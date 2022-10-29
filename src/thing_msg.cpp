@@ -105,26 +105,12 @@ void Thing::msg(const char *fmt, ...)
   if (! player) {
     dbg("No player for msg: %s", why.c_str());
     TRACE_AND_INDENT();
-
-    IF_DEBUG
-    {
-      va_start(args, fmt);
-      dbg_(fmt, args);
-      va_end(args);
-    }
     return;
   }
 
   if (! player_is_ready_for_messages(why)) {
     dbg("Player not ready for msg: %s", why.c_str());
     TRACE_AND_INDENT();
-
-    IF_DEBUG
-    {
-      va_start(args, fmt);
-      dbg_(fmt, args);
-      va_end(args);
-    }
     return;
   }
 
@@ -154,22 +140,8 @@ void Thing::msg(const char *fmt, ...)
     if (! level->can_see_unimpeded(player->curr_at, curr_at)) {
       dbg("Cannot directly see for msg: %s", why.c_str());
       TRACE_AND_INDENT();
-
-      IF_DEBUG
-      {
-        va_start(args, fmt);
-        dbg_(fmt, args);
-        va_end(args);
-      }
       return;
     }
-  }
-
-  IF_DEBUG
-  {
-    va_start(args, fmt);
-    dbg_(fmt, args);
-    va_end(args);
   }
 
   va_start(args, fmt);

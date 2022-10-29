@@ -16,6 +16,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.enchant_max(self, 1)
     my.environ_avoids_fire(self, 100)
     my.gfx_ascii_shown(self, True)
+    my.gfx_pixelart_submergable(self, True)
     my.gold_value_dice(self, "300")
     my.is_able_to_burn(self, True)
     my.is_able_to_fall(self, True)

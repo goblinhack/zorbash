@@ -1521,7 +1521,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       } else if (attack_options->attack_cold) {
         reason = "by cold";
       } else if (attack_options->attack_fire) {
-        if (is_meltable()) {
+        if (is_able_to_melt()) {
           reason = "by melting";
         } else {
           reason = "by fire";

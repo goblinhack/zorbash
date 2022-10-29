@@ -340,7 +340,7 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
     //
     dbg("No collision; ignore corpse");
   } else if (is_fire() &&
-             (it->is_meltable() || it->is_able_to_burn() || it->is_very_combustible() || it->is_combustible())) {
+             (it->is_able_to_melt() || it->is_able_to_burn() || it->is_very_combustible() || it->is_combustible())) {
     //
     // Fire attack?
     //

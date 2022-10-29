@@ -62,16 +62,6 @@ void Thing::lifespan_tick(void)
   auto o = top_owner();
   if (o) {
     o->on_lifespan_tick(this);
-
-    //
-    // If the onwer if on first and this is fire, remove the flames!
-    //
-    if (is_fire()) {
-      if (o->is_player()) {
-        o->msg("The flames go out.");
-      }
-      o->on_fire_unset();
-    }
   }
 
   //

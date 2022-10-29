@@ -381,6 +381,8 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   // clang-format off
   // begin sort marker1 {
              my.t->corpse_cleanup                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->gfx_ascii_animated                           = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->gfx_pixelart_animated                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->has_attacked_player                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->has_ever_moved                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->has_light                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -398,8 +400,6 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->is_fadeup                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_falling                                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_frozen                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->is_gfx_ascii_animated                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->is_gfx_pixelart_animated                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_hidden                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_hunger_level_gorged                       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_hunger_level_hungry                       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -494,6 +494,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->i_set_is_smoke                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_spiderweb                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_staff                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_steam                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_sticky                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_torch                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_treasure_type                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -629,6 +630,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_shovable);
   in >> bits(my.t->_is_skillstone);
   in >> bits(my.t->_is_smoke);
+  in >> bits(my.t->_is_steam);
   in >> bits(my.t->_is_spiderweb);
   in >> bits(my.t->_is_sticky);
   in >> bits(my.t->_is_torch);

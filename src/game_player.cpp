@@ -45,9 +45,9 @@ void Game::place_player(void)
         auto k = level->thing_new("key", point(x, y));
         t->carry(k);
       }
-      if (0) {
-        auto d = level->thing_new("door_wood", point(x + 3, y - 2));
-        d->open();
+      if (1) {
+        auto w = level->thing_new("sword_wood", point(x, y));
+        t->carry(w);
       }
       if (1) {
         auto w = level->thing_new("food_pottedmeat", point(x, y));
@@ -222,8 +222,13 @@ void Game::place_player(void)
 
       IF_DEBUG2
       {
-        if (1) {
-          level->thing_new("ghost_mob", point(x + 2, y + 1));
+        if (0) {
+          level->thing_new("water", point(x + 1, y));
+          level->thing_new("water", point(x + 2, y));
+          level->thing_new("water", point(x + 3, y));
+        }
+        if (0) {
+          level->thing_new("coffin_mob", point(x + 2, y + 1));
         }
         if (0) {
           level->thing_new("barrel", point(x + 2, y + 1));
@@ -232,7 +237,6 @@ void Game::place_player(void)
         if (0) {
           level->thing_new("staff_energy", point(x, y + 1));
         }
-        // level->thing_new("belcher", point(x + 3, y));
         // level->thing_new("gargoyle_moving", point(x + 2, y - 5));
         // level->thing_new("rat_giant", point(x - 1, y));
         // level->thing_new("rat_giant", point(x + 1, y));
@@ -396,7 +400,7 @@ void Game::place_player(void)
   if (player) {
     level->request_player_light_update = true;
 
-    if (1) {
+    if (0) {
       IF_DEBUG2
       {
         player->health_max_incr(200);

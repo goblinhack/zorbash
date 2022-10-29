@@ -1714,6 +1714,42 @@ void Level::is_smoke_unset(const int x, const int y)
   decr(_is_smoke, x, y, (uint8_t) 1);
 }
 
+uint8_t Level::is_steam(const point p)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
+  return (get(_is_steam, p.x, p.y));
+}
+
+uint8_t Level::is_steam(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
+  return (get(_is_steam, x, y));
+}
+
+void Level::is_steam_set(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  incr(_is_steam, x, y, (uint8_t) 1);
+}
+
+void Level::is_steam_unset(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  decr(_is_steam, x, y, (uint8_t) 1);
+}
+
 //
 // Used in lighting, so inlined
 //

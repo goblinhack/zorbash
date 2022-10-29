@@ -64,6 +64,7 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_outlined(self, True)
+    my.gfx_pixelart_submergable(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "7d8+20")
     my.is_able_to_fall(self, True)

@@ -31,7 +31,6 @@ def on_death(me, x, y):
         "All tragedies are finished by a death, all comedies by a marriage - Lord Byron.",
         "Always go to other people's funerals, otherwise they won't come to yours - Yogi Berra.",
         "At my age flowers scare me - George Burns.",
-        "I get my daily paper, look at the obituaries page and if I'm not there I carry on as usual - Mark Twain.",
         "Death is a delightful hiding place for weary men - Herodotus.",
         "Death is a very narrow theme, but it reaches a wide audience - Socrates.",
         "Death is just nature's way of telling you to slow down - Dick Sharples.",
@@ -50,6 +49,7 @@ def on_death(me, x, y):
         "I don't mind dying, the trouble is you feel so stiff the next day - George Axlerod.",
         "I don't want to achieve immortality through my work, I want to achieve it through not dying - Woody Allen.",
         "If you die in an elevator, be sure to push the UP button - Sam Levenson.",
+        "I get my daily paper, look at the obituaries page and if I'm not there I carry on as usual - Mark Twain.",
         "I have never killed a man, but I have read many obituaries with great pleasure - Clarence Darrow.",
         "I intend to live forever or die trying - Groucho Marx.",
         "I like sleeping; it's like death without the commitment - Unknown.",
@@ -77,7 +77,6 @@ def on_death(me, x, y):
         # Non quotes
         #
         "And I thought you were tough...",
-        "Are you paid to play this?",
         "Are you paid to play this? You shouldn't be.",
         "Awful. Just awful.",
         "Believe in yourself more. Someone has to.",
@@ -102,7 +101,7 @@ def on_death(me, x, y):
         "Life was hard. Take it easy now...",
         "LOL.",
         "My pet kakapo plays better than that.",
-        "My pet pigeon ccould do better.",
+        "My pet pigeon could do better.",
         "Not sure how that happened. It was going so well...",
         "Sinner, you are expired.",
         "Stick to knitting.",
@@ -111,8 +110,7 @@ def on_death(me, x, y):
         "The Gods are disappointed in you...",
         "This isn't pong you know?",
         "Time to rest in the fjords with your parrot!",
-        "Try 3D Monster maze instead.",
-        "Try firing next time.",
+        "Try 3D Monster Maze instead.",
         "Try tetris instead?",
         "Was a noble pursuit.",
         "Welcome to the afterlife!",
@@ -156,8 +154,8 @@ def on_death(me, x, y):
         "You tried. Well done. I really mean it. Maybe.",
         "You wave farewell to the monsters.",
         "You went to meet your maker. It was not impressed.",
-        "You went to the spirit in the sky.",
         "You went to the restaurant at the end of the universe.",
+        "You went to the spirit in the sky.",
     ]
     my.topcon(f"{random.choice(messages)}")
 
@@ -185,6 +183,9 @@ def on_move(me, x, y):
             last_footstep = footstep
 
 
+#
+# Really just stub functions to demonstrate that damage can be altered.
+#
 def on_receiving_dmg_melee(me, hitter, x, y, damage):
     return damage
 
@@ -355,6 +356,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_outlined(self, True)
+    my.gfx_pixelart_submergable(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "100")
     my.hunger_clock_tick_freq(self, 10)

@@ -99,8 +99,8 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   //
   // Cached as used often
   //
-  is_gfx_pixelart_animated = tp()->gfx_pixelart_animated();
-  is_gfx_ascii_animated    = tp()->gfx_ascii_animated();
+  gfx_pixelart_animated = tp()->gfx_pixelart_animated();
+  gfx_ascii_animated    = tp()->gfx_ascii_animated();
 
   //
   // Cache this flag so that polymorphing works

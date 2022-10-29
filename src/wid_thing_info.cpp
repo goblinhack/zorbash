@@ -1815,7 +1815,7 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
       }
       hates += "fire";
     }
-  } else if (t->is_meltable()) {
+  } else if (t->is_able_to_melt()) {
     //
     // Is this too much helpful info?
     //

@@ -255,6 +255,7 @@ void Thing::temperature_tick(void)
   }
 
   if ((thing_temp >= 50) && is_humanoid()) {
+    dbg("Check for fire damage");
     if (thing_check_for_heat_damage()) {
       auto damage = abs(thing_temp) / 10;
       dbg("Apply fire damage");
@@ -309,6 +310,26 @@ void Thing::temperature_tick(void)
     if (thing_check_for_heat_damage()) {
       auto damage = abs(thing_temp) / 10;
       popup("Crack!");
+      dbg("Apply fire damage");
+      TRACE_AND_INDENT();
+      is_attacked_with_damage_fire(this, this, damage);
+    }
+  }
+
+  if ((thing_temp >= 100) && is_able_to_burn()) {
+    if (thing_check_for_heat_damage()) {
+      auto damage = abs(thing_temp) / 10;
+      popup("Burn!");
+      dbg("Apply fire damage");
+      TRACE_AND_INDENT();
+      is_attacked_with_damage_fire(this, this, damage);
+    }
+  }
+
+  if ((thing_temp >= 50) && is_able_to_melt()) {
+    if (thing_check_for_heat_damage()) {
+      auto damage = abs(thing_temp) / 10;
+      popup("Melt!");
       dbg("Apply fire damage");
       TRACE_AND_INDENT();
       is_attacked_with_damage_fire(this, this, damage);

@@ -407,8 +407,10 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   // We render these offset form their owner, so if dead, then it is
   // likely they also have no owner as the swing has ended.
   //
-  auto tpp  = tp();
-  auto blit = true;
+  auto tpp   = tp();
+  auto blit  = true;
+  auto o_top = top_owner();
+  auto o_imm = immediate_owner();
 
   if (unlikely(is_changing_level)) {
     blit = false;
@@ -424,12 +426,6 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   } else if (is_cursor() || is_cursor_path() || is_the_grid) {
     blit = true;
   }
-
-  //
-  // Keep track of what we are submerged in!
-  //
-  is_in_lava  = false;
-  is_in_water = false;
 
   float tilew = game->config.tile_pix_width;
   float tileh = game->config.tile_pix_height;
@@ -448,7 +444,8 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   //
   float tile_pix_width  = TILE_WIDTH;
   float tile_pix_height = TILE_HEIGHT;
-  if (! is_no_tile()) {
+
+  if (likely(! is_no_tile())) {
     tile = tile_index_to_tile(tile_curr);
     if (unlikely(! tile)) {
       err("Has no tile, index %d", tile_curr);
@@ -486,9 +483,7 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   //
   // Flipping
   //
-  auto o       = top_owner();
-  auto owner   = immediate_owner();
-  auto falling = is_falling || (owner && owner->is_falling);
+  auto falling = is_falling || (o_top && o_top->is_falling);
 
   if (likely(! falling)) {
     if (unlikely(tpp->gfx_pixelart_animated_can_hflip())) {
@@ -537,22 +532,25 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   }
 
   //
-  // For second rings
+  // For second rings provide a small offset of a few pixels so we can see both.
   //
-  if (is_ring2) {
+  if (unlikely(is_ring2)) {
     blit_tl.x += 2;
     blit_br.x += 2;
   }
 
+  //
+  // Set this pre-bounce as the cursor uses it.
+  //
   last_blit_at = ((blit_tl + blit_br) / (short) 2);
 
   //
-  // Boing.
+  // Bouncing. But not in water, that just looks odd.
   //
-  if (unlikely(is_bouncing || (o && o->is_bouncing))) {
+  if (unlikely(! (is_in_water || is_in_lava) && (is_bouncing || (o_top && o_top->is_bouncing)))) {
     float bounce;
-    if (o) {
-      bounce = owner->bounce_curr();
+    if (o_top) {
+      bounce = o_top->bounce_curr();
     } else {
       bounce = bounce_curr();
     }
@@ -570,13 +568,13 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   //
   // Waaaaaaah
   //
-  if (falling) {
+  if (unlikely(falling)) {
     float fall = 0;
 
     fall = fall_curr();
     update_interpolated_position();
-    if (owner) {
-      fall = owner->fall_curr();
+    if (o_top) {
+      fall = o_top->fall_curr();
     }
 
     auto s = ((blit_br.y - blit_tl.y - 1) / 2) * fall;
@@ -590,9 +588,9 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   }
 
   //
-  // Prevent items inside bags/chests being seen. This also works for falling.
+  // Prevent items inside bags/chests being seen.
   //
-  if (owner && owner->is_bag_item_container()) {
+  if (unlikely(o_imm && o_imm->is_bag_item_container())) {
     blit = false;
   }
 
@@ -600,15 +598,15 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   // Lunge to attack.
   //
   float lunge;
-  if (owner) {
-    lunge = owner->lunge_curr();
+  if (o_imm) {
+    lunge = o_imm->lunge_curr();
   } else {
     lunge = lunge_curr();
   }
   if (unlikely(lunge > 0.0)) {
     point delta;
-    if (owner) {
-      delta = owner->lunge_to_get() - owner->curr_at;
+    if (o_imm) {
+      delta = o_imm->lunge_to_get() - o_imm->curr_at;
     } else {
       delta = lunge_to_get() - curr_at;
     }
@@ -623,10 +621,13 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   }
 
   //
-  // Fading.
+  // Fading. Used for text.
   //
   float fadeup = fadeup_curr();
   if (likely(fadeup == 0)) {
+    //
+    // Not fading.
+    //
   } else if (fadeup < 0) {
     blit = false;
   } else {
@@ -639,40 +640,27 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
     }
   }
 
-  //
-  // If the owner is submerged, so is the weapon
-  //
-  if (owner && owner->is_in_water) {
-    is_in_water = true;
-  }
-
-  if (unlikely(is_in_water || is_block_of_ice() || is_pillar() || is_barrel() || is_monst() || is_item() ||
-               is_treasure_type() || is_skillstone() || is_player() || is_wet_grass() || is_foilage() || is_plant() ||
-               tpp->gfx_pixelart_attack_anim() || tpp->gfx_on_fire_anim() || tpp->gfx_pixelart_equip_carry_anim())) {
-
+  if ((is_in_lava || is_in_water) && gfx_pixelart_submergable()) {
     //
     // Render the weapon and player on the same tile rules
     //
     auto map_loc = make_point(at);
-    if (owner) {
-      map_loc = owner->curr_at;
+    if (o_top) {
+      map_loc = o_top->curr_at;
     }
 
     submerged_offset_set(0);
 
-    if (is_submerged()) {
+    if (is_always_submerged()) {
       //
       // Krakens are pre submerged.
       //
     } else if (level->is_deep_water((int) map_loc.x, (int) map_loc.y)) {
-      is_in_water = true;
       submerged_offset_set(8);
     } else if (level->is_lava((int) map_loc.x, (int) map_loc.y)) {
-      is_in_lava = true;
       submerged_offset_set(TILE_HEIGHT / 2);
     } else if (level->is_shallow_water((int) map_loc.x, (int) map_loc.y)) {
       submerged_offset_set(4);
-      is_in_water = true;
     }
 
     if (! is_dead && (is_floating() || is_flying())) {
@@ -701,7 +689,7 @@ bool Thing::map_offset_coords_get(point &blit_tl, point &blit_br, Tilep &tile, b
   blit_br.x -= dx;
   blit_br.y -= dy;
 
-  if (! reflection) {
+  if (likely(! reflection)) {
     last_blit_tl = blit_tl;
     last_blit_br = blit_br;
     pre_effect_blit_tl.x -= dx;

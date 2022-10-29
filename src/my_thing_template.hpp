@@ -201,6 +201,7 @@ private:
   int _gfx_pixelart_show_asleep_anim {};
   int _gfx_pixelart_shown_in_bg {};
   int _gfx_pixelart_show_outlined {};
+  int _gfx_pixelart_submergable {};
   int _gfx_pixelart_wobbles_when_hit {};
   int _gfx_water {};
   int _has_temperature {};
@@ -234,6 +235,7 @@ private:
   int _is_able_to_jump_randomly_chance_d1000 {};
   int _is_able_to_jump_without_tiring {};
   int _is_able_to_learn_skills {};
+  int _is_able_to_melt {};
   int _is_able_to_move_diagonally {};
   int _is_able_to_open_doors {};
   int _is_able_to_rest {};
@@ -262,6 +264,7 @@ private:
   int _is_air_breather {};
   int _is_alive_on_end_of_anim {};
   int _is_always_hit {};
+  int _is_always_submerged {};
   int _is_amulet {};
   int _is_aquatic {};
   int _is_armor {};
@@ -421,7 +424,6 @@ private:
   int _is_map_beast {};
   int _is_map_treasure {};
   int _is_meat {};
-  int _is_meltable {};
   int _is_metal {};
   int _is_minion {};
   int _is_mob {};
@@ -484,7 +486,6 @@ private:
   int _is_steam {};
   int _is_sticky {};
   int _is_stone {};
-  int _is_submerged {};
   int _is_swimmer {};
   int _is_sword {};
   int _is_target_radial {};
@@ -628,7 +629,6 @@ private:
   int _unused_flag39 {};
   int _unused_flag4 {};
   int _unused_flag40 {};
-  int _unused_flag41 {};
   int _unused_flag48 {};
   int _unused_flag5 {};
   int _unused_flag56 {};
@@ -1219,6 +1219,7 @@ public:
   int gfx_pixelart_show_asleep_anim(void) const;
   int gfx_pixelart_shown_in_bg(void) const;
   int gfx_pixelart_show_outlined(void) const;
+  int gfx_pixelart_submergable(void) const;
   int gfx_pixelart_wobbles_when_hit(void) const;
   int gfx_water(void) const;
   int hunger_clock_tick_freq(void) const;
@@ -1251,6 +1252,7 @@ public:
   int is_able_to_jump(void) const;
   int is_able_to_jump_without_tiring(void) const;
   int is_able_to_learn_skills(void) const;
+  int is_able_to_melt(void) const;
   int is_able_to_move_diagonally(void) const;
   int is_able_to_open_doors(void) const;
   int is_able_to_rest(void) const;
@@ -1279,6 +1281,7 @@ public:
   int is_air_breather(void) const;
   int is_alive_on_end_of_anim(void) const;
   int is_always_hit(void) const;
+  int is_always_submerged(void) const;
   int is_amulet(void) const;
   int is_aquatic(void) const;
   int is_armor(void) const;
@@ -1437,7 +1440,6 @@ public:
   int is_map_beast(void) const;
   int is_map_treasure(void) const;
   int is_meat(void) const;
-  int is_meltable(void) const;
   int is_metal(void) const;
   int is_minion(void) const;
   int is_mob_challenge_class_a(void) const;
@@ -1500,7 +1502,6 @@ public:
   int is_steam(void) const;
   int is_sticky(void) const;
   int is_stone(void) const;
-  int is_submerged(void) const;
   int is_swimmer(void) const;
   int is_sword(void) const;
   int is_target_radial(void) const;
@@ -1644,7 +1645,6 @@ public:
   int unused_flag39(void) const;
   int unused_flag3(void) const;
   int unused_flag40(void) const;
-  int unused_flag41(void) const;
   int unused_flag48(void) const;
   int unused_flag4(void) const;
   int unused_flag56(void) const;
@@ -1758,6 +1758,7 @@ public:
   void gfx_pixelart_show_asleep_anim_set(int v);
   void gfx_pixelart_shown_in_bg_set(int v);
   void gfx_pixelart_show_outlined_set(int v);
+  void gfx_pixelart_submergable_set(int v);
   void gfx_pixelart_wobbles_when_hit_set(int v);
   void gfx_water_set(int v);
   void hunger_clock_tick_freq_set(int v);
@@ -1790,6 +1791,7 @@ public:
   void is_able_to_jump_set(int v);
   void is_able_to_jump_without_tiring_set(int v);
   void is_able_to_learn_skills_set(int v);
+  void is_able_to_melt_set(int v);
   void is_able_to_move_diagonally_set(int v);
   void is_able_to_open_doors_set(int v);
   void is_able_to_rest_set(int v);
@@ -1819,6 +1821,7 @@ public:
   void is_alive_on_end_of_anim_set(int v);
   void is_allied_with_set(const std::string &v);
   void is_always_hit_set(int v);
+  void is_always_submerged_set(int v);
   void is_amulet_set(int v);
   void is_aquatic_set(int v);
   void is_armor_set(int v);
@@ -1977,7 +1980,6 @@ public:
   void is_map_beast_set(int v);
   void is_map_treasure_set(int v);
   void is_meat_set(int v);
-  void is_meltable_set(int v);
   void is_metal_set(int v);
   void is_minion_set(int v);
   void is_mob_challenge_class_a_set(int v);
@@ -2040,7 +2042,6 @@ public:
   void is_steam_set(int v);
   void is_sticky_set(int v);
   void is_stone_set(int v);
-  void is_submerged_set(int v);
   void is_swimmer_set(int v);
   void is_sword_set(int v);
   void is_target_radial_set(int v);
@@ -2319,7 +2320,6 @@ public:
   void unused_flag39_set(int v);
   void unused_flag3_set(int v);
   void unused_flag40_set(int v);
-  void unused_flag41_set(int v);
   void unused_flag48_set(int v);
   void unused_flag4_set(int v);
   void unused_flag56_set(int v);

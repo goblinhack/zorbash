@@ -390,6 +390,7 @@ PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywd
     Py_RETURN_FALSE;                                                                                                 \
   }
 
+// begin sort marker1
 LEVEL_BODY_GET_BOOL_AT(level_ai_detect_secret_doors_at, ai_detect_secret_doors)
 LEVEL_BODY_GET_BOOL_AT(level_ai_resent_count_at, ai_resent_count)
 LEVEL_BODY_GET_BOOL_AT(level_ai_wanderer_at, ai_wanderer)
@@ -403,6 +404,7 @@ LEVEL_BODY_GET_BOOL_AT(level_hunger_is_insatiable_at, hunger_is_insatiable)
 LEVEL_BODY_GET_BOOL_AT(level_is_able_to_break_out_of_ice_at, is_able_to_break_out_of_ice)
 LEVEL_BODY_GET_BOOL_AT(level_is_able_to_burn_at, is_able_to_burn)
 LEVEL_BODY_GET_BOOL_AT(level_is_able_to_freeze_at, is_able_to_freeze)
+LEVEL_BODY_GET_BOOL_AT(level_is_able_to_melt_at, is_able_to_melt)
 LEVEL_BODY_GET_BOOL_AT(level_is_acid_at, is_acid)
 LEVEL_BODY_GET_BOOL_AT(level_is_air_breather_at, is_air_breather)
 LEVEL_BODY_GET_BOOL_AT(level_is_alive_monst_at, is_alive_monst)
@@ -552,7 +554,6 @@ LEVEL_BODY_GET_BOOL_AT(level_is_living_at, is_living)
 LEVEL_BODY_GET_BOOL_AT(level_is_loggable_at, is_loggable)
 LEVEL_BODY_GET_BOOL_AT(level_is_magical_at, is_magical)
 LEVEL_BODY_GET_BOOL_AT(level_is_meat_at, is_meat)
-LEVEL_BODY_GET_BOOL_AT(level_is_meltable_at, is_meltable)
 LEVEL_BODY_GET_BOOL_AT(level_is_metal_at, is_metal)
 LEVEL_BODY_GET_BOOL_AT(level_is_minion_at, is_minion)
 LEVEL_BODY_GET_BOOL_AT(level_is_mob_at, is_mob)
@@ -641,3 +642,4 @@ LEVEL_BODY_GET_BOOL_AT(level_shove_strength_at, shove_strength)
 LEVEL_BODY_GET_BOOL_AT(level_stamina_drain_on_attacking, stamina_drain_on_attacking)
 LEVEL_BODY_GET_BOOL_AT(level_stamina_drain_on_using, stamina_drain_on_using)
 LEVEL_BODY_GET_BOOL_AT(level_teleport_distance_at, teleport_distance_get)
+// end sort marker1

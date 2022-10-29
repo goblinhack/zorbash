@@ -250,6 +250,7 @@ int Tp::gfx_pixelart_shadow(void) const { return _gfx_pixelart_shadow; }
 int Tp::gfx_pixelart_show_asleep_anim(void) const { return _gfx_pixelart_show_asleep_anim; }
 int Tp::gfx_pixelart_shown_in_bg(void) const { return _gfx_pixelart_shown_in_bg; }
 int Tp::gfx_pixelart_show_outlined(void) const { return _gfx_pixelart_show_outlined; }
+int Tp::gfx_pixelart_submergable(void) const { return _gfx_pixelart_submergable; }
 int Tp::gfx_pixelart_wobbles_when_hit(void) const { return _gfx_pixelart_wobbles_when_hit; }
 int Tp::gfx_water(void) const { return _gfx_water; }
 int Tp::hunger_clock_tick_freq(void) const { return _hunger_clock_tick_freq; }
@@ -282,6 +283,7 @@ int Tp::is_able_to_jump_randomly_chance_d1000(void) const { return _is_able_to_j
 int Tp::is_able_to_jump(void) const { return _is_able_to_jump; }
 int Tp::is_able_to_jump_without_tiring(void) const { return _is_able_to_jump_without_tiring; }
 int Tp::is_able_to_learn_skills(void) const { return _is_able_to_learn_skills; }
+int Tp::is_able_to_melt(void) const { return _is_able_to_melt; }
 int Tp::is_able_to_move_diagonally(void) const { return _is_able_to_move_diagonally; }
 int Tp::is_able_to_open_doors(void) const { return _is_able_to_open_doors; }
 int Tp::is_able_to_rest(void) const { return _is_able_to_rest; }
@@ -310,6 +312,7 @@ int Tp::is_acid(void) const { return _is_acid; }
 int Tp::is_air_breather(void) const { return _is_air_breather; }
 int Tp::is_alive_on_end_of_anim(void) const { return _is_alive_on_end_of_anim; }
 int Tp::is_always_hit(void) const { return _is_always_hit; }
+int Tp::is_always_submerged(void) const { return _is_always_submerged; }
 int Tp::is_amulet(void) const { return _is_amulet; }
 int Tp::is_aquatic(void) const { return _is_aquatic; }
 int Tp::is_armor(void) const { return _is_armor; }
@@ -468,7 +471,6 @@ int Tp::is_magical(void) const { return _is_magical; }
 int Tp::is_map_beast(void) const { return _is_map_beast; }
 int Tp::is_map_treasure(void) const { return _is_map_treasure; }
 int Tp::is_meat(void) const { return _is_meat; }
-int Tp::is_meltable(void) const { return _is_meltable; }
 int Tp::is_metal(void) const { return _is_metal; }
 int Tp::is_minion(void) const { return _is_minion; }
 int Tp::is_mob_challenge_class_a(void) const { return _is_mob_challenge_class_a; }
@@ -531,7 +533,6 @@ int Tp::is_steal_item_chance_d1000(void) const { return _is_steal_item_chance_d1
 int Tp::is_steam(void) const { return _is_steam; }
 int Tp::is_sticky(void) const { return _is_sticky; }
 int Tp::is_stone(void) const { return _is_stone; }
-int Tp::is_submerged(void) const { return _is_submerged; }
 int Tp::is_swimmer(void) const { return _is_swimmer; }
 int Tp::is_sword(void) const { return _is_sword; }
 int Tp::is_target_radial(void) const { return _is_target_radial; }
@@ -675,7 +676,6 @@ int Tp::unused_flag38(void) const { return _unused_flag38; }
 int Tp::unused_flag39(void) const { return _unused_flag39; }
 int Tp::unused_flag3(void) const { return _unused_flag3; }
 int Tp::unused_flag40(void) const { return _unused_flag40; }
-int Tp::unused_flag41(void) const { return _unused_flag41; }
 int Tp::unused_flag48(void) const { return _unused_flag48; }
 int Tp::unused_flag4(void) const { return _unused_flag4; }
 int Tp::unused_flag56(void) const { return _unused_flag56; }
@@ -789,6 +789,7 @@ void Tp::gfx_pixelart_shadow_very_short_set(int v) { _gfx_pixelart_shadow_very_s
 void Tp::gfx_pixelart_show_asleep_anim_set(int v) { _gfx_pixelart_show_asleep_anim = v; }
 void Tp::gfx_pixelart_shown_in_bg_set(int v) { _gfx_pixelart_shown_in_bg = v; }
 void Tp::gfx_pixelart_show_outlined_set(int v) { _gfx_pixelart_show_outlined = v; }
+void Tp::gfx_pixelart_submergable_set(int v) { _gfx_pixelart_submergable = v; }
 void Tp::gfx_pixelart_wobbles_when_hit_set(int v) { _gfx_pixelart_wobbles_when_hit = v; }
 void Tp::gfx_water_set(int v) { _gfx_water = v; }
 void Tp::hunger_clock_tick_freq_set(int v) { _hunger_clock_tick_freq = v; }
@@ -821,6 +822,7 @@ void Tp::is_able_to_jump_randomly_chance_d1000_set(int v) { _is_able_to_jump_ran
 void Tp::is_able_to_jump_set(int v) { _is_able_to_jump = v; }
 void Tp::is_able_to_jump_without_tiring_set(int v) { _is_able_to_jump_without_tiring = v; }
 void Tp::is_able_to_learn_skills_set(int v) { _is_able_to_learn_skills = v; }
+void Tp::is_able_to_melt_set(int v) { _is_able_to_melt = v; }
 void Tp::is_able_to_move_diagonally_set(int v) { _is_able_to_move_diagonally = v; }
 void Tp::is_able_to_open_doors_set(int v) { _is_able_to_open_doors = v; }
 void Tp::is_able_to_rest_set(int v) { _is_able_to_rest = v; }
@@ -850,6 +852,7 @@ void Tp::is_air_breather_set(int v) { _is_air_breather = v; }
 void Tp::is_alive_on_end_of_anim_set(int v) { _is_alive_on_end_of_anim = v; }
 void Tp::is_allied_with_set(const std::string &v) { _is_allied_with = v; }
 void Tp::is_always_hit_set(int v) { _is_always_hit = v; }
+void Tp::is_always_submerged_set(int v) { _is_always_submerged = v; }
 void Tp::is_amulet_set(int v) { _is_amulet = v; }
 void Tp::is_aquatic_set(int v) { _is_aquatic = v; }
 void Tp::is_armor_set(int v) { _is_armor = v; }
@@ -1008,7 +1011,6 @@ void Tp::is_magical_set(int v) { _is_magical = v; }
 void Tp::is_map_beast_set(int v) { _is_map_beast = v; }
 void Tp::is_map_treasure_set(int v) { _is_map_treasure = v; }
 void Tp::is_meat_set(int v) { _is_meat = v; }
-void Tp::is_meltable_set(int v) { _is_meltable = v; }
 void Tp::is_metal_set(int v) { _is_metal = v; }
 void Tp::is_minion_set(int v) { _is_minion = v; }
 void Tp::is_mob_challenge_class_a_set(int v) { _is_mob_challenge_class_a = v; }
@@ -1071,7 +1073,6 @@ void Tp::is_steal_item_chance_d1000_set(int v) { _is_steal_item_chance_d1000 = v
 void Tp::is_steam_set(int v) { _is_steam = v; }
 void Tp::is_sticky_set(int v) { _is_sticky = v; }
 void Tp::is_stone_set(int v) { _is_stone = v; }
-void Tp::is_submerged_set(int v) { _is_submerged = v; }
 void Tp::is_swimmer_set(int v) { _is_swimmer = v; }
 void Tp::is_sword_set(int v) { _is_sword = v; }
 void Tp::is_target_radial_set(int v) { _is_target_radial = v; }
@@ -1349,7 +1350,6 @@ void Tp::unused_flag38_set(int v) { _unused_flag38 = v; }
 void Tp::unused_flag39_set(int v) { _unused_flag39 = v; }
 void Tp::unused_flag3_set(int v) { _unused_flag3 = v; }
 void Tp::unused_flag40_set(int v) { _unused_flag40 = v; }
-void Tp::unused_flag41_set(int v) { _unused_flag41 = v; }
 void Tp::unused_flag48_set(int v) { _unused_flag48 = v; }
 void Tp::unused_flag4_set(int v) { _unused_flag4 = v; }
 void Tp::unused_flag56_set(int v) { _unused_flag56 = v; }

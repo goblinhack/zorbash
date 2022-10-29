@@ -85,7 +85,7 @@ void Thing::level_enter(bool rejoin)
     }
   }
 
-  if (is_gfx_pixelart_animated) {
+  if (gfx_pixelart_animated) {
     //
     // If doing a walk, we must be careful and cannot modify the map
     //

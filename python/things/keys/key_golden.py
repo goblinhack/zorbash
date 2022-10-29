@@ -33,7 +33,7 @@ def key_init(name, text_long_name):
     my.is_item(self, True)
     my.is_key(self, 10)
     my.is_loggable(self, True)
-    my.is_meltable(self, True)
+    my.is_able_to_melt(self, True)
     my.is_metal(self, True)
     my.is_moveable(self, True)
     my.light_color(self, "yellow")

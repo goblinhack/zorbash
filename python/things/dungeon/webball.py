@@ -11,6 +11,7 @@ def tp_init(name, tiles=[]):
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_show_outlined(self, True)
+    my.gfx_pixelart_submergable(self, True)
     my.health_initial_dice(self, "1d40")
     my.is_able_to_burn(self, True)
     my.is_able_to_fall(self, True)

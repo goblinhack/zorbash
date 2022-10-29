@@ -73,9 +73,9 @@ void Level::update_water_next_to_lava(void)
                 if (t->is_lava()) {
                   t->dead("by being too close to deep water");
                   if (! is_starting) {
-                    if (! is_smoke(x, y)) {
-                      auto smoke = thing_new("smoke", point(x, y));
-                      smoke->lifespan_set(pcg_random_range(1, 10));
+                    if (! is_steam(x, y)) {
+                      auto steam = thing_new("steam", point(x, y));
+                      steam->lifespan_set(pcg_random_range(1, 10));
                     }
                   }
                 }
@@ -99,9 +99,9 @@ void Level::update_water_next_to_lava(void)
                 if (t->is_shallow_water()) {
                   t->dead("by being too close to lava");
                   if (! is_starting) {
-                    if (! is_smoke(x, y)) {
-                      auto smoke = thing_new("smoke", point(x, y));
-                      smoke->lifespan_set(pcg_random_range(1, 10));
+                    if (! is_steam(x, y)) {
+                      auto steam = thing_new("steam", point(x, y));
+                      steam->lifespan_set(pcg_random_range(1, 10));
                     }
                   }
                 }

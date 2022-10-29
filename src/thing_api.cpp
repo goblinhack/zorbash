@@ -1494,10 +1494,10 @@ int Thing::unused_flag40(void)
   return (tp()->unused_flag40());
 }
 
-int Thing::unused_flag41(void)
+int Thing::gfx_pixelart_submergable(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag41());
+  return (tp()->gfx_pixelart_submergable());
 }
 
 int Thing::is_obs_for_jump_landing(void)
@@ -1542,10 +1542,10 @@ int Thing::unused_flag48(void)
   return (tp()->unused_flag48());
 }
 
-int Thing::is_submerged(void)
+int Thing::is_always_submerged(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_submerged());
+  return (tp()->is_always_submerged());
 }
 
 int Thing::is_deep_water_swimmer(void)
@@ -2249,10 +2249,10 @@ int Thing::is_able_to_move_diagonally(void)
   return (tp()->is_able_to_move_diagonally());
 }
 
-int Thing::is_meltable(void)
+int Thing::is_able_to_melt(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_meltable());
+  return (tp()->is_able_to_melt());
 }
 
 int Thing::is_amulet(void)

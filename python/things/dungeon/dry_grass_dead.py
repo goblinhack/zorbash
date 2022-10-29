@@ -13,6 +13,7 @@ def tp_init(name, tiles=[]):
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_shadow_very_short(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
+    my.gfx_pixelart_submergable(self, True)
     my.is_able_to_fall(self, True)
     my.is_biome_dungeon(self, True)
     my.is_cursor_can_hover_over(self, True)

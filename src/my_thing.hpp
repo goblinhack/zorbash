@@ -201,6 +201,8 @@ public:
   /////////////////////////////////////////////////////////////////////////
   // begin sort marker5 {
   uint64_t corpse_cleanup                               : 1 {};
+  uint64_t gfx_ascii_animated                           : 1 {};
+  uint64_t gfx_pixelart_animated                        : 1 {};
   uint64_t has_attacked_player                          : 1 {};
   uint64_t has_ever_moved                               : 1 {};
   uint64_t has_light                                    : 1 {};
@@ -218,8 +220,6 @@ public:
   uint64_t is_fadeup                                    : 1 {}; // for text that fades upwards
   uint64_t is_falling                                   : 1 {};
   uint64_t is_frozen                                    : 1 {}; // frozen by ice and cannot move
-  uint64_t is_gfx_ascii_animated                        : 1 {};
-  uint64_t is_gfx_pixelart_animated                     : 1 {};
   uint64_t is_hidden                                    : 1 {};
   uint64_t is_hunger_level_gorged                       : 1 {};
   uint64_t is_hunger_level_hungry                       : 1 {};
@@ -314,6 +314,7 @@ public:
   uint64_t i_set_is_smoke                   : 1 {};
   uint64_t i_set_is_spiderweb               : 1 {};
   uint64_t i_set_is_staff                   : 1 {};
+  uint64_t i_set_is_steam                   : 1 {};
   uint64_t i_set_is_sticky                  : 1 {};
   uint64_t i_set_is_torch                   : 1 {};
   uint64_t i_set_is_treasure_type           : 1 {};
@@ -1146,6 +1147,7 @@ public:
   int gfx_pixelart_show_asleep_anim(void);
   int gfx_pixelart_shown_in_bg(void);
   int gfx_pixelart_show_outlined(void);
+  int gfx_pixelart_submergable(void);
   int gfx_pixelart_wobbles_when_hit(void);
   int gfx_water(void);
   int goal_penalty_get(Thingp attacker);
@@ -1214,6 +1216,7 @@ public:
   int is_able_to_jump(void);
   int is_able_to_jump_without_tiring(void);
   int is_able_to_learn_skills(void);
+  int is_able_to_melt(void);
   int is_able_to_move_diagonally(void);
   int is_able_to_open_doors(void);
   int is_able_to_rest(void);
@@ -1243,6 +1246,7 @@ public:
   int is_alive_monst(void);
   int is_alive_on_end_of_anim(void);
   int is_always_hit(void);
+  int is_always_submerged(void);
   int is_amulet(void);
   int is_aquatic(void);
   int is_armor(void);
@@ -1423,7 +1427,6 @@ public:
   int is_map_beast(void);
   int is_map_treasure(void);
   int is_meat(void);
-  int is_meltable(void);
   int is_metal(void);
   int is_minion(void);
   int is_mob_challenge_class_a(void);
@@ -1487,7 +1490,6 @@ public:
   int is_steam(void);
   int is_sticky(void);
   int is_stone(void);
-  int is_submerged(void);
   int is_swimmer(void);
   int is_sword(void);
   int is_target_radial(void);
@@ -1985,7 +1987,6 @@ public:
   int unused_flag39(void);
   int unused_flag3(void);
   int unused_flag40(void);
-  int unused_flag41(void);
   int unused_flag48(void);
   int unused_flag4(void);
   int unused_flag56(void);
@@ -2335,7 +2336,6 @@ public:
   void jump_end(void);
   void killed(Thingp defeater, const char *reason);
   void killed(Thingp defeater, const std::string &reason);
-  void lava_tick(void);
   void leader_set(Thingp leader);
   void level_change(Levelp);
   void level_enter(bool rejoin = false);
@@ -2513,8 +2513,8 @@ public:
                                  AttackOptions *attack_options);
   bool victim_attack_found_best(int equip, Thingp item, Thingp best, point best_hit_at, AttackOptions *o);
 
-  inline int gfx_pixelart_animated(void) { return is_gfx_pixelart_animated; }
-  inline int gfx_ascii_animated(void) { return is_gfx_ascii_animated; }
+  inline int is_gfx_pixelart_animated(void) { return gfx_pixelart_animated; }
+  inline int is_gfx_ascii_animated(void) { return gfx_ascii_animated; }
 
   int gfx_pixelart_attack_anim(void);
 } Thing;

@@ -11,7 +11,7 @@ bool Thing::thing_check_for_heat_damage(void)
   dbg("Heat damage check");
   TRACE_AND_INDENT();
 
-  if (is_meltable() || is_able_to_burn() || is_combustible() || is_very_combustible()) {
+  if (is_able_to_melt() || is_able_to_burn() || is_combustible() || is_very_combustible()) {
     //
     // Keep going
     //
@@ -62,7 +62,7 @@ bool Thing::thing_check_for_heat_damage(void)
     if (hit) {
       if (d20roll_under(stat_luck_total() - 5)) {
         if (is_player()) {
-          msg("%%fg=green$The flames go out!%%fg=reset$");
+          msg("%%fg=green$Luckily, the flames go out!%%fg=reset$");
         }
 
         dbg("Remove the flames");
@@ -88,7 +88,7 @@ bool Thing::thing_check_for_heat_damage(void)
     if (hit) {
       dbg("Heat damage check: is_combustible and too close to the flames");
     }
-  } else if (is_meltable() && (level->heatmap(at.x, at.y) > 0)) {
+  } else if (is_able_to_melt() && (level->heatmap(at.x, at.y) > 0)) {
     //
     // Too close to the flames?
     //
@@ -104,6 +104,21 @@ bool Thing::thing_check_for_heat_damage(void)
     if (hit) {
       dbg("Heat damage check: is melting");
     }
+  } else if (level->is_lava(at.x, at.y)) {
+    if (! level->is_smoke(at.x, at.y)) {
+      auto smoke = level->thing_new("smoke", at);
+      smoke->lifespan_set(pcg_random_range(1, 10));
+    }
+
+    if (is_able_to_melt() || is_able_to_burn() || is_combustible() || is_very_combustible()) {
+      hit = true;
+    }
+
+    if (hit) {
+      if (is_player()) {
+        msg("%%fg=red$You swim in lava!%%fg=reset$");
+      }
+    }
   } else if (level->is_fire(at.x, at.y)) {
     if (! level->is_smoke(at.x, at.y)) {
       auto smoke = level->thing_new("smoke", at);
@@ -115,7 +130,7 @@ bool Thing::thing_check_for_heat_damage(void)
     //
     hit = (d100() < 20);
 
-    if (is_meltable() || is_able_to_burn() || is_combustible() || is_very_combustible()) {
+    if (is_able_to_melt() || is_able_to_burn() || is_combustible() || is_very_combustible()) {
       hit = true;
     }
 
@@ -135,6 +150,16 @@ bool Thing::thing_check_for_heat_damage(void)
         msg("%%fg=red$You dodge the flames.%%fg=reset$");
       }
       hit = false;
+    }
+  } else if (level->is_steam(at.x, at.y)) {
+    //
+    // No chance to avoid steam
+    //
+    if (is_alive_monst() || is_player()) {
+      hit = true;
+      if (is_player()) {
+        msg("%%fg=red$The steam burns you!%%fg=reset$");
+      }
     }
   }
 

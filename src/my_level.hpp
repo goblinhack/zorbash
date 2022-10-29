@@ -93,6 +93,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_shovable {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_skillstone {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_smoke {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_steam {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_spiderweb {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_sticky {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_torch {};
@@ -864,6 +865,8 @@ public:
   uint8_t is_smoke(const point p);
   uint8_t is_spiderweb(const int x, const int y);
   uint8_t is_spiderweb(const point p);
+  uint8_t is_steam(const int x, const int y);
+  uint8_t is_steam(const point p);
   uint8_t is_sticky(const int x, const int y);
   uint8_t is_sticky(const point p);
   uint8_t is_torch(const int x, const int y);
@@ -1130,6 +1133,8 @@ public:
   void is_smoke_unset(const int x, const int y);
   void is_spiderweb_set(const int x, const int y);
   void is_spiderweb_unset(const int x, const int y);
+  void is_steam_set(const int x, const int y);
+  void is_steam_unset(const int x, const int y);
   void is_sticky_set(const int x, const int y);
   void is_sticky_unset(const int x, const int y);
   void is_torch_set(const int x, const int y);

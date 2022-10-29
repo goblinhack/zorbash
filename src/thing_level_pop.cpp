@@ -249,6 +249,10 @@ void Thing::level_pop(void)
     i_set_is_smoke = false;
     level->is_smoke_unset(mx, my);
   }
+  if (i_set_is_steam) {
+    i_set_is_steam = false;
+    level->is_steam_unset(mx, my);
+  }
   if (i_set_is_brazier) {
     i_set_is_brazier = false;
     level->is_brazier_unset(mx, my);

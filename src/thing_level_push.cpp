@@ -221,6 +221,10 @@ void Thing::level_push(void)
     i_set_is_smoke = true;
     level->is_smoke_set(mx, my);
   }
+  if (is_steam()) {
+    i_set_is_steam = true;
+    level->is_steam_set(mx, my);
+  }
   if (is_treasure_type()) {
     i_set_is_treasure_type = true;
     level->is_treasure_type_set(mx, my);
@@ -307,6 +311,21 @@ void Thing::level_push(void)
 
   if (gfx_pixelart_shown_in_bg()) {
     level->ts_redraw_bg = time_ms_cached() + 500;
+  }
+
+  //
+  // Keep track of what we are submerged in (or our owner).
+  //
+  auto o_top = top_owner();
+
+  is_in_water = level->is_water(curr_at);
+  if (o_top && o_top->is_in_water) {
+    is_in_water = true;
+  }
+
+  is_in_lava = level->is_lava(curr_at);
+  if (o_top && o_top->is_in_lava) {
+    is_in_lava = true;
   }
 
   // dbg("Is_monst count %d (after push) at %d,%d", level->is_monst(mx, my), mx, my);

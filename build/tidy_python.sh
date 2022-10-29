@@ -319,7 +319,7 @@ do
       is_gas_blocker \
       is_gauntlet \
       is_gelatinous \
-      is_gfx_anim_synced_with_owner \
+      gfx_anim_synced_with_owner \
       is_glass \
       is_gold \
       is_green_blood \
@@ -363,7 +363,7 @@ do
       is_map_beast \
       is_map_treasure \
       is_meat \
-      is_meltable \
+      is_able_to_melt \
       is_metal \
       is_minion \
       is_mob \
@@ -422,7 +422,7 @@ do
       is_steam \
       is_sticky \
       is_stone \
-      is_submerged \
+      is_always_submerged \
       is_swimmer \
       is_sword \
       is_target_radial \
@@ -524,7 +524,7 @@ do
       unused_flag39 \
       unused_flag4 \
       unused_flag40 \
-      unused_flag41 \
+      gfx_pixelart_submergable \
       is_obs_for_jump_landing \
       gfx_pixelart_reflection \
       gfx_pixelart_shadow \

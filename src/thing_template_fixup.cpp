@@ -38,6 +38,18 @@ void tp_fixup(void)
       tp->is_interesting_set(true);
     }
 
+    if (tp->is_able_to_melt()) {
+      tp->is_interesting_set(true);
+    }
+
+    if (tp->is_able_to_burn()) {
+      tp->is_interesting_set(true);
+    }
+
+    if (tp->is_temperature_sensitive()) {
+      tp->is_interesting_set(true);
+    }
+
     if (tp->is_ethereal()) {
       tp->is_immune_to_spiderwebs_set(true);
     }
@@ -75,7 +87,7 @@ void tp_fixup(void)
       tp->is_temperature_sensitive_set(true);
     }
 
-    if (tp->is_meltable()) {
+    if (tp->is_able_to_melt()) {
       tp->is_temperature_sensitive_set(true);
       if (! tp->melting_chance_d1000()) {
         DIE("Tp %s needs melting chance set as it can melt", tp->name().c_str());

@@ -133,18 +133,6 @@ bool Thing::matches(const std::string &what)
   if (is_immune_to_water() && (what == "is_immune_to_water")) {
     return true;
   }
-  if (gfx_pixelart_flickers() && (what == "gfx_pixelart_flickers")) {
-    return true;
-  }
-  if (gfx_pixelart_shadow_long() && (what == "gfx_pixelart_shadow_long")) {
-    return true;
-  }
-  if (gfx_pixelart_shadow_solid() && (what == "gfx_pixelart_shadow_solid")) {
-    return true;
-  }
-  if (gfx_pixelart_shadow_very_short() && (what == "gfx_pixelart_shadow_very_short")) {
-    return true;
-  }
   if (is_able_to_change_levels() && (what == "is_able_to_change_levels")) {
     return true;
   }
@@ -380,9 +368,6 @@ bool Thing::matches(const std::string &what)
     return true;
   }
   if (is_food() && (what == "is_food")) {
-    return true;
-  }
-  if (gfx_pixelart_anim_synced_with_owner() && (what == "gfx_pixelart_anim_synced_with_owner")) {
     return true;
   }
   if (is_glass() && (what == "is_glass")) {
@@ -775,16 +760,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag40() && (what == "unused_flag40")) {
     return true;
   }
-  if (unused_flag41() && (what == "unused_flag41")) {
-    return true;
-  }
   if (is_obs_for_jump_landing() && (what == "is_obs_for_jump_landing")) {
-    return true;
-  }
-  if (gfx_pixelart_reflection() && (what == "gfx_pixelart_reflection")) {
-    return true;
-  }
-  if (gfx_pixelart_shadow() && (what == "gfx_pixelart_shadow")) {
     return true;
   }
   if (is_able_to_be_surprised() && (what == "is_able_to_be_surprised")) {
@@ -799,7 +775,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag48() && (what == "unused_flag48")) {
     return true;
   }
-  if (is_submerged() && (what == "is_submerged")) {
+  if (is_always_submerged() && (what == "is_always_submerged")) {
     return true;
   }
   if (is_deep_water_swimmer() && (what == "is_deep_water_swimmer")) {
@@ -919,25 +895,10 @@ bool Thing::matches(const std::string &what)
   if (is_able_to_swim() && (what == "is_able_to_swim")) {
     return true;
   }
-  if (gfx_ascii_shown_as_gray_in_shadow() && (what == "gfx_ascii_shown_as_gray_in_shadow")) {
-    return true;
-  }
-  if (gfx_ascii_shown_in_bg() && (what == "gfx_ascii_shown_in_bg")) {
-    return true;
-  }
-  if (gfx_ascii_fade_with_dist() && (what == "gfx_ascii_fade_with_dist")) {
-    return true;
-  }
   if (is_jump_blocker() && (what == "is_jump_blocker")) {
     return true;
   }
   if (is_cursor_path_blocker() && (what == "is_cursor_path_blocker")) {
-    return true;
-  }
-  if (gfx_ascii_color_is_animated() && (what == "gfx_ascii_color_is_animated")) {
-    return true;
-  }
-  if (gfx_ascii_animated() && (what == "gfx_ascii_animated")) {
     return true;
   }
   if (tick_prio() && (what == "tick_prio")) {
@@ -977,9 +938,6 @@ bool Thing::matches(const std::string &what)
     return true;
   }
   if (shove_strength() && (what == "shove_strength")) {
-    return true;
-  }
-  if (gfx_pixelart_wobbles_when_hit() && (what == "gfx_pixelart_wobbles_when_hit")) {
     return true;
   }
   if (is_snake() && (what == "is_snake")) {
@@ -1049,12 +1007,6 @@ bool Thing::matches(const std::string &what)
     return true;
   }
   if (is_very_heavy() && (what == "is_very_heavy")) {
-    return true;
-  }
-  if (gfx_pixelart_health_bar_only_when_awake() && (what == "gfx_pixelart_health_bar_only_when_awake")) {
-    return true;
-  }
-  if (gfx_pixelart_show_asleep_anim() && (what == "gfx_pixelart_show_asleep_anim")) {
     return true;
   }
   if (noise_additional_on_jump_end() && (what == "noise_additional_on_jump_end")) {
@@ -1180,7 +1132,7 @@ bool Thing::matches(const std::string &what)
   if (is_able_to_move_diagonally() && (what == "is_able_to_move_diagonally")) {
     return true;
   }
-  if (is_meltable() && (what == "is_meltable")) {
+  if (is_able_to_melt() && (what == "is_able_to_melt")) {
     return true;
   }
   if (is_amulet() && (what == "is_amulet")) {
@@ -1357,45 +1309,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "environ_avoids_water") {
     return &Thing::environ_avoids_water;
-  }
-  if (what == "gfx_ascii_animated") {
-    return &Thing::gfx_ascii_animated;
-  }
-  if (what == "gfx_ascii_color_is_animated") {
-    return &Thing::gfx_ascii_color_is_animated;
-  }
-  if (what == "gfx_ascii_fade_with_dist") {
-    return &Thing::gfx_ascii_fade_with_dist;
-  }
-  if (what == "gfx_ascii_shown_as_gray_in_shadow") {
-    return &Thing::gfx_ascii_shown_as_gray_in_shadow;
-  }
-  if (what == "gfx_ascii_shown_in_bg") {
-    return &Thing::gfx_ascii_shown_in_bg;
-  }
-  if (what == "gfx_pixelart_anim_synced_with_owner") {
-    return &Thing::gfx_pixelart_anim_synced_with_owner;
-  }
-  if (what == "gfx_pixelart_flickers") {
-    return &Thing::gfx_pixelart_flickers;
-  }
-  if (what == "gfx_pixelart_health_bar_only_when_awake") {
-    return &Thing::gfx_pixelart_health_bar_only_when_awake;
-  }
-  if (what == "gfx_pixelart_shadow_long") {
-    return &Thing::gfx_pixelart_shadow_long;
-  }
-  if (what == "gfx_pixelart_shadow_solid") {
-    return &Thing::gfx_pixelart_shadow_solid;
-  }
-  if (what == "gfx_pixelart_shadow_very_short") {
-    return &Thing::gfx_pixelart_shadow_very_short;
-  }
-  if (what == "gfx_pixelart_show_asleep_anim") {
-    return &Thing::gfx_pixelart_show_asleep_anim;
-  }
-  if (what == "gfx_pixelart_wobbles_when_hit") {
-    return &Thing::gfx_pixelart_wobbles_when_hit;
   }
   if (what == "hunger_is_insatiable") {
     return &Thing::hunger_is_insatiable;
@@ -1928,8 +1841,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_meat") {
     return &Thing::is_meat;
   }
-  if (what == "is_meltable") {
-    return &Thing::is_meltable;
+  if (what == "is_able_to_melt") {
+    return &Thing::is_able_to_melt;
   }
   if (what == "is_metal") {
     return &Thing::is_metal;
@@ -2351,18 +2264,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag40") {
     return &Thing::unused_flag40;
   }
-  if (what == "unused_flag41") {
-    return &Thing::unused_flag41;
-  }
-  if (what == "is_obs_for_jump_landing") {
-    return &Thing::is_obs_for_jump_landing;
-  }
-  if (what == "gfx_pixelart_reflection") {
-    return &Thing::gfx_pixelart_reflection;
-  }
-  if (what == "gfx_pixelart_shadow") {
-    return &Thing::gfx_pixelart_shadow;
-  }
   if (what == "is_able_to_be_surprised") {
     return &Thing::is_able_to_be_surprised;
   }
@@ -2375,8 +2276,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag48") {
     return &Thing::unused_flag48;
   }
-  if (what == "is_submerged") {
-    return &Thing::is_submerged;
+  if (what == "is_always_submerged") {
+    return &Thing::is_always_submerged;
   }
   if (what == "unused_flag4") {
     return &Thing::unused_flag4;

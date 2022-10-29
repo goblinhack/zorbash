@@ -321,6 +321,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   // clang-format off
   // begin sort marker1 {
   bits64 |= (my.t->corpse_cleanup                               ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->gfx_ascii_animated                           ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->gfx_pixelart_animated                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->has_attacked_player                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->has_ever_moved                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->has_light                                    ? 1LLU : 0LLU) << shift; shift++;
@@ -338,8 +340,6 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_fadeup                                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_falling                                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_frozen                                    ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->is_gfx_ascii_animated                        ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->is_gfx_pixelart_animated                     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_hidden                                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_hunger_level_gorged                       ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_hunger_level_hungry                       ? 1LLU : 0LLU) << shift; shift++;
@@ -438,6 +438,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_smoke                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_spiderweb                     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_staff                         ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_steam                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_sticky                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_torch                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_treasure_type                 ? 1LLU : 0LLU) << shift; shift++;
@@ -579,6 +580,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_shovable);
   out << bits(my.t->_is_skillstone);
   out << bits(my.t->_is_smoke);
+  out << bits(my.t->_is_steam);
   out << bits(my.t->_is_spiderweb);
   out << bits(my.t->_is_sticky);
   out << bits(my.t->_is_sticky);
