@@ -222,10 +222,10 @@ void Game::place_player(void)
 
       IF_DEBUG2
       {
-        if (0) {
-          level->thing_new("water", point(x + 1, y));
-          level->thing_new("water", point(x + 2, y));
-          level->thing_new("water", point(x + 3, y));
+        if (1) {
+          level->thing_new("lava", point(x + 1, y));
+          level->thing_new("lava", point(x + 2, y));
+          level->thing_new("lava", point(x + 3, y));
         }
         if (0) {
           level->thing_new("coffin_mob", point(x + 2, y + 1));
