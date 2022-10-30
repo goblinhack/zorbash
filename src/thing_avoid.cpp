@@ -41,11 +41,11 @@ bool Thing::will_avoid_monst(const Thingp it)
     return false;
   }
 
-  if (same_leader(it)) {
+  if (same_leader_or_owner(it)) {
     return false;
   }
 
-  if (it->is_minion() && (it->top_mob() == top_mob())) {
+  if (same_mob(it)) {
     return false;
   }
 
@@ -105,11 +105,11 @@ bool Thing::will_avoid_monst(const point p)
       continue;
     }
 
-    if (same_leader(it)) {
+    if (same_leader_or_owner(it)) {
       return false;
     }
 
-    if (it->is_minion() && (it->top_mob() == top_mob())) {
+    if (same_mob(it)) {
       return false;
     }
 

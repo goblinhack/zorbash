@@ -530,15 +530,13 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
       // jump over them. Better to walk around so you can attack
       // from all sides.
       //
-      if (is_able_to_follow()) {
-        FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
-        {
-          if (same_leader(it)) {
-            break;
-          }
+      FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
+      {
+        if (same_leader_or_owner(it)) {
+          break;
         }
-        FOR_ALL_THINGS_END();
       }
+      FOR_ALL_THINGS_END();
 
       //
       // So if we get here this thing is an AI obstacle. Can we jump over it?
@@ -1017,24 +1015,27 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           AI_LOG("Can see cand", it);
         }
 
-        if (it->immediate_owner_id().ok()) {
-          AI_LOG("Has an ownwer; ignore", it);
+        //
+        // Don't attack your own tentacles
+        //
+        if (same_leader_or_owner(it)) {
+          AI_LOG("My fellow thing", it);
           continue;
         }
 
         //
-        // Don't attack your mob
+        // Don't attack your fellow minion or mob spawner
         //
-        if (it->is_mob() && (top_mob() == this)) {
-          AI_LOG("My mob spawner", it);
+        if (same_mob(it)) {
+          AI_LOG("My fellow minion", it);
           continue;
         }
 
         //
-        // Don't attack your fellow minion
+        // Don't attack friedns
         //
-        if (it->is_minion() && it->top_mob() && (it->top_mob() == top_mob())) {
-          AI_LOG("Fellow minion", it);
+        if (is_friend(it)) {
+          AI_LOG("Friend", it);
           continue;
         }
 
@@ -1043,32 +1044,6 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             AI_LOG("Avoid heat at location", it);
             continue;
           }
-        }
-
-        //
-        // Don't attack your leader
-        //
-        auto l = leader();
-        if (l == this) {
-          AI_LOG("Same leader", it);
-          continue;
-        }
-
-        //
-        // Don't attack your fellow follower
-        //
-        if (it->is_able_to_follow()) {
-          if (l) {
-            if (it->leader() == l) {
-              AI_LOG("Fellow follower", it);
-              continue;
-            }
-          }
-        }
-
-        if (is_friend(it)) {
-          AI_LOG("Friend", it);
-          continue;
         }
 
         // AI_LOG("Can see", it);
@@ -1349,37 +1324,20 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     //
     // Don't try and walk through other minions
     //
-    if (is_minion()) {
-      FOR_ALL_NON_INTERNAL_THINGS(level, it, p.x, p.y)
-      {
-        if (it == this) {
-          continue;
-        }
-        if (it->is_minion()) {
-          if (same_mob(it)) {
-            skip_location = true;
-            break;
-          }
-        }
+    FOR_ALL_NON_INTERNAL_THINGS(level, it, p.x, p.y)
+    {
+      if (it == this) {
+        continue;
       }
-    }
-    FOR_ALL_THINGS_END();
 
-    //
-    // Don't try and walk through other followers
-    //
-    if (is_able_to_follow()) {
-      FOR_ALL_NON_INTERNAL_THINGS(level, it, p.x, p.y)
-      {
-        if (it == this) {
-          continue;
-        }
-        if (it->is_able_to_follow()) {
-          if (same_leader(it)) {
-            skip_location = true;
-            break;
-          }
-        }
+      if (same_mob(it)) {
+        skip_location = true;
+        break;
+      }
+
+      if (same_leader_or_owner(it)) {
+        skip_location = true;
+        break;
       }
     }
     FOR_ALL_THINGS_END();
@@ -1731,22 +1689,17 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       }
     }
 
-    if (is_minion()) {
-      auto mob = top_mob();
-      if (mob) {
-        auto dist = distance(p, mob->curr_at);
-        auto msg  = string_sprintf("search cand @(%d,%d) dist-from-owner %f", p.x, p.y, dist);
-        GOAL_ADD(GOAL_PRIO_VERY_LOW, total_score, msg.c_str(), nullptr);
-      } else {
-        auto msg = string_sprintf("search cand @(%d,%d) no-owner", p.x, p.y);
-        GOAL_ADD(GOAL_PRIO_VERY_LOW, total_score, msg.c_str(), nullptr);
-      }
-    } else {
-      auto msg = string_sprintf("search cand @(%d,%d)", p.x, p.y);
+    auto mob = top_mob();
+    if (mob) {
+      auto dist = distance(p, mob->curr_at);
+      auto msg  = string_sprintf("search cand @(%d,%d) dist-from-owner %f", p.x, p.y, dist);
       GOAL_ADD(GOAL_PRIO_VERY_LOW, total_score, msg.c_str(), nullptr);
+    } else {
+      auto msg = string_sprintf("search cand @(%d,%d) no-owner", p.x, p.y);
       if (is_debug_type()) {
         con("search cand @(%d,%d) score %d", p.x, p.y, total_score);
       }
+      GOAL_ADD(GOAL_PRIO_VERY_LOW, total_score, msg.c_str(), nullptr);
     }
   }
 }

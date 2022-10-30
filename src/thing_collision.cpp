@@ -92,7 +92,7 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
       }
     }
 
-    if (same_mob(t) || same_leader(t)) {
+    if (same_mob(t) || same_leader_or_owner(t)) {
       dbg2("Collision-candidate: %s no same leader", t->to_short_string().c_str());
       continue;
     }
@@ -720,21 +720,10 @@ bool Thing::collision_check_only(Thingp it, point future_pos)
   //
   // This lets you skip around mobs to avoid ghosts
   //
-  if (is_minion()) {
-    if (same_mob(it)) {
-      if (things_overlap(me, future_pos, it)) {
-        dbg("Collision; cannot pass through my mob friend");
-        return true;
-      }
-    }
-
-    if (it->is_mob()) {
-      if (it == top_mob()) {
-        if (things_overlap(me, future_pos, it)) {
-          dbg("Collision; cannot pass through my mob spawner");
-          return true;
-        }
-      }
+  if (same_mob(it) || same_leader_or_owner(it)) {
+    if (things_overlap(me, future_pos, it)) {
+      dbg("Collision; cannot pass through my friend");
+      return true;
     }
   }
 

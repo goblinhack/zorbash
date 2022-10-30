@@ -9,17 +9,17 @@
 
 PyObject *if_matches_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *if_matches_then_dead_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *place_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *spawn_at_if_possible(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *spawn_at_my_position(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_owned_thing_at_my_position(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *spawn_at_if_possible(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *spawn_at_my_position(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tp_update_(PyObject *obj, PyObject *args, PyObject *keywds);
 
@@ -223,6 +223,7 @@ TP_SET_PROTO(is_able_to_see_in_the_dark)
 TP_SET_PROTO(is_able_to_see_through_doors)
 TP_SET_PROTO(is_able_to_shove)
 TP_SET_PROTO(is_able_to_sleep)
+TP_SET_PROTO(is_able_to_spawn_things)
 TP_SET_PROTO(is_able_to_swim)
 TP_SET_PROTO(is_able_to_teleport_attack)
 TP_SET_PROTO(is_able_to_teleport_attack_chance_d1000)
@@ -463,7 +464,6 @@ TP_SET_PROTO(is_slippery)
 TP_SET_PROTO(is_smoke)
 TP_SET_PROTO(is_snake)
 TP_SET_PROTO(is_soft)
-TP_SET_PROTO(is_spawner)
 TP_SET_PROTO(is_spider)
 TP_SET_PROTO(is_spiderweb)
 TP_SET_PROTO(is_staff)
@@ -477,6 +477,7 @@ TP_SET_PROTO(is_target_radial)
 TP_SET_PROTO(is_target_select)
 TP_SET_PROTO(is_temperature_change_sensitive)
 TP_SET_PROTO(is_temperature_sensitive)
+TP_SET_PROTO(is_tentacle)
 TP_SET_PROTO(is_the_grid)
 TP_SET_PROTO(is_thief)
 TP_SET_PROTO(is_throwable)
@@ -773,7 +774,6 @@ TP_SET_PROTO(unused_flag56)
 TP_SET_PROTO(unused_flag6)
 TP_SET_PROTO(unused_flag7)
 TP_SET_PROTO(unused_flag8)
-TP_SET_PROTO(unused_flag87)
 TP_SET_PROTO(unused_flag9)
 TP_SET_PROTO(weapon_damage)
 TP_SET_PROTO(z_depth)

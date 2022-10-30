@@ -292,6 +292,7 @@ int Tp::is_able_to_see_in_the_dark(void) const { return _is_able_to_see_in_the_d
 int Tp::is_able_to_see_through_doors(void) const { return _is_able_to_see_through_doors; }
 int Tp::is_able_to_shove(void) const { return _is_able_to_shove; }
 int Tp::is_able_to_sleep(void) const { return _is_able_to_sleep; }
+int Tp::is_able_to_spawn_things(void) const { return _is_able_to_spawn_things; }
 int Tp::is_able_to_swim(void) const { return _is_able_to_swim; }
 int Tp::is_able_to_teleport_attack_chance_d1000(void) const { return _is_able_to_teleport_attack_chance_d1000; }
 int Tp::is_able_to_teleport_attack(void) const { return _is_able_to_teleport_attack; }
@@ -526,7 +527,6 @@ int Tp::is_slippery(void) const { return _is_slippery; }
 int Tp::is_smoke(void) const { return _is_smoke; }
 int Tp::is_snake(void) const { return _is_snake; }
 int Tp::is_soft(void) const { return _is_soft; }
-int Tp::is_spawner(void) const { return _is_spawner; }
 int Tp::is_spider(void) const { return _is_spider; }
 int Tp::is_spiderweb(void) const { return _is_spiderweb; }
 int Tp::is_staff(void) const { return _is_staff; }
@@ -540,6 +540,7 @@ int Tp::is_target_radial(void) const { return _is_target_radial; }
 int Tp::is_target_select(void) const { return _is_target_select; }
 int Tp::is_temperature_change_sensitive(void) const { return _is_temperature_change_sensitive; }
 int Tp::is_temperature_sensitive(void) const { return _is_temperature_sensitive; }
+int Tp::is_tentacle(void) const { return _is_tentacle; }
 int Tp::is_the_grid(void) const { return _is_the_grid; }
 int Tp::is_thief(void) const { return _is_thief; }
 int Tp::is_throwable(void) const { return _is_throwable; }
@@ -683,7 +684,6 @@ int Tp::unused_flag56(void) const { return _unused_flag56; }
 int Tp::unused_flag5(void) const { return _unused_flag5; }
 int Tp::unused_flag6(void) const { return _unused_flag6; }
 int Tp::unused_flag7(void) const { return _unused_flag7; }
-int Tp::unused_flag87(void) const { return _unused_flag87; }
 int Tp::unused_flag8(void) const { return _unused_flag8; }
 int Tp::unused_flag9(void) const { return _unused_flag9; }
 int Tp::weapon_damage(void) const { return _weapon_damage; }
@@ -831,6 +831,7 @@ void Tp::is_able_to_see_in_the_dark_set(int v) { _is_able_to_see_in_the_dark = v
 void Tp::is_able_to_see_through_doors_set(int v) { _is_able_to_see_through_doors = v; }
 void Tp::is_able_to_shove_set(int v) { _is_able_to_shove = v; }
 void Tp::is_able_to_sleep_set(int v) { _is_able_to_sleep = v; }
+void Tp::is_able_to_spawn_things_set(int v) { _is_able_to_spawn_things = v; }
 void Tp::is_able_to_swim_set(int v) { _is_able_to_swim = v; }
 void Tp::is_able_to_teleport_attack_chance_d1000_set(int v) { _is_able_to_teleport_attack_chance_d1000 = v; }
 void Tp::is_able_to_teleport_attack_set(int v) { _is_able_to_teleport_attack = v; }
@@ -1066,7 +1067,6 @@ void Tp::is_slippery_set(int v) { _is_slippery = v; }
 void Tp::is_smoke_set(int v) { _is_smoke = v; }
 void Tp::is_snake_set(int v) { _is_snake = v; }
 void Tp::is_soft_set(int v) { _is_soft = v; }
-void Tp::is_spawner_set(int v) { _is_spawner = v; }
 void Tp::is_spider_set(int v) { _is_spider = v; }
 void Tp::is_spiderweb_set(int v) { _is_spiderweb = v; }
 void Tp::is_staff_set(int v) { _is_staff = v; }
@@ -1080,6 +1080,7 @@ void Tp::is_target_radial_set(int v) { _is_target_radial = v; }
 void Tp::is_target_select_set(int v) { _is_target_select = v; }
 void Tp::is_temperature_change_sensitive_set(int v) { _is_temperature_change_sensitive = v; }
 void Tp::is_temperature_sensitive_set(int v) { _is_temperature_sensitive = v; }
+void Tp::is_tentacle_set(int v) { _is_tentacle = v; }
 void Tp::is_the_grid_set(int v) { _is_the_grid = v; }
 void Tp::is_thief_set(int v) { _is_thief = v; }
 void Tp::is_throwable_set(int v) { _is_throwable = v; }
@@ -1358,7 +1359,6 @@ void Tp::unused_flag56_set(int v) { _unused_flag56 = v; }
 void Tp::unused_flag5_set(int v) { _unused_flag5 = v; }
 void Tp::unused_flag6_set(int v) { _unused_flag6 = v; }
 void Tp::unused_flag7_set(int v) { _unused_flag7 = v; }
-void Tp::unused_flag87_set(int v) { _unused_flag87 = v; }
 void Tp::unused_flag8_set(int v) { _unused_flag8 = v; }
 void Tp::unused_flag9_set(int v) { _unused_flag9 = v; }
 void Tp::weapon_damage_set(int v) { _weapon_damage = v; }

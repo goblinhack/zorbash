@@ -1764,10 +1764,10 @@ int Thing::is_brittle(void)
   return (tp()->is_brittle());
 }
 
-int Thing::unused_flag87(void)
+int Thing::is_tentacle(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag87());
+  return (tp()->is_tentacle());
 }
 
 int Thing::is_able_to_swim(void)
@@ -2620,10 +2620,10 @@ int Thing::is_soft(void)
   return (tp()->is_soft());
 }
 
-int Thing::is_spawner(void)
+int Thing::is_able_to_spawn_things(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_spawner());
+  return (tp()->is_able_to_spawn_things());
 }
 
 int Thing::is_spiderweb(void)

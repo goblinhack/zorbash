@@ -550,7 +550,7 @@ bool Thing::matches(const std::string &what)
   if (is_soft() && (what == "is_soft")) {
     return true;
   }
-  if (is_spawner() && (what == "is_spawner")) {
+  if (is_able_to_spawn_things() && (what == "is_able_to_spawn_things")) {
     return true;
   }
   if (is_spiderweb() && (what == "is_spiderweb")) {
@@ -889,7 +889,7 @@ bool Thing::matches(const std::string &what)
   if (is_block_of_ice() && (what == "is_block_of_ice")) {
     return true;
   }
-  if (unused_flag87() && (what == "unused_flag87")) {
+  if (is_tentacle() && (what == "is_tentacle")) {
     return true;
   }
   if (is_able_to_swim() && (what == "is_able_to_swim")) {
@@ -1991,8 +1991,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_soft") {
     return &Thing::is_soft;
   }
-  if (what == "is_spawner") {
-    return &Thing::is_spawner;
+  if (what == "is_able_to_spawn_things") {
+    return &Thing::is_able_to_spawn_things;
   }
   if (what == "is_spider") {
     return &Thing::is_spider;
@@ -2384,8 +2384,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_carnivorous_plant") {
     return &Thing::is_carnivorous_plant;
   }
-  if (what == "unused_flag87") {
-    return &Thing::unused_flag87;
+  if (what == "is_tentacle") {
+    return &Thing::is_tentacle;
   }
   if (what == "unused_flag8") {
     return &Thing::unused_flag8;

@@ -89,7 +89,7 @@ void Thing::add_enemy(Thingp attacker, bool recursing)
   if (! ai_resent_count()) {
     return;
   }
-  if (same_leader(attacker)) {
+  if (same_leader_or_owner(attacker)) {
     return;
   }
 

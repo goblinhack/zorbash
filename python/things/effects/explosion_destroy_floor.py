@@ -7,7 +7,7 @@ def on_born(me, x, y):
     my.if_matches_then_dead(me, "is_floor", x, y)
     my.if_matches_then_dead(me, "is_corridor", x, y)
     my.if_matches_then_dead(me, "is_dirt", x, y)
-    my.spawn_at(me, "chasm1", x, y)
+    my.place_at(me, "chasm1", x, y)
 
 
 def tp_init(name, text_long_name, text_short_name):

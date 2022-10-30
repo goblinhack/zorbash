@@ -33,31 +33,13 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta, bool force)
     return (THING_SHOVE_NEVER_TRIED);
   }
 
-  auto my_owner  = top_owner();
-  auto its_owner = it->top_owner();
-  if (my_owner && (my_owner == its_owner)) {
+  if (same_leader_or_owner(it)) {
     dbg("Not able to shove (same owner) %s", it->to_short_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
   }
 
-  auto my_mob  = top_mob();
-  auto its_mob = it->top_mob();
-  if (my_mob && (my_mob == its_mob)) {
+  if (same_mob(it)) {
     dbg("Not able to shove (same master) %s", it->to_short_string().c_str());
-    return (THING_SHOVE_NEVER_TRIED);
-  }
-
-  auto my_leader  = leader();
-  auto its_leader = it->leader();
-  if (my_leader && (my_leader == its_leader)) {
-    dbg("Not able to shove (same leader) %s", it->to_short_string().c_str());
-    return (THING_SHOVE_NEVER_TRIED);
-  }
-
-  auto my_spawned_owner  = top_spawned_owner();
-  auto its_spawned_owner = it->top_spawned_owner();
-  if (my_spawned_owner && (my_spawned_owner == its_spawned_owner)) {
-    dbg("Not able to shove (same spawner) %s", it->to_short_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
   }
 

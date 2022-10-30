@@ -215,7 +215,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       continue;
     }
 
-    if (same_mob(it) || same_leader(it)) {
+    if (same_mob(it) || same_leader_or_owner(it)) {
       dbg("Friends are piling up, but allow jumping");
       wobble(25);
       continue;

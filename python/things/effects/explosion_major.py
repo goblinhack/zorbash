@@ -20,9 +20,9 @@ def on_born(me, x, y):
     for dx in range(-2, 3):
         for dy in range(-2, 3):
             if my.pcg_randint(1, 100) < 20:
-                my.spawn_at(me, "small_fire", x + dx, y + dy)
+                my.place_at(me, "small_fire", x + dx, y + dy)
             if my.pcg_randint(1, 100) < 10:
-                my.spawn_at(me, "fire", x + dx, y + dy)
+                my.place_at(me, "fire", x + dx, y + dy)
             for it in my.level_get_all(me, selection_x + dx, selection_y + dy):
                 attack(me, it)
 

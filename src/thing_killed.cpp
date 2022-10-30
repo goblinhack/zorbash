@@ -108,7 +108,7 @@ void Thing::killed(Thingp defeater, const char *reason)
     destroy_minions(defeater);
   }
 
-  if (defeater && is_spawner()) {
+  if (defeater && is_able_to_spawn_things()) {
     TRACE_NO_INDENT();
     destroy_spawned(defeater);
   }

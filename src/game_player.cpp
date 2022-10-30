@@ -222,7 +222,7 @@ void Game::place_player(void)
 
       IF_DEBUG2
       {
-        if (1) {
+        if (0) {
           level->thing_new("lava", point(x + 1, y));
           level->thing_new("lava", point(x + 2, y));
           level->thing_new("lava", point(x + 3, y));

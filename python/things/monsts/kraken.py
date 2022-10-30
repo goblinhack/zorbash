@@ -18,9 +18,35 @@ def on_death(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "monst_death_epic")
 
 
+def spawn_tentacle(me, x, y, dx, dy):
+    if my.level_is_monst_at(me, x + dx, y + dy) or \
+       my.level_is_lava_at(me, x + dx, y + dy) or \
+       my.level_is_chasm_at(me, x + dx, y + dy) or \
+       my.level_is_brazier_at(me, x + dx, y + dy) or \
+       my.level_is_fire_at(me, x + dx, y + dy) or \
+       my.level_is_wall_at(me, x + dx, y + dy):
+        return
+
+    if not my.level_is_water_at(me, x + dx, y + dy):
+        return
+
+    my.spawn_at(me, "kraken_tentacle", x + dx, y + dy)
+
+
 def on_awake(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monster_roar_epic")
     my.thing_popup(me, "Deafening roar!")
+
+    spawn_tentacle(me, x, y, -1, 1)
+    spawn_tentacle(me, x, y, -1, 0)
+    spawn_tentacle(me, x, y, -1, -1)
+
+    spawn_tentacle(me, x, y, 1, 1)
+    spawn_tentacle(me, x, y, 1, 0)
+    spawn_tentacle(me, x, y, 1, -1)
+
+    spawn_tentacle(me, x, y, 0, 1)
+    spawn_tentacle(me, x, y, 0, -1)
 
 
 def tp_init(name, text_long_name):
@@ -44,6 +70,7 @@ def tp_init(name, text_long_name):
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_health_bar_only_when_awake(self, True)
     my.gfx_pixelart_health_bar_shown(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
@@ -54,6 +81,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_freeze(self, True)
     my.is_able_to_rest(self, True)
     my.is_able_to_see_in_the_dark(self, True)
+    my.is_able_to_spawn_things(self, True)
     my.is_able_to_tire(self, True)
     my.is_always_submerged(self, True)
     my.is_asleep_initially(self, True)

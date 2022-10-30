@@ -200,7 +200,7 @@ PyObject *level_is_skillstone_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_is_slippery_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_smoke_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_steam_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_spawner_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_able_to_spawn_things_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_spider_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_spiderweb_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_steal_item_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);

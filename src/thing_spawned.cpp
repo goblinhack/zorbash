@@ -40,6 +40,7 @@ Thingp Thing::immediate_spawned_owner(void)
 void Thing::spawned_owner_set(Thingp spawner_owner)
 {
   TRACE_NO_INDENT();
+
   if (spawner_owner) {
     verify(MTYPE_THING, spawner_owner);
   }
@@ -99,7 +100,7 @@ void Thing::destroy_spawned(Thingp defeater)
   // a new level
   //
 
-  if (! is_spawner()) {
+  if (! is_able_to_spawn_things()) {
     return;
   }
 
@@ -125,7 +126,7 @@ void Thing::destroy_spawned(Thingp defeater)
 void Thing::unleash_spawners_things(void)
 {
   TRACE_NO_INDENT();
-  if (! is_spawner()) {
+  if (! is_able_to_spawn_things()) {
     return;
   }
 

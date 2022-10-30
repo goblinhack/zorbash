@@ -396,21 +396,18 @@ bool Thing::ai_obstacle(Thingp it)
     return false;
   }
 
-  if (! is_ethereal()) {
+  if (is_ethereal()) {
     //
     // This lets you skip around mobs to avoid ghosts
     //
-    if (is_minion()) {
-      if (it->is_mob()) {
-        if (it == top_mob()) {
-          // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
-          return true;
-        }
-      }
+  } else {
+    if (same_mob(it)) {
+      // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
+      return true;
     }
   }
 
-  if (same_leader(it)) {
+  if (same_leader_or_owner(it)) {
     // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
     return true;
   }

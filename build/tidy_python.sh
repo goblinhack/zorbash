@@ -12,58 +12,68 @@ POST=$(mktemp) || exit 1
 OUT=$(mktemp) || exit 1
 
 for i in \
-    amulets \
-    armor \
-    boots \
-    buffs \
-    debuffs \
-    doors \
-    dungeon \
-    effects \
-    food \
-    gauntlets \
-    internal \
-    items \
-    lasers \
-    mobs \
-    monsts \
-    player \
-    potions \
-    projectiles \
-    rings \
-    skills \
-    treasure \
-    wands \
-    weapons
+  amulets \
+  armor \
+  boots \
+  buffs \
+  cloaks \
+  containers \
+  debuffs \
+  doors \
+  dungeon \
+  effects \
+  food \
+  gauntlets \
+  internal \
+  items \
+  keys \
+  lasers \
+  mobs \
+  monsts \
+  player \
+  potions \
+  projectiles \
+  rings \
+  shield \
+  skills \
+  staffs \
+  treasure \
+  wands \
+  weapons
 do
   cp .flake8 $i/
   git add $i/.flake8
 done
 
 for IN in \
-    amulets/*py \
-    armor/*py \
-    boots/*py \
-    buffs/*py \
-    debuffs/*py \
-    doors/*py \
-    dungeon/*py \
-    effects/*py \
-    food/*py \
-    gauntlets/*py \
-    internal/*py \
-    items/*py \
-    lasers/*py \
-    mobs/*py \
-    monsts/*py \
-    player/*py \
-    potions/*py \
-    projectiles/*py \
-    rings/*py \
-    skills/*py \
-    treasure/*py \
-    wands/*py \
-    weapons/*py
+  amulets/*py \
+  armor/*py \
+  boots/*py \
+  buffs/*py \
+  cloaks/*py \
+  containers/*py \
+  debuffs/*py \
+  doors/*py \
+  dungeon/*py \
+  effects/*py \
+  food/*py \
+  gauntlets/*py \
+  internal/*py \
+  items/*py \
+  keys/*py \
+  lasers/*py \
+  mobs/*py \
+  monsts/*py \
+  player/*py \
+  potions/*py \
+  projectiles/*py \
+  rings/*py \
+  shield/*py \
+  skills/*py \
+  staffs/*py \
+  treasure/*py \
+  wands/*py \
+  weapons/*py
 do
     echo Tidying $IN...
 
@@ -115,6 +125,7 @@ do
       environ_avoids_poison \
       environ_avoids_water \
       gfx_an_animation_only \
+      gfx_anim_synced_with_owner \
       gfx_ascii_animated \
       gfx_ascii_bg_color_spread_blue \
       gfx_ascii_bg_color_spread_green \
@@ -146,7 +157,10 @@ do
       gfx_pixelart_animated_can_vflip \
       gfx_pixelart_animated_no_dir \
       gfx_pixelart_flickers \
+      gfx_pixelart_reflection \
+      gfx_pixelart_shadow \
       gfx_pixelart_shown_in_bg \
+      gfx_pixelart_submergable \
       gfx_show_asleep \
       gfx_show_outlined \
       gfx_solid_shadow \
@@ -177,6 +191,7 @@ do
       is_able_to_jump_onto \
       is_able_to_jump_without_tiring \
       is_able_to_learn_skills \
+      is_able_to_melt \
       is_able_to_move_diagonally \
       is_able_to_open_doors \
       is_able_to_rest \
@@ -184,6 +199,7 @@ do
       is_able_to_see_through_doors \
       is_able_to_shove \
       is_able_to_sleep \
+      is_able_to_spawn_things \
       is_able_to_swim \
       is_able_to_teleport_attack \
       is_able_to_teleport_escape \
@@ -204,6 +220,7 @@ do
       is_air_breather \
       is_alive_on_end_of_anim \
       is_always_hit \
+      is_always_submerged \
       is_amulet \
       is_aquatic \
       is_armor \
@@ -319,7 +336,6 @@ do
       is_gas_blocker \
       is_gauntlet \
       is_gelatinous \
-      gfx_anim_synced_with_owner \
       is_glass \
       is_gold \
       is_green_blood \
@@ -363,7 +379,6 @@ do
       is_map_beast \
       is_map_treasure \
       is_meat \
-      is_able_to_melt \
       is_metal \
       is_minion \
       is_mob \
@@ -375,17 +390,21 @@ do
       is_monst_class_c \
       is_monst_class_d \
       is_monst_class_e \
+      is_monst_pack \
       is_moveable \
       is_msg \
+      is_msg_allowed_is_seen \
+      is_msg_allowed_is_surprised \
+      is_msg_allowed_is_wounded \
       is_necrotic_danger_level \
       is_no_tile \
       is_obs_destructable \
+      is_obs_for_jump_landing \
       is_obs_for_shoving \
       is_obstacle_when_dead \
       is_obs_wall_or_door \
       is_openable \
       is_organic \
-      is_monst_pack \
       is_pillar \
       is_pink_splatter \
       is_plant \
@@ -415,14 +434,12 @@ do
       is_smoke \
       is_snake \
       is_soft \
-      is_spawner \
       is_spider \
       is_spiderweb \
       is_staff \
       is_steam \
       is_sticky \
       is_stone \
-      is_always_submerged \
       is_swimmer \
       is_sword \
       is_target_radial \
@@ -455,9 +472,6 @@ do
       is_weapon \
       is_wooden \
       move_speed \
-      is_msg_allowed_is_seen \
-      is_msg_allowed_is_surprised \
-      is_msg_allowed_is_wounded \
       noise_additional_on_jump_end \
       noise_additional_on_teleporting \
       noise_blocker \
@@ -470,6 +484,7 @@ do
       noise_on_you_are_hit_but_still_alive \
       normal_placement_rules \
       on_death_drop_all_items \
+      on_death_is_open \
       shove_strength \
       spawn_group_radius \
       stamina_drain_on_attacking \
@@ -524,19 +539,14 @@ do
       unused_flag39 \
       unused_flag4 \
       unused_flag40 \
-      gfx_pixelart_submergable \
-      is_obs_for_jump_landing \
-      gfx_pixelart_reflection \
-      gfx_pixelart_shadow \
       unused_flag48 \
       unused_flag5 \
       unused_flag56 \
       unused_flag6 \
       unused_flag7 \
       unused_flag8 \
-      unused_flag87 \
-      unused_flag9 \
-      on_death_is_open
+      is_tentacle \
+      unused_flag9
     do
         grep -q $arg $PAYLOAD
         # Too much noise

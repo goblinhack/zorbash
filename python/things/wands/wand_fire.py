@@ -9,7 +9,7 @@ def on_thrown(me, x, y):
         return
     for dx in range(-1, 2):
         for dy in range(-1, 2):
-            my.spawn_at(me, "fire", x + dx, y + dy)
+            my.place_at(me, "fire", x + dx, y + dy)
 
 
 def on_idle(me, x, y):

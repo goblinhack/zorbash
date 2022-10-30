@@ -9,8 +9,8 @@ def melt(me, x, y):
     my.thing_msg(me, "The ice melts.")
     for dx in range(-1, 2):
         for dy in range(-1, 2):
-            my.spawn_at(me, "water", x + dx, y + dy)
-            my.spawn_at(me, "explosion_cold", x + dx, y + dy)
+            my.place_at(me, "water", x + dx, y + dy)
+            my.place_at(me, "explosion_cold", x + dx, y + dy)
 
 
 def on_fire(me, x, y):

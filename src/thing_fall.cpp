@@ -146,7 +146,7 @@ bool Thing::fall(void)
     destroy_minions(nullptr);
   }
 
-  if (is_spawner()) {
+  if (is_able_to_spawn_things()) {
     destroy_spawned(nullptr);
   }
 

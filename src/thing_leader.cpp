@@ -329,20 +329,24 @@ std::list< Thingp > Thing::all_followers_get(void)
   return out;
 }
 
-bool Thing::same_leader(Thingp it)
+bool Thing::same_leader_or_owner(Thingp it)
 {
   if (! it) {
     return false;
   }
 
+  // dbg2("same_leader_or_owner: %s", it->to_short_string().c_str());
+
   auto my_owner  = top_owner();
   auto its_owner = it->top_owner();
 
   if (! is_interesting()) {
+    // dbg2("same_leader_or_owner: %s (no, line %d)", it->to_short_string().c_str(), __LINE__);
     return false;
   }
 
   if (! it->is_interesting()) {
+    // dbg2("same_leader_or_owner: %s (no, line %d)", it->to_short_string().c_str(), __LINE__);
     return false;
   }
 
@@ -357,6 +361,7 @@ bool Thing::same_leader(Thingp it)
       // Allow this; a sword being swung by a team member
       //
     } else {
+      // dbg2("same_leader_or_owner: %s (no, line %d)", it->to_short_string().c_str(), __LINE__);
       return false;
     }
   }
@@ -367,7 +372,24 @@ bool Thing::same_leader(Thingp it)
       // Allow this; a sword being swung by a team member
       //
     } else {
+      // dbg2("same_leader_or_owner: %s (no, line %d)", it->to_short_string().c_str(), __LINE__);
       return false;
+    }
+  }
+
+  //
+  // Check for things like tentacles being owned by krakens.
+  //
+  auto my_spawned_owner  = top_spawned_owner();
+  auto its_spawned_owner = it->top_spawned_owner();
+
+  if (my_spawned_owner || its_spawned_owner) {
+    if (its_spawned_owner == this) {
+      return true;
+    }
+
+    if (its_spawned_owner == my_spawned_owner) {
+      return true;
     }
   }
 
@@ -384,30 +406,37 @@ bool Thing::same_leader(Thingp it)
   }
 
   if (it == me) {
+    // dbg2("same_leader_or_owner: %s (yes, line %d)", it->to_short_string().c_str(), __LINE__);
     return true;
   }
 
   Thingp my_leader  = me->leader();
   Thingp its_leader = it->leader();
 
-  if (my_leader) {
-    dbg3("my leader: %s", my_leader->to_short_string().c_str());
-  }
-  if (its_leader) {
-    dbg3("its leader: %s", its_leader->to_short_string().c_str());
+  if (0) {
+    if (my_leader) {
+      dbg2("my leader: %s", my_leader->to_short_string().c_str());
+    }
+    if (its_leader) {
+      dbg2("its leader: %s", its_leader->to_short_string().c_str());
+    }
   }
 
   if (my_leader && (my_leader == it)) {
+    // dbg2("same_leader_or_owner: %s (yes, line %d)", it->to_short_string().c_str(), __LINE__);
     return true;
   }
 
   if (its_leader && (its_leader == my_leader)) {
+    // dbg2("same_leader_or_owner: %s (yes, line %d)", it->to_short_string().c_str(), __LINE__);
     return true;
   }
 
   if (its_leader && (its_leader == me)) {
+    // dbg2("same_leader_or_owner: %s (yes, line %d)", it->to_short_string().c_str(), __LINE__);
     return true;
   }
 
+  // dbg2("same_leader_or_owner: %s (no, line %d)", it->to_short_string().c_str(), __LINE__);
   return false;
 }

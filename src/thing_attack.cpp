@@ -31,32 +31,17 @@ bool Thing::possible_to_attack(const Thingp victim)
   //   return false;
   // }
 
-  auto my_owner  = top_owner();
-  auto its_owner = victim->top_owner();
-  if (my_owner && ((my_owner == its_owner) || (my_owner == victim))) {
+  if (same_leader_or_owner(victim)) {
     if (is_able_to_attack_owner()) {
       //
       // Sword of plutonium / lightning fork.
       //
       return true;
     }
-
     return false;
   }
 
-  auto my_mob  = top_mob();
-  auto its_mob = victim->top_mob();
-  if (my_mob && (my_mob == its_mob)) {
-    return false;
-  }
-
-  auto my_spawned_owner  = top_spawned_owner();
-  auto its_spawned_owner = victim->top_spawned_owner();
-  if (my_spawned_owner && (my_spawned_owner == its_spawned_owner)) {
-    return false;
-  }
-
-  if (same_leader(victim)) {
+  if (same_mob(victim)) {
     return false;
   }
 
@@ -68,7 +53,10 @@ bool Thing::possible_to_attack(const Thingp victim)
   // Weapons can't attack all by themselves. That would be nuts.
   //
   if (is_weapon() || is_wand_or_staff() || is_ring()) {
-    if (! my_owner) {
+    //
+    // How can this happen? Confused
+    //
+    if (! top_owner()) {
       if (is_debug_type()) {
         dbg("Cannot attack %s, I have no owner", victim->to_short_string().c_str());
       }
@@ -195,7 +183,7 @@ bool Thing::possible_to_attack(const Thingp victim)
   //
   // Don't attadk thy leader or follower
   //
-  if (same_leader(victim)) {
+  if (same_leader_or_owner(victim)) {
     return false;
   }
 

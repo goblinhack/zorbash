@@ -12,11 +12,49 @@
 
 #include <math.h>
 
+//
+// A new born spawned thing. Perform common checks for it.
+//
+void Thing::spawned_newborn(Thingp it)
+{
+  TRACE_NO_INDENT();
+  dbg("Spawned thing %s", it->to_short_string().c_str());
+  TRACE_AND_INDENT();
+
+  it->inherit_from(this);
+
+  //
+  // Like a kraken spwning a tentacle.
+  //
+  // Or could be an actual mob spawning.
+  //
+  if (it->is_minion()) {
+    dbg("Spawned minion thing %s", it->to_short_string().c_str());
+    it->mob_set(this);
+  }
+
+  //
+  // Like a wand spawning a projectile
+  //
+  if (is_able_to_spawn_things()) {
+    dbg("Spawned owned thing %s", it->to_short_string().c_str());
+    it->spawned_owner_set(this);
+  }
+
+  //
+  // Check if we are newly spawned over a chasm.
+  // Or if something we spawned at needs to react to us
+  // If a tick is pending there should be no need, as we will do a location check.
+  //
+  it->location_check_me();
+}
+
 bool Thing::spawn_next_to(const std::string &what)
 {
   TRACE_NO_INDENT();
   dbg("Spawn %s next to", what.c_str());
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
+
   std::vector< point >              possible;
   static const std::vector< point > all_deltas = {
       point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1), point(-1, 0), point(1, 0), point(0, 1),
@@ -77,23 +115,8 @@ bool Thing::spawn_next_to(const std::string &what)
   }
 
   auto chosen = possible[ pcg_random_range(0, cands) ];
-  auto c      = level->thing_new(what, chosen);
-  c->inherit_from(this);
-
-  if (c->is_minion()) {
-    c->mob_set(this);
-  }
-
-  if (is_spawner()) {
-    c->spawned_owner_set(this);
-  }
-
-  //
-  // Check if we are newly spawned over a chasm.
-  // Or if something we spawned at needs to react to us
-  // If a tick is pending there should be no need, as we will do a location check.
-  //
-  c->location_check_me();
+  auto it     = level->thing_new(what, chosen);
+  spawned_newborn(it);
 
   return true;
 }
@@ -102,6 +125,7 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
 {
   TRACE_NO_INDENT();
   dbg("Spawn %s next to or on monst", what.c_str());
+  TRACE_AND_INDENT();
 
   std::vector< point >              possible;
   static const std::vector< point > all_deltas = {
@@ -159,17 +183,8 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
 
   auto chosen = possible[ pcg_random_range(0, cands) ];
 
-  auto c = level->thing_new(what, chosen);
-  c->inherit_from(this);
-  if (is_spawner()) {
-    c->spawned_owner_set(this);
-  }
-
-  //
-  // Check if we are newly spawned over a chasm
-  // Or if something we spawned at needs to react to us
-  //
-  c->location_check_me();
+  auto it = level->thing_new(what, chosen);
+  spawned_newborn(it);
 
   return true;
 }
@@ -207,6 +222,7 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
 
   dbg("Spawn %s in radius range %u to %u at %s", what.c_str(), radius_min, radius_max,
       target->to_short_string().c_str());
+  TRACE_AND_INDENT();
 
   //
   // Don't spawn too many monsts
@@ -246,19 +262,9 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
       }
       dbg("%d,%d ok", x, y);
 
-      auto c = level->thing_new(what, point(x, y));
-      c->inherit_from(this);
-      c->ts_anim_delay_end_set(time_game_ms_cached() + dist * 100);
-
-      if (is_spawner()) {
-        c->spawned_owner_set(this);
-      }
-
-      //
-      // Check if we are newly spawned over a chasm
-      // Or if something we spawned at needs to react to us
-      //
-      c->location_check_me();
+      auto it = level->thing_new(what, point(x, y));
+      spawned_newborn(it);
+      it->ts_anim_delay_end_set(time_game_ms_cached() + dist * 100);
     }
   }
 
@@ -268,6 +274,7 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
 bool Thing::spawn_radius_range(const std::string &what, int radius_min, int radius_max)
 {
   TRACE_NO_INDENT();
+
   auto tpp = tp_find(what);
   if (unlikely(! tpp)) {
     err("Cannot find %s to spawn", what.c_str());
@@ -309,19 +316,9 @@ bool Thing::spawn_radius_range(const std::string &what, int radius_min, int radi
         continue;
       }
 
-      auto c = level->thing_new(what, point(x, y));
-      c->inherit_from(this);
-      c->ts_anim_delay_end_set(time_game_ms_cached() + dist * 100);
-
-      if (is_spawner()) {
-        c->spawned_owner_set(this);
-      }
-
-      //
-      // Check if we are newly spawned over a chasm
-      // Or if something we spawned at needs to react to us
-      //
-      c->location_check_me();
+      auto it = level->thing_new(what, point(x, y));
+      spawned_newborn(it);
+      it->ts_anim_delay_end_set(time_game_ms_cached() + dist * 100);
     }
   }
 
@@ -442,20 +439,10 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, i
         }
       }
 
-      auto c = level->thing_new(what, spawn_at);
+      auto it = level->thing_new(what, spawn_at);
+      spawned_newborn(it);
+      it->ts_anim_delay_end_set(time_game_ms_cached() + dist * 100);
 
-      c->inherit_from(this);
-      c->ts_anim_delay_end_set(time_game_ms_cached() + dist * 100);
-
-      if (is_spawner()) {
-        c->spawned_owner_set(this);
-      }
-
-      //
-      // Check if we are newly spawned over a chasm
-      // Or if something we spawned at needs to react to us
-      //
-      c->location_check_me();
       spawned++;
       break;
     }
@@ -621,19 +608,10 @@ Thingp Thing::spawn_at_if_possible(const std::string &what)
 
   auto chosen = possible[ pcg_random_range(0, cands) ];
 
-  auto c = level->thing_new(what, chosen);
-  c->inherit_from(this);
-  if (is_spawner()) {
-    c->spawned_owner_set(this);
-  }
+  auto it = level->thing_new(what, chosen);
+  spawned_newborn(it);
 
-  //
-  // Check if we are newly spawned over a chasm
-  // Or if something we spawned at needs to react to us
-  //
-  c->location_check_me();
-
-  return c;
+  return it;
 }
 
 Thingp Thing::spawn_at(const std::string &what) { return spawn_at(what, curr_at); }
@@ -644,21 +622,12 @@ Thingp Thing::spawn_at(const std::string &what, point p)
   TRACE_AND_INDENT();
 
   Thingp it;
-  if (is_spawner()) {
-    dbg("Spawn spawned owned thing at: %s", what.c_str());
-    TRACE_AND_INDENT();
+  if (is_able_to_spawn_things()) {
     it = level->thing_new(what, p, this);
   } else {
     it = level->thing_new(what, p);
   }
-
-  it->inherit_from(this);
-
-  //
-  // Check if we are newly spawned over a chasm
-  // Or if something we spawned at needs to react to us
-  //
-  it->location_check_me();
+  spawned_newborn(it);
 
   return it;
 }
@@ -669,13 +638,7 @@ Thingp Thing::spawn_owned_thing_at_my_position(const std::string &what)
   TRACE_AND_INDENT();
 
   auto it = level->thing_new(what, curr_at, this);
-  it->inherit_from(this);
-
-  //
-  // Check if we are newly spawned over a chasm
-  // Or if something we spawned at needs to react to us
-  //
-  it->location_check_me();
+  spawned_newborn(it);
 
   return it;
 }

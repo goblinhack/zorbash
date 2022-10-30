@@ -597,7 +597,7 @@ public:
   bool possible_to_attack(const Thingp it);
   bool projectile_anim_exists(void);
   bool projectile_choose_target(Thingp item, Thingp victim = nullptr);
-  bool same_leader(Thingp it);
+  bool same_leader_or_owner(Thingp it);
   bool same_mob(Thingp it);
   bool shove_ok(point future_pos);
   bool skill_add(Thingp it);
@@ -1225,6 +1225,7 @@ public:
   int is_able_to_see_through_doors(void);
   int is_able_to_shove(void);
   int is_able_to_sleep(void);
+  int is_able_to_spawn_things(void);
   int is_able_to_swim(void);
   int is_able_to_teleport_attack_chance_d1000(void);
   int is_able_to_teleport_attack(void);
@@ -1483,7 +1484,6 @@ public:
   int is_smoke(void);
   int is_snake(void);
   int is_soft(void);
-  int is_spawner(void);
   int is_spider(void);
   int is_spiderweb(void);
   int is_staff(void);
@@ -1497,6 +1497,7 @@ public:
   int is_target_select(void);
   int is_temperature_change_sensitive(void);
   int is_temperature_sensitive(void);
+  int is_tentacle(void);
   int is_thief(void);
   int is_throwable(void);
   int is_throw_blocker(void);
@@ -1994,7 +1995,6 @@ public:
   int unused_flag5(void);
   int unused_flag6(void);
   int unused_flag7(void);
-  int unused_flag87(void);
   int unused_flag8(void);
   int unused_flag9(void);
   int value(const Thingp it);
@@ -2447,6 +2447,7 @@ public:
   void skill_remove_all(void);
   void sleep(void);
   void solid_rock_tick(void);
+  void spawned_newborn(Thingp it);
   void spawned_owner_set(Thingp spawner_owner);
   void stamina_boost(int v);
   void stats_tick(void);

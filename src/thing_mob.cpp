@@ -102,6 +102,9 @@ Thingp Thing::immediate_mob(void)
   return nullptr;
 }
 
+//
+// Mobs can be e.g. bone piles always spawning, or krakens only spawning tentacles once.
+//
 void Thing::mob_set(Thingp mob)
 {
   TRACE_NO_INDENT();
@@ -221,14 +224,6 @@ bool Thing::same_mob(Thingp it)
     return false;
   }
 
-  if (! is_monst()) {
-    return false;
-  }
-
-  if (! it->is_monst()) {
-    return false;
-  }
-
   if (! is_minion()) {
     return false;
   }
@@ -237,13 +232,17 @@ bool Thing::same_mob(Thingp it)
     return false;
   }
 
-  auto mob = top_mob();
-  if (! mob) {
+  auto its_mob = it->top_mob();
+  if (! its_mob) {
     return false;
   }
 
-  auto its_mob = it->top_mob();
-  if (! its_mob) {
+  if (its_mob == this) {
+    return true;
+  }
+
+  auto mob = top_mob();
+  if (! mob) {
     return false;
   }
 

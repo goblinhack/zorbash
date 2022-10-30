@@ -243,6 +243,7 @@ private:
   int _is_able_to_see_through_doors {};
   int _is_able_to_shove {};
   int _is_able_to_sleep {};
+  int _is_able_to_spawn_things {};
   int _is_able_to_swim {};
   int _is_able_to_teleport_attack {};
   int _is_able_to_teleport_attack_chance_d1000 {};
@@ -478,7 +479,6 @@ private:
   int _is_smoke {};
   int _is_snake {};
   int _is_soft {};
-  int _is_spawner {};
   int _is_spider {};
   int _is_spiderweb {};
   int _is_staff {};
@@ -492,6 +492,7 @@ private:
   int _is_target_select {};
   int _is_temperature_change_sensitive {};
   int _is_temperature_sensitive {};
+  int _is_tentacle {};
   int _is_the_grid {};
   int _is_thief {};
   int _is_throwable {};
@@ -635,7 +636,6 @@ private:
   int _unused_flag6 {};
   int _unused_flag7 {};
   int _unused_flag8 {};
-  int _unused_flag87 {};
   int _unused_flag9 {};
   int _weapon_damage {};
   int _weapon_use_distance {};
@@ -1262,6 +1262,7 @@ public:
   int is_able_to_see_through_doors(void) const;
   int is_able_to_shove(void) const;
   int is_able_to_sleep(void) const;
+  int is_able_to_spawn_things(void) const;
   int is_able_to_swim(void) const;
   int is_able_to_teleport_attack_chance_d1000(void) const;
   int is_able_to_teleport_attack(void) const;
@@ -1496,7 +1497,6 @@ public:
   int is_smoke(void) const;
   int is_snake(void) const;
   int is_soft(void) const;
-  int is_spawner(void) const;
   int is_spider(void) const;
   int is_spiderweb(void) const;
   int is_staff(void) const;
@@ -1510,6 +1510,7 @@ public:
   int is_target_select(void) const;
   int is_temperature_change_sensitive(void) const;
   int is_temperature_sensitive(void) const;
+  int is_tentacle(void) const;
   int is_the_grid(void) const;
   int is_thief(void) const;
   int is_throwable(void) const;
@@ -1653,7 +1654,6 @@ public:
   int unused_flag5(void) const;
   int unused_flag6(void) const;
   int unused_flag7(void) const;
-  int unused_flag87(void) const;
   int unused_flag8(void) const;
   int unused_flag9(void) const;
   int weapon_damage(void) const;
@@ -1801,6 +1801,7 @@ public:
   void is_able_to_see_through_doors_set(int v);
   void is_able_to_shove_set(int v);
   void is_able_to_sleep_set(int v);
+  void is_able_to_spawn_things_set(int v);
   void is_able_to_swim_set(int v);
   void is_able_to_teleport_attack_chance_d1000_set(int v);
   void is_able_to_teleport_attack_set(int v);
@@ -2036,7 +2037,6 @@ public:
   void is_smoke_set(int v);
   void is_snake_set(int v);
   void is_soft_set(int v);
-  void is_spawner_set(int v);
   void is_spider_set(int v);
   void is_spiderweb_set(int v);
   void is_staff_set(int v);
@@ -2050,6 +2050,7 @@ public:
   void is_target_select_set(int v);
   void is_temperature_change_sensitive_set(int v);
   void is_temperature_sensitive_set(int v);
+  void is_tentacle_set(int v);
   void is_the_grid_set(int v);
   void is_thief_set(int v);
   void is_throwable_set(int v);
@@ -2329,7 +2330,6 @@ public:
   void unused_flag5_set(int v);
   void unused_flag6_set(int v);
   void unused_flag7_set(int v);
-  void unused_flag87_set(int v);
   void unused_flag8_set(int v);
   void unused_flag9_set(int v);
   void weapon_damage_set(int v);

@@ -740,6 +740,60 @@ PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
+  if (t->spawn_at(std::string(what), point(x, y))) {
+    Py_RETURN_TRUE;
+  }
+  Py_RETURN_FALSE;
+}
+
+PyObject *place_at(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_AND_INDENT();
+  char    *what = nullptr;
+  uint32_t id   = 0;
+  int      x    = -1;
+  int      y    = -1;
+
+  static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "x", (char *) "y", nullptr};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Isii", kwlist, &id, &what, &x, &y)) {
+    ERR("%s: Bad args", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! id) {
+    ERR("%s: Missing 'id'", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! what) {
+    ERR("%s: Missing 'what'", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (x == -1) {
+    ERR("%s: Missing 'x'", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (y == -1) {
+    ERR("%s: Missing 'y'", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  PY_DBG("%s(%X, %s, %d, %d)", __FUNCTION__, id, what, x, y);
+
+  auto level = game->get_current_level();
+  if (! level) {
+    Py_RETURN_FALSE;
+  }
+
+  auto t = level->thing_find(ThingId(id));
+  if (unlikely(! t)) {
+    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
+    Py_RETURN_FALSE;
+  }
+
   if (t->place(std::string(what), point(x, y))) {
     Py_RETURN_TRUE;
   }
@@ -898,6 +952,7 @@ TP_BODY_SET_INT(is_able_to_see_in_the_dark)
 TP_BODY_SET_INT(is_able_to_see_through_doors)
 TP_BODY_SET_INT(is_able_to_shove)
 TP_BODY_SET_INT(is_able_to_sleep)
+TP_BODY_SET_INT(is_able_to_spawn_things)
 TP_BODY_SET_INT(is_able_to_swim)
 TP_BODY_SET_INT(is_able_to_teleport_attack)
 TP_BODY_SET_INT(is_able_to_teleport_attack_chance_d1000)
@@ -1132,7 +1187,6 @@ TP_BODY_SET_INT(is_slippery)
 TP_BODY_SET_INT(is_smoke)
 TP_BODY_SET_INT(is_snake)
 TP_BODY_SET_INT(is_soft)
-TP_BODY_SET_INT(is_spawner)
 TP_BODY_SET_INT(is_spider)
 TP_BODY_SET_INT(is_spiderweb)
 TP_BODY_SET_INT(is_staff)
@@ -1146,6 +1200,7 @@ TP_BODY_SET_INT(is_target_radial)
 TP_BODY_SET_INT(is_target_select)
 TP_BODY_SET_INT(is_temperature_change_sensitive)
 TP_BODY_SET_INT(is_temperature_sensitive)
+TP_BODY_SET_INT(is_tentacle)
 TP_BODY_SET_INT(is_the_grid)
 TP_BODY_SET_INT(is_thief)
 TP_BODY_SET_INT(is_throwable)
@@ -1289,7 +1344,6 @@ TP_BODY_SET_INT(unused_flag56)
 TP_BODY_SET_INT(unused_flag6)
 TP_BODY_SET_INT(unused_flag7)
 TP_BODY_SET_INT(unused_flag8)
-TP_BODY_SET_INT(unused_flag87)
 TP_BODY_SET_INT(unused_flag9)
 TP_BODY_SET_INT(weapon_damage)
 TP_BODY_SET_INT(z_depth)

@@ -1,6 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- - kraken tentacles                                                                                                                           -->
+<!-- - check plutonium sword and lightning                                                                                                        -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

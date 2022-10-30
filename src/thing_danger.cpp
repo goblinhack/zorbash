@@ -306,11 +306,11 @@ int Thing::is_dangerous(Thingp it)
     return false;
   }
 
-  if (same_leader(it)) {
+  if (same_leader_or_owner(it)) {
     return false;
   }
 
-  if (it->is_minion() && (it->top_mob() == top_mob())) {
+  if (same_mob(it)) {
     return false;
   }
 
