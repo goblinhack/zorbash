@@ -1,5 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - "You can't jump into solid objects." when clicking on secret door                                                                          -->
+<!-- - "You sweat from the extreme heat." when trapped in ice                                                                                     -->
 <!-- - kraken tentacles                                                                                                                           -->
 <!-- - test with freezing and wand of descent                                                                                                     -->
 <!-- - test main body death                                                                                                                       -->
