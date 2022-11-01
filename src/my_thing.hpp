@@ -2324,8 +2324,8 @@ public:
   void goal_penalty_tick(void);
   void grass_tick(void);
   void hide(void);
-  void hooks_remove(void);
   void hooks_remove_from(Thingp);
+  void hooks_remove(void);
   void hunger_clock_tick(void);
   void hunger_update(void);
   void inherit_from(Thingp it);
