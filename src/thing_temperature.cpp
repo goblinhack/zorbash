@@ -22,6 +22,13 @@ void Thing::temperature_tick(void)
     }
 
     //
+    // Do not count hidden (carried) items
+    //
+    if (t->is_hidden) {
+      continue;
+    }
+
+    //
     // Without this check a player will heat themselves up ridiculously
     //
     if (t == this) {

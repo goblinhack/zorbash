@@ -126,13 +126,6 @@ void Thing::msg(const char *fmt, ...)
       if (distance >= DMAP_IS_PASSABLE) {
         dbg("Too far to see (dist %d) msg: %s", distance, why.c_str());
         TRACE_AND_INDENT();
-
-        IF_DEBUG
-        {
-          va_start(args, fmt);
-          dbg_(fmt, args);
-          va_end(args);
-        }
         return;
       }
     }
