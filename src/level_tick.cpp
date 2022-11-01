@@ -178,6 +178,7 @@ void Level::tick_(void)
   // Even if a tick is not running, we need to animate all things
   //
   {
+    TRACE_NO_INDENT();
     FOR_ALL_ANIMATED_THINGS_LEVEL(this, t)
     {
       t->animate();
@@ -186,6 +187,7 @@ void Level::tick_(void)
     }
     FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
 
+    TRACE_NO_INDENT();
     FOR_ALL_ANIMATED_THINGS_LEVEL(this, t)
     {
       if (t->is_scheduled_for_death) {
@@ -288,6 +290,7 @@ void Level::tick_(void)
   // then monsters etc...
   //
   for (uint8_t tick_prio = MAP_TICK_PRIO_VERY_HIGH; tick_prio < MAP_TICK_PRIO; tick_prio++) {
+    TRACE_NO_INDENT();
     FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
     {
       if (likely(t->tick_prio() != tick_prio)) {
@@ -337,6 +340,7 @@ void Level::tick_(void)
     FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
     if (t->is_scheduled_for_jump_end) {
@@ -354,6 +358,7 @@ void Level::tick_(void)
   static int       wait_count;
   wait_count++;
 
+  TRACE_NO_INDENT();
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
     //
@@ -419,6 +424,7 @@ void Level::tick_(void)
       // t->con("WAIT %d", __LINE__);
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_EQUIP(e)
     {
       //
@@ -462,6 +468,7 @@ void Level::tick_(void)
     //
     // Make sure weapons keep up
     //
+    TRACE_NO_INDENT();
     FOR_ALL_EQUIP(e)
     {
       auto o = t->equip_carry_anim(e);
@@ -504,6 +511,7 @@ void Level::tick_(void)
   // location checks on the ends of moves, but this is a backup and will
   // also handle things that do not move, like a wand that is now on fire.
   //
+  TRACE_NO_INDENT();
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
     //
@@ -517,6 +525,7 @@ void Level::tick_(void)
   // Fast moving things may still have stuff to do
   //
   bool work_to_do = game->things_are_moving;
+  TRACE_NO_INDENT();
   FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
   {
     if (t->movement_remaining() > 0) {
@@ -621,6 +630,7 @@ void Level::tick_(void)
     // For debugging consistent randomness
     //
     float h = 0;
+  TRACE_NO_INDENT();
     FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t) {
       h += t->curr_at.x;
       h += t->curr_at.y;
@@ -691,7 +701,7 @@ void Level::tick_begin_now(void)
   game->tick_begin_now();
 
   dbg("Tick add movement to all things");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
   {
     //

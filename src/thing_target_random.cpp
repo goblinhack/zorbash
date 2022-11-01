@@ -18,6 +18,9 @@ point Thing::dest_random_get(int d)
       d = MAP_WIDTH / 2;
     } else {
       d = (int) distance_vision_get();
+      if (! d) {
+        err("Thing has no distance_vision set");
+      }
     }
   }
 

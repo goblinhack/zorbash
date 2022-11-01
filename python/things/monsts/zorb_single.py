@@ -10,7 +10,7 @@ def tp_init(name, text_long_name):
     self = zorb_all.tp_init(name, text_long_name)
     my.text_short_description(self, "A very lesser and a bit insecure zorblin.")
     my.is_able_to_use_weapons(self, True)
-    my.is_monst_class_b(self, True)
+    my.is_monst_class_a(self, True)
     my.on_born_do(self, "me.on_born()")
     my.is_biome_dungeon(self, True)
     my.is_carrier_of_treasure_class_a(self, True)

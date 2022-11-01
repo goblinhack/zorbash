@@ -417,6 +417,7 @@ public:
   Thingp spawn_owned_thing_at_my_position(const std::string &what);
   Thingp top_mob(void);
   Thingp top_owner(void);
+  Thingp top_owner_internal(void);
   Thingp top_spawned_owner(void);
   Thingp debuff_find(const std::string &);
   Thingp buff_find(const std::string &);
@@ -2324,6 +2325,7 @@ public:
   void grass_tick(void);
   void hide(void);
   void hooks_remove(void);
+  void hooks_remove_from(Thingp);
   void hunger_clock_tick(void);
   void hunger_update(void);
   void inherit_from(Thingp it);

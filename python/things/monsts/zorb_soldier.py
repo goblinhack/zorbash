@@ -19,7 +19,7 @@ def tp_init(name, text_long_name):
     my.text_short_description(self, "A grizzled war-weary soldier.")
     my.is_able_to_use_armor(self, True)
     my.on_born_do(self, "me.on_born()")
-    my.is_monst_class_b(self, True)
+    my.is_monst_class_a(self, True)
     my.is_biome_dungeon(self, True)
     my.stat_str(self, 10)
     my.health_initial_dice(self, "2d8+2")

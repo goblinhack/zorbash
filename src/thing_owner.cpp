@@ -92,6 +92,28 @@ void Thing::on_owner_remove(Thingp owner)
   }
 }
 
+Thingp Thing::top_owner_internal(void)
+{
+  TRACE_NO_INDENT();
+
+  if (! maybe_infop()) {
+    return this;
+  }
+
+  auto oid = immediate_owner_id();
+  if (likely(oid.ok())) {
+    auto i = level->thing_find(oid);
+    if (unlikely(! i)) {
+      return nullptr;
+    }
+    if (unlikely(i->immediate_owner_id().ok())) {
+      return i->top_owner_internal();
+    }
+    return i;
+  }
+  return nullptr;
+}
+
 Thingp Thing::top_owner(void)
 {
   TRACE_NO_INDENT();
@@ -103,10 +125,6 @@ Thingp Thing::top_owner(void)
     return nullptr;
   }
 
-  if (! maybe_infop()) {
-    return nullptr;
-  }
-
   auto oid = immediate_owner_id();
   if (likely(oid.ok())) {
     auto i = level->thing_find(oid);
@@ -114,7 +132,7 @@ Thingp Thing::top_owner(void)
       return nullptr;
     }
     if (unlikely(i->immediate_owner_id().ok())) {
-      return i->top_owner();
+      return i->top_owner_internal();
     }
     return i;
   }
@@ -129,10 +147,6 @@ Thingp Thing::immediate_owner(void)
   // Things own themselves
   //
   if (is_player() || is_monst()) {
-    return nullptr;
-  }
-
-  if (! maybe_infop()) {
     return nullptr;
   }
 

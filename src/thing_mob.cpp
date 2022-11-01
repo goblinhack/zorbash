@@ -224,27 +224,23 @@ bool Thing::same_mob(Thingp it)
     return false;
   }
 
-  if (! is_minion()) {
-    return false;
-  }
-
-  if (! it->is_minion()) {
-    return false;
-  }
-
   auto its_mob = it->top_mob();
-  if (! its_mob) {
-    return false;
-  }
-
-  if (its_mob == this) {
-    return true;
+  if (its_mob) {
+    if (its_mob == this) {
+      return true;
+    }
   }
 
   auto mob = top_mob();
-  if (! mob) {
-    return false;
+  if (mob) {
+    if (mob == its_mob) {
+      return true;
+    }
   }
 
-  return mob == its_mob;
+  if (mob == this) {
+    return true;
+  }
+
+  return false;
 }
