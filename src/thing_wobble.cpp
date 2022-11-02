@@ -8,6 +8,18 @@
 
 void Thing::wobble(float wobble)
 {
+  if (is_frozen) {
+    return;
+  }
+
+  if (is_burnt) {
+    return;
+  }
+
+  if (is_dead) {
+    return;
+  }
+
   if (non_pcg_random_range(0, 100) < 50) {
     wobble_set(wobble);
   } else {
