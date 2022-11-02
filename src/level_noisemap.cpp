@@ -235,7 +235,7 @@ void Level::update_noisemap(void)
   if (0) {
     noisemap_print();
   }
-  dmap_process(&_noisemap);
+  dmap_process(&_noisemap, point(0, 0), point(MAP_WIDTH - 1, MAP_HEIGHT - 1), true, true);
   if (0) {
     noisemap_print();
   }

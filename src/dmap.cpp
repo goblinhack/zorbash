@@ -148,7 +148,7 @@ void dmap_print(const Dmap *D)
   }
 }
 
-void dmap_process(Dmap *D, point tl, point br, bool place_border)
+void dmap_process(Dmap *D, point tl, point br, bool place_border, bool allow_diagonals)
 {
   auto                                                              before = SDL_GetTicks();
   uint8_t                                                           x;
@@ -186,8 +186,8 @@ void dmap_process(Dmap *D, point tl, point br, bool place_border)
 
   //
   // We always place a border around the dmap so the search doesn't trickly off the map.
-  // So grow the search space slightly so that creatures that can only see one tile, do not lose out and have nothing
-  // to look at.
+  // So grow the search space slightly so that creatures that can only see one tile, do
+  // not lose out and have nothing to look at.
   //
   if (place_border) {
     minx--;
@@ -300,7 +300,8 @@ void dmap_process(Dmap *D, point tl, point br, bool place_border)
         //
         // Avoid diagonal moves.
         //
-        if ((get_no_check(D->val, x - 1, y) == DMAP_IS_WALL) || (get_no_check(D->val, x, y - 1) == DMAP_IS_WALL)) {
+        if (! allow_diagonals &&
+            ((get_no_check(D->val, x - 1, y) == DMAP_IS_WALL) || (get_no_check(D->val, x, y - 1) == DMAP_IS_WALL))) {
           a = DMAP_IS_WALL;
         } else {
           a = get_no_check(D->val, x - 1, y - 1);
@@ -308,7 +309,8 @@ void dmap_process(Dmap *D, point tl, point br, bool place_border)
 
         b = get_no_check(D->val, x, y - 1);
 
-        if ((get_no_check(D->val, x + 1, y) == DMAP_IS_WALL) || (get_no_check(D->val, x, y - 1) == DMAP_IS_WALL)) {
+        if (! allow_diagonals &&
+            ((get_no_check(D->val, x + 1, y) == DMAP_IS_WALL) || (get_no_check(D->val, x, y - 1) == DMAP_IS_WALL))) {
           c = DMAP_IS_WALL;
         } else {
           c = get_no_check(D->val, x + 1, y - 1);
@@ -317,7 +319,8 @@ void dmap_process(Dmap *D, point tl, point br, bool place_border)
         d = get_no_check(D->val, x - 1, y);
         f = get_no_check(D->val, x + 1, y);
 
-        if ((get_no_check(D->val, x - 1, y) == DMAP_IS_WALL) || (get_no_check(D->val, x, y + 1) == DMAP_IS_WALL)) {
+        if (! allow_diagonals &&
+            ((get_no_check(D->val, x - 1, y) == DMAP_IS_WALL) || (get_no_check(D->val, x, y + 1) == DMAP_IS_WALL))) {
           g = DMAP_IS_WALL;
         } else {
           g = get_no_check(D->val, x - 1, y + 1);
@@ -325,7 +328,8 @@ void dmap_process(Dmap *D, point tl, point br, bool place_border)
 
         h = get_no_check(D->val, x, y + 1);
 
-        if ((get_no_check(D->val, x + 1, y) == DMAP_IS_WALL) || (get_no_check(D->val, x, y + 1) == DMAP_IS_WALL)) {
+        if (! allow_diagonals &&
+            ((get_no_check(D->val, x + 1, y) == DMAP_IS_WALL) || (get_no_check(D->val, x, y + 1) == DMAP_IS_WALL))) {
           i = DMAP_IS_WALL;
         } else {
           i = get_no_check(D->val, x + 1, y + 1);
@@ -396,8 +400,6 @@ void dmap_process(Dmap *D, point tl, point br, bool place_border)
     }
   }
 }
-
-void dmap_process(Dmap *D) { dmap_process(D, point(0, 0), point(MAP_WIDTH, MAP_HEIGHT), true); }
 
 static bool is_obs_wall_or_door_at(const Dmap *D, int x, int y)
 {

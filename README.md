@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - a monst can hit diagonally through a rock, but no msg                                                                                      -->
 <!-- - "You can't jump into solid objects." when clicking on secret door                                                                          -->
 <!-- - kraken tentacles                                                                                                                           -->
 <!-- - test with freezing and wand of descent                                                                                                     -->
