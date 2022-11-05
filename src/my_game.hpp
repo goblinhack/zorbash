@@ -123,7 +123,7 @@ public:
   SDL_Keysym key_wait_or_collect = {};
   SDL_Keysym key_zoom_in         = {};
   SDL_Keysym key_zoom_out        = {};
-  // end sort marker1 {
+  // end sort marker1 }
 
   uint8_t tile_height = {};
   uint8_t tile_width  = {};
@@ -244,7 +244,7 @@ public:
   void wid_thing_info_clear_popup(void);
   void wid_thing_info_destroy_deferred(void);
   void wid_thing_info_destroy_immediate(void);
-  // end sort marker2 {
+  // end sort marker2 }
 
   //
   // Save file name, contains the date and other useful save slot info
@@ -392,7 +392,7 @@ public:
   bool request_to_update_inventory_with_thing_over {};
   bool request_to_update_inventory_with_thing_selected {};
   bool request_to_update_same_level {};
-  // end sort marker3 {
+  // end sort marker3 }
 
   uint32_t request_destroy_thing_info {}; // Timestamp
   uint32_t request_player_move {};        // Player pressed some keys

@@ -13,21 +13,24 @@ def on_death_of_a_follower(me, leader, x, y):
 
 def tp_init(name, text_long_name):
     self = zorb_all.tp_init(name, text_long_name)
-    my.text_long_description2(self, "This particular zorblin has risen through the ranks. As tough as stone nails in a stone coffin, this zorblin is not prepared to take any of your cheek.")
+
+    # begin sort marker
     my.health_initial_dice(self, "2d10")
     my.health_initial_dice(self, "2d10+4")
-    my.is_able_to_use_weapons(self, True)
-    my.is_able_to_use_armor(self, True)
-    my.on_born_do(self, "me.on_born()")
-    my.is_carrier_of_treasure_class_b(self, True)
     my.is_able_to_freeze(self, True)
-    my.is_monst_class_b(self, True)
+    my.is_able_to_use_armor(self, True)
+    my.is_able_to_use_weapons(self, True)
     my.is_biome_dungeon(self, True)
-    my.is_carrier_of_weapon_class_b(self, True)
+    my.is_carrier_of_treasure_class_b_d1000(self, 500)
+    my.is_carrier_of_weapon_class_b(self, 1000)
+    my.is_monst_class_b(self, True)
+    my.on_born_do(self, "me.on_born()")
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
-    my.on_you_nat_att_do(self, "me.on_you_nat_att()")
+    my.on_you_nat_att_do(self, "zorb_all.on_you_nat_att()")
     my.stat_str(self, 12)
+    my.text_long_description2(self, "This particular zorblin has risen through the ranks. As tough as stone nails in a stone coffin, this zorblin is not prepared to take any of your cheek.")
     my.text_short_description(self, "A grizzled war-weary zorblin.")
+    # end sort marker
 
     delay = 300
     my.tile(self,

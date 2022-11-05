@@ -8,15 +8,7 @@
 
 void Thing::wobble(float wobble)
 {
-  if (is_frozen) {
-    return;
-  }
-
-  if (is_burnt) {
-    return;
-  }
-
-  if (is_dead) {
+  if (is_frozen || is_burnt || is_dead) {
     return;
   }
 

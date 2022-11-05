@@ -13,7 +13,10 @@ void Thing::burnt_set(void)
     return;
   }
 
+  level_pop();
   is_burnt = true;
+  level_push();
+
   msg("%s is burnt", text_The().c_str());
 
   //

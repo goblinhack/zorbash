@@ -86,7 +86,7 @@ def tp_init(name, text_long_name):
     my.is_biome_dungeon(self, True)
     my.is_biome_swamp(self, True)
     my.is_bleeder(self, True)
-    my.is_carrier_of_treasure_class_a(self, True)
+    my.is_carrier_of_treasure_class_a_d1000(self, 1000)
     my.is_corpse_on_death(self, True)
     my.is_corpse_with_bones(self, True)
     my.is_crushable(self, True)

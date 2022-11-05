@@ -297,9 +297,9 @@ private:
   int _is_brittle {};
   int _is_buff {};
   int _is_carnivorous_plant {};
-  int _is_carrier_of_treasure_class_a {};
-  int _is_carrier_of_treasure_class_b {};
-  int _is_carrier_of_treasure_class_c {};
+  int _is_carrier_of_treasure_class_a_d1000 {};
+  int _is_carrier_of_treasure_class_b_d1000 {};
+  int _is_carrier_of_treasure_class_c_d1000 {};
   int _is_carrier_of_weapon_class_a {};
   int _is_carrier_of_weapon_class_b {};
   int _is_carrier_of_weapon_class_c {};
@@ -639,7 +639,7 @@ private:
   int _unused_flag9 {};
   int _weapon_damage {};
   int _weapon_use_distance {};
-  // end sort marker1 {
+  // end sort marker1 }
 
   // begin sort marker2 {
   std::string _damage_acid_dice_str;
@@ -806,7 +806,7 @@ private:
   std::string _text_unused1;
   std::string _text_unused2;
   std::string _text_unused3;
-  // end sort marker2 {
+  // end sort marker2 }
 
 public:
   Tp(void);
@@ -1106,7 +1106,7 @@ public:
   const std::string &text_unused2(void) const;
   const std::string &text_unused3(void) const;
   const std::string &text_unused(void) const;
-  // end sort marker3 {
+  // end sort marker3 }
 
   // begin sort marker4 {
   int aggression_pct(void) const;
@@ -1316,9 +1316,9 @@ public:
   int is_brittle(void) const;
   int is_buff(void) const;
   int is_carnivorous_plant(void) const;
-  int is_carrier_of_treasure_class_a(void) const;
-  int is_carrier_of_treasure_class_b(void) const;
-  int is_carrier_of_treasure_class_c(void) const;
+  int is_carrier_of_treasure_class_a_d1000(void) const;
+  int is_carrier_of_treasure_class_b_d1000(void) const;
+  int is_carrier_of_treasure_class_c_d1000(void) const;
   int is_carrier_of_weapon_class_a(void) const;
   int is_carrier_of_weapon_class_b(void) const;
   int is_carrier_of_weapon_class_c(void) const;
@@ -1657,7 +1657,7 @@ public:
   int unused_flag8(void) const;
   int unused_flag9(void) const;
   int weapon_damage(void) const;
-  // end sort marker4 {
+  // end sort marker4 }
 
   // begin sort marker5 {
   void aggression_pct_set(int v);
@@ -1856,9 +1856,9 @@ public:
   void is_brittle_set(int v);
   void is_buff_set(int v);
   void is_carnivorous_plant_set(int v);
-  void is_carrier_of_treasure_class_a_set(int v);
-  void is_carrier_of_treasure_class_b_set(int v);
-  void is_carrier_of_treasure_class_c_set(int v);
+  void is_carrier_of_treasure_class_a_d1000_set(int v);
+  void is_carrier_of_treasure_class_b_d1000_set(int v);
+  void is_carrier_of_treasure_class_c_d1000_set(int v);
   void is_carrier_of_weapon_class_a_set(int v);
   void is_carrier_of_weapon_class_b_set(int v);
   void is_carrier_of_weapon_class_c_set(int v);
@@ -2336,7 +2336,7 @@ public:
   void weapon_use_distance_set(int v);
   void z_depth_set(int v);
   void z_prio_set(int v);
-  // end sort marker5 {
+  // end sort marker5 }
 
   void damage_water_chance_d1000_set(int index, int v);
   void damage_acid_chance_d1000_set(int index, int v);

@@ -100,8 +100,8 @@ bool Thing::bag_add(Thingp item)
     }
     while (tries < bw * bh) {
       tries++;
-      auto  x = pcg_random_range(0, bw - w);
-      auto  y = pcg_random_range(0, bh - h);
+      auto  x = non_pcg_random_range(0, bw - w);
+      auto  y = non_pcg_random_range(0, bh - h);
       point at(x, y);
 
       if (bag_can_place_at(item, at)) {
@@ -187,8 +187,8 @@ bool Thing::bag_add_test(Thingp item)
     }
     while (tries < bw * bh) {
       tries++;
-      auto  x = pcg_random_range(0, bw - w);
-      auto  y = pcg_random_range(0, bh - h);
+      auto  x = non_pcg_random_range(0, bw - w);
+      auto  y = non_pcg_random_range(0, bh - h);
       point at(x, y);
 
       if (bag_can_place_at(item, at)) {
@@ -431,8 +431,8 @@ bool Thing::bag_can_place_anywhere(Thingp item, point &pos)
     }
     while (tries < bw * bh) {
       tries++;
-      auto  x = pcg_random_range(0, bw - w);
-      auto  y = pcg_random_range(0, bh - h);
+      auto  x = non_pcg_random_range(0, bw - w);
+      auto  y = non_pcg_random_range(0, bh - h);
       point at(x, y);
       if (bag_can_place_at(item, at)) {
         pos = at;

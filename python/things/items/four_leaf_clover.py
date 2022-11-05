@@ -49,7 +49,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="four_leaf_clover", text_long_name="four-leaf clover", text_short_name="4-clover")
+    tp_init(name="four_leaf_clover", text_long_name="four leaf clover", text_short_name="four leaf clover")
 
 
 init()

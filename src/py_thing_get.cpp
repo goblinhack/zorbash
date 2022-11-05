@@ -563,4 +563,4 @@ THING_BODY_GET_THING(thing_immediate_owner_id_get, immediate_owner_id)
 THING_BODY_GET_THING(thing_immediate_spawned_owner_id_get, immediate_spawned_owner_id)
 THING_BODY_GET_THING(thing_leader_id_get, leader_id)
 THING_BODY_GET_THING(thing_top_owner_id_get, top_owner_id)
-// end sort marker1 {
+// end sort marker1 }

@@ -6,8 +6,7 @@
 
 void wid_leftbar_fini(void);
 bool wid_leftbar_init(void);
-bool wid_leftbar_ascii_create(void);
-bool wid_leftbar_pixelart_create(void);
+bool wid_leftbar_display_create(void);
 
 #include "my_wid.hpp"
 

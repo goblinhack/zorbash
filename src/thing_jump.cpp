@@ -151,6 +151,17 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   }
 
   //
+  // If stuck in a web, cannot jump
+  //
+  if (! is_immune_to_spiderwebs()) {
+    if (level->is_spiderweb(curr_at)) {
+      msg("You try to jump but are stuck in a web.");
+      wobble(25);
+      return false;
+    }
+  }
+
+  //
   // Ensure cleaners do not get stuck in themselves!
   //
   if (is_stuck_currently()) {
@@ -158,7 +169,11 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     // Ok to move
     //
     if (is_player()) {
-      msg("You try to jump but are stuck fast.");
+      if (is_frozen) {
+        msg("You try to jump but are frozen to the bone.");
+      } else {
+        msg("You try to jump but are stuck fast.");
+      }
     }
     wobble(25);
     dbg("You try to jump but are stuck fast.");
@@ -171,16 +186,6 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   if (level->is_block_of_ice(curr_at)) {
     dbg("Cannot jump, stuck in ice");
     return false;
-  }
-
-  //
-  // If stuck in a web, cannot jump
-  //
-  if (! is_immune_to_spiderwebs()) {
-    if (level->is_spiderweb(curr_at)) {
-      dbg("Cannot jump, stuck in a web");
-      return false;
-    }
   }
 
   //
@@ -309,9 +314,9 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   }
 
   //
-  // No sneaky jumping onto doors to get passed them
+  // No sneaky jumping onto doors to get passed them. But we do need to allow jumping into secret doors.
   //
-  if (level->is_obs_for_jump_landing(x, y) || level->is_obs_wall_or_door(x, y) || level->is_obs_destructable(x, y)) {
+  if (level->is_obs_for_jump_landing(x, y)) {
     TRACE_AND_INDENT();
     dbg("No, jump failed, into obstacle");
     if (is_player()) {

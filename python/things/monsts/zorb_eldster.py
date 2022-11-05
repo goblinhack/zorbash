@@ -13,19 +13,21 @@ def on_death_of_a_follower(me, leader, x, y):
 
 def tp_init(name, text_long_name):
     self = zorb_all.tp_init(name, text_long_name)
-    my.text_long_description2(self, "This zorblin is world weary and longing for an early retirement. Can you help?")
-    my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
-    my.on_you_nat_att_do(self, "me.on_you_nat_att()")
-    my.text_short_description(self, "A very war-weary goblin.")
-    my.is_carrier_of_treasure_class_b(self, True)
-    my.is_carrier_of_weapon_class_a(self, True)
-    my.on_born_do(self, "me.on_born()")
-    my.stat_str(self, 8)
+    # begin sort marker
     my.health_initial_dice(self, "2d5")
-    my.is_able_to_use_weapons(self, True)
     my.is_able_to_freeze(self, True)
-    my.is_monst_class_b(self, True)
+    my.is_able_to_use_weapons(self, True)
     my.is_biome_dungeon(self, True)
+    my.is_carrier_of_treasure_class_b_d1000(self, 200)
+    my.is_carrier_of_weapon_class_a(self, 400)
+    my.is_monst_class_b(self, True)
+    my.on_born_do(self, "me.on_born()")
+    my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
+    my.on_you_nat_att_do(self, "zorb_all.on_you_nat_att()")
+    my.stat_str(self, 8)
+    my.text_long_description2(self, "This zorblin is world weary and longing for an early retirement. Can you help?")
+    my.text_short_description(self, "A very war-weary goblin.")
+    # end sort marker
 
     delay = 300
     my.tile(self,

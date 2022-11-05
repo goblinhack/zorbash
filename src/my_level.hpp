@@ -732,7 +732,7 @@ public:
   bool skillbox_chosen(const uint32_t slot);
   bool skillbox_over(const uint32_t slot);
   bool update_map_mini_should_show_monst(int x, int y);
-  // end sort marker1 {
+  // end sort marker1 }
 
   int total_monst_hp_level(void);
   int total_monst_damage_level(void);
@@ -897,7 +897,7 @@ public:
   uint8_t noisemap_in_no_check(const point p);
   uint8_t noisemap_no_check(const int x, const int y);
   uint8_t noisemap_no_check(const point p);
-  // end sort marker2 {
+  // end sort marker2 }
 
   // begin sort marker3 {
   void assign_leaders_and_followers(void);
@@ -1224,7 +1224,7 @@ public:
   void update(void);
   void update_water_next_to_lava(void);
   void wobble_set(float);
-  // end sort marker3 {
+  // end sort marker3 }
 
   uint8_t is_lava(const int x, const int y);
   uint8_t is_lava(const point p);

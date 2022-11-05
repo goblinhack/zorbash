@@ -60,6 +60,12 @@ void Thing::achieve_goals_in_life(void)
     return;
   }
 
+  //
+  // To handle cases where water or lava spawns under you.
+  //
+  level_pop();
+  level_push();
+
   // dbg("Tick %d goals to achieve", game->tick_current);
 
   //

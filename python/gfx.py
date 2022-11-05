@@ -104,6 +104,13 @@ def init_ui_health_bar_pixelart():
         "health_bar_2",
         "health_bar_1",
         "health_bar_0",
+        "status_bar_pixelart_normal",
+        "status_bar_pixelart_dark",
+        "status_bar_pixelart_orange",
+        "status_bar_pixelart_brown",
+        "status_bar_pixelart_blue",
+        "status_bar_pixelart_red",
+        "status_bar_pixelart_green",
     ]
     my.tile_load_arr(
         file="data/gfx/ui/pixelart/ui_health_bar.tga",
@@ -135,6 +142,13 @@ def init_ui_health_bar_ascii():
         "health_bar_ascii_2",
         "health_bar_ascii_1",
         "health_bar_ascii_0",
+        "status_bar_ascii_normal",
+        "status_bar_ascii_dark",
+        "status_bar_ascii_orange",
+        "status_bar_ascii_brown",
+        "status_bar_ascii_blue",
+        "status_bar_ascii_red",
+        "status_bar_ascii_green",
     ]
     my.tile_load_arr(
         file="data/gfx/ui/ascii/ui_health_bar.tga",

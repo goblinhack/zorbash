@@ -16,19 +16,21 @@ def on_death_of_a_follower(me, leader, x, y):
 
 def tp_init(name, text_long_name):
     self = zorb_all.tp_init(name, text_long_name)
-    my.text_long_description2(self, "This particular zorblin was once a ruthless adventurer who plundered the seas in their mighty pirate ship, but due to a series of unfortunate events finds themselves wandering this dungeon looking for the odd piece of eight.")
-    my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
-    my.on_you_nat_att_do(self, "me.on_you_nat_att()")
-    my.on_born_do(self, "me.on_born()")
-    my.text_short_description(self, "A one-eyed pirate zorblin.")
-    my.is_carrier_of_treasure_class_c(self, True)
-    my.stat_str(self, 14)
-    my.health_initial_dice(self, "2d10+4")
+    # begin sort marker
     my.health_initial_dice(self, "2d10")
+    my.health_initial_dice(self, "2d10+4")
     my.is_able_to_freeze(self, True)
     my.is_able_to_use_weapons(self, True)
-    my.is_monst_class_b(self, True)
     my.is_biome_dungeon(self, True)
+    my.is_carrier_of_treasure_class_c_d1000(self, 1000)
+    my.is_monst_class_b(self, True)
+    my.on_born_do(self, "me.on_born()")
+    my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
+    my.on_you_nat_att_do(self, "zorb_all.on_you_nat_att()")
+    my.stat_str(self, 14)
+    my.text_long_description2(self, "This particular zorblin was once a ruthless adventurer who plundered the seas in their mighty pirate ship, but due to a series of unfortunate events finds themselves wandering this dungeon looking for the odd piece of eight.")
+    my.text_short_description(self, "A one-eyed pirate zorblin.")
+    # end sort marker
 
     delay = 300
     my.tile(self,

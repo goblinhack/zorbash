@@ -83,8 +83,5 @@ bool wid_leftbar_create(void)
     default: ERR("Unhandled game state"); return false;
   }
 
-  if (g_opt_ascii) {
-    return wid_leftbar_ascii_create();
-  }
-  return wid_leftbar_pixelart_create();
+  return wid_leftbar_display_create();
 }

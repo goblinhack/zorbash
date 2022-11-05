@@ -337,19 +337,22 @@ void Thing::update(void)
     dbg("Is weapon equipper");
     TRACE_AND_INDENT();
 
-    if (is_carrier_of_weapon_class_a()) {
+    if (d1000() < is_carrier_of_weapon_class_a()) {
+      dbg("New weapon class A");
       auto W = level->thing_new(tp_random_weapon_class_a(), curr_at, this);
       if (W) {
         carried += carry(W);
       }
     }
-    if (is_carrier_of_weapon_class_b()) {
+    if (d1000() < is_carrier_of_weapon_class_b()) {
+      dbg("New weapon class B");
       auto W = level->thing_new(tp_random_weapon_class_b(), curr_at, this);
       if (W) {
         carried += carry(W);
       }
     }
-    if (is_carrier_of_weapon_class_c()) {
+    if (d1000() < is_carrier_of_weapon_class_c()) {
+      dbg("New weapon class C");
       auto W = level->thing_new(tp_random_weapon_class_c(), curr_at, this);
       if (W) {
         carried += carry(W);
@@ -361,19 +364,22 @@ void Thing::update(void)
     dbg("Is wand equipper");
     TRACE_AND_INDENT();
 
-    if (is_carrier_of_treasure_class_a()) {
+    if (d1000() < is_carrier_of_treasure_class_a_d1000()) {
+      dbg("New wand class A");
       auto W = level->thing_new(tp_random_wand_or_staff_class_a(), curr_at, this);
       if (W) {
         carried += carry(W);
       }
     }
-    if (is_carrier_of_treasure_class_b()) {
+    if (d1000() < is_carrier_of_treasure_class_b_d1000()) {
+      dbg("New wand class B");
       auto W = level->thing_new(tp_random_wand_or_staff_class_b(), curr_at, this);
       if (W) {
         carried += carry(W);
       }
     }
-    if (is_carrier_of_treasure_class_c()) {
+    if (d1000() < is_carrier_of_treasure_class_c_d1000()) {
+      dbg("New wand class C");
       auto W = level->thing_new(tp_random_wand_or_staff_class_c(), curr_at, this);
       if (W) {
         carried += carry(W);
@@ -385,19 +391,22 @@ void Thing::update(void)
     dbg("Is ring equipper");
     TRACE_AND_INDENT();
 
-    if (is_carrier_of_treasure_class_a()) {
+    if (d1000() < is_carrier_of_treasure_class_a_d1000()) {
+      dbg("New ring class A");
       auto W = level->thing_new(tp_random_ring_class_a(), curr_at, this);
       if (W) {
         carried += carry(W);
       }
     }
-    if (is_carrier_of_treasure_class_b()) {
+    if (d1000() < is_carrier_of_treasure_class_b_d1000()) {
+      dbg("New ring class B");
       auto W = level->thing_new(tp_random_ring_class_b(), curr_at, this);
       if (W) {
         carried += carry(W);
       }
     }
-    if (is_carrier_of_treasure_class_c()) {
+    if (d1000() < is_carrier_of_treasure_class_c_d1000()) {
+      dbg("New ring class C");
       auto W = level->thing_new(tp_random_ring_class_c(), curr_at, this);
       if (W) {
         carried += carry(W);
@@ -409,19 +418,22 @@ void Thing::update(void)
     dbg("Is bag item container");
     TRACE_AND_INDENT();
 
-    if (is_carrier_of_treasure_class_a()) {
+    if (d1000() < is_carrier_of_treasure_class_a_d1000()) {
+      dbg("New item class A");
       auto W = level->thing_new(tp_random_item_not_a_container_class_a(), curr_at, this);
       if (W) {
         carried += carry(W);
       }
     }
-    if (is_carrier_of_treasure_class_b()) {
+    if (d1000() < is_carrier_of_treasure_class_b_d1000()) {
+      dbg("New item class B");
       auto W = level->thing_new(tp_random_item_not_a_container_class_b(), curr_at, this);
       if (W) {
         carried += carry(W);
       }
     }
-    if (is_carrier_of_treasure_class_c()) {
+    if (d1000() < is_carrier_of_treasure_class_c_d1000()) {
+      dbg("New item class C");
       auto W = level->thing_new(tp_random_item_not_a_container_class_c(), curr_at, this);
       if (W) {
         carried += carry(W);
@@ -431,19 +443,22 @@ void Thing::update(void)
     dbg("Is item carrier");
     TRACE_AND_INDENT();
 
-    if (is_carrier_of_treasure_class_a()) {
+    if (d1000() < is_carrier_of_treasure_class_a_d1000()) {
+      dbg("New item class A");
       auto W = level->thing_new(tp_random_item_class_a(), curr_at, this);
       if (W) {
         carried += carry(W);
       }
     }
-    if (is_carrier_of_treasure_class_b()) {
+    if (d1000() < is_carrier_of_treasure_class_b_d1000()) {
+      dbg("New item class B");
       auto W = level->thing_new(tp_random_item_class_b(), curr_at, this);
       if (W) {
         carried += carry(W);
       }
     }
-    if (is_carrier_of_treasure_class_c()) {
+    if (d1000() < is_carrier_of_treasure_class_c_d1000()) {
+      dbg("New item class C");
       auto W = level->thing_new(tp_random_item_class_c(), curr_at, this);
       if (W) {
         carried += carry(W);

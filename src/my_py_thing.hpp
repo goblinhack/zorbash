@@ -580,6 +580,6 @@ PyObject *thing_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag9(PyObject *obj, PyObject *args, PyObject *keywds);
-// end sort marker1 {
+// end sort marker1 }
 
 #endif

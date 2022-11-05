@@ -252,7 +252,7 @@ public:
   uint64_t is_waiting_to_leave_level_has_completed_fall : 1 {};
   uint64_t is_wounded_msg                               : 1 {};
   uint64_t was_frozen                                   : 1 {}; /* was frozen at the start of the tick */
-  // end sort marker5 {
+  // end sort marker5 }
 
   //
   // These are flags used to make sure we set or unset flags onto the level only once.
@@ -323,7 +323,7 @@ public:
   uint64_t i_set_is_wet_grass               : 1 {};
   uint64_t i_set_noise_blocker              : 1 {};
   uint64_t i_set_water                      : 1 {};
-  // end sort marker6 {
+  // end sort marker6 }
 
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
@@ -679,7 +679,7 @@ public:
   bool will_avoid_monst(const Thingp it);
   bool will_prefer_terrain(const Thingp it);
   bool worth_eating(const Thingp it);
-  // end sort marker1 {
+  // end sort marker1 }
 
   std::vector< std::string > on_get_text_long_description(void);
 
@@ -1298,9 +1298,9 @@ public:
   int is_brittle(void);
   int is_buff(void);
   int is_carnivorous_plant(void);
-  int is_carrier_of_treasure_class_a(void);
-  int is_carrier_of_treasure_class_b(void);
-  int is_carrier_of_treasure_class_c(void);
+  int is_carrier_of_treasure_class_a_d1000(void);
+  int is_carrier_of_treasure_class_b_d1000(void);
+  int is_carrier_of_treasure_class_c_d1000(void);
   int is_carrier_of_weapon_class_a(void);
   int is_carrier_of_weapon_class_b(void);
   int is_carrier_of_weapon_class_c(void);
@@ -2004,7 +2004,7 @@ public:
   int weapon_damage(void);
   int worth_collecting(const Thingp it);
   int worth_collecting(const Thingp it, Thingp *would_need_to_drop);
-  // end sort marker2 {
+  // end sort marker2 }
 
   point3d born_get(void);
 
@@ -2114,7 +2114,7 @@ public:
   ts_t ts_lunge_end_incr(void);
   ts_t ts_lunge_end_set(ts_t);
   ts_t ts_lunge_end(void);
-  // end sort marker3 {
+  // end sort marker3 }
 
   uint32_t tick_last_location_check_decr(uint32_t);
   uint32_t tick_last_location_check_decr(void);
@@ -2234,6 +2234,7 @@ public:
   void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, const point tl, const point br);
   void blit_shadow(const Tpp &tp, const Tilep &tile, const point tl, const point br);
   void blit_text(std::string const &, color c, point tl, point br);
+  void blit_tile_at(point tl, bool lit = true, bool leftbar = false);
   void blit_upside_down(int fbo);
   void blit_wall_cladding(point tl, point br, const ThingTiles *tiles);
   void blit_wall_shadow(point tl, point br, const ThingTiles *tiles);
@@ -2484,7 +2485,7 @@ public:
   void weapon_sheath(void);
   void wobble(float wobble);
   void wobble_set(float);
-  // end sort marker4 {
+  // end sort marker4 }
 
   const std::array< std::array< ThingId, MAX_BAG_HEIGHT >, MAX_BAG_WIDTH > *stat_const_bag(void);
 

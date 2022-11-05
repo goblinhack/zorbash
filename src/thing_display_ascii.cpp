@@ -274,6 +274,11 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
     return;
   }
 
+  if (! g_opt_ascii) {
+    ascii_set_fg4(p.x, p.y, tile);
+    return;
+  }
+
   //
   // This is for walls that can be composed of multiple tiles.
   //

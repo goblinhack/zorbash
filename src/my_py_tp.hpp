@@ -278,9 +278,9 @@ TP_SET_PROTO(is_bridge)
 TP_SET_PROTO(is_brittle)
 TP_SET_PROTO(is_buff)
 TP_SET_PROTO(is_carnivorous_plant)
-TP_SET_PROTO(is_carrier_of_treasure_class_a)
-TP_SET_PROTO(is_carrier_of_treasure_class_b)
-TP_SET_PROTO(is_carrier_of_treasure_class_c)
+TP_SET_PROTO(is_carrier_of_treasure_class_a_d1000)
+TP_SET_PROTO(is_carrier_of_treasure_class_b_d1000)
+TP_SET_PROTO(is_carrier_of_treasure_class_c_d1000)
 TP_SET_PROTO(is_carrier_of_weapon_class_a)
 TP_SET_PROTO(is_carrier_of_weapon_class_b)
 TP_SET_PROTO(is_carrier_of_weapon_class_c)
@@ -778,6 +778,6 @@ TP_SET_PROTO(unused_flag9)
 TP_SET_PROTO(weapon_damage)
 TP_SET_PROTO(z_depth)
 TP_SET_PROTO(z_prio)
-// end sort marker1 {
+// end sort marker1 }
 
 #endif

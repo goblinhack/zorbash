@@ -52,28 +52,30 @@ def on_death(me, x, y):
 
 def tp_init(name, text_long_name):
     self = zorb_all.tp_init(name, text_long_name)
-    my.text_long_description2(self, "This particular zorblin is learned in the dark arts. Withered of body, but sharp of mind, beware the abilities of this zorblin.")
-    my.on_born_do(self, "me.on_born()")
-    my.on_death_do(self, "me.on_death()")
-    my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
-    my.on_you_nat_att_do(self, "me.on_you_nat_att()")
-    my.text_short_description(self, "A master of the darkest arts.")
-    # my.is_carrier_of_treasure_class_b(self, True)
-    my.is_monst_class_b(self, True)
-    my.is_biome_dungeon(self, True)
-    my.stat_str(self, 6)
-    my.stat_dex(self, 6)
-    my.stat_luck(self, 6)
+
+    # begin sort marker
     my.distance_avoid(self, 5)
     my.environ_avoids_fire(self, 100)
     my.environ_avoids_water(self, 100)
-    my.is_able_to_freeze(self, True)
-    my.is_cowardly(self, True)
     my.health_initial_dice(self, "2d3+4")
-    my.is_able_to_use_wands_or_staffs(self, True)
-    my.on_tick_do(self, "me.on_tick()")
-    my.is_intelligent(self, True)
     my.is_able_to_use_rings(self, True)
+    my.is_able_to_use_wands_or_staffs(self, True)
+    my.is_biome_dungeon(self, True)
+    my.is_carrier_of_treasure_class_c_d1000(self, 1000)
+    my.is_cowardly(self, True)
+    my.is_intelligent(self, True)
+    my.is_monst_class_b(self, True)
+    my.on_born_do(self, "me.on_born()")
+    my.on_death_do(self, "me.on_death()")
+    my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
+    my.on_tick_do(self, "me.on_tick()")
+    my.on_you_nat_att_do(self, "zorb_all.on_you_nat_att()")
+    my.stat_dex(self, 6)
+    my.stat_luck(self, 6)
+    my.stat_str(self, 6)
+    my.text_long_description2(self, "This particular zorblin is learned in the dark arts. Withered of body, but sharp of mind, beware the abilities of this zorblin.")
+    my.text_short_description(self, "A master of the darkest arts.")
+    # end sort marker
 
     delay = 300
     my.tile(self,

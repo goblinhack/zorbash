@@ -1,6 +1,9 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - "You can't jump into solid objects." when clicking on secret door                                                                          -->
+<!-- - if frozen do we unfreeze?                                                                                                                  -->
+<!-- - check jump out of web stuck bug                                                                                                            -->
+<!-- - resize the collect window to just what we need                                                                                             -->
+<!-- - zorblin with rings cannot swing attack                                                                                                     -->
 <!-- - kraken tentacles                                                                                                                           -->
 <!-- - test with freezing and wand of descent                                                                                                     -->
 <!-- - test main body death                                                                                                                       -->

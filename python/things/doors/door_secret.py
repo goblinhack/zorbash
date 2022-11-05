@@ -18,7 +18,6 @@ def tp_init(name, text_long_name):
     my.is_interesting(self, True)
     my.is_jump_blocker(self, True)
     my.is_light_blocker(self, True)
-    my.is_obs_for_jump_landing(self, True)
     my.is_secret_door(self, True)
     my.noise_blocker(self, True)
     my.noise_on_open(self, 10)

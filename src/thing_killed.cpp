@@ -229,30 +229,34 @@ void Thing::killed(Thingp defeater, const char *reason)
         TRACE_NO_INDENT();
         if (defeater && (defeater == this)) {
           if (is_on_fire()) {
-            msg("%%fg=red$RIP: Robot is consumed %s.%%fg=reset$", reason);
+            msg("%%fg=red$RIP: Robo player is burnt to death.%%fg=reset$");
+          } else if (is_frozen) {
+            msg("%%fg=red$RIP: Robo player is frozen to death.%%fg=reset$");
           } else {
-            msg("%%fg=red$RIP: Robot is defeated %s.%%fg=reset$", reason);
+            msg("%%fg=red$RIP: Robo player is defeated %s.%%fg=reset$", reason);
           }
         } else if (defeater && defeater->is_acid()) {
-          msg("%%fg=red$RIP: Robot is dissolved to death %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: Robo player is dissolved to death %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_fire()) {
-          msg("%%fg=red$RIP: Robot is burnt to death %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: Robo player is burnt to death %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_water()) {
-          msg("%%fg=red$RIP: Robot is shorted out %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: Robo player is shorted out %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_necrotic_danger_level()) {
-          msg("%%fg=red$RIP: Robot is disassembled %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: Robo player is disassembled %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_engulfer()) {
-          msg("%%fg=red$RIP: Robot is consumed %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: Robo player is consumed %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_monst()) {
-          msg("%%fg=red$RIP: Robot is deactivated %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: Robo player is deactivated %s.%%fg=reset$", reason);
         } else {
-          msg("%%fg=red$RIP: Robot is broken %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: Robo player is broken %s.%%fg=reset$", reason);
         }
       } else {
         TRACE_NO_INDENT();
         if (defeater && (defeater == this)) {
           if (is_on_fire()) {
-            msg("%%fg=red$RIP: You are consumed %s.%%fg=reset$", reason);
+            msg("%%fg=red$RIP: You burn to death%%fg=reset$");
+          } else if (is_frozen) {
+            msg("%%fg=red$RIP: You freeze to death%%fg=reset$");
           } else {
             msg("%%fg=red$RIP: You are defeated %s.%%fg=reset$", reason);
           }

@@ -4,6 +4,7 @@
 
 #include "my_game.hpp"
 #include "my_thing_template.hpp"
+#include "my_ui.hpp"
 
 void tp_fixup(void)
 {
@@ -20,8 +21,8 @@ void tp_fixup(void)
 
     if (tp->is_item()) {
       if (! tp->is_collected_as_keys() && ! tp->is_collected_as_gold()) {
-        if (tp->text_short_name().size() > 15) {
-          DIE("Tp %s short name is too long and will be truncated?", tp->name().c_str());
+        if (tp->text_short_name().size() > UI_LEFTBAR_WIDTH) {
+          DIE("Tp %s short name is too long and will be truncated (max %d)?", tp->name().c_str(), UI_LEFTBAR_WIDTH);
         }
       }
     }
@@ -84,6 +85,10 @@ void tp_fixup(void)
     }
 
     if (tp->is_able_to_burn() || tp->is_combustible() || tp->is_very_combustible()) {
+      tp->is_temperature_sensitive_set(true);
+    }
+
+    if (tp->is_able_to_freeze()) {
       tp->is_temperature_sensitive_set(true);
     }
 

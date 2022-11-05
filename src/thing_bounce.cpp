@@ -21,6 +21,10 @@ bool Thing::bounce(float bounce_height, float bounce_fade, ts_t ms, int bounce_c
     return false;
   }
 
+  if (is_frozen || is_burnt || is_dead) {
+    return false;
+  }
+
   //
   // Check if we can lunge
   //

@@ -153,7 +153,7 @@ const std::string &Tp::text_unused1(void) const { return _text_unused1; }
 const std::string &Tp::text_unused2(void) const { return _text_unused2; }
 const std::string &Tp::text_unused3(void) const { return _text_unused3; }
 const std::string &Tp::text_unused(void) const { return _text_unused; }
-// end sort marker1 {
+// end sort marker1 }
 
 // begin sort marker2 {
 int Tp::aggression_pct(void) const { return _aggression_pct; }
@@ -346,9 +346,9 @@ int Tp::is_bridge(void) const { return _is_bridge; }
 int Tp::is_brittle(void) const { return _is_brittle; }
 int Tp::is_buff(void) const { return _is_buff; }
 int Tp::is_carnivorous_plant(void) const { return _is_carnivorous_plant; }
-int Tp::is_carrier_of_treasure_class_a(void) const { return _is_carrier_of_treasure_class_a; }
-int Tp::is_carrier_of_treasure_class_b(void) const { return _is_carrier_of_treasure_class_b; }
-int Tp::is_carrier_of_treasure_class_c(void) const { return _is_carrier_of_treasure_class_c; }
+int Tp::is_carrier_of_treasure_class_a_d1000(void) const { return _is_carrier_of_treasure_class_a_d1000; }
+int Tp::is_carrier_of_treasure_class_b_d1000(void) const { return _is_carrier_of_treasure_class_b_d1000; }
+int Tp::is_carrier_of_treasure_class_c_d1000(void) const { return _is_carrier_of_treasure_class_c_d1000; }
 int Tp::is_carrier_of_weapon_class_a(void) const { return _is_carrier_of_weapon_class_a; }
 int Tp::is_carrier_of_weapon_class_b(void) const { return _is_carrier_of_weapon_class_b; }
 int Tp::is_carrier_of_weapon_class_c(void) const { return _is_carrier_of_weapon_class_c; }
@@ -687,7 +687,7 @@ int Tp::unused_flag7(void) const { return _unused_flag7; }
 int Tp::unused_flag8(void) const { return _unused_flag8; }
 int Tp::unused_flag9(void) const { return _unused_flag9; }
 int Tp::weapon_damage(void) const { return _weapon_damage; }
-// end sort marker2 {
+// end sort marker2 }
 
 // begin sort marker3 {
 void Tp::aggression_pct_set(int v) { _aggression_pct = v; }
@@ -886,9 +886,9 @@ void Tp::is_bridge_set(int v) { _is_bridge = v; }
 void Tp::is_brittle_set(int v) { _is_brittle = v; }
 void Tp::is_buff_set(int v) { _is_buff = v; }
 void Tp::is_carnivorous_plant_set(int v) { _is_carnivorous_plant = v; }
-void Tp::is_carrier_of_treasure_class_a_set(int v) { _is_carrier_of_treasure_class_a = v; }
-void Tp::is_carrier_of_treasure_class_b_set(int v) { _is_carrier_of_treasure_class_b = v; }
-void Tp::is_carrier_of_treasure_class_c_set(int v) { _is_carrier_of_treasure_class_c = v; }
+void Tp::is_carrier_of_treasure_class_a_d1000_set(int v) { _is_carrier_of_treasure_class_a_d1000 = v; }
+void Tp::is_carrier_of_treasure_class_b_d1000_set(int v) { _is_carrier_of_treasure_class_b_d1000 = v; }
+void Tp::is_carrier_of_treasure_class_c_d1000_set(int v) { _is_carrier_of_treasure_class_c_d1000 = v; }
 void Tp::is_carrier_of_weapon_class_a_set(int v) { _is_carrier_of_weapon_class_a = v; }
 void Tp::is_carrier_of_weapon_class_b_set(int v) { _is_carrier_of_weapon_class_b = v; }
 void Tp::is_carrier_of_weapon_class_c_set(int v) { _is_carrier_of_weapon_class_c = v; }
@@ -1365,4 +1365,4 @@ void Tp::weapon_damage_set(int v) { _weapon_damage = v; }
 void Tp::weapon_use_distance_set(int v) { _weapon_use_distance = v; }
 void Tp::z_depth_set(int v) { z_depth = v; }
 void Tp::z_prio_set(int v) { z_prio = v; }
-// end sort marker3 {
+// end sort marker3 }

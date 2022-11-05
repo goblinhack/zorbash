@@ -600,22 +600,22 @@ int Thing::is_able_to_burn(void)
   return (tp()->is_able_to_burn());
 }
 
-int Thing::is_carrier_of_treasure_class_a(void)
+int Thing::is_carrier_of_treasure_class_a_d1000(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_carrier_of_treasure_class_a());
+  return (tp()->is_carrier_of_treasure_class_a_d1000());
 }
 
-int Thing::is_carrier_of_treasure_class_b(void)
+int Thing::is_carrier_of_treasure_class_b_d1000(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_carrier_of_treasure_class_b());
+  return (tp()->is_carrier_of_treasure_class_b_d1000());
 }
 
-int Thing::is_carrier_of_treasure_class_c(void)
+int Thing::is_carrier_of_treasure_class_c_d1000(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_carrier_of_treasure_class_c());
+  return (tp()->is_carrier_of_treasure_class_c_d1000());
 }
 
 int Thing::is_carrier_of_weapon_class_a(void)

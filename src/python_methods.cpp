@@ -1074,9 +1074,9 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(is_brittle),
     MY_ADD_PYTHON_TP_FUNCTION(is_buff),
     MY_ADD_PYTHON_TP_FUNCTION(is_carnivorous_plant),
-    MY_ADD_PYTHON_TP_FUNCTION(is_carrier_of_treasure_class_a),
-    MY_ADD_PYTHON_TP_FUNCTION(is_carrier_of_treasure_class_b),
-    MY_ADD_PYTHON_TP_FUNCTION(is_carrier_of_treasure_class_c),
+    MY_ADD_PYTHON_TP_FUNCTION(is_carrier_of_treasure_class_a_d1000),
+    MY_ADD_PYTHON_TP_FUNCTION(is_carrier_of_treasure_class_b_d1000),
+    MY_ADD_PYTHON_TP_FUNCTION(is_carrier_of_treasure_class_c_d1000),
     MY_ADD_PYTHON_TP_FUNCTION(is_carrier_of_weapon_class_a),
     MY_ADD_PYTHON_TP_FUNCTION(is_carrier_of_weapon_class_b),
     MY_ADD_PYTHON_TP_FUNCTION(is_carrier_of_weapon_class_c),
@@ -1597,7 +1597,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_WRAPPED_PYTHON_FUNCTION(tp_load),
     MY_ADD_WRAPPED_PYTHON_FUNCTION(tp_update),
     PYFUNC_REF(SDLGetKeyState),
-    // end sort marker1 {
+    // end sort marker1 }
 
     {nullptr, nullptr, 0, nullptr} /* sentinel */
 };

@@ -38,7 +38,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_loggable(self, True)
     my.is_magical(self, True)
     my.is_ring(self, True)
-    my.is_treasure_class_c(self, True)
+    my.is_treasure_class_b(self, True)
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
     my.is_usable(self, True)
@@ -67,7 +67,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="ring_poison_resist", text_long_name="ring of poison loving", text_short_name="ring, poison")
+    tp_init(name="ring_poison_resist", text_long_name="ring of poison resist", text_short_name="ring, poison")
 
 
 init()

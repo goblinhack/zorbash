@@ -79,7 +79,7 @@ def init():
     tp_init(
         name="gauntlets_war",
         text_long_name="gauntlets of war",
-        text_short_name="gaunt, war",
+        text_short_name="gauntlets, war",
     )
 
 

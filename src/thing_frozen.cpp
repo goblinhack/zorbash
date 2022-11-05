@@ -13,6 +13,9 @@ void Thing::frozen_set(void)
     return;
   }
 
+  level_pop();
   is_frozen = true;
+  level_push();
+
   msg("%s is frozen", text_The().c_str());
 }
