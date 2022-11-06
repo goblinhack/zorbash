@@ -365,32 +365,37 @@ void Thing::level_push(void)
   }
 
   //
-  // Need to push all animations also; so if we are changing state, like being
-  // submerged, then when we push again, the animations are also suitably submerged.
+  // If loading, then the animations may not be loaded yet, so take care.
   //
-  FOR_ALL_EQUIP(e)
-  {
-    if (equip_id_carry_anim(e).ok()) {
-      auto w = level->thing_find(equip_id_carry_anim(e));
-      if (w) {
-        w->level_push();
+  if (! g_loading) {
+    //
+    // Need to push all animations also; so if we are changing state, like being
+    // submerged, then when we push again, the animations are also suitably submerged.
+    //
+    FOR_ALL_EQUIP(e)
+    {
+      if (equip_id_carry_anim(e).ok()) {
+        auto w = level->thing_find(equip_id_carry_anim(e));
+        if (w) {
+          w->level_push();
+        }
+      }
+
+      if (equip_id_use_anim(e).ok()) {
+        auto w = level->thing_find(equip_id_use_anim(e));
+        if (w) {
+          w->level_push();
+        }
       }
     }
 
-    if (equip_id_use_anim(e).ok()) {
-      auto w = level->thing_find(equip_id_use_anim(e));
+    auto on_fire_id = on_fire_anim_id();
+    if (on_fire_id.ok()) {
+      TRACE_NO_INDENT();
+      auto w = level->thing_find(on_fire_id);
       if (w) {
         w->level_push();
       }
-    }
-  }
-
-  auto on_fire_id = on_fire_anim_id();
-  if (on_fire_id.ok()) {
-    TRACE_NO_INDENT();
-    auto w = level->thing_find(on_fire_id);
-    if (w) {
-      w->level_push();
     }
   }
 
