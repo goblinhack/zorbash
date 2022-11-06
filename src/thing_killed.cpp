@@ -503,8 +503,12 @@ void Thing::killed(Thingp defeater, const char *reason)
   is_dead  = true;
   is_dying = false;
 
+  //
+  // Need to leave the level here so that things about to be GCd are not left on any lists.
+  // e.g. an item that has been auto collected and converted into gold should not appear on the left bar.
+  //
   TRACE_NO_INDENT();
-  level_pop();
+  level_leave();
 
   if (is_loggable()) {
     dbg("Need to garbage collect");

@@ -90,9 +90,20 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     }
   }
 
+  if (t->immediate_owner()) {
+    //
+    // Carried items are grouped
+    //
+  } else if (t->curr_at != wid_leftbar_last_thing_position) {
+    //
+    // Things at the same location are grouped
+    //
+    y_at++;
+  }
+  wid_leftbar_last_thing_position = t->curr_at;
+
   level->wid_leftbar_things.push_back(t->id);
 
-  y_at++;
   {
     TRACE_NO_INDENT();
     auto  w  = wid_new_square_button(wid_leftbar, "It");
@@ -137,10 +148,10 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
     wid_set_thing_id_context(w, t);
+    y_at++;
   }
 
   if (t->is_on_fire()) {
-    y_at++;
     TRACE_NO_INDENT();
     auto  w  = wid_new_square_button(wid_leftbar, "(On fire)");
     point tl = make_point(0, y_at);
@@ -155,10 +166,10 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
     wid_set_thing_id_context(w, t);
+    y_at++;
   }
 
   if (t->is_frozen) {
-    y_at++;
     TRACE_NO_INDENT();
     auto  w  = wid_new_square_button(wid_leftbar, "(Frozen)");
     point tl = make_point(0, y_at);
@@ -173,10 +184,10 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
     wid_set_thing_id_context(w, t);
+    y_at++;
   }
 
   if (t->is_burnt) {
-    y_at++;
     TRACE_NO_INDENT();
     auto  w  = wid_new_square_button(wid_leftbar, "(Burnt)");
     point tl = make_point(0, y_at);
@@ -191,10 +202,10 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
     wid_set_thing_id_context(w, t);
+    y_at++;
   }
 
   if (t->is_falling) {
-    y_at++;
     TRACE_NO_INDENT();
     auto  w  = wid_new_square_button(wid_leftbar, "(Falling)");
     point tl = make_point(0, y_at);
@@ -209,10 +220,10 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
     wid_set_thing_id_context(w, t);
+    y_at++;
   }
 
   if (t->is_dead) {
-    y_at++;
     TRACE_NO_INDENT();
     auto  w  = wid_new_square_button(wid_leftbar, "(Deceased)");
     point tl = make_point(0, y_at);
@@ -233,9 +244,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
     wid_set_thing_id_context(w, t);
+    y_at++;
   } else {
     if (t->is_monst() && (game->tick_current - t->tick_last_i_attacked() < 2)) {
-      y_at++;
       TRACE_NO_INDENT();
       auto  w  = wid_new_square_button(wid_leftbar, "(Attacking)");
       point tl = make_point(0, y_at);
@@ -250,10 +261,10 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_id_context(w, t);
+      y_at++;
     }
 
     if (t->stuck_count() > 1) {
-      y_at++;
       TRACE_NO_INDENT();
       auto  w  = wid_new_square_button(wid_leftbar, "(Stuck)");
       point tl = make_point(0, y_at);
@@ -268,8 +279,8 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_id_context(w, t);
-    } else if (t->is_sleeping) {
       y_at++;
+    } else if (t->is_sleeping) {
       TRACE_NO_INDENT();
       auto  w  = wid_new_square_button(wid_leftbar, "(Sleeping)");
       point tl = make_point(0, y_at);
@@ -284,8 +295,8 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_id_context(w, t);
-    } else if (t->is_monst() && (t->idle_count() > 1)) {
       y_at++;
+    } else if (t->is_monst() && (t->idle_count() > 1)) {
       TRACE_NO_INDENT();
       auto  w  = wid_new_square_button(wid_leftbar, "(Idle)");
       point tl = make_point(0, y_at);
@@ -300,13 +311,13 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_id_context(w, t);
+      y_at++;
     }
   }
 
   if (player && t->maybe_aip()) {
     for (auto p1 : t->aip()->move_path) {
       if (p1 == player->curr_at) {
-        y_at++;
         TRACE_NO_INDENT();
         auto  w  = wid_new_square_button(wid_leftbar, "(Hunting)");
         point tl = make_point(0, y_at);
@@ -321,13 +332,13 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
         wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
         wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
         wid_set_thing_id_context(w, t);
+        y_at++;
       }
     }
   }
 
   if (t->is_door() || t->is_ascend_dungeon() || t->is_descend_dungeon()) {
     if (t->is_open) {
-      y_at++;
       TRACE_NO_INDENT();
       auto  w  = wid_new_square_button(wid_leftbar, "(Open)");
       point tl = make_point(0, y_at);
@@ -342,8 +353,8 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_id_context(w, t);
-    } else {
       y_at++;
+    } else {
       TRACE_NO_INDENT();
       auto  w  = wid_new_square_button(wid_leftbar, "(Closed)");
       point tl = make_point(0, y_at);
@@ -363,12 +374,12 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_id_context(w, t);
+      y_at++;
     }
   }
 
   if (! t->is_dead) {
     if (t->is_monst()) {
-      y_at++;
       {
         TRACE_NO_INDENT();
         auto  w  = wid_new_plain(wid_leftbar, "Health-bar");
@@ -412,6 +423,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
         wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
         wid_set_thing_id_context(w, t);
       }
+      y_at++;
     }
   }
 
@@ -419,7 +431,6 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
   // Display all items as one block, and then a blank line
   //
   {
-    int orig_y_at = y_at;
     FOR_ALL_EQUIP(e)
     {
       auto iter = t->equip_get(e);
@@ -427,25 +438,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
         wid_leftbar_display_describe(level, iter, y_at, width, "+ ");
       }
     }
-
-    if (orig_y_at != y_at) {
-      y_at++;
-    }
   }
-
-  if (t->curr_at == wid_leftbar_last_thing_position) {
-    //
-    // Things at the same location are grouped
-    //
-  } else if (t->immediate_owner()) {
-    //
-    // Carried items are grouped
-    //
-  } else {
-    y_at++;
-  }
-
-  wid_leftbar_last_thing_position = t->curr_at;
 }
 
 bool wid_leftbar_display_create(void)
