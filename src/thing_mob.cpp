@@ -236,10 +236,10 @@ bool Thing::same_mob(Thingp it)
     if (mob == its_mob) {
       return true;
     }
-  }
 
-  if (mob == this) {
-    return true;
+    if (mob == it) {
+      return true;
+    }
   }
 
   return false;
