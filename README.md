@@ -1,5 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - ring and sword out of sync                                                                                                                 -->
+<!-- - cannot click on right most tile on mac                                                                                                     -->
 <!-- - test main body death                                                                                                                       -->
 <!-- - test with freezing and wand of descent                                                                                                     -->
 <!-- - tentacle grapple                                                                                                                           -->
