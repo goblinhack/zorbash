@@ -96,7 +96,7 @@ int first_of_month(void)
   TRACE_AND_INDENT();
   struct tm *lt = getlt();
 
-  return (int) ((lt->tm_mday == 1));
+  return int ((lt->tm_mday == 1));
 }
 
 int midnight(void)

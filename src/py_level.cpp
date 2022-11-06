@@ -228,7 +228,7 @@ PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds)
 
   if (t->level->is_oob(x, y)) {
     PyObject *lst = PyList_New(0);
-    return (lst);
+    return lst;
   }
 
   auto items = 0;
@@ -261,7 +261,7 @@ PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds)
   }
   FOR_ALL_THINGS_END()
 
-  return (lst);
+  return lst;
 }
 
 PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -296,7 +296,7 @@ PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObjec
 
   if (t->level->is_oob(x, y)) {
     PyObject *lst = PyList_New(0);
-    return (lst);
+    return lst;
   }
 
   auto      things = t->level->flood_fill_things(point(x, y), Thing::matches_to_func(filter));
@@ -308,7 +308,7 @@ PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObjec
     item++;
   }
 
-  return (lst);
+  return lst;
 }
 
 PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -347,7 +347,7 @@ PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywd
     item++;
   }
 
-  return (lst);
+  return lst;
 }
 
 #define LEVEL_BODY_GET_BOOL_AT(__func__, __api__)                                                                    \

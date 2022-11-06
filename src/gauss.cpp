@@ -35,7 +35,7 @@ double gaussrand(double mean, double stddev)
   val *= stddev;
   val += mean;
 
-  return (val);
+  return val;
 }
 
 double gauss(const double m, const double s)

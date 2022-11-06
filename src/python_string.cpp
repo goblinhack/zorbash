@@ -45,5 +45,5 @@ err_out:
     Py_XDECREF(py_encstr);
   }
 
-  return (outstr);
+  return outstr;
 }

@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - kraken tentacles attacking kraken                                                                                                          -->
 <!-- - if frozen do we unfreeze?                                                                                                                  -->
 <!-- - check jump out of web stuck bug                                                                                                            -->
 <!-- - resize the collect window to just what we need                                                                                             -->

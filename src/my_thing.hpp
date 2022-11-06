@@ -726,7 +726,7 @@ public:
   const Tpp tp(void)
   {
     if (likely(mytp != nullptr)) {
-      return (mytp);
+      return mytp;
     }
 
     return tp_slow();

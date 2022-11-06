@@ -94,7 +94,7 @@ static char *substr (const char *in, int pos, int len)
   memcpy(out, &(in[pos]), len);
   out[len] = '\0';
 
-  return (out);
+  return out;
 }
 #endif
 
@@ -123,7 +123,7 @@ char *strsub_(const char *in, const char *look_for, const char *replace_with, co
   at = strstr(in, look_for);
   if (! at) {
     buf = dupstr(in, what);
-    return (buf);
+    return buf;
   }
 
   oldlen = (uint32_t) strlen(look_for);
@@ -141,12 +141,12 @@ char *strsub_(const char *in, const char *look_for, const char *replace_with, co
   strcat(buf, at + oldlen);
 
   if (! strcmp(buf, in)) {
-    return (buf);
+    return buf;
   }
 
   auto out = strsub_(buf, look_for, replace_with, what, file, func, line);
   myfree(buf);
-  return (out);
+  return out;
 }
 
 /*
@@ -175,7 +175,7 @@ char *strappend(const char *in, const char *append)
   strcpy(buf, in);
   strcat(buf, append);
 
-  return (buf);
+  return buf;
 }
 
 /*
@@ -204,7 +204,7 @@ char *strprepend(const char *in, const char *prepend)
   strcpy(buf, prepend);
   strcat(buf, in);
 
-  return (buf);
+  return buf;
 }
 
 /*
@@ -301,7 +301,7 @@ size_t strlcpy_(char *dst, const char *src, size_t max_len)
     memcpy(dst, src, len);
     dst[ len ] = '\0';
   }
-  return (srclen);
+  return srclen;
 }
 
 size_t strlcat_(char *dst, const char *src, size_t max_len)
@@ -367,7 +367,7 @@ static const char *dynvprintf_(const char *fmt, va_list args)
   buf[ 0 ] = '\0';
   vsnprintf(buf, MAXSTR, fmt, args);
 
-  return (buf);
+  return buf;
 }
 
 /*
@@ -464,7 +464,7 @@ char *strcasestr_(const char *s, const char *find)
     do {
       do {
         if ((sc = *s++) == 0)
-          return (nullptr);
+          return nullptr;
       } while ((char) tolower((unsigned char) sc) != c);
     } while (strncasecmp(s, find, len) != 0);
     s--;
@@ -622,7 +622,7 @@ shared_vector_string split(const char *text, int max_line_len)
     }
   }
 
-  return (result);
+  return result;
 }
 
 shared_vector_string split(const std::string &text, int max_line_len)
@@ -802,7 +802,7 @@ shared_vector_string split(const std::string &text, int max_line_len)
     }
   }
 
-  return (result);
+  return result;
 }
 
 shared_vector_wstring split(const std::wstring &text, int max_line_len)
@@ -976,7 +976,7 @@ shared_vector_wstring split(const std::wstring &text, int max_line_len)
     }
   }
 
-  return (result);
+  return result;
 }
 
 int length_without_format(const std::string &text)
@@ -1184,7 +1184,7 @@ Tpp string2tp(const char **s)
     ERR("Tp name [%s] not found", tmp);
   }
 
-  return (tp);
+  return tp;
 }
 
 Tpp string2tp(const std::string &s, int *len)
@@ -1218,7 +1218,7 @@ Tpp string2tp(const std::string &s, int *len)
     ERR("Tp name [%s] not found", out.c_str());
   }
 
-  return (tp);
+  return tp;
 }
 
 Tpp string2tp(const std::wstring &s, int *len)

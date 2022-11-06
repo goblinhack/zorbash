@@ -1254,7 +1254,7 @@ PyObject *thing_teleport(PyObject *obj, PyObject *args, PyObject *keywds)
 
   if (t->level->is_oob(x, y)) {
     PyObject *lst = PyList_New(0);
-    return (lst);
+    return lst;
   }
 
   bool too_far = false;

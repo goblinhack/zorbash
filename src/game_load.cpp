@@ -44,7 +44,7 @@ std::array< bool, UI_WID_SAVE_SLOTS > slot_valid;
     in >> bits(magic);                                                                                               \
     if (magic != m) {                                                                                                \
       game_load_error = "bad " what " magic expected: " + std::to_string(m) + " got " + std::to_string(magic);       \
-      return (in);                                                                                                   \
+      return in;                                                                                                   \
     }                                                                                                                \
   }
 
@@ -67,7 +67,7 @@ std::istream &operator>>(std::istream &in, Bits< SDL_Keysym & > my)
   in >> bits(my.t.sym);
   in >> bits(my.t.mod);
   in >> bits(my.t.unused);
-  return (in);
+  return in;
 }
 
 std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
@@ -218,7 +218,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
   // and always update game_load.cpp and game_save.cpp
   /////////////////////////////////////////////////////////////////////////
 
-  return (in);
+  return in;
 }
 
 std::istream &operator>>(std::istream &in, Bits< ThingItemsp & > my)
@@ -255,7 +255,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingItemsp & > my)
   // and always update game_load.cpp and game_save.cpp
   /////////////////////////////////////////////////////////////////////////
 
-  return (in);
+  return in;
 }
 
 std::istream &operator>>(std::istream &in, Bits< ThingAip & > my)
@@ -277,7 +277,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingAip & > my)
   in >> bits(my.t->wander_dest);
   in >> bits(my.t->idle_count);
   in >> bits(my.t->stuck_count);
-  return (in);
+  return in;
 }
 
 std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
@@ -292,7 +292,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   auto tpp = tp_find(name);
   if (unlikely(! tpp)) {
     game_load_error = "unknown thing name '" + name;
-    return (in);
+    return in;
   }
 
   my.t->tp_id = tpp->id;
@@ -540,7 +540,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
         my.t->last_at.x, my.t->last_at.y);
   }
 
-  return (in);
+  return in;
 }
 
 std::istream &operator>>(std::istream &in, Bits< Level *& > my)
@@ -837,7 +837,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   my.t->update_map();
   DBG("INF: Updated map for level %d,%d,%d", p.x, p.y, p.z);
 
-  return (in);
+  return in;
 }
 
 std::istream &operator>>(std::istream &in, Bits< class World & > my)
@@ -861,7 +861,7 @@ std::istream &operator>>(std::istream &in, Bits< class World & > my)
         if (p != point3d(x, y, z)) {
           game_load_error =
               string_sprintf("level mismatch expected %d,%d,%d vs found %d,%d,%d", x, y, z, p.x, p.y, p.z);
-          return (in);
+          return in;
         }
 
         if (exists) {
@@ -882,7 +882,7 @@ std::istream &operator>>(std::istream &in, Bits< class World & > my)
           in >> bits(eol);
           if (eol != GAME_SAVE_MARKER_EOL) {
             game_load_error = string_sprintf("end of level %d,%d,%d not found", x, y, z);
-            return (in);
+            return in;
           }
           LOG("INF: Loaded level %d,%d,%d", p.x, p.y, p.z);
         }
@@ -891,7 +891,7 @@ std::istream &operator>>(std::istream &in, Bits< class World & > my)
   }
 
   wid_progress_bar_destroy();
-  return (in);
+  return in;
 }
 
 std::istream &operator>>(std::istream &in, Bits< Config & > my)
@@ -1024,7 +1024,7 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
     my.t.ui_pix_zoom   = GAME_DEFAULT_UI_ZOOM;
   }
 
-  return (in);
+  return in;
 }
 
 std::istream &operator>>(std::istream &in, Bits< class Game & > my)
@@ -1039,19 +1039,19 @@ std::istream &operator>>(std::istream &in, Bits< class Game & > my)
     } else {
       game_load_error = "Incompatible version. Expected version " MYVER ", found version " + my.t.version;
     }
-    return (in);
+    return in;
   }
 
   if (my.t.version != MYVER) {
     game_load_error = "May not load. Wrong version. Expected version " MYVER ", found version " + my.t.version;
-    return (in);
+    return in;
   }
 
   in >> bits(my.t.save_slot);
   in >> bits(my.t.save_meta);
   in >> bits(my.t.save_file);
   if (game_load_headers_only) {
-    return (in);
+    return in;
   }
   in >> bits(my.t.appdata);
   in >> bits(my.t.saved_dir);
@@ -1091,7 +1091,7 @@ std::istream &operator>>(std::istream &in, Bits< class Game & > my)
   my.t.level = get(my.t.world.levels, my.t.current_level.x, my.t.current_level.y, my.t.current_level.z);
   my.t.level->log("This is the current level");
 
-  return (in);
+  return in;
 }
 
 // binary mode is only for switching off newline translation
@@ -1134,10 +1134,10 @@ static std::vector< char > read_lzo_file(const std::string filename, lzo_uint *u
     sz -= (int) sizeof(*cs);
     std::vector< char > bytes(sz);
     ifs.read(bytes.data(), sz);
-    return (bytes);
+    return bytes;
   }
   std::vector< char > bytes;
-  return (bytes);
+  return bytes;
 }
 
 uint32_t csum(char *mem, uint32_t len)

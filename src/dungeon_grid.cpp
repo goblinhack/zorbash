@@ -649,7 +649,7 @@ int Nodes::offset(const int x, const int y)
   auto offset = grid_width * y;
   offset += x;
 
-  return (offset);
+  return offset;
 }
 
 bool Nodes::is_oob(const int x, const int y)
@@ -1077,7 +1077,7 @@ int Nodes::snake_walk(int depth, int max_placed, int pass)
 
   } while (s.size());
 
-  return (placed);
+  return placed;
 }
 
 void Nodes::join_nodes_of_same_depth(int depth, int pass)

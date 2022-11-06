@@ -261,7 +261,7 @@ static hash_elem_t *hash_find(hash_t *hash_table, void *ptr)
     elem = elem->next;
   }
 
-  return (elem);
+  return elem;
 }
 
 //
@@ -457,7 +457,7 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, const char 
       std::cerr << string_sprintf("PTRCHECK: %p verified at \"%s\" (%u bytes) at %s:%s line %u (do not store)\n", ptr,
                                   pc->what, pc->size, file, func, line);
 #endif
-      return (pc);
+      return pc;
     }
 
     //
@@ -497,7 +497,7 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, const char 
       }
     }
 #endif
-    return (pc);
+    return pc;
   }
   if (! ptr) {
     ERR("%s%p NULL pointer %s:%s line %u", null_pointer_warning, ptr, file, func, line);

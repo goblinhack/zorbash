@@ -361,7 +361,7 @@ int sdl_get_mouse(void)
   int button = SDL_GetMouseState(&x, &y);
 
   if (! x && ! y) {
-    return (button);
+    return button;
   }
 
   /*
@@ -374,7 +374,7 @@ int sdl_get_mouse(void)
   sdl.mouse_x = x;
   sdl.mouse_y = y;
 
-  return (button);
+  return button;
 }
 
 void sdl_mouse_center(void)

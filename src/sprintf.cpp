@@ -68,7 +68,7 @@ std::string string_sprintf(const char *format, ...)
 
   va_end(args);
 
-  return (ret);
+  return ret;
 }
 
 std::string string_sprintf(const char *format, va_list args)
@@ -82,5 +82,5 @@ std::string string_sprintf(const char *format, va_list args)
   std::string ret = buf;
   free(buf);
 
-  return (ret);
+  return ret;
 }

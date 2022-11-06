@@ -287,7 +287,7 @@ Thingp Thing::equip_carry_anim(int equip)
     anim = level->thing_find(id);
   }
 
-  return (anim);
+  return anim;
 }
 
 Thingp Thing::equip_use_anim(int equip)

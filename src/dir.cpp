@@ -38,7 +38,7 @@ uint8_t dir_exists(const char *indir)
 
   myfree(dir);
 
-  return (rc);
+  return rc;
 }
 
 /*
@@ -51,7 +51,7 @@ char *dir_dot(void)
 
   dospath2unix(getcwd(buf, sizeof(buf)));
 
-  return (buf);
+  return buf;
 }
 
 /*
@@ -98,5 +98,5 @@ char *dospath2unix(char *in)
     s++;
   }
 
-  return (in);
+  return in;
 }

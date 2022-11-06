@@ -83,7 +83,7 @@ color string2color(const char **s)
   }
 
   if (c == eo_tmp) {
-    return (WHITE);
+    return WHITE;
   }
 
   *t++ = '\0';
@@ -99,7 +99,7 @@ color string2color(const char **s)
     if (color_init_done) { // avoids color warnings due to very early errors
       ERR("Unknown color [%s]", tmp);
     }
-    return (WHITE);
+    return WHITE;
   }
 
   return (result->second);
@@ -122,7 +122,7 @@ color string2color(const wchar_t **s)
   }
 
   if (c == eo_tmp) {
-    return (WHITE);
+    return WHITE;
   }
 
   *t++ = '\0';
@@ -139,7 +139,7 @@ color string2color(const wchar_t **s)
     if (color_init_done) { // avoids color warnings due to very early errors
       ERR("Unknown color [%s]", f.c_str());
     }
-    return (WHITE);
+    return WHITE;
   }
 
   return (result->second);
@@ -176,7 +176,7 @@ color string2color(std::string &s, int *len)
     if (color_init_done) { // avoids color warnings due to very early errors
       ERR("Unknown color [%s]", out.c_str());
     }
-    return (WHITE);
+    return WHITE;
   }
 
   return (result->second);
@@ -208,7 +208,7 @@ color string2color(std::string &s)
     if (color_init_done) { // avoids color warnings due to very early errors
       ERR("Unknown color [%s]", out.c_str());
     }
-    return (WHITE);
+    return WHITE;
   }
 
   return (result->second);
@@ -257,7 +257,7 @@ const char *string2colorname(const char **s)
     return ("");
   }
 
-  return (tmp);
+  return tmp;
 }
 
 std::string string2colorname(std::string &s)
@@ -294,18 +294,18 @@ std::string string2colorname(std::string &s)
     return ("");
   }
 
-  return (out);
+  return out;
 }
 
 color color_find(const char *s)
 {
   TRACE_AND_INDENT();
   if (! s) {
-    return (WHITE);
+    return WHITE;
   }
 
   if (! strcmp(s, "")) {
-    return (WHITE);
+    return WHITE;
   }
 
   auto result = color_map.find(std::string(s));
@@ -314,7 +314,7 @@ color color_find(const char *s)
     if (color_init_done) { // avoids color warnings due to very early errors
       ERR("Unknown color [%s]", s);
     }
-    return (WHITE);
+    return WHITE;
   }
 
   return (result->second);

@@ -107,7 +107,7 @@ Tilep Font::unicode_to_tile(int u)
 
   auto tile = get(this->cache, index);
   if (tile) {
-    return (tile);
+    return tile;
   }
 
   char tile_name[ 10 ];
@@ -125,7 +125,7 @@ Tilep Font::unicode_to_tile(int u)
 
   set(this->cache, index, tile);
 
-  return (tile);
+  return tile;
 }
 
 uint8_t font_init(void)

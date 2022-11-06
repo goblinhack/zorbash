@@ -19,7 +19,7 @@ void *myzalloc_(int size, const char *what, const char *file, const char *func, 
 
   IF_DEBUG2 { ptrcheck_alloc(MTYPE_MISC, ptr, what, size, file, func, line); }
 
-  return (ptr);
+  return ptr;
 }
 
 void *mymalloc_(int size, const char *what, const char *file, const char *func, int line)
@@ -33,7 +33,7 @@ void *mymalloc_(int size, const char *what, const char *file, const char *func, 
 
   IF_DEBUG2 { ptrcheck_alloc(MTYPE_MISC, ptr, what, size, file, func, line); }
 
-  return (ptr);
+  return ptr;
 }
 
 void *myrealloc_(void *ptr, int size, const char *what, const char *file, const char *func, int line)
@@ -48,7 +48,7 @@ void *myrealloc_(void *ptr, int size, const char *what, const char *file, const 
 
   IF_DEBUG2 { ptrcheck_alloc(MTYPE_MISC, ptr, what, size, file, func, line); }
 
-  return (ptr);
+  return ptr;
 }
 
 void myfree_(void *ptr, const char *file, const char *func, int line)
@@ -76,5 +76,5 @@ char *dupstr_(const char *in, const char *what, const char *file, const char *fu
 
   IF_DEBUG2 { ptrcheck_alloc(MTYPE_MISC, ptr, what, size, file, func, line); }
 
-  return (ptr);
+  return ptr;
 }

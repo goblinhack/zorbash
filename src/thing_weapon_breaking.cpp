@@ -15,7 +15,7 @@ int Thing::weapon_damaged_pct(void)
   if (! damaged_count()) {
     return 0;
   }
-  return (int) (((((float) damaged_count())) / (((float) health_max()))) * 100.0);
+  return int (((((float) damaged_count())) / (((float) health_max()))) * 100.0);
 }
 
 //

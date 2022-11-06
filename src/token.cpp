@@ -20,7 +20,7 @@ static class Tokens *tokens_parse(const char *input, class Tokens *tokens)
   memset(tokens, 0, sizeof(*tokens));
 
   if (strlen(input) >= MAXSHORTSTR) {
-    return (tokens);
+    return tokens;
   }
 
   in   = input;
@@ -33,7 +33,7 @@ static class Tokens *tokens_parse(const char *input, class Tokens *tokens)
      */
     if (tokens->cnt >= ARRAY_SIZE(tokens->args)) {
       tokens->cnt = 0;
-      return (tokens);
+      return tokens;
     }
 
     i = *(in++);
@@ -42,7 +42,7 @@ static class Tokens *tokens_parse(const char *input, class Tokens *tokens)
      * End of line ?
      */
     if (i == '\0') {
-      return (tokens);
+      return tokens;
     }
 
     /*
@@ -56,7 +56,7 @@ static class Tokens *tokens_parse(const char *input, class Tokens *tokens)
      * End of line ?
      */
     if (i == '\0') {
-      return (tokens);
+      return tokens;
     }
 
     /*
@@ -102,14 +102,14 @@ static class Tokens *tokens_parse(const char *input, class Tokens *tokens)
      * End of line ?
      */
     if (i == '\0') {
-      return (tokens);
+      return tokens;
     }
 
     tokens->args[ tokens->cnt++ ] = out;
 
     for (; /*ever*/;) {
       switch (i) {
-        case '\0': *out++ = i; return (tokens);
+        case '\0': *out++ = i; return tokens;
 
         case ' ': i = '\0'; break;
 

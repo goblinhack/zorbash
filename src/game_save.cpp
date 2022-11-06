@@ -43,7 +43,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const SDL_Keysym & > const my)
   out << bits(my.t.sym);
   out << bits(my.t.mod);
   out << bits(my.t.unused);
-  return (out);
+  return out;
 }
 
 std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
@@ -194,7 +194,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   // and always update game_load.cpp and game_save.cpp
   /////////////////////////////////////////////////////////////////////////
 
-  return (out);
+  return out;
 }
 
 std::ostream &operator<<(std::ostream &out, Bits< ThingItemsp & > const my)
@@ -231,7 +231,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingItemsp & > const my)
   // and always update game_load.cpp and game_save.cpp
   /////////////////////////////////////////////////////////////////////////
 
-  return (out);
+  return out;
 }
 
 std::ostream &operator<<(std::ostream &out, Bits< ThingAip & > const my)
@@ -253,7 +253,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingAip & > const my)
   out << bits(my.t->wander_dest);
   out << bits(my.t->idle_count);
   out << bits(my.t->stuck_count);
-  return (out);
+  return out;
 }
 
 std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
@@ -496,7 +496,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
     LOG("SAVE %d bytes %s TP %d ID %X last_at %d,%d infop %p", (int) diff, name.c_str(), my.t->tp_id, my.t->id.id,
         my.t->last_at.x, my.t->last_at.y, my.t->maybe_infop());
   }
-  return (out);
+  return out;
 }
 
 std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
@@ -735,7 +735,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   WRITE_MAGIC(THING_MAGIC_FINAL);
   LOG("INF: Saved things");
 
-  return (out);
+  return out;
 }
 
 std::ostream &operator<<(std::ostream &out, Bits< const class World & > const my)
@@ -787,7 +787,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const class World & > const my
     }
   }
   wid_progress_bar_destroy();
-  return (out);
+  return out;
 }
 
 std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my)
@@ -892,7 +892,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my)
   out << bits(g_opt_seed_name);
   out << bits(my.t.hiscores);
 
-  return (out);
+  return out;
 }
 
 std::ostream &operator<<(std::ostream &out, Bits< const class Game & > const my)
@@ -929,7 +929,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const class Game & > const my)
   out << bits(wid_topcon_serialize());
   out << bits(wid_console_serialize());
 
-  return (out);
+  return out;
 }
 
 bool Game::save(std::string file_to_save)

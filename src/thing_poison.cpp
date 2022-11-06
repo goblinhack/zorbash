@@ -159,7 +159,7 @@ const std::string &Thing::poison_reason_get(void)
     return (infop()->poison_reason);
   }
   static std::string empty;
-  return (empty);
+  return empty;
 }
 
 void Thing::poison_reason_set(const std::string &v)

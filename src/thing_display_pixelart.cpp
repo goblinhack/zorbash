@@ -401,6 +401,7 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
                        Tilep &tile, bool reflection)
 {
   TRACE_NO_INDENT();
+
   fpoint at = interpolated_at_get();
 
   //
@@ -640,43 +641,13 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
     }
   }
 
-  if ((is_in_lava || is_in_water) && gfx_pixelart_submergable()) {
-    //
-    // Render the weapon and player on the same tile rules
-    //
-    auto map_loc = make_point(at);
-    if (o_top) {
-      map_loc = o_top->curr_at;
-    }
-
-    submerged_offset_set(0);
-
-    if (is_always_submerged()) {
-      //
-      // Krakens are pre submerged.
-      //
-    } else if (level->is_deep_water((int) map_loc.x, (int) map_loc.y)) {
-      submerged_offset_set(8);
-    } else if (level->is_lava((int) map_loc.x, (int) map_loc.y)) {
-      submerged_offset_set(TILE_HEIGHT / 2);
-    } else if (level->is_shallow_water((int) map_loc.x, (int) map_loc.y)) {
-      submerged_offset_set(4);
-    }
-
-    if (! is_dead && (is_floating() || is_flying())) {
-      //
-      // Ghosts do not sink into lava
-      //
-      submerged_offset_set(0);
-    }
-  }
-
-  return (blit);
+  return blit;
 }
 
 bool Thing::map_offset_coords_get(point &blit_tl, point &blit_br, Tilep &tile, bool reflection)
 {
   TRACE_NO_INDENT();
+
   point pre_effect_blit_tl;
   point pre_effect_blit_br;
 
@@ -698,7 +669,7 @@ bool Thing::map_offset_coords_get(point &blit_tl, point &blit_br, Tilep &tile, b
     pre_effect_blit_br.y -= dy;
   }
 
-  return (blit);
+  return blit;
 }
 
 uint8_t Thing::blit_begin_submerged(void)
@@ -722,7 +693,7 @@ uint8_t Thing::blit_begin_submerged(void)
     glTranslatef(0, submerged, 0);
     blit_init();
   }
-  return (submerged);
+  return submerged;
 }
 
 void Thing::blit_end_submerged(uint8_t submerged)
@@ -760,7 +731,7 @@ uint8_t Thing::blit_begin_reflection_submerged(void)
     glTranslatef(0, -submerged, 0);
     blit_init();
   }
-  return (submerged);
+  return submerged;
 }
 
 void Thing::blit_end_reflection_submerged(uint8_t submerged)

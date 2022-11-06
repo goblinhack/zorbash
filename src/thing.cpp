@@ -13,19 +13,19 @@ Thingp g_debug_thing;
 const Tpp Thing::tp_or_update(void)
 {
   if (likely(mytp != nullptr)) {
-    return (mytp);
+    return mytp;
   }
   if (unlikely(tp_id == -1)) {
     return nullptr;
   }
   mytp = tp_id_map[ tp_id - 1 ];
-  return (mytp);
+  return mytp;
 }
 
 const Tpp Thing::tp_slow(void)
 {
   if (likely(mytp != nullptr)) {
-    return (mytp);
+    return mytp;
   }
 
   if (unlikely(tp_id == -1)) {

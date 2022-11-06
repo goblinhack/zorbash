@@ -31,7 +31,7 @@ float Level::update_wobble(void)
 float Level::wobble_curr(void) const
 {
   TRACE_NO_INDENT();
-  return (wobble);
+  return wobble;
 }
 
 void Level::wobble_set(float v)

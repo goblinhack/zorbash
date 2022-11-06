@@ -22,5 +22,5 @@ PYFUNC(SDLGetKeyState, "get a snapshot of the current keyboard state")
     PyList_SetItem(lst, i, Py_BuildValue("i", keys[ i ]));
   }
 
-  return (lst);
+  return lst;
 }

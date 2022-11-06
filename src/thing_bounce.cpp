@@ -87,5 +87,5 @@ float Thing::bounce_curr(void)
   height *= sin(time_step * RAD_180);
   height *= bounce_height_curr();
 
-  return (height);
+  return height;
 }

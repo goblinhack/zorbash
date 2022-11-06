@@ -45,7 +45,7 @@ err_out:
     Py_XDECREF(py_encstr);
   }
 
-  return (outstr);
+  return outstr;
 }
 
 int py_obj_to_int(PyObject *py_obj)
@@ -67,7 +67,7 @@ err_out:
     ERR("Int conversion failed");
   }
 
-  return (val);
+  return val;
 }
 
 int py_obj_to_bool(PyObject *py_obj)
@@ -112,7 +112,7 @@ err_out:
     ERR("Int conversion failed");
   }
 
-  return (val);
+  return val;
 }
 
 double py_obj_to_double(PyObject *py_obj)
@@ -137,7 +137,7 @@ err_out:
     ERR("Int conversion failed");
   }
 
-  return (val);
+  return val;
 }
 
 int py_obj_attr_int(const PyObject *py_obj, const char *attr)
@@ -269,7 +269,7 @@ err_out:
     Py_XDECREF(py_encstr);
   }
 
-  return (outstr);
+  return outstr;
 }
 
 PyObject *py_obj_attr(const PyObject *py_obj, const char *attr)

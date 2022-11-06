@@ -3359,7 +3359,7 @@ const std::string &Thing::msg_get(void)
     return (infop()->msg);
   }
   static std::string empty;
-  return (empty);
+  return empty;
 }
 
 void Thing::msg_set(const std::string &v)
@@ -3379,7 +3379,7 @@ const std::string &Thing::dead_reason_get(void)
     return (infop()->dead_reason);
   }
   static std::string empty;
-  return (empty);
+  return empty;
 }
 
 void Thing::dead_reason_set(const std::string &v)

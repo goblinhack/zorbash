@@ -113,7 +113,7 @@ float angle_radians(const fpoint &p)
 
   if (p.x > 0) {
     if (p.y > 0) {
-      return (theta);
+      return theta;
     }
     return (RAD_360 + theta);
   }

@@ -41,5 +41,5 @@ float Thing::fadeup_curr(void)
   height *= sin(time_step * RAD_90);
   height *= fadeup_height_curr();
 
-  return (height);
+  return height;
 }

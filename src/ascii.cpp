@@ -958,7 +958,7 @@ std::string ascii_strip(std::string const &text)
     out += ch;
     x++;
   }
-  return (out);
+  return out;
 }
 
 static void ascii_putf_(int x, int y, color fg, color bg, std::wstring const fmt, va_list args)

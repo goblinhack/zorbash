@@ -320,7 +320,7 @@ static int command_matches(const char *input, char *output, uint8_t show_ambiguo
     (*matched_command->callback)(&input_tokens, context);
   }
 
-  return (matches);
+  return matches;
 }
 
 uint8_t command_handle(const char *input, char *expandedtext, uint8_t show_ambiguous, uint8_t show_complete,

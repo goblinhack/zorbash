@@ -143,7 +143,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const HiScore & > const my)
   out << bits(my.t.level_reached);
   // CON("Saved Hiscore: %s, %d defeated  by %s, %s",
   //     my.t.name.c_str(), my.t.score, my.t.defeated_by.c_str(), my.t.when.c_str());
-  return (out);
+  return out;
 }
 
 std::ostream &operator<<(std::ostream &out, Bits< HiScore & > const my)
@@ -156,7 +156,7 @@ std::ostream &operator<<(std::ostream &out, Bits< HiScore & > const my)
   out << bits(my.t.level_reached);
   // CON("Read Hiscore: %s, %d defeated  by %s, %s",
   //     my.t.name.c_str(), my.t.score, my.t.defeated_by.c_str(), my.t.when.c_str());
-  return (out);
+  return out;
 }
 
 std::istream &operator>>(std::istream &in, Bits< HiScores & > my)
@@ -175,5 +175,5 @@ std::ostream &operator<<(std::ostream &out, Bits< const HiScores & > const my)
 {
   TRACE_AND_INDENT();
   out << bits(my.t.hiscores);
-  return (out);
+  return out;
 }

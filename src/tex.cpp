@@ -166,7 +166,7 @@ static SDL_Surface *load_image(std::string filename)
 
   free_raw_image(image_data);
 
-  return (surf);
+  return surf;
 }
 
 static void load_images(SDL_Surface **surf1_out, SDL_Surface **surf2_out, std::string filename)

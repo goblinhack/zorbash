@@ -367,7 +367,7 @@ int Dungeon::offset(const int x, const int y, const int z)
   offset += (map_width) *y;
   offset += x;
 
-  return (offset);
+  return offset;
 }
 
 int Dungeon::offset(const int x, const int y)
@@ -375,7 +375,7 @@ int Dungeon::offset(const int x, const int y)
   auto offset = (map_width) *y;
   offset += x;
 
-  return (offset);
+  return offset;
 }
 
 //

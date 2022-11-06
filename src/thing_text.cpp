@@ -42,7 +42,7 @@ std::string Thing::text_a_or_an(void)
     out += tpp->text_long_name();
   }
 
-  return (out);
+  return out;
 }
 
 std::string Thing::text_the(bool include_owner)
@@ -86,7 +86,7 @@ std::string Thing::text_the(bool include_owner)
 
   out += tpp->text_long_name();
 
-  return (out);
+  return out;
 }
 
 std::string Thing::text_the_no_dying(bool include_owner)
@@ -114,7 +114,7 @@ std::string Thing::text_the_no_dying(bool include_owner)
 
   out += tpp->text_long_name();
 
-  return (out);
+  return out;
 }
 
 std::string Thing::text_The(void)
@@ -122,7 +122,7 @@ std::string Thing::text_The(void)
   TRACE_NO_INDENT();
   auto out = text_the();
   out[ 0 ] = toupper(out[ 0 ]);
-  return (out);
+  return out;
 }
 
 std::string Thing::text_The_no_dying(void)
@@ -130,7 +130,7 @@ std::string Thing::text_The_no_dying(void)
   TRACE_NO_INDENT();
   auto out = text_the_no_dying();
   out[ 0 ] = toupper(out[ 0 ]);
-  return (out);
+  return out;
 }
 
 std::string Thing::text_short_a_or_an(void)
@@ -168,7 +168,7 @@ std::string Thing::text_short_a_or_an(void)
     out += tpp->text_short_name();
   }
 
-  return (out);
+  return out;
 }
 
 std::string Thing::text_short_the(void)
@@ -195,7 +195,7 @@ std::string Thing::text_short_the(void)
 
   out += tpp->text_short_name();
 
-  return (out);
+  return out;
 }
 
 std::string Thing::text_short_The(void)
@@ -203,7 +203,7 @@ std::string Thing::text_short_The(void)
   TRACE_NO_INDENT();
   auto out = text_short_the();
   out[ 0 ] = toupper(out[ 0 ]);
-  return (out);
+  return out;
 }
 
 std::string Thing::text_A_or_An(void)
@@ -211,7 +211,7 @@ std::string Thing::text_A_or_An(void)
   TRACE_NO_INDENT();
   auto out = text_short_a_or_an();
   out[ 0 ] = toupper(out[ 0 ]);
-  return (out);
+  return out;
 }
 
 //

@@ -543,14 +543,14 @@ static std::vector< point > dmap_solve_(const Dmap *D, const point start, const 
     }
 
     if (! got) {
-      return (out);
+      return out;
     }
 
     out.push_back(best);
     at = best;
     set(walked, best.x, best.y, true);
   }
-  return (out);
+  return out;
 }
 
 std::vector< point > dmap_solve_allow_diagonal(const Dmap *D, const point start)

@@ -66,8 +66,6 @@ void Thing::achieve_goals_in_life(void)
   level_pop();
   level_push();
 
-  // dbg("Tick %d goals to achieve", game->tick_current);
-
   //
   // Check torch counts
   //

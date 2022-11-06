@@ -522,7 +522,7 @@ Widp wid_get_head(Widp w)
     w = prev;
   }
 
-  return (w);
+  return w;
 }
 
 Widp wid_get_tail(Widp w)
@@ -539,19 +539,19 @@ Widp wid_get_tail(Widp w)
     w = next;
   }
 
-  return (w);
+  return w;
 }
 
 Widp wid_get_top_parent(Widp w)
 {
   TRACE_NO_INDENT();
   if (unlikely(! w)) {
-    return (w);
+    return w;
   }
   verify(MTYPE_WID, w);
 
   if (! w->parent) {
-    return (w);
+    return w;
   }
 
   while (w->parent) {
@@ -559,7 +559,7 @@ Widp wid_get_top_parent(Widp w)
     w = w->parent;
   }
 
-  return (w);
+  return w;
 }
 
 Widp wid_get_parent(Widp w)
@@ -1155,7 +1155,7 @@ static std::wstring wid_get_text_with_cursor(Widp w)
   std::wstring t = w->text;
   std::wstring o = t.substr(0, w->cursor) + UNICODE_CURSOR + t.substr(w->cursor);
 
-  return (o);
+  return o;
 }
 
 void wid_set_name(Widp w, std::string name)
@@ -1703,7 +1703,7 @@ color wid_get_color(Widp w, wid_color which)
     return (cfg->colors[ which ]);
   }
 
-  return (WHITE);
+  return WHITE;
 }
 
 int wid_get_style(Widp w)
@@ -2284,7 +2284,7 @@ static Widp wid_new(Widp parent)
   w->visible = true;
   wid_set_style(w, UI_WID_STYLE_SOLID_NONE);
 
-  return (w);
+  return w;
 }
 
 static Widp wid_new(void)
@@ -2306,7 +2306,7 @@ static Widp wid_new(void)
   w->visible = true;
   wid_set_style(w, UI_WID_STYLE_SOLID_NONE);
 
-  return (w);
+  return w;
 }
 
 static void wid_destroy_immediate_internal(Widp w)
@@ -2540,7 +2540,7 @@ Widp wid_new_window(std::string name)
   //
   wid_raise(w);
 
-  return (w);
+  return w;
 }
 
 //
@@ -2574,7 +2574,7 @@ Widp wid_new_container(Widp parent, std::string name)
   //
   wid_raise(w);
 
-  return (w);
+  return w;
 }
 
 //
@@ -2602,7 +2602,7 @@ Widp wid_new_square_window(std::string name)
   //
   wid_raise(w);
 
-  return (w);
+  return w;
 }
 
 Widp wid_new_square_button(Widp parent, std::string name)
@@ -2641,7 +2641,7 @@ Widp wid_new_square_button(Widp parent, std::string name)
   //
   wid_raise(w);
 
-  return (w);
+  return w;
 }
 
 Widp wid_new_plain(Widp parent, std::string name)
@@ -2678,7 +2678,7 @@ Widp wid_new_plain(Widp parent, std::string name)
   //
   wid_raise(w);
 
-  return (w);
+  return w;
 }
 
 //
@@ -2717,7 +2717,7 @@ static Widp wid_new_scroll_trough(Widp parent)
 
   wid_set_style(w, UI_WID_STYLE_DARK);
 
-  return (w);
+  return w;
 }
 
 //
@@ -2781,7 +2781,7 @@ static Widp wid_new_scroll_bar(Widp parent, std::string name, Widp scrollbar_own
 
   wid_set_style(w, UI_WID_STYLE_DARK);
 
-  return (w);
+  return w;
 }
 
 Widp wid_new_vert_scroll_bar(Widp parent, std::string name, Widp scrollbar_owner)
@@ -2837,7 +2837,7 @@ Widp wid_new_vert_scroll_bar(Widp parent, std::string name, Widp scrollbar_owner
     trough->is_scrollbar_vert_trough = true;
     scrollbar->is_scrollbar_vert     = true;
 
-    return (scrollbar);
+    return scrollbar;
   }
 }
 
@@ -2891,7 +2891,7 @@ Widp wid_new_horiz_scroll_bar(Widp parent, std::string name, Widp scrollbar_owne
     trough->is_scrollbar_horiz_trough = true;
     scrollbar->is_scrollbar_horiz     = true;
 
-    return (scrollbar);
+    return scrollbar;
   }
 }
 
@@ -3092,7 +3092,7 @@ static Widp wid_find_top_wid_focus(Widp w)
   Widp best {};
 
   if (wid_ignore_for_focus(w)) {
-    return (best);
+    return best;
   }
 
   //
@@ -3101,16 +3101,16 @@ static Widp wid_find_top_wid_focus(Widp w)
   if (! w->focus_last) {
     wid_find_first_child_focus(w, &best);
     if (best) {
-      return (best);
+      return best;
     }
   }
 
   wid_find_specific_child_focus(w, &best, w->focus_last);
   if (best) {
-    return (best);
+    return best;
   }
 
-  return (best);
+  return best;
 }
 
 static void wid_find_top_focus(void)
@@ -3179,13 +3179,13 @@ Widp wid_get_focus(Widp w)
   if (! w->focus_last) {
     best = wid_find_top_wid_focus(wid_get_top_parent(w));
     if (best) {
-      return (best);
+      return best;
     }
   }
 
   wid_find_specific_child_focus(w, &best, w->focus_last);
 
-  return (best);
+  return best;
 }
 
 static void wid_find_last_focus(void)
@@ -3316,7 +3316,7 @@ Widp wid_find(Widp w, const std::string &name)
 {
   TRACE_NO_INDENT();
   if (! strcasecmp(w->name.c_str(), name.c_str())) {
-    return (w);
+    return w;
   }
 
   for (auto &iter : w->children_display_sorted) {
@@ -3326,7 +3326,7 @@ Widp wid_find(Widp w, const std::string &name)
 
     ret = wid_find(child, name);
     if (ret) {
-      return (ret);
+      return ret;
     }
   }
   return nullptr;
@@ -3393,7 +3393,7 @@ Widp wid_find(const std::string &name)
     auto w = iter.second;
     auto r = wid_find(w, name);
     if (r) {
-      return (r);
+      return r;
     }
   }
   // DBG3("Wid [%s] not found", name.c_str());
@@ -4278,7 +4278,7 @@ Widp wid_find_at(int x, int y)
     return nullptr;
   }
 
-  return (w);
+  return w;
 }
 
 Widp wid_find_under_mouse(void)
@@ -4382,7 +4382,7 @@ static Widp wid_key_down_handler_at(Widp w, int x, int y, uint8_t strict)
       return nullptr;
     }
 
-    return (w);
+    return w;
   }
 
   w = wid_get_top_parent(w);
@@ -4391,7 +4391,7 @@ static Widp wid_key_down_handler_at(Widp w, int x, int y, uint8_t strict)
       return nullptr;
     }
 
-    return (w);
+    return w;
   }
 
   return nullptr;
@@ -4458,7 +4458,7 @@ static Widp wid_key_up_handler_at(Widp w, int x, int y, uint8_t strict)
       return nullptr;
     }
 
-    return (w);
+    return w;
   }
 
   return nullptr;
@@ -4512,7 +4512,7 @@ static Widp wid_joy_button_handler_at(Widp w, int x, int y, uint8_t strict)
       return nullptr;
     }
 
-    return (w);
+    return w;
   }
 
   return nullptr;
@@ -4570,7 +4570,7 @@ static Widp wid_mouse_down_handler_at(Widp w, int x, int y, uint8_t strict)
       return nullptr;
     }
 
-    return (w);
+    return w;
   }
 
   if (wid_get_moveable(w)) {
@@ -4578,7 +4578,7 @@ static Widp wid_mouse_down_handler_at(Widp w, int x, int y, uint8_t strict)
       return nullptr;
     }
 
-    return (w);
+    return w;
   }
 
   //
@@ -4590,7 +4590,7 @@ static Widp wid_mouse_down_handler_at(Widp w, int x, int y, uint8_t strict)
       return nullptr;
     }
 
-    return (w);
+    return w;
   }
 
   return nullptr;
@@ -4644,7 +4644,7 @@ static Widp wid_mouse_held_handler_at(Widp w, int x, int y, uint8_t strict)
       return nullptr;
     }
 
-    return (w);
+    return w;
   }
 
   if (wid_get_moveable(w)) {
@@ -4652,7 +4652,7 @@ static Widp wid_mouse_held_handler_at(Widp w, int x, int y, uint8_t strict)
       return nullptr;
     }
 
-    return (w);
+    return w;
   }
 
   //
@@ -4664,7 +4664,7 @@ static Widp wid_mouse_held_handler_at(Widp w, int x, int y, uint8_t strict)
       return nullptr;
     }
 
-    return (w);
+    return w;
   }
 
   return nullptr;
@@ -4718,7 +4718,7 @@ static Widp wid_mouse_up_handler_at(Widp w, int x, int y, uint8_t strict)
       return nullptr;
     }
 
-    return (w);
+    return w;
   }
 
   if (wid_get_moveable(w)) {
@@ -4726,7 +4726,7 @@ static Widp wid_mouse_up_handler_at(Widp w, int x, int y, uint8_t strict)
       return nullptr;
     }
 
-    return (w);
+    return w;
   }
 
   //
@@ -4738,7 +4738,7 @@ static Widp wid_mouse_up_handler_at(Widp w, int x, int y, uint8_t strict)
       return nullptr;
     }
 
-    return (w);
+    return w;
   }
 
   return nullptr;
@@ -5027,7 +5027,7 @@ static Widp wid_joy_button_handler(int x, int y)
       continue;
     }
 
-    return (w);
+    return w;
   }
 
   return nullptr;
@@ -5040,12 +5040,12 @@ static Widp wid_mouse_down_handler(int x, int y)
 
   w = wid_mouse_down_handler_at(wid_focus, x, y, true /* strict */);
   if (w) {
-    return (w);
+    return w;
   }
 
   w = wid_mouse_down_handler_at(wid_over, x, y, true /* strict */);
   if (w) {
-    return (w);
+    return w;
   }
 
   for (auto iter = wid_top_level.rbegin(); iter != wid_top_level.rend(); ++iter) {
@@ -5060,7 +5060,7 @@ static Widp wid_mouse_down_handler(int x, int y)
       continue;
     }
 
-    return (w);
+    return w;
   }
 
   for (auto iter = wid_top_level.rbegin(); iter != wid_top_level.rend(); ++iter) {
@@ -5075,7 +5075,7 @@ static Widp wid_mouse_down_handler(int x, int y)
       continue;
     }
 
-    return (w);
+    return w;
   }
 
   return nullptr;
@@ -5088,12 +5088,12 @@ static Widp wid_mouse_held_handler(int x, int y)
 
   w = wid_mouse_held_handler_at(wid_focus, x, y, true /* strict */);
   if (w) {
-    return (w);
+    return w;
   }
 
   w = wid_mouse_held_handler_at(wid_over, x, y, true /* strict */);
   if (w) {
-    return (w);
+    return w;
   }
 
   for (auto iter = wid_top_level.rbegin(); iter != wid_top_level.rend(); ++iter) {
@@ -5108,7 +5108,7 @@ static Widp wid_mouse_held_handler(int x, int y)
       continue;
     }
 
-    return (w);
+    return w;
   }
 
   for (auto iter = wid_top_level.rbegin(); iter != wid_top_level.rend(); ++iter) {
@@ -5123,7 +5123,7 @@ static Widp wid_mouse_held_handler(int x, int y)
       continue;
     }
 
-    return (w);
+    return w;
   }
 
   return nullptr;
@@ -5136,12 +5136,12 @@ static Widp wid_mouse_up_handler(int x, int y)
 
   w = wid_mouse_up_handler_at(wid_focus, x, y, true /* strict */);
   if (w) {
-    return (w);
+    return w;
   }
 
   w = wid_mouse_up_handler_at(wid_over, x, y, true /* strict */);
   if (w) {
-    return (w);
+    return w;
   }
 
   for (auto iter = wid_top_level.rbegin(); iter != wid_top_level.rend(); ++iter) {
@@ -5156,7 +5156,7 @@ static Widp wid_mouse_up_handler(int x, int y)
       continue;
     }
 
-    return (w);
+    return w;
   }
 
   for (auto iter = wid_top_level.rbegin(); iter != wid_top_level.rend(); ++iter) {
@@ -5171,7 +5171,7 @@ static Widp wid_mouse_up_handler(int x, int y)
       continue;
     }
 
-    return (w);
+    return w;
   }
 
   return nullptr;
@@ -5188,7 +5188,7 @@ static Widp wid_mouse_motion_handler(int x, int y, int relx, int rely, int wheel
     if (w->hidden) {
       return nullptr;
     }
-    return (w);
+    return w;
   }
 
   return nullptr;
@@ -5680,25 +5680,25 @@ static Widp wid_key_down_handler(int x, int y)
   w = wid_key_down_handler_at(wid_focus, x, y, true /* strict */);
   if (w) {
     // TOPCON("%s %d.",to_cstring(w).c_str(),__LINE__);
-    return (w);
+    return w;
   }
 
   w = wid_key_down_handler_at(wid_get_top_parent(wid_focus), x, y, false /* strict */);
   if (w) {
     // TOPCON("%s %d.",to_string(w).c_str(),__LINE__);
-    return (w);
+    return w;
   }
 
   w = wid_key_down_handler_at(wid_over, x, y, true /* strict */);
   if (w) {
     // TOPCON("%s %d.",to_string(w).c_str(),__LINE__);
-    return (w);
+    return w;
   }
 
   w = wid_key_down_handler_at(wid_get_top_parent(wid_over), x, y, false /* strict */);
   if (w) {
     // TOPCON("%s %d.",to_string(w).c_str(),__LINE__);
-    return (w);
+    return w;
   }
 
   for (auto iter = wid_top_level.rbegin(); iter != wid_top_level.rend(); ++iter) {
@@ -5715,7 +5715,7 @@ static Widp wid_key_down_handler(int x, int y)
     }
     // TOPCON("     got top level strict handler%s.",to_string(w).c_str());
 
-    return (w);
+    return w;
   }
 
   for (auto iter = wid_top_level.rbegin(); iter != wid_top_level.rend(); ++iter) {
@@ -5732,7 +5732,7 @@ static Widp wid_key_down_handler(int x, int y)
     }
 
     // TOPCON("     got top level loose handler%s.",to_string(w));
-    return (w);
+    return w;
   }
 
   return nullptr;
@@ -5745,22 +5745,22 @@ static Widp wid_key_up_handler(int x, int y)
 
   w = wid_key_up_handler_at(wid_focus, x, y, true /* strict */);
   if (w) {
-    return (w);
+    return w;
   }
 
   w = wid_key_up_handler_at(wid_get_top_parent(wid_focus), x, y, false /* strict */);
   if (w) {
-    return (w);
+    return w;
   }
 
   w = wid_key_up_handler_at(wid_over, x, y, true /* strict */);
   if (w) {
-    return (w);
+    return w;
   }
 
   w = wid_key_up_handler_at(wid_get_top_parent(wid_over), x, y, false /* strict */);
   if (w) {
-    return (w);
+    return w;
   }
 
   for (auto iter = wid_top_level.rbegin(); iter != wid_top_level.rend(); ++iter) {
@@ -5775,7 +5775,7 @@ static Widp wid_key_up_handler(int x, int y)
       continue;
     }
 
-    return (w);
+    return w;
   }
 
   for (auto iter = wid_top_level.rbegin(); iter != wid_top_level.rend(); ++iter) {
@@ -5790,7 +5790,7 @@ static Widp wid_key_up_handler(int x, int y)
       continue;
     }
 
-    return (w);
+    return w;
   }
 
   return nullptr;

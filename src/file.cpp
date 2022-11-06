@@ -37,7 +37,7 @@ unsigned char *file_load(const char *filename, int *outlen)
         out = file_io_read_if_exists(filename, outlen);
         if (out) {
           FILE_LOG("Read file %s (newer than exec)", filename);
-          return (out);
+          return out;
         }
       }
 
@@ -45,7 +45,7 @@ unsigned char *file_load(const char *filename, int *outlen)
         out = file_io_read_if_exists(filename, outlen);
         if (out) {
           FILE_LOG("Read file %s (newer than build)", filename);
-          return (out);
+          return out;
         }
       }
 
@@ -53,14 +53,14 @@ unsigned char *file_load(const char *filename, int *outlen)
         out = file_io_read_if_exists(filename, outlen);
         if (out) {
           FILE_LOG("Read file %s (newer than src build)", filename);
-          return (out);
+          return out;
         }
       }
     } else {
       out = file_io_read_if_exists(filename, outlen);
       if (out) {
         FILE_LOG("Read file %s (exists locally)", filename);
-        return (out);
+        return out;
       }
     }
   }
@@ -76,7 +76,7 @@ unsigned char *file_load(const char *filename, int *outlen)
           myfree(alt_filename);
           alt_filename = nullptr;
 
-          return (out);
+          return out;
         }
       }
 
@@ -87,7 +87,7 @@ unsigned char *file_load(const char *filename, int *outlen)
           myfree(alt_filename);
           alt_filename = nullptr;
 
-          return (out);
+          return out;
         }
       }
 
@@ -98,7 +98,7 @@ unsigned char *file_load(const char *filename, int *outlen)
           myfree(alt_filename);
           alt_filename = nullptr;
 
-          return (out);
+          return out;
         }
       }
     }
@@ -128,7 +128,7 @@ unsigned char *file_load(const char *filename, int *outlen)
       alt_filename = nullptr;
     }
 
-    return (out);
+    return out;
   }
 
   out = file_io_read_if_exists(alt_filename, outlen);
@@ -140,7 +140,7 @@ unsigned char *file_load(const char *filename, int *outlen)
       alt_filename = nullptr;
     }
 
-    return (out);
+    return out;
   }
 
   if (alt_filename) {
@@ -155,7 +155,7 @@ unsigned char *file_load(const char *filename, int *outlen)
     if (out) {
       FILE_LOG("Read file %s", alt_filename.c_str());
 
-      return (out);
+      return out;
     }
   }
 
@@ -234,7 +234,7 @@ unsigned char *file_io_read(const char *filename, int *out_len)
 
   fclose(file);
 
-  return (buffer);
+  return buffer;
 }
 
 int file_write(const char *filename, unsigned char *buffer, int len)
@@ -303,7 +303,7 @@ unsigned char *file_io_read_if_exists(const char *filename, int *out_len)
 
   if (strstr(filename, ".mz")) {
     ret = mzip_file_read(filename, out_len);
-    return (ret);
+    return ret;
   }
 
   mz_filename = strappend(filename, ".mz");
@@ -314,7 +314,7 @@ unsigned char *file_io_read_if_exists(const char *filename, int *out_len)
   if (file_exists(mz_filename)) {
     ret = mzip_file_read(mz_filename, out_len);
     myfree(mz_filename);
-    return (ret);
+    return ret;
   }
 
   myfree(mz_filename);
@@ -336,7 +336,7 @@ int file_size(const char *filename)
   struct stat buf;
 
   if (stat(filename, &buf) >= 0) {
-    return (int) (buf.st_size);
+    return int (buf.st_size);
   }
 
   return (-1);

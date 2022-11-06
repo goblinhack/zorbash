@@ -212,7 +212,7 @@ float Thing::fall_curr(void)
 
   float height = fall_height_curr() * time_step;
 
-  return (height);
+  return height;
 }
 
 bool Thing::fall_to_next_level(void)

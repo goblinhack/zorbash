@@ -2,29 +2,6 @@ import my
 import tp
 
 
-def on_you_nat_att(me, x, y):
-    sound = f"growl{my.non_pcg_randint(1, 10)}"
-    my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
-
-
-def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
-    sound = f"hiss{my.non_pcg_randint(1, 10)}"
-    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
-        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
-
-
-def on_you_are_hit_but_dodge_it_do(me, hitter, x, y):
-    sound = f"hiss{my.non_pcg_randint(1, 10)}"
-    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
-        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
-
-
-def on_death(me, x, y):
-    sound = "squeaky_toy"
-    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
-        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
-
-
 def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
@@ -83,10 +60,6 @@ def tp_init(name, text_long_name):
     my.is_tentacle(self, True)
     my.is_tickable(self, True)
     my.move_speed(self, 50)
-    my.on_death_do(self, "me.on_death()")
-    my.on_you_are_hit_but_dodge_it_do(self, "me.on_you_are_hit_but_dodge_it_do()")
-    my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
-    my.on_you_nat_att_do(self, "me.on_you_nat_att()")
     my.rarity(self, my.RARITY_COMMON)
     my.stamina(self, 100)
     my.stat_con(self, 10)

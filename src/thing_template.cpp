@@ -38,7 +38,7 @@ Tpp tp_find(uint32_t id)
     ERR("Thing template %" PRIX32 " not found", id);
   }
 
-  return (result);
+  return result;
 }
 
 uint8_t tp_init(void)
@@ -84,7 +84,7 @@ Tpp tp_load(int id, std::string const &name, const std::string &text_long_name, 
   tp_id_map.push_back(tp);
   tp->id = tp_id_map.size();
 
-  return (tp);
+  return tp;
 }
 
 Tilep tp_first_tile(Tpp tp)

@@ -319,14 +319,49 @@ void Thing::level_push(void)
   //
   auto o_top = top_owner();
 
-  is_in_water = level->is_water(curr_at);
-  if (o_top && o_top->is_in_water) {
-    is_in_water = true;
+  if (! is_water()) {
+    is_in_water = level->is_water(curr_at);
+    if (o_top && o_top->is_in_water) {
+      is_in_water = true;
+    }
   }
 
-  is_in_lava = level->is_lava(curr_at);
-  if (o_top && o_top->is_in_lava) {
-    is_in_lava = true;
+  if (! is_lava()) {
+    is_in_lava = level->is_lava(curr_at);
+    if (o_top && o_top->is_in_lava) {
+      is_in_lava = true;
+    }
+  }
+
+  //
+  // Update submerged status
+  //
+  if (gfx_pixelart_submergable()) {
+    auto map_loc = curr_at;
+    if (o_top) {
+      map_loc = o_top->curr_at;
+    }
+
+    submerged_offset_set(0);
+
+    if (is_always_submerged()) {
+      //
+      // Krakens are pre submerged.
+      //
+    } else if (level->is_deep_water((int) map_loc.x, (int) map_loc.y)) {
+      submerged_offset_set(8);
+    } else if (level->is_lava((int) map_loc.x, (int) map_loc.y)) {
+      submerged_offset_set(TILE_HEIGHT / 2);
+    } else if (level->is_shallow_water((int) map_loc.x, (int) map_loc.y)) {
+      submerged_offset_set(4);
+    }
+
+    if (! is_dead && (is_floating() || is_flying())) {
+      //
+      // Ghosts do not sink into lava
+      //
+      submerged_offset_set(0);
+    }
   }
 
   //

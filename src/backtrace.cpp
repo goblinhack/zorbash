@@ -112,7 +112,7 @@ std::string Backtrace::to_string(void)
 
   if (size == 0) {
     sout += "  <empty, possibly corrupt>\n";
-    return (sout);
+    return sout;
   }
 
   // resolve addresses into strings containing "filename(function+address)",
@@ -177,7 +177,7 @@ std::string Backtrace::to_string(void)
 
   free(symbollist);
 
-  return (sout);
+  return sout;
 #endif
 }
 

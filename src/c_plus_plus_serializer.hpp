@@ -200,7 +200,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< const wchar_t & 
   } else {
     static_assert(sizeof(wchar_t) <= 4, "wchar_t is greater that 32 bit");
   }
-  return (out);
+  return out;
 }
 
 static inline std::ostream &operator<<(std::ostream &out, Bits< wchar_t & > const v)
@@ -237,7 +237,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< wchar_t & > cons
   } else {
     static_assert(sizeof(wchar_t) <= 4, "wchar_t is greater that 32 bit");
   }
-  return (out);
+  return out;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -254,7 +254,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< C< T > & > const
   for (auto i : v.t) {
     out << bits(i);
   }
-  return (out);
+  return out;
 }
 
 template < class T, template < typename ELEM, typename ALLOC = std::allocator< ELEM > > class C >
@@ -268,7 +268,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< const C< T > & >
   for (auto i : v.t) {
     out << bits(i);
   }
-  return (out);
+  return out;
 }
 
 template < class T, template < typename ELEM, typename ALLOC = std::allocator< ELEM > > class C >
@@ -304,7 +304,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< C< T, N > & > co
   for (auto i : v.t) {
     out << bits(i);
   }
-  return (out);
+  return out;
 }
 
 template < class T, std::size_t N, template < typename ELEM, std::size_t > class C >
@@ -318,7 +318,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< const C< T, N > 
   for (auto i : v.t) {
     out << bits(i);
   }
-  return (out);
+  return out;
 }
 
 template < class T, std::size_t N, template < typename ELEM, std::size_t > class C >
@@ -359,7 +359,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< M< K, V > & > co
   for (auto i : m.t) {
     out << bits(i.first) << bits(i.second);
   }
-  return (out);
+  return out;
 }
 
 template < template < class K, class V, class Compare = std::less< K >,
@@ -377,7 +377,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< M< K, const V > 
   for (auto i : m.t) {
     out << bits(i.first) << bits(i.second);
   }
-  return (out);
+  return out;
 }
 
 template < template < class K, class V, class Compare = std::less< K >,
@@ -423,7 +423,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< M< K, V > & > co
   for (auto i : m.t) {
     out << bits(i.first) << bits(i.second);
   }
-  return (out);
+  return out;
 }
 
 template < template < class K, class T, class Hash = std::hash< K >, class Pred = std::equal_to< K >,
@@ -441,7 +441,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< M< K, const V > 
   for (auto i : m.t) {
     out << bits(i.first) << bits(i.second);
   }
-  return (out);
+  return out;
 }
 
 template < template < class K, class T, class Hash = std::hash< K >, class Pred = std::equal_to< K >,
@@ -480,7 +480,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< std::pair< K, V 
 #endif
   out << bits(wrapped.t.first);
   out << bits(wrapped.t.second);
-  return (out);
+  return out;
 }
 
 template < typename K, typename V >

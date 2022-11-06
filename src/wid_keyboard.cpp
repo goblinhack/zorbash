@@ -480,7 +480,7 @@ static uint8_t wid_keyboard_parent_joy_button(Widp w, int x, int y)
     wid_mouse_warp(ctx->b);
   }
 
-  return (ret);
+  return ret;
 }
 
 static uint8_t wid_keyboard_button_key_event(Widp w, const SDL_Keysym *key)
@@ -602,7 +602,7 @@ static uint8_t wid_keyboard_button_joy_button_event(Widp w, int x, int y)
     wid_mouse_warp(ctx->b);
   }
 
-  return (ret);
+  return ret;
 }
 
 static uint8_t wid_keyboard_text_input_key_event(Widp w, const SDL_Keysym *key)
@@ -928,5 +928,5 @@ Widp wid_keyboard(const std::wstring &text, const std::wstring &title, wid_keybo
 
   ctx->created = time_ms();
 
-  return (window);
+  return window;
 }

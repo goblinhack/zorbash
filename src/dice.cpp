@@ -81,7 +81,7 @@ bool d20roll_under(int stat)
 
 Dice::Dice(void) = default;
 
-std::string Dice::to_string(void) const { return (hd); }
+std::string Dice::to_string(void) const { return hd; }
 
 Dice::Dice(std::string s)
 {
@@ -137,7 +137,7 @@ int Dice::roll(void) const
     tot += pcg_random_range(0, sides) + 1;
   }
   tot += stat;
-  return (tot);
+  return tot;
 }
 
 int Dice::max_roll(void) const { return ndice * sides + stat; }

@@ -273,7 +273,7 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
   }
 
   thing_possible_init();
-  return (ret);
+  return ret;
 }
 
 bool things_overlap(const Thingp A, point A_at, const Thingp B) { return A_at == B->curr_at; }
