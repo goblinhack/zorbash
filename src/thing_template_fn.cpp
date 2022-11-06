@@ -284,6 +284,7 @@ int Tp::is_able_to_jump_randomly_chance_d1000(void) const { return _is_able_to_j
 int Tp::is_able_to_jump(void) const { return _is_able_to_jump; }
 int Tp::is_able_to_jump_without_tiring(void) const { return _is_able_to_jump_without_tiring; }
 int Tp::is_able_to_learn_skills(void) const { return _is_able_to_learn_skills; }
+int Tp::is_able_to_live_out_of_water(void) const { return _is_able_to_live_out_of_water; }
 int Tp::is_able_to_melt(void) const { return _is_able_to_melt; }
 int Tp::is_able_to_move_diagonally(void) const { return _is_able_to_move_diagonally; }
 int Tp::is_able_to_open_doors(void) const { return _is_able_to_open_doors; }
@@ -680,7 +681,6 @@ int Tp::unused_flag3(void) const { return _unused_flag3; }
 int Tp::unused_flag40(void) const { return _unused_flag40; }
 int Tp::unused_flag48(void) const { return _unused_flag48; }
 int Tp::unused_flag4(void) const { return _unused_flag4; }
-int Tp::unused_flag56(void) const { return _unused_flag56; }
 int Tp::unused_flag5(void) const { return _unused_flag5; }
 int Tp::unused_flag6(void) const { return _unused_flag6; }
 int Tp::unused_flag7(void) const { return _unused_flag7; }
@@ -823,6 +823,7 @@ void Tp::is_able_to_jump_randomly_chance_d1000_set(int v) { _is_able_to_jump_ran
 void Tp::is_able_to_jump_set(int v) { _is_able_to_jump = v; }
 void Tp::is_able_to_jump_without_tiring_set(int v) { _is_able_to_jump_without_tiring = v; }
 void Tp::is_able_to_learn_skills_set(int v) { _is_able_to_learn_skills = v; }
+void Tp::is_able_to_live_out_of_water_set(int v) { _is_able_to_live_out_of_water = v; }
 void Tp::is_able_to_melt_set(int v) { _is_able_to_melt = v; }
 void Tp::is_able_to_move_diagonally_set(int v) { _is_able_to_move_diagonally = v; }
 void Tp::is_able_to_open_doors_set(int v) { _is_able_to_open_doors = v; }
@@ -1355,7 +1356,6 @@ void Tp::unused_flag3_set(int v) { _unused_flag3 = v; }
 void Tp::unused_flag40_set(int v) { _unused_flag40 = v; }
 void Tp::unused_flag48_set(int v) { _unused_flag48 = v; }
 void Tp::unused_flag4_set(int v) { _unused_flag4 = v; }
-void Tp::unused_flag56_set(int v) { _unused_flag56 = v; }
 void Tp::unused_flag5_set(int v) { _unused_flag5 = v; }
 void Tp::unused_flag6_set(int v) { _unused_flag6 = v; }
 void Tp::unused_flag7_set(int v) { _unused_flag7 = v; }

@@ -134,6 +134,7 @@ PyObject *thing_is_able_to_jump_randomly_chance_d1000(PyObject *obj, PyObject *a
 PyObject *thing_is_able_to_jump_randomly(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_jump_without_tiring(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_learn_skills(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_live_out_of_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_melt(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_move_diagonally(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_open_doors(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -574,7 +575,6 @@ PyObject *thing_unused_flag3(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag40(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag48(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag4(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag56(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag5(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);

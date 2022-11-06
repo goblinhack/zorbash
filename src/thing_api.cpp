@@ -1584,10 +1584,10 @@ int Thing::bite_amount(void)
   return (tp()->bite_amount());
 }
 
-int Thing::unused_flag56(void)
+int Thing::is_able_to_live_out_of_water(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag56());
+  return (tp()->is_able_to_live_out_of_water());
 }
 
 int Thing::is_able_to_rest(void)

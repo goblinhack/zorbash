@@ -1218,6 +1218,7 @@ public:
   int is_able_to_jump(void);
   int is_able_to_jump_without_tiring(void);
   int is_able_to_learn_skills(void);
+  int is_able_to_live_out_of_water(void);
   int is_able_to_melt(void);
   int is_able_to_move_diagonally(void);
   int is_able_to_open_doors(void);
@@ -1992,7 +1993,6 @@ public:
   int unused_flag40(void);
   int unused_flag48(void);
   int unused_flag4(void);
-  int unused_flag56(void);
   int unused_flag5(void);
   int unused_flag6(void);
   int unused_flag7(void);

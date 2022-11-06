@@ -12,7 +12,16 @@
 void Thing::water_tick(void)
 {
   TRACE_NO_INDENT();
+
   if (! level->is_water(curr_at.x, curr_at.y)) {
+    //
+    // Check for fish out of water.
+    //
+    if (is_always_submerged()) {
+      if (! is_able_to_live_out_of_water()) {
+        dead("out of water");
+      }
+    }
     return;
   }
 

@@ -336,7 +336,7 @@ int file_size(const char *filename)
   struct stat buf;
 
   if (stat(filename, &buf) >= 0) {
-    return int (buf.st_size);
+    return int(buf.st_size);
   }
 
   return (-1);

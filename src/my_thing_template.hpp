@@ -235,6 +235,7 @@ private:
   int _is_able_to_jump_randomly_chance_d1000 {};
   int _is_able_to_jump_without_tiring {};
   int _is_able_to_learn_skills {};
+  int _is_able_to_live_out_of_water {};
   int _is_able_to_melt {};
   int _is_able_to_move_diagonally {};
   int _is_able_to_open_doors {};
@@ -632,7 +633,6 @@ private:
   int _unused_flag40 {};
   int _unused_flag48 {};
   int _unused_flag5 {};
-  int _unused_flag56 {};
   int _unused_flag6 {};
   int _unused_flag7 {};
   int _unused_flag8 {};
@@ -1254,6 +1254,7 @@ public:
   int is_able_to_jump(void) const;
   int is_able_to_jump_without_tiring(void) const;
   int is_able_to_learn_skills(void) const;
+  int is_able_to_live_out_of_water(void) const;
   int is_able_to_melt(void) const;
   int is_able_to_move_diagonally(void) const;
   int is_able_to_open_doors(void) const;
@@ -1650,7 +1651,6 @@ public:
   int unused_flag40(void) const;
   int unused_flag48(void) const;
   int unused_flag4(void) const;
-  int unused_flag56(void) const;
   int unused_flag5(void) const;
   int unused_flag6(void) const;
   int unused_flag7(void) const;
@@ -1793,6 +1793,7 @@ public:
   void is_able_to_jump_set(int v);
   void is_able_to_jump_without_tiring_set(int v);
   void is_able_to_learn_skills_set(int v);
+  void is_able_to_live_out_of_water_set(int v);
   void is_able_to_melt_set(int v);
   void is_able_to_move_diagonally_set(int v);
   void is_able_to_open_doors_set(int v);
@@ -2326,7 +2327,6 @@ public:
   void unused_flag40_set(int v);
   void unused_flag48_set(int v);
   void unused_flag4_set(int v);
-  void unused_flag56_set(int v);
   void unused_flag5_set(int v);
   void unused_flag6_set(int v);
   void unused_flag7_set(int v);

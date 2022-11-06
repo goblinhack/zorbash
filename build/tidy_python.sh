@@ -541,7 +541,7 @@ do
       unused_flag40 \
       unused_flag48 \
       unused_flag5 \
-      unused_flag56 \
+      is_able_to_live_out_of_water \
       unused_flag6 \
       unused_flag7 \
       unused_flag8 \

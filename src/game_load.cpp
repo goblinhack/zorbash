@@ -44,7 +44,7 @@ std::array< bool, UI_WID_SAVE_SLOTS > slot_valid;
     in >> bits(magic);                                                                                               \
     if (magic != m) {                                                                                                \
       game_load_error = "bad " what " magic expected: " + std::to_string(m) + " got " + std::to_string(magic);       \
-      return in;                                                                                                   \
+      return in;                                                                                                     \
     }                                                                                                                \
   }
 
