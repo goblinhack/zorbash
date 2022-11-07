@@ -127,6 +127,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.tile(self,
             ascii_fg_char="V", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".4", delay_ms=delay)
+
     my.tile(self,
             ascii_fg_char="v", ascii_bg_col_name="", ascii_fg_col_name="brown",
             tile=name + ".dead", is_dead=True)

@@ -111,15 +111,20 @@ void Thing::destroy_spawned(Thingp defeater)
   //
   // Slow, but not used too often
   //
-  {
-    for (auto p : level->all_things) {
-      auto spawner = p.second;
-      auto o       = spawner->immediate_spawned_owner();
-      if (o && (o == this)) {
-        spawner->remove_spawner_owner();
-        spawner->dead(defeater, "its spawner died");
-      }
+  std::vector< Thingp > things;
+
+  for (auto p : level->all_things) {
+    auto spawner = p.second;
+    auto o       = spawner->immediate_spawned_owner();
+    if (o && (o == this)) {
+      things.push_back(spawner);
     }
+  }
+
+  TRACE_NO_INDENT();
+  for (auto spawner : things) {
+    spawner->remove_spawner_owner();
+    spawner->dead(defeater, "its spawner died");
   }
 }
 

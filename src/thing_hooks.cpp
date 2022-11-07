@@ -212,6 +212,7 @@ void Thing::remove_all_references()
     {
       for (auto p : level->all_things) {
         auto t = p.second;
+        verify(MTYPE_THING, t);
         auto o = t->immediate_owner();
         if (o == this) {
           t->remove_owner();
@@ -229,6 +230,7 @@ void Thing::remove_all_references()
     {
       for (auto p : level->all_things) {
         auto t = p.second;
+        verify(MTYPE_THING, t);
         auto o = t->immediate_mob();
         if (o == this) {
           t->remove_mob();
@@ -246,6 +248,7 @@ void Thing::remove_all_references()
     {
       for (auto p : level->all_things) {
         auto t = p.second;
+        verify(MTYPE_THING, t);
         auto o = t->leader();
         if (o == this) {
           t->remove_leader();
@@ -263,6 +266,7 @@ void Thing::remove_all_references()
     {
       for (auto p : level->all_things) {
         auto t = p.second;
+        verify(MTYPE_THING, t);
         auto o = t->immediate_spawned_owner();
         if (o == this) {
           t->remove_spawner_owner();
@@ -276,6 +280,7 @@ void Thing::remove_all_references()
     {
       for (auto p : level->all_things) {
         auto t = p.second;
+        verify(MTYPE_THING, t);
         if (t == this) {
           continue;
         }

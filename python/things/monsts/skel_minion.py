@@ -259,17 +259,17 @@ def tp_init(name, text_long_name):
             tile="skeleton.dead.4", is_dead=True, delay_ms=delay, is_end_of_anim=True)
 
     my.tile(self,
-            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="gray50",
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile="skeleton.dead.4", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="gray50",
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile="skeleton.dead.3", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="gray50",
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile="skeleton.dead.2", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
             tile="skeleton.dead.1",
-            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="gray50",
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
             is_resurrecting=True,
             is_end_of_anim=True,
             is_alive_on_end_of_anim=True)

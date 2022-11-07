@@ -161,9 +161,9 @@ void Thing::remove_mob(void)
 void Thing::destroy_minions(Thingp defeater)
 {
   TRACE_NO_INDENT();
+
   //
-  // Warning defeater can be nullptr - e.g. when a mob falls to
-  // a new level
+  // Warning defeater can be nullptr - e.g. when a mob falls to a new level
   //
 
   if (! is_mob()) {
@@ -177,16 +177,23 @@ void Thing::destroy_minions(Thingp defeater)
   //
   // Slow, but not used too often
   //
-  {
-    for (auto p : level->all_things) {
-      auto minion = p.second;
-      auto o      = minion->immediate_mob();
-      if (o && (o == this)) {
-        minion->remove_mob();
-        minion->is_resurrection_blocked = true;
-        minion->dead(defeater, "its creator was destroyed");
-      }
+  std::vector< Thingp > minions;
+
+  for (auto p : level->all_things) {
+    auto minion = p.second;
+    verify(MTYPE_THING, minion);
+
+    auto o = minion->immediate_mob();
+    if (o && (o == this)) {
+      minions.push_back(minion);
     }
+  }
+
+  TRACE_NO_INDENT();
+  for (auto minion : minions) {
+    minion->remove_mob();
+    minion->is_resurrection_blocked = true;
+    minion->dead(defeater, "its creator was destroyed");
   }
 }
 

@@ -34,7 +34,7 @@
 #define MAP_ROOM_HEIGHT 13 // Max room dimensions
 #define MAP_ROOM_WIDTH  13 // Max room dimensions
 
-#define MAP_BORDER_ASCII_AUTO_SCROLL 8 // Max room dimensions
+#define MAP_BORDER_ASCII_AUTO_SCROLL 8 // Ascii map scroll threshold
 
 #define LEVELS_ACROSS MAP_WIDTH // World size; no world yet...
 #define LEVELS_DOWN   MAP_HEIGHT

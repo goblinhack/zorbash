@@ -105,25 +105,25 @@ def tp_init(name, text_long_name):
 
     delay = 300
     my.tile(self,
-            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray40",
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray70",
             tile="gargoyle.moving.1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray40",
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray70",
             tile="gargoyle.moving.2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray40",
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray70",
             tile="gargoyle.moving.3", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray40",
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray70",
             tile="gargoyle.moving.4", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray40",
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray70",
             tile="gargoyle.moving.5", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray40",
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray70",
             tile="gargoyle.moving.6", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray40",
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray70",
             tile="gargoyle.moving.7", delay_ms=delay)
     my.tile(self,
             ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray50",

@@ -189,6 +189,7 @@ def tp_init(name, text_long_name):
     my.tile(self,
             ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="pink",
             tile="teletoad.9", delay_ms=delay)
+
     my.tile(self,
             ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile="teletoad.dead", is_dead=True, is_end_of_anim=True)

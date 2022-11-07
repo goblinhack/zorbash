@@ -150,20 +150,21 @@ def tp_init(name, text_long_name):
 
     delay = 150
     my.tile(self,
-            ascii_fg_char="S", ascii_bg_col_name="", ascii_fg_col_name="gray40",
+            ascii_fg_char="S", ascii_bg_col_name="", ascii_fg_col_name="brown",
             tile="spider_giant.1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="S", ascii_bg_col_name="", ascii_fg_col_name="gray40",
+            ascii_fg_char="S", ascii_bg_col_name="", ascii_fg_col_name="brown",
             tile="spider_giant.2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="S", ascii_bg_col_name="", ascii_fg_col_name="gray40",
+            ascii_fg_char="S", ascii_bg_col_name="", ascii_fg_col_name="brown",
             tile="spider_giant.3", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="S", ascii_bg_col_name="", ascii_fg_col_name="gray40",
+            ascii_fg_char="S", ascii_bg_col_name="", ascii_fg_col_name="brown",
             tile="spider_giant.4", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="S", ascii_bg_col_name="", ascii_fg_col_name="gray40",
+            ascii_fg_char="S", ascii_bg_col_name="", ascii_fg_col_name="brown",
             tile="spider_giant.5", delay_ms=delay)
+
     my.tile(self,
             ascii_fg_char="S", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile="spider_giant.dead", is_dead=True, delay_ms=delay)

@@ -83,7 +83,7 @@ void Game::place_player(void)
         level->thing_new("boots_jumping", point(x + 1, y - 2));
         level->thing_new("boots_teleport", point(x + 1, y - 1));
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("gauntlets_lion", point(x, y - 2));
         t->carry(w);
         t->enchant_without_stone(w);
@@ -130,8 +130,10 @@ void Game::place_player(void)
         t->carry(w);
       }
       if (0) {
-        level->thing_new("ring_shield", point(x + 2, y));
-        level->thing_new("ring_poison_resist", point(x + 2, y - 1));
+        auto r1 = level->thing_new("ring_shield", point(x, y));
+        t->carry(r1);
+        auto r2 = level->thing_new("ring_poison_resist", point(x, y));
+        t->carry(r2);
       }
       if (0) {
         auto w = level->thing_new("very_broadsword", point(x, y));
