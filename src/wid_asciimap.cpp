@@ -34,7 +34,7 @@ bool wid_asciimap_init(void)
     return false;
   }
 
-  int width  = TERM_WIDTH - UI_LEFTBAR_WIDTH - UI_RIGHTBAR_WIDTH - 1;
+  int width  = TERM_WIDTH - UI_LEFTBAR_WIDTH - UI_RIGHTBAR_WIDTH - 4;
   int height = TERM_HEIGHT - UI_TOPCON_VIS_HEIGHT - 2;
 
   TRACE_AND_INDENT();
