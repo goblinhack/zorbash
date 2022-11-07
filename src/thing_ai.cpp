@@ -2083,7 +2083,10 @@ bool Thing::ai_tick(bool recursing)
     // Wake on noise? Like a player hitting a wall.
     //
     if (LEVEL_LOUDEST_SOUND - level->noisemap(curr_at) > noise_decibels_hearing()) {
-      msg("%s hears something!", text_The().c_str());
+      if (is_msg_allowed_hears_something()) {
+        msg("%s hears something!", text_The().c_str());
+      }
+
       if (! wake("heard something")) {
         return false;
       }
@@ -2093,7 +2096,9 @@ bool Thing::ai_tick(bool recursing)
     // Wake up if the flames are nearby
     //
     if (environ_avoids_fire() && level->heatmap(curr_at)) {
-      msg("%s senses danger!", text_The().c_str());
+      if (is_msg_allowed_senses_danger()) {
+        msg("%s senses danger!", text_The().c_str());
+      }
       if (! wake("senses heat")) {
         return false;
       }

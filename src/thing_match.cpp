@@ -751,10 +751,10 @@ bool Thing::matches(const std::string &what)
   if (unused_flag37() && (what == "unused_flag37")) {
     return true;
   }
-  if (unused_flag38() && (what == "unused_flag38")) {
+  if (is_msg_allowed_senses_danger() && (what == "is_msg_allowed_senses_danger")) {
     return true;
   }
-  if (unused_flag39() && (what == "unused_flag39")) {
+  if (is_msg_allowed_hears_something() && (what == "is_msg_allowed_hears_something")) {
     return true;
   }
   if (unused_flag40() && (what == "unused_flag40")) {
@@ -2252,11 +2252,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag37") {
     return &Thing::unused_flag37;
   }
-  if (what == "unused_flag38") {
-    return &Thing::unused_flag38;
+  if (what == "is_msg_allowed_senses_danger") {
+    return &Thing::is_msg_allowed_senses_danger;
   }
-  if (what == "unused_flag39") {
-    return &Thing::unused_flag39;
+  if (what == "is_msg_allowed_hears_something") {
+    return &Thing::is_msg_allowed_hears_something;
   }
   if (what == "unused_flag3") {
     return &Thing::unused_flag3;

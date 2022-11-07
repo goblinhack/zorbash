@@ -440,9 +440,11 @@ private:
   int _is_monst_pack {};
   int _is_moveable {};
   int _is_msg {};
+  int _is_msg_allowed_hears_something {};
   int _is_msg_allowed_is_seen {};
   int _is_msg_allowed_is_surprised {};
   int _is_msg_allowed_is_wounded {};
+  int _is_msg_allowed_senses_danger {};
   int _is_necrotic_danger_level {};
   int _is_no_tile {};
   int _is_obs_destructable {};
@@ -627,8 +629,6 @@ private:
   int _unused_flag35 {};
   int _unused_flag36 {};
   int _unused_flag37 {};
-  int _unused_flag38 {};
-  int _unused_flag39 {};
   int _unused_flag4 {};
   int _unused_flag40 {};
   int _unused_flag48 {};
@@ -1457,9 +1457,11 @@ public:
   int is_monst_pack(void) const;
   int is_monst(void) const;
   int is_moveable(void) const;
+  int is_msg_allowed_hears_something(void) const;
   int is_msg_allowed_is_seen(void) const;
   int is_msg_allowed_is_surprised(void) const;
   int is_msg_allowed_is_wounded(void) const;
+  int is_msg_allowed_senses_danger(void) const;
   int is_msg(void) const;
   int is_necrotic_danger_level(void) const;
   int is_no_tile(void) const;
@@ -1645,8 +1647,6 @@ public:
   int unused_flag35(void) const;
   int unused_flag36(void) const;
   int unused_flag37(void) const;
-  int unused_flag38(void) const;
-  int unused_flag39(void) const;
   int unused_flag3(void) const;
   int unused_flag40(void) const;
   int unused_flag48(void) const;
@@ -1997,9 +1997,11 @@ public:
   void is_monst_pack_set(int v);
   void is_monst_set(int v);
   void is_moveable_set(int v);
+  void is_msg_allowed_hears_something_set(int v);
   void is_msg_allowed_is_seen_set(int v);
   void is_msg_allowed_is_surprised_set(int v);
   void is_msg_allowed_is_wounded_set(int v);
+  void is_msg_allowed_senses_danger_set(int v);
   void is_msg_set(int v);
   void is_necrotic_danger_level_set(int v);
   void is_no_tile_set(int v);
@@ -2321,8 +2323,6 @@ public:
   void unused_flag35_set(int v);
   void unused_flag36_set(int v);
   void unused_flag37_set(int v);
-  void unused_flag38_set(int v);
-  void unused_flag39_set(int v);
   void unused_flag3_set(int v);
   void unused_flag40_set(int v);
   void unused_flag48_set(int v);

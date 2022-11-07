@@ -1476,16 +1476,16 @@ int Thing::unused_flag37(void)
   return (tp()->unused_flag37());
 }
 
-int Thing::unused_flag38(void)
+int Thing::is_msg_allowed_senses_danger(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag38());
+  return (tp()->is_msg_allowed_senses_danger());
 }
 
-int Thing::unused_flag39(void)
+int Thing::is_msg_allowed_hears_something(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag39());
+  return (tp()->is_msg_allowed_hears_something());
 }
 
 int Thing::unused_flag40(void)

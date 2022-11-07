@@ -104,6 +104,8 @@ def tp_init(name, text_long_name):
     my.is_monst_class_c(self, True)
     my.is_monst(self, True)
     my.is_moveable(self, True)
+    my.is_msg_allowed_hears_something(self, True)
+    my.is_msg_allowed_senses_danger(self, True)
     my.is_soft(self, True)
     my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)

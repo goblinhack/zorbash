@@ -487,9 +487,11 @@ int Tp::is_monst_class_e(void) const { return _is_monst_class_e; }
 int Tp::is_monst_pack(void) const { return _is_monst_pack; }
 int Tp::is_monst(void) const { return _is_monst; }
 int Tp::is_moveable(void) const { return _is_moveable; }
+int Tp::is_msg_allowed_hears_something(void) const { return _is_msg_allowed_hears_something; }
 int Tp::is_msg_allowed_is_seen(void) const { return _is_msg_allowed_is_seen; }
 int Tp::is_msg_allowed_is_surprised(void) const { return _is_msg_allowed_is_surprised; }
 int Tp::is_msg_allowed_is_wounded(void) const { return _is_msg_allowed_is_wounded; }
+int Tp::is_msg_allowed_senses_danger(void) const { return _is_msg_allowed_senses_danger; }
 int Tp::is_msg(void) const { return _is_msg; }
 int Tp::is_necrotic_danger_level(void) const { return _is_necrotic_danger_level; }
 int Tp::is_no_tile(void) const { return _is_no_tile; }
@@ -675,8 +677,6 @@ int Tp::unused_flag34(void) const { return _unused_flag34; }
 int Tp::unused_flag35(void) const { return _unused_flag35; }
 int Tp::unused_flag36(void) const { return _unused_flag36; }
 int Tp::unused_flag37(void) const { return _unused_flag37; }
-int Tp::unused_flag38(void) const { return _unused_flag38; }
-int Tp::unused_flag39(void) const { return _unused_flag39; }
 int Tp::unused_flag3(void) const { return _unused_flag3; }
 int Tp::unused_flag40(void) const { return _unused_flag40; }
 int Tp::unused_flag48(void) const { return _unused_flag48; }
@@ -1027,9 +1027,11 @@ void Tp::is_monst_class_e_set(int v) { _is_monst_class_e = v; }
 void Tp::is_monst_pack_set(int v) { _is_monst_pack = v; }
 void Tp::is_monst_set(int v) { _is_monst = v; }
 void Tp::is_moveable_set(int v) { _is_moveable = v; }
+void Tp::is_msg_allowed_hears_something_set(int v) { _is_msg_allowed_hears_something = v; }
 void Tp::is_msg_allowed_is_seen_set(int v) { _is_msg_allowed_is_seen = v; }
 void Tp::is_msg_allowed_is_surprised_set(int v) { _is_msg_allowed_is_surprised = v; }
 void Tp::is_msg_allowed_is_wounded_set(int v) { _is_msg_allowed_is_wounded = v; }
+void Tp::is_msg_allowed_senses_danger_set(int v) { _is_msg_allowed_senses_danger = v; }
 void Tp::is_msg_set(int v) { _is_msg = v; }
 void Tp::is_necrotic_danger_level_set(int v) { _is_necrotic_danger_level = v; }
 void Tp::is_no_tile_set(int v) { _is_no_tile = v; }
@@ -1350,8 +1352,6 @@ void Tp::unused_flag34_set(int v) { _unused_flag34 = v; }
 void Tp::unused_flag35_set(int v) { _unused_flag35 = v; }
 void Tp::unused_flag36_set(int v) { _unused_flag36 = v; }
 void Tp::unused_flag37_set(int v) { _unused_flag37 = v; }
-void Tp::unused_flag38_set(int v) { _unused_flag38 = v; }
-void Tp::unused_flag39_set(int v) { _unused_flag39 = v; }
 void Tp::unused_flag3_set(int v) { _unused_flag3 = v; }
 void Tp::unused_flag40_set(int v) { _unused_flag40 = v; }
 void Tp::unused_flag48_set(int v) { _unused_flag48 = v; }

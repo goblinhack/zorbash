@@ -535,8 +535,8 @@ do
       unused_flag35 \
       unused_flag36 \
       unused_flag37 \
-      unused_flag38 \
-      unused_flag39 \
+      is_msg_allowed_senses_danger \
+      is_msg_allowed_hears_something \
       unused_flag4 \
       unused_flag40 \
       unused_flag48 \

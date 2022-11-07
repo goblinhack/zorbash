@@ -1444,9 +1444,11 @@ public:
   int is_monst_pack(void);
   int is_monst(void);
   int is_moveable(void);
+  int is_msg_allowed_hears_something(void);
   int is_msg_allowed_is_seen(void);
   int is_msg_allowed_is_surprised(void);
   int is_msg_allowed_is_wounded(void);
+  int is_msg_allowed_senses_danger(void);
   int is_msg(void);
   int is_necrotic_danger_level(void);
   int is_no_tile(void);
@@ -1987,8 +1989,6 @@ public:
   int unused_flag35(void);
   int unused_flag36(void);
   int unused_flag37(void);
-  int unused_flag38(void);
-  int unused_flag39(void);
   int unused_flag3(void);
   int unused_flag40(void);
   int unused_flag48(void);
