@@ -171,7 +171,7 @@ PyObject *level_is_msg_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_necrotic_danger_level_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_no_tile_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_obs_destructable_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_obstacle_when_dead_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_obs_when_dead_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_obs_wall_or_door_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_on_firing_at_something(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_openable_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -253,7 +253,7 @@ PyObject *level_is_pillar_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_flat_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_target_radial_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_staff_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_throw_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_obs_in_the_way_for_throwing_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_freeze_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_gelatinous_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_plant_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -265,7 +265,7 @@ PyObject *level_is_block_of_ice_at(PyObject *obj, PyObject *args, PyObject *keyw
 PyObject *level_is_able_to_break_out_of_ice_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_brittle_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_block_of_ice_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_jump_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_obs_in_the_way_for_jumping_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cursor_path_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywds);
 #endif

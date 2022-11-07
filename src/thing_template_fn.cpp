@@ -460,7 +460,6 @@ int Tp::is_item_organic(void) const { return _is_item_organic; }
 int Tp::is_item_targetted(void) const { return _is_item_targetted; }
 int Tp::is_item(void) const { return _is_item; }
 int Tp::is_jelly(void) const { return _is_jelly; }
-int Tp::is_jump_blocker(void) const { return _is_jump_blocker; }
 int Tp::is_key_special(void) const { return _is_key_special; }
 int Tp::is_key(void) const { return _is_key; }
 int Tp::is_laser(void) const { return _is_laser; }
@@ -498,8 +497,11 @@ int Tp::is_no_tile(void) const { return _is_no_tile; }
 int Tp::is_obs_destructable(void) const { return _is_obs_destructable; }
 int Tp::is_obs_for_jump_landing(void) const { return _is_obs_for_jump_landing; }
 int Tp::is_obs_for_shoving(void) const { return _is_obs_for_shoving; }
-int Tp::is_obstacle_when_dead(void) const { return _is_obstacle_when_dead; }
+int Tp::is_obs_in_the_way_for_firing(void) const { return _is_obs_in_the_way_for_firing; }
+int Tp::is_obs_in_the_way_for_jumping(void) const { return _is_obs_in_the_way_for_jumping; }
+int Tp::is_obs_in_the_way_for_throwing(void) const { return _is_obs_in_the_way_for_throwing; }
 int Tp::is_obs_wall_or_door(void) const { return _is_obs_wall_or_door; }
+int Tp::is_obs_when_dead(void) const { return _is_obs_when_dead; }
 int Tp::is_openable(void) const { return _is_openable; }
 int Tp::is_organic(void) const { return _is_organic; }
 int Tp::is_pillar(void) const { return _is_pillar; }
@@ -547,7 +549,6 @@ int Tp::is_tentacle(void) const { return _is_tentacle; }
 int Tp::is_the_grid(void) const { return _is_the_grid; }
 int Tp::is_thief(void) const { return _is_thief; }
 int Tp::is_throwable(void) const { return _is_throwable; }
-int Tp::is_throw_blocker(void) const { return _is_throw_blocker; }
 int Tp::is_tickable(void) const { return _is_tickable; }
 int Tp::is_tireless(void) const { return _is_tireless; }
 int Tp::is_tmp_thing(void) const { return _is_tmp_thing; }
@@ -676,7 +677,6 @@ int Tp::unused_flag33(void) const { return _unused_flag33; }
 int Tp::unused_flag34(void) const { return _unused_flag34; }
 int Tp::unused_flag35(void) const { return _unused_flag35; }
 int Tp::unused_flag36(void) const { return _unused_flag36; }
-int Tp::unused_flag37(void) const { return _unused_flag37; }
 int Tp::unused_flag3(void) const { return _unused_flag3; }
 int Tp::unused_flag40(void) const { return _unused_flag40; }
 int Tp::unused_flag48(void) const { return _unused_flag48; }
@@ -1000,7 +1000,6 @@ void Tp::is_item_organic_set(int v) { _is_item_organic = v; }
 void Tp::is_item_set(int v) { _is_item = v; }
 void Tp::is_item_targetted_set(int v) { _is_item_targetted = v; }
 void Tp::is_jelly_set(int v) { _is_jelly = v; }
-void Tp::is_jump_blocker_set(int v) { _is_jump_blocker = v; }
 void Tp::is_key_set(int v) { _is_key = v; }
 void Tp::is_key_special_set(int v) { _is_key_special = v; }
 void Tp::is_laser_set(int v) { _is_laser = v; }
@@ -1038,8 +1037,11 @@ void Tp::is_no_tile_set(int v) { _is_no_tile = v; }
 void Tp::is_obs_destructable_set(int v) { _is_obs_destructable = v; }
 void Tp::is_obs_for_jump_landing_set(int v) { _is_obs_for_jump_landing = v; }
 void Tp::is_obs_for_shoving_set(int v) { _is_obs_for_shoving = v; }
-void Tp::is_obstacle_when_dead_set(int v) { _is_obstacle_when_dead = v; }
+void Tp::is_obs_in_the_way_for_firing_set(int v) { _is_obs_in_the_way_for_firing = v; }
+void Tp::is_obs_in_the_way_for_jumping_set(int v) { _is_obs_in_the_way_for_jumping = v; }
+void Tp::is_obs_in_the_way_for_throwing_set(int v) { _is_obs_in_the_way_for_throwing = v; }
 void Tp::is_obs_wall_or_door_set(int v) { _is_obs_wall_or_door = v; }
+void Tp::is_obs_when_dead_set(int v) { _is_obs_when_dead = v; }
 void Tp::is_openable_set(int v) { _is_openable = v; }
 void Tp::is_organic_set(int v) { _is_organic = v; }
 void Tp::is_pillar_set(int v) { _is_pillar = v; }
@@ -1087,7 +1089,6 @@ void Tp::is_tentacle_set(int v) { _is_tentacle = v; }
 void Tp::is_the_grid_set(int v) { _is_the_grid = v; }
 void Tp::is_thief_set(int v) { _is_thief = v; }
 void Tp::is_throwable_set(int v) { _is_throwable = v; }
-void Tp::is_throw_blocker_set(int v) { _is_throw_blocker = v; }
 void Tp::is_tickable_set(int v) { _is_tickable = v; }
 void Tp::is_tireless_set(int v) { _is_tireless = v; }
 void Tp::is_tmp_thing_set(int v) { _is_tmp_thing = v; }
@@ -1351,7 +1352,6 @@ void Tp::unused_flag33_set(int v) { _unused_flag33 = v; }
 void Tp::unused_flag34_set(int v) { _unused_flag34 = v; }
 void Tp::unused_flag35_set(int v) { _unused_flag35 = v; }
 void Tp::unused_flag36_set(int v) { _unused_flag36 = v; }
-void Tp::unused_flag37_set(int v) { _unused_flag37 = v; }
 void Tp::unused_flag3_set(int v) { _unused_flag3 = v; }
 void Tp::unused_flag40_set(int v) { _unused_flag40 = v; }
 void Tp::unused_flag48_set(int v) { _unused_flag48 = v; }

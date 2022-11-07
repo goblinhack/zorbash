@@ -114,6 +114,7 @@ def tp_init(name, text_long_name):
     my.move_speed(self, 50)
     my.noise_decibels_hearing(self, 40)
     my.normal_placement_rules(self, True)
+    my.is_obs_when_dead(self, True)
     my.on_awake_do(self, "me.on_awake()")
     my.on_death_do(self, "me.on_death()")
     my.on_you_are_hit_but_dodge_it_do(self, "me.on_you_are_hit_but_dodge_it_do()")

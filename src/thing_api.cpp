@@ -1470,10 +1470,10 @@ int Thing::unused_flag36(void)
   return (tp()->unused_flag36());
 }
 
-int Thing::unused_flag37(void)
+int Thing::is_obs_in_the_way_for_firing(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag37());
+  return (tp()->is_obs_in_the_way_for_firing());
 }
 
 int Thing::is_msg_allowed_senses_danger(void)
@@ -1698,10 +1698,10 @@ int Thing::appearing_chance_d1000(void)
   return (tp()->appearing_chance_d1000());
 }
 
-int Thing::is_throw_blocker(void)
+int Thing::is_obs_in_the_way_for_throwing(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_throw_blocker());
+  return (tp()->is_obs_in_the_way_for_throwing());
 }
 
 int Thing::is_able_to_freeze(void)
@@ -1794,10 +1794,10 @@ int Thing::gfx_ascii_fade_with_dist(void)
   return (tp()->gfx_ascii_fade_with_dist());
 }
 
-int Thing::is_jump_blocker(void)
+int Thing::is_obs_in_the_way_for_jumping(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_jump_blocker());
+  return (tp()->is_obs_in_the_way_for_jumping());
 }
 
 int Thing::tick_prio(void)
@@ -2093,10 +2093,10 @@ int Thing::noise_on_dropping(void)
   return (tp()->noise_on_dropping());
 }
 
-int Thing::is_obstacle_when_dead(void)
+int Thing::is_obs_when_dead(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_obstacle_when_dead());
+  return (tp()->is_obs_when_dead());
 }
 
 int Thing::is_green_blood(void)

@@ -1417,7 +1417,6 @@ public:
   int is_item_targetted(void);
   int is_item(void);
   int is_jelly(void);
-  int is_jump_blocker(void);
   int is_key_special(void);
   int is_key(void);
   int is_laser(void);
@@ -1455,8 +1454,11 @@ public:
   int is_obs_destructable(void);
   int is_obs_for_jump_landing(void);
   int is_obs_for_shoving(void);
-  int is_obstacle_when_dead(void);
+  int is_obs_in_the_way_for_firing(void);
+  int is_obs_in_the_way_for_jumping(void);
+  int is_obs_in_the_way_for_throwing(void);
   int is_obs_wall_or_door(void);
+  int is_obs_when_dead(void);
   int is_openable(void);
   int is_organic(void);
   int is_pillar(void);
@@ -1504,7 +1506,6 @@ public:
   int is_tentacle(void);
   int is_thief(void);
   int is_throwable(void);
-  int is_throw_blocker(void);
   int is_tickable(void);
   int is_tireless(void);
   int is_tmp_thing(void);
@@ -1988,7 +1989,6 @@ public:
   int unused_flag34(void);
   int unused_flag35(void);
   int unused_flag36(void);
-  int unused_flag37(void);
   int unused_flag3(void);
   int unused_flag40(void);
   int unused_flag48(void);

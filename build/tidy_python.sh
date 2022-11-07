@@ -365,7 +365,7 @@ do
       is_item_organic \
       is_item_targetted \
       is_jelly \
-      is_jump_blocker \
+      is_obs_in_the_way_for_jumping \
       is_key \
       is_key_special \
       is_laser \
@@ -401,7 +401,7 @@ do
       is_obs_destructable \
       is_obs_for_jump_landing \
       is_obs_for_shoving \
-      is_obstacle_when_dead \
+      is_obs_when_dead \
       is_obs_wall_or_door \
       is_openable \
       is_organic \
@@ -449,7 +449,7 @@ do
       is_the_grid \
       is_thief \
       is_throwable \
-      is_throw_blocker \
+      is_obs_in_the_way_for_throwing \
       is_tickable \
       is_tireless \
       is_tmp_thing \
@@ -534,7 +534,7 @@ do
       unused_flag34 \
       unused_flag35 \
       unused_flag36 \
-      unused_flag37 \
+      is_obs_in_the_way_for_firing \
       is_msg_allowed_senses_danger \
       is_msg_allowed_hears_something \
       unused_flag4 \

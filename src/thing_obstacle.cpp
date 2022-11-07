@@ -258,7 +258,7 @@ bool Thing::collision_obstacle(Thingp it)
       //
       // Allow passing over corpses
       //
-      if (it->is_obstacle_when_dead()) {
+      if (it->is_obs_when_dead()) {
         IF_DEBUG3 { dbg("Collision obstacle (as dead): %s", it->to_short_string().c_str()); }
         return true;
       }
@@ -451,7 +451,7 @@ bool Thing::ai_obstacle(Thingp it)
       //
       // Allow passing over corpses
       //
-      if (it->is_obstacle_when_dead()) {
+      if (it->is_obs_when_dead()) {
         // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
         return true;
       }
@@ -585,7 +585,7 @@ bool Tp::ai_obstacle(Thingp it)
       //
       // Allow passing over corpses
       //
-      if (it->is_obstacle_when_dead()) {
+      if (it->is_obs_when_dead()) {
         return true;
       }
     }

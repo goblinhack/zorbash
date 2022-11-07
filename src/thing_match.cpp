@@ -748,7 +748,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag36() && (what == "unused_flag36")) {
     return true;
   }
-  if (unused_flag37() && (what == "unused_flag37")) {
+  if (is_obs_in_the_way_for_firing() && (what == "is_obs_in_the_way_for_firing")) {
     return true;
   }
   if (is_msg_allowed_senses_danger() && (what == "is_msg_allowed_senses_danger")) {
@@ -853,7 +853,7 @@ bool Thing::matches(const std::string &what)
   if (appearing_chance_d1000() && (what == "appearing_chance_d1000")) {
     return true;
   }
-  if (is_throw_blocker() && (what == "is_throw_blocker")) {
+  if (is_obs_in_the_way_for_throwing() && (what == "is_obs_in_the_way_for_throwing")) {
     return true;
   }
   if (is_able_to_freeze() && (what == "is_able_to_freeze")) {
@@ -895,7 +895,7 @@ bool Thing::matches(const std::string &what)
   if (is_able_to_swim() && (what == "is_able_to_swim")) {
     return true;
   }
-  if (is_jump_blocker() && (what == "is_jump_blocker")) {
+  if (is_obs_in_the_way_for_jumping() && (what == "is_obs_in_the_way_for_jumping")) {
     return true;
   }
   if (is_cursor_path_blocker() && (what == "is_cursor_path_blocker")) {
@@ -1045,7 +1045,7 @@ bool Thing::matches(const std::string &what)
   if (is_able_to_sleep() && (what == "is_able_to_sleep")) {
     return true;
   }
-  if (is_obstacle_when_dead() && (what == "is_obstacle_when_dead")) {
+  if (is_obs_when_dead() && (what == "is_obs_when_dead")) {
     return true;
   }
   if (is_gas_blocker() && (what == "is_gas_blocker")) {
@@ -1799,8 +1799,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_jelly") {
     return &Thing::is_jelly;
   }
-  if (what == "is_jump_blocker") {
-    return &Thing::is_jump_blocker;
+  if (what == "is_obs_in_the_way_for_jumping") {
+    return &Thing::is_obs_in_the_way_for_jumping;
   }
   if (what == "is_key") {
     return &Thing::is_key;
@@ -1892,8 +1892,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_obs_destructable") {
     return &Thing::is_obs_destructable;
   }
-  if (what == "is_obstacle_when_dead") {
-    return &Thing::is_obstacle_when_dead;
+  if (what == "is_obs_when_dead") {
+    return &Thing::is_obs_when_dead;
   }
   if (what == "is_obs_wall_or_door") {
     return &Thing::is_obs_wall_or_door;
@@ -2249,8 +2249,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag36") {
     return &Thing::unused_flag36;
   }
-  if (what == "unused_flag37") {
-    return &Thing::unused_flag37;
+  if (what == "is_obs_in_the_way_for_firing") {
+    return &Thing::is_obs_in_the_way_for_firing;
   }
   if (what == "is_msg_allowed_senses_danger") {
     return &Thing::is_msg_allowed_senses_danger;
@@ -2363,8 +2363,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "appearing_chance_d1000") {
     return &Thing::appearing_chance_d1000;
   }
-  if (what == "is_throw_blocker") {
-    return &Thing::is_throw_blocker;
+  if (what == "is_obs_in_the_way_for_throwing") {
+    return &Thing::is_obs_in_the_way_for_throwing;
   }
   if (what == "is_able_to_freeze") {
     return &Thing::is_able_to_freeze;

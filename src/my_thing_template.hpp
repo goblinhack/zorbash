@@ -412,7 +412,6 @@ private:
   int _is_item_organic {};
   int _is_item_targetted {};
   int _is_jelly {};
-  int _is_jump_blocker {};
   int _is_key {};
   int _is_key_special {};
   int _is_laser {};
@@ -450,8 +449,11 @@ private:
   int _is_obs_destructable {};
   int _is_obs_for_jump_landing {};
   int _is_obs_for_shoving {};
-  int _is_obstacle_when_dead {};
+  int _is_obs_in_the_way_for_firing {};
+  int _is_obs_in_the_way_for_jumping {};
+  int _is_obs_in_the_way_for_throwing {};
   int _is_obs_wall_or_door {};
+  int _is_obs_when_dead {};
   int _is_openable {};
   int _is_organic {};
   int _is_pillar {};
@@ -499,7 +501,6 @@ private:
   int _is_the_grid {};
   int _is_thief {};
   int _is_throwable {};
-  int _is_throw_blocker {};
   int _is_tickable {}; // e.g. a monst or player or something moveable
   int _is_tireless {};
   int _is_tmp_thing {};
@@ -628,7 +629,6 @@ private:
   int _unused_flag34 {};
   int _unused_flag35 {};
   int _unused_flag36 {};
-  int _unused_flag37 {};
   int _unused_flag4 {};
   int _unused_flag40 {};
   int _unused_flag48 {};
@@ -1430,7 +1430,6 @@ public:
   int is_item_targetted(void) const;
   int is_item(void) const;
   int is_jelly(void) const;
-  int is_jump_blocker(void) const;
   int is_key_special(void) const;
   int is_key(void) const;
   int is_laser(void) const;
@@ -1468,8 +1467,11 @@ public:
   int is_obs_destructable(void) const;
   int is_obs_for_jump_landing(void) const;
   int is_obs_for_shoving(void) const;
-  int is_obstacle_when_dead(void) const;
+  int is_obs_in_the_way_for_firing(void) const;
+  int is_obs_in_the_way_for_jumping(void) const;
+  int is_obs_in_the_way_for_throwing(void) const;
   int is_obs_wall_or_door(void) const;
+  int is_obs_when_dead(void) const;
   int is_openable(void) const;
   int is_organic(void) const;
   int is_pillar(void) const;
@@ -1517,7 +1519,6 @@ public:
   int is_the_grid(void) const;
   int is_thief(void) const;
   int is_throwable(void) const;
-  int is_throw_blocker(void) const;
   int is_tickable(void) const;
   int is_tireless(void) const;
   int is_tmp_thing(void) const;
@@ -1646,7 +1647,6 @@ public:
   int unused_flag34(void) const;
   int unused_flag35(void) const;
   int unused_flag36(void) const;
-  int unused_flag37(void) const;
   int unused_flag3(void) const;
   int unused_flag40(void) const;
   int unused_flag48(void) const;
@@ -1970,7 +1970,6 @@ public:
   void is_item_set(int v);
   void is_item_targetted_set(int v);
   void is_jelly_set(int v);
-  void is_jump_blocker_set(int v);
   void is_key_set(int v);
   void is_key_special_set(int v);
   void is_laser_set(int v);
@@ -2008,8 +2007,11 @@ public:
   void is_obs_destructable_set(int v);
   void is_obs_for_jump_landing_set(int v);
   void is_obs_for_shoving_set(int v);
-  void is_obstacle_when_dead_set(int v);
+  void is_obs_in_the_way_for_firing_set(int v);
+  void is_obs_in_the_way_for_jumping_set(int v);
+  void is_obs_in_the_way_for_throwing_set(int v);
   void is_obs_wall_or_door_set(int v);
+  void is_obs_when_dead_set(int v);
   void is_openable_set(int v);
   void is_organic_set(int v);
   void is_pillar_set(int v);
@@ -2057,7 +2059,6 @@ public:
   void is_the_grid_set(int v);
   void is_thief_set(int v);
   void is_throwable_set(int v);
-  void is_throw_blocker_set(int v);
   void is_tickable_set(int v);
   void is_tireless_set(int v);
   void is_tmp_thing_set(int v);
@@ -2322,7 +2323,6 @@ public:
   void unused_flag34_set(int v);
   void unused_flag35_set(int v);
   void unused_flag36_set(int v);
-  void unused_flag37_set(int v);
   void unused_flag3_set(int v);
   void unused_flag40_set(int v);
   void unused_flag48_set(int v);

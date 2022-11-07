@@ -4,6 +4,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"
 #include "my_thing.hpp"
@@ -37,10 +38,6 @@ Thingp Thing::in_the_way_for_firing(const point s, const point e, int x, int y)
     //
     // So missiles do not hit blood or maps
     //
-    if (t->is_flat()) {
-      continue;
-    }
-
     if (t->is_dead) {
       continue;
     }
@@ -49,7 +46,20 @@ Thingp Thing::in_the_way_for_firing(const point s, const point e, int x, int y)
       continue;
     }
 
-    if (t->is_pillar() || t->is_attackable_by_player() || t->is_attackable_by_monst()) {
+    if (t->is_ethereal()) {
+      continue;
+    }
+
+    if (thing_size() < (int) THING_SIZE_NORMAL) {
+      continue;
+    }
+
+    if (thing_size() > (int) THING_SIZE_NORMAL) {
+      dbg("This is in the way: %s", t->to_short_string().c_str());
+      return t;
+    }
+
+    if (t->is_obs_in_the_way_for_firing() || t->is_attackable_by_player() || t->is_attackable_by_monst()) {
       dbg("This is in the way: %s", t->to_short_string().c_str());
       return t;
     }

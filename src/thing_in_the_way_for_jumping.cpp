@@ -4,6 +4,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
@@ -34,7 +35,20 @@ Thingp Thing::in_the_way_for_jumping(const point s, const point e, int x, int y)
       continue;
     }
 
-    if (t->is_jump_blocker()) {
+    if (t->is_ethereal()) {
+      continue;
+    }
+
+    if (thing_size() < (int) THING_SIZE_NORMAL) {
+      continue;
+    }
+
+    if (thing_size() > (int) THING_SIZE_NORMAL) {
+      dbg("This is in the way: %s", t->to_short_string().c_str());
+      return t;
+    }
+
+    if (t->is_obs_in_the_way_for_jumping()) {
       dbg("This is in the way: %s", t->to_short_string().c_str());
       return t;
     }
