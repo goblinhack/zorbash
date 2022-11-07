@@ -1427,7 +1427,7 @@ void wid_actionbar_ascii_init(void)
     }
   }
 
-  int option_width  = 9;
+  int option_width  = 8;
   int option_height = 1;
 
   int w          = options * (option_width + 1);
@@ -1471,7 +1471,7 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_up(w, wid_actionbar_robot);
     wid_set_on_mouse_over_begin(w, wid_actionbar_robot_over_begin);
     wid_set_on_mouse_over_end(w, wid_actionbar_robot_over_end);
-    wid_set_text(w, "Robot");
+    wid_set_text(w, "Robo");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1492,7 +1492,7 @@ void wid_actionbar_ascii_init(void)
       wid_set_on_mouse_up(w, wid_actionbar_ascend);
       wid_set_on_mouse_over_begin(w, wid_actionbar_ascend_over_begin);
       wid_set_on_mouse_over_end(w, wid_actionbar_ascend_over_end);
-      wid_set_text(w, "Ascend");
+      wid_set_text(w, "Up");
       wid_set_mode(w, WID_MODE_OVER);
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);
@@ -1508,7 +1508,7 @@ void wid_actionbar_ascii_init(void)
       wid_set_on_mouse_up(w, wid_actionbar_descend);
       wid_set_on_mouse_over_begin(w, wid_actionbar_descend_over_begin);
       wid_set_on_mouse_over_end(w, wid_actionbar_descend_over_end);
-      wid_set_text(w, "Descend");
+      wid_set_text(w, "Down");
       wid_set_mode(w, WID_MODE_OVER);
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);
@@ -1589,7 +1589,7 @@ void wid_actionbar_ascii_init(void)
       wid_set_on_mouse_up(w, wid_actionbar_collect);
       wid_set_on_mouse_over_begin(w, wid_actionbar_collect_over_begin);
       wid_set_on_mouse_over_end(w, wid_actionbar_collect_over_end);
-      wid_set_text(w, "Collect");
+      wid_set_text(w, "Grab");
       wid_set_mode(w, WID_MODE_OVER);
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);

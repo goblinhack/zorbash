@@ -350,9 +350,9 @@ int Tp::is_carnivorous_plant(void) const { return _is_carnivorous_plant; }
 int Tp::is_carrier_of_treasure_class_a_d1000(void) const { return _is_carrier_of_treasure_class_a_d1000; }
 int Tp::is_carrier_of_treasure_class_b_d1000(void) const { return _is_carrier_of_treasure_class_b_d1000; }
 int Tp::is_carrier_of_treasure_class_c_d1000(void) const { return _is_carrier_of_treasure_class_c_d1000; }
-int Tp::is_carrier_of_weapon_class_a(void) const { return _is_carrier_of_weapon_class_a; }
-int Tp::is_carrier_of_weapon_class_b(void) const { return _is_carrier_of_weapon_class_b; }
-int Tp::is_carrier_of_weapon_class_c(void) const { return _is_carrier_of_weapon_class_c; }
+int Tp::is_carrier_of_weapon_class_a_d1000(void) const { return _is_carrier_of_weapon_class_a_d1000; }
+int Tp::is_carrier_of_weapon_class_b_d1000(void) const { return _is_carrier_of_weapon_class_b_d1000; }
+int Tp::is_carrier_of_weapon_class_c_d1000(void) const { return _is_carrier_of_weapon_class_c_d1000; }
 int Tp::is_chasm(void) const { return _is_chasm; }
 int Tp::is_cloak(void) const { return _is_cloak; }
 int Tp::is_cold(void) const { return _is_cold; }
@@ -890,9 +890,9 @@ void Tp::is_carnivorous_plant_set(int v) { _is_carnivorous_plant = v; }
 void Tp::is_carrier_of_treasure_class_a_d1000_set(int v) { _is_carrier_of_treasure_class_a_d1000 = v; }
 void Tp::is_carrier_of_treasure_class_b_d1000_set(int v) { _is_carrier_of_treasure_class_b_d1000 = v; }
 void Tp::is_carrier_of_treasure_class_c_d1000_set(int v) { _is_carrier_of_treasure_class_c_d1000 = v; }
-void Tp::is_carrier_of_weapon_class_a_set(int v) { _is_carrier_of_weapon_class_a = v; }
-void Tp::is_carrier_of_weapon_class_b_set(int v) { _is_carrier_of_weapon_class_b = v; }
-void Tp::is_carrier_of_weapon_class_c_set(int v) { _is_carrier_of_weapon_class_c = v; }
+void Tp::is_carrier_of_weapon_class_a_d1000_set(int v) { _is_carrier_of_weapon_class_a_d1000 = v; }
+void Tp::is_carrier_of_weapon_class_b_d1000_set(int v) { _is_carrier_of_weapon_class_b_d1000 = v; }
+void Tp::is_carrier_of_weapon_class_c_d1000_set(int v) { _is_carrier_of_weapon_class_c_d1000 = v; }
 void Tp::is_chasm_set(int v) { _is_chasm = v; }
 void Tp::is_cloak_set(int v) { _is_cloak = v; }
 void Tp::is_cold_set(int v) { _is_cold = v; }

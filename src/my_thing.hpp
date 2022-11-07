@@ -1302,9 +1302,9 @@ public:
   int is_carrier_of_treasure_class_a_d1000(void);
   int is_carrier_of_treasure_class_b_d1000(void);
   int is_carrier_of_treasure_class_c_d1000(void);
-  int is_carrier_of_weapon_class_a(void);
-  int is_carrier_of_weapon_class_b(void);
-  int is_carrier_of_weapon_class_c(void);
+  int is_carrier_of_weapon_class_a_d1000(void);
+  int is_carrier_of_weapon_class_b_d1000(void);
+  int is_carrier_of_weapon_class_c_d1000(void);
   int is_chasm(void);
   int is_cloak(void);
   int is_cold(void);

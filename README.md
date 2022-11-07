@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - cannot click on right most tile on mac                                                                                                     -->
 <!-- - test main body death                                                                                                                       -->
 <!-- - test with freezing and wand of descent                                                                                                     -->
 <!-- - tentacle grapple                                                                                                                           -->

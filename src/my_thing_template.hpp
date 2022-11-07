@@ -301,9 +301,9 @@ private:
   int _is_carrier_of_treasure_class_a_d1000 {};
   int _is_carrier_of_treasure_class_b_d1000 {};
   int _is_carrier_of_treasure_class_c_d1000 {};
-  int _is_carrier_of_weapon_class_a {};
-  int _is_carrier_of_weapon_class_b {};
-  int _is_carrier_of_weapon_class_c {};
+  int _is_carrier_of_weapon_class_a_d1000 {};
+  int _is_carrier_of_weapon_class_b_d1000 {};
+  int _is_carrier_of_weapon_class_c_d1000 {};
   int _is_chasm {};
   int _is_cloak {};
   int _is_cold {};
@@ -1320,9 +1320,9 @@ public:
   int is_carrier_of_treasure_class_a_d1000(void) const;
   int is_carrier_of_treasure_class_b_d1000(void) const;
   int is_carrier_of_treasure_class_c_d1000(void) const;
-  int is_carrier_of_weapon_class_a(void) const;
-  int is_carrier_of_weapon_class_b(void) const;
-  int is_carrier_of_weapon_class_c(void) const;
+  int is_carrier_of_weapon_class_a_d1000(void) const;
+  int is_carrier_of_weapon_class_b_d1000(void) const;
+  int is_carrier_of_weapon_class_c_d1000(void) const;
   int is_chasm(void) const;
   int is_cloak(void) const;
   int is_cold(void) const;
@@ -1860,9 +1860,9 @@ public:
   void is_carrier_of_treasure_class_a_d1000_set(int v);
   void is_carrier_of_treasure_class_b_d1000_set(int v);
   void is_carrier_of_treasure_class_c_d1000_set(int v);
-  void is_carrier_of_weapon_class_a_set(int v);
-  void is_carrier_of_weapon_class_b_set(int v);
-  void is_carrier_of_weapon_class_c_set(int v);
+  void is_carrier_of_weapon_class_a_d1000_set(int v);
+  void is_carrier_of_weapon_class_b_d1000_set(int v);
+  void is_carrier_of_weapon_class_c_d1000_set(int v);
   void is_chasm_set(int v);
   void is_cloak_set(int v);
   void is_cold_set(int v);

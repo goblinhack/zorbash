@@ -337,21 +337,21 @@ void Thing::update(void)
     dbg("Is weapon equipper");
     TRACE_AND_INDENT();
 
-    if (d1000() < is_carrier_of_weapon_class_a()) {
+    if (d1000() < is_carrier_of_weapon_class_a_d1000()) {
       dbg("New weapon class A");
       auto W = level->thing_new(tp_random_weapon_class_a(), curr_at, this);
       if (W) {
         carried += carry(W);
       }
     }
-    if (d1000() < is_carrier_of_weapon_class_b()) {
+    if (d1000() < is_carrier_of_weapon_class_b_d1000()) {
       dbg("New weapon class B");
       auto W = level->thing_new(tp_random_weapon_class_b(), curr_at, this);
       if (W) {
         carried += carry(W);
       }
     }
-    if (d1000() < is_carrier_of_weapon_class_c()) {
+    if (d1000() < is_carrier_of_weapon_class_c_d1000()) {
       dbg("New weapon class C");
       auto W = level->thing_new(tp_random_weapon_class_c(), curr_at, this);
       if (W) {

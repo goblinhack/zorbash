@@ -19,14 +19,14 @@ def tp_init(name, text_long_name):
     my.is_able_to_use_armor(self, True)
     my.is_able_to_use_weapons(self, True)
     my.is_biome_dungeon(self, True)
-    my.is_carrier_of_treasure_class_a_d1000(self, 200)
-    my.is_carrier_of_weapon_class_a(self, 1000)
+    my.is_carrier_of_treasure_class_a_d1000(self, 20)
+    my.is_carrier_of_weapon_class_a_d1000(self, 1000)
     my.is_monst_class_a(self, True)
     my.on_born_do(self, "me.on_born()")
     my.on_death_of_my_leader_do(self, "me.on_death_of_my_leader()")
     my.on_you_nat_att_do(self, "zorb_all.on_you_nat_att()")
     my.stat_str(self, 10)
-    my.text_long_description2(self, "This particular zorblin has is a battle hardened veteran of many wars.")
+    my.text_long_description2(self, "This particular zorblin is a battle hardened veteran of many wars.")
     my.text_short_description(self, "A grizzled war-weary soldier.")
     # end sort marker
 

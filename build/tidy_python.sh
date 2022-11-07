@@ -255,9 +255,9 @@ do
       is_carrier_of_treasure_class_a_d1000 \
       is_carrier_of_treasure_class_b_d1000 \
       is_carrier_of_treasure_class_c_d1000 \
-      is_carrier_of_weapon_class_a \
-      is_carrier_of_weapon_class_b \
-      is_carrier_of_weapon_class_c \
+      is_carrier_of_weapon_class_a_d1000 \
+      is_carrier_of_weapon_class_b_d1000 \
+      is_carrier_of_weapon_class_c_d1000 \
       is_chasm \
       is_cloak \
       is_cold \
