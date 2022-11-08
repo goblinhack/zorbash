@@ -2,6 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_english.hpp"
 #include "my_random.hpp"
 #include "my_thing.hpp"
 
@@ -47,7 +48,7 @@ void Thing::weapon_check_for_damage(Thingp weapon, Thingp victim)
   }
 
   bool corrode = false;
-  bool shatter = false;
+  bool damaged = false;
 
   //
   // Enchantment is already factored in here
@@ -111,7 +112,7 @@ void Thing::weapon_check_for_damage(Thingp weapon, Thingp victim)
   if (! is_hard()) {
     if (victim->is_hard()) {
       damaged_chance *= 2;
-      shatter = true;
+      damaged = true;
     }
   }
 
@@ -121,7 +122,7 @@ void Thing::weapon_check_for_damage(Thingp weapon, Thingp victim)
       // This will be * 4 as the above will pass too.
       //
       damaged_chance *= 2;
-      shatter = true;
+      damaged = true;
     }
   }
 
@@ -146,23 +147,61 @@ void Thing::weapon_check_for_damage(Thingp weapon, Thingp victim)
   // Decrement the items health. If it gets too damaged, it is dead.
   //
   if (weapon->health_decr(1) > 0) {
-    if (shatter) {
-      msg("%%fg=orange$%s is buckling.%%fg=reset$", weapon->text_The().c_str());
-    } else if (corrode) {
-      msg("%%fg=orange$%s is corroding.%%fg=reset$", weapon->text_The().c_str());
+    if (my_owner->is_player()) {
+      if (damaged) {
+        if (weapon->is_wooden()) {
+          msg("%%fg=orange$Your %s is splintering.%%fg=reset$", weapon->text_long_name().c_str());
+        } else {
+          msg("%%fg=orange$Your %s is buckling.%%fg=reset$", weapon->text_long_name().c_str());
+        }
+      } else if (corrode) {
+        msg("%%fg=orange$Your %s is corroding.%%fg=reset$", weapon->text_long_name().c_str());
+      } else {
+        msg("%%fg=orange$Your %s is damaged.%%fg=reset$", weapon->text_long_name().c_str());
+      }
     } else {
-      msg("%%fg=orange$%s is damaged.%%fg=reset$", weapon->text_The().c_str());
+      if (damaged) {
+        if (weapon->is_wooden()) {
+          msg("%%fg=orange$%s is splintering.%%fg=reset$", apostrophise(my_owner->text_The()).c_str());
+        } else {
+          msg("%%fg=orange$%s is buckling.%%fg=reset$", apostrophise(my_owner->text_The()).c_str());
+        }
+      } else if (corrode) {
+        msg("%%fg=orange$%s is corroding.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
+            weapon->text_long_name().c_str());
+      } else {
+        msg("%%fg=orange$%s is damaged.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
+            weapon->text_long_name().c_str());
+      }
     }
     return;
   }
 
   if (my_owner->is_player()) {
-    if (shatter) {
-      msg("%%fg=red$%s shatters.%%fg=reset$", weapon->text_The().c_str());
+    if (damaged) {
+      if (weapon->is_wooden()) {
+        msg("%%fg=red$Your %s is shattered.%%fg=reset$", weapon->text_long_name().c_str());
+      } else {
+        msg("%%fg=red$Your %s is buckled.%%fg=reset$", weapon->text_long_name().c_str());
+      }
     } else if (corrode) {
-      msg("%%fg=red$%s dissolves to nothing.%%fg=reset$", weapon->text_The().c_str());
+      msg("%%fg=red$Your %s is corroded.%%fg=reset$", weapon->text_long_name().c_str());
     } else {
-      msg("%%fg=red$%s is broken.%%fg=reset$", weapon->text_The().c_str());
+      msg("%%fg=red$Your %s is destroyed.%%fg=reset$", weapon->text_long_name().c_str());
+    }
+  } else {
+    if (damaged) {
+      if (weapon->is_wooden()) {
+        msg("%%fg=red$%s is shattered.%%fg=reset$", apostrophise(my_owner->text_The()).c_str());
+      } else {
+        msg("%%fg=red$%s is buckled.%%fg=reset$", apostrophise(my_owner->text_The()).c_str());
+      }
+    } else if (corrode) {
+      msg("%%fg=red$%s is corroded.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
+          weapon->text_long_name().c_str());
+    } else {
+      msg("%%fg=red$%s is destroyed.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
+          weapon->text_long_name().c_str());
     }
   }
   weapon->dead("broken");

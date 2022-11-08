@@ -1,12 +1,9 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - test main body death                                                                                                                       -->
-<!-- - test with freezing and wand of descent                                                                                                     -->
+<!-- - test main body with freezing and wand of descent                                                                                           -->
 <!-- - tentacle grapple                                                                                                                           -->
 <!-- - if frozen do we unfreeze?                                                                                                                  -->
-<!-- - check jump out of web stuck bug                                                                                                            -->
 <!-- - resize the collect window to just what we need                                                                                             -->
-<!-- - zorblin with rings cannot swing attack                                                                                                     -->
 <!-- - check plutonium sword and lightning                                                                                                        -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

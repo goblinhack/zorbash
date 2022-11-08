@@ -949,7 +949,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       }
     } else if (owner && owner->is_monst()) {
       if (! owner->is_dying && ! owner->is_dying) {
-        msg("The %s %s is destroyed!", owner->text_The().c_str(), pluralise(text_short_name()).c_str());
+        msg("The %s %s is destroyed!", apostrophise(owner->text_The()).c_str(), text_short_name().c_str());
       }
     }
   }
@@ -1288,10 +1288,10 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       // Provide some more interesting messages for when hitting rocks...
       //
       if (hitter->is_weapon()) {
-        if (hitter->is_weapon() && (hitter->weapon_damaged_pct() < 100)) {
+        if (hitter->is_weapon() && (hitter->weapon_damaged_pct() > 50)) {
+          hitter->msg("You pointlessly hit %s with your very damaged weapon.", text_the().c_str());
+        } else if (hitter->is_weapon() && (hitter->weapon_damaged_pct() > 0)) {
           hitter->msg("You hit %s with your damaged weapon.", text_the().c_str());
-        } else if (hitter->is_weapon() && (hitter->weapon_damaged_pct() < 50)) {
-          hitter->msg("You pointlessly hit %s with your damaged weapon.", text_the().c_str());
         } else {
           if (pcg_random_range(1, 100) < 10) {
             hitter->msg("You hit %s, why though?", text_the().c_str());
