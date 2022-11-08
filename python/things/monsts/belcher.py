@@ -73,6 +73,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_monst_class_b(self, True)
     my.is_monst(self, True)
     my.is_msg_allowed_hears_something(self, True)
+    my.is_msg_allowed_is_dead(self, True)
     my.is_msg_allowed_is_seen(self, True)
     my.is_msg_allowed_is_wounded(self, True)
     my.is_msg_allowed_senses_danger(self, True)

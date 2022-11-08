@@ -1458,16 +1458,16 @@ int Thing::unused_flag34(void)
   return (tp()->unused_flag34());
 }
 
-int Thing::unused_flag35(void)
+int Thing::is_limb(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag35());
+  return (tp()->is_limb());
 }
 
-int Thing::unused_flag36(void)
+int Thing::is_msg_allowed_is_dead(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag36());
+  return (tp()->is_msg_allowed_is_dead());
 }
 
 int Thing::is_obs_in_the_way_for_firing(void)

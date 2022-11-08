@@ -163,9 +163,6 @@ int Thing::danger_initial_level(void)
   if (is_always_submerged()) {
     danger_level *= 2;
   }
-  if (is_always_submerged()) {
-    danger_level *= 2;
-  }
 
   danger_level += damage_max();
 

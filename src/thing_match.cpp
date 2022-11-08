@@ -742,10 +742,10 @@ bool Thing::matches(const std::string &what)
   if (unused_flag34() && (what == "unused_flag34")) {
     return true;
   }
-  if (unused_flag35() && (what == "unused_flag35")) {
+  if (is_limb() && (what == "is_limb")) {
     return true;
   }
-  if (unused_flag36() && (what == "unused_flag36")) {
+  if (is_msg_allowed_is_dead() && (what == "is_msg_allowed_is_dead")) {
     return true;
   }
   if (is_obs_in_the_way_for_firing() && (what == "is_obs_in_the_way_for_firing")) {
@@ -2243,11 +2243,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag34") {
     return &Thing::unused_flag34;
   }
-  if (what == "unused_flag35") {
-    return &Thing::unused_flag35;
+  if (what == "is_limb") {
+    return &Thing::is_limb;
   }
-  if (what == "unused_flag36") {
-    return &Thing::unused_flag36;
+  if (what == "is_msg_allowed_is_dead") {
+    return &Thing::is_msg_allowed_is_dead;
   }
   if (what == "is_obs_in_the_way_for_firing") {
     return &Thing::is_obs_in_the_way_for_firing;

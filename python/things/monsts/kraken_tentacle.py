@@ -38,9 +38,11 @@ def tp_init(name, text_long_name):
     my.is_able_to_freeze(self, True)
     my.is_able_to_see_in_the_dark(self, True)
     my.is_air_breather(self, True)
+    my.is_always_submerged(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_bleeder(self, True)
+    my.is_corpse_on_death(self, True)
     my.is_crushable(self, True)
     my.is_deep_water_swimmer(self, True)
     my.is_described_when_hovering_over(self, True)
@@ -49,6 +51,7 @@ def tp_init(name, text_long_name):
     my.is_hittable(self, True)
     my.is_immune_to_water(self, True)
     my.is_interesting(self, True)
+    my.is_limb(self, True)
     my.is_loggable(self, True)
     my.is_meat(self, True)
     my.is_minion(self, True)
@@ -97,6 +100,10 @@ def tp_init(name, text_long_name):
     my.tile(self,
             ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name + ".6", delay_ms=delay)
+
+    my.tile(self,
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="gray50",
+            tile=name + ".6", is_dead=True, delay_ms=delay)
 
     my.tp_update(self)
 

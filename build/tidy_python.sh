@@ -532,8 +532,8 @@ do
       unused_flag32 \
       unused_flag33 \
       unused_flag34 \
-      unused_flag35 \
-      unused_flag36 \
+      is_limb \
+      is_msg_allowed_is_dead \
       is_obs_in_the_way_for_firing \
       is_msg_allowed_senses_danger \
       is_msg_allowed_hears_something \

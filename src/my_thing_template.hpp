@@ -419,6 +419,7 @@ private:
   int _is_lifeless {};
   int _is_light_blocker {};
   int _is_light_blocker_for_monst {};
+  int _is_limb {};
   int _is_living {};
   int _is_loggable {};
   int _is_magical {};
@@ -440,6 +441,7 @@ private:
   int _is_moveable {};
   int _is_msg {};
   int _is_msg_allowed_hears_something {};
+  int _is_msg_allowed_is_dead {};
   int _is_msg_allowed_is_seen {};
   int _is_msg_allowed_is_surprised {};
   int _is_msg_allowed_is_wounded {};
@@ -627,8 +629,6 @@ private:
   int _unused_flag32 {};
   int _unused_flag33 {};
   int _unused_flag34 {};
-  int _unused_flag35 {};
-  int _unused_flag36 {};
   int _unused_flag4 {};
   int _unused_flag40 {};
   int _unused_flag48 {};
@@ -1437,6 +1437,7 @@ public:
   int is_lifeless(void) const;
   int is_light_blocker_for_monst(void) const;
   int is_light_blocker(void) const;
+  int is_limb(void) const;
   int is_living(void) const;
   int is_loggable(void) const;
   int is_magical(void) const;
@@ -1457,6 +1458,7 @@ public:
   int is_monst(void) const;
   int is_moveable(void) const;
   int is_msg_allowed_hears_something(void) const;
+  int is_msg_allowed_is_dead(void) const;
   int is_msg_allowed_is_seen(void) const;
   int is_msg_allowed_is_surprised(void) const;
   int is_msg_allowed_is_wounded(void) const;
@@ -1645,8 +1647,6 @@ public:
   int unused_flag32(void) const;
   int unused_flag33(void) const;
   int unused_flag34(void) const;
-  int unused_flag35(void) const;
-  int unused_flag36(void) const;
   int unused_flag3(void) const;
   int unused_flag40(void) const;
   int unused_flag48(void) const;
@@ -1977,6 +1977,7 @@ public:
   void is_lifeless_set(int v);
   void is_light_blocker_for_monst_set(int v);
   void is_light_blocker_set(int v);
+  void is_limb_set(int v);
   void is_living_set(int v);
   void is_loggable_set(int v);
   void is_magical_set(int v);
@@ -1997,6 +1998,7 @@ public:
   void is_monst_set(int v);
   void is_moveable_set(int v);
   void is_msg_allowed_hears_something_set(int v);
+  void is_msg_allowed_is_dead_set(int v);
   void is_msg_allowed_is_seen_set(int v);
   void is_msg_allowed_is_surprised_set(int v);
   void is_msg_allowed_is_wounded_set(int v);
@@ -2321,8 +2323,6 @@ public:
   void unused_flag32_set(int v);
   void unused_flag33_set(int v);
   void unused_flag34_set(int v);
-  void unused_flag35_set(int v);
-  void unused_flag36_set(int v);
   void unused_flag3_set(int v);
   void unused_flag40_set(int v);
   void unused_flag48_set(int v);

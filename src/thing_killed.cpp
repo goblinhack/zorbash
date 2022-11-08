@@ -328,12 +328,18 @@ void Thing::killed(Thingp defeater, const char *reason)
           // Killed by the player
           //
           if (is_monst()) {
-            if (is_undead()) {
-              msg("%%fg=white$%s is vanquished %s.%%fg=reset$", The_no_dying.c_str(), reason);
-            } else if (is_jelly()) {
-              msg("%%fg=white$%s is splattered %s.%%fg=reset$", The_no_dying.c_str(), reason);
-            } else {
-              msg("%%fg=white$%s is dead, killed %s.%%fg=reset$", The_no_dying.c_str(), reason);
+            if (is_msg_allowed_is_dead()) {
+              if (is_limb() || is_tentacle()) {
+                //
+                // Not sure what to show here yet.
+                //
+              } else if (is_undead()) {
+                msg("%%fg=white$%s is vanquished %s.%%fg=reset$", The_no_dying.c_str(), reason);
+              } else if (is_jelly()) {
+                msg("%%fg=white$%s is splattered %s.%%fg=reset$", The_no_dying.c_str(), reason);
+              } else {
+                msg("%%fg=white$%s is dead, killed %s.%%fg=reset$", The_no_dying.c_str(), reason);
+              }
             }
           } else if (on_death_is_open()) {
             //

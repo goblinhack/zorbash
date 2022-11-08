@@ -76,7 +76,7 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_submergable(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
-    my.health_initial_dice(self, "27d10")
+    my.health_initial_dice(self, "1")
     my.hunger_clock_tick_freq(self, 50)
     my.is_able_to_fall(self, True)
     my.is_able_to_freeze(self, True)
@@ -86,6 +86,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_tire(self, True)
     my.is_always_submerged(self, True)
     my.is_asleep_initially(self, True)
+    my.is_engulfer(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)
@@ -105,6 +106,7 @@ def tp_init(name, text_long_name):
     my.is_monst(self, True)
     my.is_moveable(self, True)
     my.is_msg_allowed_hears_something(self, True)
+    my.is_msg_allowed_is_dead(self, True)
     my.is_msg_allowed_senses_danger(self, True)
     my.is_obs_when_dead(self, True)
     my.is_soft(self, True)
@@ -134,7 +136,7 @@ def tp_init(name, text_long_name):
     my.text_short_description(self, "A baby kraken.")
     my.thing_size(self, my.THING_SIZE_GARGANTUAN)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
-    my.z_depth(self, my.MAP_DEPTH_TOP)
+    my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
     # end sort marker
 
@@ -171,6 +173,10 @@ def tp_init(name, text_long_name):
     my.tile(self,
             ascii_fg_char="", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile="kraken.sleeping.2", is_sleeping=True, delay_ms=delay)
+
+    my.tile(self,
+            ascii_fg_char="K", ascii_bg_col_name="", ascii_fg_col_name="gray50",
+            tile="kraken.sleeping.2", is_dead=True, delay_ms=delay)
 
     my.tp_update(self)
 

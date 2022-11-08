@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - tentacle should not occupy same tile as kraken                                                                                             -->
 <!-- - test main body with freezing and wand of descent                                                                                           -->
 <!-- - tentacle grapple                                                                                                                           -->
 <!-- - if frozen do we unfreeze?                                                                                                                  -->

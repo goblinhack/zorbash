@@ -467,6 +467,7 @@ int Tp::is_lava(void) const { return _is_lava; }
 int Tp::is_lifeless(void) const { return _is_lifeless; }
 int Tp::is_light_blocker_for_monst(void) const { return _is_light_blocker_for_monst; }
 int Tp::is_light_blocker(void) const { return _is_light_blocker; }
+int Tp::is_limb(void) const { return _is_limb; }
 int Tp::is_living(void) const { return _is_living; }
 int Tp::is_loggable(void) const { return _is_loggable; }
 int Tp::is_magical(void) const { return _is_magical; }
@@ -487,6 +488,7 @@ int Tp::is_monst_pack(void) const { return _is_monst_pack; }
 int Tp::is_monst(void) const { return _is_monst; }
 int Tp::is_moveable(void) const { return _is_moveable; }
 int Tp::is_msg_allowed_hears_something(void) const { return _is_msg_allowed_hears_something; }
+int Tp::is_msg_allowed_is_dead(void) const { return _is_msg_allowed_is_dead; }
 int Tp::is_msg_allowed_is_seen(void) const { return _is_msg_allowed_is_seen; }
 int Tp::is_msg_allowed_is_surprised(void) const { return _is_msg_allowed_is_surprised; }
 int Tp::is_msg_allowed_is_wounded(void) const { return _is_msg_allowed_is_wounded; }
@@ -675,8 +677,6 @@ int Tp::unused_flag31(void) const { return _unused_flag31; }
 int Tp::unused_flag32(void) const { return _unused_flag32; }
 int Tp::unused_flag33(void) const { return _unused_flag33; }
 int Tp::unused_flag34(void) const { return _unused_flag34; }
-int Tp::unused_flag35(void) const { return _unused_flag35; }
-int Tp::unused_flag36(void) const { return _unused_flag36; }
 int Tp::unused_flag3(void) const { return _unused_flag3; }
 int Tp::unused_flag40(void) const { return _unused_flag40; }
 int Tp::unused_flag48(void) const { return _unused_flag48; }
@@ -1007,6 +1007,7 @@ void Tp::is_lava_set(int v) { _is_lava = v; }
 void Tp::is_lifeless_set(int v) { _is_lifeless = v; }
 void Tp::is_light_blocker_for_monst_set(int v) { _is_light_blocker_for_monst = v; }
 void Tp::is_light_blocker_set(int v) { _is_light_blocker = v; }
+void Tp::is_limb_set(int v) { _is_limb = v; }
 void Tp::is_living_set(int v) { _is_living = v; }
 void Tp::is_loggable_set(int v) { _is_loggable = v; }
 void Tp::is_magical_set(int v) { _is_magical = v; }
@@ -1027,6 +1028,7 @@ void Tp::is_monst_pack_set(int v) { _is_monst_pack = v; }
 void Tp::is_monst_set(int v) { _is_monst = v; }
 void Tp::is_moveable_set(int v) { _is_moveable = v; }
 void Tp::is_msg_allowed_hears_something_set(int v) { _is_msg_allowed_hears_something = v; }
+void Tp::is_msg_allowed_is_dead_set(int v) { _is_msg_allowed_is_dead = v; }
 void Tp::is_msg_allowed_is_seen_set(int v) { _is_msg_allowed_is_seen = v; }
 void Tp::is_msg_allowed_is_surprised_set(int v) { _is_msg_allowed_is_surprised = v; }
 void Tp::is_msg_allowed_is_wounded_set(int v) { _is_msg_allowed_is_wounded = v; }
@@ -1350,8 +1352,6 @@ void Tp::unused_flag31_set(int v) { _unused_flag31 = v; }
 void Tp::unused_flag32_set(int v) { _unused_flag32 = v; }
 void Tp::unused_flag33_set(int v) { _unused_flag33 = v; }
 void Tp::unused_flag34_set(int v) { _unused_flag34 = v; }
-void Tp::unused_flag35_set(int v) { _unused_flag35 = v; }
-void Tp::unused_flag36_set(int v) { _unused_flag36 = v; }
 void Tp::unused_flag3_set(int v) { _unused_flag3 = v; }
 void Tp::unused_flag40_set(int v) { _unused_flag40 = v; }
 void Tp::unused_flag48_set(int v) { _unused_flag48 = v; }

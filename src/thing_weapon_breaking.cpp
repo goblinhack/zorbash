@@ -162,15 +162,17 @@ void Thing::weapon_check_for_damage(Thingp weapon, Thingp victim)
     } else {
       if (damaged) {
         if (weapon->is_wooden()) {
-          msg("%%fg=orange$%s is splintering.%%fg=reset$", apostrophise(my_owner->text_The()).c_str());
+          msg("%%fg=orange$%s %s is splintering.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
+              weapon->text_long_name().c_str());
         } else {
-          msg("%%fg=orange$%s is buckling.%%fg=reset$", apostrophise(my_owner->text_The()).c_str());
+          msg("%%fg=orange$%s %s is buckling.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
+              weapon->text_long_name().c_str());
         }
       } else if (corrode) {
-        msg("%%fg=orange$%s is corroding.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
+        msg("%%fg=orange$%s %s is corroding.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
             weapon->text_long_name().c_str());
       } else {
-        msg("%%fg=orange$%s is damaged.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
+        msg("%%fg=orange$%s %s is damaged.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
             weapon->text_long_name().c_str());
       }
     }
@@ -192,15 +194,17 @@ void Thing::weapon_check_for_damage(Thingp weapon, Thingp victim)
   } else {
     if (damaged) {
       if (weapon->is_wooden()) {
-        msg("%%fg=red$%s is shattered.%%fg=reset$", apostrophise(my_owner->text_The()).c_str());
+        msg("%%fg=orange$%s %s is shattered.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
+            weapon->text_long_name().c_str());
       } else {
-        msg("%%fg=red$%s is buckled.%%fg=reset$", apostrophise(my_owner->text_The()).c_str());
+        msg("%%fg=orange$%s %s is buckled.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
+            weapon->text_long_name().c_str());
       }
     } else if (corrode) {
-      msg("%%fg=red$%s is corroded.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
+      msg("%%fg=orange$%s %s is corroded.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
           weapon->text_long_name().c_str());
     } else {
-      msg("%%fg=red$%s is destroyed.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
+      msg("%%fg=orange$%s %s is destroyed.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
           weapon->text_long_name().c_str());
     }
   }

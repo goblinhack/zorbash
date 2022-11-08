@@ -1424,6 +1424,7 @@ public:
   int is_lifeless(void);
   int is_light_blocker_for_monst(void);
   int is_light_blocker(void);
+  int is_limb(void);
   int is_living(void);
   int is_loggable(void);
   int is_magical(void);
@@ -1444,6 +1445,7 @@ public:
   int is_monst(void);
   int is_moveable(void);
   int is_msg_allowed_hears_something(void);
+  int is_msg_allowed_is_dead(void);
   int is_msg_allowed_is_seen(void);
   int is_msg_allowed_is_surprised(void);
   int is_msg_allowed_is_wounded(void);
@@ -1987,8 +1989,6 @@ public:
   int unused_flag32(void);
   int unused_flag33(void);
   int unused_flag34(void);
-  int unused_flag35(void);
-  int unused_flag36(void);
   int unused_flag3(void);
   int unused_flag40(void);
   int unused_flag48(void);
