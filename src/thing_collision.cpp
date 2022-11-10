@@ -688,6 +688,17 @@ bool Thing::collision_check_only(Thingp it, point future_pos)
     }
   }
 
+  //
+  // Important to have this check before can_eat or krakens will try to eat their
+  // own tentacles.
+  //
+  if (same_mob(it) || same_leader_or_owner(it)) {
+    if (things_overlap(me, future_pos, it)) {
+      dbg("Collision; cannot pass through my friend");
+      return true;
+    }
+  }
+
   if (possible_to_attack(it)) {
     if (things_overlap(me, future_pos, it)) {
       dbg("Collision; overlaps and can attack");
@@ -715,16 +726,6 @@ bool Thing::collision_check_only(Thingp it, point future_pos)
     }
     dbg("Collision; can eat but no overlap");
     return false;
-  }
-
-  //
-  // This lets you skip around mobs to avoid ghosts
-  //
-  if (same_mob(it) || same_leader_or_owner(it)) {
-    if (things_overlap(me, future_pos, it)) {
-      dbg("Collision; cannot pass through my friend");
-      return true;
-    }
   }
 
   //

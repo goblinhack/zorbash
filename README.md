@@ -1,11 +1,13 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - tentacle should not occupy same tile as kraken                                                                                             -->
+<!-- - test spiders and web minionness                                                                                                            -->
+<!-- - kraken corpse                                                                                                                              -->
 <!-- - test main body with freezing and wand of descent                                                                                           -->
 <!-- - tentacle grapple                                                                                                                           -->
 <!-- - if frozen do we unfreeze?                                                                                                                  -->
 <!-- - resize the collect window to just what we need                                                                                             -->
 <!-- - check plutonium sword and lightning                                                                                                        -->
+<!-- - red highlight for monsters                                                                                                                 -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

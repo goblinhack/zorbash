@@ -273,6 +273,8 @@ bool Thing::collision_obstacle(Thingp it)
 //
 bool Thing::ai_obstacle(Thingp it)
 {
+  const bool debug = false;
+
   if (it == this) {
     return false;
   }
@@ -281,10 +283,16 @@ bool Thing::ai_obstacle(Thingp it)
   // Skip things we cannot collide with
   //
   if (it->is_internal() || it->is_hidden || it->is_falling || it->is_jumping || it->is_changing_level) {
+    if (debug && is_debug_type()) {
+      con("check collision with %s, no at line %d", it->to_string().c_str(), __LINE__);
+    }
     return false;
   }
 
   if (is_internal() || is_hidden || is_falling || is_jumping || is_changing_level) {
+    if (debug && is_debug_type()) {
+      con("check collision with %s, no at line %d", it->to_string().c_str(), __LINE__);
+    }
     return false;
   }
 
@@ -294,18 +302,30 @@ bool Thing::ai_obstacle(Thingp it)
   if (is_swimmer()) {
     if (is_deep_water_swimmer() && is_shallow_water_swimmer()) {
       if (! level->is_water(it->curr_at)) {
+        if (debug && is_debug_type()) {
+          con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
+        }
         return true;
       }
     } else if (is_deep_water_swimmer()) {
       if (! level->is_deep_water(it->curr_at)) {
+        if (debug && is_debug_type()) {
+          con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
+        }
         return true;
       }
     } else if (is_shallow_water_swimmer()) {
       if (! level->is_shallow_water(it->curr_at)) {
+        if (debug && is_debug_type()) {
+          con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
+        }
         return true;
       }
     } else {
       if (! level->is_water(it->curr_at)) {
+        if (debug && is_debug_type()) {
+          con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
+        }
         return true;
       }
     }
@@ -316,6 +336,9 @@ bool Thing::ai_obstacle(Thingp it)
   //
   if (is_engulfer() && can_eat(it)) {
     if (it->thing_size() > thing_size()) {
+      if (debug && is_debug_type()) {
+        con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
+      }
       return true;
     }
   }
@@ -325,7 +348,9 @@ bool Thing::ai_obstacle(Thingp it)
   //
   if (it->is_floating() || it->is_flying()) {
     if (is_floating() || is_flying()) {
-      // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
+      if (debug && is_debug_type()) {
+        con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
+      }
       return true;
     }
   }
@@ -335,7 +360,9 @@ bool Thing::ai_obstacle(Thingp it)
   //
   if (it->is_ethereal()) {
     if (is_ethereal()) {
-      // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
+      if (debug && is_debug_type()) {
+        con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
+      }
       return true;
     }
   }
@@ -345,7 +372,9 @@ bool Thing::ai_obstacle(Thingp it)
   //
   if (it->is_able_to_walk_through_walls()) {
     if (is_able_to_walk_through_walls()) {
-      // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
+      if (debug && is_debug_type()) {
+        con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
+      }
       return true;
     }
   }
@@ -355,12 +384,18 @@ bool Thing::ai_obstacle(Thingp it)
   //
   if (it->is_able_to_see_through_doors()) {
     if (it->is_door()) {
+      if (debug && is_debug_type()) {
+        con("check collision with %s, no at line %d", it->to_string().c_str(), __LINE__);
+      }
       return false;
     }
   }
 
   if (it->is_brazier() || it->is_barrel() || it->is_block_of_ice() || it->is_obs_wall_or_door()) {
     if (is_able_to_walk_through_walls()) {
+      if (debug && is_debug_type()) {
+        con("check collision with %s, no at line %d", it->to_string().c_str(), __LINE__);
+      }
       return false;
     }
 
@@ -368,6 +403,9 @@ bool Thing::ai_obstacle(Thingp it)
     // Dead/extinguished braziers
     //
     if (it->is_dead) {
+      if (debug && is_debug_type()) {
+        con("check collision with %s, no at line %d", it->to_string().c_str(), __LINE__);
+      }
       return false;
     }
 
@@ -375,14 +413,22 @@ bool Thing::ai_obstacle(Thingp it)
       if (it->is_door()) {
         if (is_able_to_open_doors()) {
           if (keys()) {
+            if (debug && is_debug_type()) {
+              con("check collision with %s, no at line %d", it->to_string().c_str(), __LINE__);
+            }
             return false;
           }
         }
         if (is_able_to_break_down_doors()) {
+          if (debug && is_debug_type()) {
+            con("check collision with %s, no at line %d", it->to_string().c_str(), __LINE__);
+          }
           return false;
         }
       }
-      // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
+      if (debug && is_debug_type()) {
+        con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
+      }
       return true;
     }
   }
@@ -390,8 +436,13 @@ bool Thing::ai_obstacle(Thingp it)
   if (it->is_secret_door()) {
     auto dist = distance(it->curr_at, curr_at);
     if (dist > THING_AI_CAN_SEE_SECRET_DOOR_DIST) {
-      // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
+      if (debug && is_debug_type()) {
+        con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
+      }
       return true;
+    }
+    if (debug && is_debug_type()) {
+      con("check collision with %s, no at line %d", it->to_string().c_str(), __LINE__);
     }
     return false;
   }
@@ -402,20 +453,26 @@ bool Thing::ai_obstacle(Thingp it)
     //
   } else {
     if (same_mob(it)) {
-      // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
+      if (debug && is_debug_type()) {
+        con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
+      }
       return true;
     }
   }
 
   if (same_leader_or_owner(it)) {
-    // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
+    if (debug && is_debug_type()) {
+      con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
+    }
     return true;
   }
 
   if (is_monst() || (is_player() && game->robot_mode)) {
     if (it->is_chasm()) {
       if (! is_floating() && ! is_flying()) {
-        // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
+        if (debug && is_debug_type()) {
+          con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
+        }
         return true;
       }
     }
@@ -441,7 +498,9 @@ bool Thing::ai_obstacle(Thingp it)
       //
       // Ignore is_ethereal to make it easier to attack ghosts
       //
-      // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
+      if (debug && is_debug_type()) {
+        con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
+      }
       return true;
     }
   }
@@ -452,10 +511,16 @@ bool Thing::ai_obstacle(Thingp it)
       // Allow passing over corpses
       //
       if (it->is_obs_when_dead()) {
-        // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
+        if (debug && is_debug_type()) {
+          con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
+        }
         return true;
       }
     }
+  }
+
+  if (debug && is_debug_type()) {
+    con("check collision with %s, no at line %d", it->to_string().c_str(), __LINE__);
   }
 
   return false;
