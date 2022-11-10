@@ -572,19 +572,13 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
     }
 
     //
-    // Attack  is 1d20 + stat_att_total - penalties
-    // Defence is        stat_def_total - penalties
+    // Attack  roll is 1d20 + stat_att_total - penalties
+    // Defence roll is        stat_def_total - penalties
+    // Damage       is dam  + stat_att_total
     //
-    auto att_bonus = stat_att_total() - stat_att_penalties_total();
+    auto att_bonus = stat_att_total();
     if (owner) {
-      //
-      // Only apply penalties if attacking a monster; not food.
-      //
-      if (victim->is_alive_monst() || victim->is_player()) {
-        att_bonus = owner->stat_att_total() - owner->stat_att_penalties_total();
-      } else {
-        att_bonus = owner->stat_att_total();
-      }
+      att_bonus = owner->stat_att_total();
     }
 
     //
@@ -594,6 +588,16 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
     if (attack_options->crit) {
       if (att_bonus < 0) {
         att_bonus = 1;
+      }
+    }
+
+    auto att_penalty = stat_att_penalties_total();
+    if (owner) {
+      //
+      // Only apply penalties if attacking a monster; not food.
+      //
+      if (victim->is_alive_monst() || victim->is_player()) {
+        att_penalty = owner->stat_att_penalties_total();
       }
     }
 
@@ -1073,35 +1077,38 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
         // Attack  is 1d20 + stat_att_total - penalties
         // Defence is        stat_def_total - penalties
         //
-        bool hit    = false;
-        int  to_hit = stat_def + def_bonus;
+        bool hit               = false;
+        int  to_hit            = stat_def + def_bonus;
+        auto att_roll_modifier = att_bonus - att_penalty;
 
         if (i_rolled == 20) {
           attack_options->crit = true;
           hit                  = true;
           IF_DEBUG
           {
-            dbg("Attack on %s: ATT %s DEF %d(%s), to-hit %d, crit rolled %d -> hit",
-                victim->to_short_string().c_str(), modifier_to_string(att_bonus).c_str(), stat_def,
-                modifier_to_string(def_bonus).c_str(), to_hit, i_rolled);
+            dbg("Attack on %s: ATT %s DEF %d(%s), to-hit %d, rolled %d -> crit", victim->to_short_string().c_str(),
+                modifier_to_string(att_roll_modifier).c_str(), stat_def, modifier_to_string(def_bonus).c_str(),
+                to_hit, i_rolled);
           }
         } else if (i_rolled == 1) {
           hit    = false;
           fumble = true;
           IF_DEBUG
           {
-            dbg("Attack on %s: ATT %s DEF %d(%s), to-hit %d, fumble rolled %d -> miss",
-                victim->to_short_string().c_str(), modifier_to_string(att_bonus).c_str(), stat_def,
-                modifier_to_string(def_bonus).c_str(), to_hit, i_rolled);
+            dbg("Attack on %s: ATT %s DEF %d(%s), to-hit %d, rolled %d -> fumble", victim->to_short_string().c_str(),
+                modifier_to_string(att_roll_modifier).c_str(), stat_def, modifier_to_string(def_bonus).c_str(),
+                to_hit, i_rolled);
           }
         } else {
-          i_rolled += att_bonus;
+          i_rolled += att_roll_modifier;
           hit = i_rolled >= to_hit;
           IF_DEBUG
           {
-            dbg("Attack on %s: ATT %s DEF %d(%s), to-hit %d, rolled %d -> %s", victim->to_short_string().c_str(),
-                modifier_to_string(att_bonus).c_str(), stat_def, modifier_to_string(def_bonus).c_str(), to_hit,
-                i_rolled, hit ? "hit" : "miss");
+            dbg("Attack on %s: ATT %s(%s,%s) DEF %d(%s), to-hit %d, rolled %d -> %s",
+                victim->to_short_string().c_str(), modifier_to_string(att_roll_modifier).c_str(),
+                modifier_to_string(att_bonus).c_str(), modifier_to_string(att_penalty).c_str(),
+
+                stat_def, modifier_to_string(def_bonus).c_str(), to_hit, i_rolled, hit ? "hit" : "miss");
           }
         }
 
@@ -1136,7 +1143,7 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
               BOTCON("%s misses the robot.", text_The().c_str());
             }
           } else {
-            dbg("The attack missed (att modifier %d, AC %d) on %s", att_bonus, stat_def,
+            dbg("The attack missed (att modifier %d, AC %d) on %s", att_roll_modifier, stat_def,
                 victim->to_short_string().c_str());
           }
 

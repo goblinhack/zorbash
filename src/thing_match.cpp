@@ -793,7 +793,7 @@ bool Thing::matches(const std::string &what)
   if (is_swimmer() && (what == "is_swimmer")) {
     return true;
   }
-  if (bite_amount() && (what == "bite_amount")) {
+  if (consume_per_bite_amount() && (what == "consume_per_bite_amount")) {
     return true;
   }
   if (is_able_to_live_out_of_water() && (what == "is_able_to_live_out_of_water")) {
@@ -2297,8 +2297,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_swimmer") {
     return &Thing::is_swimmer;
   }
-  if (what == "bite_amount") {
-    return &Thing::bite_amount;
+  if (what == "consume_per_bite_amount") {
+    return &Thing::consume_per_bite_amount;
   }
   if (what == "is_able_to_live_out_of_water") {
     return &Thing::is_able_to_live_out_of_water;

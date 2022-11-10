@@ -885,12 +885,12 @@ void Game::wid_thing_info_add_damage_drown(WidPopup *w, Thingp t, int index)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->damage_drown_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Drown          %22s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Drown dmg %19s", tmp2);
       } else {
         min_value += t->enchant_get();
         max_value += t->enchant_get();
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->damage_drown_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Drown          %22s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Drown dmg %19s", tmp2);
       }
       w->log(tmp);
 
@@ -918,12 +918,12 @@ void Game::wid_thing_info_add_damage_bite(WidPopup *w, Thingp t, int index)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->damage_bite_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_bite   %22s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Bite dmg  %19s", tmp2);
       } else {
         min_value += t->enchant_get();
         max_value += t->enchant_get();
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->damage_bite_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_bite   %22s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Bite dmg  %19s", tmp2);
       }
       w->log(tmp);
 
@@ -951,12 +951,12 @@ void Game::wid_thing_info_add_damage_claw(WidPopup *w, Thingp t, int index)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->damage_claw_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_claw   %22s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Claw dmg  %19s", tmp2);
       } else {
         min_value += t->enchant_get();
         max_value += t->enchant_get();
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->damage_claw_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_claw   %22s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Claw dmg  %19s", tmp2);
       }
       w->log(tmp);
 

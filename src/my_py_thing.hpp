@@ -17,7 +17,6 @@ PyObject *thing_attack_engulf_chance_d1000(PyObject *obj, PyObject *args, PyObje
 PyObject *thing_attack_no_msg(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_attacks_per_round(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_attack_undead(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_bite_amount(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_buff_add(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_buff_remove(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_carry(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -29,6 +28,7 @@ PyObject *thing_collision_hit_180(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_collision_hit_360(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_collision_hit_adj(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_collision_hit_two_tiles_ahead(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_consume_per_bite_amount(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_coords_get(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_damage_acid(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_damage_bite(PyObject *obj, PyObject *args, PyObject *keywds);

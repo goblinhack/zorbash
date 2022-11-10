@@ -172,7 +172,6 @@ int Tp::attack_meat(void) const { return _attack_meat; }
 int Tp::attack_no_msg(void) const { return _attack_no_msg; }
 int Tp::attacks_per_round(void) const { return _attacks_per_round; }
 int Tp::attack_undead(void) const { return _attack_undead; }
-int Tp::bite_amount(void) const { return _bite_amount; }
 int Tp::blast_max_radius(void) const { return _blast_max_radius; }
 int Tp::blast_min_radius(void) const { return _blast_min_radius; }
 int Tp::blit_bot_off(void) const { return _blit_bot_off; }
@@ -189,6 +188,7 @@ int Tp::collision_hit_360(void) const { return _collision_hit_360; }
 int Tp::collision_hit_adj(void) const { return _collision_hit_adj; }
 int Tp::collision_hit_priority(void) const { return _collision_hit_priority; }
 int Tp::collision_hit_two_tiles_ahead(void) const { return _collision_hit_two_tiles_ahead; }
+int Tp::consume_per_bite_amount(void) const { return _consume_per_bite_amount; }
 int Tp::crit_chance_d10000(void) const { return _crit_chance_d10000; }
 int Tp::damaged_chance_d10000(void) const { return _damaged_chance_d10000; }
 int Tp::damage_received_doubled_from_acid(void) const { return _damage_received_doubled_from_acid; }
@@ -706,7 +706,6 @@ void Tp::attack_meat_set(int v) { _attack_meat = v; }
 void Tp::attack_no_msg_set(int v) { _attack_no_msg = v; }
 void Tp::attacks_per_round_set(int v) { _attacks_per_round = v; }
 void Tp::attack_undead_set(int v) { _attack_undead = v; }
-void Tp::bite_amount_set(int v) { _bite_amount = v; }
 void Tp::blast_max_radius_set(int v) { _blast_max_radius = v; }
 void Tp::blast_min_radius_set(int v) { _blast_min_radius = v; }
 void Tp::blit_bot_off_set(int v) { _blit_bot_off = v; }
@@ -724,6 +723,7 @@ void Tp::collision_hit_360_set(int v) { _collision_hit_360 = v; }
 void Tp::collision_hit_adj_set(int v) { _collision_hit_adj = v; }
 void Tp::collision_hit_priority_set(int v) { _collision_hit_priority = v; }
 void Tp::collision_hit_two_tiles_ahead_set(int v) { _collision_hit_two_tiles_ahead = v; }
+void Tp::consume_per_bite_amount_set(int v) { _consume_per_bite_amount = v; }
 void Tp::crit_chance_d10000_set(int v) { _crit_chance_d10000 = v; }
 void Tp::damaged_chance_d10000_set(int v) { _damaged_chance_d10000 = v; }
 void Tp::damage_received_doubled_from_acid_set(int v) { _damage_received_doubled_from_acid = v; }

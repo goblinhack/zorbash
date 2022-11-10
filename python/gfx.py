@@ -5904,7 +5904,7 @@ def init_tiles_16x16():
         "kraken_tentacle.4",
         "kraken_tentacle.5",
         "kraken_tentacle.6",
-        "",
+        "kraken_tentacle.dead",
         "",
         "",
         "",

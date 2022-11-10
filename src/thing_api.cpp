@@ -1578,10 +1578,10 @@ int Thing::is_swimmer(void)
   return (tp()->is_swimmer());
 }
 
-int Thing::bite_amount(void)
+int Thing::consume_per_bite_amount(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->bite_amount());
+  return (tp()->consume_per_bite_amount());
 }
 
 int Thing::is_able_to_live_out_of_water(void)

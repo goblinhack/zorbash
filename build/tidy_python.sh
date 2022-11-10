@@ -101,7 +101,7 @@ do
       attack_no_msg \
       attacks_per_round \
       attack_undead \
-      bite_amount \
+      consume_per_bite_amount \
       collateral_damage_pct \
       collision_check \
       collision_hit_180 \

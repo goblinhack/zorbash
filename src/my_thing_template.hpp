@@ -118,7 +118,6 @@ private:
   int _attack_no_msg {};
   int _attacks_per_round {};
   int _attack_undead {};
-  int _bite_amount {};
   int _blast_max_radius {};
   int _blast_min_radius {};
   int _blit_bot_off {};
@@ -137,6 +136,7 @@ private:
   int _collision_hit_adj {};
   int _collision_hit_priority {};
   int _collision_hit_two_tiles_ahead {};
+  int _consume_per_bite_amount {};
   int _crit_chance_d10000 {};
   int _damaged_chance_d10000 {};
   int _damage_received_doubled_from_acid {};
@@ -1125,7 +1125,6 @@ public:
   int attack_no_msg(void) const;
   int attacks_per_round(void) const;
   int attack_undead(void) const;
-  int bite_amount(void) const;
   int blast_max_radius(void) const;
   int blast_min_radius(void) const;
   int blit_bot_off(void) const;
@@ -1142,6 +1141,7 @@ public:
   int collision_hit_adj(void) const;
   int collision_hit_priority(void) const;
   int collision_hit_two_tiles_ahead(void) const;
+  int consume_per_bite_amount(void) const;
   int crit_chance_d10000(void) const;
   int damage_acid_chance_d1000(int index) const;
   int damage_bite_chance_d1000(int index) const;
@@ -1676,7 +1676,6 @@ public:
   void attack_no_msg_set(int v);
   void attacks_per_round_set(int v);
   void attack_undead_set(int v);
-  void bite_amount_set(int v);
   void blast_max_radius_set(int v);
   void blast_min_radius_set(int v);
   void blit_bot_off_set(int v);
@@ -1694,6 +1693,7 @@ public:
   void collision_hit_adj_set(int v);
   void collision_hit_priority_set(int v);
   void collision_hit_two_tiles_ahead_set(int v);
+  void consume_per_bite_amount_set(int v);
   void crit_chance_d10000_set(int v);
   void damaged_chance_d10000_set(int v);
   void damage_received_doubled_from_acid_set(int v);

@@ -216,7 +216,7 @@ bool Thing::consume(Thingp victim)
     //
     // Allow monsters to eat things in bite sized chunks so the food does not vanish too fast.
     //
-    auto bite = bite_amount();
+    auto bite = consume_per_bite_amount();
     auto nutr = victim->nutrition_get();
 
     if (bite < nutr) {

@@ -956,7 +956,6 @@ public:
   int attacks_per_round(void);
   int attack_undead(void);
   int attack(void);
-  int bite_amount(void);
   int blast_max_radius(void);
   int blast_min_radius(void);
   int bounce_count(void);
@@ -1016,6 +1015,7 @@ public:
   int collision_hit_adj(void);
   int collision_hit_priority(void);
   int collision_hit_two_tiles_ahead(void);
+  int consume_per_bite_amount(void);
   int crit_chance_d10000(void);
   int damage_acid_chance_d1000(int);
   int damage_acid(void);
