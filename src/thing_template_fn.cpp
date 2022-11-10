@@ -229,7 +229,6 @@ int Tp::gfx_ascii_shown_in_bg(void) const { return _gfx_ascii_shown_in_bg; }
 int Tp::gfx_ascii_shown(void) const { return _gfx_ascii_shown; }
 int Tp::gfx_glows(void) const { return _gfx_glows; }
 int Tp::gfx_on_fire_anim(void) const { return _gfx_on_fire_anim; }
-int Tp::gfx_oversized_and_on_floor(void) const { return _gfx_oversized_and_on_floor; }
 int Tp::gfx_pixelart_animated_can_hflip(void) const { return _gfx_pixelart_animated_can_hflip; }
 int Tp::gfx_pixelart_animated_can_vflip(void) const { return _gfx_pixelart_animated_can_vflip; }
 int Tp::gfx_pixelart_animated_no_dir(void) const { return _gfx_pixelart_animated_no_dir; }
@@ -242,6 +241,8 @@ int Tp::gfx_pixelart_flickers(void) const { return _gfx_pixelart_flickers; }
 int Tp::gfx_pixelart_health_bar_autohide(void) const { return _gfx_pixelart_health_bar_autohide; }
 int Tp::gfx_pixelart_health_bar_only_when_awake(void) const { return _gfx_pixelart_health_bar_only_when_awake; }
 int Tp::gfx_pixelart_health_bar_shown(void) const { return _gfx_pixelart_health_bar_shown; }
+int Tp::gfx_pixelart_oversized_and_centered(void) const { return _gfx_pixelart_oversized_and_centered; }
+int Tp::gfx_pixelart_oversized_and_on_floor(void) const { return _gfx_pixelart_oversized_and_on_floor; }
 int Tp::gfx_pixelart_reflection(void) const { return _gfx_pixelart_reflection; }
 int Tp::gfx_pixelart_shadow_long(void) const { return _gfx_pixelart_shadow_long; }
 int Tp::gfx_pixelart_shadow_short(void) const { return _gfx_pixelart_shadow_short; }
@@ -676,7 +677,6 @@ int Tp::unused_flag30(void) const { return _unused_flag30; }
 int Tp::unused_flag31(void) const { return _unused_flag31; }
 int Tp::unused_flag32(void) const { return _unused_flag32; }
 int Tp::unused_flag33(void) const { return _unused_flag33; }
-int Tp::unused_flag34(void) const { return _unused_flag34; }
 int Tp::unused_flag3(void) const { return _unused_flag3; }
 int Tp::unused_flag40(void) const { return _unused_flag40; }
 int Tp::unused_flag48(void) const { return _unused_flag48; }
@@ -767,7 +767,6 @@ void Tp::gfx_ascii_shown_in_bg_set(int v) { _gfx_ascii_shown_in_bg = v; }
 void Tp::gfx_ascii_shown_set(int v) { _gfx_ascii_shown = v; }
 void Tp::gfx_glows_set(int v) { _gfx_glows = v; }
 void Tp::gfx_on_fire_anim_set(int v) { _gfx_on_fire_anim = v; }
-void Tp::gfx_oversized_and_on_floor_set(int v) { _gfx_oversized_and_on_floor = v; }
 void Tp::gfx_pixelart_animated_can_hflip_set(int v) { _gfx_pixelart_animated_can_hflip = v; }
 void Tp::gfx_pixelart_animated_can_vflip_set(int v) { _gfx_pixelart_animated_can_vflip = v; }
 void Tp::gfx_pixelart_animated_no_dir_set(int v) { _gfx_pixelart_animated_no_dir = v; }
@@ -781,6 +780,8 @@ void Tp::gfx_pixelart_flickers_set(int v) { _gfx_pixelart_flickers = v; }
 void Tp::gfx_pixelart_health_bar_autohide_set(int v) { _gfx_pixelart_health_bar_autohide = v; }
 void Tp::gfx_pixelart_health_bar_only_when_awake_set(int v) { _gfx_pixelart_health_bar_only_when_awake = v; }
 void Tp::gfx_pixelart_health_bar_shown_set(int v) { _gfx_pixelart_health_bar_shown = v; }
+void Tp::gfx_pixelart_oversized_and_centered_set(int v) { _gfx_pixelart_oversized_and_centered = v; }
+void Tp::gfx_pixelart_oversized_and_on_floor_set(int v) { _gfx_pixelart_oversized_and_on_floor = v; }
 void Tp::gfx_pixelart_reflection_set(int v) { _gfx_pixelart_reflection = v; }
 void Tp::gfx_pixelart_shadow_long_set(int v) { _gfx_pixelart_shadow_long = v; }
 void Tp::gfx_pixelart_shadow_set(int v) { _gfx_pixelart_shadow = v; }
@@ -1351,7 +1352,6 @@ void Tp::unused_flag30_set(int v) { _unused_flag30 = v; }
 void Tp::unused_flag31_set(int v) { _unused_flag31 = v; }
 void Tp::unused_flag32_set(int v) { _unused_flag32 = v; }
 void Tp::unused_flag33_set(int v) { _unused_flag33 = v; }
-void Tp::unused_flag34_set(int v) { _unused_flag34 = v; }
 void Tp::unused_flag3_set(int v) { _unused_flag3 = v; }
 void Tp::unused_flag40_set(int v) { _unused_flag40 = v; }
 void Tp::unused_flag48_set(int v) { _unused_flag48 = v; }

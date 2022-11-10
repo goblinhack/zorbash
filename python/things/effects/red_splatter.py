@@ -6,8 +6,8 @@ def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
     my.gfx_ascii_shown(self, True)
-    my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_oversized_and_on_floor(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_show_outlined(self, True)

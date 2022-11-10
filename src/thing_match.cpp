@@ -739,7 +739,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag33() && (what == "unused_flag33")) {
     return true;
   }
-  if (unused_flag34() && (what == "unused_flag34")) {
+  if (gfx_pixelart_oversized_and_centered() && (what == "gfx_pixelart_oversized_and_centered")) {
     return true;
   }
   if (is_limb() && (what == "is_limb")) {
@@ -2240,8 +2240,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag33") {
     return &Thing::unused_flag33;
   }
-  if (what == "unused_flag34") {
-    return &Thing::unused_flag34;
+  if (what == "gfx_pixelart_oversized_and_centered") {
+    return &Thing::gfx_pixelart_oversized_and_centered;
   }
   if (what == "is_limb") {
     return &Thing::is_limb;

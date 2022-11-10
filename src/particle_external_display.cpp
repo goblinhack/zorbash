@@ -110,7 +110,7 @@ void Level::display_pixelart_external_particles(void)
       blit_br.y += ((ytiles - 1) * tileh) / 2;
     }
 
-    if (unlikely(tpp && tpp->gfx_oversized_and_on_floor())) {
+    if (unlikely(tpp && tpp->gfx_pixelart_oversized_and_on_floor())) {
       float y_offset = (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
       blit_tl.y -= y_offset;
       blit_br.y -= y_offset;

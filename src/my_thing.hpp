@@ -1128,7 +1128,6 @@ public:
   int gfx_ascii_shown(void);
   int gfx_glows(void);
   int gfx_on_fire_anim(void);
-  int gfx_oversized_and_on_floor(void);
   int gfx_pixelart_animated_can_hflip(void);
   int gfx_pixelart_animated_can_vflip(void);
   int gfx_pixelart_animated_no_dir(void);
@@ -1140,6 +1139,8 @@ public:
   int gfx_pixelart_health_bar_autohide(void);
   int gfx_pixelart_health_bar_only_when_awake(void);
   int gfx_pixelart_health_bar_shown(void);
+  int gfx_pixelart_oversized_and_centered(void);
+  int gfx_pixelart_oversized_and_on_floor(void);
   int gfx_pixelart_reflection(void);
   int gfx_pixelart_shadow_long(void);
   int gfx_pixelart_shadow_short(void);
@@ -1988,7 +1989,6 @@ public:
   int unused_flag31(void);
   int unused_flag32(void);
   int unused_flag33(void);
-  int unused_flag34(void);
   int unused_flag3(void);
   int unused_flag40(void);
   int unused_flag48(void);

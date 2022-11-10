@@ -151,7 +151,7 @@ do
       gfx_health_bar_shown \
       gfx_long_shadow_caster \
       gfx_on_fire_anim \
-      gfx_oversized_and_on_floor \
+      gfx_pixelart_oversized_and_on_floor \
       gfx_pixelart_animated \
       gfx_pixelart_animated_can_hflip \
       gfx_pixelart_animated_can_vflip \
@@ -531,7 +531,7 @@ do
       unused_flag31 \
       unused_flag32 \
       unused_flag33 \
-      unused_flag34 \
+      gfx_pixelart_oversized_and_centered \
       is_limb \
       is_msg_allowed_is_dead \
       is_obs_in_the_way_for_firing \

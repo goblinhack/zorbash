@@ -30,7 +30,6 @@ enum {
   MAP_Z_PRIO_ALWAYS_BEHIND, // e.g. Dungeon entrance, walls
   MAP_Z_PRIO_BEHIND,        // e.g. Gargoyle podium
   MAP_Z_PRIO_ITEM,          // Normal items for carrying, like food, weapons
-  MAP_Z_PRIO_CURSOR,        // Selected path
   MAP_Z_PRIO_WEB,           // Should be behind spiders
   MAP_Z_PRIO_FIRE,          // Flames!
   MAP_Z_PRIO_MONST,         // Spiders and more! Want monsters in front of fire, so you can see bats for e.g.
@@ -43,6 +42,7 @@ enum {
   MAP_Z_PRIO_SWING,         // Attack animations
   MAP_Z_PRIO_CONSUMER,      // e.g. a gelatinous cube
   MAP_Z_PRIO_EFFECT,        // Potion effects
+  MAP_Z_PRIO_CURSOR,        // Selected path; you want this in front of large monsters so you can target them.
   MAP_Z_PRIO_LAST,
 };
 

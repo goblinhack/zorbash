@@ -28,6 +28,7 @@ def tp_init(name, text_long_name):
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_oversized_and_on_floor(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_submergable(self, True)

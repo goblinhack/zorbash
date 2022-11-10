@@ -178,7 +178,6 @@ private:
   int _gfx_ascii_shown_in_bg {};
   int _gfx_glows {};
   int _gfx_on_fire_anim {};
-  int _gfx_oversized_and_on_floor {};
   int _gfx_pixelart_animated {};
   int _gfx_pixelart_animated_can_hflip {};
   int _gfx_pixelart_animated_can_vflip {};
@@ -192,6 +191,8 @@ private:
   int _gfx_pixelart_health_bar_autohide {};
   int _gfx_pixelart_health_bar_only_when_awake {};
   int _gfx_pixelart_health_bar_shown {};
+  int _gfx_pixelart_oversized_and_centered {};
+  int _gfx_pixelart_oversized_and_on_floor {};
   int _gfx_pixelart_reflection {};
   int _gfx_pixelart_shadow {};
   int _gfx_pixelart_shadow_long {};
@@ -628,7 +629,6 @@ private:
   int _unused_flag31 {};
   int _unused_flag32 {};
   int _unused_flag33 {};
-  int _unused_flag34 {};
   int _unused_flag4 {};
   int _unused_flag40 {};
   int _unused_flag48 {};
@@ -1199,7 +1199,6 @@ public:
   int gfx_ascii_shown(void) const;
   int gfx_glows(void) const;
   int gfx_on_fire_anim(void) const;
-  int gfx_oversized_and_on_floor(void) const;
   int gfx_pixelart_animated_can_hflip(void) const;
   int gfx_pixelart_animated_can_vflip(void) const;
   int gfx_pixelart_animated_no_dir(void) const;
@@ -1212,6 +1211,8 @@ public:
   int gfx_pixelart_health_bar_autohide(void) const;
   int gfx_pixelart_health_bar_only_when_awake(void) const;
   int gfx_pixelart_health_bar_shown(void) const;
+  int gfx_pixelart_oversized_and_centered(void) const;
+  int gfx_pixelart_oversized_and_on_floor(void) const;
   int gfx_pixelart_reflection(void) const;
   int gfx_pixelart_shadow_long(void) const;
   int gfx_pixelart_shadow_short(void) const;
@@ -1646,7 +1647,6 @@ public:
   int unused_flag31(void) const;
   int unused_flag32(void) const;
   int unused_flag33(void) const;
-  int unused_flag34(void) const;
   int unused_flag3(void) const;
   int unused_flag40(void) const;
   int unused_flag48(void) const;
@@ -1737,7 +1737,6 @@ public:
   void gfx_ascii_shown_set(int v);
   void gfx_glows_set(int v);
   void gfx_on_fire_anim_set(int v);
-  void gfx_oversized_and_on_floor_set(int v);
   void gfx_pixelart_animated_can_hflip_set(int v);
   void gfx_pixelart_animated_can_vflip_set(int v);
   void gfx_pixelart_animated_no_dir_set(int v);
@@ -1751,6 +1750,8 @@ public:
   void gfx_pixelart_health_bar_autohide_set(int v);
   void gfx_pixelart_health_bar_only_when_awake_set(int v);
   void gfx_pixelart_health_bar_shown_set(int v);
+  void gfx_pixelart_oversized_and_centered_set(int v);
+  void gfx_pixelart_oversized_and_on_floor_set(int v);
   void gfx_pixelart_reflection_set(int v);
   void gfx_pixelart_shadow_long_set(int v);
   void gfx_pixelart_shadow_set(int v);
@@ -2322,7 +2323,6 @@ public:
   void unused_flag31_set(int v);
   void unused_flag32_set(int v);
   void unused_flag33_set(int v);
-  void unused_flag34_set(int v);
   void unused_flag3_set(int v);
   void unused_flag40_set(int v);
   void unused_flag48_set(int v);

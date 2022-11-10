@@ -64,6 +64,10 @@ def tp_init(name, text_long_name):
     my.collision_hit_priority(self, 20)
     my.damage_bite_chance_d1000(self, 0, 1000)
     my.damage_bite_dice(self, "3d8+10")
+    my.damage_digest_chance_d1000(self, 0, 1000)
+    my.damage_digest_dice(self, "1d40")
+    my.damage_poison_chance_d1000(self, 0, 500)
+    my.damage_poison_dice(self, "1d8+1")
     my.distance_avoid(self, 3)
     my.distance_vision(self, 10)
     my.gfx_anim_use(self, "attack_claws")
@@ -72,6 +76,7 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_health_bar_only_when_awake(self, True)
     my.gfx_pixelart_health_bar_shown(self, True)
+    my.gfx_pixelart_oversized_and_centered(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_submergable(self, True)
@@ -86,7 +91,6 @@ def tp_init(name, text_long_name):
     my.is_able_to_tire(self, True)
     my.is_always_submerged(self, True)
     my.is_asleep_initially(self, True)
-    my.is_engulfer(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)
@@ -96,6 +100,7 @@ def tp_init(name, text_long_name):
     my.is_deep_water_swimmer(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_eater_of_meat(self, True)
+    my.is_engulfer(self, True)
     my.is_green_blooded(self, True)
     my.is_hittable(self, True)
     my.is_immune_to_water(self, True)
@@ -171,12 +176,15 @@ def tp_init(name, text_long_name):
             ascii_fg_char="", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile="kraken.sleeping.1", is_sleeping=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="", ascii_bg_col_name="", ascii_fg_col_name="green",
+            ascii_fg_char="\"", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile="kraken.sleeping.2", is_sleeping=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="", ascii_bg_col_name="", ascii_fg_col_name="green",
+            tile="kraken.sleeping.3", is_sleeping=True, delay_ms=delay)
 
     my.tile(self,
             ascii_fg_char="K", ascii_bg_col_name="", ascii_fg_col_name="gray50",
-            tile="kraken.sleeping.2", is_dead=True, delay_ms=delay)
+            tile="kraken.dead", is_dead=True, delay_ms=delay)
 
     my.tp_update(self)
 

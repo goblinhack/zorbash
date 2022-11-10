@@ -332,10 +332,10 @@ int Thing::gfx_on_fire_anim(void)
   return (tp()->gfx_on_fire_anim());
 }
 
-int Thing::gfx_oversized_and_on_floor(void)
+int Thing::gfx_pixelart_oversized_and_on_floor(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_oversized_and_on_floor());
+  return (tp()->gfx_pixelart_oversized_and_on_floor());
 }
 
 int Thing::gfx_pixelart_shadow_short(void)
@@ -1452,10 +1452,10 @@ int Thing::unused_flag33(void)
   return (tp()->unused_flag33());
 }
 
-int Thing::unused_flag34(void)
+int Thing::gfx_pixelart_oversized_and_centered(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag34());
+  return (tp()->gfx_pixelart_oversized_and_centered());
 }
 
 int Thing::is_limb(void)

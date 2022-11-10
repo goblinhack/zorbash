@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - kraken guards treasure                                                                                                                     -->
 <!-- - test spiders and web minionness                                                                                                            -->
 <!-- - kraken corpse                                                                                                                              -->
 <!-- - test main body with freezing and wand of descent                                                                                           -->

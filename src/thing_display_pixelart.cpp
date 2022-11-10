@@ -475,7 +475,7 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   //
   // Put larger tiles on the same y base as small ones.
   //
-  if (unlikely(tpp->gfx_oversized_and_on_floor())) {
+  if (unlikely(tpp->gfx_pixelart_oversized_and_on_floor())) {
     float y_offset = (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
     blit_tl.y -= y_offset;
     blit_br.y -= y_offset;
@@ -553,7 +553,7 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   //
   // Bouncing. But not in water, that just looks odd.
   //
-  if (unlikely(! (is_in_water || is_in_lava) && (is_bouncing || (o_top && o_top->is_bouncing)))) {
+  if (unlikely((! (is_in_water || is_in_lava)) && (is_bouncing || (o_top && o_top->is_bouncing)))) {
     float bounce;
     if (o_top) {
       bounce = o_top->bounce_curr();
@@ -561,13 +561,13 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
       bounce = bounce_curr();
     }
 
-    float bh = (tileh / TILE_HEIGHT) * (int) (bounce * TILE_HEIGHT);
+    float bounce_height = (tileh / TILE_HEIGHT) * (int) (bounce * TILE_HEIGHT);
     if (reflection) {
-      blit_tl.y += bh;
-      blit_br.y += bh;
+      blit_tl.y += bounce_height;
+      blit_br.y += bounce_height;
     } else {
-      blit_tl.y -= bh;
-      blit_br.y -= bh;
+      blit_tl.y -= bounce_height;
+      blit_br.y -= bounce_height;
     }
   }
 
@@ -935,13 +935,17 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
         blit_end_reflection_submerged(submerged);
       } else {
         if (tile && tile_get_height(tile) != TILE_HEIGHT) {
-          if (tpp->gfx_oversized_and_on_floor()) {
+          if (tpp->gfx_pixelart_oversized_and_on_floor()) {
             //
-            // Seems to blit ok
+            // e.g. kraken
+            //
+          } else if (tpp->gfx_pixelart_oversized_and_centered()) {
+            //
+            // e.g. dungeon cleaner
             //
           } else if (immediate_owner()) {
             //
-            // Seems to blit ok
+            // e.g. sword
             //
           } else {
             blit_br.y += TILE_HEIGHT;
@@ -1108,7 +1112,7 @@ void Thing::blit_upside_down(int fbo)
   std::swap(blit_tl.y, blit_br.y);
 
   if (tile && tile_get_height(tile) != TILE_HEIGHT) {
-    if (tpp->gfx_oversized_and_on_floor()) {
+    if (tpp->gfx_pixelart_oversized_and_on_floor()) {
       blit_br.y += diff;
       blit_tl.y += diff;
     } else {
