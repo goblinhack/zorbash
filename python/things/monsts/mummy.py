@@ -29,7 +29,6 @@ def tp_init(name, text_long_name):
     # begin sort marker
     my.aggression_pct(self, 100)
     my.ai_resent_count(self, 100)
-    my.ai_shove_chance_d1000(self, 200)
     my.ai_wanderer(self, True)
     my.attack_eater(self, True)
     my.attack_humanoid(self, True)
@@ -73,7 +72,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_change_levels(self, True)
     my.is_able_to_fall(self, True)
     my.is_able_to_see_in_the_dark(self, True)
-    my.is_able_to_shove(self, True)
+    my.is_able_to_shove_chance_d1000(self, 200)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)

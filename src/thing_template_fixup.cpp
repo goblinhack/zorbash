@@ -92,6 +92,10 @@ void tp_fixup(void)
       tp->is_temperature_sensitive_set(true);
     }
 
+    if (tp->is_able_to_shove_chance_d1000()) {
+      tp->is_able_to_shove_set(true);
+    }
+
     if (tp->is_able_to_melt()) {
       tp->is_temperature_sensitive_set(true);
       if (! tp->melting_chance_d1000()) {

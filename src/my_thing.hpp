@@ -943,7 +943,6 @@ public:
   int ai_hit_actual(Thingp hitter, Thingp real_hitter, AttackOptions *, int damage);
   int ai_obstacle(void);
   int ai_resent_count(void);
-  int ai_shove_chance_d1000(void);
   int ai_wanderer(void);
   int appearing_chance_d1000(void);
   int attack_eater(void);
@@ -1226,6 +1225,7 @@ public:
   int is_able_to_rest(void);
   int is_able_to_see_in_the_dark(void);
   int is_able_to_see_through_doors(void);
+  int is_able_to_shove_chance_d1000(void);
   int is_able_to_shove(void);
   int is_able_to_sleep(void);
   int is_able_to_spawn_things(void);

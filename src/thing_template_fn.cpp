@@ -160,7 +160,6 @@ int Tp::aggression_pct(void) const { return _aggression_pct; }
 int Tp::ai_detect_secret_doors(void) const { return _ai_detect_secret_doors; }
 int Tp::ai_obstacle(void) const { return _ai_obstacle; }
 int Tp::ai_resent_count(void) const { return _ai_resent_count; }
-int Tp::ai_shove_chance_d1000(void) const { return _ai_shove_chance_d1000; }
 int Tp::ai_wanderer(void) const { return _ai_wanderer; }
 int Tp::appearing_chance_d1000(void) const { return _appearing_chance_d1000; }
 int Tp::attack_eater(void) const { return _attack_eater; }
@@ -292,6 +291,7 @@ int Tp::is_able_to_open_doors(void) const { return _is_able_to_open_doors; }
 int Tp::is_able_to_rest(void) const { return _is_able_to_rest; }
 int Tp::is_able_to_see_in_the_dark(void) const { return _is_able_to_see_in_the_dark; }
 int Tp::is_able_to_see_through_doors(void) const { return _is_able_to_see_through_doors; }
+int Tp::is_able_to_shove_chance_d1000(void) const { return _is_able_to_shove_chance_d1000; }
 int Tp::is_able_to_shove(void) const { return _is_able_to_shove; }
 int Tp::is_able_to_sleep(void) const { return _is_able_to_sleep; }
 int Tp::is_able_to_spawn_things(void) const { return _is_able_to_spawn_things; }
@@ -694,7 +694,6 @@ void Tp::aggression_pct_set(int v) { _aggression_pct = v; }
 void Tp::ai_detect_secret_doors_set(int v) { _ai_detect_secret_doors = v; }
 void Tp::ai_obstacle_set(int v) { _ai_obstacle = v; }
 void Tp::ai_resent_count_set(int v) { _ai_resent_count = v; }
-void Tp::ai_shove_chance_d1000_set(int v) { _ai_shove_chance_d1000 = v; }
 void Tp::ai_wanderer_set(int v) { _ai_wanderer = v; }
 void Tp::appearing_chance_d1000_set(int v) { _appearing_chance_d1000 = v; }
 void Tp::attack_eater_set(int v) { _attack_eater = v; }
@@ -831,6 +830,7 @@ void Tp::is_able_to_open_doors_set(int v) { _is_able_to_open_doors = v; }
 void Tp::is_able_to_rest_set(int v) { _is_able_to_rest = v; }
 void Tp::is_able_to_see_in_the_dark_set(int v) { _is_able_to_see_in_the_dark = v; }
 void Tp::is_able_to_see_through_doors_set(int v) { _is_able_to_see_through_doors = v; }
+void Tp::is_able_to_shove_chance_d1000_set(int v) { _is_able_to_shove_chance_d1000 = v; }
 void Tp::is_able_to_shove_set(int v) { _is_able_to_shove = v; }
 void Tp::is_able_to_sleep_set(int v) { _is_able_to_sleep = v; }
 void Tp::is_able_to_spawn_things_set(int v) { _is_able_to_spawn_things = v; }

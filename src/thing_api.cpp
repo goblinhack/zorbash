@@ -133,10 +133,10 @@ int Thing::attack_meat(void)
   return (tp()->attack_meat());
 }
 
-int Thing::ai_shove_chance_d1000(void)
+int Thing::is_able_to_shove_chance_d1000(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->ai_shove_chance_d1000());
+  return (tp()->is_able_to_shove_chance_d1000());
 }
 
 int Thing::unused_chance1_d1000(void)

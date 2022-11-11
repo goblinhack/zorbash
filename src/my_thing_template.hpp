@@ -106,7 +106,6 @@ private:
   int _ai_detect_secret_doors {};
   int _ai_obstacle {};
   int _ai_resent_count {};
-  int _ai_shove_chance_d1000 {};
   int _ai_wanderer {};
   int _appearing_chance_d1000 {};
   int _attack_eater {};
@@ -244,6 +243,7 @@ private:
   int _is_able_to_see_in_the_dark {};
   int _is_able_to_see_through_doors {};
   int _is_able_to_shove {};
+  int _is_able_to_shove_chance_d1000 {};
   int _is_able_to_sleep {};
   int _is_able_to_spawn_things {};
   int _is_able_to_swim {};
@@ -1113,7 +1113,6 @@ public:
   int ai_detect_secret_doors(void) const;
   int ai_obstacle(void) const;
   int ai_resent_count(void) const;
-  int ai_shove_chance_d1000(void) const;
   int ai_wanderer(void) const;
   int appearing_chance_d1000(void) const;
   int attack_eater(void) const;
@@ -1262,6 +1261,7 @@ public:
   int is_able_to_rest(void) const;
   int is_able_to_see_in_the_dark(void) const;
   int is_able_to_see_through_doors(void) const;
+  int is_able_to_shove_chance_d1000(void) const;
   int is_able_to_shove(void) const;
   int is_able_to_sleep(void) const;
   int is_able_to_spawn_things(void) const;
@@ -1664,7 +1664,6 @@ public:
   void ai_detect_secret_doors_set(int v);
   void ai_obstacle_set(int v);
   void ai_resent_count_set(int v);
-  void ai_shove_chance_d1000_set(int v);
   void ai_wanderer_set(int v);
   void appearing_chance_d1000_set(int v);
   void attack_eater_set(int v);
@@ -1801,6 +1800,7 @@ public:
   void is_able_to_rest_set(int v);
   void is_able_to_see_in_the_dark_set(int v);
   void is_able_to_see_through_doors_set(int v);
+  void is_able_to_shove_chance_d1000_set(int v);
   void is_able_to_shove_set(int v);
   void is_able_to_sleep_set(int v);
   void is_able_to_spawn_things_set(int v);
