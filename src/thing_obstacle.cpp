@@ -94,7 +94,7 @@ bool Thing::collision_obstacle(Thingp it)
   }
 
   //
-  // Limit krakens to the depths, but allow eels and giant_pirhanas free roam.
+  // Limit krakens to the depths, but allow eels and pirhana_giants free roam.
   //
   if (is_swimmer()) {
     if (is_deep_water_swimmer() && is_shallow_water_swimmer()) {
@@ -297,7 +297,7 @@ bool Thing::ai_obstacle(Thingp it)
   }
 
   //
-  // Limit krakens to the depths, but allow eels and giant_pirhanas free roam.
+  // Limit krakens to the depths, but allow eels and pirhana_giants free roam.
   //
   if (is_swimmer()) {
     if (is_deep_water_swimmer() && is_shallow_water_swimmer()) {

@@ -128,7 +128,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="giant_pirhana", text_long_name="giant pirhana")
+    tp_init(name="pirhana_giant", text_long_name="giant pirhana")
 
 
 init()

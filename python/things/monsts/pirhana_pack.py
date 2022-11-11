@@ -3,7 +3,7 @@ import tp
 
 
 def on_you_are_declared_leader(me, x, y):
-    my.thing_polymorph(me, "giant_pirhana")
+    my.thing_polymorph(me, "pirhana_giant")
 
 
 def on_you_are_declared_a_follower(me, leader, x, y):
