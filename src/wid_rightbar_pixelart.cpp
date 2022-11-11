@@ -253,7 +253,7 @@ bool wid_rightbar_pixelart_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ width + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "%2d", 10 + player->stat_att_total());
+    snprintf(tmp, sizeof(tmp) - 1, "%2d", 10 + player->stat_att_mod_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }

@@ -6,7 +6,7 @@
 #include "my_monst.hpp"
 #include "my_thing.hpp"
 
-int Thing::stat_att_total()
+int Thing::stat_att_mod_total()
 {
   TRACE_AND_INDENT();
 
@@ -41,7 +41,7 @@ int Thing::stat_att_total()
   {
     auto iter = equip_get(e);
     if (iter) {
-      stat += iter->stat_att_total();
+      stat += iter->stat_att_mod_total();
       if (stat != prev) {
         prev = stat;
         dbg2("Att: with (%s %s): %d", iter->to_short_string().c_str(),
@@ -68,7 +68,7 @@ int Thing::stat_att_total()
         if (iter->is_auto_equipped()) {
           continue;
         }
-        stat += iter->stat_att_total();
+        stat += iter->stat_att_mod_total();
         if (stat != prev) {
           prev = stat;
           dbg2("Att: with (%s %s): %d", iter->to_short_string().c_str(),
@@ -81,7 +81,7 @@ int Thing::stat_att_total()
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += iter->stat_att_total();
+        stat += iter->stat_att_mod_total();
         if (stat != prev) {
           prev = stat;
           dbg2("Att: with (%s %s): %d", iter->to_short_string().c_str(),
@@ -94,7 +94,7 @@ int Thing::stat_att_total()
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += iter->stat_att_total();
+        stat += iter->stat_att_mod_total();
         if (stat != prev) {
           prev = stat;
           dbg2("Att: with (%s %s): %d", iter->to_short_string().c_str(),
@@ -107,7 +107,7 @@ int Thing::stat_att_total()
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += iter->stat_att_total();
+        stat += iter->stat_att_mod_total();
         if (stat != prev) {
           prev = stat;
           dbg2("Att: with (%s %s): %d", iter->to_short_string().c_str(),
@@ -124,6 +124,20 @@ int Thing::stat_att_total()
       prev = stat;
       dbg2("Att: with enchant %d: %d", enchant, stat);
     }
+  }
+
+  switch (thing_size()) {
+    case THING_SIZE_GARGANTUAN: stat += 4; break;
+    case THING_SIZE_GIANT: stat += 2; break;
+    case THING_SIZE_LARGE: stat += 1; break;
+    case THING_SIZE_NORMAL: stat += 0; break;
+    case THING_SIZE_SMALL: stat -= 1; break;
+    case THING_SIZE_TINY: stat -= 2; break;
+  }
+
+  if (stat != prev) {
+    prev = stat;
+    dbg3("Att: with size modifier: %d", stat);
   }
 
   return stat;

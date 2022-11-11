@@ -572,13 +572,13 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
     }
 
     //
-    // Attack  roll is 1d20 + stat_att_total - penalties
+    // Attack  roll is 1d20 + stat_att_mod_total - penalties
     // Defence roll is        stat_def_total - penalties
-    // Damage       is dam  + stat_att_total
+    // Damage       is dam  + stat_att_mod_total
     //
-    auto att_bonus = stat_att_total();
+    auto att_bonus = stat_att_mod_total();
     if (owner) {
-      att_bonus = owner->stat_att_total();
+      att_bonus = owner->stat_att_mod_total();
     }
 
     //
@@ -1074,7 +1074,7 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
         //
       } else {
         //
-        // Attack  is 1d20 + stat_att_total - penalties
+        // Attack  is 1d20 + stat_att_mod_total - penalties
         // Defence is        stat_def_total - penalties
         //
         bool hit               = false;

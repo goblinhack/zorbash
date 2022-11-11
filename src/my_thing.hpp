@@ -1789,7 +1789,7 @@ public:
   int stat_att_penalty_when_stuck_max(void);
   int stat_att_penalty_when_stuck(void);
   int stat_att_set(int);
-  int stat_att_total(void);
+  int stat_att_mod_total(void);
   int stat_att(void);
   int stat_con_decr(int);
   int stat_con_decr(void);

@@ -1322,9 +1322,9 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     auto stat_att       = 10 + t->stat_att();
-    auto stat_att_total = 10 + t->stat_att_total();
-    if (stat_att_total != stat_att) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack                    %3d", stat_att_total);
+    auto stat_att_mod_total = 10 + t->stat_att_mod_total();
+    if (stat_att_mod_total != stat_att) {
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack                    %3d", stat_att_mod_total);
       w->log(tmp);
 
       Thingp curr_armor = t->equip_get(MONST_EQUIP_ARMOR);
@@ -1389,7 +1389,7 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
       w->log(tmp);
     }
   } else if (t->stat_att_mod()) {
-    auto stat = t->stat_att_total();
+    auto stat = t->stat_att_mod_total();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack modifier          %4s", modifier_to_string(stat).c_str());
     w->log(tmp);
   }

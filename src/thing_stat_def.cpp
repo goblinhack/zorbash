@@ -126,6 +126,20 @@ int Thing::stat_def_total(void)
     }
   }
 
+  switch (thing_size()) {
+    case THING_SIZE_GARGANTUAN: stat += 4; break;
+    case THING_SIZE_GIANT: stat += 2; break;
+    case THING_SIZE_LARGE: stat += 1; break;
+    case THING_SIZE_NORMAL: stat += 0; break;
+    case THING_SIZE_SMALL: stat -= 1; break;
+    case THING_SIZE_TINY: stat -= 2; break;
+  }
+
+  if (stat != prev) {
+    prev = stat;
+    dbg3("Def: with size modifier: %d", stat);
+  }
+
   return stat;
 }
 

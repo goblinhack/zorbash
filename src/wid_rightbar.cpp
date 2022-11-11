@@ -230,7 +230,7 @@ void wid_rightbar_stats_over_stat_att_b(Widp w, int relx, int rely, int wheelx, 
 
   {
     auto val = 10 + player->stat_att();
-    auto tot = 10 + player->stat_att_total();
+    auto tot = 10 + player->stat_att_mod_total();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total attack including all items and modifiers is %d.", tot);
