@@ -19,6 +19,7 @@ def tp_init(name, tiles=[]):
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)
     my.is_combustible(self, True)
+    my.gfx_ascii_color_fg_unchanged_by_lights(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_hittable(self, True)
@@ -31,11 +32,11 @@ def tp_init(name, tiles=[]):
     my.text_short_description(self, "Thick and sticky webball.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_Z_PRIO_WEB)
+    my.z_prio(self, my.MAP_Z_PRIO_EFFECT)
     # end sort marker
 
     for t in tiles:
-        my.tile(self, ascii_fg_char="cross", ascii_fg_col_name="white", tile=t)
+        my.tile(self, ascii_fg_char="cross", ascii_fg_col_name="white", ascii_fg_alpha=250, tile=t)
 
     my.tp_update(self)
 

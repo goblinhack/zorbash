@@ -736,10 +736,10 @@ bool Thing::matches(const std::string &what)
   if (unused_flag31() && (what == "unused_flag31")) {
     return true;
   }
-  if (unused_flag32() && (what == "unused_flag32")) {
+  if (gfx_ascii_color_bg_unchanged_by_lights() && (what == "gfx_ascii_color_bg_unchanged_by_lights")) {
     return true;
   }
-  if (unused_flag33() && (what == "unused_flag33")) {
+  if (gfx_ascii_color_fg_unchanged_by_lights() && (what == "gfx_ascii_color_fg_unchanged_by_lights")) {
     return true;
   }
   if (gfx_pixelart_oversized_and_centered() && (what == "gfx_pixelart_oversized_and_centered")) {
@@ -2240,11 +2240,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag31") {
     return &Thing::unused_flag31;
   }
-  if (what == "unused_flag32") {
-    return &Thing::unused_flag32;
+  if (what == "gfx_ascii_color_bg_unchanged_by_lights") {
+    return &Thing::gfx_ascii_color_bg_unchanged_by_lights;
   }
-  if (what == "unused_flag33") {
-    return &Thing::unused_flag33;
+  if (what == "gfx_ascii_color_fg_unchanged_by_lights") {
+    return &Thing::gfx_ascii_color_fg_unchanged_by_lights;
   }
   if (what == "gfx_pixelart_oversized_and_centered") {
     return &Thing::gfx_pixelart_oversized_and_centered;

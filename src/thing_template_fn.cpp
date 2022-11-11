@@ -216,6 +216,8 @@ int Tp::gfx_ascii_bg_color_spread_blue(void) const { return _gfx_ascii_bg_color_
 int Tp::gfx_ascii_bg_color_spread_green(void) const { return _gfx_ascii_bg_color_spread_green; }
 int Tp::gfx_ascii_bg_color_spread_hue(void) const { return _gfx_ascii_bg_color_spread_hue; }
 int Tp::gfx_ascii_bg_color_spread_red(void) const { return _gfx_ascii_bg_color_spread_red; }
+int Tp::gfx_ascii_color_bg_unchanged_by_lights(void) const { return _gfx_ascii_color_bg_unchanged_by_lights; }
+int Tp::gfx_ascii_color_fg_unchanged_by_lights(void) const { return _gfx_ascii_color_fg_unchanged_by_lights; }
 int Tp::gfx_ascii_color_is_animated(void) const { return _gfx_ascii_color_is_animated; }
 int Tp::gfx_ascii_fade_with_dist(void) const { return _gfx_ascii_fade_with_dist; }
 int Tp::gfx_ascii_fg_color_spread_alpha(void) const { return _gfx_ascii_fg_color_spread_alpha; }
@@ -274,6 +276,8 @@ int Tp::is_able_to_fall(void) const { return _is_able_to_fall; }
 int Tp::is_able_to_fire_at(void) const { return _is_able_to_fire_at; }
 int Tp::is_able_to_follow(void) const { return _is_able_to_follow; }
 int Tp::is_able_to_freeze(void) const { return _is_able_to_freeze; }
+int Tp::is_able_to_grapple_chance_d1000(void) const { return _is_able_to_grapple_chance_d1000; }
+int Tp::is_able_to_grapple(void) const { return _is_able_to_grapple; }
 int Tp::is_able_to_jump_attack_chance_d1000(void) const { return _is_able_to_jump_attack_chance_d1000; }
 int Tp::is_able_to_jump_attack(void) const { return _is_able_to_jump_attack; }
 int Tp::is_able_to_jump_escape(void) const { return _is_able_to_jump_escape; }
@@ -292,9 +296,7 @@ int Tp::is_able_to_rest(void) const { return _is_able_to_rest; }
 int Tp::is_able_to_see_in_the_dark(void) const { return _is_able_to_see_in_the_dark; }
 int Tp::is_able_to_see_through_doors(void) const { return _is_able_to_see_through_doors; }
 int Tp::is_able_to_shove_chance_d1000(void) const { return _is_able_to_shove_chance_d1000; }
-int Tp::is_able_to_grapple_chance_d1000(void) const { return _is_able_to_grapple_chance_d1000; }
 int Tp::is_able_to_shove(void) const { return _is_able_to_shove; }
-int Tp::is_able_to_grapple(void) const { return _is_able_to_grapple; }
 int Tp::is_able_to_sleep(void) const { return _is_able_to_sleep; }
 int Tp::is_able_to_spawn_things(void) const { return _is_able_to_spawn_things; }
 int Tp::is_able_to_swim(void) const { return _is_able_to_swim; }
@@ -677,8 +679,6 @@ int Tp::unused_flag29(void) const { return _unused_flag29; }
 int Tp::unused_flag2(void) const { return _unused_flag2; }
 int Tp::unused_flag30(void) const { return _unused_flag30; }
 int Tp::unused_flag31(void) const { return _unused_flag31; }
-int Tp::unused_flag32(void) const { return _unused_flag32; }
-int Tp::unused_flag33(void) const { return _unused_flag33; }
 int Tp::unused_flag3(void) const { return _unused_flag3; }
 int Tp::unused_flag40(void) const { return _unused_flag40; }
 int Tp::unused_flag48(void) const { return _unused_flag48; }
@@ -756,6 +756,8 @@ void Tp::gfx_ascii_bg_color_spread_blue_set(int v) { _gfx_ascii_bg_color_spread_
 void Tp::gfx_ascii_bg_color_spread_green_set(int v) { _gfx_ascii_bg_color_spread_green = v; }
 void Tp::gfx_ascii_bg_color_spread_hue_set(int v) { _gfx_ascii_bg_color_spread_hue = v; }
 void Tp::gfx_ascii_bg_color_spread_red_set(int v) { _gfx_ascii_bg_color_spread_red = v; }
+void Tp::gfx_ascii_color_bg_unchanged_by_lights_set(int v) { _gfx_ascii_color_bg_unchanged_by_lights = v; }
+void Tp::gfx_ascii_color_fg_unchanged_by_lights_set(int v) { _gfx_ascii_color_fg_unchanged_by_lights = v; }
 void Tp::gfx_ascii_color_is_animated_set(int v) { _gfx_ascii_color_is_animated = v; }
 void Tp::gfx_ascii_fade_with_dist_set(int v) { _gfx_ascii_fade_with_dist = v; }
 void Tp::gfx_ascii_fg_color_spread_alpha_set(int v) { _gfx_ascii_fg_color_spread_alpha = v; }
@@ -1354,8 +1356,6 @@ void Tp::unused_flag29_set(int v) { _unused_flag29 = v; }
 void Tp::unused_flag2_set(int v) { _unused_flag2 = v; }
 void Tp::unused_flag30_set(int v) { _unused_flag30 = v; }
 void Tp::unused_flag31_set(int v) { _unused_flag31 = v; }
-void Tp::unused_flag32_set(int v) { _unused_flag32 = v; }
-void Tp::unused_flag33_set(int v) { _unused_flag33 = v; }
 void Tp::unused_flag3_set(int v) { _unused_flag3 = v; }
 void Tp::unused_flag40_set(int v) { _unused_flag40 = v; }
 void Tp::unused_flag48_set(int v) { _unused_flag48 = v; }

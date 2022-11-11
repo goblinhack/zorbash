@@ -939,7 +939,6 @@ public:
   // begin sort marker2 {
   int aggression_pct(void);
   int ai_detect_secret_doors(void);
-  int size_modifier(void);
   int ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int type, bool check);
   int ai_hit_actual(Thingp hitter, Thingp real_hitter, AttackOptions *, int damage);
   int ai_obstacle(void);
@@ -1116,6 +1115,8 @@ public:
   int gfx_ascii_bg_color_spread_green(void);
   int gfx_ascii_bg_color_spread_hue(void);
   int gfx_ascii_bg_color_spread_red(void);
+  int gfx_ascii_color_bg_unchanged_by_lights(void);
+  int gfx_ascii_color_fg_unchanged_by_lights(void);
   int gfx_ascii_color_is_animated(void);
   int gfx_ascii_fade_with_dist(void);
   int gfx_ascii_fg_color_spread_alpha(void);
@@ -1741,6 +1742,7 @@ public:
   int shove_strength_mod(void);
   int shove_strength_total(void);
   int shove_strength(void);
+  int size_modifier(void);
   int skill_enchant_count(const uint32_t slot);
   int skillstone_count(void);
   int sleep_count_decr(int);
@@ -1781,6 +1783,7 @@ public:
   int stat_att_mod_incr(int);
   int stat_att_mod_incr(void);
   int stat_att_mod_set(int);
+  int stat_att_mod_total(void);
   int stat_att_mod(void);
   int stat_att_penalties_total(void);
   int stat_att_penalty_when_idle_max(void);
@@ -1790,7 +1793,6 @@ public:
   int stat_att_penalty_when_stuck_max(void);
   int stat_att_penalty_when_stuck(void);
   int stat_att_set(int);
-  int stat_att_mod_total(void);
   int stat_att(void);
   int stat_con_decr(int);
   int stat_con_decr(void);
@@ -1990,8 +1992,6 @@ public:
   int unused_flag2(void);
   int unused_flag30(void);
   int unused_flag31(void);
-  int unused_flag32(void);
-  int unused_flag33(void);
   int unused_flag3(void);
   int unused_flag40(void);
   int unused_flag48(void);

@@ -20,6 +20,7 @@ def lava_init(name, text_long_name, tiles=[]):
     my.damage_nat_att_type(self, "burn")
     my.gfx_ascii_animated(self, True)
     my.gfx_ascii_bg_color_spread_hue(self, 30)
+    my.gfx_ascii_color_fg_unchanged_by_lights(self, True)
     my.gfx_ascii_color_is_animated(self, True)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)

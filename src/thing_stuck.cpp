@@ -104,20 +104,6 @@ bool Thing::is_stuck_check(void)
     return true;
   }
 
-  if (level->is_sticky(curr_at.x, curr_at.y)) {
-    if (is_sticky()) {
-      //
-      // ok
-      //
-    } else if (buff_find_is_slippery()) {
-      //
-      // ok
-      //
-    } else {
-      stuck = true;
-    }
-  }
-
   if (level->is_spiderweb(curr_at.x, curr_at.y)) {
     if (is_immune_to_spiderwebs()) {
       //
@@ -130,6 +116,18 @@ bool Thing::is_stuck_check(void)
     } else if (10 + d20() < stat_str()) {
       //
       // Give a chance to escape.
+      //
+    } else {
+      stuck = true;
+    }
+  } else if (level->is_sticky(curr_at.x, curr_at.y)) {
+    if (is_sticky()) {
+      //
+      // ok
+      //
+    } else if (buff_find_is_slippery()) {
+      //
+      // ok
       //
     } else {
       stuck = true;

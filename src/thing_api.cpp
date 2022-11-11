@@ -1452,16 +1452,16 @@ int Thing::unused_flag31(void)
   return (tp()->unused_flag31());
 }
 
-int Thing::unused_flag32(void)
+int Thing::gfx_ascii_color_bg_unchanged_by_lights(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag32());
+  return (tp()->gfx_ascii_color_bg_unchanged_by_lights());
 }
 
-int Thing::unused_flag33(void)
+int Thing::gfx_ascii_color_fg_unchanged_by_lights(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag33());
+  return (tp()->gfx_ascii_color_fg_unchanged_by_lights());
 }
 
 int Thing::gfx_pixelart_oversized_and_centered(void)

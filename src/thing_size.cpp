@@ -16,4 +16,5 @@ int Thing::size_modifier(void)
     case THING_SIZE_SMALL: return 1; break;
     case THING_SIZE_TINY: return 2; break;
   }
+  return 0;
 }

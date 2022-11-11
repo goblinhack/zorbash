@@ -165,6 +165,8 @@ private:
   int _gfx_ascii_bg_color_spread_green {};
   int _gfx_ascii_bg_color_spread_hue {};
   int _gfx_ascii_bg_color_spread_red {};
+  int _gfx_ascii_color_bg_unchanged_by_lights {};
+  int _gfx_ascii_color_fg_unchanged_by_lights {};
   int _gfx_ascii_color_is_animated {};
   int _gfx_ascii_fade_with_dist {};
   int _gfx_ascii_fg_color_spread_alpha {};
@@ -629,8 +631,6 @@ private:
   int _unused_flag3 {};
   int _unused_flag30 {};
   int _unused_flag31 {};
-  int _unused_flag32 {};
-  int _unused_flag33 {};
   int _unused_flag4 {};
   int _unused_flag40 {};
   int _unused_flag48 {};
@@ -1188,6 +1188,8 @@ public:
   int gfx_ascii_bg_color_spread_green(void) const;
   int gfx_ascii_bg_color_spread_hue(void) const;
   int gfx_ascii_bg_color_spread_red(void) const;
+  int gfx_ascii_color_bg_unchanged_by_lights(void) const;
+  int gfx_ascii_color_fg_unchanged_by_lights(void) const;
   int gfx_ascii_color_is_animated(void) const;
   int gfx_ascii_fade_with_dist(void) const;
   int gfx_ascii_fg_color_spread_alpha(void) const;
@@ -1649,8 +1651,6 @@ public:
   int unused_flag2(void) const;
   int unused_flag30(void) const;
   int unused_flag31(void) const;
-  int unused_flag32(void) const;
-  int unused_flag33(void) const;
   int unused_flag3(void) const;
   int unused_flag40(void) const;
   int unused_flag48(void) const;
@@ -1728,6 +1728,8 @@ public:
   void gfx_ascii_bg_color_spread_green_set(int v);
   void gfx_ascii_bg_color_spread_hue_set(int v);
   void gfx_ascii_bg_color_spread_red_set(int v);
+  void gfx_ascii_color_bg_unchanged_by_lights_set(int v);
+  void gfx_ascii_color_fg_unchanged_by_lights_set(int v);
   void gfx_ascii_color_is_animated_set(int v);
   void gfx_ascii_fade_with_dist_set(int v);
   void gfx_ascii_fg_color_spread_alpha_set(int v);
@@ -2327,8 +2329,6 @@ public:
   void unused_flag2_set(int v);
   void unused_flag30_set(int v);
   void unused_flag31_set(int v);
-  void unused_flag32_set(int v);
-  void unused_flag33_set(int v);
   void unused_flag3_set(int v);
   void unused_flag40_set(int v);
   void unused_flag48_set(int v);

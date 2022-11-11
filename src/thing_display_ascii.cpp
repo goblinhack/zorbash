@@ -222,10 +222,14 @@ void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
     //
 
     //
-    // This prevents the L in lave from appearing reddish. Not sure if I want this for other things too.
+    // This prevents the L in lava from appearing reddish. Not sure if I want this for other things too.
     //
     if (fg) {
-      if (is_lava()) {
+      if (gfx_ascii_color_fg_unchanged_by_lights()) {
+        return;
+      }
+    } else {
+      if (gfx_ascii_color_bg_unchanged_by_lights()) {
         return;
       }
     }

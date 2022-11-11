@@ -529,8 +529,8 @@ do
       unused_flag3 \
       unused_flag30 \
       unused_flag31 \
-      unused_flag32 \
-      unused_flag33 \
+      gfx_ascii_color_bg_unchanged_by_lights \
+      gfx_ascii_color_fg_unchanged_by_lights \
       gfx_pixelart_oversized_and_centered \
       is_limb \
       is_msg_allowed_is_dead \
