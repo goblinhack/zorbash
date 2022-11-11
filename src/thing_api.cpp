@@ -139,6 +139,12 @@ int Thing::is_able_to_shove_chance_d1000(void)
   return (tp()->is_able_to_shove_chance_d1000());
 }
 
+int Thing::is_able_to_grapple_chance_d1000(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_able_to_grapple_chance_d1000());
+}
+
 int Thing::unused_chance1_d1000(void)
 {
   TRACE_NO_INDENT();
@@ -211,6 +217,12 @@ int Thing::is_able_to_shove(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_able_to_shove());
+}
+
+int Thing::is_able_to_grapple(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_able_to_grapple());
 }
 
 int Thing::blast_max_radius(void)

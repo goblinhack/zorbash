@@ -52,6 +52,9 @@ bool Thing::matches(const std::string &what)
   if (is_able_to_shove() && (what == "is_able_to_shove")) {
     return true;
   }
+  if (is_able_to_grapple() && (what == "is_able_to_grapple")) {
+    return true;
+  }
   if (is_able_to_walk_through_walls() && (what == "is_able_to_walk_through_walls")) {
     return true;
   }
@@ -1381,6 +1384,9 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "is_able_to_shove") {
     return &Thing::is_able_to_shove;
+  }
+  if (what == "is_able_to_grapple") {
+    return &Thing::is_able_to_grapple;
   }
   if (what == "is_able_to_sleep") {
     return &Thing::is_able_to_sleep;

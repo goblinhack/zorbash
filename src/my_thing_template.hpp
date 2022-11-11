@@ -225,6 +225,8 @@ private:
   int _is_able_to_fire_at {};
   int _is_able_to_follow {};
   int _is_able_to_freeze {};
+  int _is_able_to_grapple {};
+  int _is_able_to_grapple_chance_d1000 {};
   int _is_able_to_jump {};
   int _is_able_to_jump_attack {};
   int _is_able_to_jump_attack_chance_d1000 {};
@@ -1244,6 +1246,8 @@ public:
   int is_able_to_fire_at(void) const;
   int is_able_to_follow(void) const;
   int is_able_to_freeze(void) const;
+  int is_able_to_grapple_chance_d1000(void) const;
+  int is_able_to_grapple(void) const;
   int is_able_to_jump_attack_chance_d1000(void) const;
   int is_able_to_jump_attack(void) const;
   int is_able_to_jump_escape(void) const;
@@ -1783,6 +1787,8 @@ public:
   void is_able_to_fire_at_set(int v);
   void is_able_to_follow_set(int v);
   void is_able_to_freeze_set(int v);
+  void is_able_to_grapple_chance_d1000_set(int v);
+  void is_able_to_grapple_set(int v);
   void is_able_to_jump_attack_chance_d1000_set(int v);
   void is_able_to_jump_attack_set(int v);
   void is_able_to_jump_escape_set(int v);

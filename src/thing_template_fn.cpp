@@ -292,7 +292,9 @@ int Tp::is_able_to_rest(void) const { return _is_able_to_rest; }
 int Tp::is_able_to_see_in_the_dark(void) const { return _is_able_to_see_in_the_dark; }
 int Tp::is_able_to_see_through_doors(void) const { return _is_able_to_see_through_doors; }
 int Tp::is_able_to_shove_chance_d1000(void) const { return _is_able_to_shove_chance_d1000; }
+int Tp::is_able_to_grapple_chance_d1000(void) const { return _is_able_to_grapple_chance_d1000; }
 int Tp::is_able_to_shove(void) const { return _is_able_to_shove; }
+int Tp::is_able_to_grapple(void) const { return _is_able_to_grapple; }
 int Tp::is_able_to_sleep(void) const { return _is_able_to_sleep; }
 int Tp::is_able_to_spawn_things(void) const { return _is_able_to_spawn_things; }
 int Tp::is_able_to_swim(void) const { return _is_able_to_swim; }
@@ -813,6 +815,8 @@ void Tp::is_able_to_fall_set(int v) { _is_able_to_fall = v; }
 void Tp::is_able_to_fire_at_set(int v) { _is_able_to_fire_at = v; }
 void Tp::is_able_to_follow_set(int v) { _is_able_to_follow = v; }
 void Tp::is_able_to_freeze_set(int v) { _is_able_to_freeze = v; }
+void Tp::is_able_to_grapple_chance_d1000_set(int v) { _is_able_to_grapple_chance_d1000 = v; }
+void Tp::is_able_to_grapple_set(int v) { _is_able_to_grapple = v; }
 void Tp::is_able_to_jump_attack_chance_d1000_set(int v) { _is_able_to_jump_attack_chance_d1000 = v; }
 void Tp::is_able_to_jump_attack_set(int v) { _is_able_to_jump_attack = v; }
 void Tp::is_able_to_jump_escape_set(int v) { _is_able_to_jump_escape = v; }

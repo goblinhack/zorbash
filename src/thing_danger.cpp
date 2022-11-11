@@ -30,6 +30,9 @@ int Tp::get_danger_level(void)
   if (is_able_to_shove()) {
     danger_level++;
   }
+  if (is_able_to_grapple()) {
+    danger_level++;
+  }
   if (is_acid()) {
     danger_level++;
   }
@@ -116,6 +119,9 @@ int Thing::danger_initial_level(void)
     danger_level *= 2;
   }
   if (is_able_to_shove()) {
+    danger_level++;
+  }
+  if (is_able_to_grapple()) {
     danger_level++;
   }
   if (is_carrying_an_item()) {
@@ -214,6 +220,9 @@ int Thing::danger_current_level(void)
     danger_level *= 2;
   }
   if (is_able_to_shove()) {
+    danger_level++;
+  }
+  if (is_able_to_grapple()) {
     danger_level++;
   }
   if (is_carrying_an_item()) {

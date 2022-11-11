@@ -1208,6 +1208,8 @@ public:
   int is_able_to_fire_at(void);
   int is_able_to_follow(void);
   int is_able_to_freeze(void);
+  int is_able_to_grapple_chance_d1000(void);
+  int is_able_to_grapple(void);
   int is_able_to_jump_attack_chance_d1000(void);
   int is_able_to_jump_attack(void);
   int is_able_to_jump_escape(void);

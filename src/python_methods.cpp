@@ -1020,6 +1020,8 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(is_able_to_see_through_doors),
     MY_ADD_PYTHON_TP_FUNCTION(is_able_to_shove),
     MY_ADD_PYTHON_TP_FUNCTION(is_able_to_shove_chance_d1000),
+    MY_ADD_PYTHON_TP_FUNCTION(is_able_to_grapple),
+    MY_ADD_PYTHON_TP_FUNCTION(is_able_to_grapple_chance_d1000),
     MY_ADD_PYTHON_TP_FUNCTION(is_able_to_sleep),
     MY_ADD_PYTHON_TP_FUNCTION(is_able_to_spawn_things),
     MY_ADD_PYTHON_TP_FUNCTION(is_able_to_swim),
