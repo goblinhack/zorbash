@@ -16,13 +16,13 @@ int Thing::stat_def_total(void)
   stat = stat_def();
   prev = stat;
   if (stat) {
-    dbg3("Def: %d", stat);
+    dbg2("Def: %d", stat);
   }
 
   stat += stat_def_mod();
   if (stat != prev) {
     prev = stat;
-    dbg3("Def: with mod (%s): %d", modifier_to_string(stat_def_mod()).c_str(), stat);
+    dbg2("Def: with mod (%s): %d", modifier_to_string(stat_def_mod()).c_str(), stat);
   }
 
   //
@@ -33,7 +33,7 @@ int Thing::stat_def_total(void)
     stat += stat_to_bonus(dex_total);
     if (stat != prev) {
       prev = stat;
-      dbg3("Def: with: (dex %d): %d", dex_total, stat);
+      dbg2("Def: with: (dex %d): %d", dex_total, stat);
     }
   }
 
@@ -44,7 +44,7 @@ int Thing::stat_def_total(void)
       stat += iter->stat_def_total();
       if (stat != prev) {
         prev = stat;
-        dbg3("Def: with (%s %s): %d", iter->to_short_string().c_str(),
+        dbg2("Def: with (%s %s): %d", iter->to_short_string().c_str(),
              modifier_to_string(iter->stat_def_mod()).c_str(), stat);
       }
     }
@@ -71,7 +71,7 @@ int Thing::stat_def_total(void)
         stat += iter->stat_def_total();
         if (stat != prev) {
           prev = stat;
-          dbg3("Def: with (%s %s): %d", iter->to_short_string().c_str(),
+          dbg2("Def: with (%s %s): %d", iter->to_short_string().c_str(),
                modifier_to_string(iter->stat_def_mod()).c_str(), stat);
         }
       }
@@ -84,7 +84,7 @@ int Thing::stat_def_total(void)
         stat += iter->stat_def_total();
         if (stat != prev) {
           prev = stat;
-          dbg3("Def: with (%s %s): %d", iter->to_short_string().c_str(),
+          dbg2("Def: with (%s %s): %d", iter->to_short_string().c_str(),
                modifier_to_string(iter->stat_def_mod()).c_str(), stat);
         }
       }
@@ -97,7 +97,7 @@ int Thing::stat_def_total(void)
         stat += iter->stat_def_total();
         if (stat != prev) {
           prev = stat;
-          dbg3("Def: with (%s %s): %d", iter->to_short_string().c_str(),
+          dbg2("Def: with (%s %s): %d", iter->to_short_string().c_str(),
                modifier_to_string(iter->stat_def_mod()).c_str(), stat);
         }
       }
@@ -110,7 +110,7 @@ int Thing::stat_def_total(void)
         stat += iter->stat_def_total();
         if (stat != prev) {
           prev = stat;
-          dbg3("Def: with (%s %s): %d", iter->to_short_string().c_str(),
+          dbg2("Def: with (%s %s): %d", iter->to_short_string().c_str(),
                modifier_to_string(iter->stat_def_mod()).c_str(), stat);
         }
       }
@@ -122,22 +122,19 @@ int Thing::stat_def_total(void)
     stat += enchant;
     if (stat != prev) {
       prev = stat;
-      dbg3("Def: with enchant %d: %d", enchant, stat);
+      dbg2("Def: with enchant %d: %d", enchant, stat);
     }
   }
 
-  switch (thing_size()) {
-    case THING_SIZE_GARGANTUAN: stat += 4; break;
-    case THING_SIZE_GIANT: stat += 2; break;
-    case THING_SIZE_LARGE: stat += 1; break;
-    case THING_SIZE_NORMAL: stat += 0; break;
-    case THING_SIZE_SMALL: stat -= 1; break;
-    case THING_SIZE_TINY: stat -= 2; break;
-  }
-
-  if (stat != prev) {
-    prev = stat;
-    dbg3("Def: with size modifier: %d", stat);
+  //
+  // Size modifiers
+  //
+  if (is_monst() || is_player()) {
+    stat += size_modifier();
+    if (stat != prev) {
+      prev = stat;
+      dbg2("Def: with size modifier: %d", stat);
+    }
   }
 
   return stat;

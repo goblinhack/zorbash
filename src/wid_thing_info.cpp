@@ -1321,7 +1321,7 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
-    auto stat_att       = 10 + t->stat_att();
+    auto stat_att           = 10 + t->stat_att();
     auto stat_att_mod_total = 10 + t->stat_att_mod_total();
     if (stat_att_mod_total != stat_att) {
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack                    %3d", stat_att_mod_total);
@@ -1686,7 +1686,7 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
       w->log("You could beat it in " + std::to_string(player_defeat_count) + " hits.");
       w->log("More likely, " + std::to_string(player_defeat_count * 2) + " hits.");
     } else {
-      w->log("%%fg=red$Takes many hits to defeat...");
+      w->log("Will take many hits to beat.");
     }
   }
 }

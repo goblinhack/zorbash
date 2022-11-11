@@ -939,6 +939,7 @@ public:
   // begin sort marker2 {
   int aggression_pct(void);
   int ai_detect_secret_doors(void);
+  int size_modifier(void);
   int ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int type, bool check);
   int ai_hit_actual(Thingp hitter, Thingp real_hitter, AttackOptions *, int damage);
   int ai_obstacle(void);

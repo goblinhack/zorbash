@@ -126,18 +126,15 @@ int Thing::stat_att_mod_total()
     }
   }
 
-  switch (thing_size()) {
-    case THING_SIZE_GARGANTUAN: stat += 4; break;
-    case THING_SIZE_GIANT: stat += 2; break;
-    case THING_SIZE_LARGE: stat += 1; break;
-    case THING_SIZE_NORMAL: stat += 0; break;
-    case THING_SIZE_SMALL: stat -= 1; break;
-    case THING_SIZE_TINY: stat -= 2; break;
-  }
-
-  if (stat != prev) {
-    prev = stat;
-    dbg3("Att: with size modifier: %d", stat);
+  //
+  // Size modifiers
+  //
+  if (is_monst() || is_player()) {
+    stat += size_modifier();
+    if (stat != prev) {
+      prev = stat;
+      dbg3("Att: with size modifier: %d", stat);
+    }
   }
 
   return stat;
