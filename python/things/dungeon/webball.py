@@ -14,7 +14,7 @@ def tp_init(name, tiles=[]):
     my.gfx_pixelart_show_outlined(self, True)
     my.gfx_pixelart_submergable(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
-    my.health_initial_dice(self, "1d6")
+    my.health_initial_dice(self, "2d6")
     my.is_able_to_burn(self, True)
     my.is_able_to_fall(self, True)
     my.is_attackable_by_monst(self, True)
