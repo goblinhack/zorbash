@@ -49,7 +49,6 @@ const std::string &Tp::on_equip_do(void) const { return _on_equip_do; }
 const std::string &Tp::on_fall_begin_do(void) const { return _on_fall_begin_do; }
 const std::string &Tp::on_fall_do(void) const { return _on_fall_do; }
 const std::string &Tp::on_final_use_do(void) const { return _on_final_use_do; }
-const std::string &Tp::on_firing_at_something_do(void) const { return _on_firing_at_something_do; }
 const std::string &Tp::on_get_text_long_description_do(void) const { return _on_get_text_long_description_do; }
 const std::string &Tp::on_jump_do(void) const { return _on_jump_do; }
 const std::string &Tp::on_lifespan_tick_do(void) const { return _on_lifespan_tick_do; }
@@ -124,6 +123,7 @@ const std::string &Tp::on_tick_do(void) const { return _on_tick_do; }
 const std::string &Tp::on_unequip_do(void) const { return _on_unequip_do; }
 const std::string &Tp::on_use_do(void) const { return _on_use_do; }
 const std::string &Tp::on_waiting_do(void) const { return _on_waiting_do; }
+const std::string &Tp::on_want_to_fire_at_something_do(void) const { return _on_want_to_fire_at_something_do; }
 const std::string &Tp::on_you_are_declared_a_follower_do(void) const { return _on_you_are_declared_a_follower_do; }
 const std::string &Tp::on_you_are_declared_leader_do(void) const { return _on_you_are_declared_leader_do; }
 const std::string &Tp::on_you_are_hit_and_now_dead_do(void) const { return _on_you_are_hit_and_now_dead_do; }
@@ -1177,7 +1177,6 @@ void Tp::on_equip_do_set(const std::string &v) { _on_equip_do = v; }
 void Tp::on_fall_begin_do_set(const std::string &v) { _on_fall_begin_do = v; }
 void Tp::on_fall_do_set(const std::string &v) { _on_fall_do = v; }
 void Tp::on_final_use_do_set(const std::string &v) { _on_final_use_do = v; }
-void Tp::on_firing_at_something_do_set(const std::string &v) { _on_firing_at_something_do = v; }
 void Tp::on_get_text_long_description_do_set(const std::string &v) { _on_get_text_long_description_do = v; }
 void Tp::on_jump_do_set(const std::string &v) { _on_jump_do = v; }
 void Tp::on_lifespan_tick_do_set(const std::string &v) { _on_lifespan_tick_do = v; }
@@ -1252,6 +1251,7 @@ void Tp::on_tick_do_set(const std::string &v) { _on_tick_do = v; }
 void Tp::on_unequip_do_set(const std::string &v) { _on_unequip_do = v; }
 void Tp::on_use_do_set(const std::string &v) { _on_use_do = v; }
 void Tp::on_waiting_do_set(const std::string &v) { _on_waiting_do = v; }
+void Tp::on_want_to_fire_at_something_do_set(const std::string &v) { _on_want_to_fire_at_something_do = v; }
 void Tp::on_you_are_declared_a_follower_do_set(const std::string &v) { _on_you_are_declared_a_follower_do = v; }
 void Tp::on_you_are_declared_leader_do_set(const std::string &v) { _on_you_are_declared_leader_do = v; }
 void Tp::on_you_are_hit_and_now_dead_do_set(const std::string &v) { _on_you_are_hit_and_now_dead_do = v; }

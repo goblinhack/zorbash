@@ -700,7 +700,6 @@ private:
   std::string _on_fall_begin_do;
   std::string _on_fall_do;
   std::string _on_final_use_do;
-  std::string _on_firing_at_something_do;
   std::string _on_get_text_long_description_do;
   std::string _on_idle_tick_freq_dice_str;
   std::string _on_jump_do;
@@ -776,6 +775,7 @@ private:
   std::string _on_unequip_do;
   std::string _on_use_do;
   std::string _on_waiting_do;
+  std::string _on_want_to_fire_at_something_do;
   std::string _on_you_are_declared_a_follower_do;
   std::string _on_you_are_declared_leader_do;
   std::string _on_you_are_hit_and_now_dead_do;
@@ -1001,7 +1001,6 @@ public:
   const std::string &on_fall_begin_do(void) const;
   const std::string &on_fall_do(void) const;
   const std::string &on_final_use_do(void) const;
-  const std::string &on_firing_at_something_do(void) const;
   const std::string &on_get_text_long_description_do(void) const;
   const std::string &on_idle_tick_freq_dice_str(void) const;
   const std::string &on_jump_do(void) const;
@@ -1077,6 +1076,7 @@ public:
   const std::string &on_unequip_do(void) const;
   const std::string &on_use_do(void) const;
   const std::string &on_waiting_do(void) const;
+  const std::string &on_want_to_fire_at_something_do(void) const;
   const std::string &on_you_are_declared_a_follower_do(void) const;
   const std::string &on_you_are_declared_leader_do(void) const;
   const std::string &on_you_are_hit_and_now_dead_do(void) const;
@@ -2149,7 +2149,6 @@ public:
   void on_fall_begin_do_set(const std::string &v);
   void on_fall_do_set(const std::string &v);
   void on_final_use_do_set(const std::string &v);
-  void on_firing_at_something_do_set(const std::string &v);
   void on_get_text_long_description_do_set(const std::string &v);
   void on_jump_do_set(const std::string &v);
   void on_lifespan_tick_do_set(const std::string &v);
@@ -2224,6 +2223,7 @@ public:
   void on_unequip_do_set(const std::string &v);
   void on_use_do_set(const std::string &v);
   void on_waiting_do_set(const std::string &v);
+  void on_want_to_fire_at_something_do_set(const std::string &v);
   void on_you_are_declared_a_follower_do_set(const std::string &v);
   void on_you_are_declared_leader_do_set(const std::string &v);
   void on_you_are_hit_and_now_dead_do_set(const std::string &v);

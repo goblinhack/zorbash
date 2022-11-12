@@ -5782,10 +5782,10 @@ const std::string &Thing::on_you_are_on_fire_do(void)
   return (tp()->on_you_are_on_fire_do());
 }
 
-const std::string &Thing::on_firing_at_something_do(void)
+const std::string &Thing::on_want_to_fire_at_something_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_firing_at_something_do());
+  return (tp()->on_want_to_fire_at_something_do());
 }
 
 const std::string &Thing::on_you_are_hit_but_still_alive_do(void)

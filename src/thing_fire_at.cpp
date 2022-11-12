@@ -24,15 +24,15 @@ static int              thing_possible_hit_size;
 //
 // Python callback upon being fire_at
 //
-bool Thing::on_firing_at_something(Thingp target)
+bool Thing::on_want_to_fire_at_something(Thingp target)
 {
   TRACE_NO_INDENT();
-  auto on_firing_at_something = tp()->on_firing_at_something_do();
-  if (std::empty(on_firing_at_something)) {
+  auto on_want_to_fire_at_something = tp()->on_want_to_fire_at_something_do();
+  if (std::empty(on_want_to_fire_at_something)) {
     return false;
   }
 
-  auto t = split_tokens(on_firing_at_something, '.');
+  auto t = split_tokens(on_want_to_fire_at_something, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -51,8 +51,8 @@ bool Thing::on_firing_at_something(Thingp target)
                            (unsigned int) curr_at.y);
   }
 
-  ERR("Bad on_firing_at_something call [%s] expected mod:function, got %d elems", on_firing_at_something.c_str(),
-      (int) on_firing_at_something.size());
+  ERR("Bad on_want_to_fire_at_something call [%s] expected mod:function, got %d elems",
+      on_want_to_fire_at_something.c_str(), (int) on_want_to_fire_at_something.size());
   return false;
 }
 
@@ -193,7 +193,7 @@ bool Thing::fire_at_target(void)
   //
   move_set_dir_from_target(target);
 
-  return on_firing_at_something(target);
+  return on_want_to_fire_at_something(target);
 }
 
 bool Thing::fire_at_and_choose_target(Thingp item, UseOptions *use_options)

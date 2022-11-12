@@ -39,6 +39,15 @@ Thingp Thing::in_the_way_for_jumping(const point s, const point e, int x, int y)
       continue;
     }
 
+    //
+    // Webballs do not hit spiders or other webs. We assume the spider is good at avoiding them.
+    //
+    if (is_spider() || is_spiderweb()) {
+      if (t->is_spider() || t->is_spiderweb()) {
+        return t;
+      }
+    }
+
     if (thing_size() < (int) THING_SIZE_NORMAL) {
       continue;
     }

@@ -583,8 +583,8 @@ public:
   bool move_to_try(const point, const bool escaping, bool check_only);
   bool nat_att(Thingp victim);
   bool on_fire_set(const std::string &why);
-  bool on_firing_at_something(Thingp hitter);
   bool on_tick(void);
+  bool on_want_to_fire_at_something(Thingp hitter);
   bool open_door(Thingp door);
   bool open(Thingp it);
   bool open(void);
@@ -798,7 +798,7 @@ public:
   const std::string &on_fall_do(void);
   const std::string &on_fall_begin_do(void);
   const std::string &on_final_use_do(void);
-  const std::string &on_firing_at_something_do(void);
+  const std::string &on_want_to_fire_at_something_do(void);
   const std::string &on_get_text_long_description_do(void);
   const std::string &on_idle_tick_freq_dice_str(void);
   const std::string &on_jump_do(void);

@@ -1134,10 +1134,15 @@ void tile_blit_outline(const Tilep &tile, const point tl, const point br, const 
   const float dy = game->config.one_pixel_height;
 
   auto binding = tile->gl_binding_mask();
+#if 0
+  //
+  // Not sure if square outlines look better
+  //
   blit(binding, x1, y2, x2, y1, tl.x - dx, br.y - dy, br.x - dx, tl.y - dy);
   blit(binding, x1, y2, x2, y1, tl.x + dx, br.y + dy, br.x + dx, tl.y + dy);
   blit(binding, x1, y2, x2, y1, tl.x - dx, br.y + dy, br.x - dx, tl.y + dy);
   blit(binding, x1, y2, x2, y1, tl.x + dx, br.y - dy, br.x + dx, tl.y - dy);
+#endif
   blit(binding, x1, y2, x2, y1, tl.x + dx, br.y, br.x + dx, tl.y);
   blit(binding, x1, y2, x2, y1, tl.x - dx, br.y, br.x - dx, tl.y);
   blit(binding, x1, y2, x2, y1, tl.x, br.y + dy, br.x, tl.y + dy);

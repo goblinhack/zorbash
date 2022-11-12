@@ -65,7 +65,7 @@ def on_you_are_hit_but_dodge_it_do(me, hitter, x, y):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
 
-def on_firing_at_something(me, target, x, y):  # Return True on doing an action
+def on_want_to_fire_at_something(me, target, x, y):  # Return True on doing an action
     if my.pcg_randint(1, 10) < 3:
         my.thing_fire_at(me, "laser_lightning", target)
         return True
@@ -158,8 +158,8 @@ def tp_init(name, text_long_name):
     my.on_born_do(self, "me.on_born()")
     my.on_death_do(self, "me.on_death()")
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
-    my.on_firing_at_something_do(self, "me.on_firing_at_something()")
     my.on_tick_do(self, "me.on_tick()")
+    my.on_want_to_fire_at_something_do(self, "me.on_want_to_fire_at_something()")
     my.on_you_are_hit_but_dodge_it_do(self, "me.on_you_are_hit_but_dodge_it_do()")
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
     my.on_you_nat_att_do(self, "me.on_you_nat_att()")
