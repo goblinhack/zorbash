@@ -8,8 +8,22 @@
 
 bool Thing::thing_check_for_heat_damage(void)
 {
-  dbg("Heat damage check");
+  dbg("Heat damage check (my temp %d)", temperature_get());
   TRACE_AND_INDENT();
+
+  if (is_block_of_ice()) {
+    if (temperature_get() > 0) {
+      dead("Melted");
+      return true;
+    }
+  }
+
+  //
+  // Can't be burnt when encased in ice. However if frozen, we can defrost.
+  //
+  if (level->is_block_of_ice(curr_at)) {
+    return false;
+  }
 
   if (is_able_to_melt() || is_able_to_burn() || is_combustible() || is_very_combustible()) {
     //

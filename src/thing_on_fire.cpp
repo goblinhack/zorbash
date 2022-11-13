@@ -80,6 +80,14 @@ bool Thing::on_fire_set(const std::string &why)
 {
   TRACE_NO_INDENT();
 
+  if (is_frozen) {
+    return false;
+  }
+
+  if (level->is_block_of_ice(curr_at)) {
+    return false;
+  }
+
   if (! is_able_to_burn() && ! is_combustible()) {
     return false;
   }

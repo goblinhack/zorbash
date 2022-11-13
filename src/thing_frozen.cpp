@@ -24,6 +24,8 @@ void Thing::frozen_set(void)
   } else {
     msg("%s is frozen!", text_The().c_str());
   }
+
+  on_fire_unset();
 }
 
 void Thing::frozen_unset(bool quiet)
