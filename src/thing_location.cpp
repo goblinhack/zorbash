@@ -229,6 +229,8 @@ void Thing::location_check(Thingp filter_to)
 //
 void Thing::location_check_me(void)
 {
+  TRACE_NO_INDENT();
+
   if (is_loggable()) {
     dbg("Do location checks");
   }
@@ -246,8 +248,11 @@ void Thing::location_check_me(void)
   // Needs to be for all things to stuff that does nothing like bones can fall
   // into a chasm
   //
+  TRACE_NO_INDENT();
   FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y)
   {
+    verify(MTYPE_THING, t);
+
     if (t == this) {
       continue;
     }
@@ -258,6 +263,7 @@ void Thing::location_check_me(void)
     //
     // Check but filter only to this thing
     //
+    verify(MTYPE_THING, this);
     t->location_check(this);
   }
   FOR_ALL_THINGS_END()

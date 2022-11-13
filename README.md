@@ -4,7 +4,6 @@
 <!-- - tentacle grapple                                                                                                                           -->
 <!-- - test main body with freezing and wand of descent                                                                                           -->
 <!-- - kraken guards treasure                                                                                                                     -->
-<!-- - if frozen do we unfreeze?                                                                                                                  -->
 <!-- - resize the collect window to just what we need                                                                                             -->
 <!-- - check plutonium sword and lightning                                                                                                        -->
 <!-- - red highlight for monsters in left bar                                                                                                     -->
