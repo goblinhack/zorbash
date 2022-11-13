@@ -540,6 +540,7 @@ public:
   bool hunger_boost_would_occur(int v);
   bool idle_check(void);
   bool if_matches_then_dead(const std::string &what, const point p);
+  bool initial_temperature_is_set(void);
   bool inventory_shortcuts_insert(Thingp what);
   bool inventory_shortcuts_remove(Thingp what);
   bool inventory_shortcuts_remove(Thingp what, Thingp target);
@@ -1196,6 +1197,7 @@ public:
   int idle_count(void);
   int initial_charge_count(void);
   int initial_light_dist_get(void);
+  int initial_temperature_get(void);
   int is_able_to_attack_mobs(void);
   int is_able_to_attack_owner(void);
   int is_able_to_be_surprised(void);
@@ -2323,6 +2325,7 @@ public:
   void fall_height_set(float);
   void fall_into_the_void(void);
   void frozen_set(void);
+  void frozen_unset(bool quiet = false);
   void gas_poison_tick(void);
   void gc(void);
   void goal_penalty_tick(void);

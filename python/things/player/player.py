@@ -480,6 +480,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.stat_dex(self, 10)
     my.stat_luck(self, 10)
     my.stat_str(self, 10)
+    my.temperature(self, 20)
     my.text_a_or_an(self, "the")
     my.text_hits(self, "hits")
     my.text_long_description2(self, "A most noble adventurer of no particular race, gender or creed. Devoid of fear and stout of heart.")

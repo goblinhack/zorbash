@@ -15,6 +15,19 @@ void Thing::temperature_tick(void)
   int  location_temp     = 0;
   bool location_temp_set = false;
 
+  //
+  // Not sure what I should do with things like pillars and smoke. Do we want them
+  // to change temperature? I guess if so, set an initial temp.
+  //
+  if (! initial_temperature_is_set()) {
+    return;
+  }
+
+  if (initial_temperature_get() != temperature_get()) {
+    temperature_set((initial_temperature_get() + (temperature_get() * 3)) / 4);
+    log("Temp %d vs %d", temperature_get(), initial_temperature_get());
+  }
+
   FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y)
   {
     if (t->is_floor()) {
@@ -32,7 +45,9 @@ void Thing::temperature_tick(void)
     // Without this check a player will heat themselves up ridiculously
     //
     if (t == this) {
-      continue;
+      if (! is_frozen) {
+        continue;
+      }
     }
 
     if (on_fire_anim_id() == t->id) {
@@ -48,6 +63,7 @@ void Thing::temperature_tick(void)
       // Ignore carried things
       //
       if (t->top_owner() == this) {
+        t->log("temp %d ignore2", t->temperature);
         continue;
       }
 
@@ -55,11 +71,13 @@ void Thing::temperature_tick(void)
       // If a bag, ignore the temperature of the carrier.
       //
       if (top_owner() == t) {
+        t->log("temp %d ignore3", t->temperature);
         continue;
       }
     }
 
     if (! t->has_temperature()) {
+      t->log("temp %d ignore4", t->temperature);
       continue;
     }
 
@@ -97,11 +115,40 @@ void Thing::temperature_tick(void)
   }
   FOR_ALL_THINGS_END()
 
+  int thing_temp = temperature;
+  if (is_able_to_freeze()) {
+    if ((thing_temp > 0) && is_frozen) {
+      frozen_unset();
+    }
+  }
+
+  if (thing_temp < 0) {
+    if (is_dead || is_dying) {
+      if (is_able_to_freeze()) {
+        if (! is_frozen) {
+          dbg("Freeze the dead monst");
+          frozen_set();
+        }
+      }
+      return;
+    }
+  }
+
+  if (is_able_to_burn()) {
+    if (is_dead || is_dying) {
+      if (! is_burnt) {
+        if (thing_temp > 0) {
+          dbg("Burn the dead monst");
+          is_burnt = true;
+        }
+      }
+      return;
+    }
+  }
+
   if (! location_temp_set) {
     return;
   }
-
-  int thing_temp = temperature;
 
   //
   // Items being carried in side a chest are insulated.
@@ -129,31 +176,6 @@ void Thing::temperature_tick(void)
     thing_temp = temperature;
     dbg("Temperature tick, my temp now %d, location temp: %d", thing_temp, location_temp);
     TRACE_AND_INDENT();
-  }
-
-  if (is_dead || is_dying) {
-    if (is_able_to_freeze()) {
-      if (! is_frozen) {
-        if (thing_temp < 0) {
-          dbg("Freeze the dead monst");
-          is_frozen = true;
-        }
-      }
-    }
-
-    if (is_able_to_burn()) {
-      if (! is_burnt) {
-        if (thing_temp > 0) {
-          dbg("Burn the dead monst");
-          is_burnt = true;
-        }
-      }
-    }
-    return;
-  }
-
-  if (! is_temperature_sensitive() && ! is_able_to_freeze()) {
-    return;
   }
 
   if (game->tick_current == tick_last_i_was_attacked()) {
@@ -359,6 +381,18 @@ int Thing::temperature_get(void)
 {
   TRACE_NO_INDENT();
   return temperature;
+}
+
+int Thing::initial_temperature_get(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->initial_temperature());
+}
+
+bool Thing::initial_temperature_is_set(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->initial_temperature_is_set());
 }
 
 int Thing::temperature_set(int v)

@@ -181,10 +181,10 @@ bool Thing::thing_check_for_heat_damage(void)
   // Rapid defrosting?
   //
   if (is_frozen) {
-    is_frozen = false;
     if (is_player()) {
       msg("%%fg=red$You defrost rapidly!%%fg=reset$");
     }
+    frozen_unset(true /* quiet */);
   }
 
   return hit;

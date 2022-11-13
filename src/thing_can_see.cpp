@@ -119,7 +119,11 @@ void Thing::can_see(point p)
         if (! has_seen_player_msg_shown) {
           has_seen_player_msg_shown = true;
           if (is_msg_allowed_is_seen()) {
-            msg("%s can see you!", text_The().c_str());
+            if (t->is_on_fire()) {
+              msg("%s can see your flaming body!", text_The().c_str());
+            } else {
+              msg("%s can see you!", text_The().c_str());
+            }
           }
         }
       }

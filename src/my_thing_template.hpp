@@ -58,6 +58,8 @@ public:
   Tilemap tr2_tiles;
 
 private:
+  bool _initial_temperature_set {};
+
   Dice _damage_acid_dice {};
   Dice _damage_cold_dice {};
   Dice _damage_crush_dice {};
@@ -211,6 +213,7 @@ private:
   int _hunger_is_hunger_level_hungry_at_pct {};
   int _hunger_is_hunger_level_starving_at_pct {};
   int _hunger_is_insatiable {};
+  int _initial_temperature {};
   int _internal_has_dir_anim {};
   int _internal_has_hp_anim {};
   int _is_able_to_attack_mobs {};
@@ -821,6 +824,7 @@ public:
   bool can_eat(const Thingp itp);
   bool is_edible(const Thingp it);
   bool has_temperature(void);
+  bool initial_temperature_is_set(void) const;
 
   void dbg_(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void err(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
@@ -1232,6 +1236,7 @@ public:
   int hunger_is_hunger_level_hungry_at_pct(void) const;
   int hunger_is_hunger_level_starving_at_pct(void) const;
   int hunger_is_insatiable(void) const;
+  int initial_temperature(void) const;
   int internal_has_dir_anim(void) const;
   int internal_has_hp_anim(void) const;
   int is_able_to_attack_mobs(void) const;

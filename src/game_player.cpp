@@ -206,7 +206,7 @@ void Game::place_player(void)
         auto w = level->thing_new("map_beast", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("wand_ice", point(x, y));
         t->carry(w);
         t->enchant_without_stone(w);
@@ -402,13 +402,14 @@ void Game::place_player(void)
   if (player) {
     level->request_player_light_update = true;
 
-    if (0) {
-      level->thing_new("water", point(player->curr_at.x, player->curr_at.y));
-      level->thing_new("water", point(player->curr_at.x + 1, player->curr_at.y));
-      level->thing_new("water", point(player->curr_at.x + 1, player->curr_at.y + 1));
-      level->thing_new("water", point(player->curr_at.x + 2, player->curr_at.y + 1));
-      level->thing_new("block_of_ice", point(player->curr_at.x, player->curr_at.y));
-      player->frozen_set();
+    if (1) {
+      // level->thing_new("water", point(player->curr_at.x, player->curr_at.y));
+      // level->thing_new("water", point(player->curr_at.x + 1, player->curr_at.y));
+      // level->thing_new("water", point(player->curr_at.x + 1, player->curr_at.y + 1));
+      // level->thing_new("water", point(player->curr_at.x + 2, player->curr_at.y + 1));
+      // level->thing_new("block_of_ice", point(player->curr_at.x, player->curr_at.y));
+      // player->frozen_set();
+      // level->thing_new("lava", point(player->curr_at.x, player->curr_at.y));
     }
 
     if (0) {

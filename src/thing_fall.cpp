@@ -473,7 +473,7 @@ bool Thing::fall_to_next_level(void)
           if (is_player()) {
             msg("%%fg=lightblue$You plunge into the water and defrost!%%fg=reset$");
           }
-          is_frozen = false;
+          frozen_unset();
         } else if (l->is_lava(new_pos)) {
           if (is_player()) {
             msg("%%fg=red$You defrost and then vaporize!%%fg=reset$");

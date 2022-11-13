@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - fireskull should die if chilled?                                                                                                           -->
 <!-- - tentacle grapple                                                                                                                           -->
 <!-- - test main body with freezing and wand of descent                                                                                           -->
 <!-- - kraken guards treasure                                                                                                                     -->

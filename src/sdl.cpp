@@ -31,7 +31,7 @@ void sdl_fini(void)
 #endif
 
   if (sdl.init_video) {
-    CON("SDL: Video quit");
+    LOG("SDL: Video quit");
     sdl.init_video = 0;
     SDL_VideoQuit();
   }
@@ -42,7 +42,7 @@ void sdl_fini(void)
   LOG("SDL: Destroy window");
   SDL_DestroyWindow(sdl.window);
 
-  CON("SDL: Quit");
+  LOG("SDL: Quit");
   SDL_Quit();
 
   LOG("SDL: Quit done");
@@ -158,17 +158,17 @@ uint8_t sdl_init(void)
   int video_height;
   int value;
 
-  CON("SDL: Version: %u.%u", SDL_MAJOR_VERSION, SDL_MINOR_VERSION);
+  LOG("SDL: Version: %u.%u", SDL_MAJOR_VERSION, SDL_MINOR_VERSION);
   TRACE_AND_INDENT();
 
-  CON("SDL: Init audio");
+  LOG("SDL: Init audio");
   if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
     SDL_MSG_BOX("SDL_Init failed %s", SDL_GetError());
     DIE("SDL_Init failed %s", SDL_GetError());
     return false;
   }
 
-  CON("SDL: Init video");
+  LOG("SDL: Init video");
   if (SDL_VideoInit(nullptr) != 0) {
     SDL_MSG_BOX("SDL_VideoInit failed %s", SDL_GetError());
     DIE("SDL_VideoInit failed %s", SDL_GetError());
@@ -198,10 +198,10 @@ uint8_t sdl_init(void)
     SDL_DisplayMode mode;
     memset(&mode, 0, sizeof(mode));
 
-    CON("SDL: Init display");
+    LOG("SDL: Init display");
     if (SDL_GetCurrentDisplayMode(0, &mode) < 0) {
-      SDL_MSG_BOX("Couldn't set windowed display: %s", SDL_GetError());
-      DIE("Couldn't set windowed display: %s", SDL_GetError());
+      SDL_MSG_BOX("SDL_GetCurrentDisplayMode couldn't set windowed display: %s", SDL_GetError());
+      DIE("SDL_GetCurrentDisplayMode couldn't set windowed display: %s", SDL_GetError());
       return false;
     }
 
@@ -223,21 +223,21 @@ uint8_t sdl_init(void)
 
   uint32_t video_unused_flags;
 
-  CON("SDL: Set SDL_WINDOW_OPENGL");
+  LOG("SDL: Set SDL_WINDOW_OPENGL");
   video_unused_flags = SDL_WINDOW_OPENGL;
 
   if (game->config.gfx_borderless) {
-    CON("SDL: Set SDL_WINDOW_BORDERLESS");
+    LOG("SDL: Set SDL_WINDOW_BORDERLESS");
     video_unused_flags |= SDL_WINDOW_BORDERLESS;
   }
 
   if (game->config.gfx_fullscreen) {
-    CON("SDL: Set SDL_WINDOW_FULLSCREEN");
+    LOG("SDL: Set SDL_WINDOW_FULLSCREEN");
     video_unused_flags |= SDL_WINDOW_FULLSCREEN;
   }
 
   if (game->config.gfx_fullscreen_desktop) {
-    CON("SDL: Set SDL_WINDOW_FULLSCREEN_DESKTOP");
+    LOG("SDL: Set SDL_WINDOW_FULLSCREEN_DESKTOP");
     video_unused_flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
   }
 
@@ -246,23 +246,23 @@ uint8_t sdl_init(void)
     // For a lo pixel game this makes no sense as the frame
     // buffers are really large and slows things down.
     //
-    CON("SDL: Calling SDL_GetDisplayDPI");
+    LOG("SDL: Calling SDL_GetDisplayDPI");
     float dpi;
     if (SDL_GetDisplayDPI(0, nullptr, &dpi, nullptr) == 0) {
       video_unused_flags |= SDL_WINDOW_ALLOW_HIGHDPI;
-      CON("SDL: Set SDL_WINDOW_ALLOW_HIGHDPI");
+      LOG("SDL: Set SDL_WINDOW_ALLOW_HIGHDPI");
     } else {
       ERR("SDL: Cannot enable high DPI");
     }
   }
 
-  CON("SDL: Create window");
+  LOG("SDL: Create window");
   sdl.window = SDL_CreateWindow("zorbash", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, video_width, video_height,
                                 video_unused_flags);
   if (! sdl.window) {
-    ERR("Couldn't set windowed display %ux%u: %s", video_width, video_height, SDL_GetError());
-
-    SDL_MSG_BOX("Couldn't set windowed display %ux%u: %s", video_width, video_height, SDL_GetError());
+    ERR("SDL_CreateWindow couldn't set windowed display %ux%u: %s", video_width, video_height, SDL_GetError());
+    SDL_MSG_BOX("SDL_CreateWindow couldn't set windowed display %ux%u: %s", video_width, video_height,
+                SDL_GetError());
 
     game->config.reset();
     game->save_config();
@@ -317,9 +317,9 @@ uint8_t sdl_init(void)
   LOG("SDL: Call SDL_SetWindowTitle");
   SDL_SetWindowTitle(sdl.window, "zorbash");
 
-  CON("SDL: OpenGL Vendor   : %s", glGetString(GL_VENDOR));
-  CON("SDL: OpenGL Renderer : %s", glGetString(GL_RENDERER));
-  CON("SDL: OpenGL Version  : %s", glGetString(GL_VERSION));
+  LOG("SDL: OpenGL Vendor   : %s", glGetString(GL_VENDOR));
+  LOG("SDL: OpenGL Renderer : %s", glGetString(GL_RENDERER));
+  LOG("SDL: OpenGL Version  : %s", glGetString(GL_VERSION));
   LOG("SDL: OpenGL Exts     : %s", glGetString(GL_EXTENSIONS));
 
   SDL_GL_GetAttribute(SDL_GL_RED_SIZE, &value);
@@ -763,10 +763,10 @@ uint8_t config_errored(class Tokens *tokens, void *context)
 void sdl_config_update_all(void)
 {
   TRACE_NO_INDENT();
-  CON("SDL: OpenGL leave 2D mode");
+  LOG("SDL: OpenGL leave 2D mode");
   config_game_gfx_update();
   config_gfx_vsync_update();
-  CON("SDL: OpenGL enter 2D mode");
+  LOG("SDL: OpenGL enter 2D mode");
   gl_init_2d_mode();
 
   if (game->level) {
@@ -808,10 +808,10 @@ void sdl_flush_display(bool force)
 void config_game_gfx_update(void)
 {
   if (g_opt_ascii) {
-    CON("SDL: Ascii mode undate");
+    LOG("SDL: Ascii mode undate");
     font_ui = font_ascii;
   } else {
-    CON("SDL: Pixelart mod undatee");
+    LOG("SDL: Pixelart mod undate");
     font_ui = font_pixelart_large;
   }
   TRACE_AND_INDENT();
@@ -877,13 +877,13 @@ void config_game_gfx_update(void)
   game->config.tile_pixel_width  = game->config.game_pix_width / TILES_VISIBLE_ACROSS;
   game->config.tile_pixel_height = game->config.game_pix_height / TILES_VISIBLE_DOWN;
 
-  CON("SDL: Window:");
-  CON("SDL: - config pixel size    : %dx%d", game->config.config_pix_width, game->config.config_pix_height);
-  CON("SDL: - window pixel size    : %dx%d", game->config.window_pix_width, game->config.window_pix_height);
-  CON("SDL: Game graphics zoom     : %f", game->config.game_pix_zoom);
-  CON("SDL: - game pixel size      : %dx%d", game->config.game_pix_width, game->config.game_pix_height);
-  CON("SDL: UI zoom                : %f", game->config.ui_pix_zoom);
-  CON("SDL: - UI pixel size        : %dx%d", game->config.ui_pix_width, game->config.ui_pix_height);
+  LOG("SDL: Window:");
+  LOG("SDL: - config pixel size    : %dx%d", game->config.config_pix_width, game->config.config_pix_height);
+  LOG("SDL: - window pixel size    : %dx%d", game->config.window_pix_width, game->config.window_pix_height);
+  LOG("SDL: Game graphics zoom     : %f", game->config.game_pix_zoom);
+  LOG("SDL: - game pixel size      : %dx%d", game->config.game_pix_width, game->config.game_pix_height);
+  LOG("SDL: UI zoom                : %f", game->config.ui_pix_zoom);
+  LOG("SDL: - UI pixel size        : %dx%d", game->config.ui_pix_width, game->config.ui_pix_height);
 
   if (g_opt_ascii) {
     TERM_WIDTH  = game->config.ui_ascii_term_width;
@@ -893,18 +893,18 @@ void config_game_gfx_update(void)
     TERM_HEIGHT = game->config.ui_gfx_term_height;
   }
 
-  CON("SDL: Terminal");
-  CON("SDL: - ascii gl size        : %ux%u", game->config.ascii_gl_width, game->config.ascii_gl_height);
-  CON("SDL: - term size            : %dx%d", TERM_WIDTH, TERM_HEIGHT);
+  LOG("SDL: Terminal");
+  LOG("SDL: - ascii gl size        : %ux%u", game->config.ascii_gl_width, game->config.ascii_gl_height);
+  LOG("SDL: - term size            : %dx%d", TERM_WIDTH, TERM_HEIGHT);
 
   if (TERM_WIDTH >= TERM_WIDTH_MAX) {
-    CON("SDL: - exceeded console max width: %d", TERM_WIDTH);
+    LOG("SDL: - exceeded console max width: %d", TERM_WIDTH);
     TERM_WIDTH                  = TERM_WIDTH_MAX;
     game->config.ascii_gl_width = ceil(((float) game->config.ui_pix_height) / ((float) TERM_WIDTH));
   }
 
   if (TERM_HEIGHT >= TERM_HEIGHT_MAX) {
-    CON("SDL: - exceeded console max height: %d", TERM_HEIGHT);
+    LOG("SDL: - exceeded console max height: %d", TERM_HEIGHT);
     TERM_HEIGHT                  = TERM_HEIGHT_MAX;
     game->config.ascii_gl_height = ceil(((float) game->config.ui_pix_height) / ((float) TERM_HEIGHT));
   }
@@ -926,16 +926,16 @@ void config_game_gfx_update(void)
   //
   while (game->config.ascii_gl_width * TERM_WIDTH > game->config.ui_pix_width) {
     TERM_WIDTH--;
-    CON("SDL: - exceeded pixel width, try width: %d", TERM_WIDTH);
+    LOG("SDL: - exceeded pixel width, try width: %d", TERM_WIDTH);
   }
   while (game->config.ascii_gl_height * TERM_HEIGHT > game->config.ui_pix_height) {
     TERM_HEIGHT--;
-    CON("SDL: - exceeded pixel height, try height: %d", TERM_HEIGHT);
+    LOG("SDL: - exceeded pixel height, try height: %d", TERM_HEIGHT);
   }
 
-  CON("SDL: Updated terminal");
-  CON("SDL: - term size            : %dx%d", TERM_WIDTH, TERM_HEIGHT);
-  CON("SDL: - width to height ratio: %f", game->config.video_w_h_ratio);
-  CON("SDL: Map");
-  CON("SDL: - map size             : %dx%d", MAP_WIDTH, MAP_HEIGHT);
+  LOG("SDL: Updated terminal");
+  LOG("SDL: - term size            : %dx%d", TERM_WIDTH, TERM_HEIGHT);
+  LOG("SDL: - width to height ratio: %f", game->config.video_w_h_ratio);
+  LOG("SDL: Map");
+  LOG("SDL: - map size             : %dx%d", MAP_WIDTH, MAP_HEIGHT);
 }
