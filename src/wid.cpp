@@ -6640,7 +6640,20 @@ static void wid_handle_requests(void)
       if (game->request_to_toggle_gfx) {
         game->request_to_toggle_gfx = false;
         g_opt_ascii                 = ! g_opt_ascii;
+
+        //
+        // We lose the console as it is resized. However I don't want to lose the logs
+        // if we change mode, so save and then restore them.
+        //
+        auto old_logs = wid_console_serialize();
+
         sdl_display_reset();
+
+        //
+        // Now back with the old logs!
+        //
+        wid_console_deserialize(old_logs);
+
         if (g_opt_ascii) {
           BOTCON("ASCII mode");
         } else {
