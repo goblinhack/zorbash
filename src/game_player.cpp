@@ -383,6 +383,11 @@ void Game::place_player(void)
       // level->thing_new("lava", point(x + 1, y + 6));
       // level->thing_new("lava", point(x + 1, y + 7));
       // level->thing_new("lava", point(x + 1, y + 7));
+      //
+      if (0) {
+        auto m = level->thing_new("coffin_mob", point(x, y + 4));
+        m->frozen_set();
+      }
 
       if (0) {
         auto m = level->thing_new("jelly_parent", point(x, y + 4));

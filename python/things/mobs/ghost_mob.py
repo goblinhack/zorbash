@@ -4,6 +4,10 @@ import tp
 
 def on_idle_tick_freq_dice(me, x, y):
     #
+    # Intentionally allowing spawning when frozen
+    #
+
+    #
     # Make sure to only spawn minions so they have the is_minion flag set
     #
     my.spawn_next_to(me, "ghost_minion")

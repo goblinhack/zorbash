@@ -3,6 +3,8 @@ import tp
 
 
 def on_idle_tick_freq_dice(me, x, y):
+    if my.thing_is_frozen(me):
+        return
     #
     # Make sure to only spawn minions so they have the is_minion flag set
     #
