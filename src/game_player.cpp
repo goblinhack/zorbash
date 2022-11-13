@@ -206,7 +206,7 @@ void Game::place_player(void)
         auto w = level->thing_new("map_beast", point(x, y));
         t->carry(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("wand_ice", point(x, y));
         t->carry(w);
         t->enchant_without_stone(w);
@@ -384,7 +384,10 @@ void Game::place_player(void)
       // level->thing_new("lava", point(x + 1, y + 7));
       // level->thing_new("lava", point(x + 1, y + 7));
 
-      // level->thing_new("jelly_parent", point(x, y + 4));
+      if (0) {
+        auto m = level->thing_new("jelly_parent", point(x, y + 4));
+        m->frozen_set();
+      }
       // level->thing_new("jelly_baby", point(x, y + 2));
       //
       // Zoom the map to the player

@@ -497,6 +497,13 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
   }
 
   //
+  // Poor frozen things are always critted.
+  //
+  if (victim->is_frozen) {
+    attack_options->crit = true;
+  }
+
+  //
   // Too tired to attack
   //
   if (is_able_to_tire()) {
@@ -1071,6 +1078,14 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
       } else if (victim->is_always_hit()) {
         //
         // You just cannot miss this.
+        //
+      } else if (victim->is_frozen) {
+        //
+        // If frozen, it cannot avoid the hits.
+        //
+      } else if (victim->stuck_count()) {
+        //
+        // If stuck, it cannot avoid the hits.
         //
       } else {
         //

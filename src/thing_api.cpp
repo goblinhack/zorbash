@@ -744,6 +744,18 @@ int Thing::is_dead_check(void)
   return is_dead;
 }
 
+int Thing::is_frozen_check(void)
+{
+  TRACE_NO_INDENT();
+  return is_frozen;
+}
+
+int Thing::is_burnt_check(void)
+{
+  TRACE_NO_INDENT();
+  return is_burnt;
+}
+
 int Thing::is_debug_path(void)
 {
   TRACE_NO_INDENT();

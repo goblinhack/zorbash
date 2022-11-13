@@ -490,6 +490,8 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_is_cursor_path_hazard),
     MY_ADD_PYTHON_FUNCTION(thing_is_dagger),
     MY_ADD_PYTHON_FUNCTION(thing_is_dead),
+    MY_ADD_PYTHON_FUNCTION(thing_is_frozen),
+    MY_ADD_PYTHON_FUNCTION(thing_is_burnt),
     MY_ADD_PYTHON_FUNCTION(thing_is_dead_on_end_of_anim),
     MY_ADD_PYTHON_FUNCTION(thing_is_dead_on_falling),
     MY_ADD_PYTHON_FUNCTION(thing_is_dead_or_dying),

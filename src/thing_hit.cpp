@@ -906,7 +906,10 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
     }
   }
 
-  if (attack_options->crit) {
+  if (victim->is_frozen) {
+    damage *= 3;
+    IF_DEBUG2 { hitter->log("Hit %s (health %d) for shatter damage %d", text_the().c_str(), health(), damage); }
+  } else if (attack_options->crit) {
     damage *= 2;
     IF_DEBUG2 { hitter->log("Hit %s (health %d) for CRIT damage %d", text_the().c_str(), health(), damage); }
   } else {

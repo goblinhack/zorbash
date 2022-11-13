@@ -228,6 +228,8 @@ PyObject *thing_is_dead_on_falling(PyObject *obj, PyObject *args, PyObject *keyw
 PyObject *thing_is_dead_or_dying_on_shove(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dead_or_dying(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dead(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_frozen(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_burnt(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_debuff(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_debug_path(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_debug_type(PyObject *obj, PyObject *args, PyObject *keywds);

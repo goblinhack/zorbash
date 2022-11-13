@@ -1336,6 +1336,8 @@ public:
   int is_dagger(void);
   int is_dangerous(Thingp);
   int is_dead_check(void);
+  int is_frozen_check(void);
+  int is_burnt_check(void);
   int is_dead_on_end_of_anim(void);
   int is_dead_on_falling(void);
   int is_dead_on_shove(void);

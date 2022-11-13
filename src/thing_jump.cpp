@@ -170,7 +170,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     //
     if (is_player()) {
       if (is_frozen) {
-        msg("You try to jump but are frozen to the bone.");
+        msg("You try to jump but are frozen to the ground!");
       } else {
         msg("You try to jump but are stuck fast.");
       }
