@@ -120,7 +120,6 @@ def tp_init(name, text_long_name):
     my.is_poisonous_danger_level(self, 2)  # danger level
     my.is_shovable(self, True)
     my.is_spider(self, True)
-    my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
     my.jump_distance(self, 2)
     my.move_speed(self, 100)
@@ -140,7 +139,10 @@ def tp_init(name, text_long_name):
     my.stat_dex(self, 16)
     my.stat_luck(self, 10)
     my.stat_str(self, 14)
+    my.temperature_max(self, 50)
+    my.temperature_min(self, 0)
     my.temperature(self, 20)
+    my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
     my.text_hits(self, "bites")
     my.text_long_description(self, "An enormous spider. Ichor drips from its glistening fangs. Watch out for its web and poisonous bite.")

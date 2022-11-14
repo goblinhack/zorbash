@@ -4,10 +4,21 @@
 
 #include "my_monst.hpp"
 #include "my_thing.hpp"
+#include "my_thing_template.hpp"
+
+int Thing::is_able_to_freeze(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_able_to_freeze());
+}
 
 void Thing::frozen_set(void)
 {
   TRACE_NO_INDENT();
+
+  if (! is_able_to_freeze()) {
+    return;
+  }
 
   if (is_frozen) {
     return;

@@ -369,7 +369,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
     IF_DEBUG2 { real_hitter->log("Attack damage_cold damage %d on %s", damage, to_short_string().c_str()); }
     damage_type = "cold ";
 
-    if (is_temperature_sensitive()) {
+    if (temperature_sensitive()) {
       if ((temperature_get() > TEMPERATURE_THRESHOLD) || is_burnt || damage_received_doubled_from_cold()) {
         damage_type = "double " + damage_type;
         damage *= 2;
@@ -404,7 +404,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
     IF_DEBUG2 { real_hitter->log("Attack damage_fire damage %d on %s", damage, to_short_string().c_str()); }
     damage_type = "fire ";
 
-    if (is_temperature_sensitive()) {
+    if (temperature_sensitive()) {
       if ((temperature_get() < -TEMPERATURE_THRESHOLD) || was_frozen || is_frozen ||
           damage_received_doubled_from_fire()) {
         damage_type = "double " + damage_type;
@@ -1335,6 +1335,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
     //
     // Something else hitting something else
     //
+    real_hitter->msg("%s killed %s.", real_hitter->text_The().c_str(), text_the().c_str());
   }
 
   //
@@ -1708,6 +1709,7 @@ int Thing::is_hit(Thingp hitter, AttackOptions *attack_options, int damage)
     //
     if (attack_options->attack_num == 0) {
       if (aip()->recently_hit_by.find(real_hitter->id) != aip()->recently_hit_by.end()) {
+        dbg("recently_hit_by size %d", (int) aip()->recently_hit_by.size());
         //
         // Faster things get more moves and hits
         //
@@ -1718,14 +1720,18 @@ int Thing::is_hit(Thingp hitter, AttackOptions *attack_options, int damage)
           auto max_hit_count = real_hitter_speed / speed;
 
           if (hit_count >= max_hit_count) {
-            IF_DEBUG2 { hitter->log("No, I've already hit %s", to_short_string().c_str()); }
+            IF_DEBUG2
+            {
+              real_hitter->log("No, I've already hit %s (count %d max %d)", to_short_string().c_str(), hit_count,
+                               max_hit_count);
+            }
             return false;
           }
         } else {
           //
           // Static things hit one time
           //
-          IF_DEBUG2 { hitter->log("No, I've already hit %s", to_short_string().c_str()); }
+          IF_DEBUG2 { real_hitter->log("No, I've already hit %s", to_short_string().c_str()); }
           return false;
         }
       }
@@ -1742,6 +1748,7 @@ int Thing::is_hit(Thingp hitter, AttackOptions *attack_options, int damage)
         //
         // NOTE: this needs to be before on_fire_set() as that leads to multiple hits by lava
         //
+        IF_DEBUG2 { real_hitter->log("Set recently hit: %s", to_short_string().c_str()); }
         aip()->recently_hit_by[ real_hitter->id ]++;
       }
     }

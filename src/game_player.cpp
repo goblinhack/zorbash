@@ -206,7 +206,7 @@ void Game::place_player(void)
         auto w = level->thing_new("map_beast", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("wand_ice", point(x, y));
         t->carry(w);
         t->enchant_without_stone(w);
@@ -388,6 +388,7 @@ void Game::place_player(void)
         auto m = level->thing_new("coffin_mob", point(x, y + 4));
         m->frozen_set();
       }
+      // level->thing_new("flameskull", point(x, y + 4));
 
       if (0) {
         auto m = level->thing_new("jelly_parent", point(x, y + 4));

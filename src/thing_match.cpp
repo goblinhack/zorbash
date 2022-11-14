@@ -730,21 +730,6 @@ bool Thing::matches(const std::string &what)
   if (unused_flag29() && (what == "unused_flag29")) {
     return true;
   }
-  if (unused_flag30() && (what == "unused_flag30")) {
-    return true;
-  }
-  if (unused_flag31() && (what == "unused_flag31")) {
-    return true;
-  }
-  if (gfx_ascii_color_bg_unchanged_by_lights() && (what == "gfx_ascii_color_bg_unchanged_by_lights")) {
-    return true;
-  }
-  if (gfx_ascii_color_fg_unchanged_by_lights() && (what == "gfx_ascii_color_fg_unchanged_by_lights")) {
-    return true;
-  }
-  if (gfx_pixelart_oversized_and_centered() && (what == "gfx_pixelart_oversized_and_centered")) {
-    return true;
-  }
   if (is_limb() && (what == "is_limb")) {
     return true;
   }
@@ -2233,21 +2218,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "unused_flag2") {
     return &Thing::unused_flag2;
-  }
-  if (what == "unused_flag30") {
-    return &Thing::unused_flag30;
-  }
-  if (what == "unused_flag31") {
-    return &Thing::unused_flag31;
-  }
-  if (what == "gfx_ascii_color_bg_unchanged_by_lights") {
-    return &Thing::gfx_ascii_color_bg_unchanged_by_lights;
-  }
-  if (what == "gfx_ascii_color_fg_unchanged_by_lights") {
-    return &Thing::gfx_ascii_color_fg_unchanged_by_lights;
-  }
-  if (what == "gfx_pixelart_oversized_and_centered") {
-    return &Thing::gfx_pixelart_oversized_and_centered;
   }
   if (what == "is_limb") {
     return &Thing::is_limb;

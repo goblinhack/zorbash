@@ -78,7 +78,6 @@ def tp_init(name, text_long_name):
     my.is_obs_in_the_way_for_firing(self, True)
     my.is_shovable_and_sticky(self, True)  # so a dogman in ice is also shoved
     my.is_shovable(self, True)
-    my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)  # So it can interact with fire
     my.is_very_heavy(self, True)
     my.melting_chance_d1000(self, 100)
@@ -86,7 +85,9 @@ def tp_init(name, text_long_name):
     my.on_death_do(self, "me.on_death()")
     my.on_fall_do(self, "me.on_fall()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
+    my.temperature_max(self, 0)
     my.temperature(self, -100)
+    my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
     my.text_short_description(self, "A block of ice.")
     my.thing_size(self, my.THING_SIZE_GIANT)

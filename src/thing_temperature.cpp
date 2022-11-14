@@ -23,9 +23,29 @@ void Thing::temperature_tick(void)
     return;
   }
 
-  if (initial_temperature_get() != temperature_get()) {
-    temperature_set((initial_temperature_get() + (temperature_get() * 3)) / 4);
-    log("Temp %d vs %d", temperature_get(), initial_temperature_get());
+  auto initial_temp = initial_temperature_get();
+  auto current_temp = temperature_get();
+
+  if (current_temp != initial_temp) {
+    con("min %d/%d/%d", temperature_min_get(), current_temp, temperature_max_get());
+
+    if (temperature_min_is_set()) {
+      if (current_temp < temperature_min_get()) {
+        dbg("Too cold");
+        TRACE_AND_INDENT();
+        is_attacked_with_damage_cold(this, this, (current_temp - temperature_min_get()) / 10);
+      }
+    }
+
+    if (temperature_max_is_set()) {
+      if (current_temp > temperature_max_get()) {
+        dbg("Too hot");
+        TRACE_AND_INDENT();
+        is_attacked_with_damage_fire(this, this, (current_temp - temperature_max_get()) / 10);
+      }
+    }
+
+    temperature_set((initial_temperature_get() + (temperature_get() * 5)) / 6);
   }
 
   FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y)
@@ -63,7 +83,6 @@ void Thing::temperature_tick(void)
       // Ignore carried things
       //
       if (t->top_owner() == this) {
-        t->log("temp %d ignore2", t->temperature);
         continue;
       }
 
@@ -71,13 +90,11 @@ void Thing::temperature_tick(void)
       // If a bag, ignore the temperature of the carrier.
       //
       if (top_owner() == t) {
-        t->log("temp %d ignore3", t->temperature);
         continue;
       }
     }
 
     if (! t->has_temperature()) {
-      t->log("temp %d ignore4", t->temperature);
       continue;
     }
 
@@ -395,6 +412,30 @@ bool Thing::initial_temperature_is_set(void)
   return (tp()->initial_temperature_is_set());
 }
 
+int Thing::temperature_min_get(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->temperature_min());
+}
+
+bool Thing::temperature_min_is_set(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->temperature_min_is_set());
+}
+
+int Thing::temperature_max_get(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->temperature_max());
+}
+
+bool Thing::temperature_max_is_set(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->temperature_max_is_set());
+}
+
 int Thing::temperature_set(int v)
 {
   TRACE_NO_INDENT();
@@ -423,7 +464,7 @@ void Thing::temperature_incr(int temperature_change)
   dbg2("Increment temp by %d, current temp %d", temperature_change, temperature_curr);
   TRACE_AND_INDENT();
 
-  if (is_temperature_change_sensitive()) {
+  if (temperature_sensitive_to_sudden_changes()) {
     if (temperature_change > 50) {
       if ((temperature_curr < 0) && (temperature_curr > -25)) {
         auto damage = (temperature_change - temperature_curr) / 10;

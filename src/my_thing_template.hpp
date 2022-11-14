@@ -59,6 +59,8 @@ public:
 
 private:
   bool _initial_temperature_set {};
+  bool _temperature_min_set {};
+  bool _temperature_max_set {};
 
   Dice _damage_acid_dice {};
   Dice _damage_cold_dice {};
@@ -505,8 +507,6 @@ private:
   int _is_sword {};
   int _is_target_radial {};
   int _is_target_select {};
-  int _is_temperature_change_sensitive {};
-  int _is_temperature_sensitive {};
   int _is_tentacle {};
   int _is_the_grid {};
   int _is_thief {};
@@ -598,6 +598,10 @@ private:
   int _stat_str {};
   int _stat_str_mod {};
   int _teleport_distance {};
+  int _temperature_max {};
+  int _temperature_min {};
+  int _temperature_sensitive {};
+  int _temperature_sensitive_to_sudden_changes {};
   int _temperature {TEMPERATURE_ROOM};
   int _thing_size {};
   int _tick_prio {};
@@ -632,8 +636,6 @@ private:
   int _unused_flag28 {};
   int _unused_flag29 {};
   int _unused_flag3 {};
-  int _unused_flag30 {};
-  int _unused_flag31 {};
   int _unused_flag4 {};
   int _unused_flag40 {};
   int _unused_flag48 {};
@@ -825,6 +827,8 @@ public:
   bool is_edible(const Thingp it);
   bool has_temperature(void);
   bool initial_temperature_is_set(void) const;
+  bool temperature_min_is_set(void) const;
+  bool temperature_max_is_set(void) const;
 
   void dbg_(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void err(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
@@ -1527,8 +1531,6 @@ public:
   int is_sword(void) const;
   int is_target_radial(void) const;
   int is_target_select(void) const;
-  int is_temperature_change_sensitive(void) const;
-  int is_temperature_sensitive(void) const;
   int is_tentacle(void) const;
   int is_the_grid(void) const;
   int is_thief(void) const;
@@ -1621,6 +1623,10 @@ public:
   int stat_str_mod(void) const;
   int stat_str(void) const;
   int teleport_distance(void) const;
+  int temperature_max(void) const;
+  int temperature_min(void) const;
+  int temperature_sensitive_to_sudden_changes(void) const;
+  int temperature_sensitive(void) const;
   int temperature(void) const;
   int thing_size(void) const;
   int tick_prio(void) const;
@@ -1654,8 +1660,6 @@ public:
   int unused_flag28(void) const;
   int unused_flag29(void) const;
   int unused_flag2(void) const;
-  int unused_flag30(void) const;
-  int unused_flag31(void) const;
   int unused_flag3(void) const;
   int unused_flag40(void) const;
   int unused_flag48(void) const;
@@ -2069,8 +2073,6 @@ public:
   void is_sword_set(int v);
   void is_target_radial_set(int v);
   void is_target_select_set(int v);
-  void is_temperature_change_sensitive_set(int v);
-  void is_temperature_sensitive_set(int v);
   void is_tentacle_set(int v);
   void is_the_grid_set(int v);
   void is_thief_set(int v);
@@ -2283,6 +2285,10 @@ public:
   void target_name_projectile_set(const std::string &v);
   void target_name_radial_set(const std::string &v);
   void teleport_distance_set(int v);
+  void temperature_max_set(int v);
+  void temperature_min_set(int v);
+  void temperature_sensitive_set(int v);
+  void temperature_sensitive_to_sudden_changes_set(int v);
   void temperature_set(int v);
   void text_a_or_an_set(const std::string &v);
   void text_debuff_set(const std::string &v);
@@ -2332,8 +2338,6 @@ public:
   void unused_flag28_set(int v);
   void unused_flag29_set(int v);
   void unused_flag2_set(int v);
-  void unused_flag30_set(int v);
-  void unused_flag31_set(int v);
   void unused_flag3_set(int v);
   void unused_flag40_set(int v);
   void unused_flag48_set(int v);

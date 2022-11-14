@@ -633,6 +633,8 @@ public:
   bool teleport_randomly_away_from_player(void);
   bool teleport_randomly_towards_player(void);
   bool teleport_randomly(void);
+  bool temperature_max_is_set(void);
+  bool temperature_min_is_set(void);
   bool thing_check_for_cold_damage(void);
   bool thing_check_for_heat_damage(void);
   bool thing_sound_play_channel(int chan, const std::string &alias);
@@ -1305,6 +1307,7 @@ public:
   int is_bridge(void);
   int is_brittle(void);
   int is_buff(void);
+  int is_burnt_check(void);
   int is_carnivorous_plant(void);
   int is_carrier_of_treasure_class_a_d1000(void);
   int is_carrier_of_treasure_class_b_d1000(void);
@@ -1336,8 +1339,6 @@ public:
   int is_dagger(void);
   int is_dangerous(Thingp);
   int is_dead_check(void);
-  int is_frozen_check(void);
-  int is_burnt_check(void);
   int is_dead_on_end_of_anim(void);
   int is_dead_on_falling(void);
   int is_dead_on_shove(void);
@@ -1393,6 +1394,7 @@ public:
   int is_flying(void);
   int is_foilage(void);
   int is_food(void);
+  int is_frozen_check(void);
   int is_gas_blocker(void);
   int is_gauntlet(void);
   int is_gelatinous(void);
@@ -1512,8 +1514,6 @@ public:
   int is_sword(void);
   int is_target_radial(void);
   int is_target_select(void);
-  int is_temperature_change_sensitive(void);
-  int is_temperature_sensitive(void);
   int is_tentacle(void);
   int is_thief(void);
   int is_throwable(void);
@@ -1922,6 +1922,10 @@ public:
   int teleport_distance_get(void);
   int teleport_distance(void);
   int temperature_get(void);
+  int temperature_max_get(void);
+  int temperature_min_get(void);
+  int temperature_sensitive_to_sudden_changes(void);
+  int temperature_sensitive(void);
   int temperature_set(int);
   int thing_size(void);
   int tick_prio(void);
@@ -1994,8 +1998,6 @@ public:
   int unused_flag28(void);
   int unused_flag29(void);
   int unused_flag2(void);
-  int unused_flag30(void);
-  int unused_flag31(void);
   int unused_flag3(void);
   int unused_flag40(void);
   int unused_flag48(void);

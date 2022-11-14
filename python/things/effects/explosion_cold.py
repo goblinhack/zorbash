@@ -7,8 +7,7 @@ def on_born(me, x, y):
     for dx in range(-1, 2):
         for dy in range(-1, 2):
             for it in my.level_get_all(me, x + dx, y + dy):
-                if my.thing_is_lava(it) or my.thing_is_fire(it):
-                    my.thing_dead(it, "frozen")
+                my.thing_freeze(it)
 
 
 def tp_init(name, text_long_name, text_short_name):

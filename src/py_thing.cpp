@@ -977,14 +977,13 @@ PyObject *thing_dead(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_NONE;
 }
 
-PyObject *thing_perma_death(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_freeze(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     id       = 0;
-  char        *reason   = nullptr;
-  static char *kwlist[] = {(char *) "t", (char *) "reason", nullptr};
+  static char *kwlist[] = {(char *) "t", nullptr};
 
-  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &reason)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_NONE;
   }
@@ -997,6 +996,59 @@ PyObject *thing_perma_death(PyObject *obj, PyObject *args, PyObject *keywds)
   Thingp t = game->thing_find(id);
   if (! t) {
     ERR("%s: Cannot find t thing ID %u", __FUNCTION__, id);
+    Py_RETURN_NONE;
+  }
+
+  t->frozen_set();
+  Py_RETURN_NONE;
+}
+
+PyObject *thing_unfreeze(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     id       = 0;
+  static char *kwlist[] = {(char *) "t", nullptr};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! id) {
+    ERR("%s: No t thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp t = game->thing_find(id);
+  if (! t) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    Py_RETURN_NONE;
+  }
+
+  t->frozen_unset();
+  Py_RETURN_NONE;
+}
+
+PyObject *thing_perma_death(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     id       = 0;
+  char        *reason   = nullptr;
+  static char *kwlist[] = {(char *) "t", (char *) "reason", nullptr};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id, &reason)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! id) {
+    ERR("%s: No thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp t = game->thing_find(id);
+  if (! t) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
@@ -1023,13 +1075,13 @@ PyObject *thing_resurrect(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   if (! id) {
-    ERR("%s: No t thing ID set", __FUNCTION__);
+    ERR("%s: No thing ID set", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find t thing ID %u", __FUNCTION__, id);
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
@@ -1056,13 +1108,13 @@ PyObject *thing_carry(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   if (! id) {
-    ERR("%s: No t thing ID set", __FUNCTION__);
+    ERR("%s: No thing ID set", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find t thing ID %u", __FUNCTION__, id);
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
@@ -1104,13 +1156,13 @@ PyObject *thing_enemy(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   if (! id) {
-    ERR("%s: No t thing ID set", __FUNCTION__);
+    ERR("%s: No thing ID set", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find t thing ID %u", __FUNCTION__, id);
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
@@ -1143,13 +1195,13 @@ PyObject *thing_friend(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   if (! id) {
-    ERR("%s: No t thing ID set", __FUNCTION__);
+    ERR("%s: No thing ID set", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find t thing ID %u", __FUNCTION__, id);
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
@@ -1182,13 +1234,13 @@ PyObject *thing_polymorph(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   if (! id) {
-    ERR("%s: No t thing ID set", __FUNCTION__);
+    ERR("%s: No thing ID set", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find t thing ID %u", __FUNCTION__, id);
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
@@ -1214,13 +1266,13 @@ PyObject *thing_teleport_randomly(PyObject *obj, PyObject *args, PyObject *keywd
   }
 
   if (! id) {
-    ERR("%s: No t thing ID set", __FUNCTION__);
+    ERR("%s: No thing ID set", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find t thing ID %u", __FUNCTION__, id);
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
@@ -1275,7 +1327,7 @@ PyObject *thing_set_mob(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   if (! id) {
-    ERR("%s: No t thing ID set", __FUNCTION__);
+    ERR("%s: No thing ID set", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
@@ -1313,7 +1365,7 @@ PyObject *thing_set_leader(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   if (! id) {
-    ERR("%s: No t thing ID set", __FUNCTION__);
+    ERR("%s: No thing ID set", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
@@ -1324,7 +1376,7 @@ PyObject *thing_set_leader(PyObject *obj, PyObject *args, PyObject *keywds)
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find t thing ID %u", __FUNCTION__, id);
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 

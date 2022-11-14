@@ -450,12 +450,6 @@ int Thing::is_able_to_fall(void)
   return (tp()->is_able_to_fall());
 }
 
-int Thing::is_able_to_fire_at(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_able_to_fire_at());
-}
-
 int Thing::is_able_to_see_through_doors(void)
 {
   TRACE_NO_INDENT();
@@ -1452,18 +1446,6 @@ int Thing::unused_flag29(void)
   return (tp()->unused_flag29());
 }
 
-int Thing::unused_flag30(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->unused_flag30());
-}
-
-int Thing::unused_flag31(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->unused_flag31());
-}
-
 int Thing::gfx_ascii_color_bg_unchanged_by_lights(void)
 {
   TRACE_NO_INDENT();
@@ -1726,12 +1708,6 @@ int Thing::is_obs_in_the_way_for_throwing(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_obs_in_the_way_for_throwing());
-}
-
-int Thing::is_able_to_freeze(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_able_to_freeze());
 }
 
 int Thing::is_gelatinous(void)
@@ -2027,10 +2003,10 @@ int Thing::is_dead_on_falling(void)
   return (tp()->is_dead_on_falling());
 }
 
-int Thing::is_temperature_sensitive(void)
+int Thing::temperature_sensitive(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_temperature_sensitive());
+  return (tp()->temperature_sensitive());
 }
 
 int Thing::is_cold(void)
@@ -2039,10 +2015,10 @@ int Thing::is_cold(void)
   return (tp()->is_cold());
 }
 
-int Thing::is_temperature_change_sensitive(void)
+int Thing::temperature_sensitive_to_sudden_changes(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_temperature_change_sensitive());
+  return (tp()->temperature_sensitive_to_sudden_changes());
 }
 
 int Thing::is_very_heavy(void)

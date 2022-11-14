@@ -21,6 +21,16 @@ typedef struct {
 static ThingPossibleHit thing_possible_hits[ MAX_THING_POSSIBLE_HIT ];
 static int              thing_possible_hit_size;
 
+int Thing::is_able_to_fire_at(void)
+{
+  if (is_frozen) {
+    return false;
+  }
+
+  TRACE_NO_INDENT();
+  return (tp()->is_able_to_fire_at());
+}
+
 //
 // Python callback upon being fire_at
 //

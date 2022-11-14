@@ -47,7 +47,7 @@ void tp_fixup(void)
       tp->is_interesting_set(true);
     }
 
-    if (tp->is_temperature_sensitive()) {
+    if (tp->temperature_sensitive()) {
       tp->is_interesting_set(true);
     }
 
@@ -85,11 +85,11 @@ void tp_fixup(void)
     }
 
     if (tp->is_able_to_burn() || tp->is_combustible() || tp->is_very_combustible()) {
-      tp->is_temperature_sensitive_set(true);
+      tp->temperature_sensitive_set(true);
     }
 
     if (tp->is_able_to_freeze()) {
-      tp->is_temperature_sensitive_set(true);
+      tp->temperature_sensitive_set(true);
     }
 
     if (tp->is_able_to_shove_chance_d1000()) {
@@ -101,14 +101,14 @@ void tp_fixup(void)
     }
 
     if (tp->is_able_to_melt()) {
-      tp->is_temperature_sensitive_set(true);
+      tp->temperature_sensitive_set(true);
       if (! tp->melting_chance_d1000()) {
         DIE("Tp %s needs melting chance set as it can melt", tp->name().c_str());
       }
     }
 
     if (tp->is_stone()) {
-      tp->is_temperature_change_sensitive_set(true);
+      tp->temperature_sensitive_to_sudden_changes_set(true);
     }
 
     if (tp->is_poisonous_danger_level()) {

@@ -444,8 +444,8 @@ do
       is_sword \
       is_target_radial \
       is_target_select \
-      is_temperature_change_sensitive \
-      is_temperature_sensitive \
+      temperature_sensitive_to_sudden_changes \
+      temperature_sensitive \
       is_the_grid \
       is_thief \
       is_throwable \
@@ -527,8 +527,8 @@ do
       unused_flag28 \
       unused_flag29 \
       unused_flag3 \
-      unused_flag30 \
-      unused_flag31 \
+      temperature_max \
+      temperature_min \
       gfx_ascii_color_bg_unchanged_by_lights \
       gfx_ascii_color_fg_unchanged_by_lights \
       gfx_pixelart_oversized_and_centered \
