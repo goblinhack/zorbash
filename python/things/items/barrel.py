@@ -28,7 +28,6 @@ def on_death(me, x, y):
 def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
-    my.ai_obstacle(self, True)
     my.appearing_chance_d1000(self, 100)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 1)
@@ -68,6 +67,7 @@ def tp_init(name, text_long_name):
     my.is_interesting(self, True)  # so it can be shoved
     my.is_light_blocker_for_monst(self, True)  # to give cover to the player
     my.is_loggable(self, True)
+    my.is_obs_for_ai(self, True)
     my.is_obs_for_shoving(self, True)
     my.is_shovable(self, True)
     my.is_very_combustible(self, True)

@@ -9,7 +9,7 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-bool Thing::ai_obstacle_for_me(point p)
+bool Thing::is_obs_for_ai_for_me(point p)
 {
   TRACE_NO_INDENT();
 
@@ -33,7 +33,7 @@ bool Thing::ai_obstacle_for_me(point p)
       //
       // "true" on collision
       //
-      if (ai_obstacle(t)) {
+      if (is_obs_for_ai(t)) {
         return true;
       }
     }
@@ -42,7 +42,7 @@ bool Thing::ai_obstacle_for_me(point p)
   return false;
 }
 
-bool Tp::ai_obstacle_for_me(Levelp level, point p)
+bool Tp::is_obs_for_ai_for_me(Levelp level, point p)
 {
   TRACE_NO_INDENT();
 
@@ -66,7 +66,7 @@ bool Tp::ai_obstacle_for_me(Levelp level, point p)
       //
       // "true" on collision
       //
-      if (ai_obstacle(t)) {
+      if (is_obs_for_ai(t)) {
         return true;
       }
     }
@@ -271,7 +271,7 @@ bool Thing::collision_obstacle(Thingp it)
 //
 // Return TRUE if this is something that should block AI
 //
-bool Thing::ai_obstacle(Thingp it)
+bool Thing::is_obs_for_ai(Thingp it)
 {
   const bool debug = false;
 
@@ -529,7 +529,7 @@ bool Thing::ai_obstacle(Thingp it)
 //
 // Return TRUE if this is something that should block AI
 //
-bool Tp::ai_obstacle(Thingp it)
+bool Tp::is_obs_for_ai(Thingp it)
 {
   //
   // Skip things we cannot collide with

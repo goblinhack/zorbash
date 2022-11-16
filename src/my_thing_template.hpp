@@ -108,7 +108,6 @@ private:
   // begin sort marker1 {
   int _aggression_pct {};
   int _ai_detect_secret_doors {};
-  int _ai_obstacle {};
   int _ai_resent_count {};
   int _ai_wanderer {};
   int _appearing_chance_d1000 {};
@@ -459,6 +458,7 @@ private:
   int _is_necrotic_danger_level {};
   int _is_no_tile {};
   int _is_obs_destructable {};
+  int _is_obs_for_ai {};
   int _is_obs_for_jump_landing {};
   int _is_obs_for_shoving {};
   int _is_obs_in_the_way_for_firing {};
@@ -821,8 +821,8 @@ public:
 
   bool is_disliked_by_me(class Level *, point p) const;
   bool is_hated_by_me(class Level *, point p) const;
-  bool ai_obstacle(Thingp it);
-  bool ai_obstacle_for_me(class Level *, point);
+  bool is_obs_for_ai(Thingp it);
+  bool is_obs_for_ai_for_me(class Level *, point);
   bool can_eat(const Thingp itp);
   bool is_edible(const Thingp it);
   bool has_temperature(void);
@@ -1121,7 +1121,6 @@ public:
   // begin sort marker4 {
   int aggression_pct(void) const;
   int ai_detect_secret_doors(void) const;
-  int ai_obstacle(void) const;
   int ai_resent_count(void) const;
   int ai_wanderer(void) const;
   int appearing_chance_d1000(void) const;
@@ -1483,6 +1482,7 @@ public:
   int is_necrotic_danger_level(void) const;
   int is_no_tile(void) const;
   int is_obs_destructable(void) const;
+  int is_obs_for_ai(void) const;
   int is_obs_for_jump_landing(void) const;
   int is_obs_for_shoving(void) const;
   int is_obs_in_the_way_for_firing(void) const;
@@ -1675,7 +1675,6 @@ public:
   // begin sort marker5 {
   void aggression_pct_set(int v);
   void ai_detect_secret_doors_set(int v);
-  void ai_obstacle_set(int v);
   void ai_resent_count_set(int v);
   void ai_wanderer_set(int v);
   void appearing_chance_d1000_set(int v);
@@ -2025,6 +2024,7 @@ public:
   void is_necrotic_danger_level_set(int v);
   void is_no_tile_set(int v);
   void is_obs_destructable_set(int v);
+  void is_obs_for_ai_set(int v);
   void is_obs_for_jump_landing_set(int v);
   void is_obs_for_shoving_set(int v);
   void is_obs_in_the_way_for_firing_set(int v);

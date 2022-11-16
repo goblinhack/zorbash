@@ -613,7 +613,7 @@ bool Game::wid_thing_info_create_list(std::vector< Thingp > &ts)
           t->topcon("off-screen");
         } else if (level->is_cursor_path_hazard(t->curr_at.x, t->curr_at.y)) {
           t->topcon("over path hazard");
-        } else if (player->ai_obstacle_for_me(t->curr_at)) {
+        } else if (player->is_obs_for_ai_for_me(t->curr_at)) {
           t->topcon("over AI obs");
         } else if (player->collision_obstacle(t->curr_at)) {
           t->topcon("over coll obs");

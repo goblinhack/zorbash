@@ -436,9 +436,6 @@ public:
   bool ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int search_type = 0);
   bool ai_create_path_to_single_goal(int, int, int, int, const Goal &goal, const struct Dmap_ *saved_dmap);
   bool ai_escape(void);
-  bool ai_obstacle_for_me(point);
-  bool ai_obstacle(fpoint);
-  bool ai_obstacle(Thingp);
   bool ai_on_fire_choose_target(point &nh);
   bool ai_on_fire(void);
   bool ai_tick(bool recursing = false);
@@ -556,6 +553,9 @@ public:
   bool is_friend(Thingp it);
   bool is_hated_by_me(const point p);
   bool is_hated_by_me(const Thingp it);
+  bool is_obs_for_ai_for_me(point);
+  bool is_obs_for_ai(fpoint);
+  bool is_obs_for_ai(Thingp);
   bool is_on_fire(void);
   bool is_state_sleeping(void);
   bool is_stuck_check(void);
@@ -944,7 +944,6 @@ public:
   int ai_detect_secret_doors(void);
   int ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int type, bool check);
   int ai_hit_actual(Thingp hitter, Thingp real_hitter, AttackOptions *, int damage);
-  int ai_obstacle(void);
   int ai_resent_count(void);
   int ai_wanderer(void);
   int appearing_chance_d1000(void);
@@ -1465,6 +1464,7 @@ public:
   int is_necrotic_danger_level(void);
   int is_no_tile(void);
   int is_obs_destructable(void);
+  int is_obs_for_ai(void);
   int is_obs_for_jump_landing(void);
   int is_obs_for_shoving(void);
   int is_obs_in_the_way_for_firing(void);

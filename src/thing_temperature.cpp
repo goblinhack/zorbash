@@ -27,13 +27,11 @@ void Thing::temperature_tick(void)
   auto current_temp = temperature_get();
 
   if (current_temp != initial_temp) {
-    con("min %d/%d/%d", temperature_min_get(), current_temp, temperature_max_get());
-
     if (temperature_min_is_set()) {
       if (current_temp < temperature_min_get()) {
         dbg("Too cold");
         TRACE_AND_INDENT();
-        is_attacked_with_damage_cold(this, this, (current_temp - temperature_min_get()) / 10);
+        is_attacked_with_damage_cold(this, this, abs((temperature_min_get() - current_temp) / 10));
       }
     }
 
@@ -41,7 +39,7 @@ void Thing::temperature_tick(void)
       if (current_temp > temperature_max_get()) {
         dbg("Too hot");
         TRACE_AND_INDENT();
-        is_attacked_with_damage_fire(this, this, (current_temp - temperature_max_get()) / 10);
+        is_attacked_with_damage_fire(this, this, abs((current_temp - temperature_max_get()) / 10));
       }
     }
 

@@ -5,7 +5,6 @@ import tp
 def tp_init(name, text_long_name, tiles=[]):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
-    my.ai_obstacle(self, True)
     my.appearing_chance_d1000(self, 100)
     my.collision_hit_priority(self, 2)
     my.damage_crush_chance_d1000(self, 0, 1000)
@@ -34,6 +33,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_heavy(self, True)
     my.is_immune_to_fire(self, True)
     my.is_interesting(self, True)  # so it can be shoved
+    my.is_obs_for_ai(self, True)
     my.is_shovable(self, True)
     my.light_color(self, "orange")
     my.light_dist(self, 2)

@@ -31,7 +31,7 @@ def on_death(me, x, y):
 def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
-    my.ai_obstacle(self, True)
+
     my.appearing_chance_d1000(self, 10)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 100)
@@ -69,13 +69,15 @@ def tp_init(name, text_long_name):
     my.is_immune_to_draining(self, True)
     my.is_immune_to_necrosis(self, True)
     my.is_immune_to_poison(self, True)
-    my.is_interesting(self, True)
     my.is_interesting(self, True)  # so it can be shoved
     my.is_light_blocker_for_monst(self, True)  # to give cover to the player
     my.is_loggable(self, True)
+    my.is_obs_for_ai(self, True)
     my.is_obs_for_jump_landing(self, True)
     my.is_obs_for_shoving(self, True)
     my.is_obs_in_the_way_for_firing(self, True)
+    my.is_obs_in_the_way_for_jumping(self, True)
+    my.is_obs_in_the_way_for_throwing(self, True)
     my.is_shovable_and_sticky(self, True)  # so a dogman in ice is also shoved
     my.is_shovable(self, True)
     my.is_tickable(self, True)  # So it can interact with fire

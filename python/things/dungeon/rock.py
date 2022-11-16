@@ -25,7 +25,6 @@ def tp_init(
 
     self = tp.Tp(name, "rock")
     # begin sort marker
-    my.ai_obstacle(self, True)
     my.collision_hit_priority(self, 1)
     my.gfx_ascii_bg_color_spread_hue(self, 50)
     my.gfx_ascii_shown_in_bg(self, True)
@@ -45,6 +44,7 @@ def tp_init(
     my.is_gas_blocker(self, True)
     my.is_hittable(self, True)
     my.is_light_blocker(self, True)
+    my.is_obs_for_ai(self, True)
     my.is_obs_for_jump_landing(self, True)
     my.is_obs_for_shoving(self, True)
     my.is_obs_in_the_way_for_firing(self, True)

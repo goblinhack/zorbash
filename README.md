@@ -1,5 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - falling in block of ice should fall together                                                                                               -->
+<!-- - using fireball in block of ice                                                                                                             -->
 <!-- - fireskull should die if chilled?                                                                                                           -->
 <!-- - some weapons crit more                                                                                                                     -->
 <!-- - tentacle grapple                                                                                                                           -->

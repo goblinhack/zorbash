@@ -97,10 +97,10 @@ int Thing::ai_resent_count(void)
   return (tp()->ai_resent_count());
 }
 
-int Thing::ai_obstacle(void)
+int Thing::is_obs_for_ai(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->ai_obstacle());
+  return (tp()->is_obs_for_ai());
 }
 
 int Thing::attack_eater(void)

@@ -102,7 +102,7 @@ bool Thing::spawn_next_to(const std::string &what)
       continue;
     }
 
-    if (tpp->ai_obstacle_for_me(level, p)) {
+    if (tpp->is_obs_for_ai_for_me(level, p)) {
       continue;
     }
 
@@ -169,7 +169,7 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
       continue;
     }
 
-    if (ai_obstacle_for_me(p)) {
+    if (is_obs_for_ai_for_me(p)) {
       continue;
     }
 
@@ -403,7 +403,7 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, i
         continue;
       }
 
-      if (ai_obstacle_for_me(spawn_at)) {
+      if (is_obs_for_ai_for_me(spawn_at)) {
         continue;
       }
 
@@ -560,7 +560,7 @@ bool Thing::spawn_gas_poison(int radius)
         continue;
       }
 
-      if (ai_obstacle_for_me(p)) {
+      if (is_obs_for_ai_for_me(p)) {
         continue;
       }
 

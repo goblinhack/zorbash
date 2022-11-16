@@ -328,7 +328,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
         // If the fallback path ends in an AI obstacle (like a chasm)
         // then this is sub ideal.
         //
-        if (ai_obstacle_for_me(fallback.path[ fallback.path.size() - 1 ])) {
+        if (is_obs_for_ai_for_me(fallback.path[ fallback.path.size() - 1 ])) {
           AI_LOG("Goal (and fallback) is astar unreachable");
           return false;
         }
@@ -510,7 +510,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         //
         // Normal monsters that can move
         //
-        if (! ai_obstacle_for_me(p)) {
+        if (! is_obs_for_ai_for_me(p)) {
           set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
           continue;
         }
@@ -573,11 +573,11 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           //
           // No jump begin/end from a chasm or barrel for example
           //
-          if (is_disliked_by_me(jump_begin) || ai_obstacle_for_me(jump_begin)) {
+          if (is_disliked_by_me(jump_begin) || is_obs_for_ai_for_me(jump_begin)) {
             continue;
           }
 
-          if (is_disliked_by_me(jump_end) || ai_obstacle_for_me(jump_end)) {
+          if (is_disliked_by_me(jump_end) || is_obs_for_ai_for_me(jump_end)) {
             continue;
           }
 
@@ -611,7 +611,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
               jump = false;
               break;
             }
-            if (! ai_obstacle_for_me(j)) {
+            if (! is_obs_for_ai_for_me(j)) {
               jump = false;
               break;
             }
@@ -1906,7 +1906,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
         continue;
       }
 
-      if (ai_obstacle_for_me(p)) {
+      if (is_obs_for_ai_for_me(p)) {
         continue;
       }
 
@@ -1940,7 +1940,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
         continue;
       }
 
-      if (ai_obstacle_for_me(p)) {
+      if (is_obs_for_ai_for_me(p)) {
         continue;
       }
 

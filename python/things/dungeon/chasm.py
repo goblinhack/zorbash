@@ -9,7 +9,6 @@ import tp
 def chasm_init(name, text_long_name, tiles=[]):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
-    my.ai_obstacle(self, True)
     my.gfx_ascii_fg_color_spread_hue(self, 20)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)
@@ -20,6 +19,7 @@ def chasm_init(name, text_long_name, tiles=[]):
     my.is_cursor_path_hazard(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_hazard(self, True)
+    my.is_obs_for_ai(self, True)
     my.text_a_or_an(self, "a")
     my.text_short_description(self, "%%fg=red$A yawning chasm to the unknown below%%fg=reset$ (double click to jump into).")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

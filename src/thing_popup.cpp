@@ -2,7 +2,11 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
+#include "my_level.hpp"
+#include "my_monst.hpp"
+#include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
 void Thing::popup(std::string const &m)
@@ -11,6 +15,10 @@ void Thing::popup(std::string const &m)
   float           dy;
   float           dx;
   static uint32_t last_tick;
+
+  if (! is_visible_to_player) {
+    return;
+  }
 
   dbg("Popup: %s", m.c_str());
 

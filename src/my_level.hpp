@@ -625,7 +625,7 @@ public:
   if (t->is_hidden) {                                                                                                \
     continue;                                                                                                        \
   }                                                                                                                  \
-  if (t->is_interesting() || t->is_attackable_by_monst() || t->is_attackable_by_player() || t->ai_obstacle()) {      \
+  if (t->is_interesting() || t->is_attackable_by_monst() || t->is_attackable_by_player() || t->is_obs_for_ai()) {    \
   } else {                                                                                                           \
     continue;                                                                                                        \
   }

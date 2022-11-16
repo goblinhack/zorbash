@@ -75,7 +75,6 @@ def tp_init(name, text_long_name):
     my.is_biome_dungeon(self, True)
     my.is_biome_swamp(self, True)
     my.is_described_when_hovering_over(self, True)
-    my.is_fire(self, True)
     my.is_floating(self, True)
     my.is_hittable(self, True)
     my.is_immune_to_acid(self, True)

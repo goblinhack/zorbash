@@ -89,7 +89,7 @@ do
     for arg in \
       aggression_pct \
       ai_detect_secret_doors \
-      ai_obstacle \
+      is_obs_for_ai \
       ai_resent_count \
       ai_wanderer \
       appearing_chance_d1000 \

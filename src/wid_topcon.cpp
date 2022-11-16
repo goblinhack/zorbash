@@ -600,6 +600,145 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     wid_thing_info_fini("escape key");
   }
 
+  if (key->scancode == SDL_SCANCODE_KP_1) {
+    // 7 8 9
+    // 4   6
+    // 1 2 3
+    if (! game->request_player_move) {
+      game->request_player_move = time_ms();
+    }
+    game->request_player_move_left = true;
+    game->request_player_move_down = true;
+    return false; // To avoid click noise
+  }
+  if (key->scancode == SDL_SCANCODE_KP_2) {
+    // 7 8 9
+    // 4   6
+    // 1 2 3
+    if (! game->request_player_move) {
+      game->request_player_move = time_ms();
+    }
+    game->request_player_move_down = true;
+    return false; // To avoid click noise
+  }
+  if (key->scancode == SDL_SCANCODE_KP_3) {
+    // 7 8 9
+    // 4   6
+    // 1 2 3
+    if (! game->request_player_move) {
+      game->request_player_move = time_ms();
+    }
+    game->request_player_move_right = true;
+    game->request_player_move_down  = true;
+    return false; // To avoid click noise
+  }
+  if (key->scancode == SDL_SCANCODE_KP_4) {
+    // 7 8 9
+    // 4   6
+    // 1 2 3
+    if (! game->request_player_move) {
+      game->request_player_move = time_ms();
+    }
+    game->request_player_move_left = true;
+    return false; // To avoid click noise
+  }
+  if (key->scancode == SDL_SCANCODE_KP_6) {
+    // 7 8 9
+    // 4   6
+    // 1 2 3
+    if (! game->request_player_move) {
+      game->request_player_move = time_ms();
+    }
+    game->request_player_move_right = true;
+    return false; // To avoid click noise
+  }
+  if (key->scancode == SDL_SCANCODE_KP_7) {
+    // 7 8 9
+    // 4   6
+    // 1 2 3
+    if (! game->request_player_move) {
+      game->request_player_move = time_ms();
+    }
+    game->request_player_move_left = true;
+    game->request_player_move_up   = true;
+    return false; // To avoid click noise
+  }
+  if (key->scancode == SDL_SCANCODE_KP_8) {
+    // 7 8 9
+    // 4   6
+    // 1 2 3
+    if (! game->request_player_move) {
+      game->request_player_move = time_ms();
+    }
+    game->request_player_move_up = true;
+    return false; // To avoid click noise
+  }
+  if (key->scancode == SDL_SCANCODE_KP_9) {
+    // 7 8 9
+    // 4   6
+    // 1 2 3
+    if (! game->request_player_move) {
+      game->request_player_move = time_ms();
+    }
+    game->request_player_move_right = true;
+    game->request_player_move_up    = true;
+    return false; // To avoid click noise
+  }
+
+  //
+  // Allow diagonal movements by checking for multiple presses
+  //
+  if ((key->scancode == SDL_SCANCODE_KP_PERIOD) || (sdlk_eq(*key, game->config.key_wait_or_collect))) {
+    //
+    // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
+    //
+    if (! game->request_player_move) {
+      game->request_player_move = time_ms();
+    }
+    game->request_player_to_wait_or_collect = true;
+    return false; // To avoid click noise
+  }
+  if (sdlk_eq(*key, game->config.key_move_left)) {
+    //
+    // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
+    //
+    if (! game->request_player_move) {
+      game->request_player_move = time_ms();
+    }
+    game->request_player_move_left = true;
+    return false; // To avoid click noise
+  }
+  if (sdlk_eq(*key, game->config.key_move_right)) {
+    //
+    // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
+    //
+    if (! game->request_player_move) {
+      game->request_player_move = time_ms();
+    }
+    game->request_player_move_right = true;
+    return false; // To avoid click noise
+  }
+  if (sdlk_eq(*key, game->config.key_move_up)) {
+    //
+    // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
+    //
+    if (! game->request_player_move) {
+      game->request_player_move = time_ms();
+    }
+    game->request_player_move_up = true;
+    return false; // To avoid click noise
+  }
+  if (sdlk_eq(*key, game->config.key_move_down)) {
+    //
+    // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
+    //
+    if (! game->request_player_move) {
+      game->request_player_move = time_ms();
+    }
+    game->request_player_move_down = true;
+    return false; // To avoid click noise
+  }
+
   return false;
 }
 

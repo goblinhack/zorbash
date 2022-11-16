@@ -5,7 +5,6 @@ import tp
 def acid_init(name, text_long_name, text_short_name, tiles=[], left_tiles=[]):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.ai_obstacle(self, True)
     my.damage_acid_chance_d1000(self, 0, 1000)
     my.damage_acid_dice(self, "1d3+1")
     my.damage_nat_att_type(self, "burn")
@@ -19,6 +18,7 @@ def acid_init(name, text_long_name, text_short_name, tiles=[], left_tiles=[]):
     my.is_hazard(self, True)
     my.is_interesting(self, True)
     my.is_loggable(self, True)
+    my.is_obs_for_ai(self, True)
     my.is_removeable_if_out_of_slots(self, True)
     my.is_tickable(self, True)  # for lifespan
     my.lifespan_dice(self, "1d20+20")

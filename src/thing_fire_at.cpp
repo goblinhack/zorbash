@@ -27,6 +27,13 @@ int Thing::is_able_to_fire_at(void)
     return false;
   }
 
+  //
+  // If trapped in ice, cannot fire.
+  //
+  if (level->is_block_of_ice(curr_at)) {
+    return false;
+  }
+
   TRACE_NO_INDENT();
   return (tp()->is_able_to_fire_at());
 }

@@ -5,7 +5,6 @@ import tp
 def tp_init(name, text_long_name, tiles=[]):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
-    my.ai_obstacle(self, True)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)
@@ -21,6 +20,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_described_when_hovering_over(self, True)
     my.is_floor_deco(self, True)
     my.is_interesting(self, True)
+    my.is_obs_for_ai(self, True)
     my.is_obs_for_jump_landing(self, True)
     my.is_obs_for_shoving(self, True)
     my.is_obs_in_the_way_for_firing(self, True)

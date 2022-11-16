@@ -170,6 +170,11 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
 {
   TRACE_NO_INDENT();
 
+  if (damage < 0) {
+    err("Negative damage: %d", damage);
+    return false;
+  }
+
   if (! hitter) {
     err("No hitter");
     return false;
@@ -1335,7 +1340,9 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
     //
     // Something else hitting something else
     //
-    real_hitter->msg("%s killed %s.", real_hitter->text_The().c_str(), text_the().c_str());
+    if (real_hitter != this) {
+      real_hitter->msg("%s hits %s.", real_hitter->text_The().c_str(), text_the().c_str());
+    }
   }
 
   //
@@ -1393,6 +1400,15 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         popup(string_sprintf("%%fg=red$You CRIT -%d", damage));
       } else {
         popup(string_sprintf("%%fg=orange$You hit -%d", damage));
+      }
+    } else {
+      //
+      // Monster hitting monst, or self attack damage like cold or fire
+      //
+      if (attack_options->crit) {
+        popup(string_sprintf("%%fg=red$-%d", damage));
+      } else {
+        popup(string_sprintf("%%fg=orange$-%d", damage));
       }
     }
   }

@@ -321,12 +321,17 @@ void Thing::killed(Thingp defeater, const char *reason)
       TRACE_NO_INDENT();
       dbg("%s is killed, %s", The_no_dying.c_str(), reason);
       if (defeater && (defeater != this)) {
+        //
+        // Killed by something other than itself.
+        //
         TRACE_NO_INDENT();
+
         if (defeater->is_player()) {
-          TRACE_NO_INDENT();
           //
           // Killed by the player
           //
+          TRACE_NO_INDENT();
+
           if (is_monst()) {
             if (is_msg_allowed_is_dead()) {
               if (is_limb() || is_tentacle()) {
@@ -354,10 +359,11 @@ void Thing::killed(Thingp defeater, const char *reason)
           defeater->score_add(this);
         } else if (defeater->is_monst() && player->level &&
                    get(player->level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
-          TRACE_NO_INDENT();
           //
           // Killed by a monster
           //
+          TRACE_NO_INDENT();
+
           if (is_monst()) {
             if (is_undead()) {
               msg("%%fg=white$%s is vanquished %s.%%fg=reset$", The_no_dying.c_str(), reason);
@@ -373,8 +379,26 @@ void Thing::killed(Thingp defeater, const char *reason)
           } else {
             msg("%s is destroyed %s.", The_no_dying.c_str(), reason);
           }
-        } else if (is_monst() && (distance_to_player() >= DMAP_IS_PASSABLE)) {
+        } else if (is_monst() && player->level &&
+                   get(player->level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+          //
+          // Killed by something else, like a block of ice; and we can see it.
+          //
           TRACE_NO_INDENT();
+
+          if (is_undead()) {
+            msg("%%fg=white$%s is vanquished %s.%%fg=reset$", The_no_dying.c_str(), reason);
+          } else if (is_jelly()) {
+            msg("%%fg=white$%s is splattered %s.%%fg=reset$", The_no_dying.c_str(), reason);
+          } else {
+            msg("%%fg=white$%s is dead, killed %s.%%fg=reset$", The_no_dying.c_str(), reason);
+          }
+        } else if (is_monst() && (distance_to_player() >= DMAP_IS_PASSABLE)) {
+          //
+          // Killed out of sight
+          //
+          TRACE_NO_INDENT();
+
           if (is_undead()) {
             msg("You hear the distant cry of the undead...");
           } else if (is_jelly()) {
@@ -386,19 +410,19 @@ void Thing::killed(Thingp defeater, const char *reason)
           } else {
             msg("You hear a distant shriek...");
           }
-        } else if (player->level && get(player->level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
-          TRACE_NO_INDENT();
-          //
-          // Killed by something else, like an block_of_ice.
-          //
-          if (is_monst()) {
-            if (is_undead()) {
-              msg("%%fg=white$%s is vanquished %s.%%fg=reset$", The_no_dying.c_str(), reason);
-            } else if (is_jelly()) {
-              msg("%%fg=white$%s is splattered %s.%%fg=reset$", The_no_dying.c_str(), reason);
-            } else {
-              msg("%%fg=white$%s is dead, killed %s.%%fg=reset$", The_no_dying.c_str(), reason);
-            }
+        }
+      } else {
+        //
+        // Killed by a self-attack, like being on fire or frozen.
+        //
+        TRACE_NO_INDENT();
+        if (is_monst()) {
+          if (is_undead()) {
+            msg("%%fg=white$%s is vanquished %s.%%fg=reset$", The_no_dying.c_str(), reason);
+          } else if (is_jelly()) {
+            msg("%%fg=white$%s is splattered %s.%%fg=reset$", The_no_dying.c_str(), reason);
+          } else {
+            msg("%%fg=white$%s is dead, killed %s.%%fg=reset$", The_no_dying.c_str(), reason);
           }
         }
       }

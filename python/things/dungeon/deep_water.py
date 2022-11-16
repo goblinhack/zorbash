@@ -5,7 +5,6 @@ import tp
 def tp_init(name, text_long_name, tiles=[]):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
-    my.ai_obstacle(self, True)
     my.damage_water_chance_d1000(self, 0, 1000)
     my.damage_water_dice(self, "1d6+1")
     my.environ_avoids_fire(self, 1)
@@ -30,6 +29,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_described_when_hovering_over(self, True)
     my.is_hazard(self, True)
     my.is_interesting(self, True)
+    my.is_obs_for_ai(self, True)
     my.text_a_or_an(self, "the")
     my.text_short_description(self, "A pool of deep dank water, with things in it.")
     my.z_depth(self, my.MAP_DEPTH_LIQUID)

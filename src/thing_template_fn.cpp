@@ -177,7 +177,6 @@ const std::string &Tp::text_unused(void) const { return _text_unused; }
 // begin sort marker2 {
 int Tp::aggression_pct(void) const { return _aggression_pct; }
 int Tp::ai_detect_secret_doors(void) const { return _ai_detect_secret_doors; }
-int Tp::ai_obstacle(void) const { return _ai_obstacle; }
 int Tp::ai_resent_count(void) const { return _ai_resent_count; }
 int Tp::ai_wanderer(void) const { return _ai_wanderer; }
 int Tp::appearing_chance_d1000(void) const { return _appearing_chance_d1000; }
@@ -522,6 +521,7 @@ int Tp::is_msg(void) const { return _is_msg; }
 int Tp::is_necrotic_danger_level(void) const { return _is_necrotic_danger_level; }
 int Tp::is_no_tile(void) const { return _is_no_tile; }
 int Tp::is_obs_destructable(void) const { return _is_obs_destructable; }
+int Tp::is_obs_for_ai(void) const { return _is_obs_for_ai; }
 int Tp::is_obs_for_jump_landing(void) const { return _is_obs_for_jump_landing; }
 int Tp::is_obs_for_shoving(void) const { return _is_obs_for_shoving; }
 int Tp::is_obs_in_the_way_for_firing(void) const { return _is_obs_in_the_way_for_firing; }
@@ -714,7 +714,6 @@ int Tp::weapon_damage(void) const { return _weapon_damage; }
 // begin sort marker3 {
 void Tp::aggression_pct_set(int v) { _aggression_pct = v; }
 void Tp::ai_detect_secret_doors_set(int v) { _ai_detect_secret_doors = v; }
-void Tp::ai_obstacle_set(int v) { _ai_obstacle = v; }
 void Tp::ai_resent_count_set(int v) { _ai_resent_count = v; }
 void Tp::ai_wanderer_set(int v) { _ai_wanderer = v; }
 void Tp::appearing_chance_d1000_set(int v) { _appearing_chance_d1000 = v; }
@@ -1064,6 +1063,7 @@ void Tp::is_msg_set(int v) { _is_msg = v; }
 void Tp::is_necrotic_danger_level_set(int v) { _is_necrotic_danger_level = v; }
 void Tp::is_no_tile_set(int v) { _is_no_tile = v; }
 void Tp::is_obs_destructable_set(int v) { _is_obs_destructable = v; }
+void Tp::is_obs_for_ai_set(int v) { _is_obs_for_ai = v; }
 void Tp::is_obs_for_jump_landing_set(int v) { _is_obs_for_jump_landing = v; }
 void Tp::is_obs_for_shoving_set(int v) { _is_obs_for_shoving = v; }
 void Tp::is_obs_in_the_way_for_firing_set(int v) { _is_obs_in_the_way_for_firing = v; }
