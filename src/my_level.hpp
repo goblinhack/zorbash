@@ -940,7 +940,7 @@ public:
   void cursor_path_draw(Thingp);
   void cursor_path_draw(Thingp, const std::vector< point > &move_path);
   void cursor_path_draw(Thingp, point start, point end);
-  void cursor_recreate(void);
+  void cursor_recreate(point curr_at = point(-1, -1));
   void cursor_warp_check(void);
   void debug_path_clear(void);
   void debug_path_create(const std::vector< point > &move_path);

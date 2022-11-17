@@ -34,7 +34,7 @@ void sdl_loop(void)
   // 4 - seems ok
   // 10 - too much lag now due to cursor redraws
   //
-  SDL_Event events[ 4 ];
+  SDL_Event events[ 6 ];
   int       found;
   int       i;
   int       frames = 0;
@@ -109,18 +109,6 @@ void sdl_loop(void)
     }
     old_g_errored = g_errored;
 
-    {
-      gl_leave_2d_mode();
-      gl_enter_2d_mode(game->config.game_pix_width, game->config.game_pix_height);
-
-      glcolor(WHITE);
-      game->display();
-      blit_fbo_unbind();
-
-      gl_leave_2d_mode();
-      gl_enter_2d_mode(game->config.window_pix_width, game->config.window_pix_height);
-    }
-
     //
     // Various event frequencies
     //
@@ -164,12 +152,6 @@ void sdl_loop(void)
           game->start();
         }
       }
-
-      //
-      // Update FPS counter. Used for damping AI even if not shown.
-      //
-      game->fps_value = (1000 / UI_EVENT_LOOP_FREQ_SLOW_MS) * frames;
-      frames          = 0;
     }
 
     //
@@ -261,6 +243,16 @@ void sdl_loop(void)
       }
     }
 
+    gl_leave_2d_mode();
+    gl_enter_2d_mode(game->config.game_pix_width, game->config.game_pix_height);
+
+    glcolor(WHITE);
+    game->display();
+    blit_fbo_unbind();
+
+    gl_leave_2d_mode();
+    gl_enter_2d_mode(game->config.window_pix_width, game->config.window_pix_height);
+
     sdl_display();
 
     //
@@ -268,6 +260,25 @@ void sdl_loop(void)
     //
     if (unlikely(g_need_restart)) {
       break;
+    }
+
+    //
+    // Update FPS counter. Used for damping AI even if not shown.
+    //
+    if (unlikely(game->config.fps_counter)) {
+      static uint32_t ts_begin;
+      static uint32_t ts_now;
+
+      if (unlikely(! ts_begin)) {
+        ts_begin = time_ms();
+      }
+
+      if (unlikely(frames >= 100)) {
+        ts_now          = time_ms();
+        game->fps_value = (int) ((float) (frames * ONESEC) / (float) (ts_now - ts_begin));
+        ts_begin        = ts_now;
+        frames          = 0;
+      }
     }
 
 #if 0

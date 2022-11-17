@@ -316,7 +316,7 @@ static uint8_t game_mouse_motion_(int x, int y, int relx, int rely, int wheelx, 
     }
   }
 
-  level->cursor_path_create(player);
+  game->request_recreate_cursor_path = true;
 
   return true;
 }

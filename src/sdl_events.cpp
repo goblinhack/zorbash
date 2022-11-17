@@ -140,7 +140,6 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
     case SDL_TEXTINPUT:
       {
         sdl.event_count++;
-        sdl.event_count++;
         DBG2("SDL: Keyboard: Text input \"%s\" in window %d", event->text.text, event->text.windowID);
         break;
       }
@@ -201,15 +200,30 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
       {
         sdl.event_count++;
         sdl.mouse_down = sdl_get_mouse();
+        int        mx;
+        int        my;
+        static int last_mx;
+        static int last_my;
 
-        DBG2("SDL: Mouse: Moved to %d,%d (%d,%d) state %d", event->motion.x, event->motion.y, event->motion.xrel,
-             event->motion.yrel, sdl.mouse_down);
+        //
+        // Catch up with the latest mouse position; and dampen identical events.
+        //
+        SDL_GetMouseState(&mx, &my);
+        if ((mx == last_mx) && (my == last_my)) {
+          break;
+        }
+
+        last_mx = mx;
+        last_my = my;
+
+        DBG2("SDL: Mouse: Moved to %d,%d (rel %d,%d) state %d (actually at %d,%d)", event->motion.x, event->motion.y,
+             event->motion.xrel, event->motion.yrel, sdl.mouse_down, mx, my);
 
         wid_mouse_visible = 1;
         sdl.mouse_tick++;
         if (! processed_mouse_motion_event) {
           pcg_random_allowed++;
-          wid_mouse_motion(sdl.mouse_x, sdl.mouse_y, event->motion.xrel, event->motion.yrel, 0, 0);
+          wid_mouse_motion(mx, my, event->motion.xrel, event->motion.yrel, 0, 0);
           pcg_random_allowed--;
           processed_mouse_motion_event = true;
         }

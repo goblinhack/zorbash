@@ -567,13 +567,13 @@ uint8_t config_fps_counter_set(class Tokens *tokens, void *context)
 
   if (! s || (*s == '\0')) {
     game->config.fps_counter = true;
-    TOPCON("FPS counter enabled (default)");
+    TOPCON("FPS counter enabled (default).");
   } else {
     game->config.fps_counter = strtol(s, nullptr, 10) ? 1 : 0;
     if (game->config.fps_counter) {
-      TOPCON("FPS counter enabled");
+      TOPCON("FPS counter enabled.");
     } else {
-      TOPCON("FPS counter disabled");
+      TOPCON("FPS counter disabled.");
     }
   }
 
@@ -604,9 +604,9 @@ uint8_t config_debug_set(class Tokens *tokens, void *context)
   }
 
   if (g_opt_debug1) {
-    TOPCON("Debug: on");
+    TOPCON("Debug: on.");
   } else {
-    TOPCON("Debug: off");
+    TOPCON("Debug: off.");
   }
 
   return true;
@@ -621,10 +621,10 @@ void config_gfx_inverted_toggle(void)
 
   if (! game->config.gfx_inverted) {
     game->config.gfx_inverted = true;
-    TOPCON("GFX inverted enabled");
+    TOPCON("GFX inverted enabled.");
   } else {
     game->config.gfx_inverted = false;
-    TOPCON("GFX inverted disabled");
+    TOPCON("GFX inverted disabled.");
   }
 }
 
@@ -639,14 +639,14 @@ uint8_t config_gfx_inverted_set(class Tokens *tokens, void *context)
 
   if (! s || (*s == '\0')) {
     game->config.gfx_inverted = true;
-    TOPCON("GFX inverted enabled (default)");
+    TOPCON("GFX inverted enabled (default).");
   } else {
     int val                   = strtol(s, nullptr, 10) ? 1 : 0;
     game->config.gfx_inverted = val;
     if (game->config.gfx_inverted) {
-      TOPCON("GFX inverted enabled");
+      TOPCON("GFX inverted enabled.");
     } else {
-      TOPCON("GFX inverted disabled");
+      TOPCON("GFX inverted disabled.");
     }
   }
 
@@ -689,7 +689,7 @@ uint8_t config_game_pix_zoom_set(class Tokens *tokens, void *context)
 
   if (! s || (*s == '\0')) {
     game->config.game_pix_zoom = GAME_DEFAULT_PIX_ZOOM;
-    TOPCON("GFX: gfx zoom enabled (default)");
+    TOPCON("GFX: gfx zoom enabled (default).");
   } else {
     int val                    = strtol(s, nullptr, 10);
     game->config.game_pix_zoom = val;
@@ -722,10 +722,10 @@ uint8_t config_gfx_vsync_enable(class Tokens *tokens, void *context)
   }
 
   if (game->config.gfx_vsync_enable) {
-    TOPCON("SDL: Vsync enabled");
+    TOPCON("SDL: Vsync enabled.");
     SDL_GL_SetSwapInterval(1);
   } else {
-    TOPCON("SDL: Vsync disabled");
+    TOPCON("SDL: Vsync disabled.");
     SDL_GL_SetSwapInterval(0);
   }
   GL_ERROR_CHECK();
@@ -755,7 +755,7 @@ uint8_t config_errored(class Tokens *tokens, void *context)
 {
   TRACE_NO_INDENT();
   g_errored = false;
-  TOPCON("SDL: Errored mode cleared");
+  TOPCON("SDL: Errored mode cleared.");
   wid_hide(wid_console_window);
   return true;
 }

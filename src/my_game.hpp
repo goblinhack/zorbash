@@ -380,6 +380,7 @@ public:
   bool request_player_to_ascend_level {};
   bool request_player_to_descend_level {};
   bool request_player_to_wait_or_collect {};
+  bool request_recreate_cursor_path {};
   bool request_reset_state_change {};
   bool request_to_remake_actionbar {};
   bool request_to_remake_buffbox {};

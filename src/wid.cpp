@@ -6661,6 +6661,13 @@ static void wid_handle_requests(void)
         }
       }
 
+      if (game->request_recreate_cursor_path) {
+        game->request_recreate_cursor_path = false;
+        if (game->level && game->level->player) {
+          game->level->cursor_path_create(game->level->player);
+        }
+      }
+
       //
       // Drive closure of the inventory if we're waiting on it.
       //

@@ -138,7 +138,7 @@ void Level::cursor_move(void)
   }
 }
 
-void Level::cursor_recreate(void)
+void Level::cursor_recreate(point curr_at)
 {
   dbg("Recreate cursor");
   TRACE_AND_INDENT();
@@ -161,9 +161,10 @@ void Level::cursor_recreate(void)
     what = game->request_to_use_item;
   }
 
-  point curr_at;
   if (cursor) {
-    curr_at = cursor->curr_at;
+    if (curr_at == point(-1, -1)) {
+      curr_at = cursor->curr_at;
+    }
     cursor->dead("update");
   } else {
     curr_at = player->curr_at;

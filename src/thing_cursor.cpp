@@ -42,6 +42,7 @@ void Thing::cursor_hover_over_check(void)
     if (level->cursor_at != curr_at) {
       level->cursor_at = curr_at;
 
+      level->cursor_recreate(curr_at);
       level->cursor_describe();
     }
     level->is_cursor_found = true;
