@@ -72,7 +72,6 @@ unsigned char *file_load(const char *filename, int *outlen)
       if (file_exists_and_is_newer_than(alt_filename, EXEC_FULL_PATH_AND_NAME)) {
         out = file_io_read_if_exists(alt_filename, outlen);
         if (out) {
-          FILE_LOG("Read file %s", filename);
           myfree(alt_filename);
           alt_filename = nullptr;
 
@@ -83,7 +82,6 @@ unsigned char *file_load(const char *filename, int *outlen)
       if (file_exists_and_is_newer_than(alt_filename, ".build/file.o")) {
         out = file_io_read_if_exists(alt_filename, outlen);
         if (out) {
-          FILE_LOG("Read file %s", filename);
           myfree(alt_filename);
           alt_filename = nullptr;
 
@@ -94,7 +92,6 @@ unsigned char *file_load(const char *filename, int *outlen)
       if (file_exists_and_is_newer_than(alt_filename, "src/.build/file.o")) {
         out = file_io_read_if_exists(alt_filename, outlen);
         if (out) {
-          FILE_LOG("Read file %s", filename);
           myfree(alt_filename);
           alt_filename = nullptr;
 
@@ -121,8 +118,6 @@ unsigned char *file_load(const char *filename, int *outlen)
    */
   out = file_io_read_if_exists(filename, outlen);
   if (out) {
-    FILE_LOG("Read file %s", filename);
-
     if (alt_filename) {
       myfree(alt_filename);
       alt_filename = nullptr;
@@ -133,8 +128,6 @@ unsigned char *file_load(const char *filename, int *outlen)
 
   out = file_io_read_if_exists(alt_filename, outlen);
   if (out) {
-    FILE_LOG("Read file %s", filename);
-
     if (alt_filename) {
       myfree(alt_filename);
       alt_filename = nullptr;
@@ -153,8 +146,6 @@ unsigned char *file_load(const char *filename, int *outlen)
 
     out = file_io_read_if_exists(alt_filename.c_str(), outlen);
     if (out) {
-      FILE_LOG("Read file %s", alt_filename.c_str());
-
       return out;
     }
   }

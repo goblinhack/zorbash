@@ -754,7 +754,6 @@ int main(int argc, char *argv[])
   signal(SIGPIPE, ctrlc_handler);
 #endif
 
-  LOG("INI: Create color names map");
   color_init();
 
 #if 0
