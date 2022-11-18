@@ -89,7 +89,7 @@ bool Thing::ascend_sewer(void)
     l->scroll_map_to_player();
     l->update_new_level();
     //
-    // Make sure all monsts on the new level are at the
+    // Make sure all monsters on the new level are at the
     // same tick or they will get lots of free attacks
     //
     l->update_all_ticks();

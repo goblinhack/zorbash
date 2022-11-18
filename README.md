@@ -224,33 +224,36 @@ Zorbash
 -------
 
 Welcome to the lair of the dread tentacleye, Zorbash. Collect the crystals of Zorb and confront Zorbash to win.
+This is work in progress.
 
-This is work in progress. Current status:
-- no bosses yet or end game
+Current status:
+- no bosses or end game so far
 - crystal collection does nothing so far
+
+Content:
 <!-- begin type marker -->
-- 55 monsts types
-- 52 food types
-- 26 weapons types
-- 19 treasure types
-- 12 boots types
-- 8 items types
-- 8 gauntlets types
-- 8 armor types
-- 7 buffs types
-- 6 staffs types
-- 6 cloaks types
-- 6 amulets types
-- 5 keys types
-- 4 wands types
-- 4 shield types
-- 4 rings types
-- 4 debuffs types
-- 3 mobs types
-- 3 doors types
-- 2 skills types
-- 2 potions types
-- 1 player types
+- 55 monsters
+- 52 food
+- 26 weapons
+- 19 treasure
+- 12 boots
+- 8 items
+- 8 gauntlets
+- 8 armor
+- 7 buffs
+- 6 staffs
+- 6 cloaks
+- 6 amulets
+- 5 keys
+- 4 wands
+- 4 shield
+- 4 rings
+- 4 debuffs
+- 3 mobs
+- 3 doors
+- 2 skills
+- 2 potions
+- 1 player
 <!-- end type marker -->
 
 Comments and suggestions welcome.

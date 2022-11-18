@@ -1065,7 +1065,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         auto health_diff  = my_health - it_health;
 
         //
-        // Don't allow of attacking monsts from memory if the player or robot
+        // Don't allow of attacking monsters from memory if the player or robot
         //
         auto lit_recently = get(ai->can_see_currently.can_see, it->curr_at.x, it->curr_at.y);
 
@@ -1120,7 +1120,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         }
 
         //
-        // Need more work before monsts can collect keys as they will be auto collected.
+        // Need more work before monsters can collect keys as they will be auto collected.
         //
         if (it->is_key()) {
           if (is_able_to_collect_keys()) {

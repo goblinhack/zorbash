@@ -120,7 +120,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
   if (game->state == Game::STATE_NORMAL) {
     //
     // Have we moved close enough to attack? Do this prior to checking for
-    // double click so we can attack monsts sitting in lava
+    // double click so we can attack monsters sitting in lava
     //
     if (level->cursor) {
       if ((std::abs(player->curr_at.x - level->cursor->curr_at.x) <= 1) &&

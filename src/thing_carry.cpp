@@ -34,7 +34,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   }
 
   //
-  // Only player/monsts or bags can carry items
+  // Only player/monsters or bags can carry items
   //
   if (! maybe_itemsp() && ! is_bag()) {
     dbg("Cannot carry; not a monst or bag");

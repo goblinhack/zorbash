@@ -29,7 +29,7 @@ for i in \
   keys \
   lasers \
   mobs \
-  monsts \
+  monsters \
   player \
   potions \
   projectiles \
@@ -63,7 +63,7 @@ for IN in \
   keys/*py \
   lasers/*py \
   mobs/*py \
-  monsts/*py \
+  monsters/*py \
   player/*py \
   potions/*py \
   projectiles/*py \

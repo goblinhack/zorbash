@@ -189,7 +189,7 @@ bool Thing::collision_obstacle(Thingp it)
     if (level->is_corpse(p)) {
       if (monst_count > 2) {
         //
-        // Too many monsts (including one corpse)
+        // Too many monsters (including one corpse)
         //
         IF_DEBUG3 { dbg("Collision obstacle (too many monst + corpse): %s", it->to_short_string().c_str()); }
         return true;
@@ -209,7 +209,7 @@ bool Thing::collision_obstacle(Thingp it)
     } else {
       if (monst_count > 1) {
         //
-        // Too many monsts (including one corpse)
+        // Too many monsters (including one corpse)
         //
         IF_DEBUG3 { dbg("Collision obstacle (too many monst): %s", it->to_short_string().c_str()); }
         return true;
@@ -478,7 +478,7 @@ bool Thing::is_obs_for_ai(Thingp it)
     }
 
     //
-    // Do not include this check. It stops monsts seeing down a corridor
+    // Do not include this check. It stops monsters seeing down a corridor
     // with a monst already in it
     //
     // if (it->is_alive_monst()) {

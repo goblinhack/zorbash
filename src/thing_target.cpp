@@ -73,7 +73,7 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
         prio += danger_current_level(t);
 
         //
-        // Make sure we prefer monsts over things like doors if there is a choice.
+        // Make sure we prefer monsters over things like doors if there is a choice.
         //
         prio += 100;
         dbg2("Target-attack-best: %s monst prio %d", t->to_short_string().c_str(), prio);
@@ -310,7 +310,7 @@ bool Thing::victim_attack_swing(int equip, Thingp best, point best_hit_at, Attac
           attack_options->prefer_nat_att = true;
         }
       } else {
-        dbg2("Target-attack-best: No monsts at target location, prefer nat attack");
+        dbg2("Target-attack-best: No monsters at target location, prefer nat attack");
         attack_options->used_as        = gfx_anim_use();
         attack_options->prefer_nat_att = true;
       }

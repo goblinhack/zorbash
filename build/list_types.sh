@@ -7,10 +7,10 @@ OUT=$(mktemp) || exit 1
 TMP=$(mktemp) || exit 1
 IN=README.md
 
-for i in amulets armor boots buffs cloaks debuffs doors food gauntlets items keys mobs monsts player potions rings shield skills staffs treasure wands weapons
+for i in amulets armor boots buffs cloaks debuffs doors food gauntlets items keys mobs monsters player potions rings shield skills staffs treasure wands weapons
 do
   types=$(ls python/things/$i/*.py | grep -v carrying | grep -v swing | wc -l)
-  echo "- $types $i types" >> $PAYLOAD
+  echo "- $types $i" >> $PAYLOAD
 done
 
 sort -r -n +1 $PAYLOAD > $TMP

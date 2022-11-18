@@ -121,7 +121,7 @@ bool Thing::ascend_dungeon(bool force, point3d next_level)
           l->scroll_map_to_player();
           l->update_new_level();
           //
-          // Make sure all monsts on the new level are at the
+          // Make sure all monsters on the new level are at the
           // same tick or they will get lots of free attacks
           //
           l->update_all_ticks();

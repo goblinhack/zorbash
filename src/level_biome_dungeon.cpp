@@ -491,7 +491,7 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
     }
 
     //
-    // Update the heatmap to avoid placing monsts next to lava
+    // Update the heatmap to avoid placing monsters next to lava
     //
     {
       uint32_t start = time_ms();
@@ -725,7 +725,7 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
     {
       uint32_t start = time_ms();
       con("INF: Place swimming monsters");
-      place_swimming_monsts();
+      place_swimming_monsters();
       if (g_errored) {
         return false;
       }

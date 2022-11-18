@@ -50,7 +50,7 @@ bool Thing::descend_sewer_tick(void)
     }
   } else {
     //
-    // Not sure if monsts should do this as they crawl out of sewers
+    // Not sure if monsters should do this as they crawl out of sewers
     //
     dbg("ThingInfo cannot descend sewer");
     return false;
@@ -139,7 +139,7 @@ bool Thing::descend_sewer(void)
     l->scroll_map_to_player();
     l->update_new_level();
     //
-    // Make sure all monsts on the new level are at the
+    // Make sure all monsters on the new level are at the
     // same tick or they will get lots of free attacks
     //
     l->update_all_ticks();

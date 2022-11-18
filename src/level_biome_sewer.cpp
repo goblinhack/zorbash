@@ -88,12 +88,12 @@ bool Level::create_biome_sewer(point3d at, uint32_t seed)
 
   create_biome_sewer_place_remaining_walls("sewer_wall");
 
-  place_swimming_monsts();
+  place_swimming_monsters();
 
   return ! g_errored;
 }
 
-void Level::place_swimming_monsts(void)
+void Level::place_swimming_monsters(void)
 {
   TRACE_AND_INDENT();
 

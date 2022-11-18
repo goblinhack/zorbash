@@ -418,7 +418,7 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
   }
 
   //
-  // Need this else monsts will keep on trying to continue along a long path
+  // Need this else monsters will keep on trying to continue along a long path
   // and end up lunging crazy distances.
   //
   clear_move_path("Could not move");

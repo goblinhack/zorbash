@@ -444,7 +444,7 @@ void Level::display_pixelart_map_all(void)
     display_projectiles(tl, br);
 
     //
-    // So we can see monsts jump over walls
+    // So we can see monsters jump over walls
     //
     display_pixelart_internal_particles();
 

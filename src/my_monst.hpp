@@ -83,7 +83,7 @@ enum {
 #define FOR_ALL_CARRIED_BY(_t_, _id_) for (auto _id_ : (_t_)->itemsp()->carrying)
 
 //
-// Extra thing info. Needed for monsts and items.
+// Extra thing info. Needed for monsters and items.
 //
 typedef struct ThingInfo_ {
 public:

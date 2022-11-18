@@ -599,7 +599,7 @@ void Thing::update_interpolated_position(void)
       //
     } else {
       //
-      // Stops monsts falling over the floor tiles
+      // Stops monsters falling over the floor tiles
       //
       z_depth = MAP_DEPTH_FLOOR;
     }
