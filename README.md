@@ -1,8 +1,8 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - fireskull should die if chilled?                                                                                                           -->
 <!-- - falling in block of ice should fall together                                                                                               -->
 <!-- - using fireball in block of ice                                                                                                             -->
-<!-- - fireskull should die if chilled?                                                                                                           -->
 <!-- - some weapons crit more                                                                                                                     -->
 <!-- - tentacle grapple                                                                                                                           -->
 <!-- - test main body with freezing and wand of descent                                                                                           -->
@@ -225,7 +225,33 @@ Zorbash
 
 Welcome to the lair of the dread tentacleye, Zorbash. Collect the crystals of Zorb and confront Zorbash to win.
 
-This is work in progress.
+This is work in progress. Current status:
+- no bosses yet or end game
+- crystal collection does nothing so far
+<!-- begin type marker -->
+- 55 monsts types
+- 52 food types
+- 26 weapons types
+- 19 treasure types
+- 12 boots types
+- 8 items types
+- 8 gauntlets types
+- 8 armor types
+- 7 buffs types
+- 6 staffs types
+- 6 cloaks types
+- 6 amulets types
+- 5 keys types
+- 4 wands types
+- 4 shield types
+- 4 rings types
+- 4 debuffs types
+- 3 mobs types
+- 3 doors types
+- 2 skills types
+- 2 potions types
+- 1 player types
+<!-- end type marker -->
 
 Comments and suggestions welcome.
 
