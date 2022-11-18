@@ -92,6 +92,7 @@ def tp_init(name, text_long_name):
     my.is_msg_allowed_is_wounded(self, True)
     my.is_shovable(self, True)
     my.is_stone(self, True)
+    my.is_very_hard(self, True)
     my.is_tickable(self, True)
     my.is_tireless(self, True)
     my.move_speed(self, 30)
@@ -115,10 +116,10 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.text_a_or_an(self, "a")
     my.text_hits(self, "claws")
-    my.text_long_description2(self, "Stone golems able to slowly recharge health.")
+    my.text_long_description2(self, "Cement men are able to slowly recharge health.")
     my.text_long_description3(self, "Makes an excellent patio ornament.")
-    my.text_long_description(self, "A hideous mass of animated and moss covered stone. Stone golems are immune to cold, poison, fire and draining attacks.")
-    my.text_short_description(self, "A stone golem.")
+    my.text_long_description(self, "A hideous mass of animated cement. Possibly brought into being by an evil necromancer who was annoyed with constant roadworks. Cement men are immune to cold, poison, fire and draining attacks.")
+    my.text_short_description(self, "A cement man.")
     my.thing_size(self, my.THING_SIZE_LARGE)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -127,36 +128,36 @@ def tp_init(name, text_long_name):
 
     delay = 500
     my.tile(self,
-            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray50",
+            ascii_fg_char="C", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile=name + ".1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray50",
+            ascii_fg_char="C", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile=name + ".2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray50",
+            ascii_fg_char="C", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile=name + ".3", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray50",
+            ascii_fg_char="C", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile=name + ".4", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray50",
+            ascii_fg_char="C", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile=name + ".5", delay_ms=delay)
 
     my.tile(self,
-            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray50",
+            ascii_fg_char="C", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile=name + ".dead.1", is_dead=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray50",
+            ascii_fg_char="C", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile=name + ".dead.2", is_dead=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray50",
+            ascii_fg_char="C", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile=name + ".dead.3", is_dead=True, is_end_of_anim=True)
 
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="stone_golem", text_long_name="stone golem")
+    tp_init(name="cement_man", text_long_name="cement man")
 
 
 init()
