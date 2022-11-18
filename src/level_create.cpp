@@ -179,7 +179,7 @@ int Level::total_loot_level(void)
   int value = 0;
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
-    if (t->is_treasure() || t->is_weapon() || t->is_wand_or_staff()) {
+    if (t->is_treasure() || t->is_weapon() || t->is_staff()) {
       value += t->gold_value();
     }
   }

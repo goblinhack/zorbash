@@ -306,7 +306,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
         wid_set_text(w, "Use (equip)");
       } else if (item_option->is_potion()) {
         wid_set_text(w, "Use (drink)");
-      } else if (item_option->is_wand_or_staff()) {
+      } else if (item_option->is_staff()) {
         wid_set_text(w, "Use (fire it)");
       } else if (item_option->is_ring()) {
         wid_set_text(w, "Use (wear it)");

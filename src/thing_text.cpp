@@ -423,7 +423,7 @@ void Thing::show_botcon_description(void)
         text += " %%fg=green$" + ::to_string(game->config.key_eat) + "%%fg=reset$ to eat.";
       } else if (is_potion()) {
         text += " %%fg=green$" + ::to_string(game->config.key_use) + "%%fg=reset$ to drink.";
-      } else if (is_wand_or_staff()) {
+      } else if (is_staff()) {
         text += " %%fg=green$" + ::to_string(game->config.key_use) + "%%fg=reset$ to use.";
       } else if (is_ring()) {
         text += " %%fg=green$" + ::to_string(game->config.key_use) + "%%fg=reset$ to wear.";

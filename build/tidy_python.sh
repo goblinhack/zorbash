@@ -38,7 +38,6 @@ for i in \
   skills \
   staffs \
   treasure \
-  wands \
   weapons
 do
   cp .flake8 $i/
@@ -72,7 +71,6 @@ for IN in \
   skills/*py \
   staffs/*py \
   treasure/*py \
-  wands/*py \
   weapons/*py
 do
     echo Tidying $IN...
@@ -89,7 +87,6 @@ do
     for arg in \
       aggression_pct \
       ai_detect_secret_doors \
-      is_obs_for_ai \
       ai_resent_count \
       ai_wanderer \
       appearing_chance_d1000 \
@@ -101,7 +98,6 @@ do
       attack_no_msg \
       attacks_per_round \
       attack_undead \
-      consume_per_bite_amount \
       collateral_damage_pct \
       collision_check \
       collision_hit_180 \
@@ -109,6 +105,7 @@ do
       collision_hit_adj \
       collision_hit_priority \
       collision_hit_two_tiles_ahead \
+      consume_per_bite_amount \
       damage_received_doubled_from_acid \
       damage_received_doubled_from_cold \
       damage_received_doubled_from_fire \
@@ -131,6 +128,8 @@ do
       gfx_ascii_bg_color_spread_green \
       gfx_ascii_bg_color_spread_hue \
       gfx_ascii_bg_color_spread_red \
+      gfx_ascii_color_bg_unchanged_by_lights \
+      gfx_ascii_color_fg_unchanged_by_lights \
       gfx_ascii_color_is_animated \
       gfx_ascii_fade_with_dist \
       gfx_ascii_fg_color_is_animated \
@@ -151,12 +150,13 @@ do
       gfx_health_bar_shown \
       gfx_long_shadow_caster \
       gfx_on_fire_anim \
-      gfx_pixelart_oversized_and_on_floor \
       gfx_pixelart_animated \
       gfx_pixelart_animated_can_hflip \
       gfx_pixelart_animated_can_vflip \
       gfx_pixelart_animated_no_dir \
       gfx_pixelart_flickers \
+      gfx_pixelart_oversized_and_centered \
+      gfx_pixelart_oversized_and_on_floor \
       gfx_pixelart_reflection \
       gfx_pixelart_shadow \
       gfx_pixelart_shown_in_bg \
@@ -191,6 +191,7 @@ do
       is_able_to_jump_onto \
       is_able_to_jump_without_tiring \
       is_able_to_learn_skills \
+      is_able_to_live_out_of_water \
       is_able_to_melt \
       is_able_to_move_diagonally \
       is_able_to_open_doors \
@@ -213,7 +214,7 @@ do
       is_able_to_use_helmet \
       is_able_to_use_rings \
       is_able_to_use_shield \
-      is_able_to_use_wands_or_staffs \
+      is_able_to_use_staffs \
       is_able_to_use_weapons \
       is_able_to_walk_through_walls \
       is_acid \
@@ -314,7 +315,7 @@ do
       is_eater_of_shields \
       is_eater_of_staffs \
       is_eater_of_treasure \
-      is_eater_of_wands \
+      is_eater_of_staffs \
       is_eater_of_weapons \
       is_enchantable \
       is_enchantstone \
@@ -365,7 +366,6 @@ do
       is_item_organic \
       is_item_targetted \
       is_jelly \
-      is_obs_in_the_way_for_jumping \
       is_key \
       is_key_special \
       is_laser \
@@ -373,6 +373,7 @@ do
       is_lifeless \
       is_light_blocker \
       is_light_blocker_for_monst \
+      is_limb \
       is_living \
       is_loggable \
       is_magical \
@@ -393,16 +394,23 @@ do
       is_monst_pack \
       is_moveable \
       is_msg \
+      is_msg_allowed_hears_something \
+      is_msg_allowed_is_dead \
       is_msg_allowed_is_seen \
       is_msg_allowed_is_surprised \
       is_msg_allowed_is_wounded \
+      is_msg_allowed_senses_danger \
       is_necrotic_danger_level \
       is_no_tile \
       is_obs_destructable \
+      is_obs_for_ai \
       is_obs_for_jump_landing \
       is_obs_for_shoving \
-      is_obs_when_dead \
+      is_obs_in_the_way_for_firing \
+      is_obs_in_the_way_for_jumping \
+      is_obs_in_the_way_for_throwing \
       is_obs_wall_or_door \
+      is_obs_when_dead \
       is_openable \
       is_organic \
       is_pillar \
@@ -444,12 +452,10 @@ do
       is_sword \
       is_target_radial \
       is_target_select \
-      temperature_sensitive_to_sudden_changes \
-      temperature_sensitive \
+      is_tentacle \
       is_the_grid \
       is_thief \
       is_throwable \
-      is_obs_in_the_way_for_throwing \
       is_tickable \
       is_tireless \
       is_tmp_thing \
@@ -468,7 +474,6 @@ do
       is_very_heavy \
       is_wall \
       is_wall_dungeon \
-      is_wand \
       is_weapon \
       is_wooden \
       move_speed \
@@ -502,6 +507,10 @@ do
       stat_def_penalty_when_stuck_max \
       teleport_distance \
       temperature \
+      temperature_max \
+      temperature_min \
+      temperature_sensitive \
+      temperature_sensitive_to_sudden_changes \
       tick_prio \
       unused_flag1 \
       unused_flag10 \
@@ -527,25 +536,13 @@ do
       unused_flag28 \
       unused_flag29 \
       unused_flag3 \
-      temperature_max \
-      temperature_min \
-      gfx_ascii_color_bg_unchanged_by_lights \
-      gfx_ascii_color_fg_unchanged_by_lights \
-      gfx_pixelart_oversized_and_centered \
-      is_limb \
-      is_msg_allowed_is_dead \
-      is_obs_in_the_way_for_firing \
-      is_msg_allowed_senses_danger \
-      is_msg_allowed_hears_something \
       unused_flag4 \
       unused_flag40 \
       unused_flag48 \
       unused_flag5 \
-      is_able_to_live_out_of_water \
       unused_flag6 \
       unused_flag7 \
       unused_flag8 \
-      is_tentacle \
       unused_flag9
     do
         grep -q $arg $PAYLOAD

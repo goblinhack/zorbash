@@ -883,8 +883,8 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   }
 
   //
-  // If a wand is firing a laser, then get the damage from the
-  // wand so we can add in enchants.
+  // If a staff is firing a laser, then get the damage from the
+  // staff so we can add in enchants.
   //
   if (hitter->is_laser()) {
     auto owner = hitter->immediate_owner();
@@ -1351,7 +1351,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   place_blood();
 
   //
-  // Check for wand of fire projectiles (this is the non real hitter case)
+  // Check for staff of fire projectiles (this is the non real hitter case)
   //
   if (attack_options->attack_fire || hitter->is_fire() || hitter->is_lava() || real_hitter->is_fire() ||
       real_hitter->is_lava()) {

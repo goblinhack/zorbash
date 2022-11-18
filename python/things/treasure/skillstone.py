@@ -9,11 +9,11 @@ def explode(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if owner:
         if my.thing_is_player(owner):
-            my.thing_msg(me, "Your wand of skillstone explodes.")
+            my.thing_msg(me, "Your staff of skillstone explodes.")
         else:
-            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s wand of skillstone explodes.")
+            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s staff of skillstone explodes.")
     else:
-        my.thing_msg(me, "The wand of skillstone explodes.")
+        my.thing_msg(me, "The staff of skillstone explodes.")
 
     my.spawn_at_my_position(me, "explosion_major")
     my.spawn_fire_around_thing(me, "fire")

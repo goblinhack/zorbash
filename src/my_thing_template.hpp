@@ -268,7 +268,7 @@ private:
   int _is_able_to_use_helmet {};
   int _is_able_to_use_rings {};
   int _is_able_to_use_shield {};
-  int _is_able_to_use_wands_or_staffs {};
+  int _is_able_to_use_staffs {};
   int _is_able_to_use_weapons {};
   int _is_able_to_walk_through_walls {};
   int _is_acid {};
@@ -369,7 +369,6 @@ private:
   int _is_eater_of_shields {};
   int _is_eater_of_staffs {};
   int _is_eater_of_treasure {};
-  int _is_eater_of_wands {};
   int _is_eater_of_weapons {};
   int _is_enchantable {};
   int _is_enchantstone {};
@@ -529,7 +528,6 @@ private:
   int _is_very_heavy {};
   int _is_wall {};
   int _is_wall_dungeon {};
-  int _is_wand {};
   int _is_weapon {};
   int _is_weapon_class_a {};
   int _is_weapon_class_b {};
@@ -1293,7 +1291,7 @@ public:
   int is_able_to_use_helmet(void) const;
   int is_able_to_use_rings(void) const;
   int is_able_to_use_shield(void) const;
-  int is_able_to_use_wands_or_staffs(void) const;
+  int is_able_to_use_staffs(void) const;
   int is_able_to_use_weapons(void) const;
   int is_able_to_walk_through_walls(void) const;
   int is_acid(void) const;
@@ -1394,7 +1392,6 @@ public:
   int is_eater_of_shields(void) const;
   int is_eater_of_staffs(void) const;
   int is_eater_of_treasure(void) const;
-  int is_eater_of_wands(void) const;
   int is_eater_of_weapons(void) const;
   int is_enchantable(void) const;
   int is_enchantstone(void) const;
@@ -1553,8 +1550,6 @@ public:
   int is_very_heavy(void) const;
   int is_wall_dungeon(void) const;
   int is_wall(void) const;
-  int is_wand_or_staff(void) const;
-  int is_wand(void) const;
   int is_weapon_class_a(void) const;
   int is_weapon_class_b(void) const;
   int is_weapon_class_c(void) const;
@@ -1834,7 +1829,7 @@ public:
   void is_able_to_use_helmet_set(int v);
   void is_able_to_use_rings_set(int v);
   void is_able_to_use_shield_set(int v);
-  void is_able_to_use_wands_or_staffs_set(int v);
+  void is_able_to_use_staffs_set(int v);
   void is_able_to_use_weapons_set(int v);
   void is_able_to_walk_through_walls_set(int v);
   void is_acid_set(int v);
@@ -1936,7 +1931,6 @@ public:
   void is_eater_of_shields_set(int v);
   void is_eater_of_staffs_set(int v);
   void is_eater_of_treasure_set(int v);
-  void is_eater_of_wands_set(int v);
   void is_eater_of_weapons_set(int v);
   void is_enchantable_set(int v);
   void is_enchantstone_set(int v);
@@ -2095,7 +2089,6 @@ public:
   void is_very_heavy_set(int v);
   void is_wall_dungeon_set(int v);
   void is_wall_set(int v);
-  void is_wand_set(int v);
   void is_weapon_class_a_set(int v);
   void is_weapon_class_b_set(int v);
   void is_weapon_class_c_set(int v);
@@ -2427,10 +2420,10 @@ class Tp *tp_random_treasure_class_b(void);
 class Tp *tp_random_treasure_class_c(void);
 class Tp *tp_random_treasure(void);
 class Tp *tp_random_wall_dungeon(void);
-class Tp *tp_random_wand_or_staff_class_a(void);
-class Tp *tp_random_wand_or_staff_class_b(void);
-class Tp *tp_random_wand_or_staff_class_c(void);
-class Tp *tp_random_wand_or_staff(void);
+class Tp *tp_random_staff_class_a(void);
+class Tp *tp_random_staff_class_b(void);
+class Tp *tp_random_staff_class_c(void);
+class Tp *tp_random_staff(void);
 class Tp *tp_random_weapon_class_a(void);
 class Tp *tp_random_weapon_class_b(void);
 class Tp *tp_random_weapon_class_c(void);

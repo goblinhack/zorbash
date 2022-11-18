@@ -59,7 +59,7 @@ def tp_init(name, text_long_name):
     my.environ_avoids_water(self, 100)
     my.health_initial_dice(self, "2d3+4")
     my.is_able_to_use_rings(self, True)
-    my.is_able_to_use_wands_or_staffs(self, True)
+    my.is_able_to_use_staffs(self, True)
     my.is_biome_dungeon(self, True)
     my.is_carrier_of_treasure_class_c_d1000(self, 1000)
     my.is_cowardly(self, True)

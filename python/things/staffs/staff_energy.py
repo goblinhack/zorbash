@@ -26,7 +26,7 @@ def on_use(owner, item, target, x, y):
 
 def on_final_use(owner, item, target, x, y):
     if my.thing_is_player(owner):
-        my.thing_msg(owner, "The wand fades away into nothingness.")
+        my.thing_msg(owner, "The staff fades away into nothingness.")
 
 
 def explode(me, x, y):
@@ -62,7 +62,7 @@ def on_fire(me, x, y):
 def on_enchant(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if my.thing_is_player(owner):
-        my.thing_msg(me, "The wand glows.")
+        my.thing_msg(me, "The staff glows.")
     my.thing_charge_count_incr(me, 5)
 
 
@@ -71,7 +71,6 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.charge_count(self, 5)
-    my.collision_hit_priority(self, 5)
     my.collision_hit_priority(self, 6)
     my.damage_energy_chance_d1000(self, 0, 1000)
     my.damage_energy_dice(self, "1d20+10")

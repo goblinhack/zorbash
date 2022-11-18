@@ -509,7 +509,7 @@ void Level::tick_(void)
   // If things have stopped moving, perform location checks on where they
   // are now. This handles things like shoving a monst into a chasm. We do
   // location checks on the ends of moves, but this is a backup and will
-  // also handle things that do not move, like a wand that is now on fire.
+  // also handle things that do not move, like a staff that is now on fire.
   //
   TRACE_NO_INDENT();
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)

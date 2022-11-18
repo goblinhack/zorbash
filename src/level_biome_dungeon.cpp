@@ -1067,9 +1067,9 @@ void Level::create_biome_dungeon_place_objects_with_normal_placement_rules(Dunge
           tp = tp_random_potion();
         }
       }
-      if (d->is_wand_or_staff(x, y)) {
+      if (d->is_staff(x, y)) {
         if (d1000() < 20) {
-          tp = tp_random_wand_or_staff();
+          tp = tp_random_staff();
         }
       }
       if (d->is_ring(x, y)) {
@@ -1493,7 +1493,7 @@ void Level::place_floor_deco(Dungeonp d)
 
       if (d->is_food(x, y) || d->is_red_blood(x, y) || d->is_door(x, y) || d->is_ascend_dungeon(x, y) ||
           d->is_descend_dungeon(x, y) || d->is_mob_any(x, y) || d->is_key(x, y) || d->is_potion(x, y) ||
-          d->is_barrel(x, y) || d->is_wand_or_staff(x, y) || d->is_ring(x, y) || d->is_secret_door(x, y) ||
+          d->is_barrel(x, y) || d->is_staff(x, y) || d->is_ring(x, y) || d->is_secret_door(x, y) ||
           d->is_weapon_class_a(x, y) || d->is_weapon_class_b(x, y) || d->is_treasure_type(x, y) ||
           d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) || d->is_treasure_class_c(x, y) ||
           d->is_monst_any(x, y)) {
@@ -1536,7 +1536,7 @@ void Level::create_biome_dungeon_place_random_floor_deco(Dungeonp d)
 
       if (d->is_food(x, y) || d->is_red_blood(x, y) || d->is_door(x, y) || d->is_ascend_dungeon(x, y) ||
           d->is_descend_dungeon(x, y) || d->is_mob_any(x, y) || d->is_key(x, y) || d->is_potion(x, y) ||
-          d->is_barrel(x, y) || d->is_wand_or_staff(x, y) || d->is_ring(x, y) || d->is_secret_door(x, y) ||
+          d->is_barrel(x, y) || d->is_staff(x, y) || d->is_ring(x, y) || d->is_secret_door(x, y) ||
           d->is_weapon_class_a(x, y) || d->is_weapon_class_b(x, y) || d->is_treasure_type(x, y) ||
           d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) || d->is_treasure_class_c(x, y) ||
           d->is_monst_any(x, y)) {

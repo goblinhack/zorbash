@@ -207,12 +207,12 @@ void Game::place_player(void)
         t->carry(w);
       }
       if (1) {
-        auto w = level->thing_new("wand_ice", point(x, y));
+        auto w = level->thing_new("staff_ice", point(x, y));
         t->carry(w);
         t->enchant_without_stone(w);
       }
       if (0) {
-        auto w = level->thing_new("wand_fire", point(x, y));
+        auto w = level->thing_new("staff_fire", point(x, y));
         t->carry(w);
         t->enchant_without_stone(w);
       }

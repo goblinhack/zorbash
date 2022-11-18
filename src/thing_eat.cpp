@@ -38,11 +38,9 @@ bool Thing::is_edible(Thingp itp)
     return true;
   if (is_eater_of_rings() && itp->is_ring())
     return true;
-  if (is_eater_of_staffs() && itp->is_staff())
-    return true;
   if (is_eater_of_treasure() && itp->is_treasure_type())
     return true;
-  if (is_eater_of_wands() && itp->is_wand())
+  if (is_eater_of_staffs() && itp->is_staff())
     return true;
   if (is_eater_of_weapons() && itp->is_weapon())
     return true;
@@ -79,11 +77,9 @@ bool Tp::is_edible(Thingp itp)
     return true;
   if (is_eater_of_rings() && itp->is_ring())
     return true;
-  if (is_eater_of_staffs() && itp->is_staff())
-    return true;
   if (is_eater_of_treasure() && itp->is_treasure_type())
     return true;
-  if (is_eater_of_wands() && itp->is_wand())
+  if (is_eater_of_staffs() && itp->is_staff())
     return true;
   if (is_eater_of_weapons() && itp->is_weapon())
     return true;

@@ -52,7 +52,7 @@ bool Thing::possible_to_attack(const Thingp victim)
   //
   // Weapons can't attack all by themselves. That would be nuts.
   //
-  if (is_weapon() || is_wand_or_staff() || is_ring()) {
+  if (is_weapon() || is_staff() || is_ring()) {
     //
     // How can this happen? Confused
     //
@@ -378,9 +378,9 @@ bool Thing::possible_to_attack(const Thingp victim)
       return true;
     }
 
-    if (is_wand_or_staff()) {
+    if (is_staff()) {
       if (is_debug_type()) {
-        dbg("Can attack as wand %s", victim->to_short_string().c_str());
+        dbg("Can attack as staff %s", victim->to_short_string().c_str());
       }
       return true;
     }

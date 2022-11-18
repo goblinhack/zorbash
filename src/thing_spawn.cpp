@@ -34,7 +34,7 @@ void Thing::spawned_newborn(Thingp it)
   }
 
   //
-  // Like a wand spawning a projectile
+  // Like a staff spawning a projectile
   //
   if (is_able_to_spawn_things()) {
     dbg("Spawned owned thing %s", it->to_short_string().c_str());
@@ -244,7 +244,7 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
       }
 
       //
-      // Radius needs to be the same as the check in carried_wand_highest_value_for_target
+      // Radius needs to be the same as the check in carried_staff_highest_value_for_target
       //
       if (dist > radius_max) {
         dbg("%d,%d too close", x, y);
@@ -302,7 +302,7 @@ bool Thing::spawn_radius_range(const std::string &what, int radius_min, int radi
       }
 
       //
-      // Radius needs to be the same as the check in carried_wand_highest_value_for_target
+      // Radius needs to be the same as the check in carried_staff_highest_value_for_target
       //
       if (dist > radius_max) {
         continue;
@@ -380,7 +380,7 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, i
       }
 
       //
-      // Radius needs to be the same as the check in carried_wand_highest_value_for_target
+      // Radius needs to be the same as the check in carried_staff_highest_value_for_target
       //
       float dist = distance(spawn_at, curr_at);
       if (dist > radius_max) {
@@ -484,7 +484,7 @@ bool Thing::spawn_fire(const std::string &what, int radius)
       float dist = DISTANCE(x, y, curr_at.x, curr_at.y);
 
       //
-      // Radius needs to be the same as the check in carried_wand_highest_value_for_target
+      // Radius needs to be the same as the check in carried_staff_highest_value_for_target
       //
       if (dist > radius) {
         continue;
@@ -544,7 +544,7 @@ bool Thing::spawn_gas_poison(int radius)
       float dist = DISTANCE(x, y, curr_at.x, curr_at.y);
 
       //
-      // Radius needs to be the same as the check in carried_wand_highest_value_for_target
+      // Radius needs to be the same as the check in carried_staff_highest_value_for_target
       //
       if (dist > radius) {
         continue;

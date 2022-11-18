@@ -144,10 +144,10 @@ void Charmap::init_charmaps(void)
   c->c         = char_index;
   c->is_potion = true;
 
-  char_index          = Charmap::WAND_OR_STAFF;
-  c                   = &all_charmaps[ char_index ];
-  c->c                = char_index;
-  c->is_wand_or_staff = true;
+  char_index  = Charmap::STAFF;
+  c           = &all_charmaps[ char_index ];
+  c->c        = char_index;
+  c->is_staff = true;
 
   char_index = Charmap::RING;
   c          = &all_charmaps[ char_index ];

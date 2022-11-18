@@ -3,7 +3,7 @@ import zorb_all
 
 
 def on_born(me, x, y):
-    my.thing_carry(me, "wand_fire")
+    my.thing_carry(me, "staff_fire")
     zorb_all.on_born(me, x, y)
 
 

@@ -227,7 +227,7 @@ PyObject *level_is_target_select_at(PyObject *obj, PyObject *args, PyObject *key
 PyObject *level_is_visible_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_wall_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_wall_dungeon_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_wand_or_staff_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_staff_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_water_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_weapon_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_wet_grass_at(PyObject *obj, PyObject *args, PyObject *keywds);

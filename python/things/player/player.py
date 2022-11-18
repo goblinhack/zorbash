@@ -388,7 +388,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.is_able_to_use_helmet(self, True)
     my.is_able_to_use_rings(self, True)
     my.is_able_to_use_shield(self, True)
-    my.is_able_to_use_wands_or_staffs(self, True)
+    my.is_able_to_use_staffs(self, True)
     my.is_able_to_use_weapons(self, True)
     my.is_air_breather(self, True)
     my.is_attackable_by_monst(self, True)

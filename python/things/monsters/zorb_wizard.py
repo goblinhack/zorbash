@@ -3,7 +3,7 @@ import zorb_all
 
 
 def on_born(me, x, y):
-    my.thing_carry(me, "wand_fire")
+    my.thing_carry(me, "staff_fire")
     zorb_all.on_born(me, x, y)
 
 
@@ -19,7 +19,7 @@ def tp_init(name, text_long_name):
     my.health_initial_dice(self, "2d4+4")
     my.is_able_to_freeze(self, True)
     my.is_able_to_use_rings(self, True)
-    my.is_able_to_use_wands_or_staffs(self, True)
+    my.is_able_to_use_staffs(self, True)
     my.is_biome_dungeon(self, True)
     my.is_carrier_of_treasure_class_b_d1000(self, 1000)
     my.is_intelligent(self, True)

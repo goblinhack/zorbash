@@ -187,16 +187,16 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
     }
   }
 
-  if (item->is_wand_or_staff()) {
-    Thingp worst_wand       = nullptr;
-    auto   worst_wand_value = carried_wand_least_value(&worst_wand);
+  if (item->is_staff()) {
+    Thingp worst_staff       = nullptr;
+    auto   worst_staff_value = carried_staff_least_value(&worst_staff);
     //
-    // If we have an existing wand, we can be smarter on checks and decided if
-    // we perhaps want to swap the worst wand for this one.
+    // If we have an existing staff, we can be smarter on checks and decided if
+    // we perhaps want to swap the worst staff for this one.
     //
-    if (worst_wand) {
-      dbg("Worth collecting %s? compare against worst wand %s", item->to_short_string().c_str(),
-          worst_wand->to_short_string().c_str());
+    if (worst_staff) {
+      dbg("Worth collecting %s? compare against worst staff %s", item->to_short_string().c_str(),
+          worst_staff->to_short_string().c_str());
 
       //
       // Can it fit in the bag?
@@ -206,62 +206,62 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
           //
           // No. Can we drop something worse.
           //
-          if (value_to_me > worst_wand_value) {
+          if (value_to_me > worst_staff_value) {
             //
-            // This is better than the worst wand.
+            // This is better than the worst staff.
             //
-            *would_need_to_drop = worst_wand;
+            *would_need_to_drop = worst_staff;
             dbg("Worth collecting %s? no space, would need to drop %s", item->to_short_string().c_str(),
-                worst_wand->to_short_string().c_str());
+                worst_staff->to_short_string().c_str());
             return value_to_me;
           }
 
           //
-          // This is WORSE than the worst wand.
+          // This is WORSE than the worst staff.
           //
-          dbg("Worth collecting %s? no, cannot fit and is worse than the worst wand %s",
-              item->to_short_string().c_str(), worst_wand->to_short_string().c_str());
+          dbg("Worth collecting %s? no, cannot fit and is worse than the worst staff %s",
+              item->to_short_string().c_str(), worst_staff->to_short_string().c_str());
           return -1;
         }
 
         //
         // Yes it fits. Check we do not have too many.
         //
-        if (value_to_me > worst_wand_value) {
+        if (value_to_me > worst_staff_value) {
           //
-          // Here we're adding a wand that is better than the worst.
-          // Check if we have too many, to drop the new worst wand.
+          // Here we're adding a staff that is better than the worst.
+          // Check if we have too many, to drop the new worst staff.
           //
-          if (carried_wand_count() > 5) {
-            *would_need_to_drop = worst_wand;
-            dbg("Worth collecting %s? yes, but no space and too many wands, would need to drop %s",
-                item->to_short_string().c_str(), worst_wand->to_short_string().c_str());
+          if (carried_staff_count() > 5) {
+            *would_need_to_drop = worst_staff;
+            dbg("Worth collecting %s? yes, but no space and too many staffs, would need to drop %s",
+                item->to_short_string().c_str(), worst_staff->to_short_string().c_str());
             return value_to_me;
           }
 
           //
-          // This is WORSE than the worst wand. Only carry if we have little
+          // This is WORSE than the worst staff. Only carry if we have little
           // else.
           //
-          dbg("Worth collecting? yes as %s is better than the worst wand %s", item->to_short_string().c_str(),
-              worst_wand->to_short_string().c_str());
+          dbg("Worth collecting? yes as %s is better than the worst staff %s", item->to_short_string().c_str(),
+              worst_staff->to_short_string().c_str());
           return value_to_me;
         }
 
         //
-        // Here we're adding a wand that is worse than the worst.
-        // Only carry if we are low on wands.
+        // Here we're adding a staff that is worse than the worst.
+        // Only carry if we are low on staffs.
         //
-        if (carried_wand_count() > 5) {
-          dbg("Worth collecting %s? no, it is worse than the worst wand %s, "
-              "and we already have enough wands",
-              item->to_short_string().c_str(), worst_wand->to_short_string().c_str());
+        if (carried_staff_count() > 5) {
+          dbg("Worth collecting %s? no, it is worse than the worst staff %s, "
+              "and we already have enough staffs",
+              item->to_short_string().c_str(), worst_staff->to_short_string().c_str());
           return -1;
         }
 
-        dbg("Worth collecting %s? yes, it is worse than the worst wand %s, "
-            "but only collect as are low on wands",
-            item->to_short_string().c_str(), worst_wand->to_short_string().c_str());
+        dbg("Worth collecting %s? yes, it is worse than the worst staff %s, "
+            "but only collect as are low on staffs",
+            item->to_short_string().c_str(), worst_staff->to_short_string().c_str());
         return value_to_me;
       }
     } else {

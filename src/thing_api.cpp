@@ -1680,12 +1680,6 @@ int Thing::is_eater_of_armor(void)
   return (tp()->is_eater_of_armor());
 }
 
-int Thing::is_eater_of_wands(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_eater_of_wands());
-}
-
 int Thing::is_dry_grass_trampled(void)
 {
   TRACE_NO_INDENT();
@@ -2560,10 +2554,10 @@ int Thing::is_map_treasure(void)
   return (tp()->is_map_treasure());
 }
 
-int Thing::is_able_to_use_wands_or_staffs(void)
+int Thing::is_able_to_use_staffs(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_able_to_use_wands_or_staffs());
+  return (tp()->is_able_to_use_staffs());
 }
 
 int Thing::is_aquatic(void)
@@ -2804,18 +2798,6 @@ int Thing::is_eater_of_magical_items(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_eater_of_magical_items());
-}
-
-int Thing::is_wand(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_wand());
-}
-
-int Thing::is_wand_or_staff(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_wand_or_staff());
 }
 
 int Thing::is_immune_to_water(void)

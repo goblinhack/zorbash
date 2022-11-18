@@ -28,7 +28,7 @@ Projectile_::Projectile_(Levelp level, ThingId thing_id, ThingId victim_id, Proj
   }
 
   //
-  // Can be either a wand or the projectile itself being fired
+  // Can be either a staff or the projectile itself being fired
   //
   std::string name;
   if (t->is_projectile()) {

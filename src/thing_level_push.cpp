@@ -194,13 +194,9 @@ void Thing::level_push(void)
     i_set_is_potion = true;
     level->is_potion_set(mx, my);
   }
-  if (is_wand()) {
-    i_set_is_wand = true;
-    level->is_wand_or_staff_set(mx, my);
-  }
   if (is_staff()) {
     i_set_is_staff = true;
-    level->is_wand_or_staff_set(mx, my);
+    level->is_staff_set(mx, my);
   }
   if (is_ring()) {
     i_set_is_ring = true;

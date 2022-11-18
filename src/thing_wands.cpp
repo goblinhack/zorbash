@@ -6,7 +6,7 @@
 #include "my_monst.hpp"
 #include "my_thing.hpp"
 
-std::list< Thingp > Thing::wand_list(void)
+std::list< Thingp > Thing::staff_list(void)
 {
   TRACE_NO_INDENT();
 
@@ -30,19 +30,19 @@ std::list< Thingp > Thing::wand_list(void)
         if (unlikely(! t)) {
           continue;
         }
-        if (t->is_wand_or_staff()) {
+        if (t->is_staff()) {
           out.push_back(t);
         }
       }
     }
-    if (t->is_wand_or_staff()) {
+    if (t->is_staff()) {
       out.push_back(t);
     }
   }
   return out;
 }
 
-std::vector< Thingp > Thing::wand_vector(void)
+std::vector< Thingp > Thing::staff_vector(void)
 {
   TRACE_NO_INDENT();
 
@@ -66,19 +66,19 @@ std::vector< Thingp > Thing::wand_vector(void)
         if (unlikely(! t)) {
           continue;
         }
-        if (t->is_wand_or_staff()) {
+        if (t->is_staff()) {
           out.push_back(t);
         }
       }
     }
-    if (t->is_wand_or_staff()) {
+    if (t->is_staff()) {
       out.push_back(t);
     }
   }
   return out;
 }
 
-int Thing::carried_wand_count(void)
+int Thing::carried_staff_count(void)
 {
   TRACE_NO_INDENT();
   int count = 0;
@@ -87,15 +87,15 @@ int Thing::carried_wand_count(void)
     return count;
   }
 
-  for (const auto t : wand_list()) {
-    if (t->is_wand_or_staff()) {
+  for (const auto t : staff_list()) {
+    if (t->is_staff()) {
       count++;
     }
   }
   return count;
 }
 
-int Thing::carried_wand_least_value(Thingp *out)
+int Thing::carried_staff_least_value(Thingp *out)
 {
   TRACE_NO_INDENT();
   int least_value = -1;
@@ -105,8 +105,8 @@ int Thing::carried_wand_least_value(Thingp *out)
     return least_value;
   }
 
-  for (const auto t : wand_list()) {
-    if (! t->is_wand_or_staff()) {
+  for (const auto t : staff_list()) {
+    if (! t->is_staff()) {
       continue;
     }
 
@@ -124,7 +124,7 @@ int Thing::carried_wand_least_value(Thingp *out)
   return least_value;
 }
 
-int Thing::carried_wand_highest_value(Thingp *out)
+int Thing::carried_staff_highest_value(Thingp *out)
 {
   TRACE_NO_INDENT();
   int highest_value = -1;
@@ -134,8 +134,8 @@ int Thing::carried_wand_highest_value(Thingp *out)
     return highest_value;
   }
 
-  for (const auto t : wand_list()) {
-    if (! t->is_wand_or_staff()) {
+  for (const auto t : staff_list()) {
+    if (! t->is_staff()) {
       continue;
     }
 
@@ -153,7 +153,7 @@ int Thing::carried_wand_highest_value(Thingp *out)
   return highest_value;
 }
 
-int Thing::carried_wand_highest_value_for_target(Thingp *out, Thingp target)
+int Thing::carried_staff_highest_value_for_target(Thingp *out, Thingp target)
 {
   TRACE_NO_INDENT();
   int highest_value = -1;
@@ -163,13 +163,13 @@ int Thing::carried_wand_highest_value_for_target(Thingp *out, Thingp target)
     return highest_value;
   }
 
-  for (const auto t : wand_list()) {
-    if (! t->is_wand_or_staff()) {
+  for (const auto t : staff_list()) {
+    if (! t->is_staff()) {
       continue;
     }
 
     //
-    // If intelligent don't use a wand that will hit you also
+    // If intelligent don't use a staff that will hit you also
     //
     if (is_intelligent()) {
       if (distance(curr_at, target->curr_at) <= t->blast_max_radius() + 1) {

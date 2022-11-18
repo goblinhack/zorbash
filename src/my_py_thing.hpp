@@ -161,7 +161,7 @@ PyObject *thing_is_able_to_use_gauntlet(PyObject *obj, PyObject *args, PyObject 
 PyObject *thing_is_able_to_use_helmet(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_use_rings(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_use_shield(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_able_to_use_wands_or_staffs(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_use_staffs(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_use_weapons(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_walk_through_walls(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_acid(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -271,7 +271,6 @@ PyObject *thing_is_eater_of_rings(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_eater_of_shields(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_eater_of_staffs(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_eater_of_treasure(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_eater_of_wands(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_eater_of_weapons(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_enchantable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_enchantstone(PyObject *obj, PyObject *args, PyObject *keywds);

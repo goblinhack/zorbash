@@ -106,7 +106,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_eater_of_shields(self, True)
     my.is_eater_of_staffs(self, True)
     my.is_eater_of_treasure(self, True)
-    my.is_eater_of_wands(self, True)
     my.is_eater_of_weapons(self, True)
     my.is_engulfer(self, True)
     my.is_gelatinous(self, True)

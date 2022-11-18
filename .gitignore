@@ -27,7 +27,7 @@ python/things/items/__pycache__
 python/things/keys/__pycache__/
 python/things/lasers/__pycache__
 python/things/mobs/__pycache__/
-python/things/monsts/__pycache__
+python/things/monsters/__pycache__
 python/things/player/__pycache__/
 python/things/potions/__pycache__
 python/things/projectiles/__pycache__
@@ -37,7 +37,6 @@ python/things/shield/__pycache__
 python/things/skills/__pycache__
 python/things/staffs/__pycache__/
 python/things/treasure/__pycache__
-python/things/wands/__pycache__
 python/things/weapons/__pycache__
 *.session
 */*.session

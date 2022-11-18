@@ -5,7 +5,7 @@
 <!-- - using fireball in block of ice                                                                                                             -->
 <!-- - some weapons crit more                                                                                                                     -->
 <!-- - tentacle grapple                                                                                                                           -->
-<!-- - test main body with freezing and wand of descent                                                                                           -->
+<!-- - test main body with freezing and staff of descent                                                                                           -->
 <!-- - kraken guards treasure                                                                                                                     -->
 <!-- - resize the collect window to just what we need                                                                                             -->
 <!-- - check plutonium sword and lightning                                                                                                        -->
@@ -33,7 +33,7 @@
 <!-- - chaos bell of summoning                                                                                                                    -->
 <!-- - crystal chest needs crystal key                                                                                                            -->
 <!-- - teleport block                                                                                                                             -->
-<!-- - invisibility wand / and crystals walls (or chest) that reflect, so can use on yourself or ally                                             -->
+<!-- - invisibility staff / and crystals walls (or chest) that reflect, so can use on yourself or ally                                             -->
 <!-- - cloak of jelly                                                                                                                             -->
 <!-- - need allies                                                                                                                                -->
 <!-- - potion of paralysis                                                                                                                        -->
@@ -146,10 +146,10 @@
 <!-- - ring combos?                                                                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
-<!-- Wands                                                                                                                                        -->
+<!-- Staffs                                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
 <!-- - staves that recharge                                                                                                                       -->
-<!-- - wand of death should stop regenerating monst                                                                                               -->
+<!-- - staff of death should stop regenerating monst                                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Potions                                                                                                                                      -->
@@ -237,15 +237,14 @@ Content:
 - 26 weapons
 - 19 treasure
 - 12 boots
+- 10 staffs
 - 8 items
 - 8 gauntlets
 - 8 armor
 - 7 buffs
-- 6 staffs
 - 6 cloaks
 - 6 amulets
 - 5 keys
-- 4 wands
 - 4 shield
 - 4 rings
 - 4 debuffs

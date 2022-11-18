@@ -9,7 +9,10 @@ def on_thrown(me, x, y):
         return
     for dx in range(-1, 2):
         for dy in range(-1, 2):
-            my.place_at(me, "fire", x + dx, y + dy)
+            my.place_at(me, "block_of_ice", x + dx, y + dy)
+            for it in my.level_get_all(me, x + dx, y + dy):
+                if my.thing_is_lava(it) or my.thing_is_fire(it):
+                    my.thing_dead(it, "frozen")
 
 
 def on_idle(me, x, y):
@@ -30,15 +33,13 @@ def explode(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if owner:
         if my.thing_is_player(owner):
-            my.thing_msg(me, "Your wand of fire explodes.")
+            my.thing_msg(me, "Your staff of ice explodes.")
         else:
-            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s wand of fire explodes.")
+            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s staff of ice explodes.")
     else:
-        my.thing_msg(me, "The wand of fire explodes.")
+        my.thing_msg(me, "The staff of ice explodes.")
 
     my.spawn_at_my_position(me, "explosion_major")
-    my.spawn_fire_around_thing(me, "fire")
-    my.spawn_at_my_position(me, "fire")
     my.thing_dead(me, "exploded")
 
 
@@ -55,11 +56,11 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.charge_count(self, 5)
     my.collision_hit_priority(self, 6)
-    my.damage_fire_chance_d1000(self, 0, 1000)
-    my.damage_fire_dice(self, "1d8+6")
-    my.damage_received_doubled_from_cold(self, True)
+    my.damage_cold_chance_d1000(self, 0, 1000)
+    my.damage_cold_dice(self, "1d8+6")
+    my.damage_received_doubled_from_fire(self, True)
     my.environ_avoids_water(self, 100)
-    my.equip_carry_anim(self, "wand_fire_carry")
+    my.equip_carry_anim(self, "staff_ice_carry")
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_reflection(self, True)
@@ -75,19 +76,20 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_crushable(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_droppable(self, True)
-    my.is_immune_to_fire(self, True)
+    my.is_enchantable(self, True)
+    my.is_immune_to_cold(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)
     my.is_loggable(self, True)
     my.is_magical(self, True)
+    my.is_staff(self, True)
     my.is_target_select(self, True)
     my.is_throwable(self, True)
-    my.is_tickable(self, True)  # So it can interact with fire
+    my.is_tickable(self, True)  # So it can interact with cold
     my.is_treasure_class_b(self, True)
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
     my.is_usable(self, True)
-    my.is_wand(self, True)
     my.is_wooden(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
@@ -98,11 +100,11 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_thrown_do(self, "me.on_thrown()")
     my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")
     my.range_max(self, 7)
-    my.target_name_projectile(self, "projectile_fire")
-    my.temperature(self, 30)
+    my.target_name_projectile(self, "projectile_cold")
+    my.temperature(self, -10)
     my.text_a_or_an(self, "a")
-    my.text_long_description(self, "Discharges a single fireball at an ungrateful recipient...")
-    my.text_short_description(self, "A wand of fire.")
+    my.text_long_description(self, "Discharges a single ball of ice at an ungrateful recipient...")
+    my.text_short_description(self, "A staff of ice.")
     my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -131,7 +133,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="wand_fire", text_long_name="wand of fire", text_short_name="wand, fire")
+    tp_init(name="staff_ice", text_long_name="staff of ice", text_short_name="staff, cold")
 
 
 init()

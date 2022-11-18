@@ -62,7 +62,7 @@ bool Thing::try_to_use_weapon(void)
 {
   //
   // Can we switch to a better weapon? Only if we can use weapons. We don't
-  // wand jellys wandering around with swords!
+  // staff jellys wandering around with swords!
   //
   if (! is_able_to_use_weapons()) {
     return false;

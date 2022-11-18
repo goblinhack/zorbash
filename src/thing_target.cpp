@@ -330,7 +330,7 @@ bool Thing::victim_attack_swing(int equip, Thingp best, point best_hit_at, Attac
     }
 
     //
-    // A monst only wielding a wand can have no swing anim
+    // A monst only wielding a staff can have no swing anim
     //
     if (! attack_options->used_as.empty()) {
       auto use_anim = level->thing_new(attack_options->used_as, best_hit_at);
@@ -345,7 +345,7 @@ bool Thing::victim_attack_swing(int equip, Thingp best, point best_hit_at, Attac
     TRACE_AND_INDENT();
 
     //
-    // A monst only wielding a wand can have no swing anim
+    // A monst only wielding a staff can have no swing anim
     //
     if (! attack_options->used_as.empty()) {
       auto use_anim = level->thing_new(attack_options->used_as, best_hit_at);

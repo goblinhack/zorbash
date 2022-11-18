@@ -243,11 +243,11 @@ bool Thing::fire_at(Thingp target)
 
   Thingp curr_weapon = equip_get(MONST_EQUIP_WEAPON);
   if (! curr_weapon) {
-    if (is_able_to_use_wands_or_staffs()) {
-      Thingp best_wand = nullptr;
-      carried_wand_highest_value_for_target(&best_wand, target);
-      if (best_wand) {
-        curr_weapon = best_wand;
+    if (is_able_to_use_staffs()) {
+      Thingp best_staff = nullptr;
+      carried_staff_highest_value_for_target(&best_staff, target);
+      if (best_staff) {
+        curr_weapon = best_staff;
       } else {
         return false;
       }
@@ -257,14 +257,14 @@ bool Thing::fire_at(Thingp target)
   }
 
   //
-  // If using a sword, allow the monst to use a wand without equipping
+  // If using a sword, allow the monst to use a staff without equipping
   //
-  if (! curr_weapon->is_wand_or_staff()) {
-    if (is_able_to_use_wands_or_staffs()) {
-      Thingp best_wand = nullptr;
-      carried_wand_highest_value_for_target(&best_wand, target);
-      if (best_wand) {
-        curr_weapon = best_wand;
+  if (! curr_weapon->is_staff()) {
+    if (is_able_to_use_staffs()) {
+      Thingp best_staff = nullptr;
+      carried_staff_highest_value_for_target(&best_staff, target);
+      if (best_staff) {
+        curr_weapon = best_staff;
       } else {
         return false;
       }

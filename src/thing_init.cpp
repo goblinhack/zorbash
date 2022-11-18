@@ -270,7 +270,7 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   init_hue();
 
   //
-  // e.g. wand charges
+  // e.g. staff charges
   //
   if (unlikely(tpp->charge_count())) {
     charge_count_set(tpp->charge_count());

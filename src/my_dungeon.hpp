@@ -143,7 +143,7 @@ public:
   bool is_treasure_type(const int x, const int y);
   bool is_wall(const int x, const int y);
   bool is_wall_no_check(const int x, const int y);
-  bool is_wand_or_staff(const int x, const int y);
+  bool is_staff(const int x, const int y);
   bool is_weapon_class_a(const int x, const int y);
   bool is_weapon_class_b(const int x, const int y);
   bool is_weapon_class_c(const int x, const int y);

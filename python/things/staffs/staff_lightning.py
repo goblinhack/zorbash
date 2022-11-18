@@ -20,11 +20,11 @@ def explode(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if owner:
         if my.thing_is_player(owner):
-            my.thing_msg(me, "Your wand of staff of lightning explodes.")
+            my.thing_msg(me, "Your staff of staff of lightning explodes.")
         else:
-            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s wand of staff of lightning explodes.")
+            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s staff of staff of lightning explodes.")
     else:
-        my.thing_msg(me, "The wand of staff of lightning explodes.")
+        my.thing_msg(me, "The staff of staff of lightning explodes.")
 
     my.spawn_at_my_position(me, "explosion_major")
     my.spawn_fire_around_thing(me, "fire")
@@ -72,6 +72,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_crushable(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_droppable(self, True)
+    my.is_enchantable(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)
     my.is_loggable(self, True)
@@ -95,7 +96,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.range_max(self, 7)
     my.target_name_laser(self, "laser_lightning")
     my.text_a_or_an(self, "a")
-    my.text_long_description(self, "This wand blasts a charge of lightning at its unwitting target. Be careful when standing in the same pool as your target... Also do not use in the bath.")
+    my.text_long_description(self, "This staff blasts a charge of lightning at its unwitting target. Be careful when standing in the same pool as your target... Also do not use in the bath.")
     my.text_short_description(self, "A staff of lightning.")
     my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
     my.z_depth(self, my.MAP_DEPTH_OBJ)

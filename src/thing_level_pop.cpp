@@ -222,13 +222,9 @@ void Thing::level_pop(void)
     i_set_is_potion = false;
     level->is_potion_unset(mx, my);
   }
-  if (i_set_is_wand) {
-    i_set_is_wand = false;
-    level->is_wand_or_staff_unset(mx, my);
-  }
   if (i_set_is_staff) {
     i_set_is_staff = false;
-    level->is_wand_or_staff_unset(mx, my);
+    level->is_staff_unset(mx, my);
   }
   if (i_set_is_ring) {
     i_set_is_ring = false;

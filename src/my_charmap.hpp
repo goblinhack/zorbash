@@ -64,7 +64,7 @@ public:
     WEAPON_CLASS_B      = ')',
     WEAPON_CLASS_C      = '-',
     WALL                = 'x',
-    WAND_OR_STAFF       = '/',
+    STAFF               = '/',
     RING                = 'R',
   };
 
@@ -100,7 +100,7 @@ public:
   bool is_monst_class_d {false};
   bool is_monst_class_e {false};
   bool is_potion {false};
-  bool is_wand_or_staff {false};
+  bool is_staff {false};
   bool is_ring {false};
   bool is_rock {false};
   bool is_secret_corridor {false};

@@ -332,7 +332,7 @@ int Tp::is_able_to_use_gauntlet(void) const { return _is_able_to_use_gauntlet; }
 int Tp::is_able_to_use_helmet(void) const { return _is_able_to_use_helmet; }
 int Tp::is_able_to_use_rings(void) const { return _is_able_to_use_rings; }
 int Tp::is_able_to_use_shield(void) const { return _is_able_to_use_shield; }
-int Tp::is_able_to_use_wands_or_staffs(void) const { return _is_able_to_use_wands_or_staffs; }
+int Tp::is_able_to_use_staffs(void) const { return _is_able_to_use_staffs; }
 int Tp::is_able_to_use_weapons(void) const { return _is_able_to_use_weapons; }
 int Tp::is_able_to_walk_through_walls(void) const { return _is_able_to_walk_through_walls; }
 int Tp::is_acid(void) const { return _is_acid; }
@@ -433,7 +433,6 @@ int Tp::is_eater_of_rings(void) const { return _is_eater_of_rings; }
 int Tp::is_eater_of_shields(void) const { return _is_eater_of_shields; }
 int Tp::is_eater_of_staffs(void) const { return _is_eater_of_staffs; }
 int Tp::is_eater_of_treasure(void) const { return _is_eater_of_treasure; }
-int Tp::is_eater_of_wands(void) const { return _is_eater_of_wands; }
 int Tp::is_eater_of_weapons(void) const { return _is_eater_of_weapons; }
 int Tp::is_enchantable(void) const { return _is_enchantable; }
 int Tp::is_enchantstone(void) const { return _is_enchantstone; }
@@ -592,8 +591,6 @@ int Tp::is_very_hard(void) const { return _is_very_hard; }
 int Tp::is_very_heavy(void) const { return _is_very_heavy; }
 int Tp::is_wall_dungeon(void) const { return _is_wall_dungeon; }
 int Tp::is_wall(void) const { return _is_wall; }
-int Tp::is_wand_or_staff(void) const { return _is_wand || _is_staff; }
-int Tp::is_wand(void) const { return _is_wand; }
 int Tp::is_weapon_class_a(void) const { return _is_weapon_class_a; }
 int Tp::is_weapon_class_b(void) const { return _is_weapon_class_b; }
 int Tp::is_weapon_class_c(void) const { return _is_weapon_class_c; }
@@ -873,7 +870,7 @@ void Tp::is_able_to_use_gauntlet_set(int v) { _is_able_to_use_gauntlet = v; }
 void Tp::is_able_to_use_helmet_set(int v) { _is_able_to_use_helmet = v; }
 void Tp::is_able_to_use_rings_set(int v) { _is_able_to_use_rings = v; }
 void Tp::is_able_to_use_shield_set(int v) { _is_able_to_use_shield = v; }
-void Tp::is_able_to_use_wands_or_staffs_set(int v) { _is_able_to_use_wands_or_staffs = v; }
+void Tp::is_able_to_use_staffs_set(int v) { _is_able_to_use_staffs = v; }
 void Tp::is_able_to_use_weapons_set(int v) { _is_able_to_use_weapons = v; }
 void Tp::is_able_to_walk_through_walls_set(int v) { _is_able_to_walk_through_walls = v; }
 void Tp::is_acid_set(int v) { _is_acid = v; }
@@ -975,7 +972,6 @@ void Tp::is_eater_of_rings_set(int v) { _is_eater_of_rings = v; }
 void Tp::is_eater_of_shields_set(int v) { _is_eater_of_shields = v; }
 void Tp::is_eater_of_staffs_set(int v) { _is_eater_of_staffs = v; }
 void Tp::is_eater_of_treasure_set(int v) { _is_eater_of_treasure = v; }
-void Tp::is_eater_of_wands_set(int v) { _is_eater_of_wands = v; }
 void Tp::is_eater_of_weapons_set(int v) { _is_eater_of_weapons = v; }
 void Tp::is_enchantable_set(int v) { _is_enchantable = v; }
 void Tp::is_enchantstone_set(int v) { _is_enchantstone = v; }
@@ -1134,7 +1130,6 @@ void Tp::is_very_hard_set(int v) { _is_very_hard = v; }
 void Tp::is_very_heavy_set(int v) { _is_very_heavy = v; }
 void Tp::is_wall_dungeon_set(int v) { _is_wall_dungeon = v; }
 void Tp::is_wall_set(int v) { _is_wall = v; }
-void Tp::is_wand_set(int v) { _is_wand = v; }
 void Tp::is_weapon_class_a_set(int v) { _is_weapon_class_a = v; }
 void Tp::is_weapon_class_b_set(int v) { _is_weapon_class_b = v; }
 void Tp::is_weapon_class_c_set(int v) { _is_weapon_class_c = v; }

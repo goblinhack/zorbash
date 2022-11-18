@@ -206,7 +206,7 @@ public:
   // If things have stopped moving, perform location checks on where theuy
   // are now. This handles things like shoving a monst into a chasm. We do
   // location checks on the ends of moves, but this is a backup and will
-  // also handle things that do not move, like a wand that is now on fire.
+  // also handle things that do not move, like a staff that is now on fire.
   //
   uint32_t tick_last_location_check {(uint32_t) -1 /* std::numeric_limits< uint32_t >::max() */};
   //

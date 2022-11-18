@@ -465,42 +465,42 @@ void Level::is_potion_unset(const int x, const int y)
   decr(_is_potion, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_wand_or_staff(const point p)
+uint8_t Level::is_staff(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
     return false;
   }
-  return (get(_is_wand_or_staff, p.x, p.y));
+  return (get(_is_staff, p.x, p.y));
 }
 
-uint8_t Level::is_wand_or_staff(const int x, const int y)
+uint8_t Level::is_staff(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
     return false;
   }
-  return (get(_is_wand_or_staff, x, y));
+  return (get(_is_staff, x, y));
 }
 
-void Level::is_wand_or_staff_set(const int x, const int y)
+void Level::is_staff_set(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
     return;
   }
   is_map_changed = true;
-  incr(_is_wand_or_staff, x, y, (uint8_t) 1);
+  incr(_is_staff, x, y, (uint8_t) 1);
 }
 
-void Level::is_wand_or_staff_unset(const int x, const int y)
+void Level::is_staff_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
     return;
   }
   is_map_changed = true;
-  decr(_is_wand_or_staff, x, y, (uint8_t) 1);
+  decr(_is_staff, x, y, (uint8_t) 1);
 }
 
 uint8_t Level::is_ring(const point p)

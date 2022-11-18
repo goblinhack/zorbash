@@ -319,7 +319,6 @@ public:
   uint64_t i_set_is_torch                   : 1 {};
   uint64_t i_set_is_treasure_type           : 1 {};
   uint64_t i_set_is_wall                    : 1 {};
-  uint64_t i_set_is_wand                    : 1 {};
   uint64_t i_set_is_wet_grass               : 1 {};
   uint64_t i_set_noise_blocker              : 1 {};
   uint64_t i_set_water                      : 1 {};
@@ -360,7 +359,7 @@ public:
   std::list< Thingp > ring_list(void);
   std::list< Thingp > shield_list(void);
   std::list< Thingp > treasure_list(void);
-  std::list< Thingp > wand_list(void);
+  std::list< Thingp > staff_list(void);
   std::list< Thingp > weapon_list(void);
 
   std::vector< Thingp > amulet_vector(void);
@@ -375,7 +374,7 @@ public:
   std::vector< Thingp > ring_vector(void);
   std::vector< Thingp > shield_vector(void);
   std::vector< Thingp > treasure_vector(void);
-  std::vector< Thingp > wand_vector(void);
+  std::vector< Thingp > staff_vector(void);
   std::vector< Thingp > weapon_vector(void);
 
   ThingShoved try_to_shove(Thingp it, point delta, bool force = false);
@@ -996,10 +995,10 @@ public:
   int carried_shield_highest_value_for_target(Thingp *out, Thingp target);
   int carried_shield_highest_value(Thingp *out);
   int carried_shield_least_value(Thingp *out);
-  int carried_wand_count(void);
-  int carried_wand_highest_value_for_target(Thingp *out, Thingp target);
-  int carried_wand_highest_value(Thingp *out);
-  int carried_wand_least_value(Thingp *out);
+  int carried_staff_count(void);
+  int carried_staff_highest_value_for_target(Thingp *out, Thingp target);
+  int carried_staff_highest_value(Thingp *out);
+  int carried_staff_least_value(Thingp *out);
   int carried_weapon_count(void);
   int carried_weapon_highest_value(Thingp *out);
   int carried_weapon_least_value(Thingp *out);
@@ -1250,7 +1249,7 @@ public:
   int is_able_to_use_helmet(void);
   int is_able_to_use_rings(void);
   int is_able_to_use_shield(void);
-  int is_able_to_use_wands_or_staffs(void);
+  int is_able_to_use_staffs(void);
   int is_able_to_use_weapons(void);
   int is_able_to_walk_through_walls(void);
   int is_acid(void);
@@ -1374,7 +1373,6 @@ public:
   int is_eater_of_shields(void);
   int is_eater_of_staffs(void);
   int is_eater_of_treasure(void);
-  int is_eater_of_wands(void);
   int is_eater_of_weapons(void);
   int is_enchantable(void);
   int is_enchantstone(void);
@@ -1535,8 +1533,6 @@ public:
   int is_very_heavy(void);
   int is_wall_dungeon(void);
   int is_wall(void);
-  int is_wand_or_staff(void);
-  int is_wand(void);
   int is_water(void);
   int is_weapon_class_a(void);
   int is_weapon_class_b(void);

@@ -1861,11 +1861,6 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
   }
 
   if (t->is_staff()) {
-    w->log("Item hits all in path.", TEXT_FORMAT_LHS);
-    printed_something = true;
-  }
-
-  if (t->is_wand()) {
     w->log("Item hits first in path.", TEXT_FORMAT_LHS);
     printed_something = true;
   }

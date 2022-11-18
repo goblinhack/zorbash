@@ -42,7 +42,7 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="wand_fire_carry")
+    tp_init(name="staff_fire_carry")
 
 
 init()

@@ -30,7 +30,7 @@ import my
 # SHALLOW_WATER                 w
 # TRAP                          t
 # WALL                          x
-# WAND_OR_STAFF                 /
+# STAFF                         /
 # SPIDERWEB                     X
 # ICE                           I
 

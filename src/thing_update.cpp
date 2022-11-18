@@ -360,27 +360,27 @@ void Thing::update(void)
     }
   }
 
-  if (is_able_to_use_wands_or_staffs()) {
-    dbg("Is wand equipper");
+  if (is_able_to_use_staffs()) {
+    dbg("Is staff equipper");
     TRACE_AND_INDENT();
 
     if (d1000() < is_carrier_of_treasure_class_a_d1000()) {
-      dbg("New wand class A");
-      auto W = level->thing_new(tp_random_wand_or_staff_class_a(), curr_at, this);
+      dbg("New staff class A");
+      auto W = level->thing_new(tp_random_staff_class_a(), curr_at, this);
       if (W) {
         carried += carry(W);
       }
     }
     if (d1000() < is_carrier_of_treasure_class_b_d1000()) {
-      dbg("New wand class B");
-      auto W = level->thing_new(tp_random_wand_or_staff_class_b(), curr_at, this);
+      dbg("New staff class B");
+      auto W = level->thing_new(tp_random_staff_class_b(), curr_at, this);
       if (W) {
         carried += carry(W);
       }
     }
     if (d1000() < is_carrier_of_treasure_class_c_d1000()) {
-      dbg("New wand class C");
-      auto W = level->thing_new(tp_random_wand_or_staff_class_c(), curr_at, this);
+      dbg("New staff class C");
+      auto W = level->thing_new(tp_random_staff_class_c(), curr_at, this);
       if (W) {
         carried += carry(W);
       }
@@ -467,7 +467,7 @@ void Thing::update(void)
   }
 
   //
-  // Initial equp of weapons
+  // Initial equip of weapons
   //
   if (is_able_to_use_weapons()) {
     dbg("Weapon equip");
@@ -495,21 +495,21 @@ void Thing::update(void)
   }
 
   //
-  // Initial equp of wand
+  // Initial equip of wand
   //
-  if (is_able_to_use_wands_or_staffs()) {
-    dbg("Wand equip");
+  if (is_able_to_use_staffs()) {
+    dbg("Staff equip");
     TRACE_AND_INDENT();
 
-    Thingp best_wand = nullptr;
-    carried_wand_highest_value(&best_wand);
-    if (best_wand) {
-      equip(best_wand, MONST_EQUIP_WEAPON);
+    Thingp best_staff = nullptr;
+    carried_staff_highest_value(&best_staff);
+    if (best_staff) {
+      equip(best_staff, MONST_EQUIP_WEAPON);
     }
   }
 
   //
-  // Initial equp of rings
+  // Initial equip of rings
   //
   if (is_able_to_use_rings()) {
     dbg("Rings equip");

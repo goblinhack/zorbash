@@ -28,7 +28,7 @@ Laser_::Laser_(Levelp level, ThingId thing_id, ThingId victim_id, LaserInfo info
   }
 
   //
-  // Can be either a wand or the projectile itself being fired
+  // Can be either a staff or the projectile itself being fired
   //
   std::string name;
   if (t->is_laser()) {

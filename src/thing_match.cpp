@@ -610,7 +610,7 @@ bool Thing::matches(const std::string &what)
   if (is_wall() && (what == "is_wall")) {
     return true;
   }
-  if (is_wand_or_staff() && (what == "is_wand_or_staff")) {
+  if (is_staff() && (what == "is_staff")) {
     return true;
   }
   if (is_able_to_use_rings() && (what == "is_able_to_use_rings")) {
@@ -823,13 +823,10 @@ bool Thing::matches(const std::string &what)
   if (is_eater_of_rings() && (what == "is_eater_of_rings")) {
     return true;
   }
-  if (is_eater_of_staffs() && (what == "is_eater_of_staffs")) {
-    return true;
-  }
   if (is_eater_of_armor() && (what == "is_eater_of_armor")) {
     return true;
   }
-  if (is_eater_of_wands() && (what == "is_eater_of_wands")) {
+  if (is_eater_of_staffs() && (what == "is_eater_of_staffs")) {
     return true;
   }
   if (is_dry_grass_trampled() && (what == "dry_grass_trampled")) {
@@ -1204,7 +1201,7 @@ bool Thing::matches(const std::string &what)
   if (is_map_beast() && (what == "is_map_beast")) {
     return true;
   }
-  if (is_able_to_use_wands_or_staffs() && (what == "is_able_to_use_wands_or_staffs")) {
+  if (is_able_to_use_staffs() && (what == "is_able_to_use_staffs")) {
     return true;
   }
   if (is_aquatic() && (what == "is_aquatic")) {
@@ -1418,8 +1415,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_able_to_use_shield") {
     return &Thing::is_able_to_use_shield;
   }
-  if (what == "is_able_to_use_wands_or_staffs") {
-    return &Thing::is_able_to_use_wands_or_staffs;
+  if (what == "is_able_to_use_staffs") {
+    return &Thing::is_able_to_use_staffs;
   }
   if (what == "is_able_to_use_weapons") {
     return &Thing::is_able_to_use_weapons;
@@ -2057,9 +2054,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_wall") {
     return &Thing::is_wall;
   }
-  if (what == "is_wand_or_staff") {
-    return &Thing::is_wand_or_staff;
-  }
   if (what == "is_water") {
     return &Thing::is_water;
   }
@@ -2318,17 +2312,14 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_eater_of_rings") {
     return &Thing::is_eater_of_rings;
   }
-  if (what == "is_eater_of_staffs") {
-    return &Thing::is_eater_of_staffs;
-  }
   if (what == "unused_flag6") {
     return &Thing::unused_flag6;
   }
   if (what == "is_eater_of_armor") {
     return &Thing::is_eater_of_armor;
   }
-  if (what == "is_eater_of_wands") {
-    return &Thing::is_eater_of_wands;
+  if (what == "is_eater_of_staffs") {
+    return &Thing::is_eater_of_staffs;
   }
   if (what == "dry_grass_trampled") {
     return &Thing::is_dry_grass_trampled;

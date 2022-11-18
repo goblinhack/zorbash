@@ -381,7 +381,7 @@ bool Thing::fall_to_next_level(void)
         fall_damage = pcg_random_range(20, 50);
       }
 
-      if (is_wand_or_staff() || is_potion() || is_mob() || is_monst()) {
+      if (is_staff() || is_potion() || is_mob() || is_monst()) {
         fall_damage = health() / 2;
       }
 
