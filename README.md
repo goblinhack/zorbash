@@ -234,23 +234,23 @@ Content:
 <!-- begin type marker -->
 - 55 monsters
 - 52 food
-- 26 weapons
 - 19 treasure
-- 12 boots
-- 10 staffs
+- 13 weapons
 - 8 items
-- 8 gauntlets
-- 8 armor
 - 7 buffs
-- 6 cloaks
-- 6 amulets
+- 6 boots
+- 5 staffs
 - 5 keys
-- 4 shield
-- 4 rings
+- 4 gauntlets
 - 4 debuffs
+- 4 armor
 - 3 mobs
 - 3 doors
+- 3 cloaks
+- 3 amulets
 - 2 skills
+- 2 shield
+- 2 rings
 - 2 potions
 - 1 player
 <!-- end type marker -->
