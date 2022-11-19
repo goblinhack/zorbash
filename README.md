@@ -1,5 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - no eat msg                                                                                                                                 -->
+<!-- - popups need alignment                                                                                                                      -->
 <!-- - move damage from lasers to the item                                                                                                        -->
 <!-- - if you enchant a staff of negation does it do more damage?                                                                                 -->
 <!-- - fireskull should die if chilled?                                                                                                           -->
