@@ -206,7 +206,8 @@ void Game::place_player(void)
         auto w = level->thing_new("map_beast", point(x, y));
         t->carry(w);
       }
-      if (1) {
+      if (0) {
+        level->thing_new("cement_man", point(x + 1, y + 1));
         auto w = level->thing_new("staff_negation", point(x, y));
         t->carry(w);
         // t->enchant_without_stone(w);
@@ -345,7 +346,6 @@ void Game::place_player(void)
       // level->player->on_fire_set("");
       // level->thing_new("block_of_ice", point(x, y + 1));
       // level->thing_new("block_of_ice", point(x, y + 2));
-      // level->thing_new("cement_man", point(x + 1, y + 1));
       if (0) {
         level->thing_new("vampire_rose_stem1", point(x - 1, y + 2));
         level->thing_new("vampire_rose_stem2", point(x + 1, y + 2));

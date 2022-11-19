@@ -20,7 +20,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.dmg_negation_chance_d1000(self, 0, 1000)
     my.dmg_negation_dice(self, "1")  # This is the damage when the monst fires
     my.gfx_ascii_shown(self, True)
-    my.is_fire(self, True)
     my.is_laser(self, True)
     my.is_loggable(self, True)
     my.is_no_tile(self, True)

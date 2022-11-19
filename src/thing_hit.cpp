@@ -1045,7 +1045,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       } else if (hitter->is_laser()) {
         real_hitter->msg("%%fg=orange$You zap yourself for %d %sdamage with %s!%%fg=reset$", damage, dmg_type.c_str(),
                          hitter->text_the().c_str());
-      } else if (hitter->is_magical()) {
+      } else if (hitter->is_magical() && hitter->is_item()) {
         real_hitter->msg("%%fg=orange$You blast yourself for %d %sdamage with %s!%%fg=reset$", damage,
                          dmg_type.c_str(), hitter->text_the().c_str());
       } else if (attack_options->attack_fire) {
@@ -1087,7 +1087,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         } else if (hitter->is_laser()) {
           msg("%%fg=red$%s zaps you apart with %s!%%fg=reset$", real_hitter->text_The().c_str(),
               hitter->text_the().c_str());
-        } else if (hitter->is_magical()) {
+        } else if (hitter->is_magical() && hitter->is_item()) {
           msg("%%fg=red$%s blasts you into pieces with %s!%%fg=reset$", real_hitter->text_The().c_str(),
               hitter->text_the().c_str());
         } else if (hitter->is_projectile() || hitter->is_laser()) {
@@ -1155,7 +1155,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         } else if (hitter->is_laser()) {
           msg("%%fg=orange$%s zaps you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
               dmg_type.c_str(), hitter->text_the().c_str());
-        } else if (hitter->is_magical()) {
+        } else if (hitter->is_magical() && hitter->is_item()) {
           msg("%%fg=orange$%s blasts you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
               damage, dmg_type.c_str(), hitter->text_the().c_str());
         } else if (hitter->is_projectile() || hitter->is_laser()) {
@@ -1288,7 +1288,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
           } else if (hitter->is_laser()) {
             real_hitter->msg("You zap %s for %d %sdamage with %s.", text_the().c_str(), damage, dmg_type.c_str(),
                              hitter->text_the().c_str());
-          } else if (hitter->is_magical()) {
+          } else if (hitter->is_magical() && hitter->is_item()) {
             real_hitter->msg("You blast %s for %d %sdamage with %s.", text_the().c_str(), damage, dmg_type.c_str(),
                              hitter->text_the().c_str());
           } else {
@@ -1350,7 +1350,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         real_hitter->msg("You hit %s.", text_the().c_str());
       } else if (hitter->is_laser()) {
         real_hitter->msg("You zap %s.", text_the().c_str());
-      } else if (hitter->is_magical()) {
+      } else if (hitter->is_magical() && hitter->is_item()) {
         real_hitter->msg("You blast %s.", text_the().c_str());
       } else {
         real_hitter->msg("You hit %s.", text_the().c_str());
@@ -1377,7 +1377,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         }
       } else if (hitter->is_laser()) {
         real_hitter->msg("You zap %s.", text_the().c_str());
-      } else if (hitter->is_magical()) {
+      } else if (hitter->is_magical() && hitter->is_item()) {
         real_hitter->msg("You blast %s.", text_the().c_str());
       } else {
         hitter->msg("You hit %s.", text_the().c_str());
@@ -1394,7 +1394,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
       } else if (hitter->is_laser()) {
         real_hitter->msg("You zap %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
-      } else if (hitter->is_magical()) {
+      } else if (hitter->is_magical() && hitter->is_item()) {
         real_hitter->msg("You blast %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
       } else {
         real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());

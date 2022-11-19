@@ -37,7 +37,7 @@ def tp_init(name, text_long_name):
     my.attack_living(self, True)
     my.attack_lunge(self, True)
     my.attack_meat(self, True)
-    my.attacks_per_round(self, 2)
+    my.attacks_per_round(self, 1)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.distance_vision(self, 5)

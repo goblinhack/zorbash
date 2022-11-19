@@ -150,7 +150,7 @@ bool Game::tick_end(void)
         time_ms() - game->tick_begin_ms);
   }
 
-  DBG("-");
+  CON("-");
 
   if (level) {
     level->update();

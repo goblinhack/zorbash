@@ -105,6 +105,14 @@ void Thing::weapon_check_for_dmg(Thingp weapon, Thingp victim)
     }
   }
 
+  if (is_wooden()) {
+    damaged_chance *= 2;
+  }
+
+  if (is_rusty()) {
+    damaged_chance *= 2;
+  }
+
   //
   // If the thing we're hitting is harder than us, then increase
   // the chance of damage.

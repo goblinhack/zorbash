@@ -1119,7 +1119,7 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
         if (i_rolled == 20) {
           attack_options->crit = true;
           hit                  = true;
-          IF_DEBUG
+          IF_DEBUG2
           {
             dbg("Attack on %s: ATT %s DEF %d(%s), to-hit %d, rolled %d -> crit", victim->to_short_string().c_str(),
                 modifier_to_string(att_roll_modifier).c_str(), stat_def, modifier_to_string(def_bonus).c_str(),
@@ -1128,7 +1128,7 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
         } else if (i_rolled == 1) {
           hit    = false;
           fumble = true;
-          IF_DEBUG
+          IF_DEBUG2
           {
             dbg("Attack on %s: ATT %s DEF %d(%s), to-hit %d, rolled %d -> fumble", victim->to_short_string().c_str(),
                 modifier_to_string(att_roll_modifier).c_str(), stat_def, modifier_to_string(def_bonus).c_str(),
@@ -1137,7 +1137,7 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
         } else {
           i_rolled += att_roll_modifier;
           hit = i_rolled >= to_hit;
-          IF_DEBUG
+          IF_DEBUG2
           {
             dbg("Attack on %s: ATT %s(%s,%s) DEF %d(%s), to-hit %d, rolled %d -> %s",
                 victim->to_short_string().c_str(), modifier_to_string(att_roll_modifier).c_str(),
@@ -1247,16 +1247,18 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
         //
         // See if the weapon crumbles
         //
-        auto my_owner = top_owner();
-        if (my_owner) {
-          auto weapon = my_owner->equip_get(MONST_EQUIP_WEAPON);
-          if (weapon) {
-            weapon_check_for_dmg(weapon, victim);
-          }
+        if (is_weapon()) {
+          auto my_owner = top_owner();
+          if (my_owner) {
+            auto weapon = my_owner->equip_get(MONST_EQUIP_WEAPON);
+            if (weapon) {
+              weapon_check_for_dmg(weapon, victim);
+            }
 
-          auto gauntlet = my_owner->equip_get(MONST_EQUIP_GAUNTLET);
-          if (gauntlet) {
-            weapon_check_for_dmg(gauntlet, victim);
+            auto gauntlet = my_owner->equip_get(MONST_EQUIP_GAUNTLET);
+            if (gauntlet) {
+              weapon_check_for_dmg(gauntlet, victim);
+            }
           }
         }
 
@@ -1323,8 +1325,7 @@ int Thing::is_attacked_with_dmg_melee(Thingp hitter, Thingp real_hitter, int dam
 {
   TRACE_NO_INDENT();
   AttackOptions attack_options {};
-  attack_options.attack_digest = true;
-  attack_options.real_hitter   = real_hitter;
+  attack_options.real_hitter = real_hitter;
   return is_hit(hitter, &attack_options, damage);
 }
 
