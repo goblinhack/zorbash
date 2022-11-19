@@ -142,7 +142,6 @@ private:
   int _collision_hit_two_tiles_ahead {};
   int _consume_per_bite_amount {};
   int _crit_chance_d10000 {};
-  int _dmgd_chance_d10000 {};
   int _distance_avoid {};
   int _distance_leader_max {};
   int _distance_minion_vision_shared {};
@@ -150,6 +149,7 @@ private:
   int _distance_recruitment_max {};
   int _distance_throw {};
   int _distance_vision {};
+  int _dmgd_chance_d10000 {};
   int _dmg_received_doubled_from_acid {};
   int _dmg_received_doubled_from_cold {};
   int _dmg_received_doubled_from_fire {};

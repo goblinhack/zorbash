@@ -1231,12 +1231,12 @@ void Tp::on_owner_receive_dmg_digest_do_set(const std::string &v) { _on_owner_re
 void Tp::on_owner_receive_dmg_draining_do_set(const std::string &v) { _on_owner_receive_dmg_draining_do = v; }
 void Tp::on_owner_receive_dmg_drown_do_set(const std::string &v) { _on_owner_receive_dmg_drown_do = v; }
 void Tp::on_owner_receive_dmg_energy_do_set(const std::string &v) { _on_owner_receive_dmg_energy_do = v; }
-void Tp::on_owner_receive_dmg_negation_do_set(const std::string &v) { _on_owner_receive_dmg_negation_do = v; }
 void Tp::on_owner_receive_dmg_fire_do_set(const std::string &v) { _on_owner_receive_dmg_fire_do = v; }
 void Tp::on_owner_receive_dmg_lightning_do_set(const std::string &v) { _on_owner_receive_dmg_lightning_do = v; }
 void Tp::on_owner_receive_dmg_melee_do_set(const std::string &v) { _on_owner_receive_dmg_melee_do = v; }
 void Tp::on_owner_receive_dmg_nat_att_do_set(const std::string &v) { _on_owner_receive_dmg_nat_att_do = v; }
 void Tp::on_owner_receive_dmg_necrosis_do_set(const std::string &v) { _on_owner_receive_dmg_necrosis_do = v; }
+void Tp::on_owner_receive_dmg_negation_do_set(const std::string &v) { _on_owner_receive_dmg_negation_do = v; }
 void Tp::on_owner_receive_dmg_poison_do_set(const std::string &v) { _on_owner_receive_dmg_poison_do = v; }
 void Tp::on_owner_receive_dmg_stat_att_do_set(const std::string &v) { _on_owner_receive_dmg_stat_att_do = v; }
 void Tp::on_owner_receive_dmg_stat_con_do_set(const std::string &v) { _on_owner_receive_dmg_stat_con_do = v; }

@@ -137,6 +137,7 @@ def tp_init(name, text_long_name):
     my.is_intelligent(self, True)
     my.is_interesting(self, True)
     my.is_loggable(self, True)
+    my.is_magical(self, True)
     my.is_monst_class_c(self, True)
     my.is_monst(self, True)
     my.is_moveable(self, True)

@@ -210,13 +210,13 @@ public:
   void wid_thing_info_add_carry_info(WidPopup *w, Thingp t);
   void wid_thing_info_add_charge_count(WidPopup *w, Thingp t);
   void wid_thing_info_add_crit_chance(WidPopup *w, Thingp t);
-  void wid_thing_info_add_dmgd_chance(WidPopup *w, Thingp t);
   void wid_thing_info_add_danger_level(WidPopup *w, Thingp t);
   void wid_thing_info_add_dmg_acid(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_dmg_bite(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_dmg_claw(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_dmg_cold(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_dmg_crush(WidPopup *w, Thingp t, int index);
+  void wid_thing_info_add_dmgd_chance(WidPopup *w, Thingp t);
   void wid_thing_info_add_dmg_digest(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_dmg_draining(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_dmg_drown(WidPopup *w, Thingp t, int index);

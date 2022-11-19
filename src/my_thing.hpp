@@ -2023,8 +2023,8 @@ public:
   int unused_flag9(void);
   int value(const Thingp it);
   int weapon_dmgd_pct(void);
-  int weapon_dmg(void);
   int weapon_dmg_modify(int damage);
+  int weapon_dmg(void);
   int worth_collecting(const Thingp it);
   int worth_collecting(const Thingp it, Thingp *would_need_to_drop);
   // end sort marker2 }
