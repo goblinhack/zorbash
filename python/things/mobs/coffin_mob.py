@@ -21,8 +21,8 @@ def tp_init(name, text_long_name):
     # begin sort marker
     my.collision_check(self, True)
     my.collision_hit_priority(self, 10)
-    my.damage_received_doubled_from_fire(self, True)
-    my.damage_received_doubled_from_water(self, True)
+    my.dmg_received_doubled_from_fire(self, True)
+    my.dmg_received_doubled_from_water(self, True)
     my.environ_avoids_acid(self, 100)
     my.environ_avoids_fire(self, 10)
     my.environ_avoids_water(self, 100)

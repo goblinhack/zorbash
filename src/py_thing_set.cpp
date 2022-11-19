@@ -71,9 +71,9 @@
 THING_BODY_SET_INT(thing_charge_count_decr, charge_count_decr)
 THING_BODY_SET_INT(thing_charge_count_incr, charge_count_incr)
 
-THING_BODY_SET_INT(thing_damage_current_decr, damage_current_decr)
-THING_BODY_SET_INT(thing_damage_current_incr, damage_current_incr)
-THING_BODY_SET_INT(thing_damage_current_set, damage_current_set)
+THING_BODY_SET_INT(thing_dmg_current_decr, dmg_current_decr)
+THING_BODY_SET_INT(thing_dmg_current_incr, dmg_current_incr)
+THING_BODY_SET_INT(thing_dmg_current_set, dmg_current_set)
 
 THING_BODY_SET_INT(thing_enchant_decr, enchant_decr)
 THING_BODY_SET_INT(thing_enchant_incr, enchant_incr)

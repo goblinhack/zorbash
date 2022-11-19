@@ -735,7 +735,7 @@ public:
   // end sort marker1 }
 
   int total_monst_hp_level(void);
-  int total_monst_damage_level(void);
+  int total_monst_dmg_level(void);
   int total_loot_level(void);
   int total_food_level(void);
 

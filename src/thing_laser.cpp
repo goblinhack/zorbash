@@ -49,7 +49,7 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
     //
     // Get the damage from the enchanted wand, so the blast inflicts that damage.
     //
-    damage_current_set(item->damage_current());
+    dmg_current_set(item->dmg_current());
     return true;
   }
 
@@ -136,12 +136,12 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, Thi
     dbg("Firing laser effect");
     TRACE_AND_INDENT();
 
-    auto collatoral_damage = in_the_way_for_firing(curr_at, target->curr_at);
-    if (collatoral_damage.size()) {
+    auto collatoral_dmg = in_the_way_for_firing(curr_at, target->curr_at);
+    if (collatoral_dmg.size()) {
       dbg("Firing laser effect (collatoral damage)");
       TRACE_AND_INDENT();
 
-      for (auto target : collatoral_damage) {
+      for (auto target : collatoral_dmg) {
         //
         // Ignore things that are too close
         //

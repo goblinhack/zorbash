@@ -112,7 +112,7 @@ void tp_fixup(void)
     }
 
     if (tp->is_poisonous_danger_level()) {
-      if (tp->damage_poison_dice_str().empty()) {
+      if (tp->dmg_poison_dice_str().empty()) {
         DIE("Tp %s needs a poison danger level set?", tp->name().c_str());
       }
     }
@@ -179,22 +179,23 @@ void tp_fixup(void)
     //
     int num_attack_types = 0;
 
-    num_attack_types += tp->damage_melee() ? 1 : 0;
-    num_attack_types += tp->damage_nat_att() ? 1 : 0;
-    num_attack_types += tp->damage_poison() ? 1 : 0;
-    num_attack_types += tp->damage_drown() ? 1 : 0;
-    num_attack_types += tp->damage_bite() ? 1 : 0;
-    num_attack_types += tp->damage_claw() ? 1 : 0;
-    num_attack_types += tp->damage_cold() ? 1 : 0;
-    num_attack_types += tp->damage_fire() ? 1 : 0;
-    num_attack_types += tp->damage_crush() ? 1 : 0;
-    num_attack_types += tp->damage_lightning() ? 1 : 0;
-    num_attack_types += tp->damage_energy() ? 1 : 0;
-    num_attack_types += tp->damage_acid() ? 1 : 0;
-    num_attack_types += tp->damage_water() ? 1 : 0;
-    num_attack_types += tp->damage_digest() ? 1 : 0;
-    num_attack_types += tp->damage_necrosis() ? 1 : 0;
-    num_attack_types += tp->damage_draining() ? 1 : 0;
+    num_attack_types += tp->dmg_melee() ? 1 : 0;
+    num_attack_types += tp->dmg_nat_att() ? 1 : 0;
+    num_attack_types += tp->dmg_poison() ? 1 : 0;
+    num_attack_types += tp->dmg_drown() ? 1 : 0;
+    num_attack_types += tp->dmg_bite() ? 1 : 0;
+    num_attack_types += tp->dmg_claw() ? 1 : 0;
+    num_attack_types += tp->dmg_cold() ? 1 : 0;
+    num_attack_types += tp->dmg_fire() ? 1 : 0;
+    num_attack_types += tp->dmg_crush() ? 1 : 0;
+    num_attack_types += tp->dmg_lightning() ? 1 : 0;
+    num_attack_types += tp->dmg_energy() ? 1 : 0;
+    num_attack_types += tp->dmg_negation() ? 1 : 0;
+    num_attack_types += tp->dmg_acid() ? 1 : 0;
+    num_attack_types += tp->dmg_water() ? 1 : 0;
+    num_attack_types += tp->dmg_digest() ? 1 : 0;
+    num_attack_types += tp->dmg_necrosis() ? 1 : 0;
+    num_attack_types += tp->dmg_draining() ? 1 : 0;
 
     //
     // If only a single attack type then make sure it is 1000%
@@ -203,53 +204,56 @@ void tp_fixup(void)
       if (num_attack_types == 1) {
         int attack_index = 0;
 
-        if (tp->damage_acid() > 0) {
-          tp->damage_acid_chance_d1000_set(attack_index, 1000);
+        if (tp->dmg_acid() > 0) {
+          tp->dmg_acid_chance_d1000_set(attack_index, 1000);
         }
-        if (tp->damage_water() > 0) {
-          tp->damage_water_chance_d1000_set(attack_index, 1000);
+        if (tp->dmg_water() > 0) {
+          tp->dmg_water_chance_d1000_set(attack_index, 1000);
         }
-        if (tp->damage_nat_att() > 0) {
-          tp->damage_nat_att_chance_d1000_set(attack_index, 1000);
+        if (tp->dmg_nat_att() > 0) {
+          tp->dmg_nat_att_chance_d1000_set(attack_index, 1000);
         }
-        if (tp->damage_crush() > 0) {
-          tp->damage_crush_chance_d1000_set(attack_index, 1000);
+        if (tp->dmg_crush() > 0) {
+          tp->dmg_crush_chance_d1000_set(attack_index, 1000);
         }
-        if (tp->damage_digest() > 0) {
-          tp->damage_digest_chance_d1000_set(attack_index, 1000);
+        if (tp->dmg_digest() > 0) {
+          tp->dmg_digest_chance_d1000_set(attack_index, 1000);
         }
-        if (tp->damage_energy() > 0) {
-          tp->damage_energy_chance_d1000_set(attack_index, 1000);
+        if (tp->dmg_energy() > 0) {
+          tp->dmg_energy_chance_d1000_set(attack_index, 1000);
         }
-        if (tp->damage_fire() > 0) {
-          tp->damage_fire_chance_d1000_set(attack_index, 1000);
+        if (tp->dmg_negation() > 0) {
+          tp->dmg_negation_chance_d1000_set(attack_index, 1000);
         }
-        if (tp->damage_drown() > 0) {
-          tp->damage_drown_chance_d1000_set(attack_index, 1000);
+        if (tp->dmg_fire() > 0) {
+          tp->dmg_fire_chance_d1000_set(attack_index, 1000);
         }
-        if (tp->damage_bite() > 0) {
-          tp->damage_bite_chance_d1000_set(attack_index, 1000);
+        if (tp->dmg_drown() > 0) {
+          tp->dmg_drown_chance_d1000_set(attack_index, 1000);
         }
-        if (tp->damage_claw() > 0) {
-          tp->damage_claw_chance_d1000_set(attack_index, 1000);
+        if (tp->dmg_bite() > 0) {
+          tp->dmg_bite_chance_d1000_set(attack_index, 1000);
         }
-        if (tp->damage_cold() > 0) {
-          tp->damage_cold_chance_d1000_set(attack_index, 1000);
+        if (tp->dmg_claw() > 0) {
+          tp->dmg_claw_chance_d1000_set(attack_index, 1000);
         }
-        if (tp->damage_lightning() > 0) {
-          tp->damage_lightning_chance_d1000_set(attack_index, 1000);
+        if (tp->dmg_cold() > 0) {
+          tp->dmg_cold_chance_d1000_set(attack_index, 1000);
         }
-        if (tp->damage_melee() > 0) {
-          tp->damage_melee_chance_d1000_set(attack_index, 1000);
+        if (tp->dmg_lightning() > 0) {
+          tp->dmg_lightning_chance_d1000_set(attack_index, 1000);
         }
-        if (tp->damage_necrosis() > 0) {
-          tp->damage_necrosis_chance_d1000_set(attack_index, 1000);
+        if (tp->dmg_melee() > 0) {
+          tp->dmg_melee_chance_d1000_set(attack_index, 1000);
         }
-        if (tp->damage_draining() > 0) {
-          tp->damage_draining_chance_d1000_set(attack_index, 1000);
+        if (tp->dmg_necrosis() > 0) {
+          tp->dmg_necrosis_chance_d1000_set(attack_index, 1000);
         }
-        if (tp->damage_poison() > 0) {
-          tp->damage_poison_chance_d1000_set(attack_index, 1000);
+        if (tp->dmg_draining() > 0) {
+          tp->dmg_draining_chance_d1000_set(attack_index, 1000);
+        }
+        if (tp->dmg_poison() > 0) {
+          tp->dmg_poison_chance_d1000_set(attack_index, 1000);
         }
       }
     }

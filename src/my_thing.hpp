@@ -59,77 +59,80 @@ typedef struct {
   bool radial_effect;
 } UseOptions;
 
-typedef struct {
+typedef class AttackOptions_
+{
+public:
   //
   // If given a real hitter, prefer that; for example a player slamming a door on a monster.
   // real_hitter would be the player. hitter would be the door.
   //
-  Thingp real_hitter;
+  Thingp real_hitter {};
   //
   // Return values
   //
-  bool victim_attacked;
-  bool victim_overlaps;
+  bool victim_attacked {};
+  bool victim_overlaps {};
   //
   // Allowed to hit solid rock. Normally disabled to avoid weapon damage.
   // Enabled if you click on a rock.
   //
-  bool allow_hitting_walls;
+  bool allow_hitting_walls {};
   //
   // Monst is using its natural attack.
   //
-  bool nat_att;
+  bool nat_att {};
   //
   // Prefer natural attack.
   //
-  bool prefer_nat_att;
+  bool prefer_nat_att {};
   //
   // Can also shove.
   //
-  bool shove_allowed;
+  bool shove_allowed {};
   //
   // Critical hit.
   //
-  bool crit;
+  bool crit {};
   //
   // Used in moving to pass on intent to attack.
   //
-  bool attack_allowed;
+  bool attack_allowed {};
   //
   // If attack_at is not set, we should look around for a target.
   //
-  bool attack_at_set;
+  bool attack_at_set {};
   //
   // Attack types;
   //
-  bool attack_water;
-  bool attack_acid;
-  bool attack_cold;
-  bool attack_crush;
-  bool attack_digest;
-  bool attack_draining;
-  bool attack_energy;
-  bool attack_fire;
-  bool attack_drown;
-  bool attack_bite;
-  bool attack_claw;
-  bool attack_lightning;
-  bool attack_natural;
-  bool attack_necrosis;
-  bool attack_poison;
+  bool attack_water {};
+  bool attack_acid {};
+  bool attack_cold {};
+  bool attack_crush {};
+  bool attack_digest {};
+  bool attack_draining {};
+  bool attack_energy {};
+  bool attack_negation {};
+  bool attack_fire {};
+  bool attack_drown {};
+  bool attack_bite {};
+  bool attack_claw {};
+  bool attack_lightning {};
+  bool attack_natural {};
+  bool attack_necrosis {};
+  bool attack_poison {};
   //
   // Set if damage is already pre calculated
   //
-  bool damage_set;
-  int  damage;
+  bool dmg_set {};
+  int  damage {};
   //
   // For multiple attacks, which one is this?
   //
-  unsigned char attack_num;
+  unsigned char attack_num {};
   //
   // How many attempts to find a target
   //
-  unsigned char attempt;
+  unsigned char attempt {};
   //
   // Where we want to attack
   //
@@ -634,8 +637,8 @@ public:
   bool teleport_randomly(void);
   bool temperature_max_is_set(void);
   bool temperature_min_is_set(void);
-  bool thing_check_for_cold_damage(void);
-  bool thing_check_for_heat_damage(void);
+  bool thing_check_for_cold_dmg(void);
+  bool thing_check_for_heat_dmg(void);
   bool thing_sound_play_channel(int chan, const std::string &alias);
   bool thing_sound_play(const std::string &alias);
   bool throw_item_choose_target(Thingp item);
@@ -685,22 +688,23 @@ public:
 
   std::vector< std::string > on_get_text_long_description(void);
 
-  const Dice &damage_water_dice(void);
-  const Dice &damage_acid_dice(void);
-  const Dice &damage_cold_dice(void);
-  const Dice &damage_crush_dice(void);
-  const Dice &damage_digest_dice(void);
-  const Dice &damage_draining_dice(void);
-  const Dice &damage_energy_dice(void);
-  const Dice &damage_fire_dice(void);
-  const Dice &damage_drown_dice(void);
-  const Dice &damage_bite_dice(void);
-  const Dice &damage_claw_dice(void);
-  const Dice &damage_lightning_dice(void);
-  const Dice &damage_melee_dice(void);
-  const Dice &damage_nat_att_dice(void);
-  const Dice &damage_necrosis_dice(void);
-  const Dice &damage_poison_dice(void);
+  const Dice &dmg_water_dice(void);
+  const Dice &dmg_acid_dice(void);
+  const Dice &dmg_cold_dice(void);
+  const Dice &dmg_crush_dice(void);
+  const Dice &dmg_digest_dice(void);
+  const Dice &dmg_draining_dice(void);
+  const Dice &dmg_energy_dice(void);
+  const Dice &dmg_negation_dice(void);
+  const Dice &dmg_fire_dice(void);
+  const Dice &dmg_drown_dice(void);
+  const Dice &dmg_bite_dice(void);
+  const Dice &dmg_claw_dice(void);
+  const Dice &dmg_lightning_dice(void);
+  const Dice &dmg_melee_dice(void);
+  const Dice &dmg_nat_att_dice(void);
+  const Dice &dmg_necrosis_dice(void);
+  const Dice &dmg_poison_dice(void);
 
   const Dice &gold_value_dice(void);
   const Dice &health_initial_dice(void);
@@ -738,28 +742,29 @@ public:
 
   const fpoint &interpolated_at_get(void);
 
-  const std::string damage_acid_dice_str(void);
-  const std::string damage_water_dice_str(void);
-  const std::string damage_cold_dice_str(void);
-  const std::string damage_crush_dice_str(void);
-  const std::string damage_digest_dice_str(void);
-  const std::string damage_draining_dice_str(void);
-  const std::string damage_energy_dice_str(void);
-  const std::string damage_fire_dice_str(void);
-  const std::string damage_drown_dice_str(void);
-  const std::string damage_bite_dice_str(void);
-  const std::string damage_claw_dice_str(void);
-  const std::string damage_lightning_dice_str(void);
-  const std::string damage_melee_dice_str(void);
-  const std::string damage_nat_att_dice_str(void);
-  const std::string damage_necrosis_dice_str(void);
-  const std::string damage_poison_dice_str(void);
+  const std::string dmg_acid_dice_str(void);
+  const std::string dmg_water_dice_str(void);
+  const std::string dmg_cold_dice_str(void);
+  const std::string dmg_crush_dice_str(void);
+  const std::string dmg_digest_dice_str(void);
+  const std::string dmg_draining_dice_str(void);
+  const std::string dmg_energy_dice_str(void);
+  const std::string dmg_negation_dice_str(void);
+  const std::string dmg_fire_dice_str(void);
+  const std::string dmg_drown_dice_str(void);
+  const std::string dmg_bite_dice_str(void);
+  const std::string dmg_claw_dice_str(void);
+  const std::string dmg_lightning_dice_str(void);
+  const std::string dmg_melee_dice_str(void);
+  const std::string dmg_nat_att_dice_str(void);
+  const std::string dmg_necrosis_dice_str(void);
+  const std::string dmg_poison_dice_str(void);
   const std::string danger_level_str(Thingp); // Cannot return reference
   const std::string text_long_description2(void);
   const std::string text_long_description3(void);
   const std::string text_long_description(void);
 
-  const std::string &damage_nat_att_type(void);
+  const std::string &dmg_nat_att_type(void);
   const std::string &dead_reason_get(void);
   const std::string &equip_carry_anim(void);
   const std::string &gfx_anim_use(void);
@@ -777,6 +782,7 @@ public:
   const std::string &on_attacking_dmg_digest_do(void);
   const std::string &on_attacking_dmg_draining_do(void);
   const std::string &on_attacking_dmg_energy_do(void);
+  const std::string &on_attacking_dmg_negation_do(void);
   const std::string &on_attacking_dmg_fire_do(void);
   const std::string &on_attacking_dmg_drown_do(void);
   const std::string &on_attacking_dmg_bite_do(void);
@@ -814,6 +820,7 @@ public:
   const std::string &on_owner_attack_dmg_digest_do(void);
   const std::string &on_owner_attack_dmg_draining_do(void);
   const std::string &on_owner_attack_dmg_energy_do(void);
+  const std::string &on_owner_attack_dmg_negation_do(void);
   const std::string &on_owner_attack_dmg_fire_do(void);
   const std::string &on_owner_attack_dmg_drown_do(void);
   const std::string &on_owner_attack_dmg_bite_do(void);
@@ -833,6 +840,7 @@ public:
   const std::string &on_owner_receive_dmg_digest_do(void);
   const std::string &on_owner_receive_dmg_draining_do(void);
   const std::string &on_owner_receive_dmg_energy_do(void);
+  const std::string &on_owner_receive_dmg_negation_do(void);
   const std::string &on_owner_receive_dmg_fire_do(void);
   const std::string &on_owner_receive_dmg_drown_do(void);
   const std::string &on_owner_receive_dmg_bite_do(void);
@@ -854,6 +862,7 @@ public:
   const std::string &on_receiving_dmg_digest_do(void);
   const std::string &on_receiving_dmg_draining_do(void);
   const std::string &on_receiving_dmg_energy_do(void);
+  const std::string &on_receiving_dmg_negation_do(void);
   const std::string &on_receiving_dmg_fire_do(void);
   const std::string &on_receiving_dmg_drown_do(void);
   const std::string &on_receiving_dmg_bite_do(void);
@@ -1008,7 +1017,7 @@ public:
   int charge_count_incr(void);
   int charge_count_set(int);
   int charge_count(void);
-  int collateral_damage_pct(void);
+  int collateral_dmg_pct(void);
   int collision_check(void);
   int collision_hit_180(void);
   int collision_hit_360(void);
@@ -1017,22 +1026,6 @@ public:
   int collision_hit_two_tiles_ahead(void);
   int consume_per_bite_amount(void);
   int crit_chance_d10000(void);
-  int damage_acid_chance_d1000(int);
-  int damage_acid(void);
-  int damage_bite_chance_d1000(int);
-  int damage_bite(void);
-  int damage_claw_chance_d1000(int);
-  int damage_claw(void);
-  int damage_cold_chance_d1000(int);
-  int damage_cold(void);
-  int damage_crush_chance_d1000(int);
-  int damage_crush(void);
-  int damage_current_decr(int);
-  int damage_current_decr(void);
-  int damage_current_incr(int);
-  int damage_current_incr(void);
-  int damage_current_set(int);
-  int damage_current(void);
   int damaged_chance_d10000(void);
   int damaged_count_decr(int);
   int damaged_count_decr(void);
@@ -1040,36 +1033,6 @@ public:
   int damaged_count_incr(void);
   int damaged_count_set(int);
   int damaged_count(void);
-  int damage_digest_chance_d1000(int);
-  int damage_digest(void);
-  int damage_draining_chance_d1000(int);
-  int damage_draining(void);
-  int damage_drown_chance_d1000(int);
-  int damage_drown(void);
-  int damage_energy_chance_d1000(int);
-  int damage_energy(void);
-  int damage_fire_chance_d1000(int);
-  int damage_fire(void);
-  int damage_lightning_chance_d1000(int);
-  int damage_lightning(void);
-  int damage_max(void);
-  int damage_melee_chance_d1000(int);
-  int damage_melee(void);
-  int damage_min(void);
-  int damage_nat_att_chance_d1000(int);
-  int damage_nat_att(void);
-  int damage_necrosis_chance_d1000(int);
-  int damage_necrosis(void);
-  int damage_poison_chance_d1000(int);
-  int damage_poison(void);
-  int damage_received_doubled_from_acid(void);
-  int damage_received_doubled_from_cold(void);
-  int damage_received_doubled_from_fire(void);
-  int damage_received_doubled_from_necrosis(void);
-  int damage_received_doubled_from_poison(void);
-  int damage_received_doubled_from_water(void);
-  int damage_water_chance_d1000(int);
-  int damage_water(void);
   int danger_current_level(Thingp);
   int danger_current_level(void);
   int danger_initial_level(Thingp);
@@ -1085,6 +1048,54 @@ public:
   int distance_throw_set(int);
   int distance_to_player_on_different_level(void);
   int distance_to_player(void);
+  int dmg_acid_chance_d1000(int);
+  int dmg_acid(void);
+  int dmg_bite_chance_d1000(int);
+  int dmg_bite(void);
+  int dmg_claw_chance_d1000(int);
+  int dmg_claw(void);
+  int dmg_cold_chance_d1000(int);
+  int dmg_cold(void);
+  int dmg_crush_chance_d1000(int);
+  int dmg_crush(void);
+  int dmg_current_decr(int);
+  int dmg_current_decr(void);
+  int dmg_current_incr(int);
+  int dmg_current_incr(void);
+  int dmg_current_set(int);
+  int dmg_current(void);
+  int dmg_digest_chance_d1000(int);
+  int dmg_digest(void);
+  int dmg_draining_chance_d1000(int);
+  int dmg_draining(void);
+  int dmg_drown_chance_d1000(int);
+  int dmg_drown(void);
+  int dmg_energy_chance_d1000(int);
+  int dmg_energy(void);
+  int dmg_fire_chance_d1000(int);
+  int dmg_fire(void);
+  int dmg_lightning_chance_d1000(int);
+  int dmg_lightning(void);
+  int dmg_max(void);
+  int dmg_melee_chance_d1000(int);
+  int dmg_melee(void);
+  int dmg_min(void);
+  int dmg_nat_att_chance_d1000(int);
+  int dmg_nat_att(void);
+  int dmg_necrosis_chance_d1000(int);
+  int dmg_necrosis(void);
+  int dmg_negation_chance_d1000(int);
+  int dmg_negation(void);
+  int dmg_poison_chance_d1000(int);
+  int dmg_poison(void);
+  int dmg_received_doubled_from_acid(void);
+  int dmg_received_doubled_from_cold(void);
+  int dmg_received_doubled_from_fire(void);
+  int dmg_received_doubled_from_necrosis(void);
+  int dmg_received_doubled_from_poison(void);
+  int dmg_received_doubled_from_water(void);
+  int dmg_water_chance_d1000(int);
+  int dmg_water(void);
   int enchant_decr(int);
   int enchant_decr(void);
   int enchant_get(void);
@@ -1266,22 +1277,23 @@ public:
   int is_asleep_initially(void);
   int is_attackable_by_monst(void);
   int is_attackable_by_player(void);
-  int is_attacked_with_damage_acid(Thingp hitter, Thingp real_hitter, int damage);
-  int is_attacked_with_damage_bite(Thingp hitter, Thingp real_hitter, int damage);
-  int is_attacked_with_damage_claw(Thingp hitter, Thingp real_hitter, int damage);
-  int is_attacked_with_damage_cold(Thingp hitter, Thingp real_hitter, int damage);
-  int is_attacked_with_damage_crush(Thingp hitter, Thingp real_hitter, int damage);
-  int is_attacked_with_damage_digest(Thingp hitter, Thingp real_hitter, int damage);
-  int is_attacked_with_damage_draining(Thingp hitter, Thingp real_hitter, int damage);
-  int is_attacked_with_damage_drown(Thingp hitter, Thingp real_hitter, int damage);
-  int is_attacked_with_damage_energy(Thingp hitter, Thingp real_hitter, int damage);
-  int is_attacked_with_damage_fire(Thingp hitter, Thingp real_hitter, int damage);
-  int is_attacked_with_damage_lightning(Thingp hitter, Thingp real_hitter, int damage);
-  int is_attacked_with_damage_melee(Thingp hitter, Thingp real_hitter, int damage);
-  int is_attacked_with_damage_nat_att(Thingp hitter, Thingp real_hitter, int damage);
-  int is_attacked_with_damage_necrosis(Thingp hitter, Thingp real_hitter, int damage);
-  int is_attacked_with_damage_poison(Thingp hitter, Thingp real_hitter, int damage);
-  int is_attacked_with_damage_water(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_dmg_acid(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_dmg_bite(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_dmg_claw(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_dmg_cold(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_dmg_crush(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_dmg_digest(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_dmg_draining(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_dmg_drown(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_dmg_energy(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_dmg_fire(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_dmg_lightning(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_dmg_melee(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_dmg_nat_att(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_dmg_necrosis(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_dmg_negation(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_dmg_poison(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_dmg_water(Thingp hitter, Thingp real_hitter, int damage);
   int is_auto_collect_item(void);
   int is_auto_equipped(void);
   int is_auto_throw(void);
@@ -1413,6 +1425,7 @@ public:
   int is_immune_to_draining(void);
   int is_immune_to_fire(void);
   int is_immune_to_necrosis(void);
+  int is_immune_to_negation(void);
   int is_immune_to_poison(void);
   int is_immune_to_spiderwebs(void);
   int is_immune_to_water(void);
@@ -1647,6 +1660,7 @@ public:
   int on_attacking_dmg_melee(Thingp victim, int damage);
   int on_attacking_dmg_nat_att(Thingp victim, int damage);
   int on_attacking_dmg_necrosis(Thingp victim, int damage);
+  int on_attacking_dmg_negation(Thingp victim, int damage);
   int on_attacking_dmg_poison(Thingp victim, int damage);
   int on_attacking_dmg_stat_att(Thingp victim, int damage);
   int on_attacking_dmg_stat_con(Thingp victim, int damage);
@@ -1669,6 +1683,7 @@ public:
   int on_owner_attack_dmg_melee(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_nat_att(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_necrosis(Thingp owner, Thingp victim, int damage);
+  int on_owner_attack_dmg_negation(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_poison(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_stat_att(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_stat_con(Thingp owner, Thingp victim, int damage);
@@ -1688,6 +1703,7 @@ public:
   int on_owner_receive_dmg_melee(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_nat_att(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_necrosis(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
+  int on_owner_receive_dmg_negation(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_poison(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_stat_att(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_stat_con(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
@@ -1707,6 +1723,7 @@ public:
   int on_receiving_dmg_melee(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_nat_att(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_necrosis(Thingp hitter, Thingp real_hitter, int damage);
+  int on_receiving_dmg_negation(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_poison(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_stat_att(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_stat_con(Thingp hitter, Thingp real_hitter, int damage);
@@ -1926,44 +1943,46 @@ public:
   int thing_size(void);
   int tick_prio(void);
   int torch_count(void);
-  int total_damage_for_on_attacking_dmg_acid(Thingp victim, int damage);
-  int total_damage_for_on_attacking_dmg_bite(Thingp victim, int damage);
-  int total_damage_for_on_attacking_dmg_claw(Thingp victim, int damage);
-  int total_damage_for_on_attacking_dmg_cold(Thingp victim, int damage);
-  int total_damage_for_on_attacking_dmg_crush(Thingp victim, int damage);
-  int total_damage_for_on_attacking_dmg_digest(Thingp victim, int damage);
-  int total_damage_for_on_attacking_dmg_draining(Thingp victim, int damage);
-  int total_damage_for_on_attacking_dmg_drown(Thingp victim, int damage);
-  int total_damage_for_on_attacking_dmg_energy(Thingp victim, int damage);
-  int total_damage_for_on_attacking_dmg_fire(Thingp victim, int damage);
-  int total_damage_for_on_attacking_dmg_lightning(Thingp victim, int damage);
-  int total_damage_for_on_attacking_dmg_melee(Thingp victim, int damage);
-  int total_damage_for_on_attacking_dmg_nat_att(Thingp victim, int damage);
-  int total_damage_for_on_attacking_dmg_necrosis(Thingp victim, int damage);
-  int total_damage_for_on_attacking_dmg_poison(Thingp victim, int damage);
-  int total_damage_for_on_attacking_dmg_stat_att(Thingp victim, int damage);
-  int total_damage_for_on_attacking_dmg_stat_con(Thingp victim, int damage);
-  int total_damage_for_on_attacking_dmg_stat_str(Thingp victim, int damage);
-  int total_damage_for_on_attacking_dmg_water(Thingp victim, int damage);
-  int total_damage_for_on_receiving_dmg_acid(Thingp hitter, Thingp real_hitter, int damage);
-  int total_damage_for_on_receiving_dmg_bite(Thingp hitter, Thingp real_hitter, int damage);
-  int total_damage_for_on_receiving_dmg_claw(Thingp hitter, Thingp real_hitter, int damage);
-  int total_damage_for_on_receiving_dmg_cold(Thingp hitter, Thingp real_hitter, int damage);
-  int total_damage_for_on_receiving_dmg_crush(Thingp hitter, Thingp real_hitter, int damage);
-  int total_damage_for_on_receiving_dmg_digest(Thingp hitter, Thingp real_hitter, int damage);
-  int total_damage_for_on_receiving_dmg_draining(Thingp hitter, Thingp real_hitter, int damage);
-  int total_damage_for_on_receiving_dmg_drown(Thingp hitter, Thingp real_hitter, int damage);
-  int total_damage_for_on_receiving_dmg_energy(Thingp hitter, Thingp real_hitter, int damage);
-  int total_damage_for_on_receiving_dmg_fire(Thingp hitter, Thingp real_hitter, int damage);
-  int total_damage_for_on_receiving_dmg_lightning(Thingp hitter, Thingp real_hitter, int damage);
-  int total_damage_for_on_receiving_dmg_melee(Thingp hitter, Thingp real_hitter, int damage);
-  int total_damage_for_on_receiving_dmg_nat_att(Thingp hitter, Thingp real_hitter, int damage);
-  int total_damage_for_on_receiving_dmg_necrosis(Thingp hitter, Thingp real_hitter, int damage);
-  int total_damage_for_on_receiving_dmg_poison(Thingp hitter, Thingp real_hitter, int damage);
-  int total_damage_for_on_receiving_dmg_stat_att(Thingp hitter, Thingp real_hitter, int damage);
-  int total_damage_for_on_receiving_dmg_stat_con(Thingp hitter, Thingp real_hitter, int damage);
-  int total_damage_for_on_receiving_dmg_stat_str(Thingp hitter, Thingp real_hitter, int damage);
-  int total_damage_for_on_receiving_dmg_water(Thingp hitter, Thingp real_hitter, int damage);
+  int total_dmg_for_on_attacking_dmg_acid(Thingp victim, int damage);
+  int total_dmg_for_on_attacking_dmg_bite(Thingp victim, int damage);
+  int total_dmg_for_on_attacking_dmg_claw(Thingp victim, int damage);
+  int total_dmg_for_on_attacking_dmg_cold(Thingp victim, int damage);
+  int total_dmg_for_on_attacking_dmg_crush(Thingp victim, int damage);
+  int total_dmg_for_on_attacking_dmg_digest(Thingp victim, int damage);
+  int total_dmg_for_on_attacking_dmg_draining(Thingp victim, int damage);
+  int total_dmg_for_on_attacking_dmg_drown(Thingp victim, int damage);
+  int total_dmg_for_on_attacking_dmg_energy(Thingp victim, int damage);
+  int total_dmg_for_on_attacking_dmg_fire(Thingp victim, int damage);
+  int total_dmg_for_on_attacking_dmg_lightning(Thingp victim, int damage);
+  int total_dmg_for_on_attacking_dmg_melee(Thingp victim, int damage);
+  int total_dmg_for_on_attacking_dmg_nat_att(Thingp victim, int damage);
+  int total_dmg_for_on_attacking_dmg_necrosis(Thingp victim, int damage);
+  int total_dmg_for_on_attacking_dmg_negation(Thingp victim, int damage);
+  int total_dmg_for_on_attacking_dmg_poison(Thingp victim, int damage);
+  int total_dmg_for_on_attacking_dmg_stat_att(Thingp victim, int damage);
+  int total_dmg_for_on_attacking_dmg_stat_con(Thingp victim, int damage);
+  int total_dmg_for_on_attacking_dmg_stat_str(Thingp victim, int damage);
+  int total_dmg_for_on_attacking_dmg_water(Thingp victim, int damage);
+  int total_dmg_for_on_receiving_dmg_acid(Thingp hitter, Thingp real_hitter, int damage);
+  int total_dmg_for_on_receiving_dmg_bite(Thingp hitter, Thingp real_hitter, int damage);
+  int total_dmg_for_on_receiving_dmg_claw(Thingp hitter, Thingp real_hitter, int damage);
+  int total_dmg_for_on_receiving_dmg_cold(Thingp hitter, Thingp real_hitter, int damage);
+  int total_dmg_for_on_receiving_dmg_crush(Thingp hitter, Thingp real_hitter, int damage);
+  int total_dmg_for_on_receiving_dmg_digest(Thingp hitter, Thingp real_hitter, int damage);
+  int total_dmg_for_on_receiving_dmg_draining(Thingp hitter, Thingp real_hitter, int damage);
+  int total_dmg_for_on_receiving_dmg_drown(Thingp hitter, Thingp real_hitter, int damage);
+  int total_dmg_for_on_receiving_dmg_energy(Thingp hitter, Thingp real_hitter, int damage);
+  int total_dmg_for_on_receiving_dmg_fire(Thingp hitter, Thingp real_hitter, int damage);
+  int total_dmg_for_on_receiving_dmg_lightning(Thingp hitter, Thingp real_hitter, int damage);
+  int total_dmg_for_on_receiving_dmg_melee(Thingp hitter, Thingp real_hitter, int damage);
+  int total_dmg_for_on_receiving_dmg_nat_att(Thingp hitter, Thingp real_hitter, int damage);
+  int total_dmg_for_on_receiving_dmg_necrosis(Thingp hitter, Thingp real_hitter, int damage);
+  int total_dmg_for_on_receiving_dmg_negation(Thingp hitter, Thingp real_hitter, int damage);
+  int total_dmg_for_on_receiving_dmg_poison(Thingp hitter, Thingp real_hitter, int damage);
+  int total_dmg_for_on_receiving_dmg_stat_att(Thingp hitter, Thingp real_hitter, int damage);
+  int total_dmg_for_on_receiving_dmg_stat_con(Thingp hitter, Thingp real_hitter, int damage);
+  int total_dmg_for_on_receiving_dmg_stat_str(Thingp hitter, Thingp real_hitter, int damage);
+  int total_dmg_for_on_receiving_dmg_water(Thingp hitter, Thingp real_hitter, int damage);
   int unused_chance1_d1000(void);
   int unused_chance2_d1000(void);
   int unused_chance3_d1000(void);
@@ -1992,7 +2011,6 @@ public:
   int unused_flag26(void);
   int unused_flag27(void);
   int unused_flag28(void);
-  int unused_flag29(void);
   int unused_flag2(void);
   int unused_flag3(void);
   int unused_flag40(void);
@@ -2004,9 +2022,9 @@ public:
   int unused_flag8(void);
   int unused_flag9(void);
   int value(const Thingp it);
-  int weapon_damaged_pct(void);
-  int weapon_damage_modify(int damage);
-  int weapon_damage(void);
+  int weapon_dmgd_pct(void);
+  int weapon_dmg(void);
+  int weapon_dmg_modify(int damage);
   int worth_collecting(const Thingp it);
   int worth_collecting(const Thingp it, Thingp *would_need_to_drop);
   // end sort marker2 }
@@ -2487,7 +2505,7 @@ public:
   void visible(void);
   void waiting(void);
   void water_tick(void);
-  void weapon_check_for_damage(Thingp weapon, Thingp victim);
+  void weapon_check_for_dmg(Thingp weapon, Thingp victim);
   void weapon_sheath(void);
   void wobble(float wobble);
   void wobble_set(float);

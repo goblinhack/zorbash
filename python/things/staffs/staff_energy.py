@@ -19,9 +19,9 @@ def on_use(owner, item, target, x, y):
     # my.topcon("owner  {} {}".format(my.thing_name_get(owner), my.thing_health(owner)))
     # my.topcon("item   {} {}".format(my.thing_name_get(item), my.thing_health(item)))
     # my.topcon("target {} {}".format(my.thing_name_get(target), my.thing_health(target)))
-    damage = my.thing_damage_energy(item)
+    damage = my.thing_dmg_energy(item)
     enchant = my.thing_enchant_get(item)
-    my.thing_damage_current_set(owner, damage + enchant)
+    my.thing_dmg_current_set(owner, damage + enchant)
 
 
 def on_final_use(owner, item, target, x, y):
@@ -72,8 +72,8 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.charge_count(self, 5)
     my.collision_hit_priority(self, 6)
-    my.damage_energy_chance_d1000(self, 0, 1000)
-    my.damage_energy_dice(self, "1d20+10")
+    my.dmg_energy_chance_d1000(self, 0, 1000)
+    my.dmg_energy_dice(self, "1d20+10")
     my.equip_carry_anim(self, "staff_energy_carry")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
@@ -130,22 +130,22 @@ def tp_init(name, text_long_name, text_short_name):
     # end sort marker
 
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".1", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".2", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".3", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".4", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".5", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".6", delay_ms=100)
 
     my.tp_update(self)

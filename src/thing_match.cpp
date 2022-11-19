@@ -727,7 +727,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag28() && (what == "unused_flag28")) {
     return true;
   }
-  if (unused_flag29() && (what == "unused_flag29")) {
+  if (is_immune_to_negation() && (what == "is_immune_to_negation")) {
     return true;
   }
   if (is_limb() && (what == "is_limb")) {
@@ -985,7 +985,7 @@ bool Thing::matches(const std::string &what)
   if (is_dead_on_falling() && (what == "is_dead_on_falling")) {
     return true;
   }
-  if (damage_received_doubled_from_cold() && (what == "damage_received_doubled_from_cold")) {
+  if (dmg_received_doubled_from_cold() && (what == "dmg_received_doubled_from_cold")) {
     return true;
   }
   if (is_cold() && (what == "is_cold")) {
@@ -1271,8 +1271,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "collision_hit_two_tiles_ahead") {
     return &Thing::collision_hit_two_tiles_ahead;
   }
-  if (what == "damage_received_doubled_from_cold") {
-    return &Thing::damage_received_doubled_from_cold;
+  if (what == "dmg_received_doubled_from_cold") {
+    return &Thing::dmg_received_doubled_from_cold;
   }
   if (what == "enchant_max") {
     return &Thing::enchant_max;
@@ -2207,8 +2207,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag28") {
     return &Thing::unused_flag28;
   }
-  if (what == "unused_flag29") {
-    return &Thing::unused_flag29;
+  if (what == "is_immune_to_negation") {
+    return &Thing::is_immune_to_negation;
   }
   if (what == "unused_flag2") {
     return &Thing::unused_flag2;

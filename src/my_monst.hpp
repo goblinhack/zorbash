@@ -237,7 +237,7 @@ public:
   //
   // Things not worth saving
   //
-  int damage_current {}; // Current damage; so it can be modified by python
+  int dmg_current {}; // Current damage; so it can be modified by python
 } ThingInfo;
 
 //

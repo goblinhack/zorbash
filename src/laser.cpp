@@ -44,22 +44,22 @@ Laser_::Laser_(Levelp level, ThingId thing_id, ThingId victim_id, LaserInfo info
   //
   // Find all laser animation tiles. Names look like this:
   //
-  // "laser_green.{frame}.start",
-  // "laser_green.{frame}.{mid}.1",
-  // "laser_green.{frame}.{mid}.2",
-  // "laser_green.{frame}.{mid}.3",
-  // "laser_green.{frame}.{mid}.4",
-  // "laser_green.{frame}.{mid}.5",
-  // "laser_green.{frame}.{mid}.6",
-  // "laser_green.{frame}.{mid}.7",
-  // "laser_green.{frame}.{mid}.8",
-  // "laser_green.{frame}.{mid}.9",
-  // "laser_green.{frame}.{mid}.10",
-  // "laser_green.{frame}.{mid}.11",
-  // "laser_green.{frame}.{mid}.12",
-  // "laser_green.{frame}.{mid}.13",
-  // "laser_green.{frame}.{mid}.14",
-  // "laser_green.{frame}.end",
+  // "laser_negation.{frame}.start",
+  // "laser_negation.{frame}.{mid}.1",
+  // "laser_negation.{frame}.{mid}.2",
+  // "laser_negation.{frame}.{mid}.3",
+  // "laser_negation.{frame}.{mid}.4",
+  // "laser_negation.{frame}.{mid}.5",
+  // "laser_negation.{frame}.{mid}.6",
+  // "laser_negation.{frame}.{mid}.7",
+  // "laser_negation.{frame}.{mid}.8",
+  // "laser_negation.{frame}.{mid}.9",
+  // "laser_negation.{frame}.{mid}.10",
+  // "laser_negation.{frame}.{mid}.11",
+  // "laser_negation.{frame}.{mid}.12",
+  // "laser_negation.{frame}.{mid}.13",
+  // "laser_negation.{frame}.{mid}.14",
+  // "laser_negation.{frame}.end",
   //
   tiles.resize(max_frames);
 

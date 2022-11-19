@@ -238,8 +238,8 @@ Content:
 - 13 weapons
 - 8 items
 - 7 buffs
+- 6 staffs
 - 6 boots
-- 5 staffs
 - 5 keys
 - 4 gauntlets
 - 4 debuffs

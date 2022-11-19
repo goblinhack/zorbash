@@ -147,27 +147,29 @@ int Level::total_monst_hp_level(void)
   return hp;
 }
 
-int Level::total_monst_damage_level(void)
+int Level::total_monst_dmg_level(void)
 {
   int damage = 0;
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
     if (t->is_mob() || t->is_monst()) {
-      damage += t->damage_melee_dice().max_roll();
-      damage += t->damage_poison_dice().max_roll();
-      damage += t->damage_drown_dice().max_roll();
-      damage += t->damage_bite_dice().max_roll();
-      damage += t->damage_claw_dice().max_roll();
-      damage += t->damage_cold_dice().max_roll();
-      damage += t->damage_fire_dice().max_roll();
-      damage += t->damage_crush_dice().max_roll();
-      damage += t->damage_lightning_dice().max_roll();
-      damage += t->damage_energy_dice().max_roll();
-      damage += t->damage_acid_dice().max_roll();
-      damage += t->damage_water_dice().max_roll();
-      damage += t->damage_digest_dice().max_roll();
-      damage += t->damage_digest_dice().max_roll();
-      damage += t->damage_nat_att_dice().max_roll();
+      damage += t->dmg_melee_dice().max_roll();
+      damage += t->dmg_poison_dice().max_roll();
+      damage += t->dmg_drown_dice().max_roll();
+      damage += t->dmg_bite_dice().max_roll();
+      damage += t->dmg_claw_dice().max_roll();
+      damage += t->dmg_cold_dice().max_roll();
+      damage += t->dmg_fire_dice().max_roll();
+      damage += t->dmg_crush_dice().max_roll();
+      damage += t->dmg_lightning_dice().max_roll();
+      damage += t->dmg_energy_dice().max_roll();
+      damage += t->dmg_negation_dice().max_roll();
+      damage += t->dmg_negation_dice().max_roll();
+      damage += t->dmg_acid_dice().max_roll();
+      damage += t->dmg_water_dice().max_roll();
+      damage += t->dmg_digest_dice().max_roll();
+      damage += t->dmg_digest_dice().max_roll();
+      damage += t->dmg_nat_att_dice().max_roll();
     }
   }
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)

@@ -22,7 +22,7 @@ def tp_init(name, text_long_name):
     # begin sort marker
     my.collision_check(self, True)
     my.collision_hit_priority(self, 10)
-    my.damage_received_doubled_from_fire(self, True)
+    my.dmg_received_doubled_from_fire(self, True)
     my.environ_avoids_acid(self, 100)
     my.environ_avoids_fire(self, 10)
     my.gfx_ascii_fade_with_dist(self, True)

@@ -31,7 +31,7 @@ void Thing::temperature_tick(void)
       if (current_temp < temperature_min_get()) {
         dbg("Too cold");
         TRACE_AND_INDENT();
-        is_attacked_with_damage_cold(this, this, abs((temperature_min_get() - current_temp) / 10));
+        is_attacked_with_dmg_cold(this, this, abs((temperature_min_get() - current_temp) / 10));
       }
     }
 
@@ -39,7 +39,7 @@ void Thing::temperature_tick(void)
       if (current_temp > temperature_max_get()) {
         dbg("Too hot");
         TRACE_AND_INDENT();
-        is_attacked_with_damage_fire(this, this, abs((current_temp - temperature_max_get()) / 10));
+        is_attacked_with_dmg_fire(this, this, abs((current_temp - temperature_max_get()) / 10));
       }
     }
 
@@ -198,33 +198,33 @@ void Thing::temperature_tick(void)
   }
 
   if ((thing_temp <= -200) && is_stone()) {
-    if (thing_check_for_heat_damage()) {
+    if (thing_check_for_heat_dmg()) {
       auto damage = abs(thing_temp) / 10;
       popup("Crack!");
       dbg("Apply cold damage");
       TRACE_AND_INDENT();
-      is_attacked_with_damage_cold(this, this, damage);
+      is_attacked_with_dmg_cold(this, this, damage);
       return;
     }
   }
 
   if ((thing_temp <= -100) && is_wooden()) {
-    if (thing_check_for_heat_damage()) {
+    if (thing_check_for_heat_dmg()) {
       auto damage = abs(thing_temp) / 10;
       popup("Shatter!");
       dbg("Apply cold damage");
       TRACE_AND_INDENT();
-      is_attacked_with_damage_cold(this, this, damage);
+      is_attacked_with_dmg_cold(this, this, damage);
       return;
     }
   }
 
   if ((thing_temp <= -50) && is_humanoid()) {
-    if (thing_check_for_cold_damage()) {
+    if (thing_check_for_cold_dmg()) {
       auto damage = abs(thing_temp) / 10;
       dbg("Apply cold damage");
       TRACE_AND_INDENT();
-      is_attacked_with_damage_cold(this, this, damage);
+      is_attacked_with_dmg_cold(this, this, damage);
       if (is_player()) {
         msg("%%fg=lightblue$%s suffers from the extreme cold.%%fg=reset$", text_The().c_str());
       } else if (is_alive_monst()) {
@@ -236,22 +236,22 @@ void Thing::temperature_tick(void)
   }
 
   if ((thing_temp <= -20) && is_plant()) {
-    if (thing_check_for_cold_damage()) {
+    if (thing_check_for_cold_dmg()) {
       auto damage = abs(thing_temp) / 10;
       dbg("Apply cold damage");
       TRACE_AND_INDENT();
-      is_attacked_with_damage_cold(this, this, damage);
+      is_attacked_with_dmg_cold(this, this, damage);
       popup("Wilts!");
       return;
     }
   }
 
   if ((thing_temp <= 0) && is_gelatinous()) {
-    if (thing_check_for_cold_damage()) {
+    if (thing_check_for_cold_dmg()) {
       auto damage = abs(thing_temp) / 10;
       dbg("Apply cold damage");
       TRACE_AND_INDENT();
-      is_attacked_with_damage_cold(this, this, damage);
+      is_attacked_with_dmg_cold(this, this, damage);
       popup("Wilts!");
       return;
     }
@@ -261,38 +261,38 @@ void Thing::temperature_tick(void)
     auto damage = abs(thing_temp) / 10;
     dbg("Apply cold damage");
     TRACE_AND_INDENT();
-    is_attacked_with_damage_cold(this, this, damage);
+    is_attacked_with_dmg_cold(this, this, damage);
     return;
   }
 
   if ((thing_temp > 0) && is_block_of_ice()) {
-    if (thing_check_for_heat_damage()) {
+    if (thing_check_for_heat_dmg()) {
       auto damage = abs(thing_temp) / 10;
       dbg("Apply fire damage");
       TRACE_AND_INDENT();
-      is_attacked_with_damage_fire(this, this, damage);
+      is_attacked_with_dmg_fire(this, this, damage);
       popup("Melting!");
       return;
     }
   }
 
   if ((thing_temp >= 20) && is_plant()) {
-    if (thing_check_for_heat_damage()) {
+    if (thing_check_for_heat_dmg()) {
       auto damage = abs(thing_temp) / 10;
       dbg("Apply fire damage");
       TRACE_AND_INDENT();
-      is_attacked_with_damage_fire(this, this, damage);
+      is_attacked_with_dmg_fire(this, this, damage);
       popup("Wilts!");
       return;
     }
   }
 
   if ((thing_temp >= 30) && is_gelatinous()) {
-    if (thing_check_for_heat_damage()) {
+    if (thing_check_for_heat_dmg()) {
       auto damage = abs(thing_temp) / 10;
       dbg("Apply fire damage");
       TRACE_AND_INDENT();
-      is_attacked_with_damage_fire(this, this, damage);
+      is_attacked_with_dmg_fire(this, this, damage);
       popup("Melts!");
       return;
     }
@@ -300,11 +300,11 @@ void Thing::temperature_tick(void)
 
   if ((thing_temp >= 50) && is_humanoid()) {
     dbg("Check for fire damage");
-    if (thing_check_for_heat_damage()) {
+    if (thing_check_for_heat_dmg()) {
       auto damage = abs(thing_temp) / 10;
       dbg("Apply fire damage");
       TRACE_AND_INDENT();
-      is_attacked_with_damage_fire(this, this, damage);
+      is_attacked_with_dmg_fire(this, this, damage);
       if (is_on_fire()) {
         //
         // It's pretty obvious you are suffering if on fire!
@@ -341,42 +341,42 @@ void Thing::temperature_tick(void)
   }
 
   if ((thing_temp >= 100) && is_wooden()) {
-    if (thing_check_for_heat_damage()) {
+    if (thing_check_for_heat_dmg()) {
       auto damage = abs(thing_temp) / 10;
       popup("Burn!");
       dbg("Apply fire damage");
       TRACE_AND_INDENT();
-      is_attacked_with_damage_fire(this, this, damage);
+      is_attacked_with_dmg_fire(this, this, damage);
     }
   }
 
   if ((thing_temp >= 200) && is_stone()) {
-    if (thing_check_for_heat_damage()) {
+    if (thing_check_for_heat_dmg()) {
       auto damage = abs(thing_temp) / 10;
       popup("Crack!");
       dbg("Apply fire damage");
       TRACE_AND_INDENT();
-      is_attacked_with_damage_fire(this, this, damage);
+      is_attacked_with_dmg_fire(this, this, damage);
     }
   }
 
   if ((thing_temp >= 100) && is_able_to_burn()) {
-    if (thing_check_for_heat_damage()) {
+    if (thing_check_for_heat_dmg()) {
       auto damage = abs(thing_temp) / 10;
       popup("Burn!");
       dbg("Apply fire damage");
       TRACE_AND_INDENT();
-      is_attacked_with_damage_fire(this, this, damage);
+      is_attacked_with_dmg_fire(this, this, damage);
     }
   }
 
   if ((thing_temp >= 50) && is_able_to_melt()) {
-    if (thing_check_for_heat_damage()) {
+    if (thing_check_for_heat_dmg()) {
       auto damage = abs(thing_temp) / 10;
       popup("Melt!");
       dbg("Apply fire damage");
       TRACE_AND_INDENT();
-      is_attacked_with_damage_fire(this, this, damage);
+      is_attacked_with_dmg_fire(this, this, damage);
     }
   }
 
@@ -387,7 +387,7 @@ void Thing::temperature_tick(void)
       TRACE_AND_INDENT();
       dbg("Apply fire damage");
       TRACE_AND_INDENT();
-      is_attacked_with_damage_fire(this, this, damage);
+      is_attacked_with_dmg_fire(this, this, damage);
     }
   }
 }
@@ -480,7 +480,7 @@ void Thing::temperature_incr(int temperature_change)
             msg("%s suffers from the change in temperature.%%fg=reset$", text_The().c_str());
           }
         }
-        is_attacked_with_damage_fire(this, this, damage);
+        is_attacked_with_dmg_fire(this, this, damage);
       }
     } else if (temperature_change < -50) {
       if ((temperature_curr > 0) && (temperature_curr < 25)) {
@@ -499,7 +499,7 @@ void Thing::temperature_incr(int temperature_change)
             msg("%s suffers from the change in temperature.", text_The().c_str());
           }
         }
-        is_attacked_with_damage_cold(this, this, damage);
+        is_attacked_with_dmg_cold(this, this, damage);
       }
     }
   }

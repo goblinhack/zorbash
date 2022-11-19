@@ -26,7 +26,7 @@ void Thing::necrosis_tick(void)
 
     if (necrosis) {
       necrotized_amount_decr();
-      is_attacked_with_damage_necrosis(hitter, hitter, 1);
+      is_attacked_with_dmg_necrosis(hitter, hitter, 1);
     }
   }
 }

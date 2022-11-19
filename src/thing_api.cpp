@@ -1440,10 +1440,10 @@ int Thing::unused_flag28(void)
   return (tp()->unused_flag28());
 }
 
-int Thing::unused_flag29(void)
+int Thing::is_immune_to_negation(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag29());
+  return (tp()->is_immune_to_negation());
 }
 
 int Thing::gfx_ascii_color_bg_unchanged_by_lights(void)
@@ -2344,10 +2344,10 @@ int Thing::is_crushable(void)
   return (tp()->is_crushable());
 }
 
-int Thing::collateral_damage_pct(void)
+int Thing::collateral_dmg_pct(void)
 {
   TRACE_NO_INDENT();
-  return tp()->collateral_damage_pct();
+  return tp()->collateral_dmg_pct();
 }
 
 int Thing::is_able_to_see_in_the_dark(void)
@@ -5920,10 +5920,10 @@ const std::string &Thing::text_hits(void)
   return (tp()->text_hits());
 }
 
-const std::string &Thing::damage_nat_att_type(void)
+const std::string &Thing::dmg_nat_att_type(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->damage_nat_att_type());
+  return (tp()->dmg_nat_att_type());
 }
 
 const std::string &Thing::text_long_name(void)

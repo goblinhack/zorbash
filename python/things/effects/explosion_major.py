@@ -30,9 +30,9 @@ def on_born(me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.damage_fire_chance_d1000(self, 0, 1000)
-    my.damage_fire_dice(self, "6d6")
-    my.damage_nat_att_type(self, "blast")
+    my.dmg_fire_chance_d1000(self, 0, 1000)
+    my.dmg_fire_dice(self, "6d6")
+    my.dmg_nat_att_type(self, "blast")
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_oversized_and_on_floor(self, True)

@@ -19,8 +19,8 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.crit_chance_d10000(self, 200)
     my.damaged_chance_d10000(self, 50)
-    my.damage_melee_chance_d1000(self, 0, 1000)
-    my.damage_melee_dice(self, "1d8")
+    my.dmg_melee_chance_d1000(self, 0, 1000)
+    my.dmg_melee_dice(self, "1d8")
     my.equip_carry_anim(self, "shovel_carry")
     my.gfx_anim_use(self, "shovel_swing")
     my.gfx_ascii_fade_with_dist(self, True)

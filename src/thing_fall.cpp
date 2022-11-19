@@ -376,21 +376,21 @@ bool Thing::fall_to_next_level(void)
       //
       // Allow mobs to fall without damage
       //
-      int fall_damage = 0;
+      int fall_dmg = 0;
       if (is_player()) {
-        fall_damage = pcg_random_range(20, 50);
+        fall_dmg = pcg_random_range(20, 50);
       }
 
       if (is_staff() || is_potion() || is_mob() || is_monst()) {
-        fall_damage = health() / 2;
+        fall_dmg = health() / 2;
       }
 
       if (is_ring()) {
-        fall_damage = 0;
+        fall_dmg = 0;
       }
 
       if (is_brittle()) {
-        fall_damage *= 2;
+        fall_dmg *= 2;
       }
 
       dbg("Level change where you landed");
@@ -399,26 +399,26 @@ bool Thing::fall_to_next_level(void)
         if (is_player()) {
           msg("%%fg=orange$You plunge into lava! This must be the end for you!%%fg=reset$");
         }
-        fall_damage *= 3;
+        fall_dmg *= 3;
       } else if (l->is_fire(new_pos)) {
         if (is_player()) {
           msg("%%fg=orange$You plunge into flames! Not a good move!%%fg=reset$");
         }
-        fall_damage *= 2;
+        fall_dmg *= 2;
       } else if (l->is_deep_water(new_pos)) {
         if (is_player()) {
           msg("%%fg=yellow$The deep water lessens the fall!%%fg=reset$");
         }
-        fall_damage /= 4;
+        fall_dmg /= 4;
       } else if (l->is_shallow_water(new_pos)) {
         if (is_player()) {
           msg("%%fg=yellow$The water lessens the fall!%%fg=reset$");
         }
-        fall_damage /= 2;
+        fall_dmg /= 2;
       }
 
       if (is_player()) {
-        msg("%%fg=red$You take %u fall damage!%%fg=reset$", fall_damage);
+        msg("%%fg=red$You take %u fall damage!%%fg=reset$", fall_dmg);
       }
 
       if (is_monst() || is_player()) {
@@ -458,7 +458,7 @@ bool Thing::fall_to_next_level(void)
       // Death from too much fall damage
       //
       if (health_max()) {
-        auto h = health_decr(fall_damage);
+        auto h = health_decr(fall_dmg);
         if (h <= 0) {
           h = health_set(0);
           dead("by flying without wings");

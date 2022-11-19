@@ -167,7 +167,7 @@ bool Thing::close_door(Thingp door)
       }
     }
 
-    t->is_attacked_with_damage_crush(door, this, door->damage_crush());
+    t->is_attacked_with_dmg_crush(door, this, door->dmg_crush());
   }
   FOR_ALL_THINGS_END()
 

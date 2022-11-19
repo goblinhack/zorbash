@@ -50,7 +50,7 @@ void Thing::acid_tick(void)
       if (t == this) {
         continue;
       }
-      is_attacked_with_damage_acid(t, t, t->damage_acid());
+      is_attacked_with_dmg_acid(t, t, t->dmg_acid());
       break;
     }
     FOR_ALL_THINGS_END()

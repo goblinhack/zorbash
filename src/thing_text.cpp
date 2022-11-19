@@ -406,7 +406,7 @@ void Thing::show_botcon_description(void)
   }
 
   if (is_weapon()) {
-    text += " Damage %%fg=red$" + tp()->damage_melee_dice_str() + "%%fg=reset$.";
+    text += " Damage %%fg=red$" + tp()->dmg_melee_dice_str() + "%%fg=reset$.";
   }
 
   if (is_poisonous_danger_level()) {

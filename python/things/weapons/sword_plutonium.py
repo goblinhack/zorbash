@@ -20,9 +20,9 @@ def on_tick(owner, me, x, y):
         if my.pcg_randint(1, 20) > my.thing_stat_con(owner):
             target = owner
             if my.pcg_randint(1, 100) > 10:
-                my.thing_hit_damage_draining(me, target, my.pcg_randint(1, 4))
+                my.thing_hit_dmg_draining(me, target, my.pcg_randint(1, 4))
             else:
-                my.thing_hit_damage_poison(me, target, my.pcg_randint(1, 20))
+                my.thing_hit_dmg_poison(me, target, my.pcg_randint(1, 20))
 
             if my.thing_is_player(owner):
                 my.topcon("You feel sick from radiation poisoning.")
@@ -36,8 +36,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.attack_no_msg(self, True)
     my.attacks_per_round(self, 1)
     my.damaged_chance_d10000(self, 1)
-    my.damage_melee_chance_d1000(self, 0, 1000)
-    my.damage_melee_dice(self, "1d12+4")
+    my.dmg_melee_chance_d1000(self, 0, 1000)
+    my.dmg_melee_dice(self, "1d12+4")
     my.equip_carry_anim(self, "sword_plutonium_carry")
     my.gfx_anim_use(self, "sword_plutonium_swing")
     my.gfx_ascii_fade_with_dist(self, True)

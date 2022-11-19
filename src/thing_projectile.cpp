@@ -34,7 +34,7 @@ bool Thing::projectile_choose_target(Thingp item, Thingp victim /* can be null *
     //
     // Get the damage from the enchanted wand, so the blast inflicts that damage.
     //
-    damage_current_set(item->damage_current());
+    dmg_current_set(item->dmg_current());
     return true;
   }
 
@@ -67,17 +67,17 @@ Thingp Thing::projectile_fire_at(Thingp item, const std::string &target_name_pro
   // Projectiles hit the first thing in the way. But ignore if it hits
   // ourselves. i.e. if we're in foilage
   //
-  auto collatoral_damage = in_the_way_for_firing(curr_at, target->curr_at, 1);
-  if (collatoral_damage.size()) {
-    target = collatoral_damage[ 0 ];
+  auto collatoral_dmg = in_the_way_for_firing(curr_at, target->curr_at, 1);
+  if (collatoral_dmg.size()) {
+    target = collatoral_dmg[ 0 ];
 
     //
     // Choose the next thing, if the thing that is in the way is on
     // our tile
     //
     if (target && (target->curr_at == curr_at)) {
-      if (collatoral_damage.size()) {
-        target = collatoral_damage[ 0 ];
+      if (collatoral_dmg.size()) {
+        target = collatoral_dmg[ 0 ];
         if (! target) {
           err("No target after removing things in the way");
           return nullptr;

@@ -5,8 +5,8 @@ import tp
 def tp_init(name, text_long_name, tiles=[]):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
-    my.damage_water_chance_d1000(self, 0, 1000)
-    my.damage_water_dice(self, "1d6+1")
+    my.dmg_water_chance_d1000(self, 0, 1000)
+    my.dmg_water_dice(self, "1d6+1")
     my.environ_avoids_fire(self, 1)
     my.gfx_ascii_animated(self, True)
     my.gfx_ascii_bg_color_spread_blue(self, 10)

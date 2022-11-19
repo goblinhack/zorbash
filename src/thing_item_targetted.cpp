@@ -29,7 +29,7 @@ bool Thing::item_choose_target(Thingp item, Thingp victim /* can be null */)
     //
     // Get the damage from the enchanted wand, so the blast inflicts that damage.
     //
-    damage_current_set(item->damage_current());
+    dmg_current_set(item->dmg_current());
     return true;
   }
 
@@ -52,9 +52,9 @@ Thingp Thing::item_targetted_use_at(Thingp item, Thingp target)
   TRACE_AND_INDENT();
   dbg("Use item %s at %s", item->to_short_string().c_str(), target->curr_at.to_string().c_str());
 
-  auto collatoral_damage = in_the_way_for_firing(curr_at, target->curr_at, 1);
-  if (collatoral_damage.size()) {
-    target = collatoral_damage[ 0 ];
+  auto collatoral_dmg = in_the_way_for_firing(curr_at, target->curr_at, 1);
+  if (collatoral_dmg.size()) {
+    target = collatoral_dmg[ 0 ];
   }
 
   auto start = last_blit_at;

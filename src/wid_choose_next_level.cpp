@@ -149,7 +149,7 @@ static void wid_choose_next_dungeons_mouse_over(Widp w, int relx, int rely, int 
     wid_level_description->log(tmp, TEXT_FORMAT_LHS);
     wid_level_description->log(UI_LOGGING_EMPTY_LINE);
 
-    snprintf(tmp, sizeof(tmp) - 1, "Monst damage est. %u", l->total_monst_damage_level());
+    snprintf(tmp, sizeof(tmp) - 1, "Monst damage est. %u", l->total_monst_dmg_level());
     wid_level_description->log(tmp, TEXT_FORMAT_LHS);
     wid_level_description->log(UI_LOGGING_EMPTY_LINE);
 

@@ -18,8 +18,8 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.collision_check(self, True)
-    my.damage_cold_chance_d1000(self, 0, 1000)
-    my.damage_cold_dice(self, "1d10")  # This is the damage when the monst colds
+    my.dmg_cold_chance_d1000(self, 0, 1000)
+    my.dmg_cold_dice(self, "1d10")  # This is the damage when the monst colds
     my.gfx_ascii_shown(self, True)
     my.is_cold(self, True)
     my.is_loggable(self, True)

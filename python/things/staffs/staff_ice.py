@@ -56,9 +56,9 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.charge_count(self, 5)
     my.collision_hit_priority(self, 6)
-    my.damage_cold_chance_d1000(self, 0, 1000)
-    my.damage_cold_dice(self, "1d8+6")
-    my.damage_received_doubled_from_fire(self, True)
+    my.dmg_cold_chance_d1000(self, 0, 1000)
+    my.dmg_cold_dice(self, "1d8+6")
+    my.dmg_received_doubled_from_fire(self, True)
     my.equip_carry_anim(self, "staff_ice_carry")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
@@ -113,22 +113,22 @@ def tp_init(name, text_long_name, text_short_name):
     # end sort marker
 
     my.tile(self,
-            ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="cyan",
             tile=name + ".1", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="cyan",
             tile=name + ".2", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="cyan",
             tile=name + ".3", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="cyan",
             tile=name + ".4", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="cyan",
             tile=name + ".5", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="cyan",
             tile=name + ".6", delay_ms=100)
 
     my.tp_update(self)

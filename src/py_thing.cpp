@@ -96,7 +96,7 @@ PyObject *thing_hit(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_FALSE;
 }
 
-PyObject *thing_hit_damage_draining(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_hit_dmg_draining(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     hitter_id = 0;
@@ -132,7 +132,7 @@ PyObject *thing_hit_damage_draining(PyObject *obj, PyObject *args, PyObject *key
   }
 
   AttackOptions attack_options {};
-  attack_options.damage_set      = true;
+  attack_options.dmg_set         = true;
   attack_options.damage          = damage;
   attack_options.attack_draining = true;
 
@@ -145,7 +145,7 @@ PyObject *thing_hit_damage_draining(PyObject *obj, PyObject *args, PyObject *key
   Py_RETURN_FALSE;
 }
 
-PyObject *thing_hit_damage_acid(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_hit_dmg_acid(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     hitter_id = 0;
@@ -181,7 +181,7 @@ PyObject *thing_hit_damage_acid(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   AttackOptions attack_options {};
-  attack_options.damage_set  = true;
+  attack_options.dmg_set     = true;
   attack_options.damage      = damage;
   attack_options.attack_acid = true;
 
@@ -194,7 +194,7 @@ PyObject *thing_hit_damage_acid(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_FALSE;
 }
 
-PyObject *thing_hit_damage_water(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_hit_dmg_water(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     hitter_id = 0;
@@ -230,7 +230,7 @@ PyObject *thing_hit_damage_water(PyObject *obj, PyObject *args, PyObject *keywds
   }
 
   AttackOptions attack_options {};
-  attack_options.damage_set   = true;
+  attack_options.dmg_set      = true;
   attack_options.damage       = damage;
   attack_options.attack_water = true;
 
@@ -243,7 +243,7 @@ PyObject *thing_hit_damage_water(PyObject *obj, PyObject *args, PyObject *keywds
   Py_RETURN_FALSE;
 }
 
-PyObject *thing_hit_damage_cold(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_hit_dmg_cold(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     hitter_id = 0;
@@ -279,7 +279,7 @@ PyObject *thing_hit_damage_cold(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   AttackOptions attack_options {};
-  attack_options.damage_set  = true;
+  attack_options.dmg_set     = true;
   attack_options.damage      = damage;
   attack_options.attack_cold = true;
 
@@ -292,7 +292,7 @@ PyObject *thing_hit_damage_cold(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_FALSE;
 }
 
-PyObject *thing_hit_damage_crush(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_hit_dmg_crush(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     hitter_id = 0;
@@ -328,7 +328,7 @@ PyObject *thing_hit_damage_crush(PyObject *obj, PyObject *args, PyObject *keywds
   }
 
   AttackOptions attack_options {};
-  attack_options.damage_set   = true;
+  attack_options.dmg_set      = true;
   attack_options.damage       = damage;
   attack_options.attack_crush = true;
 
@@ -341,7 +341,7 @@ PyObject *thing_hit_damage_crush(PyObject *obj, PyObject *args, PyObject *keywds
   Py_RETURN_FALSE;
 }
 
-PyObject *thing_hit_damage_digest(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_hit_dmg_digest(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     hitter_id = 0;
@@ -377,7 +377,7 @@ PyObject *thing_hit_damage_digest(PyObject *obj, PyObject *args, PyObject *keywd
   }
 
   AttackOptions attack_options {};
-  attack_options.damage_set    = true;
+  attack_options.dmg_set       = true;
   attack_options.damage        = damage;
   attack_options.attack_digest = true;
 
@@ -390,7 +390,7 @@ PyObject *thing_hit_damage_digest(PyObject *obj, PyObject *args, PyObject *keywd
   Py_RETURN_FALSE;
 }
 
-PyObject *thing_hit_damage_energy(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_hit_dmg_energy(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     hitter_id = 0;
@@ -426,7 +426,7 @@ PyObject *thing_hit_damage_energy(PyObject *obj, PyObject *args, PyObject *keywd
   }
 
   AttackOptions attack_options {};
-  attack_options.damage_set    = true;
+  attack_options.dmg_set       = true;
   attack_options.damage        = damage;
   attack_options.attack_energy = true;
 
@@ -439,7 +439,7 @@ PyObject *thing_hit_damage_energy(PyObject *obj, PyObject *args, PyObject *keywd
   Py_RETURN_FALSE;
 }
 
-PyObject *thing_hit_damage_fire(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_hit_dmg_negation(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     hitter_id = 0;
@@ -475,7 +475,56 @@ PyObject *thing_hit_damage_fire(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   AttackOptions attack_options {};
-  attack_options.damage_set  = true;
+  attack_options.dmg_set         = true;
+  attack_options.damage          = damage;
+  attack_options.attack_negation = true;
+
+  hitter->log("Attack with negation damage, %d", damage);
+  TRACE_AND_INDENT();
+
+  if (hitter->attack(target, &attack_options)) {
+    Py_RETURN_TRUE;
+  }
+  Py_RETURN_FALSE;
+}
+
+PyObject *thing_hit_dmg_fire(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     hitter_id = 0;
+  uint32_t     victim_id = 0;
+  int          damage    = 0;
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", nullptr};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! hitter_id) {
+    ERR("%s: No hitter thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp hitter = game->thing_find(hitter_id);
+  if (! hitter) {
+    ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! victim_id) {
+    ERR("%s: No target thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp target = game->thing_find(victim_id);
+  if (! target) {
+    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    Py_RETURN_NONE;
+  }
+
+  AttackOptions attack_options {};
+  attack_options.dmg_set     = true;
   attack_options.damage      = damage;
   attack_options.attack_fire = true;
 
@@ -488,7 +537,7 @@ PyObject *thing_hit_damage_fire(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_FALSE;
 }
 
-PyObject *thing_hit_damage_drown(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_hit_dmg_drown(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     hitter_id = 0;
@@ -524,7 +573,7 @@ PyObject *thing_hit_damage_drown(PyObject *obj, PyObject *args, PyObject *keywds
   }
 
   AttackOptions attack_options {};
-  attack_options.damage_set   = true;
+  attack_options.dmg_set      = true;
   attack_options.damage       = damage;
   attack_options.attack_drown = true;
 
@@ -537,7 +586,7 @@ PyObject *thing_hit_damage_drown(PyObject *obj, PyObject *args, PyObject *keywds
   Py_RETURN_FALSE;
 }
 
-PyObject *thing_hit_damage_bite(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_hit_dmg_bite(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     hitter_id = 0;
@@ -573,7 +622,7 @@ PyObject *thing_hit_damage_bite(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   AttackOptions attack_options {};
-  attack_options.damage_set  = true;
+  attack_options.dmg_set     = true;
   attack_options.damage      = damage;
   attack_options.attack_bite = true;
 
@@ -586,7 +635,7 @@ PyObject *thing_hit_damage_bite(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_FALSE;
 }
 
-PyObject *thing_hit_damage_claw(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_hit_dmg_claw(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     hitter_id = 0;
@@ -622,7 +671,7 @@ PyObject *thing_hit_damage_claw(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   AttackOptions attack_options {};
-  attack_options.damage_set  = true;
+  attack_options.dmg_set     = true;
   attack_options.damage      = damage;
   attack_options.attack_claw = true;
 
@@ -635,7 +684,7 @@ PyObject *thing_hit_damage_claw(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_FALSE;
 }
 
-PyObject *thing_hit_damage_lightning(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_hit_dmg_lightning(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     hitter_id = 0;
@@ -671,7 +720,7 @@ PyObject *thing_hit_damage_lightning(PyObject *obj, PyObject *args, PyObject *ke
   }
 
   AttackOptions attack_options {};
-  attack_options.damage_set       = true;
+  attack_options.dmg_set          = true;
   attack_options.damage           = damage;
   attack_options.attack_lightning = true;
 
@@ -684,7 +733,7 @@ PyObject *thing_hit_damage_lightning(PyObject *obj, PyObject *args, PyObject *ke
   Py_RETURN_FALSE;
 }
 
-PyObject *thing_hit_damage_necrosis(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_hit_dmg_necrosis(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     hitter_id = 0;
@@ -720,7 +769,7 @@ PyObject *thing_hit_damage_necrosis(PyObject *obj, PyObject *args, PyObject *key
   }
 
   AttackOptions attack_options {};
-  attack_options.damage_set      = true;
+  attack_options.dmg_set         = true;
   attack_options.damage          = damage;
   attack_options.attack_necrosis = true;
 
@@ -733,7 +782,7 @@ PyObject *thing_hit_damage_necrosis(PyObject *obj, PyObject *args, PyObject *key
   Py_RETURN_FALSE;
 }
 
-PyObject *thing_hit_damage_poison(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_hit_dmg_poison(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     hitter_id = 0;
@@ -769,7 +818,7 @@ PyObject *thing_hit_damage_poison(PyObject *obj, PyObject *args, PyObject *keywd
   }
 
   AttackOptions attack_options {};
-  attack_options.damage_set    = true;
+  attack_options.dmg_set       = true;
   attack_options.damage        = damage;
   attack_options.attack_poison = true;
 

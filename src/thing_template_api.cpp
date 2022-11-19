@@ -44,148 +44,157 @@ void               Tp::nutrition_dice_set(const std::string &v)
   _nutrition_dice_str = v;
 }
 
-const Dice        &Tp::damage_melee_dice(void) const { return _damage_melee_dice; }
-const int          Tp::damage_melee(void) const { return _damage_melee_dice.roll(); }
-const std::string &Tp::damage_melee_dice_str(void) const { return _damage_melee_dice_str; }
-void               Tp::damage_melee_dice_set(const std::string &v)
+const Dice        &Tp::dmg_melee_dice(void) const { return _dmg_melee_dice; }
+const int          Tp::dmg_melee(void) const { return _dmg_melee_dice.roll(); }
+const std::string &Tp::dmg_melee_dice_str(void) const { return _dmg_melee_dice_str; }
+void               Tp::dmg_melee_dice_set(const std::string &v)
 {
-  _damage_melee_dice     = v;
-  _damage_melee_dice_str = v;
+  _dmg_melee_dice     = v;
+  _dmg_melee_dice_str = v;
 }
 
-const Dice        &Tp::damage_poison_dice(void) const { return _damage_poison_dice; }
-const int          Tp::damage_poison(void) const { return _damage_poison_dice.roll(); }
-const std::string &Tp::damage_poison_dice_str(void) const { return _damage_poison_dice_str; }
-void               Tp::damage_poison_dice_set(const std::string &v)
+const Dice        &Tp::dmg_poison_dice(void) const { return _dmg_poison_dice; }
+const int          Tp::dmg_poison(void) const { return _dmg_poison_dice.roll(); }
+const std::string &Tp::dmg_poison_dice_str(void) const { return _dmg_poison_dice_str; }
+void               Tp::dmg_poison_dice_set(const std::string &v)
 {
-  _damage_poison_dice     = v;
-  _damage_poison_dice_str = v;
+  _dmg_poison_dice     = v;
+  _dmg_poison_dice_str = v;
 }
 
-const Dice        &Tp::damage_drown_dice(void) const { return _damage_drown_dice; }
-const int          Tp::damage_drown(void) const { return _damage_drown_dice.roll(); }
-const std::string &Tp::damage_drown_dice_str(void) const { return _damage_drown_dice_str; }
-void               Tp::damage_drown_dice_set(const std::string &v)
+const Dice        &Tp::dmg_drown_dice(void) const { return _dmg_drown_dice; }
+const int          Tp::dmg_drown(void) const { return _dmg_drown_dice.roll(); }
+const std::string &Tp::dmg_drown_dice_str(void) const { return _dmg_drown_dice_str; }
+void               Tp::dmg_drown_dice_set(const std::string &v)
 {
-  _damage_drown_dice     = v;
-  _damage_drown_dice_str = v;
+  _dmg_drown_dice     = v;
+  _dmg_drown_dice_str = v;
 }
 
-const Dice        &Tp::damage_bite_dice(void) const { return _damage_bite_dice; }
-const int          Tp::damage_bite(void) const { return _damage_bite_dice.roll(); }
-const std::string &Tp::damage_bite_dice_str(void) const { return _damage_bite_dice_str; }
-void               Tp::damage_bite_dice_set(const std::string &v)
+const Dice        &Tp::dmg_bite_dice(void) const { return _dmg_bite_dice; }
+const int          Tp::dmg_bite(void) const { return _dmg_bite_dice.roll(); }
+const std::string &Tp::dmg_bite_dice_str(void) const { return _dmg_bite_dice_str; }
+void               Tp::dmg_bite_dice_set(const std::string &v)
 {
-  _damage_bite_dice     = v;
-  _damage_bite_dice_str = v;
+  _dmg_bite_dice     = v;
+  _dmg_bite_dice_str = v;
 }
 
-const Dice        &Tp::damage_claw_dice(void) const { return _damage_claw_dice; }
-const int          Tp::damage_claw(void) const { return _damage_claw_dice.roll(); }
-const std::string &Tp::damage_claw_dice_str(void) const { return _damage_claw_dice_str; }
-void               Tp::damage_claw_dice_set(const std::string &v)
+const Dice        &Tp::dmg_claw_dice(void) const { return _dmg_claw_dice; }
+const int          Tp::dmg_claw(void) const { return _dmg_claw_dice.roll(); }
+const std::string &Tp::dmg_claw_dice_str(void) const { return _dmg_claw_dice_str; }
+void               Tp::dmg_claw_dice_set(const std::string &v)
 {
-  _damage_claw_dice     = v;
-  _damage_claw_dice_str = v;
+  _dmg_claw_dice     = v;
+  _dmg_claw_dice_str = v;
 }
 
-const Dice        &Tp::damage_cold_dice(void) const { return _damage_cold_dice; }
-const int          Tp::damage_cold(void) const { return _damage_cold_dice.roll(); }
-const std::string &Tp::damage_cold_dice_str(void) const { return _damage_cold_dice_str; }
-void               Tp::damage_cold_dice_set(const std::string &v)
+const Dice        &Tp::dmg_cold_dice(void) const { return _dmg_cold_dice; }
+const int          Tp::dmg_cold(void) const { return _dmg_cold_dice.roll(); }
+const std::string &Tp::dmg_cold_dice_str(void) const { return _dmg_cold_dice_str; }
+void               Tp::dmg_cold_dice_set(const std::string &v)
 {
-  _damage_cold_dice     = v;
-  _damage_cold_dice_str = v;
+  _dmg_cold_dice     = v;
+  _dmg_cold_dice_str = v;
 }
 
-const Dice        &Tp::damage_fire_dice(void) const { return _damage_fire_dice; }
-const int          Tp::damage_fire(void) const { return _damage_fire_dice.roll(); }
-const std::string &Tp::damage_fire_dice_str(void) const { return _damage_fire_dice_str; }
-void               Tp::damage_fire_dice_set(const std::string &v)
+const Dice        &Tp::dmg_fire_dice(void) const { return _dmg_fire_dice; }
+const int          Tp::dmg_fire(void) const { return _dmg_fire_dice.roll(); }
+const std::string &Tp::dmg_fire_dice_str(void) const { return _dmg_fire_dice_str; }
+void               Tp::dmg_fire_dice_set(const std::string &v)
 {
-  _damage_fire_dice     = v;
-  _damage_fire_dice_str = v;
+  _dmg_fire_dice     = v;
+  _dmg_fire_dice_str = v;
 }
 
-const Dice        &Tp::damage_crush_dice(void) const { return _damage_crush_dice; }
-const int          Tp::damage_crush(void) const { return _damage_crush_dice.roll(); }
-const std::string &Tp::damage_crush_dice_str(void) const { return _damage_crush_dice_str; }
-void               Tp::damage_crush_dice_set(const std::string &v)
+const Dice        &Tp::dmg_crush_dice(void) const { return _dmg_crush_dice; }
+const int          Tp::dmg_crush(void) const { return _dmg_crush_dice.roll(); }
+const std::string &Tp::dmg_crush_dice_str(void) const { return _dmg_crush_dice_str; }
+void               Tp::dmg_crush_dice_set(const std::string &v)
 {
-  _damage_crush_dice     = v;
-  _damage_crush_dice_str = v;
+  _dmg_crush_dice     = v;
+  _dmg_crush_dice_str = v;
 }
 
-const Dice        &Tp::damage_lightning_dice(void) const { return _damage_lightning_dice; }
-const int          Tp::damage_lightning(void) const { return _damage_lightning_dice.roll(); }
-const std::string &Tp::damage_lightning_dice_str(void) const { return _damage_lightning_dice_str; }
-void               Tp::damage_lightning_dice_set(const std::string &v)
+const Dice        &Tp::dmg_lightning_dice(void) const { return _dmg_lightning_dice; }
+const int          Tp::dmg_lightning(void) const { return _dmg_lightning_dice.roll(); }
+const std::string &Tp::dmg_lightning_dice_str(void) const { return _dmg_lightning_dice_str; }
+void               Tp::dmg_lightning_dice_set(const std::string &v)
 {
-  _damage_lightning_dice     = v;
-  _damage_lightning_dice_str = v;
+  _dmg_lightning_dice     = v;
+  _dmg_lightning_dice_str = v;
 }
 
-const Dice        &Tp::damage_energy_dice(void) const { return _damage_energy_dice; }
-const int          Tp::damage_energy(void) const { return _damage_energy_dice.roll(); }
-const std::string &Tp::damage_energy_dice_str(void) const { return _damage_energy_dice_str; }
-void               Tp::damage_energy_dice_set(const std::string &v)
+const Dice        &Tp::dmg_energy_dice(void) const { return _dmg_energy_dice; }
+const int          Tp::dmg_energy(void) const { return _dmg_energy_dice.roll(); }
+const std::string &Tp::dmg_energy_dice_str(void) const { return _dmg_energy_dice_str; }
+void               Tp::dmg_energy_dice_set(const std::string &v)
 {
-  _damage_energy_dice     = v;
-  _damage_energy_dice_str = v;
+  _dmg_energy_dice     = v;
+  _dmg_energy_dice_str = v;
 }
 
-const Dice        &Tp::damage_acid_dice(void) const { return _damage_acid_dice; }
-const int          Tp::damage_acid(void) const { return _damage_acid_dice.roll(); }
-const std::string &Tp::damage_acid_dice_str(void) const { return _damage_acid_dice_str; }
-void               Tp::damage_acid_dice_set(const std::string &v)
+const Dice        &Tp::dmg_negation_dice(void) const { return _dmg_negation_dice; }
+const int          Tp::dmg_negation(void) const { return _dmg_negation_dice.roll(); }
+const std::string &Tp::dmg_negation_dice_str(void) const { return _dmg_negation_dice_str; }
+void               Tp::dmg_negation_dice_set(const std::string &v)
 {
-  _damage_acid_dice     = v;
-  _damage_acid_dice_str = v;
+  _dmg_negation_dice     = v;
+  _dmg_negation_dice_str = v;
 }
 
-const Dice        &Tp::damage_water_dice(void) const { return _damage_water_dice; }
-const int          Tp::damage_water(void) const { return _damage_water_dice.roll(); }
-const std::string &Tp::damage_water_dice_str(void) const { return _damage_water_dice_str; }
-void               Tp::damage_water_dice_set(const std::string &v)
+const Dice        &Tp::dmg_acid_dice(void) const { return _dmg_acid_dice; }
+const int          Tp::dmg_acid(void) const { return _dmg_acid_dice.roll(); }
+const std::string &Tp::dmg_acid_dice_str(void) const { return _dmg_acid_dice_str; }
+void               Tp::dmg_acid_dice_set(const std::string &v)
 {
-  _damage_water_dice     = v;
-  _damage_water_dice_str = v;
+  _dmg_acid_dice     = v;
+  _dmg_acid_dice_str = v;
 }
 
-const Dice        &Tp::damage_digest_dice(void) const { return _damage_digest_dice; }
-const int          Tp::damage_digest(void) const { return _damage_digest_dice.roll(); }
-const std::string &Tp::damage_digest_dice_str(void) const { return _damage_digest_dice_str; }
-void               Tp::damage_digest_dice_set(const std::string &v)
+const Dice        &Tp::dmg_water_dice(void) const { return _dmg_water_dice; }
+const int          Tp::dmg_water(void) const { return _dmg_water_dice.roll(); }
+const std::string &Tp::dmg_water_dice_str(void) const { return _dmg_water_dice_str; }
+void               Tp::dmg_water_dice_set(const std::string &v)
 {
-  _damage_digest_dice     = v;
-  _damage_digest_dice_str = v;
+  _dmg_water_dice     = v;
+  _dmg_water_dice_str = v;
 }
 
-const Dice        &Tp::damage_necrosis_dice(void) const { return _damage_necrosis_dice; }
-const int          Tp::damage_necrosis(void) const { return _damage_necrosis_dice.roll(); }
-const std::string &Tp::damage_necrosis_dice_str(void) const { return _damage_necrosis_dice_str; }
-void               Tp::damage_necrosis_dice_set(const std::string &v)
+const Dice        &Tp::dmg_digest_dice(void) const { return _dmg_digest_dice; }
+const int          Tp::dmg_digest(void) const { return _dmg_digest_dice.roll(); }
+const std::string &Tp::dmg_digest_dice_str(void) const { return _dmg_digest_dice_str; }
+void               Tp::dmg_digest_dice_set(const std::string &v)
 {
-  _damage_necrosis_dice     = v;
-  _damage_necrosis_dice_str = v;
+  _dmg_digest_dice     = v;
+  _dmg_digest_dice_str = v;
 }
 
-const Dice        &Tp::damage_draining_dice(void) const { return _damage_draining_dice; }
-const int          Tp::damage_draining(void) const { return _damage_draining_dice.roll(); }
-const std::string &Tp::damage_draining_dice_str(void) const { return _damage_draining_dice_str; }
-void               Tp::damage_draining_dice_set(const std::string &v)
+const Dice        &Tp::dmg_necrosis_dice(void) const { return _dmg_necrosis_dice; }
+const int          Tp::dmg_necrosis(void) const { return _dmg_necrosis_dice.roll(); }
+const std::string &Tp::dmg_necrosis_dice_str(void) const { return _dmg_necrosis_dice_str; }
+void               Tp::dmg_necrosis_dice_set(const std::string &v)
 {
-  _damage_draining_dice     = v;
-  _damage_draining_dice_str = v;
+  _dmg_necrosis_dice     = v;
+  _dmg_necrosis_dice_str = v;
 }
 
-const Dice        &Tp::damage_nat_att_dice(void) const { return _damage_nat_att_dice; }
-const int          Tp::damage_nat_att(void) const { return _damage_nat_att_dice.roll(); }
-const std::string &Tp::damage_nat_att_dice_str(void) const { return _damage_nat_att_dice_str; }
-void               Tp::damage_nat_att_dice_set(const std::string &v)
+const Dice        &Tp::dmg_draining_dice(void) const { return _dmg_draining_dice; }
+const int          Tp::dmg_draining(void) const { return _dmg_draining_dice.roll(); }
+const std::string &Tp::dmg_draining_dice_str(void) const { return _dmg_draining_dice_str; }
+void               Tp::dmg_draining_dice_set(const std::string &v)
 {
-  _damage_nat_att_dice     = v;
-  _damage_nat_att_dice_str = v;
+  _dmg_draining_dice     = v;
+  _dmg_draining_dice_str = v;
+}
+
+const Dice        &Tp::dmg_nat_att_dice(void) const { return _dmg_nat_att_dice; }
+const int          Tp::dmg_nat_att(void) const { return _dmg_nat_att_dice.roll(); }
+const std::string &Tp::dmg_nat_att_dice_str(void) const { return _dmg_nat_att_dice_str; }
+void               Tp::dmg_nat_att_dice_set(const std::string &v)
+{
+  _dmg_nat_att_dice     = v;
+  _dmg_nat_att_dice_str = v;
 }
 
 const Dice        &Tp::health_initial_dice(void) const { return _health_initial_dice; }

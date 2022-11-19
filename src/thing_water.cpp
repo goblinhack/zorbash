@@ -58,7 +58,7 @@ void Thing::water_tick(void)
       if (! t->is_water()) {
         continue;
       }
-      is_attacked_with_damage_water(t, t, t->damage_water());
+      is_attacked_with_dmg_water(t, t, t->dmg_water());
     }
     FOR_ALL_THINGS_END()
   }

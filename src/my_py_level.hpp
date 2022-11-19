@@ -13,7 +13,7 @@ PyObject *level_ai_resent_count_at(PyObject *obj, PyObject *args, PyObject *keyw
 PyObject *level_ai_wanderer_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_attack_engulf_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_attack_undead_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_damage_received_doubled_from_cold_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_dmg_received_doubled_from_cold_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_hunger_clock_tick_freq_at(PyObject *obj, PyObject *args, PyObject *keywds);

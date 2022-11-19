@@ -98,7 +98,7 @@ do
       attack_no_msg \
       attacks_per_round \
       attack_undead \
-      collateral_damage_pct \
+      collateral_dmg_pct \
       collision_check \
       collision_hit_180 \
       collision_hit_360 \
@@ -106,12 +106,12 @@ do
       collision_hit_priority \
       collision_hit_two_tiles_ahead \
       consume_per_bite_amount \
-      damage_received_doubled_from_acid \
-      damage_received_doubled_from_cold \
-      damage_received_doubled_from_fire \
-      damage_received_doubled_from_necrosis \
-      damage_received_doubled_from_poison \
-      damage_received_doubled_from_water \
+      dmg_received_doubled_from_acid \
+      dmg_received_doubled_from_cold \
+      dmg_received_doubled_from_fire \
+      dmg_received_doubled_from_necrosis \
+      dmg_received_doubled_from_poison \
+      dmg_received_doubled_from_water \
       distance_leader_max \
       distance_minion_vision_shared \
       enchant_level \
@@ -534,7 +534,7 @@ do
       unused_flag26 \
       unused_flag27 \
       unused_flag28 \
-      unused_flag29 \
+      is_immune_to_negation \
       unused_flag3 \
       unused_flag4 \
       unused_flag40 \

@@ -29,7 +29,7 @@ Thingp Thing::in_the_way_for_firing(const point s, const point e, int x, int y)
     // Occasionally allow goblins to fire through comrades
     //
     if (same_leader_or_owner(t)) {
-      if (d100() > collateral_damage_pct()) {
+      if (d100() > collateral_dmg_pct()) {
         return t;
       }
       continue;

@@ -45,7 +45,7 @@ void Thing::block_of_ice_tick(void)
       }
 
       t->log("Crushed by a block of ice");
-      t->is_attacked_with_damage_crush(this, this, damage_crush());
+      t->is_attacked_with_dmg_crush(this, this, dmg_crush());
     }
     FOR_ALL_THINGS_END()
   }

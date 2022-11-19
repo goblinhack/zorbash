@@ -14,9 +14,9 @@ def lava_init(name, text_long_name, tiles=[]):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
     my.collision_hit_priority(self, 100)
-    my.damage_fire_chance_d1000(self, 0, 1000)
-    my.damage_fire_dice(self, "1d12+6")
-    my.damage_nat_att_type(self, "burn")
+    my.dmg_fire_chance_d1000(self, 0, 1000)
+    my.dmg_fire_dice(self, "1d12+6")
+    my.dmg_nat_att_type(self, "burn")
     my.gfx_ascii_animated(self, True)
     my.gfx_ascii_bg_color_spread_hue(self, 30)
     my.gfx_ascii_color_fg_unchanged_by_lights(self, True)

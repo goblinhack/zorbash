@@ -19,9 +19,9 @@ def tp_init(name):
     # begin sort marker
     my.collision_check(self, True)
     my.collision_hit_priority(self, 9)
-    my.damage_crush_chance_d1000(self, 0, 1000)
-    my.damage_crush_dice(self, "2d6")
-    my.damage_received_doubled_from_fire(self, True)
+    my.dmg_crush_chance_d1000(self, 0, 1000)
+    my.dmg_crush_dice(self, "2d6")
+    my.dmg_received_doubled_from_fire(self, True)
     my.environ_avoids_fire(self, 100)
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)

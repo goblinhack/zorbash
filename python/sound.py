@@ -128,7 +128,7 @@ my.sound_load(
 )
 my.sound_load(
     volume=0.25,
-    file="data/sounds/impacts/404109__deathscyp__damage-1.wav",
+    file="data/sounds/impacts/404109__deathscyp__dmg-1.wav",
     name="player_hit2",
 )
 my.sound_load(
@@ -216,7 +216,7 @@ my.sound_load(volume=0.25, file="data/sounds/misc/drop.wav", name="drop")
 # my.sound_load(volume=1.0, file="data/sounds/impacts/magic_crumble.wav",    name="magic_crumble")
 # my.sound_load(volume=1.0, file="data/sounds/impacts/area_effect_a.wav",    name="area_effect_a")
 # my.sound_load(volume=1.0, file="data/sounds/impacts/area_effect_b.wav",    name="area_effect_b")
-# my.sound_load(volume=1.0, file="data/sounds/impacts/pit_trap_damage.wav",  name="pit_trap_damage")
+# my.sound_load(volume=1.0, file="data/sounds/impacts/pit_trap_dmg.wav",  name="pit_trap_dmg")
 # my.sound_load(volume=1.0, file="data/sounds/impacts/spike_trap_a.wav",     name="spike_trap_a")
 # my.sound_load(volume=1.0, file="data/sounds/impacts/hit.wav",              name="hit")
 # my.sound_load(volume=1.0, file="data/sounds/impacts/spike_trap_b.wav",     name="spike_trap_b")

@@ -11,7 +11,7 @@
 //
 // See if the weapon crumbles
 //
-int Thing::weapon_damaged_pct(void)
+int Thing::weapon_dmgd_pct(void)
 {
   if (! damaged_count()) {
     return 0;
@@ -22,15 +22,15 @@ int Thing::weapon_damaged_pct(void)
 //
 // Take account of the state of the weapon
 //
-int Thing::weapon_damage_modify(int damage)
+int Thing::weapon_dmg_modify(int damage)
 {
   if (! damaged_count()) {
     return damage;
   }
 
-  int damage_in = damage;
-  damage -= (int) ceil(((((float) damage)) / 100.0) * ((float) weapon_damaged_pct()));
-  dbg("Weapon is damaged, hits for %d -> %d", damage_in, damage);
+  int dmg_in = damage;
+  damage -= (int) ceil(((((float) damage)) / 100.0) * ((float) weapon_dmgd_pct()));
+  dbg("Weapon is damaged, hits for %d -> %d", dmg_in, damage);
   if (damage < 0) {
     damage = 0;
   }
@@ -40,7 +40,7 @@ int Thing::weapon_damage_modify(int damage)
 //
 // See if the weapon crumbles
 //
-void Thing::weapon_check_for_damage(Thingp weapon, Thingp victim)
+void Thing::weapon_check_for_dmg(Thingp weapon, Thingp victim)
 {
   auto my_owner = weapon->top_owner();
   if (! my_owner) {
@@ -65,7 +65,7 @@ void Thing::weapon_check_for_damage(Thingp weapon, Thingp victim)
     if (victim->is_acid()) {
       if (! weapon->is_immune_to_acid()) {
         damaged_chance *= 2;
-        if (weapon->damage_received_doubled_from_acid()) {
+        if (weapon->dmg_received_doubled_from_acid()) {
           damaged_chance *= 2;
         }
       }
@@ -76,7 +76,7 @@ void Thing::weapon_check_for_damage(Thingp weapon, Thingp victim)
     if (victim->is_cold()) {
       if (! weapon->is_immune_to_cold()) {
         damaged_chance *= 2;
-        if (weapon->damage_received_doubled_from_cold()) {
+        if (weapon->dmg_received_doubled_from_cold()) {
           damaged_chance *= 2;
         }
       }
@@ -87,7 +87,7 @@ void Thing::weapon_check_for_damage(Thingp weapon, Thingp victim)
     if (victim->is_fire()) {
       if (! weapon->is_immune_to_fire()) {
         damaged_chance *= 2;
-        if (weapon->damage_received_doubled_from_fire()) {
+        if (weapon->dmg_received_doubled_from_fire()) {
           damaged_chance *= 2;
         }
       }
@@ -98,7 +98,7 @@ void Thing::weapon_check_for_damage(Thingp weapon, Thingp victim)
     if (victim->is_water()) {
       if (! weapon->is_immune_to_water()) {
         damaged_chance *= 2;
-        if (weapon->damage_received_doubled_from_water()) {
+        if (weapon->dmg_received_doubled_from_water()) {
           damaged_chance *= 2;
         }
       }

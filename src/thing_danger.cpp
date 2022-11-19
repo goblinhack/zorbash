@@ -72,21 +72,22 @@ int Tp::get_danger_level(void)
 
   danger_level += aggression_pct() / 10;
 
-  danger_level += damage_melee_dice().max_roll();
-  danger_level += damage_poison_dice().max_roll();
-  danger_level += damage_drown_dice().max_roll();
-  danger_level += damage_bite_dice().max_roll();
-  danger_level += damage_claw_dice().max_roll();
-  danger_level += damage_cold_dice().max_roll();
-  danger_level += damage_fire_dice().max_roll();
-  danger_level += damage_crush_dice().max_roll();
-  danger_level += damage_lightning_dice().max_roll();
-  danger_level += damage_energy_dice().max_roll();
-  danger_level += damage_acid_dice().max_roll();
-  danger_level += damage_water_dice().max_roll();
-  danger_level += damage_digest_dice().max_roll();
-  danger_level += damage_digest_dice().max_roll();
-  danger_level += damage_nat_att_dice().max_roll();
+  danger_level += dmg_melee_dice().max_roll();
+  danger_level += dmg_poison_dice().max_roll();
+  danger_level += dmg_drown_dice().max_roll();
+  danger_level += dmg_bite_dice().max_roll();
+  danger_level += dmg_claw_dice().max_roll();
+  danger_level += dmg_cold_dice().max_roll();
+  danger_level += dmg_fire_dice().max_roll();
+  danger_level += dmg_crush_dice().max_roll();
+  danger_level += dmg_lightning_dice().max_roll();
+  danger_level += dmg_energy_dice().max_roll();
+  danger_level += dmg_negation_dice().max_roll();
+  danger_level += dmg_acid_dice().max_roll();
+  danger_level += dmg_water_dice().max_roll();
+  danger_level += dmg_digest_dice().max_roll();
+  danger_level += dmg_digest_dice().max_roll();
+  danger_level += dmg_nat_att_dice().max_roll();
 
   //
   // Don't include crush damage as it is non typical
@@ -170,7 +171,7 @@ int Thing::danger_initial_level(void)
     danger_level *= 2;
   }
 
-  danger_level += damage_max();
+  danger_level += dmg_max();
 
   danger_level += aggression_pct() / 10;
 
@@ -271,7 +272,7 @@ int Thing::danger_current_level(void)
     danger_level *= 2;
   }
 
-  danger_level += damage_max();
+  danger_level += dmg_max();
 
   danger_level += aggression_pct() / 10;
 

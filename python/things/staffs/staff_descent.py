@@ -110,22 +110,22 @@ def tp_init(name, text_long_name, text_short_name):
     # end sort marker
 
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="blue",
             tile=name + ".1", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="blue",
             tile=name + ".2", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="blue",
             tile=name + ".3", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="blue",
             tile=name + ".4", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="blue",
             tile=name + ".5", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="blue",
             tile=name + ".6", delay_ms=100)
 
     my.tp_update(self)

@@ -50,8 +50,8 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.charge_count(self, 3)
     my.collision_hit_priority(self, 6)
-    my.damage_energy_dice(self, "1d20+8")
-    my.damage_lightning_chance_d1000(self, 0, 1000)
+    my.dmg_energy_dice(self, "1d20+8")
+    my.dmg_lightning_chance_d1000(self, 0, 1000)
     my.equip_carry_anim(self, "staff_lightning_carry")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)

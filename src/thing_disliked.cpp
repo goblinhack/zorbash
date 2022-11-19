@@ -80,7 +80,7 @@ bool Thing::is_disliked_by_me(const point p)
     //
     int  heat        = level->heatmap(p);
     auto avoid_level = environ_avoids_fire();
-    if (damage_received_doubled_from_fire()) {
+    if (dmg_received_doubled_from_fire()) {
       avoid_level *= 2;
     }
     if (avoid_level >= 100) {
@@ -168,7 +168,7 @@ bool Tp::is_disliked_by_me(Levelp level, point p) const
   //
   int  heat        = level->heatmap(p);
   auto avoid_level = environ_avoids_fire();
-  if (damage_received_doubled_from_fire()) {
+  if (dmg_received_doubled_from_fire()) {
     avoid_level *= 2;
   }
   if (avoid_level >= 100) {
@@ -266,7 +266,7 @@ bool Thing::is_disliked_by_me(const Thingp itp)
     //
     int  heat        = level->heatmap(itp->curr_at);
     auto avoid_level = environ_avoids_fire();
-    if (damage_received_doubled_from_fire()) {
+    if (dmg_received_doubled_from_fire()) {
       avoid_level *= 2;
     }
     if (avoid_level >= 100) {

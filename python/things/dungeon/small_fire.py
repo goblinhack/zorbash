@@ -10,9 +10,9 @@ def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
     my.collision_check(self, True)
-    my.damage_fire_chance_d1000(self, 0, 1000)
-    my.damage_fire_dice(self, "1d3+1")
-    my.damage_nat_att_type(self, "burn")
+    my.dmg_fire_chance_d1000(self, 0, 1000)
+    my.dmg_fire_dice(self, "1d3+1")
+    my.dmg_nat_att_type(self, "burn")
     my.environ_avoids_water(self, 100)
     my.gfx_ascii_shown(self, True)
     my.gfx_on_fire_anim(self, True)
