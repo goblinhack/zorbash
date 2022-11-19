@@ -54,7 +54,6 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.blast_max_radius(self, 2)
     my.charge_count(self, 3)
-    my.collision_hit_priority(self, 5)
     my.collision_hit_priority(self, 6)
     my.equip_carry_anim(self, "staff_descent_carry")
     my.gfx_ascii_fade_with_dist(self, True)
@@ -83,6 +82,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_staff(self, True)
     my.is_target_radial(self, True)
     my.is_target_select(self, True)
+    my.is_throwable(self, True)
     my.is_tickable(self, True)  # So it can interact with fire
     my.is_treasure_class_c(self, True)
     my.is_treasure(self, True)

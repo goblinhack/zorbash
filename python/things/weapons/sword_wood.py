@@ -60,7 +60,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.stamina_drain_on_attacking(self, 0)
     my.text_a_or_an(self, "a")
     my.text_enchant(self, "+2 DMG")
-    my.text_long_description(self, "A wooden short sword. Ideal for play fighting and not much else.")
+    my.text_long_description(self, "Ideal for play fighting and not much else.")
     my.text_short_description(self, "Thy wooden means of justice.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)

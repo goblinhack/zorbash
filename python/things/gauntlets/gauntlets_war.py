@@ -61,7 +61,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_str_mod(self, 5)
     my.text_a_or_an(self, "a")
     my.text_enchant(self, "+1 str, +1 def, +1 shove")
-    my.text_long_description(self, "Gauntlets of war. Providing a hefty strength and defense bonus, these gauntlets mean business.?")
+    my.text_long_description(self, "Provides a hefty strength and defense bonus, these gauntlets mean business.?")
     my.text_short_description(self, "Gauntlets of war.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)

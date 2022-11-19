@@ -49,7 +49,6 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.charge_count(self, 3)
-    my.collision_hit_priority(self, 5)
     my.collision_hit_priority(self, 6)
     my.damage_energy_dice(self, "1d20+8")
     my.damage_lightning_chance_d1000(self, 0, 1000)
@@ -79,6 +78,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_magical(self, True)
     my.is_staff(self, True)
     my.is_target_select(self, True)
+    my.is_throwable(self, True)
     my.is_tickable(self, True)  # So it can interact with fire
     my.is_treasure_class_c(self, True)
     my.is_treasure(self, True)

@@ -62,7 +62,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.stamina_drain_on_attacking(self, 3)
     my.text_a_or_an(self, "a")
     my.text_enchant(self, "+1 DMG")
-    my.text_long_description(self, "A truly inspiring weapon of dread. The shovel. Ideal for light gardening and decapitation.")
+    my.text_long_description(self, "A truly inspiring weapon of flatness. The shovel. Ideal for light gardening and decapitation.")
     my.text_short_description(self, "Thy diggy means of justice.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)

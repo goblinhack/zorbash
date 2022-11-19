@@ -34,7 +34,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "10+1d15")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
-    my.text_long_description(self, "An aubergine. Some call it eggplant. This one, well, it's round and a bit puckered and has seen better days. It might be a rock.")
+    my.text_long_description(self, "A dungeon aubergine. Some call it eggplant. This one, well, it's round and a bit puckered and has seen better days. It might be a rock.")
     my.text_short_description(self, "Aubergine.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)

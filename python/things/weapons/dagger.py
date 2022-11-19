@@ -61,7 +61,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_dex_mod(self, 1)  # means +1 per enchant
     my.text_a_or_an(self, "a")
     my.text_enchant(self, "+1 DMG")
-    my.text_long_description(self, "A short dagger. Ideal for cutting vegetables and enemies.")
+    my.text_long_description(self, "Ideal for cutting vegetables and enemies.")
     my.text_short_description(self, "Thy stabby means of justice.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)

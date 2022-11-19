@@ -34,7 +34,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "10+1d20")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
-    my.text_long_description(self, "Custard pie. At least it might be custard. Whatever it is it oozes a bit and is yellow.")
+    my.text_long_description(self, "At least it might be custard. Whatever it is it oozes a bit and is yellow.")
     my.text_short_description(self, "Custard pie.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
