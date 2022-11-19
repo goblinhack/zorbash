@@ -172,7 +172,7 @@ int Thing::carried_cloak_highest_value_for_target(Thingp *out, Thingp target)
     // If intelligent don't use a cloak that will hit you also
     //
     if (is_intelligent()) {
-      if (distance(curr_at, target->curr_at) <= t->blast_max_radius()) {
+      if (distance(curr_at, target->curr_at) <= t->effect_radius()) {
         continue;
       }
     }

@@ -30,7 +30,7 @@ void Level::cursor_path_draw_circle(void)
   }
 
   auto radius_min = what->tp()->blast_min_radius();
-  auto radius_max = what->blast_max_radius();
+  auto radius_max = what->effect_radius();
   auto curr_at    = cursor->curr_at;
 
   if (! radius_max) {
@@ -278,7 +278,7 @@ void Level::cursor_path_draw(Thingp it, point start, point end)
     //
     // Draw a line instead
     //
-    if (game->request_to_use_item->blast_max_radius()) {
+    if (game->request_to_use_item->effect_radius()) {
       //
       // For wands with a blast effect, show both line and radius
       //

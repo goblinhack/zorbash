@@ -172,7 +172,7 @@ int Thing::carried_boots_highest_value_for_target(Thingp *out, Thingp target)
     // If intelligent don't use a boots that will hit you also
     //
     if (is_intelligent()) {
-      if (distance(curr_at, target->curr_at) <= t->blast_max_radius()) {
+      if (distance(curr_at, target->curr_at) <= t->effect_radius()) {
         continue;
       }
     }

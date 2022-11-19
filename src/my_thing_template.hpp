@@ -122,7 +122,6 @@ private:
   int _attack_no_msg {};
   int _attacks_per_round {};
   int _attack_undead {};
-  int _blast_max_radius {};
   int _blast_min_radius {};
   int _blit_bot_off {};
   int _blit_left_off {};
@@ -156,6 +155,7 @@ private:
   int _dmg_received_doubled_from_necrosis {};
   int _dmg_received_doubled_from_poison {};
   int _dmg_received_doubled_from_water {};
+  int _effect_radius {};
   int _enchant_level {};
   int _enchant_max {};
   int _environ_avoids_acid {};
@@ -1146,7 +1146,6 @@ public:
   int attack_no_msg(void) const;
   int attacks_per_round(void) const;
   int attack_undead(void) const;
-  int blast_max_radius(void) const;
   int blast_min_radius(void) const;
   int blit_bot_off(void) const;
   int blit_left_off(void) const;
@@ -1195,6 +1194,7 @@ public:
   int dmg_received_doubled_from_poison(void) const;
   int dmg_received_doubled_from_water(void) const;
   int dmg_water_chance_d1000(int index) const;
+  int effect_radius(void) const;
   int enchant_max(void) const;
   int environ_avoids_acid(void) const;
   int environ_avoids_cold(void) const;
@@ -1698,7 +1698,6 @@ public:
   void attack_no_msg_set(int v);
   void attacks_per_round_set(int v);
   void attack_undead_set(int v);
-  void blast_max_radius_set(int v);
   void blast_min_radius_set(int v);
   void blit_bot_off_set(int v);
   void blit_left_off_set(int v);
@@ -1731,6 +1730,7 @@ public:
   void dmg_received_doubled_from_necrosis_set(int v);
   void dmg_received_doubled_from_poison_set(int v);
   void dmg_received_doubled_from_water_set(int v);
+  void effect_radius_set(int v);
   void enchant_level_set(int v);
   void enchant_max_set(int v);
   void environ_avoids_acid_set(int v);

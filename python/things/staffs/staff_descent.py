@@ -52,9 +52,9 @@ def on_fire(me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.blast_max_radius(self, 2)
     my.charge_count(self, 3)
     my.collision_hit_priority(self, 6)
+    my.effect_radius(self, 2)
     my.equip_carry_anim(self, "staff_descent_carry")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)

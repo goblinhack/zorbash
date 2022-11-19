@@ -4,7 +4,7 @@ import tp
 
 def on_born(me, x, y):
     item = my.thing_immediate_owner_id_get(me)
-    radius = my.thing_blast_max_radius_get(item)
+    radius = my.thing_effect_radius_get(item)
     # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
     # my.con("item    {} {:X}".format(my.thing_name_get(item), item))
 

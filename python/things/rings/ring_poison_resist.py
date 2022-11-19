@@ -13,9 +13,9 @@ def on_unequip(owner, me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.blast_max_radius(self, 2)
     my.collision_hit_priority(self, 5)
     my.collision_hit_priority(self, 6)
+    my.effect_radius(self, 2)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_reflection(self, True)

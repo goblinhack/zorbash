@@ -193,7 +193,6 @@ int Tp::attack_meat(void) const { return _attack_meat; }
 int Tp::attack_no_msg(void) const { return _attack_no_msg; }
 int Tp::attacks_per_round(void) const { return _attacks_per_round; }
 int Tp::attack_undead(void) const { return _attack_undead; }
-int Tp::blast_max_radius(void) const { return _blast_max_radius; }
 int Tp::blast_min_radius(void) const { return _blast_min_radius; }
 int Tp::blit_bot_off(void) const { return _blit_bot_off; }
 int Tp::blit_left_off(void) const { return _blit_left_off; }
@@ -225,6 +224,7 @@ int Tp::dmg_received_doubled_from_fire(void) const { return _dmg_received_double
 int Tp::dmg_received_doubled_from_necrosis(void) const { return _dmg_received_doubled_from_necrosis; }
 int Tp::dmg_received_doubled_from_poison(void) const { return _dmg_received_doubled_from_poison; }
 int Tp::dmg_received_doubled_from_water(void) const { return _dmg_received_doubled_from_water; }
+int Tp::effect_radius(void) const { return _effect_radius; }
 int Tp::enchant_max(void) const { return _enchant_max; }
 int Tp::environ_avoids_acid(void) const { return _environ_avoids_acid; }
 int Tp::environ_avoids_cold(void) const { return _environ_avoids_cold; }
@@ -727,7 +727,6 @@ void Tp::attack_meat_set(int v) { _attack_meat = v; }
 void Tp::attack_no_msg_set(int v) { _attack_no_msg = v; }
 void Tp::attacks_per_round_set(int v) { _attacks_per_round = v; }
 void Tp::attack_undead_set(int v) { _attack_undead = v; }
-void Tp::blast_max_radius_set(int v) { _blast_max_radius = v; }
 void Tp::blast_min_radius_set(int v) { _blast_min_radius = v; }
 void Tp::blit_bot_off_set(int v) { _blit_bot_off = v; }
 void Tp::blit_left_off_set(int v) { _blit_left_off = v; }
@@ -760,6 +759,7 @@ void Tp::dmg_received_doubled_from_fire_set(int v) { _dmg_received_doubled_from_
 void Tp::dmg_received_doubled_from_necrosis_set(int v) { _dmg_received_doubled_from_necrosis = v; }
 void Tp::dmg_received_doubled_from_poison_set(int v) { _dmg_received_doubled_from_poison = v; }
 void Tp::dmg_received_doubled_from_water_set(int v) { _dmg_received_doubled_from_water = v; }
+void Tp::effect_radius_set(int v) { _effect_radius = v; }
 void Tp::enchant_level_set(int v) { _enchant_level = v; }
 void Tp::enchant_max_set(int v) { _enchant_max = v; }
 void Tp::environ_avoids_acid_set(int v) { _environ_avoids_acid = v; }

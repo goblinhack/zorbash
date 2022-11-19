@@ -54,9 +54,11 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.charge_count(self, 5)
-    my.blast_max_radius(self, 1)
     my.collision_hit_priority(self, 6)
+    my.dmg_negation_chance_d1000(self, 0, 1000)
+    my.dmg_negation_dice(self, "1")  # This is the damage when the monst fires
     my.dmg_received_doubled_from_cold(self, True)
+    my.effect_radius(self, 1)
     my.environ_avoids_water(self, 100)
     my.equip_carry_anim(self, "staff_negation_carry")
     my.gfx_ascii_fade_with_dist(self, True)
@@ -84,8 +86,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_loggable(self, True)
     my.is_magical(self, True)
     my.is_staff(self, True)
-    my.is_target_select(self, True)
     my.is_target_radial(self, True)
+    my.is_target_select(self, True)
     my.is_throwable(self, True)
     my.is_tickable(self, True)  # So it can interact with negation
     my.is_treasure_class_b(self, True)
@@ -99,8 +101,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.normal_placement_rules(self, True)
     my.on_fall_do(self, "me.on_fall()")
     my.on_idle_tick_freq_dice(self, "1d200+200:me.on_idle()")
-    my.dmg_negation_chance_d1000(self, 0, 1000)
-    my.dmg_negation_dice(self, "1")  # This is the damage when the monst fires
     my.on_thrown_do(self, "me.on_thrown()")
     my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")
     my.range_max(self, 7)

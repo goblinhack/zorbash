@@ -965,7 +965,6 @@ public:
   int attacks_per_round(void);
   int attack_undead(void);
   int attack(void);
-  int blast_max_radius(void);
   int blast_min_radius(void);
   int bounce_count(void);
   int capacity_height(void);
@@ -1096,6 +1095,7 @@ public:
   int dmg_received_doubled_from_water(void);
   int dmg_water_chance_d1000(int);
   int dmg_water(void);
+  int effect_radius(void);
   int enchant_decr(int);
   int enchant_decr(void);
   int enchant_get(void);
@@ -2349,7 +2349,6 @@ public:
   void goal_penalty_tick(void);
   void grass_tick(void);
   void hide(void);
-  void negation_dmg(int damage, bool &is_killed);
   void hooks_remove_from(Thingp);
   void hooks_remove(void);
   void hunger_clock_tick(void);
@@ -2399,6 +2398,7 @@ public:
   void msg(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void msg_set(const std::string &);
   void necrosis_tick(void);
+  void negation_dmg(int damage, bool &is_killed);
   void new_aip(void);
   void new_infop(void);
   void new_itemsp(void);

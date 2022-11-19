@@ -91,7 +91,7 @@ bool Thing::matches(const std::string &what)
   if (attack_undead() && (what == "attack_undead")) {
     return true;
   }
-  if (blast_max_radius() && (what == "blast_max_radius")) {
+  if (effect_radius() && (what == "effect_radius")) {
     return true;
   }
   if (blast_min_radius() && (what == "blast_min_radius")) {
@@ -1253,8 +1253,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "attack_undead") {
     return &Thing::attack_undead;
   }
-  if (what == "blast_max_radius") {
-    return &Thing::blast_max_radius;
+  if (what == "effect_radius") {
+    return &Thing::effect_radius;
   }
   if (what == "blast_min_radius") {
     return &Thing::blast_min_radius;

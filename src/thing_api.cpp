@@ -225,11 +225,11 @@ int Thing::is_able_to_grapple(void)
   return (tp()->is_able_to_grapple());
 }
 
-int Thing::blast_max_radius(void)
+int Thing::effect_radius(void)
 {
   TRACE_NO_INDENT();
 
-  int radius = tp()->blast_max_radius();
+  int radius = tp()->effect_radius();
   if (radius) {
     radius += enchant_get();
   }

@@ -536,8 +536,8 @@ PyObject *spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObjec
   }
 
   if (! radius_max) {
-    if (t->blast_max_radius()) {
-      radius_max = t->blast_max_radius();
+    if (t->effect_radius()) {
+      radius_max = t->effect_radius();
     }
   }
 
@@ -812,7 +812,6 @@ TP_BODY_SET_INT(attack_meat)
 TP_BODY_SET_INT(attack_no_msg)
 TP_BODY_SET_INT(attacks_per_round)
 TP_BODY_SET_INT(attack_undead)
-TP_BODY_SET_INT(blast_max_radius)
 TP_BODY_SET_INT(blast_min_radius)
 TP_BODY_SET_INT(blit_bot_off)
 TP_BODY_SET_INT(blit_left_off)
@@ -844,6 +843,7 @@ TP_BODY_SET_INT(dmg_received_doubled_from_fire)
 TP_BODY_SET_INT(dmg_received_doubled_from_necrosis)
 TP_BODY_SET_INT(dmg_received_doubled_from_poison)
 TP_BODY_SET_INT(dmg_received_doubled_from_water)
+TP_BODY_SET_INT(effect_radius)
 TP_BODY_SET_INT(enchant_max)
 TP_BODY_SET_INT(environ_avoids_acid)
 TP_BODY_SET_INT(environ_avoids_cold)
