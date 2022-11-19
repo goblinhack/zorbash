@@ -229,7 +229,7 @@ static void wid_actionbar_robot_over_begin(Widp w, int relx, int rely, int wheel
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
   int width  = 32;
-  int height = 19;
+  int height = 20;
 
   tlx -= width / 2;
   brx += width / 2;
@@ -857,7 +857,7 @@ static void wid_actionbar_wait_over_begin(Widp w, int relx, int rely, int wheelx
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
   int width  = 32;
-  int height = 12;
+  int height = 13;
 
   tlx -= width / 2;
   brx += width / 2;
@@ -933,7 +933,7 @@ static void wid_actionbar_zoom_in_over_begin(Widp w, int relx, int rely, int whe
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
   int width  = 32;
-  int height = 6;
+  int height = 7;
 
   tlx -= width / 2;
   brx += width / 2;

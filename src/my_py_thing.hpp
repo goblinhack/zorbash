@@ -61,6 +61,7 @@ PyObject *thing_dmg_received_doubled_from_cold(PyObject *obj, PyObject *args, Py
 PyObject *thing_dmg_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_get(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_blast_max_radius_get(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_max_current_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_max_current_incr(PyObject *obj, PyObject *args, PyObject *keywds);

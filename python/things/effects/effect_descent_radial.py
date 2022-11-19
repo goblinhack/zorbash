@@ -15,7 +15,6 @@ def on_born(me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.blast_max_radius(self, 2)
     my.collision_check(self, True)
     my.gfx_ascii_shown(self, True)
     my.is_loggable(self, True)

@@ -333,6 +333,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_dmg_water),
     MY_ADD_PYTHON_FUNCTION(thing_enchant_decr),
     MY_ADD_PYTHON_FUNCTION(thing_enchant_get),
+    MY_ADD_PYTHON_FUNCTION(thing_blast_max_radius_get),
     MY_ADD_PYTHON_FUNCTION(thing_enchant_incr),
     MY_ADD_PYTHON_FUNCTION(thing_enchant_max),
     MY_ADD_PYTHON_FUNCTION(thing_enchant_max_current_decr),

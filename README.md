@@ -1,5 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - move damage from lasers to the item                                                                                                        -->
+<!-- - if you enchant a staff of negation does it do more damage?                                                                                 -->
 <!-- - fireskull should die if chilled?                                                                                                           -->
 <!-- - falling in block of ice should fall together                                                                                               -->
 <!-- - using fireball in block of ice                                                                                                             -->
@@ -33,7 +35,7 @@
 <!-- - chaos bell of summoning                                                                                                                    -->
 <!-- - crystal chest needs crystal key                                                                                                            -->
 <!-- - teleport block                                                                                                                             -->
-<!-- - invisibility staff / and crystals walls (or chest) that reflect, so can use on yourself or ally                                             -->
+<!-- - invisibility staff / and crystals walls (or chest) that reflect, so can use on yourself or ally                                            -->
 <!-- - cloak of jelly                                                                                                                             -->
 <!-- - need allies                                                                                                                                -->
 <!-- - potion of paralysis                                                                                                                        -->

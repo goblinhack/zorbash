@@ -10,7 +10,7 @@
 int Thing::attacks_per_round(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->attacks_per_round());
+  return (std::max(1, tp()->attacks_per_round()));
 }
 
 int Thing::weapon_dmg(void)

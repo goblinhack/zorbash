@@ -168,6 +168,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
         wid_popup_window->log("Burnt to a crisp.");
       }
       wid_popup_window->log("It's dead, Jim");
+      wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
     }
   } else {
     wid_popup_window->log(t->text_long_description(), TEXT_FORMAT_LHS, "pink");

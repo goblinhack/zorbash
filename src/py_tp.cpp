@@ -535,9 +535,6 @@ PyObject *spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObjec
     Py_RETURN_FALSE;
   }
 
-  //
-  // This is intentionally 0,0 to use the items range unless overridden
-  //
   if (! radius_max) {
     if (t->blast_max_radius()) {
       radius_max = t->blast_max_radius();

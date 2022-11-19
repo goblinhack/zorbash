@@ -3,10 +3,23 @@ import tp
 
 
 def on_born(me, x, y):
-    selection_x, selection_y = my.thing_coords_get(me)
-    for it in my.level_get_all(me, selection_x, selection_y):
-        if my.thing_possible_to_attack(me, it):
-            my.thing_hit(me, it)
+    item = my.thing_immediate_owner_id_get(me)
+    radius = my.thing_blast_max_radius_get(item)
+    # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
+    # my.con("item    {} {:X}".format(my.thing_name_get(item), item))
+
+    for dx in range(-radius, radius + 1):
+        for dy in range(-radius, radius + 1):
+            x1 = x + dx
+            y1 = y + dy
+            distance = (((x1 - x)**2 + (y1 - y)**2)**0.5)
+            if distance > radius:
+                continue
+
+            my.place_at(me, "magical_effect", x1, y1)
+            for it in my.level_get_all(item, x1, y1):
+                if my.thing_possible_to_attack(item, it):
+                    my.thing_hit(item, it)
 
 
 #
@@ -16,8 +29,6 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.collision_check(self, True)
-    my.dmg_negation_chance_d1000(self, 0, 1000)
-    my.dmg_negation_dice(self, "1")  # This is the damage when the monst fires
     my.gfx_ascii_shown(self, True)
     my.is_laser(self, True)
     my.is_loggable(self, True)

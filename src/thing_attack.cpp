@@ -472,7 +472,7 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
   }
 
   //
-  // Critical attach optins
+  // Critical attack optins
   //
   if (d10000() < crit_chance_d10000()) {
     attack_options->crit = true;
@@ -541,6 +541,9 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
   //
   bool tried_to_attack = false;
   int  attack_count    = 0;
+
+  dbg("Attack count #%d", attacks_per_round());
+  TRACE_AND_INDENT();
 
   for (int attack_num = 0; attack_num < attacks_per_round(); attack_num++) {
     bool fumble = false;
@@ -1106,6 +1109,10 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
       } else if (victim->stuck_count()) {
         //
         // If stuck, it cannot avoid the hits.
+        //
+      } else if (is_staff()) {
+        //
+        // Staffs always hit
         //
       } else {
         //
