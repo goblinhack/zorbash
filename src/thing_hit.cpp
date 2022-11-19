@@ -519,30 +519,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
 
     IF_DEBUG2 { real_hitter->log("Attack dmg_negation damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "negation ";
-
-    //
-    // If a magial monster, kill them
-    //
-    if (is_monst()) {
-      if (is_magical()) {
-        is_killed = true;
-      }
-    } else if (enchant_get()) {
-      //
-      // If an enchanted item, remove one charge (or more)
-      //
-      enchant_decr(damage);
-      auto owner = top_owner();
-      if (owner && owner->is_player()) {
-        if (! owner->is_dying && ! owner->is_dying) {
-          msg("Your %s is negated!", text_short_name().c_str());
-        }
-      } else if (owner && owner->is_monst()) {
-        if (! owner->is_dying && ! owner->is_dying) {
-          msg("The %s %s is negated!", apostrophise(owner->text_The()).c_str(), text_short_name().c_str());
-        }
-      }
-    }
+    negation_dmg(damage, is_killed);
   }
 
   /////////////////////////////////////////////////////////////////////////
@@ -1010,11 +987,11 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
     auto owner = top_owner();
     if (owner && owner->is_player()) {
       if (! owner->is_dying && ! owner->is_dying) {
-        msg("Your %s is destroyed!", text_short_name().c_str());
+        msg("Your %s is destroyed!", text_long_name().c_str());
       }
     } else if (owner && owner->is_monst()) {
       if (! owner->is_dying && ! owner->is_dying) {
-        msg("The %s %s is destroyed!", apostrophise(owner->text_The()).c_str(), text_short_name().c_str());
+        msg("The %s %s is destroyed!", apostrophise(owner->text_The()).c_str(), text_long_name().c_str());
       }
     }
   }
@@ -1232,37 +1209,37 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       }
 
       if (attack_options->attack_poison) {
-        msg("Your %s is being poisoned.", text_short_name().c_str());
+        msg("Your %s is being poisoned.", text_long_name().c_str());
       } else if (attack_options->attack_drown) {
-        msg("Your %s is being drowned.", text_short_name().c_str());
+        msg("Your %s is being drowned.", text_long_name().c_str());
       } else if (attack_options->attack_bite) {
-        msg("Your %s is being bitten.", text_short_name().c_str());
+        msg("Your %s is being bitten.", text_long_name().c_str());
       } else if (attack_options->attack_claw) {
-        msg("Your %s is being clawed.", text_short_name().c_str());
+        msg("Your %s is being clawed.", text_long_name().c_str());
       } else if (attack_options->attack_cold) {
-        msg("Your %s is freezing.", text_short_name().c_str());
+        msg("Your %s is freezing.", text_long_name().c_str());
       } else if (attack_options->attack_fire) {
-        msg("Your %s is burning.", text_short_name().c_str());
+        msg("Your %s is burning.", text_long_name().c_str());
       } else if (attack_options->attack_crush) {
-        msg("Your %s is being crushed.", text_short_name().c_str());
+        msg("Your %s is being crushed.", text_long_name().c_str());
       } else if (attack_options->attack_lightning) {
-        msg("Your %s is being zapped.", text_short_name().c_str());
+        msg("Your %s is being zapped.", text_long_name().c_str());
       } else if (attack_options->attack_energy) {
-        msg("Your %s is being blasted.", text_short_name().c_str());
+        msg("Your %s is being blasted.", text_long_name().c_str());
       } else if (attack_options->attack_negation) {
-        msg("Your %s is being negated.", text_short_name().c_str());
+        msg("Your %s is being negated.", text_long_name().c_str());
       } else if (attack_options->attack_acid) {
-        msg("Your %s is disintegrating.", text_short_name().c_str());
+        msg("Your %s is disintegrating.", text_long_name().c_str());
       } else if (attack_options->attack_digest) {
-        msg("Your %s is dissolving.", text_short_name().c_str());
+        msg("Your %s is dissolving.", text_long_name().c_str());
       } else if (attack_options->attack_necrosis) {
-        msg("Your %s is rotting.", text_short_name().c_str());
+        msg("Your %s is rotting.", text_long_name().c_str());
       } else if (attack_options->attack_draining) {
-        msg("Your %s is drained.", text_short_name().c_str());
+        msg("Your %s is drained.", text_long_name().c_str());
       } else if (attack_options->attack_drown) {
-        msg("Your %s is drowned.", text_short_name().c_str());
+        msg("Your %s is drowned.", text_long_name().c_str());
       } else {
-        msg("Your %s is being damaged.", text_short_name().c_str());
+        msg("Your %s is being damaged.", text_long_name().c_str());
       }
     } else if (is_alive_monst() || is_mob()) {
       //

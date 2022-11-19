@@ -2349,6 +2349,7 @@ public:
   void goal_penalty_tick(void);
   void grass_tick(void);
   void hide(void);
+  void negation_dmg(int damage, bool &is_killed);
   void hooks_remove_from(Thingp);
   void hooks_remove(void);
   void hunger_clock_tick(void);
