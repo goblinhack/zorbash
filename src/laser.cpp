@@ -90,9 +90,7 @@ void Level::new_laser(ThingId id, ThingId victim_id, LaserInfo info, uint32_t du
   //
   // The ascii display is a bit slower, so to avoid not seeing the laser in all its glory, bump the duration.
   //
-  if (g_opt_ascii) {
-    dur *= 8;
-  }
+  dur *= 8;
 
   info.ts_stop = now + dur;
 

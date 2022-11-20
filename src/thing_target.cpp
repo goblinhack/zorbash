@@ -49,6 +49,7 @@ void Thing::on_targetted(point target)
     return;
   }
 
+  TRACE_NO_INDENT();
   auto t = split_tokens(on_targetted, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];

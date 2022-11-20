@@ -43,6 +43,7 @@ def tp_init(name, text_long_name):
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 50)
+    my.is_allied_with(self, "flesh_golem")
     my.distance_vision(self, 5)
     my.dmg_nat_att_chance_d1000(self, 0, 1000)
     my.dmg_nat_att_chance_d1000(self, 1, 1000)
@@ -127,7 +128,7 @@ def tp_init(name, text_long_name):
     my.thing_size(self, my.THING_SIZE_LARGE)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_Z_PRIO_MONST)
+    my.z_prio(self, my.MAP_Z_PRIO_BIG_MONST)
     # end sort marker
 
     delay = 500

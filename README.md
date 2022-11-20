@@ -1,6 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - no eat msg                                                                                                                                 -->
+<!-- - check monsters can zap staffs                                                                                                              -->
+<!-- - no eat msg when satiated at tick 1                                                                                                         -->
 <!-- - wand of fire does not hit all in path                                                                                                      -->
 <!-- - popups need alignment                                                                                                                      -->
 <!-- - move damage from lasers to the item                                                                                                        -->

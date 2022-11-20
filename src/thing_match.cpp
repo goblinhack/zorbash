@@ -724,7 +724,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag27() && (what == "unused_flag27")) {
     return true;
   }
-  if (unused_flag28() && (what == "unused_flag28")) {
+  if (is_lightning() && (what == "is_lightning")) {
     return true;
   }
   if (is_immune_to_negation() && (what == "is_immune_to_negation")) {
@@ -2204,8 +2204,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag27") {
     return &Thing::unused_flag27;
   }
-  if (what == "unused_flag28") {
-    return &Thing::unused_flag28;
+  if (what == "is_lightning") {
+    return &Thing::is_lightning;
   }
   if (what == "is_immune_to_negation") {
     return &Thing::is_immune_to_negation;

@@ -634,7 +634,7 @@ private:
   int _unused_flag25 {};
   int _unused_flag26 {};
   int _unused_flag27 {};
-  int _unused_flag28 {};
+  int _is_lightning {};
   int _unused_flag3 {};
   int _unused_flag4 {};
   int _unused_flag40 {};
@@ -1673,7 +1673,7 @@ public:
   int unused_flag25(void) const;
   int unused_flag26(void) const;
   int unused_flag27(void) const;
-  int unused_flag28(void) const;
+  int is_lightning(void) const;
   int unused_flag2(void) const;
   int unused_flag3(void) const;
   int unused_flag40(void) const;
@@ -2355,7 +2355,7 @@ public:
   void unused_flag25_set(int v);
   void unused_flag26_set(int v);
   void unused_flag27_set(int v);
-  void unused_flag28_set(int v);
+  void is_lightning_set(int v);
   void unused_flag2_set(int v);
   void unused_flag3_set(int v);
   void unused_flag40_set(int v);

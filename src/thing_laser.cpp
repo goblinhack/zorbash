@@ -89,7 +89,7 @@ bool Thing::laser_fire_at(Thingp item, const std::string &gfx_targetted_laser, T
   auto end   = target->last_blit_at;
 
   if (! start.x && ! start.y) {
-    msg("Misfire!");
+    msg("Misfire1!");
     if (is_player()) {
       game->tick_begin("failed to fire laser");
     }
@@ -97,7 +97,7 @@ bool Thing::laser_fire_at(Thingp item, const std::string &gfx_targetted_laser, T
   }
 
   if (! end.x && ! end.y) {
-    msg("Misfire!");
+    msg("Misfire2!");
     if (is_player()) {
       game->tick_begin("failed to fire laser");
     }
@@ -178,7 +178,10 @@ bool Thing::laser_fire_at(Thingp item, const std::string &gfx_targetted_laser, T
         laser->last_blit_at = end;
 
         on_use(laser, target);
-        item->on_targetted(target->curr_at);
+
+        if (item) {
+          item->on_targetted(target->curr_at);
+        }
 
         //
         // Set everything in the way on fire.
@@ -222,7 +225,10 @@ bool Thing::laser_fire_at(Thingp item, const std::string &gfx_targetted_laser, T
       laser->last_blit_at = end;
 
       on_use(laser, target);
-      item->on_targetted(target->curr_at);
+
+      if (item) {
+        item->on_targetted(target->curr_at);
+      }
 
       //
       // Set everything in the way on fire.

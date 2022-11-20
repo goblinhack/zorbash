@@ -88,6 +88,10 @@ bool Thing::on_fire_set(const std::string &why)
     return false;
   }
 
+  if (level->is_water(curr_at)) {
+    return false;
+  }
+
   if (! is_able_to_burn() && ! is_combustible()) {
     return false;
   }

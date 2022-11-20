@@ -97,6 +97,11 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
       continue;
     }
 
+    if (is_friend(t)) {
+      dbg2("Collision-candidate: %s friend", t->to_short_string().c_str());
+      continue;
+    }
+
     if (! best) {
       best = &cand;
       continue;

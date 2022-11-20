@@ -41,6 +41,7 @@ def tp_init(name, text_long_name):
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.distance_vision(self, 5)
+    my.is_allied_with(self, "cement_man")
     my.dmg_nat_att_chance_d1000(self, 0, 1000)
     my.dmg_nat_att_chance_d1000(self, 1, 1000)
     my.dmg_nat_att_dice(self, "3d8+6")
@@ -123,7 +124,7 @@ def tp_init(name, text_long_name):
     my.thing_size(self, my.THING_SIZE_LARGE)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_Z_PRIO_MONST)
+    my.z_prio(self, my.MAP_Z_PRIO_BIG_MONST)
     # end sort marker
 
     delay = 500

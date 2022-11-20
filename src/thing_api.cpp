@@ -1434,10 +1434,10 @@ int Thing::unused_flag27(void)
   return (tp()->unused_flag27());
 }
 
-int Thing::unused_flag28(void)
+int Thing::is_lightning(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag28());
+  return (tp()->is_lightning());
 }
 
 int Thing::is_immune_to_negation(void)

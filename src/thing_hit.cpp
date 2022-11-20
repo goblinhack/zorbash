@@ -1382,10 +1382,20 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       }
     }
   } else {
-    //
-    // Something else hitting something else
-    //
-    if (real_hitter != this) {
+    if (hitter->is_lightning()) {
+      //
+      // Fork lightning passes through water.
+      //
+      if (real_hitter->is_water()) {
+        hitter->msg("%s surges through the water and electrifies %s for %d damage.", hitter->text_The().c_str(),
+                    text_the().c_str(), damage);
+      } else {
+        hitter->msg("%s electrifies %s for %d damage.", hitter->text_The().c_str(), text_the().c_str(), damage);
+      }
+    } else if (real_hitter != this) {
+      //
+      // Something else hitting something else
+      //
       real_hitter->msg("%s hits %s.", real_hitter->text_The().c_str(), text_the().c_str());
     }
   }

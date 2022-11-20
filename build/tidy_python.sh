@@ -533,7 +533,7 @@ do
       unused_flag25 \
       unused_flag26 \
       unused_flag27 \
-      unused_flag28 \
+      is_lightning \
       is_immune_to_negation \
       unused_flag3 \
       unused_flag4 \

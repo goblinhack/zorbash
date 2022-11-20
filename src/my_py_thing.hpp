@@ -575,7 +575,7 @@ PyObject *thing_unused_flag24(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag25(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag26(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag27(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag28(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_lightning(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag2(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag3(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag40(PyObject *obj, PyObject *args, PyObject *keywds);

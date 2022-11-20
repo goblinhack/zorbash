@@ -700,7 +700,7 @@ int Tp::unused_flag24(void) const { return _unused_flag24; }
 int Tp::unused_flag25(void) const { return _unused_flag25; }
 int Tp::unused_flag26(void) const { return _unused_flag26; }
 int Tp::unused_flag27(void) const { return _unused_flag27; }
-int Tp::unused_flag28(void) const { return _unused_flag28; }
+int Tp::is_lightning(void) const { return _is_lightning; }
 int Tp::unused_flag2(void) const { return _unused_flag2; }
 int Tp::unused_flag3(void) const { return _unused_flag3; }
 int Tp::unused_flag40(void) const { return _unused_flag40; }
@@ -1379,7 +1379,7 @@ void Tp::unused_flag24_set(int v) { _unused_flag24 = v; }
 void Tp::unused_flag25_set(int v) { _unused_flag25 = v; }
 void Tp::unused_flag26_set(int v) { _unused_flag26 = v; }
 void Tp::unused_flag27_set(int v) { _unused_flag27 = v; }
-void Tp::unused_flag28_set(int v) { _unused_flag28 = v; }
+void Tp::is_lightning_set(int v) { _is_lightning = v; }
 void Tp::unused_flag2_set(int v) { _unused_flag2 = v; }
 void Tp::unused_flag3_set(int v) { _unused_flag3 = v; }
 void Tp::unused_flag40_set(int v) { _unused_flag40 = v; }

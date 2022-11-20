@@ -107,7 +107,7 @@ public:
   SDL_Window *window {};
 };
 
-#define SDL_KEY_REPEAT_HUNDREDTHS_FIRST 200
+#define SDL_KEY_REPEAT_HUNDREDTHS_FIRST 500
 #define SDL_KEY_REPEAT_HUNDREDTHS_NEXT  10
 
 extern SDL sdl;

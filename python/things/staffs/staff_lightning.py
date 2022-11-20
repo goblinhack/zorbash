@@ -2,6 +2,16 @@ import my
 import tp
 
 
+def on_targetted(me, x, y):
+    # my.con("targetted {} {:X}".format(my.thing_name_get(me), me))
+
+    my.thing_sound_play_channel(me, my.CHANNEL_WEAPON, "lightning_a")
+    my.place_at(me, "explosion_fire", x, y)
+    for it in my.level_get_all(me, x, y):
+        if my.thing_possible_to_attack(me, it):
+            my.thing_hit(me, it)
+
+
 def on_idle(me, x, y):
     #
     # Random recharge
@@ -50,7 +60,7 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.charge_count(self, 3)
     my.collision_hit_priority(self, 6)
-    my.dmg_energy_dice(self, "1d20+8")
+    my.dmg_lightning_dice(self, "1d20+8")
     my.dmg_lightning_chance_d1000(self, 0, 1000)
     my.equip_carry_anim(self, "staff_lightning_carry")
     my.gfx_ascii_fade_with_dist(self, True)
@@ -59,7 +69,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
-    my.gfx_targetted_laser(self, "laser_lightning")
+    my.gfx_targetted_laser(self, "staff_lightning_laser")
     my.gold_value_dice(self, "300")
     my.health_initial_dice(self, "20+1d10")
     my.is_able_to_burn(self, True)
@@ -75,6 +85,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_enchantable(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)
+    my.is_able_to_attack_owner(self, True)
+    my.on_targetted_do(self, "me.on_targetted()")
     my.is_loggable(self, True)
     my.is_magical(self, True)
     my.is_staff(self, True)

@@ -40,6 +40,7 @@ enum {
   MAP_Z_PRIO_RING,          // Carried rings
   MAP_Z_PRIO_BARREL,        // In front of creatures for when they are trapped
   MAP_Z_PRIO_SWING,         // Attack animations
+  MAP_Z_PRIO_BIG_MONST,     // Big monsters stand in front
   MAP_Z_PRIO_CONSUMER,      // e.g. a gelatinous cube
   MAP_Z_PRIO_EFFECT,        // Potion effects
   MAP_Z_PRIO_CURSOR,        // Selected path; you want this in front of large monsters so you can target them.
