@@ -1,6 +1,6 @@
 #pragma once
 #include "my_callstack.hpp"
-#include "my_globals.hpp"
+// REMOVED #include "my_globals.hpp"
 #include <array>
 #include <assert.h>
 #include <iostream>

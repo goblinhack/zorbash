@@ -11,9 +11,9 @@
 #include <list>
 #include <vector>
 
-#include "my_game_defs.hpp"
+// REMOVED #include "my_game_defs.hpp"
 #include "my_hiscore.hpp"
-#include "my_thing_defs.hpp"
+// REMOVED #include "my_thing_defs.hpp"
 #include "my_world.hpp"
 
 class WidBag;

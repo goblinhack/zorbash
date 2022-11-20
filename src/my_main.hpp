@@ -7,7 +7,7 @@
 #define _MY_MAIN_HPP_
 
 #include "my_format_str_attribute.hpp"
-#include "my_globals.hpp"
+// REMOVED #include "my_globals.hpp"
 
 void BOTCON(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
 void BOTCON(const wchar_t *fmt, ...);
