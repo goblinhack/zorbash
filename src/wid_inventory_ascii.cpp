@@ -274,7 +274,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
       wid_set_pos(w, tl, br);
       wid_set_text(w, "Eat");
       y_at += 2;
-    } else if (! item_option->target_name_laser().empty()) {
+    } else if (! item_option->gfx_targetted_laser().empty()) {
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;
       auto w = wid_new_square_button(p, "use");
@@ -337,7 +337,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
     //
     // "You shall not pass" mode
     //
-    if (! item_option->target_name_radial().empty()) {
+    if (! item_option->gfx_targetted_radial().empty()) {
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;
       auto w = wid_new_square_button(p, "use");

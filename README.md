@@ -1,6 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- - no eat msg                                                                                                                                 -->
+<!-- - wand of fire does not hit all in path                                                                                                      -->
 <!-- - popups need alignment                                                                                                                      -->
 <!-- - move damage from lasers to the item                                                                                                        -->
 <!-- - if you enchant a staff of negation does it do more damage?                                                                                 -->

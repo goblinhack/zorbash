@@ -2,6 +2,45 @@ import my
 import tp
 
 
+def on_targetted(me, x, y):
+    radius = my.thing_effect_radius_get(me)
+    # my.con("targetted {} {:X}".format(my.thing_name_get(me), me))
+
+    for dx in range(-radius, radius + 1):
+        for dy in range(-radius, radius + 1):
+            x1 = x + dx
+            y1 = y + dy
+            distance = (((x1 - x)**2 + (y1 - y)**2)**0.5)
+            if distance > radius:
+                continue
+
+            my.place_at(me, "magical_effect", x1, y1)
+            for it in my.level_get_all(me, x1, y1):
+                if my.thing_possible_to_attack(me, it):
+                    my.thing_hit(me, it)
+
+
+def on_targetted_radially(me, x, y):
+    radius = my.thing_effect_radius_get(me)
+    radius += 1
+    # my.con("targetted radially {} {:X}".format(my.thing_name_get(me), me))
+
+    for dx in range(-radius, radius + 1):
+        for dy in range(-radius, radius + 1):
+            if dx == 0 and dy == 0:
+                continue
+            x1 = x + dx
+            y1 = y + dy
+            distance = (((x1 - x)**2 + (y1 - y)**2)**0.5)
+            if distance > radius:
+                continue
+
+            my.place_at(me, "magical_effect", x1, y1)
+            for it in my.level_get_all(me, x1, y1):
+                if my.thing_possible_to_attack(me, it):
+                    my.thing_hit(me, it)
+
+
 def on_thrown(me, x, y):
     if my.level_is_chasm_at(me, x, y):
         return
@@ -58,7 +97,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.dmg_negation_chance_d1000(self, 0, 1000)
     my.dmg_negation_dice(self, "1")  # This is the damage when the monst fires
     my.dmg_received_doubled_from_cold(self, True)
-    my.effect_radius(self, 1)
+    my.effect_radius(self, 0)
     my.environ_avoids_water(self, 100)
     my.equip_carry_anim(self, "staff_negation_carry")
     my.gfx_ascii_fade_with_dist(self, True)
@@ -67,6 +106,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
+    my.gfx_targetted_laser(self, "staff_negation_laser")
+    my.gfx_targetted_radial(self, "staff_negation_radial")
     my.gold_value_dice(self, "300")
     my.health_initial_dice(self, "20+1d10")
     my.is_able_to_burn(self, True)
@@ -101,11 +142,11 @@ def tp_init(name, text_long_name, text_short_name):
     my.normal_placement_rules(self, True)
     my.on_fall_do(self, "me.on_fall()")
     my.on_idle_tick_freq_dice(self, "1d200+200:me.on_idle()")
+    my.on_targetted_do(self, "me.on_targetted()")
+    my.on_targetted_radially_do(self, "me.on_targetted_radially()")
     my.on_thrown_do(self, "me.on_thrown()")
     my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")
     my.range_max(self, 7)
-    my.target_name_laser(self, "laser_negation")
-    my.target_name_radial(self, "effect_negation_radial")
     my.temperature(self, 30)
     my.text_a_or_an(self, "a")
     my.text_long_description(self, "Discharges a single negationball at an ungrateful recipient...")

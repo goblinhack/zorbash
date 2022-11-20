@@ -5632,16 +5632,16 @@ const std::string &Thing::gfx_anim_use(void)
   return (tp()->gfx_anim_use());
 }
 
-const std::string &Thing::target_name_laser(void)
+const std::string &Thing::gfx_targetted_laser(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->target_name_laser());
+  return (tp()->gfx_targetted_laser());
 }
 
-const std::string &Thing::target_name_radial(void)
+const std::string &Thing::gfx_targetted_radial(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->target_name_radial());
+  return (tp()->gfx_targetted_radial());
 }
 
 const std::string &Thing::text_unused1(void)
@@ -5720,6 +5720,18 @@ const std::string &Thing::on_thrown_do(void)
 {
   TRACE_NO_INDENT();
   return (tp()->on_thrown_do());
+}
+
+const std::string &Thing::on_targetted_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_targetted_do());
+}
+
+const std::string &Thing::on_targetted_radially_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_targetted_radially_do());
 }
 
 const std::string &Thing::on_dropped_do(void)

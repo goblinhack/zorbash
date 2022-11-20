@@ -25,21 +25,21 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
 
     used(item, victim, true);
 
-    if (! item->target_name_laser().empty()) {
+    if (! item->gfx_targetted_laser().empty()) {
       UseOptions use_options = {};
       if (non_pcg_random_range(0, 100) < 10) {
-        if (! item->target_name_radial().empty()) {
+        if (! item->gfx_targetted_radial().empty()) {
           //
           // You shall not pass!
           //
           use_options.radial_effect = true;
           victim                    = this;
-          laser_fire_at(item, item->target_name_radial(), victim, &use_options);
+          laser_fire_at(item, item->gfx_targetted_radial(), victim, &use_options);
         } else {
-          laser_fire_at(item, item->target_name_laser(), victim, &use_options);
+          laser_fire_at(item, item->gfx_targetted_laser(), victim, &use_options);
         }
       } else {
-        laser_fire_at(item, item->target_name_laser(), victim, &use_options);
+        laser_fire_at(item, item->gfx_targetted_laser(), victim, &use_options);
       }
     } else {
       err("Unknown beam weapon: %s.", item->text_the().c_str());
@@ -67,17 +67,17 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
   return is_target_select(item);
 }
 
-bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, Thingp target, UseOptions *use_options)
+bool Thing::laser_fire_at(Thingp item, const std::string &gfx_targetted_laser, Thingp target, UseOptions *use_options)
 {
   //
   // NOTE: the item can be null here if this is monster firing with its
   // intrinsic ability. Or it might be non null if say a staff.
   //
 
-  dbg("Laser fire %s at %s", target_name_laser.c_str(), target->to_short_string().c_str());
+  dbg("Laser fire %s at %s", gfx_targetted_laser.c_str(), target->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  if (target_name_laser == "") {
+  if (gfx_targetted_laser == "") {
     die("No laser name");
   }
 
@@ -120,7 +120,7 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, Thi
     dbg("Firing radial effect");
     TRACE_AND_INDENT();
 
-    auto laser = level->thing_new(target_name_laser, target->curr_at, item ? item : this);
+    auto laser = level->thing_new(gfx_targetted_laser, target->curr_at, item ? item : this);
     if (! laser) {
       err("No laser to fire");
       if (is_player()) {
@@ -132,6 +132,7 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, Thi
     dbg("Firing named laser with: %s", laser->to_string().c_str());
 
     on_use(laser, target);
+    item->on_targetted_radially();
   } else {
     dbg("Firing laser effect");
     TRACE_AND_INDENT();
@@ -149,7 +150,7 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, Thi
           continue;
         }
 
-        auto laser = level->thing_new(target_name_laser, target->curr_at, item ? item : this);
+        auto laser = level->thing_new(gfx_targetted_laser, target->curr_at, item ? item : this);
         if (! laser) {
           err("No laser to fire");
           if (is_player()) {
@@ -177,6 +178,7 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, Thi
         laser->last_blit_at = end;
 
         on_use(laser, target);
+        item->on_targetted(target->curr_at);
 
         //
         // Set everything in the way on fire.
@@ -192,7 +194,7 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, Thi
       dbg("Firing laser effect (nothing in the way)");
       TRACE_AND_INDENT();
 
-      auto laser = level->thing_new(target_name_laser, target->curr_at, item ? item : this);
+      auto laser = level->thing_new(gfx_targetted_laser, target->curr_at, item ? item : this);
       if (! laser) {
         err("No laser to fire");
         if (is_player()) {
@@ -220,6 +222,7 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, Thi
       laser->last_blit_at = end;
 
       on_use(laser, target);
+      item->on_targetted(target->curr_at);
 
       //
       // Set everything in the way on fire.
@@ -233,7 +236,7 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, Thi
   return true;
 }
 
-bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, point at, UseOptions *use_options)
+bool Thing::laser_fire_at(Thingp item, const std::string &gfx_targetted_laser, point at, UseOptions *use_options)
 {
   //
   // NOTE: the item can be null here if this is monster firing with its
@@ -243,7 +246,7 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, poi
   Thingp best = nullptr;
   point  best_hit_at;
 
-  dbg("Laser fire %s at point %s", target_name_laser.c_str(), at.to_string().c_str());
+  dbg("Laser fire %s at point %s", gfx_targetted_laser.c_str(), at.to_string().c_str());
   TRACE_AND_INDENT();
 
   //
@@ -252,7 +255,7 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, poi
   if (item->range_max()) {
     float dist = distance(item->curr_at, at);
     if (dist > item->range_max()) {
-      dbg("Laser fire %s at point %s is out of range, dist %f, max %d", target_name_laser.c_str(),
+      dbg("Laser fire %s at point %s is out of range, dist %f, max %d", gfx_targetted_laser.c_str(),
           at.to_string().c_str(), dist, item->range_max());
       float dx = (float) at.x - (float) item->curr_at.x;
       float dy = (float) at.y - (float) item->curr_at.y;
@@ -263,7 +266,7 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, poi
       at = curr_at + point(dx, dy);
 
       float dist = distance(item->curr_at, at);
-      dbg("Laser fire %s at new point %s, dist %f, max %d", target_name_laser.c_str(), at.to_string().c_str(), dist,
+      dbg("Laser fire %s at new point %s, dist %f, max %d", gfx_targetted_laser.c_str(), at.to_string().c_str(), dist,
           item->range_max());
     }
   }
@@ -271,13 +274,13 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, poi
   AttackOptions attack_options       = {};
   attack_options.allow_hitting_walls = true;
   if (victim_attack_choose_best(nullptr, at, &best, &best_hit_at, &attack_options)) {
-    return laser_fire_at(item, target_name_laser, best, use_options);
+    return laser_fire_at(item, gfx_targetted_laser, best, use_options);
   }
 
   FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
   {
     if (t->is_the_grid) {
-      return laser_fire_at(item, target_name_laser, t, use_options);
+      return laser_fire_at(item, gfx_targetted_laser, t, use_options);
     }
   }
   FOR_ALL_THINGS_END()

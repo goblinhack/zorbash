@@ -503,14 +503,14 @@ bool Thing::use(Thingp what, UseOptions *use_options)
       game->tick_begin("player drunk an item");
     }
   } else if (what->is_staff()) {
-    dbg("Trying to wave: %s", what->to_short_string().c_str());
+    dbg("Trying to use: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
     if (is_player()) {
-      msg("You wave %s.", what->text_the().c_str());
+      msg("You use %s.", what->text_the().c_str());
     }
     used(what, this, false /* remove after use */, use_options);
     if (is_player()) {
-      game->tick_begin("player waved an item");
+      game->tick_begin("player used a staff");
     }
   } else if (what->is_ring()) {
     dbg("Trying to put on: %s", what->to_short_string().c_str());

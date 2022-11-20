@@ -98,8 +98,8 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
       //
       // The laser name is provided by the likes of wand
       //
-      if (! item->target_name_laser().empty()) {
-        player->laser_fire_at(item, item->target_name_laser(), level->cursor->curr_at);
+      if (! item->gfx_targetted_laser().empty()) {
+        player->laser_fire_at(item, item->gfx_targetted_laser(), level->cursor->curr_at);
       } else if (! item->target_name_projectile().empty()) {
         player->projectile_fire_at(item, item->target_name_projectile(), level->cursor->curr_at);
       } else if (item->is_item_targetted()) {

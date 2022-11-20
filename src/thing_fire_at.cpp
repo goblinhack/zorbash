@@ -216,10 +216,10 @@ bool Thing::fire_at_target(void)
 bool Thing::fire_at_and_choose_target(Thingp item, UseOptions *use_options)
 {
   TRACE_NO_INDENT();
-  if (use_options && use_options->radial_effect && ! item->target_name_radial().empty()) {
-    return laser_fire_at(item, item->target_name_radial(), this, use_options);
+  if (use_options && use_options->radial_effect && ! item->gfx_targetted_radial().empty()) {
+    return laser_fire_at(item, item->gfx_targetted_radial(), this, use_options);
   }
-  if (! item->target_name_laser().empty()) {
+  if (! item->gfx_targetted_laser().empty()) {
     return laser_choose_target(item);
   }
   return projectile_choose_target(item);
@@ -228,7 +228,7 @@ bool Thing::fire_at_and_choose_target(Thingp item, UseOptions *use_options)
 bool Thing::fire_at(Thingp item, Thingp target)
 {
   TRACE_NO_INDENT();
-  if (item->target_name_laser().empty()) {
+  if (item->gfx_targetted_laser().empty()) {
     return projectile_choose_target(item, target);
   }
   return laser_choose_target(item, target);

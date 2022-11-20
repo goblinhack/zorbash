@@ -881,6 +881,8 @@ public:
   const std::string &on_swing_do(void);
   const std::string &on_teleport_do(void);
   const std::string &on_thrown_do(void);
+  const std::string &on_targetted_radially_do(void);
+  const std::string &on_targetted_do(void);
   const std::string &on_dropped_do(void);
   const std::string &on_tick_do(void);
   const std::string &on_unequip_do(void);
@@ -900,9 +902,9 @@ public:
   const std::string &str1(void);
   const std::string &str2(void);
   const std::string &str4(void);
-  const std::string &target_name_laser(void);
+  const std::string &gfx_targetted_laser(void);
   const std::string &target_name_projectile(void);
-  const std::string &target_name_radial(void);
+  const std::string &gfx_targetted_radial(void);
   const std::string &text_debuff(void);
   const std::string &text_enchant(void);
   const std::string &text_hits(void);
@@ -2429,6 +2431,10 @@ public:
   void on_resting(void);
   void on_stuck(void);
   void on_swing(Thingp what);
+  void on_targetted(point target);
+  void on_targetted_radially(void);
+  void on_targetted_radial(void);
+  void on_targetted(void);
   void on_teleport(void);
   void on_thrown_callback(void);
   void on_thrown(void);

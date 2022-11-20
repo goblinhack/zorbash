@@ -34,7 +34,7 @@ Laser_::Laser_(Levelp level, ThingId thing_id, ThingId victim_id, LaserInfo info
   if (t->is_laser()) {
     name = t->tp()->name();
   } else {
-    name = t->target_name_laser();
+    name = t->gfx_targetted_laser();
     if (name.empty()) {
       t->err("no laser name");
       return;
@@ -44,22 +44,22 @@ Laser_::Laser_(Levelp level, ThingId thing_id, ThingId victim_id, LaserInfo info
   //
   // Find all laser animation tiles. Names look like this:
   //
-  // "laser_negation.{frame}.start",
-  // "laser_negation.{frame}.{mid}.1",
-  // "laser_negation.{frame}.{mid}.2",
-  // "laser_negation.{frame}.{mid}.3",
-  // "laser_negation.{frame}.{mid}.4",
-  // "laser_negation.{frame}.{mid}.5",
-  // "laser_negation.{frame}.{mid}.6",
-  // "laser_negation.{frame}.{mid}.7",
-  // "laser_negation.{frame}.{mid}.8",
-  // "laser_negation.{frame}.{mid}.9",
-  // "laser_negation.{frame}.{mid}.10",
-  // "laser_negation.{frame}.{mid}.11",
-  // "laser_negation.{frame}.{mid}.12",
-  // "laser_negation.{frame}.{mid}.13",
-  // "laser_negation.{frame}.{mid}.14",
-  // "laser_negation.{frame}.end",
+  // "staff_negation_laser.{frame}.start",
+  // "staff_negation_laser.{frame}.{mid}.1",
+  // "staff_negation_laser.{frame}.{mid}.2",
+  // "staff_negation_laser.{frame}.{mid}.3",
+  // "staff_negation_laser.{frame}.{mid}.4",
+  // "staff_negation_laser.{frame}.{mid}.5",
+  // "staff_negation_laser.{frame}.{mid}.6",
+  // "staff_negation_laser.{frame}.{mid}.7",
+  // "staff_negation_laser.{frame}.{mid}.8",
+  // "staff_negation_laser.{frame}.{mid}.9",
+  // "staff_negation_laser.{frame}.{mid}.10",
+  // "staff_negation_laser.{frame}.{mid}.11",
+  // "staff_negation_laser.{frame}.{mid}.12",
+  // "staff_negation_laser.{frame}.{mid}.13",
+  // "staff_negation_laser.{frame}.{mid}.14",
+  // "staff_negation_laser.{frame}.end",
   //
   tiles.resize(max_frames);
 

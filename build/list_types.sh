@@ -9,7 +9,7 @@ IN=README.md
 
 for i in amulets armor boots buffs cloaks debuffs doors food gauntlets items keys mobs monsters player potions rings shield skills staffs treasure weapons
 do
-  types=$(ls python/things/$i/*.py | grep -v swing | grep -v carry | wc -l)
+  types=$(ls python/things/$i/*.py | grep -v swing | grep -v carry | grep -v radial | grep -v laser | wc -l)
   echo "- $types $i" >> $PAYLOAD
 done
 
