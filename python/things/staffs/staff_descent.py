@@ -2,6 +2,47 @@ import my
 import tp
 
 
+def on_targetted(me, x, y):
+    radius = my.thing_effect_radius_get(me)
+    # my.con("targetted {} {:X}".format(my.thing_name_get(me), me))
+
+    for dx in range(-radius, radius + 1):
+        for dy in range(-radius, radius + 1):
+            x1 = x + dx
+            y1 = y + dy
+            distance = (((x1 - x)**2 + (y1 - y)**2)**0.5)
+            if distance > radius:
+                continue
+
+            my.place_at(me, "explosion_destroy_floor", x1, y1)
+            for it in my.level_get_all(me, x1, y1):
+                if my.thing_possible_to_attack(me, it):
+                    my.thing_hit(me, it)
+
+
+def on_targetted_radially(me, x, y):
+    radius = my.thing_effect_radius_get(me)
+    # my.con("targetted radially {} {:X}".format(my.thing_name_get(me), me))
+
+    for dx in range(-radius, radius + 1):
+        for dy in range(-radius, radius + 1):
+            if dx == 0 and dy == 0:
+                continue
+            x1 = x + dx
+            y1 = y + dy
+            distance = (((x1 - x)**2 + (y1 - y)**2)**0.5)
+            if distance > radius:
+                continue
+
+            my.place_at(me, "explosion_destroy_floor", x1, y1)
+            for it in my.level_get_all(me, x1, y1):
+                if my.thing_possible_to_attack(me, it):
+                    my.thing_hit(me, it)
+
+    owner = my.thing_top_owner_id_get(me)
+    my.thing_popup(owner, "You shall not pass!")
+
+
 def on_idle(me, x, y):
     #
     # Random recharge
@@ -62,8 +103,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
-    my.gfx_targetted_laser(self, "laser_descent")
-    my.gfx_targetted_radial(self, "effect_descent_radial")
+    my.gfx_targetted_laser(self, "staff_descent_laser")
+    my.gfx_targetted_radial(self, "staff_descent_radial")
     my.gold_value_dice(self, "500")
     my.health_initial_dice(self, "20+1d10")
     my.is_able_to_burn(self, True)
@@ -98,6 +139,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_fall_do(self, "me.on_fall()")
     my.on_final_use_do(self, "me.on_final_use()")
     my.on_idle_tick_freq_dice(self, "1d1000+200:me.on_idle()")
+    my.on_targetted_do(self, "me.on_targetted()")
+    my.on_targetted_radially_do(self, "me.on_targetted_radially()")
     my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.range_max(self, 7)

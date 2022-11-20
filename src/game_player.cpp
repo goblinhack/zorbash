@@ -209,7 +209,8 @@ void Game::place_player(void)
       if (1) {
         level->thing_new("cement_man", point(x + 1, y));
         level->thing_new("cement_man", point(x + 2, y));
-        auto w = level->thing_new("staff_negation", point(x, y));
+        // auto w = level->thing_new("staff_negation", point(x, y));
+        auto w = level->thing_new("staff_descent", point(x, y));
         t->carry(w);
         // t->enchant_without_stone(w);
       }
