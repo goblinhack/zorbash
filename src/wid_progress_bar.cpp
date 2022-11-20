@@ -2,7 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_sdl.hpp"
+#include "my_sdl_proto.hpp"
 #include "my_sys.hpp"
 #include "my_ui.hpp"
 #include "my_wid_popup.hpp"

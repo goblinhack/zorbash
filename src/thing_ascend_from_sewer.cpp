@@ -4,6 +4,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
+#include "my_sdl_proto.hpp"
 #include "my_thing.hpp"
 
 bool Thing::ascend_sewer_tick(void)

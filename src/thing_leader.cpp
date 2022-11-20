@@ -5,6 +5,7 @@
 #include "my_game.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 
 void Thing::on_you_are_declared_leader(void)

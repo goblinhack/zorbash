@@ -14,6 +14,7 @@
 std::default_random_engine rng;
 
 #include "my_audio.hpp"
+#include "my_command.hpp"
 #include "my_dir.hpp"
 #include "my_file.hpp"
 #include "my_font.hpp"
@@ -31,7 +32,7 @@ std::default_random_engine rng;
 #include "my_random.hpp"
 #include "my_random_name.hpp"
 #include "my_room.hpp"
-#include "my_sdl.hpp"
+#include "my_sdl_proto.hpp"
 #include "my_sound.hpp"
 #include "my_sys.hpp"
 #include "my_thing_template.hpp"

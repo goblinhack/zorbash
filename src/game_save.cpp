@@ -9,7 +9,7 @@
 #include "my_gl.hpp"
 #include "my_globals_extra.hpp"
 #include "my_monst.hpp"
-#include "my_sdl.hpp"
+#include "my_sdl_proto.hpp"
 #include "my_serialize.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"

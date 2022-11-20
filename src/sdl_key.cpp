@@ -2,7 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_sdl.hpp"
+#include "my_sdl_event.hpp"
 
 std::string to_string_ignoring_mods(const SDL_Keysym &k)
 {

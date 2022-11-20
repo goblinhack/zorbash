@@ -4,7 +4,6 @@
 
 #include "my_game.hpp"
 #include "my_monst.hpp"
-#include "my_sdl.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_ui.hpp"

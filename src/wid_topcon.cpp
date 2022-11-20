@@ -7,7 +7,7 @@
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
 #include "my_player.hpp"
-#include "my_sdl.hpp"
+#include "my_sdl_proto.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"

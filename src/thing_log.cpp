@@ -7,6 +7,7 @@
 #include "my_globals_extra.hpp"
 #include "my_log.hpp"
 #include "my_ptrcheck.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_wid_botcon.hpp"
 #include "my_wid_console.hpp"

@@ -7,7 +7,6 @@
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"
-#include "my_sdl.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_wid_actionbar.hpp"
@@ -150,7 +149,7 @@ bool Game::tick_end(void)
         time_ms() - game->tick_begin_ms);
   }
 
-  CON("-");
+  DBG("-");
 
   if (level) {
     level->update();

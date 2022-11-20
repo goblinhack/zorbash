@@ -4,7 +4,7 @@
 
 #include <SDL.h>
 
-#include "my_sdl.hpp"
+#include "my_sdl_proto.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_ui.hpp"

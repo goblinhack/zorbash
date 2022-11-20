@@ -8,8 +8,10 @@
 #include <sstream>
 #include <string>
 
+#include "my_globals.hpp"
+#include "my_main.hpp"
 #include "my_ptrcheck.hpp"
-#include "my_sdl.hpp"
+#include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_tex.hpp"
 #include "my_thing_template.hpp"

@@ -9,7 +9,6 @@
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_random.hpp"
-#include "my_sdl.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"

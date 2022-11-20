@@ -5,7 +5,7 @@
 #include "my_dungeon.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
-#include "my_sdl.hpp"
+#include "my_sdl_proto.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 

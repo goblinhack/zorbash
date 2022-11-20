@@ -13,6 +13,7 @@
 #include "my_main.hpp"
 #include "my_math.hpp"
 #include "my_ptrcheck.hpp"
+#include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_template.hpp"
 #include "my_thing.hpp"

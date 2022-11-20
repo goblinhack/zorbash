@@ -6,13 +6,13 @@
 #ifndef _MY_GAME_HPP_
 #define _MY_GAME_HPP_
 
+#include <SDL.h>
 #include <array>
 #include <list>
 #include <vector>
 
 #include "my_game_defs.hpp"
 #include "my_hiscore.hpp"
-#include "my_sdl.hpp"
 #include "my_thing_defs.hpp"
 #include "my_world.hpp"
 

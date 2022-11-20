@@ -2,10 +2,10 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include <SDL.h>
 #include <ctime>
 #include <time.h>
 
-#include "my_sdl.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_time.hpp"

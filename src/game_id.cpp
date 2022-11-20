@@ -3,7 +3,6 @@
 //
 
 #include "my_game.hpp"
-#include "my_sdl.hpp"
 #include "my_sys.hpp"
 
 Thingp Game::thing_find(const ThingId id)

@@ -7,6 +7,7 @@
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_random.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 
 void Thing::on_targetted_radially(void)

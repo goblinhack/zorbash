@@ -5,7 +5,6 @@
 #pragma once
 #include "my_main.hpp"
 #include "my_point.hpp"
-#include "my_sdl.hpp"
 #include "my_size.hpp"
 
 void    wid_topcon_fini(void);

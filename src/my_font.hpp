@@ -6,10 +6,8 @@
 #ifndef _MY_FONT_HPP_
 #define _MY_FONT_HPP_
 
-#include <array>
-
 #include "my_fwd.hpp"
-#include "my_sdl.hpp"
+#include <array>
 
 extern Fontp font_pixelart_small;
 extern Fontp font_pixelart_large;

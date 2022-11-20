@@ -9,7 +9,8 @@
 #include "my_player.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"
-#include "my_sdl.hpp"
+#include "my_sdl_event.hpp"
+#include "my_sdl_proto.hpp"
 #include "my_sys.hpp"
 #include "my_ui.hpp"
 #include "my_wid_console.hpp"
@@ -436,16 +437,11 @@ static void sdl_key_repeat_events_(void)
 
   const uint8_t *state = SDL_GetKeyboardState(nullptr);
 
-  bool        up    = state[ sdlk_to_scancode(game->config.key_move_up) ];
-  bool        down  = state[ sdlk_to_scancode(game->config.key_move_down) ];
-  bool        left  = state[ sdlk_to_scancode(game->config.key_move_left) ];
-  bool        right = state[ sdlk_to_scancode(game->config.key_move_right) ];
-  bool        wait  = state[ sdlk_to_scancode(game->config.key_wait_or_collect) ];
-  static bool old_up;
-  static bool old_down;
-  static bool old_left;
-  static bool old_right;
-  static bool old_wait;
+  bool up    = state[ sdlk_to_scancode(game->config.key_move_up) ];
+  bool down  = state[ sdlk_to_scancode(game->config.key_move_down) ];
+  bool left  = state[ sdlk_to_scancode(game->config.key_move_left) ];
+  bool right = state[ sdlk_to_scancode(game->config.key_move_right) ];
+  bool wait  = state[ sdlk_to_scancode(game->config.key_wait_or_collect) ];
 
   //
   // Keypad stuff is hardcoded.
@@ -506,26 +502,12 @@ static void sdl_key_repeat_events_(void)
     up    = true;
   }
 
-  bool        movement = wait || up || down || left || right;
-  static bool old_movement;
+  bool        movement               = wait || up || down || left || right;
   static ts_t last_movement_keypress = 0;
   static int  repeat_count;
 
-  if (! movement || ! last_movement_keypress) {
-    last_movement_keypress = time_ms();
-    repeat_count           = 0;
-
-    if (old_movement) {
-      game->request_player_move_up            = old_up;
-      game->request_player_move_down          = old_down;
-      game->request_player_move_left          = old_left;
-      game->request_player_move_right         = old_right;
-      game->request_player_to_wait_or_collect = old_wait;
-
-      if (! game->request_player_move) {
-        game->request_player_move = time_ms();
-      }
-    }
+  if (! movement) {
+    repeat_count = 0;
   } else {
     if (repeat_count > 0) {
       //
@@ -566,13 +548,6 @@ static void sdl_key_repeat_events_(void)
   if (game->level) {
     game->level->handle_input_events();
   }
-
-  old_up       = up;
-  old_down     = down;
-  old_left     = left;
-  old_right    = right;
-  old_wait     = wait;
-  old_movement = movement;
 }
 
 void sdl_key_repeat_events(void)

@@ -4,6 +4,7 @@
 
 #include "my_game.hpp"
 #include "my_ptrcheck.hpp"
+#include "my_sdl_event.hpp"
 #include "my_thing.hpp"
 #include <stdarg.h>
 

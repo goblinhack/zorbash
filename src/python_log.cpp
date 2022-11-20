@@ -13,7 +13,7 @@
 #include "my_py_tp.hpp"
 #include "my_python.hpp"
 #include "my_random.hpp"
-#include "my_sdl.hpp"
+#include "my_sdl_event.hpp"
 #include "my_sound.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"

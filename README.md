@@ -1,6 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- - check monsters can zap staffs                                                                                                              -->
+<!-- - negation of negation?                                                                                                                      -->
 <!-- - no eat msg when satiated at tick 1                                                                                                         -->
 <!-- - wand of fire does not hit all in path                                                                                                      -->
 <!-- - popups need alignment                                                                                                                      -->

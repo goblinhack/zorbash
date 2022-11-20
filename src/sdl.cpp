@@ -4,13 +4,15 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_color_defs.hpp"
+#include "my_command.hpp"
 #include "my_font.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
 #include "my_player.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"
-#include "my_sdl.hpp"
+#include "my_sdl_event.hpp"
+#include "my_sdl_proto.hpp"
 #include "my_sys.hpp"
 #include "my_ui.hpp"
 #include "my_wid_asciimap.hpp"
@@ -60,7 +62,7 @@ static inline void sdl_list_video_size(void)
   }
 }
 
-void sdl_joy_rumble(float strength, ts_t ms)
+void sdl_joy_rumble(float strength, uint32_t ms)
 {
   TRACE_NO_INDENT();
   if (! sdl.haptic) {
