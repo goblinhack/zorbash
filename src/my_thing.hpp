@@ -1447,6 +1447,7 @@ public:
   int is_lifeless(void);
   int is_light_blocker_for_monst(void);
   int is_light_blocker(void);
+  int is_lightning(void);
   int is_limb(void);
   int is_living(void);
   int is_loggable(void);
@@ -2012,7 +2013,6 @@ public:
   int unused_flag25(void);
   int unused_flag26(void);
   int unused_flag27(void);
-  int is_lightning(void);
   int unused_flag2(void);
   int unused_flag3(void);
   int unused_flag40(void);

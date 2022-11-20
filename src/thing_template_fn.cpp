@@ -497,6 +497,7 @@ int Tp::is_lava(void) const { return _is_lava; }
 int Tp::is_lifeless(void) const { return _is_lifeless; }
 int Tp::is_light_blocker_for_monst(void) const { return _is_light_blocker_for_monst; }
 int Tp::is_light_blocker(void) const { return _is_light_blocker; }
+int Tp::is_lightning(void) const { return _is_lightning; }
 int Tp::is_limb(void) const { return _is_limb; }
 int Tp::is_living(void) const { return _is_living; }
 int Tp::is_loggable(void) const { return _is_loggable; }
@@ -700,7 +701,6 @@ int Tp::unused_flag24(void) const { return _unused_flag24; }
 int Tp::unused_flag25(void) const { return _unused_flag25; }
 int Tp::unused_flag26(void) const { return _unused_flag26; }
 int Tp::unused_flag27(void) const { return _unused_flag27; }
-int Tp::is_lightning(void) const { return _is_lightning; }
 int Tp::unused_flag2(void) const { return _unused_flag2; }
 int Tp::unused_flag3(void) const { return _unused_flag3; }
 int Tp::unused_flag40(void) const { return _unused_flag40; }
@@ -1038,6 +1038,7 @@ void Tp::is_lava_set(int v) { _is_lava = v; }
 void Tp::is_lifeless_set(int v) { _is_lifeless = v; }
 void Tp::is_light_blocker_for_monst_set(int v) { _is_light_blocker_for_monst = v; }
 void Tp::is_light_blocker_set(int v) { _is_light_blocker = v; }
+void Tp::is_lightning_set(int v) { _is_lightning = v; }
 void Tp::is_limb_set(int v) { _is_limb = v; }
 void Tp::is_living_set(int v) { _is_living = v; }
 void Tp::is_loggable_set(int v) { _is_loggable = v; }
@@ -1379,7 +1380,6 @@ void Tp::unused_flag24_set(int v) { _unused_flag24 = v; }
 void Tp::unused_flag25_set(int v) { _unused_flag25 = v; }
 void Tp::unused_flag26_set(int v) { _unused_flag26 = v; }
 void Tp::unused_flag27_set(int v) { _unused_flag27 = v; }
-void Tp::is_lightning_set(int v) { _is_lightning = v; }
 void Tp::unused_flag2_set(int v) { _unused_flag2 = v; }
 void Tp::unused_flag3_set(int v) { _unused_flag3 = v; }
 void Tp::unused_flag40_set(int v) { _unused_flag40 = v; }

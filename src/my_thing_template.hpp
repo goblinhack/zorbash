@@ -430,6 +430,7 @@ private:
   int _is_lifeless {};
   int _is_light_blocker {};
   int _is_light_blocker_for_monst {};
+  int _is_lightning {};
   int _is_limb {};
   int _is_living {};
   int _is_loggable {};
@@ -634,7 +635,6 @@ private:
   int _unused_flag25 {};
   int _unused_flag26 {};
   int _unused_flag27 {};
-  int _is_lightning {};
   int _unused_flag3 {};
   int _unused_flag4 {};
   int _unused_flag40 {};
@@ -1470,6 +1470,7 @@ public:
   int is_lifeless(void) const;
   int is_light_blocker_for_monst(void) const;
   int is_light_blocker(void) const;
+  int is_lightning(void) const;
   int is_limb(void) const;
   int is_living(void) const;
   int is_loggable(void) const;
@@ -1673,7 +1674,6 @@ public:
   int unused_flag25(void) const;
   int unused_flag26(void) const;
   int unused_flag27(void) const;
-  int is_lightning(void) const;
   int unused_flag2(void) const;
   int unused_flag3(void) const;
   int unused_flag40(void) const;
@@ -2011,6 +2011,7 @@ public:
   void is_lifeless_set(int v);
   void is_light_blocker_for_monst_set(int v);
   void is_light_blocker_set(int v);
+  void is_lightning_set(int v);
   void is_limb_set(int v);
   void is_living_set(int v);
   void is_loggable_set(int v);
@@ -2355,7 +2356,6 @@ public:
   void unused_flag25_set(int v);
   void unused_flag26_set(int v);
   void unused_flag27_set(int v);
-  void is_lightning_set(int v);
   void unused_flag2_set(int v);
   void unused_flag3_set(int v);
   void unused_flag40_set(int v);
