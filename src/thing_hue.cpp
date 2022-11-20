@@ -2,7 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_random.hpp"
 #include "my_thing.hpp"
 
 void Thing::init_hue(void)

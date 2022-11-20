@@ -5,7 +5,6 @@
 #include "my_game.hpp"
 #include "my_python.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
 
 PyObject *thing_coords_get(PyObject *obj, PyObject *args, PyObject *keywds)
 {

@@ -5,7 +5,6 @@
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
 
 const Dice &Thing::gold_value_dice(void)
 {

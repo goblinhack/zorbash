@@ -4,7 +4,6 @@
 
 #include "my_level.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
 
 //
 // One level above dislike!

@@ -4,8 +4,6 @@
 
 #include "my_level.hpp"
 #include "my_ptrcheck.hpp"
-#include "my_random.hpp"
-#include "my_thing_template.hpp"
 #include "my_vector_bounds_check.hpp"
 
 Tpnamemap tp_name_map;

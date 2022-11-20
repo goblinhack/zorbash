@@ -3,12 +3,7 @@
 //
 
 #include "my_array_bounds_check.hpp"
-#include "my_depth.hpp"
 #include "my_game.hpp"
-#include "my_monst.hpp"
-#include "my_ptrcheck.hpp"
-#include "my_random.hpp"
-#include "my_thing.hpp"
 
 uint8_t Level::is_lava(const point p)
 {

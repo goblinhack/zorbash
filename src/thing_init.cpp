@@ -7,10 +7,8 @@
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
-#include "my_random.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
 
 Thingp Level::thing_new(Tpp tp, const point at, Thingp owner)
 {

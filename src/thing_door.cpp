@@ -4,7 +4,6 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
-#include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
 bool Thing::open_door(Thingp door)

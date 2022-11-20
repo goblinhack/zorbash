@@ -7,9 +7,7 @@
 #include "my_font.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
-#include "my_random.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
 #include "my_ui.hpp"
 
 void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, const point blit_tl, const point blit_br)

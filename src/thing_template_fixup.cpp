@@ -4,7 +4,6 @@
 
 #include "my_game.hpp"
 #include "my_string.hpp"
-#include "my_thing_template.hpp"
 #include "my_ui.hpp"
 
 void tp_fixup(void)

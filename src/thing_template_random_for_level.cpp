@@ -3,7 +3,6 @@
 //
 
 #include "my_game.hpp"
-#include "my_thing_template.hpp"
 
 Tpp Level::tp_random_treasure_class_a(const point p)
 {

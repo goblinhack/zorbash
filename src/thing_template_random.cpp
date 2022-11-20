@@ -4,8 +4,6 @@
 
 #include "my_game.hpp"
 #include "my_monst.hpp"
-#include "my_random.hpp"
-#include "my_thing_template.hpp"
 #include "my_vector_bounds_check.hpp"
 
 static Tpidmap tp_ascend_dungeon;

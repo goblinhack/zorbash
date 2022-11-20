@@ -3,9 +3,7 @@
 //
 
 #include "my_level.hpp"
-#include "my_random.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
 
 //
 // Trail of blood?

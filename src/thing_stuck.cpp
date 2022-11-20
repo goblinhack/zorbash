@@ -3,15 +3,12 @@
 //
 
 #include "my_array_bounds_check.hpp"
-#include "my_dice.hpp"
 #include "my_level.hpp"
 #include "my_monst.hpp"
-#include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_sprintf.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
 
 void Thing::on_stuck(void)
 {

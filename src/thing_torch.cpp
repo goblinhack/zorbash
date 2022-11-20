@@ -3,9 +3,7 @@
 //
 
 #include "my_game.hpp"
-#include "my_random.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
 
 bool Thing::torch_tick(void)
 {

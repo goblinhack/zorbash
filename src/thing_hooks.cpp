@@ -6,7 +6,6 @@
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
-#include "my_wid_actionbar.hpp"
 
 //
 // Get rid of all the hooks to other things that this thing has. e.g. the

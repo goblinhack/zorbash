@@ -6,10 +6,7 @@
 #include "my_depth.hpp"
 #include "my_level.hpp"
 #include "my_monst.hpp"
-#include "my_ptrcheck.hpp"
-#include "my_random.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
 
 void Thing::acid_tick(void)
 {

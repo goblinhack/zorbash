@@ -3,7 +3,6 @@
 //
 
 #include "my_game.hpp"
-#include "my_random.hpp"
 #include "my_thing.hpp"
 
 bool Thing::laser_choose_target(Thingp item, Thingp victim)

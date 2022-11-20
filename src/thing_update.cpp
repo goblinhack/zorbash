@@ -5,7 +5,6 @@
 #include "my_level.hpp"
 #include "my_monst.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
 
 void Thing::update_light(void)
 {

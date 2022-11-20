@@ -3,7 +3,6 @@
 //
 
 #include "my_monst.hpp"
-#include "my_random.hpp"
 #include "my_thing.hpp"
 
 void Thing::physical_training_tick(void)

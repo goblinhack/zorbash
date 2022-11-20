@@ -5,7 +5,6 @@
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
 
 int Thing::move_speed_total(void)
 {

@@ -5,7 +5,6 @@
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
-#include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
 Thingp Thing::in_the_way_for_jumping(const point s, const point e, int x, int y)

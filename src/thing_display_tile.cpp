@@ -4,7 +4,6 @@
 
 #include "my_ascii.hpp"
 #include "my_thing.hpp"
-#include "my_tile.hpp"
 
 //
 // Blit pixel art or ascii representation.

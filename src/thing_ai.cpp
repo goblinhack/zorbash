@@ -7,9 +7,7 @@
 #include "my_math.hpp"
 #include "my_monst.hpp"
 #include "my_player.hpp"
-#include "my_ptrcheck.hpp"
 #include "my_sprintf.hpp"
-#include "my_template.hpp"
 #include "my_thing.hpp"
 
 #define GOAL_PRIO_VERY_HIGH 0

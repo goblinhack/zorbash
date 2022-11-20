@@ -8,7 +8,6 @@
 #include "my_sound.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_thing_info.hpp"
 

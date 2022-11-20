@@ -5,7 +5,6 @@
 #include "my_game.hpp"
 #include "my_log.hpp"
 #include "my_ptrcheck.hpp"
-#include "my_sys.hpp"
 #include "my_thing.hpp"
 #include <stdarg.h>
 
