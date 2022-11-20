@@ -451,11 +451,11 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, i
   return spawned;
 }
 
-bool Thing::spawn_fire(const std::string &what, int radius)
+bool Thing::spawn_fire_around_thing(const std::string &what, int radius)
 {
   TRACE_NO_INDENT();
 
-  dbg("Spawn fire: %s", what.c_str());
+  dbg("Spawn fire around thing of type: %s", what.c_str());
   TRACE_AND_INDENT();
 
   if (! radius) {
@@ -504,7 +504,8 @@ bool Thing::spawn_fire(const std::string &what, int radius)
           continue;
         }
 
-        it->on_fire_set("spawned fire");
+        auto f = level->thing_new(what, point(x, y));
+        spawned_newborn(f);
       }
       FOR_ALL_THINGS_END()
     }
@@ -513,7 +514,7 @@ bool Thing::spawn_fire(const std::string &what, int radius)
   return true;
 }
 
-bool Thing::spawn_gas_poison(int radius)
+bool Thing::spawn_gas_poison_around_thing(int radius)
 {
   TRACE_NO_INDENT();
 

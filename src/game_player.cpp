@@ -211,7 +211,8 @@ void Game::place_player(void)
         level->thing_new("cement_man", point(x + 4, y + 3));
         // auto w = level->thing_new("staff_negation", point(x, y));
         // auto w = level->thing_new("staff_descent", point(x, y));
-        auto w = level->thing_new("staff_lightning", point(x, y));
+        // auto w = level->thing_new("staff_lightning", point(x, y));
+        auto w = level->thing_new("staff_fire", point(x, y));
         t->carry(w);
         // t->enchant_without_stone(w);
       }
@@ -225,7 +226,7 @@ void Game::place_player(void)
         t->carry(w);
         t->enchant_without_stone(w);
       }
-      if (1) {
+      if (0) {
         level->thing_new("water", point(x + 1, y));
         level->thing_new("deep_water", point(x + 2, y));
         level->thing_new("deep_water", point(x + 3, y));

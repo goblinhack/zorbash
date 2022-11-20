@@ -2,6 +2,48 @@ import my
 import tp
 
 
+def on_targetted(me, x, y):
+    radius = my.thing_effect_radius_get(me)
+    # my.con("targetted {} {:X}".format(my.thing_name_get(me), me))
+
+    for dx in range(-radius, radius + 1):
+        for dy in range(-radius, radius + 1):
+            x1 = x + dx
+            y1 = y + dy
+            distance = (((x1 - x)**2 + (y1 - y)**2)**0.5)
+            if distance > radius:
+                continue
+
+            my.place_at(me, "fire", x1, y1)
+            for it in my.level_get_all(me, x1, y1):
+                if my.thing_possible_to_attack(me, it):
+                    my.thing_hit(me, it)
+
+
+def on_targetted_radially(me, x, y):
+    radius = my.thing_effect_radius_get(me)
+    radius += 1
+    # my.con("targetted radially {} {:X}".format(my.thing_name_get(me), me))
+
+    for dx in range(-radius, radius + 1):
+        for dy in range(-radius, radius + 1):
+            if dx == 0 and dy == 0:
+                continue
+            x1 = x + dx
+            y1 = y + dy
+            distance = (((x1 - x)**2 + (y1 - y)**2)**0.5)
+            if distance > radius:
+                continue
+
+            my.place_at(me, "fire", x1, y1)
+            for it in my.level_get_all(me, x1, y1):
+                if my.thing_possible_to_attack(me, it):
+                    my.thing_hit(me, it)
+
+    owner = my.thing_top_owner_id_get(me)
+    my.thing_popup(owner, "You shall not pass!")
+
+
 def on_thrown(me, x, y):
     if my.level_is_chasm_at(me, x, y):
         return
@@ -59,6 +101,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.dmg_fire_dice(self, "1d8+6")
     my.dmg_received_doubled_from_cold(self, True)
     my.environ_avoids_water(self, 100)
+    my.effect_radius(self, 0)
     my.equip_carry_anim(self, "staff_fire_carry")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
@@ -85,6 +128,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_loggable(self, True)
     my.is_magical(self, True)
     my.is_staff(self, True)
+    my.is_target_radial(self, True)
     my.is_target_select(self, True)
     my.is_throwable(self, True)
     my.is_tickable(self, True)  # So it can interact with fire
@@ -100,9 +144,11 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_fall_do(self, "me.on_fall()")
     my.on_idle_tick_freq_dice(self, "1d200+200:me.on_idle()")
     my.on_thrown_do(self, "me.on_thrown()")
+    my.on_targetted_do(self, "me.on_targetted()")
+    my.on_targetted_radially_do(self, "me.on_targetted_radially()")
     my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")
     my.range_max(self, 7)
-    my.target_name_projectile(self, "projectile_fire")
+    my.target_name_projectile(self, "staff_fire_projectile")
     my.temperature(self, 30)
     my.text_a_or_an(self, "a")
     my.text_long_description(self, "Discharges a single fireball at an ungrateful recipient...")

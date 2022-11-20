@@ -337,7 +337,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
     //
     // "You shall not pass" mode
     //
-    if (! item_option->gfx_targetted_radial().empty()) {
+    if (item_option->is_target_radial()) {
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;
       auto w = wid_new_square_button(p, "use");

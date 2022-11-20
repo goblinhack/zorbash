@@ -411,8 +411,8 @@ public:
   Thingp leader(void);
   Thingp most_dangerous_adjacent_thing(void);
   Thingp most_dangerous_visible_thing(void);
-  Thingp projectile_fire_at(Thingp wand, const std::string &item, point at);
-  Thingp projectile_fire_at(Thingp wand, const std::string &item, Thingp target);
+  Thingp staff_fire_projectile_at(Thingp wand, const std::string &item, point at);
+  Thingp staff_fire_projectile_at(Thingp wand, const std::string &item, Thingp target);
   Thingp spawn_at(const std::string &what);
   Thingp spawn_at(const std::string &what, point p);
   Thingp spawn_at_if_possible(const std::string &what);
@@ -610,8 +610,8 @@ public:
   bool skillbox_id_remove(Thingp what);
   bool skill_remove(Thingp it);
   bool skill_use(Thingp it);
-  bool spawn_fire(const std::string &what, int radius);
-  bool spawn_gas_poison(int radius);
+  bool spawn_fire_around_thing(const std::string &what, int radius);
+  bool spawn_gas_poison_around_thing(int radius);
   bool spawn_next_to(const std::string &what);
   bool spawn_next_to_or_on_monst(const std::string &what);
   bool spawn_radius_range(const std::string &what, int rad_min, int rad_max);

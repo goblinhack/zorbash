@@ -28,7 +28,7 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
     if (! item->gfx_targetted_laser().empty()) {
       UseOptions use_options = {};
       if (non_pcg_random_range(0, 100) < 10) {
-        if (! item->gfx_targetted_radial().empty()) {
+        if (item->is_target_radial()) {
           //
           // You shall not pass!
           //
@@ -77,10 +77,6 @@ bool Thing::laser_fire_at(Thingp item, const std::string &gfx_targetted_laser, T
   dbg("Laser fire %s at %s", gfx_targetted_laser.c_str(), target->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  if (gfx_targetted_laser == "") {
-    die("No laser name");
-  }
-
   if (is_player()) {
     msg("You fire %s at %s.", item->text_the().c_str(), target->text_the().c_str());
   }
@@ -120,18 +116,25 @@ bool Thing::laser_fire_at(Thingp item, const std::string &gfx_targetted_laser, T
     dbg("Firing radial effect");
     TRACE_AND_INDENT();
 
-    auto laser = level->thing_new(gfx_targetted_laser, target->curr_at, item ? item : this);
-    if (! laser) {
-      err("No laser to fire");
-      if (is_player()) {
-        game->tick_begin("failed to fire laser");
+    Thingp laser = nullptr;
+    if (! gfx_targetted_laser.empty()) {
+      laser = level->thing_new(gfx_targetted_laser, target->curr_at, item ? item : this);
+      if (! laser) {
+        err("No laser to fire");
+        if (is_player()) {
+          game->tick_begin("failed to fire laser");
+        }
+        return false;
       }
-      return false;
     }
 
-    dbg("Firing named laser with: %s", laser->to_string().c_str());
+    if (laser) {
+      dbg("Firing named laser with: %s", laser->to_string().c_str());
+      on_use(laser, target);
+    } else {
+      dbg("Firing laser");
+    }
 
-    on_use(laser, target);
     item->on_targetted_radially();
   } else {
     dbg("Firing laser effect");
@@ -150,17 +153,25 @@ bool Thing::laser_fire_at(Thingp item, const std::string &gfx_targetted_laser, T
           continue;
         }
 
-        auto laser = level->thing_new(gfx_targetted_laser, target->curr_at, item ? item : this);
-        if (! laser) {
-          err("No laser to fire");
-          if (is_player()) {
-            game->tick_begin("failed to fire laser");
+        Thingp laser = nullptr;
+        if (! gfx_targetted_laser.empty()) {
+          laser = level->thing_new(gfx_targetted_laser, target->curr_at, item ? item : this);
+          if (! laser) {
+            err("No laser to fire");
+            if (is_player()) {
+              game->tick_begin("failed to fire laser");
+            }
+            return false;
           }
-          return false;
         }
 
-        dbg("Firing named laser (at collatoral damage) with: %s at %s dist %f", laser->to_string().c_str(),
-            target->to_short_string().c_str(), distance(curr_at, target->curr_at));
+        if (laser) {
+          dbg("Firing named laser (at collatoral damage) with: %s at %s dist %f", laser->to_string().c_str(),
+              target->to_short_string().c_str(), distance(curr_at, target->curr_at));
+        } else {
+          dbg("Firing laser (at collatoral damage) with: %s dist %f", target->to_short_string().c_str(),
+              distance(curr_at, target->curr_at));
+        }
         TRACE_AND_INDENT();
 
         LaserInfo info {};
@@ -170,24 +181,27 @@ bool Thing::laser_fire_at(Thingp item, const std::string &gfx_targetted_laser, T
         info.map_stop             = target->curr_at;
         info.follow_moving_target = true;
         info.pixel_map_at         = level->pixel_map_at;
-        level->new_laser(laser->id, target->id, info, game->current_move_speed);
 
-        //
-        // This is needed for secondary lasers
-        //
-        laser->last_blit_at = end;
+        if (laser) {
+          level->new_laser(laser->id, target->id, info, game->current_move_speed);
 
-        on_use(laser, target);
+          //
+          // This is needed for secondary lasers
+          //
+          laser->last_blit_at = end;
+
+          on_use(laser, target);
+
+          //
+          // Set everything in the way on fire.
+          //
+          if (laser->is_fire()) {
+            level->line_set_all_on_fire(curr_at, target->curr_at, 0, "laser");
+          }
+        }
 
         if (item) {
           item->on_targetted(target->curr_at);
-        }
-
-        //
-        // Set everything in the way on fire.
-        //
-        if (laser->is_fire()) {
-          level->line_set_all_on_fire(curr_at, target->curr_at, 0, "laser");
         }
       }
     } else {
@@ -206,8 +220,12 @@ bool Thing::laser_fire_at(Thingp item, const std::string &gfx_targetted_laser, T
         return false;
       }
 
-      dbg("Firing named laser with: %s at %s dist %f", laser->to_string().c_str(), target->to_short_string().c_str(),
-          distance(curr_at, target->curr_at));
+      if (laser) {
+        dbg("Firing named laser with: %s at %s dist %f", laser->to_string().c_str(),
+            target->to_short_string().c_str(), distance(curr_at, target->curr_at));
+      } else {
+        dbg("Firing laser with: %s dist %f", target->to_short_string().c_str(), distance(curr_at, target->curr_at));
+      }
       TRACE_AND_INDENT();
 
       LaserInfo info {};
@@ -217,24 +235,27 @@ bool Thing::laser_fire_at(Thingp item, const std::string &gfx_targetted_laser, T
       info.map_stop             = target->curr_at;
       info.follow_moving_target = true;
       info.pixel_map_at         = level->pixel_map_at;
-      level->new_laser(laser->id, target->id, info, game->current_move_speed);
 
-      //
-      // This is needed for secondary lasers
-      //
-      laser->last_blit_at = end;
+      if (laser) {
+        level->new_laser(laser->id, target->id, info, game->current_move_speed);
 
-      on_use(laser, target);
+        //
+        // This is needed for secondary lasers
+        //
+        laser->last_blit_at = end;
+
+        on_use(laser, target);
+
+        //
+        // Set everything in the way on fire.
+        //
+        if (laser->is_fire()) {
+          level->line_set_all_on_fire(curr_at, target->curr_at, 0, "laser");
+        }
+      }
 
       if (item) {
         item->on_targetted(target->curr_at);
-      }
-
-      //
-      // Set everything in the way on fire.
-      //
-      if (laser->is_fire()) {
-        level->line_set_all_on_fire(curr_at, target->curr_at, 0, "laser");
       }
     }
   }

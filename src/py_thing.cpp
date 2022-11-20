@@ -925,7 +925,7 @@ PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   if (itemp->is_projectile()) {
-    if (owner->projectile_fire_at(nullptr /* staff */, std::string(item), target)) {
+    if (owner->staff_fire_projectile_at(nullptr /* staff */, std::string(item), target)) {
       Py_RETURN_TRUE;
     }
     Py_RETURN_FALSE;
@@ -1813,7 +1813,7 @@ PyObject *spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject *keywd
     Py_RETURN_FALSE;
   }
 
-  if (t->spawn_fire(std::string(what), 1)) {
+  if (t->spawn_fire_around_thing(std::string(what), 1)) {
     Py_RETURN_TRUE;
   }
   Py_RETURN_FALSE;
@@ -1850,7 +1850,7 @@ PyObject *spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyObject 
     Py_RETURN_FALSE;
   }
 
-  if (t->spawn_gas_poison(radius)) {
+  if (t->spawn_gas_poison_around_thing(radius)) {
     Py_RETURN_TRUE;
   }
   Py_RETURN_FALSE;

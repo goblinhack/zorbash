@@ -36,7 +36,7 @@ def on_awake(me, x, y):
 def on_want_to_fire_at_something(me, target, x, y):  # Return True on doing an action
     if my.pcg_randint(1, 10) < 8:
         my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monster_roar")
-        my.thing_fire_at(me, "projectile_fire", target)
+        my.thing_fire_at(me, "staff_fire_projectile", target)
         return True
     return False
 

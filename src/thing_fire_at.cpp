@@ -216,7 +216,7 @@ bool Thing::fire_at_target(void)
 bool Thing::fire_at_and_choose_target(Thingp item, UseOptions *use_options)
 {
   TRACE_NO_INDENT();
-  if (use_options && use_options->radial_effect && ! item->gfx_targetted_radial().empty()) {
+  if (use_options && use_options->radial_effect) {
     return laser_fire_at(item, item->gfx_targetted_radial(), this, use_options);
   }
   if (! item->gfx_targetted_laser().empty()) {
