@@ -101,7 +101,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
       if (! item->gfx_targetted_laser().empty()) {
         player->laser_fire_at(item, item->gfx_targetted_laser(), level->cursor->curr_at);
       } else if (! item->target_name_projectile().empty()) {
-        player->staff_fire_projectile_at(item, item->target_name_projectile(), level->cursor->curr_at);
+        player->fire_projectile_at(item, item->target_name_projectile(), level->cursor->curr_at);
       } else if (item->is_item_targetted()) {
         player->item_targetted_use_at(item, level->cursor->curr_at);
       } else {

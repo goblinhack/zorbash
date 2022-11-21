@@ -229,9 +229,7 @@ int Thing::effect_radius(void)
   TRACE_NO_INDENT();
 
   int radius = tp()->effect_radius();
-  if (radius) {
-    radius += enchant_get();
-  }
+  radius += enchant_get();
   return radius;
 }
 

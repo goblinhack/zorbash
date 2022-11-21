@@ -4,7 +4,7 @@ import tp
 
 def on_targetted(me, x, y):
     radius = my.thing_effect_radius_get(me)
-    # my.con("targetted {} {:X}".format(my.thing_name_get(me), me))
+    # my.con("targetted {} {:X} radius {}".format(my.thing_name_get(me), me, radius))
 
     for dx in range(-radius, radius + 1):
         for dy in range(-radius, radius + 1):
@@ -83,7 +83,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.dmg_fire_chance_d1000(self, 0, 1000)
     my.dmg_fire_dice(self, "1d8+6")
     my.dmg_received_doubled_from_cold(self, True)
-    my.effect_radius(self, 0)
     my.environ_avoids_water(self, 100)
     my.equip_carry_anim(self, "staff_fire_carry")
     my.gfx_ascii_fade_with_dist(self, True)

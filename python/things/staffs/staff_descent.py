@@ -22,6 +22,7 @@ def on_targetted(me, x, y):
 
 def on_targetted_radially(me, x, y):
     radius = my.thing_effect_radius_get(me)
+    radius += 1
     # my.con("targetted radially {} {:X}".format(my.thing_name_get(me), me))
     my.spawn_things_around_me(me, "explosion_destroy_floor", radius)
     owner = my.thing_top_owner_id_get(me)
@@ -80,7 +81,6 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.charge_count(self, 3)
     my.collision_hit_priority(self, 6)
-    my.effect_radius(self, 1)
     my.equip_carry_anim(self, "staff_descent_carry")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)

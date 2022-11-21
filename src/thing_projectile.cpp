@@ -25,7 +25,7 @@ bool Thing::projectile_choose_target(Thingp item, Thingp victim /* can be null *
     used(item, victim, true);
 
     if (! item->target_name_projectile().empty()) {
-      staff_fire_projectile_at(item, item->target_name_projectile(), victim);
+      fire_projectile_at(item, item->target_name_projectile(), victim);
     } else {
       err("Unknown projectile: %s.", item->text_the().c_str());
       return false;
@@ -47,7 +47,7 @@ bool Thing::projectile_choose_target(Thingp item, Thingp victim /* can be null *
   return is_target_select(item);
 }
 
-Thingp Thing::staff_fire_projectile_at(Thingp item, const std::string &target_name_projectile, Thingp target)
+Thingp Thing::fire_projectile_at(Thingp item, const std::string &target_name_projectile, Thingp target)
 {
   //
   // NOTE: the item can be null here if this is monster firing with its
@@ -144,6 +144,10 @@ Thingp Thing::staff_fire_projectile_at(Thingp item, const std::string &target_na
 
   on_use(projectile, target);
 
+  if (item) {
+    item->on_targetted(target->curr_at);
+  }
+
   if (projectile->is_fire()) {
     level->line_set_all_on_fire(curr_at, target->curr_at, 0, "projectile");
   }
@@ -151,7 +155,7 @@ Thingp Thing::staff_fire_projectile_at(Thingp item, const std::string &target_na
   return projectile;
 }
 
-Thingp Thing::staff_fire_projectile_at(Thingp item, const std::string &target_name_projectile, point at)
+Thingp Thing::fire_projectile_at(Thingp item, const std::string &target_name_projectile, point at)
 {
   //
   // NOTE: the item can be null here if this is monster firing with its
@@ -189,13 +193,13 @@ Thingp Thing::staff_fire_projectile_at(Thingp item, const std::string &target_na
   AttackOptions attack_options       = {};
   attack_options.allow_hitting_walls = true;
   if (victim_attack_choose_best(nullptr, at, &best, &best_hit_at, &attack_options)) {
-    return staff_fire_projectile_at(item, target_name_projectile, best);
+    return fire_projectile_at(item, target_name_projectile, best);
   }
 
   FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
   {
     if (t->is_the_grid) {
-      return staff_fire_projectile_at(item, target_name_projectile, t);
+      return fire_projectile_at(item, target_name_projectile, t);
     }
   }
   FOR_ALL_THINGS_END()
