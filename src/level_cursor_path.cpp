@@ -61,7 +61,7 @@ void Level::cursor_path_draw_circle(void)
         continue;
       }
 
-      if (dist > radius_max) {
+      if (dist > radius_max + 0.5) {
         continue;
       }
 

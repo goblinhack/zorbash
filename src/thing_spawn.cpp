@@ -243,13 +243,11 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
       //
       // Radius needs to be the same as the check in carried_staff_highest_value_for_target
       //
-      if (dist > radius_max) {
-        dbg("%d,%d too close", x, y);
+      if (dist > radius_max + 0.5) {
         continue;
       }
 
       if (dist < radius_min) {
-        dbg("%d,%d too far", x, y);
         continue;
       }
 
@@ -301,7 +299,7 @@ bool Thing::spawn_radius_range(const std::string &what, int radius_min, int radi
       //
       // Radius needs to be the same as the check in carried_staff_highest_value_for_target
       //
-      if (dist > radius_max) {
+      if (dist > radius_max + 0.5) {
         continue;
       }
 
@@ -380,7 +378,7 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, i
       // Radius needs to be the same as the check in carried_staff_highest_value_for_target
       //
       float dist = distance(spawn_at, curr_at);
-      if (dist > radius_max) {
+      if (dist > radius_max + 0.5) {
         continue;
       }
 
@@ -465,7 +463,7 @@ bool Thing::spawn_set_fire_to_things_around_me(const std::string &what, int radi
       auto x = curr_at.x + dx;
       auto y = curr_at.y + dy;
 
-      if (! x && ! y) {
+      if (! dx && ! dy) {
         continue;
       }
       if (x < MAP_BORDER_ROCK) {
@@ -531,7 +529,7 @@ bool Thing::spawn_things_around_me(const std::string &what, int radius)
       auto x = curr_at.x + dx;
       auto y = curr_at.y + dy;
 
-      if (! x && ! y) {
+      if (! dx && ! dy) {
         continue;
       }
       if (x < MAP_BORDER_ROCK) {
