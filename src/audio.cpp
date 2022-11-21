@@ -2,12 +2,12 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_audio.hpp"
-#include "my_file.hpp"
+// REMOVED #include "my_audio.hpp"
+// REMOVED #include "my_file.hpp"
 #include "my_game.hpp"
-#include "my_main.hpp"
-#include "my_ptrcheck.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_main.hpp"
+// REMOVED #include "my_ptrcheck.hpp"
+// REMOVED #include "my_sys.hpp"
 #include <SDL_mixer.h>
 
 uint8_t audio_init_done;

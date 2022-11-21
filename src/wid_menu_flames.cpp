@@ -5,13 +5,13 @@
 #include "my_ascii.hpp"
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
-#include "my_gl.hpp"
-#include "my_random.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_gl.hpp"
+// REMOVED #include "my_random.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_unicode.hpp"
-#include "my_wid_botcon.hpp"
-#include "my_wid_rightbar.hpp"
-#include "my_wid_topcon.hpp"
+// REMOVED #include "my_wid_botcon.hpp"
+// REMOVED #include "my_wid_rightbar.hpp"
+// REMOVED #include "my_wid_topcon.hpp"
 
 color bg[ TERM_WIDTH_MAX * 2 ][ TERM_HEIGHT_MAX * 2 + 2 ];
 color bg2[ TERM_WIDTH_MAX * 2 ][ TERM_HEIGHT_MAX * 2 + 2 ];

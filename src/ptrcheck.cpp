@@ -2,7 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include <ctime>
+// REMOVED #include <ctime>
 #include <iostream>
 #include <locale.h>  // do not remove
 #include <stdint.h>  // do not remove
@@ -14,7 +14,7 @@
 
 #include "my_backtrace.hpp"
 #include "my_callstack.hpp"
-#include "my_globals.hpp"
+// REMOVED #include "my_globals.hpp"
 #include "my_main.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_sprintf.hpp"

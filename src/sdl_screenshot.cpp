@@ -3,12 +3,12 @@
 //
 
 #include "my_game.hpp"
-#include "my_gl.hpp"
-#include "my_player.hpp"
+// REMOVED #include "my_gl.hpp"
+// REMOVED #include "my_player.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_string.hpp"
-#include "my_sys.hpp"
-#include "my_wid_console.hpp"
+// REMOVED #include "my_sys.hpp"
+// REMOVED #include "my_wid_console.hpp"
 #include "stb_image_write.hpp"
 
 void sdl_screenshot(void)

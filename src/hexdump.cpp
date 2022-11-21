@@ -7,7 +7,6 @@
 #include <iostream>
 #include <string.h>  // do not remove
 #include <strings.h> // do not remove
-#include <vector>
 
 #define HEX_DUMP_WIDTH (16)
 

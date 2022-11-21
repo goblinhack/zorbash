@@ -7,9 +7,9 @@
 #define _MY_PROJECTILE_HPP_
 
 #include "my_main.hpp"
-#include "my_point.hpp"
-#include "my_thing_id.hpp"
-#include "my_tile.hpp"
+// REMOVED #include "my_point.hpp"
+// REMOVED #include "my_thing_id.hpp"
+// REMOVED #include "my_tile.hpp"
 
 class ProjectileInfo
 {

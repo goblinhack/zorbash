@@ -4,12 +4,12 @@
 
 #include "my_file.hpp"
 #include "my_game.hpp"
-#include "my_main.hpp"
-#include "my_ptrcheck.hpp"
+// REMOVED #include "my_main.hpp"
+// REMOVED #include "my_ptrcheck.hpp"
 #include "my_sound.hpp"
-#include "my_sys.hpp"
-#include "my_thing.hpp"
-#include <SDL_mixer.h>
+// REMOVED #include "my_sys.hpp"
+// REMOVED #include "my_thing.hpp"
+// REMOVED #include <SDL_mixer.h>
 
 std::map< std::string, class sound * > all_sound;
 

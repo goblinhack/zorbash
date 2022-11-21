@@ -9,7 +9,7 @@
 #include "my_string.hpp"
 #include "my_thing.hpp"
 
-#include <math.h>
+// REMOVED #include <math.h>
 
 void Thing::on_thrown(void)
 {

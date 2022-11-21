@@ -2,16 +2,16 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include <SDL.h>
+// REMOVED #include <SDL.h>
 
 #include "my_color_defs.hpp"
-#include "my_game.hpp"
+// REMOVED #include "my_game.hpp"
 #include "my_string.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_ui.hpp"
 #include "my_wid.hpp"
 #include "my_wid_botcon.hpp"
-#include "slre.hpp"
+// REMOVED #include "slre.hpp"
 
 static void wid_botcon_wid_create(void);
 

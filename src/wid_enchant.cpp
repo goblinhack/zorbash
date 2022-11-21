@@ -3,18 +3,18 @@
 //
 
 #include "my_game.hpp"
-#include "my_main.hpp"
+// REMOVED #include "my_main.hpp"
 #include "my_monst.hpp"
 #include "my_sdl_proto.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
-#include "my_tile.hpp"
+// REMOVED #include "my_thing_template.hpp"
+// REMOVED #include "my_tile.hpp"
 #include "my_ui.hpp"
 #include "my_wid_actionbar.hpp"
-#include "my_wid_bag.hpp"
-#include "my_wid_console.hpp"
-#include "my_wid_popup.hpp"
+// REMOVED #include "my_wid_bag.hpp"
+// REMOVED #include "my_wid_console.hpp"
+// REMOVED #include "my_wid_popup.hpp"
 #include "my_wid_thing_info.hpp"
 
 WidPopup                    *wid_enchant;

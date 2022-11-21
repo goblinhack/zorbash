@@ -7,9 +7,9 @@
 #include "my_main.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing_template.hpp"
-#include "my_tile.hpp"
+// REMOVED #include "my_tile.hpp"
 #include "my_unicode.hpp"
 
 PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds)

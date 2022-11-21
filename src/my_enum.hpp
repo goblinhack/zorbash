@@ -6,7 +6,7 @@
 #ifndef _MY__ENUM_HPP__
 #define _MY__ENUM_HPP__
 
-#include <map>
+// REMOVED #include <map>
 typedef std::map< std::string, uint32_t > enum_map;
 
 /*

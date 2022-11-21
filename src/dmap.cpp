@@ -7,8 +7,8 @@
 #include "my_main.hpp"
 #include "my_sdl_event.hpp"
 #include "my_sprintf.hpp"
-#include "my_sys.hpp"
-#include "my_thing_defs.hpp"
+// REMOVED #include "my_sys.hpp"
+// REMOVED #include "my_thing_defs.hpp"
 
 void dmap_print(const Dmap *D, point at, point tl, point br)
 {

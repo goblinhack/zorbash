@@ -3,9 +3,9 @@
 //
 
 #pragma once
-#include "my_main.hpp"
-#include "my_point.hpp"
-#include "my_size.hpp"
+// REMOVED #include "my_main.hpp"
+// REMOVED #include "my_point.hpp"
+// REMOVED #include "my_size.hpp"
 
 void    wid_topcon_fini(void);
 uint8_t wid_topcon_init(void);

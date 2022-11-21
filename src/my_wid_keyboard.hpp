@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include "my_string.hpp"
-#include "my_wid.hpp"
+// REMOVED #include "my_string.hpp"
+// REMOVED #include "my_wid.hpp"
 
 typedef void (*wid_keyboard_event_t)(Widp, const std::wstring &text);
 

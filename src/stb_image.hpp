@@ -351,7 +351,7 @@ enum {
   STBI_rgb_alpha  = 4
 };
 
-#include <stdlib.h>
+// REMOVED // REMOVED #include <stdlib.h>
 typedef unsigned char  stbi_uc;
 typedef unsigned short stbi_us;
 
@@ -553,8 +553,8 @@ STBIDEF int   stbi_zlib_decode_noheader_buffer(char *obuffer, int olen, const ch
 #endif
 
 #include <limits.h>
-#include <stdarg.h>
-#include <stddef.h> // ptrdiff_t on osx
+// REMOVED #include <stdarg.h>
+// REMOVED #include <stddef.h> // ptrdiff_t on osx
 #include <stdlib.h>
 #include <string.h>
 
@@ -695,7 +695,7 @@ typedef unsigned char validate_uint32[ sizeof(stbi__uint32) == 4 ? 1 : -1 ];
 #ifdef _MSC_VER
 
 #if _MSC_VER >= 1400 // not VC6
-#include <intrin.h>  // __cpuid
+// REMOVED #include <intrin.h>  // __cpuid
 static int stbi__cpuid3(void)
 {
   int info[ 4 ];
@@ -747,7 +747,7 @@ static int stbi__sse2_available(void)
 #endif
 
 #ifdef STBI_NEON
-#include <arm_neon.h>
+// REMOVED #include <arm_neon.h>
 // assume GCC or Clang on ARM targets
 #define STBI_SIMD_ALIGN(type, name) type name __attribute__((aligned(16)))
 #endif

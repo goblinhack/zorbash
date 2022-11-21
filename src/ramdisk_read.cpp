@@ -7,7 +7,7 @@
 #include "my_main.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_ramdisk.hpp"
-#include "my_string.hpp"
+// REMOVED #include "my_string.hpp"
 #include "my_sys.hpp"
 
 std::map< std::string, ramdisk_t_ > ramdisk_data;

@@ -5,7 +5,7 @@
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_thing.hpp"
-#include <set>
+// REMOVED #include <set>
 
 int Thing::goal_penalty_get(Thingp attacker)
 {

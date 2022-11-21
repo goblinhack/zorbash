@@ -4,13 +4,13 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
-#include "my_globals.hpp"
-#include "my_ptrcheck.hpp"
-#include "my_random.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_globals.hpp"
+// REMOVED #include "my_ptrcheck.hpp"
+// REMOVED #include "my_random.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-#include "my_thing_ai.hpp"
-#include "my_thing_template.hpp"
+// REMOVED #include "my_thing_ai.hpp"
+// REMOVED #include "my_thing_template.hpp"
 
 bool Level::create_biome_sewer(point3d at, uint32_t seed)
 {

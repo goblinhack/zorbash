@@ -9,9 +9,9 @@
 #include <iostream>
 #include <map>
 #include <memory>
-#include <stdarg.h>
+// REMOVED #include <stdarg.h>
 #include <vector>
-#include <wchar.h>
+// REMOVED #include <wchar.h>
 
 #include "my_format_str_attribute.hpp"
 

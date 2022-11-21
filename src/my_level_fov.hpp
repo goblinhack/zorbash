@@ -5,7 +5,7 @@
 #pragma once
 
 #include "my_game_defs.hpp"
-#include <array>
+// REMOVED #include <array>
 
 using FovMap = struct FovMap_ {
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > can_see {};

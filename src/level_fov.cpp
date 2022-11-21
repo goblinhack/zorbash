@@ -39,15 +39,15 @@
 //
 
 #include <math.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <string.h>
+// REMOVED #include <stdbool.h>
+// REMOVED #include <stdlib.h>
+// REMOVED #include <string.h>
 
 #include "my_array_bounds_check.hpp"
 #include "my_level.hpp"
-#include "my_level_fov.hpp"
+// REMOVED #include "my_level_fov.hpp"
 #include "my_thing.hpp"
-#include "my_wid_topcon.hpp"
+// REMOVED #include "my_wid_topcon.hpp"
 
 // Octant transformation matrixes.
 // {xx, xy, yx, yy}

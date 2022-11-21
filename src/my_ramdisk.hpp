@@ -5,7 +5,7 @@
 #pragma once
 
 #include <map>
-#include <string>
+// REMOVED #include <string>
 
 using ramdisk_t = struct ramdisk_t_ {
   const unsigned char *data;

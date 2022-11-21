@@ -4,11 +4,11 @@
 
 #include "my_game.hpp"
 #include "my_ptrcheck.hpp"
-#include "my_py_tp.hpp"
+// REMOVED #include "my_py_tp.hpp"
 #include "my_python.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
+// REMOVED #include "my_thing_template.hpp"
 
 PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 {

@@ -6,9 +6,9 @@
 #ifndef _MY_TEMPLATE_HPP_
 #define _MY_TEMPLATE_HPP_
 
-#include "my_random.hpp"
+// REMOVED #include "my_random.hpp"
 
-#include <algorithm>
+// REMOVED #include <algorithm>
 #include <map>
 
 template < class T, template < typename ELEM, typename ALLOC = std::allocator< ELEM > > class C >
@@ -79,7 +79,7 @@ std::multimap< B, A > flip_map(const M< A, B, Args... > &src)
   return dst;
 }
 
-#include <type_traits>
+// REMOVED #include <type_traits>
 
 template < typename T > size_t len(const T &a)
 {

@@ -2,21 +2,21 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include <iterator>
-#include <math.h>
-#include <vector>
+// REMOVED #include <iterator>
+// REMOVED #include <math.h>
+// REMOVED #include <vector>
 
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
-#include "my_gl.hpp"
+// REMOVED #include "my_gl.hpp"
 #include "my_math.hpp"
-#include "my_point.hpp"
-#include "my_projectile.hpp"
-#include "my_random.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_point.hpp"
+// REMOVED #include "my_projectile.hpp"
+// REMOVED #include "my_random.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
-#include "my_tile.hpp"
+// REMOVED #include "my_thing_template.hpp"
+// REMOVED #include "my_tile.hpp"
 #include "my_vector_bounds_check.hpp"
 
 void Level::display_pixelart_projectiles(point tl, point br)

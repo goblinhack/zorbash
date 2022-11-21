@@ -8,7 +8,7 @@
 
 #include <map>
 #include <memory>
-#include <string>
+// REMOVED #include <string>
 
 using file_nodep = class file_node;
 using file_nodes = std::map< std::string, std::shared_ptr< class file_node > >;

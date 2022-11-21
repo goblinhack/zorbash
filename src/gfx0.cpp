@@ -2,7 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_gfx.hpp"
+// REMOVED #include "my_gfx.hpp"
 #include "my_tile.hpp"
 
 void gfx_init0(void)

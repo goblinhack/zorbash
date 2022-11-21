@@ -7,8 +7,8 @@
 #define _MY_GAME_HPP_
 
 #include <SDL.h>
-#include <array>
-#include <list>
+// REMOVED #include <array>
+// REMOVED #include <list>
 #include <vector>
 
 // REMOVED #include "my_game_defs.hpp"

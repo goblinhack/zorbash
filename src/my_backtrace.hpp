@@ -7,7 +7,7 @@
 #define _MY_TRACEBACK_HPP_
 
 #include <array>
-#include <string>
+// REMOVED #include <string>
 
 class Backtrace
 {

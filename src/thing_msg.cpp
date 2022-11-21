@@ -6,7 +6,7 @@
 #include "my_log.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
-#include <stdarg.h>
+// REMOVED #include <stdarg.h>
 
 //
 // A message generated for the console. Check if we should print it.

@@ -9,13 +9,13 @@
 #ifndef _MY_SOUND_HPP_
 #define _MY_SOUND_HPP_
 
-#include "my_main.hpp"
+// REMOVED #include "my_main.hpp"
 #include "my_ptrcheck.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sys.hpp"
 
 #include <SDL_mixer.h>
-#include <map>
-#include <string>
+// REMOVED #include <map>
+// REMOVED #include <string>
 
 class sound;
 using soundp = class sound *;

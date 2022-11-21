@@ -6,7 +6,7 @@
 #include "my_ptrcheck.hpp"
 #include "my_sprintf.hpp"
 #include "my_thing.hpp"
-#include <cinttypes> // PRIX32
+// REMOVED #include <cinttypes> // PRIX32
 
 std::string Thing::to_string(void)
 {

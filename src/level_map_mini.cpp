@@ -5,13 +5,13 @@
 #include "my_array_bounds_check.hpp"
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
-#include "my_gl.hpp"
-#include "my_level.hpp"
-#include "my_ptrcheck.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_gl.hpp"
+// REMOVED #include "my_level.hpp"
+// REMOVED #include "my_ptrcheck.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_tex.hpp"
 #include "my_thing.hpp"
-#include "my_tile.hpp"
+// REMOVED #include "my_tile.hpp"
 
 //
 // Should the minimap show this monster?

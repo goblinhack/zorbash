@@ -6,8 +6,8 @@
 #ifndef _MY_ROOM_HPP_
 #define _MY_ROOM_HPP_
 
-#include <array>
-#include <vector>
+// REMOVED #include <array>
+// REMOVED #include <vector>
 
 #include "my_charmap.hpp"
 #include "my_depth.hpp"

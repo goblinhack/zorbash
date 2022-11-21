@@ -3,7 +3,7 @@
 //
 
 #include "my_py_sdl.hpp"
-#include "my_python.hpp"
+// REMOVED #include "my_python.hpp"
 #include "my_sys.hpp"
 #include <SDL.h>
 

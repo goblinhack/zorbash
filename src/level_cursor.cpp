@@ -3,16 +3,16 @@
 //
 
 #include "my_game.hpp"
-#include "my_globals.hpp"
+// REMOVED #include "my_globals.hpp"
 #include "my_math.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_sdl_event.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
-#include "my_tile.hpp"
+// REMOVED #include "my_thing_template.hpp"
+// REMOVED #include "my_tile.hpp"
 #include "my_wid_bag.hpp"
-#include "my_wid_inventory.hpp"
+// REMOVED #include "my_wid_inventory.hpp"
 #include "my_wid_popups.hpp"
 #include "my_wid_thing_info.hpp"
 

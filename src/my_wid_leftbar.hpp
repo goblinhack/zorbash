@@ -8,7 +8,7 @@ void wid_leftbar_fini(void);
 bool wid_leftbar_init(void);
 bool wid_leftbar_display_create(void);
 
-#include "my_wid.hpp"
+// REMOVED #include "my_wid.hpp"
 
 //
 // Global widgets.

@@ -4,10 +4,10 @@
 
 #include <SDL.h>
 #include <ctime>
-#include <time.h>
+// REMOVED #include <time.h>
 
 #include "my_string.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_time.hpp"
 
 //

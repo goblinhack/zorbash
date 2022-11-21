@@ -3,8 +3,8 @@
 //
 
 #include "my_array_bounds_check.hpp"
-#include "my_ptrcheck.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_ptrcheck.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_world.hpp"
 
 void World::clear(void)

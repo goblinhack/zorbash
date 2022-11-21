@@ -3,18 +3,18 @@
 //
 
 #include "my_array_bounds_check.hpp"
-#include "my_font.hpp"
+// REMOVED #include "my_font.hpp"
 #include "my_game.hpp"
-#include "my_gl.hpp"
-#include "my_player.hpp"
+// REMOVED #include "my_gl.hpp"
+// REMOVED #include "my_player.hpp"
 #include "my_ptrcheck.hpp"
-#include "my_random.hpp"
+// REMOVED #include "my_random.hpp"
 #include "my_sdl_event.hpp"
 #include "my_sdl_proto.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_ui.hpp"
 #include "my_wid_console.hpp"
-#include "stb_image_write.hpp"
+// REMOVED #include "stb_image_write.hpp"
 
 int sdl_filter_events(void *userdata, SDL_Event *event)
 {

@@ -6,7 +6,7 @@
 #ifndef _MY_UI_WID_POPUPS_HPP_
 #define _MY_UI_WID_POPUPS_HPP_
 
-#include "my_wid_popup.hpp"
+// REMOVED #include "my_wid_popup.hpp"
 
 extern void wid_collect_destroy(void);
 extern void wid_enchant_destroy(void);

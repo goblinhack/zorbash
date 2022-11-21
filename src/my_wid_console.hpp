@@ -3,7 +3,7 @@
 //
 
 #pragma once
-#include "my_main.hpp"
+// REMOVED #include "my_main.hpp"
 
 void    wid_console_fini(void);
 uint8_t wid_console_init(void);

@@ -6,7 +6,7 @@
 #ifndef _MY_POINT3D_HPP_
 #define _MY_POINT3D_HPP_
 
-#include <string>
+// REMOVED #include <string>
 
 template < class T > class my_apoint3d
 {

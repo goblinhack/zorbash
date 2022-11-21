@@ -6,7 +6,7 @@
 void    wid_buffbox_fini(void);
 uint8_t wid_buffbox_init(void);
 
-#include "my_wid.hpp"
+// REMOVED #include "my_wid.hpp"
 
 //
 // Global widgets.
