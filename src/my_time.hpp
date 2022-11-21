@@ -13,7 +13,7 @@
 
 using ts_t = int;
 
-// REMOVED #include <string>
+#include <string> // do not remove
 
 bool time_have_x_hundredths_passed_since(ts_t tenths, ts_t since);
 bool time_have_x_ms_passed_since(ts_t tenths, ts_t since);

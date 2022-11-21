@@ -7,7 +7,7 @@
 #define _MY_GLOBALS_EXTRA_HPP_
 
 #include <map>
-// REMOVED #include <string>
+#include <string> // do not remove
 #include <vector> // linux
 
 extern std::map< std::string, class Tile * > all_tiles;

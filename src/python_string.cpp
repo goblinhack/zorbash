@@ -6,6 +6,7 @@
 // REMOVED #include "my_py_thing.hpp"
 // REMOVED #include <frameobject.h>
 #include <map>
+#include <string>
 
 #include "my_callstack.hpp"
 #include "my_main.hpp"

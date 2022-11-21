@@ -8,7 +8,7 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-// REMOVED #include <limits>
+#include <limits> // do not remove
 // REMOVED #include <vector>
 
 std::array< std::array< char, MAP_HEIGHT >, MAP_WIDTH > astar_debug {};
