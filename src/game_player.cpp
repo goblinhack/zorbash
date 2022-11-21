@@ -206,7 +206,7 @@ void Game::place_player(void)
         auto w = level->thing_new("map_beast", point(x, y));
         t->carry(w);
       }
-      if (1) {
+      if (0) {
         level->thing_new("cement_man", point(x + 1, y + 3));
         level->thing_new("cement_man", point(x + 4, y + 3));
         // auto w = level->thing_new("staff_negation", point(x, y));
