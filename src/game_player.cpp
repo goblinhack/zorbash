@@ -209,9 +209,9 @@ void Game::place_player(void)
       if (1) {
         level->thing_new("zorb_eldster", point(x + 1, y));
         level->thing_new("cement_man", point(x + 4, y + 3));
-        // auto w = level->thing_new("staff_negation", point(x, y));
         // auto w = level->thing_new("staff_lightning", point(x, y));
-        auto w = level->thing_new("staff_descent", point(x, y));
+        // auto w = level->thing_new("staff_descent", point(x, y));
+        auto w = level->thing_new("staff_negation", point(x, y));
         // auto w = level->thing_new("staff_fire", point(x, y));
         t->carry(w);
         // t->enchant_without_stone(w);

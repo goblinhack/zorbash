@@ -100,7 +100,7 @@ void Thing::resurrect_tick(void)
     }
 
     if (t->is_heavy() || t->is_monst()) {
-      msg("The ground trembles beneath %s...", t->text_The().c_str());
+      msg("The ground trembles beneath %s...", t->text_the().c_str());
       return;
     }
   }

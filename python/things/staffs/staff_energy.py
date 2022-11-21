@@ -122,7 +122,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.range_max(self, 7)
     my.text_a_or_an(self, "a")
     my.text_enchant(self, "+5 CHARGE, +1 DMG")
-    my.text_long_description(self, "Discharges a powerful ray of energy upon an unwitting recipient...")
+    my.text_long_description(self, "Staff of department of energy. Discharges a powerful ray of energy upon an unwitting recipient...")
     my.text_short_description(self, "A staff of energy.")
     my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -152,7 +152,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_energy", text_long_name="staff of dept of energy", text_short_name="staff, energy")
+    tp_init(name="staff_energy", text_long_name="staff of energy", text_short_name="staff, energy")
 
 
 init()

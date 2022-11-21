@@ -71,14 +71,17 @@ void Thing::negation_dmg(int dmg, bool &is_killed)
 
     auto owner = top_owner();
 
+    //
+    // Still enchanted?
+    //
     if (enchant_get()) {
       if (owner && owner->is_player()) {
         if (! owner->is_dying && ! owner->is_dying) {
-          owner->msg("Your %s is negated!", text_long_name().c_str());
+          owner->msg("Your %s loses enchantment!", text_long_name().c_str());
         }
       } else if (owner && owner->is_monst()) {
         if (! owner->is_dying && ! owner->is_dying) {
-          owner->msg("The %s %s is negated!", apostrophise(owner->text_The()).c_str(), text_long_name().c_str());
+          owner->msg("%s %s loses enchantment!", apostrophise(owner->text_The()).c_str(), text_long_name().c_str());
         }
       }
     } else {
@@ -88,9 +91,26 @@ void Thing::negation_dmg(int dmg, bool &is_killed)
         }
       } else if (owner && owner->is_monst()) {
         if (! owner->is_dying && ! owner->is_dying) {
-          owner->msg("The %s %s is no longer enchanted!", apostrophise(owner->text_The()).c_str(),
+          owner->msg("%s %s is no longer enchanted!", apostrophise(owner->text_The()).c_str(),
                      text_long_name().c_str());
         }
+      }
+    }
+  } else if (charge_count()) {
+    charge_count_set(0);
+
+    auto owner = top_owner();
+
+    //
+    // Still enchanted?
+    //
+    if (owner && owner->is_player()) {
+      if (! owner->is_dying && ! owner->is_dying) {
+        owner->msg("Your %s loses all charges!", text_long_name().c_str());
+      }
+    } else if (owner && owner->is_monst()) {
+      if (! owner->is_dying && ! owner->is_dying) {
+        owner->msg("%s %s has no more charges!", apostrophise(owner->text_The()).c_str(), text_long_name().c_str());
       }
     }
   }

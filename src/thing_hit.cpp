@@ -493,7 +493,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   }
 
   /////////////////////////////////////////////////////////////////////////
-  // Energy damage
+  // Negation damage
   /////////////////////////////////////////////////////////////////////////
   if (attack_options->attack_negation) {
     attack_set = true;
@@ -518,7 +518,6 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
 
     IF_DEBUG2 { real_hitter->log("Attack dmg_negation damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "negation ";
-    negation_dmg(damage, is_killed);
   }
 
   /////////////////////////////////////////////////////////////////////////
@@ -990,7 +989,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       }
     } else if (owner && owner->is_monst()) {
       if (! owner->is_dying && ! owner->is_dying) {
-        msg("The %s %s is destroyed!", apostrophise(owner->text_The()).c_str(), text_long_name().c_str());
+        msg("%s %s is destroyed!", apostrophise(owner->text_The()).c_str(), text_long_name().c_str());
       }
     }
   }
@@ -1545,6 +1544,13 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       h         = health_set(0);
       is_killed = true;
     }
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // Negation damage
+  /////////////////////////////////////////////////////////////////////////
+  if (attack_options->attack_negation) {
+    negation_dmg(damage, is_killed);
   }
 
   if (is_killed) {
