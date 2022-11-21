@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - decr charge for monsters                                                                                                                   -->
 <!-- - check monsters can zap staffs                                                                                                              -->
 <!-- - negation of negation?                                                                                                                      -->
 <!-- - no eat msg when satiated at tick 1                                                                                                         -->
