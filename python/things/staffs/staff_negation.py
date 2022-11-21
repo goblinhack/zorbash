@@ -11,7 +11,7 @@ def on_targetted(me, x, y):
             x1 = x + dx
             y1 = y + dy
             distance = (((x1 - x)**2 + (y1 - y)**2)**0.5)
-            if distance > radius:
+            if distance > radius + 0.5:
                 continue
 
             my.place_at(me, "magical_effect", x1, y1)
@@ -32,7 +32,7 @@ def on_targetted_radially(me, x, y):
             x1 = x + dx
             y1 = y + dy
             distance = (((x1 - x)**2 + (y1 - y)**2)**0.5)
-            if distance > radius:
+            if distance > radius + 0.5:
                 continue
 
             my.place_at(me, "magical_effect", x1, y1)

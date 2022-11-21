@@ -610,12 +610,13 @@ public:
   bool skillbox_id_remove(Thingp what);
   bool skill_remove(Thingp it);
   bool skill_use(Thingp it);
-  bool spawn_fire_around_thing(const std::string &what, int radius);
   bool spawn_gas_poison_around_thing(int radius);
   bool spawn_next_to(const std::string &what);
   bool spawn_next_to_or_on_monst(const std::string &what);
   bool spawn_radius_range(const std::string &what, int rad_min, int rad_max);
   bool spawn_radius_range(Thingp parent, Thingp target, const std::string &what, int rad_min, int rad_max);
+  bool spawn_set_fire_to_things_around_me(const std::string &what, int radius);
+  bool spawn_things_around_me(const std::string &what, int radius);
   bool state_idle(Thingp threat, int minx, int miny, int maxx, int maxy);
   bool state_moving(void);
   bool state_open_inventory(void);

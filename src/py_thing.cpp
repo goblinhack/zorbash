@@ -1776,7 +1776,7 @@ PyObject *thing_sound_play_channel_(PyObject *obj, PyObject *args, PyObject *key
   Py_RETURN_TRUE;
 }
 
-PyObject *spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *spawn_set_fire_to_things_around_me(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   char    *what = nullptr;
@@ -1812,7 +1812,50 @@ PyObject *spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject *keywd
     Py_RETURN_FALSE;
   }
 
-  if (t->spawn_fire_around_thing(std::string(what), 1)) {
+  if (t->spawn_set_fire_to_things_around_me(std::string(what), 1)) {
+    Py_RETURN_TRUE;
+  }
+  Py_RETURN_FALSE;
+}
+
+PyObject *spawn_things_around_me(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  char    *what   = nullptr;
+  uint32_t id     = 0;
+  int      radius = 1;
+
+  static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "radius", nullptr};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Isi", kwlist, &id, &what, &radius)) {
+    ERR("%s: Bad args", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! id) {
+    ERR("%s: Missing 'id'", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! what) {
+    ERR("%s: Missing 'what'", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  PY_DBG("%s(%X, %s)", __FUNCTION__, id, what);
+
+  auto level = game->get_current_level();
+  if (! level) {
+    Py_RETURN_FALSE;
+  }
+
+  auto t = level->thing_find(ThingId(id));
+  if (unlikely(! t)) {
+    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
+    Py_RETURN_FALSE;
+  }
+
+  if (t->spawn_things_around_me(std::string(what), radius)) {
     Py_RETURN_TRUE;
   }
   Py_RETURN_FALSE;

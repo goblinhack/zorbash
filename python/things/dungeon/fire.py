@@ -3,7 +3,7 @@ import tp
 
 
 def spawn(me, x, y):
-    my.spawn_fire_around_thing(me, "small_fire")
+    my.spawn_set_fire_to_things_around_me(me, "small_fire")
 
 
 def tp_init(name, text_long_name):

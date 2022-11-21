@@ -9,7 +9,7 @@ def explode(me, x, y):
     my.thing_dead(me, "exploded")
     my.thing_msg(me, "The oil filled barrel explodes!")
     my.spawn_at_my_position(me, "explosion_major")
-    my.spawn_fire_around_thing(me, "fire")
+    my.spawn_set_fire_to_things_around_me(me, "fire")
     my.spawn_at_my_position(me, "fire")
 
 

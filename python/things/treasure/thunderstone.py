@@ -16,7 +16,7 @@ def explode(me, x, y):
         my.thing_msg(me, "The staff of thunderstone explodes.")
 
     my.spawn_at_my_position(me, "explosion_major")
-    my.spawn_fire_around_thing(me, "fire")
+    my.spawn_set_fire_to_things_around_me(me, "fire")
     my.spawn_at_my_position(me, "fire")
     my.spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
     my.thing_dead(me, "exploded")

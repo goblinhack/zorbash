@@ -11,7 +11,7 @@ def on_targetted(me, x, y):
             x1 = x + dx
             y1 = y + dy
             distance = (((x1 - x)**2 + (y1 - y)**2)**0.5)
-            if distance > radius:
+            if distance > radius + 0.5:
                 continue
 
             my.place_at(me, "fire", x1, y1)
@@ -24,24 +24,7 @@ def on_targetted_radially(me, x, y):
     radius = my.thing_effect_radius_get(me)
     radius += 1
     # my.con("targetted radially {} {:X}".format(my.thing_name_get(me), me))
-
-    for dx in range(-radius, radius + 1):
-        for dy in range(-radius, radius + 1):
-            if dx == 0 and dy == 0:
-                continue
-            x1 = x + dx
-            y1 = y + dy
-            distance = (((x1 - x)**2 + (y1 - y)**2)**0.5)
-            if distance > radius:
-                continue
-
-            my.place_at(me, "fire", x1, y1)
-            for it in my.level_get_all(me, x1, y1):
-                if my.thing_possible_to_attack(me, it):
-                    my.thing_hit(me, it)
-
-    owner = my.thing_top_owner_id_get(me)
-    my.thing_popup(owner, "You shall not pass!")
+    my.spawn_things_around_me(me, "fire", radius)
 
 
 def on_thrown(me, x, y):
@@ -79,7 +62,7 @@ def explode(me, x, y):
         my.thing_msg(me, "The staff of fire explodes.")
 
     my.spawn_at_my_position(me, "explosion_major")
-    my.spawn_fire_around_thing(me, "fire")
+    my.spawn_set_fire_to_things_around_me(me, "fire")
     my.spawn_at_my_position(me, "fire")
     my.thing_dead(me, "exploded")
 

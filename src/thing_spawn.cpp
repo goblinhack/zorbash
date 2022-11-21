@@ -448,7 +448,7 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, i
   return spawned;
 }
 
-bool Thing::spawn_fire_around_thing(const std::string &what, int radius)
+bool Thing::spawn_set_fire_to_things_around_me(const std::string &what, int radius)
 {
   TRACE_NO_INDENT();
 
@@ -465,6 +465,9 @@ bool Thing::spawn_fire_around_thing(const std::string &what, int radius)
       auto x = curr_at.x + dx;
       auto y = curr_at.y + dy;
 
+      if (! x && ! y) {
+        continue;
+      }
       if (x < MAP_BORDER_ROCK) {
         continue;
       }
@@ -483,7 +486,7 @@ bool Thing::spawn_fire_around_thing(const std::string &what, int radius)
       //
       // Radius needs to be the same as the check in carried_staff_highest_value_for_target
       //
-      if (dist > radius) {
+      if (dist > (float) radius + 0.5) {
         continue;
       }
 
@@ -505,6 +508,60 @@ bool Thing::spawn_fire_around_thing(const std::string &what, int radius)
         spawned_newborn(f);
       }
       FOR_ALL_THINGS_END()
+    }
+  }
+
+  return true;
+}
+
+bool Thing::spawn_things_around_me(const std::string &what, int radius)
+{
+  TRACE_NO_INDENT();
+
+  dbg("Spawn around thing of type: %s", what.c_str());
+  TRACE_AND_INDENT();
+
+  if (! radius) {
+    radius = 1;
+  }
+
+  for (int dx = -radius; dx <= radius; dx++) {
+    for (int dy = -radius; dy <= radius; dy++) {
+
+      auto x = curr_at.x + dx;
+      auto y = curr_at.y + dy;
+
+      if (! x && ! y) {
+        continue;
+      }
+      if (x < MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (x >= MAP_WIDTH - MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (y < MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
+        continue;
+      }
+
+      float dist = DISTANCE(x, y, curr_at.x, curr_at.y);
+
+      //
+      // Radius needs to be the same as the check in carried_staff_highest_value_for_target
+      //
+      if (dist > (float) radius + 0.5) {
+        continue;
+      }
+
+      if (level->is_hazard(x, y) || level->is_rock(x, y) || level->is_wall(x, y)) {
+        continue;
+      }
+
+      auto f = level->thing_new(what, point(x, y));
+      spawned_newborn(f);
     }
   }
 
