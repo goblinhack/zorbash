@@ -3,18 +3,18 @@
 //
 
 #include "my_array_bounds_check.hpp"
-#include "my_dmap.hpp"
+// REMOVED #include "my_dmap.hpp"
 #include "my_game.hpp"
-#include "my_gl.hpp"
-#include "my_globals.hpp"
+// REMOVED #include "my_gl.hpp"
+// REMOVED #include "my_globals.hpp"
 #include "my_math.hpp"
-#include "my_ptrcheck.hpp"
-#include "my_sound.hpp"
-#include "my_sys.hpp"
-#include "my_tex.hpp"
+// REMOVED #include "my_ptrcheck.hpp"
+// REMOVED #include "my_sound.hpp"
+// REMOVED #include "my_sys.hpp"
+// REMOVED #include "my_tex.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
-#include "my_tile.hpp"
+// REMOVED #include "my_thing_template.hpp"
+// REMOVED #include "my_tile.hpp"
 #include "my_wid.hpp"
 
 void Level::cursor_path_draw_circle(void)

@@ -7,7 +7,7 @@ void wid_asciimap_fini(void);
 bool wid_asciimap_init(void);
 void wid_asciimap_update(void);
 
-#include "my_wid.hpp"
+// REMOVED #include "my_wid.hpp"
 
 //
 // Global widgets.

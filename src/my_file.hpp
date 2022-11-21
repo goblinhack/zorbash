@@ -20,8 +20,8 @@ uint8_t        file_exists_and_is_newer_than(const char *filename, const char *f
 unsigned char *file_load(const char *filename, int *outlen);
 
 #if defined(MSDOS) || defined(OS2) || defined(WIN32) || defined(__CYGWIN__)
-#include <fcntl.h>
-#include <io.h>
+// REMOVED #include <fcntl.h>
+// REMOVED #include <io.h>
 #define SET_BINARY_MODE(file) setmode(fileno(file), O_BINARY)
 #else
 #define SET_BINARY_MODE(file)

@@ -2,16 +2,16 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_backtrace.hpp"
-#include "my_color.hpp"
-#include "my_dmap.hpp"
-#include "my_globals.hpp"
+// REMOVED #include "my_backtrace.hpp"
+// REMOVED #include "my_color.hpp"
+// REMOVED #include "my_dmap.hpp"
+// REMOVED #include "my_globals.hpp"
 #include "my_level.hpp"
-#include "my_main.hpp"
-#include "my_sprintf.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_main.hpp"
+// REMOVED #include "my_sprintf.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-#include <cinttypes> // PRIX32
+// REMOVED #include <cinttypes> // PRIX32
 
 void Level::things_gc(bool force)
 {

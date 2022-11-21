@@ -7,7 +7,7 @@
 #include "my_color_defs.hpp"
 #include "my_main.hpp"
 #include "my_string.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_ui.hpp"
 
 static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_tile, Tilep fg3_tile, int x1, int y1,

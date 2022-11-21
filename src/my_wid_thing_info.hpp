@@ -3,12 +3,12 @@
 //
 
 #pragma once
-#include <string>
+// REMOVED #include <string>
 
 void    wid_thing_info_fini(const std::string &why);
 uint8_t wid_thing_info_init(void);
 
-#include "my_wid.hpp"
+// REMOVED #include "my_wid.hpp"
 #include "my_wid_popup.hpp"
 
 //

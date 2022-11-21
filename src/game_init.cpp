@@ -2,27 +2,27 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_array_bounds_check.hpp"
-#include "my_dungeon_grid.hpp"
+// REMOVED #include "my_array_bounds_check.hpp"
+// REMOVED #include "my_dungeon_grid.hpp"
 #include "my_game.hpp"
-#include "my_globals.hpp"
+// REMOVED #include "my_globals.hpp"
 #include "my_globals_extra.hpp"
-#include "my_level.hpp"
-#include "my_random.hpp"
+// REMOVED #include "my_level.hpp"
+// REMOVED #include "my_random.hpp"
 #include "my_random_name.hpp"
-#include "my_sys.hpp"
-#include "my_thing.hpp"
+// REMOVED #include "my_sys.hpp"
+// REMOVED #include "my_thing.hpp"
 #include "my_wid_actionbar.hpp"
 #include "my_wid_asciimap.hpp"
 #include "my_wid_botcon.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_leftbar.hpp"
-#include "my_wid_popup.hpp"
+// REMOVED #include "my_wid_popup.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_skillbox.hpp"
 #include "my_wid_thing_info.hpp"
 #include "my_wid_topcon.hpp"
-#include "my_world.hpp"
+// REMOVED #include "my_world.hpp"
 
 void Game::pre_init(void)
 {

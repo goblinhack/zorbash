@@ -6,7 +6,7 @@
 #ifndef _MY_WID_TEXT_BOX_HPP_
 #define _MY_WID_TEXT_BOX_HPP_
 
-#include "my_main.hpp"
+// REMOVED #include "my_main.hpp"
 #include "my_wid.hpp"
 
 typedef enum {

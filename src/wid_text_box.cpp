@@ -2,19 +2,19 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include <SDL.h>
+// REMOVED #include <SDL.h>
 
 #include "my_backtrace.hpp"
-#include "my_color.hpp"
+// REMOVED #include "my_color.hpp"
 #include "my_color_defs.hpp"
-#include "my_sdl_proto.hpp"
+// REMOVED #include "my_sdl_proto.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_ui.hpp"
 #include "my_vector_bounds_check.hpp"
-#include "my_wid.hpp"
+// REMOVED #include "my_wid.hpp"
 #include "my_wid_text_box.hpp"
-#include "slre.hpp"
+// REMOVED #include "slre.hpp"
 
 WidTextBox::~WidTextBox()
 {

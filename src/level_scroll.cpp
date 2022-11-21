@@ -3,11 +3,11 @@
 //
 
 #include "my_game.hpp"
-#include "my_globals.hpp"
+// REMOVED #include "my_globals.hpp"
 #include "my_sdl_event.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-#include "my_wid.hpp"
+// REMOVED #include "my_wid.hpp"
 #include "my_wid_rightbar.hpp"
 
 //

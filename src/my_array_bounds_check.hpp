@@ -2,7 +2,7 @@
 #include "my_callstack.hpp"
 // REMOVED #include "my_globals.hpp"
 #include <array>
-#include <assert.h>
+// REMOVED #include <assert.h>
 #include <iostream>
 #include <sstream>
 

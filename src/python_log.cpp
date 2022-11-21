@@ -5,21 +5,21 @@
 #include "my_callstack.hpp"
 #include "my_globals_extra.hpp"
 #include "my_main.hpp"
-#include "my_monst.hpp"
+// REMOVED #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
-#include "my_py_level.hpp"
+// REMOVED #include "my_py_level.hpp"
 #include "my_py_sdl.hpp"
-#include "my_py_thing.hpp"
-#include "my_py_tp.hpp"
-#include "my_python.hpp"
-#include "my_random.hpp"
-#include "my_sdl_event.hpp"
-#include "my_sound.hpp"
-#include "my_string.hpp"
-#include "my_thing.hpp"
-#include "my_thing_template.hpp"
+// REMOVED #include "my_py_thing.hpp"
+// REMOVED #include "my_py_tp.hpp"
+// REMOVED #include "my_python.hpp"
+// REMOVED #include "my_random.hpp"
+// REMOVED #include "my_sdl_event.hpp"
+// REMOVED #include "my_sound.hpp"
+// REMOVED #include "my_string.hpp"
+// REMOVED #include "my_thing.hpp"
+// REMOVED #include "my_thing_template.hpp"
 #include <frameobject.h>
-#include <map>
+// REMOVED #include <map>
 
 PyObject *con_(PyObject *obj, PyObject *args, PyObject *keywds)
 {

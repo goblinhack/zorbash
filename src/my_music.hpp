@@ -9,7 +9,7 @@
 #ifndef _MY_MUSIC_HPP_
 #define _MY_MUSIC_HPP_
 
-#include <string>
+// REMOVED #include <string>
 
 class music;
 using musicp = class music *;

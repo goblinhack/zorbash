@@ -2,18 +2,18 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include <SDL.h>
+// REMOVED #include <SDL.h>
 
-#include "my_sdl_proto.hpp"
-#include "my_string.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sdl_proto.hpp"
+// REMOVED #include "my_string.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_ui.hpp"
-#include "my_wid.hpp"
-#include "my_wid_actionbar.hpp"
-#include "my_wid_inventory.hpp"
+// REMOVED #include "my_wid.hpp"
+// REMOVED #include "my_wid_actionbar.hpp"
+// REMOVED #include "my_wid_inventory.hpp"
 #include "my_wid_popup.hpp"
-#include "my_wid_text_box.hpp"
-#include "slre.hpp"
+// REMOVED #include "my_wid_text_box.hpp"
+// REMOVED #include "slre.hpp"
 
 WidPopup::~WidPopup()
 {

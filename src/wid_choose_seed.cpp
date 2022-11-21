@@ -3,18 +3,18 @@
 //
 
 #include "my_game.hpp"
-#include "my_globals.hpp"
+// REMOVED #include "my_globals.hpp"
 #include "my_globals_extra.hpp"
 #include "my_string.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_ui.hpp"
 #include "my_wid.hpp"
-#include "my_wid_inventory.hpp"
+// REMOVED #include "my_wid_inventory.hpp"
 #include "my_wid_keyboard.hpp"
-#include "my_wid_popup.hpp"
-#include "my_wid_rightbar.hpp"
-#include "my_wid_skillbox.hpp"
-#include <SDL_mixer.h>
+// REMOVED #include "my_wid_popup.hpp"
+// REMOVED #include "my_wid_rightbar.hpp"
+// REMOVED #include "my_wid_skillbox.hpp"
+// REMOVED #include <SDL_mixer.h>
 
 static Widp wid_choose_seed;
 

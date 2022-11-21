@@ -8,13 +8,13 @@
 
 #include "my_dice.hpp"
 #include "my_format_str_attribute.hpp"
-#include "my_fwd.hpp"
-#include "my_size.hpp"
+// REMOVED #include "my_fwd.hpp"
+// REMOVED #include "my_size.hpp"
 #include "my_thing_defs.hpp"
 #include "my_tile.hpp"
 #include <map>
 #include <set>
-#include <vector>
+// REMOVED #include <vector>
 
 using Tpidmap   = std::vector< class Tp   *>;
 using Tpnamemap = std::map< std::string, class Tp * >;

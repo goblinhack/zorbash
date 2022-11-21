@@ -5,11 +5,11 @@
 #include "my_file.hpp"
 #include "my_gl.hpp"
 #include "my_main.hpp"
-#include "my_math.hpp"
+// REMOVED #include "my_math.hpp"
 #include "my_pixel.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_string.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_tex.hpp"
 #include "stb_image.hpp"
 

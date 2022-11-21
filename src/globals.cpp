@@ -2,7 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_globals.hpp"
+// REMOVED #include "my_globals.hpp"
 #include "my_globals_extra.hpp"
 
 class Game *game;

@@ -2,8 +2,8 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_file.hpp"
-#include "my_globals.hpp"
+// REMOVED #include "my_file.hpp"
+// REMOVED #include "my_globals.hpp"
 #include "my_globals_extra.hpp"
 #include "my_log.hpp"
 #include "my_string.hpp"

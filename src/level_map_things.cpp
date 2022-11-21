@@ -5,7 +5,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_level.hpp"
 #include "my_thing.hpp"
-#include <cinttypes> // PRIX32
+// REMOVED #include <cinttypes> // PRIX32
 
 void Level::put_thing(int x, int y, ThingId id)
 {

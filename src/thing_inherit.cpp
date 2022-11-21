@@ -3,7 +3,7 @@
 //
 
 #include "my_thing.hpp"
-#include <set>
+// REMOVED #include <set>
 
 void Thing::inherit_from(Thingp it)
 {

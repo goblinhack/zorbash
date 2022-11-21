@@ -2,11 +2,11 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include <math.h>
+// REMOVED #include <math.h>
 
 #include "my_game.hpp"
-#include "my_gl.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_gl.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 
 float Level::update_wobble(void)

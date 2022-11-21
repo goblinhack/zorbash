@@ -4,11 +4,11 @@
 
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
-#include "my_gl.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_gl.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_tex.hpp"
-#include "my_thing.hpp"
-#include "my_tile.hpp"
+// REMOVED #include "my_thing.hpp"
+// REMOVED #include "my_tile.hpp"
 
 void Level::update_map_debug(int x, int y)
 {

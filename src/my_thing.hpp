@@ -6,13 +6,13 @@
 #ifndef _MY_THING_HPP_
 #define _MY_THING_HPP_
 
-#include <array>
+// REMOVED #include <array>
 #include <functional> // for std::function
 #include <list>
 
 #include "my_color.hpp"
 #include "my_dice.hpp"
-#include "my_format_str_attribute.hpp"
+// REMOVED #include "my_format_str_attribute.hpp"
 #include "my_fwd.hpp"
 #include "my_point.hpp"
 #include "my_point3d.hpp"

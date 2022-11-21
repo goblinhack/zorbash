@@ -7,9 +7,9 @@
 #define _MY_LEVEL_HPP_
 
 #include <deque>
-#include <functional>
+// REMOVED #include <functional>
 #include <list>
-#include <map>
+// REMOVED #include <map>
 
 #include "my_dmap.hpp"
 #include "my_fcolor.hpp"

@@ -3315,8 +3315,8 @@ LZO_COMPILE_TIME_ASSERT_HEADER(sizeof(lzo_int_fast64_t) == sizeof(lzo_uint_fast6
 #if defined(LZO_HAVE_CONFIG_H)
 #  include <config.h>
 #endif
-#include <limits.h>
-#include <stddef.h>
+// REMOVED #include <limits.h>
+// REMOVED #include <stddef.h>
 #endif
 #endif
 #if defined(LZO_CFG_EXTRA_CONFIG_HEADER2)

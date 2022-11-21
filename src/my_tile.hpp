@@ -6,11 +6,11 @@
 #ifndef _MY_TILE_HPP_
 #define _MY_TILE_HPP_
 
-#include "my_color.hpp"
+// REMOVED #include "my_color.hpp"
 #include "my_fwd.hpp"
 #include "my_gl.hpp"
-#include "my_point.hpp"
-#include <array>
+// REMOVED #include "my_point.hpp"
+// REMOVED #include <array>
 
 #define TILE_HEIGHT       game->config.tile_height
 #define TILE_HEIGHT_LORES 16
