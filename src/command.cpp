@@ -7,7 +7,7 @@
 #include "my_main.hpp"
 #include "my_python.hpp"
 #include "my_sys.hpp"
-// REMOVED #include <array>
+#include <array> // do not remove
 
 /*
  * Simple console expanding code, takes a comand input and expands it as

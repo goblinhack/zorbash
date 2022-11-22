@@ -26,7 +26,7 @@
 // REMOVED #include "my_wid.hpp"
 #include "my_wid_choose_level.hpp"
 #include "my_wid_console.hpp"
-// REMOVED #include "my_wid_popup.hpp"
+#include "my_wid_popup.hpp" // do not remove
 
 static uint8_t wid_choose_initial_dungeons_enter(Widp w, int x, int y, uint32_t button);
 static uint8_t wid_choose_initial_dungeons_shortcut_enter(Widp w, int x, int y, uint32_t button);

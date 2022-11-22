@@ -151,7 +151,7 @@ LICENSE
 #ifndef INCLUDE_STB_IMAGE_WRITE_H
 #define INCLUDE_STB_IMAGE_WRITE_H
 
-// REMOVED // REMOVED #include <stdlib.h>
+#include <stdlib.h> // do not remove
 
 // if STB_IMAGE_WRITE_STATIC causes problems, try defining STBIWDEF to 'inline' or 'static inline'
 #ifndef STBIWDEF
@@ -210,13 +210,13 @@ STBIWDEF void stbi_flip_vertically_on_write(int flip_boolean);
 #endif
 
 #ifndef STBI_WRITE_NO_STDIO
-// REMOVED #include <stdio.h>
+#include <stdio.h>
 #endif // STBI_WRITE_NO_STDIO
 
-// REMOVED #include <math.h>
-// REMOVED #include <stdarg.h>
+#include <math.h>
+#include <stdarg.h>
 #include <stdlib.h>
-// REMOVED #include <string.h>
+#include <string.h>
 
 #if defined(STBIW_MALLOC) && defined(STBIW_FREE) && (defined(STBIW_REALLOC) || defined(STBIW_REALLOC_SIZED))
 // ok
@@ -241,7 +241,7 @@ STBIWDEF void stbi_flip_vertically_on_write(int flip_boolean);
 #endif
 
 #ifndef STBIW_ASSERT
-// REMOVED #include <assert.h>
+#include <assert.h>
 #define STBIW_ASSERT(x) assert(x)
 #endif
 
@@ -263,7 +263,7 @@ STBIWDEF void stbi_flip_vertically_on_write(int flag) { stbi__flip_vertically_on
 
 typedef struct {
   stbi_write_func *func;
-  void            *context;
+  void *           context;
   unsigned char    buffer[ 64 ];
   int              buf_used;
 } stbi__write_context;
@@ -345,14 +345,14 @@ static void stbiw__writefv(stbi__write_context *s, const char *fmt, va_list v)
 {
   while (*fmt) {
     switch (*fmt++) {
-      case ' ' : break;
-      case '1' :
+      case ' ': break;
+      case '1':
         {
           unsigned char x = STBIW_UCHAR(va_arg(v, int));
           s->func(s->context, &x, 1);
           break;
         }
-      case '2' :
+      case '2':
         {
           int           x = va_arg(v, int);
           unsigned char b[ 2 ];
@@ -361,7 +361,7 @@ static void stbiw__writefv(stbi__write_context *s, const char *fmt, va_list v)
           s->func(s->context, b, 2);
           break;
         }
-      case '4' :
+      case '4':
         {
           stbiw_uint32  x = va_arg(v, int);
           unsigned char b[ 4 ];
@@ -372,7 +372,7 @@ static void stbiw__writefv(stbi__write_context *s, const char *fmt, va_list v)
           s->func(s->context, b, 4);
           break;
         }
-      default : STBIW_ASSERT(0); return;
+      default: STBIW_ASSERT(0); return;
     }
   }
 }
@@ -424,14 +424,14 @@ static void stbiw__write_pixel(stbi__write_context *s, int rgb_dir, int comp, in
     stbiw__write1(s, d[ comp - 1 ]);
 
   switch (comp) {
-    case 2 : // 2 pixels = mono + alpha, alpha is written separately, so same as 1-channel case
-    case 1 :
+    case 2: // 2 pixels = mono + alpha, alpha is written separately, so same as 1-channel case
+    case 1:
       if (expand_mono)
         stbiw__write3(s, d[ 0 ], d[ 0 ], d[ 0 ]); // monochrome bmp
       else
         stbiw__write1(s, d[ 0 ]); // monochrome TGA
       break;
-    case 4 :
+    case 4:
       if (! write_alpha) {
         // composite against pink background
         for (k = 0; k < 3; ++k)
@@ -440,7 +440,7 @@ static void stbiw__write_pixel(stbi__write_context *s, int rgb_dir, int comp, in
         break;
       }
       /* FALLTHROUGH */
-    case 3 : stbiw__write3(s, d[ 1 - rgb_dir ], d[ 1 ], d[ 1 + rgb_dir ]); break;
+    case 3: stbiw__write3(s, d[ 1 - rgb_dir ], d[ 1 ], d[ 1 + rgb_dir ]); break;
   }
   if (write_alpha > 0)
     stbiw__write1(s, d[ comp - 1 ]);
@@ -675,13 +675,13 @@ static void stbiw__write_hdr_scanline(stbi__write_context *s, int width, int nco
   if (width < 8 || width >= 32768) {
     for (x = 0; x < width; x++) {
       switch (ncomp) {
-        case 4 : /* fallthrough */
-        case 3 :
+        case 4: /* fallthrough */
+        case 3:
           linear[ 2 ] = scanline[ x * ncomp + 2 ];
           linear[ 1 ] = scanline[ x * ncomp + 1 ];
           linear[ 0 ] = scanline[ x * ncomp + 0 ];
           break;
-        default : linear[ 0 ] = linear[ 1 ] = linear[ 2 ] = scanline[ x * ncomp + 0 ]; break;
+        default: linear[ 0 ] = linear[ 1 ] = linear[ 2 ] = scanline[ x * ncomp + 0 ]; break;
       }
       stbiw__linear_to_rgbe(rgbe, linear);
       s->func(s->context, rgbe, 4);
@@ -691,13 +691,13 @@ static void stbiw__write_hdr_scanline(stbi__write_context *s, int width, int nco
     /* encode into scratch buffer */
     for (x = 0; x < width; x++) {
       switch (ncomp) {
-        case 4 : /* fallthrough */
-        case 3 :
+        case 4: /* fallthrough */
+        case 3:
           linear[ 2 ] = scanline[ x * ncomp + 2 ];
           linear[ 1 ] = scanline[ x * ncomp + 1 ];
           linear[ 0 ] = scanline[ x * ncomp + 0 ];
           break;
-        default : linear[ 0 ] = linear[ 1 ] = linear[ 2 ] = scanline[ x * ncomp + 0 ]; break;
+        default: linear[ 0 ] = linear[ 1 ] = linear[ 2 ] = scanline[ x * ncomp + 0 ]; break;
       }
       stbiw__linear_to_rgbe(rgbe, linear);
       scratch[ x + width * 0 ] = rgbe[ 0 ];
@@ -909,8 +909,8 @@ static unsigned char *stbi_zlib_compress(unsigned char *data, int data_len, int 
                                    6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13};
   unsigned int          bitbuf     = 0;
   int                   i, j, bitcount = 0;
-  unsigned char        *out        = nullptr;
-  unsigned char      ***hash_table = (unsigned char ***) STBIW_MALLOC(stbiw__ZHASH * sizeof(unsigned char **));
+  unsigned char *       out        = nullptr;
+  unsigned char ***     hash_table = (unsigned char ***) STBIW_MALLOC(stbiw__ZHASH * sizeof(unsigned char **));
   if (hash_table == nullptr)
     return nullptr;
   if (quality < 5)
@@ -928,7 +928,7 @@ static unsigned char *stbi_zlib_compress(unsigned char *data, int data_len, int 
   while (i < data_len - 3) {
     // hash next 3 bytes of data to be compressed
     int             h = stbiw__zhash(data + i) & (stbiw__ZHASH - 1), best = 3;
-    unsigned char  *bestloc = 0;
+    unsigned char * bestloc = 0;
     unsigned char **hlist   = hash_table[ h ];
     int             n       = stbiw__sbcount(hlist);
     for (j = 0; j < n; ++j) {
@@ -1093,7 +1093,7 @@ static void stbiw__encode_png_line(unsigned char *pixels, int stride_bytes, int 
 {
   static int     mapping[]  = {0, 1, 2, 3, 4};
   static int     firstmap[] = {0, 1, 0, 5, 6};
-  int           *mymap      = (y != 0) ? mapping : firstmap;
+  int *          mymap      = (y != 0) ? mapping : firstmap;
   int            i;
   int            type          = mymap[ filter_type ];
   unsigned char *z             = pixels + stride_bytes * (stbi__flip_vertically_on_write ? height - 1 - y : y);
@@ -1107,36 +1107,36 @@ static void stbiw__encode_png_line(unsigned char *pixels, int stride_bytes, int 
   // first loop isn't optimized since it's just one pixel
   for (i = 0; i < n; ++i) {
     switch (type) {
-      case 1 : line_buffer[ i ] = z[ i ]; break;
-      case 2 : line_buffer[ i ] = z[ i ] - z[ i - signed_stride ]; break;
-      case 3 : line_buffer[ i ] = z[ i ] - (z[ i - signed_stride ] >> 1); break;
-      case 4 : line_buffer[ i ] = (signed char) (z[ i ] - stbiw__paeth(0, z[ i - signed_stride ], 0)); break;
-      case 5 : line_buffer[ i ] = z[ i ]; break;
-      case 6 : line_buffer[ i ] = z[ i ]; break;
+      case 1: line_buffer[ i ] = z[ i ]; break;
+      case 2: line_buffer[ i ] = z[ i ] - z[ i - signed_stride ]; break;
+      case 3: line_buffer[ i ] = z[ i ] - (z[ i - signed_stride ] >> 1); break;
+      case 4: line_buffer[ i ] = (signed char) (z[ i ] - stbiw__paeth(0, z[ i - signed_stride ], 0)); break;
+      case 5: line_buffer[ i ] = z[ i ]; break;
+      case 6: line_buffer[ i ] = z[ i ]; break;
     }
   }
   switch (type) {
-    case 1 :
+    case 1:
       for (i = n; i < width * n; ++i)
         line_buffer[ i ] = z[ i ] - z[ i - n ];
       break;
-    case 2 :
+    case 2:
       for (i = n; i < width * n; ++i)
         line_buffer[ i ] = z[ i ] - z[ i - signed_stride ];
       break;
-    case 3 :
+    case 3:
       for (i = n; i < width * n; ++i)
         line_buffer[ i ] = z[ i ] - ((z[ i - n ] + z[ i - signed_stride ]) >> 1);
       break;
-    case 4 :
+    case 4:
       for (i = n; i < width * n; ++i)
         line_buffer[ i ] = z[ i ] - stbiw__paeth(z[ i - n ], z[ i - signed_stride ], z[ i - signed_stride - n ]);
       break;
-    case 5 :
+    case 5:
       for (i = n; i < width * n; ++i)
         line_buffer[ i ] = z[ i ] - (z[ i - n ] >> 1);
       break;
-    case 6 :
+    case 6:
       for (i = n; i < width * n; ++i)
         line_buffer[ i ] = z[ i ] - stbiw__paeth(z[ i - n ], 0, 0);
       break;
@@ -1150,7 +1150,7 @@ static unsigned char *stbi_write_png_to_mem(const unsigned char *pixels, int str
   int            ctype[ 5 ]   = {-1, 0, 4, 2, 6};
   unsigned char  sig[ 8 ]     = {137, 80, 78, 71, 13, 10, 26, 10};
   unsigned char *out, *o, *filt, *zlib;
-  signed char   *line_buffer;
+  signed char *  line_buffer;
   int            j, zlen;
 
   if (stride_bytes == 0)
@@ -1242,7 +1242,7 @@ static unsigned char *stbi_write_png_to_mem(const unsigned char *pixels, int str
 #ifndef STBI_WRITE_NO_STDIO
 STBIWDEF int stbi_write_png(char const *filename, int x, int y, int comp, const void *data, int stride_bytes)
 {
-  FILE          *f;
+  FILE *         f;
   int            len;
   unsigned char *png = stbi_write_png_to_mem((const unsigned char *) data, stride_bytes, x, y, comp, &len);
   if (png == nullptr)

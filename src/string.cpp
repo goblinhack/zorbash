@@ -2,11 +2,11 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include <algorithm>
-// REMOVED #include <iostream>
-// REMOVED #include <libgen.h>
-#include <sstream>
-// REMOVED #include <string>
+#include <algorithm> // do not remove
+#include <iostream>  // do not remove
+#include <libgen.h>  // do not remove
+#include <sstream>   // do not remove
+#include <string>    // do not remove
 
 // REMOVED #include "my_globals.hpp"
 #include "my_main.hpp"
@@ -109,7 +109,7 @@ char *strsub_(const char *in, const char *look_for, const char *replace_with, co
               const char *func, int line)
 {
   TRACE_NO_INDENT();
-  char       *buf;
+  char *      buf;
   const char *at;
   int         newlen;
   int         oldlen;
@@ -224,7 +224,7 @@ uint32_t strcommon(const char *a, const char *b)
     b++;
   }
 
-  return (uint32_t) (a - o);
+  return (uint32_t)(a - o);
 }
 
 /*
@@ -234,7 +234,7 @@ void strchop(char *s)
 {
   TRACE_NO_INDENT();
   uint32_t size;
-  char    *end;
+  char *   end;
 
   size = (uint32_t) strlen(s);
   if (! size) {
@@ -256,7 +256,7 @@ void strchopc(char *s, char c)
 {
   TRACE_NO_INDENT();
   uint32_t size;
-  char    *end;
+  char *   end;
 
   size = (uint32_t) strlen(s);
   if (! size) {
@@ -408,7 +408,7 @@ char *dynvprintf(const char *fmt, va_list args)
 std::string mybasename(const char *in, const char *who)
 {
   TRACE_NO_INDENT();
-  char       *tmp = dupstr(in, who);
+  char *      tmp = dupstr(in, who);
   std::string tmp2(basename(tmp));
   myfree(tmp);
 
@@ -481,8 +481,8 @@ shared_vector_string split(const char *text, int max_line_len)
 {
   TRACE_NO_INDENT();
   uint8_t           found_format_string;
-  const char       *line_start;
-  const char       *line_end;
+  const char *      line_start;
+  const char *      line_end;
   int               line_len;
   char              c;
   const char *const text_start = text;
@@ -1162,8 +1162,8 @@ Tpp string2tp(const char **s)
   TRACE_NO_INDENT();
   static char        tmp[ MAXSHORTSTR ];
   static const char *eo_tmp = tmp + MAXSHORTSTR;
-  const char        *c      = *s;
-  char              *t      = tmp;
+  const char *       c      = *s;
+  char *             t      = tmp;
 
   while (t < eo_tmp) {
     if ((*c == '\0') || (*c == '$')) {
@@ -1248,7 +1248,7 @@ int snprintf_realloc(char **str, int *size, int *used, const char *fmt, ...)
   int     needspace;
   int     usedspace;
   va_list ap;
-  char   *tmp;
+  char *  tmp;
 
   if (! str) {
     return (-1);
