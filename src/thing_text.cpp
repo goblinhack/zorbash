@@ -28,6 +28,8 @@ std::string Thing::text_a_or_an(void)
       out += "a frozen ";
     } else if (is_burnt) {
       out += "a burnt ";
+    } else if (tpp->charge_count() && ! charge_count()) {
+      out += "a spent ";
     }
   }
 
@@ -81,6 +83,8 @@ std::string Thing::text_the(bool include_owner)
       out += "frozen ";
     } else if (is_burnt) {
       out += "burnt ";
+    } else if (tpp->charge_count() && ! charge_count()) {
+      out += "spent ";
     }
   }
 
@@ -154,6 +158,8 @@ std::string Thing::text_short_a_or_an(void)
       out += "a frozen ";
     } else if (is_burnt) {
       out += "a burnt ";
+    } else if (tpp->charge_count() && ! charge_count()) {
+      out += "a spent ";
     }
   }
 
@@ -175,6 +181,7 @@ std::string Thing::text_short_the(void)
 {
   TRACE_NO_INDENT();
   auto tpp = tp();
+
   verify(MTYPE_THING, this);
   verify(MTYPE_TP, tpp);
   if (unlikely(! tpp)) {
@@ -270,6 +277,14 @@ std::string Thing::text_long_capitalised(void)
 std::string Thing::text_short_and_state_capitalised(void)
 {
   TRACE_NO_INDENT();
+  auto tpp = tp();
+
+  verify(MTYPE_THING, this);
+  verify(MTYPE_TP, tpp);
+  if (unlikely(! tpp)) {
+    return ("<no name>");
+  }
+
   std::string out;
 
   if (is_player() || is_monst()) {
@@ -285,6 +300,8 @@ std::string Thing::text_short_and_state_capitalised(void)
       out += "frozen ";
     } else if (is_burnt) {
       out += "burnt ";
+    } else if (tpp->charge_count() && ! charge_count()) {
+      out += "spent ";
     }
   }
 
@@ -307,8 +324,8 @@ std::string Thing::text_short_and_state_capitalised(void)
     c++;
   }
 
-  if (enchant_get()) {
-    out += " +" + std::to_string(enchant_get());
+  if (enchant_count_get()) {
+    out += " +" + std::to_string(enchant_count_get());
   }
 
   return out;
@@ -350,8 +367,8 @@ std::string Thing::text_long_and_state_capitalised(void)
     c++;
   }
 
-  if (enchant_get()) {
-    out += " +" + std::to_string(enchant_get());
+  if (enchant_count_get()) {
+    out += " +" + std::to_string(enchant_count_get());
   }
 
   return out;
@@ -360,7 +377,7 @@ std::string Thing::text_long_and_state_capitalised(void)
 void Thing::show_botcon_description(void)
 {
   TRACE_NO_INDENT();
-  auto text = text_short_description();
+  auto text = text_description_short();
 
   bool skip_showing_keys_to_use = true;
   switch (game->state) {

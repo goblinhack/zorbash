@@ -107,7 +107,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     return nullptr;
   }
 
-  if (t->text_long_description().empty()) {
+  if (t->text_description_long().empty()) {
     IF_DEBUG1 { t->log("Create thing info popup; no, has no text"); }
     wid_thing_info_fini("has no text");
     t->show_botcon_description();
@@ -171,14 +171,14 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
       wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
     }
   } else {
-    wid_popup_window->log(t->text_long_description(), TEXT_FORMAT_LHS, "pink");
+    wid_popup_window->log(t->text_description_long(), TEXT_FORMAT_LHS, "pink");
 
-    if (! t->text_long_description2().empty()) {
-      wid_popup_window->log(t->text_long_description2(), TEXT_FORMAT_LHS, "yellow");
+    if (! t->text_description_long2().empty()) {
+      wid_popup_window->log(t->text_description_long2(), TEXT_FORMAT_LHS, "yellow");
     }
 
-    if (! t->text_long_description3().empty()) {
-      wid_popup_window->log(t->text_long_description3(), TEXT_FORMAT_LHS, "orange");
+    if (! t->text_description_long3().empty()) {
+      wid_popup_window->log(t->text_description_long3(), TEXT_FORMAT_LHS, "orange");
     }
 
     wid_thing_info_add_general_info(wid_popup_window, t);
@@ -337,7 +337,7 @@ bool Game::wid_thing_info_push_popup(Thingp t)
   IF_DEBUG1 { t->log("Push thing info?"); }
   TRACE_AND_INDENT();
 
-  if (t->text_long_description() == "") {
+  if (t->text_description_long() == "") {
     IF_DEBUG1 { t->log("No; cannot push, no text"); }
     return false;
   }
@@ -520,7 +520,7 @@ bool Game::wid_thing_info_create_list(std::vector< Thingp > &ts)
   //
   bool found_one_with_long_text = false;
   for (auto t : ts) {
-    if (! t->text_long_description().empty()) {
+    if (! t->text_description_long().empty()) {
       found_one_with_long_text = true;
       break;
     }
@@ -577,7 +577,7 @@ bool Game::wid_thing_info_create_list(std::vector< Thingp > &ts)
   //
   std::vector< Thingp > ts_new;
   for (auto t : ts) {
-    if (! t->text_long_description().empty()) {
+    if (! t->text_description_long().empty()) {
       ts_new.push_back(t);
     }
   }
@@ -605,7 +605,7 @@ bool Game::wid_thing_info_create_list(std::vector< Thingp > &ts)
   if (! compact) {
     int i = 0;
     for (auto t : ts) {
-      if (t->text_long_description().empty()) {
+      if (t->text_description_long().empty()) {
         continue;
       }
 
@@ -797,8 +797,8 @@ void Game::wid_thing_info_add_dmg_melee(WidPopup *w, Thingp t, int index)
           snprintf(tmp2, sizeof(tmp2) - 1, "%s", curr_weapon->dmg_melee_dice_str().c_str());
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee dmg%20s", tmp2);
         } else {
-          min_value += t->enchant_get();
-          max_value += t->enchant_get();
+          min_value += t->enchant_count_get();
+          max_value += t->enchant_count_get();
           snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value,
                    curr_weapon->dmg_melee_dice_str().c_str());
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee dmg%20s", tmp2);
@@ -817,8 +817,8 @@ void Game::wid_thing_info_add_dmg_melee(WidPopup *w, Thingp t, int index)
           snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_melee_dice_str().c_str());
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee dmg%20s", tmp2);
         } else {
-          min_value += t->enchant_get();
-          max_value += t->enchant_get();
+          min_value += t->enchant_count_get();
+          max_value += t->enchant_count_get();
           snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_melee_dice_str().c_str());
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee dmg%20s", tmp2);
         }
@@ -844,8 +844,8 @@ void Game::wid_thing_info_add_dmg_poison(WidPopup *w, Thingp t, int index)
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_poison_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Poison dmg%19s", tmp2);
       } else {
-        min_value += t->enchant_get();
-        max_value += t->enchant_get();
+        min_value += t->enchant_count_get();
+        max_value += t->enchant_count_get();
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_poison_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Poison dmg%19s", tmp2);
       }
@@ -877,8 +877,8 @@ void Game::wid_thing_info_add_dmg_drown(WidPopup *w, Thingp t, int index)
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_drown_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Drown dmg %19s", tmp2);
       } else {
-        min_value += t->enchant_get();
-        max_value += t->enchant_get();
+        min_value += t->enchant_count_get();
+        max_value += t->enchant_count_get();
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_drown_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Drown dmg %19s", tmp2);
       }
@@ -910,8 +910,8 @@ void Game::wid_thing_info_add_dmg_bite(WidPopup *w, Thingp t, int index)
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_bite_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Bite dmg  %19s", tmp2);
       } else {
-        min_value += t->enchant_get();
-        max_value += t->enchant_get();
+        min_value += t->enchant_count_get();
+        max_value += t->enchant_count_get();
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_bite_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Bite dmg  %19s", tmp2);
       }
@@ -943,8 +943,8 @@ void Game::wid_thing_info_add_dmg_claw(WidPopup *w, Thingp t, int index)
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_claw_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Claw dmg  %19s", tmp2);
       } else {
-        min_value += t->enchant_get();
-        max_value += t->enchant_get();
+        min_value += t->enchant_count_get();
+        max_value += t->enchant_count_get();
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_claw_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Claw dmg  %19s", tmp2);
       }
@@ -976,8 +976,8 @@ void Game::wid_thing_info_add_dmg_cold(WidPopup *w, Thingp t, int index)
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_cold_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Cold dmg%21s", tmp2);
       } else {
-        min_value += t->enchant_get();
-        max_value += t->enchant_get();
+        min_value += t->enchant_count_get();
+        max_value += t->enchant_count_get();
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_cold_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Cold dmg%21s", tmp2);
       }
@@ -1009,8 +1009,8 @@ void Game::wid_thing_info_add_dmg_fire(WidPopup *w, Thingp t, int index)
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_fire_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Fire dmg%21s", tmp2);
       } else {
-        min_value += t->enchant_get();
-        max_value += t->enchant_get();
+        min_value += t->enchant_count_get();
+        max_value += t->enchant_count_get();
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_fire_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Fire dmg%21s", tmp2);
       }
@@ -1042,8 +1042,8 @@ void Game::wid_thing_info_add_dmg_crush(WidPopup *w, Thingp t, int index)
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_crush_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Crush dmg%20s", tmp2);
       } else {
-        min_value += t->enchant_get();
-        max_value += t->enchant_get();
+        min_value += t->enchant_count_get();
+        max_value += t->enchant_count_get();
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_crush_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Crush dmg%20s", tmp2);
       }
@@ -1075,8 +1075,8 @@ void Game::wid_thing_info_add_dmg_lightning(WidPopup *w, Thingp t, int index)
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_lightning_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Blast dmg%20s", tmp2);
       } else {
-        min_value += t->enchant_get();
-        max_value += t->enchant_get();
+        min_value += t->enchant_count_get();
+        max_value += t->enchant_count_get();
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_lightning_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Blast dmg%20s", tmp2);
       }
@@ -1108,8 +1108,8 @@ void Game::wid_thing_info_add_dmg_energy(WidPopup *w, Thingp t, int index)
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_energy_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Energy dmg%19s", tmp2);
       } else {
-        min_value += t->enchant_get();
-        max_value += t->enchant_get();
+        min_value += t->enchant_count_get();
+        max_value += t->enchant_count_get();
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_energy_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Energy dmg%19s", tmp2);
       }
@@ -1141,8 +1141,8 @@ void Game::wid_thing_info_add_dmg_negation(WidPopup *w, Thingp t, int index)
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_negation_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Negat. dmg%19s", tmp2);
       } else {
-        min_value += t->enchant_get();
-        max_value += t->enchant_get();
+        min_value += t->enchant_count_get();
+        max_value += t->enchant_count_get();
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_negation_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Negat. dmg%19s", tmp2);
       }
@@ -1174,8 +1174,8 @@ void Game::wid_thing_info_add_dmg_acid(WidPopup *w, Thingp t, int index)
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_acid_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Acid dmg%21s", tmp2);
       } else {
-        min_value += t->enchant_get();
-        max_value += t->enchant_get();
+        min_value += t->enchant_count_get();
+        max_value += t->enchant_count_get();
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_acid_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Acid dmg%21s", tmp2);
       }
@@ -1208,8 +1208,8 @@ void Game::wid_thing_info_add_dmg_nat_att(WidPopup *w, Thingp t, int index)
           snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_nat_att_dice_str().c_str());
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Bite dmg%21s", tmp2);
         } else {
-          min_value += t->enchant_get();
-          max_value += t->enchant_get();
+          min_value += t->enchant_count_get();
+          max_value += t->enchant_count_get();
           snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_nat_att_dice_str().c_str());
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Bite dmg%21s", tmp2);
         }
@@ -1219,8 +1219,8 @@ void Game::wid_thing_info_add_dmg_nat_att(WidPopup *w, Thingp t, int index)
           snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_nat_att_dice_str().c_str());
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dmg:%-9s%16s", capitalise(t->dmg_nat_att_type()).c_str(), tmp2);
         } else {
-          min_value += t->enchant_get();
-          max_value += t->enchant_get();
+          min_value += t->enchant_count_get();
+          max_value += t->enchant_count_get();
           snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_nat_att_dice_str().c_str());
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dmg:%-9s%16s", capitalise(t->dmg_nat_att_type()).c_str(), tmp2);
         }
@@ -1253,8 +1253,8 @@ void Game::wid_thing_info_add_dmg_digest(WidPopup *w, Thingp t, int index)
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_digest_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Digest dmg%19s", tmp2);
       } else {
-        min_value += t->enchant_get();
-        max_value += t->enchant_get();
+        min_value += t->enchant_count_get();
+        max_value += t->enchant_count_get();
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_digest_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Digest dmg%19s", tmp2);
       }
@@ -1286,8 +1286,8 @@ void Game::wid_thing_info_add_dmg_necrosis(WidPopup *w, Thingp t, int index)
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_necrosis_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Rotting dmg%18s", tmp2);
       } else {
-        min_value += t->enchant_get();
-        max_value += t->enchant_get();
+        min_value += t->enchant_count_get();
+        max_value += t->enchant_count_get();
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_necrosis_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Rotting dmg%18s", tmp2);
       }
@@ -1319,8 +1319,8 @@ void Game::wid_thing_info_add_dmg_draining(WidPopup *w, Thingp t, int index)
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_draining_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Drain dmg  %18s", tmp2);
       } else {
-        min_value += t->enchant_get();
-        max_value += t->enchant_get();
+        min_value += t->enchant_count_get();
+        max_value += t->enchant_count_get();
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_draining_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Drain dmg  %18s", tmp2);
       }
@@ -1768,7 +1768,7 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
   bool printed_something = false;
 
   TRACE_AND_INDENT();
-  if (t->enchant_get()) {
+  if (t->enchant_count_get()) {
     if (t->is_skill()) {
       w->log("This skill is enchanted.", TEXT_FORMAT_LHS);
       printed_something = true;
@@ -1941,13 +1941,12 @@ void Game::wid_thing_info_add_charge_count(WidPopup *w, Thingp t)
 
   auto tp = t->tp();
   if (tp->charge_count()) {
-    auto c = player->item_count_including_charges(t->tp());
-    if (c > t->charge_count()) {
-      snprintf(tmp2, sizeof(tmp2) - 1, "%d(%d tot)", t->charge_count(), c);
+    if (t->charge_count()) {
+      snprintf(tmp2, sizeof(tmp2) - 1, "%d", t->charge_count());
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Charges%22s", tmp2);
       w->log(tmp);
     } else {
-      snprintf(tmp2, sizeof(tmp2) - 1, "%d", t->charge_count());
+      snprintf(tmp2, sizeof(tmp2) - 1, "Spent");
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Charges%22s", tmp2);
       w->log(tmp);
     }

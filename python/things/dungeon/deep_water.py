@@ -31,7 +31,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_interesting(self, True)
     my.is_obs_for_ai(self, True)
     my.text_a_or_an(self, "the")
-    my.text_short_description(self, "A pool of deep dank water, with things in it.")
+    my.text_description_short(self, "A pool of deep dank water, with things in it.")
     my.z_depth(self, my.MAP_DEPTH_LIQUID)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker

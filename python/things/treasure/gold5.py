@@ -34,7 +34,7 @@ def gold_init(name, text_long_name, text_short_name):
     my.normal_placement_rules(self, True)
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "an")
-    my.text_short_description(self, "Some gold goins.")
+    my.text_description_short(self, "Some gold goins.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)

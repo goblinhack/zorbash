@@ -41,8 +41,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_long_description(self, "The food of the Gods. May seem out of place in a dungeon and you'd be correct. It is rumored a helpful god left them here for brave adventurers to assist them on their path. Often found in a purple wrapper. Almost looks too good to eat.")
-    my.text_short_description(self, "The food of the Gods: a chocolate frog.")
+    my.text_description_long(self, "The food of the Gods. May seem out of place in a dungeon and you'd be correct. It is rumored a helpful god left them here for brave adventurers to assist them on their path. Often found in a purple wrapper. Almost looks too good to eat.")
+    my.text_description_short(self, "The food of the Gods: a chocolate frog.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
     # end sort marker

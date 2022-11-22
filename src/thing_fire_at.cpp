@@ -213,7 +213,9 @@ bool Thing::fire_at_target(void)
 
 bool Thing::fire_at_and_choose_target(Thingp item, UseOptions *use_options)
 {
-  TRACE_NO_INDENT();
+  dbg("Fire at and choose target: %s", item->to_short_string().c_str());
+  TRACE_AND_INDENT();
+
   if (use_options && use_options->radial_effect) {
     return laser_fire_at(item, item->gfx_targetted_radial(), this, use_options);
   }
@@ -225,7 +227,13 @@ bool Thing::fire_at_and_choose_target(Thingp item, UseOptions *use_options)
 
 bool Thing::fire_at(Thingp item, Thingp target)
 {
-  TRACE_NO_INDENT();
+  if (target) {
+    dbg("Fire %s at %s", item->to_short_string().c_str(), target->to_short_string().c_str());
+  } else {
+    dbg("Fire %s", item->to_short_string().c_str());
+  }
+  TRACE_AND_INDENT();
+
   if (item->gfx_targetted_laser().empty()) {
     return projectile_choose_target(item, target);
   }
@@ -234,10 +242,12 @@ bool Thing::fire_at(Thingp item, Thingp target)
 
 bool Thing::fire_at(Thingp target)
 {
-  TRACE_NO_INDENT();
   if (! target) {
     return false;
   }
+
+  dbg("Fire at %s if possible", target->to_short_string().c_str());
+  TRACE_AND_INDENT();
 
   Thingp curr_weapon = equip_get(MONST_EQUIP_WEAPON);
   if (! curr_weapon) {

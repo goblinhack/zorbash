@@ -11,7 +11,7 @@ def on_owner_attack_dmg_melee(me, owner, victim, x, y, damage):
     # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
     # my.con("victim  {} {:X}".format(my.thing_name_get(victim), victim))
     # my.con("damage  {}".format(damage))
-    return damage + my.thing_enchant_get(me)
+    return damage + my.thing_enchant_count_get(me)
 
 
 def tp_init(name, text_long_name, text_short_name):
@@ -59,9 +59,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_RARE)
     my.stamina_drain_on_attacking(self, 0)
     my.text_a_or_an(self, "a")
-    my.text_enchant(self, "+1 DMG")
-    my.text_long_description(self, "A gleaming cutlass. Ideal for the entry level pirate.")
-    my.text_short_description(self, "Thy curved and pointy means of justice. Aar.")
+    my.text_description_enchant(self, "+1 DMG")
+    my.text_description_long(self, "A gleaming cutlass. Ideal for the entry level pirate.")
+    my.text_description_short(self, "Thy curved and pointy means of justice. Aar.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)

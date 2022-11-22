@@ -7,8 +7,8 @@
 
 bool Thing::item_choose_target(Thingp item, Thingp victim /* can be null */)
 {
-  TRACE_AND_INDENT();
   dbg("Trying to target a item with: %s", item->to_short_string().c_str());
+  TRACE_AND_INDENT();
 
   if (is_monst() || (game->robot_mode && is_player())) {
     if (! victim) {

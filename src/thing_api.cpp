@@ -191,7 +191,7 @@ int Thing::damaged_chance_d10000(void)
   TRACE_NO_INDENT();
 
   int chance = tp()->damaged_chance_d10000();
-  int e      = enchant_get();
+  int e      = enchant_count_get();
   while (e-- > 0) {
     chance /= 2;
   }
@@ -204,7 +204,7 @@ int Thing::crit_chance_d10000(void)
   TRACE_NO_INDENT();
 
   int chance = tp()->crit_chance_d10000();
-  int e      = enchant_get();
+  int e      = enchant_count_get();
   while (e-- > 0) {
     chance *= 2;
   }
@@ -229,7 +229,7 @@ int Thing::effect_radius(void)
   TRACE_NO_INDENT();
 
   int radius = tp()->effect_radius();
-  radius += enchant_get();
+  radius += enchant_count_get();
   return radius;
 }
 
@@ -5917,10 +5917,10 @@ const std::string &Thing::is_allied_with(void)
   return (tp()->is_allied_with());
 }
 
-const std::string &Thing::text_enchant(void)
+const std::string &Thing::text_description_enchant(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->text_enchant());
+  return (tp()->text_description_enchant());
 }
 
 const std::string &Thing::text_hits(void)

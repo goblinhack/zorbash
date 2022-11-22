@@ -168,6 +168,10 @@ int Thing::carried_cloak_highest_value_for_target(Thingp *out, Thingp target)
       continue;
     }
 
+    if (! t->charge_count()) {
+      continue;
+    }
+
     //
     // If intelligent don't use a cloak that will hit you also
     //

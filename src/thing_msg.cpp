@@ -24,19 +24,15 @@ bool Thing::player_is_ready_for_messages(void)
     return false;
   }
 
+  if (! player->ready_for_messages) {
+    return false;
+  }
+
   //
   // Cut down on post death messages.
   //
   if (player->is_dead) {
     return false;
-  }
-
-  if (game->tick_current <= 1) {
-    if (game->tick_requested.empty()) {
-      if (! game->tick_begin_ms || (time_ms() - game->tick_begin_ms) < 50) {
-        return false;
-      }
-    }
   }
 
   if (level->is_starting || level->is_being_destroyed) {
@@ -61,20 +57,15 @@ bool Thing::player_is_ready_for_messages(std::string &why)
     return false;
   }
 
+  if (! player->ready_for_messages) {
+    return false;
+  }
+
   //
   // Cut down on post death messages.
   //
   if (player->is_dead) {
     return false;
-  }
-
-  if (game->tick_current <= 1) {
-    if (game->tick_requested.empty()) {
-      if (! game->tick_begin_ms) {
-        why = "first tick";
-        return false;
-      }
-    }
   }
 
   if (level->is_starting) {

@@ -16,7 +16,7 @@ def on_unequip(owner, me, x, y):
 
 def on_owner_receive_dmg_draining(me, owner, hitter, real_hitter, x, y, damage):
     damage = int(damage / 2)
-    enchant = my.thing_enchant_get(me)
+    enchant = my.thing_enchant_count_get(me)
     damage -= 10 * enchant
     if damage < 0:
         damage = 0
@@ -59,9 +59,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_RARE)
     my.text_a_or_an(self, "a")
-    my.text_enchant(self, "-10 stamina DMG")
-    my.text_long_description(self, "Amulet of endurance. Leap for joy whilst wearing this amulet for you will only use half as much stamina as normal. This also applies to magical items that may attempt to drain stamina, like boots of jumping or skills such as Devoted Thrust. Each enchant will reduce a further 10 points of stamina damage.")
-    my.text_short_description(self, "Amuler of endurance.")
+    my.text_description_enchant(self, "-10 stamina DMG")
+    my.text_description_long(self, "Amulet of endurance. Leap for joy whilst wearing this amulet for you will only use half as much stamina as normal. This also applies to magical items that may attempt to drain stamina, like boots of jumping or skills such as Devoted Thrust. Each enchant will reduce a further 10 points of stamina damage.")
+    my.text_description_short(self, "Amuler of endurance.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)

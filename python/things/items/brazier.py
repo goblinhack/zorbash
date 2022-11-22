@@ -41,7 +41,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.spawn_on_shoved(self, "fire")
     my.temperature(self, 100)
     my.text_a_or_an(self, "a")
-    my.text_short_description(self, "A beacon of light in this blighted place.")
+    my.text_description_short(self, "A beacon of light in this blighted place.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker

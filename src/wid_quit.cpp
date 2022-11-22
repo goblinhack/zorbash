@@ -29,6 +29,7 @@ void wid_quit_destroy(void)
 static uint8_t wid_quit_yes(Widp w, int x, int y, uint32_t button)
 {
   TRACE_NO_INDENT();
+
   if (game->started) {
     LOG("INF: Restart game");
 

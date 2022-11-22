@@ -342,6 +342,7 @@ public:
   uint64_t has_external_particle : 1 {}; // current in motion particle
   uint64_t has_internal_particle : 1 {}; // current in motion particle
   uint64_t ai_tried_to_wander    : 1 {}; // tried to wander
+  uint64_t ready_for_messages    : 1 {}; // ready to see console messages
 #ifdef ENABLE_DEBUG_THING_SER
   std::string debug_str;
 #endif
@@ -687,7 +688,7 @@ public:
   bool worth_eating(const Thingp it);
   // end sort marker1 }
 
-  std::vector< std::string > on_get_text_long_description(void);
+  std::vector< std::string > on_get_text_description_long(void);
 
   const Dice &dmg_water_dice(void);
   const Dice &dmg_acid_dice(void);
@@ -761,9 +762,9 @@ public:
   const std::string dmg_necrosis_dice_str(void);
   const std::string dmg_poison_dice_str(void);
   const std::string danger_level_str(Thingp); // Cannot return reference
-  const std::string text_long_description2(void);
-  const std::string text_long_description3(void);
-  const std::string text_long_description(void);
+  const std::string text_description_long2(void);
+  const std::string text_description_long3(void);
+  const std::string text_description_long(void);
 
   const std::string &dmg_nat_att_type(void);
   const std::string &dead_reason_get(void);
@@ -808,7 +809,7 @@ public:
   const std::string &on_fall_begin_do(void);
   const std::string &on_final_use_do(void);
   const std::string &on_want_to_fire_at_something_do(void);
-  const std::string &on_get_text_long_description_do(void);
+  const std::string &on_get_text_description_long_do(void);
   const std::string &on_idle_tick_freq_dice_str(void);
   const std::string &on_jump_do(void);
   const std::string &on_lifespan_tick_do(void);
@@ -907,10 +908,10 @@ public:
   const std::string &target_name_projectile(void);
   const std::string &gfx_targetted_radial(void);
   const std::string &text_debuff(void);
-  const std::string &text_enchant(void);
+  const std::string &text_description_enchant(void);
   const std::string &text_hits(void);
   const std::string &text_long_name(void);
-  const std::string &text_short_description(void);
+  const std::string &text_description_short(void);
   const std::string &text_short_name(void);
   const std::string &text_skill(void);
   const std::string &text_title(void);
@@ -1099,11 +1100,12 @@ public:
   int dmg_water_chance_d1000(int);
   int dmg_water(void);
   int effect_radius(void);
-  int enchant_decr(int);
-  int enchant_decr(void);
-  int enchant_get(void);
-  int enchant_incr(int);
-  int enchant_incr(void);
+  int enchant_count_decr(int);
+  int enchant_count_decr(void);
+  int enchant_count_get(void);
+  int enchant_count_incr(int);
+  int enchant_count_incr(void);
+  int enchant_count_set(int);
   int enchant_max_current_decr(int);
   int enchant_max_current_decr(void);
   int enchant_max_current_get(void);
@@ -1111,7 +1113,6 @@ public:
   int enchant_max_current_incr(void);
   int enchant_max_current_set(int);
   int enchant_max(void);
-  int enchant_set(int);
   int enchantstone_count(void);
   int environ_avoids_acid(void);
   int environ_avoids_cold(void);

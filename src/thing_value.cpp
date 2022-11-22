@@ -52,7 +52,7 @@ int Thing::value(Thingp it)
   // Enchant is included in damage, but enchanting also has other benefits like
   // less corrosive. So give a boost in relation to the enchangt level.
   //
-  value += it->enchant_get();
+  value += it->enchant_count_get();
 
   value *= 1 + it->charge_count();
 

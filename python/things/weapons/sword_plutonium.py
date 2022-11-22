@@ -80,9 +80,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_COMMON)
     my.stat_att_mod(self, 2)  # means +2 per enchant
     my.text_a_or_an(self, "a")
-    my.text_enchant(self, "+1 DMG, +2 ATT")
-    my.text_long_description(self, "This glowing and very heavy sword offers supreme damage potential and durability. Crafted from the core of a long gone power source of the ancients, you must take care as prolonged exposure to this sword will make you weak and sick. But maybe it is worth it?")
-    my.text_short_description(self, "Thy nuclear means of justice.")
+    my.text_description_enchant(self, "+1 DMG, +2 ATT")
+    my.text_description_long(self, "This glowing and very heavy sword offers supreme damage potential and durability. Crafted from the core of a long gone power source of the ancients, you must take care as prolonged exposure to this sword will make you weak and sick. But maybe it is worth it?")
+    my.text_description_short(self, "Thy nuclear means of justice.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)

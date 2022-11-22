@@ -49,7 +49,7 @@ bool Thing::enchant_with_stone(Thingp what)
   TRACE_AND_INDENT();
 
   what->on_enchant();
-  what->enchant_incr(1);
+  what->enchant_count_incr(1);
   what->damaged_count_set(0);
 
   //
@@ -81,7 +81,7 @@ bool Thing::enchant_without_stone(Thingp what)
   TRACE_AND_INDENT();
 
   what->on_enchant();
-  what->enchant_incr(1);
+  what->enchant_count_incr(1);
   what->damaged_count_set(0);
 
   return true;
@@ -95,12 +95,12 @@ void Thing::enchant_randomly(void)
     return;
   }
 
-  enchant_incr(1);
+  enchant_count_incr(1);
   while (pcg_random_range(0, 100) < 20 + level->num() * 2) {
-    if (enchant_get() >= enchant_max_current_get()) {
+    if (enchant_count_get() >= enchant_max_current_get()) {
       break;
     }
-    enchant_incr(1);
+    enchant_count_incr(1);
   }
   damaged_count_set(0);
 }
@@ -152,7 +152,7 @@ bool Thing::enchant_random_item_with_stone(void)
   return enchant_with_stone(chosen);
 }
 
-int Thing::enchant_get(void)
+int Thing::enchant_count_get(void)
 {
   TRACE_NO_INDENT();
   int v = 0;
@@ -161,19 +161,19 @@ int Thing::enchant_get(void)
   }
   auto owner = immediate_owner();
   if (owner && (owner != this)) {
-    v += owner->enchant_get();
+    v += owner->enchant_count_get();
   }
   if (is_minion()) {
     auto mob = immediate_mob();
     if (mob) {
       auto mob = immediate_mob();
-      v += mob->enchant_get();
+      v += mob->enchant_count_get();
     }
   }
   return v;
 }
 
-int Thing::enchant_set(int v)
+int Thing::enchant_count_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -181,7 +181,7 @@ int Thing::enchant_set(int v)
   return n;
 }
 
-int Thing::enchant_decr(int v)
+int Thing::enchant_count_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -192,7 +192,7 @@ int Thing::enchant_decr(int v)
   return n;
 }
 
-int Thing::enchant_incr(int v)
+int Thing::enchant_count_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -200,7 +200,7 @@ int Thing::enchant_incr(int v)
   return n;
 }
 
-int Thing::enchant_decr(void)
+int Thing::enchant_count_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -211,7 +211,7 @@ int Thing::enchant_decr(void)
   return n;
 }
 
-int Thing::enchant_incr(void)
+int Thing::enchant_count_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();

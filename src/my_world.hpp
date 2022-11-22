@@ -6,7 +6,7 @@
 #ifndef _MY_WORLD_HPP_
 #define _MY_WORLD_HPP_
 
-// REMOVED #include <unordered_map>
+#include <unordered_map> // do not remove
 
 // REMOVED #include "my_game_defs.hpp"
 #include "my_level.hpp"

@@ -35,8 +35,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "10+1d15")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
-    my.text_long_description(self, "Dungeon sushi. The last sushi you'll ever try...")
-    my.text_short_description(self, "Sushi. Possibly.")
+    my.text_description_long(self, "Dungeon sushi. The last sushi you'll ever try...")
+    my.text_description_short(self, "Sushi. Possibly.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
     # end sort marker

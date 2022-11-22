@@ -20,7 +20,7 @@ def on_use(owner, item, target, x, y):
     # my.topcon("item   {} {}".format(my.thing_name_get(item), my.thing_health(item)))
     # my.topcon("target {} {}".format(my.thing_name_get(target), my.thing_health(target)))
     damage = my.thing_dmg_energy(item)
-    enchant = my.thing_enchant_get(item)
+    enchant = my.thing_enchant_count_get(item)
     my.thing_dmg_current_set(owner, damage + enchant)
 
 
@@ -121,9 +121,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.range_max(self, 7)
     my.text_a_or_an(self, "a")
-    my.text_enchant(self, "+5 CHARGE, +1 DMG")
-    my.text_long_description(self, "Staff of department of energy. Discharges a powerful ray of energy upon an unwitting recipient...")
-    my.text_short_description(self, "A staff of energy.")
+    my.text_description_enchant(self, "+5 CHARGE, +1 DMG")
+    my.text_description_long(self, "Staff of department of energy. Discharges a powerful ray of energy upon an unwitting recipient...")
+    my.text_description_short(self, "A staff of energy.")
     my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)

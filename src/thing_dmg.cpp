@@ -118,7 +118,7 @@ int Thing::dmg_max(void)
   //
   // Don't include crush damage as it is non typical
   //
-  return max_dmg + enchant_get();
+  return max_dmg + enchant_count_get();
 }
 
 int Thing::dmg_min(void)
@@ -153,5 +153,5 @@ int Thing::dmg_min(void)
   //
   // Don't include crush damage as it is non typical
   //
-  return min_dmg + enchant_get();
+  return min_dmg + enchant_count_get();
 }

@@ -142,7 +142,7 @@ int Thing::skill_enchant_count(const uint32_t slot)
     auto o = game->level->thing_find(oid);
     if (o) {
       if (o->id == thing_id) {
-        return o->enchant_get();
+        return o->enchant_count_get();
       }
     }
   }

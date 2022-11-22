@@ -19,8 +19,8 @@ const std::string Thing::dmg_lightning_dice_str(void)
 {
   TRACE_NO_INDENT();
 
-  if (enchant_get()) {
-    return tp()->dmg_lightning_dice_str() + modifier_to_string(enchant_get());
+  if (enchant_count_get()) {
+    return tp()->dmg_lightning_dice_str() + modifier_to_string(enchant_count_get());
   }
 
   return (tp()->dmg_lightning_dice_str());
@@ -31,7 +31,7 @@ int Thing::dmg_lightning(void)
   TRACE_NO_INDENT();
   auto roll    = tp()->dmg_lightning_dice().roll();
   roll         = weapon_dmg_modify(roll);
-  auto enchant = enchant_get();
+  auto enchant = enchant_count_get();
   dbg("Damage lightning roll %d + enchant %d", roll, enchant);
   return roll + enchant;
 }

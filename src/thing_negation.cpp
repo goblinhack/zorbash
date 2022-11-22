@@ -63,18 +63,18 @@ void Thing::negation_dmg(int dmg, bool &is_killed)
     }
   }
 
-  if (enchant_get()) {
+  if (enchant_count_get()) {
     //
     // If an enchanted item, remove one charge (or more)
     //
-    enchant_decr(dmg);
+    enchant_count_decr(dmg);
 
     auto owner = top_owner();
 
     //
     // Still enchanted?
     //
-    if (enchant_get()) {
+    if (enchant_count_get()) {
       if (owner && owner->is_player()) {
         if (! owner->is_dying && ! owner->is_dying) {
           owner->msg("Your %s loses enchantment!", text_long_name().c_str());
@@ -111,6 +111,7 @@ void Thing::negation_dmg(int dmg, bool &is_killed)
     } else if (owner && owner->is_monst()) {
       if (! owner->is_dying && ! owner->is_dying) {
         owner->msg("%s %s has no more charges!", apostrophise(owner->text_The()).c_str(), text_long_name().c_str());
+        owner->drop(this);
       }
     }
   }

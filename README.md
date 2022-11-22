@@ -1,19 +1,14 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - decr charge for monsters                                                                                                                   -->
-<!-- - check monsters can zap staffs                                                                                                              -->
+<!-- - fix cold and energy staffs                                                                                                                 -->
 <!-- - negation of negation?                                                                                                                      -->
-<!-- - no eat msg when satiated at tick 1                                                                                                         -->
-<!-- - wand of fire does not hit all in path                                                                                                      -->
 <!-- - popups need alignment                                                                                                                      -->
-<!-- - move damage from lasers to the item                                                                                                        -->
-<!-- - if you enchant a staff of negation does it do more damage?                                                                                 -->
 <!-- - fireskull should die if chilled?                                                                                                           -->
 <!-- - falling in block of ice should fall together                                                                                               -->
 <!-- - using fireball in block of ice                                                                                                             -->
 <!-- - some weapons crit more                                                                                                                     -->
 <!-- - tentacle grapple                                                                                                                           -->
-<!-- - test main body with freezing and staff of descent                                                                                           -->
+<!-- - test main body with freezing and staff of descent                                                                                          -->
 <!-- - kraken guards treasure                                                                                                                     -->
 <!-- - resize the collect window to just what we need                                                                                             -->
 <!-- - check plutonium sword and lightning                                                                                                        -->

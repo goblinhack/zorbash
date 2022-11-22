@@ -129,7 +129,7 @@ def tp_init(name, text_long_name):
     my.on_owner_receive_dmg_stat_str_do(self, "me.on_owner_receive_dmg_stat_str()")
     my.on_owner_remove_do(self, "me.on_owner_remove()")
     my.on_tick_do(self, "me.on_tick()")
-    my.text_long_description(self, "Poison causes you 50 percent less damage.")
+    my.text_description_long(self, "Poison causes you 50 percent less damage.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     # my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
     # end sort marker

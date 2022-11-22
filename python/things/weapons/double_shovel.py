@@ -11,7 +11,7 @@ def on_owner_attack_dmg_melee(me, owner, victim, x, y, damage):
     # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
     # my.con("victim  {} {:X}".format(my.thing_name_get(victim), victim))
     # my.con("damage  {}".format(damage))
-    return damage + my.thing_enchant_get(me)
+    return damage + my.thing_enchant_count_get(me)
 
 
 def tp_init(name, text_long_name, text_short_name):
@@ -63,9 +63,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.stamina_drain_on_attacking(self, 3)
     my.stat_att_mod(self, 1)  # means +1 per enchant
     my.text_a_or_an(self, "a")
-    my.text_enchant(self, "+1 DMG, +1 ATT")
-    my.text_long_description(self, "A truly dreadful weapon of last resort. The masterwork double bladed shovel. Ideal for allotment use and casual bludgeoning.")
-    my.text_short_description(self, "Thy diggy means of justice.")
+    my.text_description_enchant(self, "+1 DMG, +1 ATT")
+    my.text_description_long(self, "A truly dreadful weapon of last resort. The masterwork double bladed shovel. Ideal for allotment use and casual bludgeoning.")
+    my.text_description_short(self, "Thy diggy means of justice.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)

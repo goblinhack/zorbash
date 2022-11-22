@@ -168,6 +168,10 @@ int Thing::carried_shield_highest_value_for_target(Thingp *out, Thingp target)
       continue;
     }
 
+    if (! t->charge_count()) {
+      continue;
+    }
+
     //
     // If intelligent don't use a shield that will hit you also
     //

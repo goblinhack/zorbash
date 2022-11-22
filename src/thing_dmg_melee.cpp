@@ -19,8 +19,8 @@ const std::string Thing::dmg_melee_dice_str(void)
 {
   TRACE_NO_INDENT();
 
-  if (enchant_get()) {
-    return tp()->dmg_melee_dice_str() + modifier_to_string(enchant_get());
+  if (enchant_count_get()) {
+    return tp()->dmg_melee_dice_str() + modifier_to_string(enchant_count_get());
   }
 
   return (tp()->dmg_melee_dice_str());
@@ -30,7 +30,7 @@ int Thing::dmg_melee(void)
 {
   TRACE_NO_INDENT();
   auto roll    = tp()->dmg_melee_dice().roll();
-  auto enchant = enchant_get();
+  auto enchant = enchant_count_get();
   roll         = weapon_dmg_modify(roll);
   dbg("Damage melee roll %s => roll %d + enchant %d", tp()->dmg_melee_dice_str().c_str(), roll, enchant);
   return roll + enchant;

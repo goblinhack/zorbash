@@ -91,7 +91,7 @@ def tp_init(name, text_long_name):
     my.temperature(self, -100)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_short_description(self, "A block of ice.")
+    my.text_description_short(self, "A block of ice.")
     my.thing_size(self, my.THING_SIZE_GIANT)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_EFFECT)

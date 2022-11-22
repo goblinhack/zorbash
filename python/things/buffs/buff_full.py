@@ -18,8 +18,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_buff(self, True)
     my.is_loggable(self, True)
     my.on_owner_add_do(self, "me.on_owner_add()")
-    my.text_long_description(self, "Hunger does not kill in this game. However, if you become hungry or starved, you will lose points on attack and defense and other abilities may also be impacted. Best to keep food at hand.")
-    my.text_short_description(self, "You are satiated.")
+    my.text_description_long(self, "Hunger does not kill in this game. However, if you become hungry or starved, you will lose points on attack and defense and other abilities may also be impacted. Best to keep food at hand.")
+    my.text_description_short(self, "You are satiated.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     # end sort marker
 

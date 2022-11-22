@@ -34,8 +34,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "10+1d12")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
-    my.text_long_description(self, "A very juicy dungeon apple. A bit too juicy if you ask me. From local dungeon apple trees, if you can believe that.")
-    my.text_short_description(self, "Very juicy apple.")
+    my.text_description_long(self, "A very juicy dungeon apple. A bit too juicy if you ask me. From local dungeon apple trees, if you can believe that.")
+    my.text_description_short(self, "Very juicy apple.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
     # end sort marker

@@ -34,8 +34,8 @@ def key_init(name, text_long_name):
     my.melting_chance_d1000(self, 5)
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "an")
-    my.text_long_description(self, "A pair of keys. What more can you say.")
-    my.text_short_description(self, "A pair of keys.")
+    my.text_description_long(self, "A pair of keys. What more can you say.")
+    my.text_description_short(self, "A pair of keys.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker

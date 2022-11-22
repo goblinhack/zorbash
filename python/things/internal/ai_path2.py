@@ -14,7 +14,7 @@ def tp_init(name):
     my.is_moveable(self, True)
     my.is_removeable_if_out_of_slots(self, True)
     my.is_tmp_thing(self, True)
-    my.text_short_description(self, "AI path.")
+    my.text_description_short(self, "AI path.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_CURSOR)

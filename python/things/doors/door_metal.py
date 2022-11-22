@@ -60,7 +60,7 @@ def tp_init(name):
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
     my.stat_def(self, 20)
     my.text_a_or_an(self, "the")
-    my.text_short_description(self, "A metal door that's not for opening.")
+    my.text_description_short(self, "A metal door that's not for opening.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker

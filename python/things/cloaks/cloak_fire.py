@@ -23,7 +23,7 @@ def on_waiting(me, x, y):
     if not owner:
         return False
 
-    enchant = my.thing_enchant_get(me)
+    enchant = my.thing_enchant_count_get(me)
     if enchant == 0:
         enchant = 1
 
@@ -88,9 +88,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_COMMON)
     my.stat_def_mod(self, 1)
     my.text_a_or_an(self, "a")
-    my.text_enchant(self, "+1 DEF")
-    my.text_long_description(self, "A brilliant fiery red cloak.")
-    my.text_short_description(self, "Cloak of fire protection.")
+    my.text_description_enchant(self, "+1 DEF")
+    my.text_description_long(self, "A brilliant fiery red cloak.")
+    my.text_description_short(self, "Cloak of fire protection.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)

@@ -542,7 +542,7 @@ PyObject *spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObjec
   }
 
   if (t->spawn_radius_range(parent, target, std::string(what), radius_min,
-                            radius_max)) { // + parent->enchant_get())) {
+                            radius_max)) { // + parent->enchant_count_get())) {
     Py_RETURN_TRUE;
   }
   Py_RETURN_FALSE;
@@ -587,7 +587,7 @@ PyObject *spawn_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   if (t->spawn_radius_range(std::string(what), radius_min,
-                            radius_max)) { // + parent->enchant_get())) {
+                            radius_max)) { // + parent->enchant_count_get())) {
     Py_RETURN_TRUE;
   }
   Py_RETURN_FALSE;
@@ -798,6 +798,7 @@ PyObject *place_at(PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 // begin sort marker1 {
+
 TP_BODY_SET_INT(aggression_pct)
 TP_BODY_SET_INT(ai_detect_secret_doors)
 TP_BODY_SET_INT(ai_resent_count)
@@ -1346,6 +1347,7 @@ TP_BODY_SET_INT(unused_flag9)
 TP_BODY_SET_INT(weapon_dmg)
 TP_BODY_SET_INT(z_depth)
 TP_BODY_SET_INT(z_prio)
+// end sort marker1 }
 TP_BODY_SET_STRING(dmg_acid_dice)
 TP_BODY_SET_STRING(dmg_bite_dice)
 TP_BODY_SET_STRING(dmg_claw_dice)
@@ -1406,7 +1408,7 @@ TP_BODY_SET_STRING(on_equip_do)
 TP_BODY_SET_STRING(on_fall_begin_do)
 TP_BODY_SET_STRING(on_fall_do)
 TP_BODY_SET_STRING(on_final_use_do)
-TP_BODY_SET_STRING(on_get_text_long_description_do)
+TP_BODY_SET_STRING(on_get_text_description_long_do)
 TP_BODY_SET_STRING(on_idle_tick_freq_dice)
 TP_BODY_SET_STRING(on_jump_do)
 TP_BODY_SET_STRING(on_lifespan_tick_do)
@@ -1503,17 +1505,24 @@ TP_BODY_SET_STRING(str4)
 TP_BODY_SET_STRING(target_name_projectile)
 TP_BODY_SET_STRING(text_a_or_an)
 TP_BODY_SET_STRING(text_debuff)
-TP_BODY_SET_STRING(text_enchant)
+TP_BODY_SET_STRING(text_description_enchant)
 TP_BODY_SET_STRING(text_hits)
-TP_BODY_SET_STRING(text_long_description)
-TP_BODY_SET_STRING(text_long_description2)
-TP_BODY_SET_STRING(text_long_description3)
+TP_BODY_SET_STRING(text_description_long)
+TP_BODY_SET_STRING(text_description_long2)
+TP_BODY_SET_STRING(text_description_long3)
 TP_BODY_SET_STRING(text_long_name)
-TP_BODY_SET_STRING(text_short_description)
+TP_BODY_SET_STRING(text_description_short)
 TP_BODY_SET_STRING(text_skill)
 TP_BODY_SET_STRING(text_title)
 TP_BODY_SET_STRING(text_unused)
 TP_BODY_SET_STRING(text_unused1)
 TP_BODY_SET_STRING(text_unused2)
 TP_BODY_SET_STRING(text_unused3)
-// end sort marker1 }
+// end sort marker2 }
+// end sort marker2 }
+// end sort marker2 }
+// end sort marker2 }
+// end sort marker2 }
+// end sort marker2 }
+// end sort marker2 }
+// end sort marker2 }

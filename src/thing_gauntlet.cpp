@@ -168,6 +168,10 @@ int Thing::carried_gauntlet_highest_value_for_target(Thingp *out, Thingp target)
       continue;
     }
 
+    if (! t->charge_count()) {
+      continue;
+    }
+
     //
     // If intelligent don't use a gauntlet that will hit you also
     //

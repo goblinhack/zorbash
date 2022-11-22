@@ -106,7 +106,7 @@ int Thing::stat_luck_total(void)
   }
 
   if (stat) {
-    auto enchant = enchant_get();
+    auto enchant = enchant_count_get();
     stat += enchant;
     if (stat != prev) {
       prev = stat;

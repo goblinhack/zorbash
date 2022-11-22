@@ -11,7 +11,7 @@ def on_owner_attack_dmg_draining(me, owner, victim, x, y, damage):
     # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
     # my.con("victim  {} {:X}".format(my.thing_name_get(victim), victim))
     # my.con("damage  {}".format(damage))
-    return damage + my.thing_enchant_get(me) * 3
+    return damage + my.thing_enchant_count_get(me) * 3
 
 
 def tp_init(name, text_long_name, text_short_name):
@@ -62,9 +62,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_COMMON)
     my.stamina_drain_on_attacking(self, 0)
     my.text_a_or_an(self, "a")
-    my.text_enchant(self, "+3 DMG stam")
-    my.text_long_description(self, "This magical sword deals additional draining damage to suck the will to live out of your opponents.")
-    my.text_short_description(self, "Thy tiring means of justice.")
+    my.text_description_enchant(self, "+3 DMG stam")
+    my.text_description_long(self, "This magical sword deals additional draining damage to suck the will to live out of your opponents.")
+    my.text_description_short(self, "Thy tiring means of justice.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)

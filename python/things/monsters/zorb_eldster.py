@@ -25,8 +25,8 @@ def tp_init(name, text_long_name):
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
     my.on_you_nat_att_do(self, "zorb_all.on_you_nat_att()")
     my.stat_str(self, 8)
-    my.text_long_description2(self, "This zorblin is world weary and longing for an early retirement. Can you help?")
-    my.text_short_description(self, "A very war-weary goblin.")
+    my.text_description_long2(self, "This zorblin is world weary and longing for an early retirement. Can you help?")
+    my.text_description_short(self, "A very war-weary goblin.")
     # end sort marker
 
     delay = 300

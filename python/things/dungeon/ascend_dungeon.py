@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_get_text_long_description(owner, me, x, y):
+def on_get_text_description_long(owner, me, x, y):
     if my.thing_level_get(me) == 1:
         return ["This imposing doorway leads back to freedom from the terrible dungeon you find yourself in.",
                 "Why are you here? Good question. Something involving a bet, copious amounts of liquid, seven ferrets and an ungodly desire to rid the world of a terrible evil of some kind.",
@@ -35,9 +35,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.light_color(self, "yellow")
     my.light_dist(self, 3)
     my.normal_placement_rules(self, True)
-    my.on_get_text_long_description_do(self, "me.on_get_text_long_description()")
+    my.on_get_text_description_long_do(self, "me.on_get_text_description_long()")
     my.text_a_or_an(self, "the")
-    my.text_short_description(self, "%%fg=gold$The way up.")
+    my.text_description_short(self, "%%fg=gold$The way up.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)

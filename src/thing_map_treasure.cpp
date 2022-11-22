@@ -72,7 +72,7 @@ bool Thing::map_treasure_available(void)
     //
     // Enchanted maps work for all levels
     //
-    if (! t->enchant_get()) {
+    if (! t->enchant_count_get()) {
       auto born_at = t->born_get();
       if (born_at.z != level->world_at.z) {
         continue;

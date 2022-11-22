@@ -25,7 +25,7 @@ def tp_init(name, text_long_name):
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "1d4")
     my.text_a_or_an(self, "a")
-    my.text_short_description(self, "An artwork comprised mainly of blood.")
+    my.text_description_short(self, "An artwork comprised mainly of blood.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_FLOOR2)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)

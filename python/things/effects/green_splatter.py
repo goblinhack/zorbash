@@ -18,7 +18,7 @@ def tp_init(name, text_long_name):
     my.is_removeable_if_out_of_slots(self, True)
     my.is_tmp_thing(self, True)
     my.text_a_or_an(self, "a")
-    my.text_short_description(self, "Splat attack.")
+    my.text_description_short(self, "Splat attack.")
     my.tick_prio(self, my.MAP_TICK_PRIO_VERY_HIGH)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)

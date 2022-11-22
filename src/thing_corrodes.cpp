@@ -41,8 +41,8 @@ void Thing::corrode_tick(void)
       chance = 1;
     }
 
-    if (enchant_get()) {
-      chance /= enchant_get() + 1;
+    if (enchant_count_get()) {
+      chance /= enchant_count_get() + 1;
     }
 
     if (chance) {

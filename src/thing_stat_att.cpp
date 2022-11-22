@@ -118,7 +118,7 @@ int Thing::stat_att_mod_total()
   }
 
   if (stat) {
-    auto enchant = enchant_get();
+    auto enchant = enchant_count_get();
     stat += enchant;
     if (stat != prev) {
       prev = stat;

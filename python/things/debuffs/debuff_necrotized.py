@@ -26,8 +26,8 @@ def tp_init(name, text_long_name):
     my.is_tickable(self, True)
     my.on_tick_do(self, "me.on_tick()")
     my.text_debuff(self, "You are rotting!")
-    my.text_long_description(self, "Your skin is peeling off!")
-    my.text_short_description(self, "Rotting debuff.")
+    my.text_description_long(self, "Your skin is peeling off!")
+    my.text_description_short(self, "Rotting debuff.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     # my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
     # end sort marker

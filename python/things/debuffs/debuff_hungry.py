@@ -18,8 +18,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_debuff(self, True)
     my.is_loggable(self, True)
     my.on_owner_add_do(self, "me.on_owner_add()")
-    my.text_long_description(self, "You are hungry and may not attack, defend or jump as well as you did.")
-    my.text_short_description(self, "You are hungry.")
+    my.text_description_long(self, "You are hungry and may not attack, defend or jump as well as you did.")
+    my.text_description_short(self, "You are hungry.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     # end sort marker
 

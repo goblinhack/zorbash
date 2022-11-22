@@ -26,7 +26,7 @@ def tp_init(name, text_long_name):
     my.is_loggable(self, True)
     my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_remove_do(self, "me.on_owner_remove()")
-    my.text_long_description(self, "You feel at home in the water and will suffer no more water penalties for either attack or defence when in shallow or deep water. Always beware of puddles though.")
+    my.text_description_long(self, "You feel at home in the water and will suffer no more water penalties for either attack or defence when in shallow or deep water. Always beware of puddles though.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     # my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
     # end sort marker

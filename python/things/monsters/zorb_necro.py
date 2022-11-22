@@ -73,8 +73,8 @@ def tp_init(name, text_long_name):
     my.stat_dex(self, 6)
     my.stat_luck(self, 6)
     my.stat_str(self, 6)
-    my.text_long_description2(self, "This particular zorblin is learned in the dark arts. Withered of body, but sharp of mind, beware the abilities of this zorblin.")
-    my.text_short_description(self, "A master of the darkest arts.")
+    my.text_description_long2(self, "This particular zorblin is learned in the dark arts. Withered of body, but sharp of mind, beware the abilities of this zorblin.")
+    my.text_description_short(self, "A master of the darkest arts.")
     # end sort marker
 
     delay = 300

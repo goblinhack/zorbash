@@ -504,8 +504,8 @@ int Thing::item_enchant_count(const uint32_t slot)
 
   for (const auto o : carried_and_equipped_item_vector()) {
     if (o->id == thing_id) {
-      if (o->enchant_get()) {
-        return o->enchant_get();
+      if (o->enchant_count_get()) {
+        return o->enchant_count_get();
       }
     }
   }

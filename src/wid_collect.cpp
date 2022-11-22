@@ -510,7 +510,7 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
           text = " " + std::to_string(slot + 1) + ". ";
         }
 
-        text += t->text_short_description();
+        text += t->text_short_and_state_capitalised();
         if (! t->gold_value_dice_str().empty()) {
           text += " Value " + t->gold_value_dice_str() + " zorkmids.";
         }

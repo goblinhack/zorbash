@@ -23,7 +23,7 @@ def basalt_init(name, text_long_name, tiles=[]):
     my.is_obs_for_ai(self, True)
     my.is_tickable(self, True)
     my.text_a_or_an(self, "")
-    my.text_short_description(self, "Warm to the touch basalt.")
+    my.text_description_short(self, "Warm to the touch basalt.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_LIQUID)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)

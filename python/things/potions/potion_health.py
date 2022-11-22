@@ -2,8 +2,8 @@ import my
 import tp
 
 
-def on_get_text_long_description(owner, me, x, y):
-    enchant = my.thing_enchant_get(me)
+def on_get_text_description_long(owner, me, x, y):
+    enchant = my.thing_enchant_count_get(me)
     if enchant == 0:
         return ["Restores you to 80 percent health"]
     elif enchant == 1:
@@ -26,7 +26,7 @@ def on_use(owner, item, target, x, y):
     # my.con("target  {} {:X}".format(my.thing_name_get(target), target))
     did_something = False
 
-    enchant = my.thing_enchant_get(item)
+    enchant = my.thing_enchant_count_get(item)
 
     health = my.thing_health(owner)
     new_health = int((my.thing_health_max(owner) / 100.0) * 80 + enchant * 10)
@@ -132,15 +132,15 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "1d20")
     my.on_enchant_do(self, "me.on_enchant()")
     my.on_fall_do(self, "me.on_fall()")
-    my.on_get_text_long_description_do(self, "me.on_get_text_long_description()")
+    my.on_get_text_description_long_do(self, "me.on_get_text_description_long()")
     my.on_thrown_do(self, "me.on_thrown()")
     my.on_use_do(self, "me.on_use()")
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.text_a_or_an(self, "a")
-    my.text_enchant(self, "+10 percent health and stamina")
-    my.text_long_description(self, "Restores your health and stamina to at least 80 percent. You'll feel like your old self again. Only even more awesome.")
-    my.text_short_description(self, "A potion of health restoration.")
+    my.text_description_enchant(self, "+10 percent health and stamina")
+    my.text_description_long(self, "Restores your health and stamina to at least 80 percent. You'll feel like your old self again. Only even more awesome.")
+    my.text_description_short(self, "A potion of health restoration.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)

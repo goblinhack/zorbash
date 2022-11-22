@@ -16,7 +16,7 @@ def tp_init(name):
     my.is_removeable_if_out_of_slots(self, True)
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "a")
-    my.text_short_description(self, "Some poor creature's remnants.")
+    my.text_description_short(self, "Some poor creature's remnants.")
     my.z_depth(self, my.MAP_DEPTH_FLOOR2)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker

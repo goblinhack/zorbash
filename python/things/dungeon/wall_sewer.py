@@ -55,7 +55,7 @@ def tp_init(
     my.is_wall(self, True)
     my.noise_blocker(self, True)
     my.text_a_or_an(self, "a")
-    my.text_short_description(self, "A slime covered wall.")
+    my.text_description_short(self, "A slime covered wall.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)

@@ -26,8 +26,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_slippery(self, True)
     my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_remove_do(self, "me.on_owner_remove()")
-    my.text_long_description(self, "No more trapped in webs for you! With this buff you can glide with ease through the cobwebs.")
-    my.text_short_description(self, "You are as slippery as a banana buff.")
+    my.text_description_long(self, "No more trapped in webs for you! With this buff you can glide with ease through the cobwebs.")
+    my.text_description_short(self, "You are as slippery as a banana buff.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     # my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
     # end sort marker

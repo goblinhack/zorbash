@@ -71,7 +71,7 @@ const std::string &Tp::on_equip_do(void) const { return _on_equip_do; }
 const std::string &Tp::on_fall_begin_do(void) const { return _on_fall_begin_do; }
 const std::string &Tp::on_fall_do(void) const { return _on_fall_do; }
 const std::string &Tp::on_final_use_do(void) const { return _on_final_use_do; }
-const std::string &Tp::on_get_text_long_description_do(void) const { return _on_get_text_long_description_do; }
+const std::string &Tp::on_get_text_description_long_do(void) const { return _on_get_text_description_long_do; }
 const std::string &Tp::on_jump_do(void) const { return _on_jump_do; }
 const std::string &Tp::on_lifespan_tick_do(void) const { return _on_lifespan_tick_do; }
 const std::string &Tp::on_move_do(void) const { return _on_move_do; }
@@ -164,13 +164,13 @@ const std::string &Tp::str2(void) const { return _str2; }
 const std::string &Tp::str4(void) const { return _str4; }
 const std::string &Tp::target_name_projectile(void) const { return _target_name_projectile; }
 const std::string &Tp::text_debuff(void) const { return _text_debuff; }
-const std::string &Tp::text_enchant(void) const { return _text_enchant; }
+const std::string &Tp::text_description_enchant(void) const { return _text_description_enchant; }
+const std::string &Tp::text_description_long2(void) const { return _text_description_long2; }
+const std::string &Tp::text_description_long3(void) const { return _text_description_long3; }
+const std::string &Tp::text_description_long(void) const { return _text_description_long; }
+const std::string &Tp::text_description_short(void) const { return _text_description_short; }
 const std::string &Tp::text_hits(void) const { return _text_hits; }
-const std::string &Tp::text_long_description2(void) const { return _text_long_description2; }
-const std::string &Tp::text_long_description3(void) const { return _text_long_description3; }
-const std::string &Tp::text_long_description(void) const { return _text_long_description; }
 const std::string &Tp::text_long_name(void) const { return _text_long_name; }
-const std::string &Tp::text_short_description(void) const { return _text_short_description; }
 const std::string &Tp::text_short_name(void) const { return _text_short_name; }
 const std::string &Tp::text_skill(void) const { return _text_skill; }
 const std::string &Tp::text_title(void) const { return _text_title; }
@@ -1201,7 +1201,7 @@ void Tp::on_equip_do_set(const std::string &v) { _on_equip_do = v; }
 void Tp::on_fall_begin_do_set(const std::string &v) { _on_fall_begin_do = v; }
 void Tp::on_fall_do_set(const std::string &v) { _on_fall_do = v; }
 void Tp::on_final_use_do_set(const std::string &v) { _on_final_use_do = v; }
-void Tp::on_get_text_long_description_do_set(const std::string &v) { _on_get_text_long_description_do = v; }
+void Tp::on_get_text_description_long_do_set(const std::string &v) { _on_get_text_description_long_do = v; }
 void Tp::on_jump_do_set(const std::string &v) { _on_jump_do = v; }
 void Tp::on_lifespan_tick_do_set(const std::string &v) { _on_lifespan_tick_do = v; }
 void Tp::on_move_do_set(const std::string &v) { _on_move_do = v; }
@@ -1337,13 +1337,13 @@ void Tp::temperature_sensitive_set(int v) { _temperature_sensitive = v; }
 void Tp::temperature_sensitive_to_sudden_changes_set(int v) { _temperature_sensitive_to_sudden_changes = v; }
 void Tp::text_a_or_an_set(const std::string &v) { _text_a_or_an = v; }
 void Tp::text_debuff_set(const std::string &v) { _text_debuff = v; }
-void Tp::text_enchant_set(const std::string &v) { _text_enchant = v; }
+void Tp::text_description_enchant_set(const std::string &v) { _text_description_enchant = v; }
+void Tp::text_description_long2_set(const std::string &v) { _text_description_long2 = v; }
+void Tp::text_description_long3_set(const std::string &v) { _text_description_long3 = v; }
+void Tp::text_description_long_set(const std::string &v) { _text_description_long = v; }
+void Tp::text_description_short_set(const std::string &v) { _text_description_short = v; }
 void Tp::text_hits_set(const std::string &v) { _text_hits = v; }
-void Tp::text_long_description2_set(const std::string &v) { _text_long_description2 = v; }
-void Tp::text_long_description3_set(const std::string &v) { _text_long_description3 = v; }
-void Tp::text_long_description_set(const std::string &v) { _text_long_description = v; }
 void Tp::text_long_name_set(const std::string &v) { _text_long_name = v; }
-void Tp::text_short_description_set(const std::string &v) { _text_short_description = v; }
 void Tp::text_short_name_set(const std::string &v) { _text_short_name = v; }
 void Tp::text_skill_set(const std::string &v) { _text_skill = v; }
 void Tp::text_title_set(const std::string &v) { _text_title = v; }

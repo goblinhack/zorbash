@@ -76,7 +76,7 @@ def tp_init(name, text_long_name):
     my.on_fall_do(self, "me.on_fall()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.text_a_or_an(self, "a")
-    my.text_short_description(self, "A barrel of oil. Why? Don't ask.")
+    my.text_description_short(self, "A barrel of oil. Why? Don't ask.")
     my.thing_size(self, my.THING_SIZE_LARGE)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BARREL)

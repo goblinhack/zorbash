@@ -29,7 +29,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_obs_wall_or_door(self, True)
     my.is_pillar(self, True)
     my.text_a_or_an(self, "a")
-    my.text_short_description(self, "An aged and moss-covered stone pillar.")
+    my.text_description_short(self, "An aged and moss-covered stone pillar.")
     my.thing_size(self, my.THING_SIZE_GIANT)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)

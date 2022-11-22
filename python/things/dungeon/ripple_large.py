@@ -14,7 +14,7 @@ def tp_init(name):
     my.is_tmp_thing(self, True)
     my.noise_on_born(self, 50)
     my.text_a_or_an(self, "a")
-    my.text_short_description(self, "An ominous large ripple.")
+    my.text_description_short(self, "An ominous large ripple.")
     my.thing_size(self, my.THING_SIZE_NORMAL)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)

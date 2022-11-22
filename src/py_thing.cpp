@@ -86,7 +86,7 @@ PyObject *thing_hit(PyObject *obj, PyObject *args, PyObject *keywds)
 
   AttackOptions attack_options {};
 
-  hitter->log("Attack hit");
+  IF_DEBUG { hitter->log("Attack hit"); }
   TRACE_AND_INDENT();
 
   if (hitter->attack(target, &attack_options)) {
@@ -135,7 +135,7 @@ PyObject *thing_hit_dmg_draining(PyObject *obj, PyObject *args, PyObject *keywds
   attack_options.damage          = damage;
   attack_options.attack_draining = true;
 
-  hitter->log("Attack with stamina damage, %d", damage);
+  IF_DEBUG { hitter->log("Attack with stamina damage, %d", damage); }
   TRACE_AND_INDENT();
 
   if (hitter->attack(target, &attack_options)) {
@@ -184,7 +184,7 @@ PyObject *thing_hit_dmg_acid(PyObject *obj, PyObject *args, PyObject *keywds)
   attack_options.damage      = damage;
   attack_options.attack_acid = true;
 
-  hitter->log("Attack with acid damage, %d", damage);
+  IF_DEBUG { hitter->log("Attack with acid damage, %d", damage); }
   TRACE_AND_INDENT();
 
   if (hitter->attack(target, &attack_options)) {
@@ -233,7 +233,7 @@ PyObject *thing_hit_dmg_water(PyObject *obj, PyObject *args, PyObject *keywds)
   attack_options.damage       = damage;
   attack_options.attack_water = true;
 
-  hitter->log("Attack with water damage, %d", damage);
+  IF_DEBUG { hitter->log("Attack with water damage, %d", damage); }
   TRACE_AND_INDENT();
 
   if (hitter->attack(target, &attack_options)) {
@@ -282,7 +282,7 @@ PyObject *thing_hit_dmg_cold(PyObject *obj, PyObject *args, PyObject *keywds)
   attack_options.damage      = damage;
   attack_options.attack_cold = true;
 
-  hitter->log("Attack with cold damage, %d", damage);
+  IF_DEBUG { hitter->log("Attack with cold damage, %d", damage); }
   TRACE_AND_INDENT();
 
   if (hitter->attack(target, &attack_options)) {
@@ -331,7 +331,7 @@ PyObject *thing_hit_dmg_crush(PyObject *obj, PyObject *args, PyObject *keywds)
   attack_options.damage       = damage;
   attack_options.attack_crush = true;
 
-  hitter->log("Attack with crush damage, %d", damage);
+  IF_DEBUG { hitter->log("Attack with crush damage, %d", damage); }
   TRACE_AND_INDENT();
 
   if (hitter->attack(target, &attack_options)) {
@@ -380,7 +380,7 @@ PyObject *thing_hit_dmg_digest(PyObject *obj, PyObject *args, PyObject *keywds)
   attack_options.damage        = damage;
   attack_options.attack_digest = true;
 
-  hitter->log("Attack with digest damage, %d", damage);
+  IF_DEBUG { hitter->log("Attack with digest damage, %d", damage); }
   TRACE_AND_INDENT();
 
   if (hitter->attack(target, &attack_options)) {
@@ -429,7 +429,7 @@ PyObject *thing_hit_dmg_energy(PyObject *obj, PyObject *args, PyObject *keywds)
   attack_options.damage        = damage;
   attack_options.attack_energy = true;
 
-  hitter->log("Attack with energy damage, %d", damage);
+  IF_DEBUG { hitter->log("Attack with energy damage, %d", damage); }
   TRACE_AND_INDENT();
 
   if (hitter->attack(target, &attack_options)) {
@@ -478,7 +478,7 @@ PyObject *thing_hit_dmg_negation(PyObject *obj, PyObject *args, PyObject *keywds
   attack_options.damage          = damage;
   attack_options.attack_negation = true;
 
-  hitter->log("Attack with negation damage, %d", damage);
+  IF_DEBUG { hitter->log("Attack with negation damage, %d", damage); }
   TRACE_AND_INDENT();
 
   if (hitter->attack(target, &attack_options)) {
@@ -527,7 +527,7 @@ PyObject *thing_hit_dmg_fire(PyObject *obj, PyObject *args, PyObject *keywds)
   attack_options.damage      = damage;
   attack_options.attack_fire = true;
 
-  hitter->log("Attack with fire damage, %d", damage);
+  IF_DEBUG { hitter->log("Attack with fire damage, %d", damage); }
   TRACE_AND_INDENT();
 
   if (hitter->attack(target, &attack_options)) {
@@ -576,7 +576,7 @@ PyObject *thing_hit_dmg_drown(PyObject *obj, PyObject *args, PyObject *keywds)
   attack_options.damage       = damage;
   attack_options.attack_drown = true;
 
-  hitter->log("Attack with drown damage, %d", damage);
+  IF_DEBUG { hitter->log("Attack with drown damage, %d", damage); }
   TRACE_AND_INDENT();
 
   if (hitter->attack(target, &attack_options)) {
@@ -625,7 +625,7 @@ PyObject *thing_hit_dmg_bite(PyObject *obj, PyObject *args, PyObject *keywds)
   attack_options.damage      = damage;
   attack_options.attack_bite = true;
 
-  hitter->log("Attack with bite damage, %d", damage);
+  IF_DEBUG { hitter->log("Attack with bite damage, %d", damage); }
   TRACE_AND_INDENT();
 
   if (hitter->attack(target, &attack_options)) {
@@ -674,7 +674,7 @@ PyObject *thing_hit_dmg_claw(PyObject *obj, PyObject *args, PyObject *keywds)
   attack_options.damage      = damage;
   attack_options.attack_claw = true;
 
-  hitter->log("Attack with claw damage, %d", damage);
+  IF_DEBUG { hitter->log("Attack with claw damage, %d", damage); }
   TRACE_AND_INDENT();
 
   if (hitter->attack(target, &attack_options)) {
@@ -723,7 +723,7 @@ PyObject *thing_hit_dmg_lightning(PyObject *obj, PyObject *args, PyObject *keywd
   attack_options.damage           = damage;
   attack_options.attack_lightning = true;
 
-  hitter->log("Attack with lightning damage, %d", damage);
+  IF_DEBUG { hitter->log("Attack with lightning damage, %d", damage); }
   TRACE_AND_INDENT();
 
   if (hitter->attack(target, &attack_options)) {
@@ -772,7 +772,7 @@ PyObject *thing_hit_dmg_necrosis(PyObject *obj, PyObject *args, PyObject *keywds
   attack_options.damage          = damage;
   attack_options.attack_necrosis = true;
 
-  hitter->log("Attack with necrosis damage, %d", damage);
+  IF_DEBUG { hitter->log("Attack with necrosis damage, %d", damage); }
   TRACE_AND_INDENT();
 
   if (hitter->attack(target, &attack_options)) {
@@ -821,7 +821,7 @@ PyObject *thing_hit_dmg_poison(PyObject *obj, PyObject *args, PyObject *keywds)
   attack_options.damage        = damage;
   attack_options.attack_poison = true;
 
-  hitter->log("Attack with poison damage, %d", damage);
+  IF_DEBUG { hitter->log("Attack with poison damage, %d", damage); }
   TRACE_AND_INDENT();
 
   if (hitter->attack(target, &attack_options)) {

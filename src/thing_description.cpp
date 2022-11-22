@@ -11,16 +11,16 @@
 //
 // Python callback upon being tick
 //
-std::vector< std::string > Thing::on_get_text_long_description(void)
+std::vector< std::string > Thing::on_get_text_description_long(void)
 {
   std::vector< std::string > out;
 
-  auto on_get_text_long_description = tp()->on_get_text_long_description_do();
-  if (std::empty(on_get_text_long_description)) {
+  auto on_get_text_description_long = tp()->on_get_text_description_long_do();
+  if (std::empty(on_get_text_description_long)) {
     return out;
   }
 
-  auto t = split_tokens(on_get_text_long_description, '.');
+  auto t = split_tokens(on_get_text_description_long, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -41,74 +41,74 @@ std::vector< std::string > Thing::on_get_text_long_description(void)
                                         (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   }
 
-  ERR("Bad on_get_text_long_description call [%s] expected mod:function, got %d elems",
-      on_get_text_long_description.c_str(), (int) on_get_text_long_description.size());
+  ERR("Bad on_get_text_description_long call [%s] expected mod:function, got %d elems",
+      on_get_text_description_long.c_str(), (int) on_get_text_description_long.size());
 
   return out;
 }
 
-const std::string &Thing::on_get_text_long_description_do(void)
+const std::string &Thing::on_get_text_description_long_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_get_text_long_description_do());
+  return (tp()->on_get_text_description_long_do());
 }
 
-const std::string Thing::text_long_description(void)
+const std::string Thing::text_description_long(void)
 {
   TRACE_NO_INDENT();
 
   //
   // If python overrides, return that string
   //
-  auto override_description = on_get_text_long_description_do();
+  auto override_description = on_get_text_description_long_do();
   if (! std::empty(override_description)) {
-    auto d = on_get_text_long_description();
+    auto d = on_get_text_description_long();
     if (d.size()) {
       return d[ 0 ];
     }
   }
 
-  return (tp()->text_long_description());
+  return (tp()->text_description_long());
 }
 
-const std::string Thing::text_long_description2(void)
+const std::string Thing::text_description_long2(void)
 {
   TRACE_NO_INDENT();
 
   //
   // If python overrides, return that string
   //
-  auto override_description = on_get_text_long_description_do();
+  auto override_description = on_get_text_description_long_do();
   if (! std::empty(override_description)) {
-    auto d = on_get_text_long_description();
+    auto d = on_get_text_description_long();
     if (d.size() > 1) {
       return d[ 1 ];
     }
   }
 
-  return (tp()->text_long_description2());
+  return (tp()->text_description_long2());
 }
 
-const std::string Thing::text_long_description3(void)
+const std::string Thing::text_description_long3(void)
 {
   TRACE_NO_INDENT();
 
   //
   // If python overrides, return that string
   //
-  auto override_description = on_get_text_long_description_do();
+  auto override_description = on_get_text_description_long_do();
   if (! std::empty(override_description)) {
-    auto d = on_get_text_long_description();
+    auto d = on_get_text_description_long();
     if (d.size() > 2) {
       return d[ 2 ];
     }
   }
 
-  return (tp()->text_long_description3());
+  return (tp()->text_description_long3());
 }
 
-const std::string &Thing::text_short_description(void)
+const std::string &Thing::text_description_short(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->text_short_description());
+  return (tp()->text_description_short());
 }

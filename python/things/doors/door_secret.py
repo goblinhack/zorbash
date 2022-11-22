@@ -25,7 +25,7 @@ def tp_init(name, text_long_name):
     my.noise_on_you_are_hit_but_still_alive(self, 10)
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "a")
-    my.text_short_description(self, "A strange looking wall.")
+    my.text_description_short(self, "A strange looking wall.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker

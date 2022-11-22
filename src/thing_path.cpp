@@ -476,6 +476,13 @@ bool Thing::cursor_path_pop_first_move(ThingMoveReason reason)
   point future_pos = make_point(cursor->curr_at.x, cursor->curr_at.y);
 
   //
+  // Not sure when/how this happens.
+  //
+  if (future_pos == curr_at) {
+    return false;
+  }
+
+  //
   // If adjacent, try to move there. There may be no path because perhaps a monster just moved but now we can
   // step there.
   //
