@@ -83,7 +83,7 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
     }
 
     if (t->is_dead || t->is_dying) {
-      if (! can_eat(t)) {
+      if (! can_eat(t) && ! t->is_frozen) {
         dbg2("Collision-candidate: %s no dead or dying", t->to_short_string().c_str());
         continue;
       }
@@ -316,7 +316,7 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
 
   if (is_player() && it->is_collectable()) {
     dbg("No collision; allow items to be collected manually");
-  } else if (! it->is_dead && possible_to_attack(it)) {
+  } else if ((! it->is_dead || (it->is_dead && it->is_frozen)) && possible_to_attack(it)) {
     if (things_overlap(me, future_pos, it)) {
       dbg("Collision; candidate to attack");
       thing_add_ai_possible_hit(it, "battle");
@@ -336,7 +336,7 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
       dbg("Collision; overlaps and can eat");
       thing_add_ai_possible_hit(it, "eat");
     }
-  } else if (it->is_dead) {
+  } else if (it->is_dead && ! it->is_frozen) {
     //
     // Continue walking by falling through to return true
     //
@@ -487,7 +487,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos)
         }
       }
 
-      if (it->is_dead) {
+      if (it->is_dead && ! it->is_frozen) {
         if (! it->is_obs_when_dead()) {
           dbg("No collision; ignore corpse");
           return false;
@@ -576,7 +576,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos)
   }
 
   if (it->is_door() && ! it->is_open) {
-    if (! it->is_dead) {
+    if (! it->is_dead && ! it->is_frozen) {
       if (things_overlap(me, future_pos, it)) {
         dbg("Collision; overlaps and can open");
         if (open_door(it)) {

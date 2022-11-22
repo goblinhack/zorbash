@@ -8,7 +8,6 @@ def on_born(me, x, y):
         if my.thing_possible_to_attack(me, it):
             my.thing_hit(me, it)
     my.spawn_owned_thing_at_my_position(me, "explosion_cold")
-    my.spawn_owned_thing_at_my_position(me, "block_of_ice")
 
 
 #
@@ -18,8 +17,6 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.collision_check(self, True)
-    my.dmg_cold_chance_d1000(self, 0, 1000)
-    my.dmg_cold_dice(self, "1d10")  # This is the damage when the monst colds
     my.gfx_ascii_shown(self, True)
     my.is_cold(self, True)
     my.is_loggable(self, True)
@@ -55,7 +52,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="projectile_cold", text_long_name="ice bolt", text_short_name="ice bolt")
+    tp_init(name="staff_ice_projectile", text_long_name="ice bolt", text_short_name="ice bolt")
 
 
 init()

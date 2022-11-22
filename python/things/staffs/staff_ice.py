@@ -2,6 +2,28 @@ import my
 import tp
 
 
+def on_targetted(me, x, y):
+    radius = my.thing_effect_radius_get(me)
+    # my.con("targetted {} {:X} radius {}".format(my.thing_name_get(me), me, radius))
+
+    for dx in range(-radius, radius + 1):
+        for dy in range(-radius, radius + 1):
+            x1 = x + dx
+            y1 = y + dy
+            distance = (((x1 - x)**2 + (y1 - y)**2)**0.5)
+            if distance > radius + 0.5:
+                continue
+
+            my.place_at(me, "block_of_ice", x1, y1)
+
+
+def on_targetted_radially(me, x, y):
+    radius = my.thing_effect_radius_get(me)
+    radius += 1
+    # my.con("targetted radially {} {:X}".format(my.thing_name_get(me), me))
+    my.spawn_things_around_me(me, "block_of_ice", radius)
+
+
 def on_thrown(me, x, y):
     if my.level_is_chasm_at(me, x, y):
         return
@@ -10,9 +32,6 @@ def on_thrown(me, x, y):
     for dx in range(-1, 2):
         for dy in range(-1, 2):
             my.place_at(me, "block_of_ice", x + dx, y + dy)
-            for it in my.level_get_all(me, x + dx, y + dy):
-                if my.thing_is_lava(it) or my.thing_is_fire(it):
-                    my.thing_dead(it, "frozen")
 
 
 def on_idle(me, x, y):
@@ -40,6 +59,7 @@ def explode(me, x, y):
         my.thing_msg(me, "The staff of ice explodes.")
 
     my.spawn_at_my_position(me, "explosion_major")
+    my.spawn_at_my_position(me, "block_of_ice")
     my.thing_dead(me, "exploded")
 
 
@@ -56,9 +76,8 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.charge_count(self, 5)
     my.collision_hit_priority(self, 6)
-    my.dmg_cold_chance_d1000(self, 0, 1000)
-    my.dmg_cold_dice(self, "1d8+6")
     my.dmg_received_doubled_from_fire(self, True)
+    my.environ_avoids_fire(self, 100)
     my.equip_carry_anim(self, "staff_ice_carry")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
@@ -85,6 +104,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_loggable(self, True)
     my.is_magical(self, True)
     my.is_staff(self, True)
+    my.is_target_radial(self, True)
     my.is_target_select(self, True)
     my.is_throwable(self, True)
     my.is_tickable(self, True)  # So it can interact with cold
@@ -99,10 +119,12 @@ def tp_init(name, text_long_name, text_short_name):
     my.normal_placement_rules(self, True)
     my.on_fall_do(self, "me.on_fall()")
     my.on_idle_tick_freq_dice(self, "1d200+200:me.on_idle()")
+    my.on_targetted_do(self, "me.on_targetted()")
+    my.on_targetted_radially_do(self, "me.on_targetted_radially()")
     my.on_thrown_do(self, "me.on_thrown()")
     my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")
     my.range_max(self, 7)
-    my.target_name_projectile(self, "projectile_cold")
+    my.target_name_projectile(self, "staff_ice_projectile")
     my.temperature(self, -10)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "Discharges a single ball of ice at an ungrateful recipient...")
