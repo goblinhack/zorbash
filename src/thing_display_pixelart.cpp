@@ -534,12 +534,17 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   // For second rings provide a small offset of a few pixels so we can see both.
   //
   if (unlikely(is_ring2)) {
-    if (is_dir_left() || is_dir_tl() || is_dir_bl()) {
-      blit_tl.x += 4;
-      blit_br.x += 4;
-    } else {
-      blit_tl.x -= 4;
-      blit_br.x -= 4;
+    //
+    // But only if carrying two rings.
+    //
+    if (equip_get(MONST_EQUIP_RING1) && equip_get(MONST_EQUIP_RING2)) {
+      if (is_dir_left() || is_dir_tl() || is_dir_bl()) {
+        blit_tl.x += 4;
+        blit_br.x += 4;
+      } else {
+        blit_tl.x -= 4;
+        blit_br.x -= 4;
+      }
     }
   }
 
