@@ -205,7 +205,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
         auto wid_item = wid_new_square_button(wid_slot, "item slot");
 
         point tl = make_point(3, 0);
-        point br = make_point(width - 1, 2);
+        point br = make_point(width - 4, 2);
         wid_set_pos(wid_item, tl, br);
         wid_set_style(wid_item, UI_WID_STYLE_DARK);
         wid_set_int_context(wid_item, slot);
@@ -239,7 +239,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
     //
     int tlx, tly, brx, bry;
     wid_get_tl_x_tl_y_br_x_br_y(wid_inventory_window, &tlx, &tly, &brx, &bry);
-    tlx += 77;
+    tlx += 76;
     tly += 5;
     brx -= 1;
     bry -= 2;
