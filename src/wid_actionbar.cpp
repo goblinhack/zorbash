@@ -106,7 +106,7 @@ static uint8_t wid_actionbar_quit(Widp w, int x, int y, uint32_t button)
 
   wid_actionbar_close_all_popups();
   if (wid_quit_window) {
-    wid_actionbar_init();
+    game->request_to_remake_actionbar = true;
     return true;
   }
 
@@ -167,7 +167,7 @@ void wid_actionbar_robot_mode_toggle(void)
   wid_actionbar_close_all_popups();
   game->robot_mode_requested = ! game->robot_mode_requested;
   DBG3("Actionbar robot: robot_mode_requested %d robot_mode %d", game->robot_mode_requested, game->robot_mode);
-  wid_actionbar_init();
+  game->request_to_remake_actionbar = true;
 }
 
 void wid_actionbar_robot_mode_update(void)
@@ -182,7 +182,7 @@ void wid_actionbar_robot_mode_update(void)
     }
     game->level->debug_path_clear();
   }
-  wid_actionbar_init();
+  game->request_to_remake_actionbar = true;
 }
 
 void wid_actionbar_robot_mode_off(void)
@@ -202,9 +202,9 @@ void wid_actionbar_robot_mode_off(void)
     }
     game->level->debug_path_clear();
   }
-  game->robot_mode_requested = false;
-  game->robot_mode           = false;
-  wid_actionbar_init();
+  game->robot_mode_requested        = false;
+  game->robot_mode                  = false;
+  game->request_to_remake_actionbar = true;
 }
 
 static uint8_t wid_actionbar_robot(Widp w, int x, int y, uint32_t button)
@@ -295,7 +295,7 @@ static uint8_t wid_actionbar_close(Widp w, int x, int y, uint32_t button)
   }
 
   wid_actionbar_close_all_popups();
-  wid_actionbar_init();
+  game->request_to_remake_actionbar = true;
   return true;
 }
 
@@ -323,12 +323,12 @@ static uint8_t wid_actionbar_load(Widp w, int x, int y, uint32_t button)
 
   wid_actionbar_close_all_popups();
   if (wid_load) {
-    wid_actionbar_init();
+    game->request_to_remake_actionbar = true;
     return true;
   }
 
   game->wid_load_select();
-  wid_actionbar_init();
+  game->request_to_remake_actionbar = true;
   return true;
 }
 
@@ -400,12 +400,12 @@ static uint8_t wid_actionbar_save(Widp w, int x, int y, uint32_t button)
 
   wid_actionbar_close_all_popups();
   if (wid_save) {
-    wid_actionbar_init();
+    game->request_to_remake_actionbar = true;
     return true;
   }
 
   game->wid_save_select();
-  wid_actionbar_init();
+  game->request_to_remake_actionbar = true;
   return true;
 }
 
@@ -478,7 +478,7 @@ static uint8_t wid_actionbar_ascend(Widp w, int x, int y, uint32_t button)
   wid_actionbar_close_all_popups();
   game->request_player_to_ascend_level = true;
   game->tick_begin("ascend");
-  wid_actionbar_init();
+  game->request_to_remake_actionbar = true;
   delete wid_over_ascend;
   wid_over_ascend = nullptr;
   return true;
@@ -554,7 +554,7 @@ static uint8_t wid_actionbar_descend(Widp w, int x, int y, uint32_t button)
   wid_actionbar_close_all_popups();
   game->request_player_to_descend_level = true;
   game->tick_begin("descend");
-  wid_actionbar_init();
+  game->request_to_remake_actionbar = true;
   delete wid_over_descend;
   wid_over_descend = nullptr;
   return true;
@@ -634,12 +634,12 @@ static uint8_t wid_actionbar_inventory(Widp w, int x, int y, uint32_t button)
 
   wid_actionbar_close_all_popups();
   if (game->state == Game::STATE_INVENTORY) {
-    wid_actionbar_init();
+    game->request_to_remake_actionbar = true;
     return true;
   }
 
   wid_inventory_init();
-  wid_actionbar_init();
+  game->request_to_remake_actionbar = true;
   return true;
 }
 
@@ -715,14 +715,14 @@ static uint8_t wid_actionbar_collect(Widp w, int x, int y, uint32_t button)
 
   wid_actionbar_close_all_popups();
   if (wid_collect) {
-    wid_actionbar_init();
+    game->request_to_remake_actionbar = true;
     return true;
   }
 
   auto items = player->anything_to_carry();
   if (items.empty()) {
     TOPCON("Nothing to carry here.");
-    wid_actionbar_init();
+    game->request_to_remake_actionbar = true;
   } else {
     game->wid_collect_create(items);
   }
@@ -1017,7 +1017,7 @@ static uint8_t wid_actionbar_configure(Widp w, int x, int y, uint32_t button)
 
   wid_actionbar_close_all_popups();
   if (wid_config_keyboard_window) {
-    wid_actionbar_init();
+    game->request_to_remake_actionbar = true;
     return true;
   }
 

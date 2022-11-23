@@ -2128,6 +2128,7 @@ static void wid_tree_remove(Widp w)
   TRACE_NO_INDENT();
   wid_key_map_location *root;
 
+  verify(MTYPE_WID, w);
   root = w->in_tree_root;
   if (! root) {
     return;
@@ -2595,7 +2596,6 @@ Widp wid_new_square_window(std::string name)
   wid_set_shape_square(w);
   wid_set_color(w, WID_COLOR_BG, WHITE);
   wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-  wid_raise(w);
 
   //
   // Raise it so if there were other widgets with the same parent
@@ -2899,6 +2899,8 @@ Widp wid_new_horiz_scroll_bar(Widp parent, std::string name, Widp scrollbar_owne
 static void wid_raise_internal(Widp w)
 {
   TRACE_NO_INDENT();
+
+  verify(MTYPE_WID, w);
   if (w->do_not_raise) {
     return;
   }
@@ -5137,11 +5139,13 @@ static Widp wid_mouse_up_handler(int x, int y)
 
   w = wid_mouse_up_handler_at(wid_focus, x, y, true /* strict */);
   if (w) {
+    verify(MTYPE_WID, w);
     return w;
   }
 
   w = wid_mouse_up_handler_at(wid_over, x, y, true /* strict */);
   if (w) {
+    verify(MTYPE_WID, w);
     return w;
   }
 
@@ -5157,6 +5161,7 @@ static Widp wid_mouse_up_handler(int x, int y)
       continue;
     }
 
+    verify(MTYPE_WID, w);
     return w;
   }
 
@@ -5172,6 +5177,7 @@ static Widp wid_mouse_up_handler(int x, int y)
       continue;
     }
 
+    verify(MTYPE_WID, w);
     return w;
   }
 
@@ -5307,6 +5313,7 @@ void wid_mouse_motion(int x, int y, int relx, int rely, int wheelx, int wheely)
       //
       if (w->on_mouse_motion) {
         if ((w->on_mouse_motion)(w, x, y, relx, rely, wheelx, wheely)) {
+          verify(MTYPE_WID, w);
           got_one = true;
           break;
         }
@@ -5559,6 +5566,7 @@ void wid_mouse_down(uint32_t button, int x, int y)
   // Raise on mouse.
   //
   if ((w->on_mouse_down && (w->on_mouse_down)(w, x, y, button)) || wid_get_moveable(w)) {
+    verify(MTYPE_WID, w);
     sound_play("click");
 
     wid_set_focus(w);
@@ -5616,6 +5624,7 @@ void wid_mouse_held(uint32_t button, int x, int y)
   // Raise on mouse.
   //
   if ((w->on_mouse_held && (w->on_mouse_held)(w, x, y, button)) || wid_get_moveable(w)) {
+    verify(MTYPE_WID, w);
 
     wid_set_focus(w);
     wid_set_mode(w, WID_MODE_ACTIVE);
@@ -5660,8 +5669,8 @@ void wid_mouse_up(uint32_t button, int x, int y)
   }
   verify(MTYPE_WID, w);
 
-  // TOPCON("wid [%s] mouse up.", w->name.c_str());
   if ((w->on_mouse_up && (w->on_mouse_up)(w, x, y, button)) || wid_get_moveable(w)) {
+    verify(MTYPE_WID, w);
     sound_play("click");
 
     wid_set_mode(w, WID_MODE_ACTIVE);

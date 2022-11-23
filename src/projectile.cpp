@@ -76,7 +76,7 @@ void Level::new_projectile(ThingId id, ThingId victim_id, ProjectileInfo info, u
         return;
       }
       t->has_projectile = true;
-      t->log("New projectile");
+      IF_DEBUG { t->log("New projectile"); }
     }
   }
 

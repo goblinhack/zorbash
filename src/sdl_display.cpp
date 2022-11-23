@@ -113,7 +113,11 @@ void sdl_display_reset(void)
   wid_visible(wid_botcon_window);
   wid_asciimap_init();
 
-  wid_gc_all();
+  //
+  // DO NOT CALL THIS HERE. We could be inside a widget mouse up handler.
+  //
+  // wid_gc_all();
+  //
   wid_display_all();
 
   CON("SDL: Video reset");

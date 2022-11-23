@@ -80,7 +80,7 @@ void Level::new_laser(ThingId id, ThingId victim_id, LaserInfo info, uint32_t du
     auto t = thing_find(id);
     if (t) {
       t->laser_count++;
-      t->log("New internal laser");
+      IF_DEBUG { t->log("New internal laser"); }
     }
   }
 
