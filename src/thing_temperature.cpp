@@ -183,7 +183,7 @@ void Thing::temperature_tick(void)
   if (thing_temp != location_temp) {
     int delta = (location_temp - thing_temp) / 2;
 
-    if (is_lava() || is_fire() || is_block_of_ice() || is_wall() || is_door() || is_rock()) {
+    if (is_lava() || is_wall() || is_door() || is_rock()) {
       delta = (location_temp - thing_temp) / 10;
     }
 

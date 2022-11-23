@@ -36,7 +36,7 @@ def tp_init(name, text_long_name):
     my.lifespan_dice(self, "1d20+20")
     my.light_color(self, "orange")
     my.light_dist(self, 4)
-    my.on_idle_tick_freq_dice(self, "1d1+1:me.spawn()")
+    my.on_idle_tick_freq_dice(self, "1d10+10:me.spawn()")
     my.temperature_min(self, 0)
     my.temperature(self, 100)
     my.temperature_sensitive(self, True)

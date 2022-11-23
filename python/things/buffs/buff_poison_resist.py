@@ -88,7 +88,7 @@ def on_owner_receive_dmg_stat_con(me, owner, hitter, real_hitter, x, y, damage):
 def on_tick(owner, item, x, y):
     poison = my.thing_poisoned_amount_get(item)
     if poison == 0:
-        return True
+        return False
     new_poison = int(poison / 2)
     if my.thing_is_player(owner):
         if new_poison == 0:

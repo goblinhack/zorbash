@@ -886,4 +886,9 @@ void Thing::clear_move_path(const std::string &why)
 
   change_state(MONST_STATE_IDLE, why);
   aip()->move_path.clear();
+
+  //
+  // Ensure we try to wander elsewhere if we got here due to a failed jump.
+  //
+  aip()->wander_dest = point(0, 0);
 }
