@@ -194,8 +194,10 @@ void Thing::is_stuck_update(void)
     if (! is_stuck_check()) {
       if (is_player()) {
         msg("You are no longer stuck!");
-        stuck_count_set(0);
+      } else if (is_monst()) {
+        msg("%s is no longer stuck.", text_The().c_str());
       }
+      unstuck();
       return;
     }
 
@@ -227,6 +229,18 @@ void Thing::is_stuck_update(void)
         msg("You are frozen to the bone and cannot move!");
       } else {
         msg("You are stuck!");
+      }
+    } else if (is_monst()) {
+      if (level->is_spiderweb(curr_at.x, curr_at.y)) {
+        msg("%s is trapped in a web!", text_The().c_str());
+      } else if (level->is_block_of_ice(curr_at.x, curr_at.y)) {
+        msg("%s is trapped in ice!", text_The().c_str());
+      } else if (level->is_barrel(curr_at.x, curr_at.y)) {
+        msg("%s is trapped inside a barrel!", text_The().c_str());
+      } else if (is_frozen) {
+        msg("%s is frozen stiff!", text_The().c_str());
+      } else {
+        msg("%s is stuck!", text_The().c_str());
       }
     }
   }

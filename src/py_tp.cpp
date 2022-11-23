@@ -798,7 +798,6 @@ PyObject *place_at(PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 // begin sort marker1 {
-
 TP_BODY_SET_INT(aggression_pct)
 TP_BODY_SET_INT(ai_detect_secret_doors)
 TP_BODY_SET_INT(ai_resent_count)
@@ -1348,6 +1347,8 @@ TP_BODY_SET_INT(weapon_dmg)
 TP_BODY_SET_INT(z_depth)
 TP_BODY_SET_INT(z_prio)
 // end sort marker1 }
+
+// begin sort marker2 {
 TP_BODY_SET_STRING(dmg_acid_dice)
 TP_BODY_SET_STRING(dmg_bite_dice)
 TP_BODY_SET_STRING(dmg_claw_dice)
@@ -1518,11 +1519,4 @@ TP_BODY_SET_STRING(text_unused)
 TP_BODY_SET_STRING(text_unused1)
 TP_BODY_SET_STRING(text_unused2)
 TP_BODY_SET_STRING(text_unused3)
-// end sort marker2 }
-// end sort marker2 }
-// end sort marker2 }
-// end sort marker2 }
-// end sort marker2 }
-// end sort marker2 }
-// end sort marker2 }
 // end sort marker2 }

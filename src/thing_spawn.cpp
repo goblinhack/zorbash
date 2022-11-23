@@ -558,6 +558,29 @@ bool Thing::spawn_things_around_me(const std::string &what, int radius)
         continue;
       }
 
+      FOR_ALL_NON_INTERNAL_THINGS(level, it, x, y)
+      {
+        if (it->is_player()) {
+          if (! it->is_on_fire()) {
+            if (it->on_fire_set("sparks")) {
+              it->msg("The fire spread to your clothing!");
+            }
+          } else {
+            level->player->msg("You dance in the fire!");
+          }
+        }
+        if (it->is_alive_monst()) {
+          if (! it->is_on_fire()) {
+            if (it->on_fire_set("sparks")) {
+              it->msg("The fire spread to %s!", it->text_the().c_str());
+            }
+          } else {
+            it->msg("%s dances in the flames!", it->text_The().c_str());
+          }
+        }
+      }
+      FOR_ALL_THINGS_END()
+
       auto f = level->thing_new(what, point(x, y));
       spawned_newborn(f);
     }

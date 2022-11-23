@@ -212,9 +212,10 @@ void Game::place_player(void)
         // auto w = level->thing_new("staff_lightning", point(x, y));
         // auto w = level->thing_new("staff_descent", point(x, y));
         // auto w = level->thing_new("staff_negation", point(x, y));
-        auto w = level->thing_new("staff_ice", point(x, y));
-        // auto w = level->thing_new("staff_fire", point(x, y));
-        t->carry(w);
+        auto w1 = level->thing_new("staff_ice", point(x, y));
+        t->carry(w1);
+        auto w2 = level->thing_new("staff_fire", point(x, y));
+        t->carry(w2);
         // t->enchant_without_stone(w);
       }
       if (0) {

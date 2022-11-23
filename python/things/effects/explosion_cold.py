@@ -4,30 +4,22 @@ import tp
 
 def on_born(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_a")
-    for dx in range(-1, 2):
-        for dy in range(-1, 2):
-            for it in my.level_get_all(me, x + dx, y + dy):
-                my.thing_freeze(it)
 
 
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.dmg_cold_chance_d1000(self, 0, 1000)
-    my.dmg_cold_dice(self, "1d6")  # This is the damage when the monst fires
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_outlined(self, True)
-    my.is_cold(self, True)
     my.is_explosion(self, True)
     my.is_floating(self, True)
     my.is_loggable(self, True)
     my.noise_on_born(self, 70)
     my.on_born_do(self, "me.on_born()")
-    my.temperature(self, 100)
     my.text_hits(self, "blasts")
     my.tick_prio(self, my.MAP_TICK_PRIO_VERY_HIGH)
     my.z_depth(self, my.MAP_DEPTH_OBJ)

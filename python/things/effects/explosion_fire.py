@@ -9,8 +9,6 @@ def on_born(me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.dmg_fire_chance_d1000(self, 0, 1000)
-    my.dmg_fire_dice(self, "1d6")  # This is the damage when the monst fires
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_reflection(self, True)
@@ -18,12 +16,10 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_outlined(self, True)
     my.is_explosion(self, True)
-    my.is_fire(self, True)
     my.is_floating(self, True)
     my.is_loggable(self, True)
     my.noise_on_born(self, 70)
     my.on_born_do(self, "me.on_born()")
-    my.temperature(self, 100)
     my.text_hits(self, "blasts")
     my.tick_prio(self, my.MAP_TICK_PRIO_VERY_HIGH)
     my.z_depth(self, my.MAP_DEPTH_OBJ)

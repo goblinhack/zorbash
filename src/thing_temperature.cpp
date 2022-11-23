@@ -21,13 +21,16 @@ void Thing::temperature_tick(void)
     return;
   }
 
+  dbg("Temperature tick");
+  TRACE_AND_INDENT();
+
   auto initial_temp = initial_temperature_get();
   auto current_temp = temperature_get();
 
   if (current_temp != initial_temp) {
     if (temperature_min_is_set()) {
       if (current_temp < temperature_min_get()) {
-        dbg("Too cold");
+        dbg("Too cold (%d)", current_temp);
         TRACE_AND_INDENT();
         is_attacked_with_dmg_cold(this, this, abs((temperature_min_get() - current_temp) / 10));
       }
@@ -35,7 +38,7 @@ void Thing::temperature_tick(void)
 
     if (temperature_max_is_set()) {
       if (current_temp > temperature_max_get()) {
-        dbg("Too hot");
+        dbg("Too hot (%d)", current_temp);
         TRACE_AND_INDENT();
         is_attacked_with_dmg_fire(this, this, abs((current_temp - temperature_max_get()) / 10));
       }
@@ -171,13 +174,13 @@ void Thing::temperature_tick(void)
     thing_temp = TEMPERATURE_ROOM;
   }
 
+  dbg("Temperature tick, my temp %d, location temp: %d", thing_temp, location_temp);
+  TRACE_AND_INDENT();
+
   //
   // Over time we gradually get closer to the location temperature.
   //
   if (thing_temp != location_temp) {
-    dbg("Temperature tick, my temp %d, location temp: %d", thing_temp, location_temp);
-    TRACE_AND_INDENT();
-
     int delta = (location_temp - thing_temp) / 2;
 
     if (is_lava() || is_fire() || is_block_of_ice() || is_wall() || is_door() || is_rock()) {
@@ -255,7 +258,7 @@ void Thing::temperature_tick(void)
     }
   }
 
-  if ((thing_temp < 0) && is_fire()) {
+  if ((thing_temp < TEMPERATURE_THRESHOLD) && is_fire()) {
     auto damage = abs(thing_temp) / 10;
     dbg("Apply cold damage");
     TRACE_AND_INDENT();
@@ -388,6 +391,8 @@ void Thing::temperature_tick(void)
       is_attacked_with_dmg_fire(this, this, damage);
     }
   }
+
+  dbg("Temperature tick, final my temp %d", temperature_get());
 }
 
 int Thing::temperature_get(void)

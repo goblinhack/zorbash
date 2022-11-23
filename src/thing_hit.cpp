@@ -1390,6 +1390,9 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       } else {
         hitter->msg("%s electrifies %s for %d damage.", hitter->text_The().c_str(), text_the().c_str(), damage);
       }
+    } else if (real_hitter->is_monst()) {
+      real_hitter->msg("%s hits %s with %s.", real_hitter->text_The().c_str(), text_the().c_str(),
+                       hitter->text_the().c_str());
     } else if (real_hitter != this) {
       //
       // Something else hitting something else

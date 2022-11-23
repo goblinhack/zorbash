@@ -115,6 +115,9 @@ void Thing::light_distance_upd_with_torch_effect(uint8_t &out_light_dist)
     if (light_dist != prev) {
       if (light_dist <= 1) {
         msg("Your last torch goes out. You are plunged into darkness!");
+        if (is_on_fire()) {
+          msg("Luckily, your burning body provides some light!");
+        }
       } else if (light_dist < prev) {
         msg("One of your torches fizzles out. It gets darker...");
       }

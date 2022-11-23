@@ -4,7 +4,7 @@ import tp
 
 def on_targetted(me, x, y):
     radius = my.thing_effect_radius_get(me)
-    # my.con("targetted {} {:X} radius {}".format(my.thing_name_get(me), me, radius))
+    my.con("targetted {} {:X} radius {}".format(my.thing_name_get(me), me, radius))
 
     for dx in range(-radius, radius + 1):
         for dy in range(-radius, radius + 1):
@@ -89,7 +89,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.health_initial_dice(self, "20+1d10")
     my.is_able_to_burn(self, True)
     my.is_able_to_fall(self, True)
-    my.is_able_to_spawn_things(self, True)
+    # my.is_able_to_spawn_things(self, False) else we end up owning ice blocks
     my.is_bag_item(self, True)
     my.is_biome_dungeon(self, True)
     my.is_collectable(self, True)
