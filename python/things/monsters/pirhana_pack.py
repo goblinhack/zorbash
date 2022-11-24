@@ -20,14 +20,17 @@ def tp_init(name, text_long_name):
     my.is_allied_with(self, "pirhana_pack")
     my.is_biome_dungeon(self, True)
     my.is_monst_class_a(self, True)
+    my.is_loggable(self, True)
     my.rarity(self, my.RARITY_COMMON)
     my.on_you_are_declared_a_follower_do(self, "me.on_you_are_declared_a_follower()")
     my.is_deep_water_swimmer(self, True)
     my.on_you_are_declared_leader_do(self, "me.on_you_are_declared_leader()")
     my.is_swimmer(self, True)
     my.is_monst_pack(self, True)
+    my.is_loggable(self, True)
     my.spawn_group_radius(self, 5)
     my.spawn_group_size_dice(self, "1d4+3")
+    # end sort marker
     my.tp_update(self)
 
 

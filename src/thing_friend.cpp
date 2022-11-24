@@ -21,6 +21,13 @@ bool Thing::is_friend(Thingp f)
     return true;
   }
 
+  //
+  // Don't attack your own tentacles
+  //
+  if (same_leader_or_owner(f)) {
+    return true;
+  }
+
   return false;
 }
 

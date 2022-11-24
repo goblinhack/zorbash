@@ -981,15 +981,15 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   //
   // If possessions are destroyed, let the player know.
   //
+  auto o_top = top_owner();
   if (is_dead || is_dying) {
-    auto owner = top_owner();
-    if (owner && owner->is_player()) {
-      if (! owner->is_dying && ! owner->is_dying) {
+    if (o_top && o_top->is_player()) {
+      if (! o_top->is_dying && ! o_top->is_dying) {
         msg("Your %s is destroyed!", text_long_name().c_str());
       }
-    } else if (owner && owner->is_monst()) {
-      if (! owner->is_dying && ! owner->is_dying) {
-        msg("%s %s is destroyed!", apostrophise(owner->text_The()).c_str(), text_long_name().c_str());
+    } else if (o_top && o_top->is_monst()) {
+      if (! o_top->is_dying && ! o_top->is_dying) {
+        msg("%s %s is destroyed!", apostrophise(o_top->text_The()).c_str(), text_long_name().c_str());
       }
     }
   }
@@ -1276,6 +1276,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
           }
         } else {
           if (attack_options->attack_poison) {
+            real_hitter->msg("You are poisoned %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
           } else if (attack_options->attack_drown) {
             real_hitter->msg("You drown %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
           } else if (attack_options->attack_bite) {
@@ -1379,26 +1380,126 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         BOTCON("Robot attacks %s.", text_the().c_str());
       }
     }
-  } else {
-    if (hitter->is_lightning()) {
-      //
-      // Fork lightning passes through water.
-      //
-      if (real_hitter->is_water()) {
-        hitter->msg("%s surges through the water and electrifies %s for %d damage.", hitter->text_The().c_str(),
-                    text_the().c_str(), damage);
-      } else {
-        hitter->msg("%s electrifies %s for %d damage.", hitter->text_The().c_str(), text_the().c_str(), damage);
-      }
-    } else if (real_hitter->is_monst()) {
-      real_hitter->msg("%s hits %s with %s.", real_hitter->text_The().c_str(), text_the().c_str(),
-                       hitter->text_the().c_str());
-    } else if (real_hitter != this) {
-      //
-      // Something else hitting something else
-      //
-      real_hitter->msg("%s hits %s.", real_hitter->text_The().c_str(), text_the().c_str());
+  } else if (hitter->is_lightning()) {
+    //
+    // Fork lightning passes through water.
+    //
+    if (real_hitter->is_water()) {
+      hitter->msg("%s surges through the water and electrifies %s for %d damage.", hitter->text_The().c_str(),
+                  text_the().c_str(), damage);
+    } else {
+      hitter->msg("%s electrifies %s for %d damage.", hitter->text_The().c_str(), text_the().c_str(), damage);
     }
+  } else if (real_hitter == this) {
+    if (o_top && o_top->is_player()) {
+      if (attack_options->attack_poison) {
+        msg("Your %s is being poisoned.", text_long_name().c_str());
+      } else if (attack_options->attack_drown) {
+        msg("Your %s is being drowned.", text_long_name().c_str());
+      } else if (attack_options->attack_bite) {
+        msg("Your %s is being bitten.", text_long_name().c_str());
+      } else if (attack_options->attack_claw) {
+        msg("Your %s is being clawed.", text_long_name().c_str());
+      } else if (attack_options->attack_cold) {
+        msg("Your %s is freezing.", text_long_name().c_str());
+      } else if (attack_options->attack_fire) {
+        msg("Your %s is burning.", text_long_name().c_str());
+      } else if (attack_options->attack_crush) {
+        msg("Your %s is being crushed.", text_long_name().c_str());
+      } else if (attack_options->attack_lightning) {
+        msg("Your %s is being zapped.", text_long_name().c_str());
+      } else if (attack_options->attack_energy) {
+        msg("Your %s is being blasted.", text_long_name().c_str());
+      } else if (attack_options->attack_negation) {
+        msg("Your %s is being negated.", text_long_name().c_str());
+      } else if (attack_options->attack_acid) {
+        msg("Your %s is disintegrating.", text_long_name().c_str());
+      } else if (attack_options->attack_digest) {
+        msg("Your %s is dissolving.", text_long_name().c_str());
+      } else if (attack_options->attack_necrosis) {
+        msg("Your %s is rotting.", text_long_name().c_str());
+      } else if (attack_options->attack_draining) {
+        msg("Your %s is drained.", text_long_name().c_str());
+      } else if (attack_options->attack_drown) {
+        msg("Your %s is drowned.", text_long_name().c_str());
+      } else {
+        msg("Your %s is being damaged.", text_long_name().c_str());
+      }
+    } else if (o_top && o_top->is_monst()) {
+      if (attack_options->attack_poison) {
+        msg("%s %s is being poisoned.", pluralise(text_The()).c_str(), text_long_name().c_str());
+      } else if (attack_options->attack_drown) {
+        msg("Your %s is being drowned.", text_long_name().c_str());
+      } else if (attack_options->attack_bite) {
+        msg("Your %s is being bitten.", text_long_name().c_str());
+      } else if (attack_options->attack_claw) {
+        msg("Your %s is being clawed.", text_long_name().c_str());
+      } else if (attack_options->attack_cold) {
+        msg("Your %s is freezing.", text_long_name().c_str());
+      } else if (attack_options->attack_fire) {
+        msg("Your %s is burning.", text_long_name().c_str());
+      } else if (attack_options->attack_crush) {
+        msg("Your %s is being crushed.", text_long_name().c_str());
+      } else if (attack_options->attack_lightning) {
+        msg("Your %s is being zapped.", text_long_name().c_str());
+      } else if (attack_options->attack_energy) {
+        msg("Your %s is being blasted.", text_long_name().c_str());
+      } else if (attack_options->attack_negation) {
+        msg("Your %s is being negated.", text_long_name().c_str());
+      } else if (attack_options->attack_acid) {
+        msg("Your %s is disintegrating.", text_long_name().c_str());
+      } else if (attack_options->attack_digest) {
+        msg("Your %s is dissolving.", text_long_name().c_str());
+      } else if (attack_options->attack_necrosis) {
+        msg("Your %s is rotting.", text_long_name().c_str());
+      } else if (attack_options->attack_draining) {
+        msg("Your %s is drained.", text_long_name().c_str());
+      } else if (attack_options->attack_drown) {
+        msg("Your %s is drowned.", text_long_name().c_str());
+      } else {
+        msg("Your %s is being damaged.", text_long_name().c_str());
+      }
+    } else {
+      if (attack_options->attack_poison) {
+        real_hitter->msg("%s is being poisoned.", text_The().c_str());
+      } else if (attack_options->attack_drown) {
+        real_hitter->msg("%s is drowning.", text_The().c_str());
+      } else if (attack_options->attack_bite) {
+        real_hitter->msg("%s is biting itself.", text_The().c_str());
+      } else if (attack_options->attack_claw) {
+        real_hitter->msg("%s is clawing itself.", text_The().c_str());
+      } else if (attack_options->attack_cold) {
+        real_hitter->msg("%s is freezing.", text_The().c_str());
+      } else if (attack_options->attack_fire) {
+        real_hitter->msg("%s is burning.", text_The().c_str());
+      } else if (attack_options->attack_crush) {
+        real_hitter->msg("%s is being crushed.", text_The().c_str());
+      } else if (attack_options->attack_lightning) {
+        real_hitter->msg("%s is being electrified.", text_The().c_str());
+      } else if (attack_options->attack_energy) {
+        real_hitter->msg("%s is being disintegrated.", text_The().c_str());
+      } else if (attack_options->attack_negation) {
+        real_hitter->msg("%s is being negated.", text_The().c_str());
+      } else if (attack_options->attack_acid) {
+        real_hitter->msg("%s is being dissolved.", text_The().c_str());
+      } else if (attack_options->attack_digest) {
+        real_hitter->msg("%s is being digested.", text_The().c_str());
+      } else if (attack_options->attack_necrosis) {
+        real_hitter->msg("%s is rotting.", text_The().c_str());
+      } else if (attack_options->attack_draining) {
+        real_hitter->msg("%s is being drained.", text_The().c_str());
+      } else {
+        real_hitter->msg("%s is hitting itself.", text_The().c_str());
+      }
+    }
+  } else if (real_hitter->is_monst()) {
+    real_hitter->msg("%s hits %s with %s.", real_hitter->text_The().c_str(), text_the().c_str(),
+                     hitter->text_the().c_str());
+  } else if (real_hitter != this) {
+    //
+    // Something else hitting something else
+    //
+    real_hitter->msg("%s hits %s.", real_hitter->text_The().c_str(), text_the().c_str());
   }
 
   //

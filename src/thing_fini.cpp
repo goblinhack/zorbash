@@ -25,12 +25,22 @@ void Thing::destroy(void)
 
   verify(MTYPE_THING, this);
 
+  if (maybe_infop()) {
+    LOG("Destroy %" PRIX32 " leader %" PRIX32 " owner %" PRIX32, id.id, infop()->leader_id.id, infop()->owner_id.id);
+  }
   /*
    * If seeing a crash in printing the description of the thing this can be handy.
-  if (maybe_infop()) {
-    LOG("Destroy %" PRIX32 " leader %" PRIX32, id.id, infop()->leader_id.id);
-  }
    */
+
+  //
+  // Make sure and set is_being_destroyed before any logging as that can cause
+  // issues in thing to_string with detached owners.
+  //
+  if (is_being_destroyed) {
+    err("Death recursion in thing destroy");
+    return;
+  }
+  is_being_destroyed = true;
 
   if (is_loggable()) {
     dbg2("Destroy");
@@ -45,12 +55,7 @@ void Thing::destroy(void)
       }
     }
   }
-
-  if (is_being_destroyed) {
-    err("Death recursion in thing destroy");
-    return;
-  }
-  is_being_destroyed = true;
+  TRACE_AND_INDENT();
 
   level_pop();
   level_leave();
@@ -164,6 +169,13 @@ void Thing::destroy(void)
 
   if (has_internal_particle) {
     err("Still has external particle");
+  }
+
+  {
+    auto f = level->all_things.find(id);
+    if (f != level->all_things.end()) {
+      level->all_things.erase(f);
+    }
   }
 
   game->world.free_thing_id(this);

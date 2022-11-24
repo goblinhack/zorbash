@@ -77,16 +77,20 @@ void Thing::add_enemy(Thingp attacker, bool recursing)
   if (attacker == this) {
     return;
   }
+
   if (unlikely(! attacker->is_monst() && ! attacker->is_player())) {
     return;
   }
+
   if (unlikely(! is_monst() && ! is_player())) {
     return;
   }
+
   if (! ai_resent_count()) {
     return;
   }
-  if (same_leader_or_owner(attacker)) {
+
+  if (is_friend(attacker) || same_mob(attacker)) {
     return;
   }
 

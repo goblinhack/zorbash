@@ -24,11 +24,14 @@ def tp_init(name, text_long_name):
     my.is_allied_with(self, "mummy_pack")
     my.is_biome_dungeon(self, True)
     my.is_monst_class_c(self, True)
+    my.is_loggable(self, True)
     my.is_monst_pack(self, True)
+    my.is_loggable(self, True)
     my.on_you_are_declared_a_follower_do(self, "me.on_you_are_declared_a_follower()")
     my.on_you_are_declared_leader_do(self, "me.on_you_are_declared_leader()")
     my.spawn_group_radius(self, 4)
     my.spawn_group_size_dice(self, "1d4+3")
+    # end sort marker
     my.tp_update(self)
 
 

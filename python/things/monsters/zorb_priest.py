@@ -14,22 +14,27 @@ def on_death_of_a_follower(me, leader, x, y):
 
 def tp_init(name, text_long_name):
     self = zorb_all.tp_init(name, text_long_name)
+    # begin sort marker
     my.text_description_long2(self, "This particular zorblin is well trained in the martial arts and prefers to fight bare fisted.")
+    my.is_loggable(self, True)
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
     my.on_you_nat_att_do(self, "zorb_all.on_you_nat_att()")
     my.on_born_do(self, "me.on_born()")
     my.text_description_short(self, "A master in physical punishment.")
+    my.is_loggable(self, True)
     my.stat_str(self, 12)
     my.distance_avoid(self, 5)
     my.text_hits(self, "hits")
     my.gfx_anim_use(self, "attack_punch")
     my.dmg_nat_att_type(self, "punch")
     my.is_monst_class_b(self, True)
+    my.is_loggable(self, True)
     my.is_biome_dungeon(self, True)
     my.dmg_nat_att_dice(self, "2d6+2")
     my.health_initial_dice(self, "2d10+4")
     my.is_able_to_freeze(self, True)
     my.is_intelligent(self, True)
+    # end sort marker
 
     delay = 300
     my.tile(self,

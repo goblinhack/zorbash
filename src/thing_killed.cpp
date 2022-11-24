@@ -543,6 +543,7 @@ void Thing::killed(Thingp defeater, const char *reason)
   if (is_loggable()) {
     dbg("Need to garbage collect");
   }
+  TRACE_AND_INDENT();
 
   gc();
 }

@@ -44,6 +44,7 @@ def tp_init(name):
     my.is_hittable(self, True)
     my.is_interesting(self, True)
     my.is_light_blocker(self, True)
+    my.is_loggable(self, True)
     my.is_obs_for_jump_landing(self, True)
     my.is_obs_for_shoving(self, True)
     my.is_obs_in_the_way_for_firing(self, True)

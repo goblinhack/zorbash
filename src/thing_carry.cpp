@@ -309,11 +309,11 @@ bool Thing::carry(Thingp item, bool can_equip)
               msg("%s collects %s.", text_The().c_str(), item->text_the().c_str());
             }
           } else if (item->is_weapon()) {
-            msg("You hear the noise of a weapons being drawn.");
+            msg("You hear the noise of weapons being drawn.");
           } else if (item->is_food()) {
-            msg("You hear a strange slurping sound.");
+            msg("You hear a strange foody slurping sound.");
           } else if (item->is_magical()) {
-            msg("You hear a greedy cackle.");
+            msg("You hear a magical sparkle.");
           }
         }
       }

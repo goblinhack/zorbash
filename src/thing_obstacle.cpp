@@ -459,7 +459,7 @@ bool Thing::is_obs_for_ai(Thingp it)
     }
   }
 
-  if (same_leader_or_owner(it)) {
+  if (is_friend(it)) {
     if (debug && is_debug_type()) {
       con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
     }

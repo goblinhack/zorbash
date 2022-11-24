@@ -12,8 +12,8 @@ void Thing::level_leave(void)
   //
   // Too noisy at level destroy time.
   //
-  if (! level->is_being_destroyed) {
-    if (is_loggable()) {
+  if (is_loggable()) {
+    if (! level->is_being_destroyed) {
       dbg("Leave %s", level->to_string().c_str());
     }
   }
@@ -50,13 +50,6 @@ void Thing::level_leave(void)
     auto it = immediate_spawned_owner();
     if (it) {
       remove_spawner_owner();
-    }
-  }
-
-  {
-    auto f = level->all_things.find(id);
-    if (f != level->all_things.end()) {
-      level->all_things.erase(f);
     }
   }
 

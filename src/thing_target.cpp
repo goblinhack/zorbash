@@ -126,7 +126,7 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
         continue;
       }
 
-      if (same_mob(t) || same_leader_or_owner(t)) {
+      if (is_friend(t) || same_mob(t)) {
         dbg2("Target-attack-best: %s no same leader", t->to_short_string().c_str());
         continue;
       }
@@ -226,7 +226,7 @@ bool Thing::victim_attack_best_attempt_2(Thingp item, point at, Thingp *best, po
         }
       }
 
-      if (same_mob(t) || same_leader_or_owner(t)) {
+      if (is_friend(t) || same_mob(t)) {
         dbg2("Target-attack-best: %s no same leader", t->to_short_string().c_str());
         continue;
       }
@@ -319,7 +319,7 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
         continue;
       }
 
-      if (same_mob(t) || same_leader_or_owner(t)) {
+      if (is_friend(t) || same_mob(t)) {
         dbg2("Target-attack-best: %s no same leader", t->to_short_string().c_str());
         continue;
       }

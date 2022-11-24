@@ -198,7 +198,9 @@ void Thing::hooks_remove()
 void Thing::remove_all_references()
 {
   verify(MTYPE_THING, this);
-  TRACE_NO_INDENT();
+
+  dbg("Remove references");
+  TRACE_AND_INDENT();
 
   //
   // Some things have lots of things they own
@@ -218,6 +220,7 @@ void Thing::remove_all_references()
       verify(MTYPE_THING, t);
       auto o = t->immediate_owner();
       if (o == this) {
+        dbg("Remove child %s", o->to_string().c_str());
         owned_things.push_back(t);
       }
     }

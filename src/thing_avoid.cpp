@@ -40,11 +40,7 @@ bool Thing::will_avoid_monst(const Thingp it)
     return false;
   }
 
-  if (same_leader_or_owner(it)) {
-    return false;
-  }
-
-  if (same_mob(it)) {
+  if (is_friend(it) || same_mob(it)) {
     return false;
   }
 
@@ -104,11 +100,7 @@ bool Thing::will_avoid_monst(const point p)
       continue;
     }
 
-    if (same_leader_or_owner(it)) {
-      return false;
-    }
-
-    if (same_mob(it)) {
+    if (is_friend(it) || same_mob(it)) {
       return false;
     }
 

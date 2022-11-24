@@ -29,7 +29,7 @@ bool Thing::possible_to_attack(const Thingp victim)
   //   return false;
   // }
 
-  if (same_leader_or_owner(victim)) {
+  if (is_friend(victim)) {
     if (is_able_to_attack_owner()) {
       //
       // Sword of plutonium / lightning fork.
@@ -179,9 +179,9 @@ bool Thing::possible_to_attack(const Thingp victim)
   }
 
   //
-  // Don't attadk thy leader or follower
+  // Don't attack thy leader or follower
   //
-  if (same_leader_or_owner(victim)) {
+  if (is_friend(victim) || same_mob(victim)) {
     return false;
   }
 

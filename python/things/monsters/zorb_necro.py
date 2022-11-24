@@ -64,6 +64,7 @@ def tp_init(name, text_long_name):
     my.is_carrier_of_treasure_class_c_d1000(self, 1000)
     my.is_cowardly(self, True)
     my.is_intelligent(self, True)
+    my.is_loggable(self, True)
     my.is_monst_class_b(self, True)
     my.on_born_do(self, "me.on_born()")
     my.on_death_do(self, "me.on_death()")

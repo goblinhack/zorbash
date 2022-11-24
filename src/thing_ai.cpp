@@ -530,7 +530,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
       //
       FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
       {
-        if (same_leader_or_owner(it)) {
+        if (is_friend(it)) {
           break;
         }
       }
@@ -1016,7 +1016,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         //
         // Don't attack your own tentacles
         //
-        if (same_leader_or_owner(it)) {
+        if (is_friend(it)) {
           AI_LOG("My fellow thing", it);
           continue;
         }
@@ -1026,14 +1026,6 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         //
         if (same_mob(it)) {
           AI_LOG("My fellow minion", it);
-          continue;
-        }
-
-        //
-        // Don't attack friedns
-        //
-        if (is_friend(it)) {
-          AI_LOG("Friend", it);
           continue;
         }
 
@@ -1328,12 +1320,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
         continue;
       }
 
-      if (same_mob(it)) {
-        skip_location = true;
-        break;
-      }
-
-      if (same_leader_or_owner(it)) {
+      if (is_friend(it) || same_mob(it)) {
         skip_location = true;
         break;
       }

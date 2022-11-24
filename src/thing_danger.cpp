@@ -313,11 +313,7 @@ int Thing::is_dangerous(Thingp it)
     return false;
   }
 
-  if (same_leader_or_owner(it)) {
-    return false;
-  }
-
-  if (same_mob(it)) {
+  if (is_friend(it) || same_mob(it)) {
     return false;
   }
 

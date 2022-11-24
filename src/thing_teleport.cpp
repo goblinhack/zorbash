@@ -251,7 +251,7 @@ bool Thing::teleport(point to, bool be_careful, bool *too_far)
       continue;
     }
 
-    if (same_mob(it) || same_leader_or_owner(it)) {
+    if (is_friend(it) || same_mob(it)) {
       dbg("Friends are piling up, but allow teleporting");
       wobble(25);
       continue;

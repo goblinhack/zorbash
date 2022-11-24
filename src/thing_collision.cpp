@@ -89,13 +89,8 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
       }
     }
 
-    if (same_mob(t) || same_leader_or_owner(t)) {
+    if (is_friend(t) || same_mob(t)) {
       dbg2("Collision-candidate: %s no same leader", t->to_short_string().c_str());
-      continue;
-    }
-
-    if (is_friend(t)) {
-      dbg2("Collision-candidate: %s friend", t->to_short_string().c_str());
       continue;
     }
 
@@ -694,7 +689,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos)
   // Important to have this check before can_eat or krakens will try to eat their
   // own tentacles.
   //
-  if (same_mob(it) || same_leader_or_owner(it)) {
+  if (is_friend(it) || same_mob(it)) {
     if (things_overlap(me, future_pos, it)) {
       dbg("Collision; cannot pass through my friend");
       return true;

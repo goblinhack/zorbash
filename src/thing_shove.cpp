@@ -31,7 +31,7 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta, bool force)
     return (THING_SHOVE_NEVER_TRIED);
   }
 
-  if (same_leader_or_owner(it)) {
+  if (is_friend(it)) {
     dbg("Not able to shove (same owner) %s", it->to_short_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
   }

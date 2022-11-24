@@ -23,6 +23,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_use_weapons(self, True)
     my.is_biome_dungeon(self, True)
     my.is_carrier_of_treasure_class_c_d1000(self, 1000)
+    my.is_loggable(self, True)
     my.is_monst_class_b(self, True)
     my.on_born_do(self, "me.on_born()")
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")

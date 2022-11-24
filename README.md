@@ -1,6 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - fix cold and energy staffs                                                                                                                 -->
+<!-- - can see mpre in gfx than ascii mode                                                                                                        -->
 <!-- - negation of negation?                                                                                                                      -->
 <!-- - popups need alignment                                                                                                                      -->
 <!-- - fireskull should die if chilled?                                                                                                           -->
