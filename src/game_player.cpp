@@ -206,7 +206,7 @@ void Game::place_player(void)
         auto w = level->thing_new("map_beast", point(x, y));
         t->carry(w);
       }
-      if (1) {
+      if (0) {
         level->thing_new("mummy_necro", point(x + 2, y));
         level->thing_new("reaper", point(x + 3, y));
         level->thing_new("tentacleye", point(x + 1, y + 1));
@@ -215,9 +215,9 @@ void Game::place_player(void)
         level->thing_new("flameskull", point(x + 1, y + 4));
         level->thing_new("tentacleye", point(x + 1, y + 1));
         level->thing_new("tentacleye", point(x + 2, y + 2));
-        level->thing_new("zorb_eldster", point(x + 2, y + 3));
-        level->thing_new("zorb_eldster", point(x + 2, y + 4));
-        level->thing_new("zorb_eldster", point(x + 3, y + 1));
+        level->thing_new("lizardkin", point(x + 2, y + 3));
+        level->thing_new("dogman", point(x + 2, y + 4));
+        level->thing_new("cleaner", point(x + 3, y + 1));
         level->thing_new("zorb_eldster", point(x + 3, y + 2));
         level->thing_new("snake_dreadfire", point(x + 3, y + 3));
         level->thing_new("zorb_eldster", point(x + 3, y + 4));

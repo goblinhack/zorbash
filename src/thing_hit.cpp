@@ -1492,7 +1492,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         real_hitter->msg("%s is hitting itself.", text_The().c_str());
       }
     }
-  } else if (real_hitter->is_monst()) {
+  } else if (real_hitter->is_monst() && (real_hitter != hitter)) {
     real_hitter->msg("%s hits %s with %s.", real_hitter->text_The().c_str(), text_the().c_str(),
                      hitter->text_the().c_str());
   } else if (real_hitter != this) {
