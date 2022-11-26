@@ -53,6 +53,8 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
   attack_options->victim_attacked = false;
   attack_options->victim_overlaps = false;
 
+  auto owner = immediate_owner();
+
   for (auto &cand : thing_colls) {
     auto t = cand.target;
 
@@ -60,6 +62,11 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
     // Don't be silly and hit yourself.
     //
     if (t == me) {
+      continue;
+    }
+
+    if (t == owner) {
+      dbg2("Collision-candidate: %s no, my thing", t->to_short_string().c_str());
       continue;
     }
 
@@ -147,7 +154,6 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
     // However, try to open the door if you have a key.
     //
     if (victim->is_door() && ! victim->is_open) {
-      auto owner = immediate_owner();
       if (owner) {
         if (owner->open_door(victim)) {
           attack_options->victim_attacked = false;
@@ -162,7 +168,6 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
     //
     // If an item is being attacked by fire, do we attack the item or the owner?
     //
-    auto owner = immediate_owner();
     if (! attack_options->victim_attacked) {
       //
       // Carry to eat later. Things attack their food.
