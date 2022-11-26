@@ -135,8 +135,8 @@ static void wid_actionbar_quit_over_begin(Widp w, int relx, int rely, int wheelx
   brx += width / 2;
   tly -= height;
   if (g_opt_ascii) {
-    bry -= 2;
-    tly -= 1;
+    bry -= 1;
+    tly -= 0;
   } else {
     bry -= 4;
   }
@@ -236,8 +236,8 @@ static void wid_actionbar_robot_over_begin(Widp w, int relx, int rely, int wheel
   tly -= height;
 
   if (g_opt_ascii) {
-    bry -= 2;
-    tly -= 1;
+    bry -= 1;
+    tly += 1;
   } else {
     bry -= 4;
   }
@@ -347,17 +347,17 @@ static void wid_actionbar_load_over_begin(Widp w, int relx, int rely, int wheelx
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
   int width  = 32;
-  int height = 9;
+  int height = 10;
 
   tlx -= width / 2;
   brx += width / 2;
   tly -= height;
 
   if (g_opt_ascii) {
-    bry -= 2;
-    tly -= 1;
+    bry -= 1;
+    tly += 1;
   } else {
-    bry -= 4;
+    bry -= 5;
   }
 
   point tl(tlx, tly);
@@ -431,8 +431,8 @@ static void wid_actionbar_save_over_begin(Widp w, int relx, int rely, int wheelx
   tly -= height;
 
   if (g_opt_ascii) {
-    bry -= 2;
-    tly -= 1;
+    bry -= 1;
+    tly -= 0;
   } else {
     bry -= 4;
   }
@@ -665,8 +665,8 @@ static void wid_actionbar_inventory_over_begin(Widp w, int relx, int rely, int w
   tly -= height;
 
   if (g_opt_ascii) {
-    bry -= 2;
-    tly -= 1;
+    bry -= 1;
+    tly -= 0;
   } else {
     bry -= 4;
   }
@@ -864,8 +864,8 @@ static void wid_actionbar_wait_over_begin(Widp w, int relx, int rely, int wheelx
   tly -= height;
 
   if (g_opt_ascii) {
-    bry -= 2;
-    tly -= 1;
+    bry -= 1;
+    tly += 1;
   } else {
     bry -= 4;
   }
@@ -1045,8 +1045,8 @@ static void wid_actionbar_configure_over_begin(Widp w, int relx, int rely, int w
   tly -= height;
 
   if (g_opt_ascii) {
-    bry -= 2;
-    tly -= 1;
+    bry -= 1;
+    tly -= 0;
   } else {
     bry -= 4;
   }

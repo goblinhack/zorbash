@@ -167,7 +167,11 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
       } else if (t->is_burnt) {
         wid_popup_window->log("Burnt to a crisp.");
       }
-      wid_popup_window->log("It's dead, Jim");
+      if (t->is_undead()) {
+        wid_popup_window->log("It's undead, Jim");
+      } else {
+        wid_popup_window->log("It's dead, Jim");
+      }
       wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
     }
   } else {

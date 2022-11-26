@@ -1,7 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- - negation of negation?                                                                                                                      -->
-<!-- - popups need alignment                                                                                                                      -->
 <!-- - fireskull should die if chilled?                                                                                                           -->
 <!-- - falling in block of ice should fall together                                                                                               -->
 <!-- - using fireball in block of ice                                                                                                             -->
