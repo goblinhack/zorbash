@@ -1312,6 +1312,12 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
         lunge(victim->curr_at);
       }
     }
+
+    //
+    // So we can tell when things are attacking us
+    //
+    tick_last_i_tried_to_attack_set(game->tick_current);
+
     dead("by foolishness");
     return true;
   }

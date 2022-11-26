@@ -261,6 +261,22 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_id_context(w, t);
       y_at++;
+    } else if (t->is_monst() && (game->tick_current - t->tick_last_i_tried_to_attack() < 2)) {
+      TRACE_NO_INDENT();
+      auto  w  = wid_new_square_button(wid_leftbar, "(Missed)");
+      point tl = make_point(0, y_at);
+      point br = make_point(width - 1, y_at);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, "(Missed)");
+      if (g_opt_ascii) {
+        wid_set_fg_tilename(w, "status_bar_ascii_orange");
+      } else {
+        wid_set_fg_tilename(w, "status_bar_pixelart_orange");
+      }
+      wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
+      wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
+      wid_set_thing_id_context(w, t);
+      y_at++;
     }
 
     if (t->stuck_count() > 1) {

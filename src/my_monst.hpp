@@ -223,6 +223,10 @@ public:
   //
   uint32_t tick_last_i_attacked {(uint32_t) -1 /* std::numeric_limits< uint32_t >::max() */};
   //
+  // When we last tried to attack and missed or succeeded
+  //
+  uint32_t tick_last_i_tried_to_attack {(uint32_t) -1 /* std::numeric_limits< uint32_t >::max() */};
+  //
   // This is to ensure things do not wake and immediately attack
   //
   uint32_t tick_last_awoke {(uint32_t) -1 /* std::numeric_limits< uint32_t >::max() */};

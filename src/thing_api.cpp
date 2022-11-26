@@ -5024,6 +5024,53 @@ uint32_t Thing::tick_last_i_attacked_incr(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// tick_last_i_tried_to_attack
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::tick_last_i_tried_to_attack(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->tick_last_i_tried_to_attack);
+  }
+  return 0;
+}
+
+uint32_t Thing::tick_last_i_tried_to_attack_set(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_i_tried_to_attack = v);
+}
+
+uint32_t Thing::tick_last_i_tried_to_attack_decr(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_i_tried_to_attack -= v);
+}
+
+uint32_t Thing::tick_last_i_tried_to_attack_incr(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_i_tried_to_attack += v);
+}
+
+uint32_t Thing::tick_last_i_tried_to_attack_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_i_tried_to_attack--);
+}
+
+uint32_t Thing::tick_last_i_tried_to_attack_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_i_tried_to_attack++);
+}
+
+////////////////////////////////////////////////////////////////////////////
 // where_i_dropped_an_item_last
 ////////////////////////////////////////////////////////////////////////////
 point Thing::where_i_dropped_an_item_last_get(void)

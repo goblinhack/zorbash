@@ -150,6 +150,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->tick_last_dropped);
    in >> bits(my.t->tick_last_escape);
    in >> bits(my.t->tick_last_i_attacked);
+   in >> bits(my.t->tick_last_i_tried_to_attack);
    in >> bits(my.t->tick_last_i_was_attacked);
    in >> bits(my.t->tick_last_level_change);
    in >> bits(my.t->tick_last_location_check);

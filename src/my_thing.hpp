@@ -2164,6 +2164,13 @@ public:
   uint32_t tick_last_i_attacked_set(uint32_t);
   uint32_t tick_last_i_attacked(void);
 
+  uint32_t tick_last_i_tried_to_attack_decr(uint32_t);
+  uint32_t tick_last_i_tried_to_attack_decr(void);
+  uint32_t tick_last_i_tried_to_attack_incr(uint32_t);
+  uint32_t tick_last_i_tried_to_attack_incr(void);
+  uint32_t tick_last_i_tried_to_attack_set(uint32_t);
+  uint32_t tick_last_i_tried_to_attack(void);
+
   uint32_t tick_last_level_change_decr(uint32_t);
   uint32_t tick_last_level_change_decr(void);
   uint32_t tick_last_level_change_incr(uint32_t);
