@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - zorblin cannot attack mob                                                                                                                  -->
 <!-- - negation of negation?                                                                                                                      -->
 <!-- - fireskull should die if chilled?                                                                                                           -->
 <!-- - falling in block of ice should fall together                                                                                               -->
