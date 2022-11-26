@@ -94,6 +94,14 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
       continue;
     }
 
+    //
+    // Pretty sure we should not be attacking carried items
+    //
+    if (t->immediate_owner()) {
+      dbg2("Collision-candidate: %s no, thing is owned", t->to_short_string().c_str());
+      continue;
+    }
+
     if (! best) {
       best = &cand;
       continue;
