@@ -171,7 +171,7 @@ def tp_init(name, text_long_name):
             tile="spider_giant.5", delay_ms=delay)
 
     my.tile(self,
-            ascii_fg_char="S", ascii_bg_col_name="", ascii_fg_col_name="gray50",
+            ascii_fg_char="S", ascii_bg_col_name="", ascii_fg_col_name="gray30",
             tile="spider_giant.dead", is_dead=True, delay_ms=delay)
 
     my.tp_update(self)

@@ -129,7 +129,7 @@ def tp_init(name, text_long_name):
             ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray70",
             tile="gargoyle.moving.7", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray50",
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray30",
             tile="gargoyle.moving.dead", is_dead=True, delay_ms=delay)
 
     my.tp_update(self)

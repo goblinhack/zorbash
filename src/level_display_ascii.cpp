@@ -68,6 +68,11 @@ void Level::update_light_ascii_map(void)
               }
 
               float d = DISTANCE(0, 0, dx, dy);
+
+              //
+              // Not sure if more dramatic light drop off exponent looks better or not
+              //
+              d *= d;
               d *= d;
 
               auto c = fcolor(l->col);
