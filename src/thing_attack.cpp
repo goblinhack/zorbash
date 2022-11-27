@@ -29,6 +29,10 @@ bool Thing::possible_to_attack(const Thingp victim)
   //   return false;
   // }
 
+  if (is_debug_type()) {
+    dbg("Is it possible to attack %s?", victim->to_short_string().c_str());
+  }
+
   if (is_friend(victim)) {
     if (is_able_to_attack_owner()) {
       //
@@ -36,15 +40,18 @@ bool Thing::possible_to_attack(const Thingp victim)
       //
       return true;
     }
+
+    if (is_debug_type()) {
+      dbg("Cannot attack %s, friend", victim->to_short_string().c_str());
+    }
     return false;
   }
 
   if (same_mob(victim)) {
+    if (is_debug_type()) {
+      dbg("Cannot attack %s, same mob", victim->to_short_string().c_str());
+    }
     return false;
-  }
-
-  if (is_debug_type()) {
-    dbg("Is it possible to attack %s?", victim->to_short_string().c_str());
   }
 
   //
@@ -396,6 +403,16 @@ bool Thing::possible_to_attack(const Thingp victim)
       }
       return true;
     }
+  }
+
+  //
+  // Some things can be helpful and attack mobs.
+  //
+  if (victim->is_mob() && is_able_to_attack_mobs()) {
+    if (is_debug_type()) {
+      dbg("Can attack mob %s", victim->to_short_string().c_str());
+    }
+    return true;
   }
 
   if (is_debug_type()) {

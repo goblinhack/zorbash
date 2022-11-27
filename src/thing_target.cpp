@@ -159,7 +159,7 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
         // Sword can attack
         //
       } else if (! possible_to_attack(t)) {
-        dbg2("Target-attack-best: %s no cannot attack", t->to_short_string().c_str());
+        dbg2("Target-attack-best: %s no, cannot attack", t->to_short_string().c_str());
         continue;
       }
 
@@ -211,7 +211,7 @@ bool Thing::victim_attack_best_attempt_2(Thingp item, point at, Thingp *best, po
         // Ok. Sword can attack
         //
       } else if (! possible_to_attack(t)) {
-        dbg2("Target-attack-best: %s no cannot attack", t->to_short_string().c_str());
+        dbg2("Target-attack-best: %s no, cannot attack", t->to_short_string().c_str());
         continue;
       }
 
@@ -304,7 +304,7 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
         // Sword can attack
         //
       } else if (! possible_to_attack(t)) {
-        dbg2("Target-attack-best: %s no cannot attack", t->to_short_string().c_str());
+        dbg2("Target-attack-best: %s no, cannot attack", t->to_short_string().c_str());
         continue;
       }
 
