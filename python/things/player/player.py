@@ -190,6 +190,10 @@ def on_receiving_dmg_melee(me, hitter, x, y, damage):
     return damage
 
 
+def on_receiving_dmg_negation(me, hitter, x, y, damage):
+    return damage
+
+
 def on_receiving_dmg_poison(me, hitter, x, y, damage):
     return damage
 
@@ -255,6 +259,10 @@ def on_receiving_dmg_stat_con(me, hitter, x, y, damage):
 
 
 def on_attacking_dmg_melee(me, victim, x, y, damage):
+    return damage
+
+
+def on_attacking_dmg_negation(me, victim, x, y, damage):
     return damage
 
 
@@ -433,6 +441,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.on_attacking_dmg_melee_do(self, "player.on_attacking_dmg_melee()")
     my.on_attacking_dmg_nat_att_do(self, "player.on_attacking_dmg_nat_att()")
     my.on_attacking_dmg_necrosis_do(self, "player.on_attacking_dmg_necrosis()")
+    my.on_attacking_dmg_negation_do(self, "player.on_attacking_dmg_negation()")
     my.on_attacking_dmg_poison_do(self, "player.on_attacking_dmg_poison()")
     my.on_attacking_dmg_stat_con_do(self, "player.on_attacking_dmg_stat_con()")
     my.on_attacking_dmg_stat_str_do(self, "player.on_attacking_dmg_stat_str()")
@@ -455,6 +464,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.on_receiving_dmg_melee_do(self, "player.on_receiving_dmg_melee()")
     my.on_receiving_dmg_nat_att_do(self, "player.on_receiving_dmg_nat_att()")
     my.on_receiving_dmg_necrosis_do(self, "player.on_receiving_dmg_necrosis()")
+    my.on_receiving_dmg_negation_do(self, "player.on_receiving_dmg_negation()")
     my.on_receiving_dmg_poison_do(self, "player.on_receiving_dmg_poison()")
     my.on_receiving_dmg_stat_con_do(self, "player.on_receiving_dmg_stat_con()")
     my.on_receiving_dmg_stat_str_do(self, "player.on_receiving_dmg_stat_str()")

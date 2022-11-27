@@ -77,7 +77,11 @@ bool Thing::laser_fire_at(Thingp item, const std::string &gfx_targetted_laser, T
   TRACE_AND_INDENT();
 
   if (is_player()) {
-    msg("You fire %s at %s.", item->text_the().c_str(), target->text_the().c_str());
+    if (use_options && use_options->radial_effect) {
+      msg("You use %s.", item->text_the().c_str());
+    } else {
+      msg("You fire %s at %s.", item->text_the().c_str(), target->text_the().c_str());
+    }
   }
 
   auto start = last_blit_at;

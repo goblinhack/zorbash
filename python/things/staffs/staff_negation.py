@@ -76,9 +76,14 @@ def explode(me, x, y):
         my.thing_msg(me, "The staff of negation explodes.")
 
     my.spawn_at_my_position(me, "explosion_major")
-    my.spawn_negation_around_thing(me, "fire")
+    my.spawn_set_fire_to_things_around_me(me, "fire")
     my.spawn_at_my_position(me, "fire")
     my.thing_dead(me, "exploded")
+
+
+def on_receiving_dmg_negation(me, hitter, x, y, damage):
+    explode(me, x, y)
+    return damage
 
 
 def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
@@ -120,7 +125,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_described_when_hovering_over(self, True)
     my.is_droppable(self, True)
     my.is_enchantable(self, True)
-    my.is_immune_to_negation(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)
     my.is_loggable(self, True)
@@ -141,6 +145,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.normal_placement_rules(self, True)
     my.on_fall_do(self, "me.on_fall()")
     my.on_idle_tick_freq_dice(self, "1d200+200:me.on_idle()")
+    my.on_receiving_dmg_negation_do(self, "me.on_receiving_dmg_negation()")
     my.on_targetted_do(self, "me.on_targetted()")
     my.on_targetted_radially_do(self, "me.on_targetted_radially()")
     my.on_thrown_do(self, "me.on_thrown()")

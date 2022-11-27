@@ -1,12 +1,10 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - negation of negation?                                                                                                                      -->
 <!-- - falling in block of ice should fall together                                                                                               -->
 <!-- - some weapons crit more                                                                                                                     -->
 <!-- - tentacle grapple                                                                                                                           -->
 <!-- - test main body with freezing and staff of descent                                                                                          -->
 <!-- - kraken guards treasure                                                                                                                     -->
-<!-- - check plutonium sword and lightning                                                                                                        -->
 <!-- - red highlight for monsters in left bar                                                                                                     -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

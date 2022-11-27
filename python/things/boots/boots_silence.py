@@ -6,12 +6,12 @@ self = None
 
 def on_equip(owner, me, x, y):
     if my.thing_is_player(owner):
-        my.thing_msg(me, "Your feet are nice and warm!")
+        my.thing_msg(me, "Your feet are nice and warm and quiet!")
 
 
 def on_unequip(owner, me, x, y):
     if my.thing_is_player(owner):
-        my.thing_msg(me, "Your feet are cold again!")
+        my.thing_msg(me, "Your feet are squeaky again!")
 
 
 def on_enchant(me, x, y):

@@ -1497,9 +1497,12 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
                      hitter->text_the().c_str());
   } else if (real_hitter != this) {
     //
-    // Something else hitting something else
+    // Something else hitting something else. But don't show a message for things
+    // like rocks being hit by explosions.
     //
-    real_hitter->msg("%s hits %s.", real_hitter->text_The().c_str(), text_the().c_str());
+    if (victim->is_interesting()) {
+      real_hitter->msg("%s hits %s.", real_hitter->text_The().c_str(), text_the().c_str());
+    }
   }
 
   //
