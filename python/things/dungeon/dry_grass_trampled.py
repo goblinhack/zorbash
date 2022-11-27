@@ -17,6 +17,7 @@ def tp_init(name, tiles=[]):
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
+    my.gfx_pixelart_shadow_very_short(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.gfx_pixelart_submergable(self, True)
     my.is_able_to_burn(self, True)
@@ -41,7 +42,7 @@ def tp_init(name, tiles=[]):
 
     for t in tiles:
         my.tile(self,
-                ascii_fg_char="strike", ascii_bg_col_name="", ascii_fg_col_name="darkgreen",
+                ascii_fg_char="three_dots", ascii_bg_col_name="", ascii_fg_col_name="darkgreen",
                 tile=t)
 
     my.tp_update(self)

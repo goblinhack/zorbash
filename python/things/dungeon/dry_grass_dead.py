@@ -3,7 +3,7 @@ import tp
 
 
 def tp_init(name, tiles=[]):
-    self = tp.Tp(name, "dry trampled grass")
+    self = tp.Tp(name, "dead grass")
     # begin sort marker
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)
@@ -11,7 +11,6 @@ def tp_init(name, tiles=[]):
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
-    my.gfx_pixelart_shadow_very_short(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.gfx_pixelart_submergable(self, True)
     my.is_able_to_fall(self, True)
@@ -25,7 +24,7 @@ def tp_init(name, tiles=[]):
     my.temperature_sensitive(self, True)
     my.temperature_sensitive_to_sudden_changes(self, True)
     my.text_a_or_an(self, "the")
-    my.text_description_short(self, "Burnt grass.")
+    my.text_description_short(self, "Dead grass.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_FLOOR2)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)

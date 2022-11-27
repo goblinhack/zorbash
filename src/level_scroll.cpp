@@ -19,13 +19,6 @@
 //
 void Level::scroll_map_set_bounds(void)
 {
-  //
-  // I think not knowing where the edge is is better for ascii mode?
-  //
-  if (g_opt_ascii) {
-    return;
-  }
-
   if (g_opt_ascii) {
     if (map_at.x > MAP_WIDTH - TILES_VISIBLE_ACROSS) {
       map_at.x = MAP_WIDTH - TILES_VISIBLE_ACROSS;

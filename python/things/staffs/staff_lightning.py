@@ -16,7 +16,7 @@ def on_idle(me, x, y):
     #
     # Random recharge
     #
-    if my.thing_charge_count_get(me) < my.thing_initial_charge_count_get(me):
+    if my.thing_charge_count(me) < my.thing_initial_charge_count_get(me):
         my.thing_charge_count_incr(me, 1)
         owner = my.thing_top_owner_id_get(me)
         if my.thing_is_player(owner):

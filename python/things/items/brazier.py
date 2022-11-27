@@ -47,8 +47,20 @@ def tp_init(name, text_long_name, tiles=[]):
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
 
-    delay = 100
+    delay = 20
     for t in tiles:
+        my.tile(self,
+                ascii_fg_char="#", ascii_bg_col_name="", ascii_fg_col_name="yellow",
+                tile=t, delay_ms=delay)
+        my.tile(self,
+                ascii_fg_char="#", ascii_bg_col_name="", ascii_fg_col_name="red",
+                tile=t, delay_ms=delay)
+        my.tile(self,
+                ascii_fg_char="#", ascii_bg_col_name="", ascii_fg_col_name="orange",
+                tile=t, delay_ms=delay)
+        my.tile(self,
+                ascii_fg_char="#", ascii_bg_col_name="", ascii_fg_col_name="red",
+                tile=t, delay_ms=delay)
         my.tile(self,
                 ascii_fg_char="#", ascii_bg_col_name="", ascii_fg_col_name="yellow",
                 tile=t, delay_ms=delay)

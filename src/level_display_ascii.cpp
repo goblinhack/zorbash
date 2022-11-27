@@ -83,6 +83,15 @@ void Level::update_light_ascii_map(void)
                 c.b /= d;
               }
 
+              //
+              // Avoid long drop offs as we combine this light source
+              //
+              if ((c.r < 10) && (c.g < 10) && (c.b < 10)) {
+                c.r = 0;
+                c.g = 0;
+                c.b = 0;
+              }
+
               fcolor o = ascii_light_source_no_check(x, y);
               o += c;
               o.count++;
