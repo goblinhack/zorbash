@@ -31,7 +31,7 @@ def on_death(me, x, y):
 
 
 def on_want_to_fire_at_something(me, target, x, y):  # Return True on doing an action
-    if my.pcg_randint(1, 100) < 90:
+    if my.pcg_randint(1, 100) < 10:
         my.thing_fire_at(me, "staff_fire_projectile", target)
         my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
         return True
@@ -52,7 +52,6 @@ def tp_init(name, text_long_name):
     my.consume_per_bite_amount(self, 1)
     my.distance_avoid(self, 4)
     my.distance_mob_max(self, 6)
-    my.distance_vision(self, 7)
     my.distance_vision(self, 8)
     my.dmg_nat_att_dice(self, "1d3")
     my.dmg_nat_att_type(self, "gore")

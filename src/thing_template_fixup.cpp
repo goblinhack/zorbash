@@ -72,6 +72,13 @@ void tp_fixup(void)
       }
     }
 
+    if (! tp->on_want_to_fire_at_something_do().empty()) {
+      if (! tp->is_tickable()) {
+        DIE("Tp %s has fire at action but is not tickable?", tp->name().c_str());
+      }
+      tp->is_able_to_fire_at_set(true);
+    }
+
     if (tp->is_very_combustible()) {
       tp->is_combustible_set(true);
     }
