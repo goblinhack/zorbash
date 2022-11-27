@@ -74,6 +74,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_weapon(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
+    my.light_color(self, "green")
+    my.light_dist(self, 1)
     my.noise_on_dropping(self, 5)
     my.on_swing_do(self, "me.on_swing()")
     my.on_tick_do(self, "me.on_tick()")
@@ -89,7 +91,7 @@ def tp_init(name, text_long_name, text_short_name):
     # end sort marker
 
     my.tile(self,
-            ascii_fg_char="up_arrow", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="up_arrow", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name)
 
     my.tp_update(self)

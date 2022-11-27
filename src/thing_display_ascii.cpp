@@ -199,6 +199,13 @@ void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
   }
 
   //
+  // Should light sources keep their color ?
+  //
+  if (has_light) {
+    return;
+  }
+
+  //
   // For monsters and the like, if we combine colors then we lose information, like what type of snake it is. It's
   // better instead to just fade the colors with distance.
   //

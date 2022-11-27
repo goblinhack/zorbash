@@ -45,40 +45,40 @@ def tp_init(name, text_long_name, text_short_name):
 
     delay = 1000
     my.tile(self,
-            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gold",
             tile=name + ".1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gold",
             tile=name + ".2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gold",
             tile=name + ".3", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gold",
             tile=name + ".4", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gold",
             tile=name + ".5", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gold",
             tile=name + ".6", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gold",
             tile=name + ".3", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gold",
             tile=name + ".2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gold",
             tile=name + ".3", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gold",
             tile=name + ".2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gold",
             tile=name + ".2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gold",
             tile=name + ".3", delay_ms=delay)
     my.tile(self,
             ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="green",
