@@ -481,6 +481,7 @@ bool wid_leftbar_display_create(void)
 
     wid_leftbar = wid_new_square_window("wid leftbar");
     wid_set_ignore_scroll_events(wid_leftbar, true);
+    wid_set_ignore_events(wid_leftbar, true);
     wid_set_pos(wid_leftbar, tl, br);
     wid_set_style(wid_leftbar, UI_WID_STYLE_SOLID_NONE);
     wid_lower(wid_leftbar);
