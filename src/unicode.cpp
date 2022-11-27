@@ -169,6 +169,9 @@ wchar_t unicode_alias_to_char(const std::string &s)
   if (s == "solid_circle") {
     return UNICODE_0x89;
   }
+  if (s == "three_dots") {
+    return UNICODE_0x8e;
+  }
   if (s == "up_arrow") {
     return UNICODE_0x90;
   }
