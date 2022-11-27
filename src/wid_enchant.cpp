@@ -300,27 +300,23 @@ void Game::wid_enchant_an_item(void)
   static int wid_width  = 70;
   int        left_half  = wid_width / 2;
   int        right_half = wid_width - left_half;
-  point      tl;
-  point      br;
 
-  if (g_opt_ascii) {
-    tl = make_point(m - left_half, TERM_HEIGHT / 2 - 7);
-    br = make_point(m + right_half, TERM_HEIGHT / 2 + 7);
-  } else {
-    tl = make_point(m - left_half, TERM_HEIGHT / 2 - 14);
-    br = make_point(m + right_half, TERM_HEIGHT / 2 + 14);
-  }
-
-  auto width = br.x - tl.x;
-
-  auto sz = enchant_items.size();
+  bool scrollbar = false;
+  auto sz        = enchant_items.size();
   if (! sz) {
     sz = 1;
   }
-  wid_enchant = new WidPopup("Enchant", tl, br, nullptr, "", false, true, sz * 3);
-
-  wid_set_on_key_up(wid_enchant->wid_popup_container, wid_enchant_key_up);
-  wid_set_on_key_down(wid_enchant->wid_popup_container, wid_enchant_key_down);
+  int height_max = (((int) sz * 3) + 6);
+  int height;
+  if (height_max > TERM_HEIGHT / 2) {
+    height    = TERM_HEIGHT / 2;
+    scrollbar = true;
+  } else {
+    height = height_max;
+  }
+  point tl    = make_point(m - left_half, TERM_HEIGHT / 2 - height / 2 - 2);
+  point br    = make_point(m + right_half, TERM_HEIGHT / 2 + height / 2);
+  wid_enchant = new WidPopup("Enchant", tl, br, nullptr, "", false, scrollbar, height_max);
 
   if (! enchant_items.size()) {
     wid_enchant->log("You have nothing to enchant");
@@ -330,7 +326,11 @@ void Game::wid_enchant_an_item(void)
     wid_enchant->log("Choose something to enchant");
   }
 
-  int y_at = 3;
+  wid_set_on_key_up(wid_enchant->wid_popup_container, wid_enchant_key_up);
+  wid_set_on_key_down(wid_enchant->wid_popup_container, wid_enchant_key_down);
+
+  auto width = br.x - tl.x;
+  int  y_at  = 3;
   for (auto slot = 0; slot < (int) enchant_items.size(); slot++) {
     Game  tmp;
     auto  p  = wid_enchant->wid_text_area->wid_text_area;

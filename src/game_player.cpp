@@ -50,6 +50,10 @@ void Game::place_player(void)
         t->carry(w);
       }
       if (1) {
+        auto w = level->thing_new("potion_health", point(x, y));
+        t->carry(w);
+      }
+      if (1) {
         auto w = level->thing_new("food_pottedmeat", point(x, y));
         t->carry(w);
       }
@@ -62,26 +66,8 @@ void Game::place_player(void)
         t->carry(w);
       }
       if (0) {
-        auto w = level->thing_new("potion_health", point(x - 1, y + 1));
-        t->carry(w);
-        t->enchant_without_stone(w);
-      }
-      if (0) {
         auto w = level->thing_new("staff_descent", point(x, y));
         t->carry(w);
-        // t->enchant_without_stone(w);
-        // t->enchant_without_stone(w);
-        // t->enchant_without_stone(w);
-        // t->enchant_without_stone(w);
-      }
-      if (0) {
-        level->thing_new("wall_dungeon.1", point(x + 1, y));
-        level->thing_new("wall_dungeon.1", point(x, y + 2));
-        level->thing_new("descend_sewer1", point(x + 4, y + 4));
-      }
-      if (0) {
-        level->thing_new("boots_jumping", point(x + 1, y - 2));
-        level->thing_new("boots_teleport", point(x + 1, y - 1));
       }
       if (0) {
         auto w = level->thing_new("gauntlets_lion", point(x, y - 2));
@@ -385,7 +371,6 @@ void Game::place_player(void)
       if (0) {
         auto d = level->thing_new("dogman", point(x + 1, y + 2));
         d->dead("x");
-        // level->thing_new("potion_health", point(x + 3, y + 4));
       }
 
       // level->thing_new("staff_descent", point(x + 5, y + 2));

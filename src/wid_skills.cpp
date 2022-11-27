@@ -223,27 +223,31 @@ void Game::wid_choose_skill(void)
   static int wid_width  = 70;
   int        left_half  = wid_width / 2;
   int        right_half = wid_width - left_half;
-  point      tl;
-  point      br;
 
-  if (g_opt_ascii) {
-    tl = make_point(m - left_half, TERM_HEIGHT / 2 - 7);
-    br = make_point(m + right_half, TERM_HEIGHT / 2 + 7);
-  } else {
-    tl = make_point(m - left_half, TERM_HEIGHT / 2 - 14);
-    br = make_point(m + right_half, TERM_HEIGHT / 2 + 14);
+  bool scrollbar = false;
+  auto sz        = skills.size();
+  if (! sz) {
+    sz = 1;
   }
+  int height_max = (((int) sz * 3) + 6);
+  int height;
+  if (height_max > TERM_HEIGHT / 2) {
+    height    = TERM_HEIGHT / 2;
+    scrollbar = true;
+  } else {
+    height = height_max;
+  }
+  point tl   = make_point(m - left_half, TERM_HEIGHT / 2 - height / 2 - 2);
+  point br   = make_point(m + right_half, TERM_HEIGHT / 2 + height / 2);
+  wid_skills = new WidPopup("Skills", tl, br, nullptr, "", false, scrollbar, height_max);
 
-  auto width = br.x - tl.x;
-
-  wid_skills = new WidPopup("skills", tl, br, nullptr, "", false, true, skills.size() * 3);
+  wid_skills->log("Choose a skill");
 
   wid_set_on_key_up(wid_skills->wid_popup_container, wid_skills_key_up);
   wid_set_on_key_down(wid_skills->wid_popup_container, wid_skills_key_down);
 
-  wid_skills->log("Choose a skill");
-
-  int y_at = 3;
+  auto width = br.x - tl.x;
+  int  y_at  = 3;
   for (auto slot = 0; slot < (int) skills.size(); slot++) {
     Game  tmp;
     auto  p  = wid_skills->wid_text_area->wid_text_area;

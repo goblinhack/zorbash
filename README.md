@@ -1,14 +1,11 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- - negation of negation?                                                                                                                      -->
-<!-- - fireskull should die if chilled?                                                                                                           -->
 <!-- - falling in block of ice should fall together                                                                                               -->
-<!-- - using fireball in block of ice                                                                                                             -->
 <!-- - some weapons crit more                                                                                                                     -->
 <!-- - tentacle grapple                                                                                                                           -->
 <!-- - test main body with freezing and staff of descent                                                                                          -->
 <!-- - kraken guards treasure                                                                                                                     -->
-<!-- - resize the collect window to just what we need                                                                                             -->
 <!-- - check plutonium sword and lightning                                                                                                        -->
 <!-- - red highlight for monsters in left bar                                                                                                     -->
 <!-- ------                                                                                                                                       -->

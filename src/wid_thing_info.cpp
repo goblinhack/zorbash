@@ -270,7 +270,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
   wid_thing_info_placement(tl, br, height);
 
   //  backtrace_dump();
-  auto wid_popup_window = new WidPopup("Thing info", tl, br, nullptr, "", false, false /* vert */);
+  auto wid_popup_window = new WidPopup("Thing info", tl, br, nullptr, "", false, true /* vert */);
 
   wid_raise(wid_popup_window->wid_popup_container);
 
@@ -289,38 +289,11 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     IF_DEBUG2 { t->topcon("compact over"); }
 
     //
-    // Not sure if we will have shops
+    // Show minimal information as we're tight for space.
     //
     wid_thing_info_add_gold_value(wid_popup_window, t);
     wid_thing_info_add_nutrition(wid_popup_window, t);
     wid_thing_info_add_health(wid_popup_window, t);
-    int attack_index = 0;
-    wid_thing_info_add_dmg_nat_att(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_melee(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_poison(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_drown(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_bite(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_claw(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_cold(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_fire(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_crush(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_lightning(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_energy(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_negation(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_acid(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_digest(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_necrosis(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_draining(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmgd_chance(wid_popup_window, t);
-    wid_thing_info_add_crit_chance(wid_popup_window, t);
-    wid_thing_info_add_attack(wid_popup_window, t);
-    wid_thing_info_add_stat_def(wid_popup_window, t);
-    wid_thing_info_add_stat_str(wid_popup_window, t);
-    wid_thing_info_add_stat_con(wid_popup_window, t);
-    wid_thing_info_add_stat_dex(wid_popup_window, t);
-    wid_thing_info_add_stat_luck(wid_popup_window, t);
-    wid_thing_info_add_charge_count(wid_popup_window, t);
-    wid_thing_info_add_danger_level(wid_popup_window, t);
   }
 
   game->current_wid_thing_info = nullptr;

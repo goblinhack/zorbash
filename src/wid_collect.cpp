@@ -399,36 +399,35 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
   static int wid_width  = 70;
   int        left_half  = wid_width / 2;
   int        right_half = wid_width - left_half;
-  point      tl;
-  point      br;
 
-  if (g_opt_ascii) {
-    tl = make_point(m - left_half, TERM_HEIGHT / 2 - 7);
-    br = make_point(m + right_half, TERM_HEIGHT / 2 + 7);
-  } else {
-    tl = make_point(m - left_half, TERM_HEIGHT / 2 - 14);
-    br = make_point(m + right_half, TERM_HEIGHT / 2 + 14);
+  bool scrollbar = false;
+  auto sz        = collect_items.size();
+  if (! sz) {
+    sz = 1;
   }
-
-  auto width  = br.x - tl.x;
-  auto height = br.y - tl.y;
-
-  if ((int) items.size() > (height / 3) - 2) {
-    wid_collect = new WidPopup("collect", tl, br, nullptr, "", false, true, collect_items.size() * 3);
+  int height_max = (((int) sz * 3) + 6);
+  int height;
+  if (height_max > TERM_HEIGHT / 2) {
+    height    = TERM_HEIGHT / 2;
+    scrollbar = true;
   } else {
-    wid_collect = new WidPopup("collect", tl, br, nullptr, "", false, false, collect_items.size() * 3);
+    height = height_max;
   }
+  point tl    = make_point(m - left_half, TERM_HEIGHT / 2 - height / 2 - 2);
+  point br    = make_point(m + right_half, TERM_HEIGHT / 2 + height / 2);
+  wid_collect = new WidPopup("Collect", tl, br, nullptr, "", false, scrollbar, height_max);
 
-  wid_set_on_key_up(wid_collect->wid_popup_container, wid_collect_key_up);
-  wid_set_on_key_down(wid_collect->wid_popup_container, wid_collect_key_down);
-
-  if (items.size() == 1) {
+  if (collect_items.size() == 1) {
     wid_collect->log("Want to collect this?");
   } else {
     wid_collect->log("Choose something to collect");
   }
 
-  int y_at = 4;
+  wid_set_on_key_up(wid_collect->wid_popup_container, wid_collect_key_up);
+  wid_set_on_key_down(wid_collect->wid_popup_container, wid_collect_key_down);
+
+  auto width = br.x - tl.x;
+  int  y_at  = 4;
   for (auto slot = 0; slot < (int) collect_items.size(); slot++) {
     auto  p  = wid_collect->wid_text_area->wid_text_area;
     auto  w  = wid_new_container(p, "item slot");
