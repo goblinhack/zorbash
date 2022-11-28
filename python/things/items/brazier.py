@@ -1,5 +1,6 @@
 import my
 import tp
+import random
 
 
 def tp_init(name, text_long_name, tiles=[]):
@@ -47,25 +48,12 @@ def tp_init(name, text_long_name, tiles=[]):
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
 
-    delay = 20
+    delay = 40
     for t in tiles:
+        colors = ["yellow", "red", "orange", "yellow", "white"]
+        color = random.choice(colors)
         my.tile(self,
-                ascii_fg_char="#", ascii_bg_col_name="", ascii_fg_col_name="yellow",
-                tile=t, delay_ms=delay)
-        my.tile(self,
-                ascii_fg_char="#", ascii_bg_col_name="", ascii_fg_col_name="red",
-                tile=t, delay_ms=delay)
-        my.tile(self,
-                ascii_fg_char="#", ascii_bg_col_name="", ascii_fg_col_name="orange",
-                tile=t, delay_ms=delay)
-        my.tile(self,
-                ascii_fg_char="#", ascii_bg_col_name="", ascii_fg_col_name="red",
-                tile=t, delay_ms=delay)
-        my.tile(self,
-                ascii_fg_char="#", ascii_bg_col_name="", ascii_fg_col_name="yellow",
-                tile=t, delay_ms=delay)
-        my.tile(self,
-                ascii_fg_char="#", ascii_bg_col_name="", ascii_fg_col_name="white",
+                ascii_fg_char="#", ascii_bg_col_name="", ascii_fg_col_name=color,
                 tile=t, delay_ms=delay)
 
     my.tile(self,
