@@ -8,7 +8,7 @@
 
 // REMOVED #include "my_random.hpp"
 
-// REMOVED #include <algorithm>
+#include <algorithm> // for std::transform()
 #include <map>
 
 template < class T, template < typename ELEM, typename ALLOC = std::allocator< ELEM > > class C >
