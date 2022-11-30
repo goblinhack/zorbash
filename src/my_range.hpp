@@ -3,7 +3,7 @@
 //
 
 #pragma once
-// REMOVED #include <algorithm>
+#include <algorithm> // for std::generate()
 #include <random>
 // REMOVED #include <vector>
 

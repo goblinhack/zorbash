@@ -12,6 +12,7 @@
 #include "my_wid.hpp"
 #include "my_wid_botcon.hpp"
 // REMOVED #include "slre.hpp"
+#include <algorithm> // for std::reverse()
 
 static void wid_botcon_wid_create(void);
 
