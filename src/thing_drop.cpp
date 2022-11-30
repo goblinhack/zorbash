@@ -41,7 +41,7 @@ void Thing::on_dropped(void)
   }
 }
 
-bool Thing::drop(Thingp what, Thingp target, bool stolen)
+bool Thing::drop(Thingp what, Thingp target, bool stolen, bool thrown)
 {
   TRACE_NO_INDENT();
 
@@ -148,7 +148,11 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
   wid_inventory_fini();
   wid_thing_info_fini("drop item");
 
-  if (stolen) {
+  if (thrown) {
+    //
+    // A message should already have been shown
+    //
+  } else if (stolen) {
     dbg("Dropped (being stolen) %s", what->to_short_string().c_str());
     if (is_player()) {
       if (! is_dead_or_dying()) {

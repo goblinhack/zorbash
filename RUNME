@@ -123,15 +123,13 @@ tech_support()
 }
 
 run() {
-    ARGS=$1
     STDOUT=$2
-
     EXIT_CODE=.exit_code
-    ($1 2>&1; echo $? > $EXIT_CODE) | tee $STDOUT
-    MY_RET=`cat $EXIT_CODE`
+    ($1 2>&1; echo $? > $EXIT_CODE) | tee "$STDOUT"
+    MY_RET="$(cat $EXIT_CODE)"
     /bin/rm $EXIT_CODE
 
-    return $MY_RET
+    return "$MY_RET"
 }
 
 help()
@@ -157,7 +155,7 @@ read_opts()
 {
     while [ "$#" -ne 0 ];
     do
-        local option=$1
+        option=$1
 
         case $option in
             -*dev2)
@@ -190,7 +188,7 @@ read_opts()
     done
 }
 
-read_opts $*
+read_opts "$@"
 
 run build/build.sh $LOG
 

@@ -2818,7 +2818,7 @@ int Thing::is_able_to_use_rings(void)
 int Thing::is_immune_to_fire(void)
 {
   TRACE_NO_INDENT();
-  if (buff_find_is_fire_proof()) {
+  if (buff_find_is_fire_resist()) {
     return true;
   }
   return (tp()->is_immune_to_fire());

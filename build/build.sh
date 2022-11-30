@@ -19,15 +19,15 @@
 
 . ./build/common.sh
 
-case `uname` in
+MY_OS_NAME=$(uname)
+case "$MY_OS_NAME" in
     *MING*|*MSYS*)
         for i in \
             $(which sdl2-config) \
             /mingw/bin/sdl2-config \
             /mingw64/bin/sdl2-config
         do
-            if [ -x $i ]
-            then
+            if [ -x "$i" ]; then
                 SDL2_CONFIG=$i
                 break
             fi
@@ -39,8 +39,7 @@ case `uname` in
             /opt/local/bin/sdl2-config \
             /usr/bin/sdl2-config
         do
-            if [ -x $i ]
-            then
+            if [ -x "$i" ]; then
                 SDL2_CONFIG=$i
                 break
             fi
@@ -95,7 +94,7 @@ sdl_help()
 {
     log_err "No SDL2 found"
 
-    case `uname` in
+    case $MY_OS_NAME in
     *MING*|*MSYS*)
         log_warn "Try:"
         log_warn "  pacman -S mingw-w64-x86_64-SDL2"
@@ -117,7 +116,7 @@ gcc_help()
 {
     log_err "No g++ or clang compiler found"
 
-    case `uname` in
+    case $MY_OS_NAME in
     *MING*|*MSYS*)
         log_warn "Try:"
         log_warn "  pacman -S base-devel"
@@ -138,19 +137,19 @@ gcc_help()
 SDL2_SCORE=0
 
 if [ "$SDL2_CONFIG" != "" ]; then
-    SDL2_INC_PATH=`$SDL2_CONFIG --cflags | sed -e 's/.*-I\([a-zA-Z\/@_0-9:\.]*\) .*/\1/g' -e 's/\-.*//g'`
+    SDL2_INC_PATH=$($SDL2_CONFIG --cflags | sed -e 's/.*-I\([a-zA-Z\/@_0-9:\.]*\) .*/\1/g' -e 's/\-.*//g')
 
     if [[ "$SDL2_INC_PATH" != "" ]]; then
-        find $SDL2_INC_PATH | grep -q SDL_mixer.h
+        find "$SDL2_INC_PATH" | grep -q SDL_mixer.h
         if [ $? -eq 0 ]; then
-            SDL2_SCORE=`expr $SDL2_SCORE + 1`
-            SDL2_MIXER=`find $SDL2_INC_PATH -name SDL_mixer.h`
+            SDL2_SCORE=$((SDL2_SCORE + 1))
+            SDL2_MIXER=$(find "$SDL2_INC_PATH" -name SDL_mixer.h)
         fi
     fi
 fi
 
 log_info "SDL2 config                : $SDL2_CONFIG"
-log_info "SDL2 version               : "`$SDL2_CONFIG --version`
+log_info "SDL2 version               : "$($SDL2_CONFIG --version)
 log_info "SDL2 include path          : $SDL2_INC_PATH"
 log_info "SDL2 mixer.h               : $SDL2_MIXER"
 #log_info "SDL2 found                 : $SDL2_SCORE"
@@ -164,7 +163,7 @@ fi
 #
 # Gives warings at runtime on MACOS
 #
-SDL_LIBS=`$SDL2_CONFIG --libs`
+SDL_LIBS=$($SDL2_CONFIG --libs)
 if [ $? -ne 0 ]
 then
     log_err "Please install SDL2."
@@ -172,7 +171,7 @@ then
     exit 1
 fi
 
-C_FLAGS=`$SDL2_CONFIG --cflags | sed 's/ \-D_REENTRANT//g'`
+C_FLAGS=$($SDL2_CONFIG --cflags | sed 's/ \-D_REENTRANT//g')
 if [ $? -ne 0 ]
 then
     log_err "Please install SDL2."
@@ -187,15 +186,14 @@ fi
 LDLIBS="$SDL_LIBS"
 LDLIBS="$LDLIBS -lSDL2_mixer"
 
-case `uname` in
+case $MY_OS_NAME in
     *MING*|*MSYS*)
         for i in \
             $(which python3-config) \
             /mingw/bin/python3-config \
             /mingw64/bin/python3-config
         do
-            if [ -x $i ]
-            then
+            if [ -x "$i" ]; then
                 Python3_CONFIG=$i
                 break
             fi
@@ -207,8 +205,7 @@ case `uname` in
             /usr/local/bin/python3-config \
             /usr/bin/python3-config
         do
-            if [ -x $i ]
-            then
+            if [ -x "$i" ]; then
                 Python3_CONFIG=$i
                 break
             fi
@@ -216,15 +213,14 @@ case `uname` in
     ;;
 esac
 
-case `uname` in
+case $MY_OS_NAME in
     *MING*|*MSYS*)
         for i in \
             $(which python3) \
             /mingw/bin/python3 \
             /mingw64/bin/python3
         do
-            if [ -x $i ]
-            then
+            if [ -x "$i" ]; then
                 Python3=$i
                 break
             fi
@@ -236,67 +232,8 @@ case `uname` in
             /opt/local/bin/python3 \
             /usr/bin/python3
         do
-            if [ -x $i ]
-            then
+            if [ -x "$i" ]; then
                 Python3=$i
-                break
-            fi
-        done
-    ;;
-esac
-
-case `uname` in
-    *MING*|*MSYS*)
-        for i in \
-            $(which python-config) \
-            /mingw/bin/python-config \
-            /mingw64/bin/python-config
-        do
-            if [ -x $i ]
-            then
-                Python2_CONFIG=$i
-                break
-            fi
-        done
-    ;;
-    *)
-        for i in \
-            $(which python-config) \
-            /usr/local/bin/python-config \
-            /usr/bin/python-config
-        do
-            if [ -x $i ]
-            then
-                Python2_CONFIG=$i
-                break
-            fi
-        done
-    ;;
-esac
-
-case `uname` in
-    *MING*|*MSYS*)
-        for i in \
-            $(which python) \
-            /mingw/bin/python \
-            /mingw64/bin/python
-        do
-            if [ -x $i ]
-            then
-                Python2=$i
-                break
-            fi
-        done
-    ;;
-    *)
-        for i in \
-            $(which python) \
-            /usr/local/bin/python \
-            /usr/bin/python
-        do
-            if [ -x $i ]
-            then
-                Python2=$i
                 break
             fi
         done
@@ -307,7 +244,7 @@ python_help()
 {
     log_warn "No python3 found"
 
-    case `uname` in
+    case $MY_OS_NAME in
     *MING*|*MSYS*)
         log_warn "Try:"
         log_warn "  pacman -S mingw-w64-python3.9"
@@ -323,90 +260,35 @@ python_help()
     exit 1
 }
 
-Python2_SCORE=0
 Python3_SCORE=0
 
-if [ "$Python2_CONFIG" != "" ]; then
-    Python2_INC_PATH=`$Python2_CONFIG --cflags | sed -e 's/.*-I\([a-zA-Z\/@_0-9:\.]*\) .*/\1/g' -e 's/\-.*//g'`
-
-    if [[ "$Python2_INC_PATH" != "" ]]; then
-        find $Python2_INC_PATH | grep -q Python.h
-        if [ $? -eq 0 ]; then
-            Python2_SCORE=`expr $Python2_SCORE + 1`
-        fi
-    fi
-fi
-
 if [ "$Python3_CONFIG" != "" ]; then
-    Python3_INC_PATH=`$Python3_CONFIG --cflags | sed -e 's/.*-I\([a-zA-Z\/@_0-9:\.]*\) .*/\1/g' -e 's/\-.*//g'`
+    Python3_INC_PATH=$($Python3_CONFIG --cflags | sed -e 's/.*-I\([a-zA-Z\/@_0-9:\.]*\) .*/\1/g' -e 's/\-.*//g')
 
     if [[ "$Python3_INC_PATH" != "" ]]; then
-        find $Python3_INC_PATH | grep -q Python.h
+        find "$Python3_INC_PATH" | grep -q Python.h
         if [ $? -eq 0 ]; then
-            Python3_SCORE=`expr $Python3_SCORE + 1`
+            Python3_SCORE=$((Python3_SCORE + 1))
         fi
     fi
-fi
-
-if [ "$Python2_CONFIG" != "" ]; then
-    log_info "Default Python             : $Python2"
-    log_info "Default Python config      : $Python2_CONFIG"
-    log_info "Default Python exec        : "`$Python2_CONFIG --exec-prefix`
-    log_info "Default Python include path: $Python2_INC_PATH"
-    #log_info "Default Python found       : $Python2_SCORE"
 fi
 
 if [[ "$Python3_CONFIG" != "" ]]; then
     log_info "Python3                    : $Python3"
     log_info "Python3 config             : $Python3_CONFIG"
-    log_info "Python3 exec               : "`$Python3_CONFIG --exec-prefix`
+    log_info "Python3 exec               : "$($Python3_CONFIG --exec-prefix)
     log_info "Python3 include path       : $Python3_INC_PATH"
     #log_info "Python3 found              : $Python3_SCORE"
 fi
 
-USE_Python2=0
-USE_Python3=0
-
-if [[ $Python2_SCORE = "0" ]]; then
-    if [[ $Python3_SCORE = "0" ]]; then
-        log_err "I need Python3"
-        python_help
-        exit 1
-    else
-        Python_CONFIG=$Python3_CONFIG
-        Python=$Python3
-        USE_Python3=1
-    fi
-elif [[ $Python3_SCORE = "0" ]]; then
-    if [[ $Python2_SCORE = "0" ]]; then
-        log_err "I need Python3"
-        python_help
-        exit 1
-    else
-#        Python_CONFIG=$Python2_CONFIG
-#        Python=$Python2
-#        USE_Python2=1
-        log_err "I need Python3"
-        python_help
-        exit 1
-    fi
-else
-    if [[ $Python3_SCORE -ge $Python2_SCORE ]]; then
-#        log_info "Prefer Python3"
-        Python_CONFIG=$Python3_CONFIG
-        Python=$Python3
-        USE_Python3=1
-    else
-        log_err "I need Python3"
-        python_help
-        exit 1
-#        log_info "Prefer Python2"
-#        Python_CONFIG=$Python2_CONFIG
-#        Python=$Python2
-#        USE_Python2=1
-    fi
+if [[ $Python3_SCORE = "0" ]]; then
+    log_err "I need Python3"
+    python_help
+    exit 1
 fi
 
+Python_CONFIG=$Python3_CONFIG
+Python=$Python3
 PYVER=$($Python --version | sed -e 's/Python //g' -e 's/\.[0-9]*$//g')
 echo "PYVER=$PYVER" > build/windows/python.version.sh
 
@@ -422,32 +304,31 @@ cat build/windows/windows.xml.tmpl | \
 #
 # Make the makefile
 #
-cd src
-
+(
+cd src || exit
 rm -f Makefile
-cat Makefile.base | sed '/DO NOT DELETE/,$d' > Makefile.tmp
+sed '/DO NOT DELETE/,$d' Makefile.base > Makefile.tmp
 mv Makefile.tmp Makefile
-
-cd ..
+)
 
 PYTHONPATH=$($Python -c "import os, sys; print(os.pathsep.join(x for x in sys.path if x))")
 
-case `uname` in
+case "$MY_OS_NAME" in
     *Darwin*)
-        echo $PYTHONPATH | grep -q -i anaconda
+        echo "$PYTHONPATH" | grep -q -i anaconda
         if [[ $? -eq 0 ]];
         then
           log_info "Python anaconda is installed"
-          Python_LIBS=`$Python_CONFIG --ldflags`
+          Python_LIBS=$($Python_CONFIG --ldflags)
           if [ $? -ne 0 ]; then
               log_err "Please install Python 3. $Python_CONFIG failed."
               exit 1
           fi
         else
           log_info "Python anaconda is not installed"
-          Python_LIBS=`$Python_CONFIG --ldflags --embed 2>/dev/null`
+          Python_LIBS=$($Python_CONFIG --ldflags --embed 2>/dev/null)
           if [ $? -ne 0 ]; then
-              Python_LIBS=`$Python_CONFIG --ldflags`
+              Python_LIBS=$($Python_CONFIG --ldflags)
               if [ $? -ne 0 ]; then
                   log_err "Please install Python 3. $Python_CONFIG failed."
                   exit 1
@@ -456,9 +337,9 @@ case `uname` in
         fi
       ;;
     *)
-        Python_LIBS=`$Python_CONFIG --ldflags --embed 2>/dev/null`
+        Python_LIBS=$($Python_CONFIG --ldflags --embed 2>/dev/null)
         if [ $? -ne 0 ]; then
-            Python_LIBS=`$Python_CONFIG --ldflags`
+            Python_LIBS=$($Python_CONFIG --ldflags)
             if [ $? -ne 0 ]; then
                 log_err "Please install Python 3. $Python_CONFIG failed."
                 exit 1
@@ -470,13 +351,13 @@ esac
 #
 # Filter some junk out of the python config that can cause link errors
 #
-C_FLAGS+=" `$Python_CONFIG --cflags | \
+C_FLAGS+=" $($Python_CONFIG --cflags       | \
            tr ' ' '\n' | sort | uniq       | \
            grep  "\-I"                     | \
            tr '\n' ' '                     | \
            sed 's/\-fstack-protector/ /g'  | \
            sed 's/\-arch i386/ /g'           \
-           `"
+           )"
 #
 # -funwind-tables and -rdynamic for backtrace info on linux.
 # But it seemed to help little.
@@ -493,7 +374,7 @@ C_FLAGS+="-include config.h"
 #
 # for backtraces, but it doesn't help much
 #
-case `uname` in
+case "$MY_OS_NAME" in
     *MSYS*)
         log_err "Please compile for ming64, not msys"
         exit 1
@@ -514,7 +395,7 @@ case `uname` in
         #
 
         LDLIBS="$LDLIBS -L/mingw64/x86_64-w64-mingw32/lib/"
-        LDLIBS=`echo $LDLIBS | sed -e 's/-lmingw32 //g'`
+        LDLIBS=$(echo $LDLIBS | sed -e 's/-lmingw32 //g')
         LDLIBS="$LDLIBS -funwind-tables"
         #LDLIBS="$LDLIBS -static"
         LDLIBS="$LDLIBS -static-libstdc++"
@@ -561,11 +442,12 @@ case `uname` in
         LDLIBS+="-lGL "
         if [[ $OPT_DEV2 != "" ]]; then
             ASAN_OPTIONS=fast_unwind_on_malloc
+            export ASAN_OPTIONS
             C_FLAGS+=" -fsanitize=address -fno-omit-frame-pointer -fno-common"
             LDFLAGS+=" -fsanitize=address"
         fi
 
-        pkg-config --print-provides libunwind 2>/dev/null
+        pkg-config --print-provides libunwind >/dev/null 2>/dev/null
         if [[ $? -eq 0 ]]; then
             echo "#define HAVE_LIBUNWIND" >> $CONFIG_H
             LDLIBS+=" -lunwind"
@@ -593,7 +475,7 @@ log_info "PYVER                      : $PYVER"
 log_info "PYTHONPATH                 : $PYTHONPATH"
 log_info "VERSION (game)             : $MYVER"
 
-cd src
+cd src || exit
 
 # Example timings at -j12
 # -O0 138 header cleanup... 91
@@ -618,15 +500,15 @@ else
     GCC_STACK_CHECK=
 fi
 
-echo "    " >> .Makefile
-echo "CLANG_COMPILER_WARNINGS=-Wall $GCC_WARN -std=c++2a # AUTOGEN" >> .Makefile
-echo "GCC_COMPILER_WARNINGS=-x c++ -Wall $GCC_WARN -std=c++2a $GCC_STACK_CHECK # AUTOGEN" >> .Makefile
-echo "    " >> .Makefile
-echo "LDFLAGS=$LDFLAGS" >> .Makefile
+cat >>.Makefile <<%%
+CLANG_COMPILER_WARNINGS=-Wall $GCC_WARN -std=c++2a # AUTOGEN
+GCC_COMPILER_WARNINGS=-x c++ -Wall $GCC_WARN -std=c++2a $GCC_STACK_CHECK # AUTOGEN
+LDFLAGS=$LDFLAGS
+%%
 
 GOT_CC=
 
-`g++ --version >/dev/null 2>/dev/null`
+g++ --version > /dev/null
 if [ $? -eq 0 ]
 then
     echo "COMPILER_WARNINGS=\$(GCC_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
@@ -638,9 +520,8 @@ fi
 # Prefer clang as its faster
 #
 if [[ $OPT_GCC = "" ]]; then
-  `clang++ --version >/dev/null 2>/dev/null`
-  if [ $? -eq 0 ]
-  then
+  clang++ --version > /dev/null
+  if [ $? -eq 0 ]; then
       echo "COMPILER_WARNINGS=\$(CLANG_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
       echo "CC=clang++ # AUTOGEN" >> .Makefile
       GOT_CC=1
@@ -652,7 +533,7 @@ if [[ $GOT_CC = "" ]]; then
     exit 1
 fi
 
-case `uname` in
+case "$MY_OS_NAME" in
     *MING*)
         echo "CC=/mingw64/bin/x86_64-w64-mingw32-g++.exe # AUTOGEN" >> .Makefile
         #
@@ -662,13 +543,14 @@ case `uname` in
     ;;
 esac
 
-echo "    " >> .Makefile
-echo "EXE=$EXE # AUTOGEN" >> .Makefile
-echo "DSYM=$DSYM # AUTOGEN" >> .Makefile
-echo "LDLIBS=$LDLIBS # AUTOGEN" >> .Makefile
-echo "CFLAGS=\$(COMPILER_FLAGS) \$(COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
+cat >>.Makefile <<%%
+EXE=$EXE # AUTOGEN
+DSYM=$DSYM # AUTOGEN
+LDLIBS=$LDLIBS # AUTOGEN
+CFLAGS=\$(COMPILER_FLAGS) \$(COMPILER_WARNINGS) # AUTOGEN
+%%
 
-cat Makefile | grep -v AUTOGEN | grep -v "^    $" >> .Makefile
+grep -v AUTOGEN Makefile | grep -v "^    $" >> .Makefile
 
 if [ -s .Makefile ]
 then
@@ -688,15 +570,15 @@ make clobber | sed 's/^/  /g'
 
 CORES=""
 
-case `uname` in
+case "$MY_OS_NAME" in
     *Darwin*)
-        CORES=`/usr/sbin/system_profiler -detailLevel full SPHardwareDataType  | grep Cores | sed 's/.*: //g' | awk '{print $1}'`
+      CORES=$(/usr/sbin/system_profiler -detailLevel full SPHardwareDataType  | grep Cores | sed 's/.*: //g' | awk '{print $1}')
     ;;
     *inux*)
-        CORES=`cat /proc/cpuinfo | grep "cpu cores" | wc -l`
+      CORES=$(grep -c "cpu cores" /proc/cpuinfo)
     ;;
     MSYS*)
-        CORES=`cat /proc/cpuinfo | grep "cpu cores" | wc -l`
+      CORES=$(grep -c "cpu cores" /proc/cpuinfo)
     ;;
 esac
 
@@ -710,12 +592,13 @@ else
 fi
 
 cd ..
-echo make $CORES $* all
-make $CORES $* all
+
+echo make $CORES "$@" all
+make $CORES "$@" all
 
 if [ $? -eq 0 ]
 then
-    case `uname` in
+    case "$MY_OS_NAME" in
         *MING*)
             log_info "Run:"
             echo "  export PYTHONPATH=/mingw64/lib/python${PYVER}/:/mingw64/lib/python${PYVER}/lib-dynload:/mingw64/lib/python${PYVER}/site-packages"
@@ -730,10 +613,8 @@ then
 
     rm -f Makefile.bak
 else
-    cd ..
     log_die "Build failed"
     exit 1
 fi
 
-cd ..
 exit 0

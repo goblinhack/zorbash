@@ -46,7 +46,7 @@ bool Thing::buff_find_is_aquatic(void)
   return false;
 }
 
-bool Thing::buff_find_is_fire_proof(void)
+bool Thing::buff_find_is_fire_resist(void)
 {
   TRACE_NO_INDENT();
 

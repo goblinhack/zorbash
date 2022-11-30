@@ -30,15 +30,24 @@ def explode(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if owner:
         if my.thing_is_player(owner):
-            my.thing_msg(me, "Your staff of staff of lightning explodes.")
+            my.thing_msg(me, "Your staff of lightning explodes.")
         else:
-            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s staff of staff of lightning explodes.")
+            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s staff of lightning explodes.")
     else:
-        my.thing_msg(me, "The staff of staff of lightning explodes.")
+        my.thing_msg(me, "The staff of lightning explodes.")
 
     my.spawn_at_my_position(me, "explosion_major")
     my.spawn_set_fire_to_things_around_me(me, "fire")
+    on_targetted(me, x, y)
     my.thing_dead(me, "exploded")
+
+
+def on_thrown(me, x, y):
+    if my.level_is_chasm_at(me, x, y):
+        return
+    if my.level_is_water_at(me, x, y):
+        return
+    explode(me, x, y)
 
 
 def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
@@ -102,6 +111,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_fall_do(self, "me.on_fall()")
     my.on_idle_tick_freq_dice(self, "1d200+200:me.on_idle()")
     my.on_targetted_do(self, "me.on_targetted()")
+    my.on_thrown_do(self, "me.on_thrown()")
     my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.range_max(self, 7)
@@ -136,7 +146,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_lightning", text_long_name="staff of lightning", text_short_name="staff, lghtn")
+    tp_init(name="staff_lightning", text_long_name="staff of lightning", text_short_name="staff of lightning")
 
 
 init()

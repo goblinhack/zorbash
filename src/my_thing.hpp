@@ -468,7 +468,7 @@ public:
   bool buffbox_id_insert(Thingp what);
   bool buffbox_id_remove(Thingp what);
   bool buff_find_is_aquatic(void);
-  bool buff_find_is_fire_proof(void);
+  bool buff_find_is_fire_resist(void);
   bool buff_find_is_slippery(void);
   bool buff_remove(Thingp it);
   bool buff_remove(Tpp what);
@@ -517,7 +517,7 @@ public:
   bool drop_from_ether(Thingp w);
   bool drop_into_ether(Thingp w);
   bool drop(Thingp w);
-  bool drop(Thingp w, Thingp target, bool stolen = false);
+  bool drop(Thingp w, Thingp target, bool stolen = false, bool thrown = false);
   bool eat_something(void);
   bool eat(Thingp it);
   bool enchant_random_item_with_stone(void);

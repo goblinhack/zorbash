@@ -24,16 +24,6 @@ def on_targetted_radially(me, x, y):
     my.spawn_things_around_me(me, "fire", radius)
 
 
-def on_thrown(me, x, y):
-    if my.level_is_chasm_at(me, x, y):
-        return
-    if my.level_is_water_at(me, x, y):
-        return
-    for dx in range(-1, 2):
-        for dy in range(-1, 2):
-            my.place_at(me, "fire", x + dx, y + dy)
-
-
 def on_idle(me, x, y):
     #
     # Random recharge
@@ -59,9 +49,16 @@ def explode(me, x, y):
         my.thing_msg(me, "The staff of fire explodes.")
 
     my.spawn_at_my_position(me, "explosion_major")
-    my.spawn_set_fire_to_things_around_me(me, "fire")
-    my.spawn_at_my_position(me, "fire")
+    on_targetted(me, x, y)
     my.thing_dead(me, "exploded")
+
+
+def on_thrown(me, x, y):
+    if my.level_is_chasm_at(me, x, y):
+        return
+    if my.level_is_water_at(me, x, y):
+        return
+    explode(me, x, y)
 
 
 def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
@@ -158,7 +155,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_fire", text_long_name="staff of fire", text_short_name="staff, fire")
+    tp_init(name="staff_fire", text_long_name="staff of fire", text_short_name="staff of fire")
 
 
 init()

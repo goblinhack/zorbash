@@ -5,11 +5,11 @@ self = None
 
 
 def on_equip(owner, me, x, y):
-    my.thing_buff_add(owner, "buff_fire_proof")
+    my.thing_buff_add(owner, "buff_fire_resist")
 
 
 def on_unequip(owner, me, x, y):
-    my.thing_buff_remove(owner, "buff_fire_proof")
+    my.thing_buff_remove(owner, "buff_fire_resist")
 
 
 def on_enchant(me, x, y):

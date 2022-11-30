@@ -4,7 +4,7 @@ import tp
 
 def on_targetted(me, x, y):
     radius = my.thing_effect_radius_get(me)
-    # my.con("targetted {} {:X}".format(my.thing_name_get(me), me))
+    # my.con("targetted {} {:X} at {} {} radius {}".format(my.thing_name_get(me), me, x, y, radius))
 
     for dx in range(-radius, radius + 1):
         for dy in range(-radius, radius + 1):
@@ -47,21 +47,29 @@ def explode(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if owner:
         if my.thing_is_player(owner):
-            my.thing_msg(me, "Your staff of staff of descent explodes.")
+            my.thing_msg(me, "Your staff of descent explodes.")
         else:
-            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s staff of staff of descent explodes.")
+            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s staff of descent explodes.")
     else:
-        my.thing_msg(me, "The staff of staff of descent explodes.")
+        my.thing_msg(me, "The staff of descent explodes.")
 
     my.spawn_at_my_position(me, "explosion_major")
     my.thing_msg(me, "The earth shakes.")
-    my.spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
+    on_targetted(me, x, y)
     my.thing_dead(me, "exploded")
 
 
 def on_final_use(owner, item, target, x, y):
     if my.thing_is_player(owner):
         my.thing_msg(owner, "The staff crumbles into dust.")
+
+
+def on_thrown(me, x, y):
+    if my.level_is_chasm_at(me, x, y):
+        return
+    if my.level_is_water_at(me, x, y):
+        return
+    explode(me, x, y)
 
 
 def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
@@ -125,6 +133,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_idle_tick_freq_dice(self, "1d1000+200:me.on_idle()")
     my.on_targetted_do(self, "me.on_targetted()")
     my.on_targetted_radially_do(self, "me.on_targetted_radially()")
+    my.on_thrown_do(self, "me.on_thrown()")
     my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.range_max(self, 7)

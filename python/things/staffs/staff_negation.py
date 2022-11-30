@@ -41,16 +41,6 @@ def on_targetted_radially(me, x, y):
                     my.thing_hit(me, it)
 
 
-def on_thrown(me, x, y):
-    if my.level_is_chasm_at(me, x, y):
-        return
-    if my.level_is_water_at(me, x, y):
-        return
-    for dx in range(-1, 2):
-        for dy in range(-1, 2):
-            my.place_at(me, "negation", x + dx, y + dy)
-
-
 def on_idle(me, x, y):
     #
     # Random recharge
@@ -79,6 +69,14 @@ def explode(me, x, y):
     my.spawn_set_fire_to_things_around_me(me, "fire")
     my.spawn_at_my_position(me, "fire")
     my.thing_dead(me, "exploded")
+
+
+def on_thrown(me, x, y):
+    if my.level_is_chasm_at(me, x, y):
+        return
+    if my.level_is_water_at(me, x, y):
+        return
+    explode(me, x, y)
 
 
 def on_receiving_dmg_negation(me, hitter, x, y, damage):
@@ -183,7 +181,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_negation", text_long_name="staff of negation", text_short_name="staff, negation")
+    tp_init(name="staff_negation", text_long_name="staff of negation", text_short_name="staff of negation")
 
 
 init()

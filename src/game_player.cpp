@@ -97,7 +97,22 @@ void Game::place_player(void)
       if (0) {
         auto w = level->thing_new("staff_lightning", point(x, y));
         t->carry(w);
-        t->enchant_without_stone(w);
+      }
+      if (0) {
+        auto w = level->thing_new("staff_fire", point(x, y));
+        t->carry(w);
+      }
+      if (0) {
+        auto w = level->thing_new("staff_cold", point(x, y));
+        t->carry(w);
+      }
+      if (0) {
+        auto w = level->thing_new("staff_energy", point(x, y));
+        t->carry(w);
+      }
+      if (0) {
+        auto w = level->thing_new("staff_descent", point(x, y));
+        t->carry(w);
       }
       if (0) {
         auto w = level->thing_new("pike", point(x, y));
@@ -120,6 +135,12 @@ void Game::place_player(void)
         t->carry(r1);
         auto r2 = level->thing_new("ring_poison_resist", point(x, y));
         t->carry(r2);
+      }
+      if (0) {
+        auto r3 = level->thing_new("ring_fire_resist", point(x, y));
+        t->carry(r3);
+        auto r4 = level->thing_new("ring_cold_resist", point(x, y));
+        t->carry(r4);
       }
       if (0) {
         auto w = level->thing_new("very_broadsword", point(x, y));
@@ -215,7 +236,7 @@ void Game::place_player(void)
         level->thing_new("cement_man", point(x + 4, y + 3));
         // auto w = level->thing_new("staff_lightning", point(x, y));
         // auto w = level->thing_new("staff_descent", point(x, y));
-        auto w1 = level->thing_new("staff_ice", point(x, y));
+        auto w1 = level->thing_new("staff_cold", point(x, y));
         t->carry(w1);
         auto w2 = level->thing_new("staff_fire", point(x, y));
         t->carry(w2);

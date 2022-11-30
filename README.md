@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - ring of fire - should carried items be vulnerable                                                                                          -->
 <!-- - ring of negation protection                                                                                                                -->
 <!-- - falling in block of ice should fall together                                                                                               -->
 <!-- - some weapons crit more                                                                                                                     -->
@@ -235,10 +236,11 @@ Content:
 - 19 treasure
 - 13 weapons
 - 8 items
-- 7 buffs
+- 8 buffs
 - 6 staffs
 - 6 boots
 - 5 keys
+- 4 rings
 - 4 gauntlets
 - 4 debuffs
 - 4 armor
@@ -248,7 +250,6 @@ Content:
 - 3 amulets
 - 2 skills
 - 2 shield
-- 2 rings
 - 2 potions
 - 1 player
 <!-- end type marker -->
