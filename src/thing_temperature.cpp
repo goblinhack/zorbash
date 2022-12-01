@@ -332,10 +332,17 @@ void Thing::temperature_tick(void)
       if (is_player()) {
         if (level->is_lava(curr_at)) {
           //
-          // Should be obvious you are too hot.
+          // Should be obvious you are too hot!
           //
+          if (is_immune_to_fire()) {
+            msg("You bask in the lava.");
+          }
         } else {
-          msg("You sweat from the extreme heat.");
+          if (is_immune_to_fire()) {
+            msg("You bask in the heat.");
+          } else {
+            msg("You sweat from the extreme heat.");
+          }
         }
       }
     }
@@ -381,14 +388,16 @@ void Thing::temperature_tick(void)
     }
   }
 
-  if (thing_temp >= 100) {
-    auto damage = abs(thing_temp) / 20;
-    if (torch_tick()) {
-      dbg("Torch attack");
-      TRACE_AND_INDENT();
-      dbg("Apply fire damage");
-      TRACE_AND_INDENT();
-      is_attacked_with_dmg_fire(this, this, damage);
+  if (! is_immune_to_fire()) {
+    if (thing_temp >= 100) {
+      auto damage = abs(thing_temp) / 20;
+      if (torch_tick()) {
+        dbg("Torch attack");
+        TRACE_AND_INDENT();
+        dbg("Apply fire damage");
+        TRACE_AND_INDENT();
+        is_attacked_with_dmg_fire(this, this, damage);
+      }
     }
   }
 
@@ -467,42 +476,58 @@ void Thing::temperature_incr(int temperature_change)
 
   if (temperature_sensitive_to_sudden_changes()) {
     if (temperature_change > 50) {
-      if ((temperature_curr < 0) && (temperature_curr > -25)) {
-        auto damage = (temperature_change - temperature_curr) / 10;
-        if (is_stone()) {
-          popup("Crack!");
-          if (is_player()) {
-            msg("%%fg=orange$%s cracks from the increase in temperature.%%fg=reset$", text_The().c_str());
-          } else {
-            msg("%s cracks from the change in temperature.%%fg=reset$", text_The().c_str());
-          }
-        } else {
-          if (is_player()) {
-            msg("%%fg=orange$%s suffers from the increase in temperature.%%fg=reset$", text_The().c_str());
-          } else {
-            msg("%s suffers from the change in temperature.%%fg=reset$", text_The().c_str());
-          }
+      if (is_immune_to_fire()) {
+        if (is_player()) {
+          msg("%%fg=orange$%s basks in the increasing heat.%%fg=reset$", text_The().c_str());
+        } else if (is_monst()) {
+          msg("%s basks in the increasing heat.", text_The().c_str());
         }
-        is_attacked_with_dmg_fire(this, this, damage);
+      } else {
+        if ((temperature_curr < 0) && (temperature_curr > -25)) {
+          auto damage = (temperature_change - temperature_curr) / 10;
+          if (is_stone()) {
+            popup("Crack!");
+            if (is_player()) {
+              msg("%%fg=orange$%s cracks from the increase in temperature.%%fg=reset$", text_The().c_str());
+            } else {
+              msg("%s cracks from the change in temperature.%%fg=reset$", text_The().c_str());
+            }
+          } else {
+            if (is_player()) {
+              msg("%%fg=orange$%s suffers from the increase in temperature.%%fg=reset$", text_The().c_str());
+            } else {
+              msg("%s suffers from the change in temperature.%%fg=reset$", text_The().c_str());
+            }
+          }
+          is_attacked_with_dmg_fire(this, this, damage);
+        }
       }
     } else if (temperature_change < -50) {
-      if ((temperature_curr > 0) && (temperature_curr < 25)) {
-        auto damage = (temperature_curr - temperature_change) / 10;
-        if (is_stone()) {
-          popup("Crack!");
-          if (is_player()) {
-            msg("%%fg=cyan$%s cracks from the decrease in temperature.%%fg=reset$", text_The().c_str());
-          } else {
-            msg("%s cracks from the change in temperature.", text_The().c_str());
-          }
-        } else {
-          if (is_player()) {
-            msg("%%fg=cyan$%s suffers from the decrease in temperature.%%fg=reset$", text_The().c_str());
-          } else {
-            msg("%s suffers from the change in temperature.", text_The().c_str());
-          }
+      if (is_immune_to_cold()) {
+        if (is_player()) {
+          msg("%%fg=cyan$%s basks in the increasing cold.%%fg=reset$", text_The().c_str());
+        } else if (is_monst()) {
+          msg("%s basks in the increasing cold.", text_The().c_str());
         }
-        is_attacked_with_dmg_cold(this, this, damage);
+      } else {
+        if ((temperature_curr > 0) && (temperature_curr < 25)) {
+          auto damage = (temperature_curr - temperature_change) / 10;
+          if (is_stone()) {
+            popup("Crack!");
+            if (is_player()) {
+              msg("%%fg=cyan$%s cracks from the decrease in temperature.%%fg=reset$", text_The().c_str());
+            } else {
+              msg("%s cracks from the change in temperature.", text_The().c_str());
+            }
+          } else {
+            if (is_player()) {
+              msg("%%fg=cyan$%s suffers from the decrease in temperature.%%fg=reset$", text_The().c_str());
+            } else {
+              msg("%s suffers from the change in temperature.", text_The().c_str());
+            }
+          }
+          is_attacked_with_dmg_cold(this, this, damage);
+        }
       }
     }
   }

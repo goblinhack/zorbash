@@ -95,6 +95,11 @@ bool Thing::on_fire_set(const std::string &why)
     return false;
   }
 
+  if (is_immune_to_fire()) {
+    on_fire_unset();
+    return false;
+  }
+
   if (is_on_fire()) {
     return true;
   }

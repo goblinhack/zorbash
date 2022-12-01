@@ -100,6 +100,7 @@ def tp_init(name, text_long_name):
 
     my.gfx_ascii_shown(self, True)
     my.is_buff(self, True)
+    my.is_immune_to_cold(self, True)
     my.is_loggable(self, True)
     my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_receive_dmg_acid_do(self, "me.on_owner_receive_dmg_acid()")
@@ -121,7 +122,7 @@ def tp_init(name, text_long_name):
     my.on_owner_remove_do(self, "me.on_owner_remove()")
     my.text_description_long(self, "You chill in the cold.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
-    # my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
+    my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
     my.tile(self,
             tile="buff_cold_resist")

@@ -119,7 +119,7 @@ def tp_init(name, text_long_name):
     my.on_owner_remove_do(self, "me.on_owner_remove()")
     my.text_description_long(self, "Undead cause half damage.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
-    # my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
+    my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
     my.tile(self,
             tile="buff_undead_resist")

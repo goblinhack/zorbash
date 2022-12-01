@@ -106,6 +106,7 @@ def tp_init(name, text_long_name):
 
     my.gfx_ascii_shown(self, True)
     my.is_buff(self, True)
+    my.is_immune_to_poison(self, True)
     my.is_interesting(self, True)
     my.is_loggable(self, True)
     my.is_tickable(self, True)
@@ -131,7 +132,7 @@ def tp_init(name, text_long_name):
     my.on_tick_do(self, "me.on_tick()")
     my.text_description_long(self, "Poison causes you 50 percent less damage.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
-    # my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
+    my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
     my.tile(self,
             tile="buff_poison_resist")

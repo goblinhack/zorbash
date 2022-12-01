@@ -46,7 +46,7 @@ def tp_init(name, text_long_name):
     my.text_description_short(self, "Devoted thrust skill.")
     my.text_skill(self, "Redirect health to damage, costing stamina")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
-    # my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
+    my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
     my.tile(self,
             tile=name)

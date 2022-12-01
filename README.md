@@ -1,6 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - ring of fire - should carried items be vulnerable                                                                                          -->
+<!-- - if wrapped in ice, and ice block adjacent, swing should hit local ice                                                                      -->
 <!-- - ring of negation protection                                                                                                                -->
 <!-- - falling in block of ice should fall together                                                                                               -->
 <!-- - some weapons crit more                                                                                                                     -->

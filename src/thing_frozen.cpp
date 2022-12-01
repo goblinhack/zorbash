@@ -16,10 +16,12 @@ void Thing::frozen_set(void)
   TRACE_NO_INDENT();
 
   if (! is_able_to_freeze()) {
+    frozen_unset();
     return;
   }
 
-  if (is_frozen) {
+  if (is_immune_to_cold()) {
+    frozen_unset();
     return;
   }
 

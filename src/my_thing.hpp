@@ -468,6 +468,7 @@ public:
   bool buffbox_id_insert(Thingp what);
   bool buffbox_id_remove(Thingp what);
   bool buff_find_is_aquatic(void);
+  bool buff_find_is_cold_resist(void);
   bool buff_find_is_fire_resist(void);
   bool buff_find_is_slippery(void);
   bool buff_remove(Thingp it);

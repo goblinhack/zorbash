@@ -53,6 +53,7 @@ bool Thing::ascend_dungeon_tick(void)
     }
     return ascend_dungeon();
   }
+
   if (is_player()) {
     msg("The exit is blocked. You are stuck here!");
   }

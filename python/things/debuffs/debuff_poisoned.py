@@ -29,7 +29,7 @@ def tp_init(name, text_long_name):
     my.text_description_long(self, "Poison courses through your unlucky veins.")
     my.text_description_short(self, "Poisoned debuff.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
-    # my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
+    my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
     my.tile(self,
             tile="debuff_poisoned")
