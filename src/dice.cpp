@@ -129,11 +129,12 @@ int Dice::roll(void) const
 {
   int n   = ndice;
   int tot = 0;
-  // LOG("roll %dd%d+%d => %d", ndice, sides, stat, tot);
+  // CON("roll %dd%d+%d", ndice, sides, stat);
   while (n-- > 0) {
     tot += pcg_random_range(0, sides) + 1;
   }
   tot += stat;
+  // CON("roll %dd%d+%d => %d", ndice, sides, stat, tot);
   return tot;
 }
 

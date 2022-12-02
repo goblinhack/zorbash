@@ -31,7 +31,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_submergable(self, True)
     my.gold_value_dice(self, "25")
-    my.health_initial_dice(self, "1d20")
+    my.health_initial_dice(self, "1d20+10")
     my.is_able_to_burn(self, True)
     my.is_able_to_fall(self, True)
     my.is_auto_equipped(self, True)
