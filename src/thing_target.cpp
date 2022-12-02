@@ -557,6 +557,12 @@ bool Thing::victim_attack_best_at(int equip, AttackOptions *attack_options)
   std::vector< point > local_only = {point(0, 0)};
   if (level->is_block_of_ice(curr_at) || level->is_spiderweb(curr_at)) {
     all_deltas = local_only;
+    //
+    // This prevents us trying to use the attack direction of the weapon when trapped.
+    // It makes no sense to hit something next to you when trapped in a block of ice.
+    //
+    dx = 0;
+    dy = 0;
   }
 
   //

@@ -347,6 +347,8 @@ void Game::place_player(void)
         d->is_burnt = true;
         d->dead("x");
       }
+      level->thing_new("block_of_ice", point(x - 1, y));
+      level->thing_new("block_of_ice", point(x, y));
       if (0) {
         level->thing_new("lava", point(x + 2, y + 1));
         level->thing_new("block_of_ice", point(x + 2, y + 1));
