@@ -71,6 +71,9 @@ void py_add_to_path(const char *path)
 
   CON("Add python path: %s", path);
 
+  //
+  // NOTE: PySys_SetPath is deprecated.
+  //
   std::string cmd = "import sys\n";
   cmd += "sys.path.append('";
   cmd += std::string(path);
