@@ -107,7 +107,12 @@ void Thing::msg(const char *fmt, ...)
   //
   // If this is a monst attacking, do we want to see the message?
   //
-  if (! is_player()) {
+  auto owner = top_owner();
+  if (is_player() || (owner && owner->is_player())) {
+    //
+    // Player messages are normally shown.
+    //
+  } else {
     //
     // If a ghost is in a wall and trying to attack the player, we must allow that even though the DMAP will say wall.
     //
