@@ -22,11 +22,9 @@ void Level::display_ascii_gas(point tl, point br, int16_t minx, int16_t miny, in
 {
   TRACE_NO_INDENT();
 
-  static int      r;
   static uint32_t last_anim_change;
   if (time_have_x_tenths_passed_since(5, last_anim_change)) {
     last_anim_change = time_ms();
-    r++;
   }
 
   for (auto y = miny; y < maxy - 1; y++) {

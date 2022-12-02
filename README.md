@@ -348,7 +348,7 @@ Pixelart Screenshots
 How to build
 ------------
 
-- On Linux: (Ubuntu 22.04)
+- On Linux: (Ubuntu 22.10)
 <pre>
     sh ./RUNME
 </pre>

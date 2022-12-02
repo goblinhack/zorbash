@@ -900,7 +900,6 @@ std::string ascii_strip(std::string const &text)
 {
   TRACE_NO_INDENT();
   auto        text_iter = text.begin();
-  int         x         = 0;
   std::string out;
 
   for (;;) {
@@ -956,7 +955,6 @@ std::string ascii_strip(std::string const &text)
       }
     }
     out += ch;
-    x++;
   }
   return out;
 }
