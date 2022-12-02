@@ -6,16 +6,8 @@
 // REMOVED #include <math.h>
 // REMOVED #include <vector>
 
-// REMOVED #include "my_backtrace.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
-// REMOVED #include "my_particle.hpp"
-// REMOVED #include "my_point.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
-// REMOVED #include "my_tile.hpp"
 
 bool Thing::particle_anim_exists(void) { return has_internal_particle || has_external_particle; }
 

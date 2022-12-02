@@ -3,14 +3,12 @@
 //
 
 #include "my_py_level.hpp"
-// REMOVED #include "my_py_thing.hpp"
 // REMOVED #include <frameobject.h>
 // REMOVED #include <map>
 
 #include "my_callstack.hpp"
 #include "my_main.hpp"
 #include "my_ptrcheck.hpp"
-// REMOVED #include "my_python.hpp"
 
 char *py_obj_to_string(const PyObject *py_str)
 {

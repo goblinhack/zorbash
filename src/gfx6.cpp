@@ -2,7 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include "my_gfx.hpp"
 #include "my_tile.hpp"
 #include "my_ui.hpp"
 

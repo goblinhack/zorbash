@@ -6,10 +6,7 @@
 #ifndef _MY_LASER_HPP_
 #define _MY_LASER_HPP_
 
-// REMOVED #include "my_main.hpp"
-// REMOVED #include "my_point.hpp"
 #include "my_thing_id.hpp"
-// REMOVED #include "my_tile.hpp"
 
 class LaserInfo
 {

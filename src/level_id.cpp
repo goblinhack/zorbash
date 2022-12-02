@@ -3,10 +3,6 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_thing.hpp"
-// REMOVED #include "my_world.hpp"
 
 //
 // Find an existing thing.

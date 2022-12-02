@@ -10,8 +10,6 @@
 #include "my_dmap.hpp"
 #include "my_dungeon_grid.hpp"
 #include "my_main.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
 #include <list>
 
 static bool debug_enabled = false;

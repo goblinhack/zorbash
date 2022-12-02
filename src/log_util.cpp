@@ -3,7 +3,6 @@
 //
 
 #include "my_ascii.hpp"
-// REMOVED #include "my_log.hpp"
 
 void putf(FILE *fp, const char *s)
 {

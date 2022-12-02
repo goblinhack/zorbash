@@ -5,14 +5,11 @@
 // REMOVED #include <SDL.h>
 
 #include "my_backtrace.hpp"
-// REMOVED #include "my_color.hpp"
 #include "my_color_defs.hpp"
-// REMOVED #include "my_sdl_proto.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_ui.hpp"
 #include "my_vector_bounds_check.hpp"
-// REMOVED #include "my_wid.hpp"
 #include "my_wid_text_box.hpp"
 // REMOVED #include "slre.hpp"
 

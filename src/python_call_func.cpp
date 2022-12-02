@@ -3,13 +3,11 @@
 //
 
 #include "my_py_level.hpp"
-// REMOVED #include "my_py_thing.hpp"
 // REMOVED #include <frameobject.h>
 // REMOVED #include <map>
 
 #include "my_callstack.hpp"
 #include "my_main.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 
 void py_call_void(const char *name)

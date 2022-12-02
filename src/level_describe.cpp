@@ -4,19 +4,9 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_globals.hpp"
-// REMOVED #include "my_main.hpp"
-// REMOVED #include "my_monst.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
-// REMOVED #include "my_sdl_event.hpp"
 #include "my_sdl_proto.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_template.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
-// REMOVED #include "my_tile.hpp"
-// REMOVED #include "my_wid_bag.hpp"
-// REMOVED #include "my_wid_inventory.hpp"
 #include "my_wid_thing_info.hpp"
 
 void Level::describe(point p)

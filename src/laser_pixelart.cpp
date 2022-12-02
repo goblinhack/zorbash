@@ -8,15 +8,8 @@
 
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
-// REMOVED #include "my_laser.hpp"
 #include "my_math.hpp"
-// REMOVED #include "my_point.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
-// REMOVED #include "my_tile.hpp"
 #include "my_vector_bounds_check.hpp"
 
 void Level::display_pixelart_lasers(point tl, point br)

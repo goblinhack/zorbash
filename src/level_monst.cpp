@@ -2,16 +2,8 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include "my_array_bounds_check.hpp"
 #include "my_dungeon.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_globals.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_thing.hpp"
-// REMOVED #include "my_thing_ai.hpp"
-// REMOVED #include "my_thing_template.hpp"
 
 static Tpidmap tp_monst[ BIOME_MAX ][ MONST_TYPE_MAX ][ MONST_CLASS_MAX ];
 

@@ -2,13 +2,8 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include "my_dungeon.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_wid_actionbar.hpp"
 
 void Game::save_snapshot_check(void)
 {

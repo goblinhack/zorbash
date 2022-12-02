@@ -4,9 +4,7 @@
 
 #include "my_game.hpp"
 #include "my_sdl_proto.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_ui.hpp"
-// REMOVED #include "my_wid_notice.hpp"
 #include "my_wid_popup.hpp"
 
 static WidPopup *wid_notice_window;

@@ -9,9 +9,7 @@
 
 #include "my_depth.hpp"
 #include "my_dungeon_grid.hpp"
-// REMOVED #include "my_fwd.hpp"
 #include "my_game_defs.hpp"
-// REMOVED #include "my_point.hpp"
 
 #define STRINGIFY(x) #x
 #define TOSTRING(x)  STRINGIFY(x)

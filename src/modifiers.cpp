@@ -3,10 +3,6 @@
 //
 
 #include "my_dice.hpp"
-// REMOVED #include "my_main.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_string.hpp"
-// REMOVED #include "my_sys.hpp"
 
 // Roll -30 -> bonus -20
 // Roll -29 -> bonus -19

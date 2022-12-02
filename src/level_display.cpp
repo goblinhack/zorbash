@@ -2,19 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include "my_array_bounds_check.hpp"
-// REMOVED #include "my_depth.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
-// REMOVED #include "my_globals.hpp"
-// REMOVED #include "my_laser.hpp"
-// REMOVED #include "my_projectile.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_tex.hpp"
-// REMOVED #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
-// REMOVED #include "my_tile.hpp"
 
 //
 // Periodic updates

@@ -7,10 +7,8 @@
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_string.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_ui.hpp"
-// REMOVED #include "my_vector_bounds_check.hpp"
 #include "my_wid_leftbar.hpp"
 #include "my_wid_thing_info.hpp"
 

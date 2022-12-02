@@ -2,17 +2,12 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include "my_array_bounds_check.hpp"
 #include "my_depth.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_player.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
-// REMOVED #include "my_python.hpp"
-// REMOVED #include "my_random.hpp"
 #include "my_sdl_event.hpp"
 #include "my_sdl_proto.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_wid_actionbar.hpp"
 #include "my_wid_console.hpp"

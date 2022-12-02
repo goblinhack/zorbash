@@ -3,18 +3,13 @@
 //
 
 #include "my_array_bounds_check.hpp"
-// REMOVED #include "my_backtrace.hpp"
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
 #include "my_light.hpp"
 #include "my_math.hpp"
 #include "my_ptrcheck.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_tex.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
 #include "my_vector_bounds_check.hpp"
 
 static Texp g_light_overlay_tex;

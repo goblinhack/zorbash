@@ -6,7 +6,6 @@
 void    wid_skillbox_fini(void);
 uint8_t wid_skillbox_init(void);
 
-// REMOVED #include "my_wid.hpp"
 
 //
 // Global widgets.

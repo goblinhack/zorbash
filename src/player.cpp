@@ -3,12 +3,7 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_player.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_thing_info.hpp"
 

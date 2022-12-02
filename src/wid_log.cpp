@@ -2,13 +2,10 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include "my_globals.hpp"
 #include "my_globals_extra.hpp"
 #include "my_log.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_string.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_time.hpp"
 #include "my_wid.hpp"
 
 static void wid_log_(Widp w, const char *fmt, va_list args)

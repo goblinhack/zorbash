@@ -3,7 +3,6 @@
 //
 
 #pragma once
-// REMOVED #include "my_point.hpp"
 
 void    wid_botcon_fini(void);
 uint8_t wid_botcon_init(void);
@@ -12,7 +11,6 @@ void    wid_botcon_log(std::string s);
 void    wid_botcon_flush(void);
 void    wid_botcon_clear(void);
 
-// REMOVED #include "my_wid.hpp"
 
 //
 // Global widgets.

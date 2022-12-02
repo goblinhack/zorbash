@@ -3,7 +3,6 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_sys.hpp"
 
 void Game::fini(void)
 {

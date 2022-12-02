@@ -3,17 +3,12 @@
 //
 
 #include "my_py_level.hpp"
-// REMOVED #include "my_py_thing.hpp"
-// REMOVED #include "my_py_tp.hpp"
 // REMOVED #include <frameobject.h>
 // REMOVED #include <map>
 
 #include "my_callstack.hpp"
 #include "my_main.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_string.hpp"
 
 std::vector< std::string > py_call_std_vector_string_fn(const char *module, const char *name, int val1, int val2,
                                                         int val3, int val4)

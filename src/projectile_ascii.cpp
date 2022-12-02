@@ -8,14 +8,7 @@
 
 #include "my_ascii.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
-// REMOVED #include "my_point.hpp"
-// REMOVED #include "my_projectile.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
-// REMOVED #include "my_tile.hpp"
 #include "my_vector_bounds_check.hpp"
 
 void Level::display_ascii_projectiles(point tl, point br)

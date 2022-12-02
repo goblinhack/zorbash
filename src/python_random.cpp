@@ -3,16 +3,10 @@
 //
 
 #include "my_py_level.hpp"
-// REMOVED #include "my_py_thing.hpp"
-// REMOVED #include "my_py_tp.hpp"
 // REMOVED #include <frameobject.h>
 // REMOVED #include <map>
 
-// REMOVED #include "my_ascii.hpp"
 #include "my_callstack.hpp"
-// REMOVED #include "my_main.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
-// REMOVED #include "my_python.hpp"
 #include "my_random.hpp"
 
 PyObject *pcg_randint(PyObject *obj, PyObject *args, PyObject *keywds)

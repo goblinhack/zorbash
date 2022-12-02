@@ -14,7 +14,6 @@
 
 #include "my_backtrace.hpp"
 #include "my_callstack.hpp"
-// REMOVED #include "my_globals.hpp"
 #include "my_main.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_sprintf.hpp"

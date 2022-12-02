@@ -6,7 +6,6 @@
 #ifndef _MY_UI_WID_BAG_HPP_
 #define _MY_UI_WID_BAG_HPP_
 
-// REMOVED #include "my_wid.hpp"
 
 class WidBag
 {

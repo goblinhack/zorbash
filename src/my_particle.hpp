@@ -7,10 +7,7 @@
 #define _MY_PARTICLE_HPP_
 
 #include "my_callback.hpp"
-// REMOVED #include "my_main.hpp"
-// REMOVED #include "my_point.hpp"
 #include "my_size.hpp"
-// REMOVED #include "my_thing_id.hpp"
 
 using Particle = class Particle_
 {

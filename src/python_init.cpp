@@ -3,23 +3,13 @@
 //
 
 #include "my_py_level.hpp"
-// REMOVED #include "my_py_thing.hpp"
-// REMOVED #include "my_py_tp.hpp"
 // REMOVED #include <frameobject.h>
 #include <map>
 
 #include "my_callstack.hpp"
 #include "my_main.hpp"
-// REMOVED #include "my_monst.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
 #include "my_py_sdl.hpp"
-// REMOVED #include "my_python.hpp"
-// REMOVED #include "my_random.hpp"
 #include "my_sdl_proto.hpp"
-// REMOVED #include "my_sound.hpp"
-// REMOVED #include "my_string.hpp"
-// REMOVED #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
 
 PyObject *my_mod;
 

@@ -6,28 +6,16 @@
 // REMOVED #include <map>
 
 #include "my_array_bounds_check.hpp"
-// REMOVED #include "my_color.hpp"
 #include "my_color_defs.hpp"
-// REMOVED #include "my_dungeon_grid.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
-// REMOVED #include "my_globals_extra.hpp"
-// REMOVED #include "my_main.hpp"
-// REMOVED #include "my_math.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_string.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_template.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_time.hpp"
 #include "my_ui.hpp"
-// REMOVED #include "my_wid.hpp"
 #include "my_wid_actionbar.hpp"
-// REMOVED #include "my_wid_botcon.hpp"
 #include "my_wid_choose_level.hpp"
 #include "my_wid_popup.hpp"
-// REMOVED #include "my_wid_rightbar.hpp"
 #include "my_wid_topcon.hpp"
 
 static int WID_LEVEL_WIDTH_CHARS  = 7;

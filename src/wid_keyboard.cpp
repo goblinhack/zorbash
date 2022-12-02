@@ -4,17 +4,11 @@
 
 // REMOVED #include <SDL.h>
 
-// REMOVED #include "my_color.hpp"
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
-// REMOVED #include "my_main.hpp"
 #include "my_math.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_sdl_event.hpp"
-// REMOVED #include "my_sdl_proto.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_time.hpp"
 #include "my_ui.hpp"
 #include "my_wid.hpp"
 #include "my_wid_keyboard.hpp"

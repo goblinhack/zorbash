@@ -6,7 +6,6 @@
 #define _MY_CALLSTACK_HPP_
 
 #include "my_globals.hpp"
-// REMOVED #include "my_source_loc.hpp"
 #include "my_sys.hpp"
 
 #define CAT(A, B)  A##B

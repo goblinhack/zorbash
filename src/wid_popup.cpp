@@ -4,15 +4,8 @@
 
 // REMOVED #include <SDL.h>
 
-// REMOVED #include "my_sdl_proto.hpp"
-// REMOVED #include "my_string.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_ui.hpp"
-// REMOVED #include "my_wid.hpp"
-// REMOVED #include "my_wid_actionbar.hpp"
-// REMOVED #include "my_wid_inventory.hpp"
 #include "my_wid_popup.hpp"
-// REMOVED #include "my_wid_text_box.hpp"
 // REMOVED #include "slre.hpp"
 
 WidPopup::~WidPopup()

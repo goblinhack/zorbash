@@ -8,7 +8,6 @@
 #include <sstream>   // do not remove
 #include <string>    // do not remove
 
-// REMOVED #include "my_globals.hpp"
 #include "my_main.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_string.hpp"

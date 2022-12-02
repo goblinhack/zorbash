@@ -3,7 +3,6 @@
 //
 
 #include "my_random.hpp"
-// REMOVED #include "my_random_name.hpp"
 #include "my_sys.hpp"
 
 //

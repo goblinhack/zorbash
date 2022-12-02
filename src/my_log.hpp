@@ -6,7 +6,6 @@
 #ifndef _MY_LOG_HPP_
 #define _MY_LOG_HPP_
 
-// REMOVED #include "my_main.hpp"
 
 void putf(FILE *fp, const char *s);
 void topcon_(const char *fmt, va_list args);

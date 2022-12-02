@@ -4,12 +4,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_sound.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_wid.hpp"
 #include "my_wid_thing_info.hpp"
 
 static uint8_t game_mouse_down_(int x, int y, uint32_t button)

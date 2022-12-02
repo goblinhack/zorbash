@@ -4,13 +4,6 @@
 
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_tex.hpp"
-// REMOVED #include "my_thing.hpp"
-// REMOVED #include "my_tile.hpp"
-// REMOVED #include "my_ui.hpp"
 
 void Level::display_pixelart_map_debug(int x, int y)
 {

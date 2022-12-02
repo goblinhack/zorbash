@@ -3,14 +3,7 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_monst.hpp"
-// REMOVED #include "my_sdl_proto.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
-// REMOVED #include "my_ui.hpp"
-// REMOVED #include "my_wid_bag.hpp"
-// REMOVED #include "my_wid_skillbox.hpp"
 #include "my_wid_thing_info.hpp"
 
 void wid_skillbox_fini(void)

@@ -8,10 +8,8 @@
 #include "my_command.hpp"
 #include "my_game.hpp"
 #include "my_sdl_proto.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_ui.hpp"
 #include "my_unicode.hpp"
-// REMOVED #include "my_wid.hpp"
 #include "my_wid_console.hpp"
 // REMOVED #include "slre.hpp"
 

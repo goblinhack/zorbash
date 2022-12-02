@@ -4,7 +4,6 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_level.hpp"
-// REMOVED #include "my_random.hpp"
 
 void Level::tick_gas_poison(void)
 {

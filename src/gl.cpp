@@ -3,10 +3,7 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
 #include "my_ptrcheck.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_thing_template.hpp"
 
 float      glapi_last_tex_right;
 float      glapi_last_tex_bottom;

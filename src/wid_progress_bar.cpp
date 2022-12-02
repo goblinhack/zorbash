@@ -3,10 +3,8 @@
 //
 
 #include "my_sdl_proto.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_ui.hpp"
 #include "my_wid_popup.hpp"
-// REMOVED #include "my_wid_progress_bar.hpp"
 
 static int progress_steps = 32;
 

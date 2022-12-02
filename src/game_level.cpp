@@ -3,23 +3,7 @@
 //
 
 #include "my_array_bounds_check.hpp"
-// REMOVED #include "my_dungeon_grid.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_globals.hpp"
-// REMOVED #include "my_globals_extra.hpp"
-// REMOVED #include "my_level.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_random_name.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_thing.hpp"
-// REMOVED #include "my_wid_actionbar.hpp"
-// REMOVED #include "my_wid_botcon.hpp"
-// REMOVED #include "my_wid_inventory.hpp"
-// REMOVED #include "my_wid_rightbar.hpp"
-// REMOVED #include "my_wid_skillbox.hpp"
-// REMOVED #include "my_wid_thing_info.hpp"
-// REMOVED #include "my_wid_topcon.hpp"
-// REMOVED #include "my_world.hpp"
 
 bool Game::init_level(point3d world_at, point grid_at, int difficulty_depth, int dungeon_walk_order_level_no)
 {

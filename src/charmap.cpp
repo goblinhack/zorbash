@@ -3,7 +3,6 @@
 //
 
 #include "my_charmap.hpp"
-// REMOVED #include "my_sys.hpp"
 
 std::vector< Charmap > Charmap::all_charmaps;
 

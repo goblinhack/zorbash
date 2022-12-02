@@ -45,9 +45,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_level.hpp"
-// REMOVED #include "my_level_fov.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_wid_topcon.hpp"
 
 // Octant transformation matrixes.
 // {xx, xy, yx, yy}

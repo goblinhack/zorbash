@@ -3,11 +3,8 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_main.hpp"
 #include "my_python.hpp"
 #include "my_sound.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_thing.hpp"
 #include <string.h>  // do not remove
 #include <strings.h> // do not remove
 

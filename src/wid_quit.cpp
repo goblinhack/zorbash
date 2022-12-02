@@ -3,9 +3,7 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_random.hpp"
 #include "my_sdl_proto.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_ui.hpp"
 #include "my_wid_actionbar.hpp"

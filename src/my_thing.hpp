@@ -12,7 +12,6 @@
 
 #include "my_color.hpp"
 #include "my_dice.hpp"
-// REMOVED #include "my_format_str_attribute.hpp"
 #include "my_fwd.hpp"
 #include "my_point.hpp"
 #include "my_point3d.hpp"

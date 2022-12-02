@@ -3,16 +3,9 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_random.hpp"
 #include "my_sdl_proto.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_thing.hpp"
 #include "my_ui.hpp"
-// REMOVED #include "my_wid_botcon.hpp"
 #include "my_wid_popup.hpp"
-// REMOVED #include "my_wid_rightbar.hpp"
-// REMOVED #include "my_wid_thing_info.hpp"
-// REMOVED #include "my_wid_topcon.hpp"
 
 static WidPopup *wid_hiscore_window;
 

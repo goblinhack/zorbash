@@ -4,20 +4,12 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_color_defs.hpp"
-// REMOVED #include "my_dmap.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
-// REMOVED #include "my_globals.hpp"
 #include "my_pixel.hpp"
 #include "my_ptrcheck.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_size.hpp"
 #include "my_string.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_template.hpp"
 #include "my_tex.hpp"
-// REMOVED #include "my_thing_template.hpp"
-// REMOVED #include "my_tile.hpp"
 
 std::map< std::string, class Tile * > all_tiles;
 std::vector< class Tile * >           all_tiles_array;

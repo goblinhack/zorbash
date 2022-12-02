@@ -8,8 +8,6 @@
 
 #include "my_dice.hpp"
 #include "my_format_str_attribute.hpp"
-// REMOVED #include "my_fwd.hpp"
-// REMOVED #include "my_size.hpp"
 #include "my_thing_defs.hpp"
 #include "my_tile.hpp"
 #include <map>

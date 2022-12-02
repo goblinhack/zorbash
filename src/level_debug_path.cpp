@@ -2,17 +2,8 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include "my_array_bounds_check.hpp"
-// REMOVED #include "my_dmap.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
-// REMOVED #include "my_globals.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_tex.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
-// REMOVED #include "my_tile.hpp"
 
 void Level::debug_path_draw_line(const std::vector< point > &move_path)
 {

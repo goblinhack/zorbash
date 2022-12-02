@@ -3,23 +3,14 @@
 //
 
 #include "my_py_level.hpp"
-// REMOVED #include "my_py_thing.hpp"
-// REMOVED #include "my_py_tp.hpp"
 // REMOVED #include <frameobject.h>
 // REMOVED #include <map>
 
-// REMOVED #include "my_ascii.hpp"
 #include "my_callstack.hpp"
 #include "my_main.hpp"
-// REMOVED #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_py_sdl.hpp"
-// REMOVED #include "my_python.hpp"
-// REMOVED #include "my_sdl_event.hpp"
-// REMOVED #include "my_sound.hpp"
 #include "my_string.hpp"
-// REMOVED #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
 
 void py_exec(const char *str)
 {

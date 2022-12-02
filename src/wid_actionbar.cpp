@@ -4,22 +4,13 @@
 
 // REMOVED #include <SDL_mixer.h>
 
-// REMOVED #include "my_backtrace.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_main.hpp"
-// REMOVED #include "my_monst.hpp"
 #include "my_sdl_proto.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
 #include "my_ui.hpp"
-// REMOVED #include "my_wid.hpp"
 #include "my_wid_actionbar.hpp"
 #include "my_wid_inventory.hpp"
-// REMOVED #include "my_wid_popup.hpp"
 #include "my_wid_popups.hpp"
-// REMOVED #include "my_wid_rightbar.hpp"
-// REMOVED #include "my_wid_skillbox.hpp"
 #include "my_wid_thing_info.hpp"
 
 static Widp      wid_actionbar;

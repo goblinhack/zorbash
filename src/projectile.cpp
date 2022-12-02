@@ -7,15 +7,7 @@
 // REMOVED #include <vector>
 
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
-// REMOVED #include "my_point.hpp"
-// REMOVED #include "my_projectile.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
-// REMOVED #include "my_tile.hpp"
-// REMOVED #include "my_vector_bounds_check.hpp"
 
 Projectile_::Projectile_(Levelp level, ThingId thing_id, ThingId victim_id, ProjectileInfo info)
     : id(thing_id), victim_id(victim_id), info(info)

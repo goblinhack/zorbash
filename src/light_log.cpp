@@ -5,13 +5,11 @@
 #include "my_backtrace.hpp"
 #include "my_console.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_globals.hpp"
 #include "my_globals_extra.hpp"
 #include "my_light.hpp"
 #include "my_log.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_string.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_wid_console.hpp"
 
 void Light::log_(const char *fmt, va_list args)

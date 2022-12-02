@@ -2,19 +2,11 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include "my_array_bounds_check.hpp"
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
-// REMOVED #include "my_player.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
-// REMOVED #include "my_random.hpp"
 #include "my_sdl_event.hpp"
 #include "my_sdl_proto.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_tile.hpp"
 #include "my_ui.hpp"
-// REMOVED #include "my_wid_asciimap.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_topcon.hpp"
 // REMOVED #include "stb_image_write.hpp"

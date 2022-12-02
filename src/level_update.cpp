@@ -2,12 +2,8 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include "my_dungeon.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
 #include "my_sdl_proto.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_thing.hpp"
 
 //
 // New or loaded level

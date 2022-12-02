@@ -3,12 +3,6 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_monst.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
-// REMOVED #include "my_string.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_thing.hpp"
-// REMOVED #include "my_ui.hpp"
 #include "my_wid_leftbar.hpp"
 #include "my_wid_popup.hpp"
 

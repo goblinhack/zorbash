@@ -2,7 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include "my_backtrace.hpp"
 #include "my_game.hpp"
 
 void Game::set_request_reset_state_change(void)

@@ -6,7 +6,6 @@
 #include "my_ptrcheck.hpp"
 #include "my_range.hpp"
 #include "my_room.hpp"
-// REMOVED #include "my_thing.hpp"
 #include "my_vector_bounds_check.hpp"
 
 std::vector< Roomp > Room::all_rooms;

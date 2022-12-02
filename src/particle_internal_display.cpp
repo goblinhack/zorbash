@@ -6,18 +6,10 @@
 // REMOVED #include <math.h>
 // REMOVED #include <vector>
 
-// REMOVED #include "my_backtrace.hpp"
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
 #include "my_math.hpp"
-// REMOVED #include "my_particle.hpp"
-// REMOVED #include "my_point.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
-// REMOVED #include "my_tile.hpp"
 
 void Level::display_pixelart_internal_particles(void)
 {

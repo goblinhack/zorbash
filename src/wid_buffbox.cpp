@@ -3,12 +3,6 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_monst.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_thing.hpp"
-// REMOVED #include "my_ui.hpp"
-// REMOVED #include "my_wid_bag.hpp"
-// REMOVED #include "my_wid_buffbox.hpp"
 #include "my_wid_thing_info.hpp"
 
 void wid_buffbox_fini(void)

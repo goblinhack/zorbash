@@ -3,10 +3,8 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_globals.hpp"
 #include "my_sdl_proto.hpp"
 #include "my_sound.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_ui.hpp"
 #include "my_wid_popup.hpp"
 

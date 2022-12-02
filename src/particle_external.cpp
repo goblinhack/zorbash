@@ -6,16 +6,8 @@
 // REMOVED #include <math.h>
 // REMOVED #include <vector>
 
-// REMOVED #include "my_backtrace.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
-// REMOVED #include "my_particle.hpp"
-// REMOVED #include "my_point.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
-// REMOVED #include "my_tile.hpp"
 
 void Level::new_external_particle(ThingId id, point start, point stop, isize sz, uint32_t dur, const Tilep tile,
                                   bool hflip, MyCallback callback)

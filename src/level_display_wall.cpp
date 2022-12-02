@@ -2,11 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include "my_font.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_tex.hpp"
 #include "my_thing.hpp"
 
 void Thing::blit_wall_cladding(point tl, point br, const ThingTiles *tiles)

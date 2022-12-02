@@ -3,21 +3,12 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_main.hpp"
 #include "my_monst.hpp"
 #include "my_sdl_proto.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
-// REMOVED #include "my_tile.hpp"
 #include "my_ui.hpp"
 #include "my_wid_actionbar.hpp"
-// REMOVED #include "my_wid_bag.hpp"
-// REMOVED #include "my_wid_botcon.hpp"
-// REMOVED #include "my_wid_console.hpp"
-// REMOVED #include "my_wid_popup.hpp"
 #include "my_wid_thing_info.hpp"
-// REMOVED #include "my_wid_topcon.hpp"
 
 WidPopup                    *wid_collect;
 static std::vector< Thingp > collect_items;

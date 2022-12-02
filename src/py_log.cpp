@@ -2,11 +2,8 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include "my_file.hpp"
-// REMOVED #include "my_globals.hpp"
 #include "my_globals_extra.hpp"
 #include "my_log.hpp"
-// REMOVED #include "my_main.hpp"
 #include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"

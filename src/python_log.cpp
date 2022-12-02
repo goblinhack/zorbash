@@ -5,19 +5,8 @@
 #include "my_callstack.hpp"
 #include "my_globals_extra.hpp"
 #include "my_main.hpp"
-// REMOVED #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
-// REMOVED #include "my_py_level.hpp"
 #include "my_py_sdl.hpp"
-// REMOVED #include "my_py_thing.hpp"
-// REMOVED #include "my_py_tp.hpp"
-// REMOVED #include "my_python.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_sdl_event.hpp"
-// REMOVED #include "my_sound.hpp"
-// REMOVED #include "my_string.hpp"
-// REMOVED #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
 #include <frameobject.h>
 // REMOVED #include <map>
 

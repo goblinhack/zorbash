@@ -7,7 +7,6 @@
 #define _MY_THING_AI_H
 
 #include "my_dmap.hpp"
-// REMOVED #include "my_fwd.hpp"
 #include <set>
 
 typedef struct AgeMap_ *AgeMapp;

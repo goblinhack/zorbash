@@ -2,14 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include "my_backtrace.hpp"
-// REMOVED #include "my_color.hpp"
-// REMOVED #include "my_dmap.hpp"
-// REMOVED #include "my_globals.hpp"
 #include "my_level.hpp"
-// REMOVED #include "my_main.hpp"
-// REMOVED #include "my_sprintf.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 // REMOVED #include <cinttypes> // PRIX32
 

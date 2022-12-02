@@ -5,9 +5,7 @@
 // REMOVED #include <SDL.h>
 
 #include "my_color_defs.hpp"
-// REMOVED #include "my_game.hpp"
 #include "my_string.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_ui.hpp"
 #include "my_wid.hpp"
 #include "my_wid_botcon.hpp"
