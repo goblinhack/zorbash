@@ -68,54 +68,12 @@ sys.stderr = catchOutErr\n\
 void py_add_to_path(const char *path)
 {
   TRACE_AND_INDENT();
-  PyObject *py_cur_path, *py_item;
-  char     *new_path;
-  int       wc_len, i;
-  wchar_t  *wc_new_path;
-  char     *item;
 
-  DBG3("Current system python path: (adding %s)", path);
+  CON("Add python path: %s", path);
 
-  new_path    = dupstr(path, __FUNCTION__);
-  py_cur_path = PySys_GetObject("path");
-
-  for (i = 0; i < PyList_Size(py_cur_path); i++) {
-    char *tmp = strappend(new_path, PATHSEP);
-    myfree(new_path);
-    new_path = tmp;
-
-    py_item = PyList_GetItem(py_cur_path, i);
-
-    if (! PyUnicode_Check(py_item)) {
-      continue;
-    }
-
-    item = py_obj_to_string(py_item);
-    if (! item) {
-      continue;
-    }
-
-    DBG3("  %s", item);
-
-    tmp = strappend(new_path, item);
-    myfree(new_path);
-    new_path = tmp;
-
-    myfree(item);
-  }
-
-  /* Convert to wide chars. */
-  wc_len = sizeof(wchar_t) * (strlen(new_path) + 1);
-
-  wc_new_path = (wchar_t *) myzalloc(wc_len, "wchar str");
-  if (! wc_new_path) {
-    ERR("Path alloc fail");
-  }
-
-  DBG3("Set python path: %s", new_path);
-
-  mbstowcs(wc_new_path, new_path, wc_len);
-  PySys_SetPath(wc_new_path);
-  myfree(new_path);
-  myfree(wc_new_path);
+  std::string cmd = "import sys\n";
+  cmd += "sys.path.append('";
+  cmd += std::string(path);
+  cmd += "')\n";
+  PyRun_SimpleString(cmd.c_str());
 }

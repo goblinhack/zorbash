@@ -22,10 +22,8 @@ void Thing::update_light(void)
     return;
   }
 
-  size_t c = 0;
   for (auto l : light_get()) {
     l->cached_light_pos = point(-1, -1);
-    c++;
   }
 }
 

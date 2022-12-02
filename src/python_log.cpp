@@ -168,10 +168,11 @@ void py_err(void)
 
   PyErr_Clear();
 
+#if 0
   PyThreadState *tstate = PyThreadState_GET();
 
-  if (tstate && tstate->frame) {
-    PyFrameObject *frame = tstate->frame;
+  if (tstate && tstate->cframe) {
+    PyFrameObject *frame = tstate->cframe;
 
     ERR("Python stack trace:\n");
 
@@ -185,6 +186,8 @@ void py_err(void)
       myfree(funcname);
     }
   }
+#endif
+
   ERR("Python error");
 }
 
@@ -196,6 +199,7 @@ void py_trace(void)
     return;
   }
 
+#if 0
   PyThreadState *tstate = PyThreadState_GET();
   if (tstate && tstate->frame) {
     PyFrameObject *frame = tstate->frame;
@@ -214,4 +218,5 @@ void py_trace(void)
       myfree(funcname);
     }
   }
+#endif
 }

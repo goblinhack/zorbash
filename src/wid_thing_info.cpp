@@ -580,7 +580,6 @@ bool Game::wid_thing_info_create_list(std::vector< Thingp > &ts)
   bool ok = false;
 
   if (! compact) {
-    int i = 0;
     for (auto t : ts) {
       if (t->text_description_long().empty()) {
         continue;
@@ -601,7 +600,6 @@ bool Game::wid_thing_info_create_list(std::vector< Thingp > &ts)
         }
       }
 
-      i++;
       if (! wid_thing_info_push_popup(t)) {
         IF_DEBUG1 { t->log("Failed to push item"); }
         wid_thing_info_fini("failed to push item");
