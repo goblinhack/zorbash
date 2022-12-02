@@ -7,7 +7,6 @@
 
 import collections
 import pathlib
-import math
 import re
 import os
 import sys
@@ -95,6 +94,7 @@ for record_number, (folder, filenames) in enumerate(sorted(files.items())):
         rel_path_filename = os.path.join(folder, orig_filename)
 
         with open("src/ramdisk_data_{}.S".format(ram_file), "a") as myfile:
+            # myfile.write(".note.GNU-stack\n")
             myfile.write(".align 4\n")
             myfile.write(".globl data_{}_start_\n".format(c_filename))
             myfile.write("data_{}_start_:\n".format(c_filename))
@@ -108,7 +108,7 @@ for record_number, (folder, filenames) in enumerate(sorted(files.items())):
 # This file references the assembly above to allow for easy loading of
 # the files
 #
-with open("src/ramdisk_data.cpp".format(ram_file), "w") as myfile:
+with open("src/ramdisk_data.cpp", "w") as myfile:
     myfile.write('#include "my_ramdisk.hpp"')
     myfile.write("\n")
     myfile.write("\n")
@@ -130,8 +130,8 @@ with open("src/ramdisk_data.cpp".format(ram_file), "w") as myfile:
             myfile.write("    {\n")
             myfile.write('        extern unsigned char *data_{}_start_\n           asm("data_{}_start_");\n'.format(c_filename, c_filename))
             myfile.write('        extern unsigned char *data_{}_end_\n           asm("data_{}_end_");\n'.format(c_filename, c_filename))
-            myfile.write("        static const unsigned char *const start =\n           (const unsigned char *const) (char*)&data_{}_start_;\n".format(c_filename, c_filename))
-            myfile.write("        static const unsigned char *const end   =\n           (const unsigned char *const) (char*)&data_{}_end_;\n".format(c_filename, c_filename))
+            myfile.write("        static const unsigned char *const start =\n           (const unsigned char *const) (char*)&data_{}_start_;\n".format(c_filename))
+            myfile.write("        static const unsigned char *const end   =\n           (const unsigned char *const) (char*)&data_{}_end_;\n".format(c_filename))
             myfile.write("        ramdisk_t r;\n")
             myfile.write("        r.data = start;\n")
             myfile.write("        r.len = end - start;\n")
