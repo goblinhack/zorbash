@@ -151,7 +151,7 @@ void py_err(void)
   ERR("%s", py_str);
   myfree(py_str);
 
-  mod  = PyImport_ImportModule("backtrace");
+  mod  = PyImport_ImportModule("traceback");
   list = PyObject_CallMethod(mod, "format_exception", "OOO", ptype, pvalue, pbacktrace);
   if (list) {
     string = PyUnicode_FromString("\n");
@@ -168,26 +168,6 @@ void py_err(void)
 
   PyErr_Clear();
 
-#if 0
-  PyThreadState *tstate = PyThreadState_GET();
-
-  if (tstate && tstate->cframe) {
-    PyFrameObject *frame = tstate->cframe;
-
-    ERR("Python stack trace:\n");
-
-    while (frame) {
-      int   line     = frame->f_lineno;
-      char *filename = py_obj_to_string(frame->f_code->co_filename);
-      char *funcname = py_obj_to_string(frame->f_code->co_name);
-      ERR("    %s(%d): %s\n", filename, line, funcname);
-      frame = frame->f_back;
-      myfree(filename);
-      myfree(funcname);
-    }
-  }
-#endif
-
   ERR("Python error");
 }
 
@@ -195,28 +175,10 @@ void py_trace(void)
 {
   TRACE_AND_INDENT();
 
-  if (! my_mod) {
-    return;
-  }
-
-#if 0
-  PyThreadState *tstate = PyThreadState_GET();
-  if (tstate && tstate->frame) {
-    PyFrameObject *frame = tstate->frame;
-
-    CON("Python stack trace:");
-
-    int cnt = 1;
-
-    while (frame) {
-      int   line     = frame->f_lineno;
-      char *filename = py_obj_to_string(frame->f_code->co_filename);
-      char *funcname = py_obj_to_string(frame->f_code->co_name);
-      CON(">>> %d. %s, line %d, %s()", cnt++, filename, line, funcname);
-      frame = frame->f_back;
-      myfree(filename);
-      myfree(funcname);
-    }
-  }
-#endif
+  //
+  // Calling py_err seems to suffice
+  //
+  // py_exec("import traceback\nprint(traceback.format_exc())\n");
+  //
+  py_err();
 }
