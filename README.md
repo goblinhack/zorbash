@@ -348,11 +348,12 @@ Pixelart Screenshots
 How to build
 ------------
 
-- On Linux: (Ubuntu 22.10)
+- On Linux: (Ubuntu 22.10, Fedora 37 + Python 3.11)
 <pre>
     sh ./RUNME
 </pre>
-- On MacOS (needs Mac Ports/Homebrew). Does not work with anaconda (help wanted):
+- On MacOS (needs Mac Ports/Homebrew).
+- Does not work with anaconda (help wanted as I do not use anaconda):
 <pre>
     sh ./RUNME
 </pre>
@@ -379,7 +380,7 @@ this PC working on.
 
 Dependancies
 ------------
-OpenGL, SDL2 and Python3 is needed.
+OpenGL, SDL2 and Python3 (tested up to 3.11) is needed.
 
 <!-- In days of old, The Zorbashian Empire discovered the Earth and they wrought much rage -->
 <!-- upon her verdant soils. Their wrath was mighty and left the world scarred and in darkness. -->
