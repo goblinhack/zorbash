@@ -112,6 +112,12 @@ void Game::place_player(void)
         auto w = level->thing_new("shovel", point(x, y));
         t->carry(w);
       }
+      if (1) {
+        auto r1 = level->thing_new("ring_negation_resist", point(x, y));
+        t->carry(r1);
+        auto r2 = level->thing_new("ring_poison_resist", point(x, y));
+        t->carry(r2);
+      }
       if (0) {
         auto r1 = level->thing_new("ring_shield", point(x, y));
         t->carry(r1);
@@ -195,7 +201,7 @@ void Game::place_player(void)
         auto w = level->thing_new("map_beast", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         level->thing_new("staff_negation", point(x + 1, y + 1));
         auto w = level->thing_new("staff_negation", point(x, y));
         t->carry(w);

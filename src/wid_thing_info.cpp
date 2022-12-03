@@ -1460,7 +1460,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
           w->log(tmp);
         }
       }
-    } else {
+    } else if (ac) {
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense                   %3d", ac);
       w->log(tmp);
     }
@@ -1911,6 +1911,10 @@ void Game::wid_thing_info_add_charge_count(WidPopup *w, Thingp t)
 
   auto player = game->level->player;
   if (! player) {
+    return;
+  }
+
+  if (t->is_ring()) {
     return;
   }
 

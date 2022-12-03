@@ -567,7 +567,7 @@ def init_tiles_16x16():
         "buff_fire_resist",
         "buff_cold_resist",
         "buff_full",
-        "",
+        "buff_negation_resist",
         "",
         "",
         "",
