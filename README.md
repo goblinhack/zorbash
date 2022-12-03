@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - two rings only one visible                                                                                                                 -->
 <!-- - ring of negation protection                                                                                                                -->
 <!-- - falling in block of ice should fall together                                                                                               -->
 <!-- - some weapons crit more                                                                                                                     -->
