@@ -94,7 +94,6 @@ for record_number, (folder, filenames) in enumerate(sorted(files.items())):
         rel_path_filename = os.path.join(folder, orig_filename)
 
         with open("src/ramdisk_data_{}.S".format(ram_file), "a") as myfile:
-            # myfile.write(".note.GNU-stack\n")
             myfile.write(".align 4\n")
             myfile.write(".globl data_{}_start_\n".format(c_filename))
             myfile.write("data_{}_start_:\n".format(c_filename))
@@ -104,9 +103,13 @@ for record_number, (folder, filenames) in enumerate(sorted(files.items())):
             myfile.write("data_{}_end_:\n".format(c_filename))
             myfile.write("\n")
 
-for ram_file in range(number_of_ramdisk_files):
-    with open("src/ramdisk_data_{}.S".format(ram_file), "a") as myfile:
-        myfile.write("\n.section .note.GNU-stack,\"\",%progbits\n")
+#
+# This wierd thing appears harmless but is a warning. Not sure how to check for it.
+#
+if sys.platform == "linux":
+    for ram_file in range(number_of_ramdisk_files):
+        with open("src/ramdisk_data_{}.S".format(ram_file), "a") as myfile:
+            myfile.write("\n.section .note.GNU-stack,\"\",%progbits\n")
 
 #
 # This file references the assembly above to allow for easy loading of
