@@ -7,6 +7,7 @@
 #include "my_ptrcheck.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
+#include <stdarg.h> // do not remove
 
 void Thing::dead_(Thingp defeater, const char *fmt, va_list args)
 {

@@ -7,7 +7,8 @@
 #include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_time.hpp"
-#include <cstring>
+#include <cstring>  // do not remove
+#include <stdarg.h> // do not remove
 
 static void file_log_(const char *fmt, va_list args)
 {
