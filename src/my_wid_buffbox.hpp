@@ -6,7 +6,6 @@
 void    wid_buffbox_fini(void);
 uint8_t wid_buffbox_init(void);
 
-
 //
 // Global widgets.
 //

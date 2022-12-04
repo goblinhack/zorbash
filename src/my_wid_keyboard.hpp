@@ -4,7 +4,6 @@
 
 #pragma once
 
-
 typedef void (*wid_keyboard_event_t)(Widp, const std::wstring &text);
 
 #define WID_KEYBOARD_ACROSS 12

@@ -6,7 +6,7 @@
 #include "my_monst.hpp"
 #include "my_thing.hpp"
 
-bool Thing::buff_find_is_slippery(void)
+bool Thing::buff_is_slippery(void)
 {
   TRACE_NO_INDENT();
 
@@ -26,7 +26,7 @@ bool Thing::buff_find_is_slippery(void)
   return false;
 }
 
-bool Thing::buff_find_is_aquatic(void)
+bool Thing::buff_is_aquatic(void)
 {
   TRACE_NO_INDENT();
 
@@ -60,7 +60,7 @@ bool Thing::buff_find_is_aquatic(void)
   return false;
 }
 
-bool Thing::buff_find_is_fire_resist(void)
+bool Thing::buff_is_immune_to_fire(void)
 {
   TRACE_NO_INDENT();
 
@@ -94,7 +94,7 @@ bool Thing::buff_find_is_fire_resist(void)
   return false;
 }
 
-bool Thing::buff_find_is_cold_resist(void)
+bool Thing::buff_is_immune_to_cold(void)
 {
   TRACE_NO_INDENT();
 
@@ -119,6 +119,176 @@ bool Thing::buff_find_is_cold_resist(void)
       auto iter = level->thing_find(item.id);
       if (iter) {
         if (iter->is_immune_to_cold()) {
+          return true;
+        }
+      }
+    }
+  }
+
+  return false;
+}
+
+bool Thing::buff_is_immune_to_poison(void)
+{
+  TRACE_NO_INDENT();
+
+  if (! maybe_itemsp()) {
+    return false;
+  }
+
+  FOR_ALL_BUFFS(id)
+  {
+    auto t = level->thing_find(id);
+    if (t) {
+      if (t->is_immune_to_poison()) {
+        return true;
+      }
+    }
+  }
+
+  auto owner = top_owner();
+  if (owner) {
+    FOR_ALL_BUFFS_FOR(owner, item)
+    {
+      auto iter = level->thing_find(item.id);
+      if (iter) {
+        if (iter->is_immune_to_poison()) {
+          return true;
+        }
+      }
+    }
+  }
+
+  return false;
+}
+
+bool Thing::buff_is_immune_to_negation(void)
+{
+  TRACE_NO_INDENT();
+
+  if (! maybe_itemsp()) {
+    return false;
+  }
+
+  FOR_ALL_BUFFS(id)
+  {
+    auto t = level->thing_find(id);
+    if (t) {
+      if (t->is_immune_to_negation()) {
+        return true;
+      }
+    }
+  }
+
+  auto owner = top_owner();
+  if (owner) {
+    FOR_ALL_BUFFS_FOR(owner, item)
+    {
+      auto iter = level->thing_find(item.id);
+      if (iter) {
+        if (iter->is_immune_to_negation()) {
+          return true;
+        }
+      }
+    }
+  }
+
+  return false;
+}
+
+bool Thing::buff_is_immune_to_water(void)
+{
+  TRACE_NO_INDENT();
+
+  if (! maybe_itemsp()) {
+    return false;
+  }
+
+  FOR_ALL_BUFFS(id)
+  {
+    auto t = level->thing_find(id);
+    if (t) {
+      if (t->is_immune_to_water()) {
+        return true;
+      }
+    }
+  }
+
+  auto owner = top_owner();
+  if (owner) {
+    FOR_ALL_BUFFS_FOR(owner, item)
+    {
+      auto iter = level->thing_find(item.id);
+      if (iter) {
+        if (iter->is_immune_to_water()) {
+          return true;
+        }
+      }
+    }
+  }
+
+  return false;
+}
+
+bool Thing::buff_is_immune_to_draining(void)
+{
+  TRACE_NO_INDENT();
+
+  if (! maybe_itemsp()) {
+    return false;
+  }
+
+  FOR_ALL_BUFFS(id)
+  {
+    auto t = level->thing_find(id);
+    if (t) {
+      if (t->is_immune_to_draining()) {
+        return true;
+      }
+    }
+  }
+
+  auto owner = top_owner();
+  if (owner) {
+    FOR_ALL_BUFFS_FOR(owner, item)
+    {
+      auto iter = level->thing_find(item.id);
+      if (iter) {
+        if (iter->is_immune_to_draining()) {
+          return true;
+        }
+      }
+    }
+  }
+
+  return false;
+}
+
+bool Thing::buff_is_immune_to_necrosis(void)
+{
+  TRACE_NO_INDENT();
+
+  if (! maybe_itemsp()) {
+    return false;
+  }
+
+  FOR_ALL_BUFFS(id)
+  {
+    auto t = level->thing_find(id);
+    if (t) {
+      if (t->is_immune_to_necrosis()) {
+        return true;
+      }
+    }
+  }
+
+  auto owner = top_owner();
+  if (owner) {
+    FOR_ALL_BUFFS_FOR(owner, item)
+    {
+      auto iter = level->thing_find(item.id);
+      if (iter) {
+        if (iter->is_immune_to_necrosis()) {
           return true;
         }
       }

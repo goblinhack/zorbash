@@ -10,6 +10,8 @@
 #include "my_point.hpp"
 #include <string>
 
+#define FOR_ALL_ATTACK_TYPES(_attack_) for (auto _attack_ = 0; _attack_ < THING_ATTACK_MAX; _attack_++)
+
 typedef enum {
   THING_ATTACK_WATER,
   THING_ATTACK_ACID,

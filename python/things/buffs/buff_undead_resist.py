@@ -95,9 +95,10 @@ def tp_init(name, text_long_name):
     global self
     self = tp.Tp(name, text_long_name)
     # begin sort marker
-
     my.gfx_ascii_shown(self, True)
     my.is_buff(self, True)
+    my.is_immune_to_draining(self, True)
+    my.is_immune_to_necrosis(self, True)
     my.is_loggable(self, True)
     my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_receive_dmg_acid_do(self, "me.on_owner_receive_dmg_acid()")

@@ -6,7 +6,6 @@
 #ifndef _MY_LOG_HPP_
 #define _MY_LOG_HPP_
 
-
 void putf(FILE *fp, const char *s);
 void topcon_(const char *fmt, va_list args);
 void topcon_(const wchar_t *fmt, va_list args);

@@ -132,9 +132,9 @@ PyObject *thing_hit_dmg_draining(PyObject *obj, PyObject *args, PyObject *keywds
   }
 
   ThingAttackOptions attack_options {};
-  attack_options.dmg_set         = true;
-  attack_options.damage          = damage;
-  attack_options.attack[THING_ATTACK_DRAINING] = true;
+  attack_options.dmg_set                         = true;
+  attack_options.damage                          = damage;
+  attack_options.attack[ THING_ATTACK_DRAINING ] = true;
 
   IF_DEBUG { hitter->log("Attack with stamina damage, %d", damage); }
   TRACE_AND_INDENT();
@@ -181,9 +181,9 @@ PyObject *thing_hit_dmg_acid(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   ThingAttackOptions attack_options {};
-  attack_options.dmg_set     = true;
-  attack_options.damage      = damage;
-  attack_options.attack[THING_ATTACK_ACID] = true;
+  attack_options.dmg_set                     = true;
+  attack_options.damage                      = damage;
+  attack_options.attack[ THING_ATTACK_ACID ] = true;
 
   IF_DEBUG { hitter->log("Attack with acid damage, %d", damage); }
   TRACE_AND_INDENT();
@@ -230,9 +230,9 @@ PyObject *thing_hit_dmg_water(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   ThingAttackOptions attack_options {};
-  attack_options.dmg_set      = true;
-  attack_options.damage       = damage;
-  attack_options.attack[THING_ATTACK_WATER] = true;
+  attack_options.dmg_set                      = true;
+  attack_options.damage                       = damage;
+  attack_options.attack[ THING_ATTACK_WATER ] = true;
 
   IF_DEBUG { hitter->log("Attack with water damage, %d", damage); }
   TRACE_AND_INDENT();
@@ -279,9 +279,9 @@ PyObject *thing_hit_dmg_cold(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   ThingAttackOptions attack_options {};
-  attack_options.dmg_set     = true;
-  attack_options.damage      = damage;
-  attack_options.attack[THING_ATTACK_COLD] = true;
+  attack_options.dmg_set                     = true;
+  attack_options.damage                      = damage;
+  attack_options.attack[ THING_ATTACK_COLD ] = true;
 
   IF_DEBUG { hitter->log("Attack with cold damage, %d", damage); }
   TRACE_AND_INDENT();
@@ -328,9 +328,9 @@ PyObject *thing_hit_dmg_crush(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   ThingAttackOptions attack_options {};
-  attack_options.dmg_set      = true;
-  attack_options.damage       = damage;
-  attack_options.attack[THING_ATTACK_CRUSH] = true;
+  attack_options.dmg_set                      = true;
+  attack_options.damage                       = damage;
+  attack_options.attack[ THING_ATTACK_CRUSH ] = true;
 
   IF_DEBUG { hitter->log("Attack with crush damage, %d", damage); }
   TRACE_AND_INDENT();
@@ -377,9 +377,9 @@ PyObject *thing_hit_dmg_digest(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   ThingAttackOptions attack_options {};
-  attack_options.dmg_set       = true;
-  attack_options.damage        = damage;
-  attack_options.attack[THING_ATTACK_DIGEST] = true;
+  attack_options.dmg_set                       = true;
+  attack_options.damage                        = damage;
+  attack_options.attack[ THING_ATTACK_DIGEST ] = true;
 
   IF_DEBUG { hitter->log("Attack with digest damage, %d", damage); }
   TRACE_AND_INDENT();
@@ -426,9 +426,9 @@ PyObject *thing_hit_dmg_energy(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   ThingAttackOptions attack_options {};
-  attack_options.dmg_set       = true;
-  attack_options.damage        = damage;
-  attack_options.attack[THING_ATTACK_ENERGY] = true;
+  attack_options.dmg_set                       = true;
+  attack_options.damage                        = damage;
+  attack_options.attack[ THING_ATTACK_ENERGY ] = true;
 
   IF_DEBUG { hitter->log("Attack with energy damage, %d", damage); }
   TRACE_AND_INDENT();
@@ -475,9 +475,9 @@ PyObject *thing_hit_dmg_negation(PyObject *obj, PyObject *args, PyObject *keywds
   }
 
   ThingAttackOptions attack_options {};
-  attack_options.dmg_set         = true;
-  attack_options.damage          = damage;
-  attack_options.attack[THING_ATTACK_NEGATION] = true;
+  attack_options.dmg_set                         = true;
+  attack_options.damage                          = damage;
+  attack_options.attack[ THING_ATTACK_NEGATION ] = true;
 
   IF_DEBUG { hitter->log("Attack with negation damage, %d", damage); }
   TRACE_AND_INDENT();
@@ -524,9 +524,9 @@ PyObject *thing_hit_dmg_fire(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   ThingAttackOptions attack_options {};
-  attack_options.dmg_set     = true;
-  attack_options.damage      = damage;
-  attack_options.attack[THING_ATTACK_FIRE] = true;
+  attack_options.dmg_set                     = true;
+  attack_options.damage                      = damage;
+  attack_options.attack[ THING_ATTACK_FIRE ] = true;
 
   IF_DEBUG { hitter->log("Attack with fire damage, %d", damage); }
   TRACE_AND_INDENT();
@@ -573,9 +573,9 @@ PyObject *thing_hit_dmg_drown(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   ThingAttackOptions attack_options {};
-  attack_options.dmg_set      = true;
-  attack_options.damage       = damage;
-  attack_options.attack[THING_ATTACK_DROWN] = true;
+  attack_options.dmg_set                      = true;
+  attack_options.damage                       = damage;
+  attack_options.attack[ THING_ATTACK_DROWN ] = true;
 
   IF_DEBUG { hitter->log("Attack with drown damage, %d", damage); }
   TRACE_AND_INDENT();
@@ -622,9 +622,9 @@ PyObject *thing_hit_dmg_bite(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   ThingAttackOptions attack_options {};
-  attack_options.dmg_set     = true;
-  attack_options.damage      = damage;
-  attack_options.attack[THING_ATTACK_BITE] = true;
+  attack_options.dmg_set                     = true;
+  attack_options.damage                      = damage;
+  attack_options.attack[ THING_ATTACK_BITE ] = true;
 
   IF_DEBUG { hitter->log("Attack with bite damage, %d", damage); }
   TRACE_AND_INDENT();
@@ -671,9 +671,9 @@ PyObject *thing_hit_dmg_claw(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   ThingAttackOptions attack_options {};
-  attack_options.dmg_set     = true;
-  attack_options.damage      = damage;
-  attack_options.attack[THING_ATTACK_CLAW] = true;
+  attack_options.dmg_set                     = true;
+  attack_options.damage                      = damage;
+  attack_options.attack[ THING_ATTACK_CLAW ] = true;
 
   IF_DEBUG { hitter->log("Attack with claw damage, %d", damage); }
   TRACE_AND_INDENT();
@@ -720,9 +720,9 @@ PyObject *thing_hit_dmg_lightning(PyObject *obj, PyObject *args, PyObject *keywd
   }
 
   ThingAttackOptions attack_options {};
-  attack_options.dmg_set          = true;
-  attack_options.damage           = damage;
-  attack_options.attack[THING_ATTACK_LIGHTNING] = true;
+  attack_options.dmg_set                          = true;
+  attack_options.damage                           = damage;
+  attack_options.attack[ THING_ATTACK_LIGHTNING ] = true;
 
   IF_DEBUG { hitter->log("Attack with lightning damage, %d", damage); }
   TRACE_AND_INDENT();
@@ -769,9 +769,9 @@ PyObject *thing_hit_dmg_necrosis(PyObject *obj, PyObject *args, PyObject *keywds
   }
 
   ThingAttackOptions attack_options {};
-  attack_options.dmg_set         = true;
-  attack_options.damage          = damage;
-  attack_options.attack[THING_ATTACK_NECROSIS] = true;
+  attack_options.dmg_set                         = true;
+  attack_options.damage                          = damage;
+  attack_options.attack[ THING_ATTACK_NECROSIS ] = true;
 
   IF_DEBUG { hitter->log("Attack with necrosis damage, %d", damage); }
   TRACE_AND_INDENT();
@@ -818,9 +818,9 @@ PyObject *thing_hit_dmg_poison(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   ThingAttackOptions attack_options {};
-  attack_options.dmg_set       = true;
-  attack_options.damage        = damage;
-  attack_options.attack[THING_ATTACK_POISON] = true;
+  attack_options.dmg_set                       = true;
+  attack_options.damage                        = damage;
+  attack_options.attack[ THING_ATTACK_POISON ] = true;
 
   IF_DEBUG { hitter->log("Attack with poison damage, %d", damage); }
   TRACE_AND_INDENT();

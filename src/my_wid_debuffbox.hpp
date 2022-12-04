@@ -6,7 +6,6 @@
 void    wid_debuffbox_fini(void);
 uint8_t wid_debuffbox_init(void);
 
-
 //
 // Global widgets.
 //

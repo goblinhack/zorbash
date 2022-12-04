@@ -45,7 +45,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_def_mod(self, 1)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 DEF")
-    my.text_description_long(self, "When carrying these two sticks that have been oddly combined, you somehow know that you will take only half damage from any udead attack. Not bad for some twigs. Item is equipped in the gauntlet slot.")
+    my.text_description_long(self, "When carrying these two sticks that have been oddly combined, you somehow know that you will take only half damage from any undead attack. Necrosis and draining will also have no effect on you. Not bad for some twigs. Item is equipped in the gauntlet slot.")
     my.text_description_short(self, "A pair of sticks.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)

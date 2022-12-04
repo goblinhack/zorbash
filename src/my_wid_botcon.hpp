@@ -11,7 +11,6 @@ void    wid_botcon_log(std::string s);
 void    wid_botcon_flush(void);
 void    wid_botcon_clear(void);
 
-
 //
 // Global widgets.
 //

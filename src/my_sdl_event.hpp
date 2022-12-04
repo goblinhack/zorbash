@@ -9,8 +9,8 @@
 #include <SDL.h>
 #include <array>
 
-//#include "my_command.hpp"
-//#include "my_main.hpp"
+// #include "my_command.hpp"
+// #include "my_main.hpp"
 #include "my_time.hpp"
 
 enum {

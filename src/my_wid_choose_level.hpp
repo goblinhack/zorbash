@@ -6,7 +6,6 @@
 
 #pragma once
 
-
 void wid_show_dungeon_contents(Levelp l);
 void wid_choose_levels_bg(void);
 void wid_choose_level_border(Widp b, Levelp l);

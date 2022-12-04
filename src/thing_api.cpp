@@ -1437,12 +1437,6 @@ int Thing::is_lightning(void)
   return (tp()->is_lightning());
 }
 
-int Thing::is_immune_to_negation(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_immune_to_negation());
-}
-
 int Thing::gfx_ascii_color_bg_unchanged_by_lights(void)
 {
   TRACE_NO_INDENT();
@@ -1821,12 +1815,6 @@ int Thing::is_lifeless(void)
   return (tp()->is_lifeless());
 }
 
-int Thing::is_immune_to_draining(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_immune_to_draining());
-}
-
 int Thing::is_key_special(void)
 {
   TRACE_NO_INDENT();
@@ -2064,15 +2052,6 @@ int Thing::noise_decibels_hearing(void)
 {
   TRACE_NO_INDENT();
   return (tp()->noise_decibels_hearing());
-}
-
-int Thing::is_immune_to_cold(void)
-{
-  TRACE_NO_INDENT();
-  if (buff_find_is_cold_resist()) {
-    return true;
-  }
-  return (tp()->is_immune_to_cold());
 }
 
 int Thing::is_air_breather(void)
@@ -2800,12 +2779,6 @@ int Thing::is_eater_of_magical_items(void)
   return (tp()->is_eater_of_magical_items());
 }
 
-int Thing::is_immune_to_water(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_immune_to_water());
-}
-
 int Thing::is_weapon(void)
 {
   TRACE_NO_INDENT();
@@ -2816,33 +2789,6 @@ int Thing::is_able_to_use_rings(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_able_to_use_rings());
-}
-
-int Thing::is_immune_to_fire(void)
-{
-  TRACE_NO_INDENT();
-  if (buff_find_is_fire_resist()) {
-    return true;
-  }
-  return (tp()->is_immune_to_fire());
-}
-
-int Thing::is_immune_to_poison(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_immune_to_poison());
-}
-
-int Thing::is_immune_to_necrosis(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_immune_to_necrosis());
-}
-
-int Thing::is_immune_to_spiderwebs(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_immune_to_spiderwebs());
 }
 
 float Thing::distance_mob_max_float(void)

@@ -32,12 +32,12 @@ def tp_init(name, text_long_name):
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
     my.tile(self,
-            tile="buff_aquatic")
+            tile="buff_is_immune_to_water")
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="buff_aquatic", text_long_name="aquatic lover")
+    tp_init(name="buff_is_immune_to_water", text_long_name="aquatic lover")
 
 
 init()

@@ -85,7 +85,9 @@ typedef std::map< std::string, uint32_t > enum_map;
     return ((__typeof__(enum_name)) result->second);                                                                 \
   }                                                                                                                  \
                                                                                                                      \
-  void enum_name##_destroy(void) {}
+  void enum_name##_destroy(void)                                                                                     \
+  {                                                                                                                  \
+  }
 
 #define _EXAMPLE(list_macro) list_macro(_RED = 0, "red"), list_macro(_GREEN, "green"),
 

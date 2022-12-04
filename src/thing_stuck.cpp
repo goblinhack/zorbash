@@ -106,7 +106,7 @@ bool Thing::is_stuck_check(void)
       //
       // ok
       //
-    } else if (buff_find_is_slippery() && (d20() < stat_str())) {
+    } else if (buff_is_slippery() && (d20() < stat_str())) {
       //
       // Give a better chance to escape if slippery.
       //
@@ -122,7 +122,7 @@ bool Thing::is_stuck_check(void)
       //
       // ok
       //
-    } else if (buff_find_is_slippery()) {
+    } else if (buff_is_slippery()) {
       //
       // ok
       //

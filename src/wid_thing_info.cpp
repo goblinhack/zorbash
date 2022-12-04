@@ -1380,7 +1380,10 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
           w->log(tmp);
         }
       }
-    } else {
+    } else if (t->is_player() || t->is_monst()) {
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack                    %3d", stat_att);
+      w->log(tmp);
+    } else if (stat_att != 10) {
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack                    %3d", stat_att);
       w->log(tmp);
     }
@@ -1460,6 +1463,9 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
           w->log(tmp);
         }
       }
+    } else if (t->is_player() || t->is_monst()) {
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense                   %3d", ac);
+      w->log(tmp);
     } else if (ac) {
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense                   %3d", ac);
       w->log(tmp);

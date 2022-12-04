@@ -6,7 +6,6 @@
 #ifndef _MY_TEMPLATE_HPP_
 #define _MY_TEMPLATE_HPP_
 
-
 #include <algorithm> // for std::transform()
 #include <map>
 

@@ -277,9 +277,9 @@ bool Thing::collision_check_do(void)
     return false;
   }
 
-  ThingAttackOptions attack_options   = {};
-  attack_options.victim_attacked = false;
-  attack_options.victim_overlaps = false;
+  ThingAttackOptions attack_options = {};
+  attack_options.victim_attacked    = false;
+  attack_options.victim_overlaps    = false;
   if (collision_check_and_handle_at(&attack_options)) {
     return attack_options.victim_attacked;
   }
