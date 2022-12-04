@@ -9,6 +9,7 @@
 #include "my_sprintf.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
+#include "my_thing_attack_options.hpp"
 
 //
 // Python callback upon being hit
@@ -165,7 +166,7 @@ void Thing::on_you_nat_att(void)
 
 int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
                          Thingp         real_hitter, // who fired the arrow?
-                         AttackOptions *attack_options, int damage)
+                         ThingAttackOptionsp attack_options, int damage)
 {
   TRACE_NO_INDENT();
 
@@ -1821,7 +1822,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
 //
 // Returns true on the target being dead.
 //
-int Thing::is_hit(Thingp hitter, AttackOptions *attack_options, int damage)
+int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
 {
   TRACE_NO_INDENT();
   if (attack_options->attack_natural || attack_options->attack_digest) {

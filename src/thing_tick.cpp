@@ -7,6 +7,7 @@
 #include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
+#include "my_thing_attack_options.hpp"
 
 //
 // Python callback upon being tick
@@ -276,7 +277,7 @@ bool Thing::collision_check_do(void)
     return false;
   }
 
-  AttackOptions attack_options   = {};
+  ThingAttackOptions attack_options   = {};
   attack_options.victim_attacked = false;
   attack_options.victim_overlaps = false;
   if (collision_check_and_handle_at(&attack_options)) {

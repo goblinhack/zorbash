@@ -4,6 +4,7 @@
 
 #include "my_game.hpp"
 #include "my_thing.hpp"
+#include "my_thing_attack_options.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_thing_info.hpp"
 
@@ -168,7 +169,7 @@ static bool player_tick_(bool left, bool right, bool up, bool down, bool attack,
     auto old_thing_info = game->current_wid_thing_info;
     auto future_pos     = player->curr_at + dir;
 
-    AttackOptions attack_options {};
+    ThingAttackOptions attack_options {};
     attack_options.shove_allowed  = true;
     attack_options.attack_allowed = true;
     if (wait) {

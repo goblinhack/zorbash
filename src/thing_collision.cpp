@@ -6,6 +6,7 @@
 #include "my_game.hpp"
 #include "my_math.hpp"
 #include "my_thing.hpp"
+#include "my_thing_attack_options.hpp"
 
 #undef DEBUG_COLLISION
 
@@ -41,7 +42,7 @@ static void thing_possible_init(void) { thing_colls.resize(0); }
 //
 // Find the thing with the highest priority to hit.
 //
-bool Thing::collision_find_best_target(AttackOptions *attack_options)
+bool Thing::collision_find_best_target(ThingAttackOptionsp attack_options)
 {
   dbg("Collided with or can attack or eat something, find the best");
   TRACE_AND_INDENT();
@@ -759,7 +760,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos)
   return false;
 }
 
-bool Thing::collision_check_and_handle(point future_pos, AttackOptions *attack_options, float radius)
+bool Thing::collision_check_and_handle(point future_pos, ThingAttackOptionsp attack_options, float radius)
 {
   //
   // Do not include hidden as we use the sword being carried here
@@ -938,17 +939,17 @@ bool Thing::collision_check_only(void) { return (collision_check_only(curr_at));
 //
 // Have we hit anything? True on having done something at this (future?) position.
 //
-bool Thing::collision_check_and_handle_nearby(point future_pos, AttackOptions *attack_options)
+bool Thing::collision_check_and_handle_nearby(point future_pos, ThingAttackOptionsp attack_options)
 {
   return (collision_check_and_handle(future_pos, attack_options, thing_collision_tiles));
 }
 
-bool Thing::collision_check_and_handle_at(point future_pos, AttackOptions *attack_options)
+bool Thing::collision_check_and_handle_at(point future_pos, ThingAttackOptionsp attack_options)
 {
   return (collision_check_and_handle(future_pos, attack_options, 0.0));
 }
 
-bool Thing::collision_check_and_handle_at(AttackOptions *attack_options)
+bool Thing::collision_check_and_handle_at(ThingAttackOptionsp attack_options)
 {
   return (collision_check_and_handle_at(curr_at, attack_options));
 }

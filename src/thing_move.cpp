@@ -10,6 +10,7 @@
 #include "my_sdl_proto.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
+#include "my_thing_attack_options.hpp"
 
 void Thing::on_move(void)
 {
@@ -122,7 +123,7 @@ bool Thing::move(point future_pos)
   bool attack          = false;
   bool wait_or_collect = false;
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.shove_allowed  = true;
   attack_options.attack_allowed = true;
 
@@ -141,7 +142,7 @@ bool Thing::move_no_shove_no_attack(point future_pos)
   bool attack          = false;
   bool wait_or_collect = false;
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.shove_allowed  = false;
   attack_options.attack_allowed = false;
 
@@ -160,7 +161,7 @@ bool Thing::move_no_shove_attack_allowed(point future_pos)
   bool attack          = false;
   bool wait_or_collect = false;
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.shove_allowed  = false;
   attack_options.attack_allowed = true;
 
@@ -169,7 +170,7 @@ bool Thing::move_no_shove_attack_allowed(point future_pos)
 }
 
 bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t must_attack,
-                 uint8_t wait_or_collect, AttackOptions *attack_options)
+                 uint8_t wait_or_collect, ThingAttackOptionsp attack_options)
 {
   TRACE_NO_INDENT();
 
@@ -504,7 +505,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     if (free_attack) {
       TRACE_NO_INDENT();
       dbg("Free attack by %s", t->to_short_string().c_str());
-      AttackOptions attack_options {};
+      ThingAttackOptions attack_options {};
       if (t->attack(this, &attack_options)) {
         //
         // Too noisy?
@@ -810,7 +811,7 @@ bool Thing::move_to_try(const point nh, const bool escaping, bool check_only)
     dbg("Cannot move to %d,%d will hit obstacle or monst", nh.x, nh.y);
     TRACE_AND_INDENT();
 
-    AttackOptions attack_options {};
+    ThingAttackOptions attack_options {};
     attack_options.victim_attacked = false;
     attack_options.victim_overlaps = false;
     collision_check_and_handle_nearby(nh, &attack_options);

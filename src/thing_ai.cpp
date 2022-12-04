@@ -9,6 +9,7 @@
 #include "my_player.hpp"
 #include "my_sprintf.hpp"
 #include "my_thing.hpp"
+#include "my_thing_attack_options.hpp"
 
 #define GOAL_PRIO_VERY_HIGH 0
 #define GOAL_PRIO_HIGH      1
@@ -1702,7 +1703,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
   bool jump   = false;
   bool attack = false;
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
 
   attack_options.shove_allowed  = false;
   attack_options.attack_allowed = true;
@@ -2401,7 +2402,7 @@ bool Thing::ai_tick(bool recursing)
     if (is_player()) {
       player_tick(left, right, up, down, attack, wait, jump);
     } else if (is_moveable()) {
-      AttackOptions attack_options {};
+      ThingAttackOptions attack_options {};
       move(curr_at, up, down, left, right, attack, wait, &attack_options);
     }
   }

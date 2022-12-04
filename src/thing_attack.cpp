@@ -7,6 +7,7 @@
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
+#include "my_thing_attack_options.hpp"
 
 bool Thing::possible_to_attack(const Thingp victim)
 {
@@ -454,7 +455,7 @@ bool Thing::attack(point future_pos)
 
   verify(MTYPE_THING, this);
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.shove_allowed  = true;
   attack_options.attack_allowed = true;
   attack_options.attack_at      = future_pos;
@@ -463,7 +464,7 @@ bool Thing::attack(point future_pos)
   return (move(future_pos, up, down, left, right, attack, idle, &attack_options));
 }
 
-bool Thing::attack(Thingp victim, AttackOptions *attack_options)
+bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
 {
   dbg("Attack %s", victim->to_short_string().c_str());
   TRACE_AND_INDENT();
@@ -1344,7 +1345,7 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
 
 bool Thing::nat_att(Thingp victim)
 {
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.prefer_nat_att = true;
   return attack(victim, &attack_options);
 }
@@ -1352,7 +1353,7 @@ bool Thing::nat_att(Thingp victim)
 int Thing::is_attacked_with_dmg_melee(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.real_hitter = real_hitter;
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1360,7 +1361,7 @@ int Thing::is_attacked_with_dmg_melee(Thingp hitter, Thingp real_hitter, int dam
 int Thing::is_attacked_with_dmg_nat_att(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.attack_natural = true;
   attack_options.real_hitter    = real_hitter;
   return is_hit(hitter, &attack_options, damage);
@@ -1369,7 +1370,7 @@ int Thing::is_attacked_with_dmg_nat_att(Thingp hitter, Thingp real_hitter, int d
 int Thing::is_attacked_with_dmg_poison(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.attack_poison = true;
   attack_options.real_hitter   = real_hitter;
   return is_hit(hitter, &attack_options, damage);
@@ -1378,7 +1379,7 @@ int Thing::is_attacked_with_dmg_poison(Thingp hitter, Thingp real_hitter, int da
 int Thing::is_attacked_with_dmg_necrosis(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.attack_necrosis = true;
   attack_options.real_hitter     = real_hitter;
   return is_hit(hitter, &attack_options, damage);
@@ -1387,7 +1388,7 @@ int Thing::is_attacked_with_dmg_necrosis(Thingp hitter, Thingp real_hitter, int 
 int Thing::is_attacked_with_dmg_draining(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.attack_draining = true;
   attack_options.real_hitter     = real_hitter;
   return is_hit(hitter, &attack_options, damage);
@@ -1396,7 +1397,7 @@ int Thing::is_attacked_with_dmg_draining(Thingp hitter, Thingp real_hitter, int 
 int Thing::is_attacked_with_dmg_drown(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.attack_drown = true;
   attack_options.real_hitter  = real_hitter;
   return is_hit(hitter, &attack_options, damage);
@@ -1405,7 +1406,7 @@ int Thing::is_attacked_with_dmg_drown(Thingp hitter, Thingp real_hitter, int dam
 int Thing::is_attacked_with_dmg_bite(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.attack_bite = true;
   attack_options.real_hitter = real_hitter;
   return is_hit(hitter, &attack_options, damage);
@@ -1414,7 +1415,7 @@ int Thing::is_attacked_with_dmg_bite(Thingp hitter, Thingp real_hitter, int dama
 int Thing::is_attacked_with_dmg_claw(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.attack_claw = true;
   attack_options.real_hitter = real_hitter;
   return is_hit(hitter, &attack_options, damage);
@@ -1423,7 +1424,7 @@ int Thing::is_attacked_with_dmg_claw(Thingp hitter, Thingp real_hitter, int dama
 int Thing::is_attacked_with_dmg_cold(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.attack_cold = true;
   attack_options.real_hitter = real_hitter;
   return is_hit(hitter, &attack_options, damage);
@@ -1432,7 +1433,7 @@ int Thing::is_attacked_with_dmg_cold(Thingp hitter, Thingp real_hitter, int dama
 int Thing::is_attacked_with_dmg_fire(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.attack_fire = true;
   attack_options.real_hitter = real_hitter;
   return is_hit(hitter, &attack_options, damage);
@@ -1441,7 +1442,7 @@ int Thing::is_attacked_with_dmg_fire(Thingp hitter, Thingp real_hitter, int dama
 int Thing::is_attacked_with_dmg_crush(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.attack_crush = true;
   attack_options.real_hitter  = real_hitter;
   return is_hit(hitter, &attack_options, damage);
@@ -1450,7 +1451,7 @@ int Thing::is_attacked_with_dmg_crush(Thingp hitter, Thingp real_hitter, int dam
 int Thing::is_attacked_with_dmg_lightning(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.attack_lightning = true;
   attack_options.real_hitter      = real_hitter;
   return is_hit(hitter, &attack_options, damage);
@@ -1459,7 +1460,7 @@ int Thing::is_attacked_with_dmg_lightning(Thingp hitter, Thingp real_hitter, int
 int Thing::is_attacked_with_dmg_energy(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.attack_energy = true;
   attack_options.real_hitter   = real_hitter;
   return is_hit(hitter, &attack_options, damage);
@@ -1468,7 +1469,7 @@ int Thing::is_attacked_with_dmg_energy(Thingp hitter, Thingp real_hitter, int da
 int Thing::is_attacked_with_dmg_negation(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.attack_negation = true;
   attack_options.real_hitter     = real_hitter;
   return is_hit(hitter, &attack_options, damage);
@@ -1477,7 +1478,7 @@ int Thing::is_attacked_with_dmg_negation(Thingp hitter, Thingp real_hitter, int 
 int Thing::is_attacked_with_dmg_acid(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.attack_acid = true;
   attack_options.real_hitter = real_hitter;
   return is_hit(hitter, &attack_options, damage);
@@ -1486,7 +1487,7 @@ int Thing::is_attacked_with_dmg_acid(Thingp hitter, Thingp real_hitter, int dama
 int Thing::is_attacked_with_dmg_water(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.attack_water = true;
   attack_options.real_hitter  = real_hitter;
   return is_hit(hitter, &attack_options, damage);
@@ -1495,7 +1496,7 @@ int Thing::is_attacked_with_dmg_water(Thingp hitter, Thingp real_hitter, int dam
 int Thing::is_attacked_with_dmg_digest(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.attack_digest = true;
   attack_options.real_hitter   = real_hitter;
   return is_hit(hitter, &attack_options, damage);

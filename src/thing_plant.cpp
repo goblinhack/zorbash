@@ -6,6 +6,7 @@
 #include "my_depth.hpp"
 #include "my_game.hpp"
 #include "my_thing.hpp"
+#include "my_thing_attack_options.hpp"
 
 void Thing::plant_tick(void)
 {
@@ -39,7 +40,7 @@ void Thing::plant_tick(void)
       if (t == this) {
         continue;
       }
-      AttackOptions attack_options {};
+      ThingAttackOptions attack_options {};
       t->attack(this, &attack_options);
       break;
     }

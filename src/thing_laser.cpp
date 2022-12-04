@@ -4,6 +4,7 @@
 
 #include "my_game.hpp"
 #include "my_thing.hpp"
+#include "my_thing_attack_options.hpp"
 
 bool Thing::laser_choose_target(Thingp item, Thingp victim)
 {
@@ -301,7 +302,7 @@ bool Thing::laser_fire_at(Thingp item, const std::string &gfx_targetted_laser, p
     }
   }
 
-  AttackOptions attack_options       = {};
+  ThingAttackOptions attack_options       = {};
   attack_options.allow_hitting_walls = true;
   if (victim_attack_choose_best(nullptr, at, &best, &best_hit_at, &attack_options)) {
     return laser_fire_at(item, gfx_targetted_laser, best, use_options);

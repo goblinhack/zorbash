@@ -5,6 +5,7 @@
 #include "my_game.hpp"
 #include "my_python.hpp"
 #include "my_thing.hpp"
+#include "my_thing_attack_options.hpp"
 
 PyObject *thing_coords_get(PyObject *obj, PyObject *args, PyObject *keywds)
 {
@@ -84,7 +85,7 @@ PyObject *thing_hit(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
 
   IF_DEBUG { hitter->log("Attack hit"); }
   TRACE_AND_INDENT();
@@ -130,7 +131,7 @@ PyObject *thing_hit_dmg_draining(PyObject *obj, PyObject *args, PyObject *keywds
     Py_RETURN_NONE;
   }
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.dmg_set         = true;
   attack_options.damage          = damage;
   attack_options.attack_draining = true;
@@ -179,7 +180,7 @@ PyObject *thing_hit_dmg_acid(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.dmg_set     = true;
   attack_options.damage      = damage;
   attack_options.attack_acid = true;
@@ -228,7 +229,7 @@ PyObject *thing_hit_dmg_water(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.dmg_set      = true;
   attack_options.damage       = damage;
   attack_options.attack_water = true;
@@ -277,7 +278,7 @@ PyObject *thing_hit_dmg_cold(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.dmg_set     = true;
   attack_options.damage      = damage;
   attack_options.attack_cold = true;
@@ -326,7 +327,7 @@ PyObject *thing_hit_dmg_crush(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.dmg_set      = true;
   attack_options.damage       = damage;
   attack_options.attack_crush = true;
@@ -375,7 +376,7 @@ PyObject *thing_hit_dmg_digest(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.dmg_set       = true;
   attack_options.damage        = damage;
   attack_options.attack_digest = true;
@@ -424,7 +425,7 @@ PyObject *thing_hit_dmg_energy(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.dmg_set       = true;
   attack_options.damage        = damage;
   attack_options.attack_energy = true;
@@ -473,7 +474,7 @@ PyObject *thing_hit_dmg_negation(PyObject *obj, PyObject *args, PyObject *keywds
     Py_RETURN_NONE;
   }
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.dmg_set         = true;
   attack_options.damage          = damage;
   attack_options.attack_negation = true;
@@ -522,7 +523,7 @@ PyObject *thing_hit_dmg_fire(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.dmg_set     = true;
   attack_options.damage      = damage;
   attack_options.attack_fire = true;
@@ -571,7 +572,7 @@ PyObject *thing_hit_dmg_drown(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.dmg_set      = true;
   attack_options.damage       = damage;
   attack_options.attack_drown = true;
@@ -620,7 +621,7 @@ PyObject *thing_hit_dmg_bite(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.dmg_set     = true;
   attack_options.damage      = damage;
   attack_options.attack_bite = true;
@@ -669,7 +670,7 @@ PyObject *thing_hit_dmg_claw(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.dmg_set     = true;
   attack_options.damage      = damage;
   attack_options.attack_claw = true;
@@ -718,7 +719,7 @@ PyObject *thing_hit_dmg_lightning(PyObject *obj, PyObject *args, PyObject *keywd
     Py_RETURN_NONE;
   }
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.dmg_set          = true;
   attack_options.damage           = damage;
   attack_options.attack_lightning = true;
@@ -767,7 +768,7 @@ PyObject *thing_hit_dmg_necrosis(PyObject *obj, PyObject *args, PyObject *keywds
     Py_RETURN_NONE;
   }
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.dmg_set         = true;
   attack_options.damage          = damage;
   attack_options.attack_necrosis = true;
@@ -816,7 +817,7 @@ PyObject *thing_hit_dmg_poison(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   attack_options.dmg_set       = true;
   attack_options.damage        = damage;
   attack_options.attack_poison = true;

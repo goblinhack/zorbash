@@ -9,6 +9,7 @@
 #include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
+#include "my_thing_attack_options.hpp"
 
 void Thing::on_equip(Thingp what)
 {
@@ -563,7 +564,7 @@ void Thing::equip_remove_anim(int equip)
   equip_id_set(NoThingId.id, equip);
 }
 
-bool Thing::equip_use(bool forced, int equip, AttackOptions *attack_options)
+bool Thing::equip_use(bool forced, int equip, ThingAttackOptionsp attack_options)
 {
   if (attack_options->attack_at_set) {
     dbg("Try to use equipped %s item at %s", equip_name(equip).c_str(),
@@ -714,7 +715,7 @@ bool Thing::equip_use_may_attack(int equip)
   dbg("Equip use and may attack");
   TRACE_AND_INDENT();
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   return equip_use(false, equip, &attack_options);
 }
 
@@ -723,7 +724,7 @@ bool Thing::equip_use_must_attack(int equip)
   dbg("Equip use and must attack");
   TRACE_AND_INDENT();
 
-  AttackOptions attack_options {};
+  ThingAttackOptions attack_options {};
   return equip_use(true, equip, &attack_options);
 }
 

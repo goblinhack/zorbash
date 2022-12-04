@@ -7,6 +7,7 @@
 #include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
+#include "my_thing_attack_options.hpp"
 
 void Thing::on_targetted_radially(void)
 {
@@ -94,7 +95,7 @@ bool Thing::is_target_select(Thingp item)
 // in that path, look around for something else.
 //
 bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, point *best_hit_at,
-                                         std::vector< point > &all_deltas, AttackOptions *attack_options)
+                                         std::vector< point > &all_deltas, ThingAttackOptionsp attack_options)
 {
   bool found_best {};
   int  best_priority = -999;
@@ -182,7 +183,7 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
 // The only difference here is that we allow the hitting of item
 //
 bool Thing::victim_attack_best_attempt_2(Thingp item, point at, Thingp *best, point *best_hit_at,
-                                         std::vector< point > &all_deltas, AttackOptions *attack_options)
+                                         std::vector< point > &all_deltas, ThingAttackOptionsp attack_options)
 {
   bool found_best {};
   int  best_priority = -999;
@@ -275,7 +276,7 @@ bool Thing::victim_attack_best_attempt_2(Thingp item, point at, Thingp *best, po
 // including things like rock.
 //
 bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, point *best_hit_at,
-                                         std::vector< point > &all_deltas, AttackOptions *attack_options)
+                                         std::vector< point > &all_deltas, ThingAttackOptionsp attack_options)
 {
   bool found_best {};
   int  best_priority = -999;
@@ -357,7 +358,7 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
   return found_best;
 }
 
-bool Thing::victim_attack_swing(int equip, Thingp best, point best_hit_at, AttackOptions *attack_options)
+bool Thing::victim_attack_swing(int equip, Thingp best, point best_hit_at, ThingAttackOptionsp attack_options)
 {
   dbg2("Target-attack-best: Best target to swing at %s", best_hit_at.to_string().c_str());
   TRACE_AND_INDENT();
@@ -439,7 +440,7 @@ bool Thing::victim_attack_swing(int equip, Thingp best, point best_hit_at, Attac
 }
 
 bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point best_hit_at,
-                                     AttackOptions *attack_options)
+                                     ThingAttackOptionsp attack_options)
 {
   attack_options->victim_attacked = false;
   attack_options->victim_overlaps = false;
@@ -495,7 +496,7 @@ bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point 
 }
 
 bool Thing::victim_attack_choose_best(Thingp item, point at, Thingp *best, point *best_hit_at,
-                                      AttackOptions *attack_options)
+                                      ThingAttackOptionsp attack_options)
 {
   std::vector< point > all_deltas = {point(0, 0)};
 
@@ -514,7 +515,7 @@ bool Thing::victim_attack_choose_best(Thingp item, point at, Thingp *best, point
   return false;
 }
 
-bool Thing::victim_attack_best_at(int equip, AttackOptions *attack_options)
+bool Thing::victim_attack_best_at(int equip, ThingAttackOptionsp attack_options)
 {
   if (attack_options->attack_at_set) {
     dbg("Target-attack-best-at: Try to attack with equipped item at %s",
@@ -672,7 +673,7 @@ bool Thing::victim_attack_best_at(int equip, AttackOptions *attack_options)
   return false;
 }
 
-bool Thing::victim_attack_best_(int equip, AttackOptions *attack_options)
+bool Thing::victim_attack_best_(int equip, ThingAttackOptionsp attack_options)
 {
   int  dx, dy;
   auto item = equip_get(equip);
@@ -880,7 +881,7 @@ bool Thing::victim_attack_best_(int equip, AttackOptions *attack_options)
   return victim_attack_best_at(equip, attack_options);
 }
 
-bool Thing::victim_attack_best(int equip, AttackOptions *attack_options)
+bool Thing::victim_attack_best(int equip, ThingAttackOptionsp attack_options)
 {
   if (attack_options->attack_at_set) {
     dbg("Target-attack-best: Try to attack with equipped item at %s", attack_options->attack_at.to_string().c_str());

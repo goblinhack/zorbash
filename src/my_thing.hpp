@@ -58,90 +58,6 @@ typedef struct {
   bool radial_effect;
 } UseOptions;
 
-typedef class AttackOptions_
-{
-public:
-  //
-  // If given a real hitter, prefer that; for example a player slamming a door on a monster.
-  // real_hitter would be the player. hitter would be the door.
-  //
-  Thingp real_hitter {};
-  //
-  // Return values
-  //
-  bool victim_attacked {};
-  bool victim_overlaps {};
-  //
-  // Allowed to hit solid rock. Normally disabled to avoid weapon damage.
-  // Enabled if you click on a rock.
-  //
-  bool allow_hitting_walls {};
-  //
-  // Monst is using its natural attack.
-  //
-  bool nat_att {};
-  //
-  // Prefer natural attack.
-  //
-  bool prefer_nat_att {};
-  //
-  // Can also shove.
-  //
-  bool shove_allowed {};
-  //
-  // Critical hit.
-  //
-  bool crit {};
-  //
-  // Used in moving to pass on intent to attack.
-  //
-  bool attack_allowed {};
-  //
-  // If attack_at is not set, we should look around for a target.
-  //
-  bool attack_at_set {};
-  //
-  // Attack types;
-  //
-  bool attack_water {};
-  bool attack_acid {};
-  bool attack_cold {};
-  bool attack_crush {};
-  bool attack_digest {};
-  bool attack_draining {};
-  bool attack_energy {};
-  bool attack_negation {};
-  bool attack_fire {};
-  bool attack_drown {};
-  bool attack_bite {};
-  bool attack_claw {};
-  bool attack_lightning {};
-  bool attack_natural {};
-  bool attack_necrosis {};
-  bool attack_poison {};
-  //
-  // Set if damage is already pre calculated
-  //
-  bool dmg_set {};
-  int  damage {};
-  //
-  // For multiple attacks, which one is this?
-  //
-  unsigned char attack_num {};
-  //
-  // How many attempts to find a target
-  //
-  unsigned char attempt {};
-  //
-  // Where we want to attack
-  //
-  point attack_at;
-  //
-  // This is the swing animation.
-  //
-  std::string used_as;
-} AttackOptions;
-
 typedef class Thing_
 {
 private:
@@ -450,7 +366,7 @@ public:
   bool ascend_sewer_tick(void);
   bool ascend_sewer(void);
   bool attack(point future_pos);
-  bool attack(Thingp victim, AttackOptions *);
+  bool attack(Thingp victim, ThingAttackOptionsp);
   bool bag_add_test(Thingp);
   bool bag_add(Thingp);
   bool bag_can_place_anywhere(Thingp item, point &pos);
@@ -484,17 +400,17 @@ public:
   bool check_anything_to_carry(bool auto_collect_allowed);
   bool close_door(Thingp door);
   bool collision_add_candidates(Thingp it, point future_pos, int x, int y, int dx, int dy);
-  bool collision_check_and_handle_at(AttackOptions *);
-  bool collision_check_and_handle_at(point future_pos, AttackOptions *);
-  bool collision_check_and_handle_nearby(point future_pos, AttackOptions *);
-  bool collision_check_and_handle(point future_pos, AttackOptions *, float radius);
+  bool collision_check_and_handle_at(ThingAttackOptionsp);
+  bool collision_check_and_handle_at(point future_pos, ThingAttackOptionsp);
+  bool collision_check_and_handle_nearby(point future_pos, ThingAttackOptionsp);
+  bool collision_check_and_handle(point future_pos, ThingAttackOptionsp, float radius);
   bool collision_check_and_handle(Thingp it, point future_pos, int x, int y, int dx, int dy);
   bool collision_check_do(void);
   bool collision_check_only(point future_pos);
   bool collision_check_only(Thingp it, int x, int y, int dx, int dy);
   bool collision_check_only(Thingp it, point future_pos);
   bool collision_check_only(void);
-  bool collision_find_best_target(AttackOptions *attack_options);
+  bool collision_find_best_target(ThingAttackOptionsp);
   bool collision_obstacle(point);
   bool collision_obstacle(Thingp);
   bool consume(Thingp it);
@@ -525,7 +441,7 @@ public:
   bool enchant_with_stone(Thingp);
   bool equipped_anything(void);
   bool equip(Thingp w, int equip);
-  bool equip_use(bool forced, int equip, AttackOptions *);
+  bool equip_use(bool forced, int equip, ThingAttackOptionsp);
   bool equip_use_may_attack(int equip);
   bool equip_use_must_attack(int equip);
   bool fall_to_next_level(void);
@@ -579,7 +495,7 @@ public:
   bool move_no_shove_attack_allowed(point future_pos);
   bool move_no_shove_no_attack(point future_pos);
   bool move(point to);
-  bool move(point to, uint8_t u, uint8_t d, uint8_t l, uint8_t r, uint8_t att, uint8_t idl, AttackOptions *);
+  bool move(point to, uint8_t u, uint8_t d, uint8_t l, uint8_t r, uint8_t att, uint8_t idl, ThingAttackOptionsp);
   bool move_to_or_attack_check_only(const point nh);
   bool move_to_or_attack(const point);
   bool move_to_or_escape_check_only(const point nh);
@@ -677,10 +593,10 @@ public:
   bool unequip(const char *why, int equip, bool allowed_to_recarry);
   bool unequip_me_from_owner(const char *why, bool allowed_to_recarry);
   bool use(Thingp w, UseOptions *options = nullptr);
-  bool victim_attack_best_at(int equip, AttackOptions *);
-  bool victim_attack_best(int equip, AttackOptions *);
-  bool victim_attack_best_(int equip, AttackOptions *);
-  bool victim_attack_swing(int equip, Thingp best, point best_hit_at, AttackOptions *attack_options);
+  bool victim_attack_best_at(int equip, ThingAttackOptionsp);
+  bool victim_attack_best(int equip, ThingAttackOptionsp);
+  bool victim_attack_best_(int equip, ThingAttackOptionsp);
+  bool victim_attack_swing(int equip, Thingp best, point best_hit_at, ThingAttackOptionsp);
   bool wake(const std::string &reason);
   bool will_avoid_monst(const point p);
   bool will_avoid_monst(const Thingp it);
@@ -955,7 +871,7 @@ public:
   int aggression_pct(void);
   int ai_detect_secret_doors(void);
   int ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int type, bool check);
-  int ai_hit_actual(Thingp hitter, Thingp real_hitter, AttackOptions *, int damage);
+  int ai_hit_actual(Thingp hitter, Thingp real_hitter, ThingAttackOptionsp, int damage);
   int ai_resent_count(void);
   int ai_wanderer(void);
   int appearing_chance_d1000(void);
@@ -1422,7 +1338,7 @@ public:
   int is_heavy(void);
   int is_helmet(void);
   int is_hittable(void);
-  int is_hit(Thingp hitter, AttackOptions *, int damage);
+  int is_hit(Thingp hitter, ThingAttackOptionsp, int damage);
   int is_humanoid(void);
   int is_immune_to_acid(void);
   int is_immune_to_cold(void);
@@ -2550,14 +2466,13 @@ public:
   ThingAip    aip(void);
 
   bool victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, point *best_hit_at,
-                                    std::vector< point > &all_deltas, AttackOptions *attack_options);
+                                    std::vector< point > &all_deltas, ThingAttackOptionsp);
   bool victim_attack_best_attempt_2(Thingp item, point at, Thingp *best, point *best_hit_at,
-                                    std::vector< point > &all_deltas, AttackOptions *attack_options);
+                                    std::vector< point > &all_deltas, ThingAttackOptionsp);
   bool victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, point *best_hit_at,
-                                    std::vector< point > &all_deltas, AttackOptions *attack_options);
-  bool victim_attack_choose_best(Thingp item, point at, Thingp *best, point *best_hit_at,
-                                 AttackOptions *attack_options);
-  bool victim_attack_found_best(int equip, Thingp item, Thingp best, point best_hit_at, AttackOptions *o);
+                                    std::vector< point > &all_deltas, ThingAttackOptionsp);
+  bool victim_attack_choose_best(Thingp item, point at, Thingp *best, point *best_hit_at, ThingAttackOptionsp);
+  bool victim_attack_found_best(int equip, Thingp item, Thingp best, point best_hit_at, ThingAttackOptionsp);
 
   inline int is_gfx_pixelart_animated(void) { return gfx_pixelart_animated; }
   inline int is_gfx_ascii_animated(void) { return gfx_ascii_animated; }

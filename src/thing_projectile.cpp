@@ -4,6 +4,7 @@
 
 #include "my_game.hpp"
 #include "my_thing.hpp"
+#include "my_thing_attack_options.hpp"
 
 bool Thing::projectile_choose_target(Thingp item, Thingp victim /* can be null */)
 {
@@ -190,7 +191,7 @@ Thingp Thing::fire_projectile_at(Thingp item, const std::string &target_name_pro
     }
   }
 
-  AttackOptions attack_options       = {};
+  ThingAttackOptions attack_options       = {};
   attack_options.allow_hitting_walls = true;
   if (victim_attack_choose_best(nullptr, at, &best, &best_hit_at, &attack_options)) {
     return fire_projectile_at(item, target_name_projectile, best);
