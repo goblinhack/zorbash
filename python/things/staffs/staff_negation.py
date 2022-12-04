@@ -53,6 +53,9 @@ def on_idle(me, x, y):
 
 
 def explode(me, x, y):
+    if my.thing_charge_count(me) == 0:
+        return
+
     if my.thing_is_dead(me):
         return
 
@@ -72,6 +75,8 @@ def explode(me, x, y):
 
 
 def on_thrown(me, x, y):
+    if my.thing_charge_count(me) == 0:
+        return
     if my.level_is_chasm_at(me, x, y):
         return
     if my.level_is_water_at(me, x, y):

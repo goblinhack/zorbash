@@ -242,6 +242,7 @@ bool Thing::fire_at(Thingp item, Thingp target)
 
 bool Thing::fire_at(Thingp target)
 {
+  TRACE_AND_INDENT();
   if (! target) {
     return false;
   }

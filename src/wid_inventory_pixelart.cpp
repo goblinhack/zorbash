@@ -275,16 +275,18 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
       y_at += 3;
     } else if (! item_option->gfx_targetted_laser().empty()) {
       TRACE_AND_INDENT();
-      auto p = wid_inventory_window;
-      auto w = wid_new_square_button(p, "use");
+      if (item_option->charge_count()) {
+        auto p = wid_inventory_window;
+        auto w = wid_new_square_button(p, "use");
 
-      point tl = make_point(x_off, y_at);
-      point br = make_point(x_off + width, y_at + 2);
-      wid_set_style(w, UI_WID_STYLE_NORMAL);
-      wid_set_on_mouse_up(w, wid_inventory_item_option_use);
-      wid_set_pos(w, tl, br);
-      wid_set_text(w, "Use (choose target)");
-      y_at += 3;
+        point tl = make_point(x_off, y_at);
+        point br = make_point(x_off + width, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
+        wid_set_on_mouse_up(w, wid_inventory_item_option_use);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "Use (choose target)");
+        y_at += 3;
+      }
     } else if (item_option->is_usable() && ! player->is_equipped(item_option)) {
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;
@@ -329,16 +331,18 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
     //
     if (item_option->is_target_radial()) {
       TRACE_AND_INDENT();
-      auto p = wid_inventory_window;
-      auto w = wid_new_square_button(p, "use");
+      if (item_option->charge_count()) {
+        auto p = wid_inventory_window;
+        auto w = wid_new_square_button(p, "use");
 
-      point tl = make_point(x_off, y_at);
-      point br = make_point(x_off + width, y_at + 2);
-      wid_set_style(w, UI_WID_STYLE_NORMAL);
-      wid_set_on_mouse_up(w, wid_inventory_item_option_use_radial);
-      wid_set_pos(w, tl, br);
-      wid_set_text(w, "Use radially");
-      y_at += 3;
+        point tl = make_point(x_off, y_at);
+        point br = make_point(x_off + width, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
+        wid_set_on_mouse_up(w, wid_inventory_item_option_use_radial);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "Use radially");
+        y_at += 3;
+      }
     }
 
     if (item_option->is_throwable()) {

@@ -272,7 +272,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     attack_set = true;
     if (is_immune_to_poison()) {
       if (real_hitter->is_player()) {
-        if (is_alive_monst()) {
+        if (is_player()) {
+          msg("You are immune to poison!");
+        } else if (is_alive_monst()) {
           msg("%s is immune to poison damage!", text_The().c_str());
         }
       }
@@ -360,7 +362,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     attack_set = true;
     if (is_immune_to_cold()) {
       if (real_hitter->is_player()) {
-        if (is_alive_monst()) {
+        if (is_player()) {
+          msg("You are immune to cold!");
+        } else if (is_alive_monst()) {
           msg("%s is immune to cold damage!", text_The().c_str());
         }
       }
@@ -395,7 +399,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     attack_set = true;
     if (is_immune_to_fire()) {
       if (real_hitter->is_player()) {
-        if (is_alive_monst()) {
+        if (is_player()) {
+          msg("You are immune to fire!");
+        } else if (is_alive_monst()) {
           msg("%s is immune to fire damage!", text_The().c_str());
         }
       }
@@ -501,7 +507,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
 
     if (is_immune_to_negation()) {
       if (real_hitter->is_player()) {
-        if (is_alive_monst()) {
+        if (is_player()) {
+          msg("You are immune to negation damage!");
+        } else if (is_alive_monst()) {
           msg("%s is immune to negation damage!", text_The().c_str());
         }
       }
@@ -528,7 +536,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     attack_set = true;
     if (is_immune_to_acid()) {
       if (real_hitter->is_player()) {
-        if (is_alive_monst()) {
+        if (is_player()) {
+          msg("You are immune to acid damage!");
+        } else if (is_alive_monst()) {
           msg("%s is immune to acid damage!", text_The().c_str());
         }
       }
@@ -561,7 +571,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     attack_set = true;
     if (is_immune_to_water()) {
       if (real_hitter->is_player()) {
-        if (is_alive_monst()) {
+        if (is_player()) {
+          msg("You are immune to water damage!");
+        } else if (is_alive_monst()) {
           msg("%s is immune to water damage!", text_The().c_str());
         }
       }
@@ -611,7 +623,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     attack_set = true;
     if (is_immune_to_necrosis()) {
       if (real_hitter->is_player()) {
-        if (is_alive_monst()) {
+        if (is_player()) {
+          msg("You are immune to rotting!");
+        } else if (is_alive_monst()) {
           msg("%s is immune to rotting!", text_The().c_str());
         }
       }
@@ -644,7 +658,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     attack_set = true;
     if (is_immune_to_draining()) {
       if (real_hitter->is_player()) {
-        if (is_alive_monst()) {
+        if (is_player()) {
+          msg("You are immune to draining!");
+        } else if (is_alive_monst()) {
           msg("%s is immune to draining attacks!", text_The().c_str());
         }
       }
