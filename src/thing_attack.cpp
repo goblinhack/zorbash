@@ -569,34 +569,34 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
 
     attack_options->attack_num = attack_num;
 
-    if (attack_options->attack_poison) {
-      dbg("Attack type already set: attack_poison");
-    } else if (attack_options->attack_drown) {
-      dbg("Attack type already set: attack_drown");
-    } else if (attack_options->attack_bite) {
-      dbg("Attack type already set: attack_bite");
-    } else if (attack_options->attack_claw) {
-      dbg("Attack type already set: attack_claw");
-    } else if (attack_options->attack_cold) {
-      dbg("Attack type already set: attack_cold");
-    } else if (attack_options->attack_fire) {
-      dbg("Attack type already set: attack_fire");
-    } else if (attack_options->attack_crush) {
-      dbg("Attack type already set: attack_crush");
-    } else if (attack_options->attack_lightning) {
-      dbg("Attack type already set: attack_lightning");
-    } else if (attack_options->attack_energy) {
-      dbg("Attack type already set: attack_energy");
-    } else if (attack_options->attack_negation) {
-      dbg("Attack type already set: attack_negation");
-    } else if (attack_options->attack_acid) {
-      dbg("Attack type already set: attack_acid");
-    } else if (attack_options->attack_digest) {
-      dbg("Attack type already set: attack_digest");
-    } else if (attack_options->attack_necrosis) {
-      dbg("Attack type already set: attack_necrosis");
-    } else if (attack_options->attack_draining) {
-      dbg("Attack type already set: attack_draining");
+    if (attack_options->attack[THING_ATTACK_POISON]) {
+      dbg("Attack type already set: attack[THING_ATTACK_POISON]");
+    } else if (attack_options->attack[THING_ATTACK_DROWN]) {
+      dbg("Attack type already set: attack[THING_ATTACK_DROWN]");
+    } else if (attack_options->attack[THING_ATTACK_BITE]) {
+      dbg("Attack type already set: attack[THING_ATTACK_BITE]");
+    } else if (attack_options->attack[THING_ATTACK_CLAW]) {
+      dbg("Attack type already set: attack[THING_ATTACK_CLAW]");
+    } else if (attack_options->attack[THING_ATTACK_COLD]) {
+      dbg("Attack type already set: attack[THING_ATTACK_COLD]");
+    } else if (attack_options->attack[THING_ATTACK_FIRE]) {
+      dbg("Attack type already set: attack[THING_ATTACK_FIRE]");
+    } else if (attack_options->attack[THING_ATTACK_CRUSH]) {
+      dbg("Attack type already set: attack[THING_ATTACK_CRUSH]");
+    } else if (attack_options->attack[THING_ATTACK_LIGHTNING]) {
+      dbg("Attack type already set: attack[THING_ATTACK_LIGHTNING]");
+    } else if (attack_options->attack[THING_ATTACK_ENERGY]) {
+      dbg("Attack type already set: attack[THING_ATTACK_ENERGY]");
+    } else if (attack_options->attack[THING_ATTACK_NEGATION]) {
+      dbg("Attack type already set: attack[THING_ATTACK_NEGATION]");
+    } else if (attack_options->attack[THING_ATTACK_ACID]) {
+      dbg("Attack type already set: attack[THING_ATTACK_ACID]");
+    } else if (attack_options->attack[THING_ATTACK_DIGEST]) {
+      dbg("Attack type already set: attack[THING_ATTACK_DIGEST]");
+    } else if (attack_options->attack[THING_ATTACK_NECROSIS]) {
+      dbg("Attack type already set: attack[THING_ATTACK_NECROSIS]");
+    } else if (attack_options->attack[THING_ATTACK_DRAINING]) {
+      dbg("Attack type already set: attack[THING_ATTACK_DRAINING]");
     }
 
     //
@@ -675,14 +675,14 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     // Chance of poison damage?
     //
-    if (! attack_options->attack_poison) {
+    if (! attack_options->attack[THING_ATTACK_POISON]) {
       if (! attack_options->dmg_set || attack_options->prefer_nat_att) {
         if (d1000() < dmg_poison_chance_d1000(attack_options->attack_num)) {
           int dmg_poison_val = dmg_poison();
           if (dmg_poison_val > 0) {
             attack_options->damage        = dmg_poison_val;
             attack_options->dmg_set       = true;
-            attack_options->attack_poison = true;
+            attack_options->attack[THING_ATTACK_POISON] = true;
             victim->poison_reason_set(text_a_or_an());
           }
         }
@@ -690,16 +690,16 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     }
 
     //
-    // Chance of attack_drown damage?
+    // Chance of attack[THING_ATTACK_DROWN] damage?
     //
-    if (! attack_options->attack_drown) {
+    if (! attack_options->attack[THING_ATTACK_DROWN]) {
       if (! attack_options->dmg_set) {
         if (d1000() < dmg_drown_chance_d1000(attack_options->attack_num)) {
           int dmg_drown_val = dmg_drown();
           if (dmg_drown_val > 0) {
             attack_options->damage       = dmg_drown_val;
             attack_options->dmg_set      = true;
-            attack_options->attack_drown = true;
+            attack_options->attack[THING_ATTACK_DROWN] = true;
             dbg("Set drown damage %d", attack_options->damage);
           }
         }
@@ -707,16 +707,16 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     }
 
     //
-    // Chance of attack_bite damage?
+    // Chance of attack[THING_ATTACK_BITE] damage?
     //
-    if (! attack_options->attack_bite) {
+    if (! attack_options->attack[THING_ATTACK_BITE]) {
       if (! attack_options->dmg_set) {
         if (d1000() < dmg_bite_chance_d1000(attack_options->attack_num)) {
           int dmg_bite_val = dmg_bite();
           if (dmg_bite_val > 0) {
             attack_options->damage      = dmg_bite_val;
             attack_options->dmg_set     = true;
-            attack_options->attack_bite = true;
+            attack_options->attack[THING_ATTACK_BITE] = true;
             dbg("Set bite damage %d", attack_options->damage);
           }
         }
@@ -724,7 +724,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     }
 
     //
-    // Chance of attack_claw damage?
+    // Chance of attack[THING_ATTACK_CLAW] damage?
     //
     if (! attack_options->dmg_set) {
       if (d1000() < dmg_claw_chance_d1000(attack_options->attack_num)) {
@@ -732,23 +732,23 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         if (dmg_claw_val > 0) {
           attack_options->damage      = dmg_claw_val;
           attack_options->dmg_set     = true;
-          attack_options->attack_claw = true;
+          attack_options->attack[THING_ATTACK_CLAW] = true;
           dbg("Set claw damage %d", attack_options->damage);
         }
       }
     }
 
     //
-    // Chance of attack_cold damage?
+    // Chance of attack[THING_ATTACK_COLD] damage?
     //
-    if (! attack_options->attack_cold) {
+    if (! attack_options->attack[THING_ATTACK_COLD]) {
       if (! attack_options->dmg_set) {
         if (d1000() < dmg_cold_chance_d1000(attack_options->attack_num)) {
           int dmg_cold_val = dmg_cold();
           if (dmg_cold_val > 0) {
             attack_options->damage      = dmg_cold_val;
             attack_options->dmg_set     = true;
-            attack_options->attack_cold = true;
+            attack_options->attack[THING_ATTACK_COLD] = true;
             dbg("Set cold damage %d", attack_options->damage);
           }
         }
@@ -756,16 +756,16 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     }
 
     //
-    // Chance of attack_fire damage?
+    // Chance of attack[THING_ATTACK_FIRE] damage?
     //
-    if (! attack_options->attack_fire) {
+    if (! attack_options->attack[THING_ATTACK_FIRE]) {
       if (! attack_options->dmg_set) {
         if (d1000() < dmg_fire_chance_d1000(attack_options->attack_num)) {
           int dmg_fire_val = dmg_fire();
           if (dmg_fire_val > 0) {
             attack_options->damage      = dmg_fire_val;
             attack_options->dmg_set     = true;
-            attack_options->attack_fire = true;
+            attack_options->attack[THING_ATTACK_FIRE] = true;
             dbg("Set fire damage %d", attack_options->damage);
           }
         }
@@ -773,16 +773,16 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     }
 
     //
-    // Chance of attack_crush damage?
+    // Chance of attack[THING_ATTACK_CRUSH] damage?
     //
-    if (! attack_options->attack_crush) {
+    if (! attack_options->attack[THING_ATTACK_CRUSH]) {
       if (! attack_options->dmg_set) {
         if (d1000() < dmg_crush_chance_d1000(attack_options->attack_num)) {
           int dmg_crush_val = dmg_crush();
           if (dmg_crush_val > 0) {
             attack_options->damage       = dmg_crush_val;
             attack_options->dmg_set      = true;
-            attack_options->attack_crush = true;
+            attack_options->attack[THING_ATTACK_CRUSH] = true;
             dbg("Set crush damage %d", attack_options->damage);
           }
         }
@@ -790,16 +790,16 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     }
 
     //
-    // Chance of attack_lightning damage?
+    // Chance of attack[THING_ATTACK_LIGHTNING] damage?
     //
-    if (! attack_options->attack_lightning) {
+    if (! attack_options->attack[THING_ATTACK_LIGHTNING]) {
       if (! attack_options->dmg_set) {
         if (d1000() < dmg_lightning_chance_d1000(attack_options->attack_num)) {
           int dmg_lightning_val = dmg_lightning();
           if (dmg_lightning_val > 0) {
             attack_options->damage           = dmg_lightning_val;
             attack_options->dmg_set          = true;
-            attack_options->attack_lightning = true;
+            attack_options->attack[THING_ATTACK_LIGHTNING] = true;
             dbg("Set lightning damage %d", attack_options->damage);
           }
         }
@@ -807,16 +807,16 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     }
 
     //
-    // Chance of attack_energy damage?
+    // Chance of attack[THING_ATTACK_ENERGY] damage?
     //
-    if (! attack_options->attack_energy) {
+    if (! attack_options->attack[THING_ATTACK_ENERGY]) {
       if (! attack_options->dmg_set) {
         if (d1000() < dmg_energy_chance_d1000(attack_options->attack_num)) {
           int dmg_energy_val = dmg_energy();
           if (dmg_energy_val > 0) {
             attack_options->damage        = dmg_energy_val;
             attack_options->dmg_set       = true;
-            attack_options->attack_energy = true;
+            attack_options->attack[THING_ATTACK_ENERGY] = true;
             dbg("Set energy damage %d", attack_options->damage);
           }
         }
@@ -824,16 +824,16 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     }
 
     //
-    // Chance of attack_negation damage?
+    // Chance of attack[THING_ATTACK_NEGATION] damage?
     //
-    if (! attack_options->attack_negation) {
+    if (! attack_options->attack[THING_ATTACK_NEGATION]) {
       if (! attack_options->dmg_set) {
         if (d1000() < dmg_negation_chance_d1000(attack_options->attack_num)) {
           int dmg_negation_val = dmg_negation();
           if (dmg_negation_val > 0) {
             attack_options->damage          = dmg_negation_val;
             attack_options->dmg_set         = true;
-            attack_options->attack_negation = true;
+            attack_options->attack[THING_ATTACK_NEGATION] = true;
             dbg("Set negation damage %d", attack_options->damage);
           }
         }
@@ -841,16 +841,16 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     }
 
     //
-    // Chance of attack_acid damage?
+    // Chance of attack[THING_ATTACK_ACID] damage?
     //
-    if (! attack_options->attack_acid) {
+    if (! attack_options->attack[THING_ATTACK_ACID]) {
       if (! attack_options->dmg_set) {
         if (d1000() < dmg_acid_chance_d1000(attack_options->attack_num)) {
           int dmg_acid_val = dmg_acid();
           if (dmg_acid_val > 0) {
             attack_options->damage      = dmg_acid_val;
             attack_options->dmg_set     = true;
-            attack_options->attack_acid = true;
+            attack_options->attack[THING_ATTACK_ACID] = true;
             dbg("Set acid damage %d", attack_options->damage);
           }
         }
@@ -858,16 +858,16 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     }
 
     //
-    // Chance of attack_water damage?
+    // Chance of attack[THING_ATTACK_WATER] damage?
     //
-    if (! attack_options->attack_water) {
+    if (! attack_options->attack[THING_ATTACK_WATER]) {
       if (! attack_options->dmg_set) {
         if (d1000() < dmg_water_chance_d1000(attack_options->attack_num)) {
           int dmg_water_val = dmg_water();
           if (dmg_water_val > 0) {
             attack_options->damage       = dmg_water_val;
             attack_options->dmg_set      = true;
-            attack_options->attack_water = true;
+            attack_options->attack[THING_ATTACK_WATER] = true;
             dbg("Set water damage %d", attack_options->damage);
           }
         }
@@ -875,16 +875,16 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     }
 
     //
-    // Chance of attack_digest damage?
+    // Chance of attack[THING_ATTACK_DIGEST] damage?
     //
-    if (! attack_options->attack_digest) {
+    if (! attack_options->attack[THING_ATTACK_DIGEST]) {
       if (! attack_options->dmg_set) {
         if (d1000() < dmg_digest_chance_d1000(attack_options->attack_num)) {
           int dmg_digest_val = dmg_digest();
           if (dmg_digest_val > 0) {
             attack_options->damage        = dmg_digest_val;
             attack_options->dmg_set       = true;
-            attack_options->attack_digest = true;
+            attack_options->attack[THING_ATTACK_DIGEST] = true;
             dbg("Set digest damage %d", attack_options->damage);
           }
         }
@@ -894,14 +894,14 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     // Chance of necrosis damage?
     //
-    if (! attack_options->attack_necrosis) {
+    if (! attack_options->attack[THING_ATTACK_NECROSIS]) {
       if (! attack_options->dmg_set) {
         if (d1000() < dmg_necrosis_chance_d1000(attack_options->attack_num)) {
           int dmg_necrosis_val = dmg_necrosis();
           if (dmg_necrosis_val > 0) {
             attack_options->damage          = dmg_necrosis_val;
             attack_options->dmg_set         = true;
-            attack_options->attack_necrosis = true;
+            attack_options->attack[THING_ATTACK_NECROSIS] = true;
             dbg("Set necro damage %d", attack_options->damage);
           }
         }
@@ -911,14 +911,14 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     // Chance of stamina damage?
     //
-    if (! attack_options->attack_draining) {
+    if (! attack_options->attack[THING_ATTACK_DRAINING]) {
       if (! attack_options->dmg_set) {
         if (d1000() < dmg_draining_chance_d1000(attack_options->attack_num)) {
           int dmg_draining_val = dmg_draining();
           if (dmg_draining_val > 0) {
             attack_options->damage          = dmg_draining_val;
             attack_options->dmg_set         = true;
-            attack_options->attack_draining = true;
+            attack_options->attack[THING_ATTACK_DRAINING] = true;
             dbg("Set drain damage %d", attack_options->damage);
           }
         }
@@ -928,14 +928,14 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     // Bite?
     //
-    if (! attack_options->attack_natural) {
+    if (! attack_options->attack[THING_ATTACK_NATURAL]) {
       if (! attack_options->dmg_set || attack_options->prefer_nat_att) {
         if (d1000() < dmg_nat_att_chance_d1000(attack_options->attack_num)) {
           int dmg_nat_att_val = dmg_nat_att();
           if (dmg_nat_att_val > 0) {
             attack_options->damage         = dmg_nat_att_val + att_bonus;
             attack_options->dmg_set        = true;
-            attack_options->attack_natural = true;
+            attack_options->attack[THING_ATTACK_NATURAL] = true;
             dbg("Set natural damage %d", attack_options->damage);
           }
         }
@@ -978,20 +978,20 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     if (is_engulfer()) {
       if (victim->curr_at == curr_at) {
         attack_options->damage           = dmg_digest();
-        attack_options->attack_poison    = false;
-        attack_options->attack_drown     = false;
-        attack_options->attack_bite      = false;
-        attack_options->attack_claw      = false;
-        attack_options->attack_cold      = false;
-        attack_options->attack_fire      = false;
-        attack_options->attack_crush     = false;
-        attack_options->attack_lightning = false;
-        attack_options->attack_energy    = false;
-        attack_options->attack_negation  = false;
-        attack_options->attack_acid      = false;
-        attack_options->attack_digest    = true;
-        attack_options->attack_necrosis  = false;
-        attack_options->attack_natural   = false;
+        attack_options->attack[THING_ATTACK_POISON]    = false;
+        attack_options->attack[THING_ATTACK_DROWN]     = false;
+        attack_options->attack[THING_ATTACK_BITE]      = false;
+        attack_options->attack[THING_ATTACK_CLAW]      = false;
+        attack_options->attack[THING_ATTACK_COLD]      = false;
+        attack_options->attack[THING_ATTACK_FIRE]      = false;
+        attack_options->attack[THING_ATTACK_CRUSH]     = false;
+        attack_options->attack[THING_ATTACK_LIGHTNING] = false;
+        attack_options->attack[THING_ATTACK_ENERGY]    = false;
+        attack_options->attack[THING_ATTACK_NEGATION]  = false;
+        attack_options->attack[THING_ATTACK_ACID]      = false;
+        attack_options->attack[THING_ATTACK_DIGEST]    = true;
+        attack_options->attack[THING_ATTACK_NECROSIS]  = false;
+        attack_options->attack[THING_ATTACK_NATURAL]   = false;
         attack_options->dmg_set          = true;
       }
     }
@@ -1100,7 +1100,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
           return true;
         }
       } else if (is_monst()) {
-        attack_options->attack_natural = true;
+        attack_options->attack[THING_ATTACK_NATURAL] = true;
       }
     }
 
@@ -1292,20 +1292,20 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     // Reset to allow multiple attacks of the same type.
     //
-    attack_options->attack_poison    = false;
-    attack_options->attack_drown     = false;
-    attack_options->attack_bite      = false;
-    attack_options->attack_claw      = false;
-    attack_options->attack_cold      = false;
-    attack_options->attack_fire      = false;
-    attack_options->attack_crush     = false;
-    attack_options->attack_lightning = false;
-    attack_options->attack_energy    = false;
-    attack_options->attack_negation  = false;
-    attack_options->attack_acid      = false;
-    attack_options->attack_digest    = false;
-    attack_options->attack_necrosis  = false;
-    attack_options->attack_natural   = false;
+    attack_options->attack[THING_ATTACK_POISON]    = false;
+    attack_options->attack[THING_ATTACK_DROWN]     = false;
+    attack_options->attack[THING_ATTACK_BITE]      = false;
+    attack_options->attack[THING_ATTACK_CLAW]      = false;
+    attack_options->attack[THING_ATTACK_COLD]      = false;
+    attack_options->attack[THING_ATTACK_FIRE]      = false;
+    attack_options->attack[THING_ATTACK_CRUSH]     = false;
+    attack_options->attack[THING_ATTACK_LIGHTNING] = false;
+    attack_options->attack[THING_ATTACK_ENERGY]    = false;
+    attack_options->attack[THING_ATTACK_NEGATION]  = false;
+    attack_options->attack[THING_ATTACK_ACID]      = false;
+    attack_options->attack[THING_ATTACK_DIGEST]    = false;
+    attack_options->attack[THING_ATTACK_NECROSIS]  = false;
+    attack_options->attack[THING_ATTACK_NATURAL]   = false;
     attack_options->dmg_set          = false;
     attack_options->damage           = 0;
   }
@@ -1362,7 +1362,7 @@ int Thing::is_attacked_with_dmg_nat_att(Thingp hitter, Thingp real_hitter, int d
 {
   TRACE_NO_INDENT();
   ThingAttackOptions attack_options {};
-  attack_options.attack_natural = true;
+  attack_options.attack[THING_ATTACK_NATURAL] = true;
   attack_options.real_hitter    = real_hitter;
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1371,7 +1371,7 @@ int Thing::is_attacked_with_dmg_poison(Thingp hitter, Thingp real_hitter, int da
 {
   TRACE_NO_INDENT();
   ThingAttackOptions attack_options {};
-  attack_options.attack_poison = true;
+  attack_options.attack[THING_ATTACK_POISON] = true;
   attack_options.real_hitter   = real_hitter;
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1380,7 +1380,7 @@ int Thing::is_attacked_with_dmg_necrosis(Thingp hitter, Thingp real_hitter, int 
 {
   TRACE_NO_INDENT();
   ThingAttackOptions attack_options {};
-  attack_options.attack_necrosis = true;
+  attack_options.attack[THING_ATTACK_NECROSIS] = true;
   attack_options.real_hitter     = real_hitter;
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1389,7 +1389,7 @@ int Thing::is_attacked_with_dmg_draining(Thingp hitter, Thingp real_hitter, int 
 {
   TRACE_NO_INDENT();
   ThingAttackOptions attack_options {};
-  attack_options.attack_draining = true;
+  attack_options.attack[THING_ATTACK_DRAINING] = true;
   attack_options.real_hitter     = real_hitter;
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1398,7 +1398,7 @@ int Thing::is_attacked_with_dmg_drown(Thingp hitter, Thingp real_hitter, int dam
 {
   TRACE_NO_INDENT();
   ThingAttackOptions attack_options {};
-  attack_options.attack_drown = true;
+  attack_options.attack[THING_ATTACK_DROWN] = true;
   attack_options.real_hitter  = real_hitter;
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1407,7 +1407,7 @@ int Thing::is_attacked_with_dmg_bite(Thingp hitter, Thingp real_hitter, int dama
 {
   TRACE_NO_INDENT();
   ThingAttackOptions attack_options {};
-  attack_options.attack_bite = true;
+  attack_options.attack[THING_ATTACK_BITE] = true;
   attack_options.real_hitter = real_hitter;
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1416,7 +1416,7 @@ int Thing::is_attacked_with_dmg_claw(Thingp hitter, Thingp real_hitter, int dama
 {
   TRACE_NO_INDENT();
   ThingAttackOptions attack_options {};
-  attack_options.attack_claw = true;
+  attack_options.attack[THING_ATTACK_CLAW] = true;
   attack_options.real_hitter = real_hitter;
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1425,7 +1425,7 @@ int Thing::is_attacked_with_dmg_cold(Thingp hitter, Thingp real_hitter, int dama
 {
   TRACE_NO_INDENT();
   ThingAttackOptions attack_options {};
-  attack_options.attack_cold = true;
+  attack_options.attack[THING_ATTACK_COLD] = true;
   attack_options.real_hitter = real_hitter;
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1434,7 +1434,7 @@ int Thing::is_attacked_with_dmg_fire(Thingp hitter, Thingp real_hitter, int dama
 {
   TRACE_NO_INDENT();
   ThingAttackOptions attack_options {};
-  attack_options.attack_fire = true;
+  attack_options.attack[THING_ATTACK_FIRE] = true;
   attack_options.real_hitter = real_hitter;
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1443,7 +1443,7 @@ int Thing::is_attacked_with_dmg_crush(Thingp hitter, Thingp real_hitter, int dam
 {
   TRACE_NO_INDENT();
   ThingAttackOptions attack_options {};
-  attack_options.attack_crush = true;
+  attack_options.attack[THING_ATTACK_CRUSH] = true;
   attack_options.real_hitter  = real_hitter;
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1452,7 +1452,7 @@ int Thing::is_attacked_with_dmg_lightning(Thingp hitter, Thingp real_hitter, int
 {
   TRACE_NO_INDENT();
   ThingAttackOptions attack_options {};
-  attack_options.attack_lightning = true;
+  attack_options.attack[THING_ATTACK_LIGHTNING] = true;
   attack_options.real_hitter      = real_hitter;
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1461,7 +1461,7 @@ int Thing::is_attacked_with_dmg_energy(Thingp hitter, Thingp real_hitter, int da
 {
   TRACE_NO_INDENT();
   ThingAttackOptions attack_options {};
-  attack_options.attack_energy = true;
+  attack_options.attack[THING_ATTACK_ENERGY] = true;
   attack_options.real_hitter   = real_hitter;
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1470,7 +1470,7 @@ int Thing::is_attacked_with_dmg_negation(Thingp hitter, Thingp real_hitter, int 
 {
   TRACE_NO_INDENT();
   ThingAttackOptions attack_options {};
-  attack_options.attack_negation = true;
+  attack_options.attack[THING_ATTACK_NEGATION] = true;
   attack_options.real_hitter     = real_hitter;
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1479,7 +1479,7 @@ int Thing::is_attacked_with_dmg_acid(Thingp hitter, Thingp real_hitter, int dama
 {
   TRACE_NO_INDENT();
   ThingAttackOptions attack_options {};
-  attack_options.attack_acid = true;
+  attack_options.attack[THING_ATTACK_ACID] = true;
   attack_options.real_hitter = real_hitter;
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1488,7 +1488,7 @@ int Thing::is_attacked_with_dmg_water(Thingp hitter, Thingp real_hitter, int dam
 {
   TRACE_NO_INDENT();
   ThingAttackOptions attack_options {};
-  attack_options.attack_water = true;
+  attack_options.attack[THING_ATTACK_WATER] = true;
   attack_options.real_hitter  = real_hitter;
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1497,7 +1497,7 @@ int Thing::is_attacked_with_dmg_digest(Thingp hitter, Thingp real_hitter, int da
 {
   TRACE_NO_INDENT();
   ThingAttackOptions attack_options {};
-  attack_options.attack_digest = true;
+  attack_options.attack[THING_ATTACK_DIGEST] = true;
   attack_options.real_hitter   = real_hitter;
   return is_hit(hitter, &attack_options, damage);
 }

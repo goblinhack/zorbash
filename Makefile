@@ -6,7 +6,7 @@ all: pre
 	@if [ ! -f src/Makefile ]; then \
 	    (./RUNME;) \
 	fi
-	(cd src; $(MAKE) -j12 $@)
+	(cd src; $(MAKE) $@)
 
 format:
 	(cd python/things ; sh ../../build/tidy_python.sh do)

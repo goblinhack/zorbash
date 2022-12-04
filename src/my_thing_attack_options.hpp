@@ -10,6 +10,26 @@
 #include "my_point.hpp"
 #include <string>
 
+typedef enum {
+  THING_ATTACK_WATER,
+  THING_ATTACK_ACID,
+  THING_ATTACK_COLD,
+  THING_ATTACK_CRUSH,
+  THING_ATTACK_DIGEST,
+  THING_ATTACK_DRAINING,
+  THING_ATTACK_ENERGY,
+  THING_ATTACK_NEGATION,
+  THING_ATTACK_FIRE,
+  THING_ATTACK_DROWN,
+  THING_ATTACK_BITE,
+  THING_ATTACK_CLAW,
+  THING_ATTACK_LIGHTNING,
+  THING_ATTACK_NATURAL,
+  THING_ATTACK_NECROSIS,
+  THING_ATTACK_POISON,
+  THING_ATTACK_MAX,
+} ThingAttack;
+
 typedef class ThingAttackOptions_
 {
 public:
@@ -55,22 +75,7 @@ public:
   //
   // Attack types;
   //
-  bool attack_water {};
-  bool attack_acid {};
-  bool attack_cold {};
-  bool attack_crush {};
-  bool attack_digest {};
-  bool attack_draining {};
-  bool attack_energy {};
-  bool attack_negation {};
-  bool attack_fire {};
-  bool attack_drown {};
-  bool attack_bite {};
-  bool attack_claw {};
-  bool attack_lightning {};
-  bool attack_natural {};
-  bool attack_necrosis {};
-  bool attack_poison {};
+  bool attack[ THING_ATTACK_MAX ] = {};
   //
   // Set if damage is already pre calculated
   //
