@@ -3,11 +3,11 @@ import tp
 
 
 def on_equip(owner, me, x, y):
-    my.thing_buff_add(owner, "buff_is_immune_to_poison")
+    my.thing_buff_add(owner, "buff_is_immune_to_negation")
 
 
 def on_unequip(owner, me, x, y):
-    my.thing_buff_remove(owner, "buff_is_immune_to_poison")
+    my.thing_buff_remove(owner, "buff_is_immune_to_negation")
 
 
 def tp_init(name, text_long_name, text_short_name):
@@ -16,6 +16,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.collision_hit_priority(self, 5)
     my.collision_hit_priority(self, 6)
     my.effect_radius(self, 2)
+    my.equip_carry_anim(self, "ring_is_immune_to_negation_carry")
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_reflection(self, True)
@@ -33,6 +34,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_described_when_hovering_over(self, True)
     my.is_droppable(self, True)
     my.is_enchantable(self, True)
+    my.is_immune_to_negation(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)
     my.is_loggable(self, True)
@@ -51,13 +53,12 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_con_mod(self, 1)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 CON")
-    my.text_description_long(self, "Eat drink and be merry while wearing this ring, for poison can do you no harm. Please wear responsibly...")
-    my.text_description_short(self, "A ring of poison resist.")
+    my.text_description_long(self, "Negate your negative qualities with this ring of nega negativity. Attacks of negation will have no impact on you.")
+    my.text_description_short(self, "A ring of negation immunity.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
     # end sort marker
-    my.equip_carry_anim(self, "ring_poison_resist_carry")
 
     my.tile(self,
             ascii_fg_char="circle", ascii_bg_col_name="", ascii_fg_col_name="green",
@@ -67,7 +68,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="ring_poison_resist", text_long_name="ring of poison resist", text_short_name="ring, poison")
+    tp_init(name="ring_is_immune_to_negation", text_long_name="ring of negation immunity", text_short_name="ring, negation")
 
 
 init()

@@ -57,7 +57,7 @@ void Game::place_player(void)
         t->enchant_without_stone(w);
       }
       if (0) {
-        auto w = level->thing_new("buff_undead_resist", point(x, y));
+        auto w = level->thing_new("buff_undead_protection", point(x, y));
         t->buff_add(w);
       }
       if (0) {
@@ -113,21 +113,21 @@ void Game::place_player(void)
         t->carry(w);
       }
       if (0) {
-        auto r1 = level->thing_new("ring_negation_resist", point(x, y));
+        auto r1 = level->thing_new("ring_is_immune_to_negation", point(x, y));
         t->carry(r1);
-        auto r2 = level->thing_new("ring_poison_resist", point(x, y));
+        auto r2 = level->thing_new("ring_is_immune_to_poison", point(x, y));
         t->carry(r2);
       }
       if (0) {
         auto r1 = level->thing_new("ring_shield", point(x, y));
         t->carry(r1);
-        auto r2 = level->thing_new("ring_poison_resist", point(x, y));
+        auto r2 = level->thing_new("ring_is_immune_to_poison", point(x, y));
         t->carry(r2);
       }
       if (0) {
-        auto r3 = level->thing_new("ring_fire_resist", point(x, y));
+        auto r3 = level->thing_new("ring_is_immune_to_fire", point(x, y));
         t->carry(r3);
-        auto r4 = level->thing_new("ring_cold_resist", point(x, y));
+        auto r4 = level->thing_new("ring_is_immune_to_cold", point(x, y));
         t->carry(r4);
       }
       if (0) {

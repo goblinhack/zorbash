@@ -40,7 +40,7 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="ring_poison_resist_carry")
+    tp_init(name="ring_is_immune_to_cold_carry")
 
 
 init()

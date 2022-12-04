@@ -3,11 +3,11 @@ import tp
 
 
 def on_equip(owner, me, x, y):
-    my.thing_buff_add(owner, "buff_is_immune_to_cold")
+    my.thing_buff_add(owner, "buff_is_immune_to_poison")
 
 
 def on_unequip(owner, me, x, y):
-    my.thing_buff_remove(owner, "buff_is_immune_to_cold")
+    my.thing_buff_remove(owner, "buff_is_immune_to_poison")
 
 
 def tp_init(name, text_long_name, text_short_name):
@@ -33,7 +33,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_described_when_hovering_over(self, True)
     my.is_droppable(self, True)
     my.is_enchantable(self, True)
-    my.is_immune_to_cold(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)
     my.is_loggable(self, True)
@@ -52,13 +51,13 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_con_mod(self, 1)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 CON")
-    my.text_description_long(self, "Complete your icy personality with this ring of cold protection.")
-    my.text_description_short(self, "A ring of cold resist.")
+    my.text_description_long(self, "Eat drink and be merry while wearing this ring, for poison can do you no harm. Please wear responsibly...")
+    my.text_description_short(self, "A ring of poison immunity.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
     # end sort marker
-    my.equip_carry_anim(self, "ring_cold_resist_carry")
+    my.equip_carry_anim(self, "ring_is_immune_to_poison_carry")
 
     my.tile(self,
             ascii_fg_char="circle", ascii_bg_col_name="", ascii_fg_col_name="green",
@@ -68,7 +67,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="ring_cold_resist", text_long_name="ring of cold resist", text_short_name="ring, cold")
+    tp_init(name="ring_is_immune_to_poison", text_long_name="ring of poison immunity", text_short_name="ring, poison")
 
 
 init()

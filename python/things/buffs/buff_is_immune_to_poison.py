@@ -60,7 +60,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="buff_is_immune_to_poison", text_long_name="poison resist")
+    tp_init(name="buff_is_immune_to_poison", text_long_name="poison immunity")
 
 
 init()

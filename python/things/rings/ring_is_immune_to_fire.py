@@ -53,12 +53,12 @@ def tp_init(name, text_long_name, text_short_name):
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 CON")
     my.text_description_long(self, "Dance in the flames with impunity with this ring of fire protection.")
-    my.text_description_short(self, "A ring of fire resist.")
+    my.text_description_short(self, "A ring of fire immunity.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
     # end sort marker
-    my.equip_carry_anim(self, "ring_fire_resist_carry")
+    my.equip_carry_anim(self, "ring_is_immune_to_fire_carry")
 
     my.tile(self,
             ascii_fg_char="circle", ascii_bg_col_name="", ascii_fg_col_name="green",
@@ -68,7 +68,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="ring_fire_resist", text_long_name="ring of fire resist", text_short_name="ring, fire")
+    tp_init(name="ring_is_immune_to_fire", text_long_name="ring of fire immunity", text_short_name="ring, fire")
 
 
 init()

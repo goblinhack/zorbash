@@ -123,12 +123,12 @@ def tp_init(name, text_long_name):
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
     my.tile(self,
-            tile="buff_undead_resist")
+            tile="buff_undead_protection")
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="buff_undead_resist", text_long_name="undead resist")
+    tp_init(name="buff_undead_protection", text_long_name="undead protection")
 
 
 init()

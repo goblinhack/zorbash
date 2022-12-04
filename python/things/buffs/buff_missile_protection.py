@@ -122,12 +122,12 @@ def tp_init(name, text_long_name):
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
     my.tile(self,
-            tile="buff_missile_resist")
+            tile="buff_missile_protection")
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="buff_missile_resist", text_long_name="missile resist")
+    tp_init(name="buff_missile_protection", text_long_name="missile protection")
 
 
 init()
