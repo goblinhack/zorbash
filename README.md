@@ -1,7 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - staff of negation blows up!                                                                                                                -->
-<!-- - ring of negation protection                                                                                                                -->
 <!-- - falling in block of ice should fall together                                                                                               -->
 <!-- - some weapons crit more                                                                                                                     -->
 <!-- - tentacle grapple                                                                                                                           -->

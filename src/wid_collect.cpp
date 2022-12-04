@@ -500,9 +500,25 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
           text = " " + std::to_string(slot + 1) + ". ";
         }
 
+        //
+        // The Item Name
+        //
         text += t->text_short_and_state_capitalised();
+
+        //
+        // Does it have value?
+        //
         if (! t->gold_value_dice_str().empty()) {
-          text += " Value " + t->gold_value_dice_str() + " zorkmids.";
+          if (t->initial_charge_count() && ! t->charge_count()) {
+            //
+            // Spent staffs aew worthless
+            //
+          } else {
+            //
+            // The currency of the future.
+            //
+            text += ", value " + t->gold_value_dice_str() + " zorkmids";
+          }
         }
         wid_set_text(wid_item, text);
       }

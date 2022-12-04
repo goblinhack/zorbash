@@ -24,13 +24,15 @@ std::string Thing::text_a_or_an(void)
       out += "a dead ";
     } else if (is_dying) {
       out += "a dying ";
-    } else if (is_frozen) {
-      out += "a frozen ";
-    } else if (is_burnt) {
-      out += "a burnt ";
-    } else if (tpp->charge_count() && ! charge_count()) {
-      out += "a spent ";
     }
+  }
+
+  if (is_frozen) {
+    out += "frozen ";
+  } else if (is_burnt) {
+    out += "burnt ";
+  } else if (tpp->charge_count() && ! charge_count()) {
+    out += "spent ";
   }
 
   if (out == "") {
@@ -79,13 +81,15 @@ std::string Thing::text_the(bool include_owner)
       }
     } else if (is_dying) {
       out += "dying ";
-    } else if (is_frozen) {
-      out += "frozen ";
-    } else if (is_burnt) {
-      out += "burnt ";
-    } else if (tpp->charge_count() && ! charge_count()) {
-      out += "spent ";
     }
+  }
+
+  if (is_frozen) {
+    out += "frozen ";
+  } else if (is_burnt) {
+    out += "burnt ";
+  } else if (tpp->charge_count() && ! charge_count()) {
+    out += "spent ";
   }
 
   out += tpp->text_long_name();
@@ -154,13 +158,15 @@ std::string Thing::text_short_a_or_an(void)
       out += "a dead ";
     } else if (is_dying) {
       out += "a dying ";
-    } else if (is_frozen) {
-      out += "a frozen ";
-    } else if (is_burnt) {
-      out += "a burnt ";
-    } else if (tpp->charge_count() && ! charge_count()) {
-      out += "a spent ";
     }
+  }
+
+  if (is_frozen) {
+    out += "frozen ";
+  } else if (is_burnt) {
+    out += "burnt ";
+  } else if (tpp->charge_count() && ! charge_count()) {
+    out += "spent ";
   }
 
   if (out == "") {
@@ -296,13 +302,15 @@ std::string Thing::text_short_and_state_capitalised(void)
       }
     } else if (is_dying) {
       out += "dying ";
-    } else if (is_frozen) {
-      out += "frozen ";
-    } else if (is_burnt) {
-      out += "burnt ";
-    } else if (tpp->charge_count() && ! charge_count()) {
-      out += "spent ";
     }
+  }
+
+  if (is_frozen) {
+    out += "frozen ";
+  } else if (is_burnt) {
+    out += "burnt ";
+  } else if (tpp->charge_count() && ! charge_count()) {
+    out += "spent ";
   }
 
   out += text_short_name();
