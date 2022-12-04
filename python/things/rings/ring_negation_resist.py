@@ -57,8 +57,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
-    # end sort marker
     my.equip_carry_anim(self, "ring_negation_resist_carry")
+    # end sort marker
 
     my.tile(self,
             ascii_fg_char="circle", ascii_bg_col_name="", ascii_fg_col_name="green",

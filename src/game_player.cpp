@@ -112,7 +112,7 @@ void Game::place_player(void)
         auto w = level->thing_new("shovel", point(x, y));
         t->carry(w);
       }
-      if (1) {
+      if (0) {
         auto r1 = level->thing_new("ring_negation_resist", point(x, y));
         t->carry(r1);
         auto r2 = level->thing_new("ring_poison_resist", point(x, y));
