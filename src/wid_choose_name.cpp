@@ -12,7 +12,6 @@
 #include "my_wid_rightbar.hpp"
 #include "my_wid_skillbox.hpp"
 #include "my_wid_thing_info.hpp"
-// REMOVED #include <SDL_mixer.h>
 
 static Widp wid_keyboard_wid_choose_player_name;
 

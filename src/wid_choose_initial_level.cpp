@@ -2,8 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include <SDL.h>
-// REMOVED #include <map>
 
 #include "my_array_bounds_check.hpp"
 #include "my_color_defs.hpp"

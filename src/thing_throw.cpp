@@ -4,12 +4,11 @@
 
 #include "my_game.hpp"
 #include "my_math.hpp"
+#include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
-
-// REMOVED #include <math.h>
 
 void Thing::on_thrown(void)
 {
@@ -209,4 +208,56 @@ void Thing::throw_at(Thingp what, Thingp target)
   if (game->state == Game::STATE_CHOOSING_TARGET) {
     game->change_state(Game::STATE_NORMAL, "finished choosing a target");
   }
+}
+
+////////////////////////////////////////////////////////////////////////////
+// distance_throw
+////////////////////////////////////////////////////////////////////////////
+float Thing::distance_throw_get(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->distance_throw);
+  }
+  return 0;
+}
+
+int Thing::distance_throw_set(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (infop()->distance_throw = v);
+  return n;
+}
+
+int Thing::distance_throw_decr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (infop()->distance_throw -= v);
+  return n;
+}
+
+int Thing::distance_throw_incr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (infop()->distance_throw += v);
+  return n;
+}
+
+int Thing::distance_throw_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (infop()->distance_throw--);
+  return n;
+}
+
+int Thing::distance_throw_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (infop()->distance_throw++);
+  return n;
 }

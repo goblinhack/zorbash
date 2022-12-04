@@ -10,8 +10,6 @@
 #include <map>
 
 #include "my_ascii.hpp"
-// REMOVED #include "my_fwd.hpp"
-// REMOVED #include "my_size.hpp"
 #include "my_thing_id.hpp"
 #include "my_time.hpp"
 #include "my_wid_tiles.hpp"

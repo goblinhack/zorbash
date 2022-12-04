@@ -5,20 +5,9 @@
 #include "my_array_bounds_check.hpp"
 #include "my_depth.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
-// REMOVED #include "my_globals.hpp"
-// REMOVED #include "my_laser.hpp"
 #include "my_light.hpp"
 #include "my_math.hpp"
-// REMOVED #include "my_projectile.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_tex.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
-// REMOVED #include "my_tile.hpp"
-// REMOVED #include "my_wid_asciimap.hpp"
 
 void Level::update_light_ascii_map(void)
 {

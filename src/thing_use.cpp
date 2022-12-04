@@ -208,63 +208,80 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
   dbg("Attempt to use %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  if (target) {
-    on_use(what, target);
-  } else {
-    on_use(what);
-  }
+  if (what->initial_charge_count() && ! what->charge_count()) {
+    //
+    // Do not allow use of drained items
+    //
+    dbg("Attempt to use drained %s", what->to_short_string().c_str());
+    TRACE_AND_INDENT();
 
-  //
-  // Stamina drain on use
-  //
-  if (d20roll_under(stat_con_total())) {
+    if (is_player()) {
+      msg("%s is spent.", what->text_The().c_str());
+    }
+
+    on_final_use(what);
+  } else {
     //
-    // Only half stamina damage if you pass con roll
+    // Still have some charges.
     //
-    auto s = what->stamina_drain_on_using();
-    if (s) {
-      s /= 2;
-      if (! s) {
-        s = 1;
+    if (target) {
+      on_use(what, target);
+    } else {
+      on_use(what);
+    }
+
+    //
+    // Stamina drain on use
+    //
+    if (d20roll_under(stat_con_total())) {
+      //
+      // Only half stamina damage if you pass con roll
+      //
+      auto s = what->stamina_drain_on_using();
+      if (s) {
+        s /= 2;
+        if (! s) {
+          s = 1;
+        }
+      }
+      stamina_decr(s);
+    }
+
+    auto existing_owner = what->top_owner();
+    if (existing_owner != this) {
+      if (is_dead) {
+        //
+        // Can happen if we teleport into solid rock and die, hence no longer
+        // having those teleport boots.
+        //
+      } else {
+        err("Attempt to use %s which is not carried", what->to_short_string().c_str());
+        return;
       }
     }
-    stamina_decr(s);
-  }
 
-  auto existing_owner = what->top_owner();
-  if (existing_owner != this) {
-    if (is_dead) {
-      //
-      // Can happen if we teleport into solid rock and die, hence no longer
-      // having those teleport boots.
-      //
-    } else {
-      err("Attempt to use %s which is not carried", what->to_short_string().c_str());
+    if (is_monst()) {
+      dbg("Used %s (do not deplete %d charges)", what->to_short_string().c_str(), what->charge_count());
       return;
     }
-  }
 
-  if (is_monst()) {
-    dbg("Used %s (do not deplete %d charges)", what->to_short_string().c_str(), what->charge_count());
-    return;
-  }
-
-  //
-  // Decrement the charge count and do not remove, if it has charges
-  //
-  if (what->charge_count()) {
-    what->charge_count_decr();
+    //
+    // Decrement the charge count and do not remove, if it has charges
+    //
     if (what->charge_count()) {
-      dbg("Used %s (has %d charges left)", what->to_short_string().c_str(), what->charge_count());
-      game->set_request_to_remake_rightbar();
-      return;
+      what->charge_count_decr();
+      if (what->charge_count()) {
+        dbg("Used %s (has %d charges left)", what->to_short_string().c_str(), what->charge_count());
+        game->set_request_to_remake_rightbar();
+        return;
+      }
     }
-  }
 
-  if (target) {
-    on_final_use(what, target);
-  } else {
-    on_final_use(what);
+    if (target) {
+      on_final_use(what, target);
+    } else {
+      on_final_use(what);
+    }
   }
 
   dbg("Used %s", what->to_short_string().c_str());

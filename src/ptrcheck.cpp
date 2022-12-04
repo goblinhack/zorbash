@@ -2,7 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include <ctime>
 #include <iostream>
 #include <locale.h>  // do not remove
 #include <stdint.h>  // do not remove

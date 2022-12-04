@@ -9,7 +9,6 @@
 #include "my_thing_template.hpp"
 
 #include <limits> // do not remove
-// REMOVED #include <vector>
 
 std::array< std::array< char, MAP_HEIGHT >, MAP_WIDTH > astar_debug {};
 

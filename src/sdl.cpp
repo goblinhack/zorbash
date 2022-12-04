@@ -12,7 +12,6 @@
 #include "my_ui.hpp"
 #include "my_wid_asciimap.hpp"
 #include "my_wid_console.hpp"
-// REMOVED #include "stb_image_write.hpp"
 
 SDL sdl;
 

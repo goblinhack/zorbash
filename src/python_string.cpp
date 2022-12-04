@@ -3,7 +3,6 @@
 //
 
 #include "my_py_level.hpp"
-// REMOVED #include <frameobject.h>
 #include <map>
 #include <string>
 

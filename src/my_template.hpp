@@ -77,7 +77,6 @@ std::multimap< B, A > flip_map(const M< A, B, Args... > &src)
   return dst;
 }
 
-// REMOVED #include <type_traits>
 
 template < typename T > size_t len(const T &a)
 {

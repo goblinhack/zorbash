@@ -2,7 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include <SDL.h>
 
 #include "my_backtrace.hpp"
 #include "my_color_defs.hpp"
@@ -11,7 +10,6 @@
 #include "my_ui.hpp"
 #include "my_vector_bounds_check.hpp"
 #include "my_wid_text_box.hpp"
-// REMOVED #include "slre.hpp"
 
 WidTextBox::~WidTextBox()
 {

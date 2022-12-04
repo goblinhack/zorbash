@@ -8,8 +8,6 @@
 
 #include "my_tex.hpp"
 #include "my_tile.hpp"
-// REMOVED #include <array>
-// REMOVED #include <wchar.h>
 
 #define TERM_ASCII_WIDTH_DEF  120
 #define TERM_ASCII_HEIGHT_DEF 40

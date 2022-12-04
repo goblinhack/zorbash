@@ -12,8 +12,6 @@
 #include "my_ptrcheck.hpp"
 
 #include <SDL_mixer.h>
-// REMOVED #include <map>
-// REMOVED #include <string>
 
 class sound;
 using soundp = class sound *;

@@ -13,7 +13,6 @@
 #include "my_wid_leftbar.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_thing_info.hpp"
-// REMOVED #include "stb_image_write.hpp"
 
 void sdl_display(void)
 {

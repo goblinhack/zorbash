@@ -6,7 +6,6 @@
 #ifndef _MY_THING_HPP_
 #define _MY_THING_HPP_
 
-// REMOVED #include <array>
 #include <functional> // for std::function
 #include <list>
 

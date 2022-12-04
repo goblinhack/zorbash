@@ -2,15 +2,8 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include "my_game.hpp"
-// REMOVED #include "my_hiscore.hpp"
-// REMOVED #include "my_main.hpp"
-// REMOVED #include "my_monst.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
 #include "my_serialize.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_time.hpp"
 
 HiScores::HiScores(void)
 {

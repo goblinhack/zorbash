@@ -10,7 +10,6 @@
 #include "my_point.hpp"
 
 #include <array>
-// REMOVED #include <vector>
 
 using Dmap = struct Dmap_ {
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > val {};

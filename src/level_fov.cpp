@@ -39,9 +39,6 @@
 //
 
 #include <math.h>
-// REMOVED #include <stdbool.h>
-// REMOVED #include <stdlib.h>
-// REMOVED #include <string.h>
 
 #include "my_array_bounds_check.hpp"
 #include "my_level.hpp"

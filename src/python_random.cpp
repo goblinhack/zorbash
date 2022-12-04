@@ -3,8 +3,6 @@
 //
 
 #include "my_py_level.hpp"
-// REMOVED #include <frameobject.h>
-// REMOVED #include <map>
 
 #include "my_callstack.hpp"
 #include "my_random.hpp"

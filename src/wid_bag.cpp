@@ -2,29 +2,19 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include <SDL.h>
 
 #include "my_game.hpp"
-// REMOVED #include "my_main.hpp"
 #include "my_monst.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
 #include "my_sdl_event.hpp"
 #include "my_sdl_proto.hpp"
 #include "my_sound.hpp"
-// REMOVED #include "my_string.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
 #include "my_ui.hpp"
-// REMOVED #include "my_wid.hpp"
-// REMOVED #include "my_wid_actionbar.hpp"
 #include "my_wid_bag.hpp"
 #include "my_wid_inventory.hpp"
-// REMOVED #include "my_wid_popup.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_thing_info.hpp"
 #include "my_wid_topcon.hpp"
-// REMOVED #include "slre.hpp"
 
 static void wid_bag_tick(Widp w);
 

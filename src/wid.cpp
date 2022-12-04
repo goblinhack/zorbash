@@ -3,40 +3,22 @@
 //
 
 #include "my_array_bounds_check.hpp"
-// REMOVED #include "my_backtrace.hpp"
 #include "my_color_defs.hpp"
 #include "my_command.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
-// REMOVED #include "my_math.hpp"
-// REMOVED #include "my_monst.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
-// REMOVED #include "my_random.hpp"
 #include "my_sdl_event.hpp"
 #include "my_sdl_proto.hpp"
 #include "my_sound.hpp"
 #include "my_sprintf.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_tex.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
-// REMOVED #include "my_tile.hpp"
-// REMOVED #include "my_time.hpp"
 #include "my_ui.hpp"
 #include "my_unicode.hpp"
-// REMOVED #include "my_wid.hpp"
 #include "my_wid_actionbar.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_leftbar.hpp"
 #include "my_wid_rightbar.hpp"
-// REMOVED #include "my_wid_skillbox.hpp"
 #include "my_wid_thing_info.hpp"
-// REMOVED #include "my_wid_tiles.hpp"
-// REMOVED #include "my_wid_topcon.hpp"
-// REMOVED #include "slre.hpp"
-// REMOVED #include <list>
-// REMOVED #include <unistd.h> // usleep
 
 #undef ENABLE_DEBUG_GFX_GL_BLEND
 

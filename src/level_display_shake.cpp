@@ -2,7 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include <math.h>
 
 #include "my_game.hpp"
 #include "my_thing.hpp"

@@ -3,6 +3,7 @@
 //
 
 #include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_string.hpp"
@@ -86,4 +87,51 @@ void Thing::on_death_of_a_follower(Thingp leader)
     ERR("Bad on_death_of_a_follower call [%s] expected mod:function, got %d elems", on_death_of_a_follower.c_str(),
         (int) on_death_of_a_follower.size());
   }
+}
+
+////////////////////////////////////////////////////////////////////////////
+// follower_count
+////////////////////////////////////////////////////////////////////////////
+int Thing::follower_count(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->follower_count);
+  }
+  return 0;
+}
+
+int Thing::follower_count_set(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->follower_count = v);
+}
+
+int Thing::follower_count_decr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->follower_count -= v);
+}
+
+int Thing::follower_count_incr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->follower_count += v);
+}
+
+int Thing::follower_count_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->follower_count--);
+}
+
+int Thing::follower_count_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->follower_count++);
 }

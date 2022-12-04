@@ -7,7 +7,6 @@
 #include "my_math.hpp"
 #include "my_thing.hpp"
 
-// REMOVED #include <math.h>
 
 //
 // A new born spawned thing. Perform common checks for it.

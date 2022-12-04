@@ -3,14 +3,12 @@
 //
 
 #include "my_file.hpp"
-// REMOVED #include "my_globals.hpp"
 #include "my_globals_extra.hpp"
 #include "my_main.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_ramdisk.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"
-// REMOVED #include <stdio.h>
 #include <string.h>  // do not remove
 #include <strings.h> // do not remove
 #include <sys/stat.h>

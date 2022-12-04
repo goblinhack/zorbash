@@ -9,7 +9,6 @@
 #include "my_python.hpp"
 #include "my_thing.hpp"
 #include "my_vector_bounds_check.hpp"
-// REMOVED #include <array>
 
 PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
 {

@@ -9,7 +9,6 @@
 #include "my_sdl_proto.hpp"
 #include "my_ui.hpp"
 #include "my_wid_console.hpp"
-// REMOVED #include "stb_image_write.hpp"
 
 int sdl_filter_events(void *userdata, SDL_Event *event)
 {

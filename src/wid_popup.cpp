@@ -2,11 +2,9 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include <SDL.h>
 
 #include "my_ui.hpp"
 #include "my_wid_popup.hpp"
-// REMOVED #include "slre.hpp"
 
 WidPopup::~WidPopup()
 {

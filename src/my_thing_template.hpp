@@ -12,7 +12,6 @@
 #include "my_tile.hpp"
 #include <map>
 #include <set>
-// REMOVED #include <vector>
 
 using Tpidmap   = std::vector< class Tp   *>;
 using Tpnamemap = std::map< std::string, class Tp * >;

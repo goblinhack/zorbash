@@ -4,7 +4,6 @@
 
 #if defined(__cpp_lib_source_location) && (__cpp_lib_source_location >= 201907L)
 // Feature test macros https://en.cppreference.com/w/cpp/feature_test
-// REMOVED #include <source_location>
 #define SRC_FILE_NAME (std::source_location::current().file_name())
 #define SRC_FUNC_NAME (std::source_location::current().function_name())
 #define SRC_LINE_NUM  (std::source_location::current().line())

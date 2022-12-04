@@ -5,7 +5,6 @@
 #include "my_file.hpp"
 #include "my_game.hpp"
 #include "my_sound.hpp"
-// REMOVED #include <SDL_mixer.h>
 
 std::map< std::string, class sound * > all_sound;
 

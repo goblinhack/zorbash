@@ -299,3 +299,50 @@ bool Thing::change_owner(Thingp new_owner)
 
   return true;
 }
+
+////////////////////////////////////////////////////////////////////////////
+// owned_count
+////////////////////////////////////////////////////////////////////////////
+int Thing::owned_count(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->owned_count);
+  }
+  return 0;
+}
+
+int Thing::owned_count_set(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->owned_count = v);
+}
+
+int Thing::owned_count_decr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->owned_count -= v);
+}
+
+int Thing::owned_count_incr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->owned_count += v);
+}
+
+int Thing::owned_count_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->owned_count--);
+}
+
+int Thing::owned_count_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->owned_count++);
+}

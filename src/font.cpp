@@ -5,10 +5,6 @@
 #include "my_array_bounds_check.hpp"
 #include "my_font.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_main.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_ui.hpp"
-// REMOVED #include <map>
 
 Fontp font_pixelart_small;
 Fontp font_pixelart_large;

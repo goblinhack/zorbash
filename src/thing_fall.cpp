@@ -4,6 +4,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
@@ -495,4 +496,98 @@ bool Thing::fall_to_next_level(void)
 
     dbg("No, not floor or lava");
   }
+}
+
+////////////////////////////////////////////////////////////////////////////
+// ts_fall_begin
+////////////////////////////////////////////////////////////////////////////
+ts_t Thing::ts_fall_begin(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->ts_fall_begin);
+  }
+  return 0;
+}
+
+ts_t Thing::ts_fall_begin_set(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_fall_begin = v);
+}
+
+ts_t Thing::ts_fall_begin_decr(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_fall_begin -= v);
+}
+
+ts_t Thing::ts_fall_begin_incr(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_fall_begin += v);
+}
+
+ts_t Thing::ts_fall_begin_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_fall_begin--);
+}
+
+ts_t Thing::ts_fall_begin_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_fall_begin++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// ts_fall_end
+////////////////////////////////////////////////////////////////////////////
+ts_t Thing::ts_fall_end(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->ts_fall_end);
+  }
+  return 0;
+}
+
+ts_t Thing::ts_fall_end_set(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_fall_end = v);
+}
+
+ts_t Thing::ts_fall_end_decr(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_fall_end -= v);
+}
+
+ts_t Thing::ts_fall_end_incr(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_fall_end += v);
+}
+
+ts_t Thing::ts_fall_end_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_fall_end--);
+}
+
+ts_t Thing::ts_fall_end_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_fall_end++);
 }

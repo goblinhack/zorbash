@@ -3,11 +3,7 @@
 //
 
 #include "my_random_name.hpp"
-// REMOVED #include "my_sys.hpp"
 
-// REMOVED #include <functional> // for std::hash
-// REMOVED #include <iostream>
-// REMOVED #include <string>
 
 std::string random_name(int len)
 {

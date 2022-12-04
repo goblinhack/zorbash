@@ -6,6 +6,7 @@
 #include "my_depth.hpp"
 #include "my_level.hpp"
 #include "my_math.hpp"
+#include "my_monst.hpp"
 #include "my_thing.hpp"
 
 #include <math.h>
@@ -87,4 +88,98 @@ float Thing::bounce_curr(void)
   height *= bounce_height_curr();
 
   return height;
+}
+
+////////////////////////////////////////////////////////////////////////////
+// ts_bounce_begin
+////////////////////////////////////////////////////////////////////////////
+ts_t Thing::ts_bounce_begin(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->ts_bounce_begin);
+  }
+  return 0;
+}
+
+ts_t Thing::ts_bounce_begin_set(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_bounce_begin = v);
+}
+
+ts_t Thing::ts_bounce_begin_decr(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_bounce_begin -= v);
+}
+
+ts_t Thing::ts_bounce_begin_incr(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_bounce_begin += v);
+}
+
+ts_t Thing::ts_bounce_begin_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_bounce_begin--);
+}
+
+ts_t Thing::ts_bounce_begin_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_bounce_begin++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// ts_bounce_end
+////////////////////////////////////////////////////////////////////////////
+ts_t Thing::ts_bounce_end(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->ts_bounce_end);
+  }
+  return 0;
+}
+
+ts_t Thing::ts_bounce_end_set(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_bounce_end = v);
+}
+
+ts_t Thing::ts_bounce_end_decr(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_bounce_end -= v);
+}
+
+ts_t Thing::ts_bounce_end_incr(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_bounce_end += v);
+}
+
+ts_t Thing::ts_bounce_end_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_bounce_end--);
+}
+
+ts_t Thing::ts_bounce_end_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_bounce_end++);
 }

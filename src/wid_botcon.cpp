@@ -2,14 +2,12 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include <SDL.h>
 
 #include "my_color_defs.hpp"
 #include "my_string.hpp"
 #include "my_ui.hpp"
 #include "my_wid.hpp"
 #include "my_wid_botcon.hpp"
-// REMOVED #include "slre.hpp"
 #include <algorithm> // for std::reverse()
 
 static void wid_botcon_wid_create(void);

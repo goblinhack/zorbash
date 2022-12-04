@@ -3,6 +3,7 @@
 //
 
 #include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
@@ -743,4 +744,210 @@ void Thing::animate(void)
       }
     }
   }
+}
+
+////////////////////////////////////////////////////////////////////////////
+// ts_fadeup_begin
+////////////////////////////////////////////////////////////////////////////
+ts_t Thing::ts_fadeup_begin(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->ts_fadeup_begin);
+  }
+  return 0;
+}
+
+ts_t Thing::ts_fadeup_begin_set(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_fadeup_begin = v);
+}
+
+ts_t Thing::ts_fadeup_begin_decr(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_fadeup_begin -= v);
+}
+
+ts_t Thing::ts_fadeup_begin_incr(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_fadeup_begin += v);
+}
+
+ts_t Thing::ts_fadeup_begin_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_fadeup_begin--);
+}
+
+ts_t Thing::ts_fadeup_begin_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_fadeup_begin++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// ts_fadeup_end
+////////////////////////////////////////////////////////////////////////////
+ts_t Thing::ts_fadeup_end(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->ts_fadeup_end);
+  }
+  return 0;
+}
+
+ts_t Thing::ts_fadeup_end_set(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_fadeup_end = v);
+}
+
+ts_t Thing::ts_fadeup_end_decr(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_fadeup_end -= v);
+}
+
+ts_t Thing::ts_fadeup_end_incr(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_fadeup_end += v);
+}
+
+ts_t Thing::ts_fadeup_end_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_fadeup_end--);
+}
+
+ts_t Thing::ts_fadeup_end_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_fadeup_end++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// ts_flip_start
+////////////////////////////////////////////////////////////////////////////
+ts_t Thing::ts_flip_start_get(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->ts_flip_start);
+  }
+  return 0;
+}
+
+ts_t Thing::ts_flip_start_set(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_flip_start = v);
+}
+
+ts_t Thing::ts_flip_start_decr(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_flip_start -= v);
+}
+
+ts_t Thing::ts_flip_start_incr(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_flip_start += v);
+}
+
+ts_t Thing::ts_flip_start_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_flip_start--);
+}
+
+ts_t Thing::ts_flip_start_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_flip_start++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// ts_anim_delay_end
+////////////////////////////////////////////////////////////////////////////
+ts_t Thing::ts_anim_delay_end(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->ts_anim_delay_end);
+  }
+  return 0;
+}
+
+ts_t Thing::ts_anim_delay_end_set(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_anim_delay_end = v);
+}
+
+ts_t Thing::ts_anim_delay_end_decr(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_anim_delay_end -= v);
+}
+
+ts_t Thing::ts_anim_delay_end_incr(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_anim_delay_end += v);
+}
+
+ts_t Thing::ts_anim_delay_end_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_anim_delay_end--);
+}
+
+ts_t Thing::ts_anim_delay_end_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_anim_delay_end++);
+}
+
+const std::string &Thing::gfx_anim_use(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->gfx_anim_use());
+}
+
+const std::string &Thing::gfx_targetted_laser(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->gfx_targetted_laser());
+}
+
+const std::string &Thing::gfx_targetted_radial(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->gfx_targetted_radial());
 }

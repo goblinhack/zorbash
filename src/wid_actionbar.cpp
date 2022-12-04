@@ -2,7 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include <SDL_mixer.h>
 
 #include "my_game.hpp"
 #include "my_sdl_proto.hpp"

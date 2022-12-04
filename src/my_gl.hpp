@@ -8,7 +8,6 @@
 #define GL_GLEXT_PROTOTYPES
 
 #include "my_game_defs.hpp"
-// REMOVED #include "my_source_loc.hpp"
 #include <array>
 
 /* Defined before OpenGL and GLUT includes to avoid deprecation messages */

@@ -9,7 +9,6 @@
 #include "my_ui.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_topcon.hpp"
-// REMOVED #include "stb_image_write.hpp"
 
 //
 // Main loop

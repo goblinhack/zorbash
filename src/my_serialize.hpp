@@ -8,11 +8,7 @@
 
 #include "c_plus_plus_serializer.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_level.hpp"
 #include "my_monst.hpp"
-// REMOVED #include "my_point.hpp"
-// REMOVED #include "my_point3d.hpp"
-// REMOVED #include "my_thing.hpp"
 
 std::istream &operator>>(std::istream &in, Bits< point & > my);
 std::ostream &operator<<(std::ostream &out, Bits< const point & > const my);

@@ -301,3 +301,70 @@ int Thing::stat_def_incr(void)
   auto n = (infop()->stat_def++);
   return n;
 }
+
+////////////////////////////////////////////////////////////////////////////
+// stat_def_mod
+////////////////////////////////////////////////////////////////////////////
+int Thing::stat_def_mod(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->stat_def_mod);
+  }
+  return 0;
+}
+
+int Thing::stat_def_mod_set(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
+  new_infop();
+  auto n = (infop()->stat_def_mod = v);
+  return n;
+}
+
+int Thing::stat_def_mod_decr(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
+  new_infop();
+  auto n = (infop()->stat_def_mod -= v);
+  return n;
+}
+
+int Thing::stat_def_mod_incr(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
+  new_infop();
+  auto n = (infop()->stat_def_mod += v);
+  return n;
+}
+
+int Thing::stat_def_mod_decr(void)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
+  new_infop();
+  auto n = (infop()->stat_def_mod--);
+  return n;
+}
+
+int Thing::stat_def_mod_incr(void)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
+  new_infop();
+  auto n = (infop()->stat_def_mod++);
+  return n;
+}

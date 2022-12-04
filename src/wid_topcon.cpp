@@ -2,7 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include <SDL.h>
 
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
@@ -17,7 +16,6 @@
 #include "my_wid_rightbar.hpp"
 #include "my_wid_thing_info.hpp"
 #include "my_wid_topcon.hpp"
-// REMOVED #include "slre.hpp"
 
 static void wid_topcon_wid_create(void);
 

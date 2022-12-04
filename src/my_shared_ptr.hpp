@@ -1,9 +1,5 @@
 #ifndef MY_SHARED_PTR
 #define MY_SHARED_PTR
-// REMOVED #include <iostream>
-// REMOVED #include <memory>
-// REMOVED #include <sstream>
-// REMOVED #include <string>
 
 template < typename T > class SmartPointerWrapper
 {

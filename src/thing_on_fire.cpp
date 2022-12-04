@@ -389,3 +389,22 @@ bool Thing::ai_on_fire(void)
 
   return false;
 }
+
+////////////////////////////////////////////////////////////////////////////
+// on_fire_id_anim
+////////////////////////////////////////////////////////////////////////////
+ThingId Thing::on_fire_anim_id(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->on_fire_id_anim);
+  }
+  return NoThingId;
+}
+
+ThingId Thing::on_fire_anim_id_set(ThingId v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->on_fire_id_anim = v);
+}

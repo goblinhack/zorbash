@@ -893,3 +893,55 @@ void Thing::clear_move_path(const std::string &why)
   //
   aip()->wander_dest = point(0, 0);
 }
+
+////////////////////////////////////////////////////////////////////////////
+// movement_remaining
+////////////////////////////////////////////////////////////////////////////
+int Thing::movement_remaining(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->movement_remaining);
+  }
+  return 0;
+}
+
+int Thing::movement_remaining_set(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (infop()->movement_remaining = v);
+  return n;
+}
+
+int Thing::movement_remaining_decr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (infop()->movement_remaining -= v);
+  return n;
+}
+
+int Thing::movement_remaining_incr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (infop()->movement_remaining += v);
+  return n;
+}
+
+int Thing::movement_remaining_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (infop()->movement_remaining--);
+  return n;
+}
+
+int Thing::movement_remaining_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (infop()->movement_remaining++);
+  return n;
+}

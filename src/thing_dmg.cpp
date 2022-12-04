@@ -155,3 +155,50 @@ int Thing::dmg_min(void)
   //
   return min_dmg + enchant_count_get();
 }
+
+////////////////////////////////////////////////////////////////////////////
+// damaged_count
+////////////////////////////////////////////////////////////////////////////
+int Thing::damaged_count(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->damaged_count);
+  }
+  return 0;
+}
+
+int Thing::damaged_count_set(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->damaged_count = v);
+}
+
+int Thing::damaged_count_decr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->damaged_count -= v);
+}
+
+int Thing::damaged_count_incr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->damaged_count += v);
+}
+
+int Thing::damaged_count_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->damaged_count--);
+}
+
+int Thing::damaged_count_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->damaged_count++);
+}

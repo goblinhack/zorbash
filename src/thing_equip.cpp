@@ -799,3 +799,70 @@ int Thing::is_able_to_use_gauntlet(void)
   TRACE_NO_INDENT();
   return (tp()->is_able_to_use_gauntlet());
 }
+
+////////////////////////////////////////////////////////////////////////////
+// equip_id_carry_anim
+////////////////////////////////////////////////////////////////////////////
+ThingId Thing::equip_id_carry_anim(int equip)
+{
+  TRACE_NO_INDENT();
+  if (maybe_itemsp()) {
+    auto id = get(itemsp()->equip_id_carry_anim, equip);
+    if (id != NoThingId) {
+      verify(MTYPE_THING, level->thing_find(id));
+    }
+    return id;
+  }
+  return NoThingId;
+}
+
+ThingId Thing::equip_id_carry_anim_set(ThingId v, int equip)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (itemsp()->equip_id_carry_anim[ equip ] = v);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// equip_id_use_anim
+////////////////////////////////////////////////////////////////////////////
+ThingId Thing::equip_id_use_anim(int equip)
+{
+  TRACE_NO_INDENT();
+  if (maybe_itemsp()) {
+    auto id = get(itemsp()->equip_id_use_anim, equip);
+    if (id != NoThingId) {
+      verify(MTYPE_THING, level->thing_find(id));
+    }
+    return id;
+  }
+  return NoThingId;
+}
+
+ThingId Thing::equip_id_use_anim_set(ThingId v, int equip)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (itemsp()->equip_id_use_anim[ equip ] = v);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// equip_tp_id
+////////////////////////////////////////////////////////////////////////////
+ThingId Thing::equip_id(int equip)
+{
+  TRACE_NO_INDENT();
+  if (maybe_itemsp()) {
+    // con("get weapon %" PRIX32 "",  itemsp()->equip_id);
+    return (itemsp()->equip_id[ equip ]);
+  } // con("get equip id => none");
+  return NoThingId;
+}
+
+ThingId Thing::equip_id_set(ThingId v, int equip)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  // con("set weapon %" PRIX32 "", v);
+  return (itemsp()->equip_id[ equip ] = v);
+}

@@ -4,7 +4,6 @@
 
 #include "my_level.hpp"
 #include "my_thing.hpp"
-// REMOVED #include <cinttypes> // PRIX32
 
 void Level::things_gc(bool force)
 {

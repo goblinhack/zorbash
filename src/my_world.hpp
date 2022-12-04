@@ -8,9 +8,7 @@
 
 #include <unordered_map> // do not remove
 
-// REMOVED #include "my_game_defs.hpp"
 #include "my_level.hpp"
-// REMOVED #include "my_point.hpp"
 
 namespace std
 {

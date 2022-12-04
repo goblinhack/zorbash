@@ -3,6 +3,7 @@
 //
 
 #include "my_level.hpp"
+#include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
@@ -151,4 +152,51 @@ void Thing::unleash_spawners_things(void)
       }
     }
   }
+}
+
+////////////////////////////////////////////////////////////////////////////
+// spawned_count
+////////////////////////////////////////////////////////////////////////////
+int Thing::spawned_count(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->spawned_count);
+  }
+  return 0;
+}
+
+int Thing::spawned_count_set(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->spawned_count = v);
+}
+
+int Thing::spawned_count_decr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->spawned_count -= v);
+}
+
+int Thing::spawned_count_incr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->spawned_count += v);
+}
+
+int Thing::spawned_count_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->spawned_count--);
+}
+
+int Thing::spawned_count_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->spawned_count++);
 }

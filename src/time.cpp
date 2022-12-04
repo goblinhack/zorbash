@@ -4,7 +4,6 @@
 
 #include <SDL.h>
 #include <ctime>
-// REMOVED #include <time.h>
 
 #include "my_string.hpp"
 #include "my_time.hpp"

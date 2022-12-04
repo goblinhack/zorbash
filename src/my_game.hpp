@@ -7,8 +7,6 @@
 #define _MY_GAME_HPP_
 
 #include <SDL.h>
-// REMOVED #include <array>
-// REMOVED #include <list>
 #include <vector>
 
 #include "my_hiscore.hpp"

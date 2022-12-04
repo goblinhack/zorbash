@@ -8,7 +8,6 @@
 #include "my_ptrcheck.hpp"
 #include "my_py_sdl.hpp"
 #include <frameobject.h>
-// REMOVED #include <map>
 
 PyObject *con_(PyObject *obj, PyObject *args, PyObject *keywds)
 {

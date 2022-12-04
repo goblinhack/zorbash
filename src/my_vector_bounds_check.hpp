@@ -3,11 +3,8 @@
 //
 
 #pragma once
-// REMOVED #include <array>
-// REMOVED #include <assert.h>
 #include <iostream>
 #include <sstream>
-// REMOVED #include <vector>
 
 //
 // Single dimension array check

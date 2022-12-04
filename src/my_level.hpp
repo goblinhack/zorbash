@@ -7,15 +7,11 @@
 #define _MY_LEVEL_HPP_
 
 #include <deque>
-// REMOVED #include <functional>
 #include <list>
-// REMOVED #include <map>
 
 #include "my_dmap.hpp"
 #include "my_fcolor.hpp"
-// REMOVED #include "my_format_str_attribute.hpp"
 #include "my_fwd.hpp"
-// REMOVED #include "my_game_defs.hpp"
 #include "my_laser.hpp"
 #include "my_level_fov.hpp"
 #include "my_particle.hpp"

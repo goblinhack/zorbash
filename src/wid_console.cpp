@@ -2,7 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include <SDL.h>
 
 #include "my_color_defs.hpp"
 #include "my_command.hpp"
@@ -11,7 +10,6 @@
 #include "my_ui.hpp"
 #include "my_unicode.hpp"
 #include "my_wid_console.hpp"
-// REMOVED #include "slre.hpp"
 
 static int  wid_console_inited;
 static int  wid_console_commands_inited;

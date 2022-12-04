@@ -5,6 +5,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_depth.hpp"
 #include "my_level.hpp"
+#include "my_monst.hpp"
 #include "my_thing.hpp"
 
 void Thing::lunge(point to)
@@ -76,4 +77,98 @@ float Thing::lunge_curr(void)
     return (1.0 - time_step);
   }
   return time_step;
+}
+
+////////////////////////////////////////////////////////////////////////////
+// ts_lunge_begin
+////////////////////////////////////////////////////////////////////////////
+ts_t Thing::ts_lunge_begin(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->ts_lunge_begin);
+  }
+  return 0;
+}
+
+ts_t Thing::ts_lunge_begin_set(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_lunge_begin = v);
+}
+
+ts_t Thing::ts_lunge_begin_decr(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_lunge_begin -= v);
+}
+
+ts_t Thing::ts_lunge_begin_incr(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_lunge_begin += v);
+}
+
+ts_t Thing::ts_lunge_begin_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_lunge_begin--);
+}
+
+ts_t Thing::ts_lunge_begin_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_lunge_begin++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// ts_lunge_end
+////////////////////////////////////////////////////////////////////////////
+ts_t Thing::ts_lunge_end(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->ts_lunge_end);
+  }
+  return 0;
+}
+
+ts_t Thing::ts_lunge_end_set(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_lunge_end = v);
+}
+
+ts_t Thing::ts_lunge_end_decr(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_lunge_end -= v);
+}
+
+ts_t Thing::ts_lunge_end_incr(ts_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_lunge_end += v);
+}
+
+ts_t Thing::ts_lunge_end_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_lunge_end--);
+}
+
+ts_t Thing::ts_lunge_end_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->ts_lunge_end++);
 }

@@ -2,9 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include <iterator>
-// REMOVED #include <math.h>
-// REMOVED #include <vector>
 
 #include "my_game.hpp"
 #include "my_thing.hpp"

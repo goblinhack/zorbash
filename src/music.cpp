@@ -4,10 +4,8 @@
 
 #include "my_file.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_main.hpp"
 #include "my_music.hpp"
 #include "my_ptrcheck.hpp"
-// REMOVED #include "my_sys.hpp"
 #include <SDL_mixer.h>
 
 class music
