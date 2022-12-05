@@ -414,7 +414,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_enchantstone                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_fire                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_floor                         ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_foilage                       ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_foliage                       ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_food                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_gas_blocker                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_gold                          ? 1LLU : 0LLU) << shift; shift++;
@@ -572,7 +572,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_enchantstone);
   out << bits(my.t->_is_fire);
   out << bits(my.t->_is_floor);
-  out << bits(my.t->_is_foilage);
+  out << bits(my.t->_is_foliage);
   out << bits(my.t->_is_carnivorous_plant);
   out << bits(my.t->_is_food);
   out << bits(my.t->_is_gas_poison);

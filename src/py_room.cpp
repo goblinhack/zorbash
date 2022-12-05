@@ -74,7 +74,7 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
         if (m.is_floor || m.is_bridge || m.is_corridor || m.is_secret_corridor || m.is_dirt) {
           floor_string += c;
         } else if (m.is_red_blood || m.is_ascend_dungeon || m.is_barrel || m.is_brazier || m.is_deep_water ||
-                   m.is_descend_dungeon || m.is_door || m.is_foilage || m.is_spiderweb || m.is_block_of_ice ||
+                   m.is_descend_dungeon || m.is_door || m.is_foliage || m.is_spiderweb || m.is_block_of_ice ||
                    m.is_dry_grass || m.is_wet_grass || m.is_floor_deco || m.is_food || m.is_gold || m.is_key ||
                    m.is_lava || m.is_mob_challenge_class_a || m.is_mob_challenge_class_b || m.is_monst_class_a ||
                    m.is_monst_class_b || m.is_monst_class_c || m.is_potion || m.is_secret_door ||
@@ -87,7 +87,7 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
           floor_string += Charmap::SPACE;
         }
 
-        if (m.is_foilage || m.is_spiderweb || m.is_block_of_ice || m.is_dry_grass || m.is_wet_grass) {
+        if (m.is_foliage || m.is_spiderweb || m.is_block_of_ice || m.is_dry_grass || m.is_wet_grass) {
           floor2_string += c;
         } else {
           floor2_string += Charmap::SPACE;

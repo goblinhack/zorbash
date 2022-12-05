@@ -7,7 +7,6 @@
 #include "my_math.hpp"
 #include "my_thing.hpp"
 
-
 //
 // A new born spawned thing. Perform common checks for it.
 //

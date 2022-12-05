@@ -20,7 +20,7 @@ import my
 # ENCHANTSTONE                  *
 # SKILLSTONE                    &
 # FLOOR                         .
-# FOILAGE                       `
+# FOLIAGE                       `
 # KEY                           k
 # LAVA                          L
 # ROCK                          r

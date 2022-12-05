@@ -332,7 +332,7 @@ do
       is_floor \
       is_floor_deco \
       is_flying \
-      is_foilage \
+      is_foliage \
       is_food \
       is_gas_blocker \
       is_gauntlet \
@@ -423,7 +423,7 @@ do
       is_red_blood \
       is_red_blooded \
       is_red_splatter \
-      is_removeable_if_out_of_slots \
+      is_removable_if_out_of_slots \
       is_resurrectable \
       is_ring \
       is_ripple \

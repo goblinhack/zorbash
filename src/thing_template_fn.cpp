@@ -455,7 +455,7 @@ int Tp::is_floating(void) const { return _is_floating; }
 int Tp::is_floor_deco(void) const { return _is_floor_deco; }
 int Tp::is_floor(void) const { return _is_floor; }
 int Tp::is_flying(void) const { return _is_flying; }
-int Tp::is_foilage(void) const { return _is_foilage; }
+int Tp::is_foliage(void) const { return _is_foliage; }
 int Tp::is_food(void) const { return _is_food; }
 int Tp::is_gas_blocker(void) const { return _is_gas_blocker; }
 int Tp::is_gauntlet(void) const { return _is_gauntlet; }
@@ -547,7 +547,7 @@ int Tp::is_projectile(void) const { return _is_projectile; }
 int Tp::is_red_blooded(void) const { return _is_red_blooded; }
 int Tp::is_red_blood(void) const { return _is_red_blood; }
 int Tp::is_red_splatter(void) const { return _is_red_splatter; }
-int Tp::is_removeable_if_out_of_slots(void) const { return _is_removeable_if_out_of_slots; }
+int Tp::is_removable_if_out_of_slots(void) const { return _is_removable_if_out_of_slots; }
 int Tp::is_resurrectable(void) const { return _is_resurrectable; }
 int Tp::is_ring(void) const { return _is_ring; }
 int Tp::is_ripple(void) const { return _is_ripple; }
@@ -996,7 +996,7 @@ void Tp::is_floating_set(int v) { _is_floating = v; }
 void Tp::is_floor_deco_set(int v) { _is_floor_deco = v; }
 void Tp::is_floor_set(int v) { _is_floor = v; }
 void Tp::is_flying_set(int v) { _is_flying = v; }
-void Tp::is_foilage_set(int v) { _is_foilage = v; }
+void Tp::is_foliage_set(int v) { _is_foliage = v; }
 void Tp::is_food_set(int v) { _is_food = v; }
 void Tp::is_gas_blocker_set(int v) { _is_gas_blocker = v; }
 void Tp::is_gauntlet_set(int v) { _is_gauntlet = v; }
@@ -1088,7 +1088,7 @@ void Tp::is_projectile_set(int v) { _is_projectile = v; }
 void Tp::is_red_blooded_set(int v) { _is_red_blooded = v; }
 void Tp::is_red_blood_set(int v) { _is_red_blood = v; }
 void Tp::is_red_splatter_set(int v) { _is_red_splatter = v; }
-void Tp::is_removeable_if_out_of_slots_set(int v) { _is_removeable_if_out_of_slots = v; }
+void Tp::is_removable_if_out_of_slots_set(int v) { _is_removable_if_out_of_slots = v; }
 void Tp::is_resurrectable_set(int v) { _is_resurrectable = v; }
 void Tp::is_ring_set(int v) { _is_ring = v; }
 void Tp::is_ripple_set(int v) { _is_ripple = v; }

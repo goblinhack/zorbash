@@ -201,7 +201,7 @@ public:
   uint64_t i_set_is_enchantstone            : 1 {};
   uint64_t i_set_is_fire                    : 1 {};
   uint64_t i_set_is_floor                   : 1 {};
-  uint64_t i_set_is_foilage                 : 1 {};
+  uint64_t i_set_is_foliage                 : 1 {};
   uint64_t i_set_is_food                    : 1 {};
   uint64_t i_set_is_gas_blocker             : 1 {};
   uint64_t i_set_is_gold                    : 1 {};
@@ -1325,7 +1325,7 @@ public:
   int is_floor_deco(void);
   int is_floor(void);
   int is_flying(void);
-  int is_foilage(void);
+  int is_foliage(void);
   int is_food(void);
   int is_frozen_check(void);
   int is_gas_blocker(void);
@@ -1419,7 +1419,7 @@ public:
   int is_red_blooded(void);
   int is_red_blood(void);
   int is_red_splatter(void);
-  int is_removeable_if_out_of_slots(void);
+  int is_removable_if_out_of_slots(void);
   int is_resurrectable(void);
   int is_resurrected_or_resurrecting(void);
   int is_ring(void);

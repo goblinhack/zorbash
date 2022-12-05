@@ -21,7 +21,7 @@ def tp_init(name, text_long_name):
     my.is_flat(self, True)
     my.is_green_blood(self, True)
     my.is_interesting(self, True)
-    my.is_removeable_if_out_of_slots(self, True)
+    my.is_removable_if_out_of_slots(self, True)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "1d4")
     my.text_a_or_an(self, "a")

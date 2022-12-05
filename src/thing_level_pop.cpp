@@ -80,9 +80,9 @@ void Thing::level_pop(void)
     i_set_is_skillstone = false;
     level->is_skillstone_unset(mx, my);
   }
-  if (i_set_is_foilage) {
-    i_set_is_foilage = false;
-    level->is_foilage_unset(mx, my);
+  if (i_set_is_foliage) {
+    i_set_is_foliage = false;
+    level->is_foliage_unset(mx, my);
   }
   if (i_set_is_carnivorous_plant) {
     i_set_is_carnivorous_plant = false;

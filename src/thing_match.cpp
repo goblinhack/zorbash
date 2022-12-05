@@ -364,7 +364,7 @@ bool Thing::matches(const std::string &what)
   if (is_floor() && (what == "is_floor")) {
     return true;
   }
-  if (is_foilage() && (what == "is_foilage")) {
+  if (is_foliage() && (what == "is_foliage")) {
     return true;
   }
   if (is_eater_of_food() && (what == "is_eater_of_food")) {
@@ -511,7 +511,7 @@ bool Thing::matches(const std::string &what)
   if (is_projectile() && (what == "is_projectile")) {
     return true;
   }
-  if (is_removeable_if_out_of_slots() && (what == "is_removeable_if_out_of_slots")) {
+  if (is_removable_if_out_of_slots() && (what == "is_removable_if_out_of_slots")) {
     return true;
   }
   if (is_resurrectable() && (what == "is_resurrectable")) {
@@ -1670,8 +1670,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_flying") {
     return &Thing::is_flying;
   }
-  if (what == "is_foilage") {
-    return &Thing::is_foilage;
+  if (what == "is_foliage") {
+    return &Thing::is_foliage;
   }
   if (what == "is_eater_of_food") {
     return &Thing::is_eater_of_food;
@@ -1925,8 +1925,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_red_splatter") {
     return &Thing::is_red_splatter;
   }
-  if (what == "is_removeable_if_out_of_slots") {
-    return &Thing::is_removeable_if_out_of_slots;
+  if (what == "is_removable_if_out_of_slots") {
+    return &Thing::is_removable_if_out_of_slots;
   }
   if (what == "is_resurrectable") {
     return &Thing::is_resurrectable;

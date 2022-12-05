@@ -2,7 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-
 #include "my_array_bounds_check.hpp"
 #include "my_color_defs.hpp"
 #include "my_dungeon_grid.hpp"

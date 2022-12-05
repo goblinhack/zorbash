@@ -36,6 +36,10 @@ void Game::place_player(void)
         t->carry(w);
       }
       if (1) {
+        auto w = level->thing_new("potion_invisibility", point(x, y));
+        t->carry(w);
+      }
+      if (1) {
         auto w = level->thing_new("food_pottedmeat", point(x, y));
         t->carry(w);
       }
@@ -338,7 +342,7 @@ void Game::place_player(void)
         level->thing_new("gargoyle_static", point(x, y + 1));
       }
       if (0) {
-        level->thing_new("foilage", point(x, y + 1));
+        level->thing_new("foliage", point(x, y + 1));
         level->thing_new("mummy", point(x - 1, y + 1));
       }
       // level->thing_new("lizardkin", point(x - 2, y + 1));
@@ -358,8 +362,8 @@ void Game::place_player(void)
       }
       // level->thing_new("vampire_rose_stem", point(x, y + 1));
       // level->thing_new("fire", point(x - 4, y + 5));
-      // level->thing_new("foilage", point(x - 4, y + 5));
-      // level->thing_new("foilage", point(x, y + 5));
+      // level->thing_new("foliage", point(x - 4, y + 5));
+      // level->thing_new("foliage", point(x, y + 5));
       // level->player->on_fire_set("");
       // level->thing_new("block_of_ice", point(x, y + 1));
       // level->thing_new("block_of_ice", point(x, y + 2));

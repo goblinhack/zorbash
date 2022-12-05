@@ -69,7 +69,7 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
           floor_string += Charmap::SPACE;
         }
 
-        if (m.is_foilage || m.is_spiderweb || m.is_block_of_ice || m.is_dry_grass || m.is_wet_grass) {
+        if (m.is_foliage || m.is_spiderweb || m.is_block_of_ice || m.is_dry_grass || m.is_wet_grass) {
           floor2_string += c;
         } else {
           floor2_string += Charmap::SPACE;
@@ -508,7 +508,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_floating_at, is_floating)
 LEVEL_BODY_GET_BOOL_AT(level_is_floor_at, is_floor)
 LEVEL_BODY_GET_BOOL_AT(level_is_floor_deco_at, is_floor_deco)
 LEVEL_BODY_GET_BOOL_AT(level_is_flying_at, is_flying)
-LEVEL_BODY_GET_BOOL_AT(level_is_foilage_at, is_foilage)
+LEVEL_BODY_GET_BOOL_AT(level_is_foliage_at, is_foliage)
 LEVEL_BODY_GET_BOOL_AT(level_is_food_at, is_food)
 LEVEL_BODY_GET_BOOL_AT(level_is_gas_blocker_at, is_gas_blocker)
 LEVEL_BODY_GET_BOOL_AT(level_is_gauntlet_at, is_gauntlet)
@@ -582,7 +582,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_potion_at, is_potion)
 LEVEL_BODY_GET_BOOL_AT(level_is_red_blood_at, is_red_blood)
 LEVEL_BODY_GET_BOOL_AT(level_is_red_blooded_at, is_red_blooded)
 LEVEL_BODY_GET_BOOL_AT(level_is_red_splatter_at, is_red_splatter)
-LEVEL_BODY_GET_BOOL_AT(level_is_removeable_if_out_of_slots_at, is_removeable_if_out_of_slots)
+LEVEL_BODY_GET_BOOL_AT(level_is_removable_if_out_of_slots_at, is_removable_if_out_of_slots)
 LEVEL_BODY_GET_BOOL_AT(level_is_resurrectable_at, is_resurrectable)
 LEVEL_BODY_GET_BOOL_AT(level_is_ring_at, is_ring)
 LEVEL_BODY_GET_BOOL_AT(level_is_ripple_at, is_ripple)

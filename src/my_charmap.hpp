@@ -34,7 +34,7 @@ public:
     ENTRANCE            = 'S',
     EXIT                = 'E',
     FLOOR               = '.',
-    FOILAGE             = '`',
+    FOLIAGE             = '`',
     SPIDERWEB           = 'X',
     ICE                 = 'I',
     FOOD                = 'f',
@@ -79,7 +79,7 @@ public:
   bool is_wet_grass {false};
   bool is_enchantstone {false};
   bool is_skillstone {false};
-  bool is_foilage {false};
+  bool is_foliage {false};
   bool is_spiderweb {false};
   bool is_block_of_ice {false};
   bool is_door {false};

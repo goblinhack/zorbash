@@ -9,7 +9,6 @@
 #ifndef _MY_MUSIC_HPP_
 #define _MY_MUSIC_HPP_
 
-
 class music;
 using musicp = class music *;
 

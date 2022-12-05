@@ -2,7 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 

@@ -268,8 +268,8 @@ void Dungeon::make_dungeon(void)
   DBG2("INF: Add remaining items");
   add_remaining();
 
-  DBG2("INF: Add foilage around water");
-  add_foilage_around_water();
+  DBG2("INF: Add foliage around water");
+  add_foliage_around_water();
 
   DBG2("INF: Add spiderwebs");
   add_spiderweb();
@@ -286,8 +286,8 @@ void Dungeon::make_dungeon(void)
                 5,    // R2
                 1 /* generations */);
 
-  DBG2("INF: Generate foilage");
-  foilage_gen(10, // fill prob
+  DBG2("INF: Generate foliage");
+  foliage_gen(10, // fill prob
               10, // R1
               5,  // R2
               4 /* generations */);
@@ -674,7 +674,7 @@ bool Dungeon::is_skillstone(const int x, const int y)
   return false;
 }
 
-bool Dungeon::is_foilage(const int x, const int y)
+bool Dungeon::is_foliage(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
@@ -684,7 +684,7 @@ bool Dungeon::is_foilage(const int x, const int y)
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_foilage) {
+    if (v.is_foliage) {
       return true;
     }
   }
@@ -3857,10 +3857,10 @@ void Dungeon::add_remaining(void)
       }
 
       if (pcg_random_range(0, 100) < 20) {
-        putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOILAGE);
+        putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOLIAGE);
       } else if (is_dirt(x, y)) {
         if (pcg_random_range(0, 100) < 20) {
-          putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOILAGE);
+          putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOLIAGE);
         }
       } else if (is_corridor(x, y)) {
         if (pcg_random_range(0, 100) < 20) {
@@ -3871,9 +3871,9 @@ void Dungeon::add_remaining(void)
   }
 }
 
-void Dungeon::add_foilage_around_water(void)
+void Dungeon::add_foliage_around_water(void)
 {
-  bool foilage_ok_next_to_walls = pcg_random_range(0, 100) > 50;
+  bool foliage_ok_next_to_walls = pcg_random_range(0, 100) > 50;
 
   for (auto y = 2; y < MAP_HEIGHT - 2; y++) {
     for (auto x = 2; x < MAP_WIDTH - 2; x++) {
@@ -3895,35 +3895,35 @@ void Dungeon::add_foilage_around_water(void)
         }
       }
 
-      int foilage_ok = 0;
+      int foliage_ok = 0;
       for (auto dx = -2; dx <= 2; dx++) {
-        if (foilage_ok < 0) {
+        if (foliage_ok < 0) {
           break;
         }
         for (auto dy = -2; dy <= 2; dy++) {
           if (is_lava(x + dx, y + dy) || is_bridge(x + dx, y + dy) || is_lava(x + dx, y + dy) ||
               is_brazier(x + dx, y + dy) || is_chasm(x + dx, y + dy)) {
-            foilage_ok = -1;
+            foliage_ok = -1;
             goto next;
           }
 
-          if (! foilage_ok_next_to_walls) {
+          if (! foliage_ok_next_to_walls) {
             if (is_wall(x + dx, y + dy)) {
-              foilage_ok = -1;
+              foliage_ok = -1;
               goto next;
             }
           }
-          if (is_shallow_water(x + dx, y + dy) || is_foilage(x + dx, y + dy) || is_deep_water(x + dx, y + dy)) {
-            foilage_ok = 1;
+          if (is_shallow_water(x + dx, y + dy) || is_foliage(x + dx, y + dy) || is_deep_water(x + dx, y + dy)) {
+            foliage_ok = 1;
           }
         }
       }
     next:
-      if (foilage_ok == 1) {
+      if (foliage_ok == 1) {
         if (pcg_random_range(0, 100) > 80) {
           putc(x, y, MAP_DEPTH_FLOOR2, Charmap::WET_GRASS);
         } else {
-          putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOILAGE);
+          putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOLIAGE);
         }
       }
     }
@@ -4316,7 +4316,7 @@ void Dungeon::wet_grass_gen(unsigned int map_fill_prob, int map_r1, int map_r2, 
   }
 }
 
-void Dungeon::foilage_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations)
+void Dungeon::foliage_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations)
 
 {
   map_save = {};
@@ -4376,7 +4376,7 @@ void Dungeon::foilage_gen(unsigned int map_fill_prob, int map_r1, int map_r2, in
           }
         }
 
-        putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOILAGE);
+        putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOLIAGE);
       }
     next:
       continue;

@@ -156,7 +156,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.range_max(self, 7)
     my.temperature(self, 30)
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "Discharges a single negationball at an ungrateful recipient...")
+    my.text_description_long(self, "Discharges a single blast of negation at an ungrateful recipient and their equipment...")
     my.text_description_short(self, "A staff of negation.")
     my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
     my.z_depth(self, my.MAP_DEPTH_OBJ)

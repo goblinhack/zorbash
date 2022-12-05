@@ -66,7 +66,7 @@ def init():
     tp_init(
         name="armor_leather",
         text_long_name="leather armor",
-        text_short_name="armor, leath",
+        text_short_name="armor, leather",
     )
 
 

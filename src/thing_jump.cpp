@@ -11,7 +11,6 @@
 #include "my_thing.hpp"
 #include "my_vector_bounds_check.hpp"
 
-
 //
 // Python callback upon being jump
 //

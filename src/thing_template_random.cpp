@@ -24,7 +24,7 @@ static Tpidmap tp_wet_grass;
 static Tpidmap tp_enchantstone;
 static Tpidmap tp_ethereal_mob;
 static Tpidmap tp_floor;
-static Tpidmap tp_foilage;
+static Tpidmap tp_foliage;
 static Tpidmap tp_food;
 static Tpidmap tp_mob;
 static Tpidmap tp_gold;
@@ -127,8 +127,8 @@ void tp_random_init(void)
     if (tp->is_floor_deco()) {
       tp_deco.push_back(tp);
     }
-    if (tp->is_foilage()) {
-      tp_foilage.push_back(tp);
+    if (tp->is_foliage()) {
+      tp_foliage.push_back(tp);
     }
     if (tp->is_spiderweb()) {
       tp_spiderweb.push_back(tp);
@@ -625,14 +625,14 @@ Tpp tp_random_skillstone(void)
   return tp_get_with_no_rarity_filter(tp_skillstone);
 }
 
-Tpp tp_random_foilage(void)
+Tpp tp_random_foliage(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_foilage.size())) {
-    ERR("No foilages found");
+  if (unlikely(! tp_foliage.size())) {
+    ERR("No foliages found");
     return nullptr;
   }
-  return tp_get_with_no_rarity_filter(tp_foilage);
+  return tp_get_with_no_rarity_filter(tp_foliage);
 }
 
 Tpp tp_random_spiderweb(void)

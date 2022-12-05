@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - invisibility potion todo                                                                                                                   -->
 <!-- - falling in block of ice should fall together                                                                                               -->
 <!-- - some weapons crit more                                                                                                                     -->
 <!-- - tentacle grapple                                                                                                                           -->
@@ -179,7 +180,7 @@
 <!-- - grass death wakes monsters                                                                                                                 -->
 <!-- - mold growth / floor puddings                                                                                                               -->
 <!-- - bloodgrass, grows near corpses                                                                                                             -->
-<!-- - yak that eats foilage                                                                                                                      -->
+<!-- - yak that eats foliage                                                                                                                      -->
 <!-- - shove/lure monsters into webs?                                                                                                             -->
 <!-- - rat pack and king rat / cranium rat                                                                                                        -->
 <!-- - zombie camel?                                                                                                                              -->
@@ -242,13 +243,13 @@ Content:
 - 4 gauntlets
 - 4 debuffs
 - 4 armor
+- 3 potions
 - 3 mobs
 - 3 doors
 - 3 cloaks
 - 3 amulets
 - 2 skills
 - 2 shield
-- 2 potions
 - 1 player
 <!-- end type marker -->
 

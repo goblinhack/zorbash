@@ -36,7 +36,7 @@ def gold_init(name, text_long_name, text_short_name):
     my.light_dist(self, 1)
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_short(self, "A gold goin.")
+    my.text_description_short(self, "A gold coin.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)

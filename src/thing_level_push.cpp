@@ -90,9 +90,9 @@ void Thing::level_push(void)
     i_set_is_skillstone = true;
     level->is_skillstone_set(mx, my);
   }
-  if (is_foilage()) {
-    i_set_is_foilage = true;
-    level->is_foilage_set(mx, my);
+  if (is_foliage()) {
+    i_set_is_foliage = true;
+    level->is_foliage_set(mx, my);
   }
   if (is_carnivorous_plant()) {
     i_set_is_carnivorous_plant = true;

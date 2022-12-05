@@ -40,7 +40,7 @@ void Level::clear(void)
   _is_enchantstone                   = {};
   _is_fire                           = {};
   _is_floor                          = {};
-  _is_foilage                        = {};
+  _is_foliage                        = {};
   _is_carnivorous_plant              = {};
   _is_food                           = {};
   _is_gold                           = {};

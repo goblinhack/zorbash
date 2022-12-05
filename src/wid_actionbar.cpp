@@ -2,7 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-
 #include "my_game.hpp"
 #include "my_sdl_proto.hpp"
 #include "my_thing.hpp"

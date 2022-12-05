@@ -66,7 +66,7 @@ Thingp Thing::fire_projectile_at(Thingp item, const std::string &target_name_pro
 
   //
   // Projectiles hit the first thing in the way. But ignore if it hits
-  // ourselves. i.e. if we're in foilage
+  // ourselves. i.e. if we're in foliage
   //
   auto collatoral_dmg = in_the_way_for_firing(curr_at, target->curr_at, 1);
   if (collatoral_dmg.size()) {

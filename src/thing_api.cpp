@@ -885,10 +885,10 @@ int Thing::is_floor(void)
   return (tp()->is_floor());
 }
 
-int Thing::is_foilage(void)
+int Thing::is_foliage(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_foilage());
+  return (tp()->is_foliage());
 }
 
 int Thing::is_eater_of_food(void)
@@ -1173,10 +1173,10 @@ int Thing::is_projectile(void)
   return (tp()->is_projectile());
 }
 
-int Thing::is_removeable_if_out_of_slots(void)
+int Thing::is_removable_if_out_of_slots(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_removeable_if_out_of_slots());
+  return (tp()->is_removable_if_out_of_slots());
 }
 
 int Thing::is_resurrectable(void)

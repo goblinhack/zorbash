@@ -2,7 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-
 #include "my_backtrace.hpp"
 #include "my_color_defs.hpp"
 #include "my_string.hpp"

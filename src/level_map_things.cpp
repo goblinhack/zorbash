@@ -71,7 +71,7 @@ do_retry:
           continue;
         }
         t->log("- slot %u", slot);
-        if (t->is_removeable_if_out_of_slots()) {
+        if (t->is_removable_if_out_of_slots()) {
           t->dead("by internal slot");
           t->level_pop();
           retry++;

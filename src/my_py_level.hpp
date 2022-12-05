@@ -111,7 +111,7 @@ PyObject *level_is_floating_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_floor_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_floor_deco_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_flying_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_foilage_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_foliage_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_food_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_eater_of_food_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_gas_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -184,7 +184,7 @@ PyObject *level_is_red_blood_at(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *level_is_eater_of_red_blood_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_red_blooded_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_red_splatter_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_removeable_if_out_of_slots_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_removable_if_out_of_slots_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_resurrectable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_ring_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_ripple_at(PyObject *obj, PyObject *args, PyObject *keywds);

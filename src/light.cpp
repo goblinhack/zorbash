@@ -286,7 +286,7 @@ bool Light::calculate(void)
             rp++;
 
             //
-            // This is for foilage so we don't obscure too much where
+            // This is for foliage so we don't obscure too much where
             // we stand
             //
             if (step < TILE_WIDTH / 2) {
@@ -402,7 +402,7 @@ bool Light::calculate(void)
             rp++;
 
             //
-            // This is for foilage so we don't obscure too much where
+            // This is for foliage so we don't obscure too much where
             // we stand
             //
             if (step < TILE_WIDTH / 2) {
@@ -523,7 +523,7 @@ bool Light::calculate(void)
           rp++;
 
           //
-          // This is for foilage so we don't obscure too much where
+          // This is for foliage so we don't obscure too much where
           // we stand
           //
           if (step < TILE_WIDTH / 2) {

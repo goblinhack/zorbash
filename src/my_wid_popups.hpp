@@ -6,7 +6,6 @@
 #ifndef _MY_UI_WID_POPUPS_HPP_
 #define _MY_UI_WID_POPUPS_HPP_
 
-
 extern void wid_collect_destroy(void);
 extern void wid_enchant_destroy(void);
 extern void wid_choose_skill_destroy(void);

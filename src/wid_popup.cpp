@@ -2,7 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-
 #include "my_ui.hpp"
 #include "my_wid_popup.hpp"
 

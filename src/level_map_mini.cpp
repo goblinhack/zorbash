@@ -170,7 +170,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           c = YELLOW;
         } else if (is_skillstone(x, y)) {
           c = RED;
-        } else if (is_foilage(x, y)) {
+        } else if (is_foliage(x, y)) {
           c = DARKGREEN;
         } else if (is_carnivorous_plant(x, y)) {
           c = GREEN;
@@ -382,7 +382,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           c = YELLOW;
         } else if (is_skillstone(x, y)) {
           c = RED;
-        } else if (is_foilage(x, y)) {
+        } else if (is_foliage(x, y)) {
           c = DARKGREEN;
         } else if (is_carnivorous_plant(x, y)) {
           c = GREEN;

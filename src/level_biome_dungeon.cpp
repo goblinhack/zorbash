@@ -702,15 +702,15 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
     //
     {
       uint32_t start = time_ms();
-      dbg2("INF: Place foilage");
-      place_foilage(dungeon);
+      dbg2("INF: Place foliage");
+      place_foliage(dungeon);
       if (g_errored) {
         return false;
       }
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
-        slowest_so_far_which = "placing foilage";
+        slowest_so_far_which = "placing foliage";
       }
     }
 
@@ -1804,7 +1804,7 @@ void Level::place_random_treasure(Dungeonp d)
       }
 
       if (tp->is_torch()) {
-        if (d->is_deep_water(x, y) || d->is_foilage(x, y)) {
+        if (d->is_deep_water(x, y) || d->is_foliage(x, y)) {
           continue;
         }
       }
@@ -1862,7 +1862,7 @@ void Level::place_random_torches(Dungeonp d)
       continue;
     }
 
-    if (d->is_shallow_water(x, y) || is_deep_water(x, y) || d->is_foilage(x, y)) {
+    if (d->is_shallow_water(x, y) || is_deep_water(x, y) || d->is_foliage(x, y)) {
       continue;
     }
 
@@ -1921,12 +1921,12 @@ void Level::place_wet_grass(Dungeonp d)
   }
 }
 
-void Level::place_foilage(Dungeonp d)
+void Level::place_foliage(Dungeonp d)
 {
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-      if (! d->is_foilage(x, y)) {
+      if (! d->is_foliage(x, y)) {
         continue;
       }
       if (is_rock(x, y) || is_wall(x, y)) {
@@ -1938,7 +1938,7 @@ void Level::place_foilage(Dungeonp d)
       if (is_water(x, y)) {
         continue;
       }
-      auto tp = tp_random_foilage();
+      auto tp = tp_random_foliage();
       if (unlikely(! tp)) {
         return;
       }

@@ -4,7 +4,6 @@
 
 #include "my_random_name.hpp"
 
-
 std::string random_name(int len)
 {
   for (;;) {

@@ -384,7 +384,7 @@ private:
   int _is_floor {};
   int _is_floor_deco {};
   int _is_flying {};
-  int _is_foilage {};
+  int _is_foliage {};
   int _is_food {};
   int _is_gas_blocker {};
   int _is_gauntlet {};
@@ -477,7 +477,7 @@ private:
   int _is_red_blood {};
   int _is_red_blooded {};
   int _is_red_splatter {};
-  int _is_removeable_if_out_of_slots {};
+  int _is_removable_if_out_of_slots {};
   int _is_resurrectable {};
   int _is_ring {};
   int _is_ripple {};
@@ -1425,7 +1425,7 @@ public:
   int is_floor_deco(void) const;
   int is_floor(void) const;
   int is_flying(void) const;
-  int is_foilage(void) const;
+  int is_foliage(void) const;
   int is_food(void) const;
   int is_gas_blocker(void) const;
   int is_gauntlet(void) const;
@@ -1517,7 +1517,7 @@ public:
   int is_red_blooded(void) const;
   int is_red_blood(void) const;
   int is_red_splatter(void) const;
-  int is_removeable_if_out_of_slots(void) const;
+  int is_removable_if_out_of_slots(void) const;
   int is_resurrectable(void) const;
   int is_ring(void) const;
   int is_ripple(void) const;
@@ -1966,7 +1966,7 @@ public:
   void is_floor_deco_set(int v);
   void is_floor_set(int v);
   void is_flying_set(int v);
-  void is_foilage_set(int v);
+  void is_foliage_set(int v);
   void is_food_set(int v);
   void is_gas_blocker_set(int v);
   void is_gauntlet_set(int v);
@@ -2058,7 +2058,7 @@ public:
   void is_red_blooded_set(int v);
   void is_red_blood_set(int v);
   void is_red_splatter_set(int v);
-  void is_removeable_if_out_of_slots_set(int v);
+  void is_removable_if_out_of_slots_set(int v);
   void is_resurrectable_set(int v);
   void is_ring_set(int v);
   void is_ripple_set(int v);
@@ -2410,7 +2410,7 @@ class Tp *tp_random_dry_grass(void);
 class Tp *tp_random_enchantstone(void);
 class Tp *tp_random_ethereal_mob(void);
 class Tp *tp_random_floor(void);
-class Tp *tp_random_foilage(void);
+class Tp *tp_random_foliage(void);
 class Tp *tp_random_food(void);
 class Tp *tp_random_gold(void);
 class Tp *tp_random_green_blood(void);

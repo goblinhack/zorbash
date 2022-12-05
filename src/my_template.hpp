@@ -77,7 +77,6 @@ std::multimap< B, A > flip_map(const M< A, B, Args... > &src)
   return dst;
 }
 
-
 template < typename T > size_t len(const T &a)
 {
   return sizeof(T) / sizeof(typename std::remove_all_extents< T >::type);

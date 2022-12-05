@@ -18,7 +18,7 @@ def tp_init(name):
     my.is_described_when_hovering_over(self, True)
     my.is_interesting(self, True)
     my.is_loggable(self, True)
-    my.is_removeable_if_out_of_slots(self, True)
+    my.is_removable_if_out_of_slots(self, True)
     my.is_steam(self, True)
     my.is_tickable(self, True)
     my.lifespan_dice(self, "1d5+3")

@@ -3,7 +3,7 @@ import tp
 
 
 def tp_init(name, tiles=[]):
-    self = tp.Tp(name, "foilage")
+    self = tp.Tp(name, "foliage")
     # begin sort marker
     my.collision_check(self, True)
     my.collision_hit_priority(self, 3)
@@ -27,7 +27,7 @@ def tp_init(name, tiles=[]):
     my.is_biome_dungeon(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_described_when_hovering_over(self, True)
-    my.is_foilage(self, True)
+    my.is_foliage(self, True)
     my.is_hittable(self, True)
     my.is_interesting(self, True)
     my.is_light_blocker_for_monst(self, True)  # to give cover to the player
@@ -38,11 +38,11 @@ def tp_init(name, tiles=[]):
     my.temperature_sensitive(self, True)
     my.temperature_sensitive_to_sudden_changes(self, True)
     my.text_a_or_an(self, "the")
-    my.text_description_long(self, "Thick and sickly looking foilage and roots. Monsters cannot see through these thick bushes. Use them for cover.")
-    my.text_description_short(self, "Thick and sickly looking foilage and roots.")
+    my.text_description_long(self, "Thick and sickly looking foliage and roots. Monsters cannot see through these thick bushes. Use them for cover.")
+    my.text_description_short(self, "Thick and sickly looking foliage and roots.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_Z_PRIO_FOILAGE)
+    my.z_prio(self, my.MAP_Z_PRIO_FOLIAGE)
     # end sort marker
 
     for t in tiles:
@@ -55,40 +55,40 @@ def tp_init(name, tiles=[]):
 
 def init():
     tp_init(
-        name="foilage",
+        name="foliage",
         tiles=[
-            "foilage.1",
-            "foilage.2",
-            "foilage.3",
-            "foilage.4",
-            "foilage.5",
-            "foilage.6",
-            "foilage.7",
-            "foilage.8",
-            "foilage.9",
-            "foilage.10",
-            "foilage.11",
-            "foilage.12",
-            "foilage.13",
-            "foilage.14",
-            "foilage.15",
-            "foilage.16",
-            "foilage.17",
-            "foilage.18",
-            "foilage.19",
-            "foilage.20",
-            "foilage.21",
-            "foilage.22",
-            "foilage.23",
-            "foilage.24",
-            "foilage.25",
-            "foilage.26",
-            "foilage.27",
-            "foilage.28",
-            "foilage.29",
-            "foilage.30",
-            "foilage.31",
-            "foilage.32",
+            "foliage.1",
+            "foliage.2",
+            "foliage.3",
+            "foliage.4",
+            "foliage.5",
+            "foliage.6",
+            "foliage.7",
+            "foliage.8",
+            "foliage.9",
+            "foliage.10",
+            "foliage.11",
+            "foliage.12",
+            "foliage.13",
+            "foliage.14",
+            "foliage.15",
+            "foliage.16",
+            "foliage.17",
+            "foliage.18",
+            "foliage.19",
+            "foliage.20",
+            "foliage.21",
+            "foliage.22",
+            "foliage.23",
+            "foliage.24",
+            "foliage.25",
+            "foliage.26",
+            "foliage.27",
+            "foliage.28",
+            "foliage.29",
+            "foliage.30",
+            "foliage.31",
+            "foliage.32",
         ],
     )
 

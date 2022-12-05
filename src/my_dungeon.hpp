@@ -106,7 +106,7 @@ public:
   bool is_floor(const int x, const int y);
   bool is_floor_deco_at(const int x, const int y);
   bool is_floor_no_check(const int x, const int y);
-  bool is_foilage(const int x, const int y);
+  bool is_foliage(const int x, const int y);
   bool is_food(const int x, const int y);
   bool is_gold(const int x, const int y);
   bool is_hazard(const int x, const int y);
@@ -161,7 +161,7 @@ public:
 
   void add_border(void);
   void add_corridor_walls(void);
-  void add_foilage_around_water(void);
+  void add_foliage_around_water(void);
   void add_remaining(void);
   void add_room_walls(void);
   void add_spiderweb(void);
@@ -177,7 +177,7 @@ public:
   void dmap_set_is_walls(Dmapp d);
   void dry_grass_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
   void dump(void);
-  void foilage_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
+  void foliage_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
   void make_dungeon(void);
   void map_place_room_ptr(Roomp r, int x, int y);
   void place_doors_between_depth_changes(void);

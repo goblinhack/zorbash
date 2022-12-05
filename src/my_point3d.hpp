@@ -6,7 +6,6 @@
 #ifndef _MY_POINT3D_HPP_
 #define _MY_POINT3D_HPP_
 
-
 template < class T > class my_apoint3d
 {
 public:

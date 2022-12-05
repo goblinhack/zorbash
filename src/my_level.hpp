@@ -66,7 +66,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_enchantstone {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_fire {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_floor {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_foilage {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_foliage {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_carnivorous_plant {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_food {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_gas_poison {};
@@ -815,8 +815,8 @@ public:
   uint8_t is_fire_no_check(const int x, const int y);
   uint8_t is_floor(const int x, const int y);
   uint8_t is_floor(const point p);
-  uint8_t is_foilage(const int x, const int y);
-  uint8_t is_foilage(const point p);
+  uint8_t is_foliage(const int x, const int y);
+  uint8_t is_foliage(const point p);
   uint8_t is_food(const int x, const int y);
   uint8_t is_food(const point p);
   uint8_t is_gas_poison(const int x, const int y) const;
@@ -1057,8 +1057,8 @@ public:
   void is_fire_unset(const int x, const int y);
   void is_floor_set(const int x, const int y);
   void is_floor_unset(const int x, const int y);
-  void is_foilage_set(const int x, const int y);
-  void is_foilage_unset(const int x, const int y);
+  void is_foliage_set(const int x, const int y);
+  void is_foliage_unset(const int x, const int y);
   void is_food_set(const int x, const int y);
   void is_food_unset(const int x, const int y);
   void is_gas_blocker_no_check_set(const int x, const int y);
@@ -1178,7 +1178,7 @@ public:
   void place_dirt(Dungeonp d);
   void place_dry_grass(Dungeonp d);
   void place_floor_deco(Dungeonp d);
-  void place_foilage(Dungeonp d);
+  void place_foliage(Dungeonp d);
   void place_random_torches(Dungeonp d);
   void place_random_treasure(Dungeonp d);
   void place_random_water_monsters(void);
