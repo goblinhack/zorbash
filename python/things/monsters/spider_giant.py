@@ -99,7 +99,6 @@ def tp_init(name, text_long_name):
     my.is_corpse_on_death(self, True)
     my.is_crushable(self, True)
     my.is_described_when_hovering_over(self, True)
-    my.is_eater_of_food(self, True)
     my.is_eater_of_meat(self, True)
     my.is_green_blooded(self, True)
     my.is_heavy(self, True)

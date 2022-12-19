@@ -2184,6 +2184,7 @@ public:
   void blit_floor_chasm(point tl, point br, const ThingTiles *tiles);
   void blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep tile, color c, const bool reflection);
   void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const point tl, const point br);
+  void blit_outline_highlight(point &blit_tl, point &blit_br, const Tilep tile);
   void blit_pixelart(int fbo);
   void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, const point tl, const point br);
   void blit_shadow(const Tpp &tp, const Tilep &tile, const point tl, const point br);
