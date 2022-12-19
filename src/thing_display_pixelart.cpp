@@ -756,7 +756,7 @@ void Thing::blit_end_reflection_submerged(uint8_t submerged)
   blit_init();
 }
 
-void Thing::blit_outline_highlight(point &blit_tl, point &blit_br, const Tilep tile)
+void Thing::blit_outline_highlight(const Tilep tile, const point blit_tl, const point blit_br)
 {
   TRACE_NO_INDENT();
 
@@ -1020,7 +1020,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
         }
       }
 
-      blit_outline_highlight(blit_tl, blit_br, tile);
+      blit_outline_highlight(tile, point(blit_tl.x, blit_tl.y - submerged), point(blit_br.x, blit_br.y - submerged));
       blit_end_submerged(submerged);
     } else {
       if (outline) {
@@ -1040,17 +1040,16 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
       }
       if (is_burnt) {
         if (outline) {
-          tile_blit_burnt(tile, point(blit_tl.x, blit_tl.y - submerged - 1),
-                          point(blit_br.x, blit_br.y - submerged - 1));
+          tile_blit_burnt(tile, point(blit_tl.x, blit_tl.y - 1), point(blit_br.x, blit_br.y - 1));
         } else {
-          tile_blit_burnt(tile, point(blit_tl.x, blit_tl.y - submerged), point(blit_br.x, blit_br.y - submerged));
+          tile_blit_burnt(tile, blit_tl, blit_br);
         }
       }
-      blit_outline_highlight(blit_tl, blit_br, tile);
+      blit_outline_highlight(tile, blit_tl, blit_br);
     }
   } else {
     tile_blit(tile, blit_tl, blit_br);
-    blit_outline_highlight(blit_tl, blit_br, tile);
+    blit_outline_highlight(tile, blit_tl, blit_br);
   }
 
   tiles_get();
