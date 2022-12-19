@@ -1027,7 +1027,23 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
     tile_blit(tile, blit_tl, blit_br);
   }
 
+  if (this == game->current_wid_thing_info) {
+    static uint8_t a    = 128;
+    static int     step = 2;
+    static int     dir  = 1;
+    a += dir * step;
+    if (a > 250) {
+      dir = -1;
+    } else if (a < 50) {
+      dir = 1;
+    }
+    color outline_color = RED;
+    outline_color.a     = a;
+    tile_blit_outline_only(tile, blit_tl, blit_br, outline_color);
+  }
+
   tiles_get();
+
   if (is_wall()) {
     if (! reflection) {
       blit_wall_shadow(blit_tl, blit_br, &tiles);

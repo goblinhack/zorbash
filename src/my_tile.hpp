@@ -266,5 +266,6 @@ void tile_load_arr_sprites(std::string file, std::string tex_name, uint32_t widt
                            const char *arr[], int gl_mode = GL_NEAREST);
 void tile_blit_frozen(const Tilep &tile, const point tl, const point br);
 void tile_blit_burnt(const Tilep &tile, const point tl, const point br);
+void tile_blit_outline_only(const Tilep &tile, const point tl, const point br, color c);
 
 #endif

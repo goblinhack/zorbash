@@ -12,6 +12,14 @@ void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny
 {
   TRACE_NO_INDENT();
 
+  //
+  // If we are over the left bar looking at a thing and then move the mouse, do not
+  // try to find the cursor as that then removes the popup.
+  //
+  if (wid_over) {
+    return;
+  }
+
   switch (game->state) {
     case Game::STATE_NORMAL: break;
     case Game::STATE_OPTIONS_FOR_ITEM_MENU: // Drop, throw etc and item

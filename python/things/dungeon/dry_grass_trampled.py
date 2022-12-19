@@ -41,7 +41,7 @@ def tp_init(name, tiles=[]):
 
     for t in tiles:
         my.tile(self,
-                ascii_fg_char="three_dots", ascii_bg_col_name="", ascii_fg_col_name="darkgreen",
+                ascii_fg_char="three_dots", ascii_bg_col_name="", ascii_fg_col_name="brown",
                 tile=t)
 
     my.tp_update(self)

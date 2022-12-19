@@ -121,7 +121,7 @@ void sdl_fbo_dump(int fbo, const std::string &name)
   fbo_get_size(fbo, w, h);
   GL_ERROR_CHECK();
 
-  blit_fbo_bind(fbo);
+  blit_fbo_push(fbo);
   GL_ERROR_CHECK();
 
   glPixelStorei(GL_PACK_ALIGNMENT, 1);
@@ -133,7 +133,7 @@ void sdl_fbo_dump(int fbo, const std::string &name)
   glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
   GL_ERROR_CHECK();
 
-  blit_fbo_unbind();
+  blit_fbo_pop();
   GL_ERROR_CHECK();
 
   static int count      = 0;

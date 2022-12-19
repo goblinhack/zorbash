@@ -7,6 +7,7 @@
 #include "my_game.hpp"
 #include "my_pixel.hpp"
 #include "my_ptrcheck.hpp"
+#include "my_sdl_proto.hpp"
 #include "my_string.hpp"
 #include "my_template.hpp"
 #include "my_tex.hpp"
@@ -1379,7 +1380,7 @@ void tile_blit_frozen(const Tilep &tile, const point tl, const point br)
     tile_ice = tile_find_mand("ice");
   }
 
-  auto  width  = tl.x > br.x ? (tl.x - br.y) : (br.x - tl.x);
+  auto  width  = tl.x > br.x ? (tl.x - br.x) : (br.x - tl.x);
   auto  height = br.y - tl.y;
   float tw     = ((float) width) / ((float) game->config.game_pix_width);
   float th     = ((float) height) / ((float) game->config.game_pix_height);
@@ -1387,6 +1388,7 @@ void tile_blit_frozen(const Tilep &tile, const point tl, const point br)
   blit_flush();
 
   blit_fbo_push(FBO_SPRITE);
+  glClear(GL_COLOR_BUFFER_BIT);
   {
     glcolor(WHITE);
     blit_init();
@@ -1433,7 +1435,7 @@ void tile_blit_burnt(const Tilep &tile, const point tl, const point br)
     tile_burnt = tile_find_mand("burnt");
   }
 
-  auto  width  = tl.x > br.x ? (tl.x - br.y) : (br.x - tl.x);
+  auto  width  = tl.x > br.x ? (tl.x - br.x) : (br.x - tl.x);
   auto  height = br.y - tl.y;
   float tw     = ((float) width) / ((float) game->config.game_pix_width);
   float th     = ((float) height) / ((float) game->config.game_pix_height);
@@ -1441,6 +1443,7 @@ void tile_blit_burnt(const Tilep &tile, const point tl, const point br)
   blit_flush();
 
   blit_fbo_push(FBO_SPRITE);
+  glClear(GL_COLOR_BUFFER_BIT);
   {
     glcolor(WHITE);
     blit_init();
@@ -1478,4 +1481,59 @@ void tile_blit_burnt(const Tilep &tile, const point tl, const point br)
     blit(fbo_tex_id[ FBO_SPRITE ], 0, 1, tw, 1.0 - th, tl.x, tl.y, br.x, br.y);
   }
   blit_flush();
+}
+
+void tile_blit_outline_only(const Tilep &tile, const point tl, const point br, color c)
+{
+  int width  = (tl.x > br.x) ? (tl.x - br.x) : (br.x - tl.x);
+  int height = br.y - tl.y;
+
+  blit_flush();
+
+  blit_fbo_push(FBO_SPRITE);
+  glClear(GL_COLOR_BUFFER_BIT);
+  blit_init();
+  {
+    auto  binding = tile->gl_binding_mask();
+    float x1, x2, y1, y2;
+
+    x2 = tile->x1;
+    x1 = tile->x2;
+    y1 = tile->y1;
+    y2 = tile->y2;
+
+    glcolor(WHITE);
+    blit(binding, x1, y1, x2, y2, 0, 0, width + 0, height + 0);
+    blit(binding, x1, y1, x2, y2, 1, 0, width + 1, height + 0);
+    blit(binding, x1, y1, x2, y2, 2, 0, width + 2, height + 0);
+    blit(binding, x1, y1, x2, y2, 0, 1, width + 0, height + 1);
+    blit(binding, x1, y1, x2, y2, 1, 1, width + 1, height + 1);
+    blit(binding, x1, y1, x2, y2, 2, 1, width + 2, height + 1);
+    blit(binding, x1, y1, x2, y2, 0, 1, width + 0, height + 2);
+    blit(binding, x1, y1, x2, y2, 1, 1, width + 1, height + 2);
+    blit(binding, x1, y1, x2, y2, 2, 1, width + 2, height + 2);
+    glcolor(BLACK);
+    blit(binding, x1, y1, x2, y2, 1, 1, width + 1, height + 1);
+    blit_flush();
+    glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    blit_init();
+    glcolor(WHITE);
+    blit(binding, x1, y1, x2, y2, 1, 1, width + 1, height + 1);
+    blit_flush();
+  }
+  blit_flush();
+  blit_fbo_pop();
+
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR);
+  blit_init();
+  glcolor(c);
+  float tw = ((float) width + 2) / ((float) game->config.game_pix_width);
+  float th = ((float) height + 2) / ((float) game->config.game_pix_height);
+  if (tl.x > br.x) {
+    blit(fbo_tex_id[ FBO_SPRITE ], 0, 1, tw, 1 - th, br.x - 1 - 0, tl.y - 2, tl.x + 1 - 0, br.y + 0);
+  } else {
+    blit(fbo_tex_id[ FBO_SPRITE ], 0, 1, tw, 1 - th, br.x + 1 - 0, tl.y - 2, tl.x - 1 - 0, br.y + 0);
+  }
+  blit_flush();
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
