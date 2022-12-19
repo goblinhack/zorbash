@@ -48,7 +48,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
 
-    delay = 40
+    delay = 60
     for t in tiles:
         colors = ["yellow", "red", "orange", "yellow", "white"]
         color = random.choice(colors)
