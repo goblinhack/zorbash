@@ -1620,9 +1620,9 @@ PyObject *thing_speaks(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   if (owner->is_monst()) {
-    owner->topcon("%s says '%s'", owner->text_The().c_str(), msg);
+    owner->msg("%s says '%s'", owner->text_The().c_str(), msg);
   } else {
-    owner->topcon("%s", msg);
+    owner->msg("%s", msg);
   }
 
   Py_RETURN_NONE;
