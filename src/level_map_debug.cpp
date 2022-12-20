@@ -55,8 +55,6 @@ void Level::update_map_debug(int x, int y)
         c = RED;
       } else if (is_block_of_ice(x, y)) {
         c = CYAN;
-      } else if (is_spiderweb(x, y)) {
-        c = WHITE;
       } else if (is_key(x, y) || is_food(x, y) || is_treasure_type(x, y) || is_skillstone(x, y) ||
                  is_enchantstone(x, y)) {
         c = GOLD2;

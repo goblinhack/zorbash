@@ -81,7 +81,14 @@ uint8_t wid_right_bar_inventory_open(Widp w, int x, int y, uint32_t button)
     return true;
   }
 
-  wid_inventory_init();
+  game->level->inventory_chosen(wid_get_int_context(w));
+  auto what = game->level->inventory_get();
+  if (what) {
+    wid_inventory_select_requested(what);
+  } else {
+    wid_inventory_init();
+  }
+
   return true;
 }
 

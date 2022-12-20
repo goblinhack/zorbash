@@ -43,26 +43,30 @@ void Game::place_player(void)
         auto w = level->thing_new("food_pottedmeat", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("armor_lather", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("sword_plutonium", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_descent", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("gauntlets_lion", point(x, y - 2));
         t->carry(w);
         t->enchant_without_stone(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("buff_undead_protection", point(x, y));
         t->buff_add(w);
+      }
+      if (1) {
+        auto w = level->thing_new("debuff_poisoned", point(x, y));
+        t->debuff_add(w);
       }
       if (0) {
         level->thing_new("zorb_necro", point(x + 2, y));
@@ -72,27 +76,27 @@ void Game::place_player(void)
         level->thing_new("fire", point(x + 1, y + 1));
         level->thing_new("small_fire", point(x + 3, y + 3));
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("skill_devoted_thrust", point(x, y));
         t->skill_add(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("amulet_endurance", point(x, y - 2));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_lightning", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_fire", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_cold", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_energy", point(x, y));
         t->carry(w);
       }
@@ -197,7 +201,7 @@ void Game::place_player(void)
         t->carry(w);
         t->enchant_without_stone(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("map_treasure", point(x, y));
         t->carry(w);
       }

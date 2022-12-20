@@ -358,6 +358,7 @@ bool wid_rightbar_pixelart_create(void)
       //
       auto x = (i % 5) * 3 + 2;
       auto y = (i / 5) * 3 + 1 + y_at;
+      x++;
 
       {
         auto  w  = wid_new_plain(wid_rightbar, "inventory slot bg");
@@ -372,7 +373,7 @@ bool wid_rightbar_pixelart_create(void)
 
       auto  s  = "inventory slot" + std::to_string(i);
       auto  w  = wid_new_plain(wid_rightbar, s);
-      point tl = make_point(x, y);
+      point tl = make_point(x - 1, y - 1);
       point br = make_point(x + 1, y + 1);
 
       wid_set_pos(w, tl, br);
@@ -473,7 +474,7 @@ bool wid_rightbar_pixelart_create(void)
   //
   // Skills
   //
-  y_at += 8;
+  y_at += 7;
   {
     std::vector< Widp > wid_skillbox_items;
 
@@ -487,11 +488,13 @@ bool wid_rightbar_pixelart_create(void)
       //
       // Always create the slot even if empty as we use this for particles
       //
-      auto  s  = "skill slot" + std::to_string(i);
-      auto  w  = wid_new_plain(wid_rightbar, s);
-      auto  x  = (i % 5) * 3 + 2;
-      auto  y  = (i / 5) * 3 + 1 + y_at;
-      point tl = make_point(x, y);
+      auto s = "skill slot" + std::to_string(i);
+      auto w = wid_new_plain(wid_rightbar, s);
+      auto x = (i % 5) * 3 + 2;
+      auto y = (i / 5) * 3 + 1 + y_at;
+      x++;
+
+      point tl = make_point(x - 1, y - 1);
       point br = make_point(x + 1, y + 1);
 
       wid_set_pos(w, tl, br);
@@ -565,7 +568,7 @@ bool wid_rightbar_pixelart_create(void)
   //
   // Buffs
   //
-  y_at += 8;
+  y_at += 7;
   {
     std::vector< Widp > wid_buffbox_items;
 
@@ -579,11 +582,13 @@ bool wid_rightbar_pixelart_create(void)
       //
       // Always create the slot even if empty as we use this for particles
       //
-      auto  s  = "buff slot" + std::to_string(i);
-      auto  w  = wid_new_plain(wid_rightbar, s);
-      auto  x  = (i % 5) * 3 + 2;
-      auto  y  = (i / 5) * 3 + 1 + y_at;
-      point tl = make_point(x, y);
+      auto s = "buff slot" + std::to_string(i);
+      auto w = wid_new_plain(wid_rightbar, s);
+      auto x = (i % 5) * 3 + 2;
+      auto y = (i / 5) * 3 + 1 + y_at;
+      x++;
+
+      point tl = make_point(x - 1, y - 1);
       point br = make_point(x + 1, y + 1);
 
       wid_set_pos(w, tl, br);
@@ -640,7 +645,7 @@ bool wid_rightbar_pixelart_create(void)
   //
   // Debuffs
   //
-  y_at += 8;
+  y_at += 7;
   {
     std::vector< Widp > wid_debuffbox_items;
 
@@ -654,11 +659,13 @@ bool wid_rightbar_pixelart_create(void)
       //
       // Always create the slot even if empty as we use this for particles
       //
-      auto  s  = "debuff slot" + std::to_string(i);
-      auto  w  = wid_new_plain(wid_rightbar, s);
-      auto  x  = (i % 5) * 3 + 2;
-      auto  y  = (i / 5) * 3 + 1 + y_at;
-      point tl = make_point(x, y);
+      auto s = "debuff slot" + std::to_string(i);
+      auto w = wid_new_plain(wid_rightbar, s);
+      auto x = (i % 5) * 3 + 2;
+      auto y = (i / 5) * 3 + 1 + y_at;
+      x++;
+
+      point tl = make_point(x - 1, y - 1);
       point br = make_point(x + 1, y + 1);
 
       wid_set_pos(w, tl, br);
@@ -712,7 +719,7 @@ bool wid_rightbar_pixelart_create(void)
     }
   }
 
-  y_at += 9;
+  y_at += 11;
 
   //
   // Map
