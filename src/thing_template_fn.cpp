@@ -484,6 +484,7 @@ int Tp::is_immune_to_water(void) const { return _is_immune_to_water; }
 int Tp::is_intelligent(void) const { return _is_intelligent; }
 int Tp::is_interesting(void) const { return _is_interesting; }
 int Tp::is_internal(void) const { return _is_internal; }
+int Tp::is_invisible(void) const { return _is_invisible; }
 int Tp::is_item_carrier(void) const { return _is_item_carrier; }
 int Tp::is_item_collector(void) const { return _is_item_collector; }
 int Tp::is_item_organic(void) const { return _is_item_organic; }
@@ -699,7 +700,6 @@ int Tp::unused_flag22(void) const { return _unused_flag22; }
 int Tp::unused_flag23(void) const { return _unused_flag23; }
 int Tp::unused_flag24(void) const { return _unused_flag24; }
 int Tp::unused_flag25(void) const { return _unused_flag25; }
-int Tp::unused_flag26(void) const { return _unused_flag26; }
 int Tp::unused_flag27(void) const { return _unused_flag27; }
 int Tp::unused_flag2(void) const { return _unused_flag2; }
 int Tp::unused_flag3(void) const { return _unused_flag3; }
@@ -1025,6 +1025,7 @@ void Tp::is_immune_to_water_set(int v) { _is_immune_to_water = v; }
 void Tp::is_intelligent_set(int v) { _is_intelligent = v; }
 void Tp::is_interesting_set(int v) { _is_interesting = v; }
 void Tp::is_internal_set(int v) { _is_internal = v; }
+void Tp::is_invisible_set(int v) { _is_invisible = v; }
 void Tp::is_item_carrier_set(int v) { _is_item_carrier = v; }
 void Tp::is_item_collector_set(int v) { _is_item_collector = v; }
 void Tp::is_item_organic_set(int v) { _is_item_organic = v; }
@@ -1378,7 +1379,6 @@ void Tp::unused_flag22_set(int v) { _unused_flag22 = v; }
 void Tp::unused_flag23_set(int v) { _unused_flag23 = v; }
 void Tp::unused_flag24_set(int v) { _unused_flag24 = v; }
 void Tp::unused_flag25_set(int v) { _unused_flag25 = v; }
-void Tp::unused_flag26_set(int v) { _unused_flag26 = v; }
 void Tp::unused_flag27_set(int v) { _unused_flag27 = v; }
 void Tp::unused_flag2_set(int v) { _unused_flag2 = v; }
 void Tp::unused_flag3_set(int v) { _unused_flag3 = v; }

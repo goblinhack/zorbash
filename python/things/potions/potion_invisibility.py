@@ -14,6 +14,7 @@ def on_use(owner, item, target, x, y):
     # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
     # my.con("item    {} {:X}".format(my.thing_name_get(item), item))
     # my.con("target  {} {:X}".format(my.thing_name_get(target), target))
+    my.thing_buff_add(owner, "buff_is_invisible")
     return
 
 

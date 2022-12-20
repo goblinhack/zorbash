@@ -413,6 +413,7 @@ private:
   int _is_intelligent {};
   int _is_interesting {}; // e.g. something edible or a monst or lava
   int _is_internal {};
+  int _is_invisible {};
   int _is_item {};
   int _is_item_carrier {};
   int _is_item_carrier0 {};
@@ -630,7 +631,6 @@ private:
   int _unused_flag23 {};
   int _unused_flag24 {};
   int _unused_flag25 {};
-  int _unused_flag26 {};
   int _unused_flag27 {};
   int _unused_flag3 {};
   int _unused_flag4 {};
@@ -1454,6 +1454,7 @@ public:
   int is_intelligent(void) const;
   int is_interesting(void) const;
   int is_internal(void) const;
+  int is_invisible(void) const;
   int is_item_carrier(void) const;
   int is_item_collector(void) const;
   int is_item_organic(void) const;
@@ -1669,7 +1670,6 @@ public:
   int unused_flag23(void) const;
   int unused_flag24(void) const;
   int unused_flag25(void) const;
-  int unused_flag26(void) const;
   int unused_flag27(void) const;
   int unused_flag2(void) const;
   int unused_flag3(void) const;
@@ -1995,6 +1995,7 @@ public:
   void is_intelligent_set(int v);
   void is_interesting_set(int v);
   void is_internal_set(int v);
+  void is_invisible_set(int v);
   void is_item_carrier_set(int v);
   void is_item_collector_set(int v);
   void is_item_organic_set(int v);
@@ -2351,7 +2352,6 @@ public:
   void unused_flag23_set(int v);
   void unused_flag24_set(int v);
   void unused_flag25_set(int v);
-  void unused_flag26_set(int v);
   void unused_flag27_set(int v);
   void unused_flag2_set(int v);
   void unused_flag3_set(int v);

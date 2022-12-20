@@ -568,7 +568,7 @@ def init_tiles_16x16():
         "buff_is_immune_to_poison",
         "buff_is_immune_to_negation",
         "buff_is_immune_to_water",
-        "",
+        "buff_is_invisible",
         "",
         "",
         "",

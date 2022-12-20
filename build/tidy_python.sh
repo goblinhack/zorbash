@@ -531,7 +531,7 @@ do
       unused_flag23 \
       unused_flag24 \
       unused_flag25 \
-      unused_flag26 \
+      is_invisible \
       unused_flag27 \
       is_lightning \
       is_immune_to_negation \

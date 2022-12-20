@@ -320,6 +320,7 @@ PyObject *thing_is_immune_to_spiderwebs(PyObject *obj, PyObject *args, PyObject 
 PyObject *thing_is_immune_to_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_intelligent(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_interesting(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_invisible(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_item_carrier(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_item_collector(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_item_organic(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -574,7 +575,6 @@ PyObject *thing_unused_flag22(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag23(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag24(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag25(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag26(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag27(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag2(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag3(PyObject *obj, PyObject *args, PyObject *keywds);

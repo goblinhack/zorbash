@@ -1413,10 +1413,10 @@ int Thing::unused_flag25(void)
   return (tp()->unused_flag25());
 }
 
-int Thing::unused_flag26(void)
+int Thing::is_invisible(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag26());
+  return (tp()->is_invisible());
 }
 
 int Thing::unused_flag27(void)

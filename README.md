@@ -234,7 +234,7 @@ Content:
 - 52 food
 - 19 treasure
 - 13 weapons
-- 9 buffs
+- 10 buffs
 - 8 items
 - 6 staffs
 - 6 boots

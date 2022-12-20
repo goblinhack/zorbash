@@ -1356,6 +1356,7 @@ public:
   int is_intelligent(void);
   int is_interesting(void);
   int is_internal(void);
+  int is_invisible(void);
   int is_item_carrier(void);
   int is_item_collector(void);
   int is_item_organic(void);
@@ -1933,7 +1934,6 @@ public:
   int unused_flag23(void);
   int unused_flag24(void);
   int unused_flag25(void);
-  int unused_flag26(void);
   int unused_flag27(void);
   int unused_flag2(void);
   int unused_flag3(void);
