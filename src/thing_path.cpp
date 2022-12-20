@@ -25,6 +25,9 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
     return false;
   }
 
+  DBG2("Pop next move");
+  TRACE_AND_INDENT();
+
   std::string s = "";
   IF_DEBUG3
   {
@@ -269,6 +272,8 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
       //
       if (level->is_monst(future_pos)) {
         DBG2("Hazard, but a monst is on it. Try to attack it.");
+        TRACE_AND_INDENT();
+
         if (move_no_shove_attack_allowed(future_pos)) {
           return true;
         }
@@ -280,6 +285,8 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
     }
 
     DBG2("Try to move (shoving not allowed, attack allowed) to %s", future_pos.to_string().c_str());
+    TRACE_AND_INDENT();
+
     if (move_no_shove_attack_allowed(future_pos)) {
       return true;
     }
@@ -381,6 +388,22 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
       }
     } else {
       DBG2("Try to move, no shove, no attack as have move path");
+      TRACE_AND_INDENT();
+
+      if (move_no_shove_no_attack(future_pos)) {
+        return true;
+      }
+    }
+  } else if (is_player() && ! game->robot_mode) {
+    if (reason == THING_MOVE_REASON_MOUSE) {
+      DBG2("Try to move player, no shove, attack allowed on next hop %s", future_pos.to_string().c_str());
+      TRACE_AND_INDENT();
+
+      if (move_no_shove_attack_allowed(future_pos)) {
+        return true;
+      }
+    } else {
+      DBG2("Try to move player, no shove, no attack as have move path");
       TRACE_AND_INDENT();
 
       if (move_no_shove_no_attack(future_pos)) {
