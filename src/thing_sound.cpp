@@ -38,6 +38,8 @@ bool Thing::thing_sound_play(const std::string &alias)
 
   volume *= MIX_MAX_VOLUME;
 
+  // con("SOUND %s dist %d", alias.c_str(), distance);
+
   //
   // Dampen sounds according to distance.
   //
@@ -47,7 +49,18 @@ bool Thing::thing_sound_play(const std::string &alias)
     // Full volume for player events; else if we fire a fireball far away we will hear nothing
     //
   } else {
-    volume -= distance;
+    if (distance == DMAP_IS_WALL) {
+      volume /= 2;
+      // con("  - vol(a) %f", volume);
+    } else {
+      volume -= (distance * distance);
+      // con("  - vol(b) %f", volume);
+    }
+
+    if (! get(player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+      volume /= 2;
+      // con("  - vol(c) %f", volume);
+    }
   }
 
   if (volume <= 0) {
@@ -102,6 +115,7 @@ bool Thing::thing_sound_play_channel(int channel, const std::string &alias)
   }
 
   // con("SOUND %s dist %d", alias.c_str(), distance);
+
   auto sound = all_sound.find(alias);
   if (sound == all_sound.end()) {
     ERR("Cannot find sound %s", alias.c_str());
@@ -111,7 +125,6 @@ bool Thing::thing_sound_play_channel(int channel, const std::string &alias)
   float volume = sound->second->volume * (((float) game->config.sound_volume) / ((float) MIX_MAX_VOLUME));
 
   volume *= MIX_MAX_VOLUME;
-  // con("  - vol %f", volume);
 
   //
   // Dampen sounds according to distance.
@@ -131,7 +144,7 @@ bool Thing::thing_sound_play_channel(int channel, const std::string &alias)
     }
 
     if (! get(player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
-      volume /= 4;
+      volume /= 2;
       // con("  - vol(c) %f", volume);
     }
   }
@@ -139,6 +152,7 @@ bool Thing::thing_sound_play_channel(int channel, const std::string &alias)
   if (volume <= 0) {
     return true;
   }
+
   // con("  - vol(final) %f", volume);
 
   Mix_VolumeChunk(sound->second->chunk, volume);

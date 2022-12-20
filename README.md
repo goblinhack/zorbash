@@ -1,6 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- - skills                                                                                                                                     -->
+<!-- - dead items not sorted                                                                                                                      -->
 <!-- - invisibility potion todo                                                                                                                   -->
 <!-- - falling in block of ice should fall together                                                                                               -->
 <!-- - some weapons crit more                                                                                                                     -->

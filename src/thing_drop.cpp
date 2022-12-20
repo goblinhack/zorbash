@@ -175,10 +175,11 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen, bool thrown)
       }
     } else {
       msg("%s drops %s.", text_The().c_str(), what->text_the().c_str());
-      sound_play("drop");
+      thing_sound_play("drop");
       level->noisemap_in_incr(curr_at.x, curr_at.y, what->noise_on_dropping());
     }
   }
+
   what->is_being_dropped = false;
   what->tick_last_dropped_set(game->tick_current);
   if (! is_dead_or_dying()) {
@@ -315,10 +316,8 @@ bool Thing::drop_from_ether(Thingp what)
   }
 
   dbg("Dropped from ether %s", what->to_short_string().c_str());
+  thing_sound_play("drop");
 
-  if (is_player()) {
-    sound_play("drop");
-  }
   what->tick_last_dropped_set(game->tick_current);
   check_all_carried_items_are_owned();
   check_all_carried_maps();
