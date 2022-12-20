@@ -521,12 +521,12 @@ bool wid_leftbar_display_create(void)
 
   {
     ///////////////////////////////////////////////////////////////////////////
-    // Monsters (dead)
+    // Monsters (dead) and items
     ///////////////////////////////////////////////////////////////////////////
     std::vector< Thingp > m;
     FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
     {
-      if (! t->is_dead) {
+      if (! t->is_dead && ! t->is_item()) {
         continue;
       }
 
@@ -552,44 +552,6 @@ bool wid_leftbar_display_create(void)
 
     for (auto n : m) {
       wid_leftbar_display_describe(level, n, y_at, width, false /* allow carried */);
-    }
-  }
-
-  {
-    ///////////////////////////////////////////////////////////////////////////
-    // Items
-    ///////////////////////////////////////////////////////////////////////////
-    std::vector< Thingp > m;
-    FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
-    {
-      if (! t->is_item()) {
-        continue;
-      }
-
-      auto player = level->player;
-      if (t->is_player()) {
-        continue;
-      }
-
-      if (! get(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) {
-        continue;
-      }
-
-      if (! level->can_see_unimpeded(player->curr_at, t->curr_at)) {
-        continue;
-      }
-
-      m.push_back(t);
-    }
-    FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(game->level)
-
-    sort(m.begin(), m.end(),
-         [](Thingp a, Thingp b) -> bool { return (a->curr_at.x > b->curr_at.x) && (a->curr_at.y > b->curr_at.y); });
-
-    bool first = true;
-    for (auto n : m) {
-      wid_leftbar_display_describe(level, n, y_at, width, false /* allow carried */, first);
-      first = false;
     }
   }
 

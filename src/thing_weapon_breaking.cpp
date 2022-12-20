@@ -157,30 +157,38 @@ void Thing::weapon_check_for_dmg(Thingp weapon, Thingp victim)
     if (my_owner->is_player()) {
       if (damaged) {
         if (weapon->is_wooden()) {
-          my_owner->msg("%%fg=orange$Your %s is splintering.%%fg=reset$", weapon->text_long_name().c_str());
+          my_owner->msg("%%fg=orange$Your %s is splintering on %s.%%fg=reset$", weapon->text_long_name().c_str(),
+                        victim->text_the().c_str());
         } else {
-          my_owner->msg("%%fg=orange$Your %s is buckling.%%fg=reset$", weapon->text_long_name().c_str());
+          my_owner->msg("%%fg=orange$Your %s is buckling on %s.%%fg=reset$", weapon->text_long_name().c_str(),
+                        victim->text_the().c_str());
         }
       } else if (corrode) {
-        my_owner->msg("%%fg=orange$Your %s is corroding.%%fg=reset$", weapon->text_long_name().c_str());
+        my_owner->msg("%%fg=orange$Your %s is corroding on %s.%%fg=reset$", weapon->text_long_name().c_str(),
+                      victim->text_the().c_str());
+      } else if (victim->is_hard()) {
+        my_owner->msg("%%fg=orange$Your %s is damaged by %s.%%fg=reset$", weapon->text_long_name().c_str(),
+                      victim->text_the().c_str());
       } else {
-        my_owner->msg("%%fg=orange$Your %s is damaged.%%fg=reset$", weapon->text_long_name().c_str());
+        my_owner->msg("%%fg=orange$Your %s is damaged by %s.%%fg=reset$", weapon->text_long_name().c_str(),
+                      victim->text_the().c_str());
       }
     } else {
       if (damaged) {
         if (weapon->is_wooden()) {
-          my_owner->msg("%%fg=orange$%s %s is splintering.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
-                        weapon->text_long_name().c_str());
+          my_owner->msg("%%fg=orange$%s %s is splintering on %s.%%fg=reset$",
+                        apostrophise(my_owner->text_The()).c_str(), weapon->text_long_name().c_str(),
+                        victim->text_the().c_str());
         } else {
-          my_owner->msg("%%fg=orange$%s %s is buckling.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
-                        weapon->text_long_name().c_str());
+          my_owner->msg("%%fg=orange$%s %s is buckling on %s.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
+                        weapon->text_long_name().c_str(), victim->text_the().c_str());
         }
       } else if (corrode) {
-        my_owner->msg("%%fg=orange$%s %s is corroding.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
-                      weapon->text_long_name().c_str());
+        my_owner->msg("%%fg=orange$%s %s is corroding on %s.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
+                      weapon->text_long_name().c_str(), victim->text_the().c_str());
       } else {
-        my_owner->msg("%%fg=orange$%s %s is damaged.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
-                      weapon->text_long_name().c_str());
+        my_owner->msg("%%fg=orange$%s %s is damaged by %s.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
+                      weapon->text_long_name().c_str(), victim->text_the().c_str());
       }
     }
     return;
@@ -189,19 +197,23 @@ void Thing::weapon_check_for_dmg(Thingp weapon, Thingp victim)
   if (my_owner->is_player()) {
     if (damaged) {
       if (weapon->is_wooden()) {
-        my_owner->msg("%%fg=red$Your %s is shattered.%%fg=reset$", weapon->text_long_name().c_str());
+        my_owner->msg("%%fg=red$Your %s shatters on %s.%%fg=reset$", weapon->text_long_name().c_str(),
+                      victim->text_the().c_str());
       } else {
-        my_owner->msg("%%fg=red$Your %s is buckled.%%fg=reset$", weapon->text_long_name().c_str());
+        my_owner->msg("%%fg=red$Your %s buckles on %s.%%fg=reset$", weapon->text_long_name().c_str(),
+                      victim->text_the().c_str());
       }
     } else if (corrode) {
-      my_owner->msg("%%fg=red$Your %s is corroded.%%fg=reset$", weapon->text_long_name().c_str());
+      my_owner->msg("%%fg=red$Your %s is dissolves on %s.%%fg=reset$", weapon->text_long_name().c_str(),
+                    victim->text_the().c_str());
     } else {
-      my_owner->msg("%%fg=red$Your %s is destroyed.%%fg=reset$", weapon->text_long_name().c_str());
+      my_owner->msg("%%fg=red$Your %s breaks on %s.%%fg=reset$", weapon->text_long_name().c_str(),
+                    victim->text_the().c_str());
     }
   } else {
     if (damaged) {
       if (weapon->is_wooden()) {
-        my_owner->msg("%%fg=orange$%s %s is shattered.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
+        my_owner->msg("%%fg=orange$%s %s shatters.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
                       weapon->text_long_name().c_str());
       } else {
         my_owner->msg("%%fg=orange$%s %s is buckled.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
