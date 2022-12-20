@@ -319,6 +319,7 @@ int Tp::is_able_to_move_diagonally(void) const { return _is_able_to_move_diagona
 int Tp::is_able_to_open_doors(void) const { return _is_able_to_open_doors; }
 int Tp::is_able_to_rest(void) const { return _is_able_to_rest; }
 int Tp::is_able_to_see_in_the_dark(void) const { return _is_able_to_see_in_the_dark; }
+int Tp::is_able_to_see_invisible(void) const { return _is_able_to_see_invisible; }
 int Tp::is_able_to_see_through_doors(void) const { return _is_able_to_see_through_doors; }
 int Tp::is_able_to_shove_chance_d1000(void) const { return _is_able_to_shove_chance_d1000; }
 int Tp::is_able_to_shove(void) const { return _is_able_to_shove; }
@@ -699,7 +700,6 @@ int Tp::unused_flag21(void) const { return _unused_flag21; }
 int Tp::unused_flag22(void) const { return _unused_flag22; }
 int Tp::unused_flag23(void) const { return _unused_flag23; }
 int Tp::unused_flag24(void) const { return _unused_flag24; }
-int Tp::unused_flag25(void) const { return _unused_flag25; }
 int Tp::unused_flag27(void) const { return _unused_flag27; }
 int Tp::unused_flag2(void) const { return _unused_flag2; }
 int Tp::unused_flag3(void) const { return _unused_flag3; }
@@ -859,6 +859,7 @@ void Tp::is_able_to_move_diagonally_set(int v) { _is_able_to_move_diagonally = v
 void Tp::is_able_to_open_doors_set(int v) { _is_able_to_open_doors = v; }
 void Tp::is_able_to_rest_set(int v) { _is_able_to_rest = v; }
 void Tp::is_able_to_see_in_the_dark_set(int v) { _is_able_to_see_in_the_dark = v; }
+void Tp::is_able_to_see_invisible_set(int v) { _is_able_to_see_invisible = v; }
 void Tp::is_able_to_see_through_doors_set(int v) { _is_able_to_see_through_doors = v; }
 void Tp::is_able_to_shove_chance_d1000_set(int v) { _is_able_to_shove_chance_d1000 = v; }
 void Tp::is_able_to_shove_set(int v) { _is_able_to_shove = v; }
@@ -1378,7 +1379,6 @@ void Tp::unused_flag21_set(int v) { _unused_flag21 = v; }
 void Tp::unused_flag22_set(int v) { _unused_flag22 = v; }
 void Tp::unused_flag23_set(int v) { _unused_flag23 = v; }
 void Tp::unused_flag24_set(int v) { _unused_flag24 = v; }
-void Tp::unused_flag25_set(int v) { _unused_flag25 = v; }
 void Tp::unused_flag27_set(int v) { _unused_flag27 = v; }
 void Tp::unused_flag2_set(int v) { _unused_flag2 = v; }
 void Tp::unused_flag3_set(int v) { _unused_flag3 = v; }

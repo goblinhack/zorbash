@@ -19,6 +19,10 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
     return;
   }
 
+  if (is_currently_invisible) {
+    return;
+  }
+
   if (! level->player) {
     return;
   }
@@ -202,6 +206,10 @@ void Thing::blit_player_owned_shadow(const Tpp &tpp, const Tilep &tile, const po
     return;
   }
 
+  if (is_currently_invisible) {
+    return;
+  }
+
   point shadow_tl = blit_tl;
   point shadow_br = blit_br;
 
@@ -234,6 +242,10 @@ void Thing::blit_shadow(const Tpp &tpp, const Tilep &tile, const point blit_tl, 
   IF_DEBUG2 { return; }
 
   if (g_render_black_and_white) {
+    return;
+  }
+
+  if (is_currently_invisible) {
     return;
   }
 
@@ -760,22 +772,37 @@ void Thing::blit_outline_highlight(const Tilep tile, const point blit_tl, const 
 {
   TRACE_NO_INDENT();
 
-  if (this != game->current_wid_thing_info) {
-    return;
+  if (is_currently_invisible && is_player()) {
+    static uint8_t a    = 128;
+    static int     step = 2;
+    static int     dir  = 1;
+    a += dir * step;
+    if (a > 250) {
+      dir = -1;
+    } else if (a < 50) {
+      dir = 1;
+    }
+
+    color outline_color = WHITE;
+    outline_color.a     = a;
+    tile_blit_outline_only(tile, blit_tl, blit_br, outline_color);
   }
 
-  static uint8_t a    = 128;
-  static int     step = 2;
-  static int     dir  = 1;
-  a += dir * step;
-  if (a > 250) {
-    dir = -1;
-  } else if (a < 50) {
-    dir = 1;
+  if (this == game->current_wid_thing_info) {
+    static uint8_t a    = 128;
+    static int     step = 2;
+    static int     dir  = 1;
+    a += dir * step;
+    if (a > 250) {
+      dir = -1;
+    } else if (a < 50) {
+      dir = 1;
+    }
+
+    color outline_color = RED;
+    outline_color.a     = a;
+    tile_blit_outline_only(tile, blit_tl, blit_br, outline_color);
   }
-  color outline_color = RED;
-  outline_color.a     = a;
-  tile_blit_outline_only(tile, blit_tl, blit_br, outline_color);
 }
 
 void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep tile, color c, bool reflection)
@@ -955,6 +982,9 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
 
   if (! g_render_black_and_white) {
     if (reflection) {
+      //
+      // Drawing a reflection
+      //
       if (auto submerged = blit_begin_reflection_submerged()) {
         tile_blit(tile, blit_tl, blit_br);
         blit_end_reflection_submerged(submerged);
@@ -995,59 +1025,74 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
         }
       }
     } else if (auto submerged = blit_begin_submerged()) {
-      if (outline) {
-        //
-        // Compensate for the one pixel of outline
-        //
-        tile_blit_outline(tile, point(blit_tl.x, blit_tl.y - 1), point(blit_br.x, blit_br.y - 1), c);
-      } else {
-        tile_blit(tile, blit_tl, blit_br);
-      }
-      if (is_frozen) {
+      //
+      // Not drawing a reflection + submerged.
+      //
+      if (! is_currently_invisible) {
         if (outline) {
-          tile_blit_frozen(tile, point(blit_tl.x, blit_tl.y - submerged - 1),
-                           point(blit_br.x, blit_br.y - submerged - 1));
+          //
+          // Compensate for the one pixel of outline
+          //
+          tile_blit_outline(tile, point(blit_tl.x, blit_tl.y - 1), point(blit_br.x, blit_br.y - 1), c);
         } else {
-          tile_blit_frozen(tile, point(blit_tl.x, blit_tl.y - submerged), point(blit_br.x, blit_br.y - submerged));
+          tile_blit(tile, blit_tl, blit_br);
         }
-      }
-      if (is_burnt) {
-        if (outline) {
-          tile_blit_burnt(tile, point(blit_tl.x, blit_tl.y - submerged - 1),
-                          point(blit_br.x, blit_br.y - submerged - 1));
-        } else {
-          tile_blit_burnt(tile, point(blit_tl.x, blit_tl.y - submerged), point(blit_br.x, blit_br.y - submerged));
+        if (is_frozen) {
+          if (outline) {
+            tile_blit_frozen(tile, point(blit_tl.x, blit_tl.y - submerged - 1),
+                             point(blit_br.x, blit_br.y - submerged - 1));
+          } else {
+            tile_blit_frozen(tile, point(blit_tl.x, blit_tl.y - submerged), point(blit_br.x, blit_br.y - submerged));
+          }
+        }
+        if (is_burnt) {
+          if (outline) {
+            tile_blit_burnt(tile, point(blit_tl.x, blit_tl.y - submerged - 1),
+                            point(blit_br.x, blit_br.y - submerged - 1));
+          } else {
+            tile_blit_burnt(tile, point(blit_tl.x, blit_tl.y - submerged), point(blit_br.x, blit_br.y - submerged));
+          }
         }
       }
 
       blit_outline_highlight(tile, point(blit_tl.x, blit_tl.y - submerged), point(blit_br.x, blit_br.y - submerged));
+
       blit_end_submerged(submerged);
     } else {
-      if (outline) {
-        //
-        // Compensate for the one pixel of outline
-        //
-        tile_blit_outline(tile, point(blit_tl.x, blit_tl.y - 1), point(blit_br.x, blit_br.y - 1), c);
-      } else {
-        tile_blit(tile, blit_tl, blit_br);
-      }
-      if (is_frozen) {
+      //
+      // Not drawing a reflection + not submerged.
+      //
+      if (! is_currently_invisible) {
         if (outline) {
-          tile_blit_frozen(tile, point(blit_tl.x, blit_tl.y - 1), point(blit_br.x, blit_br.y - 1));
+          //
+          // Compensate for the one pixel of outline
+          //
+          tile_blit_outline(tile, point(blit_tl.x, blit_tl.y - 1), point(blit_br.x, blit_br.y - 1), c);
         } else {
-          tile_blit_frozen(tile, blit_tl, blit_br);
+          tile_blit(tile, blit_tl, blit_br);
+        }
+        if (is_frozen) {
+          if (outline) {
+            tile_blit_frozen(tile, point(blit_tl.x, blit_tl.y - 1), point(blit_br.x, blit_br.y - 1));
+          } else {
+            tile_blit_frozen(tile, blit_tl, blit_br);
+          }
+        }
+        if (is_burnt) {
+          if (outline) {
+            tile_blit_burnt(tile, point(blit_tl.x, blit_tl.y - 1), point(blit_br.x, blit_br.y - 1));
+          } else {
+            tile_blit_burnt(tile, blit_tl, blit_br);
+          }
         }
       }
-      if (is_burnt) {
-        if (outline) {
-          tile_blit_burnt(tile, point(blit_tl.x, blit_tl.y - 1), point(blit_br.x, blit_br.y - 1));
-        } else {
-          tile_blit_burnt(tile, blit_tl, blit_br);
-        }
-      }
+
       blit_outline_highlight(tile, blit_tl, blit_br);
     }
   } else {
+    //
+    // Black and white
+    //
     tile_blit(tile, blit_tl, blit_br);
     blit_outline_highlight(tile, blit_tl, blit_br);
   }

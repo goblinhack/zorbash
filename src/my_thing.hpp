@@ -249,14 +249,15 @@ public:
   // and always update game_load.cpp and game_save.cpp
   /////////////////////////////////////////////////////////////////////////
   // Fields not worth saving
-  uint64_t debug                 : 1 {};
-  uint64_t is_being_dropped      : 1 {};
-  uint64_t is_blitted            : 1 {};
-  uint64_t inited_tiles          : 1 {};
-  uint64_t has_external_particle : 1 {}; // current in motion particle
-  uint64_t has_internal_particle : 1 {}; // current in motion particle
-  uint64_t ai_tried_to_wander    : 1 {}; // tried to wander
-  uint64_t ready_for_messages    : 1 {}; // ready to see console messages
+  uint64_t debug                  : 1 {};
+  uint64_t is_currently_invisible : 1 {}; // Updated per tick
+  uint64_t is_being_dropped       : 1 {};
+  uint64_t is_blitted             : 1 {};
+  uint64_t inited_tiles           : 1 {};
+  uint64_t has_external_particle  : 1 {}; // current in motion particle
+  uint64_t has_internal_particle  : 1 {}; // current in motion particle
+  uint64_t ai_tried_to_wander     : 1 {}; // tried to wander
+  uint64_t ready_for_messages     : 1 {}; // ready to see console messages
 #ifdef ENABLE_DEBUG_THING_SER
   std::string debug_str;
 #endif
@@ -389,6 +390,7 @@ public:
   bool buff_is_immune_to_negation(void);
   bool buff_is_immune_to_poison(void);
   bool buff_is_immune_to_water(void);
+  bool buff_is_invisible(void);
   bool buff_is_slippery(void);
   bool buff_remove(Thingp it);
   bool buff_remove(Tpp what);
@@ -476,6 +478,7 @@ public:
   bool is_friend(Thingp it);
   bool is_hated_by_me(const point p);
   bool is_hated_by_me(const Thingp it);
+  bool is_invisible(void);
   bool is_obs_for_ai_for_me(point);
   bool is_obs_for_ai(fpoint);
   bool is_obs_for_ai(Thingp);
@@ -1165,6 +1168,7 @@ public:
   int is_able_to_open_doors(void);
   int is_able_to_rest(void);
   int is_able_to_see_in_the_dark(void);
+  int is_able_to_see_invisible(void);
   int is_able_to_see_through_doors(void);
   int is_able_to_shove_chance_d1000(void);
   int is_able_to_shove(void);
@@ -1356,7 +1360,6 @@ public:
   int is_intelligent(void);
   int is_interesting(void);
   int is_internal(void);
-  int is_invisible(void);
   int is_item_carrier(void);
   int is_item_collector(void);
   int is_item_organic(void);
@@ -1933,7 +1936,6 @@ public:
   int unused_flag22(void);
   int unused_flag23(void);
   int unused_flag24(void);
-  int unused_flag25(void);
   int unused_flag27(void);
   int unused_flag2(void);
   int unused_flag3(void);
@@ -2292,6 +2294,7 @@ public:
   void interpolated_at_set(fpoint v);
   void inventory_particle(Thingp what, uint32_t slot);
   void inventory_particle(Thingp what, uint32_t slot, Thingp particle_target);
+  void invisible_tick(void);
   void is_stuck_update(void);
   void jump_end(void);
   void killed(Thingp defeater, const char *reason);

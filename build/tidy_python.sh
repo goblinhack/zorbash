@@ -530,7 +530,7 @@ do
       unused_flag22 \
       unused_flag23 \
       unused_flag24 \
-      unused_flag25 \
+      is_able_to_see_invisible \
       is_invisible \
       unused_flag27 \
       is_lightning \

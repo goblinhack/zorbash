@@ -715,7 +715,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag24() && (what == "unused_flag24")) {
     return true;
   }
-  if (unused_flag25() && (what == "unused_flag25")) {
+  if (is_able_to_see_invisible() && (what == "is_able_to_see_invisible")) {
     return true;
   }
   if (is_invisible() && (what == "is_invisible")) {
@@ -2195,8 +2195,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag24") {
     return &Thing::unused_flag24;
   }
-  if (what == "unused_flag25") {
-    return &Thing::unused_flag25;
+  if (what == "is_able_to_see_invisible") {
+    return &Thing::is_able_to_see_invisible;
   }
   if (what == "is_invisible") {
     return &Thing::is_invisible;

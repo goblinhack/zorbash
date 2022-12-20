@@ -36,6 +36,7 @@ def tp_init(name, text_long_name):
     my.health_initial_dice(self, "1")
     my.is_able_to_be_surprised(self, True)
     my.is_able_to_see_in_the_dark(self, True)
+    my.is_able_to_see_invisible(self, True)
     my.is_able_to_walk_through_walls(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)

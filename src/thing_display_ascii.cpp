@@ -469,6 +469,22 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
     ascii_set_bg(p.x, p.y, outline_color);
     ascii_set_fg(p.x, p.y, WHITE);
   }
+
+  if (is_currently_invisible && is_player()) {
+    static uint8_t a    = 128;
+    static int     step = 10;
+    static int     dir  = 1;
+    a += dir * step;
+    if (a > 250) {
+      dir = -1;
+    } else if (a < 100) {
+      dir = 1;
+    }
+    color outline_color = WHITE;
+    outline_color.a     = a;
+    ascii_set_bg(p.x, p.y, outline_color);
+    ascii_set_fg(p.x, p.y, WHITE);
+  }
 }
 
 void Thing::blit_ascii(point tl, point br, point p, bool left_bar)

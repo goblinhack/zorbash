@@ -1407,16 +1407,10 @@ int Thing::unused_flag24(void)
   return (tp()->unused_flag24());
 }
 
-int Thing::unused_flag25(void)
+int Thing::is_able_to_see_invisible(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag25());
-}
-
-int Thing::is_invisible(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_invisible());
+  return (tp()->is_able_to_see_invisible());
 }
 
 int Thing::unused_flag27(void)
@@ -4182,7 +4176,8 @@ std::array< std::array< ThingId, MAX_BAG_HEIGHT >, MAX_BAG_WIDTH > *Thing::bag_g
   TRACE_NO_INDENT();
   if (maybe_itemsp()) {
     return (&itemsp()->bag);
-  } //
+  }
+  //
   // Watch out here as lasers can have owners and do not live in bags.
   //
   dbg("No bag");
@@ -4194,7 +4189,8 @@ const std::array< std::array< ThingId, MAX_BAG_HEIGHT >, MAX_BAG_WIDTH > *Thing:
   TRACE_NO_INDENT();
   if (maybe_itemsp()) {
     return (&itemsp()->bag);
-  } //
+  }
+  //
   // Watch out here as lasers can have owners and do not live in bags.
   //
   dbg("No bag");

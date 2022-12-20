@@ -77,6 +77,11 @@ void Thing::achieve_goals_in_life(void)
   is_stuck_update();
 
   //
+  // Check if invisible
+  //
+  invisible_tick();
+
+  //
   // Lifespan tick for carried torches must be before is_hidden check
   //
   lifespan_tick();

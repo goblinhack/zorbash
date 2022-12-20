@@ -248,6 +248,7 @@ private:
   int _is_able_to_open_doors {};
   int _is_able_to_rest {};
   int _is_able_to_see_in_the_dark {};
+  int _is_able_to_see_invisible {};
   int _is_able_to_see_through_doors {};
   int _is_able_to_shove {};
   int _is_able_to_shove_chance_d1000 {};
@@ -630,7 +631,6 @@ private:
   int _unused_flag22 {};
   int _unused_flag23 {};
   int _unused_flag24 {};
-  int _unused_flag25 {};
   int _unused_flag27 {};
   int _unused_flag3 {};
   int _unused_flag4 {};
@@ -1289,6 +1289,7 @@ public:
   int is_able_to_open_doors(void) const;
   int is_able_to_rest(void) const;
   int is_able_to_see_in_the_dark(void) const;
+  int is_able_to_see_invisible(void) const;
   int is_able_to_see_through_doors(void) const;
   int is_able_to_shove_chance_d1000(void) const;
   int is_able_to_shove(void) const;
@@ -1669,7 +1670,6 @@ public:
   int unused_flag22(void) const;
   int unused_flag23(void) const;
   int unused_flag24(void) const;
-  int unused_flag25(void) const;
   int unused_flag27(void) const;
   int unused_flag2(void) const;
   int unused_flag3(void) const;
@@ -1829,6 +1829,7 @@ public:
   void is_able_to_open_doors_set(int v);
   void is_able_to_rest_set(int v);
   void is_able_to_see_in_the_dark_set(int v);
+  void is_able_to_see_invisible_set(int v);
   void is_able_to_see_through_doors_set(int v);
   void is_able_to_shove_chance_d1000_set(int v);
   void is_able_to_shove_set(int v);
@@ -2351,7 +2352,6 @@ public:
   void unused_flag22_set(int v);
   void unused_flag23_set(int v);
   void unused_flag24_set(int v);
-  void unused_flag25_set(int v);
   void unused_flag27_set(int v);
   void unused_flag2_set(int v);
   void unused_flag3_set(int v);
