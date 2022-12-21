@@ -27,7 +27,11 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
 
     if (! item->gfx_targetted_laser().empty()) {
       UseOptions use_options = {};
-      if (non_pcg_random_range(0, 100) < 10) {
+
+      //
+      // Use the radial attack if desperate
+      //
+      if ((health() < health_max() / 5) && non_pcg_random_range(0, 100) < 10) {
         if (item->is_target_radial()) {
           //
           // You shall not pass!
