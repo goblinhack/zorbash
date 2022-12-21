@@ -217,7 +217,7 @@ void Level::heatmap_print(point at, point tl, point br)
         debug += string_sprintf("%2d", heatmap(x, y));
         continue;
       }
-      if (is_floor(x, y)) {
+      if (is_floor(x, y) || is_corridor(x, y)) {
         debug += (" .");
         continue;
       }

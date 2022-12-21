@@ -183,7 +183,7 @@ int Thing::light_distance_update(void)
             } else {
               s += "x";
             }
-          } else if (level->is_floor(x, y)) {
+          } else if (level->is_floor(x, y) || level->is_corridor(x, y)) {
             if (get(level->can_see_currently.can_see, x, y)) {
               s += "l";
             } else if (get(level->can_see_ever.can_see, x, y)) {

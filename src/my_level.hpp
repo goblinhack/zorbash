@@ -563,7 +563,7 @@ public:
   if (t->is_internal()) {                                                                                            \
     continue;                                                                                                        \
   }                                                                                                                  \
-  if (t->is_floor()) {                                                                                               \
+  if (t->is_floor() || t->is_corridor()) {                                                                           \
     continue;                                                                                                        \
   }                                                                                                                  \
   if (t->is_hidden) {                                                                                                \
@@ -582,7 +582,7 @@ public:
   if (t->is_internal()) {                                                                                            \
     continue;                                                                                                        \
   }                                                                                                                  \
-  if (t->is_floor()) {                                                                                               \
+  if (t->is_floor() || t->is_corridor()) {                                                                           \
     continue;                                                                                                        \
   }                                                                                                                  \
   if (t->is_hidden) {                                                                                                \
@@ -597,7 +597,7 @@ public:
   if (t->is_internal()) {                                                                                            \
     continue;                                                                                                        \
   }                                                                                                                  \
-  if (t->is_floor()) {                                                                                               \
+  if (t->is_floor() || t->is_corridor()) {                                                                           \
     continue;                                                                                                        \
   }                                                                                                                  \
   if (t->is_hidden) {                                                                                                \
@@ -615,7 +615,7 @@ public:
   if (t->is_internal()) {                                                                                            \
     continue;                                                                                                        \
   }                                                                                                                  \
-  if (t->is_floor()) {                                                                                               \
+  if (t->is_floor() || t->is_corridor()) {                                                                           \
     continue;                                                                                                        \
   }                                                                                                                  \
   if (t->is_hidden) {                                                                                                \

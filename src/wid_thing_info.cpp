@@ -510,7 +510,7 @@ bool Game::wid_thing_info_create_list(std::vector< Thingp > &ts)
       // If multiple things are shown at this location, try and show them all.
       //
       for (auto t : ts) {
-        if (t->is_floor()) {
+        if (t->is_floor() || t->is_corridor()) {
           continue;
         }
         description += t->text_short_and_state_capitalised();

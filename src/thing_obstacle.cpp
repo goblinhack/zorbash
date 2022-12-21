@@ -23,7 +23,7 @@ bool Thing::is_obs_for_ai_for_me(point p)
         continue;
       }
 
-      if (t->is_floor()) {
+      if (t->is_floor() || t->is_corridor()) {
         continue;
       }
 
@@ -56,7 +56,7 @@ bool Tp::is_obs_for_ai_for_me(Levelp level, point p)
         continue;
       }
 
-      if (t->is_floor()) {
+      if (t->is_floor() || t->is_corridor()) {
         continue;
       }
 

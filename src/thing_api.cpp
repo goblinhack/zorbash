@@ -2844,7 +2844,7 @@ void Thing::new_infop(void)
         //
         // Cursor needs to move
         //
-      } else if (is_dirt() || is_internal() || is_floor()) {
+      } else if (is_dirt() || is_internal() || is_floor() || is_corridor()) {
         die("Unexpectedly needs info monst struct");
       }
     }
@@ -2864,7 +2864,7 @@ void Thing::new_itemsp(void)
       //
       // Walls and rock can be destroyed, hence no checks
       //
-      if (is_wall() || is_dirt() || is_internal() || is_floor()) {
+      if (is_wall() || is_dirt() || is_internal() || is_floor() || is_corridor()) {
         die("Unexpectedly needs item monst struct");
       }
     }

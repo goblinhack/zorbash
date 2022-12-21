@@ -134,7 +134,7 @@ void Thing::level_push(void)
     i_set_is_descend_sewer = true;
     level->is_descend_sewer_set(mx, my);
   }
-  if (is_floor()) {
+  if (is_floor() || is_corridor()) {
     i_set_is_floor = true;
     level->is_floor_set(mx, my);
   }

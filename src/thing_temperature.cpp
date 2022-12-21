@@ -49,7 +49,7 @@ void Thing::temperature_tick(void)
 
   FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y)
   {
-    if (t->is_floor()) {
+    if (t->is_floor() || t->is_corridor()) {
       continue;
     }
 

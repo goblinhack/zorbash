@@ -148,7 +148,7 @@ void tp_fixup(void)
       }
     }
 
-    if (tp->is_floor()) {
+    if (tp->is_floor() || tp->is_corridor()) {
       if (tp->is_interesting()) {
         DIE("Tp %s interesting floor?", tp->name().c_str());
       }

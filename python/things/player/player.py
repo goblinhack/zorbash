@@ -416,6 +416,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.is_living(self, True)
     my.is_loggable(self, True)
     my.is_meat(self, True)
+    my.is_debug_type(self, True)
     my.is_moveable(self, True)
     my.is_player(self, True)
     my.is_red_blooded(self, True)

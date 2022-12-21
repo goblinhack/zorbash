@@ -651,7 +651,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
             } else {
               printf("x");
             }
-          } else if (level->is_floor(x, y)) {
+          } else if (level->is_floor(x, y) || level->is_corridor(x, y)) {
             if (get(ai->can_see_currently.can_see, x, y)) {
               printf("L");
             } else if (get(ai->can_see_ever.can_see, x, y)) {
@@ -671,7 +671,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
             } else {
               printf("x");
             }
-          } else if (level->is_floor(x, y)) {
+          } else if (level->is_floor(x, y) || level->is_corridor(x, y)) {
             if (get(ai->can_see_currently.can_see, x, y)) {
               printf("l");
             } else if (get(ai->can_see_ever.can_see, x, y)) {
@@ -837,7 +837,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
             } else {
               printf("x");
             }
-          } else if (level->is_floor(x, y)) {
+          } else if (level->is_floor(x, y) || level->is_corridor(x, y)) {
             if (get(ai->can_see_currently.can_see, x, y)) {
               printf("L");
             } else if (get(ai->can_see_ever.can_see, x, y)) {
@@ -857,7 +857,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
             } else {
               printf("x");
             }
-          } else if (level->is_floor(x, y)) {
+          } else if (level->is_floor(x, y) || level->is_corridor(x, y)) {
             if (get(ai->can_see_currently.can_see, x, y)) {
               printf("l");
             } else if (get(ai->can_see_ever.can_see, x, y)) {
@@ -1544,7 +1544,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
             } else {
               s += "x";
             }
-          } else if (level->is_floor(x, y)) {
+          } else if (level->is_floor(x, y) || level->is_corridor(x, y)) {
             if (get(ai->can_see_currently.can_see, x, y)) {
               s += "L";
             } else if (get(ai->can_see_ever.can_see, x, y)) {
@@ -1564,7 +1564,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
             } else {
               s += "x";
             }
-          } else if (level->is_floor(x, y)) {
+          } else if (level->is_floor(x, y) || level->is_corridor(x, y)) {
             if (get(ai->can_see_currently.can_see, x, y)) {
               s += "l";
             } else if (get(ai->can_see_ever.can_see, x, y)) {
@@ -2310,7 +2310,7 @@ bool Thing::ai_tick(bool recursing)
               printf("d");
             } else if (level->is_obs_wall_or_door(x, y)) {
               printf("x");
-            } else if (level->is_floor(x, y)) {
+            } else if (level->is_floor(x, y) || level->is_corridor(x, y)) {
               printf(".");
             } else {
               printf(" ");
