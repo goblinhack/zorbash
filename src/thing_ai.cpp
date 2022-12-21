@@ -22,6 +22,8 @@ bool operator<(const class Goal &lhs, const class Goal &rhs)
   // Lower priorities at the head
   if (lhs.prio < rhs.prio) {
     return true;
+  } else if (lhs.prio > rhs.prio) {
+    return false;
   }
   return lhs.score > rhs.score; // Higher scores at the head
 }
@@ -775,6 +777,10 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
                     continue;
                   }
 
+                  if (! can_see_is_invisible(it)) {
+                    continue;
+                  }
+
                   if (worth_collecting(it) > 0) {
                     set(ai->interrupt_map.val, p.x, p.y, game->tick_current);
                     if (check_for_interrupts) {
@@ -1003,6 +1009,10 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         }
 
         if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
+          continue;
+        }
+
+        if (! can_see_is_invisible(it)) {
           continue;
         }
 

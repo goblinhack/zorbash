@@ -252,11 +252,11 @@ void Thing::level_push(void)
       i_set_is_fire = true;
       level->is_fire_set(mx, my);
     }
-    if (is_light_blocker() && ! is_open) {
+    if (is_light_blocker() && ! is_open && ! is_currently_invisible) {
       i_set_is_light_blocker = true;
       level->is_light_blocker_set(mx, my);
     }
-    if (is_light_blocker_for_monst() && ! is_open) {
+    if (is_light_blocker_for_monst() && ! is_open && ! is_currently_invisible) {
       i_set_is_light_blocker_for_monst = true;
       level->is_light_blocker_for_monst_set(mx, my);
     }

@@ -400,6 +400,7 @@ public:
   bool can_enchant_something(void);
   bool can_learn_something(void);
   bool cannot_avoid(Thingp attacker);
+  bool can_see_is_invisible(Thingp);
   bool carrying_anything(void);
   bool carry(Thingp w, bool can_equip = true);
   bool change_owner(Thingp new_owner);
