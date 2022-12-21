@@ -477,7 +477,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
     for (int x = minx; x <= maxx; x++) {
       point p(x, y);
 
-      if (! get(ai->can_see_ever.can_see, x, y)) {
+      if (! get(ai->can_see_currently.can_see, x, y)) {
         // dbg("can see walk %d,%d line %d", x, y, __LINE__);
         continue;
       }
@@ -696,21 +696,22 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   if (is_explorer()) {
     {
       for (int y = miny; y <= maxy; y++) {
-        for (int x = minx; x <= maxx; x++) {
-          point p(x, y);
+        if (y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
+          continue;
+        }
+        if (y < MAP_BORDER_ROCK) {
+          continue;
+        }
 
-          if (p.x >= MAP_WIDTH - MAP_BORDER_ROCK) {
+        for (int x = minx; x <= maxx; x++) {
+          if (x >= MAP_WIDTH - MAP_BORDER_ROCK) {
             continue;
           }
-          if (p.y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
+          if (x < MAP_BORDER_ROCK) {
             continue;
           }
-          if (p.x < MAP_BORDER_ROCK) {
-            continue;
-          }
-          if (p.y < MAP_BORDER_ROCK) {
-            continue;
-          }
+
+          point p(x, y);
           if (get(walked, x, y)) {
             continue;
           }
@@ -993,10 +994,6 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         //   log("%d %d can not see due to dmap", p.x, p.y);
         // }
         continue;
-      }
-
-      if (is_debug_type()) {
-        log("Walk %d,%d", p.x, p.y);
       }
 
       FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)

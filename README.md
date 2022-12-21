@@ -1,14 +1,12 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - pressing a key fast at the start can be ignored?                                                                                           -->
 <!-- - skills                                                                                                                                     -->
-<!-- - dead items not sorted                                                                                                                      -->
-<!-- - invisibility potion todo                                                                                                                   -->
 <!-- - falling in block of ice should fall together                                                                                               -->
 <!-- - some weapons crit more                                                                                                                     -->
 <!-- - tentacle grapple                                                                                                                           -->
 <!-- - test main body with freezing and staff of descent                                                                                          -->
 <!-- - kraken guards treasure                                                                                                                     -->
-<!-- - red highlight for monsters in left bar                                                                                                     -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
