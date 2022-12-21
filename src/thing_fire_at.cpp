@@ -247,6 +247,13 @@ bool Thing::fire_at(Thingp target)
     return false;
   }
 
+  //
+  // It is possible to attack food, but really we want to eat it and not shoot it...
+  //
+  if (target->is_item()) {
+    return false;
+  }
+
   dbg("Fire at %s if possible", target->to_short_string().c_str());
   TRACE_AND_INDENT();
 

@@ -35,7 +35,7 @@ void Game::place_player(void)
         auto w = level->thing_new("potion_health", point(x, y));
         t->carry(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("potion_invisibility", point(x, y));
         t->carry(w);
       }
