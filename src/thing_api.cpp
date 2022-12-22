@@ -2960,20 +2960,20 @@ void Thing::clear_age_map(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// seen_map
+// dmap_can_see_old
 ////////////////////////////////////////////////////////////////////////////
-AgeMap *Thing::seen_map_get(void)
+Dmap *Thing::dmap_can_see_old_get(void)
 {
   TRACE_NO_INDENT();
   new_aip();
-  return (&aip()->seen_map);
+  return (&aip()->dmap_can_see_old);
 }
 
-void Thing::clear_seen_map(void)
+void Thing::clear_dmap_can_see_old(void)
 {
   TRACE_NO_INDENT();
   new_aip();
-  aip()->seen_map.val = {};
+  aip()->dmap_can_see_old.val = {};
 }
 
 ////////////////////////////////////////////////////////////////////////////

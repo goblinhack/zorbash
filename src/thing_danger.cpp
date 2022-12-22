@@ -79,6 +79,7 @@ int Tp::get_danger_level(void)
   danger_level += dmg_claw_dice().max_roll();
   danger_level += dmg_cold_dice().max_roll();
   danger_level += dmg_fire_dice().max_roll();
+  danger_level += dmg_heat_dice().max_roll();
   danger_level += dmg_crush_dice().max_roll();
   danger_level += dmg_lightning_dice().max_roll();
   danger_level += dmg_energy_dice().max_roll();

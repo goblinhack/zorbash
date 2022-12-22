@@ -26,11 +26,8 @@ void Thing::water_tick(void)
   if (is_on_fire()) {
     on_fire_unset();
 
-    auto owner = top_owner();
-    if (owner) {
-      if (owner->is_player()) {
-        msg("%%fg=green$You quench the flames!%%fg=reset$");
-      }
+    if (is_player()) {
+      msg("%%fg=green$You quench the flames!%%fg=reset$");
     }
 
     auto smoke = level->thing_new("smoke", curr_at);

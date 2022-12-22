@@ -773,6 +773,23 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     }
 
     //
+    // Chance of attack[THING_ATTACK_HEAT] damage?
+    //
+    if (! attack_options->attack[ THING_ATTACK_HEAT ]) {
+      if (! attack_options->dmg_set) {
+        if (d1000() < dmg_heat_chance_d1000(attack_options->attack_num)) {
+          int dmg_heat_val = dmg_heat();
+          if (dmg_heat_val > 0) {
+            attack_options->damage                      = dmg_heat_val;
+            attack_options->dmg_set                     = true;
+            attack_options->attack[ THING_ATTACK_FIRE ] = true;
+            dbg("Set heat damage %d", attack_options->damage);
+          }
+        }
+      }
+    }
+
+    //
     // Chance of attack[THING_ATTACK_CRUSH] damage?
     //
     if (! attack_options->attack[ THING_ATTACK_CRUSH ]) {
@@ -1435,6 +1452,18 @@ int Thing::is_attacked_with_dmg_fire(Thingp hitter, Thingp real_hitter, int dama
   TRACE_NO_INDENT();
   ThingAttackOptions attack_options {};
   attack_options.attack[ THING_ATTACK_FIRE ] = true;
+  attack_options.real_hitter                 = real_hitter;
+  return is_hit(hitter, &attack_options, damage);
+}
+
+int Thing::is_attacked_with_dmg_heat(Thingp hitter, Thingp real_hitter, int damage)
+{
+  TRACE_NO_INDENT();
+  if (is_on_fire()) {
+    return is_attacked_with_dmg_fire(hitter, real_hitter, damage);
+  }
+  ThingAttackOptions attack_options {};
+  attack_options.attack[ THING_ATTACK_HEAT ] = true;
   attack_options.real_hitter                 = real_hitter;
   return is_hit(hitter, &attack_options, damage);
 }

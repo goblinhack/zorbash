@@ -23,7 +23,6 @@ def gold_init(name, text_long_name, text_short_name):
     my.is_collected_as_gold(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_gold(self, True)
-    my.is_immune_to_cold(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)
     my.is_loggable(self, True)

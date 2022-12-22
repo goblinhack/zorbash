@@ -51,6 +51,7 @@ PyObject *thing_dmg_draining(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_dmg_drown(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_dmg_energy(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_dmg_fire(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_dmg_heat(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_dmg_lightning(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_dmg_melee(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_dmg_nat_att(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -102,6 +103,7 @@ PyObject *thing_hit_dmg_draining(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_hit_dmg_drown(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_hit_dmg_energy(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_hit_dmg_fire(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_hit_dmg_heat(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_hit_dmg_lightning(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_hit_dmg_necrosis(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_hit_dmg_negation(PyObject *obj, PyObject *args, PyObject *keywds);

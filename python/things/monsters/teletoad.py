@@ -108,7 +108,6 @@ def tp_init(name, text_long_name):
     my.is_eater_of_red_blood(self, True)
     my.is_green_blooded(self, True)
     my.is_hittable(self, True)
-    my.is_immune_to_acid(self, True)
     my.is_immune_to_cold(self, True)
     my.is_immune_to_water(self, True)
     my.is_interesting(self, True)

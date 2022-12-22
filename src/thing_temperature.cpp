@@ -40,7 +40,7 @@ void Thing::temperature_tick(void)
       if (current_temp > temperature_max_get()) {
         dbg("Too hot (%d)", current_temp);
         TRACE_AND_INDENT();
-        is_attacked_with_dmg_fire(this, this, abs((current_temp - temperature_max_get()) / 10));
+        is_attacked_with_dmg_heat(this, this, abs((current_temp - temperature_max_get()) / 10));
       }
     }
 
@@ -269,9 +269,9 @@ void Thing::temperature_tick(void)
   if ((thing_temp > 0) && is_block_of_ice()) {
     if (thing_check_for_heat_dmg()) {
       auto damage = abs(thing_temp) / 10;
-      dbg("Apply fire damage");
+      dbg("Apply heat damage");
       TRACE_AND_INDENT();
-      is_attacked_with_dmg_fire(this, this, damage);
+      is_attacked_with_dmg_heat(this, this, damage);
       popup("Melting!");
       return;
     }
@@ -280,9 +280,9 @@ void Thing::temperature_tick(void)
   if ((thing_temp >= 20) && is_plant()) {
     if (thing_check_for_heat_dmg()) {
       auto damage = abs(thing_temp) / 10;
-      dbg("Apply fire damage");
+      dbg("Apply heat damage");
       TRACE_AND_INDENT();
-      is_attacked_with_dmg_fire(this, this, damage);
+      is_attacked_with_dmg_heat(this, this, damage);
       popup("Wilts!");
       return;
     }
@@ -291,21 +291,21 @@ void Thing::temperature_tick(void)
   if ((thing_temp >= 30) && is_gelatinous()) {
     if (thing_check_for_heat_dmg()) {
       auto damage = abs(thing_temp) / 10;
-      dbg("Apply fire damage");
+      dbg("Apply heat damage");
       TRACE_AND_INDENT();
-      is_attacked_with_dmg_fire(this, this, damage);
+      is_attacked_with_dmg_heat(this, this, damage);
       popup("Melts!");
       return;
     }
   }
 
   if ((thing_temp >= 50) && is_humanoid()) {
-    dbg("Check for fire damage");
+    dbg("Check for heat damage");
     if (thing_check_for_heat_dmg()) {
       auto damage = abs(thing_temp) / 10;
-      dbg("Apply fire damage");
+      dbg("Apply heat damage");
       TRACE_AND_INDENT();
-      is_attacked_with_dmg_fire(this, this, damage);
+      is_attacked_with_dmg_heat(this, this, damage);
       if (is_on_fire()) {
         //
         // It's pretty obvious you are suffering if on fire!
@@ -352,9 +352,9 @@ void Thing::temperature_tick(void)
     if (thing_check_for_heat_dmg()) {
       auto damage = abs(thing_temp) / 10;
       popup("Burn!");
-      dbg("Apply fire damage");
+      dbg("Apply heat damage");
       TRACE_AND_INDENT();
-      is_attacked_with_dmg_fire(this, this, damage);
+      is_attacked_with_dmg_heat(this, this, damage);
     }
   }
 
@@ -362,9 +362,9 @@ void Thing::temperature_tick(void)
     if (thing_check_for_heat_dmg()) {
       auto damage = abs(thing_temp) / 10;
       popup("Crack!");
-      dbg("Apply fire damage");
+      dbg("Apply heat damage");
       TRACE_AND_INDENT();
-      is_attacked_with_dmg_fire(this, this, damage);
+      is_attacked_with_dmg_heat(this, this, damage);
     }
   }
 
@@ -372,9 +372,9 @@ void Thing::temperature_tick(void)
     if (thing_check_for_heat_dmg()) {
       auto damage = abs(thing_temp) / 10;
       popup("Burn!");
-      dbg("Apply fire damage");
+      dbg("Apply heat damage");
       TRACE_AND_INDENT();
-      is_attacked_with_dmg_fire(this, this, damage);
+      is_attacked_with_dmg_heat(this, this, damage);
     }
   }
 
@@ -382,9 +382,9 @@ void Thing::temperature_tick(void)
     if (thing_check_for_heat_dmg()) {
       auto damage = abs(thing_temp) / 10;
       popup("Melt!");
-      dbg("Apply fire damage");
+      dbg("Apply heat damage");
       TRACE_AND_INDENT();
-      is_attacked_with_dmg_fire(this, this, damage);
+      is_attacked_with_dmg_heat(this, this, damage);
     }
   }
 
@@ -394,9 +394,9 @@ void Thing::temperature_tick(void)
       if (torch_tick()) {
         dbg("Torch attack");
         TRACE_AND_INDENT();
-        dbg("Apply fire damage");
+        dbg("Apply heat damage");
         TRACE_AND_INDENT();
-        is_attacked_with_dmg_fire(this, this, damage);
+        is_attacked_with_dmg_heat(this, this, damage);
       }
     }
   }
@@ -499,7 +499,7 @@ void Thing::temperature_incr(int temperature_change)
               msg("%s suffers from the change in temperature.%%fg=reset$", text_The().c_str());
             }
           }
-          is_attacked_with_dmg_fire(this, this, damage);
+          is_attacked_with_dmg_heat(this, this, damage);
         }
       }
     } else if (temperature_change < -50) {

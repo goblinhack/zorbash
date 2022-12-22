@@ -107,6 +107,15 @@ void               Tp::dmg_fire_dice_set(const std::string &v)
   _dmg_fire_dice_str = v;
 }
 
+const Dice        &Tp::dmg_heat_dice(void) const { return _dmg_heat_dice; }
+const int          Tp::dmg_heat(void) const { return _dmg_heat_dice.roll(); }
+const std::string &Tp::dmg_heat_dice_str(void) const { return _dmg_heat_dice_str; }
+void               Tp::dmg_heat_dice_set(const std::string &v)
+{
+  _dmg_heat_dice     = v;
+  _dmg_heat_dice_str = v;
+}
+
 const Dice        &Tp::dmg_crush_dice(void) const { return _dmg_crush_dice; }
 const int          Tp::dmg_crush(void) const { return _dmg_crush_dice.roll(); }
 const std::string &Tp::dmg_crush_dice_str(void) const { return _dmg_crush_dice_str; }

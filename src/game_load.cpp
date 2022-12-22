@@ -257,7 +257,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingAip & > my)
 {
   TRACE_AND_INDENT();
   in >> bits(my.t->age_map.val);
-  in >> bits(my.t->seen_map.val);
+  in >> bits(my.t->dmap_can_see_old.val);
   in >> bits(my.t->interrupt_map.val);
   in >> bits(my.t->dmap_can_see.val);
   in >> bits(my.t->can_see_currently.can_see);

@@ -880,7 +880,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   // Check for changes in the dmap worthy of note
   //
   if (check_for_interrupts) {
-    auto seen_map = seen_map_get();
+    auto dmap_can_see_old = dmap_can_see_old_get();
     for (int y = miny; y <= maxy; y++) {
       for (int x = minx; x <= maxx; x++) {
 
@@ -899,28 +899,19 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         }
 
         //
-        // Did anything of interest change worthy of interrupting a walk?
+        // If something changed from wall to passable or vice versa,
+        // it could be a door opening or closing.
         //
-        auto dmap_score = get(dmap_can_see->val, x, y);
-        auto seen_when  = get(seen_map->val, x, y);
-        if (dmap_score == DMAP_IS_PASSABLE) {
-          //
-          // Is now seen; did something open?
-          //
-          if (! seen_when) {
-            something_changed++;
-            set(seen_map->val, x, y, game->tick_current);
-            // con("INTERRUPT1 %d,%d", x, y);
-          }
-        } else if (dmap_score == DMAP_IS_WALL) {
-          //
-          // Was seen but now cannot see; did something close?
-          //
-          if (seen_when && (seen_when < game->tick_current - 20)) {
-            something_changed++;
-            // con("INTERRUPT2 %d,%d", x, y);
-            set(seen_map->val, x, y, 0U);
-          }
+        auto location_old = get(dmap_can_see_old->val, x, y);
+        auto location_new = get(dmap_can_see->val, x, y);
+
+        if (location_old && (location_new != location_old)) {
+          something_changed++;
+          AI_LOG("Interrupted by location change");
+        }
+
+        if (level->is_obs_wall_or_door(x, y)) {
+          set(dmap_can_see_old->val, x, y, location_new);
         }
       }
     }
@@ -1643,10 +1634,10 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     }
 
     //
-    // Prefer closer
+    // Prefer further
     //
     float dist = distance(start, p);
-    total_score -= dist;
+    total_score += dist;
 
     //
     // Choose doors etc... as a last resort when nothing else

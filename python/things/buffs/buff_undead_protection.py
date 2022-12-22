@@ -55,6 +55,10 @@ def on_owner_receive_dmg_fire(me, owner, hitter, real_hitter, x, y, damage):
     return on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage)
 
 
+def on_owner_receive_dmg_heat(me, owner, hitter, real_hitter, x, y, damage):
+    return on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage)
+
+
 def on_owner_receive_dmg_crush(me, owner, hitter, real_hitter, x, y, damage):
     return on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage)
 

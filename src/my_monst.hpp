@@ -299,9 +299,9 @@ public:
 
 typedef struct ThingAi_ {
 public:
-  AgeMap age_map;       // How old a cell is
-  AgeMap seen_map;      // If we've ever seen this tile and when
-  AgeMap interrupt_map; // If we've ever interrupt this tile and when
+  AgeMap age_map;          // How old a cell is
+  AgeMap interrupt_map;    // If we've ever interrupt this tile and when
+  Dmap   dmap_can_see_old; // Used for detecting changes in dmaps
 
   uint8_t idle_count;  // How long we have not moved
   uint8_t stuck_count; // How long we have not moved due to being stuck

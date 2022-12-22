@@ -203,6 +203,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   } else if (attack_options->attack[ THING_ATTACK_FIRE ]) {
     real_hitter->total_dmg_for_on_attacking_dmg_fire(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_fire(hitter, real_hitter, damage);
+  } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
+    real_hitter->total_dmg_for_on_attacking_dmg_heat(victim, damage);
+    damage = victim->total_dmg_for_on_receiving_dmg_heat(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
     real_hitter->total_dmg_for_on_attacking_dmg_crush(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_crush(hitter, real_hitter, damage);
@@ -426,6 +429,44 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         dmg_type = "double " + dmg_type;
         damage *= 2;
         dbg("Double damage from fire");
+      }
+    }
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // Fire damage
+  /////////////////////////////////////////////////////////////////////////
+  if (attack_options->attack[ THING_ATTACK_HEAT ]) {
+    attack_set = true;
+    if (is_immune_to_fire()) {
+      if (real_hitter->is_player()) {
+        if (is_player()) {
+          msg("You are immune to heat!");
+        } else if (is_alive_monst()) {
+          msg("%s is immune to heat damage!", text_The().c_str());
+        }
+      }
+      return false;
+    }
+
+    if (! damage) {
+      if (is_player()) {
+        msg("You take no heat damage!");
+      } else if (real_hitter->is_player()) {
+        msg("%s takes no heat damage!", text_The().c_str());
+      }
+      return false;
+    }
+
+    IF_DEBUG2 { real_hitter->log("Attack dmg_heat damage %d on %s", damage, to_short_string().c_str()); }
+    dmg_type = "heat ";
+
+    if (temperature_sensitive()) {
+      if ((temperature_get() < -TEMPERATURE_THRESHOLD) || was_frozen || is_frozen ||
+          dmg_received_doubled_from_fire()) {
+        dmg_type = "double " + dmg_type;
+        damage *= 2;
+        dbg("Double damage from heat");
       }
     }
   }

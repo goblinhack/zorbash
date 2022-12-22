@@ -537,6 +537,55 @@ PyObject *thing_hit_dmg_fire(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_FALSE;
 }
 
+PyObject *thing_hit_dmg_heat(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     hitter_id = 0;
+  uint32_t     victim_id = 0;
+  int          damage    = 0;
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", nullptr};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! hitter_id) {
+    ERR("%s: No hitter thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp hitter = game->thing_find(hitter_id);
+  if (! hitter) {
+    ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! victim_id) {
+    ERR("%s: No target thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp target = game->thing_find(victim_id);
+  if (! target) {
+    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    Py_RETURN_NONE;
+  }
+
+  ThingAttackOptions attack_options {};
+  attack_options.dmg_set                     = true;
+  attack_options.damage                      = damage;
+  attack_options.attack[ THING_ATTACK_FIRE ] = true;
+
+  IF_DEBUG { hitter->log("Attack with heat damage, %d", damage); }
+  TRACE_AND_INDENT();
+
+  if (hitter->attack(target, &attack_options)) {
+    Py_RETURN_TRUE;
+  }
+  Py_RETURN_FALSE;
+}
+
 PyObject *thing_hit_dmg_drown(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();

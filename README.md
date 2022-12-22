@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - check cannot be set on fire due to temp                                                                                                    -->
 <!-- - pressing a key fast at the start can be ignored?                                                                                           -->
 <!-- - skills                                                                                                                                     -->
 <!-- - falling in block of ice should fall together                                                                                               -->

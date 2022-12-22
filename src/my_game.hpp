@@ -218,6 +218,7 @@ public:
   void wid_thing_info_add_dmg_drown(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_dmg_energy(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_dmg_fire(WidPopup *w, Thingp t, int index);
+  void wid_thing_info_add_dmg_heat(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_dmg_lightning(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_dmg_melee(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_dmg_nat_att(WidPopup *w, Thingp t, int index);

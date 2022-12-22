@@ -205,6 +205,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_dmg_claw(wid_popup_window, t, attack_index);
   wid_thing_info_add_dmg_cold(wid_popup_window, t, attack_index);
   wid_thing_info_add_dmg_fire(wid_popup_window, t, attack_index);
+  wid_thing_info_add_dmg_heat(wid_popup_window, t, attack_index);
   wid_thing_info_add_dmg_crush(wid_popup_window, t, attack_index);
   wid_thing_info_add_dmg_lightning(wid_popup_window, t, attack_index);
   wid_thing_info_add_dmg_energy(wid_popup_window, t, attack_index);
@@ -992,6 +993,39 @@ void Game::wid_thing_info_add_dmg_fire(WidPopup *w, Thingp t, int index)
       w->log(tmp);
 
       int chance = (int) (((((float) tp->dmg_fire_chance_d1000(index))) / 1000.0) * 100.0);
+      if (chance < 100) {
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        w->log(tmp);
+      }
+    }
+  }
+}
+
+void Game::wid_thing_info_add_dmg_heat(WidPopup *w, Thingp t, int index)
+{
+  TRACE_AND_INDENT();
+  char tmp[ MAXSHORTSTR ];
+  char tmp2[ MAXSHORTSTR ];
+
+  auto tp = t->tp();
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    auto dmg_heat_dice = t->dmg_heat_dice();
+    auto min_value     = dmg_heat_dice.min_roll();
+    auto max_value     = dmg_heat_dice.max_roll();
+    if (min_value > 0) {
+      if (min_value == max_value) {
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_heat_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Heat dmg%21s", tmp2);
+      } else {
+        min_value += t->enchant_count_get();
+        max_value += t->enchant_count_get();
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_heat_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Heat dmg%21s", tmp2);
+      }
+      w->log(tmp);
+
+      int chance = (int) (((((float) tp->dmg_heat_chance_d1000(index))) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);

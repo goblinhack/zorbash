@@ -89,7 +89,6 @@ def tp_init(name, text_long_name):
     my.is_fearless(self, True)
     my.is_hittable(self, True)
     my.is_immune_to_acid(self, True)
-    my.is_immune_to_cold(self, True)
     my.is_immune_to_draining(self, True)
     my.is_immune_to_fire(self, True)
     my.is_immune_to_necrosis(self, True)

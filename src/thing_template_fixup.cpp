@@ -194,6 +194,7 @@ void tp_fixup(void)
     num_attack_types += tp->dmg_claw() ? 1 : 0;
     num_attack_types += tp->dmg_cold() ? 1 : 0;
     num_attack_types += tp->dmg_fire() ? 1 : 0;
+    num_attack_types += tp->dmg_heat() ? 1 : 0;
     num_attack_types += tp->dmg_crush() ? 1 : 0;
     num_attack_types += tp->dmg_lightning() ? 1 : 0;
     num_attack_types += tp->dmg_energy() ? 1 : 0;
@@ -234,6 +235,9 @@ void tp_fixup(void)
         }
         if (tp->dmg_fire() > 0) {
           tp->dmg_fire_chance_d1000_set(attack_index, 1000);
+        }
+        if (tp->dmg_heat() > 0) {
+          tp->dmg_heat_chance_d1000_set(attack_index, 1000);
         }
         if (tp->dmg_drown() > 0) {
           tp->dmg_drown_chance_d1000_set(attack_index, 1000);

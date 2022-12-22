@@ -32,7 +32,7 @@ void Thing::level_change(Levelp l)
   if (maybe_aip()) {
     aip()->move_path = {};
     clear_age_map();
-    clear_seen_map();
+    clear_dmap_can_see_old();
     clear_interrupt_map();
     clear_dmap_can_see();
     clear_can_see_currently();

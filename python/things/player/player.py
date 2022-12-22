@@ -218,6 +218,10 @@ def on_receiving_dmg_fire(me, hitter, x, y, damage):
     return damage
 
 
+def on_receiving_dmg_heat(me, hitter, x, y, damage):
+    return damage
+
+
 def on_receiving_dmg_crush(me, hitter, x, y, damage):
     return damage
 
@@ -287,6 +291,10 @@ def on_attacking_dmg_cold(me, victim, x, y, damage):
 
 
 def on_attacking_dmg_fire(me, victim, x, y, damage):
+    return damage
+
+
+def on_attacking_dmg_heat(me, victim, x, y, damage):
     return damage
 
 
@@ -405,6 +413,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.is_corpse_on_death(self, True)
     my.is_corpse_with_bones(self, True)
     my.is_crushable(self, True)
+    my.is_debug_type(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_eater_of_food(self, True)
     my.is_exit_finder(self, True)
@@ -416,7 +425,6 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.is_living(self, True)
     my.is_loggable(self, True)
     my.is_meat(self, True)
-    my.is_debug_type(self, True)
     my.is_moveable(self, True)
     my.is_player(self, True)
     my.is_red_blooded(self, True)
@@ -438,6 +446,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.on_attacking_dmg_drown_do(self, "player.on_attacking_dmg_drown()")
     my.on_attacking_dmg_energy_do(self, "player.on_attacking_dmg_energy()")
     my.on_attacking_dmg_fire_do(self, "player.on_attacking_dmg_fire()")
+    my.on_attacking_dmg_heat_do(self, "player.on_attacking_dmg_heat()")
     my.on_attacking_dmg_lightning_do(self, "player.on_attacking_dmg_lightning()")
     my.on_attacking_dmg_melee_do(self, "player.on_attacking_dmg_melee()")
     my.on_attacking_dmg_nat_att_do(self, "player.on_attacking_dmg_nat_att()")
@@ -461,6 +470,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.on_receiving_dmg_drown_do(self, "player.on_receiving_dmg_drown()")
     my.on_receiving_dmg_energy_do(self, "player.on_receiving_dmg_energy()")
     my.on_receiving_dmg_fire_do(self, "player.on_receiving_dmg_fire()")
+    my.on_receiving_dmg_heat_do(self, "player.on_receiving_dmg_heat()")
     my.on_receiving_dmg_lightning_do(self, "player.on_receiving_dmg_lightning()")
     my.on_receiving_dmg_melee_do(self, "player.on_receiving_dmg_melee()")
     my.on_receiving_dmg_nat_att_do(self, "player.on_receiving_dmg_nat_att()")
