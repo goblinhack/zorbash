@@ -274,18 +274,16 @@ bool Thing::drop_from_ether(Thingp what)
   dbg("Drop from ether %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  auto player = game->level->player;
-
   what->hooks_remove();
   what->remove_owner();
   what->hide();
   what->visible();
-  what->move_to_immediately(player->curr_at);
+  what->move_to_immediately(curr_at);
 
   //
   // Prevent too soon re-carry
   //
-  where_i_dropped_an_item_last_set(player->curr_at);
+  where_i_dropped_an_item_last_set(curr_at);
 
   //
   // Remove from the inventory
@@ -295,7 +293,7 @@ bool Thing::drop_from_ether(Thingp what)
   wid_inventory_fini();
   wid_thing_info_fini("drop from ether");
 
-  point e = (player->last_blit_tl + player->last_blit_br) / (short) 2;
+  point e = (last_blit_tl + last_blit_br) / (short) 2;
 
   auto w = game->in_transit_item;
   if (unlikely(! w)) {

@@ -238,7 +238,7 @@ bool Thing::ai_create_on_fire_path(point &nh, const point start, const point end
   auto p = dmap_solve_allow_diagonal(&dmap, start);
 
   char path_debug           = '\0'; // astart path debug
-  auto [ result, fallback ] = astar_solve(nullptr, path_debug, start, end, &dmap);
+  auto [ result, fallback ] = astar_solve(nullptr, path_debug, start, end, &dmap, true /* allow diagonals */);
 #if 0
   for (auto i : result.path) {
     set(dmap.val, i.x, i.y, (uint8_t)0);

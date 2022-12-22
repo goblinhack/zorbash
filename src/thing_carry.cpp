@@ -361,8 +361,11 @@ std::list< Thingp > Thing::anything_to_carry_at(point at)
 {
   std::vector< std::pair< Thingp, int > > items;
 
+  dbg("Anything to carry at %d,%d:", at.x, at.y);
+  TRACE_AND_INDENT();
+
   //
-  // Can't pick things up whilst being swallowed!
+  // You cannot pick things up whilst being swallowed!
   //
   FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y) // curr_at is correct
   {
@@ -374,6 +377,9 @@ std::list< Thingp > Thing::anything_to_carry_at(point at)
       continue;
     }
 
+    //
+    // If there is an engulfer here, we're inside them!
+    //
     if (t->is_engulfer()) {
       goto end;
     }
@@ -387,12 +393,14 @@ std::list< Thingp > Thing::anything_to_carry_at(point at)
     }
 
     if (t->is_dead) {
-      dbg("Potential item to carry, no, is dead: %s", t->to_short_string().c_str());
       continue;
     }
 
     if (t->immediate_owner()) {
-      dbg("Potential item to carry, no, has owner: %s", t->to_short_string().c_str());
+      continue;
+    }
+
+    if ((int) game->tick_current - (int) t->tick_last_dropped() <= 1) {
       continue;
     }
 
@@ -403,6 +411,19 @@ std::list< Thingp > Thing::anything_to_carry_at(point at)
       open(t);
 
       for (const auto t : t->carried_item_only_vector()) {
+        {
+          if ((int) game->tick_current - (int) t->tick_last_dropped() <= 1) {
+            continue;
+          }
+
+          TRACE_AND_INDENT();
+          if (worth_collecting(t) < 0) {
+            dbg("Potential bag item to carry, no, not worth it: %s", t->to_short_string().c_str());
+            continue;
+          }
+        }
+
+        dbg("Potential bag item to carry: %s", t->to_short_string().c_str());
         items.push_back(std::make_pair(t, value(t)));
       }
     }
@@ -411,9 +432,12 @@ std::list< Thingp > Thing::anything_to_carry_at(point at)
       continue;
     }
 
-    if (worth_collecting(t) < 0) {
-      dbg("Potential item to carry, no, not worth it: %s", t->to_short_string().c_str());
-      continue;
+    {
+      TRACE_AND_INDENT();
+      if (worth_collecting(t) < 0) {
+        dbg("Potential item to carry, no, not worth it: %s", t->to_short_string().c_str());
+        continue;
+      }
     }
 
     dbg("Potential item to carry: %s", t->to_short_string().c_str());
@@ -421,14 +445,15 @@ std::list< Thingp > Thing::anything_to_carry_at(point at)
   }
   FOR_ALL_THINGS_END()
 
-end:
   sort(items.begin(), items.end(), [](const std::pair< Thingp, int > &a, const std::pair< Thingp, int > &b) -> bool {
     return a.second > b.second;
   });
 
+end:
   std::list< Thingp > out;
   for (auto i : items) {
     out.push_back(i.first);
+    dbg("Final item list: %s value %d", i.first->to_short_string().c_str(), value(i.first));
   }
 
   return out;

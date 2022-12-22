@@ -248,8 +248,8 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   return false;
 }
 
-bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy, const Goal &goal,
-                                          const Dmap *saved_dmap)
+bool Thing::ai_create_path_to_single_goal_do(int minx, int miny, int maxx, int maxy, const Goal &goal,
+                                             const Dmap *saved_dmap, bool allow_diagonals)
 {
   IF_DEBUG
   {
@@ -314,7 +314,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
 #endif
   point astar_start(start.x, start.y);
   auto  astar_end           = goal.at;
-  auto [ result, fallback ] = astar_solve(&goal, path_debug, astar_start, astar_end, &dmap);
+  auto [ result, fallback ] = astar_solve(&goal, path_debug, astar_start, astar_end, &dmap, allow_diagonals);
 
   //
   // Unreachable?
@@ -434,6 +434,17 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
   return false;
 }
 
+bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy, const Goal &goal,
+                                          const Dmap *saved_dmap)
+{
+  if (! ai_create_path_to_single_goal_do(minx, miny, maxx, maxy, goal, saved_dmap, false)) {
+    AI_LOG("Try diagonal path");
+    TRACE_AND_INDENT();
+    return ai_create_path_to_single_goal_do(minx, miny, maxx, maxy, goal, saved_dmap, true);
+  }
+  return true;
+}
+
 //
 // Initialize basic visibility and things that are lit and can be seen
 //
@@ -477,7 +488,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
     for (int x = minx; x <= maxx; x++) {
       point p(x, y);
 
-      if (! get(ai->can_see_currently.can_see, x, y)) {
+      if (! get(ai->can_see_ever.can_see, x, y)) {
         // dbg("can see walk %d,%d line %d", x, y, __LINE__);
         continue;
       }
@@ -644,14 +655,9 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         }
         if (get(walked, x, y)) {
           if (level->is_obs_wall_or_door(x, y)) {
-            if (get(ai->can_see_currently.can_see, x, y)) {
-              printf("X");
-            } else if (get(ai->can_see_ever.can_see, x, y)) {
-              printf("X");
-            } else {
-              printf("x");
-            }
-          } else if (level->is_floor(x, y) || level->is_corridor(x, y)) {
+            printf("#");
+          } else if (level->is_dirt(x, y) || level->is_water(x, y) || level->is_floor(x, y) ||
+                     level->is_corridor(x, y)) {
             if (get(ai->can_see_currently.can_see, x, y)) {
               printf("L");
             } else if (get(ai->can_see_ever.can_see, x, y)) {
@@ -664,14 +670,9 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           }
         } else {
           if (level->is_obs_wall_or_door(x, y)) {
-            if (get(ai->can_see_currently.can_see, x, y)) {
-              printf("x");
-            } else if (get(ai->can_see_ever.can_see, x, y)) {
-              printf("x");
-            } else {
-              printf("x");
-            }
-          } else if (level->is_floor(x, y) || level->is_corridor(x, y)) {
+            printf("#");
+          } else if (level->is_dirt(x, y) || level->is_water(x, y) || level->is_floor(x, y) ||
+                     level->is_corridor(x, y)) {
             if (get(ai->can_see_currently.can_see, x, y)) {
               printf("l");
             } else if (get(ai->can_see_ever.can_see, x, y)) {
@@ -713,14 +714,6 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
 
           point p(x, y);
           if (get(walked, x, y)) {
-            continue;
-          }
-
-          //
-          // Ignore tiles we have never seen. This check works as we allow the light to grow
-          // a bit when calling fov_calculate
-          //
-          if (! get(ai->can_see_ever.can_see, p.x, p.y)) {
             continue;
           }
 
@@ -831,14 +824,9 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         }
         if (get(walked, x, y)) {
           if (level->is_obs_wall_or_door(x, y)) {
-            if (get(ai->can_see_currently.can_see, x, y)) {
-              printf("X");
-            } else if (get(ai->can_see_ever.can_see, x, y)) {
-              printf("X");
-            } else {
-              printf("x");
-            }
-          } else if (level->is_floor(x, y) || level->is_corridor(x, y)) {
+            printf("#");
+          } else if (level->is_dirt(x, y) || level->is_water(x, y) || level->is_floor(x, y) ||
+                     level->is_corridor(x, y)) {
             if (get(ai->can_see_currently.can_see, x, y)) {
               printf("L");
             } else if (get(ai->can_see_ever.can_see, x, y)) {
@@ -851,14 +839,9 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           }
         } else {
           if (level->is_obs_wall_or_door(x, y)) {
-            if (get(ai->can_see_currently.can_see, x, y)) {
-              printf("x");
-            } else if (get(ai->can_see_ever.can_see, x, y)) {
-              printf("x");
-            } else {
-              printf("x");
-            }
-          } else if (level->is_floor(x, y) || level->is_corridor(x, y)) {
+            printf("#");
+          } else if (level->is_dirt(x, y) || level->is_water(x, y) || level->is_floor(x, y) ||
+                     level->is_corridor(x, y)) {
             if (get(ai->can_see_currently.can_see, x, y)) {
               printf("l");
             } else if (get(ai->can_see_ever.can_see, x, y)) {
@@ -893,7 +876,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         // Ignore interruptions too far away
         //
         float dist     = distance(curr_at, point(x, y));
-        float max_dist = distance_vision_get() + 1;
+        float max_dist = distance_vision_get();
         if (dist > max_dist) {
           continue;
         }
@@ -1525,13 +1508,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
         }
         if (get(walked, x, y)) {
           if (level->is_obs_wall_or_door(x, y)) {
-            if (get(ai->can_see_currently.can_see, x, y)) {
-              s += "X";
-            } else if (get(ai->can_see_ever.can_see, x, y)) {
-              s += "X";
-            } else {
-              s += "x";
-            }
+            s += "#";
           } else if (level->is_floor(x, y) || level->is_corridor(x, y)) {
             if (get(ai->can_see_currently.can_see, x, y)) {
               s += "L";
@@ -1545,13 +1522,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           }
         } else {
           if (level->is_obs_wall_or_door(x, y)) {
-            if (get(ai->can_see_currently.can_see, x, y)) {
-              s += "x";
-            } else if (get(ai->can_see_ever.can_see, x, y)) {
-              s += "x";
-            } else {
-              s += "x";
-            }
+            s += "#";
           } else if (level->is_floor(x, y) || level->is_corridor(x, y)) {
             if (get(ai->can_see_currently.can_see, x, y)) {
               s += "l";
@@ -1634,10 +1605,10 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     }
 
     //
-    // Prefer further
+    // Prefer closer
     //
     float dist = distance(start, p);
-    total_score += dist;
+    total_score -= dist;
 
     //
     // Choose doors etc... as a last resort when nothing else
@@ -2281,7 +2252,7 @@ bool Thing::ai_tick(bool recursing)
             if (level->is_door(x, y)) {
               printf("D");
             } else if (level->is_obs_wall_or_door(x, y)) {
-              printf("X");
+              printf("#");
             } else {
               printf("l");
             }
@@ -2297,7 +2268,7 @@ bool Thing::ai_tick(bool recursing)
             if (level->is_door(x, y)) {
               printf("d");
             } else if (level->is_obs_wall_or_door(x, y)) {
-              printf("x");
+              printf("#");
             } else if (level->is_floor(x, y) || level->is_corridor(x, y)) {
               printf(".");
             } else {

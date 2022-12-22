@@ -353,6 +353,7 @@ public:
   bool ai_create_path(point &nh, const point start, const point end);
   bool ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int search_type = 0);
   bool ai_create_path_to_single_goal(int, int, int, int, const Goal &goal, const struct Dmap_ *saved_dmap);
+  bool ai_create_path_to_single_goal_do(int, int, int, int, const Goal &goal, const struct Dmap_ *saved_dmap, bool);
   bool ai_escape(void);
   bool ai_on_fire_choose_target(point &nh);
   bool ai_on_fire(void);
@@ -2475,7 +2476,8 @@ public:
 
   std::list< Thingp > all_followers_get(void);
 
-  std::pair< Path, Path > astar_solve(const class Goal *goal, char path_debug, point s, point g, const Dmap *d);
+  std::pair< Path, Path > astar_solve(const class Goal *goal, char path_debug, point s, point g, const Dmap *d,
+                                      bool allow_diagonals);
 
   ThingInfop  get_or_alloc_infop(void);
   ThingItemsp get_or_alloc_itemsp(void);

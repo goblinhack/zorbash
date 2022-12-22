@@ -203,7 +203,7 @@ public:
     return {l, cost};
   }
 
-  std::pair< Path, Path > solve(Thingp me, const Goal *goalp, char *path_debug)
+  std::pair< Path, Path > solve(Thingp me, const Goal *goalp, char *path_debug, bool allow_diagonal)
   {
     auto distance_to_next_hop = 0;
     auto ncost                = Nodecost(distance_to_next_hop + heuristic(start));
@@ -273,13 +273,11 @@ public:
       eval_neighbor(me, current, point(0, 1));
 
       //
-      // This leads to the robot taking diagonals across lava which looks
-      // like cheating.
+      // This leads to the robot taking diagonals across lava which looks like cheating.
       //
-      // Also leads to zig zag paths over chasms that would need
-      // optimized.
+      // Also leads to zig zag paths over chasms that would need optimized.
       //
-      if (me->is_able_to_move_diagonally()) {
+      if (allow_diagonal || me->is_able_to_move_diagonally()) {
         if ((get(dmap->val, at.x - 1, at.y) == DMAP_IS_WALL) || (get(dmap->val, at.x, at.y - 1) == DMAP_IS_WALL)) {
           eval_neighbor(me, current, point(-1, -1));
         }
@@ -338,9 +336,10 @@ void astar_dump(const Dmap *dmap, const point at, const point start, const point
   }
 }
 
-std::pair< Path, Path > Thing::astar_solve(const Goal *goal, char path_debug, point s, point g, const Dmap *d)
+std::pair< Path, Path > Thing::astar_solve(const Goal *goal, char path_debug, point s, point g, const Dmap *d,
+                                           bool allow_diagonal)
 {
   char tmp = path_debug;
   auto a   = Astar(s, g, d);
-  return (a.solve(this, goal, &tmp));
+  return (a.solve(this, goal, &tmp, allow_diagonal));
 }
