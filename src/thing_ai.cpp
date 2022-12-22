@@ -297,12 +297,6 @@ bool Thing::ai_create_path_to_single_goal_do(int minx, int miny, int maxx, int m
   }
 
   //
-  // Record we've been here.
-  //
-  auto age_map = age_map_get();
-  set(age_map->val, start.x, start.y, game->tick_current);
-
-  //
   // Modify the given goals with scores that indicate the cost of the
   // path to that goal. The result should be a sorted set of goals.
   //
@@ -320,36 +314,8 @@ bool Thing::ai_create_path_to_single_goal_do(int minx, int miny, int maxx, int m
   // Unreachable?
   //
   if (result.cost == std::numeric_limits< int >::max()) {
-    //
-    // Occasionally try the fallback path for a bit of variety.
-    //
-    if (d100() < 20) {
-      if (fallback.path.size()) {
-        //
-        // If the fallback path ends in an AI obstacle (like a chasm)
-        // then this is sub ideal.
-        //
-        if (is_obs_for_ai_for_me(fallback.path[ fallback.path.size() - 1 ])) {
-          AI_LOG("Goal (and fallback) is astar unreachable");
-          return false;
-        }
-
-        IF_DEBUG
-        {
-          auto s = string_sprintf("Use fallback path as goal at %d,%d is unreachable", goal.at.x, goal.at.y);
-          AI_LOG(s);
-        }
-        result = fallback;
-      } else {
-#ifdef ENABLE_DEBUG_AI_ASTAR
-        auto start = point(minx, miny);
-        auto end   = point(maxx, maxy);
-        astar_dump(&dmap, goal.at, start, end);
-#endif
-        AI_LOG("Goal is astar unreachable");
-        return false;
-      }
-    }
+    AI_LOG("Goal is astar unreachable");
+    return false;
   }
 
   paths.insert(result);
@@ -1598,8 +1564,9 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     //
     // Prefer the unknown.
     //
+    con("%d %d age %d", p.x, p.y, age);
     if (age) {
-      total_score -= ((int) age) - game->tick_current;
+      total_score -= ((((int) age) - game->tick_current) + 1) * 100;
     } else {
       total_score += 100;
     }

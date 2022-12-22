@@ -9,6 +9,12 @@
 
 void Thing::can_see(point p)
 {
+  //
+  // Record we've been here.
+  //
+  auto age_map = age_map_get();
+  set(age_map->val, p.x, p.y, game->tick_current);
+
   FOR_ALL_THINGS_THAT_INTERACT(level, t, p.x, p.y)
   {
     //

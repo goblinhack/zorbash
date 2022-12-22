@@ -30,7 +30,9 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
   // Don't try to pick up goblins carrying gold
   //
   if (! item->is_collectable()) {
-    dbg("Worth collecting %s? no, not collectable", item->to_short_string().c_str());
+    //
+    // Noisy
+    // dbg("Worth collecting %s? no, not collectable", item->to_short_string().c_str());
     return -1;
   }
 
