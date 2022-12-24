@@ -61,7 +61,11 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
     }
   }
 
-  if (time_game_ms_cached() <= ts_anim_delay_end()) {
+  if (game->robot_mode) {
+    //
+    // End the animation asap for robot mode
+    //
+  } else if (time_game_ms_cached() <= ts_anim_delay_end()) {
 #ifdef DEBUG_ANIM
     if (is_debug_type()) {
       con("Animate: waiting on anim frame");
@@ -90,7 +94,11 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
     //
     // If within the animate time of this frame, keep with it.
     //
-    if (ts_next_frame > time_game_ms_cached()) {
+    if (game->robot_mode) {
+      //
+      // End the animation asap for robot mode
+      //
+    } else if (ts_next_frame > time_game_ms_cached()) {
 #ifdef DEBUG_ANIM
       if (is_debug_type()) {
         con("Animate: Same frame");

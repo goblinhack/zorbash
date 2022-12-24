@@ -198,11 +198,19 @@ void Game::tick_update(void)
   // Work out the current timestep in this move
   //
   if (game->tick_begin_ms) {
-    float move_at       = time_game_ms() - game->tick_begin_game_ms;
-    float move_duration = game->current_move_speed;
-    game->tick_dt       = move_at / move_duration;
-    if (game->tick_dt > 1) {
+    float move_at = time_game_ms() - game->tick_begin_game_ms;
+    if (move_at <= 0) {
+      //
+      // Handle robot mode and its fake clock
+      //
       game->tick_dt = 1;
+    } else {
+      float move_duration = game->current_move_speed;
+      game->tick_dt       = move_at / move_duration;
+
+      if (game->tick_dt > 1) {
+        game->tick_dt = 1;
+      }
     }
   }
 }
