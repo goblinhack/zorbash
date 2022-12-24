@@ -42,6 +42,10 @@ void Level::cursor_move(void)
     return;
   }
 
+  if (game->robot_mode) {
+    return;
+  }
+
   if ((game->state != Game::STATE_NORMAL) && (game->state != Game::STATE_CHOOSING_TARGET)) {
     return;
   }
@@ -148,6 +152,10 @@ void Level::cursor_recreate(point curr_at)
 
   if (player->is_dead) {
     dbg("Recreate cursor; player dead");
+    return;
+  }
+
+  if (game->robot_mode) {
     return;
   }
 

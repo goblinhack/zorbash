@@ -110,6 +110,15 @@ void sdl_loop(void)
     bool update_fast      = (ts_now - ui_ts_fast_last >= UI_EVENT_LOOP_FREQ_FAST_MS);
 
     //
+    // Check for clock reset due to leaving robot mode
+    //
+    if ((ts_now < ui_ts_fast_last) || (ts_now < ui_ts_slow_last) || (ts_now < ui_ts_very_slow_last)) {
+      ui_ts_fast_last      = time_ms();
+      ui_ts_slow_last      = ui_ts_fast_last;
+      ui_ts_very_slow_last = ui_ts_fast_last;
+    }
+
+    //
     // This is for either
     // a) widget display when in ascii mode, which needs to be faster
     // b) when in pixel art mode and between levels and waiting for level fade in

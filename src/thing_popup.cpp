@@ -16,6 +16,10 @@ void Thing::popup(std::string const &m)
     return;
   }
 
+  if (game->robot_mode) {
+    return;
+  }
+
   dbg("Popup: %s", m.c_str());
 
   if (game->tick_current == last_tick) {

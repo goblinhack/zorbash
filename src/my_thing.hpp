@@ -92,7 +92,6 @@ public:
   point last_blit_at;  // Center of the above
 
   uint16_t tile_curr {};
-  uint16_t frame_count {};
   int16_t  tp_id {-1}; // Common settings
 
   uint8_t z_depth {};
@@ -352,8 +351,8 @@ public:
   bool ai_create_on_fire_path(point &nh, const point start, const point end);
   bool ai_create_path(point &nh, const point start, const point end);
   bool ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int search_type = 0);
-  bool ai_create_path_to_single_goal(int, int, int, int, const Goal &goal, const struct Dmap_ *saved_dmap);
   bool ai_create_path_to_single_goal_do(int, int, int, int, const Goal &goal, const struct Dmap_ *saved_dmap, bool);
+  bool ai_create_path_to_single_goal(int, int, int, int, const Goal &goal, const struct Dmap_ *saved_dmap);
   bool ai_escape(void);
   bool ai_on_fire_choose_target(point &nh);
   bool ai_on_fire(void);

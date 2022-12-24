@@ -5,6 +5,7 @@
 #include <SDL.h>
 #include <ctime>
 
+#include "my_game.hpp"
 #include "my_string.hpp"
 #include "my_time.hpp"
 
@@ -29,9 +30,27 @@ static char buf_[ MAXSHORTSTR ];
 
 ts_t time_ms_cached(void) { return time_now; }
 
+static bool using_fake_clock;
+
 ts_t time_ms(void)
 {
-  time_now = SDL_GetTicks();
+  if (using_fake_clock) {
+    if (! game->robot_mode) {
+      using_fake_clock = false;
+    }
+  } else if (game && game->robot_mode) {
+    using_fake_clock = true;
+  }
+
+  if (using_fake_clock) {
+    //
+    // Huge hack - but it makes the animations deterministic and hence robot mode
+    // is more likely to do the same things each run.
+    //
+    time_now = game->frame_count * 50;
+  } else {
+    time_now = SDL_GetTicks();
+  }
 
   //
   // Update the game time too

@@ -25,7 +25,7 @@ void Level::new_external_particle(ThingId id, point start, point stop, isize sz,
         return;
       }
 
-      if (g_opt_ascii) {
+      if (g_opt_ascii || game->robot_mode) {
         callback();
         return;
       }
@@ -38,7 +38,7 @@ void Level::new_external_particle(ThingId id, point start, point stop, isize sz,
     }
   }
 
-  if (g_opt_ascii) {
+  if (g_opt_ascii || game->robot_mode) {
     callback();
     return;
   }
@@ -64,6 +64,7 @@ void Level::handle_external_particles(void)
 
     float t  = p.ts_stop - p.ts_start;
     float dt = (((float) (now) -p.ts_start)) / t;
+
     // con("dt %f", dt);
     if (dt >= 1) {
       if (p.id.id) {

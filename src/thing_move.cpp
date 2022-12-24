@@ -523,27 +523,36 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     }
   }
 
-  if (tp()->gfx_pixelart_animated_can_hflip()) {
-    switch (dir) {
-      case THING_DIR_NONE:
-      case THING_DIR_DOWN:
-      case THING_DIR_UP: break;
+  if (g_opt_ascii || game->robot_mode || ! is_visible_to_player) {
+    //
+    // No need to flip
+    //
+  } else {
+    //
+    // Flip the character
+    //
+    if (tp()->gfx_pixelart_animated_can_hflip()) {
+      switch (dir) {
+        case THING_DIR_NONE:
+        case THING_DIR_DOWN:
+        case THING_DIR_UP: break;
 
-      case THING_DIR_LEFT:
-      case THING_DIR_TL:
-      case THING_DIR_BL:
-        if (! is_facing_left && ! ts_flip_start_get()) {
-          ts_flip_start_set(time_ms_cached());
-        }
-        break;
+        case THING_DIR_LEFT:
+        case THING_DIR_TL:
+        case THING_DIR_BL:
+          if (! is_facing_left && ! ts_flip_start_get()) {
+            ts_flip_start_set(time_ms_cached());
+          }
+          break;
 
-      case THING_DIR_RIGHT:
-      case THING_DIR_TR:
-      case THING_DIR_BR:
-        if (is_facing_left && ! ts_flip_start_get()) {
-          ts_flip_start_set(time_ms_cached());
-        }
-        break;
+        case THING_DIR_RIGHT:
+        case THING_DIR_TR:
+        case THING_DIR_BR:
+          if (is_facing_left && ! ts_flip_start_get()) {
+            ts_flip_start_set(time_ms_cached());
+          }
+          break;
+      }
     }
   }
 

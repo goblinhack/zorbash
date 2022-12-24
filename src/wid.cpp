@@ -6478,7 +6478,6 @@ void wid_move_all(void)
     double y;
 
     if (wid_time >= w->ts_moving_end) {
-
       wid_move_dequeue(w);
 
       //

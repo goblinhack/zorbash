@@ -103,7 +103,7 @@ bool Thing::fall(void)
   const float fall_height = 1;
   auto        duration    = THING_FALL_SPEED_MS;
 
-  if (g_opt_ascii || ! is_visible_to_player) {
+  if (g_opt_ascii || game->robot_mode || ! is_visible_to_player) {
     //
     // Ascii mode, fall is immediate
     //

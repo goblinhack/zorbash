@@ -544,7 +544,11 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
     //
     // The delay until the next anim frame; with some jitter.
     //
-    delay += (non_pcg_rand() % delay) / 2;
+    // Try to be more deterministic in robot mode.
+    //
+    if (! game->robot_mode) {
+      delay += (non_pcg_rand() % delay) / 2;
+    }
   } else {
     //
     // This is for things like doors that do not need to look for their next frame

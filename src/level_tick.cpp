@@ -547,45 +547,40 @@ void Level::tick_(void)
   //
   // The robot needs to be more deterministic and less loosy goosey
   //
-  if (0) {
+  if (game->robot_mode) {
     //
-    // No, it slows the game too much. Let's live with some non determinism.
+    // No moving if weapons have not finished firing
     //
-    if (game->robot_mode) {
-      //
-      // No moving if weapons have not finished firing
-      //
-      if (all_projectiles.size()) {
-        return;
-      }
+    if (all_projectiles.size()) {
+      return;
+    }
 
-      if (new_projectiles.size()) {
-        return;
-      }
+    if (new_projectiles.size()) {
+      return;
+    }
 
-      if (all_lasers.size()) {
-        return;
-      }
+    if (all_lasers.size()) {
+      return;
+    }
 
-      if (new_lasers.size()) {
-        return;
-      }
+    if (new_lasers.size()) {
+      return;
+    }
 
-      if (all_internal_particles.size()) {
-        return;
-      }
+    if (all_internal_particles.size()) {
+      return;
+    }
 
-      if (new_internal_particles.size()) {
-        return;
-      }
+    if (new_internal_particles.size()) {
+      return;
+    }
 
-      if (all_external_particles.size()) {
-        return;
-      }
+    if (all_external_particles.size()) {
+      return;
+    }
 
-      if (new_external_particles.size()) {
-        return;
-      }
+    if (new_external_particles.size()) {
+      return;
     }
   }
 
@@ -621,17 +616,20 @@ void Level::tick_(void)
     handle_all_pending_things();
     things_gc_if_possible();
     create_wandering_monster();
+
 #if 0
     //
     // For debugging consistent randomness
     //
     float h = 0;
-  TRACE_NO_INDENT();
-    FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t) {
+    TRACE_NO_INDENT();
+    FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
+    {
       h += t->curr_at.x;
       h += t->curr_at.y;
-      t->con("at %f,%f", t->curr_at.x, t->curr_at.y);
-    } FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
+      t->con("at %d,%d", t->curr_at.x, t->curr_at.y);
+    }
+    FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
     CON("TICK %d hash %f random %d", game->tick_current, h, pcg_rand());
 #endif
   }

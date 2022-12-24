@@ -23,7 +23,7 @@ void Level::new_internal_particle(ThingId id, point start, point stop, isize sz,
         return;
       }
 
-      if (g_opt_ascii) {
+      if (g_opt_ascii || game->robot_mode) {
         callback();
         return;
       }
@@ -36,7 +36,7 @@ void Level::new_internal_particle(ThingId id, point start, point stop, isize sz,
     }
   }
 
-  if (g_opt_ascii) {
+  if (g_opt_ascii || game->robot_mode) {
     callback();
     return;
   }
@@ -72,6 +72,7 @@ void Level::handle_internal_particles(void)
 
     float t  = p.ts_stop - p.ts_start;
     float dt = (((float) (now) -p.ts_start)) / t;
+
     if (dt >= 1) {
       if (p.id.id) {
         auto t = thing_find(p.id);

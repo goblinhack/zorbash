@@ -4,6 +4,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_depth.hpp"
+#include "my_game.hpp"
 #include "my_level.hpp"
 #include "my_math.hpp"
 #include "my_monst.hpp"
@@ -14,6 +15,10 @@
 bool Thing::bounce(float bounce_height, float bounce_fade, ts_t ms, int bounce_count)
 {
   if (g_opt_ascii) {
+    return true;
+  }
+
+  if (game->robot_mode) {
     return true;
   }
 

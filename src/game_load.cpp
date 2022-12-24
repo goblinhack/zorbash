@@ -342,7 +342,6 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   /////////////////////////////////////////////////////////////////////////
   // Keep these in the same order as my_thing.h and save/load
   /////////////////////////////////////////////////////////////////////////
-  in >> bits(my.t->frame_count);
   in >> bits(my.t->interpolated_at);
   in >> bits(my.t->last_at);
   in >> bits(my.t->curr_at);

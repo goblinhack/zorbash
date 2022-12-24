@@ -289,7 +289,7 @@ bool Thing::ai_create_path_to_single_goal_do(int minx, int miny, int maxx, int m
     set(dmap.val, start.x, start.y, DMAP_IS_PASSABLE);
   }
 
-  IF_DEBUG2
+  IF_DEBUG3
   {
     if (is_debug_type()) {
       dmap_print(&dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy));
@@ -742,25 +742,25 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
                   }
 
                   if (worth_collecting(it) > 0) {
-                    set(ai->interrupt_map.val, p.x, p.y, game->tick_current);
+                    set(ai->interrupt_map.val, o.x, o.y, game->tick_current);
                     if (check_for_interrupts) {
                       something_changed++;
                       AI_LOG("Interrupted by thing worth collecting", it);
                     }
                   }
-                  if (is_dangerous(it)) {
-                    set(ai->interrupt_map.val, p.x, p.y, game->tick_current);
-                    if (check_for_interrupts) {
-                      something_changed++;
-                      AI_LOG("Interrupted by dangerous thing", it);
-                    }
-                  }
-
                   if (worth_eating(it)) {
-                    set(ai->interrupt_map.val, p.x, p.y, game->tick_current);
+                    set(ai->interrupt_map.val, o.x, o.y, game->tick_current);
                     if (check_for_interrupts) {
                       something_changed++;
                       AI_LOG("Interrupted by edible collecting", it);
+                    }
+                  }
+
+                  if (is_dangerous(it)) {
+                    set(ai->interrupt_map.val, o.x, o.y, game->tick_current);
+                    if (check_for_interrupts) {
+                      something_changed++;
+                      AI_LOG("Interrupted by dangerous thing", it);
                     }
                   }
                 }
@@ -1203,8 +1203,9 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
 
   point start((int) curr_at.x, (int) curr_at.y);
 
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > walked = {};
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > pushed = {};
+  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > walked   = {};
+  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > pushed   = {};
+  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > searched = {};
   std::deque< point >                                     in;
   std::deque< point >                                     can_reach_cands;
   std::deque< Thingp >                                    out;
@@ -1296,24 +1297,17 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       }
     }
 
-    if (! get(pushed, p.x + 1, p.y)) {
-      set(pushed, p.x + 1, p.y, true);
-      in.push_back(point(p.x + 1, p.y));
-    }
+    for (int dx = -1; dx <= 1; dx++) {
+      for (int dy = -1; dy <= 1; dy++) {
+        if (! dx && ! dy) {
+          continue;
+        }
 
-    if (! get(pushed, p.x - 1, p.y)) {
-      set(pushed, p.x - 1, p.y, true);
-      in.push_back(point(p.x - 1, p.y));
-    }
-
-    if (! get(pushed, p.x, p.y + 1)) {
-      set(pushed, p.x, p.y + 1, true);
-      in.push_back(point(p.x, p.y + 1));
-    }
-
-    if (! get(pushed, p.x, p.y - 1)) {
-      set(pushed, p.x, p.y - 1, true);
-      in.push_back(point(p.x, p.y - 1));
+        if (! get(pushed, p.x + dx, p.y + dy)) {
+          set(pushed, p.x + dx, p.y + dy, true);
+          in.push_back(point(p.x + dx, p.y + dy));
+        }
+      }
     }
 
     int jump_distance;
@@ -1337,17 +1331,18 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           continue;
         }
 
-        if (! dx && ! dy) {
-          continue;
-        }
-
-        if (get(dmap_can_see->val, o.x, o.y) > DMAP_IS_PASSABLE) {
+        if (get(dmap_can_see->val, o.x, o.y) == DMAP_IS_WALL) {
           continue;
         }
 
         if (get(walked, o.x, o.y)) {
           continue;
         }
+
+        if (get(searched, o.x, o.y)) {
+          continue;
+        }
+        set(searched, o.x, o.y, true);
 
         if (level->is_door(o)) {
           //
@@ -1448,7 +1443,6 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           }
         }
 
-        set(walked, o.x, o.y, true);
         can_reach_cands.push_back(o);
       }
     }
@@ -1564,7 +1558,6 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     //
     // Prefer the unknown.
     //
-    con("%d %d age %d", p.x, p.y, age);
     if (age) {
       total_score -= ((((int) age) - game->tick_current) + 1) * 100;
     } else {

@@ -491,14 +491,6 @@ void Thing::blit_ascii(point tl, point br, point p, bool left_bar)
 {
   TRACE_NO_INDENT();
 
-  //
-  // If currently being displayed and is visible, update the frame count so we can tell
-  // what is currently visible and on screen.
-  //
-  if (get_no_check(level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
-    frame_count = game->frame_count;
-  }
-
   auto tpp  = tp();
   auto blit = true;
 

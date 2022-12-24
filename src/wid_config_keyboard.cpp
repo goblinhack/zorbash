@@ -175,9 +175,12 @@ static void wid_config_check_for_conflicts(SDL_Keysym code)
     TOPCON("%%fg=orange$Conflicting key, disabling key console%%fg=reset$");
     game->config.key_console = {};
   }
-  if (sdlk_eq(game->config.key_robot_mode, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key robot mode%%fg=reset$");
-    game->config.key_robot_mode = {};
+  IF_DEBUG2
+  {
+    if (sdlk_eq(game->config.key_robot_mode, code)) {
+      TOPCON("%%fg=orange$Conflicting key, disabling key robot mode%%fg=reset$");
+      game->config.key_robot_mode = {};
+    }
   }
   if (sdlk_eq(game->config.key_gfx_toggle, code)) {
     TOPCON("%%fg=orange$Conflicting key, disabling key gfx toggle%%fg=reset$");
@@ -2769,41 +2772,46 @@ void Game::wid_config_keyboard_select(void)
     wid_set_text(w, ::to_string(game->config.key_load));
     wid_set_on_mouse_up(w, wid_config_key_load);
   }
-  ///////////////////////////////////////////////////////////////////////
-  // robot_mode
-  ///////////////////////////////////////////////////////////////////////
-  y_at++;
+
+  IF_DEBUG2
   {
-    TRACE_AND_INDENT();
-    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "robot_mode");
+    ///////////////////////////////////////////////////////////////////////
+    // robot_mode
+    ///////////////////////////////////////////////////////////////////////
+    y_at++;
+    {
+      TRACE_AND_INDENT();
+      auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+      auto w = wid_new_square_button(p, "robot_mode");
 
-    point tl = make_point(1, y_at);
-    point br = make_point(width / 2, y_at);
-    wid_set_shape_none(w);
-    wid_set_pos(w, tl, br);
-    wid_set_text_lhs(w, true);
-    wid_set_text(w, "Robot mode");
+      point tl = make_point(1, y_at);
+      point br = make_point(width / 2, y_at);
+      wid_set_shape_none(w);
+      wid_set_pos(w, tl, br);
+      wid_set_text_lhs(w, true);
+      wid_set_text(w, "Robot mode");
+    }
+
+    {
+      TRACE_AND_INDENT();
+      auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+      auto w = wid_new_square_button(p, "value");
+
+      point tl = make_point(width / 2 + 7, y_at);
+      point br = make_point(width / 2 + 21, y_at);
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, ::to_string(game->config.key_robot_mode));
+      wid_set_on_mouse_up(w, wid_config_key_robot_mode);
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    y_at++;
+    ///////////////////////////////////////////////////////////////////////
   }
-  {
-    TRACE_AND_INDENT();
-    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "value");
-
-    point tl = make_point(width / 2 + 7, y_at);
-    point br = make_point(width / 2 + 21, y_at);
-    wid_set_mode(w, WID_MODE_OVER);
-    wid_set_style(w, box_highlight_style);
-    wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_style(w, box_style);
-    wid_set_pos(w, tl, br);
-    wid_set_text(w, ::to_string(game->config.key_robot_mode));
-    wid_set_on_mouse_up(w, wid_config_key_robot_mode);
-  }
-
-  ///////////////////////////////////////////////////////////////////////
-  y_at++;
-  ///////////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////////
   // zoom_in

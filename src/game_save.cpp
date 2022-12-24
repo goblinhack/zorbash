@@ -285,7 +285,6 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   /////////////////////////////////////////////////////////////////////////
   // Keep these in the same order as my_thing.h and save/load
   /////////////////////////////////////////////////////////////////////////
-  out << bits(my.t->frame_count);
   out << bits(my.t->interpolated_at);
   out << bits(my.t->last_at);
   out << bits(my.t->curr_at);

@@ -280,9 +280,9 @@ public:
 
   point3d current_level; // Where we are in the world.
 
-  uint32_t move_count {};   // How many moves the player has made
-  uint16_t frame_count {0}; // Used to know if things have been displayed
-  uint32_t fps_value = {};  // Current framerate
+  uint32_t move_count {}; // How many moves the player has made
+  uint32_t frame_count {0};
+  uint32_t fps_value = {}; // Current framerate
   uint32_t tick_completed {1};
   uint32_t tick_current {1};
 

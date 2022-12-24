@@ -1106,11 +1106,16 @@ void wid_actionbar_pixelart_init(void)
     ui_icon_close = true;
   }
 
-  int options = 7;
+  int options = 6;
 
   if (game->state == Game::STATE_NORMAL) {
     options++;
     options++;
+
+    //
+    // Robot debug mode
+    //
+    IF_DEBUG2 { options++; }
   }
 
   if (ui_icon_collect) {
@@ -1192,21 +1197,24 @@ void wid_actionbar_pixelart_init(void)
     x_at += option_width;
   }
 
+  IF_DEBUG2
   {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar robot");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_width - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "ui_icon_robot");
-    wid_set_on_mouse_up(w, wid_actionbar_robot);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_robot_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_robot_over_end);
-    if (game->robot_mode) {
-      wid_set_bg_tilename(w, "ui_icon_robot_on");
-      wid_set_on_tick(w, wid_actionbar_ai_tick);
+    if (game->state == Game::STATE_NORMAL) {
+      auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar robot");
+      point tl = make_point(x_at, 0);
+      point br = make_point(x_at + option_width - 1, option_width - 1);
+      wid_set_pos(w, tl, br);
+      wid_set_bg_tilename(w, "ui_icon_robot");
+      wid_set_on_mouse_up(w, wid_actionbar_robot);
+      wid_set_on_mouse_over_begin(w, wid_actionbar_robot_over_begin);
+      wid_set_on_mouse_over_end(w, wid_actionbar_robot_over_end);
+      if (game->robot_mode) {
+        wid_set_bg_tilename(w, "ui_icon_robot_on");
+        wid_set_on_tick(w, wid_actionbar_ai_tick);
+      }
+      wid_set_style(w, UI_WID_STYLE_RED);
+      x_at += option_width;
     }
-    wid_set_style(w, UI_WID_STYLE_RED);
-    x_at += option_width;
   }
 
   if (! game->request_player_to_ascend_level && add_ascend) {
@@ -1452,24 +1460,27 @@ void wid_actionbar_ascii_init(void)
     x_at += option_width + 1;
   }
 
-  if (game->state == Game::STATE_NORMAL) {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar robot");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_height - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, wid_actionbar_robot);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_robot_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_robot_over_end);
-    wid_set_text(w, "Robo");
-    wid_set_mode(w, WID_MODE_OVER);
-    wid_set_style(w, box_highlight_style);
-    wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_style(w, box_style);
-    if (game->robot_mode) {
-      wid_set_on_tick(w, wid_actionbar_ai_tick);
-      wid_set_style(w, UI_WID_STYLE_RED);
+  IF_DEBUG2
+  {
+    if (game->state == Game::STATE_NORMAL) {
+      auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar robot");
+      point tl = make_point(x_at, 0);
+      point br = make_point(x_at + option_width - 1, option_height - 1);
+      wid_set_pos(w, tl, br);
+      wid_set_on_mouse_up(w, wid_actionbar_robot);
+      wid_set_on_mouse_over_begin(w, wid_actionbar_robot_over_begin);
+      wid_set_on_mouse_over_end(w, wid_actionbar_robot_over_end);
+      wid_set_text(w, "Robo");
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
+      if (game->robot_mode) {
+        wid_set_on_tick(w, wid_actionbar_ai_tick);
+        wid_set_style(w, UI_WID_STYLE_RED);
+      }
+      x_at += option_width + 1;
     }
-    x_at += option_width + 1;
   }
 
   if (! game->robot_mode) {
