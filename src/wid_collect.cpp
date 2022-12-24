@@ -404,7 +404,7 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
   } else {
     height = height_max;
   }
-  point tl    = make_point(m - left_half, TERM_HEIGHT / 2 - height / 2 - 2);
+  point tl    = make_point(m - left_half, TERM_HEIGHT / 2 - height / 2 - 1);
   point br    = make_point(m + right_half, TERM_HEIGHT / 2 + height / 2);
   wid_collect = new WidPopup("Collect", tl, br, nullptr, "", false, scrollbar, height_max);
 

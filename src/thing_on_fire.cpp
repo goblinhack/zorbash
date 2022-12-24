@@ -132,17 +132,6 @@ bool Thing::on_fire_set(const std::string &why)
 
     if (is_player()) {
       msg("%%fg=red$You are literally ON FIRE!%%fg=reset$");
-    } else if (is_monst()) {
-      msg("%s is on fire!", text_The().c_str());
-    }
-
-    auto owner = top_owner();
-    if (owner && owner->is_player()) {
-      if (is_torch()) {
-        msg("Your %s is now a blazing inferno!", text_long_name().c_str());
-      } else {
-        msg("Your %s is on fire!", text_long_name().c_str());
-      }
     }
 
     //

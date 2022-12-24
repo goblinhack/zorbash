@@ -1,7 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - check cannot be set on fire due to temp                                                                                                    -->
-<!-- - pressing a key fast at the start can be ignored?                                                                                           -->
+<!-- - cloak in water offset                                                                                                                      -->
 <!-- - skills                                                                                                                                     -->
 <!-- - falling in block of ice should fall together                                                                                               -->
 <!-- - some weapons crit more                                                                                                                     -->

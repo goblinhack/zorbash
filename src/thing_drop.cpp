@@ -173,9 +173,11 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen, bool thrown)
         sound_play("drop");
         level->noisemap_in_incr(curr_at.x, curr_at.y, what->noise_on_dropping());
       }
-    } else {
+    } else if (is_bag_item_container()) {
+      msg("%s falls out of %s.", what->text_the().c_str(), text_the().c_str());
+      level->noisemap_in_incr(curr_at.x, curr_at.y, what->noise_on_dropping());
+    } else if (is_monst()) {
       msg("%s drops %s.", text_The().c_str(), what->text_the().c_str());
-      thing_sound_play("drop");
       level->noisemap_in_incr(curr_at.x, curr_at.y, what->noise_on_dropping());
     }
   }

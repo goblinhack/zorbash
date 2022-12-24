@@ -67,7 +67,6 @@ void Game::place_player(void)
       if (0) {
         level->thing_new("zorb_necro", point(x + 2, y));
         level->thing_new("zorb_pirate", point(x + 2, y + 1));
-        level->thing_new("fire", point(x + 1, y));
         level->thing_new("fire", point(x + 1, y - 1));
         level->thing_new("fire", point(x + 1, y + 1));
         level->thing_new("small_fire", point(x + 3, y + 3));

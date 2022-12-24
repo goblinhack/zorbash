@@ -1089,6 +1089,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         real_hitter->msg("%%fg=limegreen$Your skin is falling away in chunks!%%fg=reset$");
       } else if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
         real_hitter->msg("%%fg=limegreen$Your stamina feels drained!%%fg=reset$");
+      } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
+        real_hitter->msg("%%fg=orange$You sweat for %d %sdamage!%%fg=reset$", damage, dmg_type.c_str());
       } else {
         real_hitter->msg("%%fg=orange$You hurt yourself for %d %sdamage with %s!%%fg=reset$", damage,
                          dmg_type.c_str(), hitter->text_the().c_str());

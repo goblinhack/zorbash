@@ -92,10 +92,12 @@ void tp_fixup(void)
     }
 
     if (tp->is_able_to_burn() || tp->is_combustible() || tp->is_very_combustible()) {
+      tp->is_tickable_set(true);
       tp->temperature_sensitive_set(true);
     }
 
     if (tp->is_able_to_freeze()) {
+      tp->is_tickable_set(true);
       tp->temperature_sensitive_set(true);
     }
 
@@ -103,15 +105,22 @@ void tp_fixup(void)
       tp->is_able_to_shove_set(true);
     }
 
-    if (tp->is_able_to_grapple_chance_d1000()) {
-      tp->is_able_to_grapple_set(true);
-    }
-
     if (tp->is_able_to_melt()) {
+      tp->is_tickable_set(true);
       tp->temperature_sensitive_set(true);
       if (! tp->melting_chance_d1000()) {
         DIE("Tp %s needs melting chance set as it can melt", tp->name().c_str());
       }
+    }
+
+    if (tp->temperature_sensitive()) {
+      if (! tp->initial_temperature_is_set()) {
+        tp->temperature_set(TEMPERATURE_ROOM);
+      }
+    }
+
+    if (tp->is_able_to_grapple_chance_d1000()) {
+      tp->is_able_to_grapple_set(true);
     }
 
     if (tp->is_stone()) {
