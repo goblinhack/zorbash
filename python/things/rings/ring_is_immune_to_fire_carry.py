@@ -13,6 +13,7 @@ def tp_init(name):
     my.gfx_pixelart_equip_carry_anim(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
+    my.gfx_pixelart_submergable(self, True)
     my.is_loggable(self, True)
     my.is_moveable(self, True)
     my.text_a_or_an(self, "a")
