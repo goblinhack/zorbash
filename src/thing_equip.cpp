@@ -362,10 +362,13 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
         // msg("%s is broken.", item->text_The().c_str());
       } else if (item->is_ring()) {
         msg("You slip off %s.", item->text_the().c_str());
+        game->tick_begin("Too off something");
       } else if (item->is_weapon()) {
         msg("You unwield %s.", item->text_the().c_str());
+        game->tick_begin("Unwieleded something");
       } else {
         msg("You take off on %s.", item->text_the().c_str());
+        game->tick_begin("Too off something");
       }
     }
   }

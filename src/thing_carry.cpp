@@ -301,6 +301,7 @@ bool Thing::carry(Thingp item, bool can_equip)
           //
         } else {
           msg("You carry %s.", item->text_the().c_str());
+          game->tick_begin("Carried something");
         }
       } else if (is_monst() && is_visible_to_player) {
         if (level->player && (level->tick_created < game->tick_current)) {
