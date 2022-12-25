@@ -30,7 +30,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.item_width(self, 2)
     my.noise_on_dropping(self, 25)
     my.normal_placement_rules(self, True)
-    my.nutrition_dice(self, "1d40")
+    my.nutrition_dice(self, "1d4")
     my.rarity(self, my.RARITY_UNCOMMON)
     my.stat_luck_mod(self, 4)
     my.text_a_or_an(self, "a")
