@@ -494,7 +494,13 @@ void Level::tick_(void)
       }
     }
 
-    return;
+    if (player && player->is_dead) {
+      //
+      // No point in waiting any more.
+      //
+    } else {
+      return;
+    }
   }
 
   debug_path_clear();

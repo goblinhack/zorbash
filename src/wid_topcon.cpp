@@ -68,16 +68,13 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     return false;
   }
 
-  IF_DEBUG2
-  {
-    if (sdlk_eq(*key, game->config.key_robot_mode)) {
-      LOG("INF: Pressed robot mode key");
-      TRACE_AND_INDENT();
-      wid_actionbar_robot_mode_toggle();
-      game->change_state(Game::STATE_NORMAL, "key press");
-      wid_thing_info_fini("robot key"); // To remove bag or other info
-      return true;
-    }
+  if (sdlk_eq(*key, game->config.key_robot_mode)) {
+    LOG("INF: Pressed robot mode key");
+    TRACE_AND_INDENT();
+    wid_actionbar_robot_mode_toggle();
+    game->change_state(Game::STATE_NORMAL, "key press");
+    wid_thing_info_fini("robot key"); // To remove bag or other info
+    return true;
   }
 
   if (sdlk_eq(*key, game->config.key_zoom_out)) {
