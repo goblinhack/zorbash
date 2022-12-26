@@ -276,6 +276,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_appearing_chance_d1000),
     MY_ADD_PYTHON_FUNCTION(thing_attack_engulf_chance_d1000),
     MY_ADD_PYTHON_FUNCTION(thing_attack_no_msg),
+    MY_ADD_PYTHON_FUNCTION(thing_attack_num_get),
     MY_ADD_PYTHON_FUNCTION(thing_attacks_per_round),
     MY_ADD_PYTHON_FUNCTION(thing_attack_undead),
     MY_ADD_PYTHON_FUNCTION(thing_buff_add),

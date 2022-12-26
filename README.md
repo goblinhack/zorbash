@@ -239,6 +239,7 @@ Content:
 - 6 boots
 - 5 rings
 - 5 keys
+- 4 skills
 - 4 gauntlets
 - 4 debuffs
 - 4 armor
@@ -247,7 +248,6 @@ Content:
 - 3 doors
 - 3 cloaks
 - 3 amulets
-- 2 skills
 - 2 shield
 - 1 player
 <!-- end type marker -->

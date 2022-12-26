@@ -19,7 +19,7 @@ def on_use(owner, skill, target, x, y):
 
     if bonus > 1:
         if my.thing_is_player(owner):
-            my.thing_msg(owner, f"%%fg=yellow$You strike with a mighty thrust of {bonus} damage.%%fg=reset$")
+            my.thing_msg(owner, f"%%fg=yellow$You strike with a mighty thrust of {bonus} additional damage.%%fg=reset$")
         my.thing_dmg_current_incr(owner, bonus)
         my.thing_stamina_decr(owner, bonus)
     else:

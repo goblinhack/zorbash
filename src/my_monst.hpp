@@ -116,14 +116,13 @@ public:
 
   point lunge_to; // When a monst attacks something
 
+  int attack_num          = {};
   int capacity_height     = {};
   int capacity_width      = {};
   int distance_throw      = {};
   int enchant             = {};
   int enchant_max         = {};
   int gold                = {-1};
-  int move_count          = {0};
-  int nutrition           = {-1};
   int health              = {};
   int health_max          = {};
   int hunger              = {THING_HUNGER_FULL};
@@ -132,16 +131,18 @@ public:
   int lifespan            = {}; // How many things this thing owns.
   int light_dist          = {}; // Current strength, including torches
   int monst_state         = {};
+  int move_count          = {0};
   int movement_remaining  = {};
-  int move_speed_mod      = {};
   int move_speed_curr     = {};
-  int shove_strength_mod  = {};
+  int move_speed_mod      = {};
   int necrosis            = {};
   int noise               = {};
+  int nutrition           = {-1};
   int physical_training   = {};
   int poison              = {};
   int prev_light_dist     = {}; // Current strength, including torches
   int score               = {};
+  int shove_strength_mod  = {};
   int stamina             = {};
   int stamina_max         = {};
   int stat_att            = {};

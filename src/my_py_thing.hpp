@@ -15,6 +15,7 @@ PyObject *thing_ai_wanderer(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_appearing_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_attack_engulf_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_attack_no_msg(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_attack_num_get(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_attacks_per_round(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_attack_undead(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_buff_add(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -93,7 +93,7 @@ int Thing::shove_strength_total(void)
     FOR_ALL_SKILLS(id)
     {
       auto iter = level->thing_find(id);
-      if (iter) {
+      if (iter && iter->is_activated) {
         stat += iter->shove_strength_total();
         if (stat != prev) {
           prev = stat;

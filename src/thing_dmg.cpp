@@ -9,7 +9,52 @@
 int Thing::attacks_per_round(void)
 {
   TRACE_NO_INDENT();
-  return (std::max(1, tp()->attacks_per_round()));
+
+  auto attacks = (std::max(1, tp()->attacks_per_round()));
+
+  FOR_ALL_EQUIP(e)
+  {
+    auto iter = equip_get(e);
+    if (iter) {
+      attacks = std::max(attacks, iter->attacks_per_round());
+    }
+  }
+
+  if (maybe_itemsp()) {
+    FOR_ALL_CARRYING(id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter) {
+        attacks = std::max(attacks, iter->attacks_per_round());
+      }
+    }
+
+    FOR_ALL_BUFFS(id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter) {
+        attacks = std::max(attacks, iter->attacks_per_round());
+      }
+    }
+
+    FOR_ALL_DEBUFFS(id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter) {
+        attacks = std::max(attacks, iter->attacks_per_round());
+      }
+    }
+
+    FOR_ALL_SKILLS(id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter && iter->is_activated) {
+        attacks = std::max(attacks, iter->attacks_per_round());
+      }
+    }
+  }
+
+  return attacks;
 }
 
 int Thing::weapon_dmg(void)

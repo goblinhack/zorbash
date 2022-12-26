@@ -990,6 +990,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     }
   }
 
+  real_hitter->attack_num_set(attack_options->attack_num);
   if (real_hitter->maybe_itemsp()) {
     FOR_ALL_SKILLS_FOR(real_hitter, oid)
     {

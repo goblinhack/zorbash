@@ -94,7 +94,7 @@ int Thing::stat_luck_total(void)
     FOR_ALL_SKILLS(id)
     {
       auto iter = level->thing_find(id);
-      if (iter) {
+      if (iter && iter->is_activated) {
         stat += iter->stat_luck_total();
         if (stat != prev) {
           prev = stat;

@@ -1933,9 +1933,11 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
     printed_something = true;
   }
 
-  if (t->attacks_per_round() > 1) {
-    w->log("Monster has multiple attacks.", TEXT_FORMAT_LHS, "red");
-    printed_something = true;
+  if (t->is_monst()) {
+    if (t->attacks_per_round() > 1) {
+      w->log("Monster has multiple attacks.", TEXT_FORMAT_LHS, "red");
+      printed_something = true;
+    }
   }
 
   if (t->is_item() || t->is_monst() || t->is_player() || printed_something) {

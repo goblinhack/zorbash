@@ -106,7 +106,7 @@ int Thing::stat_att_mod_total()
     FOR_ALL_SKILLS(id)
     {
       auto iter = level->thing_find(id);
-      if (iter) {
+      if (iter && iter->is_activated) {
         stat += iter->stat_att_mod_total();
         if (stat != prev) {
           prev = stat;

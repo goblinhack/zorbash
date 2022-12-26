@@ -76,6 +76,10 @@ void Game::place_player(void)
         t->skill_add(w);
       }
       if (0) {
+        auto w = level->thing_new("skill_secondary_attack", point(x, y));
+        t->skill_add(w);
+      }
+      if (0) {
         auto w = level->thing_new("amulet_endurance", point(x, y - 2));
         t->carry(w);
       }
@@ -209,7 +213,7 @@ void Game::place_player(void)
         t->carry(w);
       }
       if (0) {
-        level->thing_new("mummy_necro", point(x + 2, y));
+        level->thing_new("mummy_necro", point(x + 1, y));
         level->thing_new("reaper", point(x + 3, y));
         level->thing_new("tentacleye", point(x + 1, y + 1));
         level->thing_new("tentacleye", point(x + 1, y + 2));

@@ -558,10 +558,11 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
   bool tried_to_attack = false;
   int  attack_count    = 0;
 
-  dbg("Attack count #%d", attacks_per_round());
+  auto attacks = owner ? owner->attacks_per_round() : attacks_per_round();
+  dbg("Attack count #%d", attacks);
   TRACE_AND_INDENT();
 
-  for (int attack_num = 0; attack_num < attacks_per_round(); attack_num++) {
+  for (int attack_num = 0; attack_num < attacks; attack_num++) {
     bool fumble = false;
 
     dbg("Attack num #%d", attack_num);
@@ -1038,6 +1039,16 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
       level->noisemap_in_incr(curr_at.x, curr_at.y, owner->noise_total());
     } else {
       level->noisemap_in_incr(curr_at.x, curr_at.y, noise_total());
+    }
+
+    //
+    // If secondary attack is enabled, perhaps via a skill, the thing may not have a
+    // secondary attack naturally set. If so, use melee.
+    //
+    if (attack_options->damage <= 0) {
+      if (attack_num > 0) {
+        attack_options->damage = dmg_melee();
+      }
     }
 
     //
@@ -1529,4 +1540,19 @@ int Thing::is_attacked_with_dmg_digest(Thingp hitter, Thingp real_hitter, int da
   attack_options.attack[ THING_ATTACK_DIGEST ] = true;
   attack_options.real_hitter                   = real_hitter;
   return is_hit(hitter, &attack_options, damage);
+}
+
+int Thing::attack_num_set(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (infop()->attack_num = v);
+  return n;
+}
+
+int Thing::attack_num_get(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return infop()->attack_num;
 }

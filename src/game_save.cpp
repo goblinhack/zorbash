@@ -51,6 +51,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
   /////////////////////////////////////////////////////////////////////////
   // clang-format off
+  out << bits(my.t->attack_num);
   out << bits(my.t->born);
   out << bits(my.t->bounce_fade);
   out << bits(my.t->bounce_height);
@@ -64,8 +65,8 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->fadeup_height);
   out << bits(my.t->fall_height);
   out << bits(my.t->gold);
-  out << bits(my.t->move_count);
   out << bits(my.t->health);
+  out << bits(my.t->move_count);
   out << bits(my.t->health_max);
   out << bits(my.t->hunger);
   out << bits(my.t->jump_distance_mod);

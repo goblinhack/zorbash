@@ -24,7 +24,7 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.collision_hit_priority(self, 6)
-    my.damaged_chance_d10000(self, 1000)
+    my.damaged_chance_d10000(self, 100)
     my.enchant_max(self, 10)
     my.equip_carry_anim(self, "armor_fish_scale_carry")
     my.gfx_ascii_shown(self, True)

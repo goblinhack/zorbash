@@ -896,6 +896,8 @@ public:
   int attack_lunge(void);
   int attack_meat(void);
   int attack_no_msg(void);
+  int attack_num_get(void);
+  int attack_num_set(int);
   int attacks_per_round(void);
   int attack_undead(void);
   int attack(void);
