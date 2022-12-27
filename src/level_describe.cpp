@@ -318,6 +318,20 @@ void Level::describe(point p)
     wid_thing_info_fini("describe");
   }
 
+  //
+  // Filter out boring things if we have more than one item do describe.
+  //
+  if (hover_over_things.size() > 1) {
+    std::vector< Thingp > hover_over_things_tmp;
+    for (auto t : hover_over_things) {
+      if (! t->is_interesting()) {
+        continue;
+      }
+      hover_over_things_tmp.push_back(t);
+    }
+    hover_over_things = hover_over_things_tmp;
+  }
+
   if (hover_over_things.size() > 1) {
     dbg("Describe @%d,%d; found %d things", p.x, p.y, (int) hover_over_things.size());
     if (hover_over_things.size() > 1) {
@@ -336,20 +350,22 @@ void Level::describe(point p)
       BOTCON("%s", text.c_str());
     }
   } else if (hover_over_things.size()) {
-    dbg("Describe @%d,%d; found thing", p.x, p.y);
-    if (hover_over_things.size() > 1) {
-      auto        k = ::to_string(game->config.key_wait_or_collect);
-      std::string text;
-      if (player->curr_at == p) {
-        if (k == ".") {
-          text = "Something is here. Press %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+    if (game->wid_thing_info_create_list(hover_over_things)) {
+      dbg("Describe @%d,%d; found thing", p.x, p.y);
+      if (hover_over_things.size() > 1) {
+        auto        k = ::to_string(game->config.key_wait_or_collect);
+        std::string text;
+        if (player->curr_at == p) {
+          if (k == ".") {
+            text = "Something is here. Press %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+          } else {
+            text = "Something is here. %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+          }
         } else {
-          text = "Something is here. %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+          text = "Something is here.";
         }
-      } else {
-        text = "Something is here.";
+        BOTCON("%s", text.c_str());
       }
-      BOTCON("%s", text.c_str());
     }
   }
 }

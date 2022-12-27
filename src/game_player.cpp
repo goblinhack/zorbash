@@ -388,7 +388,7 @@ void Game::place_player(void)
         level->thing_new("vampire_rose_stem2", point(x + 1, y + 4));
         level->thing_new("vampire_rose_stem1", point(x, y + 4));
       }
-      if (1) {
+      if (0) {
         level->thing_new("jelly_parent", point(x, y + 4));
         level->thing_new("jelly_baby", point(x, y + 4));
       }
