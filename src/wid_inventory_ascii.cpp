@@ -31,7 +31,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
     return false;
   }
 
-  wid_inventory_fini();
+  wid_inventory_fini(true /* remake */);
   wid_inventory_thing_over     = over;
   wid_inventory_thing_selected = selected;
 

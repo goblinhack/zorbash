@@ -24,7 +24,7 @@ Thingp wid_inventory_thing_selected;
 
 int wid_inventory_tab = WID_INVENTORY_TAB_BAG1;
 
-void wid_inventory_fini(void)
+void wid_inventory_fini(bool remake)
 {
   DBG2("Close inventory");
   TRACE_AND_INDENT();
@@ -56,7 +56,9 @@ void wid_inventory_fini(void)
   if (wid_inventory_window) {
     wid_destroy(&wid_inventory_window);
     game->set_request_to_remake_rightbar();
-    game->change_state(Game::STATE_NORMAL, "inventory close");
+    if (! remake) {
+      game->change_state(Game::STATE_NORMAL, "inventory close");
+    }
   }
 }
 
