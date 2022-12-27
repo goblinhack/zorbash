@@ -371,6 +371,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_outlined(self, True)
+    my.gfx_pixelart_show_square_outlined(self, True)
     my.gfx_pixelart_submergable(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "100")
