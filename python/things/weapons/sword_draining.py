@@ -14,6 +14,15 @@ def on_owner_attack_dmg_draining(me, owner, victim, x, y, damage):
     return damage + my.thing_enchant_count_get(me) * 3
 
 
+def on_equip(owner, me, x, y):
+    my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, "sword_equip")
+    return
+
+
+def on_unequip(owner, me, x, y):
+    return
+
+
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
@@ -56,8 +65,10 @@ def tp_init(name, text_long_name, text_short_name):
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.noise_on_dropping(self, 5)
+    my.on_equip_do(self, "me.on_equip()")
     my.on_owner_attack_dmg_draining_do(self, "me.on_owner_attack_dmg_draining()")
     my.on_swing_do(self, "me.on_swing()")
+    my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_COMMON)
     my.stamina_drain_on_attacking(self, 0)
     my.text_a_or_an(self, "a")

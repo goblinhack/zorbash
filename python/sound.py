@@ -82,6 +82,7 @@ my.sound_load(volume=1.0, file="data/sounds/misc/footsteps5.wav", name="footstep
 my.sound_load(volume=1.0, file="data/sounds/misc/footsteps6.wav", name="footsteps6")
 my.sound_load(volume=1.0, file="data/sounds/misc/footsteps7.wav", name="footsteps7")
 my.sound_load(volume=1.0, file="data/sounds/misc/footsteps8.wav", name="footsteps8")
+my.sound_load(volume=1.0, file="data/sounds/misc/56264__q-k__sword-sheath.wav", name="sword_equip")
 # my.sound_load(volume=1.0, file="data/sounds/misc/clack.wav",               name="clack")
 # my.sound_load(volume=1.0, file="data/sounds/misc/step.wav",                name="step")
 # my.sound_load(volume=1.0, file="data/sounds/misc/bay_door_close.wav",      name="bay_door_close")
