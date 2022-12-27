@@ -3,12 +3,11 @@ import tp
 
 
 def on_you_nat_att(me, x, y):
-    my.thing_sound_play_channel(me, my.CHANNEL_MONST, "squelch")
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, "slime_attack")
 
 
 def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
-    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, "squelch"):
-        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "squelch")
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, "slime_attack")
 
 
 def on_death(me, x, y):
@@ -16,7 +15,7 @@ def on_death(me, x, y):
 
 
 def on_jump(me, x, y):
-    my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "squelch")
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, "slime_jump")
 
 
 def tp_init(name, text_long_name):

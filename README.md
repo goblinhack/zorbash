@@ -513,6 +513,8 @@ Sound effects
 - Rat squeak by tim.kahn [found here](https://freesound.org/people/tim.kahn/)
 - Skill learn by Mrthenoronha [found here](https://freesound.org/people/Mrthenoronha/)
 - Slime by Konstati [found here](https://freesound.org/people/konstati/)
+- Slime by Zuzek06 [found here](https://freesound.org/people/Zuzek06/)
+- Slime by wubitog [found here](https://freesound.org/people/wubitog/)
 - Sword by Danjocross [found here](https://freesound.org/people/Danjocross/)
 - Sword by XxChr0nosxX [found here](https://freesound.org/people/XxChr0nosxX/)
 - Sword sounds by Q.K [found here](https://freesound.org/people/Q.K./)

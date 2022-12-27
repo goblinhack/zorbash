@@ -1,8 +1,10 @@
 import my
 
 my.sound_load(volume=0.1, file="data/sounds/impacts/door_hit1.wav", name="door_hit1")
-my.sound_load(volume=0.2, file="data/sounds/creatures/148975__adam_n__squelch_1.wav", name="squelch",)
+my.sound_load(volume=1.0, file="data/sounds/creatures/148975__adam_n__squelch_1.wav", name="squelch",)
 my.sound_load(volume=0.2, file="data/sounds/creatures/23733__tim-kahn__squeakyrat.wav", name="squeaky_toy",)
+my.sound_load(volume=1.0, file="data/sounds/creatures/353250__zuzek06__slimejump.wav", name="slime_jump",)
+my.sound_load(volume=1.0, file="data/sounds/creatures/188384__wubitog__slime-attack-or-movement.wav", name="slime_attack",)
 my.sound_load(volume=0.2, file="data/sounds/creatures/76962__michel88__deaths.wav", name="monst_death1",)
 my.sound_load(volume=0.2, file="data/sounds/creatures/bones1.wav", name="bones1")
 my.sound_load(volume=0.2, file="data/sounds/creatures/bones2.wav", name="bones2")
