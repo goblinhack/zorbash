@@ -221,9 +221,10 @@ void tile_blit_colored(Tilep tile, point tl, point br, color color_tl, color col
                        color color_br);
 void tile_blit_colored_fat(class Tp *tp, Tilep tile, point tl, point br, color color_tl, color color_tr,
                            color color_bl, color color_br);
-void tile_blit_outline(const Tilep &tile, const point tl, const point br, const color &c);
-void tile_blit_outline(const Tilep &tile, const point tl, const point br, const color &c, const color &o);
-void tile_blit_outline(uint16_t index, const point tl, const point br, const color &c);
+void tile_blit_outline(const Tilep &tile, const point tl, const point br, const color &c, bool square = false);
+void tile_blit_outline(const Tilep &tile, const point tl, const point br, const color &c, const color &o,
+                       bool square = false);
+void tile_blit_outline(uint16_t index, const point tl, const point br, const color &c, bool square = false);
 void tile_blit_outline_section(const Tilep &tile, const point tile_tl, const point tile_br, const point tl,
                                const point br);
 void tile_blit_outline_section(uint16_t index, const point tile_tl, const point tile_br, const point tl,

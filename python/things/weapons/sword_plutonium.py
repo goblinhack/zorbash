@@ -95,9 +95,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.light_dist(self, 1)
     my.noise_on_dropping(self, 5)
     my.on_equip_do(self, "me.on_equip()")
+    my.on_owner_attack_dmg_melee_do(self, "me.on_owner_attack_dmg_melee()")
     my.on_swing_do(self, "me.on_swing()")
     my.on_tick_do(self, "me.on_tick()")
-    my.on_owner_attack_dmg_melee_do(self, "me.on_owner_attack_dmg_melee()")
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_COMMON)
     my.stat_att_mod(self, 2)  # means +2 per enchant

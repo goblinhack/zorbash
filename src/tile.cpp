@@ -1107,7 +1107,7 @@ void Tile::set_gl_binding_mask(int v) { _gl_binding_mask = v; }
 //
 // Blits a whole tile. Y co-ords are inverted.
 //
-void tile_blit_outline(const Tilep &tile, const point tl, const point br, const color &c)
+void tile_blit_outline(const Tilep &tile, const point tl, const point br, const color &c, bool square)
 {
   float x1, x2, y1, y2;
 
@@ -1127,15 +1127,13 @@ void tile_blit_outline(const Tilep &tile, const point tl, const point br, const 
   const float dy = game->config.one_pixel_height;
 
   auto binding = tile->gl_binding_mask();
-#if 0
-  //
-  // Not sure if square outlines look better
-  //
-  blit(binding, x1, y2, x2, y1, tl.x - dx, br.y - dy, br.x - dx, tl.y - dy);
-  blit(binding, x1, y2, x2, y1, tl.x + dx, br.y + dy, br.x + dx, tl.y + dy);
-  blit(binding, x1, y2, x2, y1, tl.x - dx, br.y + dy, br.x - dx, tl.y + dy);
-  blit(binding, x1, y2, x2, y1, tl.x + dx, br.y - dy, br.x + dx, tl.y - dy);
-#endif
+
+  if (square) {
+    blit(binding, x1, y2, x2, y1, tl.x - dx, br.y - dy, br.x - dx, tl.y - dy);
+    blit(binding, x1, y2, x2, y1, tl.x + dx, br.y + dy, br.x + dx, tl.y + dy);
+    blit(binding, x1, y2, x2, y1, tl.x - dx, br.y + dy, br.x - dx, tl.y + dy);
+    blit(binding, x1, y2, x2, y1, tl.x + dx, br.y - dy, br.x + dx, tl.y - dy);
+  }
   blit(binding, x1, y2, x2, y1, tl.x + dx, br.y, br.x + dx, tl.y);
   blit(binding, x1, y2, x2, y1, tl.x - dx, br.y, br.x - dx, tl.y);
   blit(binding, x1, y2, x2, y1, tl.x, br.y + dy, br.x, tl.y + dy);
@@ -1146,7 +1144,8 @@ void tile_blit_outline(const Tilep &tile, const point tl, const point br, const 
   blit(binding, x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
 }
 
-void tile_blit_outline(const Tilep &tile, const point tl, const point br, const color &c, const color &outline)
+void tile_blit_outline(const Tilep &tile, const point tl, const point br, const color &c, const color &outline,
+                       bool square)
 {
   float x1, x2, y1, y2;
 
@@ -1165,10 +1164,13 @@ void tile_blit_outline(const Tilep &tile, const point tl, const point br, const 
   const float dy = game->config.one_pixel_height;
 
   auto binding = tile->gl_binding_mask();
-  blit(binding, x1, y2, x2, y1, tl.x - dx, br.y - dy, br.x - dx, tl.y - dy);
-  blit(binding, x1, y2, x2, y1, tl.x + dx, br.y + dy, br.x + dx, tl.y + dy);
-  blit(binding, x1, y2, x2, y1, tl.x - dx, br.y + dy, br.x - dx, tl.y + dy);
-  blit(binding, x1, y2, x2, y1, tl.x + dx, br.y - dy, br.x + dx, tl.y - dy);
+
+  if (square) {
+    blit(binding, x1, y2, x2, y1, tl.x - dx, br.y - dy, br.x - dx, tl.y - dy);
+    blit(binding, x1, y2, x2, y1, tl.x + dx, br.y + dy, br.x + dx, tl.y + dy);
+    blit(binding, x1, y2, x2, y1, tl.x - dx, br.y + dy, br.x - dx, tl.y + dy);
+    blit(binding, x1, y2, x2, y1, tl.x + dx, br.y - dy, br.x + dx, tl.y - dy);
+  }
   blit(binding, x1, y2, x2, y1, tl.x + dx, br.y, br.x + dx, tl.y);
   blit(binding, x1, y2, x2, y1, tl.x - dx, br.y, br.x - dx, tl.y);
   blit(binding, x1, y2, x2, y1, tl.x, br.y + dy, br.x, tl.y + dy);
@@ -1179,9 +1181,9 @@ void tile_blit_outline(const Tilep &tile, const point tl, const point br, const 
   blit(binding, x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
 }
 
-void tile_blit_outline(uint16_t index, const point tl, const point br, const color &c)
+void tile_blit_outline(uint16_t index, const point tl, const point br, const color &c, bool square)
 {
-  tile_blit_outline(tile_index_to_tile(index), tl, br, c);
+  tile_blit_outline(tile_index_to_tile(index), tl, br, c, square);
 }
 
 void tile_blit(const Tilep &tile, const point tl, const point br, const color &c)

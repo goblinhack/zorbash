@@ -207,6 +207,7 @@ private:
   int _gfx_pixelart_show_asleep_anim {};
   int _gfx_pixelart_shown_in_bg {};
   int _gfx_pixelart_show_outlined {};
+  int _gfx_pixelart_show_square_outlined {};
   int _gfx_pixelart_submergable {};
   int _gfx_pixelart_wobbles_when_hit {};
   int _gfx_water {};
@@ -632,7 +633,6 @@ private:
   int _unused_flag21 {};
   int _unused_flag22 {};
   int _unused_flag23 {};
-  int _unused_flag24 {};
   int _unused_flag27 {};
   int _unused_flag3 {};
   int _unused_flag4 {};
@@ -1263,6 +1263,7 @@ public:
   int gfx_pixelart_show_asleep_anim(void) const;
   int gfx_pixelart_shown_in_bg(void) const;
   int gfx_pixelart_show_outlined(void) const;
+  int gfx_pixelart_show_square_outlined(void) const;
   int gfx_pixelart_submergable(void) const;
   int gfx_pixelart_wobbles_when_hit(void) const;
   int gfx_water(void) const;
@@ -1685,7 +1686,6 @@ public:
   int unused_flag21(void) const;
   int unused_flag22(void) const;
   int unused_flag23(void) const;
-  int unused_flag24(void) const;
   int unused_flag27(void) const;
   int unused_flag2(void) const;
   int unused_flag3(void) const;
@@ -1802,6 +1802,7 @@ public:
   void gfx_pixelart_show_asleep_anim_set(int v);
   void gfx_pixelart_shown_in_bg_set(int v);
   void gfx_pixelart_show_outlined_set(int v);
+  void gfx_pixelart_show_square_outlined_set(int v);
   void gfx_pixelart_submergable_set(int v);
   void gfx_pixelart_wobbles_when_hit_set(int v);
   void gfx_targetted_laser_set(const std::string &v);
@@ -2371,7 +2372,6 @@ public:
   void unused_flag21_set(int v);
   void unused_flag22_set(int v);
   void unused_flag23_set(int v);
-  void unused_flag24_set(int v);
   void unused_flag27_set(int v);
   void unused_flag2_set(int v);
   void unused_flag3_set(int v);

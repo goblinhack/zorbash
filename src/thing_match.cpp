@@ -712,7 +712,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag23() && (what == "unused_flag23")) {
     return true;
   }
-  if (unused_flag24() && (what == "unused_flag24")) {
+  if (gfx_pixelart_show_square_outlined() && (what == "gfx_pixelart_show_square_outlined")) {
     return true;
   }
   if (is_able_to_see_invisible() && (what == "is_able_to_see_invisible")) {
@@ -2192,8 +2192,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag23") {
     return &Thing::unused_flag23;
   }
-  if (what == "unused_flag24") {
-    return &Thing::unused_flag24;
+  if (what == "gfx_pixelart_show_square_outlined") {
+    return &Thing::gfx_pixelart_show_square_outlined;
   }
   if (what == "is_able_to_see_invisible") {
     return &Thing::is_able_to_see_invisible;

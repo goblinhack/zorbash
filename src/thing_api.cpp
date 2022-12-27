@@ -1401,10 +1401,10 @@ int Thing::unused_flag23(void)
   return (tp()->unused_flag23());
 }
 
-int Thing::unused_flag24(void)
+int Thing::gfx_pixelart_show_square_outlined(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag24());
+  return (tp()->gfx_pixelart_show_square_outlined());
 }
 
 int Thing::is_able_to_see_invisible(void)

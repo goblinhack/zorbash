@@ -1101,6 +1101,7 @@ public:
   int gfx_pixelart_show_asleep_anim(void);
   int gfx_pixelart_shown_in_bg(void);
   int gfx_pixelart_show_outlined(void);
+  int gfx_pixelart_show_square_outlined(void);
   int gfx_pixelart_submergable(void);
   int gfx_pixelart_wobbles_when_hit(void);
   int gfx_water(void);
@@ -1953,7 +1954,6 @@ public:
   int unused_flag21(void);
   int unused_flag22(void);
   int unused_flag23(void);
-  int unused_flag24(void);
   int unused_flag27(void);
   int unused_flag2(void);
   int unused_flag3(void);

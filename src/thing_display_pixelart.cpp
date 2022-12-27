@@ -978,7 +978,8 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
     glTranslatef(-mid.x, -mid.y, 0);
   }
 
-  bool outline = tpp->gfx_pixelart_show_outlined();
+  bool square_outline = tpp->gfx_pixelart_show_square_outlined();
+  bool outline        = tpp->gfx_pixelart_show_outlined() || square_outline;
 
   if (! g_render_black_and_white) {
     if (reflection) {
@@ -1033,7 +1034,8 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
           //
           // Compensate for the one pixel of outline
           //
-          tile_blit_outline(tile, point(blit_tl.x, blit_tl.y - 1), point(blit_br.x, blit_br.y - 1), c);
+          tile_blit_outline(tile, point(blit_tl.x, blit_tl.y - 1), point(blit_br.x, blit_br.y - 1), c,
+                            square_outline);
         } else {
           tile_blit(tile, blit_tl, blit_br);
         }
@@ -1067,7 +1069,8 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
           //
           // Compensate for the one pixel of outline
           //
-          tile_blit_outline(tile, point(blit_tl.x, blit_tl.y - 1), point(blit_br.x, blit_br.y - 1), c);
+          tile_blit_outline(tile, point(blit_tl.x, blit_tl.y - 1), point(blit_br.x, blit_br.y - 1), c,
+                            square_outline);
         } else {
           tile_blit(tile, blit_tl, blit_br);
         }

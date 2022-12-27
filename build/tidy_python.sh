@@ -529,7 +529,7 @@ do
       unused_flag21 \
       unused_flag22 \
       unused_flag23 \
-      unused_flag24 \
+      gfx_pixelart_show_square_outlined \
       is_able_to_see_invisible \
       is_invisible \
       unused_flag27 \
