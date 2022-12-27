@@ -4,6 +4,7 @@
 
 #include "my_game.hpp"
 #include "my_monst.hpp"
+#include "my_sound.hpp"
 #include "my_thing.hpp"
 #include "my_ui.hpp"
 #include "my_vector_bounds_check.hpp"
@@ -292,6 +293,7 @@ bool Level::skillbox_chosen(const uint32_t slot)
   } else {
     player->msg("You deactivate %s skill.", what->text_the().c_str());
   }
+  sound_play("coin");
 
   return true;
 }

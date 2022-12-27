@@ -58,7 +58,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="skill_devoted_thrust", text_long_name="devoted thrust")
+    tp_init(name="skill_devoted_thrust", text_long_name="devoted thrust skill")
 
 
 init()

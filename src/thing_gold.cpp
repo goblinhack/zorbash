@@ -4,6 +4,7 @@
 
 #include "my_game.hpp"
 #include "my_monst.hpp"
+#include "my_sound.hpp"
 #include "my_thing.hpp"
 
 const Dice &Thing::gold_value_dice(void)
@@ -84,6 +85,7 @@ int Thing::gold_incr(int v)
   }
   new_infop();
   auto n = (infop()->gold += v);
+  sound_play("gold");
   return n;
 }
 
@@ -109,5 +111,6 @@ int Thing::gold_incr(void)
   }
   new_infop();
   auto n = (infop()->gold++);
+  sound_play("gold");
   return n;
 }

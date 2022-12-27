@@ -2424,6 +2424,7 @@ public:
   void rotting(void);
   void score_add(Thingp victim);
   void score_incr(int);
+  void score_decr(int);
   void score_set(int);
   void secret_door_tick(void);
   void show_botcon_description(void);

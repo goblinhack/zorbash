@@ -19,6 +19,10 @@ bool Thing::on_tick(void)
     return false;
   }
 
+  if (is_skill() && ! is_activated) {
+    return false;
+  }
+
   auto t = split_tokens(on_tick, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];

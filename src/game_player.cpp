@@ -80,6 +80,11 @@ void Game::place_player(void)
         t->skill_add(w);
       }
       if (0) {
+        level->thing_new("gold6", point(x + 1, y));
+        auto w = level->thing_new("skill_gold_to_health", point(x, y));
+        t->skill_add(w);
+      }
+      if (0) {
         auto w = level->thing_new("amulet_endurance", point(x, y - 2));
         t->carry(w);
       }

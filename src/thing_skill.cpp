@@ -4,6 +4,7 @@
 
 #include "my_game.hpp"
 #include "my_monst.hpp"
+#include "my_sound.hpp"
 #include "my_thing.hpp"
 #include "my_ui.hpp"
 #include "my_vector_bounds_check.hpp"
@@ -53,6 +54,7 @@ bool Thing::skill_add(Thingp what)
 
   if (is_player()) {
     wid_skillbox_init();
+    sound_play("skillup");
   }
 
   return true;
@@ -116,6 +118,10 @@ void Thing::skill_deactivate(Thingp what)
   TRACE_NO_INDENT();
   what->is_activated = false;
   game->set_request_to_remake_skillbox();
+  if (is_player()) {
+    msg("You deactivate %s skill.", what->text_the().c_str());
+    sound_play("coin");
+  }
 }
 
 void Thing::skill_activate(Thingp what)
@@ -123,6 +129,10 @@ void Thing::skill_activate(Thingp what)
   TRACE_NO_INDENT();
   what->is_activated = true;
   game->set_request_to_remake_skillbox();
+  if (is_player()) {
+    msg("You activate %s skill.", what->text_the().c_str());
+    sound_play("coin");
+  }
 }
 
 int Thing::skill_enchant_count(const uint32_t slot)

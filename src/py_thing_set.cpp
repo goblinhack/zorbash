@@ -86,6 +86,14 @@ THING_BODY_SET_INT(thing_health_decr, health_decr)
 THING_BODY_SET_INT(thing_health_incr, health_incr)
 THING_BODY_SET_INT(thing_health_set, health_set)
 
+THING_BODY_SET_INT(thing_gold_decr, gold_decr)
+THING_BODY_SET_INT(thing_gold_incr, gold_incr)
+THING_BODY_SET_INT(thing_gold_set, gold_set)
+
+THING_BODY_SET_INT(thing_score_decr, score_decr)
+THING_BODY_SET_INT(thing_score_incr, score_incr)
+THING_BODY_SET_INT(thing_score_set, score_set)
+
 THING_BODY_SET_INT(thing_necrotized_amount_decr, necrotized_amount_decr)
 THING_BODY_SET_INT(thing_necrotized_amount_incr, necrotized_amount_incr)
 THING_BODY_SET_INT(thing_necrotized_amount_set, necrotized_amount_set)

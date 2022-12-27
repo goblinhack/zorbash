@@ -1,91 +1,79 @@
 import my
 
-my.sound_load(volume=1.0, file="data/sounds/misc/clack.wav", name="bonk")
+my.sound_load(volume=0.1, file="data/sounds/impacts/door_hit1.wav", name="door_hit1")
+my.sound_load(volume=0.2, file="data/sounds/creatures/148975__adam_n__squelch_1.wav", name="squelch",)
+my.sound_load(volume=0.2, file="data/sounds/creatures/23733__tim-kahn__squeakyrat.wav", name="squeaky_toy",)
+my.sound_load(volume=0.2, file="data/sounds/creatures/76962__michel88__deaths.wav", name="monst_death1",)
+my.sound_load(volume=0.2, file="data/sounds/creatures/bones1.wav", name="bones1")
+my.sound_load(volume=0.2, file="data/sounds/creatures/bones2.wav", name="bones2")
+my.sound_load(volume=0.2, file="data/sounds/creatures/growl10.wav", name="growl10")
+my.sound_load(volume=0.2, file="data/sounds/creatures/growl1.wav", name="growl1")
+my.sound_load(volume=0.2, file="data/sounds/creatures/growl2.wav", name="growl2")
+my.sound_load(volume=0.2, file="data/sounds/creatures/growl3.wav", name="growl3")
+my.sound_load(volume=0.2, file="data/sounds/creatures/growl4.wav", name="growl4")
+my.sound_load(volume=0.2, file="data/sounds/creatures/growl5.wav", name="growl5")
+my.sound_load(volume=0.2, file="data/sounds/creatures/growl6.wav", name="growl6")
+my.sound_load(volume=0.2, file="data/sounds/creatures/growl7.wav", name="growl7")
+my.sound_load(volume=0.2, file="data/sounds/creatures/growl8.wav", name="growl8")
+my.sound_load(volume=0.2, file="data/sounds/creatures/growl9.wav", name="growl9")
+my.sound_load(volume=0.2, file="data/sounds/creatures/hiss10.wav", name="hiss10")
+my.sound_load(volume=0.2, file="data/sounds/creatures/hiss1.wav", name="hiss1")
+my.sound_load(volume=0.2, file="data/sounds/creatures/hiss2.wav", name="hiss2")
+my.sound_load(volume=0.2, file="data/sounds/creatures/hiss3.wav", name="hiss3")
+my.sound_load(volume=0.2, file="data/sounds/creatures/hiss4.wav", name="hiss4")
+my.sound_load(volume=0.2, file="data/sounds/creatures/hiss5.wav", name="hiss5")
+my.sound_load(volume=0.2, file="data/sounds/creatures/hiss6.wav", name="hiss6")
+my.sound_load(volume=0.2, file="data/sounds/creatures/hiss7.wav", name="hiss7")
+my.sound_load(volume=0.2, file="data/sounds/creatures/hiss8.wav", name="hiss8")
+my.sound_load(volume=0.2, file="data/sounds/creatures/hiss9.wav", name="hiss9")
+my.sound_load(volume=0.2, file="data/sounds/creatures/slime1.wav", name="slime1")
+my.sound_load(volume=0.2, file="data/sounds/creatures/slime2.wav", name="slime2")
+my.sound_load(volume=0.2, file="data/sounds/creatures/slime3.wav", name="slime3")
+my.sound_load(volume=0.2, file="data/sounds/creatures/slime4.wav", name="slime4")
+my.sound_load(volume=0.2, file="data/sounds/creatures/slime5.wav", name="slime5")
+my.sound_load(volume=0.2, file="data/sounds/creatures/slime6.wav", name="slime6")
+my.sound_load(volume=0.2, file="data/sounds/creatures/slime7.wav", name="slime7")
+my.sound_load(volume=0.2, file="data/sounds/creatures/slime8.wav", name="slime8")
+my.sound_load(volume=0.2, file="data/sounds/creatures/slime9.wav", name="slime9")
+my.sound_load(volume=0.2, file="data/sounds/impacts/257709__vmgraw__grunt-2.wav", name="player_hit5",)
+my.sound_load(volume=0.2, file="data/sounds/impacts/404109__deathscyp__dmg-1.wav", name="player_hit2",)
+my.sound_load(volume=0.2, file="data/sounds/impacts/434462__dersuperanton__getting-hit-hugh.wav", name="player_hit1",)
+my.sound_load(volume=0.2, file="data/sounds/impacts/437650__dersuperanton__getting-hit-damage-scream.wav", name="player_hit4",)
+my.sound_load(volume=0.2, file="data/sounds/impacts/443293__deathscyp__wood-break.wav", name="door_break",)
+my.sound_load(volume=0.2, file="data/sounds/impacts/554153__danielvj__door-open.wav", name="door_open",)
+my.sound_load(volume=0.2, file="data/sounds/impacts/82388__robinhood76__01308_man_hit_9.wav", name="player_hit3",)
+my.sound_load(volume=0.2, file="data/sounds/impacts/door_hit2.wav", name="door_hit2")
+my.sound_load(volume=0.2, file="data/sounds/interface/181002__ueffects__s-key.wav", name="keypress",)
+my.sound_load(volume=0.2, file="data/sounds/interface/click2.wav", name="click")
+my.sound_load(volume=0.2, file="data/sounds/misc/drop.wav", name="drop")
+my.sound_load(volume=0.5, file="data/sounds/impacts/437653__dersuperanton__moan-male-beat-punch.wav", name="player_punch")
+my.sound_load(volume=0.5, file="data/sounds/impacts/578808__nomiqbomi__fall-3.wav", name="fall",)
+my.sound_load(volume=0.6, file="data/sounds/impacts/59992__qubodup__swosh-sword-swing.wav", name="sword_swing1",)
+my.sound_load(volume=0.8, file="data/sounds/impacts/268227__xxchr0nosxx__swing.wav", name="sword_swing2",)
+my.sound_load(volume=1.0, file="data/sounds/abilities/lightning_a.wav", name="lightning_a")
+my.sound_load(volume=1.0, file="data/sounds/abilities/lightning_b.wav", name="lightning_b")
+my.sound_load(volume=1.0, file="data/sounds/abilities/teleport.wav", name="teleport")
+my.sound_load(volume=1.0, file="data/sounds/creatures/249686__cylon8472__cthulhu-growl.wav", name="monster_roar_epic",)
+my.sound_load(volume=1.0, file="data/sounds/creatures/487513__nicknamelarry__monster-roar.wav", name="monster_roar",)
+my.sound_load(volume=1.0, file="data/sounds/creatures/56304__syna-max__monster-death-scream.wav", name="monst_death_epic",)
+my.sound_load(volume=1.0, file="data/sounds/impacts/507466__danjocross__clean-fast-swoosh.wav", name="sword_swing3",)
 my.sound_load(volume=1.0, file="data/sounds/impacts/explosion_a.wav", name="explosion_a")
 my.sound_load(volume=1.0, file="data/sounds/impacts/explosion_b.wav", name="explosion_b")
 my.sound_load(volume=1.0, file="data/sounds/impacts/explosion_c.wav", name="explosion_c")
 my.sound_load(volume=1.0, file="data/sounds/impacts/explosion_d.wav", name="explosion_d")
 my.sound_load(volume=1.0, file="data/sounds/impacts/explosion_e.wav", name="explosion_e")
-my.sound_load(volume=1.0, file="data/sounds/abilities/lightning_a.wav", name="lightning_a")
-my.sound_load(volume=1.0, file="data/sounds/abilities/lightning_b.wav", name="lightning_b")
-my.sound_load(volume=1.0, file="data/sounds/abilities/teleport.wav", name="teleport")
-my.sound_load(
-    volume=0.50,
-    file="data/sounds/impacts/437653__dersuperanton__moan-male-beat-punch.wav",
-    name="player_punch",
-)
-my.sound_load(
-    volume=0.25,
-    file="data/sounds/impacts/443293__deathscyp__wood-break.wav",
-    name="door_break",
-)
-my.sound_load(
-    volume=0.25,
-    file="data/sounds/impacts/554153__danielvj__door-open.wav",
-    name="door_open",
-)
-my.sound_load(
-    volume=0.50,
-    file="data/sounds/impacts/578808__nomiqbomi__fall-3.wav",
-    name="fall",
-)
-my.sound_load(
-    volume=0.60,
-    file="data/sounds/impacts/59992__qubodup__swosh-sword-swing.wav",
-    name="sword_swing1",
-)
-my.sound_load(
-    volume=0.80,
-    file="data/sounds/impacts/268227__xxchr0nosxx__swing.wav",
-    name="sword_swing2",
-)
-my.sound_load(
-    volume=1.00,
-    file="data/sounds/impacts/507466__danjocross__clean-fast-swoosh.wav",
-    name="sword_swing3",
-)
-my.sound_load(volume=0.05, file="data/sounds/impacts/door_hit1.wav", name="door_hit1")
-my.sound_load(volume=0.25, file="data/sounds/impacts/door_hit2.wav", name="door_hit2")
-my.sound_load(
-    volume=0.25,
-    file="data/sounds/creatures/23733__tim-kahn__squeakyrat.wav",
-    name="squeaky_toy",
-)
-my.sound_load(
-    volume=1.00,
-    file="data/sounds/creatures/249686__cylon8472__cthulhu-growl.wav",
-    name="monster_roar_epic",
-)
-my.sound_load(
-    volume=1.0,
-    file="data/sounds/creatures/56304__syna-max__monster-death-scream.wav",
-    name="monst_death_epic",
-)
-my.sound_load(
-    volume=1.00,
-    file="data/sounds/creatures/487513__nicknamelarry__monster-roar.wav",
-    name="monster_roar",
-)
-my.sound_load(volume=0.25, file="data/sounds/creatures/growl1.wav", name="growl1")
-my.sound_load(volume=0.25, file="data/sounds/creatures/growl2.wav", name="growl2")
-my.sound_load(volume=0.25, file="data/sounds/creatures/growl3.wav", name="growl3")
-my.sound_load(volume=0.25, file="data/sounds/creatures/growl4.wav", name="growl4")
-my.sound_load(volume=0.25, file="data/sounds/creatures/growl5.wav", name="growl5")
-my.sound_load(volume=0.25, file="data/sounds/creatures/growl6.wav", name="growl6")
-my.sound_load(volume=0.25, file="data/sounds/creatures/growl7.wav", name="growl7")
-my.sound_load(volume=0.25, file="data/sounds/creatures/growl8.wav", name="growl8")
-my.sound_load(volume=0.25, file="data/sounds/creatures/growl9.wav", name="growl9")
-my.sound_load(volume=0.25, file="data/sounds/creatures/growl10.wav", name="growl10")
-my.sound_load(volume=0.25, file="data/sounds/creatures/hiss1.wav", name="hiss1")
-my.sound_load(volume=0.25, file="data/sounds/creatures/hiss2.wav", name="hiss2")
-my.sound_load(volume=0.25, file="data/sounds/creatures/hiss3.wav", name="hiss3")
-my.sound_load(volume=0.25, file="data/sounds/creatures/hiss4.wav", name="hiss4")
-my.sound_load(volume=0.25, file="data/sounds/creatures/hiss5.wav", name="hiss5")
-my.sound_load(volume=0.25, file="data/sounds/creatures/hiss6.wav", name="hiss6")
-my.sound_load(volume=0.25, file="data/sounds/creatures/hiss7.wav", name="hiss7")
-my.sound_load(volume=0.25, file="data/sounds/creatures/hiss8.wav", name="hiss8")
-my.sound_load(volume=0.25, file="data/sounds/creatures/hiss9.wav", name="hiss9")
-my.sound_load(volume=0.25, file="data/sounds/creatures/hiss10.wav", name="hiss10")
+my.sound_load(volume=1.0, file="data/sounds/impacts/splash1.wav", name="splash1")
+my.sound_load(volume=1.0, file="data/sounds/impacts/splash2.wav", name="splash2")
+my.sound_load(volume=1.0, file="data/sounds/impacts/splash3.wav", name="splash3")
+my.sound_load(volume=1.0, file="data/sounds/impacts/splash4.wav", name="splash4")
+my.sound_load(volume=1.0, file="data/sounds/impacts/splash5.wav", name="splash5")
+my.sound_load(volume=1.0, file="data/sounds/impacts/splash6.wav", name="splash6")
+my.sound_load(volume=1.0, file="data/sounds/interface/coin.wav", name="coin")
+my.sound_load(volume=1.0, file="data/sounds/misc/220173__gameaudio__spacey-1up-power-up.wav", name="powerup")
+my.sound_load(volume=1.0, file="data/sounds/misc/511385__mrthenoronha__power-up-8-bit.wav", name="skillup")
+my.sound_load(volume=1.0, file="data/sounds/misc/512216__herkules92__coins.wav", name="gold")
+my.sound_load(volume=1.0, file="data/sounds/misc/630018__flem0527__singular-coin-dropping.wav", name="coindrop")
+my.sound_load(volume=1.0, file="data/sounds/misc/clack.wav", name="bonk")
 my.sound_load(volume=1.0, file="data/sounds/misc/footsteps1.wav", name="footsteps1")
 my.sound_load(volume=1.0, file="data/sounds/misc/footsteps2.wav", name="footsteps2")
 my.sound_load(volume=1.0, file="data/sounds/misc/footsteps3.wav", name="footsteps3")
@@ -94,67 +82,6 @@ my.sound_load(volume=1.0, file="data/sounds/misc/footsteps5.wav", name="footstep
 my.sound_load(volume=1.0, file="data/sounds/misc/footsteps6.wav", name="footsteps6")
 my.sound_load(volume=1.0, file="data/sounds/misc/footsteps7.wav", name="footsteps7")
 my.sound_load(volume=1.0, file="data/sounds/misc/footsteps8.wav", name="footsteps8")
-my.sound_load(volume=1.0, file="data/sounds/impacts/splash1.wav", name="splash1")
-my.sound_load(volume=1.0, file="data/sounds/impacts/splash2.wav", name="splash2")
-my.sound_load(volume=1.0, file="data/sounds/impacts/splash3.wav", name="splash3")
-my.sound_load(volume=1.0, file="data/sounds/impacts/splash4.wav", name="splash4")
-my.sound_load(volume=1.0, file="data/sounds/impacts/splash5.wav", name="splash5")
-my.sound_load(volume=1.0, file="data/sounds/impacts/splash6.wav", name="splash6")
-my.sound_load(
-    volume=0.25,
-    file="data/sounds/creatures/148975__adam_n__squelch_1.wav",
-    name="squelch",
-)
-my.sound_load(volume=0.25, file="data/sounds/creatures/bones1.wav", name="bones1")
-my.sound_load(volume=0.25, file="data/sounds/creatures/bones2.wav", name="bones2")
-my.sound_load(volume=0.25, file="data/sounds/creatures/slime1.wav", name="slime1")
-my.sound_load(volume=0.25, file="data/sounds/creatures/slime2.wav", name="slime2")
-my.sound_load(volume=0.25, file="data/sounds/creatures/slime3.wav", name="slime3")
-my.sound_load(volume=0.25, file="data/sounds/creatures/slime4.wav", name="slime4")
-my.sound_load(volume=0.25, file="data/sounds/creatures/slime5.wav", name="slime5")
-my.sound_load(volume=0.25, file="data/sounds/creatures/slime6.wav", name="slime6")
-my.sound_load(volume=0.25, file="data/sounds/creatures/slime7.wav", name="slime7")
-my.sound_load(volume=0.25, file="data/sounds/creatures/slime8.wav", name="slime8")
-my.sound_load(volume=0.25, file="data/sounds/creatures/slime9.wav", name="slime9")
-my.sound_load(
-    volume=0.25,
-    file="data/sounds/creatures/76962__michel88__deaths.wav",
-    name="monst_death1",
-)
-my.sound_load(
-    volume=0.25,
-    file="data/sounds/impacts/434462__dersuperanton__getting-hit-hugh.wav",
-    name="player_hit1",
-)
-my.sound_load(
-    volume=0.25,
-    file="data/sounds/impacts/404109__deathscyp__dmg-1.wav",
-    name="player_hit2",
-)
-my.sound_load(
-    volume=0.25,
-    file="data/sounds/impacts/82388__robinhood76__01308_man_hit_9.wav",
-    name="player_hit3",
-)
-my.sound_load(
-    volume=0.25,
-    file="data/sounds/impacts/437650__dersuperanton__getting-hit-damage-scream.wav",
-    name="player_hit4",
-)
-my.sound_load(
-    volume=0.25,
-    file="data/sounds/impacts/257709__vmgraw__grunt-2.wav",
-    name="player_hit5",
-)
-my.sound_load(
-    volume=0.25,
-    file="data/sounds/interface/181002__ueffects__s-key.wav",
-    name="keypress",
-)
-my.sound_load(volume=0.25, file="data/sounds/interface/click2.wav", name="click")
-my.sound_load(volume=0.25, file="data/sounds/misc/drop.wav", name="drop")
-
-# my.sound_play(name="click")
 # my.sound_load(volume=1.0, file="data/sounds/misc/clack.wav",               name="clack")
 # my.sound_load(volume=1.0, file="data/sounds/misc/step.wav",                name="step")
 # my.sound_load(volume=1.0, file="data/sounds/misc/bay_door_close.wav",      name="bay_door_close")
@@ -198,7 +125,6 @@ my.sound_load(volume=0.25, file="data/sounds/misc/drop.wav", name="drop")
 # my.sound_load(volume=1.0, file="data/sounds/interface/1up_a.wav",          name="1up_a")
 # my.sound_load(volume=1.0, file="data/sounds/interface/blip.wav",           name="blip")
 # my.sound_load(volume=1.0, file="data/sounds/interface/1up_b.wav",          name="1up_b")
-# my.sound_load(volume=1.0, file="data/sounds/interface/coin.wav",           name="coin")
 # my.sound_load(volume=1.0, file="data/sounds/interface/error.wav",          name="error")
 # my.sound_load(volume=1.0, file="data/sounds/interface/score.wav",          name="score")
 # my.sound_load(volume=1.0, file="data/sounds/interface/dong.wav",           name="dong")

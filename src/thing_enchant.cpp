@@ -5,6 +5,7 @@
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_python.hpp"
+#include "my_sound.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 
@@ -51,6 +52,7 @@ bool Thing::enchant_with_stone(Thingp what)
   what->on_enchant();
   what->enchant_count_incr(1);
   what->damaged_count_set(0);
+  sound_play("powerup");
 
   //
   // Drop an enchantstone
@@ -83,6 +85,7 @@ bool Thing::enchant_without_stone(Thingp what)
   what->on_enchant();
   what->enchant_count_incr(1);
   what->damaged_count_set(0);
+  sound_play("powerup");
 
   return true;
 }

@@ -3366,6 +3366,20 @@ void Thing::score_incr(int v)
   infop()->score += v;
 }
 
+void Thing::score_decr(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
+  new_infop();
+  infop()->score -= v;
+
+  if (infop()->score < 0) {
+    infop()->score = 0;
+  }
+}
+
 ////////////////////////////////////////////////////////////////////////////
 // stats02
 ////////////////////////////////////////////////////////////////////////////
