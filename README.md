@@ -518,3 +518,5 @@ Sound effects
 - Sword sounds by Q.K [found here](https://freesound.org/people/Q.K./)
 - Water splash by launemax [found here](https://freesound.org/people/launemax/)
 - Wood break by Deathscyp [found here](https://freesound.org/people/Deathscyp/)
+- Sword sounds by qubodup [found here](https://freesound.org/people/qubodup/sounds/442769/)
+- Sword sounds by SlavicMagic [found here](https://freesound.org/people/SlavicMagic/sounds/446015/)

@@ -47,7 +47,7 @@ void Game::place_player(void)
         auto w = level->thing_new("armor_lather", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("sword_plutonium", point(x, y));
         t->carry(w);
       }
