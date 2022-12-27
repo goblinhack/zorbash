@@ -12,30 +12,30 @@
 void Level::describe(point p)
 {
   TRACE_NO_INDENT();
-  bool got_one_with_long_text = false;
-
-  dbg("Level describe @%d,%d", p.x, p.y);
-  TRACE_AND_INDENT();
 
   if (! player) {
-    dbg2("Level describe @%d,%d; no, no player", p.x, p.y);
+    return;
+  }
+
+  if (! player->player_is_ready_for_messages()) {
     return;
   }
 
   if (player->is_dead) {
-    dbg2("Level describe @%d,%d; no, dead", p.x, p.y);
     return;
   }
 
   if (game->robot_mode) {
-    dbg2("Level describe @%d,%d; no, robot mode", p.x, p.y);
     return;
   }
 
   if (is_starting) {
-    dbg2("Level describe @%d,%d; no, starting", p.x, p.y);
     return;
   }
+
+  bool got_one_with_long_text = false;
+  dbg("Level describe @%d,%d", p.x, p.y);
+  TRACE_AND_INDENT();
 
   if ((game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
       (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_ENCHANTING_ITEMS) ||
@@ -161,7 +161,7 @@ void Level::describe(point p)
     }
 
     //
-    // Dead monst clog up the screen
+    // Dead monsters clog up the screen
     //
     if (t->is_monst() && t->is_dead) {
       IF_DEBUG2 { t->log("Ignore for describe, monst or dead"); }
@@ -321,15 +321,27 @@ void Level::describe(point p)
   //
   // Filter out boring things if we have more than one item do describe.
   //
+  bool something_to_collect = false;
   if (hover_over_things.size() > 1) {
     std::vector< Thingp > hover_over_things_tmp;
     for (auto t : hover_over_things) {
       if (! t->is_interesting()) {
         continue;
       }
+      if (t->is_collectable()) {
+        something_to_collect = true;
+      }
       hover_over_things_tmp.push_back(t);
     }
     hover_over_things = hover_over_things_tmp;
+  }
+
+  if (0) {
+    CON(" ");
+    for (auto t : hover_over_things) {
+      t->con("describe");
+    }
+    CON("%d items", (int) hover_over_things.size());
   }
 
   if (hover_over_things.size() > 1) {
@@ -338,14 +350,12 @@ void Level::describe(point p)
       auto        k = ::to_string(game->config.key_wait_or_collect);
       std::string text;
 
-      if (player->curr_at == p) {
+      if ((player->curr_at == p) && something_to_collect) {
         if (k == ".") {
           text = "Multiple things here. Press %%fg=yellow$" + k + "%%fg=reset$ to collect.";
         } else {
           text = "Multiple things here. %%fg=yellow$" + k + "%%fg=reset$ to collect.";
         }
-      } else {
-        text = "Multiple things here.";
       }
       BOTCON("%s", text.c_str());
     }
@@ -355,14 +365,12 @@ void Level::describe(point p)
       if (hover_over_things.size() > 1) {
         auto        k = ::to_string(game->config.key_wait_or_collect);
         std::string text;
-        if (player->curr_at == p) {
+        if ((player->curr_at == p) && something_to_collect) {
           if (k == ".") {
             text = "Something is here. Press %%fg=yellow$" + k + "%%fg=reset$ to collect.";
           } else {
             text = "Something is here. %%fg=yellow$" + k + "%%fg=reset$ to collect.";
           }
-        } else {
-          text = "Something is here.";
         }
         BOTCON("%s", text.c_str());
       }
@@ -378,7 +386,7 @@ void Level::describe(Thingp t)
     return;
   }
 
-  if (player->is_dead) {
+  if (! player->player_is_ready_for_messages()) {
     return;
   }
 

@@ -332,6 +332,8 @@ std::initializer_list< std::string > tps = {
     "skill_devoted_thrust_effect",
     "skill_secondary_attack",
     "skill_secondary_attack_effect",
+    "skill_gold_to_health",
+    "skill_gold_to_health_effect",
     "skillstone",
     "small_fire",
     "smoke",
