@@ -11,7 +11,6 @@
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
 <!-- - some weapons crit more                                                                                                                     -->
-<!-- - test main body with freezing and staff of descent                                                                                          -->
 <!-- - kraken guards treasure                                                                                                                     -->
 <!-- - dimension portal                                                                                                                           -->
 <!-- - wort food ? fungas foods and some poisonous?                                                                                               -->

@@ -334,6 +334,12 @@ void Level::describe(point p)
       if (t->is_blood()) {
         continue;
       }
+      if (t->is_water()) {
+        continue;
+      }
+      if (t->is_lava()) {
+        continue;
+      }
       if (t->is_collectable()) {
         something_to_collect = true;
       }

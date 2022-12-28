@@ -130,7 +130,11 @@ bool Thing::is_stuck_check(void)
       stuck = true;
     }
   } else if (level->is_tentacle(curr_at.x, curr_at.y)) {
-    if (buff_is_slippery()) {
+    if (is_tentacle()) {
+      //
+      // ok
+      //
+    } else if (buff_is_slippery()) {
       //
       // ok
       //

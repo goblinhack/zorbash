@@ -334,7 +334,6 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
           continue;
         }
 
-        t->topcon("grappled");
         t->move(curr_at);
         if (t->is_player()) {
           msg("You are grappled by %s.", text_the().c_str());

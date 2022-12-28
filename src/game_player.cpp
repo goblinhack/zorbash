@@ -96,7 +96,7 @@ void Game::place_player(void)
         auto w = level->thing_new("staff_fire", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_cold", point(x, y));
         t->carry(w);
       }
