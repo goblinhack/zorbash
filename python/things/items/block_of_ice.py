@@ -9,7 +9,7 @@ def melt(me, x, y):
     my.thing_msg(me, "The ice melts.")
     for dx in range(-1, 2):
         for dy in range(-1, 2):
-            my.place_at(me, "water", x + dx, y + dy)
+            my.place_at("water", x + dx, y + dy)
             my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "splash6")
             for it in my.level_get_all(me, x + dx, y + dy):
                 if my.thing_is_lava(it) or my.thing_is_fire(it):

@@ -701,11 +701,6 @@ PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (! id) {
-    ERR("%s: Missing 'id'", __FUNCTION__);
-    Py_RETURN_FALSE;
-  }
-
   if (! what) {
     ERR("%s: Missing 'what'", __FUNCTION__);
     Py_RETURN_FALSE;
@@ -728,35 +723,36 @@ PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  auto t = level->thing_find(ThingId(id));
-  if (unlikely(! t)) {
-    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
-    Py_RETURN_FALSE;
+  if (! id) {
+    if (level->thing_new(std::string(what), point(x, y))) {
+      Py_RETURN_TRUE;
+    }
+  } else {
+    auto t = level->thing_find(ThingId(id));
+    if (unlikely(! t)) {
+      ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
+      Py_RETURN_FALSE;
+    }
+
+    if (t->spawn_at(std::string(what), point(x, y))) {
+      Py_RETURN_TRUE;
+    }
   }
 
-  if (t->spawn_at(std::string(what), point(x, y))) {
-    Py_RETURN_TRUE;
-  }
   Py_RETURN_FALSE;
 }
 
 PyObject *place_at(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char    *what = nullptr;
-  uint32_t id   = 0;
-  int      x    = -1;
-  int      y    = -1;
+  char *what = nullptr;
+  int   x    = -1;
+  int   y    = -1;
 
-  static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "x", (char *) "y", nullptr};
+  static char *kwlist[] = {(char *) "what", (char *) "x", (char *) "y", nullptr};
 
-  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Isii", kwlist, &id, &what, &x, &y)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "sii", kwlist, &what, &x, &y)) {
     ERR("%s: Bad args", __FUNCTION__);
-    Py_RETURN_FALSE;
-  }
-
-  if (! id) {
-    ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -775,22 +771,17 @@ PyObject *place_at(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  PY_DBG("%s(%X, %s, %d, %d)", __FUNCTION__, id, what, x, y);
+  PY_DBG("%s(%s, %d, %d)", __FUNCTION__, what, x, y);
 
   auto level = game->get_current_level();
   if (! level) {
     Py_RETURN_FALSE;
   }
 
-  auto t = level->thing_find(ThingId(id));
-  if (unlikely(! t)) {
-    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
-    Py_RETURN_FALSE;
-  }
-
-  if (t->place(std::string(what), point(x, y))) {
+  if (level->thing_new(std::string(what), point(x, y))) {
     Py_RETURN_TRUE;
   }
+
   Py_RETURN_FALSE;
 }
 

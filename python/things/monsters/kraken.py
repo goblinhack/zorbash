@@ -4,7 +4,7 @@ import tp
 
 def on_born(me, x, y):
     # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
-    my.spawn_at_my_position(me, "random_treasure_class_c")
+    my.place_at("random_treasure_class_c", x, y)
 
 
 def on_you_nat_att(me, x, y):

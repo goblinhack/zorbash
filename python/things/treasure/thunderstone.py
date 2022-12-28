@@ -51,7 +51,6 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.collision_hit_priority(self, 5)
-    my.collision_hit_priority(self, 6)
     my.effect_radius(self, 4)
     my.environ_avoids_fire(self, 20)
     my.gfx_ascii_shown(self, True)

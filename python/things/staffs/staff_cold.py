@@ -14,7 +14,7 @@ def on_targetted(me, x, y):
             if distance > radius + 0.5:
                 continue
 
-            my.place_at(me, "block_of_ice", x1, y1)
+            my.place_at("block_of_ice", x1, y1)
 
 
 def on_targetted_radially(me, x, y):
