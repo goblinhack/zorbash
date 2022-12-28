@@ -1,6 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- red targets                                                                                                                                  -->
+<!-- throw attack?                                                                                                                                -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -11,20 +12,16 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - kraken guards treasure                                                                                                                     -->
 <!-- - some weapons crit more                                                                                                                     -->
 <!-- - dimension portal                                                                                                                           -->
 <!-- - wort food ? fungas foods and some poisonous?                                                                                               -->
 <!-- - spider web spawn small spiders?                                                                                                            -->
 <!-- - monsters with random buffs like vampirism would be interesting                                                                             -->
 <!-- - vampiric damage                                                                                                                            -->
-<!-- - This scroll contains a powerful anti-magic. When it is released, all creatures (including yourself) and all items lying on the ground      -->
-<!-- - within your field of view will be exposed to its blast and stripped of magic  - and creatures animated purely by magic will die. Potions,  -->
-<!-- - scrolls, items being held by other creatures and items in your inventory will not be affected.                                             -->
 <!-- - chaos bell of summoning                                                                                                                    -->
 <!-- - crystal chest needs crystal key                                                                                                            -->
 <!-- - teleport block                                                                                                                             -->
-<!-- - invisibility staff / and crystals walls (or chest) that reflect, so can use on yourself or ally                                            -->
+<!-- - crystals walls (or chest) that reflect, so can use on yourself or ally                                                                     -->
 <!-- - cloak of jelly                                                                                                                             -->
 <!-- - need allies                                                                                                                                -->
 <!-- - potion of paralysis                                                                                                                        -->
@@ -41,7 +38,7 @@
 <!--          explode bog tiles to kill boss                                                                                                      -->
 <!-- - boss 3 rat king boss, sewer like level with rats coming out of the walls                                                                   -->
 <!-- - boss 4 goblin king boss, will be happy if the rat king crown is given                                                                      -->
-<!-- - boss 5 water level, kraken? can grab and throw the player                                                                                  -->
+<!-- - boss 5 water level, kraken?                                                                                                                -->
 <!-- - boss 6 ...                                                                                                                                 -->
 <!-- - boss 7 face a clone of yourself                                                                                                            -->
 <!-- - boss 8 Place crystals at the alter of Zorb. This opens a vault. Go inside and battle zorbash.                                              -->
