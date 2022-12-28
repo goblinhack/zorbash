@@ -58,6 +58,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
+    my.gfx_pixelart_show_highlighted(self, True)
     my.health_initial_dice(self, "1d3")
     my.is_able_to_burn(self, True)
     my.is_able_to_fall(self, True)

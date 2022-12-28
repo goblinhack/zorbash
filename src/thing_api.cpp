@@ -1395,10 +1395,10 @@ int Thing::unused_flag22(void)
   return (tp()->unused_flag22());
 }
 
-int Thing::unused_flag23(void)
+int Thing::gfx_pixelart_show_highlighted(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag23());
+  return (tp()->gfx_pixelart_show_highlighted());
 }
 
 int Thing::gfx_pixelart_show_square_outlined(void)

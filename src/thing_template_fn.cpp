@@ -279,6 +279,7 @@ int Tp::gfx_pixelart_shadow_solid(void) const { return _gfx_pixelart_shadow_soli
 int Tp::gfx_pixelart_shadow_very_short(void) const { return _gfx_pixelart_shadow_very_short; }
 int Tp::gfx_pixelart_shadow(void) const { return _gfx_pixelart_shadow; }
 int Tp::gfx_pixelart_show_asleep_anim(void) const { return _gfx_pixelart_show_asleep_anim; }
+int Tp::gfx_pixelart_show_highlighted(void) const { return _gfx_pixelart_show_highlighted; }
 int Tp::gfx_pixelart_shown_in_bg(void) const { return _gfx_pixelart_shown_in_bg; }
 int Tp::gfx_pixelart_show_outlined(void) const { return _gfx_pixelart_show_outlined; }
 int Tp::gfx_pixelart_show_square_outlined(void) const { return _gfx_pixelart_show_square_outlined; }
@@ -703,7 +704,6 @@ int Tp::unused_flag1(void) const { return _unused_flag1; }
 int Tp::unused_flag20(void) const { return _unused_flag20; }
 int Tp::unused_flag21(void) const { return _unused_flag21; }
 int Tp::unused_flag22(void) const { return _unused_flag22; }
-int Tp::unused_flag23(void) const { return _unused_flag23; }
 int Tp::unused_flag27(void) const { return _unused_flag27; }
 int Tp::unused_flag2(void) const { return _unused_flag2; }
 int Tp::unused_flag3(void) const { return _unused_flag3; }
@@ -818,6 +818,7 @@ void Tp::gfx_pixelart_shadow_short_set(int v) { _gfx_pixelart_shadow_short = v; 
 void Tp::gfx_pixelart_shadow_solid_set(int v) { _gfx_pixelart_shadow_solid = v; }
 void Tp::gfx_pixelart_shadow_very_short_set(int v) { _gfx_pixelart_shadow_very_short = v; }
 void Tp::gfx_pixelart_show_asleep_anim_set(int v) { _gfx_pixelart_show_asleep_anim = v; }
+void Tp::gfx_pixelart_show_highlighted_set(int v) { _gfx_pixelart_show_highlighted = v; }
 void Tp::gfx_pixelart_shown_in_bg_set(int v) { _gfx_pixelart_shown_in_bg = v; }
 void Tp::gfx_pixelart_show_outlined_set(int v) { _gfx_pixelart_show_outlined = v; }
 void Tp::gfx_pixelart_show_square_outlined_set(int v) { _gfx_pixelart_show_square_outlined = v; }
@@ -1386,7 +1387,6 @@ void Tp::unused_flag1_set(int v) { _unused_flag1 = v; }
 void Tp::unused_flag20_set(int v) { _unused_flag20 = v; }
 void Tp::unused_flag21_set(int v) { _unused_flag21 = v; }
 void Tp::unused_flag22_set(int v) { _unused_flag22 = v; }
-void Tp::unused_flag23_set(int v) { _unused_flag23 = v; }
 void Tp::unused_flag27_set(int v) { _unused_flag27 = v; }
 void Tp::unused_flag2_set(int v) { _unused_flag2 = v; }
 void Tp::unused_flag3_set(int v) { _unused_flag3 = v; }

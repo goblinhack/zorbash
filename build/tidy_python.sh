@@ -528,7 +528,7 @@ do
       unused_flag20 \
       unused_flag21 \
       unused_flag22 \
-      unused_flag23 \
+      gfx_pixelart_show_highlighted \
       gfx_pixelart_show_square_outlined \
       is_able_to_see_invisible \
       is_invisible \

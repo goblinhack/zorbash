@@ -331,13 +331,7 @@ void Level::describe(point p)
       if (! t->is_interesting()) {
         continue;
       }
-      if (t->is_blood()) {
-        continue;
-      }
-      if (t->is_water()) {
-        continue;
-      }
-      if (t->is_lava()) {
+      if (! t->gfx_pixelart_show_highlighted()) {
         continue;
       }
       if (t->is_collectable()) {

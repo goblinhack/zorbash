@@ -16,6 +16,7 @@ def tp_init(name, tiles=[]):
     my.gfx_pixelart_shadow_long(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_solid(self, True)
+    my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.gfx_pixelart_submergable(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)

@@ -788,20 +788,22 @@ void Thing::blit_outline_highlight(const Tilep tile, const point blit_tl, const 
     tile_blit_outline_only(tile, blit_tl, blit_br, outline_color);
   }
 
-  if (this == game->current_wid_thing_info) {
-    static uint8_t a    = 128;
-    static int     step = 2;
-    static int     dir  = 1;
-    a += dir * step;
-    if (a > 250) {
-      dir = -1;
-    } else if (a < 50) {
-      dir = 1;
-    }
+  if (gfx_pixelart_show_highlighted() && ! immediate_owner()) {
+    if ((this == game->current_wid_thing_info) || (level->cursor && (this->curr_at == level->cursor->curr_at))) {
+      static uint8_t a    = 128;
+      static int     step = 2;
+      static int     dir  = 1;
+      a += dir * step;
+      if (a > 250) {
+        dir = -1;
+      } else if (a < 50) {
+        dir = 1;
+      }
 
-    color outline_color = RED;
-    outline_color.a     = a;
-    tile_blit_outline_only(tile, blit_tl, blit_br, outline_color);
+      color outline_color = RED;
+      outline_color.a     = a;
+      tile_blit_outline_only(tile, blit_tl, blit_br, outline_color);
+    }
   }
 }
 

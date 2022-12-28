@@ -14,6 +14,7 @@ def key_init(name, text_long_name):
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
+    my.gfx_pixelart_show_highlighted(self, True)
     my.gold_value_dice(self, "100")
     my.is_able_to_fall(self, True)
     my.is_able_to_melt(self, True)

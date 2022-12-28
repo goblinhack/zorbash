@@ -10,6 +10,7 @@ def tp_init(name):
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
+    my.gfx_pixelart_show_highlighted(self, True)
     my.is_floating(self, True)
     my.is_loggable(self, True)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

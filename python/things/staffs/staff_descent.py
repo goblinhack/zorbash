@@ -101,6 +101,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
+    my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_targetted_laser(self, "staff_descent_laser")
     my.gfx_targetted_radial(self, "staff_descent_radial")
     my.gold_value_dice(self, "500")

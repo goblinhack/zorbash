@@ -30,6 +30,7 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_oversized_and_on_floor(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
+    my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_submergable(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "1d10")

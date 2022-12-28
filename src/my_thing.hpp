@@ -1100,6 +1100,7 @@ public:
   int gfx_pixelart_shadow_very_short(void);
   int gfx_pixelart_shadow(void);
   int gfx_pixelart_show_asleep_anim(void);
+  int gfx_pixelart_show_highlighted(void);
   int gfx_pixelart_shown_in_bg(void);
   int gfx_pixelart_show_outlined(void);
   int gfx_pixelart_show_square_outlined(void);
@@ -1954,7 +1955,6 @@ public:
   int unused_flag20(void);
   int unused_flag21(void);
   int unused_flag22(void);
-  int unused_flag23(void);
   int unused_flag27(void);
   int unused_flag2(void);
   int unused_flag3(void);

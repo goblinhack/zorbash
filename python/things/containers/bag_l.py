@@ -13,6 +13,7 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
+    my.gfx_pixelart_show_highlighted(self, True)
     my.is_able_to_burn(self, True)
     my.is_able_to_fall(self, True)
     my.is_bag_item_container(self, True)

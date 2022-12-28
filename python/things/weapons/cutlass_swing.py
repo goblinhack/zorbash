@@ -14,6 +14,7 @@ def tp_init(name):
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
+    my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_show_outlined(self, True)
     my.is_loggable(self, True)
     # end sort marker
