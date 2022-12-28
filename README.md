@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- have to move the mouse to recreate red target                                                                                                -->
 <!-- red targets                                                                                                                                  -->
 <!-- throw attack?                                                                                                                                -->
 <!-- ------                                                                                                                                       -->
