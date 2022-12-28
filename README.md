@@ -1,11 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - skills                                                                                                                                     -->
-<!-- - falling in block of ice should fall together                                                                                               -->
-<!-- - some weapons crit more                                                                                                                     -->
 <!-- - tentacle grapple                                                                                                                           -->
-<!-- - test main body with freezing and staff of descent                                                                                          -->
-<!-- - kraken guards treasure                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -16,6 +11,9 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
+<!-- - some weapons crit more                                                                                                                     -->
+<!-- - test main body with freezing and staff of descent                                                                                          -->
+<!-- - kraken guards treasure                                                                                                                     -->
 <!-- - dimension portal                                                                                                                           -->
 <!-- - wort food ? fungas foods and some poisonous?                                                                                               -->
 <!-- - spider web spawn small spiders?                                                                                                            -->
