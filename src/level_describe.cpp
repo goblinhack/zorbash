@@ -102,6 +102,7 @@ void Level::describe(point p)
       if (! t->text_description_short().empty() || ! t->text_description_long().empty()) {
         IF_DEBUG2 { t->log("Add to describe"); }
         got_one_with_long_text |= ! t->text_description_long().empty();
+        got_one_with_long_text |= ! t->on_get_text_description_long_do().empty();
         push_back_if_unique(hover_over_things, t);
       } else {
         IF_DEBUG2 { t->log("Ignore for describe, no text"); }
@@ -177,6 +178,7 @@ void Level::describe(point p)
       if (! t->text_description_short().empty() || ! t->text_description_long().empty()) {
         IF_DEBUG2 { t->log("Add to describe"); }
         got_one_with_long_text |= ! t->text_description_long().empty();
+        got_one_with_long_text |= ! t->on_get_text_description_long_do().empty();
         push_back_if_unique(hover_over_things, t);
       } else {
         IF_DEBUG2 { t->log("Ignore for describe, no text"); }
@@ -256,6 +258,7 @@ void Level::describe(point p)
     if (t->is_described_when_hovering_over()) {
       if (! t->text_description_short().empty() || ! t->text_description_long().empty()) {
         got_one_with_long_text |= ! t->text_description_long().empty();
+        got_one_with_long_text |= ! t->on_get_text_description_long_do().empty();
         IF_DEBUG2 { t->log("Add to describe"); }
         push_back_if_unique(hover_over_things, t);
       } else {
@@ -326,6 +329,9 @@ void Level::describe(point p)
     std::vector< Thingp > hover_over_things_tmp;
     for (auto t : hover_over_things) {
       if (! t->is_interesting()) {
+        continue;
+      }
+      if (t->is_blood()) {
         continue;
       }
       if (t->is_collectable()) {
@@ -428,8 +434,7 @@ void Level::describe(Thingp t)
   }
 
   //
-  // If we're trying to show the player, then don't do that
-  // if we're showing something more interesting from the
+  // If we're trying to show the player, then don't do that if we're showing something more interesting from the
   // inventory.
   //
   auto o = game->current_wid_thing_info;
@@ -440,8 +445,7 @@ void Level::describe(Thingp t)
     }
 
     //
-    // If showing something under the player, then prefer
-    // to keep showing that if nothing else.
+    // If showing something under the player, then prefer to keep showing that if nothing else.
     //
     if (o->curr_at == player->curr_at) {
       dbg2("Describe %s; prefer me over current6", o->to_string().c_str());
