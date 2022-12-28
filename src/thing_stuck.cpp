@@ -129,6 +129,14 @@ bool Thing::is_stuck_check(void)
     } else {
       stuck = true;
     }
+  } else if (level->is_tentacle(curr_at.x, curr_at.y)) {
+    if (buff_is_slippery()) {
+      //
+      // ok
+      //
+    } else {
+      stuck = true;
+    }
   }
 
   if (level->is_barrel(curr_at.x, curr_at.y)) {

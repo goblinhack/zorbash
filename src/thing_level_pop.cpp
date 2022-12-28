@@ -100,6 +100,10 @@ void Thing::level_pop(void)
     i_set_is_sticky = false;
     level->is_sticky_unset(mx, my);
   }
+  if (i_set_is_tentacle) {
+    i_set_is_tentacle = false;
+    level->is_tentacle_unset(mx, my);
+  }
   if (i_set_is_shovable) {
     i_set_is_shovable = false;
     level->is_shovable_unset(mx, my);

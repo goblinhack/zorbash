@@ -313,6 +313,43 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
     }
   }
 
+  if (is_able_to_grapple() && (is_monst() || (is_player() && game->robot_mode))) {
+    //
+    // Someone in our way we can grab?
+    //
+    if (d1000() < tp()->is_able_to_grapple_chance_d1000()) {
+      //
+      // Can the monst shove it into a something bad?
+      //
+      DBG2("Try to grapple");
+      TRACE_AND_INDENT();
+
+      FOR_ALL_NON_INTERNAL_THINGS(level, t, future_pos.x, future_pos.y)
+      {
+        if (! t->is_shovable()) {
+          continue;
+        }
+
+        if (is_friend(t) || same_mob(t)) {
+          continue;
+        }
+
+        t->topcon("grappled");
+        t->move(curr_at);
+        if (t->is_player()) {
+          msg("You are grappled by %s.", text_the().c_str());
+        }
+
+        if (is_player()) {
+          game->tick_begin("Grapple");
+        }
+        clear_move_path("Grapple");
+        return true;
+      }
+      FOR_ALL_THINGS_END()
+    }
+  }
+
   //
   // If moving along a path and we bump into a monster, just stop. Don't auto attack as that might lead to bad things.
   //

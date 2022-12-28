@@ -110,6 +110,10 @@ void Thing::level_push(void)
     i_set_is_sticky = true;
     level->is_sticky_set(mx, my);
   }
+  if (is_tentacle()) {
+    i_set_is_tentacle = true;
+    level->is_tentacle_set(mx, my);
+  }
   if (is_shovable()) {
     i_set_is_shovable = true;
     level->is_shovable_set(mx, my);

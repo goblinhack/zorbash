@@ -232,6 +232,7 @@ public:
   uint64_t i_set_is_staff                   : 1 {};
   uint64_t i_set_is_steam                   : 1 {};
   uint64_t i_set_is_sticky                  : 1 {};
+  uint64_t i_set_is_tentacle                : 1 {};
   uint64_t i_set_is_torch                   : 1 {};
   uint64_t i_set_is_treasure_type           : 1 {};
   uint64_t i_set_is_wall                    : 1 {};

@@ -92,6 +92,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_steam {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_spiderweb {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_sticky {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_tentacle {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_torch {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_treasure_type {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_wall {};
@@ -867,6 +868,8 @@ public:
   uint8_t is_steam(const point p);
   uint8_t is_sticky(const int x, const int y);
   uint8_t is_sticky(const point p);
+  uint8_t is_tentacle(const int x, const int y);
+  uint8_t is_tentacle(const point p);
   uint8_t is_torch(const int x, const int y);
   uint8_t is_torch(const point p);
   uint8_t is_treasure_type(const int x, const int y);
@@ -1135,6 +1138,8 @@ public:
   void is_steam_unset(const int x, const int y);
   void is_sticky_set(const int x, const int y);
   void is_sticky_unset(const int x, const int y);
+  void is_tentacle_set(const int x, const int y);
+  void is_tentacle_unset(const int x, const int y);
   void is_torch_set(const int x, const int y);
   void is_torch_unset(const int x, const int y);
   void is_treasure_type_set(const int x, const int y);

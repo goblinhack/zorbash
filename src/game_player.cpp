@@ -282,7 +282,7 @@ void Game::place_player(void)
         level->thing_new("deep_water", point(x + 3, y + 5));
         level->thing_new("water", point(x + 4, y + 5));
 
-        // level->thing_new("kraken", point(x + 2, y + 2));
+        level->thing_new("kraken", point(x + 2, y + 2));
 
         // level->thing_new("cleaner", point(x + 2, y - 2));
       }
