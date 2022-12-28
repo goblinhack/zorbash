@@ -22,6 +22,177 @@ Tpp tp_find(const std::string &name)
   auto result = tp_name_map.find(name);
 
   if (unlikely(result == tp_name_map.end())) {
+    if (name == "random_food") {
+      return tp_random_food();
+    }
+    if (name == "random_gold") {
+      return tp_random_gold();
+    }
+    if (name == "random_treasure") {
+      return tp_random_treasure();
+    }
+    if (name == "random_item_class_a") {
+      return tp_random_item_class_a();
+    }
+    if (name == "random_item_class_b") {
+      return tp_random_item_class_b();
+    }
+    if (name == "random_item_class_c") {
+      return tp_random_item_class_c();
+    }
+    if (name == "random_item_not_a_container_class_a") {
+      return tp_random_item_not_a_container_class_a();
+    }
+    if (name == "random_item_not_a_container_class_b") {
+      return tp_random_item_not_a_container_class_b();
+    }
+    if (name == "random_item_not_a_container_class_c") {
+      return tp_random_item_not_a_container_class_c();
+    }
+    if (name == "random_weapon_class_a") {
+      return tp_random_weapon_class_a();
+    }
+    if (name == "random_weapon_class_b") {
+      return tp_random_weapon_class_b();
+    }
+    if (name == "random_weapon_class_c") {
+      return tp_random_weapon_class_c();
+    }
+    if (name == "random_treasure_class_a") {
+      return tp_random_treasure_class_a();
+    }
+    if (name == "random_treasure_class_b") {
+      return tp_random_treasure_class_b();
+    }
+    if (name == "random_treasure_class_c") {
+      return tp_random_treasure_class_c();
+    }
+    if (name == "random_staff_class_a") {
+      return tp_random_staff_class_a();
+    }
+    if (name == "random_staff_class_b") {
+      return tp_random_staff_class_b();
+    }
+    if (name == "random_staff_class_c") {
+      return tp_random_staff_class_c();
+    }
+    if (name == "random_ring_class_a") {
+      return tp_random_ring_class_a();
+    }
+    if (name == "random_ring_class_b") {
+      return tp_random_ring_class_b();
+    }
+    if (name == "random_ring_class_c") {
+      return tp_random_ring_class_c();
+    }
+    if (name == "random_dirt") {
+      return tp_random_dirt();
+    }
+    if (name == "random_dry_grass") {
+      return tp_random_dry_grass();
+    }
+    if (name == "random_wet_grass") {
+      return tp_random_wet_grass();
+    }
+    if (name == "random_enchantstone") {
+      return tp_random_enchantstone();
+    }
+    if (name == "random_skillstone") {
+      return tp_random_skillstone();
+    }
+    if (name == "random_foliage") {
+      return tp_random_foliage();
+    }
+    if (name == "random_spiderweb") {
+      return tp_random_spiderweb();
+    }
+    if (name == "random_small_ripple") {
+      return tp_random_small_ripple();
+    }
+    if (name == "random_large_ripple") {
+      return tp_random_large_ripple();
+    }
+    if (name == "random_red_splatter") {
+      return tp_random_red_splatter();
+    }
+    if (name == "random_green_splatter") {
+      return tp_random_green_splatter();
+    }
+    if (name == "random_key") {
+      return tp_random_key();
+    }
+    if (name == "random_potion") {
+      return tp_random_potion();
+    }
+    if (name == "random_staff") {
+      return tp_random_staff();
+    }
+    if (name == "random_ring") {
+      return tp_random_ring();
+    }
+    if (name == "random_weapon") {
+      return tp_random_weapon();
+    }
+    if (name == "random_ascend_dungeon") {
+      return tp_random_ascend_dungeon();
+    }
+    if (name == "random_descend_dungeon") {
+      return tp_random_descend_dungeon();
+    }
+    if (name == "random_brazier") {
+      return tp_random_brazier();
+    }
+    if (name == "random_barrel") {
+      return tp_random_barrel();
+    }
+    if (name == "random_door") {
+      return tp_random_door();
+    }
+    if (name == "random_secret_door") {
+      return tp_random_secret_door();
+    }
+    if (name == "random_mob") {
+      return tp_random_mob();
+    }
+    if (name == "random_ethereal_mob") {
+      return tp_random_ethereal_mob();
+    }
+    if (name == "random_mob_challenge_class_a") {
+      return tp_random_mob_challenge_class_a();
+    }
+    if (name == "random_mob_challenge_class_b") {
+      return tp_random_mob_challenge_class_b();
+    }
+    if (name == "random_red_blood") {
+      return tp_random_red_blood();
+    }
+    if (name == "random_green_blood") {
+      return tp_random_green_blood();
+    }
+    if (name == "random_bones") {
+      return tp_random_bones();
+    }
+    if (name == "random_wall_dungeon") {
+      return tp_random_wall_dungeon();
+    }
+    if (name == "random_sewer_wall") {
+      return tp_random_sewer_wall();
+    }
+    if (name == "random_rock") {
+      return tp_random_rock();
+    }
+    if (name == "random_floor") {
+      return tp_random_floor();
+    }
+    if (name == "random_deco") {
+      return tp_random_deco();
+    }
+    if (name == "random_ascend_sewer") {
+      return tp_random_ascend_sewer();
+    }
+    if (name == "random_descend_sewer") {
+      return tp_random_descend_sewer();
+    }
     return nullptr;
   }
 

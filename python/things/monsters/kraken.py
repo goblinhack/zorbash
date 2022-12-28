@@ -2,6 +2,11 @@ import my
 import tp
 
 
+def on_born(me, x, y):
+    # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
+    my.spawn_at_my_position(me, "random_treasure_class_c")
+
+
 def on_you_nat_att(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monster_roar")
 
@@ -107,6 +112,7 @@ def tp_init(name, text_long_name):
     my.is_interesting(self, True)
     my.is_loggable(self, True)
     my.is_meat(self, True)
+    my.on_born_do(self, "me.on_born()")
     my.is_monst_class_c(self, True)
     my.is_monst(self, True)
     my.is_moveable(self, True)

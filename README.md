@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- red targets                                                                                                                                  -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -10,14 +11,12 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - some weapons crit more                                                                                                                     -->
 <!-- - kraken guards treasure                                                                                                                     -->
+<!-- - some weapons crit more                                                                                                                     -->
 <!-- - dimension portal                                                                                                                           -->
 <!-- - wort food ? fungas foods and some poisonous?                                                                                               -->
 <!-- - spider web spawn small spiders?                                                                                                            -->
 <!-- - monsters with random buffs like vampirism would be interesting                                                                             -->
-<!-- - negation                                                                                                                                   -->
-<!-- - golems killed by negation                                                                                                                  -->
 <!-- - vampiric damage                                                                                                                            -->
 <!-- - This scroll contains a powerful anti-magic. When it is released, all creatures (including yourself) and all items lying on the ground      -->
 <!-- - within your field of view will be exposed to its blast and stripped of magic  - and creatures animated purely by magic will die. Potions,  -->
