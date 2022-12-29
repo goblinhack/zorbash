@@ -100,7 +100,7 @@ void Game::place_player(void)
         auto w = level->thing_new("staff_cold", point(x, y));
         t->carry(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("staff_energy", point(x, y));
         t->carry(w);
       }
@@ -301,7 +301,7 @@ void Game::place_player(void)
           level->thing_new("barrel", point(x + 2, y + 1));
           level->thing_new("rat_giant", point(x + 3, y + 1));
         }
-        if (1) {
+        if (0) {
           level->thing_new("staff_energy", point(x, y + 1));
         }
         // level->thing_new("gargoyle_moving", point(x + 2, y - 5));
