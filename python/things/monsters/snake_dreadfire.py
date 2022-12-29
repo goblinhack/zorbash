@@ -68,6 +68,7 @@ def tp_init(name, text_long_name):
     my.health_initial_dice(self, "1d12")
     my.hunger_clock_tick_freq(self, 50)
     my.is_able_to_fall(self, True)
+    my.is_able_to_fire_at_close_range(self, True)
     my.is_able_to_fire_at(self, True)
     my.is_able_to_freeze(self, True)
     my.is_able_to_rest(self, True)

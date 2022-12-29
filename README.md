@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- electric eel cannot hit eel                                                                                                                  -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -220,7 +221,7 @@ Current status:
 
 Content:
 <!-- begin type marker -->
-- 55 monsters
+- 57 monsters
 - 52 food
 - 19 treasure
 - 13 weapons

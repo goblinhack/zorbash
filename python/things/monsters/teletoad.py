@@ -25,9 +25,6 @@ def on_death(me, x, y):
 
 def on_want_to_fire_at_something(me, target, x, y):  # Return True on doing an action
     if my.pcg_randint(1, 10) < 8:
-        sound = f"growl{my.non_pcg_randint(1, 10)}"
-        if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
-            my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
         my.thing_fire_at(me, "projectile_acid", target)
         return True
     return False
@@ -74,6 +71,7 @@ def tp_init(name, text_long_name):
     my.hunger_clock_tick_freq(self, 50)
     my.hunger_is_insatiable(self, True)
     my.is_able_to_fall(self, True)
+    my.is_able_to_fire_at_close_range(self, True)
     my.is_able_to_fire_at(self, True)
     my.is_able_to_freeze(self, True)
     my.is_able_to_jump_attack_chance_d1000(self, 800)

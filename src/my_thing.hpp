@@ -1161,6 +1161,7 @@ public:
   int is_able_to_collect_keys(void);
   int is_able_to_enchant_items(void);
   int is_able_to_fall(void);
+  int is_able_to_fire_at_close_range(void);
   int is_able_to_fire_at(void);
   int is_able_to_follow(void);
   int is_able_to_freeze(void);
@@ -1366,6 +1367,7 @@ public:
   int is_immune_to_acid(void);
   int is_immune_to_cold(void);
   int is_immune_to_draining(void);
+  int is_immune_to_electricity(void);
   int is_immune_to_fire(void);
   int is_immune_to_necrosis(void);
   int is_immune_to_negation(void);
@@ -1953,8 +1955,6 @@ public:
   int unused_flag19(void);
   int unused_flag1(void);
   int unused_flag20(void);
-  int unused_flag21(void);
-  int unused_flag22(void);
   int unused_flag27(void);
   int unused_flag2(void);
   int unused_flag3(void);

@@ -77,3 +77,9 @@ int Thing::is_immune_to_spiderwebs(void)
   TRACE_NO_INDENT();
   return (tp()->is_immune_to_spiderwebs());
 }
+
+int Thing::is_immune_to_electricity(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_immune_to_electricity());
+}

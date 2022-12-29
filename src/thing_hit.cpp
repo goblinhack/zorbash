@@ -494,9 +494,20 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   }
 
   /////////////////////////////////////////////////////////////////////////
-  // Lightning damage
+  // Lightning / electricity damage
   /////////////////////////////////////////////////////////////////////////
   if (attack_options->attack[ THING_ATTACK_LIGHTNING ]) {
+    if (is_immune_to_electricity()) {
+      if (real_hitter->is_player()) {
+        if (is_player()) {
+          msg("You are immune to electrical damage!");
+        } else if (is_alive_monst()) {
+          msg("%s is immune to electrical damage!", text_The().c_str());
+        }
+      }
+      return false;
+    }
+
     attack_set = true;
     if (! damage) {
       if (is_player()) {

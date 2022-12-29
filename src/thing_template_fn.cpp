@@ -304,6 +304,7 @@ int Tp::is_able_to_change_levels(void) const { return _is_able_to_change_levels;
 int Tp::is_able_to_collect_keys(void) const { return _is_able_to_collect_keys; }
 int Tp::is_able_to_enchant_items(void) const { return _is_able_to_enchant_items; }
 int Tp::is_able_to_fall(void) const { return _is_able_to_fall; }
+int Tp::is_able_to_fire_at_close_range(void) const { return _is_able_to_fire_at_close_range; }
 int Tp::is_able_to_fire_at(void) const { return _is_able_to_fire_at; }
 int Tp::is_able_to_follow(void) const { return _is_able_to_follow; }
 int Tp::is_able_to_freeze(void) const { return _is_able_to_freeze; }
@@ -482,6 +483,7 @@ int Tp::is_humanoid(void) const { return _is_humanoid; }
 int Tp::is_immune_to_acid(void) const { return _is_immune_to_acid; }
 int Tp::is_immune_to_cold(void) const { return _is_immune_to_cold; }
 int Tp::is_immune_to_draining(void) const { return _is_immune_to_draining; }
+int Tp::is_immune_to_electricity(void) const { return _is_immune_to_electricity; }
 int Tp::is_immune_to_fire(void) const { return _is_immune_to_fire; }
 int Tp::is_immune_to_necrosis(void) const { return _is_immune_to_necrosis; }
 int Tp::is_immune_to_negation(void) const { return _is_immune_to_negation; }
@@ -702,8 +704,6 @@ int Tp::unused_flag18(void) const { return _unused_flag18; }
 int Tp::unused_flag19(void) const { return _unused_flag19; }
 int Tp::unused_flag1(void) const { return _unused_flag1; }
 int Tp::unused_flag20(void) const { return _unused_flag20; }
-int Tp::unused_flag21(void) const { return _unused_flag21; }
-int Tp::unused_flag22(void) const { return _unused_flag22; }
 int Tp::unused_flag27(void) const { return _unused_flag27; }
 int Tp::unused_flag2(void) const { return _unused_flag2; }
 int Tp::unused_flag3(void) const { return _unused_flag3; }
@@ -844,6 +844,7 @@ void Tp::is_able_to_change_levels_set(int v) { _is_able_to_change_levels = v; }
 void Tp::is_able_to_collect_keys_set(int v) { _is_able_to_collect_keys = v; }
 void Tp::is_able_to_enchant_items_set(int v) { _is_able_to_enchant_items = v; }
 void Tp::is_able_to_fall_set(int v) { _is_able_to_fall = v; }
+void Tp::is_able_to_fire_at_close_range_set(int v) { _is_able_to_fire_at_close_range = v; }
 void Tp::is_able_to_fire_at_set(int v) { _is_able_to_fire_at = v; }
 void Tp::is_able_to_follow_set(int v) { _is_able_to_follow = v; }
 void Tp::is_able_to_freeze_set(int v) { _is_able_to_freeze = v; }
@@ -1023,6 +1024,7 @@ void Tp::is_humanoid_set(int v) { _is_humanoid = v; }
 void Tp::is_immune_to_acid_set(int v) { _is_immune_to_acid = v; }
 void Tp::is_immune_to_cold_set(int v) { _is_immune_to_cold = v; }
 void Tp::is_immune_to_draining_set(int v) { _is_immune_to_draining = v; }
+void Tp::is_immune_to_electricity_set(int v) { _is_immune_to_electricity = v; }
 void Tp::is_immune_to_fire_set(int v) { _is_immune_to_fire = v; }
 void Tp::is_immune_to_necrosis_set(int v) { _is_immune_to_necrosis = v; }
 void Tp::is_immune_to_negation_set(int v) { _is_immune_to_negation = v; }
@@ -1385,8 +1387,6 @@ void Tp::unused_flag18_set(int v) { _unused_flag18 = v; }
 void Tp::unused_flag19_set(int v) { _unused_flag19 = v; }
 void Tp::unused_flag1_set(int v) { _unused_flag1 = v; }
 void Tp::unused_flag20_set(int v) { _unused_flag20 = v; }
-void Tp::unused_flag21_set(int v) { _unused_flag21 = v; }
-void Tp::unused_flag22_set(int v) { _unused_flag22 = v; }
 void Tp::unused_flag27_set(int v) { _unused_flag27 = v; }
 void Tp::unused_flag2_set(int v) { _unused_flag2 = v; }
 void Tp::unused_flag3_set(int v) { _unused_flag3 = v; }

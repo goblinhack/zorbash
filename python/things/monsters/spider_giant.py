@@ -79,6 +79,7 @@ def tp_init(name, text_long_name):
     my.hunger_clock_tick_freq(self, 50)
     my.hunger_is_insatiable(self, True)
     my.is_able_to_fall(self, True)
+    my.is_able_to_fire_at_close_range(self, True)
     my.is_able_to_fire_at(self, True)
     my.is_able_to_freeze(self, True)
     my.is_able_to_jump_attack_chance_d1000(self, 800)

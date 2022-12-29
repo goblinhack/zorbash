@@ -232,6 +232,7 @@ private:
   int _is_able_to_enchant_items {};
   int _is_able_to_fall {};
   int _is_able_to_fire_at {};
+  int _is_able_to_fire_at_close_range {};
   int _is_able_to_follow {};
   int _is_able_to_freeze {};
   int _is_able_to_grapple {};
@@ -409,6 +410,7 @@ private:
   int _is_immune_to_acid {};
   int _is_immune_to_cold {};
   int _is_immune_to_draining {};
+  int _is_immune_to_electricity {};
   int _is_immune_to_fire {};
   int _is_immune_to_necrosis {};
   int _is_immune_to_negation {};
@@ -631,8 +633,6 @@ private:
   int _unused_flag19 {};
   int _unused_flag2 {};
   int _unused_flag20 {};
-  int _unused_flag21 {};
-  int _unused_flag22 {};
   int _unused_flag27 {};
   int _unused_flag3 {};
   int _unused_flag4 {};
@@ -1286,6 +1286,7 @@ public:
   int is_able_to_collect_keys(void) const;
   int is_able_to_enchant_items(void) const;
   int is_able_to_fall(void) const;
+  int is_able_to_fire_at_close_range(void) const;
   int is_able_to_fire_at(void) const;
   int is_able_to_follow(void) const;
   int is_able_to_freeze(void) const;
@@ -1464,6 +1465,7 @@ public:
   int is_immune_to_acid(void) const;
   int is_immune_to_cold(void) const;
   int is_immune_to_draining(void) const;
+  int is_immune_to_electricity(void) const;
   int is_immune_to_fire(void) const;
   int is_immune_to_necrosis(void) const;
   int is_immune_to_negation(void) const;
@@ -1684,8 +1686,6 @@ public:
   int unused_flag19(void) const;
   int unused_flag1(void) const;
   int unused_flag20(void) const;
-  int unused_flag21(void) const;
-  int unused_flag22(void) const;
   int unused_flag27(void) const;
   int unused_flag2(void) const;
   int unused_flag3(void) const;
@@ -1826,6 +1826,7 @@ public:
   void is_able_to_collect_keys_set(int v);
   void is_able_to_enchant_items_set(int v);
   void is_able_to_fall_set(int v);
+  void is_able_to_fire_at_close_range_set(int v);
   void is_able_to_fire_at_set(int v);
   void is_able_to_follow_set(int v);
   void is_able_to_freeze_set(int v);
@@ -2005,6 +2006,7 @@ public:
   void is_immune_to_acid_set(int v);
   void is_immune_to_cold_set(int v);
   void is_immune_to_draining_set(int v);
+  void is_immune_to_electricity_set(int v);
   void is_immune_to_fire_set(int v);
   void is_immune_to_necrosis_set(int v);
   void is_immune_to_negation_set(int v);
@@ -2370,8 +2372,6 @@ public:
   void unused_flag19_set(int v);
   void unused_flag1_set(int v);
   void unused_flag20_set(int v);
-  void unused_flag21_set(int v);
-  void unused_flag22_set(int v);
   void unused_flag27_set(int v);
   void unused_flag2_set(int v);
   void unused_flag3_set(int v);

@@ -132,6 +132,7 @@ std::initializer_list< std::string > tps = {
     "dry_grass_dead",
     "dry_grass_trampled",
     "eel",
+    "electric_eel",
     "enchantstone",
     "exit1",
     "explosion_cold",

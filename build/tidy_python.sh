@@ -526,8 +526,8 @@ do
       unused_flag19 \
       unused_flag2 \
       unused_flag20 \
-      unused_flag21 \
-      unused_flag22 \
+      is_immune_to_electricity \
+      is_able_to_fire_at_close_range \
       gfx_pixelart_show_highlighted \
       gfx_pixelart_show_square_outlined \
       is_able_to_see_invisible \

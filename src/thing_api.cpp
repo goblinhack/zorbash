@@ -1383,16 +1383,10 @@ int Thing::unused_flag20(void)
   return (tp()->unused_flag20());
 }
 
-int Thing::unused_flag21(void)
+int Thing::is_able_to_fire_at_close_range(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag21());
-}
-
-int Thing::unused_flag22(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->unused_flag22());
+  return (tp()->is_able_to_fire_at_close_range());
 }
 
 int Thing::gfx_pixelart_show_highlighted(void)

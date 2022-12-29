@@ -156,17 +156,19 @@ bool Thing::fire_at_target(void)
       //
       // Too far?
       //
-      auto d = DISTANCE(x, y, curr_at.x, curr_at.y);
-      if (d > distance) {
+      float d = DISTANCE(x, y, curr_at.x, curr_at.y);
+      if (d > distance + 0.5) {
         continue;
       }
 
       //
       // Too close, use melee (that's if we are able to move, unlike a static gargoyle).
       //
-      if (is_moveable()) {
-        if (d < 2) {
-          continue;
+      if (! is_able_to_fire_at_close_range()) {
+        if (is_moveable()) {
+          if (d < 2) {
+            continue;
+          }
         }
       }
 

@@ -52,7 +52,10 @@ bool Thing::enchant_with_stone(Thingp what)
   what->on_enchant();
   what->enchant_count_incr(1);
   what->damaged_count_set(0);
-  sound_play("powerup");
+
+  if (is_player()) {
+    sound_play("powerup");
+  }
 
   //
   // Drop an enchantstone
@@ -85,7 +88,10 @@ bool Thing::enchant_without_stone(Thingp what)
   what->on_enchant();
   what->enchant_count_incr(1);
   what->damaged_count_set(0);
-  sound_play("powerup");
+
+  if (is_player()) {
+    sound_play("powerup");
+  }
 
   return true;
 }

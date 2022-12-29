@@ -73,6 +73,7 @@ def tp_init(name, text_long_name):
     my.health_initial_dice(self, "4")
     my.is_able_to_be_surprised(self, True)
     my.is_able_to_fall(self, True)
+    my.is_able_to_fire_at_close_range(self, True)
     my.is_able_to_fire_at(self, True)
     my.is_able_to_see_in_the_dark(self, True)
     my.is_able_to_shove_chance_d1000(self, 200)
