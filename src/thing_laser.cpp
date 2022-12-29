@@ -154,12 +154,17 @@ bool Thing::laser_fire_at(Thingp item, const std::string &gfx_targetted_laser, T
       TRACE_AND_INDENT();
 
       for (auto target : collatoral_dmg) {
+        IF_DEBUG2 { target->log("This is in the way"); }
+        TRACE_AND_INDENT();
+
         //
         // Ignore things that are too close
         //
         if (target->curr_at == curr_at) {
           continue;
         }
+
+        end = target->last_blit_at;
 
         Thingp laser = nullptr;
         if (! gfx_targetted_laser.empty()) {
