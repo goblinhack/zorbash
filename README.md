@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- throw attack?                                                                                                                                -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -11,6 +10,7 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
+<!-- - throw attack for tentacle?                                                                                                                 -->
 <!-- - some weapons crit more                                                                                                                     -->
 <!-- - dimension portal                                                                                                                           -->
 <!-- - wort food ? fungas foods and some poisonous?                                                                                               -->
