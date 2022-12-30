@@ -87,7 +87,7 @@ bool Thing::thing_sound_play(const std::string &alias)
     }
   }
 
-  con("Played sound %s on any channel volume %f distance %d", alias.c_str(), volume, distance);
+  dbg("Played sound %s on any channel volume %f distance %d", alias.c_str(), volume, distance);
   return true;
 }
 
@@ -183,6 +183,6 @@ bool Thing::thing_sound_play_channel(int channel, const std::string &alias)
     return false;
   }
 
-  con("Played sound %s on channel %d volume %f distance %d", alias.c_str(), channel, volume, distance);
+  dbg("Played sound %s on channel %d volume %f distance %d", alias.c_str(), channel, volume, distance);
   return true;
 }
