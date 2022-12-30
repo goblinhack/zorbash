@@ -22,6 +22,12 @@ bool Thing::thing_sound_play(const std::string &alias)
   if (! player) {
     return false;
   }
+  //
+  // Avoid initial equip sounds
+  //
+  if (! player->ready_for_messages) {
+    return false;
+  }
 
   int distance = distance_to_player();
   if (distance >= DMAP_IS_PASSABLE) {
@@ -97,9 +103,9 @@ bool Thing::thing_sound_play_channel(int channel, const std::string &alias)
   if (! player) {
     return false;
   }
-  if (! player->ready_for_messages) {
-    return false;
-  }
+  //
+  // Avoid initial equip sounds
+  //
   if (! player->ready_for_messages) {
     return false;
   }
