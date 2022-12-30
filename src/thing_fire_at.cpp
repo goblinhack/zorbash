@@ -62,8 +62,8 @@ bool Thing::on_want_to_fire_at_something(Thingp target)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), target->to_short_string().c_str());
 
-    return py_call_bool_fn(mod.c_str(), fn.c_str(), id.id, target->id.id, (unsigned int) curr_at.x,
-                           (unsigned int) curr_at.y);
+    return py_call_bool_fn(mod.c_str(), fn.c_str(), id.id, target->id.id, (unsigned int) target->curr_at.x,
+                           (unsigned int) target->curr_at.y);
   }
 
   ERR("Bad on_want_to_fire_at_something call [%s] expected mod:function, got %d elems",

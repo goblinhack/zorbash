@@ -24,7 +24,7 @@ def on_death(me, x, y):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "monst_death1")
 
 
-def on_want_to_fire_at_something(me, target, x, y):  # Return True on doing an action
+def on_want_to_fire_at_something(me, target, target_x, target_y):  # Return True on doing an action
     if my.pcg_randint(1, 10) < 3:
         my.thing_fire_at(me, "staff_fire_projectile", target)
         return True

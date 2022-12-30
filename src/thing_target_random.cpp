@@ -69,19 +69,24 @@ point Thing::dest_random_get(int d)
 
     if (! is_able_to_walk_through_walls()) {
       if (level->is_rock(x, y) || level->is_wall(x, y)) {
-        dbg2("Try: %d,%d; rock or wall", start.x + dx, start.y + dy);
+        dbg2("Try: %d,%d; rock or wall", x, y);
         continue;
       }
     }
 
+    if (is_hated_by_me(point(x, y))) {
+      dbg2("Try: %d,%d; no hated terrain", x, y);
+      continue;
+    }
+
     if (collision_obstacle(point(x, y))) {
-      dbg2("Try: %d,%d; obstacle", start.x + dx, start.y + dy);
+      dbg2("Try: %d,%d; obstacle", x, y);
       continue;
     }
 
     auto c = terrain_cost_get(point(x, y));
     if (c >= DMAP_LESS_PREFERRED_TERRAIN) {
-      dbg2("Try: %d,%d; less preferred terrain", start.x + dx, start.y + dy);
+      dbg2("Try: %d,%d; less preferred terrain", x, y);
       continue;
     }
 

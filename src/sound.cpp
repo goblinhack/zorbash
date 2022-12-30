@@ -14,6 +14,7 @@ bool sound_init(void)
 {
   TRACE_AND_INDENT();
   Mix_AllocateChannels(16);
+  CON("channels: %d", Mix_AllocateChannels(-1));
 
   sound_init_done = true;
 

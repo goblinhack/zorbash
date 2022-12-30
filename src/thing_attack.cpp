@@ -1137,7 +1137,11 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     // See if we can bypass its defences
     //
-    if (is_player() || is_alive_monst() || (owner && (owner->is_player() || owner->is_alive_monst()))) {
+    if (is_lightning()) {
+      //
+      // Lightning cannot miss
+      //
+    } else if (is_player() || is_alive_monst() || (owner && (owner->is_player() || owner->is_alive_monst()))) {
       if (victim->is_dead) {
         //
         // It's hard to miss a corpse.
@@ -1273,7 +1277,9 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
       }
     }
 
-    if (! missed) {
+    if (missed) {
+      dbg("Missed");
+    } else {
       dbg("Do the hit");
       TRACE_AND_INDENT();
 

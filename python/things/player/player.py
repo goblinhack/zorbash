@@ -6,6 +6,7 @@ import random
 # hitter: arrow / monst
 # real_hitter: who fired the arrow
 def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
+    # my.con("I'm hit {} {:X} {},{} damage {}".format(my.thing_name_get(me), me, x, y, damage))
     if damage <= 5:
         my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, f"player_hit{my.non_pcg_randint(1, 4)}")
     else:

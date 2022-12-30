@@ -30,7 +30,7 @@ def on_born(me, x, y):
         my.thing_set_mob(me, it)
 
 
-def on_want_to_fire_at_something(me, target, x, y):  # Return True on doing an action
+def on_want_to_fire_at_something(me, target, target_x, target_y):  # Return True on doing an action
     if my.pcg_randint(1, 100) < 10:
         my.thing_fire_at(me, "projectile_web", target)
         my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "slime1")

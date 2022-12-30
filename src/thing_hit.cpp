@@ -255,8 +255,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   } else {
     //
     // The real hitter could be a sword. The hitter, the player.
-    // Use this to see if we increase the damage due to any buffs of abilities
-    // of the sword.
+    // Use this to see if we increase the damage due to any buffs of abilities of the sword.
     //
     real_hitter->total_dmg_for_on_attacking_dmg_melee(victim, damage);
     //
@@ -280,6 +279,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         } else if (is_alive_monst()) {
           msg("%s is immune to poison damage!", text_The().c_str());
         }
+      } else {
+        dbg("Is immune to poison");
       }
       return false;
     }
@@ -289,6 +290,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("You take no poison damage!");
       } else if (real_hitter->is_player()) {
         msg("%s takes no poison damage!", text_The().c_str());
+      } else {
+        dbg("Takes no poison damage");
       }
       return false;
     }
@@ -317,6 +320,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("You take no drowning damage!");
       } else if (real_hitter->is_player()) {
         msg("%s takes no drowning damage!", text_The().c_str());
+      } else {
+        dbg("Takes no drowning damage");
       }
       return false;
     }
@@ -334,6 +339,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("You take no bite damage!");
       } else if (real_hitter->is_player()) {
         msg("%s takes no bite damage!", text_The().c_str());
+      } else {
+        dbg("Takes no bite damage");
       }
       return false;
     }
@@ -351,6 +358,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("You take no claw damage!");
       } else if (real_hitter->is_player()) {
         msg("%s takes no claw damage!", text_The().c_str());
+      } else {
+        dbg("Takes no claw damage");
       }
       return false;
     }
@@ -369,7 +378,11 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           msg("You are immune to cold!");
         } else if (is_alive_monst()) {
           msg("%s is immune to cold damage!", text_The().c_str());
+        } else {
+          dbg("Takes no cold damage");
         }
+      } else {
+        dbg("Is immune to cold damage");
       }
       return false;
     }
@@ -379,6 +392,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("You take no cold damage!");
       } else if (real_hitter->is_player()) {
         msg("%s takes no cold damage!", text_The().c_str());
+      } else {
+        dbg("Takes no cold damage");
       }
       return false;
     }
@@ -406,6 +421,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           msg("You are immune to fire!");
         } else if (is_alive_monst()) {
           msg("%s is immune to fire damage!", text_The().c_str());
+        } else {
+          dbg("Is immune to fire damage");
         }
       }
       return false;
@@ -416,6 +433,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("You take no fire damage!");
       } else if (real_hitter->is_player()) {
         msg("%s takes no fire damage!", text_The().c_str());
+      } else {
+        dbg("Takes no fire damage");
       }
       return false;
     }
@@ -444,6 +463,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           msg("You are immune to heat!");
         } else if (is_alive_monst()) {
           msg("%s is immune to heat damage!", text_The().c_str());
+        } else {
+          dbg("Is immune to heat damage");
         }
       }
       return false;
@@ -454,6 +475,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("You take no heat damage!");
       } else if (real_hitter->is_player()) {
         msg("%s takes no heat damage!", text_The().c_str());
+      } else {
+        dbg("Takes no heat damage");
       }
       return false;
     }
@@ -486,6 +509,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("You take no crush damage!");
       } else if (real_hitter->is_player()) {
         msg("%s takes no crush damage!", text_The().c_str());
+      } else {
+        dbg("Takes no crush damage");
       }
       return false;
     }
@@ -503,7 +528,11 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           msg("You are immune to electrical damage!");
         } else if (is_alive_monst()) {
           msg("%s is immune to electrical damage!", text_The().c_str());
+        } else {
+          dbg("Takes no electrical damage");
         }
+      } else {
+        dbg("Is immune to electrical damage");
       }
       return false;
     }
@@ -514,6 +543,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("You take no lightning damage!");
       } else if (real_hitter->is_player()) {
         msg("%s takes no lightning damage!", text_The().c_str());
+      } else {
+        dbg("Takes no electrical damage");
       }
       return false;
     }
@@ -537,6 +568,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("You take no energy damage!");
       } else if (real_hitter->is_player()) {
         msg("%s takes no energy damage!", text_The().c_str());
+      } else {
+        dbg("Takes no energy damage");
       }
       return false;
     }
@@ -563,6 +596,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           msg("You are immune to negation damage!");
         } else if (is_alive_monst()) {
           msg("%s is immune to negation damage!", text_The().c_str());
+        } else {
+          dbg("Takes no negation damage");
         }
       }
       return false;
@@ -573,6 +608,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("You take no negation damage!");
       } else if (real_hitter->is_player()) {
         msg("%s takes no negation damage!", text_The().c_str());
+      } else {
+        dbg("Is immune to negation damage");
       }
       return false;
     }
@@ -592,6 +629,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           msg("You are immune to acid damage!");
         } else if (is_alive_monst()) {
           msg("%s is immune to acid damage!", text_The().c_str());
+        } else {
+          dbg("Is immune to acid damage");
         }
       }
       return false;
@@ -602,6 +641,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("You take no acid damage!");
       } else if (real_hitter->is_player()) {
         msg("%s takes no acid damage!", text_The().c_str());
+      } else {
+        dbg("Takes no acid damage");
       }
       return false;
     }
@@ -627,7 +668,11 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           msg("You are immune to water damage!");
         } else if (is_alive_monst()) {
           msg("%s is immune to water damage!", text_The().c_str());
+        } else {
+          dbg("Is immune to water damage");
         }
+      } else {
+        dbg("Is immune to water damage");
       }
       return false;
     }
@@ -637,6 +682,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("You take no water damage!");
       } else if (real_hitter->is_player()) {
         msg("%s takes no water damage!", text_The().c_str());
+      } else {
+        dbg("Takes no water damage");
       }
       return false;
     }
@@ -661,6 +708,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("You take no digest damage!");
       } else if (real_hitter->is_player()) {
         msg("%s takes no digest damage!", text_The().c_str());
+      } else {
+        dbg("Takes no digest damage");
       }
       return false;
     }
@@ -679,6 +728,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           msg("You are immune to rotting!");
         } else if (is_alive_monst()) {
           msg("%s is immune to rotting!", text_The().c_str());
+        } else {
+          dbg("Takes no rotting damage");
         }
       }
       return false;
@@ -689,6 +740,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("You take no necrosis damage!");
       } else if (real_hitter->is_player()) {
         msg("%s takes no necrosis damage!", text_The().c_str());
+      } else {
+        dbg("Takes no necrosis damage");
       }
       return false;
     }
@@ -714,7 +767,11 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           msg("You are immune to draining!");
         } else if (is_alive_monst()) {
           msg("%s is immune to draining attacks!", text_The().c_str());
+        } else {
+          dbg("Is immune to draining damage");
         }
+      } else {
+        dbg("Is immune to draining damage");
       }
       return false;
     }
@@ -724,6 +781,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("You take no stamina damage!");
       } else if (real_hitter->is_player()) {
         msg("%s takes no stamina damage!", text_The().c_str());
+      } else {
+        dbg("Takes no draining damage");
       }
       return false;
     }
@@ -742,6 +801,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("You take no %s damage!", dmg_type.c_str());
       } else if (real_hitter->is_player()) {
         msg("%s takes no %s damage!", text_The().c_str(), dmg_type.c_str());
+      } else {
+        dbg("Takes no nat damage");
       }
       return false;
     }
@@ -755,6 +816,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("You take no attack damage!");
       } else if (real_hitter->is_player()) {
         msg("%s takes no attack damage!", text_The().c_str());
+      } else {
+        dbg("Takes no nat damage");
       }
       return false;
     }
@@ -2127,6 +2190,9 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
   int hit_and_destroyed;
 
   hit_and_destroyed = ai_hit_actual(hitter, real_hitter, attack_options, damage);
+  if (hit_and_destroyed) {
+    IF_DEBUG2 { hitter->log("Hit and destroyed victim"); }
+  }
 
   return (hit_and_destroyed);
 }

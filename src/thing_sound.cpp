@@ -76,19 +76,18 @@ bool Thing::thing_sound_play(const std::string &alias)
   Mix_VolumeChunk(sound->second->chunk, volume);
 
   if (Mix_PlayChannel(-1 /* first free channel */, sound->second->chunk, 0 /* loops */) == -1) {
-
-    LOG("Cannot play sound %s on any channel", alias.c_str());
+    dbg("Cannot play sound %s on any channel", alias.c_str());
     Mix_HaltChannel(0);
     SDL_ClearError();
 
     if (Mix_PlayChannel(-1 /* first free channel */, sound->second->chunk, 0 /* loops */) == -1) {
-      ERR("Cannot play sound %s: %s", alias.c_str(), Mix_GetError());
+      dbg("Cannot play sound %s: %s", alias.c_str(), Mix_GetError());
       SDL_ClearError();
+      return false;
     }
   }
 
-  DBG("Play sound %s on any channel volume %f distance %d", alias.c_str(), volume, distance);
-
+  con("Played sound %s on any channel volume %f distance %d", alias.c_str(), volume, distance);
   return true;
 }
 
@@ -173,15 +172,17 @@ bool Thing::thing_sound_play_channel(int channel, const std::string &alias)
 
   if (Mix_Playing(channel)) {
     if (Mix_PlayChannel(-1, sound->second->chunk, 0 /* loops */) == -1) {
-      dbg("Cannot play sound %s on channel %d, something else playing", alias.c_str(), channel);
+      dbg("Cannot play sound %s on any channel, originally %d, something else playing", alias.c_str(), channel);
       return false;
+    } else {
+      dbg("Played sound %s on any channel volume %f distance %d", alias.c_str(), volume, distance);
+      return true;
     }
   } else if (Mix_PlayChannel(channel, sound->second->chunk, 0 /* loops */) == -1) {
     dbg("Cannot play sound %s on channel %d", alias.c_str(), channel);
     return false;
   }
 
-  dbg("Play sound %s on channel %d volume %f distance %d", alias.c_str(), channel, volume, distance);
-
+  con("Played sound %s on channel %d volume %f distance %d", alias.c_str(), channel, volume, distance);
   return true;
 }

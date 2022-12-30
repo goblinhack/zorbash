@@ -3,7 +3,7 @@ import tp
 
 
 def on_born(me, x, y):
-    # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
+    # my.con("me      {} {:X} {},{}".format(my.thing_name_get(me), me, x, y))
 
     #
     # Lightning can impact all things in the same pool
@@ -13,17 +13,22 @@ def on_born(me, x, y):
             for water in my.level_flood_fill_get_all_things(me, x, y, "is_water"):
                 water_x, water_y = my.thing_coords_get(water)
 
-                if water_x == x and water_y == y:
-                    continue
-
                 for it in my.level_get_all(water, water_x, water_y):
+                    # my.con("cand    {} {:X} {},{}".format(my.thing_name_get(it), it, water_x, water_y))
                     if it != me:
                         if my.thing_possible_to_attack(me, it):
+                            my.thing_hit(me, it)
                             if my.thing_is_player(it):
                                 my.thing_msg(it, "Current surges through your body!")
 
                             my.thing_fire_at(source, "staff_lightning_laser_fork", it)
             return
+
+        it = source
+        if my.thing_possible_to_attack(me, it):
+            my.thing_hit(me, it)
+            if my.thing_is_player(it):
+                my.thing_msg(it, "Current surges through your body!")
 
 
 #
@@ -32,6 +37,8 @@ def on_born(me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
+    my.dmg_lightning_chance_d1000(self, 0, 1000)  # for electric eel attack
+    my.dmg_lightning_dice(self, "1d10+4")
     my.gfx_ascii_shown(self, True)
     my.is_able_to_attack_owner(self, True)
     my.is_laser(self, True)
