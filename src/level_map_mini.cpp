@@ -131,7 +131,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         } else if (is_mob(x, y)) {
           c = PINK;
         } else if (player && (x == (int) player->curr_at.x) && (y == (int) player->curr_at.y)) {
-          c = PINK;
+          c = WHITE;
         } else if (is_door(x, y)) {
           c = BROWN;
         } else if (is_lava(x, y)) {
@@ -263,7 +263,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         } else if (is_wall(x, y) || is_rock(x, y)) {
           continue;
         } else if (player && (x == (int) player->curr_at.x) && (y == (int) player->curr_at.y)) {
-          c.a = 100;
+          c = WHITE;
         } else if (is_door(x, y)) {
           c.a = 255;
         } else if (is_lava(x, y)) {
