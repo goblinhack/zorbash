@@ -81,6 +81,8 @@ bool Thing::thing_sound_play(const std::string &alias)
     }
   }
 
+  DBG("Play sound %s on any channel volume %f distance %d", alias.c_str(), volume, distance);
+
   return true;
 }
 
@@ -93,6 +95,12 @@ bool Thing::thing_sound_play_channel(int channel, const std::string &alias)
   }
   auto player = level->player;
   if (! player) {
+    return false;
+  }
+  if (! player->ready_for_messages) {
+    return false;
+  }
+  if (! player->ready_for_messages) {
     return false;
   }
 
@@ -159,15 +167,15 @@ bool Thing::thing_sound_play_channel(int channel, const std::string &alias)
 
   if (Mix_Playing(channel)) {
     if (Mix_PlayChannel(-1, sound->second->chunk, 0 /* loops */) == -1) {
-      dbg2("Cannot play sound %s on channel %d, something else playing", alias.c_str(), channel);
+      dbg("Cannot play sound %s on channel %d, something else playing", alias.c_str(), channel);
       return false;
     }
   } else if (Mix_PlayChannel(channel, sound->second->chunk, 0 /* loops */) == -1) {
-    dbg2("Cannot play sound %s on channel %d", alias.c_str(), channel);
+    dbg("Cannot play sound %s on channel %d", alias.c_str(), channel);
     return false;
   }
 
-  dbg2("Play sound %s on channel %d volume %f distance %d", alias.c_str(), channel, volume, distance);
+  dbg("Play sound %s on channel %d volume %f distance %d", alias.c_str(), channel, volume, distance);
 
   return true;
 }
