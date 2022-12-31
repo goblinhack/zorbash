@@ -178,6 +178,10 @@ void Level::check_thing(Thingp t)
   int x = t->curr_at.x;
   int y = t->curr_at.y;
 
+  if (t->level != this) {
+    return;
+  }
+
   if (unlikely(is_oob(x, y))) {
     t->err("Oob thing");
     return;
