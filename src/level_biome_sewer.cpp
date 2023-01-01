@@ -267,7 +267,7 @@ bool Level::create_biome_sewer_pipes(point3d at)
     }
 
     std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > walked = {};
-    int                                                     tries  = 0;
+    int                                                             tries  = 0;
     while (tries < 1000) {
       set(final_pipes, a.x, a.y, true);
       set(walked, a.x, a.y, true);

@@ -257,7 +257,7 @@ public:
   uint64_t is_currently_invisible : 1 {}; // Updated per tick
   uint64_t is_in_lava             : 1 {}; // Updated on level pop/push
   uint64_t is_in_water            : 1 {}; // Updated on level pop/push
-  uint64_t is_ready_for_messages     : 1 {}; // ready to see console messages
+  uint64_t is_ready_for_messages  : 1 {}; // ready to see console messages
 #ifdef ENABLE_DEBUG_THING_SER
   std::string debug_str;
 #endif

@@ -1206,9 +1206,9 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > walked   = {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > pushed   = {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > searched = {};
-  std::deque< point >                                     in;
-  std::deque< point >                                     can_reach_cands;
-  std::deque< Thingp >                                    out;
+  std::deque< point >                                             in;
+  std::deque< point >                                             can_reach_cands;
+  std::deque< Thingp >                                            out;
   in.push_back(start);
   set(pushed, start.x, start.y, true);
 

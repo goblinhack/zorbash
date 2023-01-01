@@ -10,8 +10,8 @@ std::deque< point > Level::flood_fill(point p) const
 {
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > walked = {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > pushed = {};
-  std::deque< point >                                     in;
-  std::deque< point >                                     out;
+  std::deque< point >                                             in;
+  std::deque< point >                                             out;
 
   in.push_back(p);
   set(pushed, p.x, p.y, true);
@@ -67,8 +67,8 @@ std::deque< point > Level::flood_fill_points(point p, std::function< int(Thingp)
 {
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > walked = {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > pushed = {};
-  std::deque< point >                                     in;
-  std::deque< point >                                     out;
+  std::deque< point >                                             in;
+  std::deque< point >                                             out;
 
   in.push_back(p);
   set(pushed, p.x, p.y, true);
@@ -138,8 +138,8 @@ std::deque< Thingp > Level::flood_fill_things(point p, std::function< int(Thingp
 {
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > walked = {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > pushed = {};
-  std::deque< point >                                     in;
-  std::deque< Thingp >                                    out;
+  std::deque< point >                                             in;
+  std::deque< Thingp >                                            out;
 
   in.push_back(p);
   set(pushed, p.x, p.y, true);
