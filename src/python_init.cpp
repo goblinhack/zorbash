@@ -29,7 +29,7 @@ void py_init(char *argv[])
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   auto pythonpath = get_env("PYTHONPATH");
-  CON("INI: PYTHONPATH is currently '%s'", pythonpath.c_str());
+  LOG("INI: PYTHONPATH is currently '%s'", pythonpath.c_str());
   sdl_flush_display();
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -62,12 +62,12 @@ void py_init(char *argv[])
   setenv("PYTHONPATH", newpath.c_str(), 1);
 #endif
 
-  CON("INI: Calling PyImport_AppendInittab");
+  LOG("INI: Calling PyImport_AppendInittab");
   PyImport_AppendInittab("my", +py_my_module_create);
   sdl_flush_display();
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  CON("INI: Calling Py_Initialize");
+  LOG("INI: Calling Py_Initialize");
   Py_Initialize();
   if (g_errored) {
     return;

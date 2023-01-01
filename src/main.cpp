@@ -52,6 +52,7 @@ void quit(void)
   signal(SIGABRT, nullptr); // uninstall our handler
   signal(SIGINT, nullptr);  // uninstall our handler
   signal(SIGPIPE, nullptr); // uninstall our handler
+  signal(SIGFPE, nullptr);  // uninstall our handler
 #endif
 
   if (game) {
@@ -687,6 +688,18 @@ int main(int argc, char *argv[])
   std::wcout.imbue(loc);
 #endif
 
+#ifdef ENABLE_CRASH_HANDLER
+  //
+  // Crash handlers
+  CON("INI: Install crash handlers");
+  signal(SIGSEGV, segv_handler);
+  signal(SIGABRT, segv_handler);
+  signal(SIGINT, ctrlc_handler);
+  signal(SIGILL, ctrlc_handler);
+  signal(SIGPIPE, ctrlc_handler);
+  signal(SIGFPE, ctrlc_handler);
+#endif
+
   //
   // Create and load the last saved game
   //
@@ -741,17 +754,6 @@ int main(int argc, char *argv[])
   std::normal_distribution< double > distribution;
   distribution.param(std::normal_distribution< double >(mean, std).param());
   rng.seed(std::random_device {}());
-
-#ifdef ENABLE_CRASH_HANDLER
-  //
-  // Crash handlers
-  CON("INI: Install crash handlers");
-  signal(SIGSEGV, segv_handler);
-  signal(SIGABRT, segv_handler);
-  signal(SIGINT, ctrlc_handler);
-  signal(SIGILL, ctrlc_handler);
-  signal(SIGPIPE, ctrlc_handler);
-#endif
 
   color_init();
 
@@ -861,7 +863,7 @@ int main(int argc, char *argv[])
   Charmap::init_charmaps();
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  CON("INI: Python init");
+  LOG("INI: Python init");
   py_init(argv);
   if (g_errored) {
     goto loop;

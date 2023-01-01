@@ -811,6 +811,21 @@ void config_game_gfx_update(void)
   }
   TRACE_AND_INDENT();
 
+  //
+  // Need to do this really early on as GL FBOs are created from the map size.
+  //
+  if (g_opt_mini) {
+    MAP_WIDTH                 = MAP_WIDTH_MINI;
+    MAP_HEIGHT                = MAP_HEIGHT_MINI;
+    DUNGEON_GRID_CHUNK_HEIGHT = DUNGEON_GRID_CHUNK_HEIGHT_MINI;
+    DUNGEON_GRID_CHUNK_WIDTH  = DUNGEON_GRID_CHUNK_WIDTH_MINI;
+  } else {
+    MAP_WIDTH                 = MAP_WIDTH_MAX;
+    MAP_HEIGHT                = MAP_HEIGHT_MAX;
+    DUNGEON_GRID_CHUNK_HEIGHT = DUNGEON_GRID_CHUNK_HEIGHT_MAX;
+    DUNGEON_GRID_CHUNK_WIDTH  = DUNGEON_GRID_CHUNK_WIDTH_MAX;
+  }
+
   game->config.tile_width  = TILE_WIDTH_LORES;
   game->config.tile_height = TILE_HEIGHT_LORES;
 
@@ -837,11 +852,44 @@ void config_game_gfx_update(void)
     return;
   }
 
+  if (! game->config.game_pix_scale_height) {
+    ERR("Game->config.game_pix_scale_height is zero");
+    return;
+  }
+
   game->config.game_pix_width  = game->config.window_pix_width / game->config.game_pix_scale_width;
   game->config.game_pix_height = game->config.window_pix_height / game->config.game_pix_scale_height;
+  if (! game->config.game_pix_width) {
+    ERR("game->config.game_pix_width is zero");
+    return;
+  }
+  if (! game->config.game_pix_height) {
+    ERR("game->config.game_pix_height is zero");
+    return;
+  }
 
   game->config.ui_pix_width  = game->config.window_pix_width;
   game->config.ui_pix_height = game->config.window_pix_height;
+
+  if (! MAP_WIDTH) {
+    ERR("MAP_WIDTH zero");
+    return;
+  }
+
+  if (! MAP_HEIGHT) {
+    ERR("MAP_HEIGHT zero");
+    return;
+  }
+
+  if (! TILE_WIDTH) {
+    ERR("TILE_WIDTH zero");
+    return;
+  }
+
+  if (! TILE_HEIGHT) {
+    ERR("TILE_HEIGHT zero");
+    return;
+  }
 
   float tiles_across = game->config.game_pix_width / TILE_WIDTH;
   float tiles_down   = game->config.game_pix_height / TILE_HEIGHT;
@@ -869,6 +917,15 @@ void config_game_gfx_update(void)
 
   game->config.video_w_h_ratio = (double) game->config.game_pix_width / (double) game->config.game_pix_height;
 
+  if (! TILES_VISIBLE_ACROSS) {
+    ERR("TILES_VISIBLE_ACROSS is zero");
+    return;
+  }
+  if (! TILES_VISIBLE_DOWN) {
+    ERR("TILES_VISIBLE_DOWN is zero");
+    return;
+  }
+
   game->config.tile_pixel_width  = game->config.game_pix_width / TILES_VISIBLE_ACROSS;
   game->config.tile_pixel_height = game->config.game_pix_height / TILES_VISIBLE_DOWN;
 
@@ -891,6 +948,15 @@ void config_game_gfx_update(void)
   LOG("SDL: Terminal");
   LOG("SDL: - ascii gl size        : %ux%u", game->config.ascii_gl_width, game->config.ascii_gl_height);
   LOG("SDL: - term size            : %dx%d", TERM_WIDTH, TERM_HEIGHT);
+
+  if (! TERM_WIDTH) {
+    ERR("TERM_WIDTH is zero");
+    return;
+  }
+  if (! TERM_HEIGHT) {
+    ERR("TERM_HEIGHT is zero");
+    return;
+  }
 
   if (TERM_WIDTH >= TERM_WIDTH_MAX) {
     LOG("SDL: - exceeded console max width: %d", TERM_WIDTH);

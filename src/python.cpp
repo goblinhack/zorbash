@@ -58,7 +58,7 @@ void py_add_to_path(const char *path)
 {
   TRACE_AND_INDENT();
 
-  CON("Add python path: %s", path);
+  LOG("Add python path: %s", path);
 
   //
   // NOTE: PySys_SetPath is deprecated.
