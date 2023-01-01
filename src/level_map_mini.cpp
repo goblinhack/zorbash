@@ -45,7 +45,6 @@ bool Level::update_map_mini_should_show_monst(int x, int y)
 
 void Level::update_map_mini(bool showing_two_levels, bool show_faded)
 {
-  CON("UPD");
   TRACE_NO_INDENT();
 
   static int last_rendered;

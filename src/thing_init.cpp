@@ -389,6 +389,11 @@ void Thing::reinit(void)
   }
 
   if (is_cursor()) {
+    //
+    // Update the minimap for the new cursor location.
+    //
+    level->is_map_mini_valid = false;
+
     level->cursor = this;
   }
 }

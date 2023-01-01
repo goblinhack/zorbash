@@ -198,6 +198,11 @@ void Level::cursor_recreate(point curr_at)
   }
 
   //
+  // Update the minimap for the new cursor location.
+  //
+  is_map_mini_valid = false;
+
+  //
   // Why hide it? When scrolling to a new position it's nice to see the cursor pop up,
   //
   // cursor->hide();
