@@ -234,6 +234,7 @@ void Level::cursor_path_draw_straight_line(Thingp it, point start, point end)
 
 void Level::cursor_path_draw_line(Thingp it, const std::vector< point > &move_path)
 {
+  dbg("Create cursor draw path");
   TRACE_AND_INDENT();
 
   game->cursor_move_path = move_path;
@@ -332,6 +333,7 @@ void Level::cursor_path_draw(Thingp it)
 //
 void Level::cursor_path_create(Thingp it)
 {
+  dbg("Create cursor draw create");
   TRACE_AND_INDENT();
 
   if (! cursor) {

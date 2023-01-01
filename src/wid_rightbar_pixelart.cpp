@@ -735,6 +735,7 @@ bool wid_rightbar_pixelart_create(void)
     wid_set_bg_tilename(w, "ui_minimap");
     wid_set_style(w, UI_WID_STYLE_SOLID_NONE);
     wid_set_ignore_events(w, true);
+    wid_set_ignore_scroll_events(w, true);
     wid_lower(w);
 
     int tlx, tly, brx, bry;

@@ -7137,13 +7137,6 @@ bool wid_some_recent_event_occurred(void)
         return true;
       }
     }
-
-    w = wid_find_under_mouse_when_scrolling();
-    if (w) {
-      if (w->name != "wid topcon window") {
-        return true;
-      }
-    }
   }
 
   return false;
