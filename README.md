@@ -1,5 +1,8 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- zorb gets stuck in heat                                                                                                                      -->
+<!-- mini map option placing monsts ok?                                                                                                           -->
+<!-- slowdown on later level                                                                                                                      -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
