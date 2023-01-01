@@ -76,9 +76,9 @@ public:
 };
 
 typedef struct AgeMap_ {
-  std::array< std::array< uint32_t, MAP_HEIGHT >, MAP_WIDTH > val {};
+  std::array< std::array< uint32_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > val {};
 } AgeMap;
 
-extern std::array< std::array< char, MAP_HEIGHT >, MAP_WIDTH > astar_debug;
+extern std::array< std::array< char, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > astar_debug;
 
 #endif

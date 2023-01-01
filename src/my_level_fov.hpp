@@ -7,5 +7,5 @@
 #include "my_game_defs.hpp"
 
 using FovMap = struct FovMap_ {
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > can_see {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > can_see {};
 };

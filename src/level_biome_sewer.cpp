@@ -150,10 +150,10 @@ bool Level::create_biome_sewer_pipes(point3d at)
     return false;
   }
 
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > pipes_template = {};
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > sewer_pipe     = {};
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > final_pipes    = {};
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > failed         = {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > pipes_template = {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > sewer_pipe     = {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > final_pipes    = {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > failed         = {};
 
   //
   // Draw some random pipes
@@ -266,7 +266,7 @@ bool Level::create_biome_sewer_pipes(point3d at)
       b = sewers[ pcg_random_range(0, sewers.size()) ];
     }
 
-    std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > walked = {};
+    std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > walked = {};
     int                                                     tries  = 0;
     while (tries < 1000) {
       set(final_pipes, a.x, a.y, true);

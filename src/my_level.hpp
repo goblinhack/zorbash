@@ -23,81 +23,81 @@
 class Level
 {
 public:
-  std::array< std::array< uint8_t, MAP_HEIGHT * DUNGEON_GAS_RESOLUTION >, MAP_WIDTH * DUNGEON_GAS_RESOLUTION >
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX * DUNGEON_GAS_RESOLUTION >, MAP_WIDTH_MAX * DUNGEON_GAS_RESOLUTION >
       gas_poison_cloud {};
 
   //
   // These are caches for fast lookup in display code
   //
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_gas_blocker {};
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_light_blocker {};
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_light_blocker_for_monst {};
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_obs_destructable {};
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_obs_wall_or_door {};
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_obs_for_jump_landing {};
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _noise_blocker {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_gas_blocker {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_light_blocker {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_light_blocker_for_monst {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_destructable {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_wall_or_door {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_for_jump_landing {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _noise_blocker {};
 
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _fade_in_map {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _gfx_water {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _heatmap {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_able_to_stand_on {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_acid {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_ascend_dungeon {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_ascend_sewer {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_barrel {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_basalt {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_brazier {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_bridge {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_able_to_burn {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_chasm {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_cold {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_combustible {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_corpse {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_corridor {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_currently_pixelart_raycast_lit {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_cursor_path_blocker {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_cursor_path_hazard {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_deep_water {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_descend_dungeon {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_descend_sewer {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_dirt {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_door {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_dry_grass {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_enchantstone {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_fire {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_floor {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_foliage {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_carnivorous_plant {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_food {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_gas_poison {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_gold {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_green_blood {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_hazard {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_heavy {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_block_of_ice {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_key {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_lava {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_mob {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_monst {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_potion {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_red_blood {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_ring {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_ripple {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_rock {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_secret_door {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_shallow_water {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_shovable {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_skillstone {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_smoke {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_steam {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_spiderweb {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_sticky {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_tentacle {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_torch {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_treasure_type {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_wall {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_staff {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_wet_grass {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _fade_in_map {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _gfx_water {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _heatmap {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_able_to_stand_on {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_acid {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_ascend_dungeon {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_ascend_sewer {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_barrel {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_basalt {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_brazier {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_bridge {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_able_to_burn {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_chasm {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_cold {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_combustible {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_corpse {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_corridor {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_currently_pixelart_raycast_lit {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_cursor_path_blocker {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_cursor_path_hazard {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_deep_water {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_descend_dungeon {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_descend_sewer {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_dirt {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_door {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_dry_grass {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_enchantstone {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_fire {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_floor {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_foliage {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_carnivorous_plant {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_food {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_gas_poison {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_gold {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_green_blood {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_hazard {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_heavy {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_block_of_ice {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_key {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_lava {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_mob {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_monst {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_potion {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_red_blood {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_ring {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_ripple {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_rock {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_secret_door {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_shallow_water {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_shovable {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_skillstone {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_smoke {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_steam {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_spiderweb {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_sticky {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_tentacle {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_torch {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_treasure_type {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_wall {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_staff {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_wet_grass {};
 
   //
   // This is what the player has seen on this level, now and forever.
@@ -280,12 +280,12 @@ public:
   //
   // All thing IDs at a given map cell
   //
-  std::array< std::array< std::array< ThingId, MAP_SLOTS >, MAP_HEIGHT >, MAP_WIDTH > all_things_id_at {};
+  std::array< std::array< std::array< ThingId, MAP_SLOTS >, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > all_things_id_at {};
 
   //
   // All thing pointers at a given map cell
   //
-  std::array< std::array< std::vector< Thingp >, MAP_HEIGHT >, MAP_WIDTH > all_things_ptr_at {};
+  std::array< std::array< std::vector< Thingp >, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > all_things_ptr_at {};
 
   //
   // This is what we've lit on this level, so we can restore it
@@ -302,7 +302,7 @@ public:
   //
   // Only used in ascii mode and updated per frame
   //
-  std::array< std::array< fcolor, MAP_HEIGHT >, MAP_WIDTH > _ascii_light_source {};
+  std::array< std::array< fcolor, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _ascii_light_source {};
 
   //
   // Update thing_fini.cpp when adding more references to Thingp
@@ -320,11 +320,11 @@ public:
   //
   // Tile maps for rendering solid blocks of water etc...
   //
-  std::array< std::array< uint8_t, MAP_HEIGHT + 8 >, MAP_WIDTH + 8 > water_tile_map      = {};
-  std::array< std::array< uint8_t, MAP_HEIGHT + 8 >, MAP_WIDTH + 8 > deep_water_tile_map = {};
-  std::array< std::array< uint8_t, MAP_HEIGHT + 8 >, MAP_WIDTH + 8 > lava_tile_map       = {};
-  std::array< std::array< uint8_t, MAP_HEIGHT + 8 >, MAP_WIDTH + 8 > basalt_tile_map     = {};
-  std::array< std::array< uint8_t, MAP_HEIGHT + 8 >, MAP_WIDTH + 8 > chasm_tile_map      = {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX + 8 >, MAP_WIDTH_MAX + 8 > water_tile_map      = {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX + 8 >, MAP_WIDTH_MAX + 8 > deep_water_tile_map = {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX + 8 >, MAP_WIDTH_MAX + 8 > lava_tile_map       = {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX + 8 >, MAP_WIDTH_MAX + 8 > basalt_tile_map     = {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX + 8 >, MAP_WIDTH_MAX + 8 > chasm_tile_map      = {};
 
   bool is_being_destroyed {};
   bool cursor_update_needed {};

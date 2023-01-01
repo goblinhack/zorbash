@@ -45,6 +45,7 @@ bool Level::update_map_mini_should_show_monst(int x, int y)
 
 void Level::update_map_mini(bool showing_two_levels, bool show_faded)
 {
+  CON("UPD");
   TRACE_NO_INDENT();
 
   static int last_rendered;
@@ -319,7 +320,11 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         bool show_monst = update_map_mini_should_show_monst(x, y);
 
         bool no_fade = false;
-        if (show_monst) {
+        if (player && (x == (int) player->curr_at.x) && (y == (int) player->curr_at.y)) {
+          c = WHITE;
+        } else if (cursor && (x == (int) cursor->curr_at.x) && (y == (int) cursor->curr_at.y)) {
+          c = YELLOW;
+        } else if (show_monst) {
           c       = RED;
           no_fade = true;
         } else if (! get(can_see_ever.can_see, x, y)) {
@@ -337,8 +342,6 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         } else if (is_mob(x, y)) {
           c       = PINK;
           no_fade = true;
-        } else if (player && (x == (int) player->curr_at.x) && (y == (int) player->curr_at.y)) {
-          c = WHITE;
         } else if (is_door(x, y)) {
           c = BROWN;
         } else if (is_lava(x, y)) {
@@ -401,11 +404,6 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         if ((x > 0) && (y > 0) && (x < MAP_WIDTH) && (y < MAP_HEIGHT)) {
           if ((game->map_mini_over.x == x) && (game->map_mini_over.y == y)) {
             c = YELLOW;
-          }
-          if (! game->robot_mode) {
-            if ((cursor_at.x == x) && (cursor_at.y == y)) {
-              c = YELLOW;
-            }
           }
         }
 

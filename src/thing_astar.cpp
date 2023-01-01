@@ -10,7 +10,7 @@
 
 #include <limits> // do not remove
 
-std::array< std::array< char, MAP_HEIGHT >, MAP_WIDTH > astar_debug {};
+std::array< std::array< char, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > astar_debug {};
 
 class Nodecost
 {
@@ -56,15 +56,13 @@ class Astar
 public:
   Astar(point s, point g, const Dmap *d) : start(s), goal(g), dmap(d) {}
 
-  static const int                                  width  = MAP_WIDTH;
-  static const int                                  height = MAP_HEIGHT;
-  std::array< std::array< Node *, height >, width > open   = {};
-  std::array< std::array< Node *, height >, width > closed = {};
-  Nodemap                                           open_nodes;
-  Nodemap                                           closed_nodes;
-  point                                             start;
-  point                                             goal;
-  const Dmap                                       *dmap {};
+  std::array< std::array< Node *, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > open   = {};
+  std::array< std::array< Node *, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > closed = {};
+  Nodemap                                                           open_nodes;
+  Nodemap                                                           closed_nodes;
+  point                                                             start;
+  point                                                             goal;
+  const Dmap                                                       *dmap {};
 
   void add_to_open(Node *n)
   {
@@ -122,7 +120,7 @@ public:
   {
     auto next_hop = current->at + delta;
 
-    if ((next_hop.x < 0) || (next_hop.y < 0) || (next_hop.x > width - 1) || (next_hop.y > height - 1)) {
+    if ((next_hop.x < 0) || (next_hop.y < 0) || (next_hop.x > MAP_WIDTH - 1) || (next_hop.y > MAP_HEIGHT - 1)) {
       return;
     }
 
@@ -161,8 +159,8 @@ public:
 
   void cleanup(void)
   {
-    for (auto y = 0; y < height; y++) {
-      for (auto x = 0; x < width; x++) {
+    for (auto y = 0; y < MAP_HEIGHT; y++) {
+      for (auto x = 0; x < MAP_WIDTH; x++) {
         if (open[ x ][ y ]) {
           delete (open[ x ][ y ]);
         }

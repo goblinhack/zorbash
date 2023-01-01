@@ -907,7 +907,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const class Game & > const my)
 
   out << bits(my.t.started);
   out << bits(my.t.things_are_moving);
-  out << bits(false); // robot_mode
+  out << bits(MAP_WIDTH);
+  out << bits(MAP_HEIGHT);
 
   out << bits(my.t.map_mini_over);
   out << bits(my.t.seed);

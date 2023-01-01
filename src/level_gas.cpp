@@ -9,7 +9,7 @@ void Level::tick_gas_poison(void)
 {
   TRACE_NO_INDENT();
 
-  std::array< std::array< uint8_t, MAP_HEIGHT * DUNGEON_GAS_RESOLUTION >, MAP_WIDTH * DUNGEON_GAS_RESOLUTION >
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX * DUNGEON_GAS_RESOLUTION >, MAP_WIDTH_MAX * DUNGEON_GAS_RESOLUTION >
       old_gas_poison_cloud {};
 
 #if 0

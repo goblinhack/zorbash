@@ -17,7 +17,7 @@
 class Grid
 {
 public:
-  std::array< std::array< Roomp, DUNGEON_GRID_CHUNK_HEIGHT >, DUNGEON_GRID_CHUNK_WIDTH > node_rooms {};
+  std::array< std::array< Roomp, DUNGEON_GRID_CHUNK_HEIGHT_MAX >, DUNGEON_GRID_CHUNK_WIDTH_MAX > node_rooms {};
 };
 
 using Dungeonp = class Dungeon *;
@@ -40,11 +40,11 @@ public:
   //
   // Pointers from map position to room
   //
-  std::vector< Roomp >                                   cells_room;
-  int                                                    map_width {MAP_WIDTH};
-  int                                                    map_height {MAP_HEIGHT};
-  int                                                    map_depth {MAP_DEPTH};
-  std::array< std::array< int, MAP_HEIGHT >, MAP_WIDTH > map_jigsaw_buffer_water_depth {};
+  std::vector< Roomp >                                           cells_room;
+  int                                                            map_width {MAP_WIDTH};
+  int                                                            map_height {MAP_HEIGHT};
+  int                                                            map_depth {MAP_DEPTH};
+  std::array< std::array< int, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > map_jigsaw_buffer_water_depth {};
   //
   // High level view of the map.
   //
@@ -207,8 +207,8 @@ public:
   //
   // Used temporarily during level generation.
   //
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > map_save {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > map_curr {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > map_save {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > map_curr {};
 
   char *cell_addr(const int x, const int y, const int z);
   char *cell_addr_no_check(const int x, const int y, const int z);

@@ -309,6 +309,7 @@ void Level::cursor_path_draw(Thingp it, const std::vector< point > &move_path)
 //
 void Level::cursor_path_draw(Thingp it)
 {
+  dbg("cursor path draw");
   TRACE_AND_INDENT();
 
   if (! player) {

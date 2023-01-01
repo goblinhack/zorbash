@@ -472,6 +472,7 @@ static void usage(void)
 
   CON("zorbash, options:");
   CON(" ");
+  CON(" --mini                      -- Use small map.");
   CON(" --ascii                     -- Enable ascii graphics.");
   CON(" --pixelart                  -- Enable pixelart graphics.");
   CON(" ");
@@ -508,6 +509,11 @@ static void parse_args(int argc, char *argv[])
   }
 
   for (i = 1; i < argc; i++) {
+    if (! strcasecmp(argv[ i ], "--mini") || ! strcasecmp(argv[ i ], "-mini")) {
+      g_opt_mini = true;
+      continue;
+    }
+
     if (! strcasecmp(argv[ i ], "--ascii") || ! strcasecmp(argv[ i ], "-ascii")) {
       g_opt_ascii          = true;
       g_opt_ascii_override = true;

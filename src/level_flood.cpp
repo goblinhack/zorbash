@@ -8,8 +8,8 @@
 
 std::deque< point > Level::flood_fill(point p) const
 {
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > walked = {};
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > pushed = {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > walked = {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > pushed = {};
   std::deque< point >                                     in;
   std::deque< point >                                     out;
 
@@ -65,8 +65,8 @@ std::deque< point > Level::flood_fill(point p) const
 
 std::deque< point > Level::flood_fill_points(point p, std::function< int(Thingp) > filter)
 {
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > walked = {};
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > pushed = {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > walked = {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > pushed = {};
   std::deque< point >                                     in;
   std::deque< point >                                     out;
 
@@ -136,8 +136,8 @@ std::deque< point > Level::flood_fill_points(point p, std::function< int(Thingp)
 
 std::deque< Thingp > Level::flood_fill_things(point p, std::function< int(Thingp) > filter)
 {
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > walked = {};
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > pushed = {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > walked = {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > pushed = {};
   std::deque< point >                                     in;
   std::deque< Thingp >                                    out;
 

@@ -194,7 +194,7 @@ void Room::finalize(void)
 
 void Room::dump(void)
 {
-  std::array< std::array< char, MAP_HEIGHT >, MAP_WIDTH > tmp {};
+  std::array< std::array< char, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > tmp {};
   for (auto y = 0; y < height; y++) {
     for (auto x = 0; x < width; x++) {
       set(tmp, x, y, ' ');
@@ -234,7 +234,7 @@ void Room::dump(void)
 
 void Room::con(void)
 {
-  std::array< std::array< char, MAP_HEIGHT >, MAP_WIDTH > tmp {};
+  std::array< std::array< char, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > tmp {};
   for (auto y = 0; y < height; y++) {
     for (auto x = 0; x < width; x++) {
       set(tmp, x, y, ' ');

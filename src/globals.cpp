@@ -17,13 +17,16 @@ char *WORLD_PATH;
 FILE *g_log_stdout;
 FILE *g_log_stderr;
 
-bool g_main_loop_running;
 bool g_die_occurred;             // Fatal error has occurred
 bool g_do_screenshot;            // Grab a screen shot next fram
 bool g_errored;                  // An error has occurred
 bool g_grab_next_key;            // Waiting for key input
 bool g_loading;                  // Currently loading
+bool g_main_loop_running;        // SDL main loop running.
 bool g_need_restart;             // Need to restart game
+bool g_opt_ascii;                // Ascii mode
+bool g_opt_ascii_override;       // Ascii mode forced
+bool g_opt_mini;                 // Smaller map
 bool g_opt_new_game;             // Start in the dungeon menu
 bool g_opt_no_slow_log_flush;    // Do not flush after each console log at start
 bool g_opt_override_debug_level; // Temporary used to disable debugs on load
@@ -32,8 +35,6 @@ bool g_opt_resume;               // Load last snapshot
 bool g_quitting;                 // Exitting the game
 bool g_render_black_and_white;   // Rendering map in black and white
 bool g_saved_snapshot;           // Just saved a snapshot
-bool g_opt_ascii;                // Ascii mode
-bool g_opt_ascii_override;       // Ascii mode forced
 
 // --debug  Basic debug
 // --debug2 Map is visible and memory checks enabled
@@ -50,5 +51,13 @@ std::string g_opt_player_name;
 //
 int TILES_VISIBLE_ACROSS;
 int TILES_VISIBLE_DOWN;
+
+//
+// Flexible map size
+//
+int MAP_HEIGHT;
+int MAP_WIDTH;
+int DUNGEON_GRID_CHUNK_HEIGHT;
+int DUNGEON_GRID_CHUNK_WIDTH;
 
 int g_last_logged_callframes_depth;

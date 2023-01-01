@@ -9,14 +9,16 @@
 //
 // Grid chunks are used to construct the levels and the overall dungeon
 //
-#define DUNGEON_GRID_CHUNK_HEIGHT  3  // Levels are split into grids. Each grid can have a room.
-#define DUNGEON_GRID_CHUNK_WIDTH   3  // Rooms across and down
-#define DUNGEONS_GRID_CHUNK_HEIGHT 10 // The whole underworld
-#define DUNGEONS_GRID_CHUNK_WIDTH  10 //
-#define DUNGEON_MAX_DEPTH          3  // Max difficulty level
-#define DUNGEONS_MAX_DEPTH         8  // Max difficulty level
-#define MAX_GRID_CHUNK_HEIGHT      DUNGEONS_GRID_CHUNK_HEIGHT
-#define MAX_GRID_CHUNK_WIDTH       DUNGEONS_GRID_CHUNK_WIDTH
+#define DUNGEON_GRID_CHUNK_HEIGHT_MAX  6  // Levels are split into grids. Each grid can have a room.
+#define DUNGEON_GRID_CHUNK_WIDTH_MAX   6  // Rooms across and down
+#define DUNGEON_GRID_CHUNK_HEIGHT_MINI 3  // Levels are split into grids. Each grid can have a room.
+#define DUNGEON_GRID_CHUNK_WIDTH_MINI  3  // Rooms across and down
+#define DUNGEONS_GRID_CHUNK_HEIGHT     10 // The whole underworld
+#define DUNGEONS_GRID_CHUNK_WIDTH      10 //
+#define DUNGEON_MAX_DEPTH              3  // Max difficulty level
+#define DUNGEONS_MAX_DEPTH             8  // Max difficulty level
+#define MAX_GRID_CHUNK_HEIGHT          DUNGEONS_GRID_CHUNK_HEIGHT
+#define MAX_GRID_CHUNK_WIDTH           DUNGEONS_GRID_CHUNK_WIDTH
 
 //
 // How granular gas is. This divides up a single tile.
@@ -36,12 +38,19 @@
 
 #define MAP_BORDER_ASCII_AUTO_SCROLL 8 // Ascii map scroll threshold
 
-#define LEVELS_ACROSS MAP_WIDTH // World size; no world yet...
-#define LEVELS_DOWN   MAP_HEIGHT
-#define LEVELS_DEEP   (DUNGEONS_GRID_CHUNK_HEIGHT * 2)
+extern int MAP_HEIGHT;
+extern int MAP_WIDTH;
+extern int DUNGEON_GRID_CHUNK_HEIGHT;
+extern int DUNGEON_GRID_CHUNK_WIDTH;
 
-#define MAP_HEIGHT ((DUNGEON_GRID_CHUNK_HEIGHT * MAP_ROOM_HEIGHT) + (MAP_BORDER_ROOM * 2))
-#define MAP_WIDTH  ((DUNGEON_GRID_CHUNK_WIDTH * MAP_ROOM_WIDTH) + (MAP_BORDER_ROOM * 2))
+#define MAP_HEIGHT_MINI ((DUNGEON_GRID_CHUNK_HEIGHT_MINI * MAP_ROOM_HEIGHT) + (MAP_BORDER_ROOM * 2))
+#define MAP_WIDTH_MINI  ((DUNGEON_GRID_CHUNK_WIDTH_MINI * MAP_ROOM_WIDTH) + (MAP_BORDER_ROOM * 2))
+#define MAP_HEIGHT_MAX  ((DUNGEON_GRID_CHUNK_HEIGHT_MAX * MAP_ROOM_HEIGHT) + (MAP_BORDER_ROOM * 2))
+#define MAP_WIDTH_MAX   ((DUNGEON_GRID_CHUNK_WIDTH_MAX * MAP_ROOM_WIDTH) + (MAP_BORDER_ROOM * 2))
+
+#define LEVELS_ACROSS MAP_WIDTH_MAX // World size; no world yet...
+#define LEVELS_DOWN   MAP_HEIGHT_MAX
+#define LEVELS_DEEP   (DUNGEONS_GRID_CHUNK_HEIGHT * 2)
 
 #define GAME_MONST_HEALTH_BAR_STEPS 16
 #define GAME_MOST_ZOOMED_IN         5

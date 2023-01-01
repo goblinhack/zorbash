@@ -3812,7 +3812,7 @@ void Dungeon::water_fixup_shallows(void)
 //
 void Dungeon::water_fixup(void)
 {
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > cand {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > cand {};
 
   for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {

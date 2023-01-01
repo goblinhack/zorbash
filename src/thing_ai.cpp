@@ -419,7 +419,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   AI_LOG("Init dmap can see");
   TRACE_AND_INDENT();
 
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > can_jump = {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > can_jump = {};
 
   point start((int) curr_at.x, (int) curr_at.y);
   auto  dmap_can_see      = dmap_can_see_get();
@@ -448,7 +448,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
 
   auto ai = aip();
 
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > walked = {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > walked = {};
 
   for (int y = miny; y <= maxy; y++) {
     for (int x = minx; x <= maxx; x++) {
@@ -1203,9 +1203,9 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
 
   point start((int) curr_at.x, (int) curr_at.y);
 
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > walked   = {};
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > pushed   = {};
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > searched = {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > walked   = {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > pushed   = {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > searched = {};
   std::deque< point >                                     in;
   std::deque< point >                                     can_reach_cands;
   std::deque< Thingp >                                    out;

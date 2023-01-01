@@ -22,11 +22,11 @@ public:
   // Unique per level.
   //
   uint32_t levelno {0};
-  uint8_t  width {MAP_WIDTH};
-  uint8_t  height {MAP_HEIGHT};
+  uint8_t  width {MAP_WIDTH_MAX};
+  uint8_t  height {MAP_HEIGHT_MAX};
   uint8_t  depth {0};
 
-  std::array< std::array< std::array< char, MAP_DEPTH >, MAP_HEIGHT >, MAP_WIDTH > data {};
+  std::array< std::array< std::array< char, MAP_DEPTH >, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > data {};
 
   static LevelStaticp level_new(void);
   void                finalize(void);

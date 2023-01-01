@@ -1062,7 +1062,8 @@ std::istream &operator>>(std::istream &in, Bits< class Game & > my)
 
   in >> bits(my.t.started);
   in >> bits(my.t.things_are_moving);
-  in >> bits(my.t.robot_mode);
+  in >> bits(MAP_WIDTH);
+  in >> bits(MAP_HEIGHT);
 
   in >> bits(my.t.map_mini_over);
   in >> bits(my.t.seed);
