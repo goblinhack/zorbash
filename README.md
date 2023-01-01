@@ -2,6 +2,7 @@
 <!-- ------                                                                                                                                       -->
 <!-- zorb gets stuck in heat                                                                                                                      -->
 <!-- mini map option placing monsts ok?                                                                                                           -->
+<!-- center map in mini mode for ascii                                                                                                            -->
 <!-- slowdown on later level                                                                                                                      -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
@@ -62,6 +63,7 @@
 <!-- ------                                                                                                                                       -->
 <!-- - monst head should be on top of armor                                                                                                       -->
 <!-- - rest until better                                                                                                                          -->
+<!-- - auto explore                                                                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Level                                                                                                                                        -->
@@ -85,8 +87,6 @@
 <!--                                                                                                                                              -->
 <!-- Sound                                                                                                                                        -->
 <!-- ------                                                                                                                                       -->
-<!-- - falling noise                                                                                                                              -->
-<!-- - sword noises                                                                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Skills                                                                                                                                       -->
@@ -98,7 +98,6 @@
 <!-- - skill, heroic charge, rush enemy                                                                                                           -->
 <!-- - skill, guaranteed hit, but you have no defense in the next move                                                                            -->
 <!-- - skill, whirl attack, attack 2 or 3 enemies                                                                                                 -->
-<!-- - skill, healing                                                                                                                             -->
 <!-- - skill, defensive mode, recover stamina                                                                                                     -->
 <!-- - skill, kneecap, hobble enemy                                                                                                               -->
 <!-- - skill, switch to defensive                                                                                                                 -->
@@ -167,6 +166,7 @@
 <!--                                                                                                                                              -->
 <!-- Monsts                                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
+<!-- - chccolate golem fires chocolate                                                                                                            -->
 <!-- - ogres and ogre totem                                                                                                                       -->
 <!-- - chickens - battle chickens - lay eggs as food - and they get names                                                                         -->
 <!-- - acid jellies should damage weapons                                                                                                         -->
@@ -177,14 +177,12 @@
 <!-- - shove/lure monsters into webs?                                                                                                             -->
 <!-- - rat pack and king rat / cranium rat                                                                                                        -->
 <!-- - zombie camel?                                                                                                                              -->
-<!-- - new monst? should explode in fire?                                                                                                         -->
 <!-- - sewer wolf?                                                                                                                                -->
 <!-- - invisible monst?                                                                                                                           -->
 <!-- - monster that runs from light ?                                                                                                             -->
 <!-- - tentacles out of the ground that try to surround you                                                                                       -->
 <!-- - creature that pretends to be a stone until close by then sprouts legs                                                                      -->
 <!-- - dungeon walrus; long headed walrus with many tusks                                                                                         -->
-<!-- - gloat - cube like creature that explodes on touch and then its spirit gloats over your death                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Gods                                                                                                                                         -->
