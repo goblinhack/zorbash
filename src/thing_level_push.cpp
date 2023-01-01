@@ -155,18 +155,6 @@ void Thing::level_push(void)
     i_set_is_gold = true;
     level->is_gold_set(x, y);
   }
-  if (is_hazard()) {
-    i_set_is_hazard = true;
-    level->is_hazard_set(x, y);
-  }
-  if (is_cursor_path_hazard()) {
-    i_set_is_cursor_path_hazard = true;
-    level->is_cursor_path_hazard_set(x, y);
-  }
-  if (is_cursor_path_blocker()) {
-    i_set_is_cursor_path_blocker = true;
-    level->is_cursor_path_blocker_set(x, y);
-  }
   if (is_combustible()) {
     i_set_is_combustible = true;
     level->is_combustible_set(x, y);
@@ -215,10 +203,6 @@ void Thing::level_push(void)
     i_set_is_rock = true;
     level->is_rock_set(x, y);
   }
-  if (is_secret_door()) {
-    i_set_is_secret_door = true;
-    level->is_secret_door_set(x, y);
-  }
   if (is_smoke()) {
     i_set_is_smoke = true;
     level->is_smoke_set(x, y);
@@ -252,10 +236,26 @@ void Thing::level_push(void)
     }
   }
 
-  if (! is_dead) {
+  if (! is_dead && ! is_open) {
     if (is_fire()) {
       i_set_is_fire = true;
       level->is_fire_set(x, y);
+    }
+    if (is_secret_door()) {
+      i_set_is_secret_door = true;
+      level->is_secret_door_set(x, y);
+    }
+    if (is_hazard()) {
+      i_set_is_hazard = true;
+      level->is_hazard_set(x, y);
+    }
+    if (is_cursor_path_hazard()) {
+      i_set_is_cursor_path_hazard = true;
+      level->is_cursor_path_hazard_set(x, y);
+    }
+    if (is_cursor_path_blocker()) {
+      i_set_is_cursor_path_blocker = true;
+      level->is_cursor_path_blocker_set(x, y);
     }
     if (is_light_blocker() && ! is_open && ! is_currently_invisible) {
       i_set_is_light_blocker = true;
