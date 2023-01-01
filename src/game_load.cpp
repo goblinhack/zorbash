@@ -406,8 +406,6 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->is_hunger_level_hungry                       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_hunger_level_satiated                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_hunger_level_starving                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->is_in_lava                                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->is_in_water                                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_jumping                                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_key_in_lock                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_moving                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -817,6 +815,12 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
 #endif
       t->init_lights();
       t->light_distance_update();
+
+      //
+      // Do this to update state like "is_in_water" as the water may have been loaded later.
+      //
+      t->level_pop();
+      t->level_push();
     }
   }
 

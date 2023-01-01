@@ -114,31 +114,31 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
         }
       }
 
-      if (floor_string.size() != MAP_WIDTH) {
+      if ((int) floor_string.size() != MAP_WIDTH) {
         DIE("Level floor width mismatch, %d, expected %d", (int) floor_string.size(), MAP_WIDTH);
         Py_RETURN_FALSE;
       }
-      if (floor2_string.size() != MAP_WIDTH) {
+      if ((int) floor2_string.size() != MAP_WIDTH) {
         DIE("Room floor2 width mismatch, %d, expected %d", (int) floor2_string.size(), MAP_WIDTH);
         Py_RETURN_FALSE;
       }
-      if (water_string.size() != MAP_WIDTH) {
+      if ((int) water_string.size() != MAP_WIDTH) {
         DIE("Level water width mismatch, %d, expected %d", (int) water_string.size(), MAP_WIDTH);
         Py_RETURN_FALSE;
       }
-      if (lava_string.size() != MAP_WIDTH) {
+      if ((int) lava_string.size() != MAP_WIDTH) {
         DIE("Level lava width mismatch, %d, expected %d", (int) lava_string.size(), MAP_WIDTH);
         Py_RETURN_FALSE;
       }
-      if (chasm_string.size() != MAP_WIDTH) {
+      if ((int) chasm_string.size() != MAP_WIDTH) {
         DIE("Level chasm width mismatch, %d, expected %d", (int) chasm_string.size(), MAP_WIDTH);
         Py_RETURN_FALSE;
       }
-      if (walls_string.size() != MAP_WIDTH) {
+      if ((int) walls_string.size() != MAP_WIDTH) {
         DIE("Level walls width mismatch, %d, expected %d", (int) walls_string.size(), MAP_WIDTH);
         Py_RETURN_FALSE;
       }
-      if (obj_strings.size() != MAP_WIDTH) {
+      if ((int) obj_strings.size() != MAP_WIDTH) {
         DIE("Level items width mismatch, %d, expected %d", (int) obj_strings.size(), MAP_WIDTH);
         Py_RETURN_FALSE;
       }
@@ -167,19 +167,19 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
         }
       }
 
-      if (floor_string.size() != MAP_WIDTH) {
+      if ((int) floor_string.size() != MAP_WIDTH) {
         ERR("Level floor width mismatch, %d, expected %d", (int) floor_string.size(), MAP_WIDTH);
         Py_RETURN_FALSE;
       }
-      if (water_string.size() != MAP_WIDTH) {
+      if ((int) water_string.size() != MAP_WIDTH) {
         ERR("Level water width mismatch, %d, expected %d", (int) water_string.size(), MAP_WIDTH);
         Py_RETURN_FALSE;
       }
-      if (walls_string.size() != MAP_WIDTH) {
+      if ((int) walls_string.size() != MAP_WIDTH) {
         ERR("Level walls width mismatch, %d, expected %d", (int) walls_string.size(), MAP_WIDTH);
         Py_RETURN_FALSE;
       }
-      if (obj_strings.size() != MAP_WIDTH) {
+      if ((int) obj_strings.size() != MAP_WIDTH) {
         ERR("Level items width mismatch, %d, expected %d", (int) obj_strings.size(), MAP_WIDTH);
         Py_RETURN_FALSE;
       }

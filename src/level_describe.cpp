@@ -17,7 +17,7 @@ void Level::describe(point p)
     return;
   }
 
-  if (! player->player_is_ready_for_messages()) {
+  if (! player->player_is_is_ready_for_messages()) {
     return;
   }
 
@@ -392,7 +392,7 @@ void Level::describe(Thingp t)
     return;
   }
 
-  if (! player->player_is_ready_for_messages()) {
+  if (! player->player_is_is_ready_for_messages()) {
     return;
   }
 

@@ -25,7 +25,7 @@ bool Thing::thing_sound_play(const std::string &alias)
   //
   // Avoid initial equip sounds
   //
-  if (! player->ready_for_messages) {
+  if (! player->is_ready_for_messages) {
     return false;
   }
 
@@ -105,7 +105,7 @@ bool Thing::thing_sound_play_channel(int channel, const std::string &alias)
   //
   // Avoid initial equip sounds
   //
-  if (! player->ready_for_messages) {
+  if (! player->is_ready_for_messages) {
     return false;
   }
 

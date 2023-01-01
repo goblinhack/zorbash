@@ -205,8 +205,8 @@ static void wid_choose_next_dungeons_destroy(Widp w)
   }
 
   if (ctx) {
-    delete ctx;
     oldptr(MTYPE_WID, ctx);
+    delete ctx;
   }
 }
 

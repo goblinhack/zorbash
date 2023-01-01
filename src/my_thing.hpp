@@ -141,8 +141,6 @@ public:
   uint64_t is_hunger_level_hungry                       : 1 {};
   uint64_t is_hunger_level_satiated                     : 1 {};
   uint64_t is_hunger_level_starving                     : 1 {};
-  uint64_t is_in_lava                                   : 1 {};
-  uint64_t is_in_water                                  : 1 {};
   uint64_t is_jumping                                   : 1 {};
   uint64_t is_key_in_lock                               : 1 {}; // key stuck in rusty lock?
   uint64_t is_moving                                    : 1 {}; // is currently moving tiles
@@ -249,15 +247,17 @@ public:
   // and always update game_load.cpp and game_save.cpp
   /////////////////////////////////////////////////////////////////////////
   // Fields not worth saving
+  uint64_t ai_tried_to_wander     : 1 {}; // tried to wander
   uint64_t debug                  : 1 {};
-  uint64_t is_currently_invisible : 1 {}; // Updated per tick
-  uint64_t is_being_dropped       : 1 {};
-  uint64_t is_blitted             : 1 {};
-  uint64_t inited_tiles           : 1 {};
   uint64_t has_external_particle  : 1 {}; // current in motion particle
   uint64_t has_internal_particle  : 1 {}; // current in motion particle
-  uint64_t ai_tried_to_wander     : 1 {}; // tried to wander
-  uint64_t ready_for_messages     : 1 {}; // ready to see console messages
+  uint64_t inited_tiles           : 1 {};
+  uint64_t is_being_dropped       : 1 {};
+  uint64_t is_blitted             : 1 {};
+  uint64_t is_currently_invisible : 1 {}; // Updated per tick
+  uint64_t is_in_lava             : 1 {}; // Updated on level pop/push
+  uint64_t is_in_water            : 1 {}; // Updated on level pop/push
+  uint64_t is_ready_for_messages     : 1 {}; // ready to see console messages
 #ifdef ENABLE_DEBUG_THING_SER
   std::string debug_str;
 #endif
@@ -520,8 +520,8 @@ public:
   bool particle_anim_exists(void);
   bool path_pop_next_move(ThingMoveReason);
   bool place(const std::string &what, const point p);
-  bool player_is_ready_for_messages(std::string &why);
-  bool player_is_ready_for_messages(void);
+  bool player_is_is_ready_for_messages(std::string &why);
+  bool player_is_is_ready_for_messages(void);
   bool player_is_ready_for_thing_info(void);
   bool possible_to_attack_at(point at);
   bool possible_to_attack(const Thingp it);

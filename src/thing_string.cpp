@@ -130,7 +130,7 @@ std::string Thing::to_dbg_string(void)
   return (string_sprintf(
       "L%d %" PRIX32
       " %s (%d,%d)%s%s%s%s%s%s%s%s%s%s%s%s"
-      "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
+      "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s)",
@@ -143,12 +143,12 @@ std::string Thing::to_dbg_string(void)
       is_scheduled_for_death ? ", is_scheduled_for_death" : "", is_dying ? ", is_dying" : "",
       is_facing_left ? ", is_facing_left" : "", is_fadeup ? ", is_fadeup" : "", is_falling ? ", is_falling" : "",
       is_hidden ? ", is_hidden" : "", is_hunger_level_hungry ? ", is_hunger_level_hungry" : "",
-      is_in_lava ? ", is_in_lava" : "", is_in_water ? ", is_in_water" : "", is_jumping ? ", is_jumping" : "",
-      is_moving ? ", is_moving" : "", is_visible_to_player ? ", is_visible_to_player" : "",
-      is_open ? ", is_open" : "", is_resurrected ? ", is_resurrected" : "",
-      is_resurrecting ? ", is_resurrecting" : "", is_resurrection_blocked ? ", is_resurrection_blocked" : "",
-      is_sleeping ? ", is_sleeping" : "", is_hunger_level_starving ? ", is_hunger_level_starving" : "",
-      is_the_grid ? ", is_the_grid" : "", is_waiting_to_ascend_dungeon ? ", is_waiting_to_ascend_dungeon" : "",
+      is_jumping ? ", is_jumping" : "", is_moving ? ", is_moving" : "",
+      is_visible_to_player ? ", is_visible_to_player" : "", is_open ? ", is_open" : "",
+      is_resurrected ? ", is_resurrected" : "", is_resurrecting ? ", is_resurrecting" : "",
+      is_resurrection_blocked ? ", is_resurrection_blocked" : "", is_sleeping ? ", is_sleeping" : "",
+      is_hunger_level_starving ? ", is_hunger_level_starving" : "", is_the_grid ? ", is_the_grid" : "",
+      is_waiting_to_ascend_dungeon ? ", is_waiting_to_ascend_dungeon" : "",
       is_waiting_to_ascend_sewer ? ", is_waiting_to_ascend_sewer" : "",
       is_waiting_to_descend_dungeon ? ", is_waiting_to_descend_dungeon" : "",
       is_waiting_to_descend_sewer ? ", is_waiting_to_descend_sewer" : "",
@@ -196,7 +196,7 @@ std::string Thing::to_dbg_saved_string(void)
       " %s (%d,%d)%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
-      "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
+      "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s)",
       level->dungeon_walk_order_level_no, id.id, tp() ? tp()->name().c_str() : "notp", curr_at.x, curr_at.y,
       has_ever_moved ? ", has_ever_moved" : "", has_light ? ", has_light" : "",
@@ -206,12 +206,12 @@ std::string Thing::to_dbg_saved_string(void)
       is_scheduled_for_death ? ", is_scheduled_for_death" : "", is_dying ? ", is_dying" : "",
       is_facing_left ? ", is_facing_left" : "", is_fadeup ? ", is_fadeup" : "", is_falling ? ", is_falling" : "",
       is_hidden ? ", is_hidden" : "", is_hunger_level_hungry ? ", is_hunger_level_hungry" : "",
-      is_in_lava ? ", is_in_lava" : "", is_in_water ? ", is_in_water" : "", is_jumping ? ", is_jumping" : "",
-      is_moving ? ", is_moving" : "", is_visible_to_player ? ", is_visible_to_player" : "",
-      is_open ? ", is_open" : "", is_resurrected ? ", is_resurrected" : "",
-      is_resurrecting ? ", is_resurrecting" : "", is_resurrection_blocked ? ", is_resurrection_blocked" : "",
-      is_sleeping ? ", is_sleeping" : "", is_hunger_level_starving ? ", is_hunger_level_starving" : "",
-      is_the_grid ? ", is_the_grid" : "", is_waiting_to_ascend_dungeon ? ", is_waiting_to_ascend_dungeon" : "",
+      is_jumping ? ", is_jumping" : "", is_moving ? ", is_moving" : "",
+      is_visible_to_player ? ", is_visible_to_player" : "", is_open ? ", is_open" : "",
+      is_resurrected ? ", is_resurrected" : "", is_resurrecting ? ", is_resurrecting" : "",
+      is_resurrection_blocked ? ", is_resurrection_blocked" : "", is_sleeping ? ", is_sleeping" : "",
+      is_hunger_level_starving ? ", is_hunger_level_starving" : "", is_the_grid ? ", is_the_grid" : "",
+      is_waiting_to_ascend_dungeon ? ", is_waiting_to_ascend_dungeon" : "",
       is_waiting_to_ascend_sewer ? ", is_waiting_to_ascend_sewer" : "",
       is_waiting_to_descend_dungeon ? ", is_waiting_to_descend_dungeon" : "",
       is_waiting_to_descend_sewer ? ", is_waiting_to_descend_sewer" : "",

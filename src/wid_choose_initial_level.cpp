@@ -375,8 +375,8 @@ static void wid_choose_initial_dungeons_destroy(Widp w)
   }
 
   if (ctx) {
-    delete ctx;
     oldptr(MTYPE_WID, ctx);
+    delete ctx;
   }
 }
 

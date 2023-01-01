@@ -10,7 +10,7 @@
 //
 // A message generated for the console. Check if we should print it.
 //
-bool Thing::player_is_ready_for_messages(void)
+bool Thing::player_is_is_ready_for_messages(void)
 {
   verify(MTYPE_THING, this);
 
@@ -23,7 +23,7 @@ bool Thing::player_is_ready_for_messages(void)
     return false;
   }
 
-  if (! player->ready_for_messages) {
+  if (! player->is_ready_for_messages) {
     return false;
   }
 
@@ -41,7 +41,7 @@ bool Thing::player_is_ready_for_messages(void)
   return true;
 }
 
-bool Thing::player_is_ready_for_messages(std::string &why)
+bool Thing::player_is_is_ready_for_messages(std::string &why)
 {
   verify(MTYPE_THING, this);
 
@@ -56,7 +56,7 @@ bool Thing::player_is_ready_for_messages(std::string &why)
     return false;
   }
 
-  if (! player->ready_for_messages) {
+  if (! player->is_ready_for_messages) {
     return false;
   }
 
@@ -97,7 +97,7 @@ void Thing::msg(const char *fmt, ...)
     return;
   }
 
-  if (! player_is_ready_for_messages(why)) {
+  if (! player_is_is_ready_for_messages(why)) {
     dbg("Player not ready for msg: %s", why.c_str());
     TRACE_AND_INDENT();
     return;
