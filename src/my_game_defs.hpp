@@ -9,12 +9,12 @@
 //
 // Grid chunks are used to construct the levels and the overall dungeon
 //
-#define DUNGEON_GRID_CHUNK_HEIGHT_MAX  6  // Levels are split into grids. Each grid can have a room.
-#define DUNGEON_GRID_CHUNK_WIDTH_MAX   6  // Rooms across and down
+#define DUNGEON_GRID_CHUNK_HEIGHT_MAX  3  // Levels are split into grids. Each grid can have a room.
+#define DUNGEON_GRID_CHUNK_WIDTH_MAX   7  // Rooms across and down
 #define DUNGEON_GRID_CHUNK_HEIGHT_MINI 3  // Levels are split into grids. Each grid can have a room.
 #define DUNGEON_GRID_CHUNK_WIDTH_MINI  3  // Rooms across and down
-#define DUNGEONS_GRID_CHUNK_HEIGHT     10 // The whole underworld
-#define DUNGEONS_GRID_CHUNK_WIDTH      10 //
+#define DUNGEONS_GRID_CHUNK_HEIGHT     11 // The whole underworld
+#define DUNGEONS_GRID_CHUNK_WIDTH      11 //
 #define DUNGEON_MAX_DEPTH              3  // Max difficulty level
 #define DUNGEONS_MAX_DEPTH             8  // Max difficulty level
 #define MAX_GRID_CHUNK_HEIGHT          DUNGEONS_GRID_CHUNK_HEIGHT
@@ -33,8 +33,8 @@
 
 #define MAP_BORDER_ROCK 1  // Map rock border. If changed from 1 you need to fix collision_check_only
 #define MAP_BORDER_ROOM 1  // Room border padding
-#define MAP_ROOM_HEIGHT 13 // Max room dimensions
-#define MAP_ROOM_WIDTH  13 // Max room dimensions
+#define MAP_ROOM_HEIGHT 11 // Max room dimensions
+#define MAP_ROOM_WIDTH  11 // Max room dimensions
 
 #define MAP_BORDER_ASCII_AUTO_SCROLL 8 // Ascii map scroll threshold
 

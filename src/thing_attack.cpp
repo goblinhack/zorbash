@@ -1227,7 +1227,10 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
             } else {
               msg("%%fg=orange$%s misses you.%%fg=reset$", text_The().c_str());
             }
-            popup("It misses you!");
+            //
+            // Too noisy?
+            //
+            // popup("It misses you!");
 
             if (game->robot_mode) {
               BOTCON("%s misses the robot.", text_The().c_str());
