@@ -1,7 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- zorb gets stuck in heat                                                                                                                      -->
-<!-- mini map option placing monsts ok?                                                                                                           -->
 <!-- center map in mini mode for ascii                                                                                                            -->
 <!-- slowdown on later level                                                                                                                      -->
 <!-- ------                                                                                                                                       -->

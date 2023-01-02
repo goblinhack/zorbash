@@ -175,6 +175,44 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
             }
           }
 
+          //
+          // If diagonal jumps are failing, try straight line jumps.
+          //
+          for (auto pit = ai->move_path.rbegin(); pit != ai->move_path.rend(); pit++) {
+            jump_pos   = *pit;
+            jump_pos.y = curr_at.y;
+            if (distance(curr_at, jump_pos) < 2) {
+              break;
+            }
+            if (try_to_jump_carefully(jump_pos, &too_far)) {
+              DBG2("Jumped carefully; try entire path %d,%d (horiz)", jump_pos.x, jump_pos.y);
+              if (is_player()) {
+                game->tick_begin("Jumped carefully");
+              }
+              clear_move_path("Jumped carefully");
+              return true;
+            }
+          }
+
+          //
+          // Try straight line vertical jump.
+          //
+          for (auto pit = ai->move_path.rbegin(); pit != ai->move_path.rend(); pit++) {
+            jump_pos   = *pit;
+            jump_pos.x = curr_at.x;
+            if (distance(curr_at, jump_pos) < 2) {
+              break;
+            }
+            if (try_to_jump_carefully(jump_pos, &too_far)) {
+              DBG2("Jumped carefully; try entire path %d,%d (vert)", jump_pos.x, jump_pos.y);
+              if (is_player()) {
+                game->tick_begin("Jumped carefully");
+              }
+              clear_move_path("Jumped carefully");
+              return true;
+            }
+          }
+
           clear_move_path("Failed to jump carefully");
 
           if (too_far) {
