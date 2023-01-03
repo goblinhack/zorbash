@@ -76,6 +76,7 @@ my.sound_load(volume=1.0, file="data/sounds/impacts/splash5.wav", name="splash5"
 my.sound_load(volume=1.0, file="data/sounds/impacts/splash6.wav", name="splash6")
 my.sound_load(volume=1.0, file="data/sounds/interface/coin.wav", name="coin")
 my.sound_load(volume=1.0, file="data/sounds/misc/220173__gameaudio__spacey-1up-power-up.wav", name="powerup")
+my.sound_load(volume=1.0, file="data/sounds/interface/1up_a.wav", name="potion")
 my.sound_load(volume=1.0, file="data/sounds/misc/511385__mrthenoronha__power-up-8-bit.wav", name="skillup")
 my.sound_load(volume=1.0, file="data/sounds/misc/512216__herkules92__coins.wav", name="gold")
 my.sound_load(volume=1.0, file="data/sounds/misc/56264__q-k__sword-sheath.wav", name="sword_equip")

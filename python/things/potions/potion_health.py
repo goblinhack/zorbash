@@ -26,6 +26,8 @@ def on_use(owner, item, target, x, y):
     # my.con("target  {} {:X}".format(my.thing_name_get(target), target))
     did_something = False
 
+    my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, "potion")
+
     enchant = my.thing_enchant_count_get(item)
 
     health = my.thing_health(owner)
