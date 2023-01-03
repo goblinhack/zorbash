@@ -9,8 +9,8 @@
 #include "my_tex.hpp"
 #include "my_tile.hpp"
 
-#define TERM_ASCII_WIDTH_DEF  120
-#define TERM_ASCII_HEIGHT_DEF 40
+#define TERM_ASCII_WIDTH_DEF  124
+#define TERM_ASCII_HEIGHT_DEF 42
 
 #define TERM_GFX_WIDTH_DEF  120
 #define TERM_GFX_HEIGHT_DEF 80
