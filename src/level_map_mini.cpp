@@ -5,6 +5,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_tex.hpp"
 #include "my_thing.hpp"
 
@@ -126,7 +127,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         //
         bool show_monst = update_map_mini_should_show_monst(x, y);
 
-        if (is_lit_recently_pixelart_raycast(x, y) && show_monst) {
+        if (get(can_see_currently.can_see, x, y) && show_monst) {
           c = RED;
         } else if (is_mob(x, y)) {
           c = PINK;
@@ -180,7 +181,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           c = BLACK;
         }
 
-        if (! is_lit_recently_pixelart_raycast(x, y)) {
+        if (! get(can_see_currently.can_see, x, y)) {
           c.r /= 2;
           c.g /= 2;
           c.b /= 2;
@@ -392,7 +393,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         }
 
         if (! no_fade) {
-          if (! is_lit_recently_pixelart_raycast(x, y)) {
+          if (! get(can_see_currently.can_see, x, y)) {
             c.r /= 2;
             c.g /= 2;
             c.b /= 2;
