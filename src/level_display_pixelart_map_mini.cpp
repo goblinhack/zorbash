@@ -45,6 +45,7 @@ void Level::display_pixelart_map_mini(void)
     if (is_oob(to)) {
       game->map_mini_over = point(-1, -1);
     } else {
+      game->map_mini_over = to;
       if (cursor) {
         TRACE_NO_INDENT();
         verify(MTYPE_THING, cursor);
