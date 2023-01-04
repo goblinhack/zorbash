@@ -107,7 +107,7 @@ void Level::cursor_path_draw_line(Thingp it, point start, point end)
     maxy = dmap_start.y;
   }
 
-  auto border = TILES_VISIBLE_ACROSS / 2;
+  auto border = TILES_VISIBLE_ACROSS;
   minx -= border;
   miny -= border;
   maxx += border;
