@@ -14,7 +14,7 @@ def on_targetted(me, x, y):
             if distance > radius + 0.5:
                 continue
 
-            my.place_at("magical_effect", x1, y1)
+            my.place_at(me, "magical_effect", x1, y1)
             for it in my.level_get_all(me, x1, y1):
                 if my.thing_possible_to_attack(me, it):
                     my.thing_hit(me, it)
@@ -35,7 +35,7 @@ def on_targetted_radially(me, x, y):
             if distance > radius + 0.5:
                 continue
 
-            my.place_at("magical_effect", x1, y1)
+            my.place_at(me, "magical_effect", x1, y1)
             for it in my.level_get_all(me, x1, y1):
                 if my.thing_possible_to_attack(me, it):
                     my.thing_hit(me, it)

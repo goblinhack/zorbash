@@ -6,7 +6,7 @@ def on_targetted(me, x, y):
     # my.con("targetted {} {:X}".format(my.thing_name_get(me), me))
 
     my.thing_sound_play_channel(me, my.CHANNEL_WEAPON, "lightning_a")
-    my.place_at("explosion_fire", x, y)
+    my.place_at(me, "explosion_fire", x, y)
     for it in my.level_get_all(me, x, y):
         if my.thing_possible_to_attack(me, it):
             my.thing_hit(me, it)

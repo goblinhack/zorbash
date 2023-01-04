@@ -408,12 +408,7 @@ PyObject *spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   PY_DBG("%s(%X, %s)", __FUNCTION__, id, what);
 
-  auto level = game->get_current_level();
-  if (! level) {
-    Py_RETURN_FALSE;
-  }
-
-  auto t = level->thing_find(ThingId(id));
+  auto t = game->thing_find(ThingId(id));
   if (unlikely(! t)) {
     ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
@@ -450,12 +445,7 @@ PyObject *spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *ke
 
   PY_DBG("%s(%X, %s)", __FUNCTION__, id, what);
 
-  auto level = game->get_current_level();
-  if (! level) {
-    Py_RETURN_FALSE;
-  }
-
-  auto t = level->thing_find(ThingId(id));
+  auto t = game->thing_find(ThingId(id));
   if (unlikely(! t)) {
     ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
@@ -509,16 +499,13 @@ PyObject *spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObjec
 
   PY_DBG("%s(%X, %s, %u, %u)", __FUNCTION__, id, what, radius_min, radius_max);
 
-  auto level = game->get_current_level();
-  if (! level) {
-    Py_RETURN_FALSE;
-  }
-
-  auto t = level->thing_find(ThingId(id));
+  auto t = game->thing_find(ThingId(id));
   if (unlikely(! t)) {
     ERR("%s: Cannot find 'me' thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
+
+  auto level = t->level;
 
   auto parent = level->thing_find(ThingId(parent_id));
   if (! parent) {
@@ -572,12 +559,7 @@ PyObject *spawn_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   PY_DBG("%s(%X, %s, %u, %u)", __FUNCTION__, id, what, radius_min, radius_max);
 
-  auto level = game->get_current_level();
-  if (! level) {
-    Py_RETURN_FALSE;
-  }
-
-  auto t = level->thing_find(ThingId(id));
+  auto t = game->thing_find(ThingId(id));
   if (unlikely(! t)) {
     ERR("%s: Cannot find 'me' thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
@@ -627,12 +609,7 @@ PyObject *if_matches_then_dead_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   PY_DBG("%s(%X, %s, %d, %d)", __FUNCTION__, id, what, x, y);
 
-  auto level = game->get_current_level();
-  if (! level) {
-    Py_RETURN_FALSE;
-  }
-
-  auto t = level->thing_find(ThingId(id));
+  auto t = game->thing_find(ThingId(id));
   if (unlikely(! t)) {
     ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
@@ -669,12 +646,7 @@ PyObject *if_matches_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   PY_DBG("%s(%X, %s)", __FUNCTION__, id, what);
 
-  auto level = game->get_current_level();
-  if (! level) {
-    Py_RETURN_FALSE;
-  }
-
-  auto t = level->thing_find(ThingId(id));
+  auto t = game->thing_find(ThingId(id));
   if (unlikely(! t)) {
     ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
@@ -701,6 +673,11 @@ PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
+  if (! id) {
+    ERR("%s: Missing 'id'", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
   if (! what) {
     ERR("%s: Missing 'what'", __FUNCTION__);
     Py_RETURN_FALSE;
@@ -718,25 +695,14 @@ PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds)
 
   PY_DBG("%s(%X, %s, %d, %d)", __FUNCTION__, id, what, x, y);
 
-  auto level = game->get_current_level();
-  if (! level) {
+  auto t = game->thing_find(ThingId(id));
+  if (unlikely(! t)) {
+    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
-  if (! id) {
-    if (level->thing_new(std::string(what), point(x, y))) {
-      Py_RETURN_TRUE;
-    }
-  } else {
-    auto t = level->thing_find(ThingId(id));
-    if (unlikely(! t)) {
-      ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
-      Py_RETURN_FALSE;
-    }
-
-    if (t->spawn_at(std::string(what), point(x, y))) {
-      Py_RETURN_TRUE;
-    }
+  if (t->spawn_at(std::string(what), point(x, y))) {
+    Py_RETURN_TRUE;
   }
 
   Py_RETURN_FALSE;
@@ -745,14 +711,26 @@ PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *place_at(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *what = nullptr;
-  int   x    = -1;
-  int   y    = -1;
+  char    *what = nullptr;
+  uint32_t id   = 0;
+  int      x    = -1;
+  int      y    = -1;
 
-  static char *kwlist[] = {(char *) "what", (char *) "x", (char *) "y", nullptr};
+  static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "x", (char *) "y", nullptr};
 
-  if (! PyArg_ParseTupleAndKeywords(args, keywds, "sii", kwlist, &what, &x, &y)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Isii", kwlist, &id, &what, &x, &y)) {
     ERR("%s: Bad args", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  //
+  // Why do we need ID here ? Only to ensure we spawn on the same level.
+  //
+  // DO NOT USE game->current_level as we could end up creating things on the wrong level when the
+  // python function runs.
+  //
+  if (! id) {
+    ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -773,12 +751,13 @@ PyObject *place_at(PyObject *obj, PyObject *args, PyObject *keywds)
 
   PY_DBG("%s(%s, %d, %d)", __FUNCTION__, what, x, y);
 
-  auto level = game->get_current_level();
-  if (! level) {
+  auto t = game->thing_find(ThingId(id));
+  if (unlikely(! t)) {
+    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
-  if (level->thing_new(std::string(what), point(x, y))) {
+  if (t->level->thing_new(std::string(what), point(x, y))) {
     Py_RETURN_TRUE;
   }
 

@@ -719,7 +719,7 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
     //
     {
       uint32_t start = time_ms();
-      con("INF: Place swimming monsters");
+      dbg("INF: Place swimming monsters");
       place_swimming_monsters();
       if (g_errored) {
         return false;
@@ -1791,7 +1791,7 @@ void Level::place_random_treasure(Dungeonp d)
     auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK + 1);
     auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK + 1);
 
-    if (d->is_rock(x, y) || d->is_wall(x, y)) {
+    if (d->is_door(x, y) || d->is_rock(x, y) || d->is_wall(x, y) || d->is_chasm(x, y) || d->is_lava(x, y)) {
       continue;
     }
 
@@ -1858,7 +1858,7 @@ void Level::place_random_torches(Dungeonp d)
     auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK + 1);
     auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK + 1);
 
-    if (d->is_rock(x, y) || d->is_wall(x, y)) {
+    if (d->is_door(x, y) || d->is_rock(x, y) || d->is_wall(x, y) || d->is_chasm(x, y) || d->is_lava(x, y)) {
       continue;
     }
 

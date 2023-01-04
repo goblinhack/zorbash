@@ -62,7 +62,7 @@ Tpp Level::get_random_monst(point p, biome_t biome, monst_type_t monst_type, mon
         continue;
       }
 
-      con("INF: Monster '%s' at %s", tp->text_short_capitalised().c_str(), p.to_string().c_str());
+      dbg("INF: Monster '%s' at %s", tp->text_short_capitalised().c_str(), p.to_string().c_str());
       return tp;
     }
   }
