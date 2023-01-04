@@ -1169,7 +1169,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
         real_hitter->msg("%%fg=limegreen$Your stamina feels drained!%%fg=reset$");
       } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
-        real_hitter->msg("%%fg=orange$You sweat for %d %sdamage!%%fg=reset$", damage, dmg_type.c_str());
+        real_hitter->msg("%%fg=orange$You take %d %sdamage!%%fg=reset$", damage, dmg_type.c_str());
       } else {
         real_hitter->msg("%%fg=orange$You hurt yourself for %d %sdamage with %s!%%fg=reset$", damage,
                          dmg_type.c_str(), hitter->text_the().c_str());
@@ -1874,6 +1874,10 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         reason = "by draining";
       } else if (attack_options->attack[ THING_ATTACK_NATURAL ]) {
         reason = "by over friendly biting";
+      } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
+        reason = "by cooking";
+      } else {
+        reason = "by something unknown";
       }
     }
 
