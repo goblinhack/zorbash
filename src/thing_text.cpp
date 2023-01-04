@@ -332,10 +332,6 @@ std::string Thing::text_short_and_state_capitalised(void)
     c++;
   }
 
-  if (enchant_count_get()) {
-    out += " +" + std::to_string(enchant_count_get());
-  }
-
   return out;
 }
 
@@ -373,10 +369,6 @@ std::string Thing::text_long_and_state_capitalised(void)
     }
 
     c++;
-  }
-
-  if (enchant_count_get()) {
-    out += " +" + std::to_string(enchant_count_get());
   }
 
   return out;
@@ -492,4 +484,26 @@ void Thing::show_botcon_description(void)
       BOTCON("%s.", text.c_str());
     }
   }
+}
+
+const std::string Thing::text_long_name(void)
+{
+  TRACE_NO_INDENT();
+
+  auto s = tp()->text_long_name();
+  if (enchant_count_get()) {
+    s += " +" + std::to_string(enchant_count_get());
+  }
+  return s;
+}
+
+const std::string Thing::text_short_name(void)
+{
+  TRACE_NO_INDENT();
+
+  auto s = tp()->text_short_name();
+  if (enchant_count_get()) {
+    s += " +" + std::to_string(enchant_count_get());
+  }
+  return s;
 }

@@ -290,7 +290,7 @@ void Game::wid_enchant_an_item(void)
   auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
 
   auto       m          = TERM_WIDTH / 2;
-  static int wid_width  = 70;
+  static int wid_width  = 80;
   int        left_half  = wid_width / 2;
   int        right_half = wid_width - left_half;
 
@@ -398,12 +398,22 @@ void Game::wid_enchant_an_item(void)
         wid_set_style(wid_item, UI_WID_STYLE_DARK);
       }
 
+      std::string s;
       if (slot < 9) {
-        wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + t->text_long_name() + ", " +
-                                   t->text_description_enchant());
+        s = " " + std::to_string(slot + 1) + ". " + t->text_long_name() + ", " + t->text_description_enchant();
       } else {
-        wid_set_text(wid_item, t->text_long_name() + ", " + t->text_description_enchant());
+        s = t->text_long_name() + ", " + t->text_description_enchant();
       }
+
+      FOR_ALL_EQUIP(e)
+      {
+        auto iter = player->equip_get(e);
+        if (iter == t) {
+          s += " (equipped)";
+        }
+      }
+
+      wid_set_text(wid_item, s);
 
       wid_set_text_lhs(wid_item, true);
       wid_update(wid_item);

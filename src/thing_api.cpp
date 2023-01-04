@@ -4083,12 +4083,6 @@ const std::string &Thing::target_name_projectile(void)
   return (tp()->target_name_projectile());
 }
 
-const std::string &Thing::text_short_name(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->text_short_name());
-}
-
 const std::string &Thing::spawn_on_shoved(void)
 {
   TRACE_NO_INDENT();
@@ -4135,12 +4129,6 @@ const std::string &Thing::dmg_nat_att_type(void)
 {
   TRACE_NO_INDENT();
   return (tp()->dmg_nat_att_type());
-}
-
-const std::string &Thing::text_long_name(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->text_long_name());
 }
 
 const std::string &Thing::text_skill(void)

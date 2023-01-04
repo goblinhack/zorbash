@@ -387,7 +387,7 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
   auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
 
   auto       m          = TERM_WIDTH / 2;
-  static int wid_width  = 70;
+  static int wid_width  = 80;
   int        left_half  = wid_width / 2;
   int        right_half = wid_width - left_half;
 

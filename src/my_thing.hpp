@@ -115,7 +115,7 @@ public:
   // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
   // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
   /////////////////////////////////////////////////////////////////////////
-  // begin sort marker5 {
+  // begin sort marker1 {
   uint64_t corpse_cleanup                               : 1 {};
   uint64_t gfx_ascii_animated                           : 1 {};
   uint64_t gfx_pixelart_animated                        : 1 {};
@@ -166,13 +166,13 @@ public:
   uint64_t is_waiting_to_leave_level_has_completed_fall : 1 {};
   uint64_t is_wounded_msg                               : 1 {};
   uint64_t was_frozen                                   : 1 {}; /* was frozen at the start of the tick */
-  // end sort marker5 }
+  // end sort marker1 }
 
   //
   // These are flags used to make sure we set or unset flags onto the level only once.
   //
 
-  // begin sort marker6 {
+  // begin sort marker2 {
   uint64_t i_set_is_able_to_burn            : 1 {}; // may produce a flame
   uint64_t i_set_is_acid                    : 1 {};
   uint64_t i_set_is_ascend_dungeon          : 1 {};
@@ -237,7 +237,7 @@ public:
   uint64_t i_set_is_wet_grass               : 1 {};
   uint64_t i_set_noise_blocker              : 1 {};
   uint64_t i_set_water                      : 1 {};
-  // end sort marker6 }
+  // end sort marker2 }
 
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
@@ -343,7 +343,7 @@ public:
   std::vector< Thingp > in_the_way_for_jumping(const point s, const point e, size_t max_elems = 0);
   std::vector< Thingp > in_the_way_for_firing(const point s, const point e, size_t max_elems = 0);
 
-  // begin sort marker1 {
+  // begin sort marker3 {
   bool ai_blocked_completely(void);
   bool ai_blocked(void);
   bool ai_choose_avoid_goals(std::multiset< Goal > &avoid_goals, const Goal &goal);
@@ -611,7 +611,7 @@ public:
   bool will_avoid_monst(const Thingp it);
   bool will_prefer_terrain(const Thingp it);
   bool worth_eating(const Thingp it);
-  // end sort marker1 }
+  // end sort marker3 }
 
   std::vector< std::string > on_get_text_description_long(void);
 
@@ -670,6 +670,7 @@ public:
 
   const fpoint &interpolated_at_get(void);
 
+  // begin sort marker4 {
   const std::string dmg_acid_dice_str(void);
   const std::string dmg_water_dice_str(void);
   const std::string dmg_cold_dice_str(void);
@@ -692,7 +693,11 @@ public:
   const std::string text_description_long2(void);
   const std::string text_description_long3(void);
   const std::string text_description_long(void);
+  const std::string text_long_name(void);
+  const std::string text_short_name(void);
+  // end sort marker4 {
 
+  // begin sort marker5 {
   const std::string &dmg_nat_att_type(void);
   const std::string &dead_reason_get(void);
   const std::string &equip_carry_anim(void);
@@ -841,9 +846,7 @@ public:
   const std::string &text_debuff(void);
   const std::string &text_description_enchant(void);
   const std::string &text_hits(void);
-  const std::string &text_long_name(void);
   const std::string &text_description_short(void);
-  const std::string &text_short_name(void);
   const std::string &text_skill(void);
   const std::string &text_title(void);
   const std::string &text_unused1(void);
@@ -851,6 +854,7 @@ public:
   const std::string &text_unused3(void);
   const std::string &text_unused(void);
   const std::string &title(void);
+  // end sort marker5 {
 
   float bounce_fade_curr(void);
   float bounce_height_curr(void);
@@ -882,7 +886,7 @@ public:
   float teleport_distance_with_modifiers_get(void);
   float update_wobble(void);
 
-  // begin sort marker2 {
+  // begin sort marker6 {
   int aggression_pct(void);
   int ai_detect_secret_doors(void);
   int ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int type, bool check);
@@ -1972,7 +1976,7 @@ public:
   int weapon_dmg(void);
   int worth_collecting(const Thingp it);
   int worth_collecting(const Thingp it, Thingp *would_need_to_drop);
-  // end sort marker2 }
+  // end sort marker6 }
 
   point3d born_get(void);
 
@@ -2021,7 +2025,7 @@ public:
   struct FovMap_ *can_see_currently(void);
   struct FovMap_ *can_see_ever(void);
 
-  // begin sort marker3 {
+  // begin sort marker7 {
   ts_t ts_anim_delay_end_decr(ts_t);
   ts_t ts_anim_delay_end_decr(void);
   ts_t ts_anim_delay_end_incr(ts_t);
@@ -2082,7 +2086,7 @@ public:
   ts_t ts_lunge_end_incr(void);
   ts_t ts_lunge_end_set(ts_t);
   ts_t ts_lunge_end(void);
-  // end sort marker3 }
+  // end sort marker7 }
 
   uint32_t tick_last_location_check_decr(uint32_t);
   uint32_t tick_last_location_check_decr(void);
@@ -2176,7 +2180,7 @@ public:
   uint8_t is_visible(void);
   uint8_t z_prio(void);
 
-  // begin sort marker4 {
+  // begin sort marker8 {
   void achieve_goals_in_death(void);
   void achieve_goals_in_life(void);
   void acid_tick(void);
@@ -2469,7 +2473,7 @@ public:
   void weapon_sheath(void);
   void wobble(float wobble);
   void wobble_set(float);
-  // end sort marker4 }
+  // end sort marker8 }
 
   const std::array< std::array< ThingId, MAX_BAG_HEIGHT >, MAX_BAG_WIDTH > *stat_const_bag(void);
 

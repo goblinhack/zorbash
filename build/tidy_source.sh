@@ -13,7 +13,7 @@ OUT=$(mktemp) || exit 1
 for IN in *.hpp *.cpp
 do
     echo Tidying $IN...
-    for WHICH in 1 2 3 4 5 6 7
+    for WHICH in 1 2 3 4 5 6 7 8 9
     do
       sed "1,/begin sort marker${WHICH}/!d" $IN > $PRE
       sed "/begin sort marker${WHICH}/,/end sort marker${WHICH}/!d" $IN | tail -n +1 - | grep -v "sort marker" | sort > $PAYLOAD
