@@ -320,9 +320,11 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
 
         bool no_fade = false;
         if (player && (x == (int) player->curr_at.x) && (y == (int) player->curr_at.y)) {
-          c = WHITE;
+          c       = WHITE;
+          no_fade = true;
         } else if (cursor && (x == (int) cursor->curr_at.x) && (y == (int) cursor->curr_at.y)) {
-          c = YELLOW;
+          c       = YELLOW;
+          no_fade = true;
         } else if (show_monst) {
           c       = RED;
           no_fade = true;
@@ -335,9 +337,6 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         } else if (is_descend_dungeon(x, y)) {
           c   = PURPLE;
           c.a = 255;
-        } else if (show_monst) {
-          c       = RED;
-          no_fade = true;
         } else if (is_mob(x, y)) {
           c       = PINK;
           no_fade = true;
