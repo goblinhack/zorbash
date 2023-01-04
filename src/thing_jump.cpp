@@ -544,12 +544,15 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     } else if (curr_at == original_destination) {
       msg("You jump.");
     } else {
+      //
+      // Here we did not jump as we expected.
+      //
       if (level->is_lava(curr_at)) {
-        msg("You jump joyfully into the lava!");
+        msg("You fail to jump and land in the lava!");
       } else if (level->is_lava(curr_at)) {
-        msg("You jump into the chasm!");
+        msg("You fail to jump and fall into the chasm!");
       } else if (level->is_hazard(curr_at)) {
-        msg("You jump into the unexpected.");
+        msg("You accidentally jump into the unexpected.");
       } else {
         msg("You jump, but not as far as you'd like.");
       }
