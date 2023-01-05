@@ -552,6 +552,8 @@ void Thing::blit_ascii(point tl, point br, point p, bool left_bar)
     lit = get(level->can_see_currently.can_see, curr_at.x, curr_at.y);
   }
 
+  IF_DEBUG2 { lit = true; }
+
   if (left_bar || is_cursor() || is_cursor_path()) {
     lit = true;
   }

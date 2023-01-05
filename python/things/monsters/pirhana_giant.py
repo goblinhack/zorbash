@@ -106,7 +106,7 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "A delightfully pet giant pirhana. It has friends and they want to play.")
+    my.text_description_long(self, "A delightful giant pirhana. It has friends and they want to play.")
     my.text_description_short(self, "Giant pirhana.")
     my.text_hits(self, "bites")
     my.thing_size(self, my.THING_SIZE_TINY)
