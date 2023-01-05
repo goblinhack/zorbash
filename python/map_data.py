@@ -795,14 +795,14 @@ my.map_load_room(
 my.map_load_room(
     exit=True,
     room_data=[
-        "           ", "           ", " .wwwww.$E ", "           ", "           ",
-        "     E     ", "  .$.m..$E ", " $w..wwwww ", "    C=C    ", "<m....  Bg ",
-        "   CCCCC   ", "      .    ", "  wwww..w. ", "    C=C    ", " .*..w  .. ",
+        "           ", "           ", " .wwwww.$E ", " $.....    ", "           ",
+        "     E     ", "  .$.m..$E ", " $w..wwwww ", " .CCC=C    ", "<m....  Bg ",
+        "   CCCCC   ", "      .    ", "  wwww..w. ", " CCCC=C    ", " .*..w  .. ",
         " CCC...CCC ", " CCCCCCCCC ", "        w  ", " CCCC=CCCC ", " ...ww  .. ",
         "<..B..*...>", "<====*====>", "<.........>", "<....=....>", " wwww..... ",
         " CCC...CCC ", " CCCCCCCCC ", " CCCCCCCCC ", " CCCCCCCCC ", " wwwwwwww. ",
-        "   CCCCC   ", "           ", " CCCCCCCC  ", " g.     .g ", " wwwwwww..>",
-        "           ", "           ", " g....*.$  ", "  ...*...  ", " g.......B ",
+        "   CCCCC   ", "           ", " CCCCCCCC  ", "        .g ", " wwwwwww..>",
+        "           ", "           ", " g....*.$  ", "     *...  ", " g.......B ",
         "           ", "           ", "           ", "     E     ", "  .    E   ",
         "           ", "           ", "           ", "           ", "  .        ",
         "           ", "           ", "           ", "           ", "  v        ",
@@ -1106,6 +1106,22 @@ my.map_load_room(
         "    C...C  ", "  C...C    ", " ..m..     ", "   ..CC..  ", "    .      ",
         "     C...C ", "   C...C   ", " ....      ", "   ......  ", "    .      ",
         "         v ", "      v    ", " v         ", "     v     ", "    v      ",
+    ],
+)
+my.map_load_room(
+    depth=1,
+    room_data=[
+        "^          ", "  ^        ", "       ^   ", "    ^      ", " ^         ",
+        "....       ", " C=C       ", "     CC=CC ", "  CC=CC    ", " ....      ",
+        " CC..      ", " C=C       ", "     CC=CC ", "  CC=CC    ", "   C=C     ",
+        " CCC=CC    ", " C=CCC.... ", "    CCC=CCC", "  CC=CC    ", "   C=C     ",
+        " CCC=CCC   ", " C=CCC...m ", "    C.....C", "  CC=CC    ", "   C=C...  ",
+        " CCC=CCC   ", " C=CCC.... ", "    C.....C", "   .......>", "<....CCC.  ",
+        " CCC=CCC   ", " C=CCC..$. ", "    CCC=CCC", "   ..CC..  ", "   ....C..>",
+        "  CC=CCC   ", " C=CCCs    ", "     CC=CC ", "   ..CC..  ", "   ......  ",
+        "   C=CCCC  ", " C=CCCs    ", "     CC=CC ", "   ..CC..  ", "    .      ",
+        "   C=CCCCC ", " ......    ", "     CC=CC ", "   ......  ", "    .      ",
+        "   CCCCC.v ", "      v    ", "       v   ", "     v     ", "    v      ",
     ],
 )
 my.map_load_room(

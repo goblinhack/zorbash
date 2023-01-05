@@ -1875,7 +1875,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_NATURAL ]) {
         reason = "by over friendly biting";
       } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
-        reason = "by cooking";
+        reason = "by being cooked";
       } else {
         reason = "by something unknown";
       }
