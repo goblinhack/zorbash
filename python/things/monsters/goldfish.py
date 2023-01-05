@@ -107,7 +107,7 @@ def tp_init(name, text_long_name):
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "A tiny little goldfish.")
-    my.text_description_short(self, "An goldfish.")
+    my.text_description_short(self, "A goldfish.")
     my.text_hits(self, "nibbles")
     my.thing_size(self, my.THING_SIZE_TINY)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

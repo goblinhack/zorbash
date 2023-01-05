@@ -1635,15 +1635,25 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       }
     }
   } else if (real_hitter->is_monst() && (real_hitter != hitter)) {
-    real_hitter->msg("%s hits %s with %s.", real_hitter->text_The().c_str(), text_the().c_str(),
-                     hitter->text_the().c_str());
+    if (attack_options->attack[ THING_ATTACK_NATURAL ]) {
+      real_hitter->msg("%s %s %s with %s.", real_hitter->text_The().c_str(), real_hitter->text_hits().c_str(),
+                       text_the().c_str(), hitter->text_the().c_str());
+    } else {
+      real_hitter->msg("%s hits %s with %s.", real_hitter->text_The().c_str(), text_the().c_str(),
+                       hitter->text_the().c_str());
+    }
   } else if (real_hitter != this) {
     //
     // Something else hitting something else. But don't show a message for things
     // like rocks being hit by explosions.
     //
     if (victim->is_interesting()) {
-      real_hitter->msg("%s hits %s.", real_hitter->text_The().c_str(), text_the().c_str());
+      if (attack_options->attack[ THING_ATTACK_NATURAL ]) {
+        real_hitter->msg("%s %s %s.", real_hitter->text_The().c_str(), real_hitter->text_hits().c_str(),
+                         text_the().c_str());
+      } else {
+        real_hitter->msg("%s hits %s.", real_hitter->text_The().c_str(), text_the().c_str());
+      }
     }
   }
 
