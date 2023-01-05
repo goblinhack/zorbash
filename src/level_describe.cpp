@@ -331,6 +331,20 @@ void Level::describe(point p)
       if (! t->is_interesting()) {
         continue;
       }
+      if (t->is_collectable()) {
+        something_to_collect = true;
+      }
+      hover_over_things_tmp.push_back(t);
+    }
+    hover_over_things = hover_over_things_tmp;
+  }
+
+  //
+  // Try again but this time filter out non highlighted things
+  //
+  if (hover_over_things.size() > 1) {
+    std::vector< Thingp > hover_over_things_tmp;
+    for (auto t : hover_over_things) {
       if (! t->gfx_pixelart_show_highlighted()) {
         continue;
       }
@@ -352,7 +366,7 @@ void Level::describe(point p)
 
   if (hover_over_things.size() > 1) {
     dbg("Describe @%d,%d; found %d things", p.x, p.y, (int) hover_over_things.size());
-    if (hover_over_things.size() > 1) {
+    if (game->wid_thing_info_create_list(hover_over_things)) {
       auto        k = ::to_string(game->config.key_wait_or_collect);
       std::string text;
 

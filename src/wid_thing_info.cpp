@@ -187,7 +187,6 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
       } else {
         wid_popup_window->log("It's dead, Jim");
       }
-      wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
     }
   } else {
     wid_popup_window->log(t->text_description_long(), TEXT_FORMAT_LHS, "pink");
