@@ -521,6 +521,9 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
     for (auto p : my.t->all_things) {
       auto t = p.second;
       csum += t->curr_at.x + t->curr_at.y + t->id.id;
+      if (t->level != my.t) {
+        t->err("Cannot save thing, is on wrong level");
+      }
       // t->con("SAVE %d,%d %d", t->curr_at.x, t->curr_at.y, t->id.id);
     }
   }
@@ -693,7 +696,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
         for (auto slot = 0; slot < MAP_SLOTS; slot++) {
           auto id = get(my.t->all_things_id_at, x, y, slot);
           if (id.ok()) {
-            CON("save slot %d @ %d,%d : %" PRIX32, slot, x, y, id.id);
+            LOG("save slot %d @ %d,%d : %" PRIX32, slot, x, y, id.id);
           }
         }
       }

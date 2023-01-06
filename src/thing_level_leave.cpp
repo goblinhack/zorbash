@@ -53,6 +53,13 @@ void Thing::level_leave(void)
     }
   }
 
+  {
+    auto f = level->all_things.find(id);
+    if (f != level->all_things.end()) {
+      level->all_things.erase(f);
+    }
+  }
+
   if (is_interesting()) {
     //
     // If doing a walk, we must be careful and cannot modify the map
