@@ -35,7 +35,7 @@ void Thing::level_leave(void)
   {
     auto it = immediate_mob();
     if (it) {
-      remove_mob();
+      mob_unset();
     }
   }
 

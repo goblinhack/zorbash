@@ -3,6 +3,7 @@
 //
 
 #include "my_level.hpp"
+#include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
@@ -108,9 +109,13 @@ Thingp Thing::immediate_mob(void)
 void Thing::mob_set(Thingp mob)
 {
   TRACE_NO_INDENT();
-  if (mob) {
-    verify(MTYPE_THING, mob);
+
+  if (! mob) {
+    mob_unset();
+    return;
   }
+
+  verify(MTYPE_THING, mob);
 
   auto old_mob = immediate_mob();
   if (old_mob) {
@@ -118,31 +123,21 @@ void Thing::mob_set(Thingp mob)
       return;
     }
 
-    if (mob) {
-      dbg("Will change mob %s->%s", old_mob->to_string().c_str(), mob->to_string().c_str());
-    } else {
-      dbg("Will remove mob %s", old_mob->to_string().c_str());
-    }
-  } else {
-    if (mob) {
-      dbg("Will set mob to %s", mob->to_string().c_str());
-    }
+    dbg("Will change mob %s->%s", old_mob->to_string().c_str(), mob->to_string().c_str());
+
+    old_mob->infop()->minions.erase(id);
+    mob_id_set(NoThingId);
+    dbg("Will set mob to %s", mob->to_string().c_str());
   }
 
-  if (mob) {
-    mob_id_set(mob->id);
-    mob->minion_count_incr();
-  } else {
-    mob_id_set(NoThingId);
-    if (old_mob) {
-      old_mob->minion_count_decr();
-    }
-  }
+  mob->infop()->minions.insert(id);
+  mob_id_set(mob->id);
 }
 
-void Thing::remove_mob(void)
+void Thing::mob_unset(void)
 {
   TRACE_NO_INDENT();
+
   auto old_mob = immediate_mob();
   if (! old_mob) {
     err("No mob");
@@ -151,8 +146,8 @@ void Thing::remove_mob(void)
 
   dbg("Remove mob %s", old_mob->to_string().c_str());
 
+  old_mob->infop()->minions.erase(id);
   mob_id_set(NoThingId);
-  old_mob->minion_count_decr();
 }
 
 //
@@ -191,7 +186,7 @@ void Thing::destroy_minions(Thingp defeater)
 
   TRACE_NO_INDENT();
   for (auto minion : minions) {
-    minion->remove_mob();
+    minion->mob_unset();
     minion->is_resurrection_blocked = true;
     minion->dead(defeater, "its creator was destroyed");
   }
@@ -219,7 +214,7 @@ void Thing::unleash_minions(void)
       auto minion = p.second;
       auto o      = minion->immediate_mob();
       if (o && (o == this)) {
-        minion->remove_mob();
+        minion->mob_unset();
       }
     }
   }

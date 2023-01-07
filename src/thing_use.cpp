@@ -312,7 +312,7 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
     }
 
     what->hooks_remove();
-    what->remove_owner();
+    what->owner_unset();
     itemsp()->carrying.remove(what->id);
 
     what->dead("by being used");

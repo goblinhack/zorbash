@@ -13,42 +13,7 @@ int Thing::minion_count(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop()->minion_count);
+    return (int) infop()->minions.size();
   }
   return 0;
-}
-
-int Thing::minion_count_set(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->minion_count = v);
-}
-
-int Thing::minion_count_decr(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->minion_count -= v);
-}
-
-int Thing::minion_count_incr(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->minion_count += v);
-}
-
-int Thing::minion_count_decr(void)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->minion_count--);
-}
-
-int Thing::minion_count_incr(void)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->minion_count++);
 }

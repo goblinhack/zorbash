@@ -139,7 +139,7 @@ void Thing::equip_carry_anim_set(Thingp new_equip_carry_anim, int equip)
     } else {
       dbg("Remove equip carry-anim, %s", old_equip_carry_anim->to_string().c_str());
     }
-    old_equip_carry_anim->remove_owner();
+    old_equip_carry_anim->owner_unset();
   } else {
     if (new_equip_carry_anim) {
       dbg("Set equip carry-anim, %s", new_equip_carry_anim->to_string().c_str());
@@ -198,7 +198,7 @@ void Thing::equip_use_anim_set(Thingp new_gfx_anim_use, int equip)
     } else {
       dbg("Remove equip use-anim %s", old_gfx_anim_use->to_string().c_str());
     }
-    old_gfx_anim_use->remove_owner();
+    old_gfx_anim_use->owner_unset();
   } else {
     if (new_gfx_anim_use) {
       dbg("Set equip use-anim %s", new_gfx_anim_use->to_string().c_str());

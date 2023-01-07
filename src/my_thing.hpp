@@ -793,7 +793,7 @@ public:
   const std::string &on_owner_receive_dmg_stat_con_do(void);
   const std::string &on_owner_receive_dmg_stat_str_do(void);
   const std::string &on_owner_receive_dmg_water_do(void);
-  const std::string &on_owner_remove_do(void);
+  const std::string &on_owner_unset_do(void);
   const std::string &on_polymorphed_do(void);
   const std::string &on_receiving_dmg_acid_do(void);
   const std::string &on_receiving_dmg_bite_do(void);
@@ -1545,11 +1545,6 @@ public:
   int map_treasure_carried_count(void);
   int map_treasure_count(void);
   int melting_chance_d1000(void);
-  int minion_count_decr(int);
-  int minion_count_decr(void);
-  int minion_count_incr(int);
-  int minion_count_incr(void);
-  int minion_count_set(int);
   int minion_count(void);
   int minion_limit(void);
   int move_count_decr(int);
@@ -2338,6 +2333,7 @@ public:
   void map_treasure_check(void);
   void map_treasure_count_set(int);
   void mob_set(Thingp mob);
+  void mob_unset(void);
   void move_carried_items_immediately(void);
   void move_carried_items(void);
   void move_delta(point);
@@ -2377,7 +2373,7 @@ public:
   void on_move(void);
   void on_open(void);
   void on_owner_add(Thingp owner);
-  void on_owner_remove(Thingp owner);
+  void on_owner_unset(Thingp owner);
   void on_polymorphed(void);
   void on_resting(void);
   void on_stuck(void);
@@ -2400,6 +2396,7 @@ public:
   void on_you_are_hit_but_still_alive(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
   void on_you_nat_att(void);
   void owner_set(Thingp owner);
+  void owner_unset(void);
   void path_shorten(std::vector< point > &path);
   void physical_training_tick(void);
   void place_blood(bool force = false);
@@ -2413,8 +2410,6 @@ public:
   void release_followers(void);
   void remove_all_references(void);
   void remove_leader(void);
-  void remove_mob(void);
-  void remove_owner(void);
   void remove_spawner_owner(void);
   void reset_goal_penalty(Thingp attacker);
   void resting(void);

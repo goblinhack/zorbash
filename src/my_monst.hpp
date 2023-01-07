@@ -172,7 +172,6 @@ public:
   int8_t sleep_count        = {}; // How long asleep
   int8_t damaged_count      = {}; // How much a weapon is damaged.
   int8_t follower_count     = {}; // How many followers this leader has
-  int8_t minion_count       = {}; // How many minions this mob has
   int8_t spawned_count      = {}; // How many things this thing spawned.
   int8_t map_treasure_count = {}; // How many treasure maps held. Really only care if > 0
   int8_t map_beast_count    = {}; // How many beast maps held. Really only care if > 0
@@ -234,7 +233,8 @@ public:
   //
   // List of things I own
   //
-  std::set< ThingId > owned_things {};
+  std::set< ThingId > owned {};
+  std::set< ThingId > minions {};
 
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^

@@ -4047,10 +4047,10 @@ const std::string &Thing::on_owner_add_do(void)
   return (tp()->on_owner_add_do());
 }
 
-const std::string &Thing::on_owner_remove_do(void)
+const std::string &Thing::on_owner_unset_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_remove_do());
+  return (tp()->on_owner_unset_do());
 }
 
 const std::string &Thing::on_you_are_declared_a_follower_do(void)

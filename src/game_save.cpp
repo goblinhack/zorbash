@@ -127,7 +127,8 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->tick_last_location_check);
   out << bits(my.t->tick_resurrect_when);
   out << bits(my.t->wobble);
-  out << bits(my.t->owned_things);
+  out << bits(my.t->owned);
+  out << bits(my.t->minions);
   // clang-format on
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
@@ -177,7 +178,6 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->sleep_count);
   out << bits(my.t->damaged_count);
   out << bits(my.t->follower_count);
-  out << bits(my.t->minion_count);
   out << bits(my.t->spawned_count);
   out << bits(my.t->map_treasure_count);
   out << bits(my.t->map_beast_count);

@@ -80,7 +80,7 @@ bool Thing::skill_remove(Thingp what)
     }
   }
 
-  what->remove_owner();
+  what->owner_unset();
   itemsp()->skills.remove(what->id);
   game->set_request_to_remake_skillbox();
 

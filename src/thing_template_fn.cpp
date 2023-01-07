@@ -120,7 +120,7 @@ const std::string &Tp::on_owner_receive_dmg_stat_att_do(void) const { return _on
 const std::string &Tp::on_owner_receive_dmg_stat_con_do(void) const { return _on_owner_receive_dmg_stat_con_do; }
 const std::string &Tp::on_owner_receive_dmg_stat_str_do(void) const { return _on_owner_receive_dmg_stat_str_do; }
 const std::string &Tp::on_owner_receive_dmg_water_do(void) const { return _on_owner_receive_dmg_water_do; }
-const std::string &Tp::on_owner_remove_do(void) const { return _on_owner_remove_do; }
+const std::string &Tp::on_owner_unset_do(void) const { return _on_owner_unset_do; }
 const std::string &Tp::on_polymorphed_do(void) const { return _on_polymorphed_do; }
 const std::string &Tp::on_receiving_dmg_acid_do(void) const { return _on_receiving_dmg_acid_do; }
 const std::string &Tp::on_receiving_dmg_bite_do(void) const { return _on_receiving_dmg_bite_do; }
@@ -1260,7 +1260,7 @@ void Tp::on_owner_receive_dmg_stat_att_do_set(const std::string &v) { _on_owner_
 void Tp::on_owner_receive_dmg_stat_con_do_set(const std::string &v) { _on_owner_receive_dmg_stat_con_do = v; }
 void Tp::on_owner_receive_dmg_stat_str_do_set(const std::string &v) { _on_owner_receive_dmg_stat_str_do = v; }
 void Tp::on_owner_receive_dmg_water_do_set(const std::string &v) { _on_owner_receive_dmg_water_do = v; }
-void Tp::on_owner_remove_do_set(const std::string &v) { _on_owner_remove_do = v; }
+void Tp::on_owner_unset_do_set(const std::string &v) { _on_owner_unset_do = v; }
 void Tp::on_polymorphed_do_set(const std::string &v) { _on_polymorphed_do = v; }
 void Tp::on_receiving_dmg_acid_do_set(const std::string &v) { _on_receiving_dmg_acid_do = v; }
 void Tp::on_receiving_dmg_bite_do_set(const std::string &v) { _on_receiving_dmg_bite_do = v; }

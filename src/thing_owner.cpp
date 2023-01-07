@@ -18,7 +18,7 @@ void Thing::on_owner_add(Thingp owner)
   }
 
   owner->log("Add owned thing: %s", to_string().c_str());
-  owner->infop()->owned_things.insert(id);
+  owner->infop()->owned.insert(id);
   owner_id_set(owner->id);
 
   auto on_owner_add = on_owner_add_do();
@@ -48,20 +48,20 @@ void Thing::on_owner_add(Thingp owner)
   }
 }
 
-void Thing::on_owner_remove(Thingp owner)
+void Thing::on_owner_unset(Thingp owner)
 {
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_remove null thing");
+    err("Cannot owner_unset null thing");
     return;
   }
 
   owner->log("Remove owned thing: %s", to_string().c_str());
-  owner->infop()->owned_things.erase(id);
+  owner->infop()->owned.erase(id);
   owner_id_set(NoThingId);
 
-  auto on_owner_remove = on_owner_remove_do();
-  if (std::empty(on_owner_remove)) {
+  auto on_owner_unset = on_owner_unset_do();
+  if (std::empty(on_owner_unset)) {
     return;
   }
 
@@ -78,7 +78,7 @@ void Thing::on_owner_remove(Thingp owner)
     return;
   }
 
-  auto t = split_tokens(on_owner_remove, '.');
+  auto t = split_tokens(on_owner_unset, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -95,8 +95,8 @@ void Thing::on_owner_remove(Thingp owner)
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
-    ERR("Bad on_owner_remove call [%s] expected mod:function, got %d elems", on_owner_remove.c_str(),
-        (int) on_owner_remove.size());
+    ERR("Bad on_owner_unset call [%s] expected mod:function, got %d elems", on_owner_unset.c_str(),
+        (int) on_owner_unset.size());
   }
 }
 
@@ -176,9 +176,12 @@ Thingp Thing::immediate_owner(void)
 void Thing::owner_set(Thingp owner)
 {
   TRACE_NO_INDENT();
-  if (owner) {
-    verify(MTYPE_THING, owner);
+  if (! owner) {
+    owner_unset();
+    return;
   }
+
+  verify(MTYPE_THING, owner);
 
   //
   // Catches errors when initializing things
@@ -194,17 +197,11 @@ void Thing::owner_set(Thingp owner)
       return;
     }
 
-    on_owner_remove(old_owner);
+    on_owner_unset(old_owner);
 
-    if (owner) {
-      dbg("Will change owner %s -> %s", old_owner->to_short_string().c_str(), owner->to_short_string().c_str());
-    } else {
-      dbg("Will remove owner %s", old_owner->to_short_string().c_str());
-    }
+    dbg("Will change owner %s -> %s", old_owner->to_short_string().c_str(), owner->to_short_string().c_str());
   } else {
-    if (owner) {
-      dbg("Will set owner to %s", owner->to_short_string().c_str());
-    }
+    dbg("Will set owner to %s", owner->to_short_string().c_str());
   }
 
   on_owner_add(owner);
@@ -219,7 +216,7 @@ void Thing::owner_set(Thingp owner)
   dbg("Set owner to %s", owner->to_short_string().c_str());
 }
 
-void Thing::remove_owner(void)
+void Thing::owner_unset(void)
 {
   TRACE_NO_INDENT();
   auto old_owner = immediate_owner();
@@ -228,7 +225,7 @@ void Thing::remove_owner(void)
   }
 
   dbg("Remove owner %s", old_owner->to_short_string().c_str());
-  on_owner_remove(old_owner);
+  on_owner_unset(old_owner);
 
   //
   // If this was fire and it had an owner (the thing it set on fire)
@@ -265,7 +262,7 @@ bool Thing::change_owner(Thingp new_owner)
     }
   }
 
-  on_owner_remove(old_owner);
+  on_owner_unset(old_owner);
 
   old_owner->itemsp()->carrying.remove(id);
 
@@ -301,7 +298,7 @@ int Thing::owned_count(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (int) infop()->owned_things.size();
+    return (int) infop()->owned.size();
   }
   return 0;
 }

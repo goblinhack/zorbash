@@ -151,7 +151,8 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->tick_last_location_check);
    in >> bits(my.t->tick_resurrect_when);
    in >> bits(my.t->wobble);
-   in >> bits(my.t->owned_things);
+   in >> bits(my.t->owned);
+   in >> bits(my.t->minions);
   // clang-format on
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
@@ -201,7 +202,6 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->sleep_count);
    in >> bits(my.t->damaged_count);
    in >> bits(my.t->follower_count);
-   in >> bits(my.t->minion_count);
    in >> bits(my.t->spawned_count);
    in >> bits(my.t->map_treasure_count);
    in >> bits(my.t->map_beast_count);

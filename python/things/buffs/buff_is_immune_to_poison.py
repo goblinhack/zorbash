@@ -10,7 +10,7 @@ def on_owner_add(me, owner, x, y):
 
 
 # Called on removing a ring. Not called on death of the owner.
-def on_owner_remove(me, owner, x, y):
+def on_owner_unset(me, owner, x, y):
     if my.thing_is_player(owner):
         my.thing_msg(me, "The green glow around you fades.")
 
@@ -48,7 +48,7 @@ def tp_init(name, text_long_name):
     my.is_tickable(self, True)
     my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_receive_dmg_poison_do(self, "me.on_owner_receive_dmg_poison()")
-    my.on_owner_remove_do(self, "me.on_owner_remove()")
+    my.on_owner_unset_do(self, "me.on_owner_unset()")
     my.on_tick_do(self, "me.on_tick()")
     my.text_description_long(self, "Poison causes you 50 percent less damage.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

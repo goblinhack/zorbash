@@ -152,7 +152,7 @@ void Thing::hooks_remove()
   }
 
   if (immediate_mob_id().ok()) {
-    remove_mob();
+    mob_unset();
   }
 
   if (leader_id().ok()) {
@@ -175,7 +175,7 @@ void Thing::hooks_remove()
         dbg("Hooks remove carry-anim");
       }
       equip_carry_anim_set(nullptr, e);
-      item->remove_owner();
+      item->owner_unset();
       item->dead("weapon carry-anim owner defeated ");
     }
   }
@@ -189,7 +189,7 @@ void Thing::hooks_remove()
         dbg("Hooks remove use-anim");
       }
       equip_use_anim_set(nullptr, e);
-      item->remove_owner();
+      item->owner_unset();
       item->dead("weapon use-anim owner defeated ");
     }
   }
@@ -207,7 +207,7 @@ void Thing::remove_all_references()
   //
   // If we are owned, we are no longer
   //
-  remove_owner();
+  owner_unset();
 
   //
   // Some things have lots of things they own
@@ -220,11 +220,11 @@ void Thing::remove_all_references()
     // Slow, but not used too often
     //
     while (owned_count()) {
-      ThingId id = *infop->owned_things.begin();
+      ThingId id = *infop->owned.begin();
       auto    t  = level->thing_find(id);
       if (t) {
         dbg("Remove child %s", t->to_string().c_str());
-        t->remove_owner();
+        t->owner_unset();
       } else {
         err("Cannot remove child %" PRIX32, id.id);
       }
@@ -243,7 +243,7 @@ void Thing::remove_all_references()
         verify(MTYPE_THING, t);
         auto o = t->immediate_mob();
         if (o == this) {
-          t->remove_mob();
+          t->mob_unset();
         }
       }
     }

@@ -759,7 +759,7 @@ private:
   std::string _on_owner_receive_dmg_stat_con_do;
   std::string _on_owner_receive_dmg_stat_str_do;
   std::string _on_owner_receive_dmg_water_do;
-  std::string _on_owner_remove_do;
+  std::string _on_owner_unset_do;
   std::string _on_polymorphed_do;
   std::string _on_receiving_dmg_acid_do;
   std::string _on_receiving_dmg_bite_do;
@@ -1081,7 +1081,7 @@ public:
   const std::string &on_owner_receive_dmg_stat_con_do(void) const;
   const std::string &on_owner_receive_dmg_stat_str_do(void) const;
   const std::string &on_owner_receive_dmg_water_do(void) const;
-  const std::string &on_owner_remove_do(void) const;
+  const std::string &on_owner_unset_do(void) const;
   const std::string &on_polymorphed_do(void) const;
   const std::string &on_receiving_dmg_acid_do(void) const;
   const std::string &on_receiving_dmg_bite_do(void) const;
@@ -2242,7 +2242,7 @@ public:
   void on_owner_receive_dmg_stat_con_do_set(const std::string &v);
   void on_owner_receive_dmg_stat_str_do_set(const std::string &v);
   void on_owner_receive_dmg_water_do_set(const std::string &v);
-  void on_owner_remove_do_set(const std::string &v);
+  void on_owner_unset_do_set(const std::string &v);
   void on_polymorphed_do_set(const std::string &v);
   void on_receiving_dmg_acid_do_set(const std::string &v);
   void on_receiving_dmg_bite_do_set(const std::string &v);

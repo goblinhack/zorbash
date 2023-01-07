@@ -100,7 +100,7 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen, bool thrown)
   }
 
   what->hooks_remove();
-  what->remove_owner();
+  what->owner_unset();
 
   if (is_player()) {
     if (has_external_particle || has_internal_particle) {
@@ -247,7 +247,7 @@ bool Thing::drop_into_ether(Thingp what)
   while (bag_compress()) {
   }
 
-  what->remove_owner();
+  what->owner_unset();
   if (immediate_owner) {
     immediate_owner->itemsp()->carrying.remove(what->id);
   }
@@ -277,7 +277,7 @@ bool Thing::drop_from_ether(Thingp what)
   TRACE_AND_INDENT();
 
   what->hooks_remove();
-  what->remove_owner();
+  what->owner_unset();
   what->hide();
   what->visible();
   what->move_to_immediately(curr_at);
