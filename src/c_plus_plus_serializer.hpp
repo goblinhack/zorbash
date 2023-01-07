@@ -3,6 +3,8 @@
 #ifndef C_PLUS_PLUS_SERIALIZER
 #define C_PLUS_PLUS_SERIALIZER
 #include <fstream>
+#include <iostream>
+#include <sstream>
 #include <vector>
 
 #undef DEBUG_C_PLUS_PLUS_SERIALIZER
@@ -90,12 +92,11 @@ static inline std::istream &operator>>(std::istream &in, Bits< std::wstring & > 
   my_size_t sz = 0;
   in >> bits(sz);
   if (in && sz) {
-    std::vector< wchar_t > tmp(sz);
     while (sz--) {
       wchar_t tmp;
       in >> bits(tmp);
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
-      std::wcout << "read '" << tmp << "'" << std::endl;
+      std::cout << "read '" << tmp << "'" << std::endl;
 #endif
       v.t += tmp;
     }
@@ -111,7 +112,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< const std::wstri
   for (auto tmp : v.t) {
     out << bits(tmp);
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
-    std::wcout << "write const '" << tmp << "'" << std::endl;
+    std::cout << "write const '" << tmp << "'" << std::endl;
 #endif
   }
   return out;
@@ -124,7 +125,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< std::wstring & >
   for (auto tmp : v.t) {
     out << bits(tmp);
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
-    std::wcout << "write '" << tmp << "'" << std::endl;
+    std::cout << "write '" << tmp << "'" << std::endl;
 #endif
   }
   return out;
@@ -132,7 +133,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< std::wstring & >
 
 ////////////////////////////////////////////////////////////////////////////
 // Read/write wchar_t
-//////////////////////// ////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 static inline std::istream &operator>>(std::istream &in, Bits< wchar_t & > v)
 {
   if (sizeof(wchar_t) == 4) {
@@ -167,7 +168,7 @@ static inline std::istream &operator>>(std::istream &in, Bits< wchar_t & > v)
 static inline std::ostream &operator<<(std::ostream &out, Bits< const wchar_t & > const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
-  std::wcout << "write const '" << v.t << "'" << std::endl;
+  std::cout << "write const '" << v.t << "'" << std::endl;
 #endif
   if (sizeof(wchar_t) == 4) {
     unsigned char _a, _b, _c, _d;
@@ -198,13 +199,13 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< const wchar_t & 
   } else {
     static_assert(sizeof(wchar_t) <= 4, "wchar_t is greater that 32 bit");
   }
-  return out;
+  return (out);
 }
 
 static inline std::ostream &operator<<(std::ostream &out, Bits< wchar_t & > const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
-  std::wcout << "write const '" << v.t << "'" << std::endl;
+  std::cout << "write const '" << v.t << "'" << std::endl;
 #endif
   if (sizeof(wchar_t) == 4) {
     unsigned char _a, _b, _c, _d;
@@ -235,7 +236,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< wchar_t & > cons
   } else {
     static_assert(sizeof(wchar_t) <= 4, "wchar_t is greater that 32 bit");
   }
-  return out;
+  return (out);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -252,7 +253,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< C< T > & > const
   for (auto i : v.t) {
     out << bits(i);
   }
-  return out;
+  return (out);
 }
 
 template < class T, template < typename ELEM, typename ALLOC = std::allocator< ELEM > > class C >
@@ -266,7 +267,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< const C< T > & >
   for (auto i : v.t) {
     out << bits(i);
   }
-  return out;
+  return (out);
 }
 
 template < class T, template < typename ELEM, typename ALLOC = std::allocator< ELEM > > class C >
@@ -302,7 +303,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< C< T, N > & > co
   for (auto i : v.t) {
     out << bits(i);
   }
-  return out;
+  return (out);
 }
 
 template < class T, std::size_t N, template < typename ELEM, std::size_t > class C >
@@ -316,7 +317,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< const C< T, N > 
   for (auto i : v.t) {
     out << bits(i);
   }
-  return out;
+  return (out);
 }
 
 template < class T, std::size_t N, template < typename ELEM, std::size_t > class C >
@@ -357,7 +358,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< M< K, V > & > co
   for (auto i : m.t) {
     out << bits(i.first) << bits(i.second);
   }
-  return out;
+  return (out);
 }
 
 template < template < class K, class V, class Compare = std::less< K >,
@@ -375,7 +376,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< M< K, const V > 
   for (auto i : m.t) {
     out << bits(i.first) << bits(i.second);
   }
-  return out;
+  return (out);
 }
 
 template < template < class K, class V, class Compare = std::less< K >,
@@ -421,7 +422,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< M< K, V > & > co
   for (auto i : m.t) {
     out << bits(i.first) << bits(i.second);
   }
-  return out;
+  return (out);
 }
 
 template < template < class K, class T, class Hash = std::hash< K >, class Pred = std::equal_to< K >,
@@ -439,7 +440,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< M< K, const V > 
   for (auto i : m.t) {
     out << bits(i.first) << bits(i.second);
   }
-  return out;
+  return (out);
 }
 
 template < template < class K, class T, class Hash = std::hash< K >, class Pred = std::equal_to< K >,
@@ -467,6 +468,64 @@ static inline std::istream &operator>>(std::istream &in, Bits< M< K, V > & > m)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// Read/write set
+////////////////////////////////////////////////////////////////////////////
+
+template < template < class K, class Compare = std::less< K >, class Allocator = std::allocator< K > > class M,
+           class K >
+
+static inline std::ostream &operator<<(std::ostream &out, Bits< M< K > & > const m)
+{
+#ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
+  std::cout << "write set<K> " << m.t.size() << " elems" << std::endl;
+#endif
+  my_size_t sz = m.t.size();
+  out << bits(sz);
+  for (auto i : m.t) {
+    out << bits(i);
+  }
+  return (out);
+}
+
+template < template < class K, class Compare = std::less< const K >, class Allocator = std::allocator< const K > >
+           class M,
+           class K >
+
+static inline std::ostream &operator<<(std::ostream &out, Bits< M< K > & > const m)
+{
+#ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
+  std::cout << "write set<K> " << m.t.size() << " elems" << std::endl;
+#endif
+  my_size_t sz = m.t.size();
+  out << bits(sz);
+  for (auto i : m.t) {
+    out << bits(i);
+  }
+  return (out);
+}
+
+template < template < class K, class Compare = std::less< K >, class Allocator = std::allocator< K > > class M,
+           class K >
+
+static inline std::istream &operator>>(std::istream &in, Bits< M< K > & > m)
+{
+  my_size_t sz = 0;
+  in >> bits(sz);
+#ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
+  std::cout << "read set<K> " << sz << " elems" << std::endl;
+#endif
+  if (in && sz) {
+    while (sz--) {
+      K k;
+      in >> bits(k);
+      m.t.insert(k);
+    }
+  }
+
+  return in;
+}
+
+////////////////////////////////////////////////////////////////////////////
 // Read/write pair
 ////////////////////////////////////////////////////////////////////////////
 
@@ -478,7 +537,7 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< std::pair< K, V 
 #endif
   out << bits(wrapped.t.first);
   out << bits(wrapped.t.second);
-  return out;
+  return (out);
 }
 
 template < typename K, typename V >
@@ -492,4 +551,14 @@ static inline std::istream &operator>>(std::istream &in, Bits< std::pair< K, V >
   return in;
 }
 
+template < typename K, typename V >
+static inline std::istream &operator>>(std::istream &in, Bits< const std::pair< K, V > & > wrapped)
+{
+#ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
+  std::cout << "const write pair<K,V>" << std::endl;
+#endif
+  in >> bits(wrapped.t.first);
+  in >> bits(wrapped.t.second);
+  return in;
+}
 #endif /* C_PLUS_PLUS_SERIALIZER */
