@@ -197,10 +197,17 @@ void Thing::hooks_remove()
 
 void Thing::remove_all_references()
 {
+  auto infop = maybe_infop();
+
   verify(MTYPE_THING, this);
 
   dbg("Remove references");
   TRACE_AND_INDENT();
+
+  //
+  // If we are owned, we are no longer
+  //
+  remove_owner();
 
   //
   // Some things have lots of things they own
@@ -212,22 +219,15 @@ void Thing::remove_all_references()
     //
     // Slow, but not used too often
     //
-    std::vector< Thingp > owned_things;
-
-    for (auto p : level->all_things) {
-      TRACE_NO_INDENT();
-      auto t = p.second;
-      verify(MTYPE_THING, t);
-      auto o = t->immediate_owner();
-      if (o == this) {
-        dbg("Remove child %s", o->to_string().c_str());
-        owned_things.push_back(t);
+    while (owned_count()) {
+      ThingId id = *infop->owned_things.begin();
+      auto    t  = level->thing_find(id);
+      if (t) {
+        dbg("Remove child %s", t->to_string().c_str());
+        t->remove_owner();
+      } else {
+        err("Cannot remove child %" PRIX32, id.id);
       }
-    }
-
-    TRACE_NO_INDENT();
-    for (auto owned_thing : owned_things) {
-      owned_thing->remove_owner();
     }
   }
 

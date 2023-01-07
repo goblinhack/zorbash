@@ -150,5 +150,5 @@ void Thing::add_enemy(Tpp attacker)
 {
   TRACE_NO_INDENT();
 
-  aip()->perma_enemies[ attacker->id ] = true;
+  aip()->perma_enemies.insert(attacker->id);
 }

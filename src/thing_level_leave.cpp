@@ -53,9 +53,14 @@ void Thing::level_leave(void)
     }
   }
 
+  //
+  // We must remove this here or we will be leaving a stale thing on the old level.
+  // This will break save and load.
+  //
   {
     auto f = level->all_things.find(id);
     if (f != level->all_things.end()) {
+      dbg2("Erase from all things");
       level->all_things.erase(f);
     }
   }

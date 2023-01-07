@@ -35,12 +35,12 @@ void Thing::add_friend(Thingp f)
 {
   TRACE_NO_INDENT();
 
-  aip()->thing_friends[ f->id ] = true;
+  aip()->thing_friends.insert(f->id);
 }
 
 void Thing::add_friend(Tpp f)
 {
   TRACE_NO_INDENT();
 
-  aip()->perma_friends[ f->id ] = true;
+  aip()->perma_friends.insert(f->id);
 }

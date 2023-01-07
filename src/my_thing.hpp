@@ -1683,11 +1683,6 @@ public:
   int on_receiving_dmg_stat_con(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_stat_str(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_water(Thingp hitter, Thingp real_hitter, int damage);
-  int owned_count_decr(int);
-  int owned_count_decr(void);
-  int owned_count_incr(int);
-  int owned_count_incr(void);
-  int owned_count_set(int);
   int owned_count(void);
   int poisoned_amount_decr(int);
   int poisoned_amount_decr(void);

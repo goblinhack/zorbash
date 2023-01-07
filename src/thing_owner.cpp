@@ -17,6 +17,10 @@ void Thing::on_owner_add(Thingp owner)
     return;
   }
 
+  owner->log("Add owned thing: %s", to_string().c_str());
+  owner->infop()->owned_things.insert(id);
+  owner_id_set(owner->id);
+
   auto on_owner_add = on_owner_add_do();
   if (std::empty(on_owner_add)) {
     return;
@@ -51,6 +55,10 @@ void Thing::on_owner_remove(Thingp owner)
     err("Cannot owner_remove null thing");
     return;
   }
+
+  owner->log("Remove owned thing: %s", to_string().c_str());
+  owner->infop()->owned_things.erase(id);
+  owner_id_set(NoThingId);
 
   auto on_owner_remove = on_owner_remove_do();
   if (std::empty(on_owner_remove)) {
@@ -186,6 +194,8 @@ void Thing::owner_set(Thingp owner)
       return;
     }
 
+    on_owner_remove(old_owner);
+
     if (owner) {
       dbg("Will change owner %s -> %s", old_owner->to_short_string().c_str(), owner->to_short_string().c_str());
     } else {
@@ -194,16 +204,6 @@ void Thing::owner_set(Thingp owner)
   } else {
     if (owner) {
       dbg("Will set owner to %s", owner->to_short_string().c_str());
-    }
-  }
-
-  if (owner) {
-    owner_id_set(owner->id);
-    owner->owned_count_incr();
-  } else {
-    owner_id_set(NoThingId);
-    if (old_owner) {
-      old_owner->owned_count_decr();
     }
   }
 
@@ -229,9 +229,6 @@ void Thing::remove_owner(void)
 
   dbg("Remove owner %s", old_owner->to_short_string().c_str());
   on_owner_remove(old_owner);
-
-  owner_id_set(NoThingId);
-  old_owner->owned_count_decr();
 
   //
   // If this was fire and it had an owner (the thing it set on fire)
@@ -300,49 +297,11 @@ bool Thing::change_owner(Thingp new_owner)
   return true;
 }
 
-////////////////////////////////////////////////////////////////////////////
-// owned_count
-////////////////////////////////////////////////////////////////////////////
 int Thing::owned_count(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop()->owned_count);
+    return (int) infop()->owned_things.size();
   }
   return 0;
-}
-
-int Thing::owned_count_set(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->owned_count = v);
-}
-
-int Thing::owned_count_decr(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->owned_count -= v);
-}
-
-int Thing::owned_count_incr(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->owned_count += v);
-}
-
-int Thing::owned_count_decr(void)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->owned_count--);
-}
-
-int Thing::owned_count_incr(void)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->owned_count++);
 }

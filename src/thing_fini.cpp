@@ -171,13 +171,6 @@ void Thing::destroy(void)
     err("Still has external particle");
   }
 
-  {
-    auto f = level->all_things.find(id);
-    if (f != level->all_things.end()) {
-      level->all_things.erase(f);
-    }
-  }
-
   game->world.free_thing_id(this);
 
   auto infop = maybe_infop();

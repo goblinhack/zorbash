@@ -173,7 +173,6 @@ public:
   int8_t damaged_count      = {}; // How much a weapon is damaged.
   int8_t follower_count     = {}; // How many followers this leader has
   int8_t minion_count       = {}; // How many minions this mob has
-  int8_t owned_count        = {}; // How many things own me
   int8_t spawned_count      = {}; // How many things this thing spawned.
   int8_t map_treasure_count = {}; // How many treasure maps held. Really only care if > 0
   int8_t map_beast_count    = {}; // How many beast maps held. Really only care if > 0
@@ -231,6 +230,12 @@ public:
   // This is to ensure things do not wake and immediately attack
   //
   uint32_t tick_last_awoke {(uint32_t) -1 /* std::numeric_limits< uint32_t >::max() */};
+
+  //
+  // List of things I own
+  //
+  std::set< ThingId > owned_things {};
+
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
   // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -320,12 +325,13 @@ public:
 
   point wander_dest {0, 0};
 
-  std::map< TpId, bool >    perma_enemies {}; // List of thing types that wronged us
-  std::map< ThingId, int >  thing_enemies {}; // List of things that wronged us
-  std::map< TpId, bool >    perma_friends {}; // List of friends
-  std::map< ThingId, bool > thing_friends {}; // List of friends
-  std::map< ThingId, int >  avoid {};         // List of things that wronged us and need to be avoided
-  std::map< ThingId, int >  goal_penalty {};  // Helps to avoid goal oscillation
+  std::set< TpId >    perma_enemies {};      // List of thing types that wronged us
+  std::set< TpId >    perma_friends {};      // List of friends
+  std::set< ThingId > thing_friends {};      // List of friends
+                                             //
+  std::map< ThingId, int > thing_enemies {}; // List of things that wronged us
+  std::map< ThingId, int > avoid {};         // List of things that wronged us and need to be avoided
+  std::map< ThingId, int > goal_penalty {};  // Helps to avoid goal oscillation
 
   std::vector< point > move_path;
 
