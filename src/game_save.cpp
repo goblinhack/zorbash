@@ -908,6 +908,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const class Game & > const my)
 
   out << bits(my.t.started);
   out << bits(my.t.things_are_moving);
+  out << bits(my.t.player_is_ready_for_messages);
   out << bits(MAP_WIDTH);
   out << bits(MAP_HEIGHT);
 

@@ -136,6 +136,324 @@ public:
 class Game
 {
 public:
+  //
+  // Save file name, contains the date and other useful save slot info
+  //
+  std::string version = "" MYVER "";
+
+  //
+  // Used to check for changes in the size of this struct.
+  //
+  uint32_t serialized_size {};
+
+  //
+  // If this was a saved game, which slot does it use.
+  //
+  int save_slot {};
+
+  //
+  // Title and seed name.
+  //
+  std::string save_meta;
+
+  //
+  // Saved file for this game.
+  //
+  std::string save_file;
+
+  //
+  // Appdata dir for saving logs.
+  //
+  std::string appdata;
+
+  //
+  // Save dir for saving games.
+  //
+  std::string saved_dir;
+
+  //
+  // User configuration.
+  //
+  Config config;
+
+  //
+  // The entire world, levels and all.
+  //
+  World world;
+
+  //
+  // Current displayed level.
+  //
+  Levelp level {};
+
+  //
+  // Current level being created.
+  //
+  Levelp level_being_created {};
+
+  //
+  // Game is afoot.
+  //
+  bool started {};
+
+  //
+  // Things in this tick are still moving. Only really used in pixel art mode.
+  //
+  bool things_are_moving {};
+
+  //
+  // Player ready to see console messages
+  //
+  bool player_is_ready_for_messages {};
+
+  //
+  // All randomness jumps off of this.
+  //
+  uint32_t seed {};
+
+  //
+  // Human readable version of the above seed.
+  //
+  std::string seed_name {};
+
+  //
+  // Something has requested a game tick.
+  //
+  std::string tick_requested {};
+
+  //
+  // Which tile in the mini map are we over.
+  //
+  point map_mini_over;
+
+  //
+  // Where the player is in the world map.
+  //
+  point3d current_level;
+
+  //
+  // How many moves the player has made
+  //
+  uint32_t player_move_count_in_this_snapshot {};
+
+  //
+  // FPS settings.
+  //
+  uint32_t frame_count {0};
+  //
+  // Current framerate
+  //
+  uint32_t fps_value = {};
+
+  //
+  // Game tick progression.
+  //
+  uint32_t tick_completed {1};
+  uint32_t tick_current {1};
+
+  //
+  // What the player has highlighted in the inventory.
+  //
+  uint8_t inventory_highlight_slot {};
+  uint8_t previous_slot {};
+  uint8_t skillbox_highlight_slot {};
+
+  /////////////////////////////////////////////////////////////////////////
+  // not worth saving
+  // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+  // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
+  /////////////////////////////////////////////////////////////////////////
+
+  //
+  // Game is paused choosing a level? Prrvents the level tick from running.
+  //
+  bool paused {};
+
+  //
+  // Game is ending and levels are being destroyed.
+  //
+  bool is_being_destroyed {};
+
+  //
+  // Temporary. Robot mode settings.
+  //
+  bool     robot_mode {};
+  uint32_t robot_mode_requested {};
+  uint32_t robot_mode_tick_requested {};
+
+  //
+  // Temporary. Player wants to play.
+  //
+  uint32_t player_requested_to_start_the_game {};
+
+  //
+  // Temporary. Used for timesteps within a game tick for smooth thing movement.
+  //
+  float tick_dt {0};
+
+  //
+  // Temporary. How long the last tick took
+  //
+  uint32_t tick_duration {};
+
+  //
+  // Temporary. This is used to try and speed up animations if in the midst of a jelly storm
+  //
+  bool tick_current_is_too_slow {};
+  bool prev_tick_was_too_slow {};
+
+  //
+  // Temporary. Global states
+  //
+  enum {
+    STATE_NORMAL,
+    STATE_OPTIONS_FOR_ITEM_MENU, // Drop, throw etc and item
+    STATE_INVENTORY,             // Currently managing inventory
+    STATE_COLLECTING_ITEMS,      // Collecting en masse from the level
+    STATE_ENCHANTING_ITEMS,      // Upgrading items
+    STATE_CHOOSING_SKILLS,       // Choosing skills
+    STATE_CHOOSING_TARGET,       // Looking to somewhere to throw at
+    STATE_CHOOSING_LEVEL,        // Choosing the next level
+    STATE_KEYBOARD_MENU,         // Keyboard optionds
+    STATE_LOAD_MENU,             // Loading a game
+    STATE_SAVE_MENU,             // Saving a game
+    STATE_QUIT_MENU,             // Pondering quitting
+  };
+  int state {STATE_NORMAL};
+
+  //
+  // Moving speed when you have a cursor path
+  //
+  int fast_move_speed {THING_MOVE_SPEED_FAST_MS};
+
+  //
+  // Normal speed of all things
+  //
+  int slow_move_speed {THING_MOVE_SPEED_SLOW_MS};
+
+  //
+  // Current thing move speed.
+  //
+  int current_move_speed {THING_MOVE_SPEED_SLOW_MS};
+
+  //
+  // Temporary. Is the selected position ok for throwing?
+  //
+  bool request_destination_ok {};
+
+  //
+  // Temporary. Used by the robot to change levels
+  //
+  Widp request_to_choose_level {};
+
+  // begin sort marker3 {
+  bool currently_saving_snapshot {};
+  bool request_player_move_down {};
+  bool request_player_move_left {};
+  bool request_player_move_right {};
+  bool request_player_move_up {};
+  bool request_player_to_ascend_level {};
+  bool request_player_to_descend_level {};
+  bool request_player_to_wait_or_collect {};
+  bool request_recreate_cursor_path {};
+  bool request_reset_state_change {};
+  bool request_to_remake_actionbar {};
+  bool request_to_remake_buffbox {};
+  bool request_to_remake_debuffbox {};
+  bool request_to_remake_inventory {};
+  bool request_to_remake_rightbar {};
+  bool request_to_remake_skillbox {};
+  bool request_to_save_snapshot {}; // Something has requested a game snapshot
+  bool request_to_toggle_gfx {};
+  bool request_to_update_inventory_with_thing_over {};
+  bool request_to_update_inventory_with_thing_selected {};
+  bool request_to_update_same_level {};
+  // end sort marker3 }
+
+  //
+  // When the thing info was requested to be destroyed.
+  //
+  uint32_t request_destroy_thing_info {}; // Timestamp
+
+  //
+  // When the player pressed some keys.
+  //
+  uint32_t request_player_move {};
+
+  //
+  // Temporary. Current thing being described in detail on screen.
+  //
+  Thingp current_wid_thing_info {};
+
+  //
+  // Which inventory items are we over.
+  //
+  Thingp request_inventory_thing_over {};
+  Thingp request_inventory_thing_selected {};
+
+  //
+  // Projectile or laser we're firing
+  //
+  Thingp request_to_use_item {};
+
+  //
+  // Temporary. Make sure to update thing_fini.cpp to remove these pointers
+  //
+  Thingp request_to_throw_item {}; // What we are throwing.
+
+  //
+  // Temporary. An item being moved between bags
+  //
+  class Wid *in_transit_item {};
+
+  //
+  // Temporary. All bags open.
+  //
+  std::list< class WidBag * > bags;
+
+  //
+  // Temporary. Last cursor path shown.
+  //
+  std::vector< point > cursor_move_path;
+  point                cursor_move_end;
+  bool                 cursor_moved {};
+
+  //
+  // Temporary for the status bar
+  //
+  std::array< std::array< Tilep, GAME_MONST_HEALTH_BAR_STEPS + 1 >, 2 > tile_cache_health;
+
+  //
+  // Temporary. Dampens mouse clicks
+  //
+  ts_t last_mouse_down {};
+  ts_t last_pause {};
+
+  //
+  // When the last tick started. Used for looking at spikes in time.
+  //
+  ts_t tick_begin_ms {};
+  ts_t tick_begin_game_ms {};
+
+  //
+  // All possible jump paths a thing can traverse. This is auto generated at startup.
+  //
+  struct JumpPath {
+  public:
+    point                begin;
+    point                end;
+    std::vector< point > path;
+  };
+  std::vector< JumpPath > jump_paths;
+
+  /////////////////////////////////////////////////////////////////////////
+  // not worth saving
+  // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+  // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+  /////////////////////////////////////////////////////////////////////////
+
+  int get_move_speed(void);
+
   Game(std::string appdata);
   Game(void) = default;
 
@@ -157,7 +475,10 @@ public:
   bool wid_thing_info_push_popup(Thingp t);
 
   // begin sort marker2 {
+  void change_state(int state, const std::string &);
   void display(void);
+  void dump(std::string prefix);
+  void dump(std::string prefix, std::ostream &out);
   void fini(void);
   void init_jump_paths(void);
   void init(void);
@@ -175,12 +496,37 @@ public:
   void save_snapshot_check();
   void save_snapshot(void);
   void save(void);
+  void set_currently_saving_snapshot(void);
+  void set_meta_data(Levelp);
+  void set_request_reset_state_change(void);
+  void set_request_to_remake_actionbar(void);
+  void set_request_to_remake_buffbox(void);
+  void set_request_to_remake_debuffbox(void);
+  void set_request_to_remake_inventory(void);
+  void set_request_to_remake_rightbar(void);
+  void set_request_to_remake_skillbox(void);
+  void set_request_to_save_snapshot(void);
+  void set_request_to_update_inventory_with_thing_over(void);
+  void set_request_to_update_inventory_with_thing_selected(void);
+  void set_request_to_update_same_level(void);
   void set_seed(void);
   void start(void);
   void tick_begin(const std::string &);
   void tick_begin_now(void);
   void tick_set_speed(void);
   void tick_update(void);
+  void unset_currently_saving_snapshot(void);
+  void unset_request_reset_state_change(void);
+  void unset_request_to_remake_actionbar(void);
+  void unset_request_to_remake_buffbox(void);
+  void unset_request_to_remake_debuffbox(void);
+  void unset_request_to_remake_inventory(void);
+  void unset_request_to_remake_rightbar(void);
+  void unset_request_to_remake_skillbox(void);
+  void unset_request_to_save_snapshot(void);
+  void unset_request_to_update_inventory_with_thing_over(void);
+  void unset_request_to_update_inventory_with_thing_selected(void);
+  void unset_request_to_update_same_level(void);
   void wid_choose_initial_dungeons(void);
   void wid_choose_next_dungeons(Levelp, bool is_ascending, bool is_descending);
   void wid_choose_player_name_select(void);
@@ -243,245 +589,6 @@ public:
   void wid_thing_info_destroy_deferred(void);
   void wid_thing_info_destroy_immediate(void);
   // end sort marker2 }
-
-  //
-  // Save file name, contains the date and other useful save slot info
-  //
-  std::string version = "" MYVER "";
-
-  uint32_t serialized_size {};
-  int      save_slot {};
-
-  std::string save_meta;
-  std::string save_file;
-  std::string appdata;
-  std::string saved_dir;
-
-  Config config;
-
-  World world;
-
-  Levelp level {}; // Current displayed level
-  Levelp level_being_created {};
-
-  //
-  // Keep all in order:
-  //
-  bool started {}; // Game is afoot
-  bool things_are_moving {};
-  bool robot_mode {};
-
-  point map_mini_over; // Which tile in the map_mini
-
-  uint32_t seed {}; // All randomness jumps off of this
-
-  std::string tick_requested {}; // Something has requested a game tick
-  std::string seed_name {};      // Human readable version of the above
-
-  point3d current_level; // Where we are in the world.
-
-  uint32_t move_count {}; // How many moves the player has made
-  uint32_t frame_count {0};
-  uint32_t fps_value = {}; // Current framerate
-  uint32_t tick_completed {1};
-  uint32_t tick_current {1};
-
-  uint8_t inventory_highlight_slot {};
-  uint8_t previous_slot {};
-  uint8_t skillbox_highlight_slot {};
-
-  /////////////////////////////////////////////////////////////////////////
-  // not worth saving
-  // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-  // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
-  /////////////////////////////////////////////////////////////////////////
-
-  //
-  // Temporary
-  //
-  bool paused {};             // Game is paused choosing a level?
-  bool is_being_destroyed {}; // Game is ending
-
-  uint32_t robot_mode_requested {};
-  uint32_t robot_mode_tick_requested {};
-  uint32_t start_requested {};
-
-  //
-  // Used for timesteps within a game tick for smooth thing movement
-  //
-  float tick_dt {0};
-
-  //
-  // How long the last tick took
-  //
-  uint32_t tick_duration {};
-
-  //
-  // This is used to try and speed up animations if in the midst of a jelly storm
-  //
-  bool tick_current_is_too_slow {};
-  bool prev_tick_was_too_slow {};
-
-  //
-  // Temporary. Global states
-  //
-  enum {
-    STATE_NORMAL,
-    STATE_OPTIONS_FOR_ITEM_MENU, // Drop, throw etc and item
-    STATE_INVENTORY,             // Currently managing inventory
-    STATE_COLLECTING_ITEMS,      // Collecting en masse from the level
-    STATE_ENCHANTING_ITEMS,      // Upgrading items
-    STATE_CHOOSING_SKILLS,       // Choosing skills
-    STATE_CHOOSING_TARGET,       // Looking to somewhere to throw at
-    STATE_CHOOSING_LEVEL,        // Choosing the next level
-    STATE_KEYBOARD_MENU,         // Keyboard optionds
-    STATE_LOAD_MENU,             // Loading a game
-    STATE_SAVE_MENU,             // Saving a game
-    STATE_QUIT_MENU,             // Pondering quitting
-  };
-  int state {STATE_NORMAL};
-  int fast_move_speed {THING_MOVE_SPEED_FAST_MS};    // Moving when you have a cursor path
-  int slow_move_speed {THING_MOVE_SPEED_SLOW_MS};    // Normal speed of all things
-  int current_move_speed {THING_MOVE_SPEED_SLOW_MS}; // Current speed
-
-  //
-  // Make sure to update thing_fini.cpp to remove these pointers
-  //
-  Thingp request_to_throw_item {}; // What we are throwing.
-  Thingp request_to_use_item {};   // Projectile or laser we're firing
-
-  //
-  // Current thing being described in detail on screen.
-  //
-  Thingp current_wid_thing_info {};
-
-  /////////////////////////////////////////////////////////////////////////
-  // Temporary. Global requests
-  /////////////////////////////////////////////////////////////////////////
-
-  //
-  // Is the selected position ok for throwing?
-  //
-  bool request_destination_ok {};
-
-  //
-  // Used by the robot to change levels
-  //
-  Widp request_to_choose_level {};
-
-  // begin sort marker3 {
-  bool currently_saving_snapshot {};
-  bool request_player_move_down {};
-  bool request_player_move_left {};
-  bool request_player_move_right {};
-  bool request_player_move_up {};
-  bool request_player_to_ascend_level {};
-  bool request_player_to_descend_level {};
-  bool request_player_to_wait_or_collect {};
-  bool request_recreate_cursor_path {};
-  bool request_reset_state_change {};
-  bool request_to_remake_actionbar {};
-  bool request_to_remake_buffbox {};
-  bool request_to_remake_debuffbox {};
-  bool request_to_remake_inventory {};
-  bool request_to_remake_rightbar {};
-  bool request_to_remake_skillbox {};
-  bool request_to_save_snapshot {}; // Something has requested a game snapshot
-  bool request_to_toggle_gfx {};
-  bool request_to_update_inventory_with_thing_over {};
-  bool request_to_update_inventory_with_thing_selected {};
-  bool request_to_update_same_level {};
-  // end sort marker3 }
-
-  uint32_t request_destroy_thing_info {}; // Timestamp
-  uint32_t request_player_move {};        // Player pressed some keys
-
-  Thingp request_inventory_thing_over {};
-  Thingp request_inventory_thing_selected {};
-
-  //
-  // An item being moved between bags
-  //
-  class Wid *in_transit_item {};
-
-  //
-  // All bags open.
-  //
-  std::list< class WidBag * > bags;
-
-  //
-  // Temporary. Last cursor path shown.
-  //
-  std::vector< point > cursor_move_path;
-  point                cursor_move_end;
-  bool                 cursor_moved {};
-
-  //
-  // Temporary for the status bar
-  //
-  std::array< std::array< Tilep, GAME_MONST_HEALTH_BAR_STEPS + 1 >, 2 > tile_cache_health;
-
-  //
-  // Temporary. Dampens mouse clicks
-  //
-  ts_t last_mouse_down {};
-  ts_t last_pause {};
-
-  //
-  // When the last tick started. Used for looking at spikes in time.
-  //
-  ts_t tick_begin_ms {};
-  ts_t tick_begin_game_ms {};
-
-  //
-  // Auto generated
-  //
-  struct JumpPath {
-  public:
-    point                begin;
-    point                end;
-    std::vector< point > path;
-  };
-  std::vector< JumpPath > jump_paths;
-
-  /////////////////////////////////////////////////////////////////////////
-  // not worth saving
-  // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
-  // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-  /////////////////////////////////////////////////////////////////////////
-
-  int get_move_speed(void);
-
-  void change_state(int state, const std::string &);
-  void set_meta_data(Levelp);
-  void dump(std::string prefix, std::ostream &out);
-  void dump(std::string prefix);
-
-  void set_request_reset_state_change(void);
-  void set_request_to_remake_rightbar(void);
-  void set_request_to_remake_inventory(void);
-  void set_request_to_remake_actionbar(void);
-  void set_request_to_remake_skillbox(void);
-  void set_request_to_remake_debuffbox(void);
-  void set_request_to_remake_buffbox(void);
-  void set_request_to_update_same_level(void);
-  void set_request_to_save_snapshot(void);
-  void set_currently_saving_snapshot(void);
-  void set_request_to_update_inventory_with_thing_over(void);
-  void set_request_to_update_inventory_with_thing_selected(void);
-
-  void unset_request_reset_state_change(void);
-  void unset_request_to_remake_rightbar(void);
-  void unset_request_to_remake_inventory(void);
-  void unset_request_to_remake_actionbar(void);
-  void unset_request_to_remake_skillbox(void);
-  void unset_request_to_remake_debuffbox(void);
-  void unset_request_to_remake_buffbox(void);
-  void unset_request_to_update_same_level(void);
-  void unset_request_to_save_snapshot(void);
-  void unset_currently_saving_snapshot(void);
-  void unset_request_to_update_inventory_with_thing_over(void);
-  void unset_request_to_update_inventory_with_thing_selected(void);
 };
 
 extern uint8_t game_mouse_down(int x, int y, uint32_t button);

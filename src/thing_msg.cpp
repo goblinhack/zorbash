@@ -10,7 +10,7 @@
 //
 // A message generated for the console. Check if we should print it.
 //
-bool Thing::player_is_is_ready_for_messages(void)
+bool Thing::player_is_player_is_ready_for_messages(void)
 {
   verify(MTYPE_THING, this);
 
@@ -20,10 +20,12 @@ bool Thing::player_is_is_ready_for_messages(void)
 
   auto player = level->player;
   if (! player) {
+    dbg("player_is_player_is_ready_for_messages: No player");
     return false;
   }
 
-  if (! player->is_ready_for_messages) {
+  if (! game->player_is_ready_for_messages) {
+    dbg("player_is_player_is_ready_for_messages: Not ready for messages");
     return false;
   }
 
@@ -31,17 +33,19 @@ bool Thing::player_is_is_ready_for_messages(void)
   // Cut down on post death messages.
   //
   if (player->is_dead) {
+    dbg("player_is_player_is_ready_for_messages: Player is dead");
     return false;
   }
 
   if (level->is_starting || level->is_being_destroyed) {
+    dbg("player_is_player_is_ready_for_messages: Level is starting");
     return false;
   }
 
   return true;
 }
 
-bool Thing::player_is_is_ready_for_messages(std::string &why)
+bool Thing::player_is_player_is_ready_for_messages(std::string &why)
 {
   verify(MTYPE_THING, this);
 
@@ -56,7 +60,7 @@ bool Thing::player_is_is_ready_for_messages(std::string &why)
     return false;
   }
 
-  if (! player->is_ready_for_messages) {
+  if (! game->player_is_ready_for_messages) {
     return false;
   }
 
@@ -97,7 +101,7 @@ void Thing::msg(const char *fmt, ...)
     return;
   }
 
-  if (! player_is_is_ready_for_messages(why)) {
+  if (! player_is_player_is_ready_for_messages(why)) {
     dbg("Player not ready for msg: %s", why.c_str());
     TRACE_AND_INDENT();
     return;

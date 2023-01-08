@@ -465,6 +465,6 @@ void Game::place_player(void)
       }
     }
 
-    player->is_ready_for_messages = true;
+    game->player_is_ready_for_messages = true;
   }
 }

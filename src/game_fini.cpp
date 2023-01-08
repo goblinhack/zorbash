@@ -9,17 +9,144 @@ void Game::fini(void)
   LOG("Game fini");
   TRACE_AND_INDENT();
 
-  fps_value          = 0;
-  started            = false;
-  things_are_moving  = false;
-  tick_completed     = 1;
-  tick_current       = 1;
-  move_count         = 0;
-  is_being_destroyed = true;
-  TRACE_NO_INDENT();
-  config.fini();
-  TRACE_NO_INDENT();
-  world.fini();
-  TRACE_NO_INDENT();
-  is_being_destroyed = false;
+  //
+  // Game is afoot.
+  //
+  started = {};
+
+  //
+  // Things in this tick are still moving. Only really used in pixel art mode.
+  //
+  things_are_moving = {};
+
+  //
+  // Player ready to see console messages
+  //
+  player_is_ready_for_messages = {};
+
+  //
+  // Something has requested a game tick.
+  //
+  tick_requested = "";
+
+  //
+  // Which tile in the mini map are we over.
+  //
+  map_mini_over = point(-1, -1);
+
+  //
+  // How many moves the player has made
+  //
+  player_move_count_in_this_snapshot = {};
+
+  //
+  // Game tick progression.
+  //
+  tick_completed = 1;
+  tick_current   = 1;
+
+  //
+  // Temporary. Robot mode settings.
+  //
+  robot_mode                = {};
+  robot_mode_requested      = {};
+  robot_mode_tick_requested = {};
+
+  //
+  // Temporary. Player wants to play.
+  //
+  player_requested_to_start_the_game = {};
+
+  //
+  // Temporary. Used for timesteps within a game tick for smooth thing movement.
+  //
+  tick_dt = {};
+
+  //
+  // Temporary. This is used to try and speed up animations if in the midst of a jelly storm
+  //
+  tick_current_is_too_slow = {};
+  prev_tick_was_too_slow   = {};
+
+  //
+  // Temporary. Is the selected position ok for throwing?
+  //
+  request_destination_ok = {};
+
+  //
+  // Temporary. Used by the robot to change levels
+  //
+  request_to_choose_level = {};
+
+  // begin sort marker3 {
+  currently_saving_snapshot                       = {};
+  request_player_move_down                        = {};
+  request_player_move_left                        = {};
+  request_player_move_right                       = {};
+  request_player_move_up                          = {};
+  request_player_to_ascend_level                  = {};
+  request_player_to_descend_level                 = {};
+  request_player_to_wait_or_collect               = {};
+  request_recreate_cursor_path                    = {};
+  request_reset_state_change                      = {};
+  request_to_remake_actionbar                     = {};
+  request_to_remake_buffbox                       = {};
+  request_to_remake_debuffbox                     = {};
+  request_to_remake_inventory                     = {};
+  request_to_remake_rightbar                      = {};
+  request_to_remake_skillbox                      = {};
+  request_to_save_snapshot                        = {}; // Something has requested a game snapshot
+  request_to_toggle_gfx                           = {};
+  request_to_update_inventory_with_thing_over     = {};
+  request_to_update_inventory_with_thing_selected = {};
+  request_to_update_same_level                    = {};
+  // end sort marker3 }
+
+  //
+  // When the thing info was requested to be destroyed.
+  //
+  request_destroy_thing_info = {}; // Timestamp
+
+  //
+  // When the player pressed some keys.
+  //
+  request_player_move = {};
+
+  //
+  // Temporary. Current thing being described in detail on screen.
+  //
+  current_wid_thing_info = {};
+
+  //
+  // Which inventory items are we over.
+  //
+  request_inventory_thing_over     = {};
+  request_inventory_thing_selected = {};
+
+  //
+  // Projectile or laser we're firing
+  //
+  request_to_use_item = {};
+
+  //
+  // Temporary. Make sure to update thing_fini.cpp to remove these pointers
+  //
+  request_to_throw_item = {}; // What we are throwing.
+
+  //
+  // Game is ending and levels are being destroyed.
+  //
+  {
+    TRACE_NO_INDENT();
+    is_being_destroyed = true;
+
+    TRACE_NO_INDENT();
+    config.fini();
+
+    TRACE_NO_INDENT();
+    world.fini();
+
+    TRACE_NO_INDENT();
+    is_being_destroyed = false;
+  }
 }

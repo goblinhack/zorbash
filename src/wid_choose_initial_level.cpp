@@ -759,7 +759,7 @@ static uint8_t wid_choose_initial_dungeons_enter(Widp w, int x, int y, uint32_t 
     DIE("No game");
   }
 
-  game->start_requested = true;
+  game->player_requested_to_start_the_game = true;
 
   return true;
 }
@@ -800,9 +800,9 @@ static uint8_t wid_choose_initial_dungeons_shortcut_enter(Widp w, int x, int y, 
     return true;
   }
 
-  game->level           = start_level;
-  game->current_level   = level_at;
-  game->start_requested = true;
+  game->level                              = start_level;
+  game->current_level                      = level_at;
+  game->player_requested_to_start_the_game = true;
 
   return true;
 }

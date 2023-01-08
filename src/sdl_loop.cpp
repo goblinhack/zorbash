@@ -148,8 +148,8 @@ void sdl_loop(void)
         //
         // Start the game if needed.
         //
-        if (game->start_requested) {
-          game->start_requested = false;
+        if (game->player_requested_to_start_the_game) {
+          game->player_requested_to_start_the_game = false;
           game->start();
         }
       }

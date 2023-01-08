@@ -1066,6 +1066,7 @@ std::istream &operator>>(std::istream &in, Bits< class Game & > my)
 
   in >> bits(my.t.started);
   in >> bits(my.t.things_are_moving);
+  in >> bits(my.t.player_is_ready_for_messages);
   in >> bits(MAP_WIDTH);
   in >> bits(MAP_HEIGHT);
 
