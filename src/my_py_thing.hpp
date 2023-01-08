@@ -123,7 +123,7 @@ PyObject *thing_idle_count_decr(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *thing_idle_count_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_immediate_mob_id_get(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_immediate_owner_id_get(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_immediate_spawned_owner_id_get(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_immediate_spawner_id_get(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_initial_charge_count(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_attack_mobs(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_attack_owner(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -569,7 +569,7 @@ THING_BODY_GET_INT(thing_teleport_distance_get, teleport_distance_get)
 THING_BODY_GET_STRING(thing_name_get, text_long_name)
 THING_BODY_GET_THING(thing_immediate_mob_id_get, immediate_mob_id)
 THING_BODY_GET_THING(thing_immediate_owner_id_get, immediate_owner_id)
-THING_BODY_GET_THING(thing_immediate_spawned_owner_id_get, immediate_spawned_owner_id)
+THING_BODY_GET_THING(thing_immediate_spawner_id_get, immediate_spawner_id)
 THING_BODY_GET_THING(thing_leader_id_get, leader_id)
 THING_BODY_GET_THING(thing_top_owner_id_get, top_owner_id)
 // end sort marker2 }

@@ -153,6 +153,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->wobble);
    in >> bits(my.t->owned);
    in >> bits(my.t->minions);
+   in >> bits(my.t->followers);
   // clang-format on
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
@@ -201,7 +202,6 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->charge_count);
    in >> bits(my.t->sleep_count);
    in >> bits(my.t->damaged_count);
-   in >> bits(my.t->follower_count);
    in >> bits(my.t->spawned_count);
    in >> bits(my.t->map_treasure_count);
    in >> bits(my.t->map_beast_count);

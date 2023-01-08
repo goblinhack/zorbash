@@ -171,7 +171,6 @@ public:
   int8_t charge_count       = {}; // Wand charges
   int8_t sleep_count        = {}; // How long asleep
   int8_t damaged_count      = {}; // How much a weapon is damaged.
-  int8_t follower_count     = {}; // How many followers this leader has
   int8_t spawned_count      = {}; // How many things this thing spawned.
   int8_t map_treasure_count = {}; // How many treasure maps held. Really only care if > 0
   int8_t map_beast_count    = {}; // How many beast maps held. Really only care if > 0
@@ -231,10 +230,17 @@ public:
   uint32_t tick_last_awoke {(uint32_t) -1 /* std::numeric_limits< uint32_t >::max() */};
 
   //
-  // List of things I own
+  // List of things I own:
   //
   std::set< ThingId > owned {};
+  //
+  // List of things I am the mob owner of:
+  //
   std::set< ThingId > minions {};
+  //
+  // List of things in my team and I am the leader of:
+  //
+  std::set< ThingId > followers {};
 
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^

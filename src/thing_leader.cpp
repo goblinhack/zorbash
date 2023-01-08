@@ -3,6 +3,7 @@
 //
 
 #include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_string.hpp"
@@ -158,61 +159,51 @@ Thingp Thing::leader(void)
   return nullptr;
 }
 
-void Thing::leader_set(Thingp l)
+void Thing::leader_set(Thingp new_leader)
 {
   TRACE_NO_INDENT();
 
-  if (l) {
-    verify(MTYPE_THING, l);
+  if (! new_leader) {
+    leader_unset();
+    return;
   }
+
+  verify(MTYPE_THING, new_leader);
 
   auto old_leader = leader();
   if (old_leader) {
-    if (old_leader == l) {
+    if (old_leader == new_leader) {
       return;
     }
 
-    if (l) {
-      dbg("Will change leader %s -> %s", old_leader->to_string().c_str(), l->to_string().c_str());
-    } else {
-      dbg("Will remove leader %s", old_leader->to_string().c_str());
-    }
-  } else {
-    if (l) {
-      dbg("Will set leader to %s", l->to_string().c_str());
-    }
-  }
-
-  if (old_leader) {
-    old_leader->follower_count_decr();
-  }
-
-  if (l) {
-    if (l == this) {
-      //
-      // I am the leader
-      //
-      leader_id_set(NoThingId);
-      dbg("I am the leader, follower count %d", l->follower_count());
-      l->on_you_are_declared_leader();
-    } else {
-      //
-      // You are being led
-      //
-      leader_id_set(l->id);
-      l->follower_count_incr();
-      dbg("I am a follower");
-      on_you_are_declared_a_follower(l);
-    }
-  } else {
+    dbg("Will change leader %s -> %s", old_leader->to_string().c_str(), new_leader->to_string().c_str());
+    old_leader->infop()->followers.erase(id);
     leader_id_set(NoThingId);
-    dbg("Leader unset");
+  } else {
+    dbg("Will set leader to %s", new_leader->to_string().c_str());
+  }
+
+  if (new_leader == this) {
+    //
+    // I am the leader
+    //
+    leader_id_set(NoThingId);
+    dbg("I am the leader, follower count %d", new_leader->follower_count());
+    new_leader->on_you_are_declared_leader();
+  } else {
+    //
+    // You are being led
+    //
+    leader_id_set(new_leader->id);
+    new_leader->infop()->followers.insert(id);
+    dbg("I am a follower");
+    on_you_are_declared_a_follower(new_leader);
   }
 
   //
   // If the leader is awake, so are we
   //
-  if (l->is_sleeping) {
+  if (new_leader->is_sleeping) {
     sleep();
   } else {
     wake("leader is awake");
@@ -221,7 +212,7 @@ void Thing::leader_set(Thingp l)
   dbg("Leader set finished");
 }
 
-void Thing::remove_leader(void)
+void Thing::leader_unset(void)
 {
   TRACE_NO_INDENT();
 
@@ -232,8 +223,8 @@ void Thing::remove_leader(void)
 
   dbg("Remove leader %s", old_leader->to_string().c_str());
 
+  old_leader->infop()->followers.erase(id);
   leader_id_set(NoThingId);
-  old_leader->follower_count_decr();
 }
 
 //
@@ -258,7 +249,7 @@ void Thing::release_followers(void)
       auto follower = p.second;
       auto o        = follower->leader();
       if (o && (o == this)) {
-        follower->remove_leader();
+        follower->leader_unset();
       }
     }
   }
@@ -381,8 +372,8 @@ bool Thing::same_leader_or_owner(Thingp it)
   //
   // Check for things like tentacles being owned by krakens.
   //
-  auto my_spawned_owner  = top_spawned_owner();
-  auto its_spawned_owner = it->top_spawned_owner();
+  auto my_spawned_owner  = top_spawner();
+  auto its_spawned_owner = it->top_spawner();
 
   if (my_spawned_owner || its_spawned_owner) {
     if (its_spawned_owner == this) {

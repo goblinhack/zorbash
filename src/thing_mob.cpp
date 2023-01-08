@@ -140,7 +140,6 @@ void Thing::mob_unset(void)
 
   auto old_mob = immediate_mob();
   if (! old_mob) {
-    err("No mob");
     return;
   }
 

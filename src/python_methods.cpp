@@ -378,7 +378,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_hunger_is_insatiable),
     MY_ADD_PYTHON_FUNCTION(thing_immediate_mob_id_get),
     MY_ADD_PYTHON_FUNCTION(thing_immediate_owner_id_get),
-    MY_ADD_PYTHON_FUNCTION(thing_immediate_spawned_owner_id_get),
+    MY_ADD_PYTHON_FUNCTION(thing_immediate_spawner_id_get),
     MY_ADD_PYTHON_FUNCTION(thing_initial_charge_count),
     MY_ADD_PYTHON_FUNCTION(thing_is_able_to_attack_mobs),
     MY_ADD_PYTHON_FUNCTION(thing_is_able_to_attack_owner),

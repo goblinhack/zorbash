@@ -33,7 +33,7 @@ void Thing::spawned_newborn(Thingp it)
   //
   if (is_able_to_spawn_things()) {
     dbg("Spawned owned thing %s", it->to_short_string().c_str());
-    it->spawned_owner_set(this);
+    it->spawner_set(this);
   }
 
   //

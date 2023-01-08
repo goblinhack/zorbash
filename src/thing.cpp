@@ -115,7 +115,7 @@ const ThingId &Thing::leader_id_set(const ThingId &v)
   return (infop()->leader_id = v);
 }
 
-const ThingId &Thing::immediate_spawned_owner_id(void)
+const ThingId &Thing::immediate_spawner_id(void)
 {
   TRACE_NO_INDENT();
   if (! maybe_infop()) {

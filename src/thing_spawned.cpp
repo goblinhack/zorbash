@@ -7,27 +7,27 @@
 #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
-Thingp Thing::top_spawned_owner(void)
+Thingp Thing::top_spawner(void)
 {
   TRACE_NO_INDENT();
-  auto id = immediate_spawned_owner_id();
+  auto id = immediate_spawner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
     if (unlikely(! i)) {
       return nullptr;
     }
-    if (unlikely(i->immediate_spawned_owner_id().ok())) {
-      return i->immediate_spawned_owner();
+    if (unlikely(i->immediate_spawner_id().ok())) {
+      return i->immediate_spawner();
     }
     return i;
   }
   return nullptr;
 }
 
-Thingp Thing::immediate_spawned_owner(void)
+Thingp Thing::immediate_spawner(void)
 {
   TRACE_NO_INDENT();
-  auto id = immediate_spawned_owner_id();
+  auto id = immediate_spawner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
     if (unlikely(! i)) {
@@ -38,7 +38,7 @@ Thingp Thing::immediate_spawned_owner(void)
   return nullptr;
 }
 
-void Thing::spawned_owner_set(Thingp spawner_owner)
+void Thing::spawner_set(Thingp spawner_owner)
 {
   TRACE_NO_INDENT();
 
@@ -46,7 +46,7 @@ void Thing::spawned_owner_set(Thingp spawner_owner)
     verify(MTYPE_THING, spawner_owner);
   }
 
-  auto old_spawner_owner = immediate_spawned_owner();
+  auto old_spawner_owner = immediate_spawner();
   if (old_spawner_owner) {
     if (old_spawner_owner == spawner_owner) {
       return;
@@ -75,12 +75,12 @@ void Thing::spawned_owner_set(Thingp spawner_owner)
   }
 }
 
-void Thing::remove_spawner_owner(void)
+void Thing::spawner_unset(void)
 {
   TRACE_NO_INDENT();
-  auto old_spawner_owner = immediate_spawned_owner();
+
+  auto old_spawner_owner = immediate_spawner();
   if (! old_spawner_owner) {
-    err("No spawner owner");
     return;
   }
 
@@ -116,7 +116,7 @@ void Thing::destroy_spawned(Thingp defeater)
 
   for (auto p : level->all_things) {
     auto spawner = p.second;
-    auto o       = spawner->immediate_spawned_owner();
+    auto o       = spawner->immediate_spawner();
     if (o && (o == this)) {
       things.push_back(spawner);
     }
@@ -124,7 +124,7 @@ void Thing::destroy_spawned(Thingp defeater)
 
   TRACE_NO_INDENT();
   for (auto spawner : things) {
-    spawner->remove_spawner_owner();
+    spawner->spawner_unset();
     spawner->dead(defeater, "its spawner died");
   }
 }
@@ -146,9 +146,9 @@ void Thing::unleash_spawners_things(void)
   {
     for (auto p : level->all_things) {
       auto spawner = p.second;
-      auto o       = spawner->immediate_spawned_owner();
+      auto o       = spawner->immediate_spawner();
       if (o && (o == this)) {
-        spawner->remove_spawner_owner();
+        spawner->spawner_unset();
       }
     }
   }

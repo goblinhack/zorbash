@@ -89,49 +89,11 @@ void Thing::on_death_of_a_follower(Thingp leader)
   }
 }
 
-////////////////////////////////////////////////////////////////////////////
-// follower_count
-////////////////////////////////////////////////////////////////////////////
 int Thing::follower_count(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop()->follower_count);
+    return (int) infop()->followers.size();
   }
   return 0;
-}
-
-int Thing::follower_count_set(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->follower_count = v);
-}
-
-int Thing::follower_count_decr(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->follower_count -= v);
-}
-
-int Thing::follower_count_incr(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->follower_count += v);
-}
-
-int Thing::follower_count_decr(void)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->follower_count--);
-}
-
-int Thing::follower_count_incr(void)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->follower_count++);
 }

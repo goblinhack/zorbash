@@ -42,14 +42,14 @@ void Thing::level_leave(void)
   {
     auto it = leader();
     if (it) {
-      remove_leader();
+      leader_unset();
     }
   }
 
   {
-    auto it = immediate_spawned_owner();
+    auto it = immediate_spawner();
     if (it) {
-      remove_spawner_owner();
+      spawner_unset();
     }
   }
 

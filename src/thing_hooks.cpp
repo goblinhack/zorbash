@@ -121,7 +121,7 @@ void Thing::hooks_remove()
   auto i = immediate_owner();
 
   release_followers();
-  remove_leader();
+  leader_unset();
 
   //
   // If a carried sword is on fire, then we need to detach.
@@ -149,18 +149,6 @@ void Thing::hooks_remove()
     if (is_item()) {
       o->drop_into_ether(this);
     }
-  }
-
-  if (immediate_mob_id().ok()) {
-    mob_unset();
-  }
-
-  if (leader_id().ok()) {
-    remove_leader();
-  }
-
-  if (immediate_spawned_owner_id().ok()) {
-    remove_spawner_owner();
   }
 
   //
@@ -193,6 +181,10 @@ void Thing::hooks_remove()
       item->dead("weapon use-anim owner defeated ");
     }
   }
+
+  mob_unset();
+  leader_unset();
+  spawner_unset();
 }
 
 void Thing::remove_all_references()
@@ -205,20 +197,20 @@ void Thing::remove_all_references()
   TRACE_AND_INDENT();
 
   //
-  // If we are owned, we are no longer
+  // Make sure references are gone
   //
   owner_unset();
+  mob_unset();
+  leader_unset();
+  spawner_unset();
 
   //
   // Some things have lots of things they own
   //
   if (owned_count()) {
-    dbg("Remove all owner references, total %d", owned_count());
+    dbg("Remove all owned items, total %d", owned_count());
     TRACE_AND_INDENT();
 
-    //
-    // Slow, but not used too often
-    //
     while (owned_count()) {
       ThingId id = *infop->owned.begin();
       auto    t  = level->thing_find(id);
@@ -232,37 +224,33 @@ void Thing::remove_all_references()
   }
 
   if (minion_count()) {
-    dbg("Remove all minion references, total %d", minion_count());
+    dbg("Remove all minions, total %d", minion_count());
+    TRACE_AND_INDENT();
 
-    //
-    // Slow, but not used too often
-    //
-    {
-      for (auto p : level->all_things) {
-        auto t = p.second;
-        verify(MTYPE_THING, t);
-        auto o = t->immediate_mob();
-        if (o == this) {
-          t->mob_unset();
-        }
+    while (minion_count()) {
+      ThingId id = *infop->owned.begin();
+      auto    t  = level->thing_find(id);
+      if (t) {
+        dbg("Remove minion %s", t->to_string().c_str());
+        t->mob_unset();
+      } else {
+        err("Cannot remove minion %" PRIX32, id.id);
       }
     }
   }
 
   if (follower_count()) {
-    dbg("Remove all follower references, total %d", follower_count());
+    dbg("Remove all followers, total %d", follower_count());
+    TRACE_AND_INDENT();
 
-    //
-    // Slow, but not used too often
-    //
-    {
-      for (auto p : level->all_things) {
-        auto t = p.second;
-        verify(MTYPE_THING, t);
-        auto o = t->leader();
-        if (o == this) {
-          t->remove_leader();
-        }
+    while (follower_count()) {
+      ThingId id = *infop->owned.begin();
+      auto    t  = level->thing_find(id);
+      if (t) {
+        dbg("Remove follower %s", t->to_string().c_str());
+        t->leader_unset();
+      } else {
+        err("Cannot remove follower %" PRIX32, id.id);
       }
     }
   }
@@ -277,9 +265,9 @@ void Thing::remove_all_references()
       for (auto p : level->all_things) {
         auto t = p.second;
         verify(MTYPE_THING, t);
-        auto o = t->immediate_spawned_owner();
+        auto o = t->immediate_spawner();
         if (o == this) {
-          t->remove_spawner_owner();
+          t->spawner_unset();
         }
       }
     }

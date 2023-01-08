@@ -318,7 +318,7 @@ public:
   Thingp equip_use_anim(int equip);
   Thingp immediate_mob(void);
   Thingp immediate_owner(void);
-  Thingp immediate_spawned_owner(void);
+  Thingp immediate_spawner(void);
   Thingp in_the_way_for_firing(const point s, const point e, int x, int y);
   Thingp in_the_way_for_jumping(const point s, const point e, int x, int y);
   Thingp in_the_way_for_throwing(const point s, const point e, int x, int y);
@@ -336,7 +336,7 @@ public:
   Thingp top_mob(void);
   Thingp top_owner(void);
   Thingp top_owner_internal(void);
-  Thingp top_spawned_owner(void);
+  Thingp top_spawner(void);
   Thingp debuff_find(const std::string &);
   Thingp buff_find(const std::string &);
 
@@ -645,7 +645,7 @@ public:
   const ThingId &immediate_mob_id(void);
   const ThingId &leader_id(void);
   const ThingId &immediate_owner_id(void);
-  const ThingId &immediate_spawned_owner_id(void);
+  const ThingId &immediate_spawner_id(void);
   const ThingId &top_owner_id(void);
   const ThingId &mob_id_set(const ThingId &v);
   const ThingId &leader_id_set(const ThingId &v);
@@ -1059,11 +1059,6 @@ public:
   int environ_avoids_necrosis(void);
   int environ_avoids_poison(void);
   int environ_avoids_water(void);
-  int follower_count_decr(int);
-  int follower_count_decr(void);
-  int follower_count_incr(int);
-  int follower_count_incr(void);
-  int follower_count_set(int);
   int follower_count(void);
   int gfx_ascii_bg_color_spread_alpha(void);
   int gfx_ascii_bg_color_spread_blue(void);
@@ -2409,8 +2404,8 @@ public:
   void reinit(void);
   void release_followers(void);
   void remove_all_references(void);
-  void remove_leader(void);
-  void remove_spawner_owner(void);
+  void leader_unset(void);
+  void spawner_unset(void);
   void reset_goal_penalty(Thingp attacker);
   void resting(void);
   void resurrect_forced(void);
@@ -2429,7 +2424,7 @@ public:
   void sleep(void);
   void solid_rock_tick(void);
   void spawned_newborn(Thingp it);
-  void spawned_owner_set(Thingp spawner_owner);
+  void spawner_set(Thingp spawner_owner);
   void stamina_boost(int v);
   void stats_tick(void);
   void stuck(const std::string &why);
