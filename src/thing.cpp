@@ -124,7 +124,7 @@ const ThingId &Thing::immediate_spawner_id(void)
   return (infop()->spawner_owner_id);
 }
 
-const ThingId &Thing::spawned_owner_id_set(const ThingId &v)
+const ThingId &Thing::spawner_set(const ThingId &v)
 {
   TRACE_NO_INDENT();
   new_infop();

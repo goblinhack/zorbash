@@ -244,7 +244,7 @@ void Thing::remove_all_references()
     TRACE_AND_INDENT();
 
     while (follower_count()) {
-      ThingId id = *infop->owned.begin();
+      ThingId id = *infop->followers.begin();
       auto    t  = level->thing_find(id);
       if (t) {
         dbg("Remove follower %s", t->to_string().c_str());
@@ -256,139 +256,17 @@ void Thing::remove_all_references()
   }
 
   if (spawned_count()) {
-    dbg("Remove all spawner references, total %d", spawned_count());
+    dbg("Remove all spawned things, total %d", spawned_count());
+    TRACE_AND_INDENT();
 
-    //
-    // Slow, but not used too often
-    //
-    {
-      for (auto p : level->all_things) {
-        auto t = p.second;
-        verify(MTYPE_THING, t);
-        auto o = t->immediate_spawner();
-        if (o == this) {
-          t->spawner_unset();
-        }
-      }
-    }
-  }
-
-  IF_DEBUG3
-  {
-    {
-      for (auto p : level->all_things) {
-        auto t = p.second;
-        verify(MTYPE_THING, t);
-        if (t == this) {
-          continue;
-        }
-        if (t->maybe_infop()) {
-          if (id == t->infop()->on_fire_id_anim) {
-            err("thing is still attached to (on fire) %s", t->to_short_string().c_str());
-          }
-          if (id == t->infop()->owner_id) {
-            err("thing is still attached to (owner) %s", t->to_short_string().c_str());
-          }
-          if (id == t->infop()->mob_id) {
-            err("thing is still attached to (mob) %s", t->to_short_string().c_str());
-          }
-          if (id == t->infop()->leader_id) {
-            err("thing is still attached to (leader) %s", t->to_short_string().c_str());
-          }
-          if (id == t->infop()->spawner_owner_id) {
-            err("thing is still attached to (spawner) %s", t->to_short_string().c_str());
-          }
-        }
-        if (t->maybe_itemsp()) {
-          FOR_ALL_EQUIP(e)
-          {
-            if (id == t->itemsp()->equip_id[ e ]) {
-              err("thing is still attached to (equip) %s", t->to_short_string().c_str());
-            }
-            if (id == t->itemsp()->equip_id_carry_anim[ e ]) {
-              err("thing is still attached to (equip carry) %s", t->to_short_string().c_str());
-            }
-            if (id == t->itemsp()->equip_id_use_anim[ e ]) {
-              err("thing is still attached to (equip use) %s", t->to_short_string().c_str());
-            }
-          }
-        }
-      }
-    }
-
-    for (auto p : level->interesting_things) {
-      auto t = p.second;
-      if (t == this) {
-        continue;
-      }
-      if (t->maybe_infop()) {
-        if (id == t->infop()->on_fire_id_anim) {
-          err("interesting thing is still attached to (on fire) %s", t->to_short_string().c_str());
-        }
-        if (id == t->infop()->owner_id) {
-          err("interesting thing is still attached to (owner) %s", t->to_short_string().c_str());
-        }
-        if (id == t->infop()->mob_id) {
-          err("interesting thing is still attached to (mob) %s", t->to_short_string().c_str());
-        }
-        if (id == t->infop()->leader_id) {
-          err("interesting thing is still attached to (leader) %s", t->to_short_string().c_str());
-        }
-        if (id == t->infop()->spawner_owner_id) {
-          err("interesting thing is still attached to (spawner) %s", t->to_short_string().c_str());
-        }
-      }
-      if (t->maybe_itemsp()) {
-        FOR_ALL_EQUIP(e)
-        {
-          if (id == t->itemsp()->equip_id[ e ]) {
-            err("interesting thing is still attached to (equip) %s", t->to_short_string().c_str());
-          }
-          if (id == t->itemsp()->equip_id_carry_anim[ e ]) {
-            err("interesting thing is still attached to (equip carry) %s", t->to_short_string().c_str());
-          }
-          if (id == t->itemsp()->equip_id_use_anim[ e ]) {
-            err("interesting thing is still attached to (equip use) %s", t->to_short_string().c_str());
-          }
-        }
-      }
-    }
-
-    for (auto p : level->animated_things) {
-      auto t = p.second;
-      if (t == this) {
-        continue;
-      }
-      if (t->maybe_infop()) {
-        if (id == t->infop()->on_fire_id_anim) {
-          err("interesting thing is still attached to (on fire) %s", t->to_short_string().c_str());
-        }
-        if (id == t->infop()->owner_id) {
-          err("interesting thing is still attached to (owner) %s", t->to_short_string().c_str());
-        }
-        if (id == t->infop()->mob_id) {
-          err("interesting thing is still attached to (mob) %s", t->to_short_string().c_str());
-        }
-        if (id == t->infop()->leader_id) {
-          err("interesting thing is still attached to (leader) %s", t->to_short_string().c_str());
-        }
-        if (id == t->infop()->spawner_owner_id) {
-          err("interesting thing is still attached to (spawner) %s", t->to_short_string().c_str());
-        }
-      }
-      if (t->maybe_itemsp()) {
-        FOR_ALL_EQUIP(e)
-        {
-          if (id == t->itemsp()->equip_id[ e ]) {
-            err("interesting thing is still attached to (equip) %s", t->to_short_string().c_str());
-          }
-          if (id == t->itemsp()->equip_id_carry_anim[ e ]) {
-            err("interesting thing is still attached to (equip carry) %s", t->to_short_string().c_str());
-          }
-          if (id == t->itemsp()->equip_id_use_anim[ e ]) {
-            err("interesting thing is still attached to (equip use) %s", t->to_short_string().c_str());
-          }
-        }
+    while (spawned_count()) {
+      ThingId id = *infop->spawned.begin();
+      auto    t  = level->thing_find(id);
+      if (t) {
+        dbg("Remove spawned %s", t->to_string().c_str());
+        t->spawner_unset();
+      } else {
+        err("Cannot remove spawned %" PRIX32, id.id);
       }
     }
   }

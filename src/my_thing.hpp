@@ -650,7 +650,7 @@ public:
   const ThingId &mob_id_set(const ThingId &v);
   const ThingId &leader_id_set(const ThingId &v);
   const ThingId &owner_id_set(const ThingId &v);
-  const ThingId &spawned_owner_id_set(const ThingId &v);
+  const ThingId &spawner_set(const ThingId &v);
 
   const Tpp tp_slow(void);
 
@@ -1707,11 +1707,6 @@ public:
   int sleep_count_incr(void);
   int sleep_count_set(int);
   int sleep_count(void);
-  int spawned_count_decr(int);
-  int spawned_count_decr(void);
-  int spawned_count_incr(int);
-  int spawned_count_incr(void);
-  int spawned_count_set(int);
   int spawned_count(void);
   int spawn_group_radius(void);
   int spawn_group_size(void);

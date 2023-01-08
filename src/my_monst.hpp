@@ -171,7 +171,6 @@ public:
   int8_t charge_count       = {}; // Wand charges
   int8_t sleep_count        = {}; // How long asleep
   int8_t damaged_count      = {}; // How much a weapon is damaged.
-  int8_t spawned_count      = {}; // How many things this thing spawned.
   int8_t map_treasure_count = {}; // How many treasure maps held. Really only care if > 0
   int8_t map_beast_count    = {}; // How many beast maps held. Really only care if > 0
 
@@ -241,6 +240,10 @@ public:
   // List of things in my team and I am the leader of:
   //
   std::set< ThingId > followers {};
+  //
+  // List of things I have spawned:
+  //
+  std::set< ThingId > spawned {};
 
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^

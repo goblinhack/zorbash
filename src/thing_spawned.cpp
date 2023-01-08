@@ -38,56 +38,46 @@ Thingp Thing::immediate_spawner(void)
   return nullptr;
 }
 
-void Thing::spawner_set(Thingp spawner_owner)
+void Thing::spawner_set(Thingp spawner)
 {
   TRACE_NO_INDENT();
 
-  if (spawner_owner) {
-    verify(MTYPE_THING, spawner_owner);
+  if (! spawner) {
+    spawner_unset();
+    return;
   }
 
-  auto old_spawner_owner = immediate_spawner();
-  if (old_spawner_owner) {
-    if (old_spawner_owner == spawner_owner) {
+  verify(MTYPE_THING, spawner);
+
+  auto old_spawner = immediate_spawner();
+  if (old_spawner) {
+    if (old_spawner == spawner) {
       return;
     }
 
-    if (spawner_owner) {
-      dbg("Will change spawner owner %s->%s", old_spawner_owner->to_short_string().c_str(),
-          spawner_owner->to_short_string().c_str());
-    } else {
-      dbg("Will remove spawner owner %s", old_spawner_owner->to_short_string().c_str());
-    }
+    dbg("Will change spawner owner %s->%s", old_spawner->to_short_string().c_str(),
+        spawner->to_short_string().c_str());
+    old_spawner->infop()->spawned.erase(id);
   } else {
-    if (spawner_owner) {
-      dbg("Will set spawner owner to %s", spawner_owner->to_short_string().c_str());
-    }
+    dbg("Will set spawner owner to %s", spawner->to_short_string().c_str());
   }
 
-  if (spawner_owner) {
-    spawned_owner_id_set(spawner_owner->id);
-    spawner_owner->spawned_count_incr();
-  } else {
-    spawned_owner_id_set(NoThingId);
-    if (old_spawner_owner) {
-      old_spawner_owner->spawned_count_decr();
-    }
-  }
+  spawner_set(spawner->id);
+  spawner->infop()->spawned.insert(id);
 }
 
 void Thing::spawner_unset(void)
 {
   TRACE_NO_INDENT();
 
-  auto old_spawner_owner = immediate_spawner();
-  if (! old_spawner_owner) {
+  auto old_spawner = immediate_spawner();
+  if (! old_spawner) {
     return;
   }
 
-  dbg("Remove spawner owner %s", old_spawner_owner->to_short_string().c_str());
-
-  spawned_owner_id_set(NoThingId);
-  old_spawner_owner->spawned_count_decr();
+  dbg("Remove spawner owner %s", old_spawner->to_short_string().c_str());
+  spawner_set(NoThingId);
+  old_spawner->infop()->spawned.erase(id);
 }
 
 //
@@ -161,42 +151,7 @@ int Thing::spawned_count(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop()->spawned_count);
+    return (int) infop()->spawned.size();
   }
   return 0;
-}
-
-int Thing::spawned_count_set(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->spawned_count = v);
-}
-
-int Thing::spawned_count_decr(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->spawned_count -= v);
-}
-
-int Thing::spawned_count_incr(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->spawned_count += v);
-}
-
-int Thing::spawned_count_decr(void)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->spawned_count--);
-}
-
-int Thing::spawned_count_incr(void)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->spawned_count++);
 }

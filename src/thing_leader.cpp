@@ -222,7 +222,6 @@ void Thing::leader_unset(void)
   }
 
   dbg("Remove leader %s", old_leader->to_string().c_str());
-
   old_leader->infop()->followers.erase(id);
   leader_id_set(NoThingId);
 }
