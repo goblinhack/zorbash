@@ -69,9 +69,11 @@ bool Thing::player_is_ready_for_thing_info(void)
       return false;
     }
 
-    if (level->player->is_dead || level->player->is_dying) {
-      dbg("Not ready for thing info; dead");
-      return false;
+    if (! is_player) {
+      if (level->player->is_dead || level->player->is_dying) {
+        dbg("Not ready for thing info; dead");
+        return false;
+      }
     }
 
     if (level->is_starting || level->is_being_destroyed) {
