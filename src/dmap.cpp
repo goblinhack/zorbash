@@ -7,6 +7,7 @@
 #include "my_main.hpp"
 #include "my_sdl_event.hpp"
 #include "my_sprintf.hpp"
+#include "my_vector_bounds_check.hpp"
 
 void dmap_print(const Dmap *D, point at, point tl, point br)
 {
@@ -559,7 +560,7 @@ std::vector< point > dmap_solve_allow_diagonal(const Dmap *D, const point start)
   return (dmap_solve_(D, start, all_deltas, true));
 }
 
-std::vector< point > dmap_solve(const Dmap *D, const point start)
+std::vector< point > dmap_solve_manhattan(const Dmap *D, const point start)
 {
   static const std::vector< point > all_deltas = {
       point(0, -1),
@@ -568,4 +569,77 @@ std::vector< point > dmap_solve(const Dmap *D, const point start)
       point(0, 1),
   };
   return (dmap_solve_(D, start, all_deltas, false));
+}
+
+//
+// Try to solve diagonally first. Then fallback to manhattan if we cannot.
+//
+std::vector< point > dmap_solve(const Dmap *D, const point start)
+{
+  //
+  // No path? Intentionally not allowing diagonal moves here as that allows the
+  // player to take a shortcut around walls. e.g.
+  //
+  // ..###    ..###
+  // ..#$#    ..#$#
+  // .@### -> ..###
+  // .....    ..@..
+  //
+  // if we allow the diagonal move then the hidden treasure in the middle of the
+  // wall gets exposed.
+  //
+  auto p         = dmap_solve_allow_diagonal(D, start);
+  auto path_size = p.size();
+  if (! path_size) {
+    std::vector< point > empty_path;
+    return empty_path;
+  }
+
+  bool failed_to_move_diagonally = false;
+  TOPCON("P%d", (int) path_size);
+
+  if (path_size >= 1) {
+    for (int i = 0; i < path_size - 1; i++) {
+      auto hop0 = get(p, i);
+      auto hop1 = get(p, i + 1);
+
+      // s.
+      // .e
+      if (((hop0.x + 1) == hop1.x) && ((hop0.y + 1) == hop1.y)) {
+        if (is_obs_wall_or_door_at(D, hop0.x + 1, hop0.y) || is_obs_wall_or_door_at(D, hop0.x, hop0.y + 1)) {
+          failed_to_move_diagonally = true;
+        }
+      }
+
+      // .s
+      // e.
+      if (((hop0.x - 1) == hop1.x) && ((hop0.y + 1) == hop1.y)) {
+        if (is_obs_wall_or_door_at(D, hop0.x - 1, hop0.y) || is_obs_wall_or_door_at(D, hop0.x, hop0.y + 1)) {
+          failed_to_move_diagonally = true;
+        }
+      }
+
+      // .e
+      // s.
+      if (((hop0.x + 1) == hop1.x) && ((hop0.y - 1) == hop1.y)) {
+        if (is_obs_wall_or_door_at(D, hop0.x + 1, hop0.y) || is_obs_wall_or_door_at(D, hop0.x, hop0.y - 1)) {
+          failed_to_move_diagonally = true;
+        }
+      }
+
+      // e.
+      // .s
+      if (((hop0.x - 1) == hop1.x) && ((hop0.y - 1) == hop1.y)) {
+        if (is_obs_wall_or_door_at(D, hop0.x - 1, hop0.y) || is_obs_wall_or_door_at(D, hop0.x, hop0.y - 1)) {
+          failed_to_move_diagonally = true;
+        }
+      }
+    }
+  }
+
+  if (failed_to_move_diagonally) {
+    p = dmap_solve_manhattan(D, start);
+  }
+
+  return p;
 }

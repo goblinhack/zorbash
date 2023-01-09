@@ -224,7 +224,7 @@ bool Thing::ai_create_on_fire_path(point &nh, const point start, const point end
   dmap_print(&dmap, start, dmap_start, dmap_end);
 #endif
 
-  auto p = dmap_solve_allow_diagonal(&dmap, start);
+  auto p = dmap_solve(&dmap, start);
 
   char path_debug           = '\0'; // astart path debug
   auto [ result, fallback ] = astar_solve(nullptr, path_debug, start, end, &dmap, true /* allow diagonals */);
@@ -238,16 +238,6 @@ bool Thing::ai_create_on_fire_path(point &nh, const point start, const point end
   auto hops     = result.path;
   auto hops_len = hops.size();
 
-  if (hops_len >= 2) {
-    auto hop0 = get(hops, hops_len - 1);
-    auto hop1 = get(hops, hops_len - 2);
-    if (dmap_can_i_move_diagonally(&dmap, start, hop0, hop1)) {
-      nh = hop1;
-    } else {
-      nh = hop0;
-    }
-    return true;
-  }
   if (hops_len >= 1) {
     auto hop0 = get(hops, hops_len - 1);
     nh        = hop0;

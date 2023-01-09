@@ -6,6 +6,7 @@
 #include "my_game.hpp"
 #include "my_math.hpp"
 #include "my_thing.hpp"
+#include "my_vector_bounds_check.hpp"
 #include "my_wid.hpp"
 
 void Level::cursor_path_draw_circle(void)
@@ -175,10 +176,7 @@ void Level::cursor_path_draw_line(Thingp it, point start, point end)
   dmap_process(&d, dmap_start, dmap_end, true, true);
   // dmap_print(&d, start, dmap_start, dmap_end);
 
-  //
-  // No path?
-  //
-  auto p         = dmap_solve_allow_diagonal(&d, start);
+  auto p         = dmap_solve(&d, start);
   auto path_size = p.size();
   if (! path_size) {
     return;
