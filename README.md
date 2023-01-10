@@ -1,7 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- jumping over lava seems to give heat damage                                                                                                  -->
-<!-- could see some treasure inside a square of walls in pixel art mode                                                                           -->
+<!-- bumping into a snake should wake it                                                                                                          -->
+<!-- convert bridges to nowhere into chasms                                                                                                       -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
