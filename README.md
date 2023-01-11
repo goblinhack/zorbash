@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- bumping into a snake should wake it                                                                                                          -->
 <!-- convert bridges to nowhere into chasms                                                                                                       -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

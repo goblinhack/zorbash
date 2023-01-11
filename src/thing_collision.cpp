@@ -578,7 +578,8 @@ bool Thing::collision_check_only(Thingp it, point future_pos)
       // Weapon hits monster or mob.
       //
       if (things_overlap(me, future_pos, it)) {
-        dbg("Collision; overlaps and can attack");
+        dbg("Collision; overlaps and can attack monst");
+        it->wake("bumped into");
         return true;
       }
     }
@@ -592,7 +593,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos)
           return false;
         }
         if (things_overlap(me, future_pos, it)) {
-          dbg("Collision; overlaps and can attack");
+          dbg("Collision; overlaps and can attack door");
           return true;
         }
       }
@@ -712,7 +713,8 @@ bool Thing::collision_check_only(Thingp it, point future_pos)
 
   if (possible_to_attack(it)) {
     if (things_overlap(me, future_pos, it)) {
-      dbg("Collision; overlaps and can attack");
+      dbg("Collision; overlaps and can attack it");
+      it->wake("bumped into");
       return true;
     }
     dbg("No collision; can attack but no overlap");
