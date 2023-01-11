@@ -595,51 +595,151 @@ std::vector< point > dmap_solve(const Dmap *D, const point start)
     return empty_path;
   }
 
-  bool failed_to_move_diagonally = false;
-  TOPCON("P%d", (int) path_size);
+  //
+  // Take a path like the following
+  //
+  // ...........
+  // .@.........
+  // ..*........
+  // ...*.#.....
+  // ....*###...
+  // .....*.#...
+  // ......*#...
+  // .......*...
+  //
+  // and convert it to avoid cutting across walls diagonally
+  //
+  // ...........
+  // .@.........
+  // ..*........
+  // ...*.#.....
+  // ....*###...
+  // ....**.#...
+  // ......*#...
+  // ......**...
+  //
+  p.insert(p.begin(), start);
+  std::vector< point > out;
+  path_size = p.size();
 
-  if (path_size >= 1) {
-    for (int i = 0; i < path_size - 1; i++) {
-      auto hop0 = get(p, i);
-      auto hop1 = get(p, i + 1);
+  for (int i = 0; i < path_size; i++) {
+    auto hop0 = get(p, i);
 
-      // s.
-      // .e
-      if (((hop0.x + 1) == hop1.x) && ((hop0.y + 1) == hop1.y)) {
-        if (is_obs_wall_or_door_at(D, hop0.x + 1, hop0.y) || is_obs_wall_or_door_at(D, hop0.x, hop0.y + 1)) {
-          failed_to_move_diagonally = true;
-        }
-      }
+    if (i == path_size - 1) {
+      out.push_back(hop0);
+      break;
+    }
 
-      // .s
-      // e.
-      if (((hop0.x - 1) == hop1.x) && ((hop0.y + 1) == hop1.y)) {
-        if (is_obs_wall_or_door_at(D, hop0.x - 1, hop0.y) || is_obs_wall_or_door_at(D, hop0.x, hop0.y + 1)) {
-          failed_to_move_diagonally = true;
-        }
-      }
+    auto hop1 = get(p, i + 1);
 
-      // .e
-      // s.
-      if (((hop0.x + 1) == hop1.x) && ((hop0.y - 1) == hop1.y)) {
-        if (is_obs_wall_or_door_at(D, hop0.x + 1, hop0.y) || is_obs_wall_or_door_at(D, hop0.x, hop0.y - 1)) {
-          failed_to_move_diagonally = true;
-        }
-      }
-
-      // e.
-      // .s
-      if (((hop0.x - 1) == hop1.x) && ((hop0.y - 1) == hop1.y)) {
-        if (is_obs_wall_or_door_at(D, hop0.x - 1, hop0.y) || is_obs_wall_or_door_at(D, hop0.x, hop0.y - 1)) {
-          failed_to_move_diagonally = true;
-        }
+    // s.
+    // .e
+    if (((hop0.x + 1) == hop1.x) && ((hop0.y + 1) == hop1.y)) {
+      if (is_obs_wall_or_door_at(D, hop0.x + 1, hop0.y) && is_obs_wall_or_door_at(D, hop0.x, hop0.y + 1)) {
+        //
+        // Allow fully diagonal moves between walls?
+        //
+        return out;
+      } else if (is_obs_wall_or_door_at(D, hop0.x + 1, hop0.y)) {
+        //
+        // Try to make a path around the obstacle
+        //
+        out.push_back(hop0);
+        out.push_back(point(hop0.x, hop0.y + 1));
+        continue;
+      } else if (is_obs_wall_or_door_at(D, hop0.x, hop0.y + 1)) {
+        //
+        // Try to make a path around the obstacle
+        //
+        out.push_back(hop0);
+        out.push_back(point(hop0.x + 1, hop0.y));
+        continue;
       }
     }
+
+    // .s
+    // e.
+    if (((hop0.x - 1) == hop1.x) && ((hop0.y + 1) == hop1.y)) {
+      if (is_obs_wall_or_door_at(D, hop0.x - 1, hop0.y) && is_obs_wall_or_door_at(D, hop0.x, hop0.y + 1)) {
+        //
+        // Allow fully diagonal moves between walls?
+        //
+        return out;
+      } else if (is_obs_wall_or_door_at(D, hop0.x - 1, hop0.y)) {
+        //
+        // Try to make a path around the obstacle
+        //
+        out.push_back(hop0);
+        out.push_back(point(hop0.x, hop0.y + 1));
+        continue;
+      } else if (is_obs_wall_or_door_at(D, hop0.x, hop0.y + 1)) {
+        //
+        // Try to make a path around the obstacle
+        //
+        out.push_back(hop0);
+        out.push_back(point(hop0.x - 1, hop0.y));
+        continue;
+      }
+    }
+
+    // .e
+    // s.
+    if (((hop0.x + 1) == hop1.x) && ((hop0.y - 1) == hop1.y)) {
+      if (is_obs_wall_or_door_at(D, hop0.x + 1, hop0.y) && is_obs_wall_or_door_at(D, hop0.x, hop0.y - 1)) {
+        //
+        // Allow fully diagonal moves between walls?
+        //
+        return out;
+      } else if (is_obs_wall_or_door_at(D, hop0.x + 1, hop0.y)) {
+        //
+        // Try to make a path around the obstacle
+        //
+        out.push_back(hop0);
+        out.push_back(point(hop0.x, hop0.y - 1));
+        continue;
+      } else if (is_obs_wall_or_door_at(D, hop0.x, hop0.y - 1)) {
+        //
+        // Try to make a path around the obstacle
+        //
+        out.push_back(hop0);
+        out.push_back(point(hop0.x + 1, hop0.y));
+        continue;
+      }
+    }
+
+    // e.
+    // .s
+    if (((hop0.x - 1) == hop1.x) && ((hop0.y - 1) == hop1.y)) {
+      if (is_obs_wall_or_door_at(D, hop0.x - 1, hop0.y) && is_obs_wall_or_door_at(D, hop0.x, hop0.y - 1)) {
+        //
+        // Allow fully diagonal moves between walls?
+        //
+        return out;
+      } else if (is_obs_wall_or_door_at(D, hop0.x - 1, hop0.y)) {
+        //
+        // Try to make a path around the obstacle
+        //
+        out.push_back(hop0);
+        out.push_back(point(hop0.x, hop0.y - 1));
+        continue;
+      } else if (is_obs_wall_or_door_at(D, hop0.x, hop0.y - 1)) {
+        //
+        // Try to make a path around the obstacle
+        //
+        out.push_back(hop0);
+        out.push_back(point(hop0.x - 1, hop0.y));
+        continue;
+      }
+    }
+
+    out.push_back(hop0);
   }
 
-  if (failed_to_move_diagonally) {
-    p = dmap_solve_manhattan(D, start);
+  out.erase(out.begin());
+  path_size = out.size();
+  if (! path_size) {
+    return out;
   }
 
-  return p;
+  return out;
 }
