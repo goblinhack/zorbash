@@ -36,7 +36,7 @@ do_retry:
   for (auto slot = 0; slot < MAP_SLOTS; slot++) {
     auto idp = &getref(all_things_id_at, x, y, slot);
     if (idp->id == id.id) {
-      IF_DEBUG2 { t->log("Found %" PRIX32 " at %u,%u slot %u", id.id, x, y, slot); }
+      IF_DEBUG3 { t->log("Found %" PRIX32 " at %u,%u slot %u", id.id, x, y, slot); }
       return;
     }
 
@@ -52,7 +52,7 @@ do_retry:
     sort(all_things_ptr_at[ x ][ y ].begin(), all_things_ptr_at[ x ][ y ].end(),
          [](const Thingp &a, const Thingp &b) -> bool { return a->z_prio() < b->z_prio(); });
 
-    IF_DEBUG2 { t->log("Put thing %p %" PRIX32 " at %u,%u slot %u", t, id.id, x, y, free_slot); }
+    IF_DEBUG3 { t->log("Put thing %p %" PRIX32 " at %u,%u slot %u", t, id.id, x, y, free_slot); }
 
     *idp = id;
     return;
@@ -127,7 +127,7 @@ void Level::remove_thing(int x, int y, ThingId id)
       auto b  = v->begin();
       auto e  = v->end();
 
-      IF_DEBUG2 { t->log("Rem thing %p %" PRIX32 " at %u,%u slot %u", t, id.id, x, y, slot); }
+      IF_DEBUG3 { t->log("Rem thing %p %" PRIX32 " at %u,%u slot %u", t, id.id, x, y, slot); }
 
 #ifdef SLOWER_BUT_USES_FANCY_STL
       auto r = std::remove_if(b, e, [ t /* pass t by value */ ](Thingp x) { return (x == t); });

@@ -367,19 +367,13 @@ bool Thing::victim_attack_swing(int equip, Thingp best, point best_hit_at, Thing
   // If attacking something like blood, then do a natural attack instead.
   //
   if (is_monst()) {
-    if (best && can_eat(best)) {
+    if (best && can_eat(best) && is_hunger_level_starving) {
       //
-      // Eat attack; but only if it is dead if it is a monster.
+      // Bite attack?
       //
-      if (is_dead) {
-        dbg2("Target-attack-best: Dead monster");
-        attack_options->used_as        = gfx_anim_use();
-        attack_options->prefer_nat_att = true;
-      } else {
-        dbg2("Target-attack-best: Something I can eat");
-        attack_options->used_as        = gfx_anim_use();
-        attack_options->prefer_nat_att = true;
-      }
+      dbg2("Target-attack-best: Prefer nat attack");
+      attack_options->used_as        = gfx_anim_use();
+      attack_options->prefer_nat_att = true;
     } else if (! level->is_monst(best_hit_at) && ! level->is_wall(best_hit_at) && ! level->is_door(best_hit_at) &&
                ! level->is_mob(best_hit_at)) {
       //
@@ -518,10 +512,10 @@ bool Thing::victim_attack_choose_best(Thingp item, point at, Thingp *best, point
 bool Thing::victim_attack_best_at(int equip, ThingAttackOptionsp attack_options)
 {
   if (attack_options->attack_at_set) {
-    dbg("Target-attack-best-at: Try to attack with equipped item at %s",
+    dbg("Target-attack-best-at: Try to attack at with equipped item at %s",
         attack_options->attack_at.to_string().c_str());
   } else {
-    dbg("Target-attack-best-at: Try to attack with equipped item");
+    dbg("Target-attack-best-at: Try to attack at with equipped item");
   }
   TRACE_AND_INDENT();
 

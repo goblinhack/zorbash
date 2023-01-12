@@ -222,7 +222,7 @@ bool Thing::collision_find_best_target(ThingAttackOptionsp attack_options)
         //
         // As above, but not for owner.
         //
-        if (can_eat(victim)) {
+        if (can_eat(victim) && 0) {
           dbg("Try to eat instead of attacking %s", victim->to_short_string().c_str());
           TRACE_AND_INDENT();
 
@@ -269,8 +269,10 @@ bool Thing::collision_find_best_target(ThingAttackOptionsp attack_options)
     if (attack_options->nat_att || is_staff() || is_laser() || is_weapon() || is_monst() ||
         (is_player() && game->robot_mode)) {
       dbg("Collision: weapon check against %s", victim->to_short_string().c_str());
+      TRACE_AND_INDENT();
       if (! attack_options->victim_attacked) {
         dbg("Collision: weapon try to attack %s", victim->to_short_string().c_str());
+        TRACE_AND_INDENT();
         if (attack(victim, attack_options)) {
           attack_options->victim_attacked = true;
           ret                             = true;
