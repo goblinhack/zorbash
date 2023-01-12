@@ -156,7 +156,7 @@ void Thing::killed(Thingp defeater, const char *reason)
     if (on_death_is_open()) {
       dbg("Defeated, now open");
       level_pop();
-      is_open = true;
+      open();
       level_push();
       if (player) {
         int distance = distance_to_player();

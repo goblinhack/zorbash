@@ -2,6 +2,14 @@ import my
 import tp
 
 
+def on_death(me, x, y):
+    my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "door_stone")
+
+
+def on_open(me, x, y):
+    my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "door_stone")
+
+
 def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
@@ -26,6 +34,9 @@ def tp_init(name, text_long_name):
     my.noise_on_you_are_hit_and_now_dead(self, 10)
     my.noise_on_you_are_hit_but_still_alive(self, 10)
     my.normal_placement_rules(self, True)
+    my.on_death_do(self, "me.on_death()")
+    my.on_death_is_open(self, True)
+    my.on_open_do(self, "me.on_open()")
     my.text_a_or_an(self, "a")
     my.text_description_short(self, "A strange looking wall.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)

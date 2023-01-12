@@ -9,6 +9,7 @@
 void Thing::secret_door_tick(void)
 {
   TRACE_NO_INDENT();
+
   if (! is_player()) {
     return;
   }
@@ -29,6 +30,13 @@ void Thing::secret_door_tick(void)
     // This stops the robot continually looking at secret doors
     //
     t->dead("opened");
+
+    if (is_player()) {
+      msg("An ancient door creaks open.");
+    } else {
+      msg("You hear an ancient door creaking open.");
+    }
+
     break;
   }
   FOR_ALL_THINGS_END()
