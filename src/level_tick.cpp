@@ -321,7 +321,8 @@ void Level::tick_(void)
 
       uint32_t tick_begin_ms = time_ms();
       t->tick();
-      {
+
+      if (! game->robot_mode) {
         auto tick_duration = time_ms() - tick_begin_ms;
         if (tick_duration > 1) {
           // t->log("PERF: Thing took tick duration %u ms", tick_duration);
