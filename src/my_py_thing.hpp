@@ -457,6 +457,7 @@ PyObject *thing_move_speed_mod_decr(PyObject *obj, PyObject *args, PyObject *key
 PyObject *thing_move_speed_mod_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_move_speed_mod_set(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_move_speed(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_msg_if_not_dead_or_dying(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_name_get(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_necrotized_amount_decr(PyObject *obj, PyObject *args, PyObject *keywds);

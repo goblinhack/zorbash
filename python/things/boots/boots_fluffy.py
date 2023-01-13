@@ -6,18 +6,18 @@ self = None
 
 def on_equip(owner, me, x, y):
     if my.thing_is_player(owner):
-        my.thing_msg(me, "Your feet are nice and warm!")
+        my.thing_msg_if_not_dead_or_dying(me, "Your feet are nice and warm!")
 
 
 def on_unequip(owner, me, x, y):
     if my.thing_is_player(owner):
-        my.thing_msg(me, "Your feet are cold again!")
+        my.thing_msg_if_not_dead_or_dying(me, "Your feet are cold again!")
 
 
 def on_enchant(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if my.thing_is_player(owner):
-        my.thing_msg(me, "The boots become yet more fluffy and quiet.")
+        my.thing_msg_if_not_dead_or_dying(me, "The boots become yet more fluffy and quiet.")
     my.thing_noise_incr(me, -10)
 
 

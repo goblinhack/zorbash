@@ -6,12 +6,12 @@ self = None
 
 def on_equip(owner, me, x, y):
     if my.thing_is_player(owner):
-        my.thing_msg(me, "You feel full of energy!")
+        my.thing_msg_if_not_dead_or_dying(me, "You feel full of energy!")
 
 
 def on_unequip(owner, me, x, y):
     if my.thing_is_player(owner):
-        my.thing_msg(me, "Your feel your normal tired old self!")
+        my.thing_msg_if_not_dead_or_dying(me, "Your feel your normal tired old self!")
 
 
 def on_owner_receive_dmg_draining(me, owner, hitter, real_hitter, x, y, damage):

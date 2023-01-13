@@ -6,12 +6,12 @@ self = None
 
 def on_equip(owner, me, x, y):
     if my.thing_is_player(owner):
-        my.thing_msg(me, "You feel an urge to peek through keyholes!")
+        my.thing_msg_if_not_dead_or_dying(me, "You feel an urge to peek through keyholes!")
 
 
 def on_unequip(owner, me, x, y):
     if my.thing_is_player(owner):
-        my.thing_msg(me, "Your vision is normal again!")
+        my.thing_msg_if_not_dead_or_dying(me, "Your vision is normal again!")
 
 
 def tp_init(name, text_long_name, text_short_name):

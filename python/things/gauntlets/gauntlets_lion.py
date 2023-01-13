@@ -6,12 +6,12 @@ self = None
 
 def on_equip(owner, me, x, y):
     if my.thing_is_player(owner):
-        my.thing_msg(me, "Your fists feel full of roaring rage!")
+        my.thing_msg_if_not_dead_or_dying(me, "Your fists feel full of roaring rage!")
 
 
 def on_unequip(owner, me, x, y):
     if my.thing_is_player(owner):
-        my.thing_msg(me, "Your fists feel like normal fists again!")
+        my.thing_msg_if_not_dead_or_dying(me, "Your fists feel like normal fists again!")
 
 
 def tp_init(name, text_long_name, text_short_name):

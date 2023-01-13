@@ -711,6 +711,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_move_speed_mod_incr),
     MY_ADD_PYTHON_FUNCTION(thing_move_speed_mod_set),
     MY_ADD_PYTHON_FUNCTION(thing_msg),
+    MY_ADD_PYTHON_FUNCTION(thing_msg_if_not_dead_or_dying),
     MY_ADD_PYTHON_FUNCTION(thing_name_get),
     MY_ADD_PYTHON_FUNCTION(thing_necrotized_amount_get),
     MY_ADD_PYTHON_FUNCTION(thing_noise_additional_on_jump_end),

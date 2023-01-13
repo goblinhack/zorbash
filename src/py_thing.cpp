@@ -1710,6 +1710,46 @@ PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_NONE;
 }
 
+PyObject *thing_msg_if_not_dead_or_dying(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     owner_id = 0;
+  char        *msg      = nullptr;
+  static char *kwlist[] = {(char *) "owner", (char *) "msg", nullptr};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &msg)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! owner_id) {
+    ERR("%s: No owner thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp owner = game->thing_find(owner_id);
+  if (! owner) {
+    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    Py_RETURN_NONE;
+  }
+
+  //
+  // To avoid logs when unequipping when dying, for example.
+  //
+  if (owner->is_dead_or_dying()) {
+    Py_RETURN_NONE;
+  }
+
+  if (! msg) {
+    ERR("%s: No msg thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  owner->msg("%s", msg);
+
+  Py_RETURN_NONE;
+}
+
 PyObject *thing_popup(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
