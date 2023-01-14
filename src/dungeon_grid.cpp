@@ -1764,7 +1764,7 @@ bool Nodes::create_path_to_exit(int pass)
   //
   if (pass == 2) {
     auto s = point(start.x * 2 + 1, start.y * 2 + 1);
-    auto p = dmap_solve(&d, s);
+    auto p = dmap_solve_manhattan(&d, s);
     if (p.size() < (unsigned) (grid_width * 2)) {
       return false;
     }
@@ -2027,7 +2027,7 @@ void Nodes::make_paths_off_critical_path_reachable(void)
 
   std::array< std::array< bool, MAX_GRID_CHUNK_HEIGHT >, MAX_GRID_CHUNK_WIDTH > on_critical_path = {};
 
-  auto p = dmap_solve(&d, start);
+  auto p = dmap_solve_manhattan(&d, start);
   for (auto c : p) {
     auto X = (c.x - 1) / 2;
     auto Y = (c.y - 1) / 2;

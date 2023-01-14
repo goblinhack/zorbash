@@ -2443,7 +2443,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
   dmap_mid /= 2;
   IF_DEBUG2 { dmap_print(&d, dmap_mid, dmap_start, dmap_end); }
 
-  auto p = dmap_solve(&d, start);
+  auto p = dmap_solve_manhattan(&d, start);
 
   //
   // Too long a corridor?
