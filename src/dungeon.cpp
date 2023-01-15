@@ -150,7 +150,9 @@ void Dungeon::make_dungeon(void)
     // Create a cyclic dungeon map.
     //
     DBG2("INF: Create cyclic rooms");
-    create_cyclic_rooms(&grid);
+    if (! create_cyclic_rooms(&grid)) {
+      continue;
+    }
     TRACE_NO_INDENT();
     debug("create cyclic rooms");
 
@@ -1670,9 +1672,24 @@ void Dungeon::room_print_only_doors(Grid *g)
   }
 }
 
-void Dungeon::rooms_print_all(Grid *g)
+bool Dungeon::rooms_print_all(Grid *g)
 {
   TRACE_NO_INDENT();
+
+  //
+  // Try to juggle the rooms around a bit so the don't all line up due
+  // to the grid placement approach we use.
+  //
+  if (pcg_random_range(0, 10) < 5) {
+    return rooms_print_all_with_no_jiggle(g);
+  }
+  return rooms_print_all_with_jiggle(g);
+}
+
+bool Dungeon::rooms_print_all_with_no_jiggle(Grid *g)
+{
+  TRACE_NO_INDENT();
+
   std::fill(cells.begin(), cells.end(), Charmap::SPACE);
 
   for (auto x = 0; x < grid_width; x++) {
@@ -1684,13 +1701,102 @@ void Dungeon::rooms_print_all(Grid *g)
 
       Roomp r = get(g->node_rooms, x, y);
       if (! r) {
-        return;
+        return false;
       }
+
       auto rx = x * MAP_ROOM_WIDTH + MAP_BORDER_ROOM;
       auto ry = y * MAP_ROOM_HEIGHT + MAP_BORDER_ROOM;
       room_print_at(r, rx, ry);
     }
   }
+  return true;
+}
+
+bool Dungeon::rooms_print_all_with_jiggle(Grid *g)
+{
+  TRACE_NO_INDENT();
+
+  //
+  // Try to juggle the rooms around a bit so the don't all line up due
+  // to the grid placement approach we use.
+  //
+  int attempts           = 100;
+  int room_jiggle_offset = 2;
+  while (attempts--) {
+    //
+    // Try to place all rooms. Clear th map.
+    //
+    std::fill(cells.begin(), cells.end(), Charmap::SPACE);
+
+    for (auto x = 0; x < grid_width; x++) {
+      for (auto y = 0; y < grid_height; y++) {
+        auto n = nodes->getn(x, y);
+        if (n->depth <= 0) {
+          continue;
+        }
+
+        Roomp r = get(g->node_rooms, x, y);
+        if (! r) {
+          return false;
+        }
+
+        auto rx = x * MAP_ROOM_WIDTH + MAP_BORDER_ROOM;
+        auto ry = y * MAP_ROOM_HEIGHT + MAP_BORDER_ROOM;
+
+        bool placed = false;
+        int  tries  = 100;
+
+        //
+        // Jiggle a single room around. Make sure it does not overlap.
+        //
+        if (pcg_random_range(0, 10) < 3) {
+          while (tries--) {
+            int nx = rx + pcg_random_range(-room_jiggle_offset, room_jiggle_offset);
+            int ny = ry + pcg_random_range(-room_jiggle_offset, room_jiggle_offset);
+
+            if (can_place_room(r, nx, ny)) {
+              room_print_at(r, nx, ny);
+              placed = true;
+              break;
+            }
+          }
+        }
+
+        if (! placed) {
+          //
+          // Failed to place this room. Try to place it with no jigggle.
+          //
+          if (can_place_room(r, rx, ry)) {
+            room_print_at(r, rx, ry);
+            placed = true;
+          }
+
+          //
+          // Still failed. Try the whole process over again.
+          //
+          if (! placed) {
+            goto next;
+          }
+        }
+      }
+    }
+
+    //
+    // Managed to place all rooms
+    //
+    return true;
+
+    //
+    // Try again
+    //
+  next:
+    continue;
+  }
+
+  //
+  // Failed all attempts
+  //
+  return false;
 }
 
 bool Dungeon::room_is_a_candidate(int x, int y, const DungeonNode *n, Roomp r)
@@ -1911,9 +2017,7 @@ bool Dungeon::create_cyclic_rooms(Grid *g)
     }
   }
 
-  rooms_print_all(g);
-
-  return true;
+  return rooms_print_all(g);
 }
 
 void Dungeon::add_border(void)
@@ -2794,23 +2898,26 @@ void Dungeon::map_place_room_ptr(Roomp r, int x, int y)
 //
 bool Dungeon::can_place_room(Roomp r, int x, int y)
 {
-  if (x < MAP_BORDER_ROOM) {
+  if (x < 0) {
     return false;
   }
-  if (x + r->width >= map_width - MAP_BORDER_ROOM) {
+  if (x + r->width >= map_width) {
     return false;
   }
 
-  if (y < MAP_BORDER_ROOM) {
+  if (y < 0) {
     return false;
   }
-  if (y + r->height >= map_height - MAP_BORDER_ROOM) {
+  if (y + r->height >= map_height) {
     return false;
   }
 
   for (auto dz = 0; dz < MAP_DEPTH; dz++) {
     for (auto dy = 0; dy < r->height; dy++) {
       for (auto dx = 0; dx < r->width; dx++) {
+        if (is_oob(x + dx, y + dy)) {
+          return false;
+        }
         auto c = get(r->data, dx, dy, dz);
         if (c != Charmap::SPACE) {
           if (is_anything_at_no_check(x + dx, y + dy)) {

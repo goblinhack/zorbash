@@ -192,7 +192,9 @@ public:
   void room_print_at(Roomp r, int x, int y);
   void room_print_only_doors_at(Roomp r, int x, int y);
   void room_print_only_doors(Grid *g);
-  void rooms_print_all(Grid *g);
+  bool rooms_print_all(Grid *g);
+  bool rooms_print_all_with_jiggle(Grid *g);
+  bool rooms_print_all_with_no_jiggle(Grid *g);
   void save_level(void);
   void water_fixup_shallows(void);
   void water_fixup(void);
