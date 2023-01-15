@@ -27,6 +27,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_biome_dungeon(self, True)
     my.is_deep_water(self, True)
     my.is_described_when_hovering_over(self, True)
+    my.is_flat(self, True)
     my.is_hazard(self, True)
     my.is_interesting(self, True)
     my.is_obs_for_ai(self, True)

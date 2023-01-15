@@ -1,6 +1,8 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- convert bridges to nowhere into chasms                                                                                                       -->
+<!-- ascii fireball is shown in the wrong place                                                                                                   -->
+<!-- "Your last torch goes out. " is seen too often                                                                                               -->
+<!-- loading levels does not restore the background                                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -11,7 +13,6 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - throw attack for tentacle?                                                                                                                 -->
 <!-- - some weapons crit more                                                                                                                     -->
 <!-- - dimension portal                                                                                                                           -->
 <!-- - wort food ? fungas foods and some poisonous?                                                                                               -->
@@ -218,7 +219,7 @@ Current status:
 
 Content:
 <!-- begin type marker -->
-- 57 monsters
+- 58 monsters
 - 52 food
 - 19 treasure
 - 13 weapons

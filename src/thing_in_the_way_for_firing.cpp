@@ -33,6 +33,10 @@ Thingp Thing::in_the_way_for_firing(const point s, const point e, int x, int y)
       continue;
     }
 
+    if (t->is_flat()) {
+      continue;
+    }
+
     //
     // So missiles do not hit blood or maps
     //
@@ -53,21 +57,33 @@ Thingp Thing::in_the_way_for_firing(const point s, const point e, int x, int y)
     //
     if (is_spider() || is_spiderweb()) {
       if (t->is_spider() || t->is_spiderweb()) {
+        dbg2("This is in the way for firing (web): %s", t->to_short_string().c_str());
         return t;
       }
     }
 
-    if (thing_size() < (int) THING_SIZE_NORMAL) {
+    if (t->thing_size() < (int) THING_SIZE_NORMAL) {
+      dbg2("This is in not the way for firing (small): %s", t->to_short_string().c_str());
       continue;
     }
 
-    if (thing_size() > (int) THING_SIZE_NORMAL) {
-      dbg("This is in the way: %s", t->to_short_string().c_str());
+    if (t->thing_size() > (int) THING_SIZE_NORMAL) {
+      dbg2("This is in the way for firing (large): %s", t->to_short_string().c_str());
       return t;
     }
 
-    if (t->is_obs_in_the_way_for_firing() || t->is_attackable_by_player() || t->is_attackable_by_monst()) {
-      dbg("This is in the way: %s", t->to_short_string().c_str());
+    if (t->is_obs_in_the_way_for_firing()) {
+      dbg2("This is in the way for firing (obs): %s", t->to_short_string().c_str());
+      return t;
+    }
+
+    if (t->is_attackable_by_player()) {
+      dbg2("This is in the way for firing (attackable): %s", t->to_short_string().c_str());
+      return t;
+    }
+
+    if (t->is_attackable_by_monst()) {
+      dbg2("This is in the way for firing (attackable): %s", t->to_short_string().c_str());
       return t;
     }
   }

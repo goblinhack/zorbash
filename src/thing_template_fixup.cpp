@@ -3,6 +3,7 @@
 //
 
 #include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_string.hpp"
 #include "my_ui.hpp"
 
@@ -11,6 +12,11 @@ void tp_fixup(void)
   TRACE_NO_INDENT();
 
   for (auto &tp : tp_id_map) {
+
+    if (tp->thing_size() == THING_SIZE_NOT_SET) {
+      tp->thing_size_set(THING_SIZE_NORMAL);
+    }
+
     if (tp->stamina()) {
       tp->is_able_to_tire_set(true);
     }
