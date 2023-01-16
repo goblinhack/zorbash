@@ -181,7 +181,7 @@ do
       is_able_to_collect_keys \
       is_able_to_enchant_items \
       is_able_to_fall \
-      is_able_to_fire_at \
+      is_albe_to_shoot_at \
       is_able_to_follow \
       is_able_to_freeze \
       is_able_to_jump \
@@ -527,7 +527,7 @@ do
       unused_flag2 \
       unused_flag20 \
       is_immune_to_electricity \
-      is_able_to_fire_at_close_range \
+      is_albe_to_shoot_at_close_range \
       gfx_pixelart_show_highlighted \
       gfx_pixelart_show_square_outlined \
       is_able_to_see_invisible \

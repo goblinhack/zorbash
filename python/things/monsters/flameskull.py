@@ -24,9 +24,9 @@ def on_death(me, x, y):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "monst_death1")
 
 
-def on_want_to_fire_at_something(me, target, target_x, target_y):  # Return True on doing an action
+def on_want_to_shoot_at_something(me, target, target_x, target_y):  # Return True on doing an action
     if my.pcg_randint(1, 10) < 3:
-        my.thing_fire_at(me, "staff_fire_projectile", target)
+        my.thing_shoot_at(me, "staff_fire_projectile", target)
         return True
     return False
 
@@ -68,9 +68,9 @@ def tp_init(name, text_long_name):
     my.hunger_is_insatiable(self, True)
     my.is_able_to_be_surprised(self, True)
     my.is_able_to_change_levels(self, True)
-    my.is_able_to_fire_at(self, True)
     my.is_able_to_lunge(self, True)
     my.is_able_to_see_in_the_dark(self, True)
+    my.is_albe_to_shoot_at(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)
@@ -105,7 +105,7 @@ def tp_init(name, text_long_name):
     my.noise_decibels_hearing(self, 50)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
-    my.on_want_to_fire_at_something_do(self, "me.on_want_to_fire_at_something()")
+    my.on_want_to_shoot_at_something_do(self, "me.on_want_to_shoot_at_something()")
     my.on_you_are_hit_but_dodge_it_do(self, "me.on_you_are_hit_but_dodge_it_do()")
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
     my.on_you_nat_att_do(self, "me.on_you_nat_att()")

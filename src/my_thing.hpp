@@ -310,7 +310,7 @@ public:
   ThingId equip_id_carry_anim_set(ThingId, int equip);
   ThingId equip_id_use_anim_set(ThingId, int equip);
 
-  Thingp best_fire_at_target_get(void);
+  Thingp best_shoot_at_target_get(void);
   Thingp best_visible_target_get(void);
   Thingp equip_carry_anim(int equip);
   Thingp equip_get(int equip);
@@ -453,10 +453,6 @@ public:
   bool equip_use_must_attack(int equip);
   bool fall_to_next_level(void);
   bool fall(void);
-  bool fire_at_and_choose_target(Thingp, UseOptions *options = nullptr);
-  bool fire_at_target(void);
-  bool fire_at(Thingp item, Thingp target);
-  bool fire_at(Thingp target);
   bool fire_choose_target(Thingp item);
   bool has_temperature(void);
   bool health_boost_would_occur(int v);
@@ -493,8 +489,8 @@ public:
   bool jump_attack(Thingp it = nullptr);
   bool laser_anim_exists(void);
   bool laser_choose_target(Thingp item, Thingp victim = nullptr);
-  bool laser_fire_at(Thingp staff, const std::string &item, point at, UseOptions *use_options = nullptr);
-  bool laser_fire_at(Thingp staff, const std::string &item, Thingp target, UseOptions *use_options = nullptr);
+  bool laser_shoot_at(Thingp staff, const std::string &item, point at, UseOptions *use_options = nullptr);
+  bool laser_shoot_at(Thingp staff, const std::string &item, Thingp target, UseOptions *use_options = nullptr);
   bool learn_random_skill(void);
   bool map_offset_coords_get(point &blit_tl, point &blit_br, Tilep &tile, bool reflection);
   bool map_treasure_available(void);
@@ -512,7 +508,7 @@ public:
   bool nat_att(Thingp victim);
   bool on_fire_set(const std::string &why);
   bool on_tick(void);
-  bool on_want_to_fire_at_something(Thingp hitter);
+  bool on_want_to_shoot_at_something(Thingp hitter);
   bool open_door(Thingp door);
   bool open(Thingp it);
   bool open(void);
@@ -528,6 +524,10 @@ public:
   bool projectile_choose_target(Thingp item, Thingp victim = nullptr);
   bool same_leader_or_owner(Thingp it);
   bool same_mob(Thingp it);
+  bool shoot_at_and_choose_target(Thingp, UseOptions *options = nullptr);
+  bool shoot_at_target(void);
+  bool shoot_at(Thingp item, Thingp target);
+  bool shoot_at(Thingp target);
   bool shove_ok(point future_pos);
   bool skill_add(Thingp it);
   bool skill_add(Tpp what);
@@ -826,7 +826,7 @@ public:
   const std::string &on_unequip_do(void);
   const std::string &on_use_do(void);
   const std::string &on_waiting_do(void);
-  const std::string &on_want_to_fire_at_something_do(void);
+  const std::string &on_want_to_shoot_at_something_do(void);
   const std::string &on_you_are_declared_a_follower_do(void);
   const std::string &on_you_are_declared_leader_do(void);
   const std::string &on_you_are_hit_and_now_dead_do(void);
@@ -1158,8 +1158,6 @@ public:
   int is_able_to_collect_keys(void);
   int is_able_to_enchant_items(void);
   int is_able_to_fall(void);
-  int is_able_to_fire_at_close_range(void);
-  int is_able_to_fire_at(void);
   int is_able_to_follow(void);
   int is_able_to_freeze(void);
   int is_able_to_grapple_chance_d1000(void);
@@ -1206,6 +1204,8 @@ public:
   int is_able_to_walk_through_walls(void);
   int is_acid(void);
   int is_air_breather(void);
+  int is_albe_to_shoot_at_close_range(void);
+  int is_albe_to_shoot_at(void);
   int is_alive_monst(void);
   int is_alive_on_end_of_anim(void);
   int is_always_hit(void);

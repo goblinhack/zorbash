@@ -1383,10 +1383,10 @@ int Thing::unused_flag20(void)
   return (tp()->unused_flag20());
 }
 
-int Thing::is_able_to_fire_at_close_range(void)
+int Thing::is_albe_to_shoot_at_close_range(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_able_to_fire_at_close_range());
+  return (tp()->is_albe_to_shoot_at_close_range());
 }
 
 int Thing::gfx_pixelart_show_highlighted(void)
@@ -3963,10 +3963,10 @@ const std::string &Thing::on_you_are_on_fire_do(void)
   return (tp()->on_you_are_on_fire_do());
 }
 
-const std::string &Thing::on_want_to_fire_at_something_do(void)
+const std::string &Thing::on_want_to_shoot_at_something_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_want_to_fire_at_something_do());
+  return (tp()->on_want_to_shoot_at_something_do());
 }
 
 const std::string &Thing::on_you_are_hit_but_still_alive_do(void)

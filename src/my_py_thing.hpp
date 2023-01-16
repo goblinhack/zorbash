@@ -76,7 +76,6 @@ PyObject *thing_environ_avoids_fire(PyObject *obj, PyObject *args, PyObject *key
 PyObject *thing_environ_avoids_necrosis(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_environ_avoids_poison(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_environ_avoids_water(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_freeze(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_friend(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_idle_count(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -136,7 +135,6 @@ PyObject *thing_is_able_to_change_levels(PyObject *obj, PyObject *args, PyObject
 PyObject *thing_is_able_to_collect_keys(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_enchant_items(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_fall(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_able_to_fire_at_close_range(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_follow(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_freeze(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_jump_attack_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -179,6 +177,7 @@ PyObject *thing_is_able_to_use_weapons(PyObject *obj, PyObject *args, PyObject *
 PyObject *thing_is_able_to_walk_through_walls(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_acid(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_air_breather(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_albe_to_shoot_at_close_range(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_alive_monst(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_alive_on_end_of_anim(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_always_hit(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -491,6 +490,7 @@ PyObject *thing_score_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_score(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_set_leader(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_set_mob(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_shoot_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_shove_strength_mod_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_shove_strength_mod_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_shove_strength_mod_set(PyObject *obj, PyObject *args, PyObject *keywds);

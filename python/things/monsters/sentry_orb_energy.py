@@ -12,12 +12,12 @@ def explode(me, x, y):
 
     my.thing_msg(me, "The sentry orb explodes!")
     my.spawn_at_my_position(me, "explosion_major")
-    # my.spawn_radius_range(me, "fire", min=0, max=3)
+    # my.spawn_radius_range(me, "energy", min=0, max=3)
 
 
 def on_want_to_shoot_at_something(me, target, target_x, target_y):  # Return True on doing an action
     if my.pcg_randint(1, 100) < 80:
-        my.thing_shoot_at(me, "staff_fire_projectile", target)
+        my.thing_shoot_at(me, "laser_energy", target)
         return True
     return False
 
@@ -28,7 +28,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.aggression_pct(self, 100)
     my.ai_wanderer(self, True)
     my.attack_humanoid(self, True)
-    my.attacks_per_round(self, 0)  # fires only
+    my.attacks_per_round(self, 0)  # energys only
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.distance_vision(self, 8)
@@ -54,7 +54,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_crushable(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_hittable(self, True)
-    my.is_immune_to_fire(self, True)
     my.is_interesting(self, True)
     my.is_lifeless(self, True)
     my.is_loggable(self, True)
@@ -67,7 +66,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_msg_allowed_is_seen(self, True)
     my.is_msg_allowed_senses_danger(self, True)
     my.is_tickable(self, True)
-    my.light_color(self, "orange")
+    my.light_color(self, "yellow")
     my.light_dist(self, 1)
     my.move_speed(self, 50)
     my.noise_decibels_hearing(self, 5)
@@ -85,7 +84,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, 200)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "Sentry orbs patrol the dungeon, raining down punishment on whomever should not be there. Essentially you... This one fires beams of fire.")
+    my.text_description_long(self, "Sentry orbs patrol the dungeon, raining down punishment on whomever should not be there. Essentially you... This one fires beams of devastating energy.")
     my.text_description_long2(self, "Note that sentry orbs are fragile and prone to explosive outbursts...")
     my.text_description_short(self, "A sentry orb.")
     my.text_hits(self, "burns")
@@ -97,20 +96,20 @@ def tp_init(name, text_long_name, text_short_name):
 
     delay = 200
     my.tile(self,
-            ascii_fg_char="O", ascii_bg_col_name="", ascii_fg_col_name="orange",
+            ascii_fg_char="O", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="o", ascii_bg_col_name="", ascii_fg_col_name="orange",
+            ascii_fg_char="o", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="O", ascii_bg_col_name="", ascii_fg_col_name="orange",
+            ascii_fg_char="O", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".3", delay_ms=delay)
 
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="sentry_orb_fire", text_long_name="sentry orb", text_short_name="sentry orb")
+    tp_init(name="sentry_orb_energy", text_long_name="sentry orb", text_short_name="sentry orb")
 
 
 init()

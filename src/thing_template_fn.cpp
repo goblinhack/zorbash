@@ -154,7 +154,7 @@ const std::string &Tp::on_tick_do(void) const { return _on_tick_do; }
 const std::string &Tp::on_unequip_do(void) const { return _on_unequip_do; }
 const std::string &Tp::on_use_do(void) const { return _on_use_do; }
 const std::string &Tp::on_waiting_do(void) const { return _on_waiting_do; }
-const std::string &Tp::on_want_to_fire_at_something_do(void) const { return _on_want_to_fire_at_something_do; }
+const std::string &Tp::on_want_to_shoot_at_something_do(void) const { return _on_want_to_shoot_at_something_do; }
 const std::string &Tp::on_you_are_declared_a_follower_do(void) const { return _on_you_are_declared_a_follower_do; }
 const std::string &Tp::on_you_are_declared_leader_do(void) const { return _on_you_are_declared_leader_do; }
 const std::string &Tp::on_you_are_hit_and_now_dead_do(void) const { return _on_you_are_hit_and_now_dead_do; }
@@ -303,8 +303,6 @@ int Tp::is_able_to_change_levels(void) const { return _is_able_to_change_levels;
 int Tp::is_able_to_collect_keys(void) const { return _is_able_to_collect_keys; }
 int Tp::is_able_to_enchant_items(void) const { return _is_able_to_enchant_items; }
 int Tp::is_able_to_fall(void) const { return _is_able_to_fall; }
-int Tp::is_able_to_fire_at_close_range(void) const { return _is_able_to_fire_at_close_range; }
-int Tp::is_able_to_fire_at(void) const { return _is_able_to_fire_at; }
 int Tp::is_able_to_follow(void) const { return _is_able_to_follow; }
 int Tp::is_able_to_freeze(void) const { return _is_able_to_freeze; }
 int Tp::is_able_to_grapple_chance_d1000(void) const { return _is_able_to_grapple_chance_d1000; }
@@ -351,6 +349,8 @@ int Tp::is_able_to_use_weapons(void) const { return _is_able_to_use_weapons; }
 int Tp::is_able_to_walk_through_walls(void) const { return _is_able_to_walk_through_walls; }
 int Tp::is_acid(void) const { return _is_acid; }
 int Tp::is_air_breather(void) const { return _is_air_breather; }
+int Tp::is_albe_to_shoot_at_close_range(void) const { return _is_albe_to_shoot_at_close_range; }
+int Tp::is_albe_to_shoot_at(void) const { return _is_albe_to_shoot_at; }
 int Tp::is_alive_on_end_of_anim(void) const { return _is_alive_on_end_of_anim; }
 int Tp::is_always_hit(void) const { return _is_always_hit; }
 int Tp::is_always_submerged(void) const { return _is_always_submerged; }
@@ -843,8 +843,6 @@ void Tp::is_able_to_change_levels_set(int v) { _is_able_to_change_levels = v; }
 void Tp::is_able_to_collect_keys_set(int v) { _is_able_to_collect_keys = v; }
 void Tp::is_able_to_enchant_items_set(int v) { _is_able_to_enchant_items = v; }
 void Tp::is_able_to_fall_set(int v) { _is_able_to_fall = v; }
-void Tp::is_able_to_fire_at_close_range_set(int v) { _is_able_to_fire_at_close_range = v; }
-void Tp::is_able_to_fire_at_set(int v) { _is_able_to_fire_at = v; }
 void Tp::is_able_to_follow_set(int v) { _is_able_to_follow = v; }
 void Tp::is_able_to_freeze_set(int v) { _is_able_to_freeze = v; }
 void Tp::is_able_to_grapple_chance_d1000_set(int v) { _is_able_to_grapple_chance_d1000 = v; }
@@ -891,6 +889,8 @@ void Tp::is_able_to_use_weapons_set(int v) { _is_able_to_use_weapons = v; }
 void Tp::is_able_to_walk_through_walls_set(int v) { _is_able_to_walk_through_walls = v; }
 void Tp::is_acid_set(int v) { _is_acid = v; }
 void Tp::is_air_breather_set(int v) { _is_air_breather = v; }
+void Tp::is_albe_to_shoot_at_close_range_set(int v) { _is_albe_to_shoot_at_close_range = v; }
+void Tp::is_albe_to_shoot_at_set(int v) { _is_albe_to_shoot_at = v; }
 void Tp::is_alive_on_end_of_anim_set(int v) { _is_alive_on_end_of_anim = v; }
 void Tp::is_allied_with_set(const std::string &v) { _is_allied_with = v; }
 void Tp::is_always_hit_set(int v) { _is_always_hit = v; }
@@ -1294,7 +1294,7 @@ void Tp::on_tick_do_set(const std::string &v) { _on_tick_do = v; }
 void Tp::on_unequip_do_set(const std::string &v) { _on_unequip_do = v; }
 void Tp::on_use_do_set(const std::string &v) { _on_use_do = v; }
 void Tp::on_waiting_do_set(const std::string &v) { _on_waiting_do = v; }
-void Tp::on_want_to_fire_at_something_do_set(const std::string &v) { _on_want_to_fire_at_something_do = v; }
+void Tp::on_want_to_shoot_at_something_do_set(const std::string &v) { _on_want_to_shoot_at_something_do = v; }
 void Tp::on_you_are_declared_a_follower_do_set(const std::string &v) { _on_you_are_declared_a_follower_do = v; }
 void Tp::on_you_are_declared_leader_do_set(const std::string &v) { _on_you_are_declared_leader_do = v; }
 void Tp::on_you_are_hit_and_now_dead_do_set(const std::string &v) { _on_you_are_hit_and_now_dead_do = v; }

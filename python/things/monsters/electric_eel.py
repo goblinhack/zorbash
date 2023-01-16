@@ -25,13 +25,13 @@ def on_death(me, x, y):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
 
-def on_want_to_fire_at_something(me, target, target_x, target_y):  # Return True on doing an action
+def on_want_to_shoot_at_something(me, target, target_x, target_y):  # Return True on doing an action
     # my.con("target  {} {:X} {},{}".format(my.thing_name_get(target), target, target_x, target_y))
     if not my.level_is_water_at(target, target_x, target_y):
         return False
     if my.pcg_randint(1, 10) < 8:
         my.thing_sound_play_channel(me, my.CHANNEL_WEAPON, "lightning_a")
-        my.thing_fire_at(me, "staff_lightning_laser", target)
+        my.thing_shoot_at(me, "staff_lightning_laser", target)
         return True
     return False
 
@@ -66,8 +66,6 @@ def tp_init(name, text_long_name):
     my.health_initial_dice(self, "1d10")
     my.hunger_clock_tick_freq(self, 50)
     my.is_able_to_fall(self, True)
-    my.is_able_to_fire_at_close_range(self, True)
-    my.is_able_to_fire_at(self, True)
     my.is_able_to_freeze(self, True)
     my.is_able_to_live_out_of_water(self, True)
     my.is_able_to_lunge(self, True)
@@ -75,6 +73,8 @@ def tp_init(name, text_long_name):
     my.is_able_to_see_in_the_dark(self, True)
     my.is_able_to_tire(self, True)
     my.is_air_breather(self, True)
+    my.is_albe_to_shoot_at_close_range(self, True)
+    my.is_albe_to_shoot_at(self, True)
     my.is_always_submerged(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
@@ -107,7 +107,7 @@ def tp_init(name, text_long_name):
     my.noise_decibels_hearing(self, 0)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
-    my.on_want_to_fire_at_something_do(self, "me.on_want_to_fire_at_something()")
+    my.on_want_to_shoot_at_something_do(self, "me.on_want_to_shoot_at_something()")
     my.on_you_are_hit_but_dodge_it_do(self, "me.on_you_are_hit_but_dodge_it_do()")
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
     my.on_you_nat_att_do(self, "me.on_you_nat_att()")

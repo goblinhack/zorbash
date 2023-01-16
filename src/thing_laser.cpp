@@ -38,12 +38,12 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
           //
           use_options.radial_effect = true;
           victim                    = this;
-          laser_fire_at(item, item->gfx_targetted_radial(), victim, &use_options);
+          laser_shoot_at(item, item->gfx_targetted_radial(), victim, &use_options);
         } else {
-          laser_fire_at(item, item->gfx_targetted_laser(), victim, &use_options);
+          laser_shoot_at(item, item->gfx_targetted_laser(), victim, &use_options);
         }
       } else {
-        laser_fire_at(item, item->gfx_targetted_laser(), victim, &use_options);
+        laser_shoot_at(item, item->gfx_targetted_laser(), victim, &use_options);
       }
     } else {
       err("Unknown beam weapon: %s.", item->text_the().c_str());
@@ -71,7 +71,8 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
   return is_target_select(item);
 }
 
-bool Thing::laser_fire_at(Thingp item, const std::string &gfx_targetted_laser, Thingp target, UseOptions *use_options)
+bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, Thingp target,
+                           UseOptions *use_options)
 {
   //
   // NOTE: the item can be null here if this is monster firing with its
@@ -276,7 +277,7 @@ bool Thing::laser_fire_at(Thingp item, const std::string &gfx_targetted_laser, T
   return true;
 }
 
-bool Thing::laser_fire_at(Thingp item, const std::string &gfx_targetted_laser, point at, UseOptions *use_options)
+bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, point at, UseOptions *use_options)
 {
   //
   // NOTE: the item can be null here if this is monster firing with its
@@ -314,13 +315,13 @@ bool Thing::laser_fire_at(Thingp item, const std::string &gfx_targetted_laser, p
   ThingAttackOptions attack_options  = {};
   attack_options.allow_hitting_walls = true;
   if (victim_attack_choose_best(nullptr, at, &best, &best_hit_at, &attack_options)) {
-    return laser_fire_at(item, gfx_targetted_laser, best, use_options);
+    return laser_shoot_at(item, gfx_targetted_laser, best, use_options);
   }
 
   FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
   {
     if (t->is_the_grid) {
-      return laser_fire_at(item, gfx_targetted_laser, t, use_options);
+      return laser_shoot_at(item, gfx_targetted_laser, t, use_options);
     }
   }
   FOR_ALL_THINGS_END()

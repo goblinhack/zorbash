@@ -208,7 +208,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
                 add_goal_penalty(goal.what);
               }
 
-              if (fire_at(goal.what)) {
+              if (shoot_at(goal.what)) {
                 return true;
               }
 
@@ -225,7 +225,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
         continue;
       }
 
-      if (fire_at(goal.what)) {
+      if (shoot_at(goal.what)) {
         return true;
       }
 

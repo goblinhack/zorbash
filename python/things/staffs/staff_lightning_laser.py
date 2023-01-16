@@ -21,7 +21,7 @@ def on_born(me, x, y):
                             if my.thing_is_player(it):
                                 my.thing_msg(it, "Current surges through your body!")
 
-                            my.thing_fire_at(source, "staff_lightning_laser_fork", it)
+                            my.thing_shoot_at(source, "staff_lightning_laser_fork", it)
             return
 
         it = source

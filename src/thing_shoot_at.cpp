@@ -19,7 +19,7 @@ typedef struct {
 static ThingPossibleHit thing_possible_hits[ MAX_THING_POSSIBLE_HIT ];
 static int              thing_possible_hit_size;
 
-int Thing::is_able_to_fire_at(void)
+int Thing::is_albe_to_shoot_at(void)
 {
   if (is_frozen) {
     return false;
@@ -33,21 +33,21 @@ int Thing::is_able_to_fire_at(void)
   }
 
   TRACE_NO_INDENT();
-  return (tp()->is_able_to_fire_at());
+  return (tp()->is_albe_to_shoot_at());
 }
 
 //
-// Python callback upon being fire_at
+// Python callback upon being shoot_at
 //
-bool Thing::on_want_to_fire_at_something(Thingp target)
+bool Thing::on_want_to_shoot_at_something(Thingp target)
 {
   TRACE_NO_INDENT();
-  auto on_want_to_fire_at_something = tp()->on_want_to_fire_at_something_do();
-  if (std::empty(on_want_to_fire_at_something)) {
+  auto on_want_to_shoot_at_something = tp()->on_want_to_shoot_at_something_do();
+  if (std::empty(on_want_to_shoot_at_something)) {
     return false;
   }
 
-  auto t = split_tokens(on_want_to_fire_at_something, '.');
+  auto t = split_tokens(on_want_to_shoot_at_something, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -66,15 +66,15 @@ bool Thing::on_want_to_fire_at_something(Thingp target)
                            (unsigned int) target->curr_at.y);
   }
 
-  ERR("Bad on_want_to_fire_at_something call [%s] expected mod:function, got %d elems",
-      on_want_to_fire_at_something.c_str(), (int) on_want_to_fire_at_something.size());
+  ERR("Bad on_want_to_shoot_at_something call [%s] expected mod:function, got %d elems",
+      on_want_to_shoot_at_something.c_str(), (int) on_want_to_shoot_at_something.size());
   return false;
 }
 
 /*
  * Find the thing with the highest priority to hit.
  */
-Thingp Thing::best_fire_at_target_get(void)
+Thingp Thing::best_shoot_at_target_get(void)
 {
   ThingPossibleHit *best = nullptr;
   int               i;
@@ -135,9 +135,9 @@ static void thing_possible_hit_add(Thingp me, Thingp target)
 //
 // Try to find something to fire at.
 //
-bool Thing::fire_at_target(void)
+bool Thing::shoot_at_target(void)
 {
-  if (! is_able_to_fire_at()) {
+  if (! is_albe_to_shoot_at()) {
     return false;
   }
 
@@ -164,7 +164,7 @@ bool Thing::fire_at_target(void)
       //
       // Too close, use melee (that's if we are able to move, unlike a static gargoyle).
       //
-      if (! is_able_to_fire_at_close_range()) {
+      if (! is_albe_to_shoot_at_close_range()) {
         if (is_moveable()) {
           if (d < 2) {
             continue;
@@ -200,7 +200,7 @@ bool Thing::fire_at_target(void)
       FOR_ALL_THINGS_END();
     }
 
-  auto target = best_fire_at_target_get();
+  auto target = best_shoot_at_target_get();
   if (! target) {
     return false;
   }
@@ -210,16 +210,16 @@ bool Thing::fire_at_target(void)
   //
   move_set_dir_from_target(target);
 
-  return on_want_to_fire_at_something(target);
+  return on_want_to_shoot_at_something(target);
 }
 
-bool Thing::fire_at_and_choose_target(Thingp item, UseOptions *use_options)
+bool Thing::shoot_at_and_choose_target(Thingp item, UseOptions *use_options)
 {
   dbg("Fire at and choose target: %s", item->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   if (use_options && use_options->radial_effect) {
-    return laser_fire_at(item, item->gfx_targetted_radial(), this, use_options);
+    return laser_shoot_at(item, item->gfx_targetted_radial(), this, use_options);
   }
   if (! item->gfx_targetted_laser().empty()) {
     return laser_choose_target(item);
@@ -227,7 +227,7 @@ bool Thing::fire_at_and_choose_target(Thingp item, UseOptions *use_options)
   return projectile_choose_target(item);
 }
 
-bool Thing::fire_at(Thingp item, Thingp target)
+bool Thing::shoot_at(Thingp item, Thingp target)
 {
   if (target) {
     dbg("Fire %s at %s", item->to_short_string().c_str(), target->to_short_string().c_str());
@@ -242,7 +242,7 @@ bool Thing::fire_at(Thingp item, Thingp target)
   return laser_choose_target(item, target);
 }
 
-bool Thing::fire_at(Thingp target)
+bool Thing::shoot_at(Thingp target)
 {
   TRACE_AND_INDENT();
   if (! target) {
@@ -300,5 +300,5 @@ bool Thing::fire_at(Thingp target)
     return false;
   }
 
-  return fire_at(curr_weapon, target);
+  return shoot_at(curr_weapon, target);
 }

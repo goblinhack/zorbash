@@ -142,7 +142,7 @@ bool Thing::matches(const std::string &what)
   if (is_able_to_fall() && (what == "is_able_to_fall")) {
     return true;
   }
-  if (is_able_to_fire_at() && (what == "is_able_to_fire_at")) {
+  if (is_albe_to_shoot_at() && (what == "is_albe_to_shoot_at")) {
     return true;
   }
   if (is_able_to_see_in_the_dark() && (what == "is_able_to_see_in_the_dark")) {
@@ -706,7 +706,7 @@ bool Thing::matches(const std::string &what)
   if (is_immune_to_electricity() && (what == "is_immune_to_electricity")) {
     return true;
   }
-  if (is_able_to_fire_at_close_range() && (what == "is_able_to_fire_at_close_range")) {
+  if (is_albe_to_shoot_at_close_range() && (what == "is_albe_to_shoot_at_close_range")) {
     return true;
   }
   if (gfx_pixelart_show_highlighted() && (what == "gfx_pixelart_show_highlighted")) {
@@ -1325,8 +1325,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_able_to_fall") {
     return &Thing::is_able_to_fall;
   }
-  if (what == "is_able_to_fire_at") {
-    return &Thing::is_able_to_fire_at;
+  if (what == "is_albe_to_shoot_at") {
+    return &Thing::is_albe_to_shoot_at;
   }
   if (what == "is_able_to_follow") {
     return &Thing::is_able_to_follow;
@@ -2186,8 +2186,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_immune_to_electricity") {
     return &Thing::is_immune_to_electricity;
   }
-  if (what == "is_able_to_fire_at_close_range") {
-    return &Thing::is_able_to_fire_at_close_range;
+  if (what == "is_albe_to_shoot_at_close_range") {
+    return &Thing::is_albe_to_shoot_at_close_range;
   }
   if (what == "gfx_pixelart_show_highlighted") {
     return &Thing::gfx_pixelart_show_highlighted;

@@ -924,7 +924,7 @@ PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keyw
   Py_RETURN_FALSE;
 }
 
-PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_shoot_at(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     owner_id  = 0;
@@ -980,7 +980,7 @@ PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
   if (itemp->is_laser()) {
-    if (owner->laser_fire_at(nullptr /* staff */, std::string(item), target)) {
+    if (owner->laser_shoot_at(nullptr /* staff */, std::string(item), target)) {
       Py_RETURN_TRUE;
     }
     Py_RETURN_FALSE;

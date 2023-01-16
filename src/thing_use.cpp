@@ -490,7 +490,7 @@ bool Thing::use(Thingp what, UseOptions *use_options)
         equip(what, preferred_equip);
       }
     }
-    ret = fire_at_and_choose_target(what, use_options);
+    ret = shoot_at_and_choose_target(what, use_options);
     if (is_player()) {
       level->describe(what);
     }

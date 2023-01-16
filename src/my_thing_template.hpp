@@ -230,8 +230,6 @@ private:
   int _is_able_to_collect_keys {};
   int _is_able_to_enchant_items {};
   int _is_able_to_fall {};
-  int _is_able_to_fire_at {};
-  int _is_able_to_fire_at_close_range {};
   int _is_able_to_follow {};
   int _is_able_to_freeze {};
   int _is_able_to_grapple {};
@@ -278,6 +276,8 @@ private:
   int _is_able_to_walk_through_walls {};
   int _is_acid {};
   int _is_air_breather {};
+  int _is_albe_to_shoot_at {};
+  int _is_albe_to_shoot_at_close_range {};
   int _is_alive_on_end_of_anim {};
   int _is_always_hit {};
   int _is_always_submerged {};
@@ -793,7 +793,7 @@ private:
   std::string _on_unequip_do;
   std::string _on_use_do;
   std::string _on_waiting_do;
-  std::string _on_want_to_fire_at_something_do;
+  std::string _on_want_to_shoot_at_something_do;
   std::string _on_you_are_declared_a_follower_do;
   std::string _on_you_are_declared_leader_do;
   std::string _on_you_are_hit_and_now_dead_do;
@@ -1115,7 +1115,7 @@ public:
   const std::string &on_unequip_do(void) const;
   const std::string &on_use_do(void) const;
   const std::string &on_waiting_do(void) const;
-  const std::string &on_want_to_fire_at_something_do(void) const;
+  const std::string &on_want_to_shoot_at_something_do(void) const;
   const std::string &on_you_are_declared_a_follower_do(void) const;
   const std::string &on_you_are_declared_leader_do(void) const;
   const std::string &on_you_are_hit_and_now_dead_do(void) const;
@@ -1285,8 +1285,6 @@ public:
   int is_able_to_collect_keys(void) const;
   int is_able_to_enchant_items(void) const;
   int is_able_to_fall(void) const;
-  int is_able_to_fire_at_close_range(void) const;
-  int is_able_to_fire_at(void) const;
   int is_able_to_follow(void) const;
   int is_able_to_freeze(void) const;
   int is_able_to_grapple_chance_d1000(void) const;
@@ -1333,6 +1331,8 @@ public:
   int is_able_to_walk_through_walls(void) const;
   int is_acid(void) const;
   int is_air_breather(void) const;
+  int is_albe_to_shoot_at_close_range(void) const;
+  int is_albe_to_shoot_at(void) const;
   int is_alive_on_end_of_anim(void) const;
   int is_always_hit(void) const;
   int is_always_submerged(void) const;
@@ -1825,8 +1825,6 @@ public:
   void is_able_to_collect_keys_set(int v);
   void is_able_to_enchant_items_set(int v);
   void is_able_to_fall_set(int v);
-  void is_able_to_fire_at_close_range_set(int v);
-  void is_able_to_fire_at_set(int v);
   void is_able_to_follow_set(int v);
   void is_able_to_freeze_set(int v);
   void is_able_to_grapple_chance_d1000_set(int v);
@@ -1873,6 +1871,8 @@ public:
   void is_able_to_walk_through_walls_set(int v);
   void is_acid_set(int v);
   void is_air_breather_set(int v);
+  void is_albe_to_shoot_at_close_range_set(int v);
+  void is_albe_to_shoot_at_set(int v);
   void is_alive_on_end_of_anim_set(int v);
   void is_allied_with_set(const std::string &v);
   void is_always_hit_set(int v);
@@ -2276,7 +2276,7 @@ public:
   void on_unequip_do_set(const std::string &v);
   void on_use_do_set(const std::string &v);
   void on_waiting_do_set(const std::string &v);
-  void on_want_to_fire_at_something_do_set(const std::string &v);
+  void on_want_to_shoot_at_something_do_set(const std::string &v);
   void on_you_are_declared_a_follower_do_set(const std::string &v);
   void on_you_are_declared_leader_do_set(const std::string &v);
   void on_you_are_hit_and_now_dead_do_set(const std::string &v);

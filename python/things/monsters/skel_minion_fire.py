@@ -30,9 +30,9 @@ def on_death(me, x, y):
             my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "bones2")
 
 
-def on_want_to_fire_at_something(me, target, x, y):  # Return True on doing an action
+def on_want_to_shoot_at_something(me, target, x, y):  # Return True on doing an action
     if my.pcg_randint(1, 100) < 10:
-        my.thing_fire_at(me, "staff_fire_projectile", target)
+        my.thing_shoot_at(me, "staff_fire_projectile", target)
         my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
         return True
     return False
@@ -72,12 +72,12 @@ def tp_init(name, text_long_name):
     my.health_initial_dice(self, "4")
     my.is_able_to_be_surprised(self, True)
     my.is_able_to_fall(self, True)
-    my.is_able_to_fire_at_close_range(self, True)
-    my.is_able_to_fire_at(self, True)
     my.is_able_to_lunge(self, True)
     my.is_able_to_see_in_the_dark(self, True)
     my.is_able_to_shove_chance_d1000(self, 200)
     my.is_able_to_use_weapons(self, True)
+    my.is_albe_to_shoot_at_close_range(self, True)
+    my.is_albe_to_shoot_at(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)
@@ -119,7 +119,7 @@ def tp_init(name, text_long_name):
     my.noise_on_moving(self, 25)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
-    my.on_want_to_fire_at_something_do(self, "me.on_want_to_fire_at_something()")
+    my.on_want_to_shoot_at_something_do(self, "me.on_want_to_shoot_at_something()")
     my.on_you_are_hit_but_dodge_it_do(self, "me.on_you_are_hit_but_dodge_it_do()")
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
     my.on_you_nat_att_do(self, "me.on_you_nat_att()")

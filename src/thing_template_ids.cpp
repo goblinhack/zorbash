@@ -311,6 +311,8 @@ std::initializer_list< std::string > tps = {
     "scythe",
     "scythe_carry",
     "scythe_swing",
+    "sentry_orb_energy",
+    "sentry_orb_fire",
     "sewer_wall",
     "shield_wooden",
     "shield_wooden_carry",

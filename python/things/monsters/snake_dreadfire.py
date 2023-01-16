@@ -22,9 +22,9 @@ def on_death(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
 
-def on_want_to_fire_at_something(me, target, x, y):  # Return True on doing an action
+def on_want_to_shoot_at_something(me, target, x, y):  # Return True on doing an action
     if my.pcg_randint(1, 100) < 10:
-        my.thing_fire_at(me, "staff_fire_projectile", target)
+        my.thing_shoot_at(me, "staff_fire_projectile", target)
         my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
         return True
     return False
@@ -67,8 +67,6 @@ def tp_init(name, text_long_name):
     my.health_initial_dice(self, "1d12")
     my.hunger_clock_tick_freq(self, 50)
     my.is_able_to_fall(self, True)
-    my.is_able_to_fire_at_close_range(self, True)
-    my.is_able_to_fire_at(self, True)
     my.is_able_to_freeze(self, True)
     my.is_able_to_lunge(self, True)
     my.is_able_to_rest(self, True)
@@ -76,6 +74,8 @@ def tp_init(name, text_long_name):
     my.is_able_to_sleep(self, True)
     my.is_able_to_tire(self, True)
     my.is_air_breather(self, True)
+    my.is_albe_to_shoot_at_close_range(self, True)
+    my.is_albe_to_shoot_at(self, True)
     my.is_asleep_initially(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
@@ -112,7 +112,7 @@ def tp_init(name, text_long_name):
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "1d4")
     my.on_death_do(self, "me.on_death()")
-    my.on_want_to_fire_at_something_do(self, "me.on_want_to_fire_at_something()")
+    my.on_want_to_shoot_at_something_do(self, "me.on_want_to_shoot_at_something()")
     my.on_you_are_hit_but_dodge_it_do(self, "me.on_you_are_hit_but_dodge_it_do()")
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
     my.on_you_nat_att_do(self, "me.on_you_nat_att()")

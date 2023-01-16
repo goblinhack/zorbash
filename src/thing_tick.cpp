@@ -202,7 +202,7 @@ void Thing::achieve_goals_in_life(void)
         return;
       }
 
-      if (fire_at_target()) {
+      if (shoot_at_target()) {
         dbg("Tried to fire");
         return;
       }
