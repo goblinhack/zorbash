@@ -120,10 +120,10 @@ int Thing::attack_living(void)
   return (tp()->attack_living());
 }
 
-int Thing::attack_lunge(void)
+int Thing::is_able_to_lunge(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->attack_lunge());
+  return (tp()->is_able_to_lunge());
 }
 
 int Thing::attack_meat(void)

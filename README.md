@@ -1,6 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- "Your last torch goes out. " is seen too often                                                                                               -->
+<!-- really need darts that you can throw for sentries                                                                                            -->
 <!-- loading levels does not restore the background                                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

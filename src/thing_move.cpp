@@ -175,7 +175,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   TRACE_NO_INDENT();
 
   if (! is_moveable()) {
-    if (attack_lunge()) {
+    if (is_able_to_lunge()) {
       //
       // Extra 0.5 is to allow diagonal attacks when vision is only 1; e.g. vampire rose.
       //

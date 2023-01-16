@@ -18,6 +18,10 @@ void Thing::lunge(point to)
     return;
   }
 
+  if (! is_able_to_lunge()) {
+    return;
+  }
+
   //
   // Already lunging? This can happen when swinging a weapon that hits in multiple
   // directions. Don't make the player dizzy and focus on the intial lunge.

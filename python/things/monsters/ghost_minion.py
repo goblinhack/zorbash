@@ -16,7 +16,6 @@ def tp_init(name, text_long_name):
     # begin sort marker
     my.aggression_pct(self, 100)
     my.attack_humanoid(self, True)
-    my.attack_lunge(self, True)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.distance_minion_vision_shared(self, True)
@@ -37,6 +36,7 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "1")
     my.is_able_to_be_surprised(self, True)
+    my.is_able_to_lunge(self, True)
     my.is_able_to_see_in_the_dark(self, True)
     my.is_able_to_see_invisible(self, True)
     my.is_able_to_walk_through_walls(self, True)

@@ -28,6 +28,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.aggression_pct(self, 100)
     my.ai_wanderer(self, True)
     my.attack_humanoid(self, True)
+    my.attacks_per_round(self, 0)  # fires only
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.distance_vision(self, 8)
@@ -45,6 +46,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "1")
     my.is_able_to_be_surprised(self, True)
+    my.is_able_to_fire_at_close_range(self, True)
     my.is_able_to_see_in_the_dark(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)

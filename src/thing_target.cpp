@@ -401,7 +401,7 @@ bool Thing::victim_attack_swing(int equip, Thingp best, point best_hit_at, Thing
     dbg2("Target-attack-best: No equipment use animation, so lunge");
     TRACE_AND_INDENT();
 
-    if (attack_lunge()) {
+    if (is_able_to_lunge()) {
       lunge(best_hit_at);
     }
 

@@ -82,7 +82,7 @@ bool Thing::matches(const std::string &what)
   if (attack_living() && (what == "attack_living")) {
     return true;
   }
-  if (attack_lunge() && (what == "attack_lunge")) {
+  if (is_able_to_lunge() && (what == "is_able_to_lunge")) {
     return true;
   }
   if (attack_meat() && (what == "attack_meat")) {
@@ -1238,8 +1238,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "attack_living") {
     return &Thing::attack_living;
   }
-  if (what == "attack_lunge") {
-    return &Thing::attack_lunge;
+  if (what == "is_able_to_lunge") {
+    return &Thing::is_able_to_lunge;
   }
   if (what == "attack_meat") {
     return &Thing::attack_meat;

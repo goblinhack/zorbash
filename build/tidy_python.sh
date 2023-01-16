@@ -93,7 +93,7 @@ do
       attack_eater \
       attack_humanoid \
       attack_living \
-      attack_lunge \
+      is_able_to_lunge \
       attack_meat \
       attack_no_msg \
       attacks_per_round \

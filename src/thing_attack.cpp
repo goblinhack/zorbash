@@ -1252,9 +1252,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
           }
 
           if (victim != this) {
-            if (attack_lunge()) {
-              lunge(victim->curr_at);
-            }
+            lunge(victim->curr_at);
           }
 
           //
@@ -1301,9 +1299,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         dbg("The attack succeeded");
 
         if (victim != this) {
-          if (attack_lunge()) {
-            lunge(victim->curr_at);
-          }
+          lunge(victim->curr_at);
         }
 
         if (attack_eater()) {
@@ -1374,9 +1370,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
       dbg("Attack missed %s", victim->to_short_string().c_str());
     }
     if (victim != this) {
-      if (attack_lunge()) {
-        lunge(victim->curr_at);
-      }
+      lunge(victim->curr_at);
     }
 
     //

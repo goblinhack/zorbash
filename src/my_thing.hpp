@@ -897,7 +897,6 @@ public:
   int attack_engulf_chance_d1000(void);
   int attack_humanoid(void);
   int attack_living(void);
-  int attack_lunge(void);
   int attack_meat(void);
   int attack_no_msg(void);
   int attack_num_get(void);
@@ -1176,6 +1175,7 @@ public:
   int is_able_to_jump_without_tiring(void);
   int is_able_to_learn_skills(void);
   int is_able_to_live_out_of_water(void);
+  int is_able_to_lunge(void);
   int is_able_to_melt(void);
   int is_able_to_move_diagonally(void);
   int is_able_to_open_doors(void);

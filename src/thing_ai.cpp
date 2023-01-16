@@ -496,7 +496,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         //
         // Possibly things like carnivorous plants that cannot, but can lunge
         //
-        if (attack_lunge()) {
+        if (is_able_to_lunge()) {
           set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
         } else {
           continue;

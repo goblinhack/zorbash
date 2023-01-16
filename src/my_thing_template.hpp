@@ -116,7 +116,6 @@ private:
   int _attack_engulf_chance_d1000 {};
   int _attack_humanoid {};
   int _attack_living {};
-  int _attack_lunge {};
   int _attack_meat {};
   int _attack_no_msg {};
   int _attacks_per_round {};
@@ -248,6 +247,7 @@ private:
   int _is_able_to_jump_without_tiring {};
   int _is_able_to_learn_skills {};
   int _is_able_to_live_out_of_water {};
+  int _is_able_to_lunge {};
   int _is_able_to_melt {};
   int _is_able_to_move_diagonally {};
   int _is_able_to_open_doors {};
@@ -1157,7 +1157,6 @@ public:
   int attack_engulf_chance_d1000(void) const;
   int attack_humanoid(void) const;
   int attack_living(void) const;
-  int attack_lunge(void) const;
   int attack_meat(void) const;
   int attack_no_msg(void) const;
   int attacks_per_round(void) const;
@@ -1303,6 +1302,7 @@ public:
   int is_able_to_jump_without_tiring(void) const;
   int is_able_to_learn_skills(void) const;
   int is_able_to_live_out_of_water(void) const;
+  int is_able_to_lunge(void) const;
   int is_able_to_melt(void) const;
   int is_able_to_move_diagonally(void) const;
   int is_able_to_open_doors(void) const;
@@ -1710,7 +1710,6 @@ public:
   void attack_engulf_chance_d1000_set(int v);
   void attack_humanoid_set(int v);
   void attack_living_set(int v);
-  void attack_lunge_set(int v);
   void attack_meat_set(int v);
   void attack_no_msg_set(int v);
   void attacks_per_round_set(int v);
@@ -1843,6 +1842,7 @@ public:
   void is_able_to_jump_without_tiring_set(int v);
   void is_able_to_learn_skills_set(int v);
   void is_able_to_live_out_of_water_set(int v);
+  void is_able_to_lunge_set(int v);
   void is_able_to_melt_set(int v);
   void is_able_to_move_diagonally_set(int v);
   void is_able_to_open_doors_set(int v);

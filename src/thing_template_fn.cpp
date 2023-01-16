@@ -194,7 +194,6 @@ int Tp::attack_eater(void) const { return _attack_eater; }
 int Tp::attack_engulf_chance_d1000(void) const { return _attack_engulf_chance_d1000; }
 int Tp::attack_humanoid(void) const { return _attack_humanoid; }
 int Tp::attack_living(void) const { return _attack_living; }
-int Tp::attack_lunge(void) const { return _attack_lunge; }
 int Tp::attack_meat(void) const { return _attack_meat; }
 int Tp::attack_no_msg(void) const { return _attack_no_msg; }
 int Tp::attacks_per_round(void) const { return _attacks_per_round; }
@@ -321,6 +320,7 @@ int Tp::is_able_to_jump(void) const { return _is_able_to_jump; }
 int Tp::is_able_to_jump_without_tiring(void) const { return _is_able_to_jump_without_tiring; }
 int Tp::is_able_to_learn_skills(void) const { return _is_able_to_learn_skills; }
 int Tp::is_able_to_live_out_of_water(void) const { return _is_able_to_live_out_of_water; }
+int Tp::is_able_to_lunge(void) const { return _is_able_to_lunge; }
 int Tp::is_able_to_melt(void) const { return _is_able_to_melt; }
 int Tp::is_able_to_move_diagonally(void) const { return _is_able_to_move_diagonally; }
 int Tp::is_able_to_open_doors(void) const { return _is_able_to_open_doors; }
@@ -728,7 +728,6 @@ void Tp::attack_eater_set(int v) { _attack_eater = v; }
 void Tp::attack_engulf_chance_d1000_set(int v) { _attack_engulf_chance_d1000 = v; }
 void Tp::attack_humanoid_set(int v) { _attack_humanoid = v; }
 void Tp::attack_living_set(int v) { _attack_living = v; }
-void Tp::attack_lunge_set(int v) { _attack_lunge = v; }
 void Tp::attack_meat_set(int v) { _attack_meat = v; }
 void Tp::attack_no_msg_set(int v) { _attack_no_msg = v; }
 void Tp::attacks_per_round_set(int v) { _attacks_per_round = v; }
@@ -861,6 +860,7 @@ void Tp::is_able_to_jump_set(int v) { _is_able_to_jump = v; }
 void Tp::is_able_to_jump_without_tiring_set(int v) { _is_able_to_jump_without_tiring = v; }
 void Tp::is_able_to_learn_skills_set(int v) { _is_able_to_learn_skills = v; }
 void Tp::is_able_to_live_out_of_water_set(int v) { _is_able_to_live_out_of_water = v; }
+void Tp::is_able_to_lunge_set(int v) { _is_able_to_lunge = v; }
 void Tp::is_able_to_melt_set(int v) { _is_able_to_melt = v; }
 void Tp::is_able_to_move_diagonally_set(int v) { _is_able_to_move_diagonally = v; }
 void Tp::is_able_to_open_doors_set(int v) { _is_able_to_open_doors = v; }
