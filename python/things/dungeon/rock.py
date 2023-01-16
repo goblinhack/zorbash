@@ -26,7 +26,7 @@ def tp_init(
     self = tp.Tp(name, "rock")
     # begin sort marker
     my.collision_hit_priority(self, 1)
-    my.gfx_ascii_bg_color_spread_hue(self, 50)
+    my.gfx_ascii_bg_color_spread_hue(self, 10)
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_reflection(self, True)

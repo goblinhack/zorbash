@@ -26,7 +26,7 @@ def tp_init(
     self = tp.Tp(name, "dungeon wall")
     # begin sort marker
     my.collision_hit_priority(self, 2)
-    my.gfx_ascii_bg_color_spread_hue(self, 50)
+    my.gfx_ascii_bg_color_spread_hue(self, 10)
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_reflection(self, True)
@@ -65,7 +65,7 @@ def tp_init(
     if tiles is not None:
         for t in tiles:
             my.tile(self,
-                    ascii_fg_char="#", ascii_bg_col_name="snow", ascii_fg_col_name="black",
+                    ascii_fg_char="#", ascii_bg_col_name="gray50", ascii_fg_col_name="black",
                     tile=t)
 
     if left1_tiles is not None:

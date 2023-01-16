@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- ascii fireball is shown in the wrong place                                                                                                   -->
 <!-- "Your last torch goes out. " is seen too often                                                                                               -->
 <!-- loading levels does not restore the background                                                                                               -->
 <!-- ------                                                                                                                                       -->
