@@ -23,16 +23,19 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
   int       is_lock            = false;
   int       is_key             = false;
   int       is_secret          = false;
+  int       biome_dungeon      = false;
+  int       biome_swamp        = false;
   int       depth              = 0;
 
-  static char *kwlist[] = {(char *) "room_data", (char *) "xxx",   (char *) "yyy",  (char *) "room_name",
-                           (char *) "up",        (char *) "down",  (char *) "left", (char *) "right",
-                           (char *) "entrance",  (char *) "exit",  (char *) "lock", (char *) "key",
-                           (char *) "secret",    (char *) "depth", nullptr};
+  static char *kwlist[] = {
+      (char *) "room_data", (char *) "xxx",  (char *) "yyy",    (char *) "room_name",     (char *) "up",
+      (char *) "down",      (char *) "left", (char *) "right",  (char *) "entrance",      (char *) "exit",
+      (char *) "lock",      (char *) "key",  (char *) "secret", (char *) "biome_dungeon", (char *) "biome_swamp",
+      (char *) "depth",     nullptr};
 
-  if (! PyArg_ParseTupleAndKeywords(args, keywds, "|Oiisiiiiiiiiii", kwlist, &py_room_data, &xxx, &yyy, &room_name,
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "|Oiisiiiiiiiiiiii", kwlist, &py_room_data, &xxx, &yyy, &room_name,
                                     &up, &down, &left, &right, &is_ascend_dungeon, &is_descend_dungeon, &is_lock,
-                                    &is_key, &is_secret, &depth)) {
+                                    &is_key, &is_secret, &biome_dungeon, &biome_swamp, &depth)) {
     ERR("map_load_room: Bad args");
     Py_RETURN_FALSE;
   }

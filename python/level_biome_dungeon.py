@@ -81,6 +81,7 @@ import my
 #  entrance rooms
 #
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -97,6 +98,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "     ^     ", "  ^        ", "     ^     ", "     ^     ",
@@ -113,6 +115,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "     ^     ", "  ^        ", "     ^     ", "     ^     ",
@@ -129,6 +132,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "     ^     ", "  ^        ", "     ^     ", "     ^     ",
@@ -145,6 +149,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "     ^     ", "  ^        ", "     ^     ", "     ^     ",
@@ -161,6 +166,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "     ^     ", "  ^        ", "     ^     ", "     ^     ",
@@ -177,6 +183,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "     ^     ", "  ^        ", "     ^     ", "     ^     ",
@@ -193,6 +200,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "     ^     ", "  ^        ", "     ^     ", "     ^     ",
@@ -209,6 +217,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "     ^     ", "  ^        ", "     ^     ", "     ^     ",
@@ -225,6 +234,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "     ^     ", "  ^        ", "     ^     ", "     ^     ",
@@ -241,6 +251,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "     ^     ", "  ^        ", "     ^     ", "     ^  .  ",
@@ -257,6 +268,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "     ^     ", "  ^        ", "     ^     ", "     ^  .  ",
@@ -273,6 +285,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "     ^     ", "  ^        ", "     ^     ", "     ^     ",
@@ -289,6 +302,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "     ^     ", "  ^        ", "     ^     ", "     ^     ",
@@ -305,6 +319,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "     ^     ", "  ^        ", "     ^     ", "     ^     ",
@@ -321,6 +336,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "     ^     ", "  ^        ", "     ^     ", "     ^     ",
@@ -337,6 +353,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "     ^     ", "  ^        ", "     ^     ", "     ^     ",
@@ -353,6 +370,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "     ^     ", "     S     ", "..   ^     ", "     ^     ",
@@ -369,6 +387,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "      ^    ", "           ", "     ^     ", "     ^     ",
@@ -385,6 +404,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "     ^     ", "           ", "     ^     ", "           ",
@@ -401,6 +421,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "     ^     ", "           ", " ... ^     ", "      ^    ",
@@ -417,6 +438,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "      ^    ", "       ^   ", "       ^   ", "           ", "           ",
@@ -433,6 +455,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "     ^     ", "           ", "     ^     ", "     ^     ",
@@ -449,6 +472,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "     ^     ", "       ^   ", "     ^     ", "     ^     ",
@@ -465,6 +489,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "     ^     ", "      ^    ", "       ^   ", "     ^     ", "     ^     ",
@@ -481,6 +506,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "           ", "      ^    ", "       ^   ", "     ^     ", " om  ^     ",
@@ -497,6 +523,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "           ", "      ^    ", "       ^   ", "     ^     ", " om  ^     ",
@@ -513,6 +540,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "  ^        ", "   ^       ", "       ^   ", "  ^        ", "     ^     ",
@@ -529,6 +557,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "  ^        ", "   ^       ", "       ^   ", "     ^     ", "     ^     ",
@@ -545,6 +574,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "           ", "      ^    ", "       ^   ", "     ^     ", "     ^     ",
@@ -561,6 +591,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "           ", "      ^    ", "  ^        ", "     ^     ", "     ^     ",
@@ -577,6 +608,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     entrance=True,
     room_data=[
         "           ", "      ^    ", "  ^        ", "     ^     ", "     ^     ",
@@ -597,6 +629,7 @@ my.map_load_room(
 # exit rooms
 #
 my.map_load_room(
+    biome_dungeon=True,
     exit=True,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -613,6 +646,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     exit=True,
     room_data=[
         "     .     ", "     .     ", "     $     ", "     .s$   ", "     .     ",
@@ -629,6 +663,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     exit=True,
     room_data=[
         "...        ", "...        ", "...        ", "...     ^  ", "...     ^  ",
@@ -645,6 +680,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     exit=True,
     room_data=[
         "...        ", "...        ", "...        ", "...     ^  ", "...     ^  ",
@@ -661,6 +697,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     exit=True,
     room_data=[
         "www        ", "www        ", "www        ", "www     ^  ", "www     ^  ",
@@ -677,6 +714,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     exit=True,
     room_data=[
         "  ^        ", "     ^     ", "       ^   ", "           ", "     ^     ",
@@ -693,6 +731,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     exit=True,
     room_data=[
         "  ^        ", "     ^     ", "       ^   ", "           ", "     ^     ",
@@ -709,6 +748,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     exit=True,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -725,6 +765,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     exit=True,
     room_data=[
         "           ", "           ", "           ", "     ^     ", "     ^     ",
@@ -741,6 +782,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     exit=True,
     room_data=[
         "  LLLELLLLL", "      g..> ", "           ", "        ^  ", "     ^     ",
@@ -757,6 +799,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     exit=True,
     room_data=[
         "    wEw    ", "           ", "           ", "     ^     ", "     ^     ",
@@ -773,6 +816,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     exit=True,
     room_data=[
         "    .E.    ", "           ", "           ", "     ^     ", "     ^     ",
@@ -789,6 +833,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     exit=True,
     room_data=[
         "    LHL    ", "           ", "           ", "     ^     ", "     ^     ",
@@ -809,6 +854,7 @@ my.map_load_room(
 # directional combined with exit rooms
 #
 my.map_load_room(
+    biome_dungeon=True,
     exit=True,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -825,6 +871,7 @@ my.map_load_room(
     ]
 )
 my.map_load_room(
+    biome_dungeon=True,
     exit=True,
     room_data=[
         "           ", "     ^     ", "           ", "       ^   ", "     ^     ",
@@ -841,6 +888,7 @@ my.map_load_room(
     ]
 )
 my.map_load_room(
+    biome_dungeon=True,
     exit=True,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -857,6 +905,7 @@ my.map_load_room(
     ]
 )
 my.map_load_room(
+    biome_dungeon=True,
     exit=True,
     room_data=[
         "      ^    ", "           ", "L.LLLLL... ", "           ", "           ",
@@ -873,6 +922,7 @@ my.map_load_room(
     ]
 )
 my.map_load_room(
+    biome_dungeon=True,
     exit=True,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -889,6 +939,7 @@ my.map_load_room(
     ]
 )
 my.map_load_room(
+    biome_dungeon=True,
     exit=True,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -905,6 +956,7 @@ my.map_load_room(
     ]
 )
 my.map_load_room(
+    biome_dungeon=True,
     exit=True,
     room_data=[
         "           ", "           ", "w.wwwww... ", "   ^       ", "   ^       ",
@@ -921,6 +973,7 @@ my.map_load_room(
     ]
 )
 my.map_load_room(
+    biome_dungeon=True,
     exit=True,
     room_data=[
         "           ", "           ", " .wwwww.$E ", " $.....    ", "           ",
@@ -941,6 +994,7 @@ my.map_load_room(
 # lock rooms
 #
 my.map_load_room(
+    biome_dungeon=True,
     lock=True,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -957,6 +1011,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     lock=True,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -973,6 +1028,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     lock=True,
     room_data=[
         "   ^       ", "           ", "    ^      ", "     ^     ", "     ^     ",
@@ -989,6 +1045,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     lock=True,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -1005,6 +1062,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     lock=True,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -1021,6 +1079,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     lock=True,
     room_data=[
         "   ^       ", "           ", "           ", "     ^     ", "     ^     ",
@@ -1041,6 +1100,7 @@ my.map_load_room(
 # key rooms
 #
 my.map_load_room(
+    biome_dungeon=True,
     key=True,
     room_data=[
         " .C....... ", " ^         ", "         ^ ", "        ^  ", "   ^       ",
@@ -1057,6 +1117,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     key=True,
     room_data=[
         " .L....... ", " ^         ", "         ^ ", "        ^  ", "   ^       ",
@@ -1073,6 +1134,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     key=True,
     room_data=[
         "           ", "           ", "  ^        ", "           ", "           ",
@@ -1089,6 +1151,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     key=True,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -1105,6 +1168,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     key=True,
     room_data=[
         "           ", "           ", "           ", "       ^   ", "        ^  ",
@@ -1121,6 +1185,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     key=True,
     room_data=[
         "           ", "   ^       ", "  ^        ", "   ^       ", "   ^       ",
@@ -1137,6 +1202,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     key=True,
     room_data=[
         "           ", "           ", "      ^    ", "   ^       ", "   ^       ",
@@ -1153,6 +1219,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     key=True,
     room_data=[
         "           ", "           ", "           ", "   ^       ", "   ^       ",
@@ -1169,6 +1236,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     key=True,
     room_data=[
         "           ", "           ", "  ^        ", "   ^       ", " ^         ",
@@ -1185,6 +1253,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     key=True,
     room_data=[
         "   ^       ", "           ", "           ", "   ^       ", "   ^       ",
@@ -1201,6 +1270,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     key=True,
     room_data=[
         "           ", "           ", "           ", "   ^       ", "           ",
@@ -1217,6 +1287,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     key=True,
     room_data=[
         "           ", "  ^        ", " ^         ", "   ^       ", " ^         ",
@@ -1237,6 +1308,7 @@ my.map_load_room(
 # depth 1 rooms
 #
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "  ^        ", "  ^        ", "       ^   ", "    ^      ", " ^         ",
@@ -1253,6 +1325,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -1269,6 +1342,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -1285,6 +1359,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -1301,6 +1376,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         " ^         ", "  ^        ", "       ^   ", "    ^      ", " ^         ",
@@ -1317,6 +1393,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "       ^   ", "        ^  ", "           ", "           ", "           ",
@@ -1333,6 +1410,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "   ^       ", "  ^        ", "       ^   ", "    ^      ", " ^         ",
@@ -1349,6 +1427,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "  ^        ", "  ^        ", "       ^   ", "    ^      ", " ^         ",
@@ -1365,6 +1444,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "   ^       ", "  ^        ", "       ^   ", "    ^      ", " ^         ",
@@ -1381,6 +1461,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "  ^        ", "  ^        ", "       ^   ", "    ^      ", " ^         ",
@@ -1397,6 +1478,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "   ^       ", "        ^  ", "           ", "   ^       ", "   ^       ",
@@ -1413,6 +1495,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "           ", "        ^  ", "           ", "           ", "   ^       ",
@@ -1429,6 +1512,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "           ", "        ^  ", "      ^    ", "     ^     ", " ^         ",
@@ -1445,6 +1529,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -1461,6 +1546,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "           ", "           ", "           ", "           ", "  ^        ",
@@ -1477,6 +1563,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "           ", "           ", "           ", "         ^ ", "     ^     ",
@@ -1493,6 +1580,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "           ", "           ", "           ", "         ^ ", " ^         ",
@@ -1509,6 +1597,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -1525,6 +1614,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -1541,6 +1631,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -1557,6 +1648,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "           ", "           ", "           ", " ^         ", "  ^        ",
@@ -1573,6 +1665,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "           ", "           ", "           ", "         ^ ", "  ^        ",
@@ -1589,6 +1682,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "           ", "           ", "           ", " ^         ", "      ^    ",
@@ -1605,6 +1699,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -1621,6 +1716,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -1637,6 +1733,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -1653,6 +1750,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -1669,6 +1767,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "           ", "           ", "           ", "         ^ ", "    ^      ",
@@ -1685,6 +1784,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "  ^        ", "         ^ ", "           ", "   ^       ", "    ^      ",
@@ -1701,6 +1801,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=1,
     room_data=[
         "         ^ ", "        ^  ", "           ", " ^         ", "      ^    ",
@@ -1721,6 +1822,7 @@ my.map_load_room(
 # depth 2 rooms
 #
 my.map_load_room(
+    biome_dungeon=True,
     depth=2,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -1737,6 +1839,7 @@ my.map_load_room(
     ]
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=2,
     room_data=[
         "        ^  ", "       ^   ", "         ^ ", "      ^    ", "     ^     ",
@@ -1753,6 +1856,7 @@ my.map_load_room(
     ]
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=2,
     room_data=[
         "    ^      ", "     ^     ", "           ", "   ^       ", "    ^      ",
@@ -1769,6 +1873,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=2,
     room_data=[
         "    ^      ", "           ", "     ^     ", "   ^       ", "     ^     ",
@@ -1785,6 +1890,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=2,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -1801,6 +1907,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=2,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -1817,6 +1924,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=2,
     room_data=[
         "   ^       ", "    ^      ", "           ", "         ^ ", "    ^      ",
@@ -1833,6 +1941,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=2,
     room_data=[
         "  ^        ", "   ^       ", "           ", "  ^        ", "  ^        ",
@@ -1849,6 +1958,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     depth=2,
     room_data=[
         "      ^    ", "       ^   ", "           ", "    ^      ", "     ^     ",
@@ -1869,6 +1979,7 @@ my.map_load_room(
 # depth 3 rooms
 #
 my.map_load_room(
+    biome_dungeon=True,
     depth=3,
     room_data=[
         "           ", "           ", "           ", "           ", "           ",
@@ -1886,6 +1997,7 @@ my.map_load_room(
 )
 
 my.map_load_room(
+    biome_dungeon=True,
     depth=3,
     room_data=[
         "        ^  ", "        ^  ", "      ^    ", "      ^    ", "      ^    ",
@@ -1903,6 +2015,7 @@ my.map_load_room(
 )
 
 my.map_load_room(
+    biome_dungeon=True,
     depth=3,
     room_data=[
         "           ", "   ^       ", "  ^        ", "   ^       ", " ^         ",
@@ -1920,6 +2033,7 @@ my.map_load_room(
 )
 
 my.map_load_room(
+    biome_dungeon=True,
     depth=3,
     room_data=[
         "           ", "           ", "           ", "   ^       ", "   ^       ",
@@ -1940,6 +2054,7 @@ my.map_load_room(
 # secret rooms
 #
 my.map_load_room(
+    biome_dungeon=True,
     secret=True,
     room_data=[
         "           ", "           ", "           ", "           ", "   ^       ",
@@ -1956,6 +2071,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     secret=True,
     room_data=[
         "           ", "           ", "           ", "   ^       ", "   ^       ",
@@ -1972,6 +2088,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     secret=True,
     room_data=[
         "           ", "           ", "           ", "           ", "     ^     ",
@@ -1988,6 +2105,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     secret=True,
     room_data=[
         "           ", "           ", "    ^      ", "           ", "   ^       ",
@@ -2004,6 +2122,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     secret=True,
     room_data=[
         "      ^    ", "     ^     ", "   ^       ", "     ^     ", " ^         ",
@@ -2020,6 +2139,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     secret=True,
     room_data=[
         "           ", "   ^       ", "    ^      ", "        ^  ", "   ^       ",
@@ -2036,6 +2156,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     secret=True,
     room_data=[
         "           ", "        ^  ", "    ^      ", "    ^      ", "   ^       ",
@@ -2052,6 +2173,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     secret=True,
     room_data=[
         "           ", "       ^   ", "    ^      ", "       ^   ", "   ^       ",
@@ -2068,6 +2190,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     secret=True,
     room_data=[
         "   ^       ", "   ^       ", "    ^      ", "   ^       ", "   ^       ",
@@ -2084,6 +2207,7 @@ my.map_load_room(
     ],
 )
 my.map_load_room(
+    biome_dungeon=True,
     secret=True,
     room_data=[
         "   ^       ", "   ^       ", "    ^      ", "   ^       ", "   ^       ",
