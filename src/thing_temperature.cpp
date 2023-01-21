@@ -21,6 +21,13 @@ void Thing::temperature_tick(void)
     return;
   }
 
+  if (is_ethereal()) {
+    //
+    // Ghosts don't burn or freeze.
+    //
+    return;
+  }
+
   dbg("Temperature tick");
   TRACE_AND_INDENT();
 
@@ -74,10 +81,18 @@ void Thing::temperature_tick(void)
     //
     if (is_player() || is_monst()) {
       if (t->is_torch()) {
-        //
-        // But make exceptions for combustible things so that they will react to a flaming torch.
-        //
-        if (! is_combustible()) {
+        if (is_combustible()) {
+          //
+          // But make exceptions for combustible things so that they will react to a flaming torch.
+          //
+        } else if (is_frozen) {
+          //
+          // Make another exception for frozen things so they can defrost.
+          //
+        } else {
+          //
+          // Ignore the torch.
+          //
           continue;
         }
       }
