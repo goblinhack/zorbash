@@ -1,5 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- ascii darts                                                                                                                                  -->
+<!-- throwing one dart should not change shortcut                                                                                                 -->
 <!-- really need darts that you can throw for sentries                                                                                            -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

@@ -168,6 +168,18 @@ void Thing::throw_at(Thingp what, Thingp target)
     auto sz    = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
     auto delay = PARTICLE_SPEED_MS;
 
+    //
+    // Daggers, horseshoes...
+    //
+    if (what->is_thrown_as_a_weapon()) {
+      //
+      // But it's too fast in ascii mode
+      //
+      if (! g_opt_ascii) {
+        delay /= 2;
+      }
+    }
+
     if (! is_being_destroyed) {
       if (is_player()) {
         //

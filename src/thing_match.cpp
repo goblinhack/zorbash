@@ -700,7 +700,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag19() && (what == "unused_flag19")) {
     return true;
   }
-  if (unused_flag20() && (what == "unused_flag20")) {
+  if (is_thrown_as_a_weapon() && (what == "is_thrown_as_a_weapon")) {
     return true;
   }
   if (is_immune_to_electricity() && (what == "is_immune_to_electricity")) {
@@ -2180,8 +2180,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag1") {
     return &Thing::unused_flag1;
   }
-  if (what == "unused_flag20") {
-    return &Thing::unused_flag20;
+  if (what == "is_thrown_as_a_weapon") {
+    return &Thing::is_thrown_as_a_weapon;
   }
   if (what == "is_immune_to_electricity") {
     return &Thing::is_immune_to_electricity;

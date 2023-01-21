@@ -77,6 +77,10 @@ public:
   //
   bool attack_at_set {};
   //
+  // Throw attack, e.g. dagger or horseshow
+  //
+  bool thrown {};
+  //
   // Attack types;
   //
   bool attack[ THING_ATTACK_MAX ] = {};

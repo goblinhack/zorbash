@@ -39,8 +39,21 @@ void Game::place_player(void)
         auto w = level->thing_new("potion_invisibility", point(x, y));
         t->carry(w);
       }
+      {
+        //
+        // Darts
+        //
+        for (auto d = 0; d < 6; d++) {
+          auto w = level->thing_new("dart", point(x, y));
+          t->carry(w);
+        }
+      }
       if (1) {
         auto w = level->thing_new("food_pottedmeat", point(x, y));
+        t->carry(w);
+      }
+      if (0) {
+        auto w = level->thing_new("horseshoe", point(x, y));
         t->carry(w);
       }
       if (0) {
@@ -294,6 +307,7 @@ void Game::place_player(void)
         // level->thing_new("cleaner", point(x + 2, y - 2));
       }
 
+      // level->thing_new("flesh_golem", point(x + 1, y + 3));
       IF_DEBUG2
       {
         if (0) {
@@ -348,7 +362,6 @@ void Game::place_player(void)
         // level->thing_new("barrel", point(x - 2, y));
         // level->thing_new("floor_red_blood1", point(x + 2, y + 1));
         // level->thing_new("teleport", point(x + 2, y + 2));
-        // level->thing_new("flesh_golem", point(x, y + 1));
         // level->thing_new("scorpion", point(x + 2, y + 2));
         level->assign_leaders_and_followers();
       }

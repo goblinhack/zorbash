@@ -519,6 +519,7 @@ private:
   int _is_the_grid {};
   int _is_thief {};
   int _is_throwable {};
+  int _is_thrown_as_a_weapon {};
   int _is_tickable {}; // e.g. a monst or player or something moveable
   int _is_tireless {};
   int _is_tmp_thing {};
@@ -632,7 +633,6 @@ private:
   int _unused_flag18 {};
   int _unused_flag19 {};
   int _unused_flag2 {};
-  int _unused_flag20 {};
   int _unused_flag27 {};
   int _unused_flag3 {};
   int _unused_flag4 {};
@@ -1573,6 +1573,7 @@ public:
   int is_the_grid(void) const;
   int is_thief(void) const;
   int is_throwable(void) const;
+  int is_thrown_as_a_weapon(void) const;
   int is_tickable(void) const;
   int is_tireless(void) const;
   int is_tmp_thing(void) const;
@@ -1685,7 +1686,6 @@ public:
   int unused_flag18(void) const;
   int unused_flag19(void) const;
   int unused_flag1(void) const;
-  int unused_flag20(void) const;
   int unused_flag27(void) const;
   int unused_flag2(void) const;
   int unused_flag3(void) const;
@@ -2114,6 +2114,7 @@ public:
   void is_the_grid_set(int v);
   void is_thief_set(int v);
   void is_throwable_set(int v);
+  void is_thrown_as_a_weapon_set(int v);
   void is_tickable_set(int v);
   void is_tireless_set(int v);
   void is_tmp_thing_set(int v);
@@ -2371,7 +2372,6 @@ public:
   void unused_flag18_set(int v);
   void unused_flag19_set(int v);
   void unused_flag1_set(int v);
-  void unused_flag20_set(int v);
   void unused_flag27_set(int v);
   void unused_flag2_set(int v);
   void unused_flag3_set(int v);

@@ -1377,10 +1377,10 @@ int Thing::unused_flag19(void)
   return (tp()->unused_flag19());
 }
 
-int Thing::unused_flag20(void)
+int Thing::is_thrown_as_a_weapon(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag20());
+  return (tp()->is_thrown_as_a_weapon());
 }
 
 int Thing::is_albe_to_shoot_at_close_range(void)

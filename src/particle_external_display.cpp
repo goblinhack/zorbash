@@ -70,18 +70,21 @@ void Level::display_pixelart_external_particles(void)
     point blit_tl(at.x - (sz.w / 2), at.y - (sz.h / 2));
     point blit_br(at.x + (sz.w / 2), at.y + (sz.h / 2));
 
-    int oy = sin(RAD_180 * dt) * ((float) p.height);
-
-    blit_tl.y -= oy;
-    blit_br.y -= oy;
+    int arcing_height = sin(RAD_180 * dt) * ((float) p.height);
 
     Tpp tpp = {};
     if (p.id.id) {
       auto t = thing_find(p.id);
       if (t) {
         tpp = t->tp();
+        if (t->is_thrown_as_a_weapon()) {
+          arcing_height = 0;
+        }
       }
     }
+
+    blit_tl.y -= arcing_height;
+    blit_br.y -= arcing_height;
 
     auto  tile            = p.tile;
     float tile_pix_width  = tile->pix_width;

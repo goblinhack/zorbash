@@ -591,6 +591,7 @@ int Tp::is_tentacle(void) const { return _is_tentacle; }
 int Tp::is_the_grid(void) const { return _is_the_grid; }
 int Tp::is_thief(void) const { return _is_thief; }
 int Tp::is_throwable(void) const { return _is_throwable; }
+int Tp::is_thrown_as_a_weapon(void) const { return _is_thrown_as_a_weapon; }
 int Tp::is_tickable(void) const { return _is_tickable; }
 int Tp::is_tireless(void) const { return _is_tireless; }
 int Tp::is_tmp_thing(void) const { return _is_tmp_thing; }
@@ -703,7 +704,6 @@ int Tp::unused_flag17(void) const { return _unused_flag17; }
 int Tp::unused_flag18(void) const { return _unused_flag18; }
 int Tp::unused_flag19(void) const { return _unused_flag19; }
 int Tp::unused_flag1(void) const { return _unused_flag1; }
-int Tp::unused_flag20(void) const { return _unused_flag20; }
 int Tp::unused_flag27(void) const { return _unused_flag27; }
 int Tp::unused_flag2(void) const { return _unused_flag2; }
 int Tp::unused_flag3(void) const { return _unused_flag3; }
@@ -1132,6 +1132,7 @@ void Tp::is_tentacle_set(int v) { _is_tentacle = v; }
 void Tp::is_the_grid_set(int v) { _is_the_grid = v; }
 void Tp::is_thief_set(int v) { _is_thief = v; }
 void Tp::is_throwable_set(int v) { _is_throwable = v; }
+void Tp::is_thrown_as_a_weapon_set(int v) { _is_thrown_as_a_weapon = v; }
 void Tp::is_tickable_set(int v) { _is_tickable = v; }
 void Tp::is_tireless_set(int v) { _is_tireless = v; }
 void Tp::is_tmp_thing_set(int v) { _is_tmp_thing = v; }
@@ -1386,7 +1387,6 @@ void Tp::unused_flag17_set(int v) { _unused_flag17 = v; }
 void Tp::unused_flag18_set(int v) { _unused_flag18 = v; }
 void Tp::unused_flag19_set(int v) { _unused_flag19 = v; }
 void Tp::unused_flag1_set(int v) { _unused_flag1 = v; }
-void Tp::unused_flag20_set(int v) { _unused_flag20 = v; }
 void Tp::unused_flag27_set(int v) { _unused_flag27 = v; }
 void Tp::unused_flag2_set(int v) { _unused_flag2 = v; }
 void Tp::unused_flag3_set(int v) { _unused_flag3 = v; }

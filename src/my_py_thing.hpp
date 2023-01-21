@@ -426,6 +426,7 @@ PyObject *thing_is_target_select(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_tentacle(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_thief(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_throwable(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_thrown_as_a_weapon(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_tickable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_tireless(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_tmp_thing(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -584,7 +585,6 @@ PyObject *thing_unused_flag17(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag18(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag19(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag1(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag20(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag27(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag2(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag3(PyObject *obj, PyObject *args, PyObject *keywds);

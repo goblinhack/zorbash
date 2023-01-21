@@ -473,11 +473,26 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
 
   auto owner = top_owner();
 
-  if (! possible_to_attack(victim)) {
-    if (is_debug_type()) {
-      dbg("Attack failed, not possible to attack %s", victim->to_short_string().c_str());
+  if (attack_options->thrown) {
+    //
+    // Allow things like horseshoes to attack, which would not normally be themselves...
+    //
+    if (victim->is_ethereal()) {
+      //
+      // Can't throw darts at ghosts
+      //
+      return false;
     }
-    return false;
+  } else {
+    //
+    // Check this thing can attack
+    //
+    if (! possible_to_attack(victim)) {
+      if (is_debug_type()) {
+        dbg("Attack failed, not possible to attack %s", victim->to_short_string().c_str());
+      }
+      return false;
+    }
   }
 
   if (victim->is_falling) {

@@ -525,7 +525,7 @@ do
       unused_flag18 \
       unused_flag19 \
       unused_flag2 \
-      unused_flag20 \
+      is_thrown_as_a_weapon \
       is_immune_to_electricity \
       is_albe_to_shoot_at_close_range \
       gfx_pixelart_show_highlighted \

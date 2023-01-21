@@ -1472,6 +1472,7 @@ public:
   int is_tentacle(void);
   int is_thief(void);
   int is_throwable(void);
+  int is_thrown_as_a_weapon(void);
   int is_tickable(void);
   int is_tireless(void);
   int is_tmp_thing(void);
@@ -1937,7 +1938,6 @@ public:
   int unused_flag18(void);
   int unused_flag19(void);
   int unused_flag1(void);
-  int unused_flag20(void);
   int unused_flag27(void);
   int unused_flag2(void);
   int unused_flag3(void);

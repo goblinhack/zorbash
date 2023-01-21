@@ -1,0 +1,173 @@
+//
+// Copyright Neil McGill, goblinhack@gmail.com
+//
+
+#include "my_game.hpp"
+#include "my_python.hpp"
+#include "my_thing.hpp"
+#include "my_thing_attack_options.hpp"
+
+static PyObject *thing_hit_common(PyObject *obj, PyObject *args, PyObject *keywds, ThingAttack type)
+{
+  TRACE_NO_INDENT();
+  uint32_t     hitter_id = 0;
+  uint32_t     victim_id = 0;
+  int          damage    = 0;
+  int          thrown    = 0;
+  int          crit      = 0;
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage",
+                            (char *) "crit",   (char *) "thrown", nullptr};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "II|iii", kwlist, &hitter_id, &victim_id, &damage, &crit,
+                                    &thrown)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! hitter_id) {
+    ERR("%s: No hitter thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp hitter = game->thing_find(hitter_id);
+  if (! hitter) {
+    ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! victim_id) {
+    ERR("%s: No target thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp target = game->thing_find(victim_id);
+  if (! target) {
+    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    Py_RETURN_NONE;
+  }
+
+  ThingAttackOptions attack_options {};
+
+  if (damage) {
+    attack_options.dmg_set = true;
+    attack_options.damage  = damage;
+  }
+
+  attack_options.thrown         = thrown ? true : false;
+  attack_options.crit           = crit ? true : false;
+  attack_options.attack[ type ] = true;
+
+  if (damage) {
+    IF_DEBUG { hitter->log("Attack for %d", damage); }
+  } else {
+    IF_DEBUG { hitter->log("Attack"); }
+  }
+  TRACE_AND_INDENT();
+
+  if (hitter->attack(target, &attack_options)) {
+    Py_RETURN_TRUE;
+  }
+  Py_RETURN_FALSE;
+}
+
+PyObject *thing_hit(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  return thing_hit_common(obj, args, keywds, THING_ATTACK_MELEE);
+}
+
+PyObject *thing_hit_dmg_draining(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  return thing_hit_common(obj, args, keywds, THING_ATTACK_DRAINING);
+}
+
+PyObject *thing_hit_dmg_acid(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  return thing_hit_common(obj, args, keywds, THING_ATTACK_ACID);
+}
+
+PyObject *thing_hit_dmg_water(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  return thing_hit_common(obj, args, keywds, THING_ATTACK_WATER);
+}
+
+PyObject *thing_hit_dmg_cold(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  return thing_hit_common(obj, args, keywds, THING_ATTACK_COLD);
+}
+
+PyObject *thing_hit_dmg_crush(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  return thing_hit_common(obj, args, keywds, THING_ATTACK_CRUSH);
+}
+
+PyObject *thing_hit_dmg_digest(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  return thing_hit_common(obj, args, keywds, THING_ATTACK_DIGEST);
+}
+
+PyObject *thing_hit_dmg_energy(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  return thing_hit_common(obj, args, keywds, THING_ATTACK_ENERGY);
+}
+
+PyObject *thing_hit_dmg_negation(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  return thing_hit_common(obj, args, keywds, THING_ATTACK_NEGATION);
+}
+
+PyObject *thing_hit_dmg_fire(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  return thing_hit_common(obj, args, keywds, THING_ATTACK_FIRE);
+}
+
+PyObject *thing_hit_dmg_heat(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  return thing_hit_common(obj, args, keywds, THING_ATTACK_HEAT);
+}
+
+PyObject *thing_hit_dmg_drown(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  return thing_hit_common(obj, args, keywds, THING_ATTACK_DROWN);
+}
+
+PyObject *thing_hit_dmg_bite(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  return thing_hit_common(obj, args, keywds, THING_ATTACK_BITE);
+}
+
+PyObject *thing_hit_dmg_claw(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  return thing_hit_common(obj, args, keywds, THING_ATTACK_CLAW);
+}
+
+PyObject *thing_hit_dmg_lightning(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  return thing_hit_common(obj, args, keywds, THING_ATTACK_LIGHTNING);
+}
+
+PyObject *thing_hit_dmg_necrosis(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  return thing_hit_common(obj, args, keywds, THING_ATTACK_NECROSIS);
+}
+
+PyObject *thing_hit_dmg_poison(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  return thing_hit_common(obj, args, keywds, THING_ATTACK_POISON);
+}
