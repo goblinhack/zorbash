@@ -13,11 +13,7 @@ def on_get_text_description_long(owner, me, x, y):
 
 
 def on_thrown(me, x, y):
-    if my.level_is_chasm_at(me, x, y):
-        return
-    if my.level_is_water_at(me, x, y):
-        return
-    my.spawn_at_my_position(me, "water")
+    explode(me, x, y)
 
 
 def on_use(owner, item, target, x, y):
