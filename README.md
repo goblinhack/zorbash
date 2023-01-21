@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- torch fire mystery                                                                                                                           -->
 <!-- really need darts that you can throw for sentries                                                                                            -->
 <!-- loading levels does not restore the background                                                                                               -->
 <!-- ------                                                                                                                                       -->

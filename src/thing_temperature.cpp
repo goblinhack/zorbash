@@ -69,6 +69,20 @@ void Thing::temperature_tick(void)
       }
     }
 
+    //
+    // If the player is standing in the same tile as a torch, don't burn them.
+    //
+    if (is_player() || is_monst()) {
+      if (t->is_torch()) {
+        //
+        // But make exceptions for combustible things so that they will react to a flaming torch.
+        //
+        if (! is_combustible()) {
+          continue;
+        }
+      }
+    }
+
     if (on_fire_anim_id() == t->id) {
       //
       // You "carry" fire when on fire.
