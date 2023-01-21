@@ -1111,10 +1111,6 @@ void wid_actionbar_pixelart_init(void)
   if (game->state == Game::STATE_NORMAL) {
     options++;
     options++;
-
-    //
-    // Robot debug mode
-    //
     IF_DEBUG2 { options++; }
   }
 

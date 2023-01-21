@@ -1745,8 +1745,9 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
       if (is_item_collector()) {
         auto items = anything_to_carry_at(at);
         if (items.size() >= 1) {
-          for (auto item : items) {
-            if (try_to_carry_if_worthwhile_dropping_items_if_needed(item)) {
+          for (auto itemid : items) {
+            auto t = level->thing_find(itemid);
+            if (try_to_carry_if_worthwhile_dropping_items_if_needed(t)) {
               return true;
             }
           }

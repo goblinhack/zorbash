@@ -532,7 +532,7 @@ public:
   void wid_choose_player_name_select(void);
   void wid_choose_seed_select(void);
   void wid_choose_skill(void);
-  void wid_collect_create(const std::list< Thingp > items);
+  void wid_collect_create(const std::list< ThingId > items);
   void wid_config_gfx_select(void);
   void wid_config_keyboard_select(void);
   void wid_config_mouse_select(void);

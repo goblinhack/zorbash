@@ -1970,8 +1970,8 @@ public:
   point where_i_dropped_an_item_last_set(point);
   point where_i_failed_to_collect_last_set(point);
 
-  std::list< Thingp > anything_to_carry(void);
-  std::list< Thingp > anything_to_carry_at(point);
+  std::list< ThingId > anything_to_carry(void);
+  std::list< ThingId > anything_to_carry_at(point);
 
   std::size_t light_count(void);
 

@@ -358,7 +358,7 @@ bool Thing::carry(Thingp item, bool can_equip)
 
 bool Thing::try_to_carry(Thingp item) { return carry(item); }
 
-std::list< Thingp > Thing::anything_to_carry_at(point at)
+std::list< ThingId > Thing::anything_to_carry_at(point at)
 {
   std::vector< std::pair< Thingp, int > > items;
 
@@ -451,16 +451,17 @@ std::list< Thingp > Thing::anything_to_carry_at(point at)
   });
 
 end:
-  std::list< Thingp > out;
+  std::list< ThingId > out;
   for (auto i : items) {
-    out.push_back(i.first);
+    Thingp t = i.first;
+    out.push_back(t->id);
     dbg("Final item list: %s value %d", i.first->to_short_string().c_str(), value(i.first));
   }
 
   return out;
 }
 
-std::list< Thingp > Thing::anything_to_carry(void) { return anything_to_carry_at(curr_at); }
+std::list< ThingId > Thing::anything_to_carry(void) { return anything_to_carry_at(curr_at); }
 
 bool Thing::check_anything_to_carry(bool auto_collect_allowed)
 {

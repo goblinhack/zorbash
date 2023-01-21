@@ -4,6 +4,7 @@
 
 #include "my_level.hpp"
 #include "my_monst.hpp"
+#include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
 //
@@ -33,9 +34,11 @@ std::list< Thingp > Thing::carried_item_only_list(void)
         if (unlikely(! t)) {
           continue;
         }
+        verify(MTYPE_THING, t);
         out.push_back(t);
       }
     }
+    verify(MTYPE_THING, t);
     out.push_back(t);
   }
   return out;
@@ -65,9 +68,11 @@ std::vector< Thingp > Thing::carried_item_only_vector(void)
         if (unlikely(! t)) {
           continue;
         }
+        verify(MTYPE_THING, t);
         out.push_back(t);
       }
     }
+    verify(MTYPE_THING, t);
     out.push_back(t);
   }
 
@@ -92,6 +97,7 @@ std::list< Thingp > Thing::carried_and_equipped_item_list(void)
   {
     auto t = equip_get(e);
     if (t) {
+      verify(MTYPE_THING, t);
       out.push_back(t);
     }
   }
@@ -109,9 +115,11 @@ std::list< Thingp > Thing::carried_and_equipped_item_list(void)
         if (unlikely(! t)) {
           continue;
         }
+        verify(MTYPE_THING, t);
         out.push_back(t);
       }
     }
+    verify(MTYPE_THING, t);
     out.push_back(t);
   }
   return out;
@@ -132,6 +140,7 @@ std::vector< Thingp > Thing::carried_and_equipped_item_vector(void)
   {
     auto t = equip_get(e);
     if (t) {
+      verify(MTYPE_THING, t);
       out.push_back(t);
     }
   }
@@ -149,9 +158,11 @@ std::vector< Thingp > Thing::carried_and_equipped_item_vector(void)
         if (unlikely(! t)) {
           continue;
         }
+        verify(MTYPE_THING, t);
         out.push_back(t);
       }
     }
+    verify(MTYPE_THING, t);
     out.push_back(t);
   }
 

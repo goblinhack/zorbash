@@ -28,7 +28,8 @@ void Thing::destroy(void)
   /*
    * If seeing a crash in printing the description of the thing this can be handy.
   if (maybe_infop()) {
-    LOG("Destroy %" PRIX32 " leader %" PRIX32 " owner %" PRIX32, id.id, infop()->leader_id.id, infop()->owner_id.id);
+  LOG("%p Destroy %" PRIX32 " leader %" PRIX32 " owner %" PRIX32, this, id.id, infop()->leader_id.id,
+      infop()->owner_id.id);
   }
    */
 
@@ -152,6 +153,7 @@ void Thing::destroy(void)
   if (wid_inventory_thing_over == this) {
     wid_inventory_thing_over = nullptr;
   }
+
   if (wid_inventory_thing_selected == this) {
     wid_inventory_thing_selected = nullptr;
   }
