@@ -703,6 +703,17 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
           }
         }
       }
+    } else if (! attack_options->dmg_set) {
+      //
+      // Here we've indicated the attack type is mandatory, but not set the damage
+      //
+      int dmg_poison_val = dmg_poison();
+      if (dmg_poison_val > 0) {
+        attack_options->damage                        = dmg_poison_val;
+        attack_options->dmg_set                       = true;
+        attack_options->attack[ THING_ATTACK_POISON ] = true;
+        victim->poison_reason_set(text_a_or_an());
+      }
     }
 
     //
@@ -719,6 +730,17 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
             dbg("Set drown damage %d", attack_options->damage);
           }
         }
+      }
+    } else if (! attack_options->dmg_set) {
+      //
+      // Here we've indicated the attack type is mandatory, but not set the damage
+      //
+      int dmg_drown_val = dmg_drown();
+      if (dmg_drown_val > 0) {
+        attack_options->damage                       = dmg_drown_val;
+        attack_options->dmg_set                      = true;
+        attack_options->attack[ THING_ATTACK_DROWN ] = true;
+        dbg("Set drown damage %d", attack_options->damage);
       }
     }
 
@@ -737,20 +759,44 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
           }
         }
       }
+    } else if (! attack_options->dmg_set) {
+      //
+      // Here we've indicated the attack type is mandatory, but not set the damage
+      //
+      int dmg_bite_val = dmg_bite();
+      if (dmg_bite_val > 0) {
+        attack_options->damage                      = dmg_bite_val;
+        attack_options->dmg_set                     = true;
+        attack_options->attack[ THING_ATTACK_BITE ] = true;
+        dbg("Set bite damage %d", attack_options->damage);
+      }
     }
 
     //
     // Chance of attack[THING_ATTACK_CLAW] damage?
     //
-    if (! attack_options->dmg_set) {
-      if (d1000() < dmg_claw_chance_d1000(attack_options->attack_num)) {
-        int dmg_claw_val = dmg_claw();
-        if (dmg_claw_val > 0) {
-          attack_options->damage                      = dmg_claw_val;
-          attack_options->dmg_set                     = true;
-          attack_options->attack[ THING_ATTACK_CLAW ] = true;
-          dbg("Set claw damage %d", attack_options->damage);
+    if (! attack_options->attack[ THING_ATTACK_CLAW ]) {
+      if (! attack_options->dmg_set) {
+        if (d1000() < dmg_claw_chance_d1000(attack_options->attack_num)) {
+          int dmg_claw_val = dmg_claw();
+          if (dmg_claw_val > 0) {
+            attack_options->damage                      = dmg_claw_val;
+            attack_options->dmg_set                     = true;
+            attack_options->attack[ THING_ATTACK_CLAW ] = true;
+            dbg("Set claw damage %d", attack_options->damage);
+          }
         }
+      }
+    } else if (! attack_options->dmg_set) {
+      //
+      // Here we've indicated the attack type is mandatory, but not set the damage
+      //
+      int dmg_claw_val = dmg_claw();
+      if (dmg_claw_val > 0) {
+        attack_options->damage                      = dmg_claw_val;
+        attack_options->dmg_set                     = true;
+        attack_options->attack[ THING_ATTACK_CLAW ] = true;
+        dbg("Set claw damage %d", attack_options->damage);
       }
     }
 
@@ -769,6 +815,17 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
           }
         }
       }
+    } else if (! attack_options->dmg_set) {
+      //
+      // Here we've indicated the attack type is mandatory, but not set the damage
+      //
+      int dmg_cold_val = dmg_cold();
+      if (dmg_cold_val > 0) {
+        attack_options->damage                      = dmg_cold_val;
+        attack_options->dmg_set                     = true;
+        attack_options->attack[ THING_ATTACK_COLD ] = true;
+        dbg("Set cold damage %d", attack_options->damage);
+      }
     }
 
     //
@@ -785,6 +842,17 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
             dbg("Set fire damage %d", attack_options->damage);
           }
         }
+      }
+    } else if (! attack_options->dmg_set) {
+      //
+      // Here we've indicated the attack type is mandatory, but not set the damage
+      //
+      int dmg_fire_val = dmg_fire();
+      if (dmg_fire_val > 0) {
+        attack_options->damage                      = dmg_fire_val;
+        attack_options->dmg_set                     = true;
+        attack_options->attack[ THING_ATTACK_FIRE ] = true;
+        dbg("Set fire damage %d", attack_options->damage);
       }
     }
 
@@ -803,6 +871,17 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
           }
         }
       }
+    } else if (! attack_options->dmg_set) {
+      //
+      // Here we've indicated the attack type is mandatory, but not set the damage
+      //
+      int dmg_heat_val = dmg_heat();
+      if (dmg_heat_val > 0) {
+        attack_options->damage                      = dmg_heat_val;
+        attack_options->dmg_set                     = true;
+        attack_options->attack[ THING_ATTACK_FIRE ] = true;
+        dbg("Set heat damage %d", attack_options->damage);
+      }
     }
 
     //
@@ -819,6 +898,45 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
             dbg("Set crush damage %d", attack_options->damage);
           }
         }
+      }
+    } else if (! attack_options->dmg_set) {
+      //
+      // Here we've indicated the attack type is mandatory, but not set the damage
+      //
+      int dmg_crush_val = dmg_crush();
+      if (dmg_crush_val > 0) {
+        attack_options->damage                       = dmg_crush_val;
+        attack_options->dmg_set                      = true;
+        attack_options->attack[ THING_ATTACK_CRUSH ] = true;
+        dbg("Set crush damage %d", attack_options->damage);
+      }
+    }
+
+    //
+    // Chance of attack[THING_ATTACK_CRUSH] damage?
+    //
+    if (! attack_options->attack[ THING_ATTACK_MISSILE ]) {
+      if (! attack_options->dmg_set) {
+        if (d1000() < dmg_missile_chance_d1000(attack_options->attack_num)) {
+          int dmg_missile_val = dmg_missile();
+          if (dmg_missile_val > 0) {
+            attack_options->damage                         = dmg_missile_val;
+            attack_options->dmg_set                        = true;
+            attack_options->attack[ THING_ATTACK_MISSILE ] = true;
+            dbg("Set impact damage %d", attack_options->damage);
+          }
+        }
+      }
+    } else if (! attack_options->dmg_set) {
+      //
+      // Here we've indicated the attack type is mandatory, but not set the damage
+      //
+      int dmg_missile_val = dmg_missile();
+      if (dmg_missile_val > 0) {
+        attack_options->damage                         = dmg_missile_val;
+        attack_options->dmg_set                        = true;
+        attack_options->attack[ THING_ATTACK_MISSILE ] = true;
+        dbg("Set impact damage %d", attack_options->damage);
       }
     }
 
@@ -837,6 +955,17 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
           }
         }
       }
+    } else if (! attack_options->dmg_set) {
+      //
+      // Here we've indicated the attack type is mandatory, but not set the damage
+      //
+      int dmg_lightning_val = dmg_lightning();
+      if (dmg_lightning_val > 0) {
+        attack_options->damage                           = dmg_lightning_val;
+        attack_options->dmg_set                          = true;
+        attack_options->attack[ THING_ATTACK_LIGHTNING ] = true;
+        dbg("Set lightning damage %d", attack_options->damage);
+      }
     }
 
     //
@@ -853,6 +982,17 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
             dbg("Set energy damage %d", attack_options->damage);
           }
         }
+      }
+    } else if (! attack_options->dmg_set) {
+      //
+      // Here we've indicated the attack type is mandatory, but not set the damage
+      //
+      int dmg_energy_val = dmg_energy();
+      if (dmg_energy_val > 0) {
+        attack_options->damage                        = dmg_energy_val;
+        attack_options->dmg_set                       = true;
+        attack_options->attack[ THING_ATTACK_ENERGY ] = true;
+        dbg("Set energy damage %d", attack_options->damage);
       }
     }
 
@@ -871,6 +1011,17 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
           }
         }
       }
+    } else if (! attack_options->dmg_set) {
+      //
+      // Here we've indicated the attack type is mandatory, but not set the damage
+      //
+      int dmg_negation_val = dmg_negation();
+      if (dmg_negation_val > 0) {
+        attack_options->damage                          = dmg_negation_val;
+        attack_options->dmg_set                         = true;
+        attack_options->attack[ THING_ATTACK_NEGATION ] = true;
+        dbg("Set negation damage %d", attack_options->damage);
+      }
     }
 
     //
@@ -887,6 +1038,17 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
             dbg("Set acid damage %d", attack_options->damage);
           }
         }
+      }
+    } else if (! attack_options->dmg_set) {
+      //
+      // Here we've indicated the attack type is mandatory, but not set the damage
+      //
+      int dmg_acid_val = dmg_acid();
+      if (dmg_acid_val > 0) {
+        attack_options->damage                      = dmg_acid_val;
+        attack_options->dmg_set                     = true;
+        attack_options->attack[ THING_ATTACK_ACID ] = true;
+        dbg("Set acid damage %d", attack_options->damage);
       }
     }
 
@@ -905,6 +1067,17 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
           }
         }
       }
+    } else if (! attack_options->dmg_set) {
+      //
+      // Here we've indicated the attack type is mandatory, but not set the damage
+      //
+      int dmg_water_val = dmg_water();
+      if (dmg_water_val > 0) {
+        attack_options->damage                       = dmg_water_val;
+        attack_options->dmg_set                      = true;
+        attack_options->attack[ THING_ATTACK_WATER ] = true;
+        dbg("Set water damage %d", attack_options->damage);
+      }
     }
 
     //
@@ -921,6 +1094,17 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
             dbg("Set digest damage %d", attack_options->damage);
           }
         }
+      }
+    } else if (! attack_options->dmg_set) {
+      //
+      // Here we've indicated the attack type is mandatory, but not set the damage
+      //
+      int dmg_digest_val = dmg_digest();
+      if (dmg_digest_val > 0) {
+        attack_options->damage                        = dmg_digest_val;
+        attack_options->dmg_set                       = true;
+        attack_options->attack[ THING_ATTACK_DIGEST ] = true;
+        dbg("Set digest damage %d", attack_options->damage);
       }
     }
 
@@ -939,6 +1123,17 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
           }
         }
       }
+    } else if (! attack_options->dmg_set) {
+      //
+      // Here we've indicated the attack type is mandatory, but not set the damage
+      //
+      int dmg_necrosis_val = dmg_necrosis();
+      if (dmg_necrosis_val > 0) {
+        attack_options->damage                          = dmg_necrosis_val;
+        attack_options->dmg_set                         = true;
+        attack_options->attack[ THING_ATTACK_NECROSIS ] = true;
+        dbg("Set necro damage %d", attack_options->damage);
+      }
     }
 
     //
@@ -956,6 +1151,17 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
           }
         }
       }
+    } else if (! attack_options->dmg_set) {
+      //
+      // Here we've indicated the attack type is mandatory, but not set the damage
+      //
+      int dmg_draining_val = dmg_draining();
+      if (dmg_draining_val > 0) {
+        attack_options->damage                          = dmg_draining_val;
+        attack_options->dmg_set                         = true;
+        attack_options->attack[ THING_ATTACK_DRAINING ] = true;
+        dbg("Set drain damage %d", attack_options->damage);
+      }
     }
 
     //
@@ -972,6 +1178,17 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
             dbg("Set natural damage %d", attack_options->damage);
           }
         }
+      }
+    } else if (! attack_options->dmg_set) {
+      //
+      // Here we've indicated the attack type is mandatory, but not set the damage
+      //
+      int dmg_nat_att_val = dmg_nat_att();
+      if (dmg_nat_att_val > 0) {
+        attack_options->damage                         = dmg_nat_att_val + att_bonus;
+        attack_options->dmg_set                        = true;
+        attack_options->attack[ THING_ATTACK_NATURAL ] = true;
+        dbg("Set natural damage %d", attack_options->damage);
       }
     }
 
@@ -1543,6 +1760,17 @@ int Thing::is_attacked_with_dmg_crush(Thingp hitter, Thingp real_hitter, int dam
   attack_options.attack[ THING_ATTACK_CRUSH ] = true;
   attack_options.real_hitter                  = real_hitter;
   hitter->log("Crush attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  TRACE_AND_INDENT();
+  return is_hit(hitter, &attack_options, damage);
+}
+
+int Thing::is_attacked_with_dmg_missile(Thingp hitter, Thingp real_hitter, int damage)
+{
+  TRACE_NO_INDENT();
+  ThingAttackOptions attack_options {};
+  attack_options.attack[ THING_ATTACK_MISSILE ] = true;
+  attack_options.real_hitter                    = real_hitter;
+  hitter->log("Impact attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
   TRACE_AND_INDENT();
   return is_hit(hitter, &attack_options, damage);
 }

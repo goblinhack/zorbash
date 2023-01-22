@@ -67,7 +67,7 @@ def on_final_use(owner, item, target, x, y):
         my.thing_msg(owner, "The staff crumbles into dust.")
 
 
-def on_thrown(me, x, y):
+def on_thrown(owner, me, x, y):
     if my.thing_charge_count(me) == 0:
         return
     if my.level_is_chasm_at(me, x, y):

@@ -50,7 +50,7 @@ def explode(me, x, y):
     my.thing_dead(me, "exploded")
 
 
-def on_thrown(me, x, y):
+def on_thrown(owner, me, x, y):
     if my.thing_charge_count(me) == 0:
         return
     if my.level_is_chasm_at(me, x, y):

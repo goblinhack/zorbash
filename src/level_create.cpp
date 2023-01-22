@@ -95,6 +95,7 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
   if (! cursor && player) {
     cursor = thing_new("cursor", player->curr_at);
     cursor->hide();
+    is_map_mini_valid = true;
   }
 
   created();
@@ -156,6 +157,7 @@ int Level::total_monst_dmg_level(void)
       damage += t->dmg_fire_dice().max_roll();
       damage += t->dmg_heat_dice().max_roll();
       damage += t->dmg_crush_dice().max_roll();
+      damage += t->dmg_missile_dice().max_roll();
       damage += t->dmg_lightning_dice().max_roll();
       damage += t->dmg_energy_dice().max_roll();
       damage += t->dmg_negation_dice().max_roll();

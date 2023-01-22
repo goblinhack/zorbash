@@ -20,7 +20,7 @@ def on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage):
     # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
     # my.con("hitter  {} {:X}".format(my.thing_name_get(hitter), hitter))
     # my.con("rhitter {} {:X}".format(my.thing_name_get(real_hitter), real_hitter))
-    if my.thing_is_projectile(hitter):
+    if my.thing_is_projectile(hitter) or my.thing_is_missile(hitter):
         if my.thing_is_player(owner):
             my.thing_msg(me, "You take half damage from the missile attack.")
         return int(damage / 2)
@@ -60,6 +60,10 @@ def on_owner_receive_dmg_heat(me, owner, hitter, real_hitter, x, y, damage):
 
 
 def on_owner_receive_dmg_crush(me, owner, hitter, real_hitter, x, y, damage):
+    return on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage)
+
+
+def on_owner_receive_dmg_missile(me, owner, hitter, real_hitter, x, y, damage):
     return on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage)
 
 
@@ -116,6 +120,7 @@ def tp_init(name, text_long_name):
     my.on_owner_receive_dmg_heat_do(self, "me.on_owner_receive_dmg_heat()")
     my.on_owner_receive_dmg_lightning_do(self, "me.on_owner_receive_dmg_lightning()")
     my.on_owner_receive_dmg_melee_do(self, "me.on_owner_receive_dmg_melee()")
+    my.on_owner_receive_dmg_missile_do(self, "me.on_owner_receive_dmg_missile()")
     my.on_owner_receive_dmg_nat_att_do(self, "me.on_owner_receive_dmg_nat_att()")
     my.on_owner_receive_dmg_necrosis_do(self, "me.on_owner_receive_dmg_necrosis()")
     my.on_owner_receive_dmg_poison_do(self, "me.on_owner_receive_dmg_poison()")

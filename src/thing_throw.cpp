@@ -10,7 +10,7 @@
 #include "my_string.hpp"
 #include "my_thing.hpp"
 
-void Thing::on_thrown(void)
+void Thing::on_thrown(ThingId owner_id_when_thrown)
 {
   TRACE_NO_INDENT();
 
@@ -34,7 +34,8 @@ void Thing::on_thrown(void)
 
     dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), owner_id_when_thrown.id, id.id, (unsigned int) curr_at.x,
+                    (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_thrown call [%s] expected mod:function, got %d elems", on_thrown.c_str(), (int) on_thrown.size());
   }
@@ -69,9 +70,9 @@ bool Thing::throw_item_choose_target(Thingp what)
   return is_target_select(what);
 }
 
-void Thing::on_thrown_callback(void)
+void Thing::on_thrown_callback(ThingId owner_id_when_thrown)
 {
-  on_thrown();
+  on_thrown(owner_id_when_thrown);
   visible();
 }
 
@@ -140,6 +141,19 @@ void Thing::throw_at(Thingp what, Thingp target)
     need_to_choose_a_new_target = true;
   }
 
+  //
+  // Adjust throwing distance for size.
+  //
+  switch (what->thing_size()) {
+    case THING_SIZE_NOT_SET: break;
+    case THING_SIZE_TINY: dist *= 3; break;
+    case THING_SIZE_SMALL: dist *= 2; break;
+    case THING_SIZE_NORMAL: break;
+    case THING_SIZE_LARGE: dist /= 2; break;
+    case THING_SIZE_GIANT: dist /= 3; break;
+    case THING_SIZE_GARGANTUAN: dist /= 4; break;
+  }
+
   if (need_to_choose_a_new_target) {
     FOR_ALL_GRID_THINGS(level, t, throw_at.x, throw_at.y)
     {
@@ -153,20 +167,36 @@ void Thing::throw_at(Thingp what, Thingp target)
     }
   }
 
-  dbg("Thrown %s", what->to_short_string().c_str());
+  dbg("Throw item %s", what->to_short_string().c_str());
+  TRACE_AND_INDENT();
+
   what->move_to_immediately(throw_at);
 
   //
   // Important to call this prior to drop, as drop() will spawn a particle. We want to spawn our own particle here,
   // which reacts when it hits the destination.
   //
-  {
-    auto callback = std::bind(&Thing::on_thrown_callback, what);
+  dbg("Throw particle");
+  TRACE_AND_INDENT();
 
-    auto src   = (last_blit_tl + last_blit_br) / (short) 2;
-    auto dst   = (target->last_blit_tl + target->last_blit_br) / (short) 2;
-    auto sz    = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
-    auto delay = PARTICLE_SPEED_MS;
+  {
+    auto o        = what->top_owner();
+    auto callback = std::bind(&Thing::on_thrown_callback, what, o ? o->id : NoThingId);
+
+    auto src = (last_blit_tl + last_blit_br) / (short) 2;
+    auto dst = (target->last_blit_tl + target->last_blit_br) / (short) 2;
+    auto sz  = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
+
+    //
+    // Default thrown particle speed
+    //
+    auto delay = 0;
+
+    if (g_opt_ascii) {
+      delay = PARTICLE_SPEED_THROWN_ITEM_ASCII_MS;
+    } else {
+      delay = PARTICLE_SPEED_THROWN_ITEM_PIXELART_MS;
+    }
 
     //
     // Daggers, horseshoes...
@@ -175,24 +205,54 @@ void Thing::throw_at(Thingp what, Thingp target)
       //
       // But it's too fast in ascii mode
       //
-      if (! g_opt_ascii) {
-        delay /= 2;
+      if (g_opt_ascii) {
+        delay = PARTICLE_SPEED_THROWN_WEAPON_ASCII_MS;
+      } else {
+        delay = PARTICLE_SPEED_THROWN_WEAPON_PIXELART_MS;
       }
     }
 
     if (! is_being_destroyed) {
-      if (is_player()) {
+      if (g_opt_ascii) {
         //
-        // So the player is visible above light
+        // Ascii animations happen inside the level as projectils
         //
-        level->new_external_particle(what->id, src, dst, sz, delay, tile_index_to_tile(what->tile_curr), false,
-                                     callback);
+        if (! what->target_name_projectile().empty()) {
+          //
+          // Fire the ascii projectile which should not really interact.
+          //
+          fire_projectile_at(what, what->target_name_projectile(), throw_at);
+
+          //
+          // Make sure the thrown item appears.
+          //
+          callback();
+        } else {
+          //
+          // Fallback, just to make sure the thrown item appears.
+          //
+          callback();
+        }
       } else {
-        level->new_internal_particle(what->id, src, dst, sz, delay, tile_index_to_tile(what->tile_curr), false,
-                                     callback);
+        //
+        // Pixelart animations happen above the level as particles
+        //
+        if (is_player()) {
+          //
+          // So the player is visible above light
+          //
+          level->new_external_particle(what->id, src, dst, sz, delay, tile_index_to_tile(what->tile_curr), false,
+                                       callback);
+        } else {
+          level->new_internal_particle(what->id, src, dst, sz, delay, tile_index_to_tile(what->tile_curr), false,
+                                       callback);
+        }
       }
     }
   }
+
+  dbg("Post particle throw, use or drop");
+  TRACE_AND_INDENT();
 
   //
   // Potions for example are used when thrown. Chocolate frogs, no.

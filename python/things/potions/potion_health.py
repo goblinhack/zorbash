@@ -12,7 +12,7 @@ def on_get_text_description_long(owner, me, x, y):
         return ["Restores you to full health"]
 
 
-def on_thrown(me, x, y):
+def on_thrown(owner, me, x, y):
     explode(me, x, y)
 
 

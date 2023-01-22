@@ -23,6 +23,14 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
     return;
   }
 
+  auto delay = 0;
+
+  if (g_opt_ascii) {
+    delay = PARTICLE_SPEED_INVENTORY_ITEM_ASCII_MS;
+  } else {
+    delay = PARTICLE_SPEED_INVENTORY_ITEM_PIXELART_MS;
+  }
+
   if (item->is_collected_as_gold()) {
     dbg("Inventory particle %s is collected as gold", item->to_short_string().c_str());
 
@@ -71,8 +79,8 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
       point j(pcg_random_range(0, TILE_WIDTH) - TILE_WIDTH / 2, pcg_random_range(0, TILE_HEIGHT) - TILE_HEIGHT / 2);
       std::string name = "gold1." + std::to_string(pcg_random_range(1, 8));
       if (! is_being_destroyed) {
-        level->new_external_particle(NoThingId, s + j, p, isize(TILE_WIDTH / 2, TILE_HEIGHT / 2),
-                                     2 * PARTICLE_SPEED_MS + c, tile_find_mand(name), false);
+        level->new_external_particle(NoThingId, s + j, p, isize(TILE_WIDTH / 2, TILE_HEIGHT / 2), delay + c,
+                                     tile_find_mand(name), false);
       }
     }
     return;
@@ -100,7 +108,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
     dbg("Yes; create inventory particle");
     std::string tile_name = "key.1";
     if (! is_being_destroyed) {
-      level->new_external_particle(NoThingId, s + j, p, isize(TILE_WIDTH / 2, TILE_HEIGHT / 2), PARTICLE_SPEED_MS,
+      level->new_external_particle(NoThingId, s + j, p, isize(TILE_WIDTH / 2, TILE_HEIGHT / 2), delay,
                                    tile_find_mand(tile_name), false);
     }
     return;
@@ -120,9 +128,9 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
 
     dbg("Yes; create inventory particle");
     if (! is_being_destroyed) {
-      level->new_external_particle(
-          item->id, (last_blit_tl + last_blit_br) / (short) 2, p, isize(TILE_WIDTH, TILE_HEIGHT), PARTICLE_SPEED_MS,
-          tile_index_to_tile(item->tile_curr), (item->is_dir_br() || item->is_dir_right() || item->is_dir_tr()));
+      level->new_external_particle(item->id, (last_blit_tl + last_blit_br) / (short) 2, p,
+                                   isize(TILE_WIDTH, TILE_HEIGHT), delay, tile_index_to_tile(item->tile_curr),
+                                   (item->is_dir_br() || item->is_dir_right() || item->is_dir_tr()));
     }
   }
 }
@@ -143,6 +151,14 @@ void Thing::inventory_particle(Thingp item, uint32_t slot, Thingp particle_targe
   if (game->in_transit_item) {
     dbg("No; not while moving an item");
     return;
+  }
+
+  auto delay = 0;
+
+  if (g_opt_ascii) {
+    delay = PARTICLE_SPEED_INVENTORY_ITEM_ASCII_MS;
+  } else {
+    delay = PARTICLE_SPEED_INVENTORY_ITEM_PIXELART_MS;
   }
 
   if (item->is_being_dropped) {
@@ -193,7 +209,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot, Thingp particle_targe
 
   auto callback = std::bind(&Thing::visible, item);
   if (! is_being_destroyed) {
-    level->new_external_particle(item->id, where_from, where_to, isize(TILE_WIDTH, TILE_HEIGHT), PARTICLE_SPEED_MS,
+    level->new_external_particle(item->id, where_from, where_to, isize(TILE_WIDTH, TILE_HEIGHT), delay,
                                  tile_index_to_tile(item->tile_curr),
                                  (item->is_dir_br() || item->is_dir_right() || item->is_dir_tr()), callback);
   }

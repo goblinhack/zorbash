@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_thrown(me, x, y):
+def on_thrown(owner, me, x, y):
     explode(me, x, y)
 
 

@@ -1,7 +1,8 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- ascii darts                                                                                                                                  -->
+<!-- pixel art dart anim                                                                                                                          -->
 <!-- throwing one dart should not change shortcut                                                                                                 -->
+<!-- check buff of missile protect                                                                                                                -->
 <!-- really need darts that you can throw for sentries                                                                                            -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
@@ -224,7 +225,7 @@ Content:
 - 19 treasure
 - 13 weapons
 - 10 buffs
-- 8 items
+- 9 items
 - 6 staffs
 - 6 boots
 - 5 rings

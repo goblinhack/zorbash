@@ -10,19 +10,23 @@
 static PyObject *thing_hit_common(PyObject *obj, PyObject *args, PyObject *keywds, ThingAttack type)
 {
   TRACE_NO_INDENT();
+  uint32_t     owner_id  = 0;
   uint32_t     hitter_id = 0;
   uint32_t     victim_id = 0;
   int          damage    = 0;
   int          thrown    = 0;
   int          crit      = 0;
-  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage",
-                            (char *) "crit",   (char *) "thrown", nullptr};
+  static char *kwlist[]  = {
+      (char *) "owner", (char *) "hitter", (char *) "target", (char *) "damage", (char *) "crit", (char *) "thrown",
+      nullptr};
 
-  if (! PyArg_ParseTupleAndKeywords(args, keywds, "II|iii", kwlist, &hitter_id, &victim_id, &damage, &crit,
-                                    &thrown)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "III|iii", kwlist, &owner_id, &hitter_id, &victim_id, &damage,
+                                    &crit, &thrown)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_NONE;
   }
+
+  Thingp owner = game->thing_find_optional(owner_id);
 
   if (! hitter_id) {
     ERR("%s: No hitter thing ID set", __FUNCTION__);
@@ -56,11 +60,20 @@ static PyObject *thing_hit_common(PyObject *obj, PyObject *args, PyObject *keywd
   attack_options.thrown         = thrown ? true : false;
   attack_options.crit           = crit ? true : false;
   attack_options.attack[ type ] = true;
+  attack_options.real_hitter    = owner;
 
-  if (damage) {
-    IF_DEBUG { hitter->log("Attack for %d", damage); }
+  if (attack_options.real_hitter) {
+    if (damage) {
+      IF_DEBUG { attack_options.real_hitter->log("Attack for %d", damage); }
+    } else {
+      IF_DEBUG { attack_options.real_hitter->log("Attack"); }
+    }
   } else {
-    IF_DEBUG { hitter->log("Attack"); }
+    if (damage) {
+      IF_DEBUG { hitter->log("Attack for %d", damage); }
+    } else {
+      IF_DEBUG { hitter->log("Attack"); }
+    }
   }
   TRACE_AND_INDENT();
 
@@ -104,6 +117,12 @@ PyObject *thing_hit_dmg_crush(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   return thing_hit_common(obj, args, keywds, THING_ATTACK_CRUSH);
+}
+
+PyObject *thing_hit_dmg_missile(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  return thing_hit_common(obj, args, keywds, THING_ATTACK_MISSILE);
 }
 
 PyObject *thing_hit_dmg_digest(PyObject *obj, PyObject *args, PyObject *keywds)

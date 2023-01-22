@@ -1371,10 +1371,10 @@ int Thing::unused_flag18(void)
   return (tp()->unused_flag18());
 }
 
-int Thing::unused_flag19(void)
+int Thing::is_missile(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag19());
+  return (tp()->is_missile());
 }
 
 int Thing::is_thrown_as_a_weapon(void)

@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_thrown(me, x, y):
+def on_thrown(owner, me, x, y):
     if my.level_is_chasm_at(me, x, y):
         return
     if my.level_is_water_at(me, x, y):

@@ -523,7 +523,7 @@ do
       unused_flag16 \
       unused_flag17 \
       unused_flag18 \
-      unused_flag19 \
+      is_missile \
       unused_flag2 \
       is_thrown_as_a_weapon \
       is_immune_to_electricity \

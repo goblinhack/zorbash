@@ -29,9 +29,9 @@ def on_tick(owner, me, x, y):
         if my.pcg_randint(1, 20) > my.thing_stat_con(owner):
             target = owner
             if my.pcg_randint(1, 100) > 10:
-                my.thing_hit_dmg_draining(me, target, my.pcg_randint(1, 4))
+                my.thing_hit_dmg_draining(owner, me, target, my.pcg_randint(1, 4))
             else:
-                my.thing_hit_dmg_poison(me, target, my.pcg_randint(1, 20))
+                my.thing_hit_dmg_poison(owner, me, target, my.pcg_randint(1, 20))
 
             if my.thing_is_player(owner):
                 my.topcon("You feel sick from radiation poisoning.")

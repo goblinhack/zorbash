@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_thrown(me, x, y):
+def on_thrown(owner, me, x, y):
     for it in my.level_get_all(me, x, y):
         if my.thing_is_interesting(it):
             if it == me:

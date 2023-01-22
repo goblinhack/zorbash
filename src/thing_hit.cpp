@@ -209,6 +209,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   } else if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
     real_hitter->total_dmg_for_on_attacking_dmg_crush(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_crush(hitter, real_hitter, damage);
+  } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
+    real_hitter->total_dmg_for_on_attacking_dmg_missile(victim, damage);
+    damage = victim->total_dmg_for_on_receiving_dmg_missile(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_LIGHTNING ]) {
     real_hitter->total_dmg_for_on_attacking_dmg_lightning(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_lightning(hitter, real_hitter, damage);
@@ -499,12 +502,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   /////////////////////////////////////////////////////////////////////////
   if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
     attack_set = true;
-    if (! is_crushable()) {
-      IF_DEBUG2 { real_hitter->log("Cannot crush %s", to_short_string().c_str()); }
-      return false;
-    }
 
-    if (! damage) {
+    if (! damage || ! is_crushable()) {
       if (is_player()) {
         msg("You take no crush damage!");
       } else if (real_hitter->is_player()) {
@@ -516,6 +515,26 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     }
     IF_DEBUG2 { real_hitter->log("Attack dmg_crush damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "crush ";
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // Crush damage
+  /////////////////////////////////////////////////////////////////////////
+  if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
+    attack_set = true;
+
+    if (! damage || is_very_hard()) {
+      if (is_player()) {
+        msg("The missile bounces off of you!");
+      } else if (real_hitter->is_player()) {
+        msg("The missile bounces off of %s!", text_the().c_str());
+      } else {
+        msg("The missile bounces off of %s!", text_the().c_str());
+      }
+      return false;
+    }
+    IF_DEBUG2 { real_hitter->log("Attack dmg_missile damage %d on %s", damage, to_short_string().c_str()); }
+    dmg_type = "impact ";
   }
 
   /////////////////////////////////////////////////////////////////////////
