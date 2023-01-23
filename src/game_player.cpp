@@ -243,7 +243,7 @@ void Game::place_player(void)
         level->thing_new("flameskull", point(x + 1, y + 4));
         level->thing_new("tentacleye", point(x + 1, y + 1));
         level->thing_new("tentacleye", point(x + 2, y + 2));
-        level->thing_new("lizardkin", point(x + 2, y + 3));
+        level->thing_new("pyrolizard", point(x + 2, y + 3));
         level->thing_new("dogman", point(x + 2, y + 4));
         level->thing_new("cleaner", point(x + 3, y + 1));
         level->thing_new("zorb_eldster", point(x + 3, y + 2));
@@ -374,7 +374,7 @@ void Game::place_player(void)
         level->thing_new("foliage", point(x, y + 1));
         level->thing_new("mummy", point(x - 1, y + 1));
       }
-      // level->thing_new("lizardkin", point(x - 2, y + 1));
+      // level->thing_new("pyrolizard", point(x - 2, y + 1));
       // level->thing_new("vampire_rose", point(x - 2, y + 1));
       // level->thing_new("blob", point(x - 2, y + 1));
       // level->thing_new("belcher", point(x - 3, y + 1));

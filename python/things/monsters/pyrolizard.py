@@ -3,7 +3,7 @@ import tp
 
 
 def on_born(me, x, y):
-    my.thing_friend(me, "lizardkin")
+    my.thing_friend(me, "pyrolizard")
     my.thing_enemy(me, "dogman")
 
 
@@ -23,7 +23,7 @@ def on_you_are_hit_but_dodge_it_do(me, hitter, x, y):
 
 
 def on_death(me, x, y):
-    my.thing_msg(me, "The lizardman hisses and promptly dies!")
+    my.thing_msg(me, "The pyrolizard hisses and promptly dies!")
 
     sound = f"growl{my.non_pcg_randint(1, 10)}"
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
@@ -139,10 +139,10 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_long2(self, "Lizardkin hate dogmen. Something to do with barking.")
-    my.text_description_long3(self, "Lizardkin do not make good pets.")
-    my.text_description_long(self, "Lizardkin are a primitive and savage race and proudly eshew all forms of weaponry, believing that their claws, teeth and... devastating fire breath are all they need for home defense.")
-    my.text_description_short(self, "A firey lizardkin.")
+    my.text_description_long2(self, "Pyro-lizards hate dogmen. Something to do with barking.")
+    my.text_description_long3(self, "Pyro-lizards do not make good pets.")
+    my.text_description_long(self, "Pyro-lizards are a primitive and savage race and proudly eschew all forms of weaponry, believing that their claws, teeth and... devastating fire breath are all they need for home defense.")
+    my.text_description_short(self, "A firey pyrolizard.")
     my.text_hits(self, "gores")
     my.thing_size(self, my.THING_SIZE_NORMAL)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -171,25 +171,25 @@ def tp_init(name, text_long_name):
             tile=name + ".6", delay_ms=delay, frame=6)
     my.tile(self,
             ascii_fg_char=".", ascii_bg_col_name="", ascii_fg_col_name="orange",
-            tile="lizardkin.sleeping.1", is_sleeping=True, delay_ms=delay)
+            tile="pyrolizard.sleeping.1", is_sleeping=True, delay_ms=delay)
     my.tile(self,
             ascii_fg_char=".", ascii_bg_col_name="", ascii_fg_col_name="orange",
-            tile="lizardkin.sleeping.2", is_sleeping=True, delay_ms=delay)
+            tile="pyrolizard.sleeping.2", is_sleeping=True, delay_ms=delay)
     my.tile(self,
             ascii_fg_char=".", ascii_bg_col_name="", ascii_fg_col_name="gray30",
-            tile="lizardkin.dead.1", is_dead=True, delay_ms=delay)
+            tile="pyrolizard.dead.1", is_dead=True, delay_ms=delay)
     my.tile(self,
             ascii_fg_char=".", ascii_bg_col_name="", ascii_fg_col_name="gray30",
-            tile="lizardkin.dead.2", is_dead=True, delay_ms=delay)
+            tile="pyrolizard.dead.2", is_dead=True, delay_ms=delay)
     my.tile(self,
             ascii_fg_char=".", ascii_bg_col_name="", ascii_fg_col_name="gray30",
-            tile="lizardkin.dead.3", is_dead=True, delay_ms=delay, is_end_of_anim=True)
+            tile="pyrolizard.dead.3", is_dead=True, delay_ms=delay, is_end_of_anim=True)
 
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="lizardkin", text_long_name="lizardkin")
+    tp_init(name="pyrolizard", text_long_name="pyrolizard")
 
 
 init()
