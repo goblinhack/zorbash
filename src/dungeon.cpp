@@ -385,7 +385,7 @@ void Dungeon::putc(const int x, const int y, const int z, const char c)
     ERR("Putting nul char at %d,%d,%d", x, y, z);
   }
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
   auto p = cell_addr(x, y, z);
   if (p != nullptr) {
@@ -410,7 +410,7 @@ void Dungeon::putc_no_check(const int x, const int y, const int z, const char c)
 char Dungeon::getc(const int x, const int y, const int z)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
   auto p = cell_addr(x, y, z);
   if (p != nullptr) {
@@ -471,7 +471,7 @@ Roomp Dungeon::getr_no_check(const int x, const int y)
 bool Dungeon::is_anything_at(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -486,7 +486,7 @@ bool Dungeon::is_anything_at(const int x, const int y)
 bool Dungeon::is_anything_at(const int x, const int y, const int z)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   auto c = getc(x, y, z);
@@ -509,7 +509,7 @@ int Dungeon::get_grid_depth_at(const int x, const int y)
 bool Dungeon::is_floor(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -526,7 +526,7 @@ bool Dungeon::is_floor(const int x, const int y)
 bool Dungeon::is_corridor(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -543,7 +543,7 @@ bool Dungeon::is_corridor(const int x, const int y)
 bool Dungeon::is_bridge(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -560,7 +560,7 @@ bool Dungeon::is_bridge(const int x, const int y)
 bool Dungeon::is_corridor_no_check(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -577,7 +577,7 @@ bool Dungeon::is_corridor_no_check(const int x, const int y)
 bool Dungeon::is_dirt(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -594,7 +594,7 @@ bool Dungeon::is_dirt(const int x, const int y)
 bool Dungeon::is_dirt_no_check(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -611,7 +611,7 @@ bool Dungeon::is_dirt_no_check(const int x, const int y)
 bool Dungeon::is_dry_grass(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -628,7 +628,7 @@ bool Dungeon::is_dry_grass(const int x, const int y)
 bool Dungeon::is_wet_grass(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -645,7 +645,7 @@ bool Dungeon::is_wet_grass(const int x, const int y)
 bool Dungeon::is_enchantstone(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -662,7 +662,7 @@ bool Dungeon::is_enchantstone(const int x, const int y)
 bool Dungeon::is_skillstone(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -679,7 +679,7 @@ bool Dungeon::is_skillstone(const int x, const int y)
 bool Dungeon::is_foliage(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -696,7 +696,7 @@ bool Dungeon::is_foliage(const int x, const int y)
 bool Dungeon::is_spiderweb(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -713,7 +713,7 @@ bool Dungeon::is_spiderweb(const int x, const int y)
 bool Dungeon::is_secret_corridor_at(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -730,7 +730,7 @@ bool Dungeon::is_secret_corridor_at(const int x, const int y)
 bool Dungeon::is_wall(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   auto d = MAP_DEPTH_OBJ;
@@ -742,7 +742,7 @@ bool Dungeon::is_wall(const int x, const int y)
 bool Dungeon::is_monst_class_a(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -759,7 +759,7 @@ bool Dungeon::is_monst_class_a(const int x, const int y)
 bool Dungeon::is_monst_any(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -788,7 +788,7 @@ bool Dungeon::is_monst_any(const int x, const int y)
 bool Dungeon::is_monst_class_b(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -805,7 +805,7 @@ bool Dungeon::is_monst_class_b(const int x, const int y)
 bool Dungeon::is_monst_class_c(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -822,7 +822,7 @@ bool Dungeon::is_monst_class_c(const int x, const int y)
 bool Dungeon::is_monst_class_d(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -839,7 +839,7 @@ bool Dungeon::is_monst_class_d(const int x, const int y)
 bool Dungeon::is_monst_class_e(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -856,7 +856,7 @@ bool Dungeon::is_monst_class_e(const int x, const int y)
 bool Dungeon::is_mob_any(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -876,7 +876,7 @@ bool Dungeon::is_mob_any(const int x, const int y)
 bool Dungeon::is_mob_challenge_class_a(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -893,7 +893,7 @@ bool Dungeon::is_mob_challenge_class_a(const int x, const int y)
 bool Dungeon::is_mob_challenge_class_b(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -910,7 +910,7 @@ bool Dungeon::is_mob_challenge_class_b(const int x, const int y)
 bool Dungeon::is_food(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -927,7 +927,7 @@ bool Dungeon::is_food(const int x, const int y)
 bool Dungeon::is_brazier(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -944,7 +944,7 @@ bool Dungeon::is_brazier(const int x, const int y)
 bool Dungeon::is_barrel(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -961,7 +961,7 @@ bool Dungeon::is_barrel(const int x, const int y)
 bool Dungeon::is_red_blood(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -978,7 +978,7 @@ bool Dungeon::is_red_blood(const int x, const int y)
 bool Dungeon::is_rock(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -995,7 +995,7 @@ bool Dungeon::is_rock(const int x, const int y)
 bool Dungeon::is_door(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1012,7 +1012,7 @@ bool Dungeon::is_door(const int x, const int y)
 bool Dungeon::is_secret_door(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1029,7 +1029,7 @@ bool Dungeon::is_secret_door(const int x, const int y)
 bool Dungeon::is_ascend_dungeon(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1046,7 +1046,7 @@ bool Dungeon::is_ascend_dungeon(const int x, const int y)
 bool Dungeon::is_floor_deco_at(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1063,7 +1063,7 @@ bool Dungeon::is_floor_deco_at(const int x, const int y)
 bool Dungeon::is_descend_sewer_at(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1080,7 +1080,7 @@ bool Dungeon::is_descend_sewer_at(const int x, const int y)
 bool Dungeon::is_descend_dungeon(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1097,7 +1097,7 @@ bool Dungeon::is_descend_dungeon(const int x, const int y)
 bool Dungeon::is_descend_sewer(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1114,7 +1114,7 @@ bool Dungeon::is_descend_sewer(const int x, const int y)
 bool Dungeon::is_lava(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1131,7 +1131,7 @@ bool Dungeon::is_lava(const int x, const int y)
 bool Dungeon::is_chasm(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1148,7 +1148,7 @@ bool Dungeon::is_chasm(const int x, const int y)
 bool Dungeon::is_shallow_water(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1165,7 +1165,7 @@ bool Dungeon::is_shallow_water(const int x, const int y)
 bool Dungeon::is_deep_water(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1182,7 +1182,7 @@ bool Dungeon::is_deep_water(const int x, const int y)
 bool Dungeon::is_hazard(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1208,7 +1208,7 @@ bool Dungeon::is_hazard(const int x, const int y)
 bool Dungeon::is_treasure_type(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1225,7 +1225,7 @@ bool Dungeon::is_treasure_type(const int x, const int y)
 bool Dungeon::is_treasure_class_a(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1242,7 +1242,7 @@ bool Dungeon::is_treasure_class_a(const int x, const int y)
 bool Dungeon::is_treasure_class_b(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1259,7 +1259,7 @@ bool Dungeon::is_treasure_class_b(const int x, const int y)
 bool Dungeon::is_treasure_class_c(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1276,7 +1276,7 @@ bool Dungeon::is_treasure_class_c(const int x, const int y)
 bool Dungeon::is_weapon_class_a(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1293,7 +1293,7 @@ bool Dungeon::is_weapon_class_a(const int x, const int y)
 bool Dungeon::is_weapon_class_b(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1310,7 +1310,7 @@ bool Dungeon::is_weapon_class_b(const int x, const int y)
 bool Dungeon::is_weapon_class_c(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1327,7 +1327,7 @@ bool Dungeon::is_weapon_class_c(const int x, const int y)
 bool Dungeon::is_gold(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1344,7 +1344,7 @@ bool Dungeon::is_gold(const int x, const int y)
 bool Dungeon::is_key(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1361,7 +1361,7 @@ bool Dungeon::is_key(const int x, const int y)
 bool Dungeon::is_potion(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1378,7 +1378,7 @@ bool Dungeon::is_potion(const int x, const int y)
 bool Dungeon::is_staff(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -1395,7 +1395,7 @@ bool Dungeon::is_staff(const int x, const int y)
 bool Dungeon::is_ring(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
   for (auto d = 0; d < map_depth; d++) {
@@ -2098,8 +2098,8 @@ void Dungeon::add_corridor_walls(void)
 
 void Dungeon::add_room_walls(void)
 {
-  for (auto y = 0; y < MAP_HEIGHT; y++) {
-    for (auto x = 0; x < MAP_WIDTH; x++) {
+  for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
+    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
       if (is_wall_no_check(x, y)) {
         continue;
       }
@@ -2298,6 +2298,15 @@ int Dungeon::draw_corridor(point start, point end, char w)
   TRACE_NO_INDENT();
   Dmap d {};
 
+  // LOG("draw corridor from %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+
+  if ((start.x <= 0) || (start.y <= 0) || (start.x >= map_width - 1) || (start.y >= map_height - 1)) {
+    return 0;
+  }
+  if ((end.x <= 0) || (end.y <= 0) || (end.x >= map_width - 1) || (end.y >= map_height - 1)) {
+    return 0;
+  }
+
   //
   // Very close corridors we cannot use dmap as that will be len 0
   //
@@ -2315,6 +2324,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
       return 3;
     }
   }
+  TRACE_NO_INDENT();
   if (start + point(1, -1) == end) {
     if (! is_anything_at_no_check(start.x + 1, start.y)) {
       putc(start.x + 1, start.y, MAP_DEPTH_FLOOR, w);
@@ -2329,6 +2339,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
       return 3;
     }
   }
+  TRACE_NO_INDENT();
   if (start + point(-1, 1) == end) {
     if (! is_anything_at_no_check(start.x - 1, start.y)) {
       putc(start.x - 1, start.y, MAP_DEPTH_FLOOR, w);
@@ -2343,6 +2354,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
       return 3;
     }
   }
+  TRACE_NO_INDENT();
   if (start + point(-1, -1) == end) {
     if (! is_anything_at_no_check(start.x - 1, start.y)) {
       putc(start.x - 1, start.y, MAP_DEPTH_FLOOR, w);
@@ -2361,6 +2373,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
   //
   // If close, try a direct walk
   //
+  TRACE_NO_INDENT();
   if (distance(start, end) < 4) {
     std::vector< point > p;
 
@@ -2420,6 +2433,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
   }
 #endif
 
+  TRACE_NO_INDENT();
   point dmap_start = start;
   point dmap_end   = end;
 
@@ -2461,6 +2475,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
   //
   // Set up obstacles for the corridor search
   //
+  TRACE_NO_INDENT();
   for (auto y = miny; y < maxy; y++) {
     for (auto x = minx; x < maxx; x++) {
       if (is_anything_at_no_check(x, y)) {
@@ -2479,6 +2494,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
   //  #D
   // ...
   //
+  TRACE_NO_INDENT();
   {
     auto x = start.x;
     auto y = start.y;
@@ -2500,6 +2516,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
     }
   }
 
+  TRACE_NO_INDENT();
   {
     auto x = end.x;
     auto y = end.y;
@@ -2524,6 +2541,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
   //
   // Ensure adjoining corridors are not possible
   //
+  TRACE_NO_INDENT();
   for (auto y = miny + 1; y < maxy - 1; y++) {
     for (auto x = minx + 1; x < maxx - 1; x++) {
       if (is_corridor_no_check(x, y)) {
@@ -2536,6 +2554,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
     }
   }
 
+  TRACE_NO_INDENT();
   dmap_start = point(minx, miny);
   dmap_end   = point(maxx, maxy);
 
@@ -2563,6 +2582,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
   //
   // Check we can reach the end point
   //
+  TRACE_NO_INDENT();
   bool got_goal = false;
   for (auto c : p) {
     if (c == end) {
@@ -2571,6 +2591,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
     }
   }
 
+  TRACE_NO_INDENT();
   if (! got_goal) {
     for (auto c : p) {
       putc(c.x, c.y, MAP_DEPTH_FLOOR, Charmap::DEBUG);
@@ -2585,11 +2606,14 @@ int Dungeon::draw_corridor(point start, point end, char w)
     return 0;
   }
 
+  TRACE_NO_INDENT();
   for (auto c : p) {
     putc(c.x, c.y, MAP_DEPTH_FLOOR, w);
   }
 
+  TRACE_NO_INDENT();
   putc(start.x, start.y, MAP_DEPTH_OBJ, Charmap::DOOR);
+  TRACE_NO_INDENT();
   putc(end.x, end.y, MAP_DEPTH_OBJ, Charmap::DOOR);
 
 #if 0
@@ -3262,8 +3286,8 @@ void Dungeon::assign_rooms_to_tiles(void)
 
 void Dungeon::block_secret_doors(void)
 {
-  for (auto x = 0; x < map_width; x++) {
-    for (auto y = 0; y < map_height; y++) {
+  for (auto x = 1; x < map_width - 1; x++) {
+    for (auto y = 1; y < map_height - 1; y++) {
       if (getc(x, y, MAP_DEPTH_OBJ) == Charmap::DOOR) {
         for (auto dy = -1; dy <= 1; dy++) {
           for (auto dx = -1; dx <= 1; dx++) {
@@ -4542,22 +4566,14 @@ void Dungeon::water_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int 
 
 Dungeonp dungeon_test(void)
 {
-#if 0
-  auto x = 1000 ;
+  auto x = 10000;
   while (x--) {
     //
     // smaller node numbers mean larger rooms
     //
-    mysrand(x);
+    CON("Test dungeon: %d", x);
     new Dungeon(MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT, x);
   }
 
   return nullptr;
-#else
-  int x = 663;
-  pcg_srand(x);
-  auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT, x);
-
-  return d;
-#endif
 }

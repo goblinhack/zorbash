@@ -20,12 +20,12 @@ void Level::put_thing(int x, int y, ThingId id)
   }
 
   if (unlikely(! t)) {
-    t->err("Oob at map (%d,%d) for put of %" PRIX32 "", x, y, id.id);
+    t->err("Out of bounds at map (%d,%d) for put of %" PRIX32 "", x, y, id.id);
     return;
   }
 
   if (unlikely(is_oob(x, y))) {
-    t->err("Oob at map (%d,%d) for put of %" PRIX32 "", x, y, id.id);
+    t->err("Out of bounds at map (%d,%d) for put of %" PRIX32 "", x, y, id.id);
     return;
   }
 
@@ -110,12 +110,12 @@ void Level::remove_thing(int x, int y, ThingId id)
   TRACE_NO_INDENT();
   auto t = thing_find(id);
   if (unlikely(! t)) {
-    ERR("Oob at map (%d,%d) for remove of %" PRIX32 "", x, y, id.id);
+    ERR("Out of bounds at map (%d,%d) for remove of %" PRIX32 "", x, y, id.id);
     return;
   }
 
   if (unlikely(is_oob(x, y))) {
-    t->err("Oob at map (%d,%d) for remove of %" PRIX32 "", x, y, id.id);
+    t->err("Out of bounds at map (%d,%d) for remove of %" PRIX32 "", x, y, id.id);
     return;
   }
 
@@ -183,7 +183,7 @@ void Level::check_thing(Thingp t)
   }
 
   if (unlikely(is_oob(x, y))) {
-    t->err("Oob thing");
+    t->err("Out of bounds thing");
     return;
   }
 

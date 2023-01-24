@@ -187,6 +187,7 @@ void Thing::destroy(void)
   auto items = maybe_itemsp();
   if (items) {
     if (items->wid) {
+      verify(MTYPE_WID, items->wid);
       if (items->wid->thing_id_context == id) {
         items->wid->thing_id_context = NoThingId;
       }

@@ -1090,8 +1090,11 @@ std::istream &operator>>(std::istream &in, Bits< class Game & > my)
   wid_console_deserialize(s);
 
   LOG("Current level set to %s", my.t.current_level.to_string().c_str());
+
   my.t.level = get(my.t.world.levels, my.t.current_level.x, my.t.current_level.y, my.t.current_level.z);
-  my.t.level->log("This is the current level");
+  if (my.t.level) {
+    my.t.level->log("This is the current level");
+  }
 
   return in;
 }

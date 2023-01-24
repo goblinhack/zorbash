@@ -6,7 +6,7 @@ def on_born(me, x, y):
     selection_x, selection_y = my.thing_coords_get(me)
     for it in my.level_get_all(me, selection_x, selection_y):
         if my.thing_possible_to_attack(me, it):
-            my.thing_hit(me, it)
+            my.thing_hit(0, me, it)
     my.spawn_owned_thing_at_my_position(me, "explosion_fire")
 
 

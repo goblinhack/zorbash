@@ -5,7 +5,7 @@ import tp
 def attack(me, it):
     if my.thing_possible_to_attack(me, it):
         if it != me:
-            my.thing_hit(me, it)
+            my.thing_hit(0, me, it)
 
 
 def on_born(me, x, y):

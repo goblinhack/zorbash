@@ -539,6 +539,11 @@ static void parse_args(int argc, char *argv[])
       continue;
     }
 
+    if (! strcasecmp(argv[ i ], "--test") || ! strcasecmp(argv[ i ], "-test")) {
+      g_opt_test = true;
+      continue;
+    }
+
     if (! strcasecmp(argv[ i ], "--seed") || ! strcasecmp(argv[ i ], "-seed") || ! strcasecmp(argv[ i ], "-s")) {
       g_opt_seed_name = argv[ i + 1 ];
       i++;
@@ -766,16 +771,6 @@ int main(int argc, char *argv[])
   }
 #endif
 
-#if 0
-  extern int dungeon_test(void);
-  dungeon_test();
-
-  auto y = 1;
-  if (y) {
-  DIE("X");
-  }
-#endif
-
   CON("INI: Load UI fonts");
   if (! font_init()) {
     ERR("Font init");
@@ -891,18 +886,27 @@ int main(int argc, char *argv[])
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#if 0
-  game->init();
-  game->load();
-  game->init();
-  game->fini();
-  game->init();
-  game->fini();
-  game->init();
-  game->save();
-  game->fini();
-  game->load();
-#endif
+  if (g_opt_test) {
+    CON("save load test");
+    CON("==============");
+    game->init();
+    game->load();
+    game->init();
+    game->fini();
+    game->init();
+    game->fini();
+    game->init();
+    game->save();
+    game->fini();
+    game->load();
+
+    CON("dungeon create test");
+    CON("====================");
+    extern int dungeon_test(void);
+    dungeon_test();
+
+    DIE("end of tests");
+  }
 
   wid_topcon_flush();
   wid_botcon_flush();

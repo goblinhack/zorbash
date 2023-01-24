@@ -79,6 +79,14 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
   // intrinsic ability. Or it might be non null if say a staff.
   //
 
+  //
+  // Set the owner. If fork lightning in water, don't set water as the owner!
+  //
+  auto owner = item ? item : this;
+  if (! owner->maybe_infop()) {
+    owner = nullptr;
+  }
+
   dbg("Laser fire %s at %s", gfx_targetted_laser.c_str(), target->to_short_string().c_str());
   TRACE_AND_INDENT();
 
@@ -127,7 +135,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
 
     Thingp laser = nullptr;
     if (! gfx_targetted_laser.empty()) {
-      laser = level->thing_new(gfx_targetted_laser, target->curr_at, item ? item : this);
+      laser = level->thing_new(gfx_targetted_laser, target->curr_at, owner);
       if (! laser) {
         err("No laser to fire");
         if (is_player()) {
@@ -169,7 +177,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
 
         Thingp laser = nullptr;
         if (! gfx_targetted_laser.empty()) {
-          laser = level->thing_new(gfx_targetted_laser, target->curr_at, item ? item : this);
+          laser = level->thing_new(gfx_targetted_laser, target->curr_at, owner);
           if (! laser) {
             err("No laser to fire");
             if (is_player()) {
@@ -225,7 +233,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
       dbg("Firing laser effect (nothing in the way)");
       TRACE_AND_INDENT();
 
-      auto laser = level->thing_new(gfx_targetted_laser, target->curr_at, item ? item : this);
+      auto laser = level->thing_new(gfx_targetted_laser, target->curr_at, owner);
       if (! laser) {
         err("No laser to fire");
         if (is_player()) {

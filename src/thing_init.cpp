@@ -110,7 +110,8 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   // Make sure we have the ability to carry items.
   //
   TRACE_NO_INDENT();
-  if (is_msg() || is_player() || is_monst() || is_item() || is_cursor()) {
+  if (is_msg() || is_player() || is_monst() || is_item() || is_cursor() || is_laser() || is_projectile() ||
+      is_weapon()) {
     new_infop();
 
     //

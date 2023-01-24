@@ -55,6 +55,14 @@ Thingp Thing::fire_projectile_at(Thingp item, const std::string &target_name_pro
   // intrinsic ability. Or it might be non null if say a wand.
   //
 
+  //
+  // Set the owner. If fork lightning in water, don't set water as the owner!
+  //
+  auto owner = item ? item : this;
+  if (! owner->maybe_infop()) {
+    owner = nullptr;
+  }
+
   if (target_name_projectile == "") {
     die("No projectile name");
   }
@@ -115,7 +123,7 @@ Thingp Thing::fire_projectile_at(Thingp item, const std::string &target_name_pro
     game->change_state(Game::STATE_NORMAL, "player fired a projectile");
   }
 
-  auto projectile = level->thing_new(target_name_projectile, target->curr_at, item ? item : this);
+  auto projectile = level->thing_new(target_name_projectile, target->curr_at, owner);
   if (! projectile) {
     err("No projectile to fire");
     if (is_player()) {

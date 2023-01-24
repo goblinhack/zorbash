@@ -6,6 +6,7 @@
 #include "my_color_defs.hpp"
 #include "my_command.hpp"
 #include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_sdl_event.hpp"
 #include "my_sdl_proto.hpp"
 #include "my_sound.hpp"
@@ -2399,6 +2400,26 @@ static void wid_destroy_immediate(Widp w)
 
   if (w == wid_moving) {
     wid_moving = nullptr;
+  }
+
+  if (w->thing_id_context.id) {
+    auto t = game->thing_find(w->thing_id_context);
+    if (t) {
+      auto items = t->maybe_itemsp();
+      if (items) {
+        items->wid = nullptr;
+      }
+    }
+  }
+
+  if (w->thing_id2_context.id) {
+    auto t = game->thing_find(w->thing_id2_context);
+    if (t) {
+      auto items = t->maybe_itemsp();
+      if (items) {
+        items->wid = nullptr;
+      }
+    }
   }
 
   for (auto x = 0; x < TERM_WIDTH; x++) {

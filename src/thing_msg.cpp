@@ -96,13 +96,27 @@ void Thing::msg(const char *fmt, ...)
 
   auto player = level->player;
   if (! player) {
-    dbg("No player for msg: %s", why.c_str());
+    if (why.find('%') != std::string::npos) {
+      //
+      // Be careful as the fmt string has arguments
+      //
+      dbg("No player for msg");
+    } else {
+      dbg("No player for msg: %s", why.c_str());
+    }
     TRACE_AND_INDENT();
     return;
   }
 
   if (! player_is_player_is_ready_for_messages(why)) {
-    dbg("Player not ready for msg: %s", why.c_str());
+    if (why.find('%') != std::string::npos) {
+      //
+      // Be careful as the fmt string has arguments
+      //
+      dbg("Player not ready for msg");
+    } else {
+      dbg("Player not ready for msg: %s", why.c_str());
+    }
     TRACE_AND_INDENT();
     return;
   }
@@ -122,14 +136,28 @@ void Thing::msg(const char *fmt, ...)
     if (! is_ethereal()) {
       int distance = distance_to_player();
       if (distance >= DMAP_IS_PASSABLE) {
-        dbg("Too far to see (dist %d) msg: %s", distance, why.c_str());
+        if (why.find('%') != std::string::npos) {
+          //
+          // Be careful as the fmt string has arguments
+          //
+          dbg("Too far to see (dist %d)", distance);
+        } else {
+          dbg("Too far to see (dist %d) msg: %s", distance, why.c_str());
+        }
         TRACE_AND_INDENT();
         return;
       }
     }
 
     if (! level->can_see_unimpeded(player->curr_at, curr_at)) {
-      dbg("Cannot directly see for msg: %s", why.c_str());
+      if (why.find('%') != std::string::npos) {
+        //
+        // Be careful as the fmt string has arguments
+        //
+        dbg("Cannot directly see for msg");
+      } else {
+        dbg("Cannot directly see for msg: %s", why.c_str());
+      }
       TRACE_AND_INDENT();
       return;
     }
