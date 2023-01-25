@@ -148,6 +148,8 @@ bool Thing::too_far_from_leader(point p, float delta)
 Thingp Thing::leader(void)
 {
   TRACE_NO_INDENT();
+  verify(MTYPE_THING, this);
+
   auto id = leader_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
@@ -162,6 +164,7 @@ Thingp Thing::leader(void)
 void Thing::leader_set(Thingp new_leader)
 {
   TRACE_NO_INDENT();
+  verify(MTYPE_THING, this);
 
   if (! new_leader) {
     leader_unset();
@@ -215,6 +218,7 @@ void Thing::leader_set(Thingp new_leader)
 void Thing::leader_unset(void)
 {
   TRACE_NO_INDENT();
+  verify(MTYPE_THING, this);
 
   auto old_leader = leader();
   if (! old_leader) {
@@ -232,6 +236,7 @@ void Thing::leader_unset(void)
 void Thing::release_followers(void)
 {
   TRACE_NO_INDENT();
+  verify(MTYPE_THING, this);
 
   if (! follower_count()) {
     return;
@@ -257,6 +262,7 @@ void Thing::release_followers(void)
 void Thing::notify_of_death_of_my_leader(void)
 {
   TRACE_NO_INDENT();
+  verify(MTYPE_THING, this);
 
   auto l = leader();
   if (! l) {

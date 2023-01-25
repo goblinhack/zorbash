@@ -65,11 +65,9 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
     wid_set_on_mouse_over_begin(w, wid_bag_item_mouse_over_begin);
     wid_set_on_mouse_over_end(w, wid_bag_item_mouse_over_end);
     wid_set_on_key_down(w, wid_bag_item_key_down);
-    wid_set_thing_id_context(w, t);
-    t->itemsp()->wid = w;
 
-    wid_set_thing_id2_context(w, bag);
-    bag->itemsp()->wid = w;
+    wid_set_thing_id_context(w, t, 0);
+    wid_set_thing_id_context(w, bag, 1);
 
     wid_set_on_mouse_up(w, wid_bag_item_mouse_up);
     wid_set_on_mouse_held(w, wid_bag_item_mouse_held);
@@ -166,7 +164,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
     return false;
   }
 
-  auto id = wid_get_thing_id_context(game->in_transit_item);
+  auto id = wid_get_thing_id_context(game->in_transit_item, 0);
   auto t  = game->thing_find(id);
   if (unlikely(! t)) {
     DBG3("Cannot find thing");
@@ -431,7 +429,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
     return false;
   }
 
-  auto bag_id = wid_get_thing_id_context(wid_bag_container);
+  auto bag_id = wid_get_thing_id_context(wid_bag_container, 0);
   auto bag    = game->thing_find(bag_id);
   if (! bag) {
     TRACE_NO_INDENT();
@@ -505,7 +503,7 @@ uint8_t wid_in_transit_item_drop(void)
     return false;
   }
 
-  auto id = wid_get_thing_id_context(game->in_transit_item);
+  auto id = wid_get_thing_id_context(game->in_transit_item, 0);
   auto t  = game->thing_find(id);
   if (unlikely(! t)) {
     ERR("Cannot find thing to drop");
@@ -538,7 +536,7 @@ uint8_t wid_bag_item_mouse_up(Widp w, int x, int y, uint32_t button)
     return false;
   }
 
-  auto id = wid_get_thing_id_context(w);
+  auto id = wid_get_thing_id_context(w, 0);
   auto t  = game->thing_find(id);
   if (unlikely(! t)) {
     return false;
@@ -562,7 +560,7 @@ uint8_t wid_bag_item_mouse_held(Widp w, int x, int y, uint32_t button)
     return false;
   }
 
-  auto id = wid_get_thing_id_context(w);
+  auto id = wid_get_thing_id_context(w, 0);
   auto t  = game->thing_find(id);
   if (unlikely(! t)) {
     return false;
@@ -607,10 +605,10 @@ bool Game::wid_bag_move_item(Thingp t)
   for (auto b : game->bags) {
     for (auto w : wid_find_all_containing(b->wid_bag_container, "wid_bag item")) {
       player->log("+ current item %s", wid_get_name(w).c_str());
-      if (wid_get_thing_id_context(w).id == t->id.id) {
+      if (wid_get_thing_id_context(w, 0).id == t->id.id) {
         player->log("Moving bag thing %s", t->to_short_string().c_str());
         wid_bag_container = wid_get_parent(w);
-        bag_id            = wid_get_thing_id_context(wid_bag_container);
+        bag_id            = wid_get_thing_id_context(wid_bag_container, 0);
         bag               = game->thing_find(bag_id);
       }
     }
@@ -665,10 +663,7 @@ bool Game::wid_bag_move_item(Thingp t)
   wid_set_pos(game->in_transit_item, tl, br);
   wid_set_style(game->in_transit_item, UI_WID_STYLE_GRAY);
   wid_set_do_not_lower(game->in_transit_item, true);
-
-  wid_set_thing_id_context(game->in_transit_item, t);
-  t->itemsp()->wid = game->in_transit_item;
-
+  wid_set_thing_id_context(game->in_transit_item, t, 0);
   wid_set_on_mouse_up(game->in_transit_item, wid_in_transit_item_place);
   wid_set_fg_tile(game->in_transit_item, t);
 
@@ -692,7 +687,7 @@ void wid_bag_item_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int w
     return;
   }
 
-  auto id = wid_get_thing_id_context(w);
+  auto id = wid_get_thing_id_context(w, 0);
   auto t  = game->thing_find(id);
   if (unlikely(! t)) {
     ERR("Could not find thing ID context");
@@ -766,7 +761,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
     return false;
   }
 
-  auto id   = wid_get_thing_id_context(w);
+  auto id   = wid_get_thing_id_context(w, 0);
   auto what = game->thing_find(id);
   if (! what) {
     DBG3("Cannot find thing");
@@ -955,8 +950,7 @@ WidBag::WidBag(Widp parent, Thingp bag_, bool highlight, point tl, point br, con
     }
 
     wid_set_on_tick(wid_bag_container, wid_bag_tick);
-    wid_set_thing_id_context(wid_bag_container, bag);
-    bag->itemsp()->wid = wid_bag_container;
+    wid_set_thing_id_context(wid_bag_container, bag, 0);
   }
 
   wid_bag_add_items(wid_bag_container, bag);

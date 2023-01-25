@@ -164,7 +164,7 @@ void Thing::hooks_remove()
       }
       equip_carry_anim_set(nullptr, e);
       item->owner_unset();
-      item->dead("weapon carry-anim owner defeated ");
+      item->dead("weapon carry-anim owner defeated");
     }
   }
 
@@ -178,7 +178,7 @@ void Thing::hooks_remove()
       }
       equip_use_anim_set(nullptr, e);
       item->owner_unset();
-      item->dead("weapon use-anim owner defeated ");
+      item->dead("weapon use-anim owner defeated");
     }
   }
 

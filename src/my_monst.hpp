@@ -310,7 +310,7 @@ public:
   //
   // If in transit, this is the wid owning me
   //
-  Widp wid {};
+  std::set< Widp > thing_wid;
 } ThingItem;
 
 typedef struct ThingAi_ {

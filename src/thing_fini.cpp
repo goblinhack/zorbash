@@ -186,15 +186,12 @@ void Thing::destroy(void)
   //
   auto items = maybe_itemsp();
   if (items) {
-    if (items->wid) {
-      verify(MTYPE_WID, items->wid);
-      if (items->wid->thing_id_context == id) {
-        items->wid->thing_id_context = NoThingId;
-      }
-      if (items->wid->thing_id2_context == id) {
-        items->wid->thing_id2_context = NoThingId;
+    for (auto w : items->thing_wid) {
+      for (auto which = 0; which < WID_THING_ID_MAX_CONTEXT; which++) {
+        wid_clear_thing_id_context(w, which);
       }
     }
+    items->thing_wid.clear();
 
     oldptr(MTYPE_ITEMP, items);
     delete _itemsp;

@@ -473,7 +473,7 @@ bool Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
   // Prefer to show the thing we are moving
   //
   if (game->in_transit_item) {
-    auto id = wid_get_thing_id_context(game->in_transit_item);
+    auto id = wid_get_thing_id_context(game->in_transit_item, 0);
     auto o  = game->thing_find(id);
     if (o) {
       wid_thing_info_push_popup(o);

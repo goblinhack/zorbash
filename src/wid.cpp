@@ -402,44 +402,77 @@ void *wid_get_void_context(Widp w)
   return (w->void_context);
 }
 
-void wid_set_thing_id_context(Widp w, Thingp t)
+void wid_unset_thing_id_context(Widp w, int which)
 {
   TRACE_NO_INDENT();
   if (! w) {
     ERR("NULL pointer");
     return;
   }
-  w->thing_id_context = t->id;
-}
 
-ThingId wid_get_thing_id_context(Widp w)
-{
-  TRACE_NO_INDENT();
-  if (! w) {
-    ERR("NULL pointer");
-    return NoThingId;
+  auto id = w->thing_id_context[ which ];
+  if (id != NoThingId) {
+    auto t                       = game->thing_find(id);
+    w->thing_id_context[ which ] = NoThingId;
+    if (t) {
+      auto items = t->maybe_itemsp();
+      if (items) {
+        WID_DBG(w, "unset thing reference %" PRIX32, id.id);
+        IF_DEBUG2 { t->log("unset thing reference %s", wid_get_name(w).c_str()); }
+        items->thing_wid.erase(w);
+      }
+    }
   }
-  return (w->thing_id_context);
 }
 
-void wid_set_thing_id2_context(Widp w, Thingp t)
+void wid_clear_thing_id_context(Widp w, int which)
 {
   TRACE_NO_INDENT();
   if (! w) {
     ERR("NULL pointer");
     return;
   }
-  w->thing_id2_context = t->id;
+
+  auto id = w->thing_id_context[ which ];
+  if (id != NoThingId) {
+    WID_DBG(w, "clear thing reference wid[%d] %p -> %" PRIX32, which, w, id.id);
+    w->thing_id_context[ which ] = NoThingId;
+  }
 }
 
-ThingId wid_get_thing_id2_context(Widp w)
+void wid_set_thing_id_context(Widp w, Thingp t, int which)
+{
+  TRACE_NO_INDENT();
+  if (! w) {
+    ERR("NULL pointer");
+    return;
+  }
+
+  wid_unset_thing_id_context(w, which);
+  w->thing_id_context[ which ] = t->id;
+
+  t->new_itemsp();
+  auto items = t->maybe_itemsp();
+  if (items) {
+    WID_DBG(w, "set thing reference wid %" PRIX32, t->id.id);
+    IF_DEBUG2 { t->log("set thing reference %s", wid_get_name(w).c_str()); }
+    items->thing_wid.insert(w);
+  }
+}
+
+ThingId wid_get_thing_id_context(Widp w, int which)
 {
   TRACE_NO_INDENT();
   if (! w) {
     ERR("NULL pointer");
     return NoThingId;
   }
-  return (w->thing_id2_context);
+
+  auto id = w->thing_id_context[ which ];
+  if (id != NoThingId) {
+    WID_DBG(w, "get thing reference wid[%d] %p -> %" PRIX32, which, w, id.id);
+  }
+  return id;
 }
 
 void wid_set_prev(Widp w, Widp prev)
@@ -2268,6 +2301,7 @@ static Widp wid_new(Widp parent)
 
   w->visible = true;
   wid_set_style(w, UI_WID_STYLE_SOLID_NONE);
+  WID_DBG(w, "new");
 
   return w;
 }
@@ -2290,6 +2324,7 @@ static Widp wid_new(void)
 
   w->visible = true;
   wid_set_style(w, UI_WID_STYLE_SOLID_NONE);
+  WID_DBG(w, "new");
 
   return w;
 }
@@ -2402,24 +2437,9 @@ static void wid_destroy_immediate(Widp w)
     wid_moving = nullptr;
   }
 
-  if (w->thing_id_context.id) {
-    auto t = game->thing_find(w->thing_id_context);
-    if (t) {
-      auto items = t->maybe_itemsp();
-      if (items) {
-        items->wid = nullptr;
-      }
-    }
-  }
-
-  if (w->thing_id2_context.id) {
-    auto t = game->thing_find(w->thing_id2_context);
-    if (t) {
-      auto items = t->maybe_itemsp();
-      if (items) {
-        items->wid = nullptr;
-      }
-    }
+  for (auto which = 0; which < WID_THING_ID_MAX_CONTEXT; which++) {
+    WID_DBG(w, "destroy thing reference");
+    wid_unset_thing_id_context(w, which);
   }
 
   for (auto x = 0; x < TERM_WIDTH; x++) {
@@ -2544,6 +2564,7 @@ Widp wid_new_window(std::string name)
   // then this will be in front
   //
   wid_raise(w);
+  WID_DBG(w, "new");
 
   return w;
 }
@@ -2578,6 +2599,7 @@ Widp wid_new_container(Widp parent, std::string name)
   // then this will be in front
   //
   wid_raise(w);
+  WID_DBG(w, "new");
 
   return w;
 }
@@ -2605,6 +2627,7 @@ Widp wid_new_square_window(std::string name)
   // then this will be in front
   //
   wid_raise(w);
+  WID_DBG(w, "new");
 
   return w;
 }
@@ -2644,6 +2667,7 @@ Widp wid_new_square_button(Widp parent, std::string name)
   // then this will be in front
   //
   wid_raise(w);
+  WID_DBG(w, "new");
 
   return w;
 }
@@ -2681,6 +2705,7 @@ Widp wid_new_plain(Widp parent, std::string name)
   // then this will be in front
   //
   wid_raise(w);
+  WID_DBG(w, "new");
 
   return w;
 }
@@ -2720,6 +2745,7 @@ static Widp wid_new_scroll_trough(Widp parent)
   wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
   wid_set_style(w, UI_WID_STYLE_DARK);
+  WID_DBG(w, "new");
 
   return w;
 }
@@ -2784,6 +2810,7 @@ static Widp wid_new_scroll_bar(Widp parent, std::string name, Widp scrollbar_own
   wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
   wid_set_style(w, UI_WID_STYLE_DARK);
+  WID_DBG(w, "new");
 
   return w;
 }

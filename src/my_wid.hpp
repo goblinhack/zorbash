@@ -110,8 +110,11 @@ int wid_get_tl_y(Widp w);
 int wid_count(Widp w, int depth);
 int wid_get_int_context(Widp);
 
-ThingId wid_get_thing_id2_context(Widp);
-ThingId wid_get_thing_id_context(Widp);
+#define WID_THING_ID_MAX_CONTEXT 2
+ThingId wid_get_thing_id_context(Widp, int which);
+void    wid_unset_thing_id_context(Widp, int which);
+void    wid_clear_thing_id_context(Widp, int which);
+void    wid_set_thing_id_context(Widp w, Thingp, int which);
 
 uint8_t wid_get_do_not_lower(Widp);
 uint8_t wid_get_do_not_raise(Widp);
@@ -259,8 +262,6 @@ void wid_set_text_top(Widp, uint8_t val);
 void wid_set_text(Widp, int);
 void wid_set_text(Widp, std::string);
 void wid_set_text(Widp, std::wstring);
-void wid_set_thing_id2_context(Widp w, Thingp);
-void wid_set_thing_id_context(Widp w, Thingp);
 void wid_set_top(Widp, uint8_t val);
 void wid_set_void_context(Widp w, void *);
 void wid_this_visible(Widp);
@@ -496,10 +497,9 @@ public:
   //
   // Client context
   //
-  int     int_context {-1};
-  void   *void_context {};
-  ThingId thing_id_context {NoThingId};
-  ThingId thing_id2_context {NoThingId};
+  int                                             int_context {-1};
+  void                                           *void_context {};
+  std::array< ThingId, WID_THING_ID_MAX_CONTEXT > thing_id_context {NoThingId};
 
   //
   // Text placement.
@@ -510,9 +510,9 @@ public:
   ts_t ts_created {};
   ts_t ts_last_mode_change {};
 
-  //
-  // Queue of wid move requests.
-  //
+//
+// Queue of wid move requests.
+//
 #define WID_MAX_MOVE_QUEUE 4
   std::array< wid_move_t, WID_MAX_MOVE_QUEUE > move {};
   point                                        moving_start {};
