@@ -622,10 +622,10 @@ std::vector< point > dmap_solve(const Dmap *D, const point start)
   std::vector< point > out;
   path_size = p.size();
 
-  for (int i = 0; i < path_size; i++) {
+  for (int i = 0; i < (int) path_size; i++) {
     auto hop0 = get(p, i);
 
-    if (i == path_size - 1) {
+    if (i == (int) path_size - 1) {
       out.push_back(hop0);
       break;
     }
