@@ -212,19 +212,40 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
         r->con();
         DIE("Entrance room is missing dungeon entrance char '%c'", Charmap::ENTRANCE);
       }
-    }
-
-    if (is_descend_dungeon) {
+      if (r->contains(MAP_DEPTH_OBJ, Charmap::EXIT)) {
+        r->con();
+        DIE("Exit is in entrance room");
+      }
+    } else if (is_descend_dungeon) {
       if (! r->contains(MAP_DEPTH_OBJ, Charmap::EXIT)) {
         r->con();
         DIE("Exit room is missing dungeon exit char '%c'", Charmap::EXIT);
       }
-    }
-
-    if (is_key) {
+      if (r->contains(MAP_DEPTH_OBJ, Charmap::ENTRANCE)) {
+        r->con();
+        DIE("Entrance is in exit room");
+      }
+    } else if (is_key) {
       if (! r->contains(MAP_DEPTH_OBJ, Charmap::KEY)) {
         r->con();
         DIE("Key room is missing dungeon key char '%c'", Charmap::KEY);
+      }
+      if (r->contains(MAP_DEPTH_OBJ, Charmap::EXIT)) {
+        r->con();
+        DIE("Exit is in key room");
+      }
+      if (r->contains(MAP_DEPTH_OBJ, Charmap::ENTRANCE)) {
+        r->con();
+        DIE("Entrance is in key room");
+      }
+    } else {
+      if (r->contains(MAP_DEPTH_OBJ, Charmap::EXIT)) {
+        r->con();
+        DIE("Exit is in normal room");
+      }
+      if (r->contains(MAP_DEPTH_OBJ, Charmap::ENTRANCE)) {
+        r->con();
+        DIE("Entrance is in normal room");
       }
     }
 
