@@ -71,6 +71,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.health_initial_dice(self, "1d1000+500")
     my.is_able_to_attack_owner(self, True)
     my.is_able_to_fall(self, True)
+    my.is_aerodynamic(self, True)
     my.is_auto_equipped(self, True)
     my.is_bag_item(self, True)
     my.is_biome_dungeon(self, True)

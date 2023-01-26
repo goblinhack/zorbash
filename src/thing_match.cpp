@@ -691,10 +691,10 @@ bool Thing::matches(const std::string &what)
   if (unused_flag16() && (what == "unused_flag16")) {
     return true;
   }
-  if (unused_flag17() && (what == "unused_flag17")) {
+  if (is_aerodynamic() && (what == "is_aerodynamic")) {
     return true;
   }
-  if (unused_flag18() && (what == "unused_flag18")) {
+  if (is_light() && (what == "is_light")) {
     return true;
   }
   if (is_missile() && (what == "is_missile")) {
@@ -2168,11 +2168,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag16") {
     return &Thing::unused_flag16;
   }
-  if (what == "unused_flag17") {
-    return &Thing::unused_flag17;
+  if (what == "is_aerodynamic") {
+    return &Thing::is_aerodynamic;
   }
-  if (what == "unused_flag18") {
-    return &Thing::unused_flag18;
+  if (what == "is_light") {
+    return &Thing::is_light;
   }
   if (what == "is_missile") {
     return &Thing::is_missile;

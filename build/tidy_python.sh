@@ -521,8 +521,8 @@ do
       unused_flag14 \
       unused_flag15 \
       unused_flag16 \
-      unused_flag17 \
-      unused_flag18 \
+      is_aerodynamic \
+      is_light \
       is_missile \
       unused_flag2 \
       is_thrown_as_a_weapon \

@@ -277,6 +277,7 @@ private:
   int _is_able_to_use_weapons {};
   int _is_able_to_walk_through_walls {};
   int _is_acid {};
+  int _is_aerodynamic {};
   int _is_air_breather {};
   int _is_albe_to_shoot_at {};
   int _is_albe_to_shoot_at_close_range {};
@@ -435,6 +436,7 @@ private:
   int _is_laser {};
   int _is_lava {};
   int _is_lifeless {};
+  int _is_light {};
   int _is_light_blocker {};
   int _is_light_blocker_for_monst {};
   int _is_lightning {};
@@ -632,8 +634,6 @@ private:
   int _unused_flag14 {};
   int _unused_flag15 {};
   int _unused_flag16 {};
-  int _unused_flag17 {};
-  int _unused_flag18 {};
   int _unused_flag2 {};
   int _unused_flag27 {};
   int _unused_flag3 {};
@@ -1346,6 +1346,7 @@ public:
   int is_able_to_use_weapons(void) const;
   int is_able_to_walk_through_walls(void) const;
   int is_acid(void) const;
+  int is_aerodynamic(void) const;
   int is_air_breather(void) const;
   int is_albe_to_shoot_at_close_range(void) const;
   int is_albe_to_shoot_at(void) const;
@@ -1506,6 +1507,7 @@ public:
   int is_light_blocker_for_monst(void) const;
   int is_light_blocker(void) const;
   int is_lightning(void) const;
+  int is_light(void) const;
   int is_limb(void) const;
   int is_living(void) const;
   int is_loggable(void) const;
@@ -1699,8 +1701,6 @@ public:
   int unused_flag14(void) const;
   int unused_flag15(void) const;
   int unused_flag16(void) const;
-  int unused_flag17(void) const;
-  int unused_flag18(void) const;
   int unused_flag1(void) const;
   int unused_flag27(void) const;
   int unused_flag2(void) const;
@@ -1886,6 +1886,7 @@ public:
   void is_able_to_use_weapons_set(int v);
   void is_able_to_walk_through_walls_set(int v);
   void is_acid_set(int v);
+  void is_aerodynamic_set(int v);
   void is_air_breather_set(int v);
   void is_albe_to_shoot_at_close_range_set(int v);
   void is_albe_to_shoot_at_set(int v);
@@ -2047,6 +2048,7 @@ public:
   void is_light_blocker_for_monst_set(int v);
   void is_light_blocker_set(int v);
   void is_lightning_set(int v);
+  void is_light_set(int v);
   void is_limb_set(int v);
   void is_living_set(int v);
   void is_loggable_set(int v);
@@ -2389,8 +2391,6 @@ public:
   void unused_flag14_set(int v);
   void unused_flag15_set(int v);
   void unused_flag16_set(int v);
-  void unused_flag17_set(int v);
-  void unused_flag18_set(int v);
   void unused_flag1_set(int v);
   void unused_flag27_set(int v);
   void unused_flag2_set(int v);

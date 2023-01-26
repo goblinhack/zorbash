@@ -352,6 +352,7 @@ int Tp::is_able_to_use_staffs(void) const { return _is_able_to_use_staffs; }
 int Tp::is_able_to_use_weapons(void) const { return _is_able_to_use_weapons; }
 int Tp::is_able_to_walk_through_walls(void) const { return _is_able_to_walk_through_walls; }
 int Tp::is_acid(void) const { return _is_acid; }
+int Tp::is_aerodynamic(void) const { return _is_aerodynamic; }
 int Tp::is_air_breather(void) const { return _is_air_breather; }
 int Tp::is_albe_to_shoot_at_close_range(void) const { return _is_albe_to_shoot_at_close_range; }
 int Tp::is_albe_to_shoot_at(void) const { return _is_albe_to_shoot_at; }
@@ -512,6 +513,7 @@ int Tp::is_lifeless(void) const { return _is_lifeless; }
 int Tp::is_light_blocker_for_monst(void) const { return _is_light_blocker_for_monst; }
 int Tp::is_light_blocker(void) const { return _is_light_blocker; }
 int Tp::is_lightning(void) const { return _is_lightning; }
+int Tp::is_light(void) const { return _is_light; }
 int Tp::is_limb(void) const { return _is_limb; }
 int Tp::is_living(void) const { return _is_living; }
 int Tp::is_loggable(void) const { return _is_loggable; }
@@ -705,8 +707,6 @@ int Tp::unused_flag13(void) const { return _unused_flag13; }
 int Tp::unused_flag14(void) const { return _unused_flag14; }
 int Tp::unused_flag15(void) const { return _unused_flag15; }
 int Tp::unused_flag16(void) const { return _unused_flag16; }
-int Tp::unused_flag17(void) const { return _unused_flag17; }
-int Tp::unused_flag18(void) const { return _unused_flag18; }
 int Tp::unused_flag1(void) const { return _unused_flag1; }
 int Tp::unused_flag27(void) const { return _unused_flag27; }
 int Tp::unused_flag2(void) const { return _unused_flag2; }
@@ -892,6 +892,7 @@ void Tp::is_able_to_use_staffs_set(int v) { _is_able_to_use_staffs = v; }
 void Tp::is_able_to_use_weapons_set(int v) { _is_able_to_use_weapons = v; }
 void Tp::is_able_to_walk_through_walls_set(int v) { _is_able_to_walk_through_walls = v; }
 void Tp::is_acid_set(int v) { _is_acid = v; }
+void Tp::is_aerodynamic_set(int v) { _is_aerodynamic = v; }
 void Tp::is_air_breather_set(int v) { _is_air_breather = v; }
 void Tp::is_albe_to_shoot_at_close_range_set(int v) { _is_albe_to_shoot_at_close_range = v; }
 void Tp::is_albe_to_shoot_at_set(int v) { _is_albe_to_shoot_at = v; }
@@ -1053,6 +1054,7 @@ void Tp::is_lifeless_set(int v) { _is_lifeless = v; }
 void Tp::is_light_blocker_for_monst_set(int v) { _is_light_blocker_for_monst = v; }
 void Tp::is_light_blocker_set(int v) { _is_light_blocker = v; }
 void Tp::is_lightning_set(int v) { _is_lightning = v; }
+void Tp::is_light_set(int v) { _is_light = v; }
 void Tp::is_limb_set(int v) { _is_limb = v; }
 void Tp::is_living_set(int v) { _is_living = v; }
 void Tp::is_loggable_set(int v) { _is_loggable = v; }
@@ -1392,8 +1394,6 @@ void Tp::unused_flag13_set(int v) { _unused_flag13 = v; }
 void Tp::unused_flag14_set(int v) { _unused_flag14 = v; }
 void Tp::unused_flag15_set(int v) { _unused_flag15 = v; }
 void Tp::unused_flag16_set(int v) { _unused_flag16 = v; }
-void Tp::unused_flag17_set(int v) { _unused_flag17 = v; }
-void Tp::unused_flag18_set(int v) { _unused_flag18 = v; }
 void Tp::unused_flag1_set(int v) { _unused_flag1 = v; }
 void Tp::unused_flag27_set(int v) { _unused_flag27 = v; }
 void Tp::unused_flag2_set(int v) { _unused_flag2 = v; }

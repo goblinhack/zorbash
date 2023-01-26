@@ -1359,16 +1359,16 @@ int Thing::unused_flag16(void)
   return (tp()->unused_flag16());
 }
 
-int Thing::unused_flag17(void)
+int Thing::is_aerodynamic(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag17());
+  return (tp()->is_aerodynamic());
 }
 
-int Thing::unused_flag18(void)
+int Thing::is_light(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag18());
+  return (tp()->is_light());
 }
 
 int Thing::is_missile(void)

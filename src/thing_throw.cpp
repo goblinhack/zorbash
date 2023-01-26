@@ -120,6 +120,25 @@ void Thing::throw_at(Thingp what, Thingp target)
   //
   float dist     = DISTANCE(curr_at.x, curr_at.y, throw_at.x, throw_at.y);
   float max_dist = distance_throw_get();
+
+  //
+  // Allow darts to be thrown further
+  //
+  if (what) {
+    if (what->is_missile()) {
+      max_dist *= 2;
+    }
+    if (what->is_heavy()) {
+      max_dist /= 2;
+    }
+    if (what->is_light()) {
+      max_dist *= 2;
+    }
+    if (what->is_aerodynamic()) {
+      max_dist *= 2;
+    }
+  }
+
   if (dist > max_dist) {
     if (! need_to_choose_a_new_target) {
       if (is_player()) {
