@@ -96,7 +96,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="door_secret", text_long_name="An inconspicious dungeon wall.")
+    tp_init(name="door_secret", text_long_name="inconspicious dungeon wall")
 
 
 init()
