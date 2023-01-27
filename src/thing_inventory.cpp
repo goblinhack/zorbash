@@ -371,6 +371,17 @@ bool Thing::inventory_shortcuts_remove(Thingp item)
     immediate_owner->bag_remove(item);
   }
 
+  /*
+   * Keep a count of the items of the same type so that we do not remove
+   * the shortcut when throwing a single dart for example.
+   */
+  auto same_item_count = 0;
+  for (auto oitem : player->carried_and_equipped_item_list()) {
+    if (item->tp() == oitem->tp()) {
+      same_item_count++;
+    }
+  }
+
   auto inventory_items = itemsp->inventory_shortcuts.size();
   for (auto i = 0U; i < inventory_items; i++) {
     auto thing_id = get(itemsp->inventory_shortcuts, i);
@@ -387,16 +398,21 @@ bool Thing::inventory_shortcuts_remove(Thingp item)
 
       inventory_particle(item, i, this);
 
-      dbg("Remove slot");
-      TRACE_AND_INDENT();
+      //
+      // If you use one dart and have more, do not remove the shortcut
+      //
+      if (same_item_count <= 1) {
+        dbg("Remove slot");
+        TRACE_AND_INDENT();
 
-      set(itemsp->inventory_shortcuts, i, NoThingId);
+        set(itemsp->inventory_shortcuts, i, NoThingId);
 
-      if (! itemsp->inventory_shortcuts.size()) {
-        game->inventory_highlight_slot = {};
-      } else {
-        while (game->inventory_highlight_slot >= itemsp->inventory_shortcuts.size()) {
-          game->inventory_highlight_slot--;
+        if (! itemsp->inventory_shortcuts.size()) {
+          game->inventory_highlight_slot = {};
+        } else {
+          while (game->inventory_highlight_slot >= itemsp->inventory_shortcuts.size()) {
+            game->inventory_highlight_slot--;
+          }
         }
       }
 
@@ -438,6 +454,17 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target)
     immediate_owner->bag_remove(item);
   }
 
+  /*
+   * Keep a count of the items of the same type so that we do not remove
+   * the shortcut when throwing a single dart for example.
+   */
+  auto same_item_count = 0;
+  for (auto oitem : player->carried_and_equipped_item_list()) {
+    if (item->tp() == oitem->tp()) {
+      same_item_count++;
+    }
+  }
+
   auto inventory_items = itemsp->inventory_shortcuts.size();
   for (auto i = 0U; i < inventory_items; i++) {
     auto thing_id = get(itemsp->inventory_shortcuts, i);
@@ -456,19 +483,21 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target)
         inventory_particle(item, i, particle_target);
       }
 
-      dbg("Remove slot");
-      TRACE_AND_INDENT();
+      if (same_item_count <= 1) {
+        dbg("Remove slot");
+        TRACE_AND_INDENT();
 
-      itemsp->inventory_shortcuts.erase(itemsp->inventory_shortcuts.begin() + i);
+        itemsp->inventory_shortcuts.erase(itemsp->inventory_shortcuts.begin() + i);
 
-      if (! itemsp->inventory_shortcuts.size()) {
-        game->inventory_highlight_slot = {};
-      } else {
-        while (game->inventory_highlight_slot >= itemsp->inventory_shortcuts.size()) {
-          game->inventory_highlight_slot--;
+        if (! itemsp->inventory_shortcuts.size()) {
+          game->inventory_highlight_slot = {};
+        } else {
+          while (game->inventory_highlight_slot >= itemsp->inventory_shortcuts.size()) {
+            game->inventory_highlight_slot--;
+          }
+
+          level->inventory_describe(game->inventory_highlight_slot);
         }
-
-        level->inventory_describe(game->inventory_highlight_slot);
       }
 
       if ((game->state != Game::STATE_CHOOSING_LEVEL) && (game->state != Game::STATE_CHOOSING_TARGET) &&
