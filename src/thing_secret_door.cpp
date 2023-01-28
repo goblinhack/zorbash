@@ -31,12 +31,6 @@ void Thing::secret_door_tick(void)
     //
     t->dead("opened");
 
-    if (is_player()) {
-      msg("An ancient door creaks open.");
-    } else {
-      msg("You hear an ancient door creaking open.");
-    }
-
     break;
   }
   FOR_ALL_THINGS_END()

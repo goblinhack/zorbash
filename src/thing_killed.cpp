@@ -160,7 +160,14 @@ void Thing::killed(Thingp defeater, const char *reason)
       level_push();
       if (player) {
         int distance = distance_to_player();
-        if (is_door()) {
+        if (is_secret_door()) {
+          if (distance <= 1) {
+            msg("An ancient door creaks open.");
+          } else {
+            msg("You hear an ancient rumbling noise.");
+          }
+          player->update_light();
+        } else if (is_door()) {
           if (defeater && defeater->is_fire()) {
             TRACE_NO_INDENT();
             if (distance < 5) {
