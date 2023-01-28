@@ -282,7 +282,9 @@ void Thing::throw_at(Thingp what, Thingp target)
   if (what->is_used_when_thrown()) {
     used(what, target, true /* remove_after_use */);
   } else {
-    drop(what, target, false /* stolen */, true /* thrown */);
+    DropReason reason;
+    reason.is_being_thrown = true;
+    drop(what, target, reason);
   }
 
   //

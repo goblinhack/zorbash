@@ -339,11 +339,15 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
   if (allowed_to_recarry) {
     if (! is_being_destroyed && ! item->is_being_destroyed && ! is_dead && ! is_dying) {
       if (! carry(item, false /* can_equip */)) {
-        drop(item);
+        DropReason reason;
+        reason.is_being_unequipped = true;
+        drop(item, reason);
       }
     }
   } else if (! is_being_destroyed && ! item->is_being_destroyed && is_dead_or_dying()) {
-    drop(item);
+    DropReason reason;
+    reason.is_being_unequipped = true;
+    drop(item, reason);
   }
 
   auto top_owner = item->top_owner();

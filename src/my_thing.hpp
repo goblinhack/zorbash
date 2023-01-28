@@ -57,6 +57,15 @@ typedef struct {
   bool radial_effect;
 } UseOptions;
 
+typedef class DropReason_
+{
+public:
+  bool is_being_equipped {};
+  bool is_being_unequipped {};
+  bool is_being_thrown {};
+  bool is_being_stolen {};
+} DropReason;
+
 typedef class Thing_
 {
 private:
@@ -440,7 +449,8 @@ public:
   bool drop_from_ether(Thingp w);
   bool drop_into_ether(Thingp w);
   bool drop(Thingp w);
-  bool drop(Thingp w, Thingp target, bool stolen = false, bool thrown = false);
+  bool drop(Thingp w, DropReason);
+  bool drop(Thingp w, Thingp target, DropReason);
   bool eat_something(void);
   bool eat(Thingp it);
   bool enchant_random_item_with_stone(void);

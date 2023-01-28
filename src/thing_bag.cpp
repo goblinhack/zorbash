@@ -533,7 +533,7 @@ bool Thing::bag_remove(Thingp item)
   auto bh = capacity_height();
 
   if (! is_monst()) {
-    IF_DEBUG2
+    IF_DEBUG3
     {
       log("Bag contents before remove of %s:", item->to_short_string().c_str());
       for (auto y = 0; y < bh; y++) {
@@ -575,7 +575,7 @@ bool Thing::bag_remove(Thingp item)
   }
 
   if (! is_monst()) {
-    IF_DEBUG2
+    IF_DEBUG3
     {
       log("Bag contents after remove of %s:", item->to_short_string().c_str());
       for (auto y = 0; y < bh; y++) {

@@ -50,6 +50,9 @@ void Thing::location_check(Thingp filter_to)
     return;
   }
 
+  dbg("Location check");
+  TRACE_AND_INDENT();
+
   //
   // Allow fall through to fall check, so burnt things can fall.
   //
@@ -229,10 +232,6 @@ void Thing::location_check(Thingp filter_to)
 void Thing::location_check_me(void)
 {
   TRACE_NO_INDENT();
-
-  if (is_loggable()) {
-    dbg("Do location checks");
-  }
 
   //
   // If we're about to check as part of a tick, do it then.

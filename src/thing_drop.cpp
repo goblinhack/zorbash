@@ -41,7 +41,7 @@ void Thing::on_dropped(void)
   }
 }
 
-bool Thing::drop(Thingp what, Thingp target, bool stolen, bool thrown)
+bool Thing::drop(Thingp what, Thingp target, DropReason reason)
 {
   TRACE_NO_INDENT();
 
@@ -51,11 +51,23 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen, bool thrown)
     return false;
   }
 
-  if (stolen) {
+  if (reason.is_being_stolen) {
     if (target) {
       dbg("Drop (being stolen) %s at %s", what->to_short_string().c_str(), target->to_short_string().c_str());
     } else {
       dbg("Drop (being stolen) %s", what->to_short_string().c_str());
+    }
+  } else if (reason.is_being_equipped) {
+    if (target) {
+      dbg("Drop (being equipped) %s at %s", what->to_short_string().c_str(), target->to_short_string().c_str());
+    } else {
+      dbg("Drop (being equipped) %s", what->to_short_string().c_str());
+    }
+  } else if (reason.is_being_thrown) {
+    if (target) {
+      dbg("Drop (being thrown) %s at %s", what->to_short_string().c_str(), target->to_short_string().c_str());
+    } else {
+      dbg("Drop (being thrown) %s", what->to_short_string().c_str());
     }
   } else {
     if (target) {
@@ -131,7 +143,7 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen, bool thrown)
     immediate_owner->itemsp()->carrying.remove(what->id);
   }
 
-  if (! stolen) {
+  if (! reason.is_being_stolen) {
     //
     // Prevent too soon re-carry
     //
@@ -148,11 +160,11 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen, bool thrown)
   wid_inventory_fini();
   wid_thing_info_fini("drop item");
 
-  if (thrown) {
+  if (reason.is_being_thrown) {
     //
     // A message should already have been shown
     //
-  } else if (stolen) {
+  } else if (reason.is_being_stolen) {
     dbg("Dropped (being stolen) %s", what->to_short_string().c_str());
     if (is_player()) {
       if (! is_dead_or_dying()) {
@@ -174,18 +186,22 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen, bool thrown)
         level->noisemap_in_incr(curr_at.x, curr_at.y, what->noise_on_dropping());
       }
     } else if (is_bag_item_container()) {
-      msg("%s falls out of %s.", what->text_The().c_str(), text_the().c_str());
-      level->noisemap_in_incr(curr_at.x, curr_at.y, what->noise_on_dropping());
+      if (! reason.is_being_thrown && ! reason.is_being_equipped && ! reason.is_being_stolen) {
+        msg("%s falls out of %s.", what->text_The().c_str(), text_the().c_str());
+        level->noisemap_in_incr(curr_at.x, curr_at.y, what->noise_on_dropping());
+      }
     } else if (is_monst()) {
-      msg("%s drops %s.", text_The().c_str(), what->text_the().c_str());
-      level->noisemap_in_incr(curr_at.x, curr_at.y, what->noise_on_dropping());
+      if (! reason.is_being_thrown && ! reason.is_being_equipped && ! reason.is_being_stolen) {
+        msg("%s drops %s.", text_The().c_str(), what->text_the().c_str());
+        level->noisemap_in_incr(curr_at.x, curr_at.y, what->noise_on_dropping());
+      }
     }
   }
 
   what->is_being_dropped = false;
   what->tick_last_dropped_set(game->tick_current);
   if (! is_dead_or_dying()) {
-    if (! stolen) {
+    if (! reason.is_being_stolen) {
       what->on_dropped();
     }
   }
@@ -333,7 +349,13 @@ bool Thing::drop_from_ether(Thingp what)
   return true;
 }
 
-bool Thing::drop(Thingp what) { return drop(what, nullptr); }
+bool Thing::drop(Thingp what)
+{
+  DropReason reason;
+  return drop(what, nullptr, reason);
+}
+
+bool Thing::drop(Thingp what, DropReason reason) { return drop(what, nullptr, reason); }
 
 void Thing::drop_all(void)
 {

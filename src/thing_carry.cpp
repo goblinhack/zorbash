@@ -89,7 +89,10 @@ bool Thing::carry(Thingp item, bool can_equip)
   bool equipped = false;
   if (can_equip && is_able_to_use_weapons() && item->is_auto_equipped() && item->is_weapon() &&
       ! equip_id(MONST_EQUIP_WEAPON)) {
+    dbg("Yes, equip weapon");
+    TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_WEAPON)) {
+      dbg("Equipped weapon");
       equipped = true;
     }
   }
@@ -99,7 +102,10 @@ bool Thing::carry(Thingp item, bool can_equip)
   //
   if (can_equip && is_able_to_use_armor() && item->is_auto_equipped() && item->is_armor() &&
       ! equip_id(MONST_EQUIP_ARMOR)) {
+    dbg("Yes, equip armor");
+    TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_ARMOR)) {
+      dbg("Equipped armor");
       equipped = true;
     }
   }
@@ -109,17 +115,10 @@ bool Thing::carry(Thingp item, bool can_equip)
   //
   if (can_equip && is_able_to_use_helmet() && item->is_auto_equipped() && item->is_helmet() &&
       ! equip_id(MONST_EQUIP_HELMET)) {
+    dbg("Yes, equip helmet");
+    TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_HELMET)) {
-      equipped = true;
-    }
-  }
-
-  //
-  // If we have no helmet yet, equip it
-  //
-  if (can_equip && is_able_to_use_helmet() && item->is_auto_equipped() && item->is_helmet() &&
-      ! equip_id(MONST_EQUIP_HELMET)) {
-    if (equip(item, MONST_EQUIP_HELMET)) {
+      dbg("Equipped helmet");
       equipped = true;
     }
   }
@@ -129,7 +128,10 @@ bool Thing::carry(Thingp item, bool can_equip)
   //
   if (can_equip && is_able_to_use_amulet() && item->is_auto_equipped() && item->is_amulet() &&
       ! equip_id(MONST_EQUIP_AMULET)) {
+    dbg("Yes, equip amulet");
+    TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_AMULET)) {
+      dbg("Equipped amulet");
       equipped = true;
     }
   }
@@ -139,7 +141,10 @@ bool Thing::carry(Thingp item, bool can_equip)
   //
   if (can_equip && is_able_to_use_boots() && item->is_auto_equipped() && item->is_boots() &&
       ! equip_id(MONST_EQUIP_BOOTS)) {
+    dbg("Yes, equip boots");
+    TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_BOOTS)) {
+      dbg("Equipped boots");
       equipped = true;
     }
   }
@@ -149,7 +154,10 @@ bool Thing::carry(Thingp item, bool can_equip)
   //
   if (can_equip && is_able_to_use_gauntlet() && item->is_auto_equipped() && item->is_gauntlet() &&
       ! equip_id(MONST_EQUIP_GAUNTLET)) {
+    dbg("Yes, equip gauntlet");
+    TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_GAUNTLET)) {
+      dbg("Equipped gauntlet");
       equipped = true;
     }
   }
@@ -159,7 +167,10 @@ bool Thing::carry(Thingp item, bool can_equip)
   //
   if (can_equip && is_able_to_use_cloak() && item->is_auto_equipped() && item->is_cloak() &&
       ! equip_id(MONST_EQUIP_CLOAK)) {
+    dbg("Yes, equip cloak");
+    TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_CLOAK)) {
+      dbg("Equipped cloak");
       equipped = true;
     }
   }
@@ -169,7 +180,10 @@ bool Thing::carry(Thingp item, bool can_equip)
   //
   if (can_equip && is_able_to_use_shield() && item->is_auto_equipped() && item->is_shield() &&
       ! equip_id(MONST_EQUIP_SHIELD)) {
+    dbg("Yes, equip shield");
+    TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_SHIELD)) {
+      dbg("Equipped shield");
       equipped = true;
     }
   }
@@ -179,12 +193,18 @@ bool Thing::carry(Thingp item, bool can_equip)
   //
   if (can_equip && is_able_to_use_rings() && item->is_auto_equipped() && item->is_ring() &&
       ! equip_id(MONST_EQUIP_RING1)) {
+    dbg("Yes, equip ring1");
+    TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_RING1)) {
+      dbg("Equipped ring1");
       equipped = true;
     }
   } else if (can_equip && is_able_to_use_rings() && item->is_auto_equipped() && item->is_ring() &&
              ! equip_id(MONST_EQUIP_RING2)) {
+    dbg("Yes, equip ring2");
+    TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_RING2)) {
+      dbg("Equipped ring1");
       equipped = true;
     }
   }
@@ -195,7 +215,11 @@ bool Thing::carry(Thingp item, bool can_equip)
   //
   auto existing_owner = item->immediate_owner();
   if (existing_owner) {
-    dbg("Drop from existing owner");
+    if (equipped) {
+      dbg("Post equip, drop from existing owner");
+    } else {
+      dbg("Drop from existing owner");
+    }
     TRACE_AND_INDENT();
 
     if (existing_owner == this) {
@@ -204,8 +228,9 @@ bool Thing::carry(Thingp item, bool can_equip)
       //
       dbg("Already owned: %s", item->to_short_string().c_str());
     } else {
-      dbg("Drop from existing owner");
-      existing_owner->drop(item);
+      DropReason reason;
+      reason.is_being_equipped = equipped;
+      existing_owner->drop(item, reason);
     }
   }
 
