@@ -222,7 +222,7 @@ bool Thing::collision_find_best_target(ThingAttackOptionsp attack_options)
         //
         // As above, but not for owner.
         //
-        if (can_eat(victim) && 0) {
+        if (can_eat(victim)) {
           dbg("Try to eat instead of attacking %s", victim->to_short_string().c_str());
           TRACE_AND_INDENT();
 

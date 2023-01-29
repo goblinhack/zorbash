@@ -113,8 +113,6 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
     FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y)
     {
       int prio = t->collision_hit_priority();
-      dbg2("Target-attack-best: %s prio %d", t->to_short_string().c_str(), prio);
-      TRACE_AND_INDENT();
 
       if (t->is_dead || t->is_dying) {
         if (t->is_frozen) {
@@ -201,8 +199,6 @@ bool Thing::victim_attack_best_attempt_2(Thingp item, point at, Thingp *best, po
     FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y)
     {
       int prio = t->collision_hit_priority();
-      dbg2("Target-attack-best: %s prio %d", t->to_short_string().c_str(), prio);
-      TRACE_AND_INDENT();
 
       //
       // Get the most important thing to hit.
@@ -294,8 +290,6 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
     FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y)
     {
       int prio = t->collision_hit_priority();
-      dbg2("Target-attack-best: %s prio %d", t->to_short_string().c_str(), prio);
-      TRACE_AND_INDENT();
 
       //
       // Get the most important thing to hit.

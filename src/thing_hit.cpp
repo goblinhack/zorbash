@@ -840,10 +840,10 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       }
       return false;
     }
-    if (victim->is_door()) {
-      dmg_type = "bashing ";
-    } else {
+    if (victim->is_player() || victim->is_monst()) {
       dmg_type = "melee ";
+    } else {
+      dmg_type = "bashing ";
     }
     IF_DEBUG2 { real_hitter->log("Attack melee damage %d on %s", damage, to_short_string().c_str()); }
   }
