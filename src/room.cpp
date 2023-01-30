@@ -163,18 +163,50 @@ void Room::find_doors(void)
       if (get(data, x, y, z) == Charmap::DOOR_UP) {
         has_door_up = true;
         doors_up.push_back(point(x, y));
+        if (y == height - 1) {
+          dump();
+          DIE("up door is in bottom row?");
+        }
+        if (get(data, x, y + 1, z) == ' ') {
+          dump();
+          DIE("up door has space next to it?");
+        }
       }
       if (get(data, x, y, z) == Charmap::DOOR_DOWN) {
         has_door_down = true;
         doors_down.push_back(point(x, y));
+        if (y == 0) {
+          dump();
+          DIE("down door is in top row?");
+        }
+        if (get(data, x, y - 1, z) == ' ') {
+          dump();
+          DIE("down door has space next to it?");
+        }
       }
       if (get(data, x, y, z) == Charmap::DOOR_LEFT) {
         has_door_left = true;
         doors_left.push_back(point(x, y));
+        if (x == width - 1) {
+          dump();
+          DIE("left door is in right column?");
+        }
+        if (get(data, x + 1, y, z) == ' ') {
+          dump();
+          DIE("left door has space next to it?");
+        }
       }
       if (get(data, x, y, z) == Charmap::DOOR_RIGHT) {
         has_door_right = true;
         doors_right.push_back(point(x, y));
+        if (x == 0) {
+          dump();
+          DIE("right door is in left column?");
+        }
+        if (get(data, x - 1, y, z) == ' ') {
+          dump();
+          DIE("right door has space next to it?");
+        }
       }
     }
   }
