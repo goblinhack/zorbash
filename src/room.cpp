@@ -6,6 +6,7 @@
 #include "my_ptrcheck.hpp"
 #include "my_range.hpp"
 #include "my_room.hpp"
+#include "my_template.hpp"
 #include "my_vector_bounds_check.hpp"
 
 std::vector< Roomp > Room::all_rooms;
@@ -217,6 +218,116 @@ void Room::find_doors(void)
   }
 }
 
+//
+// Erase all connected character cells in the room
+//
+void Room::room_flood_erase(
+    std::array< std::array< std::array< char, MAP_DEPTH >, MAP_ROOM_HEIGHT >, MAP_ROOM_WIDTH > &room_copy, int x,
+    int y)
+{
+  bool found_something = false;
+
+  for (auto z = 0; z < MAP_DEPTH; z++) {
+    auto m = get(room_copy, x, y, z);
+    if (m && (m != ' ')) {
+      found_something = true;
+      set(room_copy, x, y, z, ' ');
+    }
+  }
+
+  if (! found_something) {
+    return;
+  }
+
+  if (x > 0) {
+    room_flood_erase(room_copy, x - 1, y);
+  }
+  if (x < width - 1) {
+    room_flood_erase(room_copy, x + 1, y);
+  }
+  if (y > 0) {
+    room_flood_erase(room_copy, x, y - 1);
+  }
+  if (y < height - 1) {
+    room_flood_erase(room_copy, x, y + 1);
+  }
+}
+
+bool Room::room_do_any_doors_remain(
+    std::array< std::array< std::array< char, MAP_DEPTH >, MAP_ROOM_HEIGHT >, MAP_ROOM_WIDTH > &room_copy)
+{
+  //
+  // Erase everything that adjoins a door.
+  //
+  for (auto x : range< int >(0, width)) {
+    for (auto y : range< int >(0, height)) {
+      if (get(room_copy, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_UP) {
+        return true;
+      }
+      if (get(room_copy, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_DOWN) {
+        return true;
+      }
+      if (get(room_copy, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_LEFT) {
+        return true;
+      }
+      if (get(room_copy, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_RIGHT) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+//
+// Check doors can all reach each other.
+//
+void Room::room_check_doors_can_reach_each_other(void)
+{
+  //
+  // Erase everything that adjoins a door.
+  //
+  for (auto x : range< int >(0, width)) {
+    for (auto y : range< int >(0, height)) {
+      if (get(data, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_UP) {
+        std::array< std::array< std::array< char, MAP_DEPTH >, MAP_ROOM_HEIGHT >, MAP_ROOM_WIDTH > data_copy {};
+        ::std::copy(mbegin(data), mend(data), mbegin(data_copy));
+        room_flood_erase(data_copy, x, y);
+        if (room_do_any_doors_remain(data_copy)) {
+          dump();
+          DIE("found an unconnected up door");
+        }
+      }
+      if (get(data, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_DOWN) {
+        std::array< std::array< std::array< char, MAP_DEPTH >, MAP_ROOM_HEIGHT >, MAP_ROOM_WIDTH > data_copy {};
+        ::std::copy(mbegin(data), mend(data), mbegin(data_copy));
+        room_flood_erase(data_copy, x, y);
+        if (room_do_any_doors_remain(data_copy)) {
+          dump();
+          DIE("found an unconnected down door");
+        }
+      }
+      if (get(data, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_LEFT) {
+        std::array< std::array< std::array< char, MAP_DEPTH >, MAP_ROOM_HEIGHT >, MAP_ROOM_WIDTH > data_copy {};
+        ::std::copy(mbegin(data), mend(data), mbegin(data_copy));
+        room_flood_erase(data_copy, x, y);
+        if (room_do_any_doors_remain(data_copy)) {
+          dump();
+          DIE("found an unconnected left door");
+        }
+      }
+      if (get(data, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_RIGHT) {
+        std::array< std::array< std::array< char, MAP_DEPTH >, MAP_ROOM_HEIGHT >, MAP_ROOM_WIDTH > data_copy {};
+        ::std::copy(mbegin(data), mend(data), mbegin(data_copy));
+        room_flood_erase(data_copy, x, y);
+        if (room_do_any_doors_remain(data_copy)) {
+          dump();
+          DIE("found an unconnected right door");
+        }
+      }
+    }
+  }
+}
+
 void Room::finalize(void)
 {
   find_doors();
@@ -224,7 +335,7 @@ void Room::finalize(void)
   IF_DEBUG3 { dump(); }
 }
 
-void Room::dump(void)
+void Room::dump(std::array< std::array< std::array< char, MAP_DEPTH >, MAP_ROOM_HEIGHT >, MAP_ROOM_WIDTH > &data)
 {
   std::array< std::array< char, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > tmp {};
   for (auto y = 0; y < height; y++) {
@@ -263,6 +374,8 @@ void Room::dump(void)
   }
   LOG("-");
 }
+
+void Room::dump(void) { dump(data); }
 
 void Room::con(void)
 {

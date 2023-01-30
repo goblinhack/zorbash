@@ -251,6 +251,11 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
 
     r->finalize();
 
+    //
+    // Check doors can all reach each other.
+    //
+    r->room_check_doors_can_reach_each_other();
+
     r = r->rotate_clockwise();
     r = r->rotate_clockwise();
     r = r->rotate_clockwise();

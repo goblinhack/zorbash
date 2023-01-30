@@ -6,6 +6,7 @@
 #ifndef _MY_TEMPLATE_HPP_
 #define _MY_TEMPLATE_HPP_
 
+#include "my_random.hpp"
 #include <algorithm> // for std::transform()
 #include <map>
 

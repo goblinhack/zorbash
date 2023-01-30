@@ -122,10 +122,20 @@ public:
   void  find_doors(void);
   void  finalize(void);
   void  dump(void);
+  void  dump(std::array< std::array< std::array< char, MAP_DEPTH >, MAP_ROOM_HEIGHT >, MAP_ROOM_WIDTH > &data);
   void  con(void);
   bool  contains(int depth, char what);
   bool  contains(int depth, char what, char);
   bool  contains(int depth, char what, char, char);
+
+  //
+  // Door connectivity checking.
+  //
+  void room_check_doors_can_reach_each_other(void);
+  void room_flood_erase(
+      std::array< std::array< std::array< char, MAP_DEPTH >, MAP_ROOM_HEIGHT >, MAP_ROOM_WIDTH > &data, int x, int y);
+  bool room_do_any_doors_remain(
+      std::array< std::array< std::array< char, MAP_DEPTH >, MAP_ROOM_HEIGHT >, MAP_ROOM_WIDTH > &data);
 };
 
 void room_init(void);
