@@ -2,6 +2,14 @@ import my
 import tp
 
 
+def on_thrown(owner, me, x, y):
+    for it in my.level_get_all(me, x, y):
+        if my.thing_is_interesting(it):
+            if it == me:
+                continue
+            my.thing_hit(owner, me, it, damage=my.pcg_randint(1, 6), thrown=True)
+
+
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
@@ -28,12 +36,14 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_meat(self, True)
     my.is_organic(self, True)
     my.is_throwable(self, True)
+    my.is_thrown_as_a_weapon(self, True)
     my.is_usable(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.noise_on_dropping(self, 15)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "10+1d85")
+    my.on_thrown_do(self, "me.on_thrown()")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "A great source of probiotics and vitamin A.")
@@ -50,7 +60,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 def init():
     tp_init(
-        name="food_pickledeyes",
+        name="pickledeyes",
         text_long_name="pickled eyes",
         text_short_name="pickled eyes",
     )

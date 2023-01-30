@@ -2,6 +2,14 @@ import my
 import tp
 
 
+def on_thrown(owner, me, x, y):
+    for it in my.level_get_all(me, x, y):
+        if my.thing_is_interesting(it):
+            if it == me:
+                continue
+            my.thing_hit(owner, me, it, damage=my.pcg_randint(1, 20), thrown=True)
+
+
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
@@ -27,16 +35,18 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_loggable(self, True)
     my.is_organic(self, True)
     my.is_throwable(self, True)
+    my.is_thrown_as_a_weapon(self, True)
     my.is_usable(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "10+1d15")
+    my.on_thrown_do(self, "me.on_thrown()")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "Grown locally and sustainably. In soil drenched with the blood of adventurers.")
-    my.text_description_short(self, "Organic turnip.")
+    my.text_description_short(self, "Organic battle turnip.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
     # end sort marker
@@ -48,7 +58,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="food_turnip", text_long_name="turnip", text_short_name="turnip")
+    tp_init(name="turnip", text_long_name="turnip", text_short_name="turnip")
 
 
 init()

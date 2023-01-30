@@ -48,7 +48,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="food_cookie", text_long_name="cookie", text_short_name="cookie")
+    tp_init(name="cookie", text_long_name="cookie", text_short_name="cookie")
 
 
 init()

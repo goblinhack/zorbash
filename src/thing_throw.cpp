@@ -234,7 +234,7 @@ void Thing::throw_at(Thingp what, Thingp target)
     }
 
     if (! is_being_destroyed) {
-      if (g_opt_ascii || what->is_thrown_as_a_weapon()) {
+      if (g_opt_ascii) {
         //
         // Ascii animations happen inside the level as projectils
         //
@@ -250,9 +250,38 @@ void Thing::throw_at(Thingp what, Thingp target)
           callback();
         } else {
           //
-          // Fallback, just to make sure the thrown item appears.
+          // Make sure the thrown item appears.
           //
           callback();
+        }
+      } else if (what->is_thrown_as_a_weapon()) {
+        //
+        // Ascii animations happen inside the level as projectils
+        //
+        if (! what->target_name_projectile().empty()) {
+          //
+          // Fire the ascii projectile which should not really interact.
+          //
+          fire_projectile_at(what, what->target_name_projectile(), throw_at);
+
+          //
+          // Make sure the thrown item appears.
+          //
+          callback();
+        } else {
+          //
+          // Pixelart animations happen above the level as particles
+          //
+          if (is_player()) {
+            //
+            // So the player is visible above light
+            //
+            level->new_external_particle(what->id, src, dst, sz, delay, tile_index_to_tile(what->tile_curr), false,
+                                         callback);
+          } else {
+            level->new_internal_particle(what->id, src, dst, sz, delay, tile_index_to_tile(what->tile_curr), false,
+                                         callback);
+          }
         }
       } else {
         //

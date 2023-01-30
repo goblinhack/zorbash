@@ -2,6 +2,14 @@ import my
 import tp
 
 
+def on_thrown(owner, me, x, y):
+    for it in my.level_get_all(me, x, y):
+        if my.thing_is_interesting(it):
+            if it == me:
+                continue
+            my.thing_hit(owner, me, it, damage=my.pcg_randint(1, 12), thrown=True)
+
+
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
@@ -48,7 +56,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="food_flagon_ale", text_long_name="flagon of weak ale", text_short_name="ale")
+    tp_init(name="flagon_ale", text_long_name="flagon of weak ale", text_short_name="ale")
 
 
 init()

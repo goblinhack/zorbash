@@ -48,7 +48,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="food_durian", text_long_name="durian", text_short_name="durian")
+    tp_init(name="durian", text_long_name="durian", text_short_name="durian")
 
 
 init()

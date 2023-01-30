@@ -50,7 +50,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 def init():
     tp_init(
-        name="food_apple_cider",
+        name="apple_cider",
         text_long_name="jug of apple cider",
         text_short_name="apple cider",
     )

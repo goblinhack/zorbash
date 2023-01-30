@@ -55,7 +55,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="food_frog", text_long_name="chocolate frog", text_short_name="choc frog")
+    tp_init(name="frog", text_long_name="chocolate frog", text_short_name="choc frog")
 
 
 init()

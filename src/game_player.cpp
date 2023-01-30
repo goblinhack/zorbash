@@ -49,7 +49,7 @@ void Game::place_player(void)
         }
       }
       if (1) {
-        auto w = level->thing_new("food_pottedmeat", point(x, y));
+        auto w = level->thing_new("pottedmeat", point(x, y));
         t->carry(w);
       }
       if (0) {
@@ -333,7 +333,7 @@ void Game::place_player(void)
         // level->thing_new("rock1", point(x + 1, y));
         // level->thing_new("rock1", point(x + 3, y));
         // level->thing_new("gargoyle_static", point(x + 2, y - 2));
-        // level->thing_new("food_frog", point(x + 3, y - 1));
+        // level->thing_new("frog", point(x + 3, y - 1));
         // level->thing_new("fire", point(x + 1, y - 1));
         // level->thing_new("enchantstone", point(x + 1, y - 1));
         // level->thing_new("skillstone", point(x + 1, y - 1));
@@ -348,7 +348,7 @@ void Game::place_player(void)
         // level->thing_new("mummy_necro", point(x + 5, y + 1));
         // level->thing_new("shield_woodon", point(x, y - 2));
         // level->thing_new("fire", point(x, y - 2));
-        // level->thing_new("food_frog", point(x, y - 2));
+        // level->thing_new("frog", point(x, y - 2));
         // level->thing_new("cleaner", point(x + 1, y + 3));
         // level->thing_new("thunderstone", point(x, y - 2));
         // level->thing_new("zorb_eldster", point(x + 5, y));
