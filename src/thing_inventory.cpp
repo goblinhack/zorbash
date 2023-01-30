@@ -437,6 +437,20 @@ bool Thing::inventory_shortcuts_remove(Thingp item)
             game->inventory_highlight_slot--;
           }
         }
+      } else {
+        //
+        // Switch to the next dart (for example)
+        //
+        for (auto oitem : player->carried_and_equipped_item_list()) {
+          if (item == oitem) {
+            continue;
+          }
+          if (item->tp() == oitem->tp()) {
+            set(itemsp->inventory_shortcuts, i, oitem->id);
+            level->inventory_describe(game->inventory_highlight_slot);
+            break;
+          }
+        }
       }
 
       level->inventory_describe(game->inventory_highlight_slot);
@@ -520,6 +534,20 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target)
           }
 
           level->inventory_describe(game->inventory_highlight_slot);
+        }
+      } else {
+        //
+        // Switch to the next dart (for example)
+        //
+        for (auto oitem : player->carried_and_equipped_item_list()) {
+          if (item == oitem) {
+            continue;
+          }
+          if (item->tp() == oitem->tp()) {
+            set(itemsp->inventory_shortcuts, i, oitem->id);
+            level->inventory_describe(game->inventory_highlight_slot);
+            break;
+          }
         }
       }
 

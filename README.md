@@ -1,8 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- pixel art dart anim                                                                                                                          -->
 <!-- check buff of missile protect                                                                                                                -->
-<!-- really need darts that you can throw for sentries                                                                                            -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
