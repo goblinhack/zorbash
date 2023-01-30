@@ -21,10 +21,10 @@ def tp_init(name, text_long_name, text_short_name):
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
 
-    my.tile(self, ascii_fg_char="-", ascii_fg_col_name="gray50",  tile="nothing")
-    my.tile(self, ascii_fg_char="/", ascii_fg_col_name="gray50",  tile="nothing")
-    my.tile(self, ascii_fg_char="|", ascii_fg_col_name="gray50",  tile="nothing")
-    my.tile(self, ascii_fg_char="\\", ascii_fg_col_name="gray50",  tile="nothing")
+    my.tile(self, ascii_fg_char="-", ascii_fg_col_name="gray50",  tile="projectile_dart")
+    my.tile(self, ascii_fg_char="/", ascii_fg_col_name="gray50",  tile="projectile_dart")
+    my.tile(self, ascii_fg_char="|", ascii_fg_col_name="gray50",  tile="projectile_dart")
+    my.tile(self, ascii_fg_char="\\", ascii_fg_col_name="gray50",  tile="projectile_dart")
 
     my.tp_update(self)
 

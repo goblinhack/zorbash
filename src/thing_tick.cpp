@@ -56,6 +56,12 @@ void Thing::update_tick(void)
 
 void Thing::achieve_goals_in_life(void)
 {
+  //
+  // Reset verious temporary flags.
+  //
+  is_being_dropped = false;
+  is_being_thrown  = false;
+
   TRACE_NO_INDENT();
 
   if (is_changing_level || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||

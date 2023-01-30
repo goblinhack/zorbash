@@ -4,6 +4,7 @@
 
 #include "my_game.hpp"
 #include "my_thing.hpp"
+#include "my_tile.hpp"
 
 Projectile_::Projectile_(Levelp level, ThingId thing_id, ThingId victim_id, ProjectileInfo info)
     : id(thing_id), victim_id(victim_id), info(info)
@@ -29,6 +30,26 @@ Projectile_::Projectile_(Levelp level, ThingId thing_id, ThingId victim_id, Proj
     }
   }
 
+  if (g_opt_ascii) {
+    //
+    // Just use the ascii char in the animation for the projectile.
+    //
+    return;
+  }
+
+  //
+  // Some things like darts are very simply animated.
+  //
+  auto proj_tp = tp_find(name);
+  if (proj_tp && tile_find(name)) {
+    auto anim_tiles = &proj_tp->tiles;
+    for (int frame = 0; frame < max_frames; frame++) {
+      auto tile = tile_n(anim_tiles, frame);
+      tiles.push_back(tile);
+    }
+    return;
+  }
+
   //
   // Find all projectile animation tiles. Names look like this:
   //
@@ -49,10 +70,8 @@ Projectile_::Projectile_(Levelp level, ThingId thing_id, ThingId victim_id, Proj
   // "projectile_green.{frame}.15",
   // "projectile_green.{frame}.16",
   //
-  if (! g_opt_ascii) {
-    for (int frame = 0; frame < max_frames; frame++) {
-      tiles.push_back(tile_find_mand(name + "." + std::to_string(frame + 1)));
-    }
+  for (int frame = 0; frame < max_frames; frame++) {
+    tiles.push_back(tile_find_mand(name + "." + std::to_string(frame + 1)));
   }
 }
 

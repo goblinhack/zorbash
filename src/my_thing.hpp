@@ -262,6 +262,7 @@ public:
   uint64_t has_internal_particle  : 1 {}; // current in motion particle
   uint64_t inited_tiles           : 1 {};
   uint64_t is_being_dropped       : 1 {};
+  uint64_t is_being_thrown        : 1 {};
   uint64_t is_blitted             : 1 {};
   uint64_t is_currently_invisible : 1 {}; // Updated per tick
   uint64_t is_in_lava             : 1 {}; // Updated on level pop/push

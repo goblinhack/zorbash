@@ -3632,7 +3632,7 @@ def init_tiles_16x16():
         "shovel",
         "double_shovel",
         "dart",
-        "",
+        "projectile_dart",
         "",
         "",
         "",

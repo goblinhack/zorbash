@@ -139,6 +139,8 @@ void Thing::throw_at(Thingp what, Thingp target)
     }
   }
 
+  what->is_being_thrown = true;
+
   if (dist > max_dist) {
     if (! need_to_choose_a_new_target) {
       if (is_player()) {
@@ -232,7 +234,7 @@ void Thing::throw_at(Thingp what, Thingp target)
     }
 
     if (! is_being_destroyed) {
-      if (g_opt_ascii) {
+      if (g_opt_ascii || what->is_thrown_as_a_weapon()) {
         //
         // Ascii animations happen inside the level as projectils
         //
@@ -290,7 +292,7 @@ void Thing::throw_at(Thingp what, Thingp target)
   //
   // As there is no animation, no need to hide.
   //
-  if (! g_opt_ascii) {
+  if (what->has_external_particle || what->has_internal_particle) {
     what->hide();
   }
 

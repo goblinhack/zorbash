@@ -10,12 +10,11 @@
 void Thing::visible(void)
 {
   TRACE_NO_INDENT();
-
   verify(MTYPE_THING, this);
-
   if (! is_hidden) {
     return;
   }
+  dbg("visible");
 
   //
   // If this thing has an owner, should the thing stay hidden?

@@ -79,8 +79,19 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
       point j(pcg_random_range(0, TILE_WIDTH) - TILE_WIDTH / 2, pcg_random_range(0, TILE_HEIGHT) - TILE_HEIGHT / 2);
       std::string name = "gold1." + std::to_string(pcg_random_range(1, 8));
       if (! is_being_destroyed) {
-        level->new_external_particle(NoThingId, s + j, p, isize(TILE_WIDTH / 2, TILE_HEIGHT / 2), delay + c,
-                                     tile_find_mand(name), false);
+        if (item->is_being_thrown && item->is_thrown_as_a_weapon()) {
+          //
+          // If being thrown, darts do not need a particle
+          //
+          IF_DEBUG { item->log("Is being thrown"); }
+        } else {
+          //
+          // Drop animation
+          //
+          IF_DEBUG { item->log("Create external particle"); }
+          level->new_external_particle(NoThingId, s + j, p, isize(TILE_WIDTH / 2, TILE_HEIGHT / 2), delay + c,
+                                       tile_find_mand(name), false);
+        }
       }
     }
     return;
@@ -209,9 +220,21 @@ void Thing::inventory_particle(Thingp item, uint32_t slot, Thingp particle_targe
 
   auto callback = std::bind(&Thing::visible, item);
   if (! is_being_destroyed) {
-    level->new_external_particle(item->id, where_from, where_to, isize(TILE_WIDTH, TILE_HEIGHT), delay,
-                                 tile_index_to_tile(item->tile_curr),
-                                 (item->is_dir_br() || item->is_dir_right() || item->is_dir_tr()), callback);
+    if (item->is_being_thrown && item->is_thrown_as_a_weapon()) {
+      //
+      // If being thrown, darts do not need a particle
+      //
+      IF_DEBUG { item->log("Is being thrown, callback"); }
+      callback();
+    } else {
+      //
+      // Drop animation
+      //
+      IF_DEBUG { item->log("Create external particle"); }
+      level->new_external_particle(item->id, where_from, where_to, isize(TILE_WIDTH, TILE_HEIGHT), delay,
+                                   tile_index_to_tile(item->tile_curr),
+                                   (item->is_dir_br() || item->is_dir_right() || item->is_dir_tr()), callback);
+    }
   }
 }
 
