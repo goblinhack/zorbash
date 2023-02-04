@@ -11,11 +11,11 @@ def on_you_nat_att(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monster_roar")
 
 
-def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
+def on_hit_and_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monster_roar")
 
 
-def on_you_are_hit_but_dodge_it_do(me, hitter, x, y):
+def on_hit_dodge_do(me, hitter, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monster_roar")
 
 
@@ -130,8 +130,8 @@ def tp_init(name, text_long_name):
     my.on_awake_do(self, "me.on_awake()")
     my.on_born_do(self, "me.on_born()")
     my.on_death_do(self, "me.on_death()")
-    my.on_you_are_hit_but_dodge_it_do(self, "me.on_you_are_hit_but_dodge_it_do()")
-    my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
+    my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
+    my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
     my.on_you_nat_att_do(self, "me.on_you_nat_att()")
     my.rarity(self, my.RARITY_COMMON)
     my.stamina(self, 100)

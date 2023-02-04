@@ -22,7 +22,7 @@ def explode(me, x, y):
     my.thing_dead(me, "exploded")
 
 
-def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
+def on_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
     explode(me, x, y)
 
 
@@ -85,8 +85,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.normal_placement_rules(self, True)
     my.on_dropped_do(self, "me.on_dropped()")
     my.on_fall_do(self, "me.on_fall()")
+    my.on_hit_and_now_dead_do(self, "me.on_hit_and_now_dead()")
     my.on_use_do(self, "me.on_use()")
-    my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "This most dangerous stone can devastate any are where it is thrown. Be careful where you drop it...")

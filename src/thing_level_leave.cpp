@@ -14,7 +14,7 @@ void Thing::level_leave(void)
   //
   if (is_loggable()) {
     if (! level->is_being_destroyed) {
-      dbg("Leave %s", level->to_string().c_str());
+      dbg2("Leave %s", level->to_string().c_str());
     }
   }
   TRACE_AND_INDENT();

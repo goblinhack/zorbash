@@ -74,6 +74,9 @@ const std::string &Tp::on_fall_begin_do(void) const { return _on_fall_begin_do; 
 const std::string &Tp::on_fall_do(void) const { return _on_fall_do; }
 const std::string &Tp::on_final_use_do(void) const { return _on_final_use_do; }
 const std::string &Tp::on_get_text_description_long_do(void) const { return _on_get_text_description_long_do; }
+const std::string &Tp::on_hit_and_now_dead_do(void) const { return _on_hit_and_now_dead_do; }
+const std::string &Tp::on_hit_and_still_alive_do(void) const { return _on_hit_and_still_alive_do; }
+const std::string &Tp::on_hit_dodge_do(void) const { return _on_hit_dodge_do; }
 const std::string &Tp::on_jump_do(void) const { return _on_jump_do; }
 const std::string &Tp::on_lifespan_tick_do(void) const { return _on_lifespan_tick_do; }
 const std::string &Tp::on_move_do(void) const { return _on_move_do; }
@@ -161,9 +164,6 @@ const std::string &Tp::on_waiting_do(void) const { return _on_waiting_do; }
 const std::string &Tp::on_want_to_shoot_at_something_do(void) const { return _on_want_to_shoot_at_something_do; }
 const std::string &Tp::on_you_are_declared_a_follower_do(void) const { return _on_you_are_declared_a_follower_do; }
 const std::string &Tp::on_you_are_declared_leader_do(void) const { return _on_you_are_declared_leader_do; }
-const std::string &Tp::on_you_are_hit_and_now_dead_do(void) const { return _on_you_are_hit_and_now_dead_do; }
-const std::string &Tp::on_you_are_hit_but_dodge_it_do(void) const { return _on_you_are_hit_but_dodge_it_do; }
-const std::string &Tp::on_you_are_hit_but_still_alive_do(void) const { return _on_you_are_hit_but_still_alive_do; }
 const std::string &Tp::on_you_are_on_fire_do(void) const { return _on_you_are_on_fire_do; }
 const std::string &Tp::on_you_nat_att_do(void) const { return _on_you_nat_att_do; }
 const std::string &Tp::spawn_on_shoved(void) const { return _spawn_on_shoved; }
@@ -638,10 +638,10 @@ int Tp::noise_blocker(void) const { return _noise_blocker; }
 int Tp::noise_decibels_hearing(void) const { return _noise_decibels_hearing; }
 int Tp::noise_on_born(void) const { return _noise_on_born; }
 int Tp::noise_on_dropping(void) const { return _noise_on_dropping; }
+int Tp::noise_on_hit_and_now_dead(void) const { return _noise_on_hit_and_now_dead; }
+int Tp::noise_on_hit_and_still_alive(void) const { return _noise_on_hit_and_still_alive; }
 int Tp::noise_on_moving(void) const { return _noise_on_moving; }
 int Tp::noise_on_open(void) const { return _noise_on_open; }
-int Tp::noise_on_you_are_hit_and_now_dead(void) const { return _noise_on_you_are_hit_and_now_dead; }
-int Tp::noise_on_you_are_hit_but_still_alive(void) const { return _noise_on_you_are_hit_but_still_alive; }
 int Tp::normal_placement_rules(void) const { return _normal_placement_rules; }
 int Tp::on_death_drop_all_items(void) const { return _on_death_drop_all_items; }
 int Tp::on_death_is_open(void) const { return _on_death_is_open; }
@@ -1181,10 +1181,10 @@ void Tp::noise_blocker_set(int v) { _noise_blocker = v; }
 void Tp::noise_decibels_hearing_set(int v) { _noise_decibels_hearing = v; }
 void Tp::noise_on_born_set(int v) { _noise_on_born = v; }
 void Tp::noise_on_dropping_set(int v) { _noise_on_dropping = v; }
+void Tp::noise_on_hit_and_now_dead_set(int v) { _noise_on_hit_and_now_dead = v; }
+void Tp::noise_on_hit_and_still_alive_set(int v) { _noise_on_hit_and_still_alive = v; }
 void Tp::noise_on_moving_set(int v) { _noise_on_moving = v; }
 void Tp::noise_on_open_set(int v) { _noise_on_open = v; }
-void Tp::noise_on_you_are_hit_and_now_dead_set(int v) { _noise_on_you_are_hit_and_now_dead = v; }
-void Tp::noise_on_you_are_hit_but_still_alive_set(int v) { _noise_on_you_are_hit_but_still_alive = v; }
 void Tp::normal_placement_rules_set(int v) { _normal_placement_rules = v; }
 void Tp::on_attacking_dmg_acid_do_set(const std::string &v) { _on_attacking_dmg_acid_do = v; }
 void Tp::on_attacking_dmg_bite_do_set(const std::string &v) { _on_attacking_dmg_bite_do = v; }
@@ -1222,6 +1222,9 @@ void Tp::on_fall_begin_do_set(const std::string &v) { _on_fall_begin_do = v; }
 void Tp::on_fall_do_set(const std::string &v) { _on_fall_do = v; }
 void Tp::on_final_use_do_set(const std::string &v) { _on_final_use_do = v; }
 void Tp::on_get_text_description_long_do_set(const std::string &v) { _on_get_text_description_long_do = v; }
+void Tp::on_hit_and_now_dead_do_set(const std::string &v) { _on_hit_and_now_dead_do = v; }
+void Tp::on_hit_and_still_alive_do_set(const std::string &v) { _on_hit_and_still_alive_do = v; }
+void Tp::on_hit_dodge_do_set(const std::string &v) { _on_hit_dodge_do = v; }
 void Tp::on_jump_do_set(const std::string &v) { _on_jump_do = v; }
 void Tp::on_lifespan_tick_do_set(const std::string &v) { _on_lifespan_tick_do = v; }
 void Tp::on_move_do_set(const std::string &v) { _on_move_do = v; }
@@ -1309,9 +1312,6 @@ void Tp::on_waiting_do_set(const std::string &v) { _on_waiting_do = v; }
 void Tp::on_want_to_shoot_at_something_do_set(const std::string &v) { _on_want_to_shoot_at_something_do = v; }
 void Tp::on_you_are_declared_a_follower_do_set(const std::string &v) { _on_you_are_declared_a_follower_do = v; }
 void Tp::on_you_are_declared_leader_do_set(const std::string &v) { _on_you_are_declared_leader_do = v; }
-void Tp::on_you_are_hit_and_now_dead_do_set(const std::string &v) { _on_you_are_hit_and_now_dead_do = v; }
-void Tp::on_you_are_hit_but_dodge_it_do_set(const std::string &v) { _on_you_are_hit_but_dodge_it_do = v; }
-void Tp::on_you_are_hit_but_still_alive_do_set(const std::string &v) { _on_you_are_hit_but_still_alive_do = v; }
 void Tp::on_you_are_on_fire_do_set(const std::string &v) { _on_you_are_on_fire_do = v; }
 void Tp::on_you_nat_att_do_set(const std::string &v) { _on_you_nat_att_do = v; }
 void Tp::range_max_set(int v) { _range_max = v; }

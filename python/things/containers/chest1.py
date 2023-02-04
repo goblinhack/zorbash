@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
+def on_hit_and_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, f"door_hit{my.non_pcg_randint(1, 2)}")
 
 
@@ -63,8 +63,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_death_do(self, "me.on_death()")
     my.on_death_drop_all_items(self, True)
     my.on_death_is_open(self, True)
+    my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_open_do(self, "me.on_open()")
-    my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "A small treasure chest.")
     my.text_description_short(self, "A small treasure chest.")

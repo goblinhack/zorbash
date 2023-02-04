@@ -12,7 +12,7 @@ void Thing::level_enter(bool rejoin)
   TRACE_NO_INDENT();
 
   if (is_loggable()) {
-    dbg("Enter level %s", level->to_string().c_str());
+    dbg2("Enter level %s", level->to_string().c_str());
   }
 
   auto result = level->all_things.insert(std::pair(id, this));
@@ -148,7 +148,7 @@ void Thing::level_enter(bool rejoin)
   if (is_player()) {
     game->set_request_to_remake_rightbar();
 
-    dbg("Level entered");
+    dbg2("Level entered");
 
     level->player = this;
     game->set_meta_data(level);

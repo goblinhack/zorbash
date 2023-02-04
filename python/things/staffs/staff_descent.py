@@ -77,7 +77,7 @@ def on_thrown(owner, me, x, y):
     explode(me, x, y)
 
 
-def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
+def on_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
     explode(me, x, y)
 
 
@@ -136,11 +136,11 @@ def tp_init(name, text_long_name, text_short_name):
     my.normal_placement_rules(self, True)
     my.on_fall_do(self, "me.on_fall()")
     my.on_final_use_do(self, "me.on_final_use()")
+    my.on_hit_and_now_dead_do(self, "me.on_hit_and_now_dead()")
     my.on_idle_tick_freq_dice(self, "1d1000+200:me.on_idle()")
     my.on_targetted_do(self, "me.on_targetted()")
     my.on_targetted_radially_do(self, "me.on_targetted_radially()")
     my.on_thrown_do(self, "me.on_thrown()")
-    my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.range_max(self, 7)
     my.text_a_or_an(self, "a")

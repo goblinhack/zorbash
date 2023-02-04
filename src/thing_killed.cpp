@@ -326,7 +326,9 @@ void Thing::killed(Thingp defeater, const char *reason)
       game->wid_dead_select(reason);
     } else if (is_loggable()) {
       TRACE_NO_INDENT();
-      dbg("%s is killed, %s", The_no_dying.c_str(), reason);
+      if (is_loggable()) {
+        dbg("%s is killed, %s", The_no_dying.c_str(), reason);
+      }
       if (defeater && (defeater != this)) {
         //
         // Killed by something other than itself.

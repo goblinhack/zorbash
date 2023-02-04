@@ -40,8 +40,8 @@ void Thing::on_move(void)
       mod = name();
     }
 
-    dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(), (int) curr_at.x,
-        (int) curr_at.y);
+    dbg2("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(), (int) curr_at.x,
+         (int) curr_at.y);
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
@@ -64,7 +64,7 @@ void Thing::move_finish(void)
   where_i_dropped_an_item_last_set(point(-1, -1));
 
   if (is_player() && ! is_dead) {
-    dbg("Check if anything to carry");
+    dbg2("Check if anything to carry");
     if (check_anything_to_carry(true)) {
       BOTCON("Press %%fg=yellow$%s%%fg=reset$ or click to collect.",
              ::to_string(game->config.key_wait_or_collect).c_str());
@@ -96,9 +96,9 @@ void Thing::move_finish(void)
           s += " " + p1.to_string();
         }
         if (s.empty()) {
-          dbg("End of move");
+          dbg2("End of move");
         } else {
-          dbg("End of move, moves left:%s", s.c_str());
+          dbg2("End of move, moves left:%s", s.c_str());
         }
       }
     }
@@ -113,7 +113,7 @@ bool Thing::move(point future_pos)
 {
   TRACE_NO_INDENT();
   if (! is_hidden) {
-    dbg("Move to %d,%d", future_pos.x, future_pos.y);
+    dbg2("Move to %d,%d", future_pos.x, future_pos.y);
   }
 
   bool up              = future_pos.y < curr_at.y;
@@ -134,7 +134,7 @@ bool Thing::move(point future_pos)
 bool Thing::move_no_shove_no_attack(point future_pos)
 {
   TRACE_NO_INDENT();
-  dbg("Move, no shove, no attack to %s", future_pos.to_string().c_str());
+  dbg2("Move, no shove, no attack to %s", future_pos.to_string().c_str());
   bool up              = future_pos.y < curr_at.y;
   bool down            = future_pos.y > curr_at.y;
   bool left            = future_pos.x < curr_at.x;
@@ -153,7 +153,7 @@ bool Thing::move_no_shove_no_attack(point future_pos)
 bool Thing::move_no_shove_attack_allowed(point future_pos)
 {
   TRACE_NO_INDENT();
-  dbg("Move, no shove, attack allowed to %s", future_pos.to_string().c_str());
+  dbg2("Move, no shove, attack allowed to %s", future_pos.to_string().c_str());
   bool up              = future_pos.y < curr_at.y;
   bool down            = future_pos.y > curr_at.y;
   bool left            = future_pos.x < curr_at.x;
@@ -180,34 +180,34 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       // Extra 0.5 is to allow diagonal attacks when vision is only 1; e.g. vampire rose.
       //
       if (distance(future_pos, curr_at) <= 1.5) {
-        dbg("Cannot move but can lunge attack");
+        dbg2("Cannot move but can lunge attack");
       } else {
-        dbg("Cannot move; I am not moveable");
+        dbg2("Cannot move; I am not moveable");
         return false;
       }
     } else {
-      dbg("Cannot move; I am not moveable");
+      dbg2("Cannot move; I am not moveable");
       return false;
     }
   }
   if (is_dead) {
-    dbg("Cannot move; dead");
+    dbg2("Cannot move; dead");
     return false;
   }
   if (is_hidden) {
-    dbg("Move; no, is hidden");
+    dbg2("Move; no, is hidden");
     return false;
   }
   if (is_changing_level) {
-    dbg("Move; no waiting on level change");
+    dbg2("Move; no waiting on level change");
     return false;
   }
   if (is_falling) {
-    dbg("Move; no, is falling");
+    dbg2("Move; no, is falling");
     return false;
   }
   if (is_jumping) {
-    dbg("Move; no, is jumping");
+    dbg2("Move; no, is jumping");
     return false;
   }
 
@@ -240,8 +240,8 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
           // Allow attacking at the edges of movement
           //
         } else {
-          dbg("Minion cannot move to %d,%d (new-dist %f, curr-dist %f); it tugs at the leash at %d,%d", future_pos.x,
-              future_pos.y, new_distance, curr_distance, mob->curr_at.x, mob->curr_at.y);
+          dbg2("Minion cannot move to %d,%d (new-dist %f, curr-dist %f); it tugs at the leash at %d,%d", future_pos.x,
+               future_pos.y, new_distance, curr_distance, mob->curr_at.x, mob->curr_at.y);
           //
           // Don't make spiders (minions to webs) lunge
           //
@@ -334,7 +334,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     game->tick_begin("player idled");
 
     if (! game->robot_mode) {
-      dbg("Check if there is anything to carry here");
+      dbg2("Check if there is anything to carry here");
       auto items = anything_to_carry();
       if (! items.empty()) {
         //
@@ -365,28 +365,28 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   // Do this after wait checks, so the player can bump the tick if stuck.
   //
   if (is_waiting_to_ascend_dungeon) {
-    dbg("Move; no, is waiting to ascend dungeon");
+    dbg2("Move; no, is waiting to ascend dungeon");
     if (is_player()) {
       game->tick_begin("player waiting to ascend");
     }
     return false;
   }
   if (is_waiting_to_descend_sewer) {
-    dbg("Move; no, is waiting to descend sewer");
+    dbg2("Move; no, is waiting to descend sewer");
     if (is_player()) {
       game->tick_begin("player waiting to descend");
     }
     return false;
   }
   if (is_waiting_to_descend_dungeon) {
-    dbg("Move; no, is waiting to descend dungeon");
+    dbg2("Move; no, is waiting to descend dungeon");
     if (is_player()) {
       game->tick_begin("player waiting to descend");
     }
     return false;
   }
   if (is_waiting_to_ascend_sewer) {
-    dbg("Move; no, is waiting to ascend sewer");
+    dbg2("Move; no, is waiting to ascend sewer");
     if (is_player()) {
       game->tick_begin("player waiting to ascend");
     }
@@ -409,7 +409,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   }
 
   if (must_attack) {
-    dbg("Must attack at %s", future_pos.to_string().c_str());
+    dbg2("Must attack at %s", future_pos.to_string().c_str());
     TRACE_AND_INDENT();
 
     equip_use(must_attack, MONST_EQUIP_WEAPON, attack_options);
@@ -430,29 +430,29 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     }
 
     if (up) {
-      dbg("Try to move up; collision check");
+      dbg2("Try to move up; collision check");
     } else if (down) {
-      dbg("Try to move down; collision check");
+      dbg2("Try to move down; collision check");
     } else if (left) {
-      dbg("Try to move left; collision check");
+      dbg2("Try to move left; collision check");
     } else if (right) {
-      dbg("Try to move right; collision check");
+      dbg2("Try to move right; collision check");
     } else if (must_attack) {
-      dbg("Try to move (attack); collision check");
+      dbg2("Try to move (attack); collision check");
     }
 
     if (collision_check_only(future_pos)) {
-      dbg("Collided with something");
+      dbg2("Collided with something");
       TRACE_AND_INDENT();
 
       if (attack_options->shove_allowed) {
-        dbg("Try to shove");
+        dbg2("Try to shove");
         if (is_player()) {
           game->tick_begin("player tried to shove");
         }
         try_to_shove(future_pos);
       } else if (attack_options->attack_allowed) {
-        dbg("Try to attack at %s", future_pos.to_string().c_str());
+        dbg2("Try to attack at %s", future_pos.to_string().c_str());
         TRACE_AND_INDENT();
 
         //
@@ -463,7 +463,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
           if (level->cursor->curr_at == future_pos) {
             attack_options->attack_at_set = true;
             attack_options->attack_at     = level->cursor->curr_at;
-            dbg("Try to attack at cursor location");
+            dbg2("Try to attack at cursor location");
           }
         }
 
@@ -472,9 +472,9 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
           return true;
         }
       } else {
-        dbg("Cannot shove or attack");
+        dbg2("Cannot shove or attack");
       }
-      dbg("Move failed");
+      dbg2("Move failed");
       lunge(future_pos);
       clear_move_path("Move failed");
       return false;
@@ -504,7 +504,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
 
     if (free_attack) {
       TRACE_NO_INDENT();
-      dbg("Free attack by %s", t->to_short_string().c_str());
+      dbg2("Free attack by %s", t->to_short_string().c_str());
       ThingAttackOptions attack_options {};
       if (t->attack(this, &attack_options)) {
         //
@@ -624,7 +624,7 @@ void Thing::update_interpolated_position(void)
   } else if (! is_moving) {
     if (curr_at != last_at) {
       if (! is_hidden) {
-        dbg("Changed position (new %d,%d, old %d,%d)", curr_at.x, curr_at.y, last_at.x, last_at.y);
+        dbg2("Changed position (new %d,%d, old %d,%d)", curr_at.x, curr_at.y, last_at.x, last_at.y);
       }
 
       new_pos = make_fpoint(curr_at);
@@ -633,7 +633,7 @@ void Thing::update_interpolated_position(void)
   } else if (game->tick_dt >= 1) {
     if (curr_at != last_at) {
       if (! is_hidden) {
-        dbg("End of move position (new %d,%d, old %d,%d)", curr_at.x, curr_at.y, last_at.x, last_at.y);
+        dbg2("End of move position (new %d,%d, old %d,%d)", curr_at.x, curr_at.y, last_at.x, last_at.y);
       }
       level->noisemap_in_incr(curr_at.x, curr_at.y, noise_total());
 
@@ -696,7 +696,7 @@ void Thing::update_pos(point to, bool immediately)
   }
 
   if (! is_hidden) {
-    dbg("Move to %d,%d", to.x, to.y);
+    dbg2("Move to %d,%d", to.x, to.y);
   }
 
   if (is_player()) {
@@ -799,9 +799,9 @@ void Thing::move_to_immediately(point to)
 bool Thing::move_to_try(const point nh, const bool escaping, bool check_only)
 {
   if (escaping) {
-    dbg("Escape to attempt %d,%d", nh.x, nh.y);
+    dbg2("Escape to attempt %d,%d", nh.x, nh.y);
   } else {
-    dbg("Move to attempt %d,%d", nh.x, nh.y);
+    dbg2("Move to attempt %d,%d", nh.x, nh.y);
   }
   TRACE_AND_INDENT();
 
@@ -817,7 +817,7 @@ bool Thing::move_to_try(const point nh, const bool escaping, bool check_only)
     // We would hit something and cannot do this move. However,
     // see if we can hit the thing that is in the way.
     //
-    dbg("Cannot move to %d,%d will hit obstacle or monst", nh.x, nh.y);
+    dbg2("Cannot move to %d,%d will hit obstacle or monst", nh.x, nh.y);
     TRACE_AND_INDENT();
 
     ThingAttackOptions attack_options {};
@@ -825,18 +825,18 @@ bool Thing::move_to_try(const point nh, const bool escaping, bool check_only)
     attack_options.victim_overlaps = false;
     collision_check_and_handle_nearby(nh, &attack_options);
     if (attack_options.victim_attacked) {
-      dbg("Cannot move to %d,%d, must attack", nh.x, nh.y);
+      dbg2("Cannot move to %d,%d, must attack", nh.x, nh.y);
       return true;
     }
-    dbg("Cannot move to %d,%d, obstacle", nh.x, nh.y);
+    dbg2("Cannot move to %d,%d, obstacle", nh.x, nh.y);
     return false;
   }
-  dbg("Move to %d,%d is ok", nh.x, nh.y);
+  dbg2("Move to %d,%d is ok", nh.x, nh.y);
 
   if (! escaping) {
     if (terrain_cost_get(nh) >= DMAP_LESS_PREFERRED_TERRAIN) {
       TRACE_NO_INDENT();
-      dbg("But %d,%d is less preferred terrain, avoid", nh.x, nh.y);
+      dbg2("But %d,%d is less preferred terrain, avoid", nh.x, nh.y);
       return false;
     }
   }
@@ -849,35 +849,35 @@ bool Thing::move_to_try(const point nh, const bool escaping, bool check_only)
 
 bool Thing::move_to_or_attack(const point nh)
 {
-  dbg("Move to or attack");
+  dbg2("Move to or attack");
   TRACE_AND_INDENT();
   return move_to_try(nh, false, false);
 }
 
 bool Thing::move_to_or_escape(const point nh)
 {
-  dbg("Move to or escape");
+  dbg2("Move to or escape");
   TRACE_AND_INDENT();
   return move_to_try(nh, true, false);
 }
 
 bool Thing::move_to_or_attack_check_only(const point nh)
 {
-  dbg("Move to or attack");
+  dbg2("Move to or attack");
   TRACE_AND_INDENT();
   return move_to_try(nh, false, true);
 }
 
 bool Thing::move_to_or_escape_check_only(const point nh)
 {
-  dbg("Move to or escape");
+  dbg2("Move to or escape");
   TRACE_AND_INDENT();
   return move_to_try(nh, true, true);
 }
 
 void Thing::clear_move_path(const std::string &why)
 {
-  dbg("Clear move path: %s", why.c_str());
+  dbg2("Clear move path: %s", why.c_str());
   TRACE_AND_INDENT();
 
   if (! maybe_aip()) {

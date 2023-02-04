@@ -758,6 +758,9 @@ public:
   const std::string &on_fall_do(void);
   const std::string &on_final_use_do(void);
   const std::string &on_get_text_description_long_do(void);
+  const std::string &on_hit_and_now_dead_do(void);
+  const std::string &on_hit_and_still_alive_do(void);
+  const std::string &on_hit_dodge_do(void);
   const std::string &on_idle_tick_freq_dice_str(void);
   const std::string &on_jump_do(void);
   const std::string &on_lifespan_tick_do(void);
@@ -846,9 +849,6 @@ public:
   const std::string &on_want_to_shoot_at_something_do(void);
   const std::string &on_you_are_declared_a_follower_do(void);
   const std::string &on_you_are_declared_leader_do(void);
-  const std::string &on_you_are_hit_and_now_dead_do(void);
-  const std::string &on_you_are_hit_but_dodge_it_do(void);
-  const std::string &on_you_are_hit_but_still_alive_do(void);
   const std::string &on_you_are_on_fire_do(void);
   const std::string &on_you_nat_att_do(void);
   const std::string &poison_reason_get(void);
@@ -1596,12 +1596,12 @@ public:
   int noise_incr(void);
   int noise_on_born(void);
   int noise_on_dropping(void);
+  int noise_on_hit_and_now_dead(void);
+  int noise_on_hit_and_still_alive(void);
   int noise_on_jumping(void);
   int noise_on_moving(void);
   int noise_on_open(void);
   int noise_on_teleporting(void);
-  int noise_on_you_are_hit_and_now_dead(void);
-  int noise_on_you_are_hit_but_still_alive(void);
   int noise_set(int);
   int noise_total(void);
   int noise(void);
@@ -2384,6 +2384,9 @@ public:
   void on_final_use(Thingp what, Thingp target);
   void on_fire_unset(void);
   void on_fire(void);
+  void on_hit_and_now_dead(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
+  void on_hit_and_still_alive(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
+  void on_hit_dodge_do(Thingp hitter);
   void on_jump(void);
   void on_lifespan_tick(Thingp hitter);
   void on_move(void);
@@ -2407,9 +2410,6 @@ public:
   void on_waiting(void);
   void on_you_are_declared_a_follower(Thingp leader);
   void on_you_are_declared_leader(void);
-  void on_you_are_hit_and_now_dead(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
-  void on_you_are_hit_but_dodge_it_do(Thingp hitter);
-  void on_you_are_hit_but_still_alive(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
   void on_you_nat_att(void);
   void owner_set(Thingp owner);
   void owner_unset(void);

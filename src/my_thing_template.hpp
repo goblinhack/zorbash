@@ -564,10 +564,10 @@ private:
   int _noise_decibels_hearing {};
   int _noise_on_born {};
   int _noise_on_dropping {};
+  int _noise_on_hit_and_now_dead {};
+  int _noise_on_hit_and_still_alive {};
   int _noise_on_moving {};
   int _noise_on_open {};
-  int _noise_on_you_are_hit_and_now_dead {};
-  int _noise_on_you_are_hit_but_still_alive {};
   int _normal_placement_rules {};
   int _on_death_drop_all_items {};
   int _on_death_is_open {};
@@ -715,6 +715,9 @@ private:
   std::string _on_fall_do;
   std::string _on_final_use_do;
   std::string _on_get_text_description_long_do;
+  std::string _on_hit_and_now_dead_do;
+  std::string _on_hit_and_still_alive_do;
+  std::string _on_hit_dodge_do;
   std::string _on_idle_tick_freq_dice_str;
   std::string _on_jump_do;
   std::string _on_lifespan_tick_do;
@@ -803,9 +806,6 @@ private:
   std::string _on_want_to_shoot_at_something_do;
   std::string _on_you_are_declared_a_follower_do;
   std::string _on_you_are_declared_leader_do;
-  std::string _on_you_are_hit_and_now_dead_do;
-  std::string _on_you_are_hit_but_dodge_it_do;
-  std::string _on_you_are_hit_but_still_alive_do;
   std::string _on_you_are_on_fire_do;
   std::string _on_you_nat_att_do;
   std::string _resurrect_dice_str;
@@ -1045,6 +1045,9 @@ public:
   const std::string &on_fall_do(void) const;
   const std::string &on_final_use_do(void) const;
   const std::string &on_get_text_description_long_do(void) const;
+  const std::string &on_hit_and_now_dead_do(void) const;
+  const std::string &on_hit_and_still_alive_do(void) const;
+  const std::string &on_hit_dodge_do(void) const;
   const std::string &on_idle_tick_freq_dice_str(void) const;
   const std::string &on_jump_do(void) const;
   const std::string &on_lifespan_tick_do(void) const;
@@ -1133,9 +1136,6 @@ public:
   const std::string &on_want_to_shoot_at_something_do(void) const;
   const std::string &on_you_are_declared_a_follower_do(void) const;
   const std::string &on_you_are_declared_leader_do(void) const;
-  const std::string &on_you_are_hit_and_now_dead_do(void) const;
-  const std::string &on_you_are_hit_but_dodge_it_do(void) const;
-  const std::string &on_you_are_hit_but_still_alive_do(void) const;
   const std::string &on_you_are_on_fire_do(void) const;
   const std::string &on_you_nat_att_do(void) const;
   const std::string &resurrect_dice_str(void) const;
@@ -1632,10 +1632,10 @@ public:
   int noise_decibels_hearing(void) const;
   int noise_on_born(void) const;
   int noise_on_dropping(void) const;
+  int noise_on_hit_and_now_dead(void) const;
+  int noise_on_hit_and_still_alive(void) const;
   int noise_on_moving(void) const;
   int noise_on_open(void) const;
-  int noise_on_you_are_hit_and_now_dead(void) const;
-  int noise_on_you_are_hit_but_still_alive(void) const;
   int normal_placement_rules(void) const;
   int on_death_drop_all_items(void) const;
   int on_death_is_open(void) const;
@@ -2175,10 +2175,10 @@ public:
   void noise_decibels_hearing_set(int v);
   void noise_on_born_set(int v);
   void noise_on_dropping_set(int v);
+  void noise_on_hit_and_now_dead_set(int v);
+  void noise_on_hit_and_still_alive_set(int v);
   void noise_on_moving_set(int v);
   void noise_on_open_set(int v);
-  void noise_on_you_are_hit_and_now_dead_set(int v);
-  void noise_on_you_are_hit_but_still_alive_set(int v);
   void normal_placement_rules_set(int v);
   void on_attacking_dmg_acid_do_set(const std::string &v);
   void on_attacking_dmg_bite_do_set(const std::string &v);
@@ -2216,6 +2216,9 @@ public:
   void on_fall_do_set(const std::string &v);
   void on_final_use_do_set(const std::string &v);
   void on_get_text_description_long_do_set(const std::string &v);
+  void on_hit_and_now_dead_do_set(const std::string &v);
+  void on_hit_and_still_alive_do_set(const std::string &v);
+  void on_hit_dodge_do_set(const std::string &v);
   void on_jump_do_set(const std::string &v);
   void on_lifespan_tick_do_set(const std::string &v);
   void on_move_do_set(const std::string &v);
@@ -2303,9 +2306,6 @@ public:
   void on_want_to_shoot_at_something_do_set(const std::string &v);
   void on_you_are_declared_a_follower_do_set(const std::string &v);
   void on_you_are_declared_leader_do_set(const std::string &v);
-  void on_you_are_hit_and_now_dead_do_set(const std::string &v);
-  void on_you_are_hit_but_dodge_it_do_set(const std::string &v);
-  void on_you_are_hit_but_still_alive_do_set(const std::string &v);
   void on_you_are_on_fire_do_set(const std::string &v);
   void on_you_nat_att_do_set(const std::string &v);
   void range_max_set(int v);

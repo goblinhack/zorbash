@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
+def on_hit_and_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, f"door_hit{my.non_pcg_randint(1, 2)}")
 
 
@@ -52,14 +52,14 @@ def tp_init(name):
     my.is_obs_in_the_way_for_jumping(self, True)
     my.is_obs_wall_or_door(self, True)
     my.noise_blocker(self, True)
+    my.noise_on_hit_and_now_dead(self, 100)
+    my.noise_on_hit_and_still_alive(self, 100)
     my.noise_on_open(self, 60)
-    my.noise_on_you_are_hit_and_now_dead(self, 100)
-    my.noise_on_you_are_hit_but_still_alive(self, 100)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
     my.on_death_is_open(self, True)
+    my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_open_do(self, "me.on_open()")
-    my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
     my.stat_def(self, 20)
     my.text_a_or_an(self, "the")
     my.text_description_short(self, "A metal door that's not for opening.")

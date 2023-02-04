@@ -23,17 +23,17 @@ void Thing::location_check(Thingp filter_to)
   // Prevent interactions that might generate things like smoke.
   //
   if (level->is_being_destroyed) {
-    dbg("Location check, skip, level is being destroyed");
+    dbg2("Location check, skip, level is being destroyed");
     return;
   }
 
   if (is_being_destroyed) {
-    dbg("Location check, skip, being destroyed");
+    dbg2("Location check, skip, being destroyed");
     return;
   }
 
   if (is_hidden) {
-    dbg("Location check, skip, is hidden");
+    dbg2("Location check, skip, is hidden");
     return;
   }
 
@@ -46,11 +46,11 @@ void Thing::location_check(Thingp filter_to)
     //
     // Skip interactions
     //
-    dbg("Location check, skip");
+    dbg2("Location check, skip");
     return;
   }
 
-  dbg("Location check");
+  dbg2("Location check");
   TRACE_AND_INDENT();
 
   //
@@ -157,19 +157,19 @@ void Thing::location_check(Thingp filter_to)
     if (is_player()) {
       if (game->robot_mode) {
         auto ai = maybe_aip();
-        dbg("Location check, over ascend sewer or dungeon (move path len %d)", (int) ai->move_path.size());
+        dbg2("Location check, over ascend sewer or dungeon (move path len %d)", (int) ai->move_path.size());
         if (! ai->move_path.size()) {
-          dbg("Location check, set ascend check (1)");
+          dbg2("Location check, set ascend check (1)");
           ascend_check = true;
         }
       } else if (game->request_player_to_ascend_level || (curr_at == game->cursor_move_end)) {
-        dbg("Location check, over ascend sewer or dungeon (move end @%d,%d)", game->cursor_move_end.x,
-            game->cursor_move_end.y);
-        dbg("Location check, set ascend check (2)");
+        dbg2("Location check, over ascend sewer or dungeon (move end @%d,%d)", game->cursor_move_end.x,
+             game->cursor_move_end.y);
+        dbg2("Location check, set ascend check (2)");
         ascend_check = true;
       }
     } else if (pcg_random_range(0, 100) < 10) {
-      dbg("Location check, set ascend check (3)");
+      dbg2("Location check, set ascend check (3)");
       ascend_check = true;
     }
   }
@@ -178,38 +178,38 @@ void Thing::location_check(Thingp filter_to)
     if (is_player()) {
       if (game->robot_mode) {
         auto ai = maybe_aip();
-        dbg("Location check, over descend sewer or dungeon (move path len %d)", (int) ai->move_path.size());
+        dbg2("Location check, over descend sewer or dungeon (move path len %d)", (int) ai->move_path.size());
         if (! ai->move_path.size()) {
-          dbg("Location check, set descend check (1)");
+          dbg2("Location check, set descend check (1)");
           descend_check = true;
         }
       } else if (game->request_player_to_descend_level || (curr_at == game->cursor_move_end)) {
-        dbg("Location check, over descend sewer or dungeon (cursor move end @%d,%d)", game->cursor_move_end.x,
-            game->cursor_move_end.y);
-        dbg("Location check, set descend check (2)");
+        dbg2("Location check, over descend sewer or dungeon (cursor move end @%d,%d)", game->cursor_move_end.x,
+             game->cursor_move_end.y);
+        dbg2("Location check, set descend check (2)");
         descend_check = true;
       }
     } else if (pcg_random_range(0, 100) < 10) {
-      dbg("Location check, set descend check (3)");
+      dbg2("Location check, set descend check (3)");
       descend_check = true;
     }
   }
 
   if (ascend_check) {
-    dbg("Location check, ascend check");
+    dbg2("Location check, ascend check");
     if (ascend_dungeon_tick()) {
-      dbg("Location check, ascending dungeon");
+      dbg2("Location check, ascending dungeon");
     } else if (ascend_sewer_tick()) {
-      dbg("Location check, ascending sewer");
+      dbg2("Location check, ascending sewer");
     }
   }
 
   if (descend_check) {
-    dbg("Location check, descend check");
+    dbg2("Location check, descend check");
     if (descend_dungeon_tick()) {
-      dbg("Location check, descending dungeon");
+      dbg2("Location check, descending dungeon");
     } else if (descend_sewer_tick()) {
-      dbg("Location check, descending sewer");
+      dbg2("Location check, descending sewer");
     }
   }
 

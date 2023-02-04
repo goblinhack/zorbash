@@ -14,21 +14,21 @@
 //
 // Python callback upon being hit
 //
-void Thing::on_you_are_hit_but_still_alive(Thingp hitter,      // an arrow / monst /...
-                                           Thingp real_hitter, // who fired the arrow?
-                                           bool crit, int damage)
+void Thing::on_hit_and_still_alive(Thingp hitter,      // an arrow / monst /...
+                                   Thingp real_hitter, // who fired the arrow?
+                                   bool crit, int damage)
 {
   if (is_dead) {
     return;
   }
 
   TRACE_NO_INDENT();
-  auto on_you_are_hit_but_still_alive = tp()->on_you_are_hit_but_still_alive_do();
-  if (std::empty(on_you_are_hit_but_still_alive)) {
+  auto on_hit_and_still_alive = tp()->on_hit_and_still_alive_do();
+  if (std::empty(on_hit_and_still_alive)) {
     return;
   }
 
-  auto t = split_tokens(on_you_are_hit_but_still_alive, '.');
+  auto t = split_tokens(on_hit_and_still_alive, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -50,22 +50,22 @@ void Thing::on_you_are_hit_but_still_alive(Thingp hitter,      // an arrow / mon
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, real_hitter->id.id, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y, (unsigned int) crit, (unsigned int) damage);
   } else {
-    ERR("Bad on_you_are_hit_but_still_alive call [%s] expected mod:function, got %d elems",
-        on_you_are_hit_but_still_alive.c_str(), (int) on_you_are_hit_but_still_alive.size());
+    ERR("Bad on_hit_and_still_alive call [%s] expected mod:function, got %d elems", on_hit_and_still_alive.c_str(),
+        (int) on_hit_and_still_alive.size());
   }
 }
 
-void Thing::on_you_are_hit_and_now_dead(Thingp hitter,      // an arrow / monst /...
-                                        Thingp real_hitter, // who fired the arrow?
-                                        bool crit, int damage)
+void Thing::on_hit_and_now_dead(Thingp hitter,      // an arrow / monst /...
+                                Thingp real_hitter, // who fired the arrow?
+                                bool crit, int damage)
 {
   TRACE_NO_INDENT();
-  auto on_you_are_hit_and_now_dead = tp()->on_you_are_hit_and_now_dead_do();
-  if (std::empty(on_you_are_hit_and_now_dead)) {
+  auto on_hit_and_now_dead = tp()->on_hit_and_now_dead_do();
+  if (std::empty(on_hit_and_now_dead)) {
     return;
   }
 
-  auto t = split_tokens(on_you_are_hit_and_now_dead, '.');
+  auto t = split_tokens(on_hit_and_now_dead, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -87,27 +87,27 @@ void Thing::on_you_are_hit_and_now_dead(Thingp hitter,      // an arrow / monst 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, real_hitter->id.id, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y, (unsigned int) crit, (unsigned int) damage);
   } else {
-    ERR("Bad on_you_are_hit_and_now_dead call [%s] expected mod:function, got %d elems",
-        on_you_are_hit_and_now_dead.c_str(), (int) on_you_are_hit_and_now_dead.size());
+    ERR("Bad on_hit_and_now_dead call [%s] expected mod:function, got %d elems", on_hit_and_now_dead.c_str(),
+        (int) on_hit_and_now_dead.size());
   }
 }
 
 //
 // Python callback upon being miss
 //
-void Thing::on_you_are_hit_but_dodge_it_do(Thingp hitter)
+void Thing::on_hit_dodge_do(Thingp hitter)
 {
   if (is_dead) {
     return;
   }
 
   TRACE_NO_INDENT();
-  auto on_you_are_hit_but_dodge_it_do = tp()->on_you_are_hit_but_dodge_it_do();
-  if (std::empty(on_you_are_hit_but_dodge_it_do)) {
+  auto on_hit_dodge_do = tp()->on_hit_dodge_do();
+  if (std::empty(on_hit_dodge_do)) {
     return;
   }
 
-  auto t = split_tokens(on_you_are_hit_but_dodge_it_do, '.');
+  auto t = split_tokens(on_hit_dodge_do, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -125,8 +125,8 @@ void Thing::on_you_are_hit_but_dodge_it_do(Thingp hitter)
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
   } else {
-    ERR("Bad on_you_are_hit_but_dodge_it_do call [%s] expected mod:function, got %d elems",
-        on_you_are_hit_but_dodge_it_do.c_str(), (int) on_you_are_hit_but_dodge_it_do.size());
+    ERR("Bad on_hit_dodge_do call [%s] expected mod:function, got %d elems", on_hit_dodge_do.c_str(),
+        (int) on_hit_dodge_do.size());
   }
 }
 
@@ -1836,7 +1836,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     //
     // Record who dun it.
     //
-    dbg("Is killed by (%s) %u damage", real_hitter->to_short_string().c_str(), damage);
+    if (is_loggable()) {
+      dbg("Is killed by (%s) %u damage", real_hitter->to_short_string().c_str(), damage);
+    }
     std::string defeater = real_hitter->text_a_or_an();
 
     //
@@ -1959,23 +1961,23 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   // Python callback
   //
   if (is_dead || is_dying) {
-    on_you_are_hit_and_now_dead(hitter, real_hitter, attack_options->crit, damage);
+    on_hit_and_now_dead(hitter, real_hitter, attack_options->crit, damage);
 
     //
     // Set up noise, for example a door being hit
     //
-    level->noisemap_in_incr(curr_at.x, curr_at.y, noise_on_you_are_hit_but_still_alive());
+    level->noisemap_in_incr(curr_at.x, curr_at.y, noise_on_hit_and_still_alive());
   } else if (is_sleeping) {
     //
     // e.g. Gargoyle being attacked by ice and does not wake.
     //
   } else {
-    on_you_are_hit_but_still_alive(hitter, real_hitter, attack_options->crit, damage);
+    on_hit_and_still_alive(hitter, real_hitter, attack_options->crit, damage);
 
     //
     // Set up noise, for example a door being broken
     //
-    level->noisemap_in_incr(curr_at.x, curr_at.y, noise_on_you_are_hit_and_now_dead());
+    level->noisemap_in_incr(curr_at.x, curr_at.y, noise_on_hit_and_now_dead());
 
     //
     // Interrupt whatever the monster was doing.

@@ -5,7 +5,7 @@ import random
 
 # hitter: arrow / monst
 # real_hitter: who fired the arrow
-def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
+def on_hit_and_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     # my.con("I'm hit {} {:X} {},{} damage {}".format(my.thing_name_get(me), me, x, y, damage))
     if damage <= 5:
         my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, f"player_hit{my.non_pcg_randint(1, 4)}")
@@ -287,8 +287,8 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.on_death_do(self, "player.on_death()")
     my.on_death_drop_all_items(self, True)
     my.on_fall_begin_do(self, "player.on_fall_begin()")
+    my.on_hit_and_still_alive_do(self, "player.on_hit_and_still_alive()")
     my.on_move_do(self, "player.on_move()")
-    my.on_you_are_hit_but_still_alive_do(self, "player.on_you_are_hit_but_still_alive()")
     my.on_you_nat_att_do(self, "player.on_you_nat_att()")
     my.stamina(self, 100)
     my.stat_att_penalty_when_idle_max(self, 0)

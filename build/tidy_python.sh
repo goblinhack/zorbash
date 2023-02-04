@@ -485,8 +485,8 @@ do
       noise_on_dropping \
       noise_on_moving \
       noise_on_open \
-      noise_on_you_are_hit_and_now_dead \
-      noise_on_you_are_hit_but_still_alive \
+      noise_on_hit_and_now_dead \
+      noise_on_hit_and_still_alive \
       normal_placement_rules \
       on_death_drop_all_items \
       on_death_is_open \

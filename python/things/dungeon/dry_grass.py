@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
+def on_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
     if my.thing_is_fire(hitter):
         my.spawn_at_my_position(me, "small_fire")
         my.thing_msg(me, "The dry grass burns!")
@@ -28,7 +28,7 @@ def tp_init(name, tiles=[]):
     my.is_cursor_can_hover_over(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_dry_grass(self, True)
-    my.on_you_are_hit_and_now_dead_do(self, "dry_grass.on_you_are_hit_and_now_dead()")
+    my.on_hit_and_now_dead_do(self, "dry_grass.on_hit_and_now_dead()")
     my.temperature_max(self, 50)
     my.temperature_min(self, 0)
     my.temperature(self, 20)

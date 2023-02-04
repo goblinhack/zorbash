@@ -1592,7 +1592,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     return true;
   }
 
-  victim->on_you_are_hit_but_dodge_it_do(this);
+  victim->on_hit_dodge_do(this);
 
   //
   // Missiles?

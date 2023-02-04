@@ -2018,16 +2018,16 @@ int Thing::noise_on_open(void)
   return (tp()->noise_on_open());
 }
 
-int Thing::noise_on_you_are_hit_and_now_dead(void)
+int Thing::noise_on_hit_and_now_dead(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->noise_on_you_are_hit_and_now_dead());
+  return (tp()->noise_on_hit_and_now_dead());
 }
 
-int Thing::noise_on_you_are_hit_but_still_alive(void)
+int Thing::noise_on_hit_and_still_alive(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->noise_on_you_are_hit_but_still_alive());
+  return (tp()->noise_on_hit_and_still_alive());
 }
 
 int Thing::noise_decibels_hearing(void)
@@ -3969,16 +3969,16 @@ const std::string &Thing::on_want_to_shoot_at_something_do(void)
   return (tp()->on_want_to_shoot_at_something_do());
 }
 
-const std::string &Thing::on_you_are_hit_but_still_alive_do(void)
+const std::string &Thing::on_hit_and_still_alive_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_you_are_hit_but_still_alive_do());
+  return (tp()->on_hit_and_still_alive_do());
 }
 
-const std::string &Thing::on_you_are_hit_and_now_dead_do(void)
+const std::string &Thing::on_hit_and_now_dead_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_you_are_hit_and_now_dead_do());
+  return (tp()->on_hit_and_now_dead_do());
 }
 
 const std::string &Thing::on_lifespan_tick_do(void)
@@ -3987,10 +3987,10 @@ const std::string &Thing::on_lifespan_tick_do(void)
   return (tp()->on_lifespan_tick_do());
 }
 
-const std::string &Thing::on_you_are_hit_but_dodge_it_do(void)
+const std::string &Thing::on_hit_dodge_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_you_are_hit_but_dodge_it_do());
+  return (tp()->on_hit_dodge_do());
 }
 
 const std::string &Thing::on_move_do(void)
