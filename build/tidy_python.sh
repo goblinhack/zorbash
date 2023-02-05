@@ -181,7 +181,7 @@ do
       is_able_to_collect_keys \
       is_able_to_enchant_items \
       is_able_to_fall \
-      is_albe_to_shoot_at \
+      is_able_to_shoot_at \
       is_able_to_follow \
       is_able_to_freeze \
       is_able_to_jump \
@@ -519,15 +519,15 @@ do
       unused_flag123 \
       unused_flag13 \
       unused_flag14 \
-      unused_flag15 \
-      unused_flag16 \
+      is_ranged_weapon \
+      is_able_to_use_ranged_weapons \
       is_aerodynamic \
       is_light \
       is_missile \
       unused_flag2 \
       is_thrown_as_a_weapon \
       is_immune_to_electricity \
-      is_albe_to_shoot_at_close_range \
+      is_able_to_shoot_at_close_range \
       gfx_pixelart_show_highlighted \
       gfx_pixelart_show_square_outlined \
       is_able_to_see_invisible \

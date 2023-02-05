@@ -63,7 +63,7 @@ int Tp::get_danger_level(void)
   if (is_thief()) {
     danger_level += 20;
   }
-  if (is_albe_to_shoot_at()) {
+  if (is_able_to_shoot_at()) {
     danger_level += 20;
   }
   if (is_always_submerged()) {
@@ -160,7 +160,7 @@ int Thing::danger_initial_level(void)
   if (is_thief()) {
     danger_level += 20;
   }
-  if (is_albe_to_shoot_at()) {
+  if (is_able_to_shoot_at()) {
     danger_level += 20;
   }
   if (idle_count() > 5) {
@@ -261,7 +261,7 @@ int Thing::danger_current_level(void)
   if (is_thief()) {
     danger_level += 20;
   }
-  if (is_albe_to_shoot_at()) {
+  if (is_able_to_shoot_at()) {
     danger_level += 20;
   }
   if (idle_count() > 5) {

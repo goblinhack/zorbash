@@ -19,7 +19,7 @@ typedef struct {
 static ThingPossibleHit thing_possible_hits[ MAX_THING_POSSIBLE_HIT ];
 static int              thing_possible_hit_size;
 
-int Thing::is_albe_to_shoot_at(void)
+int Thing::is_able_to_shoot_at(void)
 {
   if (is_frozen) {
     return false;
@@ -33,21 +33,21 @@ int Thing::is_albe_to_shoot_at(void)
   }
 
   TRACE_NO_INDENT();
-  return (tp()->is_albe_to_shoot_at());
+  return (tp()->is_able_to_shoot_at());
 }
 
 //
 // Python callback upon being shoot_at
 //
-bool Thing::on_want_to_shoot_at_something(Thingp target)
+bool Thing::on_want_to_shoot_at(Thingp target)
 {
   TRACE_NO_INDENT();
-  auto on_want_to_shoot_at_something = tp()->on_want_to_shoot_at_something_do();
-  if (std::empty(on_want_to_shoot_at_something)) {
+  auto on_want_to_shoot_at = tp()->on_want_to_shoot_at_do();
+  if (std::empty(on_want_to_shoot_at)) {
     return false;
   }
 
-  auto t = split_tokens(on_want_to_shoot_at_something, '.');
+  auto t = split_tokens(on_want_to_shoot_at, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -66,8 +66,8 @@ bool Thing::on_want_to_shoot_at_something(Thingp target)
                            (unsigned int) target->curr_at.y);
   }
 
-  ERR("Bad on_want_to_shoot_at_something call [%s] expected mod:function, got %d elems",
-      on_want_to_shoot_at_something.c_str(), (int) on_want_to_shoot_at_something.size());
+  ERR("Bad on_want_to_shoot_at call [%s] expected mod:function, got %d elems", on_want_to_shoot_at.c_str(),
+      (int) on_want_to_shoot_at.size());
   return false;
 }
 
@@ -137,7 +137,7 @@ static void thing_possible_hit_add(Thingp me, Thingp target)
 //
 bool Thing::shoot_at_target(void)
 {
-  if (! is_albe_to_shoot_at()) {
+  if (! is_able_to_shoot_at()) {
     return false;
   }
 
@@ -164,7 +164,7 @@ bool Thing::shoot_at_target(void)
       //
       // Too close, use melee (that's if we are able to move, unlike a static gargoyle).
       //
-      if (! is_albe_to_shoot_at_close_range()) {
+      if (! is_able_to_shoot_at_close_range()) {
         if (is_moveable()) {
           if (d < 2) {
             continue;
@@ -210,7 +210,7 @@ bool Thing::shoot_at_target(void)
   //
   move_set_dir_from_target(target);
 
-  return on_want_to_shoot_at_something(target);
+  return on_want_to_shoot_at(target);
 }
 
 bool Thing::shoot_at_and_choose_target(Thingp item, UseOptions *use_options)
@@ -265,7 +265,17 @@ bool Thing::shoot_at(Thingp target)
       Thingp best_staff = nullptr;
       carried_staff_highest_value_for_target(&best_staff, target);
       if (best_staff) {
+        dbg("Fire with best staff: %s", best_staff->to_short_string().c_str());
         curr_weapon = best_staff;
+      } else {
+        return false;
+      }
+    } else if (is_able_to_use_ranged_weapons()) {
+      Thingp best_ranged_weapon = nullptr;
+      carried_ranged_weapon_highest_value_for_target(&best_ranged_weapon, target);
+      if (best_ranged_weapon) {
+        dbg("Fire with best ranged weapon: %s", best_ranged_weapon->to_short_string().c_str());
+        curr_weapon = best_ranged_weapon;
       } else {
         return false;
       }
@@ -277,18 +287,31 @@ bool Thing::shoot_at(Thingp target)
   //
   // If using a sword, allow the monst to use a staff without equipping
   //
-  if (! curr_weapon->is_staff()) {
-    if (is_able_to_use_staffs()) {
-      Thingp best_staff = nullptr;
-      carried_staff_highest_value_for_target(&best_staff, target);
-      if (best_staff) {
-        curr_weapon = best_staff;
-      } else {
-        return false;
-      }
+  if (! curr_weapon->is_staff() && is_able_to_use_staffs()) {
+    Thingp best_staff = nullptr;
+    carried_staff_highest_value_for_target(&best_staff, target);
+    if (best_staff) {
+      dbg("Best staff: %s", best_staff->to_short_string().c_str());
+      curr_weapon = best_staff;
     } else {
       return false;
     }
+  }
+
+  if (! curr_weapon->is_ranged_weapon() && is_able_to_use_ranged_weapons()) {
+    Thingp best_ranged_weapon = nullptr;
+    carried_ranged_weapon_highest_value_for_target(&best_ranged_weapon, target);
+    if (best_ranged_weapon) {
+      dbg("Best ranged weapon: %s", best_ranged_weapon->to_short_string().c_str());
+      curr_weapon = best_ranged_weapon;
+    } else {
+      return false;
+    }
+  }
+
+  if (! curr_weapon->is_ranged_weapon() && ! curr_weapon->is_staff()) {
+    dbg("No staff or ranged weapon to use");
+    return false;
   }
 
   if (! possible_to_attack(target)) {

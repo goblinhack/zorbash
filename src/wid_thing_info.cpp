@@ -11,6 +11,7 @@
 #include "my_ui.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_inventory.hpp"
+#include "my_wid_leftbar.hpp"
 #include "my_wid_popup.hpp"
 
 std::list< WidPopup * > wid_thing_info_window;
@@ -252,6 +253,12 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   IF_DEBUG1 { t->log("Created thing info popup"); }
 
   wid_popup_window->compress();
+
+  //
+  // TODO: flickery
+  //
+  wid_leftbar_init();
+
   return wid_popup_window;
 }
 

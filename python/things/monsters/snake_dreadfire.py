@@ -22,7 +22,7 @@ def on_death(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
 
-def on_want_to_shoot_at_something(me, target, x, y):  # Return True on doing an action
+def on_want_to_shoot_at(me, target, x, y):  # Return True on doing an action
     if my.pcg_randint(1, 100) < 10:
         my.thing_shoot_at(me, "staff_fire_projectile", target)
         my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
@@ -71,11 +71,11 @@ def tp_init(name, text_long_name):
     my.is_able_to_lunge(self, True)
     my.is_able_to_rest(self, True)
     my.is_able_to_see_in_the_dark(self, True)
+    my.is_able_to_shoot_at_close_range(self, True)
+    my.is_able_to_shoot_at(self, True)
     my.is_able_to_sleep(self, True)
     my.is_able_to_tire(self, True)
     my.is_air_breather(self, True)
-    my.is_albe_to_shoot_at_close_range(self, True)
-    my.is_albe_to_shoot_at(self, True)
     my.is_asleep_initially(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
@@ -114,7 +114,7 @@ def tp_init(name, text_long_name):
     my.on_death_do(self, "me.on_death()")
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
-    my.on_want_to_shoot_at_something_do(self, "me.on_want_to_shoot_at_something()")
+    my.on_want_to_shoot_at_do(self, "me.on_want_to_shoot_at()")
     my.on_you_nat_att_do(self, "me.on_you_nat_att()")
     my.rarity(self, my.RARITY_RARE)
     my.stamina(self, 100)

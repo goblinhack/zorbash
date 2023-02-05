@@ -3,6 +3,7 @@
 //
 
 #include "my_array_bounds_check.hpp"
+#include "my_color_defs.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
@@ -107,6 +108,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     point tl = make_point(0, y_at);
     point br = make_point(width - 1, y_at);
     auto  s  = dynprintf("%%fg=gray$%s", t->text_short_capitalised().c_str());
+    if (t == game->current_wid_thing_info) {
+      s = dynprintf("%%fg=red$%s", t->text_short_capitalised().c_str());
+    }
     wid_set_pos(w, tl, br);
     if (t->immediate_owner()) {
       wid_set_text(w, "+ " + std::string(s));
@@ -116,15 +120,15 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     }
     if (t->immediate_owner()) {
       if (g_opt_ascii) {
-        wid_set_fg_tilename(w, "status_bar_ascii_dark");
+        wid_set_bg_tilename(w, "status_bar_ascii_dark");
       } else {
-        wid_set_fg_tilename(w, "status_bar_pixelart_dark");
+        wid_set_bg_tilename(w, "status_bar_pixelart_dark");
       }
     } else {
       if (g_opt_ascii) {
-        wid_set_fg_tilename(w, "status_bar_ascii_normal");
+        wid_set_bg_tilename(w, "status_bar_ascii_normal");
       } else {
-        wid_set_fg_tilename(w, "status_bar_pixelart_normal");
+        wid_set_bg_tilename(w, "status_bar_pixelart_normal");
       }
     }
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);

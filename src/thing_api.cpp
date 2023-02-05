@@ -1347,16 +1347,16 @@ int Thing::unused_flag14(void)
   return (tp()->unused_flag14());
 }
 
-int Thing::unused_flag15(void)
+int Thing::is_ranged_weapon(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag15());
+  return (tp()->is_ranged_weapon());
 }
 
-int Thing::unused_flag16(void)
+int Thing::is_able_to_use_ranged_weapons(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag16());
+  return (tp()->is_able_to_use_ranged_weapons());
 }
 
 int Thing::is_aerodynamic(void)
@@ -1383,10 +1383,10 @@ int Thing::is_thrown_as_a_weapon(void)
   return (tp()->is_thrown_as_a_weapon());
 }
 
-int Thing::is_albe_to_shoot_at_close_range(void)
+int Thing::is_able_to_shoot_at_close_range(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_albe_to_shoot_at_close_range());
+  return (tp()->is_able_to_shoot_at_close_range());
 }
 
 int Thing::gfx_pixelart_show_highlighted(void)
@@ -3963,10 +3963,10 @@ const std::string &Thing::on_you_are_on_fire_do(void)
   return (tp()->on_you_are_on_fire_do());
 }
 
-const std::string &Thing::on_want_to_shoot_at_something_do(void)
+const std::string &Thing::on_want_to_shoot_at_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_want_to_shoot_at_something_do());
+  return (tp()->on_want_to_shoot_at_do());
 }
 
 const std::string &Thing::on_hit_and_still_alive_do(void)

@@ -15,7 +15,7 @@ def explode(me, x, y):
     # my.spawn_radius_range(me, "energy", min=0, max=3)
 
 
-def on_want_to_shoot_at_something(me, target, target_x, target_y):  # Return True on doing an action
+def on_want_to_shoot_at(me, target, target_x, target_y):  # Return True on doing an action
     if my.pcg_randint(1, 100) < 80:
         my.thing_shoot_at(me, "laser_energy", target)
         return True
@@ -47,7 +47,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.health_initial_dice(self, "1")
     my.is_able_to_be_surprised(self, True)
     my.is_able_to_see_in_the_dark(self, True)
-    my.is_albe_to_shoot_at_close_range(self, True)
+    my.is_able_to_shoot_at_close_range(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)
@@ -72,7 +72,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.noise_decibels_hearing(self, 5)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
-    my.on_want_to_shoot_at_something_do(self, "me.on_want_to_shoot_at_something()")
+    my.on_want_to_shoot_at_do(self, "me.on_want_to_shoot_at()")
     my.rarity(self, my.RARITY_RARE)
     my.stat_con(self, 10)
     my.stat_def(self, 10)

@@ -78,11 +78,11 @@ void tp_fixup(void)
       }
     }
 
-    if (! tp->on_want_to_shoot_at_something_do().empty()) {
+    if (! tp->on_want_to_shoot_at_do().empty()) {
       if (! tp->is_tickable()) {
         DIE("Tp %s has fire at action but is not tickable?", tp->name().c_str());
       }
-      tp->is_albe_to_shoot_at_set(true);
+      tp->is_able_to_shoot_at_set(true);
     }
 
     if (tp->is_very_combustible()) {
@@ -151,7 +151,7 @@ void tp_fixup(void)
       }
     }
 
-    if (tp->is_albe_to_shoot_at()) {
+    if (tp->is_able_to_shoot_at()) {
       if (! tp->distance_vision()) {
         DIE("Tp %s needs vision distance if it is able to fire at things", tp->name().c_str());
       }

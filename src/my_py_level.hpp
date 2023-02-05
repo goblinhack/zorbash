@@ -173,7 +173,7 @@ PyObject *level_is_no_tile_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_obs_destructable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_obs_when_dead_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_obs_wall_or_door_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_on_want_to_shoot_at_something(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_on_want_to_shoot_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_openable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_organic_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_player_at(PyObject *obj, PyObject *args, PyObject *keywds);

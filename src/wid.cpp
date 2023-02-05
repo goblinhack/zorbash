@@ -5,6 +5,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_color_defs.hpp"
 #include "my_command.hpp"
+#include "my_console.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_sdl_event.hpp"
@@ -6473,8 +6474,12 @@ static void wid_display(Widp w, uint8_t disable_scissor, uint8_t *updated_scisso
       }
     }
 
-    if (w->cfg[ mode ].color_set[ WID_COLOR_TEXT_BG ]) {
+    if (w->cfg[ mode ].color_set[ WID_COLOR_TEXT_FG ] && w->cfg[ mode ].color_set[ WID_COLOR_TEXT_BG ]) {
       ascii_putf__(x, y, w_box_args.col_text, w_box_args.col_bg, text);
+    } else if (w->cfg[ mode ].color_set[ WID_COLOR_TEXT_FG ]) {
+      ascii_putf__(x, y, w_box_args.col_text, COLOR_NONE, text);
+    } else if (w->cfg[ mode ].color_set[ WID_COLOR_TEXT_BG ]) {
+      ascii_putf__(x, y, WHITE, w_box_args.col_bg, text);
     } else {
       ascii_putf__(x, y, w_box_args.col_text, COLOR_NONE, text);
     }

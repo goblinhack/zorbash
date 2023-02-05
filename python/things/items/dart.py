@@ -35,6 +35,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_loggable(self, True)
     my.is_missile(self, True)
     my.is_moveable(self, True)
+    my.is_ranged_weapon(self, True)
     my.is_throwable(self, True)
     my.is_thrown_as_a_weapon(self, True)
     my.is_treasure_class_a(self, True)

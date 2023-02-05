@@ -255,6 +255,8 @@ private:
   int _is_able_to_see_in_the_dark {};
   int _is_able_to_see_invisible {};
   int _is_able_to_see_through_doors {};
+  int _is_able_to_shoot_at {};
+  int _is_able_to_shoot_at_close_range {};
   int _is_able_to_shove {};
   int _is_able_to_shove_chance_d1000 {};
   int _is_able_to_sleep {};
@@ -271,6 +273,7 @@ private:
   int _is_able_to_use_cloak {};
   int _is_able_to_use_gauntlet {};
   int _is_able_to_use_helmet {};
+  int _is_able_to_use_ranged_weapons {};
   int _is_able_to_use_rings {};
   int _is_able_to_use_shield {};
   int _is_able_to_use_staffs {};
@@ -279,8 +282,6 @@ private:
   int _is_acid {};
   int _is_aerodynamic {};
   int _is_air_breather {};
-  int _is_albe_to_shoot_at {};
-  int _is_albe_to_shoot_at_close_range {};
   int _is_alive_on_end_of_anim {};
   int _is_always_hit {};
   int _is_always_submerged {};
@@ -487,6 +488,7 @@ private:
   int _is_poisonous_danger_level {};
   int _is_potion {};
   int _is_projectile {};
+  int _is_ranged_weapon {};
   int _is_red_blood {};
   int _is_red_blooded {};
   int _is_red_splatter {};
@@ -632,8 +634,6 @@ private:
   int _unused_flag123 {};
   int _unused_flag13 {};
   int _unused_flag14 {};
-  int _unused_flag15 {};
-  int _unused_flag16 {};
   int _unused_flag2 {};
   int _unused_flag27 {};
   int _unused_flag3 {};
@@ -803,7 +803,7 @@ private:
   std::string _on_unequip_do;
   std::string _on_use_do;
   std::string _on_waiting_do;
-  std::string _on_want_to_shoot_at_something_do;
+  std::string _on_want_to_shoot_at_do;
   std::string _on_you_are_declared_a_follower_do;
   std::string _on_you_are_declared_leader_do;
   std::string _on_you_are_on_fire_do;
@@ -1133,7 +1133,7 @@ public:
   const std::string &on_unequip_do(void) const;
   const std::string &on_use_do(void) const;
   const std::string &on_waiting_do(void) const;
-  const std::string &on_want_to_shoot_at_something_do(void) const;
+  const std::string &on_want_to_shoot_at_do(void) const;
   const std::string &on_you_are_declared_a_follower_do(void) const;
   const std::string &on_you_are_declared_leader_do(void) const;
   const std::string &on_you_are_on_fire_do(void) const;
@@ -1324,6 +1324,8 @@ public:
   int is_able_to_see_in_the_dark(void) const;
   int is_able_to_see_invisible(void) const;
   int is_able_to_see_through_doors(void) const;
+  int is_able_to_shoot_at_close_range(void) const;
+  int is_able_to_shoot_at(void) const;
   int is_able_to_shove_chance_d1000(void) const;
   int is_able_to_shove(void) const;
   int is_able_to_sleep(void) const;
@@ -1340,6 +1342,7 @@ public:
   int is_able_to_use_cloak(void) const;
   int is_able_to_use_gauntlet(void) const;
   int is_able_to_use_helmet(void) const;
+  int is_able_to_use_ranged_weapons(void) const;
   int is_able_to_use_rings(void) const;
   int is_able_to_use_shield(void) const;
   int is_able_to_use_staffs(void) const;
@@ -1348,8 +1351,6 @@ public:
   int is_acid(void) const;
   int is_aerodynamic(void) const;
   int is_air_breather(void) const;
-  int is_albe_to_shoot_at_close_range(void) const;
-  int is_albe_to_shoot_at(void) const;
   int is_alive_on_end_of_anim(void) const;
   int is_always_hit(void) const;
   int is_always_submerged(void) const;
@@ -1555,6 +1556,7 @@ public:
   int is_poisonous_danger_level(void) const;
   int is_potion(void) const;
   int is_projectile(void) const;
+  int is_ranged_weapon(void) const;
   int is_red_blooded(void) const;
   int is_red_blood(void) const;
   int is_red_splatter(void) const;
@@ -1699,8 +1701,6 @@ public:
   int unused_flag12(void) const;
   int unused_flag13(void) const;
   int unused_flag14(void) const;
-  int unused_flag15(void) const;
-  int unused_flag16(void) const;
   int unused_flag1(void) const;
   int unused_flag27(void) const;
   int unused_flag2(void) const;
@@ -1864,6 +1864,8 @@ public:
   void is_able_to_see_in_the_dark_set(int v);
   void is_able_to_see_invisible_set(int v);
   void is_able_to_see_through_doors_set(int v);
+  void is_able_to_shoot_at_close_range_set(int v);
+  void is_able_to_shoot_at_set(int v);
   void is_able_to_shove_chance_d1000_set(int v);
   void is_able_to_shove_set(int v);
   void is_able_to_sleep_set(int v);
@@ -1880,6 +1882,7 @@ public:
   void is_able_to_use_cloak_set(int v);
   void is_able_to_use_gauntlet_set(int v);
   void is_able_to_use_helmet_set(int v);
+  void is_able_to_use_ranged_weapons_set(int v);
   void is_able_to_use_rings_set(int v);
   void is_able_to_use_shield_set(int v);
   void is_able_to_use_staffs_set(int v);
@@ -1888,8 +1891,6 @@ public:
   void is_acid_set(int v);
   void is_aerodynamic_set(int v);
   void is_air_breather_set(int v);
-  void is_albe_to_shoot_at_close_range_set(int v);
-  void is_albe_to_shoot_at_set(int v);
   void is_alive_on_end_of_anim_set(int v);
   void is_allied_with_set(const std::string &v);
   void is_always_hit_set(int v);
@@ -2096,6 +2097,7 @@ public:
   void is_poisonous_danger_level_set(int v);
   void is_potion_set(int v);
   void is_projectile_set(int v);
+  void is_ranged_weapon_set(int v);
   void is_red_blooded_set(int v);
   void is_red_blood_set(int v);
   void is_red_splatter_set(int v);
@@ -2303,7 +2305,7 @@ public:
   void on_unequip_do_set(const std::string &v);
   void on_use_do_set(const std::string &v);
   void on_waiting_do_set(const std::string &v);
-  void on_want_to_shoot_at_something_do_set(const std::string &v);
+  void on_want_to_shoot_at_do_set(const std::string &v);
   void on_you_are_declared_a_follower_do_set(const std::string &v);
   void on_you_are_declared_leader_do_set(const std::string &v);
   void on_you_are_on_fire_do_set(const std::string &v);
@@ -2389,8 +2391,6 @@ public:
   void unused_flag12_set(int v);
   void unused_flag13_set(int v);
   void unused_flag14_set(int v);
-  void unused_flag15_set(int v);
-  void unused_flag16_set(int v);
   void unused_flag1_set(int v);
   void unused_flag27_set(int v);
   void unused_flag2_set(int v);

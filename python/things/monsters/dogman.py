@@ -5,6 +5,9 @@ import tp
 def on_born(me, x, y):
     my.thing_friend(me, "dogman")
     my.thing_carry(me, "dagger")
+    my.thing_carry(me, "dart")
+    my.thing_carry(me, "dart")
+    my.thing_carry(me, "dart")
 
 
 def on_you_nat_att(me, x, y):

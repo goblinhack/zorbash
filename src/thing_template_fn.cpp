@@ -161,7 +161,7 @@ const std::string &Tp::on_tick_do(void) const { return _on_tick_do; }
 const std::string &Tp::on_unequip_do(void) const { return _on_unequip_do; }
 const std::string &Tp::on_use_do(void) const { return _on_use_do; }
 const std::string &Tp::on_waiting_do(void) const { return _on_waiting_do; }
-const std::string &Tp::on_want_to_shoot_at_something_do(void) const { return _on_want_to_shoot_at_something_do; }
+const std::string &Tp::on_want_to_shoot_at_do(void) const { return _on_want_to_shoot_at_do; }
 const std::string &Tp::on_you_are_declared_a_follower_do(void) const { return _on_you_are_declared_a_follower_do; }
 const std::string &Tp::on_you_are_declared_leader_do(void) const { return _on_you_are_declared_leader_do; }
 const std::string &Tp::on_you_are_on_fire_do(void) const { return _on_you_are_on_fire_do; }
@@ -330,6 +330,8 @@ int Tp::is_able_to_rest(void) const { return _is_able_to_rest; }
 int Tp::is_able_to_see_in_the_dark(void) const { return _is_able_to_see_in_the_dark; }
 int Tp::is_able_to_see_invisible(void) const { return _is_able_to_see_invisible; }
 int Tp::is_able_to_see_through_doors(void) const { return _is_able_to_see_through_doors; }
+int Tp::is_able_to_shoot_at_close_range(void) const { return _is_able_to_shoot_at_close_range; }
+int Tp::is_able_to_shoot_at(void) const { return _is_able_to_shoot_at; }
 int Tp::is_able_to_shove_chance_d1000(void) const { return _is_able_to_shove_chance_d1000; }
 int Tp::is_able_to_shove(void) const { return _is_able_to_shove; }
 int Tp::is_able_to_sleep(void) const { return _is_able_to_sleep; }
@@ -346,6 +348,7 @@ int Tp::is_able_to_use_boots(void) const { return _is_able_to_use_boots; }
 int Tp::is_able_to_use_cloak(void) const { return _is_able_to_use_cloak; }
 int Tp::is_able_to_use_gauntlet(void) const { return _is_able_to_use_gauntlet; }
 int Tp::is_able_to_use_helmet(void) const { return _is_able_to_use_helmet; }
+int Tp::is_able_to_use_ranged_weapons(void) const { return _is_able_to_use_ranged_weapons; }
 int Tp::is_able_to_use_rings(void) const { return _is_able_to_use_rings; }
 int Tp::is_able_to_use_shield(void) const { return _is_able_to_use_shield; }
 int Tp::is_able_to_use_staffs(void) const { return _is_able_to_use_staffs; }
@@ -354,8 +357,6 @@ int Tp::is_able_to_walk_through_walls(void) const { return _is_able_to_walk_thro
 int Tp::is_acid(void) const { return _is_acid; }
 int Tp::is_aerodynamic(void) const { return _is_aerodynamic; }
 int Tp::is_air_breather(void) const { return _is_air_breather; }
-int Tp::is_albe_to_shoot_at_close_range(void) const { return _is_albe_to_shoot_at_close_range; }
-int Tp::is_albe_to_shoot_at(void) const { return _is_albe_to_shoot_at; }
 int Tp::is_alive_on_end_of_anim(void) const { return _is_alive_on_end_of_anim; }
 int Tp::is_always_hit(void) const { return _is_always_hit; }
 int Tp::is_always_submerged(void) const { return _is_always_submerged; }
@@ -561,6 +562,7 @@ int Tp::is_player(void) const { return _is_player; }
 int Tp::is_poisonous_danger_level(void) const { return _is_poisonous_danger_level; }
 int Tp::is_potion(void) const { return _is_potion; }
 int Tp::is_projectile(void) const { return _is_projectile; }
+int Tp::is_ranged_weapon(void) const { return _is_ranged_weapon; }
 int Tp::is_red_blooded(void) const { return _is_red_blooded; }
 int Tp::is_red_blood(void) const { return _is_red_blood; }
 int Tp::is_red_splatter(void) const { return _is_red_splatter; }
@@ -705,8 +707,6 @@ int Tp::unused_flag123(void) const { return _unused_flag123; }
 int Tp::unused_flag12(void) const { return _unused_flag12; }
 int Tp::unused_flag13(void) const { return _unused_flag13; }
 int Tp::unused_flag14(void) const { return _unused_flag14; }
-int Tp::unused_flag15(void) const { return _unused_flag15; }
-int Tp::unused_flag16(void) const { return _unused_flag16; }
 int Tp::unused_flag1(void) const { return _unused_flag1; }
 int Tp::unused_flag27(void) const { return _unused_flag27; }
 int Tp::unused_flag2(void) const { return _unused_flag2; }
@@ -870,6 +870,8 @@ void Tp::is_able_to_rest_set(int v) { _is_able_to_rest = v; }
 void Tp::is_able_to_see_in_the_dark_set(int v) { _is_able_to_see_in_the_dark = v; }
 void Tp::is_able_to_see_invisible_set(int v) { _is_able_to_see_invisible = v; }
 void Tp::is_able_to_see_through_doors_set(int v) { _is_able_to_see_through_doors = v; }
+void Tp::is_able_to_shoot_at_close_range_set(int v) { _is_able_to_shoot_at_close_range = v; }
+void Tp::is_able_to_shoot_at_set(int v) { _is_able_to_shoot_at = v; }
 void Tp::is_able_to_shove_chance_d1000_set(int v) { _is_able_to_shove_chance_d1000 = v; }
 void Tp::is_able_to_shove_set(int v) { _is_able_to_shove = v; }
 void Tp::is_able_to_sleep_set(int v) { _is_able_to_sleep = v; }
@@ -886,6 +888,7 @@ void Tp::is_able_to_use_boots_set(int v) { _is_able_to_use_boots = v; }
 void Tp::is_able_to_use_cloak_set(int v) { _is_able_to_use_cloak = v; }
 void Tp::is_able_to_use_gauntlet_set(int v) { _is_able_to_use_gauntlet = v; }
 void Tp::is_able_to_use_helmet_set(int v) { _is_able_to_use_helmet = v; }
+void Tp::is_able_to_use_ranged_weapons_set(int v) { _is_able_to_use_ranged_weapons = v; }
 void Tp::is_able_to_use_rings_set(int v) { _is_able_to_use_rings = v; }
 void Tp::is_able_to_use_shield_set(int v) { _is_able_to_use_shield = v; }
 void Tp::is_able_to_use_staffs_set(int v) { _is_able_to_use_staffs = v; }
@@ -894,8 +897,6 @@ void Tp::is_able_to_walk_through_walls_set(int v) { _is_able_to_walk_through_wal
 void Tp::is_acid_set(int v) { _is_acid = v; }
 void Tp::is_aerodynamic_set(int v) { _is_aerodynamic = v; }
 void Tp::is_air_breather_set(int v) { _is_air_breather = v; }
-void Tp::is_albe_to_shoot_at_close_range_set(int v) { _is_albe_to_shoot_at_close_range = v; }
-void Tp::is_albe_to_shoot_at_set(int v) { _is_albe_to_shoot_at = v; }
 void Tp::is_alive_on_end_of_anim_set(int v) { _is_alive_on_end_of_anim = v; }
 void Tp::is_allied_with_set(const std::string &v) { _is_allied_with = v; }
 void Tp::is_always_hit_set(int v) { _is_always_hit = v; }
@@ -1102,6 +1103,7 @@ void Tp::is_player_set(int v) { _is_player = v; }
 void Tp::is_poisonous_danger_level_set(int v) { _is_poisonous_danger_level = v; }
 void Tp::is_potion_set(int v) { _is_potion = v; }
 void Tp::is_projectile_set(int v) { _is_projectile = v; }
+void Tp::is_ranged_weapon_set(int v) { _is_ranged_weapon = v; }
 void Tp::is_red_blooded_set(int v) { _is_red_blooded = v; }
 void Tp::is_red_blood_set(int v) { _is_red_blood = v; }
 void Tp::is_red_splatter_set(int v) { _is_red_splatter = v; }
@@ -1309,7 +1311,7 @@ void Tp::on_tick_do_set(const std::string &v) { _on_tick_do = v; }
 void Tp::on_unequip_do_set(const std::string &v) { _on_unequip_do = v; }
 void Tp::on_use_do_set(const std::string &v) { _on_use_do = v; }
 void Tp::on_waiting_do_set(const std::string &v) { _on_waiting_do = v; }
-void Tp::on_want_to_shoot_at_something_do_set(const std::string &v) { _on_want_to_shoot_at_something_do = v; }
+void Tp::on_want_to_shoot_at_do_set(const std::string &v) { _on_want_to_shoot_at_do = v; }
 void Tp::on_you_are_declared_a_follower_do_set(const std::string &v) { _on_you_are_declared_a_follower_do = v; }
 void Tp::on_you_are_declared_leader_do_set(const std::string &v) { _on_you_are_declared_leader_do = v; }
 void Tp::on_you_are_on_fire_do_set(const std::string &v) { _on_you_are_on_fire_do = v; }
@@ -1392,8 +1394,6 @@ void Tp::unused_flag123_set(int v) { _unused_flag123 = v; }
 void Tp::unused_flag12_set(int v) { _unused_flag12 = v; }
 void Tp::unused_flag13_set(int v) { _unused_flag13 = v; }
 void Tp::unused_flag14_set(int v) { _unused_flag14 = v; }
-void Tp::unused_flag15_set(int v) { _unused_flag15 = v; }
-void Tp::unused_flag16_set(int v) { _unused_flag16 = v; }
 void Tp::unused_flag1_set(int v) { _unused_flag1 = v; }
 void Tp::unused_flag27_set(int v) { _unused_flag27 = v; }
 void Tp::unused_flag2_set(int v) { _unused_flag2 = v; }

@@ -288,6 +288,7 @@ public:
   std::list< Thingp > shield_list(void);
   std::list< Thingp > treasure_list(void);
   std::list< Thingp > staff_list(void);
+  std::list< Thingp > ranged_weapon_list(void);
   std::list< Thingp > weapon_list(void);
 
   std::vector< Thingp > amulet_vector(void);
@@ -303,6 +304,7 @@ public:
   std::vector< Thingp > shield_vector(void);
   std::vector< Thingp > treasure_vector(void);
   std::vector< Thingp > staff_vector(void);
+  std::vector< Thingp > ranged_weapon_vector(void);
   std::vector< Thingp > weapon_vector(void);
 
   ThingShoved try_to_shove(Thingp it, point delta, bool force = false);
@@ -519,7 +521,7 @@ public:
   bool nat_att(Thingp victim);
   bool on_fire_set(const std::string &why);
   bool on_tick(void);
-  bool on_want_to_shoot_at_something(Thingp hitter);
+  bool on_want_to_shoot_at(Thingp hitter);
   bool open_door(Thingp door);
   bool open(Thingp it);
   bool open(void);
@@ -846,7 +848,7 @@ public:
   const std::string &on_unequip_do(void);
   const std::string &on_use_do(void);
   const std::string &on_waiting_do(void);
-  const std::string &on_want_to_shoot_at_something_do(void);
+  const std::string &on_want_to_shoot_at_do(void);
   const std::string &on_you_are_declared_a_follower_do(void);
   const std::string &on_you_are_declared_leader_do(void);
   const std::string &on_you_are_on_fire_do(void);
@@ -952,6 +954,10 @@ public:
   int carried_helmet_highest_value_for_target(Thingp *out, Thingp target);
   int carried_helmet_highest_value(Thingp *out);
   int carried_helmet_least_value(Thingp *out);
+  int carried_ranged_weapon_count(void);
+  int carried_ranged_weapon_highest_value_for_target(Thingp *out, Thingp target);
+  int carried_ranged_weapon_highest_value(Thingp *out);
+  int carried_ranged_weapon_least_value(Thingp *out);
   int carried_ring_count(void);
   int carried_ring_highest_value(Thingp *out);
   int carried_ring_least_value(Thingp *out);
@@ -1200,6 +1206,8 @@ public:
   int is_able_to_see_in_the_dark(void);
   int is_able_to_see_invisible(void);
   int is_able_to_see_through_doors(void);
+  int is_able_to_shoot_at_close_range(void);
+  int is_able_to_shoot_at(void);
   int is_able_to_shove_chance_d1000(void);
   int is_able_to_shove(void);
   int is_able_to_sleep(void);
@@ -1216,6 +1224,7 @@ public:
   int is_able_to_use_cloak(void);
   int is_able_to_use_gauntlet(void);
   int is_able_to_use_helmet(void);
+  int is_able_to_use_ranged_weapons(void);
   int is_able_to_use_rings(void);
   int is_able_to_use_shield(void);
   int is_able_to_use_staffs(void);
@@ -1224,8 +1233,6 @@ public:
   int is_acid(void);
   int is_aerodynamic(void);
   int is_air_breather(void);
-  int is_albe_to_shoot_at_close_range(void);
-  int is_albe_to_shoot_at(void);
   int is_alive_monst(void);
   int is_alive_on_end_of_anim(void);
   int is_always_hit(void);
@@ -1458,6 +1465,7 @@ public:
   int is_poisonous_danger_level(void);
   int is_potion(void);
   int is_projectile(void);
+  int is_ranged_weapon(void);
   int is_red_blooded(void);
   int is_red_blood(void);
   int is_red_splatter(void);
@@ -1961,8 +1969,6 @@ public:
   int unused_flag12(void);
   int unused_flag13(void);
   int unused_flag14(void);
-  int unused_flag15(void);
-  int unused_flag16(void);
   int unused_flag1(void);
   int unused_flag27(void);
   int unused_flag2(void);
