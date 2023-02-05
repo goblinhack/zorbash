@@ -63,11 +63,7 @@ static void wid_leftbar_over_begin(Widp w, int relx, int rely, int wheelx, int w
   game->wid_thing_info_create(t);
 }
 
-static void wid_leftbar_over_end(Widp w)
-{
-  TRACE_NO_INDENT();
-  wid_thing_info_fini("leftbar");
-}
+static void wid_leftbar_over_end(Widp w) { TRACE_NO_INDENT(); }
 
 static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int width, bool allow_carried = false,
                                          bool first = false)

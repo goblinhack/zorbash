@@ -23,7 +23,11 @@ void wid_thing_info_fini(const std::string &why)
   TRACE_AND_INDENT();
 
   game->wid_thing_info_clear_popup();
-  game->current_wid_thing_info = nullptr;
+
+  if (game->current_wid_thing_info) {
+    game->current_wid_thing_info = nullptr;
+    wid_leftbar_init();
+  }
 
   //
   // Clear out any text shown from the above
@@ -248,16 +252,15 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_charge_count(wid_popup_window, t);
   wid_thing_info_add_danger_level(wid_popup_window, t);
   t->show_botcon_description();
-  game->current_wid_thing_info = t;
 
-  IF_DEBUG1 { t->log("Created thing info popup"); }
+  if (game->current_wid_thing_info != t) {
+    game->current_wid_thing_info = t;
+    wid_leftbar_init();
+  }
 
   wid_popup_window->compress();
 
-  //
-  // TODO: flickery
-  //
-  wid_leftbar_init();
+  IF_DEBUG1 { t->log("Created thing info popup"); }
 
   return wid_popup_window;
 }
@@ -335,7 +338,10 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     wid_thing_info_add_health(wid_popup_window, t);
   }
 
-  game->current_wid_thing_info = nullptr;
+  if (game->current_wid_thing_info) {
+    game->current_wid_thing_info = nullptr;
+    wid_leftbar_init();
+  }
 
   auto w        = wid_popup_window;
   int  utilized = w->wid_text_area->line_count;
