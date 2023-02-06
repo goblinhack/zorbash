@@ -114,6 +114,20 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
     {
       int prio = t->collision_hit_priority();
 
+      //
+      // Don't allow attacking of the exit!
+      //
+      if (t->is_critical_to_level()) {
+        continue;
+      }
+
+      //
+      // Don't attack things like sewers!
+      //
+      if (! t->is_attackable_by_player() && ! t->is_attackable_by_monst()) {
+        continue;
+      }
+
       if (t->is_dead || t->is_dying) {
         if (t->is_frozen) {
           //
@@ -199,6 +213,20 @@ bool Thing::victim_attack_best_attempt_2(Thingp item, point at, Thingp *best, po
     FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y)
     {
       int prio = t->collision_hit_priority();
+
+      //
+      // Don't allow attacking of the exit!
+      //
+      if (t->is_critical_to_level()) {
+        continue;
+      }
+
+      //
+      // Don't attack things like sewers!
+      //
+      if (! t->is_attackable_by_player() && ! t->is_attackable_by_monst()) {
+        continue;
+      }
 
       //
       // Get the most important thing to hit.
@@ -290,6 +318,20 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
     FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y)
     {
       int prio = t->collision_hit_priority();
+
+      //
+      // Don't allow attacking of the exit!
+      //
+      if (t->is_critical_to_level()) {
+        continue;
+      }
+
+      //
+      // Don't attack things like sewers!
+      //
+      if (! t->is_attackable_by_player() && ! t->is_attackable_by_monst()) {
+        continue;
+      }
 
       //
       // Get the most important thing to hit.

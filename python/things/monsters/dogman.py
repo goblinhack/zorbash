@@ -6,8 +6,6 @@ def on_born(me, x, y):
     my.thing_friend(me, "dogman")
     my.thing_carry(me, "dagger")
     my.thing_carry(me, "dart")
-    my.thing_carry(me, "dart")
-    my.thing_carry(me, "dart")
 
 
 def on_you_nat_att(me, x, y):
@@ -44,6 +42,7 @@ def tp_init(name, text_long_name):
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 10)
     my.distance_avoid(self, 4)
+    my.distance_throw(self, 10)
     my.distance_vision(self, 10)
     my.dmg_nat_att_chance_d1000(self, 0, 100)
     my.dmg_nat_att_dice(self, "1d4+1")
@@ -82,6 +81,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_tire(self, True)
     my.is_able_to_use_amulet(self, True)
     my.is_able_to_use_cloak(self, True)
+    my.is_able_to_use_ranged_weapons(self, True)
     my.is_able_to_use_weapons(self, True)
     my.is_air_breather(self, True)
     my.is_asleep_initially(self, True)
@@ -102,6 +102,7 @@ def tp_init(name, text_long_name):
     my.is_humanoid(self, True)
     my.is_immune_to_water(self, True)
     my.is_interesting(self, True)
+    my.is_item_collector(self, True)
     my.is_living(self, True)
     my.is_loggable(self, True)
     my.is_meat(self, True)
@@ -138,7 +139,7 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_long2(self, "Dogmen have amazing hearing and are hard to creep up on.")
+    my.text_description_long2(self, "Dogmen have amazing hearing and are hard to creep up on. Very skilled with throwing darts.")
     my.text_description_long3(self, "Where the dogwomen live is a well kept secret.")
     my.text_description_long(self, "A mildly odorous dogman. Half man, half mutt and blessed with the intellectual capabilities of a human, this poor creature is often very confused as to where it is.")
     my.text_description_short(self, "A perma panting dogman.")

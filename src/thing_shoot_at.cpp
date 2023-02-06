@@ -215,7 +215,7 @@ bool Thing::shoot_at_target(void)
 
 bool Thing::shoot_at_and_choose_target(Thingp item, UseOptions *use_options)
 {
-  dbg("Fire at and choose target: %s", item->to_short_string().c_str());
+  dbg("Shoot at and choose target: %s", item->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   if (use_options && use_options->radial_effect) {
@@ -230,9 +230,9 @@ bool Thing::shoot_at_and_choose_target(Thingp item, UseOptions *use_options)
 bool Thing::shoot_at(Thingp item, Thingp target)
 {
   if (target) {
-    dbg("Fire %s at %s", item->to_short_string().c_str(), target->to_short_string().c_str());
+    dbg("Shoot %s at %s", item->to_short_string().c_str(), target->to_short_string().c_str());
   } else {
-    dbg("Fire %s", item->to_short_string().c_str());
+    dbg("Shoot %s", item->to_short_string().c_str());
   }
   TRACE_AND_INDENT();
 
@@ -256,7 +256,7 @@ bool Thing::shoot_at(Thingp target)
     return false;
   }
 
-  dbg("Fire at %s if possible", target->to_short_string().c_str());
+  dbg("Shoot at %s if possible", target->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   Thingp curr_weapon = equip_get(MONST_EQUIP_WEAPON);
@@ -265,54 +265,61 @@ bool Thing::shoot_at(Thingp target)
       Thingp best_staff = nullptr;
       carried_staff_highest_value_for_target(&best_staff, target);
       if (best_staff) {
-        dbg("Fire with best staff: %s", best_staff->to_short_string().c_str());
+        dbg("Shoot with best staff: %s", best_staff->to_short_string().c_str());
         curr_weapon = best_staff;
-      } else {
-        return false;
       }
     } else if (is_able_to_use_ranged_weapons()) {
       Thingp best_ranged_weapon = nullptr;
       carried_ranged_weapon_highest_value_for_target(&best_ranged_weapon, target);
       if (best_ranged_weapon) {
-        dbg("Fire with best ranged weapon: %s", best_ranged_weapon->to_short_string().c_str());
+        dbg("Shoot with best ranged weapon: %s", best_ranged_weapon->to_short_string().c_str());
         curr_weapon = best_ranged_weapon;
-      } else {
-        return false;
       }
-    } else {
-      return false;
     }
   }
 
   //
   // If using a sword, allow the monst to use a staff without equipping
   //
-  if (! curr_weapon->is_staff() && is_able_to_use_staffs()) {
-    Thingp best_staff = nullptr;
-    carried_staff_highest_value_for_target(&best_staff, target);
-    if (best_staff) {
-      dbg("Best staff: %s", best_staff->to_short_string().c_str());
-      curr_weapon = best_staff;
-    } else {
+  if (curr_weapon) {
+    dbg("Current weapon: %s", curr_weapon->to_short_string().c_str());
+    TRACE_AND_INDENT();
+
+    if (! curr_weapon->is_staff() && is_able_to_use_staffs()) {
+      dbg("Try to use a staff?");
+      TRACE_AND_INDENT();
+      Thingp best_staff = nullptr;
+      carried_staff_highest_value_for_target(&best_staff, target);
+      if (best_staff) {
+        dbg("Best staff: %s", best_staff->to_short_string().c_str());
+        curr_weapon = best_staff;
+      }
+    }
+
+    if (! curr_weapon->is_ranged_weapon() && is_able_to_use_ranged_weapons()) {
+      dbg("Try to use ranged weapon?");
+      TRACE_AND_INDENT();
+      Thingp best_ranged_weapon = nullptr;
+      carried_ranged_weapon_highest_value_for_target(&best_ranged_weapon, target);
+      if (best_ranged_weapon) {
+        dbg("Best ranged weapon: %s", best_ranged_weapon->to_short_string().c_str());
+        curr_weapon = best_ranged_weapon;
+      }
+    }
+
+    if (! curr_weapon->is_ranged_weapon() && ! curr_weapon->is_staff()) {
+      dbg("No staff or ranged weapon to use");
       return false;
     }
   }
 
-  if (! curr_weapon->is_ranged_weapon() && is_able_to_use_ranged_weapons()) {
-    Thingp best_ranged_weapon = nullptr;
-    carried_ranged_weapon_highest_value_for_target(&best_ranged_weapon, target);
-    if (best_ranged_weapon) {
-      dbg("Best ranged weapon: %s", best_ranged_weapon->to_short_string().c_str());
-      curr_weapon = best_ranged_weapon;
-    } else {
-      return false;
-    }
-  }
-
-  if (! curr_weapon->is_ranged_weapon() && ! curr_weapon->is_staff()) {
-    dbg("No staff or ranged weapon to use");
+  if (! curr_weapon) {
+    dbg("No current weapon to shoot with");
     return false;
   }
+
+  dbg("Shoot with best weapon: %s", curr_weapon->to_short_string().c_str());
+  TRACE_AND_INDENT();
 
   if (! possible_to_attack(target)) {
     return false;
@@ -323,5 +330,13 @@ bool Thing::shoot_at(Thingp target)
     return false;
   }
 
+  if (curr_weapon->is_ranged_weapon()) {
+    dbg("Throw with best ranged weapon: %s", curr_weapon->to_short_string().c_str());
+    TRACE_AND_INDENT();
+    return throw_at(curr_weapon, target);
+  }
+
+  dbg("Shoot with best weapon: %s", curr_weapon->to_short_string().c_str());
+  TRACE_AND_INDENT();
   return shoot_at(curr_weapon, target);
 }

@@ -234,7 +234,7 @@ void Game::place_player(void)
         auto w = level->thing_new("staff_negation", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto d = level->thing_new("dogman", point(x + 2, y));
         d->wake("");
       }

@@ -580,6 +580,7 @@ public:
   bool thing_check_for_heat_dmg(void);
   bool thing_sound_play_channel(int chan, const std::string &alias);
   bool thing_sound_play(const std::string &alias);
+  bool throw_at(Thingp w, Thingp target);
   bool throw_item_choose_target(Thingp item);
   bool too_far_from_leader(point p);
   bool too_far_from_leader(point p, float delta);
@@ -2461,7 +2462,6 @@ public:
   void temperature_incr(int);
   void temperature_incr(void);
   void temperature_tick(void);
-  void throw_at(Thingp w, Thingp target);
   void tick(void);
   void tiles_get(void);
   void topcon(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);

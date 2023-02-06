@@ -83,7 +83,7 @@ point Thing::in_the_way_for_throwing(const point s, const point e)
 
     auto it = in_the_way_for_throwing(s, e, x0, y0);
     if (it) {
-      CON("hit somat stop at %d,%d", prev.x, prev.y);
+      dbg("hit something stop at %d,%d", prev.x, prev.y);
       return prev;
     }
     prev = point(x0, y0);

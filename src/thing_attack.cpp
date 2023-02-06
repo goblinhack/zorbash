@@ -483,6 +483,20 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
       //
       return false;
     }
+
+    //
+    // Don't allow attacking of the exit!
+    //
+    if (victim->is_critical_to_level()) {
+      return false;
+    }
+
+    //
+    // Don't attack things like sewers!
+    //
+    if (! victim->is_attackable_by_player() && ! victim->is_attackable_by_monst()) {
+      return false;
+    }
   } else {
     //
     // Check this thing can attack

@@ -168,8 +168,10 @@ int Thing::carried_ranged_weapon_highest_value_for_target(Thingp *out, Thingp ta
       continue;
     }
 
-    if (! t->charge_count()) {
-      continue;
+    if (t->initial_charge_count()) {
+      if (! t->charge_count()) {
+        continue;
+      }
     }
 
     //

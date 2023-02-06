@@ -76,7 +76,7 @@ void Thing::on_thrown_callback(ThingId owner_id_when_thrown)
   visible();
 }
 
-void Thing::throw_at(Thingp what, Thingp target)
+bool Thing::throw_at(Thingp what, Thingp target)
 {
   TRACE_NO_INDENT();
   if (! what) {
@@ -86,13 +86,13 @@ void Thing::throw_at(Thingp what, Thingp target)
   verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot throw null thing");
-    return;
+    return false;
   }
 
   verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot throw at null target");
-    return;
+    return false;
   }
 
   //
@@ -108,10 +108,12 @@ void Thing::throw_at(Thingp what, Thingp target)
   if (throw_at != throw_was_stopped_at) {
     if (is_player()) {
       msg("You fail to throw %s that far, something was in the way.", what->text_the().c_str());
+    } else {
+      dbg("Fail to throw %s that far, something was in the way.", what->text_the().c_str());
     }
     throw_at = throw_was_stopped_at;
 
-    dbg("Throw %s at new point %s", what->to_short_string().c_str(), throw_at.to_string().c_str());
+    dbg("Throw %s at new in-the-way thing at: %s", what->to_short_string().c_str(), throw_at.to_string().c_str());
     need_to_choose_a_new_target = true;
   }
 
@@ -120,6 +122,10 @@ void Thing::throw_at(Thingp what, Thingp target)
   //
   float dist     = DISTANCE(curr_at.x, curr_at.y, throw_at.x, throw_at.y);
   float max_dist = distance_throw_get();
+  if (! max_dist) {
+    err("Cannot throw, no distance set");
+    return false;
+  }
 
   //
   // Allow darts to be thrown further
@@ -157,8 +163,8 @@ void Thing::throw_at(Thingp what, Thingp target)
     throw_at = curr_at + point(dx, dy);
 
     float dist = distance(curr_at, throw_at);
-    dbg("Throw %s at new point %s, dist %f, max %f", what->to_short_string().c_str(), throw_at.to_string().c_str(),
-        dist, max_dist);
+    dbg("Throw %s at new point %s, dist %f, max dist %f", what->to_short_string().c_str(),
+        throw_at.to_string().c_str(), dist, max_dist);
     need_to_choose_a_new_target = true;
   }
 
@@ -332,6 +338,8 @@ void Thing::throw_at(Thingp what, Thingp target)
   if (game->state == Game::STATE_CHOOSING_TARGET) {
     game->change_state(Game::STATE_NORMAL, "finished choosing a target");
   }
+
+  return true;
 }
 
 ////////////////////////////////////////////////////////////////////////////
