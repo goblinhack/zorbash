@@ -158,7 +158,13 @@ void Thing::killed(Thingp defeater, const char *reason)
       level_pop();
       open();
       level_push();
+
       if (player) {
+        //
+        // Update the dmap else the messages below may not appear
+        //
+        level->dmap_to_player_update();
+
         int distance = distance_to_player();
         if (is_secret_door()) {
           if (distance <= 1) {

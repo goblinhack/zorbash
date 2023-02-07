@@ -28,6 +28,7 @@ def tp_init(name, text_long_name):
     my.is_light_blocker(self, True)
     my.is_loggable(self, True)
     my.is_obs_in_the_way_for_jumping(self, True)
+    my.is_openable(self, True)
     my.is_secret_door(self, True)
     my.noise_blocker(self, True)
     my.noise_on_hit_and_now_dead(self, 10)

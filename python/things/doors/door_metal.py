@@ -51,6 +51,7 @@ def tp_init(name):
     my.is_obs_in_the_way_for_firing(self, True)
     my.is_obs_in_the_way_for_jumping(self, True)
     my.is_obs_wall_or_door(self, True)
+    my.is_openable(self, True)
     my.noise_blocker(self, True)
     my.noise_on_hit_and_now_dead(self, 100)
     my.noise_on_hit_and_still_alive(self, 100)
