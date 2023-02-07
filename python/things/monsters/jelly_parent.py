@@ -46,6 +46,8 @@ def tp_init(name, text_long_name):
     my.ai_resent_count(self, 10)
     my.ai_wanderer(self, True)
     my.attack_eater(self, True)
+    my.capacity_height(self, 8)
+    my.capacity_width(self, 8)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 5)

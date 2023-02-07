@@ -2,6 +2,7 @@
 <!-- ------                                                                                                                                       -->
 <!-- dogman dart throwing                                                                                                                         -->
 <!-- check buff of missile protect                                                                                                                -->
+<!-- torch in a chest should not set it on fire                                                                                                   -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

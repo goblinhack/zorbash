@@ -21,6 +21,12 @@ void tp_fixup(void)
       tp->is_able_to_tire_set(true);
     }
 
+    if (tp->is_item_collector()) {
+      if (! tp->capacity_height() || ! tp->capacity_width()) {
+        DIE("Tp %s needs bag capacity", tp->name().c_str());
+      }
+    }
+
     if (tp->is_monst() || tp->is_monst_pack()) {
       tp->is_tickable_set(true);
     }

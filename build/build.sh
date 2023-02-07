@@ -438,7 +438,7 @@ case "$MY_OS_NAME" in
         # These seem to make no difference
         #C_FLAGS+='-fasynchronous-unwind-tables '
         #C_FLAGS+='-funwind-tables '
-        LDFLAGS+='-rdynamic '
+        LDFLAGS+=' -rdynamic'
         LDLIBS+="-lGL "
         if [[ $OPT_DEV2 != "" ]]; then
             ASAN_OPTIONS=fast_unwind_on_malloc
