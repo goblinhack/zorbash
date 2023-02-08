@@ -187,6 +187,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     return false;
   }
 
+  dbg("Hit actual, damage %d", damage);
+  TRACE_AND_INDENT();
+
   auto victim = this;
   if (attack_options->attack[ THING_ATTACK_POISON ]) {
     damage = real_hitter->total_dmg_for_on_attacking_dmg_poison(victim, damage);
@@ -299,7 +302,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       return false;
     }
 
-    IF_DEBUG2 { real_hitter->log("Attack poison damage %d on %s", damage, to_short_string().c_str()); }
+    IF_DEBUG { real_hitter->log("Attack poison damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "poison ";
 
     if (dmg_received_doubled_from_poison()) {
@@ -328,7 +331,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       }
       return false;
     }
-    IF_DEBUG2 { real_hitter->log("Attack drown damage %d on %s", damage, to_short_string().c_str()); }
+    IF_DEBUG { real_hitter->log("Attack drown damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "drown ";
   }
 
@@ -347,7 +350,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       }
       return false;
     }
-    IF_DEBUG2 { real_hitter->log("Attack dmg_bite damage %d on %s", damage, to_short_string().c_str()); }
+    IF_DEBUG { real_hitter->log("Attack dmg_bite damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "bite ";
   }
 
@@ -366,7 +369,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       }
       return false;
     }
-    IF_DEBUG2 { real_hitter->log("Attack dmg_claw damage %d on %s", damage, to_short_string().c_str()); }
+    IF_DEBUG { real_hitter->log("Attack dmg_claw damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "claw ";
   }
 
@@ -401,7 +404,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       return false;
     }
 
-    IF_DEBUG2 { real_hitter->log("Attack dmg_cold damage %d on %s", damage, to_short_string().c_str()); }
+    IF_DEBUG { real_hitter->log("Attack dmg_cold damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "cold ";
 
     if (temperature_sensitive()) {
@@ -442,7 +445,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       return false;
     }
 
-    IF_DEBUG2 { real_hitter->log("Attack dmg_fire damage %d on %s", damage, to_short_string().c_str()); }
+    IF_DEBUG { real_hitter->log("Attack dmg_fire damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "fire ";
 
     if (temperature_sensitive()) {
@@ -484,7 +487,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       return false;
     }
 
-    IF_DEBUG2 { real_hitter->log("Attack dmg_heat damage %d on %s", damage, to_short_string().c_str()); }
+    IF_DEBUG { real_hitter->log("Attack dmg_heat damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "heat ";
 
     if (temperature_sensitive()) {
@@ -513,7 +516,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       }
       return false;
     }
-    IF_DEBUG2 { real_hitter->log("Attack dmg_crush damage %d on %s", damage, to_short_string().c_str()); }
+    IF_DEBUG { real_hitter->log("Attack dmg_crush damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "crush ";
   }
 
@@ -533,7 +536,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       }
       return false;
     }
-    IF_DEBUG2 { real_hitter->log("Attack dmg_missile damage %d on %s", damage, to_short_string().c_str()); }
+    IF_DEBUG { real_hitter->log("Attack dmg_missile damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "impact ";
   }
 
@@ -567,7 +570,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       }
       return false;
     }
-    IF_DEBUG2 { real_hitter->log("Attack dmg_lightning damage %d on %s", damage, to_short_string().c_str()); }
+    IF_DEBUG { real_hitter->log("Attack dmg_lightning damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "lightning ";
 
     if (was_frozen || is_frozen) {
@@ -593,7 +596,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       return false;
     }
 
-    IF_DEBUG2 { real_hitter->log("Attack dmg_energy damage %d on %s", damage, to_short_string().c_str()); }
+    IF_DEBUG { real_hitter->log("Attack dmg_energy damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "energy ";
 
     if (was_frozen || is_frozen) {
@@ -633,7 +636,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       return false;
     }
 
-    IF_DEBUG2 { real_hitter->log("Attack dmg_negation damage %d on %s", damage, to_short_string().c_str()); }
+    IF_DEBUG { real_hitter->log("Attack dmg_negation damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "negation ";
   }
 
@@ -666,7 +669,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       return false;
     }
 
-    IF_DEBUG2 { real_hitter->log("Attack dmg_acid damage %d on %s", damage, to_short_string().c_str()); }
+    IF_DEBUG { real_hitter->log("Attack dmg_acid damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "acid ";
 
     if (dmg_received_doubled_from_acid()) {
@@ -707,7 +710,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       return false;
     }
 
-    IF_DEBUG2 { real_hitter->log("Attack dmg_water damage %d on %s", damage, to_short_string().c_str()); }
+    IF_DEBUG { real_hitter->log("Attack dmg_water damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "water ";
 
     if (dmg_received_doubled_from_water()) {
@@ -732,7 +735,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       }
       return false;
     }
-    IF_DEBUG2 { real_hitter->log("Attack dmg_digest damage %d on %s", damage, to_short_string().c_str()); }
+    IF_DEBUG { real_hitter->log("Attack dmg_digest damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "digest ";
   }
 
@@ -765,7 +768,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       return false;
     }
 
-    IF_DEBUG2 { real_hitter->log("Attack necrosis damage %d on %s", damage, to_short_string().c_str()); }
+    IF_DEBUG { real_hitter->log("Attack necrosis damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "rotting ";
 
     if (dmg_received_doubled_from_necrosis()) {
@@ -805,7 +808,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       }
       return false;
     }
-    IF_DEBUG2 { real_hitter->log("Attack stamina damage %d on %s", damage, to_short_string().c_str()); }
+    IF_DEBUG { real_hitter->log("Attack stamina damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "draining ";
   }
 
@@ -825,7 +828,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       }
       return false;
     }
-    IF_DEBUG2 { real_hitter->log("Attack natural attack damage %d on %s", damage, to_short_string().c_str()); }
+    IF_DEBUG { real_hitter->log("Attack natural attack damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = real_hitter->dmg_nat_att_type() + " ";
   }
 
@@ -845,7 +848,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     } else {
       dmg_type = "bashing ";
     }
-    IF_DEBUG2 { real_hitter->log("Attack melee damage %d on %s", damage, to_short_string().c_str()); }
+    IF_DEBUG { real_hitter->log("Attack melee damage %d on %s", damage, to_short_string().c_str()); }
   }
 
   //
@@ -853,14 +856,14 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   if (is_dead || is_dying) {
     if (real_hitter->can_eat(this)) {
-      IF_DEBUG2 { hitter->log("Thing is dead, allow it to be eaten"); }
+      IF_DEBUG { hitter->log("Thing is dead, allow it to be eaten"); }
     } else {
-      IF_DEBUG2 { hitter->log("Hit fails, it's dead"); }
+      IF_DEBUG { hitter->log("Hit fails, it's dead"); }
       return false;
     }
   } else {
     if (! damage) {
-      IF_DEBUG2 { hitter->log("Hit fails, no damage"); }
+      IF_DEBUG { hitter->log("Hit fails, no damage"); }
       return false;
     }
   }
@@ -1010,7 +1013,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           }
           damage = total_dmg_for_on_receiving_dmg_stat_str(hitter, real_hitter, damage);
           if (! damage) {
-            IF_DEBUG2 { real_hitter->log("No strength damage"); }
+            IF_DEBUG { real_hitter->log("No strength damage"); }
             return false;
           }
           if (real_hitter->is_necrotic_danger_level()) {
@@ -1047,7 +1050,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           }
           damage = total_dmg_for_on_receiving_dmg_stat_con(hitter, real_hitter, damage);
           if (! damage) {
-            IF_DEBUG2 { real_hitter->log("No con damage"); }
+            IF_DEBUG { real_hitter->log("No con damage"); }
             return false;
           }
           if (real_hitter->is_necrotic_danger_level()) {
@@ -1101,12 +1104,12 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
 
   if (victim->is_frozen) {
     damage *= 3;
-    IF_DEBUG2 { hitter->log("Hit %s (health %d) for shatter damage %d", text_the().c_str(), health(), damage); }
+    IF_DEBUG { hitter->log("Hit %s (health %d) for shatter damage %d", text_the().c_str(), health(), damage); }
   } else if (attack_options->crit) {
     damage *= 2;
-    IF_DEBUG2 { hitter->log("Hit %s (health %d) for CRIT damage %d", text_the().c_str(), health(), damage); }
+    IF_DEBUG { hitter->log("Hit %s (health %d) for CRIT damage %d", text_the().c_str(), health(), damage); }
   } else {
-    IF_DEBUG2 { hitter->log("Hit %s (health %d) for damage %d", text_the().c_str(), health(), damage); }
+    IF_DEBUG { hitter->log("Hit %s (health %d) for damage %d", text_the().c_str(), health(), damage); }
   }
 
   //
@@ -1139,12 +1142,15 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   auto o_top = top_owner();
   if (is_dead || is_dying) {
+    dbg("Dead or dying");
     if (o_top && o_top->is_player()) {
-      if (! o_top->is_dying && ! o_top->is_dying) {
+      dbg("Player is onwer of dead or dying thing");
+      if (! o_top->is_dead && ! o_top->is_dying) {
         msg("Your %s is destroyed!", text_long_name().c_str());
       }
     } else if (o_top && o_top->is_monst()) {
-      if (! o_top->is_dying && ! o_top->is_dying) {
+      dbg("Monst is onwer of dead or dying thing");
+      if (! o_top->is_dead && ! o_top->is_dying) {
         msg("%s %s is destroyed!", apostrophise(o_top->text_The()).c_str(), text_long_name().c_str());
       }
     }
@@ -1404,6 +1410,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("Your %s is being drowned.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
         msg("Your %s is struck down.", text_long_name().c_str());
+      } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
+        msg("Your %s is burnt.", text_long_name().c_str());
       } else {
         msg("Your %s is being damaged.", text_long_name().c_str());
       }
@@ -1592,6 +1600,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("Your %s is being drowned.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
         msg("Your %s is struck down.", text_long_name().c_str());
+      } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
+        msg("Your %s is burnt.", text_long_name().c_str());
       } else {
         msg("Your %s is being damaged.", text_long_name().c_str());
       }
@@ -1626,6 +1636,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("Your %s is being drowned.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
         msg("Your %s is struck down.", text_long_name().c_str());
+      } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
+        msg("Your %s is burnt.", text_long_name().c_str());
       } else {
         msg("Your %s is being damaged.", text_long_name().c_str());
       }
@@ -1915,7 +1927,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_NATURAL ]) {
         reason = "by over friendly biting";
       } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
-        reason = "by being cooked";
+        reason = "by being burnt";
       } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
         reason = "by drowning";
       } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
@@ -2014,31 +2026,33 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
 //
 int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
 {
-  TRACE_NO_INDENT();
+  IF_DEBUG { hitter->log("Is hit? damage %d", damage); }
+  TRACE_AND_INDENT();
+
   if (attack_options->attack[ THING_ATTACK_NATURAL ] || attack_options->attack[ THING_ATTACK_DIGEST ]) {
     //
     // Allow attacks when dead
     //
-    IF_DEBUG2 { hitter->log("Possible attack on %s", to_short_string().c_str()); }
+    IF_DEBUG { hitter->log("Possible attack on %s", to_short_string().c_str()); }
   } else if (damage) {
     //
     // Filter attacks when dead
     //
     if (is_dead || is_dying) {
       if (is_frozen) {
-        IF_DEBUG2 { hitter->log("Already dead, allow frozen corpse hit %s", to_short_string().c_str()); }
+        IF_DEBUG { hitter->log("Already dead, allow frozen corpse hit %s", to_short_string().c_str()); }
         corpse_cleanup = true;
         dead("frozen corpse cleanup");
         return false;
       }
-      IF_DEBUG2 { hitter->log("Already dead, no more hits %s", to_short_string().c_str()); }
+      IF_DEBUG { hitter->log("Already dead, no more hits %s", to_short_string().c_str()); }
       return false;
     }
-    IF_DEBUG2 { hitter->log("Possible attack on %s", to_short_string().c_str()); }
+    IF_DEBUG { hitter->log("Possible attack on %s", to_short_string().c_str()); }
   } else {
     //
     // Failed attack
-    IF_DEBUG2 { hitter->log("No damage"); }
+    IF_DEBUG { hitter->log("No damage"); }
     return false;
   }
   TRACE_NO_INDENT();
@@ -2094,7 +2108,7 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
           auto max_hit_count = real_hitter_speed / speed;
 
           if (hit_count >= max_hit_count) {
-            IF_DEBUG2
+            IF_DEBUG
             {
               real_hitter->log("No, I've already hit %s (count %d max %d)", to_short_string().c_str(), hit_count,
                                max_hit_count);
@@ -2105,7 +2119,7 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
           //
           // Static things hit one time
           //
-          IF_DEBUG2 { real_hitter->log("No, I've already hit %s", to_short_string().c_str()); }
+          IF_DEBUG { real_hitter->log("No, I've already hit %s", to_short_string().c_str()); }
           return false;
         }
       }
@@ -2122,7 +2136,7 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
         //
         // NOTE: this needs to be before on_fire_set() as that leads to multiple hits by lava
         //
-        IF_DEBUG2 { real_hitter->log("Set recently hit: %s", to_short_string().c_str()); }
+        IF_DEBUG { real_hitter->log("Set recently hit: %s", to_short_string().c_str()); }
         aip()->recently_hit_by[ real_hitter->id ]++;
       }
     }
@@ -2134,9 +2148,9 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
   //
   if (is_dead || is_dying) {
     if (real_hitter->can_eat(this)) {
-      IF_DEBUG2 { hitter->log("Cannot hit dead thing, but can eat: %s", to_short_string().c_str()); }
+      IF_DEBUG { hitter->log("Cannot hit dead thing, but can eat: %s", to_short_string().c_str()); }
     } else {
-      IF_DEBUG2 { hitter->log("Cannot hit: %s is dead", to_short_string().c_str()); }
+      IF_DEBUG { hitter->log("Cannot hit: %s is dead", to_short_string().c_str()); }
       return false;
     }
   }
@@ -2147,13 +2161,13 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
   if (is_very_hard()) {
     if ((curr_at.x < MAP_BORDER_ROCK) || (curr_at.y < MAP_BORDER_ROCK) ||
         (curr_at.x >= MAP_WIDTH - MAP_BORDER_ROCK) || (curr_at.y >= MAP_HEIGHT - MAP_BORDER_ROCK)) {
-      IF_DEBUG2 { hitter->log("Cannot hit: %s is very_hard", to_short_string().c_str()); }
+      IF_DEBUG { hitter->log("Cannot hit: %s is very_hard", to_short_string().c_str()); }
       return false;
     }
   }
 
   if (is_resurrecting) {
-    IF_DEBUG2 { hitter->log("Cannot hit: %s is resurrecting", to_short_string().c_str()); }
+    IF_DEBUG { hitter->log("Cannot hit: %s is resurrecting", to_short_string().c_str()); }
     return false;
   }
 
@@ -2164,7 +2178,7 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
     // the ghost is dead though.
     //
     if (hitter->is_monst()) {
-      IF_DEBUG2 { hitter->log("No, hitter %s is already dead", to_short_string().c_str()); }
+      IF_DEBUG { hitter->log("No, hitter %s is already dead", to_short_string().c_str()); }
       return false;
     }
   }
@@ -2199,7 +2213,7 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
         //
         // Not something that typically damages walls.
         //
-        IF_DEBUG2 { hitter->log("No, %s is immune (1)", to_short_string().c_str()); }
+        IF_DEBUG { hitter->log("No, %s is immune (1)", to_short_string().c_str()); }
         return false;
       }
     }
@@ -2220,7 +2234,7 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
         //
         // Not something that typically damages walls.
         //
-        IF_DEBUG2 { hitter->log("No, %s is immune (2)", to_short_string().c_str()); }
+        IF_DEBUG { hitter->log("No, %s is immune (2)", to_short_string().c_str()); }
         return false;
       }
     }
@@ -2233,16 +2247,18 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
     }
 
     if (hitter->is_fire()) {
-      IF_DEBUG2 { hitter->log("Fire attack"); }
+      IF_DEBUG { hitter->log("Fire attack"); }
     }
   }
 
-  IF_DEBUG2 { hitter->log("Hit succeeds"); }
+  IF_DEBUG { hitter->log("Hit succeeds"); }
+  TRACE_AND_INDENT();
+
   int hit_and_destroyed;
 
   hit_and_destroyed = ai_hit_actual(hitter, real_hitter, attack_options, damage);
   if (hit_and_destroyed) {
-    IF_DEBUG2 { hitter->log("Hit and destroyed victim"); }
+    IF_DEBUG { hitter->log("Hit and destroyed victim"); }
   }
 
   return (hit_and_destroyed);

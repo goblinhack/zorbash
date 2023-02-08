@@ -714,6 +714,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
             attack_options->dmg_set                       = true;
             attack_options->attack[ THING_ATTACK_POISON ] = true;
             victim->poison_reason_set(text_a_or_an());
+            dbg("Set poison damage %d", attack_options->damage);
           }
         }
       }
@@ -727,6 +728,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         attack_options->dmg_set                       = true;
         attack_options->attack[ THING_ATTACK_POISON ] = true;
         victim->poison_reason_set(text_a_or_an());
+        dbg("Set poison damage %d", attack_options->damage);
       }
     }
 
@@ -1241,7 +1243,8 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     if (is_engulfer()) {
       if (victim->curr_at == curr_at) {
-        attack_options->damage                           = dmg_digest();
+        attack_options->damage = dmg_digest();
+        dbg("Set digest damage %d", attack_options->damage);
         attack_options->attack[ THING_ATTACK_POISON ]    = false;
         attack_options->attack[ THING_ATTACK_DROWN ]     = false;
         attack_options->attack[ THING_ATTACK_BITE ]      = false;
@@ -1266,6 +1269,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     if (attack_options->dmg_set) {
       if (attack_options->damage < 1) {
         attack_options->damage = 1;
+        dbg("Set min damage %d", attack_options->damage);
       }
     }
 
@@ -1274,7 +1278,8 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     if (attack_options->crit) {
       if (attack_options->damage < 1) {
-        attack_options->damage = 10;
+        attack_options->damage = 2;
+        dbg("Set min crit damage %d", attack_options->damage);
       }
     }
 
@@ -1294,6 +1299,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     if (attack_options->damage <= 0) {
       if (attack_num > 0) {
         attack_options->damage = dmg_melee();
+        dbg("Set melee damage %d", attack_options->damage);
       }
     }
 
@@ -1431,32 +1437,22 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         if (i_rolled == 20) {
           attack_options->crit = true;
           hit                  = true;
-          IF_DEBUG2
-          {
-            dbg("Attack on %s: ATT %s DEF %d(%s), to-hit %d, rolled %d -> crit", victim->to_short_string().c_str(),
-                modifier_to_string(att_roll_modifier).c_str(), stat_def, modifier_to_string(def_bonus).c_str(),
-                to_hit, i_rolled);
-          }
+          dbg("Attack on %s: ATT %s DEF %d(%s), to-hit %d, rolled %d -> crit", victim->to_short_string().c_str(),
+              modifier_to_string(att_roll_modifier).c_str(), stat_def, modifier_to_string(def_bonus).c_str(), to_hit,
+              i_rolled);
         } else if (i_rolled == 1) {
           hit    = false;
           fumble = true;
-          IF_DEBUG2
-          {
-            dbg("Attack on %s: ATT %s DEF %d(%s), to-hit %d, rolled %d -> fumble", victim->to_short_string().c_str(),
-                modifier_to_string(att_roll_modifier).c_str(), stat_def, modifier_to_string(def_bonus).c_str(),
-                to_hit, i_rolled);
-          }
+          dbg("Attack on %s: ATT %s DEF %d(%s), to-hit %d, rolled %d -> fumble", victim->to_short_string().c_str(),
+              modifier_to_string(att_roll_modifier).c_str(), stat_def, modifier_to_string(def_bonus).c_str(), to_hit,
+              i_rolled);
         } else {
           i_rolled += att_roll_modifier;
           hit = i_rolled >= to_hit;
-          IF_DEBUG2
-          {
-            dbg("Attack on %s: ATT %s(%s,%s) DEF %d(%s), to-hit %d, rolled %d -> %s",
-                victim->to_short_string().c_str(), modifier_to_string(att_roll_modifier).c_str(),
-                modifier_to_string(att_bonus).c_str(), modifier_to_string(att_penalty).c_str(),
-
-                stat_def, modifier_to_string(def_bonus).c_str(), to_hit, i_rolled, hit ? "hit" : "miss");
-          }
+          dbg("Attack on %s: ATT %s(%s,%s) DEF %d(%s), to-hit %d, rolled %d -> %s", victim->to_short_string().c_str(),
+              modifier_to_string(att_roll_modifier).c_str(), modifier_to_string(att_bonus).c_str(),
+              modifier_to_string(att_penalty).c_str(), stat_def, modifier_to_string(def_bonus).c_str(), to_hit,
+              i_rolled, hit ? "hit" : "miss");
         }
 
         //

@@ -14,7 +14,8 @@ void Thing::visible(void)
   if (! is_hidden) {
     return;
   }
-  dbg("visible");
+
+  dbg("Visible");
 
   //
   // If this thing has an owner, should the thing stay hidden?

@@ -12,7 +12,8 @@ void Thing::hide(void)
   if (is_hidden) {
     return;
   }
-  dbg("hide");
+
+  dbg("Hide");
 
   level_pop();
   is_hidden = true;
