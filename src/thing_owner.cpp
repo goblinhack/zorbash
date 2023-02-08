@@ -39,7 +39,7 @@ void Thing::on_owner_add(Thingp owner)
       mod = name();
     }
 
-    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), owner->to_short_string().c_str());
+    dbg2("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), owner->to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
@@ -91,7 +91,7 @@ void Thing::on_owner_unset(Thingp owner)
       mod = name();
     }
 
-    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), owner->to_short_string().c_str());
+    dbg2("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), owner->to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {

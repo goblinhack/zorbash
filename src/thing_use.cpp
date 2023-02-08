@@ -36,7 +36,7 @@ void Thing::on_use(Thingp what)
       mod = what->name();
     }
 
-    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
+    dbg2("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, 0U, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
@@ -72,7 +72,7 @@ void Thing::on_swing(Thingp what)
       mod = what->name();
     }
 
-    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
+    dbg2("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
@@ -109,7 +109,7 @@ void Thing::on_use(Thingp what, Thingp target)
         mod = what->name();
       }
 
-      dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
+      dbg2("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
           what->to_short_string().c_str(), target->to_short_string().c_str());
 
       py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, target->id.id, (unsigned int) curr_at.x,
@@ -146,7 +146,7 @@ void Thing::on_final_use(Thingp what)
       mod = what->name();
     }
 
-    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
+    dbg2("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, 0U, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
@@ -185,7 +185,7 @@ void Thing::on_final_use(Thingp what, Thingp target)
         mod = what->name();
       }
 
-      dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
+      dbg2("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
           what->to_short_string().c_str(), target->to_short_string().c_str());
 
       py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, target->id.id, (unsigned int) curr_at.x,

@@ -60,7 +60,7 @@ bool Thing::on_want_to_shoot_at(Thingp target)
       mod = name();
     }
 
-    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), target->to_short_string().c_str());
+    dbg2("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), target->to_short_string().c_str());
 
     return py_call_bool_fn(mod.c_str(), fn.c_str(), id.id, target->id.id, (unsigned int) target->curr_at.x,
                            (unsigned int) target->curr_at.y);

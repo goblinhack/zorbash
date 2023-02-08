@@ -31,7 +31,7 @@ void Thing::on_targetted_radially(void)
       mod = name();
     }
 
-    dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
+    dbg2("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
@@ -63,7 +63,7 @@ void Thing::on_targetted(point target)
       mod = name();
     }
 
-    dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
+    dbg2("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) target.x, (unsigned int) target.y);
   } else {
