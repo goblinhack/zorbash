@@ -1,6 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- dogman dart throwing                                                                                                                         -->
+<!-- clicking on a broken door swings weapon                                                                                                      -->
 <!-- check buff of missile protect                                                                                                                -->
 <!-- torch in a chest should not set it on fire                                                                                                   -->
 <!-- ------                                                                                                                                       -->

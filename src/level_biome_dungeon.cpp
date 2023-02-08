@@ -1045,12 +1045,12 @@ void Level::create_biome_dungeon_place_objects_with_normal_placement_rules(Dunge
         tp = tp_random_descend_dungeon();
       }
       if (d->is_food(x, y)) {
-        if (d1000() < 200) {
+        if (d1000() < 500) {
           tp = tp_random_food();
         }
       }
       if (d->is_gold(x, y)) {
-        if (d1000() < 20) {
+        if (d1000() < 500) {
           tp = tp_random_gold();
         }
       }
@@ -1058,17 +1058,19 @@ void Level::create_biome_dungeon_place_objects_with_normal_placement_rules(Dunge
         tp = tp_random_key();
       }
       if (d->is_potion(x, y)) {
-        if (d1000() < 20) {
+        if (d1000() < 500) {
           tp = tp_random_potion();
         }
       }
       if (d->is_staff(x, y)) {
-        if (d1000() < 20) {
+        if (d1000() < 500) {
           tp = tp_random_staff();
         }
       }
       if (d->is_ring(x, y)) {
-        tp = tp_random_ring();
+        if (d1000() < 500) {
+          tp = tp_random_ring();
+        }
       }
       if (d->is_secret_door(x, y)) {
         tp = tp_random_secret_door();
