@@ -5,7 +5,8 @@ import tp
 def key_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
-    my.appearing_chance_d1000(self, 100)
+    my.chance_d1000_appearing(self, 100)
+    my.chance_d1000_melting(self, 5)
     my.collision_hit_priority(self, 6)
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
@@ -31,7 +32,6 @@ def key_init(name, text_long_name):
     my.is_moveable(self, True)
     my.light_color(self, "yellow")
     my.light_dist(self, 2)
-    my.melting_chance_d1000(self, 5)
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "an")
     my.text_description_long(self, "A pair of keys. What more can you say.")

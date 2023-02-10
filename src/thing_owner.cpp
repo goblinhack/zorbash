@@ -69,12 +69,12 @@ void Thing::on_owner_unset(Thingp owner)
   // Don't call this on death of the owner to avoid spurious post RIP messages
   //
   if (level->is_being_destroyed) {
-    dbg("Do not call unset, level being destroyed");
+    dbg2("Do not call unset, level being destroyed");
     return;
   }
 
   if (owner->is_dying || owner->is_dying) {
-    dbg("Do not call unset, owner is dying");
+    dbg2("Do not call unset, owner is dying");
     return;
   }
 
@@ -199,9 +199,9 @@ void Thing::owner_set(Thingp owner)
 
     on_owner_unset(old_owner);
 
-    dbg("Will change owner %s -> %s", old_owner->to_short_string().c_str(), owner->to_short_string().c_str());
+    dbg2("Will change owner %s -> %s", old_owner->to_short_string().c_str(), owner->to_short_string().c_str());
   } else {
-    dbg("Will set owner to %s", owner->to_short_string().c_str());
+    dbg2("Will set owner to %s", owner->to_short_string().c_str());
   }
 
   on_owner_add(owner);
@@ -213,7 +213,7 @@ void Thing::owner_set(Thingp owner)
   //
   is_visible_to_player = owner->is_visible_to_player;
 
-  dbg("Set owner to %s", owner->to_short_string().c_str());
+  dbg2("Set owner to %s", owner->to_short_string().c_str());
 }
 
 void Thing::owner_unset(void)
@@ -224,7 +224,7 @@ void Thing::owner_unset(void)
     return;
   }
 
-  dbg("Remove owner %s", old_owner->to_short_string().c_str());
+  dbg2("Remove owner %s", old_owner->to_short_string().c_str());
   on_owner_unset(old_owner);
 
   //
@@ -253,7 +253,7 @@ bool Thing::change_owner(Thingp new_owner)
     return true;
   }
 
-  dbg("Change owner from %s to %s", old_owner->to_short_string().c_str(), new_owner->to_short_string().c_str());
+  dbg2("Change owner from %s to %s", old_owner->to_short_string().c_str(), new_owner->to_short_string().c_str());
 
   if (old_owner->is_player()) {
     if (! old_owner->inventory_shortcuts_remove(this)) {

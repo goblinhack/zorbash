@@ -35,8 +35,8 @@ std::vector< std::string > Thing::on_get_text_description_long(void)
 
     auto owner = top_owner();
     dbg2("Call %s.%s(owner=%s, item=%s, %d, %d)", mod.c_str(), fn.c_str(),
-        owner ? owner->to_short_string().c_str() : "<>", to_string().c_str(), (unsigned int) curr_at.x,
-        (unsigned int) curr_at.y);
+         owner ? owner->to_short_string().c_str() : "<>", to_string().c_str(), (unsigned int) curr_at.x,
+         (unsigned int) curr_at.y);
     return py_call_std_vector_string_fn(mod.c_str(), fn.c_str(), owner ? owner->id.id : 0, id.id,
                                         (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   }

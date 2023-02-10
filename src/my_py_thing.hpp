@@ -8,12 +8,19 @@
 #include <Python.h>
 
 // begin sort marker1 {
+PyObject *chance_d10000_thing_set_on_fire(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *chance_d1000_thing_appearing(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *chance_d1000_thing_attack_engulf(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *chance_d1000_thing_is_able_to_jump_attack(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *chance_d1000_thing_is_able_to_jump_on_low_hp(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *chance_d1000_thing_is_able_to_jump_onto(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *chance_d1000_thing_is_able_to_jump_randomly(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *chance_d1000_thing_is_able_to_teleport_attack(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *chance_d1000_thing_is_steal_item(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_aggression_pct(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_ai_detect_secret_doors(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_ai_resent_count(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_ai_wanderer(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_appearing_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_attack_engulf_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_attack_no_msg(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_attack_num_get(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_attacks_per_round(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -139,14 +146,10 @@ PyObject *thing_is_able_to_enchant_items(PyObject *obj, PyObject *args, PyObject
 PyObject *thing_is_able_to_fall(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_follow(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_freeze(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_able_to_jump_attack_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_jump_attack(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_jump_escape(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_able_to_jump_on_low_hp_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_able_to_jump_onto_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_jump_onto(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_jump(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_able_to_jump_randomly_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_jump_randomly(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_jump_without_tiring(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_learn_skills(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -162,7 +165,6 @@ PyObject *thing_is_able_to_shoot_at_close_range(PyObject *obj, PyObject *args, P
 PyObject *thing_is_able_to_sleep(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_spawn_things(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_swim(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_able_to_teleport_attack_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_teleport_attack(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_teleport_escape(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_teleport_without_tiring(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -422,7 +424,6 @@ PyObject *thing_is_soft(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spider(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spiderweb(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_staff(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_steal_item_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_steam(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_sticky(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_stone(PyObject *obj, PyObject *args, PyObject *keywds);

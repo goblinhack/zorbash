@@ -53,8 +53,8 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.attack_no_msg(self, True)
     my.attacks_per_round(self, 1)
-    my.damaged_chance_d10000(self, 1)
-    my.dmg_melee_chance_d1000(self, 0, 1000)
+    my.chance_d10000_damaged(self, 1)
+    my.chance_d1000_dmg_melee(self, 0, 1000)
     my.dmg_melee_dice(self, "1d12+4")
     my.equip_carry_anim(self, "sword_plutonium_carry")
     my.gfx_anim_use(self, "sword_plutonium_swing")

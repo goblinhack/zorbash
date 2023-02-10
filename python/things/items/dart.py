@@ -13,8 +13,8 @@ def on_thrown(owner, me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.appearing_chance_d1000(self, 10)
-    my.dmg_missile_chance_d1000(self, 0, 1000)
+    my.chance_d1000_appearing(self, 10)
+    my.chance_d1000_dmg_missile(self, 0, 1000)
     my.dmg_missile_dice(self, "1d4")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)

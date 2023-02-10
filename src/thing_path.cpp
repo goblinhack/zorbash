@@ -247,7 +247,7 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
     //
     // Someone in our way?
     //
-    if (level->is_shovable(future_pos) && d1000() < tp()->is_able_to_shove_chance_d1000()) {
+    if (level->is_shovable(future_pos) && d1000() < tp()->chance_d1000_is_able_to_shove()) {
       //
       // Can the monst shove it into a something bad?
       //
@@ -355,7 +355,7 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
     //
     // Someone in our way we can grab?
     //
-    if (d1000() < tp()->is_able_to_grapple_chance_d1000()) {
+    if (d1000() < tp()->chance_d1000_is_able_to_grapple()) {
       //
       // Can the monst shove it into a something bad?
       //

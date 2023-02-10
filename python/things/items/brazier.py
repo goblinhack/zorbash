@@ -6,9 +6,9 @@ import random
 def tp_init(name, text_long_name, tiles=[]):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
-    my.appearing_chance_d1000(self, 100)
+    my.chance_d1000_appearing(self, 100)
+    my.chance_d1000_dmg_crush(self, 0, 1000)
     my.collision_hit_priority(self, 2)
-    my.dmg_crush_chance_d1000(self, 0, 1000)
     my.dmg_crush_dice(self, "1d6")
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)

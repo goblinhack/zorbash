@@ -852,7 +852,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
   TRACE_AND_INDENT();
 
   if (maybe_victim) {
-    if (d1000() < tp()->is_able_to_jump_attack_chance_d1000()) {
+    if (d1000() < tp()->chance_d1000_is_able_to_jump_attack()) {
       dbg("Try to jump in direction of escape attack");
       TRACE_AND_INDENT();
 
@@ -867,7 +867,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
       }
     }
 
-    if (d1000() < tp()->is_able_to_jump_attack_chance_d1000()) {
+    if (d1000() < tp()->chance_d1000_is_able_to_jump_attack()) {
       dbg("Try to jump in front attack");
       TRACE_AND_INDENT();
 
@@ -877,7 +877,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
     }
   }
 
-  if (d1000() < tp()->is_able_to_jump_attack_chance_d1000()) {
+  if (d1000() < tp()->chance_d1000_is_able_to_jump_attack()) {
     dbg("Try to jump attack");
     TRACE_AND_INDENT();
 
@@ -903,7 +903,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
         }
       }
 
-      if (d1000() < tp()->is_able_to_jump_onto_chance_d1000()) {
+      if (d1000() < tp()->chance_d1000_is_able_to_jump_onto()) {
         dbg("Try to jump onto %s", maybe_victim->to_short_string().c_str());
         TRACE_AND_INDENT();
 

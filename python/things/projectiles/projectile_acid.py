@@ -16,8 +16,8 @@ def on_born(me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
+    my.chance_d1000_dmg_acid(self, 0, 1000)
     my.collision_check(self, True)
-    my.dmg_acid_chance_d1000(self, 0, 1000)
     my.dmg_acid_dice(self, "1d10")  # This is the damage when the monst acids
     my.gfx_ascii_shown(self, True)
     my.is_acid(self, True)

@@ -100,9 +100,9 @@ def on_fall(me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
+    my.chance_d1000_dmg_negation(self, 0, 1000)
     my.charge_count(self, 5)
     my.collision_hit_priority(self, 6)
-    my.dmg_negation_chance_d1000(self, 0, 1000)
     my.dmg_negation_dice(self, "1")  # This is the damage when the monst fires
     my.dmg_received_doubled_from_cold(self, True)
     my.environ_avoids_water(self, 100)

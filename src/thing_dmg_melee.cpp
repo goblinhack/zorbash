@@ -70,7 +70,7 @@ int Thing::on_owner_receive_dmg_melee(Thingp owner, Thingp hitter, Thingp real_h
     }
 
     dbg2("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
-        owner->to_short_string().c_str(), hitter->to_short_string().c_str(), damage);
+         owner->to_short_string().c_str(), hitter->to_short_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, hitter->id.id, real_hitter->id.id,
                           (unsigned int) curr_at.x, (unsigned int) curr_at.y, (unsigned int) damage);
@@ -110,7 +110,7 @@ int Thing::on_receiving_dmg_melee(Thingp hitter, Thingp real_hitter, int damage)
     }
 
     dbg2("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
-        hitter->to_short_string().c_str(), damage);
+         hitter->to_short_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) curr_at.x,
                           (unsigned int) curr_at.y, (unsigned int) damage);
@@ -186,7 +186,7 @@ int Thing::on_attacking_dmg_melee(Thingp victim, int damage)
     }
 
     dbg2("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
-        victim->to_short_string().c_str(), damage);
+         victim->to_short_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, victim->id.id, (unsigned int) curr_at.x,
                           (unsigned int) curr_at.y, (unsigned int) damage);
@@ -232,7 +232,7 @@ int Thing::on_owner_attack_dmg_melee(Thingp owner, Thingp victim, int damage)
     }
 
     dbg2("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
-        owner->to_short_string().c_str(), victim->to_short_string().c_str(), damage);
+         owner->to_short_string().c_str(), victim->to_short_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, victim->id.id, (unsigned int) curr_at.x,
                           (unsigned int) curr_at.y, (unsigned int) damage);
@@ -280,10 +280,10 @@ int Thing::total_dmg_for_on_attacking_dmg_melee(Thingp victim, int damage)
   return damage;
 }
 
-int Thing::dmg_melee_chance_d1000(int index)
+int Thing::chance_d1000_dmg_melee(int index)
 {
   TRACE_NO_INDENT();
-  return (tp()->dmg_melee_chance_d1000(index));
+  return (tp()->chance_d1000_dmg_melee(index));
 }
 
 const std::string &Thing::on_receiving_dmg_melee_do(void)
@@ -310,16 +310,16 @@ const std::string &Thing::on_owner_receive_dmg_melee_do(void)
   return (tp()->on_owner_receive_dmg_melee_do());
 }
 
-int Tp::dmg_melee_chance_d1000(int index) const
+int Tp::chance_d1000_dmg_melee(int index) const
 {
-  if (index >= (int) _dmg_melee_chance_d1000.size()) {
+  if (index >= (int) _chance_d1000_dmg_melee.size()) {
     return 0;
   }
-  return _dmg_melee_chance_d1000[ index ];
+  return _chance_d1000_dmg_melee[ index ];
 }
 
-void Tp::dmg_melee_chance_d1000_set(int index, int v)
+void Tp::chance_d1000_dmg_melee_set(int index, int v)
 {
-  _dmg_melee_chance_d1000.resize(index + 1);
-  _dmg_melee_chance_d1000[ index ] = v;
+  _chance_d1000_dmg_melee.resize(index + 1);
+  _chance_d1000_dmg_melee[ index ] = v;
 }

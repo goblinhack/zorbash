@@ -593,7 +593,7 @@ bool Thing::teleport_attack(Thingp maybe_victim)
   TRACE_AND_INDENT();
 
   if (maybe_victim) {
-    if (d1000() < tp()->is_able_to_teleport_attack_chance_d1000()) {
+    if (d1000() < tp()->chance_d1000_is_able_to_teleport_attack()) {
       dbg("Try to teleport in direction of escape attack");
       TRACE_AND_INDENT();
 
@@ -608,7 +608,7 @@ bool Thing::teleport_attack(Thingp maybe_victim)
       }
     }
 
-    if (d1000() < tp()->is_able_to_teleport_attack_chance_d1000()) {
+    if (d1000() < tp()->chance_d1000_is_able_to_teleport_attack()) {
       dbg("Try to teleport in front attack");
       TRACE_AND_INDENT();
 
@@ -623,7 +623,7 @@ bool Thing::teleport_attack(Thingp maybe_victim)
   //
   auto p = aip()->move_path;
   if (p.size() > 1) {
-    if (d1000() < tp()->is_able_to_teleport_attack_chance_d1000()) {
+    if (d1000() < tp()->chance_d1000_is_able_to_teleport_attack()) {
       dbg("Try to teleport attack");
       TRACE_AND_INDENT();
 

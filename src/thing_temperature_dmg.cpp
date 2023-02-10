@@ -105,7 +105,7 @@ bool Thing::thing_check_for_heat_dmg(void)
     //
     // Too close to the flames?
     //
-    auto melt_chance = melting_chance_d1000();
+    auto melt_chance = chance_d1000_melting();
 
     //
     // Make things more likely to melt the closer to the heat?

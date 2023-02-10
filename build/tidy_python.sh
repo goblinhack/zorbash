@@ -89,7 +89,7 @@ do
       ai_detect_secret_doors \
       ai_resent_count \
       ai_wanderer \
-      appearing_chance_d1000 \
+      chance_d1000_appearing \
       attack_eater \
       attack_humanoid \
       attack_living \
@@ -186,7 +186,7 @@ do
       is_able_to_freeze \
       is_able_to_jump \
       is_able_to_jump_attack \
-      is_able_to_jump_attack_chance_d1000 \
+      chance_d1000_is_able_to_jump_attack \
       is_able_to_jump_escape \
       is_able_to_jump_onto \
       is_able_to_jump_without_tiring \

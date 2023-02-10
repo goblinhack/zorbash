@@ -9,7 +9,7 @@ def on_born(me, x, y):
 def tp_init(name):
     self = tp.Tp(name, "teleport_out")
     # begin sort marker
-    my.dmg_cold_chance_d1000(self, 0, 1000)
+    my.chance_d1000_dmg_cold(self, 0, 1000)
     my.dmg_cold_dice(self, "2d6")
     my.dmg_nat_att_type(self, "telefreeze")
     my.gfx_ascii_shown(self, True)

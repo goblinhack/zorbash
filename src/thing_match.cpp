@@ -835,7 +835,7 @@ bool Thing::matches(const std::string &what)
   if (is_cowardly() && (what == "is_cowardly")) {
     return true;
   }
-  if (appearing_chance_d1000() && (what == "appearing_chance_d1000")) {
+  if (chance_d1000_appearing() && (what == "chance_d1000_appearing")) {
     return true;
   }
   if (is_obs_in_the_way_for_throwing() && (what == "is_obs_in_the_way_for_throwing")) {
@@ -934,10 +934,10 @@ bool Thing::matches(const std::string &what)
   if (noise_additional_on_teleporting() && (what == "noise_additional_on_teleporting")) {
     return true;
   }
-  if (is_able_to_jump_attack_chance_d1000() && (what == "is_able_to_jump_attack_chance_d1000")) {
+  if (chance_d1000_is_able_to_jump_attack() && (what == "chance_d1000_is_able_to_jump_attack")) {
     return true;
   }
-  if (is_able_to_teleport_attack_chance_d1000() && (what == "is_able_to_teleport_attack_chance_d1000")) {
+  if (chance_d1000_is_able_to_teleport_attack() && (what == "chance_d1000_is_able_to_teleport_attack")) {
     return true;
   }
   if (is_able_to_teleport_attack() && (what == "is_able_to_teleport_attack")) {
@@ -1331,8 +1331,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_able_to_follow") {
     return &Thing::is_able_to_follow;
   }
-  if (what == "is_able_to_jump_attack_chance_d1000") {
-    return &Thing::is_able_to_jump_attack_chance_d1000;
+  if (what == "chance_d1000_is_able_to_jump_attack") {
+    return &Thing::chance_d1000_is_able_to_jump_attack;
   }
   if (what == "is_able_to_jump_attack") {
     return &Thing::is_able_to_jump_attack;
@@ -1376,8 +1376,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_able_to_swim") {
     return &Thing::is_able_to_swim;
   }
-  if (what == "is_able_to_teleport_attack_chance_d1000") {
-    return &Thing::is_able_to_teleport_attack_chance_d1000;
+  if (what == "chance_d1000_is_able_to_teleport_attack") {
+    return &Thing::chance_d1000_is_able_to_teleport_attack;
   }
   if (what == "is_able_to_teleport_attack") {
     return &Thing::is_able_to_teleport_attack;
@@ -2327,8 +2327,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_cowardly") {
     return &Thing::is_cowardly;
   }
-  if (what == "appearing_chance_d1000") {
-    return &Thing::appearing_chance_d1000;
+  if (what == "chance_d1000_appearing") {
+    return &Thing::chance_d1000_appearing;
   }
   if (what == "is_obs_in_the_way_for_throwing") {
     return &Thing::is_obs_in_the_way_for_throwing;

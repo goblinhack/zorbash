@@ -387,10 +387,11 @@ PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywd
   }
 
 // begin sort marker1
+LEVEL_BODY_GET_BOOL_AT(chance_d1000_level_attack_engulf_at, chance_d1000_attack_engulf)
+LEVEL_BODY_GET_BOOL_AT(chance_d1000_level_is_steal_item_at, chance_d1000_is_steal_item)
 LEVEL_BODY_GET_BOOL_AT(level_ai_detect_secret_doors_at, ai_detect_secret_doors)
 LEVEL_BODY_GET_BOOL_AT(level_ai_resent_count_at, ai_resent_count)
 LEVEL_BODY_GET_BOOL_AT(level_ai_wanderer_at, ai_wanderer)
-LEVEL_BODY_GET_BOOL_AT(level_attack_engulf_chance_d1000_at, attack_engulf_chance_d1000)
 LEVEL_BODY_GET_BOOL_AT(level_attack_no_msg_at, attack_no_msg)
 LEVEL_BODY_GET_BOOL_AT(level_attacks_per_round_at, attacks_per_round)
 LEVEL_BODY_GET_BOOL_AT(level_attack_undead_at, attack_undead)
@@ -603,7 +604,6 @@ LEVEL_BODY_GET_BOOL_AT(level_is_soft_at, is_soft)
 LEVEL_BODY_GET_BOOL_AT(level_is_spider_at, is_spider)
 LEVEL_BODY_GET_BOOL_AT(level_is_spiderweb_at, is_spiderweb)
 LEVEL_BODY_GET_BOOL_AT(level_is_staff_at, is_staff)
-LEVEL_BODY_GET_BOOL_AT(level_is_steal_item_chance_d1000_at, is_steal_item_chance_d1000)
 LEVEL_BODY_GET_BOOL_AT(level_is_steam_at, is_steam)
 LEVEL_BODY_GET_BOOL_AT(level_is_sticky_at, is_sticky)
 LEVEL_BODY_GET_BOOL_AT(level_is_stone_at, is_stone)

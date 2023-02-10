@@ -519,13 +519,13 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
   //
   // Critical attack optins
   //
-  if (d10000() < crit_chance_d10000()) {
+  if (d10000() < chance_d10000_crit()) {
     attack_options->crit = true;
   }
 
   if (! attack_options->crit) {
     if (victim->is_stuck_currently()) {
-      if (d10000() < crit_chance_d10000()) {
+      if (d10000() < chance_d10000_crit()) {
         attack_options->crit = true;
       }
     }
@@ -707,7 +707,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     if (! attack_options->attack[ THING_ATTACK_POISON ]) {
       if (! attack_options->dmg_set || attack_options->prefer_nat_att) {
-        if (d1000() < dmg_poison_chance_d1000(attack_options->attack_num)) {
+        if (d1000() < chance_d1000_dmg_poison(attack_options->attack_num)) {
           int dmg_poison_val = dmg_poison();
           if (dmg_poison_val > 0) {
             attack_options->damage                        = dmg_poison_val;
@@ -737,7 +737,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     if (! attack_options->attack[ THING_ATTACK_DROWN ]) {
       if (! attack_options->dmg_set) {
-        if (d1000() < dmg_drown_chance_d1000(attack_options->attack_num)) {
+        if (d1000() < chance_d1000_dmg_drown(attack_options->attack_num)) {
           int dmg_drown_val = dmg_drown();
           if (dmg_drown_val > 0) {
             attack_options->damage                       = dmg_drown_val;
@@ -765,7 +765,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     if (! attack_options->attack[ THING_ATTACK_BITE ]) {
       if (! attack_options->dmg_set) {
-        if (d1000() < dmg_bite_chance_d1000(attack_options->attack_num)) {
+        if (d1000() < chance_d1000_dmg_bite(attack_options->attack_num)) {
           int dmg_bite_val = dmg_bite();
           if (dmg_bite_val > 0) {
             attack_options->damage                      = dmg_bite_val;
@@ -793,7 +793,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     if (! attack_options->attack[ THING_ATTACK_CLAW ]) {
       if (! attack_options->dmg_set) {
-        if (d1000() < dmg_claw_chance_d1000(attack_options->attack_num)) {
+        if (d1000() < chance_d1000_dmg_claw(attack_options->attack_num)) {
           int dmg_claw_val = dmg_claw();
           if (dmg_claw_val > 0) {
             attack_options->damage                      = dmg_claw_val;
@@ -821,7 +821,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     if (! attack_options->attack[ THING_ATTACK_COLD ]) {
       if (! attack_options->dmg_set) {
-        if (d1000() < dmg_cold_chance_d1000(attack_options->attack_num)) {
+        if (d1000() < chance_d1000_dmg_cold(attack_options->attack_num)) {
           int dmg_cold_val = dmg_cold();
           if (dmg_cold_val > 0) {
             attack_options->damage                      = dmg_cold_val;
@@ -849,7 +849,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     if (! attack_options->attack[ THING_ATTACK_FIRE ]) {
       if (! attack_options->dmg_set) {
-        if (d1000() < dmg_fire_chance_d1000(attack_options->attack_num)) {
+        if (d1000() < chance_d1000_dmg_fire(attack_options->attack_num)) {
           int dmg_fire_val = dmg_fire();
           if (dmg_fire_val > 0) {
             attack_options->damage                      = dmg_fire_val;
@@ -877,7 +877,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     if (! attack_options->attack[ THING_ATTACK_HEAT ]) {
       if (! attack_options->dmg_set) {
-        if (d1000() < dmg_heat_chance_d1000(attack_options->attack_num)) {
+        if (d1000() < chance_d1000_dmg_heat(attack_options->attack_num)) {
           int dmg_heat_val = dmg_heat();
           if (dmg_heat_val > 0) {
             attack_options->damage                      = dmg_heat_val;
@@ -905,7 +905,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     if (! attack_options->attack[ THING_ATTACK_CRUSH ]) {
       if (! attack_options->dmg_set) {
-        if (d1000() < dmg_crush_chance_d1000(attack_options->attack_num)) {
+        if (d1000() < chance_d1000_dmg_crush(attack_options->attack_num)) {
           int dmg_crush_val = dmg_crush();
           if (dmg_crush_val > 0) {
             attack_options->damage                       = dmg_crush_val;
@@ -933,7 +933,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     if (! attack_options->attack[ THING_ATTACK_MISSILE ]) {
       if (! attack_options->dmg_set) {
-        if (d1000() < dmg_missile_chance_d1000(attack_options->attack_num)) {
+        if (d1000() < chance_d1000_dmg_missile(attack_options->attack_num)) {
           int dmg_missile_val = dmg_missile();
           if (dmg_missile_val > 0) {
             attack_options->damage                         = dmg_missile_val;
@@ -961,7 +961,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     if (! attack_options->attack[ THING_ATTACK_LIGHTNING ]) {
       if (! attack_options->dmg_set) {
-        if (d1000() < dmg_lightning_chance_d1000(attack_options->attack_num)) {
+        if (d1000() < chance_d1000_dmg_lightning(attack_options->attack_num)) {
           int dmg_lightning_val = dmg_lightning();
           if (dmg_lightning_val > 0) {
             attack_options->damage                           = dmg_lightning_val;
@@ -989,7 +989,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     if (! attack_options->attack[ THING_ATTACK_ENERGY ]) {
       if (! attack_options->dmg_set) {
-        if (d1000() < dmg_energy_chance_d1000(attack_options->attack_num)) {
+        if (d1000() < chance_d1000_dmg_energy(attack_options->attack_num)) {
           int dmg_energy_val = dmg_energy();
           if (dmg_energy_val > 0) {
             attack_options->damage                        = dmg_energy_val;
@@ -1017,7 +1017,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     if (! attack_options->attack[ THING_ATTACK_NEGATION ]) {
       if (! attack_options->dmg_set) {
-        if (d1000() < dmg_negation_chance_d1000(attack_options->attack_num)) {
+        if (d1000() < chance_d1000_dmg_negation(attack_options->attack_num)) {
           int dmg_negation_val = dmg_negation();
           if (dmg_negation_val > 0) {
             attack_options->damage                          = dmg_negation_val;
@@ -1045,7 +1045,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     if (! attack_options->attack[ THING_ATTACK_ACID ]) {
       if (! attack_options->dmg_set) {
-        if (d1000() < dmg_acid_chance_d1000(attack_options->attack_num)) {
+        if (d1000() < chance_d1000_dmg_acid(attack_options->attack_num)) {
           int dmg_acid_val = dmg_acid();
           if (dmg_acid_val > 0) {
             attack_options->damage                      = dmg_acid_val;
@@ -1073,7 +1073,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     if (! attack_options->attack[ THING_ATTACK_WATER ]) {
       if (! attack_options->dmg_set) {
-        if (d1000() < dmg_water_chance_d1000(attack_options->attack_num)) {
+        if (d1000() < chance_d1000_dmg_water(attack_options->attack_num)) {
           int dmg_water_val = dmg_water();
           if (dmg_water_val > 0) {
             attack_options->damage                       = dmg_water_val;
@@ -1101,7 +1101,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     if (! attack_options->attack[ THING_ATTACK_DIGEST ]) {
       if (! attack_options->dmg_set) {
-        if (d1000() < dmg_digest_chance_d1000(attack_options->attack_num)) {
+        if (d1000() < chance_d1000_dmg_digest(attack_options->attack_num)) {
           int dmg_digest_val = dmg_digest();
           if (dmg_digest_val > 0) {
             attack_options->damage                        = dmg_digest_val;
@@ -1129,7 +1129,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     if (! attack_options->attack[ THING_ATTACK_NECROSIS ]) {
       if (! attack_options->dmg_set) {
-        if (d1000() < dmg_necrosis_chance_d1000(attack_options->attack_num)) {
+        if (d1000() < chance_d1000_dmg_necrosis(attack_options->attack_num)) {
           int dmg_necrosis_val = dmg_necrosis();
           if (dmg_necrosis_val > 0) {
             attack_options->damage                          = dmg_necrosis_val;
@@ -1157,7 +1157,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     if (! attack_options->attack[ THING_ATTACK_DRAINING ]) {
       if (! attack_options->dmg_set) {
-        if (d1000() < dmg_draining_chance_d1000(attack_options->attack_num)) {
+        if (d1000() < chance_d1000_dmg_draining(attack_options->attack_num)) {
           int dmg_draining_val = dmg_draining();
           if (dmg_draining_val > 0) {
             attack_options->damage                          = dmg_draining_val;
@@ -1185,7 +1185,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     if (! attack_options->attack[ THING_ATTACK_NATURAL ]) {
       if (! attack_options->dmg_set || attack_options->prefer_nat_att) {
-        if (d1000() < dmg_nat_att_chance_d1000(attack_options->attack_num)) {
+        if (d1000() < chance_d1000_dmg_nat_att(attack_options->attack_num)) {
           int dmg_nat_att_val = dmg_nat_att();
           if (dmg_nat_att_val > 0) {
             attack_options->damage                         = dmg_nat_att_val + att_bonus;
@@ -1215,7 +1215,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     // else hits.
     //
     if (! attack_options->dmg_set) {
-      if (d1000() < dmg_melee_chance_d1000(attack_options->attack_num)) {
+      if (d1000() < chance_d1000_dmg_melee(attack_options->attack_num)) {
         auto damage            = dmg_melee();
         attack_options->damage = damage + att_bonus;
         dbg("Set melee damage %d att_bonus %d", damage, att_bonus);
@@ -1227,7 +1227,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
 
     if (! attack_options->dmg_set) {
       if (owner) {
-        if (d1000() < owner->dmg_melee_chance_d1000(attack_options->attack_num)) {
+        if (d1000() < owner->chance_d1000_dmg_melee(attack_options->attack_num)) {
           auto damage            = dmg_melee();
           attack_options->damage = damage + att_bonus;
           dbg("Set owner melee damage %d att_bonus %d", damage, att_bonus);

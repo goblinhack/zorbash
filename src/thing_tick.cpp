@@ -38,8 +38,8 @@ bool Thing::on_tick(void)
 
     auto owner = top_owner();
     dbg2("Call %s.%s(owner=%s, item=%s, %d, %d)", mod.c_str(), fn.c_str(),
-        owner ? owner->to_short_string().c_str() : "<>", to_string().c_str(), (unsigned int) curr_at.x,
-        (unsigned int) curr_at.y);
+         owner ? owner->to_short_string().c_str() : "<>", to_string().c_str(), (unsigned int) curr_at.x,
+         (unsigned int) curr_at.y);
     return py_call_bool_fn(mod.c_str(), fn.c_str(), owner ? owner->id.id : 0, id.id, (unsigned int) curr_at.x,
                            (unsigned int) curr_at.y);
   }
@@ -214,7 +214,7 @@ void Thing::achieve_goals_in_life(void)
       }
 
       if (is_able_to_jump()) {
-        if (d1000() < tp()->is_able_to_jump_randomly_chance_d1000()) {
+        if (d1000() < tp()->chance_d1000_is_able_to_jump_randomly()) {
           dbg("Try to randomly jump");
           if (! collision_obstacle(level->player)) {
             if (try_to_jump_towards_player()) {

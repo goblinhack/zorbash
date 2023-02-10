@@ -193,9 +193,7 @@ int Tp::aggression_pct(void) const { return _aggression_pct; }
 int Tp::ai_detect_secret_doors(void) const { return _ai_detect_secret_doors; }
 int Tp::ai_resent_count(void) const { return _ai_resent_count; }
 int Tp::ai_wanderer(void) const { return _ai_wanderer; }
-int Tp::appearing_chance_d1000(void) const { return _appearing_chance_d1000; }
 int Tp::attack_eater(void) const { return _attack_eater; }
-int Tp::attack_engulf_chance_d1000(void) const { return _attack_engulf_chance_d1000; }
 int Tp::attack_humanoid(void) const { return _attack_humanoid; }
 int Tp::attack_living(void) const { return _attack_living; }
 int Tp::attack_meat(void) const { return _attack_meat; }
@@ -209,6 +207,20 @@ int Tp::blit_right_off(void) const { return _blit_right_off; }
 int Tp::blit_top_off(void) const { return _blit_top_off; }
 int Tp::capacity_height(void) const { return _capacity_height; }
 int Tp::capacity_width(void) const { return _capacity_width; }
+int Tp::chance_d10000_crit(void) const { return chance_d10000__crit; }
+int Tp::chance_d10000_damaged(void) const { return chance_d10000_dmgd; }
+int Tp::chance_d1000_appearing(void) const { return chance_d1000__appearing; }
+int Tp::chance_d1000_attack_engulf(void) const { return chance_d1000__attack_engulf; }
+int Tp::chance_d1000_is_able_to_grapple(void) const { return chance_d1000__is_able_to_grapple; }
+int Tp::chance_d1000_is_able_to_jump_attack(void) const { return chance_d1000__is_able_to_jump_attack; }
+int Tp::chance_d1000_is_able_to_jump_on_low_hp(void) const { return chance_d1000__is_able_to_jump_on_low_hp; }
+int Tp::chance_d1000_is_able_to_jump_onto(void) const { return chance_d1000__is_able_to_jump_onto; }
+int Tp::chance_d1000_is_able_to_jump_randomly(void) const { return chance_d1000__is_able_to_jump_randomly; }
+int Tp::chance_d1000_is_able_to_shove(void) const { return chance_d1000__is_able_to_shove; }
+int Tp::chance_d1000_is_able_to_teleport_attack(void) const { return chance_d1000__is_able_to_teleport_attack; }
+int Tp::chance_d1000_is_steal_item(void) const { return chance_d1000__is_steal_item; }
+int Tp::chance_d1000_melting(void) const { return chance_d1000__melting; }
+int Tp::chance_d1000_set_on_fire(void) const { return chance_d1000__set_on_fire; }
 int Tp::charge_count(void) const { return _charge_count; }
 int Tp::collateral_dmg_pct(void) const { return _collateral_dmg_pct; }
 int Tp::collision_check(void) const { return _collision_check; }
@@ -218,8 +230,6 @@ int Tp::collision_hit_adj(void) const { return _collision_hit_adj; }
 int Tp::collision_hit_priority(void) const { return _collision_hit_priority; }
 int Tp::collision_hit_two_tiles_ahead(void) const { return _collision_hit_two_tiles_ahead; }
 int Tp::consume_per_bite_amount(void) const { return _consume_per_bite_amount; }
-int Tp::crit_chance_d10000(void) const { return _crit_chance_d10000; }
-int Tp::damaged_chance_d10000(void) const { return _dmgd_chance_d10000; }
 int Tp::distance_avoid(void) const { return _distance_avoid; }
 int Tp::distance_leader_max(void) const { return _distance_leader_max; }
 int Tp::distance_minion_vision_shared(void) const { return _distance_minion_vision_shared; }
@@ -309,15 +319,10 @@ int Tp::is_able_to_enchant_items(void) const { return _is_able_to_enchant_items;
 int Tp::is_able_to_fall(void) const { return _is_able_to_fall; }
 int Tp::is_able_to_follow(void) const { return _is_able_to_follow; }
 int Tp::is_able_to_freeze(void) const { return _is_able_to_freeze; }
-int Tp::is_able_to_grapple_chance_d1000(void) const { return _is_able_to_grapple_chance_d1000; }
 int Tp::is_able_to_grapple(void) const { return _is_able_to_grapple; }
-int Tp::is_able_to_jump_attack_chance_d1000(void) const { return _is_able_to_jump_attack_chance_d1000; }
 int Tp::is_able_to_jump_attack(void) const { return _is_able_to_jump_attack; }
 int Tp::is_able_to_jump_escape(void) const { return _is_able_to_jump_escape; }
-int Tp::is_able_to_jump_on_low_hp_chance_d1000(void) const { return _is_able_to_jump_on_low_hp_chance_d1000; }
-int Tp::is_able_to_jump_onto_chance_d1000(void) const { return _is_able_to_jump_onto_chance_d1000; }
 int Tp::is_able_to_jump_onto(void) const { return _is_able_to_jump_onto; }
-int Tp::is_able_to_jump_randomly_chance_d1000(void) const { return _is_able_to_jump_randomly_chance_d1000; }
 int Tp::is_able_to_jump(void) const { return _is_able_to_jump; }
 int Tp::is_able_to_jump_without_tiring(void) const { return _is_able_to_jump_without_tiring; }
 int Tp::is_able_to_learn_skills(void) const { return _is_able_to_learn_skills; }
@@ -332,12 +337,10 @@ int Tp::is_able_to_see_invisible(void) const { return _is_able_to_see_invisible;
 int Tp::is_able_to_see_through_doors(void) const { return _is_able_to_see_through_doors; }
 int Tp::is_able_to_shoot_at_close_range(void) const { return _is_able_to_shoot_at_close_range; }
 int Tp::is_able_to_shoot_at(void) const { return _is_able_to_shoot_at; }
-int Tp::is_able_to_shove_chance_d1000(void) const { return _is_able_to_shove_chance_d1000; }
 int Tp::is_able_to_shove(void) const { return _is_able_to_shove; }
 int Tp::is_able_to_sleep(void) const { return _is_able_to_sleep; }
 int Tp::is_able_to_spawn_things(void) const { return _is_able_to_spawn_things; }
 int Tp::is_able_to_swim(void) const { return _is_able_to_swim; }
-int Tp::is_able_to_teleport_attack_chance_d1000(void) const { return _is_able_to_teleport_attack_chance_d1000; }
 int Tp::is_able_to_teleport_attack(void) const { return _is_able_to_teleport_attack; }
 int Tp::is_able_to_teleport_escape(void) const { return _is_able_to_teleport_escape; }
 int Tp::is_able_to_teleport_without_tiring(void) const { return _is_able_to_teleport_without_tiring; }
@@ -588,7 +591,6 @@ int Tp::is_soft(void) const { return _is_soft; }
 int Tp::is_spider(void) const { return _is_spider; }
 int Tp::is_spiderweb(void) const { return _is_spiderweb; }
 int Tp::is_staff(void) const { return _is_staff; }
-int Tp::is_steal_item_chance_d1000(void) const { return _is_steal_item_chance_d1000; }
 int Tp::is_steam(void) const { return _is_steam; }
 int Tp::is_sticky(void) const { return _is_sticky; }
 int Tp::is_stone(void) const { return _is_stone; }
@@ -630,7 +632,6 @@ int Tp::item_width(void) const { return _item_width ? _item_width : 1; }
 int Tp::jump_distance_mod(void) const { return _jump_distance_mod; }
 int Tp::jump_distance(void) const { return _jump_distance; }
 int Tp::light_dist(void) const { return _light_dist; }
-int Tp::melting_chance_d1000(void) const { return _melting_chance_d1000; }
 int Tp::minion_limit(void) const { return _minion_limit; }
 int Tp::move_speed_mod(void) const { return _move_speed_mod; }
 int Tp::move_speed(void) const { return _move_speed; }
@@ -727,9 +728,7 @@ void Tp::aggression_pct_set(int v) { _aggression_pct = v; }
 void Tp::ai_detect_secret_doors_set(int v) { _ai_detect_secret_doors = v; }
 void Tp::ai_resent_count_set(int v) { _ai_resent_count = v; }
 void Tp::ai_wanderer_set(int v) { _ai_wanderer = v; }
-void Tp::appearing_chance_d1000_set(int v) { _appearing_chance_d1000 = v; }
 void Tp::attack_eater_set(int v) { _attack_eater = v; }
-void Tp::attack_engulf_chance_d1000_set(int v) { _attack_engulf_chance_d1000 = v; }
 void Tp::attack_humanoid_set(int v) { _attack_humanoid = v; }
 void Tp::attack_living_set(int v) { _attack_living = v; }
 void Tp::attack_meat_set(int v) { _attack_meat = v; }
@@ -743,6 +742,20 @@ void Tp::blit_right_off_set(int v) { _blit_right_off = v; }
 void Tp::blit_top_off_set(int v) { _blit_top_off = v; }
 void Tp::capacity_height_set(int v) { _capacity_height = v; }
 void Tp::capacity_width_set(int v) { _capacity_width = v; }
+void Tp::chance_d10000_crit_set(int v) { chance_d10000__crit = v; }
+void Tp::chance_d10000_damaged_set(int v) { chance_d10000_dmgd = v; }
+void Tp::chance_d1000_appearing_set(int v) { chance_d1000__appearing = v; }
+void Tp::chance_d1000_attack_engulf_set(int v) { chance_d1000__attack_engulf = v; }
+void Tp::chance_d1000_is_able_to_grapple_set(int v) { chance_d1000__is_able_to_grapple = v; }
+void Tp::chance_d1000_is_able_to_jump_attack_set(int v) { chance_d1000__is_able_to_jump_attack = v; }
+void Tp::chance_d1000_is_able_to_jump_on_low_hp_set(int v) { chance_d1000__is_able_to_jump_on_low_hp = v; }
+void Tp::chance_d1000_is_able_to_jump_onto_set(int v) { chance_d1000__is_able_to_jump_onto = v; }
+void Tp::chance_d1000_is_able_to_jump_randomly_set(int v) { chance_d1000__is_able_to_jump_randomly = v; }
+void Tp::chance_d1000_is_able_to_shove_set(int v) { chance_d1000__is_able_to_shove = v; }
+void Tp::chance_d1000_is_able_to_teleport_attack_set(int v) { chance_d1000__is_able_to_teleport_attack = v; }
+void Tp::chance_d1000_is_steal_item_set(int v) { chance_d1000__is_steal_item = v; }
+void Tp::chance_d1000_melting_set(int v) { chance_d1000__melting = v; }
+void Tp::chance_d1000_set_on_fire_set(int v) { chance_d1000__set_on_fire = v; }
 void Tp::charge_count_set(int v) { _charge_count = v; }
 void Tp::collateral_dmg_pct_set(int v) { _collateral_dmg_pct = v; }
 void Tp::collision_attack_set(int v) { _collision_attack = v; }
@@ -753,8 +766,6 @@ void Tp::collision_hit_adj_set(int v) { _collision_hit_adj = v; }
 void Tp::collision_hit_priority_set(int v) { _collision_hit_priority = v; }
 void Tp::collision_hit_two_tiles_ahead_set(int v) { _collision_hit_two_tiles_ahead = v; }
 void Tp::consume_per_bite_amount_set(int v) { _consume_per_bite_amount = v; }
-void Tp::crit_chance_d10000_set(int v) { _crit_chance_d10000 = v; }
-void Tp::damaged_chance_d10000_set(int v) { _dmgd_chance_d10000 = v; }
 void Tp::distance_avoid_set(int v) { _distance_avoid = v; }
 void Tp::distance_leader_max_set(int v) { _distance_leader_max = v; }
 void Tp::distance_minion_vision_shared_set(int v) { _distance_minion_vision_shared = v; }
@@ -849,15 +860,10 @@ void Tp::is_able_to_enchant_items_set(int v) { _is_able_to_enchant_items = v; }
 void Tp::is_able_to_fall_set(int v) { _is_able_to_fall = v; }
 void Tp::is_able_to_follow_set(int v) { _is_able_to_follow = v; }
 void Tp::is_able_to_freeze_set(int v) { _is_able_to_freeze = v; }
-void Tp::is_able_to_grapple_chance_d1000_set(int v) { _is_able_to_grapple_chance_d1000 = v; }
 void Tp::is_able_to_grapple_set(int v) { _is_able_to_grapple = v; }
-void Tp::is_able_to_jump_attack_chance_d1000_set(int v) { _is_able_to_jump_attack_chance_d1000 = v; }
 void Tp::is_able_to_jump_attack_set(int v) { _is_able_to_jump_attack = v; }
 void Tp::is_able_to_jump_escape_set(int v) { _is_able_to_jump_escape = v; }
-void Tp::is_able_to_jump_on_low_hp_chance_d1000_set(int v) { _is_able_to_jump_on_low_hp_chance_d1000 = v; }
-void Tp::is_able_to_jump_onto_chance_d1000_set(int v) { _is_able_to_jump_onto_chance_d1000 = v; }
 void Tp::is_able_to_jump_onto_set(int v) { _is_able_to_jump_onto = v; }
-void Tp::is_able_to_jump_randomly_chance_d1000_set(int v) { _is_able_to_jump_randomly_chance_d1000 = v; }
 void Tp::is_able_to_jump_set(int v) { _is_able_to_jump = v; }
 void Tp::is_able_to_jump_without_tiring_set(int v) { _is_able_to_jump_without_tiring = v; }
 void Tp::is_able_to_learn_skills_set(int v) { _is_able_to_learn_skills = v; }
@@ -872,12 +878,10 @@ void Tp::is_able_to_see_invisible_set(int v) { _is_able_to_see_invisible = v; }
 void Tp::is_able_to_see_through_doors_set(int v) { _is_able_to_see_through_doors = v; }
 void Tp::is_able_to_shoot_at_close_range_set(int v) { _is_able_to_shoot_at_close_range = v; }
 void Tp::is_able_to_shoot_at_set(int v) { _is_able_to_shoot_at = v; }
-void Tp::is_able_to_shove_chance_d1000_set(int v) { _is_able_to_shove_chance_d1000 = v; }
 void Tp::is_able_to_shove_set(int v) { _is_able_to_shove = v; }
 void Tp::is_able_to_sleep_set(int v) { _is_able_to_sleep = v; }
 void Tp::is_able_to_spawn_things_set(int v) { _is_able_to_spawn_things = v; }
 void Tp::is_able_to_swim_set(int v) { _is_able_to_swim = v; }
-void Tp::is_able_to_teleport_attack_chance_d1000_set(int v) { _is_able_to_teleport_attack_chance_d1000 = v; }
 void Tp::is_able_to_teleport_attack_set(int v) { _is_able_to_teleport_attack = v; }
 void Tp::is_able_to_teleport_escape_set(int v) { _is_able_to_teleport_escape = v; }
 void Tp::is_able_to_teleport_without_tiring_set(int v) { _is_able_to_teleport_without_tiring = v; }
@@ -1129,7 +1133,6 @@ void Tp::is_soft_set(int v) { _is_soft = v; }
 void Tp::is_spider_set(int v) { _is_spider = v; }
 void Tp::is_spiderweb_set(int v) { _is_spiderweb = v; }
 void Tp::is_staff_set(int v) { _is_staff = v; }
-void Tp::is_steal_item_chance_d1000_set(int v) { _is_steal_item_chance_d1000 = v; }
 void Tp::is_steam_set(int v) { _is_steam = v; }
 void Tp::is_sticky_set(int v) { _is_sticky = v; }
 void Tp::is_stone_set(int v) { _is_stone = v; }
@@ -1172,7 +1175,6 @@ void Tp::jump_distance_mod_set(int v) { _jump_distance_mod = v; }
 void Tp::jump_distance_set(int v) { _jump_distance = v; }
 void Tp::light_color_set(const std::string &v) { _light_color = v; }
 void Tp::light_dist_set(int v) { _light_dist = v; }
-void Tp::melting_chance_d1000_set(int v) { _melting_chance_d1000 = v; }
 void Tp::minion_limit_set(int v) { _minion_limit = v; }
 void Tp::move_speed_mod_set(int v) { _move_speed_mod = v; }
 void Tp::move_speed_set(int v) { _move_speed = v; }

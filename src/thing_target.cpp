@@ -486,9 +486,19 @@ bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point 
   //
   // Swing the weapon
   //
-  dbg2("Target-attack-best: Swing weapon?");
+  dbg2("Target-attack-best: Attack with weapon?");
   TRACE_AND_INDENT();
 
+  if (item && item->is_staff()) {
+    //
+    // Don't try to swing a staff, that's just silly.
+    //
+    return shoot_at(item, best);
+  }
+
+  //
+  // Try to swing the weapon
+  //
   victim_attack_swing(equip, best, best_hit_at, attack_options);
 
   //

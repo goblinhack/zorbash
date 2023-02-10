@@ -95,6 +95,10 @@ bool Thing::on_fire_set(const std::string &why)
     return false;
   }
 
+  // if (d10000() > chance_d1000_set_on_fire0()) {
+  //   return false;
+  // }
+
   if (is_immune_to_fire()) {
     on_fire_unset();
     return false;
@@ -123,12 +127,17 @@ bool Thing::on_fire_set(const std::string &why)
     }
 
     dbg("Set on fire, %s", why.c_str());
+    TRACE_NO_INDENT();
+
     auto on_fire_anim = level->thing_new("fire", this);
     on_fire_anim_id_set(on_fire_anim->id);
     on_fire_anim->owner_set(this);
     move_carried_items();
 
     on_fire();
+
+    dbg("Is now on fire, %s", why.c_str());
+    TRACE_NO_INDENT();
 
     if (is_player()) {
       msg("%%fg=red$You are literally ON FIRE!%%fg=reset$");

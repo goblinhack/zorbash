@@ -23,7 +23,7 @@ bool Thing::try_to_escape(void)
       return false;
     }
 
-    if (d1000() < tp()->is_able_to_jump_on_low_hp_chance_d1000()) {
+    if (d1000() < tp()->chance_d1000_is_able_to_jump_on_low_hp()) {
       if (try_to_jump_away_from_player()) {
         tick_last_escape_set(game->tick_current);
         return true;

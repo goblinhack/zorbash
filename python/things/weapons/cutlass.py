@@ -27,9 +27,9 @@ def on_unequip(owner, me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.crit_chance_d10000(self, 200)
-    my.damaged_chance_d10000(self, 20)
-    my.dmg_melee_chance_d1000(self, 0, 1000)
+    my.chance_d10000_crit(self, 200)
+    my.chance_d10000_damaged(self, 20)
+    my.chance_d1000_dmg_melee(self, 0, 1000)
     my.dmg_melee_dice(self, "1d10")
     my.equip_carry_anim(self, "cutlass_carry")
     my.gfx_anim_use(self, "cutlass_swing")

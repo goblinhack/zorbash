@@ -362,7 +362,7 @@ static Tpp tp_get_with_no_rarity_filter(Tpidmap &m)
     //
     // If this thing has a limited chance of appearing, roll the dice.
     //
-    auto chance = tp->appearing_chance_d1000();
+    auto chance = tp->chance_d1000_appearing();
     if (chance) {
       auto roll = d1000();
       if (roll < chance) {

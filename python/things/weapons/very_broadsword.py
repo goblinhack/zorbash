@@ -33,10 +33,10 @@ def on_unequip(owner, me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
+    my.chance_d10000_crit(self, 500)
+    my.chance_d10000_damaged(self, 1)
+    my.chance_d1000_dmg_melee(self, 0, 1000)
     my.collision_hit_adj(self, True)
-    my.crit_chance_d10000(self, 500)
-    my.damaged_chance_d10000(self, 1)
-    my.dmg_melee_chance_d1000(self, 0, 1000)
     my.dmg_melee_dice(self, "2d12")
     my.equip_carry_anim(self, "very_broadsword_carry")
     my.gfx_anim_use(self, "very_broadsword_swing")

@@ -132,16 +132,16 @@ int Thing::attack_meat(void)
   return (tp()->attack_meat());
 }
 
-int Thing::is_able_to_shove_chance_d1000(void)
+int Thing::chance_d1000_is_able_to_shove(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_able_to_shove_chance_d1000());
+  return (tp()->chance_d1000_is_able_to_shove());
 }
 
-int Thing::is_able_to_grapple_chance_d1000(void)
+int Thing::chance_d1000_is_able_to_grapple(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_able_to_grapple_chance_d1000());
+  return (tp()->chance_d1000_is_able_to_grapple());
 }
 
 int Thing::unused_chance1_d1000(void)
@@ -180,17 +180,17 @@ int Thing::unused_chance6_d1000(void)
   return (tp()->unused_chance6_d1000());
 }
 
-int Thing::melting_chance_d1000(void)
+int Thing::chance_d1000_melting(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->melting_chance_d1000());
+  return (tp()->chance_d1000_melting());
 }
 
-int Thing::damaged_chance_d10000(void)
+int Thing::chance_d10000_damaged(void)
 {
   TRACE_NO_INDENT();
 
-  int chance = tp()->damaged_chance_d10000();
+  int chance = tp()->chance_d10000_damaged();
   int e      = enchant_count_get();
   while (e-- > 0) {
     chance /= 2;
@@ -199,11 +199,11 @@ int Thing::damaged_chance_d10000(void)
   return chance;
 }
 
-int Thing::crit_chance_d10000(void)
+int Thing::chance_d10000_crit(void)
 {
   TRACE_NO_INDENT();
 
-  int chance = tp()->crit_chance_d10000();
+  int chance = tp()->chance_d10000_crit();
   int e      = enchant_count_get();
   while (e-- > 0) {
     chance *= 2;
@@ -969,28 +969,28 @@ int Thing::is_jelly(void)
   return (tp()->is_jelly());
 }
 
-int Thing::is_able_to_jump_randomly_chance_d1000(void)
+int Thing::chance_d1000_is_able_to_jump_randomly(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_able_to_jump_randomly_chance_d1000());
+  return (tp()->chance_d1000_is_able_to_jump_randomly());
 }
 
-int Thing::is_able_to_jump_attack_chance_d1000(void)
+int Thing::chance_d1000_is_able_to_jump_attack(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_able_to_jump_attack_chance_d1000());
+  return (tp()->chance_d1000_is_able_to_jump_attack());
 }
 
-int Thing::is_able_to_jump_onto_chance_d1000(void)
+int Thing::chance_d1000_is_able_to_jump_onto(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_able_to_jump_onto_chance_d1000());
+  return (tp()->chance_d1000_is_able_to_jump_onto());
 }
 
-int Thing::is_able_to_jump_on_low_hp_chance_d1000(void)
+int Thing::chance_d1000_is_able_to_jump_on_low_hp(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_able_to_jump_on_low_hp_chance_d1000());
+  return (tp()->chance_d1000_is_able_to_jump_on_low_hp());
 }
 
 int Thing::is_able_to_jump(void)
@@ -1665,10 +1665,16 @@ int Thing::is_cowardly(void)
   return (tp()->is_cowardly());
 }
 
-int Thing::appearing_chance_d1000(void)
+int Thing::chance_d1000_appearing(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->appearing_chance_d1000());
+  return (tp()->chance_d1000_appearing());
+}
+
+int Thing::chance_d1000_set_on_fire(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->chance_d1000_set_on_fire());
 }
 
 int Thing::is_obs_in_the_way_for_throwing(void)
@@ -1845,10 +1851,10 @@ int Thing::noise_additional_on_teleporting(void)
   return (tp()->noise_additional_on_teleporting());
 }
 
-int Thing::is_able_to_teleport_attack_chance_d1000(void)
+int Thing::chance_d1000_is_able_to_teleport_attack(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_able_to_teleport_attack_chance_d1000());
+  return (tp()->chance_d1000_is_able_to_teleport_attack());
 }
 
 int Thing::teleport_distance(void)
@@ -2593,16 +2599,16 @@ int Thing::is_able_to_tire(void)
   return (tp()->is_able_to_tire());
 }
 
-int Thing::is_steal_item_chance_d1000(void)
+int Thing::chance_d1000_is_steal_item(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_steal_item_chance_d1000());
+  return (tp()->chance_d1000_is_steal_item());
 }
 
-int Thing::attack_engulf_chance_d1000(void)
+int Thing::chance_d1000_attack_engulf(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->attack_engulf_chance_d1000());
+  return (tp()->chance_d1000_attack_engulf());
 }
 
 int Thing::is_sticky(void)

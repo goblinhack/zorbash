@@ -83,9 +83,9 @@ def tp_init(name, text_long_name, text_short_name):
     global self
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
+    my.chance_d1000_dmg_energy(self, 0, 1000)
     my.charge_count(self, 5)
     my.collision_hit_priority(self, 6)
-    my.dmg_energy_chance_d1000(self, 0, 1000)
     my.dmg_energy_dice(self, "1d20+10")
     my.equip_carry_anim(self, "staff_energy_carry")
     my.gfx_ascii_fade_with_dist(self, True)

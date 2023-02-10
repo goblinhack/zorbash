@@ -13,8 +13,8 @@ def on_death(me, x, y):
 def lava_init(name, text_long_name, tiles=[]):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
+    my.chance_d1000_dmg_fire(self, 0, 1000)
     my.collision_hit_priority(self, 100)
-    my.dmg_fire_chance_d1000(self, 0, 1000)
     my.dmg_fire_dice(self, "1d12+6")
     my.dmg_nat_att_type(self, "burn")
     my.gfx_ascii_animated(self, True)

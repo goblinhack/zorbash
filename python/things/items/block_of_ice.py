@@ -32,12 +32,13 @@ def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
 
-    my.appearing_chance_d1000(self, 10)
+    my.chance_d1000_appearing(self, 10)
+    my.chance_d1000_dmg_cold(self, 0, 1000)
+    my.chance_d1000_dmg_crush(self, 0, 1000)
+    my.chance_d1000_melting(self, 100)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 100)
-    my.dmg_cold_chance_d1000(self, 0, 1000)
     my.dmg_cold_dice(self, "1d6")
-    my.dmg_crush_chance_d1000(self, 0, 1000)
     my.dmg_crush_dice(self, "2d6")
     my.dmg_received_doubled_from_fire(self, True)
     my.environ_avoids_fire(self, 100)
@@ -83,7 +84,6 @@ def tp_init(name, text_long_name):
     my.is_shovable(self, True)
     my.is_tickable(self, True)  # So it can interact with fire
     my.is_very_heavy(self, True)
-    my.melting_chance_d1000(self, 100)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
     my.on_fall_do(self, "me.on_fall()")

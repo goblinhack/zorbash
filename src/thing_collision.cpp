@@ -450,7 +450,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos)
   // Allow cleaners to engulf/swallow attack
   //
   if (is_engulfer() && can_eat(it) && (it->curr_at == future_pos)) {
-    if (d1000() < me_tp->attack_engulf_chance_d1000()) {
+    if (d1000() < me_tp->chance_d1000_attack_engulf()) {
       if (it->thing_size() < thing_size()) {
         dbg2("No collision; can engulf");
         return false;

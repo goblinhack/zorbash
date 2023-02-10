@@ -5,6 +5,7 @@ import tp
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
+    my.chance_d1000_melting(self, 500)
     my.collision_hit_priority(self, 6)
     my.environ_avoids_fire(self, 100)
     my.gfx_ascii_fade_with_dist(self, True)
@@ -33,7 +34,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_usable(self, True)
     my.item_height(self, 3)
     my.item_width(self, 3)
-    my.melting_chance_d1000(self, 500)
     my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "50+1d100")

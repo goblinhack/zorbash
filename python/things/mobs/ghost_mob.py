@@ -20,6 +20,7 @@ def on_death(me, x, y):
 def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
+    my.chance_d1000_is_able_to_shove(self, 200)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 10)
     my.dmg_received_doubled_from_fire(self, True)
@@ -40,7 +41,6 @@ def tp_init(name, text_long_name):
     my.health_initial_dice(self, "1d6")
     my.is_able_to_burn(self, True)
     my.is_able_to_fall(self, True)
-    my.is_able_to_shove_chance_d1000(self, 200)
     my.is_always_hit(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)

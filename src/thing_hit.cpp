@@ -42,7 +42,7 @@ void Thing::on_hit_and_still_alive(Thingp hitter,      // an arrow / monst /...
     }
 
     dbg2("Call %s.%s(%s, %s, %s, crit=%d, damage=%d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
-        hitter->to_short_string().c_str(), real_hitter->to_short_string().c_str(), crit, damage);
+         hitter->to_short_string().c_str(), real_hitter->to_short_string().c_str(), crit, damage);
 
     //
     // Warning cannot handle negative values here for damage
@@ -79,7 +79,7 @@ void Thing::on_hit_and_now_dead(Thingp hitter,      // an arrow / monst /...
     }
 
     dbg2("Call %s.%s(%s, %s, %s, crit=%d, damage=%d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
-        hitter->to_short_string().c_str(), real_hitter->to_short_string().c_str(), crit, damage);
+         hitter->to_short_string().c_str(), real_hitter->to_short_string().c_str(), crit, damage);
 
     //
     // Warning cannot handle negative values here for damage

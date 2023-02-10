@@ -23,8 +23,9 @@ def tp_init(name, text_long_name, text_short_name):
     global self
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
+    my.chance_d10000_damaged(self, 100)
+    my.chance_d1000_melting(self, 2)
     my.collision_hit_priority(self, 6)
-    my.damaged_chance_d10000(self, 100)
     my.enchant_max(self, 10)
     my.equip_carry_anim(self, "armor_fish_scale_carry")
     my.gfx_ascii_shown(self, True)
@@ -52,7 +53,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_treasure_type(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.melting_chance_d1000(self, 2)
     my.noise_on_dropping(self, 25)
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")

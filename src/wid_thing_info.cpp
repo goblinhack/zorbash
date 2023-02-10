@@ -751,11 +751,11 @@ void Game::wid_thing_info_add_dmgd_chance(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
-  auto chance = t->damaged_chance_d10000();
+  auto chance = t->chance_d10000_damaged();
   if (chance) {
-    int chance = (int) (((((float) t->damaged_chance_d10000())) / 10000.0) * 100.0);
+    int chance = (int) (((((float) t->chance_d10000_damaged())) / 10000.0) * 100.0);
     if (chance < 5) {
-      float chance = (((((float) t->damaged_chance_d10000())) / 10000.0) * 100.0);
+      float chance = (((((float) t->chance_d10000_damaged())) / 10000.0) * 100.0);
       snprintf(tmp2, sizeof(tmp2) - 1, "%3.2f pct", chance);
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Damaged chance  %11s", tmp2);
       w->log(tmp);
@@ -780,11 +780,11 @@ void Game::wid_thing_info_add_crit_chance(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
-  auto chance = t->crit_chance_d10000();
+  auto chance = t->chance_d10000_crit();
   if (chance) {
-    int chance = (int) (((((float) t->crit_chance_d10000())) / 10000.0) * 100.0);
+    int chance = (int) (((((float) t->chance_d10000_crit())) / 10000.0) * 100.0);
     if (chance < 5) {
-      float chance = (((((float) t->crit_chance_d10000())) / 10000.0) * 100.0);
+      float chance = (((((float) t->chance_d10000_crit())) / 10000.0) * 100.0);
       snprintf(tmp2, sizeof(tmp2) - 1, "%3.2f pct", chance);
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Crit hit chance %11s", tmp2);
       w->log(tmp);
@@ -871,7 +871,7 @@ void Game::wid_thing_info_add_dmg_poison(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_poison_chance_d1000(index))) / 1000.0) * 100.0);
+      int chance = (int) (((((float) tp->chance_d1000_dmg_poison(index))) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
@@ -904,7 +904,7 @@ void Game::wid_thing_info_add_dmg_drown(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_drown_chance_d1000(index))) / 1000.0) * 100.0);
+      int chance = (int) (((((float) tp->chance_d1000_dmg_drown(index))) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
@@ -937,7 +937,7 @@ void Game::wid_thing_info_add_dmg_bite(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_bite_chance_d1000(index))) / 1000.0) * 100.0);
+      int chance = (int) (((((float) tp->chance_d1000_dmg_bite(index))) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
@@ -970,7 +970,7 @@ void Game::wid_thing_info_add_dmg_claw(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_claw_chance_d1000(index))) / 1000.0) * 100.0);
+      int chance = (int) (((((float) tp->chance_d1000_dmg_claw(index))) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
@@ -1003,7 +1003,7 @@ void Game::wid_thing_info_add_dmg_cold(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_cold_chance_d1000(index))) / 1000.0) * 100.0);
+      int chance = (int) (((((float) tp->chance_d1000_dmg_cold(index))) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
@@ -1036,7 +1036,7 @@ void Game::wid_thing_info_add_dmg_fire(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_fire_chance_d1000(index))) / 1000.0) * 100.0);
+      int chance = (int) (((((float) tp->chance_d1000_dmg_fire(index))) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
@@ -1069,7 +1069,7 @@ void Game::wid_thing_info_add_dmg_heat(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_heat_chance_d1000(index))) / 1000.0) * 100.0);
+      int chance = (int) (((((float) tp->chance_d1000_dmg_heat(index))) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
@@ -1102,7 +1102,7 @@ void Game::wid_thing_info_add_dmg_crush(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_crush_chance_d1000(index))) / 1000.0) * 100.0);
+      int chance = (int) (((((float) tp->chance_d1000_dmg_crush(index))) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
@@ -1135,7 +1135,7 @@ void Game::wid_thing_info_add_dmg_missile(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_missile_chance_d1000(index))) / 1000.0) * 100.0);
+      int chance = (int) (((((float) tp->chance_d1000_dmg_missile(index))) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
@@ -1168,7 +1168,7 @@ void Game::wid_thing_info_add_dmg_lightning(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_lightning_chance_d1000(index))) / 1000.0) * 100.0);
+      int chance = (int) (((((float) tp->chance_d1000_dmg_lightning(index))) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
@@ -1201,7 +1201,7 @@ void Game::wid_thing_info_add_dmg_energy(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_energy_chance_d1000(index))) / 1000.0) * 100.0);
+      int chance = (int) (((((float) tp->chance_d1000_dmg_energy(index))) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
@@ -1234,7 +1234,7 @@ void Game::wid_thing_info_add_dmg_negation(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_negation_chance_d1000(index))) / 1000.0) * 100.0);
+      int chance = (int) (((((float) tp->chance_d1000_dmg_negation(index))) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
@@ -1267,7 +1267,7 @@ void Game::wid_thing_info_add_dmg_acid(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_acid_chance_d1000(index))) / 1000.0) * 100.0);
+      int chance = (int) (((((float) tp->chance_d1000_dmg_acid(index))) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
@@ -1313,7 +1313,7 @@ void Game::wid_thing_info_add_dmg_nat_att(WidPopup *w, Thingp t, int index)
         w->log(tmp);
       }
 
-      int chance = (int) (((((float) tp->dmg_nat_att_chance_d1000(index))) / 1000.0) * 100.0);
+      int chance = (int) (((((float) tp->chance_d1000_dmg_nat_att(index))) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
@@ -1346,7 +1346,7 @@ void Game::wid_thing_info_add_dmg_digest(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_digest_chance_d1000(index))) / 1000.0) * 100.0);
+      int chance = (int) (((((float) tp->chance_d1000_dmg_digest(index))) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
@@ -1379,7 +1379,7 @@ void Game::wid_thing_info_add_dmg_necrosis(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_necrosis_chance_d1000(index))) / 1000.0) * 100.0);
+      int chance = (int) (((((float) tp->chance_d1000_dmg_necrosis(index))) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
@@ -1412,7 +1412,7 @@ void Game::wid_thing_info_add_dmg_draining(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_draining_chance_d1000(index))) / 1000.0) * 100.0);
+      int chance = (int) (((((float) tp->chance_d1000_dmg_draining(index))) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);

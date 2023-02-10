@@ -113,14 +113,14 @@ void tp_fixup(void)
       tp->temperature_sensitive_set(true);
     }
 
-    if (tp->is_able_to_shove_chance_d1000()) {
+    if (tp->chance_d1000_is_able_to_shove()) {
       tp->is_able_to_shove_set(true);
     }
 
     if (tp->is_able_to_melt()) {
       tp->is_tickable_set(true);
       tp->temperature_sensitive_set(true);
-      if (! tp->melting_chance_d1000()) {
+      if (! tp->chance_d1000_melting()) {
         DIE("Tp %s needs melting chance set as it can melt", tp->name().c_str());
       }
     }
@@ -131,7 +131,7 @@ void tp_fixup(void)
       }
     }
 
-    if (tp->is_able_to_grapple_chance_d1000()) {
+    if (tp->chance_d1000_is_able_to_grapple()) {
       tp->is_able_to_grapple_set(true);
     }
 
@@ -235,61 +235,61 @@ void tp_fixup(void)
         int attack_index = 0;
 
         if (tp->dmg_acid() > 0) {
-          tp->dmg_acid_chance_d1000_set(attack_index, 1000);
+          tp->chance_d1000_dmg_acid_set(attack_index, 1000);
         }
         if (tp->dmg_water() > 0) {
-          tp->dmg_water_chance_d1000_set(attack_index, 1000);
+          tp->chance_d1000_dmg_water_set(attack_index, 1000);
         }
         if (tp->dmg_nat_att() > 0) {
-          tp->dmg_nat_att_chance_d1000_set(attack_index, 1000);
+          tp->chance_d1000_dmg_nat_att_set(attack_index, 1000);
         }
         if (tp->dmg_crush() > 0) {
-          tp->dmg_crush_chance_d1000_set(attack_index, 1000);
+          tp->chance_d1000_dmg_crush_set(attack_index, 1000);
         }
         if (tp->dmg_missile() > 0) {
-          tp->dmg_missile_chance_d1000_set(attack_index, 1000);
+          tp->chance_d1000_dmg_missile_set(attack_index, 1000);
         }
         if (tp->dmg_digest() > 0) {
-          tp->dmg_digest_chance_d1000_set(attack_index, 1000);
+          tp->chance_d1000_dmg_digest_set(attack_index, 1000);
         }
         if (tp->dmg_energy() > 0) {
-          tp->dmg_energy_chance_d1000_set(attack_index, 1000);
+          tp->chance_d1000_dmg_energy_set(attack_index, 1000);
         }
         if (tp->dmg_negation() > 0) {
-          tp->dmg_negation_chance_d1000_set(attack_index, 1000);
+          tp->chance_d1000_dmg_negation_set(attack_index, 1000);
         }
         if (tp->dmg_fire() > 0) {
-          tp->dmg_fire_chance_d1000_set(attack_index, 1000);
+          tp->chance_d1000_dmg_fire_set(attack_index, 1000);
         }
         if (tp->dmg_heat() > 0) {
-          tp->dmg_heat_chance_d1000_set(attack_index, 1000);
+          tp->chance_d1000_dmg_heat_set(attack_index, 1000);
         }
         if (tp->dmg_drown() > 0) {
-          tp->dmg_drown_chance_d1000_set(attack_index, 1000);
+          tp->chance_d1000_dmg_drown_set(attack_index, 1000);
         }
         if (tp->dmg_bite() > 0) {
-          tp->dmg_bite_chance_d1000_set(attack_index, 1000);
+          tp->chance_d1000_dmg_bite_set(attack_index, 1000);
         }
         if (tp->dmg_claw() > 0) {
-          tp->dmg_claw_chance_d1000_set(attack_index, 1000);
+          tp->chance_d1000_dmg_claw_set(attack_index, 1000);
         }
         if (tp->dmg_cold() > 0) {
-          tp->dmg_cold_chance_d1000_set(attack_index, 1000);
+          tp->chance_d1000_dmg_cold_set(attack_index, 1000);
         }
         if (tp->dmg_lightning() > 0) {
-          tp->dmg_lightning_chance_d1000_set(attack_index, 1000);
+          tp->chance_d1000_dmg_lightning_set(attack_index, 1000);
         }
         if (tp->dmg_melee() > 0) {
-          tp->dmg_melee_chance_d1000_set(attack_index, 1000);
+          tp->chance_d1000_dmg_melee_set(attack_index, 1000);
         }
         if (tp->dmg_necrosis() > 0) {
-          tp->dmg_necrosis_chance_d1000_set(attack_index, 1000);
+          tp->chance_d1000_dmg_necrosis_set(attack_index, 1000);
         }
         if (tp->dmg_draining() > 0) {
-          tp->dmg_draining_chance_d1000_set(attack_index, 1000);
+          tp->chance_d1000_dmg_draining_set(attack_index, 1000);
         }
         if (tp->dmg_poison() > 0) {
-          tp->dmg_poison_chance_d1000_set(attack_index, 1000);
+          tp->chance_d1000_dmg_poison_set(attack_index, 1000);
         }
       }
     }

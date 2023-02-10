@@ -28,12 +28,12 @@ def on_death(me, x, y):
 def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
-    my.appearing_chance_d1000(self, 100)
+    my.chance_d1000_appearing(self, 100)
+    my.chance_d1000_dmg_crush(self, 0, 1000)
+    my.chance_d1000_dmg_drown(self, 0, 1000)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 1)
-    my.dmg_crush_chance_d1000(self, 0, 1000)
     my.dmg_crush_dice(self, "2d6")
-    my.dmg_drown_chance_d1000(self, 0, 1000)
     my.dmg_drown_dice(self, "2d6")
     my.dmg_received_doubled_from_fire(self, True)
     my.environ_avoids_fire(self, 100)

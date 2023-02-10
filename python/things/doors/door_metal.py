@@ -17,9 +17,9 @@ def on_open(me, x, y):
 def tp_init(name):
     self = tp.Tp(name, "reinforced door")
     # begin sort marker
+    my.chance_d1000_dmg_crush(self, 0, 1000)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 9)
-    my.dmg_crush_chance_d1000(self, 0, 1000)
     my.dmg_crush_dice(self, "2d6")
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)

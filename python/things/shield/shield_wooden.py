@@ -15,8 +15,8 @@ def tp_init(name, text_long_name, text_short_name):
     global self
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
+    my.chance_d10000_damaged(self, 20)
     my.collision_hit_priority(self, 6)
-    my.damaged_chance_d10000(self, 20)
     my.enchant_max(self, 5)
     my.equip_carry_anim(self, "shield_wooden_carry")
     my.gfx_ascii_shown(self, True)

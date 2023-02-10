@@ -52,7 +52,7 @@ void Thing::weapon_check_for_dmg(Thingp weapon, Thingp victim)
   //
   // Enchantment is already factored in here
   //
-  auto damaged_chance = weapon->damaged_chance_d10000();
+  auto damaged_chance = weapon->chance_d10000_damaged();
   if (victim->is_soft()) {
     damaged_chance /= 2;
   }
