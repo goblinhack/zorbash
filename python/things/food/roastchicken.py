@@ -13,7 +13,7 @@ def on_thrown(owner, me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.chance_d1000_set_on_fire(self, 5000)
+    my.chance_d10000_set_on_fire(self, 500)
     my.collision_hit_priority(self, 6)
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)

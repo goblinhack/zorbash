@@ -100,8 +100,8 @@ def on_fall(me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
+    my.chance_d10000_set_on_fire(self, 5000)
     my.chance_d1000_dmg_negation(self, 0, 1000)
-    my.chance_d1000_set_on_fire(self, 5000)
     my.charge_count(self, 5)
     my.collision_hit_priority(self, 6)
     my.dmg_negation_dice(self, "1")  # This is the damage when the monst fires
@@ -139,7 +139,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_target_select(self, True)
     my.is_throwable(self, True)
     my.is_tickable(self, True)  # So it can interact with negation
-    my.is_treasure_class_b(self, True)
+    my.is_treasure_class_B(self, True)
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
     my.is_usable(self, True)

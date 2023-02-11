@@ -58,7 +58,7 @@ def tp_init(name, text_long_name):
     my.is_described_when_hovering_over(self, True)
     my.is_interesting(self, True)
     my.is_loggable(self, True)
-    my.is_mob_challenge_class_a(self, True)
+    my.is_mob_challenge_class_A(self, True)
     my.is_mob(self, True)
     my.is_obs_destructable(self, True)
     my.is_shovable(self, True)

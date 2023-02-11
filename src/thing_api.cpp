@@ -597,40 +597,40 @@ int Thing::is_able_to_burn(void)
   return (tp()->is_able_to_burn());
 }
 
-int Thing::is_carrier_of_treasure_class_a_d1000(void)
+int Thing::chance_d1000_carrier_of_treasure_class_A(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_carrier_of_treasure_class_a_d1000());
+  return (tp()->chance_d1000_carrier_of_treasure_class_A());
 }
 
-int Thing::is_carrier_of_treasure_class_b_d1000(void)
+int Thing::chance_d1000_carrier_of_treasure_class_B(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_carrier_of_treasure_class_b_d1000());
+  return (tp()->chance_d1000_carrier_of_treasure_class_B());
 }
 
-int Thing::is_carrier_of_treasure_class_c_d1000(void)
+int Thing::chance_d1000_carrier_of_treasure_class_C(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_carrier_of_treasure_class_c_d1000());
+  return (tp()->chance_d1000_carrier_of_treasure_class_C());
 }
 
-int Thing::is_carrier_of_weapon_class_a_d1000(void)
+int Thing::chance_d1000_carrier_of_weapon_class_A(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_carrier_of_weapon_class_a_d1000());
+  return (tp()->chance_d1000_carrier_of_weapon_class_A());
 }
 
-int Thing::is_carrier_of_weapon_class_b_d1000(void)
+int Thing::chance_d1000_carrier_of_weapon_class_B(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_carrier_of_weapon_class_b_d1000());
+  return (tp()->chance_d1000_carrier_of_weapon_class_B());
 }
 
-int Thing::is_carrier_of_weapon_class_c_d1000(void)
+int Thing::chance_d1000_carrier_of_weapon_class_C(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_carrier_of_weapon_class_c_d1000());
+  return (tp()->chance_d1000_carrier_of_weapon_class_C());
 }
 
 int Thing::is_chasm(void)
@@ -1671,10 +1671,10 @@ int Thing::chance_d1000_appearing(void)
   return (tp()->chance_d1000_appearing());
 }
 
-int Thing::chance_d1000_set_on_fire(void)
+int Thing::chance_d10000_set_on_fire(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->chance_d1000_set_on_fire());
+  return (tp()->chance_d10000_set_on_fire());
 }
 
 int Thing::is_obs_in_the_way_for_throwing(void)
@@ -2084,10 +2084,10 @@ int Thing::is_treasure(void)
   return (tp()->is_treasure());
 }
 
-int Thing::is_monst_class_e(void)
+int Thing::is_monst_class_E(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_monst_class_e());
+  return (tp()->is_monst_class_E());
 }
 
 int Thing::is_eater_of_green_blood(void)
@@ -2096,40 +2096,40 @@ int Thing::is_eater_of_green_blood(void)
   return (tp()->is_eater_of_green_blood());
 }
 
-int Thing::is_mob_challenge_class_b(void)
+int Thing::is_mob_challenge_class_B(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_mob_challenge_class_b());
+  return (tp()->is_mob_challenge_class_B());
 }
 
-int Thing::is_mob_challenge_class_a(void)
+int Thing::is_mob_challenge_class_A(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_mob_challenge_class_a());
+  return (tp()->is_mob_challenge_class_A());
 }
 
-int Thing::is_monst_class_d(void)
+int Thing::is_monst_class_D(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_monst_class_d());
+  return (tp()->is_monst_class_D());
 }
 
-int Thing::is_monst_class_c(void)
+int Thing::is_monst_class_C(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_monst_class_c());
+  return (tp()->is_monst_class_C());
 }
 
-int Thing::is_monst_class_b(void)
+int Thing::is_monst_class_B(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_monst_class_b());
+  return (tp()->is_monst_class_B());
 }
 
-int Thing::is_monst_class_a(void)
+int Thing::is_monst_class_A(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_monst_class_a());
+  return (tp()->is_monst_class_A());
 }
 
 int Thing::stat_att_penalty_when_in_deep_water(void)
@@ -2659,40 +2659,40 @@ int Thing::is_torch(void)
   return (tp()->is_torch());
 }
 
-int Thing::is_treasure_class_a(void)
+int Thing::is_treasure_class_A(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_treasure_class_a());
+  return (tp()->is_treasure_class_A());
 }
 
-int Thing::is_treasure_class_b(void)
+int Thing::is_treasure_class_B(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_treasure_class_b());
+  return (tp()->is_treasure_class_B());
 }
 
-int Thing::is_treasure_class_c(void)
+int Thing::is_treasure_class_C(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_treasure_class_c());
+  return (tp()->is_treasure_class_C());
 }
 
-int Thing::is_weapon_class_a(void)
+int Thing::is_weapon_class_A(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_weapon_class_a());
+  return (tp()->is_weapon_class_A());
 }
 
-int Thing::is_weapon_class_b(void)
+int Thing::is_weapon_class_B(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_weapon_class_b());
+  return (tp()->is_weapon_class_B());
 }
 
-int Thing::is_weapon_class_c(void)
+int Thing::is_weapon_class_C(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_weapon_class_c());
+  return (tp()->is_weapon_class_C());
 }
 
 int Thing::is_treasure_chest(void)

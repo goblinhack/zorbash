@@ -16,27 +16,27 @@ int Thing::value(Thingp it)
     value++;
   }
 
-  if (it->is_treasure_class_a()) {
+  if (it->is_treasure_class_A()) {
     value++;
   }
 
-  if (it->is_treasure_class_b()) {
+  if (it->is_treasure_class_B()) {
     value++;
   }
 
-  if (it->is_treasure_class_c()) {
+  if (it->is_treasure_class_C()) {
     value++;
   }
 
-  if (it->is_weapon_class_a()) {
+  if (it->is_weapon_class_A()) {
     value++;
   }
 
-  if (it->is_weapon_class_b()) {
+  if (it->is_weapon_class_B()) {
     value++;
   }
 
-  if (it->is_weapon_class_c()) {
+  if (it->is_weapon_class_C()) {
     value++;
   }
 

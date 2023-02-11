@@ -181,57 +181,57 @@ void Charmap::init_charmaps(void)
   char_index             = Charmap::TREASURE_CLASS_A;
   c                      = &all_charmaps[ char_index ];
   c->c                   = char_index;
-  c->is_treasure_class_a = true;
+  c->is_treasure_class_A = true;
 
   char_index             = Charmap::TREASURE_CLASS_B;
   c                      = &all_charmaps[ char_index ];
   c->c                   = char_index;
-  c->is_treasure_class_b = true;
+  c->is_treasure_class_B = true;
 
   char_index             = Charmap::TREASURE_CLASS_C;
   c                      = &all_charmaps[ char_index ];
   c->c                   = char_index;
-  c->is_treasure_class_c = true;
+  c->is_treasure_class_C = true;
 
   char_index           = Charmap::WEAPON_CLASS_A;
   c                    = &all_charmaps[ char_index ];
   c->c                 = char_index;
-  c->is_weapon_class_a = true;
+  c->is_weapon_class_A = true;
 
   char_index           = Charmap::WEAPON_CLASS_B;
   c                    = &all_charmaps[ char_index ];
   c->c                 = char_index;
-  c->is_weapon_class_b = true;
+  c->is_weapon_class_B = true;
 
   char_index           = Charmap::WEAPON_CLASS_C;
   c                    = &all_charmaps[ char_index ];
   c->c                 = char_index;
-  c->is_weapon_class_c = true;
+  c->is_weapon_class_C = true;
 
   char_index          = Charmap::MONST_CLASS_A;
   c                   = &all_charmaps[ char_index ];
   c->c                = char_index;
-  c->is_monst_class_a = true;
+  c->is_monst_class_A = true;
 
   char_index          = Charmap::MONST_CLASS_B;
   c                   = &all_charmaps[ char_index ];
   c->c                = char_index;
-  c->is_monst_class_c = true;
+  c->is_monst_class_C = true;
 
   char_index          = Charmap::MONST_CLASS_C;
   c                   = &all_charmaps[ char_index ];
   c->c                = char_index;
-  c->is_monst_class_c = true;
+  c->is_monst_class_C = true;
 
   char_index          = Charmap::MONST_CLASS_D;
   c                   = &all_charmaps[ char_index ];
   c->c                = char_index;
-  c->is_monst_class_d = true;
+  c->is_monst_class_D = true;
 
   char_index          = Charmap::MONST_CLASS_E;
   c                   = &all_charmaps[ char_index ];
   c->c                = char_index;
-  c->is_monst_class_e = true;
+  c->is_monst_class_E = true;
 
   char_index = Charmap::FOOD;
   c          = &all_charmaps[ char_index ];
@@ -265,10 +265,10 @@ void Charmap::init_charmaps(void)
   char_index                  = Charmap::MOB_SPAWNER_CLASS_A;
   c                           = &all_charmaps[ char_index ];
   c->c                        = char_index;
-  c->is_mob_challenge_class_a = true;
+  c->is_mob_challenge_class_A = true;
 
   char_index                  = Charmap::MOB_SPAWNER_CLASS_B;
   c                           = &all_charmaps[ char_index ];
   c->c                        = char_index;
-  c->is_mob_challenge_class_a = true;
+  c->is_mob_challenge_class_A = true;
 }

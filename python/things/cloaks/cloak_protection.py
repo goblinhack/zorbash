@@ -22,7 +22,7 @@ def tp_init(name, text_long_name, text_short_name):
     global self
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.chance_d1000_set_on_fire(self, 2000)
+    my.chance_d10000_set_on_fire(self, 2000)
     my.collision_hit_priority(self, 6)
     my.enchant_max(self, 10)
     my.equip_carry_anim(self, "cloak_protection_carry")
@@ -47,7 +47,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_item(self, True)
     my.is_loggable(self, True)
     my.is_tickable(self, True)
-    my.is_treasure_class_c(self, True)
+    my.is_treasure_class_C(self, True)
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
     my.item_height(self, 4)

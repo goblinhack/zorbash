@@ -45,7 +45,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_interesting(self, True)
     my.is_item(self, True)
     my.is_loggable(self, True)
-    my.is_treasure_class_b(self, True)
+    my.is_treasure_class_B(self, True)
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
     my.item_height(self, 4)

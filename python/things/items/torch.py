@@ -21,8 +21,8 @@ def on_lifespan_tick(owner, me, x, y):
 def tp_init(name, text_long_name, text_short_name, tiles=[]):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
+    my.chance_d10000_set_on_fire(self, 2000)
     my.chance_d1000_appearing(self, 100)
-    my.chance_d1000_set_on_fire(self, 2000)
     my.charge_count(self, 10)
     my.collision_hit_priority(self, 1)
     my.collision_hit_priority(self, 6)
@@ -52,7 +52,7 @@ def tp_init(name, text_long_name, text_short_name, tiles=[]):
     my.is_throwable(self, True)
     my.is_tickable(self, True)  # for pushing and falling
     my.is_torch(self, True)
-    my.is_treasure_class_a(self, True)
+    my.is_treasure_class_A(self, True)
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
     my.is_wooden(self, True)

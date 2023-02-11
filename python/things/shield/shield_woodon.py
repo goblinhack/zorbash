@@ -16,7 +16,7 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.chance_d10000_damaged(self, 100)
-    my.chance_d1000_set_on_fire(self, 5000)
+    my.chance_d10000_set_on_fire(self, 5000)
     my.collision_hit_priority(self, 6)
     my.enchant_max(self, 2)
     my.equip_carry_anim(self, "shield_woodon_carry")
@@ -39,7 +39,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_item(self, True)
     my.is_loggable(self, True)
     my.is_shield(self, True)
-    my.is_treasure_class_a(self, True)
+    my.is_treasure_class_A(self, True)
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
     my.is_wooden(self, True)

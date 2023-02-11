@@ -1054,28 +1054,28 @@ bool Thing::matches(const std::string &what)
   if (is_treasure() && (what == "is_treasure")) {
     return true;
   }
-  if (is_monst_class_e() && (what == "is_monst_class_e")) {
+  if (is_monst_class_E() && (what == "is_monst_class_E")) {
     return true;
   }
   if (is_eater_of_green_blood() && (what == "is_eater_of_green_blood")) {
     return true;
   }
-  if (is_mob_challenge_class_b() && (what == "is_mob_challenge_class_b")) {
+  if (is_mob_challenge_class_B() && (what == "is_mob_challenge_class_B")) {
     return true;
   }
-  if (is_mob_challenge_class_a() && (what == "is_mob_challenge_class_a")) {
+  if (is_mob_challenge_class_A() && (what == "is_mob_challenge_class_A")) {
     return true;
   }
-  if (is_monst_class_d() && (what == "is_monst_class_d")) {
+  if (is_monst_class_D() && (what == "is_monst_class_D")) {
     return true;
   }
-  if (is_monst_class_c() && (what == "is_monst_class_c")) {
+  if (is_monst_class_C() && (what == "is_monst_class_C")) {
     return true;
   }
-  if (is_monst_class_b() && (what == "is_monst_class_b")) {
+  if (is_monst_class_B() && (what == "is_monst_class_B")) {
     return true;
   }
-  if (is_monst_class_a() && (what == "is_monst_class_a")) {
+  if (is_monst_class_A() && (what == "is_monst_class_A")) {
     return true;
   }
   if (stat_att_penalty_when_in_deep_water() && (what == "stat_att_penalty_when_in_deep_water")) {
@@ -1838,29 +1838,29 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_minion") {
     return &Thing::is_minion;
   }
-  if (what == "is_mob_challenge_class_a") {
-    return &Thing::is_mob_challenge_class_a;
+  if (what == "is_mob_challenge_class_A") {
+    return &Thing::is_mob_challenge_class_A;
   }
-  if (what == "is_mob_challenge_class_b") {
-    return &Thing::is_mob_challenge_class_b;
+  if (what == "is_mob_challenge_class_B") {
+    return &Thing::is_mob_challenge_class_B;
   }
   if (what == "is_mob") {
     return &Thing::is_mob;
   }
-  if (what == "is_monst_class_a") {
-    return &Thing::is_monst_class_a;
+  if (what == "is_monst_class_A") {
+    return &Thing::is_monst_class_A;
   }
-  if (what == "is_monst_class_b") {
-    return &Thing::is_monst_class_b;
+  if (what == "is_monst_class_B") {
+    return &Thing::is_monst_class_B;
   }
-  if (what == "is_monst_class_c") {
-    return &Thing::is_monst_class_c;
+  if (what == "is_monst_class_C") {
+    return &Thing::is_monst_class_C;
   }
-  if (what == "is_monst_class_d") {
-    return &Thing::is_monst_class_d;
+  if (what == "is_monst_class_D") {
+    return &Thing::is_monst_class_D;
   }
-  if (what == "is_monst_class_e") {
-    return &Thing::is_monst_class_e;
+  if (what == "is_monst_class_E") {
+    return &Thing::is_monst_class_E;
   }
   if (what == "is_monst") {
     return &Thing::is_monst;

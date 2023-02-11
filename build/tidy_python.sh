@@ -253,12 +253,12 @@ do
       is_brittle \
       is_buff \
       is_carnivorous_plant \
-      is_carrier_of_treasure_class_a_d1000 \
-      is_carrier_of_treasure_class_b_d1000 \
-      is_carrier_of_treasure_class_c_d1000 \
-      is_carrier_of_weapon_class_a_d1000 \
-      is_carrier_of_weapon_class_b_d1000 \
-      is_carrier_of_weapon_class_c_d1000 \
+      chance_d1000_carrier_of_treasure_class_A \
+      chance_d1000_carrier_of_treasure_class_B \
+      chance_d1000_carrier_of_treasure_class_C \
+      chance_d1000_carrier_of_weapon_class_A \
+      chance_d1000_carrier_of_weapon_class_B \
+      chance_d1000_carrier_of_weapon_class_C \
       is_chasm \
       is_cloak \
       is_cold \
@@ -383,14 +383,14 @@ do
       is_metal \
       is_minion \
       is_mob \
-      is_mob_challenge_class_a \
-      is_mob_challenge_class_b \
+      is_mob_challenge_class_A \
+      is_mob_challenge_class_B \
       is_monst \
-      is_monst_class_a \
-      is_monst_class_b \
-      is_monst_class_c \
-      is_monst_class_d \
-      is_monst_class_e \
+      is_monst_class_A \
+      is_monst_class_B \
+      is_monst_class_C \
+      is_monst_class_D \
+      is_monst_class_E \
       is_monst_pack \
       is_moveable \
       is_msg \
@@ -462,9 +462,9 @@ do
       is_torch \
       is_treasure \
       is_treasure_chest \
-      is_treasure_class_a \
-      is_treasure_class_b \
-      is_treasure_class_c \
+      is_treasure_class_A \
+      is_treasure_class_B \
+      is_treasure_class_C \
       is_treasure_type \
       is_undead \
       is_usable \

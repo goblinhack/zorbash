@@ -29,18 +29,18 @@ static Tpidmap tp_food;
 static Tpidmap tp_mob;
 static Tpidmap tp_gold;
 static Tpidmap tp_green_splatter;
-static Tpidmap tp_item_class_a;
-static Tpidmap tp_item_class_b;
-static Tpidmap tp_item_class_c;
-static Tpidmap tp_item_not_a_container_class_a;
-static Tpidmap tp_item_not_a_container_class_b;
-static Tpidmap tp_item_not_a_container_class_c;
+static Tpidmap tp_item_class_A;
+static Tpidmap tp_item_class_B;
+static Tpidmap tp_item_class_C;
+static Tpidmap tp_item_not_a_container_class_A;
+static Tpidmap tp_item_not_a_container_class_B;
+static Tpidmap tp_item_not_a_container_class_C;
 static Tpidmap tp_key;
 static Tpidmap tp_potion;
 static Tpidmap tp_ring;
-static Tpidmap tp_ring_class_a;
-static Tpidmap tp_ring_class_b;
-static Tpidmap tp_ring_class_c;
+static Tpidmap tp_ring_class_A;
+static Tpidmap tp_ring_class_B;
+static Tpidmap tp_ring_class_C;
 static Tpidmap tp_small_ripples;
 static Tpidmap tp_large_ripples;
 static Tpidmap tp_rock;
@@ -52,16 +52,16 @@ static Tpidmap tp_spiderweb;
 static Tpidmap tp_treasure;
 static Tpidmap tp_wall_dungeon;
 static Tpidmap tp_staff;
-static Tpidmap tp_staff_class_a;
-static Tpidmap tp_staff_class_b;
-static Tpidmap tp_staff_class_c;
+static Tpidmap tp_staff_class_A;
+static Tpidmap tp_staff_class_B;
+static Tpidmap tp_staff_class_C;
 static Tpidmap tp_weapon;
-static Tpidmap tp_weapon_class_a;
-static Tpidmap tp_weapon_class_b;
-static Tpidmap tp_weapon_class_c;
-static Tpidmap tp_treasure_class_a;
-static Tpidmap tp_treasure_class_b;
-static Tpidmap tp_treasure_class_c;
+static Tpidmap tp_weapon_class_A;
+static Tpidmap tp_weapon_class_B;
+static Tpidmap tp_weapon_class_C;
+static Tpidmap tp_treasure_class_A;
+static Tpidmap tp_treasure_class_B;
+static Tpidmap tp_treasure_class_C;
 
 void tp_random_init(void)
 {
@@ -176,60 +176,60 @@ void tp_random_init(void)
     // chests containing chests forever
     //
     if (tp->is_bag_item_container()) {
-      if (tp->is_treasure_class_a()) {
-        tp_item_class_a.push_back(tp);
+      if (tp->is_treasure_class_A()) {
+        tp_item_class_A.push_back(tp);
       }
-      if (tp->is_treasure_class_b()) {
-        tp_item_class_b.push_back(tp);
+      if (tp->is_treasure_class_B()) {
+        tp_item_class_B.push_back(tp);
       }
-      if (tp->is_treasure_class_c()) {
-        tp_item_class_c.push_back(tp);
+      if (tp->is_treasure_class_C()) {
+        tp_item_class_C.push_back(tp);
       }
-      if (tp->is_weapon_class_a()) {
-        tp_item_class_a.push_back(tp);
+      if (tp->is_weapon_class_A()) {
+        tp_item_class_A.push_back(tp);
       }
-      if (tp->is_weapon_class_b()) {
-        tp_item_class_b.push_back(tp);
+      if (tp->is_weapon_class_B()) {
+        tp_item_class_B.push_back(tp);
       }
-      if (tp->is_weapon_class_c()) {
-        tp_item_class_c.push_back(tp);
+      if (tp->is_weapon_class_C()) {
+        tp_item_class_C.push_back(tp);
       }
     } else {
-      if (tp->is_treasure_class_a()) {
-        tp_item_class_a.push_back(tp);
+      if (tp->is_treasure_class_A()) {
+        tp_item_class_A.push_back(tp);
       }
-      if (tp->is_treasure_class_b()) {
-        tp_item_class_b.push_back(tp);
+      if (tp->is_treasure_class_B()) {
+        tp_item_class_B.push_back(tp);
       }
-      if (tp->is_treasure_class_c()) {
-        tp_item_class_c.push_back(tp);
+      if (tp->is_treasure_class_C()) {
+        tp_item_class_C.push_back(tp);
       }
-      if (tp->is_treasure_class_a()) {
-        tp_item_not_a_container_class_a.push_back(tp);
+      if (tp->is_treasure_class_A()) {
+        tp_item_not_a_container_class_A.push_back(tp);
       }
-      if (tp->is_treasure_class_b()) {
-        tp_item_not_a_container_class_b.push_back(tp);
+      if (tp->is_treasure_class_B()) {
+        tp_item_not_a_container_class_B.push_back(tp);
       }
-      if (tp->is_treasure_class_c()) {
-        tp_item_not_a_container_class_c.push_back(tp);
+      if (tp->is_treasure_class_C()) {
+        tp_item_not_a_container_class_C.push_back(tp);
       }
-      if (tp->is_weapon_class_a()) {
-        tp_item_class_a.push_back(tp);
+      if (tp->is_weapon_class_A()) {
+        tp_item_class_A.push_back(tp);
       }
-      if (tp->is_weapon_class_b()) {
-        tp_item_class_b.push_back(tp);
+      if (tp->is_weapon_class_B()) {
+        tp_item_class_B.push_back(tp);
       }
-      if (tp->is_weapon_class_c()) {
-        tp_item_class_c.push_back(tp);
+      if (tp->is_weapon_class_C()) {
+        tp_item_class_C.push_back(tp);
       }
-      if (tp->is_weapon_class_a()) {
-        tp_item_not_a_container_class_a.push_back(tp);
+      if (tp->is_weapon_class_A()) {
+        tp_item_not_a_container_class_A.push_back(tp);
       }
-      if (tp->is_weapon_class_b()) {
-        tp_item_not_a_container_class_b.push_back(tp);
+      if (tp->is_weapon_class_B()) {
+        tp_item_not_a_container_class_B.push_back(tp);
       }
-      if (tp->is_weapon_class_c()) {
-        tp_item_not_a_container_class_c.push_back(tp);
+      if (tp->is_weapon_class_C()) {
+        tp_item_not_a_container_class_C.push_back(tp);
       }
     }
 
@@ -244,51 +244,51 @@ void tp_random_init(void)
     }
 
     if (tp->is_weapon()) {
-      if (tp->is_weapon_class_a()) {
-        tp_weapon_class_a.push_back(tp);
+      if (tp->is_weapon_class_A()) {
+        tp_weapon_class_A.push_back(tp);
       }
-      if (tp->is_weapon_class_b()) {
-        tp_weapon_class_b.push_back(tp);
+      if (tp->is_weapon_class_B()) {
+        tp_weapon_class_B.push_back(tp);
       }
-      if (tp->is_weapon_class_c()) {
-        tp_weapon_class_c.push_back(tp);
+      if (tp->is_weapon_class_C()) {
+        tp_weapon_class_C.push_back(tp);
       }
     }
 
-    if (tp->is_treasure_class_a()) {
-      tp_treasure_class_a.push_back(tp);
+    if (tp->is_treasure_class_A()) {
+      tp_treasure_class_A.push_back(tp);
     }
-    if (tp->is_treasure_class_b()) {
-      tp_treasure_class_b.push_back(tp);
+    if (tp->is_treasure_class_B()) {
+      tp_treasure_class_B.push_back(tp);
     }
-    if (tp->is_treasure_class_c()) {
-      tp_treasure_class_c.push_back(tp);
+    if (tp->is_treasure_class_C()) {
+      tp_treasure_class_C.push_back(tp);
     }
 
     if (tp->is_staff()) {
       tp_staff.push_back(tp);
     }
     if (tp->is_staff()) {
-      if (tp->is_treasure_class_a()) {
-        tp_staff_class_a.push_back(tp);
+      if (tp->is_treasure_class_A()) {
+        tp_staff_class_A.push_back(tp);
       }
-      if (tp->is_treasure_class_b()) {
-        tp_staff_class_b.push_back(tp);
+      if (tp->is_treasure_class_B()) {
+        tp_staff_class_B.push_back(tp);
       }
-      if (tp->is_treasure_class_c()) {
-        tp_staff_class_c.push_back(tp);
+      if (tp->is_treasure_class_C()) {
+        tp_staff_class_C.push_back(tp);
       }
     }
 
     if (tp->is_ring()) {
-      if (tp->is_treasure_class_a()) {
-        tp_ring_class_a.push_back(tp);
+      if (tp->is_treasure_class_A()) {
+        tp_ring_class_A.push_back(tp);
       }
-      if (tp->is_treasure_class_b()) {
-        tp_ring_class_b.push_back(tp);
+      if (tp->is_treasure_class_B()) {
+        tp_ring_class_B.push_back(tp);
       }
-      if (tp->is_treasure_class_c()) {
-        tp_ring_class_c.push_back(tp);
+      if (tp->is_treasure_class_C()) {
+        tp_ring_class_C.push_back(tp);
       }
     }
 
@@ -411,168 +411,168 @@ Tpp tp_random_treasure(void)
   return tp_get_with_rarity_filter(tp_treasure);
 }
 
-Tpp tp_random_item_class_a(void)
+Tpp tp_random_item_class_A(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_item_class_a.size())) {
-    ERR("No item_class_a found");
+  if (unlikely(! tp_item_class_A.size())) {
+    ERR("No item_class_A found");
     return nullptr;
   }
-  return tp_get_with_rarity_filter(tp_item_class_a);
+  return tp_get_with_rarity_filter(tp_item_class_A);
 }
 
-Tpp tp_random_item_class_b(void)
+Tpp tp_random_item_class_B(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_item_class_b.size())) {
-    return tp_random_item_class_a();
+  if (unlikely(! tp_item_class_B.size())) {
+    return tp_random_item_class_A();
   }
-  return tp_get_with_rarity_filter(tp_item_class_b);
+  return tp_get_with_rarity_filter(tp_item_class_B);
 }
 
-Tpp tp_random_item_class_c(void)
+Tpp tp_random_item_class_C(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_item_class_c.size())) {
-    return tp_random_item_class_b();
+  if (unlikely(! tp_item_class_C.size())) {
+    return tp_random_item_class_B();
   }
-  return tp_get_with_rarity_filter(tp_item_class_c);
+  return tp_get_with_rarity_filter(tp_item_class_C);
 }
 
-Tpp tp_random_item_not_a_container_class_a(void)
+Tpp tp_random_item_not_a_container_class_A(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_item_not_a_container_class_a.size())) {
-    ERR("No item_not_a_container_class_a found");
+  if (unlikely(! tp_item_not_a_container_class_A.size())) {
+    ERR("No item_not_a_container_class_A found");
     return nullptr;
   }
-  return tp_get_with_rarity_filter(tp_item_not_a_container_class_a);
+  return tp_get_with_rarity_filter(tp_item_not_a_container_class_A);
 }
 
-Tpp tp_random_item_not_a_container_class_b(void)
+Tpp tp_random_item_not_a_container_class_B(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_item_not_a_container_class_b.size())) {
-    return tp_random_item_not_a_container_class_a();
+  if (unlikely(! tp_item_not_a_container_class_B.size())) {
+    return tp_random_item_not_a_container_class_A();
   }
-  return tp_get_with_rarity_filter(tp_item_not_a_container_class_b);
+  return tp_get_with_rarity_filter(tp_item_not_a_container_class_B);
 }
 
-Tpp tp_random_item_not_a_container_class_c(void)
+Tpp tp_random_item_not_a_container_class_C(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_item_not_a_container_class_c.size())) {
-    return tp_random_item_not_a_container_class_b();
+  if (unlikely(! tp_item_not_a_container_class_C.size())) {
+    return tp_random_item_not_a_container_class_B();
   }
-  return tp_get_with_rarity_filter(tp_item_not_a_container_class_c);
+  return tp_get_with_rarity_filter(tp_item_not_a_container_class_C);
 }
 
-Tpp tp_random_weapon_class_a(void)
+Tpp tp_random_weapon_class_A(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_weapon_class_a.size())) {
+  if (unlikely(! tp_weapon_class_A.size())) {
     return tp_random_weapon();
   }
-  return tp_get_with_rarity_filter(tp_weapon_class_a);
+  return tp_get_with_rarity_filter(tp_weapon_class_A);
 }
 
-Tpp tp_random_weapon_class_b(void)
+Tpp tp_random_weapon_class_B(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_weapon_class_b.size())) {
-    return tp_random_weapon_class_a();
+  if (unlikely(! tp_weapon_class_B.size())) {
+    return tp_random_weapon_class_A();
   }
-  return tp_get_with_rarity_filter(tp_weapon_class_b);
+  return tp_get_with_rarity_filter(tp_weapon_class_B);
 }
 
-Tpp tp_random_weapon_class_c(void)
+Tpp tp_random_weapon_class_C(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_weapon_class_c.size())) {
-    return tp_random_weapon_class_b();
+  if (unlikely(! tp_weapon_class_C.size())) {
+    return tp_random_weapon_class_B();
   }
-  return tp_get_with_rarity_filter(tp_weapon_class_c);
+  return tp_get_with_rarity_filter(tp_weapon_class_C);
 }
 
-Tpp tp_random_treasure_class_a(void)
+Tpp tp_random_treasure_class_A(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_treasure_class_a.size())) {
+  if (unlikely(! tp_treasure_class_A.size())) {
     return tp_random_treasure();
   }
-  return tp_get_with_rarity_filter(tp_treasure_class_a);
+  return tp_get_with_rarity_filter(tp_treasure_class_A);
 }
 
-Tpp tp_random_treasure_class_b(void)
+Tpp tp_random_treasure_class_B(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_treasure_class_b.size())) {
-    return tp_random_treasure_class_a();
+  if (unlikely(! tp_treasure_class_B.size())) {
+    return tp_random_treasure_class_A();
   }
-  return tp_get_with_rarity_filter(tp_treasure_class_b);
+  return tp_get_with_rarity_filter(tp_treasure_class_B);
 }
 
-Tpp tp_random_treasure_class_c(void)
+Tpp tp_random_treasure_class_C(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_treasure_class_c.size())) {
-    return tp_random_treasure_class_b();
+  if (unlikely(! tp_treasure_class_C.size())) {
+    return tp_random_treasure_class_B();
   }
-  return tp_get_with_rarity_filter(tp_treasure_class_c);
+  return tp_get_with_rarity_filter(tp_treasure_class_C);
 }
 
-Tpp tp_random_staff_class_a(void)
+Tpp tp_random_staff_class_A(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_staff_class_a.size())) {
+  if (unlikely(! tp_staff_class_A.size())) {
     return tp_random_staff();
   }
-  return tp_get_with_rarity_filter(tp_staff_class_a);
+  return tp_get_with_rarity_filter(tp_staff_class_A);
 }
 
-Tpp tp_random_staff_class_b(void)
+Tpp tp_random_staff_class_B(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_staff_class_b.size())) {
-    return tp_random_staff_class_a();
+  if (unlikely(! tp_staff_class_B.size())) {
+    return tp_random_staff_class_A();
   }
-  return tp_get_with_rarity_filter(tp_staff_class_b);
+  return tp_get_with_rarity_filter(tp_staff_class_B);
 }
 
-Tpp tp_random_staff_class_c(void)
+Tpp tp_random_staff_class_C(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_staff_class_c.size())) {
-    return tp_random_staff_class_b();
+  if (unlikely(! tp_staff_class_C.size())) {
+    return tp_random_staff_class_B();
   }
-  return tp_get_with_rarity_filter(tp_staff_class_c);
+  return tp_get_with_rarity_filter(tp_staff_class_C);
 }
 
-Tpp tp_random_ring_class_a(void)
+Tpp tp_random_ring_class_A(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_ring_class_a.size())) {
+  if (unlikely(! tp_ring_class_A.size())) {
     return tp_random_ring();
   }
-  return tp_get_with_rarity_filter(tp_ring_class_a);
+  return tp_get_with_rarity_filter(tp_ring_class_A);
 }
 
-Tpp tp_random_ring_class_b(void)
+Tpp tp_random_ring_class_B(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_ring_class_b.size())) {
-    return tp_random_ring_class_a();
+  if (unlikely(! tp_ring_class_B.size())) {
+    return tp_random_ring_class_A();
   }
-  return tp_get_with_rarity_filter(tp_ring_class_b);
+  return tp_get_with_rarity_filter(tp_ring_class_B);
 }
 
-Tpp tp_random_ring_class_c(void)
+Tpp tp_random_ring_class_C(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_ring_class_c.size())) {
-    return tp_random_ring_class_b();
+  if (unlikely(! tp_ring_class_C.size())) {
+    return tp_random_ring_class_B();
   }
-  return tp_get_with_rarity_filter(tp_ring_class_c);
+  return tp_get_with_rarity_filter(tp_ring_class_C);
 }
 
 Tpp tp_random_dirt(void)
@@ -815,9 +815,9 @@ Tpp tp_random_ethereal_mob(void)
   return tp_get_with_rarity_filter(tp_ethereal_mob);
 }
 
-Tpp tp_random_mob_challenge_class_a(void) { return tp_random_mob(); }
+Tpp tp_random_mob_challenge_class_A(void) { return tp_random_mob(); }
 
-Tpp tp_random_mob_challenge_class_b(void) { return tp_random_mob(); }
+Tpp tp_random_mob_challenge_class_B(void) { return tp_random_mob(); }
 
 Tpp tp_random_red_blood(void)
 {

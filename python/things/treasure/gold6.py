@@ -26,7 +26,7 @@ def gold_init(name, text_long_name, text_short_name):
     my.is_loggable(self, True)
     my.is_metal(self, True)
     my.is_moveable(self, True)
-    my.is_treasure_class_c(self, True)
+    my.is_treasure_class_C(self, True)
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
     my.light_color(self, "yellow")

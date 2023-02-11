@@ -38,7 +38,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_ranged_weapon(self, True)
     my.is_throwable(self, True)
     my.is_thrown_as_a_weapon(self, True)
-    my.is_treasure_class_a(self, True)
+    my.is_treasure_class_A(self, True)
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
     my.item_height(self, 2)

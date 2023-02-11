@@ -98,8 +98,8 @@ bool Thing::on_fire_set(const std::string &why)
   //
   // Give some things more of a chance of catching on fire, to be less cruel
   //
-  if (chance_d1000_set_on_fire()) {
-    if (d10000() > chance_d1000_set_on_fire()) {
+  if (chance_d10000_set_on_fire()) {
+    if (d10000() > chance_d10000_set_on_fire()) {
       return false;
     }
   }

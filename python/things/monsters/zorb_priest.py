@@ -24,7 +24,7 @@ def tp_init(name, text_long_name):
     my.is_biome_dungeon(self, True)
     my.is_intelligent(self, True)
     my.is_loggable(self, True)
-    my.is_monst_class_b(self, True)
+    my.is_monst_class_B(self, True)
     my.on_born_do(self, "me.on_born()")
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
     my.on_you_nat_att_do(self, "zorb_all.on_you_nat_att()")

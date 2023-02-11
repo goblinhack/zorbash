@@ -31,59 +31,59 @@ Tpp tp_find(const std::string &name)
     if (name == "random_treasure") {
       return tp_random_treasure();
     }
-    if (name == "random_item_class_a") {
-      return tp_random_item_class_a();
+    if (name == "random_item_class_A") {
+      return tp_random_item_class_A();
     }
-    if (name == "random_item_class_b") {
-      return tp_random_item_class_b();
+    if (name == "random_item_class_B") {
+      return tp_random_item_class_B();
     }
-    if (name == "random_item_class_c") {
-      return tp_random_item_class_c();
+    if (name == "random_item_class_C") {
+      return tp_random_item_class_C();
     }
-    if (name == "random_item_not_a_container_class_a") {
-      return tp_random_item_not_a_container_class_a();
+    if (name == "random_item_not_a_container_class_A") {
+      return tp_random_item_not_a_container_class_A();
     }
-    if (name == "random_item_not_a_container_class_b") {
-      return tp_random_item_not_a_container_class_b();
+    if (name == "random_item_not_a_container_class_B") {
+      return tp_random_item_not_a_container_class_B();
     }
-    if (name == "random_item_not_a_container_class_c") {
-      return tp_random_item_not_a_container_class_c();
+    if (name == "random_item_not_a_container_class_C") {
+      return tp_random_item_not_a_container_class_C();
     }
-    if (name == "random_weapon_class_a") {
-      return tp_random_weapon_class_a();
+    if (name == "random_weapon_class_A") {
+      return tp_random_weapon_class_A();
     }
-    if (name == "random_weapon_class_b") {
-      return tp_random_weapon_class_b();
+    if (name == "random_weapon_class_B") {
+      return tp_random_weapon_class_B();
     }
-    if (name == "random_weapon_class_c") {
-      return tp_random_weapon_class_c();
+    if (name == "random_weapon_class_C") {
+      return tp_random_weapon_class_C();
     }
-    if (name == "random_treasure_class_a") {
-      return tp_random_treasure_class_a();
+    if (name == "random_treasure_class_A") {
+      return tp_random_treasure_class_A();
     }
-    if (name == "random_treasure_class_b") {
-      return tp_random_treasure_class_b();
+    if (name == "random_treasure_class_B") {
+      return tp_random_treasure_class_B();
     }
-    if (name == "random_treasure_class_c") {
-      return tp_random_treasure_class_c();
+    if (name == "random_treasure_class_C") {
+      return tp_random_treasure_class_C();
     }
-    if (name == "random_staff_class_a") {
-      return tp_random_staff_class_a();
+    if (name == "random_staff_class_A") {
+      return tp_random_staff_class_A();
     }
-    if (name == "random_staff_class_b") {
-      return tp_random_staff_class_b();
+    if (name == "random_staff_class_B") {
+      return tp_random_staff_class_B();
     }
-    if (name == "random_staff_class_c") {
-      return tp_random_staff_class_c();
+    if (name == "random_staff_class_C") {
+      return tp_random_staff_class_C();
     }
-    if (name == "random_ring_class_a") {
-      return tp_random_ring_class_a();
+    if (name == "random_ring_class_A") {
+      return tp_random_ring_class_A();
     }
-    if (name == "random_ring_class_b") {
-      return tp_random_ring_class_b();
+    if (name == "random_ring_class_B") {
+      return tp_random_ring_class_B();
     }
-    if (name == "random_ring_class_c") {
-      return tp_random_ring_class_c();
+    if (name == "random_ring_class_C") {
+      return tp_random_ring_class_C();
     }
     if (name == "random_dirt") {
       return tp_random_dirt();
@@ -157,11 +157,11 @@ Tpp tp_find(const std::string &name)
     if (name == "random_ethereal_mob") {
       return tp_random_ethereal_mob();
     }
-    if (name == "random_mob_challenge_class_a") {
-      return tp_random_mob_challenge_class_a();
+    if (name == "random_mob_challenge_class_A") {
+      return tp_random_mob_challenge_class_A();
     }
-    if (name == "random_mob_challenge_class_b") {
-      return tp_random_mob_challenge_class_b();
+    if (name == "random_mob_challenge_class_B") {
+      return tp_random_mob_challenge_class_B();
     }
     if (name == "random_red_blood") {
       return tp_random_red_blood();

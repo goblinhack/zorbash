@@ -86,7 +86,7 @@ def tp_init(name, text_long_name):
     my.is_immune_to_water(self, True)
     my.is_interesting(self, True)
     my.is_loggable(self, True)
-    my.is_monst_class_c(self, True)
+    my.is_monst_class_C(self, True)
     my.is_monst(self, True)
     my.is_msg_allowed_hears_something(self, True)
     my.is_msg_allowed_is_dead(self, True)

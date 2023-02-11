@@ -15,16 +15,16 @@ def on_death_of_a_follower(me, leader, x, y):
 def tp_init(name, text_long_name):
     self = zorb_all.tp_init(name, text_long_name)
     # begin sort marker
+    my.chance_d1000_carrier_of_treasure_class_B(self, 1000)
     my.distance_avoid(self, 5)
     my.health_initial_dice(self, "2d4+4")
     my.is_able_to_freeze(self, True)
     my.is_able_to_use_rings(self, True)
     my.is_able_to_use_staffs(self, True)
     my.is_biome_dungeon(self, True)
-    my.is_carrier_of_treasure_class_b_d1000(self, 1000)
     my.is_intelligent(self, True)
     my.is_loggable(self, True)
-    my.is_monst_class_c(self, True)
+    my.is_monst_class_C(self, True)
     my.on_born_do(self, "me.on_born()")
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
     my.on_you_nat_att_do(self, "zorb_all.on_you_nat_att()")

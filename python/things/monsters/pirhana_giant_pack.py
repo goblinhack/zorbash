@@ -19,7 +19,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_follow(self, True)
     my.is_allied_with(self, "pirhana_giant_pack")
     my.is_biome_dungeon(self, True)
-    my.is_monst_class_c(self, True)
+    my.is_monst_class_C(self, True)
     my.is_loggable(self, True)
     my.rarity(self, my.RARITY_COMMON)
     my.on_you_are_declared_a_follower_do(self, "me.on_you_are_declared_a_follower()")

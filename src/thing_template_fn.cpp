@@ -209,8 +209,15 @@ int Tp::capacity_height(void) const { return _capacity_height; }
 int Tp::capacity_width(void) const { return _capacity_width; }
 int Tp::chance_d10000_crit(void) const { return chance_d10000__crit; }
 int Tp::chance_d10000_damaged(void) const { return chance_d10000_dmgd; }
+int Tp::chance_d10000_set_on_fire(void) const { return chance_d1000__set_on_fire; }
 int Tp::chance_d1000_appearing(void) const { return chance_d1000__appearing; }
 int Tp::chance_d1000_attack_engulf(void) const { return chance_d1000__attack_engulf; }
+int Tp::chance_d1000_carrier_of_treasure_class_A(void) const { return _chance_d1000_carrier_of_treasure_class_A; }
+int Tp::chance_d1000_carrier_of_treasure_class_B(void) const { return _chance_d1000_carrier_of_treasure_class_B; }
+int Tp::chance_d1000_carrier_of_treasure_class_C(void) const { return _chance_d1000_carrier_of_treasure_class_C; }
+int Tp::chance_d1000_carrier_of_weapon_class_A(void) const { return _chance_d1000_carrier_of_weapon_class_A; }
+int Tp::chance_d1000_carrier_of_weapon_class_B(void) const { return _chance_d1000_carrier_of_weapon_class_B; }
+int Tp::chance_d1000_carrier_of_weapon_class_C(void) const { return _chance_d1000_carrier_of_weapon_class_C; }
 int Tp::chance_d1000_is_able_to_grapple(void) const { return chance_d1000__is_able_to_grapple; }
 int Tp::chance_d1000_is_able_to_jump_attack(void) const { return chance_d1000__is_able_to_jump_attack; }
 int Tp::chance_d1000_is_able_to_jump_on_low_hp(void) const { return chance_d1000__is_able_to_jump_on_low_hp; }
@@ -220,7 +227,6 @@ int Tp::chance_d1000_is_able_to_shove(void) const { return chance_d1000__is_able
 int Tp::chance_d1000_is_able_to_teleport_attack(void) const { return chance_d1000__is_able_to_teleport_attack; }
 int Tp::chance_d1000_is_steal_item(void) const { return chance_d1000__is_steal_item; }
 int Tp::chance_d1000_melting(void) const { return chance_d1000__melting; }
-int Tp::chance_d1000_set_on_fire(void) const { return chance_d1000__set_on_fire; }
 int Tp::charge_count(void) const { return _charge_count; }
 int Tp::collateral_dmg_pct(void) const { return _collateral_dmg_pct; }
 int Tp::collision_check(void) const { return _collision_check; }
@@ -394,12 +400,6 @@ int Tp::is_bridge(void) const { return _is_bridge; }
 int Tp::is_brittle(void) const { return _is_brittle; }
 int Tp::is_buff(void) const { return _is_buff; }
 int Tp::is_carnivorous_plant(void) const { return _is_carnivorous_plant; }
-int Tp::is_carrier_of_treasure_class_a_d1000(void) const { return _is_carrier_of_treasure_class_a_d1000; }
-int Tp::is_carrier_of_treasure_class_b_d1000(void) const { return _is_carrier_of_treasure_class_b_d1000; }
-int Tp::is_carrier_of_treasure_class_c_d1000(void) const { return _is_carrier_of_treasure_class_c_d1000; }
-int Tp::is_carrier_of_weapon_class_a_d1000(void) const { return _is_carrier_of_weapon_class_a_d1000; }
-int Tp::is_carrier_of_weapon_class_b_d1000(void) const { return _is_carrier_of_weapon_class_b_d1000; }
-int Tp::is_carrier_of_weapon_class_c_d1000(void) const { return _is_carrier_of_weapon_class_c_d1000; }
 int Tp::is_chasm(void) const { return _is_chasm; }
 int Tp::is_cloak(void) const { return _is_cloak; }
 int Tp::is_cold(void) const { return _is_cold; }
@@ -528,14 +528,14 @@ int Tp::is_meat(void) const { return _is_meat; }
 int Tp::is_metal(void) const { return _is_metal; }
 int Tp::is_minion(void) const { return _is_minion; }
 int Tp::is_missile(void) const { return _is_missile; }
-int Tp::is_mob_challenge_class_a(void) const { return _is_mob_challenge_class_a; }
-int Tp::is_mob_challenge_class_b(void) const { return _is_mob_challenge_class_b; }
+int Tp::is_mob_challenge_class_A(void) const { return _is_mob_challenge_class_A; }
+int Tp::is_mob_challenge_class_B(void) const { return _is_mob_challenge_class_B; }
 int Tp::is_mob(void) const { return _is_mob; }
-int Tp::is_monst_class_a(void) const { return _is_monst_class_a; }
-int Tp::is_monst_class_b(void) const { return _is_monst_class_b; }
-int Tp::is_monst_class_c(void) const { return _is_monst_class_c; }
-int Tp::is_monst_class_d(void) const { return _is_monst_class_d; }
-int Tp::is_monst_class_e(void) const { return _is_monst_class_e; }
+int Tp::is_monst_class_A(void) const { return _is_monst_class_A; }
+int Tp::is_monst_class_B(void) const { return _is_monst_class_B; }
+int Tp::is_monst_class_C(void) const { return _is_monst_class_C; }
+int Tp::is_monst_class_D(void) const { return _is_monst_class_D; }
+int Tp::is_monst_class_E(void) const { return _is_monst_class_E; }
 int Tp::is_monst_pack(void) const { return _is_monst_pack; }
 int Tp::is_monst(void) const { return _is_monst; }
 int Tp::is_moveable(void) const { return _is_moveable; }
@@ -608,9 +608,9 @@ int Tp::is_tireless(void) const { return _is_tireless; }
 int Tp::is_tmp_thing(void) const { return _is_tmp_thing; }
 int Tp::is_torch(void) const { return _is_torch; }
 int Tp::is_treasure_chest(void) const { return _is_treasure_chest; }
-int Tp::is_treasure_class_a(void) const { return _is_treasure_class_a; }
-int Tp::is_treasure_class_b(void) const { return _is_treasure_class_b; }
-int Tp::is_treasure_class_c(void) const { return _is_treasure_class_c; }
+int Tp::is_treasure_class_A(void) const { return _is_treasure_class_A; }
+int Tp::is_treasure_class_B(void) const { return _is_treasure_class_B; }
+int Tp::is_treasure_class_C(void) const { return _is_treasure_class_C; }
 int Tp::is_treasure_type(void) const { return _is_treasure_type; }
 int Tp::is_treasure(void) const { return _is_treasure; }
 int Tp::is_undead(void) const { return _is_undead; }
@@ -621,9 +621,9 @@ int Tp::is_very_hard(void) const { return _is_very_hard; }
 int Tp::is_very_heavy(void) const { return _is_very_heavy; }
 int Tp::is_wall_dungeon(void) const { return _is_wall_dungeon; }
 int Tp::is_wall(void) const { return _is_wall; }
-int Tp::is_weapon_class_a(void) const { return _is_weapon_class_a; }
-int Tp::is_weapon_class_b(void) const { return _is_weapon_class_b; }
-int Tp::is_weapon_class_c(void) const { return _is_weapon_class_c; }
+int Tp::is_weapon_class_A(void) const { return _is_weapon_class_A; }
+int Tp::is_weapon_class_B(void) const { return _is_weapon_class_B; }
+int Tp::is_weapon_class_C(void) const { return _is_weapon_class_C; }
 int Tp::is_weapon(void) const { return _is_weapon; }
 int Tp::is_wet_grass(void) const { return _is_wet_grass; }
 int Tp::is_wooden(void) const { return _is_wooden; }
@@ -744,8 +744,15 @@ void Tp::capacity_height_set(int v) { _capacity_height = v; }
 void Tp::capacity_width_set(int v) { _capacity_width = v; }
 void Tp::chance_d10000_crit_set(int v) { chance_d10000__crit = v; }
 void Tp::chance_d10000_damaged_set(int v) { chance_d10000_dmgd = v; }
+void Tp::chance_d10000_set_on_fire_set(int v) { chance_d1000__set_on_fire = v; }
 void Tp::chance_d1000_appearing_set(int v) { chance_d1000__appearing = v; }
 void Tp::chance_d1000_attack_engulf_set(int v) { chance_d1000__attack_engulf = v; }
+void Tp::chance_d1000_carrier_of_treasure_class_A_set(int v) { _chance_d1000_carrier_of_treasure_class_A = v; }
+void Tp::chance_d1000_carrier_of_treasure_class_B_set(int v) { _chance_d1000_carrier_of_treasure_class_B = v; }
+void Tp::chance_d1000_carrier_of_treasure_class_C_set(int v) { _chance_d1000_carrier_of_treasure_class_C = v; }
+void Tp::chance_d1000_carrier_of_weapon_class_A_set(int v) { _chance_d1000_carrier_of_weapon_class_A = v; }
+void Tp::chance_d1000_carrier_of_weapon_class_B_set(int v) { _chance_d1000_carrier_of_weapon_class_B = v; }
+void Tp::chance_d1000_carrier_of_weapon_class_C_set(int v) { _chance_d1000_carrier_of_weapon_class_C = v; }
 void Tp::chance_d1000_is_able_to_grapple_set(int v) { chance_d1000__is_able_to_grapple = v; }
 void Tp::chance_d1000_is_able_to_jump_attack_set(int v) { chance_d1000__is_able_to_jump_attack = v; }
 void Tp::chance_d1000_is_able_to_jump_on_low_hp_set(int v) { chance_d1000__is_able_to_jump_on_low_hp = v; }
@@ -755,7 +762,6 @@ void Tp::chance_d1000_is_able_to_shove_set(int v) { chance_d1000__is_able_to_sho
 void Tp::chance_d1000_is_able_to_teleport_attack_set(int v) { chance_d1000__is_able_to_teleport_attack = v; }
 void Tp::chance_d1000_is_steal_item_set(int v) { chance_d1000__is_steal_item = v; }
 void Tp::chance_d1000_melting_set(int v) { chance_d1000__melting = v; }
-void Tp::chance_d1000_set_on_fire_set(int v) { chance_d1000__set_on_fire = v; }
 void Tp::charge_count_set(int v) { _charge_count = v; }
 void Tp::collateral_dmg_pct_set(int v) { _collateral_dmg_pct = v; }
 void Tp::collision_attack_set(int v) { _collision_attack = v; }
@@ -936,12 +942,6 @@ void Tp::is_bridge_set(int v) { _is_bridge = v; }
 void Tp::is_brittle_set(int v) { _is_brittle = v; }
 void Tp::is_buff_set(int v) { _is_buff = v; }
 void Tp::is_carnivorous_plant_set(int v) { _is_carnivorous_plant = v; }
-void Tp::is_carrier_of_treasure_class_a_d1000_set(int v) { _is_carrier_of_treasure_class_a_d1000 = v; }
-void Tp::is_carrier_of_treasure_class_b_d1000_set(int v) { _is_carrier_of_treasure_class_b_d1000 = v; }
-void Tp::is_carrier_of_treasure_class_c_d1000_set(int v) { _is_carrier_of_treasure_class_c_d1000 = v; }
-void Tp::is_carrier_of_weapon_class_a_d1000_set(int v) { _is_carrier_of_weapon_class_a_d1000 = v; }
-void Tp::is_carrier_of_weapon_class_b_d1000_set(int v) { _is_carrier_of_weapon_class_b_d1000 = v; }
-void Tp::is_carrier_of_weapon_class_c_d1000_set(int v) { _is_carrier_of_weapon_class_c_d1000 = v; }
 void Tp::is_chasm_set(int v) { _is_chasm = v; }
 void Tp::is_cloak_set(int v) { _is_cloak = v; }
 void Tp::is_cold_set(int v) { _is_cold = v; }
@@ -1070,14 +1070,14 @@ void Tp::is_meat_set(int v) { _is_meat = v; }
 void Tp::is_metal_set(int v) { _is_metal = v; }
 void Tp::is_minion_set(int v) { _is_minion = v; }
 void Tp::is_missile_set(int v) { _is_missile = v; }
-void Tp::is_mob_challenge_class_a_set(int v) { _is_mob_challenge_class_a = v; }
-void Tp::is_mob_challenge_class_b_set(int v) { _is_mob_challenge_class_b = v; }
+void Tp::is_mob_challenge_class_A_set(int v) { _is_mob_challenge_class_A = v; }
+void Tp::is_mob_challenge_class_B_set(int v) { _is_mob_challenge_class_B = v; }
 void Tp::is_mob_set(int v) { _is_mob = v; }
-void Tp::is_monst_class_a_set(int v) { _is_monst_class_a = v; }
-void Tp::is_monst_class_b_set(int v) { _is_monst_class_b = v; }
-void Tp::is_monst_class_c_set(int v) { _is_monst_class_c = v; }
-void Tp::is_monst_class_d_set(int v) { _is_monst_class_d = v; }
-void Tp::is_monst_class_e_set(int v) { _is_monst_class_e = v; }
+void Tp::is_monst_class_A_set(int v) { _is_monst_class_A = v; }
+void Tp::is_monst_class_B_set(int v) { _is_monst_class_B = v; }
+void Tp::is_monst_class_C_set(int v) { _is_monst_class_C = v; }
+void Tp::is_monst_class_D_set(int v) { _is_monst_class_D = v; }
+void Tp::is_monst_class_E_set(int v) { _is_monst_class_E = v; }
 void Tp::is_monst_pack_set(int v) { _is_monst_pack = v; }
 void Tp::is_monst_set(int v) { _is_monst = v; }
 void Tp::is_moveable_set(int v) { _is_moveable = v; }
@@ -1150,9 +1150,9 @@ void Tp::is_tireless_set(int v) { _is_tireless = v; }
 void Tp::is_tmp_thing_set(int v) { _is_tmp_thing = v; }
 void Tp::is_torch_set(int v) { _is_torch = v; }
 void Tp::is_treasure_chest_set(int v) { _is_treasure_chest = v; }
-void Tp::is_treasure_class_a_set(int v) { _is_treasure_class_a = v; }
-void Tp::is_treasure_class_b_set(int v) { _is_treasure_class_b = v; }
-void Tp::is_treasure_class_c_set(int v) { _is_treasure_class_c = v; }
+void Tp::is_treasure_class_A_set(int v) { _is_treasure_class_A = v; }
+void Tp::is_treasure_class_B_set(int v) { _is_treasure_class_B = v; }
+void Tp::is_treasure_class_C_set(int v) { _is_treasure_class_C = v; }
 void Tp::is_treasure_set(int v) { _is_treasure = v; }
 void Tp::is_treasure_type_set(int v) { _is_treasure_type = v; }
 void Tp::is_undead_set(int v) { _is_undead = v; }
@@ -1163,9 +1163,9 @@ void Tp::is_very_hard_set(int v) { _is_very_hard = v; }
 void Tp::is_very_heavy_set(int v) { _is_very_heavy = v; }
 void Tp::is_wall_dungeon_set(int v) { _is_wall_dungeon = v; }
 void Tp::is_wall_set(int v) { _is_wall = v; }
-void Tp::is_weapon_class_a_set(int v) { _is_weapon_class_a = v; }
-void Tp::is_weapon_class_b_set(int v) { _is_weapon_class_b = v; }
-void Tp::is_weapon_class_c_set(int v) { _is_weapon_class_c = v; }
+void Tp::is_weapon_class_A_set(int v) { _is_weapon_class_A = v; }
+void Tp::is_weapon_class_B_set(int v) { _is_weapon_class_B = v; }
+void Tp::is_weapon_class_C_set(int v) { _is_weapon_class_C = v; }
 void Tp::is_weapon_set(int v) { _is_weapon = v; }
 void Tp::is_wet_grass_set(int v) { _is_wet_grass = v; }
 void Tp::is_wooden_set(int v) { _is_wooden = v; }

@@ -4,7 +4,7 @@ import tp
 
 def on_born(me, x, y):
     # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
-    my.place_at(me, "random_treasure_class_c", x, y)
+    my.place_at(me, "random_treasure_class_C", x, y)
 
 
 def on_you_nat_att(me, x, y):
@@ -113,7 +113,7 @@ def tp_init(name, text_long_name):
     my.is_interesting(self, True)
     my.is_loggable(self, True)
     my.is_meat(self, True)
-    my.is_monst_class_c(self, True)
+    my.is_monst_class_C(self, True)
     my.is_monst(self, True)
     my.is_moveable(self, True)
     my.is_msg_allowed_hears_something(self, True)

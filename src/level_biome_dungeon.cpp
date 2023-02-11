@@ -1096,7 +1096,7 @@ void Level::create_biome_dungeon_place_objects_with_normal_placement_rules(Dunge
         }
       }
 
-      if (d->is_mob_challenge_class_a(x, y) || d->is_mob_challenge_class_b(x, y)) {
+      if (d->is_mob_challenge_class_A(x, y) || d->is_mob_challenge_class_B(x, y)) {
         //
         // If surrounded by hazards then choose an ethereal mob
         //
@@ -1104,21 +1104,21 @@ void Level::create_biome_dungeon_place_objects_with_normal_placement_rules(Dunge
             d->is_hazard(x - 1, y - 1) && d->is_hazard(x + 1, y - 1) && d->is_hazard(x - 1, y + 1) &&
             d->is_hazard(x + 1, y + 1)) {
 
-          if (d1000() < d1000_chance_of_creating_mob_challenge_class_a) {
+          if (d1000() < d1000_chance_of_creating_mob_challenge_class_A) {
             tp = tp_random_ethereal_mob();
           }
         } else {
           //
           // Else choose a normal mob
           //
-          if (d->is_mob_challenge_class_a(x, y)) {
-            if (d1000() < d1000_chance_of_creating_mob_challenge_class_a) {
-              tp = tp_random_mob_challenge_class_a(p);
+          if (d->is_mob_challenge_class_A(x, y)) {
+            if (d1000() < d1000_chance_of_creating_mob_challenge_class_A) {
+              tp = tp_random_mob_challenge_class_A(p);
             }
           }
-          if (d->is_mob_challenge_class_b(x, y)) {
-            if (d1000() < d1000_chance_of_creating_mob_challenge_class_b) {
-              tp = tp_random_mob_challenge_class_b(p);
+          if (d->is_mob_challenge_class_B(x, y)) {
+            if (d1000() < d1000_chance_of_creating_mob_challenge_class_B) {
+              tp = tp_random_mob_challenge_class_B(p);
             }
           }
         }
@@ -1133,51 +1133,51 @@ void Level::create_biome_dungeon_place_objects_with_normal_placement_rules(Dunge
         // For secret rooms, be generous and place the good stuff first.
         // We enchant this later after placing.
         //
-        if (d->is_treasure_class_a(x, y)) {
-          if (d1000() < d1000_chance_of_creating_treasure_class_a * 3) {
-            tp = tp_random_treasure_class_a(p);
+        if (d->is_treasure_class_A(x, y)) {
+          if (d1000() < d1000_chance_of_creating_treasure_class_A * 3) {
+            tp = tp_random_treasure_class_A(p);
           }
         }
-        if (d->is_treasure_class_b(x, y)) {
-          if (d1000() < d1000_chance_of_creating_treasure_class_b * 3) {
-            tp = tp_random_treasure_class_b(p);
+        if (d->is_treasure_class_B(x, y)) {
+          if (d1000() < d1000_chance_of_creating_treasure_class_B * 3) {
+            tp = tp_random_treasure_class_B(p);
           }
         }
-        if (d->is_treasure_class_c(x, y)) {
-          if (d1000() < d1000_chance_of_creating_treasure_class_c * 3) {
-            tp = tp_random_treasure_class_c(p);
+        if (d->is_treasure_class_C(x, y)) {
+          if (d1000() < d1000_chance_of_creating_treasure_class_C * 3) {
+            tp = tp_random_treasure_class_C(p);
           }
         }
       } else if (is_more_generous_room) {
-        if (d->is_treasure_class_a(x, y)) {
-          if (d1000() < d1000_chance_of_creating_treasure_class_a * 2) {
-            tp = tp_random_treasure_class_a(p);
+        if (d->is_treasure_class_A(x, y)) {
+          if (d1000() < d1000_chance_of_creating_treasure_class_A * 2) {
+            tp = tp_random_treasure_class_A(p);
           }
         }
-        if (d->is_treasure_class_b(x, y)) {
-          if (d1000() < d1000_chance_of_creating_treasure_class_b * 2) {
-            tp = tp_random_treasure_class_b(p);
+        if (d->is_treasure_class_B(x, y)) {
+          if (d1000() < d1000_chance_of_creating_treasure_class_B * 2) {
+            tp = tp_random_treasure_class_B(p);
           }
         }
-        if (d->is_treasure_class_c(x, y)) {
-          if (d1000() < d1000_chance_of_creating_treasure_class_c * 2) {
-            tp = tp_random_treasure_class_c(p);
+        if (d->is_treasure_class_C(x, y)) {
+          if (d1000() < d1000_chance_of_creating_treasure_class_C * 2) {
+            tp = tp_random_treasure_class_C(p);
           }
         }
       } else {
-        if (d->is_treasure_class_a(x, y)) {
-          if (d1000() < d1000_chance_of_creating_treasure_class_a) {
-            tp = tp_random_treasure_class_a(p);
+        if (d->is_treasure_class_A(x, y)) {
+          if (d1000() < d1000_chance_of_creating_treasure_class_A) {
+            tp = tp_random_treasure_class_A(p);
           }
         }
-        if (d->is_treasure_class_b(x, y)) {
-          if (d1000() < d1000_chance_of_creating_treasure_class_b) {
-            tp = tp_random_treasure_class_b(p);
+        if (d->is_treasure_class_B(x, y)) {
+          if (d1000() < d1000_chance_of_creating_treasure_class_B) {
+            tp = tp_random_treasure_class_B(p);
           }
         }
-        if (d->is_treasure_class_c(x, y)) {
-          if (d1000() < d1000_chance_of_creating_treasure_class_c) {
-            tp = tp_random_treasure_class_c(p);
+        if (d->is_treasure_class_C(x, y)) {
+          if (d1000() < d1000_chance_of_creating_treasure_class_C) {
+            tp = tp_random_treasure_class_C(p);
           }
         }
       }
@@ -1187,51 +1187,51 @@ void Level::create_biome_dungeon_place_objects_with_normal_placement_rules(Dunge
         // For secret rooms, be generous and place the good stuff first.
         // We enchant this later after placing.
         //
-        if (d->is_weapon_class_a(x, y)) {
-          if (d1000() < d1000_chance_of_creating_weapon_class_a * 3) {
-            tp = tp_random_weapon_class_a(p);
+        if (d->is_weapon_class_A(x, y)) {
+          if (d1000() < d1000_chance_of_creating_weapon_class_A * 3) {
+            tp = tp_random_weapon_class_A(p);
           }
         }
-        if (d->is_weapon_class_b(x, y)) {
-          if (d1000() < d1000_chance_of_creating_weapon_class_b * 3) {
-            tp = tp_random_weapon_class_b(p);
+        if (d->is_weapon_class_B(x, y)) {
+          if (d1000() < d1000_chance_of_creating_weapon_class_B * 3) {
+            tp = tp_random_weapon_class_B(p);
           }
         }
-        if (d->is_weapon_class_c(x, y)) {
-          if (d1000() < d1000_chance_of_creating_weapon_class_c * 3) {
-            tp = tp_random_weapon_class_c(p);
+        if (d->is_weapon_class_C(x, y)) {
+          if (d1000() < d1000_chance_of_creating_weapon_class_C * 3) {
+            tp = tp_random_weapon_class_C(p);
           }
         }
       } else if (is_more_generous_room) {
-        if (d->is_weapon_class_a(x, y)) {
-          if (d1000() < d1000_chance_of_creating_weapon_class_a * 2) {
-            tp = tp_random_weapon_class_a(p);
+        if (d->is_weapon_class_A(x, y)) {
+          if (d1000() < d1000_chance_of_creating_weapon_class_A * 2) {
+            tp = tp_random_weapon_class_A(p);
           }
         }
-        if (d->is_weapon_class_b(x, y)) {
-          if (d1000() < d1000_chance_of_creating_weapon_class_b * 2) {
-            tp = tp_random_weapon_class_b(p);
+        if (d->is_weapon_class_B(x, y)) {
+          if (d1000() < d1000_chance_of_creating_weapon_class_B * 2) {
+            tp = tp_random_weapon_class_B(p);
           }
         }
-        if (d->is_weapon_class_c(x, y)) {
-          if (d1000() < d1000_chance_of_creating_weapon_class_c * 2) {
-            tp = tp_random_weapon_class_c(p);
+        if (d->is_weapon_class_C(x, y)) {
+          if (d1000() < d1000_chance_of_creating_weapon_class_C * 2) {
+            tp = tp_random_weapon_class_C(p);
           }
         }
       } else {
-        if (d->is_weapon_class_a(x, y)) {
-          if (d1000() < d1000_chance_of_creating_weapon_class_a) {
-            tp = tp_random_weapon_class_a(p);
+        if (d->is_weapon_class_A(x, y)) {
+          if (d1000() < d1000_chance_of_creating_weapon_class_A) {
+            tp = tp_random_weapon_class_A(p);
           }
         }
-        if (d->is_weapon_class_b(x, y)) {
-          if (d1000() < d1000_chance_of_creating_weapon_class_b) {
-            tp = tp_random_weapon_class_b(p);
+        if (d->is_weapon_class_B(x, y)) {
+          if (d1000() < d1000_chance_of_creating_weapon_class_B) {
+            tp = tp_random_weapon_class_B(p);
           }
         }
-        if (d->is_weapon_class_c(x, y)) {
-          if (d1000() < d1000_chance_of_creating_weapon_class_c) {
-            tp = tp_random_weapon_class_c(p);
+        if (d->is_weapon_class_C(x, y)) {
+          if (d1000() < d1000_chance_of_creating_weapon_class_C) {
+            tp = tp_random_weapon_class_C(p);
           }
         }
       }
@@ -1491,8 +1491,8 @@ void Level::place_floor_deco(Dungeonp d)
       if (d->is_food(x, y) || d->is_red_blood(x, y) || d->is_door(x, y) || d->is_ascend_dungeon(x, y) ||
           d->is_descend_dungeon(x, y) || d->is_mob_any(x, y) || d->is_key(x, y) || d->is_potion(x, y) ||
           d->is_barrel(x, y) || d->is_staff(x, y) || d->is_ring(x, y) || d->is_secret_door(x, y) ||
-          d->is_weapon_class_a(x, y) || d->is_weapon_class_b(x, y) || d->is_treasure_type(x, y) ||
-          d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) || d->is_treasure_class_c(x, y) ||
+          d->is_weapon_class_A(x, y) || d->is_weapon_class_B(x, y) || d->is_treasure_type(x, y) ||
+          d->is_treasure_class_A(x, y) || d->is_treasure_class_B(x, y) || d->is_treasure_class_C(x, y) ||
           d->is_monst_any(x, y)) {
         continue;
       }
@@ -1534,8 +1534,8 @@ void Level::create_biome_dungeon_place_random_floor_deco(Dungeonp d)
       if (d->is_food(x, y) || d->is_red_blood(x, y) || d->is_door(x, y) || d->is_ascend_dungeon(x, y) ||
           d->is_descend_dungeon(x, y) || d->is_mob_any(x, y) || d->is_key(x, y) || d->is_potion(x, y) ||
           d->is_barrel(x, y) || d->is_staff(x, y) || d->is_ring(x, y) || d->is_secret_door(x, y) ||
-          d->is_weapon_class_a(x, y) || d->is_weapon_class_b(x, y) || d->is_treasure_type(x, y) ||
-          d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) || d->is_treasure_class_c(x, y) ||
+          d->is_weapon_class_A(x, y) || d->is_weapon_class_B(x, y) || d->is_treasure_type(x, y) ||
+          d->is_treasure_class_A(x, y) || d->is_treasure_class_B(x, y) || d->is_treasure_class_C(x, y) ||
           d->is_monst_any(x, y)) {
         continue;
       }
@@ -1797,8 +1797,8 @@ void Level::place_random_treasure(Dungeonp d)
       continue;
     }
 
-    if (d->is_dirt(x, y) || d->is_weapon_class_a(x, y) || d->is_weapon_class_b(x, y) || d->is_weapon_class_c(x, y) ||
-        d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) || d->is_treasure_class_c(x, y)) {
+    if (d->is_dirt(x, y) || d->is_weapon_class_A(x, y) || d->is_weapon_class_B(x, y) || d->is_weapon_class_C(x, y) ||
+        d->is_treasure_class_A(x, y) || d->is_treasure_class_B(x, y) || d->is_treasure_class_C(x, y)) {
 
       auto tp = tp_random_treasure();
       if (unlikely(! tp)) {
@@ -1868,8 +1868,8 @@ void Level::place_random_torches(Dungeonp d)
       continue;
     }
 
-    if (d->is_weapon_class_a(x, y) || d->is_weapon_class_b(x, y) || d->is_weapon_class_c(x, y) ||
-        d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) || d->is_treasure_class_c(x, y) ||
+    if (d->is_weapon_class_A(x, y) || d->is_weapon_class_B(x, y) || d->is_weapon_class_C(x, y) ||
+        d->is_treasure_class_A(x, y) || d->is_treasure_class_B(x, y) || d->is_treasure_class_C(x, y) ||
         d->is_spiderweb(x, y)) {
 
       //

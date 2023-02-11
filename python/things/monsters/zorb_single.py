@@ -9,13 +9,13 @@ def on_born(me, x, y):
 def tp_init(name, text_long_name):
     self = zorb_all.tp_init(name, text_long_name)
     # begin sort marker
+    my.chance_d1000_carrier_of_treasure_class_A(self, 20)
+    my.chance_d1000_carrier_of_weapon_class_A(self, 500)
     my.is_able_to_freeze(self, True)
     my.is_able_to_use_weapons(self, True)
     my.is_biome_dungeon(self, True)
-    my.is_carrier_of_treasure_class_a_d1000(self, 20)
-    my.is_carrier_of_weapon_class_a_d1000(self, 500)
     my.is_loggable(self, True)
-    my.is_monst_class_a(self, True)
+    my.is_monst_class_A(self, True)
     my.on_born_do(self, "me.on_born()")
     my.text_description_short(self, "A very lesser and a bit insecure zorblin.")
     # end sort marker

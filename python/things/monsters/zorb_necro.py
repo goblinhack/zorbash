@@ -54,6 +54,7 @@ def tp_init(name, text_long_name):
     self = zorb_all.tp_init(name, text_long_name)
 
     # begin sort marker
+    my.chance_d1000_carrier_of_treasure_class_C(self, 1000)
     my.distance_avoid(self, 5)
     my.environ_avoids_fire(self, 100)
     my.environ_avoids_water(self, 100)
@@ -61,11 +62,10 @@ def tp_init(name, text_long_name):
     my.is_able_to_use_rings(self, True)
     my.is_able_to_use_staffs(self, True)
     my.is_biome_dungeon(self, True)
-    my.is_carrier_of_treasure_class_c_d1000(self, 1000)
     my.is_cowardly(self, True)
     my.is_intelligent(self, True)
     my.is_loggable(self, True)
-    my.is_monst_class_b(self, True)
+    my.is_monst_class_B(self, True)
     my.on_born_do(self, "me.on_born()")
     my.on_death_do(self, "me.on_death()")
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")

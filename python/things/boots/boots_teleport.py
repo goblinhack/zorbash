@@ -49,7 +49,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_item_targetted(self, True)
     my.is_loggable(self, True)
     my.is_target_select(self, True)
-    my.is_treasure_class_c(self, True)
+    my.is_treasure_class_C(self, True)
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
     my.is_usable(self, True)

@@ -74,19 +74,19 @@ Tpp Level::get_dungeon_biome_random_monst(Dungeonp d, point p, biome_t biome, mo
   monst_class_t monst_class       = MONST_CLASS_ANY;
   int           difficulty_offset = 0;
 
-  if (d->is_monst_class_a(p.x, p.y)) {
+  if (d->is_monst_class_A(p.x, p.y)) {
     difficulty_offset = 1;
     monst_class       = MONST_CLASS_A;
-  } else if (d->is_monst_class_b(p.x, p.y)) {
+  } else if (d->is_monst_class_B(p.x, p.y)) {
     difficulty_offset = 50;
     monst_class       = MONST_CLASS_B;
-  } else if (d->is_monst_class_c(p.x, p.y)) {
+  } else if (d->is_monst_class_C(p.x, p.y)) {
     difficulty_offset = 100;
     monst_class       = MONST_CLASS_C;
-  } else if (d->is_monst_class_d(p.x, p.y)) {
+  } else if (d->is_monst_class_D(p.x, p.y)) {
     difficulty_offset = 200;
     monst_class       = MONST_CLASS_D;
-  } else if (d->is_monst_class_e(p.x, p.y)) {
+  } else if (d->is_monst_class_E(p.x, p.y)) {
     difficulty_offset = 500;
     monst_class       = MONST_CLASS_E;
   } else {
@@ -148,19 +148,19 @@ void tp_monst_add(Tpp tp)
       if (tp->is_monst()) {
         tp_monst[ biome ][ monst_type ][ MONST_CLASS_ANY ].push_back(tp);
       }
-      if (tp->is_monst_class_a()) {
+      if (tp->is_monst_class_A()) {
         tp_monst[ biome ][ monst_type ][ MONST_CLASS_A ].push_back(tp);
       }
-      if (tp->is_monst_class_b()) {
+      if (tp->is_monst_class_B()) {
         tp_monst[ biome ][ monst_type ][ MONST_CLASS_B ].push_back(tp);
       }
-      if (tp->is_monst_class_c()) {
+      if (tp->is_monst_class_C()) {
         tp_monst[ biome ][ monst_type ][ MONST_CLASS_C ].push_back(tp);
       }
-      if (tp->is_monst_class_d()) {
+      if (tp->is_monst_class_D()) {
         tp_monst[ biome ][ monst_type ][ MONST_CLASS_D ].push_back(tp);
       }
-      if (tp->is_monst_class_e()) {
+      if (tp->is_monst_class_E()) {
         tp_monst[ biome ][ monst_type ][ MONST_CLASS_E ].push_back(tp);
       }
     }

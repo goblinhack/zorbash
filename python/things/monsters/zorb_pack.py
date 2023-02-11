@@ -37,7 +37,7 @@ def tp_init(name, text_long_name):
     my.is_allied_with(self, "zorb_pack")
     my.is_biome_dungeon(self, True)
     my.distance_recruitment_max(self, 7)
-    my.is_monst_class_b(self, True)
+    my.is_monst_class_B(self, True)
     my.is_loggable(self, True)
     my.is_monst_pack(self, True)
     my.is_loggable(self, True)

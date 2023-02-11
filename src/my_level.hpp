@@ -171,14 +171,14 @@ public:
   //
   // Set to -1 to mean no chance
   //
-  int d1000_chance_of_creating_mob_challenge_class_a {};
-  int d1000_chance_of_creating_mob_challenge_class_b {};
-  int d1000_chance_of_creating_treasure_class_a {};
-  int d1000_chance_of_creating_treasure_class_b {};
-  int d1000_chance_of_creating_treasure_class_c {};
-  int d1000_chance_of_creating_weapon_class_a {};
-  int d1000_chance_of_creating_weapon_class_b {};
-  int d1000_chance_of_creating_weapon_class_c {};
+  int d1000_chance_of_creating_mob_challenge_class_A {};
+  int d1000_chance_of_creating_mob_challenge_class_B {};
+  int d1000_chance_of_creating_treasure_class_A {};
+  int d1000_chance_of_creating_treasure_class_B {};
+  int d1000_chance_of_creating_treasure_class_C {};
+  int d1000_chance_of_creating_weapon_class_A {};
+  int d1000_chance_of_creating_weapon_class_B {};
+  int d1000_chance_of_creating_weapon_class_C {};
 
   //
   // Current on screen map limits in tile coords
@@ -665,14 +665,14 @@ public:
   Thingp thing_new(const std::string &tp_name, const point at, Thingp owner = nullptr);
 
   Tpp tp_random_mob(const point p);
-  Tpp tp_random_mob_challenge_class_a(const point p);
-  Tpp tp_random_mob_challenge_class_b(const point p);
-  Tpp tp_random_treasure_class_a(const point p);
-  Tpp tp_random_treasure_class_c(const point p);
-  Tpp tp_random_treasure_class_b(const point p);
-  Tpp tp_random_weapon_class_a(const point p);
-  Tpp tp_random_weapon_class_c(const point p);
-  Tpp tp_random_weapon_class_b(const point p);
+  Tpp tp_random_mob_challenge_class_A(const point p);
+  Tpp tp_random_mob_challenge_class_B(const point p);
+  Tpp tp_random_treasure_class_A(const point p);
+  Tpp tp_random_treasure_class_C(const point p);
+  Tpp tp_random_treasure_class_B(const point p);
+  Tpp tp_random_weapon_class_A(const point p);
+  Tpp tp_random_weapon_class_C(const point p);
+  Tpp tp_random_weapon_class_B(const point p);
 
   Tpp get_dungeon_biome_random_monst(Dungeonp d, point p, biome_t, monst_type_t);
   Tpp get_sewer_biome_random_monst(point p, biome_t, monst_type_t);
@@ -878,12 +878,12 @@ public:
   uint8_t is_wall(const point p);
   uint8_t is_water(const int x, const int y);
   uint8_t is_water(const point p);
-  uint8_t is_weapon_class_a(const int x, const int y);
-  uint8_t is_weapon_class_a(const point p);
-  uint8_t is_weapon_class_b(const int x, const int y);
-  uint8_t is_weapon_class_b(const point p);
-  uint8_t is_weapon_class_c(const int x, const int y);
-  uint8_t is_weapon_class_c(const point p);
+  uint8_t is_weapon_class_A(const int x, const int y);
+  uint8_t is_weapon_class_A(const point p);
+  uint8_t is_weapon_class_B(const int x, const int y);
+  uint8_t is_weapon_class_B(const point p);
+  uint8_t is_weapon_class_C(const int x, const int y);
+  uint8_t is_weapon_class_C(const point p);
   uint8_t is_weapon_type(const int x, const int y);
   uint8_t is_weapon_type(const point p);
   uint8_t is_wet_grass(const int x, const int y);

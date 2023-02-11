@@ -79,11 +79,11 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
         } else if (m.is_red_blood || m.is_ascend_dungeon || m.is_barrel || m.is_brazier || m.is_deep_water ||
                    m.is_descend_dungeon || m.is_door || m.is_foliage || m.is_spiderweb || m.is_block_of_ice ||
                    m.is_dry_grass || m.is_wet_grass || m.is_floor_deco || m.is_food || m.is_gold || m.is_key ||
-                   m.is_lava || m.is_mob_challenge_class_a || m.is_mob_challenge_class_b || m.is_monst_class_a ||
-                   m.is_monst_class_b || m.is_monst_class_c || m.is_potion || m.is_secret_door ||
-                   m.is_shallow_water || m.is_trap || m.is_monst_class_d || m.is_monst_class_e || m.is_enchantstone ||
-                   m.is_skillstone || m.is_weapon_class_a || m.is_weapon_class_b || m.is_weapon_class_c ||
-                   m.is_treasure_class_a || m.is_treasure_class_b || m.is_treasure_class_c || m.is_staff ||
+                   m.is_lava || m.is_mob_challenge_class_A || m.is_mob_challenge_class_B || m.is_monst_class_A ||
+                   m.is_monst_class_B || m.is_monst_class_C || m.is_potion || m.is_secret_door ||
+                   m.is_shallow_water || m.is_trap || m.is_monst_class_D || m.is_monst_class_E || m.is_enchantstone ||
+                   m.is_skillstone || m.is_weapon_class_A || m.is_weapon_class_B || m.is_weapon_class_C ||
+                   m.is_treasure_class_A || m.is_treasure_class_B || m.is_treasure_class_C || m.is_staff ||
                    m.is_ring || m.is_deep_water) {
           floor_string += Charmap::FLOOR;
         } else {
@@ -123,10 +123,10 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
         }
 
         if (m.is_red_blood || m.is_ascend_dungeon || m.is_descend_dungeon || m.is_floor_deco || m.is_food ||
-            m.is_mob_challenge_class_a || m.is_mob_challenge_class_b || m.is_gold || m.is_key || m.is_monst_class_a ||
-            m.is_monst_class_b || m.is_monst_class_c || m.is_monst_class_d || m.is_monst_class_e ||
-            m.is_enchantstone || m.is_skillstone || m.is_treasure_class_a || m.is_treasure_class_b ||
-            m.is_treasure_class_c || m.is_weapon_class_a || m.is_weapon_class_b || m.is_weapon_class_c ||
+            m.is_mob_challenge_class_A || m.is_mob_challenge_class_B || m.is_gold || m.is_key || m.is_monst_class_A ||
+            m.is_monst_class_B || m.is_monst_class_C || m.is_monst_class_D || m.is_monst_class_E ||
+            m.is_enchantstone || m.is_skillstone || m.is_treasure_class_A || m.is_treasure_class_B ||
+            m.is_treasure_class_C || m.is_weapon_class_A || m.is_weapon_class_B || m.is_weapon_class_C ||
             m.is_potion || m.is_staff || m.is_ring || m.is_brazier || m.is_barrel || m.is_trap ||
             m.is_descend_sewer) {
           obj_strings += c;

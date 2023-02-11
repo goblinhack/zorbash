@@ -67,7 +67,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_moveable(self, True)
     my.is_treasure_type(self, True)
     my.is_usable(self, True)
-    my.is_weapon_class_c(self, True)
+    my.is_weapon_class_C(self, True)
     my.is_weapon(self, True)
     my.item_height(self, 8)
     my.item_width(self, 8)
