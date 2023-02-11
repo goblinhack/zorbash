@@ -11,6 +11,8 @@ bool Thing::will_avoid_monst(const Thingp it)
   TRACE_NO_INDENT();
   auto me = tp();
 
+  dbg("Avoid %s?", it->to_short_string().c_str());
+
   //
   // Avoid flaming things; even friends.
   //
@@ -30,6 +32,7 @@ bool Thing::will_avoid_monst(const Thingp it)
   // Not moving?
   //
   if (it->idle_count() > 5) {
+    dbg("Avoid %s? no it's idle", it->to_short_string().c_str());
     return false;
   }
 
@@ -37,10 +40,12 @@ bool Thing::will_avoid_monst(const Thingp it)
   // It's stuck?
   //
   if (it->stuck_count() > 5) {
+    dbg("Avoid %s? no it's stuck", it->to_short_string().c_str());
     return false;
   }
 
   if (is_friend(it) || same_mob(it)) {
+    dbg("Avoid %s? no it's a friend", it->to_short_string().c_str());
     return false;
   }
 

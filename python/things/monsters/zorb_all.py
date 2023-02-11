@@ -143,6 +143,7 @@ def tp_init(name, text_long_name):
     my.on_born_do(self, "me.on_born()")
     my.on_death_do(self, "zorb_all.on_death()")
     my.on_death_drop_all_items(self, True)
+    my.attack_humanoid(self, True)
     my.on_hit_and_still_alive_do(self, "zorb_all.on_hit_and_still_alive()")
     my.on_hit_dodge_do(self, "zorb_all.on_hit_dodge_do()")
     my.on_you_nat_att_do(self, "zorb_all.on_you_nat_att()")

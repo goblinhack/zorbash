@@ -7,6 +7,7 @@ def tp_init(name, text_long_name):
     # begin sort marker
     my.capacity_height(self, 10)
     my.capacity_width(self, 10)
+    my.chance_d1000_set_on_fire(self, 2000)
     my.collision_hit_priority(self, 6)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)

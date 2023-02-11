@@ -71,6 +71,7 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.chance_d1000_dmg_lightning(self, 0, 1000)
+    my.chance_d1000_set_on_fire(self, 5000)
     my.charge_count(self, 3)
     my.collision_hit_priority(self, 6)
     my.dmg_lightning_dice(self, "1d20+8")

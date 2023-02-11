@@ -77,6 +77,7 @@ def on_fall(me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
+    my.chance_d1000_set_on_fire(self, 5000)
     my.charge_count(self, 5)
     my.collision_hit_priority(self, 6)
     my.dmg_received_doubled_from_cold(self, True)

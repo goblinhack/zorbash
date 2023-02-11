@@ -238,6 +238,7 @@ void Game::place_player(void)
         auto d = level->thing_new("dogman", point(x + 2, y));
         d->wake("");
       }
+      level->thing_new("zorb_priest", point(x + 1, y + 3));
       if (0) {
         level->thing_new("mummy_necro", point(x + 1, y));
         level->thing_new("reaper", point(x + 3, y));

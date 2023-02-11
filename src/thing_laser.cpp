@@ -94,7 +94,13 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
     if (use_options && use_options->radial_effect) {
       msg("You use %s.", item->text_the().c_str());
     } else {
-      msg("You fire %s at %s.", item->text_the().c_str(), target->text_the().c_str());
+      msg("You shoot %s at %s.", item->text_the().c_str(), target->text_the().c_str());
+    }
+  } else {
+    if (use_options && use_options->radial_effect) {
+      msg("%s uses %s.", text_The().c_str(), item->text_the().c_str());
+    } else {
+      msg("%s shoots %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
     }
   }
 
@@ -102,17 +108,19 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
   auto end   = target->last_blit_at;
 
   if (! start.x && ! start.y) {
-    msg("Misfire1!");
     if (is_player()) {
+      msg("Misfire!");
       game->tick_begin("failed to fire laser");
     }
     return false;
   }
 
   if (! end.x && ! end.y) {
-    msg("Misfire2!");
     if (is_player()) {
+      msg("Misfire!");
       game->tick_begin("failed to fire laser");
+    } else {
+      msg("%s misfires.", text_The().c_str());
     }
     return false;
   }

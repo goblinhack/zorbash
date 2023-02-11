@@ -95,9 +95,14 @@ bool Thing::on_fire_set(const std::string &why)
     return false;
   }
 
-  // if (d10000() > chance_d1000_set_on_fire0()) {
-  //   return false;
-  // }
+  //
+  // Give some things more of a chance of catching on fire, to be less cruel
+  //
+  if (chance_d1000_set_on_fire()) {
+    if (d10000() > chance_d1000_set_on_fire()) {
+      return false;
+    }
+  }
 
   if (is_immune_to_fire()) {
     on_fire_unset();

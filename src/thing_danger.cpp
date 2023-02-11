@@ -303,19 +303,24 @@ int Thing::danger_current_level(void)
 
 int Thing::is_dangerous(Thingp it)
 {
-  if (is_dead || is_dying) {
-    return false;
-  }
-
   if (! it->is_mob() && ! it->is_monst() && ! it->is_player()) {
     return false;
   }
 
+  dbg("Is dangerous %s?", it->to_short_string().c_str());
+
+  if (is_dead || is_dying) {
+    dbg("Is dangerous %s? no is dead or dying", it->to_short_string().c_str());
+    return false;
+  }
+
   if (is_fearless()) {
+    dbg("Is dangerous %s? no as I am fearless", it->to_short_string().c_str());
     return false;
   }
 
   if (is_friend(it) || same_mob(it)) {
+    dbg("Is dangerous %s? no as it is a friend", it->to_short_string().c_str());
     return false;
   }
 
@@ -346,12 +351,14 @@ int Thing::is_dangerous(Thingp it)
     b *= 10;
   }
 
-  // dbg("My danger level %d, its %d, %s", a, b, it->to_short_string().c_str());
+  dbg("My danger level %d, its %d, %s", a, b, it->to_short_string().c_str());
 
   //
   // So giant rats will attack each other if at the same danger level
   //
-  return b > a;
+  // Add some caution, hence the multiplier
+  //
+  return (b * 2) > a;
 }
 
 const std::string Thing::danger_level_str(Thingp it)

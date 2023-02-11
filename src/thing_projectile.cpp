@@ -69,6 +69,8 @@ Thingp Thing::fire_projectile_at(Thingp item, const std::string &target_name_pro
 
   if (is_player()) {
     msg("You fire %s at %s.", item->text_the().c_str(), target->text_the().c_str());
+  } else {
+    msg("%s shoot %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
   }
   TRACE_AND_INDENT();
 
@@ -102,6 +104,8 @@ Thingp Thing::fire_projectile_at(Thingp item, const std::string &target_name_pro
     if (is_player()) {
       msg("Misfire!");
       game->tick_begin("failed to fire projectile");
+    } else {
+      msg("%s misfires.", text_The().c_str());
     }
     return nullptr;
   }
@@ -110,6 +114,8 @@ Thingp Thing::fire_projectile_at(Thingp item, const std::string &target_name_pro
     if (is_player()) {
       msg("Misfire!");
       game->tick_begin("failed to fire projectile");
+    } else {
+      msg("%s misfires.", text_The().c_str());
     }
     return nullptr;
   }

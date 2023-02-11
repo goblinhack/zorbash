@@ -6,6 +6,7 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.chance_d1000_appearing(self, 10)
+    my.chance_d1000_set_on_fire(self, 5000)
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_show_highlighted(self, True)

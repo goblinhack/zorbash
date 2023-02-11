@@ -22,6 +22,7 @@ def tp_init(name, text_long_name, text_short_name, tiles=[]):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.chance_d1000_appearing(self, 100)
+    my.chance_d1000_set_on_fire(self, 2000)
     my.charge_count(self, 10)
     my.collision_hit_priority(self, 1)
     my.collision_hit_priority(self, 6)
