@@ -179,6 +179,7 @@ bool Thing::thing_check_for_heat_dmg(void)
   if (hit) {
     dbg("Fire hit");
     TRACE_AND_INDENT();
+    hit = true;
 
     if (! is_on_fire()) {
       on_fire_set("caught fire");
