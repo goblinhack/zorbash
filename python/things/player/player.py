@@ -194,7 +194,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.attack_undead(self, True)
     my.capacity_height(self, 20)
     my.capacity_width(self, 20)
-    my.chance_d1000_is_able_to_shove(self, 50)
+    my.chance_d1000_shove(self, 50)
     my.collateral_dmg_pct(self, 90)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)

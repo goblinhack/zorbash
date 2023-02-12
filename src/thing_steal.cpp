@@ -10,7 +10,7 @@
 bool Thing::steal_treasure_from(Thingp it)
 {
   TRACE_NO_INDENT();
-  if (d1000() > tp()->chance_d1000_is_steal_item()) {
+  if (d1000() > tp()->chance_d1000_steal_item()) {
     return false;
   }
 
@@ -48,7 +48,7 @@ bool Thing::steal_item_from(Thingp it)
   dbg("Try to steal item from %s?", it->to_short_string().c_str());
   TRACE_NO_INDENT();
 
-  if (d1000() > tp()->chance_d1000_is_steal_item()) {
+  if (d1000() > tp()->chance_d1000_steal_item()) {
     dbg("No");
     return false;
   }

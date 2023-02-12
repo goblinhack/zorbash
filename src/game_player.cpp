@@ -379,6 +379,7 @@ void Game::place_player(void)
         level->assign_leaders_and_followers();
       }
       // level->thing_new("sentry_orb_energy", point(x - 3, y));
+      // level->thing_new("portable_hole", point(x - 3, y));
       if (0) {
         level->thing_new("cleaner", point(x, y));
         level->thing_new("gargoyle_static", point(x, y + 1));

@@ -207,26 +207,27 @@ int Tp::blit_right_off(void) const { return _blit_right_off; }
 int Tp::blit_top_off(void) const { return _blit_top_off; }
 int Tp::capacity_height(void) const { return _capacity_height; }
 int Tp::capacity_width(void) const { return _capacity_width; }
-int Tp::chance_d10000_crit(void) const { return chance_d10000__crit; }
-int Tp::chance_d10000_damaged(void) const { return chance_d10000_dmgd; }
-int Tp::chance_d10000_set_on_fire(void) const { return chance_d1000__set_on_fire; }
-int Tp::chance_d1000_appearing(void) const { return chance_d1000__appearing; }
-int Tp::chance_d1000_attack_engulf(void) const { return chance_d1000__attack_engulf; }
+int Tp::chance_d10000_crit(void) const { return _chance_d10000_crit; }
+int Tp::chance_d10000_damaged(void) const { return _chance_d10000_damaged; }
+int Tp::chance_d10000_set_on_fire(void) const { return _chance_d10000_set_on_fire; }
+int Tp::chance_d1000_appearing(void) const { return _chance_d1000_appearing; }
+int Tp::chance_d1000_attack_engulf(void) const { return _chance_d1000_attack_engulf; }
 int Tp::chance_d1000_carrier_of_treasure_class_A(void) const { return _chance_d1000_carrier_of_treasure_class_A; }
 int Tp::chance_d1000_carrier_of_treasure_class_B(void) const { return _chance_d1000_carrier_of_treasure_class_B; }
 int Tp::chance_d1000_carrier_of_treasure_class_C(void) const { return _chance_d1000_carrier_of_treasure_class_C; }
 int Tp::chance_d1000_carrier_of_weapon_class_A(void) const { return _chance_d1000_carrier_of_weapon_class_A; }
 int Tp::chance_d1000_carrier_of_weapon_class_B(void) const { return _chance_d1000_carrier_of_weapon_class_B; }
 int Tp::chance_d1000_carrier_of_weapon_class_C(void) const { return _chance_d1000_carrier_of_weapon_class_C; }
-int Tp::chance_d1000_is_able_to_grapple(void) const { return chance_d1000__is_able_to_grapple; }
-int Tp::chance_d1000_is_able_to_jump_attack(void) const { return chance_d1000__is_able_to_jump_attack; }
-int Tp::chance_d1000_is_able_to_jump_on_low_hp(void) const { return chance_d1000__is_able_to_jump_on_low_hp; }
-int Tp::chance_d1000_is_able_to_jump_onto(void) const { return chance_d1000__is_able_to_jump_onto; }
-int Tp::chance_d1000_is_able_to_jump_randomly(void) const { return chance_d1000__is_able_to_jump_randomly; }
-int Tp::chance_d1000_is_able_to_shove(void) const { return chance_d1000__is_able_to_shove; }
-int Tp::chance_d1000_is_able_to_teleport_attack(void) const { return chance_d1000__is_able_to_teleport_attack; }
-int Tp::chance_d1000_is_steal_item(void) const { return chance_d1000__is_steal_item; }
-int Tp::chance_d1000_melting(void) const { return chance_d1000__melting; }
+int Tp::chance_d1000_grapple(void) const { return _chance_d1000_grapple; }
+int Tp::chance_d1000_jump_attack(void) const { return _chance_d1000_jump_attack; }
+int Tp::chance_d1000_jump_on_low_hp(void) const { return _chance_d1000_jump_on_low_hp; }
+int Tp::chance_d1000_jump_onto(void) const { return _chance_d1000_jump_onto; }
+int Tp::chance_d1000_jump_randomly(void) const { return _chance_d1000_jump_randomly; }
+int Tp::chance_d1000_melting(void) const { return _chance_d1000_melting; }
+int Tp::chance_d1000_shove(void) const { return _chance_d1000_shove; }
+int Tp::chance_d1000_steal_item(void) const { return _chance_d1000_steal_item; }
+int Tp::chance_d1000_teleport_attack(void) const { return _chance_d1000_teleport_attack; }
+int Tp::chance_d1000_teleport_self(void) const { return _chance_d1000_teleport_self; }
 int Tp::charge_count(void) const { return _charge_count; }
 int Tp::collateral_dmg_pct(void) const { return _collateral_dmg_pct; }
 int Tp::collision_check(void) const { return _collision_check; }
@@ -349,6 +350,7 @@ int Tp::is_able_to_spawn_things(void) const { return _is_able_to_spawn_things; }
 int Tp::is_able_to_swim(void) const { return _is_able_to_swim; }
 int Tp::is_able_to_teleport_attack(void) const { return _is_able_to_teleport_attack; }
 int Tp::is_able_to_teleport_escape(void) const { return _is_able_to_teleport_escape; }
+int Tp::is_able_to_teleport_self(void) const { return _is_able_to_teleport_self; }
 int Tp::is_able_to_teleport_without_tiring(void) const { return _is_able_to_teleport_without_tiring; }
 int Tp::is_able_to_tire(void) const { return _is_able_to_tire; }
 int Tp::is_able_to_use_amulet(void) const { return _is_able_to_use_amulet; }
@@ -707,7 +709,6 @@ int Tp::unused_chance6_d1000(void) const { return _unused_chance6_d1000; }
 int Tp::unused_flag103(void) const { return _unused_flag103; }
 int Tp::unused_flag10(void) const { return _unused_flag10; }
 int Tp::unused_flag11(void) const { return _unused_flag11; }
-int Tp::unused_flag12(void) const { return _unused_flag12; }
 int Tp::unused_flag1(void) const { return _unused_flag1; }
 int Tp::unused_flag27(void) const { return _unused_flag27; }
 int Tp::unused_flag2(void) const { return _unused_flag2; }
@@ -742,26 +743,27 @@ void Tp::blit_right_off_set(int v) { _blit_right_off = v; }
 void Tp::blit_top_off_set(int v) { _blit_top_off = v; }
 void Tp::capacity_height_set(int v) { _capacity_height = v; }
 void Tp::capacity_width_set(int v) { _capacity_width = v; }
-void Tp::chance_d10000_crit_set(int v) { chance_d10000__crit = v; }
-void Tp::chance_d10000_damaged_set(int v) { chance_d10000_dmgd = v; }
-void Tp::chance_d10000_set_on_fire_set(int v) { chance_d1000__set_on_fire = v; }
-void Tp::chance_d1000_appearing_set(int v) { chance_d1000__appearing = v; }
-void Tp::chance_d1000_attack_engulf_set(int v) { chance_d1000__attack_engulf = v; }
+void Tp::chance_d10000_crit_set(int v) { _chance_d10000_crit = v; }
+void Tp::chance_d10000_damaged_set(int v) { _chance_d10000_damaged = v; }
+void Tp::chance_d10000_set_on_fire_set(int v) { _chance_d10000_set_on_fire = v; }
+void Tp::chance_d1000_appearing_set(int v) { _chance_d1000_appearing = v; }
+void Tp::chance_d1000_attack_engulf_set(int v) { _chance_d1000_attack_engulf = v; }
 void Tp::chance_d1000_carrier_of_treasure_class_A_set(int v) { _chance_d1000_carrier_of_treasure_class_A = v; }
 void Tp::chance_d1000_carrier_of_treasure_class_B_set(int v) { _chance_d1000_carrier_of_treasure_class_B = v; }
 void Tp::chance_d1000_carrier_of_treasure_class_C_set(int v) { _chance_d1000_carrier_of_treasure_class_C = v; }
 void Tp::chance_d1000_carrier_of_weapon_class_A_set(int v) { _chance_d1000_carrier_of_weapon_class_A = v; }
 void Tp::chance_d1000_carrier_of_weapon_class_B_set(int v) { _chance_d1000_carrier_of_weapon_class_B = v; }
 void Tp::chance_d1000_carrier_of_weapon_class_C_set(int v) { _chance_d1000_carrier_of_weapon_class_C = v; }
-void Tp::chance_d1000_is_able_to_grapple_set(int v) { chance_d1000__is_able_to_grapple = v; }
-void Tp::chance_d1000_is_able_to_jump_attack_set(int v) { chance_d1000__is_able_to_jump_attack = v; }
-void Tp::chance_d1000_is_able_to_jump_on_low_hp_set(int v) { chance_d1000__is_able_to_jump_on_low_hp = v; }
-void Tp::chance_d1000_is_able_to_jump_onto_set(int v) { chance_d1000__is_able_to_jump_onto = v; }
-void Tp::chance_d1000_is_able_to_jump_randomly_set(int v) { chance_d1000__is_able_to_jump_randomly = v; }
-void Tp::chance_d1000_is_able_to_shove_set(int v) { chance_d1000__is_able_to_shove = v; }
-void Tp::chance_d1000_is_able_to_teleport_attack_set(int v) { chance_d1000__is_able_to_teleport_attack = v; }
-void Tp::chance_d1000_is_steal_item_set(int v) { chance_d1000__is_steal_item = v; }
-void Tp::chance_d1000_melting_set(int v) { chance_d1000__melting = v; }
+void Tp::chance_d1000_grapple_set(int v) { _chance_d1000_grapple = v; }
+void Tp::chance_d1000_jump_attack_set(int v) { _chance_d1000_jump_attack = v; }
+void Tp::chance_d1000_jump_on_low_hp_set(int v) { _chance_d1000_jump_on_low_hp = v; }
+void Tp::chance_d1000_jump_onto_set(int v) { _chance_d1000_jump_onto = v; }
+void Tp::chance_d1000_jump_randomly_set(int v) { _chance_d1000_jump_randomly = v; }
+void Tp::chance_d1000_melting_set(int v) { _chance_d1000_melting = v; }
+void Tp::chance_d1000_shove_set(int v) { _chance_d1000_shove = v; }
+void Tp::chance_d1000_steal_item_set(int v) { _chance_d1000_steal_item = v; }
+void Tp::chance_d1000_teleport_attack_set(int v) { _chance_d1000_teleport_attack = v; }
+void Tp::chance_d1000_teleport_self_set(int v) { _chance_d1000_teleport_self = v; }
 void Tp::charge_count_set(int v) { _charge_count = v; }
 void Tp::collateral_dmg_pct_set(int v) { _collateral_dmg_pct = v; }
 void Tp::collision_attack_set(int v) { _collision_attack = v; }
@@ -890,6 +892,7 @@ void Tp::is_able_to_spawn_things_set(int v) { _is_able_to_spawn_things = v; }
 void Tp::is_able_to_swim_set(int v) { _is_able_to_swim = v; }
 void Tp::is_able_to_teleport_attack_set(int v) { _is_able_to_teleport_attack = v; }
 void Tp::is_able_to_teleport_escape_set(int v) { _is_able_to_teleport_escape = v; }
+void Tp::is_able_to_teleport_self_set(int v) { _is_able_to_teleport_self = v; }
 void Tp::is_able_to_teleport_without_tiring_set(int v) { _is_able_to_teleport_without_tiring = v; }
 void Tp::is_able_to_tire_set(int v) { _is_able_to_tire = v; }
 void Tp::is_able_to_use_amulet_set(int v) { _is_able_to_use_amulet = v; }
@@ -1395,7 +1398,6 @@ void Tp::unused_chance6_d1000_set(int v) { _unused_chance6_d1000 = v; }
 void Tp::unused_flag103_set(int v) { _unused_flag103 = v; }
 void Tp::unused_flag10_set(int v) { _unused_flag10 = v; }
 void Tp::unused_flag11_set(int v) { _unused_flag11 = v; }
-void Tp::unused_flag12_set(int v) { _unused_flag12 = v; }
 void Tp::unused_flag1_set(int v) { _unused_flag1 = v; }
 void Tp::unused_flag27_set(int v) { _unused_flag27 = v; }
 void Tp::unused_flag2_set(int v) { _unused_flag2 = v; }

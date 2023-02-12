@@ -47,7 +47,7 @@ def tp_init(name, text_long_name):
     my.attack_humanoid(self, True)
     my.attack_meat(self, True)
     my.chance_d1000_carrier_of_treasure_class_A(self, 1000)
-    my.chance_d1000_is_able_to_shove(self, 200)
+    my.chance_d1000_shove(self, 200)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 1)

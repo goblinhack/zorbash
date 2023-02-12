@@ -15,7 +15,7 @@ PyObject *chance_d1000_thing_is_able_to_jump_attack(PyObject *obj, PyObject *arg
 PyObject *chance_d1000_thing_is_able_to_jump_on_low_hp(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *chance_d1000_thing_is_able_to_jump_onto(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *chance_d1000_thing_is_able_to_jump_randomly(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *chance_d1000_thing_is_able_to_teleport_attack(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *chance_d1000_thing_is_able_to_teleport_self(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *chance_d1000_thing_is_steal_item(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_aggression_pct(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_ai_detect_secret_doors(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -167,6 +167,7 @@ PyObject *thing_is_able_to_spawn_things(PyObject *obj, PyObject *args, PyObject 
 PyObject *thing_is_able_to_swim(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_teleport_attack(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_teleport_escape(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_teleport_self(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_teleport_without_tiring(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_tire(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_use_amulet(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -586,7 +587,6 @@ PyObject *thing_top_owner_id_get(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_unfreeze(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag10(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag11(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag12(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag1(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag27(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag2(PyObject *obj, PyObject *args, PyObject *keywds);

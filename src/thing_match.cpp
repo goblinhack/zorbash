@@ -676,7 +676,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag11() && (what == "unused_flag11")) {
     return true;
   }
-  if (unused_flag12() && (what == "unused_flag12")) {
+  if (is_able_to_teleport_attack() && (what == "is_able_to_teleport_attack")) {
     return true;
   }
   if (is_obsidian() && (what == "is_obsidian")) {
@@ -835,9 +835,6 @@ bool Thing::matches(const std::string &what)
   if (is_cowardly() && (what == "is_cowardly")) {
     return true;
   }
-  if (chance_d1000_appearing() && (what == "chance_d1000_appearing")) {
-    return true;
-  }
   if (is_obs_in_the_way_for_throwing() && (what == "is_obs_in_the_way_for_throwing")) {
     return true;
   }
@@ -934,13 +931,7 @@ bool Thing::matches(const std::string &what)
   if (noise_additional_on_teleporting() && (what == "noise_additional_on_teleporting")) {
     return true;
   }
-  if (chance_d1000_is_able_to_jump_attack() && (what == "chance_d1000_is_able_to_jump_attack")) {
-    return true;
-  }
-  if (chance_d1000_is_able_to_teleport_attack() && (what == "chance_d1000_is_able_to_teleport_attack")) {
-    return true;
-  }
-  if (is_able_to_teleport_attack() && (what == "is_able_to_teleport_attack")) {
+  if (is_able_to_teleport_self() && (what == "is_able_to_teleport_self")) {
     return true;
   }
   if (is_able_to_teleport_without_tiring() && (what == "is_able_to_teleport_without_tiring")) {
@@ -1331,9 +1322,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_able_to_follow") {
     return &Thing::is_able_to_follow;
   }
-  if (what == "chance_d1000_is_able_to_jump_attack") {
-    return &Thing::chance_d1000_is_able_to_jump_attack;
-  }
   if (what == "is_able_to_jump_attack") {
     return &Thing::is_able_to_jump_attack;
   }
@@ -1376,11 +1364,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_able_to_swim") {
     return &Thing::is_able_to_swim;
   }
-  if (what == "chance_d1000_is_able_to_teleport_attack") {
-    return &Thing::chance_d1000_is_able_to_teleport_attack;
-  }
-  if (what == "is_able_to_teleport_attack") {
-    return &Thing::is_able_to_teleport_attack;
+  if (what == "is_able_to_teleport_self") {
+    return &Thing::is_able_to_teleport_self;
   }
   if (what == "is_able_to_teleport_escape") {
     return &Thing::is_able_to_teleport_escape;
@@ -2153,8 +2138,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_daring") {
     return &Thing::is_daring;
   }
-  if (what == "unused_flag12") {
-    return &Thing::unused_flag12;
+  if (what == "is_able_to_teleport_attack") {
+    return &Thing::is_able_to_teleport_attack;
   }
   if (what == "is_obsidian") {
     return &Thing::is_obsidian;
@@ -2326,9 +2311,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "is_cowardly") {
     return &Thing::is_cowardly;
-  }
-  if (what == "chance_d1000_appearing") {
-    return &Thing::chance_d1000_appearing;
   }
   if (what == "is_obs_in_the_way_for_throwing") {
     return &Thing::is_obs_in_the_way_for_throwing;

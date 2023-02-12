@@ -186,7 +186,7 @@ do
       is_able_to_freeze \
       is_able_to_jump \
       is_able_to_jump_attack \
-      chance_d1000_is_able_to_jump_attack \
+      chance_d1000_jump_attack \
       is_able_to_jump_escape \
       is_able_to_jump_onto \
       is_able_to_jump_without_tiring \
@@ -202,7 +202,7 @@ do
       is_able_to_sleep \
       is_able_to_spawn_things \
       is_able_to_swim \
-      is_able_to_teleport_attack \
+      is_able_to_teleport_self \
       is_able_to_teleport_escape \
       is_able_to_teleport_without_tiring \
       is_able_to_tire \
@@ -515,7 +515,7 @@ do
       unused_flag1 \
       unused_flag10 \
       unused_flag11 \
-      unused_flag12 \
+      is_able_to_teleport_attack \
       is_daring \
       is_obsidian \
       is_cautious \

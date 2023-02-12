@@ -133,7 +133,7 @@ float Thing::teleport_distance_max_get(void)
   return d;
 }
 
-bool Thing::teleport(point to, bool be_careful, bool *too_far)
+bool Thing::teleport(TeleportReason reason, point to, bool *too_far)
 {
   TRACE_NO_INDENT();
 
@@ -154,7 +154,7 @@ bool Thing::teleport(point to, bool be_careful, bool *too_far)
     return false;
   }
 
-  if (be_careful) {
+  if (reason.teleport_carefully) {
     dbg("Try to teleport carefully %d,%d", to.x, to.y);
   } else {
     dbg("Try to teleport to %d,%d", to.x, to.y);
@@ -219,7 +219,9 @@ bool Thing::teleport(point to, bool be_careful, bool *too_far)
     TRACE_NO_INDENT();
     dbg("No, oob");
     if (is_player()) {
-      msg("You can't teleport into the void.");
+      if (reason.teleport_self) {
+        msg("You can't teleport into the void.");
+      }
     }
     return false;
   }
@@ -230,7 +232,9 @@ bool Thing::teleport(point to, bool be_careful, bool *too_far)
   if (is_stuck_currently()) {
     dbg("You teleport out of trouble.");
     if (is_player()) {
-      msg("You teleport out of your sticky situation!");
+      if (reason.teleport_self) {
+        msg("You teleport out of your sticky situation!");
+      }
       game->tick_begin("teleport");
     }
     wobble(25);
@@ -257,7 +261,9 @@ bool Thing::teleport(point to, bool be_careful, bool *too_far)
 
     if (! d20roll(stat_str(), it->stat_str_total())) {
       if (is_player()) {
-        msg("You are held in place!");
+        if (reason.teleport_self) {
+          msg("You are held in place!");
+        }
       }
       dbg("You are held in place");
       wobble(25);
@@ -280,7 +286,7 @@ bool Thing::teleport(point to, bool be_careful, bool *too_far)
     x  = to.x;
     y  = to.y;
 
-    if (be_careful) {
+    if (reason.teleport_carefully) {
       if (is_player() && game->robot_mode) {
         dbg("Robot: Cannot teleport as far as it would like");
       }
@@ -294,7 +300,7 @@ bool Thing::teleport(point to, bool be_careful, bool *too_far)
     }
   }
 
-  if (be_careful) {
+  if (reason.teleport_carefully) {
     if (! level->is_able_to_stand_on(x, y)) {
       TRACE_AND_INDENT();
       dbg("No, nothing to stand on at target");
@@ -379,31 +385,33 @@ bool Thing::teleport(point to, bool be_careful, bool *too_far)
   return true;
 }
 
-bool Thing::teleport_carefully(point p, bool *too_far)
+bool Thing::teleport_carefully(TeleportReason reason, point p, bool *too_far)
 {
   TRACE_NO_INDENT();
-  return teleport(p, true, too_far);
+  reason.teleport_carefully = true;
+  return teleport(reason, p, too_far);
 }
 
-bool Thing::teleport_carefree(point p, bool *too_far)
+bool Thing::teleport_carefree(TeleportReason reason, point p, bool *too_far)
 {
   TRACE_NO_INDENT();
-  return teleport(p, false, too_far);
+  return teleport(reason, p, too_far);
 }
 
-bool Thing::teleport_carefully(point p)
+bool Thing::teleport_carefully(TeleportReason reason, point p)
 {
   TRACE_NO_INDENT();
-  return teleport(p, true, nullptr);
+  reason.teleport_carefully = true;
+  return teleport(reason, p, nullptr);
 }
 
-bool Thing::teleport_carefree(point p)
+bool Thing::teleport_carefree(TeleportReason reason, point p)
 {
   TRACE_NO_INDENT();
-  return teleport(p, false, nullptr);
+  return teleport(reason, p, nullptr);
 }
 
-bool Thing::teleport_randomly(void)
+bool Thing::teleport_randomly(TeleportReason reason, float max_distance)
 {
   TRACE_NO_INDENT();
 
@@ -415,13 +423,16 @@ bool Thing::teleport_randomly(void)
 
   idle_count_set(0);
 
-  float d     = teleport_distance_with_modifiers_get();
-  int   tries = d * d;
+  if (! max_distance) {
+    max_distance = teleport_distance_with_modifiers_get();
+  }
+
+  int tries = max_distance * max_distance;
 
   while (tries-- > 0) {
-    int x = pcg_random_range(curr_at.x - d, curr_at.x + d);
-    int y = pcg_random_range(curr_at.y - d, curr_at.y + d);
-    if (teleport_carefully(point(x, y))) {
+    int x = pcg_random_range(curr_at.x - max_distance, curr_at.x + max_distance);
+    int y = pcg_random_range(curr_at.y - max_distance, curr_at.y + max_distance);
+    if (teleport_carefully(reason, point(x, y))) {
       return true;
     }
   }
@@ -429,7 +440,7 @@ bool Thing::teleport_randomly(void)
   return false;
 }
 
-bool Thing::teleport_randomly_towards_player(void)
+bool Thing::teleport_randomly_towards_player(TeleportReason reason)
 {
   TRACE_NO_INDENT();
 
@@ -440,6 +451,9 @@ bool Thing::teleport_randomly_towards_player(void)
   }
 
   idle_count_set(0);
+
+  reason.teleport_closer = true;
+  reason.teleport_self   = true;
 
   float d     = teleport_distance_with_modifiers_get();
   int   tries = d * d;
@@ -463,7 +477,7 @@ bool Thing::teleport_randomly_towards_player(void)
       continue;
     }
 
-    if (teleport_carefully(point(x, y))) {
+    if (teleport_carefully(reason, point(x, y))) {
       return true;
     }
   }
@@ -471,7 +485,7 @@ bool Thing::teleport_randomly_towards_player(void)
   return false;
 }
 
-bool Thing::teleport_randomly_away_from_player(void)
+bool Thing::teleport_randomly_away_from_player(TeleportReason reason)
 {
   TRACE_NO_INDENT();
 
@@ -480,6 +494,11 @@ bool Thing::teleport_randomly_away_from_player(void)
       is_jumping) {
     return false;
   }
+
+  idle_count_set(0);
+
+  reason.teleport_away = true;
+  reason.teleport_self = true;
 
   float d     = teleport_distance_with_modifiers_get();
   int   tries = d * d;
@@ -496,7 +515,7 @@ bool Thing::teleport_randomly_away_from_player(void)
       continue;
     }
 
-    if (teleport_carefree(point(x, y))) {
+    if (teleport_carefree(reason, point(x, y))) {
       return true;
     }
   }
@@ -504,7 +523,7 @@ bool Thing::teleport_randomly_away_from_player(void)
   return false;
 }
 
-bool Thing::try_harder_to_teleport(void)
+bool Thing::try_harder_to_teleport(TeleportReason reason)
 {
   TRACE_NO_INDENT();
 
@@ -520,7 +539,7 @@ bool Thing::try_harder_to_teleport(void)
   while (tries-- > 0) {
     int x = pcg_random_range(curr_at.x - d, curr_at.x + d);
     int y = pcg_random_range(curr_at.y - d, curr_at.y + d);
-    if (teleport_carefree(point(x, y))) {
+    if (teleport_carefree(reason, point(x, y))) {
       return true;
     }
   }
@@ -579,9 +598,9 @@ void Thing::teleport_end(void)
   temperature_set(TEMPERATURE_ROOM);
 }
 
-bool Thing::teleport_attack(Thingp maybe_victim)
+bool Thing::teleport_self(TeleportReason reason, Thingp maybe_victim)
 {
-  if (! is_able_to_teleport_attack()) {
+  if (! is_able_to_teleport_self()) {
     return false;
   }
 
@@ -589,32 +608,35 @@ bool Thing::teleport_attack(Thingp maybe_victim)
     return false;
   }
 
+  reason.teleport_self = true;
+  idle_count_set(0);
+
   dbg("Teleport attack maybe");
   TRACE_AND_INDENT();
 
   if (maybe_victim) {
-    if (d1000() < tp()->chance_d1000_is_able_to_teleport_attack()) {
+    if (d1000() < tp()->chance_d1000_teleport_self()) {
       dbg("Try to teleport in direction of escape attack");
       TRACE_AND_INDENT();
 
       auto delta = maybe_victim->curr_at - maybe_victim->last_at;
       if (delta != point(0, 0)) {
         auto dest = maybe_victim->curr_at + (delta * (short) 2);
-        if (! teleport_carefully(dest)) {
+        if (! teleport_carefully(reason, dest)) {
           auto dest = maybe_victim->curr_at + delta;
-          return teleport_carefully(dest);
+          return teleport_carefully(reason, dest);
         }
         return true;
       }
     }
 
-    if (d1000() < tp()->chance_d1000_is_able_to_teleport_attack()) {
+    if (d1000() < tp()->chance_d1000_teleport_self()) {
       dbg("Try to teleport in front attack");
       TRACE_AND_INDENT();
 
       auto delta = maybe_victim->curr_at - curr_at;
       auto dest  = curr_at + delta;
-      return teleport_carefully(dest);
+      return teleport_carefully(reason, dest);
     }
   }
 
@@ -623,12 +645,12 @@ bool Thing::teleport_attack(Thingp maybe_victim)
   //
   auto p = aip()->move_path;
   if (p.size() > 1) {
-    if (d1000() < tp()->chance_d1000_is_able_to_teleport_attack()) {
+    if (d1000() < tp()->chance_d1000_teleport_self()) {
       dbg("Try to teleport attack");
       TRACE_AND_INDENT();
 
       auto teleport_dist = pcg_random_range(1, p.size() - 1);
-      return teleport_carefully(get(p, teleport_dist));
+      return teleport_carefully(reason, get(p, teleport_dist));
     }
   }
 
@@ -644,7 +666,7 @@ bool Thing::teleport_attack(Thingp maybe_victim)
         dbg("Try to teleport onto weakly %s", maybe_victim->to_short_string().c_str());
         TRACE_AND_INDENT();
 
-        if (teleport_carefree(maybe_victim->curr_at)) {
+        if (teleport_carefree(reason, maybe_victim->curr_at)) {
           return true;
         }
       }

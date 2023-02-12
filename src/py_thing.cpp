@@ -545,7 +545,9 @@ PyObject *thing_teleport_randomly(PyObject *obj, PyObject *args, PyObject *keywd
     Py_RETURN_NONE;
   }
 
-  t->teleport_randomly();
+  TeleportReason reason;
+  reason.teleport_self = true;
+  t->teleport_randomly(reason);
   Py_RETURN_NONE;
 }
 
@@ -579,7 +581,10 @@ PyObject *thing_teleport(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   bool too_far = false;
-  t->teleport_carefree(point(x, y), &too_far);
+
+  TeleportReason reason;
+  reason.teleport_self = true;
+  t->teleport_carefree(reason, point(x, y), &too_far);
   Py_RETURN_NONE;
 }
 

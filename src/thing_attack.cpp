@@ -473,6 +473,19 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
 
   auto owner = top_owner();
 
+  if (d1000() < chance_d1000_teleport_attack()) {
+    TeleportReason reason;
+    reason.teleport_attack = true;
+    if (victim->teleport_randomly(reason, teleport_distance())) {
+      if (victim->is_player()) {
+        msg("Your stomach lurches as you de-materialize!");
+      } else if (victim->is_monst()) {
+        msg("%s vanishes!", text_The().c_str());
+      }
+      return true;
+    }
+  }
+
   if (attack_options->thrown) {
     //
     // Allow things like horseshoes to attack, which would not normally be themselves...

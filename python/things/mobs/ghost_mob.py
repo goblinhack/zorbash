@@ -20,7 +20,7 @@ def on_death(me, x, y):
 def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
-    my.chance_d1000_is_able_to_shove(self, 200)
+    my.chance_d1000_shove(self, 200)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 10)
     my.dmg_received_doubled_from_fire(self, True)

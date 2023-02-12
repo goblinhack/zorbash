@@ -13,7 +13,7 @@ def tp_init(name, text_long_name):
     my.attack_meat(self, True)
     my.chance_d1000_dmg_nat_att(self, 0, 900)
     my.chance_d1000_dmg_poison(self, 0, 500)
-    my.chance_d1000_is_able_to_grapple(self, 200)
+    my.chance_d1000_grapple(self, 200)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 1)

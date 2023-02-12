@@ -382,7 +382,10 @@ bool Thing::ai_create_path_to_single_goal_do(int minx, int miny, int maxx, int m
     } else {
       ai->move_path = new_move_path;
 
-      if (teleport_attack(goal.what)) {
+      TeleportReason reason;
+      reason.teleport_self   = true;
+      reason.teleport_closer = true;
+      if (teleport_self(reason, goal.what)) {
         return true;
       }
 

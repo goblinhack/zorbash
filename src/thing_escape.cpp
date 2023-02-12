@@ -23,7 +23,7 @@ bool Thing::try_to_escape(void)
       return false;
     }
 
-    if (d1000() < tp()->chance_d1000_is_able_to_jump_on_low_hp()) {
+    if (d1000() < tp()->chance_d1000_jump_on_low_hp()) {
       if (try_to_jump_away_from_player()) {
         tick_last_escape_set(game->tick_current);
         return true;
@@ -50,7 +50,10 @@ bool Thing::ai_escape(void)
   clear_move_path("AI: escape");
 
   if (is_able_to_teleport_escape()) {
-    if (teleport_randomly()) {
+    TeleportReason reason;
+    reason.teleport_self   = true;
+    reason.teleport_escape = true;
+    if (teleport_randomly(reason)) {
       dbg("AI: escape teleport");
       return false;
     }

@@ -132,16 +132,16 @@ int Thing::attack_meat(void)
   return (tp()->attack_meat());
 }
 
-int Thing::chance_d1000_is_able_to_shove(void)
+int Thing::chance_d1000_shove(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->chance_d1000_is_able_to_shove());
+  return (tp()->chance_d1000_shove());
 }
 
-int Thing::chance_d1000_is_able_to_grapple(void)
+int Thing::chance_d1000_grapple(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->chance_d1000_is_able_to_grapple());
+  return (tp()->chance_d1000_grapple());
 }
 
 int Thing::unused_chance1_d1000(void)
@@ -969,28 +969,28 @@ int Thing::is_jelly(void)
   return (tp()->is_jelly());
 }
 
-int Thing::chance_d1000_is_able_to_jump_randomly(void)
+int Thing::chance_d1000_jump_randomly(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->chance_d1000_is_able_to_jump_randomly());
+  return (tp()->chance_d1000_jump_randomly());
 }
 
-int Thing::chance_d1000_is_able_to_jump_attack(void)
+int Thing::chance_d1000_jump_attack(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->chance_d1000_is_able_to_jump_attack());
+  return (tp()->chance_d1000_jump_attack());
 }
 
-int Thing::chance_d1000_is_able_to_jump_onto(void)
+int Thing::chance_d1000_jump_onto(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->chance_d1000_is_able_to_jump_onto());
+  return (tp()->chance_d1000_jump_onto());
 }
 
-int Thing::chance_d1000_is_able_to_jump_on_low_hp(void)
+int Thing::chance_d1000_jump_on_low_hp(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->chance_d1000_is_able_to_jump_on_low_hp());
+  return (tp()->chance_d1000_jump_on_low_hp());
 }
 
 int Thing::is_able_to_jump(void)
@@ -1329,10 +1329,10 @@ int Thing::unused_flag11(void)
   return (tp()->unused_flag11());
 }
 
-int Thing::unused_flag12(void)
+int Thing::is_able_to_teleport_attack(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag12());
+  return (tp()->is_able_to_teleport_attack());
 }
 
 int Thing::is_obsidian(void)
@@ -1851,10 +1851,16 @@ int Thing::noise_additional_on_teleporting(void)
   return (tp()->noise_additional_on_teleporting());
 }
 
-int Thing::chance_d1000_is_able_to_teleport_attack(void)
+int Thing::chance_d1000_teleport_self(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->chance_d1000_is_able_to_teleport_attack());
+  return (tp()->chance_d1000_teleport_self());
+}
+
+int Thing::chance_d1000_teleport_attack(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->chance_d1000_teleport_attack());
 }
 
 int Thing::teleport_distance(void)
@@ -1863,10 +1869,10 @@ int Thing::teleport_distance(void)
   return (tp()->teleport_distance());
 }
 
-int Thing::is_able_to_teleport_attack(void)
+int Thing::is_able_to_teleport_self(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_able_to_teleport_attack());
+  return (tp()->is_able_to_teleport_self());
 }
 
 int Thing::is_able_to_teleport_without_tiring(void)
@@ -2599,10 +2605,10 @@ int Thing::is_able_to_tire(void)
   return (tp()->is_able_to_tire());
 }
 
-int Thing::chance_d1000_is_steal_item(void)
+int Thing::chance_d1000_steal_item(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->chance_d1000_is_steal_item());
+  return (tp()->chance_d1000_steal_item());
 }
 
 int Thing::chance_d1000_attack_engulf(void)

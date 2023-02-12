@@ -65,6 +65,9 @@ void tp_fixup(void)
 
     if (tp->is_ethereal()) {
       tp->is_immune_to_spiderwebs_set(true);
+      if (tp->is_crushable()) {
+        DIE("Tp %s is ethereal and crushable?", tp->name().c_str());
+      }
     }
 
     if (tp->is_undead()) {
@@ -121,7 +124,7 @@ void tp_fixup(void)
       tp->temperature_sensitive_set(true);
     }
 
-    if (tp->chance_d1000_is_able_to_shove()) {
+    if (tp->chance_d1000_shove()) {
       tp->is_able_to_shove_set(true);
     }
 
@@ -139,7 +142,7 @@ void tp_fixup(void)
       }
     }
 
-    if (tp->chance_d1000_is_able_to_grapple()) {
+    if (tp->chance_d1000_grapple()) {
       tp->is_able_to_grapple_set(true);
     }
 

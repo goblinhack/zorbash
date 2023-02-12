@@ -388,7 +388,7 @@ PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywd
 
 // begin sort marker1
 LEVEL_BODY_GET_BOOL_AT(chance_d1000_level_attack_engulf_at, chance_d1000_attack_engulf)
-LEVEL_BODY_GET_BOOL_AT(chance_d1000_level_is_steal_item_at, chance_d1000_is_steal_item)
+LEVEL_BODY_GET_BOOL_AT(chance_d1000_level_is_steal_item_at, chance_d1000_steal_item)
 LEVEL_BODY_GET_BOOL_AT(level_ai_detect_secret_doors_at, ai_detect_secret_doors)
 LEVEL_BODY_GET_BOOL_AT(level_ai_resent_count_at, ai_resent_count)
 LEVEL_BODY_GET_BOOL_AT(level_ai_wanderer_at, ai_wanderer)

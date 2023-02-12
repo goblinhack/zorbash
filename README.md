@@ -10,7 +10,6 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - some weapons crit more                                                                                                                     -->
 <!-- - dimension portal                                                                                                                           -->
 <!-- - wort food ? fungas foods and some poisonous?                                                                                               -->
 <!-- - spider web spawn small spiders?                                                                                                            -->
@@ -216,7 +215,7 @@ Current status:
 
 Content:
 <!-- begin type marker -->
-- 59 x monsters
+- 60 x monsters
 - 52 x food
 - 19 x treasure
 - 13 x weapons

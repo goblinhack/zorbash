@@ -66,6 +66,17 @@ public:
   bool is_being_stolen {};
 } DropReason;
 
+typedef class TeleportReason_
+{
+public:
+  bool teleport_self {};
+  bool teleport_escape {};
+  bool teleport_closer {};
+  bool teleport_away {};
+  bool teleport_attack {};
+  bool teleport_carefully {};
+} TeleportReason;
+
 typedef class Thing_
 {
 private:
@@ -565,15 +576,15 @@ public:
   bool state_using_skillstone(void);
   bool steal_item_from(Thingp);
   bool steal_treasure_from(Thingp);
-  bool teleport_attack(Thingp it = nullptr);
-  bool teleport_carefree(point to);
-  bool teleport_carefree(point to, bool *too_far);
-  bool teleport_carefully(point to);
-  bool teleport_carefully(point to, bool *too_far);
-  bool teleport(point to, bool carefully, bool *too_far);
-  bool teleport_randomly_away_from_player(void);
-  bool teleport_randomly_towards_player(void);
-  bool teleport_randomly(void);
+  bool teleport_carefree(TeleportReason, point to);
+  bool teleport_carefree(TeleportReason, point to, bool *too_far);
+  bool teleport_carefully(TeleportReason, point to);
+  bool teleport_carefully(TeleportReason, point to, bool *too_far);
+  bool teleport(TeleportReason, point to, bool *too_far);
+  bool teleport_randomly_away_from_player(TeleportReason);
+  bool teleport_randomly(TeleportReason, float max_distance = 0.0);
+  bool teleport_randomly_towards_player(TeleportReason);
+  bool teleport_self(TeleportReason, Thingp it = nullptr);
   bool temperature_max_is_set(void);
   bool temperature_min_is_set(void);
   bool thing_check_for_cold_dmg(void);
@@ -590,7 +601,7 @@ public:
   bool too_far_from_mob(void);
   bool torch_tick(void);
   bool try_harder_to_jump(void);
-  bool try_harder_to_teleport(void);
+  bool try_harder_to_teleport(TeleportReason);
   bool try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp it);
   bool try_to_carry(Thingp w);
   bool try_to_enchant_items(void);
@@ -1001,15 +1012,16 @@ public:
   int chance_d1000_dmg_negation(int);
   int chance_d1000_dmg_poison(int);
   int chance_d1000_dmg_water(int);
-  int chance_d1000_is_able_to_grapple(void);
-  int chance_d1000_is_able_to_jump_attack(void);
-  int chance_d1000_is_able_to_jump_on_low_hp(void);
-  int chance_d1000_is_able_to_jump_onto(void);
-  int chance_d1000_is_able_to_jump_randomly(void);
-  int chance_d1000_is_able_to_shove(void);
-  int chance_d1000_is_able_to_teleport_attack(void);
-  int chance_d1000_is_steal_item(void);
+  int chance_d1000_grapple(void);
+  int chance_d1000_jump_attack(void);
+  int chance_d1000_jump_on_low_hp(void);
+  int chance_d1000_jump_onto(void);
+  int chance_d1000_jump_randomly(void);
   int chance_d1000_melting(void);
+  int chance_d1000_shove(void);
+  int chance_d1000_steal_item(void);
+  int chance_d1000_teleport_attack(void);
+  int chance_d1000_teleport_self(void);
   int charge_count_decr(int);
   int charge_count_decr(void);
   int charge_count_incr(int);
@@ -1226,6 +1238,7 @@ public:
   int is_able_to_swim(void);
   int is_able_to_teleport_attack(void);
   int is_able_to_teleport_escape(void);
+  int is_able_to_teleport_self(void);
   int is_able_to_teleport_without_tiring(void);
   int is_able_to_tire(void);
   int is_able_to_use_amulet(void);
@@ -1970,7 +1983,6 @@ public:
   int unused_flag103(void);
   int unused_flag10(void);
   int unused_flag11(void);
-  int unused_flag12(void);
   int unused_flag1(void);
   int unused_flag27(void);
   int unused_flag2(void);
