@@ -95,6 +95,14 @@ void tp_fixup(void)
       tp->is_combustible_set(true);
     }
 
+    if (tp->is_obsidian()) {
+      tp->is_very_hard_set(true);
+    }
+
+    if (tp->is_metal()) {
+      tp->is_hard_set(true);
+    }
+
     if (tp->is_very_hard()) {
       tp->is_hard_set(true);
     }

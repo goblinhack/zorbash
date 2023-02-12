@@ -517,7 +517,7 @@ do
       unused_flag11 \
       unused_flag12 \
       is_daring \
-      unused_flag13 \
+      is_obsidian \
       is_cautious \
       is_ranged_weapon \
       is_able_to_use_ranged_weapons \

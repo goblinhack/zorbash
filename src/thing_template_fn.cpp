@@ -554,6 +554,7 @@ int Tp::is_obs_destructable(void) const { return _is_obs_destructable; }
 int Tp::is_obs_for_ai(void) const { return _is_obs_for_ai; }
 int Tp::is_obs_for_jump_landing(void) const { return _is_obs_for_jump_landing; }
 int Tp::is_obs_for_shoving(void) const { return _is_obs_for_shoving; }
+int Tp::is_obsidian(void) const { return _is_obsidian; }
 int Tp::is_obs_in_the_way_for_firing(void) const { return _is_obs_in_the_way_for_firing; }
 int Tp::is_obs_in_the_way_for_jumping(void) const { return _is_obs_in_the_way_for_jumping; }
 int Tp::is_obs_in_the_way_for_throwing(void) const { return _is_obs_in_the_way_for_throwing; }
@@ -707,7 +708,6 @@ int Tp::unused_flag103(void) const { return _unused_flag103; }
 int Tp::unused_flag10(void) const { return _unused_flag10; }
 int Tp::unused_flag11(void) const { return _unused_flag11; }
 int Tp::unused_flag12(void) const { return _unused_flag12; }
-int Tp::unused_flag13(void) const { return _unused_flag13; }
 int Tp::unused_flag1(void) const { return _unused_flag1; }
 int Tp::unused_flag27(void) const { return _unused_flag27; }
 int Tp::unused_flag2(void) const { return _unused_flag2; }
@@ -1096,6 +1096,7 @@ void Tp::is_obs_destructable_set(int v) { _is_obs_destructable = v; }
 void Tp::is_obs_for_ai_set(int v) { _is_obs_for_ai = v; }
 void Tp::is_obs_for_jump_landing_set(int v) { _is_obs_for_jump_landing = v; }
 void Tp::is_obs_for_shoving_set(int v) { _is_obs_for_shoving = v; }
+void Tp::is_obsidian_set(int v) { _is_obsidian = v; }
 void Tp::is_obs_in_the_way_for_firing_set(int v) { _is_obs_in_the_way_for_firing = v; }
 void Tp::is_obs_in_the_way_for_jumping_set(int v) { _is_obs_in_the_way_for_jumping = v; }
 void Tp::is_obs_in_the_way_for_throwing_set(int v) { _is_obs_in_the_way_for_throwing = v; }
@@ -1395,7 +1396,6 @@ void Tp::unused_flag103_set(int v) { _unused_flag103 = v; }
 void Tp::unused_flag10_set(int v) { _unused_flag10 = v; }
 void Tp::unused_flag11_set(int v) { _unused_flag11 = v; }
 void Tp::unused_flag12_set(int v) { _unused_flag12 = v; }
-void Tp::unused_flag13_set(int v) { _unused_flag13 = v; }
 void Tp::unused_flag1_set(int v) { _unused_flag1 = v; }
 void Tp::unused_flag27_set(int v) { _unused_flag27 = v; }
 void Tp::unused_flag2_set(int v) { _unused_flag2 = v; }

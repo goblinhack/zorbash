@@ -219,27 +219,27 @@ Current status:
 
 Content:
 <!-- begin type marker -->
-- 59 monsters
-- 52 food
-- 19 treasure
-- 13 weapons
-- 10 buffs
-- 9 items
-- 6 staffs
-- 6 boots
-- 5 rings
-- 5 keys
-- 4 gauntlets
-- 4 debuffs
-- 4 armor
-- 3 skills
-- 3 mobs
-- 3 doors
-- 3 cloaks
-- 3 amulets
-- 2 shield
-- 2 potions
-- 1 player
+- 59 x monsters
+- 52 x food
+- 19 x treasure
+- 13 x weapons
+- 10 x buffs
+- 9 x items
+- 6 x staffs
+- 6 x shield
+- 6 x boots
+- 5 x rings
+- 5 x keys
+- 4 x gauntlets
+- 4 x debuffs
+- 4 x armor
+- 3 x skills
+- 3 x mobs
+- 3 x doors
+- 3 x cloaks
+- 3 x amulets
+- 2 x potions
+- 1 x player
 <!-- end type marker -->
 
 Comments and suggestions welcome.
@@ -297,6 +297,18 @@ Press <TAB> to switch between modes during the game.
 <img alt="Ascii art" src="pics/ascii/screenshot.8.png" width="45%">
 </p>
 
+<p align="center">
+<img alt="Pixel art" src="pics/pixelart/screenshot.9.png" width="45%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+<img alt="Ascii art" src="pics/ascii/screenshot.9.png" width="45%">
+</p>
+
+<p align="center">
+<img alt="Pixel art" src="pics/pixelart/screenshot.10.png" width="45%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+<img alt="Ascii art" src="pics/ascii/screenshot.10.png" width="45%">
+</p>
+
 Ascii Screenshots
 -----------------
 
@@ -308,6 +320,8 @@ Ascii Screenshots
 ![Alt text](pics/ascii/screenshot.6.png?raw=true "")
 ![Alt text](pics/ascii/screenshot.7.png?raw=true "")
 ![Alt text](pics/ascii/screenshot.8.png?raw=true "")
+![Alt text](pics/ascii/screenshot.9.png?raw=true "")
+![Alt text](pics/ascii/screenshot.10.png?raw=true "")
 
 Pixelart Screenshots
 --------------------

@@ -679,7 +679,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag12() && (what == "unused_flag12")) {
     return true;
   }
-  if (unused_flag13() && (what == "unused_flag13")) {
+  if (is_obsidian() && (what == "is_obsidian")) {
     return true;
   }
   if (is_cautious() && (what == "is_cautious")) {
@@ -2156,8 +2156,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag12") {
     return &Thing::unused_flag12;
   }
-  if (what == "unused_flag13") {
-    return &Thing::unused_flag13;
+  if (what == "is_obsidian") {
+    return &Thing::is_obsidian;
   }
   if (what == "is_cautious") {
     return &Thing::is_cautious;

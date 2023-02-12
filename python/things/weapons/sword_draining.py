@@ -71,7 +71,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_owner_attack_dmg_draining_do(self, "me.on_owner_attack_dmg_draining()")
     my.on_swing_do(self, "me.on_swing()")
     my.on_unequip_do(self, "me.on_unequip()")
-    my.rarity(self, my.RARITY_COMMON)
+    my.rarity(self, my.RARITY_VERY_RARE)
     my.stamina_drain_on_attacking(self, 0)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+3 DMG stam")

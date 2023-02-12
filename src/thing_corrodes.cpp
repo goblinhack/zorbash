@@ -40,6 +40,9 @@ void Thing::corrode_tick(void)
     if (is_stone()) {
       chance = 1;
     }
+    if (is_obsidian()) {
+      chance = 0;
+    }
 
     if (enchant_count_get()) {
       chance /= enchant_count_get() + 1;

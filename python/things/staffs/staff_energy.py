@@ -99,6 +99,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_targetted_laser(self, "laser_energy")
     my.gold_value_dice(self, "200")
     my.health_initial_dice(self, "20+1d10")
+    my.health_initial_dice(self, "50")
     my.is_able_to_burn(self, True)
     my.is_able_to_fall(self, True)
     # my.is_able_to_spawn_things(self, False) else we end up owning fire
@@ -115,7 +116,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_loggable(self, True)
     my.is_magical(self, True)
     my.is_staff(self, True)
-    my.health_initial_dice(self, "50")
     my.is_target_select(self, True)
     my.is_throwable(self, True)
     my.is_tickable(self, True)  # So it can interact with fire

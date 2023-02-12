@@ -56,7 +56,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
     my.on_tick_do(self, "me.on_tick()")
-    my.rarity(self, my.RARITY_COMMON)
+    my.rarity(self, my.RARITY_VERY_RARE)
     my.stat_def_mod(self, 2)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+2 DEF")

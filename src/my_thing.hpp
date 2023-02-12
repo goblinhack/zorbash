@@ -1458,6 +1458,7 @@ public:
   int is_obs_for_ai(void);
   int is_obs_for_jump_landing(void);
   int is_obs_for_shoving(void);
+  int is_obsidian(void);
   int is_obs_in_the_way_for_firing(void);
   int is_obs_in_the_way_for_jumping(void);
   int is_obs_in_the_way_for_throwing(void);
@@ -1970,7 +1971,6 @@ public:
   int unused_flag10(void);
   int unused_flag11(void);
   int unused_flag12(void);
-  int unused_flag13(void);
   int unused_flag1(void);
   int unused_flag27(void);
   int unused_flag2(void);

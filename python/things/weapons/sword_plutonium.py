@@ -101,7 +101,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_swing_do(self, "me.on_swing()")
     my.on_tick_do(self, "me.on_tick()")
     my.on_unequip_do(self, "me.on_unequip()")
-    my.rarity(self, my.RARITY_COMMON)
+    my.rarity(self, my.RARITY_VERY_RARE)
     my.stat_att_mod(self, 2)  # means +2 per enchant
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 DMG, +2 ATT")

@@ -480,6 +480,7 @@ private:
   int _is_obs_for_ai {};
   int _is_obs_for_jump_landing {};
   int _is_obs_for_shoving {};
+  int _is_obsidian {};
   int _is_obs_in_the_way_for_firing {};
   int _is_obs_in_the_way_for_jumping {};
   int _is_obs_in_the_way_for_throwing {};
@@ -634,7 +635,6 @@ private:
   int _unused_flag103 {};
   int _unused_flag11 {};
   int _unused_flag12 {};
-  int _unused_flag13 {};
   int _unused_flag2 {};
   int _unused_flag27 {};
   int _unused_flag3 {};
@@ -1549,6 +1549,7 @@ public:
   int is_obs_for_ai(void) const;
   int is_obs_for_jump_landing(void) const;
   int is_obs_for_shoving(void) const;
+  int is_obsidian(void) const;
   int is_obs_in_the_way_for_firing(void) const;
   int is_obs_in_the_way_for_jumping(void) const;
   int is_obs_in_the_way_for_throwing(void) const;
@@ -1702,7 +1703,6 @@ public:
   int unused_flag10(void) const;
   int unused_flag11(void) const;
   int unused_flag12(void) const;
-  int unused_flag13(void) const;
   int unused_flag1(void) const;
   int unused_flag27(void) const;
   int unused_flag2(void) const;
@@ -2091,6 +2091,7 @@ public:
   void is_obs_for_ai_set(int v);
   void is_obs_for_jump_landing_set(int v);
   void is_obs_for_shoving_set(int v);
+  void is_obsidian_set(int v);
   void is_obs_in_the_way_for_firing_set(int v);
   void is_obs_in_the_way_for_jumping_set(int v);
   void is_obs_in_the_way_for_throwing_set(int v);
@@ -2393,7 +2394,6 @@ public:
   void unused_flag10_set(int v);
   void unused_flag11_set(int v);
   void unused_flag12_set(int v);
-  void unused_flag13_set(int v);
   void unused_flag1_set(int v);
   void unused_flag27_set(int v);
   void unused_flag2_set(int v);

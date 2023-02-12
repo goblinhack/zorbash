@@ -1335,10 +1335,10 @@ int Thing::unused_flag12(void)
   return (tp()->unused_flag12());
 }
 
-int Thing::unused_flag13(void)
+int Thing::is_obsidian(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag13());
+  return (tp()->is_obsidian());
 }
 
 int Thing::is_cautious(void)

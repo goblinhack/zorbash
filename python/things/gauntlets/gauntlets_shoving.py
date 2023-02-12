@@ -17,7 +17,7 @@ def on_unequip(owner, me, x, y):
 def on_enchant(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if my.thing_is_player(owner):
-        my.thing_msg_if_not_dead_or_dying(me, "The gauntlets become yet more menacing.")
+        my.thing_msg_if_not_dead_or_dying(me, "The gauntlets become yet more menacing. You feel strong.")
     my.thing_shove_strength_mod_incr(me, 1)
 
 
@@ -32,6 +32,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
     my.gold_value_dice(self, "250")
+    my.health_initial_dice(self, "200")
     my.is_able_to_fall(self, True)
     my.is_auto_equipped(self, True)
     my.is_bag_item(self, True)
@@ -42,7 +43,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_droppable(self, True)
     my.is_enchantable(self, True)
     my.is_gauntlet(self, True)
-    my.health_initial_dice(self, "200")
     my.is_interesting(self, True)
     my.is_item(self, True)
     my.is_loggable(self, True)
@@ -58,7 +58,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_enchant_do(self, "me.on_enchant()")
     my.on_equip_do(self, "me.on_equip()")
     my.on_unequip_do(self, "me.on_unequip()")
-    my.rarity(self, my.RARITY_UNCOMMON)
+    my.rarity(self, my.RARITY_RARE)
     my.shove_strength_mod(self, 1)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "-10 decibels")
