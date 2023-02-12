@@ -146,6 +146,8 @@ void Game::place_player(void)
       if (0) {
         auto r1 = level->thing_new("ring_shield", point(x, y));
         t->carry(r1);
+      }
+      if (0) {
         auto r2 = level->thing_new("ring_is_immune_to_poison", point(x, y));
         t->carry(r2);
       }
