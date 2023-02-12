@@ -135,9 +135,9 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
           TRACE_AND_INDENT();
 
           //
-          // Not sure if we want to be able to attack corpses via the mouse.
+          // Don't attack dead monsters or broken doors
           //
-          if (t->is_dead && t->is_monst()) {
+          if (t->is_dead) {
             continue;
           }
 
