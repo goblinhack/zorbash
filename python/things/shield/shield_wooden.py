@@ -16,10 +16,11 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.chance_d10000_damaged(self, 20)
-    my.chance_d10000_set_on_fire(self, 5000)
+    my.chance_d10000_set_on_fire(self, 500)
     my.collision_hit_priority(self, 6)
     my.enchant_max(self, 5)
     my.equip_carry_anim(self, "shield_wooden_carry")
+    my.health_initial_dice(self, "100")
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)

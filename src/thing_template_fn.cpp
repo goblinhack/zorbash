@@ -400,6 +400,7 @@ int Tp::is_bridge(void) const { return _is_bridge; }
 int Tp::is_brittle(void) const { return _is_brittle; }
 int Tp::is_buff(void) const { return _is_buff; }
 int Tp::is_carnivorous_plant(void) const { return _is_carnivorous_plant; }
+int Tp::is_cautious(void) const { return _is_cautious; }
 int Tp::is_chasm(void) const { return _is_chasm; }
 int Tp::is_cloak(void) const { return _is_cloak; }
 int Tp::is_cold(void) const { return _is_cold; }
@@ -421,6 +422,7 @@ int Tp::is_cursor_path_hazard(void) const { return _is_cursor_path_hazard; }
 int Tp::is_cursor_path(void) const { return _is_cursor_path; }
 int Tp::is_cursor(void) const { return _is_cursor; }
 int Tp::is_dagger(void) const { return _is_dagger; }
+int Tp::is_daring(void) const { return _is_daring; }
 int Tp::is_dead_on_end_of_anim(void) const { return _is_dead_on_end_of_anim; }
 int Tp::is_dead_on_falling(void) const { return _is_dead_on_falling; }
 int Tp::is_dead_on_shove(void) const { return _is_dead_on_shove; }
@@ -704,10 +706,8 @@ int Tp::unused_chance6_d1000(void) const { return _unused_chance6_d1000; }
 int Tp::unused_flag103(void) const { return _unused_flag103; }
 int Tp::unused_flag10(void) const { return _unused_flag10; }
 int Tp::unused_flag11(void) const { return _unused_flag11; }
-int Tp::unused_flag123(void) const { return _unused_flag123; }
 int Tp::unused_flag12(void) const { return _unused_flag12; }
 int Tp::unused_flag13(void) const { return _unused_flag13; }
-int Tp::unused_flag14(void) const { return _unused_flag14; }
 int Tp::unused_flag1(void) const { return _unused_flag1; }
 int Tp::unused_flag27(void) const { return _unused_flag27; }
 int Tp::unused_flag2(void) const { return _unused_flag2; }
@@ -942,6 +942,7 @@ void Tp::is_bridge_set(int v) { _is_bridge = v; }
 void Tp::is_brittle_set(int v) { _is_brittle = v; }
 void Tp::is_buff_set(int v) { _is_buff = v; }
 void Tp::is_carnivorous_plant_set(int v) { _is_carnivorous_plant = v; }
+void Tp::is_cautious_set(int v) { _is_cautious = v; }
 void Tp::is_chasm_set(int v) { _is_chasm = v; }
 void Tp::is_cloak_set(int v) { _is_cloak = v; }
 void Tp::is_cold_set(int v) { _is_cold = v; }
@@ -963,6 +964,7 @@ void Tp::is_cursor_path_hazard_set(int v) { _is_cursor_path_hazard = v; }
 void Tp::is_cursor_path_set(int v) { _is_cursor_path = v; }
 void Tp::is_cursor_set(int v) { _is_cursor = v; }
 void Tp::is_dagger_set(int v) { _is_dagger = v; }
+void Tp::is_daring_set(int v) { _is_daring = v; }
 void Tp::is_dead_on_end_of_anim_set(int v) { _is_dead_on_end_of_anim = v; }
 void Tp::is_dead_on_falling_set(int v) { _is_dead_on_falling = v; }
 void Tp::is_dead_on_shove_set(int v) { _is_dead_on_shove = v; }
@@ -1392,10 +1394,8 @@ void Tp::unused_chance6_d1000_set(int v) { _unused_chance6_d1000 = v; }
 void Tp::unused_flag103_set(int v) { _unused_flag103 = v; }
 void Tp::unused_flag10_set(int v) { _unused_flag10 = v; }
 void Tp::unused_flag11_set(int v) { _unused_flag11 = v; }
-void Tp::unused_flag123_set(int v) { _unused_flag123 = v; }
 void Tp::unused_flag12_set(int v) { _unused_flag12 = v; }
 void Tp::unused_flag13_set(int v) { _unused_flag13 = v; }
-void Tp::unused_flag14_set(int v) { _unused_flag14 = v; }
 void Tp::unused_flag1_set(int v) { _unused_flag1 = v; }
 void Tp::unused_flag27_set(int v) { _unused_flag27 = v; }
 void Tp::unused_flag2_set(int v) { _unused_flag2 = v; }

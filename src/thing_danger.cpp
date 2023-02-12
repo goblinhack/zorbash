@@ -324,48 +324,60 @@ int Thing::is_dangerous(Thingp it)
     return false;
   }
 
-  int a = danger_current_level();
-  int b = it->danger_current_level();
+  int my_danger_level  = danger_current_level();
+  int its_danger_level = it->danger_current_level();
 
   //
   // If it's really close, then it's more dangerous
   //
   if (distance(curr_at, it->curr_at) < 2) {
-    b += 10;
+    its_danger_level += 10;
   }
 
   if (distance(curr_at, it->curr_at) == 0) {
-    b += 20;
+    its_danger_level += 20;
   }
 
   //
   // If I'm low on health then consider it more dangereous
   //
   if (health() < health_max() / 5) {
-    b++;
+    its_danger_level++;
   } else if (health() < health_max() / 10) {
-    b += 2;
+    its_danger_level += 2;
   }
 
   if (is_cowardly()) {
-    b *= 10;
+    its_danger_level *= 10;
   }
 
-  dbg("My danger level %d, its %d, %s", a, b, it->to_short_string().c_str());
+  dbg("My danger level %d, its %d, %s", my_danger_level, its_danger_level, it->to_short_string().c_str());
+
+  //
+  // Will consider more dangerous things even more dangerous
+  //
+  if (is_cautious()) {
+    its_danger_level *= 2;
+  }
+
+  //
+  // Will consider more dangerous things less dangerous
+  //
+  if (is_daring()) {
+    its_danger_level /= 2;
+  }
 
   //
   // So giant rats will attack each other if at the same danger level
   //
-  // Add some caution, hence the multiplier
-  //
-  return (b * 2) > a;
+  return its_danger_level > my_danger_level;
 }
 
 const std::string Thing::danger_level_str(Thingp it)
 {
-  auto a     = danger_current_level();
-  auto b     = it->danger_current_level();
-  auto delta = b - a;
+  auto my_danger_level  = danger_current_level();
+  auto its_danger_level = it->danger_current_level();
+  auto delta            = its_danger_level - my_danger_level;
 
   if (delta > 20) {
     return "%%fg=red$Deadly. Avoid!";
@@ -390,15 +402,15 @@ const std::string Thing::danger_level_str(Thingp it)
 
 int Thing::danger_current_level(Thingp it)
 {
-  int a = danger_current_level();
-  int b = it->danger_current_level();
-  return b - a;
+  int my_danger_level  = danger_current_level();
+  int its_danger_level = it->danger_current_level();
+  return its_danger_level - my_danger_level;
 }
 
 int Thing::danger_initial_level(Thingp it)
 {
-  int a = danger_initial_level();
-  int b = it->danger_initial_level();
-  // con("danger level %d vs %s %d", a, it->to_short_string().c_str(), b);
-  return b - a;
+  int my_danger_level  = danger_initial_level();
+  int its_danger_level = it->danger_initial_level();
+  // con("danger level %d vs %s %d", my_danger_level, it->to_short_string().c_str(), its_danger_level);
+  return its_danger_level - my_danger_level;
 }

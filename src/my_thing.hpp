@@ -1299,6 +1299,7 @@ public:
   int is_buff(void);
   int is_burnt_check(void);
   int is_carnivorous_plant(void);
+  int is_cautious(void);
   int is_chasm(void);
   int is_cloak(void);
   int is_cold(void);
@@ -1322,6 +1323,7 @@ public:
   int is_cursor(void);
   int is_dagger(void);
   int is_dangerous(Thingp);
+  int is_daring(void);
   int is_dead_check(void);
   int is_dead_on_end_of_anim(void);
   int is_dead_on_falling(void);
@@ -1967,10 +1969,8 @@ public:
   int unused_flag103(void);
   int unused_flag10(void);
   int unused_flag11(void);
-  int unused_flag123(void);
   int unused_flag12(void);
   int unused_flag13(void);
-  int unused_flag14(void);
   int unused_flag1(void);
   int unused_flag27(void);
   int unused_flag2(void);

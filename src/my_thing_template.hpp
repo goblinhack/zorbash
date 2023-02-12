@@ -325,6 +325,7 @@ private:
   int _is_brittle {};
   int _is_buff {};
   int _is_carnivorous_plant {};
+  int _is_cautious {};
   int _is_chasm {};
   int _is_cloak {};
   int _is_cold {};
@@ -346,6 +347,7 @@ private:
   int _is_cursor_path_blocker {};
   int _is_cursor_path_hazard {};
   int _is_dagger {};
+  int _is_daring {};
   int _is_dead_on_end_of_anim {};
   int _is_dead_on_falling {};
   int _is_dead_on_shove {};
@@ -632,9 +634,7 @@ private:
   int _unused_flag103 {};
   int _unused_flag11 {};
   int _unused_flag12 {};
-  int _unused_flag123 {};
   int _unused_flag13 {};
-  int _unused_flag14 {};
   int _unused_flag2 {};
   int _unused_flag27 {};
   int _unused_flag3 {};
@@ -1395,6 +1395,7 @@ public:
   int is_brittle(void) const;
   int is_buff(void) const;
   int is_carnivorous_plant(void) const;
+  int is_cautious(void) const;
   int is_chasm(void) const;
   int is_cloak(void) const;
   int is_cold(void) const;
@@ -1416,6 +1417,7 @@ public:
   int is_cursor_path(void) const;
   int is_cursor(void) const;
   int is_dagger(void) const;
+  int is_daring(void) const;
   int is_dead_on_end_of_anim(void) const;
   int is_dead_on_falling(void) const;
   int is_dead_on_shove(void) const;
@@ -1699,10 +1701,8 @@ public:
   int unused_flag103(void) const;
   int unused_flag10(void) const;
   int unused_flag11(void) const;
-  int unused_flag123(void) const;
   int unused_flag12(void) const;
   int unused_flag13(void) const;
-  int unused_flag14(void) const;
   int unused_flag1(void) const;
   int unused_flag27(void) const;
   int unused_flag2(void) const;
@@ -1937,6 +1937,7 @@ public:
   void is_brittle_set(int v);
   void is_buff_set(int v);
   void is_carnivorous_plant_set(int v);
+  void is_cautious_set(int v);
   void is_chasm_set(int v);
   void is_cloak_set(int v);
   void is_cold_set(int v);
@@ -1958,6 +1959,7 @@ public:
   void is_cursor_path_set(int v);
   void is_cursor_set(int v);
   void is_dagger_set(int v);
+  void is_daring_set(int v);
   void is_dead_on_end_of_anim_set(int v);
   void is_dead_on_falling_set(int v);
   void is_dead_on_shove_set(int v);
@@ -2390,10 +2392,8 @@ public:
   void unused_flag103_set(int v);
   void unused_flag10_set(int v);
   void unused_flag11_set(int v);
-  void unused_flag123_set(int v);
   void unused_flag12_set(int v);
   void unused_flag13_set(int v);
-  void unused_flag14_set(int v);
   void unused_flag1_set(int v);
   void unused_flag27_set(int v);
   void unused_flag2_set(int v);

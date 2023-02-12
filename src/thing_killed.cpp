@@ -3,6 +3,7 @@
 //
 
 #include "my_array_bounds_check.hpp"
+#include "my_english.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_python.hpp"
@@ -48,6 +49,8 @@ void Thing::killed(Thingp defeater, const char *reason)
   } else {
     err("Thing has no level");
   }
+
+  auto o_top = top_owner();
 
   ///////////////////////////////////////////////////////////////
   // WARNING: defeater can be nullptr
@@ -291,6 +294,10 @@ void Thing::killed(Thingp defeater, const char *reason)
           msg("%%fg=red$RIP: You are killed %s.%%fg=reset$", reason);
         }
       }
+    } else if (o_top && (o_top->is_player())) {
+      msg("Your %s is destroyed.", text_long_name().c_str());
+    } else if (o_top && (o_top->is_monst())) {
+      msg("%s %ss is destroyed.", pluralise(o_top->text_The()).c_str(), text_long_name().c_str());
     }
 
     //

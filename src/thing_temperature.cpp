@@ -228,7 +228,7 @@ void Thing::temperature_tick(void)
 
   if ((thing_temp <= -200) && is_stone()) {
     if (thing_check_for_heat_dmg()) {
-      auto damage = abs(thing_temp) / 10;
+      auto damage = abs(thing_temp) / 20;
       popup("Crack!");
       dbg("Apply cold damage");
       TRACE_AND_INDENT();
@@ -239,7 +239,7 @@ void Thing::temperature_tick(void)
 
   if ((thing_temp <= -100) && is_wooden()) {
     if (thing_check_for_heat_dmg()) {
-      auto damage = abs(thing_temp) / 10;
+      auto damage = abs(thing_temp) / 20;
       popup("Shatter!");
       dbg("Apply cold damage");
       TRACE_AND_INDENT();
@@ -250,7 +250,7 @@ void Thing::temperature_tick(void)
 
   if ((thing_temp <= -50) && is_humanoid()) {
     if (thing_check_for_cold_dmg()) {
-      auto damage = abs(thing_temp) / 10;
+      auto damage = abs(thing_temp) / 20;
       dbg("Apply cold damage");
       TRACE_AND_INDENT();
       is_attacked_with_dmg_cold(this, this, damage);
@@ -266,7 +266,7 @@ void Thing::temperature_tick(void)
 
   if ((thing_temp <= -20) && is_plant()) {
     if (thing_check_for_cold_dmg()) {
-      auto damage = abs(thing_temp) / 10;
+      auto damage = abs(thing_temp) / 20;
       dbg("Apply cold damage");
       TRACE_AND_INDENT();
       is_attacked_with_dmg_cold(this, this, damage);
@@ -277,7 +277,7 @@ void Thing::temperature_tick(void)
 
   if ((thing_temp <= 0) && is_gelatinous()) {
     if (thing_check_for_cold_dmg()) {
-      auto damage = abs(thing_temp) / 10;
+      auto damage = abs(thing_temp) / 20;
       dbg("Apply cold damage");
       TRACE_AND_INDENT();
       is_attacked_with_dmg_cold(this, this, damage);
@@ -287,7 +287,7 @@ void Thing::temperature_tick(void)
   }
 
   if ((thing_temp < TEMPERATURE_THRESHOLD) && is_fire()) {
-    auto damage = abs(thing_temp) / 10;
+    auto damage = abs(thing_temp) / 20;
     dbg("Apply cold damage");
     TRACE_AND_INDENT();
     is_attacked_with_dmg_cold(this, this, damage);
@@ -296,7 +296,7 @@ void Thing::temperature_tick(void)
 
   if ((thing_temp > 0) && is_block_of_ice()) {
     if (thing_check_for_heat_dmg()) {
-      auto damage = abs(thing_temp) / 10;
+      auto damage = abs(thing_temp) / 20;
       dbg("Apply heat damage");
       TRACE_AND_INDENT();
       is_attacked_with_dmg_heat(this, this, damage);
@@ -307,7 +307,7 @@ void Thing::temperature_tick(void)
 
   if ((thing_temp >= 20) && is_plant()) {
     if (thing_check_for_heat_dmg()) {
-      auto damage = abs(thing_temp) / 10;
+      auto damage = abs(thing_temp) / 20;
       dbg("Apply heat damage");
       TRACE_AND_INDENT();
       is_attacked_with_dmg_heat(this, this, damage);
@@ -318,7 +318,7 @@ void Thing::temperature_tick(void)
 
   if ((thing_temp >= 30) && is_gelatinous()) {
     if (thing_check_for_heat_dmg()) {
-      auto damage = abs(thing_temp) / 10;
+      auto damage = abs(thing_temp) / 20;
       dbg("Apply heat damage");
       TRACE_AND_INDENT();
       is_attacked_with_dmg_heat(this, this, damage);
@@ -330,7 +330,7 @@ void Thing::temperature_tick(void)
   if ((thing_temp >= 50) && is_humanoid()) {
     dbg("Check for heat damage");
     if (thing_check_for_heat_dmg()) {
-      auto damage = abs(thing_temp) / 10;
+      auto damage = abs(thing_temp) / 20;
       dbg("Apply heat damage");
       TRACE_AND_INDENT();
       is_attacked_with_dmg_heat(this, this, damage);
@@ -378,7 +378,7 @@ void Thing::temperature_tick(void)
 
   if ((thing_temp >= 100) && is_wooden()) {
     if (thing_check_for_heat_dmg()) {
-      auto damage = abs(thing_temp) / 10;
+      auto damage = abs(thing_temp) / 20;
       popup("Burn!");
       dbg("Apply heat damage");
       TRACE_AND_INDENT();
@@ -389,7 +389,7 @@ void Thing::temperature_tick(void)
 
   if ((thing_temp >= 200) && is_stone()) {
     if (thing_check_for_heat_dmg()) {
-      auto damage = abs(thing_temp) / 10;
+      auto damage = abs(thing_temp) / 20;
       popup("Crack!");
       dbg("Apply heat damage");
       TRACE_AND_INDENT();
@@ -400,7 +400,7 @@ void Thing::temperature_tick(void)
 
   if ((thing_temp >= 100) && is_able_to_burn()) {
     if (thing_check_for_heat_dmg()) {
-      auto damage = abs(thing_temp) / 10;
+      auto damage = abs(thing_temp) / 20;
       popup("Burn!");
       dbg("Apply heat damage");
       TRACE_AND_INDENT();
@@ -411,7 +411,7 @@ void Thing::temperature_tick(void)
 
   if ((thing_temp >= 50) && is_able_to_melt()) {
     if (thing_check_for_heat_dmg()) {
-      auto damage = abs(thing_temp) / 10;
+      auto damage = abs(thing_temp) / 20;
       popup("Melt!");
       dbg("Apply heat damage");
       TRACE_AND_INDENT();

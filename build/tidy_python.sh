@@ -516,9 +516,9 @@ do
       unused_flag10 \
       unused_flag11 \
       unused_flag12 \
-      unused_flag123 \
+      is_daring \
       unused_flag13 \
-      unused_flag14 \
+      is_cautious \
       is_ranged_weapon \
       is_able_to_use_ranged_weapons \
       is_aerodynamic \

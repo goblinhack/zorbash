@@ -221,6 +221,7 @@ PyObject *thing_is_burnt(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_carnivorous_plant(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_carrying_an_item(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_carrying_treasure(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_cautious(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_chasm(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cloak(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cold(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -243,6 +244,7 @@ PyObject *thing_is_cursor_path_hazard(PyObject *obj, PyObject *args, PyObject *k
 PyObject *thing_is_cursor_path(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cursor(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dagger(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_daring(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dead_on_end_of_anim(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dead_on_falling(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dead_or_dying_on_shove(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -583,10 +585,8 @@ PyObject *thing_top_owner_id_get(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_unfreeze(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag10(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag11(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag123(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag12(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag13(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag14(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag1(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag27(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag2(PyObject *obj, PyObject *args, PyObject *keywds);

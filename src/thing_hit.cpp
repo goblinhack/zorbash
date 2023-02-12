@@ -203,9 +203,6 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   } else if (attack_options->attack[ THING_ATTACK_FIRE ]) {
     real_hitter->total_dmg_for_on_attacking_dmg_fire(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_fire(hitter, real_hitter, damage);
-  } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
-    real_hitter->total_dmg_for_on_attacking_dmg_heat(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_heat(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
     real_hitter->total_dmg_for_on_attacking_dmg_crush(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_crush(hitter, real_hitter, damage);
@@ -258,6 +255,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
     real_hitter->total_dmg_for_on_attacking_dmg_missile(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_missile(hitter, real_hitter, damage);
+  } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
+    real_hitter->total_dmg_for_on_attacking_dmg_heat(victim, damage);
+    damage = victim->total_dmg_for_on_receiving_dmg_heat(hitter, real_hitter, damage);
   } else {
     //
     // The real hitter could be a sword. The hitter, the player.
@@ -459,48 +459,6 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   }
 
   /////////////////////////////////////////////////////////////////////////
-  // Fire damage
-  /////////////////////////////////////////////////////////////////////////
-  if (attack_options->attack[ THING_ATTACK_HEAT ]) {
-    attack_set = true;
-    if (is_immune_to_fire()) {
-      if (real_hitter->is_player()) {
-        if (is_player()) {
-          msg("You are immune to heat!");
-        } else if (is_alive_monst()) {
-          msg("%s is immune to heat damage!", text_The().c_str());
-        } else {
-          dbg("Is immune to heat damage");
-        }
-      }
-      return false;
-    }
-
-    if (! damage) {
-      if (is_player()) {
-        msg("You take no heat damage!");
-      } else if (real_hitter->is_player()) {
-        msg("%s takes no heat damage!", text_The().c_str());
-      } else {
-        dbg("Takes no heat damage");
-      }
-      return false;
-    }
-
-    IF_DEBUG { real_hitter->log("Attack dmg_heat damage %d on %s", damage, to_short_string().c_str()); }
-    dmg_type = "heat ";
-
-    if (temperature_sensitive()) {
-      if ((temperature_get() < -TEMPERATURE_THRESHOLD) || was_frozen || is_frozen ||
-          dmg_received_doubled_from_fire()) {
-        dmg_type = "double " + dmg_type;
-        damage *= 2;
-        dbg("Double damage from heat");
-      }
-    }
-  }
-
-  /////////////////////////////////////////////////////////////////////////
   // Crush damage
   /////////////////////////////////////////////////////////////////////////
   if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
@@ -518,26 +476,6 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     }
     IF_DEBUG { real_hitter->log("Attack dmg_crush damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "crush ";
-  }
-
-  /////////////////////////////////////////////////////////////////////////
-  // Crush damage
-  /////////////////////////////////////////////////////////////////////////
-  if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
-    attack_set = true;
-
-    if (! damage || is_very_hard()) {
-      if (is_player()) {
-        msg("The missile bounces off of you!");
-      } else if (real_hitter->is_player()) {
-        msg("The missile bounces off of %s!", text_the().c_str());
-      } else {
-        msg("The missile bounces off of %s!", text_the().c_str());
-      }
-      return false;
-    }
-    IF_DEBUG { real_hitter->log("Attack dmg_missile damage %d on %s", damage, to_short_string().c_str()); }
-    dmg_type = "impact ";
   }
 
   /////////////////////////////////////////////////////////////////////////
@@ -810,6 +748,68 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     }
     IF_DEBUG { real_hitter->log("Attack stamina damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "draining ";
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // Missile damage
+  /////////////////////////////////////////////////////////////////////////
+  if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
+    attack_set = true;
+
+    if (! damage || is_very_hard()) {
+      if (is_player()) {
+        msg("The missile bounces off of you!");
+      } else if (real_hitter->is_player()) {
+        msg("The missile bounces off of %s!", text_the().c_str());
+      } else {
+        msg("The missile bounces off of %s!", text_the().c_str());
+      }
+      return false;
+    }
+    IF_DEBUG { real_hitter->log("Attack dmg_missile damage %d on %s", damage, to_short_string().c_str()); }
+    dmg_type = "impact ";
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // Heat damage
+  /////////////////////////////////////////////////////////////////////////
+  if (attack_options->attack[ THING_ATTACK_HEAT ]) {
+    attack_set = true;
+    if (is_immune_to_fire()) {
+      if (real_hitter->is_player()) {
+        if (is_player()) {
+          msg("You are immune to heat!");
+        } else if (is_alive_monst()) {
+          msg("%s is immune to heat damage!", text_The().c_str());
+        } else {
+          dbg("Is immune to heat damage");
+        }
+      }
+      return false;
+    }
+
+    if (! damage) {
+      if (is_player()) {
+        msg("You take no heat damage!");
+      } else if (real_hitter->is_player()) {
+        msg("%s takes no heat damage!", text_The().c_str());
+      } else {
+        dbg("Takes no heat damage");
+      }
+      return false;
+    }
+
+    IF_DEBUG { real_hitter->log("Attack dmg_heat damage %d on %s", damage, to_short_string().c_str()); }
+    dmg_type = "heat ";
+
+    if (temperature_sensitive()) {
+      if ((temperature_get() < -TEMPERATURE_THRESHOLD) || was_frozen || is_frozen ||
+          dmg_received_doubled_from_fire()) {
+        dmg_type = "double " + dmg_type;
+        damage *= 2;
+        dbg("Double damage from heat");
+      }
+    }
   }
 
   /////////////////////////////////////////////////////////////////////////
@@ -1264,6 +1264,10 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           msg("%%fg=red$%s strikes you with %s!%%fg=reset$", real_hitter->text_The().c_str(),
               hitter->text_the().c_str());
           // popup("%%fg=red$Drown!");
+        } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
+          msg("%%fg=red$%s burns you with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+              hitter->text_the().c_str());
+          // popup("%%fg=red$Drown!");
         } else {
           msg("%%fg=red$%s %s you fatally!%%fg=reset$", real_hitter->text_The().c_str(),
               real_hitter->text_hits().c_str());
@@ -1354,6 +1358,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
           msg("%%fg=orange$%s strikes you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
               damage, dmg_type.c_str(), hitter->text_the().c_str());
+        } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
+          msg("%%fg=orange$%s burns you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
+              dmg_type.c_str(), hitter->text_the().c_str());
         } else {
           msg("%%fg=orange$%s %s you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(),
               real_hitter->text_hits().c_str(), damage, dmg_type.c_str());
@@ -1409,9 +1416,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
         msg("Your %s is being drowned.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
-        msg("Your %s is struck down.", text_long_name().c_str());
+        msg("Your %s is struck.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
-        msg("Your %s is burnt.", text_long_name().c_str());
+        msg("Your %s burns.", text_long_name().c_str());
       } else {
         msg("Your %s is being damaged.", text_long_name().c_str());
       }
@@ -1481,6 +1488,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
             real_hitter->msg("You drown %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
           } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
             real_hitter->msg("You strike down %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+          } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
+            real_hitter->msg("You burn down %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
           } else if (hitter->is_weapon()) {
             real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
           } else if (hitter->is_laser()) {
@@ -1599,9 +1608,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
         msg("Your %s is being drowned.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
-        msg("Your %s is struck down.", text_long_name().c_str());
+        msg("Your %s is struck.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
-        msg("Your %s is burnt.", text_long_name().c_str());
+        msg("Your %s burns.", text_long_name().c_str());
       } else {
         msg("Your %s is being damaged.", text_long_name().c_str());
       }
@@ -1635,9 +1644,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
         msg("Your %s is being drowned.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
-        msg("Your %s is struck down.", text_long_name().c_str());
+        msg("Your %s is struck.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
-        msg("Your %s is burnt.", text_long_name().c_str());
+        msg("Your %s burns.", text_long_name().c_str());
       } else {
         msg("Your %s is being damaged.", text_long_name().c_str());
       }
@@ -1672,6 +1681,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         real_hitter->msg("%s is drowning.", text_The().c_str());
       } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
         real_hitter->msg("%s is struck.", text_The().c_str());
+      } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
+        real_hitter->msg("%s burns.", text_The().c_str());
       } else {
         real_hitter->msg("%s is hitting itself.", text_The().c_str());
       }
@@ -1926,12 +1937,12 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         reason = "by draining";
       } else if (attack_options->attack[ THING_ATTACK_NATURAL ]) {
         reason = "by over friendly biting";
-      } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
-        reason = "by being burnt";
       } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
         reason = "by drowning";
       } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
         reason = "by a missile";
+      } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
+        reason = "by burning";
       } else {
         reason = "by something unknown";
       }

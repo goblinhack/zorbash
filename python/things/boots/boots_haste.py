@@ -30,6 +30,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_biome_dungeon(self, True)
     my.is_biome_swamp(self, True)
     my.is_boots(self, True)
+    my.health_initial_dice(self, "50")
     my.is_collectable(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_droppable(self, True)

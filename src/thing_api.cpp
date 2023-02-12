@@ -1341,10 +1341,10 @@ int Thing::unused_flag13(void)
   return (tp()->unused_flag13());
 }
 
-int Thing::unused_flag14(void)
+int Thing::is_cautious(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag14());
+  return (tp()->is_cautious());
 }
 
 int Thing::is_ranged_weapon(void)
@@ -1892,10 +1892,10 @@ int Thing::is_able_to_teleport_escape(void)
   return (tp()->is_able_to_teleport_escape());
 }
 
-int Thing::unused_flag123(void)
+int Thing::is_daring(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag123());
+  return (tp()->is_daring());
 }
 
 int Thing::is_monst_pack(void)

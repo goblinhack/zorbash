@@ -103,6 +103,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_loggable(self, True)
     my.is_magical(self, True)
     my.is_staff(self, True)
+    my.health_initial_dice(self, "50")
     my.is_target_select(self, True)
     my.is_throwable(self, True)
     my.is_tickable(self, True)  # So it can interact with fire

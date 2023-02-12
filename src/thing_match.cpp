@@ -682,7 +682,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag13() && (what == "unused_flag13")) {
     return true;
   }
-  if (unused_flag14() && (what == "unused_flag14")) {
+  if (is_cautious() && (what == "is_cautious")) {
     return true;
   }
   if (is_ranged_weapon() && (what == "is_ranged_weapon")) {
@@ -949,7 +949,7 @@ bool Thing::matches(const std::string &what)
   if (is_able_to_teleport_escape() && (what == "is_able_to_teleport_escape")) {
     return true;
   }
-  if (unused_flag123() && (what == "unused_flag123")) {
+  if (is_daring() && (what == "is_daring")) {
     return true;
   }
   if (is_monst_pack() && (what == "is_monst_pack")) {
@@ -2150,8 +2150,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag11") {
     return &Thing::unused_flag11;
   }
-  if (what == "unused_flag123") {
-    return &Thing::unused_flag123;
+  if (what == "is_daring") {
+    return &Thing::is_daring;
   }
   if (what == "unused_flag12") {
     return &Thing::unused_flag12;
@@ -2159,8 +2159,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag13") {
     return &Thing::unused_flag13;
   }
-  if (what == "unused_flag14") {
-    return &Thing::unused_flag14;
+  if (what == "is_cautious") {
+    return &Thing::is_cautious;
   }
   if (what == "is_ranged_weapon") {
     return &Thing::is_ranged_weapon;
