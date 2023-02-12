@@ -238,11 +238,11 @@ void Game::place_player(void)
         auto d = level->thing_new("dogman", point(x + 2, y));
         d->wake("");
       }
-      level->thing_new("amulet_healing", point(x + 1, y - 3));
-      level->thing_new("amulet_peeking", point(x + 2, y - 3));
-      level->thing_new("amulet_endurance", point(x, y - 3));
-      level->thing_new("shield_eagle", point(x, y - 2));
       if (0) {
+        level->thing_new("amulet_healing", point(x + 1, y - 3));
+        level->thing_new("amulet_peeking", point(x + 2, y - 3));
+        level->thing_new("amulet_endurance", point(x, y - 3));
+        level->thing_new("shield_eagle", point(x, y - 2));
         level->thing_new("zorb_priest", point(x + 1, y + 3));
         level->thing_new("mummy_necro", point(x + 1, y));
         level->thing_new("reaper", point(x + 3, y));
