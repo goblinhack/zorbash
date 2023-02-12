@@ -1142,16 +1142,26 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   auto o_top = top_owner();
   if (is_dead || is_dying) {
+    //
+    // Limit to posessions and not things like a sword thing animation.
+    //
     dbg("Dead or dying");
-    if (o_top && o_top->is_player()) {
-      dbg("Player is onwer of dead or dying thing");
-      if (! o_top->is_dead && ! o_top->is_dying) {
-        msg("Your %s is destroyed!", text_long_name().c_str());
-      }
-    } else if (o_top && o_top->is_monst()) {
-      dbg("Monst is onwer of dead or dying thing");
-      if (! o_top->is_dead && ! o_top->is_dying) {
-        msg("%s %s is destroyed!", apostrophise(o_top->text_The()).c_str(), text_long_name().c_str());
+    TRACE_AND_INDENT();
+
+    if (is_item()) {
+      dbg("Dead or dying item");
+      TRACE_AND_INDENT();
+
+      if (o_top && o_top->is_player()) {
+        dbg("Player is onwer of dead or dying thing");
+        if (! o_top->is_dead && ! o_top->is_dying) {
+          msg("Your %s is destroyed!", text_long_name().c_str());
+        }
+      } else if (o_top && o_top->is_monst()) {
+        dbg("Monst is onwer of dead or dying thing");
+        if (! o_top->is_dead && ! o_top->is_dying) {
+          msg("%s %s is destroyed!", apostrophise(o_top->text_The()).c_str(), text_long_name().c_str());
+        }
       }
     }
   }

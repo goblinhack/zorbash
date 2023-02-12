@@ -105,6 +105,7 @@ def tp_init(name, text_long_name):
     my.is_red_blooded(self, True)
     my.is_shovable(self, True)
     my.is_tickable(self, True)
+    my.is_cautious(self, True)
     my.jump_distance(self, 2)
     my.move_speed(self, 200)
     my.noise_decibels_hearing(self, 10)

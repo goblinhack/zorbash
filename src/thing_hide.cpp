@@ -13,7 +13,9 @@ void Thing::hide(void)
     return;
   }
 
-  dbg("Hide");
+  if (is_loggable()) {
+    dbg("Hide");
+  }
 
   level_pop();
   is_hidden = true;

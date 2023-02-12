@@ -15,7 +15,9 @@ void Thing::visible(void)
     return;
   }
 
-  dbg("Visible");
+  if (is_loggable()) {
+    dbg("Visible");
+  }
 
   //
   // If this thing has an owner, should the thing stay hidden?

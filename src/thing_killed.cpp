@@ -294,9 +294,9 @@ void Thing::killed(Thingp defeater, const char *reason)
           msg("%%fg=red$RIP: You are killed %s.%%fg=reset$", reason);
         }
       }
-    } else if (o_top && (o_top->is_player())) {
+    } else if (is_item() && o_top && (o_top->is_player())) {
       msg("Your %s is destroyed.", text_long_name().c_str());
-    } else if (o_top && (o_top->is_monst())) {
+    } else if (is_item() && o_top && (o_top->is_monst())) {
       msg("%s %ss is destroyed.", pluralise(o_top->text_The()).c_str(), text_long_name().c_str());
     }
 
@@ -372,7 +372,7 @@ void Thing::killed(Thingp defeater, const char *reason)
             //
             // Already logged
             //
-          } else if (top_owner() == defeater) {
+          } else if (is_item() && top_owner() == defeater) {
             msg("Your %s is destroyed.", text_short_name().c_str());
           } else {
             msg("%s is destroyed %s.", The_no_dying.c_str(), reason);

@@ -28,9 +28,6 @@ void Thing::temperature_tick(void)
     return;
   }
 
-  dbg("Temperature tick");
-  TRACE_AND_INDENT();
-
   auto initial_temp = initial_temperature_get();
   auto current_temp = temperature_get();
 
@@ -78,23 +75,26 @@ void Thing::temperature_tick(void)
 
     //
     // If the player is standing in the same tile as a torch, don't burn them.
+    // Same goes for things like treasure chests on the same tile as a torch.
     //
-    if (is_player() || is_monst()) {
-      if (t->is_torch()) {
-        if (is_combustible()) {
-          //
-          // But make exceptions for combustible things so that they will react to a flaming torch.
-          //
-        } else if (is_frozen) {
-          //
-          // Make another exception for frozen things so they can defrost.
-          //
-        } else {
-          //
-          // Ignore the torch.
-          //
-          continue;
-        }
+    if (t->is_torch()) {
+      if (is_combustible()) {
+        //
+        // But make exceptions for combustible things so that they will react to a flaming torch.
+        //
+      } else if (is_able_to_melt()) {
+        //
+        // Ice?
+        //
+      } else if (is_frozen) {
+        //
+        // Make another exception for frozen things so they can defrost.
+        //
+      } else {
+        //
+        // Ignore the torch.
+        //
+        continue;
       }
     }
 
@@ -195,6 +195,9 @@ void Thing::temperature_tick(void)
     return;
   }
 
+  dbg("Temperature tick, my temp %d, location temp: %d", thing_temp, location_temp);
+  TRACE_AND_INDENT();
+
   //
   // Items being carried in side a chest are insulated.
   //
@@ -202,9 +205,6 @@ void Thing::temperature_tick(void)
   if (owner && owner->is_bag_item_container()) {
     thing_temp = TEMPERATURE_ROOM;
   }
-
-  dbg("Temperature tick, my temp %d, location temp: %d", thing_temp, location_temp);
-  TRACE_AND_INDENT();
 
   //
   // Over time we gradually get closer to the location temperature.
