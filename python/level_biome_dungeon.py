@@ -41,7 +41,7 @@ import my
 # SKILLSTONE                    &
 # SPIDERWEB                     X
 # STAFF                         /
-# TRAP                          t
+# TELEPORT                      T
 # TREASURE_CLASS_A              $
 # TREASURE_CLASS_B              2
 # TREASURE_CLASS_C              3
@@ -49,33 +49,6 @@ import my
 # WEAPON_CLASS_A                (
 # WEAPON_CLASS_B                )
 # WEAPON_CLASS_C                -
-
-#
-# User defined rooms (todo)
-#
-# def add_room():
-#    def add_things():
-#        my.room_add_thing(name="skeleton1", rel_coord=True, x=4, y=1)
-#
-#    my.map_load_room(entrance=True,
-#                     name="skel1",
-#                     on_create=add_things,
-#                     room_data=[
-#                         "             ",
-#                         "    ......   ",
-#                         "    ....S.   ",
-#                         "    ......   ",
-#                         "    ......   ",
-#                         " <........   ",
-#                         "    ......   ",
-#                         "    ......   ",
-#                         "    ......   ",
-#                         "      .      ",
-#                         "      v      ",
-#                         "             ",
-#                         "             ",
-#                         ])
-# add_room()
 
 #
 #  entrance rooms

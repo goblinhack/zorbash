@@ -580,11 +580,11 @@ public:
   bool teleport_carefree(TeleportReason, point to, bool *too_far);
   bool teleport_carefully(TeleportReason, point to);
   bool teleport_carefully(TeleportReason, point to, bool *too_far);
-  bool teleport(TeleportReason, point to, bool *too_far);
   bool teleport_randomly_away_from_player(TeleportReason);
   bool teleport_randomly(TeleportReason, float max_distance = 0.0);
   bool teleport_randomly_towards_player(TeleportReason);
   bool teleport_self(TeleportReason, Thingp it = nullptr);
+  bool teleport(TeleportReason, point to, bool *too_far);
   bool temperature_max_is_set(void);
   bool temperature_min_is_set(void);
   bool thing_check_for_cold_dmg(void);

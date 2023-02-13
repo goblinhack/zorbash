@@ -51,7 +51,7 @@ def tp_init(name, text_long_name, tiles=[]):
 
     delay = 60
     for t in tiles:
-        colors = ["yellow", "red", "orange", "yellow", "white"]
+        colors = ["yellow", "red", "orange", "orange", "yellow", "white"]
         color = random.choice(colors)
         my.tile(self,
                 ascii_fg_char="#", ascii_bg_col_name="", ascii_fg_col_name=color,

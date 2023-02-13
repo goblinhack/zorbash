@@ -476,11 +476,9 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
   if (d1000() < chance_d1000_teleport_attack()) {
     TeleportReason reason;
     reason.teleport_attack = true;
-    if (victim->teleport_randomly(reason, teleport_distance())) {
+    if (victim->teleport_randomly(reason, teleport_distance_with_modifiers_get())) {
       if (victim->is_player()) {
-        msg("Your stomach lurches as you de-materialize!");
-      } else if (victim->is_monst()) {
-        msg("%s vanishes!", text_The().c_str());
+        msg("Your stomach lurches!");
       }
       return true;
     }

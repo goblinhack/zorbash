@@ -92,21 +92,25 @@ void Level::display_pixelart_lasers(point tl, point br)
         continue;
       }
 
-      Tilep tile;
+      Tilep tile = nullptr;
 
       TRACE_NO_INDENT();
-      if (animstep == 1) {
-        tile = get(l.tiles, frame, 0);
-      } else if ((animstep >= steps) || (animstep >= (int) l.tiles.size())) {
-        tile = get(l.tiles, frame, Laser::max_frames - 1);
-      } else if (animstep >= (int) l.tiles.size()) {
-        tile = get(l.tiles, frame, (frame % (l.tiles.size() - 2)) + 1);
-      } else {
-        tile = get(l.tiles, frame, animstep);
+      if (frame < (int) l.tiles.size()) {
+        if (animstep == 1) {
+          tile = get(l.tiles, frame, 0);
+        } else if ((animstep >= steps) || (animstep >= (int) l.tiles.size())) {
+          tile = get(l.tiles, frame, Laser::max_frames - 1);
+        } else if (animstep >= (int) l.tiles.size()) {
+          tile = get(l.tiles, frame, (frame % (l.tiles.size() - 2)) + 1);
+        } else {
+          tile = get(l.tiles, frame, animstep);
+        }
       }
 
       if (unlikely(! tile)) {
-        t->err("No tile for laser, animstep %d, frame %d, steps %d", animstep, frame, (int) steps);
+        if (t) {
+          t->err("No tile for laser, animstep %d, frame %d, steps %d", animstep, frame, (int) steps);
+        }
         break;
       }
 

@@ -11,17 +11,18 @@
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
 <!-- - dimension portal                                                                                                                           -->
+<!-- - teleport block                                                                                                                             -->
+<!-- - cloak of jelly                                                                                                                             -->
+<!-- - sword of jelly                                                                                                                             -->
+<!-- - potion of paralysis                                                                                                                        -->
 <!-- - wort food ? fungas foods and some poisonous?                                                                                               -->
 <!-- - spider web spawn small spiders?                                                                                                            -->
 <!-- - monsters with random buffs like vampirism would be interesting                                                                             -->
 <!-- - vampiric damage                                                                                                                            -->
 <!-- - chaos bell of summoning                                                                                                                    -->
 <!-- - crystal chest needs crystal key                                                                                                            -->
-<!-- - teleport block                                                                                                                             -->
 <!-- - crystals walls (or chest) that reflect, so can use on yourself or ally                                                                     -->
-<!-- - cloak of jelly                                                                                                                             -->
 <!-- - need allies                                                                                                                                -->
-<!-- - potion of paralysis                                                                                                                        -->
 <!-- - cursed weapon with bad luck / horseshoe / witches hat?                                                                                     -->
 <!-- - luck trap                                                                                                                                  -->
 <!-- - luck and enchanted stuff                                                                                                                   -->

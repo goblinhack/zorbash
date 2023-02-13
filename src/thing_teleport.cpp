@@ -68,14 +68,14 @@ int Thing::teleport_distance_get(void)
   }
 
   auto dist = teleport_distance();
-  // con("TELEPORT %d", dist);
+  // dbg("TELEPORT %d", dist);
 
   FOR_ALL_EQUIP(e)
   {
     auto it = equip_get(e);
     if (it) {
       dist += it->teleport_distance_get();
-      // it->con("TELEPORT %d", dist);
+      // it->dbg("TELEPORT %d", dist);
     }
   }
 
@@ -91,7 +91,7 @@ int Thing::teleport_distance_get(void)
           continue;
         }
         dist += it->teleport_distance_get();
-        // it->con("TELEPORT %d", dist);
+        // it->dbg("TELEPORT %d", dist);
       }
     }
 
@@ -100,7 +100,7 @@ int Thing::teleport_distance_get(void)
       auto it = level->thing_find(id);
       if (it) {
         dist += it->teleport_distance_get();
-        // it->con("TELEPORT %d", dist);
+        // it->dbg("TELEPORT %d", dist);
       }
     }
 
@@ -109,7 +109,7 @@ int Thing::teleport_distance_get(void)
       auto it = level->thing_find(id);
       if (it) {
         dist += it->teleport_distance_get();
-        // it->con("TELEPORT %d", dist);
+        // it->dbg("TELEPORT %d", dist);
       }
     }
 
@@ -118,7 +118,7 @@ int Thing::teleport_distance_get(void)
       auto it = level->thing_find(id);
       if (it) {
         dist += it->teleport_distance_get();
-        // it->con("TELEPORT %d", dist);
+        // it->dbg("TELEPORT %d", dist);
       }
     }
   }
@@ -278,24 +278,33 @@ bool Thing::teleport(TeleportReason reason, point to, bool *too_far)
   float d    = teleport_distance_with_modifiers_get();
   float dist = distance(curr_at, to);
 
-  if (dist > d) {
-    auto u = (to - curr_at);
-    u.unit();
-    u *= d;
-    to = curr_at + u;
-    x  = to.x;
-    y  = to.y;
+  if (reason.teleport_attack) {
+    //
+    // No limit if you are being teleported.
+    //
+  } else {
+    //
+    // Limit the distance
+    //
+    if (dist > d) {
+      auto u = (to - curr_at);
+      u.unit();
+      u *= d;
+      to = curr_at + u;
+      x  = to.x;
+      y  = to.y;
 
-    if (reason.teleport_carefully) {
-      if (is_player() && game->robot_mode) {
-        dbg("Robot: Cannot teleport as far as it would like");
-      }
-      if (too_far) {
-        *too_far = true;
-      }
-      if (! teleporting_home) {
-        dbg("Too far");
-        return false;
+      if (reason.teleport_carefully) {
+        if (is_player() && game->robot_mode) {
+          dbg("Robot: Cannot teleport as far as it would like");
+        }
+        if (too_far) {
+          *too_far = true;
+        }
+        if (! teleporting_home) {
+          dbg("Too far");
+          return false;
+        }
       }
     }
   }
@@ -411,7 +420,7 @@ bool Thing::teleport_carefree(TeleportReason reason, point p)
   return teleport(reason, p, nullptr);
 }
 
-bool Thing::teleport_randomly(TeleportReason reason, float max_distance)
+bool Thing::teleport_randomly(TeleportReason reason, float max_distance_in)
 {
   TRACE_NO_INDENT();
 
@@ -423,17 +432,44 @@ bool Thing::teleport_randomly(TeleportReason reason, float max_distance)
 
   idle_count_set(0);
 
-  if (! max_distance) {
+  int max_distance;
+  if (max_distance_in == 0.0) {
     max_distance = teleport_distance_with_modifiers_get();
+  } else {
+    max_distance = (int) max_distance_in;
   }
 
   int tries = max_distance * max_distance;
 
   while (tries-- > 0) {
-    int x = pcg_random_range(curr_at.x - max_distance, curr_at.x + max_distance);
-    int y = pcg_random_range(curr_at.y - max_distance, curr_at.y + max_distance);
-    if (teleport_carefully(reason, point(x, y))) {
-      return true;
+    int   x = pcg_random_range(curr_at.x - max_distance, curr_at.x + max_distance);
+    int   y = pcg_random_range(curr_at.y - max_distance, curr_at.y + max_distance);
+    point to(x, y);
+
+    //
+    // Too close.
+    //
+    if (distance(to, curr_at) <= 2) {
+      continue;
+    }
+
+    if (reason.teleport_attack) {
+      //
+      // Too cruel to teleport attack into solid objects ?
+      //
+      if (d100() < 95) {
+        if (level->is_obs_wall_or_door(to) || level->is_obs_destructable(to)) {
+          continue;
+        }
+      }
+
+      if (teleport_carefree(reason, to)) {
+        return true;
+      }
+    } else {
+      if (teleport_carefully(reason, to)) {
+        return true;
+      }
     }
   }
 

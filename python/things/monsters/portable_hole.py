@@ -9,7 +9,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.ai_wanderer(self, True)
     my.attack_humanoid(self, True)
     my.attacks_per_round(self, 1)
-    my.chance_d1000_teleport_attack(self, 100)
+    my.chance_d1000_teleport_attack(self, 1000)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.distance_vision(self, 8)
@@ -70,13 +70,13 @@ def tp_init(name, text_long_name, text_short_name):
             ascii_fg_char="O", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="0", ascii_bg_col_name="", ascii_fg_col_name="red",
+            ascii_fg_char="o", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="O", ascii_bg_col_name="", ascii_fg_col_name="green",
+            ascii_fg_char=".", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".3", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="0", ascii_bg_col_name="", ascii_fg_col_name="blue",
+            ascii_fg_char="o", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".4", delay_ms=delay)
 
     my.tp_update(self)

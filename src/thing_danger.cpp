@@ -69,6 +69,9 @@ int Tp::get_danger_level(void)
   if (is_always_submerged()) {
     danger_level *= 2;
   }
+  if (is_able_to_teleport_attack()) {
+    danger_level *= 2;
+  }
 
   danger_level += aggression_pct() / 10;
 
@@ -172,6 +175,9 @@ int Thing::danger_initial_level(void)
   if (is_always_submerged()) {
     danger_level *= 2;
   }
+  if (is_able_to_teleport_attack()) {
+    danger_level *= 2;
+  }
 
   danger_level += dmg_max();
 
@@ -271,6 +277,9 @@ int Thing::danger_current_level(void)
     danger_level /= 2;
   }
   if (is_always_submerged()) {
+    danger_level *= 2;
+  }
+  if (is_able_to_teleport_attack()) {
     danger_level *= 2;
   }
 

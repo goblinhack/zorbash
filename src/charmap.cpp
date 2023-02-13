@@ -253,7 +253,7 @@ void Charmap::init_charmaps(void)
   c->c         = char_index;
   c->is_barrel = true;
 
-  char_index = Charmap::TRAP;
+  char_index = Charmap::TELEPORT;
   c          = &all_charmaps[ char_index ];
   c->c       = char_index;
   c->is_trap = true;

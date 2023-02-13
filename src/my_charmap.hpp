@@ -56,7 +56,7 @@ public:
     SEWER               = 'O',
     SHALLOW_WATER       = 'w',
     SPACE               = ' ',
-    TRAP                = 't',
+    TELEPORT            = 't',
     TREASURE_CLASS_A    = '$',
     TREASURE_CLASS_B    = '2',
     TREASURE_CLASS_C    = '3',

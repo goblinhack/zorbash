@@ -760,6 +760,8 @@ void Thing::move_to_immediately(point to)
   auto delta = to - curr_at;
   move_set_dir_from_dest_or_delta(delta);
 
+  // dbg("Move imediately to %s", to.to_string().c_str());
+
   //
   // Don't check for descending here as that check will be set when falling
   //
