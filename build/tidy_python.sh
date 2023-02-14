@@ -514,7 +514,7 @@ do
       tick_prio \
       unused_flag1 \
       unused_flag10 \
-      unused_flag11 \
+      is_enchantable_as_a_group \
       is_able_to_teleport_attack \
       is_daring \
       is_obsidian \

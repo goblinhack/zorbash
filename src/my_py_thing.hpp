@@ -293,6 +293,7 @@ PyObject *thing_is_eater_of_shields(PyObject *obj, PyObject *args, PyObject *key
 PyObject *thing_is_eater_of_staffs(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_eater_of_treasure(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_eater_of_weapons(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_enchantable_as_a_group(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_enchantable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_enchantstone(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_engulfer(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -586,7 +587,6 @@ PyObject *thing_tick_prio(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_top_owner_id_get(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unfreeze(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag10(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag11(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag1(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag27(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag2(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -1323,10 +1323,10 @@ int Thing::unused_flag10(void)
   return (tp()->unused_flag10());
 }
 
-int Thing::unused_flag11(void)
+int Thing::is_enchantable_as_a_group(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag11());
+  return (tp()->is_enchantable_as_a_group());
 }
 
 int Thing::is_able_to_teleport_attack(void)

@@ -673,7 +673,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag10() && (what == "unused_flag10")) {
     return true;
   }
-  if (unused_flag11() && (what == "unused_flag11")) {
+  if (is_enchantable_as_a_group() && (what == "is_enchantable_as_a_group")) {
     return true;
   }
   if (is_able_to_teleport_attack() && (what == "is_able_to_teleport_attack")) {
@@ -2132,8 +2132,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag10") {
     return &Thing::unused_flag10;
   }
-  if (what == "unused_flag11") {
-    return &Thing::unused_flag11;
+  if (what == "is_enchantable_as_a_group") {
+    return &Thing::is_enchantable_as_a_group;
   }
   if (what == "is_daring") {
     return &Thing::is_daring;

@@ -1375,6 +1375,7 @@ public:
   int is_eater_of_staffs(void);
   int is_eater_of_treasure(void);
   int is_eater_of_weapons(void);
+  int is_enchantable_as_a_group(void);
   int is_enchantable(void);
   int is_enchantstone(void);
   int is_engulfer(void);
@@ -1982,7 +1983,6 @@ public:
   int unused_chance6_d1000(void);
   int unused_flag103(void);
   int unused_flag10(void);
-  int unused_flag11(void);
   int unused_flag1(void);
   int unused_flag27(void);
   int unused_flag2(void);

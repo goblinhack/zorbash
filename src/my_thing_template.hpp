@@ -387,6 +387,7 @@ private:
   int _is_eater_of_treasure {};
   int _is_eater_of_weapons {};
   int _is_enchantable {};
+  int _is_enchantable_as_a_group {};
   int _is_enchantstone {};
   int _is_engulfer {};
   int _is_ethereal {};
@@ -635,7 +636,6 @@ private:
   int _unused_flag1 {};
   int _unused_flag10 {};
   int _unused_flag103 {};
-  int _unused_flag11 {};
   int _unused_flag2 {};
   int _unused_flag27 {};
   int _unused_flag3 {};
@@ -1457,6 +1457,7 @@ public:
   int is_eater_of_staffs(void) const;
   int is_eater_of_treasure(void) const;
   int is_eater_of_weapons(void) const;
+  int is_enchantable_as_a_group(void) const;
   int is_enchantable(void) const;
   int is_enchantstone(void) const;
   int is_engulfer(void) const;
@@ -1704,7 +1705,6 @@ public:
   int unused_chance6_d1000(void) const;
   int unused_flag103(void) const;
   int unused_flag10(void) const;
-  int unused_flag11(void) const;
   int unused_flag1(void) const;
   int unused_flag27(void) const;
   int unused_flag2(void) const;
@@ -2000,6 +2000,7 @@ public:
   void is_eater_of_staffs_set(int v);
   void is_eater_of_treasure_set(int v);
   void is_eater_of_weapons_set(int v);
+  void is_enchantable_as_a_group_set(int v);
   void is_enchantable_set(int v);
   void is_enchantstone_set(int v);
   void is_engulfer_set(int v);
@@ -2396,7 +2397,6 @@ public:
   void unused_chance6_d1000_set(int v);
   void unused_flag103_set(int v);
   void unused_flag10_set(int v);
-  void unused_flag11_set(int v);
   void unused_flag1_set(int v);
   void unused_flag27_set(int v);
   void unused_flag2_set(int v);

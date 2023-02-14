@@ -180,6 +180,7 @@ void Game::wid_enchant_an_item(void)
 
   enchant_items.clear();
   std::map< Thingp, bool > found;
+  std::map< Tpp, bool >    found_group;
 
   FOR_ALL_EQUIP(e)
   {
@@ -191,12 +192,27 @@ void Game::wid_enchant_an_item(void)
       if (! t->is_enchantable()) {
         continue;
       }
+
+      //
+      // Only show one dart, not all of them
+      //
+      if (t->is_enchantable_as_a_group()) {
+        if (found_group.find(t->tp()) != found_group.end()) {
+          continue;
+        }
+      }
+
+      //
+      // Don't over enchant
+      //
       if (t->enchant_max_current_get()) {
         if (t->enchant_count_get() >= t->enchant_max_current_get()) {
           continue;
         }
       }
-      found[ t ] = true;
+
+      found[ t ]             = true;
+      found_group[ t->tp() ] = true;
       enchant_items.push_back(t);
     }
   }
@@ -215,12 +231,23 @@ void Game::wid_enchant_an_item(void)
         if (! t->is_enchantable()) {
           continue;
         }
+
+        //
+        // Only show one dart, not all of them
+        //
+        if (t->is_enchantable_as_a_group()) {
+          if (found_group.find(t->tp()) != found_group.end()) {
+            continue;
+          }
+        }
+
         if (t->enchant_max_current_get()) {
           if (t->enchant_count_get() >= t->enchant_max_current_get()) {
             continue;
           }
         }
-        found[ t ] = true;
+        found[ t ]             = true;
+        found_group[ t->tp() ] = true;
         enchant_items.push_back(t);
       }
     }
@@ -235,12 +262,23 @@ void Game::wid_enchant_an_item(void)
         if (! t->is_enchantable()) {
           continue;
         }
+
+        //
+        // Only show one dart, not all of them
+        //
+        if (t->is_enchantable_as_a_group()) {
+          if (found_group.find(t->tp()) != found_group.end()) {
+            continue;
+          }
+        }
+
         if (t->enchant_max_current_get()) {
           if (t->enchant_count_get() >= t->enchant_max_current_get()) {
             continue;
           }
         }
-        found[ t ] = true;
+        found[ t ]             = true;
+        found_group[ t->tp() ] = true;
         enchant_items.push_back(t);
       }
     }
@@ -255,12 +293,23 @@ void Game::wid_enchant_an_item(void)
         if (! t->is_enchantable()) {
           continue;
         }
+
+        //
+        // Only show one dart, not all of them
+        //
+        if (t->is_enchantable_as_a_group()) {
+          if (found_group.find(t->tp()) != found_group.end()) {
+            continue;
+          }
+        }
+
         if (t->enchant_max_current_get()) {
           if (t->enchant_count_get() >= t->enchant_max_current_get()) {
             continue;
           }
         }
-        found[ t ] = true;
+        found[ t ]             = true;
+        found_group[ t->tp() ] = true;
         enchant_items.push_back(t);
       }
     }
@@ -275,12 +324,23 @@ void Game::wid_enchant_an_item(void)
         if (! t->is_enchantable()) {
           continue;
         }
+
+        //
+        // Only show one dart, not all of them
+        //
+        if (t->is_enchantable_as_a_group()) {
+          if (found_group.find(t->tp()) != found_group.end()) {
+            continue;
+          }
+        }
+
         if (t->enchant_max_current_get()) {
           if (t->enchant_count_get() >= t->enchant_max_current_get()) {
             continue;
           }
         }
-        found[ t ] = true;
+        found[ t ]             = true;
+        found_group[ t->tp() ] = true;
         enchant_items.push_back(t);
       }
     }

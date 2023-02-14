@@ -461,6 +461,7 @@ int Tp::is_eater_of_shields(void) const { return _is_eater_of_shields; }
 int Tp::is_eater_of_staffs(void) const { return _is_eater_of_staffs; }
 int Tp::is_eater_of_treasure(void) const { return _is_eater_of_treasure; }
 int Tp::is_eater_of_weapons(void) const { return _is_eater_of_weapons; }
+int Tp::is_enchantable_as_a_group(void) const { return _is_enchantable_as_a_group; }
 int Tp::is_enchantable(void) const { return _is_enchantable; }
 int Tp::is_enchantstone(void) const { return _is_enchantstone; }
 int Tp::is_engulfer(void) const { return _is_engulfer; }
@@ -708,7 +709,6 @@ int Tp::unused_chance5_d1000(void) const { return _unused_chance5_d1000; }
 int Tp::unused_chance6_d1000(void) const { return _unused_chance6_d1000; }
 int Tp::unused_flag103(void) const { return _unused_flag103; }
 int Tp::unused_flag10(void) const { return _unused_flag10; }
-int Tp::unused_flag11(void) const { return _unused_flag11; }
 int Tp::unused_flag1(void) const { return _unused_flag1; }
 int Tp::unused_flag27(void) const { return _unused_flag27; }
 int Tp::unused_flag2(void) const { return _unused_flag2; }
@@ -1004,6 +1004,7 @@ void Tp::is_eater_of_shields_set(int v) { _is_eater_of_shields = v; }
 void Tp::is_eater_of_staffs_set(int v) { _is_eater_of_staffs = v; }
 void Tp::is_eater_of_treasure_set(int v) { _is_eater_of_treasure = v; }
 void Tp::is_eater_of_weapons_set(int v) { _is_eater_of_weapons = v; }
+void Tp::is_enchantable_as_a_group_set(int v) { _is_enchantable_as_a_group = v; }
 void Tp::is_enchantable_set(int v) { _is_enchantable = v; }
 void Tp::is_enchantstone_set(int v) { _is_enchantstone = v; }
 void Tp::is_engulfer_set(int v) { _is_engulfer = v; }
@@ -1397,7 +1398,6 @@ void Tp::unused_chance5_d1000_set(int v) { _unused_chance5_d1000 = v; }
 void Tp::unused_chance6_d1000_set(int v) { _unused_chance6_d1000 = v; }
 void Tp::unused_flag103_set(int v) { _unused_flag103 = v; }
 void Tp::unused_flag10_set(int v) { _unused_flag10 = v; }
-void Tp::unused_flag11_set(int v) { _unused_flag11 = v; }
 void Tp::unused_flag1_set(int v) { _unused_flag1 = v; }
 void Tp::unused_flag27_set(int v) { _unused_flag27 = v; }
 void Tp::unused_flag2_set(int v) { _unused_flag2 = v; }

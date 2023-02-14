@@ -27,6 +27,12 @@ void tp_fixup(void)
       }
     }
 
+    if (tp->is_enchantable()) {
+      if (tp->text_description_enchant().empty()) {
+        DIE("Tp %s needs enchant description", tp->name().c_str());
+      }
+    }
+
     if (tp->is_monst() || tp->is_monst_pack()) {
       tp->is_tickable_set(true);
     }

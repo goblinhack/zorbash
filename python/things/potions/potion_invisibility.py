@@ -44,18 +44,11 @@ def on_fall(me, x, y):
     explode(me, x, y)
 
 
-def on_enchant(me, x, y):
-    owner = my.thing_top_owner_id_get(me)
-    if my.thing_is_player(owner):
-        my.thing_msg(me, "The potion bubbles.")
-
-
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.collision_hit_priority(self, 5)
     my.collision_hit_priority(self, 6)
-    my.enchant_max(self, 5)
     my.environ_avoids_fire(self, 20)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
@@ -73,7 +66,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_crushable(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_droppable(self, True)
-    my.is_enchantable(self, True)
     my.is_glass(self, True)
     my.is_hittable(self, True)
     my.is_interesting(self, True)
@@ -90,7 +82,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.item_width(self, 4)
     my.noise_on_dropping(self, 10)
     my.normal_placement_rules(self, True)
-    my.on_enchant_do(self, "me.on_enchant()")
     my.on_fall_do(self, "me.on_fall()")
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_thrown_do(self, "me.on_thrown()")

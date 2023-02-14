@@ -146,6 +146,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.range_max(self, 7)
     my.text_a_or_an(self, "a")
+    my.text_description_enchant(self, "+1 radius")
     my.text_description_long(self, "This most dangerous staff can transport its target to the next level by the most efficacious means possible...")
     my.text_description_short(self, "A staff of descent.")
     my.tick_prio(self, my.MAP_TICK_PRIO_LOW)

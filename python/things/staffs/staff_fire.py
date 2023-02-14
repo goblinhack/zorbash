@@ -132,6 +132,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.target_name_projectile(self, "staff_fire_projectile")
     my.temperature(self, 30)
     my.text_a_or_an(self, "a")
+    my.text_description_enchant(self, "+1 radius")
     my.text_description_long(self, "Discharges a single fireball at an ungrateful recipient...")
     my.text_description_short(self, "A staff of fire.")
     my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
