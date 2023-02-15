@@ -513,7 +513,7 @@ do
       temperature_sensitive_to_sudden_changes \
       tick_prio \
       unused_flag1 \
-      unused_flag10 \
+      effect_has_blast_radius \
       is_enchantable_as_a_group \
       is_able_to_teleport_attack \
       is_daring \

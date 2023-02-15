@@ -2,6 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_english.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_python.hpp"
@@ -42,16 +43,41 @@ void Thing::on_enchant(void)
   }
 }
 
-bool Thing::enchant_with_stone(Thingp what)
+void Thing::enchant_common(Thingp what)
 {
   if (is_player()) {
-    msg("You enchant %s.", what->text_the().c_str());
+    if (what->is_enchantable_as_a_group()) {
+      msg("You enchant all of your %s.", pluralise(what->text_the()).c_str());
+    } else {
+      msg("You enchant %s.", what->text_the().c_str());
+    }
   }
+}
+
+bool Thing::enchant_with_stone(Thingp what)
+{
+  enchant_common(what);
   TRACE_AND_INDENT();
 
-  what->on_enchant();
-  what->enchant_count_incr(1);
-  what->damaged_count_set(0);
+  //
+  // Enchant one dart, you enchant them all
+  //
+  if (what->is_enchantable_as_a_group()) {
+    for (const auto t : carried_and_equipped_item_vector()) {
+      if (t->tp() == what->tp()) {
+        t->on_enchant();
+        t->enchant_count_incr(1);
+        t->damaged_count_set(0);
+      }
+    }
+  } else {
+    //
+    // Single item enchant.
+    //
+    what->on_enchant();
+    what->enchant_count_incr(1);
+    what->damaged_count_set(0);
+  }
 
   if (is_player()) {
     sound_play("powerup");
@@ -80,14 +106,28 @@ bool Thing::enchant_with_stone(Thingp what)
 
 bool Thing::enchant_without_stone(Thingp what)
 {
-  if (is_player()) {
-    msg("You enchant %s.", what->text_the().c_str());
-  }
+  enchant_common(what);
   TRACE_AND_INDENT();
 
-  what->on_enchant();
-  what->enchant_count_incr(1);
-  what->damaged_count_set(0);
+  //
+  // Enchant one dart, you enchant them all
+  //
+  if (what->is_enchantable_as_a_group()) {
+    for (const auto t : carried_and_equipped_item_vector()) {
+      if (t->tp() == what->tp()) {
+        t->on_enchant();
+        t->enchant_count_incr(1);
+        t->damaged_count_set(0);
+      }
+    }
+  } else {
+    //
+    // Single item enchant.
+    //
+    what->on_enchant();
+    what->enchant_count_incr(1);
+    what->damaged_count_set(0);
+  }
 
   if (is_player()) {
     sound_play("powerup");

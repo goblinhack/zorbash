@@ -69,6 +69,7 @@ PyObject *thing_dmg_negation(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_dmg_poison(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_dmg_received_doubled_from_cold(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_dmg_water(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_effect_has_blast_radius(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_effect_radius_get(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_count_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_count_get(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -586,7 +587,6 @@ PyObject *thing_temperature_min(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *thing_tick_prio(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_top_owner_id_get(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unfreeze(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag10(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag1(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag27(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag2(PyObject *obj, PyObject *args, PyObject *keywds);

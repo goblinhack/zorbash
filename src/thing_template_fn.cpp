@@ -250,6 +250,7 @@ int Tp::dmg_received_doubled_from_fire(void) const { return _dmg_received_double
 int Tp::dmg_received_doubled_from_necrosis(void) const { return _dmg_received_doubled_from_necrosis; }
 int Tp::dmg_received_doubled_from_poison(void) const { return _dmg_received_doubled_from_poison; }
 int Tp::dmg_received_doubled_from_water(void) const { return _dmg_received_doubled_from_water; }
+int Tp::effect_has_blast_radius(void) const { return _effect_has_blast_radius; }
 int Tp::effect_radius(void) const { return _effect_radius; }
 int Tp::enchant_max(void) const { return _enchant_max; }
 int Tp::environ_avoids_acid(void) const { return _environ_avoids_acid; }
@@ -707,8 +708,7 @@ int Tp::unused_chance3_d1000(void) const { return _unused_chance3_d1000; }
 int Tp::unused_chance4_d1000(void) const { return _unused_chance4_d1000; }
 int Tp::unused_chance5_d1000(void) const { return _unused_chance5_d1000; }
 int Tp::unused_chance6_d1000(void) const { return _unused_chance6_d1000; }
-int Tp::unused_flag103(void) const { return _unused_flag103; }
-int Tp::unused_flag10(void) const { return _unused_flag10; }
+int Tp::unused_flag12(void) const { return _unused_flag12; }
 int Tp::unused_flag1(void) const { return _unused_flag1; }
 int Tp::unused_flag27(void) const { return _unused_flag27; }
 int Tp::unused_flag2(void) const { return _unused_flag2; }
@@ -787,6 +787,7 @@ void Tp::dmg_received_doubled_from_fire_set(int v) { _dmg_received_doubled_from_
 void Tp::dmg_received_doubled_from_necrosis_set(int v) { _dmg_received_doubled_from_necrosis = v; }
 void Tp::dmg_received_doubled_from_poison_set(int v) { _dmg_received_doubled_from_poison = v; }
 void Tp::dmg_received_doubled_from_water_set(int v) { _dmg_received_doubled_from_water = v; }
+void Tp::effect_has_blast_radius_set(int v) { _effect_has_blast_radius = v; }
 void Tp::effect_radius_set(int v) { _effect_radius = v; }
 void Tp::enchant_level_set(int v) { _enchant_level = v; }
 void Tp::enchant_max_set(int v) { _enchant_max = v; }
@@ -1396,8 +1397,7 @@ void Tp::unused_chance3_d1000_set(int v) { _unused_chance3_d1000 = v; }
 void Tp::unused_chance4_d1000_set(int v) { _unused_chance4_d1000 = v; }
 void Tp::unused_chance5_d1000_set(int v) { _unused_chance5_d1000 = v; }
 void Tp::unused_chance6_d1000_set(int v) { _unused_chance6_d1000 = v; }
-void Tp::unused_flag103_set(int v) { _unused_flag103 = v; }
-void Tp::unused_flag10_set(int v) { _unused_flag10 = v; }
+void Tp::unused_flag12_set(int v) { _unused_flag12 = v; }
 void Tp::unused_flag1_set(int v) { _unused_flag1 = v; }
 void Tp::unused_flag27_set(int v) { _unused_flag27 = v; }
 void Tp::unused_flag2_set(int v) { _unused_flag2 = v; }

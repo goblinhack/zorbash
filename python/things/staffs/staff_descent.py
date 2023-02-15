@@ -95,6 +95,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.chance_d10000_set_on_fire(self, 5000)
     my.charge_count(self, 3)
     my.collision_hit_priority(self, 6)
+    my.effect_has_blast_radius(self, True)
     my.equip_carry_anim(self, "staff_descent_carry")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)

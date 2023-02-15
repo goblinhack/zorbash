@@ -1090,6 +1090,7 @@ public:
   int dmg_received_doubled_from_poison(void);
   int dmg_received_doubled_from_water(void);
   int dmg_water(void);
+  int effect_has_blast_radius(void);
   int effect_radius(void);
   int enchant_count_decr(int);
   int enchant_count_decr(void);
@@ -1981,8 +1982,7 @@ public:
   int unused_chance4_d1000(void);
   int unused_chance5_d1000(void);
   int unused_chance6_d1000(void);
-  int unused_flag103(void);
-  int unused_flag10(void);
+  int unused_flag12(void);
   int unused_flag1(void);
   int unused_flag27(void);
   int unused_flag2(void);
@@ -2208,6 +2208,7 @@ public:
   // begin sort marker8 {
   void achieve_goals_in_death(void);
   void achieve_goals_in_life(void);
+  void enchant_common(Thingp);
   void acid_tick(void);
   void add_avoid(Thingp attacker);
   void add_enemy(Thingp attacker, bool is_recursing = false);

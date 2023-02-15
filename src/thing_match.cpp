@@ -670,7 +670,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag9() && (what == "unused_flag9")) {
     return true;
   }
-  if (unused_flag10() && (what == "unused_flag10")) {
+  if (effect_has_blast_radius() && (what == "effect_has_blast_radius")) {
     return true;
   }
   if (is_enchantable_as_a_group() && (what == "is_enchantable_as_a_group")) {
@@ -2129,8 +2129,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "tick_prio") {
     return &Thing::tick_prio;
   }
-  if (what == "unused_flag10") {
-    return &Thing::unused_flag10;
+  if (what == "effect_has_blast_radius") {
+    return &Thing::effect_has_blast_radius;
   }
   if (what == "is_enchantable_as_a_group") {
     return &Thing::is_enchantable_as_a_group;

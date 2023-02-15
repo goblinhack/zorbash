@@ -15,7 +15,6 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.collision_hit_priority(self, 5)
     my.collision_hit_priority(self, 6)
-    my.effect_radius(self, 2)
     my.equip_carry_anim(self, "ring_shield_carry")
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)

@@ -172,6 +172,7 @@ private:
   int _dmg_received_doubled_from_necrosis {};
   int _dmg_received_doubled_from_poison {};
   int _dmg_received_doubled_from_water {};
+  int _effect_has_blast_radius {};
   int _effect_radius {};
   int _enchant_level {};
   int _enchant_max {};
@@ -634,8 +635,7 @@ private:
   int _unused_chance5_d1000 {};
   int _unused_chance6_d1000 {};
   int _unused_flag1 {};
-  int _unused_flag10 {};
-  int _unused_flag103 {};
+  int _unused_flag12 {};
   int _unused_flag2 {};
   int _unused_flag27 {};
   int _unused_flag3 {};
@@ -1245,6 +1245,7 @@ public:
   int dmg_received_doubled_from_necrosis(void) const;
   int dmg_received_doubled_from_poison(void) const;
   int dmg_received_doubled_from_water(void) const;
+  int effect_has_blast_radius(void) const;
   int effect_radius(void) const;
   int enchant_max(void) const;
   int environ_avoids_acid(void) const;
@@ -1703,8 +1704,7 @@ public:
   int unused_chance4_d1000(void) const;
   int unused_chance5_d1000(void) const;
   int unused_chance6_d1000(void) const;
-  int unused_flag103(void) const;
-  int unused_flag10(void) const;
+  int unused_flag12(void) const;
   int unused_flag1(void) const;
   int unused_flag27(void) const;
   int unused_flag2(void) const;
@@ -1783,6 +1783,7 @@ public:
   void dmg_received_doubled_from_necrosis_set(int v);
   void dmg_received_doubled_from_poison_set(int v);
   void dmg_received_doubled_from_water_set(int v);
+  void effect_has_blast_radius_set(int v);
   void effect_radius_set(int v);
   void enchant_level_set(int v);
   void enchant_max_set(int v);
@@ -2395,8 +2396,7 @@ public:
   void unused_chance4_d1000_set(int v);
   void unused_chance5_d1000_set(int v);
   void unused_chance6_d1000_set(int v);
-  void unused_flag103_set(int v);
-  void unused_flag10_set(int v);
+  void unused_flag12_set(int v);
   void unused_flag1_set(int v);
   void unused_flag27_set(int v);
   void unused_flag2_set(int v);

@@ -229,7 +229,9 @@ int Thing::effect_radius(void)
   TRACE_NO_INDENT();
 
   int radius = tp()->effect_radius();
-  radius += enchant_count_get();
+  if (tp()->effect_has_blast_radius()) {
+    radius += enchant_count_get();
+  }
   return radius;
 }
 
@@ -293,10 +295,10 @@ int Thing::gfx_pixelart_bounce_on_move(void)
   return (tp()->gfx_pixelart_bounce_on_move());
 }
 
-int Thing::unused_flag103(void)
+int Thing::unused_flag12(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag103());
+  return (tp()->unused_flag12());
 }
 
 int Thing::gfx_pixelart_flickers(void)
@@ -1317,10 +1319,10 @@ int Thing::unused_flag9(void)
   return (tp()->unused_flag9());
 }
 
-int Thing::unused_flag10(void)
+int Thing::effect_has_blast_radius(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag10());
+  return (tp()->effect_has_blast_radius());
 }
 
 int Thing::is_enchantable_as_a_group(void)
