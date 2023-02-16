@@ -250,6 +250,7 @@ std::initializer_list< std::string > tps = {
     "mummy",
     "mummy_necro",
     "mummy_pack",
+    "ogre",
     "onion",
     "orange_slices",
     "peach",
