@@ -198,7 +198,7 @@ void Game::place_player(void)
         auto b = level->thing_new("bag_s", point(x, y));
         t->carry(b);
       }
-      if (1) {
+      if (0) {
         auto b = level->thing_new("enchantstone", point(x, y));
         t->carry(b);
       }
@@ -241,6 +241,7 @@ void Game::place_player(void)
         d->wake("");
       }
       if (0) {
+        level->thing_new("ogre", point(x + 2, y));
         level->thing_new("amulet_healing", point(x + 1, y - 3));
         level->thing_new("amulet_peeking", point(x + 2, y - 3));
         level->thing_new("amulet_endurance", point(x, y - 3));
