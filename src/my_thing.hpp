@@ -2208,7 +2208,6 @@ public:
   // begin sort marker8 {
   void achieve_goals_in_death(void);
   void achieve_goals_in_life(void);
-  void enchant_common(Thingp);
   void acid_tick(void);
   void add_avoid(Thingp attacker);
   void add_enemy(Thingp attacker, bool is_recursing = false);
@@ -2310,6 +2309,7 @@ public:
   void drop_all(void);
   void dump_equip(void);
   void dump(std::string prefix, std::ostream &out);
+  void enchant_common(Thingp);
   void enchant_randomly(void);
   void enemies_tick(void);
   void equip_carry_anim_id_set(ThingId equip_carry_anim_id, int equip);
