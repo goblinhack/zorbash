@@ -24,7 +24,10 @@ int Tp::get_danger_level(void)
   if (is_spiderweb()) {
     danger_level += 5;
   }
-  if (is_resurrectable()) {
+  if (is_able_to_be_resurrected()) {
+    danger_level *= 2;
+  }
+  if (is_able_to_regenerate()) {
     danger_level *= 2;
   }
   if (is_able_to_shove()) {
@@ -121,7 +124,10 @@ int Thing::danger_initial_level(void)
   if (is_spiderweb()) {
     danger_level += 5;
   }
-  if (is_resurrectable()) {
+  if (is_able_to_be_resurrected()) {
+    danger_level *= 2;
+  }
+  if (is_able_to_regenerate()) {
     danger_level *= 2;
   }
   if (is_able_to_shove()) {
@@ -225,7 +231,10 @@ int Thing::danger_current_level(void)
   if (is_spiderweb()) {
     danger_level += 5;
   }
-  if (is_resurrectable()) {
+  if (is_able_to_be_resurrected()) {
+    danger_level *= 2;
+  }
+  if (is_able_to_regenerate()) {
     danger_level *= 2;
   }
   if (is_able_to_shove()) {

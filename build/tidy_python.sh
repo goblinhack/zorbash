@@ -176,7 +176,7 @@ do
       is_able_to_break_down_doors \
       is_able_to_break_out_of_ice \
       is_able_to_break_out_of_webs \
-      is_able_to_burn \
+      is_burnable \
       is_able_to_change_levels \
       is_able_to_collect_keys \
       is_able_to_enchant_items \
@@ -424,7 +424,7 @@ do
       is_red_blooded \
       is_red_splatter \
       is_removable_if_out_of_slots \
-      is_resurrectable \
+      is_able_to_be_resurrected \
       is_ring \
       is_ripple \
       is_rock \
@@ -538,12 +538,12 @@ do
       unused_flag3 \
       unused_flag4 \
       unused_flag40 \
-      unused_flag48 \
+      is_able_to_regenerate \
       unused_flag5 \
       unused_flag6 \
       unused_flag7 \
       unused_flag8 \
-      unused_flag9
+      is_mimic
     do
         grep -q $arg $PAYLOAD
         # Too much noise

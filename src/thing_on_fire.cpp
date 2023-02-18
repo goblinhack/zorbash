@@ -91,7 +91,7 @@ bool Thing::on_fire_set(const std::string &why)
     return false;
   }
 
-  if (! is_able_to_burn() && ! is_combustible()) {
+  if (! is_burnable() && ! is_combustible()) {
     return false;
   }
 

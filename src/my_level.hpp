@@ -48,7 +48,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_basalt {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_brazier {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_bridge {};
-  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_able_to_burn {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_burnable {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_chasm {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_cold {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_combustible {};
@@ -756,8 +756,6 @@ public:
   uint8_t heatmap(const point p);
   uint8_t heatmap_no_check(const int x, const int y);
   uint8_t heatmap_no_check(const point p);
-  uint8_t is_able_to_burn(const int x, const int y);
-  uint8_t is_able_to_burn(const point p);
   uint8_t is_able_to_stand_on(const int x, const int y);
   uint8_t is_able_to_stand_on(const point p);
   uint8_t is_acid(const int x, const int y);
@@ -777,6 +775,8 @@ public:
   uint8_t is_brazier_no_check(const int x, const int y);
   uint8_t is_bridge(const int x, const int y);
   uint8_t is_bridge(const point p);
+  uint8_t is_burnable(const int x, const int y);
+  uint8_t is_burnable(const point p);
   uint8_t is_carnivorous_plant(const int x, const int y);
   uint8_t is_carnivorous_plant(const point p);
   uint8_t is_chasm(const int x, const int y);
@@ -1001,8 +1001,6 @@ public:
   void heatmap_print(point at, point tl, point br);
   void heatmap_unset(const int x, const int y);
   void inventory_dump(void);
-  void is_able_to_burn_set(const int x, const int y);
-  void is_able_to_burn_unset(const int x, const int y);
   void is_able_to_stand_on_set(const int x, const int y);
   void is_able_to_stand_on_unset(const int x, const int y);
   void is_acid_set(const int x, const int y);
@@ -1021,6 +1019,8 @@ public:
   void is_brazier_unset(const int x, const int y);
   void is_bridge_set(const int x, const int y);
   void is_bridge_unset(const int x, const int y);
+  void is_burnable_set(const int x, const int y);
+  void is_burnable_unset(const int x, const int y);
   void is_carnivorous_plant_set(const int x, const int y);
   void is_carnivorous_plant_unset(const int x, const int y);
   void is_chasm_set(const int x, const int y);

@@ -80,6 +80,7 @@ private:
   Dice _dmg_water_dice {};
   Dice _gold_value_dice {};
   Dice _health_initial_dice {};
+  Dice _health_regenerate_amount_dice {};
   Dice _lifespan_dice {};
   Dice _nutrition_dice {};
   Dice _on_idle_tick_freq_dice {};
@@ -145,6 +146,7 @@ private:
   int _chance_d1000_jump_onto {};
   int _chance_d1000_jump_randomly {};
   int _chance_d1000_melting {};
+  int _chance_d1000_regenerate {};
   int _chance_d1000_shove {};
   int _chance_d1000_steal_item {};
   int _chance_d1000_teleport_attack {};
@@ -241,11 +243,11 @@ private:
   int _internal_has_hp_anim {};
   int _is_able_to_attack_mobs {};
   int _is_able_to_attack_owner {};
+  int _is_able_to_be_resurrected {};
   int _is_able_to_be_surprised {};
   int _is_able_to_break_down_doors {};
   int _is_able_to_break_out_of_ice {};
   int _is_able_to_break_out_of_webs {};
-  int _is_able_to_burn {};
   int _is_able_to_change_levels {};
   int _is_able_to_collect_keys {};
   int _is_able_to_enchant_items {};
@@ -264,6 +266,7 @@ private:
   int _is_able_to_melt {};
   int _is_able_to_move_diagonally {};
   int _is_able_to_open_doors {};
+  int _is_able_to_regenerate {};
   int _is_able_to_rest {};
   int _is_able_to_see_in_the_dark {};
   int _is_able_to_see_invisible {};
@@ -327,6 +330,7 @@ private:
   int _is_bridge {};
   int _is_brittle {};
   int _is_buff {};
+  int _is_burnable {};
   int _is_carnivorous_plant {};
   int _is_cautious {};
   int _is_chasm {};
@@ -458,6 +462,7 @@ private:
   int _is_map_treasure {};
   int _is_meat {};
   int _is_metal {};
+  int _is_mimic {};
   int _is_minion {};
   int _is_missile {};
   int _is_mob {};
@@ -503,7 +508,6 @@ private:
   int _is_red_blooded {};
   int _is_red_splatter {};
   int _is_removable_if_out_of_slots {};
-  int _is_resurrectable {};
   int _is_ring {};
   int _is_ripple {};
   int _is_rock {};
@@ -641,12 +645,10 @@ private:
   int _unused_flag3 {};
   int _unused_flag4 {};
   int _unused_flag40 {};
-  int _unused_flag48 {};
   int _unused_flag5 {};
   int _unused_flag6 {};
   int _unused_flag7 {};
   int _unused_flag8 {};
-  int _unused_flag9 {};
   int _weapon_dmg {};
   int _weapon_use_distance {};
   // end sort marker1 }
@@ -678,6 +680,7 @@ private:
   std::string _gfx_targetted_radial;
   std::string _gold_value_dice_str;
   std::string _health_initial_dice_str;
+  std::string _health_regenerate_amount_dice_str;
   std::string _is_allied_with;
   std::string _lifespan_dice_str;
   std::string _light_color;
@@ -826,6 +829,7 @@ private:
   std::string _text_description_short;
   std::string _text_hits;
   std::string _text_long_name;
+  std::string _text_real_name;
   std::string _text_short_name;
   std::string _text_skill;
   std::string _text_title;
@@ -882,6 +886,7 @@ public:
   const Dice &dmg_draining_dice(void) const;
   const Dice &dmg_poison_dice(void) const;
   const Dice &health_initial_dice(void) const;
+  const Dice &health_regenerate_amount_dice(void) const;
   const Dice &gold_value_dice(void) const;
   const Dice &lifespan_dice(void) const;
   const Dice &nutrition_dice(void) const;
@@ -911,6 +916,8 @@ public:
   const int dmg_poison(void) const;
   const int health_initial(void) const;
   const int health_initial_max_roll(void) const;
+  const int health_regenerate_amount(void) const;
+  const int health_regenerate_amount_max_roll(void) const;
   const int on_idle_tick_freq(void) const;
   const int spawn_group_size(void) const;
   const int lifespan(void) const;
@@ -970,6 +977,8 @@ public:
   void dmg_poison_dice_set(const std::string &);
   void gold_value_dice_set(const std::string &);
   void health_initial_dice_set(const std::string &);
+  void health_regenerate_amount_dice_set(const std::string &);
+  void chance_d1000_regenerate_set(const std::string &);
   void lifespan_dice_set(const std::string &);
   void nutrition_dice_set(const std::string &);
   void on_idle_tick_freq_dice_set(const std::string &);
@@ -1008,6 +1017,7 @@ public:
   const std::string &gfx_targetted_radial(void) const;
   const std::string &gold_value_dice_str(void) const;
   const std::string &health_initial_dice_str(void) const;
+  const std::string &health_regenerate_amount_dice_str(void) const;
   const std::string &is_allied_with(void) const;
   const std::string &lifespan_dice_str(void) const;
   const std::string &light_color(void) const;
@@ -1155,6 +1165,7 @@ public:
   const std::string &text_description_short(void) const;
   const std::string &text_hits(void) const;
   const std::string &text_long_name(void) const;
+  const std::string &text_real_name(void) const;
   const std::string &text_short_name(void) const;
   const std::string &text_skill(void) const;
   const std::string &text_title(void) const;
@@ -1219,6 +1230,7 @@ public:
   int chance_d1000_jump_onto(void) const;
   int chance_d1000_jump_randomly(void) const;
   int chance_d1000_melting(void) const;
+  int chance_d1000_regenerate(void) const;
   int chance_d1000_shove(void) const;
   int chance_d1000_steal_item(void) const;
   int chance_d1000_teleport_attack(void) const;
@@ -1312,11 +1324,11 @@ public:
   int internal_has_hp_anim(void) const;
   int is_able_to_attack_mobs(void) const;
   int is_able_to_attack_owner(void) const;
+  int is_able_to_be_resurrected(void) const;
   int is_able_to_be_surprised(void) const;
   int is_able_to_break_down_doors(void) const;
   int is_able_to_break_out_of_ice(void) const;
   int is_able_to_break_out_of_webs(void) const;
-  int is_able_to_burn(void) const;
   int is_able_to_change_levels(void) const;
   int is_able_to_collect_keys(void) const;
   int is_able_to_enchant_items(void) const;
@@ -1335,6 +1347,7 @@ public:
   int is_able_to_melt(void) const;
   int is_able_to_move_diagonally(void) const;
   int is_able_to_open_doors(void) const;
+  int is_able_to_regenerate(void) const;
   int is_able_to_rest(void) const;
   int is_able_to_see_in_the_dark(void) const;
   int is_able_to_see_invisible(void) const;
@@ -1398,6 +1411,7 @@ public:
   int is_bridge(void) const;
   int is_brittle(void) const;
   int is_buff(void) const;
+  int is_burnable(void) const;
   int is_carnivorous_plant(void) const;
   int is_cautious(void) const;
   int is_chasm(void) const;
@@ -1528,6 +1542,7 @@ public:
   int is_map_treasure(void) const;
   int is_meat(void) const;
   int is_metal(void) const;
+  int is_mimic(void) const;
   int is_minion(void) const;
   int is_missile(void) const;
   int is_mob_challenge_class_A(void) const;
@@ -1573,7 +1588,6 @@ public:
   int is_red_blood(void) const;
   int is_red_splatter(void) const;
   int is_removable_if_out_of_slots(void) const;
-  int is_resurrectable(void) const;
   int is_ring(void) const;
   int is_ripple(void) const;
   int is_rock(void) const;
@@ -1710,13 +1724,11 @@ public:
   int unused_flag2(void) const;
   int unused_flag3(void) const;
   int unused_flag40(void) const;
-  int unused_flag48(void) const;
   int unused_flag4(void) const;
   int unused_flag5(void) const;
   int unused_flag6(void) const;
   int unused_flag7(void) const;
   int unused_flag8(void) const;
-  int unused_flag9(void) const;
   int weapon_dmg(void) const;
   // end sort marker4 }
 
@@ -1756,6 +1768,7 @@ public:
   void chance_d1000_jump_onto_set(int v);
   void chance_d1000_jump_randomly_set(int v);
   void chance_d1000_melting_set(int v);
+  void chance_d1000_regenerate_set(int v);
   void chance_d1000_shove_set(int v);
   void chance_d1000_steal_item_set(int v);
   void chance_d1000_teleport_attack_set(int v);
@@ -1854,11 +1867,11 @@ public:
   void internal_has_hp_anim_set(int v);
   void is_able_to_attack_mobs_set(int v);
   void is_able_to_attack_owner_set(int v);
+  void is_able_to_be_resurrected_set(int v);
   void is_able_to_be_surprised_set(int v);
   void is_able_to_break_down_doors_set(int v);
   void is_able_to_break_out_of_ice_set(int v);
   void is_able_to_break_out_of_webs_set(int v);
-  void is_able_to_burn_set(int v);
   void is_able_to_change_levels_set(int v);
   void is_able_to_collect_keys_set(int v);
   void is_able_to_enchant_items_set(int v);
@@ -1877,6 +1890,7 @@ public:
   void is_able_to_melt_set(int v);
   void is_able_to_move_diagonally_set(int v);
   void is_able_to_open_doors_set(int v);
+  void is_able_to_regenerate_set(int v);
   void is_able_to_rest_set(int v);
   void is_able_to_see_in_the_dark_set(int v);
   void is_able_to_see_invisible_set(int v);
@@ -1941,6 +1955,7 @@ public:
   void is_bridge_set(int v);
   void is_brittle_set(int v);
   void is_buff_set(int v);
+  void is_burnable_set(int v);
   void is_carnivorous_plant_set(int v);
   void is_cautious_set(int v);
   void is_chasm_set(int v);
@@ -2071,6 +2086,7 @@ public:
   void is_map_treasure_set(int v);
   void is_meat_set(int v);
   void is_metal_set(int v);
+  void is_mimic_set(int v);
   void is_minion_set(int v);
   void is_missile_set(int v);
   void is_mob_challenge_class_A_set(int v);
@@ -2116,7 +2132,6 @@ public:
   void is_red_blood_set(int v);
   void is_red_splatter_set(int v);
   void is_removable_if_out_of_slots_set(int v);
-  void is_resurrectable_set(int v);
   void is_ring_set(int v);
   void is_ripple_set(int v);
   void is_rock_set(int v);
@@ -2381,6 +2396,7 @@ public:
   void text_description_short_set(const std::string &v);
   void text_hits_set(const std::string &v);
   void text_long_name_set(const std::string &v);
+  void text_real_name_set(const std::string &v);
   void text_short_name_set(const std::string &v);
   void text_skill_set(const std::string &v);
   void text_title_set(const std::string &v);
@@ -2402,13 +2418,11 @@ public:
   void unused_flag2_set(int v);
   void unused_flag3_set(int v);
   void unused_flag40_set(int v);
-  void unused_flag48_set(int v);
   void unused_flag4_set(int v);
   void unused_flag5_set(int v);
   void unused_flag6_set(int v);
   void unused_flag7_set(int v);
   void unused_flag8_set(int v);
-  void unused_flag9_set(int v);
   void weapon_dmg_set(int v);
   void weapon_use_distance_set(int v);
   void z_depth_set(int v);

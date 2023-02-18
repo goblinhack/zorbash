@@ -179,7 +179,7 @@ void Thing::temperature_tick(void)
     }
   }
 
-  if (is_able_to_burn()) {
+  if (is_burnable()) {
     if (is_dead || is_dying) {
       if (! is_burnt) {
         if (thing_temp > 0) {
@@ -398,7 +398,7 @@ void Thing::temperature_tick(void)
     }
   }
 
-  if ((thing_temp >= 100) && is_able_to_burn()) {
+  if ((thing_temp >= 100) && is_burnable()) {
     if (thing_check_for_heat_dmg()) {
       auto damage = abs(thing_temp) / 20;
       popup("Burn!");

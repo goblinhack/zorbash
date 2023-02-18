@@ -100,6 +100,14 @@ void Thing::achieve_goals_in_life(void)
   }
 
   //
+  // Regenerate health
+  //
+  health_regenerate();
+  if (is_dead) {
+    return;
+  }
+
+  //
   // Check stats don't get too low
   //
   stats_tick();
@@ -333,7 +341,7 @@ void Thing::tick(void)
     //
     // Resurrect things unless that can do unless that has been disabled e.g. via minion mob death
     //
-    if (! is_resurrection_blocked && is_resurrectable()) {
+    if (! is_resurrection_blocked && is_able_to_be_resurrected()) {
       //
       // Tick on player move/change of the current tick
       //

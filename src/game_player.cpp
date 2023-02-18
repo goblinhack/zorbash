@@ -240,8 +240,10 @@ void Game::place_player(void)
         auto d = level->thing_new("dogman", point(x + 2, y));
         d->wake("");
       }
+      level->thing_new("ogre", point(x + 2, y));
+      level->thing_new("gargoyle_baby", point(x + 2, y + 2));
+      level->thing_new("mimic", point(x - 2, y + 2));
       if (0) {
-        level->thing_new("ogre", point(x + 2, y));
         level->thing_new("amulet_healing", point(x + 1, y - 3));
         level->thing_new("amulet_peeking", point(x + 2, y - 3));
         level->thing_new("amulet_endurance", point(x, y - 3));

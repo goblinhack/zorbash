@@ -179,6 +179,7 @@ const std::string &Tp::text_description_long(void) const { return _text_descript
 const std::string &Tp::text_description_short(void) const { return _text_description_short; }
 const std::string &Tp::text_hits(void) const { return _text_hits; }
 const std::string &Tp::text_long_name(void) const { return _text_long_name; }
+const std::string &Tp::text_real_name(void) const { return _text_real_name; }
 const std::string &Tp::text_short_name(void) const { return _text_short_name; }
 const std::string &Tp::text_skill(void) const { return _text_skill; }
 const std::string &Tp::text_title(void) const { return _text_title; }
@@ -224,6 +225,7 @@ int Tp::chance_d1000_jump_on_low_hp(void) const { return _chance_d1000_jump_on_l
 int Tp::chance_d1000_jump_onto(void) const { return _chance_d1000_jump_onto; }
 int Tp::chance_d1000_jump_randomly(void) const { return _chance_d1000_jump_randomly; }
 int Tp::chance_d1000_melting(void) const { return _chance_d1000_melting; }
+int Tp::chance_d1000_regenerate(void) const { return _chance_d1000_regenerate; }
 int Tp::chance_d1000_shove(void) const { return _chance_d1000_shove; }
 int Tp::chance_d1000_steal_item(void) const { return _chance_d1000_steal_item; }
 int Tp::chance_d1000_teleport_attack(void) const { return _chance_d1000_teleport_attack; }
@@ -316,11 +318,11 @@ int Tp::internal_has_dir_anim(void) const { return _internal_has_dir_anim; }
 int Tp::internal_has_hp_anim(void) const { return _internal_has_hp_anim; }
 int Tp::is_able_to_attack_mobs(void) const { return _is_able_to_attack_mobs; }
 int Tp::is_able_to_attack_owner(void) const { return _is_able_to_attack_owner; }
+int Tp::is_able_to_be_resurrected(void) const { return _is_able_to_be_resurrected; }
 int Tp::is_able_to_be_surprised(void) const { return _is_able_to_be_surprised; }
 int Tp::is_able_to_break_down_doors(void) const { return _is_able_to_break_down_doors; }
 int Tp::is_able_to_break_out_of_ice(void) const { return _is_able_to_break_out_of_ice; }
 int Tp::is_able_to_break_out_of_webs(void) const { return _is_able_to_break_out_of_webs; }
-int Tp::is_able_to_burn(void) const { return _is_able_to_burn; }
 int Tp::is_able_to_change_levels(void) const { return _is_able_to_change_levels; }
 int Tp::is_able_to_collect_keys(void) const { return _is_able_to_collect_keys; }
 int Tp::is_able_to_enchant_items(void) const { return _is_able_to_enchant_items; }
@@ -339,6 +341,7 @@ int Tp::is_able_to_lunge(void) const { return _is_able_to_lunge; }
 int Tp::is_able_to_melt(void) const { return _is_able_to_melt; }
 int Tp::is_able_to_move_diagonally(void) const { return _is_able_to_move_diagonally; }
 int Tp::is_able_to_open_doors(void) const { return _is_able_to_open_doors; }
+int Tp::is_able_to_regenerate(void) const { return _is_able_to_regenerate; }
 int Tp::is_able_to_rest(void) const { return _is_able_to_rest; }
 int Tp::is_able_to_see_in_the_dark(void) const { return _is_able_to_see_in_the_dark; }
 int Tp::is_able_to_see_invisible(void) const { return _is_able_to_see_invisible; }
@@ -402,6 +405,7 @@ int Tp::is_brazier(void) const { return _is_brazier; }
 int Tp::is_bridge(void) const { return _is_bridge; }
 int Tp::is_brittle(void) const { return _is_brittle; }
 int Tp::is_buff(void) const { return _is_buff; }
+int Tp::is_burnable(void) const { return _is_burnable; }
 int Tp::is_carnivorous_plant(void) const { return _is_carnivorous_plant; }
 int Tp::is_cautious(void) const { return _is_cautious; }
 int Tp::is_chasm(void) const { return _is_chasm; }
@@ -532,6 +536,7 @@ int Tp::is_map_beast(void) const { return _is_map_beast; }
 int Tp::is_map_treasure(void) const { return _is_map_treasure; }
 int Tp::is_meat(void) const { return _is_meat; }
 int Tp::is_metal(void) const { return _is_metal; }
+int Tp::is_mimic(void) const { return _is_mimic; }
 int Tp::is_minion(void) const { return _is_minion; }
 int Tp::is_missile(void) const { return _is_missile; }
 int Tp::is_mob_challenge_class_A(void) const { return _is_mob_challenge_class_A; }
@@ -577,7 +582,6 @@ int Tp::is_red_blooded(void) const { return _is_red_blooded; }
 int Tp::is_red_blood(void) const { return _is_red_blood; }
 int Tp::is_red_splatter(void) const { return _is_red_splatter; }
 int Tp::is_removable_if_out_of_slots(void) const { return _is_removable_if_out_of_slots; }
-int Tp::is_resurrectable(void) const { return _is_resurrectable; }
 int Tp::is_ring(void) const { return _is_ring; }
 int Tp::is_ripple(void) const { return _is_ripple; }
 int Tp::is_rock(void) const { return _is_rock; }
@@ -714,13 +718,11 @@ int Tp::unused_flag27(void) const { return _unused_flag27; }
 int Tp::unused_flag2(void) const { return _unused_flag2; }
 int Tp::unused_flag3(void) const { return _unused_flag3; }
 int Tp::unused_flag40(void) const { return _unused_flag40; }
-int Tp::unused_flag48(void) const { return _unused_flag48; }
 int Tp::unused_flag4(void) const { return _unused_flag4; }
 int Tp::unused_flag5(void) const { return _unused_flag5; }
 int Tp::unused_flag6(void) const { return _unused_flag6; }
 int Tp::unused_flag7(void) const { return _unused_flag7; }
 int Tp::unused_flag8(void) const { return _unused_flag8; }
-int Tp::unused_flag9(void) const { return _unused_flag9; }
 int Tp::weapon_dmg(void) const { return _weapon_dmg; }
 // end sort marker2 }
 
@@ -760,6 +762,7 @@ void Tp::chance_d1000_jump_on_low_hp_set(int v) { _chance_d1000_jump_on_low_hp =
 void Tp::chance_d1000_jump_onto_set(int v) { _chance_d1000_jump_onto = v; }
 void Tp::chance_d1000_jump_randomly_set(int v) { _chance_d1000_jump_randomly = v; }
 void Tp::chance_d1000_melting_set(int v) { _chance_d1000_melting = v; }
+void Tp::chance_d1000_regenerate_set(int v) { _chance_d1000_regenerate = v; }
 void Tp::chance_d1000_shove_set(int v) { _chance_d1000_shove = v; }
 void Tp::chance_d1000_steal_item_set(int v) { _chance_d1000_steal_item = v; }
 void Tp::chance_d1000_teleport_attack_set(int v) { _chance_d1000_teleport_attack = v; }
@@ -858,11 +861,11 @@ void Tp::internal_has_dir_anim_set(int v) { _internal_has_dir_anim = v; }
 void Tp::internal_has_hp_anim_set(int v) { _internal_has_hp_anim = v; }
 void Tp::is_able_to_attack_mobs_set(int v) { _is_able_to_attack_mobs = v; }
 void Tp::is_able_to_attack_owner_set(int v) { _is_able_to_attack_owner = v; }
+void Tp::is_able_to_be_resurrected_set(int v) { _is_able_to_be_resurrected = v; }
 void Tp::is_able_to_be_surprised_set(int v) { _is_able_to_be_surprised = v; }
 void Tp::is_able_to_break_down_doors_set(int v) { _is_able_to_break_down_doors = v; }
 void Tp::is_able_to_break_out_of_ice_set(int v) { _is_able_to_break_out_of_ice = v; }
 void Tp::is_able_to_break_out_of_webs_set(int v) { _is_able_to_break_out_of_webs = v; }
-void Tp::is_able_to_burn_set(int v) { _is_able_to_burn = v; }
 void Tp::is_able_to_change_levels_set(int v) { _is_able_to_change_levels = v; }
 void Tp::is_able_to_collect_keys_set(int v) { _is_able_to_collect_keys = v; }
 void Tp::is_able_to_enchant_items_set(int v) { _is_able_to_enchant_items = v; }
@@ -881,6 +884,7 @@ void Tp::is_able_to_lunge_set(int v) { _is_able_to_lunge = v; }
 void Tp::is_able_to_melt_set(int v) { _is_able_to_melt = v; }
 void Tp::is_able_to_move_diagonally_set(int v) { _is_able_to_move_diagonally = v; }
 void Tp::is_able_to_open_doors_set(int v) { _is_able_to_open_doors = v; }
+void Tp::is_able_to_regenerate_set(int v) { _is_able_to_regenerate = v; }
 void Tp::is_able_to_rest_set(int v) { _is_able_to_rest = v; }
 void Tp::is_able_to_see_in_the_dark_set(int v) { _is_able_to_see_in_the_dark = v; }
 void Tp::is_able_to_see_invisible_set(int v) { _is_able_to_see_invisible = v; }
@@ -945,6 +949,7 @@ void Tp::is_brazier_set(int v) { _is_brazier = v; }
 void Tp::is_bridge_set(int v) { _is_bridge = v; }
 void Tp::is_brittle_set(int v) { _is_brittle = v; }
 void Tp::is_buff_set(int v) { _is_buff = v; }
+void Tp::is_burnable_set(int v) { _is_burnable = v; }
 void Tp::is_carnivorous_plant_set(int v) { _is_carnivorous_plant = v; }
 void Tp::is_cautious_set(int v) { _is_cautious = v; }
 void Tp::is_chasm_set(int v) { _is_chasm = v; }
@@ -1075,6 +1080,7 @@ void Tp::is_map_beast_set(int v) { _is_map_beast = v; }
 void Tp::is_map_treasure_set(int v) { _is_map_treasure = v; }
 void Tp::is_meat_set(int v) { _is_meat = v; }
 void Tp::is_metal_set(int v) { _is_metal = v; }
+void Tp::is_mimic_set(int v) { _is_mimic = v; }
 void Tp::is_minion_set(int v) { _is_minion = v; }
 void Tp::is_missile_set(int v) { _is_missile = v; }
 void Tp::is_mob_challenge_class_A_set(int v) { _is_mob_challenge_class_A = v; }
@@ -1120,7 +1126,6 @@ void Tp::is_red_blooded_set(int v) { _is_red_blooded = v; }
 void Tp::is_red_blood_set(int v) { _is_red_blood = v; }
 void Tp::is_red_splatter_set(int v) { _is_red_splatter = v; }
 void Tp::is_removable_if_out_of_slots_set(int v) { _is_removable_if_out_of_slots = v; }
-void Tp::is_resurrectable_set(int v) { _is_resurrectable = v; }
 void Tp::is_ring_set(int v) { _is_ring = v; }
 void Tp::is_ripple_set(int v) { _is_ripple = v; }
 void Tp::is_rock_set(int v) { _is_rock = v; }
@@ -1382,6 +1387,7 @@ void Tp::text_description_long_set(const std::string &v) { _text_description_lon
 void Tp::text_description_short_set(const std::string &v) { _text_description_short = v; }
 void Tp::text_hits_set(const std::string &v) { _text_hits = v; }
 void Tp::text_long_name_set(const std::string &v) { _text_long_name = v; }
+void Tp::text_real_name_set(const std::string &v) { _text_real_name = v; }
 void Tp::text_short_name_set(const std::string &v) { _text_short_name = v; }
 void Tp::text_skill_set(const std::string &v) { _text_skill = v; }
 void Tp::text_title_set(const std::string &v) { _text_title = v; }
@@ -1403,13 +1409,11 @@ void Tp::unused_flag27_set(int v) { _unused_flag27 = v; }
 void Tp::unused_flag2_set(int v) { _unused_flag2 = v; }
 void Tp::unused_flag3_set(int v) { _unused_flag3 = v; }
 void Tp::unused_flag40_set(int v) { _unused_flag40 = v; }
-void Tp::unused_flag48_set(int v) { _unused_flag48 = v; }
 void Tp::unused_flag4_set(int v) { _unused_flag4 = v; }
 void Tp::unused_flag5_set(int v) { _unused_flag5 = v; }
 void Tp::unused_flag6_set(int v) { _unused_flag6 = v; }
 void Tp::unused_flag7_set(int v) { _unused_flag7 = v; }
 void Tp::unused_flag8_set(int v) { _unused_flag8 = v; }
-void Tp::unused_flag9_set(int v) { _unused_flag9 = v; }
 void Tp::weapon_dmg_set(int v) { _weapon_dmg = v; }
 void Tp::weapon_use_distance_set(int v) { _weapon_use_distance = v; }
 void Tp::z_depth_set(int v) { z_depth = v; }

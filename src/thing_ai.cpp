@@ -980,6 +980,16 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           continue;
         }
 
+        //
+        // Mimics are ignored when asleep
+        //
+        if (! is_intelligent()) {
+          if (it->is_mimic() && it->is_sleeping) {
+            AI_LOG("My fellow minion", it);
+            continue;
+          }
+        }
+
         if (environ_avoids_fire()) {
           if (level->heatmap(curr_at)) {
             AI_LOG("Avoid heat at location", it);

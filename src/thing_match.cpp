@@ -235,7 +235,7 @@ bool Thing::matches(const std::string &what)
   if (is_buff() && (what == "is_buff")) {
     return true;
   }
-  if (is_able_to_burn() && (what == "is_able_to_burn")) {
+  if (is_burnable() && (what == "is_burnable")) {
     return true;
   }
   if (is_chasm() && (what == "is_chasm")) {
@@ -514,7 +514,7 @@ bool Thing::matches(const std::string &what)
   if (is_removable_if_out_of_slots() && (what == "is_removable_if_out_of_slots")) {
     return true;
   }
-  if (is_resurrectable() && (what == "is_resurrectable")) {
+  if (is_able_to_be_resurrected() && (what == "is_able_to_be_resurrected")) {
     return true;
   }
   if (is_ring() && (what == "is_ring")) {
@@ -667,7 +667,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag8() && (what == "unused_flag8")) {
     return true;
   }
-  if (unused_flag9() && (what == "unused_flag9")) {
+  if (is_mimic() && (what == "is_mimic")) {
     return true;
   }
   if (effect_has_blast_radius() && (what == "effect_has_blast_radius")) {
@@ -760,7 +760,7 @@ bool Thing::matches(const std::string &what)
   if (is_obs_for_shoving() && (what == "is_obs_for_shoving")) {
     return true;
   }
-  if (unused_flag48() && (what == "unused_flag48")) {
+  if (is_able_to_regenerate() && (what == "is_able_to_regenerate")) {
     return true;
   }
   if (is_always_submerged() && (what == "is_always_submerged")) {
@@ -1505,8 +1505,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_buff") {
     return &Thing::is_buff;
   }
-  if (what == "is_able_to_burn") {
-    return &Thing::is_able_to_burn;
+  if (what == "is_burnable") {
+    return &Thing::is_burnable;
   }
   if (what == "is_chasm") {
     return &Thing::is_chasm;
@@ -1913,8 +1913,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_removable_if_out_of_slots") {
     return &Thing::is_removable_if_out_of_slots;
   }
-  if (what == "is_resurrectable") {
-    return &Thing::is_resurrectable;
+  if (what == "is_able_to_be_resurrected") {
+    return &Thing::is_able_to_be_resurrected;
   }
   if (what == "is_ring") {
     return &Thing::is_ring;
@@ -2228,8 +2228,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_obs_for_shoving") {
     return &Thing::is_obs_for_shoving;
   }
-  if (what == "unused_flag48") {
-    return &Thing::unused_flag48;
+  if (what == "is_able_to_regenerate") {
+    return &Thing::is_able_to_regenerate;
   }
   if (what == "is_always_submerged") {
     return &Thing::is_always_submerged;
@@ -2339,8 +2339,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag8") {
     return &Thing::unused_flag8;
   }
-  if (what == "unused_flag9") {
-    return &Thing::unused_flag9;
+  if (what == "is_mimic") {
+    return &Thing::is_mimic;
   }
 
   DIE("could not find a matches function for [%s]", what.c_str());

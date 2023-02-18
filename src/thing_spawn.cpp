@@ -496,7 +496,7 @@ bool Thing::spawn_set_fire_to_things_around_me(const std::string &what, int radi
 
       FOR_ALL_NON_INTERNAL_THINGS(level, it, x, y)
       {
-        if (! it->is_combustible() && ! it->is_able_to_burn() && ! it->is_able_to_melt()) {
+        if (! it->is_combustible() && ! it->is_burnable() && ! it->is_able_to_melt()) {
           continue;
         }
 

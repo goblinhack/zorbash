@@ -123,7 +123,7 @@ void Thing::killed(Thingp defeater, const char *reason)
   //
   if (! is_resurrection_blocked) {
     TRACE_NO_INDENT();
-    if (is_resurrectable()) {
+    if (is_able_to_be_resurrected()) {
       tick_resurrect_when_set(game->tick_current + resurrect_when());
     }
   }

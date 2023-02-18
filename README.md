@@ -218,7 +218,7 @@ Current status:
 
 Content:
 <!-- begin type marker -->
-- 61 x monsters
+- 63 x monsters
 - 52 x food
 - 19 x treasure
 - 13 x weapons

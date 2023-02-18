@@ -593,10 +593,10 @@ int Thing::is_bridge(void)
   return (tp()->is_bridge());
 }
 
-int Thing::is_able_to_burn(void)
+int Thing::is_burnable(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_able_to_burn());
+  return (tp()->is_burnable());
 }
 
 int Thing::chance_d1000_carrier_of_treasure_class_A(void)
@@ -1181,10 +1181,10 @@ int Thing::is_removable_if_out_of_slots(void)
   return (tp()->is_removable_if_out_of_slots());
 }
 
-int Thing::is_resurrectable(void)
+int Thing::is_able_to_be_resurrected(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_resurrectable());
+  return (tp()->is_able_to_be_resurrected());
 }
 
 int Thing::is_resurrected_or_resurrecting(void)
@@ -1313,10 +1313,10 @@ int Thing::unused_flag8(void)
   return (tp()->unused_flag8());
 }
 
-int Thing::unused_flag9(void)
+int Thing::is_mimic(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag9());
+  return (tp()->is_mimic());
 }
 
 int Thing::effect_has_blast_radius(void)
@@ -1515,12 +1515,6 @@ int Thing::is_obs_for_shoving(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_obs_for_shoving());
-}
-
-int Thing::unused_flag48(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->unused_flag48());
 }
 
 int Thing::is_always_submerged(void)
@@ -4137,6 +4131,12 @@ const std::string &Thing::text_hits(void)
 {
   TRACE_NO_INDENT();
   return (tp()->text_hits());
+}
+
+const std::string &Thing::text_real_name(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->text_real_name());
 }
 
 const std::string &Thing::dmg_nat_att_type(void)

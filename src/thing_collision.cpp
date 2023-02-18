@@ -353,7 +353,7 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
     //
     dbg2("No collision; ignore corpse");
   } else if (is_fire() &&
-             (it->is_able_to_melt() || it->is_able_to_burn() || it->is_very_combustible() || it->is_combustible())) {
+             (it->is_able_to_melt() || it->is_burnable() || it->is_very_combustible() || it->is_combustible())) {
     //
     // Fire attack?
     //
@@ -363,7 +363,7 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
     } else {
       dbg2("No collision; cannot burn %s, no overlap", it->to_short_string().c_str());
     }
-  } else if (is_lava() && (it->is_able_to_burn() || it->is_very_combustible() || it->is_combustible())) {
+  } else if (is_lava() && (it->is_burnable() || it->is_very_combustible() || it->is_combustible())) {
     //
     // Fire attack?
     //

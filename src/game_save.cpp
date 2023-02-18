@@ -387,7 +387,6 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   shift  = 0;
   // clang-format off
   // begin sort marker3
-  bits64 |= (my.t->i_set_is_able_to_burn                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_acid                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_ascend_dungeon                ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_ascend_sewer                  ? 1LLU : 0LLU) << shift; shift++;
@@ -396,6 +395,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_block_of_ice                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_brazier                       ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_bridge                        ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_burnable                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_carnivorous_plant             ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_chasm                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_combustible                   ? 1LLU : 0LLU) << shift; shift++;
@@ -556,7 +556,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_basalt);
   out << bits(my.t->_is_brazier);
   out << bits(my.t->_is_bridge);
-  out << bits(my.t->_is_able_to_burn);
+  out << bits(my.t->_is_burnable);
   out << bits(my.t->_is_chasm);
   out << bits(my.t->_is_combustible);
   out << bits(my.t->_is_corpse);

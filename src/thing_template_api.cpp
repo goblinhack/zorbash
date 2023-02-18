@@ -225,6 +225,16 @@ void               Tp::health_initial_dice_set(const std::string &v)
   _health_initial_dice_str = v;
 }
 
+const Dice &Tp::health_regenerate_amount_dice(void) const { return _health_regenerate_amount_dice; }
+const int   Tp::health_regenerate_amount(void) const { return _health_regenerate_amount_dice.roll(); }
+const int   Tp::health_regenerate_amount_max_roll(void) const { return _health_regenerate_amount_dice.max_roll(); }
+const std::string &Tp::health_regenerate_amount_dice_str(void) const { return _health_regenerate_amount_dice_str; }
+void               Tp::health_regenerate_amount_dice_set(const std::string &v)
+{
+  _health_regenerate_amount_dice     = v;
+  _health_regenerate_amount_dice_str = v;
+}
+
 const Dice        &Tp::gold_value_dice(void) const { return _gold_value_dice; }
 const int          Tp::cash(void) const { return _gold_value_dice.roll(); }
 const std::string &Tp::gold_value_dice_str(void) const { return _gold_value_dice_str; }

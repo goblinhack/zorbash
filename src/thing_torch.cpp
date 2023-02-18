@@ -15,7 +15,7 @@ bool Thing::torch_tick(void)
     return false;
   }
 
-  if (is_able_to_melt() || is_able_to_burn() || is_combustible() || is_very_combustible()) {
+  if (is_able_to_melt() || is_burnable() || is_combustible() || is_very_combustible()) {
     //
     // Keep going
     //

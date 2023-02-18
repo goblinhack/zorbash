@@ -235,42 +235,42 @@ void Level::is_torch_unset(const int x, const int y)
   decr(_is_torch, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_able_to_burn(const point p)
+uint8_t Level::is_burnable(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
     return false;
   }
-  return (get(_is_able_to_burn, p.x, p.y));
+  return (get(_is_burnable, p.x, p.y));
 }
 
-uint8_t Level::is_able_to_burn(const int x, const int y)
+uint8_t Level::is_burnable(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
     return false;
   }
-  return (get(_is_able_to_burn, x, y));
+  return (get(_is_burnable, x, y));
 }
 
-void Level::is_able_to_burn_set(const int x, const int y)
+void Level::is_burnable_set(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
     return;
   }
   is_map_changed = true;
-  incr(_is_able_to_burn, x, y, (uint8_t) 1);
+  incr(_is_burnable, x, y, (uint8_t) 1);
 }
 
-void Level::is_able_to_burn_unset(const int x, const int y)
+void Level::is_burnable_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
     return;
   }
   is_map_changed = true;
-  decr(_is_able_to_burn, x, y, (uint8_t) 1);
+  decr(_is_burnable, x, y, (uint8_t) 1);
 }
 
 uint8_t Level::is_heavy(const point p)

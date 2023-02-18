@@ -193,7 +193,6 @@ public:
   //
 
   // begin sort marker2 {
-  uint64_t i_set_is_able_to_burn            : 1 {}; // may produce a flame
   uint64_t i_set_is_acid                    : 1 {};
   uint64_t i_set_is_ascend_dungeon          : 1 {};
   uint64_t i_set_is_ascend_sewer            : 1 {};
@@ -202,6 +201,7 @@ public:
   uint64_t i_set_is_block_of_ice            : 1 {};
   uint64_t i_set_is_brazier                 : 1 {};
   uint64_t i_set_is_bridge                  : 1 {};
+  uint64_t i_set_is_burnable                : 1 {}; // may produce a flame
   uint64_t i_set_is_carnivorous_plant       : 1 {};
   uint64_t i_set_is_chasm                   : 1 {};
   uint64_t i_set_is_combustible             : 1 {}; // may not produce a flame
@@ -661,6 +661,7 @@ public:
 
   const Dice &gold_value_dice(void);
   const Dice &health_initial_dice(void);
+  const Dice &health_regenerate_amount_dice(void);
   const Dice &lifespan_dice(void);
   const Dice &nutrition_dice(void);
   const Dice &on_idle_tick_freq_dice(void);
@@ -732,6 +733,7 @@ public:
   const std::string &gfx_targetted_radial(void);
   const std::string &gold_value_dice_str(void);
   const std::string &health_initial_dice_str(void);
+  const std::string &health_regenerate_amount_dice_str(void);
   const std::string &is_allied_with(void);
   const std::string &lifespan_dice_str(void);
   const std::string &light_color(void);
@@ -877,6 +879,7 @@ public:
   const std::string &text_description_enchant(void);
   const std::string &text_description_short(void);
   const std::string &text_hits(void);
+  const std::string &text_real_name(void);
   const std::string &text_skill(void);
   const std::string &text_title(void);
   const std::string &text_unused1(void);
@@ -1018,6 +1021,7 @@ public:
   int chance_d1000_jump_onto(void);
   int chance_d1000_jump_randomly(void);
   int chance_d1000_melting(void);
+  int chance_d1000_regenerate(void);
   int chance_d1000_shove(void);
   int chance_d1000_steal_item(void);
   int chance_d1000_teleport_attack(void);
@@ -1179,6 +1183,8 @@ public:
   int health_max_incr(void);
   int health_max_set(int);
   int health_max(void);
+  int health_regenerate_amount(void);
+  int health_regenerate(void);
   int health_set(int);
   int health(void);
   int hunger_boost(int v);
@@ -1204,11 +1210,11 @@ public:
   int initial_temperature_get(void);
   int is_able_to_attack_mobs(void);
   int is_able_to_attack_owner(void);
+  int is_able_to_be_resurrected(void);
   int is_able_to_be_surprised(void);
   int is_able_to_break_down_doors(void);
   int is_able_to_break_out_of_ice(void);
   int is_able_to_break_out_of_webs(void);
-  int is_able_to_burn(void);
   int is_able_to_change_levels(void);
   int is_able_to_collect_keys(void);
   int is_able_to_enchant_items(void);
@@ -1227,6 +1233,7 @@ public:
   int is_able_to_melt(void);
   int is_able_to_move_diagonally(void);
   int is_able_to_open_doors(void);
+  int is_able_to_regenerate(void);
   int is_able_to_rest(void);
   int is_able_to_see_in_the_dark(void);
   int is_able_to_see_invisible(void);
@@ -1311,6 +1318,7 @@ public:
   int is_bridge(void);
   int is_brittle(void);
   int is_buff(void);
+  int is_burnable(void);
   int is_burnt_check(void);
   int is_carnivorous_plant(void);
   int is_cautious(void);
@@ -1447,6 +1455,7 @@ public:
   int is_map_treasure(void);
   int is_meat(void);
   int is_metal(void);
+  int is_mimic(void);
   int is_minion(void);
   int is_missile(void);
   int is_mob_challenge_class_A(void);
@@ -1492,7 +1501,6 @@ public:
   int is_red_blood(void);
   int is_red_splatter(void);
   int is_removable_if_out_of_slots(void);
-  int is_resurrectable(void);
   int is_resurrected_or_resurrecting(void);
   int is_ring(void);
   int is_ripple(void);
@@ -1988,13 +1996,11 @@ public:
   int unused_flag2(void);
   int unused_flag3(void);
   int unused_flag40(void);
-  int unused_flag48(void);
   int unused_flag4(void);
   int unused_flag5(void);
   int unused_flag6(void);
   int unused_flag7(void);
   int unused_flag8(void);
-  int unused_flag9(void);
   int value(const Thingp it);
   int weapon_dmgd_pct(void);
   int weapon_dmg_modify(int damage);

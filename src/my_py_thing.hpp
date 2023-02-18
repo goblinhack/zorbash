@@ -140,7 +140,6 @@ PyObject *thing_is_able_to_be_surprised(PyObject *obj, PyObject *args, PyObject 
 PyObject *thing_is_able_to_break_down_doors(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_break_out_of_ice(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_break_out_of_webs(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_able_to_burn(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_change_levels(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_collect_keys(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_enchant_items(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -158,6 +157,7 @@ PyObject *thing_is_able_to_live_out_of_water(PyObject *obj, PyObject *args, PyOb
 PyObject *thing_is_able_to_melt(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_move_diagonally(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_open_doors(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_regenerate(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_rest(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_see_in_the_dark(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_see_invisible(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -219,6 +219,7 @@ PyObject *thing_is_brazier(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bridge(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_brittle(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_buff(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_burnable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_burnt(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_carnivorous_plant(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_carrying_an_item(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -363,6 +364,7 @@ PyObject *thing_is_loggable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_magical(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_meat(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_metal(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_mimic(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_minion(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_missile(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_mob_challenge_class_A(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -592,13 +594,11 @@ PyObject *thing_unused_flag27(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag2(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag3(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag40(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag48(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag4(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag5(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag9(PyObject *obj, PyObject *args, PyObject *keywds);
 // end sort marker1 }
 
 #endif

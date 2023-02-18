@@ -24,7 +24,7 @@ bool Thing::thing_check_for_heat_dmg(void)
     return false;
   }
 
-  if (is_able_to_melt() || is_able_to_burn() || is_combustible() || is_very_combustible()) {
+  if (is_able_to_melt() || is_burnable() || is_combustible() || is_very_combustible()) {
     //
     // Keep going
     //
@@ -123,7 +123,7 @@ bool Thing::thing_check_for_heat_dmg(void)
       smoke->lifespan_set(pcg_random_range(1, 10));
     }
 
-    if (is_able_to_melt() || is_able_to_burn() || is_combustible() || is_very_combustible()) {
+    if (is_able_to_melt() || is_burnable() || is_combustible() || is_very_combustible()) {
       hit = true;
     }
 
@@ -143,7 +143,7 @@ bool Thing::thing_check_for_heat_dmg(void)
     //
     hit = (d100() < 20);
 
-    if (is_able_to_melt() || is_able_to_burn() || is_combustible() || is_very_combustible()) {
+    if (is_able_to_melt() || is_burnable() || is_combustible() || is_very_combustible()) {
       hit = true;
     }
 

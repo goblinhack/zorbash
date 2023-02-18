@@ -490,7 +490,13 @@ const std::string Thing::text_long_name(void)
 {
   TRACE_NO_INDENT();
 
-  auto s = tp()->text_long_name();
+  std::string s;
+  if (is_mimic() && ! is_sleeping) {
+    s = tp()->text_real_name();
+  } else {
+    s = tp()->text_long_name();
+  }
+
   if (enchant_count_get()) {
     s += " +" + std::to_string(enchant_count_get());
   }
@@ -501,7 +507,13 @@ const std::string Thing::text_short_name(void)
 {
   TRACE_NO_INDENT();
 
-  auto s = tp()->text_short_name();
+  std::string s;
+  if (is_mimic() && ! is_sleeping) {
+    s = tp()->text_real_name();
+  } else {
+    s = tp()->text_short_name();
+  }
+
   if (enchant_count_get()) {
     s += " +" + std::to_string(enchant_count_get());
   }
