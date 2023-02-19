@@ -418,6 +418,7 @@ public:
   bool buff_remove(Thingp it);
   bool buff_remove(Tpp what);
   bool buff_use(Thingp it);
+  bool can_detect(Thingp);
   bool can_eat(const Thingp it);
   bool can_eat_something(void);
   bool can_enchant_something(void);

@@ -212,45 +212,53 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   // Not sure if we will have shops
   //
   wid_thing_info_add_gold_value(wid_popup_window, t);
-  wid_thing_info_add_nutrition(wid_popup_window, t);
-  wid_thing_info_add_health(wid_popup_window, t);
-  wid_thing_info_add_noise(wid_popup_window, t);
-  int attack_index = 0;
-  wid_thing_info_add_dmg_nat_att(wid_popup_window, t, attack_index);
-  wid_thing_info_add_dmg_melee(wid_popup_window, t, attack_index);
-  wid_thing_info_add_dmg_poison(wid_popup_window, t, attack_index);
-  wid_thing_info_add_dmg_drown(wid_popup_window, t, attack_index);
-  wid_thing_info_add_dmg_bite(wid_popup_window, t, attack_index);
-  wid_thing_info_add_dmg_claw(wid_popup_window, t, attack_index);
-  wid_thing_info_add_dmg_cold(wid_popup_window, t, attack_index);
-  wid_thing_info_add_dmg_fire(wid_popup_window, t, attack_index);
-  wid_thing_info_add_dmg_heat(wid_popup_window, t, attack_index);
-  wid_thing_info_add_dmg_crush(wid_popup_window, t, attack_index);
-  wid_thing_info_add_dmg_missile(wid_popup_window, t, attack_index);
-  wid_thing_info_add_dmg_missile(wid_popup_window, t, attack_index);
-  wid_thing_info_add_dmg_lightning(wid_popup_window, t, attack_index);
-  wid_thing_info_add_dmg_energy(wid_popup_window, t, attack_index);
-  wid_thing_info_add_dmg_negation(wid_popup_window, t, attack_index);
-  wid_thing_info_add_dmg_acid(wid_popup_window, t, attack_index);
-  wid_thing_info_add_dmg_digest(wid_popup_window, t, attack_index);
-  wid_thing_info_add_dmg_necrosis(wid_popup_window, t, attack_index);
-  wid_thing_info_add_dmg_draining(wid_popup_window, t, attack_index);
-  wid_thing_info_add_dmgd_chance(wid_popup_window, t);
-  wid_thing_info_add_crit_chance(wid_popup_window, t);
-  wid_thing_info_add_attack(wid_popup_window, t);
-  wid_thing_info_add_stat_def(wid_popup_window, t);
-  wid_thing_info_add_stat_str(wid_popup_window, t);
-  wid_thing_info_add_stat_con(wid_popup_window, t);
-  wid_thing_info_add_stat_dex(wid_popup_window, t);
-  wid_thing_info_add_stat_luck(wid_popup_window, t);
-  wid_thing_info_add_move_speed(wid_popup_window, t);
-  wid_thing_info_add_shove_strength(wid_popup_window, t);
-  wid_thing_info_add_jump_distance(wid_popup_window, t);
-  if (t->is_alive_monst()) {
-    wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+
+  if (t->is_mimic() && t->is_sleeping) {
+    //
+    // Do not describe
+    //
+  } else {
+    wid_thing_info_add_nutrition(wid_popup_window, t);
+    wid_thing_info_add_health(wid_popup_window, t);
+    wid_thing_info_add_noise(wid_popup_window, t);
+    int attack_index = 0;
+    wid_thing_info_add_dmg_nat_att(wid_popup_window, t, attack_index);
+    wid_thing_info_add_dmg_melee(wid_popup_window, t, attack_index);
+    wid_thing_info_add_dmg_poison(wid_popup_window, t, attack_index);
+    wid_thing_info_add_dmg_drown(wid_popup_window, t, attack_index);
+    wid_thing_info_add_dmg_bite(wid_popup_window, t, attack_index);
+    wid_thing_info_add_dmg_claw(wid_popup_window, t, attack_index);
+    wid_thing_info_add_dmg_cold(wid_popup_window, t, attack_index);
+    wid_thing_info_add_dmg_fire(wid_popup_window, t, attack_index);
+    wid_thing_info_add_dmg_heat(wid_popup_window, t, attack_index);
+    wid_thing_info_add_dmg_crush(wid_popup_window, t, attack_index);
+    wid_thing_info_add_dmg_missile(wid_popup_window, t, attack_index);
+    wid_thing_info_add_dmg_missile(wid_popup_window, t, attack_index);
+    wid_thing_info_add_dmg_lightning(wid_popup_window, t, attack_index);
+    wid_thing_info_add_dmg_energy(wid_popup_window, t, attack_index);
+    wid_thing_info_add_dmg_negation(wid_popup_window, t, attack_index);
+    wid_thing_info_add_dmg_acid(wid_popup_window, t, attack_index);
+    wid_thing_info_add_dmg_digest(wid_popup_window, t, attack_index);
+    wid_thing_info_add_dmg_necrosis(wid_popup_window, t, attack_index);
+    wid_thing_info_add_dmg_draining(wid_popup_window, t, attack_index);
+    wid_thing_info_add_dmgd_chance(wid_popup_window, t);
+    wid_thing_info_add_crit_chance(wid_popup_window, t);
+    wid_thing_info_add_attack(wid_popup_window, t);
+    wid_thing_info_add_stat_def(wid_popup_window, t);
+    wid_thing_info_add_stat_str(wid_popup_window, t);
+    wid_thing_info_add_stat_con(wid_popup_window, t);
+    wid_thing_info_add_stat_dex(wid_popup_window, t);
+    wid_thing_info_add_stat_luck(wid_popup_window, t);
+    wid_thing_info_add_move_speed(wid_popup_window, t);
+    wid_thing_info_add_shove_strength(wid_popup_window, t);
+    wid_thing_info_add_jump_distance(wid_popup_window, t);
+    if (t->is_alive_monst()) {
+      wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+    }
+    wid_thing_info_add_charge_count(wid_popup_window, t);
+    wid_thing_info_add_danger_level(wid_popup_window, t);
   }
-  wid_thing_info_add_charge_count(wid_popup_window, t);
-  wid_thing_info_add_danger_level(wid_popup_window, t);
+
   t->show_botcon_description();
 
   if (game->current_wid_thing_info != t) {

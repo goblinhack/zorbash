@@ -39,6 +39,10 @@ Thingp Thing::most_dangerous_adjacent_thing(void)
         continue;
       }
 
+      if (! can_detect(t)) {
+        continue;
+      }
+
       //
       // Treat as a threat so they attack
       //
@@ -105,8 +109,24 @@ Thingp Thing::most_dangerous_visible_thing(void)
           continue;
         }
 
+        if (! can_detect(t)) {
+          continue;
+        }
+
         if (! t->is_monst() && ! t->is_player()) {
           continue;
+        }
+
+        if (! is_intelligent()) {
+          //
+          // Dumb monsters
+          //
+          if (t->is_mimic() && t->is_sleeping) {
+            //
+            // Allow intelligent monsts to detect sleeping mimics?
+            //
+            continue;
+          }
         }
 
         auto score = t->health();
@@ -171,7 +191,15 @@ bool Thing::any_unfriendly_monst_visible(void)
           continue;
         }
 
+        if (! can_detect(t)) {
+          continue;
+        }
+
         if (! t->is_monst() && ! t->is_player()) {
+          continue;
+        }
+
+        if (! can_detect(t)) {
           continue;
         }
 
@@ -215,6 +243,10 @@ bool Thing::any_adjacent_monst(void)
         continue;
       }
 
+      if (! can_detect(t)) {
+        continue;
+      }
+
       if (t->is_monst() || t->is_player()) {
         return true;
       }
@@ -249,6 +281,10 @@ Thingp Thing::best_visible_target_get(void)
         }
 
         if (t->is_dead) {
+          continue;
+        }
+
+        if (! can_detect(t)) {
           continue;
         }
 

@@ -17,6 +17,10 @@ void Thing::can_see(point p)
 
   FOR_ALL_THINGS_THAT_INTERACT(level, t, p.x, p.y)
   {
+    if (! can_detect(t)) {
+      continue;
+    }
+
     //
     // Display a message when a monster comes into view
     //

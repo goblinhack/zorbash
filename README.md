@@ -218,7 +218,7 @@ Current status:
 
 Content:
 <!-- begin type marker -->
-- 63 x monsters
+- 64 x monsters
 - 52 x food
 - 19 x treasure
 - 13 x weapons
@@ -308,6 +308,12 @@ Press <TAB> to switch between modes during the game.
 <img alt="Ascii art" src="pics/ascii/screenshot.10.png" width="45%">
 </p>
 
+<p align="center">
+<img alt="Pixel art" src="pics/pixelart/screenshot.11.png" width="45%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+<img alt="Ascii art" src="pics/ascii/screenshot.11.png" width="45%">
+</p>
+
 Ascii Screenshots
 -----------------
 
@@ -321,6 +327,7 @@ Ascii Screenshots
 ![Alt text](pics/ascii/screenshot.8.png?raw=true "")
 ![Alt text](pics/ascii/screenshot.9.png?raw=true "")
 ![Alt text](pics/ascii/screenshot.10.png?raw=true "")
+![Alt text](pics/ascii/screenshot.11.png?raw=true "")
 
 Pixelart Screenshots
 --------------------

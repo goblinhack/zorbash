@@ -91,6 +91,10 @@ bool Thing::will_avoid_monst(const point p)
       continue;
     }
 
+    if (! can_detect(it)) {
+      continue;
+    }
+
     //
     // Not moving?
     //

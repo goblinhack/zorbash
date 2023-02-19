@@ -152,6 +152,7 @@ color FORESTGREEN;
 color GAINSBORO;
 color GHOST_WHITE;
 color GHOSTWHITE;
+color SILVER;
 color GOLD;
 color GOLD1;
 color GOLD2;
@@ -297,6 +298,7 @@ void color_init1(void)
   color_set("forestgreen", &FORESTGREEN, 34, 139, 34, 255);
   color_set("gainsboro", &GAINSBORO, 220, 220, 220, 255);
   color_set("ghostwhite", &GHOSTWHITE, 248, 248, 255, 255);
+  color_set("silver", &SILVER, 192, 192, 192, 255);
   color_set("gold1", &GOLD1, 255, 215, 0, 255);
   color_set("gold2", &GOLD2, 238, 201, 0, 255);
   color_set("gold3", &GOLD3, 205, 173, 0, 255);

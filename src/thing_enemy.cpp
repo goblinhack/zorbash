@@ -128,6 +128,9 @@ void Thing::add_enemy(Thingp attacker, bool recursing)
           }
           FOR_ALL_THINGS_THAT_INTERACT(level, it, x, y)
           {
+            if (! can_detect(it)) {
+              continue;
+            }
             if (! it->is_monst()) {
               continue;
             }

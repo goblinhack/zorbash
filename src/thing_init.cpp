@@ -180,6 +180,18 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
     is_facing_left = owner->is_facing_left;
   }
 
+  //
+  // Change state prior to choosing the first tile so we get the
+  // sleep anim immediately.
+  //
+  if (is_asleep_initially()) {
+    change_state(MONST_STATE_SLEEPING, "asleep initially");
+  }
+
+  //
+  // Make sure and call this after any state changes so we get the
+  // sleeping tile assigned if needed.
+  //
   update();
 
   //
@@ -230,14 +242,6 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
     clear_dmap_can_see();
     clear_can_see_currently();
     clear_can_see_ever();
-  }
-
-  //
-  // Change state prior to choosing the first tile so we get the
-  // sleep anim immediately.
-  //
-  if (is_asleep_initially()) {
-    change_state(MONST_STATE_SLEEPING, "asleep initially");
   }
 
   //

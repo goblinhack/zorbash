@@ -60,7 +60,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_wooden(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.noise_on_dropping(self, 1)
+    my.noise_on_dropping(self, 100)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
     my.on_death_drop_all_items(self, True)

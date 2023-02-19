@@ -3,11 +3,13 @@ import tp
 
 
 def on_you_nat_att(me, x, y):
-    my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monster_roar")
+    sound = f"growl{my.non_pcg_randint(1, 10)}"
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
 
 
 def on_hit_and_still_alive(me, hitter, real_hitter, x, y, crit, damage):
-    my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monster_roar")
+    sound = f"growl{my.non_pcg_randint(1, 10)}"
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
 
 
 def on_hit_dodge_do(me, hitter, x, y):
@@ -19,14 +21,16 @@ def on_death(me, x, y):
 
 
 def on_awake(me, x, y):
-    my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "monster_roar")
+    sound = f"growl{my.non_pcg_randint(1, 10)}"
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
     my.thing_speaks(me, "Who dares wake me?")
     my.thing_popup(me, "Tiny roar!")
 
 
 def on_want_to_shoot_at(me, target, x, y):  # Return True on doing an action
     if my.pcg_randint(1, 10) < 4:
-        my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monster_roar")
+        sound = f"growl{my.non_pcg_randint(1, 10)}"
+        my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
         my.thing_shoot_at(me, "staff_fire_projectile", target)
         return True
     return False

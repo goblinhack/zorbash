@@ -149,6 +149,7 @@ extern color FORESTGREEN;
 extern color GAINSBORO;
 extern color GHOST_WHITE;
 extern color GHOSTWHITE;
+extern color SILVER;
 extern color GOLD;
 extern color GOLD1;
 extern color GOLD2;

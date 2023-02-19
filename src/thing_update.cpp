@@ -618,9 +618,6 @@ void Thing::update(void)
     }
   }
 
-  TRACE_NO_INDENT();
-  hunger_update();
-
   if (carried && (is_monst() || is_player())) {
     dbg("Final item list:");
     TRACE_AND_INDENT();

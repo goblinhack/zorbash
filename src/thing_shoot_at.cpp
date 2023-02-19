@@ -185,6 +185,10 @@ bool Thing::shoot_at_target(void)
           continue;
         }
 
+        if (! can_detect(it)) {
+          continue;
+        }
+
         dbg("Look for something to fire at; %s", it->to_short_string().c_str());
         TRACE_AND_INDENT();
 

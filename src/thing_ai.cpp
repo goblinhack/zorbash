@@ -952,7 +952,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           continue;
         }
 
-        if (! can_see_is_invisible(it)) {
+        if (! can_detect(it)) {
           continue;
         }
 
@@ -978,16 +978,6 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         if (same_mob(it)) {
           AI_LOG("My fellow minion", it);
           continue;
-        }
-
-        //
-        // Mimics are ignored when asleep
-        //
-        if (! is_intelligent()) {
-          if (it->is_mimic() && it->is_sleeping) {
-            AI_LOG("My fellow minion", it);
-            continue;
-          }
         }
 
         if (environ_avoids_fire()) {
@@ -2019,13 +2009,15 @@ bool Thing::ai_tick(bool recursing)
     //
     // Wake on noise? Like a player hitting a wall.
     //
-    if (LEVEL_LOUDEST_SOUND - level->noisemap(curr_at) > noise_decibels_hearing()) {
-      if (is_msg_allowed_hears_something()) {
-        msg("%s hears something!", text_The().c_str());
-      }
+    if (noise_decibels_hearing()) {
+      if (LEVEL_LOUDEST_SOUND - level->noisemap(curr_at) > noise_decibels_hearing()) {
+        if (is_msg_allowed_hears_something()) {
+          msg("%s hears something!", text_The().c_str());
+        }
 
-      if (! wake("heard something")) {
-        return false;
+        if (! wake("heard something")) {
+          return false;
+        }
       }
     }
 
