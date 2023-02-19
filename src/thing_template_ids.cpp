@@ -95,6 +95,7 @@ std::initializer_list< std::string > tps = {
     "cheesecake",
     "cherry",
     "chest1",
+    "chest2",
     "chicken",
     "chocolate_bar",
     "cleaner",
