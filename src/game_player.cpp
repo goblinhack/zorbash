@@ -322,7 +322,7 @@ void Game::place_player(void)
         // level->thing_new("cleaner", point(x + 2, y - 2));
       }
 
-      if (1) {
+      if (0) {
         level->thing_new("door_metal", point(x + 2, y));
         // d->dead("killed");
       }
