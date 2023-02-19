@@ -491,7 +491,7 @@ PyObject *thing_noise_on_dropping(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_noise_on_hit_and_now_dead(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_noise_on_hit_and_still_alive(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_noise_on_moving(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_noise_on_open(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_noise_on_open_or_close(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_noise_set(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_perma_death(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_poisoned_amount_decr(PyObject *obj, PyObject *args, PyObject *keywds);

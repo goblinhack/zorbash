@@ -1637,9 +1637,11 @@ void Game::wid_thing_info_add_noise(WidPopup *w, Thingp t)
     }
   }
 
-  if (t->is_alive_monst()) {
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Hearing                 %5d", t->noise_decibels_hearing());
-    w->log(tmp);
+  if (t->noise_decibels_hearing()) {
+    if (t->is_alive_monst()) {
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Hearing                 %5d", t->noise_decibels_hearing());
+      w->log(tmp);
+    }
   }
 }
 

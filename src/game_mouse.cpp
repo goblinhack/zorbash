@@ -120,7 +120,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
     if (level->cursor) {
       if ((std::abs(player->curr_at.x - level->cursor->curr_at.x) <= 1) &&
           (std::abs(player->curr_at.y - level->cursor->curr_at.y) <= 1)) {
-        IF_DEBUG2 { player->log("Close enough to attack check"); }
+        IF_DEBUG { player->log("Close enough to attack check"); }
         TRACE_AND_INDENT();
 
         int x = level->cursor->curr_at.x;
@@ -131,7 +131,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
             continue;
           }
 
-          IF_DEBUG2 { player->log("Yes; close enough to attack %s?", t->to_short_string().c_str()); }
+          IF_DEBUG { player->log("Yes; close enough to attack %s?", t->to_short_string().c_str()); }
           TRACE_AND_INDENT();
 
           //
@@ -144,13 +144,13 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
           //
           // If the door is not broken, we can close it
           //
-          if (t->is_door() && t->is_open) {
-            IF_DEBUG2 { player->log("Close door"); }
+          if ((t->is_treasure_chest() || t->is_door()) && t->is_open) {
+            IF_DEBUG { player->log("Close"); }
             TRACE_AND_INDENT();
-            game->tick_begin("close door");
+            game->tick_begin("close");
 
-            if (player->close_door(t)) {
-              IF_DEBUG2 { player->log("Closed a door"); }
+            if (player->close(t)) {
+              IF_DEBUG { player->log("Closed"); }
               return true;
             }
 
@@ -158,19 +158,20 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
             // If we fail to close the door; there could be a larger thing standing there,
             // then fall through to attack.
             //
-            IF_DEBUG2 { player->log("Failed to close door"); }
+            IF_DEBUG { player->log("Failed to close"); }
           }
 
           //
           // Try to open the door with a key.
           //
-          if (t->is_door() && ! t->is_open) {
-            IF_DEBUG2 { player->log("Open door"); }
+          if ((t->is_treasure_chest() || t->is_door()) && ! t->is_open) {
+            IF_DEBUG { player->log("Open"); }
             TRACE_AND_INDENT();
-            game->tick_begin("open door");
+            game->tick_begin("open");
 
-            if (player->open_door(t)) {
-              IF_DEBUG2 { player->log("Opened a door"); }
+            if (player->open(t)) {
+              IF_DEBUG { player->log("Opened"); }
+              player->move(level->cursor->curr_at);
               return true;
             }
 
@@ -184,7 +185,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
           // Attack
           //
           if (t->is_attackable_by_player()) {
-            IF_DEBUG2 { player->log("Close enough to attack"); }
+            IF_DEBUG { player->log("Close enough to attack"); }
             player->attack(level->cursor->curr_at);
             return true;
           }
@@ -194,7 +195,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
         //
         // 2nd try, see if we can shove it. Like a brazier for example.
         //
-        IF_DEBUG2 { player->log("Close enough to shove check"); }
+        IF_DEBUG { player->log("Close enough to shove check"); }
         TRACE_AND_INDENT();
 
         FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)
@@ -211,7 +212,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
           }
 
           if (t->is_shovable()) {
-            IF_DEBUG2 { player->log("Yes; close enough to shove %s?", t->to_short_string().c_str()); }
+            IF_DEBUG { player->log("Yes; close enough to shove %s?", t->to_short_string().c_str()); }
             TRACE_AND_INDENT();
             player->try_to_shove(level->cursor->curr_at);
             return true;

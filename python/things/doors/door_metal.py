@@ -55,7 +55,7 @@ def tp_init(name):
     my.noise_blocker(self, True)
     my.noise_on_hit_and_now_dead(self, 100)
     my.noise_on_hit_and_still_alive(self, 100)
-    my.noise_on_open(self, 60)
+    my.noise_on_open_or_close(self, 60)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
     my.on_death_is_open(self, True)

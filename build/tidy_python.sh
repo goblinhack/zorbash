@@ -484,7 +484,7 @@ do
       noise_on_born \
       noise_on_dropping \
       noise_on_moving \
-      noise_on_open \
+      noise_on_open_or_close \
       noise_on_hit_and_now_dead \
       noise_on_hit_and_still_alive \
       normal_placement_rules \

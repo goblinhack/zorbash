@@ -2020,10 +2020,10 @@ int Thing::noise_on_born(void)
   return (tp()->noise_on_born());
 }
 
-int Thing::noise_on_open(void)
+int Thing::noise_on_open_or_close(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->noise_on_open());
+  return (tp()->noise_on_open_or_close());
 }
 
 int Thing::noise_on_hit_and_now_dead(void)
@@ -4011,6 +4011,12 @@ const std::string &Thing::on_open_do(void)
 {
   TRACE_NO_INDENT();
   return (tp()->on_open_do());
+}
+
+const std::string &Thing::on_close_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_close_do());
 }
 
 const std::string &Thing::on_tick_do(void)

@@ -201,7 +201,7 @@ bool Thing::drop(Thingp what, Thingp target, DropReason reason)
   what->is_being_dropped = false;
   what->tick_last_dropped_set(game->tick_current);
   if (! is_dead_or_dying()) {
-    if (! reason.is_being_stolen) {
+    if (! reason.is_being_thrown && ! reason.is_being_equipped && ! reason.is_being_stolen) {
       what->on_dropped();
     }
   }

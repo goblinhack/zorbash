@@ -81,6 +81,7 @@ const std::string &Tp::on_jump_do(void) const { return _on_jump_do; }
 const std::string &Tp::on_lifespan_tick_do(void) const { return _on_lifespan_tick_do; }
 const std::string &Tp::on_move_do(void) const { return _on_move_do; }
 const std::string &Tp::on_open_do(void) const { return _on_open_do; }
+const std::string &Tp::on_close_do(void) const { return _on_close_do; }
 const std::string &Tp::on_owner_add_do(void) const { return _on_owner_add_do; }
 const std::string &Tp::on_owner_attack_dmg_acid_do(void) const { return _on_owner_attack_dmg_acid_do; }
 const std::string &Tp::on_owner_attack_dmg_bite_do(void) const { return _on_owner_attack_dmg_bite_do; }
@@ -655,7 +656,7 @@ int Tp::noise_on_dropping(void) const { return _noise_on_dropping; }
 int Tp::noise_on_hit_and_now_dead(void) const { return _noise_on_hit_and_now_dead; }
 int Tp::noise_on_hit_and_still_alive(void) const { return _noise_on_hit_and_still_alive; }
 int Tp::noise_on_moving(void) const { return _noise_on_moving; }
-int Tp::noise_on_open(void) const { return _noise_on_open; }
+int Tp::noise_on_open_or_close(void) const { return _noise_on_open_or_close; }
 int Tp::normal_placement_rules(void) const { return _normal_placement_rules; }
 int Tp::on_death_drop_all_items(void) const { return _on_death_drop_all_items; }
 int Tp::on_death_is_open(void) const { return _on_death_is_open; }
@@ -1201,7 +1202,7 @@ void Tp::noise_on_dropping_set(int v) { _noise_on_dropping = v; }
 void Tp::noise_on_hit_and_now_dead_set(int v) { _noise_on_hit_and_now_dead = v; }
 void Tp::noise_on_hit_and_still_alive_set(int v) { _noise_on_hit_and_still_alive = v; }
 void Tp::noise_on_moving_set(int v) { _noise_on_moving = v; }
-void Tp::noise_on_open_set(int v) { _noise_on_open = v; }
+void Tp::noise_on_open_or_close_set(int v) { _noise_on_open_or_close = v; }
 void Tp::normal_placement_rules_set(int v) { _normal_placement_rules = v; }
 void Tp::on_attacking_dmg_acid_do_set(const std::string &v) { _on_attacking_dmg_acid_do = v; }
 void Tp::on_attacking_dmg_bite_do_set(const std::string &v) { _on_attacking_dmg_bite_do = v; }
@@ -1246,6 +1247,7 @@ void Tp::on_jump_do_set(const std::string &v) { _on_jump_do = v; }
 void Tp::on_lifespan_tick_do_set(const std::string &v) { _on_lifespan_tick_do = v; }
 void Tp::on_move_do_set(const std::string &v) { _on_move_do = v; }
 void Tp::on_open_do_set(const std::string &v) { _on_open_do = v; }
+void Tp::on_close_do_set(const std::string &v) { _on_close_do = v; }
 void Tp::on_owner_add_do_set(const std::string &v) { _on_owner_add_do = v; }
 void Tp::on_owner_attack_dmg_acid_do_set(const std::string &v) { _on_owner_attack_dmg_acid_do = v; }
 void Tp::on_owner_attack_dmg_bite_do_set(const std::string &v) { _on_owner_attack_dmg_bite_do = v; }

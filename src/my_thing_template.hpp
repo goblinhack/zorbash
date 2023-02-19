@@ -581,7 +581,7 @@ private:
   int _noise_on_hit_and_now_dead {};
   int _noise_on_hit_and_still_alive {};
   int _noise_on_moving {};
-  int _noise_on_open {};
+  int _noise_on_open_or_close {};
   int _normal_placement_rules {};
   int _on_death_drop_all_items {};
   int _on_death_is_open {};
@@ -728,6 +728,7 @@ private:
   std::string _on_lifespan_tick_do;
   std::string _on_move_do;
   std::string _on_open_do;
+  std::string _on_close_do;
   std::string _on_owner_add_do;
   std::string _on_owner_attack_dmg_acid_do;
   std::string _on_owner_attack_dmg_bite_do;
@@ -1065,6 +1066,7 @@ public:
   const std::string &on_lifespan_tick_do(void) const;
   const std::string &on_move_do(void) const;
   const std::string &on_open_do(void) const;
+  const std::string &on_close_do(void) const;
   const std::string &on_owner_add_do(void) const;
   const std::string &on_owner_attack_dmg_acid_do(void) const;
   const std::string &on_owner_attack_dmg_bite_do(void) const;
@@ -1661,7 +1663,7 @@ public:
   int noise_on_hit_and_now_dead(void) const;
   int noise_on_hit_and_still_alive(void) const;
   int noise_on_moving(void) const;
-  int noise_on_open(void) const;
+  int noise_on_open_or_close(void) const;
   int normal_placement_rules(void) const;
   int on_death_drop_all_items(void) const;
   int on_death_is_open(void) const;
@@ -2207,7 +2209,7 @@ public:
   void noise_on_hit_and_now_dead_set(int v);
   void noise_on_hit_and_still_alive_set(int v);
   void noise_on_moving_set(int v);
-  void noise_on_open_set(int v);
+  void noise_on_open_or_close_set(int v);
   void normal_placement_rules_set(int v);
   void on_attacking_dmg_acid_do_set(const std::string &v);
   void on_attacking_dmg_bite_do_set(const std::string &v);
@@ -2252,6 +2254,7 @@ public:
   void on_lifespan_tick_do_set(const std::string &v);
   void on_move_do_set(const std::string &v);
   void on_open_do_set(const std::string &v);
+  void on_close_do_set(const std::string &v);
   void on_owner_add_do_set(const std::string &v);
   void on_owner_attack_dmg_acid_do_set(const std::string &v);
   void on_owner_attack_dmg_bite_do_set(const std::string &v);

@@ -537,6 +537,8 @@ public:
   bool open_door(Thingp door);
   bool open(Thingp it);
   bool open(void);
+  bool close(Thingp it);
+  bool close(void);
   bool particle_anim_exists(void);
   bool path_pop_next_move(ThingMoveReason);
   bool place(const std::string &what, const point p);
@@ -783,6 +785,7 @@ public:
   const std::string &on_lifespan_tick_do(void);
   const std::string &on_move_do(void);
   const std::string &on_open_do(void);
+  const std::string &on_close_do(void);
   const std::string &on_owner_add_do(void);
   const std::string &on_owner_attack_dmg_acid_do(void);
   const std::string &on_owner_attack_dmg_bite_do(void);
@@ -1637,7 +1640,7 @@ public:
   int noise_on_hit_and_still_alive(void);
   int noise_on_jumping(void);
   int noise_on_moving(void);
-  int noise_on_open(void);
+  int noise_on_open_or_close(void);
   int noise_on_teleporting(void);
   int noise_set(int);
   int noise_total(void);
@@ -2419,6 +2422,7 @@ public:
   void on_lifespan_tick(Thingp hitter);
   void on_move(void);
   void on_open(void);
+  void on_close(void);
   void on_owner_add(Thingp owner);
   void on_owner_unset(Thingp owner);
   void on_polymorphed(void);

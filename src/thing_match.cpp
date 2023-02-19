@@ -991,7 +991,7 @@ bool Thing::matches(const std::string &what)
   if (noise_on_born() && (what == "noise_on_born")) {
     return true;
   }
-  if (noise_on_open() && (what == "noise_on_open")) {
+  if (noise_on_open_or_close() && (what == "noise_on_open_or_close")) {
     return true;
   }
   if (noise_on_hit_and_now_dead() && (what == "noise_on_hit_and_now_dead")) {
@@ -2075,8 +2075,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "noise_on_moving") {
     return &Thing::noise_on_moving;
   }
-  if (what == "noise_on_open") {
-    return &Thing::noise_on_open;
+  if (what == "noise_on_open_or_close") {
+    return &Thing::noise_on_open_or_close;
   }
   if (what == "noise_on_hit_and_now_dead") {
     return &Thing::noise_on_hit_and_now_dead;

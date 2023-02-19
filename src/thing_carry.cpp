@@ -229,7 +229,7 @@ bool Thing::carry(Thingp item, bool can_equip)
       dbg("Already owned: %s", item->to_short_string().c_str());
     } else {
       DropReason reason;
-      reason.is_being_equipped = equipped;
+      reason.is_being_equipped = true;
       existing_owner->drop(item, reason);
     }
   }

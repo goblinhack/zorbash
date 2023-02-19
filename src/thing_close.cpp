@@ -7,14 +7,14 @@
 #include "my_string.hpp"
 #include "my_thing.hpp"
 
-void Thing::on_open(void)
+void Thing::on_close(void)
 {
-  auto on_open = tp()->on_open_do();
-  if (std::empty(on_open)) {
+  auto on_close = tp()->on_close_do();
+  if (std::empty(on_close)) {
     return;
   }
 
-  auto t = split_tokens(on_open, '.');
+  auto t = split_tokens(on_close, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -29,16 +29,16 @@ void Thing::on_open(void)
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
-    ERR("Bad on_open call [%s] expected mod:function, got %d elems", on_open.c_str(), (int) on_open.size());
+    ERR("Bad on_close call [%s] expected mod:function, got %d elems", on_close.c_str(), (int) on_close.size());
   }
 }
 
-bool Thing::open(Thingp it)
+bool Thing::close(Thingp it)
 {
   TRACE_NO_INDENT();
 
   if (it->is_door()) {
-    return open_door(it);
+    return close_door(it);
   }
 
   if (! is_monst() && ! is_player()) {
@@ -49,7 +49,7 @@ bool Thing::open(Thingp it)
     return false;
   }
 
-  if (it->is_open) {
+  if (! it->is_open) {
     return false;
   }
 
@@ -57,13 +57,13 @@ bool Thing::open(Thingp it)
     return false;
   }
 
-  IF_DEBUG1 { it->log("Open"); }
+  IF_DEBUG1 { it->log("Close"); }
 
   it->level_pop();
-  it->is_open = true;
+  it->is_open = false;
   it->level_push();
 
-  it->on_open();
+  it->on_close();
   update_light();
   level->request_dmap_to_player_update = true;
 
@@ -72,19 +72,19 @@ bool Thing::open(Thingp it)
   return true;
 }
 
-bool Thing::open(void)
+bool Thing::close(void)
 {
   TRACE_NO_INDENT();
 
   if (is_door()) {
-    return open_door(this);
+    return close_door(this);
   }
 
   if (! is_openable()) {
     return false;
   }
 
-  if (is_open) {
+  if (! is_open) {
     return false;
   }
 
@@ -92,13 +92,13 @@ bool Thing::open(void)
     return false;
   }
 
-  IF_DEBUG1 { log("Open"); }
+  IF_DEBUG1 { log("Close"); }
 
   level_pop();
-  is_open = true;
+  is_open = false;
   level_push();
 
-  on_open();
+  on_close();
   update_light();
   level->request_dmap_to_player_update = true;
 

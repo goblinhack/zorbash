@@ -322,6 +322,10 @@ void Game::place_player(void)
         // level->thing_new("cleaner", point(x + 2, y - 2));
       }
 
+      if (1) {
+        level->thing_new("door_metal", point(x + 2, y));
+        // d->dead("killed");
+      }
       // level->thing_new("flesh_golem", point(x + 1, y + 3));
       IF_DEBUG2
       {
@@ -344,10 +348,6 @@ void Game::place_player(void)
         // level->thing_new("rat_giant", point(x - 1, y));
         // level->thing_new("rat_giant", point(x + 1, y));
         // level->thing_new("rat_giant", point(x, y - 1));
-        if (0) {
-          auto d = level->thing_new("door_metal", point(x + 2, y));
-          d->dead("killed");
-        }
         // level->thing_new("rock1", point(x + 1, y));
         // level->thing_new("rock1", point(x + 3, y));
         // level->thing_new("gargoyle_static", point(x + 2, y - 2));
