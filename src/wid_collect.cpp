@@ -88,15 +88,41 @@ static void wid_collect_slot(int slot)
   // When collecting, an item might have been destoryed.
   //
   std::vector< ThingId > new_collect_items;
+
+  //
+  // What was previously collectable
+  //
+  for (auto id : collect_items) {
+    auto t = level->thing_find_optional(id);
+    if (t) {
+      player->log("Current collect items: %s", t->to_short_string().c_str());
+    }
+  }
+
+  //
+  // What is left on the table to collect, minus what we collected
+  //
   for (auto id : collect_items) {
     auto t = level->thing_find_optional(id);
     if (! t) {
       continue;
     }
-    if (t->immediate_owner()) {
+
+    //
+    // Skip collected coins that are now dead
+    //
+    if (t->is_dead) {
       continue;
     }
-    player->log("Remaining collect items: %p %s", t, t->to_short_string().c_str());
+
+    //
+    // Skip things already collected by the player
+    //
+    if (t->top_owner() == player) {
+      continue;
+    }
+
+    player->log("Remaining collect items: %s", t->to_short_string().c_str());
     new_collect_items.push_back(t->id);
   }
   collect_items = new_collect_items;

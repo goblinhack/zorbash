@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- treasure chests should be similar to doors                                                                                                   -->
 <!-- regeneration for troll not ogre                                                                                                              -->
 <!-- teleport                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
