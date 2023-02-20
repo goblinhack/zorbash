@@ -24,6 +24,11 @@ public:
   Tilep       title_tile {};
   Thingp      t {};
   std::string background;
+  std::string name;
+  int         outer_w {};
+  int         outer_h {};
+  int         inner_w {};
+  int         inner_h {};
 
 public:
   ~WidPopup();

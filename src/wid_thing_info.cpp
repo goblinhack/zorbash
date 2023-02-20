@@ -359,6 +359,8 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
   wid_update(w->wid_text_area->wid_text_area);
   wid_thing_info_window.push_back(wid_popup_window);
 
+  wid_popup_window->compress();
+
   return wid_popup_window;
 }
 

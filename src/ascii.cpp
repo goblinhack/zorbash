@@ -188,7 +188,7 @@ void pixel_to_ascii(int *x, int *y)
   *y = my;
 }
 
-static int ascii_ok_for_scissors(int x, int y)
+int ascii_ok_for_scissors(int x, int y)
 {
   if ((x < 0) || (y < 0) || (x >= TERM_WIDTH) || (y >= TERM_HEIGHT)) {
     return false;

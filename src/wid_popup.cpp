@@ -16,15 +16,19 @@ WidPopup::WidPopup(const std::string name, point tl, point br, Tilep title_tile,
     : tl(tl), br(br), title_tile(title_tile), background(background)
 {
   TRACE_AND_INDENT();
-  int outer_w = br.x - tl.x;
-  int outer_h = br.y - tl.y;
-  int width   = outer_w;
-  int height  = outer_h;
+
+  outer_w = br.x - tl.x;
+  outer_h = br.y - tl.y;
+
+  int width  = outer_w;
+  int height = outer_h;
+
+  this->name = name;
 
   point inner_tl = point(0, 0);
   point inner_br = point(width, height);
-  int   inner_w  = inner_br.x - inner_tl.x;
-  int   inner_h  = inner_br.y - inner_tl.y;
+  inner_w        = inner_br.x - inner_tl.x;
+  inner_h        = inner_br.y - inner_tl.y;
 
   if (g_opt_ascii) {
     title_tile = nullptr;
@@ -98,5 +102,18 @@ void WidPopup::compress(void)
   TRACE_NO_INDENT();
 
   int utilized = wid_text_area->line_count;
+
   wid_resize(wid_popup_container, -1, utilized + 1);
+  wid_resize(wid_text_area->wid_text_area, -1, utilized + 1);
+  wid_resize(wid_text_area->wid_text_box_container, -1, utilized + 1);
+
+  //
+  // We don't need a scrollbar if we've not exceeded size limits
+  //
+  if (utilized < inner_h) {
+    if (wid_text_area->wid_vert_scroll) {
+      wid_hide(wid_text_area->wid_vert_scroll);
+      wid_hide(wid_text_area->wid_vert_scroll->parent);
+    }
+  }
 }

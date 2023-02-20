@@ -247,6 +247,11 @@ bool Thing::carry(Thingp item, bool can_equip)
     // Always carry
     //
     dbg("Things always carry items");
+  } else if (top_owner && top_owner->is_bag_item_container()) {
+    //
+    // Allow treasure chests to carry gold
+    //
+    dbg("Chests always carry items");
   } else if (item->is_bag_item_container() && bag_add(item)) {
     //
     // Bag being carried

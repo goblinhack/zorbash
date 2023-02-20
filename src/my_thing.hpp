@@ -430,6 +430,8 @@ public:
   bool change_owner(Thingp new_owner);
   bool check_anything_to_carry(bool auto_collect_allowed);
   bool close_door(Thingp door);
+  bool close(Thingp it);
+  bool close(void);
   bool collision_add_candidates(Thingp it, point future_pos, int x, int y, int dx, int dy);
   bool collision_check_and_handle_at(point future_pos, ThingAttackOptionsp);
   bool collision_check_and_handle_at(ThingAttackOptionsp);
@@ -537,8 +539,6 @@ public:
   bool open_door(Thingp door);
   bool open(Thingp it);
   bool open(void);
-  bool close(Thingp it);
-  bool close(void);
   bool particle_anim_exists(void);
   bool path_pop_next_move(ThingMoveReason);
   bool place(const std::string &what, const point p);
@@ -767,6 +767,7 @@ public:
   const std::string &on_attacking_dmg_water_do(void);
   const std::string &on_awake_do(void);
   const std::string &on_born_do(void);
+  const std::string &on_close_do(void);
   const std::string &on_death_do(void);
   const std::string &on_death_of_a_follower_do(void);
   const std::string &on_death_of_my_leader_do(void);
@@ -785,7 +786,6 @@ public:
   const std::string &on_lifespan_tick_do(void);
   const std::string &on_move_do(void);
   const std::string &on_open_do(void);
-  const std::string &on_close_do(void);
   const std::string &on_owner_add_do(void);
   const std::string &on_owner_attack_dmg_acid_do(void);
   const std::string &on_owner_attack_dmg_bite_do(void);
@@ -2404,6 +2404,7 @@ public:
   void notify_followers_of_death_of_my_leader(void);
   void notify_of_death_of_my_leader(void);
   void on_born(void);
+  void on_close(void);
   void on_death_of_a_follower(Thingp leader);
   void on_death_of_my_leader(void);
   void on_dropped(void);
@@ -2422,7 +2423,6 @@ public:
   void on_lifespan_tick(Thingp hitter);
   void on_move(void);
   void on_open(void);
-  void on_close(void);
   void on_owner_add(Thingp owner);
   void on_owner_unset(Thingp owner);
   void on_polymorphed(void);

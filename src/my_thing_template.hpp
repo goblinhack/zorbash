@@ -710,6 +710,7 @@ private:
   std::string _on_attacking_dmg_water_do;
   std::string _on_awake_do;
   std::string _on_born_do;
+  std::string _on_close_do;
   std::string _on_death_do;
   std::string _on_death_of_a_follower_do;
   std::string _on_death_of_my_leader_do;
@@ -728,7 +729,6 @@ private:
   std::string _on_lifespan_tick_do;
   std::string _on_move_do;
   std::string _on_open_do;
-  std::string _on_close_do;
   std::string _on_owner_add_do;
   std::string _on_owner_attack_dmg_acid_do;
   std::string _on_owner_attack_dmg_bite_do;
@@ -1048,6 +1048,7 @@ public:
   const std::string &on_attacking_dmg_water_do(void) const;
   const std::string &on_awake_do(void) const;
   const std::string &on_born_do(void) const;
+  const std::string &on_close_do(void) const;
   const std::string &on_death_do(void) const;
   const std::string &on_death_of_a_follower_do(void) const;
   const std::string &on_death_of_my_leader_do(void) const;
@@ -1066,7 +1067,6 @@ public:
   const std::string &on_lifespan_tick_do(void) const;
   const std::string &on_move_do(void) const;
   const std::string &on_open_do(void) const;
-  const std::string &on_close_do(void) const;
   const std::string &on_owner_add_do(void) const;
   const std::string &on_owner_attack_dmg_acid_do(void) const;
   const std::string &on_owner_attack_dmg_bite_do(void) const;
@@ -2235,6 +2235,7 @@ public:
   void on_attacking_dmg_water_do_set(const std::string &v);
   void on_awake_do_set(const std::string &v);
   void on_born_do_set(const std::string &v);
+  void on_close_do_set(const std::string &v);
   void on_death_do_set(const std::string &v);
   void on_death_drop_all_items_set(int v);
   void on_death_is_open_set(int v);
@@ -2254,7 +2255,6 @@ public:
   void on_lifespan_tick_do_set(const std::string &v);
   void on_move_do_set(const std::string &v);
   void on_open_do_set(const std::string &v);
-  void on_close_do_set(const std::string &v);
   void on_owner_add_do_set(const std::string &v);
   void on_owner_attack_dmg_acid_do_set(const std::string &v);
   void on_owner_attack_dmg_bite_do_set(const std::string &v);

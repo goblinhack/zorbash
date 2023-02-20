@@ -144,13 +144,13 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
           //
           // If the door is not broken, we can close it
           //
-          if ((t->is_treasure_chest() || t->is_door()) && t->is_open) {
-            IF_DEBUG { player->log("Close"); }
+          if (t->is_door() && t->is_open) {
+            IF_DEBUG { player->log("Close door"); }
             TRACE_AND_INDENT();
-            game->tick_begin("close");
+            game->tick_begin("close door");
 
             if (player->close(t)) {
-              IF_DEBUG { player->log("Closed"); }
+              IF_DEBUG { player->log("Closed door"); }
               return true;
             }
 
@@ -164,19 +164,71 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
           //
           // Try to open the door with a key.
           //
-          if ((t->is_treasure_chest() || t->is_door()) && ! t->is_open) {
-            IF_DEBUG { player->log("Open"); }
+          if (t->is_door() && ! t->is_open) {
+            IF_DEBUG { player->log("Open door"); }
             TRACE_AND_INDENT();
-            game->tick_begin("open");
+            game->tick_begin("open door");
 
             if (player->open(t)) {
-              IF_DEBUG { player->log("Opened"); }
+              IF_DEBUG { player->log("Opened door"); }
               player->move(level->cursor->curr_at);
               return true;
             }
 
             //
             // Fall through to attack if we fail to open the door. Maybe there is a monst
+            // in the way
+            //
+          }
+
+          //
+          // If the chest is not broken, we can close it
+          //
+          if (t->is_treasure_chest() && t->is_open) {
+            IF_DEBUG { player->log("Close chest"); }
+            TRACE_AND_INDENT();
+            game->tick_begin("close chest");
+
+            if (player->close(t)) {
+              IF_DEBUG { player->log("Closed chest"); }
+              return true;
+            }
+
+            //
+            // If we fail to close the chest; there could be a larger thing standing there,
+            // then fall through to attack.
+            //
+            IF_DEBUG { player->log("Failed to close chest"); }
+          }
+
+          //
+          // Try to open the chest with a key.
+          //
+          if (t->is_treasure_chest() && ! t->is_open) {
+            IF_DEBUG { player->log("Open chest"); }
+            TRACE_AND_INDENT();
+            game->tick_begin("open chest");
+
+            if (player->open(t)) {
+              IF_DEBUG { player->log("Opened chest"); }
+              player->move(level->cursor->curr_at);
+
+              //
+              // Have we moved close enough to collect? Do this after the double
+              // click check so we do not try to collect things in lava.
+              //
+              if (level->cursor) {
+                auto items = player->anything_to_carry_at(player->curr_at);
+                if (items.size()) {
+                  game->wid_collect_create(items);
+                }
+              }
+
+              return true;
+            }
+
+            //
+            // Fall through to attack if we fail to open the chest. Maybe there is a monst
             // in the way
             //
           }

@@ -21,6 +21,14 @@ void Thing::temperature_tick(void)
     return;
   }
 
+  //
+  // Don't allow things inside chests to catch fire.
+  //
+  auto o_top = top_owner();
+  if (o_top && ! o_top->initial_temperature_is_set()) {
+    return;
+  }
+
   if (is_ethereal()) {
     //
     // Ghosts don't burn or freeze.
@@ -78,7 +86,12 @@ void Thing::temperature_tick(void)
     // Same goes for things like treasure chests on the same tile as a torch.
     //
     if (t->is_torch()) {
-      if (is_combustible()) {
+      if (is_treasure_chest() || (o_top && o_top->is_treasure_chest())) {
+        //
+        // Don't ignite torches inside chests.
+        //
+        continue;
+      } else if (is_combustible()) {
         //
         // But make exceptions for combustible things so that they will react to a flaming torch.
         //
@@ -117,7 +130,7 @@ void Thing::temperature_tick(void)
       //
       // If a bag, ignore the temperature of the carrier.
       //
-      if (top_owner() == t) {
+      if (o_top == t) {
         continue;
       }
     }

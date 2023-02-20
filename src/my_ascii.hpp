@@ -90,6 +90,7 @@ bool ascii_is_empty(int x, int y);
 color ascii_get_color(int x, int y, int z);
 
 int ascii_ok(int x, int y);
+int ascii_ok_for_scissors(int x, int y);
 int ascii_strlen(std::wstring const &buf, std::wstring *col);
 int ascii_strlen(std::wstring const &);
 int ascii_tp_br1_tile(int x, int y, fpoint *);

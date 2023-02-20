@@ -20,198 +20,198 @@ static void wid_config_check_for_conflicts(SDL_Keysym code)
   TRACE_AND_INDENT();
 
   if (sdlk_eq(game->config.key_action0, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key action0%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key action0%%fg=reset$");
     game->config.key_action0 = {};
   }
   if (sdlk_eq(game->config.key_action1, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key action1%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key action1%%fg=reset$");
     game->config.key_action1 = {};
   }
   if (sdlk_eq(game->config.key_action2, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key action2%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key action2%%fg=reset$");
     game->config.key_action2 = {};
   }
   if (sdlk_eq(game->config.key_action3, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key action3%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key action3%%fg=reset$");
     game->config.key_action3 = {};
   }
   if (sdlk_eq(game->config.key_action4, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key action4%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key action4%%fg=reset$");
     game->config.key_action4 = {};
   }
   if (sdlk_eq(game->config.key_action5, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key action5%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key action5%%fg=reset$");
     game->config.key_action5 = {};
   }
   if (sdlk_eq(game->config.key_action6, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key action6%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key action6%%fg=reset$");
     game->config.key_action6 = {};
   }
   if (sdlk_eq(game->config.key_action7, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key action7%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key action7%%fg=reset$");
     game->config.key_action7 = {};
   }
   if (sdlk_eq(game->config.key_action8, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key action8%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key action8%%fg=reset$");
     game->config.key_action8 = {};
   }
   if (sdlk_eq(game->config.key_action9, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key action9%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key action9%%fg=reset$");
     game->config.key_action9 = {};
   }
   if (sdlk_eq(game->config.key_skill0, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key skill0%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key skill0%%fg=reset$");
     game->config.key_skill0 = {};
   }
   if (sdlk_eq(game->config.key_skill1, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key skill1%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key skill1%%fg=reset$");
     game->config.key_skill1 = {};
   }
   if (sdlk_eq(game->config.key_skill2, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key skill2%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key skill2%%fg=reset$");
     game->config.key_skill2 = {};
   }
   if (sdlk_eq(game->config.key_skill3, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key skill3%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key skill3%%fg=reset$");
     game->config.key_skill3 = {};
   }
   if (sdlk_eq(game->config.key_skill4, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key skill4%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key skill4%%fg=reset$");
     game->config.key_skill4 = {};
   }
   if (sdlk_eq(game->config.key_skill5, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key skill5%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key skill5%%fg=reset$");
     game->config.key_skill5 = {};
   }
   if (sdlk_eq(game->config.key_skill6, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key skill6%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key skill6%%fg=reset$");
     game->config.key_skill6 = {};
   }
   if (sdlk_eq(game->config.key_skill7, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key skill7%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key skill7%%fg=reset$");
     game->config.key_skill7 = {};
   }
   if (sdlk_eq(game->config.key_skill8, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key skill8%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key skill8%%fg=reset$");
     game->config.key_skill8 = {};
   }
   if (sdlk_eq(game->config.key_skill9, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key skill9%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key skill9%%fg=reset$");
     game->config.key_skill9 = {};
   }
   if (sdlk_eq(game->config.key_attack, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key attack.%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key attack.%%fg=reset$");
     game->config.key_attack = {};
   }
   if (sdlk_eq(game->config.key_drop, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key drop.%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key drop.%%fg=reset$");
     game->config.key_drop = {};
   }
   if (sdlk_eq(game->config.key_help, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key help.%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key help.%%fg=reset$");
     game->config.key_help = {};
   }
   if (sdlk_eq(game->config.key_jump, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key jump.%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key jump.%%fg=reset$");
     game->config.key_jump = {};
   }
   if (sdlk_eq(game->config.key_load, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key load.%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key load.%%fg=reset$");
     game->config.key_load = {};
   }
   if (sdlk_eq(game->config.key_map_down, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key map down.%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key map down.%%fg=reset$");
     game->config.key_map_down = {};
   }
   if (sdlk_eq(game->config.key_map_left, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key map left.%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key map left.%%fg=reset$");
     game->config.key_map_left = {};
   }
   if (sdlk_eq(game->config.key_map_right, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key map right.%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key map right.%%fg=reset$");
     game->config.key_map_right = {};
   }
   if (sdlk_eq(game->config.key_map_up, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key map up.%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key map up.%%fg=reset$");
     game->config.key_map_up = {};
   }
   if (sdlk_eq(game->config.key_move_down, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key move down.%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key move down.%%fg=reset$");
     game->config.key_move_down = {};
   }
   if (sdlk_eq(game->config.key_move_left, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key move left.%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key move left.%%fg=reset$");
     game->config.key_move_left = {};
   }
   if (sdlk_eq(game->config.key_move_right, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key move right.%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key move right.%%fg=reset$");
     game->config.key_move_right = {};
   }
   if (sdlk_eq(game->config.key_move_up, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key move up.%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key move up.%%fg=reset$");
     game->config.key_move_up = {};
   }
   if (sdlk_eq(game->config.key_quit, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key quit.%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key quit.%%fg=reset$");
     game->config.key_quit = {};
   }
   if (sdlk_eq(game->config.key_save, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key save.%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key save.%%fg=reset$");
     game->config.key_save = {};
   }
   if (sdlk_eq(game->config.key_screenshot, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key screenshot.%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key screenshot.%%fg=reset$");
     game->config.key_screenshot = {};
   }
   if (sdlk_eq(game->config.key_throw, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key throw.%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key throw.%%fg=reset$");
     game->config.key_throw = {};
   }
   if (sdlk_eq(game->config.key_inventory, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key gfx mode.%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key gfx mode.%%fg=reset$");
     game->config.key_inventory = {};
   }
   if (sdlk_eq(game->config.key_console, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key console%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key console%%fg=reset$");
     game->config.key_console = {};
   }
   IF_DEBUG2
   {
     if (sdlk_eq(game->config.key_robot_mode, code)) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key robot mode%%fg=reset$");
+      TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key robot mode%%fg=reset$");
       game->config.key_robot_mode = {};
     }
   }
   if (sdlk_eq(game->config.key_gfx_toggle, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key gfx toggle%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key gfx toggle%%fg=reset$");
     game->config.key_gfx_toggle = {};
   }
   if (sdlk_eq(game->config.key_descend, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key descend%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key descend%%fg=reset$");
     game->config.key_descend = {};
   }
   if (sdlk_eq(game->config.key_ascend, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key ascend%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key ascend%%fg=reset$");
     game->config.key_ascend = {};
   }
   if (sdlk_eq(game->config.key_eat, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key eat%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key eat%%fg=reset$");
     game->config.key_eat = {};
   }
   if (sdlk_eq(game->config.key_use, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key use.%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key use.%%fg=reset$");
     game->config.key_use = {};
   }
   if (sdlk_eq(game->config.key_wait_or_collect, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key wait.%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key wait.%%fg=reset$");
     game->config.key_wait_or_collect = {};
   }
   if (sdlk_eq(game->config.key_zoom_in, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key zoom in.%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key zoom in.%%fg=reset$");
     game->config.key_zoom_in = {};
   }
   if (sdlk_eq(game->config.key_zoom_out, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key zoom out.%%fg=reset$");
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key zoom out.%%fg=reset$");
     game->config.key_zoom_out = {};
   }
 }

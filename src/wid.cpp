@@ -4325,10 +4325,9 @@ Widp wid_find_under_mouse(void)
   auto w = wid_find_at(ascii_mouse_x, ascii_mouse_y);
   if (w) {
     w = wid_get_top_parent(w);
+    // CON("mouse %d,%d over %s %p", ascii_mouse_x, ascii_mouse_y, w->name.c_str(), w);
     if (wid_ignore_events_only(w)) {
       return nullptr;
-    } else {
-      return w;
     }
     return w;
   }
@@ -6409,6 +6408,11 @@ static void wid_display(Widp w, uint8_t disable_scissor, uint8_t *updated_scisso
   }
 
   {
+    //
+    // Set the tiles this widget is over, taking into account the scissors
+    // if the parent is resized.
+    //
+    // CON("%d,%d to %d,%d %s %p", tl.x, tl.y, br.x, br.y, w->name.c_str(), w);
     for (auto x = tl.x; x < br.x; x++) {
       if (unlikely(! ascii_x_ok(x))) {
         continue;
@@ -6417,7 +6421,10 @@ static void wid_display(Widp w, uint8_t disable_scissor, uint8_t *updated_scisso
         if (unlikely(! ascii_y_ok(y))) {
           continue;
         }
-        set(wid_on_screen_at, x, y, w);
+
+        if (ascii_ok_for_scissors(x, y)) {
+          set(wid_on_screen_at, x, y, w);
+        }
       }
     }
   }
@@ -6859,6 +6866,8 @@ void wid_display_all(bool ok_to_handle_requests)
   TRACE_NO_INDENT();
   wid_move_all();
 
+  // CON("---------------------------------");
+
   wid_on_screen_at = {};
 
   wid_total_count = 0;
@@ -6885,6 +6894,19 @@ printf("========================================= %d\n", wid_total_count);
   if (wid_total_count > 5000) {
     ERR("Too many widgets %d", wid_total_count);
   }
+
+#if 0
+  for (auto y = 0; y < TERM_HEIGHT; y++) {
+    for (auto x = 0; x < TERM_WIDTH; x++) {
+      if (get_no_check(wid_on_screen_at, x, y)) {
+        putchar('W');
+      } else {
+        putchar(' ');
+      }
+    }
+    putchar('\n');
+  }
+#endif
 
   ascii_clear_scissors();
 
@@ -7171,10 +7193,12 @@ bool wid_some_recent_event_occurred(void)
   // widget for example.
   //
   if (! time_have_x_tenths_passed_since(2, wid_last_over_event)) {
+    // DBG("wid_some_recent_event_occurred: Too soon since last wid over event");
     return true;
   }
 
   if (! time_have_x_tenths_passed_since(1, wid_ignore_events_briefly_ts)) {
+    // DBG("wid_some_recent_event_occurred: Too soon since last ignore event");
     return true;
   }
 
@@ -7187,6 +7211,7 @@ bool wid_some_recent_event_occurred(void)
     auto w = wid_find_under_mouse();
     if (w) {
       if (w->name != "wid topcon window") {
+        // DBG("wid_some_recent_event_occurred: Over wid ignore event: %s %p", w->name.c_str(), w);
         return true;
       }
     }
