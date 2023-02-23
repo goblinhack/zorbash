@@ -2,6 +2,8 @@
 <!-- ------                                                                                                                                       -->
 <!-- regeneration for troll not ogre                                                                                                              -->
 <!-- teleport                                                                                                                                     -->
+<!-- - dimension portal                                                                                                                           -->
+<!-- - teleport block                                                                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -12,11 +14,9 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - dimension portal                                                                                                                           -->
-<!-- - teleport block                                                                                                                             -->
 <!-- - cloak of jelly                                                                                                                             -->
 <!-- - sword of jelly                                                                                                                             -->
-<!-- - potion of paralysis                                                                                                                        -->
+<!-- - paralysis dart                                                                                                                             -->
 <!-- - wort food ? fungas foods and some poisonous?                                                                                               -->
 <!-- - spider web spawn small spiders?                                                                                                            -->
 <!-- - monsters with random buffs like vampirism would be interesting                                                                             -->

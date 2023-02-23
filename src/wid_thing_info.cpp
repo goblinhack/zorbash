@@ -1851,9 +1851,7 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
     //
     // Cannot see inside a chest, so no log
     //
-    if (t->is_treasure_chest()) {
-      w->log("Looks to be locked.", TEXT_FORMAT_LHS);
-    } else if (t->is_bag()) {
+    if (t->is_bag()) {
       if (items > 3) {
         w->log("Looks to be bulging with presents.", TEXT_FORMAT_LHS);
       } else if (items > 1) {
