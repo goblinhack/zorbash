@@ -129,7 +129,7 @@ def tp_init(name, text_long_name):
     my.stat_luck(self, 8)
     my.stat_str(self, 18)
     my.text_a_or_an(self, "a")
-    my.text_description_long2(self, "This fire troll likes the heat of battle.")
+    my.text_description_long2(self, "This fire troll likes the heat of battle and does not appreciate comments that he looks like Iron Man.")
     my.text_description_long3(self, "Trolls can naturally regenerate health. You have been warned.")
     my.text_description_long(self, "An enormous creature that seems to be a collection of burning boulders strung together and brought to life.")
     my.text_description_short(self, "A hot fire troll.")

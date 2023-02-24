@@ -208,6 +208,10 @@
 Zorbash
 -------
 
+<p align="center">
+<img alt="Pixel art" src="pics/banner.png" width="85%">
+</p>
+
 Welcome to the lair of the dread tentacleye, Zorbash. Collect the crystals of Zorb and confront Zorbash to win.
 This is work in progress.
 
@@ -320,22 +324,6 @@ Press <TAB> to switch between modes during the game.
 <img alt="Ascii art" src="pics/ascii/screenshot.12.png" width="45%">
 </p>
 
-Ascii Screenshots
------------------
-
-![Alt text](pics/ascii/screenshot.1.png?raw=true "")
-![Alt text](pics/ascii/screenshot.2.png?raw=true "")
-![Alt text](pics/ascii/screenshot.3.png?raw=true "")
-![Alt text](pics/ascii/screenshot.4.png?raw=true "")
-![Alt text](pics/ascii/screenshot.5.png?raw=true "")
-![Alt text](pics/ascii/screenshot.6.png?raw=true "")
-![Alt text](pics/ascii/screenshot.7.png?raw=true "")
-![Alt text](pics/ascii/screenshot.8.png?raw=true "")
-![Alt text](pics/ascii/screenshot.9.png?raw=true "")
-![Alt text](pics/ascii/screenshot.10.png?raw=true "")
-![Alt text](pics/ascii/screenshot.11.png?raw=true "")
-![Alt text](pics/ascii/screenshot.12.png?raw=true "")
-
 Pixelart Screenshots
 --------------------
 
@@ -359,6 +347,22 @@ Pixelart Screenshots
 ![Alt text](pics/pixelart/screenshot.18.png?raw=true "")
 ![Alt text](pics/pixelart/screenshot.19.png?raw=true "")
 ![Alt text](pics/pixelart/screenshot.20.png?raw=true "")
+
+Ascii Screenshots
+-----------------
+
+![Alt text](pics/ascii/screenshot.1.png?raw=true "")
+![Alt text](pics/ascii/screenshot.2.png?raw=true "")
+![Alt text](pics/ascii/screenshot.3.png?raw=true "")
+![Alt text](pics/ascii/screenshot.4.png?raw=true "")
+![Alt text](pics/ascii/screenshot.5.png?raw=true "")
+![Alt text](pics/ascii/screenshot.6.png?raw=true "")
+![Alt text](pics/ascii/screenshot.7.png?raw=true "")
+![Alt text](pics/ascii/screenshot.8.png?raw=true "")
+![Alt text](pics/ascii/screenshot.9.png?raw=true "")
+![Alt text](pics/ascii/screenshot.10.png?raw=true "")
+![Alt text](pics/ascii/screenshot.11.png?raw=true "")
+![Alt text](pics/ascii/screenshot.12.png?raw=true "")
 
 How to build
 ------------
