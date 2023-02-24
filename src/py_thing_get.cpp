@@ -324,6 +324,7 @@ THING_BODY_GET_BOOL(thing_is_enchantstone, is_enchantstone)
 THING_BODY_GET_BOOL(thing_is_engulfer, is_engulfer)
 THING_BODY_GET_BOOL(thing_is_ethereal, is_ethereal)
 THING_BODY_GET_BOOL(thing_is_ethereal_mob, is_ethereal_mob)
+THING_BODY_GET_BOOL(thing_is_ettin, is_ettin)
 THING_BODY_GET_BOOL(thing_is_exit_finder, is_exit_finder)
 THING_BODY_GET_BOOL(thing_is_explorer, is_explorer)
 THING_BODY_GET_BOOL(thing_is_explosion, is_explosion)
@@ -525,7 +526,6 @@ THING_BODY_GET_BOOL(thing_tick_prio, tick_prio)
 THING_BODY_GET_BOOL(thing_unused_flag1, unused_flag1)
 THING_BODY_GET_BOOL(thing_unused_flag27, unused_flag27)
 THING_BODY_GET_BOOL(thing_unused_flag2, unused_flag2)
-THING_BODY_GET_BOOL(thing_unused_flag3, unused_flag3)
 // end sort marker1 }
 
 // begin sort marker2 {

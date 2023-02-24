@@ -638,7 +638,7 @@ bool Tp::matches(const std::string &what)
   if (unused_flag2() && (what == "unused_flag2")) {
     return true;
   }
-  if (unused_flag3() && (what == "unused_flag3")) {
+  if (is_ettin() && (what == "is_ettin")) {
     return true;
   }
   if (is_golem() && (what == "is_golem")) {
@@ -1832,7 +1832,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag2() && (what == "unused_flag2")) {
     return true;
   }
-  if (unused_flag3() && (what == "unused_flag3")) {
+  if (is_ettin() && (what == "is_ettin")) {
     return true;
   }
   if (is_golem() && (what == "is_golem")) {
@@ -3384,8 +3384,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_msg_allowed_hears_something") {
     return &Thing::is_msg_allowed_hears_something;
   }
-  if (what == "unused_flag3") {
-    return &Thing::unused_flag3;
+  if (what == "is_ettin") {
+    return &Thing::is_ettin;
   }
   if (what == "is_unused_flag9") {
     return &Thing::is_unused_flag9;

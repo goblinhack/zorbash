@@ -12,7 +12,6 @@ def explode(me, x, y):
 
     my.thing_msg(me, "The sentry orb explodes!")
     my.spawn_at_my_position(me, "explosion_major")
-    # my.spawn_radius_range(me, "energy", min=0, max=3)
 
 
 def on_want_to_shoot_at(me, target, target_x, target_y):  # Return True on doing an action
@@ -28,7 +27,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.aggression_pct(self, 100)
     my.ai_wanderer(self, True)
     my.attack_humanoid(self, True)
-    my.attacks_per_round(self, 0)  # energys only
+    my.attacks_per_round(self, 0)  # fires only
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.distance_vision(self, 8)

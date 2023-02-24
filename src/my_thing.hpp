@@ -1396,6 +1396,7 @@ public:
   int is_engulfer(void);
   int is_ethereal_mob(void);
   int is_ethereal(void);
+  int is_ettin(void);
   int is_exit_finder(void);
   int is_explorer(void);
   int is_explosion(void);
@@ -2005,7 +2006,6 @@ public:
   int unused_flag1(void);
   int unused_flag27(void);
   int unused_flag2(void);
-  int unused_flag3(void);
   int value(const Thingp it);
   int weapon_dmgd_pct(void);
   int weapon_dmg_modify(int damage);

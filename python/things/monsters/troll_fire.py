@@ -5,6 +5,7 @@ import tp
 def on_born(me, x, y):
     my.thing_enemy(me, "is_ogre")
     my.thing_friend(me, "is_troll")
+    my.thing_enemy(me, "is_ettin")
 
 
 def on_you_nat_att(me, x, y):

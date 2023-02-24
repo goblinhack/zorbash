@@ -1277,10 +1277,10 @@ int Thing::unused_flag2(void)
   return (tp()->unused_flag2());
 }
 
-int Thing::unused_flag3(void)
+int Thing::is_ettin(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag3());
+  return (tp()->is_ettin());
 }
 
 int Thing::is_golem(void)

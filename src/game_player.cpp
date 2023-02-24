@@ -240,7 +240,7 @@ void Game::place_player(void)
         auto d = level->thing_new("dogman", point(x + 2, y));
         d->wake("");
       }
-      level->thing_new("demon_fire", point(x + 4, y));
+      // level->thing_new("demon_fire", point(x + 4, y));
       // level->thing_new("ogre", point(x + 4, y));
       // level->thing_new("troll_stone", point(x + 2, y));
       // level->thing_new("troll_fire", point(x + 2, y + 2));

@@ -12,7 +12,6 @@ def explode(me, x, y):
 
     my.thing_msg(me, "The sentry orb explodes!")
     my.spawn_at_my_position(me, "explosion_major")
-    # my.spawn_radius_range(me, "fire", min=0, max=3)
 
 
 def on_want_to_shoot_at(me, target, target_x, target_y):  # Return True on doing an action

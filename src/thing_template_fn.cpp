@@ -474,6 +474,7 @@ int Tp::is_enchantstone(void) const { return _is_enchantstone; }
 int Tp::is_engulfer(void) const { return _is_engulfer; }
 int Tp::is_ethereal_mob(void) const { return _is_ethereal_mob; }
 int Tp::is_ethereal(void) const { return _is_ethereal; }
+int Tp::is_ettin(void) const { return _is_ettin; }
 int Tp::is_exit_finder(void) const { return _is_exit_finder; }
 int Tp::is_explorer(void) const { return _is_explorer; }
 int Tp::is_explosion(void) const { return _is_explosion; }
@@ -723,7 +724,6 @@ int Tp::unused_flag12(void) const { return _unused_flag12; }
 int Tp::unused_flag1(void) const { return _unused_flag1; }
 int Tp::unused_flag27(void) const { return _unused_flag27; }
 int Tp::unused_flag2(void) const { return _unused_flag2; }
-int Tp::unused_flag3(void) const { return _unused_flag3; }
 int Tp::weapon_dmg(void) const { return _weapon_dmg; }
 // end sort marker2 }
 
@@ -1018,6 +1018,7 @@ void Tp::is_enchantstone_set(int v) { _is_enchantstone = v; }
 void Tp::is_engulfer_set(int v) { _is_engulfer = v; }
 void Tp::is_ethereal_mob_set(int v) { _is_ethereal_mob = v; }
 void Tp::is_ethereal_set(int v) { _is_ethereal = v; }
+void Tp::is_ettin_set(int v) { _is_ettin = v; }
 void Tp::is_exit_finder_set(int v) { _is_exit_finder = v; }
 void Tp::is_explorer_set(int v) { _is_explorer = v; }
 void Tp::is_explosion_set(int v) { _is_explosion = v; }
@@ -1415,7 +1416,6 @@ void Tp::unused_flag12_set(int v) { _unused_flag12 = v; }
 void Tp::unused_flag1_set(int v) { _unused_flag1 = v; }
 void Tp::unused_flag27_set(int v) { _unused_flag27 = v; }
 void Tp::unused_flag2_set(int v) { _unused_flag2 = v; }
-void Tp::unused_flag3_set(int v) { _unused_flag3 = v; }
 void Tp::weapon_dmg_set(int v) { _weapon_dmg = v; }
 void Tp::weapon_use_distance_set(int v) { _weapon_use_distance = v; }
 void Tp::z_depth_set(int v) { z_depth = v; }

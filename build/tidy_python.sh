@@ -535,7 +535,7 @@ do
       unused_flag27 \
       is_lightning \
       is_immune_to_negation \
-      unused_flag3 \
+      is_ettin \
       is_golem \
       is_unused_flag9 \
       is_able_to_regenerate \

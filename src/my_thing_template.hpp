@@ -398,6 +398,7 @@ private:
   int _is_engulfer {};
   int _is_ethereal {};
   int _is_ethereal_mob {};
+  int _is_ettin {};
   int _is_exit_finder {};
   int _is_explorer {};
   int _is_explosion {};
@@ -648,7 +649,6 @@ private:
   int _unused_flag12 {};
   int _unused_flag2 {};
   int _unused_flag27 {};
-  int _unused_flag3 {};
   int _weapon_dmg {};
   int _weapon_use_distance {};
   // end sort marker1 }
@@ -1482,6 +1482,7 @@ public:
   int is_engulfer(void) const;
   int is_ethereal_mob(void) const;
   int is_ethereal(void) const;
+  int is_ettin(void) const;
   int is_exit_finder(void) const;
   int is_explorer(void) const;
   int is_explosion(void) const;
@@ -1731,7 +1732,6 @@ public:
   int unused_flag1(void) const;
   int unused_flag27(void) const;
   int unused_flag2(void) const;
-  int unused_flag3(void) const;
   int weapon_dmg(void) const;
   // end sort marker4 }
 
@@ -2026,6 +2026,7 @@ public:
   void is_engulfer_set(int v);
   void is_ethereal_mob_set(int v);
   void is_ethereal_set(int v);
+  void is_ettin_set(int v);
   void is_exit_finder_set(int v);
   void is_explorer_set(int v);
   void is_explosion_set(int v);
@@ -2426,7 +2427,6 @@ public:
   void unused_flag1_set(int v);
   void unused_flag27_set(int v);
   void unused_flag2_set(int v);
-  void unused_flag3_set(int v);
   void weapon_dmg_set(int v);
   void weapon_use_distance_set(int v);
   void z_depth_set(int v);

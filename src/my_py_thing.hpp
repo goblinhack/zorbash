@@ -302,6 +302,7 @@ PyObject *thing_is_enchantstone(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *thing_is_engulfer(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ethereal_mob(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ethereal(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_ettin(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_exit_finder(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_explorer(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_explosion(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -598,7 +599,6 @@ PyObject *thing_unfreeze(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag1(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag27(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag2(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag3(PyObject *obj, PyObject *args, PyObject *keywds);
 // end sort marker1 }
 
 #endif
