@@ -1,6 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- regeneration for troll not ogre                                                                                                              -->
+<!-- after throwing a dart do not change the shortcut                                                                                             -->
 <!-- teleport                                                                                                                                     -->
 <!-- - dimension portal                                                                                                                           -->
 <!-- - teleport block                                                                                                                             -->
@@ -218,7 +218,7 @@ Current status:
 
 Content:
 <!-- begin type marker -->
-- 64 x monsters
+- 66 x monsters
 - 52 x food
 - 19 x treasure
 - 13 x weapons

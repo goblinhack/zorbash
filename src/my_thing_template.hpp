@@ -495,6 +495,7 @@ private:
   int _is_obs_in_the_way_for_throwing {};
   int _is_obs_wall_or_door {};
   int _is_obs_when_dead {};
+  int _is_ogre {};
   int _is_openable {};
   int _is_organic {};
   int _is_pillar {};
@@ -550,6 +551,7 @@ private:
   int _is_treasure_class_B {};
   int _is_treasure_class_C {};
   int _is_treasure_type {};
+  int _is_troll {};
   int _is_undead {};
   int _is_usable {};
   int _is_used_when_thrown {};
@@ -585,6 +587,7 @@ private:
   int _normal_placement_rules {};
   int _on_death_drop_all_items {};
   int _on_death_is_open {};
+  int _on_death_is_stone {};
   int _range_max {};
   int _rarity {};
   int _shove_strength {};
@@ -646,9 +649,6 @@ private:
   int _unused_flag4 {};
   int _unused_flag40 {};
   int _unused_flag5 {};
-  int _unused_flag6 {};
-  int _unused_flag7 {};
-  int _unused_flag8 {};
   int _weapon_dmg {};
   int _weapon_use_distance {};
   // end sort marker1 }
@@ -850,6 +850,7 @@ public:
   bool is_obs_for_ai_for_me(class Level *, point);
   bool can_eat(const Thingp itp);
   bool is_edible(const Thingp it);
+  bool matches(const std::string &what);
   bool has_temperature(void);
   bool initial_temperature_is_set(void) const;
   bool temperature_min_is_set(void) const;
@@ -1577,6 +1578,7 @@ public:
   int is_obs_in_the_way_for_throwing(void) const;
   int is_obs_wall_or_door(void) const;
   int is_obs_when_dead(void) const;
+  int is_ogre(void) const;
   int is_openable(void) const;
   int is_organic(void) const;
   int is_pillar(void) const;
@@ -1632,6 +1634,7 @@ public:
   int is_treasure_class_C(void) const;
   int is_treasure_type(void) const;
   int is_treasure(void) const;
+  int is_troll(void) const;
   int is_undead(void) const;
   int is_usable(void) const;
   int is_used_when_thrown(void) const;
@@ -1667,6 +1670,7 @@ public:
   int normal_placement_rules(void) const;
   int on_death_drop_all_items(void) const;
   int on_death_is_open(void) const;
+  int on_death_is_stone(void) const;
   int range_max(void) const;
   int rarity(void) const;
   int shove_strength_mod(void) const;
@@ -1728,9 +1732,6 @@ public:
   int unused_flag40(void) const;
   int unused_flag4(void) const;
   int unused_flag5(void) const;
-  int unused_flag6(void) const;
-  int unused_flag7(void) const;
-  int unused_flag8(void) const;
   int weapon_dmg(void) const;
   // end sort marker4 }
 
@@ -2121,6 +2122,7 @@ public:
   void is_obs_in_the_way_for_throwing_set(int v);
   void is_obs_wall_or_door_set(int v);
   void is_obs_when_dead_set(int v);
+  void is_ogre_set(int v);
   void is_openable_set(int v);
   void is_organic_set(int v);
   void is_pillar_set(int v);
@@ -2176,6 +2178,7 @@ public:
   void is_treasure_class_C_set(int v);
   void is_treasure_set(int v);
   void is_treasure_type_set(int v);
+  void is_troll_set(int v);
   void is_undead_set(int v);
   void is_usable_set(int v);
   void is_used_when_thrown_set(int v);
@@ -2239,6 +2242,7 @@ public:
   void on_death_do_set(const std::string &v);
   void on_death_drop_all_items_set(int v);
   void on_death_is_open_set(int v);
+  void on_death_is_stone_set(int v);
   void on_death_of_a_follower_do_set(const std::string &v);
   void on_death_of_my_leader_do_set(const std::string &v);
   void on_dropped_do_set(const std::string &v);
@@ -2423,9 +2427,6 @@ public:
   void unused_flag40_set(int v);
   void unused_flag4_set(int v);
   void unused_flag5_set(int v);
-  void unused_flag6_set(int v);
-  void unused_flag7_set(int v);
-  void unused_flag8_set(int v);
   void weapon_dmg_set(int v);
   void weapon_use_distance_set(int v);
   void z_depth_set(int v);

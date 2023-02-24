@@ -74,7 +74,7 @@ def tp_init(name, text_long_name):
     my.noise_decibels_hearing(self, 0)
     my.normal_placement_rules(self, True)
     my.on_you_nat_att_do(self, "me.on_you_nat_att()")
-    my.rarity(self, my.RARITY_VERY_RARE)
+    my.rarity(self, my.RARITY_VERY_RARE)  # how rare within this monster class
     my.resurrect_dice(self, "1d10+30")
     my.stat_con(self, 25)
     my.stat_def(self, 25)

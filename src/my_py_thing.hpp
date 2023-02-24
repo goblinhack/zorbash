@@ -395,6 +395,7 @@ PyObject *thing_is_obs_in_the_way_for_jumping(PyObject *obj, PyObject *args, PyO
 PyObject *thing_is_obs_in_the_way_for_throwing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obs_wall_or_door(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obs_when_dead(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_ogre(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_on_fire(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_openable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_organic(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -450,6 +451,7 @@ PyObject *thing_is_torch(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_treasure_chest(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_treasure(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_treasure_type(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_troll(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_undead(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_usable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_used_when_thrown(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -493,6 +495,7 @@ PyObject *thing_noise_on_hit_and_still_alive(PyObject *obj, PyObject *args, PyOb
 PyObject *thing_noise_on_moving(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_noise_on_open_or_close(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_noise_set(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_on_death_is_stone(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_perma_death(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_poisoned_amount_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_poisoned_amount_get(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -596,9 +599,6 @@ PyObject *thing_unused_flag3(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag40(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag4(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag5(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);
 // end sort marker1 }
 
 #endif

@@ -4,7 +4,1205 @@
 
 #include "my_string.hpp"
 #include "my_thing.hpp"
+#include "my_thing_template.hpp"
 #include "slre.hpp"
+
+bool Tp::matches(const std::string &what)
+{
+  if (strisregexp(what.c_str())) {
+    struct slre slre;
+    if (slre_compile(&slre, what.c_str())) {
+      auto name = text_short_name();
+      if (slre_match(&slre, name.c_str(), name.size(), nullptr /* captures */)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  if (is_able_to_attack_mobs() && (what == "is_able_to_attack_mobs")) {
+    return true;
+  }
+  if (is_able_to_break_down_doors() && (what == "is_able_to_break_down_doors")) {
+    return true;
+  }
+  if (is_able_to_break_out_of_webs() && (what == "is_able_to_break_out_of_webs")) {
+    return true;
+  }
+  if (is_able_to_collect_keys() && (what == "is_able_to_collect_keys")) {
+    return true;
+  }
+  if (ai_detect_secret_doors() && (what == "ai_detect_secret_doors")) {
+    return true;
+  }
+  if (is_able_to_enchant_items() && (what == "is_able_to_enchant_items")) {
+    return true;
+  }
+  if (is_able_to_jump() && (what == "is_able_to_jump")) {
+    return true;
+  }
+  if (is_able_to_learn_skills() && (what == "is_able_to_learn_skills")) {
+    return true;
+  }
+  if (is_able_to_open_doors() && (what == "is_able_to_open_doors")) {
+    return true;
+  }
+  if (is_able_to_see_through_doors() && (what == "is_able_to_see_through_doors")) {
+    return true;
+  }
+  if (is_able_to_shove() && (what == "is_able_to_shove")) {
+    return true;
+  }
+  if (is_able_to_grapple() && (what == "is_able_to_grapple")) {
+    return true;
+  }
+  if (is_able_to_walk_through_walls() && (what == "is_able_to_walk_through_walls")) {
+    return true;
+  }
+  if (is_exit_finder() && (what == "is_exit_finder")) {
+    return true;
+  }
+  if (is_item_collector() && (what == "is_item_collector")) {
+    return true;
+  }
+  if (is_explorer() && (what == "is_explorer")) {
+    return true;
+  }
+  if (ai_resent_count() && (what == "ai_resent_count")) {
+    return true;
+  }
+  if (ai_wanderer() && (what == "ai_wanderer")) {
+    return true;
+  }
+  if (attack_eater() && (what == "attack_eater")) {
+    return true;
+  }
+  if (attack_humanoid() && (what == "attack_humanoid")) {
+    return true;
+  }
+  if (attack_living() && (what == "attack_living")) {
+    return true;
+  }
+  if (is_able_to_lunge() && (what == "is_able_to_lunge")) {
+    return true;
+  }
+  if (attack_meat() && (what == "attack_meat")) {
+    return true;
+  }
+  if (attack_undead() && (what == "attack_undead")) {
+    return true;
+  }
+  if (effect_radius() && (what == "effect_radius")) {
+    return true;
+  }
+  if (blast_min_radius() && (what == "blast_min_radius")) {
+    return true;
+  }
+  if (enchant_max() && (what == "enchant_max")) {
+    return true;
+  }
+  if (environ_avoids_acid() && (what == "environ_avoids_acid")) {
+    return true;
+  }
+  if (environ_avoids_cold() && (what == "environ_avoids_cold")) {
+    return true;
+  }
+  if (environ_avoids_fire() && (what == "environ_avoids_fire")) {
+    return true;
+  }
+  if (environ_avoids_necrosis() && (what == "environ_avoids_necrosis")) {
+    return true;
+  }
+  if (environ_avoids_poison() && (what == "environ_avoids_poison")) {
+    return true;
+  }
+  if (environ_avoids_water() && (what == "environ_avoids_water")) {
+    return true;
+  }
+  if (is_immune_to_acid() && (what == "is_immune_to_acid")) {
+    return true;
+  }
+  if (is_immune_to_fire() && (what == "is_immune_to_fire")) {
+    return true;
+  }
+  if (is_immune_to_necrosis() && (what == "is_immune_to_necrosis")) {
+    return true;
+  }
+  if (is_immune_to_poison() && (what == "is_immune_to_poison")) {
+    return true;
+  }
+  if (is_immune_to_spiderwebs() && (what == "is_immune_to_spiderwebs")) {
+    return true;
+  }
+  if (is_immune_to_water() && (what == "is_immune_to_water")) {
+    return true;
+  }
+  if (is_able_to_change_levels() && (what == "is_able_to_change_levels")) {
+    return true;
+  }
+  if (is_able_to_fall() && (what == "is_able_to_fall")) {
+    return true;
+  }
+  if (is_able_to_shoot_at() && (what == "is_able_to_shoot_at")) {
+    return true;
+  }
+  if (is_able_to_see_in_the_dark() && (what == "is_able_to_see_in_the_dark")) {
+    return true;
+  }
+  if (is_able_to_tire() && (what == "is_able_to_tire")) {
+    return true;
+  }
+  if (is_acid() && (what == "is_acid")) {
+    return true;
+  }
+  if (is_alive_on_end_of_anim() && (what == "is_alive_on_end_of_anim")) {
+    return true;
+  }
+  if (is_always_hit() && (what == "is_always_hit")) {
+    return true;
+  }
+  if (is_ascend_dungeon() && (what == "is_ascend_dungeon")) {
+    return true;
+  }
+  if (is_ascend_sewer() && (what == "is_ascend_sewer")) {
+    return true;
+  }
+  if (is_attackable_by_monst() && (what == "is_attackable_by_monst")) {
+    return true;
+  }
+  if (is_attackable_by_player() && (what == "is_attackable_by_player")) {
+    return true;
+  }
+  if (is_auto_collect_item() && (what == "is_auto_collect_item")) {
+    return true;
+  }
+  if (is_auto_equipped() && (what == "is_auto_equipped")) {
+    return true;
+  }
+  if (is_auto_throw() && (what == "is_auto_throw")) {
+    return true;
+  }
+  if (is_auto_use() && (what == "is_auto_use")) {
+    return true;
+  }
+  if (is_bag_item_container() && (what == "is_bag_item_container")) {
+    return true;
+  }
+  if (is_bag_item_not_stackable() && (what == "is_bag_item_not_stackable")) {
+    return true;
+  }
+  if (is_bag_item() && (what == "is_bag_item")) {
+    return true;
+  }
+  if (is_bag() && (what == "is_bag")) {
+    return true;
+  }
+  if (is_barrel() && (what == "is_barrel")) {
+    return true;
+  }
+  if (is_bleeder() && (what == "is_bleeder")) {
+    return true;
+  }
+  if (is_eater_of_red_blood() && (what == "is_eater_of_red_blood")) {
+    return true;
+  }
+  if (is_red_splatter() && (what == "is_red_splatter")) {
+    return true;
+  }
+  if (is_red_blood() && (what == "is_red_blood")) {
+    return true;
+  }
+  if (is_eater_of_green_blood() && (what == "is_eater_of_green_blood")) {
+    return true;
+  }
+  if (is_green_splatter() && (what == "is_green_splatter")) {
+    return true;
+  }
+  if (is_green_blood() && (what == "is_green_blood")) {
+    return true;
+  }
+  if (is_bones() && (what == "is_bones")) {
+    return true;
+  }
+  if (is_brazier() && (what == "is_brazier")) {
+    return true;
+  }
+  if (is_bridge() && (what == "is_bridge")) {
+    return true;
+  }
+  if (is_buff() && (what == "is_buff")) {
+    return true;
+  }
+  if (is_burnable() && (what == "is_burnable")) {
+    return true;
+  }
+  if (is_chasm() && (what == "is_chasm")) {
+    return true;
+  }
+  if (is_collectable() && (what == "is_collectable")) {
+    return true;
+  }
+  if (is_collected_as_keys() && (what == "is_collected_as_keys")) {
+    return true;
+  }
+  if (is_collected_as_gold() && (what == "is_collected_as_gold")) {
+    return true;
+  }
+  if (is_combustible() && (what == "is_combustible")) {
+    return true;
+  }
+  if (is_corridor() && (what == "is_corridor")) {
+    return true;
+  }
+  if (is_critical_to_level() && (what == "is_critical_to_level")) {
+    return true;
+  }
+  if (is_cursor_can_hover_over() && (what == "is_cursor_can_hover_over")) {
+    return true;
+  }
+  if (is_cursor_can_hover_over_x2_click() && (what == "is_cursor_can_hover_over_x2_click")) {
+    return true;
+  }
+  if (is_cursor_path_hazard() && (what == "is_cursor_path_hazard")) {
+    return true;
+  }
+  if (is_cursor_path_blocker() && (what == "is_cursor_path_blocker")) {
+    return true;
+  }
+  if (is_combustible() && (what == "is_combustible")) {
+    return true;
+  }
+  if (is_cursor_path() && (what == "is_cursor_path")) {
+    return true;
+  }
+  if (is_cursor() && (what == "is_cursor")) {
+    return true;
+  }
+  if (is_dead_on_end_of_anim() && (what == "is_dead_on_end_of_anim")) {
+    return true;
+  }
+  if (is_dead_on_shove() && (what == "is_dead_on_shove")) {
+    return true;
+  }
+  if (is_debuff() && (what == "is_debuff")) {
+    return true;
+  }
+  if (is_debug_path() && (what == "is_debug_path")) {
+    return true;
+  }
+  if (is_debug_type() && (what == "is_debug_type")) {
+    return true;
+  }
+  if (is_deep_water() && (what == "is_deep_water")) {
+    return true;
+  }
+  if (is_descend_dungeon() && (what == "is_descend_dungeon")) {
+    return true;
+  }
+  if (is_descend_sewer() && (what == "is_descend_sewer")) {
+    return true;
+  }
+  if (is_described_when_hovering_over() && (what == "is_described_when_hovering_over")) {
+    return true;
+  }
+  if (is_destroyed_on_hit_or_miss() && (what == "is_defeated _on_hit_and_still_alive_or_miss")) {
+    return true;
+  }
+  if (is_destroyed_on_hitting() && (what == "is_defeated _on_hit_and_still_aliveting")) {
+    return true;
+  }
+  if (is_dirt() && (what == "is_dirt")) {
+    return true;
+  }
+  if (is_door() && (what == "is_door")) {
+    return true;
+  }
+  if (is_droppable() && (what == "is_droppable")) {
+    return true;
+  }
+  if (is_dry_grass() && (what == "dry_grass")) {
+    return true;
+  }
+  if (is_wet_grass() && (what == "is_wet_grass")) {
+    return true;
+  }
+  if (is_enchantable() && (what == "is_enchantable")) {
+    return true;
+  }
+  if (is_enchantstone() && (what == "is_enchantstone")) {
+    return true;
+  }
+  if (is_engulfer() && (what == "is_engulfer")) {
+    return true;
+  }
+  if (is_ethereal_mob() && (what == "is_ethereal_mob")) {
+    return true;
+  }
+  if (is_ethereal() && (what == "is_ethereal")) {
+    return true;
+  }
+  if (is_explosion() && (what == "is_explosion")) {
+    return true;
+  }
+  if (is_fearless() && (what == "is_fearless")) {
+    return true;
+  }
+  if (is_fire() && (what == "is_fire")) {
+    return true;
+  }
+  if (is_floating() && (what == "is_floating")) {
+    return true;
+  }
+  if (is_floor_deco() && (what == "is_floor_deco")) {
+    return true;
+  }
+  if (is_floor() && (what == "is_floor")) {
+    return true;
+  }
+  if (is_foliage() && (what == "is_foliage")) {
+    return true;
+  }
+  if (is_eater_of_food() && (what == "is_eater_of_food")) {
+    return true;
+  }
+  if (is_food() && (what == "is_food")) {
+    return true;
+  }
+  if (is_glass() && (what == "is_glass")) {
+    return true;
+  }
+  if (is_gold() && (what == "is_gold")) {
+    return true;
+  }
+  if (is_hazard() && (what == "is_hazard")) {
+    return true;
+  }
+  if (is_health_booster() && (what == "is_health_booster")) {
+    return true;
+  }
+  if (is_hittable() && (what == "is_hittable")) {
+    return true;
+  }
+  if (is_humanoid() && (what == "is_humanoid")) {
+    return true;
+  }
+  if (hunger_is_insatiable() && (what == "hunger_is_insatiable")) {
+    return true;
+  }
+  if (is_very_hard() && (what == "is_very_hard")) {
+    return true;
+  }
+  if (is_intelligent() && (what == "is_intelligent")) {
+    return true;
+  }
+  if (is_interesting() && (what == "is_interesting")) {
+    return true;
+  }
+  if (is_item_carrier() && (what == "is_item_carrier")) {
+    return true;
+  }
+  if (is_thief() && (what == "is_thief")) {
+    return true;
+  }
+  if (is_eater_of_magical_items() && (what == "is_eater_of_magical_items")) {
+    return true;
+  }
+  if (is_magical() && (what == "is_magical")) {
+    return true;
+  }
+  if (is_item_organic() && (what == "is_item_organic")) {
+    return true;
+  }
+  if (is_item() && (what == "is_item")) {
+    return true;
+  }
+  if (is_eater_of_jelly() && (what == "is_eater_of_jelly")) {
+    return true;
+  }
+  if (is_jelly() && (what == "is_jelly")) {
+    return true;
+  }
+  if (is_key() && (what == "is_key")) {
+    return true;
+  }
+  if (is_laser() && (what == "is_laser")) {
+    return true;
+  }
+  if (is_lava() && (what == "is_lava")) {
+    return true;
+  }
+  if (is_light_blocker() && (what == "is_light_blocker")) {
+    return true;
+  }
+  if (is_light_blocker_for_monst() && (what == "is_light_blocker_for_monst")) {
+    return true;
+  }
+  if (is_gas_blocker() && (what == "is_gas_blocker")) {
+    return true;
+  }
+  if (noise_blocker() && (what == "noise_blocker")) {
+    return true;
+  }
+  if (is_living() && (what == "is_living")) {
+    return true;
+  }
+  if (is_loggable() && (what == "is_loggable")) {
+    return true;
+  }
+  if (is_eater_of_meat() && (what == "is_eater_of_meat")) {
+    return true;
+  }
+  if (is_meat() && (what == "is_meat")) {
+    return true;
+  }
+  if (is_metal() && (what == "is_metal")) {
+    return true;
+  }
+  if (is_mob() && (what == "is_mob")) {
+    return true;
+  }
+  if (is_minion() && (what == "is_minion")) {
+    return true;
+  }
+  if (is_monst() && (what == "is_monst")) {
+    return true;
+  }
+  if (is_moveable() && (what == "is_moveable")) {
+    return true;
+  }
+  if (is_msg() && (what == "is_msg")) {
+    return true;
+  }
+  if (is_necrotic_danger_level() && (what == "is_necrotic_danger_level")) {
+    return true;
+  }
+  if (is_no_tile() && (what == "is_no_tile")) {
+    return true;
+  }
+  if (is_obs_destructable() && (what == "is_obs_destructable")) {
+    return true;
+  }
+  if (is_obs_wall_or_door() && (what == "is_obs_wall_or_door")) {
+    return true;
+  }
+  if (is_openable() && (what == "is_openable")) {
+    return true;
+  }
+  if (is_organic() && (what == "is_organic")) {
+    return true;
+  }
+  if (is_player() && (what == "is_player")) {
+    return true;
+  }
+  if (is_poisonous_danger_level() && (what == "is_poisonous_danger_level")) {
+    return true;
+  }
+  if (is_eater_of_potions() && (what == "is_eater_of_potions")) {
+    return true;
+  }
+  if (is_potion() && (what == "is_potion")) {
+    return true;
+  }
+  if (is_projectile() && (what == "is_projectile")) {
+    return true;
+  }
+  if (is_removable_if_out_of_slots() && (what == "is_removable_if_out_of_slots")) {
+    return true;
+  }
+  if (is_able_to_be_resurrected() && (what == "is_able_to_be_resurrected")) {
+    return true;
+  }
+  if (is_ring() && (what == "is_ring")) {
+    return true;
+  }
+  if (is_ripple() && (what == "is_ripple")) {
+    return true;
+  }
+  if (is_rock() && (what == "is_rock")) {
+    return true;
+  }
+  if (is_rusty() && (what == "is_rusty")) {
+    return true;
+  }
+  if (is_secret_door() && (what == "is_secret_door")) {
+    return true;
+  }
+  if (is_sewer_wall() && (what == "is_sewer_wall")) {
+    return true;
+  }
+  if (is_shallow_water() && (what == "is_shallow_water")) {
+    return true;
+  }
+  if (is_shovable() && (what == "is_shovable")) {
+    return true;
+  }
+  if (is_skillstone() && (what == "is_skillstone")) {
+    return true;
+  }
+  if (is_skill() && (what == "is_skill")) {
+    return true;
+  }
+  if (is_smoke() && (what == "is_smoke")) {
+    return true;
+  }
+  if (is_soft() && (what == "is_soft")) {
+    return true;
+  }
+  if (is_able_to_spawn_things() && (what == "is_able_to_spawn_things")) {
+    return true;
+  }
+  if (is_spiderweb() && (what == "is_spiderweb")) {
+    return true;
+  }
+  if (is_sticky() && (what == "is_sticky")) {
+    return true;
+  }
+  if (is_stone() && (what == "is_stone")) {
+    return true;
+  }
+  if (is_sword() && (what == "is_sword")) {
+    return true;
+  }
+  if (is_target_select() && (what == "is_target_select")) {
+    return true;
+  }
+  if (is_throwable() && (what == "is_throwable")) {
+    return true;
+  }
+  if (is_tickable() && (what == "is_tickable")) {
+    return true;
+  }
+  if (is_tmp_thing() && (what == "is_tmp_thing")) {
+    return true;
+  }
+  if (is_torch() && (what == "is_torch")) {
+    return true;
+  }
+  if (is_treasure_chest() && (what == "is_treasure_chest")) {
+    return true;
+  }
+  if (is_eater_of_treasure() && (what == "is_eater_of_treasure")) {
+    return true;
+  }
+  if (is_treasure_type() && (what == "is_treasure_type")) {
+    return true;
+  }
+  if (is_undead() && (what == "is_undead")) {
+    return true;
+  }
+  if (is_usable() && (what == "is_usable")) {
+    return true;
+  }
+  if (is_used_when_thrown() && (what == "is_used_when_thrown")) {
+    return true;
+  }
+  if (is_very_combustible() && (what == "is_very_combustible")) {
+    return true;
+  }
+  if (is_wall_dungeon() && (what == "is_wall_dungeon")) {
+    return true;
+  }
+  if (is_wall() && (what == "is_wall")) {
+    return true;
+  }
+  if (is_staff() && (what == "is_staff")) {
+    return true;
+  }
+  if (is_able_to_use_rings() && (what == "is_able_to_use_rings")) {
+    return true;
+  }
+  if (is_weapon() && (what == "is_weapon")) {
+    return true;
+  }
+  if (is_wooden() && (what == "is_wooden")) {
+    return true;
+  }
+  if (minion_limit() && (what == "minion_limit")) {
+    return true;
+  }
+  if (range_max() && (what == "range_max")) {
+    return true;
+  }
+  if (is_able_to_jump_escape() && (what == "is_able_to_jump_escape")) {
+    return true;
+  }
+  if (is_able_to_follow() && (what == "is_able_to_follow")) {
+    return true;
+  }
+  if (is_able_to_use_weapons() && (what == "is_able_to_use_weapons")) {
+    return true;
+  }
+  if (is_corpse_with_bones() && (what == "is_corpse_with_bones")) {
+    return true;
+  }
+  if (is_green_splatter() && (what == "is_green_splatter")) {
+    return true;
+  }
+  if (unused_flag1() && (what == "unused_flag1")) {
+    return true;
+  }
+  if (unused_flag2() && (what == "unused_flag2")) {
+    return true;
+  }
+  if (unused_flag3() && (what == "unused_flag3")) {
+    return true;
+  }
+  if (unused_flag4() && (what == "unused_flag4")) {
+    return true;
+  }
+  if (unused_flag5() && (what == "unused_flag5")) {
+    return true;
+  }
+  if (is_ogre() && (what == "is_ogre")) {
+    return true;
+  }
+  if (is_troll() && (what == "is_troll")) {
+    return true;
+  }
+  if (on_death_is_stone() && (what == "on_death_is_stone")) {
+    return true;
+  }
+  if (is_mimic() && (what == "is_mimic")) {
+    return true;
+  }
+  if (effect_has_blast_radius() && (what == "effect_has_blast_radius")) {
+    return true;
+  }
+  if (is_enchantable_as_a_group() && (what == "is_enchantable_as_a_group")) {
+    return true;
+  }
+  if (is_able_to_teleport_attack() && (what == "is_able_to_teleport_attack")) {
+    return true;
+  }
+  if (is_obsidian() && (what == "is_obsidian")) {
+    return true;
+  }
+  if (is_cautious() && (what == "is_cautious")) {
+    return true;
+  }
+  if (is_ranged_weapon() && (what == "is_ranged_weapon")) {
+    return true;
+  }
+  if (is_able_to_use_ranged_weapons() && (what == "is_able_to_use_ranged_weapons")) {
+    return true;
+  }
+  if (is_aerodynamic() && (what == "is_aerodynamic")) {
+    return true;
+  }
+  if (is_light() && (what == "is_light")) {
+    return true;
+  }
+  if (is_missile() && (what == "is_missile")) {
+    return true;
+  }
+  if (is_thrown_as_a_weapon() && (what == "is_thrown_as_a_weapon")) {
+    return true;
+  }
+  if (is_immune_to_electricity() && (what == "is_immune_to_electricity")) {
+    return true;
+  }
+  if (is_able_to_shoot_at_close_range() && (what == "is_able_to_shoot_at_close_range")) {
+    return true;
+  }
+  if (gfx_pixelart_show_highlighted() && (what == "gfx_pixelart_show_highlighted")) {
+    return true;
+  }
+  if (gfx_pixelart_show_square_outlined() && (what == "gfx_pixelart_show_square_outlined")) {
+    return true;
+  }
+  if (is_able_to_see_invisible() && (what == "is_able_to_see_invisible")) {
+    return true;
+  }
+  if (is_invisible() && (what == "is_invisible")) {
+    return true;
+  }
+  if (unused_flag27() && (what == "unused_flag27")) {
+    return true;
+  }
+  if (is_lightning() && (what == "is_lightning")) {
+    return true;
+  }
+  if (is_immune_to_negation() && (what == "is_immune_to_negation")) {
+    return true;
+  }
+  if (is_limb() && (what == "is_limb")) {
+    return true;
+  }
+  if (is_msg_allowed_is_dead() && (what == "is_msg_allowed_is_dead")) {
+    return true;
+  }
+  if (is_obs_in_the_way_for_firing() && (what == "is_obs_in_the_way_for_firing")) {
+    return true;
+  }
+  if (is_msg_allowed_senses_danger() && (what == "is_msg_allowed_senses_danger")) {
+    return true;
+  }
+  if (is_msg_allowed_hears_something() && (what == "is_msg_allowed_hears_something")) {
+    return true;
+  }
+  if (unused_flag40() && (what == "unused_flag40")) {
+    return true;
+  }
+  if (is_obs_for_jump_landing() && (what == "is_obs_for_jump_landing")) {
+    return true;
+  }
+  if (is_able_to_be_surprised() && (what == "is_able_to_be_surprised")) {
+    return true;
+  }
+  if (is_msg_allowed_is_surprised() && (what == "is_msg_allowed_is_surprised")) {
+    return true;
+  }
+  if (is_obs_for_shoving() && (what == "is_obs_for_shoving")) {
+    return true;
+  }
+  if (is_able_to_regenerate() && (what == "is_able_to_regenerate")) {
+    return true;
+  }
+  if (is_always_submerged() && (what == "is_always_submerged")) {
+    return true;
+  }
+  if (is_deep_water_swimmer() && (what == "is_deep_water_swimmer")) {
+    return true;
+  }
+  if (is_shallow_water_swimmer() && (what == "is_shallow_water_swimmer")) {
+    return true;
+  }
+  if (is_biome_unused() && (what == "is_biome_unused")) {
+    return true;
+  }
+  if (is_biome_sewer() && (what == "is_biome_sewer")) {
+    return true;
+  }
+  if (is_swimmer() && (what == "is_swimmer")) {
+    return true;
+  }
+  if (consume_per_bite_amount() && (what == "consume_per_bite_amount")) {
+    return true;
+  }
+  if (is_able_to_live_out_of_water() && (what == "is_able_to_live_out_of_water")) {
+    return true;
+  }
+  if (is_able_to_rest() && (what == "is_able_to_rest")) {
+    return true;
+  }
+  if (is_msg_allowed_is_wounded() && (what == "is_msg_allowed_is_wounded")) {
+    return true;
+  }
+  if (is_msg_allowed_is_seen() && (what == "is_msg_allowed_is_seen")) {
+    return true;
+  }
+  if (is_internal() && (what == "is_internal")) {
+    return true;
+  }
+  if (is_eater_of_helmets() && (what == "is_eater_of_helmets")) {
+    return true;
+  }
+  if (is_eater_of_amulets() && (what == "is_eater_of_amulets")) {
+    return true;
+  }
+  if (is_eater_of_weapons() && (what == "is_eater_of_weapons")) {
+    return true;
+  }
+  if (is_eater_of_boots() && (what == "is_eater_of_boots")) {
+    return true;
+  }
+  if (is_eater_of_gauntlets() && (what == "is_eater_of_gauntlets")) {
+    return true;
+  }
+  if (is_eater_of_cloaks() && (what == "is_eater_of_cloaks")) {
+    return true;
+  }
+  if (is_eater_of_shields() && (what == "is_eater_of_shields")) {
+    return true;
+  }
+  if (is_eater_of_rings() && (what == "is_eater_of_rings")) {
+    return true;
+  }
+  if (is_eater_of_armor() && (what == "is_eater_of_armor")) {
+    return true;
+  }
+  if (is_eater_of_staffs() && (what == "is_eater_of_staffs")) {
+    return true;
+  }
+  if (is_dry_grass_trampled() && (what == "dry_grass_trampled")) {
+    return true;
+  }
+  if (is_cowardly() && (what == "is_cowardly")) {
+    return true;
+  }
+  if (is_obs_in_the_way_for_throwing() && (what == "is_obs_in_the_way_for_throwing")) {
+    return true;
+  }
+  if (is_able_to_freeze() && (what == "is_able_to_freeze")) {
+    return true;
+  }
+  if (is_gelatinous() && (what == "is_gelatinous")) {
+    return true;
+  }
+  if (is_plant() && (what == "is_plant")) {
+    return true;
+  }
+  if (is_steam() && (what == "is_steam")) {
+    return true;
+  }
+  if (is_carnivorous_plant() && (what == "is_carnivorous_plant")) {
+    return true;
+  }
+  if (is_basalt() && (what == "is_basalt")) {
+    return true;
+  }
+  if (is_shovable_and_sticky() && (what == "is_shovable_and_sticky")) {
+    return true;
+  }
+  if (is_block_of_ice() && (what == "is_block_of_ice")) {
+    return true;
+  }
+  if (is_able_to_break_out_of_ice() && (what == "is_able_to_break_out_of_ice")) {
+    return true;
+  }
+  if (is_brittle() && (what == "is_brittle")) {
+    return true;
+  }
+  if (is_block_of_ice() && (what == "is_block_of_ice")) {
+    return true;
+  }
+  if (is_tentacle() && (what == "is_tentacle")) {
+    return true;
+  }
+  if (is_able_to_swim() && (what == "is_able_to_swim")) {
+    return true;
+  }
+  if (is_obs_in_the_way_for_jumping() && (what == "is_obs_in_the_way_for_jumping")) {
+    return true;
+  }
+  if (is_cursor_path_blocker() && (what == "is_cursor_path_blocker")) {
+    return true;
+  }
+  if (tick_prio() && (what == "tick_prio")) {
+    return true;
+  }
+  if (attack_no_msg() && (what == "attack_no_msg")) {
+    return true;
+  }
+  if (is_able_to_attack_owner() && (what == "is_able_to_attack_owner")) {
+    return true;
+  }
+  if (is_dagger() && (what == "is_dagger")) {
+    return true;
+  }
+  if (is_lifeless() && (what == "is_lifeless")) {
+    return true;
+  }
+  if (is_magical() && (what == "is_magical")) {
+    return true;
+  }
+  if (is_immune_to_draining() && (what == "is_immune_to_draining")) {
+    return true;
+  }
+  if (attacks_per_round() && (what == "attacks_per_round")) {
+    return true;
+  }
+  if (is_key_special() && (what == "is_key_special")) {
+    return true;
+  }
+  if (is_crystal() && (what == "is_crystal")) {
+    return true;
+  }
+  if (noise_on_moving() && (what == "noise_on_moving")) {
+    return true;
+  }
+  if (is_tireless() && (what == "is_tireless")) {
+    return true;
+  }
+  if (shove_strength() && (what == "shove_strength")) {
+    return true;
+  }
+  if (is_snake() && (what == "is_snake")) {
+    return true;
+  }
+  if (is_item_targetted() && (what == "is_item_targetted")) {
+    return true;
+  }
+  if (noise_additional_on_teleporting() && (what == "noise_additional_on_teleporting")) {
+    return true;
+  }
+  if (is_able_to_teleport_self() && (what == "is_able_to_teleport_self")) {
+    return true;
+  }
+  if (is_able_to_teleport_without_tiring() && (what == "is_able_to_teleport_without_tiring")) {
+    return true;
+  }
+  if (is_able_to_teleport_escape() && (what == "is_able_to_teleport_escape")) {
+    return true;
+  }
+  if (is_daring() && (what == "is_daring")) {
+    return true;
+  }
+  if (is_monst_pack() && (what == "is_monst_pack")) {
+    return true;
+  }
+  if (is_pillar() && (what == "is_pillar")) {
+    return true;
+  }
+  if (is_able_to_walk_through_walls() && (what == "is_able_to_walk_through_walls")) {
+    return true;
+  }
+  if (collision_hit_two_tiles_ahead() && (what == "collision_hit_two_tiles_ahead")) {
+    return true;
+  }
+  if (is_flat() && (what == "is_flat")) {
+    return true;
+  }
+  if (is_target_radial() && (what == "is_target_radial")) {
+    return true;
+  }
+  if (is_staff() && (what == "is_staff")) {
+    return true;
+  }
+  if (collision_hit_adj() && (what == "collision_hit_adj")) {
+    return true;
+  }
+  if (collision_hit_180() && (what == "collision_hit_180")) {
+    return true;
+  }
+  if (collision_hit_360() && (what == "collision_hit_360")) {
+    return true;
+  }
+  if (is_dead_on_falling() && (what == "is_dead_on_falling")) {
+    return true;
+  }
+  if (dmg_received_doubled_from_cold() && (what == "dmg_received_doubled_from_cold")) {
+    return true;
+  }
+  if (is_cold() && (what == "is_cold")) {
+    return true;
+  }
+  if (is_very_heavy() && (what == "is_very_heavy")) {
+    return true;
+  }
+  if (noise_additional_on_jump_end() && (what == "noise_additional_on_jump_end")) {
+    return true;
+  }
+  if (noise_on_born() && (what == "noise_on_born")) {
+    return true;
+  }
+  if (noise_on_open_or_close() && (what == "noise_on_open_or_close")) {
+    return true;
+  }
+  if (noise_on_hit_and_now_dead() && (what == "noise_on_hit_and_now_dead")) {
+    return true;
+  }
+  if (noise_on_hit_and_still_alive() && (what == "noise_on_hit_and_still_alive")) {
+    return true;
+  }
+  if (noise_decibels_hearing() && (what == "noise_decibels_hearing")) {
+    return true;
+  }
+  if (noise_blocker() && (what == "noise_blocker")) {
+    return true;
+  }
+  if (is_immune_to_cold() && (what == "is_immune_to_cold")) {
+    return true;
+  }
+  if (is_air_breather() && (what == "is_air_breather")) {
+    return true;
+  }
+  if (noise_on_dropping() && (what == "noise_on_dropping")) {
+    return true;
+  }
+  if (is_asleep_initially() && (what == "is_asleep_initially")) {
+    return true;
+  }
+  if (is_able_to_sleep() && (what == "is_able_to_sleep")) {
+    return true;
+  }
+  if (is_obs_when_dead() && (what == "is_obs_when_dead")) {
+    return true;
+  }
+  if (is_gas_blocker() && (what == "is_gas_blocker")) {
+    return true;
+  }
+  if (is_light_blocker_for_monst() && (what == "is_light_blocker_for_monst")) {
+    return true;
+  }
+  if (noise_blocker() && (what == "noise_blocker")) {
+    return true;
+  }
+  if (is_green_blood() && (what == "is_green_blood")) {
+    return true;
+  }
+  if (is_biome_swamp() && (what == "is_biome_swamp")) {
+    return true;
+  }
+  if (is_biome_dungeon() && (what == "is_biome_dungeon")) {
+    return true;
+  }
+  if (is_treasure() && (what == "is_treasure")) {
+    return true;
+  }
+  if (is_monst_class_E() && (what == "is_monst_class_E")) {
+    return true;
+  }
+  if (is_eater_of_green_blood() && (what == "is_eater_of_green_blood")) {
+    return true;
+  }
+  if (is_mob_challenge_class_B() && (what == "is_mob_challenge_class_B")) {
+    return true;
+  }
+  if (is_mob_challenge_class_A() && (what == "is_mob_challenge_class_A")) {
+    return true;
+  }
+  if (is_monst_class_D() && (what == "is_monst_class_D")) {
+    return true;
+  }
+  if (is_monst_class_C() && (what == "is_monst_class_C")) {
+    return true;
+  }
+  if (is_monst_class_B() && (what == "is_monst_class_B")) {
+    return true;
+  }
+  if (is_monst_class_A() && (what == "is_monst_class_A")) {
+    return true;
+  }
+  if (stat_att_penalty_when_in_deep_water() && (what == "stat_att_penalty_when_in_deep_water")) {
+    return true;
+  }
+  if (stat_att_penalty_when_in_shallow_water() && (what == "stat_att_penalty_when_in_shallow_water")) {
+    return true;
+  }
+  if (stat_att_penalty_when_idle_max() && (what == "stat_att_penalty_when_idle_max")) {
+    return true;
+  }
+  if (stat_att_penalty_when_idle() && (what == "stat_att_penalty_when_idle")) {
+    return true;
+  }
+  if (stat_att_penalty_when_stuck() && (what == "stat_att_penalty_when_stuck")) {
+    return true;
+  }
+  if (stat_att_penalty_when_stuck_max() && (what == "stat_att_penalty_when_stuck_max")) {
+    return true;
+  }
+  if (stat_def_penalty_when_stuck_max() && (what == "stat_def_penalty_when_stuck_max")) {
+    return true;
+  }
+  if (stat_def_penalty_when_idle_max() && (what == "stat_def_penalty_when_idle_max")) {
+    return true;
+  }
+  if (stat_def_penalty_when_in_deep_water() && (what == "stat_def_penalty_when_in_deep_water")) {
+    return true;
+  }
+  if (stat_def_penalty_when_in_shallow_water() && (what == "stat_def_penalty_when_in_shallow_water")) {
+    return true;
+  }
+  if (stat_def_penalty_when_stuck() && (what == "stat_def_penalty_when_stuck")) {
+    return true;
+  }
+  if (stat_def_penalty_when_idle() && (what == "stat_def_penalty_when_idle")) {
+    return true;
+  }
+  if (is_able_to_move_diagonally() && (what == "is_able_to_move_diagonally")) {
+    return true;
+  }
+  if (is_able_to_melt() && (what == "is_able_to_melt")) {
+    return true;
+  }
+  if (is_amulet() && (what == "is_amulet")) {
+    return true;
+  }
+  if (is_able_to_use_amulet() && (what == "is_able_to_use_amulet")) {
+    return true;
+  }
+  if (is_able_to_use_helmet() && (what == "is_able_to_use_helmet")) {
+    return true;
+  }
+  if (is_able_to_use_boots() && (what == "is_able_to_use_boots")) {
+    return true;
+  }
+  if (is_able_to_use_cloak() && (what == "is_able_to_use_cloak")) {
+    return true;
+  }
+  if (is_able_to_use_shield() && (what == "is_able_to_use_shield")) {
+    return true;
+  }
+  if (is_able_to_use_gauntlet() && (what == "is_able_to_use_gauntlet")) {
+    return true;
+  }
+  if (is_able_to_use_helmet() && (what == "is_able_to_use_helmet")) {
+    return true;
+  }
+  if (is_helmet() && (what == "is_helmet")) {
+    return true;
+  }
+  if (is_boots() && (what == "is_boots")) {
+    return true;
+  }
+  if (is_shield() && (what == "is_shield")) {
+    return true;
+  }
+  if (is_cloak() && (what == "is_cloak")) {
+    return true;
+  }
+  if (is_gauntlet() && (what == "is_gauntlet")) {
+    return true;
+  }
+  if (is_hard() && (what == "is_hard")) {
+    return true;
+  }
+  if (is_red_blooded() && (what == "is_red_blooded")) {
+    return true;
+  }
+  if (is_green_blooded() && (what == "is_green_blooded")) {
+    return true;
+  }
+  if (is_able_to_jump_without_tiring() && (what == "is_able_to_jump_without_tiring")) {
+    return true;
+  }
+  if (is_spider() && (what == "is_spider")) {
+    return true;
+  }
+  if (is_able_to_jump_attack() && (what == "is_able_to_jump_attack")) {
+    return true;
+  }
+  if (is_able_to_jump_onto() && (what == "is_able_to_jump_onto")) {
+    return true;
+  }
+  if (is_crushable() && (what == "is_crushable")) {
+    return true;
+  }
+  if (is_able_to_use_armor() && (what == "is_able_to_use_armor")) {
+    return true;
+  }
+  if (is_heavy() && (what == "is_heavy")) {
+    return true;
+  }
+  if (is_slippery() && (what == "is_slippery")) {
+    return true;
+  }
+  if (is_armor() && (what == "is_armor")) {
+    return true;
+  }
+  if (is_flying() && (what == "is_flying")) {
+    return true;
+  }
+  if (is_map_beast() && (what == "is_map_beast")) {
+    return true;
+  }
+  if (is_able_to_use_staffs() && (what == "is_able_to_use_staffs")) {
+    return true;
+  }
+  if (is_aquatic() && (what == "is_aquatic")) {
+    return true;
+  }
+
+  //
+  // Any water type
+  //
+  if ((is_shallow_water() || is_deep_water()) && (what == "is_water")) {
+    return true;
+  }
+
+  return (what == text_short_name());
+}
 
 bool Thing::matches(const std::string &what)
 {
@@ -658,13 +1856,13 @@ bool Thing::matches(const std::string &what)
   if (unused_flag5() && (what == "unused_flag5")) {
     return true;
   }
-  if (unused_flag6() && (what == "unused_flag6")) {
+  if (is_ogre() && (what == "is_ogre")) {
     return true;
   }
-  if (unused_flag7() && (what == "unused_flag7")) {
+  if (is_troll() && (what == "is_troll")) {
     return true;
   }
-  if (unused_flag8() && (what == "unused_flag8")) {
+  if (on_death_is_stone() && (what == "on_death_is_stone")) {
     return true;
   }
   if (is_mimic() && (what == "is_mimic")) {
@@ -2297,8 +3495,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_eater_of_rings") {
     return &Thing::is_eater_of_rings;
   }
-  if (what == "unused_flag6") {
-    return &Thing::unused_flag6;
+  if (what == "is_ogre") {
+    return &Thing::is_ogre;
   }
   if (what == "is_eater_of_armor") {
     return &Thing::is_eater_of_armor;
@@ -2327,8 +3525,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_steam") {
     return &Thing::is_steam;
   }
-  if (what == "unused_flag7") {
-    return &Thing::unused_flag7;
+  if (what == "is_troll") {
+    return &Thing::is_troll;
   }
   if (what == "is_carnivorous_plant") {
     return &Thing::is_carnivorous_plant;
@@ -2336,8 +3534,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_tentacle") {
     return &Thing::is_tentacle;
   }
-  if (what == "unused_flag8") {
-    return &Thing::unused_flag8;
+  if (what == "on_death_is_stone") {
+    return &Thing::on_death_is_stone;
   }
   if (what == "is_mimic") {
     return &Thing::is_mimic;

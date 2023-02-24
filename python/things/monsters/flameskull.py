@@ -109,7 +109,7 @@ def tp_init(name, text_long_name):
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
     my.on_want_to_shoot_at_do(self, "me.on_want_to_shoot_at()")
     my.on_you_nat_att_do(self, "me.on_you_nat_att()")
-    my.rarity(self, my.RARITY_UNCOMMON)
+    my.rarity(self, my.RARITY_UNCOMMON)  # how rare within this monster class
     my.stamina(self, 100)
     my.stat_con(self, 14)
     my.stat_def(self, 13)

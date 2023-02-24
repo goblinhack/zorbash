@@ -540,9 +540,9 @@ do
       unused_flag40 \
       is_able_to_regenerate \
       unused_flag5 \
-      unused_flag6 \
-      unused_flag7 \
-      unused_flag8 \
+      is_ogre \
+      is_troll \
+      on_death_is_stone \
       is_mimic
     do
         grep -q $arg $PAYLOAD

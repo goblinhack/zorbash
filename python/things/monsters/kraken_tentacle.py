@@ -65,7 +65,7 @@ def tp_init(name, text_long_name):
     my.is_tentacle(self, True)
     my.is_tickable(self, True)
     my.move_speed(self, 50)
-    my.rarity(self, my.RARITY_COMMON)
+    my.rarity(self, my.RARITY_COMMON)  # how rare within this monster class
     my.stamina(self, 100)
     my.stat_con(self, 10)
     my.stat_def(self, 4)

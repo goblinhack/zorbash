@@ -34,6 +34,7 @@ public:
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_light_blocker_for_monst {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_destructable {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_wall_or_door {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_when_dead {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_for_jump_landing {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _noise_blocker {};
 
@@ -716,6 +717,10 @@ public:
   bool is_obs_wall_or_door(const point p) const;
   bool is_obs_wall_or_door_no_check(const int x, const int y) const;
   bool is_obs_wall_or_door_no_check(const point p) const;
+  bool is_obs_when_dead(const int x, const int y) const;
+  bool is_obs_when_dead(const point p) const;
+  bool is_obs_when_dead_no_check(const int x, const int y) const;
+  bool is_obs_when_dead_no_check(const point p) const;
   bool is_oob(const fpoint p) const;
   bool is_oob(const int x, const int y) const;
   bool is_oob(const int x, const int y, const int z) const;
@@ -1110,6 +1115,10 @@ public:
   void is_obs_wall_or_door_no_check_unset(const int x, const int y);
   void is_obs_wall_or_door_set(const int x, const int y);
   void is_obs_wall_or_door_unset(const int x, const int y);
+  void is_obs_when_dead_no_check_set(const int x, const int y);
+  void is_obs_when_dead_no_check_unset(const int x, const int y);
+  void is_obs_when_dead_set(const int x, const int y);
+  void is_obs_when_dead_unset(const int x, const int y);
   void is_potion_set(const int x, const int y);
   void is_potion_unset(const int x, const int y);
   void is_red_blood_set(const int x, const int y);

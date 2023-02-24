@@ -480,6 +480,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->i_set_is_obs_destructable              = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_obs_for_jump_landing          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_obs_wall_or_door              = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_obs_when_dead              = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   // end sort marker3
   // clang-format on
 
@@ -583,6 +584,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_light_blocker_for_monst);
   in >> bits(my.t->_is_obs_destructable);
   in >> bits(my.t->_is_obs_wall_or_door);
+  in >> bits(my.t->_is_obs_when_dead);
   in >> bits(my.t->_is_obs_for_jump_landing);
 
   in >> bits(my.t->_fade_in_map);

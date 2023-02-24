@@ -698,6 +698,11 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
             // But allow chasms and lava so we can see over. Just block on walls and pillars etc...
             //
             continue;
+          } else if (level->is_obs_when_dead(p)) {
+            //
+            // Dead ogres
+            //
+            continue;
           }
 
           set(walked, x, y, true);
@@ -721,6 +726,11 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
               } else if (level->is_obs_wall_or_door(o)) {
                 //
                 // But allow chasms and lava so we can see over. Just block on walls and pillars etc...
+                //
+                continue;
+              } else if (level->is_obs_when_dead(o)) {
+                //
+                // Dead ogres
                 //
                 continue;
               }

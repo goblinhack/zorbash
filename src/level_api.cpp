@@ -2146,6 +2146,52 @@ void Level::is_obs_wall_or_door_no_check_unset(const int x, const int y)
   set_no_check(_is_obs_wall_or_door, x, y, false);
 }
 
+bool Level::is_obs_when_dead(const point p) const
+{
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
+  return (get(_is_obs_when_dead, p.x, p.y));
+}
+
+bool Level::is_obs_when_dead_no_check(const point p) const { return (get_no_check(_is_obs_when_dead, p.x, p.y)); }
+
+bool Level::is_obs_when_dead(const int x, const int y) const
+{
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
+  return (get(_is_obs_when_dead, x, y));
+}
+
+bool Level::is_obs_when_dead_no_check(const int x, const int y) const
+{
+  return (get_no_check(_is_obs_when_dead, x, y));
+}
+
+void Level::is_obs_when_dead_set(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  set(_is_obs_when_dead, x, y, true);
+}
+
+void Level::is_obs_when_dead_no_check_set(const int x, const int y) { set_no_check(_is_obs_when_dead, x, y, true); }
+
+void Level::is_obs_when_dead_unset(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  set(_is_obs_when_dead, x, y, false);
+}
+
+void Level::is_obs_when_dead_no_check_unset(const int x, const int y)
+{
+  set_no_check(_is_obs_when_dead, x, y, false);
+}
+
 bool Level::is_obs_for_jump_landing(const point p) const
 {
   if (unlikely(is_oob(p.x, p.y))) {

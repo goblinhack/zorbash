@@ -47,7 +47,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.move_speed(self, 50)
     my.noise_decibels_hearing(self, 5)
     my.normal_placement_rules(self, True)
-    my.rarity(self, my.RARITY_RARE)
+    my.rarity(self, my.RARITY_RARE)  # how rare within this monster class
     my.stat_con(self, 10)
     my.stat_def(self, 10)
     my.stat_dex(self, 10)

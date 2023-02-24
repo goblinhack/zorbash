@@ -1295,22 +1295,16 @@ int Thing::unused_flag5(void)
   return (tp()->unused_flag5());
 }
 
-int Thing::unused_flag6(void)
+int Thing::is_ogre(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag6());
+  return (tp()->is_ogre());
 }
 
-int Thing::unused_flag7(void)
+int Thing::is_troll(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag7());
-}
-
-int Thing::unused_flag8(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->unused_flag8());
+  return (tp()->is_troll());
 }
 
 int Thing::is_mimic(void)
@@ -2467,12 +2461,6 @@ int Thing::is_glass(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_glass());
-}
-
-int Thing::is_stone(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_stone());
 }
 
 int Thing::is_item_organic(void)

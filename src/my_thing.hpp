@@ -235,6 +235,7 @@ public:
   uint64_t i_set_is_obs_destructable        : 1 {};
   uint64_t i_set_is_obs_for_jump_landing    : 1 {};
   uint64_t i_set_is_obs_wall_or_door        : 1 {};
+  uint64_t i_set_is_obs_when_dead           : 1 {};
   uint64_t i_set_is_poisonous_danger_level  : 1 {};
   uint64_t i_set_is_potion                  : 1 {};
   uint64_t i_set_is_red_blood               : 1 {};
@@ -1492,6 +1493,7 @@ public:
   int is_obs_in_the_way_for_throwing(void);
   int is_obs_wall_or_door(void);
   int is_obs_when_dead(void);
+  int is_ogre(void);
   int is_openable(void);
   int is_organic(void);
   int is_pillar(void);
@@ -1547,6 +1549,7 @@ public:
   int is_treasure_class_C(void);
   int is_treasure_type(void);
   int is_treasure(void);
+  int is_troll(void);
   int is_undead(void);
   int is_usable(void);
   int is_used_when_thrown(void);
@@ -1673,6 +1676,7 @@ public:
   int on_attacking_dmg_water(Thingp victim, int damage);
   int on_death_drop_all_items(void);
   int on_death_is_open(void);
+  int on_death_is_stone(void);
   int on_idle_tick_freq(void);
   int on_owner_attack_dmg_acid(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_bite(Thingp owner, Thingp victim, int damage);
@@ -2002,9 +2006,6 @@ public:
   int unused_flag40(void);
   int unused_flag4(void);
   int unused_flag5(void);
-  int unused_flag6(void);
-  int unused_flag7(void);
-  int unused_flag8(void);
   int value(const Thingp it);
   int weapon_dmgd_pct(void);
   int weapon_dmg_modify(int damage);

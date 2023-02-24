@@ -506,6 +506,36 @@ void Thing::killed(Thingp defeater, const char *reason)
         // If we are a bat corpse, for example, we now need to fall.
         //
         location_check_me();
+
+        //
+        // Need to call on death for corpses too
+        //
+        {
+          TRACE_NO_INDENT();
+          auto on_death = on_death_do();
+          if (! std::empty(on_death)) {
+            auto t = split_tokens(on_death, '.');
+            if (t.size() == 2) {
+              auto        mod   = t[ 0 ];
+              auto        fn    = t[ 1 ];
+              std::size_t found = fn.find("()");
+              if (found != std::string::npos) {
+                fn = fn.replace(found, 2, "");
+              }
+
+              if (mod == "me") {
+                mod = name();
+              }
+
+              dbg2("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
+
+              py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+            } else {
+              ERR("Bad on_death call [%s] expected mod:function, got %d elems", on_death.c_str(),
+                  (int) on_death.size());
+            }
+          }
+        }
         return;
       }
     }

@@ -570,6 +570,7 @@ int Tp::is_obs_in_the_way_for_jumping(void) const { return _is_obs_in_the_way_fo
 int Tp::is_obs_in_the_way_for_throwing(void) const { return _is_obs_in_the_way_for_throwing; }
 int Tp::is_obs_wall_or_door(void) const { return _is_obs_wall_or_door; }
 int Tp::is_obs_when_dead(void) const { return _is_obs_when_dead; }
+int Tp::is_ogre(void) const { return _is_ogre; }
 int Tp::is_openable(void) const { return _is_openable; }
 int Tp::is_organic(void) const { return _is_organic; }
 int Tp::is_pillar(void) const { return _is_pillar; }
@@ -625,6 +626,7 @@ int Tp::is_treasure_class_B(void) const { return _is_treasure_class_B; }
 int Tp::is_treasure_class_C(void) const { return _is_treasure_class_C; }
 int Tp::is_treasure_type(void) const { return _is_treasure_type; }
 int Tp::is_treasure(void) const { return _is_treasure; }
+int Tp::is_troll(void) const { return _is_troll; }
 int Tp::is_undead(void) const { return _is_undead; }
 int Tp::is_usable(void) const { return _is_usable; }
 int Tp::is_used_when_thrown(void) const { return _is_used_when_thrown; }
@@ -660,6 +662,7 @@ int Tp::noise_on_open_or_close(void) const { return _noise_on_open_or_close; }
 int Tp::normal_placement_rules(void) const { return _normal_placement_rules; }
 int Tp::on_death_drop_all_items(void) const { return _on_death_drop_all_items; }
 int Tp::on_death_is_open(void) const { return _on_death_is_open; }
+int Tp::on_death_is_stone(void) const { return _on_death_is_stone; }
 int Tp::range_max(void) const { return _range_max; }
 int Tp::rarity(void) const { return _rarity; }
 int Tp::shove_strength_mod(void) const { return _shove_strength_mod; }
@@ -721,9 +724,6 @@ int Tp::unused_flag3(void) const { return _unused_flag3; }
 int Tp::unused_flag40(void) const { return _unused_flag40; }
 int Tp::unused_flag4(void) const { return _unused_flag4; }
 int Tp::unused_flag5(void) const { return _unused_flag5; }
-int Tp::unused_flag6(void) const { return _unused_flag6; }
-int Tp::unused_flag7(void) const { return _unused_flag7; }
-int Tp::unused_flag8(void) const { return _unused_flag8; }
 int Tp::weapon_dmg(void) const { return _weapon_dmg; }
 // end sort marker2 }
 
@@ -1114,6 +1114,7 @@ void Tp::is_obs_in_the_way_for_jumping_set(int v) { _is_obs_in_the_way_for_jumpi
 void Tp::is_obs_in_the_way_for_throwing_set(int v) { _is_obs_in_the_way_for_throwing = v; }
 void Tp::is_obs_wall_or_door_set(int v) { _is_obs_wall_or_door = v; }
 void Tp::is_obs_when_dead_set(int v) { _is_obs_when_dead = v; }
+void Tp::is_ogre_set(int v) { _is_ogre = v; }
 void Tp::is_openable_set(int v) { _is_openable = v; }
 void Tp::is_organic_set(int v) { _is_organic = v; }
 void Tp::is_pillar_set(int v) { _is_pillar = v; }
@@ -1169,6 +1170,7 @@ void Tp::is_treasure_class_B_set(int v) { _is_treasure_class_B = v; }
 void Tp::is_treasure_class_C_set(int v) { _is_treasure_class_C = v; }
 void Tp::is_treasure_set(int v) { _is_treasure = v; }
 void Tp::is_treasure_type_set(int v) { _is_treasure_type = v; }
+void Tp::is_troll_set(int v) { _is_troll = v; }
 void Tp::is_undead_set(int v) { _is_undead = v; }
 void Tp::is_usable_set(int v) { _is_usable = v; }
 void Tp::is_used_when_thrown_set(int v) { _is_used_when_thrown = v; }
@@ -1232,6 +1234,7 @@ void Tp::on_close_do_set(const std::string &v) { _on_close_do = v; }
 void Tp::on_death_do_set(const std::string &v) { _on_death_do = v; }
 void Tp::on_death_drop_all_items_set(int v) { _on_death_drop_all_items = v; }
 void Tp::on_death_is_open_set(int v) { _on_death_is_open = v; }
+void Tp::on_death_is_stone_set(int v) { _on_death_is_stone = v; }
 void Tp::on_death_of_a_follower_do_set(const std::string &v) { _on_death_of_a_follower_do = v; }
 void Tp::on_death_of_my_leader_do_set(const std::string &v) { _on_death_of_my_leader_do = v; }
 void Tp::on_dropped_do_set(const std::string &v) { _on_dropped_do = v; }
@@ -1413,9 +1416,6 @@ void Tp::unused_flag3_set(int v) { _unused_flag3 = v; }
 void Tp::unused_flag40_set(int v) { _unused_flag40 = v; }
 void Tp::unused_flag4_set(int v) { _unused_flag4 = v; }
 void Tp::unused_flag5_set(int v) { _unused_flag5 = v; }
-void Tp::unused_flag6_set(int v) { _unused_flag6 = v; }
-void Tp::unused_flag7_set(int v) { _unused_flag7 = v; }
-void Tp::unused_flag8_set(int v) { _unused_flag8 = v; }
 void Tp::weapon_dmg_set(int v) { _weapon_dmg = v; }
 void Tp::weapon_use_distance_set(int v) { _weapon_use_distance = v; }
 void Tp::z_depth_set(int v) { z_depth = v; }

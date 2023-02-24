@@ -93,7 +93,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_death_do(self, "me.on_death()")
     my.on_idle_tick_freq_dice(self, "1d5:me.on_idle()")
     my.on_you_nat_att_do(self, "me.on_you_nat_att()")
-    my.rarity(self, my.RARITY_COMMON)
+    my.rarity(self, my.RARITY_COMMON)  # how rare within this monster class
     my.stat_con(self, 20)
     my.stat_def(self, 0)
     my.stat_dex(self, 0)

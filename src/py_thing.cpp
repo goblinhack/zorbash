@@ -440,13 +440,25 @@ PyObject *thing_enemy(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  auto tp = tp_find(what);
-  if (unlikely(! tp)) {
-    t->err("Could not find to enemy %s", what);
-    Py_RETURN_NONE;
+  bool got_one = false;
+  auto tp      = tp_find(what);
+
+  if (tp) {
+    t->add_enemy(tp);
+    got_one = true;
+  } else {
+    for (auto &tp : tp_id_map) {
+      if (tp->matches(what)) {
+        t->add_enemy(tp);
+        got_one = true;
+      }
+    }
   }
 
-  t->add_enemy(tp);
+  if (! got_one) {
+    t->err("Could not find template to add as enemy %s", what);
+    Py_RETURN_NONE;
+  }
 
   Py_RETURN_TRUE;
 }
@@ -479,13 +491,24 @@ PyObject *thing_friend(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  auto tp = tp_find(what);
-  if (unlikely(! tp)) {
-    t->err("Could not find to friend %s", what);
-    Py_RETURN_NONE;
+  bool got_one = false;
+  auto tp      = tp_find(what);
+  if (tp) {
+    t->add_friend(tp);
+    got_one = true;
+  } else {
+    for (auto &tp : tp_id_map) {
+      if (tp->matches(what)) {
+        t->add_friend(tp);
+        got_one = true;
+      }
+    }
   }
 
-  t->add_friend(tp);
+  if (! got_one) {
+    t->err("Could not find template to add as friend %s", what);
+    Py_RETURN_NONE;
+  }
 
   Py_RETURN_TRUE;
 }

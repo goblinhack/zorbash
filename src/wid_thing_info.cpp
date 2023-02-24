@@ -184,13 +184,27 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     if (t->is_monst()) {
       if (t->is_frozen) {
         wid_popup_window->log("Frozen to death.");
+        wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
       } else if (t->is_burnt) {
         wid_popup_window->log("Burnt to a crisp.");
+        wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
       }
-      if (t->is_undead()) {
-        wid_popup_window->log("It's undead, Jim");
+      if (t->is_stone()) {
+        if (t->is_undead()) {
+          wid_popup_window->log("It's stone undead, Jim");
+          wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+        } else {
+          wid_popup_window->log("It's stone dead, Jim");
+          wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+        }
       } else {
-        wid_popup_window->log("It's dead, Jim");
+        if (t->is_undead()) {
+          wid_popup_window->log("It's undead, Jim");
+          wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+        } else {
+          wid_popup_window->log("It's dead, Jim");
+          wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+        }
       }
     }
   } else {
@@ -1508,6 +1522,10 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack                    %3d", stat_att);
       w->log(tmp);
     }
+  } else if (t->is_dead && (t->is_monst() || t->is_player())) {
+    //
+    // Nothing to report when dead.
+    //
   } else if (t->stat_att_mod()) {
     auto stat = t->stat_att_mod_total();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack modifier          %4s", modifier_to_string(stat).c_str());
@@ -1591,6 +1609,10 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense                   %3d", ac);
       w->log(tmp);
     }
+  } else if (t->is_dead && (t->is_monst() || t->is_player())) {
+    //
+    // Nothing to report when dead.
+    //
   } else if (t->stat_def_mod()) {
     auto stat = t->stat_def_total();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense modifier         %4s", modifier_to_string(stat).c_str());
@@ -1609,6 +1631,10 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
     snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength               %6s", tmp2);
     w->log(tmp);
+  } else if (t->is_dead && (t->is_monst() || t->is_player())) {
+    //
+    // Nothing to report when dead.
+    //
   } else if (t->stat_str_mod()) {
     auto stat = t->stat_str_total();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength modifier        %4s", modifier_to_string(stat).c_str());
@@ -1710,6 +1736,10 @@ void Game::wid_thing_info_add_shove_strength(WidPopup *w, Thingp t)
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Shove strength bonus     %4d", shove_strength);
       w->log(tmp);
     }
+  } else if (t->is_dead && (t->is_monst() || t->is_player())) {
+    //
+    // Nothing to report when dead.
+    //
   } else if (t->shove_strength_mod()) {
     auto shove_strength = t->shove_strength_total();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Shove strength modifier  %4d", shove_strength);
@@ -1728,6 +1758,10 @@ void Game::wid_thing_info_add_jump_distance(WidPopup *w, Thingp t)
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Jump distance            %4d", dist);
       w->log(tmp);
     }
+  } else if (t->is_dead && (t->is_monst() || t->is_player())) {
+    //
+    // Nothing to report when dead.
+    //
   } else if (t->jump_distance_mod()) {
     auto dist = t->jump_distance_total();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Jump distance modifier   %4d", dist);
@@ -1746,6 +1780,10 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
     snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution           %6s", tmp2);
     w->log(tmp);
+  } else if (t->is_dead && (t->is_monst() || t->is_player())) {
+    //
+    // Nothing to report when dead.
+    //
   } else if (t->stat_con_mod()) {
     auto stat = t->stat_con_total();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution modifier    %4s", modifier_to_string(stat).c_str());

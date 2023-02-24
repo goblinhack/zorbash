@@ -429,6 +429,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_obs_destructable              ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_obs_for_jump_landing          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_obs_wall_or_door              ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_obs_when_dead              ? 1LLU : 0LLU) << shift; shift++;
   // end sort marker3
   // clang-format on
   if (shift >= (int) (sizeof(bits64) * 8)) {
@@ -543,6 +544,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_light_blocker_for_monst);
   out << bits(my.t->_is_obs_destructable);
   out << bits(my.t->_is_obs_wall_or_door);
+  out << bits(my.t->_is_obs_when_dead);
   out << bits(my.t->_is_obs_for_jump_landing);
 
   out << bits(my.t->_fade_in_map);
