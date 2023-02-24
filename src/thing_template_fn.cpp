@@ -439,6 +439,7 @@ int Tp::is_debug_path(void) const { return _is_debug_path; }
 int Tp::is_debug_type(void) const { return _is_debug_type; }
 int Tp::is_deep_water_swimmer(void) const { return _is_deep_water_swimmer; }
 int Tp::is_deep_water(void) const { return _is_deep_water; }
+int Tp::is_demon(void) const { return _is_demon; }
 int Tp::is_descend_dungeon(void) const { return _is_descend_dungeon; }
 int Tp::is_descend_sewer(void) const { return _is_descend_sewer; }
 int Tp::is_described_when_hovering_over(void) const { return _is_described_when_hovering_over; }
@@ -490,6 +491,7 @@ int Tp::is_gauntlet(void) const { return _is_gauntlet; }
 int Tp::is_gelatinous(void) const { return _is_gelatinous; }
 int Tp::is_glass(void) const { return _is_glass; }
 int Tp::is_gold(void) const { return _is_gold; }
+int Tp::is_golem(void) const { return _is_golem; }
 int Tp::is_green_blooded(void) const { return _is_green_blooded; }
 int Tp::is_green_blood(void) const { return _is_green_blood; }
 int Tp::is_green_splatter(void) const { return _is_green_splatter; }
@@ -628,6 +630,7 @@ int Tp::is_treasure_type(void) const { return _is_treasure_type; }
 int Tp::is_treasure(void) const { return _is_treasure; }
 int Tp::is_troll(void) const { return _is_troll; }
 int Tp::is_undead(void) const { return _is_undead; }
+int Tp::is_unused_flag9(void) const { return _is_unused_flag9; }
 int Tp::is_usable(void) const { return _is_usable; }
 int Tp::is_used_when_thrown(void) const { return _is_used_when_thrown; }
 int Tp::is_very_combustible(void) const { return _is_very_combustible; }
@@ -721,9 +724,6 @@ int Tp::unused_flag1(void) const { return _unused_flag1; }
 int Tp::unused_flag27(void) const { return _unused_flag27; }
 int Tp::unused_flag2(void) const { return _unused_flag2; }
 int Tp::unused_flag3(void) const { return _unused_flag3; }
-int Tp::unused_flag40(void) const { return _unused_flag40; }
-int Tp::unused_flag4(void) const { return _unused_flag4; }
-int Tp::unused_flag5(void) const { return _unused_flag5; }
 int Tp::weapon_dmg(void) const { return _weapon_dmg; }
 // end sort marker2 }
 
@@ -983,6 +983,7 @@ void Tp::is_debug_path_set(int v) { _is_debug_path = v; }
 void Tp::is_debug_type_set(int v) { _is_debug_type = v; }
 void Tp::is_deep_water_set(int v) { _is_deep_water = v; }
 void Tp::is_deep_water_swimmer_set(int v) { _is_deep_water_swimmer = v; }
+void Tp::is_demon_set(int v) { _is_demon = v; }
 void Tp::is_descend_dungeon_set(int v) { _is_descend_dungeon = v; }
 void Tp::is_descend_sewer_set(int v) { _is_descend_sewer = v; }
 void Tp::is_described_when_hovering_over_set(int v) { _is_described_when_hovering_over = v; }
@@ -1034,6 +1035,7 @@ void Tp::is_gauntlet_set(int v) { _is_gauntlet = v; }
 void Tp::is_gelatinous_set(int v) { _is_gelatinous = v; }
 void Tp::is_glass_set(int v) { _is_glass = v; }
 void Tp::is_gold_set(int v) { _is_gold = v; }
+void Tp::is_golem_set(int v) { _is_golem = v; }
 void Tp::is_green_blooded_set(int v) { _is_green_blooded = v; }
 void Tp::is_green_blood_set(int v) { _is_green_blood = v; }
 void Tp::is_green_splatter_set(int v) { _is_green_splatter = v; }
@@ -1172,6 +1174,7 @@ void Tp::is_treasure_set(int v) { _is_treasure = v; }
 void Tp::is_treasure_type_set(int v) { _is_treasure_type = v; }
 void Tp::is_troll_set(int v) { _is_troll = v; }
 void Tp::is_undead_set(int v) { _is_undead = v; }
+void Tp::is_unused_flag9_set(int v) { _is_unused_flag9 = v; }
 void Tp::is_usable_set(int v) { _is_usable = v; }
 void Tp::is_used_when_thrown_set(int v) { _is_used_when_thrown = v; }
 void Tp::is_very_combustible_set(int v) { _is_very_combustible = v; }
@@ -1413,9 +1416,6 @@ void Tp::unused_flag1_set(int v) { _unused_flag1 = v; }
 void Tp::unused_flag27_set(int v) { _unused_flag27 = v; }
 void Tp::unused_flag2_set(int v) { _unused_flag2 = v; }
 void Tp::unused_flag3_set(int v) { _unused_flag3 = v; }
-void Tp::unused_flag40_set(int v) { _unused_flag40 = v; }
-void Tp::unused_flag4_set(int v) { _unused_flag4 = v; }
-void Tp::unused_flag5_set(int v) { _unused_flag5 = v; }
 void Tp::weapon_dmg_set(int v) { _weapon_dmg = v; }
 void Tp::weapon_use_distance_set(int v) { _weapon_use_distance = v; }
 void Tp::z_depth_set(int v) { z_depth = v; }

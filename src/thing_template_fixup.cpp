@@ -21,6 +21,18 @@ void tp_fixup(void)
       tp->is_able_to_tire_set(true);
     }
 
+    if (tp->is_living()) {
+      if (tp->is_lifeless()) {
+        DIE("Tp %s is living and lifeless?", tp->name().c_str());
+      }
+    }
+
+    if (tp->is_able_to_freeze()) {
+      if (tp->is_fire()) {
+        DIE("Tp %s is fire and can freeze?", tp->name().c_str());
+      }
+    }
+
     if (tp->is_item_collector()) {
       if (! tp->capacity_height() || ! tp->capacity_width()) {
         DIE("Tp %s needs bag capacity", tp->name().c_str());

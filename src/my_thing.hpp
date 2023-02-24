@@ -1361,6 +1361,7 @@ public:
   int is_debug_type(void);
   int is_deep_water_swimmer(void);
   int is_deep_water(void);
+  int is_demon(void);
   int is_descend_dungeon(void);
   int is_descend_sewer(void);
   int is_described_when_hovering_over(void);
@@ -1413,6 +1414,7 @@ public:
   int is_gelatinous(void);
   int is_glass(void);
   int is_gold(void);
+  int is_golem(void);
   int is_green_blooded(void);
   int is_green_blood(void);
   int is_green_splatter(void);
@@ -1551,6 +1553,7 @@ public:
   int is_treasure(void);
   int is_troll(void);
   int is_undead(void);
+  int is_unused_flag9(void);
   int is_usable(void);
   int is_used_when_thrown(void);
   int is_very_combustible(void);
@@ -2003,9 +2006,6 @@ public:
   int unused_flag27(void);
   int unused_flag2(void);
   int unused_flag3(void);
-  int unused_flag40(void);
-  int unused_flag4(void);
-  int unused_flag5(void);
   int value(const Thingp it);
   int weapon_dmgd_pct(void);
   int weapon_dmg_modify(int damage);

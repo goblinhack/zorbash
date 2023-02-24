@@ -363,6 +363,7 @@ private:
   int _is_debug_type {};
   int _is_deep_water {};
   int _is_deep_water_swimmer {};
+  int _is_demon {};
   int _is_descend_dungeon {};
   int _is_descend_sewer {};
   int _is_described_when_hovering_over {};
@@ -414,6 +415,7 @@ private:
   int _is_gelatinous {};
   int _is_glass {};
   int _is_gold {};
+  int _is_golem {};
   int _is_green_blood {};
   int _is_green_blooded {};
   int _is_green_splatter {};
@@ -553,6 +555,7 @@ private:
   int _is_treasure_type {};
   int _is_troll {};
   int _is_undead {};
+  int _is_unused_flag9 {};
   int _is_usable {};
   int _is_used_when_thrown {};
   int _is_very_combustible {};
@@ -646,9 +649,6 @@ private:
   int _unused_flag2 {};
   int _unused_flag27 {};
   int _unused_flag3 {};
-  int _unused_flag4 {};
-  int _unused_flag40 {};
-  int _unused_flag5 {};
   int _weapon_dmg {};
   int _weapon_use_distance {};
   // end sort marker1 }
@@ -1447,6 +1447,7 @@ public:
   int is_debug_type(void) const;
   int is_deep_water_swimmer(void) const;
   int is_deep_water(void) const;
+  int is_demon(void) const;
   int is_descend_dungeon(void) const;
   int is_descend_sewer(void) const;
   int is_described_when_hovering_over(void) const;
@@ -1498,6 +1499,7 @@ public:
   int is_gelatinous(void) const;
   int is_glass(void) const;
   int is_gold(void) const;
+  int is_golem(void) const;
   int is_green_blooded(void) const;
   int is_green_blood(void) const;
   int is_green_splatter(void) const;
@@ -1636,6 +1638,7 @@ public:
   int is_treasure(void) const;
   int is_troll(void) const;
   int is_undead(void) const;
+  int is_unused_flag9(void) const;
   int is_usable(void) const;
   int is_used_when_thrown(void) const;
   int is_very_combustible(void) const;
@@ -1729,9 +1732,6 @@ public:
   int unused_flag27(void) const;
   int unused_flag2(void) const;
   int unused_flag3(void) const;
-  int unused_flag40(void) const;
-  int unused_flag4(void) const;
-  int unused_flag5(void) const;
   int weapon_dmg(void) const;
   // end sort marker4 }
 
@@ -1991,6 +1991,7 @@ public:
   void is_debug_type_set(int v);
   void is_deep_water_set(int v);
   void is_deep_water_swimmer_set(int v);
+  void is_demon_set(int v);
   void is_descend_dungeon_set(int v);
   void is_descend_sewer_set(int v);
   void is_described_when_hovering_over_set(int v);
@@ -2042,6 +2043,7 @@ public:
   void is_gelatinous_set(int v);
   void is_glass_set(int v);
   void is_gold_set(int v);
+  void is_golem_set(int v);
   void is_green_blooded_set(int v);
   void is_green_blood_set(int v);
   void is_green_splatter_set(int v);
@@ -2180,6 +2182,7 @@ public:
   void is_treasure_type_set(int v);
   void is_troll_set(int v);
   void is_undead_set(int v);
+  void is_unused_flag9_set(int v);
   void is_usable_set(int v);
   void is_used_when_thrown_set(int v);
   void is_very_combustible_set(int v);
@@ -2424,9 +2427,6 @@ public:
   void unused_flag27_set(int v);
   void unused_flag2_set(int v);
   void unused_flag3_set(int v);
-  void unused_flag40_set(int v);
-  void unused_flag4_set(int v);
-  void unused_flag5_set(int v);
   void weapon_dmg_set(int v);
   void weapon_use_distance_set(int v);
   void z_depth_set(int v);

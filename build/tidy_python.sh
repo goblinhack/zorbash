@@ -536,10 +536,10 @@ do
       is_lightning \
       is_immune_to_negation \
       unused_flag3 \
-      unused_flag4 \
-      unused_flag40 \
+      is_golem \
+      is_unused_flag9 \
       is_able_to_regenerate \
-      unused_flag5 \
+      is_demon \
       is_ogre \
       is_troll \
       on_death_is_stone \

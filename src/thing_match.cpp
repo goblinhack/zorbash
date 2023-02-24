@@ -92,12 +92,6 @@ bool Tp::matches(const std::string &what)
   if (attack_undead() && (what == "attack_undead")) {
     return true;
   }
-  if (effect_radius() && (what == "effect_radius")) {
-    return true;
-  }
-  if (blast_min_radius() && (what == "blast_min_radius")) {
-    return true;
-  }
   if (enchant_max() && (what == "enchant_max")) {
     return true;
   }
@@ -647,10 +641,10 @@ bool Tp::matches(const std::string &what)
   if (unused_flag3() && (what == "unused_flag3")) {
     return true;
   }
-  if (unused_flag4() && (what == "unused_flag4")) {
+  if (is_golem() && (what == "is_golem")) {
     return true;
   }
-  if (unused_flag5() && (what == "unused_flag5")) {
+  if (is_demon() && (what == "is_demon")) {
     return true;
   }
   if (is_ogre() && (what == "is_ogre")) {
@@ -663,9 +657,6 @@ bool Tp::matches(const std::string &what)
     return true;
   }
   if (is_mimic() && (what == "is_mimic")) {
-    return true;
-  }
-  if (effect_has_blast_radius() && (what == "effect_has_blast_radius")) {
     return true;
   }
   if (is_enchantable_as_a_group() && (what == "is_enchantable_as_a_group")) {
@@ -740,7 +731,7 @@ bool Tp::matches(const std::string &what)
   if (is_msg_allowed_hears_something() && (what == "is_msg_allowed_hears_something")) {
     return true;
   }
-  if (unused_flag40() && (what == "unused_flag40")) {
+  if (is_unused_flag9() && (what == "is_unused_flag9")) {
     return true;
   }
   if (is_obs_for_jump_landing() && (what == "is_obs_for_jump_landing")) {
@@ -1287,12 +1278,6 @@ bool Thing::matches(const std::string &what)
     return true;
   }
   if (attack_undead() && (what == "attack_undead")) {
-    return true;
-  }
-  if (effect_radius() && (what == "effect_radius")) {
-    return true;
-  }
-  if (blast_min_radius() && (what == "blast_min_radius")) {
     return true;
   }
   if (enchant_max() && (what == "enchant_max")) {
@@ -1850,10 +1835,10 @@ bool Thing::matches(const std::string &what)
   if (unused_flag3() && (what == "unused_flag3")) {
     return true;
   }
-  if (unused_flag4() && (what == "unused_flag4")) {
+  if (is_golem() && (what == "is_golem")) {
     return true;
   }
-  if (unused_flag5() && (what == "unused_flag5")) {
+  if (is_demon() && (what == "is_demon")) {
     return true;
   }
   if (is_ogre() && (what == "is_ogre")) {
@@ -1866,9 +1851,6 @@ bool Thing::matches(const std::string &what)
     return true;
   }
   if (is_mimic() && (what == "is_mimic")) {
-    return true;
-  }
-  if (effect_has_blast_radius() && (what == "effect_has_blast_radius")) {
     return true;
   }
   if (is_enchantable_as_a_group() && (what == "is_enchantable_as_a_group")) {
@@ -1943,7 +1925,7 @@ bool Thing::matches(const std::string &what)
   if (is_msg_allowed_hears_something() && (what == "is_msg_allowed_hears_something")) {
     return true;
   }
-  if (unused_flag40() && (what == "unused_flag40")) {
+  if (is_unused_flag9() && (what == "is_unused_flag9")) {
     return true;
   }
   if (is_obs_for_jump_landing() && (what == "is_obs_for_jump_landing")) {
@@ -2441,12 +2423,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "attack_undead") {
     return &Thing::attack_undead;
-  }
-  if (what == "effect_radius") {
-    return &Thing::effect_radius;
-  }
-  if (what == "blast_min_radius") {
-    return &Thing::blast_min_radius;
   }
   if (what == "collision_hit_180") {
     return &Thing::collision_hit_180;
@@ -3327,9 +3303,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "tick_prio") {
     return &Thing::tick_prio;
   }
-  if (what == "effect_has_blast_radius") {
-    return &Thing::effect_has_blast_radius;
-  }
   if (what == "is_enchantable_as_a_group") {
     return &Thing::is_enchantable_as_a_group;
   }
@@ -3414,8 +3387,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag3") {
     return &Thing::unused_flag3;
   }
-  if (what == "unused_flag40") {
-    return &Thing::unused_flag40;
+  if (what == "is_unused_flag9") {
+    return &Thing::is_unused_flag9;
   }
   if (what == "is_able_to_be_surprised") {
     return &Thing::is_able_to_be_surprised;
@@ -3432,8 +3405,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_always_submerged") {
     return &Thing::is_always_submerged;
   }
-  if (what == "unused_flag4") {
-    return &Thing::unused_flag4;
+  if (what == "is_golem") {
+    return &Thing::is_golem;
   }
   if (what == "is_deep_water_swimmer") {
     return &Thing::is_deep_water_swimmer;
@@ -3465,8 +3438,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_msg_allowed_is_seen") {
     return &Thing::is_msg_allowed_is_seen;
   }
-  if (what == "unused_flag5") {
-    return &Thing::unused_flag5;
+  if (what == "is_demon") {
+    return &Thing::is_demon;
   }
   if (what == "internal") {
     return &Thing::is_internal;

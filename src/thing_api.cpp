@@ -1283,16 +1283,16 @@ int Thing::unused_flag3(void)
   return (tp()->unused_flag3());
 }
 
-int Thing::unused_flag4(void)
+int Thing::is_golem(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag4());
+  return (tp()->is_golem());
 }
 
-int Thing::unused_flag5(void)
+int Thing::is_demon(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag5());
+  return (tp()->is_demon());
 }
 
 int Thing::is_ogre(void)
@@ -1463,10 +1463,10 @@ int Thing::is_msg_allowed_hears_something(void)
   return (tp()->is_msg_allowed_hears_something());
 }
 
-int Thing::unused_flag40(void)
+int Thing::is_unused_flag9(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag40());
+  return (tp()->is_unused_flag9());
 }
 
 int Thing::gfx_pixelart_submergable(void)

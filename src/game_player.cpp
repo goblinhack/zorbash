@@ -240,6 +240,7 @@ void Game::place_player(void)
         auto d = level->thing_new("dogman", point(x + 2, y));
         d->wake("");
       }
+      // level->thing_new("demon_fire", point(x + 4, y));
       // level->thing_new("ogre", point(x + 4, y));
       // level->thing_new("troll_stone", point(x + 2, y));
       // level->thing_new("troll_fire", point(x + 2, y + 2));
@@ -270,7 +271,7 @@ void Game::place_player(void)
         level->thing_new("zorb_eldster", point(x + 3, y + 2));
         level->thing_new("snake_dreadfire", point(x + 3, y + 3));
         level->thing_new("zorb_eldster", point(x + 3, y + 4));
-        level->thing_new("cement_man", point(x + 4, y + 3));
+        level->thing_new("golem_cement", point(x + 4, y + 3));
         // auto w = level->thing_new("staff_lightning", point(x, y));
         // auto w = level->thing_new("staff_descent", point(x, y));
         auto w1 = level->thing_new("staff_cold", point(x, y));
@@ -332,7 +333,7 @@ void Game::place_player(void)
         level->thing_new("door_metal", point(x + 2, y));
         // d->dead("killed");
       }
-      // level->thing_new("flesh_golem", point(x + 1, y + 3));
+      // level->thing_new("golem_flesh", point(x + 1, y + 3));
       IF_DEBUG2
       {
         if (0) {
@@ -450,7 +451,7 @@ void Game::place_player(void)
       if (0) {
         level->thing_new("bat_lesser", point(x + 2, y + 1));
       }
-      // level->thing_new("flesh_golem", point(x, y + 3));
+      // level->thing_new("golem_flesh", point(x, y + 3));
       // level->thing_new("lava", point(x, y + 5));
       // level->thing_new("lava", point(x, y + 6));
       // level->thing_new("lava", point(x, y + 7));

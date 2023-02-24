@@ -75,7 +75,6 @@ def tp_init(name, text_long_name):
     my.hunger_is_insatiable(self, True)
     my.is_able_to_be_surprised(self, True)
     my.is_able_to_fall(self, True)
-    my.is_able_to_freeze(self, True)
     my.is_able_to_lunge(self, True)
     my.is_able_to_regenerate(self, True)
     my.is_able_to_rest(self, True)
@@ -120,7 +119,7 @@ def tp_init(name, text_long_name):
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
     my.on_want_to_shoot_at_do(self, "me.on_want_to_shoot_at()")
     my.on_you_nat_att_do(self, "me.on_you_nat_att()")
-    my.rarity(self, my.RARITY_COMMON)  # how rare within this monster class
+    my.rarity(self, my.RARITY_UNCOMMON)  # how rare within this monster class
     my.shove_strength_mod(self, 1)
     my.stamina(self, 100)
     my.stat_con(self, 18)
@@ -140,7 +139,7 @@ def tp_init(name, text_long_name):
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
     # end sort marker
 
-    delay = 75
+    delay = 35
     my.tile(self,
             ascii_fg_char="T", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".1", delay_ms=delay, frame=1)
