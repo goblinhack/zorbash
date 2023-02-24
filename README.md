@@ -209,7 +209,7 @@ Zorbash
 -------
 
 <p align="center">
-<img alt="Pixel art" src="pics/banner.png" width="85%">
+<img alt="Pixel art" src="pics/banner.png" width="100%">
 </p>
 
 Welcome to the lair of the dread tentacleye, Zorbash. Collect the crystals of Zorb and confront Zorbash to win.
