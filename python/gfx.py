@@ -11209,6 +11209,12 @@ def init_tiles_64x64():
         "kraken.sleeping.2",
         "kraken.sleeping.3",
         "kraken.dead",
+        "scorpion_colossal.1",
+        "scorpion_colossal.2",
+        "scorpion_colossal.3",
+        "scorpion_colossal.4",
+        "scorpion_colossal.dead",
+        "scorpion_colossal.sleeping",
     ]
 
     my.tile_load_arr_sprites(

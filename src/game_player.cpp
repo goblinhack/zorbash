@@ -251,6 +251,7 @@ void Game::place_player(void)
       //  level->thing_new("mimic_sleeping", point(x - 2, y + 2));
       //  level->thing_new("chest1", point(x + 2, y + 2));
       //  level->thing_new("chest2", point(x + 3, y + 2));
+      // level->thing_new("scorpion_colossal", point(x + 3, y + 2));
       if (0) {
         level->thing_new("amulet_healing", point(x + 1, y - 3));
         level->thing_new("amulet_peeking", point(x + 2, y - 3));

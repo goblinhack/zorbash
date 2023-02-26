@@ -310,6 +310,7 @@ std::initializer_list< std::string > tps = {
     "salmon",
     "sardines",
     "scorpion",
+    "scorpion_colossal",
     "scythe",
     "scythe_carry",
     "scythe_swing",
