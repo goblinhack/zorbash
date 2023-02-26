@@ -382,13 +382,13 @@ private:
   int _is_eater_of_gauntlets {};
   int _is_eater_of_green_blood {};
   int _is_eater_of_helmets {};
-  int _is_eater_of_jelly {};
   int _is_eater_of_magical_items {};
   int _is_eater_of_meat {};
   int _is_eater_of_potions {};
   int _is_eater_of_red_blood {};
   int _is_eater_of_rings {};
   int _is_eater_of_shields {};
+  int _is_eater_of_slime {};
   int _is_eater_of_staffs {};
   int _is_eater_of_treasure {};
   int _is_eater_of_weapons {};
@@ -447,7 +447,6 @@ private:
   int _is_item_collector {};
   int _is_item_organic {};
   int _is_item_targetted {};
-  int _is_jelly {};
   int _is_key {};
   int _is_key_special {};
   int _is_laser {};
@@ -525,6 +524,7 @@ private:
   int _is_shovable_and_sticky {};
   int _is_skill {};
   int _is_skillstone {};
+  int _is_slime {};
   int _is_slippery {};
   int _is_smoke {};
   int _is_snake {};
@@ -1466,13 +1466,13 @@ public:
   int is_eater_of_gauntlets(void) const;
   int is_eater_of_green_blood(void) const;
   int is_eater_of_helmets(void) const;
-  int is_eater_of_jelly(void) const;
   int is_eater_of_magical_items(void) const;
   int is_eater_of_meat(void) const;
   int is_eater_of_potions(void) const;
   int is_eater_of_red_blood(void) const;
   int is_eater_of_rings(void) const;
   int is_eater_of_shields(void) const;
+  int is_eater_of_slime(void) const;
   int is_eater_of_staffs(void) const;
   int is_eater_of_treasure(void) const;
   int is_eater_of_weapons(void) const;
@@ -1530,7 +1530,6 @@ public:
   int is_item_organic(void) const;
   int is_item_targetted(void) const;
   int is_item(void) const;
-  int is_jelly(void) const;
   int is_key_special(void) const;
   int is_key(void) const;
   int is_laser(void) const;
@@ -1608,6 +1607,7 @@ public:
   int is_shovable(void) const;
   int is_skillstone(void) const;
   int is_skill(void) const;
+  int is_slime(void) const;
   int is_slippery(void) const;
   int is_smoke(void) const;
   int is_snake(void) const;
@@ -2010,13 +2010,13 @@ public:
   void is_eater_of_gauntlets_set(int v);
   void is_eater_of_green_blood_set(int v);
   void is_eater_of_helmets_set(int v);
-  void is_eater_of_jelly_set(int v);
   void is_eater_of_magical_items_set(int v);
   void is_eater_of_meat_set(int v);
   void is_eater_of_potions_set(int v);
   void is_eater_of_red_blood_set(int v);
   void is_eater_of_rings_set(int v);
   void is_eater_of_shields_set(int v);
+  void is_eater_of_slime_set(int v);
   void is_eater_of_staffs_set(int v);
   void is_eater_of_treasure_set(int v);
   void is_eater_of_weapons_set(int v);
@@ -2074,7 +2074,6 @@ public:
   void is_item_organic_set(int v);
   void is_item_set(int v);
   void is_item_targetted_set(int v);
-  void is_jelly_set(int v);
   void is_key_set(int v);
   void is_key_special_set(int v);
   void is_laser_set(int v);
@@ -2152,6 +2151,7 @@ public:
   void is_shovable_set(int v);
   void is_skill_set(int v);
   void is_skillstone_set(int v);
+  void is_slime_set(int v);
   void is_slippery_set(int v);
   void is_smoke_set(int v);
   void is_snake_set(int v);

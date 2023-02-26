@@ -306,7 +306,7 @@ do
       is_eater_of_gauntlets \
       is_eater_of_green_blood \
       is_eater_of_helmets \
-      is_eater_of_jelly \
+      is_eater_of_slime \
       is_eater_of_magical_items \
       is_eater_of_meat \
       is_eater_of_potions \
@@ -365,7 +365,7 @@ do
       is_item_collector \
       is_item_organic \
       is_item_targetted \
-      is_jelly \
+      is_slime \
       is_key \
       is_key_special \
       is_laser \

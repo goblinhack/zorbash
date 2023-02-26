@@ -959,16 +959,16 @@ int Thing::is_item(void)
   return (tp()->is_item());
 }
 
-int Thing::is_eater_of_jelly(void)
+int Thing::is_eater_of_slime(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_eater_of_jelly());
+  return (tp()->is_eater_of_slime());
 }
 
-int Thing::is_jelly(void)
+int Thing::is_slime(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_jelly());
+  return (tp()->is_slime());
 }
 
 int Thing::chance_d1000_jump_randomly(void)

@@ -425,7 +425,7 @@ void Level::tick_(void)
     FOR_ALL_EQUIP(e)
     {
       //
-      // Check for any use animations e.g. a jelly's attack with green splatter anim.
+      // Check for any use animations e.g. a slime's attack with green splatter anim.
       //
       auto equip_id = t->equip_id_use_anim(e);
       if (equip_id.ok()) {

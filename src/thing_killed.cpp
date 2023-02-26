@@ -362,7 +362,7 @@ void Thing::killed(Thingp defeater, const char *reason)
                 //
               } else if (is_undead()) {
                 msg("%%fg=white$%s is vanquished %s.%%fg=reset$", The_no_dying.c_str(), reason);
-              } else if (is_jelly()) {
+              } else if (is_slime()) {
                 msg("%%fg=white$%s is splattered %s.%%fg=reset$", The_no_dying.c_str(), reason);
               } else {
                 msg("%%fg=white$%s is dead, killed %s.%%fg=reset$", The_no_dying.c_str(), reason);
@@ -389,7 +389,7 @@ void Thing::killed(Thingp defeater, const char *reason)
           if (is_monst()) {
             if (is_undead()) {
               msg("%%fg=white$%s is vanquished %s.%%fg=reset$", The_no_dying.c_str(), reason);
-            } else if (is_jelly()) {
+            } else if (is_slime()) {
               msg("%%fg=white$%s is splattered %s.%%fg=reset$", The_no_dying.c_str(), reason);
             } else {
               msg("%%fg=white$%s is dead, killed %s.%%fg=reset$", The_no_dying.c_str(), reason);
@@ -410,7 +410,7 @@ void Thing::killed(Thingp defeater, const char *reason)
 
           if (is_undead()) {
             msg("%%fg=white$%s is vanquished %s.%%fg=reset$", The_no_dying.c_str(), reason);
-          } else if (is_jelly()) {
+          } else if (is_slime()) {
             msg("%%fg=white$%s is splattered %s.%%fg=reset$", The_no_dying.c_str(), reason);
           } else {
             msg("%%fg=white$%s is dead, killed %s.%%fg=reset$", The_no_dying.c_str(), reason);
@@ -423,7 +423,7 @@ void Thing::killed(Thingp defeater, const char *reason)
 
           if (is_undead()) {
             msg("You hear the distant cry of the undead...");
-          } else if (is_jelly()) {
+          } else if (is_slime()) {
             msg("You hear a distant splat...");
           } else if (is_humanoid()) {
             msg("You hear distant common language cursing...");
@@ -441,7 +441,7 @@ void Thing::killed(Thingp defeater, const char *reason)
         if (is_monst()) {
           if (is_undead()) {
             msg("%%fg=white$%s is vanquished %s.%%fg=reset$", The_no_dying.c_str(), reason);
-          } else if (is_jelly()) {
+          } else if (is_slime()) {
             msg("%%fg=white$%s is splattered %s.%%fg=reset$", The_no_dying.c_str(), reason);
           } else {
             msg("%%fg=white$%s is dead, killed %s.%%fg=reset$", The_no_dying.c_str(), reason);

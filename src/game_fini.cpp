@@ -63,7 +63,7 @@ void Game::fini(void)
   tick_dt = {};
 
   //
-  // Temporary. This is used to try and speed up animations if in the midst of a jelly storm
+  // Temporary. This is used to try and speed up animations if in the midst of a slime storm
   //
   tick_current_is_too_slow = {};
   prev_tick_was_too_slow   = {};

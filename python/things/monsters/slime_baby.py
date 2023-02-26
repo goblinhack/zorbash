@@ -74,16 +74,15 @@ def tp_init(name, text_long_name):
     my.is_crushable(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_eater_of_green_blood(self, True)
-    my.is_eater_of_jelly(self, True)
     my.is_eater_of_meat(self, True)
     my.is_eater_of_red_blood(self, True)
+    my.is_eater_of_slime(self, True)
     my.is_fearless(self, 500)
     my.is_green_blooded(self, True)
     my.is_hittable(self, True)
     my.is_immune_to_acid(self, True)
     my.is_immune_to_necrosis(self, True)
     my.is_interesting(self, True)
-    my.is_jelly(self, True)
     my.is_living(self, True)
     my.is_loggable(self, True)
     my.is_monst_class_A(self, True)
@@ -94,6 +93,7 @@ def tp_init(name, text_long_name):
     my.is_msg_allowed_is_seen(self, True)
     my.is_msg_allowed_is_wounded(self, True)
     my.is_msg_allowed_senses_danger(self, True)
+    my.is_slime(self, True)
     my.is_soft(self, True)
     my.is_tickable(self, True)
     my.jump_distance(self, 2)
@@ -116,9 +116,9 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_long2(self, "This one is a baby jelly. It tends to avoid adults of its kind. So should you.")
-    my.text_description_long(self, "Jelly jumpers are numerous, bouncy and lots of fun! They will eat almost anything, including their own. They have the annoying habit of jumping when threatened.")
-    my.text_description_short(self, "A small pile of semi sentient jelly.")
+    my.text_description_long2(self, "This one is a baby slime. It tends to avoid adults of its kind. So should you.")
+    my.text_description_long(self, "Slime jumpers are numerous, bouncy and lots of fun! They will eat almost anything, including their own. They have the annoying habit of jumping when threatened.")
+    my.text_description_short(self, "A small pile of semi sentient slime.")
     my.text_hits(self, "splats")
     my.thing_size(self, my.THING_SIZE_TINY)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -156,7 +156,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="jelly_baby", text_long_name="baby jelly jumper")
+    tp_init(name="slime_baby", text_long_name="baby slime jumper")
 
 
 init()

@@ -17,20 +17,20 @@ def on_death(me, x, y):
     if my.thing_is_burnt(me):
         return
     if my.pcg_randint(1, 100) < 80:
-        my.spawn_next_to(me, "jelly_baby")
+        my.spawn_next_to(me, "slime_baby")
         splits = True
     if my.pcg_randint(1, 100) < 80:
-        my.spawn_next_to(me, "jelly_baby")
+        my.spawn_next_to(me, "slime_baby")
         splits = True
     if my.pcg_randint(1, 100) < 40:
-        my.spawn_next_to(me, "jelly_baby")
+        my.spawn_next_to(me, "slime_baby")
         splits = True
     if my.pcg_randint(1, 100) < 40:
-        my.spawn_next_to(me, "jelly_baby")
+        my.spawn_next_to(me, "slime_baby")
         splits = True
 
     if splits:
-        my.thing_msg(me, "The jelly splits!")
+        my.thing_msg(me, "The slime splits!")
 
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, f"slime{my.non_pcg_randint(1, 9)}")
 
@@ -98,12 +98,12 @@ def tp_init(name, text_long_name):
     my.is_crushable(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_eater_of_green_blood(self, True)
-    my.is_eater_of_jelly(self, True)
     my.is_eater_of_magical_items(self, True)
     my.is_eater_of_meat(self, True)
     my.is_eater_of_potions(self, True)
     my.is_eater_of_red_blood(self, True)
     my.is_eater_of_rings(self, True)
+    my.is_eater_of_slime(self, True)
     my.is_fearless(self, 500)
     my.is_green_blooded(self, True)
     my.is_hittable(self, True)
@@ -111,7 +111,6 @@ def tp_init(name, text_long_name):
     my.is_immune_to_necrosis(self, True)
     my.is_interesting(self, True)
     my.is_item_collector(self, True)
-    my.is_jelly(self, True)
     my.is_living(self, True)
     my.is_loggable(self, True)
     my.is_monst_class_A(self, True)
@@ -122,6 +121,7 @@ def tp_init(name, text_long_name):
     my.is_msg_allowed_is_seen(self, True)
     my.is_msg_allowed_is_wounded(self, True)
     my.is_msg_allowed_senses_danger(self, True)
+    my.is_slime(self, True)
     my.is_soft(self, True)
     my.is_thief(self, True)
     my.is_tickable(self, True)
@@ -146,8 +146,8 @@ def tp_init(name, text_long_name):
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
     my.text_description_long2(self, "This is an adult. It will eat its own children, and you!")
-    my.text_description_long(self, "Jelly jumpers are numerous, bouncy and carnivorous. They will eat almost anything, including their own. They have the annoying habit of jumping when threatened and dividing when defeated.")
-    my.text_description_short(self, "A gargantuan pile of sentient jelly.")
+    my.text_description_long(self, "Slime jumpers are numerous, bouncy and carnivorous. They will eat almost anything, including their own. They have the annoying habit of jumping when threatened and dividing when defeated.")
+    my.text_description_short(self, "A gargantuan pile of sentient slime.")
     my.text_hits(self, "splats")
     my.thing_size(self, my.THING_SIZE_LARGE)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -257,7 +257,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="jelly_parent", text_long_name="jelly jumper")
+    tp_init(name="slime_parent", text_long_name="slime jumper")
 
 
 init()

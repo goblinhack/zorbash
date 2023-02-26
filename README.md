@@ -14,8 +14,8 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - cloak of jelly                                                                                                                             -->
-<!-- - sword of jelly                                                                                                                             -->
+<!-- - cloak of slime                                                                                                                             -->
+<!-- - sword of slime                                                                                                                             -->
 <!-- - paralysis dart                                                                                                                             -->
 <!-- - wort food ? fungas foods and some poisonous?                                                                                               -->
 <!-- - spider web spawn small spiders?                                                                                                            -->
@@ -32,7 +32,7 @@
 <!-- - ogre and totems?                                                                                                                           -->
 <!-- - swamp level                                                                                                                                -->
 <!-- - boss 1 Mummy mummy, ankh of life                                                                                                           -->
-<!-- - boss 2 jelly boss, spawns jellys, tries to jump splat the player                                                                           -->
+<!-- - boss 2 slime boss, spawns slimes, tries to jump splat the player                                                                           -->
 <!--          swamp tiles that allow 50% movement                                                                                                 -->
 <!--          boss will eat swamp wort to spawn                                                                                                   -->
 <!--          explode bog tiles to kill boss                                                                                                      -->
@@ -156,7 +156,7 @@
 <!-- - darts / poison darts                                                                                                                       -->
 <!-- - strength penalties                                                                                                                         -->
 <!-- - blessed items resist explosion                                                                                                             -->
-<!-- - warhammer should kill parent jelly in one go                                                                                               -->
+<!-- - warhammer should kill parent slime in one go                                                                                               -->
 <!-- - warhammer smash skeletton                                                                                                                  -->
 <!-- - (blunt/warhamma?) slime specific weapon does not cause slimes to split                                                                     -->
 <!-- ------                                                                                                                                       -->
@@ -219,7 +219,7 @@ Current status:
 
 Content:
 <!-- begin type marker -->
-- 68 x monsters
+- 70 x monsters
 - 52 x food
 - 19 x treasure
 - 13 x weapons

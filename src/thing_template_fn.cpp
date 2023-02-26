@@ -458,13 +458,13 @@ int Tp::is_eater_of_food(void) const { return _is_eater_of_food; }
 int Tp::is_eater_of_gauntlets(void) const { return _is_eater_of_gauntlets; }
 int Tp::is_eater_of_green_blood(void) const { return _is_eater_of_green_blood; }
 int Tp::is_eater_of_helmets(void) const { return _is_eater_of_helmets; }
-int Tp::is_eater_of_jelly(void) const { return _is_eater_of_jelly; }
 int Tp::is_eater_of_magical_items(void) const { return _is_eater_of_magical_items; }
 int Tp::is_eater_of_meat(void) const { return _is_eater_of_meat; }
 int Tp::is_eater_of_potions(void) const { return _is_eater_of_potions; }
 int Tp::is_eater_of_red_blood(void) const { return _is_eater_of_red_blood; }
 int Tp::is_eater_of_rings(void) const { return _is_eater_of_rings; }
 int Tp::is_eater_of_shields(void) const { return _is_eater_of_shields; }
+int Tp::is_eater_of_slime(void) const { return _is_eater_of_slime; }
 int Tp::is_eater_of_staffs(void) const { return _is_eater_of_staffs; }
 int Tp::is_eater_of_treasure(void) const { return _is_eater_of_treasure; }
 int Tp::is_eater_of_weapons(void) const { return _is_eater_of_weapons; }
@@ -522,7 +522,6 @@ int Tp::is_item_collector(void) const { return _is_item_collector; }
 int Tp::is_item_organic(void) const { return _is_item_organic; }
 int Tp::is_item_targetted(void) const { return _is_item_targetted; }
 int Tp::is_item(void) const { return _is_item; }
-int Tp::is_jelly(void) const { return _is_jelly; }
 int Tp::is_key_special(void) const { return _is_key_special; }
 int Tp::is_key(void) const { return _is_key; }
 int Tp::is_laser(void) const { return _is_laser; }
@@ -600,6 +599,7 @@ int Tp::is_shovable_and_sticky(void) const { return _is_shovable_and_sticky; }
 int Tp::is_shovable(void) const { return _is_shovable; }
 int Tp::is_skillstone(void) const { return _is_skillstone; }
 int Tp::is_skill(void) const { return _is_skill; }
+int Tp::is_slime(void) const { return _is_slime; }
 int Tp::is_slippery(void) const { return _is_slippery; }
 int Tp::is_smoke(void) const { return _is_smoke; }
 int Tp::is_snake(void) const { return _is_snake; }
@@ -1002,13 +1002,13 @@ void Tp::is_eater_of_food_set(int v) { _is_eater_of_food = v; }
 void Tp::is_eater_of_gauntlets_set(int v) { _is_eater_of_gauntlets = v; }
 void Tp::is_eater_of_green_blood_set(int v) { _is_eater_of_green_blood = v; }
 void Tp::is_eater_of_helmets_set(int v) { _is_eater_of_helmets = v; }
-void Tp::is_eater_of_jelly_set(int v) { _is_eater_of_jelly = v; }
 void Tp::is_eater_of_magical_items_set(int v) { _is_eater_of_magical_items = v; }
 void Tp::is_eater_of_meat_set(int v) { _is_eater_of_meat = v; }
 void Tp::is_eater_of_potions_set(int v) { _is_eater_of_potions = v; }
 void Tp::is_eater_of_red_blood_set(int v) { _is_eater_of_red_blood = v; }
 void Tp::is_eater_of_rings_set(int v) { _is_eater_of_rings = v; }
 void Tp::is_eater_of_shields_set(int v) { _is_eater_of_shields = v; }
+void Tp::is_eater_of_slime_set(int v) { _is_eater_of_slime = v; }
 void Tp::is_eater_of_staffs_set(int v) { _is_eater_of_staffs = v; }
 void Tp::is_eater_of_treasure_set(int v) { _is_eater_of_treasure = v; }
 void Tp::is_eater_of_weapons_set(int v) { _is_eater_of_weapons = v; }
@@ -1066,7 +1066,6 @@ void Tp::is_item_collector_set(int v) { _is_item_collector = v; }
 void Tp::is_item_organic_set(int v) { _is_item_organic = v; }
 void Tp::is_item_set(int v) { _is_item = v; }
 void Tp::is_item_targetted_set(int v) { _is_item_targetted = v; }
-void Tp::is_jelly_set(int v) { _is_jelly = v; }
 void Tp::is_key_set(int v) { _is_key = v; }
 void Tp::is_key_special_set(int v) { _is_key_special = v; }
 void Tp::is_laser_set(int v) { _is_laser = v; }
@@ -1144,6 +1143,7 @@ void Tp::is_shovable_and_sticky_set(int v) { _is_shovable_and_sticky = v; }
 void Tp::is_shovable_set(int v) { _is_shovable = v; }
 void Tp::is_skill_set(int v) { _is_skill = v; }
 void Tp::is_skillstone_set(int v) { _is_skillstone = v; }
+void Tp::is_slime_set(int v) { _is_slime = v; }
 void Tp::is_slippery_set(int v) { _is_slippery = v; }
 void Tp::is_smoke_set(int v) { _is_smoke = v; }
 void Tp::is_snake_set(int v) { _is_snake = v; }

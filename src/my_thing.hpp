@@ -1380,13 +1380,13 @@ public:
   int is_eater_of_gauntlets(void);
   int is_eater_of_green_blood(void);
   int is_eater_of_helmets(void);
-  int is_eater_of_jelly(void);
   int is_eater_of_magical_items(void);
   int is_eater_of_meat(void);
   int is_eater_of_potions(void);
   int is_eater_of_red_blood(void);
   int is_eater_of_rings(void);
   int is_eater_of_shields(void);
+  int is_eater_of_slime(void);
   int is_eater_of_staffs(void);
   int is_eater_of_treasure(void);
   int is_eater_of_weapons(void);
@@ -1445,7 +1445,6 @@ public:
   int is_item_organic(void);
   int is_item_targetted(void);
   int is_item(void);
-  int is_jelly(void);
   int is_key_special(void);
   int is_key(void);
   int is_laser(void);
@@ -1524,6 +1523,7 @@ public:
   int is_shovable(void);
   int is_skillstone(void);
   int is_skill(void);
+  int is_slime(void);
   int is_slippery(void);
   int is_smoke(void);
   int is_snake(void);

@@ -252,6 +252,8 @@ void Game::place_player(void)
       //  level->thing_new("chest1", point(x + 2, y + 2));
       //  level->thing_new("chest2", point(x + 3, y + 2));
       // level->thing_new("scorpion_colossal", point(x + 3, y + 2));
+      level->thing_new("cthulite", point(x + 3, y + 2));
+      level->thing_new("blinkcat", point(x + 2, y + 1));
       if (0) {
         level->thing_new("amulet_healing", point(x + 1, y - 3));
         level->thing_new("amulet_peeking", point(x + 2, y - 3));
@@ -436,8 +438,8 @@ void Game::place_player(void)
         level->thing_new("vampire_rose_stem1", point(x, y + 4));
       }
       if (0) {
-        level->thing_new("jelly_parent", point(x, y + 4));
-        level->thing_new("jelly_baby", point(x, y + 4));
+        level->thing_new("slime_parent", point(x, y + 4));
+        level->thing_new("slime_baby", point(x, y + 4));
       }
       if (0) {
         auto d = level->thing_new("dogman", point(x + 1, y + 2));
@@ -467,10 +469,10 @@ void Game::place_player(void)
       // level->thing_new("flameskull", point(x, y + 4));
 
       if (0) {
-        auto m = level->thing_new("jelly_parent", point(x, y + 4));
+        auto m = level->thing_new("slime_parent", point(x, y + 4));
         m->frozen_set();
       }
-      // level->thing_new("jelly_baby", point(x, y + 2));
+      // level->thing_new("slime_baby", point(x, y + 2));
       //
       // Zoom the map to the player
       //

@@ -25,7 +25,7 @@ bool Thing::is_edible(Thingp itp)
     return true;
   if (is_eater_of_helmets() && itp->is_helmet())
     return true;
-  if (is_eater_of_jelly() && itp->is_jelly())
+  if (is_eater_of_slime() && itp->is_slime())
     return true;
   if (is_eater_of_magical_items() && itp->is_magical())
     return true;
@@ -64,7 +64,7 @@ bool Tp::is_edible(Thingp itp)
     return true;
   if (is_eater_of_helmets() && itp->is_helmet())
     return true;
-  if (is_eater_of_jelly() && itp->is_jelly())
+  if (is_eater_of_slime() && itp->is_slime())
     return true;
   if (is_eater_of_magical_items() && itp->is_magical())
     return true;

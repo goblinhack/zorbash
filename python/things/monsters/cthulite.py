@@ -2,6 +2,10 @@ import my
 import tp
 
 
+def on_born(me, x, y):
+    my.thing_friend(me, "is_slime")
+
+
 def on_you_nat_att(me, x, y):
     sound = f"hiss{my.non_pcg_randint(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
@@ -18,27 +22,19 @@ def on_hit_dodge_do(me, hitter, x, y):
 
 
 def on_tick(owner, me, x, y):
-    if my.pcg_randint(1, 100) < 90:
+    if my.pcg_randint(1, 100) < 70:
         return False
 
-    my.spawn_at_my_position(me, "fire")
+    my.spawn_owned_thing_at_my_position(me, "slime_baby")
     return True
 
 
 def on_death(me, x, y):
-    my.thing_msg(me, "The demon screams angrily and vanishes!")
-    my.spawn_at_my_position(me, "fire")
+    my.thing_msg(me, "The lesser god screams angrily and vanishes!")
 
     sound = f"growl{my.non_pcg_randint(1, 10)}"
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
-
-
-def on_want_to_shoot_at(me, target, target_x, target_y):  # Return True on doing an action
-    if my.pcg_randint(1, 10) < 3:
-        my.thing_shoot_at(me, "staff_fire_projectile", target)
-        return True
-    return False
 
 
 def tp_init(name, text_long_name):
@@ -51,18 +47,21 @@ def tp_init(name, text_long_name):
     my.attack_humanoid(self, True)
     my.attack_meat(self, True)
     my.attacks_per_round(self, 2)
+    my.chance_d1000_dmg_acid(self, 0, 500)
     my.chance_d1000_dmg_nat_att(self, 0, 1000)
+    my.chance_d1000_dmg_poison(self, 0, 900)
     my.chance_d1000_jump_attack(self, 800)
     my.chance_d1000_jump_onto(self, 100)
     my.chance_d1000_jump_randomly(self, 20)
     my.chance_d1000_shove(self, 200)
-    my.chance_d1000_teleport_self(self, 50)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 10)
     my.distance_vision(self, 7)
+    my.dmg_acid_dice(self, "2d6")
     my.dmg_nat_att_dice(self, "1d14+4")
     my.dmg_nat_att_type(self, "bludgeon")
+    my.dmg_poison_dice(self, "2d12")
     my.dmg_received_doubled_from_water(self, True)
     my.gfx_anim_use(self, "sword_plutonium_swing")
     my.gfx_ascii_fade_with_dist(self, True)
@@ -86,12 +85,10 @@ def tp_init(name, text_long_name):
     my.is_able_to_rest(self, True)
     my.is_able_to_see_in_the_dark(self, True)
     my.is_able_to_see_through_doors(self, True)
-    my.is_able_to_teleport_escape(self, True)
-    my.is_able_to_teleport_self(self, True)
-    my.is_able_to_teleport_without_tiring(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)
+    my.is_biome_swamp(self, True)
     my.is_daring(self, True)
     my.is_demon(self, True)
     my.is_described_when_hovering_over(self, True)
@@ -99,11 +96,10 @@ def tp_init(name, text_long_name):
     my.is_eater_of_red_blood(self, True)
     my.is_ethereal(self, True)
     my.is_fearless(self, True)
-    my.is_fire(self, True)
     my.is_heavy(self, True)
     my.is_hittable(self, True)
     my.is_humanoid(self, True)
-    my.is_immune_to_fire(self, True)
+    my.is_immune_to_acid(self, True)
     my.is_immune_to_necrosis(self, True)
     my.is_immune_to_poison(self, True)
     my.is_intelligent(self, True)
@@ -116,21 +112,21 @@ def tp_init(name, text_long_name):
     my.is_msg_allowed_hears_something(self, True)
     my.is_msg_allowed_is_dead(self, True)
     my.is_msg_allowed_is_seen(self, True)
-    my.is_msg_allowed_is_surprised(self, True)
     my.is_msg_allowed_is_wounded(self, True)
-    my.is_msg_allowed_senses_danger(self, True)
     my.is_obs_when_dead(self, True)
+    my.is_poisonous_danger_level(self, 4)
+    my.is_slime(self, True)
     my.is_tickable(self, True)
-    my.light_color(self, "red")
+    my.light_color(self, "green")
     my.light_dist(self, 2)
-    my.move_speed(self, 150)
+    my.move_speed(self, 50)
     my.noise_decibels_hearing(self, 50)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
+    my.on_born_do(self, "me.on_born()")
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
     my.on_tick_do(self, "me.on_tick()")
-    my.on_want_to_shoot_at_do(self, "me.on_want_to_shoot_at()")
     my.on_you_nat_att_do(self, "me.on_you_nat_att()")
     my.rarity(self, my.RARITY_UNCOMMON)  # how rare within this monster class
     my.shove_strength_mod(self, 1)
@@ -140,11 +136,10 @@ def tp_init(name, text_long_name):
     my.stat_dex(self, 8)
     my.stat_luck(self, 2)
     my.stat_str(self, 18)
-    my.teleport_distance(self, 5)
     my.text_a_or_an(self, "a")
-    my.text_description_long2(self, "Fire demons are formidable enemies. Execute extreme caution or be executed extremely...")
-    my.text_description_long(self, "Accursed creature of the abyss. Devoid of life. Full of hatred, and just wants to get back to the pit so it can take care of its pet cats. And you are in the way...")
-    my.text_description_short(self, "A hot fire demon.")
+    my.text_description_long2(self, "Watch out as this creature oozes living slime")
+    my.text_description_long(self, "A lesser form of the eternal unnamed god, this create is still very deserving of your fear")
+    my.text_description_short(self, "A lesser god.")
     my.text_hits(self, "whips")
     my.thing_size(self, my.THING_SIZE_GIANT)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -154,23 +149,23 @@ def tp_init(name, text_long_name):
 
     delay = 350
     my.tile(self,
-            ascii_fg_char="D", ascii_bg_col_name="", ascii_fg_col_name="red",
+            ascii_fg_char="C", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".1", delay_ms=delay, frame=1)
     my.tile(self,
-            ascii_fg_char="D", ascii_bg_col_name="", ascii_fg_col_name="orange",
+            ascii_fg_char="C", ascii_bg_col_name="", ascii_fg_col_name="orange",
             tile=name + ".2", delay_ms=delay, frame=2)
     my.tile(self,
-            ascii_fg_char="D", ascii_bg_col_name="", ascii_fg_col_name="yellow",
+            ascii_fg_char="C", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".3", delay_ms=delay, frame=3)
     my.tile(self,
-            ascii_fg_char="D", ascii_bg_col_name="", ascii_fg_col_name="gray30",
-            tile="demon_fire.dead", is_dead=True, delay_ms=delay)
+            ascii_fg_char="C", ascii_bg_col_name="", ascii_fg_col_name="gray30",
+            tile="cthulite.dead", is_dead=True, delay_ms=delay)
 
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="demon_fire", text_long_name="fire demon")
+    tp_init(name="cthulite", text_long_name="cthulite")
 
 
 init()

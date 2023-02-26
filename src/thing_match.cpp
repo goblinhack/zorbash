@@ -410,10 +410,10 @@ bool Tp::matches(const std::string &what)
   if (is_item() && (what == "is_item")) {
     return true;
   }
-  if (is_eater_of_jelly() && (what == "is_eater_of_jelly")) {
+  if (is_eater_of_slime() && (what == "is_eater_of_slime")) {
     return true;
   }
-  if (is_jelly() && (what == "is_jelly")) {
+  if (is_slime() && (what == "is_slime")) {
     return true;
   }
   if (is_key() && (what == "is_key")) {
@@ -1604,10 +1604,10 @@ bool Thing::matches(const std::string &what)
   if (is_item() && (what == "is_item")) {
     return true;
   }
-  if (is_eater_of_jelly() && (what == "is_eater_of_jelly")) {
+  if (is_eater_of_slime() && (what == "is_eater_of_slime")) {
     return true;
   }
-  if (is_jelly() && (what == "is_jelly")) {
+  if (is_slime() && (what == "is_slime")) {
     return true;
   }
   if (is_key() && (what == "is_key")) {
@@ -2940,11 +2940,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_item_targetted") {
     return &Thing::is_item_targetted;
   }
-  if (what == "is_eater_of_jelly") {
-    return &Thing::is_eater_of_jelly;
+  if (what == "is_eater_of_slime") {
+    return &Thing::is_eater_of_slime;
   }
-  if (what == "is_jelly") {
-    return &Thing::is_jelly;
+  if (what == "is_slime") {
+    return &Thing::is_slime;
   }
   if (what == "is_obs_in_the_way_for_jumping") {
     return &Thing::is_obs_in_the_way_for_jumping;
