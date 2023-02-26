@@ -205,9 +205,6 @@
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 
-Zorbash
--------
-
 <p align="center">
 <img alt="Pixel art" src="pics/banner.png" width="100%">
 </p>
