@@ -14,6 +14,7 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
+<!-- - pressure plate, that monsters avoid                                                                                                        -->
 <!-- - cloak of slime                                                                                                                             -->
 <!-- - sword of slime                                                                                                                             -->
 <!-- - paralysis dart                                                                                                                             -->
@@ -219,7 +220,7 @@ Current status:
 
 Content:
 <!-- begin type marker -->
-- 70 x monsters
+- 71 x monsters
 - 52 x food
 - 19 x treasure
 - 13 x weapons

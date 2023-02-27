@@ -242,8 +242,8 @@ int Tp::collision_hit_two_tiles_ahead(void) const { return _collision_hit_two_ti
 int Tp::consume_per_bite_amount(void) const { return _consume_per_bite_amount; }
 int Tp::distance_avoid(void) const { return _distance_avoid; }
 int Tp::distance_leader_max(void) const { return _distance_leader_max; }
+int Tp::distance_minion_from_mob_max(void) const { return _distance_minion_from_mob_max; }
 int Tp::distance_minion_vision_shared(void) const { return _distance_minion_vision_shared; }
-int Tp::distance_mob_max(void) const { return _distance_mob_max; }
 int Tp::distance_recruitment_max(void) const { return _distance_recruitment_max; }
 int Tp::distance_throw(void) const { return _distance_throw; }
 int Tp::distance_vision(void) const { return _distance_vision; }
@@ -780,8 +780,8 @@ void Tp::collision_hit_two_tiles_ahead_set(int v) { _collision_hit_two_tiles_ahe
 void Tp::consume_per_bite_amount_set(int v) { _consume_per_bite_amount = v; }
 void Tp::distance_avoid_set(int v) { _distance_avoid = v; }
 void Tp::distance_leader_max_set(int v) { _distance_leader_max = v; }
+void Tp::distance_minion_from_mob_max_set(int v) { _distance_minion_from_mob_max = v; }
 void Tp::distance_minion_vision_shared_set(int v) { _distance_minion_vision_shared = v; }
-void Tp::distance_mob_max_set(int v) { _distance_mob_max = v; }
 void Tp::distance_recruitment_max_set(int v) { _distance_recruitment_max = v; }
 void Tp::distance_throw_set(int v) { _distance_throw = v; }
 void Tp::distance_vision_set(int v) { _distance_vision = v; }

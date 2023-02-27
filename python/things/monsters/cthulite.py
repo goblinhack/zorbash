@@ -25,7 +25,7 @@ def on_tick(owner, me, x, y):
     if my.pcg_randint(1, 100) < 70:
         return False
 
-    my.spawn_owned_thing_at_my_position(me, "slime_baby")
+    my.spawn_minion_at_my_position(me, "slime_baby")
     return True
 
 
@@ -57,6 +57,7 @@ def tp_init(name, text_long_name):
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 10)
+    my.distance_minion_from_mob_max(self, 5)
     my.distance_vision(self, 7)
     my.dmg_acid_dice(self, "2d6")
     my.dmg_nat_att_dice(self, "1d14+4")
@@ -122,8 +123,8 @@ def tp_init(name, text_long_name):
     my.move_speed(self, 50)
     my.noise_decibels_hearing(self, 50)
     my.normal_placement_rules(self, True)
-    my.on_death_do(self, "me.on_death()")
     my.on_born_do(self, "me.on_born()")
+    my.on_death_do(self, "me.on_death()")
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
     my.on_tick_do(self, "me.on_tick()")

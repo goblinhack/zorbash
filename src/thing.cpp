@@ -57,32 +57,6 @@ std::size_t Thing::light_count(void)
   return (infop()->light.size());
 }
 
-const ThingId &Thing::immediate_owner_id(void)
-{
-  TRACE_NO_INDENT();
-  if (! maybe_infop()) {
-    return (NoThingId);
-  }
-  return (infop()->owner_id);
-}
-
-const ThingId &Thing::top_owner_id(void)
-{
-  TRACE_NO_INDENT();
-  auto t = top_owner();
-  if (t) {
-    return t->id;
-  }
-  return (NoThingId);
-}
-
-const ThingId &Thing::owner_id_set(const ThingId &v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->owner_id = v);
-}
-
 const ThingId &Thing::immediate_mob_id(void)
 {
   TRACE_NO_INDENT();
@@ -113,22 +87,6 @@ const ThingId &Thing::leader_id_set(const ThingId &v)
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->leader_id = v);
-}
-
-const ThingId &Thing::immediate_spawner_id(void)
-{
-  TRACE_NO_INDENT();
-  if (! maybe_infop()) {
-    return (NoThingId);
-  }
-  return (infop()->spawner_owner_id);
-}
-
-const ThingId &Thing::spawner_set(const ThingId &v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->spawner_owner_id = v);
 }
 
 const fpoint &Thing::interpolated_at_get(void)

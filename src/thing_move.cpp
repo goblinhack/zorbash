@@ -224,14 +224,14 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   auto ai  = maybe_aip();
   auto mob = top_mob();
   if (mob) {
-    if (distance_mob_max_float()) {
+    if (distance_minion_from_mob_max_float()) {
       auto new_distance  = distance(future_pos, mob->curr_at);
       auto curr_distance = distance(curr_at, mob->curr_at);
       if (new_distance <= curr_distance) {
         //
         // Always allow moves that end up closer to the base
         //
-      } else if (new_distance > distance_mob_max_float() + 1) {
+      } else if (new_distance > distance_minion_from_mob_max_float() + 1) {
         //
         // Too far.
         //

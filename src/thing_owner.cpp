@@ -176,6 +176,20 @@ Thingp Thing::immediate_owner(void)
 void Thing::owner_set(Thingp owner)
 {
   TRACE_NO_INDENT();
+
+  /*
+   * Did you mean to minion-ify ?
+   */
+  if (is_player() || is_monst()) {
+    err("Should not be owned");
+    return;
+  }
+
+  if (! maybe_infop()) {
+    err("Thing has no infop, cannot be owned");
+    return;
+  }
+
   if (! owner) {
     owner_unset();
     return;
@@ -214,6 +228,11 @@ void Thing::owner_set(Thingp owner)
   is_visible_to_player = owner->is_visible_to_player;
 
   dbg2("Set owner to %s", owner->to_short_string().c_str());
+
+  auto i = immediate_owner();
+  if (! i) {
+    err("Failed to set owner to %s", owner->to_short_string().c_str());
+  }
 }
 
 void Thing::owner_unset(void)
@@ -301,4 +320,46 @@ int Thing::owned_count(void)
     return (int) infop()->owned.size();
   }
   return 0;
+}
+
+const ThingId &Thing::owner_id_set(const ThingId &v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->owner_id = v);
+}
+
+const ThingId &Thing::immediate_owner_id(void)
+{
+  TRACE_NO_INDENT();
+  if (! maybe_infop()) {
+    return (NoThingId);
+  }
+  return (infop()->owner_id);
+}
+
+const ThingId &Thing::top_owner_id(void)
+{
+  TRACE_NO_INDENT();
+  auto t = top_owner();
+  if (t) {
+    return t->id;
+  }
+  return (NoThingId);
+}
+
+const ThingId &Thing::immediate_spawner_id(void)
+{
+  TRACE_NO_INDENT();
+  if (! maybe_infop()) {
+    return (NoThingId);
+  }
+  return (infop()->spawner_owner_id);
+}
+
+const ThingId &Thing::spawner_set(const ThingId &v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->spawner_owner_id = v);
 }

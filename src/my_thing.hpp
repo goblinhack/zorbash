@@ -163,6 +163,7 @@ public:
   uint64_t is_hunger_level_starving                     : 1 {};
   uint64_t is_jumping                                   : 1 {};
   uint64_t is_key_in_lock                               : 1 {}; // key stuck in rusty lock?
+  uint64_t is_minion_set                                : 1 {}; /* overrides is_minion in template */
   uint64_t is_moving                                    : 1 {}; // is currently moving tiles
   uint64_t is_open                                      : 1 {};
   uint64_t is_resurrected                               : 1 {}; // has finished resurrecting
@@ -356,6 +357,7 @@ public:
   Thingp spawn_at(const std::string &what, point p);
   Thingp spawn_at_if_possible(const std::string &what);
   Thingp spawn_owned_thing_at_my_position(const std::string &what);
+  Thingp spawn_minion_at_my_position(const std::string &what);
   Thingp top_mob(void);
   Thingp top_owner(void);
   Thingp top_owner_internal(void);
@@ -904,8 +906,8 @@ public:
   float distance_from_mob(void);
   float distance_leader_max_float(point p);
   float distance_leader_max_float(void);
-  float distance_mob_max_float(point p);
-  float distance_mob_max_float(void);
+  float distance_minion_from_mob_max_float(point p);
+  float distance_minion_from_mob_max_float(void);
   float distance_recruitment_max_float(point p);
   float distance_recruitment_max_float(void);
   float distance_throw_get(void);

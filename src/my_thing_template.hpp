@@ -163,8 +163,8 @@ private:
   int _consume_per_bite_amount {};
   int _distance_avoid {};
   int _distance_leader_max {};
+  int _distance_minion_from_mob_max {};
   int _distance_minion_vision_shared {};
-  int _distance_mob_max {};
   int _distance_recruitment_max {};
   int _distance_throw {};
   int _distance_vision {};
@@ -1249,8 +1249,8 @@ public:
   int consume_per_bite_amount(void) const;
   int distance_avoid(void) const;
   int distance_leader_max(void) const;
+  int distance_minion_from_mob_max(void) const;
   int distance_minion_vision_shared(void) const;
-  int distance_mob_max(void) const;
   int distance_recruitment_max(void) const;
   int distance_throw(void) const;
   int distance_vision(void) const;
@@ -1788,8 +1788,8 @@ public:
   void consume_per_bite_amount_set(int v);
   void distance_avoid_set(int v);
   void distance_leader_max_set(int v);
+  void distance_minion_from_mob_max_set(int v);
   void distance_minion_vision_shared_set(int v);
-  void distance_mob_max_set(int v);
   void distance_recruitment_max_set(int v);
   void distance_throw_set(int v);
   void distance_vision_set(int v);

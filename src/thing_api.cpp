@@ -1091,12 +1091,6 @@ int Thing::is_mob(void)
   return (tp()->is_mob());
 }
 
-int Thing::is_minion(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_minion());
-}
-
 int Thing::is_monst(void)
 {
   TRACE_NO_INDENT();
@@ -1239,12 +1233,6 @@ int Thing::spawn_group_radius(void)
 {
   TRACE_NO_INDENT();
   return (tp()->spawn_group_radius());
-}
-
-int Thing::distance_minion_vision_shared(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->distance_minion_vision_shared());
 }
 
 int Thing::is_able_to_use_weapons(void)
@@ -2769,22 +2757,16 @@ int Thing::is_able_to_use_rings(void)
   return (tp()->is_able_to_use_rings());
 }
 
-float Thing::distance_mob_max_float(void)
+float Thing::distance_minion_from_mob_max_float(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->distance_mob_max());
+  return (tp()->distance_minion_from_mob_max());
 }
 
 float Thing::distance_leader_max_float(void)
 {
   TRACE_NO_INDENT();
   return (tp()->distance_leader_max());
-}
-
-int Thing::minion_limit(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->minion_limit());
 }
 
 int Thing::normal_placement_rules(void)

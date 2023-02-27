@@ -53,7 +53,7 @@ def tp_init(name, text_long_name):
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 30)
     my.distance_avoid(self, 5)
-    my.distance_mob_max(self, 5)
+    my.distance_minion_from_mob_max(self, 5)
     my.distance_vision(self, 5)
     my.dmg_nat_att_dice(self, "1d8+3")
     my.dmg_nat_att_type(self, "gore")

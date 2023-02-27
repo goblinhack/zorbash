@@ -716,3 +716,22 @@ Thingp Thing::spawn_owned_thing_at_my_position(const std::string &what)
 
   return it;
 }
+
+Thingp Thing::spawn_minion_at_my_position(const std::string &what)
+{
+  dbg("Spawn minion thing at: %s", what.c_str());
+  TRACE_AND_INDENT();
+
+  auto it = level->thing_new(what, curr_at, nullptr /* no owner */);
+
+  //
+  // Allow non normal minions to also be minions. No minion left behind.
+  //
+  if (! it->is_minion()) {
+    it->is_minion_set = true;
+  }
+
+  spawned_newborn(it);
+
+  return it;
+}

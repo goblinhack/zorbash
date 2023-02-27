@@ -19,6 +19,7 @@ PyObject *spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyObject 
 PyObject *spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_owned_thing_at_my_position(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *spawn_minion_at_my_position(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -122,8 +123,8 @@ TP_SET_PROTO(collision_hit_two_tiles_ahead)
 TP_SET_PROTO(consume_per_bite_amount)
 TP_SET_PROTO(distance_avoid)
 TP_SET_PROTO(distance_leader_max)
+TP_SET_PROTO(distance_minion_from_mob_max)
 TP_SET_PROTO(distance_minion_vision_shared)
-TP_SET_PROTO(distance_mob_max)
 TP_SET_PROTO(distance_recruitment_max)
 TP_SET_PROTO(distance_throw)
 TP_SET_PROTO(distance_vision)

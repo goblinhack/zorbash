@@ -34,7 +34,7 @@ point Thing::dest_random_get(int d)
   //
   auto mob = top_mob();
   if (mob && (mob != this)) {
-    d             = (int) ceil(distance_mob_max_float());
+    d             = (int) ceil(distance_minion_from_mob_max_float());
     wander_source = mob->curr_at;
     dbg2("Use mob %s as wander source: %s distance %d", mob->to_short_string().c_str(),
          wander_source.to_string().c_str(), d);

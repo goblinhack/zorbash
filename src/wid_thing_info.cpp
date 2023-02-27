@@ -827,6 +827,13 @@ void Game::wid_thing_info_add_dmg_melee(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    //
+    // Don't display for dead monsters
+    //
+    if (t->is_dead) {
+      return;
+    }
+
     Thingp curr_weapon = t->equip_get(MONST_EQUIP_WEAPON);
 
     int min_value;
@@ -880,6 +887,13 @@ void Game::wid_thing_info_add_dmg_poison(WidPopup *w, Thingp t, int index)
 
   auto tp = t->tp();
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    //
+    // Don't display for dead monsters
+    //
+    if (t->is_dead) {
+      return;
+    }
+
     auto dmg_poison_dice = t->dmg_poison_dice();
     auto min_value       = dmg_poison_dice.min_roll();
     auto max_value       = dmg_poison_dice.max_roll();
@@ -913,6 +927,13 @@ void Game::wid_thing_info_add_dmg_drown(WidPopup *w, Thingp t, int index)
 
   auto tp = t->tp();
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    //
+    // Don't display for dead monsters
+    //
+    if (t->is_dead) {
+      return;
+    }
+
     auto dmg_drown_dice = t->dmg_drown_dice();
     auto min_value      = dmg_drown_dice.min_roll();
     auto max_value      = dmg_drown_dice.max_roll();
@@ -946,6 +967,13 @@ void Game::wid_thing_info_add_dmg_bite(WidPopup *w, Thingp t, int index)
 
   auto tp = t->tp();
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    //
+    // Don't display for dead monsters
+    //
+    if (t->is_dead) {
+      return;
+    }
+
     auto dmg_bite_dice = t->dmg_bite_dice();
     auto min_value     = dmg_bite_dice.min_roll();
     auto max_value     = dmg_bite_dice.max_roll();
@@ -979,6 +1007,13 @@ void Game::wid_thing_info_add_dmg_claw(WidPopup *w, Thingp t, int index)
 
   auto tp = t->tp();
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    //
+    // Don't display for dead monsters
+    //
+    if (t->is_dead) {
+      return;
+    }
+
     auto dmg_claw_dice = t->dmg_claw_dice();
     auto min_value     = dmg_claw_dice.min_roll();
     auto max_value     = dmg_claw_dice.max_roll();
@@ -1012,6 +1047,13 @@ void Game::wid_thing_info_add_dmg_cold(WidPopup *w, Thingp t, int index)
 
   auto tp = t->tp();
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    //
+    // Don't display for dead monsters
+    //
+    if (t->is_dead) {
+      return;
+    }
+
     auto dmg_cold_dice = t->dmg_cold_dice();
     auto min_value     = dmg_cold_dice.min_roll();
     auto max_value     = dmg_cold_dice.max_roll();
@@ -1045,6 +1087,13 @@ void Game::wid_thing_info_add_dmg_fire(WidPopup *w, Thingp t, int index)
 
   auto tp = t->tp();
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    //
+    // Don't display for dead monsters
+    //
+    if (t->is_dead) {
+      return;
+    }
+
     auto dmg_fire_dice = t->dmg_fire_dice();
     auto min_value     = dmg_fire_dice.min_roll();
     auto max_value     = dmg_fire_dice.max_roll();
@@ -1078,6 +1127,13 @@ void Game::wid_thing_info_add_dmg_heat(WidPopup *w, Thingp t, int index)
 
   auto tp = t->tp();
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    //
+    // Don't display for dead monsters
+    //
+    if (t->is_dead) {
+      return;
+    }
+
     auto dmg_heat_dice = t->dmg_heat_dice();
     auto min_value     = dmg_heat_dice.min_roll();
     auto max_value     = dmg_heat_dice.max_roll();
@@ -1111,6 +1167,13 @@ void Game::wid_thing_info_add_dmg_crush(WidPopup *w, Thingp t, int index)
 
   auto tp = t->tp();
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    //
+    // Don't display for dead monsters
+    //
+    if (t->is_dead) {
+      return;
+    }
+
     auto dmg_crush_dice = t->dmg_crush_dice();
     auto min_value      = dmg_crush_dice.min_roll();
     auto max_value      = dmg_crush_dice.max_roll();
@@ -1144,6 +1207,13 @@ void Game::wid_thing_info_add_dmg_missile(WidPopup *w, Thingp t, int index)
 
   auto tp = t->tp();
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    //
+    // Don't display for dead monsters
+    //
+    if (t->is_dead) {
+      return;
+    }
+
     auto dmg_missile_dice = t->dmg_missile_dice();
     auto min_value        = dmg_missile_dice.min_roll();
     auto max_value        = dmg_missile_dice.max_roll();
@@ -1177,6 +1247,13 @@ void Game::wid_thing_info_add_dmg_lightning(WidPopup *w, Thingp t, int index)
 
   auto tp = t->tp();
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    //
+    // Don't display for dead monsters
+    //
+    if (t->is_dead) {
+      return;
+    }
+
     auto dmg_lightning_dice = t->dmg_lightning_dice();
     auto min_value          = dmg_lightning_dice.min_roll();
     auto max_value          = dmg_lightning_dice.max_roll();
@@ -1210,6 +1287,13 @@ void Game::wid_thing_info_add_dmg_energy(WidPopup *w, Thingp t, int index)
 
   auto tp = t->tp();
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    //
+    // Don't display for dead monsters
+    //
+    if (t->is_dead) {
+      return;
+    }
+
     auto dmg_energy_dice = t->dmg_energy_dice();
     auto min_value       = dmg_energy_dice.min_roll();
     auto max_value       = dmg_energy_dice.max_roll();
@@ -1243,6 +1327,13 @@ void Game::wid_thing_info_add_dmg_negation(WidPopup *w, Thingp t, int index)
 
   auto tp = t->tp();
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    //
+    // Don't display for dead monsters
+    //
+    if (t->is_dead) {
+      return;
+    }
+
     auto dmg_negation_dice = t->dmg_negation_dice();
     auto min_value         = dmg_negation_dice.min_roll();
     auto max_value         = dmg_negation_dice.max_roll();
@@ -1276,6 +1367,13 @@ void Game::wid_thing_info_add_dmg_acid(WidPopup *w, Thingp t, int index)
 
   auto tp = t->tp();
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    //
+    // Don't display for dead monsters
+    //
+    if (t->is_dead) {
+      return;
+    }
+
     auto dmg_acid_dice = t->dmg_acid_dice();
     auto min_value     = dmg_acid_dice.min_roll();
     auto max_value     = dmg_acid_dice.max_roll();
@@ -1309,6 +1407,13 @@ void Game::wid_thing_info_add_dmg_nat_att(WidPopup *w, Thingp t, int index)
 
   auto tp = t->tp();
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    //
+    // Don't display for dead monsters
+    //
+    if (t->is_dead) {
+      return;
+    }
+
     auto dmg_nat_att_dice = t->dmg_nat_att_dice();
     auto min_value        = dmg_nat_att_dice.min_roll();
     auto max_value        = dmg_nat_att_dice.max_roll();
@@ -1355,6 +1460,13 @@ void Game::wid_thing_info_add_dmg_digest(WidPopup *w, Thingp t, int index)
 
   auto tp = t->tp();
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    //
+    // Don't display for dead monsters
+    //
+    if (t->is_dead) {
+      return;
+    }
+
     auto attack_swallow_dice = t->dmg_digest_dice();
     auto min_value           = attack_swallow_dice.min_roll();
     auto max_value           = attack_swallow_dice.max_roll();
@@ -1388,6 +1500,13 @@ void Game::wid_thing_info_add_dmg_necrosis(WidPopup *w, Thingp t, int index)
 
   auto tp = t->tp();
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    //
+    // Don't display for dead monsters
+    //
+    if (t->is_dead) {
+      return;
+    }
+
     auto attack_swallow_dice = t->dmg_necrosis_dice();
     auto min_value           = attack_swallow_dice.min_roll();
     auto max_value           = attack_swallow_dice.max_roll();
@@ -1421,6 +1540,13 @@ void Game::wid_thing_info_add_dmg_draining(WidPopup *w, Thingp t, int index)
 
   auto tp = t->tp();
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    //
+    // Don't display for dead monsters
+    //
+    if (t->is_dead) {
+      return;
+    }
+
     auto attack_swallow_dice = t->dmg_draining_dice();
     auto min_value           = attack_swallow_dice.min_roll();
     auto max_value           = attack_swallow_dice.max_roll();
@@ -1452,6 +1578,13 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    //
+    // Don't display for dead monsters
+    //
+    if (t->is_dead) {
+      return;
+    }
+
     auto stat_att           = 10 + t->stat_att();
     auto stat_att_mod_total = 10 + t->stat_att_mod_total();
     if (stat_att_mod_total != stat_att) {
@@ -1539,6 +1672,13 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    //
+    // Don't display for dead monsters
+    //
+    if (t->is_dead) {
+      return;
+    }
+
     auto ac       = t->stat_def();
     auto ac_total = t->stat_def_total();
     if (ac_total != ac) {

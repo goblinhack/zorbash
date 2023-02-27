@@ -211,9 +211,16 @@ void Thing::remove_all_references()
     dbg2("Remove all owned items, total %d", owned_count());
     TRACE_AND_INDENT();
 
+    Thingp last = nullptr;
     while (owned_count()) {
       ThingId id = *infop->owned.begin();
       auto    t  = level->thing_find(id);
+      if (t == last) {
+        err("Infinite loop when removing owned items");
+        t->err("Infinite loop for this thing when removing owned items");
+        break;
+      }
+      last = t;
       if (t) {
         dbg2("Remove child %s", t->to_string().c_str());
         t->owner_unset();
@@ -227,9 +234,16 @@ void Thing::remove_all_references()
     dbg2("Remove all minions, total %d", minion_count());
     TRACE_AND_INDENT();
 
+    Thingp last = nullptr;
     while (minion_count()) {
-      ThingId id = *infop->owned.begin();
+      ThingId id = *infop->minions.begin();
       auto    t  = level->thing_find(id);
+      if (t == last) {
+        err("Infinite loop when removing minion count");
+        t->err("Infinite loop for this thing when removing minion count");
+        break;
+      }
+      last = t;
       if (t) {
         dbg2("Remove minion %s", t->to_string().c_str());
         t->mob_unset();
@@ -243,9 +257,16 @@ void Thing::remove_all_references()
     dbg2("Remove all followers, total %d", follower_count());
     TRACE_AND_INDENT();
 
+    Thingp last = nullptr;
     while (follower_count()) {
       ThingId id = *infop->followers.begin();
       auto    t  = level->thing_find(id);
+      if (t == last) {
+        err("Infinite loop when removing followers");
+        t->err("Infinite loop for this thing when removing followers");
+        break;
+      }
+      last = t;
       if (t) {
         dbg2("Remove follower %s", t->to_string().c_str());
         t->leader_unset();
@@ -259,9 +280,16 @@ void Thing::remove_all_references()
     dbg2("Remove all spawned things, total %d", spawned_count());
     TRACE_AND_INDENT();
 
+    Thingp last = nullptr;
     while (spawned_count()) {
       ThingId id = *infop->spawned.begin();
       auto    t  = level->thing_find(id);
+      if (t == last) {
+        err("Infinite loop when removing spawned things");
+        t->err("Infinite loop for this thing when removing spawned things");
+        break;
+      }
+      last = t;
       if (t) {
         dbg2("Remove spawned %s", t->to_string().c_str());
         t->spawner_unset();

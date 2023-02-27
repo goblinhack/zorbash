@@ -34,9 +34,16 @@ bool Thing::too_far_from_mob(void)
     return false;
   }
 
-  auto m = distance_mob_max_float();
+  auto m = distance_minion_from_mob_max_float();
   if (! m) {
-    err("distance_mob_max() is not set for thing");
+    //
+    // This could be a thing that is not normally a minion.
+    // Allow it to roam untethered.
+    //
+    if (is_minion_set) {
+      return false;
+    }
+    err("distance_minion_from_mob_max() is not set for minion");
   }
 
   return distance(curr_at, mob->curr_at) > m;
@@ -49,9 +56,16 @@ bool Thing::too_far_from_mob(point p)
     return false;
   }
 
-  auto m = distance_mob_max_float();
+  auto m = distance_minion_from_mob_max_float();
   if (! m) {
-    err("distance_mob_max() is not set for thing");
+    //
+    // This could be a thing that is not normally a minion.
+    // Allow it to roam untethered.
+    //
+    if (is_minion_set) {
+      return false;
+    }
+    err("distance_minion_from_mob_max() is not set for minion");
   }
 
   return distance(p, mob->curr_at) > m;
@@ -64,9 +78,16 @@ bool Thing::too_far_from_mob(point p, float delta)
     return false;
   }
 
-  auto m = distance_mob_max_float();
+  auto m = distance_minion_from_mob_max_float();
   if (! m) {
-    err("distance_mob_max() is not set for thing");
+    //
+    // This could be a thing that is not normally a minion.
+    // Allow it to roam untethered.
+    //
+    if (is_minion_set) {
+      return false;
+    }
+    err("distance_minion_from_mob_max() is not set for minion");
   }
 
   return distance(p, mob->curr_at) > m + delta;
