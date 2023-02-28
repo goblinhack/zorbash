@@ -87,12 +87,7 @@ int Thing::carried_ranged_weapon_count(void)
     return count;
   }
 
-  for (const auto t : ranged_weapon_list()) {
-    if (t->is_ranged_weapon()) {
-      count++;
-    }
-  }
-  return count;
+  return ranged_weapon_list().size();
 }
 
 int Thing::carried_ranged_weapon_least_value(Thingp *out)
@@ -106,10 +101,6 @@ int Thing::carried_ranged_weapon_least_value(Thingp *out)
   }
 
   for (const auto t : ranged_weapon_list()) {
-    if (! t->is_ranged_weapon()) {
-      continue;
-    }
-
     auto v = value(t);
     if (! *out) {
       *out        = t;
@@ -135,10 +126,6 @@ int Thing::carried_ranged_weapon_highest_value(Thingp *out)
   }
 
   for (const auto t : ranged_weapon_list()) {
-    if (! t->is_ranged_weapon()) {
-      continue;
-    }
-
     auto v = value(t);
     if (! *out) {
       *out          = t;
@@ -164,10 +151,6 @@ int Thing::carried_ranged_weapon_highest_value_for_target(Thingp *out, Thingp ta
   }
 
   for (const auto t : ranged_weapon_list()) {
-    if (! t->is_ranged_weapon()) {
-      continue;
-    }
-
     if (t->initial_charge_count()) {
       if (! t->charge_count()) {
         continue;
@@ -178,8 +161,10 @@ int Thing::carried_ranged_weapon_highest_value_for_target(Thingp *out, Thingp ta
     // If intelligent don't use a ranged_weapon that will hit you also
     //
     if (is_intelligent()) {
-      if (distance(curr_at, target->curr_at) <= t->effect_radius() + 1) {
-        continue;
+      if (t->effect_radius()) {
+        if (distance(curr_at, target->curr_at) <= t->effect_radius() + 1) {
+          continue;
+        }
       }
     }
 

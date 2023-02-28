@@ -18,7 +18,8 @@ void Thing::hooks_remove_from(Thingp o)
 
   if (o->is_player() || o->is_monst()) {
     if (o->is_player()) {
-      o->inventory_shortcuts_remove(this);
+      DropReason reason;
+      o->inventory_shortcuts_remove(this, reason);
     }
 
     if (is_skill()) {

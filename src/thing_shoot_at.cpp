@@ -276,7 +276,11 @@ bool Thing::shoot_at(Thingp target)
         dbg("Shoot with best staff: %s", best_staff->to_short_string().c_str());
         curr_weapon = best_staff;
       }
-    } else if (is_able_to_use_ranged_weapons()) {
+    }
+  }
+
+  if (! curr_weapon) {
+    if (is_able_to_use_ranged_weapons()) {
       Thingp best_ranged_weapon = nullptr;
       carried_ranged_weapon_highest_value_for_target(&best_ranged_weapon, target);
       if (best_ranged_weapon) {

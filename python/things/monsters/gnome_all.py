@@ -52,6 +52,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_shoot_at_close_range(self, True)
     my.is_able_to_shoot_at(self, True)
     my.collision_check(self, True)
+    my.is_able_to_use_ranged_weapons(self, True)
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 10)
     my.distance_avoid(self, 5)

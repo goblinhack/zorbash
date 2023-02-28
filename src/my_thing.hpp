@@ -64,6 +64,7 @@ public:
   bool is_being_unequipped {};
   bool is_being_thrown {};
   bool is_being_stolen {};
+  bool is_being_used {};
 } DropReason;
 
 typedef class TeleportReason_
@@ -491,8 +492,8 @@ public:
   bool if_matches_then_dead(const std::string &what, const point p);
   bool initial_temperature_is_set(void);
   bool inventory_shortcuts_insert(Thingp what);
-  bool inventory_shortcuts_remove(Thingp what);
-  bool inventory_shortcuts_remove(Thingp what, Thingp target);
+  bool inventory_shortcuts_remove(Thingp what, DropReason);
+  bool inventory_shortcuts_remove(Thingp what, Thingp target, DropReason);
   bool is_blocking_terrain(const Thingp it);
   bool is_bloodied(void);
   bool is_carrying_an_item(void);

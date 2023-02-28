@@ -294,13 +294,15 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
     //
     // Last charge used up.
     //
+    DropReason reason;
+    reason.is_being_used = true;
     if (what->initial_charge_count()) {
-      inventory_shortcuts_remove(what);
+      inventory_shortcuts_remove(what, reason);
     } else {
       if (target) {
-        inventory_shortcuts_remove(what, target);
+        inventory_shortcuts_remove(what, target, reason);
       } else {
-        inventory_shortcuts_remove(what);
+        inventory_shortcuts_remove(what, reason);
       }
     }
   }

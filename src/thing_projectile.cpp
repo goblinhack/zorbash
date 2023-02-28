@@ -70,9 +70,9 @@ Thingp Thing::fire_projectile_at(Thingp item, const std::string &target_name_pro
   if (is_player()) {
     msg("You fire %s at %s.", item->text_the().c_str(), target->text_the().c_str());
   } else if (item) {
-    msg("%s shoot %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
+    msg("%s fires %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
   } else {
-    msg("%s shoot at %s.", text_The().c_str(), target->text_the().c_str());
+    msg("%s fires at %s.", text_The().c_str(), target->text_the().c_str());
   }
   TRACE_AND_INDENT();
 

@@ -105,9 +105,9 @@ bool Thing::drop(Thingp what, Thingp target, DropReason reason)
   what->is_being_dropped = true;
   if (is_player()) {
     if (target) {
-      inventory_shortcuts_remove(what, target);
+      inventory_shortcuts_remove(what, target, reason);
     } else {
-      inventory_shortcuts_remove(what);
+      inventory_shortcuts_remove(what, reason);
     }
   }
 
@@ -250,7 +250,8 @@ bool Thing::drop_into_ether(Thingp what)
     }
 
     if (top_owner->is_player()) {
-      top_owner->inventory_shortcuts_remove(what);
+      DropReason reason;
+      top_owner->inventory_shortcuts_remove(what, reason);
     }
   } else {
     //
@@ -306,7 +307,8 @@ bool Thing::drop_from_ether(Thingp what)
   //
   // Remove from the inventory
   //
-  inventory_shortcuts_remove(what);
+  DropReason reason;
+  inventory_shortcuts_remove(what, reason);
 
   wid_inventory_fini();
   wid_thing_info_fini("drop from ether");

@@ -25,7 +25,7 @@ def tp_init(name, text_long_name):
     my.on_born_do(self, "me.on_born()")
     my.on_death_of_my_leader_do(self, "me.on_death_of_my_leader()")
     my.on_you_nat_att_do(self, "gnome_all.on_you_nat_att()")
-    my.text_description_long2(self, "This particular gnome is very adept at liberating items from their owners.0")
+    my.text_description_long2(self, "This particular gnome is very adept at liberating items from their owners.")
     my.text_description_short(self, "A sneaky gnome thief.")
     # end sort marker
 

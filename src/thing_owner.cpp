@@ -275,7 +275,8 @@ bool Thing::change_owner(Thingp new_owner)
   dbg2("Change owner from %s to %s", old_owner->to_short_string().c_str(), new_owner->to_short_string().c_str());
 
   if (old_owner->is_player()) {
-    if (! old_owner->inventory_shortcuts_remove(this)) {
+    DropReason reason;
+    if (! old_owner->inventory_shortcuts_remove(this, reason)) {
       err("Failed to remove %s from inventory", to_short_string().c_str());
       return false;
     }

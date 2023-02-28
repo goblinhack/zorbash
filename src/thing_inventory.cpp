@@ -367,7 +367,7 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
   return true;
 }
 
-bool Thing::inventory_shortcuts_remove(Thingp item)
+bool Thing::inventory_shortcuts_remove(Thingp item, DropReason reason)
 {
   TRACE_NO_INDENT();
 
@@ -419,7 +419,9 @@ bool Thing::inventory_shortcuts_remove(Thingp item)
     if (item->tp() == t->tp()) {
       game->set_request_to_remake_rightbar();
 
-      inventory_particle(item, i, this);
+      if (! reason.is_being_stolen) {
+        inventory_particle(item, i, this);
+      }
 
       //
       // If you use one dart and have more, do not remove the shortcut
@@ -464,7 +466,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item)
   return false;
 }
 
-bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target)
+bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target, DropReason reason)
 {
   TRACE_NO_INDENT();
   dbg("Inventory remove %s with target %s", item->to_short_string().c_str(),
@@ -516,8 +518,10 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target)
     if (item->tp() == t->tp()) {
       game->set_request_to_remake_rightbar();
 
-      if (particle_target) {
-        inventory_particle(item, i, particle_target);
+      if (! reason.is_being_stolen) {
+        if (particle_target) {
+          inventory_particle(item, i, particle_target);
+        }
       }
 
       if (same_item_count <= 1) {
