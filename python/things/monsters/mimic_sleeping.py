@@ -93,7 +93,6 @@ def tp_init(name, text_long_name):
     my.is_humanoid(self, True)
     my.is_immune_to_water(self, True)
     my.is_interesting(self, True)
-    my.is_item_collector(self, True)
     my.is_loggable(self, True)
     my.is_magical(self, True)
     my.is_mimic(self, True)
@@ -139,7 +138,7 @@ def tp_init(name, text_long_name):
             tile="chest1", is_sleeping=True, delay_ms=delay)
     my.tile(self,
             ascii_fg_char="up_triangle", ascii_bg_col_name="", ascii_fg_col_name="gold",
-            tile="mimic.1", delay_ms=delay, frame=1)
+            tile="mimic.1", delay_ms=delay)
     my.tile(self,
             ascii_fg_char="up_triangle", ascii_bg_col_name="", ascii_fg_col_name="gray30",
             tile="mimic.dead", is_dead=True, delay_ms=delay)

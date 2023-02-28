@@ -27,7 +27,7 @@ Thingp Thing::in_the_way_for_firing(const point s, const point e, int x, int y)
     // Occasionally allow goblins to fire through comrades
     //
     if (is_friend(t) || same_mob(t)) {
-      if (d100() > collateral_dmg_pct()) {
+      if (d100() > chance_d100_of_firing_avoiding_comrades()) {
         return t;
       }
       continue;

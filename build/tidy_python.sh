@@ -89,16 +89,22 @@ do
       ai_detect_secret_doors \
       ai_resent_count \
       ai_wanderer \
-      chance_d1000_appearing \
       attack_eater \
       attack_humanoid \
       attack_living \
-      is_able_to_lunge \
       attack_meat \
       attack_no_msg \
       attacks_per_round \
       attack_undead \
-      collateral_dmg_pct \
+      chance_d1000_appearing \
+      chance_d1000_carrier_of_treasure_class_A \
+      chance_d1000_carrier_of_treasure_class_B \
+      chance_d1000_carrier_of_treasure_class_C \
+      chance_d1000_carrier_of_weapon_class_A \
+      chance_d1000_carrier_of_weapon_class_B \
+      chance_d1000_carrier_of_weapon_class_C \
+      chance_d1000_jump_attack \
+      chance_d100_of_firing_avoiding_comrades \
       collision_check \
       collision_hit_180 \
       collision_hit_360 \
@@ -106,14 +112,15 @@ do
       collision_hit_priority \
       collision_hit_two_tiles_ahead \
       consume_per_bite_amount \
+      distance_leader_max \
+      distance_minion_vision_shared \
       dmg_received_doubled_from_acid \
       dmg_received_doubled_from_cold \
       dmg_received_doubled_from_fire \
       dmg_received_doubled_from_necrosis \
       dmg_received_doubled_from_poison \
       dmg_received_doubled_from_water \
-      distance_leader_max \
-      distance_minion_vision_shared \
+      effect_has_blast_radius \
       enchant_level \
       enchant_max \
       environ_avoids_acid \
@@ -159,7 +166,9 @@ do
       gfx_pixelart_oversized_and_on_floor \
       gfx_pixelart_reflection \
       gfx_pixelart_shadow \
+      gfx_pixelart_show_highlighted \
       gfx_pixelart_shown_in_bg \
+      gfx_pixelart_show_square_outlined \
       gfx_pixelart_submergable \
       gfx_show_asleep \
       gfx_show_outlined \
@@ -172,38 +181,42 @@ do
       internal \
       is_able_to_attack_mobs \
       is_able_to_attack_owner \
+      is_able_to_be_resurrected \
       is_able_to_be_surprised \
       is_able_to_break_down_doors \
       is_able_to_break_out_of_ice \
       is_able_to_break_out_of_webs \
-      is_burnable \
       is_able_to_change_levels \
       is_able_to_collect_keys \
       is_able_to_enchant_items \
       is_able_to_fall \
-      is_able_to_shoot_at \
       is_able_to_follow \
       is_able_to_freeze \
       is_able_to_jump \
       is_able_to_jump_attack \
-      chance_d1000_jump_attack \
       is_able_to_jump_escape \
       is_able_to_jump_onto \
       is_able_to_jump_without_tiring \
       is_able_to_learn_skills \
       is_able_to_live_out_of_water \
+      is_able_to_lunge \
       is_able_to_melt \
       is_able_to_move_diagonally \
       is_able_to_open_doors \
+      is_able_to_regenerate \
       is_able_to_rest \
       is_able_to_see_in_the_dark \
+      is_able_to_see_invisible \
       is_able_to_see_through_doors \
+      is_able_to_shoot_at \
+      is_able_to_shoot_at_close_range \
       is_able_to_shove \
       is_able_to_sleep \
       is_able_to_spawn_things \
       is_able_to_swim \
-      is_able_to_teleport_self \
+      is_able_to_teleport_attack \
       is_able_to_teleport_escape \
+      is_able_to_teleport_self \
       is_able_to_teleport_without_tiring \
       is_able_to_tire \
       is_able_to_use_amulet \
@@ -212,12 +225,14 @@ do
       is_able_to_use_cloak \
       is_able_to_use_gauntlet \
       is_able_to_use_helmet \
+      is_able_to_use_ranged_weapons \
       is_able_to_use_rings \
       is_able_to_use_shield \
       is_able_to_use_staffs \
       is_able_to_use_weapons \
       is_able_to_walk_through_walls \
       is_acid \
+      is_aerodynamic \
       is_air_breather \
       is_alive_on_end_of_anim \
       is_always_hit \
@@ -252,13 +267,9 @@ do
       is_bridge \
       is_brittle \
       is_buff \
+      is_burnable \
       is_carnivorous_plant \
-      chance_d1000_carrier_of_treasure_class_A \
-      chance_d1000_carrier_of_treasure_class_B \
-      chance_d1000_carrier_of_treasure_class_C \
-      chance_d1000_carrier_of_weapon_class_A \
-      chance_d1000_carrier_of_weapon_class_B \
-      chance_d1000_carrier_of_weapon_class_C \
+      is_cautious \
       is_chasm \
       is_cloak \
       is_cold \
@@ -280,6 +291,7 @@ do
       is_cursor_path_blocker \
       is_cursor_path_hazard \
       is_dagger \
+      is_daring \
       is_dead_on_end_of_anim \
       is_dead_on_falling \
       is_dead_on_shove \
@@ -288,6 +300,7 @@ do
       is_debug_type \
       is_deep_water \
       is_deep_water_swimmer \
+      is_demon \
       is_descend_dungeon \
       is_descend_sewer \
       is_described_when_hovering_over \
@@ -306,22 +319,23 @@ do
       is_eater_of_gauntlets \
       is_eater_of_green_blood \
       is_eater_of_helmets \
-      is_eater_of_slime \
       is_eater_of_magical_items \
       is_eater_of_meat \
       is_eater_of_potions \
       is_eater_of_red_blood \
       is_eater_of_rings \
       is_eater_of_shields \
+      is_eater_of_slime \
       is_eater_of_staffs \
       is_eater_of_treasure \
-      is_eater_of_staffs \
       is_eater_of_weapons \
       is_enchantable \
+      is_enchantable_as_a_group \
       is_enchantstone \
       is_engulfer \
       is_ethereal \
       is_ethereal_mob \
+      is_ettin \
       is_exit_finder \
       is_explorer \
       is_explosion \
@@ -338,7 +352,9 @@ do
       is_gauntlet \
       is_gelatinous \
       is_glass \
+      is_gnome \
       is_gold \
+      is_golem \
       is_green_blood \
       is_green_blooded \
       is_green_splatter \
@@ -353,26 +369,30 @@ do
       is_immune_to_acid \
       is_immune_to_cold \
       is_immune_to_draining \
+      is_immune_to_electricity \
       is_immune_to_fire \
       is_immune_to_necrosis \
+      is_immune_to_negation \
       is_immune_to_poison \
       is_immune_to_spiderwebs \
       is_immune_to_water \
       is_intelligent \
       is_interesting \
+      is_invisible \
       is_item \
       is_item_carrier \
       is_item_collector \
       is_item_organic \
       is_item_targetted \
-      is_slime \
       is_key \
       is_key_special \
       is_laser \
       is_lava \
       is_lifeless \
+      is_light \
       is_light_blocker \
       is_light_blocker_for_monst \
+      is_lightning \
       is_limb \
       is_living \
       is_loggable \
@@ -382,6 +402,7 @@ do
       is_meat \
       is_metal \
       is_minion \
+      is_missile \
       is_mob \
       is_mob_challenge_class_A \
       is_mob_challenge_class_B \
@@ -406,11 +427,13 @@ do
       is_obs_for_ai \
       is_obs_for_jump_landing \
       is_obs_for_shoving \
+      is_obsidian \
       is_obs_in_the_way_for_firing \
       is_obs_in_the_way_for_jumping \
       is_obs_in_the_way_for_throwing \
       is_obs_wall_or_door \
       is_obs_when_dead \
+      is_ogre \
       is_openable \
       is_organic \
       is_pillar \
@@ -420,11 +443,11 @@ do
       is_poisonous_danger_level \
       is_potion \
       is_projectile \
+      is_ranged_weapon \
       is_red_blood \
       is_red_blooded \
       is_red_splatter \
       is_removable_if_out_of_slots \
-      is_able_to_be_resurrected \
       is_ring \
       is_ripple \
       is_rock \
@@ -438,6 +461,7 @@ do
       is_shovable_and_sticky \
       is_skill \
       is_skillstone \
+      is_slime \
       is_slippery \
       is_smoke \
       is_snake \
@@ -456,6 +480,7 @@ do
       is_the_grid \
       is_thief \
       is_throwable \
+      is_thrown_as_a_weapon \
       is_tickable \
       is_tireless \
       is_tmp_thing \
@@ -466,6 +491,7 @@ do
       is_treasure_class_B \
       is_treasure_class_C \
       is_treasure_type \
+      is_troll \
       is_undead \
       is_usable \
       is_used_when_thrown \
@@ -483,13 +509,14 @@ do
       noise_decibels_hearing \
       noise_on_born \
       noise_on_dropping \
-      noise_on_moving \
-      noise_on_open_or_close \
       noise_on_hit_and_now_dead \
       noise_on_hit_and_still_alive \
+      noise_on_moving \
+      noise_on_open_or_close \
       normal_placement_rules \
       on_death_drop_all_items \
       on_death_is_open \
+      on_death_is_stone \
       shove_strength \
       spawn_group_radius \
       stamina_drain_on_attacking \
@@ -512,37 +539,206 @@ do
       temperature_sensitive \
       temperature_sensitive_to_sudden_changes \
       tick_prio \
-      unused_flag1 \
-      effect_has_blast_radius \
-      is_enchantable_as_a_group \
-      is_able_to_teleport_attack \
-      is_daring \
-      is_obsidian \
-      is_cautious \
-      is_ranged_weapon \
-      is_able_to_use_ranged_weapons \
-      is_aerodynamic \
-      is_light \
-      is_missile \
-      unused_flag2 \
-      is_thrown_as_a_weapon \
-      is_immune_to_electricity \
-      is_able_to_shoot_at_close_range \
-      gfx_pixelart_show_highlighted \
-      gfx_pixelart_show_square_outlined \
-      is_able_to_see_invisible \
-      is_invisible \
-      unused_flag27 \
-      is_lightning \
-      is_immune_to_negation \
-      is_ettin \
-      is_golem \
+      is_unused_flag1 \
+      is_unused_flag10 \
+      is_unused_flag100 \
+      is_unused_flag101 \
+      is_unused_flag102 \
+      is_unused_flag103 \
+      is_unused_flag104 \
+      is_unused_flag105 \
+      is_unused_flag106 \
+      is_unused_flag107 \
+      is_unused_flag108 \
+      is_unused_flag109 \
+      is_unused_flag11 \
+      is_unused_flag110 \
+      is_unused_flag111 \
+      is_unused_flag112 \
+      is_unused_flag113 \
+      is_unused_flag114 \
+      is_unused_flag115 \
+      is_unused_flag116 \
+      is_unused_flag117 \
+      is_unused_flag118 \
+      is_unused_flag119 \
+      is_unused_flag12 \
+      is_unused_flag120 \
+      is_unused_flag121 \
+      is_unused_flag122 \
+      is_unused_flag123 \
+      is_unused_flag124 \
+      is_unused_flag125 \
+      is_unused_flag126 \
+      is_unused_flag127 \
+      is_unused_flag128 \
+      is_unused_flag129 \
+      is_unused_flag13 \
+      is_unused_flag130 \
+      is_unused_flag131 \
+      is_unused_flag132 \
+      is_unused_flag133 \
+      is_unused_flag134 \
+      is_unused_flag135 \
+      is_unused_flag136 \
+      is_unused_flag137 \
+      is_unused_flag138 \
+      is_unused_flag139 \
+      is_unused_flag14 \
+      is_unused_flag140 \
+      is_unused_flag141 \
+      is_unused_flag142 \
+      is_unused_flag143 \
+      is_unused_flag144 \
+      is_unused_flag145 \
+      is_unused_flag146 \
+      is_unused_flag147 \
+      is_unused_flag148 \
+      is_unused_flag149 \
+      is_unused_flag15 \
+      is_unused_flag150 \
+      is_unused_flag151 \
+      is_unused_flag152 \
+      is_unused_flag153 \
+      is_unused_flag154 \
+      is_unused_flag155 \
+      is_unused_flag156 \
+      is_unused_flag157 \
+      is_unused_flag158 \
+      is_unused_flag159 \
+      is_unused_flag16 \
+      is_unused_flag160 \
+      is_unused_flag161 \
+      is_unused_flag162 \
+      is_unused_flag163 \
+      is_unused_flag164 \
+      is_unused_flag165 \
+      is_unused_flag166 \
+      is_unused_flag167 \
+      is_unused_flag168 \
+      is_unused_flag169 \
+      is_unused_flag17 \
+      is_unused_flag170 \
+      is_unused_flag171 \
+      is_unused_flag172 \
+      is_unused_flag173 \
+      is_unused_flag174 \
+      is_unused_flag175 \
+      is_unused_flag176 \
+      is_unused_flag177 \
+      is_unused_flag178 \
+      is_unused_flag179 \
+      is_unused_flag18 \
+      is_unused_flag180 \
+      is_unused_flag181 \
+      is_unused_flag182 \
+      is_unused_flag183 \
+      is_unused_flag184 \
+      is_unused_flag185 \
+      is_unused_flag186 \
+      is_unused_flag187 \
+      is_unused_flag188 \
+      is_unused_flag189 \
+      is_unused_flag19 \
+      is_unused_flag190 \
+      is_unused_flag191 \
+      is_unused_flag192 \
+      is_unused_flag193 \
+      is_unused_flag194 \
+      is_unused_flag195 \
+      is_unused_flag196 \
+      is_unused_flag197 \
+      is_unused_flag198 \
+      is_unused_flag199 \
+      is_unused_flag2 \
+      is_unused_flag20 \
+      is_unused_flag200 \
+      is_unused_flag21 \
+      is_unused_flag22 \
+      is_unused_flag23 \
+      is_unused_flag24 \
+      is_unused_flag25 \
+      is_unused_flag26 \
+      is_unused_flag27 \
+      is_unused_flag28 \
+      is_unused_flag29 \
+      is_unused_flag3 \
+      is_unused_flag30 \
+      is_unused_flag31 \
+      is_unused_flag32 \
+      is_unused_flag33 \
+      is_unused_flag34 \
+      is_unused_flag35 \
+      is_unused_flag36 \
+      is_unused_flag37 \
+      is_unused_flag38 \
+      is_unused_flag39 \
+      is_unused_flag4 \
+      is_unused_flag40 \
+      is_unused_flag41 \
+      is_unused_flag42 \
+      is_unused_flag43 \
+      is_unused_flag44 \
+      is_unused_flag45 \
+      is_unused_flag46 \
+      is_unused_flag47 \
+      is_unused_flag48 \
+      is_unused_flag49 \
+      is_unused_flag5 \
+      is_unused_flag50 \
+      is_unused_flag51 \
+      is_unused_flag52 \
+      is_unused_flag53 \
+      is_unused_flag54 \
+      is_unused_flag55 \
+      is_unused_flag56 \
+      is_unused_flag57 \
+      is_unused_flag58 \
+      is_unused_flag59 \
+      is_unused_flag6 \
+      is_unused_flag60 \
+      is_unused_flag61 \
+      is_unused_flag62 \
+      is_unused_flag63 \
+      is_unused_flag64 \
+      is_unused_flag65 \
+      is_unused_flag66 \
+      is_unused_flag67 \
+      is_unused_flag68 \
+      is_unused_flag69 \
+      is_unused_flag7 \
+      is_unused_flag70 \
+      is_unused_flag71 \
+      is_unused_flag72 \
+      is_unused_flag73 \
+      is_unused_flag74 \
+      is_unused_flag75 \
+      is_unused_flag76 \
+      is_unused_flag77 \
+      is_unused_flag78 \
+      is_unused_flag79 \
+      is_unused_flag8 \
+      is_unused_flag80 \
+      is_unused_flag81 \
+      is_unused_flag82 \
+      is_unused_flag83 \
+      is_unused_flag84 \
+      is_unused_flag85 \
+      is_unused_flag86 \
+      is_unused_flag87 \
+      is_unused_flag88 \
+      is_unused_flag89 \
       is_unused_flag9 \
-      is_able_to_regenerate \
-      is_demon \
-      is_ogre \
-      is_troll \
-      on_death_is_stone \
+      is_unused_flag90 \
+      is_unused_flag91 \
+      is_unused_flag92 \
+      is_unused_flag93 \
+      is_unused_flag94 \
+      is_unused_flag95 \
+      is_unused_flag96 \
+      is_unused_flag97 \
+      is_unused_flag98 \
+      is_unused_flag99 \
       is_mimic
     do
         grep -q $arg $PAYLOAD

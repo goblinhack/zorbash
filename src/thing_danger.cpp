@@ -63,9 +63,6 @@ int Tp::get_danger_level(void)
   if (is_able_to_jump()) {
     danger_level += 5;
   }
-  if (is_thief()) {
-    danger_level += 20;
-  }
   if (is_able_to_shoot_at()) {
     danger_level += 20;
   }
@@ -165,9 +162,6 @@ int Thing::danger_initial_level(void)
   }
   if (is_able_to_jump()) {
     danger_level += 5;
-  }
-  if (is_thief()) {
-    danger_level += 20;
   }
   if (is_able_to_shoot_at()) {
     danger_level += 20;
@@ -272,9 +266,6 @@ int Thing::danger_current_level(void)
   }
   if (is_able_to_jump()) {
     danger_level += 5;
-  }
-  if (is_thief()) {
-    danger_level += 20;
   }
   if (is_able_to_shoot_at()) {
     danger_level += 20;
@@ -403,8 +394,11 @@ const std::string Thing::danger_level_str(Thingp it)
   if (delta > 10) {
     return "%%fg=red$Dangerous";
   }
-  if (delta >= 0) {
+  if (delta >= 5) {
     return "%%fg=orange$Caution advised";
+  }
+  if (delta >= 0) {
+    return "%%fg=orange$Some caution advised";
   }
   if (delta >= -10) {
     return "%%fg=yellow$Slight caution needed";

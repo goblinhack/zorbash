@@ -146,6 +146,10 @@ void tp_fixup(void)
       tp->is_able_to_shove_set(true);
     }
 
+    if (tp->chance_d1000_steal_item() && ! tp->is_thief()) {
+      DIE("Tp %s needs is_theif set", tp->name().c_str());
+    }
+
     if (tp->is_able_to_melt()) {
       tp->is_tickable_set(true);
       tp->temperature_sensitive_set(true);

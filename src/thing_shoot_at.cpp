@@ -249,6 +249,10 @@ bool Thing::shoot_at(Thingp item, Thingp target)
 bool Thing::shoot_at(Thingp target)
 {
   TRACE_AND_INDENT();
+  if (! is_able_to_shoot_at()) {
+    return false;
+  }
+
   if (! target) {
     return false;
   }

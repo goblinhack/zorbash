@@ -166,7 +166,7 @@ fpoint unit(const fpoint &p)
   return (fpoint(p.x / length, p.y / length));
 }
 
-#ifdef unused_flag
+#ifdef is_unused_flag
 uint8_t get_line_intersection(fpoint p0, fpoint p1, fpoint p2, fpoint p3, fpoint *intersect)
 {
   double denominator = ((p3.y - p2.y) * (p1.x - p0.x)) - ((p3.x - p2.x) * (p1.y - p0.y));

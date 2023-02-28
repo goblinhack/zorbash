@@ -231,8 +231,8 @@ int Tp::chance_d1000_shove(void) const { return _chance_d1000_shove; }
 int Tp::chance_d1000_steal_item(void) const { return _chance_d1000_steal_item; }
 int Tp::chance_d1000_teleport_attack(void) const { return _chance_d1000_teleport_attack; }
 int Tp::chance_d1000_teleport_self(void) const { return _chance_d1000_teleport_self; }
+int Tp::chance_d100_of_firing_avoiding_comrades(void) const { return _chance_d100_of_firing_avoiding_comrades; }
 int Tp::charge_count(void) const { return _charge_count; }
-int Tp::collateral_dmg_pct(void) const { return _collateral_dmg_pct; }
 int Tp::collision_check(void) const { return _collision_check; }
 int Tp::collision_hit_180(void) const { return _collision_hit_180; }
 int Tp::collision_hit_360(void) const { return _collision_hit_360; }
@@ -491,6 +491,7 @@ int Tp::is_gas_blocker(void) const { return _is_gas_blocker; }
 int Tp::is_gauntlet(void) const { return _is_gauntlet; }
 int Tp::is_gelatinous(void) const { return _is_gelatinous; }
 int Tp::is_glass(void) const { return _is_glass; }
+int Tp::is_gnome(void) const { return _is_gnome; }
 int Tp::is_gold(void) const { return _is_gold; }
 int Tp::is_golem(void) const { return _is_golem; }
 int Tp::is_green_blooded(void) const { return _is_green_blooded; }
@@ -631,6 +632,205 @@ int Tp::is_treasure_type(void) const { return _is_treasure_type; }
 int Tp::is_treasure(void) const { return _is_treasure; }
 int Tp::is_troll(void) const { return _is_troll; }
 int Tp::is_undead(void) const { return _is_undead; }
+int Tp::is_unused_flag100(void) const { return _is_unused_flag100; }
+int Tp::is_unused_flag101(void) const { return _is_unused_flag101; }
+int Tp::is_unused_flag102(void) const { return _is_unused_flag102; }
+int Tp::is_unused_flag103(void) const { return _is_unused_flag103; }
+int Tp::is_unused_flag104(void) const { return _is_unused_flag104; }
+int Tp::is_unused_flag105(void) const { return _is_unused_flag105; }
+int Tp::is_unused_flag106(void) const { return _is_unused_flag106; }
+int Tp::is_unused_flag107(void) const { return _is_unused_flag107; }
+int Tp::is_unused_flag108(void) const { return _is_unused_flag108; }
+int Tp::is_unused_flag109(void) const { return _is_unused_flag109; }
+int Tp::is_unused_flag10(void) const { return _is_unused_flag10; }
+int Tp::is_unused_flag110(void) const { return _is_unused_flag110; }
+int Tp::is_unused_flag111(void) const { return _is_unused_flag111; }
+int Tp::is_unused_flag112(void) const { return _is_unused_flag112; }
+int Tp::is_unused_flag113(void) const { return _is_unused_flag113; }
+int Tp::is_unused_flag114(void) const { return _is_unused_flag114; }
+int Tp::is_unused_flag115(void) const { return _is_unused_flag115; }
+int Tp::is_unused_flag116(void) const { return _is_unused_flag116; }
+int Tp::is_unused_flag117(void) const { return _is_unused_flag117; }
+int Tp::is_unused_flag118(void) const { return _is_unused_flag118; }
+int Tp::is_unused_flag119(void) const { return _is_unused_flag119; }
+int Tp::is_unused_flag11(void) const { return _is_unused_flag11; }
+int Tp::is_unused_flag120(void) const { return _is_unused_flag120; }
+int Tp::is_unused_flag121(void) const { return _is_unused_flag121; }
+int Tp::is_unused_flag122(void) const { return _is_unused_flag122; }
+int Tp::is_unused_flag123(void) const { return _is_unused_flag123; }
+int Tp::is_unused_flag124(void) const { return _is_unused_flag124; }
+int Tp::is_unused_flag125(void) const { return _is_unused_flag125; }
+int Tp::is_unused_flag126(void) const { return _is_unused_flag126; }
+int Tp::is_unused_flag127(void) const { return _is_unused_flag127; }
+int Tp::is_unused_flag128(void) const { return _is_unused_flag128; }
+int Tp::is_unused_flag129(void) const { return _is_unused_flag129; }
+int Tp::is_unused_flag12(void) const { return _is_unused_flag12; }
+int Tp::is_unused_flag130(void) const { return _is_unused_flag130; }
+int Tp::is_unused_flag131(void) const { return _is_unused_flag131; }
+int Tp::is_unused_flag132(void) const { return _is_unused_flag132; }
+int Tp::is_unused_flag133(void) const { return _is_unused_flag133; }
+int Tp::is_unused_flag134(void) const { return _is_unused_flag134; }
+int Tp::is_unused_flag135(void) const { return _is_unused_flag135; }
+int Tp::is_unused_flag136(void) const { return _is_unused_flag136; }
+int Tp::is_unused_flag137(void) const { return _is_unused_flag137; }
+int Tp::is_unused_flag138(void) const { return _is_unused_flag138; }
+int Tp::is_unused_flag139(void) const { return _is_unused_flag139; }
+int Tp::is_unused_flag13(void) const { return _is_unused_flag13; }
+int Tp::is_unused_flag140(void) const { return _is_unused_flag140; }
+int Tp::is_unused_flag141(void) const { return _is_unused_flag141; }
+int Tp::is_unused_flag142(void) const { return _is_unused_flag142; }
+int Tp::is_unused_flag143(void) const { return _is_unused_flag143; }
+int Tp::is_unused_flag144(void) const { return _is_unused_flag144; }
+int Tp::is_unused_flag145(void) const { return _is_unused_flag145; }
+int Tp::is_unused_flag146(void) const { return _is_unused_flag146; }
+int Tp::is_unused_flag147(void) const { return _is_unused_flag147; }
+int Tp::is_unused_flag148(void) const { return _is_unused_flag148; }
+int Tp::is_unused_flag149(void) const { return _is_unused_flag149; }
+int Tp::is_unused_flag14(void) const { return _is_unused_flag14; }
+int Tp::is_unused_flag150(void) const { return _is_unused_flag150; }
+int Tp::is_unused_flag151(void) const { return _is_unused_flag151; }
+int Tp::is_unused_flag152(void) const { return _is_unused_flag152; }
+int Tp::is_unused_flag153(void) const { return _is_unused_flag153; }
+int Tp::is_unused_flag154(void) const { return _is_unused_flag154; }
+int Tp::is_unused_flag155(void) const { return _is_unused_flag155; }
+int Tp::is_unused_flag156(void) const { return _is_unused_flag156; }
+int Tp::is_unused_flag157(void) const { return _is_unused_flag157; }
+int Tp::is_unused_flag158(void) const { return _is_unused_flag158; }
+int Tp::is_unused_flag159(void) const { return _is_unused_flag159; }
+int Tp::is_unused_flag15(void) const { return _is_unused_flag15; }
+int Tp::is_unused_flag160(void) const { return _is_unused_flag160; }
+int Tp::is_unused_flag161(void) const { return _is_unused_flag161; }
+int Tp::is_unused_flag162(void) const { return _is_unused_flag162; }
+int Tp::is_unused_flag163(void) const { return _is_unused_flag163; }
+int Tp::is_unused_flag164(void) const { return _is_unused_flag164; }
+int Tp::is_unused_flag165(void) const { return _is_unused_flag165; }
+int Tp::is_unused_flag166(void) const { return _is_unused_flag166; }
+int Tp::is_unused_flag167(void) const { return _is_unused_flag167; }
+int Tp::is_unused_flag168(void) const { return _is_unused_flag168; }
+int Tp::is_unused_flag169(void) const { return _is_unused_flag169; }
+int Tp::is_unused_flag16(void) const { return _is_unused_flag16; }
+int Tp::is_unused_flag170(void) const { return _is_unused_flag170; }
+int Tp::is_unused_flag171(void) const { return _is_unused_flag171; }
+int Tp::is_unused_flag172(void) const { return _is_unused_flag172; }
+int Tp::is_unused_flag173(void) const { return _is_unused_flag173; }
+int Tp::is_unused_flag174(void) const { return _is_unused_flag174; }
+int Tp::is_unused_flag175(void) const { return _is_unused_flag175; }
+int Tp::is_unused_flag176(void) const { return _is_unused_flag176; }
+int Tp::is_unused_flag177(void) const { return _is_unused_flag177; }
+int Tp::is_unused_flag178(void) const { return _is_unused_flag178; }
+int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
+int Tp::is_unused_flag17(void) const { return _is_unused_flag17; }
+int Tp::is_unused_flag180(void) const { return _is_unused_flag180; }
+int Tp::is_unused_flag181(void) const { return _is_unused_flag181; }
+int Tp::is_unused_flag182(void) const { return _is_unused_flag182; }
+int Tp::is_unused_flag183(void) const { return _is_unused_flag183; }
+int Tp::is_unused_flag184(void) const { return _is_unused_flag184; }
+int Tp::is_unused_flag185(void) const { return _is_unused_flag185; }
+int Tp::is_unused_flag186(void) const { return _is_unused_flag186; }
+int Tp::is_unused_flag187(void) const { return _is_unused_flag187; }
+int Tp::is_unused_flag188(void) const { return _is_unused_flag188; }
+int Tp::is_unused_flag189(void) const { return _is_unused_flag189; }
+int Tp::is_unused_flag18(void) const { return _is_unused_flag18; }
+int Tp::is_unused_flag190(void) const { return _is_unused_flag190; }
+int Tp::is_unused_flag191(void) const { return _is_unused_flag191; }
+int Tp::is_unused_flag192(void) const { return _is_unused_flag192; }
+int Tp::is_unused_flag193(void) const { return _is_unused_flag193; }
+int Tp::is_unused_flag194(void) const { return _is_unused_flag194; }
+int Tp::is_unused_flag195(void) const { return _is_unused_flag195; }
+int Tp::is_unused_flag196(void) const { return _is_unused_flag196; }
+int Tp::is_unused_flag197(void) const { return _is_unused_flag197; }
+int Tp::is_unused_flag198(void) const { return _is_unused_flag198; }
+int Tp::is_unused_flag199(void) const { return _is_unused_flag199; }
+int Tp::is_unused_flag19(void) const { return _is_unused_flag19; }
+int Tp::is_unused_flag1(void) const { return _is_unused_flag1; }
+int Tp::is_unused_flag200(void) const { return _is_unused_flag200; }
+int Tp::is_unused_flag20(void) const { return _is_unused_flag20; }
+int Tp::is_unused_flag21(void) const { return _is_unused_flag21; }
+int Tp::is_unused_flag22(void) const { return _is_unused_flag22; }
+int Tp::is_unused_flag23(void) const { return _is_unused_flag23; }
+int Tp::is_unused_flag24(void) const { return _is_unused_flag24; }
+int Tp::is_unused_flag25(void) const { return _is_unused_flag25; }
+int Tp::is_unused_flag26(void) const { return _is_unused_flag26; }
+int Tp::is_unused_flag27(void) const { return _is_unused_flag27; }
+int Tp::is_unused_flag28(void) const { return _is_unused_flag28; }
+int Tp::is_unused_flag29(void) const { return _is_unused_flag29; }
+int Tp::is_unused_flag2(void) const { return _is_unused_flag2; }
+int Tp::is_unused_flag30(void) const { return _is_unused_flag30; }
+int Tp::is_unused_flag31(void) const { return _is_unused_flag31; }
+int Tp::is_unused_flag32(void) const { return _is_unused_flag32; }
+int Tp::is_unused_flag33(void) const { return _is_unused_flag33; }
+int Tp::is_unused_flag34(void) const { return _is_unused_flag34; }
+int Tp::is_unused_flag35(void) const { return _is_unused_flag35; }
+int Tp::is_unused_flag36(void) const { return _is_unused_flag36; }
+int Tp::is_unused_flag37(void) const { return _is_unused_flag37; }
+int Tp::is_unused_flag38(void) const { return _is_unused_flag38; }
+int Tp::is_unused_flag39(void) const { return _is_unused_flag39; }
+int Tp::is_unused_flag3(void) const { return _is_unused_flag3; }
+int Tp::is_unused_flag40(void) const { return _is_unused_flag40; }
+int Tp::is_unused_flag41(void) const { return _is_unused_flag41; }
+int Tp::is_unused_flag42(void) const { return _is_unused_flag42; }
+int Tp::is_unused_flag43(void) const { return _is_unused_flag43; }
+int Tp::is_unused_flag44(void) const { return _is_unused_flag44; }
+int Tp::is_unused_flag45(void) const { return _is_unused_flag45; }
+int Tp::is_unused_flag46(void) const { return _is_unused_flag46; }
+int Tp::is_unused_flag47(void) const { return _is_unused_flag47; }
+int Tp::is_unused_flag48(void) const { return _is_unused_flag48; }
+int Tp::is_unused_flag49(void) const { return _is_unused_flag49; }
+int Tp::is_unused_flag4(void) const { return _is_unused_flag4; }
+int Tp::is_unused_flag50(void) const { return _is_unused_flag50; }
+int Tp::is_unused_flag51(void) const { return _is_unused_flag51; }
+int Tp::is_unused_flag52(void) const { return _is_unused_flag52; }
+int Tp::is_unused_flag53(void) const { return _is_unused_flag53; }
+int Tp::is_unused_flag54(void) const { return _is_unused_flag54; }
+int Tp::is_unused_flag55(void) const { return _is_unused_flag55; }
+int Tp::is_unused_flag56(void) const { return _is_unused_flag56; }
+int Tp::is_unused_flag57(void) const { return _is_unused_flag57; }
+int Tp::is_unused_flag58(void) const { return _is_unused_flag58; }
+int Tp::is_unused_flag59(void) const { return _is_unused_flag59; }
+int Tp::is_unused_flag5(void) const { return _is_unused_flag5; }
+int Tp::is_unused_flag60(void) const { return _is_unused_flag60; }
+int Tp::is_unused_flag61(void) const { return _is_unused_flag61; }
+int Tp::is_unused_flag62(void) const { return _is_unused_flag62; }
+int Tp::is_unused_flag63(void) const { return _is_unused_flag63; }
+int Tp::is_unused_flag64(void) const { return _is_unused_flag64; }
+int Tp::is_unused_flag65(void) const { return _is_unused_flag65; }
+int Tp::is_unused_flag66(void) const { return _is_unused_flag66; }
+int Tp::is_unused_flag67(void) const { return _is_unused_flag67; }
+int Tp::is_unused_flag68(void) const { return _is_unused_flag68; }
+int Tp::is_unused_flag69(void) const { return _is_unused_flag69; }
+int Tp::is_unused_flag6(void) const { return _is_unused_flag6; }
+int Tp::is_unused_flag70(void) const { return _is_unused_flag70; }
+int Tp::is_unused_flag71(void) const { return _is_unused_flag71; }
+int Tp::is_unused_flag72(void) const { return _is_unused_flag72; }
+int Tp::is_unused_flag73(void) const { return _is_unused_flag73; }
+int Tp::is_unused_flag74(void) const { return _is_unused_flag74; }
+int Tp::is_unused_flag75(void) const { return _is_unused_flag75; }
+int Tp::is_unused_flag76(void) const { return _is_unused_flag76; }
+int Tp::is_unused_flag77(void) const { return _is_unused_flag77; }
+int Tp::is_unused_flag78(void) const { return _is_unused_flag78; }
+int Tp::is_unused_flag79(void) const { return _is_unused_flag79; }
+int Tp::is_unused_flag7(void) const { return _is_unused_flag7; }
+int Tp::is_unused_flag80(void) const { return _is_unused_flag80; }
+int Tp::is_unused_flag81(void) const { return _is_unused_flag81; }
+int Tp::is_unused_flag82(void) const { return _is_unused_flag82; }
+int Tp::is_unused_flag83(void) const { return _is_unused_flag83; }
+int Tp::is_unused_flag84(void) const { return _is_unused_flag84; }
+int Tp::is_unused_flag85(void) const { return _is_unused_flag85; }
+int Tp::is_unused_flag86(void) const { return _is_unused_flag86; }
+int Tp::is_unused_flag87(void) const { return _is_unused_flag87; }
+int Tp::is_unused_flag88(void) const { return _is_unused_flag88; }
+int Tp::is_unused_flag89(void) const { return _is_unused_flag89; }
+int Tp::is_unused_flag8(void) const { return _is_unused_flag8; }
+int Tp::is_unused_flag90(void) const { return _is_unused_flag90; }
+int Tp::is_unused_flag91(void) const { return _is_unused_flag91; }
+int Tp::is_unused_flag92(void) const { return _is_unused_flag92; }
+int Tp::is_unused_flag93(void) const { return _is_unused_flag93; }
+int Tp::is_unused_flag94(void) const { return _is_unused_flag94; }
+int Tp::is_unused_flag95(void) const { return _is_unused_flag95; }
+int Tp::is_unused_flag96(void) const { return _is_unused_flag96; }
+int Tp::is_unused_flag97(void) const { return _is_unused_flag97; }
+int Tp::is_unused_flag98(void) const { return _is_unused_flag98; }
+int Tp::is_unused_flag99(void) const { return _is_unused_flag99; }
 int Tp::is_unused_flag9(void) const { return _is_unused_flag9; }
 int Tp::is_usable(void) const { return _is_usable; }
 int Tp::is_used_when_thrown(void) const { return _is_used_when_thrown; }
@@ -720,10 +920,6 @@ int Tp::unused_chance3_d1000(void) const { return _unused_chance3_d1000; }
 int Tp::unused_chance4_d1000(void) const { return _unused_chance4_d1000; }
 int Tp::unused_chance5_d1000(void) const { return _unused_chance5_d1000; }
 int Tp::unused_chance6_d1000(void) const { return _unused_chance6_d1000; }
-int Tp::unused_flag12(void) const { return _unused_flag12; }
-int Tp::unused_flag1(void) const { return _unused_flag1; }
-int Tp::unused_flag27(void) const { return _unused_flag27; }
-int Tp::unused_flag2(void) const { return _unused_flag2; }
 int Tp::weapon_dmg(void) const { return _weapon_dmg; }
 // end sort marker2 }
 
@@ -768,8 +964,8 @@ void Tp::chance_d1000_shove_set(int v) { _chance_d1000_shove = v; }
 void Tp::chance_d1000_steal_item_set(int v) { _chance_d1000_steal_item = v; }
 void Tp::chance_d1000_teleport_attack_set(int v) { _chance_d1000_teleport_attack = v; }
 void Tp::chance_d1000_teleport_self_set(int v) { _chance_d1000_teleport_self = v; }
+void Tp::chance_d100_of_firing_avoiding_comrades_set(int v) { _chance_d100_of_firing_avoiding_comrades = v; }
 void Tp::charge_count_set(int v) { _charge_count = v; }
-void Tp::collateral_dmg_pct_set(int v) { _collateral_dmg_pct = v; }
 void Tp::collision_attack_set(int v) { _collision_attack = v; }
 void Tp::collision_check_set(int v) { _collision_check = v; }
 void Tp::collision_hit_180_set(int v) { _collision_hit_180 = v; }
@@ -1035,6 +1231,7 @@ void Tp::is_gas_blocker_set(int v) { _is_gas_blocker = v; }
 void Tp::is_gauntlet_set(int v) { _is_gauntlet = v; }
 void Tp::is_gelatinous_set(int v) { _is_gelatinous = v; }
 void Tp::is_glass_set(int v) { _is_glass = v; }
+void Tp::is_gnome_set(int v) { _is_gnome = v; }
 void Tp::is_gold_set(int v) { _is_gold = v; }
 void Tp::is_golem_set(int v) { _is_golem = v; }
 void Tp::is_green_blooded_set(int v) { _is_green_blooded = v; }
@@ -1175,6 +1372,205 @@ void Tp::is_treasure_set(int v) { _is_treasure = v; }
 void Tp::is_treasure_type_set(int v) { _is_treasure_type = v; }
 void Tp::is_troll_set(int v) { _is_troll = v; }
 void Tp::is_undead_set(int v) { _is_undead = v; }
+void Tp::is_unused_flag100_set(int v) { _is_unused_flag100 = v; }
+void Tp::is_unused_flag101_set(int v) { _is_unused_flag101 = v; }
+void Tp::is_unused_flag102_set(int v) { _is_unused_flag102 = v; }
+void Tp::is_unused_flag103_set(int v) { _is_unused_flag103 = v; }
+void Tp::is_unused_flag104_set(int v) { _is_unused_flag104 = v; }
+void Tp::is_unused_flag105_set(int v) { _is_unused_flag105 = v; }
+void Tp::is_unused_flag106_set(int v) { _is_unused_flag106 = v; }
+void Tp::is_unused_flag107_set(int v) { _is_unused_flag107 = v; }
+void Tp::is_unused_flag108_set(int v) { _is_unused_flag108 = v; }
+void Tp::is_unused_flag109_set(int v) { _is_unused_flag109 = v; }
+void Tp::is_unused_flag10_set(int v) { _is_unused_flag10 = v; }
+void Tp::is_unused_flag110_set(int v) { _is_unused_flag110 = v; }
+void Tp::is_unused_flag111_set(int v) { _is_unused_flag111 = v; }
+void Tp::is_unused_flag112_set(int v) { _is_unused_flag112 = v; }
+void Tp::is_unused_flag113_set(int v) { _is_unused_flag113 = v; }
+void Tp::is_unused_flag114_set(int v) { _is_unused_flag114 = v; }
+void Tp::is_unused_flag115_set(int v) { _is_unused_flag115 = v; }
+void Tp::is_unused_flag116_set(int v) { _is_unused_flag116 = v; }
+void Tp::is_unused_flag117_set(int v) { _is_unused_flag117 = v; }
+void Tp::is_unused_flag118_set(int v) { _is_unused_flag118 = v; }
+void Tp::is_unused_flag119_set(int v) { _is_unused_flag119 = v; }
+void Tp::is_unused_flag11_set(int v) { _is_unused_flag11 = v; }
+void Tp::is_unused_flag120_set(int v) { _is_unused_flag120 = v; }
+void Tp::is_unused_flag121_set(int v) { _is_unused_flag121 = v; }
+void Tp::is_unused_flag122_set(int v) { _is_unused_flag122 = v; }
+void Tp::is_unused_flag123_set(int v) { _is_unused_flag123 = v; }
+void Tp::is_unused_flag124_set(int v) { _is_unused_flag124 = v; }
+void Tp::is_unused_flag125_set(int v) { _is_unused_flag125 = v; }
+void Tp::is_unused_flag126_set(int v) { _is_unused_flag126 = v; }
+void Tp::is_unused_flag127_set(int v) { _is_unused_flag127 = v; }
+void Tp::is_unused_flag128_set(int v) { _is_unused_flag128 = v; }
+void Tp::is_unused_flag129_set(int v) { _is_unused_flag129 = v; }
+void Tp::is_unused_flag12_set(int v) { _is_unused_flag12 = v; }
+void Tp::is_unused_flag130_set(int v) { _is_unused_flag130 = v; }
+void Tp::is_unused_flag131_set(int v) { _is_unused_flag131 = v; }
+void Tp::is_unused_flag132_set(int v) { _is_unused_flag132 = v; }
+void Tp::is_unused_flag133_set(int v) { _is_unused_flag133 = v; }
+void Tp::is_unused_flag134_set(int v) { _is_unused_flag134 = v; }
+void Tp::is_unused_flag135_set(int v) { _is_unused_flag135 = v; }
+void Tp::is_unused_flag136_set(int v) { _is_unused_flag136 = v; }
+void Tp::is_unused_flag137_set(int v) { _is_unused_flag137 = v; }
+void Tp::is_unused_flag138_set(int v) { _is_unused_flag138 = v; }
+void Tp::is_unused_flag139_set(int v) { _is_unused_flag139 = v; }
+void Tp::is_unused_flag13_set(int v) { _is_unused_flag13 = v; }
+void Tp::is_unused_flag140_set(int v) { _is_unused_flag140 = v; }
+void Tp::is_unused_flag141_set(int v) { _is_unused_flag141 = v; }
+void Tp::is_unused_flag142_set(int v) { _is_unused_flag142 = v; }
+void Tp::is_unused_flag143_set(int v) { _is_unused_flag143 = v; }
+void Tp::is_unused_flag144_set(int v) { _is_unused_flag144 = v; }
+void Tp::is_unused_flag145_set(int v) { _is_unused_flag145 = v; }
+void Tp::is_unused_flag146_set(int v) { _is_unused_flag146 = v; }
+void Tp::is_unused_flag147_set(int v) { _is_unused_flag147 = v; }
+void Tp::is_unused_flag148_set(int v) { _is_unused_flag148 = v; }
+void Tp::is_unused_flag149_set(int v) { _is_unused_flag149 = v; }
+void Tp::is_unused_flag14_set(int v) { _is_unused_flag14 = v; }
+void Tp::is_unused_flag150_set(int v) { _is_unused_flag150 = v; }
+void Tp::is_unused_flag151_set(int v) { _is_unused_flag151 = v; }
+void Tp::is_unused_flag152_set(int v) { _is_unused_flag152 = v; }
+void Tp::is_unused_flag153_set(int v) { _is_unused_flag153 = v; }
+void Tp::is_unused_flag154_set(int v) { _is_unused_flag154 = v; }
+void Tp::is_unused_flag155_set(int v) { _is_unused_flag155 = v; }
+void Tp::is_unused_flag156_set(int v) { _is_unused_flag156 = v; }
+void Tp::is_unused_flag157_set(int v) { _is_unused_flag157 = v; }
+void Tp::is_unused_flag158_set(int v) { _is_unused_flag158 = v; }
+void Tp::is_unused_flag159_set(int v) { _is_unused_flag159 = v; }
+void Tp::is_unused_flag15_set(int v) { _is_unused_flag15 = v; }
+void Tp::is_unused_flag160_set(int v) { _is_unused_flag160 = v; }
+void Tp::is_unused_flag161_set(int v) { _is_unused_flag161 = v; }
+void Tp::is_unused_flag162_set(int v) { _is_unused_flag162 = v; }
+void Tp::is_unused_flag163_set(int v) { _is_unused_flag163 = v; }
+void Tp::is_unused_flag164_set(int v) { _is_unused_flag164 = v; }
+void Tp::is_unused_flag165_set(int v) { _is_unused_flag165 = v; }
+void Tp::is_unused_flag166_set(int v) { _is_unused_flag166 = v; }
+void Tp::is_unused_flag167_set(int v) { _is_unused_flag167 = v; }
+void Tp::is_unused_flag168_set(int v) { _is_unused_flag168 = v; }
+void Tp::is_unused_flag169_set(int v) { _is_unused_flag169 = v; }
+void Tp::is_unused_flag16_set(int v) { _is_unused_flag16 = v; }
+void Tp::is_unused_flag170_set(int v) { _is_unused_flag170 = v; }
+void Tp::is_unused_flag171_set(int v) { _is_unused_flag171 = v; }
+void Tp::is_unused_flag172_set(int v) { _is_unused_flag172 = v; }
+void Tp::is_unused_flag173_set(int v) { _is_unused_flag173 = v; }
+void Tp::is_unused_flag174_set(int v) { _is_unused_flag174 = v; }
+void Tp::is_unused_flag175_set(int v) { _is_unused_flag175 = v; }
+void Tp::is_unused_flag176_set(int v) { _is_unused_flag176 = v; }
+void Tp::is_unused_flag177_set(int v) { _is_unused_flag177 = v; }
+void Tp::is_unused_flag178_set(int v) { _is_unused_flag178 = v; }
+void Tp::is_unused_flag179_set(int v) { _is_unused_flag179 = v; }
+void Tp::is_unused_flag17_set(int v) { _is_unused_flag17 = v; }
+void Tp::is_unused_flag180_set(int v) { _is_unused_flag180 = v; }
+void Tp::is_unused_flag181_set(int v) { _is_unused_flag181 = v; }
+void Tp::is_unused_flag182_set(int v) { _is_unused_flag182 = v; }
+void Tp::is_unused_flag183_set(int v) { _is_unused_flag183 = v; }
+void Tp::is_unused_flag184_set(int v) { _is_unused_flag184 = v; }
+void Tp::is_unused_flag185_set(int v) { _is_unused_flag185 = v; }
+void Tp::is_unused_flag186_set(int v) { _is_unused_flag186 = v; }
+void Tp::is_unused_flag187_set(int v) { _is_unused_flag187 = v; }
+void Tp::is_unused_flag188_set(int v) { _is_unused_flag188 = v; }
+void Tp::is_unused_flag189_set(int v) { _is_unused_flag189 = v; }
+void Tp::is_unused_flag18_set(int v) { _is_unused_flag18 = v; }
+void Tp::is_unused_flag190_set(int v) { _is_unused_flag190 = v; }
+void Tp::is_unused_flag191_set(int v) { _is_unused_flag191 = v; }
+void Tp::is_unused_flag192_set(int v) { _is_unused_flag192 = v; }
+void Tp::is_unused_flag193_set(int v) { _is_unused_flag193 = v; }
+void Tp::is_unused_flag194_set(int v) { _is_unused_flag194 = v; }
+void Tp::is_unused_flag195_set(int v) { _is_unused_flag195 = v; }
+void Tp::is_unused_flag196_set(int v) { _is_unused_flag196 = v; }
+void Tp::is_unused_flag197_set(int v) { _is_unused_flag197 = v; }
+void Tp::is_unused_flag198_set(int v) { _is_unused_flag198 = v; }
+void Tp::is_unused_flag199_set(int v) { _is_unused_flag199 = v; }
+void Tp::is_unused_flag19_set(int v) { _is_unused_flag19 = v; }
+void Tp::is_unused_flag1_set(int v) { _is_unused_flag1 = v; }
+void Tp::is_unused_flag200_set(int v) { _is_unused_flag200 = v; }
+void Tp::is_unused_flag20_set(int v) { _is_unused_flag20 = v; }
+void Tp::is_unused_flag21_set(int v) { _is_unused_flag21 = v; }
+void Tp::is_unused_flag22_set(int v) { _is_unused_flag22 = v; }
+void Tp::is_unused_flag23_set(int v) { _is_unused_flag23 = v; }
+void Tp::is_unused_flag24_set(int v) { _is_unused_flag24 = v; }
+void Tp::is_unused_flag25_set(int v) { _is_unused_flag25 = v; }
+void Tp::is_unused_flag26_set(int v) { _is_unused_flag26 = v; }
+void Tp::is_unused_flag27_set(int v) { _is_unused_flag27 = v; }
+void Tp::is_unused_flag28_set(int v) { _is_unused_flag28 = v; }
+void Tp::is_unused_flag29_set(int v) { _is_unused_flag29 = v; }
+void Tp::is_unused_flag2_set(int v) { _is_unused_flag2 = v; }
+void Tp::is_unused_flag30_set(int v) { _is_unused_flag30 = v; }
+void Tp::is_unused_flag31_set(int v) { _is_unused_flag31 = v; }
+void Tp::is_unused_flag32_set(int v) { _is_unused_flag32 = v; }
+void Tp::is_unused_flag33_set(int v) { _is_unused_flag33 = v; }
+void Tp::is_unused_flag34_set(int v) { _is_unused_flag34 = v; }
+void Tp::is_unused_flag35_set(int v) { _is_unused_flag35 = v; }
+void Tp::is_unused_flag36_set(int v) { _is_unused_flag36 = v; }
+void Tp::is_unused_flag37_set(int v) { _is_unused_flag37 = v; }
+void Tp::is_unused_flag38_set(int v) { _is_unused_flag38 = v; }
+void Tp::is_unused_flag39_set(int v) { _is_unused_flag39 = v; }
+void Tp::is_unused_flag3_set(int v) { _is_unused_flag3 = v; }
+void Tp::is_unused_flag40_set(int v) { _is_unused_flag40 = v; }
+void Tp::is_unused_flag41_set(int v) { _is_unused_flag41 = v; }
+void Tp::is_unused_flag42_set(int v) { _is_unused_flag42 = v; }
+void Tp::is_unused_flag43_set(int v) { _is_unused_flag43 = v; }
+void Tp::is_unused_flag44_set(int v) { _is_unused_flag44 = v; }
+void Tp::is_unused_flag45_set(int v) { _is_unused_flag45 = v; }
+void Tp::is_unused_flag46_set(int v) { _is_unused_flag46 = v; }
+void Tp::is_unused_flag47_set(int v) { _is_unused_flag47 = v; }
+void Tp::is_unused_flag48_set(int v) { _is_unused_flag48 = v; }
+void Tp::is_unused_flag49_set(int v) { _is_unused_flag49 = v; }
+void Tp::is_unused_flag4_set(int v) { _is_unused_flag4 = v; }
+void Tp::is_unused_flag50_set(int v) { _is_unused_flag50 = v; }
+void Tp::is_unused_flag51_set(int v) { _is_unused_flag51 = v; }
+void Tp::is_unused_flag52_set(int v) { _is_unused_flag52 = v; }
+void Tp::is_unused_flag53_set(int v) { _is_unused_flag53 = v; }
+void Tp::is_unused_flag54_set(int v) { _is_unused_flag54 = v; }
+void Tp::is_unused_flag55_set(int v) { _is_unused_flag55 = v; }
+void Tp::is_unused_flag56_set(int v) { _is_unused_flag56 = v; }
+void Tp::is_unused_flag57_set(int v) { _is_unused_flag57 = v; }
+void Tp::is_unused_flag58_set(int v) { _is_unused_flag58 = v; }
+void Tp::is_unused_flag59_set(int v) { _is_unused_flag59 = v; }
+void Tp::is_unused_flag5_set(int v) { _is_unused_flag5 = v; }
+void Tp::is_unused_flag60_set(int v) { _is_unused_flag60 = v; }
+void Tp::is_unused_flag61_set(int v) { _is_unused_flag61 = v; }
+void Tp::is_unused_flag62_set(int v) { _is_unused_flag62 = v; }
+void Tp::is_unused_flag63_set(int v) { _is_unused_flag63 = v; }
+void Tp::is_unused_flag64_set(int v) { _is_unused_flag64 = v; }
+void Tp::is_unused_flag65_set(int v) { _is_unused_flag65 = v; }
+void Tp::is_unused_flag66_set(int v) { _is_unused_flag66 = v; }
+void Tp::is_unused_flag67_set(int v) { _is_unused_flag67 = v; }
+void Tp::is_unused_flag68_set(int v) { _is_unused_flag68 = v; }
+void Tp::is_unused_flag69_set(int v) { _is_unused_flag69 = v; }
+void Tp::is_unused_flag6_set(int v) { _is_unused_flag6 = v; }
+void Tp::is_unused_flag70_set(int v) { _is_unused_flag70 = v; }
+void Tp::is_unused_flag71_set(int v) { _is_unused_flag71 = v; }
+void Tp::is_unused_flag72_set(int v) { _is_unused_flag72 = v; }
+void Tp::is_unused_flag73_set(int v) { _is_unused_flag73 = v; }
+void Tp::is_unused_flag74_set(int v) { _is_unused_flag74 = v; }
+void Tp::is_unused_flag75_set(int v) { _is_unused_flag75 = v; }
+void Tp::is_unused_flag76_set(int v) { _is_unused_flag76 = v; }
+void Tp::is_unused_flag77_set(int v) { _is_unused_flag77 = v; }
+void Tp::is_unused_flag78_set(int v) { _is_unused_flag78 = v; }
+void Tp::is_unused_flag79_set(int v) { _is_unused_flag79 = v; }
+void Tp::is_unused_flag7_set(int v) { _is_unused_flag7 = v; }
+void Tp::is_unused_flag80_set(int v) { _is_unused_flag80 = v; }
+void Tp::is_unused_flag81_set(int v) { _is_unused_flag81 = v; }
+void Tp::is_unused_flag82_set(int v) { _is_unused_flag82 = v; }
+void Tp::is_unused_flag83_set(int v) { _is_unused_flag83 = v; }
+void Tp::is_unused_flag84_set(int v) { _is_unused_flag84 = v; }
+void Tp::is_unused_flag85_set(int v) { _is_unused_flag85 = v; }
+void Tp::is_unused_flag86_set(int v) { _is_unused_flag86 = v; }
+void Tp::is_unused_flag87_set(int v) { _is_unused_flag87 = v; }
+void Tp::is_unused_flag88_set(int v) { _is_unused_flag88 = v; }
+void Tp::is_unused_flag89_set(int v) { _is_unused_flag89 = v; }
+void Tp::is_unused_flag8_set(int v) { _is_unused_flag8 = v; }
+void Tp::is_unused_flag90_set(int v) { _is_unused_flag90 = v; }
+void Tp::is_unused_flag91_set(int v) { _is_unused_flag91 = v; }
+void Tp::is_unused_flag92_set(int v) { _is_unused_flag92 = v; }
+void Tp::is_unused_flag93_set(int v) { _is_unused_flag93 = v; }
+void Tp::is_unused_flag94_set(int v) { _is_unused_flag94 = v; }
+void Tp::is_unused_flag95_set(int v) { _is_unused_flag95 = v; }
+void Tp::is_unused_flag96_set(int v) { _is_unused_flag96 = v; }
+void Tp::is_unused_flag97_set(int v) { _is_unused_flag97 = v; }
+void Tp::is_unused_flag98_set(int v) { _is_unused_flag98 = v; }
+void Tp::is_unused_flag99_set(int v) { _is_unused_flag99 = v; }
 void Tp::is_unused_flag9_set(int v) { _is_unused_flag9 = v; }
 void Tp::is_usable_set(int v) { _is_usable = v; }
 void Tp::is_used_when_thrown_set(int v) { _is_used_when_thrown = v; }
@@ -1412,10 +1808,6 @@ void Tp::unused_chance3_d1000_set(int v) { _unused_chance3_d1000 = v; }
 void Tp::unused_chance4_d1000_set(int v) { _unused_chance4_d1000 = v; }
 void Tp::unused_chance5_d1000_set(int v) { _unused_chance5_d1000 = v; }
 void Tp::unused_chance6_d1000_set(int v) { _unused_chance6_d1000 = v; }
-void Tp::unused_flag12_set(int v) { _unused_flag12 = v; }
-void Tp::unused_flag1_set(int v) { _unused_flag1 = v; }
-void Tp::unused_flag27_set(int v) { _unused_flag27 = v; }
-void Tp::unused_flag2_set(int v) { _unused_flag2 = v; }
 void Tp::weapon_dmg_set(int v) { _weapon_dmg = v; }
 void Tp::weapon_use_distance_set(int v) { _weapon_use_distance = v; }
 void Tp::z_depth_set(int v) { z_depth = v; }

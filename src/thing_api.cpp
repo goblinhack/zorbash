@@ -295,10 +295,1005 @@ int Thing::gfx_pixelart_bounce_on_move(void)
   return (tp()->gfx_pixelart_bounce_on_move());
 }
 
-int Thing::unused_flag12(void)
+int Thing::is_unused_flag1(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag12());
+  return (tp()->is_unused_flag1());
+}
+int Thing::is_unused_flag2(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag2());
+}
+int Thing::is_unused_flag3(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag3());
+}
+int Thing::is_unused_flag4(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag4());
+}
+int Thing::is_unused_flag5(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag5());
+}
+int Thing::is_unused_flag6(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag6());
+}
+int Thing::is_unused_flag7(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag7());
+}
+int Thing::is_unused_flag8(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag8());
+}
+int Thing::is_unused_flag9(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag9());
+}
+int Thing::is_unused_flag10(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag10());
+}
+int Thing::is_unused_flag11(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag11());
+}
+int Thing::is_unused_flag12(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag12());
+}
+int Thing::is_unused_flag13(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag13());
+}
+int Thing::is_unused_flag14(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag14());
+}
+int Thing::is_unused_flag15(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag15());
+}
+int Thing::is_unused_flag16(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag16());
+}
+int Thing::is_unused_flag17(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag17());
+}
+int Thing::is_unused_flag18(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag18());
+}
+int Thing::is_unused_flag19(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag19());
+}
+int Thing::is_unused_flag20(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag20());
+}
+int Thing::is_unused_flag21(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag21());
+}
+int Thing::is_unused_flag22(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag22());
+}
+int Thing::is_unused_flag23(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag23());
+}
+int Thing::is_unused_flag24(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag24());
+}
+int Thing::is_unused_flag25(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag25());
+}
+int Thing::is_unused_flag26(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag26());
+}
+int Thing::is_unused_flag27(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag27());
+}
+int Thing::is_unused_flag28(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag28());
+}
+int Thing::is_unused_flag29(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag29());
+}
+int Thing::is_unused_flag30(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag30());
+}
+int Thing::is_unused_flag31(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag31());
+}
+int Thing::is_unused_flag32(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag32());
+}
+int Thing::is_unused_flag33(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag33());
+}
+int Thing::is_unused_flag34(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag34());
+}
+int Thing::is_unused_flag35(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag35());
+}
+int Thing::is_unused_flag36(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag36());
+}
+int Thing::is_unused_flag37(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag37());
+}
+int Thing::is_unused_flag38(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag38());
+}
+int Thing::is_unused_flag39(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag39());
+}
+int Thing::is_unused_flag40(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag40());
+}
+int Thing::is_unused_flag41(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag41());
+}
+int Thing::is_unused_flag42(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag42());
+}
+int Thing::is_unused_flag43(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag43());
+}
+int Thing::is_unused_flag44(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag44());
+}
+int Thing::is_unused_flag45(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag45());
+}
+int Thing::is_unused_flag46(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag46());
+}
+int Thing::is_unused_flag47(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag47());
+}
+int Thing::is_unused_flag48(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag48());
+}
+int Thing::is_unused_flag49(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag49());
+}
+int Thing::is_unused_flag50(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag50());
+}
+int Thing::is_unused_flag51(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag51());
+}
+int Thing::is_unused_flag52(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag52());
+}
+int Thing::is_unused_flag53(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag53());
+}
+int Thing::is_unused_flag54(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag54());
+}
+int Thing::is_unused_flag55(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag55());
+}
+int Thing::is_unused_flag56(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag56());
+}
+int Thing::is_unused_flag57(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag57());
+}
+int Thing::is_unused_flag58(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag58());
+}
+int Thing::is_unused_flag59(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag59());
+}
+int Thing::is_unused_flag60(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag60());
+}
+int Thing::is_unused_flag61(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag61());
+}
+int Thing::is_unused_flag62(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag62());
+}
+int Thing::is_unused_flag63(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag63());
+}
+int Thing::is_unused_flag64(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag64());
+}
+int Thing::is_unused_flag65(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag65());
+}
+int Thing::is_unused_flag66(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag66());
+}
+int Thing::is_unused_flag67(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag67());
+}
+int Thing::is_unused_flag68(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag68());
+}
+int Thing::is_unused_flag69(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag69());
+}
+int Thing::is_unused_flag70(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag70());
+}
+int Thing::is_unused_flag71(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag71());
+}
+int Thing::is_unused_flag72(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag72());
+}
+int Thing::is_unused_flag73(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag73());
+}
+int Thing::is_unused_flag74(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag74());
+}
+int Thing::is_unused_flag75(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag75());
+}
+int Thing::is_unused_flag76(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag76());
+}
+int Thing::is_unused_flag77(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag77());
+}
+int Thing::is_unused_flag78(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag78());
+}
+int Thing::is_unused_flag79(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag79());
+}
+int Thing::is_unused_flag80(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag80());
+}
+int Thing::is_unused_flag81(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag81());
+}
+int Thing::is_unused_flag82(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag82());
+}
+int Thing::is_unused_flag83(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag83());
+}
+int Thing::is_unused_flag84(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag84());
+}
+int Thing::is_unused_flag85(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag85());
+}
+int Thing::is_unused_flag86(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag86());
+}
+int Thing::is_unused_flag87(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag87());
+}
+int Thing::is_unused_flag88(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag88());
+}
+int Thing::is_unused_flag89(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag89());
+}
+int Thing::is_unused_flag90(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag90());
+}
+int Thing::is_unused_flag91(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag91());
+}
+int Thing::is_unused_flag92(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag92());
+}
+int Thing::is_unused_flag93(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag93());
+}
+int Thing::is_unused_flag94(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag94());
+}
+int Thing::is_unused_flag95(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag95());
+}
+int Thing::is_unused_flag96(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag96());
+}
+int Thing::is_unused_flag97(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag97());
+}
+int Thing::is_unused_flag98(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag98());
+}
+int Thing::is_unused_flag99(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag99());
+}
+int Thing::is_unused_flag100(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag100());
+}
+int Thing::is_unused_flag101(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag101());
+}
+int Thing::is_unused_flag102(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag102());
+}
+int Thing::is_unused_flag103(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag103());
+}
+int Thing::is_unused_flag104(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag104());
+}
+int Thing::is_unused_flag105(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag105());
+}
+int Thing::is_unused_flag106(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag106());
+}
+int Thing::is_unused_flag107(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag107());
+}
+int Thing::is_unused_flag108(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag108());
+}
+int Thing::is_unused_flag109(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag109());
+}
+int Thing::is_unused_flag110(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag110());
+}
+int Thing::is_unused_flag111(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag111());
+}
+int Thing::is_unused_flag112(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag112());
+}
+int Thing::is_unused_flag113(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag113());
+}
+int Thing::is_unused_flag114(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag114());
+}
+int Thing::is_unused_flag115(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag115());
+}
+int Thing::is_unused_flag116(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag116());
+}
+int Thing::is_unused_flag117(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag117());
+}
+int Thing::is_unused_flag118(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag118());
+}
+int Thing::is_unused_flag119(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag119());
+}
+int Thing::is_unused_flag120(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag120());
+}
+int Thing::is_unused_flag121(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag121());
+}
+int Thing::is_unused_flag122(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag122());
+}
+int Thing::is_unused_flag123(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag123());
+}
+int Thing::is_unused_flag124(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag124());
+}
+int Thing::is_unused_flag125(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag125());
+}
+int Thing::is_unused_flag126(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag126());
+}
+int Thing::is_unused_flag127(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag127());
+}
+int Thing::is_unused_flag128(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag128());
+}
+int Thing::is_unused_flag129(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag129());
+}
+int Thing::is_unused_flag130(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag130());
+}
+int Thing::is_unused_flag131(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag131());
+}
+int Thing::is_unused_flag132(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag132());
+}
+int Thing::is_unused_flag133(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag133());
+}
+int Thing::is_unused_flag134(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag134());
+}
+int Thing::is_unused_flag135(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag135());
+}
+int Thing::is_unused_flag136(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag136());
+}
+int Thing::is_unused_flag137(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag137());
+}
+int Thing::is_unused_flag138(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag138());
+}
+int Thing::is_unused_flag139(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag139());
+}
+int Thing::is_unused_flag140(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag140());
+}
+int Thing::is_unused_flag141(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag141());
+}
+int Thing::is_unused_flag142(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag142());
+}
+int Thing::is_unused_flag143(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag143());
+}
+int Thing::is_unused_flag144(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag144());
+}
+int Thing::is_unused_flag145(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag145());
+}
+int Thing::is_unused_flag146(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag146());
+}
+int Thing::is_unused_flag147(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag147());
+}
+int Thing::is_unused_flag148(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag148());
+}
+int Thing::is_unused_flag149(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag149());
+}
+int Thing::is_unused_flag150(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag150());
+}
+int Thing::is_unused_flag151(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag151());
+}
+int Thing::is_unused_flag152(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag152());
+}
+int Thing::is_unused_flag153(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag153());
+}
+int Thing::is_unused_flag154(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag154());
+}
+int Thing::is_unused_flag155(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag155());
+}
+int Thing::is_unused_flag156(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag156());
+}
+int Thing::is_unused_flag157(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag157());
+}
+int Thing::is_unused_flag158(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag158());
+}
+int Thing::is_unused_flag159(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag159());
+}
+int Thing::is_unused_flag160(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag160());
+}
+int Thing::is_unused_flag161(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag161());
+}
+int Thing::is_unused_flag162(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag162());
+}
+int Thing::is_unused_flag163(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag163());
+}
+int Thing::is_unused_flag164(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag164());
+}
+int Thing::is_unused_flag165(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag165());
+}
+int Thing::is_unused_flag166(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag166());
+}
+int Thing::is_unused_flag167(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag167());
+}
+int Thing::is_unused_flag168(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag168());
+}
+int Thing::is_unused_flag169(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag169());
+}
+int Thing::is_unused_flag170(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag170());
+}
+int Thing::is_unused_flag171(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag171());
+}
+int Thing::is_unused_flag172(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag172());
+}
+int Thing::is_unused_flag173(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag173());
+}
+int Thing::is_unused_flag174(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag174());
+}
+int Thing::is_unused_flag175(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag175());
+}
+int Thing::is_unused_flag176(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag176());
+}
+int Thing::is_unused_flag177(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag177());
+}
+int Thing::is_unused_flag178(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag178());
+}
+int Thing::is_unused_flag179(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag179());
+}
+int Thing::is_unused_flag180(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag180());
+}
+int Thing::is_unused_flag181(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag181());
+}
+int Thing::is_unused_flag182(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag182());
+}
+int Thing::is_unused_flag183(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag183());
+}
+int Thing::is_unused_flag184(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag184());
+}
+int Thing::is_unused_flag185(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag185());
+}
+int Thing::is_unused_flag186(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag186());
+}
+int Thing::is_unused_flag187(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag187());
+}
+int Thing::is_unused_flag188(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag188());
+}
+int Thing::is_unused_flag189(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag189());
+}
+int Thing::is_unused_flag190(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag190());
+}
+int Thing::is_unused_flag191(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag191());
+}
+int Thing::is_unused_flag192(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag192());
+}
+int Thing::is_unused_flag193(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag193());
+}
+int Thing::is_unused_flag194(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag194());
+}
+int Thing::is_unused_flag195(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag195());
+}
+int Thing::is_unused_flag196(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag196());
+}
+int Thing::is_unused_flag197(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag197());
+}
+int Thing::is_unused_flag198(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag198());
+}
+int Thing::is_unused_flag199(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag199());
+}
+int Thing::is_unused_flag200(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_unused_flag200());
 }
 
 int Thing::gfx_pixelart_flickers(void)
@@ -1253,16 +2248,10 @@ int Thing::is_green_splatter(void)
   return (tp()->is_green_splatter());
 }
 
-int Thing::unused_flag1(void)
+int Thing::is_gnome(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag1());
-}
-
-int Thing::unused_flag2(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->unused_flag2());
+  return (tp()->is_gnome());
 }
 
 int Thing::is_ettin(void)
@@ -1391,12 +2380,6 @@ int Thing::is_able_to_see_invisible(void)
   return (tp()->is_able_to_see_invisible());
 }
 
-int Thing::unused_flag27(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->unused_flag27());
-}
-
 int Thing::is_lightning(void)
 {
   TRACE_NO_INDENT();
@@ -1449,12 +2432,6 @@ int Thing::is_msg_allowed_hears_something(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_msg_allowed_hears_something());
-}
-
-int Thing::is_unused_flag9(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_unused_flag9());
 }
 
 int Thing::gfx_pixelart_submergable(void)
@@ -2295,10 +3272,10 @@ int Thing::is_crushable(void)
   return (tp()->is_crushable());
 }
 
-int Thing::collateral_dmg_pct(void)
+int Thing::chance_d100_of_firing_avoiding_comrades(void)
 {
   TRACE_NO_INDENT();
-  return tp()->collateral_dmg_pct();
+  return tp()->chance_d100_of_firing_avoiding_comrades();
 }
 
 int Thing::is_able_to_see_in_the_dark(void)

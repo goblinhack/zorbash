@@ -498,7 +498,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
   // If we could not find a tile, warn but don't use the dead tile
   //
   if (! chose_tile) {
-    if (is_dead && ! unused_flag12()) {
+    if (is_dead && ! is_unused_flag12()) {
       //
       // ignore
       //

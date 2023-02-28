@@ -216,24 +216,24 @@ uint8_t sdl_init(void)
   //
   SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
-  uint32_t video_unused_flags;
+  uint32_t video_is_unused_flags;
 
   LOG("SDL: Set SDL_WINDOW_OPENGL");
-  video_unused_flags = SDL_WINDOW_OPENGL;
+  video_is_unused_flags = SDL_WINDOW_OPENGL;
 
   if (game->config.gfx_borderless) {
     LOG("SDL: Set SDL_WINDOW_BORDERLESS");
-    video_unused_flags |= SDL_WINDOW_BORDERLESS;
+    video_is_unused_flags |= SDL_WINDOW_BORDERLESS;
   }
 
   if (game->config.gfx_fullscreen) {
     LOG("SDL: Set SDL_WINDOW_FULLSCREEN");
-    video_unused_flags |= SDL_WINDOW_FULLSCREEN;
+    video_is_unused_flags |= SDL_WINDOW_FULLSCREEN;
   }
 
   if (game->config.gfx_fullscreen_desktop) {
     LOG("SDL: Set SDL_WINDOW_FULLSCREEN_DESKTOP");
-    video_unused_flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
+    video_is_unused_flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
   }
 
   if (game->config.gfx_allow_highdpi) {
@@ -244,7 +244,7 @@ uint8_t sdl_init(void)
     LOG("SDL: Calling SDL_GetDisplayDPI");
     float dpi;
     if (SDL_GetDisplayDPI(0, nullptr, &dpi, nullptr) == 0) {
-      video_unused_flags |= SDL_WINDOW_ALLOW_HIGHDPI;
+      video_is_unused_flags |= SDL_WINDOW_ALLOW_HIGHDPI;
       LOG("SDL: Set SDL_WINDOW_ALLOW_HIGHDPI");
     } else {
       ERR("SDL: Cannot enable high DPI");
@@ -253,7 +253,7 @@ uint8_t sdl_init(void)
 
   LOG("SDL: Create window");
   sdl.window = SDL_CreateWindow("zorbash", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, video_width, video_height,
-                                video_unused_flags);
+                                video_is_unused_flags);
   if (! sdl.window) {
     ERR("SDL_CreateWindow couldn't set windowed display %ux%u: %s", video_width, video_height, SDL_GetError());
     SDL_MSG_BOX("SDL_CreateWindow couldn't set windowed display %ux%u: %s", video_width, video_height,
@@ -264,7 +264,7 @@ uint8_t sdl_init(void)
     return false;
   }
 
-  if (video_unused_flags & SDL_WINDOW_ALLOW_HIGHDPI) {
+  if (video_is_unused_flags & SDL_WINDOW_ALLOW_HIGHDPI) {
     SDL_GL_GetDrawableSize(sdl.window, &game->config.window_pix_width, &game->config.window_pix_height);
   } else {
     SDL_GetWindowSize(sdl.window, &game->config.window_pix_width, &game->config.window_pix_height);

@@ -1,5 +1,8 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- can dogmen throw darts?                                                                                                                      -->
+<!-- teleport on stealing                                                                                                                         -->
+<!-- upon stealing an item, should hide if not a cleaner                                                                                          -->
 <!-- after throwing a dart do not change the shortcut                                                                                             -->
 <!-- teleport                                                                                                                                     -->
 <!-- - dimension portal                                                                                                                           -->
@@ -220,7 +223,7 @@ Current status:
 
 Content:
 <!-- begin type marker -->
-- 71 x monsters
+- 73 x monsters
 - 52 x food
 - 19 x treasure
 - 13 x weapons
