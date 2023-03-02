@@ -377,6 +377,13 @@ int Thing::is_dangerous(Thingp it)
   }
 
   //
+  // Will consider more dangerous things less dangerous
+  //
+  if (is_fearless()) {
+    its_danger_level = 0;
+  }
+
+  //
   // So giant rats will attack each other if at the same danger level
   //
   return its_danger_level > my_danger_level;

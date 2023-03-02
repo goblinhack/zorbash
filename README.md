@@ -2,6 +2,7 @@
 <!-- ------                                                                                                                                       -->
 <!-- teleport on stealing                                                                                                                         -->
 <!-- after throwing a dart do not change the shortcut                                                                                             -->
+<!-- dart reuse?                                                                                                                                  -->
 <!-- teleport                                                                                                                                     -->
 <!-- - dimension portal                                                                                                                           -->
 <!-- - teleport block                                                                                                                             -->

@@ -9,6 +9,9 @@ def on_thrown(owner, me, x, y):
                 continue
             my.thing_hit_dmg_missile(owner, me, it, thrown=True)
 
+    if my.pcg_randint(1, 100) < 90:
+        my.thing_dead(me, "used")
+
 
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)

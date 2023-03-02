@@ -29,6 +29,25 @@ bool Thing::will_avoid_monst(const Thingp it)
   }
 
   //
+  // Low on health?
+  //
+  if (! is_fearless()) {
+    if (is_cautious()) {
+      if (health() < health_max() / 2) {
+        dbg("Avoid %s? yes as low on health", it->to_short_string().c_str());
+        return false;
+      }
+    }
+
+    if (is_daring()) {
+      if (health() < health_max() / 3) {
+        dbg("Avoid %s? yes as low on health", it->to_short_string().c_str());
+        return false;
+      }
+    }
+  }
+
+  //
   // Not moving?
   //
   if (it->idle_count() > 5) {

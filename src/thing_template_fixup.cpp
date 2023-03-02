@@ -33,6 +33,18 @@ void tp_fixup(void)
       }
     }
 
+    if (tp->is_fearless()) {
+      if (tp->is_cautious()) {
+        DIE("Tp %s is fearless and cautious?", tp->name().c_str());
+      }
+    }
+
+    if (tp->is_fearless()) {
+      if (tp->is_daring()) {
+        DIE("Tp %s is fearless and daring?", tp->name().c_str());
+      }
+    }
+
     if (tp->is_item_collector()) {
       if (! tp->capacity_height() || ! tp->capacity_width()) {
         DIE("Tp %s needs bag capacity", tp->name().c_str());

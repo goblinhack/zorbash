@@ -1079,7 +1079,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           }
         }
 
-        if (it->is_door() && ! it->is_open) {
+        if (it->is_door() && ! it->is_open && ! it->is_dead) {
           if (is_able_to_open_doors() || is_able_to_break_down_doors()) {
             if (keys()) {
               GOAL_ADD(GOAL_PRIO_LOW, -goal_penalty, "open-door-with-key", it);
@@ -1668,7 +1668,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
 
       FOR_ALL_NON_INTERNAL_THINGS(level, it, at.x, at.y)
       {
-        if (it->is_door() && ! it->is_open) {
+        if (it->is_door() && ! it->is_open && ! it->is_dead) {
           if (is_able_to_open_doors()) {
             if (keys()) {
               if (open_door(it)) {
