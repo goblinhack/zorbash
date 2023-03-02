@@ -158,6 +158,7 @@ PyObject *thing_is_able_to_move_diagonally(PyObject *obj, PyObject *args, PyObje
 PyObject *thing_is_able_to_open_doors(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_regenerate(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_rest(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_run_away_after_stealing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_see_in_the_dark(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_see_invisible(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_see_through_doors(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -567,7 +568,6 @@ PyObject *thing_is_unused_flag198(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag199(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag19(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag1(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag200(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag20(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag21(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag22(PyObject *obj, PyObject *args, PyObject *keywds);

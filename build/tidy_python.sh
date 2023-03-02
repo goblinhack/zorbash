@@ -652,7 +652,7 @@ do
       is_unused_flag199 \
       is_unused_flag2 \
       is_unused_flag20 \
-      is_unused_flag200 \
+      is_able_to_run_away_after_stealing \
       is_unused_flag21 \
       is_unused_flag22 \
       is_unused_flag23 \

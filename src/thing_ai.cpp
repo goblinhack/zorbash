@@ -1998,8 +1998,25 @@ bool Thing::ai_tick(bool recursing)
   //
   // Set up the extent of the AI, choosing smaller areas for monsters for speed.
   //
-  const float dx = distance_vision_get();
-  const float dy = dx;
+  float dx = distance_vision_get();
+  float dy = dx;
+
+  //
+  // There is how much we can see, but if we need to avoid something then we need a
+  // larger view of the level so we can escape.
+  //
+  if (is_intelligent()) {
+    dx *= 2;
+    dy *= 2;
+  }
+
+  //
+  // Same goes for wandering.
+  //
+  if (ai_wanderer()) {
+    dx *= 2;
+    dy *= 2;
+  }
 
   bool   left         = false;
   bool   right        = false;

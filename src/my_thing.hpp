@@ -494,6 +494,7 @@ public:
   bool inventory_shortcuts_insert(Thingp what);
   bool inventory_shortcuts_remove(Thingp what, DropReason);
   bool inventory_shortcuts_remove(Thingp what, Thingp target, DropReason);
+  bool is_adjacent(const Thingp);
   bool is_blocking_terrain(const Thingp it);
   bool is_bloodied(void);
   bool is_carrying_an_item(void);
@@ -1243,6 +1244,7 @@ public:
   int is_able_to_open_doors(void);
   int is_able_to_regenerate(void);
   int is_able_to_rest(void);
+  int is_able_to_run_away_after_stealing(void);
   int is_able_to_see_in_the_dark(void);
   int is_able_to_see_invisible(void);
   int is_able_to_see_through_doors(void);
@@ -1669,7 +1671,6 @@ public:
   int is_unused_flag199(void);
   int is_unused_flag19(void);
   int is_unused_flag1(void);
-  int is_unused_flag200(void);
   int is_unused_flag20(void);
   int is_unused_flag21(void);
   int is_unused_flag22(void);

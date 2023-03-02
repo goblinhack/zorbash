@@ -339,3 +339,10 @@ Thingp Thing::best_visible_target_get(void)
 
   return possible[ 0 ].first;
 }
+
+bool Thing::is_adjacent(const Thingp it)
+{
+  auto dx = abs(curr_at.x - it->curr_at.x);
+  auto dy = abs(curr_at.y - it->curr_at.y);
+  return (dx <= 1) && (dy <= 1);
+}

@@ -84,7 +84,6 @@ def tp_init(name, text_long_name):
     my.is_moveable(self, True)
     my.is_msg_allowed_is_dead(self, True)
     my.is_red_blooded(self, True)
-    my.is_shallow_water_swimmer(self, True)
     my.is_soft(self, True)
     my.is_swimmer(self, True)
     my.is_tickable(self, True)

@@ -16,7 +16,7 @@ bool Thing::steal_treasure_from(Thingp it)
 
   dbg("Steal treasure from %s", it->to_short_string().c_str());
   TRACE_NO_INDENT();
-  auto cands = treasure_vector();
+  auto cands = it->treasure_vector();
   if (! cands.size()) {
     dbg("No, nothing to steal");
     return false;
@@ -39,6 +39,11 @@ bool Thing::steal_treasure_from(Thingp it)
     it->popup(string_sprintf("%%fg=white$Where's my money?!"));
     it->msg("%%fg=orange$You feel less wealthy somehow...%%fg=reset$");
   }
+
+  if (is_able_to_run_away_after_stealing()) {
+    add_avoid(it);
+  }
+
   return true;
 }
 

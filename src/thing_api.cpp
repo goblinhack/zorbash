@@ -1290,10 +1290,10 @@ int Thing::is_unused_flag199(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag199());
 }
-int Thing::is_unused_flag200(void)
+int Thing::is_able_to_run_away_after_stealing(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag200());
+  return (tp()->is_able_to_run_away_after_stealing());
 }
 
 int Thing::gfx_pixelart_flickers(void)

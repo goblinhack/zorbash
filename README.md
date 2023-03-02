@@ -1,8 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- can dogmen throw darts?                                                                                                                      -->
 <!-- teleport on stealing                                                                                                                         -->
-<!-- upon stealing an item, should hide if not a cleaner                                                                                          -->
 <!-- after throwing a dart do not change the shortcut                                                                                             -->
 <!-- teleport                                                                                                                                     -->
 <!-- - dimension portal                                                                                                                           -->

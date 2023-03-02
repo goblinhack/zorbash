@@ -268,6 +268,7 @@ private:
   int _is_able_to_open_doors {};
   int _is_able_to_regenerate {};
   int _is_able_to_rest {};
+  int _is_able_to_run_away_after_stealing {};
   int _is_able_to_see_in_the_dark {};
   int _is_able_to_see_invisible {};
   int _is_able_to_see_through_doors {};
@@ -670,7 +671,6 @@ private:
   int _is_unused_flag199 {};
   int _is_unused_flag2 {};
   int _is_unused_flag20 {};
-  int _is_unused_flag200 {};
   int _is_unused_flag21 {};
   int _is_unused_flag22 {};
   int _is_unused_flag23 {};
@@ -1548,6 +1548,7 @@ public:
   int is_able_to_open_doors(void) const;
   int is_able_to_regenerate(void) const;
   int is_able_to_rest(void) const;
+  int is_able_to_run_away_after_stealing(void) const;
   int is_able_to_see_in_the_dark(void) const;
   int is_able_to_see_invisible(void) const;
   int is_able_to_see_through_doors(void) const;
@@ -1947,7 +1948,6 @@ public:
   int is_unused_flag199(void) const;
   int is_unused_flag19(void) const;
   int is_unused_flag1(void) const;
-  int is_unused_flag200(void) const;
   int is_unused_flag20(void) const;
   int is_unused_flag21(void) const;
   int is_unused_flag22(void) const;
@@ -2287,6 +2287,7 @@ public:
   void is_able_to_open_doors_set(int v);
   void is_able_to_regenerate_set(int v);
   void is_able_to_rest_set(int v);
+  void is_able_to_run_away_after_stealing_set(int v);
   void is_able_to_see_in_the_dark_set(int v);
   void is_able_to_see_invisible_set(int v);
   void is_able_to_see_through_doors_set(int v);
@@ -2687,7 +2688,6 @@ public:
   void is_unused_flag199_set(int v);
   void is_unused_flag19_set(int v);
   void is_unused_flag1_set(int v);
-  void is_unused_flag200_set(int v);
   void is_unused_flag20_set(int v);
   void is_unused_flag21_set(int v);
   void is_unused_flag22_set(int v);
