@@ -20,6 +20,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.chance_d1000_dmg_missile(self, 0, 1000)
     my.dmg_missile_dice(self, "1d4")
     my.gfx_ascii_fade_with_dist(self, True)
+    my.chance_d1000_dmg_poison(self, 0, 1000)
+    my.dmg_poison_dice(self, "1d4")
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_submergable(self, True)
@@ -51,11 +53,11 @@ def tp_init(name, text_long_name, text_short_name):
     my.normal_placement_rules(self, True)
     my.on_thrown_do(self, "me.on_thrown()")
     my.rarity(self, my.RARITY_COMMON)
-    my.target_name_projectile(self, "projectile_dart")
+    my.target_name_projectile(self, "projectile_dart_poison")
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 DMG")
-    my.text_description_long(self, "The gentle person's melee weapon. This dart has a metal tip and wooden shaft with a high chance of breaking once used.")
-    my.text_description_short(self, "A small metal tipped dart.")
+    my.text_description_long(self, "The assassin's melee weapon. This dart has a poison tip. Ideal for dealing with dinner guests that refuse to leave.")
+    my.text_description_short(self, "A poison tipped dart.")
     my.thing_size(self, my.THING_SIZE_TINY)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -69,7 +71,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="dart", text_long_name="dart", text_short_name="dart")
+    tp_init(name="dart_poison", text_long_name="poison dart", text_short_name="poison dart")
 
 
 init()

@@ -9,7 +9,7 @@ def on_thrown(owner, me, x, y):
                 continue
             my.thing_hit_dmg_missile(owner, me, it, thrown=True)
 
-    if my.pcg_randint(1, 100) < 90:
+    if my.pcg_randint(1, 1000) < 90:
         my.thing_dead(me, "used")
 
 
@@ -18,7 +18,7 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.chance_d1000_appearing(self, 10)
     my.chance_d1000_dmg_missile(self, 0, 1000)
-    my.dmg_missile_dice(self, "1d4")
+    my.dmg_missile_dice(self, "1d5")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
@@ -45,17 +45,17 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_treasure_class_A(self, True)
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
-    my.item_height(self, 3)
-    my.item_width(self, 3)
-    my.noise_on_dropping(self, 1)
+    my.item_height(self, 4)
+    my.item_width(self, 4)
+    my.noise_on_dropping(self, 10)
     my.normal_placement_rules(self, True)
     my.on_thrown_do(self, "me.on_thrown()")
     my.rarity(self, my.RARITY_COMMON)
-    my.target_name_projectile(self, "projectile_dart")
+    my.target_name_projectile(self, "projectile_dart_metal")
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 DMG")
-    my.text_description_long(self, "The gentle person's melee weapon. This dart has a metal tip and wooden shaft with a high chance of breaking once used.")
-    my.text_description_short(self, "A small metal tipped dart.")
+    my.text_description_long(self, "The professional's melee weapon. This steel dart flies through the air with punishing levels of accuracy and has a low chance of being damaged.")
+    my.text_description_short(self, "A steel dart.")
     my.thing_size(self, my.THING_SIZE_TINY)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -69,7 +69,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="dart", text_long_name="dart", text_short_name="dart")
+    tp_init(name="dart_metal", text_long_name="steel dart", text_short_name="steel dart")
 
 
 init()

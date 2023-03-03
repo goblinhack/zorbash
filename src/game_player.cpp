@@ -47,6 +47,14 @@ void Game::place_player(void)
           auto w = level->thing_new("dart", point(x, y));
           t->carry(w);
         }
+        {
+          auto w = level->thing_new("dart_metal", point(x, y));
+          t->carry(w);
+        }
+        {
+          auto w = level->thing_new("dart_poison", point(x, y));
+          t->carry(w);
+        }
       }
       if (1) {
         auto w = level->thing_new("pottedmeat", point(x, y));
