@@ -295,9 +295,19 @@ void Thing::killed(Thingp defeater, const char *reason)
         }
       }
     } else if (is_item() && o_top && (o_top->is_player())) {
-      msg("Your %s is destroyed.", text_long_name().c_str());
+      //
+      // Darts are destroyed sometimes when thrown, so avoid a pointless message
+      //
+      if (! is_being_thrown) {
+        msg("Your %s is destroyed.", text_long_name().c_str());
+      }
     } else if (is_item() && o_top && (o_top->is_monst())) {
-      msg("%s %ss is destroyed.", pluralise(o_top->text_The()).c_str(), text_long_name().c_str());
+      //
+      // Darts are destroyed sometimes when thrown, so avoid a pointless message
+      //
+      if (! is_being_thrown) {
+        msg("%s %ss is destroyed.", pluralise(o_top->text_The()).c_str(), text_long_name().c_str());
+      }
     }
 
     //
@@ -314,10 +324,10 @@ void Thing::killed(Thingp defeater, const char *reason)
       on_death_of_a_follower(l);
     }
 
-    //
-    // Add to the hiscore table?
-    //
     if (is_player()) {
+      //
+      // Player is dead. Add to the hiscore table?
+      //
       TRACE_NO_INDENT();
       //
       // Poor player
@@ -338,10 +348,14 @@ void Thing::killed(Thingp defeater, const char *reason)
       level->is_map_follow_player = false;
       game->wid_dead_select(reason);
     } else if (is_loggable()) {
+      //
+      // Something else (non player) is dead.
+      //
       TRACE_NO_INDENT();
       if (is_loggable()) {
         dbg("%s is killed, %s", The_no_dying.c_str(), reason);
       }
+
       if (defeater && (defeater != this)) {
         //
         // Killed by something other than itself.
@@ -373,8 +387,14 @@ void Thing::killed(Thingp defeater, const char *reason)
             // Already logged
             //
           } else if (is_item() && top_owner() == defeater) {
+            //
+            // I'm not sure how we get to this. The player destroyed their own item?
+            //
             msg("Your %s is destroyed.", text_short_name().c_str());
           } else {
+            //
+            // I'm not sure how we get to this. The player destroyed their own stuff?
+            //
             msg("%s is destroyed %s.", The_no_dying.c_str(), reason);
           }
 
