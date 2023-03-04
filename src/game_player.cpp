@@ -43,15 +43,15 @@ void Game::place_player(void)
         //
         // Darts
         //
-        for (auto d = 0; d < 6; d++) {
+        for (auto d = 0; d < 2; d++) {
           auto w = level->thing_new("dart", point(x, y));
           t->carry(w);
         }
-        {
+        if (0) {
           auto w = level->thing_new("dart_metal", point(x, y));
           t->carry(w);
         }
-        {
+        if (0) {
           auto w = level->thing_new("dart_poison", point(x, y));
           t->carry(w);
         }
