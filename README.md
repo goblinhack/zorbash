@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- after throwing a dart do not change the shortcut                                                                                             -->
 <!-- teleport                                                                                                                                     -->
 <!-- - dimension portal                                                                                                                           -->
 <!-- - teleport block                                                                                                                             -->
