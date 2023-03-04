@@ -48,7 +48,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
 
-    delay = 1000
+    delay = 100
     my.tile(self,
             ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".1", delay_ms=delay)
@@ -70,6 +70,33 @@ def tp_init(name, text_long_name, text_short_name):
     my.tile(self,
             ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".7", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            tile=name + ".8", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            tile=name + ".9", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            tile=name + ".10", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            tile=name + ".11", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            tile=name + ".12", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            tile=name + ".13", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            tile=name + ".14", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            tile=name + ".15", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            tile=name + ".16", delay_ms=delay)
 
     my.tp_update(self)
 

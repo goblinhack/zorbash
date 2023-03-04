@@ -118,6 +118,9 @@ void Thing::move_finish(void)
       continue;
     }
 
+    if (it->is_portal()) {
+      it->con("XXX");
+    }
     if (! it->on_enter_do().empty()) {
       it->on_enter(this);
     }
