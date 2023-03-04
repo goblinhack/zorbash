@@ -21,6 +21,16 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta, bool force)
   TRACE_AND_INDENT();
 
   //
+  // Are we daring enough to try shoving a larger creatuee?
+  //
+  if (! is_daring() && ! is_fearless()) {
+    if (it->thing_size() - thing_size() > 1) {
+      dbg("Too large to shove, don't even try to shove %s", it->to_short_string().c_str());
+      return (THING_SHOVE_NEVER_TRIED);
+    }
+  }
+
+  //
   // Wake on shove
   //
   bool was_sleeping = it->is_sleeping;
