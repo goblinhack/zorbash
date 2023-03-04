@@ -649,7 +649,7 @@ do
       is_unused_flag196 \
       is_unused_flag197 \
       is_unused_flag198 \
-      is_unused_flag199 \
+      is_portal \
       is_unused_flag2 \
       is_unused_flag20 \
       is_able_to_run_away_after_stealing \

@@ -1285,10 +1285,10 @@ int Thing::is_unused_flag198(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag198());
 }
-int Thing::is_unused_flag199(void)
+int Thing::is_portal(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag199());
+  return (tp()->is_portal());
 }
 int Thing::is_able_to_run_away_after_stealing(void)
 {
@@ -4952,18 +4952,6 @@ const std::string &Thing::on_move_do(void)
 {
   TRACE_NO_INDENT();
   return (tp()->on_move_do());
-}
-
-const std::string &Thing::on_open_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_open_do());
-}
-
-const std::string &Thing::on_close_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_close_do());
 }
 
 const std::string &Thing::on_tick_do(void)

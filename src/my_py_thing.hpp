@@ -407,6 +407,7 @@ PyObject *thing_is_pillar(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_plant(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_player(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_poisonous_danger_level(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_portal(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_potion(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_projectile(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ranged_weapon(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -565,7 +566,6 @@ PyObject *thing_is_unused_flag195(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag196(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag197(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag198(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag199(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag19(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag1(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag20(PyObject *obj, PyObject *args, PyObject *keywds);

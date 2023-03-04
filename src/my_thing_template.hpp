@@ -506,6 +506,7 @@ private:
   int _is_plant {};
   int _is_player {};
   int _is_poisonous_danger_level {};
+  int _is_portal {};
   int _is_potion {};
   int _is_projectile {};
   int _is_ranged_weapon {};
@@ -668,7 +669,6 @@ private:
   int _is_unused_flag196 {};
   int _is_unused_flag197 {};
   int _is_unused_flag198 {};
-  int _is_unused_flag199 {};
   int _is_unused_flag2 {};
   int _is_unused_flag20 {};
   int _is_unused_flag21 {};
@@ -912,6 +912,7 @@ private:
   std::string _on_death_of_my_leader_do;
   std::string _on_dropped_do;
   std::string _on_enchant_do;
+  std::string _on_enter_do;
   std::string _on_equip_do;
   std::string _on_fall_begin_do;
   std::string _on_fall_do;
@@ -995,12 +996,12 @@ private:
   std::string _on_receiving_dmg_stat_str_do;
   std::string _on_receiving_dmg_water_do;
   std::string _on_resting_do;
+  std::string _on_stealing_do;
   std::string _on_stuck_do;
   std::string _on_swing_do;
   std::string _on_targetted_do;
   std::string _on_targetted_radially_do;
   std::string _on_teleport_do;
-  std::string _on_stealing_do;
   std::string _on_thrown_do;
   std::string _on_tick_do;
   std::string _on_unequip_do;
@@ -1252,6 +1253,7 @@ public:
   const std::string &on_death_of_my_leader_do(void) const;
   const std::string &on_dropped_do(void) const;
   const std::string &on_enchant_do(void) const;
+  const std::string &on_enter_do(void) const;
   const std::string &on_equip_do(void) const;
   const std::string &on_fall_begin_do(void) const;
   const std::string &on_fall_do(void) const;
@@ -1335,12 +1337,12 @@ public:
   const std::string &on_receiving_dmg_stat_str_do(void) const;
   const std::string &on_receiving_dmg_water_do(void) const;
   const std::string &on_resting_do(void) const;
+  const std::string &on_stealing_do(void) const;
   const std::string &on_stuck_do(void) const;
   const std::string &on_swing_do(void) const;
   const std::string &on_targetted_do(void) const;
   const std::string &on_targetted_radially_do(void) const;
   const std::string &on_teleport_do(void) const;
-  const std::string &on_stealing_do(void) const;
   const std::string &on_thrown_do(void) const;
   const std::string &on_tick_do(void) const;
   const std::string &on_unequip_do(void) const;
@@ -1787,6 +1789,7 @@ public:
   int is_plant(void) const;
   int is_player(void) const;
   int is_poisonous_danger_level(void) const;
+  int is_portal(void) const;
   int is_potion(void) const;
   int is_projectile(void) const;
   int is_ranged_weapon(void) const;
@@ -1947,7 +1950,6 @@ public:
   int is_unused_flag196(void) const;
   int is_unused_flag197(void) const;
   int is_unused_flag198(void) const;
-  int is_unused_flag199(void) const;
   int is_unused_flag19(void) const;
   int is_unused_flag1(void) const;
   int is_unused_flag20(void) const;
@@ -2527,6 +2529,7 @@ public:
   void is_plant_set(int v);
   void is_player_set(int v);
   void is_poisonous_danger_level_set(int v);
+  void is_portal_set(int v);
   void is_potion_set(int v);
   void is_projectile_set(int v);
   void is_ranged_weapon_set(int v);
@@ -2687,7 +2690,6 @@ public:
   void is_unused_flag196_set(int v);
   void is_unused_flag197_set(int v);
   void is_unused_flag198_set(int v);
-  void is_unused_flag199_set(int v);
   void is_unused_flag19_set(int v);
   void is_unused_flag1_set(int v);
   void is_unused_flag20_set(int v);
@@ -2845,6 +2847,7 @@ public:
   void on_death_of_my_leader_do_set(const std::string &v);
   void on_dropped_do_set(const std::string &v);
   void on_enchant_do_set(const std::string &v);
+  void on_enter_do_set(const std::string &v);
   void on_equip_do_set(const std::string &v);
   void on_fall_begin_do_set(const std::string &v);
   void on_fall_do_set(const std::string &v);
@@ -2927,12 +2930,12 @@ public:
   void on_receiving_dmg_stat_str_do_set(const std::string &v);
   void on_receiving_dmg_water_do_set(const std::string &v);
   void on_resting_do_set(const std::string &v);
+  void on_stealing_do_set(const std::string &v);
   void on_stuck_do_set(const std::string &v);
   void on_swing_do_set(const std::string &v);
   void on_targetted_do_set(const std::string &v);
   void on_targetted_radially_do_set(const std::string &v);
   void on_teleport_do_set(const std::string &v);
-  void on_stealing_do_set(const std::string &v);
   void on_thrown_do_set(const std::string &v);
   void on_tick_do_set(const std::string &v);
   void on_unequip_do_set(const std::string &v);
@@ -3096,6 +3099,7 @@ class Tp *tp_random_secret_door(void);
 class Tp *tp_random_sewer_wall(void);
 class Tp *tp_random_skillstone(void);
 class Tp *tp_random_spiderweb(void);
+class Tp *tp_random_portal(void);
 class Tp *tp_random_treasure_class_A(void);
 class Tp *tp_random_treasure_class_B(void);
 class Tp *tp_random_treasure_class_C(void);

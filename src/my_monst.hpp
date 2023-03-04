@@ -117,6 +117,7 @@ public:
 
   point lunge_to; // When a monst attacks something
 
+  // begin sort marker1 {
   int attack_num          = {};
   int capacity_height     = {};
   int capacity_width      = {};
@@ -167,6 +168,7 @@ public:
   int stat_str_mod        = {};
   int submerged_offset    = {}; // Pixels
   int tick_resurrect_when = {};
+  // end sort marker1 }
 
   int8_t bounce_count       = {}; // Graphical bounce count
   int8_t charge_count       = {}; // Wand charges
@@ -179,6 +181,8 @@ public:
   std::string dead_reason;   // What defeated me
   std::string poison_reason; // What poisoned me
 
+  // begin sort marker2 {
+  ts_t ts_anim_delay_end {};
   ts_t ts_bounce_begin {};
   ts_t ts_bounce_end {};
   ts_t ts_fadeup_begin {};
@@ -188,7 +192,7 @@ public:
   ts_t ts_flip_start {}; // Used for animating the steps.
   ts_t ts_lunge_begin {};
   ts_t ts_lunge_end {};
-  ts_t ts_anim_delay_end {};
+  // end sort marker2 }
 
   //
   // Used for calling on_idle()

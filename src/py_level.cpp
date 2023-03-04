@@ -54,7 +54,7 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
       for (auto &c : py_obj_to_std_string(o)) {
         auto m = get(Charmap::all_charmaps, c);
 
-        if (m.is_floor || m.is_bridge || m.is_corridor || m.is_secret_corridor || m.is_dirt) {
+        if (m.is_floor || m.is_bridge || m.is_corridor || m.is_secret_corridor || m.is_portal || m.is_dirt) {
           floor_string += c;
         } else if (m.is_red_blood || m.is_deep_water || m.is_door || m.is_ascend_dungeon || m.is_descend_dungeon ||
                    m.is_descend_sewer || m.is_floor_deco || m.is_food || m.is_mob_challenge_class_A ||

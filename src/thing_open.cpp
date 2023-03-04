@@ -106,3 +106,9 @@ bool Thing::open(void)
 
   return true;
 }
+
+const std::string &Thing::on_open_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_open_do());
+}

@@ -38,6 +38,11 @@ void Charmap::init_charmaps(void)
   c->c                  = char_index;
   c->is_secret_corridor = true;
 
+  char_index   = Charmap::TELEPORT;
+  c            = &all_charmaps[ char_index ];
+  c->c         = char_index;
+  c->is_portal = true;
+
   char_index     = Charmap::CORRIDOR;
   c              = &all_charmaps[ char_index ];
   c->c           = char_index;
@@ -253,7 +258,7 @@ void Charmap::init_charmaps(void)
   c->c         = char_index;
   c->is_barrel = true;
 
-  char_index = Charmap::TELEPORT;
+  char_index = Charmap::TRAP;
   c          = &all_charmaps[ char_index ];
   c->c       = char_index;
   c->is_trap = true;

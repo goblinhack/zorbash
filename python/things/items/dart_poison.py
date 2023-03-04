@@ -18,10 +18,10 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.chance_d1000_appearing(self, 10)
     my.chance_d1000_dmg_missile(self, 0, 1000)
-    my.dmg_missile_dice(self, "1d4")
-    my.gfx_ascii_fade_with_dist(self, True)
     my.chance_d1000_dmg_poison(self, 0, 1000)
+    my.dmg_missile_dice(self, "1d4")
     my.dmg_poison_dice(self, "1d4")
+    my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_submergable(self, True)

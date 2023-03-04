@@ -1049,6 +1049,11 @@ void Level::create_biome_dungeon_place_objects_with_normal_placement_rules(Dunge
           tp = tp_random_food();
         }
       }
+      if (d->is_portal(x, y)) {
+        if (d1000() < 500) {
+          tp = tp_random_portal();
+        }
+      }
       if (d->is_gold(x, y)) {
         if (d1000() < 500) {
           tp = tp_random_gold();

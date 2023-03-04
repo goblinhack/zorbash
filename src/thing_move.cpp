@@ -2,6 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_array_bounds_check.hpp"
 #include "my_depth.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
@@ -107,6 +108,21 @@ void Thing::move_finish(void)
       change_state(MONST_STATE_IDLE, "move finished");
     }
   }
+
+  //
+  // Did we enter something like a portal?
+  //
+  FOR_ALL_NON_INTERNAL_THINGS(level, it, curr_at.x, curr_at.y)
+  {
+    if (it == this) {
+      continue;
+    }
+
+    if (! it->on_enter_do().empty()) {
+      it->on_enter(this);
+    }
+  }
+  FOR_ALL_THINGS_END()
 }
 
 bool Thing::move(point future_pos)

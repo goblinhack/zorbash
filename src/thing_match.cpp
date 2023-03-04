@@ -309,6 +309,7 @@ bool Tp::matches(const std::string &what)
   if (is_plant() && (what == "is_plant")) { return true; }
   if (is_player() && (what == "is_player")) { return true; }
   if (is_poisonous_danger_level() && (what == "is_poisonous_danger_level")) { return true; }
+  if (is_portal() && (what == "is_portal")) { return true; }
   if (is_potion() && (what == "is_potion")) { return true; }
   if (is_projectile() && (what == "is_projectile")) { return true; }
   if (is_ranged_weapon() && (what == "is_ranged_weapon")) { return true; }
@@ -465,7 +466,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag196() && (what == "is_unused_flag196")) { return true; }
   if (is_unused_flag197() && (what == "is_unused_flag197")) { return true; }
   if (is_unused_flag198() && (what == "is_unused_flag198")) { return true; }
-  if (is_unused_flag199() && (what == "is_unused_flag199")) { return true; }
   if (is_unused_flag19() && (what == "is_unused_flag19")) { return true; }
   if (is_unused_flag1() && (what == "is_unused_flag1")) { return true; }
   if (is_unused_flag20() && (what == "is_unused_flag20")) { return true; }
@@ -905,6 +905,7 @@ bool Thing::matches(const std::string &what)
   if (is_plant() && (what == "is_plant")) { return true; }
   if (is_player() && (what == "is_player")) { return true; }
   if (is_poisonous_danger_level() && (what == "is_poisonous_danger_level")) { return true; }
+  if (is_portal() && (what == "is_portal")) { return true; }
   if (is_potion() && (what == "is_potion")) { return true; }
   if (is_projectile() && (what == "is_projectile")) { return true; }
   if (is_ranged_weapon() && (what == "is_ranged_weapon")) { return true; }
@@ -1061,7 +1062,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag196() && (what == "is_unused_flag196")) { return true; }
   if (is_unused_flag197() && (what == "is_unused_flag197")) { return true; }
   if (is_unused_flag198() && (what == "is_unused_flag198")) { return true; }
-  if (is_unused_flag199() && (what == "is_unused_flag199")) { return true; }
   if (is_unused_flag19() && (what == "is_unused_flag19")) { return true; }
   if (is_unused_flag1() && (what == "is_unused_flag1")) { return true; }
   if (is_unused_flag20() && (what == "is_unused_flag20")) { return true; }
@@ -1492,6 +1492,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_plant") { return &Thing::is_plant; }
   if (what == "is_player") { return &Thing::is_player; }
   if (what == "is_poisonous_danger_level") { return &Thing::is_poisonous_danger_level; }
+  if (what == "is_portal") { return &Thing::is_portal; }
   if (what == "is_potion") { return &Thing::is_potion; }
   if (what == "is_projectile") { return &Thing::is_projectile; }
   if (what == "is_ranged_weapon") { return &Thing::is_ranged_weapon; }
@@ -1647,7 +1648,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag196") { return &Thing::is_unused_flag196; }
   if (what == "is_unused_flag197") { return &Thing::is_unused_flag197; }
   if (what == "is_unused_flag198") { return &Thing::is_unused_flag198; }
-  if (what == "is_unused_flag199") { return &Thing::is_unused_flag199; }
   if (what == "is_unused_flag19") { return &Thing::is_unused_flag19; }
   if (what == "is_unused_flag1") { return &Thing::is_unused_flag1; }
   if (what == "is_unused_flag20") { return &Thing::is_unused_flag20; }

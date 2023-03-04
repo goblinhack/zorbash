@@ -92,6 +92,8 @@ void Game::place_player(void)
         level->thing_new("fire", point(x + 1, y + 1));
         level->thing_new("small_fire", point(x + 3, y + 3));
       }
+      level->thing_new("portal", point(x + 2, y + 3));
+      level->thing_new("portal", point(x - 1, y + 4));
       if (0) {
         auto w = level->thing_new("skill_devoted_thrust", point(x, y));
         t->skill_add(w);

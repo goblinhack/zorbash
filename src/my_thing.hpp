@@ -778,6 +778,7 @@ public:
   const std::string &on_death_of_my_leader_do(void);
   const std::string &on_dropped_do(void);
   const std::string &on_enchant_do(void);
+  const std::string &on_enter_do(void);
   const std::string &on_equip_do(void);
   const std::string &on_fall_begin_do(void);
   const std::string &on_fall_do(void);
@@ -861,12 +862,12 @@ public:
   const std::string &on_receiving_dmg_stat_str_do(void);
   const std::string &on_receiving_dmg_water_do(void);
   const std::string &on_resting_do(void);
+  const std::string &on_stealing_do(void);
   const std::string &on_stuck_do(void);
   const std::string &on_swing_do(void);
   const std::string &on_targetted_do(void);
   const std::string &on_targetted_radially_do(void);
   const std::string &on_teleport_do(void);
-  const std::string &on_stealing_do(void);
   const std::string &on_thrown_do(void);
   const std::string &on_tick_do(void);
   const std::string &on_unequip_do(void);
@@ -1509,6 +1510,7 @@ public:
   int is_plant(void);
   int is_player(void);
   int is_poisonous_danger_level(void);
+  int is_portal(void);
   int is_potion(void);
   int is_projectile(void);
   int is_ranged_weapon(void);
@@ -1669,7 +1671,6 @@ public:
   int is_unused_flag196(void);
   int is_unused_flag197(void);
   int is_unused_flag198(void);
-  int is_unused_flag199(void);
   int is_unused_flag19(void);
   int is_unused_flag1(void);
   int is_unused_flag20(void);
@@ -2611,6 +2612,7 @@ public:
   void on_death_of_my_leader(void);
   void on_dropped(void);
   void on_enchant(void);
+  void on_enter(Thingp victim);
   void on_equip(Thingp what);
   void on_fall_begin(void);
   void on_fall(void);
@@ -2629,6 +2631,7 @@ public:
   void on_owner_unset(Thingp owner);
   void on_polymorphed(void);
   void on_resting(void);
+  void on_stealing(Thingp from, Thingp what);
   void on_stuck(void);
   void on_swing(Thingp what);
   void on_targetted(point target);
@@ -2636,7 +2639,6 @@ public:
   void on_targetted_radial(void);
   void on_targetted(void);
   void on_teleport(void);
-  void on_stealing(Thingp from, Thingp what);
   void on_thrown_callback(ThingId owner_id_when_thrown);
   void on_thrown(ThingId owner_id_when_thrown);
   void on_unequip(Thingp what);

@@ -49,6 +49,7 @@ static Tpidmap tp_sewer_wall;
 static Tpidmap tp_skills;
 static Tpidmap tp_skillstone;
 static Tpidmap tp_spiderweb;
+static Tpidmap tp_portal;
 static Tpidmap tp_treasure;
 static Tpidmap tp_wall_dungeon;
 static Tpidmap tp_staff;
@@ -132,6 +133,9 @@ void tp_random_init(void)
     }
     if (tp->is_spiderweb()) {
       tp_spiderweb.push_back(tp);
+    }
+    if (tp->is_portal()) {
+      tp_portal.push_back(tp);
     }
     if (tp->is_food()) {
       tp_food.push_back(tp);
@@ -643,6 +647,16 @@ Tpp tp_random_spiderweb(void)
     return nullptr;
   }
   return tp_get_with_no_rarity_filter(tp_spiderweb);
+}
+
+Tpp tp_random_portal(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_portal.size())) {
+    ERR("No portals found");
+    return nullptr;
+  }
+  return tp_get_with_no_rarity_filter(tp_portal);
 }
 
 Tpp tp_random_small_ripple(void)

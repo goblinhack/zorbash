@@ -70,6 +70,7 @@ const std::string &Tp::on_death_of_a_follower_do(void) const { return _on_death_
 const std::string &Tp::on_death_of_my_leader_do(void) const { return _on_death_of_my_leader_do; }
 const std::string &Tp::on_dropped_do(void) const { return _on_dropped_do; }
 const std::string &Tp::on_enchant_do(void) const { return _on_enchant_do; }
+const std::string &Tp::on_enter_do(void) const { return _on_enter_do; }
 const std::string &Tp::on_equip_do(void) const { return _on_equip_do; }
 const std::string &Tp::on_fall_begin_do(void) const { return _on_fall_begin_do; }
 const std::string &Tp::on_fall_do(void) const { return _on_fall_do; }
@@ -152,12 +153,12 @@ const std::string &Tp::on_receiving_dmg_stat_con_do(void) const { return _on_rec
 const std::string &Tp::on_receiving_dmg_stat_str_do(void) const { return _on_receiving_dmg_stat_str_do; }
 const std::string &Tp::on_receiving_dmg_water_do(void) const { return _on_receiving_dmg_water_do; }
 const std::string &Tp::on_resting_do(void) const { return _on_resting_do; }
+const std::string &Tp::on_stealing_do(void) const { return _on_stealing_do; }
 const std::string &Tp::on_stuck_do(void) const { return _on_stuck_do; }
 const std::string &Tp::on_swing_do(void) const { return _on_swing_do; }
 const std::string &Tp::on_targetted_do(void) const { return _on_targetted_do; }
 const std::string &Tp::on_targetted_radially_do(void) const { return _on_targetted_radially_do; }
 const std::string &Tp::on_teleport_do(void) const { return _on_teleport_do; }
-const std::string &Tp::on_stealing_do(void) const { return _on_stealing_do; }
 const std::string &Tp::on_thrown_do(void) const { return _on_thrown_do; }
 const std::string &Tp::on_tick_do(void) const { return _on_tick_do; }
 const std::string &Tp::on_unequip_do(void) const { return _on_unequip_do; }
@@ -582,6 +583,7 @@ int Tp::is_pillar(void) const { return _is_pillar; }
 int Tp::is_plant(void) const { return _is_plant; }
 int Tp::is_player(void) const { return _is_player; }
 int Tp::is_poisonous_danger_level(void) const { return _is_poisonous_danger_level; }
+int Tp::is_portal(void) const { return _is_portal; }
 int Tp::is_potion(void) const { return _is_potion; }
 int Tp::is_projectile(void) const { return _is_projectile; }
 int Tp::is_ranged_weapon(void) const { return _is_ranged_weapon; }
@@ -742,7 +744,6 @@ int Tp::is_unused_flag195(void) const { return _is_unused_flag195; }
 int Tp::is_unused_flag196(void) const { return _is_unused_flag196; }
 int Tp::is_unused_flag197(void) const { return _is_unused_flag197; }
 int Tp::is_unused_flag198(void) const { return _is_unused_flag198; }
-int Tp::is_unused_flag199(void) const { return _is_unused_flag199; }
 int Tp::is_unused_flag19(void) const { return _is_unused_flag19; }
 int Tp::is_unused_flag1(void) const { return _is_unused_flag1; }
 int Tp::is_unused_flag20(void) const { return _is_unused_flag20; }
@@ -1322,6 +1323,7 @@ void Tp::is_pillar_set(int v) { _is_pillar = v; }
 void Tp::is_plant_set(int v) { _is_plant = v; }
 void Tp::is_player_set(int v) { _is_player = v; }
 void Tp::is_poisonous_danger_level_set(int v) { _is_poisonous_danger_level = v; }
+void Tp::is_portal_set(int v) { _is_portal = v; }
 void Tp::is_potion_set(int v) { _is_potion = v; }
 void Tp::is_projectile_set(int v) { _is_projectile = v; }
 void Tp::is_ranged_weapon_set(int v) { _is_ranged_weapon = v; }
@@ -1482,7 +1484,6 @@ void Tp::is_unused_flag195_set(int v) { _is_unused_flag195 = v; }
 void Tp::is_unused_flag196_set(int v) { _is_unused_flag196 = v; }
 void Tp::is_unused_flag197_set(int v) { _is_unused_flag197 = v; }
 void Tp::is_unused_flag198_set(int v) { _is_unused_flag198 = v; }
-void Tp::is_unused_flag199_set(int v) { _is_unused_flag199 = v; }
 void Tp::is_unused_flag19_set(int v) { _is_unused_flag19 = v; }
 void Tp::is_unused_flag1_set(int v) { _is_unused_flag1 = v; }
 void Tp::is_unused_flag20_set(int v) { _is_unused_flag20 = v; }
@@ -1640,6 +1641,7 @@ void Tp::on_death_of_a_follower_do_set(const std::string &v) { _on_death_of_a_fo
 void Tp::on_death_of_my_leader_do_set(const std::string &v) { _on_death_of_my_leader_do = v; }
 void Tp::on_dropped_do_set(const std::string &v) { _on_dropped_do = v; }
 void Tp::on_enchant_do_set(const std::string &v) { _on_enchant_do = v; }
+void Tp::on_enter_do_set(const std::string &v) { _on_enter_do = v; }
 void Tp::on_equip_do_set(const std::string &v) { _on_equip_do = v; }
 void Tp::on_fall_begin_do_set(const std::string &v) { _on_fall_begin_do = v; }
 void Tp::on_fall_do_set(const std::string &v) { _on_fall_do = v; }
@@ -1722,12 +1724,12 @@ void Tp::on_receiving_dmg_stat_con_do_set(const std::string &v) { _on_receiving_
 void Tp::on_receiving_dmg_stat_str_do_set(const std::string &v) { _on_receiving_dmg_stat_str_do = v; }
 void Tp::on_receiving_dmg_water_do_set(const std::string &v) { _on_receiving_dmg_water_do = v; }
 void Tp::on_resting_do_set(const std::string &v) { _on_resting_do = v; }
+void Tp::on_stealing_do_set(const std::string &v) { _on_stealing_do = v; }
 void Tp::on_stuck_do_set(const std::string &v) { _on_stuck_do = v; }
 void Tp::on_swing_do_set(const std::string &v) { _on_swing_do = v; }
 void Tp::on_targetted_do_set(const std::string &v) { _on_targetted_do = v; }
 void Tp::on_targetted_radially_do_set(const std::string &v) { _on_targetted_radially_do = v; }
 void Tp::on_teleport_do_set(const std::string &v) { _on_teleport_do = v; }
-void Tp::on_stealing_do_set(const std::string &v) { _on_stealing_do = v; }
 void Tp::on_thrown_do_set(const std::string &v) { _on_thrown_do = v; }
 void Tp::on_tick_do_set(const std::string &v) { _on_tick_do = v; }
 void Tp::on_unequip_do_set(const std::string &v) { _on_unequip_do = v; }

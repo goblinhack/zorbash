@@ -106,6 +106,9 @@ Tpp tp_find(const std::string &name)
     if (name == "random_spiderweb") {
       return tp_random_spiderweb();
     }
+    if (name == "random_portal") {
+      return tp_random_portal();
+    }
     if (name == "random_small_ripple") {
       return tp_random_small_ripple();
     }

@@ -12,6 +12,7 @@ class Charmap
 {
 public:
   enum {
+    // begin sort marker1 {
     BARREL              = 'b',
     BLOOD               = '_',
     BRAZIER             = 'B',
@@ -22,23 +23,20 @@ public:
     DECO                = '|',
     DEEP_WATER          = 'W',
     DIRT                = ',',
-    ENCHANTSTONE        = '*',
-    SKILLSTONE          = '&',
     DOOR                = 'D',
     DOOR_DOWN           = 'v',
     DOOR_LEFT           = '<',
     DOOR_RIGHT          = '>',
     DOOR_UP             = '^',
     DRY_GRASS           = '\'',
-    WET_GRASS           = '"',
+    ENCHANTSTONE        = '*',
     ENTRANCE            = 'S',
     EXIT                = 'E',
     FLOOR               = '.',
     FOLIAGE             = '`',
-    SPIDERWEB           = 'X',
-    ICE                 = 'I',
     FOOD                = 'f',
     GOLD                = 'o',
+    ICE                 = 'I',
     KEY                 = 'k',
     LAVA                = 'L',
     MOB_SPAWNER_CLASS_A = 'g',
@@ -50,72 +48,81 @@ public:
     MONST_CLASS_E       = 'N',
     NONE                = '\0',
     POTION              = '!',
+    RING                = 'R',
     ROCK                = 'r',
     SECRET_CORRIDOR     = '?',
     SECRET_DOOR         = 's',
     SEWER               = 'O',
     SHALLOW_WATER       = 'w',
+    SKILLSTONE          = '&',
     SPACE               = ' ',
-    TELEPORT            = 't',
+    SPIDERWEB           = 'X',
+    STAFF               = '/',
+    TELEPORT            = 'T',
+    TRAP                = 't',
     TREASURE_CLASS_A    = '$',
     TREASURE_CLASS_B    = '2',
     TREASURE_CLASS_C    = '3',
+    WALL                = 'x',
     WEAPON_CLASS_A      = '(',
     WEAPON_CLASS_B      = ')',
     WEAPON_CLASS_C      = '-',
-    WALL                = 'x',
-    STAFF               = '/',
-    RING                = 'R',
+    WET_GRASS           = '"',
+    // end sort marker1 }
   };
 
-  char c;
-  bool is_red_blood {false};
+  // begin sort marker2 {
+  bool is_ascend_dungeon {false};
+  bool is_barrel {false};
+  bool is_block_of_ice {false};
+  bool is_brazier {false};
+  bool is_bridge {false};
   bool is_chasm {false};
   bool is_corridor {false};
-  bool is_bridge {false};
   bool is_deep_water {false};
-  bool is_dirt {false};
-  bool is_dry_grass {false};
-  bool is_wet_grass {false};
-  bool is_enchantstone {false};
-  bool is_skillstone {false};
-  bool is_foliage {false};
-  bool is_spiderweb {false};
-  bool is_block_of_ice {false};
-  bool is_door {false};
-  bool is_ascend_dungeon {false};
   bool is_descend_dungeon {false};
   bool is_descend_sewer {false};
-  bool is_floor {false};
+  bool is_dirt {false};
+  bool is_door {false};
+  bool is_dry_grass {false};
+  bool is_enchantstone {false};
   bool is_floor_deco {false};
+  bool is_floor {false};
+  bool is_foliage {false};
   bool is_food {false};
   bool is_gold {false};
   bool is_key {false};
   bool is_lava {false};
-  bool is_mob_challenge_class_B {false};
   bool is_mob_challenge_class_A {false};
+  bool is_mob_challenge_class_B {false};
   bool is_monst_class_A {false};
   bool is_monst_class_B {false};
   bool is_monst_class_C {false};
   bool is_monst_class_D {false};
   bool is_monst_class_E {false};
+  bool is_portal {false};
   bool is_potion {false};
-  bool is_staff {false};
+  bool is_red_blood {false};
   bool is_ring {false};
   bool is_rock {false};
   bool is_secret_corridor {false};
   bool is_secret_door {false};
   bool is_shallow_water {false};
-  bool is_brazier {false};
-  bool is_barrel {false};
+  bool is_skillstone {false};
+  bool is_spiderweb {false};
+  bool is_staff {false};
   bool is_trap {false};
   bool is_treasure_class_A {false};
   bool is_treasure_class_B {false};
   bool is_treasure_class_C {false};
+  bool is_wall {false};
   bool is_weapon_class_A {false};
   bool is_weapon_class_B {false};
   bool is_weapon_class_C {false};
-  bool is_wall {false};
+  bool is_wet_grass {false};
+  // end sort marker2 }
+
+  char c;
 
   static std::vector< Charmap > all_charmaps;
   static void                   init_charmaps(void);

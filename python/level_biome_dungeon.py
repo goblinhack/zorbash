@@ -42,6 +42,7 @@ import my
 # SPIDERWEB                     X
 # STAFF                         /
 # TELEPORT                      T
+# TRAP                          t
 # TREASURE_CLASS_A              $
 # TREASURE_CLASS_B              2
 # TREASURE_CLASS_C              3

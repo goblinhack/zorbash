@@ -194,3 +194,9 @@ int Thing::carried_cloak_highest_value_for_target(Thingp *out, Thingp target)
   }
   return highest_value;
 }
+
+const std::string &Thing::on_close_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_close_do());
+}

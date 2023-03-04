@@ -74,6 +74,7 @@ public:
   Roomp getr(const int x, const int y);
   Roomp getr_no_check(const int x, const int y);
 
+  // begin sort marker1 {
   bool can_place_room(Roomp r, int x, int y);
   bool create_cyclic_rooms(Grid *g);
   bool is_anything_at(const int x, const int y);
@@ -124,6 +125,7 @@ public:
   bool is_monst_class_E(const int x, const int y);
   bool is_oob(const int x, const int y);
   bool is_oob(const int x, const int y, const int z);
+  bool is_portal(const int x, const int y);
   bool is_potion(const int x, const int y);
   bool is_red_blood(const int x, const int y);
   bool is_ring(const int x, const int y);
@@ -134,13 +136,13 @@ public:
   bool is_shallow_water_no_check(const int x, const int y);
   bool is_skillstone(const int x, const int y);
   bool is_spiderweb(const int x, const int y);
+  bool is_staff(const int x, const int y);
   bool is_treasure_class_A(const int x, const int y);
   bool is_treasure_class_B(const int x, const int y);
   bool is_treasure_class_C(const int x, const int y);
   bool is_treasure_type(const int x, const int y);
   bool is_wall(const int x, const int y);
   bool is_wall_no_check(const int x, const int y);
-  bool is_staff(const int x, const int y);
   bool is_weapon_class_A(const int x, const int y);
   bool is_weapon_class_B(const int x, const int y);
   bool is_weapon_class_C(const int x, const int y);
@@ -149,6 +151,7 @@ public:
   bool room_is_a_candidate_less_restrictive(const DungeonNode *n, Roomp r);
   bool rooms_move_closer_together(void);
   bool solve(int x, int y, Grid *g);
+  // end sort marker1 }
 
   char getc(const int x, const int y, const int z);
   char getc_no_check(const int x, const int y, const int z);
@@ -159,6 +162,10 @@ public:
   int offset(const int x, const int y);
   int offset(const int x, const int y, const int z);
 
+  // begin sort marker2 {
+  bool rooms_print_all(Grid *g);
+  bool rooms_print_all_with_jiggle(Grid *g);
+  bool rooms_print_all_with_no_jiggle(Grid *g);
   void add_border(void);
   void add_corridor_walls(void);
   void add_foliage_around_water(void);
@@ -192,14 +199,12 @@ public:
   void room_print_at(Roomp r, int x, int y);
   void room_print_only_doors_at(Roomp r, int x, int y);
   void room_print_only_doors(Grid *g);
-  bool rooms_print_all(Grid *g);
-  bool rooms_print_all_with_jiggle(Grid *g);
-  bool rooms_print_all_with_no_jiggle(Grid *g);
   void save_level(void);
   void water_fixup_shallows(void);
   void water_fixup(void);
   void water_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
   void wet_grass_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
+  // end sort marker2 }
 
   unsigned int MAP_FILL_PROB   = 10;
   unsigned int MAP_R1          = 5;
