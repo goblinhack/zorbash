@@ -866,6 +866,7 @@ public:
   const std::string &on_targetted_do(void);
   const std::string &on_targetted_radially_do(void);
   const std::string &on_teleport_do(void);
+  const std::string &on_stealing_do(void);
   const std::string &on_thrown_do(void);
   const std::string &on_tick_do(void);
   const std::string &on_unequip_do(void);
@@ -2635,6 +2636,7 @@ public:
   void on_targetted_radial(void);
   void on_targetted(void);
   void on_teleport(void);
+  void on_stealing(Thingp from, Thingp what);
   void on_thrown_callback(ThingId owner_id_when_thrown);
   void on_thrown(ThingId owner_id_when_thrown);
   void on_unequip(Thingp what);

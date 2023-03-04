@@ -1000,6 +1000,7 @@ private:
   std::string _on_targetted_do;
   std::string _on_targetted_radially_do;
   std::string _on_teleport_do;
+  std::string _on_stealing_do;
   std::string _on_thrown_do;
   std::string _on_tick_do;
   std::string _on_unequip_do;
@@ -1339,6 +1340,7 @@ public:
   const std::string &on_targetted_do(void) const;
   const std::string &on_targetted_radially_do(void) const;
   const std::string &on_teleport_do(void) const;
+  const std::string &on_stealing_do(void) const;
   const std::string &on_thrown_do(void) const;
   const std::string &on_tick_do(void) const;
   const std::string &on_unequip_do(void) const;
@@ -2930,6 +2932,7 @@ public:
   void on_targetted_do_set(const std::string &v);
   void on_targetted_radially_do_set(const std::string &v);
   void on_teleport_do_set(const std::string &v);
+  void on_stealing_do_set(const std::string &v);
   void on_thrown_do_set(const std::string &v);
   void on_tick_do_set(const std::string &v);
   void on_unequip_do_set(const std::string &v);

@@ -157,6 +157,7 @@ const std::string &Tp::on_swing_do(void) const { return _on_swing_do; }
 const std::string &Tp::on_targetted_do(void) const { return _on_targetted_do; }
 const std::string &Tp::on_targetted_radially_do(void) const { return _on_targetted_radially_do; }
 const std::string &Tp::on_teleport_do(void) const { return _on_teleport_do; }
+const std::string &Tp::on_stealing_do(void) const { return _on_stealing_do; }
 const std::string &Tp::on_thrown_do(void) const { return _on_thrown_do; }
 const std::string &Tp::on_tick_do(void) const { return _on_tick_do; }
 const std::string &Tp::on_unequip_do(void) const { return _on_unequip_do; }
@@ -1726,6 +1727,7 @@ void Tp::on_swing_do_set(const std::string &v) { _on_swing_do = v; }
 void Tp::on_targetted_do_set(const std::string &v) { _on_targetted_do = v; }
 void Tp::on_targetted_radially_do_set(const std::string &v) { _on_targetted_radially_do = v; }
 void Tp::on_teleport_do_set(const std::string &v) { _on_teleport_do = v; }
+void Tp::on_stealing_do_set(const std::string &v) { _on_stealing_do = v; }
 void Tp::on_thrown_do_set(const std::string &v) { _on_thrown_do = v; }
 void Tp::on_tick_do_set(const std::string &v) { _on_tick_do = v; }
 void Tp::on_unequip_do_set(const std::string &v) { _on_unequip_do = v; }

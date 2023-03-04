@@ -11,6 +11,16 @@ def on_death_of_my_leader(me, x, y):
         my.thing_msg(me, "The gnome thief cries out in tiny impotent rage!")
 
 
+def on_stealing(me, victim, what, x, y):
+    if my.pcg_randint(1, 100) < 100:
+        if not my.thing_is_dead_or_dying(me):
+            my.thing_msg(me, "The gnome thief cackles with glee and vanishes!")
+        my.thing_teleport_randomly(me)
+    else:
+        if not my.thing_is_dead_or_dying(me):
+            my.thing_msg(me, "The gnome thief cackles with glee!")
+
+
 def tp_init(name, text_long_name):
     self = gnome_all.tp_init(name, text_long_name)
     # begin sort marker
@@ -20,11 +30,12 @@ def tp_init(name, text_long_name):
     my.is_able_to_run_away_after_stealing(self, True)
     my.is_able_to_teleport_escape(self, True)
     my.is_biome_dungeon(self, True)
+    my.teleport_distance(self, 20)
     my.is_cowardly(self, True)
     my.is_loggable(self, True)
     my.is_monst_class_A(self, True)
     my.on_born_do(self, "me.on_born()")
-    my.on_death_of_my_leader_do(self, "me.on_death_of_my_leader()")
+    my.on_stealing_do(self, "me.on_stealing()")
     my.on_you_nat_att_do(self, "gnome_all.on_you_nat_att()")
     my.text_description_long2(self, "This particular gnome is very adept at liberating items from their owners.")
     my.text_description_short(self, "A sneaky gnome thief.")

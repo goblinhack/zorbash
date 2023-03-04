@@ -1894,6 +1894,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(on_targetted_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_targetted_radially_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_teleport_do),
+    MY_ADD_PYTHON_TP_FUNCTION(on_stealing_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_thrown_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_tick_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_unequip_do),
