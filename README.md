@@ -1,6 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- teleport on stealing                                                                                                                         -->
+<!-- grass should dampen noise                                                                                                                    -->
 <!-- after throwing a dart do not change the shortcut                                                                                             -->
 <!-- dart reuse?                                                                                                                                  -->
 <!-- teleport                                                                                                                                     -->
