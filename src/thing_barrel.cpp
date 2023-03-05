@@ -33,13 +33,13 @@ void Thing::barrel_tick(void)
     }
 
     if (t->is_air_breather()) {
-      t->log("Drowned by a barrel");
+      IF_DEBUG { t->log("Drowned by a barrel"); }
       t->is_attacked_with_dmg_drown(this, this, dmg_crush());
       continue;
     }
 
     if (t->is_crushable()) {
-      t->log("Crushed by a barrel");
+      IF_DEBUG { t->log("Crushed by a barrel"); }
       t->is_attacked_with_dmg_crush(this, this, dmg_crush());
       continue;
     }

@@ -1655,7 +1655,10 @@ int Thing::is_attacked_with_dmg_melee(Thingp hitter, Thingp real_hitter, int dam
   ThingAttackOptions attack_options {};
   attack_options.attack[ THING_ATTACK_MELEE ] = true;
   attack_options.real_hitter                  = real_hitter;
-  hitter->log("Melee attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  IF_DEBUG
+  {
+    hitter->log("Melee attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  }
   TRACE_AND_INDENT();
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1666,7 +1669,11 @@ int Thing::is_attacked_with_dmg_nat_att(Thingp hitter, Thingp real_hitter, int d
   ThingAttackOptions attack_options {};
   attack_options.attack[ THING_ATTACK_NATURAL ] = true;
   attack_options.real_hitter                    = real_hitter;
-  hitter->log("Natural attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  IF_DEBUG
+  {
+    hitter->log("Natural attack %s, real hitter %s", to_short_string().c_str(),
+                real_hitter->to_short_string().c_str());
+  }
   TRACE_AND_INDENT();
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1677,7 +1684,11 @@ int Thing::is_attacked_with_dmg_poison(Thingp hitter, Thingp real_hitter, int da
   ThingAttackOptions attack_options {};
   attack_options.attack[ THING_ATTACK_POISON ] = true;
   attack_options.real_hitter                   = real_hitter;
-  hitter->log("Poison attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  IF_DEBUG
+  {
+    hitter->log("Poison attack %s, real hitter %s", to_short_string().c_str(),
+                real_hitter->to_short_string().c_str());
+  }
   TRACE_AND_INDENT();
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1688,8 +1699,11 @@ int Thing::is_attacked_with_dmg_necrosis(Thingp hitter, Thingp real_hitter, int 
   ThingAttackOptions attack_options {};
   attack_options.attack[ THING_ATTACK_NECROSIS ] = true;
   attack_options.real_hitter                     = real_hitter;
-  hitter->log("Necrosis attack %s, real hitter %s", to_short_string().c_str(),
-              real_hitter->to_short_string().c_str());
+  IF_DEBUG
+  {
+    hitter->log("Necrosis attack %s, real hitter %s", to_short_string().c_str(),
+                real_hitter->to_short_string().c_str());
+  }
   TRACE_AND_INDENT();
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1700,8 +1714,11 @@ int Thing::is_attacked_with_dmg_draining(Thingp hitter, Thingp real_hitter, int 
   ThingAttackOptions attack_options {};
   attack_options.attack[ THING_ATTACK_DRAINING ] = true;
   attack_options.real_hitter                     = real_hitter;
-  hitter->log("Draining attack %s, real hitter %s", to_short_string().c_str(),
-              real_hitter->to_short_string().c_str());
+  IF_DEBUG
+  {
+    hitter->log("Draining attack %s, real hitter %s", to_short_string().c_str(),
+                real_hitter->to_short_string().c_str());
+  }
   TRACE_AND_INDENT();
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1712,7 +1729,10 @@ int Thing::is_attacked_with_dmg_drown(Thingp hitter, Thingp real_hitter, int dam
   ThingAttackOptions attack_options {};
   attack_options.attack[ THING_ATTACK_DROWN ] = true;
   attack_options.real_hitter                  = real_hitter;
-  hitter->log("Drown attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  IF_DEBUG
+  {
+    hitter->log("Drown attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  }
   TRACE_AND_INDENT();
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1723,7 +1743,10 @@ int Thing::is_attacked_with_dmg_bite(Thingp hitter, Thingp real_hitter, int dama
   ThingAttackOptions attack_options {};
   attack_options.attack[ THING_ATTACK_BITE ] = true;
   attack_options.real_hitter                 = real_hitter;
-  hitter->log("Bite attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  IF_DEBUG
+  {
+    hitter->log("Bite attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  }
   TRACE_AND_INDENT();
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1734,7 +1757,10 @@ int Thing::is_attacked_with_dmg_claw(Thingp hitter, Thingp real_hitter, int dama
   ThingAttackOptions attack_options {};
   attack_options.attack[ THING_ATTACK_CLAW ] = true;
   attack_options.real_hitter                 = real_hitter;
-  hitter->log("Claw attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  IF_DEBUG
+  {
+    hitter->log("Claw attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  }
   TRACE_AND_INDENT();
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1745,7 +1771,10 @@ int Thing::is_attacked_with_dmg_cold(Thingp hitter, Thingp real_hitter, int dama
   ThingAttackOptions attack_options {};
   attack_options.attack[ THING_ATTACK_COLD ] = true;
   attack_options.real_hitter                 = real_hitter;
-  hitter->log("Cold attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  IF_DEBUG
+  {
+    hitter->log("Cold attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  }
   TRACE_AND_INDENT();
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1756,7 +1785,10 @@ int Thing::is_attacked_with_dmg_fire(Thingp hitter, Thingp real_hitter, int dama
   ThingAttackOptions attack_options {};
   attack_options.attack[ THING_ATTACK_FIRE ] = true;
   attack_options.real_hitter                 = real_hitter;
-  hitter->log("Fire attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  IF_DEBUG
+  {
+    hitter->log("Fire attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  }
   TRACE_AND_INDENT();
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1770,7 +1802,10 @@ int Thing::is_attacked_with_dmg_heat(Thingp hitter, Thingp real_hitter, int dama
   ThingAttackOptions attack_options {};
   attack_options.attack[ THING_ATTACK_HEAT ] = true;
   attack_options.real_hitter                 = real_hitter;
-  hitter->log("Heat attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  IF_DEBUG
+  {
+    hitter->log("Heat attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  }
   TRACE_AND_INDENT();
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1781,7 +1816,10 @@ int Thing::is_attacked_with_dmg_crush(Thingp hitter, Thingp real_hitter, int dam
   ThingAttackOptions attack_options {};
   attack_options.attack[ THING_ATTACK_CRUSH ] = true;
   attack_options.real_hitter                  = real_hitter;
-  hitter->log("Crush attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  IF_DEBUG
+  {
+    hitter->log("Crush attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  }
   TRACE_AND_INDENT();
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1792,7 +1830,11 @@ int Thing::is_attacked_with_dmg_missile(Thingp hitter, Thingp real_hitter, int d
   ThingAttackOptions attack_options {};
   attack_options.attack[ THING_ATTACK_MISSILE ] = true;
   attack_options.real_hitter                    = real_hitter;
-  hitter->log("Impact attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  IF_DEBUG
+  {
+    hitter->log("Impact attack %s, real hitter %s", to_short_string().c_str(),
+                real_hitter->to_short_string().c_str());
+  }
   TRACE_AND_INDENT();
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1803,8 +1845,11 @@ int Thing::is_attacked_with_dmg_lightning(Thingp hitter, Thingp real_hitter, int
   ThingAttackOptions attack_options {};
   attack_options.attack[ THING_ATTACK_LIGHTNING ] = true;
   attack_options.real_hitter                      = real_hitter;
-  hitter->log("Lightning attack %s, real hitter %s", to_short_string().c_str(),
-              real_hitter->to_short_string().c_str());
+  IF_DEBUG
+  {
+    hitter->log("Lightning attack %s, real hitter %s", to_short_string().c_str(),
+                real_hitter->to_short_string().c_str());
+  }
   TRACE_AND_INDENT();
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1815,7 +1860,11 @@ int Thing::is_attacked_with_dmg_energy(Thingp hitter, Thingp real_hitter, int da
   ThingAttackOptions attack_options {};
   attack_options.attack[ THING_ATTACK_ENERGY ] = true;
   attack_options.real_hitter                   = real_hitter;
-  hitter->log("Energy attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  IF_DEBUG
+  {
+    hitter->log("Energy attack %s, real hitter %s", to_short_string().c_str(),
+                real_hitter->to_short_string().c_str());
+  }
   TRACE_AND_INDENT();
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1826,8 +1875,11 @@ int Thing::is_attacked_with_dmg_negation(Thingp hitter, Thingp real_hitter, int 
   ThingAttackOptions attack_options {};
   attack_options.attack[ THING_ATTACK_NEGATION ] = true;
   attack_options.real_hitter                     = real_hitter;
-  hitter->log("Negation attack %s, real hitter %s", to_short_string().c_str(),
-              real_hitter->to_short_string().c_str());
+  IF_DEBUG
+  {
+    hitter->log("Negation attack %s, real hitter %s", to_short_string().c_str(),
+                real_hitter->to_short_string().c_str());
+  }
   TRACE_AND_INDENT();
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1838,7 +1890,10 @@ int Thing::is_attacked_with_dmg_acid(Thingp hitter, Thingp real_hitter, int dama
   ThingAttackOptions attack_options {};
   attack_options.attack[ THING_ATTACK_ACID ] = true;
   attack_options.real_hitter                 = real_hitter;
-  hitter->log("Acid attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  IF_DEBUG
+  {
+    hitter->log("Acid attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  }
   TRACE_AND_INDENT();
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1849,7 +1904,10 @@ int Thing::is_attacked_with_dmg_water(Thingp hitter, Thingp real_hitter, int dam
   ThingAttackOptions attack_options {};
   attack_options.attack[ THING_ATTACK_WATER ] = true;
   attack_options.real_hitter                  = real_hitter;
-  hitter->log("Water attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  IF_DEBUG
+  {
+    hitter->log("Water attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  }
   TRACE_AND_INDENT();
   return is_hit(hitter, &attack_options, damage);
 }
@@ -1860,7 +1918,11 @@ int Thing::is_attacked_with_dmg_digest(Thingp hitter, Thingp real_hitter, int da
   ThingAttackOptions attack_options {};
   attack_options.attack[ THING_ATTACK_DIGEST ] = true;
   attack_options.real_hitter                   = real_hitter;
-  hitter->log("Digest attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  IF_DEBUG
+  {
+    hitter->log("Digest attack %s, real hitter %s", to_short_string().c_str(),
+                real_hitter->to_short_string().c_str());
+  }
   TRACE_AND_INDENT();
   return is_hit(hitter, &attack_options, damage);
 }

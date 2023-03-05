@@ -624,7 +624,7 @@ bool Thing::equip_use(bool forced, int equip, ThingAttackOptionsp attack_options
       if (is_player()) {
         msg("You attack with bare fists!");
       } else {
-        log("Attacks with nat attack");
+        dbg("Attacks with nat attack");
       }
 
       attack_options->nat_att = true;

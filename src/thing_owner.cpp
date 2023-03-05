@@ -17,7 +17,7 @@ void Thing::on_owner_add(Thingp owner)
     return;
   }
 
-  owner->log("Add owned thing: %s", to_string().c_str());
+  IF_DEBUG { owner->log("Add owned thing: %s", to_string().c_str()); }
   owner->infop()->owned.insert(id);
   owner_id_set(owner->id);
 
@@ -56,7 +56,7 @@ void Thing::on_owner_unset(Thingp owner)
     return;
   }
 
-  owner->log("Remove owned thing: %s", to_string().c_str());
+  IF_DEBUG { owner->log("Remove owned thing: %s", to_string().c_str()); }
   owner->infop()->owned.erase(id);
   owner_id_set(NoThingId);
 
