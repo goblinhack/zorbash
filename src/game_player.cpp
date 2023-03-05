@@ -92,8 +92,8 @@ void Game::place_player(void)
         level->thing_new("fire", point(x + 1, y + 1));
         level->thing_new("small_fire", point(x + 3, y + 3));
       }
-      // level->thing_new("portal", point(x + 2, y + 3));
-      // level->thing_new("portal", point(x - 1, y + 4));
+      level->thing_new("portal", point(x, y + 4));
+      level->thing_new("portal", point(x, y + 7));
       if (0) {
         auto w = level->thing_new("skill_devoted_thrust", point(x, y));
         t->skill_add(w);
@@ -115,7 +115,7 @@ void Game::place_player(void)
         auto w = level->thing_new("staff_lightning", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_fire", point(x, y));
         t->carry(w);
       }

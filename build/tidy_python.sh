@@ -428,7 +428,7 @@ do
       is_obs_for_jump_landing \
       is_obs_for_shoving \
       is_obsidian \
-      is_obs_in_the_way_for_firing \
+      is_obs_in_the_way_for_shooting \
       is_obs_in_the_way_for_jumping \
       is_obs_in_the_way_for_throwing \
       is_obs_wall_or_door \

@@ -53,7 +53,7 @@ Thingp Thing::item_targetted_use_at(Thingp item, Thingp target)
   TRACE_AND_INDENT();
   dbg("Use item %s at %s", item->to_short_string().c_str(), target->curr_at.to_string().c_str());
 
-  auto collatoral_dmg = in_the_way_for_firing(curr_at, target->curr_at, 1);
+  auto collatoral_dmg = in_the_way_for_shooting(curr_at, target->curr_at, 1);
   if (collatoral_dmg.size()) {
     target = collatoral_dmg[ 0 ];
   }

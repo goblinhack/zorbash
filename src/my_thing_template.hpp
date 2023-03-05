@@ -245,6 +245,7 @@ private:
   int _is_able_to_attack_owner {};
   int _is_able_to_be_resurrected {};
   int _is_able_to_be_surprised {};
+  int _is_able_to_be_teleported {};
   int _is_able_to_break_down_doors {};
   int _is_able_to_break_out_of_ice {};
   int _is_able_to_break_out_of_webs {};
@@ -494,8 +495,8 @@ private:
   int _is_obs_for_jump_landing {};
   int _is_obs_for_shoving {};
   int _is_obsidian {};
-  int _is_obs_in_the_way_for_firing {};
   int _is_obs_in_the_way_for_jumping {};
+  int _is_obs_in_the_way_for_shooting {};
   int _is_obs_in_the_way_for_throwing {};
   int _is_obs_wall_or_door {};
   int _is_obs_when_dead {};
@@ -668,7 +669,6 @@ private:
   int _is_unused_flag195 {};
   int _is_unused_flag196 {};
   int _is_unused_flag197 {};
-  int _is_able_to_be_teleported {};
   int _is_unused_flag2 {};
   int _is_unused_flag20 {};
   int _is_unused_flag21 {};
@@ -1529,6 +1529,7 @@ public:
   int is_able_to_attack_owner(void) const;
   int is_able_to_be_resurrected(void) const;
   int is_able_to_be_surprised(void) const;
+  int is_able_to_be_teleported(void) const;
   int is_able_to_break_down_doors(void) const;
   int is_able_to_break_out_of_ice(void) const;
   int is_able_to_break_out_of_webs(void) const;
@@ -1777,8 +1778,8 @@ public:
   int is_obs_for_jump_landing(void) const;
   int is_obs_for_shoving(void) const;
   int is_obsidian(void) const;
-  int is_obs_in_the_way_for_firing(void) const;
   int is_obs_in_the_way_for_jumping(void) const;
+  int is_obs_in_the_way_for_shooting(void) const;
   int is_obs_in_the_way_for_throwing(void) const;
   int is_obs_wall_or_door(void) const;
   int is_obs_when_dead(void) const;
@@ -1949,7 +1950,6 @@ public:
   int is_unused_flag195(void) const;
   int is_unused_flag196(void) const;
   int is_unused_flag197(void) const;
-  int is_able_to_be_teleported(void) const;
   int is_unused_flag19(void) const;
   int is_unused_flag1(void) const;
   int is_unused_flag20(void) const;
@@ -2268,6 +2268,7 @@ public:
   void is_able_to_attack_owner_set(int v);
   void is_able_to_be_resurrected_set(int v);
   void is_able_to_be_surprised_set(int v);
+  void is_able_to_be_teleported_set(int v);
   void is_able_to_break_down_doors_set(int v);
   void is_able_to_break_out_of_ice_set(int v);
   void is_able_to_break_out_of_webs_set(int v);
@@ -2517,8 +2518,8 @@ public:
   void is_obs_for_jump_landing_set(int v);
   void is_obs_for_shoving_set(int v);
   void is_obsidian_set(int v);
-  void is_obs_in_the_way_for_firing_set(int v);
   void is_obs_in_the_way_for_jumping_set(int v);
+  void is_obs_in_the_way_for_shooting_set(int v);
   void is_obs_in_the_way_for_throwing_set(int v);
   void is_obs_wall_or_door_set(int v);
   void is_obs_when_dead_set(int v);
@@ -2689,7 +2690,6 @@ public:
   void is_unused_flag195_set(int v);
   void is_unused_flag196_set(int v);
   void is_unused_flag197_set(int v);
-  void is_able_to_be_teleported_set(int v);
   void is_unused_flag19_set(int v);
   void is_unused_flag1_set(int v);
   void is_unused_flag20_set(int v);

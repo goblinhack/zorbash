@@ -2416,10 +2416,10 @@ int Thing::is_msg_allowed_is_dead(void)
   return (tp()->is_msg_allowed_is_dead());
 }
 
-int Thing::is_obs_in_the_way_for_firing(void)
+int Thing::is_obs_in_the_way_for_shooting(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_obs_in_the_way_for_firing());
+  return (tp()->is_obs_in_the_way_for_shooting());
 }
 
 int Thing::is_msg_allowed_senses_danger(void)

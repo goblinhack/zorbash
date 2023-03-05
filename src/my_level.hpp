@@ -764,8 +764,6 @@ public:
   uint8_t heatmap_no_check(const point p);
   uint8_t is_able_to_stand_on(const int x, const int y);
   uint8_t is_able_to_stand_on(const point p);
-  uint8_t is_portal(const int x, const int y);
-  uint8_t is_portal(const point p);
   uint8_t is_acid(const int x, const int y);
   uint8_t is_acid(const point p);
   uint8_t is_ascend_dungeon(const int x, const int y);
@@ -848,6 +846,8 @@ public:
   uint8_t is_monst(const int x, const int y);
   uint8_t is_monst(const point p);
   uint8_t is_monst_or_player(const point p);
+  uint8_t is_portal(const int x, const int y);
+  uint8_t is_portal(const point p);
   uint8_t is_potion(const int x, const int y);
   uint8_t is_potion(const point p);
   uint8_t is_red_blood(const int x, const int y);
@@ -1011,8 +1011,6 @@ public:
   void inventory_dump(void);
   void is_able_to_stand_on_set(const int x, const int y);
   void is_able_to_stand_on_unset(const int x, const int y);
-  void is_portal_set(const int x, const int y);
-  void is_portal_unset(const int x, const int y);
   void is_acid_set(const int x, const int y);
   void is_acid_unset(const int x, const int y);
   void is_ascend_dungeon_set(const int x, const int y);
@@ -1124,6 +1122,8 @@ public:
   void is_obs_when_dead_no_check_unset(const int x, const int y);
   void is_obs_when_dead_set(const int x, const int y);
   void is_obs_when_dead_unset(const int x, const int y);
+  void is_portal_set(const int x, const int y);
+  void is_portal_unset(const int x, const int y);
   void is_potion_set(const int x, const int y);
   void is_potion_unset(const int x, const int y);
   void is_red_blood_set(const int x, const int y);

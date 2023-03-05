@@ -136,6 +136,7 @@ PyObject *thing_initial_charge_count(PyObject *obj, PyObject *args, PyObject *ke
 PyObject *thing_is_able_to_attack_mobs(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_attack_owner(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_be_surprised(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_be_teleported(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_break_down_doors(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_break_out_of_ice(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_break_out_of_webs(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -393,8 +394,8 @@ PyObject *thing_is_obs_destructable(PyObject *obj, PyObject *args, PyObject *key
 PyObject *thing_is_obs_for_jump_landing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obs_for_shoving(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obsidian(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_obs_in_the_way_for_firing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obs_in_the_way_for_jumping(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_obs_in_the_way_for_shooting(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obs_in_the_way_for_throwing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obs_wall_or_door(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obs_when_dead(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -565,7 +566,6 @@ PyObject *thing_is_unused_flag194(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag195(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag196(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag197(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_able_to_be_teleported(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag19(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag1(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag20(PyObject *obj, PyObject *args, PyObject *keywds);

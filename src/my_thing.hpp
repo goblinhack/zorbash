@@ -363,7 +363,7 @@ public:
   Thingp immediate_mob(void);
   Thingp immediate_owner(void);
   Thingp immediate_spawner(void);
-  Thingp in_the_way_for_firing(const point s, const point e, int x, int y);
+  Thingp in_the_way_for_shooting(const point s, const point e, int x, int y);
   Thingp in_the_way_for_jumping(const point s, const point e, int x, int y);
   Thingp in_the_way_for_throwing(const point s, const point e, int x, int y);
   Thingp item_targetted_use_at(Thingp wand, point at);
@@ -386,7 +386,7 @@ public:
   Thingp buff_find(const std::string &);
 
   std::vector< Thingp > in_the_way_for_jumping(const point s, const point e, size_t max_elems = 0);
-  std::vector< Thingp > in_the_way_for_firing(const point s, const point e, size_t max_elems = 0);
+  std::vector< Thingp > in_the_way_for_shooting(const point s, const point e, size_t max_elems = 0);
   std::vector< Thingp > in_the_way_for_throwing(const point s, const point e, size_t max_elems = 0);
 
   // begin sort marker3 {
@@ -606,9 +606,10 @@ public:
   bool steal_treasure_from(Thingp);
   bool teleport_carefree(TeleportReason, point to);
   bool teleport_carefree(TeleportReason, point to, bool *too_far);
-  bool teleport_portal(Thingp portal);
   bool teleport_carefully(TeleportReason, point to);
   bool teleport_carefully(TeleportReason, point to, bool *too_far);
+  bool teleport_portal_find_target(point &target);
+  bool teleport_portal(Thingp portal);
   bool teleport_randomly_away_from_player(TeleportReason);
   bool teleport_randomly(TeleportReason, float max_distance = 0.0);
   bool teleport_randomly_towards_player(TeleportReason);
@@ -1244,6 +1245,7 @@ public:
   int is_able_to_attack_owner(void);
   int is_able_to_be_resurrected(void);
   int is_able_to_be_surprised(void);
+  int is_able_to_be_teleported(void);
   int is_able_to_break_down_doors(void);
   int is_able_to_break_out_of_ice(void);
   int is_able_to_break_out_of_webs(void);
@@ -1519,8 +1521,8 @@ public:
   int is_obs_for_jump_landing(void);
   int is_obs_for_shoving(void);
   int is_obsidian(void);
-  int is_obs_in_the_way_for_firing(void);
   int is_obs_in_the_way_for_jumping(void);
+  int is_obs_in_the_way_for_shooting(void);
   int is_obs_in_the_way_for_throwing(void);
   int is_obs_wall_or_door(void);
   int is_obs_when_dead(void);
@@ -1691,7 +1693,6 @@ public:
   int is_unused_flag195(void);
   int is_unused_flag196(void);
   int is_unused_flag197(void);
-  int is_able_to_be_teleported(void);
   int is_unused_flag19(void);
   int is_unused_flag1(void);
   int is_unused_flag20(void);
@@ -2465,7 +2466,6 @@ public:
   void avoid_tick(void);
   void awake(void);
   void barrel_tick(void);
-  void portal_tick(void);
   void blit_ascii_adjust_color(color &c, bool fg, bool leftbar);
   void blit_ascii_adjust_color_hue(color &c, bool fg);
   void blit_ascii_at(point tl, bool lit = true, bool leftbar = false);
@@ -2687,6 +2687,7 @@ public:
   void poison_tick(void);
   void polymorph(Tpp);
   void popup(const std::string &);
+  void portal_tick(void);
   void reinit(void);
   void release_followers(void);
   void remove_all_references(void);

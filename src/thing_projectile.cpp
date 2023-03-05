@@ -67,20 +67,11 @@ Thingp Thing::fire_projectile_at(Thingp item, const std::string &target_name_pro
     die("No projectile name");
   }
 
-  if (is_player()) {
-    msg("You fire %s at %s.", item->text_the().c_str(), target->text_the().c_str());
-  } else if (item) {
-    msg("%s fires %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
-  } else {
-    msg("%s fires at %s.", text_The().c_str(), target->text_the().c_str());
-  }
-  TRACE_AND_INDENT();
-
   //
   // Projectiles hit the first thing in the way. But ignore if it hits
   // ourselves. i.e. if we're in foliage
   //
-  auto collatoral_dmg = in_the_way_for_firing(curr_at, target->curr_at, 1);
+  auto collatoral_dmg = in_the_way_for_shooting(curr_at, target->curr_at, 1);
   if (collatoral_dmg.size()) {
     target = collatoral_dmg[ 0 ];
 
@@ -98,6 +89,15 @@ Thingp Thing::fire_projectile_at(Thingp item, const std::string &target_name_pro
       }
     }
   }
+
+  if (is_player()) {
+    msg("You shoot %s at %s.", item->text_the().c_str(), target->text_the().c_str());
+  } else if (item) {
+    msg("%s shoots %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
+  } else {
+    msg("%s shoots at %s.", text_The().c_str(), target->text_the().c_str());
+  }
+  TRACE_AND_INDENT();
 
   auto start = last_blit_at;
   auto end   = target->last_blit_at;
@@ -140,7 +140,45 @@ Thingp Thing::fire_projectile_at(Thingp item, const std::string &target_name_pro
     return nullptr;
   }
 
-  dbg("Firing named projectile with: %s at %s", projectile->to_string().c_str(), target->to_short_string().c_str());
+  //
+  // Find the end of the portal which is where we will fire the new projectile.
+  //
+  if (target && target->is_portal()) {
+    auto  delta = target->curr_at - curr_at;
+    point other_portal;
+
+    if (target->teleport_portal_find_target(other_portal)) {
+      point other_portal_target = other_portal + delta;
+
+      dbg("Shooting named projectile from other portal at %s with target at %s", other_portal.to_string().c_str(),
+          other_portal_target.to_string().c_str());
+
+      level->thing_new(target_name_projectile, other_portal + delta, owner);
+
+      //
+      // Fire a 2nd particle from the portal end point.
+      //
+      FOR_ALL_GRID_THINGS(level, grid_thing, other_portal_target.x, other_portal_target.y)
+      {
+        if (grid_thing->is_the_grid) {
+          ProjectileInfo info {};
+          info.pixel_start  = target->last_blit_at;
+          info.map_start    = target->curr_at;
+          info.pixel_stop   = grid_thing->last_blit_at;
+          info.map_stop     = grid_thing->curr_at;
+          info.pixel_map_at = level->pixel_map_at;
+
+          level->new_projectile(projectile->id, target->id, info, 200);
+          break;
+        }
+      }
+      FOR_ALL_THINGS_END()
+    } else {
+      dbg("Failed to shoot named projectile from other portal at %s", other_portal.to_string().c_str());
+    }
+  }
+
+  dbg("Shooting named projectile with: %s at %s", projectile->to_string().c_str(), target->to_short_string().c_str());
 
   if (! projectile->is_projectile()) {
     if (is_player()) {

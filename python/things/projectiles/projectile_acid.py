@@ -20,11 +20,11 @@ def tp_init(name, text_long_name, text_short_name):
     my.collision_check(self, True)
     my.dmg_acid_dice(self, "1d10")  # This is the damage when the monst acids
     my.gfx_ascii_shown(self, True)
+    my.is_able_to_be_teleported(self, True)
     my.is_acid(self, True)
     my.is_loggable(self, True)
     my.is_no_tile(self, True)
     my.is_projectile(self, True)
-    my.is_able_to_be_teleported(self, True)
     my.is_usable(self, True)
     my.on_born_do(self, "me.on_born()")
     my.text_a_or_an(self, "a")

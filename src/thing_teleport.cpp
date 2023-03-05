@@ -405,54 +405,6 @@ bool Thing::teleport_carefully(TeleportReason reason, point p, bool *too_far)
   return teleport(reason, p, too_far);
 }
 
-bool Thing::teleport_portal(Thingp portal)
-{
-  TRACE_NO_INDENT();
-
-  dbg("Entering a portal: %s", portal->to_short_string().c_str());
-
-  TeleportReason reason;
-  reason.teleport_carefully = false;
-  reason.teleport_limit     = false;
-
-  auto radius = 30;
-
-  //
-  // Try to find another portal
-  //
-  for (int dx = -radius; dx < radius; dx++) {
-    for (int dy = -radius; dy < radius; dy++) {
-
-      auto px = curr_at.x + dx;
-      auto py = curr_at.y + dy;
-
-      if (! level->is_portal(px, py)) {
-        continue;
-      }
-
-      //
-      // Ignore the originating portal
-      //
-      if ((portal->curr_at.x == px) && (portal->curr_at.y == py)) {
-        continue;
-      }
-
-      dbg("Found a new portal at: %d,%d", px, py);
-
-      //
-      // Found one.
-      //
-      bool too_far = false;
-
-      return teleport(reason, point(px, py), &too_far);
-    }
-  }
-
-  dbg("Did not find a portal, teleport randomly");
-
-  return teleport_randomly(reason, radius);
-}
-
 bool Thing::teleport_carefree(TeleportReason reason, point p, bool *too_far)
 {
   TRACE_NO_INDENT();

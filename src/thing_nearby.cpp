@@ -299,7 +299,7 @@ Thingp Thing::best_visible_target_get(void)
         //
         // If no clear shot, then ignore
         //
-        if (in_the_way_for_firing(curr_at, t->curr_at, 1).size()) {
+        if (in_the_way_for_shooting(curr_at, t->curr_at, 1).size()) {
           continue;
         }
 

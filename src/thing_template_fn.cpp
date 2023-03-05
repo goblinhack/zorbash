@@ -323,6 +323,7 @@ int Tp::is_able_to_attack_mobs(void) const { return _is_able_to_attack_mobs; }
 int Tp::is_able_to_attack_owner(void) const { return _is_able_to_attack_owner; }
 int Tp::is_able_to_be_resurrected(void) const { return _is_able_to_be_resurrected; }
 int Tp::is_able_to_be_surprised(void) const { return _is_able_to_be_surprised; }
+int Tp::is_able_to_be_teleported(void) const { return _is_able_to_be_teleported; }
 int Tp::is_able_to_break_down_doors(void) const { return _is_able_to_break_down_doors; }
 int Tp::is_able_to_break_out_of_ice(void) const { return _is_able_to_break_out_of_ice; }
 int Tp::is_able_to_break_out_of_webs(void) const { return _is_able_to_break_out_of_webs; }
@@ -571,8 +572,8 @@ int Tp::is_obs_for_ai(void) const { return _is_obs_for_ai; }
 int Tp::is_obs_for_jump_landing(void) const { return _is_obs_for_jump_landing; }
 int Tp::is_obs_for_shoving(void) const { return _is_obs_for_shoving; }
 int Tp::is_obsidian(void) const { return _is_obsidian; }
-int Tp::is_obs_in_the_way_for_firing(void) const { return _is_obs_in_the_way_for_firing; }
 int Tp::is_obs_in_the_way_for_jumping(void) const { return _is_obs_in_the_way_for_jumping; }
+int Tp::is_obs_in_the_way_for_shooting(void) const { return _is_obs_in_the_way_for_shooting; }
 int Tp::is_obs_in_the_way_for_throwing(void) const { return _is_obs_in_the_way_for_throwing; }
 int Tp::is_obs_wall_or_door(void) const { return _is_obs_wall_or_door; }
 int Tp::is_obs_when_dead(void) const { return _is_obs_when_dead; }
@@ -743,7 +744,6 @@ int Tp::is_unused_flag194(void) const { return _is_unused_flag194; }
 int Tp::is_unused_flag195(void) const { return _is_unused_flag195; }
 int Tp::is_unused_flag196(void) const { return _is_unused_flag196; }
 int Tp::is_unused_flag197(void) const { return _is_unused_flag197; }
-int Tp::is_able_to_be_teleported(void) const { return _is_able_to_be_teleported; }
 int Tp::is_unused_flag19(void) const { return _is_unused_flag19; }
 int Tp::is_unused_flag1(void) const { return _is_unused_flag1; }
 int Tp::is_unused_flag20(void) const { return _is_unused_flag20; }
@@ -1062,6 +1062,7 @@ void Tp::is_able_to_attack_mobs_set(int v) { _is_able_to_attack_mobs = v; }
 void Tp::is_able_to_attack_owner_set(int v) { _is_able_to_attack_owner = v; }
 void Tp::is_able_to_be_resurrected_set(int v) { _is_able_to_be_resurrected = v; }
 void Tp::is_able_to_be_surprised_set(int v) { _is_able_to_be_surprised = v; }
+void Tp::is_able_to_be_teleported_set(int v) { _is_able_to_be_teleported = v; }
 void Tp::is_able_to_break_down_doors_set(int v) { _is_able_to_break_down_doors = v; }
 void Tp::is_able_to_break_out_of_ice_set(int v) { _is_able_to_break_out_of_ice = v; }
 void Tp::is_able_to_break_out_of_webs_set(int v) { _is_able_to_break_out_of_webs = v; }
@@ -1311,8 +1312,8 @@ void Tp::is_obs_for_ai_set(int v) { _is_obs_for_ai = v; }
 void Tp::is_obs_for_jump_landing_set(int v) { _is_obs_for_jump_landing = v; }
 void Tp::is_obs_for_shoving_set(int v) { _is_obs_for_shoving = v; }
 void Tp::is_obsidian_set(int v) { _is_obsidian = v; }
-void Tp::is_obs_in_the_way_for_firing_set(int v) { _is_obs_in_the_way_for_firing = v; }
 void Tp::is_obs_in_the_way_for_jumping_set(int v) { _is_obs_in_the_way_for_jumping = v; }
+void Tp::is_obs_in_the_way_for_shooting_set(int v) { _is_obs_in_the_way_for_shooting = v; }
 void Tp::is_obs_in_the_way_for_throwing_set(int v) { _is_obs_in_the_way_for_throwing = v; }
 void Tp::is_obs_wall_or_door_set(int v) { _is_obs_wall_or_door = v; }
 void Tp::is_obs_when_dead_set(int v) { _is_obs_when_dead = v; }
@@ -1483,7 +1484,6 @@ void Tp::is_unused_flag194_set(int v) { _is_unused_flag194 = v; }
 void Tp::is_unused_flag195_set(int v) { _is_unused_flag195 = v; }
 void Tp::is_unused_flag196_set(int v) { _is_unused_flag196 = v; }
 void Tp::is_unused_flag197_set(int v) { _is_unused_flag197 = v; }
-void Tp::is_able_to_be_teleported_set(int v) { _is_able_to_be_teleported = v; }
 void Tp::is_unused_flag19_set(int v) { _is_unused_flag19 = v; }
 void Tp::is_unused_flag1_set(int v) { _is_unused_flag1 = v; }
 void Tp::is_unused_flag20_set(int v) { _is_unused_flag20 = v; }

@@ -7,7 +7,7 @@
 #include "my_monst.hpp"
 #include "my_thing.hpp"
 
-Thingp Thing::in_the_way_for_firing(const point s, const point e, int x, int y)
+Thingp Thing::in_the_way_for_shooting(const point s, const point e, int x, int y)
 {
   TRACE_NO_INDENT();
 
@@ -72,7 +72,7 @@ Thingp Thing::in_the_way_for_firing(const point s, const point e, int x, int y)
       return t;
     }
 
-    if (t->is_obs_in_the_way_for_firing()) {
+    if (t->is_obs_in_the_way_for_shooting()) {
       dbg2("This is in the way for firing (obs): %s", t->to_short_string().c_str());
       return t;
     }
@@ -95,7 +95,7 @@ Thingp Thing::in_the_way_for_firing(const point s, const point e, int x, int y)
 /*
  * We're trying to hit a target, but something might be in the way.
  */
-std::vector< Thingp > Thing::in_the_way_for_firing(const point s, const point e, size_t max_elems)
+std::vector< Thingp > Thing::in_the_way_for_shooting(const point s, const point e, size_t max_elems)
 {
   TRACE_NO_INDENT();
 
@@ -115,7 +115,7 @@ std::vector< Thingp > Thing::in_the_way_for_firing(const point s, const point e,
       break;
     }
 
-    auto it = in_the_way_for_firing(s, e, x0, y0);
+    auto it = in_the_way_for_shooting(s, e, x0, y0);
     if (it) {
       out.push_back(it);
       if (max_elems) {

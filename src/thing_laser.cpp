@@ -165,7 +165,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
     dbg("Firing laser effect");
     TRACE_AND_INDENT();
 
-    auto collatoral_dmg = in_the_way_for_firing(curr_at, target->curr_at);
+    auto collatoral_dmg = in_the_way_for_shooting(curr_at, target->curr_at);
     if (collatoral_dmg.size()) {
       dbg("Firing laser effect (collatoral damage)");
       TRACE_AND_INDENT();

@@ -77,8 +77,8 @@ def tp_init(name, text_long_name):
     my.is_obs_for_ai(self, True)
     my.is_obs_for_jump_landing(self, True)
     my.is_obs_for_shoving(self, True)
-    my.is_obs_in_the_way_for_firing(self, True)
     my.is_obs_in_the_way_for_jumping(self, True)
+    my.is_obs_in_the_way_for_shooting(self, True)
     my.is_obs_in_the_way_for_throwing(self, True)
     my.is_shovable_and_sticky(self, True)  # so a dogman in ice is also shoved
     my.is_shovable(self, True)

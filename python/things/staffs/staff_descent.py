@@ -109,6 +109,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gold_value_dice(self, "500")
     my.health_initial_dice(self, "20+1d10")
     my.health_initial_dice(self, "50")
+    my.is_able_to_be_teleported(self, True)
     my.is_able_to_fall(self, True)
     my.is_bag_item(self, True)
     my.is_biome_dungeon(self, True)
@@ -121,7 +122,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_enchantable(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)
-    my.is_able_to_be_teleported(self, True)
     my.is_loggable(self, True)
     my.is_magical(self, True)
     my.is_staff(self, True)
@@ -131,7 +131,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_tickable(self, True)  # So it can interact with fire
     my.is_treasure_class_C(self, True)
     my.is_treasure(self, True)
-    my.is_able_to_be_teleported(self, True)
     my.is_treasure_type(self, True)
     my.is_usable(self, True)
     my.is_wooden(self, True)
