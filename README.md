@@ -1,5 +1,12 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<<<<<<< HEAD
+=======
+<!-- teleport on stealing                                                                                                                         -->
+<!-- grass should dampen noise                                                                                                                    -->
+<!-- after throwing a dart do not change the shortcut                                                                                             -->
+<!-- dart reuse?                                                                                                                                  -->
+>>>>>>> 71495612639debe7e147bf6c71989348046f3278
 <!-- teleport                                                                                                                                     -->
 <!-- - dimension portal                                                                                                                           -->
 <!-- - teleport block                                                                                                                             -->
