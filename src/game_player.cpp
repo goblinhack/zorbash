@@ -108,6 +108,13 @@ void Game::place_player(void)
         auto w = level->thing_new("skill_secondary_attack", point(x, y));
         t->skill_add(w);
       }
+
+      if (0) {
+        level->thing_new("wet_grass1", point(x + 1, y));
+        level->thing_new("wet_grass2", point(x + 2, y));
+        level->thing_new("wet_grass4", point(x + 3, y));
+      }
+
       if (0) {
         level->thing_new("gold6", point(x + 1, y));
         auto w = level->thing_new("skill_gold_to_health", point(x, y));

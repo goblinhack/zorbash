@@ -21,8 +21,10 @@ PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObjec
 PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_hunger_clock_tick_freq_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_hunger_is_insatiable_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_able_to_amplify_footsteps_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_be_resurrected_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_break_out_of_ice_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_able_to_dampen_footsteps_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_freeze_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_melt_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_spawn_things_at(PyObject *obj, PyObject *args, PyObject *keywds);

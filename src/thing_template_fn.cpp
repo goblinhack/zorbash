@@ -319,6 +319,7 @@ int Tp::hunger_is_insatiable(void) const { return _hunger_is_insatiable; }
 int Tp::initial_temperature(void) const { return _initial_temperature; }
 int Tp::internal_has_dir_anim(void) const { return _internal_has_dir_anim; }
 int Tp::internal_has_hp_anim(void) const { return _internal_has_hp_anim; }
+int Tp::is_able_to_amplify_footsteps(void) const { return _is_able_to_amplify_footsteps; }
 int Tp::is_able_to_attack_mobs(void) const { return _is_able_to_attack_mobs; }
 int Tp::is_able_to_attack_owner(void) const { return _is_able_to_attack_owner; }
 int Tp::is_able_to_be_resurrected(void) const { return _is_able_to_be_resurrected; }
@@ -329,6 +330,7 @@ int Tp::is_able_to_break_out_of_ice(void) const { return _is_able_to_break_out_o
 int Tp::is_able_to_break_out_of_webs(void) const { return _is_able_to_break_out_of_webs; }
 int Tp::is_able_to_change_levels(void) const { return _is_able_to_change_levels; }
 int Tp::is_able_to_collect_keys(void) const { return _is_able_to_collect_keys; }
+int Tp::is_able_to_dampen_footsteps(void) const { return _is_able_to_dampen_footsteps; }
 int Tp::is_able_to_enchant_items(void) const { return _is_able_to_enchant_items; }
 int Tp::is_able_to_fall(void) const { return _is_able_to_fall; }
 int Tp::is_able_to_follow(void) const { return _is_able_to_follow; }
@@ -741,9 +743,6 @@ int Tp::is_unused_flag191(void) const { return _is_unused_flag191; }
 int Tp::is_unused_flag192(void) const { return _is_unused_flag192; }
 int Tp::is_unused_flag193(void) const { return _is_unused_flag193; }
 int Tp::is_unused_flag194(void) const { return _is_unused_flag194; }
-int Tp::is_unused_flag195(void) const { return _is_unused_flag195; }
-int Tp::is_unused_flag196(void) const { return _is_unused_flag196; }
-int Tp::is_unused_flag197(void) const { return _is_unused_flag197; }
 int Tp::is_unused_flag19(void) const { return _is_unused_flag19; }
 int Tp::is_unused_flag1(void) const { return _is_unused_flag1; }
 int Tp::is_unused_flag20(void) const { return _is_unused_flag20; }
@@ -845,6 +844,7 @@ int Tp::is_weapon_class_A(void) const { return _is_weapon_class_A; }
 int Tp::is_weapon_class_B(void) const { return _is_weapon_class_B; }
 int Tp::is_weapon_class_C(void) const { return _is_weapon_class_C; }
 int Tp::is_weapon(void) const { return _is_weapon; }
+int Tp::is_wet_grass_trampled(void) const { return _is_wet_grass_trampled; }
 int Tp::is_wet_grass(void) const { return _is_wet_grass; }
 int Tp::is_wooden(void) const { return _is_wooden; }
 int Tp::item_height(void) const { return _item_height ? _item_height : 1; }
@@ -1058,6 +1058,7 @@ void Tp::hunger_is_hunger_level_starving_at_pct_set(int v) { _hunger_is_hunger_l
 void Tp::hunger_is_insatiable_set(int v) { _hunger_is_insatiable = v; }
 void Tp::internal_has_dir_anim_set(int v) { _internal_has_dir_anim = v; }
 void Tp::internal_has_hp_anim_set(int v) { _internal_has_hp_anim = v; }
+void Tp::is_able_to_amplify_footsteps_set(int v) { _is_able_to_amplify_footsteps = v; }
 void Tp::is_able_to_attack_mobs_set(int v) { _is_able_to_attack_mobs = v; }
 void Tp::is_able_to_attack_owner_set(int v) { _is_able_to_attack_owner = v; }
 void Tp::is_able_to_be_resurrected_set(int v) { _is_able_to_be_resurrected = v; }
@@ -1068,6 +1069,7 @@ void Tp::is_able_to_break_out_of_ice_set(int v) { _is_able_to_break_out_of_ice =
 void Tp::is_able_to_break_out_of_webs_set(int v) { _is_able_to_break_out_of_webs = v; }
 void Tp::is_able_to_change_levels_set(int v) { _is_able_to_change_levels = v; }
 void Tp::is_able_to_collect_keys_set(int v) { _is_able_to_collect_keys = v; }
+void Tp::is_able_to_dampen_footsteps_set(int v) { _is_able_to_dampen_footsteps = v; }
 void Tp::is_able_to_enchant_items_set(int v) { _is_able_to_enchant_items = v; }
 void Tp::is_able_to_fall_set(int v) { _is_able_to_fall = v; }
 void Tp::is_able_to_follow_set(int v) { _is_able_to_follow = v; }
@@ -1481,9 +1483,6 @@ void Tp::is_unused_flag191_set(int v) { _is_unused_flag191 = v; }
 void Tp::is_unused_flag192_set(int v) { _is_unused_flag192 = v; }
 void Tp::is_unused_flag193_set(int v) { _is_unused_flag193 = v; }
 void Tp::is_unused_flag194_set(int v) { _is_unused_flag194 = v; }
-void Tp::is_unused_flag195_set(int v) { _is_unused_flag195 = v; }
-void Tp::is_unused_flag196_set(int v) { _is_unused_flag196 = v; }
-void Tp::is_unused_flag197_set(int v) { _is_unused_flag197 = v; }
 void Tp::is_unused_flag19_set(int v) { _is_unused_flag19 = v; }
 void Tp::is_unused_flag1_set(int v) { _is_unused_flag1 = v; }
 void Tp::is_unused_flag20_set(int v) { _is_unused_flag20 = v; }
@@ -1586,6 +1585,7 @@ void Tp::is_weapon_class_B_set(int v) { _is_weapon_class_B = v; }
 void Tp::is_weapon_class_C_set(int v) { _is_weapon_class_C = v; }
 void Tp::is_weapon_set(int v) { _is_weapon = v; }
 void Tp::is_wet_grass_set(int v) { _is_wet_grass = v; }
+void Tp::is_wet_grass_trampled_set(int v) { _is_wet_grass_trampled = v; }
 void Tp::is_wooden_set(int v) { _is_wooden = v; }
 void Tp::item_height_set(int v) { _item_height = v; }
 void Tp::item_width_set(int v) { _item_width = v; }

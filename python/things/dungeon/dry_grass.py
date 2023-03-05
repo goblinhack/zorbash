@@ -21,6 +21,7 @@ def tp_init(name, tiles=[]):
     my.gfx_pixelart_shadow_very_short(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.gfx_pixelart_submergable(self, True)
+    my.is_able_to_amplify_footsteps(self, True)
     my.is_able_to_fall(self, True)
     my.is_biome_dungeon(self, True)
     my.is_burnable(self, True)
@@ -42,7 +43,7 @@ def tp_init(name, tiles=[]):
 
     for t in tiles:
         my.tile(self, delay_ms=300,
-                ascii_fg_char="three_dots", ascii_bg_col_name="", ascii_fg_col_name="darkolivegreen2",
+                ascii_fg_char="four_dots", ascii_bg_col_name="", ascii_fg_col_name="darkolivegreen2",
                 tile=t)
 
     my.tp_update(self)

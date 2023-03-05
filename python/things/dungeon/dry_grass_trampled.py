@@ -26,6 +26,7 @@ def tp_init(name, tiles=[]):
     my.is_combustible(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_described_when_hovering_over(self, True)
+    my.is_dry_grass(self, True)
     my.is_dry_grass_trampled(self, True)
     my.on_hit_and_now_dead_do(self, "me.on_hit_and_now_dead()")
     my.temperature_max(self, 50)
@@ -33,7 +34,7 @@ def tp_init(name, tiles=[]):
     my.temperature_sensitive(self, True)
     my.temperature_sensitive_to_sudden_changes(self, True)
     my.text_a_or_an(self, "the")
-    my.text_description_short(self, "Trampled grass.")
+    my.text_description_short(self, "Trampled dry grass.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_FLOOR2)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -41,7 +42,7 @@ def tp_init(name, tiles=[]):
 
     for t in tiles:
         my.tile(self,
-                ascii_fg_char="three_dots", ascii_bg_col_name="", ascii_fg_col_name="darkgreen",
+                ascii_fg_char="three_dots", ascii_bg_col_name="", ascii_fg_col_name="brown",
                 tile=t)
 
     my.tp_update(self)

@@ -38,19 +38,23 @@ public:
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_for_jump_landing {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _noise_blocker {};
 
+  // begin sort marker1 {
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _fade_in_map {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _gfx_water {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _heatmap {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_able_to_amplify_footsteps {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_able_to_dampen_footsteps {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_able_to_stand_on {};
-  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_portal {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_acid {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_ascend_dungeon {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_ascend_sewer {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_barrel {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_basalt {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_block_of_ice {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_brazier {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_bridge {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_burnable {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_carnivorous_plant {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_chasm {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_cold {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_combustible {};
@@ -69,18 +73,17 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_fire {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_floor {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_foliage {};
-  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_carnivorous_plant {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_food {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_gas_poison {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_gold {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_green_blood {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_hazard {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_heavy {};
-  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_block_of_ice {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_key {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_lava {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_mob {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_monst {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_portal {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_potion {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_red_blood {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_ring {};
@@ -91,15 +94,16 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_shovable {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_skillstone {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_smoke {};
-  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_steam {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_spiderweb {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_staff {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_steam {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_sticky {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_tentacle {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_torch {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_treasure_type {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_wall {};
-  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_staff {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_wet_grass {};
+  // end sort marker1 }
 
   //
   // This is what the player has seen on this level, now and forever.
@@ -681,7 +685,7 @@ public:
   Tpp get_sewer_biome_random_monst(point p, biome_t, monst_type_t);
   Tpp get_random_monst(point p, biome_t, monst_type_t, monst_class_t, int difficulty_offset = 0);
 
-  // begin sort marker1 {
+  // begin sort marker2 {
   bool buffbox_over(const uint32_t slot);
   bool can_see_obstacle(int x, int y);
   bool can_see_unimpeded(const point &start, const point &end);
@@ -736,7 +740,7 @@ public:
   bool skillbox_chosen(const uint32_t slot);
   bool skillbox_over(const uint32_t slot);
   bool update_map_mini_should_show_monst(int x, int y);
-  // end sort marker1 }
+  // end sort marker2 }
 
   int total_monst_hp_level(void);
   int total_monst_dmg_level(void);
@@ -752,7 +756,7 @@ public:
 
   uint32_t num(void);
 
-  // begin sort marker2 {
+  // begin sort marker3 {
   uint8_t fade_in_map(const int x, const int y);
   uint8_t fade_in_map(const point p);
   uint8_t fade_in_map_no_check(const int x, const int y);
@@ -763,6 +767,10 @@ public:
   uint8_t heatmap(const point p);
   uint8_t heatmap_no_check(const int x, const int y);
   uint8_t heatmap_no_check(const point p);
+  uint8_t is_able_to_amplify_footsteps(const int x, const int y);
+  uint8_t is_able_to_amplify_footsteps(const point p);
+  uint8_t is_able_to_dampen_footsteps(const int x, const int y);
+  uint8_t is_able_to_dampen_footsteps(const point p);
   uint8_t is_able_to_stand_on(const int x, const int y);
   uint8_t is_able_to_stand_on(const point p);
   uint8_t is_acid(const int x, const int y);
@@ -905,9 +913,9 @@ public:
   uint8_t noisemap_in_no_check(const point p);
   uint8_t noisemap_no_check(const int x, const int y);
   uint8_t noisemap_no_check(const point p);
-  // end sort marker2 }
+  // end sort marker3 }
 
-  // begin sort marker3 {
+  // begin sort marker4 {
   void assign_leaders_and_followers(void);
   void chances_of_creating_set(void);
   void clear(void);
@@ -1010,6 +1018,10 @@ public:
   void heatmap_print(point at, point tl, point br);
   void heatmap_unset(const int x, const int y);
   void inventory_dump(void);
+  void is_able_to_amplify_footsteps_set(const int x, const int y);
+  void is_able_to_amplify_footsteps_unset(const int x, const int y);
+  void is_able_to_dampen_footsteps_set(const int x, const int y);
+  void is_able_to_dampen_footsteps_unset(const int x, const int y);
   void is_able_to_stand_on_set(const int x, const int y);
   void is_able_to_stand_on_unset(const int x, const int y);
   void is_acid_set(const int x, const int y);
@@ -1240,7 +1252,7 @@ public:
   void update(void);
   void update_water_next_to_lava(void);
   void wobble_set(float);
-  // end sort marker3 }
+  // end sort marker4 }
 
   uint8_t is_lava(const int x, const int y);
   uint8_t is_lava(const point p);

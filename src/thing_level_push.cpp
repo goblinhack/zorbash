@@ -87,6 +87,10 @@ void Thing::level_push(void)
     i_set_is_wet_grass = true;
     level->is_wet_grass_set(x, y);
   }
+  if (is_dry_grass()) {
+    i_set_is_dry_grass = true;
+    level->is_dry_grass_set(x, y);
+  }
   if (is_enchantstone()) {
     i_set_is_enchantstone = true;
     level->is_enchantstone_set(x, y);
@@ -241,6 +245,14 @@ void Thing::level_push(void)
   }
 
   if (! is_dead && ! is_open) {
+    if (is_able_to_dampen_footsteps()) {
+      i_set_is_able_to_dampen_footsteps = true;
+      level->is_able_to_dampen_footsteps_set(x, y);
+    }
+    if (is_able_to_amplify_footsteps()) {
+      i_set_is_able_to_amplify_footsteps = true;
+      level->is_able_to_amplify_footsteps_set(x, y);
+    }
     if (is_fire()) {
       i_set_is_fire = true;
       level->is_fire_set(x, y);

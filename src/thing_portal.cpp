@@ -195,4 +195,3 @@ Thingp Level::thing_find_portal_at(point at)
 
   return nullptr;
 }
-

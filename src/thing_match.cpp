@@ -48,6 +48,7 @@ bool Tp::matches(const std::string &what)
   if (gfx_pixelart_show_highlighted() && (what == "gfx_pixelart_show_highlighted")) { return true; }
   if (gfx_pixelart_show_square_outlined() && (what == "gfx_pixelart_show_square_outlined")) { return true; }
   if (hunger_is_insatiable() && (what == "hunger_is_insatiable")) { return true; }
+  if (is_able_to_amplify_footsteps() && (what == "is_able_to_amplify_footsteps")) { return true; }
   if (is_able_to_attack_mobs() && (what == "is_able_to_attack_mobs")) { return true; }
   if (is_able_to_attack_owner() && (what == "is_able_to_attack_owner")) { return true; }
   if (is_able_to_be_resurrected() && (what == "is_able_to_be_resurrected")) { return true; }
@@ -58,6 +59,7 @@ bool Tp::matches(const std::string &what)
   if (is_able_to_break_out_of_webs() && (what == "is_able_to_break_out_of_webs")) { return true; }
   if (is_able_to_change_levels() && (what == "is_able_to_change_levels")) { return true; }
   if (is_able_to_collect_keys() && (what == "is_able_to_collect_keys")) { return true; }
+  if (is_able_to_dampen_footsteps() && (what == "is_able_to_dampen_footsteps")) { return true; }
   if (is_able_to_enchant_items() && (what == "is_able_to_enchant_items")) { return true; }
   if (is_able_to_fall() && (what == "is_able_to_fall")) { return true; }
   if (is_able_to_follow() && (what == "is_able_to_follow")) { return true; }
@@ -463,9 +465,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag192() && (what == "is_unused_flag192")) { return true; }
   if (is_unused_flag193() && (what == "is_unused_flag193")) { return true; }
   if (is_unused_flag194() && (what == "is_unused_flag194")) { return true; }
-  if (is_unused_flag195() && (what == "is_unused_flag195")) { return true; }
-  if (is_unused_flag196() && (what == "is_unused_flag196")) { return true; }
-  if (is_unused_flag197() && (what == "is_unused_flag197")) { return true; }
   if (is_unused_flag19() && (what == "is_unused_flag19")) { return true; }
   if (is_unused_flag1() && (what == "is_unused_flag1")) { return true; }
   if (is_unused_flag20() && (what == "is_unused_flag20")) { return true; }
@@ -564,6 +563,7 @@ bool Tp::matches(const std::string &what)
   if (is_wall_dungeon() && (what == "is_wall_dungeon")) { return true; }
   if (is_wall() && (what == "is_wall")) { return true; }
   if (is_weapon() && (what == "is_weapon")) { return true; }
+  if (is_wet_grass_trampled() && (what == "is_wet_grass_trampled")) { return true; }
   if (is_wet_grass() && (what == "is_wet_grass")) { return true; }
   if (is_wooden() && (what == "is_wooden")) { return true; }
   if (minion_limit() && (what == "minion_limit")) { return true; }
@@ -642,6 +642,7 @@ bool Thing::matches(const std::string &what)
   if (gfx_pixelart_show_highlighted() && (what == "gfx_pixelart_show_highlighted")) { return true; }
   if (gfx_pixelart_show_square_outlined() && (what == "gfx_pixelart_show_square_outlined")) { return true; }
   if (hunger_is_insatiable() && (what == "hunger_is_insatiable")) { return true; }
+  if (is_able_to_amplify_footsteps() && (what == "is_able_to_amplify_footsteps")) { return true; }
   if (is_able_to_attack_mobs() && (what == "is_able_to_attack_mobs")) { return true; }
   if (is_able_to_attack_owner() && (what == "is_able_to_attack_owner")) { return true; }
   if (is_able_to_be_resurrected() && (what == "is_able_to_be_resurrected")) { return true; }
@@ -652,6 +653,7 @@ bool Thing::matches(const std::string &what)
   if (is_able_to_break_out_of_webs() && (what == "is_able_to_break_out_of_webs")) { return true; }
   if (is_able_to_change_levels() && (what == "is_able_to_change_levels")) { return true; }
   if (is_able_to_collect_keys() && (what == "is_able_to_collect_keys")) { return true; }
+  if (is_able_to_dampen_footsteps() && (what == "is_able_to_dampen_footsteps")) { return true; }
   if (is_able_to_enchant_items() && (what == "is_able_to_enchant_items")) { return true; }
   if (is_able_to_fall() && (what == "is_able_to_fall")) { return true; }
   if (is_able_to_follow() && (what == "is_able_to_follow")) { return true; }
@@ -1059,9 +1061,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag192() && (what == "is_unused_flag192")) { return true; }
   if (is_unused_flag193() && (what == "is_unused_flag193")) { return true; }
   if (is_unused_flag194() && (what == "is_unused_flag194")) { return true; }
-  if (is_unused_flag195() && (what == "is_unused_flag195")) { return true; }
-  if (is_unused_flag196() && (what == "is_unused_flag196")) { return true; }
-  if (is_unused_flag197() && (what == "is_unused_flag197")) { return true; }
   if (is_unused_flag19() && (what == "is_unused_flag19")) { return true; }
   if (is_unused_flag1() && (what == "is_unused_flag1")) { return true; }
   if (is_unused_flag20() && (what == "is_unused_flag20")) { return true; }
@@ -1160,6 +1159,7 @@ bool Thing::matches(const std::string &what)
   if (is_wall_dungeon() && (what == "is_wall_dungeon")) { return true; }
   if (is_wall() && (what == "is_wall")) { return true; }
   if (is_weapon() && (what == "is_weapon")) { return true; }
+  if (is_wet_grass_trampled() && (what == "is_wet_grass_trampled")) { return true; }
   if (is_wet_grass() && (what == "is_wet_grass")) { return true; }
   if (is_wooden() && (what == "is_wooden")) { return true; }
   if (minion_limit() && (what == "minion_limit")) { return true; }
@@ -1235,6 +1235,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "gfx_pixelart_show_square_outlined") { return &Thing::gfx_pixelart_show_square_outlined; }
   if (what == "hunger_is_insatiable") { return &Thing::hunger_is_insatiable; }
   if (what == "internal") { return &Thing::is_internal; }
+  if (what == "is_able_to_amplify_footsteps") { return &Thing::is_able_to_amplify_footsteps; }
   if (what == "is_able_to_attack_mobs") { return &Thing::is_able_to_attack_mobs; }
   if (what == "is_able_to_attack_owner") { return &Thing::is_able_to_attack_owner; }
   if (what == "is_able_to_be_resurrected") { return &Thing::is_able_to_be_resurrected; }
@@ -1245,6 +1246,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_able_to_break_out_of_webs") { return &Thing::is_able_to_break_out_of_webs; }
   if (what == "is_able_to_change_levels") { return &Thing::is_able_to_change_levels; }
   if (what == "is_able_to_collect_keys") { return &Thing::is_able_to_collect_keys; }
+  if (what == "is_able_to_dampen_footsteps") { return &Thing::is_able_to_dampen_footsteps; }
   if (what == "is_able_to_enchant_items") { return &Thing::is_able_to_enchant_items; }
   if (what == "is_able_to_fall") { return &Thing::is_able_to_fall; }
   if (what == "is_able_to_follow") { return &Thing::is_able_to_follow; }
@@ -1645,9 +1647,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag192") { return &Thing::is_unused_flag192; }
   if (what == "is_unused_flag193") { return &Thing::is_unused_flag193; }
   if (what == "is_unused_flag194") { return &Thing::is_unused_flag194; }
-  if (what == "is_unused_flag195") { return &Thing::is_unused_flag195; }
-  if (what == "is_unused_flag196") { return &Thing::is_unused_flag196; }
-  if (what == "is_unused_flag197") { return &Thing::is_unused_flag197; }
   if (what == "is_unused_flag19") { return &Thing::is_unused_flag19; }
   if (what == "is_unused_flag1") { return &Thing::is_unused_flag1; }
   if (what == "is_unused_flag20") { return &Thing::is_unused_flag20; }
@@ -1748,6 +1747,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_water") { return &Thing::is_water; }
   if (what == "is_weapon") { return &Thing::is_weapon; }
   if (what == "is_wet_grass") { return &Thing::is_wet_grass; }
+  if (what == "is_wet_grass_trampled") { return &Thing::is_wet_grass_trampled; }
   if (what == "is_wooden") { return &Thing::is_wooden; }
   if (what == "minion_limit") { return &Thing::minion_limit; }
   if (what == "noise_additional_on_jump_end") { return &Thing::noise_additional_on_jump_end; }

@@ -1265,26 +1265,13 @@ int Thing::is_unused_flag194(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag194());
 }
-int Thing::is_unused_flag195(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_unused_flag195());
-}
-int Thing::is_unused_flag196(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_unused_flag196());
-}
-int Thing::is_unused_flag197(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_unused_flag197());
-}
+
 int Thing::is_able_to_be_teleported(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_able_to_be_teleported());
 }
+
 int Thing::is_portal(void)
 {
   TRACE_NO_INDENT();
@@ -1792,18 +1779,6 @@ int Thing::is_droppable(void)
   return (tp()->is_droppable());
 }
 
-int Thing::is_dry_grass(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_dry_grass());
-}
-
-int Thing::is_wet_grass(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_wet_grass());
-}
-
 int Thing::is_enchantable(void)
 {
   TRACE_NO_INDENT();
@@ -2048,12 +2023,6 @@ int Thing::is_gas_blocker(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_gas_blocker());
-}
-
-int Thing::noise_blocker(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->noise_blocker());
 }
 
 int Thing::is_living(void)
@@ -2608,12 +2577,6 @@ int Thing::is_eater_of_armor(void)
   return (tp()->is_eater_of_armor());
 }
 
-int Thing::is_dry_grass_trampled(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_dry_grass_trampled());
-}
-
 int Thing::is_cowardly(void)
 {
   TRACE_NO_INDENT();
@@ -2770,12 +2733,6 @@ int Thing::is_crystal(void)
   return (tp()->is_crystal());
 }
 
-int Thing::noise_on_moving(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->noise_on_moving());
-}
-
 int Thing::is_tireless(void)
 {
   TRACE_NO_INDENT();
@@ -2798,12 +2755,6 @@ int Thing::is_item_targetted(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_item_targetted());
-}
-
-int Thing::noise_additional_on_teleporting(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->noise_additional_on_teleporting());
 }
 
 int Thing::chance_d1000_teleport_self(void)
@@ -2967,52 +2918,10 @@ int Thing::gfx_pixelart_show_asleep_anim(void)
   return (tp()->gfx_pixelart_show_asleep_anim());
 }
 
-int Thing::noise_additional_on_jump_end(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->noise_additional_on_jump_end());
-}
-
-int Thing::noise_on_born(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->noise_on_born());
-}
-
-int Thing::noise_on_open_or_close(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->noise_on_open_or_close());
-}
-
-int Thing::noise_on_hit_and_now_dead(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->noise_on_hit_and_now_dead());
-}
-
-int Thing::noise_on_hit_and_still_alive(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->noise_on_hit_and_still_alive());
-}
-
-int Thing::noise_decibels_hearing(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->noise_decibels_hearing());
-}
-
 int Thing::is_air_breather(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_air_breather());
-}
-
-int Thing::noise_on_dropping(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->noise_on_dropping());
 }
 
 int Thing::is_obs_when_dead(void)

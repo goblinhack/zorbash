@@ -241,6 +241,7 @@ private:
   int _initial_temperature {};
   int _internal_has_dir_anim {};
   int _internal_has_hp_anim {};
+  int _is_able_to_amplify_footsteps {};
   int _is_able_to_attack_mobs {};
   int _is_able_to_attack_owner {};
   int _is_able_to_be_resurrected {};
@@ -251,6 +252,7 @@ private:
   int _is_able_to_break_out_of_webs {};
   int _is_able_to_change_levels {};
   int _is_able_to_collect_keys {};
+  int _is_able_to_dampen_footsteps {};
   int _is_able_to_enchant_items {};
   int _is_able_to_fall {};
   int _is_able_to_follow {};
@@ -666,9 +668,6 @@ private:
   int _is_unused_flag192 {};
   int _is_unused_flag193 {};
   int _is_unused_flag194 {};
-  int _is_unused_flag195 {};
-  int _is_unused_flag196 {};
-  int _is_unused_flag197 {};
   int _is_unused_flag2 {};
   int _is_unused_flag20 {};
   int _is_unused_flag21 {};
@@ -769,6 +768,7 @@ private:
   int _is_weapon_class_B {};
   int _is_weapon_class_C {};
   int _is_wet_grass {};
+  int _is_wet_grass_trampled {};
   int _is_wooden {};
   int _item_height {};
   int _item_width {};
@@ -1525,6 +1525,7 @@ public:
   int initial_temperature(void) const;
   int internal_has_dir_anim(void) const;
   int internal_has_hp_anim(void) const;
+  int is_able_to_amplify_footsteps(void) const;
   int is_able_to_attack_mobs(void) const;
   int is_able_to_attack_owner(void) const;
   int is_able_to_be_resurrected(void) const;
@@ -1535,6 +1536,7 @@ public:
   int is_able_to_break_out_of_webs(void) const;
   int is_able_to_change_levels(void) const;
   int is_able_to_collect_keys(void) const;
+  int is_able_to_dampen_footsteps(void) const;
   int is_able_to_enchant_items(void) const;
   int is_able_to_fall(void) const;
   int is_able_to_follow(void) const;
@@ -1947,9 +1949,6 @@ public:
   int is_unused_flag192(void) const;
   int is_unused_flag193(void) const;
   int is_unused_flag194(void) const;
-  int is_unused_flag195(void) const;
-  int is_unused_flag196(void) const;
-  int is_unused_flag197(void) const;
   int is_unused_flag19(void) const;
   int is_unused_flag1(void) const;
   int is_unused_flag20(void) const;
@@ -2051,6 +2050,7 @@ public:
   int is_weapon_class_B(void) const;
   int is_weapon_class_C(void) const;
   int is_weapon(void) const;
+  int is_wet_grass_trampled(void) const;
   int is_wet_grass(void) const;
   int is_wooden(void) const;
   int item_height(void) const;
@@ -2264,6 +2264,7 @@ public:
   void hunger_is_insatiable_set(int v);
   void internal_has_dir_anim_set(int v);
   void internal_has_hp_anim_set(int v);
+  void is_able_to_amplify_footsteps_set(int v);
   void is_able_to_attack_mobs_set(int v);
   void is_able_to_attack_owner_set(int v);
   void is_able_to_be_resurrected_set(int v);
@@ -2274,6 +2275,7 @@ public:
   void is_able_to_break_out_of_webs_set(int v);
   void is_able_to_change_levels_set(int v);
   void is_able_to_collect_keys_set(int v);
+  void is_able_to_dampen_footsteps_set(int v);
   void is_able_to_enchant_items_set(int v);
   void is_able_to_fall_set(int v);
   void is_able_to_follow_set(int v);
@@ -2687,9 +2689,6 @@ public:
   void is_unused_flag192_set(int v);
   void is_unused_flag193_set(int v);
   void is_unused_flag194_set(int v);
-  void is_unused_flag195_set(int v);
-  void is_unused_flag196_set(int v);
-  void is_unused_flag197_set(int v);
   void is_unused_flag19_set(int v);
   void is_unused_flag1_set(int v);
   void is_unused_flag20_set(int v);
@@ -2792,6 +2791,7 @@ public:
   void is_weapon_class_C_set(int v);
   void is_weapon_set(int v);
   void is_wet_grass_set(int v);
+  void is_wet_grass_trampled_set(int v);
   void is_wooden_set(int v);
   void item_height_set(int v);
   void item_width_set(int v);

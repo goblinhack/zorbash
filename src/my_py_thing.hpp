@@ -133,6 +133,7 @@ PyObject *thing_immediate_mob_id_get(PyObject *obj, PyObject *args, PyObject *ke
 PyObject *thing_immediate_owner_id_get(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_immediate_spawner_id_get(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_initial_charge_count(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_amplify_footsteps(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_attack_mobs(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_attack_owner(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_be_surprised(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -142,6 +143,7 @@ PyObject *thing_is_able_to_break_out_of_ice(PyObject *obj, PyObject *args, PyObj
 PyObject *thing_is_able_to_break_out_of_webs(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_change_levels(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_collect_keys(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_dampen_footsteps(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_enchant_items(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_fall(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_follow(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -563,9 +565,6 @@ PyObject *thing_is_unused_flag191(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag192(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag193(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag194(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag195(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag196(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag197(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag19(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag1(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag20(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -667,6 +666,7 @@ PyObject *thing_is_wall(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_weapon(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_wet_grass(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_wet_grass_trampled(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_wooden(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_jump_distance_mod_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_jump_distance_mod_incr(PyObject *obj, PyObject *args, PyObject *keywds);

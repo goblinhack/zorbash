@@ -645,9 +645,9 @@ do
       is_unused_flag192 \
       is_unused_flag193 \
       is_unused_flag194 \
-      is_unused_flag195 \
-      is_unused_flag196 \
-      is_unused_flag197 \
+      is_able_to_amplify_footsteps \
+      is_wet_grass_trampled \
+      is_able_to_dampen_footsteps \
       is_able_to_be_teleported \
       is_portal \
       is_unused_flag2 \

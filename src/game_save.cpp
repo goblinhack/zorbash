@@ -389,6 +389,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   shift  = 0;
   // clang-format off
   // begin sort marker3
+  bits64 |= (my.t->i_set_is_able_to_amplify_footsteps     ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_able_to_dampen_footsteps      ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_acid                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_ascend_dungeon                ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_ascend_sewer                  ? 1LLU : 0LLU) << shift; shift++;
@@ -444,6 +446,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   shift  = 0;
   // clang-format off
   // begin sort marker4
+  bits64 |= (my.t->i_set_is_dry_grass                     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_poisonous_danger_level        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_potion                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_red_blood                     ? 1LLU : 0LLU) << shift; shift++;
@@ -588,6 +591,8 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_hazard);
   out << bits(my.t->_is_heavy);
   out << bits(my.t->_is_block_of_ice);
+  out << bits(my.t->_is_able_to_dampen_footsteps);
+  out << bits(my.t->_is_able_to_amplify_footsteps);
   out << bits(my.t->_is_key);
   out << bits(my.t->_is_lava);
   out << bits(my.t->_is_mob);
@@ -611,6 +616,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_wall);
   out << bits(my.t->_is_staff);
   out << bits(my.t->_is_wet_grass);
+  out << bits(my.t->_is_dry_grass);
   out << bits(my.t->_noisemap);
   out << bits(my.t->_noisemap_in);
 

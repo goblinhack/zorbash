@@ -1,8 +1,8 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- wet grass should dampen noise                                                                                                                -->
+<!-- dry grass should amplify noise                                                                                                               -->
 <!-- teleport on stealing                                                                                                                         -->
-<!-- grass should dampen noise                                                                                                                    -->
-<!-- dart reuse?                                                                                                                                  -->
 <!-- teleport block                                                                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

@@ -73,6 +73,10 @@ void Thing::level_pop(void)
       i_set_is_wet_grass = false;
       level->is_wet_grass_unset(x, y);
     }
+    if (i_set_is_dry_grass) {
+      i_set_is_dry_grass = false;
+      level->is_dry_grass_unset(x, y);
+    }
     if (i_set_is_enchantstone) {
       i_set_is_enchantstone = false;
       level->is_enchantstone_unset(x, y);
@@ -96,6 +100,14 @@ void Thing::level_pop(void)
     if (i_set_is_block_of_ice) {
       i_set_is_block_of_ice = false;
       level->is_block_of_ice_unset(x, y);
+    }
+    if (i_set_is_able_to_dampen_footsteps) {
+      i_set_is_able_to_dampen_footsteps = false;
+      level->is_able_to_dampen_footsteps_unset(x, y);
+    }
+    if (i_set_is_able_to_amplify_footsteps) {
+      i_set_is_able_to_amplify_footsteps = false;
+      level->is_able_to_amplify_footsteps_unset(x, y);
     }
     if (i_set_is_sticky) {
       i_set_is_sticky = false;
