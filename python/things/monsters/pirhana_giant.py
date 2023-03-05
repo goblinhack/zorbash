@@ -80,6 +80,7 @@ def tp_init(name, text_long_name):
     my.is_meat(self, True)
     my.is_monst_class_B(self, True)
     my.is_monst(self, True)
+    my.is_able_to_be_teleported(self, True)
     my.is_moveable(self, True)
     my.is_msg_allowed_is_dead(self, True)
     my.is_red_blooded(self, True)

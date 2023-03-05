@@ -42,6 +42,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _gfx_water {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _heatmap {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_able_to_stand_on {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_portal {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_acid {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_ascend_dungeon {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_ascend_sewer {};
@@ -763,6 +764,8 @@ public:
   uint8_t heatmap_no_check(const point p);
   uint8_t is_able_to_stand_on(const int x, const int y);
   uint8_t is_able_to_stand_on(const point p);
+  uint8_t is_portal(const int x, const int y);
+  uint8_t is_portal(const point p);
   uint8_t is_acid(const int x, const int y);
   uint8_t is_acid(const point p);
   uint8_t is_ascend_dungeon(const int x, const int y);
@@ -1008,6 +1011,8 @@ public:
   void inventory_dump(void);
   void is_able_to_stand_on_set(const int x, const int y);
   void is_able_to_stand_on_unset(const int x, const int y);
+  void is_portal_set(const int x, const int y);
+  void is_portal_unset(const int x, const int y);
   void is_acid_set(const int x, const int y);
   void is_acid_unset(const int x, const int y);
   void is_ascend_dungeon_set(const int x, const int y);

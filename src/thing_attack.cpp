@@ -476,6 +476,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
   if (d1000() < chance_d1000_teleport_attack()) {
     TeleportReason reason;
     reason.teleport_attack = true;
+    reason.teleport_limit  = false;
     if (victim->teleport_randomly(reason, teleport_distance_with_modifiers_get())) {
       if (victim->is_player()) {
         msg("Your stomach lurches!");

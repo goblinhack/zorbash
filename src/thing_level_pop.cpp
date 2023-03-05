@@ -125,6 +125,14 @@ void Thing::level_pop(void)
       i_set_is_ascend_sewer = false;
       level->is_ascend_sewer_unset(x, y);
     }
+    if (i_set_is_portal) {
+      i_set_is_portal = false;
+      level->is_portal_unset(x, y);
+    }
+    if (i_set_is_portal) {
+      i_set_is_portal = false;
+      level->is_portal_unset(x, y);
+    }
     if (i_set_is_descend_sewer) {
       i_set_is_descend_sewer = false;
       level->is_descend_sewer_unset(x, y);

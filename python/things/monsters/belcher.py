@@ -73,6 +73,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_loggable(self, True)
     my.is_monst_class_B(self, True)
     my.is_monst(self, True)
+    my.is_able_to_be_teleported(self, True)
     my.is_msg_allowed_hears_something(self, True)
     my.is_msg_allowed_is_dead(self, True)
     my.is_msg_allowed_is_seen(self, True)

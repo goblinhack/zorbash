@@ -53,6 +53,7 @@ bool Thing::ai_escape(void)
     TeleportReason reason;
     reason.teleport_self   = true;
     reason.teleport_escape = true;
+    reason.teleport_limit  = true;
     if (teleport_randomly(reason)) {
       dbg("AI: escape teleport");
       return false;

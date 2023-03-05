@@ -465,7 +465,7 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag195() && (what == "is_unused_flag195")) { return true; }
   if (is_unused_flag196() && (what == "is_unused_flag196")) { return true; }
   if (is_unused_flag197() && (what == "is_unused_flag197")) { return true; }
-  if (is_unused_flag198() && (what == "is_unused_flag198")) { return true; }
+  if (is_able_to_be_teleported() && (what == "is_able_to_be_teleported")) { return true; }
   if (is_unused_flag19() && (what == "is_unused_flag19")) { return true; }
   if (is_unused_flag1() && (what == "is_unused_flag1")) { return true; }
   if (is_unused_flag20() && (what == "is_unused_flag20")) { return true; }
@@ -1061,7 +1061,7 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag195() && (what == "is_unused_flag195")) { return true; }
   if (is_unused_flag196() && (what == "is_unused_flag196")) { return true; }
   if (is_unused_flag197() && (what == "is_unused_flag197")) { return true; }
-  if (is_unused_flag198() && (what == "is_unused_flag198")) { return true; }
+  if (is_able_to_be_teleported() && (what == "is_able_to_be_teleported")) { return true; }
   if (is_unused_flag19() && (what == "is_unused_flag19")) { return true; }
   if (is_unused_flag1() && (what == "is_unused_flag1")) { return true; }
   if (is_unused_flag20() && (what == "is_unused_flag20")) { return true; }
@@ -1647,7 +1647,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag195") { return &Thing::is_unused_flag195; }
   if (what == "is_unused_flag196") { return &Thing::is_unused_flag196; }
   if (what == "is_unused_flag197") { return &Thing::is_unused_flag197; }
-  if (what == "is_unused_flag198") { return &Thing::is_unused_flag198; }
+  if (what == "is_able_to_be_teleported") { return &Thing::is_able_to_be_teleported; }
   if (what == "is_unused_flag19") { return &Thing::is_unused_flag19; }
   if (what == "is_unused_flag1") { return &Thing::is_unused_flag1; }
   if (what == "is_unused_flag20") { return &Thing::is_unused_flag20; }

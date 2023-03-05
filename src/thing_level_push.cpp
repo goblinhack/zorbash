@@ -135,6 +135,10 @@ void Thing::level_push(void)
     i_set_is_ascend_sewer = true;
     level->is_ascend_sewer_set(x, y);
   }
+  if (is_portal()) {
+    i_set_is_portal = true;
+    level->is_portal_set(x, y);
+  }
   if (is_descend_sewer()) {
     i_set_is_descend_sewer = true;
     level->is_descend_sewer_set(x, y);

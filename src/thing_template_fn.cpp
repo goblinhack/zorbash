@@ -743,7 +743,7 @@ int Tp::is_unused_flag194(void) const { return _is_unused_flag194; }
 int Tp::is_unused_flag195(void) const { return _is_unused_flag195; }
 int Tp::is_unused_flag196(void) const { return _is_unused_flag196; }
 int Tp::is_unused_flag197(void) const { return _is_unused_flag197; }
-int Tp::is_unused_flag198(void) const { return _is_unused_flag198; }
+int Tp::is_able_to_be_teleported(void) const { return _is_able_to_be_teleported; }
 int Tp::is_unused_flag19(void) const { return _is_unused_flag19; }
 int Tp::is_unused_flag1(void) const { return _is_unused_flag1; }
 int Tp::is_unused_flag20(void) const { return _is_unused_flag20; }
@@ -1483,7 +1483,7 @@ void Tp::is_unused_flag194_set(int v) { _is_unused_flag194 = v; }
 void Tp::is_unused_flag195_set(int v) { _is_unused_flag195 = v; }
 void Tp::is_unused_flag196_set(int v) { _is_unused_flag196 = v; }
 void Tp::is_unused_flag197_set(int v) { _is_unused_flag197 = v; }
-void Tp::is_unused_flag198_set(int v) { _is_unused_flag198 = v; }
+void Tp::is_able_to_be_teleported_set(int v) { _is_able_to_be_teleported = v; }
 void Tp::is_unused_flag19_set(int v) { _is_unused_flag19 = v; }
 void Tp::is_unused_flag1_set(int v) { _is_unused_flag1 = v; }
 void Tp::is_unused_flag20_set(int v) { _is_unused_flag20 = v; }

@@ -565,7 +565,7 @@ PyObject *thing_is_unused_flag194(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag195(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag196(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag197(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag198(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_be_teleported(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag19(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag1(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag20(PyObject *obj, PyObject *args, PyObject *keywds);

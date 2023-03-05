@@ -82,6 +82,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_immune_to_acid(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)
+    my.is_able_to_be_teleported(self, True)
     my.is_loggable(self, True)
     my.is_moveable(self, True)
     my.is_sword(self, True)

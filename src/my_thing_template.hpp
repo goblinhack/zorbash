@@ -668,7 +668,7 @@ private:
   int _is_unused_flag195 {};
   int _is_unused_flag196 {};
   int _is_unused_flag197 {};
-  int _is_unused_flag198 {};
+  int _is_able_to_be_teleported {};
   int _is_unused_flag2 {};
   int _is_unused_flag20 {};
   int _is_unused_flag21 {};
@@ -1949,7 +1949,7 @@ public:
   int is_unused_flag195(void) const;
   int is_unused_flag196(void) const;
   int is_unused_flag197(void) const;
-  int is_unused_flag198(void) const;
+  int is_able_to_be_teleported(void) const;
   int is_unused_flag19(void) const;
   int is_unused_flag1(void) const;
   int is_unused_flag20(void) const;
@@ -2689,7 +2689,7 @@ public:
   void is_unused_flag195_set(int v);
   void is_unused_flag196_set(int v);
   void is_unused_flag197_set(int v);
-  void is_unused_flag198_set(int v);
+  void is_able_to_be_teleported_set(int v);
   void is_unused_flag19_set(int v);
   void is_unused_flag1_set(int v);
   void is_unused_flag20_set(int v);

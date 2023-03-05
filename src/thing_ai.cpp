@@ -385,6 +385,7 @@ bool Thing::ai_create_path_to_single_goal_do(int minx, int miny, int maxx, int m
       TeleportReason reason;
       reason.teleport_self   = true;
       reason.teleport_closer = true;
+      reason.teleport_limit  = true;
       if (teleport_self(reason, goal.what)) {
         return true;
       }

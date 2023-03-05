@@ -119,6 +119,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->tick_last_awoke);
   out << bits(my.t->tick_last_did_something);
   out << bits(my.t->tick_last_dropped);
+  out << bits(my.t->tick_last_teleported);
   out << bits(my.t->tick_last_escape);
   out << bits(my.t->tick_last_i_attacked);
   out << bits(my.t->tick_last_i_tried_to_attack);
@@ -396,7 +397,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_block_of_ice                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_brazier                       ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_bridge                        ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_burnable                  ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_burnable                      ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_carnivorous_plant             ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_chasm                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_combustible                   ? 1LLU : 0LLU) << shift; shift++;
@@ -430,7 +431,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_obs_destructable              ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_obs_for_jump_landing          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_obs_wall_or_door              ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_obs_when_dead              ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_obs_when_dead                 ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_portal                        ? 1LLU : 0LLU) << shift; shift++;
   // end sort marker3
   // clang-format on
   if (shift >= (int) (sizeof(bits64) * 8)) {
@@ -552,6 +554,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_gfx_water);
   out << bits(my.t->_heatmap);
   out << bits(my.t->_is_able_to_stand_on);
+  out << bits(my.t->_is_portal);
   out << bits(my.t->_is_acid);
   out << bits(my.t->_is_ascend_dungeon);
   out << bits(my.t->_is_ascend_sewer);

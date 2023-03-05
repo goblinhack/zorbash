@@ -7,6 +7,7 @@
 #define _MY_PY_LEVEL_HPP_
 #include <Python.h>
 
+// begin sort marker1 {
 PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_ai_detect_secret_doors_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_ai_resent_count_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -229,6 +230,7 @@ PyObject *level_is_wall_dungeon_at(PyObject *obj, PyObject *args, PyObject *keyw
 PyObject *level_is_staff_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_water_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_weapon_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_portal_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_wet_grass_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_wooden_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_move_speed_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -267,4 +269,6 @@ PyObject *level_is_block_of_ice_at(PyObject *obj, PyObject *args, PyObject *keyw
 PyObject *level_is_obs_in_the_way_for_jumping_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cursor_path_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywds);
+// end sort marker1 }
+
 #endif

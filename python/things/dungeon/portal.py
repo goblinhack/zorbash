@@ -2,19 +2,6 @@ import my
 import tp
 
 
-def on_enter(me, victim, x, y):
-    range = 30
-    for dx in range(-range, range):
-        for dy in range(-range, range):
-            for it in my.level_get_all(me, x + dx, y + dy):
-                if my.thing_is_portal(it):
-                    my.thing_dead(it, "frozen")
-                    my.thing_teleport(victim, x + dx, y + dy)
-                    return
-
-    my.thing_teleport_randomly(victim)
-
-
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
@@ -40,9 +27,12 @@ def tp_init(name, text_long_name, text_short_name):
     my.light_color(self, "purple")
     my.light_dist(self, 3)
     my.normal_placement_rules(self, True)
-    my.on_enter_do(self, "me.on_enter()")
     my.text_a_or_an(self, "the")
-    my.text_description_short(self, "A magical portal to places undreamt of. Depends how boring your dreams are.")
+    my.text_description_long(self, "A magical portal to places undreamt of. Depends how boring your dreams are.")
+    my.text_description_short(self, "A magical portal.")
+    my.is_obs_in_the_way_for_firing(self, True)
+    my.is_obs_in_the_way_for_jumping(self, True)
+    my.is_obs_in_the_way_for_throwing(self, True)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)

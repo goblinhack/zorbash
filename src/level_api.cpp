@@ -1307,6 +1307,44 @@ void Level::is_able_to_stand_on_unset(const int x, const int y)
   decr(_is_able_to_stand_on, x, y, (uint8_t) 1);
 }
 
+uint8_t Level::is_portal(const point p)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
+  return (get(_is_portal, p.x, p.y));
+}
+
+uint8_t Level::is_portal(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
+  return (get(_is_portal, x, y));
+}
+
+void Level::is_portal_set(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  is_map_changed = true;
+  incr(_is_portal, x, y, (uint8_t) 1);
+}
+
+void Level::is_portal_unset(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  is_map_changed = true;
+  decr(_is_portal, x, y, (uint8_t) 1);
+}
+
 uint8_t Level::is_corpse(const point p)
 {
   TRACE_NO_INDENT();

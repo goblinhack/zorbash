@@ -70,12 +70,30 @@ public:
 typedef class TeleportReason_
 {
 public:
+  //
+  // Self initiated teleport.
+  //
   bool teleport_self {};
+  //
+  // Escaping via teleport.
+  //
   bool teleport_escape {};
+  //
+  // Attacking closer.
+  //
   bool teleport_closer {};
-  bool teleport_away {};
+  //
+  // Teleport a victim.
+  //
   bool teleport_attack {};
+  //
+  // Avoid chasms and hazards/
+  //
   bool teleport_carefully {};
+  //
+  // Limit distance you can teleport.
+  //
+  bool teleport_limit {};
 } TeleportReason;
 
 typedef class Thing_
@@ -239,6 +257,7 @@ public:
   uint64_t i_set_is_obs_wall_or_door        : 1 {};
   uint64_t i_set_is_obs_when_dead           : 1 {};
   uint64_t i_set_is_poisonous_danger_level  : 1 {};
+  uint64_t i_set_is_portal                  : 1 {};
   uint64_t i_set_is_potion                  : 1 {};
   uint64_t i_set_is_red_blood               : 1 {};
   uint64_t i_set_is_ring                    : 1 {};
@@ -368,6 +387,7 @@ public:
 
   std::vector< Thingp > in_the_way_for_jumping(const point s, const point e, size_t max_elems = 0);
   std::vector< Thingp > in_the_way_for_firing(const point s, const point e, size_t max_elems = 0);
+  std::vector< Thingp > in_the_way_for_throwing(const point s, const point e, size_t max_elems = 0);
 
   // begin sort marker3 {
   bool ai_blocked_completely(void);
@@ -586,6 +606,7 @@ public:
   bool steal_treasure_from(Thingp);
   bool teleport_carefree(TeleportReason, point to);
   bool teleport_carefree(TeleportReason, point to, bool *too_far);
+  bool teleport_portal(Thingp portal);
   bool teleport_carefully(TeleportReason, point to);
   bool teleport_carefully(TeleportReason, point to, bool *too_far);
   bool teleport_randomly_away_from_player(TeleportReason);
@@ -1670,7 +1691,7 @@ public:
   int is_unused_flag195(void);
   int is_unused_flag196(void);
   int is_unused_flag197(void);
-  int is_unused_flag198(void);
+  int is_able_to_be_teleported(void);
   int is_unused_flag19(void);
   int is_unused_flag1(void);
   int is_unused_flag20(void);
@@ -2220,7 +2241,6 @@ public:
 
   point dest_random_get(int dist = 0);
   point dir_to_direction(void);
-  point in_the_way_for_throwing(const point s, const point e);
   point lunge_to_get(void);
   point vision_source_get(void);
   point where_i_dropped_an_item_last_get(void);
@@ -2375,6 +2395,13 @@ public:
   uint32_t tick_last_dropped_set(uint32_t);
   uint32_t tick_last_dropped(void);
 
+  uint32_t tick_last_teleported_decr(uint32_t);
+  uint32_t tick_last_teleported_decr(void);
+  uint32_t tick_last_teleported_incr(uint32_t);
+  uint32_t tick_last_teleported_incr(void);
+  uint32_t tick_last_teleported_set(uint32_t);
+  uint32_t tick_last_teleported(void);
+
   uint32_t tick_last_escape_decr(uint32_t);
   uint32_t tick_last_escape_decr(void);
   uint32_t tick_last_escape_incr(uint32_t);
@@ -2438,6 +2465,7 @@ public:
   void avoid_tick(void);
   void awake(void);
   void barrel_tick(void);
+  void portal_tick(void);
   void blit_ascii_adjust_color(color &c, bool fg, bool leftbar);
   void blit_ascii_adjust_color_hue(color &c, bool fg);
   void blit_ascii_at(point tl, bool lit = true, bool leftbar = false);

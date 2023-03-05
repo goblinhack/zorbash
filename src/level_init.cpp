@@ -20,6 +20,7 @@ void Level::clear(void)
   _noisemap                          = {};
   _noisemap_in                       = {};
   _is_able_to_stand_on               = {};
+  _is_portal                         = {};
   _is_block_of_ice                   = {};
   _is_acid                           = {};
   _is_ascend_dungeon                 = {};

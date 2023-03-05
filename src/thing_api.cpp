@@ -1280,10 +1280,10 @@ int Thing::is_unused_flag197(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag197());
 }
-int Thing::is_unused_flag198(void)
+int Thing::is_able_to_be_teleported(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag198());
+  return (tp()->is_able_to_be_teleported());
 }
 int Thing::is_portal(void)
 {

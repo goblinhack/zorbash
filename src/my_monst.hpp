@@ -205,6 +205,10 @@ public:
   //
   uint32_t tick_last_dropped {(uint32_t) -1 /* std::numeric_limits< uint32_t >::max() */};
   //
+  // To prevent teleport looping
+  //
+  uint32_t tick_last_teleported {(uint32_t) -1 /* std::numeric_limits< uint32_t >::max() */};
+  //
   // If things have stopped moving, perform location checks on where theuy
   // are now. This handles things like shoving a monst into a chasm. We do
   // location checks on the ends of moves, but this is a backup and will

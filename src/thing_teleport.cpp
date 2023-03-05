@@ -143,9 +143,13 @@ bool Thing::teleport(TeleportReason reason, point to, bool *too_far)
     return false;
   }
 
-  if (! maybe_aip()) {
-    return false;
+  if (reason.teleport_carefully) {
+    dbg("Try to teleport carefully %d,%d", to.x, to.y);
+  } else {
+    dbg("Try to teleport to %d,%d", to.x, to.y);
   }
+
+  TRACE_AND_INDENT();
 
   //
   // Trying to teleport to the same location
@@ -153,13 +157,6 @@ bool Thing::teleport(TeleportReason reason, point to, bool *too_far)
   if (to == curr_at) {
     return false;
   }
-
-  if (reason.teleport_carefully) {
-    dbg("Try to teleport carefully %d,%d", to.x, to.y);
-  } else {
-    dbg("Try to teleport to %d,%d", to.x, to.y);
-  }
-  TRACE_AND_INDENT();
 
   //
   // Spider minions need to be leashed
@@ -278,14 +275,18 @@ bool Thing::teleport(TeleportReason reason, point to, bool *too_far)
   float d    = teleport_distance_with_modifiers_get();
   float dist = distance(curr_at, to);
 
-  if (reason.teleport_attack) {
+  if (! reason.teleport_limit) {
     //
     // No limit if you are being teleported.
+    // No limit if you are entering a portal.
     //
+    dbg("Try to teleport %d,%d with no distance limit", to.x, to.y);
   } else {
     //
     // Limit the distance
     //
+    dbg("Try to teleport %d,%d with a distance limit", to.x, to.y);
+
     if (dist > d) {
       auto u = (to - curr_at);
       u.unit();
@@ -378,6 +379,8 @@ bool Thing::teleport(TeleportReason reason, point to, bool *too_far)
 
   on_teleport();
 
+  tick_last_teleported_set(game->tick_current);
+
   if (is_player()) {
     msg("You fade out of existance!");
   }
@@ -398,7 +401,56 @@ bool Thing::teleport_carefully(TeleportReason reason, point p, bool *too_far)
 {
   TRACE_NO_INDENT();
   reason.teleport_carefully = true;
+  reason.teleport_limit     = true;
   return teleport(reason, p, too_far);
+}
+
+bool Thing::teleport_portal(Thingp portal)
+{
+  TRACE_NO_INDENT();
+
+  dbg("Entering a portal: %s", portal->to_short_string().c_str());
+
+  TeleportReason reason;
+  reason.teleport_carefully = false;
+  reason.teleport_limit     = false;
+
+  auto radius = 30;
+
+  //
+  // Try to find another portal
+  //
+  for (int dx = -radius; dx < radius; dx++) {
+    for (int dy = -radius; dy < radius; dy++) {
+
+      auto px = curr_at.x + dx;
+      auto py = curr_at.y + dy;
+
+      if (! level->is_portal(px, py)) {
+        continue;
+      }
+
+      //
+      // Ignore the originating portal
+      //
+      if ((portal->curr_at.x == px) && (portal->curr_at.y == py)) {
+        continue;
+      }
+
+      dbg("Found a new portal at: %d,%d", px, py);
+
+      //
+      // Found one.
+      //
+      bool too_far = false;
+
+      return teleport(reason, point(px, py), &too_far);
+    }
+  }
+
+  dbg("Did not find a portal, teleport randomly");
+
+  return teleport_randomly(reason, radius);
 }
 
 bool Thing::teleport_carefree(TeleportReason reason, point p, bool *too_far)
@@ -411,6 +463,7 @@ bool Thing::teleport_carefully(TeleportReason reason, point p)
 {
   TRACE_NO_INDENT();
   reason.teleport_carefully = true;
+  reason.teleport_limit     = true;
   return teleport(reason, p, nullptr);
 }
 
@@ -490,6 +543,7 @@ bool Thing::teleport_randomly_towards_player(TeleportReason reason)
 
   reason.teleport_closer = true;
   reason.teleport_self   = true;
+  reason.teleport_limit  = true;
 
   float d     = teleport_distance_with_modifiers_get();
   int   tries = d * d;
@@ -533,8 +587,9 @@ bool Thing::teleport_randomly_away_from_player(TeleportReason reason)
 
   idle_count_set(0);
 
-  reason.teleport_away = true;
-  reason.teleport_self = true;
+  reason.teleport_escape = true;
+  reason.teleport_self   = true;
+  reason.teleport_limit  = true;
 
   float d     = teleport_distance_with_modifiers_get();
   int   tries = d * d;
@@ -640,10 +695,6 @@ bool Thing::teleport_self(TeleportReason reason, Thingp maybe_victim)
     return false;
   }
 
-  if (! maybe_aip()) {
-    return false;
-  }
-
   reason.teleport_self = true;
   idle_count_set(0);
 
@@ -679,14 +730,16 @@ bool Thing::teleport_self(TeleportReason reason, Thingp maybe_victim)
   //
   // Only teleport if moving more that 1 tile
   //
-  auto p = aip()->move_path;
-  if (p.size() > 1) {
-    if (d1000() < tp()->chance_d1000_teleport_self()) {
-      dbg("Try to teleport attack");
-      TRACE_AND_INDENT();
+  if (maybe_aip()) {
+    auto p = aip()->move_path;
+    if (p.size() > 1) {
+      if (d1000() < tp()->chance_d1000_teleport_self()) {
+        dbg("Try to teleport attack");
+        TRACE_AND_INDENT();
 
-      auto teleport_dist = pcg_random_range(1, p.size() - 1);
-      return teleport_carefully(reason, get(p, teleport_dist));
+        auto teleport_dist = pcg_random_range(1, p.size() - 1);
+        return teleport_carefully(reason, get(p, teleport_dist));
+      }
     }
   }
 

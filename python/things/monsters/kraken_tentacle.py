@@ -59,6 +59,7 @@ def tp_init(name, text_long_name):
     my.is_minion(self, True)
     my.is_monst_class_A(self, True)
     my.is_monst(self, True)
+    my.is_able_to_be_teleported(self, True)
     my.is_moveable(self, True)
     my.is_shallow_water_swimmer(self, True)
     my.is_soft(self, True)

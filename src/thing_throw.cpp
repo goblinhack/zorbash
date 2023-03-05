@@ -105,16 +105,36 @@ bool Thing::throw_at(Thingp what, Thingp target)
   //
   auto throw_at             = target->curr_at;
   auto throw_was_stopped_at = in_the_way_for_throwing(curr_at, throw_at);
-  if (throw_at != throw_was_stopped_at) {
-    if (is_player()) {
-      msg("You fail to throw %s that far, something was in the way.", what->text_the().c_str());
-    } else {
-      dbg("Fail to throw %s that far, something was in the way.", what->text_the().c_str());
-    }
-    throw_at = throw_was_stopped_at;
 
+  auto in_the_way = in_the_way_for_throwing(curr_at, throw_at, 1);
+  if (in_the_way.size()) {
+    target = in_the_way[ 0 ];
+
+    if (target && target->is_portal()) {
+      //
+      // Throwing into a portal?
+      // Will teleport the item later after the particle move.
+      //
+      if (is_player()) {
+        msg("You throw %s into a portal.", what->text_the().c_str());
+      } else {
+        msg("%s throws %s into a portal.", text_The().c_str(), what->text_the().c_str());
+      }
+    } else {
+      //
+      // Something was in the way.
+      //
+      if (is_player()) {
+        msg("You fail to throw %s that far, something was in the way.", what->text_the().c_str());
+      } else {
+        dbg("Fail to throw %s that far, something was in the way.", what->text_the().c_str());
+      }
+
+      need_to_choose_a_new_target = true;
+    }
+
+    throw_at = target->curr_at;
     dbg("Throw %s at new in-the-way thing at: %s", what->to_short_string().c_str(), throw_at.to_string().c_str());
-    need_to_choose_a_new_target = true;
   }
 
   //
@@ -197,7 +217,15 @@ bool Thing::throw_at(Thingp what, Thingp target)
   dbg("Throw item %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  what->move_to_immediately(throw_at);
+  if (target && target->is_portal()) {
+    //
+    // The portal will move the item.
+  } else {
+    //
+    // Move to the new location.
+    //
+    what->move_to_immediately(throw_at);
+  }
 
   //
   // Important to call this prior to drop, as drop() will spawn a particle. We want to spawn our own particle here,
@@ -315,14 +343,35 @@ bool Thing::throw_at(Thingp what, Thingp target)
   //
   // Must come after the particle code above.
   //
-  what->location_check_me();
   if (what->is_used_when_thrown()) {
+    dbg("Use thrown item");
+    TRACE_AND_INDENT();
     used(what, target, true /* remove_after_use */);
   } else {
     DropReason reason;
     reason.is_being_thrown = true;
-    drop(what, target, reason);
+
+    if (target && target->is_portal()) {
+      dbg("Drop into portal");
+      TRACE_AND_INDENT();
+      drop(what, target, reason);
+    } else {
+      dbg("Drop thrown item");
+      TRACE_AND_INDENT();
+      drop(what, target, reason);
+    }
   }
+
+  dbg("Post drop");
+  TRACE_AND_INDENT();
+
+  //
+  // Location check must be after drop as this could thrown into a teleport.
+  //
+  what->location_check_me();
+
+  dbg("Post location check");
+  TRACE_AND_INDENT();
 
   //
   // As there is no animation, no need to hide.

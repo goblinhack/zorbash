@@ -143,6 +143,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->tick_last_awoke);
    in >> bits(my.t->tick_last_did_something);
    in >> bits(my.t->tick_last_dropped);
+   in >> bits(my.t->tick_last_teleported);
    in >> bits(my.t->tick_last_escape);
    in >> bits(my.t->tick_last_i_attacked);
    in >> bits(my.t->tick_last_i_tried_to_attack);
@@ -447,7 +448,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->i_set_is_block_of_ice                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_brazier                       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_bridge                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->i_set_is_burnable                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_burnable                      = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_carnivorous_plant             = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_chasm                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_combustible                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -481,7 +482,8 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->i_set_is_obs_destructable              = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_obs_for_jump_landing          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_obs_wall_or_door              = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->i_set_is_obs_when_dead              = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_obs_when_dead                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_portal                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   // end sort marker3
   // clang-format on
 
@@ -592,6 +594,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_gfx_water);
   in >> bits(my.t->_heatmap);
   in >> bits(my.t->_is_able_to_stand_on);
+  in >> bits(my.t->_is_portal);
   in >> bits(my.t->_is_acid);
   in >> bits(my.t->_is_ascend_dungeon);
   in >> bits(my.t->_is_ascend_sewer);

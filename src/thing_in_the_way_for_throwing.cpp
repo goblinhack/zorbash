@@ -60,7 +60,7 @@ Thingp Thing::in_the_way_for_throwing(const point s, const point e, int x, int y
 //
 // We're trying to throw, but something might be in the way. Return the end destination.
 //
-point Thing::in_the_way_for_throwing(const point s, const point e)
+std::vector< Thingp > Thing::in_the_way_for_throwing(const point s, const point e, size_t max_elems)
 {
   TRACE_NO_INDENT();
 
@@ -71,22 +71,24 @@ point Thing::in_the_way_for_throwing(const point s, const point e)
   int x1 = e.x;
   int y1 = e.y;
 
-  int   dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
-  int   dy = -abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
-  int   err  = dx + dy, e2; /* error value e_xy */
-  point prev = s;
+  int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
+  int dy = -abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
+  int err = dx + dy, e2; /* error value e_xy */
 
   for (;;) { /* loop */
     if (x0 == x1 && y0 == y1) {
-      return e;
+      break;
     }
 
     auto it = in_the_way_for_throwing(s, e, x0, y0);
     if (it) {
-      dbg("hit something stop at %d,%d", prev.x, prev.y);
-      return prev;
+      out.push_back(it);
+      if (max_elems) {
+        if (out.size() >= max_elems) {
+          return out;
+        }
+      }
     }
-    prev = point(x0, y0);
 
     e2 = 2 * err;
     if (e2 >= dy) {
@@ -98,5 +100,5 @@ point Thing::in_the_way_for_throwing(const point s, const point e)
       y0 += sy;
     } /* e_xy+e_y < 0 */
   }
-  return e;
+  return out;
 }

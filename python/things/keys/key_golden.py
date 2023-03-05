@@ -26,6 +26,7 @@ def key_init(name, text_long_name):
     my.is_described_when_hovering_over(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)
+    my.is_able_to_be_teleported(self, True)
     my.is_key(self, 10)
     my.is_loggable(self, True)
     my.is_metal(self, True)

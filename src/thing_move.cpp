@@ -110,22 +110,26 @@ void Thing::move_finish(void)
   }
 
   //
-  // Did we enter something like a portal?
+  // Did we enter something like a portal? Don't check if already teleporting.
   //
-  FOR_ALL_NON_INTERNAL_THINGS(level, it, curr_at.x, curr_at.y)
-  {
-    if (it == this) {
-      continue;
-    }
+  if (! is_teleporting) {
+    //
+    // Do not do this for carried items else it is a bit weird for items to teleport by themselves somewhere else.
+    //
+    if (! immediate_owner()) {
+      FOR_ALL_NON_INTERNAL_THINGS(level, it, curr_at.x, curr_at.y)
+      {
+        if (it == this) {
+          continue;
+        }
 
-    if (it->is_portal()) {
-      it->con("XXX");
-    }
-    if (! it->on_enter_do().empty()) {
-      it->on_enter(this);
+        if (! it->on_enter_do().empty()) {
+          it->on_enter(this);
+        }
+      }
+      FOR_ALL_THINGS_END()
     }
   }
-  FOR_ALL_THINGS_END()
 }
 
 bool Thing::move(point future_pos)
@@ -640,7 +644,7 @@ void Thing::update_interpolated_position(void)
 
     new_pos.x = last_at.x + dx * step;
     new_pos.y = last_at.y + dy * step;
-  } else if (! is_moving) {
+  } else if (! is_moving || is_teleporting) {
     if (curr_at != last_at) {
       if (! is_hidden) {
         dbg2("Changed position (new %d,%d, old %d,%d)", curr_at.x, curr_at.y, last_at.x, last_at.y);

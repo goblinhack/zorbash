@@ -648,7 +648,7 @@ do
       is_unused_flag195 \
       is_unused_flag196 \
       is_unused_flag197 \
-      is_unused_flag198 \
+      is_able_to_be_teleported \
       is_portal \
       is_unused_flag2 \
       is_unused_flag20 \

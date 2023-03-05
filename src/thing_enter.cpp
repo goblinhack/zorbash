@@ -15,12 +15,12 @@
 void Thing::on_enter(Thingp victim)
 {
   TRACE_NO_INDENT();
-  auto on_stealing = tp()->on_stealing_do();
-  if (std::empty(on_stealing)) {
+  auto on_enter = tp()->on_enter_do();
+  if (std::empty(on_enter)) {
     return;
   }
 
-  auto t = split_tokens(on_stealing, '.');
+  auto t = split_tokens(on_enter, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -33,13 +33,12 @@ void Thing::on_enter(Thingp victim)
       mod = name();
     }
 
-    dbg2("Call %s.%s(%s %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), victim->to_short_string().c_str());
+    con("Call %s.%s(%s %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), victim->to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, victim->id.id, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
   } else {
-    ERR("Bad on_stealing call [%s] expected mod:function, got %d elems", on_stealing.c_str(),
-        (int) on_stealing.size());
+    ERR("Bad on_enter call [%s] expected mod:function, got %d elems", on_enter.c_str(), (int) on_enter.size());
   }
 }
 

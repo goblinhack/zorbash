@@ -106,6 +106,54 @@ uint32_t Thing::tick_last_dropped_incr(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// tick_last_teleported
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::tick_last_teleported(void)
+{
+  TRACE_NO_INDENT();
+
+  if (maybe_infop()) {
+    return (infop()->tick_last_teleported);
+  }
+  return 0;
+}
+
+uint32_t Thing::tick_last_teleported_set(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_teleported = v);
+}
+
+uint32_t Thing::tick_last_teleported_decr(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_teleported -= v);
+}
+
+uint32_t Thing::tick_last_teleported_incr(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_teleported += v);
+}
+
+uint32_t Thing::tick_last_teleported_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_teleported--);
+}
+
+uint32_t Thing::tick_last_teleported_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_teleported++);
+}
+
+////////////////////////////////////////////////////////////////////////////
 // tick_last_location_check
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::tick_last_location_check(void)
