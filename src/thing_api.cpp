@@ -1255,15 +1255,15 @@ int Thing::is_unused_flag192(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag192());
 }
-int Thing::is_unused_flag193(void)
+int Thing::is_attackable_by_magic(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag193());
+  return (tp()->is_attackable_by_magic());
 }
-int Thing::is_unused_flag194(void)
+int Thing::is_magical_effect(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag194());
+  return (tp()->is_magical_effect());
 }
 
 int Thing::is_able_to_be_teleported(void)

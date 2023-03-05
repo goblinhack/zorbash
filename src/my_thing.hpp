@@ -1313,6 +1313,7 @@ public:
   int is_ascend_dungeon(void);
   int is_ascend_sewer(void);
   int is_asleep_initially(void);
+  int is_attackable_by_magic(void);
   int is_attackable_by_monst(void);
   int is_attackable_by_player(void);
   int is_attacked_with_dmg_acid(Thingp hitter, Thingp real_hitter, int damage);
@@ -1492,6 +1493,7 @@ public:
   int is_limb(void);
   int is_living(void);
   int is_loggable(void);
+  int is_magical_effect(void);
   int is_magical(void);
   int is_map_beast(void);
   int is_map_treasure(void);
@@ -1692,8 +1694,6 @@ public:
   int is_unused_flag190(void);
   int is_unused_flag191(void);
   int is_unused_flag192(void);
-  int is_unused_flag193(void);
-  int is_unused_flag194(void);
   int is_unused_flag19(void);
   int is_unused_flag1(void);
   int is_unused_flag20(void);

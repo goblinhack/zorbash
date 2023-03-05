@@ -7,6 +7,7 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.gfx_ascii_shown(self, True)
     my.is_loggable(self, True)
+    my.is_magical_effect(self, True)
     my.is_no_tile(self, True)
     my.text_a_or_an(self, "a")
     my.tick_prio(self, my.MAP_TICK_PRIO_VERY_HIGH)

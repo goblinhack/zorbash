@@ -310,6 +310,7 @@ private:
   int _is_ascend_dungeon {};
   int _is_ascend_sewer {};
   int _is_asleep_initially {};
+  int _is_attackable_by_magic {};
   int _is_attackable_by_monst {};
   int _is_attackable_by_player {};
   int _is_auto_collect_item {};
@@ -465,6 +466,7 @@ private:
   int _is_living {};
   int _is_loggable {};
   int _is_magical {};
+  int _is_magical_effect {};
   int _is_map_beast {};
   int _is_map_treasure {};
   int _is_meat {};
@@ -666,8 +668,6 @@ private:
   int _is_unused_flag190 {};
   int _is_unused_flag191 {};
   int _is_unused_flag192 {};
-  int _is_unused_flag193 {};
-  int _is_unused_flag194 {};
   int _is_unused_flag2 {};
   int _is_unused_flag20 {};
   int _is_unused_flag21 {};
@@ -1594,6 +1594,7 @@ public:
   int is_ascend_dungeon(void) const;
   int is_ascend_sewer(void) const;
   int is_asleep_initially(void) const;
+  int is_attackable_by_magic(void) const;
   int is_attackable_by_monst(void) const;
   int is_attackable_by_player(void) const;
   int is_auto_collect_item(void) const;
@@ -1747,6 +1748,7 @@ public:
   int is_limb(void) const;
   int is_living(void) const;
   int is_loggable(void) const;
+  int is_magical_effect(void) const;
   int is_magical(void) const;
   int is_map_beast(void) const;
   int is_map_treasure(void) const;
@@ -1947,8 +1949,6 @@ public:
   int is_unused_flag190(void) const;
   int is_unused_flag191(void) const;
   int is_unused_flag192(void) const;
-  int is_unused_flag193(void) const;
-  int is_unused_flag194(void) const;
   int is_unused_flag19(void) const;
   int is_unused_flag1(void) const;
   int is_unused_flag20(void) const;
@@ -2334,6 +2334,7 @@ public:
   void is_ascend_dungeon_set(int v);
   void is_ascend_sewer_set(int v);
   void is_asleep_initially_set(int v);
+  void is_attackable_by_magic_set(int v);
   void is_attackable_by_monst_set(int v);
   void is_attackable_by_player_set(int v);
   void is_auto_collect_item_set(int v);
@@ -2487,6 +2488,7 @@ public:
   void is_limb_set(int v);
   void is_living_set(int v);
   void is_loggable_set(int v);
+  void is_magical_effect_set(int v);
   void is_magical_set(int v);
   void is_map_beast_set(int v);
   void is_map_treasure_set(int v);
@@ -2687,8 +2689,6 @@ public:
   void is_unused_flag190_set(int v);
   void is_unused_flag191_set(int v);
   void is_unused_flag192_set(int v);
-  void is_unused_flag193_set(int v);
-  void is_unused_flag194_set(int v);
   void is_unused_flag19_set(int v);
   void is_unused_flag1_set(int v);
   void is_unused_flag20_set(int v);

@@ -1211,11 +1211,11 @@ public:
   void place_dry_grass(Dungeonp d);
   void place_floor_deco(Dungeonp d);
   void place_foliage(Dungeonp d);
+  void place_portals(Dungeonp d);
   void place_random_torches(Dungeonp d);
   void place_random_treasure(Dungeonp d);
   void place_random_water_monsters(void);
   void place_spiderweb(Dungeonp d);
-  void place_portals(Dungeonp d);
   void place_swimming_monsters(void);
   void place_the_grid(void);
   void place_wet_grass(Dungeonp d);

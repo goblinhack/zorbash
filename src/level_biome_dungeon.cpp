@@ -2026,7 +2026,11 @@ void Level::place_portals(Dungeonp d)
     if (d->is_hazard(x, y)) {
       continue;
     }
-    if (d->is_wall_no_check(x, y)) {
+    if (! d->is_floor(x, y)) {
+      continue;
+    }
+
+    if (! d->is_floor_deco_at(x, y)) {
       continue;
     }
 

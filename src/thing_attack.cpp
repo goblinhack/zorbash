@@ -321,6 +321,18 @@ bool Thing::possible_to_attack(const Thingp victim)
     }
   }
 
+  //
+  // To allow negation to attack portals.
+  //
+  if (is_magical()) {
+    if (victim->is_attackable_by_magic()) {
+      if (is_debug_type()) {
+        dbg("Can attack magical enemy %s", victim->to_short_string().c_str());
+      }
+      return true;
+    }
+  }
+
   if (is_enemy(victim)) {
     if (is_debug_type()) {
       dbg("Can attack enemy %s", victim->to_short_string().c_str());

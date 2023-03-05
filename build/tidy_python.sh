@@ -643,8 +643,8 @@ do
       is_unused_flag190 \
       is_unused_flag191 \
       is_unused_flag192 \
-      is_unused_flag193 \
-      is_unused_flag194 \
+      is_attackable_by_magic \
+      is_magical_effect \
       is_able_to_amplify_footsteps \
       is_wet_grass_trampled \
       is_able_to_dampen_footsteps \

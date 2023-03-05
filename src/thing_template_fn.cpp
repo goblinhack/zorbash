@@ -541,6 +541,7 @@ int Tp::is_light(void) const { return _is_light; }
 int Tp::is_limb(void) const { return _is_limb; }
 int Tp::is_living(void) const { return _is_living; }
 int Tp::is_loggable(void) const { return _is_loggable; }
+int Tp::is_magical_effect(void) const { return _is_magical_effect; }
 int Tp::is_magical(void) const { return _is_magical; }
 int Tp::is_map_beast(void) const { return _is_map_beast; }
 int Tp::is_map_treasure(void) const { return _is_map_treasure; }
@@ -741,8 +742,7 @@ int Tp::is_unused_flag18(void) const { return _is_unused_flag18; }
 int Tp::is_unused_flag190(void) const { return _is_unused_flag190; }
 int Tp::is_unused_flag191(void) const { return _is_unused_flag191; }
 int Tp::is_unused_flag192(void) const { return _is_unused_flag192; }
-int Tp::is_unused_flag193(void) const { return _is_unused_flag193; }
-int Tp::is_unused_flag194(void) const { return _is_unused_flag194; }
+int Tp::is_attackable_by_magic(void) const { return _is_attackable_by_magic; }
 int Tp::is_unused_flag19(void) const { return _is_unused_flag19; }
 int Tp::is_unused_flag1(void) const { return _is_unused_flag1; }
 int Tp::is_unused_flag20(void) const { return _is_unused_flag20; }
@@ -1281,6 +1281,7 @@ void Tp::is_light_set(int v) { _is_light = v; }
 void Tp::is_limb_set(int v) { _is_limb = v; }
 void Tp::is_living_set(int v) { _is_living = v; }
 void Tp::is_loggable_set(int v) { _is_loggable = v; }
+void Tp::is_magical_effect_set(int v) { _is_magical_effect = v; }
 void Tp::is_magical_set(int v) { _is_magical = v; }
 void Tp::is_map_beast_set(int v) { _is_map_beast = v; }
 void Tp::is_map_treasure_set(int v) { _is_map_treasure = v; }
@@ -1481,8 +1482,7 @@ void Tp::is_unused_flag18_set(int v) { _is_unused_flag18 = v; }
 void Tp::is_unused_flag190_set(int v) { _is_unused_flag190 = v; }
 void Tp::is_unused_flag191_set(int v) { _is_unused_flag191 = v; }
 void Tp::is_unused_flag192_set(int v) { _is_unused_flag192 = v; }
-void Tp::is_unused_flag193_set(int v) { _is_unused_flag193 = v; }
-void Tp::is_unused_flag194_set(int v) { _is_unused_flag194 = v; }
+void Tp::is_attackable_by_magic_set(int v) { _is_attackable_by_magic = v; }
 void Tp::is_unused_flag19_set(int v) { _is_unused_flag19 = v; }
 void Tp::is_unused_flag1_set(int v) { _is_unused_flag1 = v; }
 void Tp::is_unused_flag20_set(int v) { _is_unused_flag20 = v; }
