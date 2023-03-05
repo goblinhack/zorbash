@@ -3,7 +3,7 @@ import tp
 
 
 def on_born(me, x, y):
-    my.spawn_owned_thing_at_my_position(me, "explosion_cold")
+    my.spawn_at_my_position(me, "explosion_cold")
 
 
 #

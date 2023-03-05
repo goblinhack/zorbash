@@ -38,12 +38,12 @@ def on_use(owner, me, target, x, y):
     # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
     # my.con("me    {} {:X}".format(my.thing_name_get(me), me))
     # my.con("target  {} {:X}".format(my.thing_name_get(target), target))
-    my.spawn_owned_thing_at_my_position(target, "explosion_major")
+    my.spawn_at_my_position(target, "explosion_major")
     my.spawn_using_items_radius_range(owner, me, target, "explosion_destroy_floor")
 
 
 def on_dropped(me, x, y):
-    my.spawn_owned_thing_at_my_position(me, "explosion_major")
+    my.spawn_at_my_position(me, "explosion_major")
     my.spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
 
 
