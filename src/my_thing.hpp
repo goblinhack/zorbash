@@ -371,8 +371,8 @@ public:
   Thingp leader(void);
   Thingp most_dangerous_adjacent_thing(void);
   Thingp most_dangerous_visible_thing(void);
-  Thingp fire_projectile_at(Thingp wand, const std::string &item, point at);
-  Thingp fire_projectile_at(Thingp wand, const std::string &item, Thingp target);
+  Thingp projectile_shoot_at(Thingp wand, const std::string &item, point at);
+  Thingp projectile_shoot_at(Thingp wand, const std::string &item, Thingp target);
   Thingp spawn_at(const std::string &what);
   Thingp spawn_at(const std::string &what, point p);
   Thingp spawn_at_if_possible(const std::string &what);

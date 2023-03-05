@@ -90,20 +90,6 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
   dbg("Laser fire %s at %s", gfx_targetted_laser.c_str(), target->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  if (is_player()) {
-    if (use_options && use_options->radial_effect) {
-      msg("You zap %s.", item->text_the().c_str());
-    } else {
-      msg("You zap %s at %s.", item->text_the().c_str(), target->text_the().c_str());
-    }
-  } else {
-    if (use_options && use_options->radial_effect) {
-      msg("%s zaps %s.", text_The().c_str(), item->text_the().c_str());
-    } else {
-      msg("%s zaps %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
-    }
-  }
-
   auto start = last_blit_at;
   auto end   = target->last_blit_at;
 
@@ -138,6 +124,20 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
   // Hit all things in the line of sight of the laser
   //
   if (use_options && use_options->radial_effect) {
+    if (is_player()) {
+      if (use_options && use_options->radial_effect) {
+        msg("You zap %s.", item->text_the().c_str());
+      } else {
+        msg("You zap %s at %s.", item->text_the().c_str(), target->text_the().c_str());
+      }
+    } else {
+      if (use_options && use_options->radial_effect) {
+        msg("%s zaps %s.", text_The().c_str(), item->text_the().c_str());
+      } else {
+        msg("%s zaps %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
+      }
+    }
+
     dbg("Firing radial effect");
     TRACE_AND_INDENT();
 
@@ -174,6 +174,20 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
         IF_DEBUG2 { target->log("This is in the way"); }
         TRACE_AND_INDENT();
 
+        if (is_player()) {
+          if (use_options && use_options->radial_effect) {
+            msg("You zap %s.", item->text_the().c_str());
+          } else {
+            msg("You zap %s at %s.", item->text_the().c_str(), target->text_the().c_str());
+          }
+        } else {
+          if (use_options && use_options->radial_effect) {
+            msg("%s zaps %s.", text_The().c_str(), item->text_the().c_str());
+          } else {
+            msg("%s zaps %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
+          }
+        }
+
         //
         // Ignore things that are too close
         //
@@ -192,6 +206,42 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
               game->tick_begin("failed to fire laser");
             }
             return false;
+          }
+        }
+
+        //
+        // Find the end of the portal which is where we will fire the new laser.
+        //
+        if (target && target->is_portal()) {
+          auto  delta = target->curr_at - curr_at;
+          point destination_of_first_portal;
+
+          //
+          // The endpoint may be a portal, or could just be randomly chosen space.
+          //
+          if (target->teleport_portal_find_target(destination_of_first_portal)) {
+            //
+            // Fire a 2nd laser from the portal end point.
+            //
+            Thingp second_portal = level->thing_find_portal_at(destination_of_first_portal);
+            if (second_portal) {
+              point second_portal_target = destination_of_first_portal + delta;
+              dbg("Shooting named laser from second portal at %s with target at %s",
+                  destination_of_first_portal.to_string().c_str(), second_portal_target.to_string().c_str());
+              TRACE_AND_INDENT();
+
+              FOR_ALL_GRID_THINGS(level, grid_thing, second_portal_target.x, second_portal_target.y)
+              {
+                if (grid_thing->is_the_grid) {
+                  second_portal->laser_shoot_at(item, gfx_targetted_laser, grid_thing, use_options);
+                }
+                break;
+              }
+              FOR_ALL_THINGS_END()
+            }
+          } else {
+            dbg("Failed to shoot named laser from second portal at %s",
+                destination_of_first_portal.to_string().c_str());
           }
         }
 
@@ -240,6 +290,20 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
       //
       dbg("Firing laser effect (nothing in the way)");
       TRACE_AND_INDENT();
+
+      if (is_player()) {
+        if (use_options && use_options->radial_effect) {
+          msg("You zap %s.", item->text_the().c_str());
+        } else {
+          msg("You zap %s at %s.", item->text_the().c_str(), target->text_the().c_str());
+        }
+      } else {
+        if (use_options && use_options->radial_effect) {
+          msg("%s zaps %s.", text_The().c_str(), item->text_the().c_str());
+        } else {
+          msg("%s zaps %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
+        }
+      }
 
       auto laser = level->thing_new(gfx_targetted_laser, target->curr_at, owner);
       if (! laser) {

@@ -26,7 +26,7 @@ bool Thing::projectile_choose_target(Thingp item, Thingp victim /* can be null *
     used(item, victim, true);
 
     if (! item->target_name_projectile().empty()) {
-      fire_projectile_at(item, item->target_name_projectile(), victim);
+      projectile_shoot_at(item, item->target_name_projectile(), victim);
     } else {
       err("Unknown projectile: %s.", item->text_the().c_str());
       return false;
@@ -48,7 +48,7 @@ bool Thing::projectile_choose_target(Thingp item, Thingp victim /* can be null *
   return is_target_select(item);
 }
 
-Thingp Thing::fire_projectile_at(Thingp item, const std::string &target_name_projectile, Thingp target)
+Thingp Thing::projectile_shoot_at(Thingp item, const std::string &target_name_projectile, Thingp target)
 {
   //
   // NOTE: the item can be null here if this is monster firing with its
@@ -145,36 +145,34 @@ Thingp Thing::fire_projectile_at(Thingp item, const std::string &target_name_pro
   //
   if (target && target->is_portal()) {
     auto  delta = target->curr_at - curr_at;
-    point other_portal;
+    point destination_of_first_portal;
 
-    if (target->teleport_portal_find_target(other_portal)) {
-      point other_portal_target = other_portal + delta;
-
-      dbg("Shooting named projectile from other portal at %s with target at %s", other_portal.to_string().c_str(),
-          other_portal_target.to_string().c_str());
-
-      level->thing_new(target_name_projectile, other_portal + delta, owner);
-
+    //
+    // The endpoint may be a portal, or could just be randomly chosen space.
+    //
+    if (target->teleport_portal_find_target(destination_of_first_portal)) {
       //
-      // Fire a 2nd particle from the portal end point.
+      // Fire a 2nd projectile from the portal end point.
       //
-      FOR_ALL_GRID_THINGS(level, grid_thing, other_portal_target.x, other_portal_target.y)
-      {
-        if (grid_thing->is_the_grid) {
-          ProjectileInfo info {};
-          info.pixel_start  = target->last_blit_at;
-          info.map_start    = target->curr_at;
-          info.pixel_stop   = grid_thing->last_blit_at;
-          info.map_stop     = grid_thing->curr_at;
-          info.pixel_map_at = level->pixel_map_at;
+      Thingp second_portal = level->thing_find_portal_at(destination_of_first_portal);
+      if (second_portal) {
+        point second_portal_target = destination_of_first_portal + delta;
+        dbg("Shooting named projectile from second portal at %s with target at %s",
+            destination_of_first_portal.to_string().c_str(), second_portal_target.to_string().c_str());
+        TRACE_AND_INDENT();
 
-          level->new_projectile(projectile->id, target->id, info, 200);
+        FOR_ALL_GRID_THINGS(level, grid_thing, second_portal_target.x, second_portal_target.y)
+        {
+          if (grid_thing->is_the_grid) {
+            second_portal->projectile_shoot_at(item, target_name_projectile, grid_thing);
+          }
           break;
         }
+        FOR_ALL_THINGS_END()
       }
-      FOR_ALL_THINGS_END()
     } else {
-      dbg("Failed to shoot named projectile from other portal at %s", other_portal.to_string().c_str());
+      dbg("Failed to shoot named projectile from second portal at %s",
+          destination_of_first_portal.to_string().c_str());
     }
   }
 
@@ -195,7 +193,7 @@ Thingp Thing::fire_projectile_at(Thingp item, const std::string &target_name_pro
   info.map_stop             = target->curr_at;
   info.follow_moving_target = true;
   info.pixel_map_at         = level->pixel_map_at;
-  level->new_projectile(projectile->id, target->id, info, 200);
+  level->new_projectile(projectile->id, target->id, info, game->current_move_speed);
 
   on_use(projectile, target);
 
@@ -210,7 +208,7 @@ Thingp Thing::fire_projectile_at(Thingp item, const std::string &target_name_pro
   return projectile;
 }
 
-Thingp Thing::fire_projectile_at(Thingp item, const std::string &target_name_projectile, point at)
+Thingp Thing::projectile_shoot_at(Thingp item, const std::string &target_name_projectile, point at)
 {
   //
   // NOTE: the item can be null here if this is monster firing with its
@@ -248,13 +246,13 @@ Thingp Thing::fire_projectile_at(Thingp item, const std::string &target_name_pro
   ThingAttackOptions attack_options  = {};
   attack_options.allow_hitting_walls = true;
   if (victim_attack_choose_best(nullptr, at, &best, &best_hit_at, &attack_options)) {
-    return fire_projectile_at(item, target_name_projectile, best);
+    return projectile_shoot_at(item, target_name_projectile, best);
   }
 
   FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
   {
     if (t->is_the_grid) {
-      return fire_projectile_at(item, target_name_projectile, t);
+      return projectile_shoot_at(item, target_name_projectile, t);
     }
   }
   FOR_ALL_THINGS_END()

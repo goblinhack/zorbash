@@ -276,7 +276,7 @@ bool Thing::throw_at(Thingp what, Thingp target)
           //
           // Fire the ascii projectile which should not really interact.
           //
-          fire_projectile_at(what, what->target_name_projectile(), throw_at);
+          projectile_shoot_at(what, what->target_name_projectile(), throw_at);
 
           //
           // Make sure the thrown item appears.
@@ -296,7 +296,7 @@ bool Thing::throw_at(Thingp what, Thingp target)
           //
           // Fire the ascii projectile which should not really interact.
           //
-          fire_projectile_at(what, what->target_name_projectile(), throw_at);
+          projectile_shoot_at(what, what->target_name_projectile(), throw_at);
 
           //
           // Make sure the thrown item appears.

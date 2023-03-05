@@ -182,3 +182,17 @@ bool Thing::teleport_portal_find_target(point &other_end_of_portal)
 
   return false;
 }
+
+Thingp Level::thing_find_portal_at(point at)
+{
+  FOR_ALL_THINGS_THAT_INTERACT(this, t, at.x, at.y)
+  {
+    if (t->is_portal()) {
+      return t;
+    }
+  }
+  FOR_ALL_THINGS_END()
+
+  return nullptr;
+}
+

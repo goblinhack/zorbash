@@ -145,7 +145,7 @@ PyObject *thing_shoot_at(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   if (itemp->is_projectile()) {
-    if (owner->fire_projectile_at(nullptr /* staff */, std::string(item), target)) {
+    if (owner->projectile_shoot_at(nullptr /* staff */, std::string(item), target)) {
       Py_RETURN_TRUE;
     }
     Py_RETURN_FALSE;

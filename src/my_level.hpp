@@ -665,6 +665,7 @@ public:
   Thingp thing_new(Tpp, const point at, Thingp owner = nullptr);
   Thingp thing_new(const std::string &tp_name, Thingp owner = nullptr);
   Thingp thing_new(const std::string &tp_name, const point at, Thingp owner = nullptr);
+  Thingp thing_find_portal_at(point at);
 
   Tpp tp_random_mob(const point p);
   Tpp tp_random_mob_challenge_class_A(const point p);
