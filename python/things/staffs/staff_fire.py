@@ -22,6 +22,7 @@ def on_targetted_radially(me, x, y):
     radius += 1
     # my.con("targetted radially {} {:X}".format(my.thing_name_get(me), me))
     my.spawn_things_around_me(me, "fire", radius)
+    my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
 
 
 def on_idle(me, x, y):

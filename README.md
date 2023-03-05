@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- fire staff radial needs a sound                                                                                                              -->
 <!-- teleport on stealing                                                                                                                         -->
 <!-- grass should dampen noise                                                                                                                    -->
 <!-- dart reuse?                                                                                                                                  -->
