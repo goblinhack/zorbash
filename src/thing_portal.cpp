@@ -5,6 +5,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_level.hpp"
+#include "my_template.hpp"
 #include "my_thing.hpp"
 
 void Thing::portal_tick(void)
@@ -49,6 +50,8 @@ void Thing::portal_tick(void)
 
   auto radius = TELEPORT_DISTANCE_MAX;
 
+  std::vector< point > choices;
+
   //
   // Try to find another portal
   //
@@ -74,12 +77,15 @@ void Thing::portal_tick(void)
       //
       // Found one.
       //
-      bool too_far = false;
-
-      teleport(reason, point(px, py), &too_far);
-
-      return;
+      choices.push_back(point(px, py));
     }
+  }
+
+  if (choices.size()) {
+    bool too_far;
+    auto to = pcg_one_of(choices);
+    teleport(reason, to, &too_far);
+    return;
   }
 
   dbg("Did not find a portal, teleport randomly");
