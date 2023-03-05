@@ -731,6 +731,9 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
       }
     }
 
+    dbg2("INF: Place portals");
+    place_portals(dungeon);
+
     delete dungeon;
     break;
   }
@@ -1496,9 +1499,9 @@ void Level::place_floor_deco(Dungeonp d)
       if (d->is_food(x, y) || d->is_red_blood(x, y) || d->is_door(x, y) || d->is_ascend_dungeon(x, y) ||
           d->is_descend_dungeon(x, y) || d->is_mob_any(x, y) || d->is_key(x, y) || d->is_potion(x, y) ||
           d->is_barrel(x, y) || d->is_staff(x, y) || d->is_ring(x, y) || d->is_secret_door(x, y) ||
-          d->is_weapon_class_A(x, y) || d->is_weapon_class_B(x, y) || d->is_treasure_type(x, y) ||
-          d->is_treasure_class_A(x, y) || d->is_treasure_class_B(x, y) || d->is_treasure_class_C(x, y) ||
-          d->is_monst_any(x, y)) {
+          d->is_portal(x, y) || d->is_weapon_class_A(x, y) || d->is_weapon_class_B(x, y) ||
+          d->is_treasure_type(x, y) || d->is_treasure_class_A(x, y) || d->is_treasure_class_B(x, y) ||
+          d->is_treasure_class_C(x, y) || d->is_monst_any(x, y)) {
         continue;
       }
 
@@ -1539,9 +1542,9 @@ void Level::create_biome_dungeon_place_random_floor_deco(Dungeonp d)
       if (d->is_food(x, y) || d->is_red_blood(x, y) || d->is_door(x, y) || d->is_ascend_dungeon(x, y) ||
           d->is_descend_dungeon(x, y) || d->is_mob_any(x, y) || d->is_key(x, y) || d->is_potion(x, y) ||
           d->is_barrel(x, y) || d->is_staff(x, y) || d->is_ring(x, y) || d->is_secret_door(x, y) ||
-          d->is_weapon_class_A(x, y) || d->is_weapon_class_B(x, y) || d->is_treasure_type(x, y) ||
-          d->is_treasure_class_A(x, y) || d->is_treasure_class_B(x, y) || d->is_treasure_class_C(x, y) ||
-          d->is_monst_any(x, y)) {
+          d->is_portal(x, y) || d->is_weapon_class_A(x, y) || d->is_weapon_class_B(x, y) ||
+          d->is_treasure_type(x, y) || d->is_treasure_class_A(x, y) || d->is_treasure_class_B(x, y) ||
+          d->is_treasure_class_C(x, y) || d->is_monst_any(x, y)) {
         continue;
       }
 
@@ -1977,6 +1980,74 @@ void Level::place_spiderweb(Dungeonp d)
         (void) thing_new(tp->name(), point(x, y));
       }
     }
+  }
+}
+
+//
+// If we only have one portal, place another.
+//
+void Level::place_portals(Dungeonp d)
+{
+  TRACE_AND_INDENT();
+
+  int portal_count = 0;
+
+  for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
+    for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
+      if (d->is_portal(x, y)) {
+        if (++portal_count > 1) {
+          return;
+        }
+      }
+    }
+  }
+
+  //
+  // Sometimes add portals if none exist
+  //
+  if (portal_count == 0) {
+    if (pcg_random_range(0, 100) < 90) {
+      return;
+    }
+  }
+
+  //
+  // Place an additional portal.
+  //
+  auto tries = 1000;
+
+  while (tries-- > 0) {
+    auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK + 1);
+    auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK + 1);
+
+    if (d->is_oob(x, y)) {
+      continue;
+    }
+    if (d->is_hazard(x, y)) {
+      continue;
+    }
+    if (d->is_wall_no_check(x, y)) {
+      continue;
+    }
+
+    if (d->is_food(x, y) || d->is_red_blood(x, y) || d->is_door(x, y) || d->is_ascend_dungeon(x, y) ||
+        d->is_descend_dungeon(x, y) || d->is_mob_any(x, y) || d->is_key(x, y) || d->is_potion(x, y) ||
+        d->is_barrel(x, y) || d->is_staff(x, y) || d->is_ring(x, y) || d->is_secret_door(x, y) ||
+        d->is_portal(x, y) || d->is_weapon_class_A(x, y) || d->is_weapon_class_B(x, y) || d->is_treasure_type(x, y) ||
+        d->is_treasure_class_A(x, y) || d->is_treasure_class_B(x, y) || d->is_treasure_class_C(x, y) ||
+        d->is_monst_any(x, y)) {
+      continue;
+    }
+
+    auto tp = tp_random_portal();
+
+    thing_new(tp->name(), point(x, y));
+
+    if (++portal_count > 1) {
+      return;
+    }
+
+    break;
   }
 }
 

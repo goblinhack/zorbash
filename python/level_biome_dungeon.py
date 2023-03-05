@@ -41,7 +41,7 @@ import my
 # SKILLSTONE                    &
 # SPIDERWEB                     X
 # STAFF                         /
-# TELEPORT                      T
+# PORTAL                        T
 # TRAP                          t
 # TREASURE_CLASS_A              $
 # TREASURE_CLASS_B              2

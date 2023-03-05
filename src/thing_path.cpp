@@ -86,7 +86,7 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
     TRACE_AND_INDENT();
 
     if (is_disliked_by_me(future_pos) || level->is_block_of_ice(future_pos) || level->is_barrel(future_pos) ||
-        level->is_brazier(future_pos)) {
+        level->is_portal(future_pos) || level->is_brazier(future_pos)) {
       DBG2("Next position %s is a hazard (move path size %d)", future_pos.to_string().c_str(),
            (int) ai->move_path.size());
       TRACE_AND_INDENT();

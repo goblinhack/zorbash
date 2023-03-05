@@ -1215,6 +1215,7 @@ public:
   void place_random_treasure(Dungeonp d);
   void place_random_water_monsters(void);
   void place_spiderweb(Dungeonp d);
+  void place_portals(Dungeonp d);
   void place_swimming_monsters(void);
   void place_the_grid(void);
   void place_wet_grass(Dungeonp d);
