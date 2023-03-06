@@ -1,11 +1,10 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- teleport on stealing                                                                                                                         -->
+<!-- impossible to hit pirhana                                                                                                                    -->
 <!-- teleport block                                                                                                                               -->
 <!-- stealth                                                                                                                                      -->
 <!-- cracked walls                                                                                                                                -->
-<!-- smaller rat                                                                                                                                  -->
-<!-- less deadly bats                                                                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
