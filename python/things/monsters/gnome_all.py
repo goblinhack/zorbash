@@ -4,12 +4,7 @@ import tp
 
 def on_born(me, x, y):
     my.thing_friend(me, "gnome_thief")
-    my.thing_carry(me, "dagger")
-    my.thing_carry(me, "dart")
-    my.thing_carry(me, "dart")
-    my.thing_carry(me, "dart")
-    my.thing_carry(me, "dart")
-    my.thing_carry(me, "gold3")
+    my.thing_friend(me, "gnome_dwarf")
 
 
 def on_you_nat_att(me, x, y):
@@ -50,6 +45,7 @@ def tp_init(name, text_long_name):
     my.chance_d1000_steal_item(self, 200)
     my.chance_d100_of_firing_avoiding_comrades(self, 50)
     my.collision_check(self, True)
+    my.on_born_do(self, "me.on_born()")
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 10)
     my.distance_avoid(self, 5)
@@ -138,7 +134,6 @@ def tp_init(name, text_long_name):
     my.noise_decibels_hearing(self, 5)
     my.noise_on_moving(self, 5)
     my.normal_placement_rules(self, True)
-    my.on_born_do(self, "me.on_born()")
     my.on_death_do(self, "gnome_all.on_death()")
     my.on_death_drop_all_items(self, True)
     my.on_hit_and_still_alive_do(self, "gnome_all.on_hit_and_still_alive()")

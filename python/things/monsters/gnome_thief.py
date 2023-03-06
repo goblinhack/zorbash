@@ -4,6 +4,12 @@ import gnome_all
 
 def on_born(me, x, y):
     gnome_all.on_born(me, x, y)
+    my.thing_carry(me, "dagger")
+    my.thing_carry(me, "dart")
+    my.thing_carry(me, "dart")
+    my.thing_carry(me, "dart")
+    my.thing_carry(me, "dart")
+    my.thing_carry(me, "gold3")
 
 
 def on_death_of_my_leader(me, x, y):
@@ -31,7 +37,6 @@ def tp_init(name, text_long_name):
     my.is_able_to_teleport_escape(self, True)
     my.is_biome_dungeon(self, True)
     my.is_cowardly(self, True)
-    my.is_loggable(self, True)
     my.is_monst_class_A(self, True)
     my.on_born_do(self, "me.on_born()")
     my.on_stealing_do(self, "me.on_stealing()")

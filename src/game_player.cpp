@@ -282,6 +282,7 @@ void Game::place_player(void)
       // level->thing_new("cthulite", point(x + 3, y + 2));
       // level->thing_new("blinkcat", point(x + 2, y + 1));
       // level->thing_new("gnome_thief", point(x + 2, y + 1));
+      // level->thing_new("gnome_dwarf", point(x + 2, y + 1));
       // level->thing_new("rat_large", point(x + 1, y + 3));
       // level->thing_new("dogman", point(x + 1, y + 3));
       if (0) {
