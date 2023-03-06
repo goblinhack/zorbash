@@ -1473,10 +1473,10 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         } else {
           i_rolled += att_roll_modifier;
           hit = i_rolled >= to_hit;
-          dbg("Attack on %s: ATT %s(%s,%s) DEF %d(%s), to-hit %d, rolled %d -> %s", victim->to_short_string().c_str(),
-              modifier_to_string(att_roll_modifier).c_str(), modifier_to_string(att_bonus).c_str(),
-              modifier_to_string(att_penalty).c_str(), stat_def, modifier_to_string(def_bonus).c_str(), to_hit,
-              i_rolled, hit ? "hit" : "miss");
+          dbg("Attack on %s: ATT %s(%s bonus,%s penalty) DEF %d(%s), to-hit %d, rolled %d -> %s",
+              victim->to_short_string().c_str(), modifier_to_string(att_roll_modifier).c_str(),
+              modifier_to_string(att_bonus).c_str(), modifier_to_string(att_penalty).c_str(), stat_def,
+              modifier_to_string(def_bonus).c_str(), to_hit, i_rolled, hit ? "hit" : "miss");
         }
 
         //

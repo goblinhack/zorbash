@@ -191,19 +191,6 @@ int Thing::stat_att_penalties_total(void)
   // Terrain penalties
   //
   if (! is_aquatic() && ! buff_is_aquatic()) {
-    if (level->is_water(curr_at)) {
-      int p = stat_att_penalty_when_in_shallow_water();
-      if (p) {
-        if (is_able_to_swim()) {
-          p /= 2;
-        }
-        penalty += p;
-        if (penalty != prev) {
-          prev = penalty;
-          dbg2("Att penalty: with (in shallow water %d): %d", p, penalty);
-        }
-      }
-    }
     if (level->is_deep_water(curr_at)) {
       int p = stat_att_penalty_when_in_deep_water();
       if (p) {
@@ -220,6 +207,18 @@ int Thing::stat_att_penalties_total(void)
         if (penalty != prev) {
           prev = penalty;
           dbg2("Att penalty: with (in deep water %d): %d", p, penalty);
+        }
+      }
+    } else if (level->is_shallow_water(curr_at)) {
+      int p = stat_att_penalty_when_in_shallow_water();
+      if (p) {
+        if (is_able_to_swim()) {
+          p /= 2;
+        }
+        penalty += p;
+        if (penalty != prev) {
+          prev = penalty;
+          dbg2("Att penalty: with (in shallow water %d): %d", p, penalty);
         }
       }
     }
