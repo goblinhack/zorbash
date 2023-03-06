@@ -110,9 +110,13 @@ void Game::place_player(void)
       }
 
       if (0) {
+        level->thing_new("dogman", point(x + 2, y + 3));
         level->thing_new("wet_grass1", point(x + 1, y));
         level->thing_new("wet_grass2", point(x + 2, y));
         level->thing_new("wet_grass4", point(x + 3, y));
+        level->thing_new("dry_grass", point(x + 1, y + 1));
+        level->thing_new("dry_grass", point(x + 2, y + 1));
+        level->thing_new("dry_grass", point(x + 3, y + 1));
       }
 
       if (0) {

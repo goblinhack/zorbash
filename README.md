@@ -1,9 +1,11 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- wet grass should dampen noise                                                                                                                -->
-<!-- dry grass should amplify noise                                                                                                               -->
 <!-- teleport on stealing                                                                                                                         -->
 <!-- teleport block                                                                                                                               -->
+<!-- stealth                                                                                                                                      -->
+<!-- cracked walls                                                                                                                                -->
+<!-- smaller rat                                                                                                                                  -->
+<!-- less deadly bats                                                                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -14,23 +16,23 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
+<!-- - wort food ? fungas foods and some poisonous?                                                                                               -->
+<!-- - paralysis dart                                                                                                                             -->
 <!-- - pressure plate, that monsters avoid                                                                                                        -->
 <!-- - cloak of slime                                                                                                                             -->
 <!-- - sword of slime                                                                                                                             -->
-<!-- - paralysis dart                                                                                                                             -->
-<!-- - wort food ? fungas foods and some poisonous?                                                                                               -->
+<!-- - vampiric damage                                                                                                                            -->
+<!-- - vampiric skill                                                                                                                             -->
 <!-- - spider web spawn small spiders?                                                                                                            -->
 <!-- - monsters with random buffs like vampirism would be interesting                                                                             -->
-<!-- - vampiric damage                                                                                                                            -->
 <!-- - chaos bell of summoning                                                                                                                    -->
 <!-- - crystal chest needs crystal key                                                                                                            -->
 <!-- - crystals walls (or chest) that reflect, so can use on yourself or ally                                                                     -->
 <!-- - need allies                                                                                                                                -->
 <!-- - cursed weapon with bad luck / horseshoe / witches hat?                                                                                     -->
 <!-- - luck trap                                                                                                                                  -->
-<!-- - luck and enchanted stuff                                                                                                                   -->
 <!-- - runics on weapons, like vampirism, force, quietus, lightning                                                                               -->
-<!-- - ogre and totems?                                                                                                                           -->
+<!-- - ogre totems?                                                                                                                               -->
 <!-- - swamp level                                                                                                                                -->
 <!-- - boss 1 Mummy mummy, ankh of life                                                                                                           -->
 <!-- - boss 2 slime boss, spawns slimes, tries to jump splat the player                                                                           -->

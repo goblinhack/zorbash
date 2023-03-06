@@ -21,6 +21,7 @@ def tp_init(name, tiles=[]):
     my.gfx_pixelart_submergable(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "1d5")
+    my.is_able_to_amplify_footsteps(self, True)
     my.is_able_to_fall(self, True)
     my.is_always_hit(self, True)
     my.is_attackable_by_player(self, True)
