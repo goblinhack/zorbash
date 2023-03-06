@@ -281,7 +281,8 @@ void Game::place_player(void)
       // level->thing_new("scorpion_colossal", point(x + 3, y + 2));
       // level->thing_new("cthulite", point(x + 3, y + 2));
       // level->thing_new("blinkcat", point(x + 2, y + 1));
-      // level->thing_new("gnome_thief", point(x + 2, y + 1));
+      level->thing_new("gnome_thief", point(x + 2, y + 1));
+      level->thing_new("rat_large", point(x + 1, y + 3));
       // level->thing_new("dogman", point(x + 1, y + 3));
       if (0) {
         level->thing_new("amulet_healing", point(x + 1, y - 3));

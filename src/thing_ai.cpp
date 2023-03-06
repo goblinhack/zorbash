@@ -2006,15 +2006,9 @@ bool Thing::ai_tick(bool recursing)
   // There is how much we can see, but if we need to avoid something then we need a
   // larger view of the level so we can escape.
   //
-  if (is_intelligent()) {
-    dx *= 2;
-    dy *= 2;
-  }
-
-  //
   // Same goes for wandering.
   //
-  if (ai_wanderer()) {
+  if (ai_wanderer() || is_intelligent()) {
     dx *= 2;
     dy *= 2;
   }

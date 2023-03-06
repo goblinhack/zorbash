@@ -33,10 +33,10 @@ def tp_init(name, text_long_name):
     my.chance_d1000_jump_randomly(self, 20)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
-    my.consume_per_bite_amount(self, 2)
+    my.consume_per_bite_amount(self, 3)
     my.distance_avoid(self, 5)
     my.distance_vision(self, 5)
-    my.dmg_nat_att_dice(self, "1d6+2")
+    my.dmg_nat_att_dice(self, "1d4+2")
     my.dmg_nat_att_type(self, "bite")
     my.dmg_received_doubled_from_fire(self, True)
     my.dmg_received_doubled_from_poison(self, True)
@@ -59,7 +59,7 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_show_outlined(self, True)
     my.gfx_pixelart_submergable(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
-    my.health_initial_dice(self, "2d4")
+    my.health_initial_dice(self, "1d4")
     my.hunger_clock_tick_freq(self, 50)
     my.hunger_is_insatiable(self, True)
     my.is_able_to_be_surprised(self, True)
@@ -95,7 +95,7 @@ def tp_init(name, text_long_name):
     my.is_living(self, True)
     my.is_loggable(self, True)
     my.is_meat(self, True)
-    my.is_monst_class_B(self, True)
+    my.is_monst_class_A(self, True)
     my.is_monst(self, True)
     my.is_moveable(self, True)
     my.is_msg_allowed_hears_something(self, True)
@@ -119,20 +119,20 @@ def tp_init(name, text_long_name):
     my.rarity(self, my.RARITY_COMMON)  # how rare within this monster class
     my.stamina(self, 100)
     my.stat_con(self, 11)
-    my.stat_def(self, 10)
+    my.stat_def(self, 12)
     my.stat_dex(self, 10)
     my.stat_luck(self, 10)
-    my.stat_str(self, 5)
+    my.stat_str(self, 7)
     my.temperature_max(self, 50)
     my.temperature_min(self, 0)
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_long2(self, "Watch out for its jump attack!")
-    my.text_description_long(self, "An rat about as big as a family sized car... Blood drips from its teeth. Seems friendly...")
-    my.text_description_short(self, "An unfeasibly large rat.")
+    my.text_description_long(self, "A rat that is larger than you comfortably would expect to find.")
+    my.text_description_long2(self, "Will eat almost anything. Prefers pizza.")
+    my.text_description_short(self, "A large hungry rat")
     my.text_hits(self, "gores")
-    my.thing_size(self, my.THING_SIZE_GIANT)
+    my.thing_size(self, my.THING_SIZE_LARGE)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
@@ -140,34 +140,34 @@ def tp_init(name, text_long_name):
 
     delay = 150
     my.tile(self,
-            ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="brown",
-            tile="rat_giant.1", delay_ms=delay)
+            ascii_fg_char="r", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="rat_large.1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="brown",
-            tile="rat_giant.2", delay_ms=delay)
+            ascii_fg_char="r", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="rat_large.2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="brown",
-            tile="rat_giant.3", delay_ms=delay)
+            ascii_fg_char="r", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="rat_large.3", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="brown",
-            tile="rat_giant.4", delay_ms=delay)
+            ascii_fg_char="r", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="rat_large.4", delay_ms=delay)
     delay = 1500
     my.tile(self,
-            ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="brown",
-            tile="rat_giant.sleeping.1", is_sleeping=True, delay_ms=delay)
+            ascii_fg_char="r", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="rat_large.sleeping.1", is_sleeping=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="brown",
-            tile="rat_giant.sleeping.2", is_sleeping=True, delay_ms=delay)
+            ascii_fg_char="r", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="rat_large.sleeping.2", is_sleeping=True, delay_ms=delay)
     delay = 150
     my.tile(self,
-            ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="gray30",
-            tile="rat_giant.dead", is_dead=True, delay_ms=delay)
+            ascii_fg_char="r", ascii_bg_col_name="", ascii_fg_col_name="gray30",
+            tile="rat_large.dead", is_dead=True, delay_ms=delay)
 
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="rat_giant", text_long_name="giant rat")
+    tp_init(name="rat_large", text_long_name="large rat")
 
 
 init()

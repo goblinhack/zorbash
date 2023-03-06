@@ -293,6 +293,7 @@ std::initializer_list< std::string > tps = {
     "projectile_web",
     "pyrolizard",
     "rat_giant",
+    "rat_large",
     "reaper",
     "redpepper",
     "red_splatter",
