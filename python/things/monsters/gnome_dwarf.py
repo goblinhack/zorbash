@@ -29,8 +29,9 @@ def tp_init(name, text_long_name):
     my.text_description_long2(self, "This particular gnome is a dwarfish gnome hybrid. How did this come about? Best not to ask. As a result, this gnome prefers the use of a small axe.")
     my.text_description_long3(self, "Gnorfs are stouter and far stronger than normal gnomes with excellent defensive and offensive abilities. Do not underestimate them and definitely do not laugh at their red hats. The red is blood.")
     my.text_description_short(self, "A stalwart gnorf.")
-    my.stat_def(self, 14)
+    my.stat_def(self, 12)
     my.stat_dex(self, 8)
+    my.stat_luck(self, 10)
     my.stat_str(self, 8)
     # end sort marker
 

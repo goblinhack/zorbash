@@ -154,7 +154,7 @@ def tp_init(name, text_long_name):
     my.stat_def_penalty_when_in_shallow_water(self, 2)
     my.stat_def_penalty_when_stuck_max(self, 15)
     my.stat_def_penalty_when_stuck(self, 10)
-    my.stat_def(self, 12)
+    my.stat_def(self, 10)
     my.stat_dex(self, 14)
     my.stat_luck(self, 12)
     my.stat_str(self, 6)
