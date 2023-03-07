@@ -1,6 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- teleport block                                                                                                                               -->
+<!-- stuck under dead rock gnome                                                                                                                  -->
 <!-- stealth                                                                                                                                      -->
 <!-- cracked walls                                                                                                                                -->
 <!-- ------                                                                                                                                       -->

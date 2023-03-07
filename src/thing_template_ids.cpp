@@ -228,6 +228,7 @@ std::initializer_list< std::string > tps = {
     "gnome_all",
     "gnome_thief",
     "gnome_dwarf",
+    "gnome_rock",
     "gold1",
     "gold2",
     "gold3",

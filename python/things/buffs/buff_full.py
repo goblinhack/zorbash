@@ -4,11 +4,6 @@ import tp
 self = None
 
 
-def on_owner_add(me, owner, x, y):
-    if my.thing_is_player(owner):
-        my.thing_msg(me, "You are satiated.")
-
-
 def tp_init(name, text_long_name, text_short_name):
     global self
     self = tp.Tp(name, text_long_name, text_short_name)
@@ -17,8 +12,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_ascii_shown(self, True)
     my.is_buff(self, True)
     my.is_loggable(self, True)
-    my.on_owner_add_do(self, "me.on_owner_add()")
-    my.text_description_long(self, "Hunger does not kill in this game. However, if you become hungry or starved, you will lose points on attack and defense and other abilities may also be impacted. Best to keep food at hand.")
+    my.text_description_long(self, "Hunger does not kill in this game.")
+    my.text_description_long2(self, "However, if you become hungry or starved, you will lose points on attack and defense and other abilities may also be impacted.")
+    my.text_description_long3(self, "Best to keep food at hand.")
     my.text_description_short(self, "You are satiated.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     # end sort marker

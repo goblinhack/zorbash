@@ -281,7 +281,6 @@ static void wid_collect_mouse_over_begin(Widp w, int relx, int rely, int wheelx,
   auto t  = level->thing_find_optional(id);
   if (t) {
     verify(MTYPE_THING, t);
-    LOG("XXX t %p", t);
     wid_thing_info_fini("collect over item");
     game->wid_thing_info_create(t);
   }
