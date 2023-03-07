@@ -162,6 +162,13 @@ void Level::update_deep_water(void)
   for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
       //
+      // Don't remove water a monster is sitting in, else pirhanas get stuck
+      //
+      if (is_monst(x, y)) {
+        continue;
+      }
+
+      //
       // Deep water must be surrounded by water
       //
       if (is_deep_water(x, y)) {

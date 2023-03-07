@@ -563,7 +563,7 @@ PyObject *thing_is_unused_flag188(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag189(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag18(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag190(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag191(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_pirhana(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag192(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag19(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag1(PyObject *obj, PyObject *args, PyObject *keywds);

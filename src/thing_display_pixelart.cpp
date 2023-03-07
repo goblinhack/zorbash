@@ -824,7 +824,6 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
     if (unlikely(tpp->gfx_pixelart_shadow_very_short() || tpp->gfx_pixelart_shadow_short() ||
                  tpp->gfx_pixelart_shadow_long())) {
       if (auto submerged = blit_begin_submerged()) {
-
         blit_shadow(tpp, tile, blit_tl, blit_br);
         blit_end_submerged(submerged);
       } else {

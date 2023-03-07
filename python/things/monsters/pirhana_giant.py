@@ -50,7 +50,6 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
-    my.gfx_pixelart_submergable(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "2d10")
     my.hunger_clock_tick_freq(self, 50)
@@ -67,6 +66,7 @@ def tp_init(name, text_long_name):
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)
     my.is_biome_swamp(self, True)
+    my.gfx_pixelart_oversized_and_centered(self, True)
     my.is_bleeder(self, True)
     my.is_corpse_on_death(self, True)
     my.is_corpse_with_bones(self, True)
@@ -78,7 +78,9 @@ def tp_init(name, text_long_name):
     my.is_immune_to_water(self, True)
     my.is_interesting(self, True)
     my.is_loggable(self, True)
+    my.gfx_pixelart_reflection(self, True)
     my.is_meat(self, True)
+    my.is_pirhana(self, True)
     my.is_monst_class_B(self, True)
     my.is_monst(self, True)
     my.is_moveable(self, True)
@@ -115,7 +117,7 @@ def tp_init(name, text_long_name):
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
     # end sort marker
 
-    delay = 200
+    delay = 800
     my.tile(self,
             ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".1", delay_ms=delay)

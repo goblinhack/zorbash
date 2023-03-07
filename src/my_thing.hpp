@@ -1692,7 +1692,7 @@ public:
   int is_unused_flag189(void);
   int is_unused_flag18(void);
   int is_unused_flag190(void);
-  int is_unused_flag191(void);
+  int is_pirhana(void);
   int is_unused_flag192(void);
   int is_unused_flag19(void);
   int is_unused_flag1(void);

@@ -1245,10 +1245,10 @@ int Thing::is_unused_flag190(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag190());
 }
-int Thing::is_unused_flag191(void)
+int Thing::is_pirhana(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag191());
+  return (tp()->is_pirhana());
 }
 int Thing::is_unused_flag192(void)
 {

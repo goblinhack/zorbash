@@ -641,7 +641,7 @@ do
       is_unused_flag189 \
       is_unused_flag19 \
       is_unused_flag190 \
-      is_unused_flag191 \
+      is_pirhana \
       is_unused_flag192 \
       is_attackable_by_magic \
       is_magical_effect \

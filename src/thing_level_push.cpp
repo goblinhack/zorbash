@@ -369,11 +369,7 @@ void Thing::level_push(void)
 
     submerged_offset_set(0);
 
-    if (is_always_submerged()) {
-      //
-      // Krakens are pre submerged.
-      //
-    } else if (level->is_deep_water((int) map_loc.x, (int) map_loc.y)) {
+    if (level->is_deep_water((int) map_loc.x, (int) map_loc.y)) {
       submerged_offset_set(8);
     } else if (level->is_lava((int) map_loc.x, (int) map_loc.y)) {
       submerged_offset_set(TILE_HEIGHT / 2);

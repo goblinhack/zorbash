@@ -463,7 +463,7 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag189() && (what == "is_unused_flag189")) { return true; }
   if (is_unused_flag18() && (what == "is_unused_flag18")) { return true; }
   if (is_unused_flag190() && (what == "is_unused_flag190")) { return true; }
-  if (is_unused_flag191() && (what == "is_unused_flag191")) { return true; }
+  if (is_pirhana() && (what == "is_pirhana")) { return true; }
   if (is_unused_flag192() && (what == "is_unused_flag192")) { return true; }
   if (is_unused_flag19() && (what == "is_unused_flag19")) { return true; }
   if (is_unused_flag1() && (what == "is_unused_flag1")) { return true; }
@@ -1059,7 +1059,7 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag189() && (what == "is_unused_flag189")) { return true; }
   if (is_unused_flag18() && (what == "is_unused_flag18")) { return true; }
   if (is_unused_flag190() && (what == "is_unused_flag190")) { return true; }
-  if (is_unused_flag191() && (what == "is_unused_flag191")) { return true; }
+  if (is_pirhana() && (what == "is_pirhana")) { return true; }
   if (is_unused_flag192() && (what == "is_unused_flag192")) { return true; }
   if (is_unused_flag19() && (what == "is_unused_flag19")) { return true; }
   if (is_unused_flag1() && (what == "is_unused_flag1")) { return true; }
@@ -1645,7 +1645,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag189") { return &Thing::is_unused_flag189; }
   if (what == "is_unused_flag18") { return &Thing::is_unused_flag18; }
   if (what == "is_unused_flag190") { return &Thing::is_unused_flag190; }
-  if (what == "is_unused_flag191") { return &Thing::is_unused_flag191; }
+  if (what == "is_pirhana") { return &Thing::is_pirhana; }
   if (what == "is_unused_flag192") { return &Thing::is_unused_flag192; }
   if (what == "is_unused_flag19") { return &Thing::is_unused_flag19; }
   if (what == "is_unused_flag1") { return &Thing::is_unused_flag1; }

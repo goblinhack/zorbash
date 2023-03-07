@@ -224,6 +224,7 @@ std::initializer_list< std::string > tps = {
     "gloat",
     "gnome_all",
     "gnome_thief",
+    "gnome_dwarf",
     "gold1",
     "gold2",
     "gold3",

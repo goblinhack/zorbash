@@ -666,7 +666,7 @@ private:
   int _is_unused_flag189 {};
   int _is_unused_flag19 {};
   int _is_unused_flag190 {};
-  int _is_unused_flag191 {};
+  int _is_pirhana {};
   int _is_unused_flag192 {};
   int _is_unused_flag2 {};
   int _is_unused_flag20 {};
@@ -1947,7 +1947,7 @@ public:
   int is_unused_flag189(void) const;
   int is_unused_flag18(void) const;
   int is_unused_flag190(void) const;
-  int is_unused_flag191(void) const;
+  int is_pirhana(void) const;
   int is_unused_flag192(void) const;
   int is_unused_flag19(void) const;
   int is_unused_flag1(void) const;
@@ -2687,7 +2687,7 @@ public:
   void is_unused_flag189_set(int v);
   void is_unused_flag18_set(int v);
   void is_unused_flag190_set(int v);
-  void is_unused_flag191_set(int v);
+  void is_pirhana_set(int v);
   void is_unused_flag192_set(int v);
   void is_unused_flag19_set(int v);
   void is_unused_flag1_set(int v);
