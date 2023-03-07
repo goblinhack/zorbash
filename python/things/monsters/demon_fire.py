@@ -121,6 +121,7 @@ def tp_init(name, text_long_name):
     my.is_msg_allowed_senses_danger(self, True)
     my.is_obs_when_dead(self, True)
     my.is_tickable(self, True)
+    my.is_very_intelligent(self, True)
     my.light_color(self, "red")
     my.light_dist(self, 2)
     my.move_speed(self, 150)

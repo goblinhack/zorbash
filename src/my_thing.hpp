@@ -1493,9 +1493,9 @@ public:
   int is_lightning(void);
   int is_light(void);
   int is_limb(void);
-  int is_living_rock(void);
   int is_living(void);
   int is_loggable(void);
+  int is_made_of_rock(void);
   int is_magical_effect(void);
   int is_magical(void);
   int is_map_beast(void);
@@ -1692,7 +1692,6 @@ public:
   int is_unused_flag185(void);
   int is_unused_flag186(void);
   int is_unused_flag187(void);
-  int is_unused_flag188(void);
   int is_unused_flag18(void);
   int is_unused_flag192(void);
   int is_unused_flag19(void);
@@ -1790,6 +1789,7 @@ public:
   int is_very_combustible(void);
   int is_very_hard(void);
   int is_very_heavy(void);
+  int is_very_intelligent(void);
   int is_wall_dungeon(void);
   int is_wall(void);
   int is_water(void);

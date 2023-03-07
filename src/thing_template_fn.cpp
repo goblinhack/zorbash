@@ -541,9 +541,9 @@ int Tp::is_light_blocker(void) const { return _is_light_blocker; }
 int Tp::is_lightning(void) const { return _is_lightning; }
 int Tp::is_light(void) const { return _is_light; }
 int Tp::is_limb(void) const { return _is_limb; }
-int Tp::is_living_rock(void) const { return _is_living_rock; }
 int Tp::is_living(void) const { return _is_living; }
 int Tp::is_loggable(void) const { return _is_loggable; }
+int Tp::is_made_of_rock(void) const { return _is_made_of_rock; }
 int Tp::is_magical_effect(void) const { return _is_magical_effect; }
 int Tp::is_magical(void) const { return _is_magical; }
 int Tp::is_map_beast(void) const { return _is_map_beast; }
@@ -740,7 +740,6 @@ int Tp::is_unused_flag184(void) const { return _is_unused_flag184; }
 int Tp::is_unused_flag185(void) const { return _is_unused_flag185; }
 int Tp::is_unused_flag186(void) const { return _is_unused_flag186; }
 int Tp::is_unused_flag187(void) const { return _is_unused_flag187; }
-int Tp::is_unused_flag188(void) const { return _is_unused_flag188; }
 int Tp::is_unused_flag18(void) const { return _is_unused_flag18; }
 int Tp::is_unused_flag192(void) const { return _is_unused_flag192; }
 int Tp::is_unused_flag19(void) const { return _is_unused_flag19; }
@@ -838,6 +837,7 @@ int Tp::is_used_when_thrown(void) const { return _is_used_when_thrown; }
 int Tp::is_very_combustible(void) const { return _is_very_combustible; }
 int Tp::is_very_hard(void) const { return _is_very_hard; }
 int Tp::is_very_heavy(void) const { return _is_very_heavy; }
+int Tp::is_very_intelligent(void) const { return _is_very_intelligent; }
 int Tp::is_wall_dungeon(void) const { return _is_wall_dungeon; }
 int Tp::is_wall(void) const { return _is_wall; }
 int Tp::is_weapon_class_A(void) const { return _is_weapon_class_A; }
@@ -1281,9 +1281,9 @@ void Tp::is_light_blocker_set(int v) { _is_light_blocker = v; }
 void Tp::is_lightning_set(int v) { _is_lightning = v; }
 void Tp::is_light_set(int v) { _is_light = v; }
 void Tp::is_limb_set(int v) { _is_limb = v; }
-void Tp::is_living_rock_set(int v) { _is_living_rock = v; }
 void Tp::is_living_set(int v) { _is_living = v; }
 void Tp::is_loggable_set(int v) { _is_loggable = v; }
+void Tp::is_made_of_rock_set(int v) { _is_made_of_rock = v; }
 void Tp::is_magical_effect_set(int v) { _is_magical_effect = v; }
 void Tp::is_magical_set(int v) { _is_magical = v; }
 void Tp::is_map_beast_set(int v) { _is_map_beast = v; }
@@ -1480,7 +1480,6 @@ void Tp::is_unused_flag184_set(int v) { _is_unused_flag184 = v; }
 void Tp::is_unused_flag185_set(int v) { _is_unused_flag185 = v; }
 void Tp::is_unused_flag186_set(int v) { _is_unused_flag186 = v; }
 void Tp::is_unused_flag187_set(int v) { _is_unused_flag187 = v; }
-void Tp::is_unused_flag188_set(int v) { _is_unused_flag188 = v; }
 void Tp::is_unused_flag18_set(int v) { _is_unused_flag18 = v; }
 void Tp::is_unused_flag192_set(int v) { _is_unused_flag192 = v; }
 void Tp::is_unused_flag19_set(int v) { _is_unused_flag19 = v; }
@@ -1578,6 +1577,7 @@ void Tp::is_used_when_thrown_set(int v) { _is_used_when_thrown = v; }
 void Tp::is_very_combustible_set(int v) { _is_very_combustible = v; }
 void Tp::is_very_hard_set(int v) { _is_very_hard = v; }
 void Tp::is_very_heavy_set(int v) { _is_very_heavy = v; }
+void Tp::is_very_intelligent_set(int v) { _is_very_intelligent = v; }
 void Tp::is_wall_dungeon_set(int v) { _is_wall_dungeon = v; }
 void Tp::is_wall_set(int v) { _is_wall = v; }
 void Tp::is_weapon_class_A_set(int v) { _is_weapon_class_A = v; }

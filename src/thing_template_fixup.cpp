@@ -144,6 +144,10 @@ void tp_fixup(void)
       tp->is_heavy_set(true);
     }
 
+    if (tp->is_very_intelligent()) {
+      tp->is_intelligent_set(true);
+    }
+
     if (tp->is_burnable() || tp->is_combustible() || tp->is_very_combustible()) {
       tp->is_tickable_set(true);
       tp->temperature_sensitive_set(true);

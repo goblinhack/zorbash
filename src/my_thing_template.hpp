@@ -465,8 +465,8 @@ private:
   int _is_lightning {};
   int _is_limb {};
   int _is_living {};
-  int _is_living_rock {};
   int _is_loggable {};
+  int _is_made_of_rock {};
   int _is_magical {};
   int _is_magical_effect {};
   int _is_map_beast {};
@@ -665,7 +665,6 @@ private:
   int _is_unused_flag185 {};
   int _is_unused_flag186 {};
   int _is_unused_flag187 {};
-  int _is_unused_flag188 {};
   int _is_unused_flag19 {};
   int _is_unused_flag192 {};
   int _is_unused_flag2 {};
@@ -761,6 +760,7 @@ private:
   int _is_very_combustible {};
   int _is_very_hard {};
   int _is_very_heavy {};
+  int _is_very_intelligent {};
   int _is_wall {};
   int _is_wall_dungeon {};
   int _is_weapon {};
@@ -1747,9 +1747,9 @@ public:
   int is_lightning(void) const;
   int is_light(void) const;
   int is_limb(void) const;
-  int is_living_rock(void) const;
   int is_living(void) const;
   int is_loggable(void) const;
+  int is_made_of_rock(void) const;
   int is_magical_effect(void) const;
   int is_magical(void) const;
   int is_map_beast(void) const;
@@ -1946,7 +1946,6 @@ public:
   int is_unused_flag185(void) const;
   int is_unused_flag186(void) const;
   int is_unused_flag187(void) const;
-  int is_unused_flag188(void) const;
   int is_unused_flag18(void) const;
   int is_unused_flag192(void) const;
   int is_unused_flag19(void) const;
@@ -2044,6 +2043,7 @@ public:
   int is_very_combustible(void) const;
   int is_very_hard(void) const;
   int is_very_heavy(void) const;
+  int is_very_intelligent(void) const;
   int is_wall_dungeon(void) const;
   int is_wall(void) const;
   int is_weapon_class_A(void) const;
@@ -2487,9 +2487,9 @@ public:
   void is_lightning_set(int v);
   void is_light_set(int v);
   void is_limb_set(int v);
-  void is_living_rock_set(int v);
   void is_living_set(int v);
   void is_loggable_set(int v);
+  void is_made_of_rock_set(int v);
   void is_magical_effect_set(int v);
   void is_magical_set(int v);
   void is_map_beast_set(int v);
@@ -2686,7 +2686,6 @@ public:
   void is_unused_flag185_set(int v);
   void is_unused_flag186_set(int v);
   void is_unused_flag187_set(int v);
-  void is_unused_flag188_set(int v);
   void is_unused_flag18_set(int v);
   void is_unused_flag192_set(int v);
   void is_unused_flag19_set(int v);
@@ -2784,6 +2783,7 @@ public:
   void is_very_combustible_set(int v);
   void is_very_hard_set(int v);
   void is_very_heavy_set(int v);
+  void is_very_intelligent_set(int v);
   void is_wall_dungeon_set(int v);
   void is_wall_set(int v);
   void is_weapon_class_A_set(int v);

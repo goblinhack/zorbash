@@ -104,6 +104,7 @@ def tp_init(name, text_long_name):
     my.is_soft(self, True)
     my.is_tickable(self, True)
     my.is_undead(self, True)
+    my.is_very_intelligent(self, True)
     my.move_speed(self, 100)
     my.noise_decibels_hearing(self, 50)
     my.normal_placement_rules(self, True)

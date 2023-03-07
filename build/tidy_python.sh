@@ -637,8 +637,8 @@ do
       is_unused_flag185 \
       is_unused_flag186 \
       is_unused_flag187 \
-      is_unused_flag188 \
-      is_living_rock \
+      is_very_intelligent \
+      is_made_of_rock \
       is_unused_flag19 \
       is_immune_to_teleport_attack \
       is_pirhana \

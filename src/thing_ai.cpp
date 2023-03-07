@@ -2013,6 +2013,11 @@ bool Thing::ai_tick(bool recursing)
     dy *= 2;
   }
 
+  if (is_very_intelligent()) {
+    dx *= 2;
+    dy *= 2;
+  }
+
   bool   left         = false;
   bool   right        = false;
   bool   up           = false;

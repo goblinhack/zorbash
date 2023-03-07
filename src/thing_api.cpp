@@ -1230,15 +1230,15 @@ int Thing::is_unused_flag187(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag187());
 }
-int Thing::is_unused_flag188(void)
+int Thing::is_very_intelligent(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag188());
+  return (tp()->is_very_intelligent());
 }
-int Thing::is_living_rock(void)
+int Thing::is_made_of_rock(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_living_rock());
+  return (tp()->is_made_of_rock());
 }
 int Thing::is_pirhana(void)
 {
