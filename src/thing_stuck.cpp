@@ -106,6 +106,14 @@ bool Thing::is_stuck_check(void)
       //
       // ok
       //
+    } else if (is_able_to_walk_through_walls()) {
+      //
+      // ok
+      //
+    } else if (is_ethereal()) {
+      //
+      // ok
+      //
     } else if (buff_is_slippery() && (d20() < stat_str())) {
       //
       // Give a better chance to escape if slippery.
@@ -122,6 +130,14 @@ bool Thing::is_stuck_check(void)
       //
       // ok
       //
+    } else if (is_able_to_walk_through_walls()) {
+      //
+      // ok
+      //
+    } else if (is_ethereal()) {
+      //
+      // ok
+      //
     } else if (buff_is_slippery()) {
       //
       // ok
@@ -131,6 +147,14 @@ bool Thing::is_stuck_check(void)
     }
   } else if (level->is_tentacle(curr_at.x, curr_at.y)) {
     if (is_tentacle()) {
+      //
+      // ok
+      //
+    } else if (is_able_to_walk_through_walls()) {
+      //
+      // ok
+      //
+    } else if (is_ethereal()) {
       //
       // ok
       //
@@ -148,6 +172,14 @@ bool Thing::is_stuck_check(void)
       //
       // ok
       //
+    } else if (is_able_to_walk_through_walls()) {
+      //
+      // ok
+      //
+    } else if (is_ethereal()) {
+      //
+      // ok
+      //
     } else if (15 + d20() < stat_str()) {
       //
       // Give a chance to escape.
@@ -157,17 +189,30 @@ bool Thing::is_stuck_check(void)
     }
   }
 
-  if (level->is_heavy(curr_at.x, curr_at.y)) {
-    if (is_flying()) {
-      //
-      // ok
-      //
-    } else if (is_heavy()) {
-      //
-      // ok
-      //
-    } else {
-      stuck = true;
+  //
+  // Stuck under an alive heavy monster?
+  //
+  if (level->is_monst(curr_at.x, curr_at.y)) {
+    if (level->is_heavy(curr_at.x, curr_at.y)) {
+      if (is_flying()) {
+        //
+        // ok
+        //
+      } else if (is_able_to_walk_through_walls()) {
+        //
+        // ok
+        //
+      } else if (is_ethereal()) {
+        //
+        // ok
+        //
+      } else if (is_heavy()) {
+        //
+        // ok
+        //
+      } else {
+        stuck = true;
+      }
     }
   }
 
