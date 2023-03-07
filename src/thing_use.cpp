@@ -315,6 +315,9 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
 
     what->hooks_remove();
     what->owner_unset();
+
+    dbg("Use and remove from carrying list");
+    TRACE_AND_INDENT();
     itemsp()->carrying.remove(what->id);
 
     what->dead("by being used");

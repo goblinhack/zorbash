@@ -313,7 +313,11 @@ bool Thing::carry(Thingp item, bool can_equip)
   TRACE_AND_INDENT();
 
   if (! already_carried) {
-    itemsp()->carrying.push_front(item->id);
+    if (! is_equipped(item)) {
+      dbg("Add to carrying list");
+      TRACE_AND_INDENT();
+      itemsp()->carrying.push_front(item->id);
+    }
   }
   item->owner_set(this);
   item->hide();

@@ -609,7 +609,7 @@ int ptrcheck_free(int mtype, void *ptr, const char *func, const char *file, int 
     return false;
   }
 
-  pc = ptrcheck_verify_pointer(mtype, ptr, file, func, line, true /* dont store */);
+  pc = ptrcheck_verify_pointer(mtype, ptr, file, func, line, true /* don't store */);
   if (! pc) {
     DIE("Failed to save pointer history");
     return false;

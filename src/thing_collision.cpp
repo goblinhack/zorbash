@@ -313,7 +313,7 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
         //
         // Abort the walk
         //
-        dbg2("No collision; dont set fire to yourself by carrying a torch");
+        dbg2("No collision; don't set fire to yourself by carrying a torch");
         return false;
       }
 

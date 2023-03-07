@@ -103,7 +103,7 @@ void Thing::can_see(point p)
                   msg("%s is sporting %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
                 }
                 if (item->is_shield()) {
-                  msg("%s is carrying %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
+                  msg("%s is holding %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
                 }
                 if (item->is_weapon()) {
                   msg("%s is wielding %s.", t->text_The().c_str(), item->text_a_or_an().c_str());

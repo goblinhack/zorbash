@@ -129,6 +129,11 @@ void Game::place_player(void)
         t->carry(w);
       }
       if (0) {
+        level->thing_new("portable_hole", point(x - 3, y));
+        auto w = level->thing_new("amulet_teleport_attack", point(x, y - 2));
+        t->carry(w);
+      }
+      if (0) {
         auto w = level->thing_new("staff_lightning", point(x, y));
         t->carry(w);
       }

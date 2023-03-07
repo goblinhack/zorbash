@@ -434,6 +434,8 @@ bool Thing::equip(Thingp item, int equip)
   //
   auto immediate_owner = item->immediate_owner();
   if (immediate_owner) {
+    dbg("Remove from carrying list");
+    TRACE_AND_INDENT();
     immediate_owner->itemsp()->carrying.remove(item->id);
 
     //

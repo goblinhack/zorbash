@@ -435,6 +435,20 @@ bool Thing::teleport_randomly(TeleportReason reason, float max_distance_in)
     return false;
   }
 
+  //
+  // Check if a portable hole can attack.
+  //
+  if (reason.teleport_attack) {
+    if (is_immune_to_teleport_attack()) {
+      if (is_player()) {
+        msg("You resist being teleported.");
+      } else {
+        msg("%s resists being teleported.", text_The().c_str());
+      }
+      return false;
+    }
+  }
+
   idle_count_set(0);
 
   int max_distance;

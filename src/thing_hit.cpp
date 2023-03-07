@@ -1191,8 +1191,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
                            dmg_type.c_str(), damage);
         }
       } else if (hitter->is_weapon()) {
-        real_hitter->msg("%%fg=orange$You hit yourself for %d %sdamage with %s!%%fg=reset$", damage, dmg_type.c_str(),
-                         hitter->text_the().c_str());
+        real_hitter->msg("%%fg=orange$You attack yourself for %d %sdamage with %s!%%fg=reset$", damage,
+                         dmg_type.c_str(), hitter->text_the().c_str());
       } else if (hitter->is_laser()) {
         real_hitter->msg("%%fg=orange$You zap yourself for %d %sdamage with %s!%%fg=reset$", damage, dmg_type.c_str(),
                          hitter->text_the().c_str());

@@ -316,20 +316,20 @@ int Thing::is_dangerous(Thingp it)
     return false;
   }
 
-  dbg2("Is dangerous %s?", it->to_short_string().c_str());
+  dbg3("Is dangerous %s?", it->to_short_string().c_str());
 
   if (is_dead || is_dying) {
-    dbg2("Is dangerous %s? no is dead or dying", it->to_short_string().c_str());
+    dbg3("Is dangerous %s? no is dead or dying", it->to_short_string().c_str());
     return false;
   }
 
   if (is_fearless()) {
-    dbg2("Is dangerous %s? no as I am fearless", it->to_short_string().c_str());
+    dbg3("Is dangerous %s? no as I am fearless", it->to_short_string().c_str());
     return false;
   }
 
   if (is_friend(it) || same_mob(it)) {
-    dbg2("Is dangerous %s? no as it is a friend", it->to_short_string().c_str());
+    dbg3("Is dangerous %s? no as it is a friend", it->to_short_string().c_str());
     return false;
   }
 
@@ -360,7 +360,7 @@ int Thing::is_dangerous(Thingp it)
     its_danger_level *= 10;
   }
 
-  dbg2("My danger level %d, its %d, %s", my_danger_level, its_danger_level, it->to_short_string().c_str());
+  dbg3("My danger level %d, its %d, %s", my_danger_level, its_danger_level, it->to_short_string().c_str());
 
   //
   // Will consider more dangerous things even more dangerous

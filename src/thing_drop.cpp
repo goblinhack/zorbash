@@ -140,6 +140,8 @@ bool Thing::drop(Thingp what, Thingp target, DropReason reason)
   }
 
   if (immediate_owner) {
+    dbg("Drop and remove from carrying list");
+    TRACE_AND_INDENT();
     immediate_owner->itemsp()->carrying.remove(what->id);
   }
 
@@ -266,6 +268,8 @@ bool Thing::drop_into_ether(Thingp what)
 
   what->owner_unset();
   if (immediate_owner) {
+    dbg("Drop and remove from carrying list");
+    TRACE_AND_INDENT();
     immediate_owner->itemsp()->carrying.remove(what->id);
   }
   game->set_request_to_remake_rightbar();

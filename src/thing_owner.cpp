@@ -284,6 +284,8 @@ bool Thing::change_owner(Thingp new_owner)
 
   on_owner_unset(old_owner);
 
+  dbg("Remove from carrying list");
+  TRACE_AND_INDENT();
   old_owner->itemsp()->carrying.remove(id);
 
   hooks_remove();

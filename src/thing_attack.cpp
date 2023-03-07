@@ -1360,9 +1360,10 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         }
       } else if (victim->is_player()) {
         if (owner) {
-          msg("%%fg=orange$%s fails to hit you with %s.%%fg=reset$", owner->text_The().c_str(), text_the().c_str());
+          msg("%%fg=orange$%s fails to attack you with %s.%%fg=reset$", owner->text_The().c_str(),
+              text_the().c_str());
         } else {
-          msg("%%fg=orange$%s fails to hit you.%%fg=reset$", text_The().c_str());
+          msg("%%fg=orange$%s fails to attack you.%%fg=reset$", text_The().c_str());
         }
         popup("Miss!");
 
