@@ -347,6 +347,7 @@ PyObject *thing_is_immune_to_necrosis(PyObject *obj, PyObject *args, PyObject *k
 PyObject *thing_is_immune_to_negation(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_poison(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_spiderwebs(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_immune_to_teleport_attack(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_intelligent(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_interesting(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -409,6 +410,7 @@ PyObject *thing_is_openable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_organic(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_pack(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_pillar(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_pirhana(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_plant(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_player(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_poisonous_danger_level(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -562,8 +564,6 @@ PyObject *thing_is_unused_flag187(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag188(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag189(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag18(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag190(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_pirhana(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag192(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag19(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag1(PyObject *obj, PyObject *args, PyObject *keywds);

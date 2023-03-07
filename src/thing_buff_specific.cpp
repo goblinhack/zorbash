@@ -196,6 +196,40 @@ bool Thing::buff_is_immune_to_negation(void)
   return false;
 }
 
+bool Thing::buff_is_immune_to_teleport_attack(void)
+{
+  TRACE_NO_INDENT();
+
+  if (! maybe_itemsp()) {
+    return false;
+  }
+
+  FOR_ALL_BUFFS(id)
+  {
+    auto t = level->thing_find(id);
+    if (t) {
+      if (t->is_immune_to_teleport_attack()) {
+        return true;
+      }
+    }
+  }
+
+  auto owner = top_owner();
+  if (owner) {
+    FOR_ALL_BUFFS_FOR(owner, item)
+    {
+      auto iter = level->thing_find(item.id);
+      if (iter) {
+        if (iter->is_immune_to_teleport_attack()) {
+          return true;
+        }
+      }
+    }
+  }
+
+  return false;
+}
+
 bool Thing::buff_is_immune_to_water(void)
 {
   TRACE_NO_INDENT();

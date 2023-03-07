@@ -438,6 +438,7 @@ public:
   bool buff_is_immune_to_necrosis(void);
   bool buff_is_immune_to_negation(void);
   bool buff_is_immune_to_poison(void);
+  bool buff_is_immune_to_teleport_attack(void);
   bool buff_is_immune_to_water(void);
   bool buff_is_invisible(void);
   bool buff_is_slippery(void);
@@ -1472,6 +1473,7 @@ public:
   int is_immune_to_negation(void);
   int is_immune_to_poison(void);
   int is_immune_to_spiderwebs(void);
+  int is_immune_to_teleport_attack(void);
   int is_immune_to_water(void);
   int is_intelligent(void);
   int is_interesting(void);
@@ -1536,6 +1538,7 @@ public:
   int is_openable(void);
   int is_organic(void);
   int is_pillar(void);
+  int is_pirhana(void);
   int is_plant(void);
   int is_player(void);
   int is_poisonous_danger_level(void);
@@ -1691,8 +1694,6 @@ public:
   int is_unused_flag188(void);
   int is_unused_flag189(void);
   int is_unused_flag18(void);
-  int is_unused_flag190(void);
-  int is_pirhana(void);
   int is_unused_flag192(void);
   int is_unused_flag19(void);
   int is_unused_flag1(void);

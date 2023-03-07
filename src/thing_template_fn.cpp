@@ -520,6 +520,7 @@ int Tp::is_immune_to_necrosis(void) const { return _is_immune_to_necrosis; }
 int Tp::is_immune_to_negation(void) const { return _is_immune_to_negation; }
 int Tp::is_immune_to_poison(void) const { return _is_immune_to_poison; }
 int Tp::is_immune_to_spiderwebs(void) const { return _is_immune_to_spiderwebs; }
+int Tp::is_immune_to_teleport_attack(void) const { return _is_immune_to_teleport_attack; }
 int Tp::is_immune_to_water(void) const { return _is_immune_to_water; }
 int Tp::is_intelligent(void) const { return _is_intelligent; }
 int Tp::is_interesting(void) const { return _is_interesting; }
@@ -585,6 +586,7 @@ int Tp::is_ogre(void) const { return _is_ogre; }
 int Tp::is_openable(void) const { return _is_openable; }
 int Tp::is_organic(void) const { return _is_organic; }
 int Tp::is_pillar(void) const { return _is_pillar; }
+int Tp::is_pirhana(void) const { return _is_pirhana; }
 int Tp::is_plant(void) const { return _is_plant; }
 int Tp::is_player(void) const { return _is_player; }
 int Tp::is_poisonous_danger_level(void) const { return _is_poisonous_danger_level; }
@@ -740,8 +742,6 @@ int Tp::is_unused_flag187(void) const { return _is_unused_flag187; }
 int Tp::is_unused_flag188(void) const { return _is_unused_flag188; }
 int Tp::is_unused_flag189(void) const { return _is_unused_flag189; }
 int Tp::is_unused_flag18(void) const { return _is_unused_flag18; }
-int Tp::is_unused_flag190(void) const { return _is_unused_flag190; }
-int Tp::is_pirhana(void) const { return _is_pirhana; }
 int Tp::is_unused_flag192(void) const { return _is_unused_flag192; }
 int Tp::is_unused_flag19(void) const { return _is_unused_flag19; }
 int Tp::is_unused_flag1(void) const { return _is_unused_flag1; }
@@ -1260,6 +1260,7 @@ void Tp::is_immune_to_necrosis_set(int v) { _is_immune_to_necrosis = v; }
 void Tp::is_immune_to_negation_set(int v) { _is_immune_to_negation = v; }
 void Tp::is_immune_to_poison_set(int v) { _is_immune_to_poison = v; }
 void Tp::is_immune_to_spiderwebs_set(int v) { _is_immune_to_spiderwebs = v; }
+void Tp::is_immune_to_teleport_attack_set(int v) { _is_immune_to_teleport_attack = v; }
 void Tp::is_immune_to_water_set(int v) { _is_immune_to_water = v; }
 void Tp::is_intelligent_set(int v) { _is_intelligent = v; }
 void Tp::is_interesting_set(int v) { _is_interesting = v; }
@@ -1325,6 +1326,7 @@ void Tp::is_ogre_set(int v) { _is_ogre = v; }
 void Tp::is_openable_set(int v) { _is_openable = v; }
 void Tp::is_organic_set(int v) { _is_organic = v; }
 void Tp::is_pillar_set(int v) { _is_pillar = v; }
+void Tp::is_pirhana_set(int v) { _is_pirhana = v; }
 void Tp::is_plant_set(int v) { _is_plant = v; }
 void Tp::is_player_set(int v) { _is_player = v; }
 void Tp::is_poisonous_danger_level_set(int v) { _is_poisonous_danger_level = v; }
@@ -1480,8 +1482,6 @@ void Tp::is_unused_flag187_set(int v) { _is_unused_flag187 = v; }
 void Tp::is_unused_flag188_set(int v) { _is_unused_flag188 = v; }
 void Tp::is_unused_flag189_set(int v) { _is_unused_flag189 = v; }
 void Tp::is_unused_flag18_set(int v) { _is_unused_flag18 = v; }
-void Tp::is_unused_flag190_set(int v) { _is_unused_flag190 = v; }
-void Tp::is_pirhana_set(int v) { _is_pirhana = v; }
 void Tp::is_unused_flag192_set(int v) { _is_unused_flag192 = v; }
 void Tp::is_unused_flag19_set(int v) { _is_unused_flag19 = v; }
 void Tp::is_unused_flag1_set(int v) { _is_unused_flag1 = v; }

@@ -16,23 +16,23 @@ def tp_init(name, text_long_name):
     self = gnome_all.tp_init(name, text_long_name)
     # begin sort marker
     my.chance_d1000_carrier_of_treasure_class_B(self, 20)
+    my.dmg_nat_att_dice(self, "1d4+1")
+    my.dmg_nat_att_type(self, "chop")
     my.health_initial_dice(self, "1d6+4")
     my.is_able_to_run_away_after_stealing(self, True)
     my.is_able_to_teleport_escape(self, True)
     my.is_biome_dungeon(self, True)
     my.is_daring(self, True)
-    my.dmg_nat_att_dice(self, "1d4+1")
-    my.dmg_nat_att_type(self, "chop")
     my.is_monst_class_A(self, True)
     my.on_born_do(self, "me.on_born()")
     my.on_you_nat_att_do(self, "gnome_all.on_you_nat_att()")
-    my.text_description_long2(self, "This particular gnome is a dwarfish gnome hybrid. How did this come about? Best not to ask. As a result, this gnome prefers the use of a small axe.")
-    my.text_description_long3(self, "Gnorfs are stouter and far stronger than normal gnomes with excellent defensive and offensive abilities. Do not underestimate them and definitely do not laugh at their red hats. The red is blood.")
-    my.text_description_short(self, "A stalwart gnorf.")
     my.stat_def(self, 12)
     my.stat_dex(self, 8)
     my.stat_luck(self, 10)
     my.stat_str(self, 8)
+    my.text_description_long2(self, "This particular gnome is a dwarfish gnome hybrid. How did this come about? Best not to ask. As a result, this gnome prefers the use of a small axe.")
+    my.text_description_long3(self, "Gnorfs are stouter and far stronger than normal gnomes with excellent defensive and offensive abilities. Do not underestimate them and definitely do not laugh at their red hats. The red is blood.")
+    my.text_description_short(self, "A stalwart gnorf.")
     # end sort marker
 
     delay = 300

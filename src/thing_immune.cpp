@@ -27,6 +27,15 @@ int Thing::is_immune_to_negation(void)
   return (tp()->is_immune_to_negation());
 }
 
+int Thing::is_immune_to_teleport_attack(void)
+{
+  TRACE_NO_INDENT();
+  if (buff_is_immune_to_teleport_attack()) {
+    return true;
+  }
+  return (tp()->is_immune_to_teleport_attack());
+}
+
 int Thing::is_immune_to_fire(void)
 {
   TRACE_NO_INDENT();

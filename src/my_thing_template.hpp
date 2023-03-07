@@ -442,6 +442,7 @@ private:
   int _is_immune_to_negation {};
   int _is_immune_to_poison {};
   int _is_immune_to_spiderwebs {};
+  int _is_immune_to_teleport_attack {};
   int _is_immune_to_water {};
   int _is_intelligent {};
   int _is_interesting {}; // e.g. something edible or a monst or lava
@@ -508,6 +509,7 @@ private:
   int _is_openable {};
   int _is_organic {};
   int _is_pillar {};
+  int _is_pirhana {};
   int _is_plant {};
   int _is_player {};
   int _is_poisonous_danger_level {};
@@ -665,8 +667,6 @@ private:
   int _is_unused_flag188 {};
   int _is_unused_flag189 {};
   int _is_unused_flag19 {};
-  int _is_unused_flag190 {};
-  int _is_pirhana {};
   int _is_unused_flag192 {};
   int _is_unused_flag2 {};
   int _is_unused_flag20 {};
@@ -1726,6 +1726,7 @@ public:
   int is_immune_to_negation(void) const;
   int is_immune_to_poison(void) const;
   int is_immune_to_spiderwebs(void) const;
+  int is_immune_to_teleport_attack(void) const;
   int is_immune_to_water(void) const;
   int is_intelligent(void) const;
   int is_interesting(void) const;
@@ -1791,6 +1792,7 @@ public:
   int is_openable(void) const;
   int is_organic(void) const;
   int is_pillar(void) const;
+  int is_pirhana(void) const;
   int is_plant(void) const;
   int is_player(void) const;
   int is_poisonous_danger_level(void) const;
@@ -1946,8 +1948,6 @@ public:
   int is_unused_flag188(void) const;
   int is_unused_flag189(void) const;
   int is_unused_flag18(void) const;
-  int is_unused_flag190(void) const;
-  int is_pirhana(void) const;
   int is_unused_flag192(void) const;
   int is_unused_flag19(void) const;
   int is_unused_flag1(void) const;
@@ -2466,6 +2466,7 @@ public:
   void is_immune_to_negation_set(int v);
   void is_immune_to_poison_set(int v);
   void is_immune_to_spiderwebs_set(int v);
+  void is_immune_to_teleport_attack_set(int v);
   void is_immune_to_water_set(int v);
   void is_intelligent_set(int v);
   void is_interesting_set(int v);
@@ -2531,6 +2532,7 @@ public:
   void is_openable_set(int v);
   void is_organic_set(int v);
   void is_pillar_set(int v);
+  void is_pirhana_set(int v);
   void is_plant_set(int v);
   void is_player_set(int v);
   void is_poisonous_danger_level_set(int v);
@@ -2686,8 +2688,6 @@ public:
   void is_unused_flag188_set(int v);
   void is_unused_flag189_set(int v);
   void is_unused_flag18_set(int v);
-  void is_unused_flag190_set(int v);
-  void is_pirhana_set(int v);
   void is_unused_flag192_set(int v);
   void is_unused_flag19_set(int v);
   void is_unused_flag1_set(int v);

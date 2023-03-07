@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- teleport on stealing                                                                                                                         -->
 <!-- teleport block                                                                                                                               -->
 <!-- stealth                                                                                                                                      -->
 <!-- cracked walls                                                                                                                                -->
@@ -220,12 +219,12 @@ Current status:
 
 Content:
 <!-- begin type marker -->
-- 73 x monsters
+- 75 x monsters
 - 52 x food
 - 19 x treasure
 - 13 x weapons
 - 11 x items
-- 10 x buffs
+- 11 x buffs
 - 6 x staffs
 - 6 x shield
 - 6 x boots
@@ -234,11 +233,11 @@ Content:
 - 4 x gauntlets
 - 4 x debuffs
 - 4 x armor
+- 4 x amulets
 - 3 x skills
 - 3 x mobs
 - 3 x doors
 - 3 x cloaks
-- 3 x amulets
 - 2 x potions
 - 1 x player
 <!-- end type marker -->
