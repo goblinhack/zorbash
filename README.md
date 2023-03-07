@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- rock gnome throw rocks                                                                                                                       -->
 <!-- stealth                                                                                                                                      -->
 <!-- cracked walls                                                                                                                                -->
 <!-- ------                                                                                                                                       -->
