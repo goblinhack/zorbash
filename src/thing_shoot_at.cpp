@@ -133,16 +133,13 @@ static void thing_possible_hit_add(Thingp me, Thingp target)
 }
 
 //
-// Try to find something to fire at.
+// Try to find something to shoot at.
 //
 bool Thing::shoot_at_target(void)
 {
   if (! is_able_to_shoot_at()) {
     return false;
   }
-
-  dbg("Look for something to fire at");
-  TRACE_AND_INDENT();
 
   int   dx, dy;
   float distance = distance_vision_get();
@@ -189,7 +186,7 @@ bool Thing::shoot_at_target(void)
           continue;
         }
 
-        dbg("Look for something to fire at; %s", it->to_short_string().c_str());
+        dbg("Look for something to shoot at; %s", it->to_short_string().c_str());
         TRACE_AND_INDENT();
 
         //
@@ -338,7 +335,7 @@ bool Thing::shoot_at(Thingp target)
   }
 
   if (d100() > aggression_pct()) {
-    dbg("Aggression check fail, do not fire at");
+    dbg("Aggression check fail, do not shoot at");
     return false;
   }
 

@@ -291,6 +291,7 @@ void Game::place_player(void)
       // level->thing_new("rat_large", point(x + 1, y + 3));
       // level->thing_new("dogman", point(x + 1, y + 3));
       if (0) {
+        level->thing_new("golem_cement", point(x + 4, y + 2));
         level->thing_new("amulet_healing", point(x + 1, y - 3));
         level->thing_new("amulet_peeking", point(x + 2, y - 3));
         level->thing_new("amulet_endurance", point(x, y - 3));
@@ -309,7 +310,6 @@ void Game::place_player(void)
         level->thing_new("zorb_eldster", point(x + 3, y + 2));
         level->thing_new("snake_dreadfire", point(x + 3, y + 3));
         level->thing_new("zorb_eldster", point(x + 3, y + 4));
-        level->thing_new("golem_cement", point(x + 4, y + 3));
         // auto w = level->thing_new("staff_lightning", point(x, y));
         // auto w = level->thing_new("staff_descent", point(x, y));
         auto w1 = level->thing_new("staff_cold", point(x, y));

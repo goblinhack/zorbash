@@ -368,6 +368,7 @@ PyObject *thing_is_lightning(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_light(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_limb(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_living(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_living_rock(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_loggable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_magical_effect(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_magical(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -562,7 +563,6 @@ PyObject *thing_is_unused_flag185(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag186(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag187(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag188(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag189(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag18(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag192(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag19(PyObject *obj, PyObject *args, PyObject *keywds);

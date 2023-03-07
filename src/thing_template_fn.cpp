@@ -541,6 +541,7 @@ int Tp::is_light_blocker(void) const { return _is_light_blocker; }
 int Tp::is_lightning(void) const { return _is_lightning; }
 int Tp::is_light(void) const { return _is_light; }
 int Tp::is_limb(void) const { return _is_limb; }
+int Tp::is_living_rock(void) const { return _is_living_rock; }
 int Tp::is_living(void) const { return _is_living; }
 int Tp::is_loggable(void) const { return _is_loggable; }
 int Tp::is_magical_effect(void) const { return _is_magical_effect; }
@@ -740,7 +741,6 @@ int Tp::is_unused_flag185(void) const { return _is_unused_flag185; }
 int Tp::is_unused_flag186(void) const { return _is_unused_flag186; }
 int Tp::is_unused_flag187(void) const { return _is_unused_flag187; }
 int Tp::is_unused_flag188(void) const { return _is_unused_flag188; }
-int Tp::is_unused_flag189(void) const { return _is_unused_flag189; }
 int Tp::is_unused_flag18(void) const { return _is_unused_flag18; }
 int Tp::is_unused_flag192(void) const { return _is_unused_flag192; }
 int Tp::is_unused_flag19(void) const { return _is_unused_flag19; }
@@ -1281,6 +1281,7 @@ void Tp::is_light_blocker_set(int v) { _is_light_blocker = v; }
 void Tp::is_lightning_set(int v) { _is_lightning = v; }
 void Tp::is_light_set(int v) { _is_light = v; }
 void Tp::is_limb_set(int v) { _is_limb = v; }
+void Tp::is_living_rock_set(int v) { _is_living_rock = v; }
 void Tp::is_living_set(int v) { _is_living = v; }
 void Tp::is_loggable_set(int v) { _is_loggable = v; }
 void Tp::is_magical_effect_set(int v) { _is_magical_effect = v; }
@@ -1480,7 +1481,6 @@ void Tp::is_unused_flag185_set(int v) { _is_unused_flag185 = v; }
 void Tp::is_unused_flag186_set(int v) { _is_unused_flag186 = v; }
 void Tp::is_unused_flag187_set(int v) { _is_unused_flag187 = v; }
 void Tp::is_unused_flag188_set(int v) { _is_unused_flag188 = v; }
-void Tp::is_unused_flag189_set(int v) { _is_unused_flag189 = v; }
 void Tp::is_unused_flag18_set(int v) { _is_unused_flag18 = v; }
 void Tp::is_unused_flag192_set(int v) { _is_unused_flag192 = v; }
 void Tp::is_unused_flag19_set(int v) { _is_unused_flag19 = v; }

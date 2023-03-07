@@ -465,6 +465,7 @@ private:
   int _is_lightning {};
   int _is_limb {};
   int _is_living {};
+  int _is_living_rock {};
   int _is_loggable {};
   int _is_magical {};
   int _is_magical_effect {};
@@ -665,7 +666,6 @@ private:
   int _is_unused_flag186 {};
   int _is_unused_flag187 {};
   int _is_unused_flag188 {};
-  int _is_unused_flag189 {};
   int _is_unused_flag19 {};
   int _is_unused_flag192 {};
   int _is_unused_flag2 {};
@@ -1747,6 +1747,7 @@ public:
   int is_lightning(void) const;
   int is_light(void) const;
   int is_limb(void) const;
+  int is_living_rock(void) const;
   int is_living(void) const;
   int is_loggable(void) const;
   int is_magical_effect(void) const;
@@ -1946,7 +1947,6 @@ public:
   int is_unused_flag186(void) const;
   int is_unused_flag187(void) const;
   int is_unused_flag188(void) const;
-  int is_unused_flag189(void) const;
   int is_unused_flag18(void) const;
   int is_unused_flag192(void) const;
   int is_unused_flag19(void) const;
@@ -2487,6 +2487,7 @@ public:
   void is_lightning_set(int v);
   void is_light_set(int v);
   void is_limb_set(int v);
+  void is_living_rock_set(int v);
   void is_living_set(int v);
   void is_loggable_set(int v);
   void is_magical_effect_set(int v);
@@ -2686,7 +2687,6 @@ public:
   void is_unused_flag186_set(int v);
   void is_unused_flag187_set(int v);
   void is_unused_flag188_set(int v);
-  void is_unused_flag189_set(int v);
   void is_unused_flag18_set(int v);
   void is_unused_flag192_set(int v);
   void is_unused_flag19_set(int v);

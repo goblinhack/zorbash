@@ -1235,10 +1235,10 @@ int Thing::is_unused_flag188(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag188());
 }
-int Thing::is_unused_flag189(void)
+int Thing::is_living_rock(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag189());
+  return (tp()->is_living_rock());
 }
 int Thing::is_pirhana(void)
 {

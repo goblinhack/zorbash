@@ -406,6 +406,6 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
   }
   FOR_ALL_THINGS_END()
 
-  err("No target to fire at");
+  err("No target to shoot at");
   return false;
 }

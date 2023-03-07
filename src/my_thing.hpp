@@ -1493,6 +1493,7 @@ public:
   int is_lightning(void);
   int is_light(void);
   int is_limb(void);
+  int is_living_rock(void);
   int is_living(void);
   int is_loggable(void);
   int is_magical_effect(void);
@@ -1692,7 +1693,6 @@ public:
   int is_unused_flag186(void);
   int is_unused_flag187(void);
   int is_unused_flag188(void);
-  int is_unused_flag189(void);
   int is_unused_flag18(void);
   int is_unused_flag192(void);
   int is_unused_flag19(void);

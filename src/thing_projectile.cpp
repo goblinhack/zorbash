@@ -257,6 +257,6 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &target_name_pr
   }
   FOR_ALL_THINGS_END()
 
-  err("No target to fire at");
+  err("No target to shoot at");
   return nullptr;
 }
