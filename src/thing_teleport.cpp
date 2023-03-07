@@ -393,7 +393,27 @@ bool Thing::teleport(TeleportReason reason, point to, bool *too_far)
   dbg("Teleport success.");
   TRACE_AND_INDENT();
 
+  //
+  // Too cruel?
+  //
+  if (is_able_to_walk_through_walls()) {
+    if (is_player()) {
+      msg("You were already partly ethereal and the teleport scatters your remaining atoms to the wind.");
+    }
+    dead("by dematerializing");
+    return false;
+  }
+
+  if (is_ethereal()) {
+    if (is_player()) {
+      msg("You were already ethereal and the teleport scatters your remaining atoms to the abyss.");
+    }
+    dead("by dematerializing");
+    return false;
+  }
+
   teleport_end();
+
   return true;
 }
 
