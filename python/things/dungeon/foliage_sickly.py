@@ -3,7 +3,7 @@ import tp
 
 
 def tp_init(name, tiles=[]):
-    self = tp.Tp(name, "foliage")
+    self = tp.Tp(name, "sickly foliage")
     # begin sort marker
     my.collision_check(self, True)
     my.collision_hit_priority(self, 3)
@@ -20,12 +20,13 @@ def tp_init(name, tiles=[]):
     my.gfx_pixelart_shown_in_bg(self, True)
     my.gfx_pixelart_submergable(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
-    my.health_initial_dice(self, "1d5")
+    my.health_initial_dice(self, "1d3")
     my.is_able_to_amplify_footsteps(self, True)
     my.is_able_to_fall(self, True)
     my.is_always_hit(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)
+    my.is_combustible(self, True)
     my.is_burnable(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_described_when_hovering_over(self, True)
@@ -40,8 +41,8 @@ def tp_init(name, tiles=[]):
     my.temperature_sensitive(self, True)
     my.temperature_sensitive_to_sudden_changes(self, True)
     my.text_a_or_an(self, "the")
-    my.text_description_long(self, "Thick foliage. Monsters cannot see through these thick bushes. Use them for cover.")
-    my.text_description_short(self, "Thick foliage.")
+    my.text_description_long(self, "Thick and sickly looking foliage and roots. Monsters cannot see through these thick bushes. Use them for cover.")
+    my.text_description_short(self, "Thick and sickly looking foliage and roots.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_FOLIAGE)
@@ -49,7 +50,7 @@ def tp_init(name, tiles=[]):
 
     for t in tiles:
         my.tile(self,
-                ascii_fg_char="aries", ascii_bg_col_name="", ascii_fg_col_name="green",
+                ascii_fg_char="aries", ascii_bg_col_name="", ascii_fg_col_name="brown",
                 tile=t)
 
     my.tp_update(self)
@@ -57,40 +58,40 @@ def tp_init(name, tiles=[]):
 
 def init():
     tp_init(
-        name="foliage",
+        name="foliage_sickly",
         tiles=[
-            "foliage.1",
-            "foliage.2",
-            "foliage.3",
-            "foliage.4",
-            "foliage.5",
-            "foliage.6",
-            "foliage.7",
-            "foliage.8",
-            "foliage.9",
-            "foliage.10",
-            "foliage.11",
-            "foliage.12",
-            "foliage.13",
-            "foliage.14",
-            "foliage.15",
-            "foliage.16",
-            "foliage.17",
-            "foliage.18",
-            "foliage.19",
-            "foliage.20",
-            "foliage.21",
-            "foliage.22",
-            "foliage.23",
-            "foliage.24",
-            "foliage.25",
-            "foliage.26",
-            "foliage.27",
-            "foliage.28",
-            "foliage.29",
-            "foliage.30",
-            "foliage.31",
-            "foliage.32",
+            "foliage_sickly.1",
+            "foliage_sickly.2",
+            "foliage_sickly.3",
+            "foliage_sickly.4",
+            "foliage_sickly.5",
+            "foliage_sickly.6",
+            "foliage_sickly.7",
+            "foliage_sickly.8",
+            "foliage_sickly.9",
+            "foliage_sickly.10",
+            "foliage_sickly.11",
+            "foliage_sickly.12",
+            "foliage_sickly.13",
+            "foliage_sickly.14",
+            "foliage_sickly.15",
+            "foliage_sickly.16",
+            "foliage_sickly.17",
+            "foliage_sickly.18",
+            "foliage_sickly.19",
+            "foliage_sickly.20",
+            "foliage_sickly.21",
+            "foliage_sickly.22",
+            "foliage_sickly.23",
+            "foliage_sickly.24",
+            "foliage_sickly.25",
+            "foliage_sickly.26",
+            "foliage_sickly.27",
+            "foliage_sickly.28",
+            "foliage_sickly.29",
+            "foliage_sickly.30",
+            "foliage_sickly.31",
+            "foliage_sickly.32",
         ],
     )
 

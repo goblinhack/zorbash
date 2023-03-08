@@ -198,6 +198,7 @@ std::initializer_list< std::string > tps = {
     "floor_red_blood7",
     "floor_red_blood8",
     "foliage",
+    "foliage_sickly",
     "four_leaf_clover",
     "frog",
     "gargoyle_baby",
