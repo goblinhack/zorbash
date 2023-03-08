@@ -1,8 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- rock gnome throw rocks                                                                                                                       -->
-<!-- stealth                                                                                                                                      -->
-<!-- cracked walls                                                                                                                                -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -13,6 +10,8 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
+<!-- - stealth                                                                                                                                    -->
+<!-- - cracked walls                                                                                                                              -->
 <!-- - wort food ? fungas foods and some poisonous?                                                                                               -->
 <!-- - paralysis dart                                                                                                                             -->
 <!-- - pressure plate, that monsters avoid                                                                                                        -->
@@ -23,10 +22,9 @@
 <!-- - spider web spawn small spiders?                                                                                                            -->
 <!-- - monsters with random buffs like vampirism would be interesting                                                                             -->
 <!-- - chaos bell of summoning                                                                                                                    -->
-<!-- - crystal chest needs crystal key                                                                                                            -->
 <!-- - crystals walls (or chest) that reflect, so can use on yourself or ally                                                                     -->
 <!-- - need allies                                                                                                                                -->
-<!-- - cursed weapon with bad luck / horseshoe / witches hat?                                                                                     -->
+<!-- - cursed weapon with bad luck                                                                                                                -->
 <!-- - luck trap                                                                                                                                  -->
 <!-- - runics on weapons, like vampirism, force, quietus, lightning                                                                               -->
 <!-- - ogre totems?                                                                                                                               -->
