@@ -47,7 +47,7 @@ void Thing::enchant_common(Thingp what)
 {
   if (is_player()) {
     if (what->is_enchantable_as_a_group()) {
-      msg("You enchant all of your %s.", pluralise(what->text_the()).c_str());
+      msg("You enchant all of %s.", pluralise(what->text_the()).c_str());
     } else {
       msg("You enchant %s.", what->text_the().c_str());
     }
