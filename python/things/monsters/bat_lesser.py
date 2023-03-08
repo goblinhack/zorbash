@@ -157,7 +157,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="bat_lesser", text_long_name="little fluffy bat")
+    tp_init(name="bat_lesser", text_long_name="fluffy bat")
 
 
 init()
