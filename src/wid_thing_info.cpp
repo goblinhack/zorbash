@@ -247,7 +247,6 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     wid_thing_info_add_dmg_heat(wid_popup_window, t, attack_index);
     wid_thing_info_add_dmg_crush(wid_popup_window, t, attack_index);
     wid_thing_info_add_dmg_missile(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_missile(wid_popup_window, t, attack_index);
     wid_thing_info_add_dmg_lightning(wid_popup_window, t, attack_index);
     wid_thing_info_add_dmg_energy(wid_popup_window, t, attack_index);
     wid_thing_info_add_dmg_negation(wid_popup_window, t, attack_index);
@@ -832,7 +831,7 @@ void Game::wid_thing_info_add_dmg_melee(WidPopup *w, Thingp t, int index)
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -892,7 +891,7 @@ void Game::wid_thing_info_add_dmg_poison(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -932,7 +931,7 @@ void Game::wid_thing_info_add_dmg_drown(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -972,7 +971,7 @@ void Game::wid_thing_info_add_dmg_bite(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1012,7 +1011,7 @@ void Game::wid_thing_info_add_dmg_claw(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1052,7 +1051,7 @@ void Game::wid_thing_info_add_dmg_cold(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1092,7 +1091,7 @@ void Game::wid_thing_info_add_dmg_fire(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1132,7 +1131,7 @@ void Game::wid_thing_info_add_dmg_heat(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1172,7 +1171,7 @@ void Game::wid_thing_info_add_dmg_crush(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1212,7 +1211,7 @@ void Game::wid_thing_info_add_dmg_missile(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1252,7 +1251,7 @@ void Game::wid_thing_info_add_dmg_lightning(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1292,7 +1291,7 @@ void Game::wid_thing_info_add_dmg_energy(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1332,7 +1331,7 @@ void Game::wid_thing_info_add_dmg_negation(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1372,7 +1371,7 @@ void Game::wid_thing_info_add_dmg_acid(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1412,7 +1411,7 @@ void Game::wid_thing_info_add_dmg_nat_att(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1465,7 +1464,7 @@ void Game::wid_thing_info_add_dmg_digest(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1505,7 +1504,7 @@ void Game::wid_thing_info_add_dmg_necrosis(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1545,7 +1544,7 @@ void Game::wid_thing_info_add_dmg_draining(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1583,7 +1582,7 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1677,7 +1676,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     //
     // Don't display for dead monsters
     //

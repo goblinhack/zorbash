@@ -320,6 +320,11 @@ void Game::place_player(void)
         // t->enchant_without_stone(w);
       }
       if (0) {
+        auto w = level->thing_new("rock", point(x, y));
+        t->carry(w);
+        t->enchant_without_stone(w);
+      }
+      if (0) {
         auto w = level->thing_new("staff_fire", point(x, y));
         t->carry(w);
         t->enchant_without_stone(w);
