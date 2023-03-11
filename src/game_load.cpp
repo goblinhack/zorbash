@@ -770,7 +770,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
             auto t = new Thing();
             in >> bits(t);
 
-            if (game_load_error != "") {
+            if (! game_load_error.empty()) {
               return in;
             }
 
@@ -886,7 +886,7 @@ std::istream &operator>>(std::istream &in, Bits< class World & > my)
           auto l = new Level();
           set(my.t.levels, x, y, z, l);
           in >> bits(l);
-          if (game_load_error != "") {
+          if (! game_load_error.empty()) {
             return in;
           }
 
@@ -1068,11 +1068,11 @@ std::istream &operator>>(std::istream &in, Bits< class Game & > my)
   in >> bits(my.t.appdata);
   in >> bits(my.t.saved_dir);
   in >> bits(my.t.config);
-  if (game_load_error != "") {
+  if (! game_load_error.empty()) {
     return in;
   }
   in >> bits(my.t.world);
-  if (game_load_error != "") {
+  if (! game_load_error.empty()) {
     return in;
   }
 
@@ -1230,7 +1230,7 @@ bool Game::load(std::string file_to_load, class Game &target)
 
   game_load_error = "";
   in >> bits(target);
-  if (game_load_error != "") {
+  if (! game_load_error.empty()) {
     if (! game_load_headers_only) {
       wid_error("load error, " + game_load_error);
     }
@@ -1523,9 +1523,10 @@ void Game::wid_load_select(void)
 
     std::string s = std::to_string(slot) + ": ";
     if (! load(tmp_file, tmp)) {
-      if (game_load_error != "") {
+      if (! game_load_error.empty()) {
         s += game_load_error;
         wid_set_style(w, UI_WID_STYLE_RED);
+        CON("GAME LOADING ERROR: %s", game_load_error.c_str());
       } else {
         if (slot == UI_WID_SAVE_SLOTS - 1) {
           s += "<no-snapshot>";

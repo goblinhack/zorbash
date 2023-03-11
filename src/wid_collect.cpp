@@ -324,6 +324,14 @@ void Game::wid_collect_create(const std::list< ThingId > items /* intentional co
   // If moving over a tile with stuff on it, do not pause to collect
   //
   if (! player->aip()->move_path.empty()) {
+    std::string s = "";
+    IF_DEBUG2
+    {
+      for (auto p : player->aip()->move_path) {
+        s += " " + p.to_string();
+      }
+    }
+    DBG("Thing collect, no, move path is not empty: moves left: %s", s.c_str());
     return;
   }
 

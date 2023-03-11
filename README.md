@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- diagonal move does not collect                                                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -10,11 +11,11 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
+<!-- - wort food ? fungus foods and some poisonous?                                                                                               -->
+<!-- - pressure plate, that monsters avoid                                                                                                        -->
 <!-- - stealth                                                                                                                                    -->
 <!-- - cracked walls                                                                                                                              -->
-<!-- - wort food ? fungas foods and some poisonous?                                                                                               -->
 <!-- - paralysis dart                                                                                                                             -->
-<!-- - pressure plate, that monsters avoid                                                                                                        -->
 <!-- - cloak of slime                                                                                                                             -->
 <!-- - sword of slime                                                                                                                             -->
 <!-- - vampiric damage                                                                                                                            -->
