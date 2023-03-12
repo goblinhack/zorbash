@@ -427,6 +427,11 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
           DBG2("Cursor is adjacent, try to move there");
           TRACE_AND_INDENT();
 
+          //
+          // Clear the move path, as if we are doing a diagonal move here, then we do not want to
+          // leave the destination on the path as that will stop us collecting items/
+          //
+          ai->move_path.clear();
           if (move_no_shove_attack_allowed(mouse_at)) {
             return true;
           }
@@ -447,6 +452,11 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
           DBG2("Cursor is not adjacent, try to jump there");
           TRACE_AND_INDENT();
 
+          //
+          // Clear the move path, as if we are doing a diagonal move here, then we do not want to
+          // leave the destination on the path as that will stop us collecting items/
+          //
+          ai->move_path.clear();
           if (try_to_jump_carefree(mouse_at)) {
             game->tick_begin("player tried to jump");
             return true;
@@ -516,6 +526,22 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
   // and end up lunging crazy distances.
   //
   clear_move_path("Could not move");
+
+  IF_DEBUG2
+  {
+    if (is_debug_type()) {
+      std::string s = "";
+      for (auto p : ai->move_path) {
+        s += " " + p.to_string();
+      }
+
+      if (s.empty()) {
+        dbg("Path now %s, path empty", future_pos.to_string().c_str());
+      } else {
+        dbg("Path now %s, path:%s", future_pos.to_string().c_str(), s.c_str());
+      }
+    }
+  }
   return false;
 }
 
