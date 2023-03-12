@@ -20,7 +20,7 @@ void Thing::grass_tick(void)
   }
 
   if (level->is_wet_grass(curr_at.x, curr_at.y)) {
-    FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_OBJ)
+    FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_FLOOR2)
     {
       if (t->is_dead) {
         continue;
@@ -67,7 +67,7 @@ void Thing::grass_tick(void)
   }
 
   if (level->is_dry_grass(curr_at.x, curr_at.y)) {
-    FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_OBJ)
+    FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_FLOOR2)
     {
       if (t->is_dead) {
         continue;

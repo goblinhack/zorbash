@@ -26,7 +26,7 @@ def tp_init(name, tiles=[]):
     my.text_a_or_an(self, "the")
     my.text_description_short(self, "Dead grass.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
-    my.z_depth(self, my.MAP_DEPTH_FLOOR2)
+    my.z_depth(self, my.MAP_DEPTH_FLOOR2)  # if you change this, change grass_tick
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
 
