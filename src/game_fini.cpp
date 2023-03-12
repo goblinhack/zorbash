@@ -95,7 +95,7 @@ void Game::fini(void)
   request_to_remake_inventory                     = {};
   request_to_remake_rightbar                      = {};
   request_to_remake_skillbox                      = {};
-  request_to_save_snapshot                        = {}; // Something has requested a game snapshot
+  request_to_save_snapshot                        = {};
   request_to_toggle_gfx                           = {};
   request_to_update_inventory_with_thing_over     = {};
   request_to_update_inventory_with_thing_selected = {};
@@ -134,19 +134,49 @@ void Game::fini(void)
   request_to_throw_item = {}; // What we are throwing.
 
   //
+  // Temporary list of popups.
+  //
+  popups.clear();
+
+  //
+  // Temporary. An item being moved between bags
+  //
+  in_transit_item = {};
+
+  //
+  // Temporary. All bags open.
+  //
+  bags = {};
+
+  //
+  // Temporary. Last cursor path shown.
+  //
+  cursor_move_path      = {};
+  point cursor_move_end = {};
+  cursor_moved          = {};
+
+  //
+  // Temporary. Dampens mouse clicks
+  //
+  last_mouse_down = {};
+  last_pause      = {};
+
+  //
+  // When the last tick started. Used for looking at spikes in time.
+  //
+  tick_begin_ms      = {};
+  tick_begin_game_ms = {};
+
+  //
   // Game is ending and levels are being destroyed.
   //
-  {
-    TRACE_NO_INDENT();
-    is_being_destroyed = true;
+  is_being_destroyed = true;
 
-    TRACE_NO_INDENT();
-    config.fini();
+  TRACE_NO_INDENT();
+  config.fini();
 
-    TRACE_NO_INDENT();
-    world.fini();
+  TRACE_NO_INDENT();
+  world.fini();
 
-    TRACE_NO_INDENT();
-    is_being_destroyed = false;
-  }
+  is_being_destroyed = false;
 }

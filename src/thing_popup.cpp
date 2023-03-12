@@ -3,16 +3,13 @@
 //
 
 #include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_thing.hpp"
 
 void Thing::popup(std::string const &m)
 {
-  static point    last_at;
-  float           dy;
-  float           dx;
-  static uint32_t last_tick;
-
   if (! is_visible_to_player) {
+    dbg("Popup: %s not visible to player", m.c_str());
     return;
   }
 
@@ -20,34 +17,36 @@ void Thing::popup(std::string const &m)
     return;
   }
 
-  dbg("Popup: %s", m.c_str());
-
-  if (game->tick_current == last_tick) {
-    //
-    // Stop msgs piling up in the same tick
-    //
-    if (last_at.y == curr_at.y) {
-      dy = 1.0;
-    } else {
-      dy = 0.0;
-    }
-
-    if (last_at.x == curr_at.x) {
-      dx = 1.0;
-    } else {
-      dx = 0.0;
-    }
-  } else {
-    dx = 0.0;
-    dy = 0.0;
+  //
+  // Get the top owner as that will be the popup owner. We keep track
+  // of who created the popup so we can avoid > 1 popup per thing which
+  // just makes things hard to read.
+  //
+  auto top_o = top_owner();
+  if (top_o) {
+    top_o->popup(m);
+    return;
   }
 
-  last_tick = game->tick_current;
+  //
+  // Stop msgs piling up in the same tick
+  //
+  // con("POPUP: %s", m.c_str());
 
-  last_at.x = curr_at.x - dx;
-  last_at.y = curr_at.y - dy;
+  //
+  // Make sure only one popup per thing
+  //
+  for (auto k : game->popups) {
+    auto p = k.first;
+    if (p->infop()->popup_owner_id == id) {
+      p->dead("too many popups");
+    }
+  }
 
-  auto msg = level->thing_new("msg", curr_at - point(dx, dy));
+  // dbg("Popup: %s delta %d,%d", m.c_str(), dx, dy);
+  auto msg = level->thing_new("msg", curr_at);
   msg->msg_set(m);
-  msg->fadeup(6.0, 0.05, 3000);
+  msg->fadeup(6.0, 0.01, 2500);
+  msg->infop()->popup_owner_id = id;
+  game->popups[ msg ]          = true;
 }

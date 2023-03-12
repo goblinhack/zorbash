@@ -1365,7 +1365,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         } else {
           msg("%%fg=orange$%s fails to attack you.%%fg=reset$", text_The().c_str());
         }
-        popup("Miss!");
+        popup("It misses");
 
         if (game->robot_mode) {
           BOTCON("%s misses the robot.", text_The().c_str());
@@ -1491,10 +1491,10 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
           if (is_player() || (owner && owner->is_player())) {
             if (fumble) {
               msg("%%fg=orange$You fumble and miss %s.%%fg=reset$", victim->text_the().c_str());
-              popup("You fumble!");
+              popup("You fumble");
             } else {
               msg("%%fg=orange$You miss %s.%%fg=reset$", victim->text_the().c_str());
-              popup("You miss!");
+              popup("You miss");
             }
             if (game->robot_mode) {
               BOTCON("Robot misses %s.", victim->text_the().c_str());
@@ -1502,13 +1502,11 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
           } else if (victim->is_player()) {
             if (owner) {
               msg("%%fg=orange$%s misses you with %s.%%fg=reset$", owner->text_The().c_str(), text_the().c_str());
+              owner->popup("It misses");
             } else {
               msg("%%fg=orange$%s misses you.%%fg=reset$", text_The().c_str());
+              popup("It misses");
             }
-            //
-            // Too noisy?
-            //
-            // popup("It misses you!");
 
             if (game->robot_mode) {
               BOTCON("%s misses the robot.", text_The().c_str());

@@ -266,6 +266,8 @@ public:
   // Things not worth saving
   //
   int dmg_current {}; // Current damage; so it can be modified by python
+
+  ThingId popup_owner_id {}; // Who popped up this thing?
 } ThingInfo;
 
 //

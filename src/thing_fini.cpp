@@ -128,6 +128,8 @@ void Thing::destroy(void)
     level->cursor = nullptr;
   }
 
+  game->popups.erase(this);
+
   if (game->request_to_throw_item == this) {
     game->request_to_throw_item  = nullptr;
     game->request_destination_ok = false;

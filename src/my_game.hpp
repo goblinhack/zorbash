@@ -402,6 +402,11 @@ public:
   Thingp request_to_throw_item {}; // What we are throwing.
 
   //
+  // Temporary list of popups.
+  //
+  std::map< Thingp, bool > popups;
+
+  //
   // Temporary. An item being moved between bags
   //
   class Wid *in_transit_item {};
