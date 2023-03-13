@@ -456,8 +456,10 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
           // Clear the move path, as if we are doing a diagonal move here, then we do not want to
           // leave the destination on the path as that will stop us collecting items/
           //
+          // Do not jump carefree just in case we jump short and land in lava.
+          //
           ai->move_path.clear();
-          if (try_to_jump_carefree(mouse_at)) {
+          if (try_to_jump_carefully(mouse_at)) {
             game->tick_begin("player tried to jump");
             return true;
           }
