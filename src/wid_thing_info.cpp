@@ -140,40 +140,42 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_popup_window->t = t;
 
   if (! g_opt_ascii) {
-    {
-      TRACE_AND_INDENT();
-      auto  w  = wid_new_plain(wid_popup_window->wid_popup_container, "ui-circle");
-      point tl = make_point(11 + 1, 1);
-      point br = make_point(11 + 6, 6);
-      wid_set_ignore_events(w, true);
-      wid_set_pos(w, tl, br);
-      wid_set_bg_tilename(w, "ui_circle");
-      wid_set_color(w, WID_COLOR_BG, WHITE);
-      wid_set_style(w, UI_WID_STYLE_SPARSE_NONE);
-    }
+    if (tile->pix_height <= 32) {
+      {
+        TRACE_AND_INDENT();
+        auto  w  = wid_new_plain(wid_popup_window->wid_popup_container, "ui-circle");
+        point tl = make_point(12, 1);
+        point br = make_point(17, 6);
+        wid_set_ignore_events(w, true);
+        wid_set_pos(w, tl, br);
+        wid_set_bg_tilename(w, "ui_circle");
+        wid_set_color(w, WID_COLOR_BG, WHITE);
+        wid_set_style(w, UI_WID_STYLE_SPARSE_NONE);
+      }
 
-    {
-      TRACE_AND_INDENT();
-      auto  w  = wid_new_plain(wid_popup_window->wid_popup_container, "ui-circle-bg");
-      point tl = make_point(11 + 2, 2);
-      point br = make_point(11 + 5, 5);
-      wid_set_ignore_events(w, true);
-      wid_set_pos(w, tl, br);
-      wid_set_bg_tilename(w, "ui_tile_bg");
-      wid_set_fg_tilename(w, tile->name);
-      wid_set_color(w, WID_COLOR_BG, WHITE);
+      {
+        TRACE_AND_INDENT();
+        auto  w  = wid_new_plain(wid_popup_window->wid_popup_container, "ui-circle-bg");
+        point tl = make_point(13, 2);
+        point br = make_point(16, 5);
+        wid_set_ignore_events(w, true);
+        wid_set_pos(w, tl, br);
+        wid_set_bg_tilename(w, "ui_tile_bg");
+        wid_set_fg_tilename(w, tile->name);
+        wid_set_color(w, WID_COLOR_BG, WHITE);
+      }
+
+      wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+      wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+      wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+      wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+      wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+      wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+      wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
     }
 
     wid_update(wid_popup_window->wid_popup_container);
     wid_raise(wid_popup_window->wid_popup_container);
-
-    wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
-    wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
-    wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
-    wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
-    wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
-    wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
-    wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
   }
 
   auto name = t->text_long_and_state_capitalised();
