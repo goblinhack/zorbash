@@ -171,7 +171,6 @@ int Thing::light_distance_update(void)
         for (int x = 0; x < MAP_WIDTH; x++) {
           if ((x == (int) curr_at.x) && (y == (int) curr_at.y)) {
             s += "@";
-            s += " ";
             continue;
           }
 

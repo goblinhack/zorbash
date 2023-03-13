@@ -27,12 +27,11 @@ def tp_init(name, tiles=[]):
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)
     my.is_burnable(self, True)
+    my.is_combustible(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_foliage(self, True)
     my.is_hittable(self, True)
-    my.is_combustible(self, True)
-    my.is_combustible(self, True)
     my.is_interesting(self, True)
     my.is_light_blocker_for_monst(self, True)  # to give cover to the player
     my.noise_blocker(self, True)

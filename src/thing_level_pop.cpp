@@ -109,6 +109,14 @@ void Thing::level_pop(void)
       i_set_is_able_to_amplify_footsteps = false;
       level->is_able_to_amplify_footsteps_unset(x, y);
     }
+    if (i_set_is_attackable_by_monst) {
+      i_set_is_attackable_by_monst = false;
+      level->is_attackable_by_monst_unset(x, y);
+    }
+    if (i_set_is_attackable_by_player) {
+      i_set_is_attackable_by_player = false;
+      level->is_attackable_by_player_unset(x, y);
+    }
     if (i_set_is_sticky) {
       i_set_is_sticky = false;
       level->is_sticky_unset(x, y);

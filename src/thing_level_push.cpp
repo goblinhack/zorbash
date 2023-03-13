@@ -253,6 +253,14 @@ void Thing::level_push(void)
       i_set_is_able_to_amplify_footsteps = true;
       level->is_able_to_amplify_footsteps_set(x, y);
     }
+    if (is_attackable_by_monst()) {
+      i_set_is_attackable_by_monst = true;
+      level->is_attackable_by_monst_set(x, y);
+    }
+    if (is_attackable_by_player()) {
+      i_set_is_attackable_by_player = true;
+      level->is_attackable_by_player_set(x, y);
+    }
     if (is_fire()) {
       i_set_is_fire = true;
       level->is_fire_set(x, y);

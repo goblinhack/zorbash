@@ -102,34 +102,10 @@ int Thing::is_obs_for_ai(void)
   return (tp()->is_obs_for_ai());
 }
 
-int Thing::attack_eater(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->attack_eater());
-}
-
-int Thing::attack_humanoid(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->attack_humanoid());
-}
-
-int Thing::attack_living(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->attack_living());
-}
-
 int Thing::is_able_to_lunge(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_able_to_lunge());
-}
-
-int Thing::attack_meat(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->attack_meat());
 }
 
 int Thing::chance_d1000_shove(void)
@@ -1250,11 +1226,7 @@ int Thing::is_unused_flag192(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag192());
 }
-int Thing::is_attackable_by_magic(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_attackable_by_magic());
-}
+
 int Thing::is_magical_effect(void)
 {
   TRACE_NO_INDENT();
@@ -1482,18 +1454,6 @@ int Thing::is_ascend_sewer(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_ascend_sewer());
-}
-
-int Thing::is_attackable_by_monst(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_attackable_by_monst());
-}
-
-int Thing::is_attackable_by_player(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_attackable_by_player());
 }
 
 int Thing::is_auto_collect_item(void)
@@ -1940,12 +1900,6 @@ int Thing::chance_d1000_jump_randomly(void)
 {
   TRACE_NO_INDENT();
   return (tp()->chance_d1000_jump_randomly());
-}
-
-int Thing::chance_d1000_jump_attack(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->chance_d1000_jump_attack());
 }
 
 int Thing::chance_d1000_jump_onto(void)
@@ -2692,18 +2646,6 @@ int Thing::tick_prio(void)
   return (tp()->tick_prio());
 }
 
-int Thing::attack_no_msg(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->attack_no_msg());
-}
-
-int Thing::is_able_to_attack_owner(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_able_to_attack_owner());
-}
-
 int Thing::is_dagger(void)
 {
   TRACE_NO_INDENT();
@@ -3230,12 +3172,6 @@ int Thing::is_debuff(void)
   return (tp()->is_debuff());
 }
 
-int Thing::attack_undead(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->attack_undead());
-}
-
 int Thing::is_eater_of_red_blood(void)
 {
   TRACE_NO_INDENT();
@@ -3306,12 +3242,6 @@ int Thing::is_able_to_enchant_items(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_able_to_enchant_items());
-}
-
-int Thing::is_able_to_attack_mobs(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_able_to_attack_mobs());
 }
 
 int Thing::ai_wanderer(void)

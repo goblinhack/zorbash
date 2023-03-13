@@ -19,6 +19,8 @@ void Level::clear(void)
   _heatmap                           = {};
   _is_able_to_dampen_footsteps       = {};
   _is_able_to_amplify_footsteps      = {};
+  _is_attackable_by_monst            = {};
+  _is_attackable_by_player           = {};
   _is_able_to_stand_on               = {};
   _is_acid                           = {};
   _is_ascend_dungeon                 = {};

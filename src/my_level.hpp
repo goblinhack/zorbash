@@ -48,6 +48,8 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_acid {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_ascend_dungeon {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_ascend_sewer {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_attackable_by_monst {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_attackable_by_player {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_barrel {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_basalt {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_block_of_ice {};
@@ -779,6 +781,10 @@ public:
   uint8_t is_ascend_dungeon(const point p);
   uint8_t is_ascend_sewer(const int x, const int y);
   uint8_t is_ascend_sewer(const point p);
+  uint8_t is_attackable_by_monst(const int x, const int y);
+  uint8_t is_attackable_by_monst(const point p);
+  uint8_t is_attackable_by_player(const int x, const int y);
+  uint8_t is_attackable_by_player(const point p);
   uint8_t is_barrel(const int x, const int y);
   uint8_t is_barrel(const point p);
   uint8_t is_blocker(const int x, const int y);
@@ -1030,6 +1036,10 @@ public:
   void is_ascend_dungeon_unset(const int x, const int y);
   void is_ascend_sewer_set(const int x, const int y);
   void is_ascend_sewer_unset(const int x, const int y);
+  void is_attackable_by_monst_set(const int x, const int y);
+  void is_attackable_by_monst_unset(const int x, const int y);
+  void is_attackable_by_player_set(const int x, const int y);
+  void is_attackable_by_player_unset(const int x, const int y);
   void is_barrel_set(const int x, const int y);
   void is_barrel_unset(const int x, const int y);
   void is_blocker_set(const int x, const int y);

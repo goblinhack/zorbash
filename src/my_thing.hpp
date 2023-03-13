@@ -218,6 +218,8 @@ public:
   uint64_t i_set_is_acid                      : 1 {};
   uint64_t i_set_is_ascend_dungeon            : 1 {};
   uint64_t i_set_is_ascend_sewer              : 1 {};
+  uint64_t i_set_is_attackable_by_monst       : 1 {};
+  uint64_t i_set_is_attackable_by_player      : 1 {};
   uint64_t i_set_is_barrel                    : 1 {};
   uint64_t i_set_is_basalt                    : 1 {};
   uint64_t i_set_is_block_of_ice              : 1 {};

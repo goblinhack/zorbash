@@ -200,6 +200,8 @@ PyObject *thing_is_ascend_dungeon(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_ascend_sewer(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_asleep_initially(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_attackable_by_magic(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_attackable_by_monst(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_attackable_by_player(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_auto_collect_item(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_auto_equipped(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_auto_throw(PyObject *obj, PyObject *args, PyObject *keywds);

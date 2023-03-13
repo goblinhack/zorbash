@@ -394,6 +394,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_acid                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_ascend_dungeon                ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_ascend_sewer                  ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_attackable_by_monst           ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_attackable_by_player          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_barrel                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_basalt                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_block_of_ice                  ? 1LLU : 0LLU) << shift; shift++;
@@ -593,6 +595,8 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_block_of_ice);
   out << bits(my.t->_is_able_to_dampen_footsteps);
   out << bits(my.t->_is_able_to_amplify_footsteps);
+  out << bits(my.t->_is_attackable_by_monst);
+  out << bits(my.t->_is_attackable_by_player);
   out << bits(my.t->_is_key);
   out << bits(my.t->_is_lava);
   out << bits(my.t->_is_mob);

@@ -1952,3 +1952,151 @@ int Thing::attack_num_get(void)
   new_infop();
   return infop()->attack_num;
 }
+
+uint8_t Level::is_attackable_by_player(const point p)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
+  return (get(_is_attackable_by_player, p.x, p.y));
+}
+
+uint8_t Level::is_attackable_by_player(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
+  return (get(_is_attackable_by_player, x, y));
+}
+
+void Level::is_attackable_by_player_set(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  is_map_changed = true;
+  incr(_is_attackable_by_player, x, y, (uint8_t) 1);
+}
+
+void Level::is_attackable_by_player_unset(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  is_map_changed = true;
+  decr(_is_attackable_by_player, x, y, (uint8_t) 1);
+}
+
+int Thing::is_attackable_by_player(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_attackable_by_player());
+}
+
+uint8_t Level::is_attackable_by_monst(const point p)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
+  return (get(_is_attackable_by_monst, p.x, p.y));
+}
+
+uint8_t Level::is_attackable_by_monst(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
+  return (get(_is_attackable_by_monst, x, y));
+}
+
+void Level::is_attackable_by_monst_set(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  is_map_changed = true;
+  incr(_is_attackable_by_monst, x, y, (uint8_t) 1);
+}
+
+void Level::is_attackable_by_monst_unset(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  is_map_changed = true;
+  decr(_is_attackable_by_monst, x, y, (uint8_t) 1);
+}
+
+int Thing::attack_eater(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->attack_eater());
+}
+
+int Thing::attack_humanoid(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->attack_humanoid());
+}
+
+int Thing::attack_living(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->attack_living());
+}
+
+int Thing::attack_meat(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->attack_meat());
+}
+
+int Thing::is_attackable_by_magic(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_attackable_by_magic());
+}
+
+int Thing::is_attackable_by_monst(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_attackable_by_monst());
+}
+
+int Thing::chance_d1000_jump_attack(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->chance_d1000_jump_attack());
+}
+
+int Thing::attack_no_msg(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->attack_no_msg());
+}
+
+int Thing::is_able_to_attack_owner(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_able_to_attack_owner());
+}
+
+int Thing::attack_undead(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->attack_undead());
+}
+
+int Thing::is_able_to_attack_mobs(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_able_to_attack_mobs());
+}

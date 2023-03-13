@@ -656,29 +656,49 @@ bool Thing::equip_use(bool forced, int equip, ThingAttackOptionsp attack_options
 
     if (attack_options->attack_at_set) {
       //
-      // If not attacking something at a point, then use the direction of the wielder.
+      // Don't swing at braziers
       //
-      auto use_anim            = level->thing_new(attack_options->used_as, attack_options->attack_at);
-      use_anim->dir            = dir;
-      use_anim->is_facing_left = is_facing_left;
+      bool create_swing_animation = false;
 
-      //
-      // Not sure why we have this. If you are on a web and hit the web then this moves
-      // the animation off of the web.
-      //
-      if (0) {
-        if (attack_options->attack_at == curr_at) {
-          auto p = attack_options->attack_at + dir_to_direction();
-          use_anim->move_to(p);
-        }
+      if (is_player() && level->is_attackable_by_player(attack_options->attack_at)) {
+        dbg("Ok to have swing animation for player");
+        create_swing_animation = true;
       }
 
-      use_anim->owner_set(this);
-      equip_use_anim_set(use_anim, equip);
+      if (is_monst() && level->is_attackable_by_monst(attack_options->attack_at)) {
+        dbg("Ok to have swing animation for monster");
+        create_swing_animation = true;
+      }
+
+      if (create_swing_animation) {
+        //
+        // If not attacking something at a point, then use the direction of the wielder.
+        //
+        auto use_anim            = level->thing_new(attack_options->used_as, attack_options->attack_at);
+        use_anim->dir            = dir;
+        use_anim->is_facing_left = is_facing_left;
+
+        //
+        // Not sure why we have this. If you are on a web and hit the web then this moves
+        // the animation off of the web.
+        //
+        if (0) {
+          if (attack_options->attack_at == curr_at) {
+            auto p = attack_options->attack_at + dir_to_direction();
+            use_anim->move_to(p);
+          }
+        }
+
+        use_anim->owner_set(this);
+        equip_use_anim_set(use_anim, equip);
+      } else {
+        dbg("Not ok to have swing animation for monster");
+      }
     } else {
       //
       // Do not swing. We will look around for a target and swing at that.
       //
+      dbg("Do not swing. We will look around for a target and swing at that.");
     }
   }
 

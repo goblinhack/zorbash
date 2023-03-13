@@ -28,6 +28,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_biome_dungeon(self, True)
     my.is_brazier(self, True)
     my.is_corpse_on_death(self, True)
+    my.is_cursor_path_blocker(self, True)
     my.is_dead_on_shove(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_fire(self, True)
@@ -37,6 +38,8 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_interesting(self, True)  # so it can be shoved
     my.is_loggable(self, True)
     my.is_obs_for_ai(self, True)
+    my.is_obs_in_the_way_for_shooting(self, True)
+    my.is_obs_in_the_way_for_throwing(self, True)
     my.is_shovable(self, True)
     my.light_color(self, "orange")
     my.light_dist(self, 2)

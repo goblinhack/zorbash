@@ -445,9 +445,23 @@ bool Thing::victim_attack_swing(int equip, Thingp best, point best_hit_at, Thing
     // A monst only wielding a staff can have no swing anim
     //
     if (! attack_options->used_as.empty()) {
-      auto use_anim = level->thing_new(attack_options->used_as, best_hit_at);
-      use_anim->owner_set(this);
-      equip_use_anim_set(use_anim, equip);
+      bool create_swing_animation = false;
+
+      if (is_player() && level->is_attackable_by_player(best_hit_at)) {
+        dbg("Ok to have swing animation for player");
+        create_swing_animation = true;
+      }
+
+      if (is_monst() && level->is_attackable_by_monst(best_hit_at)) {
+        dbg("Ok to have swing animation for monster");
+        create_swing_animation = true;
+      }
+
+      if (create_swing_animation) {
+        auto use_anim = level->thing_new(attack_options->used_as, best_hit_at);
+        use_anim->owner_set(this);
+        equip_use_anim_set(use_anim, equip);
+      }
     }
   } else if (use_anim && (best_hit_at != use_anim->curr_at)) {
     //
