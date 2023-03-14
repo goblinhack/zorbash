@@ -9,13 +9,8 @@ def tp_init(name, text_long_name, tiles=[]):
     my.dmg_water_dice(self, "1d6+1")
     my.environ_avoids_fire(self, 1)
     my.gfx_ascii_animated(self, True)
-    my.gfx_ascii_bg_color_spread_blue(self, 10)
     my.gfx_ascii_bg_color_spread_green(self, 20)
-    my.gfx_ascii_bg_color_spread_red(self, 10)
     my.gfx_ascii_color_is_animated(self, True)
-    my.gfx_ascii_fg_color_spread_blue(self, 50)
-    my.gfx_ascii_fg_color_spread_green(self, 50)
-    my.gfx_ascii_fg_color_spread_red(self, 5)
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
@@ -40,7 +35,7 @@ def tp_init(name, text_long_name, tiles=[]):
     delay = 3000
     for t in tiles:
         my.tile(self,
-                ascii_fg_char="-", ascii_bg_col_name="deepwater", ascii_fg_col_name="water",
+                ascii_fg_char="~", ascii_bg_col_name="deepwater", ascii_fg_col_name="water",
                 tile=t, delay_ms=delay)
 
     my.tp_update(self)

@@ -101,8 +101,8 @@ void color_init3(void)
   color_set("lemonchiffon4", &LEMONCHIFFON4, 139, 137, 112, 255);
   color_set("lemon_chiffon", &LEMON_CHIFFON, 255, 250, 205, 255);
   color_set("lemonchiffon", &LEMONCHIFFON, 255, 250, 205, 255);
-  color_set("water", &WATER, 99, 99, 255, 255);
-  color_set("deepwater", &DEEPWATER, 18, 33, 130, 255);
+  color_set("water", &WATER, 84, 84, 232, 255);
+  color_set("deepwater", &DEEPWATER, 20, 38, 124, 255);
   color_set("lightblue1", &LIGHTBLUE1, 191, 239, 255, 255);
   color_set("lightblue2", &LIGHTBLUE2, 178, 223, 238, 255);
   color_set("lightblue3", &LIGHTBLUE3, 154, 192, 205, 255);
