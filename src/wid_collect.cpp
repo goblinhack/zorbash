@@ -49,11 +49,14 @@ static void wid_collect_slot(int slot)
   TRACE_AND_INDENT();
   for (auto id : collect_items) {
     auto t = level->thing_find_optional(id);
-    if (t) {
-      verify(MTYPE_THING, t);
-      player->log("Old collect items: %p %s", t, t->to_short_string().c_str());
-    } else {
-      player->log("Old collect items: <empty slot>");
+    IF_DEBUG
+    {
+      if (t) {
+        verify(MTYPE_THING, t);
+        player->log("Old collect items: %p %s", t, t->to_short_string().c_str());
+      } else {
+        player->log("Old collect items: <empty slot>");
+      }
     }
   }
 
@@ -95,7 +98,7 @@ static void wid_collect_slot(int slot)
   for (auto id : collect_items) {
     auto t = level->thing_find_optional(id);
     if (t) {
-      player->log("Current collect items: %s", t->to_short_string().c_str());
+      IF_DEBUG { player->log("Current collect items: %s", t->to_short_string().c_str()); }
     }
   }
 
@@ -122,7 +125,7 @@ static void wid_collect_slot(int slot)
       continue;
     }
 
-    player->log("Remaining collect items: %s", t->to_short_string().c_str());
+    IF_DEBUG { player->log("Remaining collect items: %s", t->to_short_string().c_str()); }
     new_collect_items.push_back(t->id);
   }
   collect_items = new_collect_items;
@@ -344,14 +347,14 @@ void Game::wid_collect_create(const std::list< ThingId > items /* intentional co
         continue;
       }
 
-      player->log("Collect item cand: %s", t->to_short_string().c_str());
+      IF_DEBUG { player->log("Collect item cand: %s", t->to_short_string().c_str()); }
       if (found.find(t) != found.end()) {
-        player->log("- exists: %s", t->to_short_string().c_str());
+        IF_DEBUG { player->log("- exists: %s", t->to_short_string().c_str()); }
         continue;
       }
 
       if (! t->is_collectable()) {
-        player->log("- not collectable: %s", t->to_short_string().c_str());
+        IF_DEBUG { player->log("- not collectable: %s", t->to_short_string().c_str()); }
         continue;
       }
 
@@ -390,13 +393,13 @@ void Game::wid_collect_create(const std::list< ThingId > items /* intentional co
 
       if (t->maybe_itemsp()) {
         for (const auto t : t->carried_item_only_vector()) {
-          player->log("Collect sub-item cand: %s", t->to_short_string().c_str());
+          IF_DEBUG { player->log("Collect sub-item cand: %s", t->to_short_string().c_str()); }
           if (found.find(t) != found.end()) {
-            player->log("- exists: %s", t->to_short_string().c_str());
+            IF_DEBUG { player->log("- exists: %s", t->to_short_string().c_str()); }
             continue;
           }
           if (! t->is_collectable()) {
-            player->log("- not collectable: %s", t->to_short_string().c_str());
+            IF_DEBUG { player->log("- not collectable: %s", t->to_short_string().c_str()); }
             continue;
           }
           found[ t ] = true;
@@ -406,11 +409,14 @@ void Game::wid_collect_create(const std::list< ThingId > items /* intentional co
     }
 
     for (auto id : collect_items) {
-      auto t = level->thing_find_optional(id);
-      if (t) {
-        player->log("Final collect items: %s", t->to_short_string().c_str());
-      } else {
-        player->log("Final collect items: <empty slot>");
+      IF_DEBUG
+      {
+        auto t = level->thing_find_optional(id);
+        if (t) {
+          player->log("Final collect items: %s", t->to_short_string().c_str());
+        } else {
+          player->log("Final collect items: <empty slot>");
+        }
       }
     }
   }

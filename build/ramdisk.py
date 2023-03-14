@@ -35,6 +35,18 @@ try:
                 newer = True
                 break
 
+        for filepath in root.rglob(r"data/gfx/*/*.tga"):
+            if os.path.getctime("zorbash-game") < os.path.getctime(filepath):
+                print("{} is newer".format(filepath))
+                newer = True
+                break
+
+        for filepath in root.rglob(r"data/gfx/*/*/*.tga"):
+            if os.path.getctime("zorbash-game") < os.path.getctime(filepath):
+                print("{} is newer".format(filepath))
+                newer = True
+                break
+
         for filepath in root.rglob(r"data/sounds/*/*/.wav"):
             if os.path.getctime("zorbash-game") < os.path.getctime(filepath):
                 print("{} is newer".format(filepath))
@@ -60,11 +72,15 @@ files = collections.defaultdict(list)
 #
 # For each .tga convert it to assembly to be included in the build
 #
-for filepath in root.rglob(r"data/gfx/*.tga"):
+for filepath in root.rglob(r"data/*/*.tga"):
     files[filepath.parent].append(filepath.name)
     number_of_files_to_add_to_ramdisk += 1
 
-for filepath in root.rglob(r"data/fonts/*.tga"):
+for filepath in root.rglob(r"data/*/*/*.tga"):
+    files[filepath.parent].append(filepath.name)
+    number_of_files_to_add_to_ramdisk += 1
+
+for filepath in root.rglob(r"data/*/*/*/*.tga"):
     files[filepath.parent].append(filepath.name)
     number_of_files_to_add_to_ramdisk += 1
 

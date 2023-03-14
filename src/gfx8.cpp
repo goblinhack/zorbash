@@ -74,7 +74,7 @@ void gfx_init8(void)
         "ui.pixelart.8,12,15", "ui.pixelart.8,13,15", "ui.pixelart.8,14,15", "ui.pixelart.8,15,15",
     };
     const std::vector< std::string > arr(tiles);
-    tile_load_arr("data/gfx/ui/pixelart/ui_vert1.tga", "ui_pixelart_box8", 8, 8, arr);
+    tile_load_arr("data/gfx/ui/pixelart/pixelart_ui_vert1.tga", "ui_pixelart_box8", 8, 8, arr);
   }
 
   {
@@ -133,6 +133,6 @@ void gfx_init8(void)
         "ui.ascii.8,15,15",
     };
     const std::vector< std::string > arr(tiles);
-    tile_load_arr("data/gfx/ui/ascii/ui_vert1.tga", "ui_ascii_box8", 8, 8, arr);
+    tile_load_arr("data/gfx/ui/ascii/ascii_ui_vert1.tga", "ui_ascii_box8", 8, 8, arr);
   }
 }

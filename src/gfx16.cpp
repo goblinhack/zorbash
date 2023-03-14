@@ -74,7 +74,7 @@ void gfx_init16(void)
         "ui.pixelart.16,12,15", "ui.pixelart.16,13,15", "ui.pixelart.16,14,15", "ui.pixelart.16,15,15",
     };
     const std::vector< std::string > arr(tiles);
-    tile_load_arr("data/gfx/ui/pixelart/ui_bag.tga", "ui_pixelart_box16", 8, 8, arr);
+    tile_load_arr("data/gfx/ui/pixelart/pixelart_ui_bag.tga", "ui_pixelart_box16", 8, 8, arr);
   }
 
   {
@@ -133,6 +133,6 @@ void gfx_init16(void)
         "ui.ascii.16,15,15",
     };
     const std::vector< std::string > arr(tiles);
-    tile_load_arr("data/gfx/ui/pixelart/ui_bag.tga", "ui_ascii_box16", 8, 8, arr);
+    tile_load_arr("data/gfx/ui/pixelart/pixelart_ui_bag.tga", "ui_ascii_box16", 8, 8, arr);
   }
 }

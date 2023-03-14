@@ -74,7 +74,7 @@ void gfx_init15(void)
         "ui.pixelart.15,12,15", "ui.pixelart.15,13,15", "ui.pixelart.15,14,15", "ui.pixelart.15,15,15",
     };
     const std::vector< std::string > arr(tiles);
-    tile_load_arr("data/gfx/ui/pixelart/ui_horiz_scroll2.tga", "ui_pixelart_box15", 8, 8, arr);
+    tile_load_arr("data/gfx/ui/pixelart/pixelart_ui_horiz_scroll2.tga", "ui_pixelart_box15", 8, 8, arr);
   }
 
   {
@@ -133,6 +133,6 @@ void gfx_init15(void)
         "ui.ascii.15,15,15",
     };
     const std::vector< std::string > arr(tiles);
-    tile_load_arr("data/gfx/ui/ascii/ui_horiz_scroll2.tga", "ui_ascii_box15", 8, 8, arr);
+    tile_load_arr("data/gfx/ui/ascii/ascii_ui_horiz_scroll2.tga", "ui_ascii_box15", 8, 8, arr);
   }
 }
