@@ -10,6 +10,7 @@
 #include <string.h>  // do not remove
 #include <strings.h> // do not remove, strcasecmp
 
+// begin sort marker1 {
 color GRAY;
 color GRAY1;
 color GRAY10;
@@ -217,11 +218,13 @@ color GREY96;
 color GREY97;
 color GREY98;
 color GREY99;
+// end sort marker1 }
 
 void color_init2(void)
 {
   TRACE_AND_INDENT();
 
+  // begin sort marker1 {
   color_set("gray10", &GRAY10, 26, 26, 26, 255);
   color_set("grey10", &GREY10, 26, 26, 26, 255);
   color_set("gray11", &GRAY11, 28, 28, 28, 255);
@@ -428,4 +431,5 @@ void color_init2(void)
   color_set("green4", &GREEN4, 0, 139, 0, 255);
   color_set("green", &GREEN, 0, 255, 0, 255);
   color_set("greenyellow", &GREENYELLOW, 173, 255, 47, 255);
+  // end sort marker1 }
 }

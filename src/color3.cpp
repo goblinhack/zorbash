@@ -10,6 +10,7 @@
 #include <string.h>  // do not remove
 #include <strings.h> // do not remove, strcasecmp
 
+// begin sort marker1 {
 color HOT_PINK;
 color HOTPINK;
 color HOTPINK1;
@@ -37,6 +38,7 @@ color LEMON_CHIFFON;
 color LEMONCHIFFON;
 color WATER;
 color DEEPWATER;
+color WALL;
 color LEMONCHIFFON1;
 color LEMONCHIFFON2;
 color LEMONCHIFFON3;
@@ -69,11 +71,13 @@ color LIGHTSKYBLUE4;
 color LIGHTSLATEBLUE;
 color LIGHTSLATEGRAY;
 color LIGHTSLATEGREY;
+// end sort marker1 }
 
 void color_init3(void)
 {
   TRACE_AND_INDENT();
 
+  // begin sort marker2 {
   color_set("hotpink1", &HOTPINK1, 255, 110, 180, 255);
   color_set("hotpink2", &HOTPINK2, 238, 106, 167, 255);
   color_set("hotpink3", &HOTPINK3, 205, 96, 144, 255);
@@ -103,6 +107,7 @@ void color_init3(void)
   color_set("lemonchiffon", &LEMONCHIFFON, 255, 250, 205, 255);
   color_set("water", &WATER, 84, 84, 232, 255);
   color_set("deepwater", &DEEPWATER, 20, 38, 124, 255);
+  color_set("wall", &WALL, 247, 188, 193, 255);
   color_set("lightblue1", &LIGHTBLUE1, 191, 239, 255, 255);
   color_set("lightblue2", &LIGHTBLUE2, 178, 223, 238, 255);
   color_set("lightblue3", &LIGHTBLUE3, 154, 192, 205, 255);
@@ -131,4 +136,5 @@ void color_init3(void)
   color_set("lightslateblue", &LIGHTSLATEBLUE, 132, 112, 255, 255);
   color_set("lightslategray", &LIGHTSLATEGRAY, 119, 136, 153, 255);
   color_set("lightslategrey", &LIGHTSLATEGREY, 119, 136, 153, 255);
+  // end sort marker2 }
 }

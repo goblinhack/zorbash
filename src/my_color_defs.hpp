@@ -8,6 +8,7 @@
 
 #include "my_color.hpp"
 
+// begin sort marker1 {
 extern color AQUAMARINE;
 extern color AQUAMARINE1;
 extern color AQUAMARINE2;
@@ -127,6 +128,7 @@ extern color DEEPSKYBLUE2;
 extern color DEEPSKYBLUE3;
 extern color DEEPSKYBLUE4;
 extern color DEEPWATER;
+extern color WALL;
 extern color DIM_GRAY;
 extern color DIMGRAY;
 extern color DIM_GREY;
@@ -605,5 +607,6 @@ extern color YELLOW2;
 extern color YELLOW3;
 extern color YELLOW4;
 extern color YELLOWGREEN;
+// end sort marker1 }
 
 #endif // _MY_COLOR_HPP_

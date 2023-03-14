@@ -7,7 +7,7 @@ def tp_init(name, tiles=[]):
     # begin sort marker
     my.collision_check(self, True)
     my.collision_hit_priority(self, 3)
-    my.gfx_ascii_fg_color_spread_hue(self, 50)
+    my.gfx_ascii_fg_color_spread_hue(self, 10)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)
