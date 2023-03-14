@@ -639,7 +639,6 @@ std::vector< point > dmap_solve(const Dmap *D, const point start)
         //
         // Allow fully diagonal moves between walls?
         //
-        return out;
       } else if (is_obs_wall_or_door_at(D, hop0.x + 1, hop0.y)) {
         //
         // Try to make a path around the obstacle
@@ -664,7 +663,6 @@ std::vector< point > dmap_solve(const Dmap *D, const point start)
         //
         // Allow fully diagonal moves between walls?
         //
-        return out;
       } else if (is_obs_wall_or_door_at(D, hop0.x - 1, hop0.y)) {
         //
         // Try to make a path around the obstacle
@@ -689,7 +687,6 @@ std::vector< point > dmap_solve(const Dmap *D, const point start)
         //
         // Allow fully diagonal moves between walls?
         //
-        return out;
       } else if (is_obs_wall_or_door_at(D, hop0.x + 1, hop0.y)) {
         //
         // Try to make a path around the obstacle
@@ -714,7 +711,6 @@ std::vector< point > dmap_solve(const Dmap *D, const point start)
         //
         // Allow fully diagonal moves between walls?
         //
-        return out;
       } else if (is_obs_wall_or_door_at(D, hop0.x - 1, hop0.y)) {
         //
         // Try to make a path around the obstacle
