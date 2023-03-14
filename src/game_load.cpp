@@ -1337,6 +1337,8 @@ void Game::load(int slot)
   LOG("-");
 
   TOPCON("Loaded the game from %s.", save_file.c_str());
+
+  sdl_display_reset();
 }
 
 void Game::load_snapshot(void)

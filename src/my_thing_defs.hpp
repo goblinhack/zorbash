@@ -43,7 +43,7 @@
 #define THING_JUMP_SPEED_MS                       450  // Jump animation speed
 #define THING_MOVE_SPEED_FAST_MS                  25   // Movement when we have a cursor path
 #define THING_MOVE_SPEED_SLOW_MS                  150  // Normal movement speed
-#define THING_TICK_DURATION_TOO_LONG              10   // How many ms per thing tick we expect not to exceed
+#define THING_TICK_DURATION_TOO_LONG              20   // How many ms per thing tick we expect not to exceed
 #define THING_TICK_WAIT_TOO_LONG                  100  // How many ticks we wait for things to stop moving
 #define TELEPORT_DISTANCE_MAX                     (MAP_WIDTH / 2) // How far can things teleport
 
