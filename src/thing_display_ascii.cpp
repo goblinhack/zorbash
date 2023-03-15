@@ -155,6 +155,14 @@ void Thing::blit_ascii_adjust_color_hue(color &c, bool fg)
 void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
 {
   //
+  // Don't adjust hues if we cannot see it. This helps make the visible area
+  // look a lot brighter in comparison to the unlit areas.
+  //
+  if (! get(level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+    return;
+  }
+
+  //
   // Poor thing is frozen?
   //
   if (fg) {
@@ -522,7 +530,11 @@ void Thing::blit_ascii(point tl, point br, point p, bool left_bar)
   //
   bool lit;
   if (has_light) {
-    lit = get(level->can_see_ever.can_see, curr_at.x, curr_at.y);
+    //
+    // Not sure if we should show lights out of view
+    //
+    // lit = get(level->can_see_ever.can_see, curr_at.x, curr_at.y);
+    lit = get(level->can_see_currently.can_see, curr_at.x, curr_at.y);
   } else {
     lit = get(level->can_see_currently.can_see, curr_at.x, curr_at.y);
   }

@@ -22,7 +22,6 @@ def lava_init(name, text_long_name, tiles=[]):
     my.gfx_ascii_color_fg_unchanged_by_lights(self, True)
     my.gfx_ascii_color_is_animated(self, True)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
-    my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_glows(self, True)
     my.gfx_pixelart_reflection(self, True)
