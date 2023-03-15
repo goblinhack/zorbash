@@ -80,7 +80,10 @@ void Thing::light_dist_including_torch_effect_get(uint8_t &out_light_dist)
   }
 
   int count = torch_count();
-  light_dist += torch->light_dist() * count;
+  //
+  // Make torches brigheter
+  //
+  light_dist += torch->light_dist() * count * 3;
 
   auto max_distance = tp()->distance_vision();
   if (light_dist > max_distance) {
