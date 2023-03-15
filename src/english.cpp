@@ -1,7 +1,9 @@
 //
-// Borrowed from "crawl"
+// Some of this is borrowed from "crawl"
 //
+
 #include "my_english.hpp"
+#include "my_string.hpp"
 
 bool starts_with(const std::string &s, const std::string &prefix) { return s.compare(0, prefix.size(), prefix) == 0; }
 
@@ -135,4 +137,16 @@ std::string apostrophise(const std::string &name)
 
   // const char lastc = name[name.length() - 1];
   return name + /*(lastc == 's' ? "'" :*/ "'s" /*)*/;
+}
+
+void abbreviate(std::string &s)
+{
+  ::replace(s, "potion of", "potion");
+  ::replace(s, "staff of", "staff");
+  ::replace(s, "ring of", "ring");
+  ::replace(s, "sword of", "sword");
+  ::replace(s, "potion", "pot.");
+  ::replace(s, "poison", "pois.");
+  ::replace(s, "immunity", "imm.");
+  ::replace(s, "lightning", "lghtn.");
 }

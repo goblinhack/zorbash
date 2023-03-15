@@ -11,4 +11,5 @@ extern bool ends_with(const std::string &s, const std::string &suffix);
 
 extern std::string pluralise(const std::string &name);
 extern std::string apostrophise(const std::string &name);
+extern void        abbreviate(std::string &s);
 #endif

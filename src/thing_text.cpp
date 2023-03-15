@@ -2,12 +2,14 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_english.hpp"
 #include "my_game.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_sdl_proto.hpp"
 #include "my_thing.hpp"
+#include "my_ui.hpp"
 
-std::string Thing::text_a_or_an(void)
+std::string Thing::text_a_or_an(size_t max_len)
 {
   TRACE_NO_INDENT();
   auto tpp = tp();
@@ -44,6 +46,12 @@ std::string Thing::text_a_or_an(void)
     }
   } else {
     out += tpp->text_long_name();
+  }
+
+  if (max_len) {
+    if (out.size() >= max_len) {
+      ::abbreviate(out);
+    }
   }
 
   return out;
@@ -141,7 +149,7 @@ std::string Thing::text_The_no_dying(void)
   return out;
 }
 
-std::string Thing::text_short_a_or_an(void)
+std::string Thing::text_short_a_or_an(size_t max_len)
 {
   TRACE_NO_INDENT();
   auto tpp = tp();
@@ -180,10 +188,16 @@ std::string Thing::text_short_a_or_an(void)
     out += tpp->text_short_name();
   }
 
+  if (max_len) {
+    if (out.size() >= max_len) {
+      abbreviate(out);
+    }
+  }
+
   return out;
 }
 
-std::string Thing::text_short_the(void)
+std::string Thing::text_short_the(size_t max_len)
 {
   TRACE_NO_INDENT();
   auto tpp = tp();
@@ -208,21 +222,27 @@ std::string Thing::text_short_the(void)
 
   out += tpp->text_short_name();
 
+  if (max_len) {
+    if (out.size() >= max_len) {
+      abbreviate(out);
+    }
+  }
+
   return out;
 }
 
-std::string Thing::text_short_The(void)
+std::string Thing::text_short_The(size_t max_len)
 {
   TRACE_NO_INDENT();
-  auto out = text_short_the();
+  auto out = text_short_the(max_len);
   out[ 0 ] = toupper(out[ 0 ]);
   return out;
 }
 
-std::string Thing::text_A_or_An(void)
+std::string Thing::text_A_or_An(size_t max_len)
 {
   TRACE_NO_INDENT();
-  auto out = text_short_a_or_an();
+  auto out = text_short_a_or_an(max_len);
   out[ 0 ] = toupper(out[ 0 ]);
   return out;
 }
@@ -230,10 +250,10 @@ std::string Thing::text_A_or_An(void)
 //
 // foo bar -> Foo Bar
 //
-std::string Thing::text_short_capitalised(void)
+std::string Thing::text_short_capitalised(size_t max_len)
 {
   TRACE_NO_INDENT();
-  std::string out = text_short_name();
+  std::string out = text_short_name(max_len);
 
   char *b          = (char *) out.c_str();
   char *e          = b + out.size();
@@ -255,10 +275,10 @@ std::string Thing::text_short_capitalised(void)
   return out;
 }
 
-std::string Thing::text_long_capitalised(void)
+std::string Thing::text_long_capitalised(size_t max_len)
 {
   TRACE_NO_INDENT();
-  std::string out = text_long_name();
+  std::string out = text_long_name(max_len);
 
   char *b          = (char *) out.c_str();
   char *e          = b + out.size();
@@ -280,7 +300,7 @@ std::string Thing::text_long_capitalised(void)
   return out;
 }
 
-std::string Thing::text_short_and_state_capitalised(void)
+std::string Thing::text_short_and_state_capitalised(size_t max_len)
 {
   TRACE_NO_INDENT();
   auto tpp = tp();
@@ -332,10 +352,16 @@ std::string Thing::text_short_and_state_capitalised(void)
     c++;
   }
 
+  if (max_len) {
+    if (out.size() >= max_len) {
+      abbreviate(out);
+    }
+  }
+
   return out;
 }
 
-std::string Thing::text_long_and_state_capitalised(void)
+std::string Thing::text_long_and_state_capitalised(size_t max_len)
 {
   TRACE_NO_INDENT();
   std::string out;
@@ -369,6 +395,12 @@ std::string Thing::text_long_and_state_capitalised(void)
     }
 
     c++;
+  }
+
+  if (max_len) {
+    if (out.size() >= max_len) {
+      abbreviate(out);
+    }
   }
 
   return out;
@@ -486,36 +518,81 @@ void Thing::show_botcon_description(void)
   }
 }
 
-const std::string Thing::text_long_name(void)
+const std::string Thing::text_long_name(size_t max_len)
 {
   TRACE_NO_INDENT();
 
-  std::string s;
+  std::string out;
   if (is_mimic() && ! is_sleeping) {
-    s = tp()->text_real_name();
+    out = tp()->text_real_name();
   } else {
-    s = tp()->text_long_name();
+    out = tp()->text_long_name();
   }
 
   if (enchant_count_get()) {
-    s += " +" + std::to_string(enchant_count_get());
+    out += " +" + std::to_string(enchant_count_get());
   }
-  return s;
+
+  if (max_len) {
+    if (out.size() >= max_len) {
+      abbreviate(out);
+    }
+  }
+
+  return out;
 }
 
-const std::string Thing::text_short_name(void)
+const std::string Thing::text_short_name(size_t max_len)
 {
   TRACE_NO_INDENT();
 
-  std::string s;
+  std::string out;
   if (is_mimic() && ! is_sleeping) {
-    s = tp()->text_real_name();
+    out = tp()->text_real_name();
   } else {
-    s = tp()->text_short_name();
+    out = tp()->text_short_name();
   }
 
   if (enchant_count_get()) {
-    s += " +" + std::to_string(enchant_count_get());
+    out += " +" + std::to_string(enchant_count_get());
   }
-  return s;
+
+  if (max_len) {
+    if (out.size() >= max_len) {
+      abbreviate(out);
+    }
+  }
+
+  return out;
+}
+
+std::string Tp::text_a_or_an(void) const { return _text_a_or_an; }
+
+//
+// foo bar -> Foo Bar
+//
+std::string Tp::text_short_capitalised(void) const
+{
+  TRACE_NO_INDENT();
+
+  std::string out        = text_short_name();
+  char       *b          = (char *) out.c_str();
+  char       *e          = b + out.size();
+  char       *c          = b;
+  bool        word_start = true;
+
+  while (c < e) {
+    if (word_start) {
+      if (islower(*c)) {
+        *c = toupper(*c);
+      }
+      word_start = false;
+    } else if (*c == ' ') {
+      word_start = true;
+    }
+
+    c++;
+  }
+
+  return out;
 }

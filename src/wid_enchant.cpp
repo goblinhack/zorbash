@@ -2,6 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_english.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_sdl_proto.hpp"
@@ -471,6 +472,10 @@ void Game::wid_enchant_an_item(void)
         if (iter == t) {
           s += " (equipped)";
         }
+      }
+
+      if (s.size() > width) {
+        abbreviate(s);
       }
 
       wid_set_text(wid_item, s);

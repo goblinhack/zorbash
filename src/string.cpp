@@ -1453,3 +1453,20 @@ std::string capitalise(std::string in)
 
   return out;
 }
+
+//
+// Modify the input string with and change "pattern" to "replace_with" repeatedly.
+//
+void replace(std::string &input, const std::string &pattern, const std::string &replace_with)
+{
+  size_t pos = 0;
+  for (;;) {
+    pos = input.find(pattern, pos);
+    if (pos == std::string::npos) {
+      return;
+    }
+    input.replace(pos, pattern.length(), replace_with);
+    pos += replace_with.length();
+  }
+}
+

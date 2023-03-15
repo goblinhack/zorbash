@@ -252,32 +252,3 @@ void               Tp::resurrect_dice_set(const std::string &v)
   _resurrect_dice     = v;
   _resurrect_dice_str = v;
 }
-
-std::string Tp::text_a_or_an(void) const { return _text_a_or_an; }
-
-//
-// foo bar -> Foo Bar
-//
-std::string Tp::text_short_capitalised(void) const
-{
-  TRACE_NO_INDENT();
-  std::string out        = text_long_name();
-  char       *b          = (char *) out.c_str();
-  char       *e          = b + out.size();
-  char       *c          = b;
-  bool        word_start = true;
-  while (c < e) {
-    if (word_start) {
-      if (islower(*c)) {
-        *c = toupper(*c);
-      }
-      word_start = false;
-    } else if (*c == ' ') {
-      word_start = true;
-    }
-
-    c++;
-  }
-
-  return out;
-}

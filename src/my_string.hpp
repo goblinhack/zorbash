@@ -72,4 +72,6 @@ void     strnoescape(char *uncompressed);
 void     strrepc(char *s, const char *replace_set, char replace_with);
 
 extern std::vector< std::string > split_tokens(const std::string &s, const char delimiter);
+void replace(std::string &input, const std::string &pattern, const std::string &replace_with);
+
 #endif

@@ -755,8 +755,8 @@ public:
   const std::string text_description_long2(void);
   const std::string text_description_long3(void);
   const std::string text_description_long(void);
-  const std::string text_long_name(void);
-  const std::string text_short_name(void);
+  const std::string text_long_name(size_t max_len = 0);
+  const std::string text_short_name(size_t max_len = 0);
   // end sort marker4 {
 
   // begin sort marker5 {
@@ -2260,15 +2260,15 @@ public:
 
   std::size_t light_count(void);
 
-  std::string text_short_and_state_capitalised(void);
-  std::string text_long_and_state_capitalised(void);
-  std::string text_short_capitalised(void);
-  std::string text_long_capitalised(void);
-  std::string text_short_a_or_an(void);
-  std::string text_short_the(void);
-  std::string text_short_The(void);
-  std::string text_a_or_an(void);
-  std::string text_A_or_An(void);
+  std::string text_short_and_state_capitalised(size_t max_len = 0);
+  std::string text_long_and_state_capitalised(size_t max_len = 0);
+  std::string text_short_capitalised(size_t max_len = 0);
+  std::string text_long_capitalised(size_t max_len = 0);
+  std::string text_short_a_or_an(size_t max_len = 0);
+  std::string text_short_the(size_t max_len = 0);
+  std::string text_short_The(size_t max_len = 0);
+  std::string text_a_or_an(size_t max_len = 0);
+  std::string text_A_or_An(size_t max_len = 0);
   std::string text_the(bool include_owner = false);
   std::string text_the_no_dying(bool include_owner = false);
   std::string text_The_no_dying(void);

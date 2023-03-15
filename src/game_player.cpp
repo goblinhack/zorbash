@@ -81,6 +81,10 @@ void Game::place_player(void)
         t->carry(w);
         t->enchant_without_stone(w);
       }
+      if (1) {
+        auto w = level->thing_new("potion_health", point(x, y - 2));
+        w->enchant_randomly();
+      }
       if (0) {
         auto w = level->thing_new("buff_undead_protection", point(x, y));
         t->buff_add(w);

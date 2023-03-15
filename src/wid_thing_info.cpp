@@ -583,7 +583,7 @@ bool Game::wid_thing_info_create_list(std::vector< Thingp > &ts)
         if (t->is_floor() || t->is_corridor()) {
           continue;
         }
-        description += t->text_short_and_state_capitalised();
+        description += t->text_short_and_state_capitalised(UI_LEFTBAR_WIDTH);
         description += ".`"; // Why does space not work ?
       }
 
@@ -862,7 +862,8 @@ void Game::wid_thing_info_add_dmg_melee(WidPopup *w, Thingp t, int index)
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee dmg%20s", tmp2);
         }
         w->log(tmp);
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", curr_weapon->text_short_and_state_capitalised().c_str());
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s",
+                 curr_weapon->text_short_and_state_capitalised(UI_LEFTBAR_WIDTH).c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Weapon %20s", tmp2);
         w->log(tmp);
       }
