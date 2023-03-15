@@ -357,10 +357,15 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
       // If this is something we would not normally show, like a monster, but it is on
       // a tile that has been seen and is lit, then show it.
       //
-      if (! shown_in_bg) {
-        fcolor combined_light = level->ascii_light_source_no_check(curr_at);
-        if (combined_light != COLOR_NONE) {
-          shown_in_bg = true;
+      if (0) {
+        //
+        // Not sure we should show monsters elsewhere. Make it an ability?
+        //
+        if (! shown_in_bg) {
+          fcolor combined_light = level->ascii_light_source_no_check(curr_at);
+          if (combined_light != COLOR_NONE) {
+            shown_in_bg = true;
+          }
         }
       }
 
