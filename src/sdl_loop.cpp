@@ -263,6 +263,16 @@ void sdl_loop(void)
       break;
     }
 
+    IF_DEBUG2
+    {
+      if (unlikely(pcg_random_allowed > 10)) {
+        ERR("pcg_random_allowed lock error");
+      }
+      if (unlikely(pcg_random_allowed < -10)) {
+        ERR("pcg_random_allowed unlock error");
+      }
+    }
+
     //
     // Update FPS counter. Used for damping AI even if not shown.
     //

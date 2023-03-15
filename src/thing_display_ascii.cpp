@@ -377,14 +377,6 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
           c.a = tile->ascii_fg_alpha;
           blit_ascii_adjust_color(c, bg, left_bar);
 
-          IF_DEBUG2
-          {
-            if (! get(level->can_see_ever.can_see, curr_at.x, curr_at.y)) {
-              c.r = ((int) (c.r / 4));
-              c.g = c.r;
-              c.b = c.b;
-            }
-          }
           ascii_set_bg(p.x, p.y, c);
         }
 
@@ -400,17 +392,6 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
           c.a = tile->ascii_fg_alpha;
           blit_ascii_adjust_color(c, bg, left_bar);
 
-          //
-          // This allows us to see the unvisited areas when in debug mode in a different color
-          //
-          IF_DEBUG2
-          {
-            if (! get(level->can_see_ever.can_see, curr_at.x, curr_at.y)) {
-              c.r = ((int) (c.r / 4));
-              c.g = c.r;
-              c.b = c.b;
-            }
-          }
           ascii_set_bg(p.x, p.y, c);
         }
 
@@ -437,17 +418,6 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
           }
           blit_ascii_adjust_color(c, fg, left_bar);
 
-          //
-          // This allows us to see the unvisited areas when in debug mode in a different color
-          //
-          IF_DEBUG2
-          {
-            if (! get(level->can_see_ever.can_see, curr_at.x, curr_at.y)) {
-              c.r = ((int) (c.r / 4));
-              c.g = c.r;
-              c.b = c.b;
-            }
-          }
           ascii_set_fg(p.x, p.y, c);
         }
       }
