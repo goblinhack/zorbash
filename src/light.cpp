@@ -246,7 +246,7 @@ bool Light::calculate(void)
   //
   if (! ray_cast_only) {
     if (owner->is_player()) {
-      light_dist_current = ((float) light_dist_current) * light_power;
+      light_dist_current = ((float) light_dist_current) * light_power * 3;
     }
   }
 
