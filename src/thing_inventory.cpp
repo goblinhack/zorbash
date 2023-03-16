@@ -10,7 +10,7 @@
 #include "my_vector_bounds_check.hpp"
 #include "my_wid_thing_info.hpp"
 
-void Thing::inventory_particle(Thingp item, uint32_t slot)
+void Thing::inventory_particle(Thingp item, int slot)
 {
   dbg("Create inventory particle? %s", item->to_short_string().c_str());
   TRACE_AND_INDENT();
@@ -149,7 +149,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
 //
 // Particle from the inventory to tp_id target
 //
-void Thing::inventory_particle(Thingp item, uint32_t slot, Thingp particle_target)
+void Thing::inventory_particle(Thingp item, int slot, Thingp particle_target)
 {
   TRACE_NO_INDENT();
 
@@ -566,7 +566,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target, Drop
   return false;
 }
 
-int Thing::item_slot_charge_count(const uint32_t slot)
+int Thing::item_slot_charge_count(const int slot)
 {
   TRACE_NO_INDENT();
 
@@ -588,7 +588,7 @@ int Thing::item_slot_charge_count(const uint32_t slot)
   return item_count_including_charges(t->tp());
 }
 
-int Thing::item_enchant_count(const uint32_t slot)
+int Thing::item_enchant_count(const int slot)
 {
   TRACE_NO_INDENT();
 
@@ -613,7 +613,7 @@ int Thing::item_enchant_count(const uint32_t slot)
   return 0;
 }
 
-Thingp Level::inventory_get(const uint32_t slot)
+Thingp Level::inventory_get(const int slot)
 {
   TRACE_NO_INDENT();
 
@@ -658,7 +658,7 @@ Thingp Level::inventory_get(void)
   return inventory_get(game->inventory_highlight_slot);
 }
 
-bool Level::inventory_over(const uint32_t slot)
+bool Level::inventory_over(const int slot)
 {
   TRACE_NO_INDENT();
 
@@ -707,7 +707,7 @@ bool Level::inventory_over(const uint32_t slot)
   return true;
 }
 
-bool Level::inventory_chosen(const uint32_t slot)
+bool Level::inventory_chosen(const int slot)
 {
   TRACE_NO_INDENT();
 
@@ -770,7 +770,7 @@ bool Level::inventory_chosen(const uint32_t slot)
   return true;
 }
 
-bool Level::inventory_assign(const uint32_t slot, Thingp item)
+bool Level::inventory_assign(const int slot, Thingp item)
 {
   TRACE_NO_INDENT();
 
@@ -880,7 +880,7 @@ int Level::inventory_slot(Thingp item)
   return -1;
 }
 
-Thingp Level::inventory_describe(const uint32_t slot)
+Thingp Level::inventory_describe(const int slot)
 {
   DBG("Inventory: Describe slot %d", slot);
   TRACE_AND_INDENT();

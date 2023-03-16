@@ -135,7 +135,7 @@ void Thing::skill_activate(Thingp what)
   }
 }
 
-int Thing::skill_enchant_count(const uint32_t slot)
+int Thing::skill_enchant_count(const int slot)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {

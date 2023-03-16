@@ -656,15 +656,15 @@ public:
     continue;                                                                                                        \
   }
 
-  Thingp buffbox_describe(const uint32_t slot);
-  Thingp buffbox_get(const uint32_t slot);
-  Thingp debuffbox_describe(const uint32_t slot);
-  Thingp debuffbox_get(const uint32_t slot);
-  Thingp inventory_describe(const uint32_t slot);
-  Thingp inventory_get(const uint32_t slot);
+  Thingp buffbox_describe(const int slot);
+  Thingp buffbox_get(const int slot);
+  Thingp debuffbox_describe(const int slot);
+  Thingp debuffbox_get(const int slot);
+  Thingp inventory_describe(const int slot);
+  Thingp inventory_get(const int slot);
   Thingp inventory_get(void);
-  Thingp skillbox_describe(const uint32_t slot);
-  Thingp skillbox_get(const uint32_t slot);
+  Thingp skillbox_describe(const int slot);
+  Thingp skillbox_get(const int slot);
   Thingp skillbox_get(void);
   Thingp thing_find(const ThingId id);
   Thingp thing_find_optional(const ThingId id);
@@ -688,7 +688,7 @@ public:
   Tpp get_random_monst(point p, biome_t, monst_type_t, monst_class_t, int difficulty_offset = 0);
 
   // begin sort marker2 {
-  bool buffbox_over(const uint32_t slot);
+  bool buffbox_over(const int slot);
   bool can_see_obstacle(int x, int y);
   bool can_see_unimpeded(const point &start, const point &end);
   bool can_see_unimpeded(int x0, int y0, int x1, int y1);
@@ -697,10 +697,10 @@ public:
   bool create_biome_sewer(point3d at, uint32_t seed);
   bool create_biome_sewer_pools(void);
   bool create_wandering_monster(void);
-  bool debuffbox_over(const uint32_t slot);
-  bool inventory_assign(const uint32_t slot, Thingp);
-  bool inventory_chosen(const uint32_t slot);
-  bool inventory_over(const uint32_t slot);
+  bool debuffbox_over(const int slot);
+  bool inventory_assign(const int slot, Thingp);
+  bool inventory_chosen(const int slot);
+  bool inventory_over(const int slot);
   bool is_gas_blocker(const int x, const int y) const;
   bool is_gas_blocker(const point p) const;
   bool is_gas_blocker_no_check(const int x, const int y) const;
@@ -739,8 +739,8 @@ public:
   bool noise_blocker_no_check(const point p) const;
   bool screen_shake_begin(void);
   bool should_display_map(void);
-  bool skillbox_chosen(const uint32_t slot);
-  bool skillbox_over(const uint32_t slot);
+  bool skillbox_chosen(const int slot);
+  bool skillbox_over(const int slot);
   bool update_map_mini_should_show_monst(int x, int y);
   // end sort marker2 }
 

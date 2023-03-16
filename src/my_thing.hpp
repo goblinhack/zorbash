@@ -1805,9 +1805,9 @@ public:
   int is_wooden(void);
   int item_count_excluding_charges(Tpp item);
   int item_count_including_charges(Tpp item);
-  int item_enchant_count(const uint32_t slot);
+  int item_enchant_count(const int slot);
   int item_height(void);
-  int item_slot_charge_count(const uint32_t slot);
+  int item_slot_charge_count(const int slot);
   int item_width(void);
   int jump_distance_mod_decr(int);
   int jump_distance_mod_decr(void);
@@ -2008,7 +2008,7 @@ public:
   int shove_strength_total(void);
   int shove_strength(void);
   int size_modifier(void);
-  int skill_enchant_count(const uint32_t slot);
+  int skill_enchant_count(const int slot);
   int skillstone_count(void);
   int sleep_count_decr(int);
   int sleep_count_decr(void);
@@ -2588,8 +2588,8 @@ public:
   void init(Levelp, const std::string &name, point at, Thingp owner = nullptr);
   void init_lights(void);
   void interpolated_at_set(fpoint v);
-  void inventory_particle(Thingp what, uint32_t slot);
-  void inventory_particle(Thingp what, uint32_t slot, Thingp particle_target);
+  void inventory_particle(Thingp what, int slot);
+  void inventory_particle(Thingp what, int slot, Thingp particle_target);
   void invisible_tick(void);
   void is_stuck_update(void);
   void jump_end(void);

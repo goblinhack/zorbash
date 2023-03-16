@@ -125,7 +125,7 @@ bool Thing::buffbox_id_remove(Thingp what)
   return false;
 }
 
-Thingp Level::buffbox_get(const uint32_t slot)
+Thingp Level::buffbox_get(const int slot)
 {
   if (! player) {
     ERR("No player");
@@ -174,7 +174,7 @@ Thingp Level::buffbox_get(const uint32_t slot)
   return nullptr;
 }
 
-bool Level::buffbox_over(const uint32_t slot)
+bool Level::buffbox_over(const int slot)
 {
   DBG2("buffbox: Over buffbox slot %d", slot);
   TRACE_AND_INDENT();
@@ -206,7 +206,7 @@ bool Level::buffbox_over(const uint32_t slot)
   return true;
 }
 
-Thingp Level::buffbox_describe(const uint32_t slot)
+Thingp Level::buffbox_describe(const int slot)
 {
   DBG2("buffbox: Describe slot %d", slot);
   TRACE_AND_INDENT();

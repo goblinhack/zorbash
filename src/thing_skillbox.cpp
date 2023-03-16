@@ -139,7 +139,7 @@ bool Thing::skillbox_id_remove(Thingp what)
   return false;
 }
 
-Thingp Level::skillbox_get(const uint32_t slot)
+Thingp Level::skillbox_get(const int slot)
 {
   TRACE_NO_INDENT();
 
@@ -192,7 +192,7 @@ Thingp Level::skillbox_get(const uint32_t slot)
 
 Thingp Level::skillbox_get(void) { return skillbox_get(game->skillbox_highlight_slot); }
 
-bool Level::skillbox_over(const uint32_t slot)
+bool Level::skillbox_over(const int slot)
 {
   TRACE_NO_INDENT();
 
@@ -241,7 +241,7 @@ bool Level::skillbox_over(const uint32_t slot)
   return true;
 }
 
-bool Level::skillbox_chosen(const uint32_t slot)
+bool Level::skillbox_chosen(const int slot)
 {
   TRACE_NO_INDENT();
 
@@ -298,7 +298,7 @@ bool Level::skillbox_chosen(const uint32_t slot)
   return true;
 }
 
-Thingp Level::skillbox_describe(const uint32_t slot)
+Thingp Level::skillbox_describe(const int slot)
 {
   TRACE_NO_INDENT();
 

@@ -136,7 +136,7 @@ bool Thing::debuffbox_id_remove(Thingp what)
   return false;
 }
 
-Thingp Level::debuffbox_get(const uint32_t slot)
+Thingp Level::debuffbox_get(const int slot)
 {
   dbg("debuffbox get slot %d", slot);
   TRACE_AND_INDENT();
@@ -185,7 +185,7 @@ Thingp Level::debuffbox_get(const uint32_t slot)
   return nullptr;
 }
 
-bool Level::debuffbox_over(const uint32_t slot)
+bool Level::debuffbox_over(const int slot)
 {
   DBG2("debuffbox: Over debuffbox slot %d", slot);
   TRACE_AND_INDENT();
@@ -223,7 +223,7 @@ bool Level::debuffbox_over(const uint32_t slot)
   return true;
 }
 
-Thingp Level::debuffbox_describe(const uint32_t slot)
+Thingp Level::debuffbox_describe(const int slot)
 {
   DBG2("debuffbox: Describe slot %d", slot);
   TRACE_AND_INDENT();

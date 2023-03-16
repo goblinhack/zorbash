@@ -1,6 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- if set on fire, remember who didit?                                                                                                          -->
+<!-- adter robot mode we're stuck                                                                                                                 -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
