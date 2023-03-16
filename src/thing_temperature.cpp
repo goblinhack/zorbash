@@ -44,7 +44,11 @@ void Thing::temperature_tick(void)
       if (current_temp < temperature_min_get()) {
         dbg("Too cold (%d)", current_temp);
         TRACE_AND_INDENT();
-        is_attacked_with_dmg_cold(this, this, abs((temperature_min_get() - current_temp) / 10));
+        if (is_fire()) {
+          dead("extinguished");
+        } else {
+          is_attacked_with_dmg_cold(this, this, abs((temperature_min_get() - current_temp) / 10));
+        }
       }
     }
 
@@ -245,6 +249,8 @@ void Thing::temperature_tick(void)
       popup("Crack!");
       dbg("Apply cold damage");
       TRACE_AND_INDENT();
+
+      TRACE_AND_INDENT();
       is_attacked_with_dmg_cold(this, this, damage);
       return;
     }
@@ -256,6 +262,8 @@ void Thing::temperature_tick(void)
       popup("Shatter!");
       dbg("Apply cold damage");
       TRACE_AND_INDENT();
+
+      TRACE_AND_INDENT();
       is_attacked_with_dmg_cold(this, this, damage);
       return;
     }
@@ -266,6 +274,7 @@ void Thing::temperature_tick(void)
       auto damage = abs(thing_temp) / 20;
       dbg("Apply cold damage");
       TRACE_AND_INDENT();
+
       is_attacked_with_dmg_cold(this, this, damage);
       if (is_player()) {
         msg("%%fg=lightblue$%s suffers from the extreme cold.%%fg=reset$", text_The().c_str());

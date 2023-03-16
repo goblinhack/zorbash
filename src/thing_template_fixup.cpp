@@ -95,14 +95,30 @@ void tp_fixup(void)
 
     if (tp->is_ethereal()) {
       tp->is_immune_to_spiderwebs_set(true);
+      tp->is_immune_to_necrosis_set(true);
+      tp->is_immune_to_draining_set(true);
+      tp->is_immune_to_fire_set(true);
+      tp->is_immune_to_cold_set(true);
       if (tp->is_crushable()) {
         DIE("Tp %s is ethereal and crushable?", tp->name().c_str());
       }
     }
 
+    if (tp->is_fire_elemental()) {
+      tp->is_immune_to_fire_set(true);
+      tp->dmg_received_doubled_from_cold_set(true);
+    }
+
+    if (tp->is_cold_elemental()) {
+      tp->is_immune_to_cold_set(true);
+      tp->dmg_received_doubled_from_fire_set(true);
+    }
+
     if (tp->is_undead()) {
       tp->is_immune_to_necrosis_set(true);
       tp->is_immune_to_draining_set(true);
+      tp->is_immune_to_cold_set(true);
+      tp->dmg_received_doubled_from_fire_set(true);
     }
 
     if (! tp->on_tick_do().empty()) {

@@ -73,6 +73,10 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
       //
       // Don't relax. You're being attacked.
       //
+    } else if (danger_level(threat) >= THING_DANGER_LEVEL_CAUTION_ADVISED) {
+      //
+      // Avoid!
+      //
     } else if (distance(curr_at, threat->curr_at) > 2) {
       //
       // Look around for something nearby to do; like collect an item.

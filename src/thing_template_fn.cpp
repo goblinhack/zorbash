@@ -418,6 +418,7 @@ int Tp::is_carnivorous_plant(void) const { return _is_carnivorous_plant; }
 int Tp::is_cautious(void) const { return _is_cautious; }
 int Tp::is_chasm(void) const { return _is_chasm; }
 int Tp::is_cloak(void) const { return _is_cloak; }
+int Tp::is_cold_elemental(void) const { return _is_cold_elemental; }
 int Tp::is_cold(void) const { return _is_cold; }
 int Tp::is_collectable(void) const { return _is_collectable; }
 int Tp::is_collected_as_gold(void) const { return _is_collected_as_gold; }
@@ -486,6 +487,7 @@ int Tp::is_exit_finder(void) const { return _is_exit_finder; }
 int Tp::is_explorer(void) const { return _is_explorer; }
 int Tp::is_explosion(void) const { return _is_explosion; }
 int Tp::is_fearless(void) const { return _is_fearless; }
+int Tp::is_fire_elemental(void) const { return _is_fire_elemental; }
 int Tp::is_fire(void) const { return _is_fire; }
 int Tp::is_flat(void) const { return _is_flat; }
 int Tp::is_floating(void) const { return _is_floating; }
@@ -738,8 +740,6 @@ int Tp::is_unused_flag182(void) const { return _is_unused_flag182; }
 int Tp::is_unused_flag183(void) const { return _is_unused_flag183; }
 int Tp::is_unused_flag184(void) const { return _is_unused_flag184; }
 int Tp::is_unused_flag185(void) const { return _is_unused_flag185; }
-int Tp::is_unused_flag186(void) const { return _is_unused_flag186; }
-int Tp::is_unused_flag187(void) const { return _is_unused_flag187; }
 int Tp::is_unused_flag18(void) const { return _is_unused_flag18; }
 int Tp::is_unused_flag192(void) const { return _is_unused_flag192; }
 int Tp::is_unused_flag19(void) const { return _is_unused_flag19; }
@@ -1158,6 +1158,7 @@ void Tp::is_carnivorous_plant_set(int v) { _is_carnivorous_plant = v; }
 void Tp::is_cautious_set(int v) { _is_cautious = v; }
 void Tp::is_chasm_set(int v) { _is_chasm = v; }
 void Tp::is_cloak_set(int v) { _is_cloak = v; }
+void Tp::is_cold_elemental_set(int v) { _is_cold_elemental = v; }
 void Tp::is_cold_set(int v) { _is_cold = v; }
 void Tp::is_collectable_set(int v) { _is_collectable = v; }
 void Tp::is_collected_as_gold_set(int v) { _is_collected_as_gold = v; }
@@ -1226,6 +1227,7 @@ void Tp::is_exit_finder_set(int v) { _is_exit_finder = v; }
 void Tp::is_explorer_set(int v) { _is_explorer = v; }
 void Tp::is_explosion_set(int v) { _is_explosion = v; }
 void Tp::is_fearless_set(int v) { _is_fearless = v; }
+void Tp::is_fire_elemental_set(int v) { _is_fire_elemental = v; }
 void Tp::is_fire_set(int v) { _is_fire = v; }
 void Tp::is_flat_set(int v) { _is_flat = v; }
 void Tp::is_floating_set(int v) { _is_floating = v; }
@@ -1478,8 +1480,6 @@ void Tp::is_unused_flag182_set(int v) { _is_unused_flag182 = v; }
 void Tp::is_unused_flag183_set(int v) { _is_unused_flag183 = v; }
 void Tp::is_unused_flag184_set(int v) { _is_unused_flag184 = v; }
 void Tp::is_unused_flag185_set(int v) { _is_unused_flag185 = v; }
-void Tp::is_unused_flag186_set(int v) { _is_unused_flag186 = v; }
-void Tp::is_unused_flag187_set(int v) { _is_unused_flag187 = v; }
 void Tp::is_unused_flag18_set(int v) { _is_unused_flag18 = v; }
 void Tp::is_unused_flag192_set(int v) { _is_unused_flag192 = v; }
 void Tp::is_unused_flag19_set(int v) { _is_unused_flag19 = v; }

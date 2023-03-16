@@ -296,9 +296,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     y  = to.y;
 
     if (be_careful) {
-      if (is_player() && game->robot_mode) {
-        dbg("Robot: Cannot jump as far as it would like");
-      }
+      dbg("Cannot jump as far as it would like");
       if (too_far) {
         *too_far = true;
       }
@@ -348,7 +346,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   point dest(src.x + dx * tw, src.y + dy * th);
   auto  duration = THING_JUMP_SPEED_MS;
 
-  if (g_opt_ascii || game->robot_mode || ! is_visible_to_player) {
+  if (g_opt_ascii || ! is_visible_to_player) {
     //
     // Ascii mode, jump is immediate
     //
@@ -419,7 +417,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       auto w  = level->thing_find(id);
       if (w) {
         w->move_to_immediately(curr_at);
-        if (g_opt_ascii || game->robot_mode || ! is_visible_to_player) {
+        if (g_opt_ascii || ! is_visible_to_player) {
           //
           // Ascii mode, jump is immediate
           //
@@ -445,7 +443,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       auto w  = level->thing_find(equip_id_use_anim(e));
       if (w) {
         w->move_to_immediately(curr_at);
-        if (g_opt_ascii || game->robot_mode || ! is_visible_to_player) {
+        if (g_opt_ascii || ! is_visible_to_player) {
           //
           // Ascii mode, jump is immediate
           //
@@ -477,7 +475,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     auto w  = level->thing_find(id);
     if (w) {
       w->move_to_immediately(curr_at);
-      if (g_opt_ascii || game->robot_mode || ! is_visible_to_player) {
+      if (g_opt_ascii || ! is_visible_to_player) {
         //
         // Ascii mode, jump is immediate
         //

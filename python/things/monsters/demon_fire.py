@@ -99,7 +99,7 @@ def tp_init(name, text_long_name):
     my.is_eater_of_red_blood(self, True)
     my.is_ethereal(self, True)
     my.is_fearless(self, True)
-    my.is_fire(self, True)
+    my.is_fire_elemental(self, True)
     my.is_heavy(self, True)
     my.is_hittable(self, True)
     my.is_humanoid(self, True)

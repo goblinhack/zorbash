@@ -341,6 +341,7 @@ private:
   int _is_chasm {};
   int _is_cloak {};
   int _is_cold {};
+  int _is_cold_elemental {};
   int _is_collectable {};
   int _is_collected_as_gold {};
   int _is_collected_as_keys {};
@@ -409,6 +410,7 @@ private:
   int _is_explosion {};
   int _is_fearless {};
   int _is_fire {};
+  int _is_fire_elemental {};
   int _is_flat {};
   int _is_floating {};
   int _is_floor {};
@@ -663,8 +665,6 @@ private:
   int _is_unused_flag183 {};
   int _is_unused_flag184 {};
   int _is_unused_flag185 {};
-  int _is_unused_flag186 {};
-  int _is_unused_flag187 {};
   int _is_unused_flag19 {};
   int _is_unused_flag192 {};
   int _is_unused_flag2 {};
@@ -1624,6 +1624,7 @@ public:
   int is_cautious(void) const;
   int is_chasm(void) const;
   int is_cloak(void) const;
+  int is_cold_elemental(void) const;
   int is_cold(void) const;
   int is_collectable(void) const;
   int is_collected_as_gold(void) const;
@@ -1692,6 +1693,7 @@ public:
   int is_explorer(void) const;
   int is_explosion(void) const;
   int is_fearless(void) const;
+  int is_fire_elemental(void) const;
   int is_fire(void) const;
   int is_flat(void) const;
   int is_floating(void) const;
@@ -1944,8 +1946,6 @@ public:
   int is_unused_flag183(void) const;
   int is_unused_flag184(void) const;
   int is_unused_flag185(void) const;
-  int is_unused_flag186(void) const;
-  int is_unused_flag187(void) const;
   int is_unused_flag18(void) const;
   int is_unused_flag192(void) const;
   int is_unused_flag19(void) const;
@@ -2364,6 +2364,7 @@ public:
   void is_cautious_set(int v);
   void is_chasm_set(int v);
   void is_cloak_set(int v);
+  void is_cold_elemental_set(int v);
   void is_cold_set(int v);
   void is_collectable_set(int v);
   void is_collected_as_gold_set(int v);
@@ -2432,6 +2433,7 @@ public:
   void is_explorer_set(int v);
   void is_explosion_set(int v);
   void is_fearless_set(int v);
+  void is_fire_elemental_set(int v);
   void is_fire_set(int v);
   void is_flat_set(int v);
   void is_floating_set(int v);
@@ -2684,8 +2686,6 @@ public:
   void is_unused_flag183_set(int v);
   void is_unused_flag184_set(int v);
   void is_unused_flag185_set(int v);
-  void is_unused_flag186_set(int v);
-  void is_unused_flag187_set(int v);
   void is_unused_flag18_set(int v);
   void is_unused_flag192_set(int v);
   void is_unused_flag19_set(int v);

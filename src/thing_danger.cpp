@@ -45,6 +45,12 @@ int Tp::get_danger_level(void)
   if (is_fire()) {
     danger_level++;
   }
+  if (is_fire_elemental()) {
+    danger_level++;
+  }
+  if (is_cold_elemental()) {
+    danger_level++;
+  }
   if (is_lava()) {
     danger_level++;
   }
@@ -143,6 +149,12 @@ int Thing::danger_initial_level(void)
     danger_level++;
   }
   if (is_fire()) {
+    danger_level++;
+  }
+  if (is_fire_elemental()) {
+    danger_level++;
+  }
+  if (is_cold_elemental()) {
     danger_level++;
   }
   if (is_lava()) {
@@ -247,6 +259,12 @@ int Thing::danger_current_level(void)
     danger_level++;
   }
   if (is_fire()) {
+    danger_level++;
+  }
+  if (is_fire_elemental()) {
+    danger_level++;
+  }
+  if (is_cold_elemental()) {
     danger_level++;
   }
   if (is_lava()) {
@@ -412,11 +430,41 @@ const std::string Thing::danger_level_str(Thingp it)
   }
   if (delta >= -20) {
     return "%%fg=green$Mostly harmless";
-  } else if (delta >= -30) {
-    return "%%fg=green$Harmless";
-  } else {
-    return "%%fg=green$Walkover";
   }
+  if (delta >= -30) {
+    return "%%fg=green$Harmless";
+  }
+  return "%%fg=green$Walkover";
+}
+
+ThingDangerLevel Thing::danger_level(Thingp it)
+{
+  auto my_danger_level  = danger_current_level();
+  auto its_danger_level = it->danger_current_level();
+  auto delta            = its_danger_level - my_danger_level;
+
+  if (delta > 20) {
+    return THING_DANGER_LEVEL_CRITICAL;
+  }
+  if (delta > 10) {
+    return THING_DANGER_LEVEL_DANGEROUS;
+  }
+  if (delta >= 5) {
+    return THING_DANGER_LEVEL_CAUTION_ADVISED;
+  }
+  if (delta >= 0) {
+    return THING_DANGER_LEVEL_MODERATE_CAUTION;
+  }
+  if (delta >= -10) {
+    return THING_DANGER_LEVEL_SLIGHT_CAUTION;
+  }
+  if (delta >= -20) {
+    return THING_DANGER_LEVEL_MOSTLY_HARMLESS;
+  }
+  if (delta >= -30) {
+    return THING_DANGER_LEVEL_HARMLESS;
+  }
+  return THING_DANGER_LEVEL_WALKOVER;
 }
 
 int Thing::danger_current_level(Thingp it)

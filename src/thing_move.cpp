@@ -546,7 +546,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     }
   }
 
-  if (g_opt_ascii || game->robot_mode || ! is_visible_to_player) {
+  if (g_opt_ascii || ! is_visible_to_player) {
     //
     // No need to flip
     //

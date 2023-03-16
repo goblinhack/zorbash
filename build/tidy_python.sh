@@ -635,8 +635,8 @@ do
       is_unused_flag183 \
       is_unused_flag184 \
       is_unused_flag185 \
-      is_unused_flag186 \
-      is_unused_flag187 \
+      is_cold_elemental \
+      is_fire_elemental \
       is_very_intelligent \
       is_made_of_rock \
       is_unused_flag19 \

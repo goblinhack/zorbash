@@ -152,7 +152,7 @@ void Game::wid_dead_select(const char *reason)
     }
 
     if (game->robot_mode) {
-      wid_dead_window->log("`  |   Deactivated    |  `");
+      wid_dead_window->log("`  |   Deactivated.   |  `");
     } else {
       wid_dead_window->log("`  |      Killed      |  `");
     }

@@ -2,6 +2,7 @@
 <!-- ------                                                                                                                                       -->
 <!-- if set on fire, remember who didit?                                                                                                          -->
 <!-- adter robot mode we're stuck                                                                                                                 -->
+<!-- did not collect shield                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

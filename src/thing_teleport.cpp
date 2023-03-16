@@ -296,9 +296,7 @@ bool Thing::teleport(TeleportReason reason, point to, bool *too_far)
       y  = to.y;
 
       if (reason.teleport_carefully) {
-        if (is_player() && game->robot_mode) {
-          dbg("Robot: Cannot teleport as far as it would like");
-        }
+        dbg("Cannot teleport as far as it would like");
         if (too_far) {
           *too_far = true;
         }
@@ -396,20 +394,22 @@ bool Thing::teleport(TeleportReason reason, point to, bool *too_far)
   //
   // Too cruel?
   //
-  if (is_able_to_walk_through_walls()) {
-    if (is_player()) {
-      msg("You were already partly ethereal and the teleport scatters your remaining atoms to the wind.");
+  if (! is_able_to_teleport_self() && ! is_able_to_teleport_escape()) {
+    if (is_able_to_walk_through_walls()) {
+      if (is_player()) {
+        msg("You were already partly ethereal and the teleport scatters your remaining atoms to the wind.");
+      }
+      dead("by dematerializing");
+      return false;
     }
-    dead("by dematerializing");
-    return false;
-  }
 
-  if (is_ethereal()) {
-    if (is_player()) {
-      msg("You were already ethereal and the teleport scatters your remaining atoms to the abyss.");
+    if (is_ethereal()) {
+      if (is_player()) {
+        msg("You were already ethereal and the teleport scatters your remaining atoms to the abyss.");
+      }
+      dead("by dematerializing");
+      return false;
     }
-    dead("by dematerializing");
-    return false;
   }
 
   teleport_end();

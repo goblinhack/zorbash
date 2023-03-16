@@ -30,6 +30,17 @@ typedef enum {
   THING_MOVE_REASON_AI,
 } ThingMoveReason;
 
+typedef enum {
+  THING_DANGER_LEVEL_WALKOVER,
+  THING_DANGER_LEVEL_HARMLESS,
+  THING_DANGER_LEVEL_MOSTLY_HARMLESS,
+  THING_DANGER_LEVEL_SLIGHT_CAUTION,
+  THING_DANGER_LEVEL_MODERATE_CAUTION,
+  THING_DANGER_LEVEL_CAUTION_ADVISED,
+  THING_DANGER_LEVEL_DANGEROUS,
+  THING_DANGER_LEVEL_CRITICAL,
+} ThingDangerLevel;
+
 typedef struct {
   uint16_t tile_outline;
   uint16_t bl1_tile;
@@ -359,6 +370,8 @@ public:
   ThingId equip_id_set(ThingId, int equip);
   ThingId equip_id_carry_anim_set(ThingId, int equip);
   ThingId equip_id_use_anim_set(ThingId, int equip);
+
+  ThingDangerLevel danger_level(Thingp it);
 
   Thingp best_shoot_at_target_get(void);
   Thingp best_visible_target_get(void);
@@ -1368,6 +1381,7 @@ public:
   int is_cautious(void);
   int is_chasm(void);
   int is_cloak(void);
+  int is_cold_elemental(void);
   int is_cold(void);
   int is_collectable(void);
   int is_collected_as_gold(void);
@@ -1440,6 +1454,7 @@ public:
   int is_explorer(void);
   int is_explosion(void);
   int is_fearless(void);
+  int is_fire_elemental(void);
   int is_fire(void);
   int is_flat(void);
   int is_floating(void);
@@ -1693,8 +1708,6 @@ public:
   int is_unused_flag183(void);
   int is_unused_flag184(void);
   int is_unused_flag185(void);
-  int is_unused_flag186(void);
-  int is_unused_flag187(void);
   int is_unused_flag18(void);
   int is_unused_flag192(void);
   int is_unused_flag19(void);

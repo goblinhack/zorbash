@@ -13,10 +13,6 @@ void Thing::popup(std::string const &m)
     return;
   }
 
-  if (game->robot_mode) {
-    return;
-  }
-
   //
   // Get the top owner as that will be the popup owner. We keep track
   // of who created the popup so we can avoid > 1 popup per thing which

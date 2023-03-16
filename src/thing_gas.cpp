@@ -9,7 +9,7 @@ void Thing::gas_poison_tick(void)
 {
   TRACE_NO_INDENT();
 
-  if (is_fire()) {
+  if (is_fire() || is_fire_elemental()) {
     auto intensity = level->is_gas_poison(curr_at.x, curr_at.y) / 10;
     if (intensity) {
       level->poison_gas_explosion(curr_at);

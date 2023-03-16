@@ -306,12 +306,8 @@ bool Thing::possible_to_attack(const Thingp victim)
   }
 
   if (me->is_fire() || me->is_lava()) {
-    if (me->is_monst()) {
-      //
-      // Fire monsters do not attack always
-      //
-    } else if (victim->is_able_to_melt() || victim->is_burnable() || victim->is_very_combustible() ||
-               victim->is_combustible()) {
+    if (victim->is_able_to_melt() || victim->is_burnable() || victim->is_very_combustible() ||
+        victim->is_combustible()) {
       if (! victim->is_fire() && ! victim->is_lava()) {
         if (is_debug_type()) {
           dbg("Can attack as I am firey %s", victim->to_short_string().c_str());

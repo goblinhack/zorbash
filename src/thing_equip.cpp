@@ -497,6 +497,8 @@ bool Thing::equip(Thingp item, int equip)
       msg("You slip on %s.", item->text_the().c_str());
     } else if (item->is_weapon()) {
       msg("You wield %s.", item->text_the().c_str());
+    } else if (item->is_shield()) {
+      msg("You raise %s.", item->text_the().c_str());
     } else {
       msg("You put on %s.", item->text_the().c_str());
     }

@@ -25,10 +25,6 @@ void Level::describe(point p)
     return;
   }
 
-  if (game->robot_mode) {
-    return;
-  }
-
   if (is_starting) {
     return;
   }
@@ -407,10 +403,6 @@ void Level::describe(Thingp t)
   }
 
   if (! player->player_is_player_is_ready_for_messages()) {
-    return;
-  }
-
-  if (game->robot_mode) {
     return;
   }
 

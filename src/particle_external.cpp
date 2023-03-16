@@ -26,7 +26,7 @@ void Level::new_external_particle(ThingId id, point start, point stop, isize sz,
         return;
       }
 
-      if (g_opt_ascii || game->robot_mode) {
+      if (g_opt_ascii) {
         callback();
         return;
       }
@@ -39,7 +39,7 @@ void Level::new_external_particle(ThingId id, point start, point stop, isize sz,
     }
   }
 
-  if (g_opt_ascii || game->robot_mode) {
+  if (g_opt_ascii) {
     callback();
     return;
   }

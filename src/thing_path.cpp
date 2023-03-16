@@ -229,11 +229,8 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
             }
           }
 
-          if (is_player() && game->robot_mode) {
-            DBG2("Failed to jump carefully; try wandering instead");
-            return ai_wander();
-          }
-          return false;
+          DBG2("Failed to jump carefully; try wandering instead");
+          return ai_wander();
         }
       } else {
         //

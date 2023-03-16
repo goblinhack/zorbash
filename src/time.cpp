@@ -30,33 +30,9 @@ static char buf_[ MAXSHORTSTR ];
 
 ts_t time_ms_cached(void) { return time_now; }
 
-static bool using_robot_mode_fixed_clock;
-
 ts_t time_ms(void)
 {
-  //
-  // What is going on here? Robot mode runs very fast and does not use normal elapsed time.
-  // Instead we use a fixed count that increases every game tick. The reason for this is to
-  // ensure that animations all end in the same order - this makes reproducability in robot
-  // mode more likely. It's really a debug mode.
-  //
-  if (using_robot_mode_fixed_clock) {
-    if (! game->robot_mode) {
-      using_robot_mode_fixed_clock = false;
-    }
-  } else if (game && game->robot_mode) {
-    using_robot_mode_fixed_clock = true;
-  }
-
-  if (using_robot_mode_fixed_clock) {
-    //
-    // Huge hack - but it makes the animations deterministic and hence robot mode
-    // is more likely to do the same things each run.
-    //
-    time_now = game->frame_count * 50;
-  } else {
-    time_now = SDL_GetTicks();
-  }
+  time_now = SDL_GetTicks();
 
   //
   // Update the game time too

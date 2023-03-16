@@ -39,7 +39,7 @@ void Thing::hooks_remove_from(Thingp o)
     if (is_loggable()) {
       dbg2("Detach on_fire_anim_id from owner %s", o->to_string().c_str());
     }
-    o->on_fire_anim_id_set(NoThingId.id);
+    o->on_fire_unset();
   }
 
   FOR_ALL_EQUIP(e)

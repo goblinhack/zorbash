@@ -1196,15 +1196,15 @@ int Thing::is_unused_flag185(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag185());
 }
-int Thing::is_unused_flag186(void)
+int Thing::is_cold_elemental(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag186());
+  return (tp()->is_cold_elemental());
 }
-int Thing::is_unused_flag187(void)
+int Thing::is_fire_elemental(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag187());
+  return (tp()->is_fire_elemental());
 }
 int Thing::is_very_intelligent(void)
 {
