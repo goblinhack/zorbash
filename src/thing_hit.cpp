@@ -1159,12 +1159,20 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (o_top && o_top->is_player()) {
         dbg("Player is onwer of dead or dying thing");
         if (! o_top->is_dead && ! o_top->is_dying) {
-          msg("Your %s is destroyed!", text_long_name().c_str());
+          if (is_drained) {
+            msg("Your %s is drained.", text_long_name().c_str());
+          } else {
+            msg("Your %s is destroyed!", text_long_name().c_str());
+          }
         }
       } else if (o_top && o_top->is_monst()) {
         dbg("Monst is onwer of dead or dying thing");
         if (! o_top->is_dead && ! o_top->is_dying) {
-          msg("%s %s is destroyed!", apostrophise(o_top->text_The()).c_str(), text_long_name().c_str());
+          if (is_drained) {
+            msg("%s %s is drained.", apostrophise(o_top->text_The()).c_str(), text_long_name().c_str());
+          } else {
+            msg("%s %s is destroyed!", apostrophise(o_top->text_The()).c_str(), text_long_name().c_str());
+          }
         }
       }
     }

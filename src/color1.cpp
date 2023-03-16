@@ -171,7 +171,7 @@ void color_init1(void)
 {
   TRACE_AND_INDENT();
 
-  // begin sort marker1 {
+  // begin sort marker2 {
   color_set("aquamarine1", &AQUAMARINE1, 127, 255, 212, 255);
   color_set("aquamarine2", &AQUAMARINE2, 118, 238, 198, 255);
   color_set("aquamarine3", &AQUAMARINE3, 102, 205, 170, 255);

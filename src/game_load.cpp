@@ -397,6 +397,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->is_burnt                                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_changing_level                            = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_dead                                      = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->is_drained                                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_dying                                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_facing_left                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_fadeup                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;

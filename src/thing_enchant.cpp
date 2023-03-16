@@ -89,6 +89,7 @@ bool Thing::enchant_with_stone(Thingp what)
   auto found = false;
   for (const auto t : carried_item_only_vector()) {
     if (t->is_enchantstone()) {
+      t->is_drained = true;
       t->dead("used");
       found = true;
       break;

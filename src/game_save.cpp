@@ -342,6 +342,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_burnt                                     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_changing_level                            ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_dead                                      ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_drained                                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_dying                                     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_facing_left                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_fadeup                                    ? 1LLU : 0LLU) << shift; shift++;

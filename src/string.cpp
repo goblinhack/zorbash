@@ -1469,4 +1469,3 @@ void replace(std::string &input, const std::string &pattern, const std::string &
     pos += replace_with.length();
   }
 }
-

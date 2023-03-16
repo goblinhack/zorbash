@@ -224,7 +224,7 @@ void color_init2(void)
 {
   TRACE_AND_INDENT();
 
-  // begin sort marker1 {
+  // begin sort marker2 {
   color_set("gray10", &GRAY10, 26, 26, 26, 255);
   color_set("grey10", &GREY10, 26, 26, 26, 255);
   color_set("gray11", &GRAY11, 28, 28, 28, 255);
@@ -431,5 +431,5 @@ void color_init2(void)
   color_set("green4", &GREEN4, 0, 139, 0, 255);
   color_set("green", &GREEN, 0, 255, 0, 255);
   color_set("greenyellow", &GREENYELLOW, 173, 255, 47, 255);
-  // end sort marker1 }
+  // end sort marker2 }
 }

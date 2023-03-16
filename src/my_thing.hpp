@@ -170,6 +170,7 @@ public:
   uint64_t is_burnt                                     : 1 {}; // burnt by ice and cannot move
   uint64_t is_changing_level                            : 1 {}; // is in the process of changing level
   uint64_t is_dead                                      : 1 {};
+  uint64_t is_drained                                   : 1 {}; // e.g. enchant or skillstone used up
   uint64_t is_dying                                     : 1 {}; // is currently in the throes of death
   uint64_t is_facing_left                               : 1 {};
   uint64_t is_fadeup                                    : 1 {}; // for text that fades upwards
@@ -182,7 +183,7 @@ public:
   uint64_t is_hunger_level_starving                     : 1 {};
   uint64_t is_jumping                                   : 1 {};
   uint64_t is_key_in_lock                               : 1 {}; // key stuck in rusty lock?
-  uint64_t is_minion_set                                : 1 {}; /* overrides is_minion in template */
+  uint64_t is_minion_set                                : 1 {}; // overrides is_minion in template
   uint64_t is_moving                                    : 1 {}; // is currently moving tiles
   uint64_t is_open                                      : 1 {};
   uint64_t is_resurrected                               : 1 {}; // has finished resurrecting
@@ -205,7 +206,7 @@ public:
   uint64_t is_waiting_to_descend_sewer                  : 1 {};
   uint64_t is_waiting_to_leave_level_has_completed_fall : 1 {};
   uint64_t is_wounded_msg                               : 1 {};
-  uint64_t was_frozen                                   : 1 {}; /* was frozen at the start of the tick */
+  uint64_t was_frozen                                   : 1 {}; // was frozen at the start of the tick
   // end sort marker1 }
 
   //
