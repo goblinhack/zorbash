@@ -1662,6 +1662,15 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
   for (int dx = -1; dx <= 1; dx++) {
     for (int dy = -1; dy <= 1; dy++) {
 
+      //
+      // Do not look locally. If you do we can get into a cycle of trying to pick
+      // up an adjaceny item that is (x,y+1) but continually dropping and pickup
+      // up a worse item at (x,y)
+      //
+      if (! dx && ! dy) {
+        continue;
+      }
+
       point at(curr_at.x + dx, curr_at.y + dy);
       if (level->is_oob(at)) {
         continue;

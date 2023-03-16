@@ -115,6 +115,8 @@ int Thing::carried_weapon_least_value(Thingp *out)
     }
 
     auto v = value(t);
+    dbg("Carried weapon: %s: value %d", t->to_short_string().c_str(), v);
+
     if (! *out) {
       *out        = t;
       least_value = v;
@@ -124,6 +126,9 @@ int Thing::carried_weapon_least_value(Thingp *out)
         least_value = v;
       }
     }
+  }
+  if (*out) {
+    dbg("Carried weapon(worst): %s: value %d", (*out)->to_short_string().c_str(), least_value);
   }
   return least_value;
 }
@@ -144,6 +149,8 @@ int Thing::carried_weapon_highest_value(Thingp *out)
     }
 
     auto v = value(t);
+    dbg("Carried weapon: %s: value %d", t->to_short_string().c_str(), v);
+
     if (! *out) {
       *out          = t;
       highest_value = v;
@@ -153,6 +160,9 @@ int Thing::carried_weapon_highest_value(Thingp *out)
         highest_value = v;
       }
     }
+  }
+  if (*out) {
+    dbg("Carried weapon(best): %s: value %d", (*out)->to_short_string().c_str(), highest_value);
   }
   return highest_value;
 }

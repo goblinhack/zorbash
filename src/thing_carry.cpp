@@ -489,7 +489,7 @@ end:
   for (auto i : items) {
     Thingp t = i.first;
     out.push_back(t->id);
-    dbg("Final item list: %s value %d", i.first->to_short_string().c_str(), value(i.first));
+    dbg("Final item list: %s value %d", t->to_short_string().c_str(), value(t));
   }
 
   return out;
