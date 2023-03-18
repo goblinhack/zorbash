@@ -23,6 +23,11 @@ void Thing::inventory_particle(Thingp item, int slot)
     return;
   }
 
+  if (level->is_being_destroyed) {
+    dbg("Not while ending the level");
+    return;
+  }
+
   auto delay = 0;
 
   if (g_opt_ascii) {

@@ -12,6 +12,7 @@ def tp_init(name, tiles=[]):
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_oversized_and_on_floor(self, True)
+    my.gfx_pixelart_show_outlined(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow_long(self, True)
     my.gfx_pixelart_shadow(self, True)

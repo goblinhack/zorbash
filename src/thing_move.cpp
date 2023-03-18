@@ -139,6 +139,9 @@ void Thing::move_finish(void)
       }
     }
   }
+
+  is_being_dropped = false;
+  is_being_thrown  = false;
 }
 
 bool Thing::move(point future_pos)
