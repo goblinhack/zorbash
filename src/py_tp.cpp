@@ -7,6 +7,8 @@
 #include "my_python.hpp"
 #include "my_thing.hpp"
 
+static int NO_VALUE = -99999;
+
 PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
@@ -577,8 +579,8 @@ PyObject *if_matches_then_dead_(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_AND_INDENT();
   char    *what = nullptr;
   uint32_t id   = 0;
-  int      x    = -1;
-  int      y    = -1;
+  int      x    = NO_VALUE;
+  int      y    = NO_VALUE;
 
   static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "x", (char *) "y", nullptr};
 
@@ -597,13 +599,17 @@ PyObject *if_matches_then_dead_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (x == -1) {
+  if (x == NO_VALUE) {
     ERR("%s: Missing 'x'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (y == -1) {
+  if (y == NO_VALUE) {
     ERR("%s: Missing 'y'", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (unlikely(game->level->is_oob(x, y))) {
     Py_RETURN_FALSE;
   }
 
@@ -663,8 +669,8 @@ PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_AND_INDENT();
   char    *what = nullptr;
   uint32_t id   = 0;
-  int      x    = -1;
-  int      y    = -1;
+  int      x    = NO_VALUE;
+  int      y    = NO_VALUE;
 
   static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "x", (char *) "y", nullptr};
 
@@ -683,13 +689,17 @@ PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (x == -1) {
+  if (x == NO_VALUE) {
     ERR("%s: Missing 'x'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (y == -1) {
+  if (y == NO_VALUE) {
     ERR("%s: Missing 'y'", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (unlikely(game->level->is_oob(x, y))) {
     Py_RETURN_FALSE;
   }
 
@@ -713,8 +723,8 @@ PyObject *place_at(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_AND_INDENT();
   char    *what = nullptr;
   uint32_t id   = 0;
-  int      x    = -1;
-  int      y    = -1;
+  int      x    = NO_VALUE;
+  int      y    = NO_VALUE;
 
   static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "x", (char *) "y", nullptr};
 
@@ -739,13 +749,17 @@ PyObject *place_at(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (x == -1) {
+  if (x == NO_VALUE) {
     ERR("%s: Missing 'x'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (y == -1) {
+  if (y == NO_VALUE) {
     ERR("%s: Missing 'y'", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (unlikely(game->level->is_oob(x, y))) {
     Py_RETURN_FALSE;
   }
 

@@ -273,6 +273,10 @@ void Thing::killed(Thingp defeater, const char *reason)
             msg("%%fg=red$RIP: You burn to death%%fg=reset$");
           } else if (is_frozen) {
             msg("%%fg=red$RIP: You freeze to death%%fg=reset$");
+          } else if (level->is_gas_poison(curr_at.x, curr_at.y)) {
+            msg("%%fg=red$RIP: You succumb to the poison gas.%%fg=reset$");
+          } else if (level->is_trap(curr_at.x, curr_at.y)) {
+            msg("%%fg=red$RIP: You die in the trap.%%fg=reset$");
           } else {
             msg("%%fg=red$RIP: You are defeated %s.%%fg=reset$", reason);
           }
@@ -463,6 +467,10 @@ void Thing::killed(Thingp defeater, const char *reason)
             msg("%%fg=white$%s is vanquished %s.%%fg=reset$", The_no_dying.c_str(), reason);
           } else if (is_slime()) {
             msg("%%fg=white$%s is splattered %s.%%fg=reset$", The_no_dying.c_str(), reason);
+          } else if (level->is_gas_poison(curr_at.x, curr_at.y)) {
+            msg("%%fg=white$%s succumbs to the gas, killed %s.%%fg=reset$", The_no_dying.c_str(), reason);
+          } else if (level->is_trap(curr_at.x, curr_at.y)) {
+            msg("%%fg=white$%s dies in a trap, killed %s.%%fg=reset$", The_no_dying.c_str(), reason);
           } else {
             msg("%%fg=white$%s is dead, killed %s.%%fg=reset$", The_no_dying.c_str(), reason);
           }

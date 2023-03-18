@@ -3,6 +3,7 @@
 //
 
 #include "my_array_bounds_check.hpp"
+#include "my_backtrace.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
@@ -18,6 +19,13 @@
 void Thing::location_check(Thingp filter_to)
 {
   TRACE_NO_INDENT();
+
+  //
+  // Don't do location checks for the cursor, that's silly
+  //
+  if (is_internal()) {
+    return;
+  }
 
   //
   // Prevent interactions that might generate things like smoke.
@@ -246,6 +254,13 @@ void Thing::location_check(Thingp filter_to)
 void Thing::location_check_me(void)
 {
   TRACE_NO_INDENT();
+
+  //
+  // Don't do location checks for the cursor, that's silly
+  //
+  if (is_internal()) {
+    return;
+  }
 
   //
   // If we're about to check as part of a tick, do it then.

@@ -32,10 +32,17 @@ void Thing::poison_tick(void)
 
     if (poison) {
       if (d20() < stat_con()) {
-        if (is_player()) {
-          msg("You take half damage fron poison due to your sturdy constitution.");
+        if (d20() < stat_con()) {
+          if (is_player()) {
+            msg("You take quarter damage fron poison due to your amazing constitution.");
+          }
+          new_poison = poison / 2;
+        } else {
+          if (is_player()) {
+            msg("You take half damage fron poison due to your sturdy constitution.");
+          }
+          new_poison = poison / 2;
         }
-        new_poison = poison / 2;
       }
     }
 

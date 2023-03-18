@@ -10,6 +10,15 @@ bool Thing::is_disliked_by_me(const point p)
   TRACE_NO_INDENT();
 
   //
+  // Intelligent monsters avoid traps
+  //
+  if (is_intelligent()) {
+    if (level->is_trap(p)) {
+      return true;
+    }
+  }
+
+  //
   // Limit krakens to the depths, but allow eels and pirhana_giants free roam.
   //
   if (is_swimmer()) {
@@ -103,6 +112,15 @@ bool Tp::is_disliked_by_me(Levelp level, point p) const
   TRACE_NO_INDENT();
 
   //
+  // Intelligent monsters avoid traps
+  //
+  if (is_intelligent()) {
+    if (level->is_trap(p)) {
+      return true;
+    }
+  }
+
+  //
   // Limit krakens to the depths, but allow eels and pirhana_giants free roam.
   //
   if (is_swimmer()) {
@@ -188,6 +206,15 @@ bool Thing::is_disliked_by_me(const Thingp itp)
   TRACE_NO_INDENT();
   auto me = tp();
   auto it = itp->tp();
+
+  //
+  // Intelligent monsters avoid traps
+  //
+  if (is_intelligent()) {
+    if (it->is_trap()) {
+      return true;
+    }
+  }
 
   if (me->environ_avoids_water()) {
     if (it->is_shallow_water() || it->is_deep_water()) {

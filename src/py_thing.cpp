@@ -7,6 +7,8 @@
 #include "my_thing.hpp"
 #include "my_thing_attack_options.hpp"
 
+static int NO_VALUE = -99999;
+
 PyObject *thing_coords_get(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
@@ -579,8 +581,8 @@ PyObject *thing_teleport(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     id       = 0;
-  int          x        = -1;
-  int          y        = -1;
+  int          x        = NO_VALUE;
+  int          y        = NO_VALUE;
   static char *kwlist[] = {(char *) "id", (char *) "x", (char *) "y", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iii", kwlist, &id, &x, &y)) {
@@ -590,6 +592,16 @@ PyObject *thing_teleport(PyObject *obj, PyObject *args, PyObject *keywds)
 
   if (! id) {
     ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    Py_RETURN_FALSE;
+  }
+
+  if (x == NO_VALUE) {
+    ERR("%s: Missing 'x'", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (y == NO_VALUE) {
+    ERR("%s: Missing 'y'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 

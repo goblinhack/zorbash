@@ -3,12 +3,16 @@ import tp
 
 
 def on_death(me, x, y):
-    my.thing_msg(me, "The pressure plate clicks.")
     my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "pressure_plate")
-    my.spawn_gas_poison_around_thing(me, 3)
+    # my.spawn_gas_poison_around_thing(me, 3)
+    for it in my.level_flood_fill_get_all_grid_things(me, x, y, 3):
+        my.spawn_gas_poison_around_thing(it, 1)
 
 
 def on_activated(me, victim, x, y):
+    my.thing_msg(victim, "The pressure plate clicks.")
+    if my.thing_is_player(victim):
+        my.thing_msg(victim, "%%fg=red$Gas surrounds you!%%fg=reset$")
     my.thing_dead(me, "activated")
 
 

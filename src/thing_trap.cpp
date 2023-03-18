@@ -10,7 +10,14 @@
 
 void Thing::trap_tick(void)
 {
-  if (is_floating() || is_flying() || is_ethereal()) {
+  if (is_trap() || is_floating() || is_flying() || is_ethereal()) {
+    return;
+  }
+
+  //
+  // Prevents bushes on traps setting them off
+  //
+  if (! has_ever_moved) {
     return;
   }
 
@@ -24,13 +31,11 @@ void Thing::trap_tick(void)
   //
   // Find all non traps and crush them
   //
-  FOR_ALL_THINGS_THAT_INTERACT(level, victim, curr_at.x, curr_at.y)
+  FOR_ALL_THINGS_THAT_INTERACT(level, it, curr_at.x, curr_at.y)
   {
-    if (victim->is_trap()) {
-      continue;
+    if (it->is_trap()) {
+      it->on_activated(this);
     }
-
-    on_activated(victim);
   }
   FOR_ALL_THINGS_END()
 }
@@ -97,7 +102,7 @@ void Thing::on_activated(Thingp victim)
       mod = name();
     }
 
-    con("Call %s.%s(%s %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), victim->to_short_string().c_str());
+    dbg2("Call %s.%s(%s %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), victim->to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, victim->id.id, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);

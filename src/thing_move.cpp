@@ -84,50 +84,59 @@ void Thing::move_finish(void)
 
   update_interpolated_position();
 
-  move_carried_items();
-
-  on_move();
-
-  if (maybe_aip()) {
-    IF_DEBUG2
-    {
-      if (is_debug_type()) {
-        std::string s = "";
-        for (auto p1 : aip()->move_path) {
-          s += " " + p1.to_string();
-        }
-        if (s.empty()) {
-          dbg2("End of move");
-        } else {
-          dbg2("End of move, moves left:%s", s.c_str());
-        }
-      }
-    }
-
-    if (! aip()->move_path.size() && (infop()->monst_state == MONST_STATE_MOVING)) {
-      change_state(MONST_STATE_IDLE, "move finished");
-    }
-  }
-
-  //
-  // Did we enter something like a portal? Don't check if already teleporting.
-  //
-  if (! is_teleporting) {
+  if (is_internal()) {
     //
-    // Do not do this for carried items else it is a bit weird for items to teleport by themselves somewhere else.
+    // The cursor does not cause a reaction
     //
-    if (! immediate_owner()) {
-      FOR_ALL_NON_INTERNAL_THINGS(level, it, curr_at.x, curr_at.y)
+  } else {
+    //
+    // Perform check post movement
+    //
+    move_carried_items();
+
+    on_move();
+
+    if (maybe_aip()) {
+      IF_DEBUG2
       {
-        if (it == this) {
-          continue;
-        }
-
-        if (! it->on_enter_do().empty()) {
-          it->on_enter(this);
+        if (is_debug_type()) {
+          std::string s = "";
+          for (auto p1 : aip()->move_path) {
+            s += " " + p1.to_string();
+          }
+          if (s.empty()) {
+            dbg2("End of move");
+          } else {
+            dbg2("End of move, moves left:%s", s.c_str());
+          }
         }
       }
-      FOR_ALL_THINGS_END()
+
+      if (! aip()->move_path.size() && (infop()->monst_state == MONST_STATE_MOVING)) {
+        change_state(MONST_STATE_IDLE, "move finished");
+      }
+    }
+
+    //
+    // Did we enter something like a portal? Don't check if already teleporting.
+    //
+    if (! is_teleporting) {
+      //
+      // Do not do this for carried items else it is a bit weird for items to teleport by themselves somewhere else.
+      //
+      if (! immediate_owner()) {
+        FOR_ALL_NON_INTERNAL_THINGS(level, it, curr_at.x, curr_at.y)
+        {
+          if (it == this) {
+            continue;
+          }
+
+          if (! it->on_enter_do().empty()) {
+            it->on_enter(this);
+          }
+        }
+        FOR_ALL_THINGS_END()
+      }
     }
   }
 }
@@ -373,11 +382,30 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         game->wid_collect_create(items);
 #endif
       }
-      msg("You wait.");
+
+      if (level->is_gas_poison(curr_at.x, curr_at.y)) {
+        msg("You hang out in the gas.");
+      } else if (level->is_trap(curr_at.x, curr_at.y)) {
+        msg("You wait dangerously.");
+      } else if (level->is_lava(curr_at.x, curr_at.y)) {
+        msg("You wait in the heat.");
+      } else {
+        msg("You wait.");
+      }
+
       waiting();
       move_count_incr();
     } else {
-      msg("You rest.");
+      if (level->is_gas_poison(curr_at.x, curr_at.y)) {
+        msg("You rest in the poison gas cloud.");
+      } else if (level->is_trap(curr_at.x, curr_at.y)) {
+        msg("You rest dangerously.");
+      } else if (level->is_lava(curr_at.x, curr_at.y)) {
+        msg("You rest in the heat.");
+      } else {
+        msg("You rest.");
+      }
+
       resting();
       move_count_incr();
     }

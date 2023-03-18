@@ -28,6 +28,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(level_attack_undead_at),
     MY_ADD_PYTHON_FUNCTION(level_dmg_received_doubled_from_cold_at),
     MY_ADD_PYTHON_FUNCTION(level_flood_fill_get_all_things),
+    MY_ADD_PYTHON_FUNCTION(level_flood_fill_get_all_grid_things),
     MY_ADD_PYTHON_FUNCTION(level_get_all),
     MY_ADD_PYTHON_FUNCTION(level_hunger_clock_tick_freq_at),
     MY_ADD_PYTHON_FUNCTION(level_hunger_is_insatiable_at),

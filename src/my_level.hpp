@@ -1298,6 +1298,7 @@ public:
   std::deque< point >  flood_fill(point) const;
   std::deque< point >  flood_fill_points(point, std::function< int(Thingp) > filter);
   std::deque< Thingp > flood_fill_things(point, std::function< int(Thingp) > filter);
+  std::deque< Thingp > flood_fill_grid_things(point, int distance);
 
   std::vector< Thingp > line(const point s, const point e, size_t max_elems = 0);
   void                  line_set_all_on_fire(const point s, const point e, size_t max_elems, const std::string &why);

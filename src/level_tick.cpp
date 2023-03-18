@@ -503,22 +503,6 @@ void Level::tick_(void)
   wait_count = 0;
 
   //
-  // If things have stopped moving, perform location checks on where they
-  // are now. This handles things like shoving a monst into a chasm. We do
-  // location checks on the ends of moves, but this is a backup and will
-  // also handle things that do not move, like a staff that is now on fire.
-  //
-  TRACE_NO_INDENT();
-  FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
-  {
-    //
-    // Need to do this even for dead things, so corpses don't hover over chasms.
-    //
-    t->location_check();
-  }
-  FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
-
-  //
   // Fast moving things may still have stuff to do
   //
   bool work_to_do = game->things_are_moving;
@@ -613,6 +597,22 @@ void Level::tick_(void)
   if (tick_done) {
     dbg("Level tick done");
     TRACE_AND_INDENT();
+
+    //
+    // If things have stopped moving, perform location checks on where they
+    // are now. This handles things like shoving a monst into a chasm. We do
+    // location checks on the ends of moves, but this is a backup and will
+    // also handle things that do not move, like a staff that is now on fire.
+    //
+    TRACE_NO_INDENT();
+    FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
+    {
+      //
+      // Need to do this even for dead things, so corpses don't hover over chasms.
+      //
+      t->location_check();
+    }
+    FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
 
     handle_all_pending_things();
     things_gc_if_possible();

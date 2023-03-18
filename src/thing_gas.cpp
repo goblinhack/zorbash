@@ -2,7 +2,9 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_game.hpp"
 #include "my_level.hpp"
+#include "my_monst.hpp"
 #include "my_thing.hpp"
 
 void Thing::gas_poison_tick(void)
@@ -21,7 +23,10 @@ void Thing::gas_poison_tick(void)
     return;
   }
 
-  auto intensity = level->is_gas_poison(curr_at.x, curr_at.y) / 10;
+  //
+  // How strong is the gas?
+  //
+  auto intensity = level->is_gas_poison(curr_at.x, curr_at.y) / 20;
   if (! intensity) {
     return;
   }
@@ -29,9 +34,18 @@ void Thing::gas_poison_tick(void)
   dbg("Poison gas tick");
   TRACE_AND_INDENT();
 
+  //
+  // Due to location checks, we check the start and end move so we end
+  // up being poisoned twice per move. As this is a bit cruel, check
+  //
+  if (game->tick_current == tick_last_poison_gas_exposure()) {
+    return;
+  }
+  tick_last_poison_gas_exposure_set(game->tick_current);
+
   if (d20() < stat_con()) {
     if (is_player()) {
-      msg("You hold your breath in the gas.");
+      msg("You hold your breath in the poison gas!");
     }
     return;
   }
@@ -40,12 +54,59 @@ void Thing::gas_poison_tick(void)
 
   if (stamina()) {
     if (is_player()) {
-      msg("You choke in the gas.");
+      msg("%%fg=yellow$You choke in the poison gas!%%fg=reset$");
     }
     stamina_decr(d20());
   } else {
     if (is_player()) {
-      msg("You are trapped in the gas! You feel like a very long nap.");
+      msg("You are still trapped in the gas! You feel like a very long nap.");
     }
   }
+}
+
+////////////////////////////////////////////////////////////////////////////
+// tick_last_poison_gas_exposure
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::tick_last_poison_gas_exposure(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->tick_last_poison_gas_exposure);
+  }
+  return 0;
+}
+
+uint32_t Thing::tick_last_poison_gas_exposure_set(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_poison_gas_exposure = v);
+}
+
+uint32_t Thing::tick_last_poison_gas_exposure_decr(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_poison_gas_exposure -= v);
+}
+
+uint32_t Thing::tick_last_poison_gas_exposure_incr(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_poison_gas_exposure += v);
+}
+
+uint32_t Thing::tick_last_poison_gas_exposure_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_poison_gas_exposure--);
+}
+
+uint32_t Thing::tick_last_poison_gas_exposure_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_poison_gas_exposure++);
 }

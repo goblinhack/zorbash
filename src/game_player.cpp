@@ -81,7 +81,7 @@ void Game::place_player(void)
         t->carry(w);
         t->enchant_without_stone(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("potion_health", point(x, y - 2));
         w->enchant_randomly();
       }
@@ -113,7 +113,15 @@ void Game::place_player(void)
         t->skill_add(w);
       }
 
-      // level->thing_new("pressure_plate_gas", point(x + 1, y + 3));
+      if (0) {
+        level->thing_new("wall_dungeon.1", point(x - 2, y + 2));
+        level->thing_new("wall_dungeon.1", point(x - 1, y + 2));
+        level->thing_new("wall_dungeon.1", point(x, y + 2));
+        level->thing_new("wall_dungeon.1", point(x + 1, y + 2));
+        level->thing_new("wall_dungeon.1", point(x + 2, y + 2));
+        level->thing_new("pressure_plate_gas", point(x - 2, y));
+        level->thing_new("rat_large", point(x + 1, y + 3));
+      }
       if (0) {
         level->thing_new("dogman", point(x + 1, y + 3));
         level->thing_new("wet_grass1", point(x + 1, y));
@@ -452,7 +460,10 @@ void Game::place_player(void)
       // level->thing_new("pyrolizard", point(x - 2, y + 1));
       // level->thing_new("vampire_rose", point(x - 2, y + 1));
       // level->thing_new("blob", point(x - 2, y + 1));
-      // level->thing_new("belcher", point(x - 3, y + 1));
+      if (0) {
+        auto d = level->thing_new("belcher", point(x - 3, y + 1));
+        d->wake("");
+      }
       // level->thing_new("cleaner", point(x - 3, y + 2));
       if (0) {
         auto d = level->thing_new("bat_lesser", point(x + 2, y + 2));

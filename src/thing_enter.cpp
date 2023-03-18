@@ -33,7 +33,7 @@ void Thing::on_enter(Thingp victim)
       mod = name();
     }
 
-    con("Call %s.%s(%s %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), victim->to_short_string().c_str());
+    dbg2("Call %s.%s(%s %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), victim->to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, victim->id.id, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);

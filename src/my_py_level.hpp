@@ -18,6 +18,7 @@ PyObject *level_attacks_per_round_at(PyObject *obj, PyObject *args, PyObject *ke
 PyObject *level_attack_undead_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_dmg_received_doubled_from_cold_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_flood_fill_get_all_grid_things(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_hunger_clock_tick_freq_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_hunger_is_insatiable_at(PyObject *obj, PyObject *args, PyObject *keywds);

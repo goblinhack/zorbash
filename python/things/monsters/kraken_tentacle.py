@@ -40,7 +40,6 @@ def tp_init(name, text_long_name):
     my.is_able_to_freeze(self, True)
     my.is_able_to_lunge(self, True)
     my.is_able_to_see_in_the_dark(self, True)
-    my.is_air_breather(self, True)
     my.is_always_submerged(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)

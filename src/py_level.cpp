@@ -10,6 +10,8 @@
 #include "my_thing.hpp"
 #include "my_vector_bounds_check.hpp"
 
+static int NO_VALUE = -99999;
+
 PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
@@ -202,8 +204,8 @@ PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   uint32_t     id       = 0;
-  int          x        = -1;
-  int          y        = -1;
+  int          x        = NO_VALUE;
+  int          y        = NO_VALUE;
   static char *kwlist[] = {(char *) "id", (char *) "x", (char *) "y", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iii", kwlist, &id, &x, &y)) {
@@ -213,6 +215,16 @@ PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds)
 
   if (! id) {
     ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    Py_RETURN_FALSE;
+  }
+
+  if (x == NO_VALUE) {
+    ERR("%s: Missing 'x'", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (y == NO_VALUE) {
+    ERR("%s: Missing 'y'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -264,8 +276,8 @@ PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObjec
 {
   TRACE_AND_INDENT();
   uint32_t     id       = 0;
-  int          x        = -1;
-  int          y        = -1;
+  int          x        = NO_VALUE;
+  int          y        = NO_VALUE;
   static char *kwlist[] = {(char *) "id", (char *) "x", (char *) "y", (char *) "filter", nullptr};
   char        *filter   = nullptr;
 
@@ -276,6 +288,16 @@ PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObjec
 
   if (! id) {
     ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    Py_RETURN_FALSE;
+  }
+
+  if (x == NO_VALUE) {
+    ERR("%s: Missing 'x'", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (y == NO_VALUE) {
+    ERR("%s: Missing 'y'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -296,6 +318,58 @@ PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObjec
   }
 
   auto      things = t->level->flood_fill_things(point(x, y), Thing::matches_to_func(filter));
+  auto      items  = things.size();
+  PyObject *lst    = PyList_New(items);
+  auto      item   = 0;
+  for (auto t : things) {
+    PyList_SetItem(lst, item, Py_BuildValue("I", t->id));
+    item++;
+  }
+
+  return lst;
+}
+
+PyObject *level_flood_fill_get_all_grid_things(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_AND_INDENT();
+  uint32_t     id       = 0;
+  int          x        = NO_VALUE;
+  int          y        = NO_VALUE;
+  int          distance = NO_VALUE;
+  static char *kwlist[] = {(char *) "id", (char *) "x", (char *) "y", (char *) "distance", nullptr};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iiii", kwlist, &id, &x, &y, &distance)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! id) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    Py_RETURN_FALSE;
+  }
+
+  if (x == NO_VALUE) {
+    ERR("%s: Missing 'x'", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (y == NO_VALUE) {
+    ERR("%s: Missing 'y'", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  Thingp t = game->thing_find(id);
+  if (unlikely(! t)) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    Py_RETURN_NONE;
+  }
+
+  if (t->level->is_oob(x, y)) {
+    PyObject *lst = PyList_New(0);
+    return lst;
+  }
+
+  auto      things = t->level->flood_fill_grid_things(point(x, y), distance);
   auto      items  = things.size();
   PyObject *lst    = PyList_New(items);
   auto      item   = 0;
@@ -351,8 +425,8 @@ PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywd
   {                                                                                                                  \
     TRACE_AND_INDENT();                                                                                              \
     uint32_t     id       = 0;                                                                                       \
-    int          x        = -1;                                                                                      \
-    int          y        = -1;                                                                                      \
+    int          x        = NO_VALUE;                                                                                \
+    int          y        = NO_VALUE;                                                                                \
     static char *kwlist[] = {(char *) "id", (char *) "x", (char *) "y", 0};                                          \
                                                                                                                      \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iii", kwlist, &id, &x, &y)) {                                   \
@@ -362,6 +436,16 @@ PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywd
                                                                                                                      \
     if (! id) {                                                                                                      \
       ERR("%s: No thing ID set", __FUNCTION__);                                                                      \
+      Py_RETURN_FALSE;                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    if (x == NO_VALUE) {                                                                                             \
+      ERR("%s: Missing 'x'", __FUNCTION__);                                                                          \
+      Py_RETURN_FALSE;                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    if (y == NO_VALUE) {                                                                                             \
+      ERR("%s: Missing 'y'", __FUNCTION__);                                                                          \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \

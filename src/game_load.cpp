@@ -148,6 +148,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->tick_last_i_attacked);
    in >> bits(my.t->tick_last_i_tried_to_attack);
    in >> bits(my.t->tick_last_i_was_attacked);
+   in >> bits(my.t->tick_last_poison_gas_exposure);
    in >> bits(my.t->tick_last_level_change);
    in >> bits(my.t->tick_last_location_check);
    in >> bits(my.t->tick_resurrect_when);

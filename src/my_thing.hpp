@@ -2382,6 +2382,13 @@ public:
   uint32_t tick_last_i_was_attacked_set(uint32_t);
   uint32_t tick_last_i_was_attacked(void);
 
+  uint32_t tick_last_poison_gas_exposure_decr(uint32_t);
+  uint32_t tick_last_poison_gas_exposure_decr(void);
+  uint32_t tick_last_poison_gas_exposure_incr(uint32_t);
+  uint32_t tick_last_poison_gas_exposure_incr(void);
+  uint32_t tick_last_poison_gas_exposure_set(uint32_t);
+  uint32_t tick_last_poison_gas_exposure(void);
+
   uint32_t tick_last_i_attacked_decr(uint32_t);
   uint32_t tick_last_i_attacked_decr(void);
   uint32_t tick_last_i_attacked_incr(uint32_t);
@@ -2487,7 +2494,6 @@ public:
   void avoid_tick(void);
   void awake(void);
   void barrel_tick(void);
-  void trap_tick(void);
   void blit_ascii_adjust_color(color &c, bool fg, bool leftbar);
   void blit_ascii_adjust_color_hue(color &c, bool fg);
   void blit_ascii_at(point tl, bool lit = true, bool leftbar = false);
@@ -2748,6 +2754,7 @@ public:
   void tiles_get(void);
   void topcon(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void topcon_(const char *fmt, va_list args); // compile error without
+  void trap_tick(void);
   void try_to_carry(const std::list< Thingp > &items);
   void unleash_minions(void);
   void unleash_spawners_things(void);

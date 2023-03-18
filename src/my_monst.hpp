@@ -225,6 +225,10 @@ public:
   //
   uint32_t tick_last_i_was_attacked {(uint32_t) -1 /* std::numeric_limits< uint32_t >::max() */};
   //
+  // Last time we had to hold our breath
+  //
+  uint32_t tick_last_poison_gas_exposure {(uint32_t) -1 /* std::numeric_limits< uint32_t >::max() */};
+  //
   // When we last attacked
   //
   uint32_t tick_last_i_attacked {(uint32_t) -1 /* std::numeric_limits< uint32_t >::max() */};

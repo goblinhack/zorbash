@@ -41,7 +41,7 @@ void Level::tick_gas_poison(void)
           for (auto dx = 0; dx < DUNGEON_GAS_RESOLUTION; dx++) {
             uint16_t gx = x * DUNGEON_GAS_RESOLUTION + dx;
             uint16_t gy = y * DUNGEON_GAS_RESOLUTION + dy;
-            set(gas_poison_cloud, gx, gy, (uint8_t) 255);
+            set_no_check(gas_poison_cloud, gx, gy, (uint8_t) 255);
           }
         }
       } else {
@@ -52,8 +52,8 @@ void Level::tick_gas_poison(void)
           for (auto dx = 0; dx < DUNGEON_GAS_RESOLUTION; dx++) {
             uint16_t gx = x * DUNGEON_GAS_RESOLUTION + dx;
             uint16_t gy = y * DUNGEON_GAS_RESOLUTION + dy;
-            if (get(gas_poison_cloud, gx, gy) == 255) {
-              set(gas_poison_cloud, gx, gy, (uint8_t) 0);
+            if (get_no_check(gas_poison_cloud, gx, gy) == 255) {
+              set_no_check(gas_poison_cloud, gx, gy, (uint8_t) 0);
             }
           }
         }
@@ -68,11 +68,11 @@ void Level::tick_gas_poison(void)
     for (; x < (MAP_WIDTH * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION; x++) {
       uint8_t n = gas_poison_cloud[ x ][ y ];
       if (n == 255) {
-        printf("X");
+        printf("XXX");
       } else if (n) {
-        printf("%u", n);
+        printf("%3u", n);
       } else {
-        printf(" ");
+        printf("   ");
       }
     }
     printf("\n");
@@ -83,9 +83,9 @@ void Level::tick_gas_poison(void)
   // Anything less than 9 will cause gas to spread more
   //
   int reduction;
-  if (pcg_random_range(0, 100) < 80) {
+  if (pcg_random_range(0, 100) < 90) {
     reduction = 9;
-  } else if (pcg_random_range(0, 100) < 50) {
+  } else if (pcg_random_range(0, 100) < 80) {
     reduction = 8;
   } else {
     reduction = 7;
@@ -93,42 +93,31 @@ void Level::tick_gas_poison(void)
 
   TRACE_NO_INDENT();
   for (uint16_t y = DUNGEON_GAS_RESOLUTION; y < (MAP_HEIGHT * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION; y++) {
-    uint16_t x = DUNGEON_GAS_RESOLUTION;
 
     // a b c
     // d e f
     // g h i
-    uint8_t *a = getptr(old_gas_poison_cloud, x - 1, y - 1);
-    uint8_t *b = getptr(old_gas_poison_cloud, x, y - 1);
-    uint8_t *c = getptr(old_gas_poison_cloud, x + 1, y - 1);
-    uint8_t *d = getptr(old_gas_poison_cloud, x - 1, y);
-    uint8_t *e = getptr(old_gas_poison_cloud, x, y);
-    uint8_t *f = getptr(old_gas_poison_cloud, x + 1, y);
-    uint8_t *g = getptr(old_gas_poison_cloud, x - 1, y + 1);
-    uint8_t *h = getptr(old_gas_poison_cloud, x, y + 1);
-    uint8_t *i = getptr(old_gas_poison_cloud, x + 1, y + 1);
 
-    uint8_t *n = getptr(gas_poison_cloud, x, y);
-
-    for (; x < (MAP_WIDTH * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION; x++) {
-      uint8_t ga = *a++;
-      uint8_t gb = *b++;
-      uint8_t gc = *c++;
-      uint8_t gd = *d++;
-      uint8_t ge = *e++;
-      uint8_t gf = *f++;
-      uint8_t gg = *g++;
-      uint8_t gh = *h++;
-      uint8_t gi = *i++;
+    for (uint16_t x = DUNGEON_GAS_RESOLUTION; x < (MAP_WIDTH * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION;
+         x++) {
+      uint8_t gn = get_no_check(gas_poison_cloud, x, y);
 
       //
       // If a rock ignore
       //
-      uint8_t gn = *n;
       if (gn == 255) {
-        n++;
         continue;
       }
+
+      uint8_t ga = get_no_check(old_gas_poison_cloud, x - 1, y - 1);
+      uint8_t gb = get_no_check(old_gas_poison_cloud, x, y - 1);
+      uint8_t gc = get_no_check(old_gas_poison_cloud, x + 1, y - 1);
+      uint8_t gd = get_no_check(old_gas_poison_cloud, x - 1, y);
+      uint8_t ge = get_no_check(old_gas_poison_cloud, x, y);
+      uint8_t gf = get_no_check(old_gas_poison_cloud, x + 1, y);
+      uint8_t gg = get_no_check(old_gas_poison_cloud, x - 1, y + 1);
+      uint8_t gh = get_no_check(old_gas_poison_cloud, x, y + 1);
+      uint8_t gi = get_no_check(old_gas_poison_cloud, x + 1, y + 1);
 
       //
       // If a rock then it does not contribute to gas strength
@@ -161,7 +150,8 @@ void Level::tick_gas_poison(void)
         gi = 0;
       }
 
-      *n++ = (ga + gb + gc + gd + ge + gf + gg + gh + gi) / reduction;
+      uint8_t nn = (ga + gb + gc + gd + ge + gf + gg + gh + gi) / reduction;
+      set_no_check(gas_poison_cloud, x, y, nn);
     }
   }
 

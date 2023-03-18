@@ -75,7 +75,6 @@ def tp_init(name, text_long_name):
     my.is_able_to_shoot_at_close_range(self, True)
     my.is_able_to_shoot_at(self, True)
     my.is_able_to_tire(self, True)
-    my.is_air_breather(self, True)
     my.is_always_submerged(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)

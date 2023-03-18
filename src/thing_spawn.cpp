@@ -638,23 +638,23 @@ bool Thing::spawn_gas_poison_around_thing(int radius)
         continue;
       }
 
-      possible.push_back(p);
+      if (pcg_random_range(0, 100) < 100 - dist * 20) {
+        uint16_t gx =
+            (p.x * DUNGEON_GAS_RESOLUTION) + pcg_random_range(-DUNGEON_GAS_RESOLUTION, DUNGEON_GAS_RESOLUTION);
+        uint16_t gy =
+            (p.y * DUNGEON_GAS_RESOLUTION) + pcg_random_range(-DUNGEON_GAS_RESOLUTION, DUNGEON_GAS_RESOLUTION);
+        gx = (p.x * DUNGEON_GAS_RESOLUTION);
+        gy = (p.y * DUNGEON_GAS_RESOLUTION);
+
+        set(level->gas_poison_cloud, gx, gy, (uint8_t) 254);
+      }
     }
   }
 
-  auto cands = possible.size();
-  if (! cands) {
-    return false;
-  }
-
-  auto chosen = possible[ pcg_random_range(0, cands) ];
-
-  uint16_t gx =
-      (chosen.x * DUNGEON_GAS_RESOLUTION) + pcg_random_range(-DUNGEON_GAS_RESOLUTION, DUNGEON_GAS_RESOLUTION);
-  uint16_t gy =
-      (chosen.y * DUNGEON_GAS_RESOLUTION) + pcg_random_range(-DUNGEON_GAS_RESOLUTION, DUNGEON_GAS_RESOLUTION);
-
-  set(level->gas_poison_cloud, gx, gy, (uint8_t) 254);
+  //
+  // For traps we need to spawn the gas on screen immediately
+  //
+  level->tick_gas_poison();
 
   return true;
 }
