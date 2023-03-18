@@ -290,6 +290,7 @@ public:
   uint64_t i_set_is_sticky                    : 1 {};
   uint64_t i_set_is_tentacle                  : 1 {};
   uint64_t i_set_is_torch                     : 1 {};
+  uint64_t i_set_is_trap                      : 1 {};
   uint64_t i_set_is_treasure_type             : 1 {};
   uint64_t i_set_is_wall                      : 1 {};
   uint64_t i_set_is_wet_grass                 : 1 {};
@@ -789,6 +790,7 @@ public:
   const std::string &msg_get(void);
   const std::string &name(void);
   const std::string &nutrition_dice_str(void);
+  const std::string &on_activated_do(void);
   const std::string &on_attacking_dmg_acid_do(void);
   const std::string &on_attacking_dmg_bite_do(void);
   const std::string &on_attacking_dmg_claw_do(void);
@@ -1563,6 +1565,7 @@ public:
   int is_poisonous_danger_level(void);
   int is_portal(void);
   int is_potion(void);
+  int is_pressure_plate(void);
   int is_projectile(void);
   int is_ranged_weapon(void);
   int is_red_blooded(void);
@@ -1606,6 +1609,7 @@ public:
   int is_tireless(void);
   int is_tmp_thing(void);
   int is_torch(void);
+  int is_trap(void);
   int is_treasure_chest(void);
   int is_treasure_class_A(void);
   int is_treasure_class_B(void);
@@ -1706,8 +1710,6 @@ public:
   int is_unused_flag181(void);
   int is_unused_flag182(void);
   int is_unused_flag183(void);
-  int is_unused_flag184(void);
-  int is_unused_flag185(void);
   int is_unused_flag18(void);
   int is_unused_flag192(void);
   int is_unused_flag19(void);
@@ -2485,6 +2487,7 @@ public:
   void avoid_tick(void);
   void awake(void);
   void barrel_tick(void);
+  void trap_tick(void);
   void blit_ascii_adjust_color(color &c, bool fg, bool leftbar);
   void blit_ascii_adjust_color_hue(color &c, bool fg);
   void blit_ascii_at(point tl, bool lit = true, bool leftbar = false);
@@ -2653,6 +2656,7 @@ public:
   void noop(void);
   void notify_followers_of_death_of_my_leader(void);
   void notify_of_death_of_my_leader(void);
+  void on_activated(Thingp victim);
   void on_born(void);
   void on_close(void);
   void on_death_of_a_follower(Thingp leader);

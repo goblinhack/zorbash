@@ -157,6 +157,9 @@ Tpp tp_find(const std::string &name)
     if (name == "random_mob") {
       return tp_random_mob();
     }
+    if (name == "random_trap") {
+      return tp_random_trap();
+    }
     if (name == "random_ethereal_mob") {
       return tp_random_ethereal_mob();
     }

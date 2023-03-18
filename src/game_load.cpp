@@ -489,6 +489,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->i_set_is_obs_wall_or_door              = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_obs_when_dead                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_portal                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_trap                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   // end sort marker3
   // clang-format on
 
@@ -605,6 +606,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_ascend_dungeon);
   in >> bits(my.t->_is_ascend_sewer);
   in >> bits(my.t->_is_barrel);
+  in >> bits(my.t->_is_trap);
   in >> bits(my.t->_is_basalt);
   in >> bits(my.t->_is_brazier);
   in >> bits(my.t->_is_bridge);

@@ -325,9 +325,9 @@ void Thing::level_push(void)
       i_set_is_brazier = true;
       level->is_brazier_set(x, y);
     }
-    if (is_barrel()) {
-      i_set_is_barrel = true;
-      level->is_barrel_set(x, y);
+    if (is_trap()) {
+      i_set_is_trap = true;
+      level->is_trap_set(x, y);
     }
     if (is_tentacle()) {
       i_set_is_tentacle = true;

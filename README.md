@@ -1,7 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- if set on fire, remember who didit?                                                                                                          -->
-<!-- adter robot mode we're stuck                                                                                                                 -->
 <!-- did not collect shield                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
@@ -240,6 +239,7 @@ Content:
 - 3 x doors
 - 3 x cloaks
 - 2 x potions
+- 1 x traps
 - 1 x player
 <!-- end type marker -->
 
@@ -528,6 +528,7 @@ Sound effects
 - Monster epic death [found here](https://freesound.org/people/Syna-Max/sounds/56304/)
 - Monster sound [found here](https://freesound.org/people/NicknameLarry/)
 - Power up by GameAudio [found here](https://freesound.org/people/GameAudio/)
+- Pressure plate by Proolsen [found here](https://freesound.org/people/proolsen/sounds/466272/)
 - Rat growl by qubodup [found here](https://freesound.org/people/qubodup/)
 - Rat hiss by qubodup [found here](https://freesound.org/people/qubodup/)
 - Rat squeak by tim.kahn [found here](https://freesound.org/people/tim.kahn/)

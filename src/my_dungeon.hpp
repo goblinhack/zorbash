@@ -137,6 +137,7 @@ public:
   bool is_skillstone(const int x, const int y);
   bool is_spiderweb(const int x, const int y);
   bool is_staff(const int x, const int y);
+  bool is_trap(const int x, const int y);
   bool is_treasure_class_A(const int x, const int y);
   bool is_treasure_class_B(const int x, const int y);
   bool is_treasure_class_C(const int x, const int y);

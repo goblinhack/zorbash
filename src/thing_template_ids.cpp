@@ -293,6 +293,7 @@ std::initializer_list< std::string > tps = {
     "potion_health",
     "potion_invisibility",
     "pottedmeat",
+    "pressure_plate_gas",
     "pretzel",
     "projectile_acid",
     "projectile_dart",

@@ -113,6 +113,7 @@ void Game::place_player(void)
         t->skill_add(w);
       }
 
+      // level->thing_new("pressure_plate_gas", point(x + 1, y + 3));
       if (0) {
         level->thing_new("dogman", point(x + 1, y + 3));
         level->thing_new("wet_grass1", point(x + 1, y));

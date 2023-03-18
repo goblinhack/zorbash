@@ -518,6 +518,7 @@ private:
   int _is_poisonous_danger_level {};
   int _is_portal {};
   int _is_potion {};
+  int _is_pressure_plate {};
   int _is_projectile {};
   int _is_ranged_weapon {};
   int _is_red_blood {};
@@ -561,6 +562,7 @@ private:
   int _is_tireless {};
   int _is_tmp_thing {};
   int _is_torch {};
+  int _is_trap {};
   int _is_treasure {};
   int _is_treasure_chest {};
   int _is_treasure_class_A {};
@@ -663,8 +665,6 @@ private:
   int _is_unused_flag181 {};
   int _is_unused_flag182 {};
   int _is_unused_flag183 {};
-  int _is_unused_flag184 {};
-  int _is_unused_flag185 {};
   int _is_unused_flag19 {};
   int _is_unused_flag192 {};
   int _is_unused_flag2 {};
@@ -882,6 +882,7 @@ private:
   std::string _light_color;
   std::string _name;
   std::string _nutrition_dice_str;
+  std::string _on_activated_do;
   std::string _on_attacking_dmg_acid_do;
   std::string _on_attacking_dmg_bite_do;
   std::string _on_attacking_dmg_claw_do;
@@ -1223,6 +1224,7 @@ public:
   const std::string &light_color(void) const;
   const std::string &name(void) const;
   const std::string &nutrition_dice_str(void) const;
+  const std::string &on_activated_do(void) const;
   const std::string &on_attacking_dmg_acid_do(void) const;
   const std::string &on_attacking_dmg_bite_do(void) const;
   const std::string &on_attacking_dmg_claw_do(void) const;
@@ -1801,6 +1803,7 @@ public:
   int is_poisonous_danger_level(void) const;
   int is_portal(void) const;
   int is_potion(void) const;
+  int is_pressure_plate(void) const;
   int is_projectile(void) const;
   int is_ranged_weapon(void) const;
   int is_red_blooded(void) const;
@@ -1844,6 +1847,7 @@ public:
   int is_tireless(void) const;
   int is_tmp_thing(void) const;
   int is_torch(void) const;
+  int is_trap(void) const;
   int is_treasure_chest(void) const;
   int is_treasure_class_A(void) const;
   int is_treasure_class_B(void) const;
@@ -1944,8 +1948,6 @@ public:
   int is_unused_flag181(void) const;
   int is_unused_flag182(void) const;
   int is_unused_flag183(void) const;
-  int is_unused_flag184(void) const;
-  int is_unused_flag185(void) const;
   int is_unused_flag18(void) const;
   int is_unused_flag192(void) const;
   int is_unused_flag19(void) const;
@@ -2541,6 +2543,7 @@ public:
   void is_poisonous_danger_level_set(int v);
   void is_portal_set(int v);
   void is_potion_set(int v);
+  void is_pressure_plate_set(int v);
   void is_projectile_set(int v);
   void is_ranged_weapon_set(int v);
   void is_red_blooded_set(int v);
@@ -2584,6 +2587,7 @@ public:
   void is_tireless_set(int v);
   void is_tmp_thing_set(int v);
   void is_torch_set(int v);
+  void is_trap_set(int v);
   void is_treasure_chest_set(int v);
   void is_treasure_class_A_set(int v);
   void is_treasure_class_B_set(int v);
@@ -2684,8 +2688,6 @@ public:
   void is_unused_flag181_set(int v);
   void is_unused_flag182_set(int v);
   void is_unused_flag183_set(int v);
-  void is_unused_flag184_set(int v);
-  void is_unused_flag185_set(int v);
   void is_unused_flag18_set(int v);
   void is_unused_flag192_set(int v);
   void is_unused_flag19_set(int v);
@@ -2814,6 +2816,7 @@ public:
   void noise_on_moving_set(int v);
   void noise_on_open_or_close_set(int v);
   void normal_placement_rules_set(int v);
+  void on_activated_do_set(const std::string &v);
   void on_attacking_dmg_acid_do_set(const std::string &v);
   void on_attacking_dmg_bite_do_set(const std::string &v);
   void on_attacking_dmg_claw_do_set(const std::string &v);
@@ -3085,6 +3088,7 @@ class Tp *tp_random_key(void);
 class Tp *tp_random_mob_challenge_class_A(void);
 class Tp *tp_random_mob_challenge_class_B(void);
 class Tp *tp_random_mob(void);
+class Tp *tp_random_trap(void);
 class Tp *tp_random_potion(void);
 class Tp *tp_random_red_blood(void);
 class Tp *tp_random_red_splatter(void);

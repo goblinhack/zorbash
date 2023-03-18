@@ -294,6 +294,10 @@ void Thing::level_pop(void)
       i_set_is_barrel = false;
       level->is_barrel_unset(x, y);
     }
+    if (i_set_is_trap) {
+      i_set_is_trap = false;
+      level->is_trap_unset(x, y);
+    }
     if (i_set_is_treasure_type) {
       i_set_is_treasure_type = false;
       level->is_treasure_type_unset(x, y);

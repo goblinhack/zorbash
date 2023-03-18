@@ -130,6 +130,18 @@ Tpp Level::tp_random_weapon_class_C(const point p)
   }
 }
 
+Tpp Level::tp_random_mob_challenge_class_A(const point p)
+{
+  TRACE_NO_INDENT();
+  return tp_random_mob(p);
+}
+
+Tpp Level::tp_random_mob_challenge_class_B(const point p)
+{
+  TRACE_NO_INDENT();
+  return tp_random_mob(p);
+}
+
 Tpp Level::tp_random_mob(const point p)
 {
   TRACE_NO_INDENT();
@@ -144,16 +156,4 @@ Tpp Level::tp_random_mob(const point p)
     }
     return tpp;
   }
-}
-
-Tpp Level::tp_random_mob_challenge_class_A(const point p)
-{
-  TRACE_NO_INDENT();
-  return tp_random_mob(p);
-}
-
-Tpp Level::tp_random_mob_challenge_class_B(const point p)
-{
-  TRACE_NO_INDENT();
-  return tp_random_mob(p);
 }

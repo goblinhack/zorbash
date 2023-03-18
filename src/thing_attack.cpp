@@ -376,7 +376,7 @@ bool Thing::possible_to_attack(const Thingp victim)
       victim->is_door() || victim->is_bridge() || victim->is_dry_grass() || victim->is_wet_grass() ||
       victim->is_treasure_type() || victim->is_enchantstone() || victim->is_skillstone() || victim->is_foliage() ||
       victim->is_carnivorous_plant() || victim->is_spiderweb() || victim->is_block_of_ice() || victim->is_sticky() ||
-      victim->is_brazier() || victim->is_barrel() || victim->is_player() || victim->is_food() ||
+      victim->is_brazier() || victim->is_barrel() || victim->is_player() || victim->is_food() || victim->is_trap() ||
       victim->is_bag_item()) {
     if (is_laser()) {
       if (is_debug_type()) {

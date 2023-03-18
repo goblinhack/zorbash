@@ -243,6 +243,7 @@ PyObject *level_is_tickable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_tireless_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_tmp_thing_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_torch_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_trap_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_treasure_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_treasure_chest_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_treasure_type_at(PyObject *obj, PyObject *args, PyObject *keywds);

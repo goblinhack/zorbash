@@ -40,6 +40,7 @@ const std::string &Tp::gfx_targetted_radial(void) const { return _gfx_targetted_
 const std::string &Tp::is_allied_with(void) const { return _is_allied_with; }
 const std::string &Tp::light_color(void) const { return _light_color; }
 const std::string &Tp::name(void) const { return _name; }
+const std::string &Tp::on_activated_do(void) const { return _on_activated_do; }
 const std::string &Tp::on_attacking_dmg_acid_do(void) const { return _on_attacking_dmg_acid_do; }
 const std::string &Tp::on_attacking_dmg_bite_do(void) const { return _on_attacking_dmg_bite_do; }
 const std::string &Tp::on_attacking_dmg_claw_do(void) const { return _on_attacking_dmg_claw_do; }
@@ -595,6 +596,7 @@ int Tp::is_player(void) const { return _is_player; }
 int Tp::is_poisonous_danger_level(void) const { return _is_poisonous_danger_level; }
 int Tp::is_portal(void) const { return _is_portal; }
 int Tp::is_potion(void) const { return _is_potion; }
+int Tp::is_pressure_plate(void) const { return _is_pressure_plate; }
 int Tp::is_projectile(void) const { return _is_projectile; }
 int Tp::is_ranged_weapon(void) const { return _is_ranged_weapon; }
 int Tp::is_red_blooded(void) const { return _is_red_blooded; }
@@ -638,6 +640,7 @@ int Tp::is_tickable(void) const { return _is_tickable; }
 int Tp::is_tireless(void) const { return _is_tireless; }
 int Tp::is_tmp_thing(void) const { return _is_tmp_thing; }
 int Tp::is_torch(void) const { return _is_torch; }
+int Tp::is_trap(void) const { return _is_trap; }
 int Tp::is_treasure_chest(void) const { return _is_treasure_chest; }
 int Tp::is_treasure_class_A(void) const { return _is_treasure_class_A; }
 int Tp::is_treasure_class_B(void) const { return _is_treasure_class_B; }
@@ -738,8 +741,6 @@ int Tp::is_unused_flag180(void) const { return _is_unused_flag180; }
 int Tp::is_unused_flag181(void) const { return _is_unused_flag181; }
 int Tp::is_unused_flag182(void) const { return _is_unused_flag182; }
 int Tp::is_unused_flag183(void) const { return _is_unused_flag183; }
-int Tp::is_unused_flag184(void) const { return _is_unused_flag184; }
-int Tp::is_unused_flag185(void) const { return _is_unused_flag185; }
 int Tp::is_unused_flag18(void) const { return _is_unused_flag18; }
 int Tp::is_unused_flag192(void) const { return _is_unused_flag192; }
 int Tp::is_unused_flag19(void) const { return _is_unused_flag19; }
@@ -1335,6 +1336,7 @@ void Tp::is_player_set(int v) { _is_player = v; }
 void Tp::is_poisonous_danger_level_set(int v) { _is_poisonous_danger_level = v; }
 void Tp::is_portal_set(int v) { _is_portal = v; }
 void Tp::is_potion_set(int v) { _is_potion = v; }
+void Tp::is_pressure_plate_set(int v) { _is_pressure_plate = v; }
 void Tp::is_projectile_set(int v) { _is_projectile = v; }
 void Tp::is_ranged_weapon_set(int v) { _is_ranged_weapon = v; }
 void Tp::is_red_blooded_set(int v) { _is_red_blooded = v; }
@@ -1378,6 +1380,7 @@ void Tp::is_tickable_set(int v) { _is_tickable = v; }
 void Tp::is_tireless_set(int v) { _is_tireless = v; }
 void Tp::is_tmp_thing_set(int v) { _is_tmp_thing = v; }
 void Tp::is_torch_set(int v) { _is_torch = v; }
+void Tp::is_trap_set(int v) { _is_trap = v; }
 void Tp::is_treasure_chest_set(int v) { _is_treasure_chest = v; }
 void Tp::is_treasure_class_A_set(int v) { _is_treasure_class_A = v; }
 void Tp::is_treasure_class_B_set(int v) { _is_treasure_class_B = v; }
@@ -1478,8 +1481,6 @@ void Tp::is_unused_flag180_set(int v) { _is_unused_flag180 = v; }
 void Tp::is_unused_flag181_set(int v) { _is_unused_flag181 = v; }
 void Tp::is_unused_flag182_set(int v) { _is_unused_flag182 = v; }
 void Tp::is_unused_flag183_set(int v) { _is_unused_flag183 = v; }
-void Tp::is_unused_flag184_set(int v) { _is_unused_flag184 = v; }
-void Tp::is_unused_flag185_set(int v) { _is_unused_flag185 = v; }
 void Tp::is_unused_flag18_set(int v) { _is_unused_flag18 = v; }
 void Tp::is_unused_flag192_set(int v) { _is_unused_flag192 = v; }
 void Tp::is_unused_flag19_set(int v) { _is_unused_flag19 = v; }
@@ -1608,6 +1609,7 @@ void Tp::noise_on_hit_and_still_alive_set(int v) { _noise_on_hit_and_still_alive
 void Tp::noise_on_moving_set(int v) { _noise_on_moving = v; }
 void Tp::noise_on_open_or_close_set(int v) { _noise_on_open_or_close = v; }
 void Tp::normal_placement_rules_set(int v) { _normal_placement_rules = v; }
+void Tp::on_activated_do_set(const std::string &v) { _on_activated_do = v; }
 void Tp::on_attacking_dmg_acid_do_set(const std::string &v) { _on_attacking_dmg_acid_do = v; }
 void Tp::on_attacking_dmg_bite_do_set(const std::string &v) { _on_attacking_dmg_bite_do = v; }
 void Tp::on_attacking_dmg_claw_do_set(const std::string &v) { _on_attacking_dmg_claw_do = v; }

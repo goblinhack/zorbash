@@ -89,5 +89,6 @@ my.sound_load(volume=1.0, file="data/sounds/misc/footsteps7.wav", name="footstep
 my.sound_load(volume=1.0, file="data/sounds/misc/footsteps8.wav", name="footsteps8")
 my.sound_load(volume=1.0, file="data/sounds/misc/gold.wav", name="gold")
 my.sound_load(volume=1.0, file="data/sounds/misc/powerup.wav", name="powerup")
+my.sound_load(volume=1.0, file="data/sounds/misc/pressure_plate.wav", name="pressure_plate")
 my.sound_load(volume=1.0, file="data/sounds/misc/skillup.wav", name="skillup")
 my.sound_load(volume=1.0, file="data/sounds/misc/sword_equip.wav", name="sword_equip")

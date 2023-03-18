@@ -27,6 +27,7 @@ static Tpidmap tp_floor;
 static Tpidmap tp_foliage;
 static Tpidmap tp_food;
 static Tpidmap tp_mob;
+static Tpidmap tp_trap;
 static Tpidmap tp_gold;
 static Tpidmap tp_green_splatter;
 static Tpidmap tp_item_class_A;
@@ -76,6 +77,9 @@ void tp_random_init(void)
     }
     if (tp->is_barrel()) {
       tp_barrel.push_back(tp);
+    }
+    if (tp->is_trap()) {
+      tp_trap.push_back(tp);
     }
     if (tp->is_red_blood()) {
       tp_red_blood.push_back(tp);
@@ -301,6 +305,181 @@ void tp_random_init(void)
         tp_monst_add(tp);
       }
     }
+  }
+
+  if (tp_ascend_dungeon.empty()) {
+    DIE("No things for type:tp_ascend_dungeon.empty");
+  }
+  if (tp_ascend_sewer.empty()) {
+    DIE("No things for type:tp_ascend_sewer.empty");
+  }
+  if (tp_barrel.empty()) {
+    DIE("No things for type:tp_barrel.empty");
+  }
+  if (tp_red_blood.empty()) {
+    DIE("No things for type:tp_red_blood.empty");
+  }
+  if (tp_green_blood.empty()) {
+    DIE("No things for type:tp_green_blood.empty");
+  }
+  if (tp_red_splatter.empty()) {
+    DIE("No things for type:tp_red_splatter.empty");
+  }
+  if (tp_bones.empty()) {
+    DIE("No things for type:tp_bones.empty");
+  }
+  if (tp_brazier.empty()) {
+    DIE("No things for type:tp_brazier.empty");
+  }
+  if (tp_deco.empty()) {
+    DIE("No things for type:tp_deco.empty");
+  }
+  if (tp_descend_dungeon.empty()) {
+    DIE("No things for type:tp_descend_dungeon.empty");
+  }
+  if (tp_descend_sewer.empty()) {
+    DIE("No things for type:tp_descend_sewer.empty");
+  }
+  if (tp_dirt.empty()) {
+    DIE("No things for type:tp_dirt.empty");
+  }
+  if (tp_door.empty()) {
+    DIE("No things for type:tp_door.empty");
+  }
+  if (tp_dry_grass.empty()) {
+    DIE("No things for type:tp_dry_grass.empty");
+  }
+  if (tp_wet_grass.empty()) {
+    DIE("No things for type:tp_wet_grass.empty");
+  }
+  if (tp_enchantstone.empty()) {
+    DIE("No things for type:tp_enchantstone.empty");
+  }
+  if (tp_ethereal_mob.empty()) {
+    DIE("No things for type:tp_ethereal_mob.empty");
+  }
+  if (tp_floor.empty()) {
+    DIE("No things for type:tp_floor.empty");
+  }
+  if (tp_foliage.empty()) {
+    DIE("No things for type:tp_foliage.empty");
+  }
+  if (tp_food.empty()) {
+    DIE("No things for type:tp_food.empty");
+  }
+  if (tp_mob.empty()) {
+    DIE("No things for type:tp_mob.empty");
+  }
+  if (tp_trap.empty()) {
+    DIE("No things for type:tp_trap.empty");
+  }
+  if (tp_gold.empty()) {
+    DIE("No things for type:tp_gold.empty");
+  }
+  if (tp_green_splatter.empty()) {
+    DIE("No things for type:tp_green_splatter.empty");
+  }
+  if (tp_item_class_A.empty()) {
+    DIE("No things for type:tp_item_class_A.empty");
+  }
+  if (tp_item_class_B.empty()) {
+    DIE("No things for type:tp_item_class_B.empty");
+  }
+  if (tp_item_class_C.empty()) {
+    DIE("No things for type:tp_item_class_C.empty");
+  }
+  if (tp_item_not_a_container_class_A.empty()) {
+    DIE("No things for type:tp_item_not_a_container_class_A.empty");
+  }
+  if (tp_item_not_a_container_class_B.empty()) {
+    DIE("No things for type:tp_item_not_a_container_class_B.empty");
+  }
+  if (tp_item_not_a_container_class_C.empty()) {
+    DIE("No things for type:tp_item_not_a_container_class_C.empty");
+  }
+  if (tp_key.empty()) {
+    DIE("No things for type:tp_key.empty");
+  }
+  if (tp_potion.empty()) {
+    DIE("No things for type:tp_potion.empty");
+  }
+  if (tp_ring.empty()) {
+    DIE("No things for type:tp_ring.empty");
+  }
+  if (tp_ring_class_A.empty()) {
+    DIE("No things for type:tp_ring_class_A.empty");
+  }
+  if (tp_ring_class_B.empty()) {
+    DIE("No things for type:tp_ring_class_B.empty");
+  }
+  if (tp_ring_class_C.empty()) {
+    DIE("No things for type:tp_ring_class_C.empty");
+  }
+  if (tp_small_ripples.empty()) {
+    DIE("No things for type:tp_small_ripples.empty");
+  }
+  if (tp_large_ripples.empty()) {
+    DIE("No things for type:tp_large_ripples.empty");
+  }
+  if (tp_rock.empty()) {
+    DIE("No things for type:tp_rock.empty");
+  }
+  if (tp_secret_door.empty()) {
+    DIE("No things for type:tp_secret_door.empty");
+  }
+  if (tp_sewer_wall.empty()) {
+    DIE("No things for type:tp_sewer_wall.empty");
+  }
+  if (tp_skills.empty()) {
+    DIE("No things for type:tp_skills.empty");
+  }
+  if (tp_skillstone.empty()) {
+    DIE("No things for type:tp_skillstone.empty");
+  }
+  if (tp_spiderweb.empty()) {
+    DIE("No things for type:tp_spiderweb.empty");
+  }
+  if (tp_portal.empty()) {
+    DIE("No things for type:tp_portal.empty");
+  }
+  if (tp_treasure.empty()) {
+    DIE("No things for type:tp_treasure.empty");
+  }
+  if (tp_wall_dungeon.empty()) {
+    DIE("No things for type:tp_wall_dungeon.empty");
+  }
+  if (tp_staff.empty()) {
+    DIE("No things for type:tp_staff.empty");
+  }
+  if (tp_staff_class_A.empty()) {
+    DIE("No things for type:tp_staff_class_A.empty");
+  }
+  if (tp_staff_class_B.empty()) {
+    DIE("No things for type:tp_staff_class_B.empty");
+  }
+  if (tp_staff_class_C.empty()) {
+    DIE("No things for type:tp_staff_class_C.empty");
+  }
+  if (tp_weapon.empty()) {
+    DIE("No things for type:tp_weapon.empty");
+  }
+  if (tp_weapon_class_A.empty()) {
+    DIE("No things for type:tp_weapon_class_A.empty");
+  }
+  if (tp_weapon_class_B.empty()) {
+    DIE("No things for type:tp_weapon_class_B.empty");
+  }
+  if (tp_weapon_class_C.empty()) {
+    DIE("No things for type:tp_weapon_class_C.empty");
+  }
+  if (tp_treasure_class_A.empty()) {
+    DIE("No things for type:tp_treasure_class_A.empty");
+  }
+  if (tp_treasure_class_B.empty()) {
+    DIE("No things for type:tp_treasure_class_B.empty");
+  }
+  if (tp_treasure_class_C.empty()) {
+    DIE("No things for type:tp_treasure_class_C.empty");
   }
 }
 
@@ -787,6 +966,16 @@ Tpp tp_random_barrel(void)
     return nullptr;
   }
   return tp_get_with_no_rarity_filter(tp_barrel);
+}
+
+Tpp tp_random_trap(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_trap.size())) {
+    ERR("No trap found");
+    return nullptr;
+  }
+  return tp_get_with_no_rarity_filter(tp_trap);
 }
 
 Tpp tp_random_door(void)

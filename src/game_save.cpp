@@ -438,6 +438,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_obs_wall_or_door              ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_obs_when_dead                 ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_portal                        ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_trap                          ? 1LLU : 0LLU) << shift; shift++;
   // end sort marker3
   // clang-format on
   if (shift >= (int) (sizeof(bits64) * 8)) {
@@ -565,6 +566,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_ascend_dungeon);
   out << bits(my.t->_is_ascend_sewer);
   out << bits(my.t->_is_barrel);
+  out << bits(my.t->_is_trap);
   out << bits(my.t->_is_basalt);
   out << bits(my.t->_is_brazier);
   out << bits(my.t->_is_bridge);

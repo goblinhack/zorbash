@@ -36,6 +36,7 @@ python/things/rings/__pycache__
 python/things/shield/__pycache__
 python/things/skills/__pycache__
 python/things/staffs/__pycache__/
+python/things/traps/__pycache__/
 python/things/treasure/__pycache__
 python/things/weapons/__pycache__
 *.session

@@ -1186,15 +1186,15 @@ int Thing::is_unused_flag183(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag183());
 }
-int Thing::is_unused_flag184(void)
+int Thing::is_pressure_plate(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag184());
+  return (tp()->is_pressure_plate());
 }
-int Thing::is_unused_flag185(void)
+int Thing::is_trap(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag185());
+  return (tp()->is_trap());
 }
 int Thing::is_cold_elemental(void)
 {
