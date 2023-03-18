@@ -26,6 +26,7 @@ def tp_init(name, tiles=[]):
     my.is_described_when_hovering_over(self, True)
     my.is_dry_grass(self, True)
     my.is_dry_grass_trampled(self, True)
+    my.is_grass(self, True)
     my.on_hit_and_now_dead_do(self, "me.on_hit_and_now_dead()")
     my.temperature_max(self, 50)
     my.temperature_min(self, 0)

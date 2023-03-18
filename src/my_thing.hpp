@@ -1433,10 +1433,12 @@ public:
   int is_eater_of_cloaks(void);
   int is_eater_of_food(void);
   int is_eater_of_gauntlets(void);
+  int is_eater_of_grass(void);
   int is_eater_of_green_blood(void);
   int is_eater_of_helmets(void);
   int is_eater_of_magical_items(void);
   int is_eater_of_meat(void);
+  int is_eater_of_plants(void);
   int is_eater_of_potions(void);
   int is_eater_of_red_blood(void);
   int is_eater_of_rings(void);
@@ -1471,8 +1473,10 @@ public:
   int is_gelatinous(void);
   int is_glass(void);
   int is_gnome(void);
+  int is_goat(void);
   int is_gold(void);
   int is_golem(void);
+  int is_grass(void);
   int is_green_blooded(void);
   int is_green_blood(void);
   int is_green_splatter(void);
@@ -1706,10 +1710,6 @@ public:
   int is_unused_flag178(void);
   int is_unused_flag179(void);
   int is_unused_flag17(void);
-  int is_unused_flag180(void);
-  int is_unused_flag181(void);
-  int is_unused_flag182(void);
-  int is_unused_flag183(void);
   int is_unused_flag18(void);
   int is_unused_flag192(void);
   int is_unused_flag19(void);

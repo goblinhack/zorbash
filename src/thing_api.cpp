@@ -1166,25 +1166,25 @@ int Thing::is_unused_flag179(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag179());
 }
-int Thing::is_unused_flag180(void)
+int Thing::is_goat(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag180());
+  return (tp()->is_goat());
 }
-int Thing::is_unused_flag181(void)
+int Thing::is_grass(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag181());
+  return (tp()->is_grass());
 }
-int Thing::is_unused_flag182(void)
+int Thing::is_eater_of_grass(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag182());
+  return (tp()->is_eater_of_grass());
 }
-int Thing::is_unused_flag183(void)
+int Thing::is_eater_of_plants(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag183());
+  return (tp()->is_eater_of_plants());
 }
 int Thing::is_pressure_plate(void)
 {

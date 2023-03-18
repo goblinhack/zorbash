@@ -19,6 +19,7 @@ def tp_init(name, tiles=[]):
     my.is_cursor_can_hover_over(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_dry_grass(self, True)
+    my.is_grass(self, True)
     my.temperature_max(self, 50)
     my.temperature_min(self, 0)
     my.temperature_sensitive(self, True)

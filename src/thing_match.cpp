@@ -192,10 +192,12 @@ bool Tp::matches(const std::string &what)
   if (is_eater_of_cloaks() && (what == "is_eater_of_cloaks")) { return true; }
   if (is_eater_of_food() && (what == "is_eater_of_food")) { return true; }
   if (is_eater_of_gauntlets() && (what == "is_eater_of_gauntlets")) { return true; }
+  if (is_eater_of_grass() && (what == "is_eater_of_grass")) { return true; }
   if (is_eater_of_green_blood() && (what == "is_eater_of_green_blood")) { return true; }
   if (is_eater_of_helmets() && (what == "is_eater_of_helmets")) { return true; }
   if (is_eater_of_magical_items() && (what == "is_eater_of_magical_items")) { return true; }
   if (is_eater_of_meat() && (what == "is_eater_of_meat")) { return true; }
+  if (is_eater_of_plants() && (what == "is_eater_of_plants")) { return true; }
   if (is_eater_of_potions() && (what == "is_eater_of_potions")) { return true; }
   if (is_eater_of_red_blood() && (what == "is_eater_of_red_blood")) { return true; }
   if (is_eater_of_rings() && (what == "is_eater_of_rings")) { return true; }
@@ -229,8 +231,10 @@ bool Tp::matches(const std::string &what)
   if (is_gelatinous() && (what == "is_gelatinous")) { return true; }
   if (is_glass() && (what == "is_glass")) { return true; }
   if (is_gnome() && (what == "is_gnome")) { return true; }
+  if (is_goat() && (what == "is_goat")) { return true; }
   if (is_gold() && (what == "is_gold")) { return true; }
   if (is_golem() && (what == "is_golem")) { return true; }
+  if (is_grass() && (what == "is_grass")) { return true; }
   if (is_green_blooded() && (what == "is_green_blooded")) { return true; }
   if (is_green_blood() && (what == "is_green_blood")) { return true; }
   if (is_green_splatter() && (what == "is_green_splatter")) { return true; }
@@ -458,10 +462,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag178() && (what == "is_unused_flag178")) { return true; }
   if (is_unused_flag179() && (what == "is_unused_flag179")) { return true; }
   if (is_unused_flag17() && (what == "is_unused_flag17")) { return true; }
-  if (is_unused_flag180() && (what == "is_unused_flag180")) { return true; }
-  if (is_unused_flag181() && (what == "is_unused_flag181")) { return true; }
-  if (is_unused_flag182() && (what == "is_unused_flag182")) { return true; }
-  if (is_unused_flag183() && (what == "is_unused_flag183")) { return true; }
   if (is_unused_flag18() && (what == "is_unused_flag18")) { return true; }
   if (is_unused_flag192() && (what == "is_unused_flag192")) { return true; }
   if (is_unused_flag19() && (what == "is_unused_flag19")) { return true; }
@@ -788,10 +788,12 @@ bool Thing::matches(const std::string &what)
   if (is_eater_of_cloaks() && (what == "is_eater_of_cloaks")) { return true; }
   if (is_eater_of_food() && (what == "is_eater_of_food")) { return true; }
   if (is_eater_of_gauntlets() && (what == "is_eater_of_gauntlets")) { return true; }
+  if (is_eater_of_grass() && (what == "is_eater_of_grass")) { return true; }
   if (is_eater_of_green_blood() && (what == "is_eater_of_green_blood")) { return true; }
   if (is_eater_of_helmets() && (what == "is_eater_of_helmets")) { return true; }
   if (is_eater_of_magical_items() && (what == "is_eater_of_magical_items")) { return true; }
   if (is_eater_of_meat() && (what == "is_eater_of_meat")) { return true; }
+  if (is_eater_of_plants() && (what == "is_eater_of_plants")) { return true; }
   if (is_eater_of_potions() && (what == "is_eater_of_potions")) { return true; }
   if (is_eater_of_red_blood() && (what == "is_eater_of_red_blood")) { return true; }
   if (is_eater_of_rings() && (what == "is_eater_of_rings")) { return true; }
@@ -825,8 +827,10 @@ bool Thing::matches(const std::string &what)
   if (is_gelatinous() && (what == "is_gelatinous")) { return true; }
   if (is_glass() && (what == "is_glass")) { return true; }
   if (is_gnome() && (what == "is_gnome")) { return true; }
+  if (is_goat() && (what == "is_goat")) { return true; }
   if (is_gold() && (what == "is_gold")) { return true; }
   if (is_golem() && (what == "is_golem")) { return true; }
+  if (is_grass() && (what == "is_grass")) { return true; }
   if (is_green_blooded() && (what == "is_green_blooded")) { return true; }
   if (is_green_blood() && (what == "is_green_blood")) { return true; }
   if (is_green_splatter() && (what == "is_green_splatter")) { return true; }
@@ -1054,10 +1058,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag178() && (what == "is_unused_flag178")) { return true; }
   if (is_unused_flag179() && (what == "is_unused_flag179")) { return true; }
   if (is_unused_flag17() && (what == "is_unused_flag17")) { return true; }
-  if (is_unused_flag180() && (what == "is_unused_flag180")) { return true; }
-  if (is_unused_flag181() && (what == "is_unused_flag181")) { return true; }
-  if (is_unused_flag182() && (what == "is_unused_flag182")) { return true; }
-  if (is_unused_flag183() && (what == "is_unused_flag183")) { return true; }
   if (is_unused_flag18() && (what == "is_unused_flag18")) { return true; }
   if (is_unused_flag192() && (what == "is_unused_flag192")) { return true; }
   if (is_unused_flag19() && (what == "is_unused_flag19")) { return true; }
@@ -1377,10 +1377,12 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_eater_of_cloaks") { return &Thing::is_eater_of_cloaks; }
   if (what == "is_eater_of_food") { return &Thing::is_eater_of_food; }
   if (what == "is_eater_of_gauntlets") { return &Thing::is_eater_of_gauntlets; }
+  if (what == "is_eater_of_grass") { return &Thing::is_eater_of_grass; }
   if (what == "is_eater_of_green_blood") { return &Thing::is_eater_of_green_blood; }
   if (what == "is_eater_of_helmets") { return &Thing::is_eater_of_helmets; }
   if (what == "is_eater_of_magical_items") { return &Thing::is_eater_of_magical_items; }
   if (what == "is_eater_of_meat") { return &Thing::is_eater_of_meat; }
+  if (what == "is_eater_of_plants") { return &Thing::is_eater_of_plants; }
   if (what == "is_eater_of_potions") { return &Thing::is_eater_of_potions; }
   if (what == "is_eater_of_red_blood") { return &Thing::is_eater_of_red_blood; }
   if (what == "is_eater_of_rings") { return &Thing::is_eater_of_rings; }
@@ -1414,8 +1416,10 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_gelatinous") { return &Thing::is_gelatinous; }
   if (what == "is_glass") { return &Thing::is_glass; }
   if (what == "is_gnome") { return &Thing::is_gnome; }
+  if (what == "is_goat") { return &Thing::is_goat; }
   if (what == "is_gold") { return &Thing::is_gold; }
   if (what == "is_golem") { return &Thing::is_golem; }
+  if (what == "is_grass") { return &Thing::is_grass; }
   if (what == "is_green_blooded") { return &Thing::is_green_blooded; }
   if (what == "is_green_blood") { return &Thing::is_green_blood; }
   if (what == "is_green_splatter") { return &Thing::is_green_splatter; }
@@ -1640,10 +1644,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag178") { return &Thing::is_unused_flag178; }
   if (what == "is_unused_flag179") { return &Thing::is_unused_flag179; }
   if (what == "is_unused_flag17") { return &Thing::is_unused_flag17; }
-  if (what == "is_unused_flag180") { return &Thing::is_unused_flag180; }
-  if (what == "is_unused_flag181") { return &Thing::is_unused_flag181; }
-  if (what == "is_unused_flag182") { return &Thing::is_unused_flag182; }
-  if (what == "is_unused_flag183") { return &Thing::is_unused_flag183; }
   if (what == "is_unused_flag18") { return &Thing::is_unused_flag18; }
   if (what == "is_unused_flag192") { return &Thing::is_unused_flag192; }
   if (what == "is_unused_flag19") { return &Thing::is_unused_flag19; }

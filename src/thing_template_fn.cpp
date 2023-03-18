@@ -465,10 +465,12 @@ int Tp::is_eater_of_boots(void) const { return _is_eater_of_boots; }
 int Tp::is_eater_of_cloaks(void) const { return _is_eater_of_cloaks; }
 int Tp::is_eater_of_food(void) const { return _is_eater_of_food; }
 int Tp::is_eater_of_gauntlets(void) const { return _is_eater_of_gauntlets; }
+int Tp::is_eater_of_grass(void) const { return _is_eater_of_grass; }
 int Tp::is_eater_of_green_blood(void) const { return _is_eater_of_green_blood; }
 int Tp::is_eater_of_helmets(void) const { return _is_eater_of_helmets; }
 int Tp::is_eater_of_magical_items(void) const { return _is_eater_of_magical_items; }
 int Tp::is_eater_of_meat(void) const { return _is_eater_of_meat; }
+int Tp::is_eater_of_plants(void) const { return _is_eater_of_plants; }
 int Tp::is_eater_of_potions(void) const { return _is_eater_of_potions; }
 int Tp::is_eater_of_red_blood(void) const { return _is_eater_of_red_blood; }
 int Tp::is_eater_of_rings(void) const { return _is_eater_of_rings; }
@@ -502,8 +504,10 @@ int Tp::is_gauntlet(void) const { return _is_gauntlet; }
 int Tp::is_gelatinous(void) const { return _is_gelatinous; }
 int Tp::is_glass(void) const { return _is_glass; }
 int Tp::is_gnome(void) const { return _is_gnome; }
+int Tp::is_goat(void) const { return _is_goat; }
 int Tp::is_gold(void) const { return _is_gold; }
 int Tp::is_golem(void) const { return _is_golem; }
+int Tp::is_grass(void) const { return _is_grass; }
 int Tp::is_green_blooded(void) const { return _is_green_blooded; }
 int Tp::is_green_blood(void) const { return _is_green_blood; }
 int Tp::is_green_splatter(void) const { return _is_green_splatter; }
@@ -737,10 +741,6 @@ int Tp::is_unused_flag177(void) const { return _is_unused_flag177; }
 int Tp::is_unused_flag178(void) const { return _is_unused_flag178; }
 int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
 int Tp::is_unused_flag17(void) const { return _is_unused_flag17; }
-int Tp::is_unused_flag180(void) const { return _is_unused_flag180; }
-int Tp::is_unused_flag181(void) const { return _is_unused_flag181; }
-int Tp::is_unused_flag182(void) const { return _is_unused_flag182; }
-int Tp::is_unused_flag183(void) const { return _is_unused_flag183; }
 int Tp::is_unused_flag18(void) const { return _is_unused_flag18; }
 int Tp::is_unused_flag192(void) const { return _is_unused_flag192; }
 int Tp::is_unused_flag19(void) const { return _is_unused_flag19; }
@@ -1205,10 +1205,12 @@ void Tp::is_eater_of_boots_set(int v) { _is_eater_of_boots = v; }
 void Tp::is_eater_of_cloaks_set(int v) { _is_eater_of_cloaks = v; }
 void Tp::is_eater_of_food_set(int v) { _is_eater_of_food = v; }
 void Tp::is_eater_of_gauntlets_set(int v) { _is_eater_of_gauntlets = v; }
+void Tp::is_eater_of_grass_set(int v) { _is_eater_of_grass = v; }
 void Tp::is_eater_of_green_blood_set(int v) { _is_eater_of_green_blood = v; }
 void Tp::is_eater_of_helmets_set(int v) { _is_eater_of_helmets = v; }
 void Tp::is_eater_of_magical_items_set(int v) { _is_eater_of_magical_items = v; }
 void Tp::is_eater_of_meat_set(int v) { _is_eater_of_meat = v; }
+void Tp::is_eater_of_plants_set(int v) { _is_eater_of_plants = v; }
 void Tp::is_eater_of_potions_set(int v) { _is_eater_of_potions = v; }
 void Tp::is_eater_of_red_blood_set(int v) { _is_eater_of_red_blood = v; }
 void Tp::is_eater_of_rings_set(int v) { _is_eater_of_rings = v; }
@@ -1242,8 +1244,10 @@ void Tp::is_gauntlet_set(int v) { _is_gauntlet = v; }
 void Tp::is_gelatinous_set(int v) { _is_gelatinous = v; }
 void Tp::is_glass_set(int v) { _is_glass = v; }
 void Tp::is_gnome_set(int v) { _is_gnome = v; }
+void Tp::is_goat_set(int v) { _is_goat = v; }
 void Tp::is_gold_set(int v) { _is_gold = v; }
 void Tp::is_golem_set(int v) { _is_golem = v; }
+void Tp::is_grass_set(int v) { _is_grass = v; }
 void Tp::is_green_blooded_set(int v) { _is_green_blooded = v; }
 void Tp::is_green_blood_set(int v) { _is_green_blood = v; }
 void Tp::is_green_splatter_set(int v) { _is_green_splatter = v; }
@@ -1477,10 +1481,6 @@ void Tp::is_unused_flag177_set(int v) { _is_unused_flag177 = v; }
 void Tp::is_unused_flag178_set(int v) { _is_unused_flag178 = v; }
 void Tp::is_unused_flag179_set(int v) { _is_unused_flag179 = v; }
 void Tp::is_unused_flag17_set(int v) { _is_unused_flag17 = v; }
-void Tp::is_unused_flag180_set(int v) { _is_unused_flag180 = v; }
-void Tp::is_unused_flag181_set(int v) { _is_unused_flag181 = v; }
-void Tp::is_unused_flag182_set(int v) { _is_unused_flag182 = v; }
-void Tp::is_unused_flag183_set(int v) { _is_unused_flag183 = v; }
 void Tp::is_unused_flag18_set(int v) { _is_unused_flag18 = v; }
 void Tp::is_unused_flag192_set(int v) { _is_unused_flag192 = v; }
 void Tp::is_unused_flag19_set(int v) { _is_unused_flag19 = v; }
