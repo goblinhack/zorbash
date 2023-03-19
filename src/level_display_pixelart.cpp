@@ -8,6 +8,7 @@
 #include "my_game.hpp"
 #include "my_sdl_proto.hpp"
 #include "my_thing.hpp"
+#include "my_ui.hpp"
 
 void Level::display_pixelart_map(void)
 {

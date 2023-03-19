@@ -10,15 +10,10 @@ static bool wid_leftbar_create(void);
 
 Widp wid_leftbar {};
 
-static WidPopup *wid_leftbar_popup;
-
 void wid_leftbar_fini(void)
 {
   TRACE_NO_INDENT();
   wid_destroy(&wid_leftbar);
-
-  delete wid_leftbar_popup;
-  wid_leftbar_popup = nullptr;
 
   auto level = game->get_current_level();
   if (level) {

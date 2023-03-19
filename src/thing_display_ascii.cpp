@@ -522,8 +522,8 @@ void Thing::blit_ascii(point tl, point br, point p, bool left_bar)
     return;
   }
 
-  int x = tl.x + (p.x - level->minx);
-  int y = tl.y + (p.y - level->miny);
+  int x = tl.x + (p.x - level->minx) - (MAP_BORDER_ROCK - 1);
+  int y = tl.y + (p.y - level->miny) - (MAP_BORDER_ROCK - 1);
 
   //
   // Can we see it?

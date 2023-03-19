@@ -151,6 +151,9 @@ bool Level::can_see_point_or_nearby(point p, int dist)
   for (auto dx = -dist; dx <= dist; dx++) {
     for (auto dy = -dist; dy <= dist; dy++) {
       point o(p.x + dx, p.y + dy);
+      if (is_oob(o)) {
+        continue;
+      }
       if (get(can_see_ever.can_see, o.x, o.y)) {
         return true;
       }

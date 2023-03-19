@@ -121,8 +121,8 @@ void Game::place_player(void)
         level->thing_new("wall_dungeon.1", point(x + 2, y + 2));
         level->thing_new("trap_pressure_plate_gas", point(x - 2, y));
         level->thing_new("rat_large", point(x + 1, y + 3));
-        level->thing_new("trap_monster", point(x - 2, y));
       }
+      level->thing_new("trap_monster", point(x - 2, y));
       if (1) {
         // level->thing_new("dogman", point(x + 1, y + 3));
         level->thing_new("wet_grass1", point(x + 1, y));

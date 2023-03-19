@@ -31,10 +31,10 @@
 #define LEVEL_MONST_COUNT_INIT_MAX 25  // Monsters max per level at creation. Want more? You're mad...
 #define LEVEL_MONST_COUNT_ABS_MAX  50  // Monsters max per level period.
 
-#define MAP_BORDER_ROCK 1  // Map rock border. If changed from 1 you need to fix collision_check_only
-#define MAP_BORDER_ROOM 1  // Room border padding
-#define MAP_ROOM_HEIGHT 11 // Max room dimensions
-#define MAP_ROOM_WIDTH  11 // Max room dimensions
+#define MAP_BORDER_ROCK 1               // Map rock border
+#define MAP_BORDER_ROOM MAP_BORDER_ROCK // Room border padding
+#define MAP_ROOM_HEIGHT 11              // Max room dimensions
+#define MAP_ROOM_WIDTH  11              // Max room dimensions
 
 #define MAP_BORDER_ASCII_AUTO_SCROLL 8 // Ascii map scroll threshold
 
@@ -43,10 +43,10 @@ extern int MAP_WIDTH;
 extern int DUNGEON_GRID_CHUNK_HEIGHT;
 extern int DUNGEON_GRID_CHUNK_WIDTH;
 
-#define MAP_HEIGHT_MINI ((DUNGEON_GRID_CHUNK_HEIGHT_MINI * MAP_ROOM_HEIGHT) + (MAP_BORDER_ROOM * 2))
-#define MAP_WIDTH_MINI  ((DUNGEON_GRID_CHUNK_WIDTH_MINI * MAP_ROOM_WIDTH) + (MAP_BORDER_ROOM * 2))
-#define MAP_HEIGHT_MAX  ((DUNGEON_GRID_CHUNK_HEIGHT_MAX * MAP_ROOM_HEIGHT) + (MAP_BORDER_ROOM * 2))
-#define MAP_WIDTH_MAX   ((DUNGEON_GRID_CHUNK_WIDTH_MAX * MAP_ROOM_WIDTH) + (MAP_BORDER_ROOM * 2))
+#define MAP_HEIGHT_MINI ((DUNGEON_GRID_CHUNK_HEIGHT_MINI * MAP_ROOM_HEIGHT) + (MAP_BORDER_ROCK * 2))
+#define MAP_WIDTH_MINI  ((DUNGEON_GRID_CHUNK_WIDTH_MINI * MAP_ROOM_WIDTH) + (MAP_BORDER_ROCK * 2))
+#define MAP_HEIGHT_MAX  ((DUNGEON_GRID_CHUNK_HEIGHT_MAX * MAP_ROOM_HEIGHT) + (MAP_BORDER_ROCK * 2))
+#define MAP_WIDTH_MAX   ((DUNGEON_GRID_CHUNK_WIDTH_MAX * MAP_ROOM_WIDTH) + (MAP_BORDER_ROCK * 2))
 
 #define LEVELS_ACROSS MAP_WIDTH_MAX // World size; no world yet...
 #define LEVELS_DOWN   MAP_HEIGHT_MAX
