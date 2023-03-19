@@ -10,7 +10,7 @@
 //
 // Return true on success.
 //
-bool Thing::path_pop_next_move(ThingMoveReason reason)
+bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
 {
   TRACE_NO_INDENT();
 
@@ -547,10 +547,15 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
 //
 // true on having performed an action
 //
-bool Thing::cursor_path_pop_first_move(ThingMoveReason reason)
+bool Thing::player_cursor_path_pop_first_move(ThingMoveReason reason)
 {
   DBG2("Cursor pop first move");
   TRACE_AND_INDENT();
+
+  if (! is_player()) {
+    err("Expected player only");
+    return false;
+  }
 
   auto cursor = level->cursor;
   if (! cursor) {
@@ -575,7 +580,7 @@ bool Thing::cursor_path_pop_first_move(ThingMoveReason reason)
     aip()->move_path = game->cursor_move_path;
     game->cursor_move_path.clear();
 
-    if (path_pop_next_move(reason)) {
+    if (player_or_monst_path_pop_next_move(reason)) {
       DBG2("Move to cursor next hop");
       if (game->cursor_move_path.empty()) {
         level->cursor_path_create(this);
@@ -632,9 +637,9 @@ bool Thing::cursor_path_pop_first_move(ThingMoveReason reason)
   //
   // If not adjacent, try and jump.
   //
-  if (get(level->can_see_ever.can_see, future_pos.x, future_pos.y)) {
+  if (level->can_see_point_or_nearby(future_pos, THING_CAN_SEE_INTO_SHADOWS_DISTANCE)) {
     DBG2("Cursor path does not exist; jump?");
-    if (is_able_to_jump() && (is_monst() || (is_player() && game->robot_mode))) {
+    if (is_able_to_jump() && game->robot_mode) {
       if (try_to_jump_carefully(future_pos)) {
         game->tick_begin("player tried to jump");
         return true;
@@ -646,9 +651,7 @@ bool Thing::cursor_path_pop_first_move(ThingMoveReason reason)
       }
     }
   } else {
-    if (is_player()) {
-      msg("You cannot see to move there.");
-    }
+    msg("You cannot see clearly to move there.");
   }
 
   //

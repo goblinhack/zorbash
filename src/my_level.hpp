@@ -691,6 +691,7 @@ public:
   // begin sort marker2 {
   bool buffbox_over(const int slot);
   bool can_see_obstacle(int x, int y);
+  bool can_see_point_or_nearby(point, int dist);
   bool can_see_unimpeded(const point &start, const point &end);
   bool can_see_unimpeded(int x0, int y0, int x1, int y1);
   bool create_biome_dungeon(point3d at, uint32_t seed);

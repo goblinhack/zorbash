@@ -313,7 +313,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
     // Grab the current move path and start walking toward it. This will
     // consume one move by the player.
     //
-    if (player->cursor_path_pop_first_move(THING_MOVE_REASON_MOUSE)) {
+    if (player->player_cursor_path_pop_first_move(THING_MOVE_REASON_MOUSE)) {
       return true;
     }
   } else {

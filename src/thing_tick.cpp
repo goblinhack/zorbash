@@ -273,7 +273,7 @@ void Thing::achieve_goals_in_life(void)
     //
     // Pop the next monst move.
     //
-    if (path_pop_next_move(THING_MOVE_REASON_AI)) {
+    if (player_or_monst_path_pop_next_move(THING_MOVE_REASON_AI)) {
       dbg("Popped next move");
       return;
     }

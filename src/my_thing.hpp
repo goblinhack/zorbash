@@ -492,7 +492,6 @@ public:
   bool collision_obstacle(Thingp);
   bool consume(Thingp it);
   bool coords_get(point &blit_tl, point &blit_br, point &pre_blit_tl, point &pre_blit_br, Tilep &tile, bool refl);
-  bool cursor_path_pop_first_move(ThingMoveReason);
   bool debuff_add_if_not_found(Tpp what);
   bool debuff_add(Thingp it);
   bool debuff_add(Tpp what);
@@ -585,11 +584,12 @@ public:
   bool open(Thingp it);
   bool open(void);
   bool particle_anim_exists(void);
-  bool path_pop_next_move(ThingMoveReason);
   bool place(const std::string &what, const point p);
+  bool player_cursor_path_pop_first_move(ThingMoveReason);
   bool player_is_player_is_ready_for_messages(std::string &why);
   bool player_is_player_is_ready_for_messages(void);
   bool player_is_ready_for_thing_info(void);
+  bool player_or_monst_path_pop_next_move(ThingMoveReason);
   bool possible_to_attack_at(point at);
   bool possible_to_attack(const Thingp it);
   bool projectile_anim_exists(void);
@@ -2525,7 +2525,7 @@ public:
   void buff_remove_all(void);
   void buff_tick(void);
   void burnt_set(void);
-  void can_see(point);
+  void can_see_you(point);
   void change_state(int new_state, const std::string &why);
   void chasm_tick(void);
   void check_all_carried_items_are_owned(void);

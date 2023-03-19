@@ -93,7 +93,10 @@ void Level::cursor_path_draw_line(Thingp it, point start, point end)
   point dmap_start = start;
   point dmap_end   = end;
 
-  if (! get(can_see_ever.can_see, end.x, end.y)) {
+  //
+  // Allow the player to see into the shadows
+  //
+  if (! can_see_point_or_nearby(end, THING_CAN_SEE_INTO_SHADOWS_DISTANCE)) {
     pcg_random_allowed--;
     return;
   }
@@ -225,7 +228,10 @@ void Level::cursor_path_draw_straight_line(Thingp it, point start, point end)
   dbg("Create cursor draw line %d,%d to %d,%d", start.x, start.y, end.x, end.y);
   TRACE_AND_INDENT();
 
-  if (! get(can_see_ever.can_see, end.x, end.y)) {
+  //
+  // Allow the player to see into the shadows
+  //
+  if (! can_see_point_or_nearby(end, THING_CAN_SEE_INTO_SHADOWS_DISTANCE)) {
     pcg_random_allowed--;
     return;
   }

@@ -122,8 +122,8 @@ void Game::place_player(void)
         level->thing_new("pressure_plate_gas", point(x - 2, y));
         level->thing_new("rat_large", point(x + 1, y + 3));
       }
-      if (0) {
-        level->thing_new("dogman", point(x + 1, y + 3));
+      if (1) {
+        // level->thing_new("dogman", point(x + 1, y + 3));
         level->thing_new("wet_grass1", point(x + 1, y));
         level->thing_new("wet_grass2", point(x + 2, y));
         level->thing_new("wet_grass4", point(x + 3, y));

@@ -118,7 +118,7 @@ void Level::scan(Thingp me, FovMap *fov_curr, FovMap *fov_ever, int pov_x, int p
       // Always call this, even for cells we can see, as a monster may have just walked onto
       // a cell that was empty that we have already seen.
       //
-      me->can_see(point(map_x, map_y));
+      me->can_see_you(point(map_x, map_y));
     }
 
     if (prev_tile_blocked && ! light_blocker) { // Wall -> floor.
@@ -164,7 +164,7 @@ bool Level::fov_calculate(Thingp me, FovMap *fov_curr, FovMap *fov_ever, int pov
 
   set_no_check(fov_curr->can_see, pov_x, pov_y, true);
   set_no_check(fov_ever->can_see, pov_x, pov_y, true);
-  me->can_see(point(pov_x, pov_y));
+  me->can_see_you(point(pov_x, pov_y));
 
   return true;
 }

@@ -98,7 +98,7 @@ bool Thing::possible_to_attack(const Thingp victim)
     //
     // If trapped in an engulfer, you can only attack locally
     //
-    FOR_ALL_COLLISION_THINGS(level, t, curr_at.x, curr_at.y)
+    FOR_ALL_THINGS_THAT_INTERACT(level, t, curr_at.x, curr_at.y)
     {
       if (t == this) {
         continue;
@@ -437,7 +437,7 @@ bool Thing::possible_to_attack_at(point at)
 
   bool ret = false;
 
-  FOR_ALL_COLLISION_THINGS(level, victim, at.x, at.y)
+  FOR_ALL_THINGS_THAT_INTERACT(level, victim, at.x, at.y)
   {
     if (! possible_to_attack(victim)) {
       continue;

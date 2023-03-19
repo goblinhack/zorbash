@@ -326,10 +326,12 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
         continue;
       }
 
+      auto edible = can_eat(t);
+
       //
       // Don't attack things like sewers!
       //
-      if (! t->is_attackable_by_player() && ! t->is_attackable_by_monst()) {
+      if (! t->is_attackable_by_player() && ! t->is_attackable_by_monst() && ! edible) {
         continue;
       }
 
@@ -339,6 +341,10 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
       if (item && item->possible_to_attack(t)) {
         //
         // Sword can attack
+        //
+      } else if (edible) {
+        //
+        // Goat grass attack
         //
       } else if (! possible_to_attack(t)) {
         dbg2("Target-attack-best: %s no, cannot attack", t->to_short_string().c_str());
@@ -368,7 +374,7 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
         }
       }
 
-      if (can_eat(t)) {
+      if (edible) {
         prio += t->nutrition_get();
         dbg2("Target-attack-best: %s monst prio %d eat", t->to_short_string().c_str(), prio);
       } else if (t->is_hittable()) {

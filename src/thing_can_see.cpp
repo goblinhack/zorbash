@@ -7,7 +7,10 @@
 #include "my_monst.hpp"
 #include "my_thing.hpp"
 
-void Thing::can_see(point p)
+//
+// Can it see you?
+//
+void Thing::can_see_you(point p)
 {
   //
   // Record we've been here.
@@ -138,4 +141,23 @@ void Thing::can_see(point p)
     }
   }
   FOR_ALL_THINGS_END()
+}
+
+//
+// Have we ever seen this point? Or is it just out of view?
+//
+bool Level::can_see_point_or_nearby(point p, int dist)
+{
+  for (auto dx = -dist; dx <= dist; dx++) {
+    for (auto dy = -dist; dy <= dist; dy++) {
+      point o(p.x + dx, p.y + dy);
+      if (get(can_see_ever.can_see, o.x, o.y)) {
+        return true;
+      }
+      if (get(can_see_currently.can_see, o.x, o.y)) {
+        return true;
+      }
+    }
+  }
+  return false;
 }

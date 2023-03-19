@@ -5,6 +5,7 @@ import tp
 def tp_init(name, tiles=[]):
     self = tp.Tp(name, "dead grass")
     # begin sort marker
+    my.collision_hit_priority(self, 1)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)
@@ -20,6 +21,8 @@ def tp_init(name, tiles=[]):
     my.is_described_when_hovering_over(self, True)
     my.is_dry_grass(self, True)
     my.is_grass(self, True)
+    my.is_interesting(self, True)
+    my.nutrition_dice(self, "1d2")
     my.temperature_max(self, 50)
     my.temperature_min(self, 0)
     my.temperature_sensitive(self, True)

@@ -5,6 +5,8 @@ import tp
 def on_born(me, x, y):
     my.thing_friend(me, "gnome_thief")
     my.thing_friend(me, "gnome_dwarf")
+    my.thing_friend(me, "gnome_rock")
+    my.thing_friend(me, "gnome_knight")
 
 
 def on_you_nat_att(me, x, y):

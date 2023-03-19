@@ -363,7 +363,7 @@ bool Thing::ai_create_path_to_single_goal_do(int minx, int miny, int maxx, int m
       //
       // Try to move. It might not work and we end up attacking.
       //
-      if (cursor_path_pop_first_move(THING_MOVE_REASON_AI)) {
+      if (player_cursor_path_pop_first_move(THING_MOVE_REASON_AI)) {
         AI_LOG("Successfully popped move");
         return true;
       }

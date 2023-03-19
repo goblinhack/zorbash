@@ -801,7 +801,7 @@ bool Thing::collision_check_and_handle(point future_pos, ThingAttackOptionsp att
     auto dx = x - future_pos.x;
     for (int16_t y = miny; y <= maxy; y++) {
       auto dy = y - future_pos.y;
-      FOR_ALL_COLLISION_THINGS(level, it, x, y)
+      FOR_ALL_THINGS_THAT_INTERACT(level, it, x, y)
       {
         if (this == it) {
           continue;

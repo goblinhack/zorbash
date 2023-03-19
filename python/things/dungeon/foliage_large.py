@@ -6,6 +6,7 @@ def tp_init(name, tiles=[]):
     self = tp.Tp(name, "foliage")
     # begin sort marker
     my.collision_check(self, True)
+    my.collision_hit_priority(self, 1)
     my.collision_hit_priority(self, 3)
     my.gfx_ascii_fg_color_spread_hue(self, 10)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
@@ -35,6 +36,7 @@ def tp_init(name, tiles=[]):
     my.is_interesting(self, True)
     my.is_light_blocker_for_monst(self, True)  # to give cover to the player
     my.noise_blocker(self, True)
+    my.nutrition_dice(self, "1d8")
     my.temperature_max(self, 50)
     my.temperature_min(self, 0)
     my.temperature(self, 20)

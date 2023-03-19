@@ -31,6 +31,10 @@ bool Thing::is_edible(Thingp itp)
     return true;
   if (is_eater_of_meat() && itp->is_meat())
     return true;
+  if (is_eater_of_plants() && itp->is_plant())
+    return true;
+  if (is_eater_of_grass() && itp->is_grass())
+    return true;
   if (is_eater_of_potions() && itp->is_potion())
     return true;
   if (is_eater_of_red_blood() && itp->is_red_blood())
@@ -69,6 +73,10 @@ bool Tp::is_edible(Thingp itp)
   if (is_eater_of_magical_items() && itp->is_magical())
     return true;
   if (is_eater_of_meat() && itp->is_meat())
+    return true;
+  if (is_eater_of_plants() && itp->is_plant())
+    return true;
+  if (is_eater_of_grass() && itp->is_grass())
     return true;
   if (is_eater_of_potions() && itp->is_potion())
     return true;
@@ -133,7 +141,7 @@ bool Thing::eat(Thingp victim)
     return false;
   }
 
-  dbg("Eat %s", victim->text_the().c_str());
+  dbg("Eat %s", victim->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   //
@@ -186,7 +194,7 @@ bool Thing::consume(Thingp victim)
     return false;
   }
 
-  dbg("Consume %s", victim->text_the().c_str());
+  dbg("Consume %s", victim->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   //
@@ -228,7 +236,7 @@ bool Thing::consume(Thingp victim)
       }
       victim->nutrition_decr(bite);
 
-      dbg("Is eating %s", victim->text_the().c_str());
+      dbg("Is eating %s", victim->to_short_string().c_str());
 
       if (! is_player()) {
         if (distance_to_player() < DMAP_IS_PASSABLE) {
@@ -292,7 +300,7 @@ bool Thing::consume(Thingp victim)
         hunger_boost(nutr);
       }
 
-      dbg("Consumes %s", victim->text_the().c_str());
+      dbg("Consumes %s", victim->to_short_string().c_str());
 
       if (! is_player()) {
         if (distance_to_player() < DMAP_IS_PASSABLE) {

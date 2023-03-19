@@ -2,6 +2,10 @@ import my
 import tp
 
 
+def on_born(me, x, y):
+    my.thing_friend(me, "is_goat")
+
+
 def on_you_nat_att(me, x, y):
     sound = f"growl{my.non_pcg_randint(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
@@ -36,7 +40,7 @@ def tp_init(name, text_long_name):
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 2)
     my.distance_avoid(self, 5)
-    my.distance_vision(self, 5)
+    my.distance_vision(self, 7)
     my.dmg_nat_att_dice(self, "1d6+2")
     my.dmg_nat_att_type(self, "rutt")
     my.dmg_received_doubled_from_fire(self, True)
@@ -78,15 +82,16 @@ def tp_init(name, text_long_name):
     my.is_biome_sewer(self, True)
     my.is_biome_swamp(self, True)
     my.is_bleeder(self, True)
-    my.is_cautious(self, True)
     my.is_corpse_on_death(self, True)
     my.is_corpse_with_bones(self, True)
     my.is_crushable(self, True)
+    my.is_daring(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_eater_of_food(self, True)
     my.is_eater_of_grass(self, True)
     my.is_eater_of_plants(self, True)
     my.is_eater_of_red_blood(self, True)
+    my.is_goat(self, True)
     my.is_hittable(self, True)
     my.is_immune_to_poison(self, True)
     my.is_immune_to_water(self, True)
@@ -107,16 +112,19 @@ def tp_init(name, text_long_name):
     my.is_shovable(self, True)
     my.is_tickable(self, True)
     my.jump_distance(self, 2)
-    my.move_speed(self, 200)
+    my.move_speed(self, 150)
     my.noise_decibels_hearing(self, 10)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "1d6")
+    my.on_born_do(self, "me.on_born()")
     my.on_death_do(self, "me.on_death()")
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
     my.on_you_nat_att_do(self, "me.on_you_nat_att()")
     my.rarity(self, my.RARITY_COMMON)  # how rare within this monster class
     my.shove_strength_mod(self, 3)
+    my.spawn_group_radius(self, 5)
+    my.spawn_group_size_dice(self, "1d3+2")
     my.stamina(self, 100)
     my.stat_con(self, 12)
     my.stat_def(self, 10)
