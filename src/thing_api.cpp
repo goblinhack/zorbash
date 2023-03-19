@@ -1151,10 +1151,10 @@ int Thing::is_unused_flag176(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag176());
 }
-int Thing::is_unused_flag177(void)
+int Thing::is_splatter(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag177());
+  return (tp()->is_splatter());
 }
 int Thing::is_unused_flag179(void)
 {

@@ -214,7 +214,7 @@ static int get_escape_char(const char **re)
     default: res = (*re)[ -1 ]; break;
   }
 
-  return (res);
+  return res;
 }
 
 static void anyof(struct slre *r, const char **re)
@@ -590,7 +590,7 @@ static int match(const struct slre *r, int pc, const char *s, int len, int *ofs,
     }
   }
 
-  return (res);
+  return res;
 }
 
 int slre_match(const struct slre *r, const char *buf, int len, struct cap *caps)
@@ -606,7 +606,7 @@ int slre_match(const struct slre *r, const char *buf, int len, struct cap *caps)
     }
   }
 
-  return (res);
+  return res;
 }
 
 #ifdef TEST

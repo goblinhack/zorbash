@@ -140,7 +140,7 @@ PyObject *thing_shoot_at(PyObject *obj, PyObject *args, PyObject *keywds)
   IF_DEBUG { owner->log("Fire %s at %s", item, target->to_short_string().c_str()); }
 
   auto what  = std::string(item);
-  auto itemp = tp_find(what);
+  auto itemp = tp_find_wildcard(what);
   if (! itemp) {
     ERR("%s: Cannot find item to fire %s", __FUNCTION__, item);
     Py_RETURN_NONE;
@@ -394,7 +394,7 @@ PyObject *thing_carry(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  auto tp = tp_find(what);
+  auto tp = tp_find_wildcard(what);
   if (unlikely(! tp)) {
     t->err("Could not find to carry %s", what);
     Py_RETURN_NONE;
@@ -443,7 +443,7 @@ PyObject *thing_enemy(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   bool got_one = false;
-  auto tp      = tp_find(what);
+  auto tp      = tp_find_wildcard(what);
 
   if (tp) {
     t->add_enemy(tp);
@@ -494,7 +494,7 @@ PyObject *thing_friend(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   bool got_one = false;
-  auto tp      = tp_find(what);
+  auto tp      = tp_find_wildcard(what);
   if (tp) {
     t->add_friend(tp);
     got_one = true;
@@ -538,7 +538,7 @@ PyObject *thing_polymorph(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  auto tp = tp_find(into);
+  auto tp = tp_find_wildcard(into);
   if (unlikely(! tp)) {
     ERR("%s: No polymorph into %s found", __FUNCTION__, into);
     Py_RETURN_NONE;
@@ -729,7 +729,7 @@ PyObject *thing_buff_add(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  auto tp = tp_find(what);
+  auto tp = tp_find_wildcard(what);
   if (unlikely(! tp)) {
     ERR("%s: No buff tp called %s found", __FUNCTION__, what);
     Py_RETURN_NONE;
@@ -767,7 +767,7 @@ PyObject *thing_debuff_add(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  auto tp = tp_find(what);
+  auto tp = tp_find_wildcard(what);
   if (unlikely(! tp)) {
     ERR("%s: No debuff tp called %s found", __FUNCTION__, what);
     Py_RETURN_NONE;
@@ -805,7 +805,7 @@ PyObject *thing_buff_remove(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  auto tp = tp_find(what);
+  auto tp = tp_find_wildcard(what);
   if (unlikely(! tp)) {
     ERR("%s: No buff tp called %s found", __FUNCTION__, what);
     Py_RETURN_NONE;
@@ -843,7 +843,7 @@ PyObject *thing_debuff_remove(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  auto tp = tp_find(what);
+  auto tp = tp_find_wildcard(what);
   if (unlikely(! tp)) {
     ERR("%s: No debuff tp called %s found", __FUNCTION__, what);
     Py_RETURN_NONE;

@@ -7454,9 +7454,9 @@ def init_tiles_16x16():
         "door_secret.14",
         "door_secret.15",
         "door_secret.16",
-        "pressure_plate.1",
-        "pressure_plate.2",
-        "pressure_plate.3",
+        "trap.1",
+        "trap.2",
+        "trap.3",
         ############################################################
         "",
         "",

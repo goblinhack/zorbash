@@ -39,17 +39,17 @@ def tp_init(name, text_long_name):
     # end sort marker
 
     my.tile(self,
-            ascii_fg_char="middle_dot", ascii_fg_col_name="brown", tile="pressure_plate.1")
+            ascii_fg_char="middle_dot", ascii_fg_col_name="brown", tile="trap.1")
     my.tile(self,
-            ascii_fg_char="middle_dot", ascii_fg_col_name="brown", tile="pressure_plate.2")
+            ascii_fg_char="middle_dot", ascii_fg_col_name="brown", tile="trap.2")
     my.tile(self,
-            ascii_fg_char="middle_dot", ascii_fg_col_name="brown", tile="pressure_plate.3")
+            ascii_fg_char="middle_dot", ascii_fg_col_name="brown", tile="trap.3")
 
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="pressure_plate_gas", text_long_name="inconspicious floor tile")
+    tp_init(name="trap_pressure_plate_gas", text_long_name="inconspicious floor tile")
 
 
 init()

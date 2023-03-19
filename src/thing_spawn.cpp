@@ -55,7 +55,7 @@ bool Thing::spawn_next_to(const std::string &what)
       point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1), point(-1, 0), point(1, 0), point(0, 1),
   };
 
-  auto tpp = tp_find(what);
+  auto tpp = tp_find_wildcard(what);
   if (unlikely(! tpp)) {
     err("Cannot find %s to spawn", what.c_str());
     return false;
@@ -127,7 +127,7 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
       point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1), point(-1, 0), point(1, 0), point(0, 1),
   };
 
-  auto tpp = tp_find(what);
+  auto tpp = tp_find_wildcard(what);
   if (unlikely(! tpp)) {
     err("Cannot find %s to spawn", what.c_str());
     return false;
@@ -187,7 +187,7 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
 bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &what, int radius_min, int radius_max)
 {
   TRACE_NO_INDENT();
-  auto tpp = tp_find(what);
+  auto tpp = tp_find_wildcard(what);
   if (unlikely(! tpp)) {
     err("Cannot find %s to spawn", what.c_str());
     return false;
@@ -268,7 +268,7 @@ bool Thing::spawn_radius_range(const std::string &what, int radius_min, int radi
 {
   TRACE_NO_INDENT();
 
-  auto tpp = tp_find(what);
+  auto tpp = tp_find_wildcard(what);
   if (unlikely(! tpp)) {
     err("Cannot find %s to spawn", what.c_str());
     return false;
@@ -322,7 +322,7 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, i
 {
   TRACE_NO_INDENT();
 
-  auto tpp = tp_find(what);
+  auto tpp = tp_find_wildcard(what);
   if (unlikely(! tpp)) {
     err("Cannot find %s to spawn", what.c_str());
     return false;

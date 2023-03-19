@@ -628,6 +628,7 @@ int Tp::is_snake(void) const { return _is_snake; }
 int Tp::is_soft(void) const { return _is_soft; }
 int Tp::is_spider(void) const { return _is_spider; }
 int Tp::is_spiderweb(void) const { return _is_spiderweb; }
+int Tp::is_splatter(void) const { return _is_splatter; }
 int Tp::is_staff(void) const { return _is_staff; }
 int Tp::is_steam(void) const { return _is_steam; }
 int Tp::is_sticky(void) const { return _is_sticky; }
@@ -738,7 +739,6 @@ int Tp::is_unused_flag173(void) const { return _is_unused_flag173; }
 int Tp::is_unused_flag174(void) const { return _is_unused_flag174; }
 int Tp::is_unused_flag175(void) const { return _is_unused_flag175; }
 int Tp::is_unused_flag176(void) const { return _is_unused_flag176; }
-int Tp::is_unused_flag177(void) const { return _is_unused_flag177; }
 int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
 int Tp::is_unused_flag17(void) const { return _is_unused_flag17; }
 int Tp::is_unused_flag18(void) const { return _is_unused_flag18; }
@@ -1368,6 +1368,7 @@ void Tp::is_snake_set(int v) { _is_snake = v; }
 void Tp::is_soft_set(int v) { _is_soft = v; }
 void Tp::is_spider_set(int v) { _is_spider = v; }
 void Tp::is_spiderweb_set(int v) { _is_spiderweb = v; }
+void Tp::is_splatter_set(int v) { _is_splatter = v; }
 void Tp::is_staff_set(int v) { _is_staff = v; }
 void Tp::is_steam_set(int v) { _is_steam = v; }
 void Tp::is_sticky_set(int v) { _is_sticky = v; }
@@ -1478,7 +1479,6 @@ void Tp::is_unused_flag173_set(int v) { _is_unused_flag173 = v; }
 void Tp::is_unused_flag174_set(int v) { _is_unused_flag174 = v; }
 void Tp::is_unused_flag175_set(int v) { _is_unused_flag175 = v; }
 void Tp::is_unused_flag176_set(int v) { _is_unused_flag176 = v; }
-void Tp::is_unused_flag177_set(int v) { _is_unused_flag177 = v; }
 void Tp::is_unused_flag179_set(int v) { _is_unused_flag179 = v; }
 void Tp::is_unused_flag17_set(int v) { _is_unused_flag17 = v; }
 void Tp::is_unused_flag18_set(int v) { _is_unused_flag18 = v; }

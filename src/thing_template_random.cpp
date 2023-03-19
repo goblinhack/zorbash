@@ -33,6 +33,11 @@ static Tpidmap tp_green_splatter;
 static Tpidmap tp_item_class_A;
 static Tpidmap tp_item_class_B;
 static Tpidmap tp_item_class_C;
+static Tpidmap tp_monst_class_A;
+static Tpidmap tp_monst_class_B;
+static Tpidmap tp_monst_class_C;
+static Tpidmap tp_monst_class_D;
+static Tpidmap tp_monst_class_E;
 static Tpidmap tp_item_not_a_container_class_A;
 static Tpidmap tp_item_not_a_container_class_B;
 static Tpidmap tp_item_not_a_container_class_C;
@@ -179,6 +184,24 @@ void tp_random_init(void)
       tp_treasure.push_back(tp);
     }
 
+    if (! tp->is_minion()) {
+      if (tp->is_monst_class_A()) {
+        tp_monst_class_A.push_back(tp);
+      }
+      if (tp->is_monst_class_B()) {
+        tp_monst_class_B.push_back(tp);
+      }
+      if (tp->is_monst_class_C()) {
+        tp_monst_class_C.push_back(tp);
+      }
+      if (tp->is_monst_class_D()) {
+        tp_monst_class_D.push_back(tp);
+      }
+      if (tp->is_monst_class_E()) {
+        tp_monst_class_E.push_back(tp);
+      }
+    }
+
     //
     // Keep bags and treasure chests seperate so we don't end up with
     // chests containing chests forever
@@ -308,178 +331,193 @@ void tp_random_init(void)
   }
 
   if (tp_ascend_dungeon.empty()) {
-    DIE("No things for type:tp_ascend_dungeon.empty");
+    DIE("No things for type:tp_ascend_dungeon");
   }
   if (tp_ascend_sewer.empty()) {
-    DIE("No things for type:tp_ascend_sewer.empty");
+    DIE("No things for type:tp_ascend_sewer");
   }
   if (tp_barrel.empty()) {
-    DIE("No things for type:tp_barrel.empty");
+    DIE("No things for type:tp_barrel");
   }
   if (tp_red_blood.empty()) {
-    DIE("No things for type:tp_red_blood.empty");
+    DIE("No things for type:tp_red_blood");
   }
   if (tp_green_blood.empty()) {
-    DIE("No things for type:tp_green_blood.empty");
+    DIE("No things for type:tp_green_blood");
   }
   if (tp_red_splatter.empty()) {
-    DIE("No things for type:tp_red_splatter.empty");
+    DIE("No things for type:tp_red_splatter");
   }
   if (tp_bones.empty()) {
-    DIE("No things for type:tp_bones.empty");
+    DIE("No things for type:tp_bones");
   }
   if (tp_brazier.empty()) {
-    DIE("No things for type:tp_brazier.empty");
+    DIE("No things for type:tp_brazier");
   }
   if (tp_deco.empty()) {
-    DIE("No things for type:tp_deco.empty");
+    DIE("No things for type:tp_deco");
   }
   if (tp_descend_dungeon.empty()) {
-    DIE("No things for type:tp_descend_dungeon.empty");
+    DIE("No things for type:tp_descend_dungeon");
   }
   if (tp_descend_sewer.empty()) {
-    DIE("No things for type:tp_descend_sewer.empty");
+    DIE("No things for type:tp_descend_sewer");
   }
   if (tp_dirt.empty()) {
-    DIE("No things for type:tp_dirt.empty");
+    DIE("No things for type:tp_dirt");
   }
   if (tp_door.empty()) {
-    DIE("No things for type:tp_door.empty");
+    DIE("No things for type:tp_door");
   }
   if (tp_dry_grass.empty()) {
-    DIE("No things for type:tp_dry_grass.empty");
+    DIE("No things for type:tp_dry_grass");
   }
   if (tp_wet_grass.empty()) {
-    DIE("No things for type:tp_wet_grass.empty");
+    DIE("No things for type:tp_wet_grass");
   }
   if (tp_enchantstone.empty()) {
-    DIE("No things for type:tp_enchantstone.empty");
+    DIE("No things for type:tp_enchantstone");
   }
   if (tp_ethereal_mob.empty()) {
-    DIE("No things for type:tp_ethereal_mob.empty");
+    DIE("No things for type:tp_ethereal_mob");
   }
   if (tp_floor.empty()) {
-    DIE("No things for type:tp_floor.empty");
+    DIE("No things for type:tp_floor");
   }
   if (tp_foliage.empty()) {
-    DIE("No things for type:tp_foliage.empty");
+    DIE("No things for type:tp_foliage");
   }
   if (tp_food.empty()) {
-    DIE("No things for type:tp_food.empty");
+    DIE("No things for type:tp_food");
   }
   if (tp_mob.empty()) {
-    DIE("No things for type:tp_mob.empty");
+    DIE("No things for type:tp_mob");
   }
   if (tp_trap.empty()) {
-    DIE("No things for type:tp_trap.empty");
+    DIE("No things for type:tp_trap");
   }
   if (tp_gold.empty()) {
-    DIE("No things for type:tp_gold.empty");
+    DIE("No things for type:tp_gold");
   }
   if (tp_green_splatter.empty()) {
-    DIE("No things for type:tp_green_splatter.empty");
+    DIE("No things for type:tp_green_splatter");
   }
   if (tp_item_class_A.empty()) {
-    DIE("No things for type:tp_item_class_A.empty");
+    DIE("No things for type:tp_item_class_A");
   }
   if (tp_item_class_B.empty()) {
-    DIE("No things for type:tp_item_class_B.empty");
+    DIE("No things for type:tp_item_class_B");
   }
   if (tp_item_class_C.empty()) {
-    DIE("No things for type:tp_item_class_C.empty");
+    DIE("No things for type:tp_item_class_C");
+  }
+  if (tp_monst_class_A.empty()) {
+    DIE("No things for type:tp_monst_class_A");
+  }
+  if (tp_monst_class_B.empty()) {
+    DIE("No things for type:tp_monst_class_B");
+  }
+  if (tp_monst_class_C.empty()) {
+    DIE("No things for type:tp_monst_class_C");
+  }
+  if (tp_monst_class_D.empty()) {
+    DIE("No things for type:tp_monst_class_D");
+  }
+  if (tp_monst_class_E.empty()) {
+    DIE("No things for type:tp_monst_class_E");
   }
   if (tp_item_not_a_container_class_A.empty()) {
-    DIE("No things for type:tp_item_not_a_container_class_A.empty");
+    DIE("No things for type:tp_item_not_a_container_class_A");
   }
   if (tp_item_not_a_container_class_B.empty()) {
-    DIE("No things for type:tp_item_not_a_container_class_B.empty");
+    DIE("No things for type:tp_item_not_a_container_class_B");
   }
   if (tp_item_not_a_container_class_C.empty()) {
-    DIE("No things for type:tp_item_not_a_container_class_C.empty");
+    DIE("No things for type:tp_item_not_a_container_class_C");
   }
   if (tp_key.empty()) {
-    DIE("No things for type:tp_key.empty");
+    DIE("No things for type:tp_key");
   }
   if (tp_potion.empty()) {
-    DIE("No things for type:tp_potion.empty");
+    DIE("No things for type:tp_potion");
   }
   if (tp_ring.empty()) {
-    DIE("No things for type:tp_ring.empty");
+    DIE("No things for type:tp_ring");
   }
   if (tp_ring_class_A.empty()) {
-    DIE("No things for type:tp_ring_class_A.empty");
+    DIE("No things for type:tp_ring_class_A");
   }
   if (tp_ring_class_B.empty()) {
-    DIE("No things for type:tp_ring_class_B.empty");
+    DIE("No things for type:tp_ring_class_B");
   }
   if (tp_ring_class_C.empty()) {
-    DIE("No things for type:tp_ring_class_C.empty");
+    DIE("No things for type:tp_ring_class_C");
   }
   if (tp_small_ripples.empty()) {
-    DIE("No things for type:tp_small_ripples.empty");
+    DIE("No things for type:tp_small_ripples");
   }
   if (tp_large_ripples.empty()) {
-    DIE("No things for type:tp_large_ripples.empty");
+    DIE("No things for type:tp_large_ripples");
   }
   if (tp_rock.empty()) {
-    DIE("No things for type:tp_rock.empty");
+    DIE("No things for type:tp_rock");
   }
   if (tp_secret_door.empty()) {
-    DIE("No things for type:tp_secret_door.empty");
+    DIE("No things for type:tp_secret_door");
   }
   if (tp_sewer_wall.empty()) {
-    DIE("No things for type:tp_sewer_wall.empty");
+    DIE("No things for type:tp_sewer_wall");
   }
   if (tp_skills.empty()) {
-    DIE("No things for type:tp_skills.empty");
+    DIE("No things for type:tp_skills");
   }
   if (tp_skillstone.empty()) {
-    DIE("No things for type:tp_skillstone.empty");
+    DIE("No things for type:tp_skillstone");
   }
   if (tp_spiderweb.empty()) {
-    DIE("No things for type:tp_spiderweb.empty");
+    DIE("No things for type:tp_spiderweb");
   }
   if (tp_portal.empty()) {
-    DIE("No things for type:tp_portal.empty");
+    DIE("No things for type:tp_portal");
   }
   if (tp_treasure.empty()) {
-    DIE("No things for type:tp_treasure.empty");
+    DIE("No things for type:tp_treasure");
   }
   if (tp_wall_dungeon.empty()) {
-    DIE("No things for type:tp_wall_dungeon.empty");
+    DIE("No things for type:tp_wall_dungeon");
   }
   if (tp_staff.empty()) {
-    DIE("No things for type:tp_staff.empty");
+    DIE("No things for type:tp_staff");
   }
   if (tp_staff_class_A.empty()) {
-    DIE("No things for type:tp_staff_class_A.empty");
+    DIE("No things for type:tp_staff_class_A");
   }
   if (tp_staff_class_B.empty()) {
-    DIE("No things for type:tp_staff_class_B.empty");
+    DIE("No things for type:tp_staff_class_B");
   }
   if (tp_staff_class_C.empty()) {
-    DIE("No things for type:tp_staff_class_C.empty");
+    DIE("No things for type:tp_staff_class_C");
   }
   if (tp_weapon.empty()) {
-    DIE("No things for type:tp_weapon.empty");
+    DIE("No things for type:tp_weapon");
   }
   if (tp_weapon_class_A.empty()) {
-    DIE("No things for type:tp_weapon_class_A.empty");
+    DIE("No things for type:tp_weapon_class_A");
   }
   if (tp_weapon_class_B.empty()) {
-    DIE("No things for type:tp_weapon_class_B.empty");
+    DIE("No things for type:tp_weapon_class_B");
   }
   if (tp_weapon_class_C.empty()) {
-    DIE("No things for type:tp_weapon_class_C.empty");
+    DIE("No things for type:tp_weapon_class_C");
   }
   if (tp_treasure_class_A.empty()) {
-    DIE("No things for type:tp_treasure_class_A.empty");
+    DIE("No things for type:tp_treasure_class_A");
   }
   if (tp_treasure_class_B.empty()) {
-    DIE("No things for type:tp_treasure_class_B.empty");
+    DIE("No things for type:tp_treasure_class_B");
   }
   if (tp_treasure_class_C.empty()) {
-    DIE("No things for type:tp_treasure_class_C.empty");
+    DIE("No things for type:tp_treasure_class_C");
   }
 }
 
@@ -620,6 +658,52 @@ Tpp tp_random_item_class_C(void)
     return tp_random_item_class_B();
   }
   return tp_get_with_rarity_filter(tp_item_class_C);
+}
+
+Tpp tp_random_monst_class_A(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_monst_class_A.size())) {
+    ERR("No monst_class_A found");
+    return nullptr;
+  }
+  return tp_get_with_rarity_filter(tp_monst_class_A);
+}
+
+Tpp tp_random_monst_class_B(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_monst_class_B.size())) {
+    return tp_random_monst_class_A();
+  }
+  return tp_get_with_rarity_filter(tp_monst_class_B);
+}
+
+Tpp tp_random_monst_class_C(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_monst_class_C.size())) {
+    return tp_random_monst_class_B();
+  }
+  return tp_get_with_rarity_filter(tp_monst_class_C);
+}
+
+Tpp tp_random_monst_class_D(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_monst_class_D.size())) {
+    return tp_random_monst_class_C();
+  }
+  return tp_get_with_rarity_filter(tp_monst_class_D);
+}
+
+Tpp tp_random_monst_class_E(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_monst_class_E.size())) {
+    return tp_random_monst_class_D();
+  }
+  return tp_get_with_rarity_filter(tp_monst_class_E);
 }
 
 Tpp tp_random_item_not_a_container_class_A(void)

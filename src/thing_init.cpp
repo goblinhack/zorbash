@@ -81,7 +81,7 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
     DIE("Thing template cannot be created: No name given");
   }
 
-  const auto tpp = tp_find(name);
+  const auto tpp = tp_find_wildcard(name);
   if (unlikely(! tpp)) {
     ERR("Thing template [%s] not found", name.c_str());
     return;
@@ -111,7 +111,8 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   //
   TRACE_NO_INDENT();
   if (gfx_pixelart_attack_anim() || is_buff() || is_debuff() || is_msg() || is_player() || is_monst() || is_item() ||
-      is_cursor() || is_laser() || is_projectile() || is_weapon() || is_fire() || is_magical_effect()) {
+      is_splatter() || is_cursor() || is_laser() || is_projectile() || is_weapon() || is_fire() ||
+      is_magical_effect()) {
     new_infop();
 
     //

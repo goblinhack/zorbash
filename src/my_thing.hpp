@@ -1598,6 +1598,7 @@ public:
   int is_soft(void);
   int is_spider(void);
   int is_spiderweb(void);
+  int is_splatter(void);
   int is_staff(void);
   int is_steam(void);
   int is_sticky(void);
@@ -1707,7 +1708,6 @@ public:
   int is_unused_flag174(void);
   int is_unused_flag175(void);
   int is_unused_flag176(void);
-  int is_unused_flag177(void);
   int is_unused_flag179(void);
   int is_unused_flag17(void);
   int is_unused_flag18(void);

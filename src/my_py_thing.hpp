@@ -455,6 +455,7 @@ PyObject *thing_is_snake(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_soft(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spider(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spiderweb(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_splatter(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_staff(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_steam(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_sticky(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -561,7 +562,6 @@ PyObject *thing_is_unused_flag173(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag174(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag175(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag176(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag177(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag179(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag17(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag18(PyObject *obj, PyObject *args, PyObject *keywds);

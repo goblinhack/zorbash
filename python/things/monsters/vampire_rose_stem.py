@@ -148,8 +148,8 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="vampire_rose_stem1", text_long_name="vampire rose stem", text_short_name="vamp rose stem")
-    tp_init(name="vampire_rose_stem2", text_long_name="vampire rose stem", text_short_name="vamp rose stem")
+    tp_init(name="vampire_rose_stem1", text_long_name="vampire rose stem", text_short_name="vampire rose stem")
+    tp_init(name="vampire_rose_stem2", text_long_name="vampire rose stem", text_short_name="vampire rose stem")
 
 
 init()

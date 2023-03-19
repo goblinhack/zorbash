@@ -1,7 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- if set on fire, remember who didit?                                                                                                          -->
-<!-- did not collect shield                                                                                                                       -->
+<!-- goat lord?                                                                                                                                   -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -238,8 +238,8 @@ Content:
 - 3 x mobs
 - 3 x doors
 - 3 x cloaks
+- 2 x traps
 - 2 x potions
-- 1 x traps
 - 1 x player
 <!-- end type marker -->
 

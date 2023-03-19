@@ -381,7 +381,7 @@ void tp_assign_allies(void)
   for (auto &tp : tp_id_map) {
     auto allies = tp->is_allied_with();
     for (auto ally : split_tokens(allies, ',')) {
-      auto tp2 = tp_find(ally);
+      auto tp2 = tp_find_wildcard(ally);
       if (! tp2) {
         DIE("Tp %s ally not found: %s", tp->name().c_str(), ally.c_str());
       }

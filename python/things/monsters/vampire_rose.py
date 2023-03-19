@@ -141,7 +141,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="vampire_rose", text_long_name="vampire rose", text_short_name="vamp rose")
+    tp_init(name="vampire_rose", text_long_name="vampire rose", text_short_name="vampire rose")
 
 
 init()

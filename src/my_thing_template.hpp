@@ -550,6 +550,7 @@ private:
   int _is_soft {};
   int _is_spider {};
   int _is_spiderweb {};
+  int _is_splatter {};
   int _is_staff {};
   int _is_steam {};
   int _is_sticky {};
@@ -662,7 +663,6 @@ private:
   int _is_unused_flag174 {};
   int _is_unused_flag175 {};
   int _is_unused_flag176 {};
-  int _is_unused_flag177 {};
   int _is_unused_flag179 {};
   int _is_unused_flag18 {};
   int _is_unused_flag19 {};
@@ -1835,6 +1835,7 @@ public:
   int is_soft(void) const;
   int is_spider(void) const;
   int is_spiderweb(void) const;
+  int is_splatter(void) const;
   int is_staff(void) const;
   int is_steam(void) const;
   int is_sticky(void) const;
@@ -1945,7 +1946,6 @@ public:
   int is_unused_flag174(void) const;
   int is_unused_flag175(void) const;
   int is_unused_flag176(void) const;
-  int is_unused_flag177(void) const;
   int is_unused_flag179(void) const;
   int is_unused_flag17(void) const;
   int is_unused_flag18(void) const;
@@ -2575,6 +2575,7 @@ public:
   void is_soft_set(int v);
   void is_spider_set(int v);
   void is_spiderweb_set(int v);
+  void is_splatter_set(int v);
   void is_staff_set(int v);
   void is_steam_set(int v);
   void is_sticky_set(int v);
@@ -2685,7 +2686,6 @@ public:
   void is_unused_flag174_set(int v);
   void is_unused_flag175_set(int v);
   void is_unused_flag176_set(int v);
-  void is_unused_flag177_set(int v);
   void is_unused_flag179_set(int v);
   void is_unused_flag17_set(int v);
   void is_unused_flag18_set(int v);
@@ -3057,6 +3057,7 @@ class Tp *string2tp(const char **s);
 class Tp *string2tp(const std::string &s, int *len);
 class Tp *string2tp(const std::wstring &s, int *len);
 class Tp *tp_find(const std::string &name);
+class Tp *tp_find_wildcard(const std::string &name);
 class Tp *tp_find(uint32_t id);
 class Tp *tp_load(int id, const std::string &file, const std::string &long_name, const std::string &sh_name);
 class Tp *tp_random_ascend_dungeon(void);
@@ -3081,6 +3082,11 @@ class Tp *tp_random_green_splatter(void);
 class Tp *tp_random_item_class_A(void);
 class Tp *tp_random_item_class_B(void);
 class Tp *tp_random_item_class_C(void);
+class Tp *tp_random_monst_class_A(void);
+class Tp *tp_random_monst_class_B(void);
+class Tp *tp_random_monst_class_C(void);
+class Tp *tp_random_monst_class_D(void);
+class Tp *tp_random_monst_class_E(void);
 class Tp *tp_random_item_not_a_container_class_A(void);
 class Tp *tp_random_item_not_a_container_class_B(void);
 class Tp *tp_random_item_not_a_container_class_C(void);
