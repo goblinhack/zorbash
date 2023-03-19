@@ -757,11 +757,7 @@ void Game::wid_thing_info_add_health(WidPopup *w, Thingp t)
   if (t->is_alive_monst() || t->is_player()) {
     int pct = (((((float) t->health()) / (float) t->health_max())) * 100.0);
 
-    if (t->health() == t->health_max()) {
-      snprintf(tmp2, sizeof(tmp2) - 1, "%d/%d%%", t->health(), pct);
-    } else {
-      snprintf(tmp2, sizeof(tmp2) - 1, "(%d/%d)%d%%", t->health(), t->health_max(), pct);
-    }
+    snprintf(tmp2, sizeof(tmp2) - 1, "%d,%d%%", t->health(), pct);
 
     if (pct < 25) {
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=red$Health        %15s", tmp2);
