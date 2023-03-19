@@ -205,4 +205,3 @@ int Thing::is_eater_of_foliage(void)
   TRACE_NO_INDENT();
   return (tp()->is_eater_of_foliage());
 }
-

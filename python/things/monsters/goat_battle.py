@@ -159,6 +159,51 @@ def tp_init(name, text_long_name):
             tile="goat_battle.3", delay_ms=delay)
     my.tile(self,
             ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="goat_battle.1", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="goat_battle.2", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="goat_battle.3", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="goat_battle.1", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="goat_battle.2", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="goat_battle.3", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="goat_battle.1", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="goat_battle.2", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="goat_battle.3", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="goat_battle.1", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="goat_battle.2", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="goat_battle.3", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="goat_battle.1", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="goat_battle.2", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="goat_battle.3", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile="goat_battle.4", delay_ms=delay)
     my.tile(self,
             ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="white",
