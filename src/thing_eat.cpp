@@ -33,6 +33,8 @@ bool Thing::is_edible(Thingp itp)
     return true;
   if (is_eater_of_plants() && itp->is_plant())
     return true;
+  if (is_eater_of_foliage() && itp->is_foliage())
+    return true;
   if (is_eater_of_grass() && itp->is_grass())
     return true;
   if (is_eater_of_potions() && itp->is_potion())
@@ -75,6 +77,8 @@ bool Tp::is_edible(Thingp itp)
   if (is_eater_of_meat() && itp->is_meat())
     return true;
   if (is_eater_of_plants() && itp->is_plant())
+    return true;
+  if (is_eater_of_foliage() && itp->is_foliage())
     return true;
   if (is_eater_of_grass() && itp->is_grass())
     return true;

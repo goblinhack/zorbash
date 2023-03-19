@@ -463,6 +463,7 @@ int Tp::is_eater_of_amulets(void) const { return _is_eater_of_amulets; }
 int Tp::is_eater_of_armor(void) const { return _is_eater_of_armor; }
 int Tp::is_eater_of_boots(void) const { return _is_eater_of_boots; }
 int Tp::is_eater_of_cloaks(void) const { return _is_eater_of_cloaks; }
+int Tp::is_eater_of_foliage(void) const { return _is_eater_of_foliage; }
 int Tp::is_eater_of_food(void) const { return _is_eater_of_food; }
 int Tp::is_eater_of_gauntlets(void) const { return _is_eater_of_gauntlets; }
 int Tp::is_eater_of_grass(void) const { return _is_eater_of_grass; }
@@ -738,7 +739,6 @@ int Tp::is_unused_flag174(void) const { return _is_unused_flag174; }
 int Tp::is_unused_flag175(void) const { return _is_unused_flag175; }
 int Tp::is_unused_flag176(void) const { return _is_unused_flag176; }
 int Tp::is_unused_flag177(void) const { return _is_unused_flag177; }
-int Tp::is_unused_flag178(void) const { return _is_unused_flag178; }
 int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
 int Tp::is_unused_flag17(void) const { return _is_unused_flag17; }
 int Tp::is_unused_flag18(void) const { return _is_unused_flag18; }
@@ -1203,6 +1203,7 @@ void Tp::is_eater_of_amulets_set(int v) { _is_eater_of_amulets = v; }
 void Tp::is_eater_of_armor_set(int v) { _is_eater_of_armor = v; }
 void Tp::is_eater_of_boots_set(int v) { _is_eater_of_boots = v; }
 void Tp::is_eater_of_cloaks_set(int v) { _is_eater_of_cloaks = v; }
+void Tp::is_eater_of_foliage_set(int v) { _is_eater_of_foliage = v; }
 void Tp::is_eater_of_food_set(int v) { _is_eater_of_food = v; }
 void Tp::is_eater_of_gauntlets_set(int v) { _is_eater_of_gauntlets = v; }
 void Tp::is_eater_of_grass_set(int v) { _is_eater_of_grass = v; }
@@ -1478,7 +1479,6 @@ void Tp::is_unused_flag174_set(int v) { _is_unused_flag174 = v; }
 void Tp::is_unused_flag175_set(int v) { _is_unused_flag175 = v; }
 void Tp::is_unused_flag176_set(int v) { _is_unused_flag176 = v; }
 void Tp::is_unused_flag177_set(int v) { _is_unused_flag177 = v; }
-void Tp::is_unused_flag178_set(int v) { _is_unused_flag178 = v; }
 void Tp::is_unused_flag179_set(int v) { _is_unused_flag179 = v; }
 void Tp::is_unused_flag17_set(int v) { _is_unused_flag17 = v; }
 void Tp::is_unused_flag18_set(int v) { _is_unused_flag18 = v; }

@@ -289,6 +289,7 @@ PyObject *thing_is_eater_of_amulets(PyObject *obj, PyObject *args, PyObject *key
 PyObject *thing_is_eater_of_armor(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_eater_of_boots(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_eater_of_cloaks(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_eater_of_foliage(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_eater_of_food(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_eater_of_gauntlets(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_eater_of_grass(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -561,7 +562,6 @@ PyObject *thing_is_unused_flag174(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag175(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag176(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag177(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag178(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag179(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag17(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag18(PyObject *obj, PyObject *args, PyObject *keywds);

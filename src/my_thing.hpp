@@ -1431,6 +1431,7 @@ public:
   int is_eater_of_armor(void);
   int is_eater_of_boots(void);
   int is_eater_of_cloaks(void);
+  int is_eater_of_foliage(void);
   int is_eater_of_food(void);
   int is_eater_of_gauntlets(void);
   int is_eater_of_grass(void);
@@ -1707,7 +1708,6 @@ public:
   int is_unused_flag175(void);
   int is_unused_flag176(void);
   int is_unused_flag177(void);
-  int is_unused_flag178(void);
   int is_unused_flag179(void);
   int is_unused_flag17(void);
   int is_unused_flag18(void);

@@ -384,6 +384,7 @@ private:
   int _is_eater_of_armor {};
   int _is_eater_of_boots {};
   int _is_eater_of_cloaks {};
+  int _is_eater_of_foliage {};
   int _is_eater_of_food {};
   int _is_eater_of_gauntlets {};
   int _is_eater_of_grass {};
@@ -662,7 +663,6 @@ private:
   int _is_unused_flag175 {};
   int _is_unused_flag176 {};
   int _is_unused_flag177 {};
-  int _is_unused_flag178 {};
   int _is_unused_flag179 {};
   int _is_unused_flag18 {};
   int _is_unused_flag19 {};
@@ -1670,6 +1670,7 @@ public:
   int is_eater_of_armor(void) const;
   int is_eater_of_boots(void) const;
   int is_eater_of_cloaks(void) const;
+  int is_eater_of_foliage(void) const;
   int is_eater_of_food(void) const;
   int is_eater_of_gauntlets(void) const;
   int is_eater_of_grass(void) const;
@@ -1945,7 +1946,6 @@ public:
   int is_unused_flag175(void) const;
   int is_unused_flag176(void) const;
   int is_unused_flag177(void) const;
-  int is_unused_flag178(void) const;
   int is_unused_flag179(void) const;
   int is_unused_flag17(void) const;
   int is_unused_flag18(void) const;
@@ -2410,6 +2410,7 @@ public:
   void is_eater_of_armor_set(int v);
   void is_eater_of_boots_set(int v);
   void is_eater_of_cloaks_set(int v);
+  void is_eater_of_foliage_set(int v);
   void is_eater_of_food_set(int v);
   void is_eater_of_gauntlets_set(int v);
   void is_eater_of_grass_set(int v);
@@ -2685,7 +2686,6 @@ public:
   void is_unused_flag175_set(int v);
   void is_unused_flag176_set(int v);
   void is_unused_flag177_set(int v);
-  void is_unused_flag178_set(int v);
   void is_unused_flag179_set(int v);
   void is_unused_flag17_set(int v);
   void is_unused_flag18_set(int v);

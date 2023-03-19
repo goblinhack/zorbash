@@ -190,6 +190,7 @@ bool Tp::matches(const std::string &what)
   if (is_eater_of_armor() && (what == "is_eater_of_armor")) { return true; }
   if (is_eater_of_boots() && (what == "is_eater_of_boots")) { return true; }
   if (is_eater_of_cloaks() && (what == "is_eater_of_cloaks")) { return true; }
+  if (is_eater_of_foliage() && (what == "is_eater_of_foliage")) { return true; }
   if (is_eater_of_food() && (what == "is_eater_of_food")) { return true; }
   if (is_eater_of_gauntlets() && (what == "is_eater_of_gauntlets")) { return true; }
   if (is_eater_of_grass() && (what == "is_eater_of_grass")) { return true; }
@@ -459,7 +460,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag175() && (what == "is_unused_flag175")) { return true; }
   if (is_unused_flag176() && (what == "is_unused_flag176")) { return true; }
   if (is_unused_flag177() && (what == "is_unused_flag177")) { return true; }
-  if (is_unused_flag178() && (what == "is_unused_flag178")) { return true; }
   if (is_unused_flag179() && (what == "is_unused_flag179")) { return true; }
   if (is_unused_flag17() && (what == "is_unused_flag17")) { return true; }
   if (is_unused_flag18() && (what == "is_unused_flag18")) { return true; }
@@ -786,6 +786,7 @@ bool Thing::matches(const std::string &what)
   if (is_eater_of_armor() && (what == "is_eater_of_armor")) { return true; }
   if (is_eater_of_boots() && (what == "is_eater_of_boots")) { return true; }
   if (is_eater_of_cloaks() && (what == "is_eater_of_cloaks")) { return true; }
+  if (is_eater_of_foliage() && (what == "is_eater_of_foliage")) { return true; }
   if (is_eater_of_food() && (what == "is_eater_of_food")) { return true; }
   if (is_eater_of_gauntlets() && (what == "is_eater_of_gauntlets")) { return true; }
   if (is_eater_of_grass() && (what == "is_eater_of_grass")) { return true; }
@@ -1055,7 +1056,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag175() && (what == "is_unused_flag175")) { return true; }
   if (is_unused_flag176() && (what == "is_unused_flag176")) { return true; }
   if (is_unused_flag177() && (what == "is_unused_flag177")) { return true; }
-  if (is_unused_flag178() && (what == "is_unused_flag178")) { return true; }
   if (is_unused_flag179() && (what == "is_unused_flag179")) { return true; }
   if (is_unused_flag17() && (what == "is_unused_flag17")) { return true; }
   if (is_unused_flag18() && (what == "is_unused_flag18")) { return true; }
@@ -1375,6 +1375,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_eater_of_armor") { return &Thing::is_eater_of_armor; }
   if (what == "is_eater_of_boots") { return &Thing::is_eater_of_boots; }
   if (what == "is_eater_of_cloaks") { return &Thing::is_eater_of_cloaks; }
+  if (what == "is_eater_of_foliage") { return &Thing::is_eater_of_foliage; }
   if (what == "is_eater_of_food") { return &Thing::is_eater_of_food; }
   if (what == "is_eater_of_gauntlets") { return &Thing::is_eater_of_gauntlets; }
   if (what == "is_eater_of_grass") { return &Thing::is_eater_of_grass; }
@@ -1641,7 +1642,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag175") { return &Thing::is_unused_flag175; }
   if (what == "is_unused_flag176") { return &Thing::is_unused_flag176; }
   if (what == "is_unused_flag177") { return &Thing::is_unused_flag177; }
-  if (what == "is_unused_flag178") { return &Thing::is_unused_flag178; }
   if (what == "is_unused_flag179") { return &Thing::is_unused_flag179; }
   if (what == "is_unused_flag17") { return &Thing::is_unused_flag17; }
   if (what == "is_unused_flag18") { return &Thing::is_unused_flag18; }

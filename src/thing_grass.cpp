@@ -181,3 +181,28 @@ int Thing::is_wet_grass(void)
   TRACE_NO_INDENT();
   return (tp()->is_wet_grass());
 }
+
+int Thing::is_grass(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_grass());
+}
+
+int Thing::is_eater_of_grass(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_eater_of_grass());
+}
+
+int Thing::is_foliage(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_foliage());
+}
+
+int Thing::is_eater_of_foliage(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_eater_of_foliage());
+}
+

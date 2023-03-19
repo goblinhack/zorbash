@@ -1156,11 +1156,6 @@ int Thing::is_unused_flag177(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag177());
 }
-int Thing::is_unused_flag178(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_unused_flag178());
-}
 int Thing::is_unused_flag179(void)
 {
   TRACE_NO_INDENT();
@@ -1170,21 +1165,6 @@ int Thing::is_goat(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_goat());
-}
-int Thing::is_grass(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_grass());
-}
-int Thing::is_eater_of_grass(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_eater_of_grass());
-}
-int Thing::is_eater_of_plants(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_eater_of_plants());
 }
 int Thing::is_pressure_plate(void)
 {
@@ -1810,12 +1790,6 @@ int Thing::is_floor(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_floor());
-}
-
-int Thing::is_foliage(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_foliage());
 }
 
 int Thing::is_eater_of_food(void)
@@ -2556,22 +2530,10 @@ int Thing::is_gelatinous(void)
   return (tp()->is_gelatinous());
 }
 
-int Thing::is_plant(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_plant());
-}
-
 int Thing::is_steam(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_steam());
-}
-
-int Thing::is_carnivorous_plant(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_carnivorous_plant());
 }
 
 int Thing::is_basalt(void)

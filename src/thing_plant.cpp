@@ -47,3 +47,21 @@ void Thing::plant_tick(void)
     FOR_ALL_THINGS_END()
   }
 }
+
+int Thing::is_plant(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_plant());
+}
+
+int Thing::is_carnivorous_plant(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_carnivorous_plant());
+}
+
+int Thing::is_eater_of_plants(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_eater_of_plants());
+}
