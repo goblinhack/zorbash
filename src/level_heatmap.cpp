@@ -68,8 +68,8 @@ void Level::update_heatmap(void)
 {
   _heatmap = {};
 
-  for (auto y = MAP_BORDER_ROOM; y < MAP_HEIGHT - MAP_BORDER_ROOM; y++) {
-    for (auto x = MAP_BORDER_ROOM; x < MAP_WIDTH - MAP_BORDER_ROOM; x++) {
+  for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
+    for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
 
       if (is_lava_no_check(x, y)) {
         heatmap_no_check_incr(x + 1, y + 1);

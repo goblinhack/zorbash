@@ -1552,23 +1552,8 @@ void Dungeon::dump(void)
             ERR("Unknown map char 0x%X/%c at x %d, y %d, depth %d", m, m, x, y, d);
           }
 
-          if (nodes) {
-            if (! (x % 2) && ! (y % 2)) {
-              if (! is_wall(x, y) && is_floor(x, y)) {
-                auto X = (x - MAP_BORDER_ROOM) / MAP_ROOM_WIDTH;
-                auto Y = (y - MAP_BORDER_ROOM) / MAP_ROOM_HEIGHT;
-                auto n = nodes->getn(X, Y);
-                if (n) {
-                  c = '0' + n->depth;
-                }
-              }
-            }
-          }
-
-          if (! ((x - MAP_BORDER_ROOM) % MAP_ROOM_WIDTH) || ! ((y - MAP_BORDER_ROOM) % MAP_ROOM_HEIGHT)) {
-            if (is_wall(x, y)) {
-              c = 'X';
-            }
+          if (is_wall(x, y)) {
+            c = 'X';
           }
 
           s += c;
@@ -1738,8 +1723,8 @@ bool Dungeon::rooms_print_all_with_no_jiggle(Grid *g)
         return false;
       }
 
-      auto rx = x * MAP_ROOM_WIDTH + MAP_BORDER_ROOM;
-      auto ry = y * MAP_ROOM_HEIGHT + MAP_BORDER_ROOM;
+      auto rx = (x * (MAP_ROOM_WIDTH + MAP_BORDER_ROOM)) + MAP_BORDER_ROCK;
+      auto ry = (y * (MAP_ROOM_HEIGHT + MAP_BORDER_ROOM)) + MAP_BORDER_ROCK;
       room_print_at(r, rx, ry);
     }
   }
@@ -1774,8 +1759,8 @@ bool Dungeon::rooms_print_all_with_jiggle(Grid *g)
           return false;
         }
 
-        auto rx = x * MAP_ROOM_WIDTH + MAP_BORDER_ROOM;
-        auto ry = y * MAP_ROOM_HEIGHT + MAP_BORDER_ROOM;
+        auto rx = (x * (MAP_ROOM_WIDTH + MAP_BORDER_ROOM)) + MAP_BORDER_ROCK;
+        auto ry = (y * (MAP_ROOM_HEIGHT + MAP_BORDER_ROOM)) + MAP_BORDER_ROCK;
 
         bool placed = false;
         int  tries  = 100;
@@ -2057,7 +2042,7 @@ bool Dungeon::create_cyclic_rooms(Grid *g)
 void Dungeon::add_border(void)
 {
   for (auto y = 0; y < MAP_HEIGHT; y++) {
-    for (auto x = 0; x < MAP_BORDER_ROOM; x++) {
+    for (auto x = 0; x < MAP_BORDER_ROCK; x++) {
       if (! is_anything_at_no_check(x, y)) {
         putc(x, y, MAP_DEPTH_OBJ, Charmap::ROCK);
       }
@@ -2067,7 +2052,7 @@ void Dungeon::add_border(void)
     }
   }
   for (auto x = 0; x < MAP_WIDTH; x++) {
-    for (auto y = 0; y < MAP_BORDER_ROOM; y++) {
+    for (auto y = 0; y < MAP_BORDER_ROCK; y++) {
       if (! is_anything_at_no_check(x, y)) {
         putc(x, y, MAP_DEPTH_OBJ, Charmap::ROCK);
       }
@@ -2956,17 +2941,16 @@ void Dungeon::map_place_room_ptr(Roomp r, int x, int y)
 //
 bool Dungeon::can_place_room(Roomp r, int x, int y)
 {
-  if (x < 0) {
+  if (x < MAP_BORDER_ROCK) {
     return false;
   }
-  if (x + r->width >= map_width) {
+  if (y < MAP_BORDER_ROCK) {
     return false;
   }
-
-  if (y < 0) {
+  if (x + r->width >= map_width - MAP_BORDER_ROCK) {
     return false;
   }
-  if (y + r->height >= map_height) {
+  if (y + r->height >= map_height - MAP_BORDER_ROCK) {
     return false;
   }
 

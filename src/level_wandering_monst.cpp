@@ -38,8 +38,8 @@ bool Level::create_wandering_monster(void)
   int tries = 1000;
 
   while (tries--) {
-    auto x = pcg_random_range(MAP_BORDER_ROOM, MAP_WIDTH - MAP_BORDER_ROOM);
-    auto y = pcg_random_range(MAP_BORDER_ROOM, MAP_HEIGHT - MAP_BORDER_ROOM);
+    auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK);
+    auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK);
 
     if (get(can_see_currently.can_see, x, y)) {
       return false;

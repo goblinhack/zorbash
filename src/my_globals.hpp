@@ -23,7 +23,6 @@ extern bool g_main_loop_running;        // SDL main loop is running.
 extern bool g_need_restart;             // Need to restart game
 extern bool g_opt_ascii;                // Ascii mode
 extern bool g_opt_ascii_override;       // Ascii mode forced
-extern bool g_opt_mini;                 // Small map
 extern bool g_opt_new_game;             // Start in the dungeon menu
 extern bool g_opt_no_slow_log_flush;    // Do not flush after each console log at start
 extern bool g_opt_override_debug_level; // Temporary, used to disable existing debugs

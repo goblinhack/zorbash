@@ -546,27 +546,27 @@ Tpp tp_get_with_rarity_filter(Tpidmap &m)
         if (tp->rarity() != THING_RARITY_COMMON) {
           continue;
         }
-        CON("chose THING_RARITY_COMMON -- %s (roll %d)", tp->name().c_str(), roll);
+        DBG("chose THING_RARITY_COMMON -- %s (roll %d)", tp->name().c_str(), roll);
       } else if (roll < 900) {
         if (tp->rarity() != THING_RARITY_UNCOMMON) {
           continue;
         }
-        CON("chose THING_RARITY_UNCOMMON -- %s (roll %d)", tp->name().c_str(), roll);
+        DBG("chose THING_RARITY_UNCOMMON -- %s (roll %d)", tp->name().c_str(), roll);
       } else if (roll < 950) {
         if (tp->rarity() != THING_RARITY_RARE) {
           continue;
         }
-        CON("chose THING_RARITY_RARE -- %s (roll %d)", tp->name().c_str(), roll);
+        DBG("chose THING_RARITY_RARE -- %s (roll %d)", tp->name().c_str(), roll);
       } else if (roll < 990) {
         if (tp->rarity() != THING_RARITY_VERY_RARE) {
           continue;
         }
-        CON("chose THING_RARITY_VERY_RARE -- %s (roll %d)", tp->name().c_str(), roll);
+        DBG("chose THING_RARITY_VERY_RARE -- %s (roll %d)", tp->name().c_str(), roll);
       } else if (roll == 999) {
         if (tp->rarity() != THING_RARITY_UNIQUE) {
           continue;
         }
-        CON("chose THING_RARITY_UNIQUE -- %s (roll %d)", tp->name().c_str(), roll);
+        DBG("chose THING_RARITY_UNIQUE -- %s (roll %d)", tp->name().c_str(), roll);
       }
       return tp;
     }

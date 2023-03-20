@@ -814,17 +814,10 @@ void config_game_gfx_update(void)
   //
   // Need to do this really early on as GL FBOs are created from the map size.
   //
-  if (g_opt_mini) {
-    MAP_WIDTH                 = MAP_WIDTH_MINI;
-    MAP_HEIGHT                = MAP_HEIGHT_MINI;
-    DUNGEON_GRID_CHUNK_HEIGHT = DUNGEON_GRID_CHUNK_HEIGHT_MINI;
-    DUNGEON_GRID_CHUNK_WIDTH  = DUNGEON_GRID_CHUNK_WIDTH_MINI;
-  } else {
-    MAP_WIDTH                 = MAP_WIDTH_MAX;
-    MAP_HEIGHT                = MAP_HEIGHT_MAX;
-    DUNGEON_GRID_CHUNK_HEIGHT = DUNGEON_GRID_CHUNK_HEIGHT_MAX;
-    DUNGEON_GRID_CHUNK_WIDTH  = DUNGEON_GRID_CHUNK_WIDTH_MAX;
-  }
+  MAP_WIDTH                 = MAP_WIDTH_MAX;
+  MAP_HEIGHT                = MAP_HEIGHT_MAX;
+  DUNGEON_GRID_CHUNK_HEIGHT = DUNGEON_GRID_CHUNK_HEIGHT_MAX;
+  DUNGEON_GRID_CHUNK_WIDTH  = DUNGEON_GRID_CHUNK_WIDTH_MAX;
 
   game->config.tile_width  = TILE_WIDTH_LORES;
   game->config.tile_height = TILE_HEIGHT_LORES;

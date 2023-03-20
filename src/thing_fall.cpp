@@ -271,17 +271,17 @@ bool Thing::fall_to_next_level(void)
       x = curr_at.x;
       y = curr_at.y;
     } else if (tries < 10) {
-      x = curr_at.x + pcg_random_range(0, MAP_BORDER_ROOM) - MAP_BORDER_ROOM / 2;
-      y = curr_at.y + pcg_random_range(0, MAP_BORDER_ROOM) - MAP_BORDER_ROOM / 2;
+      x = curr_at.x + pcg_random_range(0, MAP_BORDER_ROCK) - MAP_BORDER_ROCK / 2;
+      y = curr_at.y + pcg_random_range(0, MAP_BORDER_ROCK) - MAP_BORDER_ROCK / 2;
     } else if (tries < 100) {
-      x = curr_at.x + pcg_random_range(0, MAP_BORDER_ROOM * 2) - MAP_BORDER_ROOM;
-      y = curr_at.y + pcg_random_range(0, MAP_BORDER_ROOM * 2) - MAP_BORDER_ROOM;
+      x = curr_at.x + pcg_random_range(0, MAP_BORDER_ROCK * 2) - MAP_BORDER_ROCK;
+      y = curr_at.y + pcg_random_range(0, MAP_BORDER_ROCK * 2) - MAP_BORDER_ROCK;
     } else if (tries < 1000) {
-      x = curr_at.x + pcg_random_range(0, MAP_BORDER_ROOM * 4) - MAP_BORDER_ROOM * 2;
-      y = curr_at.y + pcg_random_range(0, MAP_BORDER_ROOM * 4) - MAP_BORDER_ROOM * 2;
+      x = curr_at.x + pcg_random_range(0, MAP_BORDER_ROCK * 4) - MAP_BORDER_ROCK * 2;
+      y = curr_at.y + pcg_random_range(0, MAP_BORDER_ROCK * 4) - MAP_BORDER_ROCK * 2;
     } else if (tries < 10000) {
-      x = pcg_random_range(MAP_BORDER_ROOM, MAP_WIDTH - MAP_BORDER_ROOM);
-      y = pcg_random_range(MAP_BORDER_ROOM, MAP_HEIGHT - MAP_BORDER_ROOM);
+      x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK);
+      y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK);
     } else {
       err("Could not fall to next level; tried many times to place this thing and failed");
       return false;

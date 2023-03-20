@@ -26,7 +26,6 @@ bool g_main_loop_running;        // SDL main loop running.
 bool g_need_restart;             // Need to restart game
 bool g_opt_ascii;                // Ascii mode
 bool g_opt_ascii_override;       // Ascii mode forced
-bool g_opt_mini;                 // Smaller map
 bool g_opt_new_game;             // Start in the dungeon menu
 bool g_opt_no_slow_log_flush;    // Do not flush after each console log at start
 bool g_opt_override_debug_level; // Temporary used to disable debugs on load
