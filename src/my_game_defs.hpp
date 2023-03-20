@@ -31,6 +31,10 @@
 #define LEVEL_MONST_COUNT_INIT_MAX 25  // Monsters max per level at creation. Want more? You're mad...
 #define LEVEL_MONST_COUNT_ABS_MAX  50  // Monsters max per level period.
 
+//
+// The border needs to be big enough so that the player is not
+// obscured by the left bar. This is about this many tiles:
+//
 #define MAP_BORDER_ROCK 6               // Map rock border
 #define MAP_BORDER_ROOM MAP_BORDER_ROCK // Room border padding
 #define MAP_ROOM_HEIGHT 11              // Max room dimensions
