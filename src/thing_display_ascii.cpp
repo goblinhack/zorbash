@@ -163,6 +163,13 @@ void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
   }
 
   //
+  // Keep the cursor path easy to see
+  //
+  if (is_cursor_path()) {
+    return;
+  }
+
+  //
   // Poor thing is frozen?
   //
   if (fg) {
