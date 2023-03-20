@@ -579,7 +579,19 @@ bool Thing::spawn_things_around_me(const std::string &what, int radius)
       }
       FOR_ALL_THINGS_END()
 
-      auto f = level->thing_new(what, point(x, y));
+      //
+      // Don't place krakens on lava
+      //
+      auto tp = tp_find_wildcard(what);
+      if (! tp) {
+        return false;
+      }
+
+      if (tp->is_disliked_by_me(level, point(x, y))) {
+        continue;
+      }
+
+      auto f = level->thing_new(tp, point(x, y));
       spawned_newborn(f);
     }
   }
