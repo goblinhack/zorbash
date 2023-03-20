@@ -17,12 +17,8 @@
 void Level::scroll_map_set_bounds(void)
 {
   if (g_opt_ascii) {
-    if (map_at.x > MAP_WIDTH - TILES_VISIBLE_ACROSS) {
-      map_at.x = MAP_WIDTH - TILES_VISIBLE_ACROSS;
-    }
-    if (map_at.y > MAP_HEIGHT - TILES_VISIBLE_DOWN) {
-      map_at.y = MAP_HEIGHT - TILES_VISIBLE_DOWN;
-    }
+    map_at.x = 0;
+    map_at.y = 0;
   } else {
     if (map_at.x > MAP_WIDTH - 1) {
       map_at.x = MAP_WIDTH - 1;

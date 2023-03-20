@@ -474,7 +474,7 @@ void Game::wid_enchant_an_item(void)
         }
       }
 
-      if (s.size() > width) {
+      if ((int) s.size() > width) {
         abbreviate(s);
       }
 

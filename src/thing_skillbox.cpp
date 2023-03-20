@@ -157,7 +157,7 @@ Thingp Level::skillbox_get(const int slot)
     return nullptr;
   }
 
-  if (slot >= itemsp->skillbox_id.size()) {
+  if (slot >= (int) itemsp->skillbox_id.size()) {
     DBG2("Slot %d out of range, max %d", slot, (int) itemsp->skillbox_id.size());
     return nullptr;
   }
@@ -210,7 +210,7 @@ bool Level::skillbox_over(const int slot)
     return false;
   }
 
-  if (slot >= itemsp->skillbox_id.size()) {
+  if (slot >= (int) itemsp->skillbox_id.size()) {
     DBG2("Skillbox: Ignore; slot out of range");
     return false;
   }
@@ -258,7 +258,7 @@ bool Level::skillbox_chosen(const int slot)
     return false;
   }
 
-  if (slot >= itemsp->skillbox_id.size()) {
+  if (slot >= (int) itemsp->skillbox_id.size()) {
     DBG2("Skillbox: Nothing in slot %d", slot);
     return false;
   }

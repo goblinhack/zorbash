@@ -2,6 +2,10 @@ import my
 import tp
 
 
+def on_born(me, x, y):
+    my.thing_carry(me, "gold1")
+
+
 def on_you_nat_att(me, x, y):
     sound = f"growl{my.non_pcg_randint(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
@@ -53,6 +57,7 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_submergable(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
+    my.gold_value_dice(self, "1")
     my.health_initial_dice(self, "1d10")
     my.hunger_clock_tick_freq(self, 50)
     my.is_able_to_be_teleported(self, True)
@@ -91,6 +96,7 @@ def tp_init(name, text_long_name):
     my.move_speed(self, 50)
     my.noise_decibels_hearing(self, 50)
     my.normal_placement_rules(self, True)
+    my.on_born_do(self, "me.on_born()")
     my.on_death_do(self, "me.on_death()")
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")

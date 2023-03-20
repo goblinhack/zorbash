@@ -531,35 +531,42 @@ Tpp tp_get_with_rarity_filter(Tpidmap &m)
 
   int tries = 100;
   while (tries--) {
-    auto r      = pcg_random_range(0, 1000);
+    auto roll   = pcg_random_range(0, 1000);
     int  tries2 = 100;
     while (tries2--) {
       auto tp = get(m, pcg_rand() % m.size());
-      if (r < 500) {
+      //
+      // 0  .. 800 comon
+      // 800.. 900 uncomon
+      // 900.. 950 rare
+      // 950.. 990 very rare
+      // 999       unique
+      //
+      if (roll < 800) {
         if (tp->rarity() != THING_RARITY_COMMON) {
           continue;
         }
-        // CON("chose THING_RARITY_COMMON -- %s", tp->name().c_str());
-      } else if (r < 800) {
+        CON("chose THING_RARITY_COMMON -- %s (roll %d)", tp->name().c_str(), roll);
+      } else if (roll < 900) {
         if (tp->rarity() != THING_RARITY_UNCOMMON) {
           continue;
         }
-        // CON("chose THING_RARITY_UNCOMMON -- %s", tp->name().c_str());
-      } else if (r < 950) {
+        CON("chose THING_RARITY_UNCOMMON -- %s (roll %d)", tp->name().c_str(), roll);
+      } else if (roll < 950) {
         if (tp->rarity() != THING_RARITY_RARE) {
           continue;
         }
-        // CON("chose THING_RARITY_RARE -- %s", tp->name().c_str());
-      } else if (r < 990) {
+        CON("chose THING_RARITY_RARE -- %s (roll %d)", tp->name().c_str(), roll);
+      } else if (roll < 990) {
         if (tp->rarity() != THING_RARITY_VERY_RARE) {
           continue;
         }
-        // CON("chose THING_RARITY_VERY_RARE -- %s", tp->name().c_str());
-      } else if (r == 999) {
+        CON("chose THING_RARITY_VERY_RARE -- %s (roll %d)", tp->name().c_str(), roll);
+      } else if (roll == 999) {
         if (tp->rarity() != THING_RARITY_UNIQUE) {
           continue;
         }
-        // CON("chose THING_RARITY_UNIQUE -- %s", tp->name().c_str());
+        CON("chose THING_RARITY_UNIQUE -- %s (roll %d)", tp->name().c_str(), roll);
       }
       return tp;
     }

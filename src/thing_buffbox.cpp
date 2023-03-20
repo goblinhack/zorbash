@@ -141,7 +141,7 @@ Thingp Level::buffbox_get(const int slot)
     return nullptr;
   }
 
-  if (slot >= itemsp->buffbox_id.size()) {
+  if (slot >= (int) itemsp->buffbox_id.size()) {
     DBG2("Slot %d out of range, max %d", slot, (int) itemsp->buffbox_id.size());
     return nullptr;
   }
@@ -184,7 +184,7 @@ bool Level::buffbox_over(const int slot)
     return false;
   }
 
-  if (slot >= player->itemsp()->buffbox_id.size()) {
+  if (slot >= (int) player->itemsp()->buffbox_id.size()) {
     DBG2("buffbox: Ignore; slot out of range");
     return false;
   }

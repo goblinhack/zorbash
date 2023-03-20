@@ -152,7 +152,7 @@ Thingp Level::debuffbox_get(const int slot)
     return nullptr;
   }
 
-  if (slot >= itemsp->debuffbox_id.size()) {
+  if (slot >= (int) itemsp->debuffbox_id.size()) {
     DBG2("Slot %d out of range, max %d", slot, (int) itemsp->debuffbox_id.size());
     return nullptr;
   }
@@ -201,7 +201,7 @@ bool Level::debuffbox_over(const int slot)
     return false;
   }
 
-  if (slot >= itemsp->debuffbox_id.size()) {
+  if (slot >= (int) itemsp->debuffbox_id.size()) {
     DBG2("debuffbox: Ignore; slot out of range");
     return false;
   }

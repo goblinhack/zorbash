@@ -151,9 +151,9 @@ void Game::fini(void)
   //
   // Temporary. Last cursor path shown.
   //
-  cursor_move_path      = {};
-  point cursor_move_end = {};
-  cursor_moved          = {};
+  cursor_move_path = {};
+  cursor_move_end  = {};
+  cursor_moved     = {};
 
   //
   // Temporary. Dampens mouse clicks

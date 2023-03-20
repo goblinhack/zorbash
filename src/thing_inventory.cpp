@@ -636,7 +636,7 @@ Thingp Level::inventory_get(const int slot)
     return nullptr;
   }
 
-  if (slot >= itemsp->inventory_shortcuts.size()) {
+  if (slot >= (int) itemsp->inventory_shortcuts.size()) {
     DBG("Slot %d out of range, max %d", slot, (int) itemsp->inventory_shortcuts.size());
     return nullptr;
   }
@@ -681,7 +681,7 @@ bool Level::inventory_over(const int slot)
     return false;
   }
 
-  if (slot >= itemsp->inventory_shortcuts.size()) {
+  if (slot >= (int) itemsp->inventory_shortcuts.size()) {
     DBG("Inventory: Ignore; slot out of range");
     return false;
   }
@@ -729,7 +729,7 @@ bool Level::inventory_chosen(const int slot)
     return false;
   }
 
-  if (slot >= itemsp->inventory_shortcuts.size()) {
+  if (slot >= (int) itemsp->inventory_shortcuts.size()) {
     player->msg("Nothing at slot %d.", slot + 1);
     inventory_dump();
     sound_play("bonk");
@@ -792,7 +792,7 @@ bool Level::inventory_assign(const int slot, Thingp item)
     return false;
   }
 
-  if (slot >= itemsp->inventory_shortcuts.size()) {
+  if (slot >= (int) itemsp->inventory_shortcuts.size()) {
     itemsp->inventory_shortcuts.resize(slot + 1);
   }
 
