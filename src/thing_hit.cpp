@@ -1745,7 +1745,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     } else if (hitter->is_fire() || real_hitter->is_fire()) {
       popup(string_sprintf("%%fg=orange$Burning -%d", damage));
     } else if (hitter->is_monst() || real_hitter->is_monst()) {
-      popup(string_sprintf("%%fg=orange$It hits you -%d", damage));
+      popup(string_sprintf("%%fg=orange$It %s you -%d", real_hitter->text_hits().c_str(), damage));
     } else {
       popup(string_sprintf("%%fg=orange$-%d", damage));
     }

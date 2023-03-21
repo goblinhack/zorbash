@@ -54,6 +54,7 @@ def tp_init(name, text_long_name):
     my.gfx_anim_use(self, "attack_claws")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
+    my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_health_bar_shown(self, True)
     my.gfx_pixelart_oversized_and_on_floor(self, True)
@@ -124,7 +125,7 @@ def tp_init(name, text_long_name):
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
     # end sort marker
 
-    delay = 70
+    delay = 270
     my.tile(self,
             ascii_fg_char="a", ascii_bg_col_name="", ascii_fg_col_name="orange",
             tile=name + ".1", delay_ms=delay)

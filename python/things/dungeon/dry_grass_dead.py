@@ -10,8 +10,6 @@ def tp_init(name, tiles=[]):
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_reflection(self, True)
-    my.gfx_pixelart_shadow(self, True)
-    my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.gfx_pixelart_submergable(self, True)
     my.is_able_to_amplify_footsteps(self, True)
