@@ -69,11 +69,11 @@ void tp_fixup(void)
       }
     }
 
-    if (tp->is_shallow_water_swimmer()) {
+    if (tp->environ_shallow_water()) {
       tp->is_swimmer_set(true);
     }
 
-    if (tp->is_deep_water_swimmer()) {
+    if (tp->environ_deep_water()) {
       tp->is_swimmer_set(true);
     }
 
@@ -300,61 +300,61 @@ void tp_fixup(void)
         int attack_index = 0;
 
         if (tp->dmg_acid() > 0) {
-          tp->chance_d1000_dmg_acid_set(attack_index, 1000);
+          tp->dmg_chance_d1000_acid_set(attack_index, 1000);
         }
         if (tp->dmg_water() > 0) {
-          tp->chance_d1000_dmg_water_set(attack_index, 1000);
+          tp->dmg_chance_d1000_water_set(attack_index, 1000);
         }
         if (tp->dmg_nat_att() > 0) {
-          tp->chance_d1000_dmg_nat_att_set(attack_index, 1000);
+          tp->dmg_chance_d1000_nat_att_set(attack_index, 1000);
         }
         if (tp->dmg_crush() > 0) {
-          tp->chance_d1000_dmg_crush_set(attack_index, 1000);
+          tp->dmg_chance_d1000_crush_set(attack_index, 1000);
         }
         if (tp->dmg_missile() > 0) {
-          tp->chance_d1000_dmg_missile_set(attack_index, 1000);
+          tp->dmg_chance_d1000_missile_set(attack_index, 1000);
         }
         if (tp->dmg_digest() > 0) {
-          tp->chance_d1000_dmg_digest_set(attack_index, 1000);
+          tp->dmg_chance_d1000_digest_set(attack_index, 1000);
         }
         if (tp->dmg_energy() > 0) {
-          tp->chance_d1000_dmg_energy_set(attack_index, 1000);
+          tp->dmg_chance_d1000_energy_set(attack_index, 1000);
         }
         if (tp->dmg_negation() > 0) {
-          tp->chance_d1000_dmg_negation_set(attack_index, 1000);
+          tp->dmg_chance_d1000_negation_set(attack_index, 1000);
         }
         if (tp->dmg_fire() > 0) {
-          tp->chance_d1000_dmg_fire_set(attack_index, 1000);
+          tp->dmg_chance_d1000_fire_set(attack_index, 1000);
         }
         if (tp->dmg_heat() > 0) {
-          tp->chance_d1000_dmg_heat_set(attack_index, 1000);
+          tp->dmg_chance_d1000_heat_set(attack_index, 1000);
         }
         if (tp->dmg_drown() > 0) {
-          tp->chance_d1000_dmg_drown_set(attack_index, 1000);
+          tp->dmg_chance_d1000_drown_set(attack_index, 1000);
         }
         if (tp->dmg_bite() > 0) {
-          tp->chance_d1000_dmg_bite_set(attack_index, 1000);
+          tp->dmg_chance_d1000_bite_set(attack_index, 1000);
         }
         if (tp->dmg_claw() > 0) {
-          tp->chance_d1000_dmg_claw_set(attack_index, 1000);
+          tp->dmg_chance_d1000_claw_set(attack_index, 1000);
         }
         if (tp->dmg_cold() > 0) {
-          tp->chance_d1000_dmg_cold_set(attack_index, 1000);
+          tp->dmg_chance_d1000_cold_set(attack_index, 1000);
         }
         if (tp->dmg_lightning() > 0) {
-          tp->chance_d1000_dmg_lightning_set(attack_index, 1000);
+          tp->dmg_chance_d1000_lightning_set(attack_index, 1000);
         }
         if (tp->dmg_melee() > 0) {
-          tp->chance_d1000_dmg_melee_set(attack_index, 1000);
+          tp->dmg_chance_d1000_melee_set(attack_index, 1000);
         }
         if (tp->dmg_necrosis() > 0) {
-          tp->chance_d1000_dmg_necrosis_set(attack_index, 1000);
+          tp->dmg_chance_d1000_necrosis_set(attack_index, 1000);
         }
         if (tp->dmg_draining() > 0) {
-          tp->chance_d1000_dmg_draining_set(attack_index, 1000);
+          tp->dmg_chance_d1000_draining_set(attack_index, 1000);
         }
         if (tp->dmg_poison() > 0) {
-          tp->chance_d1000_dmg_poison_set(attack_index, 1000);
+          tp->dmg_chance_d1000_poison_set(attack_index, 1000);
         }
       }
     }

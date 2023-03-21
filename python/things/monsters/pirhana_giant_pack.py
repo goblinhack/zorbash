@@ -23,7 +23,7 @@ def tp_init(name, text_long_name):
     my.is_loggable(self, True)
     my.rarity(self, my.RARITY_RARE)  # how rare within this monster class
     my.on_you_are_declared_a_follower_do(self, "me.on_you_are_declared_a_follower()")
-    my.is_deep_water_swimmer(self, True)
+    my.environ_deep_water(self, True)
     my.on_you_are_declared_leader_do(self, "me.on_you_are_declared_leader()")
     my.is_swimmer(self, True)
     my.is_monst_pack(self, True)

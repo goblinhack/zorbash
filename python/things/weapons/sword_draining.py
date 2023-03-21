@@ -29,8 +29,8 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.attacks_per_round(self, 2)
     my.chance_d10000_damaged(self, 5)
-    my.chance_d1000_dmg_draining(self, 1, 1000)
-    my.chance_d1000_dmg_melee(self, 0, 1000)
+    my.dmg_chance_d1000_draining(self, 1, 1000)
+    my.dmg_chance_d1000_melee(self, 0, 1000)
     my.dmg_draining_dice(self, "1d20")
     my.dmg_melee_dice(self, "1d8")
     my.equip_carry_anim(self, "sword_draining_carry")

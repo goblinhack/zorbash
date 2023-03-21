@@ -33,11 +33,11 @@ def tp_init(name, text_long_name):
     # begin sort marker
 
     my.chance_d1000_appearing(self, 10)
-    my.chance_d1000_dmg_cold(self, 0, 1000)
-    my.chance_d1000_dmg_crush(self, 0, 1000)
     my.chance_d1000_melting(self, 100)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 100)
+    my.dmg_chance_d1000_cold(self, 0, 1000)
+    my.dmg_chance_d1000_crush(self, 0, 1000)
     my.dmg_cold_dice(self, "1d6")
     my.dmg_crush_dice(self, "2d6")
     my.dmg_received_doubled_from_fire(self, True)

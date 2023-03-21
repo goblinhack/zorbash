@@ -17,15 +17,15 @@ bool Thing::is_hated_by_me(const point p)
   // Limit krakens to the depths, but allow eels and pirhana_giants free roam.
   //
   if (is_swimmer()) {
-    if (is_deep_water_swimmer() && is_shallow_water_swimmer()) {
+    if (environ_deep_water() && environ_shallow_water()) {
       if (! level->is_water(p)) {
         return true;
       }
-    } else if (is_deep_water_swimmer()) {
+    } else if (environ_deep_water()) {
       if (! level->is_deep_water(p)) {
         return true;
       }
-    } else if (is_shallow_water_swimmer()) {
+    } else if (environ_shallow_water()) {
       if (! level->is_shallow_water(p)) {
         return true;
       }
@@ -60,10 +60,14 @@ bool Thing::is_hated_by_me(const point p)
     }
     if (environ_avoids_fire()) {
       if (level->is_fire(p)) {
-        return true;
+        if (! is_fire_elemental()) {
+          return true;
+        }
       }
       if (level->is_lava(p)) {
-        return true;
+        if (! environ_prefer_lava()) {
+          return true;
+        }
       }
     }
   }
@@ -79,15 +83,15 @@ bool Tp::is_hated_by_me(Levelp level, point p) const
   // Limit krakens to the depths, but allow eels and pirhana_giants free roam.
   //
   if (is_swimmer()) {
-    if (is_deep_water_swimmer() && is_shallow_water_swimmer()) {
+    if (environ_deep_water() && environ_shallow_water()) {
       if (! level->is_water(p)) {
         return true;
       }
-    } else if (is_deep_water_swimmer()) {
+    } else if (environ_deep_water()) {
       if (! level->is_deep_water(p)) {
         return true;
       }
-    } else if (is_shallow_water_swimmer()) {
+    } else if (environ_shallow_water()) {
       if (! level->is_shallow_water(p)) {
         return true;
       }
@@ -122,10 +126,14 @@ bool Tp::is_hated_by_me(Levelp level, point p) const
     }
     if (environ_avoids_fire()) {
       if (level->is_fire(p)) {
-        return true;
+        if (! is_fire_elemental()) {
+          return true;
+        }
       }
       if (level->is_lava(p)) {
-        return true;
+        if (! environ_prefer_lava()) {
+          return true;
+        }
       }
     }
   }

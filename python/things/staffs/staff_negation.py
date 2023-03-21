@@ -101,9 +101,9 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.chance_d10000_set_on_fire(self, 5000)
-    my.chance_d1000_dmg_negation(self, 0, 1000)
     my.charge_count(self, 5)
     my.collision_hit_priority(self, 6)
+    my.dmg_chance_d1000_negation(self, 0, 1000)
     my.dmg_negation_dice(self, "1")  # This is the damage when the monst fires
     my.dmg_received_doubled_from_cold(self, True)
     my.effect_has_blast_radius(self, True)

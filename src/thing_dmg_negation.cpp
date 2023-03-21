@@ -280,10 +280,10 @@ int Thing::total_dmg_for_on_attacking_dmg_negation(Thingp victim, int damage)
   return damage;
 }
 
-int Thing::chance_d1000_dmg_negation(int index)
+int Thing::dmg_chance_d1000_negation(int index)
 {
   TRACE_NO_INDENT();
-  return (tp()->chance_d1000_dmg_negation(index));
+  return (tp()->dmg_chance_d1000_negation(index));
 }
 
 const std::string &Thing::on_receiving_dmg_negation_do(void)
@@ -310,16 +310,16 @@ const std::string &Thing::on_owner_receive_dmg_negation_do(void)
   return (tp()->on_owner_receive_dmg_negation_do());
 }
 
-int Tp::chance_d1000_dmg_negation(int index) const
+int Tp::dmg_chance_d1000_negation(int index) const
 {
-  if (index >= (int) _chance_d1000_dmg_negation.size()) {
+  if (index >= (int) _dmg_chance_d1000_negation.size()) {
     return 0;
   }
-  return _chance_d1000_dmg_negation[ index ];
+  return _dmg_chance_d1000_negation[ index ];
 }
 
-void Tp::chance_d1000_dmg_negation_set(int index, int v)
+void Tp::dmg_chance_d1000_negation_set(int index, int v)
 {
-  _chance_d1000_dmg_negation.resize(index + 1);
-  _chance_d1000_dmg_negation[ index ] = v;
+  _dmg_chance_d1000_negation.resize(index + 1);
+  _dmg_chance_d1000_negation[ index ] = v;
 }

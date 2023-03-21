@@ -281,10 +281,10 @@ int Thing::total_dmg_for_on_attacking_dmg_acid(Thingp victim, int damage)
   return damage;
 }
 
-int Thing::chance_d1000_dmg_acid(int index)
+int Thing::dmg_chance_d1000_acid(int index)
 {
   TRACE_NO_INDENT();
-  return (tp()->chance_d1000_dmg_acid(index));
+  return (tp()->dmg_chance_d1000_acid(index));
 }
 
 const std::string &Thing::on_receiving_dmg_acid_do(void)
@@ -317,16 +317,16 @@ int Thing::dmg_received_doubled_from_acid(void)
   return (tp()->dmg_received_doubled_from_acid());
 }
 
-int Tp::chance_d1000_dmg_acid(int index) const
+int Tp::dmg_chance_d1000_acid(int index) const
 {
-  if (index >= (int) _chance_d1000_dmg_acid.size()) {
+  if (index >= (int) _dmg_chance_d1000_acid.size()) {
     return 0;
   }
-  return _chance_d1000_dmg_acid[ index ];
+  return _dmg_chance_d1000_acid[ index ];
 }
 
-void Tp::chance_d1000_dmg_acid_set(int index, int v)
+void Tp::dmg_chance_d1000_acid_set(int index, int v)
 {
-  _chance_d1000_dmg_acid.resize(index + 1);
-  _chance_d1000_dmg_acid[ index ] = v;
+  _dmg_chance_d1000_acid.resize(index + 1);
+  _dmg_chance_d1000_acid[ index ] = v;
 }

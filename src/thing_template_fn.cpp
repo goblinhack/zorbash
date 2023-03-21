@@ -265,6 +265,9 @@ int Tp::environ_avoids_fire(void) const { return _environ_avoids_fire; }
 int Tp::environ_avoids_necrosis(void) const { return _environ_avoids_necrosis; }
 int Tp::environ_avoids_poison(void) const { return _environ_avoids_poison; }
 int Tp::environ_avoids_water(void) const { return _environ_avoids_water; }
+int Tp::environ_deep_water(void) const { return _environ_deep_water; }
+int Tp::environ_prefer_lava(void) const { return _environ_prefer_lava; }
+int Tp::environ_shallow_water(void) const { return _environ_shallow_water; }
 int Tp::gfx_ascii_animated(void) const { return _gfx_ascii_animated; }
 int Tp::gfx_ascii_bg_color_spread_alpha(void) const { return _gfx_ascii_bg_color_spread_alpha; }
 int Tp::gfx_ascii_bg_color_spread_blue(void) const { return _gfx_ascii_bg_color_spread_blue; }
@@ -446,7 +449,6 @@ int Tp::is_dead_on_shove(void) const { return _is_dead_on_shove; }
 int Tp::is_debuff(void) const { return _is_debuff; }
 int Tp::is_debug_path(void) const { return _is_debug_path; }
 int Tp::is_debug_type(void) const { return _is_debug_type; }
-int Tp::is_deep_water_swimmer(void) const { return _is_deep_water_swimmer; }
 int Tp::is_deep_water(void) const { return _is_deep_water; }
 int Tp::is_demon(void) const { return _is_demon; }
 int Tp::is_descend_dungeon(void) const { return _is_descend_dungeon; }
@@ -614,7 +616,6 @@ int Tp::is_rock(void) const { return _is_rock; }
 int Tp::is_rusty(void) const { return _is_rusty; }
 int Tp::is_secret_door(void) const { return _is_secret_door; }
 int Tp::is_sewer_wall(void) const { return _is_sewer_wall; }
-int Tp::is_shallow_water_swimmer(void) const { return _is_shallow_water_swimmer; }
 int Tp::is_shallow_water(void) const { return _is_shallow_water; }
 int Tp::is_shield(void) const { return _is_shield; }
 int Tp::is_shovable_and_sticky(void) const { return _is_shovable_and_sticky; }
@@ -738,7 +739,6 @@ int Tp::is_unused_flag172(void) const { return _is_unused_flag172; }
 int Tp::is_unused_flag173(void) const { return _is_unused_flag173; }
 int Tp::is_unused_flag174(void) const { return _is_unused_flag174; }
 int Tp::is_unused_flag175(void) const { return _is_unused_flag175; }
-int Tp::is_unused_flag176(void) const { return _is_unused_flag176; }
 int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
 int Tp::is_unused_flag17(void) const { return _is_unused_flag17; }
 int Tp::is_unused_flag18(void) const { return _is_unused_flag18; }
@@ -1000,6 +1000,9 @@ void Tp::environ_avoids_fire_set(int v) { _environ_avoids_fire = v; }
 void Tp::environ_avoids_necrosis_set(int v) { _environ_avoids_necrosis = v; }
 void Tp::environ_avoids_poison_set(int v) { _environ_avoids_poison = v; }
 void Tp::environ_avoids_water_set(int v) { _environ_avoids_water = v; }
+void Tp::environ_deep_water_set(int v) { _environ_deep_water = v; }
+void Tp::environ_prefer_lava_set(int v) { _environ_prefer_lava = v; }
+void Tp::environ_shallow_water_set(int v) { _environ_shallow_water = v; }
 void Tp::equip_carry_anim_set(const std::string &v) { _equip_carry_anim = v; }
 void Tp::gfx_anim_use_set(const std::string &v) { _gfx_anim_use = v; }
 void Tp::gfx_ascii_animated_set(int v) { _gfx_ascii_animated = v; }
@@ -1187,7 +1190,6 @@ void Tp::is_debuff_set(int v) { _is_debuff = v; }
 void Tp::is_debug_path_set(int v) { _is_debug_path = v; }
 void Tp::is_debug_type_set(int v) { _is_debug_type = v; }
 void Tp::is_deep_water_set(int v) { _is_deep_water = v; }
-void Tp::is_deep_water_swimmer_set(int v) { _is_deep_water_swimmer = v; }
 void Tp::is_demon_set(int v) { _is_demon = v; }
 void Tp::is_descend_dungeon_set(int v) { _is_descend_dungeon = v; }
 void Tp::is_descend_sewer_set(int v) { _is_descend_sewer = v; }
@@ -1355,7 +1357,6 @@ void Tp::is_rusty_set(int v) { _is_rusty = v; }
 void Tp::is_secret_door_set(int v) { _is_secret_door = v; }
 void Tp::is_sewer_wall_set(int v) { _is_sewer_wall = v; }
 void Tp::is_shallow_water_set(int v) { _is_shallow_water = v; }
-void Tp::is_shallow_water_swimmer_set(int v) { _is_shallow_water_swimmer = v; }
 void Tp::is_shield_set(int v) { _is_shield = v; }
 void Tp::is_shovable_and_sticky_set(int v) { _is_shovable_and_sticky = v; }
 void Tp::is_shovable_set(int v) { _is_shovable = v; }
@@ -1478,7 +1479,6 @@ void Tp::is_unused_flag172_set(int v) { _is_unused_flag172 = v; }
 void Tp::is_unused_flag173_set(int v) { _is_unused_flag173 = v; }
 void Tp::is_unused_flag174_set(int v) { _is_unused_flag174 = v; }
 void Tp::is_unused_flag175_set(int v) { _is_unused_flag175 = v; }
-void Tp::is_unused_flag176_set(int v) { _is_unused_flag176 = v; }
 void Tp::is_unused_flag179_set(int v) { _is_unused_flag179 = v; }
 void Tp::is_unused_flag17_set(int v) { _is_unused_flag17 = v; }
 void Tp::is_unused_flag18_set(int v) { _is_unused_flag18 = v; }

@@ -35,8 +35,8 @@ def init_weapon(name, text_long_name, text_short_name):
     # begin sort marker
     my.chance_d10000_crit(self, 500)
     my.chance_d10000_damaged(self, 10)
-    my.chance_d1000_dmg_melee(self, 0, 1000)
     my.collision_hit_360(self, True)
+    my.dmg_chance_d1000_melee(self, 0, 1000)
     my.dmg_melee_dice(self, "1d6")
     my.equip_carry_anim(self, "axe_carry")
     my.gfx_anim_use(self, "axe_swing")

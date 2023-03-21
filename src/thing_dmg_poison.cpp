@@ -280,10 +280,10 @@ int Thing::total_dmg_for_on_attacking_dmg_poison(Thingp victim, int damage)
   return damage;
 }
 
-int Thing::chance_d1000_dmg_poison(int index)
+int Thing::dmg_chance_d1000_poison(int index)
 {
   TRACE_NO_INDENT();
-  return (tp()->chance_d1000_dmg_poison(index));
+  return (tp()->dmg_chance_d1000_poison(index));
 }
 
 const std::string &Thing::on_receiving_dmg_poison_do(void)
@@ -316,16 +316,16 @@ int Thing::dmg_received_doubled_from_poison(void)
   return (tp()->dmg_received_doubled_from_poison());
 }
 
-int Tp::chance_d1000_dmg_poison(int index) const
+int Tp::dmg_chance_d1000_poison(int index) const
 {
-  if (index >= (int) _chance_d1000_dmg_poison.size()) {
+  if (index >= (int) _dmg_chance_d1000_poison.size()) {
     return 0;
   }
-  return _chance_d1000_dmg_poison[ index ];
+  return _dmg_chance_d1000_poison[ index ];
 }
 
-void Tp::chance_d1000_dmg_poison_set(int index, int v)
+void Tp::dmg_chance_d1000_poison_set(int index, int v)
 {
-  _chance_d1000_dmg_poison.resize(index + 1);
-  _chance_d1000_dmg_poison[ index ] = v;
+  _dmg_chance_d1000_poison.resize(index + 1);
+  _dmg_chance_d1000_poison[ index ] = v;
 }

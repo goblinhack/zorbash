@@ -17,7 +17,7 @@ def on_born(me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.chance_d1000_dmg_lightning(self, 0, 1000)
+    my.dmg_chance_d1000_lightning(self, 0, 1000)
     my.dmg_lightning_dice(self, "1d5+4")
     my.gfx_ascii_shown(self, True)
     my.is_able_to_attack_owner(self, True)

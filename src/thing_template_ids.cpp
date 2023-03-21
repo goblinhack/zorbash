@@ -259,6 +259,7 @@ std::initializer_list< std::string > tps = {
     "kraken_tentacle",
     "laser_energy",
     "lava",
+    "lava_ant",
     "lemonpie",
     "magical_effect",
     "map_beast",

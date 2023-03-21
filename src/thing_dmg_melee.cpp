@@ -280,10 +280,10 @@ int Thing::total_dmg_for_on_attacking_dmg_melee(Thingp victim, int damage)
   return damage;
 }
 
-int Thing::chance_d1000_dmg_melee(int index)
+int Thing::dmg_chance_d1000_melee(int index)
 {
   TRACE_NO_INDENT();
-  return (tp()->chance_d1000_dmg_melee(index));
+  return (tp()->dmg_chance_d1000_melee(index));
 }
 
 const std::string &Thing::on_receiving_dmg_melee_do(void)
@@ -310,16 +310,16 @@ const std::string &Thing::on_owner_receive_dmg_melee_do(void)
   return (tp()->on_owner_receive_dmg_melee_do());
 }
 
-int Tp::chance_d1000_dmg_melee(int index) const
+int Tp::dmg_chance_d1000_melee(int index) const
 {
-  if (index >= (int) _chance_d1000_dmg_melee.size()) {
+  if (index >= (int) _dmg_chance_d1000_melee.size()) {
     return 0;
   }
-  return _chance_d1000_dmg_melee[ index ];
+  return _dmg_chance_d1000_melee[ index ];
 }
 
-void Tp::chance_d1000_dmg_melee_set(int index, int v)
+void Tp::dmg_chance_d1000_melee_set(int index, int v)
 {
-  _chance_d1000_dmg_melee.resize(index + 1);
-  _chance_d1000_dmg_melee[ index ] = v;
+  _dmg_chance_d1000_melee.resize(index + 1);
+  _dmg_chance_d1000_melee[ index ] = v;
 }

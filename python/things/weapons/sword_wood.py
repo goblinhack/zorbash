@@ -29,7 +29,7 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.chance_d10000_damaged(self, 100)
     my.chance_d10000_set_on_fire(self, 5000)
-    my.chance_d1000_dmg_melee(self, 0, 1000)
+    my.dmg_chance_d1000_melee(self, 0, 1000)
     my.dmg_melee_dice(self, "1d4")
     my.equip_carry_anim(self, "sword_wood_carry")
     my.gfx_anim_use(self, "sword_wood_swing")

@@ -5,8 +5,8 @@ import tp
 def acid_init(name, text_long_name, text_short_name, tiles=[], left_tiles=[]):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.chance_d1000_dmg_acid(self, 0, 1000)
     my.dmg_acid_dice(self, "1d3+1")
+    my.dmg_chance_d1000_acid(self, 0, 1000)
     my.dmg_nat_att_type(self, "burn")
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_reflection(self, True)

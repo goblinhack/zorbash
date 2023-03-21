@@ -28,8 +28,8 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.chance_d10000_damaged(self, 200)
-    my.chance_d1000_dmg_melee(self, 0, 1000)
-    my.chance_d1000_dmg_poison(self, 0, 100)
+    my.dmg_chance_d1000_melee(self, 0, 1000)
+    my.dmg_chance_d1000_poison(self, 0, 100)
     my.dmg_melee_dice(self, "1d6+1")
     my.dmg_poison_dice(self, "1d2+1")
     my.equip_carry_anim(self, "sword_rusty_carry")

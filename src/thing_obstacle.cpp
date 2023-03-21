@@ -94,15 +94,15 @@ bool Thing::collision_obstacle(Thingp it)
   // Limit krakens to the depths, but allow eels and pirhana_giants free roam.
   //
   if (is_swimmer()) {
-    if (is_deep_water_swimmer() && is_shallow_water_swimmer()) {
+    if (environ_deep_water() && environ_shallow_water()) {
       if (! level->is_water(it->curr_at)) {
         return true;
       }
-    } else if (is_deep_water_swimmer()) {
+    } else if (environ_deep_water()) {
       if (! level->is_deep_water(it->curr_at)) {
         return true;
       }
-    } else if (is_shallow_water_swimmer()) {
+    } else if (environ_shallow_water()) {
       if (! level->is_shallow_water(it->curr_at)) {
         return true;
       }
@@ -309,21 +309,21 @@ bool Thing::is_obs_for_ai(Thingp it)
   // Limit krakens to the depths, but allow eels and pirhana_giants free roam.
   //
   if (is_swimmer()) {
-    if (is_deep_water_swimmer() && is_shallow_water_swimmer()) {
+    if (environ_deep_water() && environ_shallow_water()) {
       if (! level->is_water(it->curr_at)) {
         if (debug && is_debug_type()) {
           con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
         }
         return true;
       }
-    } else if (is_deep_water_swimmer()) {
+    } else if (environ_deep_water()) {
       if (! level->is_deep_water(it->curr_at)) {
         if (debug && is_debug_type()) {
           con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
         }
         return true;
       }
-    } else if (is_shallow_water_swimmer()) {
+    } else if (environ_shallow_water()) {
       if (! level->is_shallow_water(it->curr_at)) {
         if (debug && is_debug_type()) {
           con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);

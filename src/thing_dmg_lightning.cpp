@@ -280,10 +280,10 @@ int Thing::total_dmg_for_on_attacking_dmg_lightning(Thingp victim, int damage)
   return damage;
 }
 
-int Thing::chance_d1000_dmg_lightning(int index)
+int Thing::dmg_chance_d1000_lightning(int index)
 {
   TRACE_NO_INDENT();
-  return (tp()->chance_d1000_dmg_lightning(index));
+  return (tp()->dmg_chance_d1000_lightning(index));
 }
 
 const std::string &Thing::on_receiving_dmg_lightning_do(void)
@@ -310,16 +310,16 @@ const std::string &Thing::on_owner_receive_dmg_lightning_do(void)
   return (tp()->on_owner_receive_dmg_lightning_do());
 }
 
-int Tp::chance_d1000_dmg_lightning(int index) const
+int Tp::dmg_chance_d1000_lightning(int index) const
 {
-  if (index >= (int) _chance_d1000_dmg_lightning.size()) {
+  if (index >= (int) _dmg_chance_d1000_lightning.size()) {
     return 0;
   }
-  return _chance_d1000_dmg_lightning[ index ];
+  return _dmg_chance_d1000_lightning[ index ];
 }
 
-void Tp::chance_d1000_dmg_lightning_set(int index, int v)
+void Tp::dmg_chance_d1000_lightning_set(int index, int v)
 {
-  _chance_d1000_dmg_lightning.resize(index + 1);
-  _chance_d1000_dmg_lightning[ index ] = v;
+  _dmg_chance_d1000_lightning.resize(index + 1);
+  _dmg_chance_d1000_lightning[ index ] = v;
 }

@@ -9,8 +9,8 @@ def spawn(me, x, y):
 def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
-    my.chance_d1000_dmg_fire(self, 0, 1000)
     my.collision_check(self, True)
+    my.dmg_chance_d1000_fire(self, 0, 1000)
     my.dmg_fire_dice(self, "1d20+6")
     my.dmg_nat_att_type(self, "fire")
     my.environ_avoids_water(self, 100)

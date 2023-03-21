@@ -37,7 +37,7 @@ def on_born(me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.chance_d1000_dmg_lightning(self, 0, 1000)  # for electric eel attack
+    my.dmg_chance_d1000_lightning(self, 0, 1000)  # for electric eel attack
     my.dmg_lightning_dice(self, "1d10+4")
     my.gfx_ascii_shown(self, True)
     my.is_able_to_attack_owner(self, True)

@@ -1146,10 +1146,10 @@ int Thing::is_unused_flag175(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag175());
 }
-int Thing::is_unused_flag176(void)
+int Thing::environ_prefer_lava(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag176());
+  return (tp()->environ_prefer_lava());
 }
 int Thing::is_splatter(void)
 {
@@ -2374,16 +2374,16 @@ int Thing::is_always_submerged(void)
   return (tp()->is_always_submerged());
 }
 
-int Thing::is_deep_water_swimmer(void)
+int Thing::environ_deep_water(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_deep_water_swimmer());
+  return (tp()->environ_deep_water());
 }
 
-int Thing::is_shallow_water_swimmer(void)
+int Thing::environ_shallow_water(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_shallow_water_swimmer());
+  return (tp()->environ_shallow_water());
 }
 
 int Thing::is_biome_unused(void)

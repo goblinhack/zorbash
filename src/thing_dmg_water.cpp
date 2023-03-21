@@ -281,10 +281,10 @@ int Thing::total_dmg_for_on_attacking_dmg_water(Thingp victim, int damage)
   return damage;
 }
 
-int Thing::chance_d1000_dmg_water(int index)
+int Thing::dmg_chance_d1000_water(int index)
 {
   TRACE_NO_INDENT();
-  return (tp()->chance_d1000_dmg_water(index));
+  return (tp()->dmg_chance_d1000_water(index));
 }
 
 const std::string &Thing::on_receiving_dmg_water_do(void)
@@ -317,16 +317,16 @@ int Thing::dmg_received_doubled_from_water(void)
   return (tp()->dmg_received_doubled_from_water());
 }
 
-int Tp::chance_d1000_dmg_water(int index) const
+int Tp::dmg_chance_d1000_water(int index) const
 {
-  if (index >= (int) _chance_d1000_dmg_water.size()) {
+  if (index >= (int) _dmg_chance_d1000_water.size()) {
     return 0;
   }
-  return _chance_d1000_dmg_water[ index ];
+  return _dmg_chance_d1000_water[ index ];
 }
 
-void Tp::chance_d1000_dmg_water_set(int index, int v)
+void Tp::dmg_chance_d1000_water_set(int index, int v)
 {
-  _chance_d1000_dmg_water.resize(index + 1);
-  _chance_d1000_dmg_water[ index ] = v;
+  _dmg_chance_d1000_water.resize(index + 1);
+  _dmg_chance_d1000_water[ index ] = v;
 }

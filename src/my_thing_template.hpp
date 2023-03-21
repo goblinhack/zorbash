@@ -89,25 +89,25 @@ private:
 
   fsize _sz;
 
-  std::vector< int > _chance_d1000_dmg_acid {};
-  std::vector< int > _chance_d1000_dmg_water {};
-  std::vector< int > _chance_d1000_dmg_cold {};
-  std::vector< int > _chance_d1000_dmg_crush {};
-  std::vector< int > _chance_d1000_dmg_missile {};
-  std::vector< int > _chance_d1000_dmg_digest {};
-  std::vector< int > _chance_d1000_dmg_energy {};
-  std::vector< int > _chance_d1000_dmg_negation {};
-  std::vector< int > _chance_d1000_dmg_fire {};
-  std::vector< int > _chance_d1000_dmg_heat {};
-  std::vector< int > _chance_d1000_dmg_drown {};
-  std::vector< int > _chance_d1000_dmg_bite {};
-  std::vector< int > _chance_d1000_dmg_claw {};
-  std::vector< int > _chance_d1000_dmg_lightning {};
-  std::vector< int > _chance_d1000_dmg_melee {};
-  std::vector< int > _chance_d1000_dmg_nat_att {};
-  std::vector< int > _chance_d1000_dmg_necrosis {};
-  std::vector< int > _chance_d1000_dmg_draining {};
-  std::vector< int > _chance_d1000_dmg_poison {};
+  std::vector< int > _dmg_chance_d1000_acid {};
+  std::vector< int > _dmg_chance_d1000_water {};
+  std::vector< int > _dmg_chance_d1000_cold {};
+  std::vector< int > _dmg_chance_d1000_crush {};
+  std::vector< int > _dmg_chance_d1000_missile {};
+  std::vector< int > _dmg_chance_d1000_digest {};
+  std::vector< int > _dmg_chance_d1000_energy {};
+  std::vector< int > _dmg_chance_d1000_negation {};
+  std::vector< int > _dmg_chance_d1000_fire {};
+  std::vector< int > _dmg_chance_d1000_heat {};
+  std::vector< int > _dmg_chance_d1000_drown {};
+  std::vector< int > _dmg_chance_d1000_bite {};
+  std::vector< int > _dmg_chance_d1000_claw {};
+  std::vector< int > _dmg_chance_d1000_lightning {};
+  std::vector< int > _dmg_chance_d1000_melee {};
+  std::vector< int > _dmg_chance_d1000_nat_att {};
+  std::vector< int > _dmg_chance_d1000_necrosis {};
+  std::vector< int > _dmg_chance_d1000_draining {};
+  std::vector< int > _dmg_chance_d1000_poison {};
 
   // begin sort marker1 {
   int _aggression_pct {};
@@ -184,6 +184,9 @@ private:
   int _environ_avoids_necrosis {};
   int _environ_avoids_poison {};
   int _environ_avoids_water {};
+  int _environ_deep_water {};
+  int _environ_prefer_lava {};
+  int _environ_shallow_water {};
   int _gfx_ascii_animated {};
   int _gfx_ascii_bg_color_spread_alpha {};
   int _gfx_ascii_bg_color_spread_blue {};
@@ -368,7 +371,6 @@ private:
   int _is_debug_path {};
   int _is_debug_type {};
   int _is_deep_water {};
-  int _is_deep_water_swimmer {};
   int _is_demon {};
   int _is_descend_dungeon {};
   int _is_descend_sewer {};
@@ -537,7 +539,6 @@ private:
   int _is_secret_door {};
   int _is_sewer_wall {};
   int _is_shallow_water {};
-  int _is_shallow_water_swimmer {};
   int _is_shield {};
   int _is_shovable {};
   int _is_shovable_and_sticky {};
@@ -662,7 +663,6 @@ private:
   int _is_unused_flag173 {};
   int _is_unused_flag174 {};
   int _is_unused_flag175 {};
-  int _is_unused_flag176 {};
   int _is_unused_flag179 {};
   int _is_unused_flag18 {};
   int _is_unused_flag19 {};
@@ -1410,25 +1410,6 @@ public:
   int chance_d1000_carrier_of_weapon_class_A(void) const;
   int chance_d1000_carrier_of_weapon_class_B(void) const;
   int chance_d1000_carrier_of_weapon_class_C(void) const;
-  int chance_d1000_dmg_acid(int index) const;
-  int chance_d1000_dmg_bite(int index) const;
-  int chance_d1000_dmg_claw(int index) const;
-  int chance_d1000_dmg_cold(int index) const;
-  int chance_d1000_dmg_crush(int index) const;
-  int chance_d1000_dmg_digest(int index) const;
-  int chance_d1000_dmg_draining(int index) const;
-  int chance_d1000_dmg_drown(int index) const;
-  int chance_d1000_dmg_energy(int index) const;
-  int chance_d1000_dmg_fire(int index) const;
-  int chance_d1000_dmg_heat(int index) const;
-  int chance_d1000_dmg_lightning(int index) const;
-  int chance_d1000_dmg_melee(int index) const;
-  int chance_d1000_dmg_missile(int index) const;
-  int chance_d1000_dmg_nat_att(int index) const;
-  int chance_d1000_dmg_necrosis(int index) const;
-  int chance_d1000_dmg_negation(int index) const;
-  int chance_d1000_dmg_poison(int index) const;
-  int chance_d1000_dmg_water(int index) const;
   int chance_d1000_grapple(void) const;
   int chance_d1000_jump_attack(void) const;
   int chance_d1000_jump_on_low_hp(void) const;
@@ -1456,6 +1437,25 @@ public:
   int distance_recruitment_max(void) const;
   int distance_throw(void) const;
   int distance_vision(void) const;
+  int dmg_chance_d1000_acid(int index) const;
+  int dmg_chance_d1000_bite(int index) const;
+  int dmg_chance_d1000_claw(int index) const;
+  int dmg_chance_d1000_cold(int index) const;
+  int dmg_chance_d1000_crush(int index) const;
+  int dmg_chance_d1000_digest(int index) const;
+  int dmg_chance_d1000_draining(int index) const;
+  int dmg_chance_d1000_drown(int index) const;
+  int dmg_chance_d1000_energy(int index) const;
+  int dmg_chance_d1000_fire(int index) const;
+  int dmg_chance_d1000_heat(int index) const;
+  int dmg_chance_d1000_lightning(int index) const;
+  int dmg_chance_d1000_melee(int index) const;
+  int dmg_chance_d1000_missile(int index) const;
+  int dmg_chance_d1000_nat_att(int index) const;
+  int dmg_chance_d1000_necrosis(int index) const;
+  int dmg_chance_d1000_negation(int index) const;
+  int dmg_chance_d1000_poison(int index) const;
+  int dmg_chance_d1000_water(int index) const;
   int dmg_received_doubled_from_acid(void) const;
   int dmg_received_doubled_from_cold(void) const;
   int dmg_received_doubled_from_fire(void) const;
@@ -1471,6 +1471,9 @@ public:
   int environ_avoids_necrosis(void) const;
   int environ_avoids_poison(void) const;
   int environ_avoids_water(void) const;
+  int environ_deep_water(void) const;
+  int environ_prefer_lava(void) const;
+  int environ_shallow_water(void) const;
   int get_danger_level(void);
   int gfx_ascii_animated(void) const;
   int gfx_ascii_bg_color_spread_alpha(void) const;
@@ -1653,7 +1656,6 @@ public:
   int is_debuff(void) const;
   int is_debug_path(void) const;
   int is_debug_type(void) const;
-  int is_deep_water_swimmer(void) const;
   int is_deep_water(void) const;
   int is_demon(void) const;
   int is_descend_dungeon(void) const;
@@ -1821,7 +1823,6 @@ public:
   int is_rusty(void) const;
   int is_secret_door(void) const;
   int is_sewer_wall(void) const;
-  int is_shallow_water_swimmer(void) const;
   int is_shallow_water(void) const;
   int is_shield(void) const;
   int is_shovable_and_sticky(void) const;
@@ -1945,7 +1946,6 @@ public:
   int is_unused_flag173(void) const;
   int is_unused_flag174(void) const;
   int is_unused_flag175(void) const;
-  int is_unused_flag176(void) const;
   int is_unused_flag179(void) const;
   int is_unused_flag17(void) const;
   int is_unused_flag18(void) const;
@@ -2207,6 +2207,9 @@ public:
   void environ_avoids_necrosis_set(int v);
   void environ_avoids_poison_set(int v);
   void environ_avoids_water_set(int v);
+  void environ_deep_water_set(int v);
+  void environ_prefer_lava_set(int v);
+  void environ_shallow_water_set(int v);
   void equip_carry_anim_set(const std::string &v);
   void gfx_anim_use_set(const std::string &v);
   void gfx_ascii_animated_set(int v);
@@ -2394,7 +2397,6 @@ public:
   void is_debug_path_set(int v);
   void is_debug_type_set(int v);
   void is_deep_water_set(int v);
-  void is_deep_water_swimmer_set(int v);
   void is_demon_set(int v);
   void is_descend_dungeon_set(int v);
   void is_descend_sewer_set(int v);
@@ -2562,7 +2564,6 @@ public:
   void is_secret_door_set(int v);
   void is_sewer_wall_set(int v);
   void is_shallow_water_set(int v);
-  void is_shallow_water_swimmer_set(int v);
   void is_shield_set(int v);
   void is_shovable_and_sticky_set(int v);
   void is_shovable_set(int v);
@@ -2685,7 +2686,6 @@ public:
   void is_unused_flag173_set(int v);
   void is_unused_flag174_set(int v);
   void is_unused_flag175_set(int v);
-  void is_unused_flag176_set(int v);
   void is_unused_flag179_set(int v);
   void is_unused_flag17_set(int v);
   void is_unused_flag18_set(int v);
@@ -3030,25 +3030,25 @@ public:
   void z_prio_set(int v);
   // end sort marker5 }
 
-  void chance_d1000_dmg_water_set(int index, int v);
-  void chance_d1000_dmg_acid_set(int index, int v);
-  void chance_d1000_dmg_cold_set(int index, int v);
-  void chance_d1000_dmg_crush_set(int index, int v);
-  void chance_d1000_dmg_missile_set(int index, int v);
-  void chance_d1000_dmg_digest_set(int index, int v);
-  void chance_d1000_dmg_energy_set(int index, int v);
-  void chance_d1000_dmg_negation_set(int index, int v);
-  void chance_d1000_dmg_fire_set(int index, int v);
-  void chance_d1000_dmg_heat_set(int index, int v);
-  void chance_d1000_dmg_drown_set(int index, int v);
-  void chance_d1000_dmg_bite_set(int index, int v);
-  void chance_d1000_dmg_claw_set(int index, int v);
-  void chance_d1000_dmg_lightning_set(int index, int v);
-  void chance_d1000_dmg_melee_set(int index, int v);
-  void chance_d1000_dmg_nat_att_set(int index, int v);
-  void chance_d1000_dmg_necrosis_set(int index, int v);
-  void chance_d1000_dmg_draining_set(int index, int v);
-  void chance_d1000_dmg_poison_set(int index, int v);
+  void dmg_chance_d1000_water_set(int index, int v);
+  void dmg_chance_d1000_acid_set(int index, int v);
+  void dmg_chance_d1000_cold_set(int index, int v);
+  void dmg_chance_d1000_crush_set(int index, int v);
+  void dmg_chance_d1000_missile_set(int index, int v);
+  void dmg_chance_d1000_digest_set(int index, int v);
+  void dmg_chance_d1000_energy_set(int index, int v);
+  void dmg_chance_d1000_negation_set(int index, int v);
+  void dmg_chance_d1000_fire_set(int index, int v);
+  void dmg_chance_d1000_heat_set(int index, int v);
+  void dmg_chance_d1000_drown_set(int index, int v);
+  void dmg_chance_d1000_bite_set(int index, int v);
+  void dmg_chance_d1000_claw_set(int index, int v);
+  void dmg_chance_d1000_lightning_set(int index, int v);
+  void dmg_chance_d1000_melee_set(int index, int v);
+  void dmg_chance_d1000_nat_att_set(int index, int v);
+  void dmg_chance_d1000_necrosis_set(int index, int v);
+  void dmg_chance_d1000_draining_set(int index, int v);
+  void dmg_chance_d1000_poison_set(int index, int v);
 
   inline int gfx_pixelart_animated(void) const { return _gfx_pixelart_animated; }
 };

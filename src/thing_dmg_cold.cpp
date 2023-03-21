@@ -280,10 +280,10 @@ int Thing::total_dmg_for_on_attacking_dmg_cold(Thingp victim, int damage)
   return damage;
 }
 
-int Thing::chance_d1000_dmg_cold(int index)
+int Thing::dmg_chance_d1000_cold(int index)
 {
   TRACE_NO_INDENT();
-  return (tp()->chance_d1000_dmg_cold(index));
+  return (tp()->dmg_chance_d1000_cold(index));
 }
 
 const std::string &Thing::on_receiving_dmg_cold_do(void)
@@ -316,16 +316,16 @@ int Thing::dmg_received_doubled_from_cold(void)
   return (tp()->dmg_received_doubled_from_cold());
 }
 
-int Tp::chance_d1000_dmg_cold(int index) const
+int Tp::dmg_chance_d1000_cold(int index) const
 {
-  if (index >= (int) _chance_d1000_dmg_cold.size()) {
+  if (index >= (int) _dmg_chance_d1000_cold.size()) {
     return 0;
   }
-  return _chance_d1000_dmg_cold[ index ];
+  return _dmg_chance_d1000_cold[ index ];
 }
 
-void Tp::chance_d1000_dmg_cold_set(int index, int v)
+void Tp::dmg_chance_d1000_cold_set(int index, int v)
 {
-  _chance_d1000_dmg_cold.resize(index + 1);
-  _chance_d1000_dmg_cold[ index ] = v;
+  _dmg_chance_d1000_cold.resize(index + 1);
+  _dmg_chance_d1000_cold[ index ] = v;
 }

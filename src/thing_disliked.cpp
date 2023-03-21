@@ -22,15 +22,15 @@ bool Thing::is_disliked_by_me(const point p)
   // Limit krakens to the depths, but allow eels and pirhana_giants free roam.
   //
   if (is_swimmer()) {
-    if (is_deep_water_swimmer() && is_shallow_water_swimmer()) {
+    if (environ_deep_water() && environ_shallow_water()) {
       if (! level->is_water(p)) {
         return true;
       }
-    } else if (is_deep_water_swimmer()) {
+    } else if (environ_deep_water()) {
       if (! level->is_deep_water(p)) {
         return true;
       }
-    } else if (is_shallow_water_swimmer()) {
+    } else if (environ_shallow_water()) {
       if (! level->is_shallow_water(p)) {
         return true;
       }
@@ -124,15 +124,15 @@ bool Tp::is_disliked_by_me(Levelp level, point p) const
   // Limit krakens to the depths, but allow eels and pirhana_giants free roam.
   //
   if (is_swimmer()) {
-    if (is_deep_water_swimmer() && is_shallow_water_swimmer()) {
+    if (environ_deep_water() && environ_shallow_water()) {
       if (! level->is_water(p)) {
         return true;
       }
-    } else if (is_deep_water_swimmer()) {
+    } else if (environ_deep_water()) {
       if (! level->is_deep_water(p)) {
         return true;
       }
-    } else if (is_shallow_water_swimmer()) {
+    } else if (environ_shallow_water()) {
       if (! level->is_shallow_water(p)) {
         return true;
       }
@@ -267,43 +267,47 @@ bool Thing::is_disliked_by_me(const Thingp itp)
     }
   }
 
-  if (! is_on_fire()) {
-    if (me->environ_avoids_fire()) {
-      if (it->is_brazier()) {
-        return false;
+  if (! is_fire_elemental()) {
+    if (! is_on_fire()) {
+      if (me->environ_avoids_fire()) {
+        if (it->is_brazier()) {
+          return false;
+        }
+        if (it->is_fire()) {
+          // log("%s is disliked line %d", it->to_short_string().c_str(), __LINE__);
+          return true;
+        }
+        if (it->is_lava()) {
+          // log("%s is disliked line %d", it->to_short_string().c_str(), __LINE__);
+          if (! environ_prefer_lava()) {
+            return true;
+          }
+        }
       }
-      if (it->is_fire()) {
-        // log("%s is disliked line %d", it->to_short_string().c_str(), __LINE__);
-        return true;
-      }
-      if (it->is_lava()) {
-        // log("%s is disliked line %d", it->to_short_string().c_str(), __LINE__);
-        return true;
-      }
-    }
 
-    //
-    // Single fire looks like:
-    // .....
-    // .111.
-    // .151.
-    // .111.
-    // .....
-    //
-    int  heat        = level->heatmap(itp->curr_at);
-    auto avoid_level = environ_avoids_fire();
-    if (dmg_received_doubled_from_fire()) {
-      avoid_level *= 2;
-    }
-    if (avoid_level >= 100) {
-      if (heat >= 1) {
-        // log("%s is disliked line %d", it->to_short_string().c_str(), __LINE__);
-        return true;
+      //
+      // Single fire looks like:
+      // .....
+      // .111.
+      // .151.
+      // .111.
+      // .....
+      //
+      int  heat        = level->heatmap(itp->curr_at);
+      auto avoid_level = environ_avoids_fire();
+      if (dmg_received_doubled_from_fire()) {
+        avoid_level *= 2;
       }
-    } else if (avoid_level >= 10) {
-      if (heat >= 9) {
-        // log("%s is disliked line %d", it->to_short_string().c_str(), __LINE__);
-        return true;
+      if (avoid_level >= 100) {
+        if (heat >= 1) {
+          // log("%s is disliked line %d", it->to_short_string().c_str(), __LINE__);
+          return true;
+        }
+      } else if (avoid_level >= 10) {
+        if (heat >= 9) {
+          // log("%s is disliked line %d", it->to_short_string().c_str(), __LINE__);
+          return true;
+        }
       }
     }
   }

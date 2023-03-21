@@ -280,10 +280,10 @@ int Thing::total_dmg_for_on_attacking_dmg_necrosis(Thingp victim, int damage)
   return damage;
 }
 
-int Thing::chance_d1000_dmg_necrosis(int index)
+int Thing::dmg_chance_d1000_necrosis(int index)
 {
   TRACE_NO_INDENT();
-  return (tp()->chance_d1000_dmg_necrosis(index));
+  return (tp()->dmg_chance_d1000_necrosis(index));
 }
 
 const std::string &Thing::on_receiving_dmg_necrosis_do(void)
@@ -316,16 +316,16 @@ int Thing::dmg_received_doubled_from_necrosis(void)
   return (tp()->dmg_received_doubled_from_necrosis());
 }
 
-int Tp::chance_d1000_dmg_necrosis(int index) const
+int Tp::dmg_chance_d1000_necrosis(int index) const
 {
-  if (index >= (int) _chance_d1000_dmg_necrosis.size()) {
+  if (index >= (int) _dmg_chance_d1000_necrosis.size()) {
     return 0;
   }
-  return _chance_d1000_dmg_necrosis[ index ];
+  return _dmg_chance_d1000_necrosis[ index ];
 }
 
-void Tp::chance_d1000_dmg_necrosis_set(int index, int v)
+void Tp::dmg_chance_d1000_necrosis_set(int index, int v)
 {
-  _chance_d1000_dmg_necrosis.resize(index + 1);
-  _chance_d1000_dmg_necrosis[ index ] = v;
+  _dmg_chance_d1000_necrosis.resize(index + 1);
+  _dmg_chance_d1000_necrosis[ index ] = v;
 }

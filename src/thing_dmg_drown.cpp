@@ -280,10 +280,10 @@ int Thing::total_dmg_for_on_attacking_dmg_drown(Thingp victim, int damage)
   return damage;
 }
 
-int Thing::chance_d1000_dmg_drown(int index)
+int Thing::dmg_chance_d1000_drown(int index)
 {
   TRACE_NO_INDENT();
-  return (tp()->chance_d1000_dmg_drown(index));
+  return (tp()->dmg_chance_d1000_drown(index));
 }
 
 const std::string &Thing::on_receiving_dmg_drown_do(void)
@@ -310,16 +310,16 @@ const std::string &Thing::on_owner_receive_dmg_drown_do(void)
   return (tp()->on_owner_receive_dmg_drown_do());
 }
 
-int Tp::chance_d1000_dmg_drown(int index) const
+int Tp::dmg_chance_d1000_drown(int index) const
 {
-  if (index >= (int) _chance_d1000_dmg_drown.size()) {
+  if (index >= (int) _dmg_chance_d1000_drown.size()) {
     return 0;
   }
-  return _chance_d1000_dmg_drown[ index ];
+  return _dmg_chance_d1000_drown[ index ];
 }
 
-void Tp::chance_d1000_dmg_drown_set(int index, int v)
+void Tp::dmg_chance_d1000_drown_set(int index, int v)
 {
-  _chance_d1000_dmg_drown.resize(index + 1);
-  _chance_d1000_dmg_drown[ index ] = v;
+  _dmg_chance_d1000_drown.resize(index + 1);
+  _dmg_chance_d1000_drown[ index ] = v;
 }

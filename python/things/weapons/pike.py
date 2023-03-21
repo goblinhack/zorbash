@@ -29,8 +29,8 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.chance_d10000_crit(self, 1000)
     my.chance_d10000_damaged(self, 50)
-    my.chance_d1000_dmg_melee(self, 0, 1000)
     my.collision_hit_two_tiles_ahead(self, True)
+    my.dmg_chance_d1000_melee(self, 0, 1000)
     my.dmg_melee_dice(self, "1d10")
     my.equip_carry_anim(self, "pike_carry")
     my.gfx_anim_use(self, "pike_swing")

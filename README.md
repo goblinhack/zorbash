@@ -219,7 +219,7 @@ Current status:
 
 Content:
 <!-- begin type marker -->
-- 80 x monsters
+- 81 x monsters
 - 52 x food
 - 19 x treasure
 - 13 x weapons
@@ -499,8 +499,11 @@ OpenGL, SDL2 and Python3 (tested up to 3.11) is needed.
 Graphics
 --------
 - Various items and monsters by Oryx, [found here](https://www.oryxdesignlab.com/)
-- Various items and food by Henry Software, [found here](https://henrysoftware.itch.io)
 <!-- Oryx: Order Number: #102084 (placed on January 16, 2016 03:14PM EST) -->
+- Various items and food by Henry Software, [found here](https://henrysoftware.itch.io)
+<!-- purchased on itch.io -->
+- Various monsters by DeepDiveGameStudio, [found here](https://deepdivegamestudio.itch.io/)
+<!-- purchased on itch.io -->
 
 Music
 -----

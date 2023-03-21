@@ -280,10 +280,10 @@ int Thing::total_dmg_for_on_attacking_dmg_energy(Thingp victim, int damage)
   return damage;
 }
 
-int Thing::chance_d1000_dmg_energy(int index)
+int Thing::dmg_chance_d1000_energy(int index)
 {
   TRACE_NO_INDENT();
-  return (tp()->chance_d1000_dmg_energy(index));
+  return (tp()->dmg_chance_d1000_energy(index));
 }
 
 const std::string &Thing::on_receiving_dmg_energy_do(void)
@@ -310,16 +310,16 @@ const std::string &Thing::on_owner_receive_dmg_energy_do(void)
   return (tp()->on_owner_receive_dmg_energy_do());
 }
 
-int Tp::chance_d1000_dmg_energy(int index) const
+int Tp::dmg_chance_d1000_energy(int index) const
 {
-  if (index >= (int) _chance_d1000_dmg_energy.size()) {
+  if (index >= (int) _dmg_chance_d1000_energy.size()) {
     return 0;
   }
-  return _chance_d1000_dmg_energy[ index ];
+  return _dmg_chance_d1000_energy[ index ];
 }
 
-void Tp::chance_d1000_dmg_energy_set(int index, int v)
+void Tp::dmg_chance_d1000_energy_set(int index, int v)
 {
-  _chance_d1000_dmg_energy.resize(index + 1);
-  _chance_d1000_dmg_energy[ index ] = v;
+  _dmg_chance_d1000_energy.resize(index + 1);
+  _dmg_chance_d1000_energy[ index ] = v;
 }
