@@ -1136,15 +1136,15 @@ int Thing::is_unused_flag173(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag173());
 }
-int Thing::is_unused_flag174(void)
+int Thing::attack_blood(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag174());
+  return (tp()->attack_blood());
 }
-int Thing::is_unused_flag175(void)
+int Thing::is_eater_of_blood(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag175());
+  return (tp()->is_eater_of_blood());
 }
 int Thing::environ_prefer_lava(void)
 {

@@ -356,38 +356,39 @@ void Game::place_player(void)
         t->carry(w);
         t->enchant_without_stone(w);
       }
-      if (0) {
+      if (1) {
+        level->thing_new("leech_giant", point(x + 2, y));
         level->thing_new("water", point(x + 1, y));
-        level->thing_new("deep_water", point(x + 2, y));
-        level->thing_new("deep_water", point(x + 3, y));
+        level->thing_new("water", point(x + 2, y));
+        level->thing_new("water", point(x + 3, y));
         level->thing_new("water", point(x + 4, y));
 
         level->thing_new("water", point(x + 1, y + 1));
-        level->thing_new("deep_water", point(x + 2, y + 1));
-        level->thing_new("deep_water", point(x + 3, y + 1));
+        level->thing_new("water", point(x + 2, y + 1));
+        level->thing_new("water", point(x + 3, y + 1));
         level->thing_new("water", point(x + 4, y + 1));
 
         level->thing_new("water", point(x + 1, y + 2));
-        level->thing_new("deep_water", point(x + 2, y + 2));
-        level->thing_new("deep_water", point(x + 3, y + 2));
+        level->thing_new("water", point(x + 2, y + 2));
+        level->thing_new("water", point(x + 3, y + 2));
         level->thing_new("water", point(x + 4, y + 2));
 
         level->thing_new("water", point(x + 1, y + 3));
-        level->thing_new("deep_water", point(x + 2, y + 3));
-        level->thing_new("deep_water", point(x + 3, y + 3));
+        level->thing_new("water", point(x + 2, y + 3));
+        level->thing_new("water", point(x + 3, y + 3));
         level->thing_new("water", point(x + 4, y + 3));
 
         level->thing_new("water", point(x + 1, y + 4));
-        level->thing_new("deep_water", point(x + 2, y + 4));
-        level->thing_new("deep_water", point(x + 3, y + 4));
+        level->thing_new("water", point(x + 2, y + 4));
+        level->thing_new("water", point(x + 3, y + 4));
         level->thing_new("water", point(x + 4, y + 4));
 
         level->thing_new("water", point(x + 1, y + 5));
-        level->thing_new("deep_water", point(x + 2, y + 5));
-        level->thing_new("deep_water", point(x + 3, y + 5));
+        level->thing_new("water", point(x + 2, y + 5));
+        level->thing_new("water", point(x + 3, y + 5));
         level->thing_new("water", point(x + 4, y + 5));
 
-        level->thing_new("electric_eel", point(x + 3, y + 2));
+        // level->thing_new("electric_eel", point(x + 3, y + 2));
         level->thing_new("eel", point(x + 3, y + 4));
         // level->thing_new("teletoad", point(x + 3, y + 3));
         // level->thing_new("kraken", point(x + 2, y + 2));
@@ -562,9 +563,9 @@ void Game::place_player(void)
       level->thing_new("water", point(player->curr_at.x + 1, player->curr_at.y));
       level->thing_new("water", point(player->curr_at.x + 1, player->curr_at.y + 1));
       level->thing_new("water", point(player->curr_at.x + 2, player->curr_at.y + 1));
-      level->thing_new("block_of_ice", point(player->curr_at.x, player->curr_at.y));
-      player->frozen_set();
-      level->thing_new("lava", point(player->curr_at.x, player->curr_at.y));
+      // level->thing_new("block_of_ice", point(player->curr_at.x, player->curr_at.y));
+      // player->frozen_set();
+      // level->thing_new("lava", point(player->curr_at.x, player->curr_at.y));
     }
 
     if (0) {

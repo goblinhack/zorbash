@@ -98,6 +98,33 @@ bool Thing::will_avoid_monst(const Thingp it)
     }
   }
 
+  if (me->is_meat()) {
+    if (it->attack_meat()) {
+      if (is_dangerous(it)) {
+        dbg("Avoid dangerous monst: %s", it->to_short_string().c_str());
+        return true;
+      }
+    }
+  }
+
+  if (me->is_red_blooded() || me->is_green_blooded() || me->is_red_blood() || me->is_green_blood()) {
+    if (it->attack_blood()) {
+      if (is_dangerous(it)) {
+        dbg("Avoid dangerous monst: %s", it->to_short_string().c_str());
+        return true;
+      }
+    }
+  }
+
+  if (me->is_undead()) {
+    if (it->attack_undead()) {
+      if (is_dangerous(it)) {
+        dbg("Avoid dangerous monst: %s", it->to_short_string().c_str());
+        return true;
+      }
+    }
+  }
+
   return false;
 }
 
@@ -168,6 +195,39 @@ bool Thing::will_avoid_monst(const point p)
         if (is_dangerous(it)) {
           if (health() < health_max() / 4) {
             dbg("Avoid living eater as I am weak: %s", it->to_short_string().c_str());
+            return true;
+          }
+        }
+      }
+    }
+
+    if (me->is_meat()) {
+      if (it->attack_meat()) {
+        if (is_dangerous(it)) {
+          if (health() < health_max() / 4) {
+            dbg("Avoid meat eater as I am weak: %s", it->to_short_string().c_str());
+            return true;
+          }
+        }
+      }
+    }
+
+    if (me->is_red_blooded() || me->is_green_blooded() || me->is_red_blood() || me->is_green_blood()) {
+      if (it->attack_blood()) {
+        if (is_dangerous(it)) {
+          if (health() < health_max() / 4) {
+            dbg("Avoid blood eater as I am weak: %s", it->to_short_string().c_str());
+            return true;
+          }
+        }
+      }
+    }
+
+    if (me->is_undead()) {
+      if (it->attack_undead()) {
+        if (is_dangerous(it)) {
+          if (health() < health_max() / 4) {
+            dbg("Avoid undead eater as I am weak: %s", it->to_short_string().c_str());
             return true;
           }
         }

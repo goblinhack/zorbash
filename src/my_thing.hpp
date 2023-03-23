@@ -980,6 +980,7 @@ public:
   int ai_hit_actual(Thingp hitter, Thingp real_hitter, ThingAttackOptionsp, int damage);
   int ai_resent_count(void);
   int ai_wanderer(void);
+  int attack_blood(void);
   int attack_eater(void);
   int attack_humanoid(void);
   int attack_living(void);
@@ -1431,6 +1432,7 @@ public:
   int is_dry_grass(void);
   int is_eater_of_amulets(void);
   int is_eater_of_armor(void);
+  int is_eater_of_blood(void);
   int is_eater_of_boots(void);
   int is_eater_of_cloaks(void);
   int is_eater_of_foliage(void);
@@ -1706,8 +1708,6 @@ public:
   int is_unused_flag171(void);
   int is_unused_flag172(void);
   int is_unused_flag173(void);
-  int is_unused_flag174(void);
-  int is_unused_flag175(void);
   int is_unused_flag179(void);
   int is_unused_flag17(void);
   int is_unused_flag18(void);

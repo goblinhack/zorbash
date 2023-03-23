@@ -260,6 +260,7 @@ std::initializer_list< std::string > tps = {
     "laser_energy",
     "lava",
     "lava_ant",
+    "leech_giant",
     "lemonpie",
     "magical_effect",
     "map_beast",

@@ -46,7 +46,11 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
         laser_shoot_at(item, item->gfx_targetted_laser(), victim, &use_options);
       }
     } else {
-      err("Unknown beam weapon: %s.", item->text_the().c_str());
+      if (item) {
+        err("Unknown beam weapon: %s.", item->text_the().c_str());
+      } else {
+        err("Unknown beam weapon");
+      }
       return false;
     }
 
@@ -132,9 +136,17 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
       }
     } else {
       if (use_options && use_options->radial_effect) {
-        msg("%s zaps %s.", text_The().c_str(), item->text_the().c_str());
+        if (item) {
+          msg("%s zaps %s.", text_The().c_str(), item->text_the().c_str());
+        } else {
+          msg("%s zaps.", text_The().c_str());
+        }
       } else {
-        msg("%s zaps %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
+        if (item) {
+          msg("%s zaps %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
+        } else {
+          msg("%s zaps at %s.", text_The().c_str(), target->text_the().c_str());
+        }
       }
     }
 
@@ -182,9 +194,17 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
           }
         } else {
           if (use_options && use_options->radial_effect) {
-            msg("%s zaps %s.", text_The().c_str(), item->text_the().c_str());
+            if (item) {
+              msg("%s zaps %s.", text_The().c_str(), item->text_the().c_str());
+            } else {
+              msg("%s zaps.", text_The().c_str());
+            }
           } else {
-            msg("%s zaps %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
+            if (item) {
+              msg("%s zaps %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
+            } else {
+              msg("%s zaps at %s.", text_The().c_str(), target->text_the().c_str());
+            }
           }
         }
 
@@ -299,9 +319,17 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
         }
       } else {
         if (use_options && use_options->radial_effect) {
-          msg("%s zaps %s.", text_The().c_str(), item->text_the().c_str());
+          if (item) {
+            msg("%s zaps %s.", text_The().c_str(), item->text_the().c_str());
+          } else {
+            msg("%s zaps.", text_The().c_str());
+          }
         } else {
-          msg("%s zaps %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
+          if (item) {
+            msg("%s zaps %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
+          } else {
+            msg("%s zaps at %s.", text_The().c_str(), target->text_the().c_str());
+          }
         }
       }
 

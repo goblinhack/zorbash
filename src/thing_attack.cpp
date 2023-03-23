@@ -238,6 +238,25 @@ bool Thing::possible_to_attack(const Thingp victim)
       }
     }
 
+    if (me->attack_meat()) {
+      if (victim->is_meat()) {
+        if (is_debug_type()) {
+          dbg("Can attack meat: %s", victim->to_short_string().c_str());
+          return true;
+        }
+      }
+    }
+
+    if (me->attack_blood()) {
+      if (victim->is_red_blooded() || victim->is_green_blooded() || victim->is_red_blood() ||
+          victim->is_green_blood()) {
+        if (is_debug_type()) {
+          dbg("Can attack blood: %s", victim->to_short_string().c_str());
+          return true;
+        }
+      }
+    }
+
     if (me->attack_undead()) {
       if (victim->is_undead()) {
         if (! victim->is_dead) {

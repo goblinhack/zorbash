@@ -198,6 +198,7 @@ int Tp::aggression_pct(void) const { return _aggression_pct; }
 int Tp::ai_detect_secret_doors(void) const { return _ai_detect_secret_doors; }
 int Tp::ai_resent_count(void) const { return _ai_resent_count; }
 int Tp::ai_wanderer(void) const { return _ai_wanderer; }
+int Tp::attack_blood(void) const { return _attack_blood; }
 int Tp::attack_eater(void) const { return _attack_eater; }
 int Tp::attack_humanoid(void) const { return _attack_humanoid; }
 int Tp::attack_living(void) const { return _attack_living; }
@@ -463,6 +464,7 @@ int Tp::is_dry_grass_trampled(void) const { return _is_dry_grass_trampled; }
 int Tp::is_dry_grass(void) const { return _is_dry_grass; }
 int Tp::is_eater_of_amulets(void) const { return _is_eater_of_amulets; }
 int Tp::is_eater_of_armor(void) const { return _is_eater_of_armor; }
+int Tp::is_eater_of_blood(void) const { return _is_eater_of_blood; }
 int Tp::is_eater_of_boots(void) const { return _is_eater_of_boots; }
 int Tp::is_eater_of_cloaks(void) const { return _is_eater_of_cloaks; }
 int Tp::is_eater_of_foliage(void) const { return _is_eater_of_foliage; }
@@ -737,8 +739,6 @@ int Tp::is_unused_flag170(void) const { return _is_unused_flag170; }
 int Tp::is_unused_flag171(void) const { return _is_unused_flag171; }
 int Tp::is_unused_flag172(void) const { return _is_unused_flag172; }
 int Tp::is_unused_flag173(void) const { return _is_unused_flag173; }
-int Tp::is_unused_flag174(void) const { return _is_unused_flag174; }
-int Tp::is_unused_flag175(void) const { return _is_unused_flag175; }
 int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
 int Tp::is_unused_flag17(void) const { return _is_unused_flag17; }
 int Tp::is_unused_flag18(void) const { return _is_unused_flag18; }
@@ -931,6 +931,7 @@ void Tp::aggression_pct_set(int v) { _aggression_pct = v; }
 void Tp::ai_detect_secret_doors_set(int v) { _ai_detect_secret_doors = v; }
 void Tp::ai_resent_count_set(int v) { _ai_resent_count = v; }
 void Tp::ai_wanderer_set(int v) { _ai_wanderer = v; }
+void Tp::attack_blood_set(int v) { _attack_blood = v; }
 void Tp::attack_eater_set(int v) { _attack_eater = v; }
 void Tp::attack_humanoid_set(int v) { _attack_humanoid = v; }
 void Tp::attack_living_set(int v) { _attack_living = v; }
@@ -1203,6 +1204,7 @@ void Tp::is_dry_grass_set(int v) { _is_dry_grass = v; }
 void Tp::is_dry_grass_trampled_set(int v) { _is_dry_grass_trampled = v; }
 void Tp::is_eater_of_amulets_set(int v) { _is_eater_of_amulets = v; }
 void Tp::is_eater_of_armor_set(int v) { _is_eater_of_armor = v; }
+void Tp::is_eater_of_blood_set(int v) { _is_eater_of_blood = v; }
 void Tp::is_eater_of_boots_set(int v) { _is_eater_of_boots = v; }
 void Tp::is_eater_of_cloaks_set(int v) { _is_eater_of_cloaks = v; }
 void Tp::is_eater_of_foliage_set(int v) { _is_eater_of_foliage = v; }
@@ -1477,8 +1479,6 @@ void Tp::is_unused_flag170_set(int v) { _is_unused_flag170 = v; }
 void Tp::is_unused_flag171_set(int v) { _is_unused_flag171 = v; }
 void Tp::is_unused_flag172_set(int v) { _is_unused_flag172 = v; }
 void Tp::is_unused_flag173_set(int v) { _is_unused_flag173 = v; }
-void Tp::is_unused_flag174_set(int v) { _is_unused_flag174 = v; }
-void Tp::is_unused_flag175_set(int v) { _is_unused_flag175 = v; }
 void Tp::is_unused_flag179_set(int v) { _is_unused_flag179 = v; }
 void Tp::is_unused_flag17_set(int v) { _is_unused_flag17 = v; }
 void Tp::is_unused_flag18_set(int v) { _is_unused_flag18 = v; }

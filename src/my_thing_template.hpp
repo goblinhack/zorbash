@@ -114,6 +114,7 @@ private:
   int _ai_detect_secret_doors {};
   int _ai_resent_count {};
   int _ai_wanderer {};
+  int _attack_blood {};
   int _attack_eater {};
   int _attack_humanoid {};
   int _attack_living {};
@@ -384,6 +385,7 @@ private:
   int _is_dry_grass_trampled {};
   int _is_eater_of_amulets {};
   int _is_eater_of_armor {};
+  int _is_eater_of_blood {};
   int _is_eater_of_boots {};
   int _is_eater_of_cloaks {};
   int _is_eater_of_foliage {};
@@ -661,8 +663,6 @@ private:
   int _is_unused_flag171 {};
   int _is_unused_flag172 {};
   int _is_unused_flag173 {};
-  int _is_unused_flag174 {};
-  int _is_unused_flag175 {};
   int _is_unused_flag179 {};
   int _is_unused_flag18 {};
   int _is_unused_flag19 {};
@@ -1385,6 +1385,7 @@ public:
   int ai_detect_secret_doors(void) const;
   int ai_resent_count(void) const;
   int ai_wanderer(void) const;
+  int attack_blood(void) const;
   int attack_eater(void) const;
   int attack_humanoid(void) const;
   int attack_living(void) const;
@@ -1670,6 +1671,7 @@ public:
   int is_dry_grass(void) const;
   int is_eater_of_amulets(void) const;
   int is_eater_of_armor(void) const;
+  int is_eater_of_blood(void) const;
   int is_eater_of_boots(void) const;
   int is_eater_of_cloaks(void) const;
   int is_eater_of_foliage(void) const;
@@ -1944,8 +1946,6 @@ public:
   int is_unused_flag171(void) const;
   int is_unused_flag172(void) const;
   int is_unused_flag173(void) const;
-  int is_unused_flag174(void) const;
-  int is_unused_flag175(void) const;
   int is_unused_flag179(void) const;
   int is_unused_flag17(void) const;
   int is_unused_flag18(void) const;
@@ -2138,6 +2138,7 @@ public:
   void ai_detect_secret_doors_set(int v);
   void ai_resent_count_set(int v);
   void ai_wanderer_set(int v);
+  void attack_blood_set(int v);
   void attack_eater_set(int v);
   void attack_humanoid_set(int v);
   void attack_living_set(int v);
@@ -2410,6 +2411,7 @@ public:
   void is_dry_grass_trampled_set(int v);
   void is_eater_of_amulets_set(int v);
   void is_eater_of_armor_set(int v);
+  void is_eater_of_blood_set(int v);
   void is_eater_of_boots_set(int v);
   void is_eater_of_cloaks_set(int v);
   void is_eater_of_foliage_set(int v);
@@ -2684,8 +2686,6 @@ public:
   void is_unused_flag171_set(int v);
   void is_unused_flag172_set(int v);
   void is_unused_flag173_set(int v);
-  void is_unused_flag174_set(int v);
-  void is_unused_flag175_set(int v);
   void is_unused_flag179_set(int v);
   void is_unused_flag17_set(int v);
   void is_unused_flag18_set(int v);

@@ -187,5 +187,29 @@ bool Thing::is_hated_by_me(const Thingp itp)
     }
   }
 
+  if (me->is_meat()) {
+    if (it->attack_meat()) {
+      if (is_dangerous(itp)) {
+        return true;
+      }
+    }
+  }
+
+  if (me->is_red_blooded() || me->is_green_blooded() || me->is_red_blood() || me->is_green_blood()) {
+    if (it->attack_blood()) {
+      if (is_dangerous(itp)) {
+        return true;
+      }
+    }
+  }
+
+  if (me->is_undead()) {
+    if (it->attack_undead()) {
+      if (is_dangerous(itp)) {
+        return true;
+      }
+    }
+  }
+
   return false;
 }
