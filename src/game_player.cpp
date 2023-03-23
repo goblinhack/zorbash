@@ -356,7 +356,7 @@ void Game::place_player(void)
         t->carry(w);
         t->enchant_without_stone(w);
       }
-      if (1) {
+      if (0) {
         level->thing_new("leech_giant", point(x + 2, y));
         level->thing_new("water", point(x + 1, y));
         level->thing_new("water", point(x + 2, y));
