@@ -516,6 +516,7 @@ void Game::place_player(void)
       // level->thing_new("staff_descent", point(x + 5, y + 2));
       // level->thing_new("fire", point(x + 5, y + 2));
       // level->thing_new("spiderweb", point(x, y));
+      // level->thing_new("spider_onyx_widow", point(x + 2, y));
       // level->thing_new("spider_giant", point(x + 2, y));
       if (0) {
         level->thing_new("bat_lesser", point(x + 2, y + 1));
