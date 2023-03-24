@@ -167,7 +167,7 @@ def tp_init(name, text_long_name):
     my.on_tick_do(self, "me.on_tick()")
     my.on_want_to_shoot_at_do(self, "me.on_want_to_shoot_at()")
     my.on_you_nat_att_do(self, "me.on_you_nat_att()")
-    my.rarity(self, my.RARITY_RARE)  # how rare within this monster class
+    my.rarity(self, my.RARITY_UNCOMMON)  # how rare within this monster class
     my.resurrect_dice(self, "1d10+30")
     my.stat_con(self, 15)
     my.stat_def(self, 11)

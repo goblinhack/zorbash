@@ -120,7 +120,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
     my.on_you_nat_att_do(self, "me.on_you_nat_att()")
-    my.rarity(self, my.RARITY_COMMON)  # how rare within this monster class
+    my.rarity(self, my.RARITY_UNCOMMON)  # how rare within this monster class
     my.stamina(self, 100)
     my.stat_con(self, 12)
     my.stat_def(self, 10)
@@ -142,19 +142,19 @@ def tp_init(name, text_long_name, text_short_name):
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
     # end sort marker
 
-    delay = 150
+    delay = 200
     my.tile(self,
             ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="cyan",
             tile="spider_flux.1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="cyan",
-            tile="spider_flux.2", delay_ms=delay)
+            ascii_fg_char="", ascii_bg_col_name="", ascii_fg_col_name="cyan",
+            tile="spider_flux.2", delay_ms=delay, is_invisible=True)
     my.tile(self,
-            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="cyan",
-            tile="spider_flux.3", delay_ms=delay)
+            ascii_fg_char="", ascii_bg_col_name="", ascii_fg_col_name="cyan",
+            tile="spider_flux.3", delay_ms=delay, is_invisible=True)
     my.tile(self,
-            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="cyan",
-            tile="spider_flux.4", delay_ms=delay)
+            ascii_fg_char="", ascii_bg_col_name="", ascii_fg_col_name="cyan",
+            tile="spider_flux.4", delay_ms=delay, is_invisible=True)
 
     my.tile(self,
             ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="cyan",

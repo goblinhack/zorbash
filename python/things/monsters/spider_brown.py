@@ -107,7 +107,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_shovable(self, True)
     my.is_spider(self, True)
     my.is_tickable(self, True)
-    my.jump_distance(self, 3)
+    my.jump_distance(self, 5)
     my.move_speed(self, 200)
     my.noise_decibels_hearing(self, 0)
     my.normal_placement_rules(self, True)
@@ -116,7 +116,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
     my.on_you_nat_att_do(self, "me.on_you_nat_att()")
-    my.rarity(self, my.RARITY_COMMON)  # how rare within this monster class
+    my.rarity(self, my.RARITY_UNCOMMON)  # how rare within this monster class
     my.stamina(self, 100)
     my.stat_con(self, 12)
     my.stat_def(self, 10)

@@ -73,7 +73,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
     my.on_want_to_shoot_at_do(self, "me.on_want_to_shoot_at()")
-    my.rarity(self, my.RARITY_RARE)  # how rare within this monster class
+    my.rarity(self, my.RARITY_UNCOMMON)  # how rare within this monster class
     my.stat_con(self, 10)
     my.stat_def(self, 10)
     my.stat_dex(self, 10)
