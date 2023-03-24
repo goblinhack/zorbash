@@ -56,7 +56,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_def_mod(self, 3)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 DEF")
-    my.text_description_long2(self, "This near indestructable shield gives the ideal combination of defense and light weight.")
+    my.text_description_long2(self, "This near indestructible shield gives the ideal combination of defense and light weight.")
     my.text_description_long(self, "An obsisdian shield, it's surface as dark as the yawning space between stars. Has some shiny bits too.")
     my.text_description_short(self, "Obsidian shield.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

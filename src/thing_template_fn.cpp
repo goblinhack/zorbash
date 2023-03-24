@@ -314,7 +314,7 @@ int Tp::gfx_pixelart_show_highlighted(void) const { return _gfx_pixelart_show_hi
 int Tp::gfx_pixelart_shown_in_bg(void) const { return _gfx_pixelart_shown_in_bg; }
 int Tp::gfx_pixelart_show_outlined(void) const { return _gfx_pixelart_show_outlined; }
 int Tp::gfx_pixelart_show_square_outlined(void) const { return _gfx_pixelart_show_square_outlined; }
-int Tp::gfx_pixelart_submergable(void) const { return _gfx_pixelart_submergable; }
+int Tp::gfx_pixelart_submergible(void) const { return _gfx_pixelart_submergible; }
 int Tp::gfx_pixelart_wobbles_when_hit(void) const { return _gfx_pixelart_wobbles_when_hit; }
 int Tp::gfx_water(void) const { return _gfx_water; }
 int Tp::hunger_clock_tick_freq(void) const { return _hunger_clock_tick_freq; }
@@ -388,6 +388,7 @@ int Tp::is_alive_on_end_of_anim(void) const { return _is_alive_on_end_of_anim; }
 int Tp::is_always_hit(void) const { return _is_always_hit; }
 int Tp::is_always_submerged(void) const { return _is_always_submerged; }
 int Tp::is_amulet(void) const { return _is_amulet; }
+int Tp::is_ant(void) const { return _is_ant; }
 int Tp::is_aquatic(void) const { return _is_aquatic; }
 int Tp::is_armor(void) const { return _is_armor; }
 int Tp::is_ascend_dungeon(void) const { return _is_ascend_dungeon; }
@@ -406,6 +407,7 @@ int Tp::is_bag_item(void) const { return _is_bag_item; }
 int Tp::is_bag(void) const { return _is_bag; }
 int Tp::is_barrel(void) const { return _is_barrel; }
 int Tp::is_basalt(void) const { return _is_basalt; }
+int Tp::is_bee(void) const { return _is_bee; }
 int Tp::is_biome_dungeon(void) const { return _is_biome_dungeon; }
 int Tp::is_biome_sewer(void) const { return _is_biome_sewer; }
 int Tp::is_biome_swamp(void) const { return _is_biome_swamp; }
@@ -737,8 +739,6 @@ int Tp::is_unused_flag169(void) const { return _is_unused_flag169; }
 int Tp::is_unused_flag16(void) const { return _is_unused_flag16; }
 int Tp::is_unused_flag170(void) const { return _is_unused_flag170; }
 int Tp::is_unused_flag171(void) const { return _is_unused_flag171; }
-int Tp::is_unused_flag172(void) const { return _is_unused_flag172; }
-int Tp::is_unused_flag173(void) const { return _is_unused_flag173; }
 int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
 int Tp::is_unused_flag17(void) const { return _is_unused_flag17; }
 int Tp::is_unused_flag18(void) const { return _is_unused_flag18; }
@@ -1052,7 +1052,7 @@ void Tp::gfx_pixelart_show_highlighted_set(int v) { _gfx_pixelart_show_highlight
 void Tp::gfx_pixelart_shown_in_bg_set(int v) { _gfx_pixelart_shown_in_bg = v; }
 void Tp::gfx_pixelart_show_outlined_set(int v) { _gfx_pixelart_show_outlined = v; }
 void Tp::gfx_pixelart_show_square_outlined_set(int v) { _gfx_pixelart_show_square_outlined = v; }
-void Tp::gfx_pixelart_submergable_set(int v) { _gfx_pixelart_submergable = v; }
+void Tp::gfx_pixelart_submergible_set(int v) { _gfx_pixelart_submergible = v; }
 void Tp::gfx_pixelart_wobbles_when_hit_set(int v) { _gfx_pixelart_wobbles_when_hit = v; }
 void Tp::gfx_targetted_laser_set(const std::string &v) { _gfx_targetted_laser = v; }
 void Tp::gfx_targetted_radial_set(const std::string &v) { _gfx_targetted_radial = v; }
@@ -1128,6 +1128,7 @@ void Tp::is_allied_with_set(const std::string &v) { _is_allied_with = v; }
 void Tp::is_always_hit_set(int v) { _is_always_hit = v; }
 void Tp::is_always_submerged_set(int v) { _is_always_submerged = v; }
 void Tp::is_amulet_set(int v) { _is_amulet = v; }
+void Tp::is_ant_set(int v) { _is_ant = v; }
 void Tp::is_aquatic_set(int v) { _is_aquatic = v; }
 void Tp::is_armor_set(int v) { _is_armor = v; }
 void Tp::is_ascend_dungeon_set(int v) { _is_ascend_dungeon = v; }
@@ -1146,6 +1147,7 @@ void Tp::is_bag_item_set(int v) { _is_bag_item = v; }
 void Tp::is_bag_set(int v) { _is_bag = v; }
 void Tp::is_barrel_set(int v) { _is_barrel = v; }
 void Tp::is_basalt_set(int v) { _is_basalt = v; }
+void Tp::is_bee_set(int v) { _is_bee = v; }
 void Tp::is_biome_dungeon_set(int v) { _is_biome_dungeon = v; }
 void Tp::is_biome_sewer_set(int v) { _is_biome_sewer = v; }
 void Tp::is_biome_swamp_set(int v) { _is_biome_swamp = v; }
@@ -1477,8 +1479,6 @@ void Tp::is_unused_flag169_set(int v) { _is_unused_flag169 = v; }
 void Tp::is_unused_flag16_set(int v) { _is_unused_flag16 = v; }
 void Tp::is_unused_flag170_set(int v) { _is_unused_flag170 = v; }
 void Tp::is_unused_flag171_set(int v) { _is_unused_flag171 = v; }
-void Tp::is_unused_flag172_set(int v) { _is_unused_flag172 = v; }
-void Tp::is_unused_flag173_set(int v) { _is_unused_flag173 = v; }
 void Tp::is_unused_flag179_set(int v) { _is_unused_flag179 = v; }
 void Tp::is_unused_flag17_set(int v) { _is_unused_flag17 = v; }
 void Tp::is_unused_flag18_set(int v) { _is_unused_flag18 = v; }

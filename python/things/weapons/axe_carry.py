@@ -16,7 +16,7 @@ def init_carry(name):
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_show_outlined(self, True)
-    my.gfx_pixelart_submergable(self, True)
+    my.gfx_pixelart_submergible(self, True)
     my.is_loggable(self, True)
     my.is_moveable(self, True)
     my.text_a_or_an(self, "a")

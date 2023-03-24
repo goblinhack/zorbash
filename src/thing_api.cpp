@@ -1126,15 +1126,15 @@ int Thing::is_unused_flag171(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag171());
 }
-int Thing::is_unused_flag172(void)
+int Thing::is_ant(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag172());
+  return (tp()->is_ant());
 }
-int Thing::is_unused_flag173(void)
+int Thing::is_bee(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag173());
+  return (tp()->is_bee());
 }
 int Thing::attack_blood(void)
 {
@@ -2326,10 +2326,10 @@ int Thing::is_msg_allowed_hears_something(void)
   return (tp()->is_msg_allowed_hears_something());
 }
 
-int Thing::gfx_pixelart_submergable(void)
+int Thing::gfx_pixelart_submergible(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_pixelart_submergable());
+  return (tp()->gfx_pixelart_submergible());
 }
 
 int Thing::is_obs_for_jump_landing(void)

@@ -25,7 +25,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.gfx_pixelart_show_square_outlined(self, True)
-    my.gfx_pixelart_submergable(self, True)
+    my.gfx_pixelart_submergible(self, True)
     my.is_ascend_dungeon(self, True)
     my.is_biome_dungeon(self, True)
     my.is_biome_swamp(self, True)

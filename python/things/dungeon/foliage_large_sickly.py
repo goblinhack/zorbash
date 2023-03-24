@@ -20,7 +20,7 @@ def tp_init(name, tiles=[]):
     my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.gfx_pixelart_show_outlined(self, True)
-    my.gfx_pixelart_submergable(self, True)
+    my.gfx_pixelart_submergible(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "1d10")
     my.is_able_to_amplify_footsteps(self, True)

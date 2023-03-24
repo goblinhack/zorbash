@@ -1218,7 +1218,7 @@ public:
   int gfx_pixelart_shown_in_bg(void);
   int gfx_pixelart_show_outlined(void);
   int gfx_pixelart_show_square_outlined(void);
-  int gfx_pixelart_submergable(void);
+  int gfx_pixelart_submergible(void);
   int gfx_pixelart_wobbles_when_hit(void);
   int gfx_water(void);
   int goal_penalty_get(Thingp attacker);
@@ -1331,6 +1331,7 @@ public:
   int is_always_hit(void);
   int is_always_submerged(void);
   int is_amulet(void);
+  int is_ant(void);
   int is_aquatic(void);
   int is_armor(void);
   int is_ascend_dungeon(void);
@@ -1368,6 +1369,7 @@ public:
   int is_bag(void);
   int is_barrel(void);
   int is_basalt(void);
+  int is_bee(void);
   int is_biome_dungeon(void);
   int is_biome_sewer(void);
   int is_biome_swamp(void);
@@ -1706,8 +1708,6 @@ public:
   int is_unused_flag16(void);
   int is_unused_flag170(void);
   int is_unused_flag171(void);
-  int is_unused_flag172(void);
-  int is_unused_flag173(void);
   int is_unused_flag179(void);
   int is_unused_flag17(void);
   int is_unused_flag18(void);

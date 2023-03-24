@@ -12,7 +12,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
-    my.gfx_pixelart_submergable(self, True)
+    my.gfx_pixelart_submergible(self, True)
     my.is_able_to_be_teleported(self, True)
     my.is_able_to_fall(self, True)
     my.is_able_to_freeze(self, True)
@@ -36,8 +36,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "10+1d20")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "A chunk of watermelon. Those black bits are likely seeds. Yes...")
-    my.text_description_short(self, "Watermelon.")
+    my.text_description_long(self, "A chunk of waterlemon. Yes lemon. Those black bits are likely seeds. Tastes awful")
+    my.text_description_short(self, "Waterlemon.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
     # end sort marker
@@ -49,7 +49,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="watermelon", text_long_name="watermelon", text_short_name="waterlemon")
+    tp_init(name="waterlemon", text_long_name="waterlemon", text_short_name="waterlemon")
 
 
 init()

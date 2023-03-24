@@ -12,7 +12,7 @@ def gold_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_shadow_very_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
-    my.gfx_pixelart_submergable(self, True)
+    my.gfx_pixelart_submergible(self, True)
     my.gold_value_dice(self, "2+1d6")
     my.is_able_to_be_teleported(self, True)
     my.is_able_to_fall(self, True)

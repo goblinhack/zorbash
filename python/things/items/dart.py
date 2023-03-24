@@ -22,7 +22,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
-    my.gfx_pixelart_submergable(self, True)
+    my.gfx_pixelart_submergible(self, True)
     my.is_able_to_be_teleported(self, True)
     my.is_able_to_fall(self, True)
     my.is_aerodynamic(self, True)

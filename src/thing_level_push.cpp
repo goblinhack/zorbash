@@ -369,7 +369,7 @@ void Thing::level_push(void)
   //
   // Update submerged status
   //
-  if (gfx_pixelart_submergable()) {
+  if (gfx_pixelart_submergible()) {
     auto map_loc = curr_at;
     if (o_top) {
       map_loc = o_top->curr_at;

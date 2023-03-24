@@ -27,24 +27,21 @@ def on_death(me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.aggression_pct(self, 100)
+    my.aggression_pct(self, -10)
     my.ai_resent_count(self, 10)
     my.attack_eater(self, True)
     my.chance_d1000_jump_attack(self, 800)
     my.chance_d1000_jump_onto(self, 100)
     my.chance_d1000_jump_randomly(self, 20)
-    my.chance_d1000_teleport_self(self, 100)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 30)
     my.distance_avoid(self, 5)
     my.distance_vision(self, 5)
     my.dmg_chance_d1000_nat_att(self, 0, 100)
-    my.dmg_chance_d1000_necrosis(self, 0, 50)
     my.dmg_chance_d1000_poison(self, 0, 900)
     my.dmg_nat_att_dice(self, "1d3")
     my.dmg_nat_att_type(self, "gore")
-    my.dmg_necrosis_dice(self, "1")
     my.dmg_poison_dice(self, "1d4")
     my.dmg_received_doubled_from_fire(self, True)
     my.environ_avoids_fire(self, 10)
@@ -56,7 +53,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_bounce_on_move(self, True)
-    my.gfx_pixelart_health_bar_shown(self, False)
+    my.gfx_pixelart_health_bar_shown(self, True)
     my.gfx_pixelart_oversized_and_centered(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
@@ -64,7 +61,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_submergible(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
-    my.health_initial_dice(self, "2d6")
+    my.health_initial_dice(self, "1d4")
     my.hunger_clock_tick_freq(self, 50)
     my.hunger_is_insatiable(self, True)
     my.is_able_to_be_teleported(self, True)
@@ -78,25 +75,23 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_able_to_lunge(self, True)
     my.is_able_to_rest(self, True)
     my.is_able_to_see_in_the_dark(self, True)
-    my.is_able_to_teleport_escape(self, True)
-    my.is_able_to_teleport_self(self, True)
-    my.is_able_to_teleport_without_tiring(self, True)
+    my.is_able_to_see_invisible(self, True)
     my.is_able_to_tire(self, True)
+    my.is_able_to_walk_through_walls(self, True)
     my.is_air_breather(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)
     my.is_bleeder(self, True)
     my.is_corpse_on_death(self, True)
-    my.is_crushable(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_eater_of_meat(self, True)
+    my.is_ethereal(self, True)
     my.is_green_blooded(self, True)
     my.is_hittable(self, True)
-    my.is_immune_to_necrosis(self, True)
     my.is_immune_to_spiderwebs(self, True)
     my.is_interesting(self, True)
-    my.is_living(self, True)
+    my.is_lifeless(self, True)
     my.is_loggable(self, True)
     my.is_monst_class_A(self, True)
     my.is_monst(self, True)
@@ -106,12 +101,11 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_msg_allowed_is_seen(self, True)
     my.is_msg_allowed_is_wounded(self, True)
     my.is_msg_allowed_senses_danger(self, True)
-    my.is_necrotic_danger_level(self, 1)  # danger level
     my.is_poisonous_danger_level(self, 2)  # danger level
     my.is_shovable(self, True)
     my.is_spider(self, True)
     my.is_tickable(self, True)
-    my.jump_distance(self, 3)
+    my.jump_distance(self, 5)
     my.move_speed(self, 200)
     my.noise_decibels_hearing(self, 0)
     my.normal_placement_rules(self, True)
@@ -127,44 +121,43 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_dex(self, 12)
     my.stat_luck(self, 10)
     my.stat_str(self, 8)
-    my.teleport_distance(self, 10)
     my.temperature_max(self, 50)
     my.temperature_min(self, 0)
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "Flux spiders weave webs both in the material and ethereal plane and can often be seen flitting between the two.")
-    my.text_description_short(self, "A phasing in and out flux spider.")
+    my.text_description_long(self, "The para spider is the stuff of nightmares. Tired of seeing spiders crawling on walls, well fear no more, as this spider can travel... through walls")
+    my.text_description_short(self, "A para spider.")
     my.text_hits(self, "bites")
-    my.thing_size(self, my.THING_SIZE_LARGE)
+    my.thing_size(self, my.THING_SIZE_NORMAL)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
     # end sort marker
 
-    delay = 200
+    delay = 150
     my.tile(self,
-            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="cyan",
-            tile="spider_flux.1", delay_ms=delay)
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            tile="spider_para.1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="", ascii_bg_col_name="", ascii_fg_col_name="cyan",
-            tile="spider_flux.2", delay_ms=delay, is_invisible=True)
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            tile="spider_para.2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="", ascii_bg_col_name="", ascii_fg_col_name="cyan",
-            tile="spider_flux.3", delay_ms=delay, is_invisible=True)
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            tile="spider_para.3", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="", ascii_bg_col_name="", ascii_fg_col_name="cyan",
-            tile="spider_flux.4", delay_ms=delay, is_invisible=True)
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            tile="spider_para.4", delay_ms=delay)
 
     my.tile(self,
-            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="cyan",
-            tile="spider_flux.dead", is_dead=True, delay_ms=delay)
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="gray30",
+            tile="spider_para.dead", is_dead=True, delay_ms=delay)
 
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="spider_flux", text_long_name="flux spider", text_short_name="flux spider")
+    tp_init(name="spider_para", text_long_name="para spider", text_short_name="para spider")
 
 
 init()

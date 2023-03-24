@@ -11,7 +11,7 @@ def tp_init(name, tiles=[]):
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
-    my.gfx_pixelart_submergable(self, True)
+    my.gfx_pixelart_submergible(self, True)
     my.is_able_to_amplify_footsteps(self, True)
     my.is_able_to_fall(self, True)
     my.is_biome_dungeon(self, True)

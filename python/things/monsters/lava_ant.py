@@ -2,6 +2,10 @@ import my
 import tp
 
 
+def on_born(me, x, y):
+    my.thing_friend(me, "is_ant")
+
+
 def on_you_nat_att(me, x, y):
     sound = f"hiss{my.non_pcg_randint(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
@@ -71,6 +75,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_lunge(self, True)
     my.is_able_to_rest(self, True)
     my.is_able_to_see_in_the_dark(self, True)
+    my.is_ant(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)
@@ -98,6 +103,7 @@ def tp_init(name, text_long_name):
     my.move_speed(self, 50)
     my.noise_decibels_hearing(self, 0)
     my.normal_placement_rules(self, True)
+    my.on_born_do(self, "me.on_born()")
     my.on_death_do(self, "me.on_death()")
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")

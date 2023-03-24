@@ -98,7 +98,7 @@ PyObject *thing_gfx_ascii_color_fg_unchanged_by_lights(PyObject *obj, PyObject *
 PyObject *thing_gfx_pixelart_oversized_and_centered(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_pixelart_show_highlighted(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_pixelart_show_square_outlined(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_gfx_pixelart_submergable(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_gfx_pixelart_submergible(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gold_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gold_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gold(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -198,6 +198,7 @@ PyObject *thing_is_alive_on_end_of_anim(PyObject *obj, PyObject *args, PyObject 
 PyObject *thing_is_always_hit(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_always_submerged(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_amulet(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_ant(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_aquatic(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_armor(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ascend_dungeon(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -216,6 +217,7 @@ PyObject *thing_is_bag_item(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bag(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_barrel(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_basalt(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_bee(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_biome_dungeon(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_biome_sewer(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_biome_swamp(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -560,8 +562,6 @@ PyObject *thing_is_unused_flag169(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag16(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag170(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag171(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag172(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag173(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag179(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag17(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag18(PyObject *obj, PyObject *args, PyObject *keywds);

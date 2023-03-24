@@ -234,7 +234,7 @@ private:
   int _gfx_pixelart_shown_in_bg {};
   int _gfx_pixelart_show_outlined {};
   int _gfx_pixelart_show_square_outlined {};
-  int _gfx_pixelart_submergable {};
+  int _gfx_pixelart_submergible {};
   int _gfx_pixelart_wobbles_when_hit {};
   int _gfx_water {};
   int _has_temperature {};
@@ -309,6 +309,7 @@ private:
   int _is_always_hit {};
   int _is_always_submerged {};
   int _is_amulet {};
+  int _is_ant {};
   int _is_aquatic {};
   int _is_armor {};
   int _is_ascend_dungeon {};
@@ -327,6 +328,7 @@ private:
   int _is_bag_item_not_stackable {};
   int _is_barrel {};
   int _is_basalt {};
+  int _is_bee {};
   int _is_biome_dungeon {};
   int _is_biome_sewer {};
   int _is_biome_swamp {};
@@ -661,8 +663,6 @@ private:
   int _is_unused_flag17 {};
   int _is_unused_flag170 {};
   int _is_unused_flag171 {};
-  int _is_unused_flag172 {};
-  int _is_unused_flag173 {};
   int _is_unused_flag179 {};
   int _is_unused_flag18 {};
   int _is_unused_flag19 {};
@@ -1521,7 +1521,7 @@ public:
   int gfx_pixelart_shown_in_bg(void) const;
   int gfx_pixelart_show_outlined(void) const;
   int gfx_pixelart_show_square_outlined(void) const;
-  int gfx_pixelart_submergable(void) const;
+  int gfx_pixelart_submergible(void) const;
   int gfx_pixelart_wobbles_when_hit(void) const;
   int gfx_water(void) const;
   int hunger_clock_tick_freq(void) const;
@@ -1595,6 +1595,7 @@ public:
   int is_always_hit(void) const;
   int is_always_submerged(void) const;
   int is_amulet(void) const;
+  int is_ant(void) const;
   int is_aquatic(void) const;
   int is_armor(void) const;
   int is_ascend_dungeon(void) const;
@@ -1613,6 +1614,7 @@ public:
   int is_bag(void) const;
   int is_barrel(void) const;
   int is_basalt(void) const;
+  int is_bee(void) const;
   int is_biome_dungeon(void) const;
   int is_biome_sewer(void) const;
   int is_biome_swamp(void) const;
@@ -1944,8 +1946,6 @@ public:
   int is_unused_flag16(void) const;
   int is_unused_flag170(void) const;
   int is_unused_flag171(void) const;
-  int is_unused_flag172(void) const;
-  int is_unused_flag173(void) const;
   int is_unused_flag179(void) const;
   int is_unused_flag17(void) const;
   int is_unused_flag18(void) const;
@@ -2259,7 +2259,7 @@ public:
   void gfx_pixelart_shown_in_bg_set(int v);
   void gfx_pixelart_show_outlined_set(int v);
   void gfx_pixelart_show_square_outlined_set(int v);
-  void gfx_pixelart_submergable_set(int v);
+  void gfx_pixelart_submergible_set(int v);
   void gfx_pixelart_wobbles_when_hit_set(int v);
   void gfx_targetted_laser_set(const std::string &v);
   void gfx_targetted_radial_set(const std::string &v);
@@ -2335,6 +2335,7 @@ public:
   void is_always_hit_set(int v);
   void is_always_submerged_set(int v);
   void is_amulet_set(int v);
+  void is_ant_set(int v);
   void is_aquatic_set(int v);
   void is_armor_set(int v);
   void is_ascend_dungeon_set(int v);
@@ -2353,6 +2354,7 @@ public:
   void is_bag_set(int v);
   void is_barrel_set(int v);
   void is_basalt_set(int v);
+  void is_bee_set(int v);
   void is_biome_dungeon_set(int v);
   void is_biome_sewer_set(int v);
   void is_biome_swamp_set(int v);
@@ -2684,8 +2686,6 @@ public:
   void is_unused_flag16_set(int v);
   void is_unused_flag170_set(int v);
   void is_unused_flag171_set(int v);
-  void is_unused_flag172_set(int v);
-  void is_unused_flag173_set(int v);
   void is_unused_flag179_set(int v);
   void is_unused_flag17_set(int v);
   void is_unused_flag18_set(int v);
