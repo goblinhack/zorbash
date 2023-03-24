@@ -380,6 +380,8 @@ std::initializer_list< std::string > tps = {
     "somekindofmeat",
     "spider_giant",
     "spider_onyx_widow",
+    "spider_brown",
+    "spider_flux",
     "spiderweb",
     "staff_cold",
     "staff_cold_carry",

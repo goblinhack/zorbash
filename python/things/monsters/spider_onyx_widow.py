@@ -99,7 +99,6 @@ def tp_init(name, text_long_name):
     my.is_msg_allowed_is_seen(self, True)
     my.is_msg_allowed_is_wounded(self, True)
     my.is_msg_allowed_senses_danger(self, True)
-    my.is_poisonous_danger_level(self, 1)
     my.is_poisonous_danger_level(self, 2)  # danger level
     my.is_shovable(self, True)
     my.is_spider(self, True)
