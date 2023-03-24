@@ -128,9 +128,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_long2(self, "These spiders are dangerous, but not very aggressive.")
-    my.text_description_long(self, "A disturbingly large reclusive brown spider. Beware its necrotic bite. I mean really, it can mess you up!")
-    my.text_description_short(self, "A very reclusive brown spider.")
+    my.text_description_long2(self, "These spiders are dangerous, and can really mess you up!")
+    my.text_description_long(self, "A disturbingly large brown spider, the extrovert spider is a close relative of the brown recluse. Beware of its necrotic bite, especially at parties, which it loves to turn up as a surprise guest.")
+    my.text_description_short(self, "A brown extrovert spider.")
     my.text_hits(self, "bites")
     my.thing_size(self, my.THING_SIZE_LARGE)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -160,7 +160,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="spider_brown", text_long_name="very reclusive brown spider", text_short_name="brown spider")
+    tp_init(name="spider_brown", text_long_name="brown extrovert spider", text_short_name="extrovert spider")
 
 
 init()

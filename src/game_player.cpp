@@ -356,9 +356,9 @@ void Game::place_player(void)
         t->carry(w);
         t->enchant_without_stone(w);
       }
+      level->thing_new("spider_brown", point(x + 2, y + 4));
       if (0) {
         level->thing_new("spider_flux", point(x - 2, y - 3));
-        level->thing_new("spider_brown", point(x + 2, y + 4));
         level->thing_new("leech_giant", point(x + 2, y));
         level->thing_new("water", point(x + 1, y));
         level->thing_new("water", point(x + 2, y));
