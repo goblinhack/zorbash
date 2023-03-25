@@ -237,6 +237,14 @@ bool Thing::carry(Thingp item, bool can_equip)
   dbg("Check if thing can be added to a bag");
   TRACE_AND_INDENT();
 
+  //
+  // Update the owner setting now the thing has been dropped.
+  //
+  top_owner = item->top_owner();
+  if (top_owner) {
+    dbg("Item %s has owner: %s", item->to_short_string().c_str(), top_owner->to_short_string().c_str());
+  }
+
   if (equipped) {
     //
     // Continue
