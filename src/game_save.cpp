@@ -916,7 +916,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my)
 std::ostream &operator<<(std::ostream &out, Bits< const class Game & > const my)
 {
   TRACE_AND_INDENT();
-  uint32_t serialized_size = sizeof(Game);
+  uint32_t serialized_size = (uint32_t) (sizeof(Game) + sizeof(Level) + sizeof(Thing) + sizeof(ThingAi) +
+                                         sizeof(ThingInfo) + sizeof(ThingItem));
   out << bits(my.t.version);
   out << bits(serialized_size);
   out << bits(my.t.save_slot);

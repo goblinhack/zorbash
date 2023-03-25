@@ -1054,7 +1054,8 @@ std::istream &operator>>(std::istream &in, Bits< class Game & > my)
   in >> bits(my.t.version);
   in >> bits(my.t.serialized_size);
 
-  if (my.t.serialized_size != (uint32_t) sizeof(Game)) {
+  if (my.t.serialized_size != (uint32_t) (sizeof(Game) + sizeof(Level) + sizeof(Thing) + sizeof(ThingAi) +
+                                          sizeof(ThingInfo) + sizeof(ThingItem))) {
     if (my.t.version == MYVER) {
       game_load_error = "Incompatible save file for version " + my.t.version;
     } else {
