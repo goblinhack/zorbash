@@ -490,6 +490,7 @@ int Tp::is_enchantable_as_a_group(void) const { return _is_enchantable_as_a_grou
 int Tp::is_enchantable(void) const { return _is_enchantable; }
 int Tp::is_enchantstone(void) const { return _is_enchantstone; }
 int Tp::is_engulfer(void) const { return _is_engulfer; }
+int Tp::is_equippable(void) const { return _is_equippable; }
 int Tp::is_ethereal_mob(void) const { return _is_ethereal_mob; }
 int Tp::is_ethereal(void) const { return _is_ethereal; }
 int Tp::is_ettin(void) const { return _is_ettin; }
@@ -738,7 +739,6 @@ int Tp::is_unused_flag168(void) const { return _is_unused_flag168; }
 int Tp::is_unused_flag169(void) const { return _is_unused_flag169; }
 int Tp::is_unused_flag16(void) const { return _is_unused_flag16; }
 int Tp::is_unused_flag170(void) const { return _is_unused_flag170; }
-int Tp::is_unused_flag171(void) const { return _is_unused_flag171; }
 int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
 int Tp::is_unused_flag17(void) const { return _is_unused_flag17; }
 int Tp::is_unused_flag18(void) const { return _is_unused_flag18; }
@@ -1230,6 +1230,7 @@ void Tp::is_enchantable_as_a_group_set(int v) { _is_enchantable_as_a_group = v; 
 void Tp::is_enchantable_set(int v) { _is_enchantable = v; }
 void Tp::is_enchantstone_set(int v) { _is_enchantstone = v; }
 void Tp::is_engulfer_set(int v) { _is_engulfer = v; }
+void Tp::is_equippable_set(int v) { _is_equippable = v; }
 void Tp::is_ethereal_mob_set(int v) { _is_ethereal_mob = v; }
 void Tp::is_ethereal_set(int v) { _is_ethereal = v; }
 void Tp::is_ettin_set(int v) { _is_ettin = v; }
@@ -1478,7 +1479,6 @@ void Tp::is_unused_flag168_set(int v) { _is_unused_flag168 = v; }
 void Tp::is_unused_flag169_set(int v) { _is_unused_flag169 = v; }
 void Tp::is_unused_flag16_set(int v) { _is_unused_flag16 = v; }
 void Tp::is_unused_flag170_set(int v) { _is_unused_flag170 = v; }
-void Tp::is_unused_flag171_set(int v) { _is_unused_flag171 = v; }
 void Tp::is_unused_flag179_set(int v) { _is_unused_flag179 = v; }
 void Tp::is_unused_flag17_set(int v) { _is_unused_flag17 = v; }
 void Tp::is_unused_flag18_set(int v) { _is_unused_flag18 = v; }

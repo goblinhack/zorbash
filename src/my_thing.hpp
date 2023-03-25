@@ -1458,6 +1458,7 @@ public:
   int is_enchantable(void);
   int is_enchantstone(void);
   int is_engulfer(void);
+  int is_equippable(void);
   int is_ethereal_mob(void);
   int is_ethereal(void);
   int is_ettin(void);
@@ -1707,7 +1708,6 @@ public:
   int is_unused_flag169(void);
   int is_unused_flag16(void);
   int is_unused_flag170(void);
-  int is_unused_flag171(void);
   int is_unused_flag179(void);
   int is_unused_flag17(void);
   int is_unused_flag18(void);

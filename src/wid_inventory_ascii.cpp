@@ -284,7 +284,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
         wid_set_text(w, "Use (choose target)");
         y_at += 2;
       }
-    } else if (item_option->is_usable() && ! player->is_equipped(item_option)) {
+    } else if (item_option->is_equippable() && ! player->is_equipped(item_option)) {
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;
       auto w = wid_new_square_button(p, "use");
@@ -298,17 +298,61 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
       wid_set_on_mouse_up(w, wid_inventory_item_option_use);
       wid_set_pos(w, tl, br);
       if (item_option->is_weapon()) {
-        wid_set_text(w, "Use (equip)");
+        wid_set_text(w, "Equip");
       } else if (item_option->is_potion()) {
-        wid_set_text(w, "Use (drink)");
+        wid_set_text(w, "Drink");
       } else if (item_option->is_staff()) {
-        wid_set_text(w, "Use (fire it)");
+        wid_set_text(w, "Shoot");
       } else if (item_option->is_ring()) {
-        wid_set_text(w, "Use (wear it)");
+        wid_set_text(w, "Wear");
+      } else if (item_option->is_shield()) {
+        wid_set_text(w, "Wield");
+      } else if (item_option->is_gauntlet()) {
+        wid_set_text(w, "Wear)");
+      } else if (item_option->is_armor()) {
+        wid_set_text(w, "Wear");
+      } else if (item_option->is_cloak()) {
+        wid_set_text(w, "Wear");
+      } else if (item_option->is_boots()) {
+        wid_set_text(w, "Wear");
+      } else if (item_option->is_amulet()) {
+        wid_set_text(w, "Wear)");
       } else {
         wid_set_text(w, "Use");
       }
       y_at += 2;
+    } else if (item_option->is_equippable() && player->is_equipped(item_option)) {
+      TRACE_AND_INDENT();
+      auto p = wid_inventory_window;
+      auto w = wid_new_square_button(p, "use");
+
+      point tl = make_point(x_off, y_at);
+      point br = make_point(x_off + width, y_at + 2);
+      wid_set_style(w, UI_WID_STYLE_NORMAL);
+      wid_set_on_mouse_up(w, wid_inventory_item_option_unequip);
+      wid_set_pos(w, tl, br);
+      if (item_option->is_weapon()) {
+        wid_set_text(w, "Unwield");
+      } else if (item_option->is_staff()) {
+        wid_set_text(w, "Unwield");
+      } else if (item_option->is_ring()) {
+        wid_set_text(w, "Remove");
+      } else if (item_option->is_shield()) {
+        wid_set_text(w, "Unwield");
+      } else if (item_option->is_gauntlet()) {
+        wid_set_text(w, "Remove)");
+      } else if (item_option->is_armor()) {
+        wid_set_text(w, "Remove");
+      } else if (item_option->is_cloak()) {
+        wid_set_text(w, "Remove");
+      } else if (item_option->is_boots()) {
+        wid_set_text(w, "Remove");
+      } else if (item_option->is_amulet()) {
+        wid_set_text(w, "Remove");
+      } else {
+        wid_set_text(w, "Unwield");
+      }
+      y_at += 3;
     } else if (item_option->is_usable() && player->is_equipped(item_option)) {
       //
       // For example boots of teleport

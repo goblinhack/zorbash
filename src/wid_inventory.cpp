@@ -219,6 +219,60 @@ uint8_t wid_inventory_item_option_use(Widp w, int x, int y, uint32_t button)
   return true;
 }
 
+uint8_t wid_inventory_item_option_unequip(Widp w, int x, int y, uint32_t button)
+{
+  DBG2("Inventory: Item options unequip");
+  TRACE_AND_INDENT();
+
+  auto level = game->get_current_level();
+  if (! level) {
+    return true;
+  }
+
+  auto player = level->player;
+  if (! player) {
+    return true;
+  }
+
+  if (player->is_dead) {
+    return true;
+  }
+
+  if (wid_inventory_thing_selected) {
+    wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected use");
+  }
+
+  if (wid_inventory_thing_over) {
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected use");
+  }
+
+  auto what = wid_inventory_thing_selected;
+  if (! what) {
+    what = wid_inventory_thing_over;
+  }
+
+  if (what) {
+    wid_inventory_fini();
+    player->log("Unequip %s", what->to_short_string().c_str());
+
+    FOR_ALL_EQUIP(e)
+    {
+      auto t = player->equip_get(e);
+      if (t == what) {
+        player->unequip("equip swap", e, true);
+        break;
+      }
+    }
+
+    //
+    // Don't do this. It closes up popups for skills
+    //
+    // wid_inventory_init();
+  }
+
+  return true;
+}
+
 uint8_t wid_inventory_item_option_use_radial(Widp w, int x, int y, uint32_t button)
 {
   DBG2("Inventory: Item options use radial");

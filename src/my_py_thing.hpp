@@ -316,6 +316,7 @@ PyObject *thing_is_enchantable_as_a_group(PyObject *obj, PyObject *args, PyObjec
 PyObject *thing_is_enchantable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_enchantstone(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_engulfer(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_equippable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ethereal_mob(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ethereal(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ettin(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -561,7 +562,6 @@ PyObject *thing_is_unused_flag168(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag169(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag16(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag170(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag171(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag179(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag17(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag18(PyObject *obj, PyObject *args, PyObject *keywds);

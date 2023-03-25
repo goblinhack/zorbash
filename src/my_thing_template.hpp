@@ -411,6 +411,7 @@ private:
   int _is_enchantable_as_a_group {};
   int _is_enchantstone {};
   int _is_engulfer {};
+  int _is_equippable {};
   int _is_ethereal {};
   int _is_ethereal_mob {};
   int _is_ettin {};
@@ -662,7 +663,6 @@ private:
   int _is_unused_flag169 {};
   int _is_unused_flag17 {};
   int _is_unused_flag170 {};
-  int _is_unused_flag171 {};
   int _is_unused_flag179 {};
   int _is_unused_flag18 {};
   int _is_unused_flag19 {};
@@ -1697,6 +1697,7 @@ public:
   int is_enchantable(void) const;
   int is_enchantstone(void) const;
   int is_engulfer(void) const;
+  int is_equippable(void) const;
   int is_ethereal_mob(void) const;
   int is_ethereal(void) const;
   int is_ettin(void) const;
@@ -1945,7 +1946,6 @@ public:
   int is_unused_flag169(void) const;
   int is_unused_flag16(void) const;
   int is_unused_flag170(void) const;
-  int is_unused_flag171(void) const;
   int is_unused_flag179(void) const;
   int is_unused_flag17(void) const;
   int is_unused_flag18(void) const;
@@ -2437,6 +2437,7 @@ public:
   void is_enchantable_set(int v);
   void is_enchantstone_set(int v);
   void is_engulfer_set(int v);
+  void is_equippable_set(int v);
   void is_ethereal_mob_set(int v);
   void is_ethereal_set(int v);
   void is_ettin_set(int v);
@@ -2685,7 +2686,6 @@ public:
   void is_unused_flag169_set(int v);
   void is_unused_flag16_set(int v);
   void is_unused_flag170_set(int v);
-  void is_unused_flag171_set(int v);
   void is_unused_flag179_set(int v);
   void is_unused_flag17_set(int v);
   void is_unused_flag18_set(int v);

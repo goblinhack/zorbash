@@ -20,6 +20,7 @@ uint8_t wid_inventory_item_option_eat(Widp w, int x, int y, uint32_t button);
 uint8_t wid_inventory_item_option_throw(Widp w, int x, int y, uint32_t button);
 uint8_t wid_inventory_item_option_use_radial(Widp w, int x, int y, uint32_t button);
 uint8_t wid_inventory_item_option_use(Widp w, int x, int y, uint32_t button);
+uint8_t wid_inventory_item_option_unequip(Widp w, int x, int y, uint32_t button);
 uint8_t wid_inventory_key_down(Widp w, const struct SDL_Keysym *key);
 uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key);
 uint8_t wid_right_bar_inventory_open(class Wid *w, int x, int y, uint32_t button);

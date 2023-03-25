@@ -217,6 +217,7 @@ bool Tp::matches(const std::string &what)
   if (is_enchantable() && (what == "is_enchantable")) { return true; }
   if (is_enchantstone() && (what == "is_enchantstone")) { return true; }
   if (is_engulfer() && (what == "is_engulfer")) { return true; }
+  if (is_equippable() && (what == "is_equippable")) { return true; }
   if (is_ethereal_mob() && (what == "is_ethereal_mob")) { return true; }
   if (is_ethereal() && (what == "is_ethereal")) { return true; }
   if (is_ettin() && (what == "is_ettin")) { return true; }
@@ -459,7 +460,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag169() && (what == "is_unused_flag169")) { return true; }
   if (is_unused_flag16() && (what == "is_unused_flag16")) { return true; }
   if (is_unused_flag170() && (what == "is_unused_flag170")) { return true; }
-  if (is_unused_flag171() && (what == "is_unused_flag171")) { return true; }
   if (is_unused_flag179() && (what == "is_unused_flag179")) { return true; }
   if (is_unused_flag17() && (what == "is_unused_flag17")) { return true; }
   if (is_unused_flag18() && (what == "is_unused_flag18")) { return true; }
@@ -813,6 +813,7 @@ bool Thing::matches(const std::string &what)
   if (is_enchantable() && (what == "is_enchantable")) { return true; }
   if (is_enchantstone() && (what == "is_enchantstone")) { return true; }
   if (is_engulfer() && (what == "is_engulfer")) { return true; }
+  if (is_equippable() && (what == "is_equippable")) { return true; }
   if (is_ethereal_mob() && (what == "is_ethereal_mob")) { return true; }
   if (is_ethereal() && (what == "is_ethereal")) { return true; }
   if (is_ettin() && (what == "is_ettin")) { return true; }
@@ -1055,7 +1056,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag169() && (what == "is_unused_flag169")) { return true; }
   if (is_unused_flag16() && (what == "is_unused_flag16")) { return true; }
   if (is_unused_flag170() && (what == "is_unused_flag170")) { return true; }
-  if (is_unused_flag171() && (what == "is_unused_flag171")) { return true; }
   if (is_unused_flag179() && (what == "is_unused_flag179")) { return true; }
   if (is_unused_flag17() && (what == "is_unused_flag17")) { return true; }
   if (is_unused_flag18() && (what == "is_unused_flag18")) { return true; }
@@ -1402,6 +1402,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_enchantable") { return &Thing::is_enchantable; }
   if (what == "is_enchantstone") { return &Thing::is_enchantstone; }
   if (what == "is_engulfer") { return &Thing::is_engulfer; }
+  if (what == "is_equippable") { return &Thing::is_equippable; }
   if (what == "is_ethereal_mob") { return &Thing::is_ethereal_mob; }
   if (what == "is_ethereal") { return &Thing::is_ethereal; }
   if (what == "is_ettin") { return &Thing::is_ettin; }
@@ -1641,7 +1642,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag169") { return &Thing::is_unused_flag169; }
   if (what == "is_unused_flag16") { return &Thing::is_unused_flag16; }
   if (what == "is_unused_flag170") { return &Thing::is_unused_flag170; }
-  if (what == "is_unused_flag171") { return &Thing::is_unused_flag171; }
   if (what == "is_unused_flag179") { return &Thing::is_unused_flag179; }
   if (what == "is_unused_flag17") { return &Thing::is_unused_flag17; }
   if (what == "is_unused_flag18") { return &Thing::is_unused_flag18; }

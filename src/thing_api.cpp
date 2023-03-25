@@ -1121,10 +1121,10 @@ int Thing::is_unused_flag170(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag170());
 }
-int Thing::is_unused_flag171(void)
+int Thing::is_equippable(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag171());
+  return (tp()->is_equippable());
 }
 int Thing::is_ant(void)
 {
