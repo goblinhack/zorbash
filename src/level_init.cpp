@@ -51,6 +51,7 @@ void Level::clear(void)
   _is_lava                           = {};
   _is_light_blocker                  = {};
   _is_light_blocker_for_monst        = {};
+  _is_walked                         = {};
   _is_monst                          = {};
   _is_obs_destructable               = {};
   _is_obs_for_jump_landing           = {};

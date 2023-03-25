@@ -83,7 +83,10 @@ void Level::cursor_path_draw_circle(void)
 //
 // Create the cursor path, avoiding things like lava
 //
-void Level::cursor_path_draw_line(Thingp it, point start, point end)
+// For the first pass, restrict to tiles we have waked on
+// For the first pass, any tiles will do
+//
+bool Level::cursor_path_draw_line_attempt(Thingp it, point start, point end, int attempt)
 {
   pcg_random_allowed++;
   dbg("Create cursor draw line %d,%d to %d,%d", start.x, start.y, end.x, end.y);
@@ -98,7 +101,7 @@ void Level::cursor_path_draw_line(Thingp it, point start, point end)
   //
   if (! can_see_point_or_nearby(end, THING_CAN_SEE_INTO_SHADOWS_DISTANCE)) {
     pcg_random_allowed--;
-    return;
+    return false;
   }
 
   int minx, miny, maxx, maxy;
@@ -141,7 +144,7 @@ void Level::cursor_path_draw_line(Thingp it, point start, point end)
   //
   if (cursor && is_cursor_path_blocker(it, cursor->curr_at.x, cursor->curr_at.y)) {
     pcg_random_allowed--;
-    return;
+    return false;
   }
 
   //
@@ -174,6 +177,19 @@ void Level::cursor_path_draw_line(Thingp it, point start, point end)
     }
   }
 
+  //
+  // Limit to previously walked tiles
+  //
+  if (attempt == 1) {
+    for (auto y = miny; y < maxy; y++) {
+      for (auto x = minx; x < maxx; x++) {
+        if (! is_walked(x, y)) {
+          set(d.val, x, y, DMAP_IS_WALL);
+        }
+      }
+    }
+  }
+
   dmap_start = point(minx, miny);
   dmap_end   = point(maxx, maxy);
 
@@ -190,7 +206,7 @@ void Level::cursor_path_draw_line(Thingp it, point start, point end)
   auto path_size = p.size();
   if (! path_size) {
     pcg_random_allowed--;
-    return;
+    return false;
   }
 
   //
@@ -199,7 +215,7 @@ void Level::cursor_path_draw_line(Thingp it, point start, point end)
   //
   if (p[ path_size - 1 ] != end) {
     pcg_random_allowed--;
-    return;
+    return false;
   }
 
   game->cursor_move_path = p;
@@ -217,6 +233,14 @@ void Level::cursor_path_draw_line(Thingp it, point start, point end)
     thing_new("cursor_path", point(c.x, c.y));
   }
   pcg_random_allowed--;
+  return true;
+}
+
+void Level::cursor_path_draw_line(Thingp it, point start, point end)
+{
+  if (! cursor_path_draw_line_attempt(it, start, end, 1)) {
+    cursor_path_draw_line_attempt(it, start, end, 2);
+  }
 }
 
 //

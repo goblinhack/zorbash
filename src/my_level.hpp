@@ -36,6 +36,7 @@ public:
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_wall_or_door {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_when_dead {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_for_jump_landing {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_walked {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _noise_blocker {};
 
   // begin sort marker1 {
@@ -699,6 +700,7 @@ public:
   bool create_biome_sewer(point3d at, uint32_t seed);
   bool create_biome_sewer_pools(void);
   bool create_wandering_monster(void);
+  bool cursor_path_draw_line_attempt(Thingp, point start, point end, int);
   bool debuffbox_over(const int slot);
   bool inventory_assign(const int slot, Thingp);
   bool inventory_chosen(const int slot);
@@ -735,6 +737,10 @@ public:
   bool is_oob(const int x, const int y) const;
   bool is_oob(const int x, const int y, const int z) const;
   bool is_oob(const point p) const;
+  bool is_walked(const int x, const int y) const;
+  bool is_walked(const point p) const;
+  bool is_walked_no_check(const int x, const int y) const;
+  bool is_walked_no_check(const point p) const;
   bool noise_blocker(const int x, const int y) const;
   bool noise_blocker(const point p) const;
   bool noise_blocker_no_check(const int x, const int y) const;
@@ -1187,6 +1193,10 @@ public:
   void is_trap_unset(const int x, const int y);
   void is_treasure_type_set(const int x, const int y);
   void is_treasure_type_unset(const int x, const int y);
+  void is_walked_no_check_set(const int x, const int y);
+  void is_walked_no_check_unset(const int x, const int y);
+  void is_walked_set(const int x, const int y);
+  void is_walked_unset(const int x, const int y);
   void is_wall_set(const int x, const int y);
   void is_wall_unset(const int x, const int y);
   void is_wet_grass_set(const int x, const int y);

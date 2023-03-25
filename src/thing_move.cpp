@@ -757,6 +757,9 @@ void Thing::update_pos(point to, bool immediately)
     if (((int) old_at.x != (int) new_at.x) || ((int) old_at.y != (int) new_at.y)) {
       level->is_map_mini_valid = false;
     }
+
+    level->is_walked_set(new_at.x, new_at.y);
+    level->is_walked_set(old_at.x, old_at.y);
   }
 
   //
