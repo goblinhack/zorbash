@@ -10,7 +10,7 @@
 #include "my_ui.hpp"
 #include "my_wid_console.hpp"
 
-static struct SDL_Keysym last_key_pressed = {};
+static struct SDL_Keysym last_key_pressed;
 
 int sdl_filter_events(void *userdata, SDL_Event *event)
 {
@@ -73,12 +73,25 @@ static bool __attribute__((noinline)) sdl_event_keydown_same_key(SDL_Keysym *key
   //
   // SDL2 has no auto repeat.
   //
-  return (! memcmp(&last_key_pressed, key, sizeof(*key)));
+  // Do not use memcmp; SDL_Keysym has an unused field and this will trigger valgrind.
+  //
+  if (key->scancode != last_key_pressed.scancode)
+    return false;
+
+  if (key->sym != last_key_pressed.sym)
+    return false;
+
+  if (key->mod != last_key_pressed.mod)
+    return false;
+
+  return true;
 }
 
 static void __attribute__((noinline)) sdl_event_keydown_handler(SDL_Keysym *key, SDL_Event *event)
 {
-  last_key_pressed = *key;
+  last_key_pressed.scancode = key->scancode;
+  last_key_pressed.sym      = key->sym;
+  last_key_pressed.mod      = key->mod;
 
   pcg_random_allowed++;
   wid_key_down(key, sdl.mouse_x, sdl.mouse_y);
@@ -126,7 +139,8 @@ static void __attribute__((noinline)) sdl_event_keyup(SDL_Keysym *key, SDL_Event
 
   sdl.key_repeat_count    = 0;
   sdl.key_repeat_this_key = 0;
-  memset(&last_key_pressed, 0, sizeof(*key));
+
+  memset(&last_key_pressed, 0, sizeof(last_key_pressed));
 
   DBG("SDL: Keyboard: Key released keycode 0x%08" PRIX32 " = %s", event->key.keysym.sym,
       SDL_GetKeyName(event->key.keysym.sym));
