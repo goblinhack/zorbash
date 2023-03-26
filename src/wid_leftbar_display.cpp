@@ -366,7 +366,10 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_id_context(w, t, 0);
       y_at++;
-    } else {
+    } else if (! t->is_dead) {
+      //
+      // (Broken is already printed for doors
+      //
       TRACE_NO_INDENT();
       auto  w  = wid_new_square_button(wid_leftbar, "(Closed)");
       point tl = make_point(0, y_at);
