@@ -207,7 +207,11 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
         wid_set_on_mouse_up(wid_item, wid_slot_item_mouse_up);
 
         if (t) {
-          wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + t->tp()->text_short_name());
+          if (slot + 1 == 10) {
+            wid_set_text(wid_item, " 0. " + t->tp()->text_short_name());
+          } else {
+            wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + t->tp()->text_short_name());
+          }
 
           if (wid_inventory_thing_selected) {
             if (wid_inventory_thing_selected == t) {
@@ -215,7 +219,11 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
             }
           }
         } else {
-          wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". empty, drag items here");
+          if (slot + 1 == 10) {
+            wid_set_text(wid_item, " 0. empty, drag items here");
+          } else {
+            wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". empty, drag items here");
+          }
         }
         wid_set_text_lhs(wid_item, true);
 

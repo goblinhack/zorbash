@@ -197,7 +197,11 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
         wid_set_color(wid_item, WID_COLOR_TEXT_FG, WHITE);
 
         if (t) {
-          wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + t->tp()->text_long_name());
+          if (slot + 1 == 10) {
+            wid_set_text(wid_item, " 0. " + t->tp()->text_long_name());
+          } else {
+            wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + t->tp()->text_long_name());
+          }
 
           if (wid_inventory_thing_selected) {
             if (wid_inventory_thing_selected == t) {
@@ -206,7 +210,11 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
           }
         } else {
           wid_set_color(wid_item, WID_COLOR_TEXT_FG, GRAY50);
-          wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". empty, drag items here");
+          if (slot + 1 == 10) {
+            wid_set_text(wid_item, " 0. empty, drag items here");
+          } else {
+            wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". empty, drag items here");
+          }
         }
         wid_set_text_lhs(wid_item, true);
 
