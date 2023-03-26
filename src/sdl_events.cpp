@@ -44,7 +44,7 @@ int sdl_filter_events(void *userdata, SDL_Event *event)
 void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
 {
   TRACE_NO_INDENT();
-  SDL_Keysym *key;
+  SDL_Keysym *key = nullptr;
 
   wid_mouse_two_clicks = false;
 

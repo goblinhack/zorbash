@@ -25,6 +25,11 @@
 #undef ENABLE_DEBUG_GFX_GL_BLEND
 
 //
+// Unique key for each tree
+//
+static uint64_t key;
+
+//
 // Display sorted.
 //
 static wid_key_map_location wid_top_level;
@@ -1963,7 +1968,6 @@ static void wid_tree_attach(Widp w)
 static void wid_tree_insert(Widp w)
 {
   TRACE_NO_INDENT();
-  static uint64_t key;
 
   if (w->in_tree_root) {
     DIE("Wid is already inserted");
@@ -2020,7 +2024,6 @@ static void wid_tree_global_unsorted_insert(Widp w)
 static void wid_tree2_unsorted_insert(Widp w)
 {
   TRACE_NO_INDENT();
-  static uint64_t key;
 
   if (w->in_tree2_unsorted_root) {
     DIE("Wid is already in the in_tree2_unsorted_root");
@@ -2077,8 +2080,6 @@ static void wid_tree4_wids_being_destroyed_insert(Widp w)
     return;
   }
 
-  static uint64_t key;
-
   wid_key_map_int *root;
 
   root = &wid_top_level4;
@@ -2103,8 +2104,6 @@ static void wid_tree5_tick_wids_insert(Widp w)
     return;
   }
 
-  static uint64_t key;
-
   wid_key_map_int *root;
 
   root = &wid_tick_top_level;
@@ -2128,8 +2127,6 @@ static void wid_tree6_tick_post_display_wids_insert(Widp w)
   if (wid_exiting) {
     return;
   }
-
-  static uint64_t key;
 
   wid_key_map_int *root;
 
@@ -6883,9 +6880,14 @@ void wid_display_all(bool ok_to_handle_requests)
 
   wid_total_count = 0;
 
-  for (auto iter = wid_top_level.begin(); iter != wid_top_level.end(); ++iter) {
+  auto wid_top_level_copy = wid_top_level;
+  for (auto iter = wid_top_level_copy.begin(); iter != wid_top_level_copy.end(); ++iter) {
     auto w = iter->second;
     verify(MTYPE_WID, w);
+
+    if (w->parent) {
+      verify(MTYPE_WID, w->parent);
+    }
 
     if (wid_is_hidden(w)) {
       continue;
