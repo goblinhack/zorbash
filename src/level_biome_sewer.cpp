@@ -13,6 +13,11 @@ bool Level::create_biome_sewer(point3d at, uint32_t seed)
 
   biome = BIOME_SEWER;
 
+  //
+  // Setup the various chances of things appearing.
+  //
+  chances_of_creating_set();
+
   place_the_grid();
   if (g_errored) {
     return false;

@@ -18,6 +18,11 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
 
   biome = BIOME_DUNGEON;
 
+  //
+  // Setup the various chances of things appearing.
+  //
+  chances_of_creating_set();
+
   uint32_t start = time_ms();
 
   uint32_t    slowest_so_far = 0;

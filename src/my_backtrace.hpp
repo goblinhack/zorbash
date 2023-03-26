@@ -12,7 +12,7 @@
 class Backtrace
 {
   static const int                    max_backtrace = 63;
-  std::array< void *, max_backtrace > bt;
+  std::array< void *, max_backtrace > bt {};
   int                                 size {};
 
 public:

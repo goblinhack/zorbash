@@ -160,7 +160,7 @@ public:
   //
   // What type of level
   //
-  biome_t biome;
+  biome_t biome = {BIOME_UNKNOWN};
 
   //
   // Levels are grouped into difficulty levels

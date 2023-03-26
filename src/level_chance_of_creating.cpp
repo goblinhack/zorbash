@@ -8,6 +8,11 @@ void Level::chances_of_creating_set(void)
 {
   TRACE_AND_INDENT();
 
+  if (biome == BIOME_UNKNOWN) {
+    ERR("Biome type not set");
+    return;
+  }
+
   switch (difficulty_depth) {
     default: DIE("Unexpected difficulty depth %d", difficulty_depth);
     case 1:

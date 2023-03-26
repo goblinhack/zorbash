@@ -1923,6 +1923,7 @@ void wid_set_on_tick_post_display(Widp w, on_tick_post_display_t fn)
 //
 static void wid_tree_detach(Widp w)
 {
+  verify(MTYPE_WID, w);
   TRACE_NO_INDENT();
   wid_tree_remove(w);
 }
@@ -1933,6 +1934,7 @@ static void wid_tree_detach(Widp w)
 static void wid_tree_attach(Widp w)
 {
   TRACE_NO_INDENT();
+  verify(MTYPE_WID, w);
   wid_key_map_location *root;
 
   if (w->in_tree_root) {
@@ -1942,6 +1944,7 @@ static void wid_tree_attach(Widp w)
   if (! w->parent) {
     root = &wid_top_level;
   } else {
+    verify(MTYPE_WID, w->parent);
     root = &w->parent->children_display_sorted;
   }
 
@@ -1976,6 +1979,7 @@ static void wid_tree_insert(Widp w)
   if (! w->parent) {
     root = &wid_top_level;
   } else {
+    verify(MTYPE_WID, w->parent);
     root = &w->parent->children_display_sorted;
   }
 
@@ -2403,6 +2407,7 @@ static void wid_destroy_immediate_internal(Widp w)
 static void wid_destroy_immediate(Widp w)
 {
   TRACE_NO_INDENT();
+  verify(MTYPE_WID, w);
   WID_DBG(w, "destroy immediate");
 
   //
@@ -2410,6 +2415,8 @@ static void wid_destroy_immediate(Widp w)
   //
   if (! w->parent) {
     wid_find_top_focus();
+  } else {
+    verify(MTYPE_WID, w->parent);
   }
 
   wid_tree_detach(w);
@@ -3007,6 +3014,9 @@ void wid_raise(Widp w_in)
 static void wid_lower_internal(Widp w)
 {
   TRACE_NO_INDENT();
+
+  verify(MTYPE_WID, w);
+
   if (w->do_not_lower) {
     return;
   }
@@ -6188,6 +6198,7 @@ static void wid_display(Widp w, uint8_t disable_scissor, uint8_t *updated_scisso
   Widp p {};
 #endif
 
+  verify(MTYPE_WID, w);
 #if 0
   if (!w->parent) {
     wid_dump(w, 0);
@@ -6874,6 +6885,8 @@ void wid_display_all(bool ok_to_handle_requests)
 
   for (auto iter = wid_top_level.begin(); iter != wid_top_level.end(); ++iter) {
     auto w = iter->second;
+    verify(MTYPE_WID, w);
+
     if (wid_is_hidden(w)) {
       continue;
     }
@@ -6882,6 +6895,7 @@ void wid_display_all(bool ok_to_handle_requests)
 auto last = wid_total_count;
 #endif
     wid_display(w, false /* disable_scissors */, 0 /* updated_scissors */, true);
+    verify(MTYPE_WID, w);
 #if 0
 printf("%s %d\n", wid_name(w).c_str(), wid_total_count - last);
 #endif
@@ -6951,6 +6965,7 @@ uint8_t wid_is_hidden(Widp w)
     return false;
   }
 
+  verify(MTYPE_WID, w);
   if (w->hidden) {
     return true;
   }

@@ -3153,6 +3153,7 @@ enum {
 };
 
 using biome_t = enum biome_type {
+  BIOME_UNKNOWN,
   BIOME_DUNGEON,
   BIOME_SWAMP,
   BIOME_SEWER,
