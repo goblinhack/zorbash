@@ -353,7 +353,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
         wid_set_text(w, "Unwield");
       }
       y_at += 3;
-    } else if (item_option->is_usable() && player->is_equipped(item_option)) {
+    } else if (item_option->is_usable()) {
       //
       // For example boots of teleport
       //

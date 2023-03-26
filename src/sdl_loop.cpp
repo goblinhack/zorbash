@@ -26,10 +26,10 @@ void sdl_loop(void)
   // 4 - seems ok
   // 10 - too much lag now due to cursor redraws
   //
-  SDL_Event events[ 6 ];
-  int       found;
-  int       i;
-  int       frames = 0;
+  SDL_Event events[ 6 ] = {};
+  int       found       = 0;
+  int       i           = 0;
+  int       frames      = 0;
 
   sdl_mouse_center();
   SDL_SetEventFilter(sdl_filter_events, nullptr);
