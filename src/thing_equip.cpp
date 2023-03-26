@@ -93,6 +93,21 @@ bool Thing::is_equipped(Thingp item)
 Thingp Thing::equip_get(int equip)
 {
   TRACE_NO_INDENT();
+
+  switch (equip) {
+    case MONST_EQUIP_HELMET: break;
+    case MONST_EQUIP_AMULET: break;
+    case MONST_EQUIP_GAUNTLET: break;
+    case MONST_EQUIP_CLOAK: break;
+    case MONST_EQUIP_SHIELD: break;
+    case MONST_EQUIP_ARMOR: break;
+    case MONST_EQUIP_WEAPON: break;
+    case MONST_EQUIP_RING1: break;
+    case MONST_EQUIP_BOOTS: break;
+    case MONST_EQUIP_RING2: break;
+    default: err("Unknown equip type %d", equip); return nullptr;
+  }
+
   auto id = equip_id(equip);
   if (id.ok()) {
     return (level->thing_find(id));
@@ -852,7 +867,7 @@ ThingId Thing::equip_id_carry_anim(int equip)
 ThingId Thing::equip_id_carry_anim_set(ThingId v, int equip)
 {
   TRACE_NO_INDENT();
-  new_infop();
+  new_itemsp();
   return (itemsp()->equip_id_carry_anim[ equip ] = v);
 }
 
@@ -875,7 +890,7 @@ ThingId Thing::equip_id_use_anim(int equip)
 ThingId Thing::equip_id_use_anim_set(ThingId v, int equip)
 {
   TRACE_NO_INDENT();
-  new_infop();
+  new_itemsp();
   return (itemsp()->equip_id_use_anim[ equip ] = v);
 }
 
@@ -887,15 +902,15 @@ ThingId Thing::equip_id(int equip)
   TRACE_NO_INDENT();
   if (maybe_itemsp()) {
     // con("get weapon %" PRIX32 "",  itemsp()->equip_id);
-    return (itemsp()->equip_id[ equip ]);
+    return (get(itemsp()->equip_id, equip));
   } // con("get equip id => none");
   return NoThingId;
 }
 
-ThingId Thing::equip_id_set(ThingId v, int equip)
+void Thing::equip_id_set(ThingId v, int equip)
 {
   TRACE_NO_INDENT();
-  new_infop();
+  new_itemsp();
   // con("set weapon %" PRIX32 "", v);
-  return (itemsp()->equip_id[ equip ] = v);
+  set(itemsp()->equip_id, equip, v);
 }

@@ -491,6 +491,9 @@ bool Thing::use(Thingp what, UseOptions *use_options)
     dbg("Trying to target something: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
     if (is_monst()) {
+      if (preferred_equip == -1) {
+        preferred_equip = MONST_EQUIP_SHIELD;
+      }
       if (! what->equip_carry_anim().empty()) {
         equip(what, preferred_equip);
       }

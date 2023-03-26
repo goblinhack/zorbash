@@ -368,7 +368,7 @@ public:
   ThingId equip_id_carry_anim(int equip);
   ThingId equip_id_use_anim(int equip);
 
-  ThingId equip_id_set(ThingId, int equip);
+  void    equip_id_set(ThingId, int equip);
   ThingId equip_id_carry_anim_set(ThingId, int equip);
   ThingId equip_id_use_anim_set(ThingId, int equip);
 
