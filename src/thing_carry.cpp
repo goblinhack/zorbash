@@ -259,7 +259,14 @@ bool Thing::carry(Thingp item, bool can_equip)
     //
     // Allow treasure chests to carry gold
     //
-    dbg("Chests always carry items");
+    dbg("Bag item containers always carry items");
+
+    //
+    // We still need to place it in the bag somewhere. Else if this bag is carried
+    // by the player, it will not appear in the inventory. The bag may not yet be
+    // carried by the player but is about to be at bag and player creation time.
+    //
+    bag_add(item);
   } else if (item->is_bag_item_container() && bag_add(item)) {
     //
     // Bag being carried

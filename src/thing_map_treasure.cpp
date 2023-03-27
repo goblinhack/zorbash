@@ -26,6 +26,10 @@ int Thing::map_treasure_carried_count(void)
 {
   TRACE_NO_INDENT();
 
+  if (! is_player()) {
+    return 0;
+  }
+
   if (! maybe_infop()) {
     return 0;
   }
@@ -40,6 +44,10 @@ int Thing::map_treasure_carried_count(void)
 void Thing::map_treasure_check(void)
 {
   TRACE_NO_INDENT();
+
+  if (! is_player()) {
+    return;
+  }
 
   //
   // If carrying a treasure map we need to update the map_mini
@@ -56,6 +64,10 @@ void Thing::map_treasure_check(void)
 bool Thing::map_treasure_available(void)
 {
   TRACE_NO_INDENT();
+
+  if (! is_player()) {
+    return false;
+  }
 
   if (! maybe_infop()) {
     return false;
