@@ -374,16 +374,19 @@ public:
 
   ThingDangerLevel danger_level(Thingp it);
 
+  Thingp bag_what_is_at(point pos);
   Thingp best_shoot_at_target_get(void);
   Thingp best_visible_target_get(void);
+  Thingp buff_find(const std::string &);
+  Thingp debuff_find(const std::string &);
   Thingp equip_carry_anim(int equip);
   Thingp equip_get(int equip);
   Thingp equip_use_anim(int equip);
   Thingp immediate_mob(void);
   Thingp immediate_owner(void);
   Thingp immediate_spawner(void);
-  Thingp in_the_way_for_shooting(const point s, const point e, int x, int y);
   Thingp in_the_way_for_jumping(const point s, const point e, int x, int y);
+  Thingp in_the_way_for_shooting(const point s, const point e, int x, int y);
   Thingp in_the_way_for_throwing(const point s, const point e, int x, int y);
   Thingp item_targetted_use_at(Thingp wand, point at);
   Thingp item_targetted_use_at(Thingp wand, Thingp target);
@@ -395,14 +398,12 @@ public:
   Thingp spawn_at(const std::string &what);
   Thingp spawn_at(const std::string &what, point p);
   Thingp spawn_at_if_possible(const std::string &what);
-  Thingp spawn_owned_thing_at_my_position(const std::string &what);
   Thingp spawn_minion_at_my_position(const std::string &what);
+  Thingp spawn_owned_thing_at_my_position(const std::string &what);
   Thingp top_mob(void);
-  Thingp top_owner(void);
   Thingp top_owner_internal(void);
+  Thingp top_owner(void);
   Thingp top_spawner(void);
-  Thingp debuff_find(const std::string &);
-  Thingp buff_find(const std::string &);
 
   std::vector< Thingp > in_the_way_for_jumping(const point s, const point e, size_t max_elems = 0);
   std::vector< Thingp > in_the_way_for_shooting(const point s, const point e, size_t max_elems = 0);

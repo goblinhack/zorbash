@@ -278,6 +278,9 @@ bool Thing::carry(Thingp item, bool can_equip)
     //
     dbg("Non item not added to bag");
   } else if (bag_add(item)) {
+    //
+    // Add a normal item into a bag
+    //
     dbg("Added %s to bag at %d,%d", item->to_short_string().c_str(), item->itemsp()->bag_position.x,
         item->itemsp()->bag_position.y);
   } else {

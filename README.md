@@ -1,7 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- if set on fire, remember who didit?                                                                                                          -->
-<!-- prefer walked paths?                                                                                                                         -->
 <!-- goat lord?                                                                                                                                   -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

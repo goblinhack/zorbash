@@ -137,6 +137,8 @@ static void wid_in_transit_item_place_in_bag(Widp wid_bag_container, Thingp bag,
   game->set_request_to_remake_rightbar();
 
   t->log("In transit item place completed");
+  TRACE_AND_INDENT();
+
   wid_bag_add_items(wid_bag_container, bag);
 
   wid_inventory_select_requested(t);
@@ -172,6 +174,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
   }
 
   t->log("In transit item place");
+  TRACE_AND_INDENT();
 
   //
   // Pver the rightbar?
@@ -429,6 +432,9 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
     return false;
   }
 
+  t->log("Try to place in bag");
+  TRACE_AND_INDENT();
+
   auto bag_id = wid_get_thing_id_context(wid_bag_container, 0);
   auto bag    = game->thing_find(bag_id);
   if (! bag) {
@@ -453,20 +459,43 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
   // iteam was at, or last resort, anywhere.
   // /
   bag->log("Try to place %s at %d,%d", t->to_short_string().c_str(), at.x, at.y);
+  TRACE_AND_INDENT();
+
+  auto existing_item = bag->bag_what_is_at(at);
   if (bag->bag_can_place_at(t, at)) {
-    TRACE_NO_INDENT();
+    //
+    // Place at a specific loation
+    //
+    bag->log("Try to place %s specifically at %d,%d", t->to_short_string().c_str(), at.x, at.y);
+    TRACE_AND_INDENT();
     wid_in_transit_item_place_in_bag(wid_bag_container, bag, t, at);
+  } else if (existing_item && existing_item->is_bag_item_container()) {
+    //
+    // Place anywhere in the specified bag
+    //
+    point where;
+    bag->log("Failed to place, try to place %s into %s anywhere", t->to_short_string().c_str(),
+             existing_item->to_short_string().c_str());
+    TRACE_AND_INDENT();
+    if (existing_item->bag_can_place_anywhere(t, where)) {
+      wid_in_transit_item_place_in_bag(wid_bag_container, existing_item, t, where);
+    } else {
+      t->log("In transit item place failed");
+      TOPCON("Could not fit that item in that bag. You can always drop the item if needed.");
+    }
   } else if (t->maybe_itemsp() && bag->bag_can_place_at(t, t->itemsp()->last_bag_position)) {
-    TRACE_NO_INDENT();
     //
     // Place back where it was picked up
     //
+    bag->log("Try to place %s back where it was picked up", t->to_short_string().c_str());
+    TRACE_AND_INDENT();
     wid_in_transit_item_place_in_bag(wid_bag_container, bag, t, t->itemsp()->last_bag_position);
   } else {
-    TRACE_NO_INDENT();
     //
     // Place anywhere
     //
+    bag->log("Failed to place, try to place %s anywhere", t->to_short_string().c_str());
+    TRACE_AND_INDENT();
     point where;
     if (bag->bag_can_place_anywhere(t, where)) {
       wid_in_transit_item_place_in_bag(wid_bag_container, bag, t, where);
