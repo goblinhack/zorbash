@@ -318,13 +318,20 @@ void Level::tick_(void)
       uint32_t tick_begin_ms = time_ms();
       t->tick();
 
-      auto tick_duration = time_ms() - tick_begin_ms;
-      if (tick_duration > 1) {
-        // t->log("PERF: Thing took tick duration %u ms", tick_duration);
+      //
+      // This is not very useful as monsters can trigger python scripts which
+      // can take a while to run e.g. a trap
+      //
+      IF_DEBUG2
+      {
+        auto tick_duration = time_ms() - tick_begin_ms;
+        if (tick_duration > 1) {
+          // t->log("PERF: Thing took tick duration %u ms", tick_duration);
 
-        if ((time_ms() - tick_begin_ms) > THING_TICK_DURATION_TOO_LONG) {
-          t->con("PERF: Thing took too long, tick duration %u ms, max %u ms", tick_duration,
-                 THING_TICK_DURATION_TOO_LONG);
+          if ((time_ms() - tick_begin_ms) > THING_TICK_DURATION_TOO_LONG) {
+            t->con("PERF: Thing took too long, tick duration %u ms, max %u ms", tick_duration,
+                   THING_TICK_DURATION_TOO_LONG);
+          }
         }
       }
     }
