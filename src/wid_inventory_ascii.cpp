@@ -198,9 +198,9 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
 
         if (t) {
           if (slot + 1 == 10) {
-            wid_set_text(wid_item, " 0. " + t->tp()->text_long_name());
+            wid_set_text(wid_item, " 0. " + t->tp()->text_short_name());
           } else {
-            wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + t->tp()->text_long_name());
+            wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + t->tp()->text_short_name());
           }
 
           if (wid_inventory_thing_selected) {

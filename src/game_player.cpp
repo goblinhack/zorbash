@@ -248,7 +248,7 @@ void Game::place_player(void)
         auto b = level->thing_new("bag_s", point(x, y));
         t->carry(b);
       }
-      if (0) {
+      if (1) {
         level->thing_new("bag_s", point(x + 1, y));
       }
       if (0) {
