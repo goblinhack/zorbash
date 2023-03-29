@@ -244,9 +244,12 @@ void Game::place_player(void)
         auto w = level->thing_new("torch", point(x, y));
         t->carry(w);
       }
-      if (1) {
+      if (0) {
         auto b = level->thing_new("bag_s", point(x, y));
         t->carry(b);
+      }
+      if (0) {
+        level->thing_new("bag_s", point(x + 1, y));
       }
       if (0) {
         auto b = level->thing_new("enchantstone", point(x, y));
