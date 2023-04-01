@@ -1106,10 +1106,10 @@ int Thing::is_unused_flag167(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag167());
 }
-int Thing::is_unused_flag168(void)
+int Thing::is_herbivore(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag168());
+  return (tp()->is_herbivore());
 }
 int Thing::is_sheep(void)
 {

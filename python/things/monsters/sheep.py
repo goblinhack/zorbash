@@ -4,6 +4,7 @@ import tp
 
 def on_born(me, x, y):
     my.thing_friend(me, "is_sheep")
+    my.thing_friend(me, "is_herbivore")
 
 
 def on_you_nat_att(me, x, y):
@@ -46,7 +47,7 @@ def tp_init(name, text_long_name):
     my.dmg_received_doubled_from_fire(self, True)
     my.environ_avoids_acid(self, 100)
     my.environ_avoids_fire(self, 100)
-    my.gfx_anim_use(self, "attack_claws")
+    my.gfx_anim_use(self, "attack_green")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
@@ -91,7 +92,7 @@ def tp_init(name, text_long_name):
     my.is_eater_of_grass(self, True)
     my.is_eater_of_plants(self, True)
     my.is_eater_of_red_blood(self, True)
-    my.is_sheep(self, True)
+    my.is_herbivore(self, True)
     my.is_hittable(self, True)
     my.is_immune_to_water(self, True)
     my.is_interesting(self, True)
@@ -108,6 +109,7 @@ def tp_init(name, text_long_name):
     my.is_msg_allowed_is_wounded(self, True)
     my.is_msg_allowed_senses_danger(self, True)
     my.is_red_blooded(self, True)
+    my.is_sheep(self, True)
     my.is_shovable(self, True)
     my.is_tickable(self, True)
     my.jump_distance(self, 2)
@@ -120,7 +122,7 @@ def tp_init(name, text_long_name):
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
     my.on_you_nat_att_do(self, "me.on_you_nat_att()")
-    my.rarity(self, my.RARITY_RARE)  # how rare within this monster class
+    my.rarity(self, my.RARITY_COMMON)  # how rare within this monster class
     my.shove_strength_mod(self, 3)
     my.spawn_group_radius(self, 5)
     my.spawn_group_size_dice(self, "1d10+2")

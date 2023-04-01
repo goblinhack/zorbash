@@ -2065,16 +2065,16 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
   auto tp = t->tp();
   if (t->is_monst()) {
     if (tp->rarity() == THING_RARITY_UNCOMMON) {
-      w->log("Monster is uncommon", TEXT_FORMAT_LHS);
+      w->log("Creature is uncommon", TEXT_FORMAT_LHS);
       printed_something = true;
     } else if (tp->rarity() == THING_RARITY_RARE) {
-      w->log("Monster is rare.", TEXT_FORMAT_LHS);
+      w->log("Creature is rare.", TEXT_FORMAT_LHS);
       printed_something = true;
     } else if (tp->rarity() == THING_RARITY_VERY_RARE) {
-      w->log("Monster is very rare.", TEXT_FORMAT_LHS);
+      w->log("Creature is very rare.", TEXT_FORMAT_LHS);
       printed_something = true;
     } else if (tp->rarity() == THING_RARITY_UNIQUE) {
-      w->log("Monster is unique!", TEXT_FORMAT_LHS);
+      w->log("Creature is unique!", TEXT_FORMAT_LHS);
       printed_something = true;
     }
   } else if (t->is_collectable()) {

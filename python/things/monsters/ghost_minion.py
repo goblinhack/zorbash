@@ -22,7 +22,7 @@ def tp_init(name, text_long_name):
     my.distance_minion_vision_shared(self, True)
     my.distance_vision(self, 7)
     my.dmg_cold_dice(self, "1")
-    my.gfx_anim_use(self, "attack_claws")
+    my.gfx_anim_use(self, "attack_red")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_glows(self, True)

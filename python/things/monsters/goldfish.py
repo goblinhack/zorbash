@@ -49,7 +49,7 @@ def tp_init(name, text_long_name):
     my.dmg_nat_att_dice(self, "1d1+2")
     my.dmg_nat_att_type(self, "nibble")
     my.environ_shallow_water(self, True)
-    my.gfx_anim_use(self, "attack_claws")
+    my.gfx_anim_use(self, "attack_red")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)

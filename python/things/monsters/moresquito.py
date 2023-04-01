@@ -52,7 +52,7 @@ def tp_init(name, text_long_name):
     my.dmg_nat_att_type(self, "stab")
     my.dmg_poison_dice(self, "1d4")
     my.environ_avoids_poison(self, 100)
-    my.gfx_anim_use(self, "attack_claws")
+    my.gfx_anim_use(self, "attack_red")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)

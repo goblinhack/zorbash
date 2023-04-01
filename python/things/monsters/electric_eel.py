@@ -58,7 +58,7 @@ def tp_init(name, text_long_name):
     my.environ_avoids_poison(self, 100)
     my.environ_deep_water(self, True)
     my.environ_shallow_water(self, True)
-    my.gfx_anim_use(self, "attack_claws")
+    my.gfx_anim_use(self, "attack_green")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)

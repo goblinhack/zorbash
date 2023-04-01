@@ -49,7 +49,7 @@ def tp_init(name, text_long_name):
     my.dmg_nat_att_type(self, "whip")
     my.dmg_received_doubled_from_fire(self, True)
     my.environ_avoids_fire(self, 10)
-    my.gfx_anim_use(self, "attack_claws")
+    my.gfx_anim_use(self, "attack_green")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)

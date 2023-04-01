@@ -1495,6 +1495,7 @@ public:
   int is_health_booster(void);
   int is_heavy(void);
   int is_helmet(void);
+  int is_herbivore(void);
   int is_hittable(void);
   int is_hit(Thingp hitter, ThingAttackOptionsp, int damage);
   int is_humanoid(void);
@@ -1594,6 +1595,7 @@ public:
   int is_secret_door(void);
   int is_sewer_wall(void);
   int is_shallow_water(void);
+  int is_sheep(void);
   int is_shield(void);
   int is_shovable_and_sticky(void);
   int is_shovable(void);
@@ -1706,8 +1708,6 @@ public:
   int is_unused_flag165(void);
   int is_unused_flag166(void);
   int is_unused_flag167(void);
-  int is_unused_flag168(void);
-  int is_sheep(void);
   int is_unused_flag16(void);
   int is_unused_flag179(void);
   int is_unused_flag17(void);

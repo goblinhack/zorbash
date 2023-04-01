@@ -67,6 +67,7 @@ def tp_init(name, text_long_name):
     my.dmg_received_doubled_from_water(self, True)
     my.environ_avoids_cold(self, 100)
     my.environ_avoids_water(self, 100)
+    my.gfx_anim_use(self, "attack_major_orange")
     my.gfx_anim_use(self, "sword_plutonium_swing")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)

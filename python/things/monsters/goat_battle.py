@@ -4,6 +4,7 @@ import tp
 
 def on_born(me, x, y):
     my.thing_friend(me, "is_goat")
+    my.thing_friend(me, "is_herbivore")
 
 
 def on_you_nat_att(me, x, y):
@@ -46,7 +47,7 @@ def tp_init(name, text_long_name):
     my.dmg_received_doubled_from_fire(self, True)
     my.environ_avoids_acid(self, 100)
     my.environ_avoids_fire(self, 100)
-    my.gfx_anim_use(self, "attack_claws")
+    my.gfx_anim_use(self, "attack_green")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
@@ -92,6 +93,7 @@ def tp_init(name, text_long_name):
     my.is_eater_of_plants(self, True)
     my.is_eater_of_red_blood(self, True)
     my.is_goat(self, True)
+    my.is_herbivore(self, True)
     my.is_hittable(self, True)
     my.is_immune_to_poison(self, True)
     my.is_immune_to_water(self, True)

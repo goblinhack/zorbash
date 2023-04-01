@@ -446,6 +446,7 @@ private:
   int _is_health_booster {};
   int _is_heavy {};
   int _is_helmet {};
+  int _is_herbivore {};
   int _is_hittable {};
   int _is_humanoid {};
   int _is_immune_to_acid {};
@@ -545,6 +546,7 @@ private:
   int _is_secret_door {};
   int _is_sewer_wall {};
   int _is_shallow_water {};
+  int _is_sheep {};
   int _is_shield {};
   int _is_shovable {};
   int _is_shovable_and_sticky {};
@@ -660,8 +662,6 @@ private:
   int _is_unused_flag165 {};
   int _is_unused_flag166 {};
   int _is_unused_flag167 {};
-  int _is_unused_flag168 {};
-  int _is_sheep {};
   int _is_unused_flag17 {};
   int _is_unused_flag179 {};
   int _is_unused_flag18 {};
@@ -1732,6 +1732,7 @@ public:
   int is_health_booster(void) const;
   int is_heavy(void) const;
   int is_helmet(void) const;
+  int is_herbivore(void) const;
   int is_hittable(void) const;
   int is_humanoid(void) const;
   int is_immune_to_acid(void) const;
@@ -1830,6 +1831,7 @@ public:
   int is_secret_door(void) const;
   int is_sewer_wall(void) const;
   int is_shallow_water(void) const;
+  int is_sheep(void) const;
   int is_shield(void) const;
   int is_shovable_and_sticky(void) const;
   int is_shovable(void) const;
@@ -1943,8 +1945,6 @@ public:
   int is_unused_flag165(void) const;
   int is_unused_flag166(void) const;
   int is_unused_flag167(void) const;
-  int is_unused_flag168(void) const;
-  int is_sheep(void) const;
   int is_unused_flag16(void) const;
   int is_unused_flag179(void) const;
   int is_unused_flag17(void) const;
@@ -2472,6 +2472,7 @@ public:
   void is_health_booster_set(int v);
   void is_heavy_set(int v);
   void is_helmet_set(int v);
+  void is_herbivore_set(int v);
   void is_hittable_set(int v);
   void is_humanoid_set(int v);
   void is_immune_to_acid_set(int v);
@@ -2570,6 +2571,7 @@ public:
   void is_secret_door_set(int v);
   void is_sewer_wall_set(int v);
   void is_shallow_water_set(int v);
+  void is_sheep_set(int v);
   void is_shield_set(int v);
   void is_shovable_and_sticky_set(int v);
   void is_shovable_set(int v);
@@ -2683,8 +2685,6 @@ public:
   void is_unused_flag165_set(int v);
   void is_unused_flag166_set(int v);
   void is_unused_flag167_set(int v);
-  void is_unused_flag168_set(int v);
-  void is_sheep_set(int v);
   void is_unused_flag16_set(int v);
   void is_unused_flag179_set(int v);
   void is_unused_flag17_set(int v);

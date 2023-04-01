@@ -525,6 +525,7 @@ int Tp::is_hazard(void) const { return _is_hazard; }
 int Tp::is_health_booster(void) const { return _is_health_booster; }
 int Tp::is_heavy(void) const { return _is_heavy; }
 int Tp::is_helmet(void) const { return _is_helmet; }
+int Tp::is_herbivore(void) const { return _is_herbivore; }
 int Tp::is_hittable(void) const { return _is_hittable; }
 int Tp::is_humanoid(void) const { return _is_humanoid; }
 int Tp::is_immune_to_acid(void) const { return _is_immune_to_acid; }
@@ -623,6 +624,7 @@ int Tp::is_rusty(void) const { return _is_rusty; }
 int Tp::is_secret_door(void) const { return _is_secret_door; }
 int Tp::is_sewer_wall(void) const { return _is_sewer_wall; }
 int Tp::is_shallow_water(void) const { return _is_shallow_water; }
+int Tp::is_sheep(void) const { return _is_sheep; }
 int Tp::is_shield(void) const { return _is_shield; }
 int Tp::is_shovable_and_sticky(void) const { return _is_shovable_and_sticky; }
 int Tp::is_shovable(void) const { return _is_shovable; }
@@ -736,8 +738,6 @@ int Tp::is_unused_flag164(void) const { return _is_unused_flag164; }
 int Tp::is_unused_flag165(void) const { return _is_unused_flag165; }
 int Tp::is_unused_flag166(void) const { return _is_unused_flag166; }
 int Tp::is_unused_flag167(void) const { return _is_unused_flag167; }
-int Tp::is_unused_flag168(void) const { return _is_unused_flag168; }
-int Tp::is_sheep(void) const { return _is_sheep; }
 int Tp::is_unused_flag16(void) const { return _is_unused_flag16; }
 int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
 int Tp::is_unused_flag17(void) const { return _is_unused_flag17; }
@@ -1265,6 +1265,7 @@ void Tp::is_hazard_set(int v) { _is_hazard = v; }
 void Tp::is_health_booster_set(int v) { _is_health_booster = v; }
 void Tp::is_heavy_set(int v) { _is_heavy = v; }
 void Tp::is_helmet_set(int v) { _is_helmet = v; }
+void Tp::is_herbivore_set(int v) { _is_herbivore = v; }
 void Tp::is_hittable_set(int v) { _is_hittable = v; }
 void Tp::is_humanoid_set(int v) { _is_humanoid = v; }
 void Tp::is_immune_to_acid_set(int v) { _is_immune_to_acid = v; }
@@ -1363,6 +1364,7 @@ void Tp::is_rusty_set(int v) { _is_rusty = v; }
 void Tp::is_secret_door_set(int v) { _is_secret_door = v; }
 void Tp::is_sewer_wall_set(int v) { _is_sewer_wall = v; }
 void Tp::is_shallow_water_set(int v) { _is_shallow_water = v; }
+void Tp::is_sheep_set(int v) { _is_sheep = v; }
 void Tp::is_shield_set(int v) { _is_shield = v; }
 void Tp::is_shovable_and_sticky_set(int v) { _is_shovable_and_sticky = v; }
 void Tp::is_shovable_set(int v) { _is_shovable = v; }
@@ -1476,8 +1478,6 @@ void Tp::is_unused_flag164_set(int v) { _is_unused_flag164 = v; }
 void Tp::is_unused_flag165_set(int v) { _is_unused_flag165 = v; }
 void Tp::is_unused_flag166_set(int v) { _is_unused_flag166 = v; }
 void Tp::is_unused_flag167_set(int v) { _is_unused_flag167 = v; }
-void Tp::is_unused_flag168_set(int v) { _is_unused_flag168 = v; }
-void Tp::is_sheep_set(int v) { _is_sheep = v; }
 void Tp::is_unused_flag16_set(int v) { _is_unused_flag16 = v; }
 void Tp::is_unused_flag179_set(int v) { _is_unused_flag179 = v; }
 void Tp::is_unused_flag17_set(int v) { _is_unused_flag17 = v; }
