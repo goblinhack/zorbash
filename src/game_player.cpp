@@ -361,8 +361,8 @@ void Game::place_player(void)
       }
       if (0) {
         level->thing_new("goat_battle", point(x + 2, y + 1));
-        level->thing_new("crab_sewer", point(x + 3, y + 3));
         level->thing_new("sheep", point(x + 1, y + 3));
+        level->thing_new("crab_sewer", point(x + 3, y + 3));
         level->thing_new("moresquito", point(x + 2, y + 3));
         level->thing_new("bloodbee", point(x + 1, y + 3));
         level->thing_new("narhornet", point(x + 0, y + 3));

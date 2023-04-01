@@ -142,7 +142,7 @@ def tp_init(name, text_long_name):
     my.text_description_long(self, "A goat of impressive stature. Bred for battle, but found to be too wild for the surface world, battle goats have made their home in this dangerous dungeon.")
     my.text_description_short(self, "An unfeasibly large goat.")
     my.text_hits(self, "gores")
-    my.thing_size(self, my.THING_SIZE_GIANT)
+    my.thing_size(self, my.THING_SIZE_NORMAL)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)

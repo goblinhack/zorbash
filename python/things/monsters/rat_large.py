@@ -131,7 +131,7 @@ def tp_init(name, text_long_name):
     my.text_description_long(self, "A rat that is larger than you comfortably would expect to find.")
     my.text_description_short(self, "A large hungry rat")
     my.text_hits(self, "gores")
-    my.thing_size(self, my.THING_SIZE_LARGE)
+    my.thing_size(self, my.THING_SIZE_SMALL)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
