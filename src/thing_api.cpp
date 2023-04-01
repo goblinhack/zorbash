@@ -1096,10 +1096,10 @@ int Thing::is_unused_flag165(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag165());
 }
-int Thing::is_unused_flag166(void)
+int Thing::is_bearowl(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag166());
+  return (tp()->is_bearowl());
 }
 int Thing::is_centipede(void)
 {

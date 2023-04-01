@@ -1370,6 +1370,7 @@ public:
   int is_bag(void);
   int is_barrel(void);
   int is_basalt(void);
+  int is_bearowl(void);
   int is_bee(void);
   int is_biome_dungeon(void);
   int is_biome_sewer(void);
@@ -1388,6 +1389,7 @@ public:
   int is_burnt_check(void);
   int is_carnivorous_plant(void);
   int is_cautious(void);
+  int is_centipede(void);
   int is_chasm(void);
   int is_cloak(void);
   int is_cold_elemental(void);
@@ -1706,8 +1708,6 @@ public:
   int is_unused_flag163(void);
   int is_unused_flag164(void);
   int is_unused_flag165(void);
-  int is_unused_flag166(void);
-  int is_centipede(void);
   int is_unused_flag16(void);
   int is_unused_flag179(void);
   int is_unused_flag17(void);

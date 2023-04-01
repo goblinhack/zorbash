@@ -135,6 +135,7 @@ bool Tp::matches(const std::string &what)
   if (is_bag() && (what == "is_bag")) { return true; }
   if (is_barrel() && (what == "is_barrel")) { return true; }
   if (is_basalt() && (what == "is_basalt")) { return true; }
+  if (is_bearowl() && (what == "is_bearowl")) { return true; }
   if (is_bee() && (what == "is_bee")) { return true; }
   if (is_biome_dungeon() && (what == "is_biome_dungeon")) { return true; }
   if (is_biome_sewer() && (what == "is_biome_sewer")) { return true; }
@@ -151,6 +152,7 @@ bool Tp::matches(const std::string &what)
   if (is_burnable() && (what == "is_burnable")) { return true; }
   if (is_carnivorous_plant() && (what == "is_carnivorous_plant")) { return true; }
   if (is_cautious() && (what == "is_cautious")) { return true; }
+  if (is_centipede() && (what == "is_centipede")) { return true; }
   if (is_chasm() && (what == "is_chasm")) { return true; }
   if (is_cloak() && (what == "is_cloak")) { return true; }
   if (is_cold_elemental() && (what == "is_cold_elemental")) { return true; }
@@ -457,8 +459,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag163() && (what == "is_unused_flag163")) { return true; }
   if (is_unused_flag164() && (what == "is_unused_flag164")) { return true; }
   if (is_unused_flag165() && (what == "is_unused_flag165")) { return true; }
-  if (is_unused_flag166() && (what == "is_unused_flag166")) { return true; }
-  if (is_centipede() && (what == "is_centipede")) { return true; }
   if (is_unused_flag16() && (what == "is_unused_flag16")) { return true; }
   if (is_unused_flag179() && (what == "is_unused_flag179")) { return true; }
   if (is_unused_flag17() && (what == "is_unused_flag17")) { return true; }
@@ -730,6 +730,7 @@ bool Thing::matches(const std::string &what)
   if (is_bag() && (what == "is_bag")) { return true; }
   if (is_barrel() && (what == "is_barrel")) { return true; }
   if (is_basalt() && (what == "is_basalt")) { return true; }
+  if (is_bearowl() && (what == "is_bearowl")) { return true; }
   if (is_bee() && (what == "is_bee")) { return true; }
   if (is_biome_dungeon() && (what == "is_biome_dungeon")) { return true; }
   if (is_biome_sewer() && (what == "is_biome_sewer")) { return true; }
@@ -746,6 +747,7 @@ bool Thing::matches(const std::string &what)
   if (is_burnable() && (what == "is_burnable")) { return true; }
   if (is_carnivorous_plant() && (what == "is_carnivorous_plant")) { return true; }
   if (is_cautious() && (what == "is_cautious")) { return true; }
+  if (is_centipede() && (what == "is_centipede")) { return true; }
   if (is_chasm() && (what == "is_chasm")) { return true; }
   if (is_cloak() && (what == "is_cloak")) { return true; }
   if (is_cold_elemental() && (what == "is_cold_elemental")) { return true; }
@@ -1053,8 +1055,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag163() && (what == "is_unused_flag163")) { return true; }
   if (is_unused_flag164() && (what == "is_unused_flag164")) { return true; }
   if (is_unused_flag165() && (what == "is_unused_flag165")) { return true; }
-  if (is_unused_flag166() && (what == "is_unused_flag166")) { return true; }
-  if (is_centipede() && (what == "is_centipede")) { return true; }
   if (is_unused_flag16() && (what == "is_unused_flag16")) { return true; }
   if (is_unused_flag179() && (what == "is_unused_flag179")) { return true; }
   if (is_unused_flag17() && (what == "is_unused_flag17")) { return true; }
@@ -1323,6 +1323,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_bag") { return &Thing::is_bag; }
   if (what == "is_barrel") { return &Thing::is_barrel; }
   if (what == "is_basalt") { return &Thing::is_basalt; }
+  if (what == "is_bearowl") { return &Thing::is_bearowl; }
   if (what == "is_bee") { return &Thing::is_bee; }
   if (what == "is_biome_dungeon") { return &Thing::is_biome_dungeon; }
   if (what == "is_biome_sewer") { return &Thing::is_biome_sewer; }
@@ -1339,6 +1340,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_burnable") { return &Thing::is_burnable; }
   if (what == "is_carnivorous_plant") { return &Thing::is_carnivorous_plant; }
   if (what == "is_cautious") { return &Thing::is_cautious; }
+  if (what == "is_centipede") { return &Thing::is_centipede; }
   if (what == "is_chasm") { return &Thing::is_chasm; }
   if (what == "is_cloak") { return &Thing::is_cloak; }
   if (what == "is_cold_elemental") { return &Thing::is_cold_elemental; }
@@ -1639,8 +1641,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag163") { return &Thing::is_unused_flag163; }
   if (what == "is_unused_flag164") { return &Thing::is_unused_flag164; }
   if (what == "is_unused_flag165") { return &Thing::is_unused_flag165; }
-  if (what == "is_unused_flag166") { return &Thing::is_unused_flag166; }
-  if (what == "is_centipede") { return &Thing::is_centipede; }
   if (what == "is_unused_flag16") { return &Thing::is_unused_flag16; }
   if (what == "is_unused_flag179") { return &Thing::is_unused_flag179; }
   if (what == "is_unused_flag17") { return &Thing::is_unused_flag17; }

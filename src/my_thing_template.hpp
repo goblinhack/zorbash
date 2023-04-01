@@ -328,6 +328,7 @@ private:
   int _is_bag_item_not_stackable {};
   int _is_barrel {};
   int _is_basalt {};
+  int _is_bearowl {};
   int _is_bee {};
   int _is_biome_dungeon {};
   int _is_biome_sewer {};
@@ -344,6 +345,7 @@ private:
   int _is_burnable {};
   int _is_carnivorous_plant {};
   int _is_cautious {};
+  int _is_centipede {};
   int _is_chasm {};
   int _is_cloak {};
   int _is_cold {};
@@ -660,8 +662,6 @@ private:
   int _is_unused_flag163 {};
   int _is_unused_flag164 {};
   int _is_unused_flag165 {};
-  int _is_unused_flag166 {};
-  int _is_centipede {};
   int _is_unused_flag17 {};
   int _is_unused_flag179 {};
   int _is_unused_flag18 {};
@@ -1614,6 +1614,7 @@ public:
   int is_bag(void) const;
   int is_barrel(void) const;
   int is_basalt(void) const;
+  int is_bearowl(void) const;
   int is_bee(void) const;
   int is_biome_dungeon(void) const;
   int is_biome_sewer(void) const;
@@ -1630,6 +1631,7 @@ public:
   int is_burnable(void) const;
   int is_carnivorous_plant(void) const;
   int is_cautious(void) const;
+  int is_centipede(void) const;
   int is_chasm(void) const;
   int is_cloak(void) const;
   int is_cold_elemental(void) const;
@@ -1943,8 +1945,6 @@ public:
   int is_unused_flag163(void) const;
   int is_unused_flag164(void) const;
   int is_unused_flag165(void) const;
-  int is_unused_flag166(void) const;
-  int is_centipede(void) const;
   int is_unused_flag16(void) const;
   int is_unused_flag179(void) const;
   int is_unused_flag17(void) const;
@@ -2354,6 +2354,7 @@ public:
   void is_bag_set(int v);
   void is_barrel_set(int v);
   void is_basalt_set(int v);
+  void is_bearowl_set(int v);
   void is_bee_set(int v);
   void is_biome_dungeon_set(int v);
   void is_biome_sewer_set(int v);
@@ -2370,6 +2371,7 @@ public:
   void is_burnable_set(int v);
   void is_carnivorous_plant_set(int v);
   void is_cautious_set(int v);
+  void is_centipede_set(int v);
   void is_chasm_set(int v);
   void is_cloak_set(int v);
   void is_cold_elemental_set(int v);
@@ -2683,8 +2685,6 @@ public:
   void is_unused_flag163_set(int v);
   void is_unused_flag164_set(int v);
   void is_unused_flag165_set(int v);
-  void is_unused_flag166_set(int v);
-  void is_centipede_set(int v);
   void is_unused_flag16_set(int v);
   void is_unused_flag179_set(int v);
   void is_unused_flag17_set(int v);

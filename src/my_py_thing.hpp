@@ -217,6 +217,7 @@ PyObject *thing_is_bag_item(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bag(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_barrel(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_basalt(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_bearowl(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bee(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_biome_dungeon(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_biome_sewer(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -237,6 +238,7 @@ PyObject *thing_is_carnivorous_plant(PyObject *obj, PyObject *args, PyObject *ke
 PyObject *thing_is_carrying_an_item(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_carrying_treasure(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cautious(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_centipede(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_chasm(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cloak(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cold_elemental(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -559,8 +561,6 @@ PyObject *thing_is_unused_flag162(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag163(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag164(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag165(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag166(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_centipede(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag16(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag179(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag17(PyObject *obj, PyObject *args, PyObject *keywds);

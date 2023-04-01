@@ -61,6 +61,7 @@ std::initializer_list< std::string > tps = {
     "bat_greater",
     "bat_lesser",
     "bat_minion",
+    "bearowl",
     "beer1",
     "beer2",
     "belcher",

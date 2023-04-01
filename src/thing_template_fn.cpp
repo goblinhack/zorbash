@@ -407,6 +407,7 @@ int Tp::is_bag_item(void) const { return _is_bag_item; }
 int Tp::is_bag(void) const { return _is_bag; }
 int Tp::is_barrel(void) const { return _is_barrel; }
 int Tp::is_basalt(void) const { return _is_basalt; }
+int Tp::is_bearowl(void) const { return _is_bearowl; }
 int Tp::is_bee(void) const { return _is_bee; }
 int Tp::is_biome_dungeon(void) const { return _is_biome_dungeon; }
 int Tp::is_biome_sewer(void) const { return _is_biome_sewer; }
@@ -423,6 +424,7 @@ int Tp::is_buff(void) const { return _is_buff; }
 int Tp::is_burnable(void) const { return _is_burnable; }
 int Tp::is_carnivorous_plant(void) const { return _is_carnivorous_plant; }
 int Tp::is_cautious(void) const { return _is_cautious; }
+int Tp::is_centipede(void) const { return _is_centipede; }
 int Tp::is_chasm(void) const { return _is_chasm; }
 int Tp::is_cloak(void) const { return _is_cloak; }
 int Tp::is_cold_elemental(void) const { return _is_cold_elemental; }
@@ -736,8 +738,6 @@ int Tp::is_unused_flag162(void) const { return _is_unused_flag162; }
 int Tp::is_unused_flag163(void) const { return _is_unused_flag163; }
 int Tp::is_unused_flag164(void) const { return _is_unused_flag164; }
 int Tp::is_unused_flag165(void) const { return _is_unused_flag165; }
-int Tp::is_unused_flag166(void) const { return _is_unused_flag166; }
-int Tp::is_centipede(void) const { return _is_centipede; }
 int Tp::is_unused_flag16(void) const { return _is_unused_flag16; }
 int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
 int Tp::is_unused_flag17(void) const { return _is_unused_flag17; }
@@ -1147,6 +1147,7 @@ void Tp::is_bag_item_set(int v) { _is_bag_item = v; }
 void Tp::is_bag_set(int v) { _is_bag = v; }
 void Tp::is_barrel_set(int v) { _is_barrel = v; }
 void Tp::is_basalt_set(int v) { _is_basalt = v; }
+void Tp::is_bearowl_set(int v) { _is_bearowl = v; }
 void Tp::is_bee_set(int v) { _is_bee = v; }
 void Tp::is_biome_dungeon_set(int v) { _is_biome_dungeon = v; }
 void Tp::is_biome_sewer_set(int v) { _is_biome_sewer = v; }
@@ -1163,6 +1164,7 @@ void Tp::is_buff_set(int v) { _is_buff = v; }
 void Tp::is_burnable_set(int v) { _is_burnable = v; }
 void Tp::is_carnivorous_plant_set(int v) { _is_carnivorous_plant = v; }
 void Tp::is_cautious_set(int v) { _is_cautious = v; }
+void Tp::is_centipede_set(int v) { _is_centipede = v; }
 void Tp::is_chasm_set(int v) { _is_chasm = v; }
 void Tp::is_cloak_set(int v) { _is_cloak = v; }
 void Tp::is_cold_elemental_set(int v) { _is_cold_elemental = v; }
@@ -1476,8 +1478,6 @@ void Tp::is_unused_flag162_set(int v) { _is_unused_flag162 = v; }
 void Tp::is_unused_flag163_set(int v) { _is_unused_flag163 = v; }
 void Tp::is_unused_flag164_set(int v) { _is_unused_flag164 = v; }
 void Tp::is_unused_flag165_set(int v) { _is_unused_flag165 = v; }
-void Tp::is_unused_flag166_set(int v) { _is_unused_flag166 = v; }
-void Tp::is_centipede_set(int v) { _is_centipede = v; }
 void Tp::is_unused_flag16_set(int v) { _is_unused_flag16 = v; }
 void Tp::is_unused_flag179_set(int v) { _is_unused_flag179 = v; }
 void Tp::is_unused_flag17_set(int v) { _is_unused_flag17 = v; }
