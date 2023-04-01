@@ -1,5 +1,6 @@
 import my
 
+my.sound_load(volume=0.5, file="data/sounds/creatures/sheep.wav", name="sheep")
 my.sound_load(volume=0.5, file="data/sounds/creatures/bones1.wav", name="bones1")
 my.sound_load(volume=0.5, file="data/sounds/creatures/bones2.wav", name="bones2")
 my.sound_load(volume=0.5, file="data/sounds/creatures/growl10.wav", name="growl10")

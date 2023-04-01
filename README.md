@@ -533,6 +533,7 @@ Sound effects
 - Rat growl by qubodup [found here](https://freesound.org/people/qubodup/)
 - Rat hiss by qubodup [found here](https://freesound.org/people/qubodup/)
 - Rat squeak by tim.kahn [found here](https://freesound.org/people/tim.kahn/)
+- Sheep sounds by n_audioman [found here](https://freesound.org/people/n_audioman/)
 - Skill learn by Mrthenoronha [found here](https://freesound.org/people/Mrthenoronha/)
 - Slime by Konstati [found here](https://freesound.org/people/konstati/)
 - Slime by wubitog [found here](https://freesound.org/people/wubitog/)

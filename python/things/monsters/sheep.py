@@ -9,25 +9,25 @@ def on_born(me, x, y):
 
 
 def on_you_nat_att(me, x, y):
-    sound = f"growl{my.non_pcg_randint(1, 10)}"
+    sound = "sheep"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
     my.thing_popup(me, "Baa!")
 
 
 def on_hit_and_still_alive(me, hitter, real_hitter, x, y, crit, damage):
-    sound = f"hiss{my.non_pcg_randint(1, 10)}"
+    sound = "sheep"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
     my.thing_popup(me, "Baa!")
 
 
 def on_hit_dodge_do(me, hitter, x, y):
-    sound = f"hiss{my.non_pcg_randint(1, 10)}"
+    sound = "sheep"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
     my.thing_popup(me, "Baa!")
 
 
 def on_death(me, x, y):
-    sound = f"growl{my.non_pcg_randint(1, 10)}"
+    sound = "sheep"
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
