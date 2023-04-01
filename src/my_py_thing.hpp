@@ -250,6 +250,7 @@ PyObject *thing_is_corpse(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_corpse_with_bones(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_corridor(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cowardly(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_crab(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_critical_to_level(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_crushable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_crystal(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -559,9 +560,8 @@ PyObject *thing_is_unused_flag165(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag166(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag167(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag168(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag169(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_sheep(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag16(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag170(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag179(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag17(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag18(PyObject *obj, PyObject *args, PyObject *keywds);

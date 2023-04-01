@@ -1111,15 +1111,15 @@ int Thing::is_unused_flag168(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag168());
 }
-int Thing::is_unused_flag169(void)
+int Thing::is_sheep(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag169());
+  return (tp()->is_sheep());
 }
-int Thing::is_unused_flag170(void)
+int Thing::is_crab(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag170());
+  return (tp()->is_crab());
 }
 int Thing::is_equippable(void)
 {

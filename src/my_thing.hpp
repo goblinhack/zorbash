@@ -1401,6 +1401,7 @@ public:
   int is_corpse_with_bones(void);
   int is_corridor(void);
   int is_cowardly(void);
+  int is_crab(void);
   int is_critical_to_level(void);
   int is_crushable(void);
   int is_crystal(void);
@@ -1706,9 +1707,8 @@ public:
   int is_unused_flag166(void);
   int is_unused_flag167(void);
   int is_unused_flag168(void);
-  int is_unused_flag169(void);
+  int is_sheep(void);
   int is_unused_flag16(void);
-  int is_unused_flag170(void);
   int is_unused_flag179(void);
   int is_unused_flag17(void);
   int is_unused_flag18(void);

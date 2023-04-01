@@ -435,6 +435,7 @@ int Tp::is_corpse_on_death(void) const { return _is_corpse_on_death; }
 int Tp::is_corpse_with_bones(void) const { return _is_corpse_with_bones; }
 int Tp::is_corridor(void) const { return _is_corridor; }
 int Tp::is_cowardly(void) const { return _is_cowardly; }
+int Tp::is_crab(void) const { return _is_crab; }
 int Tp::is_critical_to_level(void) const { return _is_critical_to_level; }
 int Tp::is_crushable(void) const { return _is_crushable; }
 int Tp::is_crystal(void) const { return _is_crystal; }
@@ -736,9 +737,8 @@ int Tp::is_unused_flag165(void) const { return _is_unused_flag165; }
 int Tp::is_unused_flag166(void) const { return _is_unused_flag166; }
 int Tp::is_unused_flag167(void) const { return _is_unused_flag167; }
 int Tp::is_unused_flag168(void) const { return _is_unused_flag168; }
-int Tp::is_unused_flag169(void) const { return _is_unused_flag169; }
+int Tp::is_sheep(void) const { return _is_sheep; }
 int Tp::is_unused_flag16(void) const { return _is_unused_flag16; }
-int Tp::is_unused_flag170(void) const { return _is_unused_flag170; }
 int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
 int Tp::is_unused_flag17(void) const { return _is_unused_flag17; }
 int Tp::is_unused_flag18(void) const { return _is_unused_flag18; }
@@ -1175,6 +1175,7 @@ void Tp::is_corpse_on_death_set(int v) { _is_corpse_on_death = v; }
 void Tp::is_corpse_with_bones_set(int v) { _is_corpse_with_bones = v; }
 void Tp::is_corridor_set(int v) { _is_corridor = v; }
 void Tp::is_cowardly_set(int v) { _is_cowardly = v; }
+void Tp::is_crab_set(int v) { _is_crab = v; }
 void Tp::is_critical_to_level_set(int v) { _is_critical_to_level = v; }
 void Tp::is_crushable_set(int v) { _is_crushable = v; }
 void Tp::is_crystal_set(int v) { _is_crystal = v; }
@@ -1476,9 +1477,8 @@ void Tp::is_unused_flag165_set(int v) { _is_unused_flag165 = v; }
 void Tp::is_unused_flag166_set(int v) { _is_unused_flag166 = v; }
 void Tp::is_unused_flag167_set(int v) { _is_unused_flag167 = v; }
 void Tp::is_unused_flag168_set(int v) { _is_unused_flag168 = v; }
-void Tp::is_unused_flag169_set(int v) { _is_unused_flag169 = v; }
+void Tp::is_sheep_set(int v) { _is_sheep = v; }
 void Tp::is_unused_flag16_set(int v) { _is_unused_flag16 = v; }
-void Tp::is_unused_flag170_set(int v) { _is_unused_flag170 = v; }
 void Tp::is_unused_flag179_set(int v) { _is_unused_flag179 = v; }
 void Tp::is_unused_flag17_set(int v) { _is_unused_flag17 = v; }
 void Tp::is_unused_flag18_set(int v) { _is_unused_flag18 = v; }

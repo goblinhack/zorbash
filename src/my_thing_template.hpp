@@ -356,6 +356,7 @@ private:
   int _is_corpse_with_bones {};
   int _is_corridor {};
   int _is_cowardly {};
+  int _is_crab {};
   int _is_critical_to_level {};
   int _is_crushable {};
   int _is_crystal {};
@@ -660,9 +661,8 @@ private:
   int _is_unused_flag166 {};
   int _is_unused_flag167 {};
   int _is_unused_flag168 {};
-  int _is_unused_flag169 {};
+  int _is_sheep {};
   int _is_unused_flag17 {};
-  int _is_unused_flag170 {};
   int _is_unused_flag179 {};
   int _is_unused_flag18 {};
   int _is_unused_flag19 {};
@@ -1642,6 +1642,7 @@ public:
   int is_corpse_with_bones(void) const;
   int is_corridor(void) const;
   int is_cowardly(void) const;
+  int is_crab(void) const;
   int is_critical_to_level(void) const;
   int is_crushable(void) const;
   int is_crystal(void) const;
@@ -1943,9 +1944,8 @@ public:
   int is_unused_flag166(void) const;
   int is_unused_flag167(void) const;
   int is_unused_flag168(void) const;
-  int is_unused_flag169(void) const;
+  int is_sheep(void) const;
   int is_unused_flag16(void) const;
-  int is_unused_flag170(void) const;
   int is_unused_flag179(void) const;
   int is_unused_flag17(void) const;
   int is_unused_flag18(void) const;
@@ -2382,6 +2382,7 @@ public:
   void is_corpse_with_bones_set(int v);
   void is_corridor_set(int v);
   void is_cowardly_set(int v);
+  void is_crab_set(int v);
   void is_critical_to_level_set(int v);
   void is_crushable_set(int v);
   void is_crystal_set(int v);
@@ -2683,9 +2684,8 @@ public:
   void is_unused_flag166_set(int v);
   void is_unused_flag167_set(int v);
   void is_unused_flag168_set(int v);
-  void is_unused_flag169_set(int v);
+  void is_sheep_set(int v);
   void is_unused_flag16_set(int v);
-  void is_unused_flag170_set(int v);
   void is_unused_flag179_set(int v);
   void is_unused_flag17_set(int v);
   void is_unused_flag18_set(int v);

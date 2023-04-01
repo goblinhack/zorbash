@@ -114,6 +114,8 @@ std::initializer_list< std::string > tps = {
     "cookie",
     "corridor1",
     "corridor2",
+    "crab_sewer",
+    "sheep",
     "cthulite",
     "cursor",
     "cursor_path",

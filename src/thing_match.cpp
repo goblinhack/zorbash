@@ -162,6 +162,7 @@ bool Tp::matches(const std::string &what)
   if (is_corpse_with_bones() && (what == "is_corpse_with_bones")) { return true; }
   if (is_corridor() && (what == "is_corridor")) { return true; }
   if (is_cowardly() && (what == "is_cowardly")) { return true; }
+  if (is_crab() && (what == "is_crab")) { return true; }
   if (is_critical_to_level() && (what == "is_critical_to_level")) { return true; }
   if (is_crushable() && (what == "is_crushable")) { return true; }
   if (is_crystal() && (what == "is_crystal")) { return true; }
@@ -457,9 +458,8 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag166() && (what == "is_unused_flag166")) { return true; }
   if (is_unused_flag167() && (what == "is_unused_flag167")) { return true; }
   if (is_unused_flag168() && (what == "is_unused_flag168")) { return true; }
-  if (is_unused_flag169() && (what == "is_unused_flag169")) { return true; }
+  if (is_sheep() && (what == "is_sheep")) { return true; }
   if (is_unused_flag16() && (what == "is_unused_flag16")) { return true; }
-  if (is_unused_flag170() && (what == "is_unused_flag170")) { return true; }
   if (is_unused_flag179() && (what == "is_unused_flag179")) { return true; }
   if (is_unused_flag17() && (what == "is_unused_flag17")) { return true; }
   if (is_unused_flag18() && (what == "is_unused_flag18")) { return true; }
@@ -758,6 +758,7 @@ bool Thing::matches(const std::string &what)
   if (is_corpse_with_bones() && (what == "is_corpse_with_bones")) { return true; }
   if (is_corridor() && (what == "is_corridor")) { return true; }
   if (is_cowardly() && (what == "is_cowardly")) { return true; }
+  if (is_crab() && (what == "is_crab")) { return true; }
   if (is_critical_to_level() && (what == "is_critical_to_level")) { return true; }
   if (is_crushable() && (what == "is_crushable")) { return true; }
   if (is_crystal() && (what == "is_crystal")) { return true; }
@@ -1053,9 +1054,8 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag166() && (what == "is_unused_flag166")) { return true; }
   if (is_unused_flag167() && (what == "is_unused_flag167")) { return true; }
   if (is_unused_flag168() && (what == "is_unused_flag168")) { return true; }
-  if (is_unused_flag169() && (what == "is_unused_flag169")) { return true; }
+  if (is_sheep() && (what == "is_sheep")) { return true; }
   if (is_unused_flag16() && (what == "is_unused_flag16")) { return true; }
-  if (is_unused_flag170() && (what == "is_unused_flag170")) { return true; }
   if (is_unused_flag179() && (what == "is_unused_flag179")) { return true; }
   if (is_unused_flag17() && (what == "is_unused_flag17")) { return true; }
   if (is_unused_flag18() && (what == "is_unused_flag18")) { return true; }
@@ -1351,6 +1351,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_corpse_with_bones") { return &Thing::is_corpse_with_bones; }
   if (what == "is_corridor") { return &Thing::is_corridor; }
   if (what == "is_cowardly") { return &Thing::is_cowardly; }
+  if (what == "is_crab") { return &Thing::is_crab; }
   if (what == "is_critical_to_level") { return &Thing::is_critical_to_level; }
   if (what == "is_crushable") { return &Thing::is_crushable; }
   if (what == "is_crystal") { return &Thing::is_crystal; }
@@ -1639,9 +1640,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag166") { return &Thing::is_unused_flag166; }
   if (what == "is_unused_flag167") { return &Thing::is_unused_flag167; }
   if (what == "is_unused_flag168") { return &Thing::is_unused_flag168; }
-  if (what == "is_unused_flag169") { return &Thing::is_unused_flag169; }
+  if (what == "is_sheep") { return &Thing::is_sheep; }
   if (what == "is_unused_flag16") { return &Thing::is_unused_flag16; }
-  if (what == "is_unused_flag170") { return &Thing::is_unused_flag170; }
   if (what == "is_unused_flag179") { return &Thing::is_unused_flag179; }
   if (what == "is_unused_flag17") { return &Thing::is_unused_flag17; }
   if (what == "is_unused_flag18") { return &Thing::is_unused_flag18; }
