@@ -5,21 +5,25 @@ import tp
 def on_born(me, x, y):
     my.thing_friend(me, "is_sheep")
     my.thing_friend(me, "is_herbivore")
+    my.thing_popup(me, "Baa!")
 
 
 def on_you_nat_att(me, x, y):
     sound = f"growl{my.non_pcg_randint(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
+    my.thing_popup(me, "Baa!")
 
 
 def on_hit_and_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     sound = f"hiss{my.non_pcg_randint(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
+    my.thing_popup(me, "Baa!")
 
 
 def on_hit_dodge_do(me, hitter, x, y):
     sound = f"hiss{my.non_pcg_randint(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
+    my.thing_popup(me, "Baa!")
 
 
 def on_death(me, x, y):
@@ -122,9 +126,9 @@ def tp_init(name, text_long_name):
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
     my.on_you_nat_att_do(self, "me.on_you_nat_att()")
     my.rarity(self, my.RARITY_COMMON)  # how rare within this monster class
-    my.shove_strength_mod(self, 3)
-    my.spawn_group_radius(self, 5)
-    my.spawn_group_size_dice(self, "1d10+2")
+    my.shove_strength_mod(self, 2)
+    my.spawn_group_radius(self, 6)
+    my.spawn_group_size_dice(self, "1d20+2")
     my.stamina(self, 100)
     my.stat_con(self, 12)
     my.stat_def(self, 10)
