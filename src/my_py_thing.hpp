@@ -560,7 +560,7 @@ PyObject *thing_is_unused_flag163(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag164(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag165(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag166(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag167(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_centipede(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag16(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag179(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag17(PyObject *obj, PyObject *args, PyObject *keywds);

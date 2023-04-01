@@ -293,6 +293,8 @@ void Game::place_player(void)
         auto d = level->thing_new("dogman", point(x + 2, y));
         d->wake("");
       }
+      level->thing_new("carcas_creeper", point(x + 2, y + 1));
+      level->thing_new("centipede", point(x - 2, y + 1));
       // level->thing_new("demon_fire", point(x + 4, y));
       // level->thing_new("ogre", point(x + 4, y));
       // level->thing_new("troll_stone", point(x + 2, y));
@@ -307,7 +309,6 @@ void Game::place_player(void)
       // level->thing_new("scorpion_colossal", point(x + 3, y + 2));
       // level->thing_new("cthulite", point(x + 3, y + 2));
       // level->thing_new("blinkcat", point(x + 2, y + 1));
-      // level->thing_new("carcas_creeper", point(x + 2, y + 1));
       // level->thing_new("gnome_thief", point(x + 2, y + 1));
       // level->thing_new("gnome_rock", point(x + 2, y + 1));
       // level->thing_new("gnome_knight", point(x + 2, y + 1));

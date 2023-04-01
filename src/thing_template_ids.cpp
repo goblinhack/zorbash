@@ -101,6 +101,7 @@ std::initializer_list< std::string > tps = {
     "buff_slippery",
     "buff_undead_protection",
     "carcas_creeper",
+    "centipede",
     "chasm1",
     "cheesecake",
     "cherry",

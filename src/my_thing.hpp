@@ -1707,7 +1707,7 @@ public:
   int is_unused_flag164(void);
   int is_unused_flag165(void);
   int is_unused_flag166(void);
-  int is_unused_flag167(void);
+  int is_centipede(void);
   int is_unused_flag16(void);
   int is_unused_flag179(void);
   int is_unused_flag17(void);

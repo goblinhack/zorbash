@@ -1101,10 +1101,10 @@ int Thing::is_unused_flag166(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag166());
 }
-int Thing::is_unused_flag167(void)
+int Thing::is_centipede(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag167());
+  return (tp()->is_centipede());
 }
 int Thing::is_herbivore(void)
 {
