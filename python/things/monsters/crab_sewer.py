@@ -118,7 +118,7 @@ def tp_init(name, text_long_name):
     my.is_tickable(self, True)
     my.jump_distance(self, 2)
     my.move_speed(self, 50)
-    my.noise_decibels_hearing(self, 10)
+    my.noise_decibels_hearing(self, 50)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "1d6")
     my.on_death_do(self, "me.on_death()")
@@ -146,14 +146,14 @@ def tp_init(name, text_long_name):
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
     # end sort marker
 
-    delay = 10000
+    delay = 5000
     my.tile(self,
             ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="pink",
             tile="crab_sewer.1", is_sleeping=True, delay_ms=delay)
     my.tile(self,
             ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="pink",
             tile="crab_sewer.2", is_sleeping=True, delay_ms=delay)
-    delay = 150
+    delay = 100
     my.tile(self,
             ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="pink",
             tile="crab_sewer.1", delay_ms=delay)

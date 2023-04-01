@@ -104,7 +104,9 @@ bool Thing::collision_obstacle(Thingp it)
       }
     } else if (environ_shallow_water()) {
       if (! level->is_shallow_water(it->curr_at)) {
-        return true;
+        if (! is_able_to_live_out_of_water()) {
+          return true;
+        }
       }
     } else {
       if (! level->is_water(it->curr_at)) {
@@ -325,10 +327,12 @@ bool Thing::is_obs_for_ai(Thingp it)
       }
     } else if (environ_shallow_water()) {
       if (! level->is_shallow_water(it->curr_at)) {
-        if (debug && is_debug_type()) {
-          con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
+        if (! is_able_to_live_out_of_water()) {
+          if (debug && is_debug_type()) {
+            con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
+          }
+          return true;
         }
-        return true;
       }
     } else {
       if (! level->is_water(it->curr_at)) {

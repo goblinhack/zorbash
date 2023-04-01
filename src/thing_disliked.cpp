@@ -32,7 +32,9 @@ bool Thing::is_disliked_by_me(const point p)
       }
     } else if (environ_shallow_water()) {
       if (! level->is_shallow_water(p)) {
-        return true;
+        if (! is_able_to_live_out_of_water()) {
+          return true;
+        }
       }
     } else {
       if (! level->is_water(p)) {
@@ -134,7 +136,9 @@ bool Tp::is_disliked_by_me(Levelp level, point p) const
       }
     } else if (environ_shallow_water()) {
       if (! level->is_shallow_water(p)) {
-        return true;
+        if (! is_able_to_live_out_of_water()) {
+          return true;
+        }
       }
     } else {
       if (! level->is_water(p)) {
