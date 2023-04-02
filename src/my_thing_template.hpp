@@ -421,6 +421,7 @@ private:
   int _is_exit_finder {};
   int _is_explorer {};
   int _is_explosion {};
+  int _is_fairy {};
   int _is_fearless {};
   int _is_fire {};
   int _is_fire_elemental {};
@@ -661,7 +662,6 @@ private:
   int _is_unused_flag162 {};
   int _is_unused_flag163 {};
   int _is_unused_flag164 {};
-  int _is_unused_flag165 {};
   int _is_unused_flag17 {};
   int _is_unused_flag179 {};
   int _is_unused_flag18 {};
@@ -1707,6 +1707,7 @@ public:
   int is_exit_finder(void) const;
   int is_explorer(void) const;
   int is_explosion(void) const;
+  int is_fairy(void) const;
   int is_fearless(void) const;
   int is_fire_elemental(void) const;
   int is_fire(void) const;
@@ -1944,7 +1945,6 @@ public:
   int is_unused_flag162(void) const;
   int is_unused_flag163(void) const;
   int is_unused_flag164(void) const;
-  int is_unused_flag165(void) const;
   int is_unused_flag16(void) const;
   int is_unused_flag179(void) const;
   int is_unused_flag17(void) const;
@@ -2447,6 +2447,7 @@ public:
   void is_exit_finder_set(int v);
   void is_explorer_set(int v);
   void is_explosion_set(int v);
+  void is_fairy_set(int v);
   void is_fearless_set(int v);
   void is_fire_elemental_set(int v);
   void is_fire_set(int v);
@@ -2684,7 +2685,6 @@ public:
   void is_unused_flag162_set(int v);
   void is_unused_flag163_set(int v);
   void is_unused_flag164_set(int v);
-  void is_unused_flag165_set(int v);
   void is_unused_flag16_set(int v);
   void is_unused_flag179_set(int v);
   void is_unused_flag17_set(int v);

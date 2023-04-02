@@ -326,6 +326,7 @@ PyObject *thing_is_ettin(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_exit_finder(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_explorer(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_explosion(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_fairy(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_fearless(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_fire_elemental(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_fire(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -560,7 +561,6 @@ PyObject *thing_is_unused_flag161(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag162(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag163(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag164(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag165(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag16(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag179(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag17(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -1091,10 +1091,10 @@ int Thing::is_unused_flag164(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag164());
 }
-int Thing::is_unused_flag165(void)
+int Thing::is_fairy(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag165());
+  return (tp()->is_fairy());
 }
 int Thing::is_bearowl(void)
 {

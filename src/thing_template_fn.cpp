@@ -500,6 +500,7 @@ int Tp::is_ettin(void) const { return _is_ettin; }
 int Tp::is_exit_finder(void) const { return _is_exit_finder; }
 int Tp::is_explorer(void) const { return _is_explorer; }
 int Tp::is_explosion(void) const { return _is_explosion; }
+int Tp::is_fairy(void) const { return _is_fairy; }
 int Tp::is_fearless(void) const { return _is_fearless; }
 int Tp::is_fire_elemental(void) const { return _is_fire_elemental; }
 int Tp::is_fire(void) const { return _is_fire; }
@@ -737,7 +738,6 @@ int Tp::is_unused_flag161(void) const { return _is_unused_flag161; }
 int Tp::is_unused_flag162(void) const { return _is_unused_flag162; }
 int Tp::is_unused_flag163(void) const { return _is_unused_flag163; }
 int Tp::is_unused_flag164(void) const { return _is_unused_flag164; }
-int Tp::is_unused_flag165(void) const { return _is_unused_flag165; }
 int Tp::is_unused_flag16(void) const { return _is_unused_flag16; }
 int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
 int Tp::is_unused_flag17(void) const { return _is_unused_flag17; }
@@ -1240,6 +1240,7 @@ void Tp::is_ettin_set(int v) { _is_ettin = v; }
 void Tp::is_exit_finder_set(int v) { _is_exit_finder = v; }
 void Tp::is_explorer_set(int v) { _is_explorer = v; }
 void Tp::is_explosion_set(int v) { _is_explosion = v; }
+void Tp::is_fairy_set(int v) { _is_fairy = v; }
 void Tp::is_fearless_set(int v) { _is_fearless = v; }
 void Tp::is_fire_elemental_set(int v) { _is_fire_elemental = v; }
 void Tp::is_fire_set(int v) { _is_fire = v; }
@@ -1477,7 +1478,6 @@ void Tp::is_unused_flag161_set(int v) { _is_unused_flag161 = v; }
 void Tp::is_unused_flag162_set(int v) { _is_unused_flag162 = v; }
 void Tp::is_unused_flag163_set(int v) { _is_unused_flag163 = v; }
 void Tp::is_unused_flag164_set(int v) { _is_unused_flag164 = v; }
-void Tp::is_unused_flag165_set(int v) { _is_unused_flag165 = v; }
 void Tp::is_unused_flag16_set(int v) { _is_unused_flag16 = v; }
 void Tp::is_unused_flag179_set(int v) { _is_unused_flag179 = v; }
 void Tp::is_unused_flag17_set(int v) { _is_unused_flag17 = v; }

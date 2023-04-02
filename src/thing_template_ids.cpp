@@ -274,6 +274,7 @@ std::initializer_list< std::string > tps = {
     "magical_effect",
     "map_beast",
     "map_treasure",
+    "meatfairy",
     "medal_of_valor",
     "melon1",
     "melon2",

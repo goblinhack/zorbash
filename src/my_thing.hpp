@@ -1469,6 +1469,7 @@ public:
   int is_exit_finder(void);
   int is_explorer(void);
   int is_explosion(void);
+  int is_fairy(void);
   int is_fearless(void);
   int is_fire_elemental(void);
   int is_fire(void);
@@ -1707,7 +1708,6 @@ public:
   int is_unused_flag162(void);
   int is_unused_flag163(void);
   int is_unused_flag164(void);
-  int is_unused_flag165(void);
   int is_unused_flag16(void);
   int is_unused_flag179(void);
   int is_unused_flag17(void);

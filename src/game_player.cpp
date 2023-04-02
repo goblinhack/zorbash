@@ -294,6 +294,7 @@ void Game::place_player(void)
         d->wake("");
       }
       if (0) {
+        level->thing_new("meatfairy", point(x + 2, y + 1));
         level->thing_new("bearowl", point(x + 2, y + 1));
         level->thing_new("carcas_creeper", point(x + 2, y + 1));
         level->thing_new("centipede", point(x - 2, y + 1));
