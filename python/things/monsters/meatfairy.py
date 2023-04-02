@@ -136,16 +136,16 @@ def tp_init(name, text_long_name):
 
     delay = 70
     my.tile(self,
-            ascii_fg_char="b", ascii_bg_col_name="", ascii_fg_col_name="red",
+            ascii_fg_char="f", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="b", ascii_bg_col_name="", ascii_fg_col_name="red",
+            ascii_fg_char="f", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="b", ascii_bg_col_name="", ascii_fg_col_name="red",
+            ascii_fg_char="f", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".3", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="b", ascii_bg_col_name="", ascii_fg_col_name="red",
+            ascii_fg_char="f", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".4", delay_ms=delay)
 
     my.tp_update(self)
