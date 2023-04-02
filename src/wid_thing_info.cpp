@@ -210,14 +210,14 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
       }
     }
   } else {
-    wid_popup_window->log(t->text_description_long(), TEXT_FORMAT_LHS, "pink");
+    wid_popup_window->log(t->text_description_long(), TEXT_FORMAT_LHS, "gray80");
 
     if (! t->text_description_long2().empty()) {
-      wid_popup_window->log(t->text_description_long2(), TEXT_FORMAT_LHS, "yellow");
+      wid_popup_window->log(t->text_description_long2(), TEXT_FORMAT_LHS, "gray70");
     }
 
     if (! t->text_description_long3().empty()) {
-      wid_popup_window->log(t->text_description_long3(), TEXT_FORMAT_LHS, "orange");
+      wid_popup_window->log(t->text_description_long3(), TEXT_FORMAT_LHS, "gray60");
     }
 
     wid_thing_info_add_general_info(wid_popup_window, t);

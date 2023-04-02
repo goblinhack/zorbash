@@ -129,7 +129,7 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_long2(self, "They have a unique attach method, that of a single massive sting, after which they die. It is believed in this way that the death hornet will finish you off in one go, leaving your fresh corpse for the benefit of its hive kin.")
+    my.text_description_long2(self, "They have a unique attack method, that of a single massive sting, after which they die. It is believed in this way that the death hornet will finish you off in one go, leaving your fresh corpse for the benefit of its hive kin.")
     my.text_description_long(self, "The death hornet is as unpleasant as it sounds and can often be found in large buzzing groups.")
     my.text_description_short(self, "A stabby death.")
     my.text_hits(self, "pierces")
