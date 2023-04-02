@@ -27,7 +27,7 @@ def tp_init(name, text_long_name):
     my.is_very_intelligent(self, True)
     my.on_born_do(self, "me.on_born()")
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
-    my.on_you_nat_att_do(self, "zorb_all.on_you_nat_att()")
+    my.on_you_nat_attack_attempt_do(self, "zorb_all.on_you_nat_attack_attempt()")
     my.stat_str(self, 8)
     my.text_description_long2(self, "This particular zorblin is learned in the dark zorbliny arts. They worship their dark lord who lives in his dark lair. They also prefer dark chocolate.")
     my.text_description_short(self, "A master of the dark zorbliny arts.")

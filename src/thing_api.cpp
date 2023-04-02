@@ -4618,10 +4618,16 @@ const std::string &Thing::on_polymorphed_do(void)
   return (tp()->on_polymorphed_do());
 }
 
-const std::string &Thing::on_you_nat_att_do(void)
+const std::string &Thing::on_you_nat_attack_attempt_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_you_nat_att_do());
+  return (tp()->on_you_nat_attack_attempt_do());
+}
+
+const std::string &Thing::on_you_nat_attack_success_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_you_nat_attack_success_do());
 }
 
 const std::string &Thing::on_born_do(void)

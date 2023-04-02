@@ -1012,7 +1012,8 @@ private:
   std::string _on_you_are_declared_a_follower_do;
   std::string _on_you_are_declared_leader_do;
   std::string _on_you_are_on_fire_do;
-  std::string _on_you_nat_att_do;
+  std::string _on_you_nat_attack_attempt_do;
+  std::string _on_you_nat_attack_success_do;
   std::string _resurrect_dice_str;
   std::string _spawn_group_size_dice_str;
   std::string _spawn_on_shoved;
@@ -1354,7 +1355,8 @@ public:
   const std::string &on_you_are_declared_a_follower_do(void) const;
   const std::string &on_you_are_declared_leader_do(void) const;
   const std::string &on_you_are_on_fire_do(void) const;
-  const std::string &on_you_nat_att_do(void) const;
+  const std::string &on_you_nat_attack_attempt_do(void) const;
+  const std::string &on_you_nat_attack_success_do(void) const;
   const std::string &resurrect_dice_str(void) const;
   const std::string &spawn_group_size_dice_str(void) const;
   const std::string &spawn_on_shoved(void) const;
@@ -2948,7 +2950,8 @@ public:
   void on_you_are_declared_a_follower_do_set(const std::string &v);
   void on_you_are_declared_leader_do_set(const std::string &v);
   void on_you_are_on_fire_do_set(const std::string &v);
-  void on_you_nat_att_do_set(const std::string &v);
+  void on_you_nat_attack_attempt_do_set(const std::string &v);
+  void on_you_nat_attack_success_do_set(const std::string &v);
   void range_max_set(int v);
   void rarity_set(int v);
   void shove_strength_mod_set(int v);

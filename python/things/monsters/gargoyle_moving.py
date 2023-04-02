@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_you_nat_att(me, x, y):
+def on_you_nat_attack_attempt(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monster_roar")
 
 
@@ -87,7 +87,7 @@ def tp_init(name, text_long_name):
     my.on_death_do(self, "me.on_death()")
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
-    my.on_you_nat_att_do(self, "me.on_you_nat_att()")
+    my.on_you_nat_attack_attempt_do(self, "me.on_you_nat_attack_attempt()")
     my.rarity(self, my.RARITY_COMMON)  # how rare within this monster class
     my.stat_att_mod(self, 4)
     my.stat_con(self, 16)

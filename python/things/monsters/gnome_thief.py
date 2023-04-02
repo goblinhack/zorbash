@@ -40,7 +40,7 @@ def tp_init(name, text_long_name):
     my.is_monst_class_A(self, True)
     my.on_born_do(self, "me.on_born()")
     my.on_stealing_do(self, "me.on_stealing()")
-    my.on_you_nat_att_do(self, "gnome_all.on_you_nat_att()")
+    my.on_you_nat_attack_attempt_do(self, "gnome_all.on_you_nat_attack_attempt()")
     my.teleport_distance(self, 20)
     my.text_description_long2(self, "This particular gnome is very adept at liberating items from their owners.")
     my.text_description_short(self, "A sneaky gnome thief.")

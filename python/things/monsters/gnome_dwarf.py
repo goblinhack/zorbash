@@ -25,7 +25,7 @@ def tp_init(name, text_long_name):
     my.is_daring(self, True)
     my.is_monst_class_A(self, True)
     my.on_born_do(self, "me.on_born()")
-    my.on_you_nat_att_do(self, "gnome_all.on_you_nat_att()")
+    my.on_you_nat_attack_attempt_do(self, "gnome_all.on_you_nat_attack_attempt()")
     my.stat_def(self, 12)
     my.stat_dex(self, 8)
     my.stat_luck(self, 10)

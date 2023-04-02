@@ -13,7 +13,7 @@ def on_hit_and_still_alive(me, hitter, real_hitter, x, y, crit, damage):
         my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "player_hit5")
 
 
-def on_you_nat_att(me, x, y):
+def on_you_nat_attack_attempt(me, x, y):
     my.sound_play("player_punch")
 
 
@@ -289,7 +289,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.on_fall_begin_do(self, "player.on_fall_begin()")
     my.on_hit_and_still_alive_do(self, "player.on_hit_and_still_alive()")
     my.on_move_do(self, "player.on_move()")
-    my.on_you_nat_att_do(self, "player.on_you_nat_att()")
+    my.on_you_nat_attack_attempt_do(self, "player.on_you_nat_attack_attempt()")
     my.stamina(self, 100)
     my.stat_att_penalty_when_idle_max(self, 0)
     my.stat_att_penalty_when_idle(self, 0)

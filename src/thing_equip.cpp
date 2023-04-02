@@ -651,7 +651,7 @@ bool Thing::equip_use(bool forced, int equip, ThingAttackOptionsp attack_options
       //
       // Python callback
       //
-      on_you_nat_att();
+      on_you_nat_attack_attempt();
     }
 
     attack_options->used_as = gfx_anim_use();

@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_you_nat_att(me, x, y):
+def on_you_nat_attack_attempt(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, "squelch")
 
 
@@ -97,7 +97,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "1d4")
     my.on_idle_tick_freq_dice(self, "1d20:me.on_idle()")
-    my.on_you_nat_att_do(self, "me.on_you_nat_att()")
+    my.on_you_nat_attack_attempt_do(self, "me.on_you_nat_attack_attempt()")
     my.rarity(self, my.RARITY_COMMON)  # how rare within this monster class
     my.stat_con(self, 20)
     my.stat_def(self, 0)

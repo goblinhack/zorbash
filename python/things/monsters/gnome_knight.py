@@ -23,7 +23,7 @@ def tp_init(name, text_long_name):
     my.is_daring(self, True)
     my.is_monst_class_B(self, True)
     my.on_born_do(self, "me.on_born()")
-    my.on_you_nat_att_do(self, "gnome_all.on_you_nat_att()")
+    my.on_you_nat_attack_attempt_do(self, "gnome_all.on_you_nat_attack_attempt()")
     my.stat_con(self, 12)
     my.stat_def(self, 14)
     my.stat_dex(self, 8)

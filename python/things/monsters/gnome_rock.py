@@ -29,7 +29,7 @@ def tp_init(name, text_long_name):
     my.is_made_of_rock(self, True)
     my.is_monst_class_B(self, True)
     my.on_born_do(self, "me.on_born()")
-    my.on_you_nat_att_do(self, "gnome_all.on_you_nat_att()")
+    my.on_you_nat_attack_attempt_do(self, "gnome_all.on_you_nat_attack_attempt()")
     my.stat_def(self, 14)
     my.stat_dex(self, 6)
     my.stat_str(self, 12)

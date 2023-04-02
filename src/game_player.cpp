@@ -293,8 +293,8 @@ void Game::place_player(void)
         auto d = level->thing_new("dogman", point(x + 2, y));
         d->wake("");
       }
-      level->thing_new("death_hornet", point(x + 2, y + 1));
       if (0) {
+        level->thing_new("death_hornet", point(x + 2, y + 1));
         level->thing_new("bear_undead", point(x + 2, y + 1));
         level->thing_new("meatfairy", point(x + 2, y + 1));
         level->thing_new("bearowl", point(x + 2, y + 1));

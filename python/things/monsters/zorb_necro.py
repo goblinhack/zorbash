@@ -70,7 +70,7 @@ def tp_init(name, text_long_name):
     my.on_death_do(self, "me.on_death()")
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
     my.on_tick_do(self, "me.on_tick()")
-    my.on_you_nat_att_do(self, "zorb_all.on_you_nat_att()")
+    my.on_you_nat_attack_attempt_do(self, "zorb_all.on_you_nat_attack_attempt()")
     my.stat_dex(self, 6)
     my.stat_luck(self, 6)
     my.stat_str(self, 6)

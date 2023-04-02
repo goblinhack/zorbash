@@ -921,7 +921,8 @@ public:
   const std::string &on_you_are_declared_a_follower_do(void);
   const std::string &on_you_are_declared_leader_do(void);
   const std::string &on_you_are_on_fire_do(void);
-  const std::string &on_you_nat_att_do(void);
+  const std::string &on_you_nat_attack_attempt_do(void);
+  const std::string &on_you_nat_attack_success_do(void);
   const std::string &poison_reason_get(void);
   const std::string &resurrect_dice_str(void);
   const std::string &spawn_group_size_dice_str(void);
@@ -2705,7 +2706,8 @@ public:
   void on_waiting(void);
   void on_you_are_declared_a_follower(Thingp leader);
   void on_you_are_declared_leader(void);
-  void on_you_nat_att(void);
+  void on_you_nat_attack_attempt(void);
+  void on_you_nat_attack_success(void);
   void owner_set(Thingp owner);
   void owner_unset(void);
   void path_shorten(std::vector< point > &path);

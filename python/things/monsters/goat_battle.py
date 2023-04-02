@@ -7,7 +7,7 @@ def on_born(me, x, y):
     my.thing_friend(me, "is_herbivore")
 
 
-def on_you_nat_att(me, x, y):
+def on_you_nat_attack_attempt(me, x, y):
     sound = f"growl{my.non_pcg_randint(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
 
@@ -122,7 +122,7 @@ def tp_init(name, text_long_name):
     my.on_death_do(self, "me.on_death()")
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
-    my.on_you_nat_att_do(self, "me.on_you_nat_att()")
+    my.on_you_nat_attack_attempt_do(self, "me.on_you_nat_attack_attempt()")
     my.rarity(self, my.RARITY_UNCOMMON)  # how rare within this monster class
     my.shove_strength_mod(self, 3)
     my.spawn_group_radius(self, 5)

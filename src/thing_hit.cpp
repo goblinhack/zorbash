@@ -130,19 +130,19 @@ void Thing::on_hit_dodge_do(Thingp hitter)
   }
 }
 
-void Thing::on_you_nat_att(void)
+void Thing::on_you_nat_attack_attempt(void)
 {
   if (is_dead) {
     return;
   }
 
   TRACE_NO_INDENT();
-  auto on_you_nat_att = tp()->on_you_nat_att_do();
-  if (std::empty(on_you_nat_att)) {
+  auto on_you_nat_attack_attempt = tp()->on_you_nat_attack_attempt_do();
+  if (std::empty(on_you_nat_attack_attempt)) {
     return;
   }
 
-  auto t = split_tokens(on_you_nat_att, '.');
+  auto t = split_tokens(on_you_nat_attack_attempt, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -159,8 +159,42 @@ void Thing::on_you_nat_att(void)
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
-    ERR("Bad on_you_nat_att call [%s] expected mod:function, got %d elems", on_you_nat_att.c_str(),
-        (int) on_you_nat_att.size());
+    ERR("Bad on_you_nat_attack_attempt call [%s] expected mod:function, got %d elems",
+        on_you_nat_attack_attempt.c_str(), (int) on_you_nat_attack_attempt.size());
+  }
+}
+
+void Thing::on_you_nat_attack_success(void)
+{
+  if (is_dead) {
+    return;
+  }
+
+  TRACE_NO_INDENT();
+  auto on_you_nat_attack_success = tp()->on_you_nat_attack_success_do();
+  if (std::empty(on_you_nat_attack_success)) {
+    return;
+  }
+
+  auto t = split_tokens(on_you_nat_attack_success, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    if (mod == "me") {
+      mod = name();
+    }
+
+    dbg2("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
+
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+  } else {
+    ERR("Bad on_you_nat_attack_success call [%s] expected mod:function, got %d elems",
+        on_you_nat_attack_success.c_str(), (int) on_you_nat_attack_success.size());
   }
 }
 
@@ -1834,7 +1868,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         }
       }
 
-      real_hitter->on_you_nat_att();
+      real_hitter->on_you_nat_attack_attempt();
     }
   }
 
@@ -2022,6 +2056,30 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else {
         change_state(MONST_STATE_IDLE, "was attacked");
       }
+    }
+  }
+
+  //
+  // Python callback. Poison looks like an attack on self, so avoid.
+  //
+  if (real_hitter != this) {
+    //
+    // Are we carrying a weapon? If not, see if we can do a claw attack
+    //
+    if (real_hitter->is_player()) {
+      //
+      // We can hit this case if we have no sword and are punching.
+      // We don't want to see the natural attack of the player as
+      // we already displayed it during swing attacks.
+      //
+    } else if (attack_options->attack[ THING_ATTACK_NATURAL ] || attack_options->attack[ THING_ATTACK_POISON ] ||
+               attack_options->attack[ THING_ATTACK_DIGEST ] ||
+               ! real_hitter->equip_id_carry_anim(MONST_EQUIP_WEAPON).ok()) {
+
+      //
+      // Monster natural attack
+      //
+      real_hitter->on_you_nat_attack_success();
     }
   }
 

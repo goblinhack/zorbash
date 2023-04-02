@@ -6,9 +6,12 @@ def on_born(me, x, y):
     my.thing_friend(me, "is_death_hornet")
 
 
-def on_you_nat_att(me, x, y):
+def on_you_nat_attack_attempt(me, x, y):
     sound = f"growl{my.non_pcg_randint(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
+
+
+def on_you_nat_attack_success(me, x, y):
     my.thing_dead(me, "by its own sting")
 
 
@@ -102,30 +105,32 @@ def tp_init(name, text_long_name):
     my.is_red_blooded(self, True)
     my.is_soft(self, True)
     my.is_tickable(self, True)
-    my.move_speed(self, 50)
+    my.move_speed(self, 250)
     my.noise_decibels_hearing(self, 0)
     my.normal_placement_rules(self, True)
     my.on_born_do(self, "me.on_born()")
     my.on_death_do(self, "me.on_death()")
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
-    my.on_you_nat_att_do(self, "me.on_you_nat_att()")
+    my.on_you_nat_attack_attempt_do(self, "me.on_you_nat_attack_attempt()")
+    my.on_you_nat_attack_success_do(self, "me.on_you_nat_attack_success()")
     my.rarity(self, my.RARITY_UNCOMMON)  # how rare within this monster class
     my.spawn_group_radius(self, 5)
-    my.spawn_group_size_dice(self, "1d3+2")
+    my.spawn_group_size_dice(self, "1d3+5")
     my.stamina(self, 100)
     my.stat_con(self, 10)
-    my.stat_def(self, 12)
-    my.stat_dex(self, 12)
+    my.stat_def(self, 6)
+    my.stat_dex(self, 14)
     my.stat_luck(self, 10)
     my.stat_str(self, 4)
+    my.stat_att_mod(self, 10)
     my.temperature_max(self, 50)
     my.temperature_min(self, 0)
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
     my.text_description_long2(self, "They have a unique attach method, that of a single massive sting, after which they die. It is believed in this way that the death hornet will finish you off in one go, leaving your fresh corpse for the benefit of its hive kin.")
-    my.text_description_long(self, "The death hornet is as unpleasant as it sounds and can often be found in large unpleasant groups.")
+    my.text_description_long(self, "The death hornet is as unpleasant as it sounds and can often be found in large buzzing groups.")
     my.text_description_short(self, "A stabby death.")
     my.text_hits(self, "pierces")
     my.thing_size(self, my.THING_SIZE_SMALL)

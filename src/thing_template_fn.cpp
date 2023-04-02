@@ -169,7 +169,8 @@ const std::string &Tp::on_want_to_shoot_at_do(void) const { return _on_want_to_s
 const std::string &Tp::on_you_are_declared_a_follower_do(void) const { return _on_you_are_declared_a_follower_do; }
 const std::string &Tp::on_you_are_declared_leader_do(void) const { return _on_you_are_declared_leader_do; }
 const std::string &Tp::on_you_are_on_fire_do(void) const { return _on_you_are_on_fire_do; }
-const std::string &Tp::on_you_nat_att_do(void) const { return _on_you_nat_att_do; }
+const std::string &Tp::on_you_nat_attack_attempt_do(void) const { return _on_you_nat_attack_attempt_do; }
+const std::string &Tp::on_you_nat_attack_success_do(void) const { return _on_you_nat_attack_success_do; }
 const std::string &Tp::spawn_on_shoved(void) const { return _spawn_on_shoved; }
 const std::string &Tp::str1(void) const { return _str1; }
 const std::string &Tp::str2(void) const { return _str2; }
@@ -1741,7 +1742,8 @@ void Tp::on_want_to_shoot_at_do_set(const std::string &v) { _on_want_to_shoot_at
 void Tp::on_you_are_declared_a_follower_do_set(const std::string &v) { _on_you_are_declared_a_follower_do = v; }
 void Tp::on_you_are_declared_leader_do_set(const std::string &v) { _on_you_are_declared_leader_do = v; }
 void Tp::on_you_are_on_fire_do_set(const std::string &v) { _on_you_are_on_fire_do = v; }
-void Tp::on_you_nat_att_do_set(const std::string &v) { _on_you_nat_att_do = v; }
+void Tp::on_you_nat_attack_attempt_do_set(const std::string &v) { _on_you_nat_attack_attempt_do = v; }
+void Tp::on_you_nat_attack_success_do_set(const std::string &v) { _on_you_nat_attack_success_do = v; }
 void Tp::range_max_set(int v) { _range_max = v; }
 void Tp::rarity_set(int v) { _rarity = v; }
 void Tp::shove_strength_mod_set(int v) { _shove_strength_mod = v; }
