@@ -269,6 +269,7 @@ PyObject *thing_is_dead_on_falling(PyObject *obj, PyObject *args, PyObject *keyw
 PyObject *thing_is_dead_or_dying_on_shove(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dead_or_dying(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dead(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_death_hornet(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_debuff(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_debug_path(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_debug_type(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -560,7 +561,6 @@ PyObject *thing_is_unused_flag160(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag161(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag162(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag163(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag164(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag16(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag179(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag17(PyObject *obj, PyObject *args, PyObject *keywds);

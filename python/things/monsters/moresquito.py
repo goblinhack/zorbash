@@ -20,7 +20,7 @@ def on_hit_dodge_do(me, hitter, x, y):
 
 
 def on_death(me, x, y):
-    sound = "squeaky_toy"
+    sound = f"hiss{my.non_pcg_randint(1, 10)}"
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 

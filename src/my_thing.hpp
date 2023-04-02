@@ -1421,6 +1421,7 @@ public:
   int is_dead_on_falling(void);
   int is_dead_on_shove(void);
   int is_dead_or_dying(void);
+  int is_death_hornet(void);
   int is_debuff(void);
   int is_debug_path(void);
   int is_debug_type(void);
@@ -1707,7 +1708,6 @@ public:
   int is_unused_flag161(void);
   int is_unused_flag162(void);
   int is_unused_flag163(void);
-  int is_unused_flag164(void);
   int is_unused_flag16(void);
   int is_unused_flag179(void);
   int is_unused_flag17(void);

@@ -373,6 +373,7 @@ private:
   int _is_dead_on_end_of_anim {};
   int _is_dead_on_falling {};
   int _is_dead_on_shove {};
+  int _is_death_hornet {};
   int _is_debuff {};
   int _is_debug_path {};
   int _is_debug_type {};
@@ -661,7 +662,6 @@ private:
   int _is_unused_flag161 {};
   int _is_unused_flag162 {};
   int _is_unused_flag163 {};
-  int _is_unused_flag164 {};
   int _is_unused_flag17 {};
   int _is_unused_flag179 {};
   int _is_unused_flag18 {};
@@ -1659,6 +1659,7 @@ public:
   int is_dead_on_end_of_anim(void) const;
   int is_dead_on_falling(void) const;
   int is_dead_on_shove(void) const;
+  int is_death_hornet(void) const;
   int is_debuff(void) const;
   int is_debug_path(void) const;
   int is_debug_type(void) const;
@@ -1944,7 +1945,6 @@ public:
   int is_unused_flag161(void) const;
   int is_unused_flag162(void) const;
   int is_unused_flag163(void) const;
-  int is_unused_flag164(void) const;
   int is_unused_flag16(void) const;
   int is_unused_flag179(void) const;
   int is_unused_flag17(void) const;
@@ -2399,6 +2399,7 @@ public:
   void is_dead_on_end_of_anim_set(int v);
   void is_dead_on_falling_set(int v);
   void is_dead_on_shove_set(int v);
+  void is_death_hornet_set(int v);
   void is_debuff_set(int v);
   void is_debug_path_set(int v);
   void is_debug_type_set(int v);
@@ -2684,7 +2685,6 @@ public:
   void is_unused_flag161_set(int v);
   void is_unused_flag162_set(int v);
   void is_unused_flag163_set(int v);
-  void is_unused_flag164_set(int v);
   void is_unused_flag16_set(int v);
   void is_unused_flag179_set(int v);
   void is_unused_flag17_set(int v);

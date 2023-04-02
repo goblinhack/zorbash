@@ -452,6 +452,7 @@ int Tp::is_daring(void) const { return _is_daring; }
 int Tp::is_dead_on_end_of_anim(void) const { return _is_dead_on_end_of_anim; }
 int Tp::is_dead_on_falling(void) const { return _is_dead_on_falling; }
 int Tp::is_dead_on_shove(void) const { return _is_dead_on_shove; }
+int Tp::is_death_hornet(void) const { return _is_death_hornet; }
 int Tp::is_debuff(void) const { return _is_debuff; }
 int Tp::is_debug_path(void) const { return _is_debug_path; }
 int Tp::is_debug_type(void) const { return _is_debug_type; }
@@ -737,7 +738,6 @@ int Tp::is_unused_flag160(void) const { return _is_unused_flag160; }
 int Tp::is_unused_flag161(void) const { return _is_unused_flag161; }
 int Tp::is_unused_flag162(void) const { return _is_unused_flag162; }
 int Tp::is_unused_flag163(void) const { return _is_unused_flag163; }
-int Tp::is_unused_flag164(void) const { return _is_unused_flag164; }
 int Tp::is_unused_flag16(void) const { return _is_unused_flag16; }
 int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
 int Tp::is_unused_flag17(void) const { return _is_unused_flag17; }
@@ -1192,6 +1192,7 @@ void Tp::is_daring_set(int v) { _is_daring = v; }
 void Tp::is_dead_on_end_of_anim_set(int v) { _is_dead_on_end_of_anim = v; }
 void Tp::is_dead_on_falling_set(int v) { _is_dead_on_falling = v; }
 void Tp::is_dead_on_shove_set(int v) { _is_dead_on_shove = v; }
+void Tp::is_death_hornet_set(int v) { _is_death_hornet = v; }
 void Tp::is_debuff_set(int v) { _is_debuff = v; }
 void Tp::is_debug_path_set(int v) { _is_debug_path = v; }
 void Tp::is_debug_type_set(int v) { _is_debug_type = v; }
@@ -1477,7 +1478,6 @@ void Tp::is_unused_flag160_set(int v) { _is_unused_flag160 = v; }
 void Tp::is_unused_flag161_set(int v) { _is_unused_flag161 = v; }
 void Tp::is_unused_flag162_set(int v) { _is_unused_flag162 = v; }
 void Tp::is_unused_flag163_set(int v) { _is_unused_flag163 = v; }
-void Tp::is_unused_flag164_set(int v) { _is_unused_flag164 = v; }
 void Tp::is_unused_flag16_set(int v) { _is_unused_flag16 = v; }
 void Tp::is_unused_flag179_set(int v) { _is_unused_flag179 = v; }
 void Tp::is_unused_flag17_set(int v) { _is_unused_flag17 = v; }

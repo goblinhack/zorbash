@@ -20,7 +20,7 @@ def on_hit_dodge_do(me, hitter, x, y):
 
 
 def on_death(me, x, y):
-    sound = "squeaky_toy"
+    sound = f"hiss{my.non_pcg_randint(1, 10)}"
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
@@ -42,14 +42,11 @@ def tp_init(name, text_long_name):
     my.distance_vision(self, 3)
     my.dmg_bite_dice(self, "1d4")
     my.dmg_chance_d1000_bite(self, 0, 500)
-    my.dmg_chance_d1000_claw(self, 0, 500)
     my.dmg_chance_d1000_nat_att(self, 0, 900)
     my.dmg_chance_d1000_poison(self, 0, 900)
-    my.dmg_claw_dice(self, "1d3")
     my.dmg_nat_att_dice(self, "1d6+1")
-    my.dmg_nat_att_type(self, "pierce")
-    my.dmg_poison_dice(self, "1d4")
-    my.environ_avoids_poison(self, 100)
+    my.dmg_nat_att_type(self, "sting")
+    my.dmg_poison_dice(self, "1d8")
     my.gfx_anim_use(self, "attack_red")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
@@ -73,7 +70,6 @@ def tp_init(name, text_long_name):
     my.is_air_breather(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
-    my.is_bee(self, True)
     my.is_biome_dungeon(self, True)
     my.is_bleeder(self, True)
     my.is_corpse_on_death(self, True)

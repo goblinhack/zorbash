@@ -179,6 +179,7 @@ bool Tp::matches(const std::string &what)
   if (is_dead_on_end_of_anim() && (what == "is_dead_on_end_of_anim")) { return true; }
   if (is_dead_on_falling() && (what == "is_dead_on_falling")) { return true; }
   if (is_dead_on_shove() && (what == "is_dead_on_shove")) { return true; }
+  if (is_death_hornet() && (what == "is_death_hornet")) { return true; }
   if (is_debuff() && (what == "is_debuff")) { return true; }
   if (is_debug_path() && (what == "is_debug_path")) { return true; }
   if (is_debug_type() && (what == "is_debug_type")) { return true; }
@@ -458,7 +459,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag161() && (what == "is_unused_flag161")) { return true; }
   if (is_unused_flag162() && (what == "is_unused_flag162")) { return true; }
   if (is_unused_flag163() && (what == "is_unused_flag163")) { return true; }
-  if (is_unused_flag164() && (what == "is_unused_flag164")) { return true; }
   if (is_unused_flag16() && (what == "is_unused_flag16")) { return true; }
   if (is_unused_flag179() && (what == "is_unused_flag179")) { return true; }
   if (is_unused_flag17() && (what == "is_unused_flag17")) { return true; }
@@ -775,6 +775,7 @@ bool Thing::matches(const std::string &what)
   if (is_dead_on_end_of_anim() && (what == "is_dead_on_end_of_anim")) { return true; }
   if (is_dead_on_falling() && (what == "is_dead_on_falling")) { return true; }
   if (is_dead_on_shove() && (what == "is_dead_on_shove")) { return true; }
+  if (is_death_hornet() && (what == "is_death_hornet")) { return true; }
   if (is_debuff() && (what == "is_debuff")) { return true; }
   if (is_debug_path() && (what == "is_debug_path")) { return true; }
   if (is_debug_type() && (what == "is_debug_type")) { return true; }
@@ -1054,7 +1055,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag161() && (what == "is_unused_flag161")) { return true; }
   if (is_unused_flag162() && (what == "is_unused_flag162")) { return true; }
   if (is_unused_flag163() && (what == "is_unused_flag163")) { return true; }
-  if (is_unused_flag164() && (what == "is_unused_flag164")) { return true; }
   if (is_unused_flag16() && (what == "is_unused_flag16")) { return true; }
   if (is_unused_flag179() && (what == "is_unused_flag179")) { return true; }
   if (is_unused_flag17() && (what == "is_unused_flag17")) { return true; }
@@ -1368,6 +1368,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_dead_on_end_of_anim") { return &Thing::is_dead_on_end_of_anim; }
   if (what == "is_dead_on_falling") { return &Thing::is_dead_on_falling; }
   if (what == "is_dead_on_shove") { return &Thing::is_dead_on_shove; }
+  if (what == "is_death_hornet") { return &Thing::is_death_hornet; }
   if (what == "is_debuff") { return &Thing::is_debuff; }
   if (what == "is_debug_path") { return &Thing::is_debug_path; }
   if (what == "is_debug_type") { return &Thing::is_debug_type; }
@@ -1640,7 +1641,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag161") { return &Thing::is_unused_flag161; }
   if (what == "is_unused_flag162") { return &Thing::is_unused_flag162; }
   if (what == "is_unused_flag163") { return &Thing::is_unused_flag163; }
-  if (what == "is_unused_flag164") { return &Thing::is_unused_flag164; }
   if (what == "is_unused_flag16") { return &Thing::is_unused_flag16; }
   if (what == "is_unused_flag179") { return &Thing::is_unused_flag179; }
   if (what == "is_unused_flag17") { return &Thing::is_unused_flag17; }
