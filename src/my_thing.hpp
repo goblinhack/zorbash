@@ -2576,7 +2576,7 @@ public:
   void dir_set_tl(void);
   void dir_set_tr(void);
   void dir_set_up(void);
-  void dmap_modify_terrain_cost(point p, uint8_t *d);
+  void dmap_modify_terrain_cost(point p, uint8_t *d, bool include_monst, bool include_dislike);
   void drop_all(void);
   void dump_equip(void);
   void dump(std::string prefix, std::ostream &out);

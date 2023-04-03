@@ -160,87 +160,97 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   AI_LOG("Process goals:");
   TRACE_AND_INDENT();
 
-  for (auto &g : goalmaps) {
-    IF_DEBUG
-    {
-      if (is_debug_type()) {
-        AI_LOG("Pre modify dmap for terrain");
-        dmap_print(g.dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy));
+  for (auto attempt = 0; attempt <= 3; attempt++) {
+    for (auto &g : goalmaps) {
+      auto goal_dmap_copy = *g.dmap;
 
-        if (search_type == MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED) {
-          level->heatmap_print(point(start.x, start.y), point(minx, miny), point(maxx, maxy));
+      IF_DEBUG
+      {
+        if (is_debug_type()) {
+          AI_LOG("Pre modify dmap for terrain");
+          dmap_print(&goal_dmap_copy, point(start.x, start.y), point(minx, miny), point(maxx, maxy));
+
+          if (search_type == MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED) {
+            level->heatmap_print(point(start.x, start.y), point(minx, miny), point(maxx, maxy));
+          }
         }
       }
-    }
 
-    //
-    // Modify the dmap for terrain.
-    //
-    for (int y = miny; y <= maxy; y++) {
-      for (int x = minx; x <= maxx; x++) {
-        point p(x, y);
-        auto  c = getptr(g.dmap->val, x, y);
-        if ((*c < DMAP_IS_PASSABLE) && (*c > DMAP_IS_GOAL)) {
-          dmap_modify_terrain_cost(p, c);
-        }
-      }
-    }
-
-    IF_DEBUG
-    {
-      if (is_debug_type()) {
-        AI_LOG("Modified dmap for terrain");
-        dmap_print(g.dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy));
-      }
-    }
-
-    const Dmap saved_dmap = *g.dmap;
-    for (const auto &goal : g.goals) {
-      if (goal.avoid) {
-        AI_LOG("Processing avoid goal");
-        TRACE_AND_INDENT();
-
-        std::multiset< Goal > avoid;
-        if (ai_choose_avoid_goals(avoid, goal)) {
-          for (const auto &inner_goal : avoid) {
-            if (ai_create_path_to_single_goal(minx, miny, maxx, maxy, inner_goal, &saved_dmap)) {
-              if (goal.what) {
-                add_goal_penalty(goal.what);
+      //
+      // Modify the dmap for terrain.
+      //
+      if (attempt < 3) {
+        for (int y = miny; y <= maxy; y++) {
+          for (int x = minx; x <= maxx; x++) {
+            point p(x, y);
+            auto  c = getptr(goal_dmap_copy.val, x, y);
+            if ((*c < DMAP_IS_PASSABLE) && (*c > DMAP_IS_GOAL)) {
+              switch (attempt) {
+                case 0: dmap_modify_terrain_cost(p, c, true, true); break;
+                case 1: dmap_modify_terrain_cost(p, c, true, false); break;
+                case 2: dmap_modify_terrain_cost(p, c, false, false); break;
               }
-
-              if (shoot_at(goal.what)) {
-                return true;
-              }
-
-              IF_DEBUG
-              {
-                auto s = string_sprintf("Accept avoid goal score %d @(%d,%d) %s", (int) goal.score, (int) goal.at.x,
-                                        (int) goal.at.y, goal.msg.c_str());
-                AI_LOG(s);
-              }
-              return true;
             }
           }
         }
-        continue;
       }
 
-      if (shoot_at(goal.what)) {
-        return true;
+      IF_DEBUG
+      {
+        if (is_debug_type()) {
+          AI_LOG("Modified dmap for terrain");
+          dmap_print(&goal_dmap_copy, point(start.x, start.y), point(minx, miny), point(maxx, maxy));
+        }
       }
 
-      if (ai_create_path_to_single_goal(minx, miny, maxx, maxy, goal, &saved_dmap)) {
-        if (goal.what) {
-          add_goal_penalty(goal.what);
+      const Dmap saved_dmap = goal_dmap_copy;
+      for (const auto &goal : g.goals) {
+        if (goal.avoid) {
+          AI_LOG("Processing avoid goal");
+          TRACE_AND_INDENT();
+
+          std::multiset< Goal > avoid;
+          if (ai_choose_avoid_goals(avoid, goal)) {
+            for (const auto &inner_goal : avoid) {
+              if (ai_create_path_to_single_goal(minx, miny, maxx, maxy, inner_goal, &saved_dmap)) {
+                if (goal.what) {
+                  add_goal_penalty(goal.what);
+                }
+
+                if (shoot_at(goal.what)) {
+                  return true;
+                }
+
+                IF_DEBUG
+                {
+                  auto s = string_sprintf("Accept avoid goal score %d @(%d,%d) %s", (int) goal.score, (int) goal.at.x,
+                                          (int) goal.at.y, goal.msg.c_str());
+                  AI_LOG(s);
+                }
+                return true;
+              }
+            }
+          }
+          continue;
         }
 
-        IF_DEBUG
-        {
-          auto s = string_sprintf("Accept goal score %d @(%d,%d) %s", (int) goal.score, (int) goal.at.x,
-                                  (int) goal.at.y, goal.msg.c_str());
-          AI_LOG(s);
+        if (shoot_at(goal.what)) {
+          return true;
         }
-        return true;
+
+        if (ai_create_path_to_single_goal(minx, miny, maxx, maxy, goal, &saved_dmap)) {
+          if (goal.what) {
+            add_goal_penalty(goal.what);
+          }
+
+          IF_DEBUG
+          {
+            auto s = string_sprintf("Accept goal score %d @(%d,%d) %s", (int) goal.score, (int) goal.at.x,
+                                    (int) goal.at.y, goal.msg.c_str());
+            AI_LOG(s);
+          }
+          return true;
+        }
       }
     }
   }

@@ -5,7 +5,7 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-void Thing::dmap_modify_terrain_cost(point p, uint8_t *d)
+void Thing::dmap_modify_terrain_cost(point p, uint8_t *d, bool include_monst, bool include_disliked)
 {
   int pref = *d;
 
@@ -16,7 +16,7 @@ void Thing::dmap_modify_terrain_cost(point p, uint8_t *d)
 
   std::vector< std::pair< Thingp, int > > possible;
 
-  {
+  if (include_monst) {
     static const std::vector< point > all_deltas = {
         point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, 0),
         point(0, -1),  point(-1, 0), point(1, 0),  point(0, 1),
@@ -33,9 +33,11 @@ void Thing::dmap_modify_terrain_cost(point p, uint8_t *d)
     }
   }
 
-  if (is_disliked_by_me(p)) {
-    pref += DMAP_LESS_PREFERRED_TERRAIN / 2;
-    // dbg("Location avoid, terrain cost now %d", pref);
+  if (include_disliked) {
+    if (is_disliked_by_me(p)) {
+      pref += DMAP_LESS_PREFERRED_TERRAIN / 2;
+      // dbg("Location avoid, terrain cost now %d", pref);
+    }
   }
 
   if (pref > DMAP_MAX_LESS_PREFERRED_TERRAIN) {
@@ -48,7 +50,7 @@ void Thing::dmap_modify_terrain_cost(point p, uint8_t *d)
 uint8_t Thing::terrain_cost_get(point p)
 {
   uint8_t pref = 0;
-  dmap_modify_terrain_cost(p, &pref);
+  dmap_modify_terrain_cost(p, &pref, true, true);
   return (uint8_t) pref;
 }
 
