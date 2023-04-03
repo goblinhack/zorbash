@@ -570,7 +570,7 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
     }
 
     //
-    // Place some pools of blood
+    // Place some pools of blood and pillars
     //
     {
       uint32_t start = time_ms();
@@ -1549,6 +1549,31 @@ void Level::create_biome_dungeon_place_random_floor_deco(Dungeonp d)
       }
 
       if (pcg_random_range(0, 100) < 99) {
+        continue;
+      }
+
+      //
+      // No pillars next to the entrance which obscures the player.
+      //
+      bool skip              = false;
+      int  entrance_distance = MAP_BORDER_ROCK - 1;
+      for (auto dx = -entrance_distance; dx <= entrance_distance; dx++) {
+        for (auto dy = -entrance_distance; dy <= entrance_distance; dy++) {
+          if (d->is_ascend_dungeon(x + dx, y + dy)) {
+            skip = true;
+            break;
+          }
+          if (d->is_descend_dungeon(x + dx, y + dy)) {
+            skip = true;
+            break;
+          }
+        }
+        if (skip) {
+          break;
+        }
+      }
+
+      if (skip) {
         continue;
       }
 
