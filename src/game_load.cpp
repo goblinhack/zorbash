@@ -1328,8 +1328,8 @@ void Game::load(int slot)
 
   LOG("-");
   CON("INF: Loading %s", save_file.c_str());
-  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-  LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
+  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
+  LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v");
 
   g_loading = true;
   load(save_file, *this);
@@ -1337,8 +1337,8 @@ void Game::load(int slot)
 
   sdl_config_update_all();
 
-  LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
-  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+  LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^");
+  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
   CON("INF: Loaded %s, seed %d", save_file.c_str(), seed);
   LOG("-");
 

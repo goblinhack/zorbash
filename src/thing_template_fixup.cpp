@@ -93,6 +93,11 @@ void tp_fixup(void)
       tp->is_interesting_set(true);
     }
 
+    if (tp->is_able_to_teleport_escape() || tp->is_able_to_teleport_self() ||
+        tp->is_able_to_teleport_without_tiring()) {
+      tp->is_immune_to_cold_set(true);
+    }
+
     if (tp->is_ethereal()) {
       tp->is_immune_to_poison_set(true);
       tp->is_immune_to_spiderwebs_set(true);
