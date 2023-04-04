@@ -56,7 +56,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.target_name_projectile(self, "projectile_rock")
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 DMG")
-    my.text_description_long(self, "The less civilized person's melee weapon. This rock has has great potential... for causing injury")
+    my.text_description_long(self, "An elegant weapon for a more civilized age, the rock, has for eons been the weapon of choice for those strapped for cash. Do not underestimate the rock as a weapon as it has great potential... mostly kinetic")
     my.text_description_short(self, "A small menacing rock.")
     my.thing_size(self, my.THING_SIZE_TINY)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
