@@ -41,7 +41,7 @@ def tp_init(name, text_long_name):
     my.dmg_cold_dice(self, "1d6")
     my.dmg_crush_dice(self, "2d6")
     my.dmg_received_doubled_from_fire(self, True)
-    my.environ_avoids_fire(self, 100)
+    my.environ_dislikes_fire(self, 100)
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)

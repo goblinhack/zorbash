@@ -35,7 +35,7 @@ void Thing::water_tick(void)
     return;
   }
 
-  if (! environ_avoids_water()) {
+  if (! environ_dislikes_water()) {
     return;
   }
 

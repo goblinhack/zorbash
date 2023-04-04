@@ -17,7 +17,7 @@ bool Thing::will_avoid_monst(const Thingp it)
   // Avoid flaming things; even friends.
   //
   if (! is_fire_elemental()) {
-    if (environ_avoids_fire() > 10) {
+    if (environ_dislikes_fire() > 10) {
       if (it->is_fire()) {
         dbg("Avoid fire: %s", it->to_short_string().c_str());
         return true;

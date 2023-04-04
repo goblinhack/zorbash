@@ -94,15 +94,15 @@ bool Thing::collision_obstacle(Thingp it)
   // Limit krakens to the depths, but allow eels and pirhana_giants free roam.
   //
   if (is_swimmer()) {
-    if (environ_deep_water() && environ_shallow_water()) {
+    if (environ_likes_deep_water() && environ_likes_shallow_water()) {
       if (! level->is_water(it->curr_at)) {
         return true;
       }
-    } else if (environ_deep_water()) {
+    } else if (environ_likes_deep_water()) {
       if (! level->is_deep_water(it->curr_at)) {
         return true;
       }
-    } else if (environ_shallow_water()) {
+    } else if (environ_likes_shallow_water()) {
       if (! level->is_shallow_water(it->curr_at)) {
         if (! is_able_to_live_out_of_water()) {
           return true;
@@ -311,21 +311,21 @@ bool Thing::is_obs_for_ai(Thingp it)
   // Limit krakens to the depths, but allow eels and pirhana_giants free roam.
   //
   if (is_swimmer()) {
-    if (environ_deep_water() && environ_shallow_water()) {
+    if (environ_likes_deep_water() && environ_likes_shallow_water()) {
       if (! level->is_water(it->curr_at)) {
         if (debug && is_debug_type()) {
           con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
         }
         return true;
       }
-    } else if (environ_deep_water()) {
+    } else if (environ_likes_deep_water()) {
       if (! level->is_deep_water(it->curr_at)) {
         if (debug && is_debug_type()) {
           con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
         }
         return true;
       }
-    } else if (environ_shallow_water()) {
+    } else if (environ_likes_shallow_water()) {
       if (! level->is_shallow_water(it->curr_at)) {
         if (! is_able_to_live_out_of_water()) {
           if (debug && is_debug_type()) {

@@ -2095,8 +2095,8 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
 
   std::string hates;
 
-  if (t->is_monst() && t->environ_avoids_water()) {
-    if (t->environ_avoids_water() > 10) {
+  if (t->is_monst() && t->environ_hates_water()) {
+    if (t->environ_hates_water() > 10) {
       if (! hates.empty()) {
         hates += "/";
       }
@@ -2104,8 +2104,8 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
     }
   }
 
-  if (t->is_monst() && t->environ_avoids_acid()) {
-    if (t->environ_avoids_acid() > 10) {
+  if (t->is_monst() && t->environ_hates_acid()) {
+    if (t->environ_hates_acid() > 10) {
       if (! hates.empty()) {
         hates += "/";
       }
@@ -2113,8 +2113,8 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
     }
   }
 
-  if (t->is_monst() && t->environ_avoids_cold()) {
-    if (t->environ_avoids_cold() > 10) {
+  if (t->is_monst() && t->environ_hates_cold()) {
+    if (t->environ_hates_cold() > 10) {
       if (! hates.empty()) {
         hates += "/";
       }
@@ -2122,8 +2122,8 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
     }
   }
 
-  if (t->is_monst() && t->environ_avoids_fire()) {
-    if (t->environ_avoids_fire() > 10) {
+  if (t->is_monst() && t->environ_hates_fire()) {
+    if (t->environ_hates_fire() > 10) {
       if (! hates.empty()) {
         hates += "/";
       }

@@ -7,7 +7,7 @@ def tp_init(name, text_long_name, tiles=[]):
     # begin sort marker
     my.dmg_chance_d1000_water(self, 0, 1000)
     my.dmg_water_dice(self, "1d6+1")
-    my.environ_avoids_fire(self, 1)
+    my.environ_dislikes_fire(self, 1)
     my.gfx_ascii_animated(self, True)
     my.gfx_ascii_bg_color_spread_green(self, 20)
     my.gfx_ascii_color_is_animated(self, True)

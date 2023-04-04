@@ -40,15 +40,21 @@ bool Tp::matches(const std::string &what)
   if (consume_per_bite_amount() && (what == "consume_per_bite_amount")) { return true; }
   if (dmg_received_doubled_from_cold() && (what == "dmg_received_doubled_from_cold")) { return true; }
   if (enchant_max() && (what == "enchant_max")) { return true; }
-  if (environ_avoids_acid() && (what == "environ_avoids_acid")) { return true; }
-  if (environ_avoids_cold() && (what == "environ_avoids_cold")) { return true; }
-  if (environ_avoids_fire() && (what == "environ_avoids_fire")) { return true; }
-  if (environ_avoids_necrosis() && (what == "environ_avoids_necrosis")) { return true; }
-  if (environ_avoids_poison() && (what == "environ_avoids_poison")) { return true; }
-  if (environ_avoids_water() && (what == "environ_avoids_water")) { return true; }
-  if (environ_deep_water() && (what == "environ_deep_water")) { return true; }
-  if (environ_prefer_lava() && (what == "environ_prefer_lava")) { return true; }
-  if (environ_shallow_water() && (what == "environ_shallow_water")) { return true; }
+  if (environ_dislikes_acid() && (what == "environ_dislikes_acid")) { return true; }
+  if (environ_dislikes_cold() && (what == "environ_dislikes_cold")) { return true; }
+  if (environ_dislikes_fire() && (what == "environ_dislikes_fire")) { return true; }
+  if (environ_dislikes_necrosis() && (what == "environ_dislikes_necrosis")) { return true; }
+  if (environ_dislikes_poison() && (what == "environ_dislikes_poison")) { return true; }
+  if (environ_dislikes_water() && (what == "environ_dislikes_water")) { return true; }
+  if (environ_hates_acid() && (what == "environ_hates_acid")) { return true; }
+  if (environ_hates_cold() && (what == "environ_hates_cold")) { return true; }
+  if (environ_hates_fire() && (what == "environ_hates_fire")) { return true; }
+  if (environ_hates_necrosis() && (what == "environ_hates_necrosis")) { return true; }
+  if (environ_hates_poison() && (what == "environ_hates_poison")) { return true; }
+  if (environ_hates_water() && (what == "environ_hates_water")) { return true; }
+  if (environ_likes_deep_water() && (what == "environ_likes_deep_water")) { return true; }
+  if (environ_likes_lava() && (what == "environ_likes_lava")) { return true; }
+  if (environ_likes_shallow_water() && (what == "environ_likes_shallow_water")) { return true; }
   if (gfx_pixelart_show_highlighted() && (what == "gfx_pixelart_show_highlighted")) { return true; }
   if (gfx_pixelart_show_square_outlined() && (what == "gfx_pixelart_show_square_outlined")) { return true; }
   if (hunger_is_insatiable() && (what == "hunger_is_insatiable")) { return true; }
@@ -634,15 +640,21 @@ bool Thing::matches(const std::string &what)
   if (consume_per_bite_amount() && (what == "consume_per_bite_amount")) { return true; }
   if (dmg_received_doubled_from_cold() && (what == "dmg_received_doubled_from_cold")) { return true; }
   if (enchant_max() && (what == "enchant_max")) { return true; }
-  if (environ_avoids_acid() && (what == "environ_avoids_acid")) { return true; }
-  if (environ_avoids_cold() && (what == "environ_avoids_cold")) { return true; }
-  if (environ_avoids_fire() && (what == "environ_avoids_fire")) { return true; }
-  if (environ_avoids_necrosis() && (what == "environ_avoids_necrosis")) { return true; }
-  if (environ_avoids_poison() && (what == "environ_avoids_poison")) { return true; }
-  if (environ_avoids_water() && (what == "environ_avoids_water")) { return true; }
-  if (environ_deep_water() && (what == "environ_deep_water")) { return true; }
-  if (environ_prefer_lava() && (what == "environ_prefer_lava")) { return true; }
-  if (environ_shallow_water() && (what == "environ_shallow_water")) { return true; }
+  if (environ_dislikes_acid() && (what == "environ_dislikes_acid")) { return true; }
+  if (environ_dislikes_cold() && (what == "environ_dislikes_cold")) { return true; }
+  if (environ_dislikes_fire() && (what == "environ_dislikes_fire")) { return true; }
+  if (environ_dislikes_necrosis() && (what == "environ_dislikes_necrosis")) { return true; }
+  if (environ_dislikes_poison() && (what == "environ_dislikes_poison")) { return true; }
+  if (environ_dislikes_water() && (what == "environ_dislikes_water")) { return true; }
+  if (environ_hates_acid() && (what == "environ_hates_acid")) { return true; }
+  if (environ_hates_cold() && (what == "environ_hates_cold")) { return true; }
+  if (environ_hates_fire() && (what == "environ_hates_fire")) { return true; }
+  if (environ_hates_necrosis() && (what == "environ_hates_necrosis")) { return true; }
+  if (environ_hates_poison() && (what == "environ_hates_poison")) { return true; }
+  if (environ_hates_water() && (what == "environ_hates_water")) { return true; }
+  if (environ_likes_deep_water() && (what == "environ_likes_deep_water")) { return true; }
+  if (environ_likes_lava() && (what == "environ_likes_lava")) { return true; }
+  if (environ_likes_shallow_water() && (what == "environ_likes_shallow_water")) { return true; }
   if (gfx_pixelart_show_highlighted() && (what == "gfx_pixelart_show_highlighted")) { return true; }
   if (gfx_pixelart_show_square_outlined() && (what == "gfx_pixelart_show_square_outlined")) { return true; }
   if (hunger_is_insatiable() && (what == "hunger_is_insatiable")) { return true; }
@@ -1226,15 +1238,21 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "dry_grass") { return &Thing::is_dry_grass; }
   if (what == "dry_grass_trampled") { return &Thing::is_dry_grass_trampled; }
   if (what == "enchant_max") { return &Thing::enchant_max; }
-  if (what == "environ_avoids_acid") { return &Thing::environ_avoids_acid; }
-  if (what == "environ_avoids_cold") { return &Thing::environ_avoids_cold; }
-  if (what == "environ_avoids_fire") { return &Thing::environ_avoids_fire; }
-  if (what == "environ_avoids_necrosis") { return &Thing::environ_avoids_necrosis; }
-  if (what == "environ_avoids_poison") { return &Thing::environ_avoids_poison; }
-  if (what == "environ_avoids_water") { return &Thing::environ_avoids_water; }
-  if (what == "environ_deep_water") { return &Thing::environ_deep_water; }
-  if (what == "environ_prefer_lava") { return &Thing::environ_prefer_lava; }
-  if (what == "environ_shallow_water") { return &Thing::environ_shallow_water; }
+  if (what == "environ_dislikes_acid") { return &Thing::environ_dislikes_acid; }
+  if (what == "environ_dislikes_cold") { return &Thing::environ_dislikes_cold; }
+  if (what == "environ_dislikes_fire") { return &Thing::environ_dislikes_fire; }
+  if (what == "environ_dislikes_necrosis") { return &Thing::environ_dislikes_necrosis; }
+  if (what == "environ_dislikes_poison") { return &Thing::environ_dislikes_poison; }
+  if (what == "environ_dislikes_water") { return &Thing::environ_dislikes_water; }
+  if (what == "environ_hates_acid") { return &Thing::environ_hates_acid; }
+  if (what == "environ_hates_cold") { return &Thing::environ_hates_cold; }
+  if (what == "environ_hates_fire") { return &Thing::environ_hates_fire; }
+  if (what == "environ_hates_necrosis") { return &Thing::environ_hates_necrosis; }
+  if (what == "environ_hates_poison") { return &Thing::environ_hates_poison; }
+  if (what == "environ_hates_water") { return &Thing::environ_hates_water; }
+  if (what == "environ_likes_deep_water") { return &Thing::environ_likes_deep_water; }
+  if (what == "environ_likes_lava") { return &Thing::environ_likes_lava; }
+  if (what == "environ_likes_shallow_water") { return &Thing::environ_likes_shallow_water; }
   if (what == "gfx_pixelart_show_highlighted") { return &Thing::gfx_pixelart_show_highlighted; }
   if (what == "gfx_pixelart_show_square_outlined") { return &Thing::gfx_pixelart_show_square_outlined; }
   if (what == "hunger_is_insatiable") { return &Thing::hunger_is_insatiable; }

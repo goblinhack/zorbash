@@ -160,7 +160,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   AI_LOG("Process goals:");
   TRACE_AND_INDENT();
 
-  for (auto attempt = 0; attempt <= 3; attempt++) {
+  for (auto attempt = 0; attempt <= 1; attempt++) {
     for (auto &g : goalmaps) {
       auto goal_dmap_copy = *g.dmap;
 
@@ -187,7 +187,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
             if ((*c < DMAP_IS_PASSABLE) && (*c > DMAP_IS_GOAL)) {
               switch (attempt) {
                 case 0: dmap_modify_terrain_cost(p, c, true, true); break;
-                case 1: dmap_modify_terrain_cost(p, c, true, false); break;
+                case 1: dmap_modify_terrain_cost(p, c, false, true); break;
                 case 2: dmap_modify_terrain_cost(p, c, false, false); break;
               }
             }
@@ -1001,7 +1001,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           continue;
         }
 
-        if (environ_avoids_fire()) {
+        if (environ_dislikes_fire()) {
           if (level->heatmap(curr_at)) {
             AI_LOG("Avoid heat at location", it);
             continue;
@@ -2070,7 +2070,7 @@ bool Thing::ai_tick(bool recursing)
     //
     // Wake up if the flames are nearby
     //
-    if (environ_avoids_fire() && level->heatmap(curr_at)) {
+    if (environ_dislikes_fire() && level->heatmap(curr_at)) {
       if (is_msg_allowed_senses_danger()) {
         msg("%s senses danger!", text_The().c_str());
       }
@@ -2194,7 +2194,7 @@ bool Thing::ai_tick(bool recursing)
         //
         // If on fire terrain, change to idle state and try again to move
         //
-        if (is_on_fire() && environ_avoids_fire()) {
+        if (is_on_fire() && environ_dislikes_fire()) {
           AI_LOG("I am on fire!");
           TRACE_AND_INDENT();
 

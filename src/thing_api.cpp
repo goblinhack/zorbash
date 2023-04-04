@@ -1146,10 +1146,10 @@ int Thing::is_eater_of_blood(void)
   TRACE_NO_INDENT();
   return (tp()->is_eater_of_blood());
 }
-int Thing::environ_prefer_lava(void)
+int Thing::environ_likes_lava(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->environ_prefer_lava());
+  return (tp()->environ_likes_lava());
 }
 int Thing::is_splatter(void)
 {
@@ -1314,40 +1314,76 @@ int Thing::gfx_pixelart_equip_carry_anim(void)
   return (tp()->gfx_pixelart_equip_carry_anim());
 }
 
-int Thing::environ_avoids_acid(void)
+int Thing::environ_dislikes_acid(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->environ_avoids_acid());
+  return (tp()->environ_dislikes_acid());
 }
 
-int Thing::environ_avoids_fire(void)
+int Thing::environ_dislikes_fire(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->environ_avoids_fire());
+  return (tp()->environ_dislikes_fire());
 }
 
-int Thing::environ_avoids_cold(void)
+int Thing::environ_dislikes_cold(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->environ_avoids_cold());
+  return (tp()->environ_dislikes_cold());
 }
 
-int Thing::environ_avoids_poison(void)
+int Thing::environ_dislikes_poison(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->environ_avoids_poison());
+  return (tp()->environ_dislikes_poison());
 }
 
-int Thing::environ_avoids_necrosis(void)
+int Thing::environ_dislikes_necrosis(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->environ_avoids_necrosis());
+  return (tp()->environ_dislikes_necrosis());
 }
 
-int Thing::environ_avoids_water(void)
+int Thing::environ_dislikes_water(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->environ_avoids_water());
+  return (tp()->environ_dislikes_water());
+}
+
+int Thing::environ_hates_acid(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->environ_hates_acid());
+}
+
+int Thing::environ_hates_fire(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->environ_hates_fire());
+}
+
+int Thing::environ_hates_cold(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->environ_hates_cold());
+}
+
+int Thing::environ_hates_poison(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->environ_hates_poison());
+}
+
+int Thing::environ_hates_necrosis(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->environ_hates_necrosis());
+}
+
+int Thing::environ_hates_water(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->environ_hates_water());
 }
 
 int Thing::is_able_to_change_levels(void)
@@ -2374,16 +2410,16 @@ int Thing::is_always_submerged(void)
   return (tp()->is_always_submerged());
 }
 
-int Thing::environ_deep_water(void)
+int Thing::environ_likes_deep_water(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->environ_deep_water());
+  return (tp()->environ_likes_deep_water());
 }
 
-int Thing::environ_shallow_water(void)
+int Thing::environ_likes_shallow_water(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->environ_shallow_water());
+  return (tp()->environ_likes_shallow_water());
 }
 
 int Thing::is_biome_unused(void)

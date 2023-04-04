@@ -125,21 +125,21 @@ void tp_monst_add(Tpp tp)
   }
 
   if (tp->is_swimmer()) {
-    if (! tp->environ_shallow_water() && ! tp->environ_deep_water()) {
+    if (! tp->environ_likes_shallow_water() && ! tp->environ_likes_deep_water()) {
       CON("INF: Swimming monster '%s' needs to set shallow and or deep water preferences",
           tp->text_short_capitalised().c_str());
     }
   }
 
-  if (tp->environ_shallow_water()) {
+  if (tp->environ_likes_shallow_water()) {
     monst_types.push_back(MONST_TYPE_SHALLOW_WATER);
   }
 
-  if (tp->environ_deep_water()) {
+  if (tp->environ_likes_deep_water()) {
     monst_types.push_back(MONST_TYPE_DEEP_WATER);
   }
 
-  if (! tp->environ_shallow_water() && ! tp->environ_deep_water()) {
+  if (! tp->environ_likes_shallow_water() && ! tp->environ_likes_deep_water()) {
     monst_types.push_back(MONST_TYPE_NORMAL);
   }
 

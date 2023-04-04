@@ -28,7 +28,7 @@ bool Thing::thing_check_for_heat_dmg(void)
     //
     // Keep going
     //
-  } else if (! environ_avoids_fire()) {
+  } else if (! environ_dislikes_fire()) {
     return false;
   }
 
@@ -213,7 +213,7 @@ bool Thing::thing_check_for_cold_dmg(void)
     //
     // Keep going
     //
-  } else if (! environ_avoids_cold()) {
+  } else if (! environ_dislikes_cold()) {
     return false;
   }
 

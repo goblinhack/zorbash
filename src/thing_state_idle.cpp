@@ -19,7 +19,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
   //
   // If on fire, try and put it out!
   //
-  if (is_on_fire() && environ_avoids_fire()) {
+  if (is_on_fire() && environ_dislikes_fire()) {
     AI_LOG("I am on fire!");
     TRACE_AND_INDENT();
 

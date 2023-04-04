@@ -10,7 +10,7 @@
 
 void Thing::acid_tick(void)
 {
-  if (! environ_avoids_acid()) {
+  if (! environ_dislikes_acid()) {
     return;
   }
 

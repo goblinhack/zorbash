@@ -82,7 +82,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.collision_hit_priority(self, 6)
     my.dmg_received_doubled_from_fire(self, True)
     my.effect_has_blast_radius(self, True)
-    my.environ_avoids_fire(self, 100)
+    my.environ_dislikes_fire(self, 100)
     my.equip_carry_anim(self, "staff_cold_carry")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)

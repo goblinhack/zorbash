@@ -69,11 +69,11 @@ void tp_fixup(void)
       }
     }
 
-    if (tp->environ_shallow_water()) {
+    if (tp->environ_likes_shallow_water()) {
       tp->is_swimmer_set(true);
     }
 
-    if (tp->environ_deep_water()) {
+    if (tp->environ_likes_deep_water()) {
       tp->is_swimmer_set(true);
     }
 
@@ -108,6 +108,30 @@ void tp_fixup(void)
       if (tp->is_crushable()) {
         DIE("Tp %s is ethereal and crushable?", tp->name().c_str());
       }
+    }
+
+    if (tp->environ_hates_acid()) {
+      tp->environ_dislikes_acid_set(true);
+    }
+
+    if (tp->environ_hates_cold()) {
+      tp->environ_dislikes_cold_set(true);
+    }
+
+    if (tp->environ_hates_fire()) {
+      tp->environ_dislikes_fire_set(true);
+    }
+
+    if (tp->environ_hates_necrosis()) {
+      tp->environ_dislikes_necrosis_set(true);
+    }
+
+    if (tp->environ_hates_poison()) {
+      tp->environ_dislikes_poison_set(true);
+    }
+
+    if (tp->environ_hates_water()) {
+      tp->environ_dislikes_water_set(true);
     }
 
     if (tp->is_fire_elemental()) {

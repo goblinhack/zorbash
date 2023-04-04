@@ -6,7 +6,7 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.collision_hit_priority(self, 6)
-    my.environ_avoids_fire(self, 100)
+    my.environ_dislikes_fire(self, 100)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_show_highlighted(self, True)

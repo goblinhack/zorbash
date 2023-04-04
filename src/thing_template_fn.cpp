@@ -261,15 +261,21 @@ int Tp::dmg_received_doubled_from_water(void) const { return _dmg_received_doubl
 int Tp::effect_has_blast_radius(void) const { return _effect_has_blast_radius; }
 int Tp::effect_radius(void) const { return _effect_radius; }
 int Tp::enchant_max(void) const { return _enchant_max; }
-int Tp::environ_avoids_acid(void) const { return _environ_avoids_acid; }
-int Tp::environ_avoids_cold(void) const { return _environ_avoids_cold; }
-int Tp::environ_avoids_fire(void) const { return _environ_avoids_fire; }
-int Tp::environ_avoids_necrosis(void) const { return _environ_avoids_necrosis; }
-int Tp::environ_avoids_poison(void) const { return _environ_avoids_poison; }
-int Tp::environ_avoids_water(void) const { return _environ_avoids_water; }
-int Tp::environ_deep_water(void) const { return _environ_deep_water; }
-int Tp::environ_prefer_lava(void) const { return _environ_prefer_lava; }
-int Tp::environ_shallow_water(void) const { return _environ_shallow_water; }
+int Tp::environ_dislikes_acid(void) const { return _environ_dislikes_acid; }
+int Tp::environ_dislikes_cold(void) const { return _environ_dislikes_cold; }
+int Tp::environ_dislikes_fire(void) const { return _environ_dislikes_fire; }
+int Tp::environ_dislikes_necrosis(void) const { return _environ_dislikes_necrosis; }
+int Tp::environ_dislikes_poison(void) const { return _environ_dislikes_poison; }
+int Tp::environ_dislikes_water(void) const { return _environ_dislikes_water; }
+int Tp::environ_hates_acid(void) const { return _environ_hates_acid; }
+int Tp::environ_hates_cold(void) const { return _environ_hates_cold; }
+int Tp::environ_hates_fire(void) const { return _environ_hates_fire; }
+int Tp::environ_hates_necrosis(void) const { return _environ_hates_necrosis; }
+int Tp::environ_hates_poison(void) const { return _environ_hates_poison; }
+int Tp::environ_hates_water(void) const { return _environ_hates_water; }
+int Tp::environ_likes_deep_water(void) const { return _environ_likes_deep_water; }
+int Tp::environ_likes_lava(void) const { return _environ_likes_lava; }
+int Tp::environ_likes_shallow_water(void) const { return _environ_likes_shallow_water; }
 int Tp::gfx_ascii_animated(void) const { return _gfx_ascii_animated; }
 int Tp::gfx_ascii_bg_color_spread_alpha(void) const { return _gfx_ascii_bg_color_spread_alpha; }
 int Tp::gfx_ascii_bg_color_spread_blue(void) const { return _gfx_ascii_bg_color_spread_blue; }
@@ -996,15 +1002,21 @@ void Tp::effect_has_blast_radius_set(int v) { _effect_has_blast_radius = v; }
 void Tp::effect_radius_set(int v) { _effect_radius = v; }
 void Tp::enchant_level_set(int v) { _enchant_level = v; }
 void Tp::enchant_max_set(int v) { _enchant_max = v; }
-void Tp::environ_avoids_acid_set(int v) { _environ_avoids_acid = v; }
-void Tp::environ_avoids_cold_set(int v) { _environ_avoids_cold = v; }
-void Tp::environ_avoids_fire_set(int v) { _environ_avoids_fire = v; }
-void Tp::environ_avoids_necrosis_set(int v) { _environ_avoids_necrosis = v; }
-void Tp::environ_avoids_poison_set(int v) { _environ_avoids_poison = v; }
-void Tp::environ_avoids_water_set(int v) { _environ_avoids_water = v; }
-void Tp::environ_deep_water_set(int v) { _environ_deep_water = v; }
-void Tp::environ_prefer_lava_set(int v) { _environ_prefer_lava = v; }
-void Tp::environ_shallow_water_set(int v) { _environ_shallow_water = v; }
+void Tp::environ_dislikes_acid_set(int v) { _environ_dislikes_acid = v; }
+void Tp::environ_dislikes_cold_set(int v) { _environ_dislikes_cold = v; }
+void Tp::environ_dislikes_fire_set(int v) { _environ_dislikes_fire = v; }
+void Tp::environ_dislikes_necrosis_set(int v) { _environ_dislikes_necrosis = v; }
+void Tp::environ_dislikes_poison_set(int v) { _environ_dislikes_poison = v; }
+void Tp::environ_dislikes_water_set(int v) { _environ_dislikes_water = v; }
+void Tp::environ_hates_acid_set(int v) { _environ_hates_acid = v; }
+void Tp::environ_hates_cold_set(int v) { _environ_hates_cold = v; }
+void Tp::environ_hates_fire_set(int v) { _environ_hates_fire = v; }
+void Tp::environ_hates_necrosis_set(int v) { _environ_hates_necrosis = v; }
+void Tp::environ_hates_poison_set(int v) { _environ_hates_poison = v; }
+void Tp::environ_hates_water_set(int v) { _environ_hates_water = v; }
+void Tp::environ_likes_deep_water_set(int v) { _environ_likes_deep_water = v; }
+void Tp::environ_likes_lava_set(int v) { _environ_likes_lava = v; }
+void Tp::environ_likes_shallow_water_set(int v) { _environ_likes_shallow_water = v; }
 void Tp::equip_carry_anim_set(const std::string &v) { _equip_carry_anim = v; }
 void Tp::gfx_anim_use_set(const std::string &v) { _gfx_anim_use = v; }
 void Tp::gfx_ascii_animated_set(int v) { _gfx_ascii_animated = v; }

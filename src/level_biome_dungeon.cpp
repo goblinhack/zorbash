@@ -1269,7 +1269,7 @@ void Level::create_biome_dungeon_place_objects_with_normal_placement_rules(Dunge
         continue;
       }
 
-      if (tp->environ_deep_water()) {
+      if (tp->environ_likes_deep_water()) {
         if (! is_deep_water(x, y)) {
           log("INF: Dropping %s for deep water", tp->name().c_str());
           continue;

@@ -128,7 +128,7 @@ bool Thing::possible_to_attack(const Thingp victim)
   // Cannot attack something firey
   //
   if (victim->is_on_fire()) {
-    if (environ_avoids_fire()) {
+    if (environ_dislikes_fire()) {
       if (is_debug_type()) {
         dbg("Cannot attack %s, it is on fire", victim->to_short_string().c_str());
       }
@@ -137,7 +137,7 @@ bool Thing::possible_to_attack(const Thingp victim)
   }
 
   if (victim->is_cold()) {
-    if (environ_avoids_cold()) {
+    if (environ_dislikes_cold()) {
       if (is_debug_type()) {
         dbg("Cannot attack %s, it is cold", victim->to_short_string().c_str());
       }

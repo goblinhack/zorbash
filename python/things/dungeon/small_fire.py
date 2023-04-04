@@ -13,7 +13,7 @@ def tp_init(name, text_long_name):
     my.dmg_chance_d1000_fire(self, 0, 1000)
     my.dmg_fire_dice(self, "1d3+1")
     my.dmg_nat_att_type(self, "burn")
-    my.environ_avoids_water(self, 100)
+    my.environ_dislikes_water(self, 100)
     my.gfx_ascii_shown(self, True)
     my.gfx_on_fire_anim(self, True)
     my.gfx_pixelart_animated(self, True)

@@ -17,15 +17,15 @@ bool Thing::is_hated_by_me(const point p)
   // Limit krakens to the depths, but allow eels and pirhana_giants free roam.
   //
   if (is_swimmer()) {
-    if (environ_deep_water() && environ_shallow_water()) {
+    if (environ_likes_deep_water() && environ_likes_shallow_water()) {
       if (! level->is_water(p)) {
         return true;
       }
-    } else if (environ_deep_water()) {
+    } else if (environ_likes_deep_water()) {
       if (! level->is_deep_water(p)) {
         return true;
       }
-    } else if (environ_shallow_water()) {
+    } else if (environ_likes_shallow_water()) {
       if (! level->is_shallow_water(p)) {
         if (! is_able_to_live_out_of_water()) {
           return true;
@@ -39,19 +39,19 @@ bool Thing::is_hated_by_me(const point p)
   }
 
   if (level->is_shallow_water(p) || level->is_deep_water(p)) {
-    if (environ_avoids_water()) {
+    if (environ_hates_water()) {
       return true;
     }
   }
 
   if (level->is_acid(p)) {
-    if (environ_avoids_acid()) {
+    if (environ_hates_acid()) {
       return true;
     }
   }
 
   if (level->is_cold(p)) {
-    if (environ_avoids_cold()) {
+    if (environ_hates_cold()) {
       return true;
     }
   }
@@ -60,14 +60,14 @@ bool Thing::is_hated_by_me(const point p)
     if (level->is_chasm(p)) {
       return true;
     }
-    if (environ_avoids_fire()) {
+    if (environ_hates_fire()) {
       if (level->is_fire(p)) {
         if (! is_fire_elemental()) {
           return true;
         }
       }
       if (level->is_lava(p)) {
-        if (! environ_prefer_lava()) {
+        if (! environ_likes_lava()) {
           return true;
         }
       }
@@ -85,15 +85,15 @@ bool Tp::is_hated_by_me(Levelp level, point p) const
   // Limit krakens to the depths, but allow eels and pirhana_giants free roam.
   //
   if (is_swimmer()) {
-    if (environ_deep_water() && environ_shallow_water()) {
+    if (environ_likes_deep_water() && environ_likes_shallow_water()) {
       if (! level->is_water(p)) {
         return true;
       }
-    } else if (environ_deep_water()) {
+    } else if (environ_likes_deep_water()) {
       if (! level->is_deep_water(p)) {
         return true;
       }
-    } else if (environ_shallow_water()) {
+    } else if (environ_likes_shallow_water()) {
       if (! level->is_shallow_water(p)) {
         if (! is_able_to_live_out_of_water()) {
           return true;
@@ -107,19 +107,19 @@ bool Tp::is_hated_by_me(Levelp level, point p) const
   }
 
   if (level->is_shallow_water(p) || level->is_deep_water(p)) {
-    if (environ_avoids_water()) {
+    if (environ_hates_water()) {
       return true;
     }
   }
 
   if (level->is_acid(p)) {
-    if (environ_avoids_acid()) {
+    if (environ_hates_acid()) {
       return true;
     }
   }
 
   if (level->is_cold(p)) {
-    if (environ_avoids_cold()) {
+    if (environ_hates_cold()) {
       return true;
     }
   }
@@ -128,14 +128,14 @@ bool Tp::is_hated_by_me(Levelp level, point p) const
     if (level->is_chasm(p)) {
       return true;
     }
-    if (environ_avoids_fire()) {
+    if (environ_hates_fire()) {
       if (level->is_fire(p)) {
         if (! is_fire_elemental()) {
           return true;
         }
       }
       if (level->is_lava(p)) {
-        if (! environ_prefer_lava()) {
+        if (! environ_likes_lava()) {
           return true;
         }
       }
@@ -151,19 +151,19 @@ bool Thing::is_hated_by_me(const Thingp itp)
   auto me = tp();
   auto it = itp->tp();
 
-  if (me->environ_avoids_water()) {
+  if (me->environ_hates_water()) {
     if (it->is_shallow_water() || it->is_deep_water()) {
       return true;
     }
   }
 
-  if (me->environ_avoids_acid()) {
+  if (me->environ_hates_acid()) {
     if (it->is_acid()) {
       return true;
     }
   }
 
-  if (me->environ_avoids_cold()) {
+  if (me->environ_hates_cold()) {
     if (it->is_cold()) {
       return true;
     }

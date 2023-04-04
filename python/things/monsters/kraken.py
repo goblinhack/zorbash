@@ -73,7 +73,7 @@ def tp_init(name, text_long_name):
     my.dmg_chance_d1000_drown(self, 0, 800)
     my.dmg_digest_dice(self, "1d40")
     my.dmg_drown_dice(self, "1d20+10")
-    my.environ_deep_water(self, True)
+    my.environ_likes_deep_water(self, True)
     my.gfx_anim_use(self, "attack_major_green")
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)

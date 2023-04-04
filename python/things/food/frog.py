@@ -7,7 +7,7 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.chance_d1000_melting(self, 500)
     my.collision_hit_priority(self, 6)
-    my.environ_avoids_fire(self, 100)
+    my.environ_dislikes_fire(self, 100)
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_bounce_always(self, True)
