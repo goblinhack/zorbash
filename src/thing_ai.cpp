@@ -1480,6 +1480,17 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     }
   }
 
+  //
+  // Too many paths ?
+  //
+  auto max_paths = 10;
+  while ((int) can_reach_cands.size() > max_paths) {
+    auto which = pcg_rand() % can_reach_cands.size();
+    auto b     = can_reach_cands.begin();
+    std::advance(b, which);
+    can_reach_cands.erase(b);
+  }
+
   if (is_debug_type()) {
     auto ai = aip();
 
