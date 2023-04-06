@@ -16,16 +16,15 @@ float Thing::jump_distance_current(void)
     d += 0.5 + ((pcg_random_range(0, 100) / 100.0));
   }
 
-  if (stamina() < stamina_max() / 4) {
-    d *= 0.2;
-  } else if (stamina() < stamina_max() / 2) {
-    d *= 0.5;
-  }
-
-  if (is_hunger_level_starving) {
-    d *= 0.5;
-  } else if (is_hunger_level_hungry) {
+  //
+  // Reduce jump distance if tired
+  //
+  if (stamina() < stamina_max() / 2) {
     d *= 0.8;
+  } else if (stamina() < stamina_max() / 4) {
+    d *= 0.5;
+  } else if (stamina() < stamina_max() / 8) {
+    d *= 0.2;
   }
 
   return d;
