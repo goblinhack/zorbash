@@ -1076,15 +1076,15 @@ int Thing::is_unused_flag161(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag161());
 }
-int Thing::is_unused_flag162(void)
+int Thing::is_leech(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag162());
+  return (tp()->is_leech());
 }
-int Thing::is_unused_flag163(void)
+int Thing::is_bedbug(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag163());
+  return (tp()->is_bedbug());
 }
 int Thing::is_death_hornet(void)
 {
@@ -2404,10 +2404,10 @@ int Thing::is_obs_for_shoving(void)
   return (tp()->is_obs_for_shoving());
 }
 
-int Thing::is_always_submerged(void)
+int Thing::is_always_submerged_in_water(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_always_submerged());
+  return (tp()->is_always_submerged_in_water());
 }
 
 int Thing::environ_likes_deep_water(void)

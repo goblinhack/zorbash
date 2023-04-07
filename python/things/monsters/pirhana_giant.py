@@ -63,7 +63,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_rest(self, True)
     my.is_able_to_see_in_the_dark(self, True)
     my.is_able_to_tire(self, True)
-    my.is_always_submerged(self, True)
+    my.is_always_submerged_in_water(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)

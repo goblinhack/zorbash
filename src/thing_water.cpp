@@ -15,7 +15,7 @@ void Thing::water_tick(void)
     //
     // Check for fish out of water.
     //
-    if (is_always_submerged()) {
+    if (is_always_submerged_in_water()) {
       if (! is_able_to_live_out_of_water()) {
         dead("out of water");
       }

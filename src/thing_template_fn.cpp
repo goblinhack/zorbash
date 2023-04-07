@@ -393,7 +393,7 @@ int Tp::is_aerodynamic(void) const { return _is_aerodynamic; }
 int Tp::is_air_breather(void) const { return _is_air_breather; }
 int Tp::is_alive_on_end_of_anim(void) const { return _is_alive_on_end_of_anim; }
 int Tp::is_always_hit(void) const { return _is_always_hit; }
-int Tp::is_always_submerged(void) const { return _is_always_submerged; }
+int Tp::is_always_submerged_in_water(void) const { return _is_always_submerged_in_water; }
 int Tp::is_amulet(void) const { return _is_amulet; }
 int Tp::is_ant(void) const { return _is_ant; }
 int Tp::is_aquatic(void) const { return _is_aquatic; }
@@ -415,6 +415,7 @@ int Tp::is_bag(void) const { return _is_bag; }
 int Tp::is_barrel(void) const { return _is_barrel; }
 int Tp::is_basalt(void) const { return _is_basalt; }
 int Tp::is_bearowl(void) const { return _is_bearowl; }
+int Tp::is_bedbug(void) const { return _is_bedbug; }
 int Tp::is_bee(void) const { return _is_bee; }
 int Tp::is_biome_dungeon(void) const { return _is_biome_dungeon; }
 int Tp::is_biome_sewer(void) const { return _is_biome_sewer; }
@@ -563,6 +564,7 @@ int Tp::is_key_special(void) const { return _is_key_special; }
 int Tp::is_key(void) const { return _is_key; }
 int Tp::is_laser(void) const { return _is_laser; }
 int Tp::is_lava(void) const { return _is_lava; }
+int Tp::is_leech(void) const { return _is_leech; }
 int Tp::is_lifeless(void) const { return _is_lifeless; }
 int Tp::is_light_blocker_for_monst(void) const { return _is_light_blocker_for_monst; }
 int Tp::is_light_blocker(void) const { return _is_light_blocker; }
@@ -743,8 +745,6 @@ int Tp::is_unused_flag159(void) const { return _is_unused_flag159; }
 int Tp::is_unused_flag15(void) const { return _is_unused_flag15; }
 int Tp::is_unused_flag160(void) const { return _is_unused_flag160; }
 int Tp::is_unused_flag161(void) const { return _is_unused_flag161; }
-int Tp::is_unused_flag162(void) const { return _is_unused_flag162; }
-int Tp::is_unused_flag163(void) const { return _is_unused_flag163; }
 int Tp::is_unused_flag16(void) const { return _is_unused_flag16; }
 int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
 int Tp::is_unused_flag17(void) const { return _is_unused_flag17; }
@@ -1139,7 +1139,7 @@ void Tp::is_air_breather_set(int v) { _is_air_breather = v; }
 void Tp::is_alive_on_end_of_anim_set(int v) { _is_alive_on_end_of_anim = v; }
 void Tp::is_allied_with_set(const std::string &v) { _is_allied_with = v; }
 void Tp::is_always_hit_set(int v) { _is_always_hit = v; }
-void Tp::is_always_submerged_set(int v) { _is_always_submerged = v; }
+void Tp::is_always_submerged_in_water_set(int v) { _is_always_submerged_in_water = v; }
 void Tp::is_amulet_set(int v) { _is_amulet = v; }
 void Tp::is_ant_set(int v) { _is_ant = v; }
 void Tp::is_aquatic_set(int v) { _is_aquatic = v; }
@@ -1161,6 +1161,7 @@ void Tp::is_bag_set(int v) { _is_bag = v; }
 void Tp::is_barrel_set(int v) { _is_barrel = v; }
 void Tp::is_basalt_set(int v) { _is_basalt = v; }
 void Tp::is_bearowl_set(int v) { _is_bearowl = v; }
+void Tp::is_bedbug_set(int v) { _is_bedbug = v; }
 void Tp::is_bee_set(int v) { _is_bee = v; }
 void Tp::is_biome_dungeon_set(int v) { _is_biome_dungeon = v; }
 void Tp::is_biome_sewer_set(int v) { _is_biome_sewer = v; }
@@ -1309,6 +1310,7 @@ void Tp::is_key_set(int v) { _is_key = v; }
 void Tp::is_key_special_set(int v) { _is_key_special = v; }
 void Tp::is_laser_set(int v) { _is_laser = v; }
 void Tp::is_lava_set(int v) { _is_lava = v; }
+void Tp::is_leech_set(int v) { _is_leech = v; }
 void Tp::is_lifeless_set(int v) { _is_lifeless = v; }
 void Tp::is_light_blocker_for_monst_set(int v) { _is_light_blocker_for_monst = v; }
 void Tp::is_light_blocker_set(int v) { _is_light_blocker = v; }
@@ -1489,8 +1491,6 @@ void Tp::is_unused_flag159_set(int v) { _is_unused_flag159 = v; }
 void Tp::is_unused_flag15_set(int v) { _is_unused_flag15 = v; }
 void Tp::is_unused_flag160_set(int v) { _is_unused_flag160 = v; }
 void Tp::is_unused_flag161_set(int v) { _is_unused_flag161 = v; }
-void Tp::is_unused_flag162_set(int v) { _is_unused_flag162 = v; }
-void Tp::is_unused_flag163_set(int v) { _is_unused_flag163 = v; }
 void Tp::is_unused_flag16_set(int v) { _is_unused_flag16 = v; }
 void Tp::is_unused_flag179_set(int v) { _is_unused_flag179 = v; }
 void Tp::is_unused_flag17_set(int v) { _is_unused_flag17 = v; }

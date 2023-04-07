@@ -313,7 +313,7 @@ private:
   int _is_air_breather {};
   int _is_alive_on_end_of_anim {};
   int _is_always_hit {};
-  int _is_always_submerged {};
+  int _is_always_submerged_in_water {};
   int _is_amulet {};
   int _is_ant {};
   int _is_aquatic {};
@@ -335,6 +335,7 @@ private:
   int _is_barrel {};
   int _is_basalt {};
   int _is_bearowl {};
+  int _is_bedbug {};
   int _is_bee {};
   int _is_biome_dungeon {};
   int _is_biome_sewer {};
@@ -484,6 +485,7 @@ private:
   int _is_key_special {};
   int _is_laser {};
   int _is_lava {};
+  int _is_leech {};
   int _is_lifeless {};
   int _is_light {};
   int _is_light_blocker {};
@@ -666,8 +668,6 @@ private:
   int _is_unused_flag16 {};
   int _is_unused_flag160 {};
   int _is_unused_flag161 {};
-  int _is_unused_flag162 {};
-  int _is_unused_flag163 {};
   int _is_unused_flag17 {};
   int _is_unused_flag179 {};
   int _is_unused_flag18 {};
@@ -1607,7 +1607,7 @@ public:
   int is_air_breather(void) const;
   int is_alive_on_end_of_anim(void) const;
   int is_always_hit(void) const;
-  int is_always_submerged(void) const;
+  int is_always_submerged_in_water(void) const;
   int is_amulet(void) const;
   int is_ant(void) const;
   int is_aquatic(void) const;
@@ -1629,6 +1629,7 @@ public:
   int is_barrel(void) const;
   int is_basalt(void) const;
   int is_bearowl(void) const;
+  int is_bedbug(void) const;
   int is_bee(void) const;
   int is_biome_dungeon(void) const;
   int is_biome_sewer(void) const;
@@ -1777,6 +1778,7 @@ public:
   int is_key(void) const;
   int is_laser(void) const;
   int is_lava(void) const;
+  int is_leech(void) const;
   int is_lifeless(void) const;
   int is_light_blocker_for_monst(void) const;
   int is_light_blocker(void) const;
@@ -1957,8 +1959,6 @@ public:
   int is_unused_flag15(void) const;
   int is_unused_flag160(void) const;
   int is_unused_flag161(void) const;
-  int is_unused_flag162(void) const;
-  int is_unused_flag163(void) const;
   int is_unused_flag16(void) const;
   int is_unused_flag179(void) const;
   int is_unused_flag17(void) const;
@@ -2353,7 +2353,7 @@ public:
   void is_alive_on_end_of_anim_set(int v);
   void is_allied_with_set(const std::string &v);
   void is_always_hit_set(int v);
-  void is_always_submerged_set(int v);
+  void is_always_submerged_in_water_set(int v);
   void is_amulet_set(int v);
   void is_ant_set(int v);
   void is_aquatic_set(int v);
@@ -2375,6 +2375,7 @@ public:
   void is_barrel_set(int v);
   void is_basalt_set(int v);
   void is_bearowl_set(int v);
+  void is_bedbug_set(int v);
   void is_bee_set(int v);
   void is_biome_dungeon_set(int v);
   void is_biome_sewer_set(int v);
@@ -2523,6 +2524,7 @@ public:
   void is_key_special_set(int v);
   void is_laser_set(int v);
   void is_lava_set(int v);
+  void is_leech_set(int v);
   void is_lifeless_set(int v);
   void is_light_blocker_for_monst_set(int v);
   void is_light_blocker_set(int v);
@@ -2703,8 +2705,6 @@ public:
   void is_unused_flag15_set(int v);
   void is_unused_flag160_set(int v);
   void is_unused_flag161_set(int v);
-  void is_unused_flag162_set(int v);
-  void is_unused_flag163_set(int v);
   void is_unused_flag16_set(int v);
   void is_unused_flag179_set(int v);
   void is_unused_flag17_set(int v);

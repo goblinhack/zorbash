@@ -1337,7 +1337,7 @@ public:
   int is_alive_monst(void);
   int is_alive_on_end_of_anim(void);
   int is_always_hit(void);
-  int is_always_submerged(void);
+  int is_always_submerged_in_water(void);
   int is_amulet(void);
   int is_ant(void);
   int is_aquatic(void);
@@ -1378,6 +1378,7 @@ public:
   int is_barrel(void);
   int is_basalt(void);
   int is_bearowl(void);
+  int is_bedbug(void);
   int is_bee(void);
   int is_biome_dungeon(void);
   int is_biome_sewer(void);
@@ -1533,6 +1534,7 @@ public:
   int is_key(void);
   int is_laser(void);
   int is_lava(void);
+  int is_leech(void);
   int is_lifeless(void);
   int is_light_blocker_for_monst(void);
   int is_light_blocker(void);
@@ -1713,8 +1715,6 @@ public:
   int is_unused_flag15(void);
   int is_unused_flag160(void);
   int is_unused_flag161(void);
-  int is_unused_flag162(void);
-  int is_unused_flag163(void);
   int is_unused_flag16(void);
   int is_unused_flag179(void);
   int is_unused_flag17(void);
