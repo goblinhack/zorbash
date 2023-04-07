@@ -210,7 +210,7 @@ void tp_fixup(void)
     }
 
     if (tp->chance_d1000_steal_item() && ! tp->is_thief()) {
-      DIE("Tp %s needs is_theif set", tp->name().c_str());
+      DIE("Tp %s needs is_thief set", tp->name().c_str());
     }
 
     if (tp->is_able_to_melt()) {

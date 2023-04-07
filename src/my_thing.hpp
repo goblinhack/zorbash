@@ -1556,6 +1556,7 @@ public:
   int is_mob_challenge_class_A(void);
   int is_mob_challenge_class_B(void);
   int is_mob(void);
+  int is_molekin(void);
   int is_monst_class_A(void);
   int is_monst_class_B(void);
   int is_monst_class_C(void);
@@ -1596,6 +1597,7 @@ public:
   int is_pressure_plate(void);
   int is_projectile(void);
   int is_ranged_weapon(void);
+  int is_rat(void);
   int is_red_blooded(void);
   int is_red_blood(void);
   int is_red_splatter(void);
@@ -1605,6 +1607,7 @@ public:
   int is_ripple(void);
   int is_rock(void);
   int is_rusty(void);
+  int is_scorpion(void);
   int is_secret_door(void);
   int is_sewer_wall(void);
   int is_shallow_water(void);
@@ -1711,10 +1714,7 @@ public:
   int is_unused_flag156(void);
   int is_unused_flag157(void);
   int is_unused_flag158(void);
-  int is_unused_flag159(void);
   int is_unused_flag15(void);
-  int is_unused_flag160(void);
-  int is_scorpion(void);
   int is_unused_flag16(void);
   int is_unused_flag179(void);
   int is_unused_flag17(void);

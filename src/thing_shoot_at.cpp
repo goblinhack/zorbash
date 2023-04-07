@@ -44,7 +44,10 @@ bool Thing::on_want_to_shoot_at(Thingp target)
   TRACE_NO_INDENT();
   auto on_want_to_shoot_at = tp()->on_want_to_shoot_at_do();
   if (std::empty(on_want_to_shoot_at)) {
-    return false;
+    //
+    // This allows gnomes to throw rocks
+    //
+    return shoot_at(target);
   }
 
   auto t = split_tokens(on_want_to_shoot_at, '.');
@@ -81,6 +84,8 @@ Thingp Thing::best_shoot_at_target_get(void)
 
   for (i = 0; i < thing_possible_hit_size; i++) {
     ThingPossibleHit *cand = &thing_possible_hits[ i ];
+
+    dbg("Possible shoot at cand: %s", cand->target->to_short_string().c_str());
 
     if (! best) {
       best = cand;
@@ -186,14 +191,17 @@ bool Thing::shoot_at_target(void)
           continue;
         }
 
-        dbg("Look for something to shoot at; %s", it->to_short_string().c_str());
-        TRACE_AND_INDENT();
-
         //
         // No shooting at blood!
         //
         if (it->is_monst() || it->is_player()) {
+          dbg("Look for something to shoot at: %s", it->to_short_string().c_str());
+          TRACE_AND_INDENT();
+
           if (possible_to_attack(it)) {
+            dbg("Possible shoot at target: %s", it->to_short_string().c_str());
+            TRACE_AND_INDENT();
+
             thing_possible_hit_add(this, it);
           }
         }
@@ -205,6 +213,9 @@ bool Thing::shoot_at_target(void)
   if (! target) {
     return false;
   }
+
+  dbg("Want to shoot atL %s", target->to_short_string().c_str());
+  TRACE_AND_INDENT();
 
   //
   // Make sure we face the direction we are firing in

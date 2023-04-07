@@ -507,6 +507,7 @@ private:
   int _is_mob {};
   int _is_mob_challenge_class_A {};
   int _is_mob_challenge_class_B {};
+  int _is_molekin {};
   int _is_monst {};
   int _is_monst_class_A {};
   int _is_monst_class_B {};
@@ -547,6 +548,7 @@ private:
   int _is_pressure_plate {};
   int _is_projectile {};
   int _is_ranged_weapon {};
+  int _is_rat {};
   int _is_red_blood {};
   int _is_red_blooded {};
   int _is_red_splatter {};
@@ -555,6 +557,7 @@ private:
   int _is_ripple {};
   int _is_rock {};
   int _is_rusty {};
+  int _is_scorpion {};
   int _is_secret_door {};
   int _is_sewer_wall {};
   int _is_shallow_water {};
@@ -664,10 +667,7 @@ private:
   int _is_unused_flag156 {};
   int _is_unused_flag157 {};
   int _is_unused_flag158 {};
-  int _is_unused_flag159 {};
   int _is_unused_flag16 {};
-  int _is_unused_flag160 {};
-  int _is_scorpion {};
   int _is_unused_flag17 {};
   int _is_unused_flag179 {};
   int _is_unused_flag18 {};
@@ -1800,6 +1800,7 @@ public:
   int is_mob_challenge_class_A(void) const;
   int is_mob_challenge_class_B(void) const;
   int is_mob(void) const;
+  int is_molekin(void) const;
   int is_monst_class_A(void) const;
   int is_monst_class_B(void) const;
   int is_monst_class_C(void) const;
@@ -1840,6 +1841,7 @@ public:
   int is_pressure_plate(void) const;
   int is_projectile(void) const;
   int is_ranged_weapon(void) const;
+  int is_rat(void) const;
   int is_red_blooded(void) const;
   int is_red_blood(void) const;
   int is_red_splatter(void) const;
@@ -1848,6 +1850,7 @@ public:
   int is_ripple(void) const;
   int is_rock(void) const;
   int is_rusty(void) const;
+  int is_scorpion(void) const;
   int is_secret_door(void) const;
   int is_sewer_wall(void) const;
   int is_shallow_water(void) const;
@@ -1955,10 +1958,7 @@ public:
   int is_unused_flag156(void) const;
   int is_unused_flag157(void) const;
   int is_unused_flag158(void) const;
-  int is_unused_flag159(void) const;
   int is_unused_flag15(void) const;
-  int is_unused_flag160(void) const;
-  int is_scorpion(void) const;
   int is_unused_flag16(void) const;
   int is_unused_flag179(void) const;
   int is_unused_flag17(void) const;
@@ -2546,6 +2546,7 @@ public:
   void is_mob_challenge_class_A_set(int v);
   void is_mob_challenge_class_B_set(int v);
   void is_mob_set(int v);
+  void is_molekin_set(int v);
   void is_monst_class_A_set(int v);
   void is_monst_class_B_set(int v);
   void is_monst_class_C_set(int v);
@@ -2586,6 +2587,7 @@ public:
   void is_pressure_plate_set(int v);
   void is_projectile_set(int v);
   void is_ranged_weapon_set(int v);
+  void is_rat_set(int v);
   void is_red_blooded_set(int v);
   void is_red_blood_set(int v);
   void is_red_splatter_set(int v);
@@ -2594,6 +2596,7 @@ public:
   void is_ripple_set(int v);
   void is_rock_set(int v);
   void is_rusty_set(int v);
+  void is_scorpion_set(int v);
   void is_secret_door_set(int v);
   void is_sewer_wall_set(int v);
   void is_shallow_water_set(int v);
@@ -2701,10 +2704,7 @@ public:
   void is_unused_flag156_set(int v);
   void is_unused_flag157_set(int v);
   void is_unused_flag158_set(int v);
-  void is_unused_flag159_set(int v);
   void is_unused_flag15_set(int v);
-  void is_unused_flag160_set(int v);
-  void is_scorpion_set(int v);
   void is_unused_flag16_set(int v);
   void is_unused_flag179_set(int v);
   void is_unused_flag17_set(int v);

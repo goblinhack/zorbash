@@ -586,6 +586,7 @@ int Tp::is_missile(void) const { return _is_missile; }
 int Tp::is_mob_challenge_class_A(void) const { return _is_mob_challenge_class_A; }
 int Tp::is_mob_challenge_class_B(void) const { return _is_mob_challenge_class_B; }
 int Tp::is_mob(void) const { return _is_mob; }
+int Tp::is_molekin(void) const { return _is_molekin; }
 int Tp::is_monst_class_A(void) const { return _is_monst_class_A; }
 int Tp::is_monst_class_B(void) const { return _is_monst_class_B; }
 int Tp::is_monst_class_C(void) const { return _is_monst_class_C; }
@@ -626,6 +627,7 @@ int Tp::is_potion(void) const { return _is_potion; }
 int Tp::is_pressure_plate(void) const { return _is_pressure_plate; }
 int Tp::is_projectile(void) const { return _is_projectile; }
 int Tp::is_ranged_weapon(void) const { return _is_ranged_weapon; }
+int Tp::is_rat(void) const { return _is_rat; }
 int Tp::is_red_blooded(void) const { return _is_red_blooded; }
 int Tp::is_red_blood(void) const { return _is_red_blood; }
 int Tp::is_red_splatter(void) const { return _is_red_splatter; }
@@ -634,6 +636,7 @@ int Tp::is_ring(void) const { return _is_ring; }
 int Tp::is_ripple(void) const { return _is_ripple; }
 int Tp::is_rock(void) const { return _is_rock; }
 int Tp::is_rusty(void) const { return _is_rusty; }
+int Tp::is_scorpion(void) const { return _is_scorpion; }
 int Tp::is_secret_door(void) const { return _is_secret_door; }
 int Tp::is_sewer_wall(void) const { return _is_sewer_wall; }
 int Tp::is_shallow_water(void) const { return _is_shallow_water; }
@@ -741,10 +744,7 @@ int Tp::is_unused_flag155(void) const { return _is_unused_flag155; }
 int Tp::is_unused_flag156(void) const { return _is_unused_flag156; }
 int Tp::is_unused_flag157(void) const { return _is_unused_flag157; }
 int Tp::is_unused_flag158(void) const { return _is_unused_flag158; }
-int Tp::is_unused_flag159(void) const { return _is_unused_flag159; }
 int Tp::is_unused_flag15(void) const { return _is_unused_flag15; }
-int Tp::is_unused_flag160(void) const { return _is_unused_flag160; }
-int Tp::is_scorpion(void) const { return _is_scorpion; }
 int Tp::is_unused_flag16(void) const { return _is_unused_flag16; }
 int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
 int Tp::is_unused_flag17(void) const { return _is_unused_flag17; }
@@ -1332,6 +1332,7 @@ void Tp::is_missile_set(int v) { _is_missile = v; }
 void Tp::is_mob_challenge_class_A_set(int v) { _is_mob_challenge_class_A = v; }
 void Tp::is_mob_challenge_class_B_set(int v) { _is_mob_challenge_class_B = v; }
 void Tp::is_mob_set(int v) { _is_mob = v; }
+void Tp::is_molekin_set(int v) { _is_molekin = v; }
 void Tp::is_monst_class_A_set(int v) { _is_monst_class_A = v; }
 void Tp::is_monst_class_B_set(int v) { _is_monst_class_B = v; }
 void Tp::is_monst_class_C_set(int v) { _is_monst_class_C = v; }
@@ -1372,6 +1373,7 @@ void Tp::is_potion_set(int v) { _is_potion = v; }
 void Tp::is_pressure_plate_set(int v) { _is_pressure_plate = v; }
 void Tp::is_projectile_set(int v) { _is_projectile = v; }
 void Tp::is_ranged_weapon_set(int v) { _is_ranged_weapon = v; }
+void Tp::is_rat_set(int v) { _is_rat = v; }
 void Tp::is_red_blooded_set(int v) { _is_red_blooded = v; }
 void Tp::is_red_blood_set(int v) { _is_red_blood = v; }
 void Tp::is_red_splatter_set(int v) { _is_red_splatter = v; }
@@ -1380,6 +1382,7 @@ void Tp::is_ring_set(int v) { _is_ring = v; }
 void Tp::is_ripple_set(int v) { _is_ripple = v; }
 void Tp::is_rock_set(int v) { _is_rock = v; }
 void Tp::is_rusty_set(int v) { _is_rusty = v; }
+void Tp::is_scorpion_set(int v) { _is_scorpion = v; }
 void Tp::is_secret_door_set(int v) { _is_secret_door = v; }
 void Tp::is_sewer_wall_set(int v) { _is_sewer_wall = v; }
 void Tp::is_shallow_water_set(int v) { _is_shallow_water = v; }
@@ -1487,10 +1490,7 @@ void Tp::is_unused_flag155_set(int v) { _is_unused_flag155 = v; }
 void Tp::is_unused_flag156_set(int v) { _is_unused_flag156 = v; }
 void Tp::is_unused_flag157_set(int v) { _is_unused_flag157 = v; }
 void Tp::is_unused_flag158_set(int v) { _is_unused_flag158 = v; }
-void Tp::is_unused_flag159_set(int v) { _is_unused_flag159 = v; }
 void Tp::is_unused_flag15_set(int v) { _is_unused_flag15 = v; }
-void Tp::is_unused_flag160_set(int v) { _is_unused_flag160 = v; }
-void Tp::is_scorpion_set(int v) { _is_scorpion = v; }
 void Tp::is_unused_flag16_set(int v) { _is_unused_flag16 = v; }
 void Tp::is_unused_flag179_set(int v) { _is_unused_flag179 = v; }
 void Tp::is_unused_flag17_set(int v) { _is_unused_flag17 = v; }

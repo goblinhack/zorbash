@@ -1061,15 +1061,15 @@ int Thing::is_unused_flag158(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag158());
 }
-int Thing::is_unused_flag159(void)
+int Thing::is_molekin(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag159());
+  return (tp()->is_molekin());
 }
-int Thing::is_unused_flag160(void)
+int Thing::is_rat(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag160());
+  return (tp()->is_rat());
 }
 int Thing::is_scorpion(void)
 {
