@@ -1071,10 +1071,10 @@ int Thing::is_unused_flag160(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag160());
 }
-int Thing::is_unused_flag161(void)
+int Thing::is_scorpion(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag161());
+  return (tp()->is_scorpion());
 }
 int Thing::is_leech(void)
 {

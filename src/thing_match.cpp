@@ -464,7 +464,7 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag159() && (what == "is_unused_flag159")) { return true; }
   if (is_unused_flag15() && (what == "is_unused_flag15")) { return true; }
   if (is_unused_flag160() && (what == "is_unused_flag160")) { return true; }
-  if (is_unused_flag161() && (what == "is_unused_flag161")) { return true; }
+  if (is_scorpion() && (what == "is_scorpion")) { return true; }
   if (is_unused_flag16() && (what == "is_unused_flag16")) { return true; }
   if (is_unused_flag179() && (what == "is_unused_flag179")) { return true; }
   if (is_unused_flag17() && (what == "is_unused_flag17")) { return true; }
@@ -1066,7 +1066,7 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag159() && (what == "is_unused_flag159")) { return true; }
   if (is_unused_flag15() && (what == "is_unused_flag15")) { return true; }
   if (is_unused_flag160() && (what == "is_unused_flag160")) { return true; }
-  if (is_unused_flag161() && (what == "is_unused_flag161")) { return true; }
+  if (is_scorpion() && (what == "is_scorpion")) { return true; }
   if (is_unused_flag16() && (what == "is_unused_flag16")) { return true; }
   if (is_unused_flag179() && (what == "is_unused_flag179")) { return true; }
   if (is_unused_flag17() && (what == "is_unused_flag17")) { return true; }
@@ -1658,7 +1658,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag159") { return &Thing::is_unused_flag159; }
   if (what == "is_unused_flag15") { return &Thing::is_unused_flag15; }
   if (what == "is_unused_flag160") { return &Thing::is_unused_flag160; }
-  if (what == "is_unused_flag161") { return &Thing::is_unused_flag161; }
+  if (what == "is_scorpion") { return &Thing::is_scorpion; }
   if (what == "is_unused_flag16") { return &Thing::is_unused_flag16; }
   if (what == "is_unused_flag179") { return &Thing::is_unused_flag179; }
   if (what == "is_unused_flag17") { return &Thing::is_unused_flag17; }

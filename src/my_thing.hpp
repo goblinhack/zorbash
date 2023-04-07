@@ -1714,7 +1714,7 @@ public:
   int is_unused_flag159(void);
   int is_unused_flag15(void);
   int is_unused_flag160(void);
-  int is_unused_flag161(void);
+  int is_scorpion(void);
   int is_unused_flag16(void);
   int is_unused_flag179(void);
   int is_unused_flag17(void);

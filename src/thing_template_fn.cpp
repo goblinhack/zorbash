@@ -744,7 +744,7 @@ int Tp::is_unused_flag158(void) const { return _is_unused_flag158; }
 int Tp::is_unused_flag159(void) const { return _is_unused_flag159; }
 int Tp::is_unused_flag15(void) const { return _is_unused_flag15; }
 int Tp::is_unused_flag160(void) const { return _is_unused_flag160; }
-int Tp::is_unused_flag161(void) const { return _is_unused_flag161; }
+int Tp::is_scorpion(void) const { return _is_scorpion; }
 int Tp::is_unused_flag16(void) const { return _is_unused_flag16; }
 int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
 int Tp::is_unused_flag17(void) const { return _is_unused_flag17; }
@@ -1490,7 +1490,7 @@ void Tp::is_unused_flag158_set(int v) { _is_unused_flag158 = v; }
 void Tp::is_unused_flag159_set(int v) { _is_unused_flag159 = v; }
 void Tp::is_unused_flag15_set(int v) { _is_unused_flag15 = v; }
 void Tp::is_unused_flag160_set(int v) { _is_unused_flag160 = v; }
-void Tp::is_unused_flag161_set(int v) { _is_unused_flag161 = v; }
+void Tp::is_scorpion_set(int v) { _is_scorpion = v; }
 void Tp::is_unused_flag16_set(int v) { _is_unused_flag16 = v; }
 void Tp::is_unused_flag179_set(int v) { _is_unused_flag179 = v; }
 void Tp::is_unused_flag17_set(int v) { _is_unused_flag17 = v; }
