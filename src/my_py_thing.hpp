@@ -565,7 +565,7 @@ PyObject *thing_is_unused_flag154(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag155(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag156(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag157(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag158(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_iceman(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag15(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag16(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag179(PyObject *obj, PyObject *args, PyObject *keywds);

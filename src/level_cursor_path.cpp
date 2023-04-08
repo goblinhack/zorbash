@@ -83,7 +83,7 @@ void Level::cursor_path_draw_circle(void)
 //
 // Create the cursor path, avoiding things like lava
 //
-// For the first pass, restrict to tiles we have waked on
+// For the first pass, restrict to tiles we have walked on
 // For the first pass, any tiles will do
 //
 bool Level::cursor_path_draw_line_attempt(Thingp it, point start, point end, int attempt)
@@ -184,6 +184,9 @@ bool Level::cursor_path_draw_line_attempt(Thingp it, point start, point end, int
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
         if (! is_walked(x, y)) {
+          set(d.val, x, y, DMAP_IS_WALL);
+        }
+        if (is_monst(x, y)) {
           set(d.val, x, y, DMAP_IS_WALL);
         }
       }

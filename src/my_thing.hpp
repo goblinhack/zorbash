@@ -1713,7 +1713,7 @@ public:
   int is_unused_flag155(void);
   int is_unused_flag156(void);
   int is_unused_flag157(void);
-  int is_unused_flag158(void);
+  int is_iceman(void);
   int is_unused_flag15(void);
   int is_unused_flag16(void);
   int is_unused_flag179(void);

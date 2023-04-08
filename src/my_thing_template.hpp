@@ -666,7 +666,7 @@ private:
   int _is_unused_flag155 {};
   int _is_unused_flag156 {};
   int _is_unused_flag157 {};
-  int _is_unused_flag158 {};
+  int _is_iceman {};
   int _is_unused_flag16 {};
   int _is_unused_flag17 {};
   int _is_unused_flag179 {};
@@ -1957,7 +1957,7 @@ public:
   int is_unused_flag155(void) const;
   int is_unused_flag156(void) const;
   int is_unused_flag157(void) const;
-  int is_unused_flag158(void) const;
+  int is_iceman(void) const;
   int is_unused_flag15(void) const;
   int is_unused_flag16(void) const;
   int is_unused_flag179(void) const;
@@ -2703,7 +2703,7 @@ public:
   void is_unused_flag155_set(int v);
   void is_unused_flag156_set(int v);
   void is_unused_flag157_set(int v);
-  void is_unused_flag158_set(int v);
+  void is_iceman_set(int v);
   void is_unused_flag15_set(int v);
   void is_unused_flag16_set(int v);
   void is_unused_flag179_set(int v);

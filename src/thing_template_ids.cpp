@@ -262,6 +262,7 @@ std::initializer_list< std::string > tps = {
     "honey",
     "horseshoe",
     "hotsauce",
+    "iceman",
     "key",
     "key_crystal",
     "key_golden",
