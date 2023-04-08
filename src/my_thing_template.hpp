@@ -460,6 +460,7 @@ private:
   int _is_herbivore {};
   int _is_hittable {};
   int _is_humanoid {};
+  int _is_iceman {};
   int _is_immune_to_acid {};
   int _is_immune_to_cold {};
   int _is_immune_to_draining {};
@@ -497,6 +498,7 @@ private:
   int _is_made_of_rock {};
   int _is_magical {};
   int _is_magical_effect {};
+  int _is_mantisman {};
   int _is_map_beast {};
   int _is_map_treasure {};
   int _is_meat {};
@@ -665,8 +667,6 @@ private:
   int _is_unused_flag154 {};
   int _is_unused_flag155 {};
   int _is_unused_flag156 {};
-  int _is_unused_flag157 {};
-  int _is_iceman {};
   int _is_unused_flag16 {};
   int _is_unused_flag17 {};
   int _is_unused_flag179 {};
@@ -1754,6 +1754,7 @@ public:
   int is_herbivore(void) const;
   int is_hittable(void) const;
   int is_humanoid(void) const;
+  int is_iceman(void) const;
   int is_immune_to_acid(void) const;
   int is_immune_to_cold(void) const;
   int is_immune_to_draining(void) const;
@@ -1790,6 +1791,7 @@ public:
   int is_made_of_rock(void) const;
   int is_magical_effect(void) const;
   int is_magical(void) const;
+  int is_mantisman(void) const;
   int is_map_beast(void) const;
   int is_map_treasure(void) const;
   int is_meat(void) const;
@@ -1956,8 +1958,6 @@ public:
   int is_unused_flag154(void) const;
   int is_unused_flag155(void) const;
   int is_unused_flag156(void) const;
-  int is_unused_flag157(void) const;
-  int is_iceman(void) const;
   int is_unused_flag15(void) const;
   int is_unused_flag16(void) const;
   int is_unused_flag179(void) const;
@@ -2500,6 +2500,7 @@ public:
   void is_herbivore_set(int v);
   void is_hittable_set(int v);
   void is_humanoid_set(int v);
+  void is_iceman_set(int v);
   void is_immune_to_acid_set(int v);
   void is_immune_to_cold_set(int v);
   void is_immune_to_draining_set(int v);
@@ -2536,6 +2537,7 @@ public:
   void is_made_of_rock_set(int v);
   void is_magical_effect_set(int v);
   void is_magical_set(int v);
+  void is_mantisman_set(int v);
   void is_map_beast_set(int v);
   void is_map_treasure_set(int v);
   void is_meat_set(int v);
@@ -2702,8 +2704,6 @@ public:
   void is_unused_flag154_set(int v);
   void is_unused_flag155_set(int v);
   void is_unused_flag156_set(int v);
-  void is_unused_flag157_set(int v);
-  void is_iceman_set(int v);
   void is_unused_flag15_set(int v);
   void is_unused_flag16_set(int v);
   void is_unused_flag179_set(int v);

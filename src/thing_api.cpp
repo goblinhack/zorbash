@@ -1051,10 +1051,10 @@ int Thing::is_unused_flag156(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag156());
 }
-int Thing::is_unused_flag157(void)
+int Thing::is_mantisman(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag157());
+  return (tp()->is_mantisman());
 }
 int Thing::is_iceman(void)
 {

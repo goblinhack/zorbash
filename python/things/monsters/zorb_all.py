@@ -49,7 +49,6 @@ def tp_init(name, text_long_name):
     my.attack_undead(self, True)
     my.capacity_height(self, 5)
     my.capacity_width(self, 5)
-    my.on_death_drop_all_items(self, True)
     my.chance_d1000_shove(self, 500)
     my.chance_d1000_steal_item(self, 50)
     my.chance_d100_of_firing_avoiding_comrades(self, 50)

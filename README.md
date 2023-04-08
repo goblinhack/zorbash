@@ -217,11 +217,11 @@ Current status:
 
 Content:
 <!-- begin type marker -->
-- 99 x monsters
+- 101 x monsters
 - 52 x food
 - 19 x treasure
 - 13 x weapons
-- 12 x items
+- 13 x items
 - 11 x buffs
 - 6 x staffs
 - 6 x shield

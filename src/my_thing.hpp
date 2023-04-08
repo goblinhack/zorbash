@@ -1511,6 +1511,7 @@ public:
   int is_hittable(void);
   int is_hit(Thingp hitter, ThingAttackOptionsp, int damage);
   int is_humanoid(void);
+  int is_iceman(void);
   int is_immune_to_acid(void);
   int is_immune_to_cold(void);
   int is_immune_to_draining(void);
@@ -1546,6 +1547,7 @@ public:
   int is_made_of_rock(void);
   int is_magical_effect(void);
   int is_magical(void);
+  int is_mantisman(void);
   int is_map_beast(void);
   int is_map_treasure(void);
   int is_meat(void);
@@ -1712,8 +1714,6 @@ public:
   int is_unused_flag154(void);
   int is_unused_flag155(void);
   int is_unused_flag156(void);
-  int is_unused_flag157(void);
-  int is_iceman(void);
   int is_unused_flag15(void);
   int is_unused_flag16(void);
   int is_unused_flag179(void);

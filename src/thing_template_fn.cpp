@@ -540,6 +540,7 @@ int Tp::is_helmet(void) const { return _is_helmet; }
 int Tp::is_herbivore(void) const { return _is_herbivore; }
 int Tp::is_hittable(void) const { return _is_hittable; }
 int Tp::is_humanoid(void) const { return _is_humanoid; }
+int Tp::is_iceman(void) const { return _is_iceman; }
 int Tp::is_immune_to_acid(void) const { return _is_immune_to_acid; }
 int Tp::is_immune_to_cold(void) const { return _is_immune_to_cold; }
 int Tp::is_immune_to_draining(void) const { return _is_immune_to_draining; }
@@ -576,6 +577,7 @@ int Tp::is_loggable(void) const { return _is_loggable; }
 int Tp::is_made_of_rock(void) const { return _is_made_of_rock; }
 int Tp::is_magical_effect(void) const { return _is_magical_effect; }
 int Tp::is_magical(void) const { return _is_magical; }
+int Tp::is_mantisman(void) const { return _is_mantisman; }
 int Tp::is_map_beast(void) const { return _is_map_beast; }
 int Tp::is_map_treasure(void) const { return _is_map_treasure; }
 int Tp::is_meat(void) const { return _is_meat; }
@@ -742,8 +744,6 @@ int Tp::is_unused_flag153(void) const { return _is_unused_flag153; }
 int Tp::is_unused_flag154(void) const { return _is_unused_flag154; }
 int Tp::is_unused_flag155(void) const { return _is_unused_flag155; }
 int Tp::is_unused_flag156(void) const { return _is_unused_flag156; }
-int Tp::is_unused_flag157(void) const { return _is_unused_flag157; }
-int Tp::is_iceman(void) const { return _is_iceman; }
 int Tp::is_unused_flag15(void) const { return _is_unused_flag15; }
 int Tp::is_unused_flag16(void) const { return _is_unused_flag16; }
 int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
@@ -1286,6 +1286,7 @@ void Tp::is_helmet_set(int v) { _is_helmet = v; }
 void Tp::is_herbivore_set(int v) { _is_herbivore = v; }
 void Tp::is_hittable_set(int v) { _is_hittable = v; }
 void Tp::is_humanoid_set(int v) { _is_humanoid = v; }
+void Tp::is_iceman_set(int v) { _is_iceman = v; }
 void Tp::is_immune_to_acid_set(int v) { _is_immune_to_acid = v; }
 void Tp::is_immune_to_cold_set(int v) { _is_immune_to_cold = v; }
 void Tp::is_immune_to_draining_set(int v) { _is_immune_to_draining = v; }
@@ -1322,6 +1323,7 @@ void Tp::is_loggable_set(int v) { _is_loggable = v; }
 void Tp::is_made_of_rock_set(int v) { _is_made_of_rock = v; }
 void Tp::is_magical_effect_set(int v) { _is_magical_effect = v; }
 void Tp::is_magical_set(int v) { _is_magical = v; }
+void Tp::is_mantisman_set(int v) { _is_mantisman = v; }
 void Tp::is_map_beast_set(int v) { _is_map_beast = v; }
 void Tp::is_map_treasure_set(int v) { _is_map_treasure = v; }
 void Tp::is_meat_set(int v) { _is_meat = v; }
@@ -1488,8 +1490,6 @@ void Tp::is_unused_flag153_set(int v) { _is_unused_flag153 = v; }
 void Tp::is_unused_flag154_set(int v) { _is_unused_flag154 = v; }
 void Tp::is_unused_flag155_set(int v) { _is_unused_flag155 = v; }
 void Tp::is_unused_flag156_set(int v) { _is_unused_flag156 = v; }
-void Tp::is_unused_flag157_set(int v) { _is_unused_flag157 = v; }
-void Tp::is_iceman_set(int v) { _is_iceman = v; }
 void Tp::is_unused_flag15_set(int v) { _is_unused_flag15 = v; }
 void Tp::is_unused_flag16_set(int v) { _is_unused_flag16 = v; }
 void Tp::is_unused_flag179_set(int v) { _is_unused_flag179 = v; }

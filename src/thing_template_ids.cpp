@@ -276,6 +276,7 @@ std::initializer_list< std::string > tps = {
     "leech_giant",
     "lemonpie",
     "magical_effect",
+    "mantisman",
     "map_beast",
     "map_treasure",
     "meatfairy",

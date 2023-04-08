@@ -294,6 +294,7 @@ void Game::place_player(void)
         d->wake("");
       }
       if (0) {
+        level->thing_new("mantisman", point(x + 2, y + 1));
         level->thing_new("iceman", point(x + 2, y + 1));
         level->thing_new("molekin", point(x + 2, y + 1));
         level->thing_new("gnome_rock", point(x + 2, y + 1));
