@@ -494,6 +494,7 @@ std::initializer_list< std::string > tps = {
     "wine",
     "wooden_cross",
     "wooden_cross_carry",
+    "yeti",
     "zoblin",
     "zorb_all",
     "zorb_captain",

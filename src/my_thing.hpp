@@ -1713,7 +1713,6 @@ public:
   int is_unused_flag153(void);
   int is_unused_flag154(void);
   int is_unused_flag155(void);
-  int is_unused_flag156(void);
   int is_unused_flag15(void);
   int is_unused_flag16(void);
   int is_unused_flag179(void);
@@ -1826,6 +1825,7 @@ public:
   int is_wet_grass_trampled(void);
   int is_wet_grass(void);
   int is_wooden(void);
+  int is_yeti(void);
   int item_count_excluding_charges(Tpp item);
   int item_count_including_charges(Tpp item);
   int item_enchant_count(const int slot);

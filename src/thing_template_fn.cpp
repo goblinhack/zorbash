@@ -743,7 +743,6 @@ int Tp::is_unused_flag152(void) const { return _is_unused_flag152; }
 int Tp::is_unused_flag153(void) const { return _is_unused_flag153; }
 int Tp::is_unused_flag154(void) const { return _is_unused_flag154; }
 int Tp::is_unused_flag155(void) const { return _is_unused_flag155; }
-int Tp::is_unused_flag156(void) const { return _is_unused_flag156; }
 int Tp::is_unused_flag15(void) const { return _is_unused_flag15; }
 int Tp::is_unused_flag16(void) const { return _is_unused_flag16; }
 int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
@@ -855,6 +854,7 @@ int Tp::is_weapon(void) const { return _is_weapon; }
 int Tp::is_wet_grass_trampled(void) const { return _is_wet_grass_trampled; }
 int Tp::is_wet_grass(void) const { return _is_wet_grass; }
 int Tp::is_wooden(void) const { return _is_wooden; }
+int Tp::is_yeti(void) const { return _is_yeti; }
 int Tp::item_height(void) const { return _item_height ? _item_height : 1; }
 int Tp::item_width(void) const { return _item_width ? _item_width : 1; }
 int Tp::jump_distance_mod(void) const { return _jump_distance_mod; }
@@ -1489,7 +1489,6 @@ void Tp::is_unused_flag152_set(int v) { _is_unused_flag152 = v; }
 void Tp::is_unused_flag153_set(int v) { _is_unused_flag153 = v; }
 void Tp::is_unused_flag154_set(int v) { _is_unused_flag154 = v; }
 void Tp::is_unused_flag155_set(int v) { _is_unused_flag155 = v; }
-void Tp::is_unused_flag156_set(int v) { _is_unused_flag156 = v; }
 void Tp::is_unused_flag15_set(int v) { _is_unused_flag15 = v; }
 void Tp::is_unused_flag16_set(int v) { _is_unused_flag16 = v; }
 void Tp::is_unused_flag179_set(int v) { _is_unused_flag179 = v; }
@@ -1601,6 +1600,7 @@ void Tp::is_weapon_set(int v) { _is_weapon = v; }
 void Tp::is_wet_grass_set(int v) { _is_wet_grass = v; }
 void Tp::is_wet_grass_trampled_set(int v) { _is_wet_grass_trampled = v; }
 void Tp::is_wooden_set(int v) { _is_wooden = v; }
+void Tp::is_yeti_set(int v) { _is_yeti = v; }
 void Tp::item_height_set(int v) { _item_height = v; }
 void Tp::item_width_set(int v) { _item_width = v; }
 void Tp::jump_distance_mod_set(int v) { _jump_distance_mod = v; }

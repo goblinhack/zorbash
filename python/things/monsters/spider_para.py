@@ -90,7 +90,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_interesting(self, True)
     my.is_lifeless(self, True)
     my.is_loggable(self, True)
-    my.is_monst_class_A(self, True)
+    my.is_monst_class_B(self, True)
     my.is_monst(self, True)
     my.is_moveable(self, True)
     my.is_msg_allowed_hears_something(self, True)

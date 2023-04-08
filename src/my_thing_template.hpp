@@ -666,7 +666,6 @@ private:
   int _is_unused_flag153 {};
   int _is_unused_flag154 {};
   int _is_unused_flag155 {};
-  int _is_unused_flag156 {};
   int _is_unused_flag16 {};
   int _is_unused_flag17 {};
   int _is_unused_flag179 {};
@@ -776,6 +775,7 @@ private:
   int _is_wet_grass {};
   int _is_wet_grass_trampled {};
   int _is_wooden {};
+  int _is_yeti {};
   int _item_height {};
   int _item_width {};
   int _jump_distance {};
@@ -1957,7 +1957,6 @@ public:
   int is_unused_flag153(void) const;
   int is_unused_flag154(void) const;
   int is_unused_flag155(void) const;
-  int is_unused_flag156(void) const;
   int is_unused_flag15(void) const;
   int is_unused_flag16(void) const;
   int is_unused_flag179(void) const;
@@ -2069,6 +2068,7 @@ public:
   int is_wet_grass_trampled(void) const;
   int is_wet_grass(void) const;
   int is_wooden(void) const;
+  int is_yeti(void) const;
   int item_height(void) const;
   int item_width(void) const;
   int jump_distance_mod(void) const;
@@ -2703,7 +2703,6 @@ public:
   void is_unused_flag153_set(int v);
   void is_unused_flag154_set(int v);
   void is_unused_flag155_set(int v);
-  void is_unused_flag156_set(int v);
   void is_unused_flag15_set(int v);
   void is_unused_flag16_set(int v);
   void is_unused_flag179_set(int v);
@@ -2815,6 +2814,7 @@ public:
   void is_wet_grass_set(int v);
   void is_wet_grass_trampled_set(int v);
   void is_wooden_set(int v);
+  void is_yeti_set(int v);
   void item_height_set(int v);
   void item_width_set(int v);
   void jump_distance_mod_set(int v);

@@ -104,6 +104,7 @@ def tp_init(name, text_long_name):
     my.is_eater_of_red_blood(self, True)
     my.is_hittable(self, True)
     my.is_immune_to_water(self, True)
+    my.is_intelligent(self, True)
     my.is_interesting(self, True)
     my.is_item_collector(self, True)
     my.is_living(self, True)
