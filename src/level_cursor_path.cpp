@@ -86,10 +86,11 @@ void Level::cursor_path_draw_circle(void)
 // For the first pass, restrict to tiles we have walked on
 // For the first pass, any tiles will do
 //
-bool Level::cursor_path_draw_line_attempt(Thingp it, point start, point end, int attempt)
+std::vector< point > Level::cursor_path_draw_line_attempt(Thingp it, point start, point end, int attempt)
 {
-  pcg_random_allowed++;
-  dbg("Create cursor draw line %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+  static std::vector< point > empty;
+
+  dbg2("Create cursor draw line %d,%d to %d,%d", start.x, start.y, end.x, end.y);
   TRACE_AND_INDENT();
 
   Dmap  d {};
@@ -100,8 +101,7 @@ bool Level::cursor_path_draw_line_attempt(Thingp it, point start, point end, int
   // Allow the player to see into the shadows
   //
   if (! can_see_point_or_nearby(end, THING_CAN_SEE_INTO_SHADOWS_DISTANCE)) {
-    pcg_random_allowed--;
-    return false;
+    return empty;
   }
 
   int minx, miny, maxx, maxy;
@@ -143,8 +143,7 @@ bool Level::cursor_path_draw_line_attempt(Thingp it, point start, point end, int
   // If clicking on a wall, don't walk into it.
   //
   if (cursor && is_cursor_path_blocker(it, cursor->curr_at.x, cursor->curr_at.y)) {
-    pcg_random_allowed--;
-    return false;
+    return empty;
   }
 
   //
@@ -186,6 +185,10 @@ bool Level::cursor_path_draw_line_attempt(Thingp it, point start, point end, int
         if (! is_walked(x, y)) {
           set(d.val, x, y, DMAP_IS_WALL);
         }
+
+        //
+        // Probably best to not use tiles where there is a monster
+        //
         if (is_monst(x, y)) {
           set(d.val, x, y, DMAP_IS_WALL);
         }
@@ -199,7 +202,7 @@ bool Level::cursor_path_draw_line_attempt(Thingp it, point start, point end, int
   set(d.val, end.x, end.y, DMAP_IS_GOAL);
   set(d.val, start.x, start.y, DMAP_IS_PASSABLE);
 
-  dbg("Make cursor path %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+  dbg2("Make cursor path %d,%d to %d,%d", start.x, start.y, end.x, end.y);
 
   // dmap_print(&d, start, dmap_start, dmap_end);
   dmap_process(&d, dmap_start, dmap_end, true, true);
@@ -208,8 +211,8 @@ bool Level::cursor_path_draw_line_attempt(Thingp it, point start, point end, int
   auto p         = dmap_solve(&d, start);
   auto path_size = p.size();
   if (! path_size) {
-    pcg_random_allowed--;
-    return false;
+    dbg2("No path");
+    return empty;
   }
 
   //
@@ -217,17 +220,50 @@ bool Level::cursor_path_draw_line_attempt(Thingp it, point start, point end, int
   // want.
   //
   if (p[ path_size - 1 ] != end) {
+    dbg2("Could not reach");
+    return empty;
+  }
+  dbg2("Created attempt %d cursor path len %d", attempt, (int) p.size());
+
+  return p;
+}
+
+bool Level::cursor_path_draw_line(Thingp it, point start, point end)
+{
+  pcg_random_allowed++;
+
+  //
+  // Choose the shortest path of each attempt.
+  //
+  // The first path prefers visited tiles.
+  //
+  auto attempt1 = cursor_path_draw_line_attempt(it, start, end, 1);
+  auto attempt2 = cursor_path_draw_line_attempt(it, start, end, 2);
+
+  std::vector< point > best;
+
+  best = attempt1;
+
+  if (! best.size()) {
+    best = attempt2;
+  } else if (attempt2.size() && (attempt2.size() < best.size())) {
+    best = attempt2;
+  }
+
+  dbg2("Best cursor path len %d", (int) best.size());
+
+  if (! best.size()) {
     pcg_random_allowed--;
     return false;
   }
 
-  game->cursor_move_path = p;
+  game->cursor_move_path = best;
   game->cursor_move_end  = end;
   game->cursor_moved     = true;
 
-  dbg("Created cursor path len %d", (int) p.size());
+  dbg2("Created cursor path len %d", (int) best.size());
 
-  for (auto &c : p) {
+  for (auto &c : best) {
     if (cursor && cursor->is_visible()) {
       if ((c.x == cursor_at.x) && (c.y == cursor_at.y)) {
         continue;
@@ -235,15 +271,9 @@ bool Level::cursor_path_draw_line_attempt(Thingp it, point start, point end, int
     }
     thing_new("cursor_path", point(c.x, c.y));
   }
+
   pcg_random_allowed--;
   return true;
-}
-
-void Level::cursor_path_draw_line(Thingp it, point start, point end)
-{
-  if (! cursor_path_draw_line_attempt(it, start, end, 1)) {
-    cursor_path_draw_line_attempt(it, start, end, 2);
-  }
 }
 
 //
@@ -252,7 +282,7 @@ void Level::cursor_path_draw_line(Thingp it, point start, point end)
 void Level::cursor_path_draw_straight_line(Thingp it, point start, point end)
 {
   pcg_random_allowed++;
-  dbg("Create cursor draw line %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+  dbg2("Create cursor draw line %d,%d to %d,%d", start.x, start.y, end.x, end.y);
   TRACE_AND_INDENT();
 
   //
@@ -263,7 +293,7 @@ void Level::cursor_path_draw_straight_line(Thingp it, point start, point end)
     return;
   }
 
-  dbg("Make straight line cursor path %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+  dbg2("Make straight line cursor path %d,%d to %d,%d", start.x, start.y, end.x, end.y);
 
   for (auto &c : ::line(start, end)) {
     if (cursor && cursor->is_visible()) {
@@ -276,10 +306,10 @@ void Level::cursor_path_draw_straight_line(Thingp it, point start, point end)
   pcg_random_allowed--;
 }
 
-void Level::cursor_path_draw_line(Thingp it, const std::vector< point > &move_path)
+bool Level::cursor_path_draw_line(Thingp it, const std::vector< point > &move_path)
 {
   pcg_random_allowed++;
-  dbg("Create cursor draw path");
+  dbg2("Create cursor draw path");
   TRACE_AND_INDENT();
 
   game->cursor_move_path = move_path;
@@ -295,6 +325,7 @@ void Level::cursor_path_draw_line(Thingp it, const std::vector< point > &move_pa
     thing_new("cursor_path", point(c.x, c.y));
   }
   pcg_random_allowed--;
+  return true;
 }
 
 //
@@ -303,7 +334,7 @@ void Level::cursor_path_draw_line(Thingp it, const std::vector< point > &move_pa
 void Level::cursor_path_draw(Thingp it, point start, point end)
 {
   pcg_random_allowed++;
-  dbg("Create cursor draw %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+  dbg2("Create cursor draw %d,%d to %d,%d", start.x, start.y, end.x, end.y);
   TRACE_AND_INDENT();
 
   if (! player) {
@@ -340,7 +371,7 @@ void Level::cursor_path_draw(Thingp it, point start, point end)
 void Level::cursor_path_draw(Thingp it, const std::vector< point > &move_path)
 {
   pcg_random_allowed++;
-  dbg("Create cursor move path");
+  dbg2("Create cursor move path");
   TRACE_AND_INDENT();
 
   if (! player) {
@@ -363,7 +394,7 @@ void Level::cursor_path_draw(Thingp it, const std::vector< point > &move_path)
 void Level::cursor_path_draw(Thingp it)
 {
   pcg_random_allowed++;
-  dbg("cursor path draw");
+  dbg2("cursor path draw");
   TRACE_AND_INDENT();
 
   if (! player) {
@@ -389,7 +420,7 @@ void Level::cursor_path_draw(Thingp it)
 void Level::cursor_path_create(Thingp it)
 {
   pcg_random_allowed++;
-  dbg("Create cursor draw create");
+  dbg2("Create cursor draw create");
   TRACE_AND_INDENT();
 
   if (! cursor) {
@@ -435,7 +466,7 @@ void Level::cursor_path_create(Thingp it)
 void Level::cursor_path_create(Thingp it, const std::vector< point > &move_path)
 {
   pcg_random_allowed++;
-  dbg("Create cursor path len %d", (int) move_path.size());
+  dbg2("Create cursor path len %d", (int) move_path.size());
   TRACE_AND_INDENT();
 
   cursor_path_clear();
@@ -454,7 +485,7 @@ void Level::cursor_path_create(Thingp it, const std::vector< point > &move_path)
 void Level::cursor_path_clear(void)
 {
   pcg_random_allowed++;
-  dbg("Clear cursor path");
+  dbg2("Clear cursor path");
   TRACE_AND_INDENT();
   // backtrace_dump();
 

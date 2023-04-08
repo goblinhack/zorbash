@@ -692,6 +692,8 @@ public:
   // begin sort marker2 {
   bool buffbox_over(const int slot);
   bool can_see_obstacle(int x, int y);
+  bool cursor_path_draw_line(Thingp, const std::vector< point > &move_path);
+  bool cursor_path_draw_line(Thingp, point start, point end);
   bool can_see_point_or_nearby(point, int dist);
   bool can_see_unimpeded(const point &start, const point &end);
   bool can_see_unimpeded(int x0, int y0, int x1, int y1);
@@ -700,7 +702,6 @@ public:
   bool create_biome_sewer(point3d at, uint32_t seed);
   bool create_biome_sewer_pools(void);
   bool create_wandering_monster(void);
-  bool cursor_path_draw_line_attempt(Thingp, point start, point end, int);
   bool debuffbox_over(const int slot);
   bool inventory_assign(const int slot, Thingp);
   bool inventory_chosen(const int slot);
@@ -966,8 +967,6 @@ public:
   void cursor_path_create(Thingp);
   void cursor_path_create(Thingp, const std::vector< point > &move_path);
   void cursor_path_draw_circle(void);
-  void cursor_path_draw_line(Thingp, const std::vector< point > &move_path);
-  void cursor_path_draw_line(Thingp, point start, point end);
   void cursor_path_draw_straight_line(Thingp, point start, point end);
   void cursor_path_draw(Thingp);
   void cursor_path_draw(Thingp, const std::vector< point > &move_path);
@@ -1311,6 +1310,7 @@ public:
   std::deque< Thingp > flood_fill_things(point, std::function< int(Thingp) > filter);
   std::deque< Thingp > flood_fill_grid_things(point, int distance);
 
+  std::vector< point >  cursor_path_draw_line_attempt(Thingp, point start, point end, int);
   std::vector< Thingp > line(const point s, const point e, size_t max_elems = 0);
   void                  line_set_all_on_fire(const point s, const point e, size_t max_elems, const std::string &why);
 
