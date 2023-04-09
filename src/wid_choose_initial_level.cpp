@@ -549,7 +549,7 @@ static void wid_choose_initial_dungeons_tick(Widp w)
     //
     // For quick start we only create one level
     //
-    if (g_opt_quick_start) {
+    if (g_opt_quickstart) {
       for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
         for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
           Widp b = ctx->buttons[ y ][ x ];
@@ -1017,7 +1017,8 @@ void Game::wid_choose_initial_dungeons(void)
   newptr(MTYPE_WID, ctx, "wid level grid ctx");
   g_ctx = ctx;
 
-  ctx->nodes            = new Nodes(DUNGEONS_GRID_CHUNK_WIDTH, DUNGEONS_GRID_CHUNK_WIDTH, false /* not a dungeon */);
+  ctx->nodes =
+      new Nodes(BIOME_UNKNOWN, DUNGEONS_GRID_CHUNK_WIDTH, DUNGEONS_GRID_CHUNK_WIDTH, false /* not a dungeon */);
   ctx->focusx           = -1;
   ctx->focusy           = -1;
   ctx->generated        = false;
@@ -1678,7 +1679,7 @@ void Game::wid_choose_initial_dungeons(void)
     }
   }
 
-  if (! g_opt_quick_start) {
+  if (! g_opt_quickstart) {
     wid_choose_initial_dungeons_update_buttons(window);
     wid_update(window);
     wid_raise(window);

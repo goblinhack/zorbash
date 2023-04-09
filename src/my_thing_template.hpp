@@ -3173,31 +3173,6 @@ enum {
   THING_DIR_BR,
 };
 
-using biome_t = enum biome_type {
-  BIOME_UNKNOWN,
-  BIOME_DUNGEON,
-  BIOME_SWAMP,
-  BIOME_SEWER,
-  BIOME_MAX,
-};
-
-using monst_class_t = enum monst_class {
-  MONST_CLASS_ANY,
-  MONST_CLASS_A,
-  MONST_CLASS_B,
-  MONST_CLASS_C,
-  MONST_CLASS_D,
-  MONST_CLASS_E,
-  MONST_CLASS_MAX,
-};
-
-using monst_type_t = enum monst_type {
-  MONST_TYPE_NORMAL,
-  MONST_TYPE_SHALLOW_WATER,
-  MONST_TYPE_DEEP_WATER,
-  MONST_TYPE_MAX,
-};
-
 extern Tpidmap   tp_id_map;
 extern Tpnamemap tp_name_map;
 

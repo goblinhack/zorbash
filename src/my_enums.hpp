@@ -55,4 +55,29 @@ enum {
   MAP_TICK_PRIO,
 };
 
+using biome_t = enum biome_type {
+  BIOME_UNKNOWN,
+  BIOME_DUNGEON,
+  BIOME_SWAMP,
+  BIOME_SEWER,
+  BIOME_MAX,
+};
+
+using monst_class_t = enum monst_class {
+  MONST_CLASS_ANY,
+  MONST_CLASS_A,
+  MONST_CLASS_B,
+  MONST_CLASS_C,
+  MONST_CLASS_D,
+  MONST_CLASS_E,
+  MONST_CLASS_MAX,
+};
+
+using monst_environ_t = enum monst_type {
+  MONST_ENVIRON_NORMAL,
+  MONST_ENVIRON_SHALLOW_WATER,
+  MONST_ENVIRON_DEEP_WATER,
+  MONST_ENVIRON_MAX,
+};
+
 #endif

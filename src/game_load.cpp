@@ -892,7 +892,7 @@ std::istream &operator>>(std::istream &in, Bits< class World & > my)
           }
 
           LOG("INF: Loading level %d,%d,%d", p.x, p.y, p.z);
-          auto l = new Level();
+          auto l = new Level(BIOME_UNKNOWN);
           set(my.t.levels, x, y, z, l);
           in >> bits(l);
           if (! game_load_error.empty()) {

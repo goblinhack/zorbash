@@ -7,7 +7,7 @@
 #define _MY_ROOM_HPP_
 
 #include "my_charmap.hpp"
-#include "my_depth.hpp"
+#include "my_enums.hpp"
 #include "my_fwd.hpp"
 #include "my_game_defs.hpp"
 #include "my_main.hpp"
@@ -21,7 +21,7 @@ private:
 public:
   static Rooms all_rooms;
 
-  Room(void);
+  Room(biome_t);
   ~Room(void);
 
   //
@@ -30,6 +30,7 @@ public:
   uint32_t roomno {0};
   uint8_t  width {MAP_ROOM_WIDTH};
   uint8_t  height {MAP_ROOM_HEIGHT};
+  biome_t  biome;
 
   std::array< std::array< std::array< char, MAP_DEPTH >, MAP_ROOM_HEIGHT >, MAP_ROOM_WIDTH > data {};
 
@@ -115,7 +116,7 @@ public:
   point at {};
   point rollback_at {};
 
-  static Roomp room_new(void);
+  static Roomp room_new(biome_t);
 
   Roomp create_w_flip(void);
   Roomp rotate_clockwise(void);

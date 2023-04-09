@@ -6,8 +6,8 @@
 
 #include <array>
 
-#include "my_depth.hpp"
 #include "my_dungeon_grid.hpp"
+#include "my_enums.hpp"
 #include "my_game_defs.hpp"
 
 #define STRINGIFY(x) #x
@@ -56,6 +56,10 @@ public:
   //
   uint32_t seed;
   //
+  // Which biome
+  //
+  biome_t biome;
+  //
   // Room pointers on the above nodes map
   //
   Grid grid {};
@@ -64,8 +68,8 @@ public:
   //
   std::vector< Roomp > all_placed_rooms;
 
-  Dungeon(int map_width, int map_height, int grid_width, int grid_height, uint32_t seed);
-  Dungeon(int level);
+  Dungeon(biome_t, int map_width, int map_height, int grid_width, int grid_height, uint32_t seed);
+  Dungeon(biome_t, int level);
   ~Dungeon();
 
   Roomp *cell_rooms_addr(const int x, const int y);

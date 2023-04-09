@@ -10,6 +10,7 @@
 #include <list>
 
 #include "my_dmap.hpp"
+#include "my_enums.hpp"
 #include "my_fcolor.hpp"
 #include "my_fwd.hpp"
 #include "my_laser.hpp"
@@ -176,7 +177,7 @@ public:
   //
   // Chances for various things to appear
   //
-  std::array< std::array< int, MONST_CLASS_MAX >, MONST_TYPE_MAX > d1000_chance_of_creating_monst {};
+  std::array< std::array< int, MONST_CLASS_MAX >, MONST_ENVIRON_MAX > d1000_chance_of_creating_monst {};
 
   //
   // Set to -1 to mean no chance
@@ -396,7 +397,7 @@ public:
   // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
   /////////////////////////////////////////////////////////////////////////
 
-  Level(void);
+  Level(biome_t);
   ~Level(void);
 
   void remove_thing(int x, int y, ThingId id);
@@ -685,9 +686,11 @@ public:
   Tpp tp_random_weapon_class_C(const point p);
   Tpp tp_random_weapon_class_B(const point p);
 
-  Tpp get_dungeon_biome_random_monst(Dungeonp d, point p, biome_t, monst_type_t);
-  Tpp get_sewer_biome_random_monst(point p, biome_t, monst_type_t);
-  Tpp get_random_monst(point p, biome_t, monst_type_t, monst_class_t, int difficulty_offset = 0);
+  Tpp get_biome_dungeon_random_monst(Dungeonp d, point p, monst_environ_t);
+  Tpp get_biome_swamp_random_monst(Dungeonp d, point p, monst_environ_t);
+  Tpp get_biome_sewer_random_monst(point p, monst_environ_t);
+  Tpp get_random_monst(point p, monst_environ_t, monst_class_t, int difficulty_offset);
+  Tpp get_random_monst(point p, monst_environ_t, int difficulty_offset);
 
   // begin sort marker2 {
   bool buffbox_over(const int slot);
@@ -699,6 +702,7 @@ public:
   bool create_biome_sewer_pipes(point3d at);
   bool create_biome_sewer(point3d at, uint32_t seed);
   bool create_biome_sewer_pools(void);
+  bool create_biome_swamp(point3d at, uint32_t seed);
   bool create_wandering_monster(void);
   bool cursor_path_draw_line(Thingp, const std::vector< point > &move_path);
   bool cursor_path_draw_line(Thingp, point start, point end);
@@ -946,7 +950,6 @@ public:
   void create_biome_dungeon_place_floors(Dungeonp d, const std::string, int depth, int var, int w, int h, int tries);
   void create_biome_dungeon_place_lava(Dungeonp d, const std::string &what);
   void create_biome_dungeon_place_lava_smoke(Dungeonp d);
-  void create_biome_dungeon_place_objects_with_normal_placement_rules(Dungeonp d);
   void create_biome_dungeon_place_place_shallow_water(Dungeonp d, const std::string &what);
   void create_biome_dungeon_place_random_floor_deco(Dungeonp d);
   void create_biome_dungeon_place_random_red_blood(Dungeonp d);
@@ -958,6 +961,12 @@ public:
   void create_biome_dungeon_place_walls(Dungeonp d, Tpp tp, int, int block_width, int block_height, int tries);
   void create_biome_sewer_place_remaining_walls(const std::string &what);
   void create_biome_sewer_place_walls(int variant, int block_width, int block_height, int tries);
+  void create_biome_swamp_place_deep_water(Dungeonp d, const std::string &what);
+  void create_biome_swamp_place_floors(Dungeonp d, const std::string, int depth, int var, int w, int h, int tries);
+  void create_biome_swamp_place_place_shallow_water(Dungeonp d, const std::string &what);
+  void create_biome_swamp_place_remaining_floor(Dungeonp d, const std::string &what);
+  void create_biome_swamp_place_remaining_rocks(Dungeonp d, const std::string &what);
+  void create_biome_swamp_place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries);
   void created(void);
   void create(point3d world_at, point grid_at, uint32_t seed, int difficulty_depth, int dungeon_walk_order_level_no);
   void cursor_describe(void);
@@ -1236,6 +1245,7 @@ public:
   void place_dry_grass(Dungeonp d);
   void place_floor_deco(Dungeonp d);
   void place_foliage(Dungeonp d);
+  void place_objects_with_normal_placement_rules(Dungeonp d);
   void place_portals(Dungeonp d);
   void place_random_torches(Dungeonp d);
   void place_random_treasure(Dungeonp d);

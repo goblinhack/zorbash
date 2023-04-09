@@ -64,15 +64,15 @@ bool Level::create_wandering_monster(void)
     //
     auto roll = d1000() + difficulty_depth * 10;
     if (roll < 950) {
-      tp = get_random_monst(p, biome, MONST_TYPE_NORMAL, MONST_CLASS_A);
+      tp = get_random_monst(p, MONST_ENVIRON_NORMAL, MONST_CLASS_A);
     } else if (roll < 980) {
-      tp = get_random_monst(p, biome, MONST_TYPE_NORMAL, MONST_CLASS_B);
+      tp = get_random_monst(p, MONST_ENVIRON_NORMAL, MONST_CLASS_B);
     } else if (roll < 990) {
-      tp = get_random_monst(p, biome, MONST_TYPE_NORMAL, MONST_CLASS_C);
+      tp = get_random_monst(p, MONST_ENVIRON_NORMAL, MONST_CLASS_C);
     } else if (roll < 995) {
-      tp = get_random_monst(p, biome, MONST_TYPE_NORMAL, MONST_CLASS_D);
+      tp = get_random_monst(p, MONST_ENVIRON_NORMAL, MONST_CLASS_D);
     } else {
-      tp = get_random_monst(p, biome, MONST_TYPE_NORMAL, MONST_CLASS_E);
+      tp = get_random_monst(p, MONST_ENVIRON_NORMAL, MONST_CLASS_E);
     }
 
     if (tp) {

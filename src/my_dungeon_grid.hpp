@@ -6,6 +6,7 @@
 //
 // Implements layered cycles that can be used to then create a dungeon
 //
+#include "my_enums.hpp"
 #include "my_fwd.hpp"
 #include "my_point.hpp"
 #include "my_random.hpp"
@@ -13,6 +14,8 @@
 class DungeonNode
 {
 public:
+  biome_t biome {BIOME_UNKNOWN};
+
   //
   // Nodes have a depth number, optional key, start and exit and corridors
   // to adjoining depths. Depth increases as we get closer to the exit.
@@ -106,6 +109,8 @@ class Nodes
 public:
   std::vector< DungeonNode > nodes;
 
+  biome_t biome {BIOME_UNKNOWN};
+
   //
   // We build either a single or all dungeons
   //
@@ -122,17 +127,17 @@ public:
   //
   int depth_obstacle {-1};
 
-  Nodes(int grid_width, int grid_height, bool is_dungeon)
+  Nodes(biome_t, int grid_width, int grid_height, bool is_dungeon)
       : grid_width(grid_width), grid_height(grid_height), is_dungeon(is_dungeon)
   {
     pcg_random_allowed++;
-    finish_constructor();
+    finish_constructor(biome);
     pcg_random_allowed--;
   }
 
-  Nodes() { finish_constructor(); }
+  Nodes(biome_t) { finish_constructor(biome); }
 
-  void         finish_constructor(void);
+  void         finish_constructor(biome_t);
   void         debug(std::string msg);
   void         dump(void);
   void         log(void);

@@ -25,10 +25,39 @@ Levelp World::new_level_at(point3d world_at, point grid_at, uint32_t seed, int d
                            int dungeon_walk_order_level_no)
 {
   TRACE_AND_INDENT();
+
+  //
+  // Choose the biome for the level
+  //
+  auto biome = BIOME_DUNGEON;
+  switch (difficulty_depth) {
+    case 0:
+    case 1:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    default:
+      if (world_at.z & 1) {
+        biome = BIOME_DUNGEON;
+      } else {
+        biome = BIOME_SEWER;
+      }
+      break;
+    case 2:
+    case 3: biome = BIOME_SWAMP; break;
+  }
+
+  //
+  // If the old level exists, remove it
+  //
   auto old_level = get(levels, world_at.x, world_at.y, world_at.z);
   delete old_level;
 
-  auto new_level = new Level();
+  //
+  // Create the new level
+  //
+  auto new_level = new Level(biome);
   set(levels, world_at.x, world_at.y, world_at.z, new_level);
   new_level->create(world_at, grid_at, seed, difficulty_depth, dungeon_walk_order_level_no);
 

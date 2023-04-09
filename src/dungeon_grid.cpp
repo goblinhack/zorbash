@@ -115,9 +115,11 @@ static bool debug_enabled = false;
  *      2-2-* E
  */
 
-void Nodes::finish_constructor(void)
+void Nodes::finish_constructor(biome_t biome)
 {
 redo:
+  this->biome = biome;
+
   init_nodes();
 
   //
@@ -737,6 +739,7 @@ void Nodes::init_nodes(void)
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
       auto n                = getn(x, y);
+      n->biome              = biome;
       n->depth              = 0;
       n->pass               = 0;
       n->x                  = x;
@@ -2183,7 +2186,7 @@ class Nodes *grid_test(void)
 {
   auto x = 1000;
   while (x--) {
-    /* auto d = */ new Nodes(MAX_GRID_CHUNK_WIDTH, MAX_GRID_CHUNK_HEIGHT, true);
+    /* auto d = */ new Nodes(BIOME_DUNGEON, MAX_GRID_CHUNK_WIDTH, MAX_GRID_CHUNK_HEIGHT, true);
 
     continue;
     //        return d;

@@ -104,7 +104,7 @@ void Level::place_swimming_monsters(void)
     auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK + 1);
 
     if (is_shallow_water(x, y)) {
-      auto tp = get_sewer_biome_random_monst(point(x, y), biome, MONST_TYPE_SHALLOW_WATER);
+      auto tp = get_biome_sewer_random_monst(point(x, y), MONST_ENVIRON_SHALLOW_WATER);
       if (unlikely(! tp)) {
         continue;
       }
@@ -124,7 +124,7 @@ void Level::place_swimming_monsters(void)
     }
 
     if (is_deep_water(x, y)) {
-      auto tp = get_sewer_biome_random_monst(point(x, y), biome, MONST_TYPE_DEEP_WATER);
+      auto tp = get_biome_sewer_random_monst(point(x, y), MONST_ENVIRON_DEEP_WATER);
       if (unlikely(! tp)) {
         continue;
       }

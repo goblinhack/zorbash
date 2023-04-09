@@ -54,8 +54,13 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   int rooms_across = room_data_elems / MAP_ROOM_HEIGHT;
 
+  biome_t biome = BIOME_DUNGEON;
+  if (biome_swamp) {
+    biome = BIOME_SWAMP;
+  }
+
   for (auto n = 0; n < rooms_across; n++) {
-    auto r = Room::room_new();
+    auto r = Room::room_new(biome);
 
     for (auto y = 0; y < MAP_ROOM_HEIGHT; y++) {
       auto o = PyList_GetItem(py_room_data, rooms_across * y + n); /* Can't fail */

@@ -476,6 +476,7 @@ static void usage(void)
   CON(" --mini                      -- Use small map.");
   CON(" --ascii                     -- Enable ascii graphics.");
   CON(" --pixelart                  -- Enable pixelart graphics.");
+  CON(" --swamp                     -- Test swamp biome");
   CON(" ");
   CON(" --player-name 'disco bob'   -- Set your name.");
   CON(" --seed <name/number>        -- Set the random dungeon seed.");
@@ -522,9 +523,14 @@ static void parse_args(int argc, char *argv[])
       continue;
     }
 
+    if (! strcasecmp(argv[ i ], "--biome_swamp") || ! strcasecmp(argv[ i ], "-biome_swamp")) {
+      g_opt_biome_swamp = true;
+      continue;
+    }
+
     if (! strcasecmp(argv[ i ], "--quick-start") || ! strcasecmp(argv[ i ], "-quick-start") ||
         ! strcasecmp(argv[ i ], "--quickstart") || ! strcasecmp(argv[ i ], "-quickstart")) {
-      g_opt_quick_start = true;
+      g_opt_quickstart = true;
       g_opt_new_game    = true;
       continue;
     }

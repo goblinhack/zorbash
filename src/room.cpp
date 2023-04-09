@@ -11,8 +11,9 @@
 
 std::vector< Roomp > Room::all_rooms;
 
-Room::Room(void)
+Room::Room(biome_t biome)
 {
+  this->biome  = biome;
   this->roomno = all_rooms.size();
   newptr(MTYPE_ROOM, this, "room");
 }
@@ -29,10 +30,10 @@ void room_fini(void)
   }
 }
 
-Roomp Room::room_new(void)
+Roomp Room::room_new(biome_t biome)
 {
   TRACE_AND_INDENT();
-  auto r = new Room();
+  auto r = new Room(biome);
   Room::all_rooms.push_back(r);
   return r;
 }
@@ -42,7 +43,7 @@ Roomp Room::create_w_flip(void)
   TRACE_AND_INDENT();
   std::vector< std::string > rot[ MAP_DEPTH ];
 
-  auto r = Room::room_new();
+  auto r = Room::room_new(biome);
 
   /*
    * Flip the room chars
@@ -99,7 +100,7 @@ Roomp Room::rotate_clockwise(void)
   TRACE_AND_INDENT();
   std::vector< std::string > rot[ MAP_DEPTH ];
 
-  auto r = Room::room_new();
+  auto r = Room::room_new(biome);
 
   /*
    * Rotate the room chars

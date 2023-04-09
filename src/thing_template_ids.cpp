@@ -347,6 +347,7 @@ std::initializer_list< std::string > tps = {
     "roastchicken",
     "rock",
     "rock1",
+    "rock2",
     "salami",
     "salmon",
     "sardines",

@@ -5,10 +5,11 @@
 #include "my_game.hpp"
 #include "my_ptrcheck.hpp"
 
-Level::Level(void)
+Level::Level(biome_t biome)
 {
   TRACE_NO_INDENT();
   newptr(MTYPE_LEVEL, this, "level");
+  this->biome = biome;
 }
 
 void Level::clear(void)

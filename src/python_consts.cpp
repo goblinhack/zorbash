@@ -5,7 +5,7 @@
 #include "my_py_level.hpp"
 
 #include "my_ascii.hpp"
-#include "my_depth.hpp"
+#include "my_enums.hpp"
 #include "my_monst.hpp"
 #include "my_py_sdl.hpp"
 #include "my_sound.hpp"

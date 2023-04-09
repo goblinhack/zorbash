@@ -331,10 +331,11 @@ void Dungeon::debug(const std::string s)
 //
 // Make a dungeon from rooms
 //
-Dungeon::Dungeon(int map_width, int map_height, int grid_width, int grid_height, uint32_t seed)
+Dungeon::Dungeon(biome_t biome, int map_width, int map_height, int grid_width, int grid_height, uint32_t seed)
     : map_width(map_width), map_height(map_height), grid_width(grid_width), grid_height(grid_height), seed(seed)
 {
   TRACE_NO_INDENT();
+  this->biome = biome;
   make_dungeon();
 }
 
@@ -343,14 +344,16 @@ Dungeon::~Dungeon() { delete nodes; }
 //
 // Make a dungeon from a single level
 //
-Dungeon::Dungeon(int level)
+Dungeon::Dungeon(biome_t biome, int level)
 {
   TRACE_NO_INDENT();
   if (level >= (int) LevelStatic::all_static_levels.size()) {
     ERR("Out of range level %d", level);
     return;
   }
-  auto l = get(LevelStatic::all_static_levels, level);
+
+  this->biome = biome;
+  auto l      = get(LevelStatic::all_static_levels, level);
 
   cells.resize(l->width * l->height * MAP_DEPTH, Charmap::SPACE);
   std::fill(cells.begin(), cells.end(), Charmap::SPACE);
@@ -1526,7 +1529,7 @@ void Dungeon::create_node_map(void)
     ERR("Nodes height overflow. got %d, max %d", grid_height, DUNGEON_GRID_CHUNK_HEIGHT);
   }
 
-  nodes = new Nodes(grid_width, grid_height, true);
+  nodes = new Nodes(biome, grid_width, grid_height, true);
 }
 
 void Dungeon::dump(void)
@@ -1820,6 +1823,10 @@ bool Dungeon::rooms_print_all_with_jiggle(Grid *g)
 
 bool Dungeon::room_is_a_candidate(int x, int y, const DungeonNode *n, Roomp r)
 {
+  if (n->biome != r->biome) {
+    return false;
+  }
+
   for (auto x = 0; x < nodes->grid_width; x++) {
     for (auto y = 0; y < nodes->grid_height; y++) {
       auto o = get(grid.node_rooms, x, y);
@@ -4590,7 +4597,12 @@ Dungeonp dungeon_test(void)
     // smaller node numbers mean larger rooms
     //
     CON("Test dungeon: %d", x);
-    new Dungeon(MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT, x);
+
+    if (g_opt_biome_swamp) {
+      new Dungeon(BIOME_SWAMP, MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT, x);
+    } else {
+      new Dungeon(BIOME_DUNGEON, MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT, x);
+    }
   }
 
   return nullptr;

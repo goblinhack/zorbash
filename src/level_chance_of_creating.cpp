@@ -16,7 +16,7 @@ void Level::chances_of_creating_set(void)
   switch (difficulty_depth) {
     default: DIE("Unexpected difficulty depth %d", difficulty_depth);
     case 1:
-      for (auto monst_type = (int) MONST_TYPE_NORMAL; monst_type < MONST_TYPE_MAX; monst_type++) {
+      for (auto monst_type = (int) MONST_ENVIRON_NORMAL; monst_type < MONST_ENVIRON_MAX; monst_type++) {
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_A ] = 1000;
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_B ] = 10;
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_C ] = 10;
@@ -33,7 +33,7 @@ void Level::chances_of_creating_set(void)
       d1000_chance_of_creating_weapon_class_C        = 10;
       break;
     case 2:
-      for (auto monst_type = (int) MONST_TYPE_NORMAL; monst_type < MONST_TYPE_MAX; monst_type++) {
+      for (auto monst_type = (int) MONST_ENVIRON_NORMAL; monst_type < MONST_ENVIRON_MAX; monst_type++) {
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_A ] = 1000;
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_B ] = 100;
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_C ] = 10;
@@ -50,7 +50,7 @@ void Level::chances_of_creating_set(void)
       d1000_chance_of_creating_weapon_class_C        = 100;
       break;
     case 3:
-      for (auto monst_type = (int) MONST_TYPE_NORMAL; monst_type < MONST_TYPE_MAX; monst_type++) {
+      for (auto monst_type = (int) MONST_ENVIRON_NORMAL; monst_type < MONST_ENVIRON_MAX; monst_type++) {
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_A ] = 1000;
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_B ] = 500;
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_C ] = 100;
@@ -67,7 +67,7 @@ void Level::chances_of_creating_set(void)
       d1000_chance_of_creating_weapon_class_C        = 200;
       break;
     case 4:
-      for (auto monst_type = (int) MONST_TYPE_NORMAL; monst_type < MONST_TYPE_MAX; monst_type++) {
+      for (auto monst_type = (int) MONST_ENVIRON_NORMAL; monst_type < MONST_ENVIRON_MAX; monst_type++) {
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_A ] = 200;
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_B ] = 500;
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_C ] = 500;
@@ -84,7 +84,7 @@ void Level::chances_of_creating_set(void)
       d1000_chance_of_creating_weapon_class_C        = 500;
       break;
     case 5:
-      for (auto monst_type = (int) MONST_TYPE_NORMAL; monst_type < MONST_TYPE_MAX; monst_type++) {
+      for (auto monst_type = (int) MONST_ENVIRON_NORMAL; monst_type < MONST_ENVIRON_MAX; monst_type++) {
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_A ] = 100;
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_B ] = 500;
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_C ] = 500;
@@ -101,7 +101,7 @@ void Level::chances_of_creating_set(void)
       d1000_chance_of_creating_weapon_class_C        = 500;
       break;
     case 6:
-      for (auto monst_type = (int) MONST_TYPE_NORMAL; monst_type < MONST_TYPE_MAX; monst_type++) {
+      for (auto monst_type = (int) MONST_ENVIRON_NORMAL; monst_type < MONST_ENVIRON_MAX; monst_type++) {
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_A ] = 10;
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_B ] = 10;
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_C ] = 500;
@@ -118,7 +118,7 @@ void Level::chances_of_creating_set(void)
       d1000_chance_of_creating_weapon_class_C        = 1000;
       break;
     case 7:
-      for (auto monst_type = (int) MONST_TYPE_NORMAL; monst_type < MONST_TYPE_MAX; monst_type++) {
+      for (auto monst_type = (int) MONST_ENVIRON_NORMAL; monst_type < MONST_ENVIRON_MAX; monst_type++) {
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_A ] = 10;
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_B ] = 10;
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_C ] = 100;
@@ -135,7 +135,7 @@ void Level::chances_of_creating_set(void)
       d1000_chance_of_creating_weapon_class_C        = 1000;
       break;
     case 8:
-      for (auto monst_type = (int) MONST_TYPE_NORMAL; monst_type < MONST_TYPE_MAX; monst_type++) {
+      for (auto monst_type = (int) MONST_ENVIRON_NORMAL; monst_type < MONST_ENVIRON_MAX; monst_type++) {
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_A ] = 10;
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_B ] = 10;
         d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_C ] = 10;
@@ -153,7 +153,7 @@ void Level::chances_of_creating_set(void)
       break;
   }
 
-  for (auto monst_type = (int) MONST_TYPE_NORMAL; monst_type < MONST_TYPE_MAX; monst_type++) {
+  for (auto monst_type = (int) MONST_ENVIRON_NORMAL; monst_type < MONST_ENVIRON_MAX; monst_type++) {
     for (auto monst_class = (int) MONST_CLASS_A; monst_class < MONST_CLASS_MAX; monst_class++) {
       if (d1000_chance_of_creating_monst[ monst_type ][ monst_class ] > 1000) {
         d1000_chance_of_creating_monst[ monst_type ][ monst_class ] = 1000;
@@ -211,7 +211,7 @@ void Level::chances_of_creating_set(void)
   }
 
   dbg("Chance of creating at difficulty depth %d:", difficulty_depth);
-  auto monst_type = MONST_TYPE_NORMAL;
+  auto monst_type = MONST_ENVIRON_NORMAL;
   dbg("- d1000 monst_class_A         %u", d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_A ]);
   dbg("- d1000 monst_class_B         %u", d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_B ]);
   dbg("- d1000 monst_class_C         %u", d1000_chance_of_creating_monst[ monst_type ][ MONST_CLASS_C ]);
