@@ -523,7 +523,7 @@ static void parse_args(int argc, char *argv[])
       continue;
     }
 
-    if (! strcasecmp(argv[ i ], "--biome_swamp") || ! strcasecmp(argv[ i ], "-biome_swamp")) {
+    if (! strcasecmp(argv[ i ], "--swamp") || ! strcasecmp(argv[ i ], "-swamp")) {
       g_opt_biome_swamp = true;
       continue;
     }
@@ -531,7 +531,7 @@ static void parse_args(int argc, char *argv[])
     if (! strcasecmp(argv[ i ], "--quick-start") || ! strcasecmp(argv[ i ], "-quick-start") ||
         ! strcasecmp(argv[ i ], "--quickstart") || ! strcasecmp(argv[ i ], "-quickstart")) {
       g_opt_quickstart = true;
-      g_opt_new_game    = true;
+      g_opt_new_game   = true;
       continue;
     }
 

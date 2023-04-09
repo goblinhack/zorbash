@@ -319,33 +319,6 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
   }
 }
 
-void Level::place_foliage(Dungeonp d)
-{
-  TRACE_AND_INDENT();
-  for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
-    for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-      if (! d->is_foliage(x, y)) {
-        continue;
-      }
-      if (is_rock(x, y) || is_wall(x, y)) {
-        continue;
-      }
-      if (heatmap(x, y)) {
-        continue;
-      }
-      if (is_water(x, y)) {
-        continue;
-      }
-      auto tp = tp_random_foliage();
-      if (unlikely(! tp)) {
-        return;
-      }
-
-      (void) thing_new(tp->name(), point(x, y));
-    }
-  }
-}
-
 void Level::place_spiderweb(Dungeonp d)
 {
   TRACE_AND_INDENT();

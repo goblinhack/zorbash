@@ -155,6 +155,16 @@ void Thing::blit_ascii_adjust_color_hue(color &c, bool fg)
 void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
 {
   //
+  // Green tint for the swamp
+  //
+  if ((level->biome == BIOME_SEWER) || (level->biome == BIOME_SWAMP)) {
+    if (is_water()) {
+      c.b = 0;
+      c.r = 0;
+    }
+  }
+
+  //
   // Don't adjust hues if we cannot see it. This helps make the visible area
   // look a lot brighter in comparison to the unlit areas.
   //

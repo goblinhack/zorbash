@@ -249,6 +249,17 @@ void Dungeon::make_dungeon(void)
             5,    // R2
             4 /* generations */);
 
+  if (biome == BIOME_SWAMP) {
+    water_gen(2000, // fill prob
+              10,   // R1
+              5,    // R2
+              4 /* generations */);
+    foliage_gen(2000, // fill prob
+                10,   // R1
+                5,    // R2
+                4 /* generations */);
+  }
+
   DBG2("INF: Generate caves");
   cave_gen(2000, // fill prob
            10,   // R1
@@ -281,18 +292,36 @@ void Dungeon::make_dungeon(void)
                 10,   // R1
                 5,    // R2
                 1 /* generations */);
+  if (biome == BIOME_SWAMP) {
+    dry_grass_gen(1500, // fill prob
+                  10,   // R1
+                  5,    // R2
+                  1 /* generations */);
+  }
 
   DBG2("INF: Generate wet grass");
   wet_grass_gen(1000, // fill prob
                 10,   // R1
                 5,    // R2
                 1 /* generations */);
+  if (biome == BIOME_SWAMP) {
+    wet_grass_gen(5000, // fill prob
+                  10,   // R1
+                  5,    // R2
+                  1 /* generations */);
+  }
 
   DBG2("INF: Generate foliage");
-  foliage_gen(10, // fill prob
-              10, // R1
-              5,  // R2
-              4 /* generations */);
+  if (0) {
+    foliage_gen(10, // fill prob
+                10, // R1
+                5,  // R2
+                4 /* generations */);
+  }
+
+  if (biome == BIOME_SWAMP) {
+    add_foliage_around_water();
+  }
 
   dump();
 }
@@ -4514,30 +4543,37 @@ void Dungeon::foliage_gen(unsigned int map_fill_prob, int map_r1, int map_r2, in
   for (x = 2; x < maze_w - 2; x++) {
     for (y = 2; y < maze_h - 2; y++) {
       if (get(map_curr, x, y)) {
-        if (is_wall(x, y) || is_rock(x, y) || is_chasm(x, y)) {
-          continue;
-        }
+        putchar('X');
+        if (biome == BIOME_DUNGEON) {
+          if (is_wall(x, y) || is_rock(x, y) || is_chasm(x, y)) {
+            continue;
+          }
 
-        for (auto dx = -1; dx <= 1; dx++) {
-          for (auto dy = -1; dy <= 1; dy++) {
-            if (is_lava(x + dx, y + dy)) {
-              goto next;
-            }
-            if (is_brazier(x + dx, y + dy)) {
-              goto next;
-            }
-            if (is_deep_water(x + dx, y + dy)) {
-              goto next;
+          for (auto dx = -1; dx <= 1; dx++) {
+            for (auto dy = -1; dy <= 1; dy++) {
+              if (is_lava(x + dx, y + dy)) {
+                goto next;
+              }
+              if (is_brazier(x + dx, y + dy)) {
+                goto next;
+              }
+              if (is_deep_water(x + dx, y + dy)) {
+                goto next;
+              }
             }
           }
         }
 
         putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOLIAGE);
+      } else {
+        putchar(' ');
       }
     next:
       continue;
     }
+    putchar('\n');
   }
+  printf("-\n");
 }
 
 void Dungeon::water_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations)

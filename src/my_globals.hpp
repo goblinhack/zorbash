@@ -26,7 +26,7 @@ extern bool g_opt_ascii_override;       // Ascii mode forced
 extern bool g_opt_new_game;             // Start in the dungeon menu
 extern bool g_opt_no_slow_log_flush;    // Do not flush after each console log at start
 extern bool g_opt_override_debug_level; // Temporary, used to disable existing debugs
-extern bool g_opt_quickstart;          // Start in the game imediately
+extern bool g_opt_quickstart;           // Start in the game imediately
 extern bool g_opt_resume;               // Load last snapshot
 extern bool g_opt_test;                 // Enable tests.
 extern bool g_quitting;                 // Exitting the game

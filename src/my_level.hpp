@@ -961,11 +961,10 @@ public:
   void create_biome_dungeon_place_walls(Dungeonp d, Tpp tp, int, int block_width, int block_height, int tries);
   void create_biome_sewer_place_remaining_walls(const std::string &what);
   void create_biome_sewer_place_walls(int variant, int block_width, int block_height, int tries);
+  void create_biome_swamp_place_dirt(Dungeonp d);
   void create_biome_swamp_place_deep_water(Dungeonp d, const std::string &what);
-  void create_biome_swamp_place_floors(Dungeonp d, const std::string, int depth, int var, int w, int h, int tries);
   void create_biome_swamp_place_place_shallow_water(Dungeonp d, const std::string &what);
-  void create_biome_swamp_place_remaining_floor(Dungeonp d, const std::string &what);
-  void create_biome_swamp_place_remaining_rocks(Dungeonp d, const std::string &what);
+  void create_biome_swamp_place_remaining_rocks(Dungeonp d);
   void create_biome_swamp_place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries);
   void created(void);
   void create(point3d world_at, point grid_at, uint32_t seed, int difficulty_depth, int dungeon_walk_order_level_no);
@@ -1244,7 +1243,8 @@ public:
   void place_dirt(Dungeonp d);
   void place_dry_grass(Dungeonp d);
   void place_floor_deco(Dungeonp d);
-  void place_foliage(Dungeonp d);
+  void create_biome_dungeon_place_foliage(Dungeonp d);
+  void create_biome_swamp_place_foliage(Dungeonp d);
   void place_objects_with_normal_placement_rules(Dungeonp d);
   void place_portals(Dungeonp d);
   void place_random_torches(Dungeonp d);

@@ -709,7 +709,7 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
     {
       uint32_t start = time_ms();
       dbg2("INF: Place foliage");
-      place_foliage(dungeon);
+      create_biome_dungeon_place_foliage(dungeon);
       if (g_errored) {
         return false;
       }
@@ -1582,6 +1582,33 @@ void Level::create_biome_dungeon_place_remaining_rocks(Dungeonp d, const std::st
       // Need this so we can display chasms under walls
       //
       (void) thing_new("wall_floor1", point(x, y));
+    }
+  }
+}
+
+void Level::create_biome_dungeon_place_foliage(Dungeonp d)
+{
+  TRACE_AND_INDENT();
+  for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
+    for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
+      if (! d->is_foliage(x, y)) {
+        continue;
+      }
+      if (is_rock(x, y) || is_wall(x, y)) {
+        continue;
+      }
+      if (heatmap(x, y)) {
+        continue;
+      }
+      if (is_water(x, y)) {
+        continue;
+      }
+      auto tp = tp_random_foliage();
+      if (unlikely(! tp)) {
+        return;
+      }
+
+      (void) thing_new(tp->name(), point(x, y));
     }
   }
 }

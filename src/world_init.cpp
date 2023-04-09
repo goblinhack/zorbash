@@ -48,6 +48,10 @@ Levelp World::new_level_at(point3d world_at, point grid_at, uint32_t seed, int d
     case 3: biome = BIOME_SWAMP; break;
   }
 
+  if (g_opt_biome_swamp) {
+    biome = BIOME_SWAMP;
+  }
+
   //
   // If the old level exists, remove it
   //

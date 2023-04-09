@@ -38,6 +38,10 @@ void Level::display_pixelart_water(int fbo, int16_t minx, int16_t miny, int16_t 
     water_type = 1;
   }
 
+  if (biome == BIOME_SWAMP) {
+    water_type = 1;
+  }
+
   if (! water[ 0 ][ 0 ][ 0 ]) {
     set(water[ 0 ], 0, 0, tile_find("water1a"));
     set(water[ 0 ], 1, 0, tile_find("water2a"));
