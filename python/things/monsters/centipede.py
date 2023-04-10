@@ -146,22 +146,22 @@ def tp_init(name, text_long_name):
 
     delay = 200
     my.tile(self,
-            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="blue",
+            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="cyan",
             tile="centipede.1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="blue",
+            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="cyan",
             tile="centipede.2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="blue",
+            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="cyan",
             tile="centipede.3", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="blue",
+            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="cyan",
             tile="centipede.4", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="blue",
+            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="cyan",
             tile="centipede.5", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="blue",
+            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="cyan",
             tile="centipede.6", delay_ms=delay)
     my.tile(self,
             ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="gray30",
