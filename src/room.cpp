@@ -338,86 +338,90 @@ void Room::finalize(void)
 
 void Room::dump(std::array< std::array< std::array< char, MAP_DEPTH >, MAP_ROOM_HEIGHT >, MAP_ROOM_WIDTH > &data)
 {
-  IF_NODEBUG2 { return; }
-
-  std::array< std::array< char, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > tmp {};
-  for (auto y = 0; y < height; y++) {
-    for (auto x = 0; x < width; x++) {
-      set(tmp, x, y, ' ');
-    }
-  }
-
-  for (auto y = 0; y < height; y++) {
-    for (auto x = 0; x < width; x++) {
-      for (auto d = MAP_DEPTH - 1; d >= 0; d--) {
-        auto m = get(data, x, y, d);
-        if (! m || (m == ' ')) {
-          continue;
-        }
-
-        auto cr = get(Charmap::all_charmaps, m);
-        auto c  = cr.c;
-
-        set(tmp, x, y, c);
-        break;
+  IF_DEBUG2
+  {
+    std::array< std::array< char, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > tmp {};
+    for (auto y = 0; y < height; y++) {
+      for (auto x = 0; x < width; x++) {
+        set(tmp, x, y, ' ');
       }
     }
-  }
 
-  LOG("ROOM(%d): depth %d", roomno, depth);
-  LOG("ROOM(%d): direction: Up %d down %d left %d right %d", roomno, dir_up, dir_down, dir_left, dir_right);
-  LOG("ROOM(%d): doors:     up %d down %d left %d right %d", roomno, has_door_up, has_door_down, has_door_left,
-      has_door_right);
-  for (auto y = 0; y < height; y++) {
-    std::string s;
-    for (auto x = 0; x < width; x++) {
-      s += get(tmp, x, y);
+    for (auto y = 0; y < height; y++) {
+      for (auto x = 0; x < width; x++) {
+        for (auto d = MAP_DEPTH - 1; d >= 0; d--) {
+          auto m = get(data, x, y, d);
+          if (! m || (m == ' ')) {
+            continue;
+          }
+
+          auto cr = get(Charmap::all_charmaps, m);
+          auto c  = cr.c;
+
+          set(tmp, x, y, c);
+          break;
+        }
+      }
     }
-    LOG("ROOM(%d): %s", roomno, s.c_str());
+
+    LOG("ROOM(%d): depth %d", roomno, depth);
+    LOG("ROOM(%d): direction: Up %d down %d left %d right %d", roomno, dir_up, dir_down, dir_left, dir_right);
+    LOG("ROOM(%d): doors:     up %d down %d left %d right %d", roomno, has_door_up, has_door_down, has_door_left,
+        has_door_right);
+    for (auto y = 0; y < height; y++) {
+      std::string s;
+      for (auto x = 0; x < width; x++) {
+        s += get(tmp, x, y);
+      }
+      LOG("ROOM(%d): %s", roomno, s.c_str());
+    }
+    LOG("-");
   }
-  LOG("-");
 }
 
 void Room::dump(void) { dump(data); }
 
 void Room::con(void)
 {
-  std::array< std::array< char, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > tmp {};
-  for (auto y = 0; y < height; y++) {
-    for (auto x = 0; x < width; x++) {
-      set(tmp, x, y, ' ');
-    }
-  }
-
-  for (auto y = 0; y < height; y++) {
-    for (auto x = 0; x < width; x++) {
-      for (auto d = MAP_DEPTH - 1; d >= 0; d--) {
-        auto m = get(data, x, y, d);
-        if (! m || (m == ' ')) {
-          continue;
-        }
-
-        auto cr = get(Charmap::all_charmaps, m);
-        auto c  = cr.c;
-
-        set(tmp, x, y, c);
-        break;
+  IF_DEBUG2
+  {
+    std::array< std::array< char, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > tmp {};
+    for (auto y = 0; y < height; y++) {
+      for (auto x = 0; x < width; x++) {
+        set(tmp, x, y, ' ');
       }
     }
-  }
 
-  CON("ROOM(%d): depth %d", roomno, depth);
-  CON("ROOM(%d): direction: Up %d down %d left %d right %d", roomno, dir_up, dir_down, dir_left, dir_right);
-  CON("ROOM(%d): doors:     up %d down %d left %d right %d", roomno, has_door_up, has_door_down, has_door_left,
-      has_door_right);
-  for (auto y = 0; y < height; y++) {
-    std::string s;
-    for (auto x = 0; x < width; x++) {
-      s += get(tmp, x, y);
+    for (auto y = 0; y < height; y++) {
+      for (auto x = 0; x < width; x++) {
+        for (auto d = MAP_DEPTH - 1; d >= 0; d--) {
+          auto m = get(data, x, y, d);
+          if (! m || (m == ' ')) {
+            continue;
+          }
+
+          auto cr = get(Charmap::all_charmaps, m);
+          auto c  = cr.c;
+
+          set(tmp, x, y, c);
+          break;
+        }
+      }
     }
-    CON("ROOM(%d): %s", roomno, s.c_str());
+
+    CON("ROOM(%d): depth %d", roomno, depth);
+    CON("ROOM(%d): direction: Up %d down %d left %d right %d", roomno, dir_up, dir_down, dir_left, dir_right);
+    CON("ROOM(%d): doors:     up %d down %d left %d right %d", roomno, has_door_up, has_door_down, has_door_left,
+        has_door_right);
+    for (auto y = 0; y < height; y++) {
+      std::string s;
+      for (auto x = 0; x < width; x++) {
+        s += get(tmp, x, y);
+      }
+      CON("ROOM(%d): %s", roomno, s.c_str());
+    }
+    CON("-");
   }
-  CON("-");
 }
 
 bool Room::contains(int depth, char what)

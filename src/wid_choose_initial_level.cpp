@@ -1272,7 +1272,7 @@ void Game::wid_choose_initial_dungeons(void)
             wid_set_pos(b, tl, br);
             wid_set_color(b, WID_COLOR_BG, ORANGE);
             wid_set_text(b, "B");
-            wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+            wid_set_style(b, UI_WID_STYLE_SOLID_DEFAULT);
           }
 
           if (node->is_key) {
@@ -1288,7 +1288,7 @@ void Game::wid_choose_initial_dungeons(void)
             wid_set_pos(b, tl, br);
             wid_set_color(b, WID_COLOR_BG, YELLOW);
             wid_set_text(b, "*");
-            wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+            wid_set_style(b, UI_WID_STYLE_SOLID_DEFAULT);
           }
 
           if (node->is_ascend_dungeon) {
@@ -1304,7 +1304,7 @@ void Game::wid_choose_initial_dungeons(void)
             wid_set_pos(b, tl, br);
             wid_set_color(b, WID_COLOR_BG, PINK);
             wid_set_text(b, "@");
-            wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+            wid_set_style(b, UI_WID_STYLE_SOLID_DEFAULT);
           }
 
           if (node->is_descend_dungeon) {
@@ -1320,7 +1320,7 @@ void Game::wid_choose_initial_dungeons(void)
             wid_set_pos(b, tl, br);
             wid_set_color(b, WID_COLOR_BG, RED);
             wid_set_text(b, "Z");
-            wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+            wid_set_style(b, UI_WID_STYLE_SOLID_DEFAULT);
           }
         }
 

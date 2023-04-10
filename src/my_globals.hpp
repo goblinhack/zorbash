@@ -64,9 +64,6 @@ extern int TILES_VISIBLE_DOWN;
 #define IF_DEBUG2                                                                                                    \
   TRACE_NO_INDENT();                                                                                                 \
   if (DEBUG2)
-#define IF_DEBUG2                                                                                                    \
-  TRACE_NO_INDENT();                                                                                                 \
-  if (DEBUG2)
 #define IF_DEBUG3                                                                                                    \
   TRACE_NO_INDENT();                                                                                                 \
   if (DEBUG3)
