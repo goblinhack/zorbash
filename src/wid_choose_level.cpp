@@ -28,7 +28,14 @@ void wid_show_dungeon_contents(Levelp l)
       FOR_ALL_THINGS_THAT_INTERACT(l, t, x, y)
       {
         if (t->is_monst() || t->is_mob()) {
-          monst_contents[ t->text_short_and_state_capitalised() ]++;
+          //
+          // Mimics were appearing as ""
+          //
+          auto name = t->text_short_and_state_capitalised();
+          if (t->is_mimic()) {
+            name = "Something...";
+          }
+          monst_contents[ name ]++;
         }
         if (t->is_treasure()) {
           treasure_contents[ t->text_short_and_state_capitalised() ]++;
