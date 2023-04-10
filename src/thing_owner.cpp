@@ -130,7 +130,13 @@ Thingp Thing::top_owner(void)
   // Things own themselves
   //
   if (is_player() || is_monst()) {
-    return nullptr;
+    if (is_tentacle()) {
+      //
+      // Exception for kraken tentacles
+      //
+    } else {
+      return nullptr;
+    }
   }
 
   auto oid = immediate_owner_id();
@@ -155,7 +161,13 @@ Thingp Thing::immediate_owner(void)
   // Things own themselves
   //
   if (is_player() || is_monst()) {
-    return nullptr;
+    if (is_tentacle()) {
+      //
+      // Exception for kraken tentacles
+      //
+    } else {
+      return nullptr;
+    }
   }
 
   auto oid = immediate_owner_id();
