@@ -241,7 +241,7 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
     {
       uint32_t start = time_ms();
       dbg2("INF: Place dry grass");
-      place_dry_grass(swamp);
+      create_biome_swamp_place_dry_grass(swamp);
       if (g_errored) {
         return false;
       }
@@ -255,7 +255,7 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
     {
       uint32_t start = time_ms();
       dbg2("INF: Place wet grass");
-      place_wet_grass(swamp);
+      create_biome_swamp_place_wet_grass(swamp);
       if (g_errored) {
         return false;
       }
@@ -340,11 +340,6 @@ void Level::create_biome_swamp_place_rocks(Dungeonp d, int variant, int block_wi
           can_place_here = false;
           break;
         }
-
-        //
-        // We place large blocks and avoid splatting them with
-        // smaller ones here.
-        //
         if (is_wall(X, Y)) {
           can_place_here = false;
           continue;
@@ -386,11 +381,6 @@ void Level::create_biome_swamp_place_rocks(Dungeonp d, int variant, int block_wi
         }
 
         t->tile_curr = tile->global_index;
-
-        //
-        // Need this so we can display chasms under walls
-        //
-        (void) thing_new("wall_floor1", point(X, Y));
       }
     }
   }
@@ -410,10 +400,6 @@ void Level::create_biome_swamp_place_place_shallow_water(Dungeonp d, const std::
       }
 
       (void) thing_new(what, point(x, y));
-
-      if (! d->is_floor(x, y)) {
-        (void) thing_new("dirt2", point(x, y));
-      }
     }
   }
 }
@@ -432,10 +418,6 @@ void Level::create_biome_swamp_place_deep_water(Dungeonp d, const std::string &w
       }
 
       (void) thing_new(what, point(x, y));
-
-      if (! d->is_floor(x, y)) {
-        (void) thing_new("dirt3", point(x, y));
-      }
     }
   }
 }
@@ -445,16 +427,18 @@ void Level::create_biome_swamp_place_remaining_rocks(Dungeonp d)
   TRACE_AND_INDENT();
   for (auto x = 0; x < MAP_WIDTH; x++) {
     for (auto y = 0; y < MAP_HEIGHT; y++) {
+      if (is_rock(x, y)) {
+        continue;
+      }
+
       if (d->is_wall(x, y)) {
-        if (d100() < 20) {
+        if (d100() < 80) {
           (void) thing_new("rock1", point(x, y));
-          (void) thing_new("wall_floor1", point(x, y));
         }
       }
 
       if (d->is_rock(x, y)) {
         (void) thing_new("rock1", point(x, y));
-        (void) thing_new("wall_floor1", point(x, y));
       }
     }
   }
@@ -465,6 +449,13 @@ void Level::create_biome_swamp_place_dirt(Dungeonp d)
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
+      if (d->is_shallow_water(x, y)) {
+        continue;
+      }
+      if (d->is_deep_water(x, y)) {
+        continue;
+      }
+
       auto tp = tp_random_dirt();
       if (tp) {
         (void) thing_new(tp->name(), point(x, y));
@@ -485,13 +476,51 @@ void Level::create_biome_swamp_place_foliage(Dungeonp d)
       if (! d->is_foliage(x, y)) {
         continue;
       }
-      if (is_rock(x, y) || is_wall(x, y)) {
+      if (d->is_ascend_dungeon(x, y)) {
         continue;
       }
-      if (heatmap(x, y)) {
+      if (d->is_descend_dungeon(x, y)) {
         continue;
       }
-      if (is_deep_water(x, y)) {
+      if (d->is_floor(x, y)) {
+        if (d100() < 50) {
+          continue;
+        }
+      }
+      if (d->is_corridor(x, y)) {
+        if (d100() < 50) {
+          continue;
+        }
+      }
+
+      //
+      // No pillars next to the entrance which obscures the player.
+      //
+      bool skip              = false;
+      int  entrance_distance = MAP_BORDER_ROCK - 1;
+      for (auto dx = -entrance_distance; dx <= entrance_distance; dx++) {
+        for (auto dy = -entrance_distance; dy <= entrance_distance; dy++) {
+          if (d->is_ascend_dungeon(x + dx, y + dy)) {
+            skip = true;
+            break;
+          }
+          if (d->is_descend_dungeon(x + dx, y + dy)) {
+            skip = true;
+            break;
+          }
+        }
+        if (skip) {
+          break;
+        }
+      }
+
+      if (skip) {
+        continue;
+      }
+      if (is_rock(x, y)) {
+        continue;
+      }
+      if (is_wall(x, y)) {
         continue;
       }
       auto tp = tp_random_foliage();
@@ -500,6 +529,46 @@ void Level::create_biome_swamp_place_foliage(Dungeonp d)
       }
 
       (void) thing_new(tp->name(), point(x, y));
+    }
+  }
+}
+
+void Level::create_biome_swamp_place_dry_grass(Dungeonp d)
+{
+  TRACE_AND_INDENT();
+  for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
+    for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
+      if (is_rock(x, y)) {
+        continue;
+      }
+      if (d->is_dry_grass(x, y)) {
+        auto tp = tp_random_dry_grass();
+        if (unlikely(! tp)) {
+          return;
+        }
+
+        (void) thing_new(tp->name(), point(x, y));
+      }
+    }
+  }
+}
+
+void Level::create_biome_swamp_place_wet_grass(Dungeonp d)
+{
+  TRACE_AND_INDENT();
+  for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
+    for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
+      if (is_rock(x, y)) {
+        continue;
+      }
+      if (d->is_wet_grass(x, y)) {
+        auto tp = tp_random_wet_grass();
+        if (unlikely(! tp)) {
+          return;
+        }
+
+        (void) thing_new(tp->name(), point(x, y));
+      }
     }
   }
 }

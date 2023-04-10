@@ -2468,7 +2468,7 @@ public:
   int physical_training(void);
 
   uint8_t blit_begin_reflection_submerged(void);
-  uint8_t blit_begin_submerged(void);
+  uint8_t blit_begin_submerged(bool scissors = true);
   uint8_t terrain_cost_get(point p);
   uint8_t is_dir_bl(void);
   uint8_t is_dir_br(void);

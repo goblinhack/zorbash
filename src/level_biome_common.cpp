@@ -267,9 +267,22 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
         }
       }
 
-      if (! tp->is_biome_dungeon()) {
-        // fix when swamp added
-        log("INF: Dropping %s for dungeon biome", tp->name().c_str());
+      if (biome == BIOME_DUNGEON) {
+        if (! tp->is_biome_dungeon()) {
+          log("INF: Dropping %s for dungeon biome", tp->name().c_str());
+          continue;
+        }
+      } else if (biome == BIOME_SWAMP) {
+        if (! tp->is_biome_swamp()) {
+          log("INF: Dropping %s for dungeon swamp", tp->name().c_str());
+          continue;
+        }
+      } else if (biome == BIOME_SEWER) {
+        if (! tp->is_biome_sewer()) {
+          log("INF: Dropping %s for dungeon sewer", tp->name().c_str());
+          continue;
+        }
+      } else {
         continue;
       }
 
@@ -413,44 +426,6 @@ void Level::place_portals(Dungeonp d)
     }
 
     break;
-  }
-}
-
-void Level::place_dry_grass(Dungeonp d)
-{
-  TRACE_AND_INDENT();
-  for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
-    for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-      if (! d->is_anything_at(x, y) || d->is_dry_grass(x, y)) {
-        auto tp = tp_random_dry_grass();
-        if (unlikely(! tp)) {
-          return;
-        }
-
-        if (heatmap(x, y)) {
-          continue;
-        }
-
-        (void) thing_new(tp->name(), point(x, y));
-      }
-    }
-  }
-}
-
-void Level::place_wet_grass(Dungeonp d)
-{
-  TRACE_AND_INDENT();
-  for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
-    for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-      if (! d->is_anything_at(x, y) || d->is_wet_grass(x, y)) {
-        auto tp = tp_random_wet_grass();
-        if (unlikely(! tp)) {
-          return;
-        }
-
-        (void) thing_new(tp->name(), point(x, y));
-      }
-    }
   }
 }
 

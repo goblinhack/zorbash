@@ -692,7 +692,7 @@ bool Thing::map_offset_coords_get(point &blit_tl, point &blit_br, Tilep &tile, b
   return blit;
 }
 
-uint8_t Thing::blit_begin_submerged(void)
+uint8_t Thing::blit_begin_submerged(bool scissors)
 {
   TRACE_NO_INDENT();
 
@@ -705,11 +705,15 @@ uint8_t Thing::blit_begin_submerged(void)
       waterline = owner->last_blit_br.y;
     }
     if (waterline < game->config.game_pix_height) {
-      glScissor(0, game->config.game_pix_height - waterline, game->config.game_pix_width,
-                game->config.game_pix_height);
+      if (scissors) {
+        glScissor(0, game->config.game_pix_height - waterline, game->config.game_pix_width,
+                  game->config.game_pix_height);
+      }
       GL_ERROR_CHECK();
     }
-    glEnable(GL_SCISSOR_TEST);
+    if (scissors) {
+      glEnable(GL_SCISSOR_TEST);
+    }
     glTranslatef(0, submerged, 0);
     blit_init();
   }
@@ -1026,7 +1030,31 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
           }
         }
       }
-    } else if (auto submerged = blit_begin_submerged()) {
+    } else if (auto submerged = submerged_offset_get()) {
+      //
+      // Display the submerged part of the thing as transparent so that it looks
+      // like it is underwater.
+      //
+      submerged              = blit_begin_submerged(false);
+      color under_water_part = WHITE;
+      if (is_foliage()) {
+        under_water_part = DARKGREEN;
+      }
+      under_water_part.a = 100;
+
+      blit_flush();
+      blit_init();
+      glcolor(under_water_part);
+      tile_blit(tile, blit_tl, blit_br);
+      blit_end_submerged(submerged);
+
+      //
+      // Now blit the thing, clipped so it looks submerged
+      //
+      glcolor(c);
+      blit_init();
+      blit_begin_submerged();
+
       //
       // Not drawing a reflection + submerged.
       //

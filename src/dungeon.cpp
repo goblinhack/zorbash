@@ -257,7 +257,7 @@ void Dungeon::make_dungeon(void)
     foliage_gen(2000, // fill prob
                 10,   // R1
                 5,    // R2
-                4 /* generations */);
+                2 /* generations */);
   }
 
   DBG2("INF: Generate caves");
@@ -281,9 +281,6 @@ void Dungeon::make_dungeon(void)
   DBG2("INF: Add remaining items");
   add_remaining();
 
-  DBG2("INF: Add foliage around water");
-  add_foliage_around_water();
-
   DBG2("INF: Add spiderwebs");
   add_spiderweb();
 
@@ -292,6 +289,7 @@ void Dungeon::make_dungeon(void)
                 10,   // R1
                 5,    // R2
                 1 /* generations */);
+
   if (biome == BIOME_SWAMP) {
     dry_grass_gen(1500, // fill prob
                   10,   // R1
@@ -304,6 +302,7 @@ void Dungeon::make_dungeon(void)
                 10,   // R1
                 5,    // R2
                 1 /* generations */);
+
   if (biome == BIOME_SWAMP) {
     wet_grass_gen(5000, // fill prob
                   10,   // R1
@@ -312,16 +311,13 @@ void Dungeon::make_dungeon(void)
   }
 
   DBG2("INF: Generate foliage");
-  if (0) {
-    foliage_gen(10, // fill prob
-                10, // R1
-                5,  // R2
-                4 /* generations */);
-  }
+  foliage_gen(10, // fill prob
+              10, // R1
+              5,  // R2
+              4 /* generations */);
 
-  if (biome == BIOME_SWAMP) {
-    add_foliage_around_water();
-  }
+  DBG2("INF: Add foliage around water");
+  add_foliage_around_water();
 
   dump();
 }

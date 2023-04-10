@@ -678,7 +678,7 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
     {
       uint32_t start = time_ms();
       dbg2("INF: Place dry grass");
-      place_dry_grass(dungeon);
+      create_biome_dungeon_place_dry_grass(dungeon);
       if (g_errored) {
         return false;
       }
@@ -692,7 +692,7 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
     {
       uint32_t start = time_ms();
       dbg2("INF: Place wet grass");
-      place_wet_grass(dungeon);
+      create_biome_dungeon_place_wet_grass(dungeon);
       if (g_errored) {
         return false;
       }
@@ -1179,7 +1179,7 @@ void Level::create_biome_dungeon_place_deep_water(Dungeonp d, const std::string 
       (void) thing_new(what, point(x, y));
 
       if (! d->is_floor(x, y)) {
-        (void) thing_new("dirt3", point(x, y));
+        (void) thing_new("dirt2", point(x, y));
       }
     }
   }
@@ -1609,6 +1609,44 @@ void Level::create_biome_dungeon_place_foliage(Dungeonp d)
       }
 
       (void) thing_new(tp->name(), point(x, y));
+    }
+  }
+}
+
+void Level::create_biome_dungeon_place_dry_grass(Dungeonp d)
+{
+  TRACE_AND_INDENT();
+  for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
+    for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
+      if (! d->is_anything_at(x, y) || d->is_dry_grass(x, y)) {
+        auto tp = tp_random_dry_grass();
+        if (unlikely(! tp)) {
+          return;
+        }
+
+        if (heatmap(x, y)) {
+          continue;
+        }
+
+        (void) thing_new(tp->name(), point(x, y));
+      }
+    }
+  }
+}
+
+void Level::create_biome_dungeon_place_wet_grass(Dungeonp d)
+{
+  TRACE_AND_INDENT();
+  for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
+    for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
+      if (! d->is_anything_at(x, y) || d->is_wet_grass(x, y)) {
+        auto tp = tp_random_wet_grass();
+        if (unlikely(! tp)) {
+          return;
+        }
+
+        (void) thing_new(tp->name(), point(x, y));
+      }
     }
   }
 }

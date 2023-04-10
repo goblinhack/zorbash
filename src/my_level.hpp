@@ -1241,7 +1241,10 @@ public:
   void noisemap_set(const int x, const int y, uint8_t v);
   void noisemap_unset(const int x, const int y);
   void place_dirt(Dungeonp d);
-  void place_dry_grass(Dungeonp d);
+  void create_biome_dungeon_place_dry_grass(Dungeonp d);
+  void create_biome_dungeon_place_wet_grass(Dungeonp d);
+  void create_biome_swamp_place_dry_grass(Dungeonp d);
+  void create_biome_swamp_place_wet_grass(Dungeonp d);
   void place_floor_deco(Dungeonp d);
   void create_biome_dungeon_place_foliage(Dungeonp d);
   void create_biome_swamp_place_foliage(Dungeonp d);
@@ -1253,7 +1256,6 @@ public:
   void place_spiderweb(Dungeonp d);
   void place_swimming_monsters(void);
   void place_the_grid(void);
-  void place_wet_grass(Dungeonp d);
   void poison_gas_explosion(point at);
   void screen_shake_end(void);
   void scroll_map_do(bool fast);
