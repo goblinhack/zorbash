@@ -181,8 +181,14 @@ void Thing::owner_set(Thingp owner)
    * Did you mean to minion-ify ?
    */
   if (is_player() || is_monst()) {
-    err("Should not be owned");
-    return;
+    if (is_tentacle()) {
+      //
+      // Not sure if kraken tentacles should be owned or not
+      //
+    } else {
+      err("Should not be owned");
+      return;
+    }
   }
 
   if (! maybe_infop()) {

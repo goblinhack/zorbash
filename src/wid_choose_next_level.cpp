@@ -282,7 +282,9 @@ static void wid_choose_next_dungeons_tick(Widp w)
                 // Unless we fell here, in which case we may have no exit
                 //
                 if (! n->is_completed) {
-                  continue;
+                  if (! g_opt_debug1) {
+                    continue;
+                  }
                 }
               }
 
