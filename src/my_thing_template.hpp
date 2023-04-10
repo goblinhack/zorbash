@@ -335,7 +335,6 @@ private:
   int _is_barrel {};
   int _is_basalt {};
   int _is_bearowl {};
-  int _is_bedbug {};
   int _is_bee {};
   int _is_biome_dungeon {};
   int _is_biome_sewer {};
@@ -343,6 +342,7 @@ private:
   int _is_biome_unused {};
   int _is_bleeder {};
   int _is_block_of_ice {};
+  int _is_bloodbug {};
   int _is_bones {};
   int _is_boots {};
   int _is_brazier {};
@@ -1629,7 +1629,6 @@ public:
   int is_barrel(void) const;
   int is_basalt(void) const;
   int is_bearowl(void) const;
-  int is_bedbug(void) const;
   int is_bee(void) const;
   int is_biome_dungeon(void) const;
   int is_biome_sewer(void) const;
@@ -1637,6 +1636,7 @@ public:
   int is_biome_unused(void) const;
   int is_bleeder(void) const;
   int is_block_of_ice(void) const;
+  int is_bloodbug(void) const;
   int is_bones(void) const;
   int is_boots(void) const;
   int is_brazier(void) const;
@@ -2375,7 +2375,6 @@ public:
   void is_barrel_set(int v);
   void is_basalt_set(int v);
   void is_bearowl_set(int v);
-  void is_bedbug_set(int v);
   void is_bee_set(int v);
   void is_biome_dungeon_set(int v);
   void is_biome_sewer_set(int v);
@@ -2383,6 +2382,7 @@ public:
   void is_biome_unused_set(int v);
   void is_bleeder_set(int v);
   void is_block_of_ice_set(int v);
+  void is_bloodbug_set(int v);
   void is_bones_set(int v);
   void is_boots_set(int v);
   void is_brazier_set(int v);

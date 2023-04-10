@@ -122,8 +122,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "Firebees collect pollen, not from plants, but from... your blood. Thankfully bloodbees are slow moving.")
-    my.text_description_short(self, "A bloated bloodbee.")
+    my.text_description_long(self, "Fleshbees collect pollen, not from plants, but from... your blood. Thankfully fleshbees are slow moving.")
+    my.text_description_short(self, "A meaty fleshbee.")
     my.text_hits(self, "stabs")
     my.thing_size(self, my.THING_SIZE_SMALL)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -152,7 +152,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="bloodbee", text_long_name="bloodbee")
+    tp_init(name="fleshbee", text_long_name="fleshbee")
 
 
 init()

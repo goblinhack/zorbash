@@ -300,7 +300,7 @@ void Game::place_player(void)
         level->thing_new("molekin", point(x + 2, y + 1));
         level->thing_new("gnome_rock", point(x + 2, y + 1));
         level->thing_new("scorpion_death", point(x + 2, y + 1));
-        level->thing_new("bedbug", point(x + 2, y + 1));
+        level->thing_new("bloodbug", point(x + 2, y + 1));
         level->thing_new("death_hornet", point(x + 2, y + 1));
         level->thing_new("bear_undead", point(x + 2, y + 1));
         level->thing_new("meatfairy", point(x + 2, y + 1));
@@ -376,7 +376,7 @@ void Game::place_player(void)
         level->thing_new("sheep", point(x + 1, y + 3));
         level->thing_new("goat_battle", point(x + 2, y + 1));
         level->thing_new("moresquito", point(x + 2, y + 3));
-        level->thing_new("bloodbee", point(x + 1, y + 3));
+        level->thing_new("fleshbee", point(x + 1, y + 3));
         level->thing_new("narhornet", point(x + 0, y + 3));
         level->thing_new("spider_para", point(x + 2, y + 4));
         level->thing_new("spider_brown", point(x + 2, y + 4));

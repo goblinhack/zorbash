@@ -3,7 +3,7 @@ import tp
 
 
 def on_born(me, x, y):
-    my.thing_friend(me, "is_bedbug")
+    my.thing_friend(me, "is_bloodbug")
 
 
 def on_you_nat_attack_attempt(me, x, y):
@@ -77,11 +77,11 @@ def tp_init(name, text_long_name):
     my.is_able_to_tire(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
-    my.is_bedbug(self, True)
     my.is_biome_dungeon(self, True)
     my.is_biome_sewer(self, True)
     my.is_biome_swamp(self, True)
     my.is_bleeder(self, True)
+    my.is_bloodbug(self, True)
     my.is_crushable(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_eater_of_blood(self, True)
@@ -119,8 +119,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "A disgusted bloated bedbug. Yes, disgusted. It looks at you with disgust, horrible humanoid.")
-    my.text_description_short(self, "A bloated bedbug.")
+    my.text_description_long(self, "A disgusted bloated bloodbug. Yes, disgusted. It looks at you with disgust, horrible humanoid.")
+    my.text_description_short(self, "A bloated bloodbug.")
     my.text_hits(self, "bites")
     my.thing_size(self, my.THING_SIZE_TINY)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -146,7 +146,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="bedbug", text_long_name="bloated bedbug")
+    tp_init(name="bloodbug", text_long_name="bloated bloodbug")
 
 
 init()

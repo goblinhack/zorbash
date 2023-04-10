@@ -142,7 +142,6 @@ bool Tp::matches(const std::string &what)
   if (is_barrel() && (what == "is_barrel")) { return true; }
   if (is_basalt() && (what == "is_basalt")) { return true; }
   if (is_bearowl() && (what == "is_bearowl")) { return true; }
-  if (is_bedbug() && (what == "is_bedbug")) { return true; }
   if (is_bee() && (what == "is_bee")) { return true; }
   if (is_biome_dungeon() && (what == "is_biome_dungeon")) { return true; }
   if (is_biome_sewer() && (what == "is_biome_sewer")) { return true; }
@@ -150,6 +149,7 @@ bool Tp::matches(const std::string &what)
   if (is_biome_unused() && (what == "is_biome_unused")) { return true; }
   if (is_bleeder() && (what == "is_bleeder")) { return true; }
   if (is_block_of_ice() && (what == "is_block_of_ice")) { return true; }
+  if (is_bloodbug() && (what == "is_bloodbug")) { return true; }
   if (is_bones() && (what == "is_bones")) { return true; }
   if (is_boots() && (what == "is_boots")) { return true; }
   if (is_brazier() && (what == "is_brazier")) { return true; }
@@ -743,7 +743,6 @@ bool Thing::matches(const std::string &what)
   if (is_barrel() && (what == "is_barrel")) { return true; }
   if (is_basalt() && (what == "is_basalt")) { return true; }
   if (is_bearowl() && (what == "is_bearowl")) { return true; }
-  if (is_bedbug() && (what == "is_bedbug")) { return true; }
   if (is_bee() && (what == "is_bee")) { return true; }
   if (is_biome_dungeon() && (what == "is_biome_dungeon")) { return true; }
   if (is_biome_sewer() && (what == "is_biome_sewer")) { return true; }
@@ -751,6 +750,7 @@ bool Thing::matches(const std::string &what)
   if (is_biome_unused() && (what == "is_biome_unused")) { return true; }
   if (is_bleeder() && (what == "is_bleeder")) { return true; }
   if (is_block_of_ice() && (what == "is_block_of_ice")) { return true; }
+  if (is_bloodbug() && (what == "is_bloodbug")) { return true; }
   if (is_bones() && (what == "is_bones")) { return true; }
   if (is_boots() && (what == "is_boots")) { return true; }
   if (is_brazier() && (what == "is_brazier")) { return true; }
@@ -1342,7 +1342,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_barrel") { return &Thing::is_barrel; }
   if (what == "is_basalt") { return &Thing::is_basalt; }
   if (what == "is_bearowl") { return &Thing::is_bearowl; }
-  if (what == "is_bedbug") { return &Thing::is_bedbug; }
   if (what == "is_bee") { return &Thing::is_bee; }
   if (what == "is_biome_dungeon") { return &Thing::is_biome_dungeon; }
   if (what == "is_biome_sewer") { return &Thing::is_biome_sewer; }
@@ -1350,6 +1349,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_biome_unused") { return &Thing::is_biome_unused; }
   if (what == "is_bleeder") { return &Thing::is_bleeder; }
   if (what == "is_block_of_ice") { return &Thing::is_block_of_ice; }
+  if (what == "is_bloodbug") { return &Thing::is_bloodbug; }
   if (what == "is_bones") { return &Thing::is_bones; }
   if (what == "is_boots") { return &Thing::is_boots; }
   if (what == "is_brazier") { return &Thing::is_brazier; }

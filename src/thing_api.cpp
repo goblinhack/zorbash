@@ -1081,10 +1081,10 @@ int Thing::is_leech(void)
   TRACE_NO_INDENT();
   return (tp()->is_leech());
 }
-int Thing::is_bedbug(void)
+int Thing::is_bloodbug(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_bedbug());
+  return (tp()->is_bloodbug());
 }
 int Thing::is_death_hornet(void)
 {

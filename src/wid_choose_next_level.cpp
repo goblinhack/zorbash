@@ -260,7 +260,6 @@ static void wid_choose_next_dungeons_tick(Widp w)
           continue;
         }
 
-        color c = WHITE;
         wid_set_color(b, WID_COLOR_BG, GRAY30);
         wid_update(b);
 

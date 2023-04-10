@@ -1378,7 +1378,6 @@ public:
   int is_barrel(void);
   int is_basalt(void);
   int is_bearowl(void);
-  int is_bedbug(void);
   int is_bee(void);
   int is_biome_dungeon(void);
   int is_biome_sewer(void);
@@ -1386,6 +1385,7 @@ public:
   int is_biome_unused(void);
   int is_bleeder(void);
   int is_block_of_ice(void);
+  int is_bloodbug(void);
   int is_blood(void);
   int is_bones(void);
   int is_boots(void);

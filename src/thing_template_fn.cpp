@@ -415,7 +415,6 @@ int Tp::is_bag(void) const { return _is_bag; }
 int Tp::is_barrel(void) const { return _is_barrel; }
 int Tp::is_basalt(void) const { return _is_basalt; }
 int Tp::is_bearowl(void) const { return _is_bearowl; }
-int Tp::is_bedbug(void) const { return _is_bedbug; }
 int Tp::is_bee(void) const { return _is_bee; }
 int Tp::is_biome_dungeon(void) const { return _is_biome_dungeon; }
 int Tp::is_biome_sewer(void) const { return _is_biome_sewer; }
@@ -423,6 +422,7 @@ int Tp::is_biome_swamp(void) const { return _is_biome_swamp; }
 int Tp::is_biome_unused(void) const { return _is_biome_unused; }
 int Tp::is_bleeder(void) const { return _is_bleeder; }
 int Tp::is_block_of_ice(void) const { return _is_block_of_ice; }
+int Tp::is_bloodbug(void) const { return _is_bloodbug; }
 int Tp::is_bones(void) const { return _is_bones; }
 int Tp::is_boots(void) const { return _is_boots; }
 int Tp::is_brazier(void) const { return _is_brazier; }
@@ -1161,7 +1161,6 @@ void Tp::is_bag_set(int v) { _is_bag = v; }
 void Tp::is_barrel_set(int v) { _is_barrel = v; }
 void Tp::is_basalt_set(int v) { _is_basalt = v; }
 void Tp::is_bearowl_set(int v) { _is_bearowl = v; }
-void Tp::is_bedbug_set(int v) { _is_bedbug = v; }
 void Tp::is_bee_set(int v) { _is_bee = v; }
 void Tp::is_biome_dungeon_set(int v) { _is_biome_dungeon = v; }
 void Tp::is_biome_sewer_set(int v) { _is_biome_sewer = v; }
@@ -1169,6 +1168,7 @@ void Tp::is_biome_swamp_set(int v) { _is_biome_swamp = v; }
 void Tp::is_biome_unused_set(int v) { _is_biome_unused = v; }
 void Tp::is_bleeder_set(int v) { _is_bleeder = v; }
 void Tp::is_block_of_ice_set(int v) { _is_block_of_ice = v; }
+void Tp::is_bloodbug_set(int v) { _is_bloodbug = v; }
 void Tp::is_bones_set(int v) { _is_bones = v; }
 void Tp::is_boots_set(int v) { _is_boots = v; }
 void Tp::is_brazier_set(int v) { _is_brazier = v; }
