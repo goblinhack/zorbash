@@ -1200,7 +1200,7 @@ void Level::place_floor_deco(Dungeonp d)
 
       if (d->is_food(x, y) || d->is_red_blood(x, y) || d->is_door(x, y) || d->is_ascend_dungeon(x, y) ||
           d->is_descend_dungeon(x, y) || d->is_mob_any(x, y) || d->is_key(x, y) || d->is_potion(x, y) ||
-          d->is_trap(x, y) || d->is_barrel(x, y) || d->is_staff(x, y) || d->is_ring(x, y) ||
+          d->is_trap(x, y) || d->is_barrel(x, y) || d->is_staff(x, y) || d->is_ring(x, y) || d->is_portal(x, y) ||
           d->is_secret_door(x, y) || d->is_portal(x, y) || d->is_weapon_class_A(x, y) || d->is_weapon_class_B(x, y) ||
           d->is_treasure_type(x, y) || d->is_treasure_class_A(x, y) || d->is_treasure_class_B(x, y) ||
           d->is_treasure_class_C(x, y) || d->is_monst_any(x, y)) {
@@ -1268,7 +1268,7 @@ void Level::create_biome_dungeon_place_random_floor_deco(Dungeonp d)
 
       if (d->is_food(x, y) || d->is_red_blood(x, y) || d->is_door(x, y) || d->is_ascend_dungeon(x, y) ||
           d->is_descend_dungeon(x, y) || d->is_mob_any(x, y) || d->is_key(x, y) || d->is_potion(x, y) ||
-          d->is_trap(x, y) || d->is_barrel(x, y) || d->is_staff(x, y) || d->is_ring(x, y) ||
+          d->is_trap(x, y) || d->is_barrel(x, y) || d->is_staff(x, y) || d->is_ring(x, y) || d->is_portal(x, y) ||
           d->is_secret_door(x, y) || d->is_portal(x, y) || d->is_weapon_class_A(x, y) || d->is_weapon_class_B(x, y) ||
           d->is_treasure_type(x, y) || d->is_treasure_class_A(x, y) || d->is_treasure_class_B(x, y) ||
           d->is_treasure_class_C(x, y) || d->is_monst_any(x, y)) {
