@@ -249,6 +249,16 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
         tp = tp_random_skillstone();
       }
 
+      //
+      // Make sure we have a floor under a portal for example
+      //
+      if (! is_chasm(x, y) && ! is_floor(x, y) && ! is_dirt(x, y) && ! is_corridor(x, y)) {
+        auto tp = tp_random_dirt();
+        if (tp) {
+          (void) thing_new(tp->name(), point(x, y));
+        }
+      }
+
       if (unlikely(! tp)) {
         continue;
       }
