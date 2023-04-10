@@ -243,12 +243,33 @@ static void wid_choose_next_dungeons_tick(Widp w)
         }
 
         auto l = ctx->levels[ y ][ x ];
-        if ((game->level == l) || g_opt_debug1) {
-          color c = WHITE;
-          wid_set_color(b, WID_COLOR_BG, c);
-          wid_set_color(b, WID_COLOR_BG, GRAY30);
-          wid_update(b);
 
+        if (g_opt_debug1) {
+          color c = WHITE;
+          c.a     = val;
+          wid_set_color(b, WID_COLOR_BG, c);
+          wid_update(b);
+          wid_set_on_mouse_down(b, wid_choose_next_dungeons_enter);
+
+          if (game->robot_mode) {
+            if (non_pcg_random_range(0, 1000) <= 10) {
+              game->request_to_choose_level = b;
+            }
+          }
+
+          continue;
+        }
+
+        color c = WHITE;
+        wid_set_color(b, WID_COLOR_BG, GRAY30);
+        wid_update(b);
+
+        if (game->level == l) {
+          //
+          // Is the player descending?
+          //
+          // Limit to the next levels.
+          //
           if (ctx->is_descending || g_opt_debug1) {
             for (auto n : ctx->next_levels[ y ][ x ]) {
               auto n_at = n->grid_at;
@@ -272,7 +293,13 @@ static void wid_choose_next_dungeons_tick(Widp w)
             }
           }
 
-          if (ctx->is_ascending || g_opt_debug1) {
+          //
+          // Is the player ascending?
+          //
+          // Limit to the levels we have previously completed; unless we fell
+          // in which case we are more lenient.
+          //
+          if (ctx->is_ascending) {
             for (auto n : ctx->prev_levels[ y ][ x ]) {
               //
               // Only allow ascension to levels we've finished.
@@ -282,9 +309,7 @@ static void wid_choose_next_dungeons_tick(Widp w)
                 // Unless we fell here, in which case we may have no exit
                 //
                 if (! n->is_completed) {
-                  if (! g_opt_debug1) {
-                    continue;
-                  }
+                  continue;
                 }
               }
 
