@@ -22,7 +22,8 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
     seedval = game->seed + 1; // +1 is a temporary hack
   } else {
     seedval = (world_at.z * DUNGEONS_GRID_CHUNK_HEIGHT * DUNGEONS_GRID_CHUNK_WIDTH) +
-              (world_at.y * DUNGEONS_GRID_CHUNK_HEIGHT) + world_at.x + dungeon_walk_order_level_no;
+              (world_at.y * DUNGEONS_GRID_CHUNK_HEIGHT) + world_at.x +
+              (dungeon_walk_order_level_no * (123 * DUNGEONS_GRID_CHUNK_HEIGHT * DUNGEONS_GRID_CHUNK_WIDTH));
   }
 
   game->seed = seedval;

@@ -37,15 +37,13 @@ Levelp World::new_level_at(point3d world_at, point grid_at, uint32_t seed, int d
     case 5:
     case 6:
     case 7:
-    default:
-      if (world_at.z & 1) {
-        biome = BIOME_DUNGEON;
-      } else {
-        biome = BIOME_SEWER;
-      }
-      break;
+    default: biome = BIOME_DUNGEON; break;
     case 2:
     case 3: biome = BIOME_SWAMP; break;
+  }
+
+  if (! (world_at.z & 1)) {
+    biome = BIOME_SEWER;
   }
 
   if (g_opt_biome_swamp) {
