@@ -3,6 +3,7 @@
 //
 
 #include "my_array_bounds_check.hpp"
+#include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_thing.hpp"
 #include "my_vector_bounds_check.hpp"
@@ -280,6 +281,10 @@ bool Thing::ai_choose_wander(point &nh)
   thing_new("ai_path2", fpoint(dest.x, dest.y));
 #endif
   dbg("Wander to %d,%d nh %d,%d", dest.x, dest.y, nh.x, nh.y);
+
+  if (game->robot_mode && is_player()) {
+    game->tick_begin("need to wander");
+  }
 
   return true;
 }
