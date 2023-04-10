@@ -243,13 +243,13 @@ static void wid_choose_next_dungeons_tick(Widp w)
         }
 
         auto l = ctx->levels[ y ][ x ];
-        if (game->level == l) {
+        if ((game->level == l) || g_opt_debug1) {
           color c = WHITE;
           wid_set_color(b, WID_COLOR_BG, c);
           wid_set_color(b, WID_COLOR_BG, GRAY30);
           wid_update(b);
 
-          if (ctx->is_descending) {
+          if (ctx->is_descending || g_opt_debug1) {
             for (auto n : ctx->next_levels[ y ][ x ]) {
               auto n_at = n->grid_at;
               Widp b    = ctx->buttons[ n_at.y ][ n_at.x ];
@@ -272,7 +272,7 @@ static void wid_choose_next_dungeons_tick(Widp w)
             }
           }
 
-          if (ctx->is_ascending) {
+          if (ctx->is_ascending || g_opt_debug1) {
             for (auto n : ctx->prev_levels[ y ][ x ]) {
               //
               // Only allow ascension to levels we've finished.
@@ -728,8 +728,8 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
     br.x += offx;
     br.y += offy;
 
-    tl.y += 5;
-    br.y += 5;
+    tl.y += 9;
+    br.y += 9;
 
     wid_set_pos(button_container, tl, br);
     wid_set_void_context(button_container, ctx);

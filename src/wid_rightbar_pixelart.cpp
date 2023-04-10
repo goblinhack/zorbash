@@ -63,6 +63,11 @@ bool wid_rightbar_pixelart_create(void)
     point br = make_point(width - 1, y_at + 1);
 
     auto s = dynprintf("Level %u", level->num());
+    if (level->biome == BIOME_SWAMP) {
+      s = dynprintf("Swamp Level %u", level->num());
+    } else if (level->biome == BIOME_SEWER) {
+      s = dynprintf("Sewer Level %u", level->num());
+    }
     wid_set_pos(w, tl, br);
     wid_set_text(w, s);
     wid_set_shape_none(w);
