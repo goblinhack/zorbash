@@ -4,7 +4,7 @@ import tp
 
 def on_targetted(me, x, y):
     radius = my.thing_effect_radius_get(me)
-    my.con("targetted {} {:X} radius {}".format(my.thing_name_get(me), me, radius))
+    # my.con("targetted {} {:X} radius {}".format(my.thing_name_get(me), me, radius))
 
     for dx in range(-radius, radius + 1):
         for dy in range(-radius, radius + 1):
