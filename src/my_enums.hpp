@@ -57,9 +57,10 @@ enum {
 
 using biome_t = enum biome_type {
   BIOME_UNKNOWN,
-  BIOME_DUNGEON,
+  BIOME_DUNGEON, // A single dungeon
   BIOME_SWAMP,
   BIOME_SEWER,
+  BIOME_DUNGEONS, // The grid of dungeons
   BIOME_MAX,
 };
 

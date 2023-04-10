@@ -431,14 +431,56 @@ void Level::create_biome_swamp_place_remaining_rocks(Dungeonp d)
         continue;
       }
 
-      if (d->is_wall(x, y)) {
-        if (d100() < 80) {
-          (void) thing_new("rock1", point(x, y));
+      if (! is_dirt(x, y)) {
+        auto tp = tp_random_dirt();
+        if (tp) {
+          (void) thing_new(tp->name(), point(x, y));
         }
       }
 
-      if (d->is_rock(x, y)) {
-        (void) thing_new("rock1", point(x, y));
+      if (d->is_wall(x, y) || d->is_rock(x, y)) {
+        //
+        // If any doors are nearby, then we need some rock surrounding the door.
+        //
+        bool needed            = false;
+        int  entrance_distance = MAP_BORDER_ROCK - 1;
+        for (auto dx = -entrance_distance; dx <= entrance_distance; dx++) {
+          for (auto dy = -entrance_distance; dy <= entrance_distance; dy++) {
+            if (d->is_oob(x + dx, y + dy)) {
+              continue;
+            }
+
+            if (d->is_door(x + dx, y + dy)) {
+              needed = true;
+              break;
+            }
+
+            if (d->is_secret_door(x + dx, y + dy)) {
+              needed = true;
+              break;
+            }
+          }
+          if (needed) {
+            break;
+          }
+        }
+
+        if (needed) {
+          (void) thing_new("rock1", point(x, y));
+          continue;
+        }
+
+        if (d->is_wall(x, y)) {
+          if (d100() < 50) {
+            (void) thing_new("rock1", point(x, y));
+            continue;
+          }
+        }
+
+        if (d->is_rock(x, y)) {
+          (void) thing_new("rock1", point(x, y));
+          continue;
+        }
       }
     }
   }
@@ -449,20 +491,15 @@ void Level::create_biome_swamp_place_dirt(Dungeonp d)
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-      if (d->is_shallow_water(x, y)) {
-        continue;
-      }
-      if (d->is_deep_water(x, y)) {
-        continue;
-      }
+      if (d->is_floor(x, y) || d->is_dirt(x, y) || d->is_corridor(x, y)) {
+        auto tp = tp_random_dirt();
+        if (tp) {
+          (void) thing_new(tp->name(), point(x, y));
+        }
 
-      auto tp = tp_random_dirt();
-      if (tp) {
-        (void) thing_new(tp->name(), point(x, y));
-      }
-
-      if (d100() < 20) {
-        (void) thing_new("water", point(x, y));
+        if (d100() < 20) {
+          (void) thing_new("water", point(x, y));
+        }
       }
     }
   }

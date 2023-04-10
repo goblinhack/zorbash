@@ -233,7 +233,9 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
     } else if (is_key) {
       if (! r->contains(MAP_DEPTH_OBJ, Charmap::KEY)) {
         r->con();
-        DIE("Key room is missing dungeon key char '%c'", Charmap::KEY);
+        if (biome == BIOME_DUNGEON) {
+          DIE("Key room is missing dungeon key char '%c'", Charmap::KEY);
+        }
       }
       if (r->contains(MAP_DEPTH_OBJ, Charmap::EXIT)) {
         r->con();

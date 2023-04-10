@@ -127,7 +127,7 @@ public:
   //
   int depth_obstacle {-1};
 
-  Nodes(biome_t, int grid_width, int grid_height, bool is_dungeon)
+  Nodes(biome_t biome, int grid_width, int grid_height, bool is_dungeon)
       : grid_width(grid_width), grid_height(grid_height), is_dungeon(is_dungeon)
   {
     pcg_random_allowed++;
@@ -135,7 +135,7 @@ public:
     pcg_random_allowed--;
   }
 
-  Nodes(biome_t) { finish_constructor(biome); }
+  Nodes(biome_t biome) { finish_constructor(biome); }
 
   void         finish_constructor(biome_t);
   void         debug(std::string msg);

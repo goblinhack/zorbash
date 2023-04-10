@@ -1848,6 +1848,10 @@ bool Dungeon::rooms_print_all_with_jiggle(Grid *g)
 
 bool Dungeon::room_is_a_candidate(int x, int y, const DungeonNode *n, Roomp r)
 {
+  if (n->biome == BIOME_UNKNOWN) {
+    DIE("No biome set for DungeonNode");
+  }
+
   if (n->biome != r->biome) {
     return false;
   }
@@ -4539,7 +4543,6 @@ void Dungeon::foliage_gen(unsigned int map_fill_prob, int map_r1, int map_r2, in
   for (x = 2; x < maze_w - 2; x++) {
     for (y = 2; y < maze_h - 2; y++) {
       if (get(map_curr, x, y)) {
-        putchar('X');
         if (biome == BIOME_DUNGEON) {
           if (is_wall(x, y) || is_rock(x, y) || is_chasm(x, y)) {
             continue;
@@ -4561,15 +4564,11 @@ void Dungeon::foliage_gen(unsigned int map_fill_prob, int map_r1, int map_r2, in
         }
 
         putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOLIAGE);
-      } else {
-        putchar(' ');
       }
     next:
       continue;
     }
-    putchar('\n');
   }
-  printf("-\n");
 }
 
 void Dungeon::water_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations)

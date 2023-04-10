@@ -1018,7 +1018,7 @@ void Game::wid_choose_initial_dungeons(void)
   g_ctx = ctx;
 
   ctx->nodes =
-      new Nodes(BIOME_UNKNOWN, DUNGEONS_GRID_CHUNK_WIDTH, DUNGEONS_GRID_CHUNK_WIDTH, false /* not a dungeon */);
+      new Nodes(BIOME_DUNGEONS, DUNGEONS_GRID_CHUNK_WIDTH, DUNGEONS_GRID_CHUNK_WIDTH, false /* not a dungeon */);
   ctx->focusx           = -1;
   ctx->focusy           = -1;
   ctx->generated        = false;

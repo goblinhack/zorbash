@@ -117,6 +117,10 @@ static bool debug_enabled = false;
 
 void Nodes::finish_constructor(biome_t biome)
 {
+  if (biome == BIOME_UNKNOWN) {
+    DIE("No biome set for Nodes constructor");
+  }
+
 redo:
   this->biome = biome;
 
@@ -732,6 +736,10 @@ void Nodes::random_dir(int *dx, int *dy)
 //
 void Nodes::init_nodes(void)
 {
+  if (biome == BIOME_UNKNOWN) {
+    DIE("No biome set for Nodes class");
+  }
+
   nodes.resize(grid_width * grid_height);
 
   std::vector< std::pair< point, point > > s;
