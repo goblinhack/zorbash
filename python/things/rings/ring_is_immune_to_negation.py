@@ -56,7 +56,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_con_mod(self, 1)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 CON")
-    my.text_description_long(self, "Negate your negative qualities with this ring of nega negativity. Attacks of negation will have no impact on you.")
+    my.text_description_long(self, "Negate your negative qualities with this ring of mega nega negativity. Attacks of negation will have no impact on you.")
     my.text_description_short(self, "A ring of negation immunity.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)

@@ -34,7 +34,7 @@ def tp_init(name, text_long_name):
     my.stat_dex(self, 6)
     my.stat_str(self, 12)
     my.text_description_long2(self, "This particular gnome is a rock gnome. Having spent so long underground, these gnomes have developed a dusty, rock like skin and a personality to match. This all makes them exceptionally tough to hit.")
-    my.text_description_short(self, "An ignaceous rock gnome.")
+    my.text_description_short(self, "An granite complexioned rock gnome.")
     # end sort marker
 
     delay = 300

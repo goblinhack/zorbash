@@ -53,7 +53,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_UNCOMMON)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "Amulet of peeking. You are now able to see through doors as if they were made of glass.")
-    my.text_description_short(self, "Amuler of peeking.")
+    my.text_description_short(self, "Amulet of peeking.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)

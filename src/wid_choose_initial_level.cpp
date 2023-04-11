@@ -1543,13 +1543,13 @@ void Game::wid_choose_initial_dungeons(void)
       }
 
       tl.x += 2;
-      br.x = TERM_WIDTH - 5;
+      br.x = TERM_WIDTH - 4;
 
       b = wid_new_square_button(window, "wid key text");
 
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-      wid_set_text(b, "...");
+      wid_set_text(b, "Swamp");
     }
     y += 2;
     {
@@ -1564,13 +1564,13 @@ void Game::wid_choose_initial_dungeons(void)
       }
 
       tl.x += 2;
-      br.x = TERM_WIDTH - 5;
+      br.x = TERM_WIDTH - 3;
 
       b = wid_new_square_button(window, "wid key text");
 
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-      wid_set_text(b, "...");
+      wid_set_text(b, "Chasms");
     }
     y += 2;
     {
@@ -1591,7 +1591,7 @@ void Game::wid_choose_initial_dungeons(void)
 
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-      wid_set_text(b, "...");
+      wid_set_text(b, "Ice");
     }
     y += 2;
     {
@@ -1606,13 +1606,13 @@ void Game::wid_choose_initial_dungeons(void)
       }
 
       tl.x += 2;
-      br.x = TERM_WIDTH - 5;
+      br.x = TERM_WIDTH - 4;
 
       b = wid_new_square_button(window, "wid key text");
 
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-      wid_set_text(b, "...");
+      wid_set_text(b, "Hard");
     }
     y += 2;
     {
@@ -1633,7 +1633,7 @@ void Game::wid_choose_initial_dungeons(void)
 
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-      wid_set_text(b, "...");
+      wid_set_text(b, "Lava");
     }
     y += 2;
     {
@@ -1648,13 +1648,13 @@ void Game::wid_choose_initial_dungeons(void)
       }
 
       tl.x += 2;
-      br.x = TERM_WIDTH - 5;
+      br.x = TERM_WIDTH - 3;
 
       b = wid_new_square_button(window, "wid key text");
 
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-      wid_set_text(b, "...");
+      wid_set_text(b, "VHard");
     }
     y += 2;
     {
@@ -1669,13 +1669,13 @@ void Game::wid_choose_initial_dungeons(void)
       }
 
       tl.x += 2;
-      br.x = TERM_WIDTH - 5;
+      br.x = TERM_WIDTH - 3;
 
       b = wid_new_square_button(window, "wid key text");
 
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-      wid_set_text(b, "Hard");
+      wid_set_text(b, "Finale");
     }
   }
 

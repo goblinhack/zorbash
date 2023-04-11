@@ -444,7 +444,7 @@ PyObject *thing_is_openable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_organic(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_pack(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_pillar(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_pirhana(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_piranha(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_plant(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_player(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_poisonous_danger_level(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -148,7 +148,7 @@ def tp_init(name, text_long_name):
     my.text_description_long2(self, "Dogmen have amazing hearing and are hard to creep up on. Very skilled with throwing darts.")
     my.text_description_long3(self, "Where the dogwomen live is a well kept secret.")
     my.text_description_long(self, "A mildly odorous dogman. Half man, half mutt and blessed with the intellectual capabilities of a human, this poor creature is often very confused as to where it is.")
-    my.text_description_short(self, "A perma panting dogman.")
+    my.text_description_short(self, "A perma-panting dogman.")
     my.text_hits(self, "gores")
     my.thing_size(self, my.THING_SIZE_NORMAL)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

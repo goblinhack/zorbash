@@ -541,7 +541,7 @@ private:
   int _is_openable {};
   int _is_organic {};
   int _is_pillar {};
-  int _is_pirhana {};
+  int _is_piranha {};
   int _is_plant {};
   int _is_player {};
   int _is_poisonous_danger_level {};
@@ -1834,7 +1834,7 @@ public:
   int is_openable(void) const;
   int is_organic(void) const;
   int is_pillar(void) const;
-  int is_pirhana(void) const;
+  int is_piranha(void) const;
   int is_plant(void) const;
   int is_player(void) const;
   int is_poisonous_danger_level(void) const;
@@ -2580,7 +2580,7 @@ public:
   void is_openable_set(int v);
   void is_organic_set(int v);
   void is_pillar_set(int v);
-  void is_pirhana_set(int v);
+  void is_piranha_set(int v);
   void is_plant_set(int v);
   void is_player_set(int v);
   void is_poisonous_danger_level_set(int v);

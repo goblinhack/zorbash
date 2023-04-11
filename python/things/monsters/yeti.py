@@ -127,7 +127,7 @@ def tp_init(name, text_long_name):
     my.temperature(self, -20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "The extra rare dungeon yeti is a formidable foe. With claws able to disembowel in a single swipe, it is best to leave these mostly peacful creatures alone.")
+    my.text_description_long(self, "The extra rare dungeon yeti is a formidable foe. With claws able to disembowel in a single swipe, it is best to leave these mostly peaceful creatures alone.")
     my.text_description_short(self, "A lonesome yeti.")
     my.text_hits(self, "gores")
     my.thing_size(self, my.THING_SIZE_NORMAL)

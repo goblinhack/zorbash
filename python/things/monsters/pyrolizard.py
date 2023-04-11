@@ -140,7 +140,7 @@ def tp_init(name, text_long_name):
     my.text_description_long2(self, "Pyro-lizards hate dogmen. Something to do with barking.")
     my.text_description_long3(self, "Pyro-lizards do not make good pets.")
     my.text_description_long(self, "Pyro-lizards are a primitive and savage race and proudly eschew all forms of weaponry, believing that their claws, teeth and... devastating fire breath are all they need for home defense.")
-    my.text_description_short(self, "A firey pyrolizard.")
+    my.text_description_short(self, "A fiery pyrolizard.")
     my.text_hits(self, "gores")
     my.thing_size(self, my.THING_SIZE_NORMAL)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

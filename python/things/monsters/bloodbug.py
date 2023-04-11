@@ -119,7 +119,7 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "A disgusted bloated bloodbug. Yes, disgusted. It looks at you with disgust, horrible humanoid.")
+    my.text_description_long(self, "A disgusted bloated bloodbug. Yes, disgusted. It looks at you with disgust, horrible humanoid meat sac full of blood.")
     my.text_description_short(self, "A bloated bloodbug.")
     my.text_hits(self, "bites")
     my.thing_size(self, my.THING_SIZE_TINY)

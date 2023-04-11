@@ -344,7 +344,7 @@ bool Tp::matches(const std::string &what)
   if (is_openable() && (what == "is_openable")) { return true; }
   if (is_organic() && (what == "is_organic")) { return true; }
   if (is_pillar() && (what == "is_pillar")) { return true; }
-  if (is_pirhana() && (what == "is_pirhana")) { return true; }
+  if (is_piranha() && (what == "is_piranha")) { return true; }
   if (is_plant() && (what == "is_plant")) { return true; }
   if (is_player() && (what == "is_player")) { return true; }
   if (is_poisonous_danger_level() && (what == "is_poisonous_danger_level")) { return true; }
@@ -946,7 +946,7 @@ bool Thing::matches(const std::string &what)
   if (is_openable() && (what == "is_openable")) { return true; }
   if (is_organic() && (what == "is_organic")) { return true; }
   if (is_pillar() && (what == "is_pillar")) { return true; }
-  if (is_pirhana() && (what == "is_pirhana")) { return true; }
+  if (is_piranha() && (what == "is_piranha")) { return true; }
   if (is_plant() && (what == "is_plant")) { return true; }
   if (is_player() && (what == "is_player")) { return true; }
   if (is_poisonous_danger_level() && (what == "is_poisonous_danger_level")) { return true; }
@@ -1539,7 +1539,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_openable") { return &Thing::is_openable; }
   if (what == "is_organic") { return &Thing::is_organic; }
   if (what == "is_pillar") { return &Thing::is_pillar; }
-  if (what == "is_pirhana") { return &Thing::is_pirhana; }
+  if (what == "is_piranha") { return &Thing::is_piranha; }
   if (what == "is_plant") { return &Thing::is_plant; }
   if (what == "is_player") { return &Thing::is_player; }
   if (what == "is_poisonous_danger_level") { return &Thing::is_poisonous_danger_level; }

@@ -620,7 +620,7 @@ int Tp::is_ogre(void) const { return _is_ogre; }
 int Tp::is_openable(void) const { return _is_openable; }
 int Tp::is_organic(void) const { return _is_organic; }
 int Tp::is_pillar(void) const { return _is_pillar; }
-int Tp::is_pirhana(void) const { return _is_pirhana; }
+int Tp::is_piranha(void) const { return _is_piranha; }
 int Tp::is_plant(void) const { return _is_plant; }
 int Tp::is_player(void) const { return _is_player; }
 int Tp::is_poisonous_danger_level(void) const { return _is_poisonous_danger_level; }
@@ -1366,7 +1366,7 @@ void Tp::is_ogre_set(int v) { _is_ogre = v; }
 void Tp::is_openable_set(int v) { _is_openable = v; }
 void Tp::is_organic_set(int v) { _is_organic = v; }
 void Tp::is_pillar_set(int v) { _is_pillar = v; }
-void Tp::is_pirhana_set(int v) { _is_pirhana = v; }
+void Tp::is_piranha_set(int v) { _is_piranha = v; }
 void Tp::is_plant_set(int v) { _is_plant = v; }
 void Tp::is_player_set(int v) { _is_player = v; }
 void Tp::is_poisonous_danger_level_set(int v) { _is_poisonous_danger_level = v; }

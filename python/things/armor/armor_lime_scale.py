@@ -53,7 +53,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+2 DEF")
     my.text_description_long2(self, "Good short term armor")
-    my.text_description_long(self, "Lime scale armor. This armor is coverted with a fine chalky deposit, giving a very tough exterior. However, once that layer flakes off, you're left with little protection.")
+    my.text_description_long(self, "Lime scale armor. This armor is covered with a fine chalky deposit, giving a very tough exterior. However, once that layer flakes off, you're left with little protection.")
     my.text_description_short(self, "Lime scale mail armor.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)

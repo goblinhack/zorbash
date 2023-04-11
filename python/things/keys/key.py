@@ -36,7 +36,7 @@ def key_init(name, text_long_name):
     my.light_dist(self, 2)
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "an")
-    my.text_description_long(self, "A key that leadeth places undreamt of, or next door.")
+    my.text_description_long(self, "A key that leadeth places undreamed of, or next door.")
     my.text_description_short(self, "A key.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)

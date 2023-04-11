@@ -125,7 +125,7 @@ def tp_init(name, text_long_name):
     my.text_a_or_an(self, "a")
     my.text_description_long2(self, "With no morning dew to feed on, meat fairies developed a ravenous taste for meat and blood, and by inference, you. They often appear in ravenous bloodlust packs, so watch out.")
     my.text_description_long3(self, "They often appear in ravenous bloodlust packs, so watch out.")
-    my.text_description_long(self, "Meat fairys are the cannibalistic variant of their surface dwelling and peace loving kin.")
+    my.text_description_long(self, "Meat fairies are the cannibalistic variant of their surface dwelling and peace loving kin.")
     my.text_description_short(self, "A meatfairy.")
     my.text_hits(self, "stabs")
     my.thing_size(self, my.THING_SIZE_TINY)

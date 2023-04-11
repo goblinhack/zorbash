@@ -14,7 +14,7 @@ bool Thing::is_hated_by_me(const point p)
   TRACE_NO_INDENT();
 
   //
-  // Limit krakens to the depths, but allow eels and pirhana_giants free roam.
+  // Limit krakens to the depths, but allow eels and piranha_giants free roam.
   //
   if (is_swimmer()) {
     if (environ_likes_deep_water() && environ_likes_shallow_water()) {
@@ -82,7 +82,7 @@ bool Tp::is_hated_by_me(Levelp level, point p) const
   TRACE_NO_INDENT();
 
   //
-  // Limit krakens to the depths, but allow eels and pirhana_giants free roam.
+  // Limit krakens to the depths, but allow eels and piranha_giants free roam.
   //
   if (is_swimmer()) {
     if (environ_likes_deep_water() && environ_likes_shallow_water()) {

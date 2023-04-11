@@ -124,7 +124,7 @@ def tp_init(name, text_long_name):
     my.stat_str(self, 19)
     my.temperature(self, 20)
     my.text_a_or_an(self, "a")
-    my.text_description_long2(self, "Golems are able to slowly recharge health and are reknowed for being no fun at parties.")
+    my.text_description_long2(self, "Golems are able to slowly recharge health and are well known for being absolutely no fun at parties.")
     my.text_description_long(self, "A hideous progeny of animated flesh that wishes to add your skin to its body mass. Golems are immune to cold, poison and draining attacks. They gain health from lightning.")
     my.text_description_short(self, "A flesh golem.")
     my.text_hits(self, "claws")

@@ -36,7 +36,7 @@ def tp_init(name, text_long_name):
     my.stat_str_mod(self, 1)
     my.text_description_enchant(self, "+1 health")
     my.text_description_long2(self, "Each enchant will convert the gold to greater health.")
-    my.text_description_long(self, "With this skill you are able to transmutate gold into life giving health.")
+    my.text_description_long(self, "With this skill you are able to trans-mutate gold into life giving health.")
     my.text_description_short(self, "Gold to health skill.")
     my.text_skill(self, "Gold to health")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

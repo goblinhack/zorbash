@@ -1590,7 +1590,7 @@ public:
   int is_openable(void);
   int is_organic(void);
   int is_pillar(void);
-  int is_pirhana(void);
+  int is_piranha(void);
   int is_plant(void);
   int is_player(void);
   int is_poisonous_danger_level(void);

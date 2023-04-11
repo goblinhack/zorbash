@@ -3,11 +3,11 @@ import tp
 
 
 def on_you_are_declared_leader(me, x, y):
-    my.thing_polymorph(me, "pirhana_giant")
+    my.thing_polymorph(me, "piranha_giant")
 
 
 def on_you_are_declared_a_follower(me, leader, x, y):
-    my.thing_polymorph(me, "pirhana_giant")
+    my.thing_polymorph(me, "piranha_giant")
 
 
 def tp_init(name, text_long_name):
@@ -17,7 +17,7 @@ def tp_init(name, text_long_name):
     my.gfx_ascii_shown(self, True)
     my.distance_recruitment_max(self, 7)
     my.is_able_to_follow(self, True)
-    my.is_allied_with(self, "pirhana_giant_pack")
+    my.is_allied_with(self, "piranha_giant_pack")
     my.is_biome_dungeon(self, True)
     my.is_monst_class_C(self, True)
     my.is_loggable(self, True)
@@ -34,7 +34,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="pirhana_giant_pack", text_long_name="pirhana_giant pack")
+    tp_init(name="piranha_giant_pack", text_long_name="piranha_giant pack")
 
 
 init()

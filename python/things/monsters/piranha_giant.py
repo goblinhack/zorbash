@@ -36,13 +36,13 @@ def tp_init(name, text_long_name):
     my.attack_meat(self, True)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
-    my.consume_per_bite_amount(self, 10)
+    my.consume_per_bite_amount(self, 30)
     my.distance_leader_max(self, 3)
     my.distance_vision(self, 5)
-    my.dmg_bite_dice(self, "1d4")
+    my.dmg_bite_dice(self, "1d8")
     my.dmg_chance_d1000_bite(self, 0, 900)
     my.dmg_chance_d1000_nat_att(self, 0, 900)
-    my.dmg_nat_att_dice(self, "1d4+3")
+    my.dmg_nat_att_dice(self, "1d10+3")
     my.dmg_nat_att_type(self, "bite")
     my.environ_likes_deep_water(self, True)
     my.gfx_anim_use(self, "attack_red")
@@ -50,11 +50,11 @@ def tp_init(name, text_long_name):
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_oversized_and_centered(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
-    my.gfx_pixelart_submergible(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
-    my.health_initial_dice(self, "1d4")
+    my.health_initial_dice(self, "2d10")
     my.hunger_clock_tick_freq(self, 50)
     my.is_able_to_be_teleported(self, True)
     my.is_able_to_fall(self, True)
@@ -79,11 +79,11 @@ def tp_init(name, text_long_name):
     my.is_interesting(self, True)
     my.is_loggable(self, True)
     my.is_meat(self, True)
-    my.is_monst_class_A(self, True)
+    my.is_monst_class_B(self, True)
     my.is_monst(self, True)
     my.is_moveable(self, True)
     my.is_msg_allowed_is_dead(self, True)
-    my.is_pirhana(self, True)
+    my.is_piranha(self, True)
     my.is_red_blooded(self, True)
     my.is_soft(self, True)
     my.is_swimmer(self, True)
@@ -95,11 +95,11 @@ def tp_init(name, text_long_name):
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
     my.on_you_nat_attack_attempt_do(self, "me.on_you_nat_attack_attempt()")
-    my.rarity(self, my.RARITY_RARE)  # how rare within this monster class
+    my.rarity(self, my.RARITY_VERY_RARE)  # how rare within this monster class
     my.stamina(self, 100)
     my.stat_con(self, 10)
-    my.stat_def(self, 6)
-    my.stat_dex(self, 12)
+    my.stat_def(self, 8)
+    my.stat_dex(self, 8)
     my.stat_luck(self, 10)
     my.stat_str(self, 2)
     my.temperature_max(self, 50)
@@ -107,8 +107,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "A delightful pet pirhana. It has friends and they want to play.")
-    my.text_description_short(self, "Pirhana.")
+    my.text_description_long(self, "A delightful giant piranha. It has friends and they want to play.")
+    my.text_description_short(self, "Giant piranha.")
     my.text_hits(self, "bites")
     my.thing_size(self, my.THING_SIZE_TINY)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -116,29 +116,23 @@ def tp_init(name, text_long_name):
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
     # end sort marker
 
-    delay = 200
+    delay = 800
     my.tile(self,
-            ascii_fg_char="p", ascii_bg_col_name="", ascii_fg_col_name="darkred",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="p", ascii_bg_col_name="", ascii_fg_col_name="darkred",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".2", delay_ms=delay)
-    my.tile(self,
-            ascii_fg_char="p", ascii_bg_col_name="", ascii_fg_col_name="darkred",
-            tile=name + ".3", delay_ms=delay)
-    my.tile(self,
-            ascii_fg_char="p", ascii_bg_col_name="", ascii_fg_col_name="darkred",
-            tile=name + ".4", delay_ms=delay)
 
     my.tile(self,
-            ascii_fg_char="p", ascii_bg_col_name="", ascii_fg_col_name="gray30",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="gray30",
             tile=name + ".dead", is_dead=True, is_end_of_anim=True)
 
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="pirhana", text_long_name="pirhana")
+    tp_init(name="piranha_giant", text_long_name="giant piranha")
 
 
 init()

@@ -46,7 +46,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_thrown_do(self, "me.on_thrown()")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "Grown locally and substainably. In soil drenched with the blood of adventurers.")
+    my.text_description_long(self, "Grown locally and sustainably. In soil drenched with the blood of adventurers.")
     my.text_description_short(self, "Organic battle turnip.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)

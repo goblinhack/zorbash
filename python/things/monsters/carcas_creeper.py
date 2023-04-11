@@ -130,7 +130,7 @@ def tp_init(name, text_long_name):
     my.text_a_or_an(self, "a")
     my.text_description_long2(self, "Watch out for its poisonous mandibles!")
     my.text_description_long(self, "A hideous, and thankfully slow moving, crawling insectoid with sickly flesh coloured skin. This creature has a use however, that of clearing the dungeon of extraneous meaty detritus. Like you.")
-    my.text_description_short(self, "A disgusting carcas creeper.")
+    my.text_description_short(self, "A disgusting carcass creeper.")
     my.text_hits(self, "gores")
     my.thing_size(self, my.THING_SIZE_LARGE)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

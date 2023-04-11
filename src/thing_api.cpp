@@ -1196,10 +1196,10 @@ int Thing::is_made_of_rock(void)
   TRACE_NO_INDENT();
   return (tp()->is_made_of_rock());
 }
-int Thing::is_pirhana(void)
+int Thing::is_piranha(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_pirhana());
+  return (tp()->is_piranha());
 }
 int Thing::is_unused_flag192(void)
 {

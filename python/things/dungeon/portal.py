@@ -33,7 +33,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.light_dist(self, 3)
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "the")
-    my.text_description_long(self, "A magical portal to places undreamt of. Depends how boring your dreams are.")
+    my.text_description_long(self, "A magical portal to places undreamed of. Depends how boring your dreams are.")
     my.text_description_short(self, "A magical portal.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
