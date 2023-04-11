@@ -66,9 +66,7 @@
 <!-- - tomb of past player ? or random player ? leads to random small room?                                                                       -->
 <!-- - gold needs to do something - shop? buy/sell                                                                                                -->
 <!-- - totems are like mobs, but do not spawn except initially. The worshippers are imbued with power but do not die when the totem does.         -->
-<!-- - exploding bogs                                                                                                                             -->
 <!-- - vaults                                                                                                                                     -->
-<!-- - teleports                                                                                                                                  -->
 <!-- - portable hunger - teleports you to a room full of digestive juices                                                                         -->
 <!-- - moving floor                                                                                                                               -->
 <!-- - shove chocolate frog statue, get frog?                                                                                                     -->
@@ -76,7 +74,6 @@
 <!--                                                                                                                                              -->
 <!-- Traps                                                                                                                                        -->
 <!-- ------                                                                                                                                       -->
-<!-- - random floor trap                                                                                                                          -->
 <!-- - moving blocks?                                                                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
@@ -107,27 +104,19 @@
 <!-- - chocolote frog cures poison?                                                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
-<!-- Gasses                                                                                                                                       -->
-<!-- ------                                                                                                                                       -->
-<!-- - gasses that spread however you will need to allow levels with gas or fire to tick so it can dissipate                                      -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
 <!-- Doors                                                                                                                                        -->
 <!-- ------                                                                                                                                       -->
 <!-- - hit door, summon monst chance                                                                                                              -->
-<!-- - hit door, wake sleeping monsters                                                                                                           -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- AI                                                                                                                                           -->
 <!-- ------                                                                                                                                       -->
 <!-- - eat corpses, like a bat corpse?                                                                                                            -->
-<!-- - add monst states, like wandering (not noticed your stealth), hunting, worshipping, sleeping                                                -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Rings                                                                                                                                        -->
 <!-- ------                                                                                                                                       -->
 <!-- - necro protection ring                                                                                                                      -->
-<!-- - ring combos?                                                                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Staffs                                                                                                                                       -->
@@ -140,7 +129,6 @@
 <!-- ------                                                                                                                                       -->
 <!-- - have a monster use a potion?                                                                                                               -->
 <!-- - antipoison potion                                                                                                                          -->
-<!-- - enchant potion of descent radius                                                                                                           -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Armor                                                                                                                                        -->
@@ -151,7 +139,6 @@
 <!-- Weapons                                                                                                                                      -->
 <!-- ------                                                                                                                                       -->
 <!-- - holy water cures poison                                                                                                                    -->
-<!-- - darts / poison darts                                                                                                                       -->
 <!-- - strength penalties                                                                                                                         -->
 <!-- - blessed items resist explosion                                                                                                             -->
 <!-- - warhammer should kill parent slime in one go                                                                                               -->
@@ -162,13 +149,10 @@
 <!-- Monsts                                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
 <!-- - chccolate golem fires chocolate                                                                                                            -->
-<!-- - ogres and ogre totem                                                                                                                       -->
 <!-- - chickens - battle chickens - lay eggs as food - and they get names                                                                         -->
 <!-- - acid jellies should damage weapons                                                                                                         -->
-<!-- - grass death wakes monsters                                                                                                                 -->
 <!-- - mold growth / floor puddings                                                                                                               -->
 <!-- - bloodgrass, grows near corpses                                                                                                             -->
-<!-- - yak that eats foliage                                                                                                                      -->
 <!-- - shove/lure monsters into webs?                                                                                                             -->
 <!-- - rat pack and king rat / cranium rat                                                                                                        -->
 <!-- - zombie camel?                                                                                                                              -->
@@ -176,7 +160,6 @@
 <!-- - invisible monst?                                                                                                                           -->
 <!-- - monster that runs from light ?                                                                                                             -->
 <!-- - tentacles out of the ground that try to surround you                                                                                       -->
-<!-- - creature that pretends to be a stone until close by then sprouts legs                                                                      -->
 <!-- - dungeon walrus; long headed walrus with many tusks                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
