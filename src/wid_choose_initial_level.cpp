@@ -228,7 +228,12 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
     fg_tilename = "final_boss_icon";
   }
 
-  wid_set_style(b, UI_WID_STYLE_SOLID_DEFAULT);
+  if (g_opt_ascii) {
+    wid_set_style(b, UI_WID_STYLE_SOLID_DEFAULT);
+  } else {
+    wid_set_color(b, WID_COLOR_BG, WHITE);
+    wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+  }
 
   if (node->is_key) {
     switch (node->depth) {
@@ -518,12 +523,12 @@ static void wid_choose_initial_dungeons_tick(Widp w)
 
   if (val > 255) {
     val   = 255;
-    delta = -1;
+    delta = -2;
   }
 
-  if (val < 200) {
-    val   = 200;
-    delta = 1;
+  if (val < 100) {
+    val   = 100;
+    delta = 2;
   }
 
   {
@@ -1408,7 +1413,7 @@ void Game::wid_choose_initial_dungeons(void)
   if (g_opt_ascii) {
     if (1) {
       auto  w  = wid_new_square_button(window, "wid key");
-      point tl = make_point(TERM_WIDTH - 11, 10);
+      point tl = make_point(TERM_WIDTH - 12, 10);
       point br = make_point(TERM_WIDTH - 4, 10);
       wid_set_pos(w, tl, br);
       wid_set_text(w, "Key:");
@@ -1564,31 +1569,10 @@ void Game::wid_choose_initial_dungeons(void)
     if (1) {
       {
         auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 10, 18);
-        point br = make_point(TERM_WIDTH - 10, 18);
-        wid_set_style(w, UI_WID_STYLE_SOLID_DEFAULT);
-        wid_set_color(w, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_4_ICE_COLOR);
-        wid_set_pos(w, tl, br);
-        wid_set_text(w, " ");
-      }
-
-      {
-        auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 8, 18);
-        point br = make_point(TERM_WIDTH - 1, 18);
-        wid_set_pos(w, tl, br);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "Ice");
-      }
-    }
-
-    if (1) {
-      {
-        auto  w  = wid_new_square_button(window, "wid key");
         point tl = make_point(TERM_WIDTH - 10, 19);
         point br = make_point(TERM_WIDTH - 10, 19);
         wid_set_style(w, UI_WID_STYLE_SOLID_DEFAULT);
-        wid_set_color(w, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_5_COLOR);
+        wid_set_color(w, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_4_ICE_COLOR);
         wid_set_pos(w, tl, br);
         wid_set_text(w, " ");
       }
@@ -1599,7 +1583,7 @@ void Game::wid_choose_initial_dungeons(void)
         point br = make_point(TERM_WIDTH - 1, 19);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "Hard");
+        wid_set_text(w, "Ice");
       }
     }
 
@@ -1609,7 +1593,7 @@ void Game::wid_choose_initial_dungeons(void)
         point tl = make_point(TERM_WIDTH - 10, 20);
         point br = make_point(TERM_WIDTH - 10, 20);
         wid_set_style(w, UI_WID_STYLE_SOLID_DEFAULT);
-        wid_set_color(w, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_6_LAVA_COLOR);
+        wid_set_color(w, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_5_COLOR);
         wid_set_pos(w, tl, br);
         wid_set_text(w, " ");
       }
@@ -1620,7 +1604,7 @@ void Game::wid_choose_initial_dungeons(void)
         point br = make_point(TERM_WIDTH - 1, 20);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "Lava");
+        wid_set_text(w, "Hard");
       }
     }
 
@@ -1630,7 +1614,7 @@ void Game::wid_choose_initial_dungeons(void)
         point tl = make_point(TERM_WIDTH - 10, 21);
         point br = make_point(TERM_WIDTH - 10, 21);
         wid_set_style(w, UI_WID_STYLE_SOLID_DEFAULT);
-        wid_set_color(w, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_7_COLOR);
+        wid_set_color(w, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_6_LAVA_COLOR);
         wid_set_pos(w, tl, br);
         wid_set_text(w, " ");
       }
@@ -1641,7 +1625,7 @@ void Game::wid_choose_initial_dungeons(void)
         point br = make_point(TERM_WIDTH - 1, 21);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "vHard");
+        wid_set_text(w, "Lava");
       }
     }
 
@@ -1651,7 +1635,7 @@ void Game::wid_choose_initial_dungeons(void)
         point tl = make_point(TERM_WIDTH - 10, 22);
         point br = make_point(TERM_WIDTH - 10, 22);
         wid_set_style(w, UI_WID_STYLE_SOLID_DEFAULT);
-        wid_set_color(w, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_8_COLOR);
+        wid_set_color(w, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_7_COLOR);
         wid_set_pos(w, tl, br);
         wid_set_text(w, " ");
       }
@@ -1660,6 +1644,27 @@ void Game::wid_choose_initial_dungeons(void)
         auto  w  = wid_new_square_button(window, "wid key");
         point tl = make_point(TERM_WIDTH - 8, 22);
         point br = make_point(TERM_WIDTH - 1, 22);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "vHard");
+      }
+    }
+
+    if (1) {
+      {
+        auto  w  = wid_new_square_button(window, "wid key");
+        point tl = make_point(TERM_WIDTH - 10, 23);
+        point br = make_point(TERM_WIDTH - 10, 23);
+        wid_set_style(w, UI_WID_STYLE_SOLID_DEFAULT);
+        wid_set_color(w, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_8_COLOR);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, " ");
+      }
+
+      {
+        auto  w  = wid_new_square_button(window, "wid key");
+        point tl = make_point(TERM_WIDTH - 8, 23);
+        point br = make_point(TERM_WIDTH - 1, 23);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Finale");

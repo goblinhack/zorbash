@@ -159,7 +159,6 @@ static void wid_choose_next_dungeons_mouse_over(Widp w, int relx, int rely, int 
       case 8: bg_tilename = "dungeon_icon.8"; break;
     }
 
-    wid_set_style(wid_level_description->wid_popup_container, UI_WID_STYLE_GRAY);
     if (g_opt_ascii) {
       switch (l->difficulty_depth) {
         case -1: break;
@@ -196,6 +195,11 @@ static void wid_choose_next_dungeons_mouse_over(Widp w, int relx, int rely, int 
                         UI_DUNGEONS_DIFFICULTY_LEVEL_8_COLOR);
           break;
       }
+
+      wid_set_style(wid_level_description->wid_popup_container, UI_WID_STYLE_SOLID_DEFAULT);
+    } else {
+      wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, WHITE);
+      wid_set_style(wid_level_description->wid_popup_container, UI_WID_STYLE_SPARSE_NONE);
     }
   }
 
@@ -254,8 +258,8 @@ static void wid_choose_next_dungeons_tick(Widp w)
     delta = -2;
   }
 
-  if (val < 150) {
-    val   = 150;
+  if (val < 100) {
+    val   = 100;
     delta = 2;
   }
 
