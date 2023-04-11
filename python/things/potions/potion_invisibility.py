@@ -21,11 +21,11 @@ def explode(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if owner:
         if my.thing_is_player(owner):
-            my.thing_msg(me, "Your potion of invisibility explodes.")
+            my.thing_msg(me, "Your potion of invisibility visibly explodes.")
         else:
-            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s potion of invisibility explodes.")
+            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s potion of invisibility visibly explodes.")
     else:
-        my.thing_msg(me, "The potion of invisibility explodes.")
+        my.thing_msg(me, "The potion of invisibility visibly explodes.")
 
     my.spawn_at_my_position(me, "explosion_fire")
     my.spawn_set_fire_to_things_around_me(me, "fire")
