@@ -345,18 +345,18 @@ static void wid_main_menu_tick(Widp w)
     ascii_putf(1, 1, GREEN, BLACK, L"Version: " MYVER);
 
     auto        k    = ::to_string(game->config.key_gfx_toggle);
-    std::string text = " Press %%fg=yellow$" + k + "%%fg=reset$ to toggle the graphics mode.";
+    std::string text = " Press %%fg=yellow$" + k + "%%fg=reset$ to toggle the graphics mode ";
     ascii_putf(TERM_WIDTH / 2 - (length_without_format(text) / 2), TERM_HEIGHT - 1, YELLOW, BLACK,
                string_to_wstring(text));
 
     if (! g_opt_player_name.empty()) {
       auto player_name = "Player name: '" + g_opt_player_name + "'";
-      ascii_putf(1, 2, YELLOW, BLACK, string_to_wstring(player_name));
+      ascii_putf(1, 2, UI_DUNGEONS_PLAYER_COLOR, BLACK, string_to_wstring(player_name));
     }
 
     if (! g_opt_seed_name.empty()) {
       auto seed_name = "Seed: '" + g_opt_seed_name + "'";
-      ascii_putf(1, 3, YELLOW, BLACK, string_to_wstring(seed_name));
+      ascii_putf(1, 3, UI_DUNGEONS_SEED_COLOR, BLACK, string_to_wstring(seed_name));
     }
   }
 }

@@ -60,6 +60,25 @@
 #define UI_WID_SAVE_SLOTS            10 // How many save game slots
 
 //
+// Various colors for the level selection
+//
+#define UI_DUNGEONS_DIFFICULTY_LEVEL_1_COLOR        GRAY50
+#define UI_DUNGEONS_DIFFICULTY_LEVEL_2_SWAMP_COLOR  OLIVEDRAB
+#define UI_DUNGEONS_DIFFICULTY_LEVEL_3_CHASMS_COLOR MEDIUMSLATEBLUE
+#define UI_DUNGEONS_DIFFICULTY_LEVEL_4_ICE_COLOR    CYAN2
+#define UI_DUNGEONS_DIFFICULTY_LEVEL_5_COLOR        GRAY40
+#define UI_DUNGEONS_DIFFICULTY_LEVEL_6_LAVA_COLOR   LAVA
+#define UI_DUNGEONS_DIFFICULTY_LEVEL_7_COLOR        GRAY30
+#define UI_DUNGEONS_DIFFICULTY_LEVEL_8_COLOR        GRAY20
+#define UI_DUNGEONS_CRYSTAL_COLOR                   YELLOW3
+#define UI_DUNGEONS_BOSS_COLOR                      RED2
+#define UI_DUNGEONS_FINAL_BOSS_COLOR                RED
+#define UI_DUNGEONS_CURRENT_LEVEL_COLOR             GREEN
+#define UI_DUNGEONS_SEED_COLOR                      GREEN2
+#define UI_DUNGEONS_PLAYER_COLOR                    PINK2
+#define UI_DUNGEONS_UNKNOWN_COLOR                   GRAY30
+
+//
 // Do faster processing of events, like reading the keyboard and updating widgets.
 //
 #define UI_EVENT_LOOP_FREQ_FAST_MS (g_opt_ascii ? 10 : 5)
