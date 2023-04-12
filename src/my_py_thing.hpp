@@ -461,6 +461,8 @@ PyObject *thing_is_removable_if_out_of_slots(PyObject *obj, PyObject *args, PyOb
 PyObject *thing_is_resurrected_or_resurrecting(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ring(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ripple(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_rock_ice(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_rock_lava(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rock(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rusty(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_scorpion(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -563,8 +565,6 @@ PyObject *thing_is_unused_flag150(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag151(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag152(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag153(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag154(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag155(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag15(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag16(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag179(PyObject *obj, PyObject *args, PyObject *keywds);

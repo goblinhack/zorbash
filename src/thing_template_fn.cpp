@@ -636,6 +636,8 @@ int Tp::is_red_splatter(void) const { return _is_red_splatter; }
 int Tp::is_removable_if_out_of_slots(void) const { return _is_removable_if_out_of_slots; }
 int Tp::is_ring(void) const { return _is_ring; }
 int Tp::is_ripple(void) const { return _is_ripple; }
+int Tp::is_rock_ice(void) const { return _is_rock_ice; }
+int Tp::is_rock_lava(void) const { return _is_rock_lava; }
 int Tp::is_rock(void) const { return _is_rock; }
 int Tp::is_rusty(void) const { return _is_rusty; }
 int Tp::is_scorpion(void) const { return _is_scorpion; }
@@ -741,8 +743,6 @@ int Tp::is_unused_flag150(void) const { return _is_unused_flag150; }
 int Tp::is_unused_flag151(void) const { return _is_unused_flag151; }
 int Tp::is_unused_flag152(void) const { return _is_unused_flag152; }
 int Tp::is_unused_flag153(void) const { return _is_unused_flag153; }
-int Tp::is_unused_flag154(void) const { return _is_unused_flag154; }
-int Tp::is_unused_flag155(void) const { return _is_unused_flag155; }
 int Tp::is_unused_flag15(void) const { return _is_unused_flag15; }
 int Tp::is_unused_flag16(void) const { return _is_unused_flag16; }
 int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
@@ -1382,6 +1382,8 @@ void Tp::is_red_splatter_set(int v) { _is_red_splatter = v; }
 void Tp::is_removable_if_out_of_slots_set(int v) { _is_removable_if_out_of_slots = v; }
 void Tp::is_ring_set(int v) { _is_ring = v; }
 void Tp::is_ripple_set(int v) { _is_ripple = v; }
+void Tp::is_rock_ice_set(int v) { _is_rock_ice = v; }
+void Tp::is_rock_lava_set(int v) { _is_rock_lava = v; }
 void Tp::is_rock_set(int v) { _is_rock = v; }
 void Tp::is_rusty_set(int v) { _is_rusty = v; }
 void Tp::is_scorpion_set(int v) { _is_scorpion = v; }
@@ -1487,8 +1489,6 @@ void Tp::is_unused_flag150_set(int v) { _is_unused_flag150 = v; }
 void Tp::is_unused_flag151_set(int v) { _is_unused_flag151 = v; }
 void Tp::is_unused_flag152_set(int v) { _is_unused_flag152 = v; }
 void Tp::is_unused_flag153_set(int v) { _is_unused_flag153 = v; }
-void Tp::is_unused_flag154_set(int v) { _is_unused_flag154 = v; }
-void Tp::is_unused_flag155_set(int v) { _is_unused_flag155 = v; }
 void Tp::is_unused_flag15_set(int v) { _is_unused_flag15 = v; }
 void Tp::is_unused_flag16_set(int v) { _is_unused_flag16 = v; }
 void Tp::is_unused_flag179_set(int v) { _is_unused_flag179 = v; }

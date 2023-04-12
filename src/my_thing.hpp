@@ -1607,6 +1607,8 @@ public:
   int is_resurrected_or_resurrecting(void);
   int is_ring(void);
   int is_ripple(void);
+  int is_rock_ice(void);
+  int is_rock_lava(void);
   int is_rock(void);
   int is_rusty(void);
   int is_scorpion(void);
@@ -1711,8 +1713,6 @@ public:
   int is_unused_flag151(void);
   int is_unused_flag152(void);
   int is_unused_flag153(void);
-  int is_unused_flag154(void);
-  int is_unused_flag155(void);
   int is_unused_flag15(void);
   int is_unused_flag16(void);
   int is_unused_flag179(void);

@@ -1036,15 +1036,15 @@ int Thing::is_unused_flag153(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag153());
 }
-int Thing::is_unused_flag154(void)
+int Thing::is_rock_lava(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag154());
+  return (tp()->is_rock_lava());
 }
-int Thing::is_unused_flag155(void)
+int Thing::is_rock_ice(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag155());
+  return (tp()->is_rock_ice());
 }
 int Thing::is_yeti(void)
 {

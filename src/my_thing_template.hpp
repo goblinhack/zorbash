@@ -558,6 +558,8 @@ private:
   int _is_ring {};
   int _is_ripple {};
   int _is_rock {};
+  int _is_rock_ice {};
+  int _is_rock_lava {};
   int _is_rusty {};
   int _is_scorpion {};
   int _is_secret_door {};
@@ -664,8 +666,6 @@ private:
   int _is_unused_flag151 {};
   int _is_unused_flag152 {};
   int _is_unused_flag153 {};
-  int _is_unused_flag154 {};
-  int _is_unused_flag155 {};
   int _is_unused_flag16 {};
   int _is_unused_flag17 {};
   int _is_unused_flag179 {};
@@ -1850,6 +1850,8 @@ public:
   int is_removable_if_out_of_slots(void) const;
   int is_ring(void) const;
   int is_ripple(void) const;
+  int is_rock_ice(void) const;
+  int is_rock_lava(void) const;
   int is_rock(void) const;
   int is_rusty(void) const;
   int is_scorpion(void) const;
@@ -1955,8 +1957,6 @@ public:
   int is_unused_flag151(void) const;
   int is_unused_flag152(void) const;
   int is_unused_flag153(void) const;
-  int is_unused_flag154(void) const;
-  int is_unused_flag155(void) const;
   int is_unused_flag15(void) const;
   int is_unused_flag16(void) const;
   int is_unused_flag179(void) const;
@@ -2596,6 +2596,8 @@ public:
   void is_removable_if_out_of_slots_set(int v);
   void is_ring_set(int v);
   void is_ripple_set(int v);
+  void is_rock_ice_set(int v);
+  void is_rock_lava_set(int v);
   void is_rock_set(int v);
   void is_rusty_set(int v);
   void is_scorpion_set(int v);
@@ -2701,8 +2703,6 @@ public:
   void is_unused_flag151_set(int v);
   void is_unused_flag152_set(int v);
   void is_unused_flag153_set(int v);
-  void is_unused_flag154_set(int v);
-  void is_unused_flag155_set(int v);
   void is_unused_flag15_set(int v);
   void is_unused_flag16_set(int v);
   void is_unused_flag179_set(int v);
