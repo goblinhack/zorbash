@@ -381,7 +381,7 @@ void tex_load(Texp *tex, Texp *tex_black_and_white, Texp *tex_mask, std::string 
   TRACE_AND_INDENT();
   Texp t = tex_find(name);
   if (t) {
-    ERR("Tex already eciste '%s'", name.c_str());
+    ERR("Tex name already e0ists '%s'", name.c_str());
   }
 
   DBG2("Loading texture '%s', '%s'", file.c_str(), name.c_str());
