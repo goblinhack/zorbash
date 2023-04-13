@@ -31,7 +31,6 @@ Levelp World::new_level_at(point3d world_at, point grid_at, uint32_t seed, int d
   // Choose the biome for the level
   //
   auto biome = get_biome(world_at, difficulty_depth);
-  ;
 
   //
   // If the old level exists, remove it

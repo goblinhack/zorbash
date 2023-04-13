@@ -6,6 +6,7 @@
 #include "my_callstack.hpp"
 #include "my_color_defs.hpp"
 #include "my_globals.hpp"
+#include "my_main.hpp"
 #include "my_ui.hpp"
 
 biome_t get_biome(point3d world_at, int difficulty_depth)
@@ -36,16 +37,23 @@ biome_t get_biome(int difficulty_depth)
   switch (difficulty_depth) {
     case 0: biome = BIOME_DUNGEON; break;
     case 1: biome = BIOME_SWAMP; break;
-    case 2: biome = BIOME_CHASMS; break;
-    case 3: biome = BIOME_ICE; break;
+    case 2:
+      biome = BIOME_CHASMS;
+      biome = BIOME_DUNGEON; // HACK
+      break;
+    case 3:
+      biome = BIOME_ICE;
+      biome = BIOME_DUNGEON; // HACK
+      break;
     case 4: biome = BIOME_DUNGEON; break;
-    case 5: biome = BIOME_LAVA; break;
+    case 5:
+      biome = BIOME_LAVA;
+      biome = BIOME_DUNGEON; // HACK
+      break;
     case 6: biome = BIOME_DUNGEON; break;
     case 7: biome = BIOME_DUNGEON; break;
     default: biome = BIOME_DUNGEON; break;
   }
-  // HACK
-  biome = BIOME_DUNGEON;
 
   if (g_opt_biome_swamp) {
     biome = BIOME_SWAMP;

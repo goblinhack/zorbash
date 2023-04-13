@@ -245,7 +245,6 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
       case 5: fg_tilename = "crystal.5"; break;
       case 6: fg_tilename = "crystal.6"; break;
       case 7: fg_tilename = "crystal.7"; break;
-      case 8: fg_tilename = "crystal.8"; break;
     }
   }
 
@@ -395,7 +394,7 @@ static void wid_choose_initial_dungeons_create_level_at(wid_choose_initial_dunge
   //
   // Create a level of the given difficulty at a fixed location
   //
-  if (! game->init_level(level_at, point(x, y), node->depth, node->walk_order_level_no)) {
+  if (! game->init_level(level_at, point(x, y), node->depth - 1, node->walk_order_level_no)) {
     ERR("Could not create level");
     return;
   }

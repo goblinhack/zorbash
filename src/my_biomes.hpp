@@ -11,12 +11,12 @@
 
 using biome_t = enum biome_type {
   BIOME_UNKNOWN,
-  BIOME_DUNGEON, // A single dungeon
-  BIOME_SWAMP,
-  BIOME_SEWER,
-  BIOME_ICE,
-  BIOME_CHASMS,
-  BIOME_LAVA,
+  BIOME_DUNGEON,  // A single dungeon
+  BIOME_SWAMP,    // Icky swamp and lots of foliage
+  BIOME_ICE,      // Ice everywhere
+  BIOME_CHASMS,   // No walls
+  BIOME_LAVA,     // Lava everywhere
+  BIOME_SEWER,    // Intermediate biome level
   BIOME_DUNGEONS, // The grid of dungeons
   BIOME_MAX,
 };

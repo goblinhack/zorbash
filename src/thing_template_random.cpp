@@ -529,10 +529,10 @@ Tpp tp_get_with_rarity_filter(Tpidmap &m)
     return nullptr;
   }
 
-  int tries = 100;
+  int tries = 1000;
   while (tries--) {
     auto roll   = pcg_random_range(0, 1000);
-    int  tries2 = 100;
+    int  tries2 = 1000;
     while (tries2--) {
       auto tp = get(m, pcg_rand() % m.size());
       //
@@ -571,7 +571,12 @@ Tpp tp_get_with_rarity_filter(Tpidmap &m)
       return tp;
     }
   }
-  ERR("Could not find a thing according to rarity");
+
+  //
+  // Well, it can happen... Just choose one
+  //
+  LOG("Could not find a thing according to rarity");
+
   return get(m, pcg_rand() % m.size());
 }
 
@@ -623,7 +628,7 @@ Tpp tp_random_gold(void)
 {
   TRACE_NO_INDENT();
   if (unlikely(! tp_gold.size())) {
-    ERR("No golds found");
+    ERR("No gold found");
     return nullptr;
   }
   return tp_get_with_rarity_filter(tp_gold);
@@ -853,7 +858,7 @@ Tpp tp_random_dirt(void)
 {
   TRACE_NO_INDENT();
   if (unlikely(! tp_dirt.size())) {
-    ERR("No dirts found");
+    ERR("No dirt found");
     return nullptr;
   }
   return tp_get_with_no_rarity_filter(tp_dirt);
@@ -903,7 +908,7 @@ Tpp tp_random_foliage(void)
 {
   TRACE_NO_INDENT();
   if (unlikely(! tp_foliage.size())) {
-    ERR("No foliages found");
+    ERR("No foliage found");
     return nullptr;
   }
   return tp_get_with_no_rarity_filter(tp_foliage);
