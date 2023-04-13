@@ -6,6 +6,7 @@
 #ifndef _MY_ROOM_HPP_
 #define _MY_ROOM_HPP_
 
+#include "my_biomes.hpp"
 #include "my_charmap.hpp"
 #include "my_enums.hpp"
 #include "my_fwd.hpp"

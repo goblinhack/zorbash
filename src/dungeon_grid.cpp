@@ -134,7 +134,7 @@ redo:
   auto depth       = 1;
   auto depth_limit = DUNGEON_MAX_DEPTH;
   if (! is_dungeon) {
-    depth_limit = DUNGEONS_MAX_DEPTH;
+    depth_limit = DUNGEONS_MAX_DIFFICULTY_LEVEL;
   }
   while (depth <= depth_limit) {
     set_max_depth();
@@ -191,7 +191,7 @@ redo:
   }
 
   if (! is_dungeon) {
-    if (max_depth != DUNGEONS_MAX_DEPTH) {
+    if (max_depth != DUNGEONS_MAX_DIFFICULTY_LEVEL) {
       debug("redo, not enough depth challenges");
       goto redo;
     }

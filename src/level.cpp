@@ -27,6 +27,15 @@ std::string Level::to_string(void)
   if (biome == BIOME_SWAMP) {
     return ("swamp L" + level_no_str);
   }
+  if (biome == BIOME_ICE) {
+    return ("ice L" + level_no_str);
+  }
+  if (biome == BIOME_CHASMS) {
+    return ("chasms L" + level_no_str);
+  }
+  if (biome == BIOME_LAVA) {
+    return ("lava L" + level_no_str);
+  }
   return ("dungeon L" + level_no_str);
 }
 

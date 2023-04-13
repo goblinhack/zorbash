@@ -14,7 +14,7 @@
 #define DUNGEONS_GRID_CHUNK_HEIGHT    11 // The whole underworld
 #define DUNGEONS_GRID_CHUNK_WIDTH     11 //
 #define DUNGEON_MAX_DEPTH             3  // Max difficulty level
-#define DUNGEONS_MAX_DEPTH            8  // Max difficulty level
+#define DUNGEONS_MAX_DIFFICULTY_LEVEL 8  // Max difficulty level
 #define MAX_GRID_CHUNK_HEIGHT         DUNGEONS_GRID_CHUNK_HEIGHT
 #define MAX_GRID_CHUNK_WIDTH          DUNGEONS_GRID_CHUNK_WIDTH
 

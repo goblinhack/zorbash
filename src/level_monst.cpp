@@ -155,6 +155,18 @@ void tp_monst_add(Tpp tp)
     biomes.push_back(BIOME_SWAMP);
   }
 
+  if (tp->is_biome_ice()) {
+    biomes.push_back(BIOME_ICE);
+  }
+
+  if (tp->is_biome_chasms()) {
+    biomes.push_back(BIOME_CHASMS);
+  }
+
+  if (tp->is_biome_lava()) {
+    biomes.push_back(BIOME_LAVA);
+  }
+
   if (tp->is_swimmer()) {
     if (! tp->environ_likes_shallow_water() && ! tp->environ_likes_deep_water()) {
       CON("INF: Swimming monster '%s' needs to set shallow and or deep water preferences",

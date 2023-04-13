@@ -1021,20 +1021,20 @@ int Thing::is_unused_flag150(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag150());
 }
-int Thing::is_unused_flag151(void)
+int Thing::is_biome_ice(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag151());
+  return (tp()->is_biome_ice());
 }
-int Thing::is_unused_flag152(void)
+int Thing::is_biome_chasms(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag152());
+  return (tp()->is_biome_chasms());
 }
-int Thing::is_unused_flag153(void)
+int Thing::is_biome_lava(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag153());
+  return (tp()->is_biome_lava());
 }
 int Thing::is_rock_lava(void)
 {

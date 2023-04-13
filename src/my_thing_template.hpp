@@ -336,7 +336,10 @@ private:
   int _is_basalt {};
   int _is_bearowl {};
   int _is_bee {};
+  int _is_biome_chasms {};
   int _is_biome_dungeon {};
+  int _is_biome_ice {};
+  int _is_biome_lava {};
   int _is_biome_sewer {};
   int _is_biome_swamp {};
   int _is_biome_unused {};
@@ -663,9 +666,6 @@ private:
   int _is_unused_flag149 {};
   int _is_unused_flag15 {};
   int _is_unused_flag150 {};
-  int _is_unused_flag151 {};
-  int _is_unused_flag152 {};
-  int _is_unused_flag153 {};
   int _is_unused_flag16 {};
   int _is_unused_flag17 {};
   int _is_unused_flag179 {};
@@ -1630,7 +1630,10 @@ public:
   int is_basalt(void) const;
   int is_bearowl(void) const;
   int is_bee(void) const;
+  int is_biome_chasms(void) const;
   int is_biome_dungeon(void) const;
+  int is_biome_ice(void) const;
+  int is_biome_lava(void) const;
   int is_biome_sewer(void) const;
   int is_biome_swamp(void) const;
   int is_biome_unused(void) const;
@@ -1954,9 +1957,6 @@ public:
   int is_unused_flag149(void) const;
   int is_unused_flag14(void) const;
   int is_unused_flag150(void) const;
-  int is_unused_flag151(void) const;
-  int is_unused_flag152(void) const;
-  int is_unused_flag153(void) const;
   int is_unused_flag15(void) const;
   int is_unused_flag16(void) const;
   int is_unused_flag179(void) const;
@@ -2376,7 +2376,10 @@ public:
   void is_basalt_set(int v);
   void is_bearowl_set(int v);
   void is_bee_set(int v);
+  void is_biome_chasms_set(int v);
   void is_biome_dungeon_set(int v);
+  void is_biome_ice_set(int v);
+  void is_biome_lava_set(int v);
   void is_biome_sewer_set(int v);
   void is_biome_swamp_set(int v);
   void is_biome_unused_set(int v);
@@ -2700,9 +2703,6 @@ public:
   void is_unused_flag149_set(int v);
   void is_unused_flag14_set(int v);
   void is_unused_flag150_set(int v);
-  void is_unused_flag151_set(int v);
-  void is_unused_flag152_set(int v);
-  void is_unused_flag153_set(int v);
   void is_unused_flag15_set(int v);
   void is_unused_flag16_set(int v);
   void is_unused_flag179_set(int v);

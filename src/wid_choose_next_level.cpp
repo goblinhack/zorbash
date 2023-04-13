@@ -163,36 +163,28 @@ static void wid_choose_next_dungeons_mouse_over(Widp w, int relx, int rely, int 
       switch (l->difficulty_depth) {
         case -1: break;
         case 1:
-          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG,
-                        UI_DUNGEONS_DIFFICULTY_LEVEL_1_COLOR);
+          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, get_difficulty_depth_color(0));
           break;
         case 2:
-          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG,
-                        UI_DUNGEONS_DIFFICULTY_LEVEL_2_SWAMP_COLOR);
+          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, get_difficulty_depth_color(1));
           break;
         case 3:
-          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG,
-                        UI_DUNGEONS_DIFFICULTY_LEVEL_3_CHASMS_COLOR);
+          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, get_difficulty_depth_color(2));
           break;
         case 4:
-          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG,
-                        UI_DUNGEONS_DIFFICULTY_LEVEL_4_ICE_COLOR);
+          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, get_difficulty_depth_color(3));
           break;
         case 5:
-          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG,
-                        UI_DUNGEONS_DIFFICULTY_LEVEL_5_COLOR);
+          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, get_difficulty_depth_color(4));
           break;
         case 6:
-          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG,
-                        UI_DUNGEONS_DIFFICULTY_LEVEL_6_LAVA_COLOR);
+          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, get_difficulty_depth_color(5));
           break;
         case 7:
-          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG,
-                        UI_DUNGEONS_DIFFICULTY_LEVEL_7_COLOR);
+          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, get_difficulty_depth_color(6));
           break;
         case 8:
-          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG,
-                        UI_DUNGEONS_DIFFICULTY_LEVEL_8_COLOR);
+          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, get_difficulty_depth_color(7));
           break;
       }
 
@@ -537,49 +529,49 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
       case 1:
         bg_tilename = "dungeon_icon.1";
         if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_1_COLOR);
+          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(0));
         }
         break;
       case 2:
         bg_tilename = "dungeon_icon.2";
         if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_2_SWAMP_COLOR);
+          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(1));
         }
         break;
       case 3:
         bg_tilename = "dungeon_icon.3";
         if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_3_CHASMS_COLOR);
+          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(2));
         }
         break;
       case 4:
         bg_tilename = "dungeon_icon.4";
         if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_4_ICE_COLOR);
+          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(3));
         }
         break;
       case 5:
         bg_tilename = "dungeon_icon.5";
         if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_5_COLOR);
+          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(4));
         }
         break;
       case 6:
         bg_tilename = "dungeon_icon.6";
         if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_6_LAVA_COLOR);
+          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(5));
         }
         break;
       case 7:
         bg_tilename = "dungeon_icon.7";
         if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_7_COLOR);
+          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(6));
         }
         break;
       case 8:
         bg_tilename = "dungeon_icon.8";
         if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_8_COLOR);
+          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(7));
         }
         break;
     }

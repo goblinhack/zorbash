@@ -55,15 +55,6 @@ enum {
   MAP_TICK_PRIO,
 };
 
-using biome_t = enum biome_type {
-  BIOME_UNKNOWN,
-  BIOME_DUNGEON, // A single dungeon
-  BIOME_SWAMP,
-  BIOME_SEWER,
-  BIOME_DUNGEONS, // The grid of dungeons
-  BIOME_MAX,
-};
-
 using monst_class_t = enum monst_class {
   MONST_CLASS_ANY,
   MONST_CLASS_A,

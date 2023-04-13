@@ -57,6 +57,12 @@ bool wid_rightbar_ascii_create(void)
       s = dynprintf("Swamp Level %u", level->num());
     } else if (level->biome == BIOME_SEWER) {
       s = dynprintf("Sewer Level %u", level->num());
+    } else if (level->biome == BIOME_ICE) {
+      s = dynprintf("Ice Level %u", level->num());
+    } else if (level->biome == BIOME_LAVA) {
+      s = dynprintf("Lava Level %u", level->num());
+    } else if (level->biome == BIOME_CHASMS) {
+      s = dynprintf("Chasms Level %u", level->num());
     }
 
     wid_set_pos(w, tl, br);

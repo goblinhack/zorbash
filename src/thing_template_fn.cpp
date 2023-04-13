@@ -416,7 +416,10 @@ int Tp::is_barrel(void) const { return _is_barrel; }
 int Tp::is_basalt(void) const { return _is_basalt; }
 int Tp::is_bearowl(void) const { return _is_bearowl; }
 int Tp::is_bee(void) const { return _is_bee; }
+int Tp::is_biome_chasms(void) const { return _is_biome_chasms; }
 int Tp::is_biome_dungeon(void) const { return _is_biome_dungeon; }
+int Tp::is_biome_ice(void) const { return _is_biome_ice; }
+int Tp::is_biome_lava(void) const { return _is_biome_lava; }
 int Tp::is_biome_sewer(void) const { return _is_biome_sewer; }
 int Tp::is_biome_swamp(void) const { return _is_biome_swamp; }
 int Tp::is_biome_unused(void) const { return _is_biome_unused; }
@@ -740,9 +743,6 @@ int Tp::is_unused_flag148(void) const { return _is_unused_flag148; }
 int Tp::is_unused_flag149(void) const { return _is_unused_flag149; }
 int Tp::is_unused_flag14(void) const { return _is_unused_flag14; }
 int Tp::is_unused_flag150(void) const { return _is_unused_flag150; }
-int Tp::is_unused_flag151(void) const { return _is_unused_flag151; }
-int Tp::is_unused_flag152(void) const { return _is_unused_flag152; }
-int Tp::is_unused_flag153(void) const { return _is_unused_flag153; }
 int Tp::is_unused_flag15(void) const { return _is_unused_flag15; }
 int Tp::is_unused_flag16(void) const { return _is_unused_flag16; }
 int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
@@ -1162,7 +1162,10 @@ void Tp::is_barrel_set(int v) { _is_barrel = v; }
 void Tp::is_basalt_set(int v) { _is_basalt = v; }
 void Tp::is_bearowl_set(int v) { _is_bearowl = v; }
 void Tp::is_bee_set(int v) { _is_bee = v; }
+void Tp::is_biome_chasms_set(int v) { _is_biome_chasms = v; }
 void Tp::is_biome_dungeon_set(int v) { _is_biome_dungeon = v; }
+void Tp::is_biome_ice_set(int v) { _is_biome_ice = v; }
+void Tp::is_biome_lava_set(int v) { _is_biome_lava = v; }
 void Tp::is_biome_sewer_set(int v) { _is_biome_sewer = v; }
 void Tp::is_biome_swamp_set(int v) { _is_biome_swamp = v; }
 void Tp::is_biome_unused_set(int v) { _is_biome_unused = v; }
@@ -1486,9 +1489,6 @@ void Tp::is_unused_flag148_set(int v) { _is_unused_flag148 = v; }
 void Tp::is_unused_flag149_set(int v) { _is_unused_flag149 = v; }
 void Tp::is_unused_flag14_set(int v) { _is_unused_flag14 = v; }
 void Tp::is_unused_flag150_set(int v) { _is_unused_flag150 = v; }
-void Tp::is_unused_flag151_set(int v) { _is_unused_flag151 = v; }
-void Tp::is_unused_flag152_set(int v) { _is_unused_flag152 = v; }
-void Tp::is_unused_flag153_set(int v) { _is_unused_flag153 = v; }
 void Tp::is_unused_flag15_set(int v) { _is_unused_flag15 = v; }
 void Tp::is_unused_flag16_set(int v) { _is_unused_flag16 = v; }
 void Tp::is_unused_flag179_set(int v) { _is_unused_flag179 = v; }

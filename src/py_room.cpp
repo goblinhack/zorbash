@@ -25,17 +25,22 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
   int       is_secret          = false;
   int       biome_dungeon      = false;
   int       biome_swamp        = false;
+  int       biome_ice          = false;
+  int       biome_chasms       = false;
+  int       biome_lava         = false;
   int       depth              = 0;
 
   static char *kwlist[] = {
-      (char *) "room_data", (char *) "xxx",  (char *) "yyy",    (char *) "room_name",     (char *) "up",
-      (char *) "down",      (char *) "left", (char *) "right",  (char *) "entrance",      (char *) "exit",
-      (char *) "lock",      (char *) "key",  (char *) "secret", (char *) "biome_dungeon", (char *) "biome_swamp",
-      (char *) "depth",     nullptr};
+      (char *) "room_data",    (char *) "xxx",           (char *) "yyy",         (char *) "room_name",
+      (char *) "up",           (char *) "down",          (char *) "left",        (char *) "right",
+      (char *) "entrance",     (char *) "exit",          (char *) "lock",        (char *) "key",
+      (char *) "secret",       (char *) "biome_dungeon", (char *) "biome_swamp", (char *) "biome_ice",
+      (char *) "biome_chasms", (char *) "biome_lava",    (char *) "depth",       nullptr};
 
-  if (! PyArg_ParseTupleAndKeywords(args, keywds, "|Oiisiiiiiiiiiiii", kwlist, &py_room_data, &xxx, &yyy, &room_name,
-                                    &up, &down, &left, &right, &is_ascend_dungeon, &is_descend_dungeon, &is_lock,
-                                    &is_key, &is_secret, &biome_dungeon, &biome_swamp, &depth)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "|Oiisiiiiiiiiiiiiiii", kwlist, &py_room_data, &xxx, &yyy,
+                                    &room_name, &up, &down, &left, &right, &is_ascend_dungeon, &is_descend_dungeon,
+                                    &is_lock, &is_key, &is_secret, &biome_dungeon, &biome_swamp, &biome_ice,
+                                    &biome_chasms, &biome_lava, &depth)) {
     ERR("map_load_room: Bad args");
     Py_RETURN_FALSE;
   }
@@ -55,8 +60,18 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
   int rooms_across = room_data_elems / MAP_ROOM_HEIGHT;
 
   biome_t biome = BIOME_DUNGEON;
+
   if (biome_swamp) {
     biome = BIOME_SWAMP;
+  }
+  if (biome_ice) {
+    biome = BIOME_ICE;
+  }
+  if (biome_chasms) {
+    biome = BIOME_CHASMS;
+  }
+  if (biome_lava) {
+    biome = BIOME_LAVA;
   }
 
   for (auto n = 0; n < rooms_across; n++) {

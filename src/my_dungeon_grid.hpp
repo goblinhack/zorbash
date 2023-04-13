@@ -6,6 +6,7 @@
 //
 // Implements layered cycles that can be used to then create a dungeon
 //
+#include "my_biomes.hpp"
 #include "my_enums.hpp"
 #include "my_fwd.hpp"
 #include "my_point.hpp"

@@ -9,6 +9,7 @@
 #include <deque>
 #include <list>
 
+#include "my_biomes.hpp"
 #include "my_dmap.hpp"
 #include "my_enums.hpp"
 #include "my_fcolor.hpp"

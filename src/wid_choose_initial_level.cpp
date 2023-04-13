@@ -152,49 +152,49 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
       case 1:
         bg_tilename = "dungeon_icon.1";
         if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_1_COLOR);
+          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(0));
         }
         break;
       case 2:
         bg_tilename = "dungeon_icon.2";
         if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_2_SWAMP_COLOR);
+          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(1));
         }
         break;
       case 3:
         bg_tilename = "dungeon_icon.3";
         if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_3_CHASMS_COLOR);
+          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(2));
         }
         break;
       case 4:
         bg_tilename = "dungeon_icon.4";
         if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_4_ICE_COLOR);
+          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(3));
         }
         break;
       case 5:
         bg_tilename = "dungeon_icon.5";
         if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_5_COLOR);
+          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(4));
         }
         break;
       case 6:
         bg_tilename = "dungeon_icon.6";
         if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_6_LAVA_COLOR);
+          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(5));
         }
         break;
       case 7:
         bg_tilename = "dungeon_icon.7";
         if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_7_COLOR);
+          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(6));
         }
         break;
       case 8:
         bg_tilename = "dungeon_icon.8";
         if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_8_COLOR);
+          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(7));
         }
         break;
     }
@@ -1503,174 +1503,28 @@ void Game::wid_choose_initial_dungeons(void)
       }
     }
 
-    if (1) {
-      {
-        auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 10, 16);
-        point br = make_point(TERM_WIDTH - 10, 16);
-        wid_set_style(w, UI_WID_STYLE_SOLID_DEFAULT);
-        wid_set_color(w, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_1_COLOR);
-        wid_set_pos(w, tl, br);
-        wid_set_text(w, " ");
-      }
+    for (auto difficulty_depth = 0; difficulty_depth < DUNGEONS_MAX_DIFFICULTY_LEVEL; difficulty_depth++) {
+      if (1) {
+        {
+          auto  w  = wid_new_square_button(window, "wid key");
+          point tl = make_point(TERM_WIDTH - 10, 16 + difficulty_depth);
+          point br = make_point(TERM_WIDTH - 10, 16 + difficulty_depth);
+          wid_set_style(w, UI_WID_STYLE_SOLID_DEFAULT);
+          wid_set_color(w, WID_COLOR_BG, get_biome_color(get_biome(difficulty_depth)));
+          wid_set_pos(w, tl, br);
+          wid_set_text(w, " ");
+        }
 
-      {
-        auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 8, 16);
-        point br = make_point(TERM_WIDTH - 1, 16);
-        wid_set_pos(w, tl, br);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "Easy");
-      }
-    }
-
-    if (1) {
-      {
-        auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 10, 17);
-        point br = make_point(TERM_WIDTH - 10, 17);
-        wid_set_style(w, UI_WID_STYLE_SOLID_DEFAULT);
-        wid_set_color(w, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_2_SWAMP_COLOR);
-        wid_set_pos(w, tl, br);
-        wid_set_text(w, " ");
-      }
-
-      {
-        auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 8, 17);
-        point br = make_point(TERM_WIDTH - 1, 17);
-        wid_set_pos(w, tl, br);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "Swamp");
+        {
+          auto  w  = wid_new_square_button(window, "wid key");
+          point tl = make_point(TERM_WIDTH - 8, 16 + difficulty_depth);
+          point br = make_point(TERM_WIDTH - 1, 16 + difficulty_depth);
+          wid_set_pos(w, tl, br);
+          wid_set_text_lhs(w, true);
+          wid_set_text(w, biome_to_string(get_biome(difficulty_depth)));
+        }
       }
     }
-
-    if (1) {
-      {
-        auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 10, 18);
-        point br = make_point(TERM_WIDTH - 10, 18);
-        wid_set_style(w, UI_WID_STYLE_SOLID_DEFAULT);
-        wid_set_color(w, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_3_CHASMS_COLOR);
-        wid_set_pos(w, tl, br);
-        wid_set_text(w, " ");
-      }
-
-      {
-        auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 8, 18);
-        point br = make_point(TERM_WIDTH - 1, 18);
-        wid_set_pos(w, tl, br);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "Chasms");
-      }
-    }
-
-    if (1) {
-      {
-        auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 10, 19);
-        point br = make_point(TERM_WIDTH - 10, 19);
-        wid_set_style(w, UI_WID_STYLE_SOLID_DEFAULT);
-        wid_set_color(w, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_4_ICE_COLOR);
-        wid_set_pos(w, tl, br);
-        wid_set_text(w, " ");
-      }
-
-      {
-        auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 8, 19);
-        point br = make_point(TERM_WIDTH - 1, 19);
-        wid_set_pos(w, tl, br);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "Ice");
-      }
-    }
-
-    if (1) {
-      {
-        auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 10, 20);
-        point br = make_point(TERM_WIDTH - 10, 20);
-        wid_set_style(w, UI_WID_STYLE_SOLID_DEFAULT);
-        wid_set_color(w, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_5_COLOR);
-        wid_set_pos(w, tl, br);
-        wid_set_text(w, " ");
-      }
-
-      {
-        auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 8, 20);
-        point br = make_point(TERM_WIDTH - 1, 20);
-        wid_set_pos(w, tl, br);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "Hard");
-      }
-    }
-
-    if (1) {
-      {
-        auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 10, 21);
-        point br = make_point(TERM_WIDTH - 10, 21);
-        wid_set_style(w, UI_WID_STYLE_SOLID_DEFAULT);
-        wid_set_color(w, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_6_LAVA_COLOR);
-        wid_set_pos(w, tl, br);
-        wid_set_text(w, " ");
-      }
-
-      {
-        auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 8, 21);
-        point br = make_point(TERM_WIDTH - 1, 21);
-        wid_set_pos(w, tl, br);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "Lava");
-      }
-    }
-
-    if (1) {
-      {
-        auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 10, 22);
-        point br = make_point(TERM_WIDTH - 10, 22);
-        wid_set_style(w, UI_WID_STYLE_SOLID_DEFAULT);
-        wid_set_color(w, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_7_COLOR);
-        wid_set_pos(w, tl, br);
-        wid_set_text(w, " ");
-      }
-
-      {
-        auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 8, 22);
-        point br = make_point(TERM_WIDTH - 1, 22);
-        wid_set_pos(w, tl, br);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "vHard");
-      }
-    }
-
-    if (1) {
-      {
-        auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 10, 23);
-        point br = make_point(TERM_WIDTH - 10, 23);
-        wid_set_style(w, UI_WID_STYLE_SOLID_DEFAULT);
-        wid_set_color(w, WID_COLOR_BG, UI_DUNGEONS_DIFFICULTY_LEVEL_8_COLOR);
-        wid_set_pos(w, tl, br);
-        wid_set_text(w, " ");
-      }
-
-      {
-        auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 8, 23);
-        point br = make_point(TERM_WIDTH - 1, 23);
-        wid_set_pos(w, tl, br);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "Finale");
-      }
-    }
-
   } else {
     int y = TERM_HEIGHT - 36;
 

@@ -32,7 +32,10 @@ extern bool g_opt_test;                 // Enable tests.
 extern bool g_quitting;                 // Exitting the game
 extern bool g_render_black_and_white;   // Rendering map in black and white
 extern bool g_saved_snapshot;           // Just saved a snapshot
-extern bool g_opt_biome_swamp;          // Test biome swamp
+extern bool g_opt_biome_swamp;          // Select this biome
+extern bool g_opt_biome_ice;            // Select this biome
+extern bool g_opt_biome_lava;           // Select this biome
+extern bool g_opt_biome_chasms;         // Select this biome
 
 // --debug  Basic debug
 // --debug2 Map is visible and memory checks enabled

@@ -14,10 +14,9 @@ bool Level::create_wandering_monster(void)
       }
       break;
     case BIOME_SWAMP:
-      if (game->tick_current % 100) {
-        return false;
-      }
-      break;
+    case BIOME_LAVA:
+    case BIOME_ICE:
+    case BIOME_CHASMS:
     case BIOME_SEWER:
       if (game->tick_current % 50) {
         return false;

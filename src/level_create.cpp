@@ -12,8 +12,8 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
 
   pcg_random_allowed++;
 
-  if (difficulty_depth > DUNGEONS_MAX_DEPTH) {
-    difficulty_depth = DUNGEONS_MAX_DEPTH;
+  if (difficulty_depth > DUNGEONS_MAX_DIFFICULTY_LEVEL) {
+    difficulty_depth = DUNGEONS_MAX_DIFFICULTY_LEVEL;
   }
 
   uint32_t seedval;
@@ -58,7 +58,7 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
     case BIOME_SWAMP: ret = create_biome_swamp(world_at, seed); break;
     case BIOME_SEWER: ret = create_biome_sewer(world_at, seed); break;
     default:
-      err("No biome set for level create");
+      DIE("No biome set for level create");
       ret = create_biome_dungeon(world_at, seed);
       break;
   }

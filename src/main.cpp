@@ -476,7 +476,10 @@ static void usage(void)
   CON(" --mini                      -- Use small map.");
   CON(" --ascii                     -- Enable ascii graphics.");
   CON(" --pixelart                  -- Enable pixelart graphics.");
-  CON(" --swamp                     -- Test swamp biome");
+  CON(" --swamp                     -- Select the swamp biome");
+  CON(" --ice                       -- Select the ice biome");
+  CON(" --chasms                    -- Select the chasms biome");
+  CON(" --lava                      -- Select the lava biome");
   CON(" ");
   CON(" --player-name 'disco bob'   -- Set your name.");
   CON(" --seed <name/number>        -- Set the random dungeon seed.");
@@ -525,6 +528,21 @@ static void parse_args(int argc, char *argv[])
 
     if (! strcasecmp(argv[ i ], "--swamp") || ! strcasecmp(argv[ i ], "-swamp")) {
       g_opt_biome_swamp = true;
+      continue;
+    }
+
+    if (! strcasecmp(argv[ i ], "--ice") || ! strcasecmp(argv[ i ], "-ice")) {
+      g_opt_biome_ice = true;
+      continue;
+    }
+
+    if (! strcasecmp(argv[ i ], "--chasms") || ! strcasecmp(argv[ i ], "-chasms")) {
+      g_opt_biome_chasms = true;
+      continue;
+    }
+
+    if (! strcasecmp(argv[ i ], "--lava") || ! strcasecmp(argv[ i ], "-lava")) {
+      g_opt_biome_lava = true;
       continue;
     }
 
