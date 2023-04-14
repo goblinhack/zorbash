@@ -22,6 +22,7 @@ def tp_init(name, text_long_name):
     my.health_initial_dice(self, "2d10+4")
     my.is_able_to_freeze(self, True)
     my.is_biome_dungeon(self, True)
+    my.is_biome_chasms(self, True)
     my.is_cautious(self, True)
     my.is_intelligent(self, True)
     my.is_loggable(self, True)

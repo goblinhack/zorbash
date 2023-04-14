@@ -37,10 +37,7 @@ biome_t get_biome(int difficulty_depth)
   switch (difficulty_depth) {
     case 0: biome = BIOME_DUNGEON; break;
     case 1: biome = BIOME_SWAMP; break;
-    case 2:
-      biome = BIOME_CHASMS;
-      biome = BIOME_DUNGEON; // HACK
-      break;
+    case 2: biome = BIOME_CHASMS; break;
     case 3:
       biome = BIOME_ICE;
       biome = BIOME_DUNGEON; // HACK

@@ -20,6 +20,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_submergible(self, True)
     my.is_attackable_by_magic(self, True)
     my.is_biome_dungeon(self, True)
+    my.is_biome_chasms(self, True)
     my.is_biome_swamp(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_described_when_hovering_over(self, True)

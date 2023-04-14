@@ -58,6 +58,7 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
     case BIOME_DUNGEON: ret = create_biome_dungeon(world_at, seed); break;
     case BIOME_SWAMP: ret = create_biome_swamp(world_at, seed); break;
     case BIOME_SEWER: ret = create_biome_sewer(world_at, seed); break;
+    case BIOME_CHASMS: ret = create_biome_chasms(world_at, seed); break;
     default:
       DIE("No biome set for level create");
       ret = create_biome_dungeon(world_at, seed);

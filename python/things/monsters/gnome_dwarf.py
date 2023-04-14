@@ -22,6 +22,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_run_away_after_stealing(self, True)
     my.is_able_to_teleport_escape(self, True)
     my.is_biome_dungeon(self, True)
+    my.is_biome_chasms(self, True)
     my.is_daring(self, True)
     my.is_monst_class_A(self, True)
     my.on_born_do(self, "me.on_born()")

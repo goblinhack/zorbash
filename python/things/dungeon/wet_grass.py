@@ -19,6 +19,7 @@ def tp_init(name, tiles=[]):
     my.is_able_to_dampen_footsteps(self, True)
     my.is_able_to_fall(self, True)
     my.is_biome_dungeon(self, True)
+    my.is_biome_chasms(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_grass(self, True)

@@ -221,18 +221,20 @@ void Dungeon::make_dungeon(void)
   TRACE_NO_INDENT();
   debug("add doors between depth changes");
 
-  //
-  // Add a perimeter to the level. Helps avoid off by one bugs.
-  //
-  DBG2("INF: Add corridor walls");
-  add_corridor_walls();
-  TRACE_NO_INDENT();
-  debug("add corridor walls");
+  if (biome != BIOME_CHASMS) {
+    //
+    // Add a perimeter to the level. Helps avoid off by one bugs.
+    //
+    DBG2("INF: Add corridor walls");
+    add_corridor_walls();
+    TRACE_NO_INDENT();
+    debug("add corridor walls");
 
-  DBG2("INF: Add room walls");
-  add_room_walls();
-  TRACE_NO_INDENT();
-  debug("add room walls");
+    DBG2("INF: Add room walls");
+    add_room_walls();
+    TRACE_NO_INDENT();
+    debug("add room walls");
+  }
 
   IF_DEBUG2
   {
@@ -243,81 +245,90 @@ void Dungeon::make_dungeon(void)
   //
   // Add a cave as the under-dungeon
   //
-  DBG2("INF: Generate water");
-  water_gen(2000, // fill prob
-            10,   // R1
-            5,    // R2
-            4 /* generations */);
+  if (biome != BIOME_CHASMS) {
+    DBG2("INF: Generate water");
 
-  if (biome == BIOME_SWAMP) {
     water_gen(2000, // fill prob
               10,   // R1
               5,    // R2
               4 /* generations */);
-    foliage_gen(2000, // fill prob
+
+    if (biome == BIOME_SWAMP) {
+      water_gen(2000, // fill prob
                 10,   // R1
                 5,    // R2
-                2 /* generations */);
+                4 /* generations */);
+      foliage_gen(2000, // fill prob
+                  10,   // R1
+                  5,    // R2
+                  2 /* generations */);
+    }
   }
 
-  DBG2("INF: Generate caves");
-  cave_gen(2000, // fill prob
-           10,   // R1
-           5,    // R2
-           3 /* generations */);
+  if (biome != BIOME_CHASMS) {
+    DBG2("INF: Generate caves");
+    cave_gen(2000, // fill prob
+             10,   // R1
+             5,    // R2
+             3 /* generations */);
 
-  DBG2("INF: Generate dirt");
-  dirt_gen(2000, // fill prob
-           10,   // R1
-           5,    // R2
-           4 /* generations */);
+    DBG2("INF: Generate dirt");
+    dirt_gen(2000, // fill prob
+             10,   // R1
+             5,    // R2
+             4 /* generations */);
 
-  DBG2("INF: Add deepwater and islands of safety");
-  water_fixup();
+    DBG2("INF: Add deepwater and islands of safety");
+    water_fixup();
 
-  DBG2("INF: Add border");
-  add_border();
+    DBG2("INF: Add border");
+    add_border();
+  }
 
   DBG2("INF: Add remaining items");
   add_remaining();
 
-  DBG2("INF: Add spiderwebs");
-  add_spiderweb();
+  if (biome != BIOME_CHASMS) {
+    DBG2("INF: Add spiderwebs");
+    add_spiderweb();
 
-  DBG2("INF: Generate dry grass");
-  dry_grass_gen(1500, // fill prob
-                10,   // R1
-                5,    // R2
-                1 /* generations */);
+    if (biome != BIOME_CHASMS) {
+      DBG2("INF: Generate dry grass");
+      dry_grass_gen(1500, // fill prob
+                    10,   // R1
+                    5,    // R2
+                    1 /* generations */);
+    }
 
-  if (biome == BIOME_SWAMP) {
-    dry_grass_gen(1500, // fill prob
+    if (biome == BIOME_SWAMP) {
+      dry_grass_gen(1500, // fill prob
+                    10,   // R1
+                    5,    // R2
+                    1 /* generations */);
+    }
+
+    DBG2("INF: Generate wet grass");
+    wet_grass_gen(1000, // fill prob
                   10,   // R1
                   5,    // R2
                   1 /* generations */);
+
+    if (biome == BIOME_SWAMP) {
+      wet_grass_gen(5000, // fill prob
+                    10,   // R1
+                    5,    // R2
+                    1 /* generations */);
+    }
+
+    DBG2("INF: Generate foliage");
+    foliage_gen(10, // fill prob
+                10, // R1
+                5,  // R2
+                4 /* generations */);
+
+    DBG2("INF: Add foliage around water");
+    add_foliage_around_water();
   }
-
-  DBG2("INF: Generate wet grass");
-  wet_grass_gen(1000, // fill prob
-                10,   // R1
-                5,    // R2
-                1 /* generations */);
-
-  if (biome == BIOME_SWAMP) {
-    wet_grass_gen(5000, // fill prob
-                  10,   // R1
-                  5,    // R2
-                  1 /* generations */);
-  }
-
-  DBG2("INF: Generate foliage");
-  foliage_gen(10, // fill prob
-              10, // R1
-              5,  // R2
-              4 /* generations */);
-
-  DBG2("INF: Add foliage around water");
-  add_foliage_around_water();
 
   dump();
 }
@@ -4027,6 +4038,19 @@ void Dungeon::add_remaining(void)
   for (auto y = 2; y < MAP_HEIGHT - 2; y++) {
     for (auto x = 2; x < MAP_WIDTH - 2; x++) {
       if (is_anything_at(x, y)) {
+        continue;
+      }
+
+      if (biome == BIOME_CHASMS) {
+        if (pcg_random_range(0, 100) < 15) {
+          putc(x, y, MAP_DEPTH_OBJ, Charmap::ROCK);
+          continue;
+        }
+        if (pcg_random_range(0, 100) < 15) {
+          putc(x, y, MAP_DEPTH_FLOOR, Charmap::DIRT);
+          continue;
+        }
+        putc(x, y, MAP_DEPTH_OBJ, Charmap::CHASM);
         continue;
       }
 

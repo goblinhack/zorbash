@@ -39,6 +39,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_bag_item_not_stackable(self, True)
     my.is_bag_item(self, True)
     my.is_biome_dungeon(self, True)
+    my.is_biome_chasms(self, True)
     my.is_burnable(self, True)
     my.is_collectable(self, True)
     my.is_corpse_on_death(self, True)

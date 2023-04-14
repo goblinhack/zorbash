@@ -73,7 +73,18 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
         tp = tp_random_secret_door();
       }
 
-      auto tp_monst = get_biome_dungeon_random_monst(d, p, MONST_ENVIRON_NORMAL);
+      Tpp tp_monst = nullptr;
+      switch (biome) {
+        case BIOME_UNKNOWN: break;
+        case BIOME_DUNGEON: tp_monst = get_biome_dungeon_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
+        case BIOME_SWAMP: tp_monst = get_biome_swamp_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
+        case BIOME_SEWER: tp_monst = get_biome_sewer_random_monst(p, MONST_ENVIRON_NORMAL); break;
+        case BIOME_ICE: break;
+        case BIOME_CHASMS: tp_monst = get_biome_chasms_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
+        case BIOME_LAVA: break;
+        default: break;
+      }
+
       if (tp_monst) {
         tp = tp_monst;
       }

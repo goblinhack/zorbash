@@ -20,6 +20,7 @@ def tp_init(name, text_long_name):
     my.dmg_nat_att_type(self, "stabs")
     my.health_initial_dice(self, "1d8+4")
     my.is_biome_dungeon(self, True)
+    my.is_biome_chasms(self, True)
     my.is_daring(self, True)
     my.is_monst_class_B(self, True)
     my.on_born_do(self, "me.on_born()")
