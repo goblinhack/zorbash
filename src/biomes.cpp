@@ -89,6 +89,7 @@ std::string biome_to_string(biome_t biome)
     case BIOME_DUNGEONS: return "Dungeons";
     case BIOME_MAX: DIE("unxpected enum");
   }
+  return "Unknown";
 }
 
 color get_biome_color(biome_t biome)
@@ -106,6 +107,7 @@ color get_biome_color(biome_t biome)
     case BIOME_DUNGEONS: return BIOME_DUNGEON_COLOR;
     case BIOME_MAX: DIE("unxpected enum");
   }
+  return BIOME_DUNGEON_COLOR;
 }
 
 color get_difficulty_depth_color(int difficulty_depth)

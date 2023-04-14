@@ -81,7 +81,6 @@ std::string pluralise(const std::string &name)
     return name.substr(0, name.length() - 2) + "ves";
   } else if (ends_with(name, "f") && ! ends_with(name, "ff")) {
     // elf -> elves, but not hippogriff -> hippogrives.
-    // TODO: if someone defines a "goblin chief", this should be revisited.
     return name.substr(0, name.length() - 1) + "ves";
   } else if (ends_with(name, "mage")) {
     // mage -> magi
