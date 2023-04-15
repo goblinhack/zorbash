@@ -41,11 +41,6 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
           tp = tp_random_food();
         }
       }
-      if (d->is_portal(x, y)) {
-        if (d1000() < 500) {
-          tp = tp_random_portal();
-        }
-      }
       if (d->is_gold(x, y)) {
         if (d1000() < 500) {
           tp = tp_random_gold();
@@ -70,7 +65,11 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
         }
       }
       if (d->is_secret_door(x, y)) {
-        tp = tp_random_secret_door();
+        if (biome == BIOME_CHASMS) {
+          tp = tp_random_door();
+        } else {
+          tp = tp_random_secret_door();
+        }
       }
 
       Tpp tp_monst = nullptr;
@@ -270,6 +269,14 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
         }
       }
 
+      if (d->is_portal(x, y)) {
+        //
+        // If the map has a portal, we must place it as place_portals will try
+        // to enssure we have at least 2 portals.
+        //
+        tp = tp_random_portal();
+      }
+
       if (unlikely(! tp)) {
         continue;
       }
@@ -424,7 +431,7 @@ void Level::place_portals(Dungeonp d)
   //
   // Place an additional portal.
   //
-  auto tries = 1000;
+  auto tries = 10000;
 
   while (tries-- > 0) {
     auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK + 1);
@@ -439,8 +446,7 @@ void Level::place_portals(Dungeonp d)
     if (! d->is_floor(x, y)) {
       continue;
     }
-
-    if (! d->is_floor_deco_at(x, y)) {
+    if (d->is_floor_deco_at(x, y)) {
       continue;
     }
 
@@ -460,8 +466,6 @@ void Level::place_portals(Dungeonp d)
     if (++portal_count > 1) {
       return;
     }
-
-    break;
   }
 }
 

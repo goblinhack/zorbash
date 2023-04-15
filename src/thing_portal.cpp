@@ -17,8 +17,10 @@ void Thing::portal_tick(void)
   //
   // No teleport infinite loops
   //
-  if (game->tick_current < tick_last_teleported() + 1) {
-    return;
+  if (tick_last_teleported() != -1) {
+    if (tick_last_teleported() >= game->tick_current - 1) {
+      return;
+    }
   }
 
   //
@@ -55,29 +57,26 @@ void Thing::portal_tick(void)
   //
   // Try to find another portal
   //
-  for (int dx = -radius; dx < radius; dx++) {
-    for (int dy = -radius; dy < radius; dy++) {
+  for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
+    for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
 
-      auto px = curr_at.x + dx;
-      auto py = curr_at.y + dy;
-
-      if (! level->is_portal(px, py)) {
+      if (! level->is_portal(x, y)) {
         continue;
       }
 
       //
       // Ignore the originating portal
       //
-      if ((curr_at.x == px) && (curr_at.y == py)) {
+      if ((curr_at.x == x) && (curr_at.y == y)) {
         continue;
       }
 
-      dbg("Found a new portal at: %d,%d", px, py);
+      dbg("Found a new portal at: %d,%d", x, y);
 
       //
       // Found one.
       //
-      choices.push_back(point(px, py));
+      choices.push_back(point(x, y));
     }
   }
 

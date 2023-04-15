@@ -4044,12 +4044,20 @@ void Dungeon::add_remaining(void)
       }
 
       if (biome == BIOME_CHASMS) {
-        if (pcg_random_range(0, 1000) < 15) {
-          putc(x, y, MAP_DEPTH_OBJ, Charmap::ROCK);
+        if (pcg_random_range(0, 1000) < 20) {
+          putc(x, y, MAP_DEPTH_FLOOR, Charmap::FLOOR);
           continue;
         }
-        if (pcg_random_range(0, 1000) < 15) {
-          putc(x, y, MAP_DEPTH_FLOOR, Charmap::DIRT);
+        if (pcg_random_range(0, 1000) < 20) {
+          putc(x, y, MAP_DEPTH_FLOOR, Charmap::TREASURE_CLASS_B);
+          continue;
+        }
+        if (pcg_random_range(0, 1000) < 10) {
+          putc(x, y, MAP_DEPTH_FLOOR, Charmap::TREASURE_CLASS_B);
+          continue;
+        }
+        if (pcg_random_range(0, 1000) < 5) {
+          putc(x, y, MAP_DEPTH_FLOOR, Charmap::TREASURE_CLASS_C);
           continue;
         }
         putc(x, y, MAP_DEPTH_OBJ, Charmap::CHASM);

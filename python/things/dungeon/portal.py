@@ -26,7 +26,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_described_when_hovering_over(self, True)
     my.is_interesting(self, True)
     my.is_magical(self, True)
-    my.is_obs_in_the_way_for_jumping(self, True)
     my.is_obs_in_the_way_for_shooting(self, True)
     my.is_obs_in_the_way_for_throwing(self, True)
     my.is_portal(self, True)
