@@ -57,7 +57,7 @@ void Level::update_hazard_tile_map(void)
   }
 }
 
-void Level::update_water_next_to_lava(void)
+void Level::update_water_next_to_lava(bool &changed)
 {
   for (auto y = 2; y < MAP_HEIGHT - 2; y++) {
     for (auto x = 2; x < MAP_WIDTH - 2; x++) {
@@ -69,9 +69,11 @@ void Level::update_water_next_to_lava(void)
               {
                 if (t->is_lava()) {
                   t->dead("by being too close to deep water");
+                  changed = true;
                   if (! is_starting) {
                     if (! is_steam(x, y)) {
                       auto steam = thing_new("steam", point(x, y));
+                      changed    = true;
                       steam->lifespan_set(pcg_random_range(1, 10));
                     }
                   }
@@ -95,9 +97,11 @@ void Level::update_water_next_to_lava(void)
               {
                 if (t->is_shallow_water()) {
                   t->dead("by being too close to lava");
+                  changed = true;
                   if (! is_starting) {
                     if (! is_steam(x, y)) {
                       auto steam = thing_new("steam", point(x, y));
+                      changed    = true;
                       steam->lifespan_set(pcg_random_range(1, 10));
                     }
                   }
@@ -112,7 +116,7 @@ void Level::update_water_next_to_lava(void)
   }
 }
 
-void Level::update_things_next_to_a_chasm(void)
+void Level::update_things_next_to_a_chasm(bool &changed)
 {
   for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
@@ -148,6 +152,7 @@ void Level::update_things_next_to_a_chasm(void)
 
               if (create_biome_dungeon_place_place_shallow_water) {
                 thing_new("water", point(x, y));
+                changed = true;
               }
             }
           }
@@ -157,7 +162,7 @@ void Level::update_things_next_to_a_chasm(void)
   }
 }
 
-void Level::update_deep_water(void)
+void Level::update_deep_water(bool &changed)
 {
   for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
@@ -177,6 +182,7 @@ void Level::update_deep_water(void)
           {
             if (t->is_shallow_water()) {
               t->dead("by being shallow");
+              changed = true;
             }
           }
           FOR_ALL_THINGS_END()
@@ -203,6 +209,7 @@ void Level::update_deep_water(void)
           {
             if (t->is_deep_water()) {
               t->dead("by being too shallow");
+              changed            = true;
               removed_deep_water = true;
             }
           }
@@ -213,6 +220,7 @@ void Level::update_deep_water(void)
           //
           if (removed_deep_water) {
             thing_new("water", point(x, y));
+            changed = true;
           }
 
           IF_DEBUG2
@@ -256,10 +264,30 @@ void Level::update_map(void)
   dbg("Update map");
   TRACE_AND_INDENT();
 
+  bool changed = false;
+
   update_hazard_tile_map();
-  update_water_next_to_lava();
-  update_things_next_to_a_chasm();
-  update_deep_water();
+  update_water_next_to_lava(changed);
+  update_things_next_to_a_chasm(changed);
+  update_deep_water(changed);
   update_hazard_tile_map();
   update_map_things_to_stand_on();
+
+  //
+  // If we get rid of any water, we need to update the submerged state
+  //
+  if (changed) {
+    for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
+      for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
+        FOR_ALL_THINGS(this, t, x, y)
+        {
+          if (t->is_attached) {
+            t->level_pop();
+            t->level_push();
+          }
+        }
+        FOR_ALL_THINGS_END()
+      }
+    }
+  }
 }

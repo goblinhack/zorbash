@@ -258,10 +258,6 @@ void Dungeon::make_dungeon(void)
                 10,   // R1
                 5,    // R2
                 4 /* generations */);
-      foliage_gen(2000, // fill prob
-                  10,   // R1
-                  5,    // R2
-                  2 /* generations */);
     }
   }
 
@@ -287,6 +283,16 @@ void Dungeon::make_dungeon(void)
 
   DBG2("INF: Add remaining items");
   add_remaining();
+
+  //
+  // Add a cave as the under-dungeon
+  //
+  if (biome == BIOME_SWAMP) {
+    foliage_gen(2000, // fill prob
+                10,   // R1
+                5,    // R2
+                2 /* generations */);
+  }
 
   if (biome != BIOME_CHASMS) {
     DBG2("INF: Add spiderwebs");

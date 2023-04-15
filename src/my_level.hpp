@@ -1282,7 +1282,7 @@ public:
   void tick_(void);
   void tiles_get(void);
   void update_all_ticks(void);
-  void update_deep_water(void);
+  void update_deep_water(bool &changed);
   void update_hazard_tile_map(void);
   void update_heatmap(void);
   void update_light_ascii_map(void);
@@ -1294,9 +1294,9 @@ public:
   void update_noisemap(void);
   void update_same_level_immediately(void);
   void update_same_level(void);
-  void update_things_next_to_a_chasm(void);
+  void update_things_next_to_a_chasm(bool &changed);
   void update(void);
-  void update_water_next_to_lava(void);
+  void update_water_next_to_lava(bool &changed);
   void wobble_set(float);
   // end sort marker4 }
 
