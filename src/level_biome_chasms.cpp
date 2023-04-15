@@ -86,12 +86,6 @@ bool Level::create_biome_chasms(point3d at, uint32_t seed)
     if (g_errored) { return false; }
 #endif
 
-    auto wall_type = tp_random_wall_dungeon();
-    if (! wall_type) {
-      ERR("No dungeon walls found");
-      return false;
-    }
-
     {
       uint32_t start = time_ms();
       dbg2("INF: Place random floors");

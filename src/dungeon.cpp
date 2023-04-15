@@ -213,15 +213,15 @@ void Dungeon::make_dungeon(void)
   TRACE_NO_INDENT();
   debug("only doors");
 
-  //
-  // Not sure we want this as rooms
-  //
-  DBG2("INF: Place doors between room depth changes");
-  place_doors_between_depth_changes();
-  TRACE_NO_INDENT();
-  debug("add doors between depth changes");
-
   if (biome != BIOME_CHASMS) {
+    //
+    // Not sure we want this as rooms
+    //
+    DBG2("INF: Place doors between room depth changes");
+    place_doors_between_depth_changes();
+    TRACE_NO_INDENT();
+    debug("add doors between depth changes");
+
     //
     // Add a perimeter to the level. Helps avoid off by one bugs.
     //
@@ -2364,7 +2364,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
   TRACE_NO_INDENT();
   Dmap d {};
 
-  // LOG("draw corridor from %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+  LOG("draw corridor from %d,%d to %d,%d", start.x, start.y, end.x, end.y);
 
   if ((start.x <= 0) || (start.y <= 0) || (start.x >= map_width - 1) || (start.y >= map_height - 1)) {
     return 0;
@@ -2552,70 +2552,72 @@ int Dungeon::draw_corridor(point start, point end, char w)
     }
   }
 
-  //
-  // Avoid this pattern as it would need a long door
-  //
-  // D
-  // ##
-  //  #D
-  // ...
-  //
-  TRACE_NO_INDENT();
-  {
-    auto x = start.x;
-    auto y = start.y;
-    if (is_anything_at_no_check(x, y + 1)) {
-      set(d.val, x - 1, y, DMAP_IS_WALL);
-      set(d.val, x + 1, y, DMAP_IS_WALL);
-    }
-    if (is_anything_at_no_check(x, y - 1)) {
-      set(d.val, x - 1, y, DMAP_IS_WALL);
-      set(d.val, x + 1, y, DMAP_IS_WALL);
-    }
-    if (is_anything_at_no_check(x + 1, y)) {
-      set(d.val, x, y - 1, DMAP_IS_WALL);
-      set(d.val, x, y + 1, DMAP_IS_WALL);
-    }
-    if (is_anything_at_no_check(x - 1, y)) {
-      set(d.val, x, y - 1, DMAP_IS_WALL);
-      set(d.val, x, y + 1, DMAP_IS_WALL);
-    }
-  }
-
-  TRACE_NO_INDENT();
-  {
-    auto x = end.x;
-    auto y = end.y;
-    if (is_anything_at_no_check(x, y + 1)) {
-      set(d.val, x - 1, y, DMAP_IS_WALL);
-      set(d.val, x + 1, y, DMAP_IS_WALL);
-    }
-    if (is_anything_at_no_check(x, y - 1)) {
-      set(d.val, x - 1, y, DMAP_IS_WALL);
-      set(d.val, x + 1, y, DMAP_IS_WALL);
-    }
-    if (is_anything_at_no_check(x + 1, y)) {
-      set(d.val, x, y - 1, DMAP_IS_WALL);
-      set(d.val, x, y + 1, DMAP_IS_WALL);
-    }
-    if (is_anything_at_no_check(x - 1, y)) {
-      set(d.val, x, y - 1, DMAP_IS_WALL);
-      set(d.val, x, y + 1, DMAP_IS_WALL);
-    }
-  }
-
-  //
-  // Ensure adjoining corridors are not possible
-  //
-  TRACE_NO_INDENT();
-  for (auto y = miny + 1; y < maxy - 1; y++) {
-    for (auto x = minx + 1; x < maxx - 1; x++) {
-      if (is_corridor_no_check(x, y)) {
+  if (biome != BIOME_CHASMS) {
+    //
+    // Avoid this pattern as it would need a long door
+    //
+    // D
+    // ##
+    //  #D
+    // ...
+    //
+    TRACE_NO_INDENT();
+    {
+      auto x = start.x;
+      auto y = start.y;
+      if (is_anything_at_no_check(x, y + 1)) {
         set(d.val, x - 1, y, DMAP_IS_WALL);
-        set(d.val, x, y - 1, DMAP_IS_WALL);
-        set(d.val, x, y, DMAP_IS_WALL);
-        set(d.val, x, y + 1, DMAP_IS_WALL);
         set(d.val, x + 1, y, DMAP_IS_WALL);
+      }
+      if (is_anything_at_no_check(x, y - 1)) {
+        set(d.val, x - 1, y, DMAP_IS_WALL);
+        set(d.val, x + 1, y, DMAP_IS_WALL);
+      }
+      if (is_anything_at_no_check(x + 1, y)) {
+        set(d.val, x, y - 1, DMAP_IS_WALL);
+        set(d.val, x, y + 1, DMAP_IS_WALL);
+      }
+      if (is_anything_at_no_check(x - 1, y)) {
+        set(d.val, x, y - 1, DMAP_IS_WALL);
+        set(d.val, x, y + 1, DMAP_IS_WALL);
+      }
+    }
+
+    TRACE_NO_INDENT();
+    {
+      auto x = end.x;
+      auto y = end.y;
+      if (is_anything_at_no_check(x, y + 1)) {
+        set(d.val, x - 1, y, DMAP_IS_WALL);
+        set(d.val, x + 1, y, DMAP_IS_WALL);
+      }
+      if (is_anything_at_no_check(x, y - 1)) {
+        set(d.val, x - 1, y, DMAP_IS_WALL);
+        set(d.val, x + 1, y, DMAP_IS_WALL);
+      }
+      if (is_anything_at_no_check(x + 1, y)) {
+        set(d.val, x, y - 1, DMAP_IS_WALL);
+        set(d.val, x, y + 1, DMAP_IS_WALL);
+      }
+      if (is_anything_at_no_check(x - 1, y)) {
+        set(d.val, x, y - 1, DMAP_IS_WALL);
+        set(d.val, x, y + 1, DMAP_IS_WALL);
+      }
+    }
+
+    //
+    // Ensure adjoining corridors are not possible
+    //
+    TRACE_NO_INDENT();
+    for (auto y = miny + 1; y < maxy - 1; y++) {
+      for (auto x = minx + 1; x < maxx - 1; x++) {
+        if (is_corridor_no_check(x, y)) {
+          set(d.val, x - 1, y, DMAP_IS_WALL);
+          set(d.val, x, y - 1, DMAP_IS_WALL);
+          set(d.val, x, y, DMAP_IS_WALL);
+          set(d.val, x, y + 1, DMAP_IS_WALL);
+          set(d.val, x + 1, y, DMAP_IS_WALL);
+        }
       }
     }
   }
@@ -2696,7 +2698,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
 int Dungeon::draw_corridors(void)
 {
   TRACE_NO_INDENT();
-#if 0
+#if 1
   LOG("Draw corridors");
   dump();
 #endif
@@ -2820,7 +2822,7 @@ int Dungeon::draw_corridors(void)
     }
   }
 
-  return (total_len);
+  return total_len;
 }
 
 void Dungeon::center_room_layout(void)
@@ -4042,11 +4044,11 @@ void Dungeon::add_remaining(void)
       }
 
       if (biome == BIOME_CHASMS) {
-        if (pcg_random_range(0, 100) < 15) {
+        if (pcg_random_range(0, 1000) < 15) {
           putc(x, y, MAP_DEPTH_OBJ, Charmap::ROCK);
           continue;
         }
-        if (pcg_random_range(0, 100) < 15) {
+        if (pcg_random_range(0, 1000) < 15) {
           putc(x, y, MAP_DEPTH_FLOOR, Charmap::DIRT);
           continue;
         }

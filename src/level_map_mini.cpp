@@ -274,8 +274,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         } else if (is_bridge(x, y)) {
           c.a = 200;
         } else if (is_chasm(x, y)) {
-          c   = PURPLE;
-          c.a = 100;
+          c = BLACK;
         } else if (is_shallow_water(x, y)) {
           c.a = 20;
         } else if (is_deep_water(x, y)) {
@@ -370,8 +369,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
             c = BROWN2;
           }
         } else if (is_chasm(x, y)) {
-          c   = PURPLE;
-          c.a = 100;
+          c = BLACK;
         } else if (is_shallow_water(x, y)) {
           c = BLUE2;
         } else if (is_deep_water(x, y)) {

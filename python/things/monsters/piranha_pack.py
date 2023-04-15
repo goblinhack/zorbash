@@ -19,7 +19,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_follow(self, True)
     my.is_allied_with(self, "piranha_pack")
     my.is_biome_dungeon(self, True)
-    my.is_biome_chasms(self, True)
+    my.is_biome_swamp(self, True)
     my.is_monst_class_A(self, True)
     my.is_loggable(self, True)
     my.rarity(self, my.RARITY_RARE)  # how rare within this monster class

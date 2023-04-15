@@ -377,6 +377,9 @@ bool Light::calculate(void)
         }
       }
     } else {
+      //
+      // Slower. Need to handle oob.
+      //
       if (ray_cast_only) {
         for (int16_t i = 0; i < max_light_rays; i++) {
           auto          r             = &getref(ray, i);
@@ -396,6 +399,10 @@ bool Light::calculate(void)
             const int16_t p1y = light_pos.y + rp->p.y;
             const uint8_t x   = p1x / TILE_WIDTH;
             const uint8_t y   = p1y / TILE_HEIGHT;
+
+            if (level->is_oob(x, y)) {
+              break;
+            }
 
             AVOID_LOOKING_AT_THE_SAME_TILE()
             level->is_currently_pixelart_raycast_lit_set(x, y); // allows lights to fade
