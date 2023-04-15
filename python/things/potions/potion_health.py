@@ -13,7 +13,7 @@ def on_get_text_description_long(owner, me, x, y):
 
 
 def on_thrown(owner, me, x, y):
-    explode(me, x, y)
+    shatters(me, x, y)
 
 
 def on_use(owner, item, target, x, y):
@@ -51,34 +51,33 @@ def on_use(owner, item, target, x, y):
             my.thing_msg(owner, "Hm. That potion didn't seem to do anything.")
 
 
-def explode(me, x, y):
+def shatters(me, x, y):
     if my.thing_is_dead(me):
         return
 
     owner = my.thing_top_owner_id_get(me)
     if owner:
         if my.thing_is_player(owner):
-            my.thing_msg(me, "Your potion of health explodes.")
+            my.thing_msg(me, "Your potion of health shatters.")
         else:
-            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s potion of health explodes.")
+            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s potion of health shatters.")
     else:
-        my.thing_msg(me, "The potion of health explodes.")
+        my.thing_msg(me, "The potion of health shatters.")
 
-    my.spawn_at_my_position(me, "explosion_fire")
-    my.spawn_set_fire_to_things_around_me(me, "fire")
-    my.thing_dead(me, "exploded")
+    my.spawn_at_my_position(me, "water")
+    my.thing_dead(me, "broken")
 
 
 def on_hit_and_still_alive(me, hitter, real_hitter, x, y, crit, damage):
-    explode(me, x, y)
+    shatters(me, x, y)
 
 
 def on_fire(me, x, y):
-    explode(me, x, y)
+    shatters(me, x, y)
 
 
 def on_fall(me, x, y):
-    explode(me, x, y)
+    shatters(me, x, y)
 
 
 def on_enchant(me, x, y):
