@@ -1981,6 +1981,63 @@ bool Dungeon::room_is_a_candidate_less_restrictive(const DungeonNode *n, Roomp r
   return true;
 }
 
+bool Dungeon::room_is_a_candidate_any_depth(const DungeonNode *n, Roomp r)
+{
+  if (n->biome != r->biome) {
+    return false;
+  }
+
+  for (auto x = 0; x < nodes->grid_width; x++) {
+    for (auto y = 0; y < nodes->grid_height; y++) {
+      auto o = get(grid.node_rooms, x, y);
+      if (o == r) {
+        return false;
+      }
+    }
+  }
+
+  if ((n->has_door_down || n->has_secret_exit_down) && ! r->doors_down.size()) {
+    return false;
+  }
+  if ((n->has_door_up || n->has_secret_exit_up) && ! r->doors_up.size()) {
+    return false;
+  }
+  if ((n->has_door_left || n->has_secret_exit_left) && ! r->doors_left.size()) {
+    return false;
+  }
+  if ((n->has_door_right || n->has_secret_exit_right) && ! r->doors_right.size()) {
+    return false;
+  }
+  if (r->dir_left) {
+    return false;
+  }
+  if (r->dir_right) {
+    return false;
+  }
+  if (r->dir_up) {
+    return false;
+  }
+  if (r->dir_down) {
+    return false;
+  }
+  if (n->is_descend_dungeon) {
+    return (n->is_descend_dungeon == r->is_descend_dungeon);
+  }
+  if (n->is_ascend_dungeon) {
+    return (n->is_ascend_dungeon == r->is_ascend_dungeon);
+  }
+  if (n->is_lock) {
+    return (n->is_lock == r->is_lock);
+  }
+  if (n->is_key) {
+    return (n->is_key == r->is_key);
+  }
+  if (n->is_secret) {
+    return (n->is_secret == r->is_secret);
+  }
+  return true;
+}
+
 bool Dungeon::solve(int x, int y, Grid *g)
 {
   auto n = nodes->getn(x, y);
@@ -2015,6 +2072,17 @@ bool Dungeon::solve(int x, int y, Grid *g)
       }
 
       candidates.push_back(r);
+    }
+
+    ncandidates = candidates.size();
+    if (! ncandidates) {
+      for (auto r : Room::all_rooms) {
+        if (! room_is_a_candidate_any_depth(n, r)) {
+          continue;
+        }
+
+        candidates.push_back(r);
+      }
     }
 
     ncandidates = candidates.size();
