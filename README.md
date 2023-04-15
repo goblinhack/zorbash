@@ -194,6 +194,7 @@ Welcome to the lair of the dread tentacleye, Zorbash. Collect the crystals of Zo
 This is work in progress.
 
 Current status:
+- dungeon, sewer, swamp and chasms biomes
 - playable and looking for feedback
 - no bosses or end game so far
 - crystal collection does nothing so far
