@@ -1000,6 +1000,16 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
             //
             // e.g. kraken
             //
+            blit_br.y -= 1;
+            blit_tl.y -= 1;
+
+            //
+            // Avoid foliage floating one pixel above the water
+            //
+            if (tpp->gfx_pixelart_show_outlined()) {
+              blit_br.y -= 1;
+              blit_tl.y -= 1;
+            }
           } else if (tpp->gfx_pixelart_oversized_and_centered()) {
             //
             // e.g. dungeon cleaner
