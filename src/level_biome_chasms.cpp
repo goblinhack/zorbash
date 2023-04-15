@@ -242,20 +242,6 @@ bool Level::create_biome_chasms(point3d at, uint32_t seed)
 
     {
       uint32_t start = time_ms();
-      dbg2("INF: Place dirt");
-      place_dirt(dungeon);
-      if (g_errored) {
-        return false;
-      }
-      uint32_t took = time_ms() - start;
-      if (took > slowest_so_far) {
-        slowest_so_far       = took;
-        slowest_so_far_which = "placing dirt";
-      }
-    }
-
-    {
-      uint32_t start = time_ms();
       dbg2("INF: Place chasms");
       create_biome_chasms_place_chasm(dungeon, "chasm1");
       if (g_errored) {
@@ -517,7 +503,12 @@ void Level::create_biome_chasms_place_remaining_floor(Dungeonp d, const std::str
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-      if (! d->is_floor(x, y)) {
+      if (! d->is_floor(x, y) && ! d->is_corridor(x, y) && ! d->is_secret_corridor_at(x, y)) {
+        continue;
+      }
+
+      if (! is_chasm(x, y) && ! is_floor(x, y) && ! is_dirt(x, y) && ! is_corridor(x, y)) {
+        thing_new(what, point(x, y));
         continue;
       }
 

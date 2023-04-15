@@ -1923,6 +1923,10 @@ bool Dungeon::room_is_a_candidate(int x, int y, const DungeonNode *n, Roomp r)
 
 bool Dungeon::room_is_a_candidate_less_restrictive(const DungeonNode *n, Roomp r)
 {
+  if (n->biome != r->biome) {
+    return false;
+  }
+
   for (auto x = 0; x < nodes->grid_width; x++) {
     for (auto y = 0; y < nodes->grid_height; y++) {
       auto o = get(grid.node_rooms, x, y);
@@ -4049,15 +4053,18 @@ void Dungeon::add_remaining(void)
           continue;
         }
         if (pcg_random_range(0, 1000) < 20) {
-          putc(x, y, MAP_DEPTH_FLOOR, Charmap::TREASURE_CLASS_B);
+          putc(x, y, MAP_DEPTH_OBJ, Charmap::TREASURE_CLASS_B);
+          putc(x, y, MAP_DEPTH_FLOOR, Charmap::FLOOR);
           continue;
         }
         if (pcg_random_range(0, 1000) < 10) {
-          putc(x, y, MAP_DEPTH_FLOOR, Charmap::TREASURE_CLASS_B);
+          putc(x, y, MAP_DEPTH_OBJ, Charmap::TREASURE_CLASS_B);
+          putc(x, y, MAP_DEPTH_FLOOR, Charmap::FLOOR);
           continue;
         }
         if (pcg_random_range(0, 1000) < 5) {
-          putc(x, y, MAP_DEPTH_FLOOR, Charmap::TREASURE_CLASS_C);
+          putc(x, y, MAP_DEPTH_OBJ, Charmap::TREASURE_CLASS_C);
+          putc(x, y, MAP_DEPTH_FLOOR, Charmap::FLOOR);
           continue;
         }
         putc(x, y, MAP_DEPTH_OBJ, Charmap::CHASM);

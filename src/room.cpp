@@ -285,6 +285,13 @@ bool Room::room_do_any_doors_remain(
 void Room::room_check_doors_can_reach_each_other(void)
 {
   //
+  // Chasms are more challenging
+  //
+  if (biome == BIOME_CHASMS) {
+    return;
+  }
+
+  //
   // Erase everything that adjoins a door.
   //
   for (auto x : range< int >(0, width)) {

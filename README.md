@@ -303,6 +303,18 @@ Press TAB to switch between modes during the game.
 <img alt="Ascii art" src="pics/ascii/screenshot.12.png" width="45%">
 </p>
 
+<p align="center">
+<img alt="Pixel art" src="pics/pixelart/screenshot.13.png" width="45%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+<img alt="Ascii art" src="pics/ascii/screenshot.13.png" width="45%">
+</p>
+
+<p align="center">
+<img alt="Pixel art" src="pics/pixelart/screenshot.14.png" width="45%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+<img alt="Ascii art" src="pics/ascii/screenshot.14.png" width="45%">
+</p>
+
 Pixelart Screenshots
 --------------------
 
@@ -326,6 +338,8 @@ Pixelart Screenshots
 ![Alt text](pics/pixelart/screenshot.18.png?raw=true "")
 ![Alt text](pics/pixelart/screenshot.19.png?raw=true "")
 ![Alt text](pics/pixelart/screenshot.20.png?raw=true "")
+![Alt text](pics/pixelart/screenshot.21.png?raw=true "")
+![Alt text](pics/pixelart/screenshot.22.png?raw=true "")
 
 Ascii Screenshots
 -----------------
@@ -342,6 +356,8 @@ Ascii Screenshots
 ![Alt text](pics/ascii/screenshot.10.png?raw=true "")
 ![Alt text](pics/ascii/screenshot.11.png?raw=true "")
 ![Alt text](pics/ascii/screenshot.12.png?raw=true "")
+![Alt text](pics/ascii/screenshot.13.png?raw=true "")
+![Alt text](pics/ascii/screenshot.14.png?raw=true "")
 
 How to build
 ------------
