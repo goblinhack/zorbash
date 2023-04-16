@@ -11,7 +11,7 @@ bool Thing::will_avoid_monst(const Thingp it)
   TRACE_NO_INDENT();
   auto me = tp();
 
-  dbg("Avoid %s?", it->to_short_string().c_str());
+  // dbg("Avoid %s?", it->to_short_string().c_str());
 
   //
   // Avoid flaming things; even friends.

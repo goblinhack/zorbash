@@ -1662,11 +1662,8 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
   }
 }
 
-bool Thing::ai_choose_immediately_adjacent_goal(void)
+bool Thing::ai_choose_immediately_adjacent_goal(int dx, int dy)
 {
-  AI_LOG("Choose immediately adjacent goals");
-  TRACE_AND_INDENT();
-
   bool left   = false;
   bool right  = false;
   bool up     = false;
@@ -1680,6 +1677,139 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
   attack_options.shove_allowed  = false;
   attack_options.attack_allowed = true;
 
+  point at(curr_at.x + dx, curr_at.y + dy);
+  if (level->is_oob(at)) {
+    return false;
+  }
+
+  FOR_ALL_NON_INTERNAL_THINGS(level, it, at.x, at.y)
+  {
+    if (it->is_door() && ! it->is_open && ! it->is_dead) {
+      if (is_able_to_open_doors()) {
+        if (keys()) {
+          if (open_door(it)) {
+            AI_LOG("Opened a door", it);
+            if (is_player()) {
+              game->tick_begin("Robot opened a door");
+            }
+            return true;
+          }
+        }
+      }
+
+      if (is_able_to_break_down_doors()) {
+        //
+        // Try hitting the door
+        //
+        left   = dx < 0;
+        right  = dx > 0;
+        up     = dy < 0;
+        down   = dy > 0;
+        attack = true;
+
+        attack_options.attack_allowed = true;
+        if (up || down || left || right) {
+          attack_options.attack_at     = at;
+          attack_options.attack_at_set = true;
+        }
+
+        AI_LOG("Trying to break down a door", it);
+        if (is_player()) {
+          player_tick(left, right, up, down, attack, wait, jump);
+        } else if (is_moveable()) {
+          move(curr_at, up, down, left, right, attack, wait, &attack_options);
+        }
+        return true;
+      }
+    }
+
+    if (is_able_to_break_out_of_webs()) {
+      if (it->is_spiderweb() && (it->curr_at == curr_at)) {
+        //
+        // Try hitting the web
+        //
+        left   = dx < 0;
+        right  = dx > 0;
+        up     = dy < 0;
+        down   = dy > 0;
+        attack = true;
+
+        attack_options.attack_allowed = true;
+        if (up || down || left || right) {
+          attack_options.attack_at     = at;
+          attack_options.attack_at_set = true;
+        }
+
+        AI_LOG("Trying to break out of a web", it);
+        if (is_player()) {
+          player_tick(left, right, up, down, attack, wait, jump);
+        } else if (is_moveable()) {
+          move(curr_at, up, down, left, right, attack, wait, &attack_options);
+        }
+        return true;
+      }
+    }
+
+    if (is_able_to_break_out_of_ice()) {
+      if (it->is_block_of_ice() && (it->curr_at == curr_at)) {
+        //
+        // Try hitting the ice
+        //
+        left   = dx < 0;
+        right  = dx > 0;
+        up     = dy < 0;
+        down   = dy > 0;
+        attack = true;
+
+        attack_options.attack_allowed = true;
+        if (up || down || left || right) {
+          attack_options.attack_at     = at;
+          attack_options.attack_at_set = true;
+        }
+
+        AI_LOG("Trying to break out of ice", it);
+        if (is_player()) {
+          player_tick(left, right, up, down, attack, wait, jump);
+        } else if (is_moveable()) {
+          move(curr_at, up, down, left, right, attack, wait, &attack_options);
+        }
+        return true;
+      }
+    }
+  }
+  FOR_ALL_THINGS_END();
+
+  if (is_item_collector()) {
+    auto items = anything_to_carry_at(at);
+    if (items.size() >= 1) {
+      AI_LOG("Yes, something to carry here");
+      for (auto itemid : items) {
+        auto t = level->thing_find(itemid);
+        if (try_to_carry_if_worthwhile_dropping_items_if_needed(t)) {
+          return true;
+        }
+      }
+    }
+  }
+
+  return false;
+}
+
+bool Thing::ai_choose_immediately_adjacent_goal(void)
+{
+  //
+  // Look locally first.
+  //
+  AI_LOG("Choose current location goal");
+  TRACE_AND_INDENT();
+
+  if (ai_choose_immediately_adjacent_goal(0, 0)) {
+    return true;
+  }
+
+  AI_LOG("Choose immediately adjacent goals");
+  TRACE_AND_INDENT();
+
   for (int dx = -1; dx <= 1; dx++) {
     for (int dy = -1; dy <= 1; dy++) {
 
@@ -1692,121 +1822,12 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
         continue;
       }
 
-      point at(curr_at.x + dx, curr_at.y + dy);
-      if (level->is_oob(at)) {
-        continue;
-      }
-
-      FOR_ALL_NON_INTERNAL_THINGS(level, it, at.x, at.y)
-      {
-        if (it->is_door() && ! it->is_open && ! it->is_dead) {
-          if (is_able_to_open_doors()) {
-            if (keys()) {
-              if (open_door(it)) {
-                AI_LOG("Opened a door", it);
-                if (is_player()) {
-                  game->tick_begin("Robot opened a door");
-                }
-                return true;
-              }
-            }
-          }
-
-          if (is_able_to_break_down_doors()) {
-            //
-            // Try hitting the door
-            //
-            left   = dx < 0;
-            right  = dx > 0;
-            up     = dy < 0;
-            down   = dy > 0;
-            attack = true;
-
-            attack_options.attack_allowed = true;
-            if (up || down || left || right) {
-              attack_options.attack_at     = at;
-              attack_options.attack_at_set = true;
-            }
-
-            AI_LOG("Trying to break down a door", it);
-            if (is_player()) {
-              player_tick(left, right, up, down, attack, wait, jump);
-            } else if (is_moveable()) {
-              move(curr_at, up, down, left, right, attack, wait, &attack_options);
-            }
-            return true;
-          }
-        }
-
-        if (is_able_to_break_out_of_webs()) {
-          if (it->is_spiderweb() && (it->curr_at == curr_at)) {
-            //
-            // Try hitting the web
-            //
-            left   = dx < 0;
-            right  = dx > 0;
-            up     = dy < 0;
-            down   = dy > 0;
-            attack = true;
-
-            attack_options.attack_allowed = true;
-            if (up || down || left || right) {
-              attack_options.attack_at     = at;
-              attack_options.attack_at_set = true;
-            }
-
-            AI_LOG("Trying to break out of a web", it);
-            if (is_player()) {
-              player_tick(left, right, up, down, attack, wait, jump);
-            } else if (is_moveable()) {
-              move(curr_at, up, down, left, right, attack, wait, &attack_options);
-            }
-            return true;
-          }
-        }
-
-        if (is_able_to_break_out_of_ice()) {
-          if (it->is_block_of_ice() && (it->curr_at == curr_at)) {
-            //
-            // Try hitting the ice
-            //
-            left   = dx < 0;
-            right  = dx > 0;
-            up     = dy < 0;
-            down   = dy > 0;
-            attack = true;
-
-            attack_options.attack_allowed = true;
-            if (up || down || left || right) {
-              attack_options.attack_at     = at;
-              attack_options.attack_at_set = true;
-            }
-
-            AI_LOG("Trying to break out of ice", it);
-            if (is_player()) {
-              player_tick(left, right, up, down, attack, wait, jump);
-            } else if (is_moveable()) {
-              move(curr_at, up, down, left, right, attack, wait, &attack_options);
-            }
-            return true;
-          }
-        }
-      }
-      FOR_ALL_THINGS_END();
-
-      if (is_item_collector()) {
-        auto items = anything_to_carry_at(at);
-        if (items.size() >= 1) {
-          for (auto itemid : items) {
-            auto t = level->thing_find(itemid);
-            if (try_to_carry_if_worthwhile_dropping_items_if_needed(t)) {
-              return true;
-            }
-          }
-        }
+      if (ai_choose_immediately_adjacent_goal(dx, dy)) {
+        return true;
       }
     }
   }
+
   return false;
 }
 
