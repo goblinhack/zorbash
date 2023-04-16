@@ -62,8 +62,11 @@ void Level::describe(point p)
     //
     // In chasm levels we can see further and offscreen. Limit to what is onscreen.
     //
-    if (! t->is_visible_to_player) {
-      continue;
+    IF_NODEBUG
+    {
+      if (! t->is_visible_to_player) {
+        continue;
+      }
     }
 
     //
@@ -137,8 +140,11 @@ void Level::describe(point p)
     //
     // In chasm levels we can see further and offscreen. Limit to what is onscreen.
     //
-    if (! t->is_visible_to_player) {
-      continue;
+    IF_NODEBUG
+    {
+      if (! t->is_visible_to_player) {
+        continue;
+      }
     }
 
     //
@@ -220,8 +226,11 @@ void Level::describe(point p)
     //
     // In chasm levels we can see further and offscreen. Limit to what is onscreen.
     //
-    if (! t->is_visible_to_player) {
-      continue;
+    IF_NODEBUG
+    {
+      if (! t->is_visible_to_player) {
+        continue;
+      }
     }
 
     //
