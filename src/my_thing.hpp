@@ -415,6 +415,7 @@ public:
   bool ai_choose_avoid_goals(std::multiset< Goal > &avoid_goals, const Goal &goal);
   bool ai_choose_immediately_adjacent_goal(int dx, int dy);
   bool ai_choose_immediately_adjacent_goal(void);
+  bool tile_is_offscreen(void);
   bool ai_choose_wander(point &nh);
   bool ai_create_on_fire_path(point &nh, const point start, const point end);
   bool ai_create_path(point &nh, const point start, const point end);

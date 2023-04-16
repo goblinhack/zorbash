@@ -60,6 +60,13 @@ void Level::describe(point p)
     }
 
     //
+    // In chasm levels we can see further and offscreen. Limit to what is onscreen.
+    //
+    if (! t->is_visible_to_player) {
+      continue;
+    }
+
+    //
     // Don't allow snooping of monsters we cannot see
     //
     if (! get(can_see_currently.can_see, x, y) && t->is_monst()) {
@@ -124,6 +131,13 @@ void Level::describe(point p)
     // We show the player info in the inventory, so skip it here.
     //
     if (t->is_player()) {
+      continue;
+    }
+
+    //
+    // In chasm levels we can see further and offscreen. Limit to what is onscreen.
+    //
+    if (! t->is_visible_to_player) {
       continue;
     }
 
@@ -200,6 +214,13 @@ void Level::describe(point p)
     // We show the player info in the inventory, so skip it here.
     //
     if (t->is_player()) {
+      continue;
+    }
+
+    //
+    // In chasm levels we can see further and offscreen. Limit to what is onscreen.
+    //
+    if (! t->is_visible_to_player) {
       continue;
     }
 

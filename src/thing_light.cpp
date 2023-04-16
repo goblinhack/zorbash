@@ -201,6 +201,13 @@ int Thing::light_distance_update(void)
     FOR_ALL_INTERESTING_THINGS_ON_LEVEL(level, t)
     {
       if (get_no_check(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) {
+        //
+        // In chasm levels we can see further and offscreen. Limit to what is onscreen.
+        //
+        if (t->tile_is_offscreen()) {
+          continue;
+        }
+
         t->is_visible_to_player = true;
 
         FOR_ALL_EQUIP(e)

@@ -10,6 +10,42 @@
 #include "my_thing.hpp"
 #include "my_ui.hpp"
 
+bool Thing::tile_is_offscreen(void)
+{
+  if (g_opt_ascii) {
+    return false;
+  }
+
+  auto tile = tile_index_to_tile(tile_curr);
+  if (! tile) {
+    return false;
+  }
+
+  auto blit_at_x = last_blit_at.x - level->pixel_map_at.x;
+  auto blit_at_y = last_blit_at.y - level->pixel_map_at.y;
+
+  //
+  // In chasm levels we can see further and offscreen. Limit to what is onscreen.
+  //
+  if (blit_at_x > game->config.game_pix_width) {
+    return true;
+  }
+
+  if (blit_at_y > game->config.game_pix_height) {
+    return true;
+  }
+
+  if (blit_at_x < -tile->pix_width) {
+    return true;
+  }
+
+  if (blit_at_y < -tile->pix_height) {
+    return true;
+  }
+
+  return false;
+}
+
 void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, const point blit_tl, const point blit_br)
 {
   TRACE_NO_INDENT();
@@ -1184,6 +1220,10 @@ void Thing::blit_pixelart(int fbo)
     }
   } else {
     if (! map_offset_coords_get(blit_tl, blit_br, tile, false)) {
+      return;
+    }
+
+    if (tile_is_offscreen()) {
       return;
     }
   }

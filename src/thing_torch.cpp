@@ -80,6 +80,7 @@ void Thing::light_dist_including_torch_effect_get(uint8_t &out_light_dist)
   }
 
   int count = torch_count();
+
   //
   // Make torches brigheter
   //

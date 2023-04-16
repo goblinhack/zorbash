@@ -201,7 +201,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.collision_hit_priority(self, 6)
     my.distance_avoid(self, 3)
     my.distance_throw(self, 5)
-    my.distance_vision(self, 15)
+    my.distance_vision(self, 10)
     my.dmg_nat_att_dice(self, "1d3")
     my.dmg_nat_att_type(self, "punch")
     my.environ_dislikes_acid(self, 100)
