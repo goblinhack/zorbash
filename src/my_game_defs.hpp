@@ -28,6 +28,7 @@
 #define LEVEL_FADE_OUT_MS          500 // Level end fade animation time
 #define LEVEL_MONST_COUNT_INIT_MAX 25  // Monsters max per level at creation. Want more? You're mad...
 #define LEVEL_MONST_COUNT_ABS_MAX  50  // Monsters max per level period.
+#define LEVEL_REDRAW_BG_DELAY_MS   50  // Frequency to redraw the entire background when things change
 
 //
 // The border needs to be big enough so that the player is not

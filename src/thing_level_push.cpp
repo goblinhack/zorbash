@@ -336,15 +336,17 @@ void Thing::level_push(void)
   }
 
   if (gfx_pixelart_shown_in_bg()) {
-    level->ts_redraw_bg = time_ms_cached() + 1000;
+    //
+    // Set this on the first change, to avoid the redraw being pushed out too
+    // far by subsequent changes.
+    //
+    if (! level->ts_redraw_bg) {
+      level->ts_redraw_bg = time_ms_cached() + LEVEL_REDRAW_BG_DELAY_MS;
+    }
   }
 
   if (is_lava() || is_fire()) {
     level->is_heatmap_valid = false;
-  }
-
-  if (gfx_pixelart_shown_in_bg()) {
-    level->ts_redraw_bg = time_ms_cached() + 500;
   }
 
   //
