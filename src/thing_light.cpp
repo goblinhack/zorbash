@@ -87,7 +87,7 @@ void Thing::init_lights(void)
     // And this is the player visible light; this diminishes according
     // to the number of torch charges.
     //
-    col = GRAY10;
+    col = ORANGE;
     new_light(point(0, 0), light_dist, col, FBO_PLAYER_VISIBLE_LIGHTING);
 
     //
@@ -95,11 +95,12 @@ void Thing::init_lights(void)
     // lighting and allows you to see a small amount ahead even with no
     // torch.
     //
-    col = GRAY50;
+    col = YELLOW;
     new_light(point(0, 0), light_dist / 2, col, FBO_PLAYER_VISIBLE_LIGHTING);
 
     col = WHITE;
     new_light(point(0, 0), light_dist / 3, col, FBO_PLAYER_VISIBLE_LIGHTING);
+
     new_light(point(0, 0), 2 * TILE_WIDTH, col, FBO_SMALL_POINT_LIGHTS);
 
     has_light = true;
