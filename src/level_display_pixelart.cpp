@@ -470,13 +470,25 @@ void Level::display_pixelart_map_all(void)
     //
     blit_fbo_bind(FBO_MAP);
     glClear(GL_COLOR_BUFFER_BIT);
-    if (biome == BIOME_CHASMS) {
-      //
-      // Looks more ominous
-      //
-      glcolor(GRAY10);
-    } else {
-      glcolor(GRAY50);
+
+    //
+    // More ominous lighting
+    //
+    switch (biome) {
+      case BIOME_UNKNOWN: break;
+      case BIOME_DUNGEON: glcolor(GRAY50); break;
+      case BIOME_SWAMP: glcolor(GRAY10); break;
+      case BIOME_SEWER: glcolor(GRAY10); break;
+      case BIOME_ICE: break;
+      case BIOME_CHASMS:
+        //
+        // Looks more ominous
+        //
+        glcolor(GRAY10);
+        break;
+      case BIOME_LAVA: glcolor(RED); break;
+      case BIOME_DUNGEONS: break;
+      case BIOME_MAX: break;
     }
 
     glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
