@@ -80,28 +80,12 @@ void Thing::light_dist_including_torch_effect_get(uint8_t &out_light_dist)
   }
 
   int count = torch_count();
-
   //
   // Make torches brighter
   //
   light_dist += torch->light_dist() * count * 3;
 
-  //
-  // You can see further in the chasms
-  //
-  if (level->biome == BIOME_CHASMS) {
-    light_dist *= 2;
-  }
-
   auto max_distance = tp()->distance_vision();
-
-  //
-  // You can see further in the chasms
-  //
-  if (level->biome == BIOME_CHASMS) {
-    max_distance *= 2;
-  }
-
   if (light_dist > max_distance) {
     light_dist = max_distance;
   }

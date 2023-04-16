@@ -278,7 +278,15 @@ int Thing::prev_light_dist_incr(void)
 int Thing::initial_light_dist_get(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->light_dist());
+  auto light_dist = tp()->light_dist();
+
+  if (is_player()) {
+    if (level->biome == BIOME_CHASMS) {
+      light_dist *= 2;
+    }
+  }
+
+  return light_dist;
 }
 
 int Thing::light_dist_get(void)
@@ -297,6 +305,12 @@ int Thing::light_dist_get(void)
 
   light_dist_including_torch_effect_get(light_dist);
   infop()->light_dist = light_dist;
+
+  if (is_player()) {
+    if (level->biome == BIOME_CHASMS) {
+      light_dist *= 2;
+    }
+  }
 
   return light_dist;
 }

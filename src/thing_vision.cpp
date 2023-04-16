@@ -58,25 +58,11 @@ float Thing::distance_vision_get(void)
   //
   auto v = tp()->distance_vision();
 
-  //
-  // You can see further in the chasms
-  //
-  if (level->biome == BIOME_CHASMS) {
-    v *= 2;
-  }
-
   if (is_able_to_see_in_the_dark()) {
     return v;
   }
 
   auto l = light_dist_get();
-
-  //
-  // You can see further in the chasms
-  //
-  if (level->biome == BIOME_CHASMS) {
-    l *= 2;
-  }
 
   if (l < v) {
     return l;
