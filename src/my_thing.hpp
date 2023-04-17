@@ -1289,6 +1289,7 @@ public:
   int is_able_to_collect_keys(void);
   int is_able_to_dampen_footsteps(void);
   int is_able_to_eat_poisonous_food(void);
+  int is_able_to_eat_rotting_food(void);
   int is_able_to_eat_unpleasant_food(void);
   int is_able_to_enchant_items(void);
   int is_able_to_fall(void);
@@ -1713,7 +1714,6 @@ public:
   int is_unused_flag145(void);
   int is_unused_flag146(void);
   int is_unused_flag147(void);
-  int is_able_to_eat_rotting_food(void);
   int is_unused_flag14(void);
   int is_unused_flag15(void);
   int is_unused_flag16(void);
@@ -2736,7 +2736,6 @@ public:
   void resurrect_forced(void);
   void resurrect_tick(void);
   void resurrect(void);
-  void unpleasant(void);
   void score_add(Thingp victim);
   void score_decr(int);
   void score_incr(int);
@@ -2769,6 +2768,7 @@ public:
   void try_to_carry(const std::list< Thingp > &items);
   void unleash_minions(void);
   void unleash_spawners_things(void);
+  void unpleasant(void);
   void unstuck(void);
   void update_all(void);
   void update_interpolated_position(void);

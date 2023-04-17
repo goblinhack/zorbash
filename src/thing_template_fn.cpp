@@ -343,6 +343,9 @@ int Tp::is_able_to_break_out_of_webs(void) const { return _is_able_to_break_out_
 int Tp::is_able_to_change_levels(void) const { return _is_able_to_change_levels; }
 int Tp::is_able_to_collect_keys(void) const { return _is_able_to_collect_keys; }
 int Tp::is_able_to_dampen_footsteps(void) const { return _is_able_to_dampen_footsteps; }
+int Tp::is_able_to_eat_poisonous_food(void) const { return _is_able_to_eat_poisonous_food; }
+int Tp::is_able_to_eat_rotting_food(void) const { return _is_able_to_eat_rotting_food; }
+int Tp::is_able_to_eat_unpleasant_food(void) const { return _is_able_to_eat_unpleasant_food; }
 int Tp::is_able_to_enchant_items(void) const { return _is_able_to_enchant_items; }
 int Tp::is_able_to_fall(void) const { return _is_able_to_fall; }
 int Tp::is_able_to_follow(void) const { return _is_able_to_follow; }
@@ -739,10 +742,7 @@ int Tp::is_unused_flag144(void) const { return _is_unused_flag144; }
 int Tp::is_unused_flag145(void) const { return _is_unused_flag145; }
 int Tp::is_unused_flag146(void) const { return _is_unused_flag146; }
 int Tp::is_unused_flag147(void) const { return _is_unused_flag147; }
-int Tp::is_able_to_eat_rotting_food(void) const { return _is_able_to_eat_rotting_food; }
-int Tp::is_able_to_eat_poisonous_food(void) const { return _is_able_to_eat_poisonous_food; }
 int Tp::is_unused_flag14(void) const { return _is_unused_flag14; }
-int Tp::is_able_to_eat_unpleasant_food(void) const { return _is_able_to_eat_unpleasant_food; }
 int Tp::is_unused_flag15(void) const { return _is_unused_flag15; }
 int Tp::is_unused_flag16(void) const { return _is_unused_flag16; }
 int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
@@ -1088,6 +1088,9 @@ void Tp::is_able_to_break_out_of_webs_set(int v) { _is_able_to_break_out_of_webs
 void Tp::is_able_to_change_levels_set(int v) { _is_able_to_change_levels = v; }
 void Tp::is_able_to_collect_keys_set(int v) { _is_able_to_collect_keys = v; }
 void Tp::is_able_to_dampen_footsteps_set(int v) { _is_able_to_dampen_footsteps = v; }
+void Tp::is_able_to_eat_poisonous_food_set(int v) { _is_able_to_eat_poisonous_food = v; }
+void Tp::is_able_to_eat_rotting_food_set(int v) { _is_able_to_eat_rotting_food = v; }
+void Tp::is_able_to_eat_unpleasant_food_set(int v) { _is_able_to_eat_unpleasant_food = v; }
 void Tp::is_able_to_enchant_items_set(int v) { _is_able_to_enchant_items = v; }
 void Tp::is_able_to_fall_set(int v) { _is_able_to_fall = v; }
 void Tp::is_able_to_follow_set(int v) { _is_able_to_follow = v; }
@@ -1485,10 +1488,7 @@ void Tp::is_unused_flag144_set(int v) { _is_unused_flag144 = v; }
 void Tp::is_unused_flag145_set(int v) { _is_unused_flag145 = v; }
 void Tp::is_unused_flag146_set(int v) { _is_unused_flag146 = v; }
 void Tp::is_unused_flag147_set(int v) { _is_unused_flag147 = v; }
-void Tp::is_able_to_eat_rotting_food_set(int v) { _is_able_to_eat_rotting_food = v; }
-void Tp::is_able_to_eat_poisonous_food_set(int v) { _is_able_to_eat_poisonous_food = v; }
 void Tp::is_unused_flag14_set(int v) { _is_unused_flag14 = v; }
-void Tp::is_able_to_eat_unpleasant_food_set(int v) { _is_able_to_eat_unpleasant_food = v; }
 void Tp::is_unused_flag15_set(int v) { _is_unused_flag15 = v; }
 void Tp::is_unused_flag16_set(int v) { _is_unused_flag16 = v; }
 void Tp::is_unused_flag179_set(int v) { _is_unused_flag179 = v; }
