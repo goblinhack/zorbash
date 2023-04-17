@@ -81,7 +81,7 @@ bool Thing::open_door(Thingp door)
       TRACE_AND_INDENT();
 
       if (is_player()) {
-        static uint32_t last_told_when;
+        static int last_told_when;
         if (! last_told_when || (game->tick_current >= last_told_when + 10)) {
           msg("You need a key.");
         }

@@ -2378,82 +2378,82 @@ public:
   ts_t ts_lunge_end(void);
   // end sort marker7 }
 
-  uint32_t tick_last_location_check_decr(uint32_t);
-  uint32_t tick_last_location_check_decr(void);
-  uint32_t tick_last_location_check_incr(uint32_t);
-  uint32_t tick_last_location_check_incr(void);
-  uint32_t tick_last_location_check_set(uint32_t);
-  uint32_t tick_last_location_check(void);
+  int tick_last_location_check_decr(uint32_t);
+  int tick_last_location_check_decr(void);
+  int tick_last_location_check_incr(uint32_t);
+  int tick_last_location_check_incr(void);
+  int tick_last_location_check_set(uint32_t);
+  int tick_last_location_check(void);
 
-  uint32_t tick_last_i_was_attacked_decr(uint32_t);
-  uint32_t tick_last_i_was_attacked_decr(void);
-  uint32_t tick_last_i_was_attacked_incr(uint32_t);
-  uint32_t tick_last_i_was_attacked_incr(void);
-  uint32_t tick_last_i_was_attacked_set(uint32_t);
-  uint32_t tick_last_i_was_attacked(void);
+  int tick_last_i_was_attacked_decr(uint32_t);
+  int tick_last_i_was_attacked_decr(void);
+  int tick_last_i_was_attacked_incr(uint32_t);
+  int tick_last_i_was_attacked_incr(void);
+  int tick_last_i_was_attacked_set(uint32_t);
+  int tick_last_i_was_attacked(void);
 
-  uint32_t tick_last_poison_gas_exposure_decr(uint32_t);
-  uint32_t tick_last_poison_gas_exposure_decr(void);
-  uint32_t tick_last_poison_gas_exposure_incr(uint32_t);
-  uint32_t tick_last_poison_gas_exposure_incr(void);
-  uint32_t tick_last_poison_gas_exposure_set(uint32_t);
-  uint32_t tick_last_poison_gas_exposure(void);
+  int tick_last_poison_gas_exposure_decr(uint32_t);
+  int tick_last_poison_gas_exposure_decr(void);
+  int tick_last_poison_gas_exposure_incr(uint32_t);
+  int tick_last_poison_gas_exposure_incr(void);
+  int tick_last_poison_gas_exposure_set(uint32_t);
+  int tick_last_poison_gas_exposure(void);
 
-  uint32_t tick_last_i_attacked_decr(uint32_t);
-  uint32_t tick_last_i_attacked_decr(void);
-  uint32_t tick_last_i_attacked_incr(uint32_t);
-  uint32_t tick_last_i_attacked_incr(void);
-  uint32_t tick_last_i_attacked_set(uint32_t);
-  uint32_t tick_last_i_attacked(void);
+  int tick_last_i_attacked_decr(uint32_t);
+  int tick_last_i_attacked_decr(void);
+  int tick_last_i_attacked_incr(uint32_t);
+  int tick_last_i_attacked_incr(void);
+  int tick_last_i_attacked_set(uint32_t);
+  int tick_last_i_attacked(void);
 
-  uint32_t tick_last_i_tried_to_attack_decr(uint32_t);
-  uint32_t tick_last_i_tried_to_attack_decr(void);
-  uint32_t tick_last_i_tried_to_attack_incr(uint32_t);
-  uint32_t tick_last_i_tried_to_attack_incr(void);
-  uint32_t tick_last_i_tried_to_attack_set(uint32_t);
-  uint32_t tick_last_i_tried_to_attack(void);
+  int tick_last_i_tried_to_attack_decr(uint32_t);
+  int tick_last_i_tried_to_attack_decr(void);
+  int tick_last_i_tried_to_attack_incr(uint32_t);
+  int tick_last_i_tried_to_attack_incr(void);
+  int tick_last_i_tried_to_attack_set(uint32_t);
+  int tick_last_i_tried_to_attack(void);
 
-  uint32_t tick_last_level_change_decr(uint32_t);
-  uint32_t tick_last_level_change_decr(void);
-  uint32_t tick_last_level_change_incr(uint32_t);
-  uint32_t tick_last_level_change_incr(void);
-  uint32_t tick_last_level_change_set(uint32_t);
-  uint32_t tick_last_level_change(void);
+  int tick_last_level_change_decr(uint32_t);
+  int tick_last_level_change_decr(void);
+  int tick_last_level_change_incr(uint32_t);
+  int tick_last_level_change_incr(void);
+  int tick_last_level_change_set(uint32_t);
+  int tick_last_level_change(void);
 
-  uint32_t tick_last_did_something_decr(uint32_t);
-  uint32_t tick_last_did_something_decr(void);
-  uint32_t tick_last_did_something_incr(uint32_t);
-  uint32_t tick_last_did_something_incr(void);
-  uint32_t tick_last_did_something_set(uint32_t);
-  uint32_t tick_last_did_something(void);
+  int tick_last_did_something_decr(uint32_t);
+  int tick_last_did_something_decr(void);
+  int tick_last_did_something_incr(uint32_t);
+  int tick_last_did_something_incr(void);
+  int tick_last_did_something_set(uint32_t);
+  int tick_last_did_something(void);
 
-  uint32_t tick_last_dropped_decr(uint32_t);
-  uint32_t tick_last_dropped_decr(void);
-  uint32_t tick_last_dropped_incr(uint32_t);
-  uint32_t tick_last_dropped_incr(void);
-  uint32_t tick_last_dropped_set(uint32_t);
-  uint32_t tick_last_dropped(void);
+  int tick_last_dropped_decr(uint32_t);
+  int tick_last_dropped_decr(void);
+  int tick_last_dropped_incr(uint32_t);
+  int tick_last_dropped_incr(void);
+  int tick_last_dropped_set(uint32_t);
+  int tick_last_dropped(void);
 
-  uint32_t tick_last_teleported_decr(uint32_t);
-  uint32_t tick_last_teleported_decr(void);
-  uint32_t tick_last_teleported_incr(uint32_t);
-  uint32_t tick_last_teleported_incr(void);
-  uint32_t tick_last_teleported_set(uint32_t);
-  uint32_t tick_last_teleported(void);
+  int tick_last_teleported_decr(uint32_t);
+  int tick_last_teleported_decr(void);
+  int tick_last_teleported_incr(uint32_t);
+  int tick_last_teleported_incr(void);
+  int tick_last_teleported_set(uint32_t);
+  int tick_last_teleported(void);
 
-  uint32_t tick_last_escape_decr(uint32_t);
-  uint32_t tick_last_escape_decr(void);
-  uint32_t tick_last_escape_incr(uint32_t);
-  uint32_t tick_last_escape_incr(void);
-  uint32_t tick_last_escape_set(uint32_t);
-  uint32_t tick_last_escape(void);
+  int tick_last_escape_decr(uint32_t);
+  int tick_last_escape_decr(void);
+  int tick_last_escape_incr(uint32_t);
+  int tick_last_escape_incr(void);
+  int tick_last_escape_set(uint32_t);
+  int tick_last_escape(void);
 
-  uint32_t tick_resurrect_when_decr(int);
-  uint32_t tick_resurrect_when_decr(void);
-  uint32_t tick_resurrect_when_incr(int);
-  uint32_t tick_resurrect_when_incr(void);
-  uint32_t tick_resurrect_when_set(int);
-  uint32_t tick_resurrect_when(void);
+  int tick_resurrect_when_decr(int);
+  int tick_resurrect_when_decr(void);
+  int tick_resurrect_when_incr(int);
+  int tick_resurrect_when_incr(void);
+  int tick_resurrect_when_set(int);
+  int tick_resurrect_when(void);
 
   int movement_remaining_decr(int);
   int movement_remaining_decr(void);

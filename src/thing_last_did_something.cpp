@@ -12,7 +12,7 @@
 ////////////////////////////////////////////////////////////////////////////
 // tick_last_did_something
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::tick_last_did_something(void)
+int Thing::tick_last_did_something(void)
 {
   TRACE_NO_INDENT();
 
@@ -22,35 +22,35 @@ uint32_t Thing::tick_last_did_something(void)
   return 0;
 }
 
-uint32_t Thing::tick_last_did_something_set(uint32_t v)
+int Thing::tick_last_did_something_set(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_did_something = v);
 }
 
-uint32_t Thing::tick_last_did_something_decr(uint32_t v)
+int Thing::tick_last_did_something_decr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_did_something -= v);
 }
 
-uint32_t Thing::tick_last_did_something_incr(uint32_t v)
+int Thing::tick_last_did_something_incr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_did_something += v);
 }
 
-uint32_t Thing::tick_last_did_something_decr(void)
+int Thing::tick_last_did_something_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_did_something--);
 }
 
-uint32_t Thing::tick_last_did_something_incr(void)
+int Thing::tick_last_did_something_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -60,7 +60,7 @@ uint32_t Thing::tick_last_did_something_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // tick_last_dropped
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::tick_last_dropped(void)
+int Thing::tick_last_dropped(void)
 {
   TRACE_NO_INDENT();
 
@@ -70,35 +70,35 @@ uint32_t Thing::tick_last_dropped(void)
   return 0;
 }
 
-uint32_t Thing::tick_last_dropped_set(uint32_t v)
+int Thing::tick_last_dropped_set(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_dropped = v);
 }
 
-uint32_t Thing::tick_last_dropped_decr(uint32_t v)
+int Thing::tick_last_dropped_decr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_dropped -= v);
 }
 
-uint32_t Thing::tick_last_dropped_incr(uint32_t v)
+int Thing::tick_last_dropped_incr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_dropped += v);
 }
 
-uint32_t Thing::tick_last_dropped_decr(void)
+int Thing::tick_last_dropped_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_dropped--);
 }
 
-uint32_t Thing::tick_last_dropped_incr(void)
+int Thing::tick_last_dropped_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -108,7 +108,7 @@ uint32_t Thing::tick_last_dropped_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // tick_last_teleported
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::tick_last_teleported(void)
+int Thing::tick_last_teleported(void)
 {
   TRACE_NO_INDENT();
 
@@ -118,35 +118,35 @@ uint32_t Thing::tick_last_teleported(void)
   return 0;
 }
 
-uint32_t Thing::tick_last_teleported_set(uint32_t v)
+int Thing::tick_last_teleported_set(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_teleported = v);
 }
 
-uint32_t Thing::tick_last_teleported_decr(uint32_t v)
+int Thing::tick_last_teleported_decr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_teleported -= v);
 }
 
-uint32_t Thing::tick_last_teleported_incr(uint32_t v)
+int Thing::tick_last_teleported_incr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_teleported += v);
 }
 
-uint32_t Thing::tick_last_teleported_decr(void)
+int Thing::tick_last_teleported_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_teleported--);
 }
 
-uint32_t Thing::tick_last_teleported_incr(void)
+int Thing::tick_last_teleported_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -156,7 +156,7 @@ uint32_t Thing::tick_last_teleported_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // tick_last_location_check
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::tick_last_location_check(void)
+int Thing::tick_last_location_check(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -165,35 +165,35 @@ uint32_t Thing::tick_last_location_check(void)
   return 0;
 }
 
-uint32_t Thing::tick_last_location_check_set(uint32_t v)
+int Thing::tick_last_location_check_set(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_location_check = v);
 }
 
-uint32_t Thing::tick_last_location_check_decr(uint32_t v)
+int Thing::tick_last_location_check_decr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_location_check -= v);
 }
 
-uint32_t Thing::tick_last_location_check_incr(uint32_t v)
+int Thing::tick_last_location_check_incr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_location_check += v);
 }
 
-uint32_t Thing::tick_last_location_check_decr(void)
+int Thing::tick_last_location_check_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_location_check--);
 }
 
-uint32_t Thing::tick_last_location_check_incr(void)
+int Thing::tick_last_location_check_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -203,7 +203,7 @@ uint32_t Thing::tick_last_location_check_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // tick_last_escape
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::tick_last_escape(void)
+int Thing::tick_last_escape(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -212,35 +212,35 @@ uint32_t Thing::tick_last_escape(void)
   return 0;
 }
 
-uint32_t Thing::tick_last_escape_set(uint32_t v)
+int Thing::tick_last_escape_set(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_escape = v);
 }
 
-uint32_t Thing::tick_last_escape_decr(uint32_t v)
+int Thing::tick_last_escape_decr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_escape -= v);
 }
 
-uint32_t Thing::tick_last_escape_incr(uint32_t v)
+int Thing::tick_last_escape_incr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_escape += v);
 }
 
-uint32_t Thing::tick_last_escape_decr(void)
+int Thing::tick_last_escape_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_escape--);
 }
 
-uint32_t Thing::tick_last_escape_incr(void)
+int Thing::tick_last_escape_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -250,7 +250,7 @@ uint32_t Thing::tick_last_escape_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // tick_last_level_change
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::tick_last_level_change(void)
+int Thing::tick_last_level_change(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -259,35 +259,35 @@ uint32_t Thing::tick_last_level_change(void)
   return 0;
 }
 
-uint32_t Thing::tick_last_level_change_set(uint32_t v)
+int Thing::tick_last_level_change_set(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_level_change = v);
 }
 
-uint32_t Thing::tick_last_level_change_decr(uint32_t v)
+int Thing::tick_last_level_change_decr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_level_change -= v);
 }
 
-uint32_t Thing::tick_last_level_change_incr(uint32_t v)
+int Thing::tick_last_level_change_incr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_level_change += v);
 }
 
-uint32_t Thing::tick_last_level_change_decr(void)
+int Thing::tick_last_level_change_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_level_change--);
 }
 
-uint32_t Thing::tick_last_level_change_incr(void)
+int Thing::tick_last_level_change_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -297,7 +297,7 @@ uint32_t Thing::tick_last_level_change_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // tick_last_i_was_attacked
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::tick_last_i_was_attacked(void)
+int Thing::tick_last_i_was_attacked(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -306,35 +306,35 @@ uint32_t Thing::tick_last_i_was_attacked(void)
   return 0;
 }
 
-uint32_t Thing::tick_last_i_was_attacked_set(uint32_t v)
+int Thing::tick_last_i_was_attacked_set(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_i_was_attacked = v);
 }
 
-uint32_t Thing::tick_last_i_was_attacked_decr(uint32_t v)
+int Thing::tick_last_i_was_attacked_decr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_i_was_attacked -= v);
 }
 
-uint32_t Thing::tick_last_i_was_attacked_incr(uint32_t v)
+int Thing::tick_last_i_was_attacked_incr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_i_was_attacked += v);
 }
 
-uint32_t Thing::tick_last_i_was_attacked_decr(void)
+int Thing::tick_last_i_was_attacked_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_i_was_attacked--);
 }
 
-uint32_t Thing::tick_last_i_was_attacked_incr(void)
+int Thing::tick_last_i_was_attacked_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -344,7 +344,7 @@ uint32_t Thing::tick_last_i_was_attacked_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // tick_last_i_attacked
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::tick_last_i_attacked(void)
+int Thing::tick_last_i_attacked(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -353,35 +353,35 @@ uint32_t Thing::tick_last_i_attacked(void)
   return 0;
 }
 
-uint32_t Thing::tick_last_i_attacked_set(uint32_t v)
+int Thing::tick_last_i_attacked_set(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_i_attacked = v);
 }
 
-uint32_t Thing::tick_last_i_attacked_decr(uint32_t v)
+int Thing::tick_last_i_attacked_decr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_i_attacked -= v);
 }
 
-uint32_t Thing::tick_last_i_attacked_incr(uint32_t v)
+int Thing::tick_last_i_attacked_incr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_i_attacked += v);
 }
 
-uint32_t Thing::tick_last_i_attacked_decr(void)
+int Thing::tick_last_i_attacked_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_i_attacked--);
 }
 
-uint32_t Thing::tick_last_i_attacked_incr(void)
+int Thing::tick_last_i_attacked_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -391,7 +391,7 @@ uint32_t Thing::tick_last_i_attacked_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // tick_last_i_tried_to_attack
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::tick_last_i_tried_to_attack(void)
+int Thing::tick_last_i_tried_to_attack(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -400,35 +400,35 @@ uint32_t Thing::tick_last_i_tried_to_attack(void)
   return 0;
 }
 
-uint32_t Thing::tick_last_i_tried_to_attack_set(uint32_t v)
+int Thing::tick_last_i_tried_to_attack_set(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_i_tried_to_attack = v);
 }
 
-uint32_t Thing::tick_last_i_tried_to_attack_decr(uint32_t v)
+int Thing::tick_last_i_tried_to_attack_decr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_i_tried_to_attack -= v);
 }
 
-uint32_t Thing::tick_last_i_tried_to_attack_incr(uint32_t v)
+int Thing::tick_last_i_tried_to_attack_incr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_i_tried_to_attack += v);
 }
 
-uint32_t Thing::tick_last_i_tried_to_attack_decr(void)
+int Thing::tick_last_i_tried_to_attack_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_i_tried_to_attack--);
 }
 
-uint32_t Thing::tick_last_i_tried_to_attack_incr(void)
+int Thing::tick_last_i_tried_to_attack_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();

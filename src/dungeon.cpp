@@ -4746,11 +4746,11 @@ void dungeon_test(void)
   CON("Test dungeon seed: %d", dungeon_seed);
   pcg_random_allowed++;
   if (g_opt_biome_swamp) {
-    new Dungeon(BIOME_SWAMP, MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT,
-                dungeon_seed);
+    delete new Dungeon(BIOME_SWAMP, MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT,
+                       dungeon_seed);
   } else {
-    new Dungeon(BIOME_DUNGEON, MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT,
-                dungeon_seed);
+    delete new Dungeon(BIOME_DUNGEON, MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT,
+                       dungeon_seed);
   }
   pcg_random_allowed--;
 

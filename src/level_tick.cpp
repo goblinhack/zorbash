@@ -315,7 +315,7 @@ void Level::tick_(void)
         t->movement_remaining_set(0);
       }
 
-      uint32_t tick_begin_ms = time_ms();
+      int tick_begin_ms = time_ms();
       t->tick();
 
       //

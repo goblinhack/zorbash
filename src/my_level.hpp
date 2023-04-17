@@ -147,7 +147,7 @@ public:
   ts_t ts_fade_out_begin {};
   ts_t ts_fade_in_begin {};
 
-  uint32_t tick_created {};
+  int tick_created {};
 
   //
   // Where we are in the world

@@ -248,8 +248,8 @@ public:
   //
   // Game tick progression.
   //
-  uint32_t tick_completed {1};
-  uint32_t tick_current {1};
+  int tick_completed {1};
+  int tick_current {1};
 
   //
   // What the player has highlighted in the inventory.
@@ -294,7 +294,7 @@ public:
   //
   // Temporary. How long the last tick took
   //
-  uint32_t tick_duration {};
+  int tick_duration {};
 
   //
   // Temporary. This is used to try and speed up animations if in the midst of a slime storm

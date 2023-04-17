@@ -112,7 +112,7 @@ void Thing::resurrect_tick(void)
 ////////////////////////////////////////////////////////////////////////////
 // tick_resurrect_when
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::tick_resurrect_when(void)
+int Thing::tick_resurrect_when(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -121,7 +121,7 @@ uint32_t Thing::tick_resurrect_when(void)
   return 0;
 }
 
-uint32_t Thing::tick_resurrect_when_set(int v)
+int Thing::tick_resurrect_when_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -129,7 +129,7 @@ uint32_t Thing::tick_resurrect_when_set(int v)
   return n;
 }
 
-uint32_t Thing::tick_resurrect_when_decr(int v)
+int Thing::tick_resurrect_when_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -137,7 +137,7 @@ uint32_t Thing::tick_resurrect_when_decr(int v)
   return n;
 }
 
-uint32_t Thing::tick_resurrect_when_incr(int v)
+int Thing::tick_resurrect_when_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -145,7 +145,7 @@ uint32_t Thing::tick_resurrect_when_incr(int v)
   return n;
 }
 
-uint32_t Thing::tick_resurrect_when_decr(void)
+int Thing::tick_resurrect_when_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -153,7 +153,7 @@ uint32_t Thing::tick_resurrect_when_decr(void)
   return n;
 }
 
-uint32_t Thing::tick_resurrect_when_incr(void)
+int Thing::tick_resurrect_when_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();

@@ -67,7 +67,7 @@ void Thing::gas_poison_tick(void)
 ////////////////////////////////////////////////////////////////////////////
 // tick_last_poison_gas_exposure
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::tick_last_poison_gas_exposure(void)
+int Thing::tick_last_poison_gas_exposure(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -76,35 +76,35 @@ uint32_t Thing::tick_last_poison_gas_exposure(void)
   return 0;
 }
 
-uint32_t Thing::tick_last_poison_gas_exposure_set(uint32_t v)
+int Thing::tick_last_poison_gas_exposure_set(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_poison_gas_exposure = v);
 }
 
-uint32_t Thing::tick_last_poison_gas_exposure_decr(uint32_t v)
+int Thing::tick_last_poison_gas_exposure_decr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_poison_gas_exposure -= v);
 }
 
-uint32_t Thing::tick_last_poison_gas_exposure_incr(uint32_t v)
+int Thing::tick_last_poison_gas_exposure_incr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_poison_gas_exposure += v);
 }
 
-uint32_t Thing::tick_last_poison_gas_exposure_decr(void)
+int Thing::tick_last_poison_gas_exposure_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_poison_gas_exposure--);
 }
 
-uint32_t Thing::tick_last_poison_gas_exposure_incr(void)
+int Thing::tick_last_poison_gas_exposure_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
