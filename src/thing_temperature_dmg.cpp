@@ -73,16 +73,21 @@ bool Thing::thing_check_for_heat_dmg(void)
     // Allow flames to fade away
     //
     if (hit) {
-      if (d20roll_under(stat_luck_total() - 5)) {
-        if (is_player()) {
-          msg("%%fg=green$Luckily, the flames go out!%%fg=reset$");
+      //
+      // If in lava, no choice but to burn
+      //
+      if (! level->is_lava(at.x, at.y)) {
+        if (d20roll_under(stat_luck_total() - 5)) {
+          if (is_player()) {
+            msg("%%fg=green$Luckily, the flames go out!%%fg=reset$");
+          }
+
+          dbg("Remove the flames");
+          TRACE_AND_INDENT();
+
+          on_fire_unset();
+          hit = false;
         }
-
-        dbg("Remove the flames");
-        TRACE_AND_INDENT();
-
-        on_fire_unset();
-        hit = false;
       }
     }
   } else if (is_very_combustible() && level->heatmap(at.x, at.y)) {

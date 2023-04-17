@@ -5,6 +5,7 @@
 #include <math.h>
 
 #include "my_array_bounds_check.hpp"
+#include "my_game.hpp"
 #include "my_level.hpp"
 #include "my_sprintf.hpp"
 #include "my_thing.hpp"
@@ -313,6 +314,13 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta, bool force)
 
   dbg("Handle location for shoved thing: %s", it->to_short_string().c_str());
   it->location_check();
+  if (it->is_player()) {
+    //
+    // Need this as we need to force a temperature check again, e.g. if shoved into lava
+    //
+    game->tick_begin("Shoved");
+    it->clear_move_path("Shoved");
+  }
 
   //
   // If shoving something on fire! set yourself on fire!
