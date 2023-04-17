@@ -50,6 +50,8 @@ def tp_init(name, text_long_name):
     my.dmg_poison_dice(self, "1d4")
     my.dmg_received_doubled_from_fire(self, True)
     my.environ_hates_fire(self, 10)
+    my.is_able_to_eat_rotting_food(self, True)
+    my.is_able_to_eat_unpleasant_food(self, True)
     my.gfx_anim_use(self, "attack_green")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)

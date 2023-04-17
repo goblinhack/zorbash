@@ -152,7 +152,7 @@ bool Thing::eat(Thingp victim)
   // Does the attacker feast on success?
   //
   if (is_player()) {
-    int got_health_boost = health_boost(victim->nutrition_get());
+    int got_health_boost = health_boost(victim, victim->nutrition_get());
     int got_hunger_boost = hunger_boost(victim->nutrition_get());
 
     if (got_health_boost) {
@@ -205,7 +205,7 @@ bool Thing::consume(Thingp victim)
   // Does the attacker feast on success?
   //
   if (is_player()) {
-    int got_health_boost = health_boost(victim->nutrition_get());
+    int got_health_boost = health_boost(victim, victim->nutrition_get());
     int got_hunger_boost = hunger_boost(victim->nutrition_get());
 
     if (got_health_boost) {
@@ -235,7 +235,7 @@ bool Thing::consume(Thingp victim)
       // Undead do not get sustenance from eating.
       //
       if (! is_undead() && ! is_ethereal()) {
-        health_boost(bite);
+        health_boost(victim, bite);
         hunger_boost(bite);
       }
       victim->nutrition_decr(bite);
@@ -300,7 +300,7 @@ bool Thing::consume(Thingp victim)
       // Undead do not get sustenance from eating.
       //
       if (! is_undead() && ! is_ethereal()) {
-        health_boost(nutr);
+        health_boost(victim, nutr);
         hunger_boost(nutr);
       }
 

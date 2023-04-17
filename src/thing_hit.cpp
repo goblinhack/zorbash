@@ -719,11 +719,11 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     if (is_immune_to_necrosis()) {
       if (real_hitter->is_player()) {
         if (is_player()) {
-          msg("You are immune to rotting!");
+          msg("You are immune to unpleasant!");
         } else if (is_alive_monst()) {
-          msg("%s is immune to rotting!", text_The().c_str());
+          msg("%s is immune to unpleasant!", text_The().c_str());
         } else {
-          dbg("Takes no rotting damage");
+          dbg("Takes no unpleasant damage");
         }
       }
       return false;
@@ -741,7 +741,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     }
 
     IF_DEBUG { real_hitter->log("Attack necrosis damage %d on %s", damage, to_short_string().c_str()); }
-    dmg_type = "rotting ";
+    dmg_type = "unpleasant ";
 
     if (dmg_received_doubled_from_necrosis()) {
       damage *= 2;
@@ -1007,7 +1007,11 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         } else if (real_hitter->is_player()) {
           msg("%s drinks in the poison! You do no damage!", text_The().c_str());
         }
-        health_boost(damage);
+        if (hitter->is_poisonous_danger_level()) {
+          health_boost(hitter, damage);
+        } else {
+          health_boost(real_hitter, damage);
+        }
         return false;
       }
     } else {
@@ -1056,15 +1060,15 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           }
           if (real_hitter->is_necrotic_danger_level()) {
             if (damage > 1) {
-              rotting();
+              unpleasant();
               necrotized_amount_incr(damage - 1);
             }
           }
           stat_str_decr();
           if (is_player()) {
-            msg("%%fg=limegreen$Your skin is rotting. You lose 1 permanent strength!%%fg=reset$");
+            msg("%%fg=limegreen$Your skin is unpleasant. You lose 1 permanent strength!%%fg=reset$");
           } else if (is_alive_monst() && real_hitter->is_player()) {
-            msg("%%fg=limegreen$Your rotting hand touches %s for 1 permanent strength damage!%%fg=reset$",
+            msg("%%fg=limegreen$Your unpleasant hand touches %s for 1 permanent strength damage!%%fg=reset$",
                 text_the().c_str());
           }
           return true;
@@ -1093,15 +1097,15 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           }
           if (real_hitter->is_necrotic_danger_level()) {
             if (damage > 1) {
-              rotting();
+              unpleasant();
               necrotized_amount_incr(damage - 1);
             }
           }
           stat_con_decr();
           if (is_player()) {
-            msg("%%fg=limegreen$Your skin is rotting. You lose 1 permanent con!%%fg=reset$");
+            msg("%%fg=limegreen$Your skin is unpleasant. You lose 1 permanent con!%%fg=reset$");
           } else if (is_alive_monst() && real_hitter->is_player()) {
-            msg("%%fg=limegreen$Your rotting hand touches %s for 1 permanent con damage!%%fg=reset$",
+            msg("%%fg=limegreen$Your unpleasant hand touches %s for 1 permanent con damage!%%fg=reset$",
                 text_the().c_str());
           }
           return true;
@@ -1440,7 +1444,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_DIGEST ]) {
         msg("Your %s is dissolving.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
-        msg("Your %s is rotting.", text_long_name().c_str());
+        msg("Your %s is unpleasant.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
         msg("Your %s is drained.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
@@ -1632,7 +1636,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_DIGEST ]) {
         msg("Your %s is dissolving.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
-        msg("Your %s is rotting.", text_long_name().c_str());
+        msg("Your %s is unpleasant.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
         msg("Your %s is drained.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
@@ -1668,7 +1672,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_DIGEST ]) {
         msg("Your %s is dissolving.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
-        msg("Your %s is rotting.", text_long_name().c_str());
+        msg("Your %s is unpleasant.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
         msg("Your %s is drained.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
@@ -1704,7 +1708,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_DIGEST ]) {
         real_hitter->msg("%s is being digested.", text_The().c_str());
       } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
-        real_hitter->msg("%s is rotting.", text_The().c_str());
+        real_hitter->msg("%s is unpleasant.", text_The().c_str());
       } else if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
         real_hitter->msg("%s is being drained.", text_The().c_str());
       } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
@@ -1964,7 +1968,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_DIGEST ]) {
         reason = "by digestion";
       } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
-        reason = "by rotting";
+        reason = "by unpleasant";
       } else if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
         reason = "by draining";
       } else if (attack_options->attack[ THING_ATTACK_NATURAL ]) {

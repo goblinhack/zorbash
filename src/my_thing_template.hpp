@@ -263,6 +263,8 @@ private:
   int _is_able_to_change_levels {};
   int _is_able_to_collect_keys {};
   int _is_able_to_dampen_footsteps {};
+  int _is_able_to_eat_poisonous_food {};
+  int _is_able_to_eat_unpleasant_food {};
   int _is_able_to_enchant_items {};
   int _is_able_to_fall {};
   int _is_able_to_follow {};
@@ -662,10 +664,8 @@ private:
   int _is_unused_flag145 {};
   int _is_unused_flag146 {};
   int _is_unused_flag147 {};
-  int _is_unused_flag148 {};
-  int _is_unused_flag149 {};
+  int _is_able_to_eat_rotting_food {};
   int _is_unused_flag15 {};
-  int _is_unused_flag150 {};
   int _is_unused_flag16 {};
   int _is_unused_flag17 {};
   int _is_unused_flag179 {};
@@ -1557,6 +1557,8 @@ public:
   int is_able_to_change_levels(void) const;
   int is_able_to_collect_keys(void) const;
   int is_able_to_dampen_footsteps(void) const;
+  int is_able_to_eat_poisonous_food(void) const;
+  int is_able_to_eat_unpleasant_food(void) const;
   int is_able_to_enchant_items(void) const;
   int is_able_to_fall(void) const;
   int is_able_to_follow(void) const;
@@ -1953,10 +1955,8 @@ public:
   int is_unused_flag145(void) const;
   int is_unused_flag146(void) const;
   int is_unused_flag147(void) const;
-  int is_unused_flag148(void) const;
-  int is_unused_flag149(void) const;
+  int is_able_to_eat_rotting_food(void) const;
   int is_unused_flag14(void) const;
-  int is_unused_flag150(void) const;
   int is_unused_flag15(void) const;
   int is_unused_flag16(void) const;
   int is_unused_flag179(void) const;
@@ -2302,6 +2302,8 @@ public:
   void is_able_to_change_levels_set(int v);
   void is_able_to_collect_keys_set(int v);
   void is_able_to_dampen_footsteps_set(int v);
+  void is_able_to_eat_poisonous_food_set(int v);
+  void is_able_to_eat_unpleasant_food_set(int v);
   void is_able_to_enchant_items_set(int v);
   void is_able_to_fall_set(int v);
   void is_able_to_follow_set(int v);
@@ -2699,10 +2701,8 @@ public:
   void is_unused_flag145_set(int v);
   void is_unused_flag146_set(int v);
   void is_unused_flag147_set(int v);
-  void is_unused_flag148_set(int v);
-  void is_unused_flag149_set(int v);
+  void is_able_to_eat_rotting_food_set(int v);
   void is_unused_flag14_set(int v);
-  void is_unused_flag150_set(int v);
   void is_unused_flag15_set(int v);
   void is_unused_flag16_set(int v);
   void is_unused_flag179_set(int v);

@@ -68,6 +68,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_fall(self, True)
     my.is_able_to_freeze(self, True)
     my.is_able_to_jump_escape(self, True)
+    my.is_able_to_eat_unpleasant_food(self, True)
     my.is_able_to_jump(self, True)
     my.is_able_to_lunge(self, True)
     my.is_able_to_rest(self, True)

@@ -1006,20 +1006,20 @@ int Thing::is_unused_flag147(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag147());
 }
-int Thing::is_unused_flag148(void)
+int Thing::is_able_to_eat_rotting_food(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag148());
+  return (tp()->is_able_to_eat_rotting_food());
 }
-int Thing::is_unused_flag149(void)
+int Thing::is_able_to_eat_poisonous_food(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag149());
+  return (tp()->is_able_to_eat_poisonous_food());
 }
-int Thing::is_unused_flag150(void)
+int Thing::is_able_to_eat_unpleasant_food(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag150());
+  return (tp()->is_able_to_eat_unpleasant_food());
 }
 int Thing::is_biome_ice(void)
 {

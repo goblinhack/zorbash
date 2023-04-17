@@ -739,10 +739,10 @@ int Tp::is_unused_flag144(void) const { return _is_unused_flag144; }
 int Tp::is_unused_flag145(void) const { return _is_unused_flag145; }
 int Tp::is_unused_flag146(void) const { return _is_unused_flag146; }
 int Tp::is_unused_flag147(void) const { return _is_unused_flag147; }
-int Tp::is_unused_flag148(void) const { return _is_unused_flag148; }
-int Tp::is_unused_flag149(void) const { return _is_unused_flag149; }
+int Tp::is_able_to_eat_rotting_food(void) const { return _is_able_to_eat_rotting_food; }
+int Tp::is_able_to_eat_poisonous_food(void) const { return _is_able_to_eat_poisonous_food; }
 int Tp::is_unused_flag14(void) const { return _is_unused_flag14; }
-int Tp::is_unused_flag150(void) const { return _is_unused_flag150; }
+int Tp::is_able_to_eat_unpleasant_food(void) const { return _is_able_to_eat_unpleasant_food; }
 int Tp::is_unused_flag15(void) const { return _is_unused_flag15; }
 int Tp::is_unused_flag16(void) const { return _is_unused_flag16; }
 int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
@@ -1485,10 +1485,10 @@ void Tp::is_unused_flag144_set(int v) { _is_unused_flag144 = v; }
 void Tp::is_unused_flag145_set(int v) { _is_unused_flag145 = v; }
 void Tp::is_unused_flag146_set(int v) { _is_unused_flag146 = v; }
 void Tp::is_unused_flag147_set(int v) { _is_unused_flag147 = v; }
-void Tp::is_unused_flag148_set(int v) { _is_unused_flag148 = v; }
-void Tp::is_unused_flag149_set(int v) { _is_unused_flag149 = v; }
+void Tp::is_able_to_eat_rotting_food_set(int v) { _is_able_to_eat_rotting_food = v; }
+void Tp::is_able_to_eat_poisonous_food_set(int v) { _is_able_to_eat_poisonous_food = v; }
 void Tp::is_unused_flag14_set(int v) { _is_unused_flag14 = v; }
-void Tp::is_unused_flag150_set(int v) { _is_unused_flag150 = v; }
+void Tp::is_able_to_eat_unpleasant_food_set(int v) { _is_able_to_eat_unpleasant_food = v; }
 void Tp::is_unused_flag15_set(int v) { _is_unused_flag15 = v; }
 void Tp::is_unused_flag16_set(int v) { _is_unused_flag16 = v; }
 void Tp::is_unused_flag179_set(int v) { _is_unused_flag179 = v; }

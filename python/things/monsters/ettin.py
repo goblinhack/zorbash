@@ -102,6 +102,8 @@ def tp_init(name, text_long_name):
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
     my.on_you_nat_attack_attempt_do(self, "me.on_you_nat_attack_attempt()")
     my.rarity(self, my.RARITY_RARE)  # how rare within this monster class
+    my.is_able_to_eat_rotting_food(self, True)
+    my.is_able_to_eat_unpleasant_food(self, True)
     my.shove_strength_mod(self, 3)
     my.stamina(self, 100)
     my.stat_con(self, 8)

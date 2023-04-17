@@ -92,8 +92,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_able_to_fall(self, True)
     # my.is_able_to_spawn_things(self, False) else we end up owning fire
     my.is_bag_item(self, True)
-    my.is_biome_dungeon(self, True)
     my.is_biome_chasms(self, True)
+    my.is_biome_dungeon(self, True)
     my.is_burnable(self, True)
     my.is_collectable(self, True)
     my.is_combustible(self, True)

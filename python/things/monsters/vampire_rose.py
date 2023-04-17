@@ -109,7 +109,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "Vampire roses grow rapidly and primarily feed on blood and rotting corpses. Be a good gardener and don't allow them to spread.")
+    my.text_description_long(self, "Vampire roses grow rapidly and primarily feed on blood and unpleasant corpses. Be a good gardener and don't allow them to spread.")
     my.text_description_short(self, "A beautiful vampire rose.")
     my.text_hits(self, "bites")
     my.thing_size(self, my.THING_SIZE_SMALL)

@@ -6,11 +6,28 @@
 #include "my_monst.hpp"
 #include "my_thing.hpp"
 
-int Thing::health_boost(int v)
+int Thing::health_boost(Thingp victim, int v)
 {
   TRACE_NO_INDENT();
   if (! v) {
     return false;
+  }
+
+  //
+  // So carcas creepers can consume each other
+  //
+  if (v < 0) {
+    if (victim && victim->is_poisonous_danger_level()) {
+      if (is_able_to_eat_poisonous_food()) {
+        v = -v;
+      }
+    } else if (victim && victim->is_necrotic_danger_level()) {
+      if (is_able_to_eat_rotting_food()) {
+        v = -v;
+      }
+    } else if (is_able_to_eat_unpleasant_food()) {
+      v = -v;
+    }
   }
 
   auto old_health = health();
@@ -30,6 +47,25 @@ int Thing::health_boost(int v)
   } else {
     dbg("Health boost by %d from %d to %d", v, old_health, new_health);
   }
+
+  if (victim) {
+    if (new_health < 0) {
+      if (is_player()) {
+        msg("%%fg=yellow$You die after eating %s.%%fg=reset$", victim->text_long_name().c_str());
+      } else if (is_monst()) {
+        msg("%%fg=yellow$%s dies after eating %s.%%fg=reset$", text_The().c_str(), victim->text_long_name().c_str());
+      }
+      dead("by eating " + victim->text_a_or_an());
+    } else if (v < 0) {
+      if (is_player()) {
+        msg("%%fg=yellow$You feel sick after eating %s.%%fg=reset$", victim->text_long_name().c_str());
+      } else if (is_monst()) {
+        msg("%%fg=yellow$%s looks sickly after eating %s.%%fg=reset$", text_The().c_str(),
+            victim->text_long_name().c_str());
+      }
+    }
+  }
+
   return new_health - old_health;
 }
 

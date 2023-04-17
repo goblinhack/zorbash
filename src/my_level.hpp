@@ -700,8 +700,8 @@ public:
   bool can_see_point_or_nearby(point, int dist);
   bool can_see_unimpeded(const point &start, const point &end);
   bool can_see_unimpeded(int x0, int y0, int x1, int y1);
-  bool create_biome_dungeon(point3d at, uint32_t seed);
   bool create_biome_chasms(point3d at, uint32_t seed);
+  bool create_biome_dungeon(point3d at, uint32_t seed);
   bool create_biome_sewer_pipes(point3d at);
   bool create_biome_sewer(point3d at, uint32_t seed);
   bool create_biome_sewer_pools(void);
@@ -945,6 +945,11 @@ public:
   void clear(void);
   void con(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void con_(const char *fmt, va_list args); // compile error without
+  void create_biome_chasms_place_braziers(Dungeonp d, const std::string &what);
+  void create_biome_chasms_place_bridge(Dungeonp d);
+  void create_biome_chasms_place_chasm(Dungeonp d, const std::string &what);
+  void create_biome_chasms_place_floors(Dungeonp d, const std::string, int depth, int var, int w, int h, int tries);
+  void create_biome_chasms_place_remaining_floor(Dungeonp d, const std::string &what);
   void create_biome_dungeon_place_braziers(Dungeonp d, const std::string &what);
   void create_biome_dungeon_place_bridge(Dungeonp d);
   void create_biome_dungeon_place_chasm(Dungeonp d, const std::string &what);
@@ -965,11 +970,6 @@ public:
   void create_biome_dungeon_place_sewer_pipes(Dungeonp d);
   void create_biome_dungeon_place_walls(Dungeonp d, Tpp tp, int, int block_width, int block_height, int tries);
   void create_biome_dungeon_place_wet_grass(Dungeonp d);
-  void create_biome_chasms_place_braziers(Dungeonp d, const std::string &what);
-  void create_biome_chasms_place_bridge(Dungeonp d);
-  void create_biome_chasms_place_chasm(Dungeonp d, const std::string &what);
-  void create_biome_chasms_place_floors(Dungeonp d, const std::string, int depth, int var, int w, int h, int tries);
-  void create_biome_chasms_place_remaining_floor(Dungeonp d, const std::string &what);
   void create_biome_sewer_place_remaining_walls(const std::string &what);
   void create_biome_sewer_place_walls(int variant, int block_width, int block_height, int tries);
   void create_biome_swamp_place_deep_water(Dungeonp d, const std::string &what);

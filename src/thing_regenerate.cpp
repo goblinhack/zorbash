@@ -18,7 +18,7 @@ int Thing::health_regenerate(void)
     return false;
   }
 
-  health_boost(health_regenerate_amount());
+  health_boost(nullptr, health_regenerate_amount());
 
   return true;
 }

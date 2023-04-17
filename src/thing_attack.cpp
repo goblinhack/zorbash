@@ -1583,7 +1583,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         }
 
         if (attack_eater()) {
-          health_boost(victim->nutrition_get());
+          health_boost(victim, victim->nutrition_get());
           hunger_boost(victim->nutrition_get());
         }
 

@@ -415,7 +415,6 @@ public:
   bool ai_choose_avoid_goals(std::multiset< Goal > &avoid_goals, const Goal &goal);
   bool ai_choose_immediately_adjacent_goal(int dx, int dy);
   bool ai_choose_immediately_adjacent_goal(void);
-  bool tile_is_offscreen(void);
   bool ai_choose_wander(point &nh);
   bool ai_create_on_fire_path(point &nh, const point start, const point end);
   bool ai_create_path(point &nh, const point start, const point end);
@@ -646,6 +645,7 @@ public:
   bool thing_sound_play(const std::string &alias);
   bool throw_at(Thingp w, Thingp target);
   bool throw_item_choose_target(Thingp item);
+  bool tile_is_offscreen(void);
   bool too_far_from_leader(point p);
   bool too_far_from_leader(point p, float delta);
   bool too_far_from_leader(void);
@@ -1239,7 +1239,7 @@ public:
   int gold_set(int);
   int gold_value(void);
   int gold(void);
-  int health_boost(int v);
+  int health_boost(Thingp victim, int v);
   int health_decr(int);
   int health_decr(void);
   int health_incr(int);
@@ -1288,6 +1288,8 @@ public:
   int is_able_to_change_levels(void);
   int is_able_to_collect_keys(void);
   int is_able_to_dampen_footsteps(void);
+  int is_able_to_eat_poisonous_food(void);
+  int is_able_to_eat_unpleasant_food(void);
   int is_able_to_enchant_items(void);
   int is_able_to_fall(void);
   int is_able_to_follow(void);
@@ -1711,10 +1713,8 @@ public:
   int is_unused_flag145(void);
   int is_unused_flag146(void);
   int is_unused_flag147(void);
-  int is_unused_flag148(void);
-  int is_unused_flag149(void);
+  int is_able_to_eat_rotting_food(void);
   int is_unused_flag14(void);
-  int is_unused_flag150(void);
   int is_unused_flag15(void);
   int is_unused_flag16(void);
   int is_unused_flag179(void);
@@ -2736,7 +2736,7 @@ public:
   void resurrect_forced(void);
   void resurrect_tick(void);
   void resurrect(void);
-  void rotting(void);
+  void unpleasant(void);
   void score_add(Thingp victim);
   void score_decr(int);
   void score_incr(int);

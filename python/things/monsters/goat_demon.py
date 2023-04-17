@@ -52,6 +52,7 @@ def tp_init(name, text_long_name):
     my.distance_vision(self, 7)
     my.dmg_nat_att_dice(self, "2d6+2")
     my.dmg_nat_att_type(self, "rutt")
+    my.is_able_to_eat_unpleasant_food(self, True)
     my.dmg_received_doubled_from_cold(self, True)
     my.dmg_received_doubled_from_water(self, True)
     my.environ_hates_cold(self, 100)
