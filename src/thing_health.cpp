@@ -53,15 +53,24 @@ int Thing::health_boost(Thingp victim, int v)
       if (is_player()) {
         msg("%%fg=yellow$You die after eating %s.%%fg=reset$", victim->text_long_name().c_str());
       } else if (is_monst()) {
-        msg("%%fg=yellow$%s dies after eating %s.%%fg=reset$", text_The().c_str(), victim->text_long_name().c_str());
+        if (victim->is_alive_monst() || victim->is_player()) {
+          msg("%%fg=yellow$%s dies after biting %s.%%fg=reset$", text_The().c_str(), victim->text_The().c_str());
+        } else {
+          msg("%%fg=yellow$%s dies after eating %s.%%fg=reset$", text_The().c_str(), victim->text_The().c_str());
+        }
       }
       dead("by eating " + victim->text_a_or_an());
     } else if (v < 0) {
       if (is_player()) {
-        msg("%%fg=yellow$You feel sick after eating %s.%%fg=reset$", victim->text_long_name().c_str());
+        msg("%%fg=yellow$You feel sick after eating %s.%%fg=reset$", victim->text_The().c_str());
       } else if (is_monst()) {
-        msg("%%fg=yellow$%s looks sickly after eating %s.%%fg=reset$", text_The().c_str(),
-            victim->text_long_name().c_str());
+        if (victim->is_alive_monst() || victim->is_player()) {
+          msg("%%fg=yellow$%s looks sickly after biting %s.%%fg=reset$", text_The().c_str(),
+              victim->text_The().c_str());
+        } else {
+          msg("%%fg=yellow$%s looks sickly after eating %s.%%fg=reset$", text_The().c_str(),
+              victim->text_The().c_str());
+        }
       }
     }
   }

@@ -133,13 +133,13 @@ public:
   int lifespan            = {}; // How many things this thing owns.
   int light_dist          = {}; // Current strength, including torches
   int monst_state         = {};
-  int move_count          = {0};
+  int move_count          = {};
   int movement_remaining  = {};
   int move_speed_curr     = {};
   int move_speed_mod      = {};
   int necrosis            = {};
   int noise               = {};
-  int nutrition           = {-1};
+  int nutrition           = {};
   int physical_training   = {};
   int poison              = {};
   int prev_light_dist     = {}; // Current strength, including torches

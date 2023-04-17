@@ -194,6 +194,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.attack_undead(self, True)
     my.capacity_height(self, 20)
     my.capacity_width(self, 20)
+    my.nutrition_dice(self, "2d10")
     my.chance_d1000_shove(self, 50)
     my.chance_d100_of_firing_avoiding_comrades(self, 90)
     my.collision_check(self, True)
