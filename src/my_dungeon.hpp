@@ -227,4 +227,4 @@ public:
   char *cell_addr_no_check(const int x, const int y, const int z);
 };
 
-extern class Dungeon *dungeon_test(void);
+extern void dungeon_test(void);

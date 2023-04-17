@@ -490,8 +490,10 @@ static void usage(void)
   CON(" --debug                     -- Basic debug.");
   CON(" --debug2                    -- Most debugs. Most useful.");
   CON(" --debug3                    -- All debugs. Slow.");
-  CON(" ");
   CON(" --no-debug                  -- Disable debugs.");
+  CON(" ");
+  CON(" --test-dungeon-gen          -- Generate lots of dungeons to check for errors");
+  CON(" --test-save-load            -- Testing level save and load");
   CON(" ");
   CON("Written by goblinhack@gmail.com");
 }
@@ -558,8 +560,15 @@ static void parse_args(int argc, char *argv[])
       continue;
     }
 
-    if (! strcasecmp(argv[ i ], "--test") || ! strcasecmp(argv[ i ], "-test")) {
-      g_opt_test = true;
+    if (! strcasecmp(argv[ i ], "--test-save-load") || ! strcasecmp(argv[ i ], "-test-save-load")) {
+      g_opt_test_save_load = true;
+      g_opt_tests          = true;
+      continue;
+    }
+
+    if (! strcasecmp(argv[ i ], "--test-dungeon-gen") || ! strcasecmp(argv[ i ], "-test-dungeon-gen")) {
+      g_opt_test_dungeon_gen = true;
+      g_opt_tests            = true;
       continue;
     }
 
@@ -905,44 +914,32 @@ int main(int argc, char *argv[])
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  if (g_opt_test) {
-    CON("save load test");
-    CON("==============");
-    game->init();
-    game->load();
-    game->init();
-    game->fini();
-    game->init();
-    game->fini();
-    game->init();
-    game->save();
-    game->fini();
-    game->load();
-
-    CON("dungeon create test");
-    CON("====================");
-    extern int dungeon_test(void);
-    dungeon_test();
-
-    DIE("end of tests");
-  }
-
   wid_topcon_flush();
   wid_botcon_flush();
   sdl_flush_display();
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  if (g_opt_new_game) {
-    CON("INI: New game");
-    game->new_game();
+  if (g_opt_tests) {
+    //
+    // Run tests
+    //
+    wid_toggle_hidden(wid_console_window);
   } else {
-    CON("INI: Game menu");
-    game->wid_main_menu_select();
-  }
+    //
+    // Main menu
+    //
+    if (g_opt_new_game) {
+      CON("INI: New game");
+      game->new_game();
+    } else {
+      CON("INI: Game menu");
+      game->wid_main_menu_select();
+    }
 
-  if (g_opt_resume) {
-    CON("INI: Load last snapshot");
-    game->load_snapshot();
+    if (g_opt_resume) {
+      CON("INI: Load last snapshot");
+      game->load_snapshot();
+    }
   }
 
 loop:
@@ -955,6 +952,7 @@ loop:
   pcg_random_allowed--;
 
   g_opt_no_slow_log_flush = false;
+
   TRACE_NO_INDENT();
   sdl_loop();
   LOG("FIN: SDL loop finished");

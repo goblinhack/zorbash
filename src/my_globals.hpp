@@ -28,7 +28,9 @@ extern bool g_opt_no_slow_log_flush;    // Do not flush after each console log a
 extern bool g_opt_override_debug_level; // Temporary, used to disable existing debugs
 extern bool g_opt_quickstart;           // Start in the game imediately
 extern bool g_opt_resume;               // Load last snapshot
-extern bool g_opt_test;                 // Enable tests.
+extern bool g_opt_tests;                // Any test enabled?
+extern bool g_opt_test_save_load;       // Enable save load tests
+extern bool g_opt_test_dungeon_gen;     // Enable dungeon tests
 extern bool g_quitting;                 // Exitting the game
 extern bool g_render_black_and_white;   // Rendering map in black and white
 extern bool g_saved_snapshot;           // Just saved a snapshot

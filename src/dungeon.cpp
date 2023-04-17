@@ -8,6 +8,7 @@
 #include "my_dungeon.hpp"
 #include "my_level_static.hpp"
 #include "my_room.hpp"
+#include "my_sdl_proto.hpp"
 #include "my_template.hpp"
 #include "my_vector_bounds_check.hpp"
 
@@ -4735,21 +4736,25 @@ void Dungeon::water_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int 
   }
 }
 
-Dungeonp dungeon_test(void)
+void dungeon_test(void)
 {
-  auto x = 10000;
-  while (x--) {
-    //
-    // smaller node numbers mean larger rooms
-    //
-    CON("Test dungeon: %d", x);
+  static int dungeon_seed = 10000;
 
-    if (g_opt_biome_swamp) {
-      new Dungeon(BIOME_SWAMP, MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT, x);
-    } else {
-      new Dungeon(BIOME_DUNGEON, MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT, x);
-    }
+  //
+  // smaller node numbers mean larger rooms
+  //
+  CON("Test dungeon seed: %d", dungeon_seed);
+  pcg_random_allowed++;
+  if (g_opt_biome_swamp) {
+    new Dungeon(BIOME_SWAMP, MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT,
+                dungeon_seed);
+  } else {
+    new Dungeon(BIOME_DUNGEON, MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT,
+                dungeon_seed);
   }
+  pcg_random_allowed--;
 
-  return nullptr;
+  if (! dungeon_seed--) {
+    DIE("end of test");
+  }
 }

@@ -6,6 +6,7 @@
 #include "my_game.hpp"
 #include "my_sdl_event.hpp"
 #include "my_sdl_proto.hpp"
+#include "my_tests.hpp"
 #include "my_ui.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_topcon.hpp"
@@ -78,6 +79,13 @@ void sdl_loop(void)
 
     frames++;
     game->frame_count++;
+
+    //
+    // If enabled, run some tests
+    //
+    if (unlikely(g_opt_tests)) {
+      run_tests();
+    }
 
     //
     // Reset joystick handling before we poll and update.
