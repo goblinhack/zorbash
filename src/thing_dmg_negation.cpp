@@ -26,11 +26,11 @@ const std::string Thing::dmg_negation_dice_str(void)
   return (tp()->dmg_negation_dice_str());
 }
 
-int Thing::dmg_negation(void)
+int Thing::dmg_negation(Thingp victim)
 {
   TRACE_NO_INDENT();
   auto roll    = tp()->dmg_negation_dice().roll();
-  roll         = weapon_dmg_modify(roll);
+  roll         = weapon_dmg_modify(roll, victim);
   auto enchant = enchant_count_get();
   dbg("Damage negation roll %d + enchant %d", roll, enchant);
   return roll + enchant;

@@ -26,11 +26,11 @@ const std::string Thing::dmg_acid_dice_str(void)
   return (tp()->dmg_acid_dice_str());
 }
 
-int Thing::dmg_acid(void)
+int Thing::dmg_acid(Thingp victim)
 {
   TRACE_NO_INDENT();
   auto roll    = tp()->dmg_acid_dice().roll();
-  roll         = weapon_dmg_modify(roll);
+  roll         = weapon_dmg_modify(roll, victim);
   auto enchant = enchant_count_get();
   dbg("Damage acid roll %d + enchant %d", roll, enchant);
   return roll + enchant;

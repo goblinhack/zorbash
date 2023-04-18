@@ -278,7 +278,11 @@ bool Thing::consume(Thingp victim)
                 msg("%s is eating %s!", text_The().c_str(), victim->text_the().c_str());
               }
             } else if (victim->is_blood()) {
-              msg("%s laps up %s.", text_The().c_str(), victim->text_the().c_str());
+              if (is_humanoid()) {
+                msg("%s laps up %s.", text_The().c_str(), victim->text_the().c_str());
+              } else {
+                msg("%s slurps at %s.", text_The().c_str(), victim->text_the().c_str());
+              }
             } else {
               if (bite <= 3) {
                 msg("%s nibbles on %s.", text_The().c_str(), victim->text_the().c_str());
@@ -342,7 +346,11 @@ bool Thing::consume(Thingp victim)
                 msg("%s consumes %s!", text_The().c_str(), victim->text_the().c_str());
               }
             } else if (victim->is_blood()) {
-              msg("%s laps up %s.", text_The().c_str(), victim->text_the().c_str());
+              if (is_humanoid()) {
+                msg("%s laps up %s.", text_The().c_str(), victim->text_the().c_str());
+              } else {
+                msg("%s slurps at %s.", text_The().c_str(), victim->text_the().c_str());
+              }
             } else {
               msg("%s consumes %s.", text_The().c_str(), victim->text_the().c_str());
             }

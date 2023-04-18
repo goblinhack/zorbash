@@ -21,9 +21,16 @@ int Thing::weapon_dmgd_pct(void)
 //
 // Take account of the state of the weapon
 //
-int Thing::weapon_dmg_modify(int damage)
+int Thing::weapon_dmg_modify(int damage, Thingp victim)
 {
   if (! damaged_count()) {
+    return damage;
+  }
+
+  //
+  // Allow already damaged weapons to hit soft victims
+  //
+  if (victim && victim->is_soft()) {
     return damage;
   }
 
@@ -54,7 +61,7 @@ void Thing::weapon_check_for_dmg(Thingp weapon, Thingp victim)
   //
   auto damaged_chance = weapon->chance_d10000_damaged();
   if (victim->is_soft()) {
-    damaged_chance /= 2;
+    damaged_chance /= 4;
   }
 
   //

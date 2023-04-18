@@ -2197,10 +2197,6 @@ bool Thing::ai_tick(bool recursing)
     }
   }
 
-  if (threat) {
-    change_state(MONST_STATE_IDLE, "threat is present");
-  }
-
   //
   // Check for anything dangerous we need to consider and maybe stop what we're doing.
   //
@@ -2213,8 +2209,6 @@ bool Thing::ai_tick(bool recursing)
         break;
       }
     case MONST_STATE_MOVING:
-    case MONST_STATE_RESTING:
-    case MONST_STATE_SLEEPING:
       {
         //
         // Prevent loops; should never hit this
@@ -2252,10 +2246,68 @@ bool Thing::ai_tick(bool recursing)
         }
       }
       break;
+    case MONST_STATE_RESTING:
+    case MONST_STATE_SLEEPING:
+      {
+        //
+        // Prevent loops; should never hit this
+        //
+        if (recursing) {
+          return true;
+        }
+
+        //
+        // If on fire terrain, change to idle state and try again to move
+        //
+        if (is_on_fire() && environ_dislikes_fire()) {
+          AI_LOG("I am on fire!");
+          TRACE_AND_INDENT();
+
+          //
+          // We're going to change state, but make sure we rest at least once
+          // as we entered this state.
+          //
+          resting();
+
+          if (is_player()) {
+            game->tick_begin("Robot resting interrupted by being on fire");
+          }
+          change_state(MONST_STATE_IDLE, "resting interrupted by being on fire!");
+          return ai_tick(true); /* try again to move now we are no longer resting or asleep */
+        }
+
+        //
+        // If on bad terrain, change to idle state and try again to move
+        //
+        if (terrain_cost_get(curr_at) >= DMAP_LESS_PREFERRED_TERRAIN) {
+          AI_LOG("I am on some bad terrain!");
+          TRACE_AND_INDENT();
+
+          //
+          // We're going to change state, but make sure we rest at least once
+          // as we entered this state.
+          //
+          resting();
+
+          if (is_player()) {
+            game->tick_begin("Robot resting interrupted by bad terrain");
+          }
+          change_state(MONST_STATE_IDLE, "resting interrupted by being on bad terrain");
+          return ai_tick(true); /* try again to move now we are no longer resting or asleep */
+        }
+      }
+      break;
     case MONST_STATE_REPACK_INVENTORY:
     case MONST_STATE_OPEN_INVENTORY:
     case MONST_STATE_USING_ENCHANTSTONE:
     case MONST_STATE_USING_SKILLSTONE: break;
+  }
+
+  //
+  // Do this after the resting state check, else we never rest if there is a bad guy around.
+  //
+  if (threat) {
+    change_state(MONST_STATE_IDLE, "threat is present");
   }
 
   switch (infop()->monst_state) {

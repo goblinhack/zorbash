@@ -63,7 +63,7 @@ int Thing::weapon_dmg(void)
   return (tp()->weapon_dmg());
 }
 
-int Thing::dmg_current(void)
+int Thing::dmg_current(Thingp victim)
 {
   TRACE_NO_INDENT();
   int v = 0;
@@ -131,7 +131,7 @@ int Thing::dmg_current_incr(void)
   auto n = (infop()->dmg_current++);
   return n;
 }
-int Thing::dmg_max(void)
+int Thing::dmg_max(Thingp victim)
 {
   TRACE_NO_INDENT();
   auto max_dmg = dmg_nat_att_dice().max_roll();
@@ -168,7 +168,7 @@ int Thing::dmg_max(void)
   return max_dmg + enchant_count_get();
 }
 
-int Thing::dmg_min(void)
+int Thing::dmg_min(Thingp victim)
 {
   TRACE_NO_INDENT();
   auto min_dmg = dmg_nat_att_dice().min_roll();

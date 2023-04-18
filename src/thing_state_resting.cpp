@@ -10,6 +10,8 @@ bool Thing::state_resting(bool &do_something, bool &wait)
 {
   TRACE_NO_INDENT();
 
+  AI_LOG("Resting state.");
+
   //
   // If attacked, we should be kicked out of resting
   //

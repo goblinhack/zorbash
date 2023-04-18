@@ -104,10 +104,9 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
       }
 
       //
-      // Get the damage from the enchanted wand, so the laser
-      // inflicts that damage.
+      // Get the damage from the enchanted wand, so the laser inflicts that damage.
       //
-      player->dmg_current_set(item->dmg_current());
+      player->dmg_current_set(item->dmg_current(nullptr));
     }
     return true;
   }
