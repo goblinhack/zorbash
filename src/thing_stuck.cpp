@@ -125,6 +125,18 @@ bool Thing::is_stuck_check(void)
     } else {
       stuck = true;
     }
+  } else if (level->is_block_of_ice(curr_at.x, curr_at.y)) {
+    if (is_able_to_walk_through_walls()) {
+      //
+      // ok
+      //
+    } else if (is_ethereal()) {
+      //
+      // ok
+      //
+    } else {
+      stuck = true;
+    }
   } else if (level->is_sticky(curr_at.x, curr_at.y)) {
     if (is_sticky()) {
       //
@@ -242,7 +254,8 @@ bool Thing::is_stuck_check(void)
 
 void Thing::is_stuck_update(void)
 {
-  TRACE_NO_INDENT();
+  dbg("Stuck check");
+  TRACE_AND_INDENT();
 
   //
   // Check if we are still stuck

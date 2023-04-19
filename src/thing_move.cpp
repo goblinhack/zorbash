@@ -323,9 +323,9 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     //
     if (is_player()) {
       move_count_incr();
-
-      is_stuck_update();
     }
+
+    is_stuck_update();
 
     //
     // Able to move?
