@@ -2310,6 +2310,9 @@ bool Thing::ai_tick(bool recursing)
     change_state(MONST_STATE_IDLE, "threat is present");
   }
 
+  //
+  // Check for less critical interruptions.
+  //
   switch (infop()->monst_state) {
     case MONST_STATE_IDLE:
       //
@@ -2319,6 +2322,25 @@ bool Thing::ai_tick(bool recursing)
         break;
       }
     case MONST_STATE_MOVING:
+      {
+        //
+        // Check for lesser interrupts; like a monster being seen
+        //
+        AI_LOG("Check for interruptions");
+        TRACE_AND_INDENT();
+
+        if (ai_dmap_can_see_init(minx, miny, maxx, maxy, MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED, true)) {
+          AI_LOG("Something interrupted me while moving");
+          TRACE_AND_INDENT();
+
+          if (is_player()) {
+            game->tick_begin("Robot move interrupted by something");
+          }
+          change_state(MONST_STATE_IDLE, "move interrupted by a change");
+          return ai_tick(true); /* try again to move now we are no longer resting or asleep */
+        }
+      }
+      break;
     case MONST_STATE_RESTING:
       {
         //
@@ -2328,13 +2350,15 @@ bool Thing::ai_tick(bool recursing)
         TRACE_AND_INDENT();
 
         if (ai_dmap_can_see_init(minx, miny, maxx, maxy, MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED, true)) {
-          AI_LOG("Something interrupted me");
+          AI_LOG("Something interrupted me while resting");
           TRACE_AND_INDENT();
 
+          resting();
+
           if (is_player()) {
-            game->tick_begin("Robot move interrupted by something");
+            game->tick_begin("Robot rest interrupted by something");
           }
-          change_state(MONST_STATE_IDLE, "move interrupted by a change");
+          change_state(MONST_STATE_IDLE, "rest interrupted by a change");
           return ai_tick(true); /* try again to move now we are no longer resting or asleep */
         }
       }
