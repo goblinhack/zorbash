@@ -1784,6 +1784,10 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       popup(string_sprintf("%%fg=orange$It strikes you -%d", damage));
     } else if (hitter->is_fire() || real_hitter->is_fire()) {
       popup(string_sprintf("%%fg=orange$Burning -%d", damage));
+    } else if (hitter->is_projectile()) {
+      popup(string_sprintf("%%fg=orange$Hits -%d", damage));
+    } else if (hitter->is_staff()) {
+      popup(string_sprintf("%%fg=orange$Zaps -%d", damage));
     } else if (hitter->is_monst() || real_hitter->is_monst()) {
       popup(string_sprintf("%%fg=orange$It %s you -%d", real_hitter->text_hits().c_str(), damage));
     } else {

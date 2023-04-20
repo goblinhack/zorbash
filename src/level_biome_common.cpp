@@ -111,7 +111,7 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
             d->is_hazard(x - 1, y - 1) && d->is_hazard(x + 1, y - 1) && d->is_hazard(x - 1, y + 1) &&
             d->is_hazard(x + 1, y + 1)) {
 
-          if (d1000() < d1000_chance_of_creating_mob_challenge_class_A) {
+          if (d1000() < d1000_chance_creating_mob_challenge_class_A) {
             tp = tp_random_ethereal_mob();
           }
         } else {
@@ -119,12 +119,12 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
           // Else choose a normal mob
           //
           if (d->is_mob_challenge_class_A(x, y)) {
-            if (d1000() < d1000_chance_of_creating_mob_challenge_class_A) {
+            if (d1000() < d1000_chance_creating_mob_challenge_class_A) {
               tp = tp_random_mob_challenge_class_A(p);
             }
           }
           if (d->is_mob_challenge_class_B(x, y)) {
-            if (d1000() < d1000_chance_of_creating_mob_challenge_class_B) {
+            if (d1000() < d1000_chance_creating_mob_challenge_class_B) {
               tp = tp_random_mob_challenge_class_B(p);
             }
           }
@@ -149,49 +149,49 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
         // We enchant this later after placing.
         //
         if (d->is_treasure_class_A(x, y)) {
-          if (d1000() < d1000_chance_of_creating_treasure_class_A * 3) {
+          if (d1000() < d1000_chance_creating_treasure_class_A * 3) {
             tp = tp_random_treasure_class_A(p);
           }
         }
         if (d->is_treasure_class_B(x, y)) {
-          if (d1000() < d1000_chance_of_creating_treasure_class_B * 3) {
+          if (d1000() < d1000_chance_creating_treasure_class_B * 3) {
             tp = tp_random_treasure_class_B(p);
           }
         }
         if (d->is_treasure_class_C(x, y)) {
-          if (d1000() < d1000_chance_of_creating_treasure_class_C * 3) {
+          if (d1000() < d1000_chance_creating_treasure_class_C * 3) {
             tp = tp_random_treasure_class_C(p);
           }
         }
       } else if (is_more_generous_room) {
         if (d->is_treasure_class_A(x, y)) {
-          if (d1000() < d1000_chance_of_creating_treasure_class_A * 2) {
+          if (d1000() < d1000_chance_creating_treasure_class_A * 2) {
             tp = tp_random_treasure_class_A(p);
           }
         }
         if (d->is_treasure_class_B(x, y)) {
-          if (d1000() < d1000_chance_of_creating_treasure_class_B * 2) {
+          if (d1000() < d1000_chance_creating_treasure_class_B * 2) {
             tp = tp_random_treasure_class_B(p);
           }
         }
         if (d->is_treasure_class_C(x, y)) {
-          if (d1000() < d1000_chance_of_creating_treasure_class_C * 2) {
+          if (d1000() < d1000_chance_creating_treasure_class_C * 2) {
             tp = tp_random_treasure_class_C(p);
           }
         }
       } else {
         if (d->is_treasure_class_A(x, y)) {
-          if (d1000() < d1000_chance_of_creating_treasure_class_A) {
+          if (d1000() < d1000_chance_creating_treasure_class_A) {
             tp = tp_random_treasure_class_A(p);
           }
         }
         if (d->is_treasure_class_B(x, y)) {
-          if (d1000() < d1000_chance_of_creating_treasure_class_B) {
+          if (d1000() < d1000_chance_creating_treasure_class_B) {
             tp = tp_random_treasure_class_B(p);
           }
         }
         if (d->is_treasure_class_C(x, y)) {
-          if (d1000() < d1000_chance_of_creating_treasure_class_C) {
+          if (d1000() < d1000_chance_creating_treasure_class_C) {
             tp = tp_random_treasure_class_C(p);
           }
         }
@@ -203,49 +203,49 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
         // We enchant this later after placing.
         //
         if (d->is_weapon_class_A(x, y)) {
-          if (d1000() < d1000_chance_of_creating_weapon_class_A * 3) {
+          if (d1000() < d1000_chance_creating_weapon_class_A * 3) {
             tp = tp_random_weapon_class_A(p);
           }
         }
         if (d->is_weapon_class_B(x, y)) {
-          if (d1000() < d1000_chance_of_creating_weapon_class_B * 3) {
+          if (d1000() < d1000_chance_creating_weapon_class_B * 3) {
             tp = tp_random_weapon_class_B(p);
           }
         }
         if (d->is_weapon_class_C(x, y)) {
-          if (d1000() < d1000_chance_of_creating_weapon_class_C * 3) {
+          if (d1000() < d1000_chance_creating_weapon_class_C * 3) {
             tp = tp_random_weapon_class_C(p);
           }
         }
       } else if (is_more_generous_room) {
         if (d->is_weapon_class_A(x, y)) {
-          if (d1000() < d1000_chance_of_creating_weapon_class_A * 2) {
+          if (d1000() < d1000_chance_creating_weapon_class_A * 2) {
             tp = tp_random_weapon_class_A(p);
           }
         }
         if (d->is_weapon_class_B(x, y)) {
-          if (d1000() < d1000_chance_of_creating_weapon_class_B * 2) {
+          if (d1000() < d1000_chance_creating_weapon_class_B * 2) {
             tp = tp_random_weapon_class_B(p);
           }
         }
         if (d->is_weapon_class_C(x, y)) {
-          if (d1000() < d1000_chance_of_creating_weapon_class_C * 2) {
+          if (d1000() < d1000_chance_creating_weapon_class_C * 2) {
             tp = tp_random_weapon_class_C(p);
           }
         }
       } else {
         if (d->is_weapon_class_A(x, y)) {
-          if (d1000() < d1000_chance_of_creating_weapon_class_A) {
+          if (d1000() < d1000_chance_creating_weapon_class_A) {
             tp = tp_random_weapon_class_A(p);
           }
         }
         if (d->is_weapon_class_B(x, y)) {
-          if (d1000() < d1000_chance_of_creating_weapon_class_B) {
+          if (d1000() < d1000_chance_creating_weapon_class_B) {
             tp = tp_random_weapon_class_B(p);
           }
         }
         if (d->is_weapon_class_C(x, y)) {
-          if (d1000() < d1000_chance_of_creating_weapon_class_C) {
+          if (d1000() < d1000_chance_creating_weapon_class_C) {
             tp = tp_random_weapon_class_C(p);
           }
         }

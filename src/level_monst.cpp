@@ -16,7 +16,7 @@ Tpp Level::get_random_monst(point p, monst_environ_t monst_environ, monst_class_
   //
   // Should be set to -1 if this is intentional
   //
-  if (! d1000_chance_of_creating_monst[ monst_environ ][ monst_class ]) {
+  if (! d1000_chance_creating_monst[ monst_environ ][ monst_class ]) {
     DIE("No chance of creating monster for biome %d type %d class %d", biome, monst_environ, monst_class);
   }
 
@@ -24,9 +24,9 @@ Tpp Level::get_random_monst(point p, monst_environ_t monst_environ, monst_class_
   // Roll the dice and see if we get to place a monster.
   //
   dbg("roll %d -- biome %d type %d class %d -- %d", roll, biome, monst_environ, monst_class,
-      d1000_chance_of_creating_monst[ monst_environ ][ monst_class ] + difficulty_offset);
+      d1000_chance_creating_monst[ monst_environ ][ monst_class ] + difficulty_offset);
 
-  if (roll < d1000_chance_of_creating_monst[ monst_environ ][ monst_class ] + difficulty_offset) {
+  if (roll < d1000_chance_creating_monst[ monst_environ ][ monst_class ] + difficulty_offset) {
     auto tries = 0U;
     for (;;) {
       //
@@ -42,7 +42,7 @@ Tpp Level::get_random_monst(point p, monst_environ_t monst_environ, monst_class_
 
         tries = 0;
         dbg("INF: Try the next lowest class for -- biome %d type %d class %d -- %d", biome, monst_environ,
-            monst_class, d1000_chance_of_creating_monst[ monst_environ ][ monst_class ] + difficulty_offset);
+            monst_class, d1000_chance_creating_monst[ monst_environ ][ monst_class ] + difficulty_offset);
         return get_random_monst(p, monst_environ, (monst_class_t) (((int) monst_class) - 1), difficulty_offset);
       }
 
@@ -77,7 +77,7 @@ Tpp Level::get_random_monst(point p, monst_environ_t monst_environ, int difficul
 {
   for (int monst_class = MONST_CLASS_A; monst_class < MONST_CLASS_MAX; monst_class++) {
     auto roll = d1000();
-    if (roll < d1000_chance_of_creating_monst[ monst_environ ][ monst_class ]) {
+    if (roll < d1000_chance_creating_monst[ monst_environ ][ monst_class ]) {
       return get_random_monst(p, monst_environ, (monst_class_t) monst_class, difficulty_offset);
     }
   }

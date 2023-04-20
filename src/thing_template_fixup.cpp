@@ -209,6 +209,30 @@ void tp_fixup(void)
       tp->is_able_to_shove_set(true);
     }
 
+    if (tp->chance_d1000_shooting()) {
+      tp->is_able_to_shoot_at_set(true);
+    }
+
+    if (tp->chance_d1000_shooting_avoid_friends()) {
+      tp->is_able_to_shoot_at_set(true);
+    }
+
+    if (tp->chance_d1000_jump_attack()) {
+      tp->is_able_to_jump_set(true);
+    }
+
+    if (tp->chance_d1000_jump_on_low_hp()) {
+      tp->is_able_to_jump_set(true);
+    }
+
+    if (tp->chance_d1000_jump_onto()) {
+      tp->is_able_to_jump_set(true);
+    }
+
+    if (tp->chance_d1000_jump_randomly()) {
+      tp->is_able_to_jump_set(true);
+    }
+
     if (tp->chance_d1000_steal_item() && ! tp->is_thief()) {
       DIE("Tp %s needs is_thief set", tp->name().c_str());
     }

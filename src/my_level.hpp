@@ -178,19 +178,19 @@ public:
   //
   // Chances for various things to appear
   //
-  std::array< std::array< int, MONST_CLASS_MAX >, MONST_ENVIRON_MAX > d1000_chance_of_creating_monst {};
+  std::array< std::array< int, MONST_CLASS_MAX >, MONST_ENVIRON_MAX > d1000_chance_creating_monst {};
 
   //
   // Set to -1 to mean no chance
   //
-  int d1000_chance_of_creating_mob_challenge_class_A {};
-  int d1000_chance_of_creating_mob_challenge_class_B {};
-  int d1000_chance_of_creating_treasure_class_A {};
-  int d1000_chance_of_creating_treasure_class_B {};
-  int d1000_chance_of_creating_treasure_class_C {};
-  int d1000_chance_of_creating_weapon_class_A {};
-  int d1000_chance_of_creating_weapon_class_B {};
-  int d1000_chance_of_creating_weapon_class_C {};
+  int d1000_chance_creating_mob_challenge_class_A {};
+  int d1000_chance_creating_mob_challenge_class_B {};
+  int d1000_chance_creating_treasure_class_A {};
+  int d1000_chance_creating_treasure_class_B {};
+  int d1000_chance_creating_treasure_class_C {};
+  int d1000_chance_creating_weapon_class_A {};
+  int d1000_chance_creating_weapon_class_B {};
+  int d1000_chance_creating_weapon_class_C {};
 
   //
   // Current on screen map limits in tile coords

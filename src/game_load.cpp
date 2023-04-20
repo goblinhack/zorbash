@@ -687,15 +687,15 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(l->is_final_boss_level);
   in >> bits(l->is_crystal_level);
 
-  in >> bits(l->d1000_chance_of_creating_mob_challenge_class_A);
-  in >> bits(l->d1000_chance_of_creating_mob_challenge_class_B);
-  in >> bits(l->d1000_chance_of_creating_monst);
-  in >> bits(l->d1000_chance_of_creating_treasure_class_A);
-  in >> bits(l->d1000_chance_of_creating_treasure_class_B);
-  in >> bits(l->d1000_chance_of_creating_treasure_class_C);
-  in >> bits(l->d1000_chance_of_creating_weapon_class_A);
-  in >> bits(l->d1000_chance_of_creating_weapon_class_B);
-  in >> bits(l->d1000_chance_of_creating_weapon_class_C);
+  in >> bits(l->d1000_chance_creating_mob_challenge_class_A);
+  in >> bits(l->d1000_chance_creating_mob_challenge_class_B);
+  in >> bits(l->d1000_chance_creating_monst);
+  in >> bits(l->d1000_chance_creating_treasure_class_A);
+  in >> bits(l->d1000_chance_creating_treasure_class_B);
+  in >> bits(l->d1000_chance_creating_treasure_class_C);
+  in >> bits(l->d1000_chance_creating_weapon_class_A);
+  in >> bits(l->d1000_chance_creating_weapon_class_B);
+  in >> bits(l->d1000_chance_creating_weapon_class_C);
 
   in >> bits(l->maxx);
   in >> bits(l->maxy);

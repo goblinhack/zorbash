@@ -217,8 +217,10 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
                   add_goal_penalty(goal.what);
                 }
 
-                if (shoot_at(goal.what)) {
-                  return true;
+                if (d1000() < chance_d1000_shooting()) {
+                  if (shoot_at(goal.what)) {
+                    return true;
+                  }
                 }
 
                 IF_DEBUG
@@ -234,8 +236,10 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
           continue;
         }
 
-        if (shoot_at(goal.what)) {
-          return true;
+        if (d1000() < chance_d1000_shooting()) {
+          if (shoot_at(goal.what)) {
+            return true;
+          }
         }
 
         if (ai_create_path_to_single_goal(minx, miny, maxx, maxy, goal, &saved_dmap)) {

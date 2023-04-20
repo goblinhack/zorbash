@@ -232,11 +232,12 @@ int Tp::chance_d1000_jump_onto(void) const { return _chance_d1000_jump_onto; }
 int Tp::chance_d1000_jump_randomly(void) const { return _chance_d1000_jump_randomly; }
 int Tp::chance_d1000_melting(void) const { return _chance_d1000_melting; }
 int Tp::chance_d1000_regenerate(void) const { return _chance_d1000_regenerate; }
+int Tp::chance_d1000_shooting_avoid_friends(void) const { return _chance_d1000_shooting_avoid_friends; }
+int Tp::chance_d1000_shooting(void) const { return _chance_d1000_shooting; }
 int Tp::chance_d1000_shove(void) const { return _chance_d1000_shove; }
 int Tp::chance_d1000_steal_item(void) const { return _chance_d1000_steal_item; }
 int Tp::chance_d1000_teleport_attack(void) const { return _chance_d1000_teleport_attack; }
 int Tp::chance_d1000_teleport_self(void) const { return _chance_d1000_teleport_self; }
-int Tp::chance_d100_of_firing_avoiding_comrades(void) const { return _chance_d100_of_firing_avoiding_comrades; }
 int Tp::charge_count(void) const { return _charge_count; }
 int Tp::collision_check(void) const { return _collision_check; }
 int Tp::collision_hit_180(void) const { return _collision_hit_180; }
@@ -971,11 +972,12 @@ void Tp::chance_d1000_jump_onto_set(int v) { _chance_d1000_jump_onto = v; }
 void Tp::chance_d1000_jump_randomly_set(int v) { _chance_d1000_jump_randomly = v; }
 void Tp::chance_d1000_melting_set(int v) { _chance_d1000_melting = v; }
 void Tp::chance_d1000_regenerate_set(int v) { _chance_d1000_regenerate = v; }
+void Tp::chance_d1000_shooting_avoid_friends_set(int v) { _chance_d1000_shooting_avoid_friends = v; }
+void Tp::chance_d1000_shooting_set(int v) { _chance_d1000_shooting = v; }
 void Tp::chance_d1000_shove_set(int v) { _chance_d1000_shove = v; }
 void Tp::chance_d1000_steal_item_set(int v) { _chance_d1000_steal_item = v; }
 void Tp::chance_d1000_teleport_attack_set(int v) { _chance_d1000_teleport_attack = v; }
 void Tp::chance_d1000_teleport_self_set(int v) { _chance_d1000_teleport_self = v; }
-void Tp::chance_d100_of_firing_avoiding_comrades_set(int v) { _chance_d100_of_firing_avoiding_comrades = v; }
 void Tp::charge_count_set(int v) { _charge_count = v; }
 void Tp::collision_attack_set(int v) { _collision_attack = v; }
 void Tp::collision_check_set(int v) { _collision_check = v; }

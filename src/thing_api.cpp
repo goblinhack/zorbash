@@ -3116,10 +3116,16 @@ int Thing::is_crushable(void)
   return (tp()->is_crushable());
 }
 
-int Thing::chance_d100_of_firing_avoiding_comrades(void)
+int Thing::chance_d1000_shooting_avoid_friends(void)
 {
   TRACE_NO_INDENT();
-  return tp()->chance_d100_of_firing_avoiding_comrades();
+  return tp()->chance_d1000_shooting_avoid_friends();
+}
+
+int Thing::chance_d1000_shooting(void)
+{
+  TRACE_NO_INDENT();
+  return tp()->chance_d1000_shooting();
 }
 
 int Thing::is_able_to_see_in_the_dark(void)

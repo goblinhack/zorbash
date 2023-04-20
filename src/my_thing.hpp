@@ -1062,11 +1062,12 @@ public:
   int chance_d1000_jump_randomly(void);
   int chance_d1000_melting(void);
   int chance_d1000_regenerate(void);
+  int chance_d1000_shooting_avoid_friends(void);
+  int chance_d1000_shooting(void);
   int chance_d1000_shove(void);
   int chance_d1000_steal_item(void);
   int chance_d1000_teleport_attack(void);
   int chance_d1000_teleport_self(void);
-  int chance_d100_of_firing_avoiding_comrades(void);
   int charge_count_decr(int);
   int charge_count_decr(void);
   int charge_count_incr(int);
