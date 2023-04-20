@@ -13,7 +13,6 @@
 #define ENABLE_SAVE_SNAPSHOT_FREQ 500 // How often/move count, to save a snapshot
 
 #undef ENABLE_DEBUG_AI_ASTAR            // Astar AI path costs
-#undef ENABLE_DEBUG_AI                  // Monster AI decisions
 #undef ENABLE_DEBUG_AI_WANDER           // AI wander path selection
 #undef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS // (SLOW)
 #undef ENABLE_DEBUG_GFX_GL_BLEND        // Use to debug specific blends
@@ -25,6 +24,6 @@
 #undef ENABLE_DEBUG_UI_FOCUS            // Which windows we are over
 #undef ENABLE_DEBUG_UI                  // User interface logs
 #undef ENABLE_LOG_TIMESTAMPS            // Full timestamps with date in logs
-#undef ENABLE_UI_ASCII_MOUSE            // Show an in game mouse, not system mouse
+#undef ENABLE_UI_ASCII_MOUSE            // Show an in-game mouse, not system mouse
 
 #endif

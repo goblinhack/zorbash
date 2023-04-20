@@ -303,9 +303,24 @@ void astar_dump(const Dmap *dmap, const point at, const point start, const point
   int y;
 
   LOG("ASTAR:");
-  for (y = start.y; y < end.y; y++) {
+  for (y = start.y - 10; y < end.y + 10; y++) {
     std::string s;
-    for (x = start.x; x < end.x; x++) {
+
+    if (y < 0) {
+      continue;
+    }
+    if (y >= MAP_WIDTH) {
+      continue;
+    }
+
+    for (x = start.x - 10; x < end.x + 10; x++) {
+      if (x < 0) {
+        continue;
+      }
+      if (x >= MAP_WIDTH) {
+        continue;
+      }
+
       uint16_t e = get(dmap->val, x, y);
 
       std::string buf;
@@ -339,5 +354,9 @@ std::pair< Path, Path > Thing::astar_solve(const Goal *goal, char path_debug, po
 {
   char tmp = path_debug;
   auto a   = Astar(s, g, d);
-  return (a.solve(this, goal, &tmp, allow_diagonal));
+  auto ret = (a.solve(this, goal, &tmp, allow_diagonal));
+#ifdef ENABLE_DEBUG_AI_ASTAR
+  astar_dump(d, s, s, g);
+#endif
+  return ret;
 }

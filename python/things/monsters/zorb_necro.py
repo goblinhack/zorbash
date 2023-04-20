@@ -55,6 +55,7 @@ def tp_init(name, text_long_name):
 
     # begin sort marker
     my.chance_d1000_carrier_of_treasure_class_C(self, 1000)
+    my.chance_d1000_shooting(self, 500)
     my.distance_avoid(self, 5)
     my.environ_hates_fire(self, 100)
     my.environ_hates_water(self, 100)

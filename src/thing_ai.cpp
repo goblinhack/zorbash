@@ -160,6 +160,11 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   AI_LOG("Process goals:");
   TRACE_AND_INDENT();
 
+  //
+  // Calculate this only once, so we don't try to shoot per goal.
+  //
+  auto shooting_chance = d1000();
+
   for (auto attempt = 0; attempt <= 1; attempt++) {
     for (auto &g : goalmaps) {
       auto goal_dmap_copy = *g.dmap;
@@ -217,7 +222,9 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
                   add_goal_penalty(goal.what);
                 }
 
-                if (d1000() < chance_d1000_shooting()) {
+                if (shooting_chance < chance_d1000_shooting()) {
+                  AI_LOG("Processing shoot goal");
+                  TRACE_AND_INDENT();
                   if (shoot_at(goal.what)) {
                     return true;
                   }
@@ -236,7 +243,9 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
           continue;
         }
 
-        if (d1000() < chance_d1000_shooting()) {
+        if (shooting_chance < chance_d1000_shooting()) {
+          AI_LOG("Processing shoot goal");
+          TRACE_AND_INDENT();
           if (shoot_at(goal.what)) {
             return true;
           }
@@ -1487,7 +1496,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
   //
   // Too many paths ?
   //
-  auto max_paths = 10;
+  auto max_paths = THING_AI_MAX_WANDER_LOC;
   while ((int) can_reach_cands.size() > max_paths) {
     auto which = pcg_rand() % can_reach_cands.size();
     auto b     = can_reach_cands.begin();

@@ -15,6 +15,7 @@ def on_death_of_a_follower(me, leader, x, y):
 def tp_init(name, text_long_name):
     self = zorb_all.tp_init(name, text_long_name)
     # begin sort marker
+    my.chance_d1000_shooting(self, 500)
     my.distance_avoid(self, 5)
     my.dmg_nat_att_dice(self, "2d6+2")
     my.dmg_nat_att_type(self, "punch")

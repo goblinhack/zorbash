@@ -146,6 +146,14 @@ bool Thing::shoot_at_target(void)
     return false;
   }
 
+  dbg("Shoot at a target?");
+  TRACE_AND_INDENT();
+
+  if (d1000() > chance_d1000_shooting()) {
+    dbg("Not this time");
+    return false;
+  }
+
   int   dx, dy;
   float distance = distance_vision_get();
 
@@ -214,7 +222,7 @@ bool Thing::shoot_at_target(void)
     return false;
   }
 
-  dbg("Want to shoot atL %s", target->to_short_string().c_str());
+  dbg("Want to shoot at %s", target->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   //

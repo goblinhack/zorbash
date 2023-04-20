@@ -22,7 +22,8 @@
 #define TEMPERATURE_THRESHOLD                     50   // Consider things cold or hot when outside this range (-X..X)
 #define THING_AI_CAN_SEE_SECRET_DOOR_DIST         3    // How close to a secret door can a monst see it?
 #define THING_AI_ESCAPE_ATTEMPTS                  4    // Quite CPU heavy
-#define THING_AI_MAX_AVOID_ATTEMPT_LOC            4    // How many places to look at per attempt to avoid something
+#define THING_AI_MAX_AVOID_ATTEMPT_LOC            100  // How many places to look at per attempt to avoid something
+#define THING_AI_MAX_WANDER_LOC                   10   // How many places to look at per wander attempt
 #define THING_AI_MAX_AVOID_COUNT                  10   // Count to keep track of avoid attempts
 #define THING_AI_MAX_GOAL_PENALTY                 100  // Helps to avoid goal oscillation
 #define THING_AI_MAX_RESENT_COUNT                 100  // Count to keep track of resentfulness
