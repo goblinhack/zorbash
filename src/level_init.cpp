@@ -55,7 +55,9 @@ void Level::clear(void)
   _is_walked                         = {};
   _is_monst                          = {};
   _is_obs_destructable               = {};
-  _is_obs_for_jump_landing           = {};
+  _is_obs_jump_end                   = {};
+  _is_obs_spawn_monst                = {};
+  _is_obs_spawn                      = {};
   _is_obs_wall_or_door               = {};
   _is_obs_when_dead                  = {};
   _is_portal                         = {};

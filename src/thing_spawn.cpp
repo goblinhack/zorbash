@@ -7,6 +7,46 @@
 #include "my_math.hpp"
 #include "my_thing.hpp"
 
+bool Level::is_obs_spawn(int x, int y, Thingp it)
+{
+  if (it->is_monst()) {
+    if (is_obs_spawn_monst(x, y)) {
+      return true;
+    }
+  }
+  return is_obs_spawn(x, y);
+}
+
+bool Level::is_obs_spawn(point p, Thingp it)
+{
+  if (it->is_monst()) {
+    if (is_obs_spawn_monst(p)) {
+      return true;
+    }
+  }
+  return is_obs_spawn(p);
+}
+
+bool Level::is_obs_spawn(int x, int y, Tpp it)
+{
+  if (it->is_monst()) {
+    if (is_obs_spawn_monst(x, y)) {
+      return true;
+    }
+  }
+  return is_obs_spawn(x, y);
+}
+
+bool Level::is_obs_spawn(point p, Tpp it)
+{
+  if (it->is_monst()) {
+    if (is_obs_spawn_monst(p)) {
+      return true;
+    }
+  }
+  return is_obs_spawn(p);
+}
+
 //
 // A new born spawned thing. Perform common checks for it.
 //
@@ -97,7 +137,7 @@ bool Thing::spawn_next_to(const std::string &what)
       continue;
     }
 
-    if (tpp->is_obs_for_ai_for_me(level, p)) {
+    if (tpp->is_obs_ai_for_me(level, p)) {
       continue;
     }
 
@@ -148,8 +188,7 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
     auto y = curr_at.y + d.y;
     auto p = point(x, y);
 
-    if (level->is_door(x, y) || level->is_secret_door(x, y) || level->is_mob(x, y) || level->is_hazard(x, y) ||
-        level->is_rock(x, y) || level->is_wall(x, y)) {
+    if (level->is_obs_spawn(x, y, tpp)) {
       continue;
     }
 
@@ -164,7 +203,7 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
       continue;
     }
 
-    if (is_obs_for_ai_for_me(p)) {
+    if (is_obs_ai_for_me(p)) {
       continue;
     }
 
@@ -249,10 +288,10 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
         continue;
       }
 
-      if (level->is_rock(x, y) || level->is_wall(x, y)) {
-        dbg("%d,%d rock or wall", x, y);
+      if (level->is_obs_spawn(x, y, tpp)) {
         continue;
       }
+
       dbg("%d,%d ok", x, y);
 
       auto it = level->thing_new(what, point(x, y));
@@ -305,7 +344,7 @@ bool Thing::spawn_radius_range(const std::string &what, int radius_min, int radi
         continue;
       }
 
-      if (level->is_rock(x, y) || level->is_wall(x, y)) {
+      if (level->is_obs_spawn(x, y, tpp)) {
         continue;
       }
 
@@ -384,7 +423,7 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, i
         continue;
       }
 
-      if (level->is_rock(spawn_at) || level->is_wall(spawn_at)) {
+      if (level->is_obs_spawn(spawn_at.x, spawn_at.y, tpp)) {
         continue;
       }
 
@@ -396,7 +435,7 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, i
         continue;
       }
 
-      if (is_obs_for_ai_for_me(spawn_at)) {
+      if (is_obs_ai_for_me(spawn_at)) {
         continue;
       }
 
@@ -455,6 +494,8 @@ bool Thing::spawn_set_fire_to_things_around_me(const std::string &what, int radi
     radius = 1;
   }
 
+  auto tp = tp_find(what);
+
   for (int dx = -radius; dx <= radius; dx++) {
     for (int dy = -radius; dy <= radius; dy++) {
 
@@ -486,7 +527,7 @@ bool Thing::spawn_set_fire_to_things_around_me(const std::string &what, int radi
         continue;
       }
 
-      if (level->is_hazard(x, y) || level->is_rock(x, y) || level->is_wall(x, y)) {
+      if (level->is_obs_spawn(x, y, tp)) {
         continue;
       }
 
@@ -521,6 +562,8 @@ bool Thing::spawn_things_around_me(const std::string &what, int radius)
     radius = 1;
   }
 
+  auto tp = tp_find(what);
+
   for (int dx = -radius; dx <= radius; dx++) {
     for (int dy = -radius; dy <= radius; dy++) {
 
@@ -552,7 +595,7 @@ bool Thing::spawn_things_around_me(const std::string &what, int radius)
         continue;
       }
 
-      if (level->is_hazard(x, y) || level->is_rock(x, y) || level->is_wall(x, y)) {
+      if (level->is_obs_spawn(x, y, tp)) {
         continue;
       }
 
@@ -636,7 +679,7 @@ bool Thing::spawn_gas_poison_around_thing(int radius)
         continue;
       }
 
-      if (level->is_rock(x, y) || level->is_wall(x, y)) {
+      if (level->is_obs_spawn(x, y)) {
         continue;
       }
 
@@ -646,7 +689,7 @@ bool Thing::spawn_gas_poison_around_thing(int radius)
         continue;
       }
 
-      if (is_obs_for_ai_for_me(p)) {
+      if (is_obs_ai_for_me(p)) {
         continue;
       }
 
@@ -681,10 +724,6 @@ Thingp Thing::spawn_at_if_possible(const std::string &what)
   auto                 y = curr_at.y;
   auto                 p = point(x, y);
 
-  if (level->is_hazard(x, y) || level->is_rock(x, y) || level->is_wall(x, y)) {
-    return nullptr;
-  }
-
   possible.push_back(p);
 
   auto cands = possible.size();
@@ -693,6 +732,12 @@ Thingp Thing::spawn_at_if_possible(const std::string &what)
   }
 
   auto chosen = possible[ pcg_random_range(0, cands) ];
+
+  auto tp = tp_find(what);
+
+  if (level->is_obs_spawn(p, tp)) {
+    return nullptr;
+  }
 
   auto it = level->thing_new(what, chosen);
   spawned_newborn(it);

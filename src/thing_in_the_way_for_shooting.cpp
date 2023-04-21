@@ -72,7 +72,7 @@ Thingp Thing::in_the_way_for_shooting(const point s, const point e, int x, int y
       return t;
     }
 
-    if (t->is_obs_in_the_way_for_shooting()) {
+    if (t->is_obs_shooting()) {
       dbg2("This is in the way for firing (obs): %s", t->to_short_string().c_str());
       return t;
     }

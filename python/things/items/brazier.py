@@ -38,9 +38,9 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_immune_to_fire(self, True)
     my.is_interesting(self, True)  # so it can be shoved
     my.is_loggable(self, True)
-    my.is_obs_for_ai(self, True)
-    my.is_obs_in_the_way_for_shooting(self, True)
-    my.is_obs_in_the_way_for_throwing(self, True)
+    my.is_obs_ai(self, True)
+    my.is_obs_shooting(self, True)
+    my.is_obs_throwing(self, True)
     my.is_shovable(self, True)
     my.light_color(self, "orange")
     my.light_dist(self, 2)

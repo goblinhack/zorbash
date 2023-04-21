@@ -62,6 +62,7 @@ def tp_init(name, text_long_name):
     my.is_mob_challenge_class_A(self, True)
     my.is_mob(self, True)
     my.is_obs_destructable(self, True)
+    my.is_obs_spawn_monst(self, True)
     my.is_shovable(self, True)
     my.is_tickable(self, True)
     my.light_color(self, "cyan")

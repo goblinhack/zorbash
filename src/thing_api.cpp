@@ -96,10 +96,10 @@ int Thing::ai_resent_count(void)
   return (tp()->ai_resent_count());
 }
 
-int Thing::is_obs_for_ai(void)
+int Thing::is_obs_ai(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_obs_for_ai());
+  return (tp()->is_obs_ai());
 }
 
 int Thing::is_able_to_lunge(void)
@@ -996,15 +996,15 @@ int Thing::is_unused_flag145(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag145());
 }
-int Thing::is_unused_flag146(void)
+int Thing::is_obj_spawning(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag146());
+  return (tp()->is_obj_spawning());
 }
-int Thing::is_unused_flag147(void)
+int Thing::is_obj_spawning_monst(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag147());
+  return (tp()->is_obj_spawning_monst());
 }
 int Thing::is_able_to_eat_rotting_food(void)
 {
@@ -2344,10 +2344,10 @@ int Thing::is_msg_allowed_is_dead(void)
   return (tp()->is_msg_allowed_is_dead());
 }
 
-int Thing::is_obs_in_the_way_for_shooting(void)
+int Thing::is_obs_shooting(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_obs_in_the_way_for_shooting());
+  return (tp()->is_obs_shooting());
 }
 
 int Thing::is_msg_allowed_senses_danger(void)
@@ -2368,10 +2368,22 @@ int Thing::gfx_pixelart_submergible(void)
   return (tp()->gfx_pixelart_submergible());
 }
 
-int Thing::is_obs_for_jump_landing(void)
+int Thing::is_obs_jump_end(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_obs_for_jump_landing());
+  return (tp()->is_obs_jump_end());
+}
+
+int Thing::is_obs_spawn_monst(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_obs_spawn_monst());
+}
+
+int Thing::is_obs_spawn(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_obs_spawn());
 }
 
 int Thing::gfx_pixelart_reflection(void)
@@ -2398,10 +2410,10 @@ int Thing::is_msg_allowed_is_surprised(void)
   return (tp()->is_msg_allowed_is_surprised());
 }
 
-int Thing::is_obs_for_shoving(void)
+int Thing::is_obs_shoving(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_obs_for_shoving());
+  return (tp()->is_obs_shoving());
 }
 
 int Thing::is_always_submerged_in_water(void)
@@ -2554,10 +2566,10 @@ int Thing::chance_d10000_set_on_fire(void)
   return (tp()->chance_d10000_set_on_fire());
 }
 
-int Thing::is_obs_in_the_way_for_throwing(void)
+int Thing::is_obs_throwing(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_obs_in_the_way_for_throwing());
+  return (tp()->is_obs_throwing());
 }
 
 int Thing::is_gelatinous(void)
@@ -2632,10 +2644,10 @@ int Thing::gfx_ascii_fade_with_dist(void)
   return (tp()->gfx_ascii_fade_with_dist());
 }
 
-int Thing::is_obs_in_the_way_for_jumping(void)
+int Thing::is_obs_jumping(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_obs_in_the_way_for_jumping());
+  return (tp()->is_obs_jumping());
 }
 
 int Thing::tick_prio(void)

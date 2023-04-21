@@ -246,9 +246,17 @@ void Thing::level_pop(void)
       i_set_is_obs_when_dead = false;
       level->is_obs_when_dead_unset(x, y);
     }
-    if (i_set_is_obs_for_jump_landing) {
-      i_set_is_obs_for_jump_landing = false;
-      level->is_obs_for_jump_landing_unset(x, y);
+    if (i_set_is_obs_jump_end) {
+      i_set_is_obs_jump_end = false;
+      level->is_obs_jump_end_unset(x, y);
+    }
+    if (i_set_is_obs_spawn_monst) {
+      i_set_is_obs_spawn_monst = false;
+      level->is_obs_spawn_monst_unset(x, y);
+    }
+    if (i_set_is_obs_spawn) {
+      i_set_is_obs_spawn = false;
+      level->is_obs_spawn_unset(x, y);
     }
     if (i_set_is_obs_destructable) {
       i_set_is_obs_destructable = false;

@@ -75,12 +75,13 @@ def tp_init(name, text_long_name):
     my.is_interesting(self, True)  # so it can be shoved
     my.is_light_blocker_for_monst(self, True)  # to give cover to the player
     my.is_loggable(self, True)
-    my.is_obs_for_ai(self, True)
-    my.is_obs_for_jump_landing(self, True)
-    my.is_obs_for_shoving(self, True)
-    my.is_obs_in_the_way_for_jumping(self, True)
-    my.is_obs_in_the_way_for_shooting(self, True)
-    my.is_obs_in_the_way_for_throwing(self, True)
+    my.is_obs_ai(self, True)
+    my.is_obs_jump_end(self, True)
+    my.is_obs_jumping(self, True)
+    my.is_obs_shooting(self, True)
+    my.is_obs_shoving(self, True)
+    my.is_obs_spawn_monst(self, True)
+    my.is_obs_throwing(self, True)
     my.is_shovable_and_sticky(self, True)  # so a dogman in ice is also shoved
     my.is_shovable(self, True)
     my.is_tickable(self, True)  # So it can interact with fire

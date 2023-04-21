@@ -2194,57 +2194,137 @@ void Level::is_obs_when_dead_no_check_unset(const int x, const int y)
   set_no_check(_is_obs_when_dead, x, y, false);
 }
 
-bool Level::is_obs_for_jump_landing(const point p) const
+bool Level::is_obs_jump_end(const point p) const
 {
   if (unlikely(is_oob(p.x, p.y))) {
     return false;
   }
-  return (get(_is_obs_for_jump_landing, p.x, p.y));
+  return (get(_is_obs_jump_end, p.x, p.y));
 }
 
-bool Level::is_obs_for_jump_landing_no_check(const point p) const
-{
-  return (get_no_check(_is_obs_for_jump_landing, p.x, p.y));
-}
+bool Level::is_obs_jump_end_no_check(const point p) const { return (get_no_check(_is_obs_jump_end, p.x, p.y)); }
 
-bool Level::is_obs_for_jump_landing(const int x, const int y) const
+bool Level::is_obs_jump_end(const int x, const int y) const
 {
   if (unlikely(is_oob(x, y))) {
     return false;
   }
-  return (get(_is_obs_for_jump_landing, x, y));
+  return (get(_is_obs_jump_end, x, y));
 }
 
-bool Level::is_obs_for_jump_landing_no_check(const int x, const int y) const
+bool Level::is_obs_jump_end_no_check(const int x, const int y) const
 {
-  return (get_no_check(_is_obs_for_jump_landing, x, y));
+  return (get_no_check(_is_obs_jump_end, x, y));
 }
 
-void Level::is_obs_for_jump_landing_set(const int x, const int y)
-{
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
-  set(_is_obs_for_jump_landing, x, y, true);
-}
-
-void Level::is_obs_for_jump_landing_no_check_set(const int x, const int y)
-{
-  set_no_check(_is_obs_for_jump_landing, x, y, true);
-}
-
-void Level::is_obs_for_jump_landing_unset(const int x, const int y)
+void Level::is_obs_jump_end_set(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  set(_is_obs_for_jump_landing, x, y, false);
+  set(_is_obs_jump_end, x, y, true);
 }
 
-void Level::is_obs_for_jump_landing_no_check_unset(const int x, const int y)
+void Level::is_obs_jump_end_no_check_set(const int x, const int y) { set_no_check(_is_obs_jump_end, x, y, true); }
+
+void Level::is_obs_jump_end_unset(const int x, const int y)
 {
-  set_no_check(_is_obs_for_jump_landing, x, y, false);
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  set(_is_obs_jump_end, x, y, false);
 }
+
+void Level::is_obs_jump_end_no_check_unset(const int x, const int y) { set_no_check(_is_obs_jump_end, x, y, false); }
+
+bool Level::is_obs_spawn_monst(const point p) const
+{
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
+  return (get(_is_obs_spawn_monst, p.x, p.y));
+}
+
+bool Level::is_obs_spawn_monst_no_check(const point p) const { return (get_no_check(_is_obs_spawn_monst, p.x, p.y)); }
+
+bool Level::is_obs_spawn_monst(const int x, const int y) const
+{
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
+  return (get(_is_obs_spawn_monst, x, y));
+}
+
+bool Level::is_obs_spawn_monst_no_check(const int x, const int y) const
+{
+  return (get_no_check(_is_obs_spawn_monst, x, y));
+}
+
+void Level::is_obs_spawn_monst_set(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  set(_is_obs_spawn_monst, x, y, true);
+}
+
+void Level::is_obs_spawn_monst_no_check_set(const int x, const int y)
+{
+  set_no_check(_is_obs_spawn_monst, x, y, true);
+}
+
+void Level::is_obs_spawn_monst_unset(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  set(_is_obs_spawn_monst, x, y, false);
+}
+
+void Level::is_obs_spawn_monst_no_check_unset(const int x, const int y)
+{
+  set_no_check(_is_obs_spawn_monst, x, y, false);
+}
+
+bool Level::is_obs_spawn(const point p) const
+{
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
+  return (get(_is_obs_spawn, p.x, p.y));
+}
+
+bool Level::is_obs_spawn_no_check(const point p) const { return (get_no_check(_is_obs_spawn, p.x, p.y)); }
+
+bool Level::is_obs_spawn(const int x, const int y) const
+{
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
+  return (get(_is_obs_spawn, x, y));
+}
+
+bool Level::is_obs_spawn_no_check(const int x, const int y) const { return (get_no_check(_is_obs_spawn, x, y)); }
+
+void Level::is_obs_spawn_set(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  set(_is_obs_spawn, x, y, true);
+}
+
+void Level::is_obs_spawn_no_check_set(const int x, const int y) { set_no_check(_is_obs_spawn, x, y, true); }
+
+void Level::is_obs_spawn_unset(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  set(_is_obs_spawn, x, y, false);
+}
+
+void Level::is_obs_spawn_no_check_unset(const int x, const int y) { set_no_check(_is_obs_spawn, x, y, false); }
 
 bool Level::is_obs_destructable(const point p) const
 {

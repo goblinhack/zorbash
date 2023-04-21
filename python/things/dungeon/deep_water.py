@@ -26,7 +26,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_flat(self, True)
     my.is_hazard(self, True)
     my.is_interesting(self, True)
-    my.is_obs_for_ai(self, True)
+    my.is_obs_ai(self, True)
     my.text_a_or_an(self, "the")
     my.text_description_short(self, "A pool of deep dank water, with things in it.")
     my.z_depth(self, my.MAP_DEPTH_LIQUID)

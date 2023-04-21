@@ -435,7 +435,9 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_monst                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_necrotic_danger_level         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_obs_destructable              ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_obs_for_jump_landing          ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_obs_jump_end                  ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_obs_spawn                     ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_obs_spawn_monst               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_obs_wall_or_door              ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_obs_when_dead                 ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_portal                        ? 1LLU : 0LLU) << shift; shift++;
@@ -557,7 +559,9 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_obs_destructable);
   out << bits(my.t->_is_obs_wall_or_door);
   out << bits(my.t->_is_obs_when_dead);
-  out << bits(my.t->_is_obs_for_jump_landing);
+  out << bits(my.t->_is_obs_jump_end);
+  out << bits(my.t->_is_obs_spawn);
+  out << bits(my.t->_is_obs_spawn_monst);
 
   out << bits(my.t->_fade_in_map);
   out << bits(my.t->_gfx_water);

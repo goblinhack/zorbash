@@ -400,7 +400,7 @@ bool Thing::shove_ok(point future_pos)
       continue;
     }
 
-    if (it->is_obs_for_shoving()) {
+    if (it->is_obs_shoving()) {
       return false;
     }
   }

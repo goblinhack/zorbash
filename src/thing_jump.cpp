@@ -310,7 +310,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   // No sneaky jumping onto doors to get passed them. But we do need to allow jumping into secret doors.
   //
-  if (level->is_obs_for_jump_landing(x, y)) {
+  if (level->is_obs_jump_end(x, y)) {
     TRACE_AND_INDENT();
     dbg("No, jump failed, into obstacle");
     if (is_player()) {

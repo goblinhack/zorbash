@@ -613,14 +613,18 @@ int Tp::is_msg_allowed_senses_danger(void) const { return _is_msg_allowed_senses
 int Tp::is_msg(void) const { return _is_msg; }
 int Tp::is_necrotic_danger_level(void) const { return _is_necrotic_danger_level; }
 int Tp::is_no_tile(void) const { return _is_no_tile; }
+int Tp::is_obj_spawning_monst(void) const { return _is_obj_spawning_monst; }
+int Tp::is_obj_spawning(void) const { return _is_obj_spawning; }
+int Tp::is_obs_ai(void) const { return _is_obs_ai; }
 int Tp::is_obs_destructable(void) const { return _is_obs_destructable; }
-int Tp::is_obs_for_ai(void) const { return _is_obs_for_ai; }
-int Tp::is_obs_for_jump_landing(void) const { return _is_obs_for_jump_landing; }
-int Tp::is_obs_for_shoving(void) const { return _is_obs_for_shoving; }
 int Tp::is_obsidian(void) const { return _is_obsidian; }
-int Tp::is_obs_in_the_way_for_jumping(void) const { return _is_obs_in_the_way_for_jumping; }
-int Tp::is_obs_in_the_way_for_shooting(void) const { return _is_obs_in_the_way_for_shooting; }
-int Tp::is_obs_in_the_way_for_throwing(void) const { return _is_obs_in_the_way_for_throwing; }
+int Tp::is_obs_jump_end(void) const { return _is_obs_jump_end; }
+int Tp::is_obs_jumping(void) const { return _is_obs_jumping; }
+int Tp::is_obs_shooting(void) const { return _is_obs_shooting; }
+int Tp::is_obs_shoving(void) const { return _is_obs_shoving; }
+int Tp::is_obs_spawn_monst(void) const { return _is_obs_spawn_monst; }
+int Tp::is_obs_spawn(void) const { return _is_obs_spawn; }
+int Tp::is_obs_throwing(void) const { return _is_obs_throwing; }
 int Tp::is_obs_wall_or_door(void) const { return _is_obs_wall_or_door; }
 int Tp::is_obs_when_dead(void) const { return _is_obs_when_dead; }
 int Tp::is_ogre(void) const { return _is_ogre; }
@@ -741,8 +745,6 @@ int Tp::is_unused_flag142(void) const { return _is_unused_flag142; }
 int Tp::is_unused_flag143(void) const { return _is_unused_flag143; }
 int Tp::is_unused_flag144(void) const { return _is_unused_flag144; }
 int Tp::is_unused_flag145(void) const { return _is_unused_flag145; }
-int Tp::is_unused_flag146(void) const { return _is_unused_flag146; }
-int Tp::is_unused_flag147(void) const { return _is_unused_flag147; }
 int Tp::is_unused_flag14(void) const { return _is_unused_flag14; }
 int Tp::is_unused_flag15(void) const { return _is_unused_flag15; }
 int Tp::is_unused_flag16(void) const { return _is_unused_flag16; }
@@ -1360,14 +1362,18 @@ void Tp::is_msg_allowed_senses_danger_set(int v) { _is_msg_allowed_senses_danger
 void Tp::is_msg_set(int v) { _is_msg = v; }
 void Tp::is_necrotic_danger_level_set(int v) { _is_necrotic_danger_level = v; }
 void Tp::is_no_tile_set(int v) { _is_no_tile = v; }
+void Tp::is_obj_spawning_monst_set(int v) { _is_obj_spawning_monst = v; }
+void Tp::is_obj_spawning_set(int v) { _is_obj_spawning = v; }
+void Tp::is_obs_ai_set(int v) { _is_obs_ai = v; }
 void Tp::is_obs_destructable_set(int v) { _is_obs_destructable = v; }
-void Tp::is_obs_for_ai_set(int v) { _is_obs_for_ai = v; }
-void Tp::is_obs_for_jump_landing_set(int v) { _is_obs_for_jump_landing = v; }
-void Tp::is_obs_for_shoving_set(int v) { _is_obs_for_shoving = v; }
 void Tp::is_obsidian_set(int v) { _is_obsidian = v; }
-void Tp::is_obs_in_the_way_for_jumping_set(int v) { _is_obs_in_the_way_for_jumping = v; }
-void Tp::is_obs_in_the_way_for_shooting_set(int v) { _is_obs_in_the_way_for_shooting = v; }
-void Tp::is_obs_in_the_way_for_throwing_set(int v) { _is_obs_in_the_way_for_throwing = v; }
+void Tp::is_obs_jump_end_set(int v) { _is_obs_jump_end = v; }
+void Tp::is_obs_jumping_set(int v) { _is_obs_jumping = v; }
+void Tp::is_obs_shooting_set(int v) { _is_obs_shooting = v; }
+void Tp::is_obs_shoving_set(int v) { _is_obs_shoving = v; }
+void Tp::is_obs_spawn_monst_set(int v) { _is_obs_spawn_monst = v; }
+void Tp::is_obs_spawn_set(int v) { _is_obs_spawn = v; }
+void Tp::is_obs_throwing_set(int v) { _is_obs_throwing = v; }
 void Tp::is_obs_wall_or_door_set(int v) { _is_obs_wall_or_door = v; }
 void Tp::is_obs_when_dead_set(int v) { _is_obs_when_dead = v; }
 void Tp::is_ogre_set(int v) { _is_ogre = v; }
@@ -1488,8 +1494,6 @@ void Tp::is_unused_flag142_set(int v) { _is_unused_flag142 = v; }
 void Tp::is_unused_flag143_set(int v) { _is_unused_flag143 = v; }
 void Tp::is_unused_flag144_set(int v) { _is_unused_flag144 = v; }
 void Tp::is_unused_flag145_set(int v) { _is_unused_flag145 = v; }
-void Tp::is_unused_flag146_set(int v) { _is_unused_flag146 = v; }
-void Tp::is_unused_flag147_set(int v) { _is_unused_flag147 = v; }
 void Tp::is_unused_flag14_set(int v) { _is_unused_flag14 = v; }
 void Tp::is_unused_flag15_set(int v) { _is_unused_flag15 = v; }
 void Tp::is_unused_flag16_set(int v) { _is_unused_flag16 = v; }

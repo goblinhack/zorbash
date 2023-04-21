@@ -337,13 +337,17 @@ bool Tp::matches(const std::string &what)
   if (is_msg() && (what == "is_msg")) { return true; }
   if (is_necrotic_danger_level() && (what == "is_necrotic_danger_level")) { return true; }
   if (is_no_tile() && (what == "is_no_tile")) { return true; }
+  if (is_obj_spawning_monst() && (what == "is_obj_spawning_monst")) { return true; }
+  if (is_obj_spawning() && (what == "is_obj_spawning")) { return true; }
   if (is_obs_destructable() && (what == "is_obs_destructable")) { return true; }
-  if (is_obs_for_jump_landing() && (what == "is_obs_for_jump_landing")) { return true; }
-  if (is_obs_for_shoving() && (what == "is_obs_for_shoving")) { return true; }
   if (is_obsidian() && (what == "is_obsidian")) { return true; }
-  if (is_obs_in_the_way_for_jumping() && (what == "is_obs_in_the_way_for_jumping")) { return true; }
-  if (is_obs_in_the_way_for_shooting() && (what == "is_obs_in_the_way_for_shooting")) { return true; }
-  if (is_obs_in_the_way_for_throwing() && (what == "is_obs_in_the_way_for_throwing")) { return true; }
+  if (is_obs_jump_end() && (what == "is_obs_jump_end")) { return true; }
+  if (is_obs_jumping() && (what == "is_obs_jumping")) { return true; }
+  if (is_obs_shooting() && (what == "is_obs_shooting")) { return true; }
+  if (is_obs_shoving() && (what == "is_obs_shoving")) { return true; }
+  if (is_obs_spawn_monst() && (what == "is_obs_spawn_monst")) { return true; }
+  if (is_obs_spawn() && (what == "is_obs_spawn")) { return true; }
+  if (is_obs_throwing() && (what == "is_obs_throwing")) { return true; }
   if (is_obs_wall_or_door() && (what == "is_obs_wall_or_door")) { return true; }
   if (is_obs_when_dead() && (what == "is_obs_when_dead")) { return true; }
   if (is_ogre() && (what == "is_ogre")) { return true; }
@@ -460,8 +464,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag143() && (what == "is_unused_flag143")) { return true; }
   if (is_unused_flag144() && (what == "is_unused_flag144")) { return true; }
   if (is_unused_flag145() && (what == "is_unused_flag145")) { return true; }
-  if (is_unused_flag146() && (what == "is_unused_flag146")) { return true; }
-  if (is_unused_flag147() && (what == "is_unused_flag147")) { return true; }
   if (is_unused_flag14() && (what == "is_unused_flag14")) { return true; }
   if (is_unused_flag15() && (what == "is_unused_flag15")) { return true; }
   if (is_unused_flag16() && (what == "is_unused_flag16")) { return true; }
@@ -939,13 +941,17 @@ bool Thing::matches(const std::string &what)
   if (is_msg() && (what == "is_msg")) { return true; }
   if (is_necrotic_danger_level() && (what == "is_necrotic_danger_level")) { return true; }
   if (is_no_tile() && (what == "is_no_tile")) { return true; }
+  if (is_obj_spawning_monst() && (what == "is_obj_spawning_monst")) { return true; }
+  if (is_obj_spawning() && (what == "is_obj_spawning")) { return true; }
   if (is_obs_destructable() && (what == "is_obs_destructable")) { return true; }
-  if (is_obs_for_jump_landing() && (what == "is_obs_for_jump_landing")) { return true; }
-  if (is_obs_for_shoving() && (what == "is_obs_for_shoving")) { return true; }
   if (is_obsidian() && (what == "is_obsidian")) { return true; }
-  if (is_obs_in_the_way_for_jumping() && (what == "is_obs_in_the_way_for_jumping")) { return true; }
-  if (is_obs_in_the_way_for_shooting() && (what == "is_obs_in_the_way_for_shooting")) { return true; }
-  if (is_obs_in_the_way_for_throwing() && (what == "is_obs_in_the_way_for_throwing")) { return true; }
+  if (is_obs_jump_end() && (what == "is_obs_jump_end")) { return true; }
+  if (is_obs_jumping() && (what == "is_obs_jumping")) { return true; }
+  if (is_obs_shooting() && (what == "is_obs_shooting")) { return true; }
+  if (is_obs_shoving() && (what == "is_obs_shoving")) { return true; }
+  if (is_obs_spawn_monst() && (what == "is_obs_spawn_monst")) { return true; }
+  if (is_obs_spawn() && (what == "is_obs_spawn")) { return true; }
+  if (is_obs_throwing() && (what == "is_obs_throwing")) { return true; }
   if (is_obs_wall_or_door() && (what == "is_obs_wall_or_door")) { return true; }
   if (is_obs_when_dead() && (what == "is_obs_when_dead")) { return true; }
   if (is_ogre() && (what == "is_ogre")) { return true; }
@@ -1062,8 +1068,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag143() && (what == "is_unused_flag143")) { return true; }
   if (is_unused_flag144() && (what == "is_unused_flag144")) { return true; }
   if (is_unused_flag145() && (what == "is_unused_flag145")) { return true; }
-  if (is_unused_flag146() && (what == "is_unused_flag146")) { return true; }
-  if (is_unused_flag147() && (what == "is_unused_flag147")) { return true; }
   if (is_unused_flag14() && (what == "is_unused_flag14")) { return true; }
   if (is_unused_flag15() && (what == "is_unused_flag15")) { return true; }
   if (is_unused_flag16() && (what == "is_unused_flag16")) { return true; }
@@ -1533,12 +1537,14 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_msg") { return &Thing::is_msg; }
   if (what == "is_necrotic_danger_level") { return &Thing::is_necrotic_danger_level; }
   if (what == "is_no_tile") { return &Thing::is_no_tile; }
+  if (what == "is_obj_spawning_monst") { return &Thing::is_obj_spawning_monst; }
+  if (what == "is_obj_spawning") { return &Thing::is_obj_spawning; }
   if (what == "is_obs_destructable") { return &Thing::is_obs_destructable; }
-  if (what == "is_obs_for_shoving") { return &Thing::is_obs_for_shoving; }
   if (what == "is_obsidian") { return &Thing::is_obsidian; }
-  if (what == "is_obs_in_the_way_for_jumping") { return &Thing::is_obs_in_the_way_for_jumping; }
-  if (what == "is_obs_in_the_way_for_shooting") { return &Thing::is_obs_in_the_way_for_shooting; }
-  if (what == "is_obs_in_the_way_for_throwing") { return &Thing::is_obs_in_the_way_for_throwing; }
+  if (what == "is_obs_jumping") { return &Thing::is_obs_jumping; }
+  if (what == "is_obs_shooting") { return &Thing::is_obs_shooting; }
+  if (what == "is_obs_shoving") { return &Thing::is_obs_shoving; }
+  if (what == "is_obs_throwing") { return &Thing::is_obs_throwing; }
   if (what == "is_obs_wall_or_door") { return &Thing::is_obs_wall_or_door; }
   if (what == "is_obs_when_dead") { return &Thing::is_obs_when_dead; }
   if (what == "is_ogre") { return &Thing::is_ogre; }
@@ -1654,8 +1660,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag143") { return &Thing::is_unused_flag143; }
   if (what == "is_unused_flag144") { return &Thing::is_unused_flag144; }
   if (what == "is_unused_flag145") { return &Thing::is_unused_flag145; }
-  if (what == "is_unused_flag146") { return &Thing::is_unused_flag146; }
-  if (what == "is_unused_flag147") { return &Thing::is_unused_flag147; }
   if (what == "is_unused_flag14") { return &Thing::is_unused_flag14; }
   if (what == "is_unused_flag15") { return &Thing::is_unused_flag15; }
   if (what == "is_unused_flag16") { return &Thing::is_unused_flag16; }

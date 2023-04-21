@@ -408,7 +408,7 @@ bool Thing::collision_obstacle(point p)
   return false;
 }
 
-bool Thing::is_obs_for_ai(fpoint p)
+bool Thing::is_obs_ai(fpoint p)
 {
   //
   // Avoid threats and treat them as obstacles
@@ -418,7 +418,7 @@ bool Thing::is_obs_for_ai(fpoint p)
     //
     // "true" on collision
     //
-    if (is_obs_for_ai(it)) {
+    if (is_obs_ai(it)) {
       return true;
     }
   }

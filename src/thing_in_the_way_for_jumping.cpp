@@ -56,7 +56,7 @@ Thingp Thing::in_the_way_for_jumping(const point s, const point e, int x, int y)
       return t;
     }
 
-    if (t->is_obs_in_the_way_for_jumping()) {
+    if (t->is_obs_jumping()) {
       dbg("This is in the way: %s", t->to_short_string().c_str());
       return t;
     }

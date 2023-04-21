@@ -47,7 +47,7 @@ Thingp Thing::in_the_way_for_throwing(const point s, const point e, int x, int y
       return t;
     }
 
-    if (t->is_obs_in_the_way_for_throwing()) {
+    if (t->is_obs_throwing()) {
       dbg("This is in the way: %s", t->to_short_string().c_str());
       return t;
     }

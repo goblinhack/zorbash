@@ -34,6 +34,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_cursor_can_hover_over(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_interesting(self, True)
+    my.is_obs_spawn_monst(self, True)
     my.light_color(self, "yellow")
     my.light_dist(self, 3)
     my.normal_placement_rules(self, True)

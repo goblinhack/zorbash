@@ -486,7 +486,9 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->i_set_is_monst                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_necrotic_danger_level         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_obs_destructable              = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->i_set_is_obs_for_jump_landing          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_obs_jump_end                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_obs_spawn                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_obs_spawn_monst               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_obs_wall_or_door              = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_obs_when_dead                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_portal                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -597,7 +599,9 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_obs_destructable);
   in >> bits(my.t->_is_obs_wall_or_door);
   in >> bits(my.t->_is_obs_when_dead);
-  in >> bits(my.t->_is_obs_for_jump_landing);
+  in >> bits(my.t->_is_obs_jump_end);
+  in >> bits(my.t->_is_obs_spawn);
+  in >> bits(my.t->_is_obs_spawn_monst);
 
   in >> bits(my.t->_fade_in_map);
   in >> bits(my.t->_gfx_water);

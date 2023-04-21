@@ -305,9 +305,17 @@ void Thing::level_push(void)
       i_set_is_obs_when_dead = true;
       level->is_obs_when_dead_set(x, y);
     }
-    if (is_obs_for_jump_landing() && ! is_open) {
-      i_set_is_obs_for_jump_landing = true;
-      level->is_obs_for_jump_landing_set(x, y);
+    if (is_obs_jump_end() && ! is_open) {
+      i_set_is_obs_jump_end = true;
+      level->is_obs_jump_end_set(x, y);
+    }
+    if (is_obs_spawn_monst() && ! is_open) {
+      i_set_is_obs_spawn_monst = true;
+      level->is_obs_spawn_monst_set(x, y);
+    }
+    if (is_obs_spawn() && ! is_open) {
+      i_set_is_obs_spawn = true;
+      level->is_obs_spawn_set(x, y);
     }
     if (is_obs_destructable() && ! is_open) {
       i_set_is_obs_destructable = true;
