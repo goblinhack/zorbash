@@ -50,7 +50,7 @@ def tp_init(name, text_long_name):
     my.capacity_height(self, 5)
     my.capacity_width(self, 5)
     my.chance_d1000_shooting_avoid_friends(self, 500)
-    my.chance_d1000_shooting(self, 200)
+    my.chance_d1000_shooting(self, 50)
     my.chance_d1000_shove(self, 500)
     my.chance_d1000_steal_item(self, 50)
     my.collision_check(self, True)

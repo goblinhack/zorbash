@@ -1889,6 +1889,14 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
     d = 2;
   }
 
+  if (ai_wanderer() || is_intelligent()) {
+    d *= 2;
+  }
+
+  if (is_very_intelligent()) {
+    d *= 2;
+  }
+
   std::vector< std::pair< Thingp, int > > possible;
 
   for (auto dx = -d; dx <= d; dx++) {

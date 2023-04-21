@@ -886,7 +886,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   }
 
   //
-  // If the thing is dead, then allow an additional eat attacj.
+  // If the thing is dead, then allow an additional eat attack.
   //
   if (is_dead || is_dying) {
     if (real_hitter->can_eat(this)) {
@@ -1185,7 +1185,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   auto o_top = top_owner();
   if (is_dead || is_dying) {
     //
-    // Limit to posessions and not things like a sword thing animation.
+    // Limit to possessions and not things like a sword thing animation.
     //
     dbg("Dead or dying");
     TRACE_AND_INDENT();
@@ -1204,7 +1204,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           }
         }
       } else if (o_top && o_top->is_monst()) {
-        dbg("Monst is onwer of dead or dying thing");
+        dbg("Monst is owner of dead or dying thing");
         if (! o_top->is_dead && ! o_top->is_dying) {
           if (is_drained) {
             msg("%s %s is drained.", apostrophise(o_top->text_The()).c_str(), text_long_name().c_str());
@@ -1950,7 +1950,11 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_CLAW ]) {
         reason = "by clawing";
       } else if (attack_options->attack[ THING_ATTACK_COLD ]) {
-        reason = "by cold";
+        if (level->is_block_of_ice(curr_at.x, curr_at.y)) {
+          reason = "by refrigeration";
+        } else {
+          reason = "by cold";
+        }
       } else if (attack_options->attack[ THING_ATTACK_FIRE ]) {
         if (is_able_to_melt()) {
           reason = "by melting";
@@ -1993,7 +1997,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     //
     // Does the attacker feast on success? This is too quick for normal
     // monsters as the body immediately vanishes into bones. But for an
-    // engulger maybe not.
+    // engulfer maybe not.
     //
     if (is_engulfer()) {
       if (real_hitter->can_eat(this)) {
@@ -2231,7 +2235,7 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
   }
 
   //
-  // Allow rocks on the main level to be destoryed; but not in the border
+  // Allow rocks on the main level to be destroyed; but not in the border
   //
   if (is_very_hard()) {
     if ((curr_at.x < MAP_BORDER_ROCK) || (curr_at.y < MAP_BORDER_ROCK) ||

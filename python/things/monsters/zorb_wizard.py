@@ -16,7 +16,7 @@ def tp_init(name, text_long_name):
     self = zorb_all.tp_init(name, text_long_name)
     # begin sort marker
     my.chance_d1000_carrier_of_treasure_class_B(self, 1000)
-    my.chance_d1000_shooting(self, 500)
+    my.chance_d1000_shooting(self, 100)
     my.distance_avoid(self, 5)
     my.health_initial_dice(self, "2d4+4")
     my.is_able_to_freeze(self, True)
