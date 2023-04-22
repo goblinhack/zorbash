@@ -22,6 +22,7 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     my.is_ascend_sewer(self, True)
     my.is_biome_chasms(self, True)
     my.is_biome_dungeon(self, True)
+    my.is_biome_lava(self, True)
     my.is_biome_swamp(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_interesting(self, True)

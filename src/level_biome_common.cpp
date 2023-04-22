@@ -78,9 +78,9 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
         case BIOME_DUNGEON: tp_monst = get_biome_dungeon_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
         case BIOME_SWAMP: tp_monst = get_biome_swamp_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
         case BIOME_SEWER: tp_monst = get_biome_sewer_random_monst(p, MONST_ENVIRON_NORMAL); break;
-        case BIOME_ICE: break;
+        case BIOME_ICE: tp_monst = get_biome_ice_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
         case BIOME_CHASMS: tp_monst = get_biome_chasms_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
-        case BIOME_LAVA: break;
+        case BIOME_LAVA: tp_monst = get_biome_lava_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
         default: break;
       }
 

@@ -22,6 +22,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_able_to_fall(self, True)
     my.is_biome_chasms(self, True)
     my.is_biome_dungeon(self, True)
+    my.is_biome_lava(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_flat(self, True)
     my.is_hazard(self, True)

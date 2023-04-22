@@ -67,6 +67,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_bag_item(self, True)
     my.is_biome_chasms(self, True)
     my.is_biome_dungeon(self, True)
+    my.is_biome_lava(self, True)
     my.is_biome_swamp(self, True)
     my.is_cloak(self, True)
     my.is_collectable(self, True)

@@ -23,6 +23,7 @@ def key_init(name, text_long_name):
     my.is_auto_collect_item(self, True)
     my.is_biome_chasms(self, True)
     my.is_biome_dungeon(self, True)
+    my.is_biome_lava(self, True)
     my.is_collectable(self, True)
     my.is_collected_as_keys(self, True)
     my.is_crystal(self, True)

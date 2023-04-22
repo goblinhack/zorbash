@@ -43,10 +43,7 @@ biome_t get_biome(int difficulty_depth)
       biome = BIOME_DUNGEON; // HACK
       break;
     case 4: biome = BIOME_DUNGEON; break;
-    case 5:
-      biome = BIOME_LAVA;
-      biome = BIOME_DUNGEON; // HACK
-      break;
+    case 5: biome = BIOME_LAVA; break;
     case 6: biome = BIOME_DUNGEON; break;
     case 7: biome = BIOME_DUNGEON; break;
     default: biome = BIOME_DUNGEON; break;

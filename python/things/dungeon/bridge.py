@@ -25,6 +25,7 @@ def tp_init(name, tiles=[], bot3_tiles=[]):
     my.is_able_to_fall(self, True)
     my.is_biome_chasms(self, True)
     my.is_biome_dungeon(self, True)
+    my.is_biome_lava(self, True)
     my.is_bridge(self, True)
     my.is_burnable(self, True)
     my.is_cursor_can_hover_over(self, True)

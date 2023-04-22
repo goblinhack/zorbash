@@ -693,6 +693,8 @@ public:
   Tpp get_biome_chasms_random_monst(Dungeonp d, point p, monst_environ_t);
   Tpp get_biome_swamp_random_monst(Dungeonp d, point p, monst_environ_t);
   Tpp get_biome_sewer_random_monst(point p, monst_environ_t);
+  Tpp get_biome_lava_random_monst(Dungeonp, point p, monst_environ_t);
+  Tpp get_biome_ice_random_monst(Dungeonp, point p, monst_environ_t);
   Tpp get_random_monst(point p, monst_environ_t, monst_class_t, int difficulty_offset);
   Tpp get_random_monst(point p, monst_environ_t, int difficulty_offset);
 
@@ -704,6 +706,7 @@ public:
   bool can_see_unimpeded(int x0, int y0, int x1, int y1);
   bool create_biome_chasms(point3d at, uint32_t seed);
   bool create_biome_dungeon(point3d at, uint32_t seed);
+  bool create_biome_lava(point3d at, uint32_t seed);
   bool create_biome_sewer_pipes(point3d at);
   bool create_biome_sewer(point3d at, uint32_t seed);
   bool create_biome_sewer_pools(void);
@@ -984,6 +987,13 @@ public:
   void create_biome_dungeon_place_sewer_pipes(Dungeonp d);
   void create_biome_dungeon_place_walls(Dungeonp d, Tpp tp, int, int block_width, int block_height, int tries);
   void create_biome_dungeon_place_wet_grass(Dungeonp d);
+  void create_biome_lava_place_braziers(Dungeonp d, const std::string &what);
+  void create_biome_lava_place_bridge(Dungeonp d);
+  void create_biome_lava_place_dirt(Dungeonp d);
+  void create_biome_lava_place_lava(Dungeonp d, const std::string &what);
+  void create_biome_lava_place_remaining_rock(Dungeonp d, const std::string &what);
+  void create_biome_lava_place_remaining_rocks(Dungeonp d);
+  void create_biome_lava_place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries);
   void create_biome_sewer_place_remaining_walls(const std::string &what);
   void create_biome_sewer_place_walls(int variant, int block_width, int block_height, int tries);
   void create_biome_swamp_place_deep_water(Dungeonp d, const std::string &what);

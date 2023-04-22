@@ -93,6 +93,7 @@ def tp_init(name, text_long_name):
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)
+    my.is_biome_lava(self, True)
     my.is_biome_swamp(self, True)
     my.is_demon(self, True)
     my.is_described_when_hovering_over(self, True)

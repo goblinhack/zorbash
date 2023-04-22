@@ -159,6 +159,48 @@ Tpp Level::get_biome_swamp_random_monst(Dungeonp d, point p, monst_environ_t mon
   return get_random_monst(p, monst_environ, monst_class);
 }
 
+Tpp Level::get_biome_lava_random_monst(Dungeonp d, point p, monst_environ_t monst_environ)
+{
+  monst_class_t monst_class = MONST_CLASS_ANY;
+
+  if (d->is_monst_class_A(p.x, p.y)) {
+    monst_class = MONST_CLASS_A;
+  } else if (d->is_monst_class_B(p.x, p.y)) {
+    monst_class = MONST_CLASS_B;
+  } else if (d->is_monst_class_C(p.x, p.y)) {
+    monst_class = MONST_CLASS_C;
+  } else if (d->is_monst_class_D(p.x, p.y)) {
+    monst_class = MONST_CLASS_D;
+  } else if (d->is_monst_class_E(p.x, p.y)) {
+    monst_class = MONST_CLASS_E;
+  } else {
+    return nullptr;
+  }
+
+  return get_random_monst(p, monst_environ, monst_class);
+}
+
+Tpp Level::get_biome_ice_random_monst(Dungeonp d, point p, monst_environ_t monst_environ)
+{
+  monst_class_t monst_class = MONST_CLASS_ANY;
+
+  if (d->is_monst_class_A(p.x, p.y)) {
+    monst_class = MONST_CLASS_A;
+  } else if (d->is_monst_class_B(p.x, p.y)) {
+    monst_class = MONST_CLASS_B;
+  } else if (d->is_monst_class_C(p.x, p.y)) {
+    monst_class = MONST_CLASS_C;
+  } else if (d->is_monst_class_D(p.x, p.y)) {
+    monst_class = MONST_CLASS_D;
+  } else if (d->is_monst_class_E(p.x, p.y)) {
+    monst_class = MONST_CLASS_E;
+  } else {
+    return nullptr;
+  }
+
+  return get_random_monst(p, monst_environ, monst_class);
+}
+
 Tpp Level::get_biome_sewer_random_monst(point p, monst_environ_t monst_environ)
 {
   monst_class_t monst_class = MONST_CLASS_ANY;
@@ -175,9 +217,11 @@ void tp_monst_add(Tpp tp)
   if (tp->is_biome_dungeon()) {
     biomes.push_back(BIOME_DUNGEON);
   }
+
   if (tp->is_biome_sewer()) {
     biomes.push_back(BIOME_SEWER);
   }
+
   if (tp->is_biome_swamp()) {
     biomes.push_back(BIOME_SWAMP);
   }

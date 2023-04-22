@@ -246,7 +246,16 @@ void Dungeon::make_dungeon(void)
   //
   // Add a cave as the under-dungeon
   //
-  if (biome != BIOME_CHASMS) {
+  if (biome == BIOME_LAVA) {
+    DBG2("INF: Generate lava");
+
+    lava_gen(2000, // fill prob
+             10,   // R1
+             5,    // R2
+             4 /* generations */);
+  }
+
+  if ((biome != BIOME_CHASMS) && (biome != BIOME_LAVA)) {
     DBG2("INF: Generate water");
 
     water_gen(2000, // fill prob
@@ -260,9 +269,7 @@ void Dungeon::make_dungeon(void)
                 5,    // R2
                 4 /* generations */);
     }
-  }
 
-  if (biome != BIOME_CHASMS) {
     DBG2("INF: Generate caves");
     cave_gen(2000, // fill prob
              10,   // R1
@@ -277,10 +284,10 @@ void Dungeon::make_dungeon(void)
 
     DBG2("INF: Add deepwater and islands of safety");
     water_fixup();
-
-    DBG2("INF: Add border");
-    add_border();
   }
+
+  DBG2("INF: Add border");
+  add_border();
 
   DBG2("INF: Add remaining items");
   add_remaining();
@@ -4736,6 +4743,55 @@ void Dungeon::water_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int 
   }
 }
 
+void Dungeon::lava_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations)
+{
+  map_save = {};
+  map_curr = {};
+
+  const int16_t maze_w = MAP_WIDTH - 2;
+  const int16_t maze_h = MAP_HEIGHT - 2;
+
+  if (map_r1) {
+    MAP_R1 = map_r1;
+  }
+
+  if (map_r2) {
+    MAP_R2 = map_r2;
+  }
+
+  if (map_generations) {
+    MAP_GENERATIONS = map_generations;
+  }
+
+  int16_t x, y, i;
+
+  map_curr = {};
+
+  for (x = 2; x < maze_w - 2; x++) {
+    for (y = 2; y < maze_h - 2; y++) {
+      if (pcg_random_range(0, 10000) < map_fill_prob) {
+        set(map_curr, x, y, (uint8_t) 1);
+      }
+    }
+  }
+
+  for (i = 0; i < MAP_GENERATIONS; i++) {
+    cave_generation();
+    std::copy(mbegin(map_save), mend(map_save), mbegin(map_curr));
+    map_save = {};
+  }
+
+  for (x = 2; x < maze_w - 2; x++) {
+    for (y = 2; y < maze_h - 2; y++) {
+      if (get(map_curr, x, y)) {
+        if (! is_anything_at(x, y)) {
+          putc(x, y, MAP_DEPTH_LIQUID, Charmap::LAVA);
+        }
+      }
+    }
+  }
+}
+
 void dungeon_test(void)
 {
   static int dungeon_seed = 10000;
@@ -4745,13 +4801,9 @@ void dungeon_test(void)
   //
   CON("Test dungeon seed: %d", dungeon_seed);
   pcg_random_allowed++;
-  if (g_opt_biome_swamp) {
-    delete new Dungeon(BIOME_SWAMP, MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT,
-                       dungeon_seed);
-  } else {
-    delete new Dungeon(BIOME_DUNGEON, MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT,
-                       dungeon_seed);
-  }
+
+  delete new Dungeon(get_biome(0), MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT,
+                     dungeon_seed);
   pcg_random_allowed--;
 
   if (! dungeon_seed--) {

@@ -21,6 +21,7 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.is_biome_chasms(self, True)
     my.is_biome_dungeon(self, True)
+    my.is_biome_lava(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_cursor_path_blocker(self, True)
     my.is_described_when_hovering_over(self, True)

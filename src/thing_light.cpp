@@ -110,6 +110,15 @@ void Thing::init_lights(void)
     has_light = true;
     dbg("Player created");
   } else {
+    //
+    // Not too many lights
+    //
+    if (is_lava()) {
+      if (d100() < 50) {
+        return;
+      }
+    }
+
     if (unlikely(initial_light_dist_get())) {
       std::string l = light_color();
       if (l.empty()) {

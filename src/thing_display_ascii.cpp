@@ -162,6 +162,9 @@ void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
       c.b = 0;
       c.r = 0;
     }
+  } else if (level->biome == BIOME_LAVA) {
+    c.b = 0;
+    c.g = 0;
   }
 
   //
