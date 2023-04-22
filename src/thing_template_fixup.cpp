@@ -350,7 +350,7 @@ void tp_fixup(void)
     //
     // If only a single attack type then make sure it is 1000%
     //
-    if (tp->attacks_per_round() <= 1) {
+    if (tp->dmg_num_of_attacks() <= 1) {
       if (num_attack_types == 1) {
         int attack_index = 0;
 
@@ -414,8 +414,28 @@ void tp_fixup(void)
       }
     }
 
-    if ((num_attack_types > 0) && ! tp->attacks_per_round()) {
-      tp->attacks_per_round_set(1);
+    //
+    // Check some damage has been set if we have multiple attacks
+    //
+    if (tp->is_monst() || tp->is_weapon() || tp->is_staff()) {
+      for (auto i = 0; i < tp->dmg_num_of_attacks(); i++) {
+        auto total_damange_for_this_attack_round =
+            tp->dmg_chance_d1000_acid(i) + tp->dmg_chance_d1000_water(i) + tp->dmg_chance_d1000_cold(i) +
+            tp->dmg_chance_d1000_crush(i) + tp->dmg_chance_d1000_missile(i) + tp->dmg_chance_d1000_digest(i) +
+            tp->dmg_chance_d1000_energy(i) + tp->dmg_chance_d1000_negation(i) + tp->dmg_chance_d1000_fire(i) +
+            tp->dmg_chance_d1000_heat(i) + tp->dmg_chance_d1000_drown(i) + tp->dmg_chance_d1000_bite(i) +
+            tp->dmg_chance_d1000_claw(i) + tp->dmg_chance_d1000_lightning(i) + tp->dmg_chance_d1000_melee(i) +
+            tp->dmg_chance_d1000_nat_att(i) + tp->dmg_chance_d1000_necrosis(i) + tp->dmg_chance_d1000_draining(i) +
+            tp->dmg_chance_d1000_poison(i);
+
+        if (! total_damange_for_this_attack_round) {
+          DIE("Thing template [%s] has no damage set for att # %d", tp->name().c_str(), i);
+        }
+      }
+    }
+
+    if ((num_attack_types > 0) && ! tp->dmg_num_of_attacks()) {
+      tp->dmg_num_of_attacks_set(1);
     }
   }
 

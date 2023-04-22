@@ -32,7 +32,7 @@ def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
 
-    my.attacks_per_round(self, 2)
+    my.dmg_num_of_attacks(self, 2)
     my.gfx_ascii_shown(self, True)
     my.is_enchantable(self, True)
     my.is_loggable(self, True)

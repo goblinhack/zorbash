@@ -31,13 +31,13 @@ bool Tp::matches(const std::string &what)
   if (attack_living() && (what == "attack_living")) { return true; }
   if (attack_meat() && (what == "attack_meat")) { return true; }
   if (attack_no_msg() && (what == "attack_no_msg")) { return true; }
-  if (attacks_per_round() && (what == "attacks_per_round")) { return true; }
   if (attack_undead() && (what == "attack_undead")) { return true; }
   if (collision_hit_180() && (what == "collision_hit_180")) { return true; }
   if (collision_hit_360() && (what == "collision_hit_360")) { return true; }
   if (collision_hit_adj() && (what == "collision_hit_adj")) { return true; }
   if (collision_hit_two_tiles_ahead() && (what == "collision_hit_two_tiles_ahead")) { return true; }
   if (consume_per_bite_amount() && (what == "consume_per_bite_amount")) { return true; }
+  if (dmg_num_of_attacks() && (what == "dmg_num_of_attacks")) { return true; }
   if (dmg_received_doubled_from_cold() && (what == "dmg_received_doubled_from_cold")) { return true; }
   if (enchant_max() && (what == "enchant_max")) { return true; }
   if (environ_dislikes_acid() && (what == "environ_dislikes_acid")) { return true; }
@@ -633,13 +633,13 @@ bool Thing::matches(const std::string &what)
   if (attack_living() && (what == "attack_living")) { return true; }
   if (attack_meat() && (what == "attack_meat")) { return true; }
   if (attack_no_msg() && (what == "attack_no_msg")) { return true; }
-  if (attacks_per_round() && (what == "attacks_per_round")) { return true; }
   if (attack_undead() && (what == "attack_undead")) { return true; }
   if (collision_hit_180() && (what == "collision_hit_180")) { return true; }
   if (collision_hit_360() && (what == "collision_hit_360")) { return true; }
   if (collision_hit_adj() && (what == "collision_hit_adj")) { return true; }
   if (collision_hit_two_tiles_ahead() && (what == "collision_hit_two_tiles_ahead")) { return true; }
   if (consume_per_bite_amount() && (what == "consume_per_bite_amount")) { return true; }
+  if (dmg_num_of_attacks() && (what == "dmg_num_of_attacks")) { return true; }
   if (dmg_received_doubled_from_cold() && (what == "dmg_received_doubled_from_cold")) { return true; }
   if (enchant_max() && (what == "enchant_max")) { return true; }
   if (environ_dislikes_acid() && (what == "environ_dislikes_acid")) { return true; }
@@ -1231,13 +1231,13 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "attack_living") { return &Thing::attack_living; }
   if (what == "attack_meat") { return &Thing::attack_meat; }
   if (what == "attack_no_msg") { return &Thing::attack_no_msg; }
-  if (what == "attacks_per_round") { return &Thing::attacks_per_round; }
   if (what == "attack_undead") { return &Thing::attack_undead; }
   if (what == "collision_hit_180") { return &Thing::collision_hit_180; }
   if (what == "collision_hit_360") { return &Thing::collision_hit_360; }
   if (what == "collision_hit_adj") { return &Thing::collision_hit_adj; }
   if (what == "collision_hit_two_tiles_ahead") { return &Thing::collision_hit_two_tiles_ahead; }
   if (what == "consume_per_bite_amount") { return &Thing::consume_per_bite_amount; }
+  if (what == "dmg_num_of_attacks") { return &Thing::dmg_num_of_attacks; }
   if (what == "dmg_received_doubled_from_cold") { return &Thing::dmg_received_doubled_from_cold; }
   if (what == "dry_grass") { return &Thing::is_dry_grass; }
   if (what == "dry_grass_trampled") { return &Thing::is_dry_grass_trampled; }

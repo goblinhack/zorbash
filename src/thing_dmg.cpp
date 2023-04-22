@@ -6,17 +6,17 @@
 #include "my_monst.hpp"
 #include "my_thing.hpp"
 
-int Thing::attacks_per_round(void)
+int Thing::dmg_num_of_attacks(void)
 {
   TRACE_NO_INDENT();
 
-  auto attacks = (std::max(1, tp()->attacks_per_round()));
+  auto attacks = (std::max(1, tp()->dmg_num_of_attacks()));
 
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
     if (iter) {
-      attacks = std::max(attacks, iter->attacks_per_round());
+      attacks = std::max(attacks, iter->dmg_num_of_attacks());
     }
   }
 
@@ -25,7 +25,7 @@ int Thing::attacks_per_round(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        attacks = std::max(attacks, iter->attacks_per_round());
+        attacks = std::max(attacks, iter->dmg_num_of_attacks());
       }
     }
 
@@ -33,7 +33,7 @@ int Thing::attacks_per_round(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        attacks = std::max(attacks, iter->attacks_per_round());
+        attacks = std::max(attacks, iter->dmg_num_of_attacks());
       }
     }
 
@@ -41,7 +41,7 @@ int Thing::attacks_per_round(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        attacks = std::max(attacks, iter->attacks_per_round());
+        attacks = std::max(attacks, iter->dmg_num_of_attacks());
       }
     }
 
@@ -49,7 +49,7 @@ int Thing::attacks_per_round(void)
     {
       auto iter = level->thing_find(id);
       if (iter && iter->is_activated) {
-        attacks = std::max(attacks, iter->attacks_per_round());
+        attacks = std::max(attacks, iter->dmg_num_of_attacks());
       }
     }
   }

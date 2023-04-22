@@ -32,7 +32,7 @@ int Thing::dmg_melee(Thingp victim)
   auto roll    = tp()->dmg_melee_dice().roll();
   auto enchant = enchant_count_get();
   roll         = weapon_dmg_modify(roll, victim);
-  dbg("Damage melee roll %s => roll %d + enchant %d", tp()->dmg_melee_dice_str().c_str(), roll, enchant);
+  dbg("Damage melee roll \"%s\" => roll %d + enchant %d", tp()->dmg_melee_dice_str().c_str(), roll, enchant);
   return roll + enchant;
 }
 

@@ -209,9 +209,10 @@ void Game::place_player(void)
         t->carry(r4);
       }
       if (0) {
-        auto w = level->thing_new("very_broadsword", point(x, y));
-        t->carry(w);
-        t->enchant_without_stone(w);
+        auto w = level->thing_new("very_broadsword", point(x + 3, y));
+        w->enchant_randomly();
+        // t->carry(w);
+        // t->enchant_without_stone(w);
       }
       if (0) {
         auto w = level->thing_new("sword_draining", point(x, y));
@@ -286,7 +287,7 @@ void Game::place_player(void)
         auto w = level->thing_new("map_beast", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_negation", point(x, y));
         t->carry(w);
       }

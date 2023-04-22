@@ -316,7 +316,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (real_hitter->is_player()) {
         if (is_player()) {
           msg("You are immune to poison!");
-        } else if (is_alive_monst()) {
+        } else if (is_item() || is_alive_monst()) {
           msg("%s is immune to poison damage!", text_The().c_str());
         }
       } else {
@@ -416,7 +416,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (real_hitter->is_player()) {
         if (is_player()) {
           msg("You are immune to cold!");
-        } else if (is_alive_monst()) {
+        } else if (is_item() || is_alive_monst()) {
           msg("%s is immune to cold damage!", text_The().c_str());
         } else {
           dbg("Takes no cold damage");
@@ -459,7 +459,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (real_hitter->is_player()) {
         if (is_player()) {
           msg("You are immune to fire!");
-        } else if (is_alive_monst()) {
+        } else if (is_item() || is_alive_monst()) {
           msg("%s is immune to fire damage!", text_The().c_str());
         } else {
           dbg("Is immune to fire damage");
@@ -520,7 +520,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (real_hitter->is_player()) {
         if (is_player()) {
           msg("You are immune to electrical damage!");
-        } else if (is_alive_monst()) {
+        } else if (is_item() || is_alive_monst()) {
           msg("%s is immune to electrical damage!", text_The().c_str());
         } else {
           dbg("Takes no electrical damage");
@@ -588,7 +588,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (real_hitter->is_player()) {
         if (is_player()) {
           msg("You are immune to negation damage!");
-        } else if (is_alive_monst()) {
+        } else if (is_item() || is_alive_monst()) {
           msg("%s is immune to negation damage!", text_The().c_str());
         } else {
           dbg("Takes no negation damage");
@@ -621,7 +621,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (real_hitter->is_player()) {
         if (is_player()) {
           msg("You are immune to acid damage!");
-        } else if (is_alive_monst()) {
+        } else if (is_item() || is_alive_monst()) {
           msg("%s is immune to acid damage!", text_The().c_str());
         } else {
           dbg("Is immune to acid damage");
@@ -660,7 +660,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (real_hitter->is_player()) {
         if (is_player()) {
           msg("You are immune to water damage!");
-        } else if (is_alive_monst()) {
+        } else if (is_item() || is_alive_monst()) {
           msg("%s is immune to water damage!", text_The().c_str());
         } else {
           dbg("Is immune to water damage");
@@ -720,7 +720,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (real_hitter->is_player()) {
         if (is_player()) {
           msg("You are immune to unpleasant!");
-        } else if (is_alive_monst()) {
+        } else if (is_item() || is_alive_monst()) {
           msg("%s is immune to unpleasant!", text_The().c_str());
         } else {
           dbg("Takes no unpleasant damage");
@@ -759,7 +759,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (real_hitter->is_player()) {
         if (is_player()) {
           msg("You are immune to draining!");
-        } else if (is_alive_monst()) {
+        } else if (is_item() || is_alive_monst()) {
           msg("%s is immune to draining attacks!", text_The().c_str());
         } else {
           dbg("Is immune to draining damage");
@@ -813,7 +813,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (real_hitter->is_player()) {
         if (is_player()) {
           msg("You are immune to heat!");
-        } else if (is_alive_monst()) {
+        } else if (is_item() || is_alive_monst()) {
           msg("%s is immune to heat damage!", text_The().c_str());
         } else {
           dbg("Is immune to heat damage");
@@ -1548,7 +1548,43 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (hitter->is_laser()) {
         real_hitter->msg("You zap %s.", text_the().c_str());
       } else if (hitter->is_magical() && hitter->is_item()) {
-        real_hitter->msg("You blast %s.", text_the().c_str());
+        if (attack_options->attack[ THING_ATTACK_POISON ]) {
+          real_hitter->msg("You magically poison %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+        } else if (attack_options->attack[ THING_ATTACK_BITE ]) {
+          real_hitter->msg("You magically bite %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+        } else if (attack_options->attack[ THING_ATTACK_CLAW ]) {
+          real_hitter->msg("You magically rake %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+        } else if (attack_options->attack[ THING_ATTACK_COLD ]) {
+          real_hitter->msg("You magically freeze %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+        } else if (attack_options->attack[ THING_ATTACK_FIRE ]) {
+          real_hitter->msg("You magically burn %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+        } else if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
+          real_hitter->msg("You magically crush %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+        } else if (attack_options->attack[ THING_ATTACK_LIGHTNING ]) {
+          real_hitter->msg("You magically zap %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+        } else if (attack_options->attack[ THING_ATTACK_ENERGY ]) {
+          real_hitter->msg("You magically blast %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+        } else if (attack_options->attack[ THING_ATTACK_NEGATION ]) {
+          real_hitter->msg("You magically blast %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+        } else if (attack_options->attack[ THING_ATTACK_ACID ]) {
+          real_hitter->msg("You magically dissolve %s for %d %sdamage.", text_the().c_str(), damage,
+                           dmg_type.c_str());
+        } else if (attack_options->attack[ THING_ATTACK_DIGEST ]) {
+          real_hitter->msg("You magically digest %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+        } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
+          real_hitter->msg("You magically rot %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+        } else if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
+          real_hitter->msg("You magically tire %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+        } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
+          real_hitter->msg("You magically drown %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+        } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
+          real_hitter->msg("You magically strike down %s for %d %sdamage.", text_the().c_str(), damage,
+                           dmg_type.c_str());
+        } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
+          real_hitter->msg("You magically burn %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+        } else {
+          real_hitter->msg("You blast %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+        }
       } else {
         real_hitter->msg("You hit %s.", text_the().c_str());
       }

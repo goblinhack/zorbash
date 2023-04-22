@@ -205,7 +205,6 @@ int Tp::attack_humanoid(void) const { return _attack_humanoid; }
 int Tp::attack_living(void) const { return _attack_living; }
 int Tp::attack_meat(void) const { return _attack_meat; }
 int Tp::attack_no_msg(void) const { return _attack_no_msg; }
-int Tp::attacks_per_round(void) const { return _attacks_per_round; }
 int Tp::attack_undead(void) const { return _attack_undead; }
 int Tp::blast_min_radius(void) const { return _blast_min_radius; }
 int Tp::blit_bot_off(void) const { return _blit_bot_off; }
@@ -253,6 +252,7 @@ int Tp::distance_minion_vision_shared(void) const { return _distance_minion_visi
 int Tp::distance_recruitment_max(void) const { return _distance_recruitment_max; }
 int Tp::distance_throw(void) const { return _distance_throw; }
 int Tp::distance_vision(void) const { return _distance_vision; }
+int Tp::dmg_num_of_attacks(void) const { return _dmg_num_of_attacks; }
 int Tp::dmg_received_doubled_from_acid(void) const { return _dmg_received_doubled_from_acid; }
 int Tp::dmg_received_doubled_from_cold(void) const { return _dmg_received_doubled_from_cold; }
 int Tp::dmg_received_doubled_from_fire(void) const { return _dmg_received_doubled_from_fire; }
@@ -947,7 +947,6 @@ void Tp::attack_humanoid_set(int v) { _attack_humanoid = v; }
 void Tp::attack_living_set(int v) { _attack_living = v; }
 void Tp::attack_meat_set(int v) { _attack_meat = v; }
 void Tp::attack_no_msg_set(int v) { _attack_no_msg = v; }
-void Tp::attacks_per_round_set(int v) { _attacks_per_round = v; }
 void Tp::attack_undead_set(int v) { _attack_undead = v; }
 void Tp::blast_min_radius_set(int v) { _blast_min_radius = v; }
 void Tp::blit_bot_off_set(int v) { _blit_bot_off = v; }
@@ -996,6 +995,7 @@ void Tp::distance_minion_vision_shared_set(int v) { _distance_minion_vision_shar
 void Tp::distance_recruitment_max_set(int v) { _distance_recruitment_max = v; }
 void Tp::distance_throw_set(int v) { _distance_throw = v; }
 void Tp::distance_vision_set(int v) { _distance_vision = v; }
+void Tp::dmg_num_of_attacks_set(int v) { _dmg_num_of_attacks = v; }
 void Tp::dmg_received_doubled_from_acid_set(int v) { _dmg_received_doubled_from_acid = v; }
 void Tp::dmg_received_doubled_from_cold_set(int v) { _dmg_received_doubled_from_cold = v; }
 void Tp::dmg_received_doubled_from_fire_set(int v) { _dmg_received_doubled_from_fire = v; }

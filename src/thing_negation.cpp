@@ -66,7 +66,7 @@ void Thing::negation_dmg(int dmg, bool &is_killed)
   //
   // The magical check avoids torches being drained
   //
-  if (is_magical()) {
+  if (is_magical() || is_weapon() || is_ring() || is_staff()) {
     if (enchant_count_get()) {
       //
       // If an enchanted item, remove one charge (or more)
@@ -87,6 +87,8 @@ void Thing::negation_dmg(int dmg, bool &is_killed)
           if (! owner->is_dying && ! owner->is_dying) {
             owner->msg("%s %s loses enchantment!", apostrophise(owner->text_The()).c_str(), text_long_name().c_str());
           }
+        } else if (is_item()) {
+          msg("%s loses enchantment!", text_The().c_str());
         }
       } else {
         if (owner && owner->is_player()) {
@@ -98,6 +100,8 @@ void Thing::negation_dmg(int dmg, bool &is_killed)
             owner->msg("%s %s is no longer enchanted!", apostrophise(owner->text_The()).c_str(),
                        text_long_name().c_str());
           }
+        } else if (is_item()) {
+          msg("%s is no longer enchanted!", text_The().c_str());
         }
       }
     } else if (charge_count()) {
@@ -117,6 +121,8 @@ void Thing::negation_dmg(int dmg, bool &is_killed)
           owner->msg("%s %s has no more charges!", apostrophise(owner->text_The()).c_str(), text_long_name().c_str());
           owner->drop(this);
         }
+      } else if (is_item()) {
+        msg("%s shakes!", text_The().c_str());
       }
     }
   }

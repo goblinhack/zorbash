@@ -994,7 +994,6 @@ public:
   int attack_no_msg(void);
   int attack_num_get(void);
   int attack_num_set(int);
-  int attacks_per_round(void);
   int attack_undead(void);
   int attack(void);
   int blast_min_radius(void);
@@ -1148,6 +1147,7 @@ public:
   int dmg_nat_att(Thingp victim = nullptr);
   int dmg_necrosis(Thingp victim = nullptr);
   int dmg_negation(Thingp victim = nullptr);
+  int dmg_num_of_attacks(void);
   int dmg_poison(Thingp victim = nullptr);
   int dmg_received_doubled_from_acid(void);
   int dmg_received_doubled_from_cold(void);

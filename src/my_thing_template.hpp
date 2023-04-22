@@ -120,7 +120,6 @@ private:
   int _attack_living {};
   int _attack_meat {};
   int _attack_no_msg {};
-  int _attacks_per_round {};
   int _attack_undead {};
   int _blast_min_radius {};
   int _blit_bot_off {};
@@ -170,6 +169,7 @@ private:
   int _distance_recruitment_max {};
   int _distance_throw {};
   int _distance_vision {};
+  int _dmg_num_of_attacks {};
   int _dmg_received_doubled_from_acid {};
   int _dmg_received_doubled_from_cold {};
   int _dmg_received_doubled_from_fire {};
@@ -1402,7 +1402,6 @@ public:
   int attack_living(void) const;
   int attack_meat(void) const;
   int attack_no_msg(void) const;
-  int attacks_per_round(void) const;
   int attack_undead(void) const;
   int blast_min_radius(void) const;
   int blit_bot_off(void) const;
@@ -1469,6 +1468,7 @@ public:
   int dmg_chance_d1000_negation(int index) const;
   int dmg_chance_d1000_poison(int index) const;
   int dmg_chance_d1000_water(int index) const;
+  int dmg_num_of_attacks(void) const;
   int dmg_received_doubled_from_acid(void) const;
   int dmg_received_doubled_from_cold(void) const;
   int dmg_received_doubled_from_fire(void) const;
@@ -2164,7 +2164,6 @@ public:
   void attack_living_set(int v);
   void attack_meat_set(int v);
   void attack_no_msg_set(int v);
-  void attacks_per_round_set(int v);
   void attack_undead_set(int v);
   void blast_min_radius_set(int v);
   void blit_bot_off_set(int v);
@@ -2213,6 +2212,7 @@ public:
   void distance_recruitment_max_set(int v);
   void distance_throw_set(int v);
   void distance_vision_set(int v);
+  void dmg_num_of_attacks_set(int v);
   void dmg_received_doubled_from_acid_set(int v);
   void dmg_received_doubled_from_cold_set(int v);
   void dmg_received_doubled_from_fire_set(int v);

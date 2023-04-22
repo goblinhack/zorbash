@@ -626,7 +626,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
   bool tried_to_attack = false;
   int  attack_count    = 0;
 
-  auto attacks = owner ? owner->attacks_per_round() : attacks_per_round();
+  auto attacks = owner ? owner->dmg_num_of_attacks() : dmg_num_of_attacks();
   dbg("Attack count #%d", attacks);
   TRACE_AND_INDENT();
 

@@ -27,12 +27,12 @@ def on_unequip(owner, me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.attacks_per_round(self, 2)
     my.chance_d10000_damaged(self, 5)
     my.dmg_chance_d1000_draining(self, 1, 1000)
     my.dmg_chance_d1000_melee(self, 0, 1000)
     my.dmg_draining_dice(self, "1d20")
     my.dmg_melee_dice(self, "1d8")
+    my.dmg_num_of_attacks(self, 2)
     my.equip_carry_anim(self, "sword_draining_carry")
     my.gfx_anim_use(self, "sword_draining_swing")
     my.gfx_ascii_fade_with_dist(self, True)
