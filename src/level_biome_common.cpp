@@ -265,6 +265,12 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
       if (biome != BIOME_CHASMS) {
         if (! is_chasm(x, y) && ! is_floor(x, y) && ! is_dirt(x, y) && ! is_corridor(x, y)) {
           auto tp = tp_random_dirt();
+          if (biome != BIOME_ICE) {
+            tp = tp_find("floor_ice1");
+          }
+          if (biome != BIOME_LAVA) {
+            tp = tp_find("floor_lava1");
+          }
           if (tp) {
             (void) thing_new(tp->name(), point(x, y));
           }

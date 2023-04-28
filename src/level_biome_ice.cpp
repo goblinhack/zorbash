@@ -144,6 +144,146 @@ bool Level::create_biome_ice(point3d at, uint32_t seed)
 
     {
       uint32_t start = time_ms();
+      dbg2("INF: Place random floors");
+      auto floor_type = 1;
+
+      int  nloops = 100;
+      auto s      = "floor_ice";
+
+      while (nloops--) {
+        auto tries = 20;
+        create_biome_ice_place_floors(dungeon, s, floor_type, 1, 6, 6, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 2, 6, 6, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 1, 6, 3, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 2, 6, 3, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 1, 3, 6, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 2, 3, 6, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 1, 3, 3, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 2, 3, 3, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 3, 3, 3, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 4, 3, 3, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 1, 2, 2, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 2, 2, 2, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 3, 2, 2, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 4, 2, 2, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 5, 2, 2, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 6, 2, 2, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 1, 2, 1, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 2, 2, 1, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 3, 2, 1, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 4, 2, 1, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 5, 2, 1, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 6, 2, 1, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 7, 2, 1, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 8, 2, 1, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 1, 1, 2, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 2, 1, 2, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 3, 1, 2, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, 4, 1, 2, tries);
+        if (g_errored) {
+          return false;
+        }
+        create_biome_ice_place_floors(dungeon, s, floor_type, pcg_random_range_inclusive(1, 38), 1, 1, tries);
+        if (g_errored) {
+          return false;
+        }
+      }
+
+      create_biome_ice_place_remaining_floor(dungeon, s + std::to_string(floor_type));
+      if (g_errored) {
+        return false;
+      }
+
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing the floor";
+      }
+    }
+
+    {
+      uint32_t start = time_ms();
       dbg2("INF: Place bridges");
       create_biome_ice_place_bridge(dungeon);
       if (g_errored) {
@@ -343,7 +483,7 @@ void Level::create_biome_ice_place_ice(Dungeonp d, const std::string &what)
       }
 
       if (d100() < 50) {
-        auto tp = tp_random_dirt();
+        auto tp = tp_find("floor_ice1");
         if (tp) {
           (void) thing_new(tp->name(), point(x, y));
         }
@@ -386,8 +526,8 @@ void Level::create_biome_ice_place_remaining_rocks(Dungeonp d)
         continue;
       }
 
-      if (! is_dirt(x, y)) {
-        auto tp = tp_random_dirt();
+      if (! is_floor(x, y)) {
+        auto tp = tp_find("floor_ice1");
         if (tp) {
           (void) thing_new(tp->name(), point(x, y));
         }
@@ -426,14 +566,14 @@ void Level::create_biome_ice_place_remaining_rocks(Dungeonp d)
         }
 
         if (d->is_wall(x, y)) {
-          if (d100() < 10) {
+          if (d100() < 50) {
             (void) thing_new("rock_ice", point(x, y));
             continue;
           }
         }
 
         if (d->is_rock(x, y)) {
-          (void) thing_new("rock_ice", point(x, y));
+          (void) thing_new("block_of_ice", point(x, y));
           continue;
         }
       }
@@ -467,6 +607,162 @@ void Level::create_biome_ice_place_bridge(Dungeonp d)
           (void) thing_new("bridge_lr", point(x, y));
           continue;
         }
+      }
+    }
+  }
+}
+
+void Level::create_biome_ice_place_remaining_floor(Dungeonp d, const std::string &what)
+{
+  TRACE_AND_INDENT();
+  for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
+    for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
+      if (! d->is_floor(x, y)) {
+        continue;
+      }
+
+      if (is_floor(x, y)) {
+        continue;
+      }
+
+      //
+      // Place bridges instead of floor, if we have multiple bridge
+      // neighbors. This allows items to be placed on bridges.
+      //
+      auto bridge_count = 0;
+      bridge_count += d->is_bridge(x - 1, y);
+      bridge_count += d->is_bridge(x + 1, y);
+      bridge_count += d->is_bridge(x, y - 1);
+      bridge_count += d->is_bridge(x, y + 1);
+
+      if (bridge_count > 1) {
+        if (bridge_count > 2) {
+          (void) thing_new("bridge_x", point(x, y));
+          continue;
+        }
+
+        if (d->is_bridge(x, y - 1) || d->is_bridge(x, y + 1)) {
+          (void) thing_new("bridge_ud", point(x, y));
+          continue;
+        }
+
+        if (d->is_bridge(x - 1, y) || d->is_bridge(x + 1, y)) {
+          (void) thing_new("bridge_lr", point(x, y));
+          continue;
+        }
+      }
+
+      thing_new(what, point(x, y));
+    }
+  }
+}
+
+void Level::create_biome_ice_place_floors(Dungeonp d, std::string what, int floor_type, int variant, int block_width,
+                                          int block_height, int tries)
+{
+  TRACE_AND_INDENT();
+  while (tries-- > 0) {
+    auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK - block_width + 1);
+    auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK - block_height + 1);
+
+    //
+    // Place bridges instead of floor, if we have multiple bridge
+    // neighbors. This allows items to be placed on bridges.
+    //
+    auto bridge_count = 0;
+    if ((block_width == 1) && (block_height == 1)) {
+      bridge_count += d->is_bridge(x - 1, y);
+      bridge_count += d->is_bridge(x + 1, y);
+      bridge_count += d->is_bridge(x, y - 1);
+      bridge_count += d->is_bridge(x, y + 1);
+    }
+
+    auto can_place_here = true;
+    for (auto dx = 0; dx < block_width; dx++) {
+      auto X = x + dx;
+      for (auto dy = 0; dy < block_height; dy++) {
+        auto Y = y + dy;
+
+        if (d->is_oob(X, Y)) {
+          continue;
+        }
+
+        if (! d->is_floor(X, Y) && ! d->is_corridor(X, Y)) {
+          can_place_here = false;
+          break;
+        }
+
+        if (is_floor(x, y) || is_corridor(x, y)) {
+          can_place_here = false;
+          continue;
+        }
+
+        //
+        // We place large blocks and avoid splatting them with
+        // smaller ones here.
+        //
+        if (is_floor(X, Y) || is_corridor(X, Y)) {
+          can_place_here = false;
+          continue;
+        }
+      }
+
+      if (! can_place_here) {
+        break;
+      }
+    }
+
+    if (! can_place_here) {
+      continue;
+    }
+
+    if (bridge_count > 1) {
+      if ((block_width == 1) && (block_height == 1)) {
+        if (bridge_count > 2) {
+          (void) thing_new("bridge_x", point(x, y));
+          continue;
+        }
+
+        if (d->is_bridge(x, y - 1) || d->is_bridge(x, y + 1)) {
+          (void) thing_new("bridge_ud", point(x, y));
+          continue;
+        }
+
+        if (d->is_bridge(x - 1, y) || d->is_bridge(x + 1, y)) {
+          (void) thing_new("bridge_lr", point(x, y));
+          continue;
+        }
+      }
+    }
+
+    auto cnt = 1;
+    for (auto dy = 0; dy < block_height; dy++) {
+      auto Y = y + dy;
+      for (auto dx = 0; dx < block_width; dx++) {
+        auto X = x + dx;
+
+        auto new_thing = what + std::to_string(floor_type);
+        auto tilename  = new_thing + ".";
+
+        tilename += std::to_string(variant);
+        if (! ((block_width == 1) && (block_height == 1))) {
+          tilename += ".";
+          tilename += std::to_string(block_width);
+          tilename += "x";
+          tilename += std::to_string(block_height);
+          tilename += ".";
+          tilename += std::to_string(cnt);
+          cnt++;
+        }
+
+        auto t    = thing_new(new_thing, point(X, Y));
+        auto tile = tile_find(tilename);
+        if (unlikely(! tile)) {
+          ERR("Floor tile %s not found", tilename.c_str());
+          return;
+        }
+
+        t->tile_curr = tile->global_index;
       }
     }
   }

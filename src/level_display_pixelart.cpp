@@ -477,7 +477,7 @@ void Level::display_pixelart_map_all(void)
       case BIOME_DUNGEON: glcolor(GRAY50); break;
       case BIOME_SWAMP: glcolor(GRAY10); break;
       case BIOME_SEWER: glcolor(GRAY10); break;
-      case BIOME_ICE: glcolor(CYAN); break;
+      case BIOME_ICE: glcolor(BLUE); break;
       case BIOME_CHASMS:
         //
         // Looks more ominous

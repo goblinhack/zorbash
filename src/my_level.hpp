@@ -964,6 +964,8 @@ public:
   void create_biome_chasms_place_bridge(Dungeonp d);
   void create_biome_chasms_place_chasm(Dungeonp d, const std::string &what);
   void create_biome_chasms_place_floors(Dungeonp d, const std::string, int depth, int var, int w, int h, int tries);
+  void create_biome_ice_place_floors(Dungeonp d, const std::string, int depth, int var, int w, int h, int tries);
+  void create_biome_ice_place_remaining_floor(Dungeonp d, const std::string &what);
   void create_biome_chasms_place_remaining_floor(Dungeonp d, const std::string &what);
   void create_biome_dungeon_place_braziers(Dungeonp d, const std::string &what);
   void create_biome_dungeon_place_bridge(Dungeonp d);
