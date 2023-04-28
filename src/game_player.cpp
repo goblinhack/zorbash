@@ -15,7 +15,7 @@ void Game::place_player(void)
     return;
   }
 
-  CON("INF: Place player");
+  DBG("Place player");
 
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
@@ -26,7 +26,6 @@ void Game::place_player(void)
       if (! level->is_ascend_dungeon(x, y)) {
         continue;
       }
-      CON("INF: Placed player");
 
       auto t = level->thing_new("player2", point(x, y));
       if (0) {
@@ -613,4 +612,6 @@ done:
 
     game->player_is_ready_for_messages = true;
   }
+
+  DBG("Placed player");
 }
