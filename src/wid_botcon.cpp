@@ -7,7 +7,7 @@
 #include "my_ui.hpp"
 #include "my_wid.hpp"
 #include "my_wid_botcon.hpp"
-// REMOVED #include <algorithm> // for std::reverse()
+#include <algorithm> // for std::reverse() // do not remove
 
 static void wid_botcon_wid_create(void);
 
