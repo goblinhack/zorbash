@@ -5,15 +5,6 @@
 #include "my_game.hpp"
 #include "my_globals_extra.hpp"
 #include "my_random_name.hpp"
-// REMOVED #include "my_wid_actionbar.hpp"
-// REMOVED #include "my_wid_asciimap.hpp"
-// REMOVED #include "my_wid_botcon.hpp"
-// REMOVED #include "my_wid_inventory.hpp"
-// REMOVED #include "my_wid_leftbar.hpp"
-// REMOVED #include "my_wid_rightbar.hpp"
-// REMOVED #include "my_wid_skillbox.hpp"
-// REMOVED #include "my_wid_thing_info.hpp"
-// REMOVED #include "my_wid_topcon.hpp"
 
 void Game::pre_init(void)
 {

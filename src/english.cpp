@@ -2,7 +2,6 @@
 // Some of this is borrowed from "crawl"
 //
 
-// REMOVED #include "my_english.hpp"
 #include "my_string.hpp"
 
 bool starts_with(const std::string &s, const std::string &prefix) { return s.compare(0, prefix.size(), prefix) == 0; }

@@ -2,7 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include "my_sys.hpp"
 #include "my_thing_template.hpp"
 
 //

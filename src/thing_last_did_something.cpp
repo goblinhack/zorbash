@@ -2,11 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include "my_array_bounds_check.hpp"
-// REMOVED #include "my_game.hpp"
-// REMOVED #include "my_globals_extra.hpp"
 #include "my_monst.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
 ////////////////////////////////////////////////////////////////////////////

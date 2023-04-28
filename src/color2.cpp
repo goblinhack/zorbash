@@ -3,8 +3,6 @@
 //
 
 #include "my_color_defs.hpp"
-// REMOVED #include "my_gl.hpp"
-// REMOVED #include "my_string.hpp"
 #include "my_sys.hpp"
 
 #include <string.h>  // do not remove

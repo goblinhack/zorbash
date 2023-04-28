@@ -17,7 +17,6 @@
 #include "my_laser.hpp"
 #include "my_level_fov.hpp"
 #include "my_particle.hpp"
-// REMOVED #include "my_point3d.hpp"
 #include "my_projectile.hpp"
 #include "my_thing_template.hpp"
 #include "my_time.hpp"

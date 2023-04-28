@@ -4,14 +4,10 @@
 
 #include "my_backtrace.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_globals.hpp"
 #include "my_globals_extra.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include <signal.h>  // dirname
 #include <string.h>  // do not remove
 #include <strings.h> // do not remove
 #include <time.h>    // do not remove
-// REMOVED #include <unistd.h>  // do not remove
 
 void callstack_dump(void)
 {
@@ -35,20 +31,14 @@ void callstack_dump(void)
 #ifdef ENABLE_CRASH_HANDLER
 
 #include <assert.h>
-// REMOVED #include <iostream>
-// REMOVED #include <stdio.h>
-// REMOVED #include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
 
 #if defined(__linux__)
-// REMOVED #include <linux/limits.h>
 #include <sys/prctl.h>
 #endif
 
 #ifdef __APPLE__
-// REMOVED #include <mach-o/dyld.h>
-// REMOVED #include <sys/syslimits.h> // PATH_MAX
 #endif
 
 #ifndef PATH_MAX

@@ -3,7 +3,6 @@
 //
 
 #include "my_array_bounds_check.hpp"
-// REMOVED #include "my_biomes.hpp"
 #include "my_world.hpp"
 
 void World::clear(void)

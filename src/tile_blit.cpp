@@ -2,15 +2,8 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include "my_array_bounds_check.hpp"
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_pixel.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
-// REMOVED #include "my_sdl_proto.hpp"
-// REMOVED #include "my_string.hpp"
-// REMOVED #include "my_template.hpp"
-// REMOVED #include "my_tex.hpp"
 
 //
 // Blits a whole tile.

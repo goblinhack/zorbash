@@ -2,7 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include "my_point.hpp"
 #include "my_point3d.hpp"
 
 template < typename T > my_apoint3d< T > operator+(my_apoint3d< T > const &a, my_apoint3d< T > const &b)

@@ -4,7 +4,6 @@
 
 #include "my_dungeon.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_main.hpp"
 
 void run_tests()
 {

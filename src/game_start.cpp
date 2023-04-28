@@ -3,8 +3,6 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_globals_extra.hpp"
-// REMOVED #include "my_random_name.hpp"
 #include "my_wid_actionbar.hpp"
 #include "my_wid_asciimap.hpp"
 #include "my_wid_botcon.hpp"

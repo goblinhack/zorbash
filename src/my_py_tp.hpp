@@ -5,7 +5,6 @@
 #pragma once
 #ifndef _MY_PY_TP_HPP_
 #define _MY_PY_TP_HPP_
-// REMOVED #include <Python.h>
 
 PyObject *if_matches_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *if_matches_then_dead_(PyObject *obj, PyObject *args, PyObject *keywds);

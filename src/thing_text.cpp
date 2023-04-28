@@ -7,7 +7,6 @@
 #include "my_ptrcheck.hpp"
 #include "my_sdl_proto.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_ui.hpp"
 
 std::string Thing::text_a_or_an(size_t max_len)
 {

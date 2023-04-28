@@ -4,8 +4,6 @@
 
 #include "my_color_defs.hpp"
 #include "my_fcolor.hpp"
-// REMOVED #include "my_gl.hpp"
-// REMOVED #include "my_string.hpp"
 #include "my_sys.hpp"
 
 #include <string.h>  // do not remove

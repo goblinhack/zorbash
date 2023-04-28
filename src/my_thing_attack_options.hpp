@@ -6,9 +6,6 @@
 #ifndef _MY_THING_ATTACK_OPTIONS_HPP_
 #define _MY_THING_ATTACK_OPTIONS_HPP_
 
-// REMOVED #include "my_fwd.hpp"
-// REMOVED #include "my_point.hpp"
-// REMOVED #include <string>
 
 #define FOR_ALL_ATTACK_TYPES(_attack_) for (auto _attack_ = 0; _attack_ < THING_ATTACK_MAX; _attack_++)
 

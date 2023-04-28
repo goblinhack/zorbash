@@ -12,7 +12,6 @@
 #include "my_fwd.hpp"
 #include "my_game_defs.hpp"
 #include "my_main.hpp"
-// REMOVED #include "my_point.hpp"
 
 using Rooms = std::vector< Roomp >;
 
