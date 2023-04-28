@@ -11,7 +11,7 @@
 #endif
 #include <cxxabi.h>
 #ifdef HAVE_LIBUNWIND
-// REMOVED #include <libunwind.h>
+#include <libunwind.h> // do not remove
 #endif
 #include <memory>
 

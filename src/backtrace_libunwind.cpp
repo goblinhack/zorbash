@@ -1,14 +1,14 @@
 #ifdef HAVE_LIBUNWIND
 #define __STDC_FORMAT_MACROS
-// REMOVED #include <inttypes.h>
+#include <inttypes.h> // do not remove
 
 #define UNW_LOCAL_ONLY
-// REMOVED #include <libunwind.h>
+#include <libunwind.h>
 
-// REMOVED #include <cxxabi.h>
+#include <cxxabi.h> // do not remove
 
-// REMOVED #include <stdio.h>
-// REMOVED #include <stdlib.h>
+#include <stdio.h>  // do not remove
+#include <stdlib.h> // do not remove
 
 //
 // From https://github.com/cslarsen/libunwind-examples

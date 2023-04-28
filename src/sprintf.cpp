@@ -3,12 +3,12 @@
 //
 
 #include "my_sprintf.hpp"
-// REMOVED #include <stdarg.h>
+#include <stdarg.h> // do not remove
 
 // https://stackoverflow.com/questions/40159892/using-asprintf-on-windows
-// REMOVED #include <stdarg.h> /* needed for va_list */
-// REMOVED #include <stdio.h>  /* needed for vsnprintf */
-// REMOVED #include <stdlib.h> /* needed for malloc-free */
+#include <stdarg.h> /* needed for va_list */     // do not remove
+#include <stdio.h> /* needed for vsnprintf */    // do not remove
+#include <stdlib.h> /* needed for malloc-free */ // do not remove
 
 #ifndef _vscprintf
 /* For some reason, MSVC fails to honour this #ifndef. */
