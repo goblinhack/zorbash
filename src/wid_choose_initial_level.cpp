@@ -406,6 +406,12 @@ static void wid_choose_initial_dungeons_create_level_at(wid_choose_initial_dunge
 
   ctx->levels[ y ][ x ] = l;
 
+  if (g_opt_test_level_start_depth != -1) {
+    game->level         = l;
+    game->current_level = level_at;
+    l->is_first_level   = true;
+  }
+
   if (node->is_ascend_dungeon) {
     game->level         = l;
     game->current_level = level_at;
@@ -553,7 +559,7 @@ static void wid_choose_initial_dungeons_tick(Widp w)
     //
     // For quick start we only create one level
     //
-    if (g_opt_quickstart) {
+    if (g_opt_test_level_start) {
       for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
         for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
           Widp b = ctx->buttons[ y ][ x ];
@@ -562,13 +568,26 @@ static void wid_choose_initial_dungeons_tick(Widp w)
           }
 
           auto node = ctx->nodes->getn(x, y);
-          if (! node->is_ascend_dungeon) {
-            continue;
+
+          if (g_opt_test_level_start_depth != -1) {
+            //
+            // Allow the user to choose the start level for testing
+            //
+            if (node->walk_order_level_no != g_opt_test_level_start_depth) {
+              continue;
+            }
+          } else {
+            //
+            // Just choose the first level
+            //
+            if (! node->is_ascend_dungeon) {
+              continue;
+            }
           }
 
           wid_choose_initial_dungeons_create_level_at(ctx, x, y);
           ctx->generating       = true;
-          ctx->generating_level = 1;
+          ctx->generating_level = node->walk_order_level_no;
           ctx->generated        = true;
           wid_choose_initial_dungeons_enter(w, 0, 0, 0);
           return;
@@ -1706,7 +1725,7 @@ void Game::wid_choose_initial_dungeons(void)
     }
   }
 
-  if (! g_opt_quickstart) {
+  if (! g_opt_test_level_start) {
     wid_choose_initial_dungeons_update_buttons(window);
     wid_update(window);
     wid_raise(window);

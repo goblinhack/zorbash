@@ -156,7 +156,7 @@ Tpp Level::get_biome_swamp_random_monst(Dungeonp d, point p, monst_environ_t mon
     return nullptr;
   }
 
-  return get_random_monst(p, monst_environ, monst_class);
+  return get_random_monst(p, monst_environ, monst_class, 0);
 }
 
 Tpp Level::get_biome_lava_random_monst(Dungeonp d, point p, monst_environ_t monst_environ)
@@ -177,7 +177,7 @@ Tpp Level::get_biome_lava_random_monst(Dungeonp d, point p, monst_environ_t mons
     return nullptr;
   }
 
-  return get_random_monst(p, monst_environ, monst_class);
+  return get_random_monst(p, monst_environ, monst_class, 0);
 }
 
 Tpp Level::get_biome_ice_random_monst(Dungeonp d, point p, monst_environ_t monst_environ)
@@ -198,7 +198,7 @@ Tpp Level::get_biome_ice_random_monst(Dungeonp d, point p, monst_environ_t monst
     return nullptr;
   }
 
-  return get_random_monst(p, monst_environ, monst_class);
+  return get_random_monst(p, monst_environ, monst_class, 0);
 }
 
 Tpp Level::get_biome_sewer_random_monst(point p, monst_environ_t monst_environ)

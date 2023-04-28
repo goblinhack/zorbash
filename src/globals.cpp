@@ -26,21 +26,21 @@ bool g_main_loop_running;        // SDL main loop running.
 bool g_need_restart;             // Need to restart game
 bool g_opt_ascii;                // Ascii mode
 bool g_opt_ascii_override;       // Ascii mode forced
-bool g_opt_new_game;             // Start in the dungeon menu
+bool g_opt_biome_chasms;         // Select this biome
+bool g_opt_biome_ice;            // Select this biome
+bool g_opt_biome_lava;           // Select this biome
+bool g_opt_biome_swamp;          // Select this biome
 bool g_opt_no_slow_log_flush;    // Do not flush after each console log at start
 bool g_opt_override_debug_level; // Temporary used to disable debugs on load
-bool g_opt_quickstart;           // Start in the game imediately
 bool g_opt_resume;               // Load last snapshot
-bool g_opt_test_save_load;       // Enable save load tests
 bool g_opt_test_dungeon_gen;     // Enable dungeon tests
+bool g_opt_test_level_start;     // Start in the game immediately
 bool g_opt_tests;                // Any test enabled?
+bool g_opt_test_save_load;       // Enable save load tests
+bool g_opt_test_skip_main_menu;  // Start in the dungeon menu
 bool g_quitting;                 // Exitting the game
 bool g_render_black_and_white;   // Rendering map in black and white
 bool g_saved_snapshot;           // Just saved a snapshot
-bool g_opt_biome_swamp;          // Select this biome
-bool g_opt_biome_ice;            // Select this biome
-bool g_opt_biome_lava;           // Select this biome
-bool g_opt_biome_chasms;         // Select this biome
 
 // --debug  Basic debug
 // --debug2 Map is visible and memory checks enabled
@@ -48,6 +48,8 @@ bool g_opt_biome_chasms;         // Select this biome
 bool g_opt_debug1; // Basic debug
 bool g_opt_debug2; // As above but includes log indentation and more detailed debugs
 bool g_opt_debug3; // As above but show the entire level
+
+int g_opt_test_level_start_depth = -1;
 
 std::string g_opt_seed_name;
 std::string g_opt_player_name;

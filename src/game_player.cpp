@@ -15,13 +15,19 @@ void Game::place_player(void)
     return;
   }
 
-  DBG("INF: Place player");
+  CON("INF: Place player");
 
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
+
+      //
+      // Place the player at the ascend exit
+      //
       if (! level->is_ascend_dungeon(x, y)) {
         continue;
       }
+      CON("INF: Placed player");
+
       auto t = level->thing_new("player2", point(x, y));
       if (0) {
         auto k = level->thing_new("key", point(x, y));
@@ -574,9 +580,12 @@ void Game::place_player(void)
       level->scroll_map_to_player();
 
       DBG("INF: Placed player");
+
+      goto done;
     }
   }
 
+done:
   level->ts_fade_in_begin = time_ms_cached();
   level->ts_redraw_bg     = 1; // Force redraw
 

@@ -484,7 +484,6 @@ static void usage(void)
   CON(" --player-name 'disco bob'   -- Set your name.");
   CON(" --seed <name/number>        -- Set the random dungeon seed.");
   CON(" ");
-  CON(" --quick-start               -- Skip menus, start the game.");
   CON(" --resume                    -- Load last snapshot.");
   CON(" ");
   CON(" --debug                     -- Basic debug.");
@@ -494,6 +493,8 @@ static void usage(void)
   CON(" ");
   CON(" --test-dungeon-gen          -- Generate lots of dungeons to check for errors");
   CON(" --test-save-load            -- Testing level save and load");
+  CON(" --test-start                -- Skip menus, start the game at a test level.");
+  CON(" --test-depth <number>            -- Set the level depth for testing");
   CON(" ");
   CON("Written by goblinhack@gmail.com");
 }
@@ -548,15 +549,22 @@ static void parse_args(int argc, char *argv[])
       continue;
     }
 
-    if (! strcasecmp(argv[ i ], "--quick-start") || ! strcasecmp(argv[ i ], "-quick-start") ||
-        ! strcasecmp(argv[ i ], "--quickstart") || ! strcasecmp(argv[ i ], "-quickstart")) {
-      g_opt_quickstart = true;
-      g_opt_new_game   = true;
+    if (! strcasecmp(argv[ i ], "--resume") || ! strcasecmp(argv[ i ], "-resume")) {
+      g_opt_resume = true;
       continue;
     }
 
-    if (! strcasecmp(argv[ i ], "--resume") || ! strcasecmp(argv[ i ], "-resume")) {
-      g_opt_resume = true;
+    if (! strcasecmp(argv[ i ], "--test-start") || ! strcasecmp(argv[ i ], "-test-start")) {
+      g_opt_test_level_start    = true;
+      g_opt_test_skip_main_menu = true;
+      continue;
+    }
+
+    if (! strcasecmp(argv[ i ], "--test-depth") || ! strcasecmp(argv[ i ], "-test-depth")) {
+      g_opt_test_level_start    = true;
+      g_opt_test_skip_main_menu = true;
+      g_opt_test_level_start_depth               = std::stoi(argv[ i + 1 ]);
+      i++;
       continue;
     }
 
@@ -572,7 +580,7 @@ static void parse_args(int argc, char *argv[])
       continue;
     }
 
-    if (! strcasecmp(argv[ i ], "--seed") || ! strcasecmp(argv[ i ], "-seed") || ! strcasecmp(argv[ i ], "-s")) {
+    if (! strcasecmp(argv[ i ], "--seed") || ! strcasecmp(argv[ i ], "-seed")) {
       g_opt_seed_name = argv[ i + 1 ];
       i++;
       continue;
@@ -928,7 +936,7 @@ int main(int argc, char *argv[])
     //
     // Main menu
     //
-    if (g_opt_new_game) {
+    if (g_opt_test_skip_main_menu) {
       CON("INI: New game");
       game->new_game();
     } else {

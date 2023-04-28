@@ -23,21 +23,21 @@ extern bool g_main_loop_running;        // SDL main loop is running.
 extern bool g_need_restart;             // Need to restart game
 extern bool g_opt_ascii;                // Ascii mode
 extern bool g_opt_ascii_override;       // Ascii mode forced
-extern bool g_opt_new_game;             // Start in the dungeon menu
+extern bool g_opt_biome_chasms;         // Select this biome
+extern bool g_opt_biome_ice;            // Select this biome
+extern bool g_opt_biome_lava;           // Select this biome
+extern bool g_opt_biome_swamp;          // Select this biome
 extern bool g_opt_no_slow_log_flush;    // Do not flush after each console log at start
 extern bool g_opt_override_debug_level; // Temporary, used to disable existing debugs
-extern bool g_opt_quickstart;           // Start in the game imediately
 extern bool g_opt_resume;               // Load last snapshot
+extern bool g_opt_test_dungeon_gen;     // Enable dungeon tests
+extern bool g_opt_test_level_start;     // Start in the game immediately
 extern bool g_opt_tests;                // Any test enabled?
 extern bool g_opt_test_save_load;       // Enable save load tests
-extern bool g_opt_test_dungeon_gen;     // Enable dungeon tests
+extern bool g_opt_test_skip_main_menu;  // Start in the dungeon menu
 extern bool g_quitting;                 // Exitting the game
 extern bool g_render_black_and_white;   // Rendering map in black and white
 extern bool g_saved_snapshot;           // Just saved a snapshot
-extern bool g_opt_biome_swamp;          // Select this biome
-extern bool g_opt_biome_ice;            // Select this biome
-extern bool g_opt_biome_lava;           // Select this biome
-extern bool g_opt_biome_chasms;         // Select this biome
 
 // --debug  Basic debug
 // --debug2 Map is visible and memory checks enabled
