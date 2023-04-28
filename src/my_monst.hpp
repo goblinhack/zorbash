@@ -6,7 +6,7 @@
 #ifndef _MY_MONST_HPP_
 #define _MY_MONST_HPP_
 
-#include <array> // do not remove
+// REMOVED #include <array> // do not remove
 #include <list>
 #include <map>
 

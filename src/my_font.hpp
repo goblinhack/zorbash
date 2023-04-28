@@ -7,7 +7,7 @@
 #define _MY_FONT_HPP_
 
 #include "my_fwd.hpp"
-#include <array>
+// REMOVED #include <array>
 
 extern Fontp font_pixelart_small;
 extern Fontp font_pixelart_large;

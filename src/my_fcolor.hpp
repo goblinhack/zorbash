@@ -6,7 +6,7 @@
 #ifndef _MY_FCOLOR_HPP_
 #define _MY_FCOLOR_HPP_
 
-#include "my_color.hpp"
+// REMOVED #include "my_color.hpp"
 
 //
 // As above, but integer based so we can go beyond 255 when adding light sources, but of course we need to average out

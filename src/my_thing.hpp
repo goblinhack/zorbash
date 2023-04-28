@@ -12,7 +12,7 @@
 #include "my_color.hpp"
 #include "my_dice.hpp"
 #include "my_fwd.hpp"
-#include "my_point.hpp"
+// REMOVED #include "my_point.hpp"
 #include "my_point3d.hpp"
 #include "my_thing_ai.hpp"
 #include "my_thing_defs.hpp"
