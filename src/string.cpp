@@ -1266,7 +1266,7 @@ int snprintf_realloc(char **str, int *size, int *used, const char *fmt, ...)
       *used = 0;
     }
 
-    *str = (char *) mymalloc(*size, "sprintf alloc");
+    *str = (char *) mymalloc(*size, "snprintf alloc");
     if (! *str) {
       *size = 0;
       return (-1);
@@ -1303,7 +1303,7 @@ int snprintf_realloc(char **str, int *size, int *used, const char *fmt, ...)
 
     (*size) *= 2;
 
-    tmp = (char *) myrealloc(*str, *size, "sprintf realloc");
+    tmp = (char *) myrealloc(*str, *size, "snprintf realloc");
     if (! tmp) {
       free(*str);
       *str  = nullptr;
