@@ -4,7 +4,7 @@
 
 #include "my_game.hpp"
 #include "my_thing.hpp"
-#include "my_tile.hpp"
+// REMOVED #include "my_tile.hpp"
 
 Projectile_::Projectile_(Levelp level, ThingId thing_id, ThingId victim_id, ProjectileInfo info)
     : id(thing_id), victim_id(victim_id), info(info)

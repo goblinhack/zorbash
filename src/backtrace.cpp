@@ -3,15 +3,15 @@
 //
 
 #include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
+// REMOVED // REMOVED #include <stdio.h>
+// REMOVED // REMOVED #include <stdlib.h>
 #include <string.h>
 #ifndef _WIN32
 #include <execinfo.h>
 #endif
 #include <cxxabi.h>
 #ifdef HAVE_LIBUNWIND
-#include <libunwind.h>
+// REMOVED #include <libunwind.h>
 #endif
 #include <memory>
 
@@ -20,7 +20,7 @@
 #include "my_globals_extra.hpp"
 #include "my_main.hpp"
 #include "my_sprintf.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sys.hpp"
 
 void Backtrace::init(void)
 {
@@ -270,17 +270,17 @@ void backtrace_dump(void)
 }
 
 #ifdef _WIN32
-#include <binutils/bfd.h>
-#include <dbghelp.h>
-#include <excpt.h>
-#include <imagehlp.h>
-#include <psapi.h>
-#include <stdarg.h>
-#include <stdbool.h>
+// REMOVED #include <binutils/bfd.h>
+// REMOVED #include <dbghelp.h>
+// REMOVED #include <excpt.h>
+// REMOVED #include <imagehlp.h>
+// REMOVED #include <psapi.h>
+// REMOVED #include <stdarg.h>
+// REMOVED #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <windows.h>
+// REMOVED #include <windows.h>
 
 #define MAX_SYMBOL_LEN 1024
 

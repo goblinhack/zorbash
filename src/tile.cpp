@@ -3,11 +3,11 @@
 //
 
 #include "my_array_bounds_check.hpp"
-#include "my_color_defs.hpp"
+// REMOVED #include "my_color_defs.hpp"
 #include "my_game.hpp"
 #include "my_pixel.hpp"
 #include "my_ptrcheck.hpp"
-#include "my_sdl_proto.hpp"
+// REMOVED #include "my_sdl_proto.hpp"
 #include "my_string.hpp"
 #include "my_template.hpp"
 #include "my_tex.hpp"

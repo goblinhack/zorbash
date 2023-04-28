@@ -4,7 +4,7 @@
 
 #include "my_string.hpp"
 #include <iomanip>
-#include <iostream>
+// REMOVED #include <iostream>
 #include <string.h>  // do not remove
 #include <strings.h> // do not remove
 

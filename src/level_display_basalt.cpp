@@ -4,7 +4,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_color_defs.hpp"
-#include "my_enums.hpp"
+// REMOVED #include "my_enums.hpp"
 #include "my_game.hpp"
 #include "my_thing.hpp"
 

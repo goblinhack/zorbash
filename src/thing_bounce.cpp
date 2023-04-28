@@ -3,14 +3,14 @@
 //
 
 #include "my_array_bounds_check.hpp"
-#include "my_enums.hpp"
+// REMOVED #include "my_enums.hpp"
 #include "my_game.hpp"
-#include "my_level.hpp"
+// REMOVED #include "my_level.hpp"
 #include "my_math.hpp"
 #include "my_monst.hpp"
 #include "my_thing.hpp"
 
-#include <math.h>
+// REMOVED #include <math.h>
 
 bool Thing::bounce(float bounce_height, float bounce_fade, ts_t ms, int bounce_count)
 {

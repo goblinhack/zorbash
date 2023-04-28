@@ -5,7 +5,7 @@
 #include "my_game.hpp"
 #include "my_python.hpp"
 #include "my_thing.hpp"
-#include "my_thing_attack_options.hpp"
+// REMOVED #include "my_thing_attack_options.hpp"
 
 static int NO_VALUE = -99999;
 

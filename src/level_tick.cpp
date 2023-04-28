@@ -2,7 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_enums.hpp"
+// REMOVED #include "my_enums.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_player.hpp"

@@ -2,12 +2,12 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include <SDL.h>
+// REMOVED #include <SDL.h>
 #include <ctime>
 
 #include "my_game.hpp"
 #include "my_string.hpp"
-#include "my_time.hpp"
+// REMOVED #include "my_time.hpp"
 
 //
 // This is the actual time

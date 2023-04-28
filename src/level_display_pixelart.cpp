@@ -4,11 +4,11 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_color_defs.hpp"
-#include "my_enums.hpp"
+// REMOVED #include "my_enums.hpp"
 #include "my_game.hpp"
 #include "my_sdl_proto.hpp"
 #include "my_thing.hpp"
-#include "my_ui.hpp"
+// REMOVED #include "my_ui.hpp"
 
 void Level::display_pixelart_map(void)
 {

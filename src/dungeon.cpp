@@ -8,7 +8,7 @@
 #include "my_dungeon.hpp"
 #include "my_level_static.hpp"
 #include "my_room.hpp"
-#include "my_sdl_proto.hpp"
+// REMOVED #include "my_sdl_proto.hpp"
 #include "my_template.hpp"
 #include "my_vector_bounds_check.hpp"
 

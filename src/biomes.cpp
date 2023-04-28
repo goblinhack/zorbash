@@ -5,9 +5,9 @@
 #include "my_biomes.hpp"
 #include "my_callstack.hpp"
 #include "my_color_defs.hpp"
-#include "my_globals.hpp"
-#include "my_main.hpp"
-#include "my_ui.hpp"
+// REMOVED #include "my_globals.hpp"
+// REMOVED #include "my_main.hpp"
+// REMOVED #include "my_ui.hpp"
 
 biome_t get_biome(point3d world_at, int difficulty_depth)
 {

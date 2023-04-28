@@ -3,7 +3,7 @@
 //
 
 #include "my_level.hpp"
-#include "my_monst.hpp"
+// REMOVED #include "my_monst.hpp"
 #include "my_thing.hpp"
 
 void Thing::invisible_tick(void) { is_currently_invisible = is_invisible(); }
