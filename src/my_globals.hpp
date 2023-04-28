@@ -23,10 +23,10 @@ extern bool g_main_loop_running;        // SDL main loop is running.
 extern bool g_need_restart;             // Need to restart game
 extern bool g_opt_ascii;                // Ascii mode
 extern bool g_opt_ascii_override;       // Ascii mode forced
-extern bool g_opt_biome_chasms;         // Select this biome
-extern bool g_opt_biome_ice;            // Select this biome
-extern bool g_opt_biome_lava;           // Select this biome
-extern bool g_opt_biome_swamp;          // Select this biome
+extern bool g_opt_biome_chasms;         // Force this biome
+extern bool g_opt_biome_ice;            // Force this biome
+extern bool g_opt_biome_lava;           // Force this biome
+extern bool g_opt_biome_swamp;          // Force this biome
 extern bool g_opt_no_slow_log_flush;    // Do not flush after each console log at start
 extern bool g_opt_override_debug_level; // Temporary, used to disable existing debugs
 extern bool g_opt_resume;               // Load last snapshot

@@ -6,12 +6,12 @@
 #include "my_game.hpp"
 #include "my_thing.hpp"
 
-bool Level::create_biome_lava(point3d at, uint32_t seed)
+bool Level::create_biome_ice(point3d at, uint32_t seed)
 {
   TRACE_AND_INDENT();
-  dbg("INF: Create lava dungeon");
+  dbg("INF: Create ice dungeon");
 
-  biome = BIOME_LAVA;
+  biome = BIOME_ICE;
 
   //
   // Setup the various chances of things appearing.
@@ -86,51 +86,51 @@ bool Level::create_biome_lava(point3d at, uint32_t seed)
     {
       uint32_t start = time_ms();
       dbg2("INF: Place rocks");
-      create_biome_lava_place_rocks(dungeon, 1, 6, 6, tries);
+      create_biome_ice_place_rocks(dungeon, 1, 6, 6, tries);
       if (g_errored) {
         return false;
       }
-      create_biome_lava_place_rocks(dungeon, 1, 6, 3, tries);
+      create_biome_ice_place_rocks(dungeon, 1, 6, 3, tries);
       if (g_errored) {
         return false;
       }
-      create_biome_lava_place_rocks(dungeon, 1, 3, 6, tries);
+      create_biome_ice_place_rocks(dungeon, 1, 3, 6, tries);
       if (g_errored) {
         return false;
       }
-      create_biome_lava_place_rocks(dungeon, 1, 3, 3, tries);
+      create_biome_ice_place_rocks(dungeon, 1, 3, 3, tries);
       if (g_errored) {
         return false;
       }
-      create_biome_lava_place_rocks(dungeon, 2, 3, 3, tries);
+      create_biome_ice_place_rocks(dungeon, 2, 3, 3, tries);
       if (g_errored) {
         return false;
       }
-      create_biome_lava_place_rocks(dungeon, 1, 2, 2, tries);
+      create_biome_ice_place_rocks(dungeon, 1, 2, 2, tries);
       if (g_errored) {
         return false;
       }
-      create_biome_lava_place_rocks(dungeon, 2, 2, 2, tries);
+      create_biome_ice_place_rocks(dungeon, 2, 2, 2, tries);
       if (g_errored) {
         return false;
       }
-      create_biome_lava_place_rocks(dungeon, 3, 2, 2, tries);
+      create_biome_ice_place_rocks(dungeon, 3, 2, 2, tries);
       if (g_errored) {
         return false;
       }
-      create_biome_lava_place_rocks(dungeon, 1, 2, 1, tries);
+      create_biome_ice_place_rocks(dungeon, 1, 2, 1, tries);
       if (g_errored) {
         return false;
       }
-      create_biome_lava_place_rocks(dungeon, 2, 2, 1, tries);
+      create_biome_ice_place_rocks(dungeon, 2, 2, 1, tries);
       if (g_errored) {
         return false;
       }
-      create_biome_lava_place_rocks(dungeon, 1, 1, 2, tries);
+      create_biome_ice_place_rocks(dungeon, 1, 1, 2, tries);
       if (g_errored) {
         return false;
       }
-      create_biome_lava_place_rocks(dungeon, 2, 1, 2, tries);
+      create_biome_ice_place_rocks(dungeon, 2, 1, 2, tries);
       if (g_errored) {
         return false;
       }
@@ -145,7 +145,7 @@ bool Level::create_biome_lava(point3d at, uint32_t seed)
     {
       uint32_t start = time_ms();
       dbg2("INF: Place bridges");
-      create_biome_lava_place_bridge(dungeon);
+      create_biome_ice_place_bridge(dungeon);
       if (g_errored) {
         return false;
       }
@@ -158,19 +158,19 @@ bool Level::create_biome_lava(point3d at, uint32_t seed)
 
     {
       uint32_t start = time_ms();
-      dbg2("INF: Place lava");
-      create_biome_lava_place_lava(dungeon, "lava");
+      dbg2("INF: Place ice");
+      create_biome_ice_place_ice(dungeon, "block_of_ice");
       if (g_errored) {
         return false;
       }
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
-        slowest_so_far_which = "placing lava";
+        slowest_so_far_which = "placing ice";
       }
     }
 
-    create_biome_lava_place_remaining_rocks(dungeon);
+    create_biome_ice_place_remaining_rocks(dungeon);
 
     //
     // Place braziers first and then update the heatmap
@@ -178,7 +178,7 @@ bool Level::create_biome_lava(point3d at, uint32_t seed)
     {
       uint32_t start = time_ms();
       dbg2("INF: Place braziers");
-      create_biome_lava_place_braziers(dungeon, "brazier");
+      create_biome_ice_place_braziers(dungeon, "brazier");
       if (g_errored) {
         return false;
       }
@@ -224,22 +224,6 @@ bool Level::create_biome_lava(point3d at, uint32_t seed)
     }
 
     //
-    // Take pity on the player getting close to the dark
-    //
-    {
-      uint32_t start = time_ms();
-      place_random_torches(dungeon);
-      if (g_errored) {
-        return false;
-      }
-      uint32_t took = time_ms() - start;
-      if (took > slowest_so_far) {
-        slowest_so_far       = took;
-        slowest_so_far_which = "placing torches";
-      }
-    }
-
-    //
     // Final update of the heatmap to account placement of braziers
     //
     dbg2("INF: Final update heatmap");
@@ -269,10 +253,10 @@ bool Level::create_biome_lava(point3d at, uint32_t seed)
   return true;
 }
 
-void Level::create_biome_lava_place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries)
+void Level::create_biome_ice_place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries)
 {
   TRACE_AND_INDENT();
-  auto tp = tp_find("rock_lava");
+  auto tp = tp_find("rock_ice");
   if (unlikely(! tp)) {
     ERR("Place rocks failed");
     return;
@@ -344,17 +328,17 @@ void Level::create_biome_lava_place_rocks(Dungeonp d, int variant, int block_wid
   }
 }
 
-void Level::create_biome_lava_place_lava(Dungeonp d, const std::string &what)
+void Level::create_biome_ice_place_ice(Dungeonp d, const std::string &what)
 {
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
 
-      if (is_lava(x, y) || is_dirt(x, y) || is_rock(x, y)) {
+      if (is_block_of_ice(x, y) || is_dirt(x, y) || is_rock(x, y)) {
         continue;
       }
 
-      if (! d->is_lava(x, y)) {
+      if (! d->is_block_of_ice(x, y)) {
         continue;
       }
 
@@ -364,7 +348,7 @@ void Level::create_biome_lava_place_lava(Dungeonp d, const std::string &what)
           (void) thing_new(tp->name(), point(x, y));
         }
       } else if (d100() < 10) {
-        auto tp = tp_find("rock_lava");
+        auto tp = tp_find("rock_ice");
         if (tp) {
           (void) thing_new(tp->name(), point(x, y));
         }
@@ -375,7 +359,7 @@ void Level::create_biome_lava_place_lava(Dungeonp d, const std::string &what)
   }
 }
 
-void Level::create_biome_lava_place_braziers(Dungeonp d, const std::string &what)
+void Level::create_biome_ice_place_braziers(Dungeonp d, const std::string &what)
 {
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
@@ -393,7 +377,7 @@ void Level::create_biome_lava_place_braziers(Dungeonp d, const std::string &what
   }
 }
 
-void Level::create_biome_lava_place_remaining_rocks(Dungeonp d)
+void Level::create_biome_ice_place_remaining_rocks(Dungeonp d)
 {
   TRACE_AND_INDENT();
   for (auto x = 0; x < MAP_WIDTH; x++) {
@@ -437,19 +421,19 @@ void Level::create_biome_lava_place_remaining_rocks(Dungeonp d)
         }
 
         if (needed) {
-          (void) thing_new("rock_lava", point(x, y));
+          (void) thing_new("rock_ice", point(x, y));
           continue;
         }
 
         if (d->is_wall(x, y)) {
-          if (d100() < 20) {
-            (void) thing_new("rock_lava", point(x, y));
+          if (d100() < 10) {
+            (void) thing_new("rock_ice", point(x, y));
             continue;
           }
         }
 
         if (d->is_rock(x, y)) {
-          (void) thing_new("rock_lava", point(x, y));
+          (void) thing_new("rock_ice", point(x, y));
           continue;
         }
       }
@@ -457,7 +441,7 @@ void Level::create_biome_lava_place_remaining_rocks(Dungeonp d)
   }
 }
 
-void Level::create_biome_lava_place_bridge(Dungeonp d)
+void Level::create_biome_ice_place_bridge(Dungeonp d)
 {
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {

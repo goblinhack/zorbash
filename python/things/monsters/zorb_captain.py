@@ -24,6 +24,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_use_weapons(self, True)
     my.is_biome_chasms(self, True)
     my.is_biome_dungeon(self, True)
+    my.is_biome_ice(self, True)
     my.is_loggable(self, True)
     my.is_monst_class_B(self, True)
     my.on_born_do(self, "me.on_born()")

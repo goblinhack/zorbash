@@ -36,6 +36,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_follow(self, True)
     my.is_allied_with(self, "zorb_pack")
     my.is_biome_dungeon(self, True)
+    my.is_biome_ice(self, True)
     my.is_biome_chasms(self, True)
     my.distance_recruitment_max(self, 7)
     my.is_monst_class_B(self, True)

@@ -11,10 +11,6 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
   TRACE_AND_INDENT();
   dbg("INF: Create dungeon");
 
-  if (player) {
-    TOPCON("A new dungeon level is coming into being...");
-  }
-
   biome = BIOME_DUNGEON;
 
   //

@@ -162,9 +162,13 @@ void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
       c.b = 0;
       c.r = 0;
     }
+    c.r = (((int) c.r) * 2) / 3;
+    c.b = (((int) c.b) * 2) / 3;
   } else if (level->biome == BIOME_LAVA) {
-    c.b = 0;
-    c.g = 0;
+    c.b = (((int) c.b) * 2) / 3;
+    c.g = (((int) c.g) * 2) / 3;
+  } else if (level->biome == BIOME_ICE) {
+    c.g = (((int) c.g) * 2) / 3;
   }
 
   //

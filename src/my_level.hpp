@@ -704,6 +704,7 @@ public:
   bool create_biome_chasms(point3d at, uint32_t seed);
   bool create_biome_dungeon(point3d at, uint32_t seed);
   bool create_biome_lava(point3d at, uint32_t seed);
+  bool create_biome_ice(point3d at, uint32_t seed);
   bool create_biome_sewer_pipes(point3d at);
   bool create_biome_sewer(point3d at, uint32_t seed);
   bool create_biome_sewer_pools(void);
@@ -991,6 +992,13 @@ public:
   void create_biome_lava_place_remaining_rock(Dungeonp d, const std::string &what);
   void create_biome_lava_place_remaining_rocks(Dungeonp d);
   void create_biome_lava_place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries);
+  void create_biome_ice_place_braziers(Dungeonp d, const std::string &what);
+  void create_biome_ice_place_bridge(Dungeonp d);
+  void create_biome_ice_place_dirt(Dungeonp d);
+  void create_biome_ice_place_ice(Dungeonp d, const std::string &what);
+  void create_biome_ice_place_remaining_rock(Dungeonp d, const std::string &what);
+  void create_biome_ice_place_remaining_rocks(Dungeonp d);
+  void create_biome_ice_place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries);
   void create_biome_sewer_place_remaining_walls(const std::string &what);
   void create_biome_sewer_place_walls(int variant, int block_width, int block_height, int tries);
   void create_biome_swamp_place_deep_water(Dungeonp d, const std::string &what);

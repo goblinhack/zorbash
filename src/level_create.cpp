@@ -54,12 +54,17 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
   //
   game->level_being_created = this;
 
+  if (player) {
+    TOPCON("A new dungeon level is coming into being...");
+  }
+
   bool ret;
   switch (biome) {
     case BIOME_DUNGEON: ret = create_biome_dungeon(world_at, seed); break;
     case BIOME_SWAMP: ret = create_biome_swamp(world_at, seed); break;
     case BIOME_SEWER: ret = create_biome_sewer(world_at, seed); break;
     case BIOME_CHASMS: ret = create_biome_chasms(world_at, seed); break;
+    case BIOME_ICE: ret = create_biome_ice(world_at, seed); break;
     case BIOME_LAVA: ret = create_biome_lava(world_at, seed); break;
     default:
       DIE("No biome set for level create");
@@ -68,8 +73,14 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
   }
 
   if (! monst_count) {
-    if (biome != BIOME_SEWER) {
-      err("No monsters placed on level, difficulty_depth %d", difficulty_depth);
+    if (g_opt_biome_chasms || g_opt_biome_ice || g_opt_biome_lava || g_opt_biome_swamp) {
+      //
+      // Ignore for testing
+      //
+    } else {
+      if (biome != BIOME_SEWER) {
+        err("No monsters placed on level, difficulty_depth %d", difficulty_depth);
+      }
     }
   }
 

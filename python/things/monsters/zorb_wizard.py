@@ -24,6 +24,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_use_staffs(self, True)
     my.is_biome_chasms(self, True)
     my.is_biome_dungeon(self, True)
+    my.is_biome_ice(self, True)
     my.is_cowardly(self, True)
     my.is_loggable(self, True)
     my.is_monst_class_C(self, True)

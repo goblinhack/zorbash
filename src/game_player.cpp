@@ -611,7 +611,7 @@ done:
     }
 
     game->player_is_ready_for_messages = true;
-  }
 
-  DBG("Placed player");
+    player->log("Placed");
+  }
 }

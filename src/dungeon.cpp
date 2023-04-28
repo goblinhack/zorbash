@@ -254,7 +254,16 @@ void Dungeon::make_dungeon(void)
              4 /* generations */);
   }
 
-  if ((biome != BIOME_CHASMS) && (biome != BIOME_LAVA)) {
+  if (biome == BIOME_ICE) {
+    DBG2("INF: Generate ice");
+
+    ice_gen(2000, // fill prob
+            10,   // R1
+            5,    // R2
+            4 /* generations */);
+  }
+
+  if ((biome != BIOME_CHASMS) && (biome != BIOME_LAVA) && (biome != BIOME_ICE)) {
     DBG2("INF: Generate water");
 
     water_gen(2000, // fill prob
@@ -1214,6 +1223,23 @@ bool Dungeon::is_lava(const int x, const int y)
   return false;
 }
 
+bool Dungeon::is_block_of_ice(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) {
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
+  }
+
+  for (auto d = 0; d < map_depth; d++) {
+    auto c = getc(x, y, d);
+    auto v = get(Charmap::all_charmaps, c);
+
+    if (v.is_block_of_ice) {
+      return true;
+    }
+  }
+  return false;
+}
+
 bool Dungeon::is_chasm(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
@@ -1285,6 +1311,9 @@ bool Dungeon::is_hazard(const int x, const int y)
       return true;
     }
     if (v.is_lava) {
+      return true;
+    }
+    if (v.is_block_of_ice) {
       return true;
     }
   }
@@ -4185,8 +4214,9 @@ void Dungeon::add_foliage_around_water(void)
   for (auto y = 2; y < MAP_HEIGHT - 2; y++) {
     for (auto x = 2; x < MAP_WIDTH - 2; x++) {
 
-      if (is_chasm(x, y) || is_wall(x, y) || is_rock(x, y) || is_bridge(x, y) || is_chasm(x, y) || is_lava(x, y) ||
-          is_brazier(x, y) || is_deep_water(x, y) || is_shallow_water(x, y)) {
+      if (is_chasm(x, y) || is_wall(x, y) || is_rock(x, y) || is_bridge(x, y) || is_chasm(x, y) ||
+          is_block_of_ice(x, y) || is_lava(x, y) || is_brazier(x, y) || is_deep_water(x, y) ||
+          is_shallow_water(x, y)) {
         continue;
       }
 
@@ -4208,7 +4238,7 @@ void Dungeon::add_foliage_around_water(void)
           break;
         }
         for (auto dy = -2; dy <= 2; dy++) {
-          if (is_lava(x + dx, y + dy) || is_bridge(x + dx, y + dy) || is_lava(x + dx, y + dy) ||
+          if (is_block_of_ice(x + dx, y + dy) || is_bridge(x + dx, y + dy) || is_lava(x + dx, y + dy) ||
               is_brazier(x + dx, y + dy) || is_chasm(x + dx, y + dy)) {
             foliage_ok = -1;
             goto next;
@@ -4246,8 +4276,8 @@ void Dungeon::add_spiderweb(void)
   for (auto y = 2; y < MAP_HEIGHT - 2; y++) {
     for (auto x = 2; x < MAP_WIDTH - 2; x++) {
 
-      if (is_lava(x, y) || is_wall(x, y) || is_rock(x, y) || is_deep_water(x, y) || is_brazier(x, y) ||
-          is_shallow_water(x, y)) {
+      if (is_block_of_ice(x, y) || is_lava(x, y) || is_wall(x, y) || is_rock(x, y) || is_deep_water(x, y) ||
+          is_brazier(x, y) || is_shallow_water(x, y)) {
         continue;
       }
 
@@ -4269,8 +4299,8 @@ void Dungeon::add_spiderweb(void)
           break;
         }
         for (auto dy = -1; dy <= 1; dy++) {
-          if (is_lava(x + dx, y + dy) || is_shallow_water(x + dx, y + dy) || is_deep_water(x + dx, y + dy) ||
-              is_brazier(x + dx, y + dy)) {
+          if (is_block_of_ice(x + dx, y + dy) || is_lava(x + dx, y + dy) || is_shallow_water(x + dx, y + dy) ||
+              is_deep_water(x + dx, y + dy) || is_brazier(x + dx, y + dy)) {
             spiderweb_ok = -1;
             goto next;
           }
@@ -4785,6 +4815,55 @@ void Dungeon::lava_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int m
       if (get(map_curr, x, y)) {
         if (! is_anything_at(x, y)) {
           putc(x, y, MAP_DEPTH_LIQUID, Charmap::LAVA);
+        }
+      }
+    }
+  }
+}
+
+void Dungeon::ice_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations)
+{
+  map_save = {};
+  map_curr = {};
+
+  const int16_t maze_w = MAP_WIDTH - 2;
+  const int16_t maze_h = MAP_HEIGHT - 2;
+
+  if (map_r1) {
+    MAP_R1 = map_r1;
+  }
+
+  if (map_r2) {
+    MAP_R2 = map_r2;
+  }
+
+  if (map_generations) {
+    MAP_GENERATIONS = map_generations;
+  }
+
+  int16_t x, y, i;
+
+  map_curr = {};
+
+  for (x = 2; x < maze_w - 2; x++) {
+    for (y = 2; y < maze_h - 2; y++) {
+      if (pcg_random_range(0, 10000) < map_fill_prob) {
+        set(map_curr, x, y, (uint8_t) 1);
+      }
+    }
+  }
+
+  for (i = 0; i < MAP_GENERATIONS; i++) {
+    cave_generation();
+    std::copy(mbegin(map_save), mend(map_save), mbegin(map_curr));
+    map_save = {};
+  }
+
+  for (x = 2; x < maze_w - 2; x++) {
+    for (y = 2; y < maze_h - 2; y++) {
+      if (get(map_curr, x, y)) {
+        if (! is_anything_at(x, y)) {
+          putc(x, y, MAP_DEPTH_LIQUID, Charmap::ICE);
         }
       }
     }

@@ -19,6 +19,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_submergible(self, True)
     my.is_biome_chasms(self, True)
     my.is_biome_dungeon(self, True)
+    my.is_biome_ice(self, True)
     my.is_biome_lava(self, True)
     my.is_biome_swamp(self, True)
     my.is_critical_to_level(self, True)

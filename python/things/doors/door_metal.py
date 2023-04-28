@@ -37,6 +37,7 @@ def tp_init(name):
     my.is_attackable_by_player(self, True)
     my.is_biome_chasms(self, True)
     my.is_biome_dungeon(self, True)
+    my.is_biome_ice(self, True)
     my.is_biome_lava(self, True)
     my.is_corpse_on_death(self, True)
     my.is_cursor_can_hover_over(self, True)

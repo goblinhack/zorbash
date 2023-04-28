@@ -473,28 +473,28 @@ static void usage(void)
 
   CON("zorbash, options:");
   CON(" ");
-  CON(" --mini                      -- Use small map.");
+  CON("Commonly used options:");
   CON(" --ascii                     -- Enable ascii graphics.");
   CON(" --pixelart                  -- Enable pixelart graphics.");
-  CON(" --swamp                     -- Select the swamp biome");
-  CON(" --ice                       -- Select the ice biome");
-  CON(" --chasms                    -- Select the chasms biome");
-  CON(" --lava                      -- Select the lava biome");
-  CON(" ");
   CON(" --player-name 'disco bob'   -- Set your name.");
   CON(" --seed <name/number>        -- Set the random dungeon seed.");
-  CON(" ");
   CON(" --resume                    -- Load last snapshot.");
   CON(" ");
+  CON("Debugging options:");
   CON(" --debug                     -- Basic debug.");
   CON(" --debug2                    -- Most debugs. Most useful.");
   CON(" --debug3                    -- All debugs. Slow.");
   CON(" --no-debug                  -- Disable debugs.");
   CON(" ");
+  CON("Testing options:");
   CON(" --test-dungeon-gen          -- Generate lots of dungeons to check for errors");
   CON(" --test-save-load            -- Testing level save and load");
   CON(" --test-start                -- Skip menus, start the game at a test level.");
-  CON(" --test-depth <number>            -- Set the level depth for testing");
+  CON(" --test-depth <number>       -- Set the level depth for testing");
+  CON(" --test-biome-swamp          -- Test the swamp biome");
+  CON(" --test-biome-ice            -- Test the ice biome");
+  CON(" --test-biome-chasms         -- Test the chasms biome");
+  CON(" --test-biome-lava           -- Test the lava biome");
   CON(" ");
   CON("Written by goblinhack@gmail.com");
 }
@@ -529,27 +529,27 @@ static void parse_args(int argc, char *argv[])
       continue;
     }
 
-    if (! strcasecmp(argv[ i ], "--swamp") || ! strcasecmp(argv[ i ], "-swamp")) {
+    if (! strcasecmp(argv[ i ], "--test-biome-swamp") || ! strcasecmp(argv[ i ], "-test-biome-swamp")) {
       g_opt_biome_swamp = true;
       continue;
     }
 
-    if (! strcasecmp(argv[ i ], "--ice") || ! strcasecmp(argv[ i ], "-ice")) {
+    if (! strcasecmp(argv[ i ], "--test-biome-ice") || ! strcasecmp(argv[ i ], "-test-biome-ice")) {
       g_opt_biome_ice = true;
       continue;
     }
 
-    if (! strcasecmp(argv[ i ], "--chasms") || ! strcasecmp(argv[ i ], "-chasms")) {
+    if (! strcasecmp(argv[ i ], "--test-biome-chasms") || ! strcasecmp(argv[ i ], "-test-biome-chasms")) {
       g_opt_biome_chasms = true;
       continue;
     }
 
-    if (! strcasecmp(argv[ i ], "--lava") || ! strcasecmp(argv[ i ], "-lava")) {
+    if (! strcasecmp(argv[ i ], "--test-biome-lava") || ! strcasecmp(argv[ i ], "-test-biome-lava")) {
       g_opt_biome_lava = true;
       continue;
     }
 
-    if (! strcasecmp(argv[ i ], "--resume") || ! strcasecmp(argv[ i ], "-resume")) {
+    if (! strcasecmp(argv[ i ], "--test-biome-resume") || ! strcasecmp(argv[ i ], "-test-biome-resume")) {
       g_opt_resume = true;
       continue;
     }
