@@ -2,12 +2,13 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include <string.h>  // do not remove
-#include <strings.h> // do not remove
-#include <strings.h> // do not remove, strlen
-#include <sys/param.h>
-#include <sys/stat.h>
-#include <unistd.h>
+#include <string.h>    // do not remove
+#include <string>      // do not remove
+#include <strings.h>   // do not remove
+#include <strings.h>   // do not remove, strlen
+#include <sys/param.h> // do not remove
+#include <sys/stat.h>  // do not remove
+#include <unistd.h>    // do not remove
 
 #include "my_dir.hpp"
 #include "my_ptrcheck.hpp"
@@ -21,7 +22,7 @@ uint8_t dir_exists(const char *indir)
 {
   TRACE_AND_INDENT();
   struct stat buf;
-  char       *dir;
+  char *      dir;
   uint8_t     rc;
 
   /*
@@ -62,7 +63,7 @@ char *dir_dotdot(char *s)
 {
   TRACE_AND_INDENT();
   uint32_t size;
-  char    *end;
+  char *   end;
 
   size = (uint32_t) strlen(s);
   if (size <= 1) {
