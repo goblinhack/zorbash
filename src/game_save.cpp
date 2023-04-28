@@ -646,8 +646,6 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->difficulty_depth);
   out << bits(my.t->dungeon_walk_order_level_no);
 
-  out << bits(my.t->is_boss_level);
-  out << bits(my.t->is_shop_level);
   out << bits(my.t->is_final_boss_level);
   out << bits(my.t->is_crystal_level);
 

@@ -686,8 +686,6 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(l->difficulty_depth);
   in >> bits(l->dungeon_walk_order_level_no);
 
-  in >> bits(l->is_boss_level);
-  in >> bits(l->is_shop_level);
   in >> bits(l->is_final_boss_level);
   in >> bits(l->is_crystal_level);
 
