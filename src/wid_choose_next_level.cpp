@@ -818,7 +818,6 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
 
         tl_y--;
 
-        bool has_door {};
         bool has_door_down {};
         bool has_door_up {};
         bool has_door_left {};
@@ -830,22 +829,18 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
             continue;
           }
           if (l->grid_at == alt->grid_at + point(0, -1)) {
-            has_door      = true;
             has_door_down = true;
             ctx->next_levels[ y ][ x ].push_back(alt);
           }
           if (l->grid_at == alt->grid_at + point(0, 1)) {
-            has_door    = true;
             has_door_up = true;
             ctx->next_levels[ y ][ x ].push_back(alt);
           }
           if (l->grid_at == alt->grid_at + point(-1, 0)) {
-            has_door       = true;
             has_door_right = true;
             ctx->next_levels[ y ][ x ].push_back(alt);
           }
           if (l->grid_at == alt->grid_at + point(1, 0)) {
-            has_door      = true;
             has_door_left = true;
             ctx->next_levels[ y ][ x ].push_back(alt);
           }
@@ -857,22 +852,18 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
             continue;
           }
           if (l->grid_at == alt->grid_at + point(0, -1)) {
-            has_door      = true;
             has_door_down = true;
             ctx->prev_levels[ y ][ x ].push_back(alt);
           }
           if (l->grid_at == alt->grid_at + point(0, 1)) {
-            has_door    = true;
             has_door_up = true;
             ctx->prev_levels[ y ][ x ].push_back(alt);
           }
           if (l->grid_at == alt->grid_at + point(-1, 0)) {
-            has_door       = true;
             has_door_right = true;
             ctx->prev_levels[ y ][ x ].push_back(alt);
           }
           if (l->grid_at == alt->grid_at + point(1, 0)) {
-            has_door      = true;
             has_door_left = true;
             ctx->prev_levels[ y ][ x ].push_back(alt);
           }
