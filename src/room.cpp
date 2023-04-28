@@ -163,6 +163,7 @@ void Room::find_doors(void)
   for (auto x : range< int >(0, width)) {
     for (auto y : range< int >(0, height)) {
       if (get(data, x, y, z) == Charmap::DOOR_UP) {
+        has_door    = true;
         has_door_up = true;
         doors_up.push_back(point(x, y));
         if (y == height - 1) {
@@ -175,6 +176,7 @@ void Room::find_doors(void)
         }
       }
       if (get(data, x, y, z) == Charmap::DOOR_DOWN) {
+        has_door      = true;
         has_door_down = true;
         doors_down.push_back(point(x, y));
         if (y == 0) {
@@ -187,6 +189,7 @@ void Room::find_doors(void)
         }
       }
       if (get(data, x, y, z) == Charmap::DOOR_LEFT) {
+        has_door      = true;
         has_door_left = true;
         doors_left.push_back(point(x, y));
         if (x == width - 1) {
@@ -199,6 +202,7 @@ void Room::find_doors(void)
         }
       }
       if (get(data, x, y, z) == Charmap::DOOR_RIGHT) {
+        has_door       = true;
         has_door_right = true;
         doors_right.push_back(point(x, y));
         if (x == 0) {

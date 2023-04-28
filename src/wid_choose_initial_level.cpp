@@ -215,10 +215,6 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
 
   std::string fg_tilename;
 
-  if (node->is_lock) {
-    fg_tilename = "boss_icon";
-  }
-
   if (node->is_ascend_dungeon) {
     fg_tilename = "you_are_here_icon";
     wid_set_on_mouse_down(b, wid_choose_initial_dungeons_shortcut_enter);
@@ -235,19 +231,6 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
     wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
   }
 
-  if (node->is_key) {
-    switch (node->depth) {
-      case -1: break;
-      case 1: fg_tilename = "crystal.1"; break;
-      case 2: fg_tilename = "crystal.2"; break;
-      case 3: fg_tilename = "crystal.3"; break;
-      case 4: fg_tilename = "crystal.4"; break;
-      case 5: fg_tilename = "crystal.5"; break;
-      case 6: fg_tilename = "crystal.6"; break;
-      case 7: fg_tilename = "crystal.7"; break;
-    }
-  }
-
   if (! g_opt_ascii) {
     if (! bg_tilename.empty()) {
       wid_set_bg_tilename(b, bg_tilename);
@@ -256,31 +239,62 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
 
   auto level_at = wid_choose_level_grid_to_level_coord(x, y);
   auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
+
   if (l) {
+    //
+    // Place crystals at level transitions
+    //
+    for (auto n : l->next_levels) {
+      auto nl        = get(game->world.levels, n.x, n.y, n.z);
+      auto next_node = ctx->nodes->getn(nl->grid_at.x, nl->grid_at.y);
+
+      if (next_node) {
+        if ((node->has_door_left && (l->grid_at + point(-1, 0) == nl->grid_at)) ||
+            (node->has_door_right && (l->grid_at + point(1, 0) == nl->grid_at)) ||
+            (node->has_door_down && (l->grid_at + point(0, 1) == nl->grid_at)) ||
+            (node->has_door_up && (l->grid_at + point(0, -1) == nl->grid_at))) {
+          if (next_node->is_lock) {
+            l->is_crystal_level = true;
+            switch (next_node->depth) {
+              case -1: break;
+              case 1: fg_tilename = "crystal.1"; break;
+              case 2: fg_tilename = "crystal.2"; break;
+              case 3: fg_tilename = "crystal.3"; break;
+              case 4: fg_tilename = "crystal.4"; break;
+              case 5: fg_tilename = "crystal.5"; break;
+              case 6: fg_tilename = "crystal.6"; break;
+              case 7: fg_tilename = "crystal.7"; break;
+            }
+          }
+        }
+      }
+    }
+
     if (! g_opt_ascii) {
       if (! fg_tilename.empty()) {
         wid_set_fg_tilename(b, fg_tilename);
       }
     }
 
-    if (node->is_lock) {
-      l->is_boss_level = true;
-    }
-
     if (node->is_descend_dungeon) {
       l->is_final_boss_level = true;
     }
 
-    if (node->is_key) {
-      l->is_crystal_level = true;
+    char tmp[ MAXSHORTSTR ];
+    if (l->is_crystal_level) {
+      if (g_opt_ascii) {
+        snprintf(tmp, sizeof(tmp) - 1, "%d*", node->walk_order_level_no);
+      } else {
+        snprintf(tmp, sizeof(tmp) - 1, "%d", node->walk_order_level_no);
+      }
+    } else {
+      snprintf(tmp, sizeof(tmp) - 1, "%d", node->walk_order_level_no);
     }
-  }
 
-  char tmp[ MAXSHORTSTR ];
-  snprintf(tmp, sizeof(tmp) - 1, "%d", node->walk_order_level_no);
-  wid_set_text(b, tmp);
-  wid_set_text_lhs(b, true);
-  wid_set_text_top(b, true);
+    wid_set_text(b, tmp);
+    wid_set_text_lhs(b, true);
+    wid_set_text_top(b, true);
+  }
 }
 
 static void wid_choose_initial_dungeons_update_buttons(Widp w)
@@ -596,6 +610,13 @@ static void wid_choose_initial_dungeons_tick(Widp w)
     }
 
     //
+    // Create the linkages between levels so we know what is closer to the big
+    // boss level and what is closer to the start. We use this when choosing the
+    // next or previous level.
+    //
+    game_join_levels(ctx);
+
+    //
     // For normal start, we make one level per tick so that we get to see
     // some visual progress for the user.
     //
@@ -628,13 +649,6 @@ static void wid_choose_initial_dungeons_tick(Widp w)
         }
       }
     }
-
-    //
-    // Create the linkages between levels so we know what is closer to the big
-    // boss level and what is closer to the start. We use this when choosing the
-    // next or previous level.
-    //
-    game_join_levels(ctx);
   }
 
   {
@@ -1026,8 +1040,8 @@ void Game::wid_choose_initial_dungeons(void)
   auto box_step   = g_opt_ascii ? 1 : 3;
 
   if (g_opt_ascii) {
-    WID_LEVEL_WIDTH_CHARS  = 3;
-    WID_LEVEL_HEIGHT_CHARS = 3;
+    WID_LEVEL_WIDTH_CHARS  = 4;
+    WID_LEVEL_HEIGHT_CHARS = 4;
   } else {
     WID_LEVEL_WIDTH_CHARS  = 7;
     WID_LEVEL_HEIGHT_CHARS = 7;
@@ -1282,38 +1296,6 @@ void Game::wid_choose_initial_dungeons(void)
         tl_y--;
 
         if (g_opt_ascii) {
-          if (node->is_lock) {
-            Widp  b = wid_new_square_button(button_container, "wid level grid connector");
-            point tl(tl_x, tl_y);
-            point br(br_x, br_y);
-
-            br.x = tl.x;
-            br.y = tl.y;
-            tl.y += WID_LEVEL_HEIGHT_CHARS - 1;
-            br.y += WID_LEVEL_HEIGHT_CHARS - 1;
-
-            wid_set_pos(b, tl, br);
-            wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_BOSS_COLOR);
-            wid_set_text(b, "B");
-            wid_set_style(b, UI_WID_STYLE_SOLID_DEFAULT);
-          }
-
-          if (node->is_key) {
-            Widp  b = wid_new_square_button(button_container, "wid level grid connector");
-            point tl(tl_x, tl_y);
-            point br(br_x, br_y);
-
-            br.x = tl.x;
-            br.y = tl.y;
-            tl.y += WID_LEVEL_HEIGHT_CHARS - 1;
-            br.y += WID_LEVEL_HEIGHT_CHARS - 1;
-
-            wid_set_pos(b, tl, br);
-            wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_CRYSTAL_COLOR);
-            wid_set_text(b, "*");
-            wid_set_style(b, UI_WID_STYLE_SOLID_DEFAULT);
-          }
-
           if (node->is_ascend_dungeon) {
             Widp  b = wid_new_square_button(button_container, "wid level grid connector");
             point tl(tl_x, tl_y);
@@ -1443,27 +1425,6 @@ void Game::wid_choose_initial_dungeons(void)
         point tl = make_point(TERM_WIDTH - 10, 11);
         point br = make_point(TERM_WIDTH - 10, 11);
         wid_set_style(w, UI_WID_STYLE_GRAY);
-        wid_set_color(w, WID_COLOR_BG, UI_DUNGEONS_BOSS_COLOR);
-        wid_set_pos(w, tl, br);
-        wid_set_text(w, "B");
-      }
-
-      {
-        auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 8, 11);
-        point br = make_point(TERM_WIDTH - 1, 11);
-        wid_set_pos(w, tl, br);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "Boss");
-      }
-    }
-
-    if (1) {
-      {
-        auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 10, 12);
-        point br = make_point(TERM_WIDTH - 10, 12);
-        wid_set_style(w, UI_WID_STYLE_GRAY);
         wid_set_color(w, WID_COLOR_BG, UI_DUNGEONS_CRYSTAL_COLOR);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "*");
@@ -1471,8 +1432,8 @@ void Game::wid_choose_initial_dungeons(void)
 
       {
         auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 8, 12);
-        point br = make_point(TERM_WIDTH - 1, 12);
+        point tl = make_point(TERM_WIDTH - 8, 11);
+        point br = make_point(TERM_WIDTH - 1, 11);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Crystal");
@@ -1482,8 +1443,8 @@ void Game::wid_choose_initial_dungeons(void)
     if (1) {
       {
         auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 10, 13);
-        point br = make_point(TERM_WIDTH - 10, 13);
+        point tl = make_point(TERM_WIDTH - 10, 12);
+        point br = make_point(TERM_WIDTH - 10, 12);
         wid_set_style(w, UI_WID_STYLE_GRAY);
         wid_set_color(w, WID_COLOR_BG, UI_DUNGEONS_FINAL_BOSS_COLOR);
         wid_set_pos(w, tl, br);
@@ -1492,8 +1453,8 @@ void Game::wid_choose_initial_dungeons(void)
 
       {
         auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 8, 13);
-        point br = make_point(TERM_WIDTH - 1, 13);
+        point tl = make_point(TERM_WIDTH - 8, 12);
+        point br = make_point(TERM_WIDTH - 1, 12);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Zorbash");
@@ -1503,8 +1464,8 @@ void Game::wid_choose_initial_dungeons(void)
     if (1) {
       {
         auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 10, 14);
-        point br = make_point(TERM_WIDTH - 10, 14);
+        point tl = make_point(TERM_WIDTH - 10, 13);
+        point br = make_point(TERM_WIDTH - 10, 13);
         wid_set_style(w, UI_WID_STYLE_GRAY);
         wid_set_color(w, WID_COLOR_BG, UI_DUNGEONS_PLAYER_COLOR);
         wid_set_pos(w, tl, br);
@@ -1513,8 +1474,8 @@ void Game::wid_choose_initial_dungeons(void)
 
       {
         auto  w  = wid_new_square_button(window, "wid key");
-        point tl = make_point(TERM_WIDTH - 8, 14);
-        point br = make_point(TERM_WIDTH - 1, 14);
+        point tl = make_point(TERM_WIDTH - 8, 13);
+        point br = make_point(TERM_WIDTH - 1, 13);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
         wid_set_text(w, "You");
@@ -1525,8 +1486,8 @@ void Game::wid_choose_initial_dungeons(void)
       if (1) {
         {
           auto  w  = wid_new_square_button(window, "wid key");
-          point tl = make_point(TERM_WIDTH - 10, 16 + difficulty_depth);
-          point br = make_point(TERM_WIDTH - 10, 16 + difficulty_depth);
+          point tl = make_point(TERM_WIDTH - 10, 15 + difficulty_depth);
+          point br = make_point(TERM_WIDTH - 10, 15 + difficulty_depth);
           wid_set_style(w, UI_WID_STYLE_SOLID_DEFAULT);
           wid_set_color(w, WID_COLOR_BG, get_biome_color(get_biome(difficulty_depth)));
           wid_set_pos(w, tl, br);
@@ -1535,8 +1496,8 @@ void Game::wid_choose_initial_dungeons(void)
 
         {
           auto  w  = wid_new_square_button(window, "wid key");
-          point tl = make_point(TERM_WIDTH - 8, 16 + difficulty_depth);
-          point br = make_point(TERM_WIDTH - 1, 16 + difficulty_depth);
+          point tl = make_point(TERM_WIDTH - 8, 15 + difficulty_depth);
+          point br = make_point(TERM_WIDTH - 1, 15 + difficulty_depth);
           wid_set_pos(w, tl, br);
           wid_set_text_lhs(w, true);
           wid_set_text(w, biome_to_string(get_biome(difficulty_depth)));

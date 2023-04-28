@@ -45,6 +45,7 @@ public:
   bool is_ascend_dungeon {false};
   bool is_descend_dungeon {false};
   bool on_critical_path {false};
+  bool has_door {false};
   bool has_door_up {false};
   bool has_door_down {false};
   bool has_door_left {false};
@@ -65,42 +66,50 @@ public:
 
   void set_has_door_up(bool v)
   {
+    has_door           = v;
     has_door_up        = v;
     has_secret_exit_up = false;
   }
   void set_has_door_down(bool v)
   {
+    has_door             = v;
     has_door_down        = v;
     has_secret_exit_down = false;
   }
   void set_has_door_right(bool v)
   {
+    has_door              = v;
     has_door_right        = v;
     has_secret_exit_right = false;
   }
   void set_has_door_left(bool v)
   {
+    has_door             = v;
     has_door_left        = v;
     has_secret_exit_left = false;
   }
   void set_has_secret_exit_up(bool v)
   {
     has_secret_exit_up = v;
+    has_door           = false;
     has_door_up        = false;
   }
   void set_has_secret_exit_down(bool v)
   {
     has_secret_exit_down = v;
+    has_door             = false;
     has_door_down        = false;
   }
   void set_has_secret_exit_right(bool v)
   {
     has_secret_exit_right = v;
+    has_door              = false;
     has_door_right        = false;
   }
   void set_has_secret_exit_left(bool v)
   {
     has_secret_exit_left = v;
+    has_door             = false;
     has_door_left        = false;
   }
 };

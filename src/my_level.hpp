@@ -172,8 +172,6 @@ public:
   int difficulty_depth {};
   int dungeon_walk_order_level_no {};
 
-  bool is_shop_level {};
-  bool is_boss_level {};
   bool is_final_boss_level {};
   bool is_crystal_level {};
 

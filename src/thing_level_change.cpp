@@ -159,8 +159,7 @@ void Thing::level_change(Levelp l)
   }
 
   if (is_player()) {
-    py_call_void_fn("events", "on_level_change", level->dungeon_walk_order_level_no, level->is_shop_level,
-                    level->is_crystal_level, level->is_boss_level, level->is_final_boss_level);
+    py_call_void_fn("events", "on_level_change", level->dungeon_walk_order_level_no, level->is_crystal_level);
   }
 
   //

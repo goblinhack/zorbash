@@ -2450,7 +2450,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
   TRACE_NO_INDENT();
   Dmap d {};
 
-  LOG("draw corridor from %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+  DBG("draw corridor from %d,%d to %d,%d", start.x, start.y, end.x, end.y);
 
   if ((start.x <= 0) || (start.y <= 0) || (start.x >= map_width - 1) || (start.y >= map_height - 1)) {
     return 0;
@@ -4134,17 +4134,17 @@ void Dungeon::add_remaining(void)
           putc(x, y, MAP_DEPTH_FLOOR, Charmap::FLOOR);
           continue;
         }
-        if (pcg_random_range(0, 1000) < 20) {
+        if (pcg_random_range(0, 10000) < 100) {
           putc(x, y, MAP_DEPTH_OBJ, Charmap::TREASURE_CLASS_B);
           putc(x, y, MAP_DEPTH_FLOOR, Charmap::FLOOR);
           continue;
         }
-        if (pcg_random_range(0, 1000) < 10) {
+        if (pcg_random_range(0, 10000) < 50) {
           putc(x, y, MAP_DEPTH_OBJ, Charmap::TREASURE_CLASS_B);
           putc(x, y, MAP_DEPTH_FLOOR, Charmap::FLOOR);
           continue;
         }
-        if (pcg_random_range(0, 1000) < 5) {
+        if (pcg_random_range(0, 10000) < 10) {
           putc(x, y, MAP_DEPTH_OBJ, Charmap::TREASURE_CLASS_C);
           putc(x, y, MAP_DEPTH_FLOOR, Charmap::FLOOR);
           continue;

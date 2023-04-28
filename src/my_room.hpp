@@ -35,6 +35,7 @@ public:
 
   std::array< std::array< std::array< char, MAP_DEPTH >, MAP_ROOM_HEIGHT >, MAP_ROOM_WIDTH > data {};
 
+  bool has_door {false};
   bool has_door_up {false};
   bool has_door_down {false};
   bool has_door_left {false};

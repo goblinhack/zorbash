@@ -581,10 +581,6 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
 
   std::string fg_tilename;
 
-  if (l->is_boss_level) {
-    fg_tilename = "boss_icon";
-  }
-
   if (l->is_final_boss_level) {
     fg_tilename = "final_boss_icon";
   }
@@ -678,8 +674,8 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
   player->is_changing_level = true;
 
   if (g_opt_ascii) {
-    WID_LEVEL_WIDTH_CHARS  = 3;
-    WID_LEVEL_HEIGHT_CHARS = 3;
+    WID_LEVEL_WIDTH_CHARS  = 4;
+    WID_LEVEL_HEIGHT_CHARS = 4;
   } else {
     WID_LEVEL_WIDTH_CHARS  = 7;
     WID_LEVEL_HEIGHT_CHARS = 7;
@@ -822,6 +818,7 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
 
         tl_y--;
 
+        bool has_door {};
         bool has_door_down {};
         bool has_door_up {};
         bool has_door_left {};
@@ -833,18 +830,22 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
             continue;
           }
           if (l->grid_at == alt->grid_at + point(0, -1)) {
+            has_door      = true;
             has_door_down = true;
             ctx->next_levels[ y ][ x ].push_back(alt);
           }
           if (l->grid_at == alt->grid_at + point(0, 1)) {
+            has_door    = true;
             has_door_up = true;
             ctx->next_levels[ y ][ x ].push_back(alt);
           }
           if (l->grid_at == alt->grid_at + point(-1, 0)) {
+            has_door       = true;
             has_door_right = true;
             ctx->next_levels[ y ][ x ].push_back(alt);
           }
           if (l->grid_at == alt->grid_at + point(1, 0)) {
+            has_door      = true;
             has_door_left = true;
             ctx->next_levels[ y ][ x ].push_back(alt);
           }
@@ -856,40 +857,28 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
             continue;
           }
           if (l->grid_at == alt->grid_at + point(0, -1)) {
+            has_door      = true;
             has_door_down = true;
             ctx->prev_levels[ y ][ x ].push_back(alt);
           }
           if (l->grid_at == alt->grid_at + point(0, 1)) {
+            has_door    = true;
             has_door_up = true;
             ctx->prev_levels[ y ][ x ].push_back(alt);
           }
           if (l->grid_at == alt->grid_at + point(-1, 0)) {
+            has_door       = true;
             has_door_right = true;
             ctx->prev_levels[ y ][ x ].push_back(alt);
           }
           if (l->grid_at == alt->grid_at + point(1, 0)) {
+            has_door      = true;
             has_door_left = true;
             ctx->prev_levels[ y ][ x ].push_back(alt);
           }
         }
 
         if (g_opt_ascii) {
-          if (l->is_boss_level) {
-            Widp  b = wid_new_square_button(button_container, "wid level grid connector");
-            point tl(tl_x, tl_y);
-            point br(br_x, br_y);
-
-            br.x = tl.x;
-            br.y = tl.y;
-            tl.y += WID_LEVEL_HEIGHT_CHARS - 1;
-            br.y += WID_LEVEL_HEIGHT_CHARS - 1;
-
-            wid_set_pos(b, tl, br);
-            wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_BOSS_COLOR);
-            wid_set_text(b, "B");
-            wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-          }
-
           if (l->is_crystal_level) {
             Widp  b = wid_new_square_button(button_container, "wid level grid connector");
             point tl(tl_x, tl_y);
