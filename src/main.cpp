@@ -561,9 +561,9 @@ static void parse_args(int argc, char *argv[])
     }
 
     if (! strcasecmp(argv[ i ], "--test-depth") || ! strcasecmp(argv[ i ], "-test-depth")) {
-      g_opt_test_level_start    = true;
-      g_opt_test_skip_main_menu = true;
-      g_opt_test_level_start_depth               = std::stoi(argv[ i + 1 ]);
+      g_opt_test_level_start       = true;
+      g_opt_test_skip_main_menu    = true;
+      g_opt_test_level_start_depth = std::stoi(argv[ i + 1 ]);
       i++;
       continue;
     }

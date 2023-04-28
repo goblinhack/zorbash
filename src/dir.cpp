@@ -22,7 +22,7 @@ uint8_t dir_exists(const char *indir)
 {
   TRACE_AND_INDENT();
   struct stat buf;
-  char *      dir;
+  char       *dir;
   uint8_t     rc;
 
   /*
@@ -63,7 +63,7 @@ char *dir_dotdot(char *s)
 {
   TRACE_AND_INDENT();
   uint32_t size;
-  char *   end;
+  char    *end;
 
   size = (uint32_t) strlen(s);
   if (size <= 1) {
