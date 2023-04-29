@@ -8,7 +8,6 @@
 #include "my_monst.hpp"
 #include "my_thing.hpp"
 
-
 bool Thing::bounce(float bounce_height, float bounce_fade, ts_t ms, int bounce_count)
 {
   if (g_opt_ascii) {

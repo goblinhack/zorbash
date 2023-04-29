@@ -74,6 +74,7 @@ public:
   // begin sort marker2 {
   bool is_ascend_dungeon {false};
   bool is_barrel {false};
+  bool is_block_of_ice {false};
   bool is_brazier {false};
   bool is_bridge {false};
   bool is_chasm {false};
@@ -92,7 +93,6 @@ public:
   bool is_gold {false};
   bool is_key {false};
   bool is_lava {false};
-  bool is_block_of_ice {false};
   bool is_mob_challenge_class_A {false};
   bool is_mob_challenge_class_B {false};
   bool is_monst_class_A {false};

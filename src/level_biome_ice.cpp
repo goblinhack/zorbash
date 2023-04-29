@@ -396,7 +396,7 @@ bool Level::create_biome_ice(point3d at, uint32_t seed)
 void Level::create_biome_ice_place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries)
 {
   TRACE_AND_INDENT();
-  auto tp = tp_find("rock_ice");
+  static auto tp = tp_find("rock_ice1");
   if (unlikely(! tp)) {
     ERR("Place rocks failed");
     return;
@@ -483,12 +483,12 @@ void Level::create_biome_ice_place_ice(Dungeonp d, const std::string &what)
       }
 
       if (d100() < 50) {
-        auto tp = tp_find("floor_ice1");
+        static auto tp = tp_find("floor_ice1");
         if (tp) {
           (void) thing_new(tp->name(), point(x, y));
         }
       } else if (d100() < 10) {
-        auto tp = tp_find("rock_ice");
+        static auto tp = tp_find("rock_ice1");
         if (tp) {
           (void) thing_new(tp->name(), point(x, y));
         }
@@ -527,7 +527,7 @@ void Level::create_biome_ice_place_remaining_rocks(Dungeonp d)
       }
 
       if (! is_floor(x, y)) {
-        auto tp = tp_find("floor_ice1");
+        static auto tp = tp_find("floor_ice1");
         if (tp) {
           (void) thing_new(tp->name(), point(x, y));
         }
@@ -561,13 +561,13 @@ void Level::create_biome_ice_place_remaining_rocks(Dungeonp d)
         }
 
         if (needed) {
-          (void) thing_new("rock_ice", point(x, y));
+          (void) thing_new("rock_ice1", point(x, y));
           continue;
         }
 
         if (d->is_wall(x, y)) {
           if (d100() < 50) {
-            (void) thing_new("rock_ice", point(x, y));
+            (void) thing_new("rock_ice1", point(x, y));
             continue;
           }
         }

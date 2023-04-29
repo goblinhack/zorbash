@@ -88,6 +88,7 @@ public:
   bool is_ascend_dungeon(const int x, const int y);
   bool is_ascend_dungeon_no_check(const int x, const int y);
   bool is_barrel(const int x, const int y);
+  bool is_block_of_ice(const int x, const int y);
   bool is_brazier(const int x, const int y);
   bool is_bridge(const int x, const int y);
   bool is_bridge_no_check(const int x, const int y);
@@ -115,11 +116,10 @@ public:
   bool is_food(const int x, const int y);
   bool is_gold(const int x, const int y);
   bool is_hazard(const int x, const int y);
+  bool is_ice_no_check(const int x, const int y);
   bool is_key(const int x, const int y);
   bool is_lava(const int x, const int y);
   bool is_lava_no_check(const int x, const int y);
-  bool is_block_of_ice(const int x, const int y);
-  bool is_ice_no_check(const int x, const int y);
   bool is_mob_any(const int x, const int y);
   bool is_mob_challenge_class_A(const int x, const int y);
   bool is_mob_challenge_class_B(const int x, const int y);
@@ -193,8 +193,8 @@ public:
   void dry_grass_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
   void dump(void);
   void foliage_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
-  void lava_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
   void ice_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
+  void lava_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
   void make_dungeon(void);
   void map_place_room_ptr(Roomp r, int x, int y);
   void place_doors_between_depth_changes(void);

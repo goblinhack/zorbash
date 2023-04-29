@@ -23,7 +23,7 @@ def tp_init(
     br2_tiles=[],
 ):
 
-    self = tp.Tp(name, "rock_ice")
+    self = tp.Tp(name, "rock_ice1")
     # begin sort marker
     my.collision_hit_priority(self, 1)
     my.gfx_ascii_bg_color_spread_hue(self, 10)
@@ -173,27 +173,27 @@ def tp_init(
 
 def init():
     tp_init(
-        name="rock_ice",
+        name="rock_ice1",
         tiles=[
-            "rock_ice.1",
-            "rock_ice.2",
-            "rock_ice.3",
-            "rock_ice.4",
-            "rock_ice.5",
-            "rock_ice.6",
-            "rock_ice.7",
-            "rock_ice.8",
-            "rock_ice.9",
-            "rock_ice.10",
-            "rock_ice.11",
-            "rock_ice.12",
-            "rock_ice.13",
-            "rock_ice.14",
-            "rock_ice.15",
-            "rock_ice.16",
-            "rock_ice.17",
-            "rock_ice.18",
-            "rock_ice.19",
+            "rock_ice1.1",
+            "rock_ice1.2",
+            "rock_ice1.3",
+            "rock_ice1.4",
+            "rock_ice1.5",
+            "rock_ice1.6",
+            "rock_ice1.7",
+            "rock_ice1.8",
+            "rock_ice1.9",
+            "rock_ice1.10",
+            "rock_ice1.11",
+            "rock_ice1.12",
+            "rock_ice1.13",
+            "rock_ice1.14",
+            "rock_ice1.15",
+            "rock_ice1.16",
+            "rock_ice1.17",
+            "rock_ice1.18",
+            "rock_ice1.19",
         ],
     )
 

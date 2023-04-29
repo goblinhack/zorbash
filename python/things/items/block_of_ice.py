@@ -69,6 +69,7 @@ def tp_init(name, text_long_name):
     my.is_cursor_can_hover_over(self, True)
     my.is_cursor_path_blocker(self, True)
     my.is_described_when_hovering_over(self, True)
+    my.is_gas_blocker(self, True)
     my.is_hittable(self, True)
     my.is_immune_to_cold(self, True)
     my.is_immune_to_draining(self, True)
@@ -76,13 +77,11 @@ def tp_init(name, text_long_name):
     my.is_immune_to_poison(self, True)
     my.is_interesting(self, True)  # so it can be shoved
     my.is_light_blocker_for_monst(self, True)  # to give cover to the player
+    my.is_light_blocker(self, True)
     my.is_loggable(self, True)
     my.is_obs_ai(self, True)
     my.is_obs_jump_end(self, True)
     my.is_obs_jumping(self, True)
-    my.is_gas_blocker(self, True)
-    my.is_light_blocker(self, True)
-    my.noise_blocker(self, True)
     my.is_obs_shooting(self, True)
     my.is_obs_shoving(self, True)
     my.is_obs_spawn_monst(self, True)
@@ -91,6 +90,7 @@ def tp_init(name, text_long_name):
     my.is_shovable(self, True)
     my.is_tickable(self, True)  # So it can interact with fire
     my.is_very_heavy(self, True)
+    my.noise_blocker(self, True)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
     my.on_fall_do(self, "me.on_fall()")

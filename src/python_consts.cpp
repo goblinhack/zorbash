@@ -2,7 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-
 #include "my_ascii.hpp"
 #include "my_enums.hpp"
 #include "my_monst.hpp"

@@ -2,7 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-
 #include "my_callstack.hpp"
 #include "my_main.hpp"
 #include "my_ptrcheck.hpp"
