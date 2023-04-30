@@ -487,7 +487,7 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
   point br;
 
   tl.x = x * (width + 1);
-  tl.y = y * (height + 1) + 1;
+  tl.y = y * (height + 1);
 
   br.x = tl.x;
   br.y = tl.y;
@@ -513,9 +513,9 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
     switch (l->difficulty_depth) {
       case -1: break;
       default:
-        bg_tilename = "biome_" + get_difficulty_depth_name(l->difficulty_depth - 1);
+        bg_tilename = "biome_" + get_difficulty_depth_name(l->difficulty_depth);
         if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(l->difficulty_depth - 1));
+          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(l->difficulty_depth));
         }
         break;
     }
