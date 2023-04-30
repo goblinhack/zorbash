@@ -13,7 +13,7 @@ def on_next_dungeon_menu_select(unused):
     my.music_play(name="relaxing")
 
 
-def on_level_change(level_no, is_shop_level, is_crystal_level):
+def on_level_change(level_no, is_crystal_level):
     return
 
 

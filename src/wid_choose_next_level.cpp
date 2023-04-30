@@ -241,6 +241,26 @@ static void wid_choose_next_dungeons_tick(Widp w)
     delta = 2;
   }
 
+  //
+  // Reset the level colors
+  //
+  {
+    for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
+      for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
+        Widp b = ctx->buttons[ y ][ x ];
+        if (! b) {
+          continue;
+        }
+
+        wid_set_color(b, WID_COLOR_BG, WHITE);
+        wid_update(b);
+      }
+    }
+  }
+
+  //
+  // Make the next level colors flash
+  //
   {
     for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
       for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
@@ -266,9 +286,6 @@ static void wid_choose_next_dungeons_tick(Widp w)
 
           continue;
         }
-
-        wid_set_color(b, WID_COLOR_BG, GRAY30);
-        wid_update(b);
 
         if (game->level == l) {
           //
@@ -716,8 +733,8 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
     br.x += offx;
     br.y += offy;
 
-    tl.y += 9;
-    br.y += 9;
+    tl.y += 5;
+    br.y += 5;
 
     wid_set_pos(button_container, tl, br);
     wid_set_void_context(button_container, ctx);
