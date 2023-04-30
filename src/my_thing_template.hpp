@@ -342,6 +342,7 @@ private:
   int _is_bee {};
   int _is_biome_chasms {};
   int _is_biome_dungeon {};
+  int _is_biome_flooded {};
   int _is_biome_ice {};
   int _is_biome_lava {};
   int _is_biome_sewer {};
@@ -667,7 +668,6 @@ private:
   int _is_unused_flag142 {};
   int _is_unused_flag143 {};
   int _is_unused_flag144 {};
-  int _is_unused_flag145 {};
   int _is_unused_flag15 {};
   int _is_unused_flag16 {};
   int _is_unused_flag17 {};
@@ -1639,6 +1639,7 @@ public:
   int is_bee(void) const;
   int is_biome_chasms(void) const;
   int is_biome_dungeon(void) const;
+  int is_biome_flooded(void) const;
   int is_biome_ice(void) const;
   int is_biome_lava(void) const;
   int is_biome_sewer(void) const;
@@ -1961,7 +1962,6 @@ public:
   int is_unused_flag142(void) const;
   int is_unused_flag143(void) const;
   int is_unused_flag144(void) const;
-  int is_unused_flag145(void) const;
   int is_unused_flag14(void) const;
   int is_unused_flag15(void) const;
   int is_unused_flag16(void) const;
@@ -2388,6 +2388,7 @@ public:
   void is_bee_set(int v);
   void is_biome_chasms_set(int v);
   void is_biome_dungeon_set(int v);
+  void is_biome_flooded_set(int v);
   void is_biome_ice_set(int v);
   void is_biome_lava_set(int v);
   void is_biome_sewer_set(int v);
@@ -2710,7 +2711,6 @@ public:
   void is_unused_flag142_set(int v);
   void is_unused_flag143_set(int v);
   void is_unused_flag144_set(int v);
-  void is_unused_flag145_set(int v);
   void is_unused_flag14_set(int v);
   void is_unused_flag15_set(int v);
   void is_unused_flag16_set(int v);

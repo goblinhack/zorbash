@@ -61,6 +61,7 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
   bool ret;
   switch (biome) {
     case BIOME_DUNGEON: ret = create_biome_dungeon(world_at, seed); break;
+    case BIOME_FLOODED: ret = create_biome_flooded(world_at, seed); break;
     case BIOME_SWAMP: ret = create_biome_swamp(world_at, seed); break;
     case BIOME_SEWER: ret = create_biome_sewer(world_at, seed); break;
     case BIOME_CHASMS: ret = create_biome_chasms(world_at, seed); break;
@@ -73,7 +74,7 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
   }
 
   if (! monst_count) {
-    if (g_opt_biome_chasms || g_opt_biome_ice || g_opt_biome_lava || g_opt_biome_swamp) {
+    if (g_opt_biome_chasms || g_opt_biome_ice || g_opt_biome_lava || g_opt_biome_swamp || g_opt_biome_flooded) {
       //
       // Ignore for testing
       //

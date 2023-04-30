@@ -991,10 +991,10 @@ int Thing::is_unused_flag144(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag144());
 }
-int Thing::is_unused_flag145(void)
+int Thing::is_biome_flooded(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag145());
+  return (tp()->is_biome_flooded());
 }
 int Thing::is_obj_spawning(void)
 {

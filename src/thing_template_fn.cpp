@@ -422,6 +422,7 @@ int Tp::is_bearowl(void) const { return _is_bearowl; }
 int Tp::is_bee(void) const { return _is_bee; }
 int Tp::is_biome_chasms(void) const { return _is_biome_chasms; }
 int Tp::is_biome_dungeon(void) const { return _is_biome_dungeon; }
+int Tp::is_biome_flooded(void) const { return _is_biome_flooded; }
 int Tp::is_biome_ice(void) const { return _is_biome_ice; }
 int Tp::is_biome_lava(void) const { return _is_biome_lava; }
 int Tp::is_biome_sewer(void) const { return _is_biome_sewer; }
@@ -744,7 +745,6 @@ int Tp::is_unused_flag141(void) const { return _is_unused_flag141; }
 int Tp::is_unused_flag142(void) const { return _is_unused_flag142; }
 int Tp::is_unused_flag143(void) const { return _is_unused_flag143; }
 int Tp::is_unused_flag144(void) const { return _is_unused_flag144; }
-int Tp::is_unused_flag145(void) const { return _is_unused_flag145; }
 int Tp::is_unused_flag14(void) const { return _is_unused_flag14; }
 int Tp::is_unused_flag15(void) const { return _is_unused_flag15; }
 int Tp::is_unused_flag16(void) const { return _is_unused_flag16; }
@@ -1171,6 +1171,7 @@ void Tp::is_bearowl_set(int v) { _is_bearowl = v; }
 void Tp::is_bee_set(int v) { _is_bee = v; }
 void Tp::is_biome_chasms_set(int v) { _is_biome_chasms = v; }
 void Tp::is_biome_dungeon_set(int v) { _is_biome_dungeon = v; }
+void Tp::is_biome_flooded_set(int v) { _is_biome_flooded = v; }
 void Tp::is_biome_ice_set(int v) { _is_biome_ice = v; }
 void Tp::is_biome_lava_set(int v) { _is_biome_lava = v; }
 void Tp::is_biome_sewer_set(int v) { _is_biome_sewer = v; }
@@ -1493,7 +1494,6 @@ void Tp::is_unused_flag141_set(int v) { _is_unused_flag141 = v; }
 void Tp::is_unused_flag142_set(int v) { _is_unused_flag142 = v; }
 void Tp::is_unused_flag143_set(int v) { _is_unused_flag143 = v; }
 void Tp::is_unused_flag144_set(int v) { _is_unused_flag144 = v; }
-void Tp::is_unused_flag145_set(int v) { _is_unused_flag145 = v; }
 void Tp::is_unused_flag14_set(int v) { _is_unused_flag14 = v; }
 void Tp::is_unused_flag15_set(int v) { _is_unused_flag15 = v; }
 void Tp::is_unused_flag16_set(int v) { _is_unused_flag16 = v; }

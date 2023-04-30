@@ -11,8 +11,8 @@
 //
 #define DUNGEON_GRID_CHUNK_HEIGHT_MAX 3  // Levels are split into grids. Each grid can have a room.
 #define DUNGEON_GRID_CHUNK_WIDTH_MAX  7  // Rooms across and down
-#define DUNGEONS_GRID_CHUNK_HEIGHT    11 // The whole underworld
-#define DUNGEONS_GRID_CHUNK_WIDTH     11 //
+#define DUNGEONS_GRID_CHUNK_HEIGHT    10 // The whole underworld
+#define DUNGEONS_GRID_CHUNK_WIDTH     10 //
 #define DUNGEON_MAX_DEPTH             3  // Max difficulty level
 #define DUNGEONS_MAX_DIFFICULTY_LEVEL 8  // Max difficulty level
 #define MAX_GRID_CHUNK_HEIGHT         DUNGEONS_GRID_CHUNK_HEIGHT

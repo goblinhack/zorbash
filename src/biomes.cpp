@@ -34,13 +34,17 @@ biome_t get_biome(int difficulty_depth)
   switch (difficulty_depth) {
     case 0: biome = BIOME_DUNGEON; break;
     case 1: biome = BIOME_SWAMP; break;
-    case 2: biome = BIOME_CHASMS; break;
-    case 3: biome = BIOME_ICE; break;
-    case 4: biome = BIOME_DUNGEON; break;
-    case 5: biome = BIOME_LAVA; break;
-    case 6: biome = BIOME_DUNGEON; break;
+    case 2: biome = BIOME_FLOODED; break;
+    case 3: biome = BIOME_DUNGEON; break;
+    case 4: biome = BIOME_CHASMS; break;
+    case 5: biome = BIOME_ICE; break;
+    case 6: biome = BIOME_LAVA; break;
     case 7: biome = BIOME_DUNGEON; break;
     default: biome = BIOME_DUNGEON; break;
+  }
+
+  if (g_opt_biome_flooded) {
+    biome = BIOME_FLOODED;
   }
 
   if (g_opt_biome_swamp) {
@@ -69,6 +73,7 @@ std::string biome_to_string(biome_t biome)
   switch (biome) {
     case BIOME_UNKNOWN: return "Unknown";
     case BIOME_DUNGEON: return "Dungeon";
+    case BIOME_FLOODED: return "Flooded";
     case BIOME_SWAMP: return "Swamp";
     case BIOME_SEWER: return "Sewer";
     case BIOME_ICE: return "Ice";
@@ -80,6 +85,25 @@ std::string biome_to_string(biome_t biome)
   return "Unknown";
 }
 
+std::string biome_to_name(biome_t biome)
+{
+  TRACE_AND_INDENT();
+
+  switch (biome) {
+    case BIOME_UNKNOWN: return "unknown";
+    case BIOME_DUNGEON: return "dungeon";
+    case BIOME_FLOODED: return "flooded";
+    case BIOME_SWAMP: return "swamp";
+    case BIOME_SEWER: return "sewer";
+    case BIOME_ICE: return "ice";
+    case BIOME_CHASMS: return "chasms";
+    case BIOME_LAVA: return "lava";
+    case BIOME_DUNGEONS: return "dungeons";
+    case BIOME_MAX: DIE("unxpected enum");
+  }
+  return "unknown";
+}
+
 color get_biome_color(biome_t biome)
 {
   TRACE_AND_INDENT();
@@ -87,6 +111,7 @@ color get_biome_color(biome_t biome)
   switch (biome) {
     case BIOME_UNKNOWN: return BIOME_DUNGEON_COLOR;
     case BIOME_DUNGEON: return BIOME_DUNGEON_COLOR;
+    case BIOME_FLOODED: return BIOME_FLOODED_COLOR;
     case BIOME_SWAMP: return BIOME_SWAMP_COLOR;
     case BIOME_SEWER: return BIOME_SEWER_COLOR;
     case BIOME_ICE: return BIOME_ICE_COLOR;
@@ -103,4 +128,11 @@ color get_difficulty_depth_color(int difficulty_depth)
   TRACE_AND_INDENT();
 
   return get_biome_color(get_biome(difficulty_depth));
+}
+
+std::string get_difficulty_depth_name(int difficulty_depth)
+{
+  TRACE_AND_INDENT();
+
+  return biome_to_name(get_biome(difficulty_depth));
 }

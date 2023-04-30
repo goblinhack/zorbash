@@ -230,6 +230,7 @@ PyObject *thing_is_bearowl(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bee(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_biome_chasms(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_biome_dungeon(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_biome_flooded(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_biome_ice(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_biome_lava(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_biome_sewer(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -563,7 +564,6 @@ PyObject *thing_is_unused_flag141(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag142(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag143(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag144(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag145(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag14(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag15(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag16(PyObject *obj, PyObject *args, PyObject *keywds);

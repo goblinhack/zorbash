@@ -1388,6 +1388,7 @@ public:
   int is_bee(void);
   int is_biome_chasms(void);
   int is_biome_dungeon(void);
+  int is_biome_flooded(void);
   int is_biome_ice(void);
   int is_biome_lava(void);
   int is_biome_sewer(void);
@@ -1717,7 +1718,6 @@ public:
   int is_unused_flag142(void);
   int is_unused_flag143(void);
   int is_unused_flag144(void);
-  int is_unused_flag145(void);
   int is_unused_flag14(void);
   int is_unused_flag15(void);
   int is_unused_flag16(void);

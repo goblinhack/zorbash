@@ -115,7 +115,7 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
   point br;
 
   tl.x = x * (width + 1);
-  tl.y = y * (height + 1) + 2;
+  tl.y = y * (height + 1) + 1;
 
   br.x = tl.x;
   br.y = tl.y;
@@ -148,52 +148,10 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
   if (ctx->levels[ y ][ x ]) {
     switch (node->depth) {
       case -1: break;
-      case 1:
-        bg_tilename = "dungeon_icon.1";
+      default:
+        bg_tilename = "biome_" + get_difficulty_depth_name(node->depth - 1);
         if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(0));
-        }
-        break;
-      case 2:
-        bg_tilename = "dungeon_icon.2";
-        if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(1));
-        }
-        break;
-      case 3:
-        bg_tilename = "dungeon_icon.3";
-        if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(2));
-        }
-        break;
-      case 4:
-        bg_tilename = "dungeon_icon.4";
-        if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(3));
-        }
-        break;
-      case 5:
-        bg_tilename = "dungeon_icon.5";
-        if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(4));
-        }
-        break;
-      case 6:
-        bg_tilename = "dungeon_icon.6";
-        if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(5));
-        }
-        break;
-      case 7:
-        bg_tilename = "dungeon_icon.7";
-        if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(6));
-        }
-        break;
-      case 8:
-        bg_tilename = "dungeon_icon.8";
-        if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(7));
+          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(node->depth - 1));
         }
         break;
     }
@@ -201,14 +159,7 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
     wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_UNKNOWN_COLOR);
     switch (node->depth) {
       case -1: break;
-      case 1: bg_tilename = "dungeon_icon_loading.1"; break;
-      case 2: bg_tilename = "dungeon_icon_loading.2"; break;
-      case 3: bg_tilename = "dungeon_icon_loading.3"; break;
-      case 4: bg_tilename = "dungeon_icon_loading.4"; break;
-      case 5: bg_tilename = "dungeon_icon_loading.5"; break;
-      case 6: bg_tilename = "dungeon_icon_loading.6"; break;
-      case 7: bg_tilename = "dungeon_icon_loading.7"; break;
-      case 8: bg_tilename = "dungeon_icon_loading.8"; break;
+      default: bg_tilename = "biome_unknown"; break;
     }
   }
 
@@ -256,13 +207,15 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
             l->is_crystal_level = true;
             switch (next_node->depth) {
               case -1: break;
-              case 1: fg_tilename = "crystal.1"; break;
-              case 2: fg_tilename = "crystal.2"; break;
-              case 3: fg_tilename = "crystal.3"; break;
-              case 4: fg_tilename = "crystal.4"; break;
-              case 5: fg_tilename = "crystal.5"; break;
-              case 6: fg_tilename = "crystal.6"; break;
-              case 7: fg_tilename = "crystal.7"; break;
+              case 0: break;
+              case 1: break;
+              case 2: fg_tilename = "crystal.1"; break;
+              case 3: fg_tilename = "crystal.2"; break;
+              case 4: fg_tilename = "crystal.3"; break;
+              case 5: fg_tilename = "crystal.4"; break;
+              case 6: fg_tilename = "crystal.5"; break;
+              case 7: fg_tilename = "crystal.6"; break;
+              case 8: fg_tilename = "crystal.7"; break;
             }
           }
         }
@@ -1524,17 +1477,17 @@ void Game::wid_choose_initial_dungeons(void)
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
       if (! g_opt_ascii) {
-        wid_set_bg_tilename(b, "dungeon_icon.1");
+        wid_set_bg_tilename(b, "biome_dungeon");
       }
 
-      tl.x += 2;
-      br.x = TERM_WIDTH - 5;
+      tl.x += 3;
+      br.x = TERM_WIDTH - 3;
 
       b = wid_new_square_button(window, "wid key text");
 
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-      wid_set_text(b, "Easy");
+      wid_set_text(b, "Dungeon");
     }
     y += 2;
     {
@@ -1545,7 +1498,7 @@ void Game::wid_choose_initial_dungeons(void)
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
       if (! g_opt_ascii) {
-        wid_set_bg_tilename(b, "dungeon_icon.2");
+        wid_set_bg_tilename(b, "biome_swamp");
       }
 
       tl.x += 2;
@@ -1566,7 +1519,28 @@ void Game::wid_choose_initial_dungeons(void)
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
       if (! g_opt_ascii) {
-        wid_set_bg_tilename(b, "dungeon_icon.3");
+        wid_set_bg_tilename(b, "biome_flooded");
+      }
+
+      tl.x += 3;
+      br.x = TERM_WIDTH - 3;
+
+      b = wid_new_square_button(window, "wid key text");
+
+      wid_set_pos(b, tl, br);
+      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+      wid_set_text(b, "Flooded");
+    }
+    y += 2;
+    {
+      Widp  b = wid_new_square_button(window, "wid key");
+      point tl(TERM_WIDTH - 12, y);
+      point br(tl.x + 1, tl.y + 1);
+
+      wid_set_pos(b, tl, br);
+      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+      if (! g_opt_ascii) {
+        wid_set_bg_tilename(b, "biome_chasms");
       }
 
       tl.x += 2;
@@ -1587,7 +1561,7 @@ void Game::wid_choose_initial_dungeons(void)
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
       if (! g_opt_ascii) {
-        wid_set_bg_tilename(b, "dungeon_icon.4");
+        wid_set_bg_tilename(b, "biome_ice");
       }
 
       tl.x += 2;
@@ -1608,28 +1582,7 @@ void Game::wid_choose_initial_dungeons(void)
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
       if (! g_opt_ascii) {
-        wid_set_bg_tilename(b, "dungeon_icon.5");
-      }
-
-      tl.x += 2;
-      br.x = TERM_WIDTH - 4;
-
-      b = wid_new_square_button(window, "wid key text");
-
-      wid_set_pos(b, tl, br);
-      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-      wid_set_text(b, "Hard");
-    }
-    y += 2;
-    {
-      Widp  b = wid_new_square_button(window, "wid key");
-      point tl(TERM_WIDTH - 12, y);
-      point br(tl.x + 1, tl.y + 1);
-
-      wid_set_pos(b, tl, br);
-      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-      if (! g_opt_ascii) {
-        wid_set_bg_tilename(b, "dungeon_icon.6");
+        wid_set_bg_tilename(b, "biome_lava");
       }
 
       tl.x += 2;
@@ -1640,48 +1593,6 @@ void Game::wid_choose_initial_dungeons(void)
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
       wid_set_text(b, "Lava");
-    }
-    y += 2;
-    {
-      Widp  b = wid_new_square_button(window, "wid key");
-      point tl(TERM_WIDTH - 12, y);
-      point br(tl.x + 1, tl.y + 1);
-
-      wid_set_pos(b, tl, br);
-      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-      if (! g_opt_ascii) {
-        wid_set_bg_tilename(b, "dungeon_icon.7");
-      }
-
-      tl.x += 2;
-      br.x = TERM_WIDTH - 3;
-
-      b = wid_new_square_button(window, "wid key text");
-
-      wid_set_pos(b, tl, br);
-      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-      wid_set_text(b, "VHard");
-    }
-    y += 2;
-    {
-      Widp  b = wid_new_square_button(window, "wid key");
-      point tl(TERM_WIDTH - 12, y);
-      point br(tl.x + 1, tl.y + 1);
-
-      wid_set_pos(b, tl, br);
-      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-      if (! g_opt_ascii) {
-        wid_set_bg_tilename(b, "dungeon_icon.8");
-      }
-
-      tl.x += 2;
-      br.x = TERM_WIDTH - 3;
-
-      b = wid_new_square_button(window, "wid key text");
-
-      wid_set_pos(b, tl, br);
-      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-      wid_set_text(b, "Finale");
     }
   }
 

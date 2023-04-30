@@ -111,6 +111,33 @@ Tpp Level::get_biome_dungeon_random_monst(Dungeonp d, point p, monst_environ_t m
   return get_random_monst(p, monst_environ, monst_class, difficulty_offset);
 }
 
+Tpp Level::get_biome_flooded_random_monst(Dungeonp d, point p, monst_environ_t monst_environ)
+{
+  monst_class_t monst_class       = MONST_CLASS_ANY;
+  int           difficulty_offset = 0;
+
+  if (d->is_monst_class_A(p.x, p.y)) {
+    difficulty_offset = 1;
+    monst_class       = MONST_CLASS_A;
+  } else if (d->is_monst_class_B(p.x, p.y)) {
+    difficulty_offset = 50;
+    monst_class       = MONST_CLASS_B;
+  } else if (d->is_monst_class_C(p.x, p.y)) {
+    difficulty_offset = 100;
+    monst_class       = MONST_CLASS_C;
+  } else if (d->is_monst_class_D(p.x, p.y)) {
+    difficulty_offset = 200;
+    monst_class       = MONST_CLASS_D;
+  } else if (d->is_monst_class_E(p.x, p.y)) {
+    difficulty_offset = 500;
+    monst_class       = MONST_CLASS_E;
+  } else {
+    return nullptr;
+  }
+
+  return get_random_monst(p, monst_environ, monst_class, difficulty_offset);
+}
+
 Tpp Level::get_biome_chasms_random_monst(Dungeonp d, point p, monst_environ_t monst_environ)
 {
   monst_class_t monst_class       = MONST_CLASS_ANY;
@@ -216,6 +243,10 @@ void tp_monst_add(Tpp tp)
 
   if (tp->is_biome_dungeon()) {
     biomes.push_back(BIOME_DUNGEON);
+  }
+
+  if (tp->is_biome_flooded()) {
+    biomes.push_back(BIOME_FLOODED);
   }
 
   if (tp->is_biome_sewer()) {

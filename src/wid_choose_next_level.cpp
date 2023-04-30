@@ -145,20 +145,6 @@ static void wid_choose_next_dungeons_mouse_over(Widp w, int relx, int rely, int 
     snprintf(tmp, sizeof(tmp) - 1, "Food HP est.      %u", l->total_food_level());
     wid_level_description->log(tmp, TEXT_FORMAT_LHS);
 
-    auto        l = ctx->levels[ y ][ x ];
-    std::string bg_tilename;
-    switch (l->difficulty_depth) {
-      case -1: break;
-      case 0: bg_tilename = "dungeon_icon.1"; break;
-      case 1: bg_tilename = "dungeon_icon.2"; break;
-      case 2: bg_tilename = "dungeon_icon.3"; break;
-      case 3: bg_tilename = "dungeon_icon.4"; break;
-      case 4: bg_tilename = "dungeon_icon.5"; break;
-      case 5: bg_tilename = "dungeon_icon.6"; break;
-      case 6: bg_tilename = "dungeon_icon.7"; break;
-      case 7: bg_tilename = "dungeon_icon.8"; break;
-    }
-
     if (g_opt_ascii) {
       switch (l->difficulty_depth) {
         case -1: break;
@@ -501,7 +487,7 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
   point br;
 
   tl.x = x * (width + 1);
-  tl.y = y * (height + 1);
+  tl.y = y * (height + 1) + 1;
 
   br.x = tl.x;
   br.y = tl.y;
@@ -526,52 +512,10 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
   if (ctx->levels[ y ][ x ]) {
     switch (l->difficulty_depth) {
       case -1: break;
-      case 0:
-        bg_tilename = "dungeon_icon.1";
+      default:
+        bg_tilename = "biome_" + get_difficulty_depth_name(l->difficulty_depth - 1);
         if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(0));
-        }
-        break;
-      case 1:
-        bg_tilename = "dungeon_icon.2";
-        if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(1));
-        }
-        break;
-      case 2:
-        bg_tilename = "dungeon_icon.3";
-        if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(2));
-        }
-        break;
-      case 3:
-        bg_tilename = "dungeon_icon.4";
-        if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(3));
-        }
-        break;
-      case 4:
-        bg_tilename = "dungeon_icon.5";
-        if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(4));
-        }
-        break;
-      case 5:
-        bg_tilename = "dungeon_icon.6";
-        if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(5));
-        }
-        break;
-      case 6:
-        bg_tilename = "dungeon_icon.7";
-        if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(6));
-        }
-        break;
-      case 7:
-        bg_tilename = "dungeon_icon.8";
-        if (g_opt_ascii) {
-          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(7));
+          wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(l->difficulty_depth - 1));
         }
         break;
     }
@@ -588,13 +532,15 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
   if (l->is_crystal_level) {
     switch (l->difficulty_depth) {
       case -1: break;
-      case 1: fg_tilename = "crystal.1"; break;
-      case 2: fg_tilename = "crystal.2"; break;
-      case 3: fg_tilename = "crystal.3"; break;
-      case 4: fg_tilename = "crystal.4"; break;
-      case 5: fg_tilename = "crystal.5"; break;
-      case 6: fg_tilename = "crystal.6"; break;
-      case 7: fg_tilename = "crystal.7"; break;
+      case 0: break;
+      case 1: break;
+      case 2: fg_tilename = "crystal.1"; break;
+      case 3: fg_tilename = "crystal.2"; break;
+      case 4: fg_tilename = "crystal.3"; break;
+      case 5: fg_tilename = "crystal.4"; break;
+      case 6: fg_tilename = "crystal.5"; break;
+      case 7: fg_tilename = "crystal.6"; break;
+      case 8: fg_tilename = "crystal.7"; break;
     }
   }
 

@@ -495,6 +495,7 @@ static void usage(void)
   CON(" --test-biome-ice            -- Test the ice biome");
   CON(" --test-biome-chasms         -- Test the chasms biome");
   CON(" --test-biome-lava           -- Test the lava biome");
+  CON(" --test-biome-flooded        -- Test the flooded biome");
   CON(" ");
   CON("Written by goblinhack@gmail.com");
 }
@@ -531,6 +532,11 @@ static void parse_args(int argc, char *argv[])
 
     if (! strcasecmp(argv[ i ], "--test-biome-swamp") || ! strcasecmp(argv[ i ], "-test-biome-swamp")) {
       g_opt_biome_swamp = true;
+      continue;
+    }
+
+    if (! strcasecmp(argv[ i ], "--test-biome-flooded") || ! strcasecmp(argv[ i ], "-test-biome-flooded")) {
+      g_opt_biome_flooded = true;
       continue;
     }
 

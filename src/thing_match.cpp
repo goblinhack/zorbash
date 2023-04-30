@@ -148,6 +148,7 @@ bool Tp::matches(const std::string &what)
   if (is_bee() && (what == "is_bee")) { return true; }
   if (is_biome_chasms() && (what == "is_biome_chasms")) { return true; }
   if (is_biome_dungeon() && (what == "is_biome_dungeon")) { return true; }
+  if (is_biome_flooded() && (what == "is_biome_flooded")) { return true; }
   if (is_biome_ice() && (what == "is_biome_ice")) { return true; }
   if (is_biome_lava() && (what == "is_biome_lava")) { return true; }
   if (is_biome_sewer() && (what == "is_biome_sewer")) { return true; }
@@ -463,7 +464,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag142() && (what == "is_unused_flag142")) { return true; }
   if (is_unused_flag143() && (what == "is_unused_flag143")) { return true; }
   if (is_unused_flag144() && (what == "is_unused_flag144")) { return true; }
-  if (is_unused_flag145() && (what == "is_unused_flag145")) { return true; }
   if (is_unused_flag14() && (what == "is_unused_flag14")) { return true; }
   if (is_unused_flag15() && (what == "is_unused_flag15")) { return true; }
   if (is_unused_flag16() && (what == "is_unused_flag16")) { return true; }
@@ -751,6 +751,7 @@ bool Thing::matches(const std::string &what)
   if (is_bee() && (what == "is_bee")) { return true; }
   if (is_biome_chasms() && (what == "is_biome_chasms")) { return true; }
   if (is_biome_dungeon() && (what == "is_biome_dungeon")) { return true; }
+  if (is_biome_flooded() && (what == "is_biome_flooded")) { return true; }
   if (is_biome_ice() && (what == "is_biome_ice")) { return true; }
   if (is_biome_lava() && (what == "is_biome_lava")) { return true; }
   if (is_biome_sewer() && (what == "is_biome_sewer")) { return true; }
@@ -1067,7 +1068,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag142() && (what == "is_unused_flag142")) { return true; }
   if (is_unused_flag143() && (what == "is_unused_flag143")) { return true; }
   if (is_unused_flag144() && (what == "is_unused_flag144")) { return true; }
-  if (is_unused_flag145() && (what == "is_unused_flag145")) { return true; }
   if (is_unused_flag14() && (what == "is_unused_flag14")) { return true; }
   if (is_unused_flag15() && (what == "is_unused_flag15")) { return true; }
   if (is_unused_flag16() && (what == "is_unused_flag16")) { return true; }
@@ -1352,6 +1352,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_bee") { return &Thing::is_bee; }
   if (what == "is_biome_chasms") { return &Thing::is_biome_chasms; }
   if (what == "is_biome_dungeon") { return &Thing::is_biome_dungeon; }
+  if (what == "is_biome_flooded") { return &Thing::is_biome_flooded; }
   if (what == "is_biome_ice") { return &Thing::is_biome_ice; }
   if (what == "is_biome_lava") { return &Thing::is_biome_lava; }
   if (what == "is_biome_sewer") { return &Thing::is_biome_sewer; }
@@ -1659,7 +1660,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag142") { return &Thing::is_unused_flag142; }
   if (what == "is_unused_flag143") { return &Thing::is_unused_flag143; }
   if (what == "is_unused_flag144") { return &Thing::is_unused_flag144; }
-  if (what == "is_unused_flag145") { return &Thing::is_unused_flag145; }
   if (what == "is_unused_flag14") { return &Thing::is_unused_flag14; }
   if (what == "is_unused_flag15") { return &Thing::is_unused_flag15; }
   if (what == "is_unused_flag16") { return &Thing::is_unused_flag16; }

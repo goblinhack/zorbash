@@ -475,6 +475,7 @@ void Level::display_pixelart_map_all(void)
     switch (biome) {
       case BIOME_UNKNOWN: break;
       case BIOME_DUNGEON: glcolor(GRAY50); break;
+      case BIOME_FLOODED: glcolor(GRAY50); break;
       case BIOME_SWAMP: glcolor(GRAY10); break;
       case BIOME_SEWER: glcolor(GRAY10); break;
       case BIOME_ICE: glcolor(BLUE); break;

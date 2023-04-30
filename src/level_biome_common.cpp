@@ -76,6 +76,7 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
       switch (biome) {
         case BIOME_UNKNOWN: break;
         case BIOME_DUNGEON: tp_monst = get_biome_dungeon_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
+        case BIOME_FLOODED: tp_monst = get_biome_flooded_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
         case BIOME_SWAMP: tp_monst = get_biome_swamp_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
         case BIOME_SEWER: tp_monst = get_biome_sewer_random_monst(p, MONST_ENVIRON_NORMAL); break;
         case BIOME_ICE: tp_monst = get_biome_ice_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
@@ -314,7 +315,12 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
       if (! tp->is_critical_to_level()) {
         if (biome == BIOME_DUNGEON) {
           if (! tp->is_biome_dungeon()) {
-            log("INF: Dropping %s for dungeon", tp->name().c_str());
+            log("INF: Dropping %s for biome dungeon", tp->name().c_str());
+            continue;
+          }
+        } else if (biome == BIOME_FLOODED) {
+          if (! tp->is_biome_flooded()) {
+            log("INF: Dropping %s for biome flooded", tp->name().c_str());
             continue;
           }
         } else if (biome == BIOME_SWAMP) {

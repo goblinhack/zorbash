@@ -9,6 +9,7 @@ bool Level::create_wandering_monster(void)
 {
   switch (biome) {
     case BIOME_DUNGEON:
+    case BIOME_FLOODED:
       if (game->tick_current % 100) {
         return false;
       }
@@ -51,7 +52,7 @@ bool Level::create_wandering_monster(void)
     }
 
     if (biome == BIOME_DUNGEON) {
-      if (is_floor(x, y) || is_corridor(x, y) || is_bridge(x, y) || is_water(x, y)) {
+      if (is_corridor(x, y) || is_bridge(x, y) || is_water(x, y) || is_hazard(x, y)) {
         continue;
       }
     }

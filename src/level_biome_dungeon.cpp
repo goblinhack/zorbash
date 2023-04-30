@@ -554,7 +554,7 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
     {
       uint32_t start = time_ms();
       dbg2("INF: Place floor deco");
-      place_floor_deco(dungeon);
+      create_biome_dungeon_place_floor_deco(dungeon);
       if (g_errored) {
         return false;
       }
@@ -1180,7 +1180,7 @@ void Level::create_biome_dungeon_place_deep_water(Dungeonp d, const std::string 
   }
 }
 
-void Level::place_floor_deco(Dungeonp d)
+void Level::create_biome_dungeon_place_floor_deco(Dungeonp d)
 {
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {

@@ -28,19 +28,35 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
   int       biome_ice          = false;
   int       biome_chasms       = false;
   int       biome_lava         = false;
+  int       biome_flooded      = false;
   int       depth              = 0;
 
-  static char *kwlist[] = {
-      (char *) "room_data",    (char *) "xxx",           (char *) "yyy",         (char *) "room_name",
-      (char *) "up",           (char *) "down",          (char *) "left",        (char *) "right",
-      (char *) "entrance",     (char *) "exit",          (char *) "lock",        (char *) "key",
-      (char *) "secret",       (char *) "biome_dungeon", (char *) "biome_swamp", (char *) "biome_ice",
-      (char *) "biome_chasms", (char *) "biome_lava",    (char *) "depth",       nullptr};
+  static char *kwlist[] = {(char *) "room_data",
+                           (char *) "xxx",
+                           (char *) "yyy",
+                           (char *) "room_name",
+                           (char *) "up",
+                           (char *) "down",
+                           (char *) "left",
+                           (char *) "right",
+                           (char *) "entrance",
+                           (char *) "exit",
+                           (char *) "lock",
+                           (char *) "key",
+                           (char *) "secret",
+                           (char *) "biome_dungeon",
+                           (char *) "biome_swamp",
+                           (char *) "biome_ice",
+                           (char *) "biome_chasms",
+                           (char *) "biome_lava",
+                           (char *) "biome_flooded",
+                           (char *) "depth",
+                           nullptr};
 
-  if (! PyArg_ParseTupleAndKeywords(args, keywds, "|Oiisiiiiiiiiiiiiiii", kwlist, &py_room_data, &xxx, &yyy,
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "|Oiisiiiiiiiiiiiiiiii", kwlist, &py_room_data, &xxx, &yyy,
                                     &room_name, &up, &down, &left, &right, &is_ascend_dungeon, &is_descend_dungeon,
                                     &is_lock, &is_key, &is_secret, &biome_dungeon, &biome_swamp, &biome_ice,
-                                    &biome_chasms, &biome_lava, &depth)) {
+                                    &biome_chasms, &biome_lava, &biome_flooded, &depth)) {
     ERR("map_load_room: Bad args");
     Py_RETURN_FALSE;
   }
@@ -72,6 +88,9 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
   }
   if (biome_lava) {
     biome = BIOME_LAVA;
+  }
+  if (biome_flooded) {
+    biome = BIOME_FLOODED;
   }
 
   for (auto n = 0; n < rooms_across; n++) {
@@ -249,6 +268,9 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
       if (! r->contains(MAP_DEPTH_OBJ, Charmap::KEY)) {
         r->con();
         if (biome == BIOME_DUNGEON) {
+          DIE("Key room is missing dungeon key char '%c'", Charmap::KEY);
+        }
+        if (biome == BIOME_FLOODED) {
           DIE("Key room is missing dungeon key char '%c'", Charmap::KEY);
         }
       }
