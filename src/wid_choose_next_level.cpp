@@ -122,7 +122,7 @@ static void wid_choose_next_dungeons_mouse_over(Widp w, int relx, int rely, int 
     delete wid_level_description;
     wid_level_description = nullptr;
 
-    point tl = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 12);
+    point tl = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 11);
     point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
 
     char tmp[ MAXSHORTSTR ];
@@ -145,39 +145,13 @@ static void wid_choose_next_dungeons_mouse_over(Widp w, int relx, int rely, int 
     snprintf(tmp, sizeof(tmp) - 1, "Food HP est.      %u", l->total_food_level());
     wid_level_description->log(tmp, TEXT_FORMAT_LHS);
 
-    if (g_opt_ascii) {
-      switch (l->difficulty_depth) {
-        case -1: break;
-        case 0:
-          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, get_difficulty_depth_color(0));
-          break;
-        case 1:
-          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, get_difficulty_depth_color(1));
-          break;
-        case 2:
-          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, get_difficulty_depth_color(2));
-          break;
-        case 3:
-          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, get_difficulty_depth_color(3));
-          break;
-        case 4:
-          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, get_difficulty_depth_color(4));
-          break;
-        case 5:
-          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, get_difficulty_depth_color(5));
-          break;
-        case 6:
-          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, get_difficulty_depth_color(6));
-          break;
-        case 7:
-          wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, get_difficulty_depth_color(7));
-          break;
-      }
-
-      wid_set_style(wid_level_description->wid_popup_container, UI_WID_STYLE_SOLID_DEFAULT);
-    } else {
-      wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, WHITE);
-      wid_set_style(wid_level_description->wid_popup_container, UI_WID_STYLE_SPARSE_NONE);
+    switch (l->difficulty_depth) {
+      case -1: break;
+      case 0: break;
+      default:
+        wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG,
+                      get_difficulty_depth_color(l->difficulty_depth));
+        break;
     }
   }
 
