@@ -12,7 +12,6 @@ def tp_init(name, text_long_name, tiles=[]):
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
-    my.gfx_pixelart_show_outlined(self, True)
     my.gfx_pixelart_submergible(self, True)
     my.is_able_to_fall(self, True)
     my.is_always_hit(self, True)
@@ -83,6 +82,22 @@ def init():
             "pillar.30",
             "pillar.31",
             "pillar.32",
+            "pillar.33",
+            "pillar.34",
+            "pillar.35",
+            "pillar.36",
+            "pillar.37",
+            "pillar.38",
+            "pillar.39",
+            "pillar.40",
+            "pillar.41",
+            "pillar.42",
+            "pillar.43",
+            "pillar.44",
+            "pillar.45",
+            "pillar.46",
+            "pillar.47",
+            "pillar.48",
         ],
     )
 

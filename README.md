@@ -501,6 +501,7 @@ Graphics
 - Various items and food by Henry Software, [found here](https://henrysoftware.itch.io)
 <!-- purchased on itch.io -->
 - Various monsters by DeepDiveGameStudio, [found here](https://deepdivegamestudio.itch.io/)
+- Rocks by Pixel Overlord, [found here](https://pixeloverload.itch.io/48x-rock-tile-maps)
 <!-- purchased on itch.io -->
 
 Music
