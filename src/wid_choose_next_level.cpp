@@ -225,11 +225,18 @@ static void wid_choose_next_dungeons_tick(Widp w)
 
   wid_choose_levels_bg();
 
+  //
+  // Fade in/out timer
+  //
   static int val;
   static int delta = 1;
   static int step  = 2;
 
-  val += delta * step;
+  static auto last = time_ms_cached();
+  if (time_have_x_hundredths_passed_since(1, last)) {
+    val += delta * step;
+    last = time_ms();
+  }
 
   if (val > 250) {
     val   = 250;

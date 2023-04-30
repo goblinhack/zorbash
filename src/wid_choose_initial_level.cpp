@@ -486,11 +486,18 @@ static void wid_choose_initial_dungeons_tick(Widp w)
   wid_choose_levels_bg();
   wid_set_style(ctx->wid_enter, UI_WID_STYLE_GRAY);
 
+  //
+  // Fade in/out timer
+  //
   static int val;
   static int delta = 1;
   static int step  = 2;
 
-  val += delta * step;
+  static auto last = time_ms_cached();
+  if (time_have_x_hundredths_passed_since(1, last)) {
+    val += delta * step;
+    last = time_ms();
+  }
 
   if (val > 255) {
     val   = 255;
