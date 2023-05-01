@@ -17,10 +17,6 @@ void tp_fixup(void)
       tp->thing_size_set(THING_SIZE_NORMAL);
     }
 
-    if (tp->stamina()) {
-      tp->is_able_to_tire_set(true);
-    }
-
     if (tp->is_living()) {
       if (tp->is_lifeless()) {
         DIE("Tp %s is living and lifeless?", tp->name().c_str());
@@ -30,6 +26,16 @@ void tp_fixup(void)
     if (tp->is_able_to_freeze()) {
       if (tp->is_fire()) {
         DIE("Tp %s is fire and can freeze?", tp->name().c_str());
+      }
+    }
+
+    if (tp->stamina()) {
+      tp->is_able_to_tire_set(true);
+    }
+
+    if (tp->is_able_to_tire()) {
+      if (tp->is_tireless()) {
+        DIE("Tp %s is tireless and can tire? or has stamina set", tp->name().c_str());
       }
     }
 
@@ -161,6 +167,12 @@ void tp_fixup(void)
     if (! tp->on_idle_tick_freq_dice_str().empty()) {
       if (! tp->is_tickable()) {
         DIE("Tp %s has idle tick action but is not tickable?", tp->name().c_str());
+      }
+    }
+
+    if (! tp->resurrect_dice_str().empty()) {
+      if (! tp->is_able_to_be_resurrected()) {
+        DIE("Tp %s has resurrect diced but is not resurrectable?", tp->name().c_str());
       }
     }
 

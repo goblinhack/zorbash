@@ -175,10 +175,6 @@ void Thing::level_push(void)
     i_set_is_burnable = true;
     level->is_burnable_set(x, y);
   }
-  if (is_heavy()) {
-    i_set_is_heavy = true;
-    level->is_heavy_set(x, y);
-  }
   if (is_key()) {
     i_set_is_key = true;
     level->is_key_set(x, y);
@@ -245,6 +241,13 @@ void Thing::level_push(void)
   }
 
   if (! is_dead && ! is_open) {
+    //
+    // Do we want dead giant spiders to be an obstacle?
+    //
+    if (is_heavy()) {
+      i_set_is_heavy = true;
+      level->is_heavy_set(x, y);
+    }
     if (is_able_to_dampen_footsteps()) {
       i_set_is_able_to_dampen_footsteps = true;
       level->is_able_to_dampen_footsteps_set(x, y);

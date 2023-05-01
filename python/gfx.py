@@ -10101,6 +10101,24 @@ def init_tiles_32x32():
         "",
         "",
         "",
+        #######################################################################
+        "spider_bone.1",
+        "spider_bone.2",
+        "spider_bone.3",
+        "spider_bone.4",
+        "spider_bone.5",
+        "spider_bone.6",
+        "spider_bone.7",
+        "spider_bone.8",
+        "spider_bone.dead",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        #######################################################################
     ]
 
     my.tile_load_arr_sprites(

@@ -379,6 +379,7 @@ void Game::place_player(void)
         t->enchant_without_stone(w);
       }
       if (0) {
+        level->thing_new("spider_bone", point(x + 2, y + 3));
         level->thing_new("crab_sewer", point(x + 3, y + 3));
         level->thing_new("sheep", point(x + 1, y + 3));
         level->thing_new("goat_battle", point(x + 2, y + 1));
