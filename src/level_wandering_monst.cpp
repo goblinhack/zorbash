@@ -8,22 +8,22 @@
 bool Level::create_wandering_monster(void)
 {
   switch (biome) {
-    case BIOME_DUNGEON:
-    case BIOME_FLOODED:
+    case BIOME_DUNGEON :
+    case BIOME_FLOODED :
       if (game->tick_current % 100) {
         return false;
       }
       break;
-    case BIOME_SWAMP:
-    case BIOME_LAVA:
-    case BIOME_ICE:
-    case BIOME_CHASMS:
-    case BIOME_SEWER:
+    case BIOME_SWAMP :
+    case BIOME_LAVA :
+    case BIOME_ICE :
+    case BIOME_CHASMS :
+    case BIOME_SEWER :
       if (game->tick_current % 50) {
         return false;
       }
       break;
-    default: return false;
+    default : return false;
   }
 
   if (monst_count >= LEVEL_MONST_COUNT_ABS_MAX) {
@@ -45,9 +45,9 @@ bool Level::create_wandering_monster(void)
       return false;
     }
 
-    if (is_ascend_dungeon(x, y) || is_monst(x, y) || is_rock(x, y) || is_door(x, y) || is_secret_door(x, y) ||
-        is_mob(x, y) || is_chasm(x, y) || is_wall(x, y) || is_ascend_sewer(x, y) || is_descend_sewer(x, y) ||
-        is_descend_dungeon(x, y)) {
+    if (is_ascend_dungeon(x, y) || is_monst(x, y) || is_rock(x, y) || is_door(x, y) || is_secret_door(x, y)
+        || is_mob(x, y) || is_chasm(x, y) || is_wall(x, y) || is_ascend_sewer(x, y) || is_descend_sewer(x, y)
+        || is_descend_dungeon(x, y)) {
       continue;
     }
 

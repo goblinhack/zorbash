@@ -552,8 +552,8 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   //
   auto t = most_dangerous_adjacent_thing();
   if (is_monst() && t && ! t->is_player()) {
-    auto free_attack = (((t->curr_at.x >= curr_at.x) && left) || ((t->curr_at.x <= curr_at.x) && right) ||
-                        ((t->curr_at.y >= curr_at.y) && up) || ((t->curr_at.y <= curr_at.y) && down));
+    auto free_attack = (((t->curr_at.x >= curr_at.x) && left) || ((t->curr_at.x <= curr_at.x) && right)
+                        || ((t->curr_at.y >= curr_at.y) && up) || ((t->curr_at.y <= curr_at.y) && down));
 
     if (free_attack) {
       TRACE_NO_INDENT();
@@ -586,21 +586,21 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     //
     if (tp()->gfx_pixelart_animated_can_hflip()) {
       switch (dir) {
-        case THING_DIR_NONE:
-        case THING_DIR_DOWN:
-        case THING_DIR_UP: break;
+        case THING_DIR_NONE :
+        case THING_DIR_DOWN :
+        case THING_DIR_UP : break;
 
-        case THING_DIR_LEFT:
-        case THING_DIR_TL:
-        case THING_DIR_BL:
+        case THING_DIR_LEFT :
+        case THING_DIR_TL :
+        case THING_DIR_BL :
           if (! is_facing_left && ! ts_flip_start_get()) {
             ts_flip_start_set(time_ms_cached());
           }
           break;
 
-        case THING_DIR_RIGHT:
-        case THING_DIR_TR:
-        case THING_DIR_BR:
+        case THING_DIR_RIGHT :
+        case THING_DIR_TR :
+        case THING_DIR_BR :
           if (is_facing_left && ! ts_flip_start_get()) {
             ts_flip_start_set(time_ms_cached());
           }
@@ -801,8 +801,8 @@ void Thing::move_delta(point delta)
   // If the move finish ended up doing something like moving into
   // a sewer, then we need to abort the delta move
   //
-  if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
-      is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_jumping) {
+  if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer
+      || is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_jumping) {
     return;
   }
 
@@ -825,8 +825,8 @@ void Thing::move_to_immediately(point to)
   update_pos(to, true);
   move_finish();
 
-  if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
-      is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_jumping || is_teleporting) {
+  if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer
+      || is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_jumping || is_teleporting) {
     //
     // Things like changing level, don't look at the location until
     // the interpolated position is updated else we can look at the

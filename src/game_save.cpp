@@ -417,7 +417,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_dirt                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_door                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_dry_grass                     ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_enchantstone                  ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_enchant_stone                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_fire                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_floor                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_foliage                       ? 1LLU : 0LLU) << shift; shift++;
@@ -463,7 +463,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_secret_door                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_shallow_water                 ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_shovable                      ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_skillstone                    ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_skill_stone                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_smoke                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_spiderweb                     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_staff                         ? 1LLU : 0LLU) << shift; shift++;
@@ -590,7 +590,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_dirt);
   out << bits(my.t->_is_door);
   out << bits(my.t->_is_dry_grass);
-  out << bits(my.t->_is_enchantstone);
+  out << bits(my.t->_is_enchant_stone);
   out << bits(my.t->_is_fire);
   out << bits(my.t->_is_floor);
   out << bits(my.t->_is_foliage);
@@ -618,7 +618,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_secret_door);
   out << bits(my.t->_is_shallow_water);
   out << bits(my.t->_is_shovable);
-  out << bits(my.t->_is_skillstone);
+  out << bits(my.t->_is_skill_stone);
   out << bits(my.t->_is_smoke);
   out << bits(my.t->_is_steam);
   out << bits(my.t->_is_spiderweb);
@@ -918,8 +918,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my)
 std::ostream &operator<<(std::ostream &out, Bits< const class Game & > const my)
 {
   TRACE_AND_INDENT();
-  uint32_t serialized_size = (uint32_t) (sizeof(Game) + sizeof(Level) + sizeof(Thing) + sizeof(ThingAi) +
-                                         sizeof(ThingInfo) + sizeof(ThingItem));
+  uint32_t serialized_size = (uint32_t) (sizeof(Game) + sizeof(Level) + sizeof(Thing) + sizeof(ThingAi)
+                                         + sizeof(ThingInfo) + sizeof(ThingItem));
   out << bits(my.t.version);
   out << bits(serialized_size);
   out << bits(my.t.save_slot);
@@ -989,8 +989,8 @@ bool Game::save(std::string file_to_save)
   HEAP_ALLOC(wrkmem, LZO1X_1_MEM_COMPRESS);
 
   lzo_uint compressed_len = 0;
-  int      r =
-      lzo1x_1_compress((lzo_bytep) uncompressed, uncompressed_len, (lzo_bytep) compressed, &compressed_len, wrkmem);
+  int      r
+      = lzo1x_1_compress((lzo_bytep) uncompressed, uncompressed_len, (lzo_bytep) compressed, &compressed_len, wrkmem);
   if (r == LZO_E_OK) {
     LOG("INF: Saved as %s, compress %luMb -> %luMb", file_to_save.c_str(),
         (unsigned long) uncompressed_len / (1024 * 1024), (unsigned long) compressed_len / (1024 * 1024));
@@ -1009,8 +1009,8 @@ bool Game::save(std::string file_to_save)
     memcpy(tmp_compressed, compressed, compressed_len);
 
     lzo_uint new_len = 0;
-    int      r =
-        lzo1x_decompress((lzo_bytep) tmp_compressed, compressed_len, (lzo_bytep) tmp_uncompressed, &new_len, nullptr);
+    int      r = lzo1x_decompress((lzo_bytep) tmp_compressed, compressed_len, (lzo_bytep) tmp_uncompressed, &new_len,
+                                  nullptr);
     if (r == LZO_E_OK && new_len == uncompressed_len) {
       if (memcmp(tmp_uncompressed, uncompressed, uncompressed_len)) {
         ERR("LZO compress-decompress failed");
@@ -1168,25 +1168,25 @@ static uint8_t wid_save_key_up(Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL:
-    case KMOD_RCTRL:
-    default:
+    case KMOD_LCTRL :
+    case KMOD_RCTRL :
+    default :
       switch (key->sym) {
-        default:
+        default :
           {
             TRACE_AND_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
-              case '0':
-              case '1':
-              case '2':
-              case '3':
-              case '4':
-              case '5':
-              case '6':
-              case '7':
-              case '8':
-              case '9':
+              case '0' :
+              case '1' :
+              case '2' :
+              case '3' :
+              case '4' :
+              case '5' :
+              case '6' :
+              case '7' :
+              case '8' :
+              case '9' :
                 {
                   TRACE_AND_INDENT();
                   int slot = c - '0';
@@ -1194,8 +1194,8 @@ static uint8_t wid_save_key_up(Widp w, const struct SDL_Keysym *key)
                   wid_save_destroy();
                   return true;
                 }
-              case 'b':
-              case SDLK_ESCAPE:
+              case 'b' :
+              case SDLK_ESCAPE :
                 {
                   TRACE_AND_INDENT();
                   CON("INF: Save game cancelled");

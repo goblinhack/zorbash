@@ -67,10 +67,10 @@ Roomp Room::create_w_flip(void)
       for (auto x = 0; x < width; x++) {
         auto c = get(r->data, x, y, z);
         switch (c) {
-          case Charmap::DOOR_UP: c = Charmap::DOOR_UP; break;
-          case Charmap::DOOR_DOWN: c = Charmap::DOOR_DOWN; break;
-          case Charmap::DOOR_LEFT: c = Charmap::DOOR_RIGHT; break;
-          case Charmap::DOOR_RIGHT: c = Charmap::DOOR_LEFT; break;
+          case Charmap::DOOR_UP : c = Charmap::DOOR_UP; break;
+          case Charmap::DOOR_DOWN : c = Charmap::DOOR_DOWN; break;
+          case Charmap::DOOR_LEFT : c = Charmap::DOOR_RIGHT; break;
+          case Charmap::DOOR_RIGHT : c = Charmap::DOOR_LEFT; break;
         }
         set(r->data, x, y, z, c);
       }
@@ -124,10 +124,10 @@ Roomp Room::rotate_clockwise(void)
       for (auto x = 0; x < width; x++) {
         auto c = get(r->data, x, y, z);
         switch (c) {
-          case Charmap::DOOR_UP: c = Charmap::DOOR_RIGHT; break;
-          case Charmap::DOOR_DOWN: c = Charmap::DOOR_LEFT; break;
-          case Charmap::DOOR_LEFT: c = Charmap::DOOR_UP; break;
-          case Charmap::DOOR_RIGHT: c = Charmap::DOOR_DOWN; break;
+          case Charmap::DOOR_UP : c = Charmap::DOOR_RIGHT; break;
+          case Charmap::DOOR_DOWN : c = Charmap::DOOR_LEFT; break;
+          case Charmap::DOOR_LEFT : c = Charmap::DOOR_UP; break;
+          case Charmap::DOOR_RIGHT : c = Charmap::DOOR_DOWN; break;
         }
 
         set(r->data, x, y, z, c);

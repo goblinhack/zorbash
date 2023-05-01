@@ -888,80 +888,80 @@ void Level::is_dirt_unset(const int x, const int y)
   decr(_is_dirt, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_enchantstone(const point p)
+uint8_t Level::is_enchant_stone(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
     return false;
   }
-  return (get(_is_enchantstone, p.x, p.y));
+  return (get(_is_enchant_stone, p.x, p.y));
 }
 
-uint8_t Level::is_enchantstone(const int x, const int y)
+uint8_t Level::is_enchant_stone(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
     return false;
   }
-  return (get(_is_enchantstone, x, y));
+  return (get(_is_enchant_stone, x, y));
 }
 
-void Level::is_enchantstone_set(const int x, const int y)
+void Level::is_enchant_stone_set(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
     return;
   }
   is_map_changed = true;
-  incr(_is_enchantstone, x, y, (uint8_t) 1);
+  incr(_is_enchant_stone, x, y, (uint8_t) 1);
 }
 
-void Level::is_enchantstone_unset(const int x, const int y)
+void Level::is_enchant_stone_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
     return;
   }
   is_map_changed = true;
-  decr(_is_enchantstone, x, y, (uint8_t) 1);
+  decr(_is_enchant_stone, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_skillstone(const point p)
+uint8_t Level::is_skill_stone(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
     return false;
   }
-  return (get(_is_skillstone, p.x, p.y));
+  return (get(_is_skill_stone, p.x, p.y));
 }
 
-uint8_t Level::is_skillstone(const int x, const int y)
+uint8_t Level::is_skill_stone(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
     return false;
   }
-  return (get(_is_skillstone, x, y));
+  return (get(_is_skill_stone, x, y));
 }
 
-void Level::is_skillstone_set(const int x, const int y)
+void Level::is_skill_stone_set(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
     return;
   }
   is_map_changed = true;
-  incr(_is_skillstone, x, y, (uint8_t) 1);
+  incr(_is_skill_stone, x, y, (uint8_t) 1);
 }
 
-void Level::is_skillstone_unset(const int x, const int y)
+void Level::is_skill_stone_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
     return;
   }
   is_map_changed = true;
-  decr(_is_skillstone, x, y, (uint8_t) 1);
+  decr(_is_skill_stone, x, y, (uint8_t) 1);
 }
 
 uint8_t Level::is_spiderweb(const point p)

@@ -191,13 +191,11 @@
 </p>
 
 Welcome to the lair of the dread tentacleye, Zorbash. Collect the crystals of Zorb and confront Zorbash to win.
-This is work in progress.
 
 Current status:
-- dungeon, sewer, swamp, ice, lava and chasms biomes
+- dungeon, sewer, swamp, ice, lava, chasms and flooded dungeon biomes
 - playable and looking for feedback
-- no bosses or end game so far
-- crystal collection does nothing so far
+- no bosses or end game yet
 
 Content:
 <!-- begin type marker -->

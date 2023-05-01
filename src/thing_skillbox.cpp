@@ -69,8 +69,8 @@ bool Thing::skillbox_id_insert(Thingp what)
   game->previous_slot = item_slot;
 
   wid_skillbox_init();
-  if ((game->state != Game::STATE_CHOOSING_LEVEL) && (game->state != Game::STATE_CHOOSING_TARGET) &&
-      (game->state != Game::STATE_INVENTORY) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
+  if ((game->state != Game::STATE_CHOOSING_LEVEL) && (game->state != Game::STATE_CHOOSING_TARGET)
+      && (game->state != Game::STATE_INVENTORY) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
     wid_thing_info_fini("skillbox add");
   }
   level->skillbox_describe(item_slot);
@@ -129,8 +129,8 @@ bool Thing::skillbox_id_remove(Thingp what)
 
       level->skillbox_describe(game->skillbox_highlight_slot);
       wid_skillbox_init();
-      if ((game->state != Game::STATE_CHOOSING_LEVEL) && (game->state != Game::STATE_CHOOSING_TARGET) &&
-          (game->state != Game::STATE_INVENTORY) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
+      if ((game->state != Game::STATE_CHOOSING_LEVEL) && (game->state != Game::STATE_CHOOSING_TARGET)
+          && (game->state != Game::STATE_INVENTORY) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
         wid_thing_info_fini("skillbox remove");
       }
       return true;

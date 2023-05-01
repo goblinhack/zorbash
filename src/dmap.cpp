@@ -299,8 +299,9 @@ void dmap_process(Dmap *D, point tl, point br, bool place_border, bool allow_dia
         //
         // Avoid diagonal moves.
         //
-        if (! allow_diagonals &&
-            ((get_no_check(D->val, x - 1, y) == DMAP_IS_WALL) || (get_no_check(D->val, x, y - 1) == DMAP_IS_WALL))) {
+        if (! allow_diagonals
+            && ((get_no_check(D->val, x - 1, y) == DMAP_IS_WALL)
+                || (get_no_check(D->val, x, y - 1) == DMAP_IS_WALL))) {
           a = DMAP_IS_WALL;
         } else {
           a = get_no_check(D->val, x - 1, y - 1);
@@ -308,8 +309,9 @@ void dmap_process(Dmap *D, point tl, point br, bool place_border, bool allow_dia
 
         b = get_no_check(D->val, x, y - 1);
 
-        if (! allow_diagonals &&
-            ((get_no_check(D->val, x + 1, y) == DMAP_IS_WALL) || (get_no_check(D->val, x, y - 1) == DMAP_IS_WALL))) {
+        if (! allow_diagonals
+            && ((get_no_check(D->val, x + 1, y) == DMAP_IS_WALL)
+                || (get_no_check(D->val, x, y - 1) == DMAP_IS_WALL))) {
           c = DMAP_IS_WALL;
         } else {
           c = get_no_check(D->val, x + 1, y - 1);
@@ -318,8 +320,9 @@ void dmap_process(Dmap *D, point tl, point br, bool place_border, bool allow_dia
         d = get_no_check(D->val, x - 1, y);
         f = get_no_check(D->val, x + 1, y);
 
-        if (! allow_diagonals &&
-            ((get_no_check(D->val, x - 1, y) == DMAP_IS_WALL) || (get_no_check(D->val, x, y + 1) == DMAP_IS_WALL))) {
+        if (! allow_diagonals
+            && ((get_no_check(D->val, x - 1, y) == DMAP_IS_WALL)
+                || (get_no_check(D->val, x, y + 1) == DMAP_IS_WALL))) {
           g = DMAP_IS_WALL;
         } else {
           g = get_no_check(D->val, x - 1, y + 1);
@@ -327,8 +330,9 @@ void dmap_process(Dmap *D, point tl, point br, bool place_border, bool allow_dia
 
         h = get_no_check(D->val, x, y + 1);
 
-        if (! allow_diagonals &&
-            ((get_no_check(D->val, x + 1, y) == DMAP_IS_WALL) || (get_no_check(D->val, x, y + 1) == DMAP_IS_WALL))) {
+        if (! allow_diagonals
+            && ((get_no_check(D->val, x + 1, y) == DMAP_IS_WALL)
+                || (get_no_check(D->val, x, y + 1) == DMAP_IS_WALL))) {
           i = DMAP_IS_WALL;
         } else {
           i = get_no_check(D->val, x + 1, y + 1);
@@ -508,25 +512,25 @@ static std::vector< point > dmap_solve_(const Dmap *D, const point start, const 
       if (! allow_diagonals) {
         if (d.x < 0) {
           if (d.y < 0) {
-            if ((get_no_check(D->val, at.x - 1, at.y) == DMAP_IS_WALL) ||
-                (get_no_check(D->val, at.x, at.y - 1) == DMAP_IS_WALL)) {
+            if ((get_no_check(D->val, at.x - 1, at.y) == DMAP_IS_WALL)
+                || (get_no_check(D->val, at.x, at.y - 1) == DMAP_IS_WALL)) {
               continue;
             }
           } else if (d.y > 0) {
-            if ((get_no_check(D->val, at.x - 1, at.y) == DMAP_IS_WALL) ||
-                (get_no_check(D->val, at.x, at.y + 1) == DMAP_IS_WALL)) {
+            if ((get_no_check(D->val, at.x - 1, at.y) == DMAP_IS_WALL)
+                || (get_no_check(D->val, at.x, at.y + 1) == DMAP_IS_WALL)) {
               continue;
             }
           }
         } else if (d.x > 0) {
           if (d.y < 0) {
-            if ((get_no_check(D->val, at.x + 1, at.y) == DMAP_IS_WALL) ||
-                (get_no_check(D->val, at.x, at.y - 1) == DMAP_IS_WALL)) {
+            if ((get_no_check(D->val, at.x + 1, at.y) == DMAP_IS_WALL)
+                || (get_no_check(D->val, at.x, at.y - 1) == DMAP_IS_WALL)) {
               continue;
             }
           } else if (d.y > 0) {
-            if ((get_no_check(D->val, at.x + 1, at.y) == DMAP_IS_WALL) ||
-                (get_no_check(D->val, at.x, at.y + 1) == DMAP_IS_WALL)) {
+            if ((get_no_check(D->val, at.x + 1, at.y) == DMAP_IS_WALL)
+                || (get_no_check(D->val, at.x, at.y + 1) == DMAP_IS_WALL)) {
               continue;
             }
           }

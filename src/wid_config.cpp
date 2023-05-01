@@ -185,22 +185,22 @@ static uint8_t wid_config_top_key_up(Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL:
-    case KMOD_RCTRL:
-    default:
+    case KMOD_LCTRL :
+    case KMOD_RCTRL :
+    default :
       switch (key->sym) {
-        default:
+        default :
           {
             TRACE_AND_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
-              case 'g': wid_config_top_gfx(nullptr, 0, 0, 0); return true;
-              case 'm': wid_config_top_mouse(nullptr, 0, 0, 0); return true;
-              case 's': wid_config_top_sound(nullptr, 0, 0, 0); return true;
-              case 'k': wid_config_top_keyboard(nullptr, 0, 0, 0); return true;
-              case 'o': wid_config_top_other(nullptr, 0, 0, 0); return true;
-              case 'b':
-              case SDLK_ESCAPE: wid_config_top_back(nullptr, 0, 0, 0); return true;
+              case 'g' : wid_config_top_gfx(nullptr, 0, 0, 0); return true;
+              case 'm' : wid_config_top_mouse(nullptr, 0, 0, 0); return true;
+              case 's' : wid_config_top_sound(nullptr, 0, 0, 0); return true;
+              case 'k' : wid_config_top_keyboard(nullptr, 0, 0, 0); return true;
+              case 'o' : wid_config_top_other(nullptr, 0, 0, 0); return true;
+              case 'b' :
+              case SDLK_ESCAPE : wid_config_top_back(nullptr, 0, 0, 0); return true;
             }
           }
       }

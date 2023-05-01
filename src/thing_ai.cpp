@@ -96,13 +96,13 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   auto dmap_can_see = dmap_can_see_get();
 
   switch (search_type) {
-    case MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED:
-    case MONST_SEARCH_TYPE_LOCAL_NO_JUMP:
-    case MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED: break;
-    case MONST_SEARCH_TYPE_GLOBAL_NO_JUMP:
-    case MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED:
-    case MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED:
-    case MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP:
+    case MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED :
+    case MONST_SEARCH_TYPE_LOCAL_NO_JUMP :
+    case MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED : break;
+    case MONST_SEARCH_TYPE_GLOBAL_NO_JUMP :
+    case MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED :
+    case MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED :
+    case MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP :
       if (is_player()) {
         minx = 0;
         maxx = MAP_WIDTH - 1;
@@ -117,16 +117,16 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   ai_dmap_can_see_init(minx, miny, maxx, maxy, search_type, false);
 
   switch (search_type) {
-    case MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED:
+    case MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED :
       ai_choose_can_see_goals(goals, minx, miny, maxx, maxy);
       goalmaps.push_back(GoalMap {goals, dmap_can_see});
       break;
-    case MONST_SEARCH_TYPE_LOCAL_NO_JUMP:
-    case MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED:
-    case MONST_SEARCH_TYPE_GLOBAL_NO_JUMP:
-    case MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED:
-    case MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED:
-    case MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP:
+    case MONST_SEARCH_TYPE_LOCAL_NO_JUMP :
+    case MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED :
+    case MONST_SEARCH_TYPE_GLOBAL_NO_JUMP :
+    case MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED :
+    case MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED :
+    case MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP :
       ai_choose_search_goals(goals, search_type);
       goalmaps.push_back(GoalMap {goals, dmap_can_see});
       break;
@@ -191,9 +191,9 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
             auto  c = getptr(goal_dmap_copy.val, x, y);
             if ((*c < DMAP_IS_PASSABLE) && (*c > DMAP_IS_GOAL)) {
               switch (attempt) {
-                case 0: dmap_modify_terrain_cost(p, c, true, true); break;
-                case 1: dmap_modify_terrain_cost(p, c, false, true); break;
-                case 2: dmap_modify_terrain_cost(p, c, false, false); break;
+                case 0 : dmap_modify_terrain_cost(p, c, true, true); break;
+                case 1 : dmap_modify_terrain_cost(p, c, false, true); break;
+                case 2 : dmap_modify_terrain_cost(p, c, false, false); break;
               }
             }
           }
@@ -460,13 +460,13 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   }
 
   switch (search_type) {
-    case MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED: jump_allowed = true; break;
-    case MONST_SEARCH_TYPE_LOCAL_NO_JUMP: jump_allowed = false; break;
-    case MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED: jump_allowed = true; break;
-    case MONST_SEARCH_TYPE_GLOBAL_NO_JUMP: jump_allowed = false; break;
-    case MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED: jump_allowed = true; break;
-    case MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED: jump_allowed = true; break;
-    case MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP: jump_allowed = false; break;
+    case MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED : jump_allowed = true; break;
+    case MONST_SEARCH_TYPE_LOCAL_NO_JUMP : jump_allowed = false; break;
+    case MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED : jump_allowed = true; break;
+    case MONST_SEARCH_TYPE_GLOBAL_NO_JUMP : jump_allowed = false; break;
+    case MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED : jump_allowed = true; break;
+    case MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED : jump_allowed = true; break;
+    case MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP : jump_allowed = false; break;
   }
 
   if (! is_able_to_jump()) {
@@ -649,8 +649,8 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         if (get(walked, x, y)) {
           if (level->is_obs_wall_or_door(x, y)) {
             printf("#");
-          } else if (level->is_dirt(x, y) || level->is_water(x, y) || level->is_floor(x, y) ||
-                     level->is_corridor(x, y)) {
+          } else if (level->is_dirt(x, y) || level->is_water(x, y) || level->is_floor(x, y)
+                     || level->is_corridor(x, y)) {
             if (get(ai->can_see_currently.can_see, x, y)) {
               printf("L");
             } else if (get(ai->can_see_ever.can_see, x, y)) {
@@ -664,8 +664,8 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         } else {
           if (level->is_obs_wall_or_door(x, y)) {
             printf("#");
-          } else if (level->is_dirt(x, y) || level->is_water(x, y) || level->is_floor(x, y) ||
-                     level->is_corridor(x, y)) {
+          } else if (level->is_dirt(x, y) || level->is_water(x, y) || level->is_floor(x, y)
+                     || level->is_corridor(x, y)) {
             if (get(ai->can_see_currently.can_see, x, y)) {
               printf("l");
             } else if (get(ai->can_see_ever.can_see, x, y)) {
@@ -828,8 +828,8 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         if (get(walked, x, y)) {
           if (level->is_obs_wall_or_door(x, y)) {
             printf("#");
-          } else if (level->is_dirt(x, y) || level->is_water(x, y) || level->is_floor(x, y) ||
-                     level->is_corridor(x, y)) {
+          } else if (level->is_dirt(x, y) || level->is_water(x, y) || level->is_floor(x, y)
+                     || level->is_corridor(x, y)) {
             if (get(ai->can_see_currently.can_see, x, y)) {
               printf("L");
             } else if (get(ai->can_see_ever.can_see, x, y)) {
@@ -843,8 +843,8 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         } else {
           if (level->is_obs_wall_or_door(x, y)) {
             printf("#");
-          } else if (level->is_dirt(x, y) || level->is_water(x, y) || level->is_floor(x, y) ||
-                     level->is_corridor(x, y)) {
+          } else if (level->is_dirt(x, y) || level->is_water(x, y) || level->is_floor(x, y)
+                     || level->is_corridor(x, y)) {
             if (get(ai->can_see_currently.can_see, x, y)) {
               printf("l");
             } else if (get(ai->can_see_ever.can_see, x, y)) {
@@ -1358,13 +1358,13 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     int jump_distance;
 
     switch (search_type) {
-      case MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED: jump_distance = jump_distance_max_get(); break;
-      case MONST_SEARCH_TYPE_LOCAL_NO_JUMP: jump_distance = 0; break;
-      case MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED: jump_distance = jump_distance_max_get(); break;
-      case MONST_SEARCH_TYPE_GLOBAL_NO_JUMP: jump_distance = 0; break;
-      case MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED: jump_distance = jump_distance_max_get(); break;
-      case MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP: jump_distance = 0; break;
-      default: DIE("unexpected search-type case"); break;
+      case MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED : jump_distance = jump_distance_max_get(); break;
+      case MONST_SEARCH_TYPE_LOCAL_NO_JUMP : jump_distance = 0; break;
+      case MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED : jump_distance = jump_distance_max_get(); break;
+      case MONST_SEARCH_TYPE_GLOBAL_NO_JUMP : jump_distance = 0; break;
+      case MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED : jump_distance = jump_distance_max_get(); break;
+      case MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP : jump_distance = 0; break;
+      default : DIE("unexpected search-type case"); break;
     }
 
     auto dist = distance(p, curr_at);
@@ -2058,9 +2058,9 @@ bool Thing::ai_tick(bool recursing)
     return false;
   }
 
-  if (is_changing_level || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
-      is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall ||
-      is_jumping) {
+  if (is_changing_level || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer
+      || is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall
+      || is_jumping) {
     return false;
   }
 
@@ -2222,14 +2222,14 @@ bool Thing::ai_tick(bool recursing)
   // Check for anything dangerous we need to consider and maybe stop what we're doing.
   //
   switch (infop()->monst_state) {
-    case MONST_STATE_IDLE:
+    case MONST_STATE_IDLE :
       //
       // if we are called 2nd time around, then we left some kind of other state and want to try moving.
       //
       if (recursing) {
         break;
       }
-    case MONST_STATE_MOVING:
+    case MONST_STATE_MOVING :
       {
         //
         // Prevent loops; should never hit this
@@ -2267,8 +2267,8 @@ bool Thing::ai_tick(bool recursing)
         }
       }
       break;
-    case MONST_STATE_RESTING:
-    case MONST_STATE_SLEEPING:
+    case MONST_STATE_RESTING :
+    case MONST_STATE_SLEEPING :
       {
         //
         // Prevent loops; should never hit this
@@ -2318,10 +2318,10 @@ bool Thing::ai_tick(bool recursing)
         }
       }
       break;
-    case MONST_STATE_REPACK_INVENTORY:
-    case MONST_STATE_OPEN_INVENTORY:
-    case MONST_STATE_USING_ENCHANTSTONE:
-    case MONST_STATE_USING_SKILLSTONE: break;
+    case MONST_STATE_REPACK_INVENTORY :
+    case MONST_STATE_OPEN_INVENTORY :
+    case MONST_STATE_USING_ENCHANT_STONE :
+    case MONST_STATE_USING_SKILL_STONE : break;
   }
 
   //
@@ -2335,14 +2335,14 @@ bool Thing::ai_tick(bool recursing)
   // Check for less critical interruptions.
   //
   switch (infop()->monst_state) {
-    case MONST_STATE_IDLE:
+    case MONST_STATE_IDLE :
       //
       // if we are called 2nd time around, then we left some kind of other state and want to try moving.
       //
       if (recursing) {
         break;
       }
-    case MONST_STATE_MOVING:
+    case MONST_STATE_MOVING :
       {
         //
         // Check for lesser interrupts; like a monster being seen
@@ -2362,7 +2362,7 @@ bool Thing::ai_tick(bool recursing)
         }
       }
       break;
-    case MONST_STATE_RESTING:
+    case MONST_STATE_RESTING :
       {
         //
         // Check for lesser interrupts; like a monster being seen
@@ -2384,11 +2384,11 @@ bool Thing::ai_tick(bool recursing)
         }
       }
       break;
-    case MONST_STATE_SLEEPING:
-    case MONST_STATE_REPACK_INVENTORY:
-    case MONST_STATE_OPEN_INVENTORY:
-    case MONST_STATE_USING_ENCHANTSTONE:
-    case MONST_STATE_USING_SKILLSTONE: break;
+    case MONST_STATE_SLEEPING :
+    case MONST_STATE_REPACK_INVENTORY :
+    case MONST_STATE_OPEN_INVENTORY :
+    case MONST_STATE_USING_ENCHANT_STONE :
+    case MONST_STATE_USING_SKILL_STONE : break;
   }
 
   if (is_debug_type()) {
@@ -2438,7 +2438,7 @@ bool Thing::ai_tick(bool recursing)
   TRACE_AND_INDENT();
 
   switch (infop()->monst_state) {
-    case MONST_STATE_IDLE:
+    case MONST_STATE_IDLE :
       {
         dbg("AI: state idle");
         TRACE_AND_INDENT();
@@ -2448,7 +2448,7 @@ bool Thing::ai_tick(bool recursing)
         }
         break;
       }
-    case MONST_STATE_MOVING:
+    case MONST_STATE_MOVING :
       {
         dbg("AI: state moving");
         TRACE_AND_INDENT();
@@ -2458,7 +2458,7 @@ bool Thing::ai_tick(bool recursing)
         }
         break;
       }
-    case MONST_STATE_SLEEPING:
+    case MONST_STATE_SLEEPING :
       {
         dbg("AI: state sleeping");
         TRACE_AND_INDENT();
@@ -2468,7 +2468,7 @@ bool Thing::ai_tick(bool recursing)
         }
         break;
       }
-    case MONST_STATE_RESTING:
+    case MONST_STATE_RESTING :
       {
         dbg("AI: state resting");
         TRACE_AND_INDENT();
@@ -2478,7 +2478,7 @@ bool Thing::ai_tick(bool recursing)
         }
         break;
       }
-    case MONST_STATE_OPEN_INVENTORY:
+    case MONST_STATE_OPEN_INVENTORY :
       {
         dbg("AI: state open inventory");
         TRACE_AND_INDENT();
@@ -2488,27 +2488,27 @@ bool Thing::ai_tick(bool recursing)
         }
         break;
       }
-    case MONST_STATE_USING_ENCHANTSTONE:
+    case MONST_STATE_USING_ENCHANT_STONE :
       {
-        dbg("AI: state use enchantstone");
+        dbg("AI: state use enchant_stone");
         TRACE_AND_INDENT();
 
-        if (state_using_enchantstone()) {
+        if (state_using_enchant_stone()) {
           return true;
         }
         break;
       }
-    case MONST_STATE_USING_SKILLSTONE:
+    case MONST_STATE_USING_SKILL_STONE :
       {
-        dbg("AI: state use skillstone");
+        dbg("AI: state use skill_stone");
         TRACE_AND_INDENT();
 
-        if (state_using_skillstone()) {
+        if (state_using_skill_stone()) {
           return true;
         }
         break;
       }
-    case MONST_STATE_REPACK_INVENTORY:
+    case MONST_STATE_REPACK_INVENTORY :
       {
         dbg("AI: state repack inventory");
         TRACE_AND_INDENT();

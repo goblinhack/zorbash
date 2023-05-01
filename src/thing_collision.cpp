@@ -266,8 +266,8 @@ bool Thing::collision_find_best_target(ThingAttackOptionsp attack_options)
     // Cannot do this for players or we end up attacking when waiting whilst
     // being consumed by a cleaner
     //
-    if (attack_options->nat_att || is_staff() || is_laser() || is_weapon() || is_monst() ||
-        (is_player() && game->robot_mode)) {
+    if (attack_options->nat_att || is_staff() || is_laser() || is_weapon() || is_monst()
+        || (is_player() && game->robot_mode)) {
       dbg2("Collision: weapon check against %s", victim->to_short_string().c_str());
       TRACE_AND_INDENT();
       if (! attack_options->victim_attacked) {
@@ -352,8 +352,8 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
     // Continue walking by falling through to return true
     //
     dbg2("No collision; ignore corpse");
-  } else if (is_fire() &&
-             (it->is_able_to_melt() || it->is_burnable() || it->is_very_combustible() || it->is_combustible())) {
+  } else if (is_fire()
+             && (it->is_able_to_melt() || it->is_burnable() || it->is_very_combustible() || it->is_combustible())) {
     //
     // Fire attack?
     //
@@ -629,8 +629,8 @@ bool Thing::collision_check_only(Thingp it, point future_pos)
 
   if (it->is_obs_wall_or_door()) {
     if (is_able_to_walk_through_walls()) {
-      if ((future_pos.x < MAP_BORDER_ROCK) || (future_pos.y < MAP_BORDER_ROCK) ||
-          (future_pos.x >= MAP_WIDTH - MAP_BORDER_ROCK) || (future_pos.y >= MAP_HEIGHT - MAP_BORDER_ROCK)) {
+      if ((future_pos.x < MAP_BORDER_ROCK) || (future_pos.y < MAP_BORDER_ROCK)
+          || (future_pos.x >= MAP_WIDTH - MAP_BORDER_ROCK) || (future_pos.y >= MAP_HEIGHT - MAP_BORDER_ROCK)) {
         dbg2("No collision; can pass through walls but too close to the edge");
         if (is_player()) {
           msg("The wall is too thick here to move");

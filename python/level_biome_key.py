@@ -13,7 +13,7 @@
 # DOOR_RIGHT                    >
 # DOOR_UP                       ^
 # DRY GRASS                     '
-# ENCHANTSTONE                  *
+# MAGIC_STONE                  *
 # ENTRANCE                      S
 # EXIT                          E
 # FLOOR                         .
@@ -36,7 +36,7 @@
 # SECRET_DOOR                   s
 # SEWER                         O
 # SHALLOW_WATER                 w
-# SKILLSTONE                    &
+# MAGIC_STONE                    &
 # SPIDERWEB                     X
 # STAFF                         /
 # PORTAL                        T

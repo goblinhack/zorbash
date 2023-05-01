@@ -146,9 +146,9 @@ static void wid_choose_next_dungeons_mouse_over(Widp w, int relx, int rely, int 
     wid_level_description->log(tmp, TEXT_FORMAT_LHS);
 
     switch (l->difficulty_depth) {
-      case -1: break;
-      case 0: break;
-      default:
+      case -1 : break;
+      case 0 : break;
+      default :
         wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG,
                       get_difficulty_depth_color(l->difficulty_depth));
         break;
@@ -509,8 +509,8 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
   std::string bg_tilename;
   if (ctx->levels[ y ][ x ]) {
     switch (l->difficulty_depth) {
-      case -1: break;
-      default:
+      case -1 : break;
+      default :
         bg_tilename = "biome_" + get_difficulty_depth_name(l->difficulty_depth);
         if (g_opt_ascii) {
           wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(l->difficulty_depth));
@@ -529,16 +529,16 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
 
   if (l->is_crystal_level) {
     switch (l->difficulty_depth) {
-      case -1: break;
-      case 0: break;
-      case 1: break;
-      case 2: fg_tilename = "crystal.1"; break;
-      case 3: fg_tilename = "crystal.2"; break;
-      case 4: fg_tilename = "crystal.3"; break;
-      case 5: fg_tilename = "crystal.4"; break;
-      case 6: fg_tilename = "crystal.5"; break;
-      case 7: fg_tilename = "crystal.6"; break;
-      case 8: fg_tilename = "crystal.7"; break;
+      case -1 : break;
+      case 0 : break;
+      case 1 : break;
+      case 2 : fg_tilename = "crystal.1"; break;
+      case 3 : fg_tilename = "crystal.2"; break;
+      case 4 : fg_tilename = "crystal.3"; break;
+      case 5 : fg_tilename = "crystal.4"; break;
+      case 6 : fg_tilename = "crystal.5"; break;
+      case 7 : fg_tilename = "crystal.6"; break;
+      case 8 : fg_tilename = "crystal.7"; break;
     }
   }
 

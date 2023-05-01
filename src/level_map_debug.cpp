@@ -55,8 +55,8 @@ void Level::update_map_debug(int x, int y)
         c = RED;
       } else if (is_block_of_ice(x, y)) {
         c = CYAN;
-      } else if (is_key(x, y) || is_food(x, y) || is_treasure_type(x, y) || is_skillstone(x, y) ||
-                 is_enchantstone(x, y)) {
+      } else if (is_key(x, y) || is_food(x, y) || is_treasure_type(x, y) || is_skill_stone(x, y)
+                 || is_enchant_stone(x, y)) {
         c = GOLD2;
       } else if (is_wall(x, y) || is_rock(x, y)) {
         continue;

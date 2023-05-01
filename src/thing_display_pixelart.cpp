@@ -861,8 +861,8 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   }
 
   if (! g_render_black_and_white) {
-    if (unlikely(tpp->gfx_pixelart_shadow_very_short() || tpp->gfx_pixelart_shadow_short() ||
-                 tpp->gfx_pixelart_shadow_long())) {
+    if (unlikely(tpp->gfx_pixelart_shadow_very_short() || tpp->gfx_pixelart_shadow_short()
+                 || tpp->gfx_pixelart_shadow_long())) {
       if (auto submerged = blit_begin_submerged()) {
         blit_shadow(tpp, tile, blit_tl, blit_br);
         blit_end_submerged(submerged);
@@ -884,8 +884,8 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
 
   auto lit = (fbo == FBO_PIXELART_FULLMAP) || level->is_currently_pixelart_raycast_lit_no_check(curr_at.x, curr_at.y);
 
-  if (tile && ! tile->is_invisible && ! is_dead && ! reflection && lit &&
-      (gfx_pixelart_health_bar_shown() || (gfx_pixelart_health_bar_autohide() && (h < m)))) {
+  if (tile && ! tile->is_invisible && ! is_dead && ! reflection && lit
+      && (gfx_pixelart_health_bar_shown() || (gfx_pixelart_health_bar_autohide() && (h < m)))) {
 
     if (is_sleeping && gfx_pixelart_health_bar_only_when_awake()) {
       //
@@ -934,12 +934,12 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
         auto health_bar_width = TILE_WIDTH;
 
         switch (thing_size()) {
-          case THING_SIZE_GARGANTUAN: health_bar_width = TILE_WIDTH * 2; break;
-          case THING_SIZE_GIANT: health_bar_width = TILE_WIDTH * 1.5; break;
-          case THING_SIZE_LARGE: health_bar_width = TILE_WIDTH; break;
-          case THING_SIZE_NORMAL: health_bar_width = TILE_WIDTH; break;
-          case THING_SIZE_SMALL: health_bar_width = TILE_WIDTH; break;
-          case THING_SIZE_TINY: health_bar_width = TILE_WIDTH / 2; break;
+          case THING_SIZE_GARGANTUAN : health_bar_width = TILE_WIDTH * 2; break;
+          case THING_SIZE_GIANT : health_bar_width = TILE_WIDTH * 1.5; break;
+          case THING_SIZE_LARGE : health_bar_width = TILE_WIDTH; break;
+          case THING_SIZE_NORMAL : health_bar_width = TILE_WIDTH; break;
+          case THING_SIZE_SMALL : health_bar_width = TILE_WIDTH; break;
+          case THING_SIZE_TINY : health_bar_width = TILE_WIDTH / 2; break;
         }
 
         tile_blit(tile, point(x - health_bar_width / 2, y - TILE_HEIGHT), point(x + health_bar_width / 2 + 1, y));

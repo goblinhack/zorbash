@@ -886,8 +886,8 @@ bool wid_rightbar_ascii_create(void)
       }
     }
 
-    if (player->is_on_fire() || player->stuck_count() || player->is_sleeping || player->is_frozen ||
-        (player->stamina() < player->stamina_max() / 2) || (player->health() < player->health_max() / 2)) {
+    if (player->is_on_fire() || player->stuck_count() || player->is_sleeping || player->is_frozen
+        || (player->stamina() < player->stamina_max() / 2) || (player->health() < player->health_max() / 2)) {
       {
         TRACE_AND_INDENT();
         y_at++;

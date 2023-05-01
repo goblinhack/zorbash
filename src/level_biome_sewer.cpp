@@ -216,19 +216,19 @@ bool Level::create_biome_sewer_pipes(point3d at)
   for (auto p : sewers) {
     int dx = 0, dy = 0;
     switch (pcg_random_range_inclusive(0, 3)) {
-      case 0:
+      case 0 :
         dx = -1;
         dy = 0;
         break;
-      case 1:
+      case 1 :
         dx = 1;
         dy = 0;
         break;
-      case 2:
+      case 2 :
         dx = 0;
         dy = -1;
         break;
-      case 3:
+      case 3 :
         dx = 0;
         dy = 1;
         break;
@@ -403,8 +403,8 @@ void Level::create_biome_sewer_place_walls(int variant, int block_width, int blo
       for (auto dy = 0; dy < block_height; dy++) {
         auto Y = y + dy;
 
-        if (is_bridge(X, Y) || is_corridor(X, Y) || is_shallow_water(X, Y) || is_ascend_sewer(X, Y) ||
-            is_deep_water(X, Y)) {
+        if (is_bridge(X, Y) || is_corridor(X, Y) || is_shallow_water(X, Y) || is_ascend_sewer(X, Y)
+            || is_deep_water(X, Y)) {
           can_place_here = false;
           continue;
         }
@@ -470,8 +470,8 @@ void Level::create_biome_sewer_place_remaining_walls(const std::string &what)
   for (auto x = 0; x < MAP_WIDTH; x++) {
     for (auto y = 0; y < MAP_HEIGHT; y++) {
 
-      if (is_bridge(x, y) || is_corridor(x, y) || is_shallow_water(x, y) || is_ascend_sewer(x, y) ||
-          is_deep_water(x, y)) {
+      if (is_bridge(x, y) || is_corridor(x, y) || is_shallow_water(x, y) || is_ascend_sewer(x, y)
+          || is_deep_water(x, y)) {
         continue;
       }
 

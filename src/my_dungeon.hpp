@@ -108,7 +108,6 @@ public:
   bool is_door(const int x, const int y);
   bool is_door_no_check(const int x, const int y);
   bool is_dry_grass(const int x, const int y);
-  bool is_enchantstone(const int x, const int y);
   bool is_floor(const int x, const int y);
   bool is_floor_deco_at(const int x, const int y);
   bool is_floor_no_check(const int x, const int y);
@@ -120,6 +119,7 @@ public:
   bool is_key(const int x, const int y);
   bool is_lava(const int x, const int y);
   bool is_lava_no_check(const int x, const int y);
+  bool is_magic_stone(const int x, const int y);
   bool is_mob_any(const int x, const int y);
   bool is_mob_challenge_class_A(const int x, const int y);
   bool is_mob_challenge_class_B(const int x, const int y);
@@ -140,7 +140,6 @@ public:
   bool is_secret_door(const int x, const int y);
   bool is_shallow_water(const int x, const int y);
   bool is_shallow_water_no_check(const int x, const int y);
-  bool is_skillstone(const int x, const int y);
   bool is_spiderweb(const int x, const int y);
   bool is_staff(const int x, const int y);
   bool is_trap(const int x, const int y);

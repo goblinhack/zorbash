@@ -75,11 +75,11 @@ uint8_t wid_right_bar_inventory_open(Widp w, int x, int y, uint32_t button)
   DBG2("Inventory: open");
   TRACE_AND_INDENT();
 
-  if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state == Game::STATE_CHOOSING_TARGET) ||
-      (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
-      (game->state == Game::STATE_CHOOSING_SKILLS) || (game->state == Game::STATE_SAVE_MENU) ||
-      (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
-      (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+  if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state == Game::STATE_CHOOSING_TARGET)
+      || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_COLLECTING_ITEMS)
+      || (game->state == Game::STATE_CHOOSING_SKILLS) || (game->state == Game::STATE_SAVE_MENU)
+      || (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU)
+      || (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     return true;
   }
 
@@ -665,18 +665,18 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL:
-    case KMOD_RCTRL:
-    default:
+    case KMOD_LCTRL :
+    case KMOD_RCTRL :
+    default :
       switch (key->sym) {
-        default:
+        default :
           {
             TRACE_AND_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
-              case SDLK_DELETE: wid_inventory_item_option_drop(nullptr, 0, 0, 0); return true;
-              case 'b':
-              case SDLK_ESCAPE:
+              case SDLK_DELETE : wid_inventory_item_option_drop(nullptr, 0, 0, 0); return true;
+              case 'b' :
+              case SDLK_ESCAPE :
                 {
                   TRACE_AND_INDENT();
                   DBG2("INF: inventory cancelled");
@@ -934,16 +934,16 @@ void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, const c
     wid_set_text(w, capitalise(equip_name(equip)));
     wid_set_text_lhs(w, true);
     switch (equip) {
-      case MONST_EQUIP_HELMET: wid_set_color(w, WID_COLOR_TEXT_FG, WHITE); break;
-      case MONST_EQUIP_AMULET: wid_set_color(w, WID_COLOR_TEXT_FG, WHITE); break;
-      case MONST_EQUIP_GAUNTLET: wid_set_color(w, WID_COLOR_TEXT_FG, GOLD); break;
-      case MONST_EQUIP_CLOAK: wid_set_color(w, WID_COLOR_TEXT_FG, GOLD); break;
-      case MONST_EQUIP_SHIELD: wid_set_color(w, WID_COLOR_TEXT_FG, WHITE); break;
-      case MONST_EQUIP_ARMOR: wid_set_color(w, WID_COLOR_TEXT_FG, GOLD); break;
-      case MONST_EQUIP_WEAPON: wid_set_color(w, WID_COLOR_TEXT_FG, WHITE); break;
-      case MONST_EQUIP_RING1: wid_set_color(w, WID_COLOR_TEXT_FG, GOLD); break;
-      case MONST_EQUIP_BOOTS: wid_set_color(w, WID_COLOR_TEXT_FG, WHITE); break;
-      case MONST_EQUIP_RING2: wid_set_color(w, WID_COLOR_TEXT_FG, GOLD); break;
+      case MONST_EQUIP_HELMET : wid_set_color(w, WID_COLOR_TEXT_FG, WHITE); break;
+      case MONST_EQUIP_AMULET : wid_set_color(w, WID_COLOR_TEXT_FG, WHITE); break;
+      case MONST_EQUIP_GAUNTLET : wid_set_color(w, WID_COLOR_TEXT_FG, GOLD); break;
+      case MONST_EQUIP_CLOAK : wid_set_color(w, WID_COLOR_TEXT_FG, GOLD); break;
+      case MONST_EQUIP_SHIELD : wid_set_color(w, WID_COLOR_TEXT_FG, WHITE); break;
+      case MONST_EQUIP_ARMOR : wid_set_color(w, WID_COLOR_TEXT_FG, GOLD); break;
+      case MONST_EQUIP_WEAPON : wid_set_color(w, WID_COLOR_TEXT_FG, WHITE); break;
+      case MONST_EQUIP_RING1 : wid_set_color(w, WID_COLOR_TEXT_FG, GOLD); break;
+      case MONST_EQUIP_BOOTS : wid_set_color(w, WID_COLOR_TEXT_FG, WHITE); break;
+      case MONST_EQUIP_RING2 : wid_set_color(w, WID_COLOR_TEXT_FG, GOLD); break;
     }
   }
 }

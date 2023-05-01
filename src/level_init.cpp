@@ -40,7 +40,7 @@ void Level::clear(void)
   _is_dirt                           = {};
   _is_door                           = {};
   _is_dry_grass                      = {};
-  _is_enchantstone                   = {};
+  _is_enchant_stone                  = {};
   _is_fire                           = {};
   _is_floor                          = {};
   _is_foliage                        = {};
@@ -65,7 +65,7 @@ void Level::clear(void)
   _is_rock                           = {};
   _is_shallow_water                  = {};
   _is_shovable                       = {};
-  _is_skillstone                     = {};
+  _is_skill_stone                    = {};
   _is_smoke                          = {};
   _is_spiderweb                      = {};
   _is_steam                          = {};

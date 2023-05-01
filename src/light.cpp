@@ -256,8 +256,8 @@ bool Light::calculate(void)
     // the light leak a little.
     //
     int d = (light_dist_current / TILE_WIDTH) + 1;
-    if (likely(((player->curr_at.x >= d) && (player->curr_at.x <= MAP_WIDTH - d) && (player->curr_at.y >= d) &&
-                (player->curr_at.y <= MAP_HEIGHT - d)))) {
+    if (likely(((player->curr_at.x >= d) && (player->curr_at.x <= MAP_WIDTH - d) && (player->curr_at.y >= d)
+                && (player->curr_at.y <= MAP_HEIGHT - d)))) {
       //
       // If were casting rays, we're wanting to update what is lit currently.
       //

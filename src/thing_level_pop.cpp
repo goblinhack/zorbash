@@ -77,13 +77,13 @@ void Thing::level_pop(void)
       i_set_is_dry_grass = false;
       level->is_dry_grass_unset(x, y);
     }
-    if (i_set_is_enchantstone) {
-      i_set_is_enchantstone = false;
-      level->is_enchantstone_unset(x, y);
+    if (i_set_is_enchant_stone) {
+      i_set_is_enchant_stone = false;
+      level->is_enchant_stone_unset(x, y);
     }
-    if (i_set_is_skillstone) {
-      i_set_is_skillstone = false;
-      level->is_skillstone_unset(x, y);
+    if (i_set_is_skill_stone) {
+      i_set_is_skill_stone = false;
+      level->is_skill_stone_unset(x, y);
     }
     if (i_set_is_foliage) {
       i_set_is_foliage = false;

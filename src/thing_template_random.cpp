@@ -21,7 +21,6 @@ static Tpidmap tp_dirt;
 static Tpidmap tp_door;
 static Tpidmap tp_dry_grass;
 static Tpidmap tp_wet_grass;
-static Tpidmap tp_enchantstone;
 static Tpidmap tp_ethereal_mob;
 static Tpidmap tp_floor;
 static Tpidmap tp_foliage;
@@ -53,7 +52,7 @@ static Tpidmap tp_rock;
 static Tpidmap tp_secret_door;
 static Tpidmap tp_sewer_wall;
 static Tpidmap tp_skills;
-static Tpidmap tp_skillstone;
+static Tpidmap tp_magic_stone;
 static Tpidmap tp_spiderweb;
 static Tpidmap tp_portal;
 static Tpidmap tp_treasure;
@@ -122,11 +121,8 @@ void tp_random_init(void)
     if (tp->is_wet_grass()) {
       tp_wet_grass.push_back(tp);
     }
-    if (tp->is_enchantstone()) {
-      tp_enchantstone.push_back(tp);
-    }
-    if (tp->is_skillstone()) {
-      tp_skillstone.push_back(tp);
+    if (tp->is_magic_stone()) {
+      tp_magic_stone.push_back(tp);
     }
     if (tp->is_ethereal_mob()) {
       tp_ethereal_mob.push_back(tp);
@@ -375,8 +371,8 @@ void tp_random_init(void)
   if (tp_wet_grass.empty()) {
     DIE("No things for type:tp_wet_grass");
   }
-  if (tp_enchantstone.empty()) {
-    DIE("No things for type:tp_enchantstone");
+  if (tp_magic_stone.empty()) {
+    DIE("No things for type:tp_magic_stone");
   }
   if (tp_ethereal_mob.empty()) {
     DIE("No things for type:tp_ethereal_mob");
@@ -470,9 +466,6 @@ void tp_random_init(void)
   }
   if (tp_skills.empty()) {
     DIE("No things for type:tp_skills");
-  }
-  if (tp_skillstone.empty()) {
-    DIE("No things for type:tp_skillstone");
   }
   if (tp_spiderweb.empty()) {
     DIE("No things for type:tp_spiderweb");
@@ -884,24 +877,14 @@ Tpp tp_random_wet_grass(void)
   return tp_get_with_no_rarity_filter(tp_wet_grass);
 }
 
-Tpp tp_random_enchantstone(void)
+Tpp tp_random_magic_stone(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_enchantstone.size())) {
-    ERR("No enchantstones found");
+  if (unlikely(! tp_magic_stone.size())) {
+    ERR("No enchant_stones found");
     return nullptr;
   }
-  return tp_get_with_no_rarity_filter(tp_enchantstone);
-}
-
-Tpp tp_random_skillstone(void)
-{
-  TRACE_NO_INDENT();
-  if (unlikely(! tp_skillstone.size())) {
-    ERR("No skillstones found");
-    return nullptr;
-  }
-  return tp_get_with_no_rarity_filter(tp_skillstone);
+  return tp_get_with_no_rarity_filter(tp_magic_stone);
 }
 
 Tpp tp_random_foliage(void)

@@ -278,15 +278,15 @@ int strisregexp(const char *in)
 
   while ((c = *a++)) {
     switch (c) {
-      case '[': return 1;
-      case ']': return 1;
-      case '{': return 1;
-      case '}': return 1;
-      case '+': return 1;
-      case '$': return 1;
-      case '^': return 1;
-      case '-': return 1;
-      case '*': return 1;
+      case '[' : return 1;
+      case ']' : return 1;
+      case '{' : return 1;
+      case '}' : return 1;
+      case '+' : return 1;
+      case '$' : return 1;
+      case '^' : return 1;
+      case '-' : return 1;
+      case '*' : return 1;
     }
   }
 
@@ -333,14 +333,14 @@ void strnoescape(char *uncompressed)
     }
 
     switch (*s++) {
-      case 'n': *t++ = '\n'; break;
-      case 't': *t++ = '\t'; break;
-      case '%': *t++ = '%'; break;
-      case '#': *t++ = '@'; break;
-      case '\"': *t++ = '\"'; break;
-      case '\'': *t++ = '\''; break;
-      case '\\': *t++ = '\\'; break;
-      default:
+      case 'n' : *t++ = '\n'; break;
+      case 't' : *t++ = '\t'; break;
+      case '%' : *t++ = '%'; break;
+      case '#' : *t++ = '@'; break;
+      case '\"' : *t++ = '\"'; break;
+      case '\'' : *t++ = '\''; break;
+      case '\\' : *t++ = '\\'; break;
+      default :
         {
           char *o = s - 1;
           char  orig;
@@ -1329,16 +1329,16 @@ std::vector< std::string > split_tokens(const std::string &s, const char delimit
 // https://www.techiedelight.com/trim-string-cpp-remove-leading-trailing-spaces/
 std::string &ltrim(std::string &s)
 {
-  auto it =
-      std::find_if(s.begin(), s.end(), [](char c) { return ! std::isspace< char >(c, std::locale::classic()); });
+  auto it
+      = std::find_if(s.begin(), s.end(), [](char c) { return ! std::isspace< char >(c, std::locale::classic()); });
   s.erase(s.begin(), it);
   return s;
 }
 
 std::string &rtrim(std::string &s)
 {
-  auto it =
-      std::find_if(s.rbegin(), s.rend(), [](char c) { return ! std::isspace< char >(c, std::locale::classic()); });
+  auto it
+      = std::find_if(s.rbegin(), s.rend(), [](char c) { return ! std::isspace< char >(c, std::locale::classic()); });
   s.erase(it.base(), s.end());
   return s;
 }
@@ -1363,16 +1363,16 @@ std::string trim_ws(const std::string &s) { return rtrim_ws(ltrim_ws(s)); }
 
 std::wstring &ltrim(std::wstring &s)
 {
-  auto it =
-      std::find_if(s.begin(), s.end(), [](char c) { return ! std::isspace< char >(c, std::locale::classic()); });
+  auto it
+      = std::find_if(s.begin(), s.end(), [](char c) { return ! std::isspace< char >(c, std::locale::classic()); });
   s.erase(s.begin(), it);
   return s;
 }
 
 std::wstring &rtrim(std::wstring &s)
 {
-  auto it =
-      std::find_if(s.rbegin(), s.rend(), [](char c) { return ! std::isspace< char >(c, std::locale::classic()); });
+  auto it
+      = std::find_if(s.rbegin(), s.rend(), [](char c) { return ! std::isspace< char >(c, std::locale::classic()); });
   s.erase(it.base(), s.end());
   return s;
 }

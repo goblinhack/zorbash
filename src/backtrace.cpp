@@ -348,8 +348,8 @@ void _backtrace(void)
 #error "platform not supported!"
 #endif
   for (ULONG frame = 0;; frame++) {
-    BOOL result =
-        StackWalk(machine, process, thread, &stack, &context, 0, SymFunctionTableAccess, SymGetModuleBase, 0);
+    BOOL result
+        = StackWalk(machine, process, thread, &stack, &context, 0, SymFunctionTableAccess, SymGetModuleBase, 0);
 
     CallstackEntry csEntry;
     csEntry.offset               = stack.AddrPC.Offset;

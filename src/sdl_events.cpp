@@ -18,28 +18,28 @@ int sdl_filter_events(void *userdata, SDL_Event *event)
 
   switch (event->type) {
     // This is important!  Queue it if we want to quit. */
-    case SDL_QUIT: return 1;
+    case SDL_QUIT : return 1;
 
     // Mouse and keyboard events go to threads */
-    case SDL_MOUSEMOTION:
-    case SDL_MOUSEBUTTONDOWN:
-    case SDL_MOUSEBUTTONUP:
-    case SDL_MOUSEWHEEL:
-    case SDL_KEYDOWN:
-    case SDL_KEYUP:
-    case SDL_CONTROLLERDEVICEADDED:
-    case SDL_CONTROLLERBUTTONDOWN:
-    case SDL_CONTROLLERBUTTONUP:
-    case SDL_CONTROLLERAXISMOTION:
-    case SDL_JOYAXISMOTION: // Joystick axis motion
-    case SDL_JOYBALLMOTION: // Joystick trackball motion
-    case SDL_JOYHATMOTION:  // Joystick hat position change
-    case SDL_JOYBUTTONDOWN: // Joystick button pressed
-    case SDL_JOYBUTTONUP:   // Joystick button released
+    case SDL_MOUSEMOTION :
+    case SDL_MOUSEBUTTONDOWN :
+    case SDL_MOUSEBUTTONUP :
+    case SDL_MOUSEWHEEL :
+    case SDL_KEYDOWN :
+    case SDL_KEYUP :
+    case SDL_CONTROLLERDEVICEADDED :
+    case SDL_CONTROLLERBUTTONDOWN :
+    case SDL_CONTROLLERBUTTONUP :
+    case SDL_CONTROLLERAXISMOTION :
+    case SDL_JOYAXISMOTION : // Joystick axis motion
+    case SDL_JOYBALLMOTION : // Joystick trackball motion
+    case SDL_JOYHATMOTION :  // Joystick hat position change
+    case SDL_JOYBUTTONDOWN : // Joystick button pressed
+    case SDL_JOYBUTTONUP :   // Joystick button released
       return 1;
 
     // Drop all other events
-    default: return 0;
+    default : return 0;
   }
 }
 
@@ -233,18 +233,18 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
   wid_mouse_two_clicks = false;
 
   switch (event->type) {
-    case SDL_KEYDOWN: sdl_event_keydown(key, event); break;
-    case SDL_KEYUP: sdl_event_keyup(key, event); break;
-    case SDL_MOUSEMOTION: sdl_event_mousemotion(key, event, processed_mouse_motion_event); break;
-    case SDL_MOUSEBUTTONDOWN: sdl_event_mousedown(key, event); break;
-    case SDL_MOUSEBUTTONUP: sdl_event_mouseup(key, event); break;
-    case SDL_TEXTINPUT:
+    case SDL_KEYDOWN : sdl_event_keydown(key, event); break;
+    case SDL_KEYUP : sdl_event_keyup(key, event); break;
+    case SDL_MOUSEMOTION : sdl_event_mousemotion(key, event, processed_mouse_motion_event); break;
+    case SDL_MOUSEBUTTONDOWN : sdl_event_mousedown(key, event); break;
+    case SDL_MOUSEBUTTONUP : sdl_event_mouseup(key, event); break;
+    case SDL_TEXTINPUT :
       {
         sdl.event_count++;
         LOG("SDL: Keyboard: Text input \"%s\" in window %d", event->text.text, event->text.windowID);
         break;
       }
-    case SDL_MOUSEWHEEL:
+    case SDL_MOUSEWHEEL :
       {
         sdl.event_count++;
         LOG("SDL: Mouse: Wheel scrolled %d in x and %d in y in window %d", event->wheel.x, event->wheel.y,
@@ -297,7 +297,7 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
         }
         break;
       }
-    case SDL_JOYAXISMOTION:
+    case SDL_JOYAXISMOTION :
       {
         sdl.event_count++;
         LOG("SDL: Joystick %d: Axis %d moved by %d", event->jaxis.which, event->jaxis.axis, event->jaxis.value);
@@ -339,77 +339,77 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
 
         break;
       }
-    case SDL_JOYBALLMOTION:
+    case SDL_JOYBALLMOTION :
       {
         sdl.event_count++;
         LOG("SDL: Joystick %d: Ball %d moved by %d,%d", event->jball.which, event->jball.ball, event->jball.xrel,
             event->jball.yrel);
         break;
       }
-    case SDL_JOYHATMOTION:
+    case SDL_JOYHATMOTION :
       {
         sdl.event_count++;
         LOG("SDL: Joystick %d: Hat %d moved to ", event->jhat.which, event->jhat.hat);
 
         switch (event->jhat.value) {
-          case SDL_HAT_CENTERED: break;
-          case SDL_HAT_UP:
+          case SDL_HAT_CENTERED : break;
+          case SDL_HAT_UP :
             {
               LOG("SDL: UP");
               sdl.joy2_up = true;
               break;
             }
-          case SDL_HAT_RIGHTUP:
+          case SDL_HAT_RIGHTUP :
             {
               LOG("SDL: RIGHTUP");
               sdl.joy2_right = true;
               sdl.joy2_up    = true;
               break;
             }
-          case SDL_HAT_RIGHT:
+          case SDL_HAT_RIGHT :
             {
               LOG("SDL: RIGHT");
               sdl.joy2_right = true;
               break;
             }
-          case SDL_HAT_RIGHTDOWN:
+          case SDL_HAT_RIGHTDOWN :
             {
               LOG("SDL: RIGHTDOWN");
               sdl.joy2_right = true;
               sdl.joy2_down  = true;
               break;
             }
-          case SDL_HAT_DOWN:
+          case SDL_HAT_DOWN :
             {
               LOG("SDL: DOWN");
               sdl.joy2_down = true;
               break;
             }
-          case SDL_HAT_LEFTDOWN:
+          case SDL_HAT_LEFTDOWN :
             {
               LOG("SDL: LEFTDOWN");
               sdl.joy2_left = true;
               sdl.joy2_down = true;
               break;
             }
-          case SDL_HAT_LEFT:
+          case SDL_HAT_LEFT :
             {
               LOG("SDL: LEFT");
               sdl.joy2_left = true;
               break;
             }
-          case SDL_HAT_LEFTUP:
+          case SDL_HAT_LEFTUP :
             {
               sdl.joy2_left = true;
               sdl.joy2_up   = true;
               LOG("SDL: LEFTUP");
               break;
             }
-          default: LOG("SDL: UNKNOWN"); break;
+          default : LOG("SDL: UNKNOWN"); break;
         }
         break;
       }
-    case SDL_JOYBUTTONDOWN:
+    case SDL_JOYBUTTONDOWN :
       {
         sdl.event_count++;
         LOG("SDL: Joystick %d: Button %d pressed", event->jbutton.which, event->jbutton.button);
@@ -420,19 +420,19 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
         pcg_random_allowed--;
         break;
       }
-    case SDL_JOYBUTTONUP:
+    case SDL_JOYBUTTONUP :
       {
         sdl.event_count++;
         LOG("SDL: Joystick %d: Button %d released", event->jbutton.which, event->jbutton.button);
         set(sdl.joy_buttons, event->jbutton.button, (uint8_t) 0);
         break;
       }
-    case SDL_CLIPBOARDUPDATE:
+    case SDL_CLIPBOARDUPDATE :
       {
         LOG("SDL: Clipboard updated");
         break;
       }
-    case SDL_QUIT:
+    case SDL_QUIT :
       {
 #ifdef ENABLE_UI_ASCII_MOUSE
         SDL_ShowCursor(1);
@@ -440,12 +440,12 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
         DIE("Quit requested");
         break;
       }
-    case SDL_USEREVENT:
+    case SDL_USEREVENT :
       {
         LOG("SDL: User event %d", event->user.code);
         break;
       }
-    default:
+    default :
       {
         LOG("SDL: Unknown event %d", event->type);
         break;

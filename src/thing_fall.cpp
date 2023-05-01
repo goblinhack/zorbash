@@ -75,9 +75,9 @@ bool Thing::fall(void)
 {
   TRACE_NO_INDENT();
 
-  if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
-      is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall ||
-      is_jumping) {
+  if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer
+      || is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall
+      || is_jumping) {
     dbg("No");
     return false;
   }
@@ -298,9 +298,9 @@ bool Thing::fall_to_next_level(void)
       continue;
     }
 
-    if (l->is_ascend_dungeon(x, y) || l->is_monst(x, y) || l->is_rock(x, y) || l->is_door(x, y) ||
-        l->is_secret_door(x, y) || l->is_mob(x, y) || l->is_chasm(x, y) || l->is_wall(x, y) ||
-        l->is_ascend_sewer(x, y) || l->is_descend_sewer(x, y) || l->is_descend_dungeon(x, y)) {
+    if (l->is_ascend_dungeon(x, y) || l->is_monst(x, y) || l->is_rock(x, y) || l->is_door(x, y)
+        || l->is_secret_door(x, y) || l->is_mob(x, y) || l->is_chasm(x, y) || l->is_wall(x, y)
+        || l->is_ascend_sewer(x, y) || l->is_descend_sewer(x, y) || l->is_descend_dungeon(x, y)) {
       dbg("No, %d,%d is a special tile", x, y);
       continue;
     }
@@ -312,8 +312,8 @@ bool Thing::fall_to_next_level(void)
       }
     }
 
-    if (l->is_floor(x, y) || l->is_corridor(x, y) || l->is_bridge(x, y) || l->is_water(x, y) || l->is_fire(x, y) ||
-        l->is_lava(x, y)) {
+    if (l->is_floor(x, y) || l->is_corridor(x, y) || l->is_bridge(x, y) || l->is_water(x, y) || l->is_fire(x, y)
+        || l->is_lava(x, y)) {
 
       if (is_player()) {
         game->level = l;

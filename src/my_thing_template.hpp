@@ -428,7 +428,7 @@ private:
   int _is_eater_of_weapons {};
   int _is_enchantable {};
   int _is_enchantable_as_a_group {};
-  int _is_enchantstone {};
+  int _is_enchant_stone {};
   int _is_engulfer {};
   int _is_equippable {};
   int _is_ethereal {};
@@ -506,6 +506,7 @@ private:
   int _is_made_of_rock {};
   int _is_magical {};
   int _is_magical_effect {};
+  int _is_magic_stone {};
   int _is_mantisman {};
   int _is_map_beast {};
   int _is_map_treasure {};
@@ -582,7 +583,7 @@ private:
   int _is_shovable {};
   int _is_shovable_and_sticky {};
   int _is_skill {};
-  int _is_skillstone {};
+  int _is_skill_stone {};
   int _is_slime {};
   int _is_slippery {};
   int _is_smoke {};
@@ -667,7 +668,6 @@ private:
   int _is_unused_flag141 {};
   int _is_unused_flag142 {};
   int _is_unused_flag143 {};
-  int _is_unused_flag144 {};
   int _is_unused_flag15 {};
   int _is_unused_flag16 {};
   int _is_unused_flag17 {};
@@ -1725,7 +1725,7 @@ public:
   int is_eater_of_weapons(void) const;
   int is_enchantable_as_a_group(void) const;
   int is_enchantable(void) const;
-  int is_enchantstone(void) const;
+  int is_enchant_stone(void) const;
   int is_engulfer(void) const;
   int is_equippable(void) const;
   int is_ethereal_mob(void) const;
@@ -1802,6 +1802,7 @@ public:
   int is_made_of_rock(void) const;
   int is_magical_effect(void) const;
   int is_magical(void) const;
+  int is_magic_stone(void) const;
   int is_mantisman(void) const;
   int is_map_beast(void) const;
   int is_map_treasure(void) const;
@@ -1877,7 +1878,7 @@ public:
   int is_shield(void) const;
   int is_shovable_and_sticky(void) const;
   int is_shovable(void) const;
-  int is_skillstone(void) const;
+  int is_skill_stone(void) const;
   int is_skill(void) const;
   int is_slime(void) const;
   int is_slippery(void) const;
@@ -1961,7 +1962,6 @@ public:
   int is_unused_flag141(void) const;
   int is_unused_flag142(void) const;
   int is_unused_flag143(void) const;
-  int is_unused_flag144(void) const;
   int is_unused_flag14(void) const;
   int is_unused_flag15(void) const;
   int is_unused_flag16(void) const;
@@ -2474,7 +2474,7 @@ public:
   void is_eater_of_weapons_set(int v);
   void is_enchantable_as_a_group_set(int v);
   void is_enchantable_set(int v);
-  void is_enchantstone_set(int v);
+  void is_enchant_stone_set(int v);
   void is_engulfer_set(int v);
   void is_equippable_set(int v);
   void is_ethereal_mob_set(int v);
@@ -2551,6 +2551,7 @@ public:
   void is_made_of_rock_set(int v);
   void is_magical_effect_set(int v);
   void is_magical_set(int v);
+  void is_magic_stone_set(int v);
   void is_mantisman_set(int v);
   void is_map_beast_set(int v);
   void is_map_treasure_set(int v);
@@ -2627,7 +2628,7 @@ public:
   void is_shovable_and_sticky_set(int v);
   void is_shovable_set(int v);
   void is_skill_set(int v);
-  void is_skillstone_set(int v);
+  void is_skill_stone_set(int v);
   void is_slime_set(int v);
   void is_slippery_set(int v);
   void is_smoke_set(int v);
@@ -2710,7 +2711,6 @@ public:
   void is_unused_flag141_set(int v);
   void is_unused_flag142_set(int v);
   void is_unused_flag143_set(int v);
-  void is_unused_flag144_set(int v);
   void is_unused_flag14_set(int v);
   void is_unused_flag15_set(int v);
   void is_unused_flag16_set(int v);
@@ -3101,7 +3101,7 @@ class Tp *tp_random_descend_sewer(void);
 class Tp *tp_random_dirt(void);
 class Tp *tp_random_door(void);
 class Tp *tp_random_dry_grass(void);
-class Tp *tp_random_enchantstone(void);
+class Tp *tp_random_magic_stone(void);
 class Tp *tp_random_ethereal_mob(void);
 class Tp *tp_random_floor(void);
 class Tp *tp_random_foliage(void);
@@ -3137,7 +3137,6 @@ class Tp *tp_random_large_ripple(void);
 class Tp *tp_random_rock(void);
 class Tp *tp_random_secret_door(void);
 class Tp *tp_random_sewer_wall(void);
-class Tp *tp_random_skillstone(void);
 class Tp *tp_random_spiderweb(void);
 class Tp *tp_random_portal(void);
 class Tp *tp_random_treasure_class_A(void);

@@ -147,8 +147,8 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
 
   if (ctx->levels[ y ][ x ]) {
     switch (node->depth) {
-      case -1: break;
-      default:
+      case -1 : break;
+      default :
         bg_tilename = "biome_" + get_difficulty_depth_name(node->depth - 1);
         if (g_opt_ascii) {
           wid_set_color(b, WID_COLOR_BG, get_difficulty_depth_color(node->depth - 1));
@@ -158,8 +158,8 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
   } else {
     wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_UNKNOWN_COLOR);
     switch (node->depth) {
-      case -1: break;
-      default: bg_tilename = "biome_unknown"; break;
+      case -1 : break;
+      default : bg_tilename = "biome_unknown"; break;
     }
   }
 
@@ -199,23 +199,23 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
       auto next_node = ctx->nodes->getn(nl->grid_at.x, nl->grid_at.y);
 
       if (next_node) {
-        if ((node->has_door_left && (l->grid_at + point(-1, 0) == nl->grid_at)) ||
-            (node->has_door_right && (l->grid_at + point(1, 0) == nl->grid_at)) ||
-            (node->has_door_down && (l->grid_at + point(0, 1) == nl->grid_at)) ||
-            (node->has_door_up && (l->grid_at + point(0, -1) == nl->grid_at))) {
+        if ((node->has_door_left && (l->grid_at + point(-1, 0) == nl->grid_at))
+            || (node->has_door_right && (l->grid_at + point(1, 0) == nl->grid_at))
+            || (node->has_door_down && (l->grid_at + point(0, 1) == nl->grid_at))
+            || (node->has_door_up && (l->grid_at + point(0, -1) == nl->grid_at))) {
           if (next_node->is_lock) {
             l->is_crystal_level = true;
             switch (next_node->depth) {
-              case -1: break;
-              case 0: break;
-              case 1: break;
-              case 2: fg_tilename = "crystal.1"; break;
-              case 3: fg_tilename = "crystal.2"; break;
-              case 4: fg_tilename = "crystal.3"; break;
-              case 5: fg_tilename = "crystal.4"; break;
-              case 6: fg_tilename = "crystal.5"; break;
-              case 7: fg_tilename = "crystal.6"; break;
-              case 8: fg_tilename = "crystal.7"; break;
+              case -1 : break;
+              case 0 : break;
+              case 1 : break;
+              case 2 : fg_tilename = "crystal.1"; break;
+              case 3 : fg_tilename = "crystal.2"; break;
+              case 4 : fg_tilename = "crystal.3"; break;
+              case 5 : fg_tilename = "crystal.4"; break;
+              case 6 : fg_tilename = "crystal.5"; break;
+              case 7 : fg_tilename = "crystal.6"; break;
+              case 8 : fg_tilename = "crystal.7"; break;
             }
           }
         }
@@ -821,24 +821,24 @@ static uint8_t wid_choose_initial_dungeons_key_up(Widp w, const struct SDL_Keysy
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL:
-    case KMOD_RCTRL:
-    default:
+    case KMOD_LCTRL :
+    case KMOD_RCTRL :
+    default :
       switch (key->sym) {
-        case SDLK_RETURN: wid_choose_initial_dungeons_enter(nullptr, 0, 0, 0); return true;
-        default:
+        case SDLK_RETURN : wid_choose_initial_dungeons_enter(nullptr, 0, 0, 0); return true;
+        default :
           {
             TRACE_NO_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
-              case 'c': wid_choose_initial_dungeons_wid_choose_seed(nullptr, 0, 0, 0); return true;
-              case 'r': wid_choose_initial_dungeons_random(nullptr, 0, 0, 0); return true;
-              case 'e': wid_choose_initial_dungeons_enter(nullptr, 0, 0, 0); return true;
-              case ' ':
-              case 'n': wid_choose_initial_dungeons_enter(nullptr, 0, 0, 0); return true;
-              case 'b':
-              case 'q':
-              case SDLK_ESCAPE: wid_choose_initial_dungeons_go_back(nullptr, 0, 0, 0); return true;
+              case 'c' : wid_choose_initial_dungeons_wid_choose_seed(nullptr, 0, 0, 0); return true;
+              case 'r' : wid_choose_initial_dungeons_random(nullptr, 0, 0, 0); return true;
+              case 'e' : wid_choose_initial_dungeons_enter(nullptr, 0, 0, 0); return true;
+              case ' ' :
+              case 'n' : wid_choose_initial_dungeons_enter(nullptr, 0, 0, 0); return true;
+              case 'b' :
+              case 'q' :
+              case SDLK_ESCAPE : wid_choose_initial_dungeons_go_back(nullptr, 0, 0, 0); return true;
             }
           }
       }
@@ -1013,8 +1013,8 @@ void Game::wid_choose_initial_dungeons(void)
   newptr(MTYPE_WID, ctx, "wid level grid ctx");
   g_ctx = ctx;
 
-  ctx->nodes =
-      new Nodes(BIOME_DUNGEONS, DUNGEONS_GRID_CHUNK_WIDTH, DUNGEONS_GRID_CHUNK_WIDTH, false /* not a dungeon */);
+  ctx->nodes
+      = new Nodes(BIOME_DUNGEONS, DUNGEONS_GRID_CHUNK_WIDTH, DUNGEONS_GRID_CHUNK_WIDTH, false /* not a dungeon */);
   ctx->focusx           = -1;
   ctx->focusy           = -1;
   ctx->generated        = false;

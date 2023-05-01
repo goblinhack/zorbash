@@ -122,7 +122,7 @@ PyObject *level_is_eater_of_red_blood_at(PyObject *obj, PyObject *args, PyObject
 PyObject *level_is_eater_of_slime_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_eater_of_treasure_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_enchantable_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_enchantstone_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_enchant_stone_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_engulfer_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_ethereal_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_ethereal_mob_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -223,7 +223,7 @@ PyObject *level_is_shield_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_shovable_and_sticky_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_shovable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_skill_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_skillstone_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_skill_stone_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_slime_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_slippery_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_smoke_at(PyObject *obj, PyObject *args, PyObject *keywds);

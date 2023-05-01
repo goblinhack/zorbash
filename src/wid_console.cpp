@@ -169,12 +169,12 @@ uint8_t wid_console_receive_input(Widp w, const SDL_Keysym *key)
   wid_console_reset_scroll();
 
   switch (key->sym) {
-    case SDLK_RETURN:
+    case SDLK_RETURN :
       {
         break;
       }
 
-    default: break;
+    default : break;
   }
 
   //

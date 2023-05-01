@@ -483,8 +483,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     dmg_type = "fire ";
 
     if (temperature_sensitive()) {
-      if ((temperature_get() < -TEMPERATURE_THRESHOLD) || was_frozen || is_frozen ||
-          dmg_received_doubled_from_fire()) {
+      if ((temperature_get() < -TEMPERATURE_THRESHOLD) || was_frozen || is_frozen
+          || dmg_received_doubled_from_fire()) {
         dmg_type = "double " + dmg_type;
         damage *= 2;
         dbg("Double damage from fire");
@@ -837,8 +837,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     dmg_type = "heat ";
 
     if (temperature_sensitive()) {
-      if ((temperature_get() < -TEMPERATURE_THRESHOLD) || was_frozen || is_frozen ||
-          dmg_received_doubled_from_fire()) {
+      if ((temperature_get() < -TEMPERATURE_THRESHOLD) || was_frozen || is_frozen
+          || dmg_received_doubled_from_fire()) {
         dmg_type = "double " + dmg_type;
         damage *= 2;
         dbg("Double damage from heat");
@@ -975,9 +975,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     //
   } else if (hitter->is_monst()) {
     switch (hitter->try_to_shove_into_hazard(this, delta)) {
-      case THING_SHOVE_TRIED_AND_FAILED: return true;
-      case THING_SHOVE_TRIED_AND_PASSED: return true;
-      case THING_SHOVE_NEVER_TRIED: break;
+      case THING_SHOVE_TRIED_AND_FAILED : return true;
+      case THING_SHOVE_TRIED_AND_PASSED : return true;
+      case THING_SHOVE_NEVER_TRIED : break;
     }
   }
 
@@ -1788,8 +1788,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   // Check for staff of fire projectiles (this is the non real hitter case)
   //
-  if (attack_options->attack[ THING_ATTACK_FIRE ] || hitter->is_fire() || hitter->is_lava() ||
-      real_hitter->is_fire() || real_hitter->is_lava()) {
+  if (attack_options->attack[ THING_ATTACK_FIRE ] || hitter->is_fire() || hitter->is_lava() || real_hitter->is_fire()
+      || real_hitter->is_lava()) {
     on_fire_set("hit by fire");
   } else if (is_on_fire()) {
     if (is_player()) {
@@ -1898,9 +1898,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       // We don't want to see the natural attack of the player as
       // we already displayed it during swing attacks.
       //
-    } else if (attack_options->attack[ THING_ATTACK_NATURAL ] || attack_options->attack[ THING_ATTACK_POISON ] ||
-               attack_options->attack[ THING_ATTACK_DIGEST ] ||
-               ! real_hitter->equip_id_carry_anim(MONST_EQUIP_WEAPON).ok()) {
+    } else if (attack_options->attack[ THING_ATTACK_NATURAL ] || attack_options->attack[ THING_ATTACK_POISON ]
+               || attack_options->attack[ THING_ATTACK_DIGEST ]
+               || ! real_hitter->equip_id_carry_anim(MONST_EQUIP_WEAPON).ok()) {
       //
       // Monster natural attack
       //
@@ -2122,9 +2122,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       // We don't want to see the natural attack of the player as
       // we already displayed it during swing attacks.
       //
-    } else if (attack_options->attack[ THING_ATTACK_NATURAL ] || attack_options->attack[ THING_ATTACK_POISON ] ||
-               attack_options->attack[ THING_ATTACK_DIGEST ] ||
-               ! real_hitter->equip_id_carry_anim(MONST_EQUIP_WEAPON).ok()) {
+    } else if (attack_options->attack[ THING_ATTACK_NATURAL ] || attack_options->attack[ THING_ATTACK_POISON ]
+               || attack_options->attack[ THING_ATTACK_DIGEST ]
+               || ! real_hitter->equip_id_carry_anim(MONST_EQUIP_WEAPON).ok()) {
 
       //
       // Monster natural attack
@@ -2274,8 +2274,8 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
   // Allow rocks on the main level to be destroyed; but not in the border
   //
   if (is_very_hard()) {
-    if ((curr_at.x < MAP_BORDER_ROCK) || (curr_at.y < MAP_BORDER_ROCK) ||
-        (curr_at.x >= MAP_WIDTH - MAP_BORDER_ROCK) || (curr_at.y >= MAP_HEIGHT - MAP_BORDER_ROCK)) {
+    if ((curr_at.x < MAP_BORDER_ROCK) || (curr_at.y < MAP_BORDER_ROCK) || (curr_at.x >= MAP_WIDTH - MAP_BORDER_ROCK)
+        || (curr_at.y >= MAP_HEIGHT - MAP_BORDER_ROCK)) {
       IF_DEBUG { hitter->log("Cannot hit: %s is very_hard", to_short_string().c_str()); }
       return false;
     }
@@ -2322,9 +2322,9 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
         }
         hitter->msg("You smash your fists against the door!");
         training = true;
-      } else if (! hitter->is_explosion() && ! hitter->is_projectile() && ! hitter->is_laser() &&
-                 ! hitter->is_weapon() && ! hitter->is_magical() && ! hitter->is_fire() && ! hitter->is_lava() &&
-                 ! hitter->gfx_pixelart_attack_anim()) {
+      } else if (! hitter->is_explosion() && ! hitter->is_projectile() && ! hitter->is_laser()
+                 && ! hitter->is_weapon() && ! hitter->is_magical() && ! hitter->is_fire() && ! hitter->is_lava()
+                 && ! hitter->gfx_pixelart_attack_anim()) {
         //
         // Not something that typically damages walls.
         //
@@ -2343,9 +2343,9 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
         }
         hitter->msg("You smash your fists against the rock!");
         training = true;
-      } else if (! hitter->is_explosion() && ! hitter->is_projectile() && ! hitter->is_laser() &&
-                 ! hitter->is_weapon() && ! hitter->is_magical() && ! hitter->is_fire() && ! hitter->is_lava() &&
-                 ! hitter->gfx_pixelart_attack_anim()) {
+      } else if (! hitter->is_explosion() && ! hitter->is_projectile() && ! hitter->is_laser()
+                 && ! hitter->is_weapon() && ! hitter->is_magical() && ! hitter->is_fire() && ! hitter->is_lava()
+                 && ! hitter->gfx_pixelart_attack_anim()) {
         //
         // Not something that typically damages walls.
         //

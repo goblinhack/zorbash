@@ -83,18 +83,18 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   TRACE_AND_INDENT();
 
   switch (state) {
-    case Game::STATE_NORMAL: break;
-    case Game::STATE_OPTIONS_FOR_ITEM_MENU: return nullptr;
-    case Game::STATE_INVENTORY: break;
-    case Game::STATE_COLLECTING_ITEMS: return nullptr;
-    case Game::STATE_ENCHANTING_ITEMS: return nullptr;
-    case Game::STATE_CHOOSING_SKILLS: return nullptr;
-    case Game::STATE_CHOOSING_TARGET: return nullptr;
-    case Game::STATE_CHOOSING_LEVEL: return nullptr;
-    case Game::STATE_KEYBOARD_MENU: return nullptr;
-    case Game::STATE_LOAD_MENU: return nullptr;
-    case Game::STATE_SAVE_MENU: return nullptr;
-    case Game::STATE_QUIT_MENU: return nullptr;
+    case Game::STATE_NORMAL : break;
+    case Game::STATE_OPTIONS_FOR_ITEM_MENU : return nullptr;
+    case Game::STATE_INVENTORY : break;
+    case Game::STATE_COLLECTING_ITEMS : return nullptr;
+    case Game::STATE_ENCHANTING_ITEMS : return nullptr;
+    case Game::STATE_CHOOSING_SKILLS : return nullptr;
+    case Game::STATE_CHOOSING_TARGET : return nullptr;
+    case Game::STATE_CHOOSING_LEVEL : return nullptr;
+    case Game::STATE_KEYBOARD_MENU : return nullptr;
+    case Game::STATE_LOAD_MENU : return nullptr;
+    case Game::STATE_SAVE_MENU : return nullptr;
+    case Game::STATE_QUIT_MENU : return nullptr;
   }
 
   auto level = game->level;
@@ -293,18 +293,18 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
   TRACE_AND_INDENT();
 
   switch (state) {
-    case Game::STATE_NORMAL: break;
-    case Game::STATE_OPTIONS_FOR_ITEM_MENU: return nullptr;
-    case Game::STATE_INVENTORY: break;
-    case Game::STATE_COLLECTING_ITEMS: return nullptr;
-    case Game::STATE_ENCHANTING_ITEMS: return nullptr;
-    case Game::STATE_CHOOSING_SKILLS: return nullptr;
-    case Game::STATE_CHOOSING_TARGET: return nullptr;
-    case Game::STATE_CHOOSING_LEVEL: return nullptr;
-    case Game::STATE_KEYBOARD_MENU: return nullptr;
-    case Game::STATE_LOAD_MENU: return nullptr;
-    case Game::STATE_SAVE_MENU: return nullptr;
-    case Game::STATE_QUIT_MENU: return nullptr;
+    case Game::STATE_NORMAL : break;
+    case Game::STATE_OPTIONS_FOR_ITEM_MENU : return nullptr;
+    case Game::STATE_INVENTORY : break;
+    case Game::STATE_COLLECTING_ITEMS : return nullptr;
+    case Game::STATE_ENCHANTING_ITEMS : return nullptr;
+    case Game::STATE_CHOOSING_SKILLS : return nullptr;
+    case Game::STATE_CHOOSING_TARGET : return nullptr;
+    case Game::STATE_CHOOSING_LEVEL : return nullptr;
+    case Game::STATE_KEYBOARD_MENU : return nullptr;
+    case Game::STATE_LOAD_MENU : return nullptr;
+    case Game::STATE_SAVE_MENU : return nullptr;
+    case Game::STATE_QUIT_MENU : return nullptr;
   }
 
   auto level = game->level;

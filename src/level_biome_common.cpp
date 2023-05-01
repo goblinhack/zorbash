@@ -74,15 +74,15 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
 
       Tpp tp_monst = nullptr;
       switch (biome) {
-        case BIOME_UNKNOWN: break;
-        case BIOME_DUNGEON: tp_monst = get_biome_dungeon_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
-        case BIOME_FLOODED: tp_monst = get_biome_flooded_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
-        case BIOME_SWAMP: tp_monst = get_biome_swamp_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
-        case BIOME_SEWER: tp_monst = get_biome_sewer_random_monst(p, MONST_ENVIRON_NORMAL); break;
-        case BIOME_ICE: tp_monst = get_biome_ice_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
-        case BIOME_CHASMS: tp_monst = get_biome_chasms_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
-        case BIOME_LAVA: tp_monst = get_biome_lava_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
-        default: break;
+        case BIOME_UNKNOWN : break;
+        case BIOME_DUNGEON : tp_monst = get_biome_dungeon_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
+        case BIOME_FLOODED : tp_monst = get_biome_flooded_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
+        case BIOME_SWAMP : tp_monst = get_biome_swamp_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
+        case BIOME_SEWER : tp_monst = get_biome_sewer_random_monst(p, MONST_ENVIRON_NORMAL); break;
+        case BIOME_ICE : tp_monst = get_biome_ice_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
+        case BIOME_CHASMS : tp_monst = get_biome_chasms_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
+        case BIOME_LAVA : tp_monst = get_biome_lava_random_monst(d, p, MONST_ENVIRON_NORMAL); break;
+        default : break;
       }
 
       if (tp_monst) {
@@ -108,9 +108,9 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
         //
         // If surrounded by hazards then choose an ethereal mob
         //
-        if (d->is_hazard(x - 1, y) && d->is_hazard(x + 1, y) && d->is_hazard(x, y - 1) && d->is_hazard(x, y + 1) &&
-            d->is_hazard(x - 1, y - 1) && d->is_hazard(x + 1, y - 1) && d->is_hazard(x - 1, y + 1) &&
-            d->is_hazard(x + 1, y + 1)) {
+        if (d->is_hazard(x - 1, y) && d->is_hazard(x + 1, y) && d->is_hazard(x, y - 1) && d->is_hazard(x, y + 1)
+            && d->is_hazard(x - 1, y - 1) && d->is_hazard(x + 1, y - 1) && d->is_hazard(x - 1, y + 1)
+            && d->is_hazard(x + 1, y + 1)) {
 
           if (d1000() < d1000_chance_creating_mob_challenge_class_A) {
             tp = tp_random_ethereal_mob();
@@ -252,12 +252,8 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
         }
       }
 
-      if (d->is_enchantstone(x, y)) {
-        tp = tp_random_enchantstone();
-      }
-
-      if (d->is_skillstone(x, y)) {
-        tp = tp_random_skillstone();
+      if (d->is_magic_stone(x, y)) {
+        tp = tp_random_magic_stone();
       }
 
       //
@@ -379,16 +375,16 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
           if (r && r->is_secret) {
             t->enchant_randomly();
           }
-          dbg("INF: Placed weapon '%s'", t->text_short_capitalised().c_str());
+          con("INF: Placed weapon '%s'", t->text_short_capitalised().c_str());
         } else if (t->is_treasure_type()) {
           if (r && r->is_secret) {
             t->enchant_randomly();
           }
-          dbg("INF: Placed treasure '%s'", t->text_short_capitalised().c_str());
+          con("INF: Placed treasure '%s'", t->text_short_capitalised().c_str());
         } else if (t->is_bag()) {
-          dbg("INF: Placed '%s'", t->text_short_capitalised().c_str());
+          con("INF: Placed '%s'", t->text_short_capitalised().c_str());
         } else if (t->is_monst()) {
-          dbg("INF: Placed monster '%s'", t->text_short_capitalised().c_str());
+          con("INF: Placed monster '%s'", t->text_short_capitalised().c_str());
         } else {
           //
           // Doors etc... don't log, not as interesting
@@ -474,12 +470,12 @@ void Level::place_portals(Dungeonp d)
       continue;
     }
 
-    if (d->is_food(x, y) || d->is_red_blood(x, y) || d->is_door(x, y) || d->is_ascend_dungeon(x, y) ||
-        d->is_descend_dungeon(x, y) || d->is_mob_any(x, y) || d->is_key(x, y) || d->is_potion(x, y) ||
-        d->is_trap(x, y) || d->is_barrel(x, y) || d->is_staff(x, y) || d->is_ring(x, y) || d->is_secret_door(x, y) ||
-        d->is_portal(x, y) || d->is_weapon_class_A(x, y) || d->is_weapon_class_B(x, y) || d->is_treasure_type(x, y) ||
-        d->is_treasure_class_A(x, y) || d->is_treasure_class_B(x, y) || d->is_treasure_class_C(x, y) ||
-        d->is_monst_any(x, y)) {
+    if (d->is_food(x, y) || d->is_red_blood(x, y) || d->is_door(x, y) || d->is_ascend_dungeon(x, y)
+        || d->is_descend_dungeon(x, y) || d->is_mob_any(x, y) || d->is_key(x, y) || d->is_potion(x, y)
+        || d->is_trap(x, y) || d->is_barrel(x, y) || d->is_staff(x, y) || d->is_ring(x, y) || d->is_secret_door(x, y)
+        || d->is_portal(x, y) || d->is_weapon_class_A(x, y) || d->is_weapon_class_B(x, y) || d->is_treasure_type(x, y)
+        || d->is_treasure_class_A(x, y) || d->is_treasure_class_B(x, y) || d->is_treasure_class_C(x, y)
+        || d->is_monst_any(x, y)) {
       continue;
     }
 
@@ -524,8 +520,8 @@ void Level::place_random_treasure(Dungeonp d)
       continue;
     }
 
-    if (d->is_dirt(x, y) || d->is_weapon_class_A(x, y) || d->is_weapon_class_B(x, y) || d->is_weapon_class_C(x, y) ||
-        d->is_treasure_class_A(x, y) || d->is_treasure_class_B(x, y) || d->is_treasure_class_C(x, y)) {
+    if (d->is_dirt(x, y) || d->is_weapon_class_A(x, y) || d->is_weapon_class_B(x, y) || d->is_weapon_class_C(x, y)
+        || d->is_treasure_class_A(x, y) || d->is_treasure_class_B(x, y) || d->is_treasure_class_C(x, y)) {
 
       auto tp = tp_random_treasure();
       if (unlikely(! tp)) {

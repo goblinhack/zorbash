@@ -166,9 +166,9 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           c = BLUE3;
         } else if (is_dirt(x, y)) {
           c = GRAY20;
-        } else if (is_enchantstone(x, y)) {
+        } else if (is_enchant_stone(x, y)) {
           c = YELLOW;
-        } else if (is_skillstone(x, y)) {
+        } else if (is_skill_stone(x, y)) {
           c = RED;
         } else if (is_foliage(x, y)) {
           c = DARKGREEN;
@@ -256,8 +256,8 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           c.a = 255;
         } else if (show_monst || is_block_of_ice(x, y) || is_mob(x, y)) {
           c = RED;
-        } else if (is_key(x, y) || is_food(x, y) || is_treasure_type(x, y) || is_skillstone(x, y) ||
-                   is_enchantstone(x, y)) {
+        } else if (is_key(x, y) || is_food(x, y) || is_treasure_type(x, y) || is_skill_stone(x, y)
+                   || is_enchant_stone(x, y)) {
           c   = GOLD2;
           c.a = 255;
         } else if (is_wall(x, y) || is_rock(x, y)) {
@@ -375,9 +375,9 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           c = BLUE3;
         } else if (is_dirt(x, y)) {
           c = GRAY20;
-        } else if (is_enchantstone(x, y)) {
+        } else if (is_enchant_stone(x, y)) {
           c = YELLOW;
-        } else if (is_skillstone(x, y)) {
+        } else if (is_skill_stone(x, y)) {
           c = RED;
         } else if (is_foliage(x, y)) {
           c = DARKGREEN;

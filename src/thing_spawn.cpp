@@ -694,10 +694,10 @@ bool Thing::spawn_gas_poison_around_thing(int radius)
       }
 
       if (pcg_random_range(0, 100) < 100 - dist * 20) {
-        uint16_t gx =
-            (p.x * DUNGEON_GAS_RESOLUTION) + pcg_random_range(-DUNGEON_GAS_RESOLUTION, DUNGEON_GAS_RESOLUTION);
-        uint16_t gy =
-            (p.y * DUNGEON_GAS_RESOLUTION) + pcg_random_range(-DUNGEON_GAS_RESOLUTION, DUNGEON_GAS_RESOLUTION);
+        uint16_t gx
+            = (p.x * DUNGEON_GAS_RESOLUTION) + pcg_random_range(-DUNGEON_GAS_RESOLUTION, DUNGEON_GAS_RESOLUTION);
+        uint16_t gy
+            = (p.y * DUNGEON_GAS_RESOLUTION) + pcg_random_range(-DUNGEON_GAS_RESOLUTION, DUNGEON_GAS_RESOLUTION);
         gx = (p.x * DUNGEON_GAS_RESOLUTION);
         gy = (p.y * DUNGEON_GAS_RESOLUTION);
 

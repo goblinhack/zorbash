@@ -34,8 +34,8 @@ static void wid_leftbar_display_display(Widp w, point tl, point br)
   // If the thing is destroyed it should have removed itself from this list.
   // So if we don't find it, we cannot display it.
   //
-  if (std::find(level->wid_leftbar_things.begin(), level->wid_leftbar_things.end(), id) ==
-      level->wid_leftbar_things.end()) {
+  if (std::find(level->wid_leftbar_things.begin(), level->wid_leftbar_things.end(), id)
+      == level->wid_leftbar_things.end()) {
     return;
   }
 
@@ -561,9 +561,9 @@ bool wid_leftbar_display_create(void)
     std::vector< Thingp > m;
     FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
     {
-      if (! t->is_door() && ! t->is_ascend_sewer() && ! t->is_descend_sewer() && ! t->is_ascend_dungeon() &&
-          ! t->is_descend_dungeon() && ! t->is_brazier() && ! t->is_spiderweb() && ! t->is_barrel() &&
-          ! t->is_portal() && ! t->is_block_of_ice()) {
+      if (! t->is_door() && ! t->is_ascend_sewer() && ! t->is_descend_sewer() && ! t->is_ascend_dungeon()
+          && ! t->is_descend_dungeon() && ! t->is_brazier() && ! t->is_spiderweb() && ! t->is_barrel()
+          && ! t->is_portal() && ! t->is_block_of_ice()) {
         continue;
       }
 

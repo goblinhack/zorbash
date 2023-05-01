@@ -469,9 +469,9 @@ PyObject *spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObjec
   uint32_t radius_min = 0;
   uint32_t radius_max = 0;
 
-  static char *kwlist[] = {(char *) "id",   (char *) "parent_id", (char *) "victim_id",
-                           (char *) "what", (char *) "min",       (char *) "max",
-                           nullptr};
+  static char *kwlist[]
+      = {(char *) "id", (char *) "parent_id", (char *) "victim_id", (char *) "what", (char *) "min", (char *) "max",
+         nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIIs|ii", kwlist, &id, &parent_id, &victim_id, &what, &radius_min,
                                     &radius_max)) {
@@ -1109,7 +1109,7 @@ TP_BODY_SET_INT(is_eater_of_treasure)
 TP_BODY_SET_INT(is_eater_of_weapons)
 TP_BODY_SET_INT(is_enchantable)
 TP_BODY_SET_INT(is_enchantable_as_a_group)
-TP_BODY_SET_INT(is_enchantstone)
+TP_BODY_SET_INT(is_enchant_stone)
 TP_BODY_SET_INT(is_engulfer)
 TP_BODY_SET_INT(is_equippable)
 TP_BODY_SET_INT(is_ethereal)
@@ -1186,6 +1186,7 @@ TP_BODY_SET_INT(is_loggable)
 TP_BODY_SET_INT(is_made_of_rock)
 TP_BODY_SET_INT(is_magical)
 TP_BODY_SET_INT(is_magical_effect)
+TP_BODY_SET_INT(is_magic_stone)
 TP_BODY_SET_INT(is_mantisman)
 TP_BODY_SET_INT(is_map_beast)
 TP_BODY_SET_INT(is_map_treasure)
@@ -1262,7 +1263,7 @@ TP_BODY_SET_INT(is_shield)
 TP_BODY_SET_INT(is_shovable)
 TP_BODY_SET_INT(is_shovable_and_sticky)
 TP_BODY_SET_INT(is_skill)
-TP_BODY_SET_INT(is_skillstone)
+TP_BODY_SET_INT(is_skill_stone)
 TP_BODY_SET_INT(is_slime)
 TP_BODY_SET_INT(is_slippery)
 TP_BODY_SET_INT(is_smoke)
@@ -1347,7 +1348,6 @@ TP_BODY_SET_INT(is_unused_flag140)
 TP_BODY_SET_INT(is_unused_flag141)
 TP_BODY_SET_INT(is_unused_flag142)
 TP_BODY_SET_INT(is_unused_flag143)
-TP_BODY_SET_INT(is_unused_flag144)
 TP_BODY_SET_INT(is_unused_flag15)
 TP_BODY_SET_INT(is_unused_flag16)
 TP_BODY_SET_INT(is_unused_flag17)

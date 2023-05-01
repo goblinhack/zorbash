@@ -127,7 +127,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(level_is_eater_of_slime_at),
     MY_ADD_PYTHON_FUNCTION(level_is_eater_of_treasure_at),
     MY_ADD_PYTHON_FUNCTION(level_is_enchantable_at),
-    MY_ADD_PYTHON_FUNCTION(level_is_enchantstone_at),
+    MY_ADD_PYTHON_FUNCTION(level_is_enchant_stone_at),
     MY_ADD_PYTHON_FUNCTION(level_is_engulfer_at),
     MY_ADD_PYTHON_FUNCTION(level_is_ethereal_at),
     MY_ADD_PYTHON_FUNCTION(level_is_ethereal_mob_at),
@@ -226,7 +226,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(level_is_shovable_and_sticky_at),
     MY_ADD_PYTHON_FUNCTION(level_is_shovable_at),
     MY_ADD_PYTHON_FUNCTION(level_is_skill_at),
-    MY_ADD_PYTHON_FUNCTION(level_is_skillstone_at),
+    MY_ADD_PYTHON_FUNCTION(level_is_skill_stone_at),
     MY_ADD_PYTHON_FUNCTION(level_is_slime_at),
     MY_ADD_PYTHON_FUNCTION(level_is_slippery_at),
     MY_ADD_PYTHON_FUNCTION(level_is_smoke_at),
@@ -586,7 +586,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_is_eater_of_weapons),
     MY_ADD_PYTHON_FUNCTION(thing_is_enchantable),
     MY_ADD_PYTHON_FUNCTION(thing_is_enchantable_as_a_group),
-    MY_ADD_PYTHON_FUNCTION(thing_is_enchantstone),
+    MY_ADD_PYTHON_FUNCTION(thing_is_enchant_stone),
     MY_ADD_PYTHON_FUNCTION(thing_is_engulfer),
     MY_ADD_PYTHON_FUNCTION(thing_is_equippable),
     MY_ADD_PYTHON_FUNCTION(thing_is_ethereal),
@@ -663,6 +663,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_is_made_of_rock),
     MY_ADD_PYTHON_FUNCTION(thing_is_magical),
     MY_ADD_PYTHON_FUNCTION(thing_is_magical_effect),
+    MY_ADD_PYTHON_FUNCTION(thing_is_magic_stone),
     MY_ADD_PYTHON_FUNCTION(thing_is_mantisman),
     MY_ADD_PYTHON_FUNCTION(thing_is_meat),
     MY_ADD_PYTHON_FUNCTION(thing_is_metal),
@@ -736,7 +737,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_is_shovable),
     MY_ADD_PYTHON_FUNCTION(thing_is_shovable_and_sticky),
     MY_ADD_PYTHON_FUNCTION(thing_is_skill),
-    MY_ADD_PYTHON_FUNCTION(thing_is_skillstone),
+    MY_ADD_PYTHON_FUNCTION(thing_is_skill_stone),
     MY_ADD_PYTHON_FUNCTION(thing_is_sleeping),
     MY_ADD_PYTHON_FUNCTION(thing_is_slime),
     MY_ADD_PYTHON_FUNCTION(thing_is_slippery),
@@ -818,7 +819,6 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_is_unused_flag141),
     MY_ADD_PYTHON_FUNCTION(thing_is_unused_flag142),
     MY_ADD_PYTHON_FUNCTION(thing_is_unused_flag143),
-    MY_ADD_PYTHON_FUNCTION(thing_is_unused_flag144),
     MY_ADD_PYTHON_FUNCTION(thing_is_unused_flag15),
     MY_ADD_PYTHON_FUNCTION(thing_is_unused_flag16),
     MY_ADD_PYTHON_FUNCTION(thing_is_unused_flag17),
@@ -1416,7 +1416,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(is_eater_of_weapons),
     MY_ADD_PYTHON_TP_FUNCTION(is_enchantable),
     MY_ADD_PYTHON_TP_FUNCTION(is_enchantable_as_a_group),
-    MY_ADD_PYTHON_TP_FUNCTION(is_enchantstone),
+    MY_ADD_PYTHON_TP_FUNCTION(is_enchant_stone),
     MY_ADD_PYTHON_TP_FUNCTION(is_engulfer),
     MY_ADD_PYTHON_TP_FUNCTION(is_equippable),
     MY_ADD_PYTHON_TP_FUNCTION(is_ethereal),
@@ -1493,6 +1493,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(is_made_of_rock),
     MY_ADD_PYTHON_TP_FUNCTION(is_magical),
     MY_ADD_PYTHON_TP_FUNCTION(is_magical_effect),
+    MY_ADD_PYTHON_TP_FUNCTION(is_magic_stone),
     MY_ADD_PYTHON_TP_FUNCTION(is_mantisman),
     MY_ADD_PYTHON_TP_FUNCTION(is_map_beast),
     MY_ADD_PYTHON_TP_FUNCTION(is_map_treasure),
@@ -1569,7 +1570,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(is_shovable),
     MY_ADD_PYTHON_TP_FUNCTION(is_shovable_and_sticky),
     MY_ADD_PYTHON_TP_FUNCTION(is_skill),
-    MY_ADD_PYTHON_TP_FUNCTION(is_skillstone),
+    MY_ADD_PYTHON_TP_FUNCTION(is_skill_stone),
     MY_ADD_PYTHON_TP_FUNCTION(is_slime),
     MY_ADD_PYTHON_TP_FUNCTION(is_slippery),
     MY_ADD_PYTHON_TP_FUNCTION(is_smoke),
@@ -1654,7 +1655,6 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(is_unused_flag141),
     MY_ADD_PYTHON_TP_FUNCTION(is_unused_flag142),
     MY_ADD_PYTHON_TP_FUNCTION(is_unused_flag143),
-    MY_ADD_PYTHON_TP_FUNCTION(is_unused_flag144),
     MY_ADD_PYTHON_TP_FUNCTION(is_unused_flag15),
     MY_ADD_PYTHON_TP_FUNCTION(is_unused_flag16),
     MY_ADD_PYTHON_TP_FUNCTION(is_unused_flag17),
@@ -2048,8 +2048,8 @@ static PyMethodDef python_c_METHODS[] = {
     {nullptr, nullptr, 0, nullptr} /* sentinel */
 };
 
-static struct PyModuleDef python_c_MODULE = {
-    PyModuleDef_HEAD_INIT, "my", nullptr, -1, python_c_METHODS, nullptr, nullptr, nullptr, nullptr};
+static struct PyModuleDef python_c_MODULE
+    = {PyModuleDef_HEAD_INIT, "my", nullptr, -1, python_c_METHODS, nullptr, nullptr, nullptr, nullptr};
 
 PyMODINIT_FUNC py_my_module_create(void)
 {

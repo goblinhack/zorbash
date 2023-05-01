@@ -40,7 +40,7 @@ void Game::wid_choose_player_name_select(void)
   wid_skillbox_fini();
   wid_thing_info_fini("choose name");
 
-  wid_keyboard_wid_choose_player_name =
-      wid_keyboard(string_to_wstring(g_opt_player_name), L"Choose a name for your hapless adventurer", selected,
-                   cancelled, UI_RIGHTBAR_WIDTH);
+  wid_keyboard_wid_choose_player_name
+      = wid_keyboard(string_to_wstring(g_opt_player_name), L"Choose a name for your hapless adventurer", selected,
+                     cancelled, UI_RIGHTBAR_WIDTH);
 }

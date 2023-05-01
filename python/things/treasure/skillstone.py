@@ -9,11 +9,11 @@ def explode(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if owner:
         if my.thing_is_player(owner):
-            my.thing_msg(me, "Your staff of skillstone explodes.")
+            my.thing_msg(me, "Your staff of skill stone explodes.")
         else:
-            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s staff of skillstone explodes.")
+            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s staff of skill stone explodes.")
     else:
-        my.thing_msg(me, "The staff of skillstone explodes.")
+        my.thing_msg(me, "The staff of skill stone explodes.")
 
     my.spawn_at_my_position(me, "explosion_major")
     my.spawn_set_fire_to_things_around_me(me, "fire")
@@ -60,8 +60,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_interesting(self, True)
     my.is_item(self, True)
     my.is_loggable(self, True)
+    my.is_magic_stone(self, True)
     my.is_moveable(self, True)
-    my.is_skillstone(self, True)
+    my.is_skill_stone(self, True)
     my.is_stone(self, True)
     my.is_throwable(self, True)
     my.is_treasure_class_C(self, True)
@@ -77,7 +78,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "Use this magical stone to learn some new skills into your brain matter thing.")
-    my.text_description_short(self, "A glowing skillstone.")
+    my.text_description_short(self, "A glowing skill stone.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -91,7 +92,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="skillstone", text_long_name="skillstone", text_short_name="skillstone")
+    tp_init(name="skill_stone", text_long_name="skill stone", text_short_name="skill stone")
 
 
 init()

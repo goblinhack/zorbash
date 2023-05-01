@@ -95,19 +95,19 @@ static uint8_t wid_quit_key_up(Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL:
-    case KMOD_RCTRL:
-    default:
+    case KMOD_LCTRL :
+    case KMOD_RCTRL :
+    default :
       switch (key->sym) {
-        default:
+        default :
           {
             TRACE_NO_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
-              case 'y': wid_quit_yes(nullptr, 0, 0, 0); return true;
-              case 'n': wid_quit_no(nullptr, 0, 0, 0); return true;
-              case 'b':
-              case SDLK_ESCAPE: wid_quit_no(nullptr, 0, 0, 0); return true;
+              case 'y' : wid_quit_yes(nullptr, 0, 0, 0); return true;
+              case 'n' : wid_quit_no(nullptr, 0, 0, 0); return true;
+              case 'b' :
+              case SDLK_ESCAPE : wid_quit_no(nullptr, 0, 0, 0); return true;
             }
           }
       }

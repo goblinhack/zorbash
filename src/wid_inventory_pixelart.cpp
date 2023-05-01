@@ -246,11 +246,11 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
     bry -= 2;
     game->wid_thing_info_clear_popup();
     if (wid_inventory_thing_selected) {
-      wid_inventory_thing_info =
-          game->wid_thing_info_create_popup(wid_inventory_thing_selected, point(tlx, tly), point(brx, bry));
+      wid_inventory_thing_info
+          = game->wid_thing_info_create_popup(wid_inventory_thing_selected, point(tlx, tly), point(brx, bry));
     } else if (wid_inventory_thing_over) {
-      wid_inventory_thing_info =
-          game->wid_thing_info_create_popup(wid_inventory_thing_over, point(tlx, tly), point(brx, bry));
+      wid_inventory_thing_info
+          = game->wid_thing_info_create_popup(wid_inventory_thing_over, point(tlx, tly), point(brx, bry));
     } else {
       wid_inventory_thing_info = game->wid_thing_info_create_popup(player, point(tlx, tly), point(brx, bry));
     }

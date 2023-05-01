@@ -414,8 +414,8 @@ uint8_t command_handle(std::wstring input, std::wstring *expanded_text, uint8_t 
 
   buf[ 0 ] = '\0';
 
-  uint8_t r =
-      command_handle(wstring_to_string(input).c_str(), buf, show_ambiguous, show_complete, execute_command, context);
+  uint8_t r = command_handle(wstring_to_string(input).c_str(), buf, show_ambiguous, show_complete, execute_command,
+                             context);
 
   if (expanded_text && buf[ 0 ]) {
     *expanded_text = string_to_wstring(std::string(buf));

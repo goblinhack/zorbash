@@ -16,19 +16,19 @@
 std::string gama_state_to_string(int state)
 {
   switch (state) {
-    case Game::STATE_NORMAL: return "NORMAL";
-    case Game::STATE_OPTIONS_FOR_ITEM_MENU: return "OPTIONS_FOR_ITEM_MENU";
-    case Game::STATE_INVENTORY: return "INVENTORY";
-    case Game::STATE_COLLECTING_ITEMS: return "COLLECTING_ITEMS";
-    case Game::STATE_ENCHANTING_ITEMS: return "ENCHANTING_ITEMS";
-    case Game::STATE_CHOOSING_SKILLS: return "CHOOSING_SKILLS";
-    case Game::STATE_CHOOSING_TARGET: return "CHOOSING_TARGET";
-    case Game::STATE_CHOOSING_LEVEL: return "CHOOSING_LEVEL";
-    case Game::STATE_KEYBOARD_MENU: return "KEYBOARD_MENU";
-    case Game::STATE_LOAD_MENU: return "LOAD_MENU";
-    case Game::STATE_SAVE_MENU: return "SAVE_MENU";
-    case Game::STATE_QUIT_MENU: return "QUIT_MENU";
-    default: ERR("Unhandled game state"); return "?";
+    case Game::STATE_NORMAL : return "NORMAL";
+    case Game::STATE_OPTIONS_FOR_ITEM_MENU : return "OPTIONS_FOR_ITEM_MENU";
+    case Game::STATE_INVENTORY : return "INVENTORY";
+    case Game::STATE_COLLECTING_ITEMS : return "COLLECTING_ITEMS";
+    case Game::STATE_ENCHANTING_ITEMS : return "ENCHANTING_ITEMS";
+    case Game::STATE_CHOOSING_SKILLS : return "CHOOSING_SKILLS";
+    case Game::STATE_CHOOSING_TARGET : return "CHOOSING_TARGET";
+    case Game::STATE_CHOOSING_LEVEL : return "CHOOSING_LEVEL";
+    case Game::STATE_KEYBOARD_MENU : return "KEYBOARD_MENU";
+    case Game::STATE_LOAD_MENU : return "LOAD_MENU";
+    case Game::STATE_SAVE_MENU : return "SAVE_MENU";
+    case Game::STATE_QUIT_MENU : return "QUIT_MENU";
+    default : ERR("Unhandled game state"); return "?";
   }
 }
 
@@ -87,7 +87,7 @@ void Game::change_state(int new_state, const std::string &why)
   // Actions for the new state
   //
   switch (new_state) {
-    case STATE_NORMAL:
+    case STATE_NORMAL :
       wid_thing_info_fini("change state");
       wid_collect_destroy();
       wid_enchant_destroy();
@@ -98,28 +98,28 @@ void Game::change_state(int new_state, const std::string &why)
       wid_quit_destroy();
       wid_actionbar_init();
       break;
-    case STATE_OPTIONS_FOR_ITEM_MENU: break;
-    case STATE_INVENTORY: // Currently managing inventory
+    case STATE_OPTIONS_FOR_ITEM_MENU : break;
+    case STATE_INVENTORY : // Currently managing inventory
       wid_actionbar_init();
       break;
-    case STATE_COLLECTING_ITEMS: // Collecting en masse from the level
+    case STATE_COLLECTING_ITEMS : // Collecting en masse from the level
       wid_thing_info_fini("change state");
       wid_collect_destroy();
       wid_actionbar_init();
       break;
-    case STATE_ENCHANTING_ITEMS:
+    case STATE_ENCHANTING_ITEMS :
       wid_enchant_destroy();
       wid_actionbar_init();
       break;
-    case STATE_CHOOSING_SKILLS:
+    case STATE_CHOOSING_SKILLS :
       wid_choose_skill_destroy();
       wid_actionbar_init();
       break;
-    case STATE_CHOOSING_TARGET: // Looking to somewhere to throw at
+    case STATE_CHOOSING_TARGET : // Looking to somewhere to throw at
       wid_thing_info_fini("change state");
       wid_actionbar_init();
       break;
-    case STATE_CHOOSING_LEVEL: // Looking to change level
+    case STATE_CHOOSING_LEVEL : // Looking to change level
       wid_actionbar_close_all_popups();
       wid_hide(wid_topcon_window);
       wid_rightbar_fini();
@@ -133,10 +133,10 @@ void Game::change_state(int new_state, const std::string &why)
       request_to_remake_debuffbox = false;
       request_to_remake_buffbox   = false;
       break;
-    case STATE_LOAD_MENU:
-    case STATE_KEYBOARD_MENU:
-    case STATE_SAVE_MENU:
-    case STATE_QUIT_MENU: wid_thing_info_fini("change state"); break;
+    case STATE_LOAD_MENU :
+    case STATE_KEYBOARD_MENU :
+    case STATE_SAVE_MENU :
+    case STATE_QUIT_MENU : wid_thing_info_fini("change state"); break;
   }
 
   //
@@ -149,11 +149,11 @@ void Game::change_state(int new_state, const std::string &why)
   request_to_use_item    = nullptr;
 
   switch (old_state) {
-    case STATE_NORMAL:
-    case STATE_INVENTORY:        // Currently managing inventory
-    case STATE_COLLECTING_ITEMS: // Collecting en masse from the level
-    case STATE_ENCHANTING_ITEMS:
-    case STATE_CHOOSING_SKILLS:
+    case STATE_NORMAL :
+    case STATE_INVENTORY :        // Currently managing inventory
+    case STATE_COLLECTING_ITEMS : // Collecting en masse from the level
+    case STATE_ENCHANTING_ITEMS :
+    case STATE_CHOOSING_SKILLS :
       if (level) {
         level->cursor_recreate();
         if (level->cursor) {
@@ -161,8 +161,8 @@ void Game::change_state(int new_state, const std::string &why)
         }
       }
       break;
-    case STATE_CHOOSING_LEVEL:
-    case STATE_CHOOSING_TARGET: // Looking to somewhere to throw at
+    case STATE_CHOOSING_LEVEL :
+    case STATE_CHOOSING_TARGET : // Looking to somewhere to throw at
       //
       // Don't create the cursor right after selecting. Wait until
       // we move again.

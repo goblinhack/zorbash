@@ -117,8 +117,8 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
     // double click so we can attack monsters sitting in lava
     //
     if (level->cursor) {
-      if ((std::abs(player->curr_at.x - level->cursor->curr_at.x) <= 1) &&
-          (std::abs(player->curr_at.y - level->cursor->curr_at.y) <= 1)) {
+      if ((std::abs(player->curr_at.x - level->cursor->curr_at.x) <= 1)
+          && (std::abs(player->curr_at.y - level->cursor->curr_at.y) <= 1)) {
         IF_DEBUG { player->log("Close enough to attack check"); }
         TRACE_AND_INDENT();
 

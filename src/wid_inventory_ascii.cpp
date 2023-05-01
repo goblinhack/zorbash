@@ -237,11 +237,11 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
     bry -= 2;
     game->wid_thing_info_clear_popup();
     if (wid_inventory_thing_selected) {
-      wid_inventory_thing_info =
-          game->wid_thing_info_create_popup(wid_inventory_thing_selected, point(tlx, tly), point(brx, bry));
+      wid_inventory_thing_info
+          = game->wid_thing_info_create_popup(wid_inventory_thing_selected, point(tlx, tly), point(brx, bry));
     } else if (wid_inventory_thing_over) {
-      wid_inventory_thing_info =
-          game->wid_thing_info_create_popup(wid_inventory_thing_over, point(tlx, tly), point(brx, bry));
+      wid_inventory_thing_info
+          = game->wid_thing_info_create_popup(wid_inventory_thing_over, point(tlx, tly), point(brx, bry));
     } else {
       wid_inventory_thing_info = game->wid_thing_info_create_popup(player, point(tlx, tly), point(brx, bry));
     }
@@ -363,7 +363,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
       y_at += 3;
     } else if (item_option->is_usable()) {
       //
-      // For example boots of teleport or an enchantstone
+      // For example boots of teleport or an enchant_stone
       //
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;

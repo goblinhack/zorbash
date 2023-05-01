@@ -95,17 +95,17 @@ Thingp Thing::equip_get(int equip)
   TRACE_NO_INDENT();
 
   switch (equip) {
-    case MONST_EQUIP_HELMET: break;
-    case MONST_EQUIP_AMULET: break;
-    case MONST_EQUIP_GAUNTLET: break;
-    case MONST_EQUIP_CLOAK: break;
-    case MONST_EQUIP_SHIELD: break;
-    case MONST_EQUIP_ARMOR: break;
-    case MONST_EQUIP_WEAPON: break;
-    case MONST_EQUIP_RING1: break;
-    case MONST_EQUIP_BOOTS: break;
-    case MONST_EQUIP_RING2: break;
-    default: err("Unknown equip type %d", equip); return nullptr;
+    case MONST_EQUIP_HELMET : break;
+    case MONST_EQUIP_AMULET : break;
+    case MONST_EQUIP_GAUNTLET : break;
+    case MONST_EQUIP_CLOAK : break;
+    case MONST_EQUIP_SHIELD : break;
+    case MONST_EQUIP_ARMOR : break;
+    case MONST_EQUIP_WEAPON : break;
+    case MONST_EQUIP_RING1 : break;
+    case MONST_EQUIP_BOOTS : break;
+    case MONST_EQUIP_RING2 : break;
+    default : err("Unknown equip type %d", equip); return nullptr;
   }
 
   auto id = equip_id(equip);
@@ -779,16 +779,16 @@ bool Thing::equip_use_must_attack(int equip)
 std::string equip_name(int equip)
 {
   switch (equip) {
-    case MONST_EQUIP_HELMET: return "helmet";
-    case MONST_EQUIP_AMULET: return "amulet";
-    case MONST_EQUIP_GAUNTLET: return "gauntlet";
-    case MONST_EQUIP_CLOAK: return "cloak";
-    case MONST_EQUIP_SHIELD: return "shield";
-    case MONST_EQUIP_ARMOR: return "armor";
-    case MONST_EQUIP_WEAPON: return "weapon";
-    case MONST_EQUIP_RING1: return "ring1";
-    case MONST_EQUIP_BOOTS: return "boots";
-    case MONST_EQUIP_RING2: return "ring2";
+    case MONST_EQUIP_HELMET : return "helmet";
+    case MONST_EQUIP_AMULET : return "amulet";
+    case MONST_EQUIP_GAUNTLET : return "gauntlet";
+    case MONST_EQUIP_CLOAK : return "cloak";
+    case MONST_EQUIP_SHIELD : return "shield";
+    case MONST_EQUIP_ARMOR : return "armor";
+    case MONST_EQUIP_WEAPON : return "weapon";
+    case MONST_EQUIP_RING1 : return "ring1";
+    case MONST_EQUIP_BOOTS : return "boots";
+    case MONST_EQUIP_RING2 : return "ring2";
   }
   DIE("unknown equip enum");
 }

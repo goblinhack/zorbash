@@ -985,83 +985,83 @@ SDL_Keysym sdlk_normalize(SDL_Keysym k_in)
   if ((k.mod & KMOD_LSHIFT) || (k.mod & KMOD_RSHIFT)) {
     k.mod &= ~KMOD_SHIFT;
     switch (k.sym) {
-      case SDLK_COMMA:
+      case SDLK_COMMA :
         // <
         k.sym = SDLK_LESS;
         return k;
-      case SDLK_MINUS:
+      case SDLK_MINUS :
         // _
         k.sym = SDLK_MINUS;
         return k;
-      case SDLK_PERIOD:
+      case SDLK_PERIOD :
         // >
         k.sym = SDLK_GREATER;
         return k;
-      case SDLK_SLASH:
+      case SDLK_SLASH :
         // ?
         k.sym = SDLK_QUESTION;
         return k;
-      case SDLK_EQUALS:
+      case SDLK_EQUALS :
         // +
         k.sym = SDLK_PLUS;
         return k;
-      case SDLK_0:
+      case SDLK_0 :
         // )
         k.sym = SDLK_RIGHTPAREN;
         return k;
-      case SDLK_1:
+      case SDLK_1 :
         // !
         k.sym = SDLK_EXCLAIM;
         return k;
-      case SDLK_2:
+      case SDLK_2 :
         // @
         k.sym = SDLK_AT;
         return k;
-      case SDLK_3:
+      case SDLK_3 :
         // #
         k.sym = SDLK_HASH;
         return k;
-      case SDLK_4:
+      case SDLK_4 :
         // $
         k.sym = SDLK_DOLLAR;
         return k;
-      case SDLK_5:
+      case SDLK_5 :
         // %
         k.sym = SDLK_PERCENT;
         return k;
-      case SDLK_6:
+      case SDLK_6 :
         // ^
         k.sym = SDLK_CARET;
         return k;
-      case SDLK_7:
+      case SDLK_7 :
         // &
         k.sym = SDLK_AMPERSAND;
         return k;
-      case SDLK_8:
+      case SDLK_8 :
         // *
         k.sym = SDLK_ASTERISK;
         return k;
-      case SDLK_9:
+      case SDLK_9 :
         // (
         k.sym = SDLK_LEFTPAREN;
         return k;
-      case SDLK_SEMICOLON:
+      case SDLK_SEMICOLON :
         // :
         k.sym = SDLK_COLON;
         return k;
-      case SDLK_LEFTBRACKET:
+      case SDLK_LEFTBRACKET :
         // {
         k.sym = SDLK_LEFTBRACKET;
         return k;
-      case SDLK_BACKSLASH:
+      case SDLK_BACKSLASH :
         // |
         k.sym = SDLK_KP_VERTICALBAR;
         return k;
-      case SDLK_RIGHTBRACKET:
+      case SDLK_RIGHTBRACKET :
         // }
         k.sym = SDLK_RIGHTBRACKET;
         return k;
-      case SDLK_HASH:
+      case SDLK_HASH :
         // ~
         //
         // Not sure about this one for tilde in US and UK keyboards

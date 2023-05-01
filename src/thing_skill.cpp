@@ -176,11 +176,11 @@ bool Thing::skill_add(Tpp what)
   skill_add(t);
 
   //
-  // Drop a skillstone
+  // Drop a skill_stone
   //
   auto found = false;
   for (const auto t : carried_item_only_vector()) {
-    if (t->is_skillstone()) {
+    if (t->is_skill_stone()) {
       t->is_drained = true;
       t->dead("used");
       found = true;
@@ -188,21 +188,21 @@ bool Thing::skill_add(Tpp what)
     }
   }
   if (! found) {
-    err("no skillstone found");
+    err("no skill_stone found");
   }
 
   return true;
 }
 
-int Thing::skillstone_count(void)
+int Thing::skill_stone_count(void)
 {
   TRACE_NO_INDENT();
   int v = 0;
   for (const auto t : carried_item_only_vector()) {
-    if (! t->is_skillstone()) {
+    if (! t->is_skill_stone()) {
       continue;
     }
-    dbg("Found a skillstone: %s", t->to_short_string().c_str());
+    dbg("Found a skill_stone: %s", t->to_short_string().c_str());
     v++;
   }
   return v;

@@ -192,13 +192,13 @@ bool Thing::throw_at(Thingp what, Thingp target)
   // Adjust throwing distance for size.
   //
   switch (what->thing_size()) {
-    case THING_SIZE_NOT_SET: break;
-    case THING_SIZE_TINY: dist *= 3; break;
-    case THING_SIZE_SMALL: dist *= 2; break;
-    case THING_SIZE_NORMAL: break;
-    case THING_SIZE_LARGE: dist /= 2; break;
-    case THING_SIZE_GIANT: dist /= 3; break;
-    case THING_SIZE_GARGANTUAN: dist /= 4; break;
+    case THING_SIZE_NOT_SET : break;
+    case THING_SIZE_TINY : dist *= 3; break;
+    case THING_SIZE_SMALL : dist *= 2; break;
+    case THING_SIZE_NORMAL : break;
+    case THING_SIZE_LARGE : dist /= 2; break;
+    case THING_SIZE_GIANT : dist /= 3; break;
+    case THING_SIZE_GARGANTUAN : dist /= 4; break;
   }
 
   if (need_to_choose_a_new_target) {

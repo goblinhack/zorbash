@@ -29,8 +29,8 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
 
   while (true) {
     uint32_t start = time_ms();
-    auto     dungeon =
-        new Dungeon(BIOME_SWAMP, MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT, seed);
+    auto     dungeon
+        = new Dungeon(BIOME_SWAMP, MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT, seed);
     if (dungeon->failed) {
       log("INF: create swamp, failed, retry");
       seed++;

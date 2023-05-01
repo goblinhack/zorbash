@@ -125,11 +125,8 @@ Tpp tp_find_wildcard(const std::string &name)
   if (name == "random_wet_grass") {
     return tp_random_wet_grass();
   }
-  if (name == "random_enchantstone") {
-    return tp_random_enchantstone();
-  }
-  if (name == "random_skillstone") {
-    return tp_random_skillstone();
+  if (name == "random_magic_stone") {
+    return tp_random_magic_stone();
   }
   if (name == "random_foliage") {
     return tp_random_foliage();

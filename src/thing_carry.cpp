@@ -87,8 +87,8 @@ bool Thing::carry(Thingp item, bool can_equip)
   // If we have no weapon yet, equip it
   //
   bool equipped = false;
-  if (can_equip && is_able_to_use_weapons() && item->is_auto_equipped() && item->is_weapon() &&
-      ! equip_id(MONST_EQUIP_WEAPON)) {
+  if (can_equip && is_able_to_use_weapons() && item->is_auto_equipped() && item->is_weapon()
+      && ! equip_id(MONST_EQUIP_WEAPON)) {
     dbg("Yes, equip weapon");
     TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_WEAPON)) {
@@ -100,8 +100,8 @@ bool Thing::carry(Thingp item, bool can_equip)
   //
   // If we have no armor yet, equip it
   //
-  if (can_equip && is_able_to_use_armor() && item->is_auto_equipped() && item->is_armor() &&
-      ! equip_id(MONST_EQUIP_ARMOR)) {
+  if (can_equip && is_able_to_use_armor() && item->is_auto_equipped() && item->is_armor()
+      && ! equip_id(MONST_EQUIP_ARMOR)) {
     dbg("Yes, equip armor");
     TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_ARMOR)) {
@@ -113,8 +113,8 @@ bool Thing::carry(Thingp item, bool can_equip)
   //
   // If we have no helmet yet, equip it
   //
-  if (can_equip && is_able_to_use_helmet() && item->is_auto_equipped() && item->is_helmet() &&
-      ! equip_id(MONST_EQUIP_HELMET)) {
+  if (can_equip && is_able_to_use_helmet() && item->is_auto_equipped() && item->is_helmet()
+      && ! equip_id(MONST_EQUIP_HELMET)) {
     dbg("Yes, equip helmet");
     TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_HELMET)) {
@@ -126,8 +126,8 @@ bool Thing::carry(Thingp item, bool can_equip)
   //
   // If we have no amulet yet, equip it
   //
-  if (can_equip && is_able_to_use_amulet() && item->is_auto_equipped() && item->is_amulet() &&
-      ! equip_id(MONST_EQUIP_AMULET)) {
+  if (can_equip && is_able_to_use_amulet() && item->is_auto_equipped() && item->is_amulet()
+      && ! equip_id(MONST_EQUIP_AMULET)) {
     dbg("Yes, equip amulet");
     TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_AMULET)) {
@@ -139,8 +139,8 @@ bool Thing::carry(Thingp item, bool can_equip)
   //
   // If we have no boots yet, equip it
   //
-  if (can_equip && is_able_to_use_boots() && item->is_auto_equipped() && item->is_boots() &&
-      ! equip_id(MONST_EQUIP_BOOTS)) {
+  if (can_equip && is_able_to_use_boots() && item->is_auto_equipped() && item->is_boots()
+      && ! equip_id(MONST_EQUIP_BOOTS)) {
     dbg("Yes, equip boots");
     TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_BOOTS)) {
@@ -152,8 +152,8 @@ bool Thing::carry(Thingp item, bool can_equip)
   //
   // If we have no gauntlet yet, equip it
   //
-  if (can_equip && is_able_to_use_gauntlet() && item->is_auto_equipped() && item->is_gauntlet() &&
-      ! equip_id(MONST_EQUIP_GAUNTLET)) {
+  if (can_equip && is_able_to_use_gauntlet() && item->is_auto_equipped() && item->is_gauntlet()
+      && ! equip_id(MONST_EQUIP_GAUNTLET)) {
     dbg("Yes, equip gauntlet");
     TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_GAUNTLET)) {
@@ -165,8 +165,8 @@ bool Thing::carry(Thingp item, bool can_equip)
   //
   // If we have no cloak yet, equip it
   //
-  if (can_equip && is_able_to_use_cloak() && item->is_auto_equipped() && item->is_cloak() &&
-      ! equip_id(MONST_EQUIP_CLOAK)) {
+  if (can_equip && is_able_to_use_cloak() && item->is_auto_equipped() && item->is_cloak()
+      && ! equip_id(MONST_EQUIP_CLOAK)) {
     dbg("Yes, equip cloak");
     TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_CLOAK)) {
@@ -178,8 +178,8 @@ bool Thing::carry(Thingp item, bool can_equip)
   //
   // If we have no shield yet, equip it
   //
-  if (can_equip && is_able_to_use_shield() && item->is_auto_equipped() && item->is_shield() &&
-      ! equip_id(MONST_EQUIP_SHIELD)) {
+  if (can_equip && is_able_to_use_shield() && item->is_auto_equipped() && item->is_shield()
+      && ! equip_id(MONST_EQUIP_SHIELD)) {
     dbg("Yes, equip shield");
     TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_SHIELD)) {
@@ -191,16 +191,16 @@ bool Thing::carry(Thingp item, bool can_equip)
   //
   // If we have no rings yet, equip it
   //
-  if (can_equip && is_able_to_use_rings() && item->is_auto_equipped() && item->is_ring() &&
-      ! equip_id(MONST_EQUIP_RING1)) {
+  if (can_equip && is_able_to_use_rings() && item->is_auto_equipped() && item->is_ring()
+      && ! equip_id(MONST_EQUIP_RING1)) {
     dbg("Yes, equip ring1");
     TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_RING1)) {
       dbg("Equipped ring1");
       equipped = true;
     }
-  } else if (can_equip && is_able_to_use_rings() && item->is_auto_equipped() && item->is_ring() &&
-             ! equip_id(MONST_EQUIP_RING2)) {
+  } else if (can_equip && is_able_to_use_rings() && item->is_auto_equipped() && item->is_ring()
+             && ! equip_id(MONST_EQUIP_RING2)) {
     dbg("Yes, equip ring2");
     TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_RING2)) {
@@ -288,8 +288,8 @@ bool Thing::carry(Thingp item, bool can_equip)
     where_i_failed_to_collect_last_set(item->curr_at);
 
     if (is_player()) {
-      if ((game->tick_current > 1) && ! level->is_starting && ! level->is_being_destroyed && ! is_dead &&
-          ! is_dying) {
+      if ((game->tick_current > 1) && ! level->is_starting && ! level->is_being_destroyed && ! is_dead
+          && ! is_dying) {
         msg("%%fg=red$No space to carry %s.%%fg=reset$", item->text_the().c_str());
       }
     }

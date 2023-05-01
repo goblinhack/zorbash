@@ -129,19 +129,19 @@ void slre_dump(const struct slre *r, FILE *fp)
 
     for (i = 0; opcodes[ op ].flags[ i ] != '\0'; i++)
       switch (opcodes[ op ].flags[ i ]) {
-        case 'i':
+        case 'i' :
           (void) fprintf(fp, "%d ", r->code[ pc + 1 ]);
           pc++;
           break;
-        case 'o':
+        case 'o' :
           (void) fprintf(fp, "%d ", pc + r->code[ pc + 1 ] - i);
           pc++;
           break;
-        case 'D':
+        case 'D' :
           print_character_set(fp, r->data + r->code[ pc + 1 ], r->code[ pc + 2 ]);
           pc += 2;
           break;
-        case 'd':
+        case 'd' :
           (void) fputc('"', fp);
           for (j = 0; j < r->code[ pc + 2 ]; j++) {
             ch = r->data[ r->code[ pc + 1 ] + j ];
@@ -204,14 +204,14 @@ static int get_escape_char(const char **re)
   int res;
 
   switch (*(*re)++) {
-    case 'n': res = '\n'; break;
-    case 'r': res = '\r'; break;
-    case 't': res = '\t'; break;
-    case '0': res = 0; break;
-    case 'S': res = NONSPACE << 8; break;
-    case 's': res = SPACE << 8; break;
-    case 'd': res = DIGIT << 8; break;
-    default: res = (*re)[ -1 ]; break;
+    case 'n' : res = '\n'; break;
+    case 'r' : res = '\r'; break;
+    case 't' : res = '\t'; break;
+    case '0' : res = 0; break;
+    case 'S' : res = NONSPACE << 8; break;
+    case 's' : res = SPACE << 8; break;
+    case 'd' : res = DIGIT << 8; break;
+    default : res = (*re)[ -1 ]; break;
   }
 
   return res;
@@ -229,14 +229,14 @@ static void anyof(struct slre *r, const char **re)
   while (**re != '\0')
 
     switch (*(*re)++) {
-      case ']':
+      case ']' :
         emit(r, op);
         emit(r, old_data_size);
         emit(r, r->data_size - old_data_size);
         return;
         /* NOTREACHED */
         break;
-      case '\\':
+      case '\\' :
         esc = get_escape_char(re);
         if ((esc & 0xff) == 0) {
           store_char_in_data(r, 0);
@@ -245,7 +245,7 @@ static void anyof(struct slre *r, const char **re)
           store_char_in_data(r, esc);
         }
         break;
-      default: store_char_in_data(r, (*re)[ -1 ]); break;
+      default : store_char_in_data(r, (*re)[ -1 ]); break;
     }
 
   r->err_str = "No closing ']' bracket";
@@ -298,22 +298,22 @@ static void compile(struct slre *r, const char **re)
 
   for (;;)
     switch (*(*re)++) {
-      case '\0':
+      case '\0' :
         (*re)--;
         return;
         /* NOTREACHED */
         break;
-      case '^': emit(r, BOL); break;
-      case '$': emit(r, EOL); break;
-      case '.':
+      case '^' : emit(r, BOL); break;
+      case '$' : emit(r, EOL); break;
+      case '.' :
         last_op = r->code_size;
         emit(r, ANY);
         break;
-      case '[':
+      case '[' :
         last_op = r->code_size;
         anyof(r, re);
         break;
-      case '\\':
+      case '\\' :
         last_op = r->code_size;
         esc     = get_escape_char(re);
         if (esc & 0xff00) {
@@ -322,7 +322,7 @@ static void compile(struct slre *r, const char **re)
           exact_one_char(r, esc);
         }
         break;
-      case '(':
+      case '(' :
         last_op = r->code_size;
         cap_no  = ++r->num_caps;
         emit(r, OPEN);
@@ -337,7 +337,7 @@ static void compile(struct slre *r, const char **re)
         emit(r, CLOSE);
         emit(r, cap_no);
         break;
-      case ')':
+      case ')' :
         (*re)--;
         fixup_branch(r, fixup);
         if (level == 0) {
@@ -347,8 +347,8 @@ static void compile(struct slre *r, const char **re)
         return;
         /* NOTREACHED */
         break;
-      case '+':
-      case '*':
+      case '+' :
+      case '*' :
         op = (*re)[ -1 ] == '*' ? STAR : PLUS;
         if (**re == '?') {
           (*re)++;
@@ -356,8 +356,8 @@ static void compile(struct slre *r, const char **re)
         }
         quantifier(r, last_op, op);
         break;
-      case '?': quantifier(r, last_op, QUEST); break;
-      case '|':
+      case '?' : quantifier(r, last_op, QUEST); break;
+      case '|' :
         fixup_branch(r, fixup);
         relocate(r, branch_start, 3);
         r->code[ branch_start ] = BRANCH;
@@ -365,7 +365,7 @@ static void compile(struct slre *r, const char **re)
         fixup            = branch_start + 2;
         r->code[ fixup ] = 0xff;
         break;
-      default:
+      default :
         (*re)--;
         last_op = r->code_size;
         exact(r, re);
@@ -471,7 +471,7 @@ static int match(const struct slre *r, int pc, const char *s, int len, int *ofs,
     assert(pc < (int) (sizeof(r->code) / sizeof(r->code[ 0 ])));
 
     switch (r->code[ pc ]) {
-      case BRANCH:
+      case BRANCH :
         saved_offset = *ofs;
         res          = match(r, pc + 3, s, len, ofs, caps);
         if (res == 0) {
@@ -480,7 +480,7 @@ static int match(const struct slre *r, int pc, const char *s, int len, int *ofs,
         }
         pc += r->code[ pc + 2 ];
         break;
-      case EXACT:
+      case EXACT :
         res = 0;
         n   = r->code[ pc + 2 ]; /* String length */
         if (n <= len - *ofs && ! memcmp(s + *ofs, r->data + r->code[ pc + 1 ], n)) {
@@ -489,38 +489,38 @@ static int match(const struct slre *r, int pc, const char *s, int len, int *ofs,
         }
         pc += 3;
         break;
-      case QUEST:
+      case QUEST :
         res          = 1;
         saved_offset = *ofs;
         if (! match(r, pc + 2, s, len, ofs, caps))
           *ofs = saved_offset;
         pc += r->code[ pc + 1 ];
         break;
-      case STAR:
+      case STAR :
         res = 1;
         loop_greedy(r, pc, s, len, ofs);
         pc += r->code[ pc + 1 ];
         break;
-      case STARQ:
+      case STARQ :
         res = 1;
         loop_non_greedy(r, pc, s, len, ofs);
         pc += r->code[ pc + 1 ];
         break;
-      case PLUS:
+      case PLUS :
         if ((res = match(r, pc + 2, s, len, ofs, caps)) == 0)
           break;
 
         loop_greedy(r, pc, s, len, ofs);
         pc += r->code[ pc + 1 ];
         break;
-      case PLUSQ:
+      case PLUSQ :
         if ((res = match(r, pc + 2, s, len, ofs, caps)) == 0)
           break;
 
         loop_non_greedy(r, pc, s, len, ofs);
         pc += r->code[ pc + 1 ];
         break;
-      case SPACE:
+      case SPACE :
         res = 0;
         if (*ofs < len && isspace(((unsigned char *) s)[ *ofs ])) {
           (*ofs)++;
@@ -528,7 +528,7 @@ static int match(const struct slre *r, int pc, const char *s, int len, int *ofs,
         }
         pc++;
         break;
-      case NONSPACE:
+      case NONSPACE :
         res = 0;
         if (*ofs < len && ! isspace(((unsigned char *) s)[ *ofs ])) {
           (*ofs)++;
@@ -536,7 +536,7 @@ static int match(const struct slre *r, int pc, const char *s, int len, int *ofs,
         }
         pc++;
         break;
-      case DIGIT:
+      case DIGIT :
         res = 0;
         if (*ofs < len && isdigit(((unsigned char *) s)[ *ofs ])) {
           (*ofs)++;
@@ -544,7 +544,7 @@ static int match(const struct slre *r, int pc, const char *s, int len, int *ofs,
         }
         pc++;
         break;
-      case ANY:
+      case ANY :
         res = 0;
         if (*ofs < len) {
           (*ofs)++;
@@ -552,38 +552,38 @@ static int match(const struct slre *r, int pc, const char *s, int len, int *ofs,
         }
         pc++;
         break;
-      case ANYOF:
+      case ANYOF :
         res = 0;
         if (*ofs < len)
           res = is_any_of(r->data + r->code[ pc + 1 ], r->code[ pc + 2 ], s, ofs);
         pc += 3;
         break;
-      case ANYBUT:
+      case ANYBUT :
         res = 0;
         if (*ofs < len)
           res = is_any_but(r->data + r->code[ pc + 1 ], r->code[ pc + 2 ], s, ofs);
         pc += 3;
         break;
-      case BOL:
+      case BOL :
         res = *ofs == 0 ? 1 : 0;
         pc++;
         break;
-      case EOL:
+      case EOL :
         res = *ofs == len ? 1 : 0;
         pc++;
         break;
-      case OPEN:
+      case OPEN :
         if (caps != nullptr)
           caps[ r->code[ pc + 1 ] ].ptr = s + *ofs;
         pc += 2;
         break;
-      case CLOSE:
+      case CLOSE :
         if (caps != nullptr)
           caps[ r->code[ pc + 1 ] ].len = (int) ((s + *ofs) - caps[ r->code[ pc + 1 ] ].ptr);
         pc += 2;
         break;
-      case END: pc++; break;
-      default:
+      case END : pc++; break;
+      default :
         printf("unknown cmd (%d) at %d\n", r->code[ pc ], pc);
         assert(0);
         break;

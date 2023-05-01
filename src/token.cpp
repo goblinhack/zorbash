@@ -67,19 +67,19 @@ static class Tokens *tokens_parse(const char *input, class Tokens *tokens)
       for (; /*ever*/;) {
         i = *(in++);
         switch (i) {
-          case '\\':
+          case '\\' :
             i = *(in++);
             switch (i) {
-              case '\"': i = '\"'; break;
-              case '\n': i = '\n'; break;
-              case '\r': i = '\r'; break;
-              case '\t': i = '\t'; break;
-              case '\\': i = '\\'; break;
-              default: break;
+              case '\"' : i = '\"'; break;
+              case '\n' : i = '\n'; break;
+              case '\r' : i = '\r'; break;
+              case '\t' : i = '\t'; break;
+              case '\\' : i = '\\'; break;
+              default : break;
             }
             break;
 
-          case '\"':
+          case '\"' :
             if (i == '\"') {
               i = '\0';
               break;
@@ -108,13 +108,13 @@ static class Tokens *tokens_parse(const char *input, class Tokens *tokens)
 
     for (; /*ever*/;) {
       switch (i) {
-        case '\0': *out++ = i; return tokens;
+        case '\0' : *out++ = i; return tokens;
 
-        case ' ': i = '\0'; break;
+        case ' ' : i = '\0'; break;
 
-        case '\t': i = '\0'; break;
+        case '\t' : i = '\0'; break;
 
-        default: break;
+        default : break;
       }
 
       *out++ = i;

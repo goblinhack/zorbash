@@ -104,8 +104,8 @@ void Thing::move_carried_items(void)
   //
   if (is_monst() || is_player()) {
     if (! is_floating() && ! is_flying() && is_visible_to_player) {
-      if (level->is_shallow_water((int) curr_at.x, (int) curr_at.y) &&
-          ! level->is_ripple((int) curr_at.x, (int) curr_at.y)) {
+      if (level->is_shallow_water((int) curr_at.x, (int) curr_at.y)
+          && ! level->is_ripple((int) curr_at.x, (int) curr_at.y)) {
         point at(curr_at.x, curr_at.y);
         if (game->tick_current_is_too_slow || game->prev_tick_was_too_slow) {
           //

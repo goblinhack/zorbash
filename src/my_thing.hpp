@@ -180,7 +180,7 @@ public:
   uint64_t is_burnt                                     : 1 {}; // burnt by ice and cannot move
   uint64_t is_changing_level                            : 1 {}; // is in the process of changing level
   uint64_t is_dead                                      : 1 {};
-  uint64_t is_drained                                   : 1 {}; // e.g. enchant or skillstone used up
+  uint64_t is_drained                                   : 1 {}; // e.g. enchant or skill_stone used up
   uint64_t is_dying                                     : 1 {}; // is currently in the throes of death
   uint64_t is_facing_left                               : 1 {};
   uint64_t is_fadeup                                    : 1 {}; // for text that fades upwards
@@ -250,7 +250,7 @@ public:
   uint64_t i_set_is_dirt                      : 1 {};
   uint64_t i_set_is_door                      : 1 {};
   uint64_t i_set_is_dry_grass                 : 1 {};
-  uint64_t i_set_is_enchantstone              : 1 {};
+  uint64_t i_set_is_enchant_stone             : 1 {};
   uint64_t i_set_is_fire                      : 1 {};
   uint64_t i_set_is_floor                     : 1 {};
   uint64_t i_set_is_foliage                   : 1 {};
@@ -283,7 +283,7 @@ public:
   uint64_t i_set_is_secret_door               : 1 {};
   uint64_t i_set_is_shallow_water             : 1 {};
   uint64_t i_set_is_shovable                  : 1 {};
-  uint64_t i_set_is_skillstone                : 1 {};
+  uint64_t i_set_is_skill_stone               : 1 {};
   uint64_t i_set_is_smoke                     : 1 {};
   uint64_t i_set_is_spiderweb                 : 1 {};
   uint64_t i_set_is_staff                     : 1 {};
@@ -623,8 +623,8 @@ public:
   bool state_repack_inventory(void);
   bool state_resting(bool &do_something, bool &wait);
   bool state_sleeping(bool &do_something, bool &wait);
-  bool state_using_enchantstone(void);
-  bool state_using_skillstone(void);
+  bool state_using_enchant_stone(void);
+  bool state_using_skill_stone(void);
   bool steal_item_from(Thingp);
   bool steal_treasure_from(Thingp);
   bool teleport_carefree(TeleportReason, point to);
@@ -1170,7 +1170,7 @@ public:
   int enchant_max_current_incr(void);
   int enchant_max_current_set(int);
   int enchant_max(void);
-  int enchantstone_count(void);
+  int enchant_stone_count(void);
   int environ_dislikes_acid(void);
   int environ_dislikes_cold(void);
   int environ_dislikes_fire(void);
@@ -1480,7 +1480,7 @@ public:
   int is_eater_of_weapons(void);
   int is_enchantable_as_a_group(void);
   int is_enchantable(void);
-  int is_enchantstone(void);
+  int is_enchant_stone(void);
   int is_engulfer(void);
   int is_equippable(void);
   int is_ethereal_mob(void);
@@ -1558,6 +1558,7 @@ public:
   int is_made_of_rock(void);
   int is_magical_effect(void);
   int is_magical(void);
+  int is_magic_stone(void);
   int is_mantisman(void);
   int is_map_beast(void);
   int is_map_treasure(void);
@@ -1634,7 +1635,7 @@ public:
   int is_shield(void);
   int is_shovable_and_sticky(void);
   int is_shovable(void);
-  int is_skillstone(void);
+  int is_skill_stone(void);
   int is_skill(void);
   int is_slime(void);
   int is_slippery(void);
@@ -1717,7 +1718,6 @@ public:
   int is_unused_flag141(void);
   int is_unused_flag142(void);
   int is_unused_flag143(void);
-  int is_unused_flag144(void);
   int is_unused_flag14(void);
   int is_unused_flag15(void);
   int is_unused_flag16(void);
@@ -2038,7 +2038,7 @@ public:
   int shove_strength(void);
   int size_modifier(void);
   int skill_enchant_count(const int slot);
-  int skillstone_count(void);
+  int skill_stone_count(void);
   int sleep_count_decr(int);
   int sleep_count_decr(void);
   int sleep_count_incr(int);

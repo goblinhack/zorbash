@@ -96,23 +96,23 @@ static uint8_t wid_main_menu_key_up(Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL:
-    case KMOD_RCTRL:
-    default:
+    case KMOD_LCTRL :
+    case KMOD_RCTRL :
+    default :
       switch (key->sym) {
-        default:
+        default :
           {
             TRACE_AND_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
-              case SDLK_RETURN:
-              case ' ':
-              case 'n': game_menu_new_game(nullptr, 0, 0, 0); return true;
-              case 'l': wid_main_menu_load_game(nullptr, 0, 0, 0); return true;
-              case 'o': wid_main_menu_config(nullptr, 0, 0, 0); return true;
-              case 'c': wid_main_menu_credits_game(nullptr, 0, 0, 0); return true;
-              case 'h': wid_main_menu_hiscores(nullptr, 0, 0, 0); return true;
-              case 'q': wid_main_menu_quit_game(nullptr, 0, 0, 0); return true;
+              case SDLK_RETURN :
+              case ' ' :
+              case 'n' : game_menu_new_game(nullptr, 0, 0, 0); return true;
+              case 'l' : wid_main_menu_load_game(nullptr, 0, 0, 0); return true;
+              case 'o' : wid_main_menu_config(nullptr, 0, 0, 0); return true;
+              case 'c' : wid_main_menu_credits_game(nullptr, 0, 0, 0); return true;
+              case 'h' : wid_main_menu_hiscores(nullptr, 0, 0, 0); return true;
+              case 'q' : wid_main_menu_quit_game(nullptr, 0, 0, 0); return true;
             }
           }
       }
@@ -231,20 +231,20 @@ color color_change_hue(const color &in, const float fHue)
   const float cosA = cos(fHue * 3.14159265f / 180); // convert degrees to radians
   const float sinA = sin(fHue * 3.14159265f / 180); // convert degrees to radians
   // calculate the rotation matrix, only depends on Hue
-  float matrix[ 3 ][ 3 ] = {
-      {cosA + (1.0f - cosA) / 3.0f, 1.0f / 3.0f * (1.0f - cosA) - sqrtf(1.0f / 3.0f) * sinA,
-       1.0f / 3.0f * (1.0f - cosA) + sqrtf(1.0f / 3.0f) * sinA},
-      {1.0f / 3.0f * (1.0f - cosA) + sqrtf(1.0f / 3.0f) * sinA, cosA + 1.0f / 3.0f * (1.0f - cosA),
-       1.0f / 3.0f * (1.0f - cosA) - sqrtf(1.0f / 3.0f) * sinA},
-      {1.0f / 3.0f * (1.0f - cosA) - sqrtf(1.0f / 3.0f) * sinA,
-       1.0f / 3.0f * (1.0f - cosA) + sqrtf(1.0f / 3.0f) * sinA, cosA + 1.0f / 3.0f * (1.0f - cosA)}};
+  float matrix[ 3 ][ 3 ]
+      = {{cosA + (1.0f - cosA) / 3.0f, 1.0f / 3.0f * (1.0f - cosA) - sqrtf(1.0f / 3.0f) * sinA,
+          1.0f / 3.0f * (1.0f - cosA) + sqrtf(1.0f / 3.0f) * sinA},
+         {1.0f / 3.0f * (1.0f - cosA) + sqrtf(1.0f / 3.0f) * sinA, cosA + 1.0f / 3.0f * (1.0f - cosA),
+          1.0f / 3.0f * (1.0f - cosA) - sqrtf(1.0f / 3.0f) * sinA},
+         {1.0f / 3.0f * (1.0f - cosA) - sqrtf(1.0f / 3.0f) * sinA,
+          1.0f / 3.0f * (1.0f - cosA) + sqrtf(1.0f / 3.0f) * sinA, cosA + 1.0f / 3.0f * (1.0f - cosA)}};
   // Use the rotation matrix to convert the RGB directly
-  out.r = clamp(((float) in.r) * matrix[ 0 ][ 0 ] + ((float) in.g) * matrix[ 0 ][ 1 ] +
-                ((float) in.b) * matrix[ 0 ][ 2 ]);
-  out.g = clamp(((float) in.r) * matrix[ 1 ][ 0 ] + ((float) in.g) * matrix[ 1 ][ 1 ] +
-                ((float) in.b) * matrix[ 1 ][ 2 ]);
-  out.b = clamp(((float) in.r) * matrix[ 2 ][ 0 ] + ((float) in.g) * matrix[ 2 ][ 1 ] +
-                ((float) in.b) * matrix[ 2 ][ 2 ]);
+  out.r = clamp(((float) in.r) * matrix[ 0 ][ 0 ] + ((float) in.g) * matrix[ 0 ][ 1 ]
+                + ((float) in.b) * matrix[ 0 ][ 2 ]);
+  out.g = clamp(((float) in.r) * matrix[ 1 ][ 0 ] + ((float) in.g) * matrix[ 1 ][ 1 ]
+                + ((float) in.b) * matrix[ 1 ][ 2 ]);
+  out.b = clamp(((float) in.r) * matrix[ 2 ][ 0 ] + ((float) in.g) * matrix[ 2 ][ 1 ]
+                + ((float) in.b) * matrix[ 2 ][ 2 ]);
   return out;
 }
 

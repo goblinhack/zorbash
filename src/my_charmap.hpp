@@ -29,7 +29,6 @@ public:
     DOOR_RIGHT          = '>',
     DOOR_UP             = '^',
     DRY_GRASS           = '\'',
-    ENCHANTSTONE        = '*',
     ENTRANCE            = 'S',
     EXIT                = 'E',
     FLOOR               = '.',
@@ -39,6 +38,7 @@ public:
     ICE                 = 'I',
     KEY                 = 'k',
     LAVA                = 'L',
+    MAGIC_STONE         = '*',
     MOB_SPAWNER_CLASS_A = 'g',
     MOB_SPAWNER_CLASS_B = 'G',
     MONST_CLASS_A       = 'm',
@@ -54,7 +54,6 @@ public:
     SECRET_DOOR         = 's',
     SEWER               = 'O',
     SHALLOW_WATER       = 'w',
-    SKILLSTONE          = '&',
     SPACE               = ' ',
     SPIDERWEB           = 'X',
     STAFF               = '/',
@@ -85,7 +84,6 @@ public:
   bool is_dirt {false};
   bool is_door {false};
   bool is_dry_grass {false};
-  bool is_enchantstone {false};
   bool is_floor_deco {false};
   bool is_floor {false};
   bool is_foliage {false};
@@ -93,6 +91,7 @@ public:
   bool is_gold {false};
   bool is_key {false};
   bool is_lava {false};
+  bool is_magic_stone {false};
   bool is_mob_challenge_class_A {false};
   bool is_mob_challenge_class_B {false};
   bool is_monst_class_A {false};
@@ -108,7 +107,6 @@ public:
   bool is_secret_corridor {false};
   bool is_secret_door {false};
   bool is_shallow_water {false};
-  bool is_skillstone {false};
   bool is_spiderweb {false};
   bool is_staff {false};
   bool is_trap {false};

@@ -703,7 +703,7 @@ bool Dungeon::is_wet_grass(const int x, const int y)
   return false;
 }
 
-bool Dungeon::is_enchantstone(const int x, const int y)
+bool Dungeon::is_magic_stone(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
@@ -713,24 +713,7 @@ bool Dungeon::is_enchantstone(const int x, const int y)
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_enchantstone) {
-      return true;
-    }
-  }
-  return false;
-}
-
-bool Dungeon::is_skillstone(const int x, const int y)
-{
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
-
-  for (auto d = 0; d < map_depth; d++) {
-    auto c = getc(x, y, d);
-    auto v = get(Charmap::all_charmaps, c);
-
-    if (v.is_skillstone) {
+    if (v.is_magic_stone) {
       return true;
     }
   }
@@ -2820,8 +2803,8 @@ int Dungeon::draw_corridors(void)
   for (auto x = 0; x < map_width; x++) {
     for (auto y = 0; y < map_height; y++) {
       auto c = getc(x, y, MAP_DEPTH_OBJ);
-      if ((c == Charmap::DOOR_UP) || (c == Charmap::DOOR_DOWN) || (c == Charmap::DOOR_LEFT) ||
-          (c == Charmap::DOOR_RIGHT)) {
+      if ((c == Charmap::DOOR_UP) || (c == Charmap::DOOR_DOWN) || (c == Charmap::DOOR_LEFT)
+          || (c == Charmap::DOOR_RIGHT)) {
         putc(x, y, MAP_DEPTH_OBJ, Charmap::WALL);
       }
     }
@@ -3024,8 +3007,8 @@ void Dungeon::place_room(Roomp r, int x, int y)
       auto f = get(r->data, dx, dy, MAP_DEPTH_FLOOR);
       auto c = get(r->data, dx, dy, MAP_DEPTH_CHASM);
       auto d = get(r->data, dx, dy, MAP_DEPTH_OBJ);
-      if ((d == Charmap::DOOR_UP) || (d == Charmap::DOOR_DOWN) || (d == Charmap::DOOR_LEFT) ||
-          (d == Charmap::DOOR_RIGHT)) {
+      if ((d == Charmap::DOOR_UP) || (d == Charmap::DOOR_DOWN) || (d == Charmap::DOOR_LEFT)
+          || (d == Charmap::DOOR_RIGHT)) {
         //
         // Do not wrap doors in walls so we can move the rooms closer
         //
@@ -3129,8 +3112,8 @@ bool Dungeon::can_place_room(Roomp r, int x, int y)
             return false;
           }
 
-          if (is_wall_no_check(x + dx - 1, y + dy) || is_wall_no_check(x + dx + 1, y + dy) ||
-              is_wall_no_check(x + dx, y + dy - 1) || is_wall_no_check(x + dx, y + dy + 1)) {
+          if (is_wall_no_check(x + dx - 1, y + dy) || is_wall_no_check(x + dx + 1, y + dy)
+              || is_wall_no_check(x + dx, y + dy - 1) || is_wall_no_check(x + dx, y + dy + 1)) {
             return false;
           }
         }
@@ -3273,7 +3256,7 @@ bool Dungeon::rooms_move_closer_together(void)
 
           auto moved_one = false;
           switch (pcg_random_range(0, 4)) {
-            case 0:
+            case 0 :
               if (can_place_room(r, r->at.x - delta, r->at.y)) {
                 r->at.x -= delta;
                 place_room(r, r->at.x, r->at.y);
@@ -3300,7 +3283,7 @@ bool Dungeon::rooms_move_closer_together(void)
               }
               break;
 
-            case 1:
+            case 1 :
               if (can_place_room(r, r->at.x + delta, r->at.y)) {
                 r->at.x += delta;
                 place_room(r, r->at.x, r->at.y);
@@ -3327,7 +3310,7 @@ bool Dungeon::rooms_move_closer_together(void)
               }
               break;
 
-            case 2:
+            case 2 :
               if (can_place_room(r, r->at.x, r->at.y - delta)) {
                 r->at.y -= delta;
                 place_room(r, r->at.x, r->at.y);
@@ -3354,7 +3337,7 @@ bool Dungeon::rooms_move_closer_together(void)
               }
               break;
 
-            case 3:
+            case 3 :
               if (can_place_room(r, r->at.x, r->at.y + delta)) {
                 r->at.y += delta;
                 place_room(r, r->at.x, r->at.y);
@@ -3380,7 +3363,7 @@ bool Dungeon::rooms_move_closer_together(void)
                 break;
               }
               break;
-            case 4: ERR("Wtf");
+            case 4 : ERR("Wtf");
           }
 
           if (moved_one) {
@@ -4109,10 +4092,10 @@ void Dungeon::water_fixup_shallows(void)
         continue;
       }
 
-      if (is_wall(x - 1, y - 1) || is_wall(x, y - 1) || is_wall(x + 1, y - 1) || is_wall(x - 1, y) || is_wall(x, y) ||
-          is_wall(x + 1, y) || is_wall(x - 1, y + 1) || is_wall(x, y + 1) || is_wall(x + 1, y + 1) ||
-          is_rock(x - 1, y - 1) || is_rock(x, y - 1) || is_rock(x + 1, y - 1) || is_rock(x - 1, y) || is_rock(x, y) ||
-          is_rock(x + 1, y) || is_rock(x - 1, y + 1) || is_rock(x, y + 1) || is_rock(x + 1, y + 1)) {
+      if (is_wall(x - 1, y - 1) || is_wall(x, y - 1) || is_wall(x + 1, y - 1) || is_wall(x - 1, y) || is_wall(x, y)
+          || is_wall(x + 1, y) || is_wall(x - 1, y + 1) || is_wall(x, y + 1) || is_wall(x + 1, y + 1)
+          || is_rock(x - 1, y - 1) || is_rock(x, y - 1) || is_rock(x + 1, y - 1) || is_rock(x - 1, y) || is_rock(x, y)
+          || is_rock(x + 1, y) || is_rock(x - 1, y + 1) || is_rock(x, y + 1) || is_rock(x + 1, y + 1)) {
         putc(x, y, MAP_DEPTH_LIQUID, Charmap::SHALLOW_WATER);
       }
     }
@@ -4128,9 +4111,9 @@ void Dungeon::water_fixup(void)
 
   for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
-      if (is_shallow_water(x - 1, y - 1) && is_shallow_water(x, y - 1) && is_shallow_water(x + 1, y - 1) &&
-          is_shallow_water(x - 1, y) && is_shallow_water(x, y) && is_shallow_water(x + 1, y) &&
-          is_shallow_water(x - 1, y + 1) && is_shallow_water(x, y + 1) && is_shallow_water(x + 1, y + 1)) {
+      if (is_shallow_water(x - 1, y - 1) && is_shallow_water(x, y - 1) && is_shallow_water(x + 1, y - 1)
+          && is_shallow_water(x - 1, y) && is_shallow_water(x, y) && is_shallow_water(x + 1, y)
+          && is_shallow_water(x - 1, y + 1) && is_shallow_water(x, y + 1) && is_shallow_water(x + 1, y + 1)) {
         set(cand, x, y, true);
       }
     }
@@ -4214,9 +4197,9 @@ void Dungeon::add_foliage_around_water(void)
   for (auto y = 2; y < MAP_HEIGHT - 2; y++) {
     for (auto x = 2; x < MAP_WIDTH - 2; x++) {
 
-      if (is_chasm(x, y) || is_wall(x, y) || is_rock(x, y) || is_bridge(x, y) || is_chasm(x, y) ||
-          is_block_of_ice(x, y) || is_lava(x, y) || is_brazier(x, y) || is_deep_water(x, y) ||
-          is_shallow_water(x, y)) {
+      if (is_chasm(x, y) || is_wall(x, y) || is_rock(x, y) || is_bridge(x, y) || is_chasm(x, y)
+          || is_block_of_ice(x, y) || is_lava(x, y) || is_brazier(x, y) || is_deep_water(x, y)
+          || is_shallow_water(x, y)) {
         continue;
       }
 
@@ -4238,8 +4221,8 @@ void Dungeon::add_foliage_around_water(void)
           break;
         }
         for (auto dy = -2; dy <= 2; dy++) {
-          if (is_block_of_ice(x + dx, y + dy) || is_bridge(x + dx, y + dy) || is_lava(x + dx, y + dy) ||
-              is_brazier(x + dx, y + dy) || is_chasm(x + dx, y + dy)) {
+          if (is_block_of_ice(x + dx, y + dy) || is_bridge(x + dx, y + dy) || is_lava(x + dx, y + dy)
+              || is_brazier(x + dx, y + dy) || is_chasm(x + dx, y + dy)) {
             foliage_ok = -1;
             goto next;
           }
@@ -4276,8 +4259,8 @@ void Dungeon::add_spiderweb(void)
   for (auto y = 2; y < MAP_HEIGHT - 2; y++) {
     for (auto x = 2; x < MAP_WIDTH - 2; x++) {
 
-      if (is_block_of_ice(x, y) || is_lava(x, y) || is_wall(x, y) || is_rock(x, y) || is_deep_water(x, y) ||
-          is_brazier(x, y) || is_shallow_water(x, y)) {
+      if (is_block_of_ice(x, y) || is_lava(x, y) || is_wall(x, y) || is_rock(x, y) || is_deep_water(x, y)
+          || is_brazier(x, y) || is_shallow_water(x, y)) {
         continue;
       }
 
@@ -4299,14 +4282,14 @@ void Dungeon::add_spiderweb(void)
           break;
         }
         for (auto dy = -1; dy <= 1; dy++) {
-          if (is_block_of_ice(x + dx, y + dy) || is_lava(x + dx, y + dy) || is_shallow_water(x + dx, y + dy) ||
-              is_deep_water(x + dx, y + dy) || is_brazier(x + dx, y + dy)) {
+          if (is_block_of_ice(x + dx, y + dy) || is_lava(x + dx, y + dy) || is_shallow_water(x + dx, y + dy)
+              || is_deep_water(x + dx, y + dy) || is_brazier(x + dx, y + dy)) {
             spiderweb_ok = -1;
             goto next;
           }
 
-          if (is_chasm(x + dx, y + dy) || is_bridge(x + dx, y + dy) || is_spiderweb(x + dx, y + dy) ||
-              is_rock(x + dx, y + dy) || is_wall(x + dx, y + dy)) {
+          if (is_chasm(x + dx, y + dy) || is_bridge(x + dx, y + dy) || is_spiderweb(x + dx, y + dy)
+              || is_rock(x + dx, y + dy) || is_wall(x + dx, y + dy)) {
             spiderweb_ok = 1;
             goto next;
           }

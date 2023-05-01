@@ -19,8 +19,8 @@ PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds)
   int       height = 0;
   PyObject *e      = nullptr;
 
-  static char *kwlist[] = {(char *) "file",   (char *) "name", (char *) "width",
-                           (char *) "height", (char *) "arr",  nullptr};
+  static char *kwlist[]
+      = {(char *) "file", (char *) "name", (char *) "width", (char *) "height", (char *) "arr", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "ssiiO", kwlist, &file, &name, &width, &height, &e)) {
     ERR("tile_load_arr: Bad args");
@@ -92,8 +92,8 @@ PyObject *tile_load_arr_sprites_(PyObject *obj, PyObject *args, PyObject *keywds
   int       height = 0;
   PyObject *e      = nullptr;
 
-  static char *kwlist[] = {(char *) "file",   (char *) "name", (char *) "width",
-                           (char *) "height", (char *) "arr",  nullptr};
+  static char *kwlist[]
+      = {(char *) "file", (char *) "name", (char *) "width", (char *) "height", (char *) "arr", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "ssiiO", kwlist, &file, &name, &width, &height, &e)) {
     ERR("tile_load_arr: Bad args");
@@ -280,8 +280,8 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
 
   Tilemap *tiles = nullptr;
   switch (dir) {
-    case THING_DIR_NONE: tiles = &tp->tiles; break;
-    case THING_DIR_DOWN:
+    case THING_DIR_NONE : tiles = &tp->tiles; break;
+    case THING_DIR_DOWN :
       if (level == 1) {
         tiles = &tp->bot1_tiles;
       } else if (level == 2) {
@@ -292,7 +292,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
         DIE("Bug");
       }
       break;
-    case THING_DIR_UP:
+    case THING_DIR_UP :
       if (level == 1) {
         tiles = &tp->top1_tiles;
       } else if (level == 2) {
@@ -301,7 +301,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
         DIE("Bug");
       }
       break;
-    case THING_DIR_LEFT:
+    case THING_DIR_LEFT :
       if (level == 1) {
         tiles = &tp->left1_tiles;
       } else if (level == 2) {
@@ -310,7 +310,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
         DIE("Bug");
       }
       break;
-    case THING_DIR_RIGHT:
+    case THING_DIR_RIGHT :
       if (level == 1) {
         tiles = &tp->right1_tiles;
       } else if (level == 2) {
@@ -319,7 +319,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
         DIE("Bug");
       }
       break;
-    case THING_DIR_TL:
+    case THING_DIR_TL :
       if (level == 1) {
         tiles = &tp->tl1_tiles;
       } else if (level == 2) {
@@ -328,7 +328,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
         DIE("Bug");
       }
       break;
-    case THING_DIR_BL:
+    case THING_DIR_BL :
       if (level == 1) {
         tiles = &tp->bl1_tiles;
       } else if (level == 2) {
@@ -337,7 +337,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
         DIE("Bug");
       }
       break;
-    case THING_DIR_TR:
+    case THING_DIR_TR :
       if (level == 1) {
         tiles = &tp->tr1_tiles;
       } else if (level == 2) {
@@ -346,7 +346,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
         DIE("Bug");
       }
       break;
-    case THING_DIR_BR:
+    case THING_DIR_BR :
       if (level == 1) {
         tiles = &tp->br1_tiles;
       } else if (level == 2) {

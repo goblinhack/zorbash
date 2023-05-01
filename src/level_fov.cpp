@@ -106,8 +106,8 @@ void Level::scan(Thingp me, FovMap *fov_curr, FovMap *fov_ever, int pov_x, int p
       }
     }
 
-    if (angle * angle + distance_from_origin * distance_from_origin <= radius_squared &&
-        (light_walls || ! light_blocker)) {
+    if (angle * angle + distance_from_origin * distance_from_origin <= radius_squared
+        && (light_walls || ! light_blocker)) {
       set_no_check(fov_curr->can_see, map_x, map_y, true);
 
       if (fov_ever) {

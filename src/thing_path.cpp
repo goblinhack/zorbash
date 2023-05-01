@@ -85,8 +85,8 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
     DBG2("Can try to jump");
     TRACE_AND_INDENT();
 
-    if (is_disliked_by_me(future_pos) || level->is_block_of_ice(future_pos) || level->is_barrel(future_pos) ||
-        level->is_portal(future_pos) || level->is_brazier(future_pos)) {
+    if (is_disliked_by_me(future_pos) || level->is_block_of_ice(future_pos) || level->is_barrel(future_pos)
+        || level->is_portal(future_pos) || level->is_brazier(future_pos)) {
       DBG2("Next position %s is a hazard (move path size %d)", future_pos.to_string().c_str(),
            (int) ai->move_path.size());
       TRACE_AND_INDENT();
@@ -258,7 +258,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
         }
 
         switch (try_to_shove_into_hazard(t, delta)) {
-          case THING_SHOVE_TRIED_AND_FAILED:
+          case THING_SHOVE_TRIED_AND_FAILED :
             {
               DBG2("Tried to shove monst into hazard at %s but failed", future_pos.to_string().c_str());
               if (is_player()) {
@@ -267,7 +267,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
               clear_move_path("Tried to shove but failed");
               return false;
             }
-          case THING_SHOVE_TRIED_AND_PASSED:
+          case THING_SHOVE_TRIED_AND_PASSED :
             {
               DBG2("Shoved monst at %s", future_pos.to_string().c_str());
               if (is_player()) {
@@ -276,7 +276,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
               clear_move_path("Tried to shove");
               return true;
             }
-          case THING_SHOVE_NEVER_TRIED: break;
+          case THING_SHOVE_NEVER_TRIED : break;
         }
       }
       FOR_ALL_THINGS_END()
@@ -416,8 +416,8 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
         DBG2("Try to move, no shove, attack allowed as mouse clicked on %s", mouse_at.to_string().c_str());
         TRACE_AND_INDENT();
 
-        if ((std::abs(curr_at.x - level->cursor->curr_at.x) <= 1) &&
-            (std::abs(curr_at.y - level->cursor->curr_at.y) <= 1)) {
+        if ((std::abs(curr_at.x - level->cursor->curr_at.x) <= 1)
+            && (std::abs(curr_at.y - level->cursor->curr_at.y) <= 1)) {
           //
           // If more than one hop away, we must jump.
           //

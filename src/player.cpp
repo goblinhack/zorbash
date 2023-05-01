@@ -51,25 +51,25 @@ static bool player_tick_(bool left, bool right, bool up, bool down, bool attack,
   // Trying to move when moving items?
   //
   switch (game->state) {
-    case Game::STATE_NORMAL: break;
-    case Game::STATE_OPTIONS_FOR_ITEM_MENU: LOG("Ignore player action when choosing item options"); return false;
-    case Game::STATE_INVENTORY: // Currently managing inventory
+    case Game::STATE_NORMAL : break;
+    case Game::STATE_OPTIONS_FOR_ITEM_MENU : LOG("Ignore player action when choosing item options"); return false;
+    case Game::STATE_INVENTORY : // Currently managing inventory
       LOG("Ignore player action when moving items");
       return false;
-    case Game::STATE_COLLECTING_ITEMS: // Collecting en masse from the level
+    case Game::STATE_COLLECTING_ITEMS : // Collecting en masse from the level
       LOG("Ignore player action when collecting items");
       return false;
-    case Game::STATE_ENCHANTING_ITEMS: LOG("Ignore player action when enchanting items"); return false;
-    case Game::STATE_CHOOSING_SKILLS: LOG("Ignore player action when choosing skills"); return false;
-    case Game::STATE_CHOOSING_LEVEL: LOG("Ignore player action when choosing level"); return false;
-    case Game::STATE_CHOOSING_TARGET: // Looking to somewhere to throw at
+    case Game::STATE_ENCHANTING_ITEMS : LOG("Ignore player action when enchanting items"); return false;
+    case Game::STATE_CHOOSING_SKILLS : LOG("Ignore player action when choosing skills"); return false;
+    case Game::STATE_CHOOSING_LEVEL : LOG("Ignore player action when choosing level"); return false;
+    case Game::STATE_CHOOSING_TARGET : // Looking to somewhere to throw at
       LOG("Ignore player action when choosing target");
       return false;
-    case Game::STATE_LOAD_MENU:
-    case Game::STATE_KEYBOARD_MENU:
-    case Game::STATE_SAVE_MENU:
-    case Game::STATE_QUIT_MENU: LOG("Ignore player action when in menu"); return false;
-    default: ERR("Unhandled game state"); return false;
+    case Game::STATE_LOAD_MENU :
+    case Game::STATE_KEYBOARD_MENU :
+    case Game::STATE_SAVE_MENU :
+    case Game::STATE_QUIT_MENU : LOG("Ignore player action when in menu"); return false;
+    default : ERR("Unhandled game state"); return false;
   }
 
   if (left || right || up || down) {

@@ -248,8 +248,8 @@ bool Thing::possible_to_attack(const Thingp victim)
     }
 
     if (me->attack_blood()) {
-      if (victim->is_red_blooded() || victim->is_green_blooded() || victim->is_red_blood() ||
-          victim->is_green_blood()) {
+      if (victim->is_red_blooded() || victim->is_green_blooded() || victim->is_red_blood()
+          || victim->is_green_blood()) {
         if (is_debug_type()) {
           dbg("Can attack blood: %s", victim->to_short_string().c_str());
           return true;
@@ -325,8 +325,8 @@ bool Thing::possible_to_attack(const Thingp victim)
   }
 
   if (me->is_fire() || me->is_lava()) {
-    if (victim->is_able_to_melt() || victim->is_burnable() || victim->is_very_combustible() ||
-        victim->is_combustible()) {
+    if (victim->is_able_to_melt() || victim->is_burnable() || victim->is_very_combustible()
+        || victim->is_combustible()) {
       if (! victim->is_fire() && ! victim->is_lava()) {
         if (is_debug_type()) {
           dbg("Can attack as I am firey %s", victim->to_short_string().c_str());
@@ -390,13 +390,13 @@ bool Thing::possible_to_attack(const Thingp victim)
     }
   }
 
-  if (victim->is_alive_monst() || victim->is_combustible() || victim->is_very_combustible() ||
-      victim->is_able_to_melt() || victim->is_burnable() || victim->is_wall() || victim->is_rock() ||
-      victim->is_door() || victim->is_bridge() || victim->is_dry_grass() || victim->is_wet_grass() ||
-      victim->is_treasure_type() || victim->is_enchantstone() || victim->is_skillstone() || victim->is_foliage() ||
-      victim->is_carnivorous_plant() || victim->is_spiderweb() || victim->is_block_of_ice() || victim->is_sticky() ||
-      victim->is_brazier() || victim->is_barrel() || victim->is_player() || victim->is_food() || victim->is_trap() ||
-      victim->is_bag_item()) {
+  if (victim->is_alive_monst() || victim->is_combustible() || victim->is_very_combustible()
+      || victim->is_able_to_melt() || victim->is_burnable() || victim->is_wall() || victim->is_rock()
+      || victim->is_door() || victim->is_bridge() || victim->is_dry_grass() || victim->is_wet_grass()
+      || victim->is_treasure_type() || victim->is_enchant_stone() || victim->is_skill_stone() || victim->is_foliage()
+      || victim->is_carnivorous_plant() || victim->is_spiderweb() || victim->is_block_of_ice() || victim->is_sticky()
+      || victim->is_brazier() || victim->is_barrel() || victim->is_player() || victim->is_food() || victim->is_trap()
+      || victim->is_bag_item()) {
     if (is_laser()) {
       if (is_debug_type()) {
         dbg("Can attack as laser %s", victim->to_short_string().c_str());

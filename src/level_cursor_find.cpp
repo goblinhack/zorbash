@@ -21,30 +21,30 @@ void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny
   }
 
   switch (game->state) {
-    case Game::STATE_NORMAL: break;
-    case Game::STATE_OPTIONS_FOR_ITEM_MENU: // Drop, throw etc and item
+    case Game::STATE_NORMAL : break;
+    case Game::STATE_OPTIONS_FOR_ITEM_MENU : // Drop, throw etc and item
       return;
-    case Game::STATE_INVENTORY: // Currently managing inventory
+    case Game::STATE_INVENTORY : // Currently managing inventory
       return;
-    case Game::STATE_COLLECTING_ITEMS: // Collecting en masse from the level
+    case Game::STATE_COLLECTING_ITEMS : // Collecting en masse from the level
       return;
-    case Game::STATE_ENCHANTING_ITEMS: // Upgrading items
+    case Game::STATE_ENCHANTING_ITEMS : // Upgrading items
       return;
-    case Game::STATE_CHOOSING_SKILLS: // Choosing skills
+    case Game::STATE_CHOOSING_SKILLS : // Choosing skills
       return;
-    case Game::STATE_CHOOSING_TARGET: // Looking to somewhere to throw at
+    case Game::STATE_CHOOSING_TARGET : // Looking to somewhere to throw at
       break;
-    case Game::STATE_CHOOSING_LEVEL: // Choosing the next level
+    case Game::STATE_CHOOSING_LEVEL : // Choosing the next level
       return;
-    case Game::STATE_KEYBOARD_MENU: // Keyboard optionds
+    case Game::STATE_KEYBOARD_MENU : // Keyboard optionds
       return;
-    case Game::STATE_LOAD_MENU: // Loading a game
+    case Game::STATE_LOAD_MENU : // Loading a game
       return;
-    case Game::STATE_SAVE_MENU: // Saving a game
+    case Game::STATE_SAVE_MENU : // Saving a game
       return;
-    case Game::STATE_QUIT_MENU: // Pondering quitting
+    case Game::STATE_QUIT_MENU : // Pondering quitting
       return;
-    default: err("Unhandled game state"); return;
+    default : err("Unhandled game state"); return;
   }
 
   if (wid_find_under_mouse()) {

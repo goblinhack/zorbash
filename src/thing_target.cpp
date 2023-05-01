@@ -416,8 +416,8 @@ bool Thing::victim_attack_swing(int equip, Thingp best, point best_hit_at, Thing
       dbg2("Target-attack-best: Prefer nat attack");
       attack_options->used_as        = gfx_anim_use();
       attack_options->prefer_nat_att = true;
-    } else if (! level->is_monst(best_hit_at) && ! level->is_wall(best_hit_at) && ! level->is_door(best_hit_at) &&
-               ! level->is_mob(best_hit_at)) {
+    } else if (! level->is_monst(best_hit_at) && ! level->is_wall(best_hit_at) && ! level->is_door(best_hit_at)
+               && ! level->is_mob(best_hit_at)) {
       //
       // Prefer claws
       //

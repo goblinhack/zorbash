@@ -468,7 +468,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->i_set_is_dirt                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_door                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_dry_grass                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->i_set_is_enchantstone                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_enchant_stone                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_fire                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_floor                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_foliage                       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -510,7 +510,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->i_set_is_secret_door                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_shallow_water                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_shovable                      = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->i_set_is_skillstone                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_skill_stone                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_smoke                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_spiderweb                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_staff                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -630,7 +630,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_dirt);
   in >> bits(my.t->_is_door);
   in >> bits(my.t->_is_dry_grass);
-  in >> bits(my.t->_is_enchantstone);
+  in >> bits(my.t->_is_enchant_stone);
   in >> bits(my.t->_is_fire);
   in >> bits(my.t->_is_floor);
   in >> bits(my.t->_is_foliage);
@@ -658,7 +658,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_secret_door);
   in >> bits(my.t->_is_shallow_water);
   in >> bits(my.t->_is_shovable);
-  in >> bits(my.t->_is_skillstone);
+  in >> bits(my.t->_is_skill_stone);
   in >> bits(my.t->_is_smoke);
   in >> bits(my.t->_is_steam);
   in >> bits(my.t->_is_spiderweb);
@@ -882,8 +882,8 @@ std::istream &operator>>(std::istream &in, Bits< class World & > my)
         in >> bits(p);
         in >> bits(exists);
         if (p != point3d(x, y, z)) {
-          game_load_error =
-              string_sprintf("level mismatch expected %d,%d,%d vs found %d,%d,%d", x, y, z, p.x, p.y, p.z);
+          game_load_error
+              = string_sprintf("level mismatch expected %d,%d,%d vs found %d,%d,%d", x, y, z, p.x, p.y, p.z);
           return in;
         }
 
@@ -1056,8 +1056,9 @@ std::istream &operator>>(std::istream &in, Bits< class Game & > my)
   in >> bits(my.t.version);
   in >> bits(my.t.serialized_size);
 
-  if (my.t.serialized_size != (uint32_t) (sizeof(Game) + sizeof(Level) + sizeof(Thing) + sizeof(ThingAi) +
-                                          sizeof(ThingInfo) + sizeof(ThingItem))) {
+  if (my.t.serialized_size
+      != (uint32_t) (sizeof(Game) + sizeof(Level) + sizeof(Thing) + sizeof(ThingAi) + sizeof(ThingInfo)
+                     + sizeof(ThingItem))) {
     if (my.t.version == MYVER) {
       game_load_error = "Incompatible save file for version " + my.t.version;
     } else {
@@ -1394,24 +1395,24 @@ static uint8_t wid_load_key_up(Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL:
-    case KMOD_RCTRL:
-    default:
+    case KMOD_LCTRL :
+    case KMOD_RCTRL :
+    default :
       switch (key->sym) {
-        default:
+        default :
           {
             auto c = wid_event_to_char(key);
             switch (c) {
-              case '0':
-              case '1':
-              case '2':
-              case '3':
-              case '4':
-              case '5':
-              case '6':
-              case '7':
-              case '8':
-              case '9':
+              case '0' :
+              case '1' :
+              case '2' :
+              case '3' :
+              case '4' :
+              case '5' :
+              case '6' :
+              case '7' :
+              case '8' :
+              case '9' :
                 {
                   int slot = c - '0';
                   if (! get(slot_valid, slot)) {
@@ -1422,8 +1423,8 @@ static uint8_t wid_load_key_up(Widp w, const struct SDL_Keysym *key)
                   }
                   return true;
                 }
-              case 'b':
-              case SDLK_ESCAPE:
+              case 'b' :
+              case SDLK_ESCAPE :
                 {
                   TRACE_AND_INDENT();
                   CON("INF: Load game cancelled");

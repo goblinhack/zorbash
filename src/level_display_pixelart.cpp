@@ -231,8 +231,8 @@ void Level::display_pixelart_map_fg_things(int fbo, const int16_t minx, const in
             //
             IF_DEBUG2
             {
-              if (! t->is_teleporting && ! t->is_moving && ! t->is_jumping && ! t->is_falling &&
-                  ! t->is_tmp_thing()) {
+              if (! t->is_teleporting && ! t->is_moving && ! t->is_jumping && ! t->is_falling
+                  && ! t->is_tmp_thing()) {
                 if (t->curr_at != make_point(t->interpolated_at_get())) {
                   t->die("Thing is not where it is interpolated to be; is at %f,%f", t->interpolated_at_get().x,
                          t->interpolated_at_get().y);
@@ -473,21 +473,21 @@ void Level::display_pixelart_map_all(void)
     // More ominous lighting
     //
     switch (biome) {
-      case BIOME_UNKNOWN: break;
-      case BIOME_DUNGEON: glcolor(GRAY50); break;
-      case BIOME_FLOODED: glcolor(GRAY50); break;
-      case BIOME_SWAMP: glcolor(GRAY10); break;
-      case BIOME_SEWER: glcolor(GRAY10); break;
-      case BIOME_ICE: glcolor(BLUE); break;
-      case BIOME_CHASMS:
+      case BIOME_UNKNOWN : break;
+      case BIOME_DUNGEON : glcolor(GRAY50); break;
+      case BIOME_FLOODED : glcolor(GRAY50); break;
+      case BIOME_SWAMP : glcolor(GRAY10); break;
+      case BIOME_SEWER : glcolor(GRAY10); break;
+      case BIOME_ICE : glcolor(BLUE); break;
+      case BIOME_CHASMS :
         //
         // Looks more ominous
         //
         glcolor(GRAY10);
         break;
-      case BIOME_LAVA: glcolor(RED); break;
-      case BIOME_DUNGEONS: break;
-      case BIOME_MAX: break;
+      case BIOME_LAVA : glcolor(RED); break;
+      case BIOME_DUNGEONS : break;
+      case BIOME_MAX : break;
     }
 
     glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);

@@ -36,12 +36,12 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
         for (auto x = 0; x < MAX_UI_SIZE; x++) {
           for (auto y = 0; y < MAX_UI_SIZE; y++) {
             if (type == UI_TYPE_PIXELART) {
-              std::string name =
-                  "ui.pixelart." + std::to_string(styles) + "," + std::to_string(x) + "," + std::to_string(y);
+              std::string name
+                  = "ui.pixelart." + std::to_string(styles) + "," + std::to_string(x) + "," + std::to_string(y);
               set(tiles, type, styles, x, y, tile_find_mand(name));
             } else {
-              std::string name =
-                  "ui.ascii." + std::to_string(styles) + "," + std::to_string(x) + "," + std::to_string(y);
+              std::string name
+                  = "ui.ascii." + std::to_string(styles) + "," + std::to_string(x) + "," + std::to_string(y);
               set(tiles, type, styles, x, y, tile_find_mand(name));
             }
           }

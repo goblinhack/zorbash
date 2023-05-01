@@ -23,11 +23,11 @@ void wid_skillbox_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int w
   TRACE_AND_INDENT();
   DBG3("Skillbox: Begin over skillbox");
   TRACE_AND_INDENT();
-  if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state == Game::STATE_CHOOSING_TARGET) ||
-      (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_INVENTORY) ||
-      (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_SAVE_MENU) ||
-      (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
-      (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+  if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state == Game::STATE_CHOOSING_TARGET)
+      || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_INVENTORY)
+      || (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_SAVE_MENU)
+      || (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU)
+      || (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     DBG3("Skillbox: Moving items; ignore");
     return;
   }
@@ -65,11 +65,11 @@ void wid_skillbox_mouse_over_end(Widp w)
   TRACE_AND_INDENT();
   DBG3("Skillbox: End over skillbox");
   TRACE_AND_INDENT();
-  if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state == Game::STATE_CHOOSING_TARGET) ||
-      (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_INVENTORY) ||
-      (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_SAVE_MENU) ||
-      (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
-      (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+  if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state == Game::STATE_CHOOSING_TARGET)
+      || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_INVENTORY)
+      || (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_SAVE_MENU)
+      || (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU)
+      || (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     DBG3("Skillbox: Moving items; ignore");
     return;
   }
@@ -106,11 +106,11 @@ uint8_t wid_skillbox_item_mouse_up(Widp w, int x, int y, uint32_t button)
   auto slot = wid_get_int_context(w);
   DBG3("Skillbox: Mouse up on slot %d", slot);
 
-  if ((game->state == Game::STATE_ENCHANTING_ITEMS) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-      (game->state == Game::STATE_CHOOSING_SKILLS) || (game->state == Game::STATE_INVENTORY) ||
-      (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
-      (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
-      (game->state == Game::STATE_COLLECTING_ITEMS)) {
+  if ((game->state == Game::STATE_ENCHANTING_ITEMS) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU)
+      || (game->state == Game::STATE_CHOOSING_SKILLS) || (game->state == Game::STATE_INVENTORY)
+      || (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU)
+      || (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_QUIT_MENU)
+      || (game->state == Game::STATE_COLLECTING_ITEMS)) {
     wid_thing_info_fini("skillbox mouse");
     return false;
   }

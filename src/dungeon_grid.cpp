@@ -689,19 +689,19 @@ point Nodes::random_dir(void)
   auto dx = 0, dy = 0;
 
   switch (pcg_random_range(0, 4)) {
-    case 0:
+    case 0 :
       dx = -1;
       dy = 0;
       break;
-    case 1:
+    case 1 :
       dx = 1;
       dy = 0;
       break;
-    case 2:
+    case 2 :
       dx = 0;
       dy = -1;
       break;
-    case 3:
+    case 3 :
       dx = 0;
       dy = 1;
       break;
@@ -712,19 +712,19 @@ point Nodes::random_dir(void)
 void Nodes::random_dir(int *dx, int *dy)
 {
   switch (pcg_random_range(0, 4)) {
-    case 0:
+    case 0 :
       *dx = -1;
       *dy = 0;
       break;
-    case 1:
+    case 1 :
       *dx = 1;
       *dy = 0;
       break;
-    case 2:
+    case 2 :
       *dx = 0;
       *dy = -1;
       break;
-    case 3:
+    case 3 :
       *dx = 0;
       *dy = 1;
       break;

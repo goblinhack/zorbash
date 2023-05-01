@@ -986,10 +986,10 @@ int Thing::is_unused_flag143(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag143());
 }
-int Thing::is_unused_flag144(void)
+int Thing::is_magic_stone(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag144());
+  return (tp()->is_magic_stone());
 }
 int Thing::is_biome_flooded(void)
 {
@@ -1756,10 +1756,10 @@ int Thing::is_enchantable(void)
   return (tp()->is_enchantable());
 }
 
-int Thing::is_enchantstone(void)
+int Thing::is_enchant_stone(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_enchantstone());
+  return (tp()->is_enchant_stone());
 }
 
 int Thing::is_ethereal_mob(void)
@@ -3362,10 +3362,10 @@ int Thing::is_shovable(void)
   return (tp()->is_shovable());
 }
 
-int Thing::is_skillstone(void)
+int Thing::is_skill_stone(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_skillstone());
+  return (tp()->is_skill_stone());
 }
 
 int Thing::is_skill(void)

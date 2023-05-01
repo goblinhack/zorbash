@@ -149,8 +149,8 @@ std::vector< point > Level::cursor_path_draw_line_attempt(Thingp it, point start
   // If standing on a hazard, then plot a course that allows travel over hazards.
   // Or likewise if the cursor is on a hazard.
   //
-  if (is_cursor_path_hazard(player->curr_at.x, player->curr_at.y) ||
-      (cursor && is_cursor_path_hazard(cursor->curr_at.x, cursor->curr_at.y))) {
+  if (is_cursor_path_hazard(player->curr_at.x, player->curr_at.y)
+      || (cursor && is_cursor_path_hazard(cursor->curr_at.x, cursor->curr_at.y))) {
     //
     // Just map the shortest path outta here
     //
@@ -447,10 +447,10 @@ void Level::cursor_path_create(Thingp it)
     return;
   }
 
-  if ((game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_INVENTORY) ||
-      (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_SAVE_MENU) ||
-      (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
-      (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+  if ((game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_INVENTORY)
+      || (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_SAVE_MENU)
+      || (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU)
+      || (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     pcg_random_allowed--;
     return;
   }

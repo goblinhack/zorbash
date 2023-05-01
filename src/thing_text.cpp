@@ -412,24 +412,24 @@ void Thing::show_botcon_description(void)
 
   bool skip_showing_keys_to_use = true;
   switch (game->state) {
-    case Game::STATE_CHOOSING_LEVEL: return;
-    case Game::STATE_NORMAL: skip_showing_keys_to_use = false; break;
-    case Game::STATE_OPTIONS_FOR_ITEM_MENU: skip_showing_keys_to_use = true; break;
-    case Game::STATE_INVENTORY: // Currently managing inventory
+    case Game::STATE_CHOOSING_LEVEL : return;
+    case Game::STATE_NORMAL : skip_showing_keys_to_use = false; break;
+    case Game::STATE_OPTIONS_FOR_ITEM_MENU : skip_showing_keys_to_use = true; break;
+    case Game::STATE_INVENTORY : // Currently managing inventory
       skip_showing_keys_to_use = false;
       break;
-    case Game::STATE_COLLECTING_ITEMS: // Collecting en masse from the level
+    case Game::STATE_COLLECTING_ITEMS : // Collecting en masse from the level
       skip_showing_keys_to_use = true;
       break;
-    case Game::STATE_ENCHANTING_ITEMS: skip_showing_keys_to_use = true; break;
-    case Game::STATE_CHOOSING_TARGET: // Looking to somewhere to throw at
+    case Game::STATE_ENCHANTING_ITEMS : skip_showing_keys_to_use = true; break;
+    case Game::STATE_CHOOSING_TARGET : // Looking to somewhere to throw at
       skip_showing_keys_to_use = true;
       break;
-    case Game::STATE_LOAD_MENU: skip_showing_keys_to_use = true; break;
-    case Game::STATE_SAVE_MENU: skip_showing_keys_to_use = true; break;
-    case Game::STATE_QUIT_MENU: skip_showing_keys_to_use = true; break;
-    case Game::STATE_KEYBOARD_MENU: skip_showing_keys_to_use = true; break;
-    default: ERR("Unhandled game state"); break;
+    case Game::STATE_LOAD_MENU : skip_showing_keys_to_use = true; break;
+    case Game::STATE_SAVE_MENU : skip_showing_keys_to_use = true; break;
+    case Game::STATE_QUIT_MENU : skip_showing_keys_to_use = true; break;
+    case Game::STATE_KEYBOARD_MENU : skip_showing_keys_to_use = true; break;
+    default : ERR("Unhandled game state"); break;
   }
 
   //

@@ -32,17 +32,17 @@ static uint8_t wid_credits_key_up(Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL:
-    case KMOD_RCTRL:
-    default:
+    case KMOD_LCTRL :
+    case KMOD_RCTRL :
+    default :
       switch (key->sym) {
-        default:
+        default :
           {
             TRACE_AND_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
-              case 'b':
-              case SDLK_ESCAPE:
+              case 'b' :
+              case SDLK_ESCAPE :
                 {
                   TRACE_AND_INDENT();
                   wid_credits_destroy();

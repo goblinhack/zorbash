@@ -354,14 +354,14 @@ bool Thing::use(Thingp what, UseOptions *use_options)
     dbg("Trying to use skill: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
     skill_use(what);
-  } else if (what->is_enchantstone()) {
-    dbg("Trying to use enchantstone: %s", what->to_short_string().c_str());
+  } else if (what->is_enchant_stone()) {
+    dbg("Trying to use enchant_stone: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
     if (is_player()) {
       game->wid_enchant_an_item();
     }
-  } else if (what->is_skillstone()) {
-    dbg("Trying to use skillstone: %s", what->to_short_string().c_str());
+  } else if (what->is_skill_stone()) {
+    dbg("Trying to use skill_stone: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
     if (is_player()) {
       game->wid_choose_skill();

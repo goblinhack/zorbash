@@ -592,15 +592,15 @@ static void parse_args(int argc, char *argv[])
       continue;
     }
 
-    if (! strcasecmp(argv[ i ], "--player-name") || ! strcasecmp(argv[ i ], "-player-name") ||
-        ! strcasecmp(argv[ i ], "--playername") || ! strcasecmp(argv[ i ], "-playername")) {
+    if (! strcasecmp(argv[ i ], "--player-name") || ! strcasecmp(argv[ i ], "-player-name")
+        || ! strcasecmp(argv[ i ], "--playername") || ! strcasecmp(argv[ i ], "-playername")) {
       g_opt_player_name = argv[ i + 1 ];
       i++;
       continue;
     }
 
-    if (! strcasecmp(argv[ i ], "--no-debug") || ! strcasecmp(argv[ i ], "-no-debug") ||
-        ! strcasecmp(argv[ i ], "--nodebug") || ! strcasecmp(argv[ i ], "-nodebug")) {
+    if (! strcasecmp(argv[ i ], "--no-debug") || ! strcasecmp(argv[ i ], "-no-debug")
+        || ! strcasecmp(argv[ i ], "--nodebug") || ! strcasecmp(argv[ i ], "-nodebug")) {
       g_opt_debug1               = false;
       g_opt_debug2               = false;
       g_opt_debug3               = false;
@@ -608,8 +608,8 @@ static void parse_args(int argc, char *argv[])
       continue;
     }
 
-    if (! strcasecmp(argv[ i ], "--debug") || ! strcasecmp(argv[ i ], "-debug") ||
-        ! strcasecmp(argv[ i ], "--debug1") || ! strcasecmp(argv[ i ], "-debug1")) {
+    if (! strcasecmp(argv[ i ], "--debug") || ! strcasecmp(argv[ i ], "-debug") || ! strcasecmp(argv[ i ], "--debug1")
+        || ! strcasecmp(argv[ i ], "-debug1")) {
       g_opt_debug1               = true;
       g_opt_override_debug_level = true;
       continue;

@@ -11,8 +11,8 @@
 void py_exec(const char *str)
 {
   TRACE_AND_INDENT();
-  char stdOutErr[] =
-      "import sys\n\
+  char stdOutErr[]
+      = "import sys\n\
 import my\n\
 class CatchOutErr:\n\
   def __init__(self):\n\

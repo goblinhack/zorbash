@@ -84,11 +84,11 @@ bool Thing::enchant_with_stone(Thingp what)
   }
 
   //
-  // Drop an enchantstone
+  // Drop an enchant_stone
   //
   auto found = false;
   for (const auto t : carried_item_only_vector()) {
-    if (t->is_enchantstone()) {
+    if (t->is_enchant_stone()) {
       t->is_drained = true;
       t->dead("used");
       found = true;
@@ -99,7 +99,7 @@ bool Thing::enchant_with_stone(Thingp what)
     //
     // Not really an error if the enchant is automatic
     //
-    dbg("no enchantstone found");
+    dbg("no enchant_stone found");
   }
 
   return true;
@@ -155,16 +155,16 @@ void Thing::enchant_randomly(void)
   damaged_count_set(0);
 }
 
-int Thing::enchantstone_count(void)
+int Thing::enchant_stone_count(void)
 {
   TRACE_NO_INDENT();
 
   int v = 0;
   for (const auto t : carried_item_only_vector()) {
-    if (! t->is_enchantstone()) {
+    if (! t->is_enchant_stone()) {
       continue;
     }
-    dbg("Found an enchantstone: %s", t->to_short_string().c_str());
+    dbg("Found an enchant_stone: %s", t->to_short_string().c_str());
     v++;
   }
   return v;

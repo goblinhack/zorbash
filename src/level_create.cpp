@@ -22,10 +22,10 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
   if (dungeon_walk_order_level_no <= 1) {
     seedval = game->seed + 1; // +1 is a temporary hack
   } else {
-    seedval = (world_at.z * DUNGEONS_GRID_CHUNK_HEIGHT * DUNGEONS_GRID_CHUNK_WIDTH) +
-              (world_at.y * DUNGEONS_GRID_CHUNK_HEIGHT) + world_at.x +
-              (dungeon_walk_order_level_no * (123 * DUNGEONS_GRID_CHUNK_HEIGHT * DUNGEONS_GRID_CHUNK_WIDTH)) +
-              (difficulty_depth * 121121);
+    seedval = (world_at.z * DUNGEONS_GRID_CHUNK_HEIGHT * DUNGEONS_GRID_CHUNK_WIDTH)
+            + (world_at.y * DUNGEONS_GRID_CHUNK_HEIGHT) + world_at.x
+            + (dungeon_walk_order_level_no * (123 * DUNGEONS_GRID_CHUNK_HEIGHT * DUNGEONS_GRID_CHUNK_WIDTH))
+            + (difficulty_depth * 121121);
   }
 
   game->seed = seedval;
@@ -60,14 +60,14 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
 
   bool ret;
   switch (biome) {
-    case BIOME_DUNGEON: ret = create_biome_dungeon(world_at, seed); break;
-    case BIOME_FLOODED: ret = create_biome_flooded(world_at, seed); break;
-    case BIOME_SWAMP: ret = create_biome_swamp(world_at, seed); break;
-    case BIOME_SEWER: ret = create_biome_sewer(world_at, seed); break;
-    case BIOME_CHASMS: ret = create_biome_chasms(world_at, seed); break;
-    case BIOME_ICE: ret = create_biome_ice(world_at, seed); break;
-    case BIOME_LAVA: ret = create_biome_lava(world_at, seed); break;
-    default:
+    case BIOME_DUNGEON : ret = create_biome_dungeon(world_at, seed); break;
+    case BIOME_FLOODED : ret = create_biome_flooded(world_at, seed); break;
+    case BIOME_SWAMP : ret = create_biome_swamp(world_at, seed); break;
+    case BIOME_SEWER : ret = create_biome_sewer(world_at, seed); break;
+    case BIOME_CHASMS : ret = create_biome_chasms(world_at, seed); break;
+    case BIOME_ICE : ret = create_biome_ice(world_at, seed); break;
+    case BIOME_LAVA : ret = create_biome_lava(world_at, seed); break;
+    default :
       DIE("No biome set for level create");
       ret = create_biome_dungeon(world_at, seed);
       break;

@@ -366,28 +366,28 @@ static uint8_t wid_keyboard_parent_key_down(Widp w, const SDL_Keysym *key)
   }
 
   switch (key->sym) {
-    case '`': return false;
+    case '`' : return false;
 
-    case SDLK_ESCAPE: (ctx->cancelled)(ctx->w, wid_get_text(ctx->input)); return true;
+    case SDLK_ESCAPE : (ctx->cancelled)(ctx->w, wid_get_text(ctx->input)); return true;
 
-    case SDLK_RETURN:
+    case SDLK_RETURN :
       {
         (ctx->selected)(ctx->w, wid_get_text(ctx->input));
         return true;
 
-        case SDLK_LEFT: wid_keyboard_focus_left(ctx); break;
+        case SDLK_LEFT : wid_keyboard_focus_left(ctx); break;
 
-        case SDLK_RIGHT: wid_keyboard_focus_right(ctx); break;
+        case SDLK_RIGHT : wid_keyboard_focus_right(ctx); break;
 
-        case SDLK_UP: wid_keyboard_focus_up(ctx); break;
+        case SDLK_UP : wid_keyboard_focus_up(ctx); break;
 
-        case SDLK_DOWN: wid_keyboard_focus_down(ctx); break;
+        case SDLK_DOWN : wid_keyboard_focus_down(ctx); break;
 
-        case SDLK_HOME: wid_keyboard_first_focus(ctx); break;
+        case SDLK_HOME : wid_keyboard_first_focus(ctx); break;
 
-        case SDLK_END: wid_keyboard_last_focus(ctx); break;
+        case SDLK_END : wid_keyboard_last_focus(ctx); break;
 
-        default: wid_keyboard_event(ctx->w, -1, -1, key); return true;
+        default : wid_keyboard_event(ctx->w, -1, -1, key); return true;
       }
   }
 
@@ -491,22 +491,22 @@ static uint8_t wid_keyboard_button_key_event(Widp w, const SDL_Keysym *key)
   }
 
   switch (key->sym) {
-    case '`': return false;
+    case '`' : return false;
 
-    case SDLK_ESCAPE: (ctx->cancelled)(ctx->w, wid_get_text(ctx->input)); return true;
+    case SDLK_ESCAPE : (ctx->cancelled)(ctx->w, wid_get_text(ctx->input)); return true;
 
-    case SDLK_RETURN: (ctx->selected)(ctx->w, wid_get_text(ctx->input)); return true;
+    case SDLK_RETURN : (ctx->selected)(ctx->w, wid_get_text(ctx->input)); return true;
 
-    case SDLK_BACKSPACE:
-    case SDLK_DELETE:
-    case SDLK_LEFT:
-    case SDLK_RIGHT:
-    case SDLK_UP:
-    case SDLK_DOWN:
-    case SDLK_HOME:
-    case SDLK_END: break;
+    case SDLK_BACKSPACE :
+    case SDLK_DELETE :
+    case SDLK_LEFT :
+    case SDLK_RIGHT :
+    case SDLK_UP :
+    case SDLK_DOWN :
+    case SDLK_HOME :
+    case SDLK_END : break;
 
-    default: wid_keyboard_event(w, -1, -1, key); return true;
+    default : wid_keyboard_event(w, -1, -1, key); return true;
   }
 
   return false;
@@ -613,20 +613,20 @@ static uint8_t wid_keyboard_text_input_key_event(Widp w, const SDL_Keysym *key)
   }
 
   switch (key->sym) {
-    case SDLK_ESCAPE: (ctx->cancelled)(ctx->w, wid_get_text(ctx->input)); return true;
+    case SDLK_ESCAPE : (ctx->cancelled)(ctx->w, wid_get_text(ctx->input)); return true;
 
-    case SDLK_RETURN: (ctx->selected)(ctx->w, wid_get_text(ctx->input)); return true;
+    case SDLK_RETURN : (ctx->selected)(ctx->w, wid_get_text(ctx->input)); return true;
 
-    case SDLK_BACKSPACE:
-    case SDLK_DELETE:
-    case SDLK_LEFT:
-    case SDLK_RIGHT:
-    case SDLK_UP:
-    case SDLK_DOWN:
-    case SDLK_HOME:
-    case SDLK_END: wid_receive_input(ctx->input, key); return true;
+    case SDLK_BACKSPACE :
+    case SDLK_DELETE :
+    case SDLK_LEFT :
+    case SDLK_RIGHT :
+    case SDLK_UP :
+    case SDLK_DOWN :
+    case SDLK_HOME :
+    case SDLK_END : wid_receive_input(ctx->input, key); return true;
 
-    default: wid_keyboard_event(w, -1, -1, key); return true;
+    default : wid_keyboard_event(w, -1, -1, key); return true;
   }
 
   return false;

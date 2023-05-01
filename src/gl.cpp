@@ -431,48 +431,48 @@ void fbo_get_size(int fbo, int &w, int &h)
   h = game->config.game_pix_height;
 
   switch (fbo) {
-    case FBO_MAP:
-    case FBO_MAP_HIDDEN:
-    case FBO_MAP_VISIBLE:
-    case FBO_PLAYER_VISIBLE_LIGHTING:
-    case FBO_SCREEN_FADE_IN_AND_OUT:
-    case FBO_SMALL_POINT_LIGHTS:
+    case FBO_MAP :
+    case FBO_MAP_HIDDEN :
+    case FBO_MAP_VISIBLE :
+    case FBO_PLAYER_VISIBLE_LIGHTING :
+    case FBO_SCREEN_FADE_IN_AND_OUT :
+    case FBO_SMALL_POINT_LIGHTS :
       w = game->config.game_pix_width;
       h = game->config.game_pix_height;
       break;
-    case FBO_MASK1:
-    case FBO_MASK2:
-    case FBO_MASK3:
-    case FBO_MASK4:
+    case FBO_MASK1 :
+    case FBO_MASK2 :
+    case FBO_MASK3 :
+    case FBO_MASK4 :
       w = game->config.game_pix_width;
       h = game->config.game_pix_height;
       break;
-    case FBO_MAP_MINI:
+    case FBO_MAP_MINI :
       w = MAP_WIDTH;
       h = MAP_HEIGHT;
       break;
-    case FBO_PIXELART_FULLMAP:
-    case FBO_PIXELART_FULLMAP_LIGHT:
-    case FBO_PIXELART_FULLMAP_VISITED:
+    case FBO_PIXELART_FULLMAP :
+    case FBO_PIXELART_FULLMAP_LIGHT :
+    case FBO_PIXELART_FULLMAP_VISITED :
       w = TILE_WIDTH * MAP_WIDTH;
       h = TILE_HEIGHT * MAP_HEIGHT;
       break;
-    case FBO_PIXELART_FULLMAP_MASK1:
-    case FBO_PIXELART_FULLMAP_MASK2:
-    case FBO_PIXELART_FULLMAP_MASK3:
-    case FBO_PIXELART_FULLMAP_MASK4:
+    case FBO_PIXELART_FULLMAP_MASK1 :
+    case FBO_PIXELART_FULLMAP_MASK2 :
+    case FBO_PIXELART_FULLMAP_MASK3 :
+    case FBO_PIXELART_FULLMAP_MASK4 :
       w = TILE_WIDTH * MAP_WIDTH;
       h = TILE_HEIGHT * MAP_HEIGHT;
       break;
-    case FBO_WID:
+    case FBO_WID :
       w = game->config.ui_pix_width;
       h = game->config.ui_pix_height;
       break;
-    case FBO_FINAL:
+    case FBO_FINAL :
       w = game->config.window_pix_width;
       h = game->config.window_pix_height;
       break;
-    case FBO_SPRITE:
+    case FBO_SPRITE :
       w = game->config.game_pix_width;
       h = game->config.game_pix_height;
       break;
@@ -562,9 +562,9 @@ void blit_fbo_unbind_locked(void)
 //
 #define NUMBER_COMPONENTS_PER_COLOR 4
 
-uint32_t NUMBER_BYTES_PER_VERTICE_2D = sizeof(GLfloat) * NUMBER_DIMENSIONS_PER_COORD_2D +
-                                       sizeof(GLushort) * NUMBER_DIMENSIONS_PER_COORD_2D +
-                                       sizeof(GLubyte) * NUMBER_COMPONENTS_PER_COLOR;
+uint32_t NUMBER_BYTES_PER_VERTICE_2D = sizeof(GLfloat) * NUMBER_DIMENSIONS_PER_COORD_2D
+                                     + sizeof(GLushort) * NUMBER_DIMENSIONS_PER_COORD_2D
+                                     + sizeof(GLubyte) * NUMBER_COMPONENTS_PER_COLOR;
 //
 // Two arrays, xy and uv.
 //
@@ -641,16 +641,17 @@ void blit_flush(void)
 
   glVertexPointer(NUMBER_DIMENSIONS_PER_COORD_2D, // (x,y)
                   GL_SHORT, NUMBER_BYTES_PER_VERTICE_2D,
-                  ((char *) gl_array_buf) + sizeof(GLfloat) * // skip (u,v)
-                                                NUMBER_DIMENSIONS_PER_COORD_2D);
+                  ((char *) gl_array_buf)
+                      + sizeof(GLfloat) * // skip (u,v)
+                            NUMBER_DIMENSIONS_PER_COORD_2D);
 
   glColorPointer(NUMBER_COMPONENTS_PER_COLOR, // (r,g,b,a)
                  GL_UNSIGNED_BYTE, NUMBER_BYTES_PER_VERTICE_2D,
-                 ((char *) gl_array_buf) +
-                     sizeof(GLushort) * // skip (x,y)
-                         NUMBER_DIMENSIONS_PER_COORD_2D +
-                     sizeof(GLfloat) * // skip (u,v)
-                         NUMBER_DIMENSIONS_PER_COORD_2D);
+                 ((char *) gl_array_buf)
+                     + sizeof(GLushort) * // skip (x,y)
+                           NUMBER_DIMENSIONS_PER_COORD_2D
+                     + sizeof(GLfloat) * // skip (u,v)
+                           NUMBER_DIMENSIONS_PER_COORD_2D);
 
   GL_ERROR_CHECK();
   glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei) nvertices);
@@ -684,8 +685,8 @@ void blit_flush_colored_triangle_fan(float *b, float *e)
 
   static long nvertices;
 
-  static const GLsizei stride =
-      sizeof(GLushort) * NUMBER_DIMENSIONS_PER_COORD_2D + sizeof(GLubyte) * NUMBER_COMPONENTS_PER_COLOR;
+  static const GLsizei stride
+      = sizeof(GLushort) * NUMBER_DIMENSIONS_PER_COORD_2D + sizeof(GLubyte) * NUMBER_COMPONENTS_PER_COLOR;
 
   nvertices = ((char *) e - (char *) b) / stride;
 
@@ -694,8 +695,9 @@ void blit_flush_colored_triangle_fan(float *b, float *e)
 
   glColorPointer(NUMBER_COMPONENTS_PER_COLOR, // (r,g,b,a)
                  GL_UNSIGNED_BYTE, stride,
-                 ((char *) b) + sizeof(GLushort) * // skip (x,y)
-                                    NUMBER_DIMENSIONS_PER_COORD_2D);
+                 ((char *) b)
+                     + sizeof(GLushort) * // skip (x,y)
+                           NUMBER_DIMENSIONS_PER_COORD_2D);
 
   GL_ERROR_CHECK();
   glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
@@ -1037,16 +1039,16 @@ static void gl_ext_load(void)
     LOG("OpenGl: - glRenderbufferStorage_EXT - present");
   }
 
-  glFramebufferRenderbuffer_EXT =
-      (__typeof__(glFramebufferRenderbuffer_EXT)) wglGetProcAddress("glFramebufferRenderbuffer");
+  glFramebufferRenderbuffer_EXT
+      = (__typeof__(glFramebufferRenderbuffer_EXT)) wglGetProcAddress("glFramebufferRenderbuffer");
   if (! glFramebufferRenderbuffer_EXT) {
     LOG("OpenGl: - glFramebufferRenderbuffer_EXT - NOT present");
   } else {
     LOG("OpenGl: - glFramebufferRenderbuffer_EXT - present");
   }
 
-  glCheckFramebufferStatus_EXT =
-      (__typeof__(glCheckFramebufferStatus_EXT)) wglGetProcAddress("glFramebufferRenderbuffer");
+  glCheckFramebufferStatus_EXT
+      = (__typeof__(glCheckFramebufferStatus_EXT)) wglGetProcAddress("glFramebufferRenderbuffer");
   if (! glCheckFramebufferStatus_EXT) {
     LOG("OpenGl: - glCheckFramebufferStatus_EXT - NOT present");
   } else {

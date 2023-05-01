@@ -58,14 +58,14 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
 
         if (m.is_floor || m.is_bridge || m.is_corridor || m.is_secret_corridor || m.is_portal || m.is_dirt) {
           floor_string += c;
-        } else if (m.is_red_blood || m.is_deep_water || m.is_door || m.is_ascend_dungeon || m.is_descend_dungeon ||
-                   m.is_descend_sewer || m.is_floor_deco || m.is_food || m.is_mob_challenge_class_A ||
-                   m.is_mob_challenge_class_B || m.is_gold || m.is_key || m.is_lava || m.is_monst_class_A ||
-                   m.is_monst_class_B || m.is_monst_class_C || m.is_enchantstone || m.is_skillstone ||
-                   m.is_monst_class_D || m.is_monst_class_E || m.is_treasure_class_A || m.is_treasure_class_B ||
-                   m.is_treasure_class_C || m.is_weapon_class_A || m.is_weapon_class_B || m.is_weapon_class_C ||
-                   m.is_potion || m.is_staff || m.is_ring || m.is_secret_door || m.is_brazier || m.is_barrel ||
-                   m.is_trap || m.is_shallow_water || m.is_deep_water || m.is_floor_deco) {
+        } else if (m.is_red_blood || m.is_deep_water || m.is_door || m.is_ascend_dungeon || m.is_descend_dungeon
+                   || m.is_descend_sewer || m.is_floor_deco || m.is_food || m.is_mob_challenge_class_A
+                   || m.is_mob_challenge_class_B || m.is_gold || m.is_key || m.is_lava || m.is_monst_class_A
+                   || m.is_monst_class_B || m.is_monst_class_C || m.is_magic_stone || m.is_monst_class_D
+                   || m.is_monst_class_E || m.is_treasure_class_A || m.is_treasure_class_B || m.is_treasure_class_C
+                   || m.is_weapon_class_A || m.is_weapon_class_B || m.is_weapon_class_C || m.is_potion || m.is_staff
+                   || m.is_ring || m.is_secret_door || m.is_brazier || m.is_barrel || m.is_trap || m.is_shallow_water
+                   || m.is_deep_water || m.is_floor_deco) {
           floor_string += Charmap::FLOOR;
         } else {
           floor_string += Charmap::SPACE;
@@ -103,13 +103,13 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
           walls_string += Charmap::SPACE;
         }
 
-        if (m.is_red_blood || m.is_ascend_dungeon || m.is_descend_dungeon || m.is_descend_sewer || m.is_floor_deco ||
-            m.is_food || m.is_mob_challenge_class_A || m.is_mob_challenge_class_B || m.is_gold || m.is_key ||
-            m.is_monst_class_A || m.is_monst_class_B || m.is_monst_class_C || m.is_enchantstone || m.is_skillstone ||
-            m.is_monst_class_D || m.is_monst_class_E || m.is_treasure_class_A || m.is_treasure_class_B ||
-            m.is_treasure_class_C || m.is_weapon_class_A || m.is_weapon_class_B || m.is_weapon_class_C ||
-            m.is_potion || m.is_staff || m.is_ring || m.is_brazier || m.is_barrel || m.is_trap ||
-            m.is_descend_sewer) {
+        if (m.is_red_blood || m.is_ascend_dungeon || m.is_descend_dungeon || m.is_descend_sewer || m.is_floor_deco
+            || m.is_food || m.is_mob_challenge_class_A || m.is_mob_challenge_class_B || m.is_gold || m.is_key
+            || m.is_monst_class_A || m.is_monst_class_B || m.is_monst_class_C || m.is_magic_stone
+            || m.is_monst_class_D || m.is_monst_class_E || m.is_treasure_class_A || m.is_treasure_class_B
+            || m.is_treasure_class_C || m.is_weapon_class_A || m.is_weapon_class_B || m.is_weapon_class_C
+            || m.is_potion || m.is_staff || m.is_ring || m.is_brazier || m.is_barrel || m.is_trap
+            || m.is_descend_sewer) {
           obj_strings += c;
         } else {
           obj_strings += Charmap::SPACE;
@@ -579,7 +579,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_eater_of_red_blood_at, is_eater_of_red_blood)
 LEVEL_BODY_GET_BOOL_AT(level_is_eater_of_slime_at, is_eater_of_slime)
 LEVEL_BODY_GET_BOOL_AT(level_is_eater_of_treasure_at, is_eater_of_treasure)
 LEVEL_BODY_GET_BOOL_AT(level_is_enchantable_at, is_enchantable)
-LEVEL_BODY_GET_BOOL_AT(level_is_enchantstone_at, is_enchantstone)
+LEVEL_BODY_GET_BOOL_AT(level_is_enchant_stone_at, is_enchant_stone)
 LEVEL_BODY_GET_BOOL_AT(level_is_engulfer_at, is_engulfer)
 LEVEL_BODY_GET_BOOL_AT(level_is_ethereal_at, is_ethereal)
 LEVEL_BODY_GET_BOOL_AT(level_is_ethereal_mob_at, is_ethereal_mob)
@@ -681,7 +681,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_shield_at, is_shield)
 LEVEL_BODY_GET_BOOL_AT(level_is_shovable_and_sticky_at, is_shovable_and_sticky)
 LEVEL_BODY_GET_BOOL_AT(level_is_shovable_at, is_shovable)
 LEVEL_BODY_GET_BOOL_AT(level_is_skill_at, is_skill)
-LEVEL_BODY_GET_BOOL_AT(level_is_skillstone_at, is_skillstone)
+LEVEL_BODY_GET_BOOL_AT(level_is_skill_stone_at, is_skill_stone)
 LEVEL_BODY_GET_BOOL_AT(level_is_slime_at, is_slime)
 LEVEL_BODY_GET_BOOL_AT(level_is_slippery_at, is_slippery)
 LEVEL_BODY_GET_BOOL_AT(level_is_smoke_at, is_smoke)

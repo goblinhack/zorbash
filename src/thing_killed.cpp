@@ -304,9 +304,9 @@ void Thing::killed(Thingp defeater, const char *reason)
       //
       if (! is_being_thrown) {
         if (is_drained) {
-          if (is_enchantstone()) {
+          if (is_enchant_stone()) {
             msg("Your %s is drained and vanishes.", text_long_name().c_str());
-          } else if (is_skillstone()) {
+          } else if (is_skill_stone()) {
             msg("Your %s is drained and vanishes.", text_long_name().c_str());
           } else {
             msg("Your %s is drained.", text_long_name().c_str());
@@ -413,8 +413,8 @@ void Thing::killed(Thingp defeater, const char *reason)
           }
 
           defeater->score_add(this);
-        } else if (defeater->is_monst() && player->level &&
-                   get(player->level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+        } else if (defeater->is_monst() && player->level
+                   && get(player->level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
           //
           // Killed by a monster
           //
@@ -435,8 +435,8 @@ void Thing::killed(Thingp defeater, const char *reason)
           } else {
             msg("%s is destroyed %s.", The_no_dying.c_str(), reason);
           }
-        } else if (is_monst() && player->level &&
-                   get(player->level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+        } else if (is_monst() && player->level
+                   && get(player->level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
           //
           // Killed by something else, like a block of ice; and we can see it.
           //

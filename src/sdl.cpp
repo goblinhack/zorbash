@@ -593,8 +593,8 @@ uint8_t config_debug_set(class Tokens *tokens, void *context)
     g_opt_debug2 = false;
     g_opt_debug3 = false;
     switch (strtol(s, nullptr, 10) ? 1 : 0) {
-      case 0: break;
-      default: g_opt_debug1 = true; break;
+      case 0 : break;
+      default : g_opt_debug1 = true; break;
     }
   }
 

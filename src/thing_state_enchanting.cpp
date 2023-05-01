@@ -6,7 +6,7 @@
 #include "my_monst.hpp"
 #include "my_thing.hpp"
 
-bool Thing::state_using_enchantstone(void)
+bool Thing::state_using_enchant_stone(void)
 {
   TRACE_NO_INDENT();
 
@@ -24,7 +24,7 @@ bool Thing::state_using_enchantstone(void)
   return true;
 }
 
-bool Thing::state_using_skillstone(void)
+bool Thing::state_using_skill_stone(void)
 {
   TRACE_NO_INDENT();
 

@@ -367,15 +367,15 @@ static void game_display_flames_change(int w, int h)
           auto c7 = bg[ x ][ y + 1 ];
           auto c8 = bg[ x + 1 ][ y + 1 ];
 
-          int r = ((int) c0.r + (int) c1.r + (int) c2.r + (int) c3.r + (int) c4.r + (int) c5.r + (int) c6.r +
-                   (int) c7.r + (int) c8.r) /
-                  10;
-          int g = ((int) c0.g + (int) c1.g + (int) c2.g + (int) c3.g + (int) c4.g + (int) c5.g + (int) c6.g +
-                   (int) c7.g + (int) c8.g) /
-                  10;
-          int b = ((int) c0.b + (int) c1.b + (int) c2.b + (int) c3.b + (int) c4.b + (int) c5.b + (int) c6.b +
-                   (int) c7.b + (int) c8.b) /
-                  9;
+          int r = ((int) c0.r + (int) c1.r + (int) c2.r + (int) c3.r + (int) c4.r + (int) c5.r + (int) c6.r
+                   + (int) c7.r + (int) c8.r)
+                / 10;
+          int g = ((int) c0.g + (int) c1.g + (int) c2.g + (int) c3.g + (int) c4.g + (int) c5.g + (int) c6.g
+                   + (int) c7.g + (int) c8.g)
+                / 10;
+          int b = ((int) c0.b + (int) c1.b + (int) c2.b + (int) c3.b + (int) c4.b + (int) c5.b + (int) c6.b
+                   + (int) c7.b + (int) c8.b)
+                / 9;
           int a = 255;
 
           bg2[ x ][ y ] = color(r, g, b, a);
@@ -396,15 +396,15 @@ static void game_display_flames_change(int w, int h)
           auto c7 = bg[ x ][ y + 1 ];
           auto c8 = bg[ x + 1 ][ y + 1 ];
 
-          int r = ((int) c0.r + (int) c1.r + (int) c2.r + (int) c3.r + (int) c4.r + (int) c5.r + (int) c6.r +
-                   (int) c7.r + (int) c8.r) /
-                  10;
-          int g = ((int) c0.g + (int) c1.g + (int) c2.g + (int) c3.g + (int) c4.g + (int) c5.g + (int) c6.g +
-                   (int) c7.g + (int) c8.g) /
-                  10;
-          int b = ((int) c0.b + (int) c1.b + (int) c2.b + (int) c3.b + (int) c4.b + (int) c5.b + (int) c6.b +
-                   (int) c7.b + (int) c8.b) /
-                  10;
+          int r = ((int) c0.r + (int) c1.r + (int) c2.r + (int) c3.r + (int) c4.r + (int) c5.r + (int) c6.r
+                   + (int) c7.r + (int) c8.r)
+                / 10;
+          int g = ((int) c0.g + (int) c1.g + (int) c2.g + (int) c3.g + (int) c4.g + (int) c5.g + (int) c6.g
+                   + (int) c7.g + (int) c8.g)
+                / 10;
+          int b = ((int) c0.b + (int) c1.b + (int) c2.b + (int) c3.b + (int) c4.b + (int) c5.b + (int) c6.b
+                   + (int) c7.b + (int) c8.b)
+                / 10;
           int a = 255;
 
           bg2[ x ][ y ] = color(r, g, b, a);

@@ -1123,16 +1123,16 @@ void wid_actionbar_pixelart_init(void)
   }
 
   bool add_descend {};
-  if (level->is_descend_dungeon(player->curr_at.x, player->curr_at.y) ||
-      level->is_descend_sewer(player->curr_at.x, player->curr_at.y)) {
+  if (level->is_descend_dungeon(player->curr_at.x, player->curr_at.y)
+      || level->is_descend_sewer(player->curr_at.x, player->curr_at.y)) {
     options++;
     add_descend = true;
   }
 
   bool add_ascend {};
   if (level->dungeon_walk_order_level_no > 1) {
-    if (level->is_ascend_dungeon(player->curr_at.x, player->curr_at.y) ||
-        level->is_ascend_sewer(player->curr_at.x, player->curr_at.y)) {
+    if (level->is_ascend_dungeon(player->curr_at.x, player->curr_at.y)
+        || level->is_ascend_sewer(player->curr_at.x, player->curr_at.y)) {
       options++;
       add_ascend = true;
     }
@@ -1404,16 +1404,16 @@ void wid_actionbar_ascii_init(void)
   }
 
   bool add_descend {};
-  if (level->is_descend_dungeon(player->curr_at.x, player->curr_at.y) ||
-      level->is_descend_sewer(player->curr_at.x, player->curr_at.y)) {
+  if (level->is_descend_dungeon(player->curr_at.x, player->curr_at.y)
+      || level->is_descend_sewer(player->curr_at.x, player->curr_at.y)) {
     options++;
     add_descend = true;
   }
 
   bool add_ascend {};
   if (level->dungeon_walk_order_level_no > 1) {
-    if (level->is_ascend_dungeon(player->curr_at.x, player->curr_at.y) ||
-        level->is_ascend_sewer(player->curr_at.x, player->curr_at.y)) {
+    if (level->is_ascend_dungeon(player->curr_at.x, player->curr_at.y)
+        || level->is_ascend_sewer(player->curr_at.x, player->curr_at.y)) {
       options++;
       add_ascend = true;
     }

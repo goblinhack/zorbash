@@ -116,8 +116,8 @@ void Thing::destroy(void)
   }
 
   {
-    if (std::find(level->wid_leftbar_things.begin(), level->wid_leftbar_things.end(), id) !=
-        level->wid_leftbar_things.end()) {
+    if (std::find(level->wid_leftbar_things.begin(), level->wid_leftbar_things.end(), id)
+        != level->wid_leftbar_things.end()) {
       dbg2("Remove from wid leftbar");
       level->wid_leftbar_things.remove(id);
     }
