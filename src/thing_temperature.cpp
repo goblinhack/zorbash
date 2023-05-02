@@ -86,6 +86,13 @@ void Thing::temperature_tick(void)
     }
 
     //
+    // Should "dead" fire skeletons cause fire damage to those standing on the same tile ?
+    //
+    if (t->is_dead) {
+      continue;
+    }
+
+    //
     // If the player is standing in the same tile as a torch, don't burn them.
     // Same goes for things like treasure chests on the same tile as a torch.
     //

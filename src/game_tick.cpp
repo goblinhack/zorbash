@@ -18,11 +18,9 @@ void Game::tick_begin(const std::string &why)
     auto player = level->player;
 
     if (player) {
-      DBG("Seed (%s) tick %d asked (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
-          player->to_string().c_str());
+      DBG("Seed (%s) tick requested (%s): %s", game->seed_name.c_str(), why.c_str(), player->to_string().c_str());
     } else {
-      DBG("Seed (%s) tick %d asked (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
-          level->to_string().c_str());
+      DBG("Seed (%s) tick requested (%s): %s", game->seed_name.c_str(), why.c_str(), level->to_string().c_str());
     }
   }
 }

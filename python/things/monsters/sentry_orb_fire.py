@@ -54,6 +54,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_biome_lava(self, True)
     my.is_crushable(self, True)
     my.is_described_when_hovering_over(self, True)
+    my.is_fire_elemental(self, True)
     my.is_hittable(self, True)
     my.is_immune_to_fire(self, True)
     my.is_interesting(self, True)

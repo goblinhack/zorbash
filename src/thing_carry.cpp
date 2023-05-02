@@ -356,17 +356,25 @@ bool Thing::carry(Thingp item, bool can_equip)
           game->tick_begin("Carried something");
         }
       } else if (is_monst() && is_visible_to_player) {
-        if (level->player && (level->tick_created < game->tick_current)) {
-          if (get(level->player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
-            if (! already_carried) {
-              msg("%s collects %s.", text_The().c_str(), item->text_the().c_str());
+        if (equipped) {
+          if (level->player && (level->tick_created < game->tick_current)) {
+            if (get(level->player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+              if (! already_carried) {
+                msg("%s collects %s.", text_The().c_str(), item->text_the().c_str());
+              }
+            } else if (item->is_weapon()) {
+              msg("You hear the noise of weapons being drawn.");
+            } else if (item->is_food()) {
+              msg("You hear a strange foody slurping sound.");
+            } else if (item->is_magical()) {
+              msg("You hear a magical sparkle.");
             }
-          } else if (item->is_weapon()) {
-            msg("You hear the noise of weapons being drawn.");
-          } else if (item->is_food()) {
-            msg("You hear a strange foody slurping sound.");
-          } else if (item->is_magical()) {
-            msg("You hear a magical sparkle.");
+          }
+        } else {
+          if (level->player && (level->tick_created < game->tick_current)) {
+            if (get(level->player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+              msg("%s drops %s.", text_The().c_str(), item->text_the().c_str());
+            }
           }
         }
       }
