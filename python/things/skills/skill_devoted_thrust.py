@@ -44,7 +44,7 @@ def tp_init(name, text_long_name):
     my.text_description_long3(self, "Each enchant will add 10 percent to the damage, but will take the additional bonus off your stamina.")
     my.text_description_long(self, "Uses half of your stamina points up in one mighty strike.")
     my.text_description_short(self, "Devoted thrust skill.")
-    my.text_skill(self, "Redirect health to damage, costing stamina")
+    my.text_skill(self, "Devoted Thrust. Redirect half of your stamina to damage dealt.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker

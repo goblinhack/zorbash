@@ -41,9 +41,9 @@ def tp_init(name, text_long_name):
     my.stat_str_mod(self, 1)
     my.text_description_enchant(self, "+1 DMG")
     my.text_description_long2(self, "Each enchant will add one to the damage.")
-    my.text_description_long(self, "With this skill you gain a secondary attack. The additional attack will be 50 percent of the initial attack")
-    my.text_description_short(self, "Secondary attack skill.")
-    my.text_skill(self, "Secondary attack")
+    my.text_description_long(self, "With this skill you gain a secondary attack. The additional attack will be half of the initial attack")
+    my.text_description_short(self, "Double strike skill.")
+    my.text_skill(self, "Double strike. Secondary attack at half of the initial attack.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker

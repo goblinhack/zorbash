@@ -298,13 +298,7 @@ void Game::wid_choose_skill(void)
         wid_set_style(skill_text, UI_WID_STYLE_DARK);
       }
 
-      if (slot < 9) {
-        wid_set_text(skill_text,
-                     " " + std::to_string(slot + 1) + ". " + tpp->text_long_name() + ", " + tpp->text_skill());
-      } else {
-        wid_set_text(skill_text, tpp->text_long_name() + ", " + tpp->text_skill());
-      }
-
+      wid_set_text(skill_text, " " + tpp->text_skill());
       wid_set_text_lhs(skill_text, true);
       wid_update(skill_text);
     }
