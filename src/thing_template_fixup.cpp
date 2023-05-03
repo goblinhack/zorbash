@@ -335,6 +335,30 @@ void tp_fixup(void)
     }
 
     //
+    // Items normally don't set stats, so set them to 0
+    //
+    if (tp->is_item()) {
+      if (! tp->stat_att()) {
+        tp->stat_att_set(10);
+      }
+      if (! tp->stat_str()) {
+        tp->stat_str_set(10);
+      }
+      if (! tp->stat_def()) {
+        tp->stat_def_set(10);
+      }
+      if (! tp->stat_con()) {
+        tp->stat_con_set(10);
+      }
+      if (! tp->stat_dex()) {
+        tp->stat_dex_set(10);
+      }
+      if (! tp->stat_luck()) {
+        tp->stat_luck_set(10);
+      }
+    }
+
+    //
     // If only a single attack type then make sure it is 1000%
     //
     int num_attack_types = 0;
