@@ -127,6 +127,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_thrown_do(self, "me.on_thrown()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.range_max(self, 7)
+    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 radius")
     my.text_description_long(self, "This staff blasts a charge of lightning at its unwitting target. Be careful when standing in the same pool as your target... Also do not use in the bath.")

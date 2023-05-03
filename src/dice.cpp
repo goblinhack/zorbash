@@ -3,12 +3,14 @@
 //
 
 #include "my_dice.hpp"
+#include "my_main.hpp"
 #include "my_string.hpp"
+#include "my_thing.hpp"
 
 //
 // True if the a >= b
 //
-bool d20roll(int stat_a, int stat_b, bool &fumble, bool &critical)
+bool d20_ge(int stat_a, int stat_b, bool &fumble, bool &critical)
 {
   auto roll_a = pcg_random_range_inclusive(1, 20);
 
@@ -35,25 +37,105 @@ bool d20roll(int stat_a, int stat_b, bool &fumble, bool &critical)
 //
 // Roll for stat modifier "a" to see if it beats "b"
 //
-bool d20roll(int stat_a, int stat_b)
+bool d20_ge(int stat_a, int stat_b)
 {
   auto roll_a = pcg_random_range_inclusive(1, 20);
 
   if (roll_a == 20) {
-    // TOPCON("ROLL: A critical hit");
+    DBG("d20: success");
     return true;
   }
 
   if (roll_a == 1) {
-    // TOPCON("ROLL: A fumble");
+    DBG("d20: fumble");
     return false;
   }
 
   auto roll_b = pcg_random_range_inclusive(1, 20);
 
+  DBG("d20: %d(%d+%d) >= %d(%d+%d)", roll_a + stat_to_bonus(stat_a), roll_a, stat_to_bonus(stat_a),
+      roll_b + stat_to_bonus(stat_b), roll_b, stat_to_bonus(stat_b));
+
   roll_a += stat_to_bonus(stat_a);
   roll_b += stat_to_bonus(stat_b);
-  // TOPCON("ROLL: A %d(+%d) B %d(%d)", roll_a, stat_a, roll_b, stat_b);
+
+  return roll_a >= roll_b;
+}
+
+bool Thing::d20_ge(int stat_a, int stat_b)
+{
+  auto roll_a = pcg_random_range_inclusive(1, 20);
+
+  if (roll_a == 20) {
+    dbg("d20: success");
+    return true;
+  }
+
+  if (roll_a == 1) {
+    dbg("d20: fumble");
+    return false;
+  }
+
+  auto roll_b = pcg_random_range_inclusive(1, 20);
+
+  dbg("d20: %d(%d+%d) >= %d(%d+%d)", roll_a + stat_to_bonus(stat_a), roll_a, stat_to_bonus(stat_a),
+      roll_b + stat_to_bonus(stat_b), roll_b, stat_to_bonus(stat_b));
+
+  roll_a += stat_to_bonus(stat_a);
+  roll_b += stat_to_bonus(stat_b);
+
+  return roll_a >= roll_b;
+}
+
+//
+// Roll for stat modifier "a" to see if it beats "b"
+//
+bool d20_le(int stat_a, int stat_b)
+{
+  auto roll_a = pcg_random_range_inclusive(1, 20);
+
+  if (roll_a == 20) {
+    DBG("d20: success");
+    return true;
+  }
+
+  if (roll_a == 1) {
+    DBG("d20: fumble");
+    return false;
+  }
+
+  auto roll_b = pcg_random_range_inclusive(1, 20);
+
+  DBG("d20: %d(%d+%d) <= %d(%d+%d)", roll_a + stat_to_bonus(stat_a), roll_a, stat_to_bonus(stat_a),
+      roll_b + stat_to_bonus(stat_b), roll_b, stat_to_bonus(stat_b));
+
+  roll_a += stat_to_bonus(stat_a);
+  roll_b += stat_to_bonus(stat_b);
+
+  return roll_a >= roll_b;
+}
+
+bool Thing::d20_le(int stat_a, int stat_b)
+{
+  auto roll_a = pcg_random_range_inclusive(1, 20);
+
+  if (roll_a == 20) {
+    dbg("d20: success");
+    return true;
+  }
+
+  if (roll_a == 1) {
+    dbg("d20: fumble");
+    return false;
+  }
+
+  auto roll_b = pcg_random_range_inclusive(1, 20);
+
+  dbg("d20: %d(%d+%d) <= %d(%d+%d)", roll_a + stat_to_bonus(stat_a), roll_a, stat_to_bonus(stat_a),
+      roll_b + stat_to_bonus(stat_b), roll_b, stat_to_bonus(stat_b));
+
+  roll_a += stat_to_bonus(stat_a);
+  roll_b += stat_to_bonus(stat_b);
 
   return roll_a >= roll_b;
 }
@@ -61,19 +143,42 @@ bool d20roll(int stat_a, int stat_b)
 //
 // Succeed if we can roll under
 //
-bool d20roll_under(int stat)
+bool Thing::d20_le(int stat)
 {
-  int roll_a = pcg_random_range_inclusive(1, 20);
+  int roll = pcg_random_range_inclusive(1, 20);
 
-  if (roll_a == 20) {
+  if (roll == 20) {
+    dbg("d20: success");
     return true;
   }
 
-  if (roll_a == 1) {
+  if (roll == 1) {
+    dbg("d20: fumble");
     return false;
   }
 
-  return roll_a <= stat + stat_to_bonus(stat);
+  dbg("d20: %d <= %d(%d+%d)", roll, stat + stat_to_bonus(stat), stat, stat_to_bonus(stat));
+
+  return roll <= stat + stat_to_bonus(stat);
+}
+
+bool d20_le(int stat)
+{
+  int roll = pcg_random_range_inclusive(1, 20);
+
+  if (roll == 20) {
+    DBG("d20: success");
+    return true;
+  }
+
+  if (roll == 1) {
+    DBG("d20: success");
+    return false;
+  }
+
+  DBG("d20: %d <= %d(%d+%d)", roll, stat + stat_to_bonus(stat), stat, stat_to_bonus(stat));
+
+  return roll <= stat + stat_to_bonus(stat);
 }
 
 Dice::Dice(void) = default;

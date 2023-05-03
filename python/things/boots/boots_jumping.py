@@ -57,6 +57,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_VERY_RARE)
     my.stamina_drain_on_using(self, 10)
     my.stat_dex_mod(self, 1)
+    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 tile")
     my.text_description_long(self, "Boots of jumping. With these boots you can bound with impunity across chasms. Well, maybe.")

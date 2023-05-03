@@ -65,6 +65,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_RARE)
     my.shove_strength_mod(self, 1)
+    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "-10 decibels")
     my.text_description_long(self, "No longer will you get pushed around with this slight boost to your shoving ability! Works in both offensive and defensive capabilities. Not that you would ever try to shove something into a chasm... right?")

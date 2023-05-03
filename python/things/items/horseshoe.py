@@ -46,6 +46,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_thrown_do(self, "me.on_thrown()")
     my.rarity(self, my.RARITY_COMMON)
     my.stat_luck_mod(self, 2)
+    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 LUCK")
     my.text_description_long(self, "Lucky for you, not so much for the horse.")

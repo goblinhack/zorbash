@@ -305,7 +305,7 @@ bool Thing::fall_to_next_level(void)
       continue;
     }
 
-    if (d20roll_under(stat_luck_total())) {
+    if (d20_le(stat_luck_total())) {
       if (l->is_lava(x, y) || l->is_fire(x, y)) {
         dbg("No, %d,%d is an unlucky tile", x, y);
         continue;

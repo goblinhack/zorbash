@@ -88,6 +88,7 @@ def init_weapon(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_UNCOMMON)
     my.stamina_drain_on_attacking(self, 2)
     my.stat_att_mod(self, 1)  # means +1 per enchant
+    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 DMG, +1 ATT")
     my.text_description_long(self, "A gleaming wooden handled axe. It's a bit short and extra hungry for vengeance. Against what, who can say. Take care, as your mighty swing can hit all monsters adjacent to you.")

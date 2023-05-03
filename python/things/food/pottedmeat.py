@@ -50,6 +50,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "10+1d45")
     my.on_thrown_do(self, "me.on_thrown()")
     my.rarity(self, my.RARITY_COMMON)
+    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "What kind, who knows. Just meat. An unforgettable experience.")
     my.text_description_short(self, "Potted meat.")

@@ -164,6 +164,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_targetted_radially_do(self, "me.on_targetted_radially()")
     my.on_thrown_do(self, "me.on_thrown()")
     my.range_max(self, 7)
+    my.stat_luck(self, 10)
     my.temperature(self, 30)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 radius")

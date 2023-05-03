@@ -77,7 +77,7 @@ bool Thing::thing_check_for_heat_dmg(void)
       // If in lava, no choice but to burn
       //
       if (! level->is_lava(at.x, at.y)) {
-        if (d20roll_under(stat_luck_total() - 5)) {
+        if (d20_le(stat_luck_total() - 5)) {
           if (is_player()) {
             msg("%%fg=green$Luckily, the flames go out!%%fg=reset$");
           }
@@ -153,7 +153,7 @@ bool Thing::thing_check_for_heat_dmg(void)
     }
 
     if (hit) {
-      if (d20roll_under(stat_luck_total() - 10)) {
+      if (d20_le(stat_luck_total() - 5)) {
         if (is_player()) {
           msg("%%fg=red$The flames wrap around you but you luckily avoid them!%%fg=reset$");
         }

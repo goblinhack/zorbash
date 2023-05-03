@@ -141,6 +141,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_use_do(self, "me.on_use()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.range_max(self, 7)
+    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+5 CHARGE, +1 DMG")
     my.text_description_long(self, "Staff of department of energy. Discharges a powerful ray of energy upon an unwitting recipient...")

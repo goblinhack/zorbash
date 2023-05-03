@@ -927,7 +927,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       //
       // Different weapons have different drain on stamina.
       //
-      if (d20roll_under(stat_con_total())) {
+      if (d20_le(stat_con_total())) {
         //
         // Only half stamina damage if you pass con roll
         //
@@ -1416,7 +1416,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       //
       // This can be the player is on fire and that causes carried items to burn
       //
-      if (d20roll_under(real_hitter->stat_luck_total())) {
+      if (d20_le(real_hitter->stat_luck_total())) {
         dbg("Avoids damage by luck");
         return false;
       }

@@ -82,6 +82,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_RARE)
     my.stamina_drain_on_attacking(self, 3)
     my.stat_att_mod(self, 1)  # means +1 per enchant
+    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 DMG, +1 ATT")
     my.text_description_long(self, "A truly dreadful weapon of last resort. The masterwork double bladed shovel. Ideal for allotment use and casual bludgeoning.")

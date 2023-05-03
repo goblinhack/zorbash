@@ -33,6 +33,7 @@ def tp_init(name, text_long_name):
     my.is_treasure_type(self, True)
     my.normal_placement_rules(self, True)
     my.rarity(self, my.RARITY_UNCOMMON)
+    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "Blood red ruby. A bit too red if you ask me. Actually it looks wet and red. Anyway, best pick it up and clean it off.")
     my.text_description_short(self, "Blood-red ruby, but who's blood?")

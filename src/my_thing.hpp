@@ -495,6 +495,9 @@ public:
   bool collision_obstacle(Thingp);
   bool consume(Thingp it);
   bool coords_get(point &blit_tl, point &blit_br, point &pre_blit_tl, point &pre_blit_br, Tilep &tile, bool refl);
+  bool d20_ge(int stat_a, int stat_b);
+  bool d20_le(int stat_a, int stat_b);
+  bool d20_le(int stat_b);
   bool debuff_add_if_not_found(Tpp what);
   bool debuff_add(Thingp it);
   bool debuff_add(Tpp what);

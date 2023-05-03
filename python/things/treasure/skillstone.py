@@ -76,6 +76,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_fall_do(self, "me.on_fall()")
     my.on_hit_and_now_dead_do(self, "me.on_hit_and_now_dead()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
+    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "Use this magical stone to learn some new skills into your brain matter thing.")
     my.text_description_short(self, "A glowing skill stone.")

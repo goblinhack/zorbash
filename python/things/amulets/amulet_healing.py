@@ -69,6 +69,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_tick_do(self, "me.on_tick()")
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_VERY_RARE)
+    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "Amulet of healing. Watch with joy as your health recovers automatically. Watch out though, for each health unit restored, you lose one stamina.")
     my.text_description_short(self, "Amulet of healing.")

@@ -38,6 +38,7 @@ def key_init(name, text_long_name):
     my.light_color(self, "red")
     my.light_dist(self, 1)
     my.normal_placement_rules(self, True)
+    my.stat_luck(self, 10)
     my.text_a_or_an(self, "an")
     my.text_description_long(self, "An evil looking set of keys. Probably still works just fine though. Translates into five keys when carried.")
     my.text_description_short(self, "An evil looking key.")

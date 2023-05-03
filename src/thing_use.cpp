@@ -233,7 +233,7 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
     //
     // Stamina drain on use
     //
-    if (d20roll_under(stat_con_total())) {
+    if (d20_le(stat_con_total())) {
       //
       // Only half stamina damage if you pass con roll
       //

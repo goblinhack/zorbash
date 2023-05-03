@@ -48,6 +48,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "10+1d15")
     my.on_thrown_do(self, "me.on_thrown()")
     my.rarity(self, my.RARITY_COMMON)
+    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "Grown locally and sustainably. In soil drenched with the blood of adventurers.")
     my.text_description_short(self, "Organic battle turnip.")

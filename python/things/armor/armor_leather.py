@@ -52,6 +52,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_enchant_do(self, "me.on_enchant()")
     my.rarity(self, my.RARITY_COMMON)
     my.stat_def_mod(self, 1)
+    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 DEF")
     my.text_description_long(self, "Leather armor. Gives slightly more protection than your own skin.")

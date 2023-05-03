@@ -174,7 +174,7 @@ bool Thing::close_door(Thingp door)
     //
     // If we're lucky, give the key back.
     //
-    if (d20roll_under(stat_luck_total() - 5)) {
+    if (d20_le(stat_luck_total() - 5)) {
       door->is_key_in_lock = false;
       keys_incr(1);
 

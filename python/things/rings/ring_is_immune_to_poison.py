@@ -55,6 +55,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_equip_do(self, "me.on_equip()")
     my.on_unequip_do(self, "me.on_unequip()")
     my.stat_con_mod(self, 1)
+    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 CON")
     my.text_description_long(self, "Eat drink and be merry while wearing this ring, for poison can do you no harm. Please wear responsibly...")

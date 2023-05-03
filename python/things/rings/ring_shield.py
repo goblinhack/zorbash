@@ -57,6 +57,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_unequip_do(self, "me.on_unequip()")
     my.stat_con_mod(self, 1)
     my.stat_def_mod(self, 1)
+    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 DEF")
     my.text_description_long(self, "This magical ring is designed to create a protective shield from missiles or missile like objects. It will not help if someone throws a wardrobe at you. Damage will be reduced by 50 percent for such attacks whilst this ring is worn. It also provides modest defence from melee attacks.")

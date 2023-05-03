@@ -598,7 +598,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         }
       } else {
         if (is_player()) {
-          if (d20roll_under(stat_con_total())) {
+          if (d20_le(stat_con_total())) {
             msg("You are so tired but dig deep and attack!");
           } else {
             msg("You are too tired to attack.");

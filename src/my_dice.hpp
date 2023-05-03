@@ -36,9 +36,11 @@ public:
   int operator()() const;
 };
 
-bool d20roll(int stat_a, int stat_b);
-bool d20roll(int stat_a, int stat_b, bool &fumble, bool &critical);
-bool d20roll_under(int stat);
+bool d20_ge(int stat_a, int stat_b);
+bool d20_ge(int stat_a, int stat_b, bool &fumble, bool &critical);
+bool d20_le(int stat_a, int stat_b);
+bool d20_le(int stat_a, int stat_b, bool &fumble, bool &critical);
+bool d20_le(int stat);
 
 int stat_to_bonus(int stat);
 

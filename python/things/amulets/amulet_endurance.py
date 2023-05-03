@@ -64,6 +64,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_owner_receive_dmg_draining_do(self, "me.on_owner_receive_dmg_draining()")
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_RARE)
+    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "-10 stamina DMG")
     my.text_description_long(self, "Amulet of endurance. Leap for joy whilst wearing this amulet for you will only use half as much stamina as normal. This also applies to magical items that may attempt to drain stamina, like boots of jumping or skills such as Devoted Thrust. Each enchant will reduce a further 10 points of stamina damage.")
