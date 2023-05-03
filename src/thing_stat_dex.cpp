@@ -29,7 +29,7 @@ int Thing::stat_dex_total(void)
   {
     auto iter = equip_get(e);
     if (iter) {
-      stat += iter->stat_dex_total();
+      stat += stat_to_bonus(iter->stat_dex_total());
       if (stat != prev) {
         prev = stat;
         dbg3("Dex: with (%s %s): %d", iter->to_short_string().c_str(),
@@ -56,7 +56,7 @@ int Thing::stat_dex_total(void)
         if (iter->is_auto_equipped()) {
           continue;
         }
-        stat += iter->stat_dex_total();
+        stat += stat_to_bonus(iter->stat_dex_total());
         if (stat != prev) {
           prev = stat;
           dbg3("Dex: with (%s %s): %d", iter->to_short_string().c_str(),
@@ -69,7 +69,7 @@ int Thing::stat_dex_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += iter->stat_dex_total();
+        stat += stat_to_bonus(iter->stat_dex_total());
         if (stat != prev) {
           prev = stat;
           dbg3("Dex: with (%s %s): %d", iter->to_short_string().c_str(),
@@ -82,7 +82,7 @@ int Thing::stat_dex_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += iter->stat_dex_total();
+        stat += stat_to_bonus(iter->stat_dex_total());
         if (stat != prev) {
           prev = stat;
           dbg3("Dex: with (%s %s): %d", iter->to_short_string().c_str(),
@@ -95,7 +95,7 @@ int Thing::stat_dex_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter && iter->is_activated) {
-        stat += iter->stat_dex_total();
+        stat += stat_to_bonus(iter->stat_dex_total());
         if (stat != prev) {
           prev = stat;
           dbg3("Dex: with (%s %s): %d", iter->to_short_string().c_str(),
