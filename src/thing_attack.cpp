@@ -673,9 +673,11 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     // Defence roll is        stat_def_total - penalties
     // Damage       is dam  + stat_att_bonus_total
     //
-    auto att_bonus = stat_to_bonus(stat_att_total());
+    int attacker_att_bonus;
     if (owner) {
-      att_bonus = stat_to_bonus(owner->stat_att_bonus());
+      attacker_att_bonus = stat_to_bonus(owner->stat_att_total());
+    } else {
+      attacker_att_bonus = stat_to_bonus(stat_att_total());
     }
 
     //
@@ -683,8 +685,8 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     // in bad siturations of achieving some damage.
     //
     if (attack_options->crit) {
-      if (att_bonus < 0) {
-        att_bonus = 1;
+      if (attacker_att_bonus < 0) {
+        attacker_att_bonus = 1;
       }
     }
 
@@ -698,8 +700,8 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
       }
     }
 
-    auto stat_def  = victim->stat_def_total() - victim->stat_def_penalties_total();
-    auto def_bonus = 0;
+    auto victim_def       = victim->stat_def_total() - victim->stat_def_penalties_total();
+    auto victim_def_bonus = 0;
 
     //
     // This can happen if the player is hiding and the monster stumbles into them.
@@ -708,7 +710,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
       if (victim->is_player()) {
         if (! has_seen_player_msg_shown) {
           //
-          // Bonus as the monster is surprised.
+          // A monster surprises the player. As the monster didn't see us, do we penalise it?
           //
           has_seen_player_msg_shown = true;
           if (is_msg_allowed_is_surprised()) {
@@ -716,7 +718,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
           }
 
           if (is_able_to_be_surprised()) {
-            def_bonus += 2;
+            victim_def_bonus += 2;
           }
         }
       }
@@ -724,7 +726,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
       if (victim->is_monst()) {
         if (! victim->has_seen_player_msg_shown) {
           //
-          // Bonus as the monster is surprised.
+          // The player surprises a monster and gets an attack bonus.
           //
           victim->has_seen_player_msg_shown = true;
           if (is_msg_allowed_is_surprised()) {
@@ -732,7 +734,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
           }
 
           if (victim->is_able_to_be_surprised()) {
-            att_bonus += 2;
+            attacker_att_bonus += 2;
           }
         }
       }
@@ -1227,7 +1229,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         if (d1000() < dmg_chance_d1000_nat_att(attack_options->attack_num)) {
           int dmg_nat_att_val = dmg_nat_att(victim);
           if (dmg_nat_att_val > 0) {
-            attack_options->damage                         = dmg_nat_att_val + att_bonus;
+            attack_options->damage                         = dmg_nat_att_val + attacker_att_bonus;
             attack_options->dmg_set                        = true;
             attack_options->attack[ THING_ATTACK_NATURAL ] = true;
             dbg("Set natural damage %d", attack_options->damage);
@@ -1240,7 +1242,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
       //
       int dmg_nat_att_val = dmg_nat_att(victim);
       if (dmg_nat_att_val > 0) {
-        attack_options->damage                         = dmg_nat_att_val + att_bonus;
+        attack_options->damage                         = dmg_nat_att_val + attacker_att_bonus;
         attack_options->dmg_set                        = true;
         attack_options->attack[ THING_ATTACK_NATURAL ] = true;
         dbg("Set natural damage %d", attack_options->damage);
@@ -1256,8 +1258,8 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     if (! attack_options->dmg_set) {
       if (d1000() < dmg_chance_d1000_melee(attack_options->attack_num)) {
         auto damage            = dmg_melee(victim);
-        attack_options->damage = damage + att_bonus;
-        dbg("Set melee damage %d att_bonus %d", damage, att_bonus);
+        attack_options->damage = damage + attacker_att_bonus;
+        dbg("Set melee damage %d attacker_att_bonus %d", damage, attacker_att_bonus);
         if (attack_options->damage > 0) {
           attack_options->dmg_set = true;
         }
@@ -1268,8 +1270,8 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
       if (owner) {
         if (d1000() < owner->dmg_chance_d1000_melee(attack_options->attack_num)) {
           auto damage            = dmg_melee(victim);
-          attack_options->damage = damage + att_bonus;
-          dbg("Set owner melee damage %d att_bonus %d", damage, att_bonus);
+          attack_options->damage = damage + attacker_att_bonus;
+          dbg("Set owner melee damage %d attacker_att_bonus %d", damage, attacker_att_bonus);
           if (attack_options->damage > 0) {
             attack_options->dmg_set = true;
           }
@@ -1403,7 +1405,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         }
       }
 
-      dbg("The attack failed, no damage (att modifier %d, AC %d) on %s", att_bonus, stat_def,
+      dbg("The attack failed, no damage (att modifier %d, AC %d) on %s", attacker_att_bonus, victim_def,
           victim->to_short_string().c_str());
 
       //
@@ -1487,28 +1489,28 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         // Defence is        stat_def_total - penalties
         //
         bool hit               = false;
-        int  to_hit            = stat_def + def_bonus;
-        auto att_roll_modifier = att_bonus - att_penalty;
+        int  to_hit            = victim_def + victim_def_bonus;
+        auto att_roll_modifier = attacker_att_bonus - att_penalty;
 
         if (i_rolled == 20) {
           attack_options->crit = true;
           hit                  = true;
           dbg("Attack on %s: ATT %s DEF %d(%s), to-hit %d, rolled %d -> crit", victim->to_short_string().c_str(),
-              bonus_to_string(att_roll_modifier).c_str(), stat_def, bonus_to_string(def_bonus).c_str(), to_hit,
-              i_rolled);
+              bonus_to_string(att_roll_modifier).c_str(), victim_def, bonus_to_string(victim_def_bonus).c_str(),
+              to_hit, i_rolled);
         } else if (i_rolled == 1) {
           hit    = false;
           fumble = true;
           dbg("Attack on %s: ATT %s DEF %d(%s), to-hit %d, rolled %d -> fumble", victim->to_short_string().c_str(),
-              bonus_to_string(att_roll_modifier).c_str(), stat_def, bonus_to_string(def_bonus).c_str(), to_hit,
-              i_rolled);
+              bonus_to_string(att_roll_modifier).c_str(), victim_def, bonus_to_string(victim_def_bonus).c_str(),
+              to_hit, i_rolled);
         } else {
           i_rolled += att_roll_modifier;
           hit = i_rolled >= to_hit;
           dbg("Attack on %s: ATT %s(%s bonus,%s penalty) DEF %d(%s), to-hit %d, rolled %d -> %s",
               victim->to_short_string().c_str(), bonus_to_string(att_roll_modifier).c_str(),
-              bonus_to_string(att_bonus).c_str(), bonus_to_string(att_penalty).c_str(), stat_def,
-              bonus_to_string(def_bonus).c_str(), to_hit, i_rolled, hit ? "hit" : "miss");
+              bonus_to_string(attacker_att_bonus).c_str(), bonus_to_string(att_penalty).c_str(), victim_def,
+              bonus_to_string(victim_def_bonus).c_str(), to_hit, i_rolled, hit ? "hit" : "miss");
         }
 
         //
@@ -1543,7 +1545,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
               BOTCON("%s misses the robot.", text_The().c_str());
             }
           } else {
-            dbg("The attack missed (att modifier %d, AC %d) on %s", att_roll_modifier, stat_def,
+            dbg("The attack missed (att modifier %d, AC %d) on %s", att_roll_modifier, victim_def,
                 victim->to_short_string().c_str());
           }
 
