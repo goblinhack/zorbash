@@ -18,10 +18,10 @@ int Thing::shove_strength_total(void)
   }
   TRACE_AND_INDENT();
 
-  stat += shove_strength_mod();
+  stat += shove_bonus();
   if (stat != prev) {
     prev = stat;
-    dbg3("Shove strength: with mod (%s): %d", modifier_to_string(shove_strength_mod()).c_str(), stat);
+    dbg3("Shove strength: with mod (%s): %d", bonus_to_string(shove_bonus()).c_str(), stat);
   }
 
   FOR_ALL_EQUIP(e)
@@ -32,7 +32,7 @@ int Thing::shove_strength_total(void)
       if (stat != prev) {
         prev = stat;
         dbg3("Shove strength: with (%s %s): %d", iter->to_short_string().c_str(),
-             modifier_to_string(iter->shove_strength_mod()).c_str(), stat);
+             bonus_to_string(iter->shove_bonus()).c_str(), stat);
       }
     }
   }
@@ -59,7 +59,7 @@ int Thing::shove_strength_total(void)
         if (stat != prev) {
           prev = stat;
           dbg3("Shove strength: with (%s %s): %d", iter->to_short_string().c_str(),
-               modifier_to_string(iter->shove_strength_mod()).c_str(), stat);
+               bonus_to_string(iter->shove_bonus()).c_str(), stat);
         }
       }
     }
@@ -72,7 +72,7 @@ int Thing::shove_strength_total(void)
         if (stat != prev) {
           prev = stat;
           dbg3("Shove strength: with (%s %s): %d", iter->to_short_string().c_str(),
-               modifier_to_string(iter->shove_strength_mod()).c_str(), stat);
+               bonus_to_string(iter->shove_bonus()).c_str(), stat);
         }
       }
     }
@@ -85,7 +85,7 @@ int Thing::shove_strength_total(void)
         if (stat != prev) {
           prev = stat;
           dbg3("Shove strength: with (%s %s): %d", iter->to_short_string().c_str(),
-               modifier_to_string(iter->shove_strength_mod()).c_str(), stat);
+               bonus_to_string(iter->shove_bonus()).c_str(), stat);
         }
       }
     }
@@ -98,7 +98,7 @@ int Thing::shove_strength_total(void)
         if (stat != prev) {
           prev = stat;
           dbg3("Shove strength: with (%s %s): %d", iter->to_short_string().c_str(),
-               modifier_to_string(iter->shove_strength_mod()).c_str(), stat);
+               bonus_to_string(iter->shove_bonus()).c_str(), stat);
         }
       }
     }
@@ -114,68 +114,68 @@ int Thing::shove_strength(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// shove_strength_mod
+// shove_bonus
 ////////////////////////////////////////////////////////////////////////////
-int Thing::shove_strength_mod(void)
+int Thing::shove_bonus(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop()->shove_strength_mod);
+    return (infop()->shove_bonus);
   }
   return 0;
 }
 
-int Thing::shove_strength_mod_set(int v)
+int Thing::shove_bonus_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->shove_strength_mod = v);
+  auto n = (infop()->shove_bonus = v);
   return n;
 }
 
-int Thing::shove_strength_mod_decr(int v)
+int Thing::shove_bonus_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->shove_strength_mod -= v);
+  auto n = (infop()->shove_bonus -= v);
   return n;
 }
 
-int Thing::shove_strength_mod_incr(int v)
+int Thing::shove_bonus_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->shove_strength_mod += v);
+  auto n = (infop()->shove_bonus += v);
   return n;
 }
 
-int Thing::shove_strength_mod_decr(void)
+int Thing::shove_bonus_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->shove_strength_mod--);
+  auto n = (infop()->shove_bonus--);
   return n;
 }
 
-int Thing::shove_strength_mod_incr(void)
+int Thing::shove_bonus_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->shove_strength_mod++);
+  auto n = (infop()->shove_bonus++);
   return n;
 }

@@ -70,7 +70,6 @@ def tp_init(name, text_long_name, text_short_name, tiles=[]):
     my.normal_placement_rules(self, True)
     my.on_lifespan_tick_do(self, "me.on_lifespan_tick()")
     my.on_thrown_do(self, "me.on_thrown()")
-    my.stat_luck(self, 10)
     my.temperature(self, 50)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "A bundle of torches to light the way. Be warned, they do burn out slowly. Don't find yourself lost in the dark...")

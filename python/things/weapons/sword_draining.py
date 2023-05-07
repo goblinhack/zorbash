@@ -80,7 +80,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_VERY_RARE)
     my.stamina_drain_on_attacking(self, 0)
-    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+3 DMG stam")
     my.text_description_long(self, "This magical sword deals additional draining damage to suck the will to live out of your opponents.")

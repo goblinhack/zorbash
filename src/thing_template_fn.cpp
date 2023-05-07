@@ -860,11 +860,11 @@ int Tp::is_wooden(void) const { return _is_wooden; }
 int Tp::is_yeti(void) const { return _is_yeti; }
 int Tp::item_height(void) const { return _item_height ? _item_height : 1; }
 int Tp::item_width(void) const { return _item_width ? _item_width : 1; }
-int Tp::jump_distance_mod(void) const { return _jump_distance_mod; }
+int Tp::jump_distance_bonus(void) const { return _jump_distance_bonus; }
 int Tp::jump_distance(void) const { return _jump_distance; }
 int Tp::light_dist(void) const { return _light_dist; }
 int Tp::minion_limit(void) const { return _minion_limit; }
-int Tp::move_speed_mod(void) const { return _move_speed_mod; }
+int Tp::move_speed_bonus(void) const { return _move_speed_bonus; }
 int Tp::move_speed(void) const { return _move_speed; }
 int Tp::noise_additional_on_jump_end(void) const { return _noise_additional_on_jump_end; }
 int Tp::noise_additional_on_teleporting(void) const { return _noise_additional_on_teleporting; }
@@ -882,13 +882,13 @@ int Tp::on_death_is_open(void) const { return _on_death_is_open; }
 int Tp::on_death_is_stone(void) const { return _on_death_is_stone; }
 int Tp::range_max(void) const { return _range_max; }
 int Tp::rarity(void) const { return _rarity; }
-int Tp::shove_strength_mod(void) const { return _shove_strength_mod; }
+int Tp::shove_bonus(void) const { return _shove_bonus; }
 int Tp::shove_strength(void) const { return _shove_strength; }
 int Tp::spawn_group_radius(void) const { return _spawn_group_radius; }
 int Tp::stamina_drain_on_attacking(void) const { return _stamina_drain_on_attacking; }
 int Tp::stamina_drain_on_using(void) const { return _stamina_drain_on_using; }
 int Tp::stamina(void) const { return _stamina; }
-int Tp::stat_att_mod(void) const { return _stat_att_mod; }
+int Tp::stat_att_bonus(void) const { return _stat_att_bonus; }
 int Tp::stat_att_penalty_when_idle_max(void) const { return _stat_att_penalty_when_idle_max; }
 int Tp::stat_att_penalty_when_idle(void) const { return _stat_att_penalty_when_idle; }
 int Tp::stat_att_penalty_when_in_deep_water(void) const { return _stat_att_penalty_when_in_deep_water; }
@@ -896,9 +896,9 @@ int Tp::stat_att_penalty_when_in_shallow_water(void) const { return _stat_att_pe
 int Tp::stat_att_penalty_when_stuck_max(void) const { return _stat_att_penalty_when_stuck_max; }
 int Tp::stat_att_penalty_when_stuck(void) const { return _stat_att_penalty_when_stuck; }
 int Tp::stat_att(void) const { return _stat_att; }
-int Tp::stat_con_mod(void) const { return _stat_con_mod; }
+int Tp::stat_con_bonus(void) const { return _stat_con_bonus; }
 int Tp::stat_con(void) const { return _stat_con; }
-int Tp::stat_def_mod(void) const { return _stat_def_mod; }
+int Tp::stat_def_bonus(void) const { return _stat_def_bonus; }
 int Tp::stat_def_penalty_when_idle_max(void) const { return _stat_def_penalty_when_idle_max; }
 int Tp::stat_def_penalty_when_idle(void) const { return _stat_def_penalty_when_idle; }
 int Tp::stat_def_penalty_when_in_deep_water(void) const { return _stat_def_penalty_when_in_deep_water; }
@@ -906,9 +906,9 @@ int Tp::stat_def_penalty_when_in_shallow_water(void) const { return _stat_def_pe
 int Tp::stat_def_penalty_when_stuck_max(void) const { return _stat_def_penalty_when_stuck_max; }
 int Tp::stat_def_penalty_when_stuck(void) const { return _stat_def_penalty_when_stuck; }
 int Tp::stat_def(void) const { return _stat_def; }
-int Tp::stat_dex_mod(void) const { return _stat_dex_mod; }
+int Tp::stat_dex_bonus(void) const { return _stat_dex_bonus; }
 int Tp::stat_dex(void) const { return _stat_dex; }
-int Tp::stat_luck_mod(void) const { return _stat_luck_mod; }
+int Tp::stat_luck_bonus(void) const { return _stat_luck_bonus; }
 int Tp::stat_luck(void) const { return _stat_luck; }
 int Tp::stats02(void) const { return _stats02; }
 int Tp::stats03(void) const { return _stats03; }
@@ -917,7 +917,7 @@ int Tp::stats05(void) const { return _stats05; }
 int Tp::stats06(void) const { return _stats06; }
 int Tp::stats07(void) const { return _stats07; }
 int Tp::stats09(void) const { return _stats09; }
-int Tp::stat_str_mod(void) const { return _stat_str_mod; }
+int Tp::stat_str_bonus(void) const { return _stat_str_bonus; }
 int Tp::stat_str(void) const { return _stat_str; }
 int Tp::teleport_distance(void) const { return _teleport_distance; }
 int Tp::temperature_max(void) const { return _temperature_max; }
@@ -1609,12 +1609,12 @@ void Tp::is_wooden_set(int v) { _is_wooden = v; }
 void Tp::is_yeti_set(int v) { _is_yeti = v; }
 void Tp::item_height_set(int v) { _item_height = v; }
 void Tp::item_width_set(int v) { _item_width = v; }
-void Tp::jump_distance_mod_set(int v) { _jump_distance_mod = v; }
+void Tp::jump_distance_bonus_set(int v) { _jump_distance_bonus = v; }
 void Tp::jump_distance_set(int v) { _jump_distance = v; }
 void Tp::light_color_set(const std::string &v) { _light_color = v; }
 void Tp::light_dist_set(int v) { _light_dist = v; }
 void Tp::minion_limit_set(int v) { _minion_limit = v; }
-void Tp::move_speed_mod_set(int v) { _move_speed_mod = v; }
+void Tp::move_speed_bonus_set(int v) { _move_speed_bonus = v; }
 void Tp::move_speed_set(int v) { _move_speed = v; }
 void Tp::name_set(const std::string &v) { _name = v; }
 void Tp::noise_additional_on_jump_end_set(int v) { _noise_additional_on_jump_end = v; }
@@ -1764,14 +1764,14 @@ void Tp::on_you_nat_attack_attempt_do_set(const std::string &v) { _on_you_nat_at
 void Tp::on_you_nat_attack_success_do_set(const std::string &v) { _on_you_nat_attack_success_do = v; }
 void Tp::range_max_set(int v) { _range_max = v; }
 void Tp::rarity_set(int v) { _rarity = v; }
-void Tp::shove_strength_mod_set(int v) { _shove_strength_mod = v; }
+void Tp::shove_bonus_set(int v) { _shove_bonus = v; }
 void Tp::shove_strength_set(int v) { _shove_strength = v; }
 void Tp::spawn_group_radius_set(int v) { _spawn_group_radius = v; }
 void Tp::spawn_on_shoved_set(const std::string &v) { _spawn_on_shoved = v; }
 void Tp::stamina_drain_on_attacking_set(int v) { _stamina_drain_on_attacking = v; }
 void Tp::stamina_drain_on_using_set(int v) { _stamina_drain_on_using = v; }
 void Tp::stamina_set(int v) { _stamina = v; }
-void Tp::stat_att_mod_set(int v) { _stat_att_mod = v; }
+void Tp::stat_att_bonus_set(int v) { _stat_att_bonus = v; }
 void Tp::stat_att_penalty_when_idle_max_set(int v) { _stat_att_penalty_when_idle_max = v; }
 void Tp::stat_att_penalty_when_idle_set(int v) { _stat_att_penalty_when_idle = v; }
 void Tp::stat_att_penalty_when_in_deep_water_set(int v) { _stat_att_penalty_when_in_deep_water = v; }
@@ -1779,9 +1779,9 @@ void Tp::stat_att_penalty_when_in_shallow_water_set(int v) { _stat_att_penalty_w
 void Tp::stat_att_penalty_when_stuck_max_set(int v) { _stat_att_penalty_when_stuck_max = v; }
 void Tp::stat_att_penalty_when_stuck_set(int v) { _stat_att_penalty_when_stuck = v; }
 void Tp::stat_att_set(int v) { _stat_att = v; }
-void Tp::stat_con_mod_set(int v) { _stat_con_mod = v; }
+void Tp::stat_con_bonus_set(int v) { _stat_con_bonus = v; }
 void Tp::stat_con_set(int v) { _stat_con = v; }
-void Tp::stat_def_mod_set(int v) { _stat_def_mod = v; }
+void Tp::stat_def_bonus_set(int v) { _stat_def_bonus = v; }
 void Tp::stat_def_penalty_when_idle_max_set(int v) { _stat_def_penalty_when_idle_max = v; }
 void Tp::stat_def_penalty_when_idle_set(int v) { _stat_def_penalty_when_idle = v; }
 void Tp::stat_def_penalty_when_in_deep_water_set(int v) { _stat_def_penalty_when_in_deep_water = v; }
@@ -1789,9 +1789,9 @@ void Tp::stat_def_penalty_when_in_shallow_water_set(int v) { _stat_def_penalty_w
 void Tp::stat_def_penalty_when_stuck_max_set(int v) { _stat_def_penalty_when_stuck_max = v; }
 void Tp::stat_def_penalty_when_stuck_set(int v) { _stat_def_penalty_when_stuck = v; }
 void Tp::stat_def_set(int v) { _stat_def = v; }
-void Tp::stat_dex_mod_set(int v) { _stat_dex_mod = v; }
+void Tp::stat_dex_bonus_set(int v) { _stat_dex_bonus = v; }
 void Tp::stat_dex_set(int v) { _stat_dex = v; }
-void Tp::stat_luck_mod_set(int v) { _stat_luck_mod = v; }
+void Tp::stat_luck_bonus_set(int v) { _stat_luck_bonus = v; }
 void Tp::stat_luck_set(int v) { _stat_luck = v; }
 void Tp::stats02_set(int v) { _stats02 = v; }
 void Tp::stats03_set(int v) { _stats03 = v; }
@@ -1800,7 +1800,7 @@ void Tp::stats05_set(int v) { _stats05 = v; }
 void Tp::stats06_set(int v) { _stats06 = v; }
 void Tp::stats07_set(int v) { _stats07 = v; }
 void Tp::stats09_set(int v) { _stats09 = v; }
-void Tp::stat_str_mod_set(int v) { _stat_str_mod = v; }
+void Tp::stat_str_bonus_set(int v) { _stat_str_bonus = v; }
 void Tp::stat_str_set(int v) { _stat_str = v; }
 void Tp::str1_set(const std::string &v) { _str1 = v; }
 void Tp::str2_set(const std::string &v) { _str2 = v; }

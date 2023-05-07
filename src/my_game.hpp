@@ -553,7 +553,6 @@ public:
   void wid_load_select(void);
   void wid_main_menu_select(void);
   void wid_save_select(void);
-  void wid_thing_info_add_attack(WidPopup *w, Thingp t);
   void wid_thing_info_add_carry_info(WidPopup *w, Thingp t);
   void wid_thing_info_add_charge_count(WidPopup *w, Thingp t);
   void wid_thing_info_add_crit_chance(WidPopup *w, Thingp t);
@@ -586,6 +585,7 @@ public:
   void wid_thing_info_add_noise(WidPopup *w, Thingp t);
   void wid_thing_info_add_nutrition(WidPopup *w, Thingp t);
   void wid_thing_info_add_shove_strength(WidPopup *w, Thingp t);
+  void wid_thing_info_add_stat_att(WidPopup *w, Thingp t);
   void wid_thing_info_add_stat_con(WidPopup *w, Thingp t);
   void wid_thing_info_add_stat_def(WidPopup *w, Thingp t);
   void wid_thing_info_add_stat_dex(WidPopup *w, Thingp t);

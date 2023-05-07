@@ -42,7 +42,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "50+1d100")
     my.rarity(self, my.RARITY_UNCOMMON)
-    my.stat_luck(self, 10)
     my.temperature_max(self, 25)
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)

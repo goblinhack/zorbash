@@ -19,21 +19,22 @@ int Thing::stat_luck_total(void)
     dbg3("Luck: %d", stat);
   }
 
-  stat += stat_luck_mod();
+  stat += stat_luck_bonus();
   if (stat != prev) {
     prev = stat;
-    dbg3("Luck: with mod (%s): %d", modifier_to_string(stat_luck_mod()).c_str(), stat);
+    dbg3("Luck: with mod (%s): %d", bonus_to_string(stat_luck_bonus()).c_str(), stat);
   }
 
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
     if (iter) {
-      stat += stat_to_bonus(iter->stat_luck_total());
+      if (iter->stat_luck_bonus()) {
+        stat += iter->stat_luck_total() - 10;
+      }
       if (stat != prev) {
         prev = stat;
-        dbg3("Luck: with (%s %s): %d", iter->to_short_string().c_str(),
-             modifier_to_string(iter->stat_luck_mod()).c_str(), stat);
+        dbg3("Luck: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_luck_total(), stat);
       }
     }
   }
@@ -56,11 +57,12 @@ int Thing::stat_luck_total(void)
         if (iter->is_auto_equipped()) {
           continue;
         }
-        stat += stat_to_bonus(iter->stat_luck_total());
+        if (iter->stat_luck_bonus()) {
+          stat += iter->stat_luck_total() - 10;
+        }
         if (stat != prev) {
           prev = stat;
-          dbg3("Luck: with (%s %s): %d", iter->to_short_string().c_str(),
-               modifier_to_string(iter->stat_luck_mod()).c_str(), stat);
+          dbg3("Luck: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_luck_total(), stat);
         }
       }
     }
@@ -69,11 +71,12 @@ int Thing::stat_luck_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += stat_to_bonus(iter->stat_luck_total());
+        if (iter->stat_luck_bonus()) {
+          stat += iter->stat_luck_total() - 10;
+        }
         if (stat != prev) {
           prev = stat;
-          dbg3("Luck: with (%s %s): %d", iter->to_short_string().c_str(),
-               modifier_to_string(iter->stat_luck_mod()).c_str(), stat);
+          dbg3("Luck: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_luck_total(), stat);
         }
       }
     }
@@ -82,11 +85,12 @@ int Thing::stat_luck_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += stat_to_bonus(iter->stat_luck_total());
+        if (iter->stat_luck_bonus()) {
+          stat += iter->stat_luck_total() - 10;
+        }
         if (stat != prev) {
           prev = stat;
-          dbg3("Luck: with (%s %s): %d", iter->to_short_string().c_str(),
-               modifier_to_string(iter->stat_luck_mod()).c_str(), stat);
+          dbg3("Luck: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_luck_total(), stat);
         }
       }
     }
@@ -95,17 +99,18 @@ int Thing::stat_luck_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter && iter->is_activated) {
-        stat += stat_to_bonus(iter->stat_luck_total());
+        if (iter->stat_luck_bonus()) {
+          stat += iter->stat_luck_total() - 10;
+        }
         if (stat != prev) {
           prev = stat;
-          dbg3("Luck: with (%s %s): %d", iter->to_short_string().c_str(),
-               modifier_to_string(iter->stat_luck_mod()).c_str(), stat);
+          dbg3("Luck: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_luck_total(), stat);
         }
       }
     }
   }
 
-  if (stat) {
+  if (stat_luck_bonus()) {
     auto enchant = enchant_count_get();
     stat += enchant;
     if (stat != prev) {
@@ -182,68 +187,68 @@ int Thing::stat_luck_incr(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// stat_luck_mod
+// stat_luck_bonus
 ////////////////////////////////////////////////////////////////////////////
-int Thing::stat_luck_mod(void)
+int Thing::stat_luck_bonus(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop()->stat_luck_mod);
+    return (infop()->stat_luck_bonus);
   }
   return 0;
 }
 
-int Thing::stat_luck_mod_set(int v)
+int Thing::stat_luck_bonus_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->stat_luck_mod = v);
+  auto n = (infop()->stat_luck_bonus = v);
   return n;
 }
 
-int Thing::stat_luck_mod_decr(int v)
+int Thing::stat_luck_bonus_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->stat_luck_mod -= v);
+  auto n = (infop()->stat_luck_bonus -= v);
   return n;
 }
 
-int Thing::stat_luck_mod_incr(int v)
+int Thing::stat_luck_bonus_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->stat_luck_mod += v);
+  auto n = (infop()->stat_luck_bonus += v);
   return n;
 }
 
-int Thing::stat_luck_mod_decr(void)
+int Thing::stat_luck_bonus_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->stat_luck_mod--);
+  auto n = (infop()->stat_luck_bonus--);
   return n;
 }
 
-int Thing::stat_luck_mod_incr(void)
+int Thing::stat_luck_bonus_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->stat_luck_mod++);
+  auto n = (infop()->stat_luck_bonus++);
   return n;
 }

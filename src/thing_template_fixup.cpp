@@ -316,28 +316,7 @@ void tp_fixup(void)
       tp->hunger_is_hunger_level_starving_at_pct_set(10);
     }
 
-    if (tp->is_monst() || tp->is_player()) {
-      if (! tp->stat_str()) {
-        tp->stat_str_set(10);
-      }
-      if (! tp->stat_def()) {
-        tp->stat_def_set(10);
-      }
-      if (! tp->stat_con()) {
-        tp->stat_con_set(10);
-      }
-      if (! tp->stat_dex()) {
-        tp->stat_dex_set(10);
-      }
-      if (! tp->stat_luck()) {
-        tp->stat_luck_set(10);
-      }
-    }
-
-    //
-    // Items normally don't set stats, so set them to 0
-    //
-    if (tp->is_item()) {
+    if (tp->is_skill() || tp->is_buff() || tp->is_debuff() || tp->is_item() || tp->is_monst() || tp->is_player()) {
       if (! tp->stat_att()) {
         tp->stat_att_set(10);
       }

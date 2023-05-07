@@ -33,7 +33,6 @@ def tp_init(name, text_long_name):
     my.is_treasure_type(self, True)
     my.normal_placement_rules(self, True)
     my.rarity(self, my.RARITY_COMMON)
-    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "A precious purple amethyst that glints in the dark. It's a bit of a safety hazard. Best pick it up.")
     my.text_description_short(self, "Sparkling purple amethyst.")

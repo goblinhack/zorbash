@@ -16,10 +16,10 @@ int Thing::move_speed_total(void)
   stat = move_speed();
   prev = stat;
 
-  stat += move_speed_mod();
+  stat += move_speed_bonus();
   if (stat != prev) {
     prev = stat;
-    // dbg("Move speed: with mod (%s): %d", modifier_to_string(move_speed_mod()).c_str(), stat);
+    // dbg("Move speed: with mod (%s): %d", bonus_to_string(move_speed_bonus()).c_str(), stat);
   }
 
   FOR_ALL_EQUIP(e)
@@ -30,7 +30,7 @@ int Thing::move_speed_total(void)
       if (stat != prev) {
         prev = stat;
         // dbg2("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
-        //   modifier_to_string(iter->move_speed_mod()).c_str(), stat);
+        //   bonus_to_string(iter->move_speed_bonus()).c_str(), stat);
       }
     }
   }
@@ -57,7 +57,7 @@ int Thing::move_speed_total(void)
         if (stat != prev) {
           prev = stat;
           // dbg("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
-          //     modifier_to_string(iter->move_speed_mod()).c_str(), stat);
+          //     bonus_to_string(iter->move_speed_bonus()).c_str(), stat);
         }
       }
     }
@@ -70,7 +70,7 @@ int Thing::move_speed_total(void)
         if (stat != prev) {
           prev = stat;
           // dbg("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
-          //    modifier_to_string(iter->move_speed_mod()).c_str(), stat);
+          //    bonus_to_string(iter->move_speed_bonus()).c_str(), stat);
         }
       }
     }
@@ -83,7 +83,7 @@ int Thing::move_speed_total(void)
         if (stat != prev) {
           prev = stat;
           // dbg("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
-          //               modifier_to_string(iter->move_speed_mod()).c_str(), stat);
+          //               bonus_to_string(iter->move_speed_bonus()).c_str(), stat);
         }
       }
     }
@@ -96,7 +96,7 @@ int Thing::move_speed_total(void)
         if (stat != prev) {
           prev = stat;
           // dbg("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
-          //               modifier_to_string(iter->move_speed_mod()).c_str(), stat);
+          //               bonus_to_string(iter->move_speed_bonus()).c_str(), stat);
         }
       }
     }
@@ -112,69 +112,69 @@ int Thing::move_speed(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// move_speed_mod
+// move_speed_bonus
 ////////////////////////////////////////////////////////////////////////////
-int Thing::move_speed_mod(void)
+int Thing::move_speed_bonus(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop()->move_speed_mod);
+    return (infop()->move_speed_bonus);
   }
   return 0;
 }
 
-int Thing::move_speed_mod_set(int v)
+int Thing::move_speed_bonus_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->move_speed_mod = v);
+  auto n = (infop()->move_speed_bonus = v);
   return n;
 }
 
-int Thing::move_speed_mod_decr(int v)
+int Thing::move_speed_bonus_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->move_speed_mod -= v);
+  auto n = (infop()->move_speed_bonus -= v);
   return n;
 }
 
-int Thing::move_speed_mod_incr(int v)
+int Thing::move_speed_bonus_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->move_speed_mod += v);
+  auto n = (infop()->move_speed_bonus += v);
   return n;
 }
 
-int Thing::move_speed_mod_decr(void)
+int Thing::move_speed_bonus_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->move_speed_mod--);
+  auto n = (infop()->move_speed_bonus--);
   return n;
 }
 
-int Thing::move_speed_mod_incr(void)
+int Thing::move_speed_bonus_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->move_speed_mod++);
+  auto n = (infop()->move_speed_bonus++);
   return n;
 }
 

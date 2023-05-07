@@ -85,6 +85,7 @@ void Game::place_player(void)
         auto w = level->thing_new("gauntlets_lion", point(x, y - 2));
         t->carry(w);
         t->enchant_without_stone(w);
+        t->enchant_without_stone(w);
       }
       if (0) {
         auto w = level->thing_new("potion_health", point(x, y - 2));
@@ -236,6 +237,10 @@ void Game::place_player(void)
         t->carry(w);
       }
       if (0) {
+        auto w = level->thing_new("boots_fluffy", point(x, y));
+        t->carry(w);
+      }
+      if (0) {
         auto w = level->thing_new("cloak_stone", point(x, y));
         t->carry(w);
       }
@@ -292,7 +297,7 @@ void Game::place_player(void)
         auto w = level->thing_new("map_beast", point(x, y));
         t->carry(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("staff_negation", point(x, y));
         t->carry(w);
       }

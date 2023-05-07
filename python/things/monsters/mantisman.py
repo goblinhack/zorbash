@@ -129,7 +129,7 @@ def tp_init(name, text_long_name):
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
     my.on_you_nat_attack_attempt_do(self, "me.on_you_nat_attack_attempt()")
     my.rarity(self, my.RARITY_UNCOMMON)  # how rare within this monster class
-    my.shove_strength_mod(self, 2)
+    my.shove_bonus(self, 2)
     my.spawn_group_radius(self, 4)
     my.spawn_group_size_dice(self, "1d4+3")
     my.stamina(self, 100)

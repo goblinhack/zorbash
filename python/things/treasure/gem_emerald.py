@@ -33,7 +33,6 @@ def tp_init(name, text_long_name):
     my.is_treasure_type(self, True)
     my.normal_placement_rules(self, True)
     my.rarity(self, my.RARITY_UNCOMMON)
-    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "The stone of loyalty. Can't be that loyal as someone left it lying here. Best to pick it up for safe keeping.")
     my.text_description_short(self, "Grass green emerald.")

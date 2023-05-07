@@ -669,13 +669,13 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     }
 
     //
-    // Attack  roll is 1d20 + stat_att_mod_total - penalties
+    // Attack  roll is 1d20 + stat_att_bonus_total - penalties
     // Defence roll is        stat_def_total - penalties
-    // Damage       is dam  + stat_att_mod_total
+    // Damage       is dam  + stat_att_bonus_total
     //
-    auto att_bonus = stat_att_mod_total();
+    auto att_bonus = stat_to_bonus(stat_att_total());
     if (owner) {
-      att_bonus = owner->stat_att_mod_total();
+      att_bonus = stat_to_bonus(owner->stat_att_bonus());
     }
 
     //
@@ -1359,15 +1359,31 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         if (stuck_count()) {
           msg("%%fg=orange$You find it hard to move and inflict no damage on %s.%%fg=reset$",
               victim->text_the().c_str());
+          //
+          // This popup is handy when you have secondary attacks to give some feedback.
+          //
+          popup("Stuck, no damage!");
         } else if (is_weapon() && (weapon_dmgd_pct() > 0)) {
           if (is_weapon() && (weapon_dmgd_pct() > 50)) {
             msg("%%fg=red$Your heavily damaged weapon inflicts no damage on %s.%%fg=reset$",
                 victim->text_the().c_str());
+            //
+            // This popup is handy when you have secondary attacks to give some feedback.
+            //
+            popup("No damage");
           } else {
             msg("%%fg=red$Your damaged weapon inflicts no damage on %s.%%fg=reset$", victim->text_the().c_str());
+            //
+            // This popup is handy when you have secondary attacks to give some feedback.
+            //
+            popup("No damage");
           }
         } else {
           msg("%%fg=orange$You inflict no damage on %s.%%fg=reset$", victim->text_the().c_str());
+          //
+          // This popup is handy when you have secondary attacks to give some feedback.
+          //
+          popup("You miss");
         }
 
         if (game->robot_mode) {
@@ -1467,7 +1483,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         //
       } else {
         //
-        // Attack  is 1d20 + stat_att_mod_total - penalties
+        // Attack  is 1d20 + stat_att_bonus_total - penalties
         // Defence is        stat_def_total - penalties
         //
         bool hit               = false;
@@ -1478,21 +1494,21 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
           attack_options->crit = true;
           hit                  = true;
           dbg("Attack on %s: ATT %s DEF %d(%s), to-hit %d, rolled %d -> crit", victim->to_short_string().c_str(),
-              modifier_to_string(att_roll_modifier).c_str(), stat_def, modifier_to_string(def_bonus).c_str(), to_hit,
+              bonus_to_string(att_roll_modifier).c_str(), stat_def, bonus_to_string(def_bonus).c_str(), to_hit,
               i_rolled);
         } else if (i_rolled == 1) {
           hit    = false;
           fumble = true;
           dbg("Attack on %s: ATT %s DEF %d(%s), to-hit %d, rolled %d -> fumble", victim->to_short_string().c_str(),
-              modifier_to_string(att_roll_modifier).c_str(), stat_def, modifier_to_string(def_bonus).c_str(), to_hit,
+              bonus_to_string(att_roll_modifier).c_str(), stat_def, bonus_to_string(def_bonus).c_str(), to_hit,
               i_rolled);
         } else {
           i_rolled += att_roll_modifier;
           hit = i_rolled >= to_hit;
           dbg("Attack on %s: ATT %s(%s bonus,%s penalty) DEF %d(%s), to-hit %d, rolled %d -> %s",
-              victim->to_short_string().c_str(), modifier_to_string(att_roll_modifier).c_str(),
-              modifier_to_string(att_bonus).c_str(), modifier_to_string(att_penalty).c_str(), stat_def,
-              modifier_to_string(def_bonus).c_str(), to_hit, i_rolled, hit ? "hit" : "miss");
+              victim->to_short_string().c_str(), bonus_to_string(att_roll_modifier).c_str(),
+              bonus_to_string(att_bonus).c_str(), bonus_to_string(att_penalty).c_str(), stat_def,
+              bonus_to_string(def_bonus).c_str(), to_hit, i_rolled, hit ? "hit" : "miss");
         }
 
         //

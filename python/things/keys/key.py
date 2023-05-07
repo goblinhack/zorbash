@@ -39,7 +39,6 @@ def key_init(name, text_long_name):
     my.light_color(self, "yellow")
     my.light_dist(self, 2)
     my.normal_placement_rules(self, True)
-    my.stat_luck(self, 10)
     my.text_a_or_an(self, "an")
     my.text_description_long(self, "A key that leadeth places undreamed of, or next door.")
     my.text_description_short(self, "A key.")

@@ -40,7 +40,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "10+1d50")
     my.rarity(self, my.RARITY_COMMON)
-    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "Dungeon steak. Of what poor creature, you have no idea. You dare eat it?")
     my.text_description_short(self, "Dungeon steak.")

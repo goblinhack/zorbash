@@ -33,7 +33,6 @@ def tp_init(name, text_long_name):
     my.is_treasure_type(self, True)
     my.normal_placement_rules(self, True)
     my.rarity(self, my.RARITY_COMMON)
-    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "If you are need of luck, a(d)venturine is the stone for you. It has a few drops of blood on it, ignore those. You will be more lucky.")
     my.text_description_short(self, "Some a(d)venturine, the luckiest stone.")

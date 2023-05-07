@@ -40,7 +40,6 @@ def gold_init(name, text_long_name, text_short_name):
     my.light_color(self, "yellow")
     my.light_dist(self, 1)
     my.normal_placement_rules(self, True)
-    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "A lonely gold coin.")
     my.text_description_short(self, "A lonely gold coin.")

@@ -8,7 +8,7 @@ def on_enchant(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if my.thing_is_player(owner):
         my.thing_msg_if_not_dead_or_dying(me, "The scale armor glows.")
-    my.thing_stat_def_mod_incr(me, 2)
+    my.thing_stat_def_bonus_incr(me, 2)
 
 
 def tp_init(name, text_long_name, text_short_name):
@@ -52,8 +52,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
     my.rarity(self, my.RARITY_RARE)
-    my.stat_def_mod(self, 5)
-    my.stat_luck(self, 10)
+    my.stat_def_bonus(self, 5)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+2 DEF")
     my.text_description_long2(self, "Good short term armor")

@@ -16,13 +16,13 @@ int Thing::stat_def_total(void)
   stat = stat_def();
   prev = stat;
   if (stat) {
-    dbg2("Def: %d", stat);
+    dbg("Def: %d", stat);
   }
 
-  stat += stat_def_mod();
+  stat += stat_def_bonus();
   if (stat != prev) {
     prev = stat;
-    dbg2("Def: with mod (%s): %d", modifier_to_string(stat_def_mod()).c_str(), stat);
+    dbg("Def: with mod (%s): %d", bonus_to_string(stat_def_bonus()).c_str(), stat);
   }
 
   //
@@ -33,7 +33,7 @@ int Thing::stat_def_total(void)
     stat += stat_to_bonus(dex_total);
     if (stat != prev) {
       prev = stat;
-      dbg2("Def: with: (dex %d): %d", dex_total, stat);
+      dbg("Def: with: (dex %d): %d", dex_total, stat);
     }
   }
 
@@ -41,11 +41,12 @@ int Thing::stat_def_total(void)
   {
     auto iter = equip_get(e);
     if (iter) {
-      stat += stat_to_bonus(iter->stat_def_total());
-      if (stat != prev) {
-        prev = stat;
-        dbg2("Def: with (%s %s): %d", iter->to_short_string().c_str(),
-             modifier_to_string(iter->stat_def_mod()).c_str(), stat);
+      if (iter->stat_def_bonus()) {
+        stat += iter->stat_def_total() - 10;
+        if (stat != prev) {
+          prev = stat;
+          dbg("Def: with bonus (%s %d): %d", iter->to_short_string().c_str(), iter->stat_def_bonus(), stat);
+        }
       }
     }
   }
@@ -68,11 +69,12 @@ int Thing::stat_def_total(void)
         if (iter->is_auto_equipped()) {
           continue;
         }
-        stat += stat_to_bonus(iter->stat_def_total());
+        if (iter->stat_def_bonus()) {
+          stat += iter->stat_def_total() - 10;
+        }
         if (stat != prev) {
           prev = stat;
-          dbg2("Def: with (%s %s): %d", iter->to_short_string().c_str(),
-               modifier_to_string(iter->stat_def_mod()).c_str(), stat);
+          dbg("Def: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_def_total(), stat);
         }
       }
     }
@@ -81,11 +83,12 @@ int Thing::stat_def_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += stat_to_bonus(iter->stat_def_total());
+        if (iter->stat_def_bonus()) {
+          stat += iter->stat_def_total() - 10;
+        }
         if (stat != prev) {
           prev = stat;
-          dbg2("Def: with (%s %s): %d", iter->to_short_string().c_str(),
-               modifier_to_string(iter->stat_def_mod()).c_str(), stat);
+          dbg("Def: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_def_total(), stat);
         }
       }
     }
@@ -94,11 +97,12 @@ int Thing::stat_def_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += stat_to_bonus(iter->stat_def_total());
+        if (iter->stat_def_bonus()) {
+          stat += iter->stat_def_total() - 10;
+        }
         if (stat != prev) {
           prev = stat;
-          dbg2("Def: with (%s %s): %d", iter->to_short_string().c_str(),
-               modifier_to_string(iter->stat_def_mod()).c_str(), stat);
+          dbg("Def: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_def_total(), stat);
         }
       }
     }
@@ -107,22 +111,23 @@ int Thing::stat_def_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter && iter->is_activated) {
-        stat += stat_to_bonus(iter->stat_def_total());
+        if (iter->stat_def_bonus()) {
+          stat += iter->stat_def_total() - 10;
+        }
         if (stat != prev) {
           prev = stat;
-          dbg2("Def: with (%s %s): %d", iter->to_short_string().c_str(),
-               modifier_to_string(iter->stat_def_mod()).c_str(), stat);
+          dbg("Def: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_def_total(), stat);
         }
       }
     }
   }
 
-  if (stat) {
+  if (stat_def_bonus()) {
     auto enchant = enchant_count_get();
     stat += enchant;
     if (stat != prev) {
       prev = stat;
-      dbg2("Def: with enchant %d: %d", enchant, stat);
+      dbg("Def: with enchant %d: %d", enchant, stat);
     }
   }
 
@@ -133,7 +138,7 @@ int Thing::stat_def_total(void)
     stat += size_modifier();
     if (stat != prev) {
       prev = stat;
-      dbg2("Def: with size modifier: %d", stat);
+      dbg("Def: with size modifier: %d", stat);
     }
   }
 
@@ -156,7 +161,7 @@ int Thing::stat_def_penalties_total(void)
     penalty += p;
     if (penalty != prev) {
       prev = penalty;
-      dbg3("AC penalty: stuck %d", p);
+      dbg3("Def penalty: stuck %d", p);
     }
   } else if (idle_count() && stat_att_penalty_when_idle()) {
     int p = stat_def_penalty_when_idle() + idle_count();
@@ -164,7 +169,7 @@ int Thing::stat_def_penalties_total(void)
     penalty += p;
     if (penalty != prev) {
       prev = penalty;
-      dbg3("AC penalty: idle %d", p);
+      dbg3("Def penalty: idle %d", p);
     }
   }
 
@@ -176,14 +181,14 @@ int Thing::stat_def_penalties_total(void)
     penalty += p;
     if (penalty != prev) {
       prev = penalty;
-      dbg2("AC penalty: starving %d", p);
+      dbg3("Def penalty: starving %d", p);
     }
   } else if (is_hunger_level_hungry) {
     int p = THING_HUNGER_PENALTY_WHEN_HUNGRY;
     penalty += p;
     if (penalty != prev) {
       prev = penalty;
-      dbg2("AC penalty: hunger %d", p);
+      dbg3("Def penalty: hunger %d", p);
     }
   }
 
@@ -206,7 +211,7 @@ int Thing::stat_def_penalties_total(void)
         penalty += p;
         if (penalty != prev) {
           prev = penalty;
-          dbg3("AC penalty: with (in deep water %d): %d", p, penalty);
+          dbg3("Def penalty: with (in deep water %d): %d", p, penalty);
         }
       }
     } else if (level->is_shallow_water(curr_at)) {
@@ -218,14 +223,14 @@ int Thing::stat_def_penalties_total(void)
         penalty += p;
         if (penalty != prev) {
           prev = penalty;
-          dbg3("AC penalty: with (in shallow water %d): %d", p, penalty);
+          dbg3("Def penalty: with (in shallow water %d): %d", p, penalty);
         }
       }
     }
   }
 
   if (penalty) {
-    dbg3("AC penalty: %d", penalty);
+    dbg3("Def penalty: %d", penalty);
   }
   return penalty;
 }
@@ -302,68 +307,68 @@ int Thing::stat_def_incr(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// stat_def_mod
+// stat_def_bonus
 ////////////////////////////////////////////////////////////////////////////
-int Thing::stat_def_mod(void)
+int Thing::stat_def_bonus(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop()->stat_def_mod);
+    return (infop()->stat_def_bonus);
   }
   return 0;
 }
 
-int Thing::stat_def_mod_set(int v)
+int Thing::stat_def_bonus_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->stat_def_mod = v);
+  auto n = (infop()->stat_def_bonus = v);
   return n;
 }
 
-int Thing::stat_def_mod_decr(int v)
+int Thing::stat_def_bonus_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->stat_def_mod -= v);
+  auto n = (infop()->stat_def_bonus -= v);
   return n;
 }
 
-int Thing::stat_def_mod_incr(int v)
+int Thing::stat_def_bonus_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->stat_def_mod += v);
+  auto n = (infop()->stat_def_bonus += v);
   return n;
 }
 
-int Thing::stat_def_mod_decr(void)
+int Thing::stat_def_bonus_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->stat_def_mod--);
+  auto n = (infop()->stat_def_bonus--);
   return n;
 }
 
-int Thing::stat_def_mod_incr(void)
+int Thing::stat_def_bonus_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->stat_def_mod++);
+  auto n = (infop()->stat_def_bonus++);
   return n;
 }

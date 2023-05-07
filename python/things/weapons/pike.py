@@ -82,8 +82,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_UNCOMMON)
     my.stamina_drain_on_attacking(self, 3)
-    my.stat_att_mod(self, 1)  # means +1 per enchant
-    my.stat_luck(self, 10)
+    my.stat_att_bonus(self, 1)  # means +1 per enchant
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 DMG, +1 ATT")
     my.text_description_long(self, "Not to be confused with the fish of legend, this deadly weapon is ideal at skewering enemies up to two tiles ahead.")

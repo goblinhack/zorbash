@@ -55,9 +55,13 @@ void Thing::update(void)
     }
   }
 
-  //
-  // If polymorphed, retain the same health
-  //
+  if (has_temperature()) {
+    TRACE_NO_INDENT();
+    auto v = tpp->temperature();
+    if (unlikely(v)) {
+      temperature_set(v);
+    }
+  }
   if (! stamina()) {
     TRACE_NO_INDENT();
     auto v = tpp->stamina();
@@ -66,218 +70,6 @@ void Thing::update(void)
       stamina_max_set(v);
     }
   }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->enchant_max();
-    if (unlikely(v)) {
-      enchant_max_current_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->stat_def();
-    if (unlikely(v)) {
-      stat_def_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->lifespan();
-    if (unlikely(v)) {
-      lifespan_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->stat_dex();
-    if (unlikely(v)) {
-      stat_dex_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->stat_luck();
-    if (unlikely(v)) {
-      stat_luck_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->stats02();
-    if (unlikely(v)) {
-      stats02_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->stats03();
-    if (unlikely(v)) {
-      stats03_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->stats04();
-    if (unlikely(v)) {
-      stats04_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->stats05();
-    if (unlikely(v)) {
-      stats05_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->stats06();
-    if (unlikely(v)) {
-      stats06_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->stats07();
-    if (unlikely(v)) {
-      stats07_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->stat_att_mod();
-    if (unlikely(v)) {
-      stat_att_mod_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->stats09();
-    if (unlikely(v)) {
-      stats09_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->stat_def_mod();
-    if (unlikely(v)) {
-      stat_def_mod_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->stat_con_mod();
-    if (unlikely(v)) {
-      stat_con_mod_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->stat_dex_mod();
-    if (unlikely(v)) {
-      stat_dex_mod_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->stat_luck_mod();
-    if (unlikely(v)) {
-      stat_luck_mod_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->move_speed_mod();
-    if (unlikely(v)) {
-      move_speed_mod_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->shove_strength_mod();
-    if (unlikely(v)) {
-      shove_strength_mod_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->jump_distance_mod();
-    if (unlikely(v)) {
-      jump_distance_mod_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->stat_att_mod();
-    if (unlikely(v)) {
-      stat_att_mod_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->stat_con();
-    if (unlikely(v)) {
-      stat_con_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->stat_str_mod();
-    if (unlikely(v)) {
-      stat_str_mod_set(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->stat_att_mod();
-    if (unlikely(v)) {
-      stat_att_mod_set(v);
-    }
-  }
-
-  if (has_temperature()) {
-    TRACE_NO_INDENT();
-    auto v = tpp->temperature();
-    if (unlikely(v)) {
-      temperature_set(v);
-    }
-  }
-
-  //
-  // Allow polymorph to change noise
-  //
-  {
-    TRACE_NO_INDENT();
-    auto v = tpp->noise_on_moving();
-    if (unlikely(v)) {
-      noise_set(v);
-    }
-  }
-
   {
     TRACE_NO_INDENT();
     auto v = tpp->distance_throw();
@@ -285,20 +77,179 @@ void Thing::update(void)
       distance_throw_set(v);
     }
   }
-
   {
     TRACE_NO_INDENT();
-    auto v = tpp->stat_str();
+    auto v = tpp->enchant_max();
     if (unlikely(v)) {
-      stat_str_set(v);
+      enchant_max_current_set(v);
     }
   }
-
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->jump_distance_bonus();
+    if (unlikely(v)) {
+      jump_distance_bonus_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->lifespan();
+    if (unlikely(v)) {
+      lifespan_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->move_speed_bonus();
+    if (unlikely(v)) {
+      move_speed_bonus_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->noise_on_moving();
+    if (unlikely(v)) {
+      noise_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->shove_bonus();
+    if (unlikely(v)) {
+      shove_bonus_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stat_att_bonus();
+    if (unlikely(v)) {
+      stat_att_bonus_set(v);
+    }
+  }
   {
     TRACE_NO_INDENT();
     auto v = tpp->stat_att();
     if (unlikely(v)) {
       stat_att_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stat_con_bonus();
+    if (unlikely(v)) {
+      stat_con_bonus_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stat_con();
+    if (unlikely(v)) {
+      stat_con_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stat_def_bonus();
+    if (unlikely(v)) {
+      stat_def_bonus_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stat_def();
+    if (unlikely(v)) {
+      stat_def_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stat_dex_bonus();
+    if (unlikely(v)) {
+      stat_dex_bonus_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stat_dex();
+    if (unlikely(v)) {
+      stat_dex_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stat_luck_bonus();
+    if (unlikely(v)) {
+      stat_luck_bonus_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stat_luck();
+    if (unlikely(v)) {
+      stat_luck_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stats02();
+    if (unlikely(v)) {
+      stats02_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stats03();
+    if (unlikely(v)) {
+      stats03_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stats04();
+    if (unlikely(v)) {
+      stats04_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stats05();
+    if (unlikely(v)) {
+      stats05_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stats06();
+    if (unlikely(v)) {
+      stats06_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stats07();
+    if (unlikely(v)) {
+      stats07_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stats09();
+    if (unlikely(v)) {
+      stats09_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stat_str_bonus();
+    if (unlikely(v)) {
+      stat_str_bonus_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stat_str();
+    if (unlikely(v)) {
+      stat_str_set(v);
     }
   }
 

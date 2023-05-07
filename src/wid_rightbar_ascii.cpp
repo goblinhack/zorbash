@@ -352,7 +352,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ width + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "%2d", 10 + player->stat_att_mod_total());
+    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_att_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
     wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);

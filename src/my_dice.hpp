@@ -46,7 +46,7 @@ int stat_to_bonus(int stat);
 
 const std::string stat_to_bonus_string(int stat);
 const std::string stat_to_bonus_slash_str(int stat);
-const std::string modifier_to_string(int stat);
+const std::string bonus_to_string(int stat);
 
 #define d10000() ((int) pcg_random_range_inclusive(1, 10000))
 #define d1000()  ((int) pcg_random_range_inclusive(1, 1000))

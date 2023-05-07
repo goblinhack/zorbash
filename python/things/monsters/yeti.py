@@ -116,7 +116,7 @@ def tp_init(name, text_long_name):
     my.on_want_to_shoot_at_do(self, "me.on_want_to_shoot_at()")
     my.on_you_nat_attack_attempt_do(self, "me.on_you_nat_attack_attempt()")
     my.rarity(self, my.RARITY_RARE)  # how rare within this monster class
-    my.shove_strength_mod(self, 4)
+    my.shove_bonus(self, 4)
     my.stamina(self, 100)
     my.stat_con(self, 18)
     my.stat_def(self, 18)

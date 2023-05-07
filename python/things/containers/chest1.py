@@ -71,7 +71,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_death_is_open(self, True)
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_open_do(self, "me.on_open()")
-    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "A small treasure chest.")
     my.text_description_short(self, "A small treasure chest.")

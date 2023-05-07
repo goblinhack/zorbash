@@ -81,7 +81,7 @@ int Thing::noise_total(void)
   // con("NOISE %d", decibels);
 
   if (is_player() || is_monst()) {
-    decibels -= stat_dex_mod() * 10;
+    decibels -= stat_dex_bonus() * 10;
   }
 
   if (level->is_able_to_dampen_footsteps(curr_at)) {
@@ -160,7 +160,7 @@ int Thing::noise_on_jumping(void)
   }
 
   if (is_player() || is_monst()) {
-    decibels -= stat_dex_mod() * 10;
+    decibels -= stat_dex_bonus() * 10;
   }
 
   if (level->is_able_to_dampen_footsteps(curr_at)) {
@@ -237,7 +237,7 @@ int Thing::noise_on_teleporting(void)
   }
 
   if (is_player() || is_monst()) {
-    decibels -= stat_dex_mod() * 10;
+    decibels -= stat_dex_bonus() * 10;
   }
 
   if (level->is_able_to_dampen_footsteps(curr_at)) {

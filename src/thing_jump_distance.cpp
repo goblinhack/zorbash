@@ -49,10 +49,10 @@ int Thing::jump_distance_total(void)
   }
   TRACE_AND_INDENT();
 
-  stat += jump_distance_mod();
+  stat += jump_distance_bonus();
   if (stat != prev) {
     prev = stat;
-    dbg3("Jump distance: with mod (%s): %d", modifier_to_string(jump_distance_mod()).c_str(), stat);
+    dbg3("Jump distance: with mod (%s): %d", bonus_to_string(jump_distance_bonus()).c_str(), stat);
   }
 
   FOR_ALL_EQUIP(e)
@@ -63,7 +63,7 @@ int Thing::jump_distance_total(void)
       if (stat != prev) {
         prev = stat;
         dbg3("Jump distance: with (%s %s): %d", iter->to_short_string().c_str(),
-             modifier_to_string(iter->jump_distance_mod()).c_str(), stat);
+             bonus_to_string(iter->jump_distance_bonus()).c_str(), stat);
       }
     }
   }
@@ -90,7 +90,7 @@ int Thing::jump_distance_total(void)
         if (stat != prev) {
           prev = stat;
           dbg3("Jump distance: with (%s %s): %d", iter->to_short_string().c_str(),
-               modifier_to_string(iter->jump_distance_mod()).c_str(), stat);
+               bonus_to_string(iter->jump_distance_bonus()).c_str(), stat);
         }
       }
     }
@@ -103,7 +103,7 @@ int Thing::jump_distance_total(void)
         if (stat != prev) {
           prev = stat;
           dbg3("Jump distance: with (%s %s): %d", iter->to_short_string().c_str(),
-               modifier_to_string(iter->jump_distance_mod()).c_str(), stat);
+               bonus_to_string(iter->jump_distance_bonus()).c_str(), stat);
         }
       }
     }
@@ -116,7 +116,7 @@ int Thing::jump_distance_total(void)
         if (stat != prev) {
           prev = stat;
           dbg3("Jump distance: with (%s %s): %d", iter->to_short_string().c_str(),
-               modifier_to_string(iter->jump_distance_mod()).c_str(), stat);
+               bonus_to_string(iter->jump_distance_bonus()).c_str(), stat);
         }
       }
     }
@@ -129,7 +129,7 @@ int Thing::jump_distance_total(void)
         if (stat != prev) {
           prev = stat;
           dbg3("Jump distance: with (%s %s): %d", iter->to_short_string().c_str(),
-               modifier_to_string(iter->jump_distance_mod()).c_str(), stat);
+               bonus_to_string(iter->jump_distance_bonus()).c_str(), stat);
         }
       }
     }
@@ -145,68 +145,68 @@ int Thing::jump_distance(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// jump_distance_mod
+// jump_distance_bonus
 ////////////////////////////////////////////////////////////////////////////
-int Thing::jump_distance_mod(void)
+int Thing::jump_distance_bonus(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop()->jump_distance_mod);
+    return (infop()->jump_distance_bonus);
   }
   return 0;
 }
 
-int Thing::jump_distance_mod_set(int v)
+int Thing::jump_distance_bonus_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->jump_distance_mod = v);
+  auto n = (infop()->jump_distance_bonus = v);
   return n;
 }
 
-int Thing::jump_distance_mod_decr(int v)
+int Thing::jump_distance_bonus_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->jump_distance_mod -= v);
+  auto n = (infop()->jump_distance_bonus -= v);
   return n;
 }
 
-int Thing::jump_distance_mod_incr(int v)
+int Thing::jump_distance_bonus_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->jump_distance_mod += v);
+  auto n = (infop()->jump_distance_bonus += v);
   return n;
 }
 
-int Thing::jump_distance_mod_decr(void)
+int Thing::jump_distance_bonus_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->jump_distance_mod--);
+  auto n = (infop()->jump_distance_bonus--);
   return n;
 }
 
-int Thing::jump_distance_mod_incr(void)
+int Thing::jump_distance_bonus_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->jump_distance_mod++);
+  auto n = (infop()->jump_distance_bonus++);
   return n;
 }

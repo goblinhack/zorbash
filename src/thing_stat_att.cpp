@@ -6,7 +6,7 @@
 #include "my_monst.hpp"
 #include "my_thing.hpp"
 
-int Thing::stat_att_mod_total()
+int Thing::stat_att_total()
 {
   TRACE_AND_INDENT();
 
@@ -16,13 +16,13 @@ int Thing::stat_att_mod_total()
   stat = stat_att();
   prev = stat;
   if (stat) {
-    dbg2("Att: %d", stat);
+    dbg3("Att: %d", stat);
   }
 
-  stat += stat_att_mod();
+  stat += stat_att_bonus();
   if (stat != prev) {
     prev = stat;
-    dbg2("Att: with mod (%s): %d", modifier_to_string(stat_att_mod()).c_str(), stat);
+    dbg3("Att: with mod (%s): %d", bonus_to_string(stat_att_bonus()).c_str(), stat);
   }
 
   //
@@ -33,7 +33,7 @@ int Thing::stat_att_mod_total()
     stat += stat_to_bonus(str_total);
     if (stat != prev) {
       prev = stat;
-      dbg2("Att: (str %d): %d", str_total, stat);
+      dbg3("Att: with: (str %d): %d", str_total, stat);
     }
   }
 
@@ -41,11 +41,12 @@ int Thing::stat_att_mod_total()
   {
     auto iter = equip_get(e);
     if (iter) {
-      stat += stat_to_bonus(iter->stat_att_mod_total());
-      if (stat != prev) {
-        prev = stat;
-        dbg2("Att: with (%s %s): %d", iter->to_short_string().c_str(),
-             modifier_to_string(iter->stat_att_mod()).c_str(), stat);
+      if (iter->stat_att_bonus()) {
+        stat += iter->stat_att_total() - 10;
+        if (stat != prev) {
+          prev = stat;
+          dbg3("Att: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_att_total(), stat);
+        }
       }
     }
   }
@@ -68,11 +69,12 @@ int Thing::stat_att_mod_total()
         if (iter->is_auto_equipped()) {
           continue;
         }
-        stat += stat_to_bonus(iter->stat_att_mod_total());
+        if (iter->stat_att_bonus()) {
+          stat += iter->stat_att_total() - 10;
+        }
         if (stat != prev) {
           prev = stat;
-          dbg2("Att: with (%s %s): %d", iter->to_short_string().c_str(),
-               modifier_to_string(iter->stat_att_mod()).c_str(), stat);
+          dbg3("Att: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_att_total(), stat);
         }
       }
     }
@@ -81,11 +83,12 @@ int Thing::stat_att_mod_total()
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += stat_to_bonus(iter->stat_att_mod_total());
+        if (iter->stat_att_bonus()) {
+          stat += iter->stat_att_total() - 10;
+        }
         if (stat != prev) {
           prev = stat;
-          dbg2("Att: with (%s %s): %d", iter->to_short_string().c_str(),
-               modifier_to_string(iter->stat_att_mod()).c_str(), stat);
+          dbg3("Att: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_att_total(), stat);
         }
       }
     }
@@ -94,11 +97,12 @@ int Thing::stat_att_mod_total()
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += stat_to_bonus(iter->stat_att_mod_total());
+        if (iter->stat_att_bonus()) {
+          stat += iter->stat_att_total() - 10;
+        }
         if (stat != prev) {
           prev = stat;
-          dbg2("Att: with (%s %s): %d", iter->to_short_string().c_str(),
-               modifier_to_string(iter->stat_att_mod()).c_str(), stat);
+          dbg3("Att: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_att_total(), stat);
         }
       }
     }
@@ -107,22 +111,23 @@ int Thing::stat_att_mod_total()
     {
       auto iter = level->thing_find(id);
       if (iter && iter->is_activated) {
-        stat += stat_to_bonus(iter->stat_att_mod_total());
+        if (iter->stat_att_bonus()) {
+          stat += iter->stat_att_total() - 10;
+        }
         if (stat != prev) {
           prev = stat;
-          dbg2("Att: with (%s %s): %d", iter->to_short_string().c_str(),
-               modifier_to_string(iter->stat_att_mod()).c_str(), stat);
+          dbg3("Att: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_att_total(), stat);
         }
       }
     }
   }
 
-  if (stat) {
+  if (stat_att_bonus()) {
     auto enchant = enchant_count_get();
     stat += enchant;
     if (stat != prev) {
       prev = stat;
-      dbg2("Att: with enchant %d: %d", enchant, stat);
+      dbg3("Att: with enchant %d: %d", enchant, stat);
     }
   }
 
@@ -156,7 +161,7 @@ int Thing::stat_att_penalties_total(void)
     penalty += p;
     if (penalty != prev) {
       prev = penalty;
-      dbg2("Att penalty: stuck %d", p);
+      dbg3("Att penalty: stuck %d", p);
     }
   } else if (idle_count() && stat_att_penalty_when_idle()) {
     int p = stat_att_penalty_when_idle() + idle_count();
@@ -164,7 +169,7 @@ int Thing::stat_att_penalties_total(void)
     penalty += p;
     if (penalty != prev) {
       prev = penalty;
-      dbg2("Att penalty: idle %d", p);
+      dbg3("Att penalty: idle %d", p);
     }
   }
 
@@ -176,14 +181,14 @@ int Thing::stat_att_penalties_total(void)
     penalty += p;
     if (penalty != prev) {
       prev = penalty;
-      dbg2("Att penalty: starving %d", p);
+      dbg3("Att penalty: starving %d", p);
     }
   } else if (is_hunger_level_hungry) {
     int p = THING_HUNGER_PENALTY_WHEN_HUNGRY;
     penalty += p;
     if (penalty != prev) {
       prev = penalty;
-      dbg2("Att penalty: hunger %d", p);
+      dbg3("Att penalty: hunger %d", p);
     }
   }
 
@@ -206,7 +211,7 @@ int Thing::stat_att_penalties_total(void)
         penalty += p;
         if (penalty != prev) {
           prev = penalty;
-          dbg2("Att penalty: with (in deep water %d): %d", p, penalty);
+          dbg3("Att penalty: with (in deep water %d): %d", p, penalty);
         }
       }
     } else if (level->is_shallow_water(curr_at)) {
@@ -218,14 +223,14 @@ int Thing::stat_att_penalties_total(void)
         penalty += p;
         if (penalty != prev) {
           prev = penalty;
-          dbg2("Att penalty: with (in shallow water %d): %d", p, penalty);
+          dbg3("Att penalty: with (in shallow water %d): %d", p, penalty);
         }
       }
     }
   }
 
   if (penalty) {
-    dbg2("Att penalty: %d", penalty);
+    dbg3("Att penalty: %d", penalty);
   }
   return penalty;
 }
@@ -295,68 +300,68 @@ int Thing::stat_att_incr(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// stat_att_mod
+// stat_att_bonus
 ////////////////////////////////////////////////////////////////////////////
-int Thing::stat_att_mod(void)
+int Thing::stat_att_bonus(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop()->stat_att_mod);
+    return (infop()->stat_att_bonus);
   }
   return 0;
 }
 
-int Thing::stat_att_mod_set(int v)
+int Thing::stat_att_bonus_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->stat_att_mod = v);
+  auto n = (infop()->stat_att_bonus = v);
   return n;
 }
 
-int Thing::stat_att_mod_decr(int v)
+int Thing::stat_att_bonus_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->stat_att_mod -= v);
+  auto n = (infop()->stat_att_bonus -= v);
   return n;
 }
 
-int Thing::stat_att_mod_incr(int v)
+int Thing::stat_att_bonus_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->stat_att_mod += v);
+  auto n = (infop()->stat_att_bonus += v);
   return n;
 }
 
-int Thing::stat_att_mod_decr(void)
+int Thing::stat_att_bonus_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->stat_att_mod--);
+  auto n = (infop()->stat_att_bonus--);
   return n;
 }
 
-int Thing::stat_att_mod_incr(void)
+int Thing::stat_att_bonus_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
   new_infop();
-  auto n = (infop()->stat_att_mod++);
+  auto n = (infop()->stat_att_bonus++);
   return n;
 }

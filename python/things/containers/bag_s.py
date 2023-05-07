@@ -47,7 +47,6 @@ def tp_init(name, text_long_name):
     my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.on_death_drop_all_items(self, True)
-    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "A small leathery brown bag.")
     my.text_description_short(self, "A small brown bag.")

@@ -33,7 +33,6 @@ def tp_init(name, text_long_name):
     my.is_treasure_type(self, True)
     my.normal_placement_rules(self, True)
     my.rarity(self, my.RARITY_COMMON)
-    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "Topaz is prized for its ability to help you make friends. Just what you need. There are some entrails left on this piece. Just wipe them off.")
     my.text_description_short(self, "Clean cut topaz.")

@@ -20,7 +20,7 @@ const std::string Thing::dmg_cold_dice_str(void)
   TRACE_NO_INDENT();
 
   if (enchant_count_get()) {
-    return tp()->dmg_cold_dice_str() + modifier_to_string(enchant_count_get());
+    return tp()->dmg_cold_dice_str() + bonus_to_string(enchant_count_get());
   }
 
   return (tp()->dmg_cold_dice_str());

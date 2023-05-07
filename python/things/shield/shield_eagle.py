@@ -8,7 +8,7 @@ def on_enchant(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if my.thing_is_player(owner):
         my.thing_msg(me, "The eagle shield flaps its wings.")
-    my.thing_stat_def_mod_incr(me, 1)
+    my.thing_stat_def_bonus_incr(me, 1)
 
 
 def tp_init(name, text_long_name, text_short_name):
@@ -53,15 +53,15 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_very_hard(self, True)
     my.item_height(self, 6)
     my.item_width(self, 4)
-    my.jump_distance_mod(self, 2)
+    my.jump_distance_bonus(self, 2)
     my.noise_on_dropping(self, 50)
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
     my.rarity(self, my.RARITY_VERY_RARE)
-    my.shove_strength_mod(self, 1)
-    my.stat_def_mod(self, 5)
-    my.stat_luck(self, 10)
-    my.stat_str_mod(self, 1)
+    my.shove_bonus(self, 1)
+    my.stat_def_bonus(self, 5)
+    my.stat_dex_bonus(self, -2)
+    my.stat_str_bonus(self, 1)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 DEF")
     my.text_description_long(self, "Fight and glide like the eagle with this dazzling lightweight shield.")

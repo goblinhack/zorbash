@@ -9,7 +9,7 @@ def on_enchant(me, x, y):
     if my.thing_is_player(owner):
         my.thing_msg(me, "The boots become a bit less squeaky and yet more speedy.")
     my.thing_noise_incr(me, -10)
-    my.thing_move_speed_mod_incr(me, 25)
+    my.thing_move_speed_bonus_incr(me, 25)
 
 
 def tp_init(name, text_long_name, text_short_name):
@@ -49,15 +49,14 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_usable(self, True)
     my.item_height(self, 3)
     my.item_width(self, 3)
-    my.move_speed_mod(self, 100)
+    my.move_speed_bonus(self, 100)
     my.noise_additional_on_jump_end(self, 50)
     my.noise_on_dropping(self, 50)
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
     my.rarity(self, my.RARITY_VERY_RARE)
     my.stamina_drain_on_using(self, 1)
-    my.stat_dex_mod(self, 1)
-    my.stat_luck(self, 10)
+    my.stat_dex_bonus(self, 1)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+25 speed")
     my.text_description_long(self, "Boots of haste. With these boots, everything about your metabolism speeds up. You can move faster and attack faster. Watch out though, as wearing them can be tiring.")

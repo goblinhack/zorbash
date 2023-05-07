@@ -46,7 +46,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
-    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "all levels")
     my.text_description_long(self, "When carrying this magical map you are able to see all the treasure, food and keys on the current level.")

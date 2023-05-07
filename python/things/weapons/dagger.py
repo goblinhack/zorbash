@@ -77,8 +77,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_COMMON)
     my.stamina_drain_on_attacking(self, 0)
-    my.stat_dex_mod(self, 1)  # means +1 per enchant
-    my.stat_luck(self, 10)
+    my.stat_dex_bonus(self, 1)  # means +1 per enchant
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 DMG")
     my.text_description_long(self, "Ideal for cutting vegetables and enemies.")

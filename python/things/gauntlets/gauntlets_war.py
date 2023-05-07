@@ -18,7 +18,7 @@ def on_enchant(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if my.thing_is_player(owner):
         my.thing_msg_if_not_dead_or_dying(me, "The gauntlets become yet more war like.")
-    my.thing_shove_strength_mod_incr(me, 1)
+    my.thing_shove_bonus_incr(me, 1)
 
 
 def tp_init(name, text_long_name, text_short_name):
@@ -64,9 +64,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_equip_do(self, "me.on_equip()")
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_VERY_RARE)
-    my.stat_def_mod(self, 3)
-    my.stat_luck(self, 10)
-    my.stat_str_mod(self, 5)
+    my.stat_def_bonus(self, 3)
+    my.stat_str_bonus(self, 5)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 str, +1 def, +1 shove")
     my.text_description_long(self, "Provides a hefty strength and defense bonus, these gauntlets mean business.?")

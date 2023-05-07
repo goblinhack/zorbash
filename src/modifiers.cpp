@@ -92,7 +92,7 @@ int stat_to_bonus(int stat)
   return bonus;
 }
 
-const std::string modifier_to_string(int stat)
+const std::string bonus_to_string(int stat)
 {
   switch (stat) {
     case -20 : return "-20";
@@ -140,7 +140,7 @@ const std::string modifier_to_string(int stat)
   }
 }
 
-const std::string stat_to_bonus_string(int stat) { return modifier_to_string(stat_to_bonus(stat)); }
+const std::string stat_to_bonus_string(int stat) { return bonus_to_string(stat_to_bonus(stat)); }
 
 const std::string stat_to_bonus_slash_str(int stat)
 {

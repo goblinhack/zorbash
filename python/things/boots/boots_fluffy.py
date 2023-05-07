@@ -64,7 +64,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_equip_do(self, "me.on_equip()")
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_UNCOMMON)
-    my.stat_luck(self, 10)
     my.temperature(self, 50)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "-10 decibels")

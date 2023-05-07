@@ -118,7 +118,7 @@ def tp_init(name, text_long_name):
     my.spawn_group_radius(self, 5)
     my.spawn_group_size_dice(self, "1d3+5")
     my.stamina(self, 100)
-    my.stat_att_mod(self, 10)
+    my.stat_att_bonus(self, 10)
     my.stat_con(self, 10)
     my.stat_def(self, 6)
     my.stat_dex(self, 14)

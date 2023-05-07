@@ -37,7 +37,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.item_width(self, 4)
     my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
-    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "This magical map can show you the position of all monsters on the level as they move around.")
     my.text_description_short(self, "An aged beast map.")

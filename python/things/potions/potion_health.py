@@ -142,7 +142,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_thrown_do(self, "me.on_thrown()")
     my.on_use_do(self, "me.on_use()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
-    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+10 percent health and stamina")
     my.text_description_long(self, "Restores your health and stamina to at least 80 percent. You'll feel like your old self again. Only even more awesome.")

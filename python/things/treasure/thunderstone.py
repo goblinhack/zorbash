@@ -94,7 +94,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_hit_and_now_dead_do(self, "me.on_hit_and_now_dead()")
     my.on_use_do(self, "me.on_use()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
-    my.stat_luck(self, 10)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "This most dangerous stone can devastate any are where it is thrown. Be careful where you drop it...")
     my.text_description_short(self, "A harmless looking brownish stone.")
