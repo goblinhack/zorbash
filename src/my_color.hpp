@@ -7,6 +7,7 @@
 #define _MY_COLOR_HPP_
 
 #include <string>
+#include <cstdint>
 
 class color
 {
