@@ -3,6 +3,7 @@ import my
 
 def init(self, name):
     # begin sort marker
+    my.gfx_pixelart_show_outlined(self, True)
     my.is_loggable(self, True)
     my.is_moveable(self, True)
     my.is_removable_if_out_of_slots(self, True)
