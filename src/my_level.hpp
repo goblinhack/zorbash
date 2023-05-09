@@ -461,7 +461,6 @@ public:
   }                                                                                                                  \
   }                                                                                                                  \
   level->interesting_things_walk_in_progress = false;                                                                \
-  level->handle_all_pending_things();                                                                                \
   }
 
 //
@@ -484,7 +483,6 @@ public:
   }                                                                                                                  \
   }                                                                                                                  \
   level->tickable_things_walk_in_progress = false;                                                                   \
-  level->handle_all_pending_things();                                                                                \
   }
 
 //
@@ -507,7 +505,6 @@ public:
   }                                                                                                                  \
   }                                                                                                                  \
   level->describable_things_walk_in_progress = false;                                                                \
-  level->handle_all_pending_things();                                                                                \
   }
 
 #define FOR_ALL_ANIMATED_THINGS_LEVEL(level, t)                                                                      \
