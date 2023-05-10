@@ -117,7 +117,7 @@ static void wid_credits_tick(Widp w)
 void Game::wid_credits_select(void)
 {
   TRACE_AND_INDENT();
-  CON("Credits");
+  CON("INF: Credits");
 
   if (wid_credits_window) {
     wid_credits_destroy();

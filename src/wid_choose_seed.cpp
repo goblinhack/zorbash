@@ -28,7 +28,7 @@ static void cancelled(Widp w, const std::wstring &text)
 void Game::wid_choose_seed_select(void)
 {
   TRACE_AND_INDENT();
-  CON("Choose seed menu");
+  CON("INF: Choose seed menu");
 
   auto seed = g_opt_seed_name;
   if (seed.empty()) {
