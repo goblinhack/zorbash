@@ -51,9 +51,9 @@ static uint8_t wid_quit_yes(Widp w, int x, int y, uint32_t button)
             TOPCON("%%fg=gold$New high score, %s place!%%fg=reset$", game->config.hiscores.place_str(player));
           }
           game->config.hiscores.add_new_hiscore(player, player->title(), "went home early");
-          CON("Player quit the game; new hiscore");
+          CON("INF: Player quit the game; new hiscore");
         } else {
-          CON("Player quit the game; no hiscore change");
+          CON("INF: Player quit the game; no hiscore change");
         }
       }
     }

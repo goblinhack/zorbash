@@ -77,7 +77,6 @@ def tp_init(name, text_long_name):
     my.is_attackable_by_player(self, True)
     my.is_biome_chasms(self, True)
     my.is_biome_dungeon(self, True)
-    my.is_biome_flooded(self, True)
     my.is_burnable(self, True)
     my.is_corpse_on_death(self, True)
     my.is_crushable(self, True)

@@ -795,7 +795,7 @@ int main(int argc, char *argv[])
   //
   // Random number
   //
-  CON("INI: Initialize random number generator");
+  CON("INI: Init random seed");
   double                             mean = 1.0;
   double                             std  = 0.5;
   std::normal_distribution< double > distribution;

@@ -223,7 +223,7 @@ static uint8_t wid_config_top_key_down(Widp w, const struct SDL_Keysym *key)
 void Game::wid_config_top_menu(void)
 {
   TRACE_AND_INDENT();
-  CON("Config menu");
+  CON("INF: Config menu");
 
   if (wid_config_top_window) {
     wid_config_top_destroy();
