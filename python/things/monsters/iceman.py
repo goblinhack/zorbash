@@ -55,7 +55,7 @@ def tp_init(name, text_long_name):
     my.dmg_chance_d1000_cold(self, 0, 1000)
     my.dmg_chance_d1000_nat_att(self, 0, 100)
     my.dmg_cold_dice(self, "1d8")
-    my.environ_hates_cold(self, 100)
+    my.environ_hates_fire(self, 100)
     my.gfx_anim_use(self, "attack_red")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)

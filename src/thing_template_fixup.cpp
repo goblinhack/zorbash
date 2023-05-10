@@ -121,10 +121,16 @@ void tp_fixup(void)
     }
 
     if (tp->environ_hates_cold()) {
+      if (tp->is_biome_ice()) {
+        DIE("Tp %s hates water and is in biome ice?", tp->name().c_str());
+      }
       tp->environ_dislikes_cold_set(true);
     }
 
     if (tp->environ_hates_fire()) {
+      if (tp->is_biome_lava()) {
+        DIE("Tp %s hates water and is in biome lava?", tp->name().c_str());
+      }
       tp->environ_dislikes_fire_set(true);
     }
 
@@ -137,15 +143,24 @@ void tp_fixup(void)
     }
 
     if (tp->environ_hates_water()) {
+      if (tp->is_biome_flooded()) {
+        DIE("Tp %s hates water and is in biome flooded?", tp->name().c_str());
+      }
       tp->environ_dislikes_water_set(true);
     }
 
     if (tp->is_fire_elemental()) {
+      if (tp->environ_hates_fire()) {
+        DIE("Tp %s hates fire and is a cold elemental ?", tp->name().c_str());
+      }
       tp->is_immune_to_fire_set(true);
       tp->dmg_received_doubled_from_cold_set(true);
     }
 
     if (tp->is_cold_elemental()) {
+      if (tp->environ_hates_cold()) {
+        DIE("Tp %s hates cold and is a cold elemental ?", tp->name().c_str());
+      }
       tp->is_immune_to_cold_set(true);
       tp->dmg_received_doubled_from_fire_set(true);
     }
