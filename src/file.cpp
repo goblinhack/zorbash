@@ -150,7 +150,6 @@ unsigned char *file_load(const char *filename, int *outlen)
 
   /*
    * Fail. Caller should whinge.
-
   char *popup_str = dynprintf("Filename was not found on ramdisk or "
                 "on the local disk, %s", filename);
 

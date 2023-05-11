@@ -104,6 +104,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     point br = make_point(width - 1, y_at);
     auto  s  = dynprintf("%%fg=gray$%s", t->text_short_capitalised(UI_LEFTBAR_WIDTH).c_str());
     if (t == game->current_wid_thing_info) {
+      myfree(s);
       s = dynprintf("%%fg=red$%s", t->text_short_capitalised(UI_LEFTBAR_WIDTH).c_str());
     }
     wid_set_pos(w, tl, br);
