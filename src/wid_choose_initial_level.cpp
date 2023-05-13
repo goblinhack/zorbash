@@ -133,6 +133,10 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
     wid_set_pos(b, tl, br);
   }
 
+  if (! ctx->nodes) {
+    return;
+  }
+
   auto node = ctx->nodes->getn(x, y);
 
   std::string bg_tilename;
@@ -195,7 +199,15 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
     // Place crystals at level transitions
     //
     for (auto n : l->next_levels) {
-      auto nl        = get(game->world.levels, n.x, n.y, n.z);
+      auto nl = get(game->world.levels, n.x, n.y, n.z);
+
+      //
+      // Can happen during shutdown started during creation
+      //
+      if (! nl) {
+        continue;
+      }
+
       auto next_node = ctx->nodes->getn(nl->grid_at.x, nl->grid_at.y);
 
       if (next_node) {
