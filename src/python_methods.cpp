@@ -2022,6 +2022,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_WRAPPED_PYTHON_FUNCTION(level_add),
     MY_ADD_WRAPPED_PYTHON_FUNCTION(log),
     MY_ADD_WRAPPED_PYTHON_FUNCTION(map_load_room),
+    MY_ADD_WRAPPED_PYTHON_FUNCTION(map_load_skill_tree),
     MY_ADD_WRAPPED_PYTHON_FUNCTION(music_halt),
     MY_ADD_WRAPPED_PYTHON_FUNCTION(music_load),
     MY_ADD_WRAPPED_PYTHON_FUNCTION(music_play),
