@@ -133,6 +133,22 @@ public:
   void reset(void);
 };
 
+class Skill
+{
+public:
+  //
+  // Current skill
+  //
+  std::string skill_alias;
+  //
+  // Next skills in the tree
+  //
+  Skillp skill_down  = {};
+  Skillp skill_up    = {};
+  Skillp skill_left  = {};
+  Skillp skill_right = {};
+};
+
 class Game
 {
 public:
@@ -427,6 +443,12 @@ public:
   // Temporary for the status bar
   //
   std::array< std::array< Tilep, GAME_MONST_HEALTH_BAR_STEPS + 1 >, 2 > tile_cache_health = {};
+
+  //
+  // Skill tree
+  //
+  std::map< std::string, std::string >                                   skill_aliases;
+  std::array< std::array< Skillp, SKILL_TREE_DOWN >, SKILL_TREE_ACROSS > skill_tree {};
 
   //
   // Temporary. Dampens mouse clicks
