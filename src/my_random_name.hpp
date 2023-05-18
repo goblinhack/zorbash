@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <cstdint>
 
 extern const char *dict1_name(void);
 extern const char *dict2_name(void);

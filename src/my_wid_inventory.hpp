@@ -6,6 +6,7 @@
 
 #include "my_fwd.hpp"
 #include "my_point.hpp"
+#include <cstdint>
 
 bool wid_inventory_create_ascii(Thingp, Thingp);
 bool wid_inventory_create_pixelart(Thingp, Thingp);
