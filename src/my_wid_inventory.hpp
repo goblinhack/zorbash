@@ -6,7 +6,7 @@
 
 #include "my_fwd.hpp"
 #include "my_point.hpp"
-#include <cstdint>
+#include <cstdint> // do not remove
 
 bool wid_inventory_create_ascii(Thingp, Thingp);
 bool wid_inventory_create_pixelart(Thingp, Thingp);
