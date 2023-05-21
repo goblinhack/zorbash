@@ -23,6 +23,7 @@ public:
   point       br;
   Tilep       title_tile {};
   Thingp      t {};
+  Tpp         tpp {};
   std::string background;
   std::string name;
   int         outer_w {};

@@ -2,6 +2,8 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_array_bounds_check.hpp"
+#include "my_color_defs.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_sdl_proto.hpp"
@@ -9,6 +11,7 @@
 #include "my_ui.hpp"
 #include "my_wid_actionbar.hpp"
 #include "my_wid_thing_info.hpp"
+#include "my_wid_tp_info.hpp"
 
 WidPopup                 *wid_skills;
 static std::vector< Tpp > skills;
@@ -162,6 +165,37 @@ static uint8_t wid_skill_close(Widp w, int x, int y, uint32_t button)
   return true;
 }
 
+void wid_skill_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
+{
+  TRACE_NO_INDENT();
+  DBG2("Skill: Begin over skill");
+  TRACE_AND_INDENT();
+
+  Skillp skill = (Skillp) wid_get_void_context(w);
+  if (! skill) {
+    return;
+  }
+
+  if (! skill->tpp) {
+    return;
+  }
+
+  game->wid_tp_info_create(skill->tpp);
+}
+
+void wid_skill_over_end(Widp w)
+{
+  TRACE_NO_INDENT();
+  DBG2("Skill: End over skill");
+  TRACE_AND_INDENT();
+
+  game->wid_tp_info_destroy_deferred();
+
+  //
+  // Do not create new wids in here
+  //
+}
+
 void Game::wid_choose_skill(void)
 {
   TRACE_AND_INDENT();
@@ -169,6 +203,7 @@ void Game::wid_choose_skill(void)
 
   DBG3("Thing skills create");
   wid_thing_info_fini("choose skill");
+  wid_tp_info_fini("choose skill");
 
   auto player = game->level->player;
   if (! player) {
@@ -209,114 +244,362 @@ void Game::wid_choose_skill(void)
 
   change_state(Game::STATE_CHOOSING_SKILLS, "choose skills");
 
-  auto box_style           = UI_WID_STYLE_HORIZ_DARK;
-  auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
+  if (0) {
+    auto box_style           = UI_WID_STYLE_HORIZ_DARK;
+    auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
 
-  auto       m          = TERM_WIDTH / 2;
-  static int wid_width  = 80;
-  int        left_half  = wid_width / 2;
-  int        right_half = wid_width - left_half;
+    auto       m          = TERM_WIDTH / 2;
+    static int wid_width  = 80;
+    int        left_half  = wid_width / 2;
+    int        right_half = wid_width - left_half;
 
-  bool scrollbar = false;
-  auto sz        = skills.size();
-  if (! sz) {
-    sz = 1;
+    bool scrollbar = false;
+    auto sz        = skills.size();
+    if (! sz) {
+      sz = 1;
+    }
+    int height_max = (((int) sz * 3) + 6);
+    int height;
+    if (height_max > TERM_HEIGHT / 2) {
+      height    = TERM_HEIGHT / 2;
+      scrollbar = true;
+    } else {
+      height = height_max;
+    }
+    point tl   = make_point(m - left_half, TERM_HEIGHT / 2 - height / 2 - 2);
+    point br   = make_point(m + right_half, TERM_HEIGHT / 2 + height / 2);
+    wid_skills = new WidPopup("Skills", tl, br, nullptr, "", false, scrollbar, height_max);
+
+    wid_skills->log("Choose a skill");
+
+    wid_set_on_key_up(wid_skills->wid_popup_container, wid_skills_key_up);
+    wid_set_on_key_down(wid_skills->wid_popup_container, wid_skills_key_down);
+
+    auto width = br.x - tl.x;
+    int  y_at  = 3;
+    for (auto slot = 0; slot < (int) skills.size(); slot++) {
+      Game  tmp;
+      auto  p  = wid_skills->wid_text_area->wid_text_area;
+      auto  w  = wid_new_container(p, "item slot");
+      point tl = make_point(0, y_at);
+      point br = make_point(width - 3, y_at + 2);
+
+      if (g_opt_ascii) {
+        tl = make_point(0, y_at);
+        br = make_point(width - 3, y_at + 2);
+      }
+
+      wid_set_pos(w, tl, br);
+      wid_set_shape_none(w);
+
+      auto tpp = skills[ slot ];
+
+      if (! g_opt_ascii) {
+        auto wid_icon = wid_new_square_button(w, "skill icon");
+        wid_set_int_context(w, slot);
+        wid_set_on_mouse_up(w, wid_skills_mouse_up);
+
+        point tl = make_point(0, 0);
+        point br = make_point(2, 2);
+
+        wid_set_pos(wid_icon, tl, br);
+
+        auto tiles = &tpp->tiles;
+        if (tiles) {
+          auto tile = tile_first(tiles);
+          wid_set_style(wid_icon, UI_WID_STYLE_DARK);
+          wid_set_fg_tile(wid_icon, tile);
+        }
+
+        wid_update(wid_icon);
+      }
+
+      {
+        auto skill_text = wid_new_square_button(w, "skill name");
+        wid_set_int_context(w, slot);
+        wid_set_on_mouse_up(w, wid_skills_mouse_up);
+
+        if (g_opt_ascii) {
+          point tl = make_point(1, 0);
+          point br = make_point(width - 2, 0);
+          wid_set_pos(skill_text, tl, br);
+          wid_set_mode(skill_text, WID_MODE_OVER);
+          wid_set_style(skill_text, box_highlight_style);
+          wid_set_mode(skill_text, WID_MODE_NORMAL);
+          wid_set_style(skill_text, box_style);
+        } else {
+          point tl = make_point(3, 0);
+          point br = make_point(width - 3, 2);
+          wid_set_pos(skill_text, tl, br);
+          wid_set_style(skill_text, UI_WID_STYLE_DARK);
+        }
+
+        wid_set_text(skill_text, " " + tpp->text_skill());
+        wid_set_text_lhs(skill_text, true);
+        wid_update(skill_text);
+      }
+      wid_update(w);
+
+      if (g_opt_ascii) {
+        y_at += 1;
+      } else {
+        y_at += 3;
+      }
+    }
+
+    //
+    // Close icons
+    //
+    if (g_opt_ascii) {
+      {
+        auto  w = wid_new_square_button(wid_skills->wid_popup_container, "wid collect window close");
+        point tl(0, 0);
+        point br(2, 2);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "X");
+        wid_set_style(w, UI_WID_STYLE_RED);
+        wid_set_on_mouse_up(w, wid_skill_close);
+      }
+      {
+        auto  w = wid_new_square_button(wid_skills->wid_popup_container, "wid collect window close");
+        point tl(wid_width - 2, 0);
+        point br(wid_width - 0, 2);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "X");
+        wid_set_style(w, UI_WID_STYLE_RED);
+        wid_set_on_mouse_up(w, wid_skill_close);
+      }
+    } else {
+      {
+        auto  w = wid_new_square_button(wid_skills->wid_popup_container, "wid collect window close");
+        point tl(0, 0);
+        point br(3, 3);
+        wid_set_pos(w, tl, br);
+        wid_set_bg_tilename(w, "ui_icon_close");
+        wid_set_on_mouse_down(w, wid_skill_close);
+      }
+
+      {
+        auto  w = wid_new_square_button(wid_skills->wid_popup_container, "wid collect window close");
+        point tl(wid_width - 3, 0);
+        point br(wid_width - 0, 3);
+        wid_set_pos(w, tl, br);
+        wid_set_bg_tilename(w, "ui_icon_close");
+        wid_set_on_mouse_down(w, wid_skill_close);
+      }
+    }
+
+    wid_update(wid_skills->wid_text_area->wid_text_area);
+    wid_actionbar_init();
   }
-  int height_max = (((int) sz * 3) + 6);
-  int height;
-  if (height_max > TERM_HEIGHT / 2) {
-    height    = TERM_HEIGHT / 2;
-    scrollbar = true;
+
+  int WID_SKILL_BUTTON_WIDTH  = 4;
+  int WID_SKILL_BUTTON_HEIGHT = 4;
+
+  if (g_opt_ascii) {
+    WID_SKILL_BUTTON_WIDTH  = 12;
+    WID_SKILL_BUTTON_HEIGHT = 4;
   } else {
-    height = height_max;
+    WID_SKILL_BUTTON_WIDTH  = 6;
+    WID_SKILL_BUTTON_HEIGHT = 6;
   }
-  point tl   = make_point(m - left_half, TERM_HEIGHT / 2 - height / 2 - 2);
-  point br   = make_point(m + right_half, TERM_HEIGHT / 2 + height / 2);
-  wid_skills = new WidPopup("Skills", tl, br, nullptr, "", false, scrollbar, height_max);
 
-  wid_skills->log("Choose a skill");
+  /*
+   * Main window
+   */
+  point tl = make_point(29, 5);
+  point br = make_point(TERM_WIDTH - 29, TERM_HEIGHT - 8);
+  if (g_opt_ascii) {
+    tl = make_point(0, 0);
+    br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
+  }
+
+  auto skills_width = br.x - tl.x;
+  wid_skills        = new WidPopup("Skills", tl, br, nullptr, "", true, false);
+  wid_skills->log("*WORK IN PROGRESS* Choose a skill");
+  auto skills_container = wid_skills->wid_popup_container;
 
   wid_set_on_key_up(wid_skills->wid_popup_container, wid_skills_key_up);
   wid_set_on_key_down(wid_skills->wid_popup_container, wid_skills_key_down);
 
-  auto width = br.x - tl.x;
-  int  y_at  = 3;
-  for (auto slot = 0; slot < (int) skills.size(); slot++) {
-    Game  tmp;
-    auto  p  = wid_skills->wid_text_area->wid_text_area;
-    auto  w  = wid_new_container(p, "item slot");
-    point tl = make_point(0, y_at);
-    point br = make_point(width - 3, y_at + 2);
-
-    if (g_opt_ascii) {
-      tl = make_point(0, y_at);
-      br = make_point(width - 3, y_at + 2);
-    }
-
-    wid_set_pos(w, tl, br);
-    wid_set_shape_none(w);
-
-    auto tpp = skills[ slot ];
-
-    if (! g_opt_ascii) {
-      auto wid_icon = wid_new_square_button(w, "skill icon");
-      wid_set_int_context(w, slot);
-      wid_set_on_mouse_up(w, wid_skills_mouse_up);
-
-      point tl = make_point(0, 0);
-      point br = make_point(2, 2);
-
-      wid_set_pos(wid_icon, tl, br);
-
-      auto tiles = &tpp->tiles;
-      if (tiles) {
-        auto tile = tile_first(tiles);
-        wid_set_style(wid_icon, UI_WID_STYLE_DARK);
-        wid_set_fg_tile(wid_icon, tile);
+  //
+  // Create the buttons
+  //
+  for (auto x = 0; x < SKILL_TREE_ACROSS; x++) {
+    for (auto y = 0; y < SKILL_TREE_DOWN; y++) {
+      auto skill = get(game->skill_tree, x, y);
+      if (! skill) {
+        continue;
       }
 
-      wid_update(wid_icon);
-    }
-
-    {
-      auto skill_text = wid_new_square_button(w, "skill name");
-      wid_set_int_context(w, slot);
-      wid_set_on_mouse_up(w, wid_skills_mouse_up);
-
+      //
+      // Create a button describing the skill
+      //
+      Widp  b = wid_new_square_button(skills_container, "wid skill grid button");
+      point tl;
+      point br;
+      tl.x = WID_SKILL_BUTTON_WIDTH * x + 2;
       if (g_opt_ascii) {
-        point tl = make_point(1, 0);
-        point br = make_point(width - 2, 0);
-        wid_set_pos(skill_text, tl, br);
-        wid_set_mode(skill_text, WID_MODE_OVER);
-        wid_set_style(skill_text, box_highlight_style);
-        wid_set_mode(skill_text, WID_MODE_NORMAL);
-        wid_set_style(skill_text, box_style);
-      } else {
-        point tl = make_point(3, 0);
-        point br = make_point(width - 3, 2);
-        wid_set_pos(skill_text, tl, br);
-        wid_set_style(skill_text, UI_WID_STYLE_DARK);
+        tl.x += 2;
+      }
+      tl.y = WID_SKILL_BUTTON_HEIGHT * y + 3;
+      if (! g_opt_ascii) {
+        tl.y += 3;
+      }
+      br.x = tl.x + (WID_SKILL_BUTTON_WIDTH - 1) - 1;
+      br.y = tl.y + (WID_SKILL_BUTTON_HEIGHT - 1) - 1;
+      wid_set_pos(b, tl, br);
+      wid_set_style(b, UI_WID_STYLE_DARK);
+
+      //
+      // Add the tile for this skill, unless it is an intermediate skill
+      //
+      auto skill_alias = skill->skill_alias;
+      if (! skill_alias.empty()) {
+        //
+        // Check the alias to skill mapping exists
+        //
+        if (game->skill_aliases.find(skill_alias) == game->skill_aliases.end()) {
+          ERR("Skill alias %s not found", skill_alias.c_str());
+        } else {
+          //
+          // Find the skill template
+          //
+          auto skill_name = game->skill_aliases[ skill_alias ];
+          if (! skill_name.empty()) {
+            auto tpp = tp_find(skill_name);
+            if (tpp) {
+              skill->tpp = tpp;
+
+              if (g_opt_ascii) {
+                //
+                // And its short description
+                //
+                wid_set_text(b, tpp->text_short_capitalised().c_str());
+              } else {
+                //
+                // And its tile
+                //
+                auto tiles = &tpp->tiles;
+                if (tiles) {
+                  auto tile = tile_first(tiles);
+                  if (tile) {
+                    wid_set_fg_tile(b, tile);
+                  }
+                }
+              }
+            } else {
+              ERR("Skill alias %s and name %s not found", skill_alias.c_str(), skill_name.c_str());
+            }
+          }
+        }
       }
 
-      wid_set_text(skill_text, " " + tpp->text_skill());
-      wid_set_text_lhs(skill_text, true);
-      wid_update(skill_text);
-    }
-    wid_update(w);
+      wid_set_on_mouse_over_begin(b, wid_skill_over_begin);
+      wid_set_on_mouse_over_end(b, wid_skill_over_end);
+      wid_set_void_context(b, skill);
 
-    if (g_opt_ascii) {
-      y_at += 1;
-    } else {
-      y_at += 3;
+      //
+      // Create connectors between skills
+      //
+      if (skill->skill_down) {
+        Widp  b   = wid_new_square_button(skills_container, "wid skill grid connector");
+        point tl2 = tl;
+        point br2 = br;
+
+        tl2.x += WID_SKILL_BUTTON_WIDTH / 2;
+        tl2.y += WID_SKILL_BUTTON_HEIGHT - 1;
+        tl2.x -= 1;
+        br2 = tl2;
+
+        wid_set_pos(b, tl2, br2);
+        if (g_opt_ascii) {
+          wid_set_text(b, "v");
+        } else {
+          wid_set_fg2_tilename(b, "tile_down");
+        }
+        wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+      }
+
+      if (skill->skill_up) {
+        Widp  b   = wid_new_square_button(skills_container, "wid skill grid connector");
+        point tl2 = tl;
+        point br2 = br;
+
+        tl2.y -= WID_SKILL_BUTTON_WIDTH;
+        tl2.x += WID_SKILL_BUTTON_WIDTH / 2;
+        tl2.y += WID_SKILL_BUTTON_HEIGHT - 1;
+        tl2.x -= 1;
+        br2 = tl2;
+
+        wid_set_pos(b, tl2, br2);
+        if (g_opt_ascii) {
+          wid_set_text(b, "^");
+        } else {
+          wid_set_fg2_tilename(b, "tile_up");
+        }
+        wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+      }
+
+      if (skill->skill_left) {
+        Widp  b   = wid_new_square_button(skills_container, "wid skill grid connector");
+        point tl2 = tl;
+        point br2 = br;
+
+        tl2.x -= 1;
+        tl2.y += 2;
+        if (g_opt_ascii) {
+          tl2.y--;
+        }
+        br2 = tl2;
+
+        wid_set_pos(b, tl2, br2);
+        if (g_opt_ascii) {
+          wid_set_text(b, "<");
+        } else {
+          wid_set_fg2_tilename(b, "tile_left");
+        }
+        wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+      }
+
+      if (skill->skill_right) {
+        Widp  b   = wid_new_square_button(skills_container, "wid skill grid connector");
+        point tl2 = tl;
+        point br2 = br;
+
+        tl2.x += WID_SKILL_BUTTON_WIDTH;
+        tl2.x -= 1;
+        tl2.y += 1;
+        tl2.y += 1;
+        if (g_opt_ascii) {
+          tl2.y--;
+        }
+        br2 = tl2;
+
+        wid_set_pos(b, tl2, br2);
+        if (g_opt_ascii) {
+          wid_set_text(b, ">");
+        } else {
+          wid_set_fg2_tilename(b, "tile_right");
+        }
+        wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+      }
     }
   }
 
-  //
-  // Close icons
-  //
   if (g_opt_ascii) {
     {
-      auto  w = wid_new_square_button(wid_skills->wid_popup_container, "wid collect window close");
+      auto  w = wid_new_square_button(skills_container, "wid skills window close");
+      point tl(skills_width - 2, 0);
+      point br(skills_width, 2);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, "X");
+      wid_set_style(w, UI_WID_STYLE_RED);
+      wid_set_on_mouse_up(w, wid_skill_close);
+    }
+
+    {
+      auto  w = wid_new_square_button(skills_container, "wid skills window close");
       point tl(0, 0);
       point br(2, 2);
       wid_set_pos(w, tl, br);
@@ -324,35 +607,25 @@ void Game::wid_choose_skill(void)
       wid_set_style(w, UI_WID_STYLE_RED);
       wid_set_on_mouse_up(w, wid_skill_close);
     }
-    {
-      auto  w = wid_new_square_button(wid_skills->wid_popup_container, "wid collect window close");
-      point tl(wid_width - 2, 0);
-      point br(wid_width - 0, 2);
-      wid_set_pos(w, tl, br);
-      wid_set_text(w, "X");
-      wid_set_style(w, UI_WID_STYLE_RED);
-      wid_set_on_mouse_up(w, wid_skill_close);
-    }
   } else {
     {
-      auto  w = wid_new_square_button(wid_skills->wid_popup_container, "wid collect window close");
+      auto  w = wid_new_square_button(skills_container, "wid skills window close");
+      point tl(skills_width - 3, 0);
+      point br(skills_width, 3);
+      wid_set_pos(w, tl, br);
+      wid_set_bg_tilename(w, "ui_icon_close");
+      wid_set_on_mouse_up(w, wid_skill_close);
+    }
+
+    {
+      auto  w = wid_new_square_button(skills_container, "wid skills window close");
       point tl(0, 0);
       point br(3, 3);
       wid_set_pos(w, tl, br);
       wid_set_bg_tilename(w, "ui_icon_close");
-      wid_set_on_mouse_down(w, wid_skill_close);
-    }
-
-    {
-      auto  w = wid_new_square_button(wid_skills->wid_popup_container, "wid collect window close");
-      point tl(wid_width - 3, 0);
-      point br(wid_width - 0, 3);
-      wid_set_pos(w, tl, br);
-      wid_set_bg_tilename(w, "ui_icon_close");
-      wid_set_on_mouse_down(w, wid_skill_close);
+      wid_set_on_mouse_up(w, wid_skill_close);
     }
   }
 
-  wid_update(wid_skills->wid_text_area->wid_text_area);
   wid_actionbar_init();
 }

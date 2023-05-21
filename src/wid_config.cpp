@@ -10,6 +10,7 @@
 #include "my_wid_rightbar.hpp"
 #include "my_wid_skillbox.hpp"
 #include "my_wid_thing_info.hpp"
+#include "my_wid_tp_info.hpp"
 #include <SDL_mixer.h>
 
 WidPopup *wid_config_top_window;
@@ -233,6 +234,7 @@ void Game::wid_config_top_menu(void)
   wid_inventory_fini();
   wid_skillbox_fini();
   wid_thing_info_fini("confg top menu");
+  wid_tp_info_fini("confg top menu");
 
   auto box_height          = g_opt_ascii ? 0 : 2;
   auto box_step            = g_opt_ascii ? 2 : 3;

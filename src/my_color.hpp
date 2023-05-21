@@ -6,8 +6,8 @@
 #ifndef _MY_COLOR_HPP_
 #define _MY_COLOR_HPP_
 
-#include <string>
 #include <cstdint> // do not remove
+#include <string>
 
 class color
 {

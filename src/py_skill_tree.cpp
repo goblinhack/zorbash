@@ -90,6 +90,7 @@ PyObject *map_load_skill_tree_(PyObject *obj, PyObject *args, PyObject *keywds)
       if (skill_alias != "  ") {
         auto skill         = new Skill();
         skill->skill_alias = skill_alias;
+        CON("New skil %s", skill_alias.c_str());
         TRACE_NO_INDENT();
         set(game->skill_tree, x, y, skill);
       }

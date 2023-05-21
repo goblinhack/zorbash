@@ -12,6 +12,7 @@
 #include "my_wid_skillbox.hpp"
 #include "my_wid_thing_info.hpp"
 #include "my_wid_topcon.hpp"
+#include "my_wid_tp_info.hpp"
 
 void Game::start(void)
 {
@@ -32,6 +33,7 @@ void Game::start(void)
   wid_topcon_init();
 
   wid_thing_info_fini("start the game");
+  wid_tp_info_fini("start the game");
   wid_inventory_fini();
 
   wid_skillbox_fini();

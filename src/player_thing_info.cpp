@@ -7,7 +7,7 @@
 #include "my_sdl_event.hpp"
 #include "my_thing.hpp"
 
-bool Thing::player_is_ready_for_thing_info(void)
+bool Thing::player_is_ready_for_popups(void)
 {
   verify(MTYPE_THING, this);
 

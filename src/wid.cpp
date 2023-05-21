@@ -20,6 +20,7 @@
 #include "my_wid_leftbar.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_thing_info.hpp"
+#include "my_wid_tp_info.hpp"
 
 #undef ENABLE_DEBUG_GFX_GL_BLEND
 
@@ -6654,6 +6655,17 @@ static void wid_handle_requests(void)
       DBG("Handle request to destroy thing info");
       game->request_destroy_thing_info = false;
       wid_thing_info_fini("wid request destroy info");
+    }
+  }
+
+  //
+  // If we need to destroy the thing info, do so
+  //
+  if (game->request_destroy_tp_info) {
+    if (time_have_x_tenths_passed_since(1, game->request_destroy_tp_info)) {
+      DBG("Handle request to destroy thing info");
+      game->request_destroy_tp_info = false;
+      wid_tp_info_fini("wid request destroy info");
     }
   }
 

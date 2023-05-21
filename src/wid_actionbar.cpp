@@ -9,6 +9,7 @@
 #include "my_wid_inventory.hpp"
 #include "my_wid_popups.hpp"
 #include "my_wid_thing_info.hpp"
+#include "my_wid_tp_info.hpp"
 
 static Widp      wid_actionbar;
 static WidPopup *wid_over_robot_mode;
@@ -33,6 +34,7 @@ void wid_actionbar_close_all_popups(void)
   TRACE_AND_INDENT();
 
   wid_thing_info_fini("close all popups");
+  wid_tp_info_fini("close all popups");
   wid_collect_destroy();
   wid_enchant_destroy();
   wid_choose_skill_destroy();
@@ -602,6 +604,7 @@ static uint8_t wid_actionbar_inventory(Widp w, int x, int y, uint32_t button)
   TRACE_NO_INDENT();
 
   game->request_destroy_thing_info = false;
+  game->request_destroy_tp_info    = false;
 
   if (! game->level) {
     return true;
@@ -1011,6 +1014,7 @@ static uint8_t wid_actionbar_configure(Widp w, int x, int y, uint32_t button)
 
   game->change_state(Game::STATE_NORMAL, "reset prior to configuring");
   wid_thing_info_fini("actionbar configure"); // To remove bag or other info
+  wid_tp_info_fini("actionbar configure");    // To remove bag or other info
   game->wid_config_keyboard_select();
   return true;
 }

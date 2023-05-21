@@ -6,6 +6,7 @@
 #include "my_game.hpp"
 #include "my_thing.hpp"
 #include "my_wid_thing_info.hpp"
+#include "my_wid_tp_info.hpp"
 
 static uint8_t game_mouse_down_(int x, int y, uint32_t button)
 {
@@ -59,6 +60,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
 
   IF_DEBUG2 { player->log("Mouse down"); }
   wid_thing_info_fini("mouse down");
+  wid_tp_info_fini("mouse down");
 
   if (game->state == Game::STATE_CHOOSING_TARGET) {
     IF_DEBUG2 { player->log("Game mouse down; in normal state"); }

@@ -15,6 +15,7 @@
 #include "my_wid_rightbar.hpp"
 #include "my_wid_thing_info.hpp"
 #include "my_wid_topcon.hpp"
+#include "my_wid_tp_info.hpp"
 
 static void wid_topcon_wid_create(void);
 
@@ -592,6 +593,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
 
   if (key->scancode == SDL_SCANCODE_ESCAPE) {
     wid_thing_info_fini("escape key");
+    wid_tp_info_fini("escape key");
   }
 
   if (key->scancode == SDL_SCANCODE_KP_1) {

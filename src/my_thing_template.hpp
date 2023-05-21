@@ -1171,6 +1171,7 @@ public:
   void dmg_cold_dice_set(const std::string &);
   void dmg_crush_dice_set(const std::string &);
   void dmg_missile_dice_set(const std::string &);
+  void show_botcon_description(void);
   void dmg_digest_dice_set(const std::string &);
   void dmg_draining_dice_set(const std::string &);
   void dmg_energy_dice_set(const std::string &);
@@ -1197,6 +1198,7 @@ public:
   void spawn_group_size_dice_set(const std::string &);
 
   std::string text_short_capitalised(void) const;
+  std::string text_long_capitalised(void) const;
   std::string text_a_or_an(void) const;
   std::string to_string(void);
   std::string to_short_string(void);

@@ -39,6 +39,7 @@ void wid_slot_item_mouse_over_end(Widp w);
 
 extern class WidBag   *wid_inventory_bag;
 extern class WidPopup *wid_inventory_thing_info;
+extern class WidPopup *wid_inventory_tp_info;
 extern class Wid      *wid_inventory_window;
 
 extern Thingp wid_inventory_thing_over;

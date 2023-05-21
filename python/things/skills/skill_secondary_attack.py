@@ -18,30 +18,26 @@ def on_use(owner, skill, target, x, y):
 
     my.spawn_using_items_radius_range(owner, skill, target, "skill_secondary_attack_effect")
 
-    enchant = my.thing_enchant_count_get(skill)
     dmg = my.thing_dmg_current(owner)
-    dmg = int(dmg / 2) + enchant
+    dmg = int(dmg / 2)
     if (dmg == 0):
         dmg = 1
     my.topcon("dmg {}".format(dmg))
     my.thing_dmg_current_set(owner, dmg)
 
 
-def tp_init(name, text_long_name):
+def tp_init(name, text_long_name, text_short_name):
     global self
-    self = tp.Tp(name, text_long_name)
+    self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
 
     my.dmg_num_of_attacks(self, 2)
     my.gfx_ascii_shown(self, True)
-    my.is_enchantable(self, True)
     my.is_loggable(self, True)
     my.is_skill(self, True)
     my.on_use_do(self, "me.on_use()")
     my.stat_def_bonus(self, -1)
     my.stat_str_bonus(self, 1)
-    my.text_description_enchant(self, "+1 DMG")
-    my.text_description_long2(self, "Each enchant will add one to the damage.")
     my.text_description_long(self, "With this skill you gain a secondary attack. The additional attack will be half of the initial attack")
     my.text_description_short(self, "Double strike skill.")
     my.text_skill(self, "Double strike. Secondary attack at half of the initial attack.")
@@ -58,7 +54,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="skill_secondary_attack", text_long_name="secondary attack skill")
+    tp_init(name="skill_secondary_attack", text_long_name="secondary attack skill", text_short_name="2ndAtt I")
 
 
 init()

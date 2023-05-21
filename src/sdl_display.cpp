@@ -13,6 +13,7 @@
 #include "my_wid_leftbar.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_thing_info.hpp"
+#include "my_wid_tp_info.hpp"
 
 void sdl_display(void)
 {
@@ -80,6 +81,7 @@ void sdl_display_reset(void)
   wid_botcon_fini();
   wid_asciimap_fini();
   wid_thing_info_fini("gfx toggle"); // To remove bag or other info
+  wid_tp_info_fini("gfx toggle");    // To remove bag or other info
 
   config_game_gfx_update();
 

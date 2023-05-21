@@ -106,6 +106,7 @@ void Game::fini(void)
   // When the thing info was requested to be destroyed.
   //
   request_destroy_thing_info = {}; // Timestamp
+  request_destroy_tp_info    = {}; // Timestamp
 
   //
   // When the player pressed some keys.
@@ -116,6 +117,7 @@ void Game::fini(void)
   // Temporary. Current thing being described in detail on screen.
   //
   current_wid_thing_info = {};
+  current_wid_tp_info    = {};
 
   //
   // Which inventory items are we over.

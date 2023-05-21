@@ -12,6 +12,7 @@
 #include "my_wid_rightbar.hpp"
 #include "my_wid_thing_info.hpp"
 #include "my_wid_topcon.hpp"
+#include "my_wid_tp_info.hpp"
 
 std::string gama_state_to_string(int state)
 {
@@ -89,6 +90,7 @@ void Game::change_state(int new_state, const std::string &why)
   switch (new_state) {
     case STATE_NORMAL :
       wid_thing_info_fini("change state");
+      wid_tp_info_fini("change state");
       wid_collect_destroy();
       wid_enchant_destroy();
       wid_choose_skill_destroy();
@@ -104,6 +106,7 @@ void Game::change_state(int new_state, const std::string &why)
       break;
     case STATE_COLLECTING_ITEMS : // Collecting en masse from the level
       wid_thing_info_fini("change state");
+      wid_tp_info_fini("change state");
       wid_collect_destroy();
       wid_actionbar_init();
       break;
@@ -117,6 +120,7 @@ void Game::change_state(int new_state, const std::string &why)
       break;
     case STATE_CHOOSING_TARGET : // Looking to somewhere to throw at
       wid_thing_info_fini("change state");
+      wid_tp_info_fini("change state");
       wid_actionbar_init();
       break;
     case STATE_CHOOSING_LEVEL : // Looking to change level
@@ -126,6 +130,7 @@ void Game::change_state(int new_state, const std::string &why)
       wid_leftbar_fini();
       wid_actionbar_fini();
       wid_thing_info_fini("change state");
+      wid_tp_info_fini("change state");
       request_to_remake_rightbar  = false;
       request_to_remake_inventory = false;
       request_to_remake_actionbar = false;
@@ -136,7 +141,10 @@ void Game::change_state(int new_state, const std::string &why)
     case STATE_LOAD_MENU :
     case STATE_KEYBOARD_MENU :
     case STATE_SAVE_MENU :
-    case STATE_QUIT_MENU : wid_thing_info_fini("change state"); break;
+    case STATE_QUIT_MENU :
+      wid_thing_info_fini("change state");
+      wid_tp_info_fini("change state");
+      break;
   }
 
   //

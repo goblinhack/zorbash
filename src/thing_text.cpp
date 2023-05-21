@@ -425,6 +425,9 @@ void Thing::show_botcon_description(void)
     case Game::STATE_CHOOSING_TARGET : // Looking to somewhere to throw at
       skip_showing_keys_to_use = true;
       break;
+    case Game::STATE_CHOOSING_SKILLS : // Looking to somewhere to throw at
+      skip_showing_keys_to_use = true;
+      break;
     case Game::STATE_LOAD_MENU : skip_showing_keys_to_use = true; break;
     case Game::STATE_SAVE_MENU : skip_showing_keys_to_use = true; break;
     case Game::STATE_QUIT_MENU : skip_showing_keys_to_use = true; break;
@@ -517,6 +520,97 @@ void Thing::show_botcon_description(void)
   }
 }
 
+void Tp::show_botcon_description(void)
+{
+  TRACE_NO_INDENT();
+  auto text = text_description_short();
+
+  bool skip_showing_keys_to_use = true;
+  switch (game->state) {
+    case Game::STATE_CHOOSING_LEVEL : return;
+    case Game::STATE_NORMAL : skip_showing_keys_to_use = false; break;
+    case Game::STATE_OPTIONS_FOR_ITEM_MENU : skip_showing_keys_to_use = true; break;
+    case Game::STATE_INVENTORY : // Currently managing inventory
+      skip_showing_keys_to_use = false;
+      break;
+    case Game::STATE_COLLECTING_ITEMS : // Collecting en masse from the level
+      skip_showing_keys_to_use = true;
+      break;
+    case Game::STATE_ENCHANTING_ITEMS : skip_showing_keys_to_use = true; break;
+    case Game::STATE_CHOOSING_TARGET : // Looking to somewhere to throw at
+      skip_showing_keys_to_use = true;
+      break;
+    case Game::STATE_CHOOSING_SKILLS : // Looking to somewhere to throw at
+      skip_showing_keys_to_use = true;
+      break;
+    case Game::STATE_LOAD_MENU : skip_showing_keys_to_use = true; break;
+    case Game::STATE_SAVE_MENU : skip_showing_keys_to_use = true; break;
+    case Game::STATE_QUIT_MENU : skip_showing_keys_to_use = true; break;
+    case Game::STATE_KEYBOARD_MENU : skip_showing_keys_to_use = true; break;
+    default : ERR("Unhandled game state"); break;
+  }
+
+  //
+  // Want to show that you can drop a bag if you select it.
+  //
+  if (is_droppable()) {
+    text += " %%fg=orange$" + ::to_string(game->config.key_drop) + "%%fg=reset$ to drop.";
+  }
+
+  //
+  // Unless a bag.
+  //
+  if (skip_showing_keys_to_use) {
+    if (text.empty()) {
+      return;
+    }
+    BOTCON("%s", text.c_str());
+    return;
+  }
+
+  if (is_weapon()) {
+    text += " Damage %%fg=red$" + dmg_melee_dice_str() + "%%fg=reset$.";
+  }
+
+  if (is_poisonous_danger_level()) {
+    text += " Poisons. ";
+  }
+
+  if (is_necrotic_danger_level()) {
+    text += " Necrotic. ";
+  }
+
+  if (is_usable()) {
+    if (is_food()) {
+      text += " %%fg=green$" + ::to_string(game->config.key_eat) + "%%fg=reset$ to eat.";
+    } else if (is_potion()) {
+      text += " %%fg=green$" + ::to_string(game->config.key_use) + "%%fg=reset$ to drink.";
+    } else if (is_staff()) {
+      text += " %%fg=green$" + ::to_string(game->config.key_use) + "%%fg=reset$ to use.";
+    } else if (is_ring()) {
+      text += " %%fg=green$" + ::to_string(game->config.key_use) + "%%fg=reset$ to wear.";
+    } else {
+      text += " %%fg=cyan$" + ::to_string(game->config.key_use) + "%%fg=reset$ to use.";
+    }
+  }
+
+  if (is_throwable() && ! is_auto_throw()) {
+    text += " %%fg=purple$" + ::to_string(game->config.key_throw) + "%%fg=reset$ to throw.";
+  }
+
+  if (is_bag_item_container()) {
+    text += " Use mouse to drag items.";
+  }
+
+  if (text.size()) {
+    if ((text[ text.size() - 1 ] == '.') || (text[ text.size() - 1 ] == '!')) {
+      BOTCON("%s", text.c_str());
+    } else {
+      BOTCON("%s.", text.c_str());
+    }
+  }
+}
+
 const std::string Thing::text_long_name(size_t max_len)
 {
   TRACE_NO_INDENT();
@@ -575,6 +669,35 @@ std::string Tp::text_short_capitalised(void) const
   TRACE_NO_INDENT();
 
   std::string out        = text_short_name();
+  char       *b          = (char *) out.c_str();
+  char       *e          = b + out.size();
+  char       *c          = b;
+  bool        word_start = true;
+
+  while (c < e) {
+    if (word_start) {
+      if (islower(*c)) {
+        *c = toupper(*c);
+      }
+      word_start = false;
+    } else if (*c == ' ') {
+      word_start = true;
+    }
+
+    c++;
+  }
+
+  return out;
+}
+
+//
+// foo bar -> Foo Bar
+//
+std::string Tp::text_long_capitalised(void) const
+{
+  TRACE_NO_INDENT();
+
+  std::string out        = text_long_name();
   char       *b          = (char *) out.c_str();
   char       *e          = b + out.size();
   char       *c          = b;

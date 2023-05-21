@@ -594,7 +594,7 @@ public:
   bool player_cursor_path_pop_first_move(ThingMoveReason);
   bool player_is_player_is_ready_for_messages(std::string &why);
   bool player_is_player_is_ready_for_messages(void);
-  bool player_is_ready_for_thing_info(void);
+  bool player_is_ready_for_popups(void);
   bool player_or_monst_path_pop_next_move(ThingMoveReason);
   bool possible_to_attack_at(point at);
   bool possible_to_attack(const Thingp it);

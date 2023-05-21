@@ -141,6 +141,10 @@ public:
   //
   std::string skill_alias;
   //
+  // Populated when the menu is made.
+  //
+  Tpp tpp = {};
+  //
   // Next skills in the tree
   //
   Skillp skill_down  = {};
@@ -390,6 +394,7 @@ public:
   // When the thing info was requested to be destroyed.
   //
   uint32_t request_destroy_thing_info {}; // Timestamp
+  uint32_t request_destroy_tp_info {};    // Timestamp
 
   //
   // When the player pressed some keys.
@@ -400,6 +405,7 @@ public:
   // Temporary. Current thing being described in detail on screen.
   //
   Thingp current_wid_thing_info {};
+  Tpp    current_wid_tp_info {};
 
   //
   // Which inventory items are we over.
@@ -492,14 +498,22 @@ public:
   WidPopup *wid_thing_info_create_popup(Thingp t, point tl, point be);
   WidPopup *wid_thing_info_create_popup_compact(const std::vector< Thingp > &);
 
+  WidPopup *wid_tp_info_create_popup(Tpp t, point tl, point be);
+  WidPopup *wid_tp_info_create_popup_compact(const std::vector< Tpp > &);
+
   bool init_level(point3d world_at, point grid_at, int difficulty_depth, int dungeon_walk_order_level_no);
   bool load(std::string save_file, class Game &target);
   bool save(std::string save_file);
   bool tick_end();
   bool wid_bag_move_item(Thingp t);
+
   bool wid_thing_info_create_list(std::vector< Thingp > &ts);
   bool wid_thing_info_create(Thingp, bool when_hovering_over = false);
   bool wid_thing_info_push_popup(Thingp t);
+
+  bool wid_tp_info_create_list(std::vector< Tpp > &ts);
+  bool wid_tp_info_create(Tpp, bool when_hovering_over = false);
+  bool wid_tp_info_push_popup(Tpp t);
 
   // begin sort marker2 {
   void change_state(int state, const std::string &);
@@ -616,6 +630,43 @@ public:
   void wid_thing_info_clear_popup(void);
   void wid_thing_info_destroy_deferred(void);
   void wid_thing_info_destroy_immediate(void);
+  void wid_tp_info_add_crit_chance(WidPopup *w, Tpp t);
+  void wid_tp_info_add_dmg_acid(WidPopup *w, Tpp t, int index);
+  void wid_tp_info_add_dmg_bite(WidPopup *w, Tpp t, int index);
+  void wid_tp_info_add_dmg_claw(WidPopup *w, Tpp t, int index);
+  void wid_tp_info_add_dmg_cold(WidPopup *w, Tpp t, int index);
+  void wid_tp_info_add_dmg_crush(WidPopup *w, Tpp t, int index);
+  void wid_tp_info_add_dmgd_chance(WidPopup *w, Tpp t);
+  void wid_tp_info_add_dmg_digest(WidPopup *w, Tpp t, int index);
+  void wid_tp_info_add_dmg_draining(WidPopup *w, Tpp t, int index);
+  void wid_tp_info_add_dmg_drown(WidPopup *w, Tpp t, int index);
+  void wid_tp_info_add_dmg_energy(WidPopup *w, Tpp t, int index);
+  void wid_tp_info_add_dmg_fire(WidPopup *w, Tpp t, int index);
+  void wid_tp_info_add_dmg_heat(WidPopup *w, Tpp t, int index);
+  void wid_tp_info_add_dmg_lightning(WidPopup *w, Tpp t, int index);
+  void wid_tp_info_add_dmg_melee(WidPopup *w, Tpp t, int index);
+  void wid_tp_info_add_dmg_missile(WidPopup *w, Tpp t, int index);
+  void wid_tp_info_add_dmg_nat_att(WidPopup *w, Tpp t, int index);
+  void wid_tp_info_add_dmg_necrosis(WidPopup *w, Tpp t, int index);
+  void wid_tp_info_add_dmg_negation(WidPopup *w, Tpp t, int index);
+  void wid_tp_info_add_dmg_poison(WidPopup *w, Tpp t, int index);
+  void wid_tp_info_add_enchant(WidPopup *w, Tpp t);
+  void wid_tp_info_add_general_info(WidPopup *w, Tpp t);
+  void wid_tp_info_add_gold_value(WidPopup *w, Tpp t);
+  void wid_tp_info_add_health(WidPopup *w, Tpp t);
+  void wid_tp_info_add_jump_distance(WidPopup *w, Tpp t);
+  void wid_tp_info_add_move_speed(WidPopup *w, Tpp t);
+  void wid_tp_info_add_nutrition(WidPopup *w, Tpp t);
+  void wid_tp_info_add_shove_strength(WidPopup *w, Tpp t);
+  void wid_tp_info_add_stat_att(WidPopup *w, Tpp t);
+  void wid_tp_info_add_stat_con(WidPopup *w, Tpp t);
+  void wid_tp_info_add_stat_def(WidPopup *w, Tpp t);
+  void wid_tp_info_add_stat_dex(WidPopup *w, Tpp t);
+  void wid_tp_info_add_stat_luck(WidPopup *w, Tpp t);
+  void wid_tp_info_add_stat_str(WidPopup *w, Tpp t);
+  void wid_tp_info_clear_popup(void);
+  void wid_tp_info_destroy_deferred(void);
+  void wid_tp_info_destroy_immediate(void);
   // end sort marker2 }
 };
 
