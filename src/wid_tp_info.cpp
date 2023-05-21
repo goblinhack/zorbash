@@ -1541,7 +1541,7 @@ void Game::wid_tp_info_add_general_info(WidPopup *w, Tpp tpp)
     }
   }
 
-  if (tpp->is_item() || tpp->is_monst() || tpp->is_player() || printed_something) {
+  if (tpp->is_item() || tpp->is_monst() || tpp->is_player() || tpp->is_skill() || printed_something) {
     w->log(UI_LOGGING_EMPTY_LINE);
   }
 }

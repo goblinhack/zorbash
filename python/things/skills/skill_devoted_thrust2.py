@@ -10,7 +10,7 @@ def on_use(owner, skill, target, x, y):
     # my.topcon("target {} {}".format(my.thing_name_get(target), my.thing_health(target)))
     my.spawn_using_items_radius_range(owner, skill, target, "skill_devoted_thrust_effect")
     # my.topcon("stam  {}".format((owner)))
-    bonus = int(my.thing_stamina(owner) / 2)
+    bonus = int(my.thing_stamina(owner) / 10) * 3
     # my.topcon("bonus {}".format(bonus))
 
     if bonus > 1:
@@ -33,26 +33,26 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_loggable(self, True)
     my.is_skill(self, True)
     my.on_use_do(self, "me.on_use()")
-    my.stat_def_bonus(self, 1)
+    my.stat_def_bonus(self, 2)
     my.stat_str_bonus(self, 1)
-    my.text_description_long2(self, "Can be used multiple times, but beware, your stamina will rapidly drop and you may end up unable to attack or jump away.")
-    my.text_description_long(self, "Uses half of your stamina points up in one mighty strike.")
+    my.text_description_long2(self, "Can be used repeatedly, but beware, your stamina will rapidly drop and you may end up unable to attack or jump away.")
+    my.text_description_long(self, "Uses 30 percent of your stamina points up in one mighty strike.")
     my.text_description_short(self, "Devoted thrust skill.")
-    my.text_skill(self, "Devoted Thrust. Redirect half of your stamina to damage dealt.")
+    my.text_skill(self, "Devoted Thrust. Redirect your stamina to damage dealt.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
     my.tile(self,
-            tile=name)
+            tile="skill_devoted_thrust")
     my.tile(self,
-            tile=name + "_activated")
+            tile="skill_devoted_thrust_activated")
     my.tile(self,
-            tile=name + "_inactive")
+            tile="skill_devoted_thrust_inactive")
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="skill_devoted_thrust", text_long_name="devoted thrust skill", text_short_name="DevtThr 1")
+    tp_init(name="skill_devoted_thrust2", text_long_name="devoted thrust skill II", text_short_name="DevtThr 2")
 
 
 init()

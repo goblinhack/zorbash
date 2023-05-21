@@ -112,7 +112,7 @@ void Game::place_player(void)
       }
 
       if (0) {
-        auto w = level->thing_new("skill_devoted_thrust", point(x, y));
+        auto w = level->thing_new("skill_devoted_thrust1", point(x, y));
         t->skill_add(w);
       }
       if (0) {
