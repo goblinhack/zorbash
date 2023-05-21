@@ -530,6 +530,7 @@ public:
   bool fall_to_next_level(void);
   bool fall(void);
   bool fire_choose_target(Thingp item);
+  bool has_skill(Tpp skill);
   bool has_temperature(void);
   bool health_boost_would_occur(int v);
   bool hunger_boost_would_occur(int v);
@@ -931,6 +932,7 @@ public:
   const std::string &on_you_nat_attack_success_do(void);
   const std::string &poison_reason_get(void);
   const std::string &resurrect_dice_str(void);
+  const std::string &skill_replaces(void);
   const std::string &spawn_group_size_dice_str(void);
   const std::string &spawn_on_shoved(void);
   const std::string &str1(void);

@@ -1024,6 +1024,7 @@ private:
   std::string _on_you_nat_attack_attempt_do;
   std::string _on_you_nat_attack_success_do;
   std::string _resurrect_dice_str;
+  std::string _skill_replaces;
   std::string _spawn_group_size_dice_str;
   std::string _spawn_on_shoved;
   std::string _str1;
@@ -1369,6 +1370,7 @@ public:
   const std::string &on_you_nat_attack_attempt_do(void) const;
   const std::string &on_you_nat_attack_success_do(void) const;
   const std::string &resurrect_dice_str(void) const;
+  const std::string &skill_replaces(void) const;
   const std::string &spawn_group_size_dice_str(void) const;
   const std::string &spawn_on_shoved(void) const;
   const std::string &str1(void) const;
@@ -2985,6 +2987,7 @@ public:
   void rarity_set(int v);
   void shove_bonus_set(int v);
   void shove_strength_set(int v);
+  void skill_replaces_set(const std::string &v);
   void spawn_group_radius_set(int v);
   void spawn_on_shoved_set(const std::string &v);
   void stamina_drain_on_attacking_set(int v);

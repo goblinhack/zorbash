@@ -444,7 +444,6 @@ void Game::wid_choose_skill(void)
       br.x = tl.x + (WID_SKILL_BUTTON_WIDTH - 1) - 1;
       br.y = tl.y + (WID_SKILL_BUTTON_HEIGHT - 1) - 1;
       wid_set_pos(b, tl, br);
-      wid_set_style(b, UI_WID_STYLE_DARK);
 
       //
       // Add the tile for this skill, unless it is an intermediate skill
@@ -488,6 +487,22 @@ void Game::wid_choose_skill(void)
             }
           }
         }
+      }
+
+      //
+      // Do we have this skill?
+      //
+      if (player->has_skill(skill->tpp)) {
+        wid_set_style(b, UI_WID_STYLE_DARK);
+      } else {
+        //
+        // Can we attain this skill?
+        //
+        wid_set_style(b, UI_WID_STYLE_GREEN);
+        //
+        // Can we not yet attain this skill?
+        //
+        wid_set_style(b, UI_WID_STYLE_RED);
       }
 
       wid_set_on_mouse_over_begin(b, wid_skill_over_begin);

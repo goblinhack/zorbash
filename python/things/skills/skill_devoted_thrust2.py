@@ -33,6 +33,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_loggable(self, True)
     my.is_skill(self, True)
     my.on_use_do(self, "me.on_use()")
+    my.skill_replaces(self, "skill_devoted_thrust1")
     my.stat_def_bonus(self, 2)
     my.stat_str_bonus(self, 1)
     my.text_description_long2(self, "Can be used repeatedly, but beware, your stamina will rapidly drop and you may end up unable to attack or jump away.")

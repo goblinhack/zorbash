@@ -1933,6 +1933,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(right2_tile),
     MY_ADD_PYTHON_TP_FUNCTION(shove_bonus),
     MY_ADD_PYTHON_TP_FUNCTION(shove_strength),
+    MY_ADD_PYTHON_TP_FUNCTION(skill_replaces),
     MY_ADD_PYTHON_TP_FUNCTION(spawn_group_radius),
     MY_ADD_PYTHON_TP_FUNCTION(spawn_group_size_dice),
     MY_ADD_PYTHON_TP_FUNCTION(spawn_on_shoved),

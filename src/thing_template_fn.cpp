@@ -171,6 +171,7 @@ const std::string &Tp::on_you_are_declared_leader_do(void) const { return _on_yo
 const std::string &Tp::on_you_are_on_fire_do(void) const { return _on_you_are_on_fire_do; }
 const std::string &Tp::on_you_nat_attack_attempt_do(void) const { return _on_you_nat_attack_attempt_do; }
 const std::string &Tp::on_you_nat_attack_success_do(void) const { return _on_you_nat_attack_success_do; }
+const std::string &Tp::skill_replaces(void) const { return _skill_replaces; }
 const std::string &Tp::spawn_on_shoved(void) const { return _spawn_on_shoved; }
 const std::string &Tp::str1(void) const { return _str1; }
 const std::string &Tp::str2(void) const { return _str2; }
@@ -1766,6 +1767,7 @@ void Tp::range_max_set(int v) { _range_max = v; }
 void Tp::rarity_set(int v) { _rarity = v; }
 void Tp::shove_bonus_set(int v) { _shove_bonus = v; }
 void Tp::shove_strength_set(int v) { _shove_strength = v; }
+void Tp::skill_replaces_set(const std::string &v) { _skill_replaces = v; }
 void Tp::spawn_group_radius_set(int v) { _spawn_group_radius = v; }
 void Tp::spawn_on_shoved_set(const std::string &v) { _spawn_on_shoved = v; }
 void Tp::stamina_drain_on_attacking_set(int v) { _stamina_drain_on_attacking = v; }

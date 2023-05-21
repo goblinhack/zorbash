@@ -160,6 +160,24 @@ int Thing::skill_enchant_count(const int slot)
   return 0;
 }
 
+bool Thing::has_skill(Tpp skill)
+{
+  TRACE_NO_INDENT();
+  if (! maybe_itemsp()) {
+    return 0;
+  }
+
+  FOR_ALL_SKILLS(oid)
+  {
+    auto o = game->level->thing_find(oid);
+    if (o->tp() == skill) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 bool Thing::skill_add(Tpp what)
 {
   TRACE_NO_INDENT();

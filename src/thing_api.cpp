@@ -4948,6 +4948,12 @@ const std::string &Thing::text_skill(void)
   return (tp()->text_skill());
 }
 
+const std::string &Thing::skill_replaces(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->skill_replaces());
+}
+
 const std::string &Thing::text_debuff(void)
 {
   TRACE_NO_INDENT();

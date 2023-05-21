@@ -211,11 +211,11 @@ Content:
 - 6 x boots
 - 5 x rings
 - 5 x keys
+- 4 x skills
 - 4 x gauntlets
 - 4 x debuffs
 - 4 x armor
 - 4 x amulets
-- 3 x skills
 - 3 x mobs
 - 3 x doors
 - 3 x cloaks
