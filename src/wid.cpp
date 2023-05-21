@@ -5907,6 +5907,7 @@ void wid_key_down(const struct SDL_Keysym *key, int x, int y)
 
   pixel_to_ascii(&x, &y);
   if (! ascii_ok(x, y)) {
+    LOG("SDL: Keyboard: bad coord %d,%d", x, y);
     return;
   }
   ascii_mouse_x = x;
@@ -5962,6 +5963,7 @@ void wid_key_down(const struct SDL_Keysym *key, int x, int y)
     //
     // If no-one handles it, feed it to the default handler, the console.
     //
+    LOG("SDL: Keyboard: no one handled the event");
     wid_receive_unhandled_input(key);
     return;
   }
@@ -7030,9 +7032,13 @@ void wid_move_to_abs(Widp w, int x, int y)
   wid_move_delta(w, dx, dy);
 }
 
-void wid_move_to_pct_centered(Widp w, double x, double y)
+void wid_move_to_pct_centered(Widp w, double ox, double oy)
 {
   TRACE_NO_INDENT();
+
+  double x = ox;
+  double y = oy;
+
   if (! w->parent) {
     x *= (double) TERM_WIDTH;
     y *= (double) TERM_HEIGHT;
@@ -7044,10 +7050,35 @@ void wid_move_to_pct_centered(Widp w, double x, double y)
   double dx = x - wid_get_tl_x(w);
   double dy = y - wid_get_tl_y(w);
 
-  dx -= (wid_get_br_x(w) - wid_get_tl_x(w)) / 2;
-  dy -= (wid_get_br_y(w) - wid_get_tl_y(w)) / 2;
+  dx -= ceil(wid_get_br_x(w) - wid_get_tl_x(w)) / 2;
+  dy -= ceil(wid_get_br_y(w) - wid_get_tl_y(w)) / 2;
 
   wid_move_delta(w, dx, dy);
+
+  //
+  // Account for rounding errors if we can fit the window in the screen and it is
+  // now one character offscreen.
+  //
+  if ((ox == 0.5) && (oy == 0.5)) {
+    int tlx;
+    int tly;
+    int brx;
+    int bry;
+
+    wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
+
+    if ((bry >= TERM_HEIGHT - 1) && (tly > 0)) {
+      wid_move_delta(w, 0, -1);
+    } else if ((tly < 0) && (bry < TERM_HEIGHT - 1)) {
+      wid_move_delta(w, 0, 1);
+    }
+
+    if ((brx >= TERM_WIDTH - 1) && (tlx > 0)) {
+      wid_move_delta(w, -1, 0);
+    } else if ((tlx < 0) && (brx < TERM_WIDTH - 1)) {
+      wid_move_delta(w, 1, 0);
+    }
+  }
 }
 
 void wid_move_to_abs_centered(Widp w, int x, int y)
@@ -7056,8 +7087,8 @@ void wid_move_to_abs_centered(Widp w, int x, int y)
   int dx = x - wid_get_tl_x(w);
   int dy = y - wid_get_tl_y(w);
 
-  dx -= (wid_get_br_x(w) - wid_get_tl_x(w)) / 2;
-  dy -= (wid_get_br_y(w) - wid_get_tl_y(w)) / 2;
+  dx -= ceil((wid_get_br_x(w) - wid_get_tl_x(w)) / 2);
+  dy -= ceil((wid_get_br_y(w) - wid_get_tl_y(w)) / 2);
 
   wid_move_delta(w, dx, dy);
 }

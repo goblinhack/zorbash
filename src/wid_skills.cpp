@@ -404,20 +404,18 @@ void Game::wid_choose_skill(void)
     WID_SKILL_BUTTON_HEIGHT = 6;
   }
 
-  /*
-   * Main window
-   */
-  point tl = make_point(29, 5);
-  point br = make_point(TERM_WIDTH - 29, TERM_HEIGHT - 8);
-  if (g_opt_ascii) {
-    tl = make_point(0, 0);
-    br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
-  }
-
-  auto skills_width = br.x - tl.x;
-  wid_skills        = new WidPopup("Skills", tl, br, nullptr, "", true, false);
+  //
+  // Main window
+  //
+  auto  skills_width  = (WID_SKILL_BUTTON_WIDTH * SKILL_TREE_ACROSS) + 3;
+  auto  skills_height = (WID_SKILL_BUTTON_HEIGHT * SKILL_TREE_DOWN) + 3;
+  point tl;
+  point br(skills_width, skills_height);
+  wid_skills = new WidPopup("Skills", tl, br, nullptr, "", true, false);
   wid_skills->log("*WORK IN PROGRESS* Choose a skill");
   auto skills_container = wid_skills->wid_popup_container;
+  skills_container      = wid_skills->wid_popup_container;
+  wid_move_to_pct_centered(skills_container, 0.5, 0.5);
 
   wid_set_on_key_up(wid_skills->wid_popup_container, wid_skills_key_up);
   wid_set_on_key_down(wid_skills->wid_popup_container, wid_skills_key_down);
@@ -439,12 +437,9 @@ void Game::wid_choose_skill(void)
       point tl;
       point br;
       tl.x = WID_SKILL_BUTTON_WIDTH * x + 2;
-      if (g_opt_ascii) {
-        tl.x += 2;
-      }
       tl.y = WID_SKILL_BUTTON_HEIGHT * y + 3;
       if (! g_opt_ascii) {
-        tl.y += 3;
+        tl.y += 1;
       }
       br.x = tl.x + (WID_SKILL_BUTTON_WIDTH - 1) - 1;
       br.y = tl.y + (WID_SKILL_BUTTON_HEIGHT - 1) - 1;
@@ -610,8 +605,8 @@ void Game::wid_choose_skill(void)
   } else {
     {
       auto  w = wid_new_square_button(skills_container, "wid skills window close");
-      point tl(skills_width - 3, 0);
-      point br(skills_width, 3);
+      point tl(skills_width - 2, 0);
+      point br(skills_width, 2);
       wid_set_pos(w, tl, br);
       wid_set_bg_tilename(w, "ui_icon_close");
       wid_set_on_mouse_up(w, wid_skill_close);
@@ -620,7 +615,7 @@ void Game::wid_choose_skill(void)
     {
       auto  w = wid_new_square_button(skills_container, "wid skills window close");
       point tl(0, 0);
-      point br(3, 3);
+      point br(2, 2);
       wid_set_pos(w, tl, br);
       wid_set_bg_tilename(w, "ui_icon_close");
       wid_set_on_mouse_up(w, wid_skill_close);
