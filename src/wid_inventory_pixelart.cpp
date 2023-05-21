@@ -66,8 +66,8 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
 
   {
     auto  w = wid_new_square_button(wid_inventory_window, "wid inventory window close");
-    point tl(inventory_width - 4, 0);
-    point br(inventory_width - 1, 3);
+    point tl(inventory_width - 3, 0);
+    point br(inventory_width - 1, 2);
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_close");
     wid_set_on_mouse_up(w, wid_inventory_close);
@@ -76,7 +76,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
   {
     auto  w = wid_new_square_button(wid_inventory_window, "wid inventory window close");
     point tl(0, 0);
-    point br(3, 3);
+    point br(2, 2);
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_close");
     wid_set_on_mouse_up(w, wid_inventory_close);

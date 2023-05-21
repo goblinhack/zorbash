@@ -420,11 +420,6 @@ bool Game::wid_tp_info_create(Tpp tpp, bool when_hovering_over)
     return false;
   }
 
-  if (wid_inventory_window) {
-    IF_DEBUG1 { tpp->log("No; inventory visible"); }
-    return false;
-  }
-
   if (! wid_tp_info_window.empty()) {
     IF_DEBUG1 { tpp->log("Yes; destroy window"); }
     wid_tp_info_destroy_immediate();
@@ -473,11 +468,6 @@ bool Game::wid_tp_info_create_list(std::vector< Tpp > &ts)
   TRACE_AND_INDENT();
   if (wid_console_window && wid_console_window->visible) {
     DBG3("No; console visible");
-    return false;
-  }
-
-  if (wid_inventory_window) {
-    DBG3("Ignore, inventory is open");
     return false;
   }
 
