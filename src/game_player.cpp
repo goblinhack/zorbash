@@ -271,7 +271,11 @@ void Game::place_player(void)
         auto b = level->thing_new("enchant_stone", point(x, y));
         t->carry(b);
       }
-      if (1) {
+      if (0) {
+        auto b = level->thing_new("skill_stone", point(x, y));
+        t->carry(b);
+      }
+      if (0) {
         auto b = level->thing_new("skill_stone", point(x, y));
         t->carry(b);
       }

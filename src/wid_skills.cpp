@@ -148,11 +148,18 @@ static uint8_t wid_skills_mouse_up(Widp w, int x, int y, uint32_t button)
     return true;
   }
 
-  if (player->is_dead) {
+  Skillp skill = (Skillp) wid_get_void_context(w);
+  if (! skill) {
     return true;
   }
 
-  wid_skills_slot(wid_get_int_context(w));
+  if (! skill->tpp) {
+    return true;
+  }
+
+  player->skill_add(skill->tpp);
+  wid_choose_skill_destroy();
+
   return true;
 }
 
@@ -199,7 +206,7 @@ void wid_skill_over_end(Widp w)
 //
 // Is this skill learned only after another?
 //
-static bool skill_has_precursor(Skillp skill_in)
+static bool skill_has_precursor(Skillp skill_curr)
 {
   for (auto x = 0; x < SKILL_TREE_ACROSS; x++) {
     for (auto y = 0; y < SKILL_TREE_DOWN; y++) {
@@ -208,16 +215,16 @@ static bool skill_has_precursor(Skillp skill_in)
         continue;
       }
 
-      if (skill->skill_up == skill_in) {
+      if (skill->skill_up == skill_curr) {
         return true;
       }
-      if (skill->skill_down == skill_in) {
+      if (skill->skill_down == skill_curr) {
         return true;
       }
-      if (skill->skill_left == skill_in) {
+      if (skill->skill_left == skill_curr) {
         return true;
       }
-      if (skill->skill_right == skill_in) {
+      if (skill->skill_right == skill_curr) {
         return true;
       }
     }
@@ -228,21 +235,25 @@ static bool skill_has_precursor(Skillp skill_in)
 //
 // Have we unlocked a skill?
 //
-static bool skill_is_available(Skillp skill_in)
+static bool skill_is_available(Skillp skill_next)
 {
   for (auto x = 0; x < SKILL_TREE_ACROSS; x++) {
     for (auto y = 0; y < SKILL_TREE_DOWN; y++) {
-      auto skill = get(game->skill_tree, x, y);
-      if (! skill) {
+      auto skill_curr = get(game->skill_tree, x, y);
+      if (! skill_curr) {
         continue;
       }
 
-      if ((skill->skill_up == skill_in) || (skill->skill_up == skill_in) || (skill->skill_up == skill_in)
-          || (skill->skill_up == skill_in)) {
+      //
+      // We walk all the other skills, looking for one that points at the next skill
+      // and that we have activated the precursos
+      //
+      if ((skill_curr->skill_up == skill_next) || (skill_curr->skill_down == skill_next)
+          || (skill_curr->skill_left == skill_next) || (skill_curr->skill_right == skill_next)) {
         FOR_ALL_SKILLS_FOR(game->level->player, id)
         {
           auto known_skill = game->level->thing_find(id);
-          if (known_skill && (skill->tpp == known_skill->tp())) {
+          if (known_skill && (skill_curr->tpp == known_skill->tp())) {
             return true;
           }
         }
@@ -300,155 +311,6 @@ void Game::wid_choose_skill(void)
 
   change_state(Game::STATE_CHOOSING_SKILLS, "choose skills");
 
-  if (0) {
-    auto box_style           = UI_WID_STYLE_HORIZ_DARK;
-    auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
-
-    auto       m          = TERM_WIDTH / 2;
-    static int wid_width  = 80;
-    int        left_half  = wid_width / 2;
-    int        right_half = wid_width - left_half;
-
-    bool scrollbar = false;
-    auto sz        = skills.size();
-    if (! sz) {
-      sz = 1;
-    }
-    int height_max = (((int) sz * 3) + 6);
-    int height;
-    if (height_max > TERM_HEIGHT / 2) {
-      height    = TERM_HEIGHT / 2;
-      scrollbar = true;
-    } else {
-      height = height_max;
-    }
-    point tl   = make_point(m - left_half, TERM_HEIGHT / 2 - height / 2 - 2);
-    point br   = make_point(m + right_half, TERM_HEIGHT / 2 + height / 2);
-    wid_skills = new WidPopup("Skills", tl, br, nullptr, "", false, scrollbar, height_max);
-
-    wid_skills->log("Choose a skill");
-
-    wid_set_on_key_up(wid_skills->wid_popup_container, wid_skills_key_up);
-    wid_set_on_key_down(wid_skills->wid_popup_container, wid_skills_key_down);
-
-    auto width = br.x - tl.x;
-    int  y_at  = 3;
-    for (auto slot = 0; slot < (int) skills.size(); slot++) {
-      Game  tmp;
-      auto  p  = wid_skills->wid_text_area->wid_text_area;
-      auto  w  = wid_new_container(p, "item slot");
-      point tl = make_point(0, y_at);
-      point br = make_point(width - 3, y_at + 2);
-
-      if (g_opt_ascii) {
-        tl = make_point(0, y_at);
-        br = make_point(width - 3, y_at + 2);
-      }
-
-      wid_set_pos(w, tl, br);
-      wid_set_shape_none(w);
-
-      auto tpp = skills[ slot ];
-
-      if (! g_opt_ascii) {
-        auto wid_icon = wid_new_square_button(w, "skill icon");
-        wid_set_int_context(w, slot);
-        wid_set_on_mouse_up(w, wid_skills_mouse_up);
-
-        point tl = make_point(0, 0);
-        point br = make_point(2, 2);
-
-        wid_set_pos(wid_icon, tl, br);
-
-        auto tiles = &tpp->tiles;
-        if (tiles) {
-          auto tile = tile_first(tiles);
-          wid_set_style(wid_icon, UI_WID_STYLE_DARK);
-          wid_set_fg_tile(wid_icon, tile);
-        }
-
-        wid_update(wid_icon);
-      }
-
-      {
-        auto skill_text = wid_new_square_button(w, "skill name");
-        wid_set_int_context(w, slot);
-        wid_set_on_mouse_up(w, wid_skills_mouse_up);
-
-        if (g_opt_ascii) {
-          point tl = make_point(1, 0);
-          point br = make_point(width - 2, 0);
-          wid_set_pos(skill_text, tl, br);
-          wid_set_mode(skill_text, WID_MODE_OVER);
-          wid_set_style(skill_text, box_highlight_style);
-          wid_set_mode(skill_text, WID_MODE_NORMAL);
-          wid_set_style(skill_text, box_style);
-        } else {
-          point tl = make_point(3, 0);
-          point br = make_point(width - 3, 2);
-          wid_set_pos(skill_text, tl, br);
-          wid_set_style(skill_text, UI_WID_STYLE_DARK);
-        }
-
-        wid_set_text(skill_text, " " + tpp->skill_base_name());
-        wid_set_text_lhs(skill_text, true);
-        wid_update(skill_text);
-      }
-      wid_update(w);
-
-      if (g_opt_ascii) {
-        y_at += 1;
-      } else {
-        y_at += 3;
-      }
-    }
-
-    //
-    // Close icons
-    //
-    if (g_opt_ascii) {
-      {
-        auto  w = wid_new_square_button(wid_skills->wid_popup_container, "wid collect window close");
-        point tl(0, 0);
-        point br(2, 2);
-        wid_set_pos(w, tl, br);
-        wid_set_text(w, "X");
-        wid_set_style(w, UI_WID_STYLE_RED);
-        wid_set_on_mouse_up(w, wid_skill_close);
-      }
-      {
-        auto  w = wid_new_square_button(wid_skills->wid_popup_container, "wid collect window close");
-        point tl(wid_width - 2, 0);
-        point br(wid_width - 0, 2);
-        wid_set_pos(w, tl, br);
-        wid_set_text(w, "X");
-        wid_set_style(w, UI_WID_STYLE_RED);
-        wid_set_on_mouse_up(w, wid_skill_close);
-      }
-    } else {
-      {
-        auto  w = wid_new_square_button(wid_skills->wid_popup_container, "wid collect window close");
-        point tl(0, 0);
-        point br(3, 3);
-        wid_set_pos(w, tl, br);
-        wid_set_bg_tilename(w, "ui_icon_close");
-        wid_set_on_mouse_down(w, wid_skill_close);
-      }
-
-      {
-        auto  w = wid_new_square_button(wid_skills->wid_popup_container, "wid collect window close");
-        point tl(wid_width - 3, 0);
-        point br(wid_width - 0, 3);
-        wid_set_pos(w, tl, br);
-        wid_set_bg_tilename(w, "ui_icon_close");
-        wid_set_on_mouse_down(w, wid_skill_close);
-      }
-    }
-
-    wid_update(wid_skills->wid_text_area->wid_text_area);
-    wid_actionbar_init();
-  }
-
   int WID_SKILL_BUTTON_WIDTH  = 4;
   int WID_SKILL_BUTTON_HEIGHT = 4;
 
@@ -468,7 +330,7 @@ void Game::wid_choose_skill(void)
   point tl;
   point br(skills_width, skills_height);
   wid_skills = new WidPopup("Skills", tl, br, nullptr, "", true, false);
-  wid_skills->log("*WORK IN PROGRESS* Choose a skill");
+  wid_skills->log("Choose a skill, mortal");
   auto skills_container = wid_skills->wid_popup_container;
   skills_container      = wid_skills->wid_popup_container;
   wid_move_to_pct_centered(skills_container, 0.5, 0.5);
@@ -558,11 +420,13 @@ void Game::wid_choose_skill(void)
         // Can we attain this skill?
         //
         wid_set_style(b, UI_WID_STYLE_GREEN);
+        wid_set_on_mouse_up(b, wid_skills_mouse_up);
       } else if (skill_is_available(skill)) {
         //
         // Can we attain this skill?
         //
         wid_set_style(b, UI_WID_STYLE_GREEN);
+        wid_set_on_mouse_up(b, wid_skills_mouse_up);
       } else {
         //
         // Can we not yet attain this skill?
