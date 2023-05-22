@@ -526,7 +526,7 @@ bool wid_rightbar_pixelart_create(void)
           continue;
         }
 
-        auto tile = tile_find_mand(t->tp()->name() + (activated ? "_activated" : "_inactive"));
+        auto tile = tile_find_mand(t->tp()->skill_base_name() + (activated ? "_activated" : "_inactive"));
         if (unlikely(! tile)) {
           item++;
           continue;

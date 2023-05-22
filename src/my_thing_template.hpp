@@ -1024,6 +1024,7 @@ private:
   std::string _on_you_nat_attack_attempt_do;
   std::string _on_you_nat_attack_success_do;
   std::string _resurrect_dice_str;
+  std::string _skill_base_name;
   std::string _skill_replaces;
   std::string _spawn_group_size_dice_str;
   std::string _spawn_on_shoved;
@@ -1038,11 +1039,11 @@ private:
   std::string _text_description_long2;
   std::string _text_description_long3;
   std::string _text_description_short;
+  std::string _text_description_very_short;
   std::string _text_hits;
   std::string _text_long_name;
   std::string _text_real_name;
   std::string _text_short_name;
-  std::string _text_skill;
   std::string _text_title;
   std::string _text_unused;
   std::string _text_unused1;
@@ -1370,6 +1371,7 @@ public:
   const std::string &on_you_nat_attack_attempt_do(void) const;
   const std::string &on_you_nat_attack_success_do(void) const;
   const std::string &resurrect_dice_str(void) const;
+  const std::string &skill_base_name(void) const;
   const std::string &skill_replaces(void) const;
   const std::string &spawn_group_size_dice_str(void) const;
   const std::string &spawn_on_shoved(void) const;
@@ -1383,11 +1385,11 @@ public:
   const std::string &text_description_long3(void) const;
   const std::string &text_description_long(void) const;
   const std::string &text_description_short(void) const;
+  const std::string &text_description_very_short(void) const;
   const std::string &text_hits(void) const;
   const std::string &text_long_name(void) const;
   const std::string &text_real_name(void) const;
   const std::string &text_short_name(void) const;
-  const std::string &text_skill(void) const;
   const std::string &text_title(void) const;
   const std::string &text_unused1(void) const;
   const std::string &text_unused2(void) const;
@@ -2987,6 +2989,7 @@ public:
   void rarity_set(int v);
   void shove_bonus_set(int v);
   void shove_strength_set(int v);
+  void skill_base_name_set(const std::string &v);
   void skill_replaces_set(const std::string &v);
   void spawn_group_radius_set(int v);
   void spawn_on_shoved_set(const std::string &v);
@@ -3041,11 +3044,11 @@ public:
   void text_description_long3_set(const std::string &v);
   void text_description_long_set(const std::string &v);
   void text_description_short_set(const std::string &v);
+  void text_description_very_short_set(const std::string &v);
   void text_hits_set(const std::string &v);
   void text_long_name_set(const std::string &v);
   void text_real_name_set(const std::string &v);
   void text_short_name_set(const std::string &v);
-  void text_skill_set(const std::string &v);
   void text_title_set(const std::string &v);
   void text_unused1_set(const std::string &v);
   void text_unused2_set(const std::string &v);

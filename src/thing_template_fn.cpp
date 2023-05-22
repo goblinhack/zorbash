@@ -171,6 +171,7 @@ const std::string &Tp::on_you_are_declared_leader_do(void) const { return _on_yo
 const std::string &Tp::on_you_are_on_fire_do(void) const { return _on_you_are_on_fire_do; }
 const std::string &Tp::on_you_nat_attack_attempt_do(void) const { return _on_you_nat_attack_attempt_do; }
 const std::string &Tp::on_you_nat_attack_success_do(void) const { return _on_you_nat_attack_success_do; }
+const std::string &Tp::skill_base_name(void) const { return _skill_base_name; }
 const std::string &Tp::skill_replaces(void) const { return _skill_replaces; }
 const std::string &Tp::spawn_on_shoved(void) const { return _spawn_on_shoved; }
 const std::string &Tp::str1(void) const { return _str1; }
@@ -183,11 +184,11 @@ const std::string &Tp::text_description_long2(void) const { return _text_descrip
 const std::string &Tp::text_description_long3(void) const { return _text_description_long3; }
 const std::string &Tp::text_description_long(void) const { return _text_description_long; }
 const std::string &Tp::text_description_short(void) const { return _text_description_short; }
+const std::string &Tp::text_description_very_short(void) const { return _text_description_very_short; }
 const std::string &Tp::text_hits(void) const { return _text_hits; }
 const std::string &Tp::text_long_name(void) const { return _text_long_name; }
 const std::string &Tp::text_real_name(void) const { return _text_real_name; }
 const std::string &Tp::text_short_name(void) const { return _text_short_name; }
-const std::string &Tp::text_skill(void) const { return _text_skill; }
 const std::string &Tp::text_title(void) const { return _text_title; }
 const std::string &Tp::text_unused1(void) const { return _text_unused1; }
 const std::string &Tp::text_unused2(void) const { return _text_unused2; }
@@ -1767,6 +1768,7 @@ void Tp::range_max_set(int v) { _range_max = v; }
 void Tp::rarity_set(int v) { _rarity = v; }
 void Tp::shove_bonus_set(int v) { _shove_bonus = v; }
 void Tp::shove_strength_set(int v) { _shove_strength = v; }
+void Tp::skill_base_name_set(const std::string &v) { _skill_base_name = v; }
 void Tp::skill_replaces_set(const std::string &v) { _skill_replaces = v; }
 void Tp::spawn_group_radius_set(int v) { _spawn_group_radius = v; }
 void Tp::spawn_on_shoved_set(const std::string &v) { _spawn_on_shoved = v; }
@@ -1818,11 +1820,11 @@ void Tp::text_description_long2_set(const std::string &v) { _text_description_lo
 void Tp::text_description_long3_set(const std::string &v) { _text_description_long3 = v; }
 void Tp::text_description_long_set(const std::string &v) { _text_description_long = v; }
 void Tp::text_description_short_set(const std::string &v) { _text_description_short = v; }
+void Tp::text_description_very_short_set(const std::string &v) { _text_description_very_short = v; }
 void Tp::text_hits_set(const std::string &v) { _text_hits = v; }
 void Tp::text_long_name_set(const std::string &v) { _text_long_name = v; }
 void Tp::text_real_name_set(const std::string &v) { _text_real_name = v; }
 void Tp::text_short_name_set(const std::string &v) { _text_short_name = v; }
-void Tp::text_skill_set(const std::string &v) { _text_skill = v; }
 void Tp::text_title_set(const std::string &v) { _text_title = v; }
 void Tp::text_unused1_set(const std::string &v) { _text_unused1 = v; }
 void Tp::text_unused2_set(const std::string &v) { _text_unused2 = v; }

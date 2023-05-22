@@ -29,11 +29,12 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_skill(self, True)
     my.is_tickable(self, True)
     my.on_tick_do(self, "me.on_tick()")
+    my.skill_base_name(self, "skill_gold_to_health")
     my.stat_dex_bonus(self, -1)
     my.stat_str_bonus(self, 1)
     my.text_description_long(self, "With this skill you are able to trans-mutate gold into life giving health.")
     my.text_description_short(self, "Golden health skill.")
-    my.text_skill(self, "Golden health. When below max health, convert gold coins to health points.")
+    my.text_description_very_short(self, "GldToHp 1")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
@@ -47,7 +48,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="skill_gold_to_health", text_long_name="gold to health skill", text_short_name="GldToHp 1")
+    tp_init(name="skill_gold_to_health", text_long_name="gold to health skill", text_short_name="Gold To Health 1")
 
 
 init()

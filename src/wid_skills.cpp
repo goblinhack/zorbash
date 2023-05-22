@@ -207,6 +207,7 @@ static bool skill_has_precursor(Skillp skill_in)
       if (! skill) {
         continue;
       }
+
       if (skill->skill_up == skill_in) {
         return true;
       }
@@ -218,6 +219,33 @@ static bool skill_has_precursor(Skillp skill_in)
       }
       if (skill->skill_right == skill_in) {
         return true;
+      }
+    }
+  }
+  return false;
+}
+
+//
+// Have we unlocked a skill?
+//
+static bool skill_is_available(Skillp skill_in)
+{
+  for (auto x = 0; x < SKILL_TREE_ACROSS; x++) {
+    for (auto y = 0; y < SKILL_TREE_DOWN; y++) {
+      auto skill = get(game->skill_tree, x, y);
+      if (! skill) {
+        continue;
+      }
+
+      if ((skill->skill_up == skill_in) || (skill->skill_up == skill_in) || (skill->skill_up == skill_in)
+          || (skill->skill_up == skill_in)) {
+        FOR_ALL_SKILLS_FOR(game->level->player, id)
+        {
+          auto known_skill = game->level->thing_find(id);
+          if (known_skill && (skill->tpp == known_skill->tp())) {
+            return true;
+          }
+        }
       }
     }
   }
@@ -362,7 +390,7 @@ void Game::wid_choose_skill(void)
           wid_set_style(skill_text, UI_WID_STYLE_DARK);
         }
 
-        wid_set_text(skill_text, " " + tpp->text_skill());
+        wid_set_text(skill_text, " " + tpp->skill_base_name());
         wid_set_text_lhs(skill_text, true);
         wid_update(skill_text);
       }
@@ -497,7 +525,7 @@ void Game::wid_choose_skill(void)
                 //
                 // And its short description
                 //
-                wid_set_text(b, tpp->text_short_capitalised().c_str());
+                wid_set_text(b, skill->tpp->text_description_very_short());
               } else {
                 //
                 // And its tile
@@ -526,6 +554,11 @@ void Game::wid_choose_skill(void)
         //
         wid_set_style(b, UI_WID_STYLE_DARK);
       } else if (! skill_has_precursor(skill)) {
+        //
+        // Can we attain this skill?
+        //
+        wid_set_style(b, UI_WID_STYLE_GREEN);
+      } else if (skill_is_available(skill)) {
         //
         // Can we attain this skill?
         //

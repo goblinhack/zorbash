@@ -4942,10 +4942,10 @@ const std::string &Thing::dmg_nat_att_type(void)
   return (tp()->dmg_nat_att_type());
 }
 
-const std::string &Thing::text_skill(void)
+const std::string &Thing::skill_base_name(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->text_skill());
+  return (tp()->skill_base_name());
 }
 
 const std::string &Thing::skill_replaces(void)

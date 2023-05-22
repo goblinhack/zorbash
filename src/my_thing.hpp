@@ -932,6 +932,7 @@ public:
   const std::string &on_you_nat_attack_success_do(void);
   const std::string &poison_reason_get(void);
   const std::string &resurrect_dice_str(void);
+  const std::string &skill_base_name(void);
   const std::string &skill_replaces(void);
   const std::string &spawn_group_size_dice_str(void);
   const std::string &spawn_on_shoved(void);
@@ -942,9 +943,9 @@ public:
   const std::string &text_debuff(void);
   const std::string &text_description_enchant(void);
   const std::string &text_description_short(void);
+  const std::string &text_description_very_short(void);
   const std::string &text_hits(void);
   const std::string &text_real_name(void);
-  const std::string &text_skill(void);
   const std::string &text_title(void);
   const std::string &text_unused1(void);
   const std::string &text_unused2(void);

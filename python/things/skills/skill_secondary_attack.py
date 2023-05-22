@@ -36,11 +36,12 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_loggable(self, True)
     my.is_skill(self, True)
     my.on_use_do(self, "me.on_use()")
+    my.skill_base_name(self, "skill_secondary_attack")
     my.stat_def_bonus(self, -1)
     my.stat_str_bonus(self, 1)
     my.text_description_long(self, "With this skill you gain a secondary attack. The additional attack will be half of the initial attack")
     my.text_description_short(self, "Double strike skill.")
-    my.text_skill(self, "Double strike. Secondary attack at half of the initial attack.")
+    my.text_description_very_short(self, "SecAtck 1")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
@@ -54,7 +55,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="skill_secondary_attack", text_long_name="secondary attack skill", text_short_name="SecAtck 1")
+    tp_init(name="skill_secondary_attack", text_long_name="secondary attack skill", text_short_name="Secondry Attack 1")
 
 
 init()

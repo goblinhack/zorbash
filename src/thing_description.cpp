@@ -112,3 +112,9 @@ const std::string &Thing::text_description_short(void)
   TRACE_NO_INDENT();
   return (tp()->text_description_short());
 }
+
+const std::string &Thing::text_description_very_short(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->text_description_very_short());
+}
