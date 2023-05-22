@@ -196,6 +196,34 @@ void wid_skill_over_end(Widp w)
   //
 }
 
+//
+// Is this skill learned only after another?
+//
+static bool skill_has_precursor(Skillp skill_in)
+{
+  for (auto x = 0; x < SKILL_TREE_ACROSS; x++) {
+    for (auto y = 0; y < SKILL_TREE_DOWN; y++) {
+      auto skill = get(game->skill_tree, x, y);
+      if (! skill) {
+        continue;
+      }
+      if (skill->skill_up == skill_in) {
+        return true;
+      }
+      if (skill->skill_down == skill_in) {
+        return true;
+      }
+      if (skill->skill_left == skill_in) {
+        return true;
+      }
+      if (skill->skill_right == skill_in) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
 void Game::wid_choose_skill(void)
 {
   TRACE_AND_INDENT();
@@ -493,16 +521,21 @@ void Game::wid_choose_skill(void)
       // Do we have this skill?
       //
       if (player->has_skill(skill->tpp)) {
+        //
+        // Yes
+        //
         wid_set_style(b, UI_WID_STYLE_DARK);
-      } else {
+      } else if (! skill_has_precursor(skill)) {
         //
         // Can we attain this skill?
         //
         wid_set_style(b, UI_WID_STYLE_GREEN);
+      } else {
         //
         // Can we not yet attain this skill?
         //
-        wid_set_style(b, UI_WID_STYLE_RED);
+        wid_set_style(b, UI_WID_STYLE_DARK);
+        wid_set_color(b, WID_COLOR_TEXT_FG, GRAY50);
       }
 
       wid_set_on_mouse_over_begin(b, wid_skill_over_begin);

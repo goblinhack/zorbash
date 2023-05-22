@@ -48,8 +48,8 @@ def init_ui_circle():
     my.tile_load_arr(
         file="data/gfx/ui/pixelart/pixelart_ui_circle.tga",
         name="ui_circle",
-        width=256,
-        height=256,
+        width=32,
+        height=32,
         arr=tiles,
     )
 
