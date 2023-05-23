@@ -33,9 +33,26 @@ bool Thing::skill_add(Thingp what)
 
   FOR_ALL_SKILLS(item)
   {
+    //
+    // Already carried?
+    //
     if (item == what->id) {
       dbg("No; already carried");
       return false;
+    }
+  }
+
+  FOR_ALL_SKILLS(item)
+  {
+    //
+    // If this skill supersedes another skill, then remote it.
+    //
+    auto existing_skill = level->thing_find(item);
+    if (existing_skill) {
+      if (what->skill_replaces() == existing_skill->tp()->name()) {
+        skill_remove(existing_skill);
+        break;
+      }
     }
   }
 
