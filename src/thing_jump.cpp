@@ -273,6 +273,25 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   }
 
   //
+  // Check if we click on a wall by accident, we don't try and jump over chasms
+  // that are in the way and then fall to our death.
+  //
+  // No sneaky jumping onto doors to get passed them. But we do need to allow jumping into secret doors.
+  //
+  if (level->is_obs_jump_end(x, y)) {
+    TRACE_AND_INDENT();
+    dbg("No, jump failed, into obstacle");
+    if (is_player()) {
+      if (point(x, y) == original_destination) {
+        msg("You can't jump into solid objects.");
+      } else {
+        msg("You can't jump there; something is in the way.");
+      }
+    }
+    return false;
+  }
+
+  //
   // Add some random delta for fun and some for diagonals
   //
   float d    = jump_distance_current();
@@ -308,16 +327,16 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   }
 
   //
-  // No sneaky jumping onto doors to get passed them. But we do need to allow jumping into secret doors.
+  // If the jump distance is truncated, check again for obstacles.
   //
   if (level->is_obs_jump_end(x, y)) {
     TRACE_AND_INDENT();
     dbg("No, jump failed, into obstacle");
     if (is_player()) {
       if (point(x, y) == original_destination) {
-        msg("You can't jump into solid objects.");
+        msg("You can't jump that far and would land in a solid object.");
       } else {
-        msg("You can't jump there; something is in the way.");
+        msg("You can't jump that far and something is in the way.");
       }
     }
     return false;
