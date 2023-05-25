@@ -335,8 +335,11 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
       auto w = wid_new_square_button(p, "use");
 
       point tl = make_point(x_off, y_at);
-      point br = make_point(x_off + width, y_at + 2);
-      wid_set_style(w, UI_WID_STYLE_NORMAL);
+      point br = make_point(x_off + width, y_at);
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
       wid_set_on_mouse_up(w, wid_inventory_item_option_unequip);
       wid_set_pos(w, tl, br);
       if (item_option->is_weapon()) {
@@ -360,7 +363,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
       } else {
         wid_set_text(w, "Unwield");
       }
-      y_at += 3;
+      y_at += 2;
     } else if (item_option->is_usable()) {
       //
       // For example boots of teleport or an enchant_stone
