@@ -142,7 +142,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
     //
     // Display the slots
     //
-    int width = 33;
+    int width = 35;
     int x_off = 45;
     int y_at  = 5;
 
@@ -240,7 +240,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
     //
     int tlx, tly, brx, bry;
     wid_get_tl_x_tl_y_br_x_br_y(wid_inventory_window, &tlx, &tly, &brx, &bry);
-    tlx += 76;
+    tlx += 78;
     tly += 5;
     brx -= 1;
     bry -= 2;
