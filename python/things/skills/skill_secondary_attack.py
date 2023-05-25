@@ -4,12 +4,16 @@ import tp
 self = None
 
 
-def on_use(owner, skill, target, x, y):
+def on_tick(owner, skill, x, y):
+    if my.pcg_randint(1, 100) < 10:
+        my.thing_stamina_decr(owner, 1)
+    return False  # didn't do anything
 
+
+def on_use(owner, skill, target, x, y):
     # my.topcon("owner  {} {}".format(my.thing_name_get(owner), my.thing_health(owner)))
     # my.topcon("skill  {} {}".format(my.thing_name_get(skill), my.thing_health(skill)))
     # my.topcon("target {} {}".format(my.thing_name_get(target), my.thing_health(target)))
-
     my.thing_stamina_decr(owner, 1)
 
     attack = my.thing_attack_num_get(owner)
@@ -35,11 +39,14 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_ascii_shown(self, True)
     my.is_loggable(self, True)
     my.is_skill(self, True)
+    my.is_tickable(self, True)
+    my.on_tick_do(self, "me.on_tick()")
     my.on_use_do(self, "me.on_use()")
     my.skill_base_name(self, "skill_secondary_attack")
     my.stat_def_bonus(self, -1)
     my.stat_str_bonus(self, 1)
     my.text_description_long(self, "With this skill you gain a secondary attack. The additional attack will be half of the initial attack")
+    my.text_description_long2(self, "When activated, 10 percent chance of draining stamina.")
     my.text_description_short(self, "Double strike skill.")
     my.text_description_very_short(self, "SecAtck 1")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

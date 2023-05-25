@@ -29,9 +29,7 @@ int Thing::stat_con_total(void)
   {
     auto iter = equip_get(e);
     if (iter) {
-      if (iter->stat_con_bonus()) {
-        stat += iter->stat_con_total() - 10;
-      }
+      stat += iter->stat_con_bonus();
       if (stat != prev) {
         prev = stat;
         dbg3("Con: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_con_total(), stat);
@@ -57,9 +55,7 @@ int Thing::stat_con_total(void)
         if (iter->is_auto_equipped()) {
           continue;
         }
-        if (iter->stat_con_bonus()) {
-          stat += iter->stat_con_total() - 10;
-        }
+        stat += iter->stat_con_bonus();
         if (stat != prev) {
           prev = stat;
           dbg3("Con: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_con_total(), stat);
@@ -71,9 +67,7 @@ int Thing::stat_con_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        if (iter->stat_con_bonus()) {
-          stat += iter->stat_con_total() - 10;
-        }
+        stat += iter->stat_con_bonus();
         if (stat != prev) {
           prev = stat;
           dbg3("Con: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_con_total(), stat);
@@ -85,9 +79,7 @@ int Thing::stat_con_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        if (iter->stat_con_bonus()) {
-          stat += iter->stat_con_total() - 10;
-        }
+        stat += iter->stat_con_bonus();
         if (stat != prev) {
           prev = stat;
           dbg3("Con: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_con_total(), stat);
@@ -99,9 +91,7 @@ int Thing::stat_con_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter && iter->is_activated) {
-        if (iter->stat_con_bonus()) {
-          stat += iter->stat_con_total() - 10;
-        }
+        stat += iter->stat_con_bonus();
         if (stat != prev) {
           prev = stat;
           dbg3("Con: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_con_total(), stat);

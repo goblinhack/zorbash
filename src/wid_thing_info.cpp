@@ -1603,7 +1603,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
         if (iter) {
           char tmp2[ MAXSHORTSTR ];
           char iter_name[ MAXSHORTSTR ];
-          if (iter->stat_def_bonus() && (iter->stat_def_total() != 10)) {
+          if (iter->stat_def_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_def_total() - 10).c_str());
             snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
@@ -1612,45 +1612,28 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
         }
       }
 
-      if (t->maybe_itemsp()) {
-        FOR_ALL_CARRIED_BY(t, id)
-        {
-          auto iter = level->thing_find(id);
-          if (iter) {
-            //
-            // Don't count boots for example twice
-            //
-            if (t->is_equipped(iter)) {
-              continue;
-            }
-            //
-            // Things that are equipped must be equipped to get the benefit.
-            // Other items give the benefit by just being carried.
-            //
-            if (iter->is_auto_equipped()) {
-              continue;
-            }
-
-            if (iter) {
-              char tmp2[ MAXSHORTSTR ];
-              char iter_name[ MAXSHORTSTR ];
-              if (iter->stat_def_bonus() && (iter->stat_def_total() != 10)) {
-                snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_def_total() - 10).c_str());
-                snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
-                snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
-                w->log(tmp);
-              }
-            }
+      FOR_ALL_CARRIED_BY(t, id)
+      {
+        auto iter = level->thing_find(id);
+        if (iter) {
+          //
+          // Don't count boots for example twice
+          //
+          if (t->is_equipped(iter)) {
+            continue;
           }
-        }
+          //
+          // Things that are equipped must be equipped to get the benefit.
+          // Other items give the benefit by just being carried.
+          //
+          if (iter->is_auto_equipped()) {
+            continue;
+          }
 
-        FOR_ALL_BUFFS_FOR(t, id)
-        {
-          auto iter = level->thing_find(id);
           if (iter) {
             char tmp2[ MAXSHORTSTR ];
             char iter_name[ MAXSHORTSTR ];
-            if (iter->stat_def_bonus() && (iter->stat_def_total() != 10)) {
+            if (iter->stat_def_bonus()) {
               snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_def_total() - 10).c_str());
               snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
               snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
@@ -1658,34 +1641,49 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
             }
           }
         }
+      }
 
-        FOR_ALL_DEBUFFS_FOR(t, id)
-        {
-          auto iter = level->thing_find(id);
-          if (iter) {
-            char tmp2[ MAXSHORTSTR ];
-            char iter_name[ MAXSHORTSTR ];
-            if (iter->stat_def_bonus() && (iter->stat_def_total() != 10)) {
-              snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_def_total() - 10).c_str());
-              snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
-              snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
-              w->log(tmp);
-            }
+      FOR_ALL_BUFFS_FOR(t, id)
+      {
+        auto iter = level->thing_find(id);
+        if (iter) {
+          char tmp2[ MAXSHORTSTR ];
+          char iter_name[ MAXSHORTSTR ];
+          if (iter->stat_def_bonus()) {
+            snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_def_total() - 10).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
+            w->log(tmp);
           }
         }
+      }
 
-        FOR_ALL_SKILLS_FOR(t, id)
-        {
-          auto iter = level->thing_find(id);
-          if (iter) {
-            char tmp2[ MAXSHORTSTR ];
-            char iter_name[ MAXSHORTSTR ];
-            if (iter->stat_def_bonus() && (iter->stat_def_total() != 10)) {
-              snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_def_total() - 10).c_str());
-              snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
-              snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
-              w->log(tmp);
-            }
+      FOR_ALL_DEBUFFS_FOR(t, id)
+      {
+        auto iter = level->thing_find(id);
+        if (iter) {
+          char tmp2[ MAXSHORTSTR ];
+          char iter_name[ MAXSHORTSTR ];
+          if (iter->stat_def_bonus()) {
+            snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_def_total() - 10).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
+            w->log(tmp);
+          }
+        }
+      }
+
+      FOR_ALL_SKILLS_FOR(t, id)
+      {
+        auto iter = level->thing_find(id);
+        if (iter) {
+          char tmp2[ MAXSHORTSTR ];
+          char iter_name[ MAXSHORTSTR ];
+          if (iter->stat_def_bonus()) {
+            snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_def_total() - 10).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
+            w->log(tmp);
           }
         }
       }
@@ -1708,6 +1706,9 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
     auto stat = t->stat_def_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense bonus            %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
+    if (t->is_skill()) {
+      w->log("(when activated)");
+    }
   }
 }
 
@@ -1738,7 +1739,7 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
         if (iter) {
           char tmp2[ MAXSHORTSTR ];
           char iter_name[ MAXSHORTSTR ];
-          if (iter->stat_att_bonus() && (iter->stat_att_total() != 10)) {
+          if (iter->stat_att_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
             snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
@@ -1747,45 +1748,28 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
         }
       }
 
-      if (t->maybe_itemsp()) {
-        FOR_ALL_CARRIED_BY(t, id)
-        {
-          auto iter = level->thing_find(id);
-          if (iter) {
-            //
-            // Don't count boots for example twice
-            //
-            if (t->is_equipped(iter)) {
-              continue;
-            }
-            //
-            // Things that are equipped must be equipped to get the benefit.
-            // Other items give the benefit by just being carried.
-            //
-            if (iter->is_auto_equipped()) {
-              continue;
-            }
-
-            if (iter) {
-              char tmp2[ MAXSHORTSTR ];
-              char iter_name[ MAXSHORTSTR ];
-              if (iter->stat_att_bonus() && (iter->stat_att_total() != 10)) {
-                snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
-                snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
-                snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
-                w->log(tmp);
-              }
-            }
+      FOR_ALL_CARRIED_BY(t, id)
+      {
+        auto iter = level->thing_find(id);
+        if (iter) {
+          //
+          // Don't count boots for example twice
+          //
+          if (t->is_equipped(iter)) {
+            continue;
           }
-        }
+          //
+          // Things that are equipped must be equipped to get the benefit.
+          // Other items give the benefit by just being carried.
+          //
+          if (iter->is_auto_equipped()) {
+            continue;
+          }
 
-        FOR_ALL_BUFFS_FOR(t, id)
-        {
-          auto iter = level->thing_find(id);
           if (iter) {
             char tmp2[ MAXSHORTSTR ];
             char iter_name[ MAXSHORTSTR ];
-            if (iter->stat_att_bonus() && (iter->stat_att_total() != 10)) {
+            if (iter->stat_att_bonus()) {
               snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
               snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
               snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
@@ -1793,34 +1777,49 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
             }
           }
         }
+      }
 
-        FOR_ALL_DEBUFFS_FOR(t, id)
-        {
-          auto iter = level->thing_find(id);
-          if (iter) {
-            char tmp2[ MAXSHORTSTR ];
-            char iter_name[ MAXSHORTSTR ];
-            if (iter->stat_att_bonus() && (iter->stat_att_total() != 10)) {
-              snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
-              snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
-              snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
-              w->log(tmp);
-            }
+      FOR_ALL_BUFFS_FOR(t, id)
+      {
+        auto iter = level->thing_find(id);
+        if (iter) {
+          char tmp2[ MAXSHORTSTR ];
+          char iter_name[ MAXSHORTSTR ];
+          if (iter->stat_att_bonus()) {
+            snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
+            w->log(tmp);
           }
         }
+      }
 
-        FOR_ALL_SKILLS_FOR(t, id)
-        {
-          auto iter = level->thing_find(id);
-          if (iter) {
-            char tmp2[ MAXSHORTSTR ];
-            char iter_name[ MAXSHORTSTR ];
-            if (iter->stat_att_bonus() && (iter->stat_att_total() != 10)) {
-              snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
-              snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
-              snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
-              w->log(tmp);
-            }
+      FOR_ALL_DEBUFFS_FOR(t, id)
+      {
+        auto iter = level->thing_find(id);
+        if (iter) {
+          char tmp2[ MAXSHORTSTR ];
+          char iter_name[ MAXSHORTSTR ];
+          if (iter->stat_att_bonus()) {
+            snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
+            w->log(tmp);
+          }
+        }
+      }
+
+      FOR_ALL_SKILLS_FOR(t, id)
+      {
+        auto iter = level->thing_find(id);
+        if (iter) {
+          char tmp2[ MAXSHORTSTR ];
+          char iter_name[ MAXSHORTSTR ];
+          if (iter->stat_att_bonus()) {
+            snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
+            w->log(tmp);
           }
         }
       }
@@ -1843,6 +1842,9 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
     auto stat = t->stat_att_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack bonus             %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
+    if (t->is_skill()) {
+      w->log("(when activated)");
+    }
   }
 }
 
@@ -1858,22 +1860,24 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength               %6s", tmp2);
     w->log(tmp);
 
-    FOR_ALL_EQUIP(e)
-    {
-      Thingp iter = t->equip_get(e);
-      if (iter) {
-        char tmp2[ MAXSHORTSTR ];
-        char iter_name[ MAXSHORTSTR ];
-        if (iter->stat_str_bonus() && (iter->stat_str_total() != 10)) {
-          snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_str_total() - 10).c_str());
-          snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
-          w->log(tmp);
+    auto str       = t->stat_str();
+    auto str_total = t->stat_str_total();
+    if (str_total != str) {
+      FOR_ALL_EQUIP(e)
+      {
+        Thingp iter = t->equip_get(e);
+        if (iter) {
+          char tmp2[ MAXSHORTSTR ];
+          char iter_name[ MAXSHORTSTR ];
+          if (iter->stat_str_bonus()) {
+            snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_str_total() - 10).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
+            w->log(tmp);
+          }
         }
       }
-    }
 
-    if (t->maybe_itemsp()) {
       FOR_ALL_CARRIED_BY(t, id)
       {
         auto iter = level->thing_find(id);
@@ -1895,7 +1899,7 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
           if (iter) {
             char tmp2[ MAXSHORTSTR ];
             char iter_name[ MAXSHORTSTR ];
-            if (iter->stat_str_bonus() && (iter->stat_str_total() != 10)) {
+            if (iter->stat_str_bonus()) {
               snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_str_total() - 10).c_str());
               snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
               snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
@@ -1911,7 +1915,7 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
         if (iter) {
           char tmp2[ MAXSHORTSTR ];
           char iter_name[ MAXSHORTSTR ];
-          if (iter->stat_str_bonus() && (iter->stat_str_total() != 10)) {
+          if (iter->stat_str_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_str_total() - 10).c_str());
             snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
@@ -1926,7 +1930,7 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
         if (iter) {
           char tmp2[ MAXSHORTSTR ];
           char iter_name[ MAXSHORTSTR ];
-          if (iter->stat_str_bonus() && (iter->stat_str_total() != 10)) {
+          if (iter->stat_str_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_str_total() - 10).c_str());
             snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
@@ -1941,7 +1945,7 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
         if (iter) {
           char tmp2[ MAXSHORTSTR ];
           char iter_name[ MAXSHORTSTR ];
-          if (iter->stat_str_bonus() && (iter->stat_str_total() != 10)) {
+          if (iter->stat_str_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_str_total() - 10).c_str());
             snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
@@ -1958,6 +1962,9 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
     auto stat = t->stat_str_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength bonus           %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
+    if (t->is_skill()) {
+      w->log("(when activated)");
+    }
   }
 }
 
@@ -1973,22 +1980,24 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity              %6s", tmp2);
     w->log(tmp);
 
-    FOR_ALL_EQUIP(e)
-    {
-      Thingp iter = t->equip_get(e);
-      if (iter) {
-        char tmp2[ MAXSHORTSTR ];
-        char iter_name[ MAXSHORTSTR ];
-        if (iter->stat_dex_bonus() && (iter->stat_dex_total() != 10)) {
-          snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_dex_total() - 10).c_str());
-          snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
-          w->log(tmp);
+    auto dex       = t->stat_dex();
+    auto dex_total = t->stat_dex_total();
+    if (dex_total != dex) {
+      FOR_ALL_EQUIP(e)
+      {
+        Thingp iter = t->equip_get(e);
+        if (iter) {
+          char tmp2[ MAXSHORTSTR ];
+          char iter_name[ MAXSHORTSTR ];
+          if (iter->stat_dex_bonus()) {
+            snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_dex_total() - 10).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
+            w->log(tmp);
+          }
         }
       }
-    }
 
-    if (t->maybe_itemsp()) {
       FOR_ALL_CARRIED_BY(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2010,7 +2019,7 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
           if (iter) {
             char tmp2[ MAXSHORTSTR ];
             char iter_name[ MAXSHORTSTR ];
-            if (iter->stat_dex_bonus() && (iter->stat_dex_total() != 10)) {
+            if (iter->stat_dex_bonus()) {
               snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_dex_total() - 10).c_str());
               snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
               snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
@@ -2026,7 +2035,7 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
         if (iter) {
           char tmp2[ MAXSHORTSTR ];
           char iter_name[ MAXSHORTSTR ];
-          if (iter->stat_dex_bonus() && (iter->stat_dex_total() != 10)) {
+          if (iter->stat_dex_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_dex_total() - 10).c_str());
             snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
@@ -2041,7 +2050,7 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
         if (iter) {
           char tmp2[ MAXSHORTSTR ];
           char iter_name[ MAXSHORTSTR ];
-          if (iter->stat_dex_bonus() && (iter->stat_dex_total() != 10)) {
+          if (iter->stat_dex_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_dex_total() - 10).c_str());
             snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
@@ -2056,7 +2065,7 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
         if (iter) {
           char tmp2[ MAXSHORTSTR ];
           char iter_name[ MAXSHORTSTR ];
-          if (iter->stat_dex_bonus() && (iter->stat_dex_total() != 10)) {
+          if (iter->stat_dex_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_dex_total() - 10).c_str());
             snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
@@ -2069,6 +2078,9 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
     auto stat = t->stat_dex_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity bonus          %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
+    if (t->is_skill()) {
+      w->log("(when activated)");
+    }
   }
 }
 
@@ -2084,22 +2096,24 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Luck                   %6s", tmp2);
     w->log(tmp);
 
-    FOR_ALL_EQUIP(e)
-    {
-      Thingp iter = t->equip_get(e);
-      if (iter) {
-        char tmp2[ MAXSHORTSTR ];
-        char iter_name[ MAXSHORTSTR ];
-        if (iter->stat_luck_bonus() && (iter->stat_luck_total() != 10)) {
-          snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_luck_total() - 10).c_str());
-          snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
-          w->log(tmp);
+    auto luck       = t->stat_luck();
+    auto luck_total = t->stat_luck_total();
+    if (luck_total != luck) {
+      FOR_ALL_EQUIP(e)
+      {
+        Thingp iter = t->equip_get(e);
+        if (iter) {
+          char tmp2[ MAXSHORTSTR ];
+          char iter_name[ MAXSHORTSTR ];
+          if (iter->stat_luck_bonus()) {
+            snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_luck_total() - 10).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
+            w->log(tmp);
+          }
         }
       }
-    }
 
-    if (t->maybe_itemsp()) {
       FOR_ALL_CARRIED_BY(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2121,7 +2135,7 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
           if (iter) {
             char tmp2[ MAXSHORTSTR ];
             char iter_name[ MAXSHORTSTR ];
-            if (iter->stat_luck_bonus() && (iter->stat_luck_total() != 10)) {
+            if (iter->stat_luck_bonus()) {
               snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_luck_total() - 10).c_str());
               snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
               snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
@@ -2137,7 +2151,7 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
         if (iter) {
           char tmp2[ MAXSHORTSTR ];
           char iter_name[ MAXSHORTSTR ];
-          if (iter->stat_luck_bonus() && (iter->stat_luck_total() != 10)) {
+          if (iter->stat_luck_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_luck_total() - 10).c_str());
             snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
@@ -2152,7 +2166,7 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
         if (iter) {
           char tmp2[ MAXSHORTSTR ];
           char iter_name[ MAXSHORTSTR ];
-          if (iter->stat_luck_bonus() && (iter->stat_luck_total() != 10)) {
+          if (iter->stat_luck_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_luck_total() - 10).c_str());
             snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
@@ -2167,7 +2181,7 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
         if (iter) {
           char tmp2[ MAXSHORTSTR ];
           char iter_name[ MAXSHORTSTR ];
-          if (iter->stat_luck_bonus() && (iter->stat_luck_total() != 10)) {
+          if (iter->stat_luck_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_luck_total() - 10).c_str());
             snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
@@ -2180,6 +2194,9 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
     auto stat = t->stat_luck_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Luck bonus               %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
+    if (t->is_skill()) {
+      w->log("(when activated)");
+    }
   }
 }
 
@@ -2195,22 +2212,24 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution           %6s", tmp2);
     w->log(tmp);
 
-    FOR_ALL_EQUIP(e)
-    {
-      Thingp iter = t->equip_get(e);
-      if (iter) {
-        char tmp2[ MAXSHORTSTR ];
-        char iter_name[ MAXSHORTSTR ];
-        if (iter->stat_con_bonus() && (iter->stat_con_total() != 10)) {
-          snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
-          snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
-          w->log(tmp);
+    auto con       = t->stat_con();
+    auto con_total = t->stat_con_total();
+    if (con_total != con) {
+      FOR_ALL_EQUIP(e)
+      {
+        Thingp iter = t->equip_get(e);
+        if (iter) {
+          char tmp2[ MAXSHORTSTR ];
+          char iter_name[ MAXSHORTSTR ];
+          if (iter->stat_con_bonus()) {
+            snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
+            w->log(tmp);
+          }
         }
       }
-    }
 
-    if (t->maybe_itemsp()) {
       FOR_ALL_CARRIED_BY(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2232,7 +2251,7 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
           if (iter) {
             char tmp2[ MAXSHORTSTR ];
             char iter_name[ MAXSHORTSTR ];
-            if (iter->stat_con_bonus() && (iter->stat_con_total() != 10)) {
+            if (iter->stat_con_bonus()) {
               snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
               snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
               snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
@@ -2248,7 +2267,7 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
         if (iter) {
           char tmp2[ MAXSHORTSTR ];
           char iter_name[ MAXSHORTSTR ];
-          if (iter->stat_con_bonus() && (iter->stat_con_total() != 10)) {
+          if (iter->stat_con_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
             snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
@@ -2263,7 +2282,7 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
         if (iter) {
           char tmp2[ MAXSHORTSTR ];
           char iter_name[ MAXSHORTSTR ];
-          if (iter->stat_con_bonus() && (iter->stat_con_total() != 10)) {
+          if (iter->stat_con_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
             snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
@@ -2278,7 +2297,7 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
         if (iter) {
           char tmp2[ MAXSHORTSTR ];
           char iter_name[ MAXSHORTSTR ];
-          if (iter->stat_con_bonus() && (iter->stat_con_total() != 10)) {
+          if (iter->stat_con_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
             snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
@@ -2295,6 +2314,9 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
     auto stat = t->stat_con_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution bonus       %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
+    if (t->is_skill()) {
+      w->log("(when activated)");
+    }
   }
 }
 
@@ -2342,6 +2364,9 @@ void Game::wid_thing_info_add_move_speed(WidPopup *w, Thingp t)
     auto speed = t->move_speed_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Move speed bonus         %4d", speed);
     w->log(tmp);
+    if (t->is_skill()) {
+      w->log("(when activated)");
+    }
   }
 }
 
@@ -2364,6 +2389,9 @@ void Game::wid_thing_info_add_shove_strength(WidPopup *w, Thingp t)
     auto shove_strength = t->shove_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Shove strength bonus     %4d", shove_strength);
     w->log(tmp);
+    if (t->is_skill()) {
+      w->log("(when activated)");
+    }
   }
 }
 
@@ -2386,6 +2414,9 @@ void Game::wid_thing_info_add_jump_distance(WidPopup *w, Thingp t)
     auto dist = t->jump_distance_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Jump distance bonus      %4d", dist);
     w->log(tmp);
+    if (t->is_skill()) {
+      w->log("(when activated)");
+    }
   }
 }
 
@@ -2663,7 +2694,7 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
     }
   }
 
-  if (t->is_item() || t->is_monst() || t->is_player() || printed_something) {
+  if (t->is_skill() || t->is_item() || t->is_monst() || t->is_player() || printed_something) {
     w->log(UI_LOGGING_EMPTY_LINE);
   }
 }

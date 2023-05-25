@@ -9,15 +9,15 @@ def on_tick(owner, skill, x, y):
     # my.topcon("skill  {} {}".format(my.thing_name_get(skill), my.thing_health(skill)))
 
     if my.thing_gold(owner) <= 0:
-        return True
+        return False  # did nothing
 
     if my.thing_health(owner) >= my.thing_health_max(owner):
-        return True
+        return False  # did nothing
 
     my.thing_gold_decr(owner, 1)
     my.spawn_using_items_radius_range(owner, skill, owner, "skill_gold_to_health_effect")
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, "coindrop")
-    return True
+    return False  # did nothing
 
 
 def tp_init(name, text_long_name, text_short_name):

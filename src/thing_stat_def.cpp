@@ -41,12 +41,10 @@ int Thing::stat_def_total(void)
   {
     auto iter = equip_get(e);
     if (iter) {
-      if (iter->stat_def_bonus()) {
-        stat += iter->stat_def_total() - 10;
-        if (stat != prev) {
-          prev = stat;
-          dbg("Def: with bonus (%s %d): %d", iter->to_short_string().c_str(), iter->stat_def_bonus(), stat);
-        }
+      stat += iter->stat_def_bonus();
+      if (stat != prev) {
+        prev = stat;
+        dbg("Def: with bonus (%s %d): %d", iter->to_short_string().c_str(), iter->stat_def_bonus(), stat);
       }
     }
   }
@@ -69,9 +67,7 @@ int Thing::stat_def_total(void)
         if (iter->is_auto_equipped()) {
           continue;
         }
-        if (iter->stat_def_bonus()) {
-          stat += iter->stat_def_total() - 10;
-        }
+        stat += iter->stat_def_bonus();
         if (stat != prev) {
           prev = stat;
           dbg("Def: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_def_total(), stat);
@@ -83,9 +79,7 @@ int Thing::stat_def_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        if (iter->stat_def_bonus()) {
-          stat += iter->stat_def_total() - 10;
-        }
+        stat += iter->stat_def_bonus();
         if (stat != prev) {
           prev = stat;
           dbg("Def: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_def_total(), stat);
@@ -97,9 +91,7 @@ int Thing::stat_def_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        if (iter->stat_def_bonus()) {
-          stat += iter->stat_def_total() - 10;
-        }
+        stat += iter->stat_def_bonus();
         if (stat != prev) {
           prev = stat;
           dbg("Def: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_def_total(), stat);
@@ -111,9 +103,7 @@ int Thing::stat_def_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter && iter->is_activated) {
-        if (iter->stat_def_bonus()) {
-          stat += iter->stat_def_total() - 10;
-        }
+        stat += iter->stat_def_bonus();
         if (stat != prev) {
           prev = stat;
           dbg("Def: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_def_total(), stat);
@@ -161,7 +151,7 @@ int Thing::stat_def_penalties_total(void)
     penalty += p;
     if (penalty != prev) {
       prev = penalty;
-      dbg3("Def penalty: stuck %d", p);
+      dbg("Def penalty: stuck %d", p);
     }
   } else if (idle_count() && stat_att_penalty_when_idle()) {
     int p = stat_def_penalty_when_idle() + idle_count();
@@ -169,7 +159,7 @@ int Thing::stat_def_penalties_total(void)
     penalty += p;
     if (penalty != prev) {
       prev = penalty;
-      dbg3("Def penalty: idle %d", p);
+      dbg("Def penalty: idle %d", p);
     }
   }
 
@@ -181,14 +171,14 @@ int Thing::stat_def_penalties_total(void)
     penalty += p;
     if (penalty != prev) {
       prev = penalty;
-      dbg3("Def penalty: starving %d", p);
+      dbg("Def penalty: starving %d", p);
     }
   } else if (is_hunger_level_hungry) {
     int p = THING_HUNGER_PENALTY_WHEN_HUNGRY;
     penalty += p;
     if (penalty != prev) {
       prev = penalty;
-      dbg3("Def penalty: hunger %d", p);
+      dbg("Def penalty: hunger %d", p);
     }
   }
 
@@ -211,7 +201,7 @@ int Thing::stat_def_penalties_total(void)
         penalty += p;
         if (penalty != prev) {
           prev = penalty;
-          dbg3("Def penalty: with (in deep water %d): %d", p, penalty);
+          dbg("Def penalty: with (in deep water %d): %d", p, penalty);
         }
       }
     } else if (level->is_shallow_water(curr_at)) {
@@ -223,14 +213,14 @@ int Thing::stat_def_penalties_total(void)
         penalty += p;
         if (penalty != prev) {
           prev = penalty;
-          dbg3("Def penalty: with (in shallow water %d): %d", p, penalty);
+          dbg("Def penalty: with (in shallow water %d): %d", p, penalty);
         }
       }
     }
   }
 
   if (penalty) {
-    dbg3("Def penalty: %d", penalty);
+    dbg("Def penalty: %d", penalty);
   }
   return penalty;
 }
