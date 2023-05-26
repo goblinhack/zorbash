@@ -184,11 +184,11 @@ WidPopup *Game::wid_tp_info_create_popup(Tpp t, point tl, point br)
   wid_popup_window->log(t->text_description_long(), TEXT_FORMAT_LHS, "gray80");
 
   if (! t->text_description_long2().empty()) {
-    wid_popup_window->log(t->text_description_long2(), TEXT_FORMAT_LHS, "gray70");
+    wid_popup_window->log(t->text_description_long2(), TEXT_FORMAT_LHS, "gray50");
   }
 
   if (! t->text_description_long3().empty()) {
-    wid_popup_window->log(t->text_description_long3(), TEXT_FORMAT_LHS, "gray60");
+    wid_popup_window->log(t->text_description_long3(), TEXT_FORMAT_LHS, "gray80");
   }
 
   wid_tp_info_add_general_info(wid_popup_window, t);
