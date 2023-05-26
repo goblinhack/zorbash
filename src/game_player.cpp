@@ -116,7 +116,7 @@ void Game::place_player(void)
         t->skill_add(w);
       }
       if (0) {
-        auto w = level->thing_new("skill_secondary_attack", point(x, y));
+        auto w = level->thing_new("skill_secondary_attack1", point(x, y));
         t->skill_add(w);
       }
 
@@ -271,11 +271,11 @@ void Game::place_player(void)
         auto b = level->thing_new("enchant_stone", point(x, y));
         t->carry(b);
       }
-      if (0) {
+      if (1) {
         auto b = level->thing_new("skill_stone", point(x, y));
         t->carry(b);
       }
-      if (0) {
+      if (1) {
         auto b = level->thing_new("skill_stone", point(x, y));
         t->carry(b);
       }

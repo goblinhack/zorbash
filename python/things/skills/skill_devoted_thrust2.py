@@ -11,9 +11,6 @@ def on_tick(owner, skill, x, y):
 
 
 def on_use(owner, skill, target, x, y):
-    # my.topcon("owner  {} {}".format(my.thing_name_get(owner), my.thing_health(owner)))
-    # my.topcon("skill  {} {}".format(my.thing_name_get(skill), my.thing_health(skill)))
-    # my.topcon("target {} {}".format(my.thing_name_get(target), my.thing_health(target)))
     my.spawn_using_items_radius_range(owner, skill, target, "skill_devoted_thrust_effect")
     bonus = int(my.thing_stamina(owner) / 10) * 3
 
@@ -21,7 +18,6 @@ def on_use(owner, skill, target, x, y):
         if my.thing_is_player(owner):
             my.thing_msg(owner, f"%%fg=yellow$You strike with a mighty thrust of {bonus} additional damage.%%fg=reset$")
         my.thing_dmg_current_incr(owner, bonus)
-        my.thing_stamina_decr(owner, bonus)
     else:
         if my.thing_is_player(owner):
             my.thing_msg(owner, "You run out of devotion.")
@@ -43,9 +39,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.skill_replaces(self, "skill_devoted_thrust1")
     my.stat_def_bonus(self, 2)
     my.stat_str_bonus(self, 1)
-    my.text_description_long2(self, "Can be used repeatedly, but beware, your stamina will rapidly drop and you may end up unable to attack or jump away.")
     my.text_description_long(self, "Uses 30 percent of your stamina points up in one mighty strike.")
-    my.text_description_long3(self, "When activated, 10 percent chance of draining stamina.")
+    my.text_description_long2(self, "When activated, 10 percent chance of draining stamina.")
     my.text_description_short(self, "Devoted thrust skill.")
     my.text_description_very_short(self, "DevtThr 2")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -61,7 +56,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="skill_devoted_thrust2", text_long_name="devoted thrust II", text_short_name="Devoted Thrust 2")
+    tp_init(name="skill_devoted_thrust2", text_long_name="devoted thrust 2", text_short_name="devoted thrust 2")
 
 
 init()

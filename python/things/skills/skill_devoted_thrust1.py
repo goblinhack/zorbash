@@ -42,9 +42,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.skill_base_name(self, "skill_devoted_thrust")
     my.stat_def_bonus(self, 1)
     my.stat_str_bonus(self, 1)
-    my.text_description_long2(self, "Can be used repeatedly, but beware, your stamina will rapidly drop and you may end up unable to attack or jump away.")
     my.text_description_long(self, "Uses 20 percent of your stamina points up in one mighty strike.")
-    my.text_description_long3(self, "When activated, 10 percent chance of draining stamina.")
+    my.text_description_long3(self, "When activated, 10 percent chance of draining stamina per move.")
     my.text_description_short(self, "Devoted thrust skill.")
     my.text_description_very_short(self, "DevtThr 1")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -60,7 +59,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="skill_devoted_thrust1", text_long_name="devoted thrust I", text_short_name="Devoted Thrust 1")
+    tp_init(name="skill_devoted_thrust1", text_long_name="devoted thrust 1", text_short_name="devoted thrust 1")
 
 
 init()

@@ -5,7 +5,11 @@ my.map_load_skill_tree(
         "d1", "skill_devoted_thrust1",
         "d2", "skill_devoted_thrust2",
         "g1", "skill_gold_to_health",
-        "a1", "skill_secondary_attack",
+        "a1", "skill_secondary_attack1",
+        "a2", "skill_secondary_attack2",
+        "a3", "skill_secondary_attack3",
+        "a4", "skill_secondary_attack4",
+        "a5", "skill_secondary_attack5",
         "[]", "",
     ],
     tree_data=[
@@ -27,7 +31,7 @@ my.map_load_skill_tree(
         "                                        ",
         "                                        ",
         "                                        ",
-        "a1->a1->a1                              ",
+        "a1->a2->a3->a4->a5                      ",
         "                                        ",
     ],
 )
