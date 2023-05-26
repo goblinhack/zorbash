@@ -144,7 +144,7 @@ void Game::place_player(void)
         level->thing_new("dry_grass", point(x + 3, y + 1));
       }
 
-      if (0) {
+      if (1) {
         level->thing_new("gold6", point(x + 1, y));
         auto w = level->thing_new("skill_gold_to_health", point(x, y));
         t->skill_add(w);

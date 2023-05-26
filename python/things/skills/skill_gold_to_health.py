@@ -15,6 +15,7 @@ def on_tick(owner, skill, x, y):
         return False  # did nothing
 
     my.thing_gold_decr(owner, 1)
+    my.thing_health_incr(owner, 1)
     my.spawn_using_items_radius_range(owner, skill, owner, "skill_gold_to_health_effect")
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, "coindrop")
     return False  # did nothing
@@ -31,19 +32,19 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_tick_do(self, "me.on_tick()")
     my.skill_base_name(self, "skill_gold_to_health")
     my.stat_dex_bonus(self, -1)
-    my.stat_str_bonus(self, 1)
     my.text_description_long(self, "With this skill you are able to trans-mutate gold into life giving health.")
+    my.text_description_long2(self, "Conversion rate is 1 gold per turn to 1 health.")
     my.text_description_short(self, "Golden health skill.")
     my.text_description_very_short(self, "GldToHp 1")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
     my.tile(self,
-            tile=name)
+            tile="skill_gold_to_health")
     my.tile(self,
-            tile=name + "_activated")
+            tile="skill_gold_to_health_activated")
     my.tile(self,
-            tile=name + "_inactive")
+            tile="skill_gold_to_health_inactive")
     my.tp_update(self)
 
 
