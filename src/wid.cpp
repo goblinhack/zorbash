@@ -6642,6 +6642,41 @@ static void wid_handle_requests(void)
   }
 
   //
+  // Allow updating the rightbar even if things are moving. Else we end up never
+  // updating it if the player is waiting.
+  //
+  switch (game->state) {
+    case Game::STATE_NORMAL :
+      //
+      // If we need to remake the rightbar, do so
+      //
+      if (game->request_to_remake_rightbar || game->request_to_remake_skillbox) {
+        DBG("Handle request to remake rightbar");
+        wid_leftbar_init();
+        if (wid_rightbar_init()) {
+          game->unset_request_to_remake_rightbar();
+          game->unset_request_to_remake_skillbox();
+        }
+        wid_actionbar_init();
+        game->unset_request_to_remake_actionbar();
+      }
+      break;
+
+    case Game::STATE_INVENTORY :
+    case Game::STATE_OPTIONS_FOR_ITEM_MENU :
+    case Game::STATE_COLLECTING_ITEMS :
+    case Game::STATE_ENCHANTING_ITEMS :
+    case Game::STATE_CHOOSING_SKILLS :
+    case Game::STATE_CHOOSING_TARGET :
+    case Game::STATE_CHOOSING_LEVEL :
+    case Game::STATE_LOAD_MENU :
+    case Game::STATE_KEYBOARD_MENU :
+    case Game::STATE_SAVE_MENU :
+    case Game::STATE_QUIT_MENU : break;
+    default : ERR("Unhandled game state"); break;
+  }
+
+  //
   // Wait until everything stops moving, or we can get into tricky situations like when changing
   // graphics modes with things that had not finished moving to their tile.
   //
@@ -6683,20 +6718,6 @@ static void wid_handle_requests(void)
 
   switch (game->state) {
     case Game::STATE_NORMAL :
-      //
-      // If we need to remake the rightbar, do so
-      //
-      if (game->request_to_remake_rightbar || game->request_to_remake_skillbox) {
-        DBG("Handle request to remake rightbar");
-        wid_leftbar_init();
-        if (wid_rightbar_init()) {
-          game->unset_request_to_remake_rightbar();
-          game->unset_request_to_remake_skillbox();
-        }
-        wid_actionbar_init();
-        game->unset_request_to_remake_actionbar();
-      }
-
       //
       // Update the actionbar
       //
