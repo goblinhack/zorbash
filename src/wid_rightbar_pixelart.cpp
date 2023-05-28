@@ -526,7 +526,7 @@ bool wid_rightbar_pixelart_create(void)
           continue;
         }
 
-        auto tile = tile_find_mand(t->tp()->skill_base_name() + (activated ? "_activated" : "_inactive"));
+        auto tile = tile_find_mand(t->tp()->skill_base_name() + (activated ? "_activated" : ""));
         if (unlikely(! tile)) {
           item++;
           continue;
@@ -543,23 +543,14 @@ bool wid_rightbar_pixelart_create(void)
           wid_set_color(w, WID_COLOR_TEXT_FG, GRAY60);
         }
 
+        if (activated) {
+          wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+        }
+
         wid_set_on_mouse_over_begin(w, wid_skillbox_mouse_over_begin);
         wid_set_on_mouse_over_end(w, wid_skillbox_mouse_over_end);
         wid_set_on_mouse_up(w, wid_skillbox_item_mouse_up);
         wid_set_int_context(w, i);
-
-        //
-        // Print enchant count. This overrides the above. If you have
-        // both I'm not sure how to represent that.
-        //
-        auto enchant_count = player->skill_enchant_count(i);
-        if (enchant_count > 9) {
-          auto tile = tile_find_mand("item_enchant_N");
-          wid_set_fg3_tile(w, tile);
-        } else if (enchant_count > 0) {
-          auto tile = tile_find_mand("item_enchant_" + std::to_string(enchant_count));
-          wid_set_fg3_tile(w, tile);
-        }
       }
       item++;
     }

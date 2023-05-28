@@ -43,19 +43,15 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_def_bonus(self, -2)
     my.stat_str_bonus(self, 1)
     my.text_description_long(self, "With this skill you gain a secondary attack.")
-    my.text_description_long2(self, "The additional attack will be 30 percent of the initial attack")
+    my.text_description_long2(self, "The additional attack will be 30 percent of the initial attack.")
     my.text_description_long3(self, "When activated, 10 percent chance of draining stamina per move.")
     my.text_description_short(self, "Double strike skill.")
     my.text_description_very_short(self, "SecAtck 2")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
-    my.tile(self,
-            tile="skill_secondary_attack")
-    my.tile(self,
-            tile="skill_secondary_attack_activated")
-    my.tile(self,
-            tile="skill_secondary_attack_inactive")
+    my.tile(self, tile="skill_secondary_attack")
+    my.tile(self, tile="skill_secondary_attack_activated")
     my.tp_update(self)
 
 

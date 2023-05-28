@@ -18,12 +18,9 @@ def tp_init(name):
     my.z_prio(self, my.MAP_Z_PRIO_EFFECT)
     # end sort marker
 
-    my.tile(self,
-            tile="nothing")
-    my.tile(self,
-            tile=name + ".1", delay_ms=50)
-    my.tile(self,
-            tile=name + ".2", delay_ms=50, is_end_of_anim=True, is_dead_on_end_of_anim=True)
+    my.tile(self, tile="nothing")
+    my.tile(self, tile=name + ".1", delay_ms=50)
+    my.tile(self, tile=name + ".2", delay_ms=50, is_end_of_anim=True, is_dead_on_end_of_anim=True)
 
     my.tp_update(self)
 

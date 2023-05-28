@@ -363,6 +363,39 @@ void Game::wid_choose_skill(void)
       br.y = tl.y + (WID_SKILL_BUTTON_HEIGHT - 1) - 1;
       wid_set_pos(b, tl, br);
 
+      bool skill_is_active_or_available = false;
+
+      //
+      // Do we have this skill?
+      //
+      if (player->has_skill(skill->tpp)) {
+        //
+        // Yes
+        //
+        skill_is_active_or_available = true;
+        wid_set_style(b, UI_WID_STYLE_DARK);
+      } else if (! skill_has_precursor(skill)) {
+        //
+        // Can we attain this skill?
+        //
+        skill_is_active_or_available = true;
+        wid_set_style(b, UI_WID_STYLE_GREEN);
+        wid_set_on_mouse_up(b, wid_skills_mouse_up);
+      } else if (skill_is_available(skill)) {
+        //
+        // Can we attain this skill?
+        //
+        skill_is_active_or_available = true;
+        wid_set_style(b, UI_WID_STYLE_GREEN);
+        wid_set_on_mouse_up(b, wid_skills_mouse_up);
+      } else {
+        //
+        // Can we not yet attain this skill?
+        //
+        wid_set_style(b, UI_WID_STYLE_DARK);
+        wid_set_color(b, WID_COLOR_TEXT_FG, GRAY50);
+      }
+
       //
       // Add the tile for this skill, unless it is an intermediate skill
       //
@@ -394,7 +427,7 @@ void Game::wid_choose_skill(void)
                 //
                 auto tiles = &tpp->tiles;
                 if (tiles) {
-                  auto tile = tile_first(tiles);
+                  auto tile = tile_n(tiles, skill_is_active_or_available ? 1 : 0);
                   if (tile) {
                     wid_set_fg_tile(b, tile);
                   }
@@ -405,34 +438,6 @@ void Game::wid_choose_skill(void)
             }
           }
         }
-      }
-
-      //
-      // Do we have this skill?
-      //
-      if (player->has_skill(skill->tpp)) {
-        //
-        // Yes
-        //
-        wid_set_style(b, UI_WID_STYLE_DARK);
-      } else if (! skill_has_precursor(skill)) {
-        //
-        // Can we attain this skill?
-        //
-        wid_set_style(b, UI_WID_STYLE_GREEN);
-        wid_set_on_mouse_up(b, wid_skills_mouse_up);
-      } else if (skill_is_available(skill)) {
-        //
-        // Can we attain this skill?
-        //
-        wid_set_style(b, UI_WID_STYLE_GREEN);
-        wid_set_on_mouse_up(b, wid_skills_mouse_up);
-      } else {
-        //
-        // Can we not yet attain this skill?
-        //
-        wid_set_style(b, UI_WID_STYLE_DARK);
-        wid_set_color(b, WID_COLOR_TEXT_FG, GRAY50);
       }
 
       wid_set_on_mouse_over_begin(b, wid_skill_over_begin);

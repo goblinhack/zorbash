@@ -46,12 +46,10 @@ def tp_init(name, text_long_name, text_short_name):
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
+    my.tile(self, tile="skill_devoted_thrust")
+    my.tile(self, tile="skill_devoted_thrust_activated")
     my.tile(self,
             tile="skill_devoted_thrust")
-    my.tile(self,
-            tile="skill_devoted_thrust_activated")
-    my.tile(self,
-            tile="skill_devoted_thrust_inactive")
     my.tp_update(self)
 
 

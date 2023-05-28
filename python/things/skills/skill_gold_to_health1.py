@@ -33,24 +33,20 @@ def tp_init(name, text_long_name, text_short_name):
     my.skill_base_name(self, "skill_gold_to_health")
     my.stat_dex_bonus(self, -1)
     my.text_description_long(self, "With this skill you are able to trans-mutate tour hard earned gold into life giving health.")
-    my.text_description_long2(self, "When in use, your skin glows radiantly. However you will also feel sluggish and less dextrous")
+    my.text_description_long2(self, "When in use, your skin glows radiantly. However you will also feel sluggish and less dextrous.")
     my.text_description_long3(self, "Conversion rate is 1 gold per turn to 1 health.")
     my.text_description_short(self, "Golden health skill.")
     my.text_description_very_short(self, "GldToHp 1")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
-    my.tile(self,
-            tile="skill_gold_to_health")
-    my.tile(self,
-            tile="skill_gold_to_health_activated")
-    my.tile(self,
-            tile="skill_gold_to_health_inactive")
+    my.tile(self, tile="skill_gold_to_health")
+    my.tile(self, tile="skill_gold_to_health_activated")
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="skill_gold_to_health1", text_long_name="golden health i", text_short_name="golden health 1")
+    tp_init(name="skill_gold_to_health1", text_long_name="golden health 1", text_short_name="golden health 1")
 
 
 init()
