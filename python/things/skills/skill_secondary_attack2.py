@@ -7,7 +7,7 @@ self = None
 def on_tick(owner, skill, x, y):
     # my.topcon("owner  {} {}".format(my.thing_name_get(owner), my.thing_health(owner)))
     # my.topcon("skill  {} {}".format(my.thing_name_get(skill), my.thing_health(skill)))
-    if my.pcg_randint(1, 100) < 10:
+    if owner and my.pcg_randint(1, 100) < 10:
         my.thing_stamina_decr(owner, 1)
     return False  # didn't do anything
 

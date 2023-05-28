@@ -5,7 +5,7 @@ self = None
 
 
 def on_tick(owner, skill, x, y):
-    if my.pcg_randint(1, 100) < 10:
+    if owner and my.pcg_randint(1, 100) < 10:
         my.thing_stamina_decr(owner, 1)
     return False  # didn't do anything
 

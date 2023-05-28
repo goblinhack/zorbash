@@ -8,6 +8,9 @@ def on_tick(owner, skill, x, y):
     # my.topcon("owner  {} {}".format(my.thing_name_get(owner), my.thing_health(owner)))
     # my.topcon("skill  {} {}".format(my.thing_name_get(skill), my.thing_health(skill)))
 
+    if not owner:
+        return False  # did nothing
+
     if my.thing_gold(owner) < 8:
         return False  # did nothing
 
