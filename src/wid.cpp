@@ -446,7 +446,7 @@ void wid_clear_thing_id_context(Widp w, int which)
   }
 }
 
-void wid_set_thing_id_context(Widp w, Thingp t, int which)
+void wid_set_thing_context(Widp w, Thingp t, int which)
 {
   TRACE_NO_INDENT();
   if (! w) {

@@ -868,7 +868,7 @@ void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, const c
   auto t = player->equip_get(equip);
   if (t) {
     t->log("Set as equip");
-    wid_set_thing_id_context(w, t, 0);
+    wid_set_thing_context(w, t, 0);
 
     if (g_opt_ascii) {
       auto tile = tile_index_to_tile(t->tile_curr);

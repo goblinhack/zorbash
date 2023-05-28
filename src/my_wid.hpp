@@ -114,7 +114,7 @@ int wid_get_int_context(Widp);
 ThingId wid_get_thing_id_context(Widp, int which);
 void    wid_unset_thing_id_context(Widp, int which);
 void    wid_clear_thing_id_context(Widp, int which);
-void    wid_set_thing_id_context(Widp w, Thingp, int which);
+void    wid_set_thing_context(Widp w, Thingp, int which);
 
 uint8_t wid_get_do_not_lower(Widp);
 uint8_t wid_get_do_not_raise(Widp);

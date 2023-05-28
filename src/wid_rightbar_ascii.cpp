@@ -592,36 +592,16 @@ bool wid_rightbar_ascii_create(void)
   // Active skills
   //
   if (1) {
-    bool                got_one = false;
-    std::vector< Widp > wid_skillbox_items;
-    uint8_t             item = 0;
-    for (auto i = 0U; i < UI_INVENTORY_QUICK_ITEMS_MAX; i++) {
-      if (item < itemsp->skillbox_id.size()) {
-        auto thing_id = get(itemsp->skillbox_id, item);
-        if (! thing_id) {
-          item++;
-          continue;
-        }
+    bool got_one = false;
 
-        auto t         = level->thing_find(thing_id);
-        bool activated = false;
-
-        for (auto id : itemsp->skills) {
-          auto o = level->thing_find(id);
-          if (o) {
-            if (o == t) {
-              activated = o->is_activated;
-            }
-          }
+    for (auto id : itemsp->skills) {
+      auto skill = level->thing_find(id);
+      if (skill) {
+        if (skill->is_activated) {
+          got_one = true;
+          break;
         }
-
-        if (! activated) {
-          continue;
-        }
-        got_one = true;
-        break;
       }
-      item++;
     }
     if (got_one) {
       {
@@ -637,52 +617,26 @@ bool wid_rightbar_ascii_create(void)
         wid_update(w);
       }
       {
-        std::vector< Widp > wid_skillbox_items;
+        for (auto id : itemsp->skills) {
+          auto skill = level->thing_find(id);
+          if (skill) {
+            if (skill->is_activated) {
+              y_at++;
+              auto  w  = wid_new_plain(wid_rightbar, "Skill");
+              point tl = make_point(0, y_at);
+              point br = make_point(width - 1, y_at);
 
-        uint8_t item = 0;
-        for (auto i = 0U; i < UI_INVENTORY_QUICK_ITEMS_MAX; i++) {
-          if (item < itemsp->skillbox_id.size()) {
-            auto thing_id = get(itemsp->skillbox_id, item);
-            if (! thing_id) {
-              item++;
-              continue;
+              wid_set_pos(w, tl, br);
+              wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
+              wid_set_thing_context(w, skill, 0);
+              wid_set_on_mouse_over_begin(w, wid_skill_mouse_over_begin);
+              wid_set_on_mouse_over_end(w, wid_skill_mouse_over_end);
+              wid_set_on_mouse_up(w, wid_skill_item_mouse_up);
+              wid_set_text_lhs(w, true);
+              wid_set_text(w, skill->text_short_and_state_capitalised());
+              wid_update(w);
             }
-
-            auto t         = level->thing_find(thing_id);
-            bool activated = false;
-
-            for (auto id : itemsp->skills) {
-              auto o = level->thing_find(id);
-              if (o) {
-                if (o == t) {
-                  activated = o->is_activated;
-                }
-              }
-            }
-
-            if (! activated) {
-              continue;
-            }
-
-            y_at++;
-            auto  w  = wid_new_plain(wid_rightbar, "Skill");
-            point tl = make_point(0, y_at);
-            point br = make_point(width - 1, y_at);
-
-            wid_set_pos(w, tl, br);
-            wid_set_mode(w, WID_MODE_OVER);
-            wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
-            wid_set_mode(w, WID_MODE_NORMAL);
-            wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
-            wid_set_on_mouse_over_begin(w, wid_skillbox_mouse_over_begin);
-            wid_set_on_mouse_over_end(w, wid_skillbox_mouse_over_end);
-            wid_set_on_mouse_up(w, wid_skillbox_item_mouse_up);
-            wid_set_int_context(w, i);
-            wid_set_text_lhs(w, true);
-            wid_set_text(w, t->text_short_and_state_capitalised());
-            wid_update(w);
           }
-          item++;
         }
       }
     }
@@ -692,36 +646,16 @@ bool wid_rightbar_ascii_create(void)
   // Inactive skills
   //
   if (1) {
-    bool                got_one = false;
-    std::vector< Widp > wid_skillbox_items;
-    uint8_t             item = 0;
-    for (auto i = 0U; i < UI_INVENTORY_QUICK_ITEMS_MAX; i++) {
-      if (item < itemsp->skillbox_id.size()) {
-        auto thing_id = get(itemsp->skillbox_id, item);
-        if (! thing_id) {
-          item++;
-          continue;
-        }
+    bool got_one = false;
 
-        auto t         = level->thing_find(thing_id);
-        bool activated = false;
-
-        for (auto id : itemsp->skills) {
-          auto o = level->thing_find(id);
-          if (o) {
-            if (o == t) {
-              activated = o->is_activated;
-            }
-          }
+    for (auto id : itemsp->skills) {
+      auto skill = level->thing_find(id);
+      if (skill) {
+        if (! skill->is_activated) {
+          got_one = true;
+          break;
         }
-
-        if (activated) {
-          continue;
-        }
-        got_one = true;
-        break;
       }
-      item++;
     }
     if (got_one) {
       {
@@ -737,49 +671,26 @@ bool wid_rightbar_ascii_create(void)
         wid_update(w);
       }
       {
-        std::vector< Widp > wid_skillbox_items;
+        for (auto id : itemsp->skills) {
+          auto skill = level->thing_find(id);
+          if (skill) {
+            if (! skill->is_activated) {
+              y_at++;
+              auto  w  = wid_new_plain(wid_rightbar, "Skill");
+              point tl = make_point(0, y_at);
+              point br = make_point(width - 1, y_at);
 
-        uint8_t item = 0;
-        for (auto i = 0U; i < UI_INVENTORY_QUICK_ITEMS_MAX; i++) {
-          if (item < itemsp->skillbox_id.size()) {
-            auto thing_id = get(itemsp->skillbox_id, item);
-            if (! thing_id) {
-              item++;
-              continue;
+              wid_set_pos(w, tl, br);
+              wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
+              wid_set_thing_context(w, skill, 0);
+              wid_set_on_mouse_over_begin(w, wid_skill_mouse_over_begin);
+              wid_set_on_mouse_over_end(w, wid_skill_mouse_over_end);
+              wid_set_on_mouse_up(w, wid_skill_item_mouse_up);
+              wid_set_text_lhs(w, true);
+              wid_set_text(w, skill->text_short_and_state_capitalised());
+              wid_update(w);
             }
-
-            auto t         = level->thing_find(thing_id);
-            bool activated = false;
-
-            for (auto id : itemsp->skills) {
-              auto o = level->thing_find(id);
-              if (o) {
-                if (o == t) {
-                  activated = o->is_activated;
-                }
-              }
-            }
-
-            if (activated) {
-              continue;
-            }
-
-            y_at++;
-            auto  w  = wid_new_plain(wid_rightbar, "Skill");
-            point tl = make_point(0, y_at);
-            point br = make_point(width - 1, y_at);
-
-            wid_set_pos(w, tl, br);
-            wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
-            wid_set_on_mouse_over_begin(w, wid_skillbox_mouse_over_begin);
-            wid_set_on_mouse_over_end(w, wid_skillbox_mouse_over_end);
-            wid_set_on_mouse_up(w, wid_skillbox_item_mouse_up);
-            wid_set_int_context(w, i);
-            wid_set_text_lhs(w, true);
-            wid_set_text(w, t->text_short_and_state_capitalised());
-            wid_update(w);
           }
-          item++;
         }
       }
     }

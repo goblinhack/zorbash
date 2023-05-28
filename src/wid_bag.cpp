@@ -66,8 +66,8 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
     wid_set_on_mouse_over_end(w, wid_bag_item_mouse_over_end);
     wid_set_on_key_down(w, wid_bag_item_key_down);
 
-    wid_set_thing_id_context(w, t, 0);
-    wid_set_thing_id_context(w, bag, 1);
+    wid_set_thing_context(w, t, 0);
+    wid_set_thing_context(w, bag, 1);
 
     wid_set_on_mouse_up(w, wid_bag_item_mouse_up);
     wid_set_on_mouse_held(w, wid_bag_item_mouse_held);
@@ -692,7 +692,7 @@ bool Game::wid_bag_move_item(Thingp t)
   wid_set_pos(game->in_transit_item, tl, br);
   wid_set_style(game->in_transit_item, UI_WID_STYLE_GRAY);
   wid_set_do_not_lower(game->in_transit_item, true);
-  wid_set_thing_id_context(game->in_transit_item, t, 0);
+  wid_set_thing_context(game->in_transit_item, t, 0);
   wid_set_on_mouse_up(game->in_transit_item, wid_in_transit_item_place);
   wid_set_fg_tile(game->in_transit_item, t);
 
@@ -979,7 +979,7 @@ WidBag::WidBag(Widp parent, Thingp bag_, bool highlight, point tl, point br, con
     }
 
     wid_set_on_tick(wid_bag_container, wid_bag_tick);
-    wid_set_thing_id_context(wid_bag_container, bag, 0);
+    wid_set_thing_context(wid_bag_container, bag, 0);
   }
 
   wid_bag_add_items(wid_bag_container, bag);
