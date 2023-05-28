@@ -183,10 +183,12 @@ void wid_skill_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
     return;
   }
 
+  TRACE_NO_INDENT();
   if (! skill->tpp) {
     return;
   }
 
+  TRACE_NO_INDENT();
   game->wid_tp_info_create(skill->tpp);
 }
 

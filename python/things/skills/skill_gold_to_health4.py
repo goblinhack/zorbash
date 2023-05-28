@@ -35,6 +35,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_tick_do(self, "me.on_tick()")
     my.skill_base_name(self, "skill_gold_to_health")
     my.skill_replaces(self, "skill_gold_to_health3")
+    my.stat_con_bonus(self, 2)
     my.stat_dex_bonus(self, -4)
     my.text_description_long2(self, "When in use, your skin glows radiantly. However you will also feel sluggish and less dextrous.")
     my.text_description_long3(self, "Conversion rate is 10 gold per turn to 5 health.")

@@ -181,6 +181,23 @@ int Thing::skill_enchant_count(const int slot)
   return 0;
 }
 
+//
+// Is this skill learned only after another?
+//
+static void skill_get_replace_list(Tpp tp, std::list< Tpp > &out)
+{
+  TRACE_NO_INDENT();
+  auto replaces = tp->skill_replaces();
+  if (! replaces.empty()) {
+    auto tppo = tp_find(replaces);
+    if (tppo) {
+      TRACE_NO_INDENT();
+      out.push_back(tppo);
+      skill_get_replace_list(tppo, out);
+    }
+  }
+}
+
 bool Thing::has_skill(Tpp skill)
 {
   TRACE_NO_INDENT();
@@ -188,11 +205,29 @@ bool Thing::has_skill(Tpp skill)
     return 0;
   }
 
+  if (! skill) {
+    return false;
+  }
+
+  TRACE_NO_INDENT();
   FOR_ALL_SKILLS(oid)
   {
-    auto o = game->level->thing_find(oid);
-    if (o->tp() == skill) {
+    auto learned_skill_iter = game->level->thing_find(oid);
+    auto learned_skill      = learned_skill_iter->tp();
+    if (learned_skill == skill) {
       return true;
+    }
+
+    //
+    // Check if this skill has been acquired via a superseding skill
+    //
+    TRACE_NO_INDENT();
+    std::list< Tpp > preceding_skills;
+    skill_get_replace_list(learned_skill, preceding_skills);
+    for (auto preceding_skill : preceding_skills) {
+      if (preceding_skill == skill) {
+        return true;
+      }
     }
   }
 

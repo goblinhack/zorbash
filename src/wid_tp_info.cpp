@@ -411,7 +411,7 @@ void Game::wid_tp_info_clear_popup(void)
 bool Game::wid_tp_info_create(Tpp t, bool when_hovering_over)
 {
   TRACE_NO_INDENT();
-  DBG3("Create wid tp info for %s", t->to_short_string().c_str());
+  DBG2("Create wid tp info for %s", t->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   TRACE_AND_INDENT();
@@ -439,6 +439,7 @@ bool Game::wid_tp_info_create(Tpp t, bool when_hovering_over)
   }
   recursion = true;
   TRACE_AND_INDENT();
+  DBG2("XXX Create wid tp info for %s", t->to_short_string().c_str());
   IF_DEBUG1 { t->log("Yes; create window"); }
 
   wid_tp_info_push_popup(t);
@@ -456,18 +457,18 @@ bool Game::wid_tp_info_create_list(std::vector< Tpp > &ts)
     //
     // Continue
     //
-    DBG3("Remake tp info from list");
+    DBG2("Remake tp info from list");
   } else if (game->state == Game::STATE_COLLECTING_ITEMS) {
     ERR("Ignore, already collecting items");
     return false;
   } else if (game->state == Game::STATE_INVENTORY) {
-    DBG3("Ignore, already moving items");
+    DBG2("Ignore, already moving items");
     return false;
   }
 
   TRACE_AND_INDENT();
   if (wid_console_window && wid_console_window->visible) {
-    DBG3("No; console visible");
+    DBG2("No; console visible");
     return false;
   }
 
@@ -588,9 +589,9 @@ bool Game::wid_tp_info_create_list(std::vector< Tpp > &ts)
   }
 
   if (compact) {
-    DBG3("Create compact tp info");
+    DBG2("Create compact tp info");
     if (! wid_tp_info_create_popup_compact(ts)) {
-      DBG3("Failed to create compact tp info");
+      DBG2("Failed to create compact tp info");
       wid_tp_info_fini("failed to create compact tp info");
       ok = false;
     }

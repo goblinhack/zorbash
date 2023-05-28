@@ -14,7 +14,7 @@
 
 void Tp::log_(const char *fmt, va_list args)
 {
-  verify(MTYPE_THING, this);
+  verify(MTYPE_TP, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
   int  len;
@@ -33,7 +33,7 @@ void Tp::log_(const char *fmt, va_list args)
 
 void Tp::log(const char *fmt, ...)
 {
-  verify(MTYPE_THING, this);
+  verify(MTYPE_TP, this);
   log_catchup_missing_indent_levels();
 
   auto    t = this;
@@ -47,7 +47,7 @@ void Tp::dbg_(const char *fmt, ...)
 {
   IF_NODEBUG { return; }
 
-  verify(MTYPE_THING, this);
+  verify(MTYPE_TP, this);
   log_catchup_missing_indent_levels();
 
   auto    t = this;
@@ -59,7 +59,7 @@ void Tp::dbg_(const char *fmt, ...)
 
 void Tp::die_(const char *fmt, va_list args)
 {
-  verify(MTYPE_THING, this);
+  verify(MTYPE_TP, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
   int  len;
@@ -79,7 +79,7 @@ void Tp::die(const char *fmt, ...)
 {
   g_errored = true;
 
-  verify(MTYPE_THING, this);
+  verify(MTYPE_TP, this);
   auto    t = this;
   va_list args;
 
@@ -90,7 +90,7 @@ void Tp::die(const char *fmt, ...)
 
 void Tp::con_(const char *fmt, va_list args)
 {
-  verify(MTYPE_THING, this);
+  verify(MTYPE_TP, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
   int  len;
@@ -113,7 +113,7 @@ void Tp::con_(const char *fmt, va_list args)
 
 void Tp::topcon_(const char *fmt, va_list args)
 {
-  verify(MTYPE_THING, this);
+  verify(MTYPE_TP, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
   int  len;
@@ -137,7 +137,7 @@ void Tp::topcon_(const char *fmt, va_list args)
 
 void Tp::con(const char *fmt, ...)
 {
-  verify(MTYPE_THING, this);
+  verify(MTYPE_TP, this);
   auto    t = this;
   va_list args;
 
@@ -148,7 +148,7 @@ void Tp::con(const char *fmt, ...)
 
 void Tp::topcon(const char *fmt, ...)
 {
-  verify(MTYPE_THING, this);
+  verify(MTYPE_TP, this);
   auto    t = this;
   va_list args;
 
@@ -165,7 +165,7 @@ void Tp::err_(const char *fmt, va_list args)
   }
   nested_error = true;
 
-  verify(MTYPE_THING, this);
+  verify(MTYPE_TP, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
   int  len;

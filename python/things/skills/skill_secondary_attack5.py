@@ -37,7 +37,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_use_do(self, "me.on_use()")
     my.skill_base_name(self, "skill_secondary_attack")
     my.skill_replaces(self, "skill_secondary_attack4")
-    my.stat_def_bonus(self, -4)
+    my.stat_def_bonus(self, -2)
     my.stat_str_bonus(self, 4)
     my.text_description_long2(self, "The additional attack will be 100 percent of the initial attack.")
     my.text_description_long3(self, "When activated, 10 percent chance of draining stamina per move.")

@@ -2154,7 +2154,7 @@ static void wid_tree_remove(Widp w)
 
   auto result = root->find(w->key);
   if (result == root->end()) {
-    DIE("Wid tree did not find wid hence cannot remove it");
+    DIE("Wid tree did not find wid %s hence cannot remove it", wid_get_name(w).c_str());
   }
 
   root->erase(w->key);
