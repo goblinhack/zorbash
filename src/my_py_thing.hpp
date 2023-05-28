@@ -216,6 +216,7 @@ PyObject *thing_is_asleep_initially(PyObject *obj, PyObject *args, PyObject *key
 PyObject *thing_is_attackable_by_magic(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_attackable_by_monst(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_attackable_by_player(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_auto_activated(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_auto_collect_item(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_auto_equipped(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_auto_throw(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -563,7 +564,6 @@ PyObject *thing_is_unused_flag13(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag140(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag141(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag142(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag143(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag14(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag15(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag16(PyObject *obj, PyObject *args, PyObject *keywds);

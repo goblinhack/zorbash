@@ -134,6 +134,7 @@ bool Tp::matches(const std::string &what)
   if (is_attackable_by_magic() && (what == "is_attackable_by_magic")) { return true; }
   if (is_attackable_by_monst() && (what == "is_attackable_by_monst")) { return true; }
   if (is_attackable_by_player() && (what == "is_attackable_by_player")) { return true; }
+  if (is_auto_activated() && (what == "is_auto_activated")) { return true; }
   if (is_auto_collect_item() && (what == "is_auto_collect_item")) { return true; }
   if (is_auto_equipped() && (what == "is_auto_equipped")) { return true; }
   if (is_auto_throw() && (what == "is_auto_throw")) { return true; }
@@ -463,7 +464,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag140() && (what == "is_unused_flag140")) { return true; }
   if (is_unused_flag141() && (what == "is_unused_flag141")) { return true; }
   if (is_unused_flag142() && (what == "is_unused_flag142")) { return true; }
-  if (is_unused_flag143() && (what == "is_unused_flag143")) { return true; }
   if (is_unused_flag14() && (what == "is_unused_flag14")) { return true; }
   if (is_unused_flag15() && (what == "is_unused_flag15")) { return true; }
   if (is_unused_flag16() && (what == "is_unused_flag16")) { return true; }
@@ -737,6 +737,7 @@ bool Thing::matches(const std::string &what)
   if (is_attackable_by_magic() && (what == "is_attackable_by_magic")) { return true; }
   if (is_attackable_by_monst() && (what == "is_attackable_by_monst")) { return true; }
   if (is_attackable_by_player() && (what == "is_attackable_by_player")) { return true; }
+  if (is_auto_activated() && (what == "is_auto_activated")) { return true; }
   if (is_auto_collect_item() && (what == "is_auto_collect_item")) { return true; }
   if (is_auto_equipped() && (what == "is_auto_equipped")) { return true; }
   if (is_auto_throw() && (what == "is_auto_throw")) { return true; }
@@ -1067,7 +1068,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag140() && (what == "is_unused_flag140")) { return true; }
   if (is_unused_flag141() && (what == "is_unused_flag141")) { return true; }
   if (is_unused_flag142() && (what == "is_unused_flag142")) { return true; }
-  if (is_unused_flag143() && (what == "is_unused_flag143")) { return true; }
   if (is_unused_flag14() && (what == "is_unused_flag14")) { return true; }
   if (is_unused_flag15() && (what == "is_unused_flag15")) { return true; }
   if (is_unused_flag16() && (what == "is_unused_flag16")) { return true; }
@@ -1338,6 +1338,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_attackable_by_magic") { return &Thing::is_attackable_by_magic; }
   if (what == "is_attackable_by_monst") { return &Thing::is_attackable_by_monst; }
   if (what == "is_attackable_by_player") { return &Thing::is_attackable_by_player; }
+  if (what == "is_auto_activated") { return &Thing::is_auto_activated; }
   if (what == "is_auto_collect_item") { return &Thing::is_auto_collect_item; }
   if (what == "is_auto_equipped") { return &Thing::is_auto_equipped; }
   if (what == "is_auto_throw") { return &Thing::is_auto_throw; }
@@ -1659,7 +1660,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag140") { return &Thing::is_unused_flag140; }
   if (what == "is_unused_flag141") { return &Thing::is_unused_flag141; }
   if (what == "is_unused_flag142") { return &Thing::is_unused_flag142; }
-  if (what == "is_unused_flag143") { return &Thing::is_unused_flag143; }
   if (what == "is_unused_flag14") { return &Thing::is_unused_flag14; }
   if (what == "is_unused_flag15") { return &Thing::is_unused_flag15; }
   if (what == "is_unused_flag16") { return &Thing::is_unused_flag16; }

@@ -770,8 +770,8 @@ public:
   bool screen_shake_begin(void);
   bool should_display_map(void);
   bool skillbox_chosen(const int slot);
-  bool skill_chosen(Thingp);
   bool skillbox_over(const int slot);
+  bool skill_chosen(Thingp);
   bool update_map_mini_should_show_monst(int x, int y);
   // end sort marker2 }
 

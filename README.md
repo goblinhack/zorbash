@@ -203,6 +203,7 @@ Content:
 - 103 x monsters
 - 52 x food
 - 19 x treasure
+- 16 x skills
 - 13 x weapons
 - 13 x items
 - 11 x buffs
@@ -211,7 +212,6 @@ Content:
 - 6 x boots
 - 5 x rings
 - 5 x keys
-- 4 x skills
 - 4 x gauntlets
 - 4 x debuffs
 - 4 x armor

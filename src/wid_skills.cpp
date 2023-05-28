@@ -471,7 +471,7 @@ void Game::wid_choose_skill(void)
         point tl2 = tl;
         point br2 = br;
 
-        tl2.y -= WID_SKILL_BUTTON_WIDTH;
+        tl2.y -= WID_SKILL_BUTTON_HEIGHT;
         tl2.x += WID_SKILL_BUTTON_WIDTH / 2;
         tl2.y += WID_SKILL_BUTTON_HEIGHT - 1;
         tl2.x -= 1;

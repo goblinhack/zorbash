@@ -1380,6 +1380,7 @@ public:
   int is_attacked_with_dmg_negation(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_dmg_poison(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_dmg_water(Thingp hitter, Thingp real_hitter, int damage);
+  int is_auto_activated(void);
   int is_auto_collect_item(void);
   int is_auto_equipped(void);
   int is_auto_throw(void);
@@ -1723,7 +1724,6 @@ public:
   int is_unused_flag140(void);
   int is_unused_flag141(void);
   int is_unused_flag142(void);
-  int is_unused_flag143(void);
   int is_unused_flag14(void);
   int is_unused_flag15(void);
   int is_unused_flag16(void);

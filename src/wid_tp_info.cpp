@@ -1265,7 +1265,7 @@ void Game::wid_tp_info_add_stat_def(WidPopup *w, Tpp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense bonus            %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
-      w->log("%%fg=gray$((while skill is active)");
+      w->log("%%fg=gray$(while skill is active)");
     }
   }
 }
@@ -1286,7 +1286,7 @@ void Game::wid_tp_info_add_stat_att(WidPopup *w, Tpp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack bonus             %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
-      w->log("%%fg=gray$((while skill is active)");
+      w->log("%%fg=gray$(while skill is active)");
     }
   }
 }
@@ -1307,7 +1307,7 @@ void Game::wid_tp_info_add_stat_str(WidPopup *w, Tpp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength bonus           %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
-      w->log("%%fg=gray$((while skill is active)");
+      w->log("%%fg=gray$(while skill is active)");
     }
   }
 }
@@ -1328,7 +1328,7 @@ void Game::wid_tp_info_add_stat_dex(WidPopup *w, Tpp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity bonus          %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
-      w->log("%%fg=gray$((while skill is active)");
+      w->log("%%fg=gray$(while skill is active)");
     }
   }
 }
@@ -1349,7 +1349,7 @@ void Game::wid_tp_info_add_stat_luck(WidPopup *w, Tpp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Luck bonus               %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
-      w->log("%%fg=gray$((while skill is active)");
+      w->log("%%fg=gray$(while skill is active)");
     }
   }
 }
@@ -1370,7 +1370,7 @@ void Game::wid_tp_info_add_stat_con(WidPopup *w, Tpp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution bonus       %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
-      w->log("%%fg=gray$((while skill is active)");
+      w->log("%%fg=gray$(while skill is active)");
     }
   }
 }
@@ -1389,7 +1389,7 @@ void Game::wid_tp_info_add_move_speed(WidPopup *w, Tpp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Move speed bonus         %4d", speed);
     w->log(tmp);
     if (t->is_skill()) {
-      w->log("%%fg=gray$((while skill is active)");
+      w->log("%%fg=gray$(while skill is active)");
     }
   }
 }
@@ -1410,7 +1410,7 @@ void Game::wid_tp_info_add_shove_strength(WidPopup *w, Tpp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Shove strength bonus     %4d", shove_strength);
     w->log(tmp);
     if (t->is_skill()) {
-      w->log("%%fg=gray$((while skill is active)");
+      w->log("%%fg=gray$(while skill is active)");
     }
   }
 }
@@ -1431,7 +1431,7 @@ void Game::wid_tp_info_add_jump_distance(WidPopup *w, Tpp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Jump distance bonus      %4d", dist);
     w->log(tmp);
     if (t->is_skill()) {
-      w->log("%%fg=gray$((while skill is active)");
+      w->log("%%fg=gray$(while skill is active)");
     }
   }
 }
@@ -1565,6 +1565,15 @@ void Game::wid_tp_info_add_general_info(WidPopup *w, Tpp t)
     if (t->dmg_num_of_attacks() > 1) {
       w->log("Monster has multiple attacks.", TEXT_FORMAT_LHS, "red");
       printed_something = true;
+    }
+  }
+
+  if (t->is_auto_activated()) {
+    w->log(UI_LOGGING_EMPTY_LINE);
+    if (t->is_skill()) {
+      w->log("Skill is auto activated");
+    } else {
+      w->log("Is auto activated");
     }
   }
 

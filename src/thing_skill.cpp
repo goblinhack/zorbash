@@ -74,6 +74,10 @@ bool Thing::skill_add(Thingp what)
     sound_play("skillup");
   }
 
+  if (what->is_auto_activated()) {
+    skill_activate(what);
+  }
+
   return true;
 }
 

@@ -981,10 +981,10 @@ int Thing::is_unused_flag142(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag142());
 }
-int Thing::is_unused_flag143(void)
+int Thing::is_auto_activated(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag143());
+  return (tp()->is_auto_activated());
 }
 int Thing::is_magic_stone(void)
 {

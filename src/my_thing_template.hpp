@@ -328,6 +328,7 @@ private:
   int _is_attackable_by_magic {};
   int _is_attackable_by_monst {};
   int _is_attackable_by_player {};
+  int _is_auto_activated {};
   int _is_auto_collect_item {};
   int _is_auto_equipped {};
   int _is_auto_throw {};
@@ -667,7 +668,6 @@ private:
   int _is_unused_flag140 {};
   int _is_unused_flag141 {};
   int _is_unused_flag142 {};
-  int _is_unused_flag143 {};
   int _is_unused_flag15 {};
   int _is_unused_flag16 {};
   int _is_unused_flag17 {};
@@ -1631,6 +1631,7 @@ public:
   int is_attackable_by_magic(void) const;
   int is_attackable_by_monst(void) const;
   int is_attackable_by_player(void) const;
+  int is_auto_activated(void) const;
   int is_auto_collect_item(void) const;
   int is_auto_equipped(void) const;
   int is_auto_throw(void) const;
@@ -1967,7 +1968,6 @@ public:
   int is_unused_flag140(void) const;
   int is_unused_flag141(void) const;
   int is_unused_flag142(void) const;
-  int is_unused_flag143(void) const;
   int is_unused_flag14(void) const;
   int is_unused_flag15(void) const;
   int is_unused_flag16(void) const;
@@ -2380,6 +2380,7 @@ public:
   void is_attackable_by_magic_set(int v);
   void is_attackable_by_monst_set(int v);
   void is_attackable_by_player_set(int v);
+  void is_auto_activated_set(int v);
   void is_auto_collect_item_set(int v);
   void is_auto_equipped_set(int v);
   void is_auto_throw_set(int v);
@@ -2716,7 +2717,6 @@ public:
   void is_unused_flag140_set(int v);
   void is_unused_flag141_set(int v);
   void is_unused_flag142_set(int v);
-  void is_unused_flag143_set(int v);
   void is_unused_flag14_set(int v);
   void is_unused_flag15_set(int v);
   void is_unused_flag16_set(int v);
