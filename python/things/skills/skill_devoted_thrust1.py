@@ -40,7 +40,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_tick_do(self, "me.on_tick()")
     my.on_use_do(self, "me.on_use()")
     my.skill_base_name(self, "skill_devoted_thrust")
-    my.stat_def_bonus(self, 1)
+    my.stat_def_bonus(self, -1)
     my.stat_str_bonus(self, 1)
     my.text_description_long(self, "Uses 20 percent of your stamina points up in one mighty strike.")
     my.text_description_long3(self, "When activated, 10 percent chance of draining stamina per move.")
