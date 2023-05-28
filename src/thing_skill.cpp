@@ -10,11 +10,29 @@
 #include "my_vector_bounds_check.hpp"
 #include "my_wid_skillbox.hpp"
 
-bool Thing::skill_add(Thingp what)
+//
+// Get the list of all other skills this skill replaces. This is done
+// recursively, so skill X level 3 replaces X levels 1, 2
+//
+static void skill_get_replace_list(Tpp tp, std::list< Tpp > &out)
+{
+  TRACE_NO_INDENT();
+  auto replaces = tp->skill_replaces();
+  if (! replaces.empty()) {
+    auto tppo = tp_find(replaces);
+    if (tppo) {
+      TRACE_NO_INDENT();
+      out.push_back(tppo);
+      skill_get_replace_list(tppo, out);
+    }
+  }
+}
+
+bool Thing::skill_add(Thingp new_skill)
 {
   TRACE_NO_INDENT();
 
-  dbg("Try to add skill %s", what->to_short_string().c_str());
+  dbg("Try to add skill %s", new_skill->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   if (! maybe_itemsp()) {
@@ -22,13 +40,13 @@ bool Thing::skill_add(Thingp what)
     return false;
   }
 
-  auto existing_owner = what->immediate_owner();
+  auto existing_owner = new_skill->immediate_owner();
   if (existing_owner) {
     if (existing_owner == this) {
       dbg("No; same owner");
       return false;
     }
-    existing_owner->drop(what);
+    existing_owner->drop(new_skill);
   }
 
   FOR_ALL_SKILLS(item)
@@ -36,46 +54,56 @@ bool Thing::skill_add(Thingp what)
     //
     // Already carried?
     //
-    if (item == what->id) {
+    if (item == new_skill->id) {
       dbg("No; already carried");
       return false;
     }
   }
 
-  FOR_ALL_SKILLS(item)
-  {
-    //
-    // If this skill supersedes another skill, then remote it.
-    //
-    auto existing_skill = level->thing_find(item);
-    if (existing_skill) {
-      if (what->skill_replaces() == existing_skill->tp()->name()) {
-        skill_remove(existing_skill);
-        break;
-      }
-    }
-  }
-
   if (is_player()) {
-    if (! skillbox_id_insert(what)) {
+    if (! skillbox_id_insert(new_skill)) {
       dbg("No; no space in skillbox");
       return false;
     }
   }
 
-  itemsp()->skills.push_front(what->id);
-  what->owner_set(this);
-  what->hide();
+  itemsp()->skills.push_front(new_skill->id);
+  new_skill->owner_set(this);
+  new_skill->hide();
 
-  dbg("Add skill %s", what->to_short_string().c_str());
+  dbg("Add skill %s", new_skill->to_short_string().c_str());
 
   if (is_player()) {
     wid_skillbox_init();
     sound_play("skillup");
   }
 
-  if (what->is_auto_activated()) {
-    skill_activate(what);
+  if (new_skill->is_auto_activated()) {
+    skill_activate(new_skill);
+  }
+
+redo:
+  //
+  // If this new skill supersedes another skill(s), then remove them.
+  //
+  FOR_ALL_SKILLS(item)
+  {
+    auto learned_skill = level->thing_find(item);
+    if (learned_skill) {
+      std::list< Tpp > preceding_skills;
+      skill_get_replace_list(learned_skill->tp(), preceding_skills);
+
+      FOR_ALL_SKILLS(item)
+      {
+        auto other_skill = level->thing_find(item);
+        for (auto preceding_skill : preceding_skills) {
+          if (preceding_skill == other_skill->tp()) {
+            skill_remove(other_skill);
+            goto redo;
+          }
+        }
+      }
+    }
   }
 
   return true;
@@ -179,23 +207,6 @@ int Thing::skill_enchant_count(const int slot)
   }
 
   return 0;
-}
-
-//
-// Is this skill learned only after another?
-//
-static void skill_get_replace_list(Tpp tp, std::list< Tpp > &out)
-{
-  TRACE_NO_INDENT();
-  auto replaces = tp->skill_replaces();
-  if (! replaces.empty()) {
-    auto tppo = tp_find(replaces);
-    if (tppo) {
-      TRACE_NO_INDENT();
-      out.push_back(tppo);
-      skill_get_replace_list(tppo, out);
-    }
-  }
 }
 
 bool Thing::has_skill(Tpp skill)
