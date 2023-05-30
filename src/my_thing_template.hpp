@@ -1014,6 +1014,8 @@ private:
   std::string _on_teleport_do;
   std::string _on_thrown_do;
   std::string _on_tick_do;
+  std::string _on_tick_when_activated_do;
+  std::string _on_tick_when_deactivated_do;
   std::string _on_unequip_do;
   std::string _on_use_do;
   std::string _on_waiting_do;
@@ -1361,6 +1363,8 @@ public:
   const std::string &on_teleport_do(void) const;
   const std::string &on_thrown_do(void) const;
   const std::string &on_tick_do(void) const;
+  const std::string &on_tick_when_activated_do(void) const;
+  const std::string &on_tick_when_deactivated_do(void) const;
   const std::string &on_unequip_do(void) const;
   const std::string &on_use_do(void) const;
   const std::string &on_waiting_do(void) const;
@@ -2976,6 +2980,8 @@ public:
   void on_teleport_do_set(const std::string &v);
   void on_thrown_do_set(const std::string &v);
   void on_tick_do_set(const std::string &v);
+  void on_tick_when_activated_do_set(const std::string &v);
+  void on_tick_when_deactivated_do_set(const std::string &v);
   void on_unequip_do_set(const std::string &v);
   void on_use_do_set(const std::string &v);
   void on_waiting_do_set(const std::string &v);

@@ -22,6 +22,7 @@ my.map_load_skill_tree(
         "r3", "skill_artful_dodging3",
         "r4", "skill_artful_dodging4",
         "r5", "skill_artful_dodging5",
+        "R1", "skill_rage1",
         "[]", "",
     ],
     tree_data=[
@@ -33,7 +34,7 @@ my.map_load_skill_tree(
         "        ^                               ",
         "r1->r2->r3                              ",
         "                                        ",
-        "                                        ",
+        "R1                                      ",
         "                                        ",
         "                                        ",
         "                                        ",

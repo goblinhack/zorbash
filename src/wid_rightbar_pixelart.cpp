@@ -611,7 +611,7 @@ bool wid_rightbar_pixelart_create(void)
           continue;
         }
 
-        auto tile = tile_n(tiles, activated ? 2 : 1);
+        auto tile = tile_n(tiles, activated ? 0 : 1);
         if (unlikely(! tile)) {
           item++;
           continue;
@@ -688,7 +688,7 @@ bool wid_rightbar_pixelart_create(void)
           continue;
         }
 
-        auto tile = tile_n(tiles, activated ? 1 : 2);
+        auto tile = tile_n(tiles, activated ? 0 : 1);
         if (unlikely(! tile)) {
           item++;
           continue;

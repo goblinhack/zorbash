@@ -4816,6 +4816,18 @@ const std::string &Thing::on_tick_do(void)
   return (tp()->on_tick_do());
 }
 
+const std::string &Thing::on_tick_when_deactivated_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_tick_when_deactivated_do());
+}
+
+const std::string &Thing::on_tick_when_activated_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_tick_when_activated_do());
+}
+
 const std::string &Thing::on_use_do(void)
 {
   TRACE_NO_INDENT();

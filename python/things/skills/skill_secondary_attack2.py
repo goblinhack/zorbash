@@ -4,7 +4,7 @@ import tp
 self = None
 
 
-def on_tick(owner, skill, x, y):
+def on_tick_when_activated(owner, skill, x, y):
     # my.topcon("owner  {} {}".format(my.thing_name_get(owner), my.thing_health(owner)))
     # my.topcon("skill  {} {}".format(my.thing_name_get(skill), my.thing_health(skill)))
     if owner and my.pcg_randint(1, 100) < 10:
@@ -36,7 +36,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_loggable(self, True)
     my.is_skill(self, True)
     my.is_tickable(self, True)
-    my.on_tick_do(self, "me.on_tick()")
+    my.on_tick_when_activated_do(self, "me.on_tick_when_activated()")
     my.on_use_do(self, "me.on_use()")
     my.skill_base_name(self, "skill_secondary_attack")
     my.skill_replaces(self, "skill_secondary_attack1")
@@ -50,8 +50,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
-    my.tile(self, tile="skill_secondary_attack")
     my.tile(self, tile="skill_secondary_attack_activated")
+    my.tile(self, tile="skill_secondary_attack")
     my.tp_update(self)
 
 

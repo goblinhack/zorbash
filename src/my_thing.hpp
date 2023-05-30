@@ -586,6 +586,8 @@ public:
   bool nat_att(Thingp victim);
   bool on_fire_set(const std::string &why);
   bool on_tick(void);
+  bool on_tick_when_activated(void);
+  bool on_tick_when_deactivated(void);
   bool on_want_to_shoot_at(Thingp hitter);
   bool open_door(Thingp door);
   bool open(Thingp it);
@@ -921,6 +923,8 @@ public:
   const std::string &on_teleport_do(void);
   const std::string &on_thrown_do(void);
   const std::string &on_tick_do(void);
+  const std::string &on_tick_when_activated_do(void);
+  const std::string &on_tick_when_deactivated_do(void);
   const std::string &on_unequip_do(void);
   const std::string &on_use_do(void);
   const std::string &on_waiting_do(void);

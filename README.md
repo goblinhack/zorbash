@@ -202,8 +202,8 @@ Content:
 <!-- begin type marker -->
 - 103 x monsters
 - 52 x food
+- 21 x skills
 - 19 x treasure
-- 16 x skills
 - 13 x weapons
 - 13 x items
 - 11 x buffs

@@ -4,7 +4,7 @@ import tp
 self = None
 
 
-def on_tick(owner, skill, x, y):
+def on_tick_when_activated(owner, skill, x, y):
     if owner and my.pcg_randint(1, 100) < 10:
         my.thing_stamina_decr(owner, 1)
     return False  # didn't do anything
@@ -33,7 +33,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_loggable(self, True)
     my.is_skill(self, True)
     my.is_tickable(self, True)
-    my.on_tick_do(self, "me.on_tick()")
+    my.on_tick_when_activated_do(self, "me.on_tick_when_activated()")
     my.on_use_do(self, "me.on_use()")
     my.skill_base_name(self, "skill_devoted_thrust")
     my.skill_replaces(self, "skill_devoted_thrust3")
@@ -47,8 +47,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
-    my.tile(self, tile="skill_devoted_thrust")
     my.tile(self, tile="skill_devoted_thrust_activated")
+    my.tile(self, tile="skill_devoted_thrust")
     my.tp_update(self)
 
 

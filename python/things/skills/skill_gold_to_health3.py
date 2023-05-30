@@ -4,7 +4,7 @@ import tp
 self = None
 
 
-def on_tick(owner, skill, x, y):
+def on_tick_when_activated(owner, skill, x, y):
     # my.topcon("owner  {} {}".format(my.thing_name_get(owner), my.thing_health(owner)))
     # my.topcon("skill  {} {}".format(my.thing_name_get(skill), my.thing_health(skill)))
 
@@ -32,11 +32,11 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_loggable(self, True)
     my.is_skill(self, True)
     my.is_tickable(self, True)
-    my.on_tick_do(self, "me.on_tick()")
+    my.on_tick_when_activated_do(self, "me.on_tick_when_activated()")
     my.skill_base_name(self, "skill_gold_to_health")
     my.skill_replaces(self, "skill_gold_to_health2")
-    my.stat_dex_bonus(self, -3)
     my.stat_con_bonus(self, 1)
+    my.stat_dex_bonus(self, -3)
     my.text_description_long2(self, "When in use, your skin glows radiantly. However you will also feel sluggish and less dextrous.")
     my.text_description_long3(self, "Conversion rate is 2 gold per turn to 3 health.")
     my.text_description_long(self, "With this skill you are able to trans-mutate your hard earned gold into life giving health.")
@@ -45,8 +45,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
-    my.tile(self, tile="skill_gold_to_health")
     my.tile(self, tile="skill_gold_to_health_activated")
+    my.tile(self, tile="skill_gold_to_health")
     my.tp_update(self)
 
 

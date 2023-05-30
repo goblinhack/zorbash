@@ -248,7 +248,7 @@ static bool skill_is_available(Skillp skill_next)
 
       //
       // We walk all the other skills, looking for one that points at the next skill
-      // and that we have activated the precursos
+      // and that we have activated the precursors
       //
       if ((skill_curr->skill_up == skill_next) || (skill_curr->skill_down == skill_next)
           || (skill_curr->skill_left == skill_next) || (skill_curr->skill_right == skill_next)) {
@@ -429,7 +429,7 @@ void Game::wid_choose_skill(void)
                 //
                 auto tiles = &tpp->tiles;
                 if (tiles) {
-                  auto tile = tile_n(tiles, skill_is_active_or_available ? 1 : 0);
+                  auto tile = tile_n(tiles, skill_is_active_or_available ? 0 : 1);
                   if (tile) {
                     wid_set_fg_tile(b, tile);
                   }
