@@ -65,7 +65,9 @@ void Thing::move_finish(void)
 
   if (is_player() && ! is_dead) {
     dbg2("Check if anything to carry");
-    if (check_anything_to_carry(true)) {
+    CarryReason reason;
+    reason.is_auto_collect_allowed = true;
+    if (check_anything_to_carry(reason)) {
       BOTCON("Press %%fg=yellow$%s%%fg=reset$ or click to collect.",
              ::to_string(game->config.key_wait_or_collect).c_str());
       level->describe(curr_at);

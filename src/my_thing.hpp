@@ -77,6 +77,14 @@ public:
   bool is_being_used {};
 } DropReason;
 
+typedef class CarryReason_
+{
+public:
+  bool is_being_stolen {};
+  bool is_being_equipped {};
+  bool is_auto_collect_allowed {};
+} CarryReason;
+
 typedef class TeleportReason_
 {
 public:
@@ -473,9 +481,8 @@ public:
   bool cannot_avoid(Thingp attacker);
   bool can_see_is_invisible(Thingp);
   bool carrying_anything(void);
-  bool carry(Thingp w, bool can_equip = true);
-  bool change_owner(Thingp new_owner);
-  bool check_anything_to_carry(bool auto_collect_allowed);
+  bool carry(Thingp w, CarryReason);
+  bool check_anything_to_carry(CarryReason);
   bool close_door(Thingp door);
   bool close(Thingp it);
   bool close(void);
@@ -662,8 +669,8 @@ public:
   bool torch_tick(void);
   bool try_harder_to_jump(void);
   bool try_harder_to_teleport(TeleportReason);
-  bool try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp it);
-  bool try_to_carry(Thingp w);
+  bool try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp it, CarryReason);
+  bool try_to_carry(Thingp w, CarryReason);
   bool try_to_enchant_items(void);
   bool try_to_escape(void);
   bool try_to_jump_away_from_player(void);
@@ -2781,7 +2788,7 @@ public:
   void topcon(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void topcon_(const char *fmt, va_list args); // compile error without
   void trap_tick(void);
-  void try_to_carry(const std::list< Thingp > &items);
+  void try_to_carry(const std::list< Thingp > &items, CarryReason);
   void unleash_minions(void);
   void unleash_spawners_things(void);
   void unpleasant(void);

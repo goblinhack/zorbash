@@ -124,7 +124,8 @@ static void wid_in_transit_item_place_in_bag(Widp wid_bag_container, Thingp bag,
   wid_destroy(&game->in_transit_item);
 
   t->itemsp()->preferred_bag_position = at;
-  bag->carry(t, false /* auto equip */);
+  CarryReason reason;
+  bag->carry(t, reason);
   t->itemsp()->preferred_bag_position = point(-1, -1);
 
   if (t->is_bag_item_container()) {
@@ -182,7 +183,8 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
   if (is_mouse_over_rightbar()) {
     TRACE_NO_INDENT();
     t->log("Is over inventory");
-    if (game->level->player->carry(t)) {
+    CarryReason reason;
+    if (game->level->player->carry(t, reason)) {
       t->log("Placed in inventory");
       wid_destroy(&game->in_transit_item);
       t->log("Placed item: Request to remake inventory");

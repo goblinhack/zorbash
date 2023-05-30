@@ -61,20 +61,31 @@ bool Thing::steal_treasure_from(Thingp it)
   auto chosen = cands[ pcg_random_range(0, cands.size()) ];
 
   dbg("Steal treasure %s", chosen->to_string().c_str());
-  DropReason reason;
-  reason.is_being_stolen = true;
-  if (! it->drop(chosen, this, reason)) {
-    return false;
+  {
+    DropReason reason;
+    reason.is_being_stolen = true;
+    if (! it->drop(chosen, this, reason)) {
+      return false;
+    }
   }
 
-  if (! it->is_dead) {
-    carry(chosen);
+  {
+    CarryReason reason;
+    reason.is_being_stolen = true;
+    if (! it->is_dead) {
+      carry(chosen, reason);
+    }
   }
   chosen->hide();
 
   if (it->is_player()) {
-    it->popup(string_sprintf("%%fg=white$Where's my money?!"));
-    it->msg("%%fg=orange$You feel less wealthy somehow...%%fg=reset$");
+    if (chosen->is_equippable()) {
+      it->popup(string_sprintf("%%fg=white$Where's my equipment?!"));
+      it->msg("%%fg=orange$You feel naked...%%fg=reset$");
+    } else {
+      it->popup(string_sprintf("%%fg=white$Where's my money?!"));
+      it->msg("%%fg=orange$You feel less wealthy somehow...%%fg=reset$");
+    }
   }
 
   if (is_able_to_run_away_after_stealing()) {
@@ -110,11 +121,14 @@ bool Thing::steal_item_from(Thingp it)
 
   DropReason reason;
   reason.is_being_stolen = true;
-
   it->drop(chosen, this, reason);
+
   if (! chosen->is_dead) {
-    carry(chosen);
+    CarryReason reason;
+    reason.is_being_stolen = true;
+    carry(chosen, reason);
   }
+
   chosen->hide();
 
   if (it->is_player()) {

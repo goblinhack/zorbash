@@ -273,67 +273,6 @@ void Thing::owner_unset(void)
   old_owner->check_all_carried_maps();
 }
 
-bool Thing::change_owner(Thingp new_owner)
-{
-  TRACE_NO_INDENT();
-  if (! new_owner) {
-    err("No new owner");
-    return true;
-  }
-
-  auto old_owner = immediate_owner();
-  if (! old_owner) {
-    return true;
-  }
-
-  if (new_owner == old_owner) {
-    return true;
-  }
-
-  dbg2("Change owner from %s to %s", old_owner->to_short_string().c_str(), new_owner->to_short_string().c_str());
-
-  if (old_owner->is_player()) {
-    DropReason reason;
-    if (! old_owner->inventory_shortcuts_remove(this, reason)) {
-      err("Failed to remove %s from inventory", to_short_string().c_str());
-      return false;
-    }
-  }
-
-  on_owner_unset(old_owner);
-
-  dbg("Remove from carrying list");
-  TRACE_AND_INDENT();
-  old_owner->itemsp()->carrying.remove(id);
-
-  hooks_remove();
-
-  if (! new_owner->carry(this)) {
-    err("New owner could not carry");
-    return false;
-  }
-
-  //
-  // Sanity check
-  //
-  auto changed_owner = immediate_owner();
-  if (! changed_owner) {
-    err("Owner change failed");
-    return false;
-  }
-  if (changed_owner != new_owner) {
-    err("Owner change failed, owner is still %s", changed_owner->to_short_string().c_str());
-    return false;
-  }
-
-  on_owner_add(new_owner);
-
-  old_owner->check_all_carried_maps();
-  new_owner->check_all_carried_maps();
-
-  return true;
-}
-
 int Thing::owned_count(void)
 {
   TRACE_NO_INDENT();

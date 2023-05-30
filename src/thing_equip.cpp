@@ -353,7 +353,8 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
   //
   if (allowed_to_recarry) {
     if (! is_being_destroyed && ! item->is_being_destroyed && ! is_dead && ! is_dying) {
-      if (! carry(item, false /* can_equip */)) {
+      CarryReason reason;
+      if (! carry(item, reason)) {
         DropReason reason;
         reason.is_being_unequipped = true;
         drop(item, reason);

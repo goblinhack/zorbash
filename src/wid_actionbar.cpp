@@ -1093,8 +1093,9 @@ void wid_actionbar_pixelart_init(void)
   // backtrace_dump();
   TRACE_AND_INDENT();
 
-  bool ui_icon_collect = false;
-  if (player->check_anything_to_carry(false)) {
+  CarryReason reason;
+  bool        ui_icon_collect = false;
+  if (player->check_anything_to_carry(reason)) {
     ui_icon_collect = true;
   }
 
@@ -1374,8 +1375,9 @@ void wid_actionbar_ascii_init(void)
   // backtrace_dump();
   TRACE_AND_INDENT();
 
-  bool ui_icon_collect = false;
-  if (player->check_anything_to_carry(false)) {
+  CarryReason reason;
+  bool        ui_icon_collect = false;
+  if (player->check_anything_to_carry(reason)) {
     ui_icon_collect = true;
   }
   //

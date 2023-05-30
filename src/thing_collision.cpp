@@ -212,7 +212,8 @@ bool Thing::collision_find_best_target(ThingAttackOptionsp attack_options)
             }
           } else if (owner->is_player()) {
             owner->log("Carry %s", victim->to_short_string().c_str());
-            if (owner->try_to_carry_if_worthwhile_dropping_items_if_needed(victim)) {
+            CarryReason reason;
+            if (owner->try_to_carry_if_worthwhile_dropping_items_if_needed(victim, reason)) {
               attack_options->victim_attacked = true;
               ret                             = true;
             }
@@ -229,7 +230,9 @@ bool Thing::collision_find_best_target(ThingAttackOptionsp attack_options)
           //
           // Eat corpse?
           //
-          if (is_item_carrier() && is_edible(victim) && try_to_carry_if_worthwhile_dropping_items_if_needed(victim)) {
+          CarryReason reason;
+          if (is_item_carrier() && is_edible(victim)
+              && try_to_carry_if_worthwhile_dropping_items_if_needed(victim, reason)) {
             dbg2("Don't eat, try to carry %s", victim->to_short_string().c_str());
             attack_options->victim_attacked = true;
             ret                             = true;
@@ -253,7 +256,8 @@ bool Thing::collision_find_best_target(ThingAttackOptionsp attack_options)
 
           if (is_player()) {
             dbg2("Don't attack, try to carry %s", victim->to_short_string().c_str());
-            if (try_to_carry_if_worthwhile_dropping_items_if_needed(victim)) {
+            CarryReason reason;
+            if (try_to_carry_if_worthwhile_dropping_items_if_needed(victim, reason)) {
               attack_options->victim_attacked = true;
               ret                             = true;
             }

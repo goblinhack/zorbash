@@ -27,22 +27,24 @@ void Game::place_player(void)
         continue;
       }
 
+      CarryReason reason;
+
       auto t = level->thing_new("player2", point(x, y));
       if (0) {
         auto k = level->thing_new("key", point(x, y));
-        t->carry(k);
+        t->carry(k, reason);
       }
       if (1) {
         auto w = level->thing_new("sword_wood", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (1) {
         auto w = level->thing_new("potion_health", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("potion_invisibility", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       {
         //
@@ -50,40 +52,40 @@ void Game::place_player(void)
         //
         for (auto d = 0; d < 2; d++) {
           auto w = level->thing_new("dart", point(x, y));
-          t->carry(w);
+          t->carry(w, reason);
         }
         if (0) {
           auto w = level->thing_new("dart_metal", point(x, y));
-          t->carry(w);
+          t->carry(w, reason);
         }
         if (0) {
           auto w = level->thing_new("dart_poison", point(x, y));
-          t->carry(w);
+          t->carry(w, reason);
         }
       }
       if (1) {
         auto w = level->thing_new("pottedmeat", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("horseshoe", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("armor_lather", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("sword_plutonium", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("staff_descent", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("gauntlets_lion", point(x, y - 2));
-        t->carry(w);
+        t->carry(w, reason);
         t->enchant_without_stone(w);
         t->enchant_without_stone(w);
       }
@@ -155,159 +157,159 @@ void Game::place_player(void)
       }
       if (0) {
         auto w = level->thing_new("amulet_endurance", point(x, y - 2));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         level->thing_new("portable_hole", point(x - 3, y));
         auto w = level->thing_new("amulet_teleport_attack", point(x, y - 2));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("staff_lightning", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("staff_fire", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("staff_cold", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("staff_energy", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("staff_descent", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("pike", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("scythe", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("double_shovel", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("shovel", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto r1 = level->thing_new("ring_is_immune_to_negation", point(x, y));
-        t->carry(r1);
+        t->carry(r1, reason);
         auto r2 = level->thing_new("ring_is_immune_to_poison", point(x, y));
-        t->carry(r2);
+        t->carry(r2, reason);
       }
       if (0) {
         auto r1 = level->thing_new("ring_shield", point(x, y));
-        t->carry(r1);
+        t->carry(r1, reason);
       }
       if (0) {
         auto r2 = level->thing_new("ring_is_immune_to_poison", point(x, y));
-        t->carry(r2);
+        t->carry(r2, reason);
       }
       if (0) {
         auto r3 = level->thing_new("ring_is_immune_to_fire", point(x, y));
-        t->carry(r3);
+        t->carry(r3, reason);
         auto r4 = level->thing_new("ring_is_immune_to_cold", point(x, y));
-        t->carry(r4);
+        t->carry(r4, reason);
       }
       if (0) {
         auto w = level->thing_new("very_broadsword", point(x + 3, y));
         w->enchant_randomly();
-        // t->carry(w);
+        // t->carry(w, reason);
         // t->enchant_without_stone(w);
       }
       if (0) {
         auto w = level->thing_new("sword_draining", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("axe", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (1) {
         auto w = level->thing_new("torch", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("wooden_cross", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("boots_fluffy", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("cloak_stone", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("cloak_fire", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("cloak_protection", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("torch", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto b = level->thing_new("bag_s", point(x, y));
-        t->carry(b);
+        t->carry(b, reason);
       }
       if (0) {
         level->thing_new("bag_s", point(x + 1, y));
       }
       if (0) {
         auto b = level->thing_new("enchant_stone", point(x, y));
-        t->carry(b);
+        t->carry(b, reason);
       }
       if (0) {
         auto b = level->thing_new("enchant_stone", point(x, y));
-        t->carry(b);
+        t->carry(b, reason);
       }
       if (1) {
         {
           for (auto sk = 0; sk < 1; sk++) {
             auto b = level->thing_new("skill_stone", point(x, y));
-            t->carry(b);
+            t->carry(b, reason);
           }
         }
       }
       if (0) {
         auto b = level->thing_new("thunderstone", point(x, y));
-        t->carry(b);
+        t->carry(b, reason);
       }
       if (0) {
         auto b = level->thing_new("chest1", point(x, y));
         auto w = level->thing_new("wooden_cross", point(x, y));
-        b->carry(w);
+        b->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("staff_energy", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
         t->enchant_without_stone(w);
       }
       if (0) {
         auto w = level->thing_new("map_treasure", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("map_beast", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto w = level->thing_new("staff_negation", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
       }
       if (0) {
         auto d = level->thing_new("dogman", point(x + 2, y));
@@ -371,24 +373,24 @@ void Game::place_player(void)
         // auto w = level->thing_new("staff_lightning", point(x, y));
         // auto w = level->thing_new("staff_descent", point(x, y));
         auto w1 = level->thing_new("staff_cold", point(x, y));
-        t->carry(w1);
+        t->carry(w1, reason);
         auto w2 = level->thing_new("staff_fire", point(x, y));
-        t->carry(w2);
+        t->carry(w2, reason);
         // t->enchant_without_stone(w);
       }
       if (0) {
         auto w = level->thing_new("rock", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
         t->enchant_without_stone(w);
       }
       if (0) {
         auto w = level->thing_new("staff_fire", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
         t->enchant_without_stone(w);
       }
       if (0) {
         auto w = level->thing_new("staff_descent", point(x, y));
-        t->carry(w);
+        t->carry(w, reason);
         t->enchant_without_stone(w);
       }
       if (0) {

@@ -275,7 +275,8 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
     // ground that are not auto collected, then describe them
     //
     if (game->state == Game::STATE_NORMAL) {
-      if (is_player() && check_anything_to_carry(false)) {
+      CarryReason reason;
+      if (is_player() && check_anything_to_carry(reason)) {
         level->describe(curr_at);
       }
     }
@@ -294,7 +295,8 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
     // ground that are not auto collected, then describe them
     //
     if (game->state == Game::STATE_NORMAL) {
-      if (is_player() && check_anything_to_carry(false)) {
+      CarryReason reason;
+      if (is_player() && check_anything_to_carry(reason)) {
         level->describe(curr_at);
       }
     }

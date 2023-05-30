@@ -405,7 +405,8 @@ PyObject *thing_carry(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  if (! t->carry(item)) {
+  CarryReason reason;
+  if (! t->carry(item, reason)) {
     t->err("Could not carry %s", what);
     Py_RETURN_NONE;
   }
