@@ -1684,7 +1684,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
       FOR_ALL_SKILLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
-        if (iter) {
+        if (iter && iter->is_activated) {
           char tmp2[ MAXSHORTSTR ];
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_def_bonus()) {
@@ -1820,7 +1820,7 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
       FOR_ALL_SKILLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
-        if (iter) {
+        if (iter && iter->is_activated) {
           char tmp2[ MAXSHORTSTR ];
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_att_bonus()) {
@@ -1950,7 +1950,7 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
       FOR_ALL_SKILLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
-        if (iter) {
+        if (iter && iter->is_activated) {
           char tmp2[ MAXSHORTSTR ];
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_str_bonus()) {
@@ -2070,7 +2070,7 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
       FOR_ALL_SKILLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
-        if (iter) {
+        if (iter && iter->is_activated) {
           char tmp2[ MAXSHORTSTR ];
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_dex_bonus()) {
@@ -2186,7 +2186,7 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
       FOR_ALL_SKILLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
-        if (iter) {
+        if (iter && iter->is_activated) {
           char tmp2[ MAXSHORTSTR ];
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_luck_bonus()) {
@@ -2302,7 +2302,7 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
       FOR_ALL_SKILLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
-        if (iter) {
+        if (iter && iter->is_activated) {
           char tmp2[ MAXSHORTSTR ];
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_con_bonus()) {

@@ -41,6 +41,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_use_do(self, "me.on_use()")
     my.skill_base_name(self, "skill_rage")
     my.stat_str_bonus(self, 2)
+    my.stat_att_bonus(self, 2)
     my.text_description_long2(self, "When activated your stamina will drain rapidly.")
     my.text_description_long(self, "While raging you gain 2 damage points per attack and gain additional strength bonuses.")
     my.text_description_short(self, "Rage skill.")

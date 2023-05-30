@@ -115,9 +115,9 @@ int Thing::teleport_distance_get(void)
 
     FOR_ALL_SKILLS_FOR(this, id)
     {
-      auto it = level->thing_find(id);
-      if (it) {
-        dist += it->teleport_distance_get();
+      auto iter = level->thing_find(id);
+      if (iter && iter->is_activated) {
+        dist += iter->teleport_distance_get();
         // it->dbg("TELEPORT %d", dist);
       }
     }

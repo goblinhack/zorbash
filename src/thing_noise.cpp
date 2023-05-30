@@ -71,10 +71,10 @@ int Thing::noise_total(void)
 
     FOR_ALL_SKILLS_FOR(this, id)
     {
-      auto it = level->thing_find(id);
-      if (it) {
-        decibels += it->noise();
-        // it->con("NOISE %d", decibels);
+      auto iter = level->thing_find(id);
+      if (iter && iter->is_activated) {
+        decibels += iter->noise();
+        // iter->con("NOISE %d", decibels);
       }
     }
   }
@@ -151,10 +151,10 @@ int Thing::noise_on_jumping(void)
 
     FOR_ALL_SKILLS_FOR(this, id)
     {
-      auto it = level->thing_find(id);
-      if (it) {
-        decibels += it->noise_additional_on_jump_end();
-        // it->con("NOISE %d", decibels);
+      auto iter = level->thing_find(id);
+      if (iter && iter->is_activated) {
+        decibels += iter->noise_additional_on_jump_end();
+        // iter->con("NOISE %d", decibels);
       }
     }
   }
@@ -228,10 +228,10 @@ int Thing::noise_on_teleporting(void)
 
     FOR_ALL_SKILLS_FOR(this, id)
     {
-      auto it = level->thing_find(id);
-      if (it) {
-        decibels += it->noise_additional_on_teleporting();
-        // it->con("NOISE %d", decibels);
+      auto iter = level->thing_find(id);
+      if (iter && iter->is_activated) {
+        decibels += iter->noise_additional_on_teleporting();
+        // iter->con("NOISE %d", decibels);
       }
     }
   }
