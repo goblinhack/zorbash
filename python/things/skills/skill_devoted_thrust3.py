@@ -1,5 +1,6 @@
 import my
 import tp
+import skill_devoted_thrust0
 
 self = None
 
@@ -12,7 +13,7 @@ def on_tick_when_activated(owner, skill, x, y):
 
 def on_use(owner, skill, target, x, y):
     my.spawn_using_items_radius_range(owner, skill, target, "skill_devoted_thrust_effect")
-    bonus = int(my.thing_stamina(owner) / 10) * 50
+    bonus = int(my.thing_stamina(owner) / 100) * 50
 
     if bonus > 1:
         if my.thing_is_player(owner):
@@ -28,28 +29,14 @@ def tp_init(name, text_long_name, text_short_name):
     global self
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-
-    my.gfx_ascii_shown(self, True)
-    my.is_loggable(self, True)
-    my.is_skill(self, True)
-    my.is_tickable(self, True)
-    my.on_tick_when_activated_do(self, "me.on_tick_when_activated()")
-    my.on_use_do(self, "me.on_use()")
-    my.skill_base_name(self, "skill_devoted_thrust")
     my.skill_replaces(self, "skill_devoted_thrust2")
     my.stat_def_bonus(self, -2)
     my.stat_str_bonus(self, 2)
-    my.text_description_long2(self, "This skill level can rapidly drain you. You have been warned.")
-    my.text_description_long2(self, "Uses 50 percent of your stamina points up in one mighty strike.")
-    my.text_description_long3(self, "When activated, 10 percent chance of draining stamina.")
-    my.text_description_long(self, "Prove your devotion to the gods by sacrificing your stamina in exchange for vanquishing damage.")
-    my.text_description_short(self, "Devoted thrust skill.")
+    my.text_description_long4(self, "When activated, 50 percent of your stamina will be converted to damage.")
+    my.text_description_long5(self, "When activated, 10 percent chance of draining stamina by 1.")
     my.text_description_very_short(self, "DevtThr 3")
-    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
-    my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
-    my.tile(self, tile="skill_devoted_thrust_activated")
-    my.tile(self, tile="skill_devoted_thrust")
+    skill_devoted_thrust0.tp_init(self)
     my.tp_update(self)
 
 

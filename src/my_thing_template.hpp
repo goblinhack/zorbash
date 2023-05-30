@@ -1040,6 +1040,8 @@ private:
   std::string _text_description_long;
   std::string _text_description_long2;
   std::string _text_description_long3;
+  std::string _text_description_long4;
+  std::string _text_description_long5;
   std::string _text_description_short;
   std::string _text_description_very_short;
   std::string _text_hits;
@@ -1387,6 +1389,8 @@ public:
   const std::string &text_description_enchant(void) const;
   const std::string &text_description_long2(void) const;
   const std::string &text_description_long3(void) const;
+  const std::string &text_description_long4(void) const;
+  const std::string &text_description_long5(void) const;
   const std::string &text_description_long(void) const;
   const std::string &text_description_short(void) const;
   const std::string &text_description_very_short(void) const;
@@ -3048,6 +3052,8 @@ public:
   void text_description_enchant_set(const std::string &v);
   void text_description_long2_set(const std::string &v);
   void text_description_long3_set(const std::string &v);
+  void text_description_long4_set(const std::string &v);
+  void text_description_long5_set(const std::string &v);
   void text_description_long_set(const std::string &v);
   void text_description_short_set(const std::string &v);
   void text_description_very_short_set(const std::string &v);

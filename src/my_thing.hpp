@@ -779,6 +779,8 @@ public:
   const std::string dmg_water_dice_str(void);
   const std::string text_description_long2(void);
   const std::string text_description_long3(void);
+  const std::string text_description_long4(void);
+  const std::string text_description_long5(void);
   const std::string text_description_long(void);
   const std::string text_long_name(size_t max_len = 0);
   const std::string text_short_name(size_t max_len = 0);

@@ -184,6 +184,8 @@ const std::string &Tp::text_debuff(void) const { return _text_debuff; }
 const std::string &Tp::text_description_enchant(void) const { return _text_description_enchant; }
 const std::string &Tp::text_description_long2(void) const { return _text_description_long2; }
 const std::string &Tp::text_description_long3(void) const { return _text_description_long3; }
+const std::string &Tp::text_description_long4(void) const { return _text_description_long4; }
+const std::string &Tp::text_description_long5(void) const { return _text_description_long5; }
 const std::string &Tp::text_description_long(void) const { return _text_description_long; }
 const std::string &Tp::text_description_short(void) const { return _text_description_short; }
 const std::string &Tp::text_description_very_short(void) const { return _text_description_very_short; }
@@ -1822,6 +1824,8 @@ void Tp::text_debuff_set(const std::string &v) { _text_debuff = v; }
 void Tp::text_description_enchant_set(const std::string &v) { _text_description_enchant = v; }
 void Tp::text_description_long2_set(const std::string &v) { _text_description_long2 = v; }
 void Tp::text_description_long3_set(const std::string &v) { _text_description_long3 = v; }
+void Tp::text_description_long4_set(const std::string &v) { _text_description_long4 = v; }
+void Tp::text_description_long5_set(const std::string &v) { _text_description_long5 = v; }
 void Tp::text_description_long_set(const std::string &v) { _text_description_long = v; }
 void Tp::text_description_short_set(const std::string &v) { _text_description_short = v; }
 void Tp::text_description_very_short_set(const std::string &v) { _text_description_very_short = v; }

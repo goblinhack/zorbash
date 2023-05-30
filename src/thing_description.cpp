@@ -75,17 +75,6 @@ const std::string Thing::text_description_long2(void)
 {
   TRACE_NO_INDENT();
 
-  //
-  // If python overrides, return that string
-  //
-  auto override_description = on_get_text_description_long_do();
-  if (! std::empty(override_description)) {
-    auto d = on_get_text_description_long();
-    if (d.size() > 1) {
-      return d[ 1 ];
-    }
-  }
-
   return (tp()->text_description_long2());
 }
 
@@ -93,18 +82,21 @@ const std::string Thing::text_description_long3(void)
 {
   TRACE_NO_INDENT();
 
-  //
-  // If python overrides, return that string
-  //
-  auto override_description = on_get_text_description_long_do();
-  if (! std::empty(override_description)) {
-    auto d = on_get_text_description_long();
-    if (d.size() > 2) {
-      return d[ 2 ];
-    }
-  }
-
   return (tp()->text_description_long3());
+}
+
+const std::string Thing::text_description_long4(void)
+{
+  TRACE_NO_INDENT();
+
+  return (tp()->text_description_long4());
+}
+
+const std::string Thing::text_description_long5(void)
+{
+  TRACE_NO_INDENT();
+
+  return (tp()->text_description_long5());
 }
 
 const std::string &Thing::text_description_short(void)

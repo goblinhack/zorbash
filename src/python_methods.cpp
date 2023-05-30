@@ -1990,6 +1990,8 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(text_description_long),
     MY_ADD_PYTHON_TP_FUNCTION(text_description_long2),
     MY_ADD_PYTHON_TP_FUNCTION(text_description_long3),
+    MY_ADD_PYTHON_TP_FUNCTION(text_description_long4),
+    MY_ADD_PYTHON_TP_FUNCTION(text_description_long5),
     MY_ADD_PYTHON_TP_FUNCTION(text_description_short),
     MY_ADD_PYTHON_TP_FUNCTION(text_description_very_short),
     MY_ADD_PYTHON_TP_FUNCTION(text_hits),

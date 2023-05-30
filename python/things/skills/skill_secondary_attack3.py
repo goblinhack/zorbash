@@ -41,7 +41,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_def_bonus(self, -1)
     my.stat_str_bonus(self, 2)
     my.text_description_long2(self, "The additional attack will be 50 percent of the initial attack.")
-    my.text_description_long3(self, "When activated, 10 percent chance of draining stamina per move.")
+    my.text_description_long3(self, "When activated, 10 percent chance of draining stamina by 1 per move.")
     my.text_description_long(self, "With this skill you gain a secondary attack.")
     my.text_description_short(self, "Double strike skill.")
     my.text_description_very_short(self, "SecAtck 3")

@@ -220,6 +220,14 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
       wid_popup_window->log(t->text_description_long3(), TEXT_FORMAT_LHS, "gray80");
     }
 
+    if (! t->text_description_long4().empty()) {
+      wid_popup_window->log(t->text_description_long4(), TEXT_FORMAT_LHS, "pink");
+    }
+
+    if (! t->text_description_long5().empty()) {
+      wid_popup_window->log(t->text_description_long5(), TEXT_FORMAT_LHS, "gray80");
+    }
+
     wid_thing_info_add_general_info(wid_popup_window, t);
     wid_thing_info_add_carry_info(wid_popup_window, t);
   }
@@ -717,7 +725,7 @@ void Game::wid_thing_info_add_gold_value(WidPopup *w, Thingp t)
     } else {
       snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->gold_value_dice_str().c_str());
     }
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Value Zorkmids %14s", tmp2);
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Value in zorkmids %11s", tmp2);
     w->log(tmp);
   }
 }
@@ -1707,7 +1715,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense bonus            %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
-      w->log("%%fg=gray$(while skill is active)");
+      w->log("%%fg=pink$(while skill is active)");
     }
   }
 }
@@ -1843,7 +1851,7 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack bonus             %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
-      w->log("%%fg=gray$(while skill is active)");
+      w->log("%%fg=pink$(while skill is active)");
     }
   }
 }
@@ -1963,7 +1971,7 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength bonus           %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
-      w->log("%%fg=gray$(while skill is active)");
+      w->log("%%fg=pink$(while skill is active)");
     }
   }
 }
@@ -2079,7 +2087,7 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity bonus          %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
-      w->log("%%fg=gray$(while skill is active)");
+      w->log("%%fg=pink$(while skill is active)");
     }
   }
 }
@@ -2195,7 +2203,7 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Luck bonus               %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
-      w->log("%%fg=gray$(while skill is active)");
+      w->log("%%fg=pink$(while skill is active)");
     }
   }
 }
@@ -2315,7 +2323,7 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution bonus       %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
-      w->log("%%fg=gray$(while skill is active)");
+      w->log("%%fg=pink$(while skill is active)");
     }
   }
 }
@@ -2365,7 +2373,7 @@ void Game::wid_thing_info_add_move_speed(WidPopup *w, Thingp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Move speed bonus         %4d", speed);
     w->log(tmp);
     if (t->is_skill()) {
-      w->log("%%fg=gray$(while skill is active)");
+      w->log("%%fg=pink$(while skill is active)");
     }
   }
 }
@@ -2390,7 +2398,7 @@ void Game::wid_thing_info_add_shove_strength(WidPopup *w, Thingp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Shove strength bonus     %4d", shove_strength);
     w->log(tmp);
     if (t->is_skill()) {
-      w->log("%%fg=gray$(while skill is active)");
+      w->log("%%fg=pink$(while skill is active)");
     }
   }
 }
@@ -2415,7 +2423,7 @@ void Game::wid_thing_info_add_jump_distance(WidPopup *w, Thingp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Jump distance bonus      %4d", dist);
     w->log(tmp);
     if (t->is_skill()) {
-      w->log("%%fg=gray$(while skill is active)");
+      w->log("%%fg=pink$(while skill is active)");
     }
   }
 }
@@ -2697,7 +2705,7 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
   if (t->is_auto_activated()) {
     w->log(UI_LOGGING_EMPTY_LINE);
     if (t->is_skill()) {
-      w->log("Skill is auto activated");
+      w->log("This skill is auto activated");
     } else {
       w->log("Is auto activated");
     }
