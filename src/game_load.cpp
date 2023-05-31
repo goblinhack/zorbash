@@ -468,7 +468,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->i_set_is_dirt                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_door                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_dry_grass                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->i_set_is_enchant_stone                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_enchantstone                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_fire                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_floor                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_foliage                       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -510,7 +510,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->i_set_is_secret_door                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_shallow_water                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_shovable                      = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->i_set_is_skill_stone                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_skillstone                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_smoke                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_spiderweb                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_staff                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -630,7 +630,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_dirt);
   in >> bits(my.t->_is_door);
   in >> bits(my.t->_is_dry_grass);
-  in >> bits(my.t->_is_enchant_stone);
+  in >> bits(my.t->_is_enchantstone);
   in >> bits(my.t->_is_fire);
   in >> bits(my.t->_is_floor);
   in >> bits(my.t->_is_foliage);
@@ -658,7 +658,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_secret_door);
   in >> bits(my.t->_is_shallow_water);
   in >> bits(my.t->_is_shovable);
-  in >> bits(my.t->_is_skill_stone);
+  in >> bits(my.t->_is_skillstone);
   in >> bits(my.t->_is_smoke);
   in >> bits(my.t->_is_steam);
   in >> bits(my.t->_is_spiderweb);

@@ -75,7 +75,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_dirt {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_door {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_dry_grass {};
-  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_enchant_stone {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_enchantstone {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_fire {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_floor {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_foliage {};
@@ -98,7 +98,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_secret_door {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_shallow_water {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_shovable {};
-  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_skill_stone {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_skillstone {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_smoke {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_spiderweb {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_staff {};
@@ -861,8 +861,8 @@ public:
   uint8_t is_door(const point p);
   uint8_t is_dry_grass(const int x, const int y);
   uint8_t is_dry_grass(const point p);
-  uint8_t is_enchant_stone(const int x, const int y);
-  uint8_t is_enchant_stone(const point p);
+  uint8_t is_enchantstone(const int x, const int y);
+  uint8_t is_enchantstone(const point p);
   uint8_t is_fire(const int x, const int y);
   uint8_t is_fire(const point p);
   uint8_t is_fire_no_check(const int x, const int y);
@@ -910,8 +910,8 @@ public:
   uint8_t is_shallow_water(const point p);
   uint8_t is_shovable(const int x, const int y);
   uint8_t is_shovable(const point p);
-  uint8_t is_skill_stone(const int x, const int y);
-  uint8_t is_skill_stone(const point p);
+  uint8_t is_skillstone(const int x, const int y);
+  uint8_t is_skillstone(const point p);
   uint8_t is_smoke(const int x, const int y);
   uint8_t is_smoke(const point p);
   uint8_t is_spiderweb(const int x, const int y);
@@ -1159,8 +1159,8 @@ public:
   void is_door_unset(const int x, const int y);
   void is_dry_grass_set(const int x, const int y);
   void is_dry_grass_unset(const int x, const int y);
-  void is_enchant_stone_set(const int x, const int y);
-  void is_enchant_stone_unset(const int x, const int y);
+  void is_enchantstone_set(const int x, const int y);
+  void is_enchantstone_unset(const int x, const int y);
   void is_fire_set(const int x, const int y);
   void is_fire_unset(const int x, const int y);
   void is_floor_set(const int x, const int y);
@@ -1245,8 +1245,8 @@ public:
   void is_shallow_water_unset(const int x, const int y);
   void is_shovable_set(const int x, const int y);
   void is_shovable_unset(const int x, const int y);
-  void is_skill_stone_set(const int x, const int y);
-  void is_skill_stone_unset(const int x, const int y);
+  void is_skillstone_set(const int x, const int y);
+  void is_skillstone_unset(const int x, const int y);
   void is_smoke_set(const int x, const int y);
   void is_smoke_unset(const int x, const int y);
   void is_spiderweb_set(const int x, const int y);

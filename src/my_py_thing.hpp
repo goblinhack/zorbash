@@ -333,7 +333,7 @@ PyObject *thing_is_eater_of_treasure(PyObject *obj, PyObject *args, PyObject *ke
 PyObject *thing_is_eater_of_weapons(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_enchantable_as_a_group(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_enchantable(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_enchant_stone(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_enchantstone(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_engulfer(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_equippable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ethereal_mob(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -485,7 +485,7 @@ PyObject *thing_is_shield(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_shovable_and_sticky(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_shovable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_skill(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_skill_stone(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_skillstone(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_sleeping(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_slime(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_slippery(PyObject *obj, PyObject *args, PyObject *keywds);

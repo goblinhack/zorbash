@@ -1756,10 +1756,10 @@ int Thing::is_enchantable(void)
   return (tp()->is_enchantable());
 }
 
-int Thing::is_enchant_stone(void)
+int Thing::is_enchantstone(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_enchant_stone());
+  return (tp()->is_enchantstone());
 }
 
 int Thing::is_ethereal_mob(void)
@@ -3362,10 +3362,10 @@ int Thing::is_shovable(void)
   return (tp()->is_shovable());
 }
 
-int Thing::is_skill_stone(void)
+int Thing::is_skillstone(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_skill_stone());
+  return (tp()->is_skillstone());
 }
 
 int Thing::is_skill(void)

@@ -270,17 +270,17 @@ void Game::place_player(void)
         level->thing_new("bag_s", point(x + 1, y));
       }
       if (0) {
-        auto b = level->thing_new("enchant_stone", point(x, y));
+        auto b = level->thing_new("enchantstone", point(x, y));
         t->carry(b, reason);
       }
       if (0) {
-        auto b = level->thing_new("enchant_stone", point(x, y));
+        auto b = level->thing_new("enchantstone", point(x, y));
         t->carry(b, reason);
       }
       if (1) {
         {
           for (auto sk = 0; sk < 1; sk++) {
-            auto b = level->thing_new("skill_stone", point(x, y));
+            auto b = level->thing_new("skillstone", point(x, y));
             t->carry(b, reason);
           }
         }
@@ -474,8 +474,8 @@ void Game::place_player(void)
         // level->thing_new("gargoyle_static", point(x + 2, y - 2));
         // level->thing_new("frog", point(x + 3, y - 1));
         // level->thing_new("fire", point(x + 1, y - 1));
-        // level->thing_new("enchant_stone", point(x + 1, y - 1));
-        // level->thing_new("skill_stone", point(x + 1, y - 1));
+        // level->thing_new("enchantstone", point(x + 1, y - 1));
+        // level->thing_new("skillstone", point(x + 1, y - 1));
         // level->thing_new("horseshoe", point(x, y));
         // level->thing_new("four_leaf_clover", point(x, y));
         // level->thing_new("medal_of_valor", point(x, y));

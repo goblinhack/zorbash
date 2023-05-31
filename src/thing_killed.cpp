@@ -304,9 +304,9 @@ void Thing::killed(Thingp defeater, const char *reason)
       //
       if (! is_being_thrown) {
         if (is_drained) {
-          if (is_enchant_stone()) {
+          if (is_enchantstone()) {
             msg("Your %s is drained and vanishes.", text_long_name().c_str());
-          } else if (is_skill_stone()) {
+          } else if (is_skillstone()) {
             msg("Your %s is drained and vanishes.", text_long_name().c_str());
           } else {
             msg("Your %s is drained.", text_long_name().c_str());

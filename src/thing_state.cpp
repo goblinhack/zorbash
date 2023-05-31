@@ -40,12 +40,12 @@ void Thing::change_state(int new_state, const std::string &why)
       is_sleeping = false;
       to          = "MONST-OPEN-INVENTORY";
       break;
-    case MONST_STATE_USING_ENCHANT_STONE :
+    case MONST_STATE_USING_ENCHANTSTONE :
       sleep_count_set(0);
       is_sleeping = false;
       to          = "MONST-USING-MAGIC_STONE";
       break;
-    case MONST_STATE_USING_SKILL_STONE :
+    case MONST_STATE_USING_SKILLSTONE :
       sleep_count_set(0);
       is_sleeping = false;
       to          = "MONST-USING-MAGIC_STONE";
@@ -74,13 +74,13 @@ void Thing::change_state(int new_state, const std::string &why)
     case MONST_STATE_RESTING : from = "MONST-RESTING"; break;
     case MONST_STATE_REPACK_INVENTORY : from = "MONST-REPACK"; break;
     case MONST_STATE_OPEN_INVENTORY : from = "MONST-OPEN-INVENTORY"; break;
-    case MONST_STATE_USING_ENCHANT_STONE :
+    case MONST_STATE_USING_ENCHANTSTONE :
       from = "MONST-USING-MAGIC_STONE";
       if (is_player()) {
         wid_enchant_destroy();
       }
       break;
-    case MONST_STATE_USING_SKILL_STONE :
+    case MONST_STATE_USING_SKILLSTONE :
       from = "MONST-USING-MAGIC_STONE";
       if (is_player()) {
         wid_choose_skill_destroy();
@@ -104,12 +104,12 @@ void Thing::change_state(int new_state, const std::string &why)
         game->set_request_to_remake_rightbar();
       }
       break;
-    case MONST_STATE_USING_ENCHANT_STONE :
+    case MONST_STATE_USING_ENCHANTSTONE :
       if (is_player()) {
         game->wid_enchant_an_item();
       }
       break;
-    case MONST_STATE_USING_SKILL_STONE :
+    case MONST_STATE_USING_SKILLSTONE :
       if (is_player()) {
         game->wid_choose_skill();
       }

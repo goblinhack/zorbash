@@ -515,7 +515,7 @@ int Tp::is_eater_of_treasure(void) const { return _is_eater_of_treasure; }
 int Tp::is_eater_of_weapons(void) const { return _is_eater_of_weapons; }
 int Tp::is_enchantable_as_a_group(void) const { return _is_enchantable_as_a_group; }
 int Tp::is_enchantable(void) const { return _is_enchantable; }
-int Tp::is_enchant_stone(void) const { return _is_enchant_stone; }
+int Tp::is_enchantstone(void) const { return _is_enchantstone; }
 int Tp::is_engulfer(void) const { return _is_engulfer; }
 int Tp::is_equippable(void) const { return _is_equippable; }
 int Tp::is_ethereal_mob(void) const { return _is_ethereal_mob; }
@@ -668,7 +668,7 @@ int Tp::is_sheep(void) const { return _is_sheep; }
 int Tp::is_shield(void) const { return _is_shield; }
 int Tp::is_shovable_and_sticky(void) const { return _is_shovable_and_sticky; }
 int Tp::is_shovable(void) const { return _is_shovable; }
-int Tp::is_skill_stone(void) const { return _is_skill_stone; }
+int Tp::is_skillstone(void) const { return _is_skillstone; }
 int Tp::is_skill(void) const { return _is_skill; }
 int Tp::is_slime(void) const { return _is_slime; }
 int Tp::is_slippery(void) const { return _is_slippery; }
@@ -1264,7 +1264,7 @@ void Tp::is_eater_of_treasure_set(int v) { _is_eater_of_treasure = v; }
 void Tp::is_eater_of_weapons_set(int v) { _is_eater_of_weapons = v; }
 void Tp::is_enchantable_as_a_group_set(int v) { _is_enchantable_as_a_group = v; }
 void Tp::is_enchantable_set(int v) { _is_enchantable = v; }
-void Tp::is_enchant_stone_set(int v) { _is_enchant_stone = v; }
+void Tp::is_enchantstone_set(int v) { _is_enchantstone = v; }
 void Tp::is_engulfer_set(int v) { _is_engulfer = v; }
 void Tp::is_equippable_set(int v) { _is_equippable = v; }
 void Tp::is_ethereal_mob_set(int v) { _is_ethereal_mob = v; }
@@ -1418,7 +1418,7 @@ void Tp::is_shield_set(int v) { _is_shield = v; }
 void Tp::is_shovable_and_sticky_set(int v) { _is_shovable_and_sticky = v; }
 void Tp::is_shovable_set(int v) { _is_shovable = v; }
 void Tp::is_skill_set(int v) { _is_skill = v; }
-void Tp::is_skill_stone_set(int v) { _is_skill_stone = v; }
+void Tp::is_skillstone_set(int v) { _is_skillstone = v; }
 void Tp::is_slime_set(int v) { _is_slime = v; }
 void Tp::is_slippery_set(int v) { _is_slippery = v; }
 void Tp::is_smoke_set(int v) { _is_smoke = v; }

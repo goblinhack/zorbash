@@ -881,7 +881,7 @@ Tpp tp_random_magic_stone(void)
 {
   TRACE_NO_INDENT();
   if (unlikely(! tp_magic_stone.size())) {
-    ERR("No enchant_stones found");
+    ERR("No enchantstones found");
     return nullptr;
   }
   return tp_get_with_no_rarity_filter(tp_magic_stone);

@@ -366,7 +366,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
       y_at += 2;
     } else if (item_option->is_usable()) {
       //
-      // For example boots of teleport or an enchant_stone
+      // For example boots of teleport or an enchantstone
       //
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;

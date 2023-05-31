@@ -91,13 +91,13 @@ void Thing::level_push(void)
     i_set_is_dry_grass = true;
     level->is_dry_grass_set(x, y);
   }
-  if (is_enchant_stone()) {
-    i_set_is_enchant_stone = true;
-    level->is_enchant_stone_set(x, y);
+  if (is_enchantstone()) {
+    i_set_is_enchantstone = true;
+    level->is_enchantstone_set(x, y);
   }
-  if (is_skill_stone()) {
-    i_set_is_skill_stone = true;
-    level->is_skill_stone_set(x, y);
+  if (is_skillstone()) {
+    i_set_is_skillstone = true;
+    level->is_skillstone_set(x, y);
   }
   if (is_foliage()) {
     i_set_is_foliage = true;

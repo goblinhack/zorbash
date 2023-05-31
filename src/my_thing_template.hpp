@@ -429,7 +429,7 @@ private:
   int _is_eater_of_weapons {};
   int _is_enchantable {};
   int _is_enchantable_as_a_group {};
-  int _is_enchant_stone {};
+  int _is_enchantstone {};
   int _is_engulfer {};
   int _is_equippable {};
   int _is_ethereal {};
@@ -584,7 +584,7 @@ private:
   int _is_shovable {};
   int _is_shovable_and_sticky {};
   int _is_skill {};
-  int _is_skill_stone {};
+  int _is_skillstone {};
   int _is_slime {};
   int _is_slippery {};
   int _is_smoke {};
@@ -1740,7 +1740,7 @@ public:
   int is_eater_of_weapons(void) const;
   int is_enchantable_as_a_group(void) const;
   int is_enchantable(void) const;
-  int is_enchant_stone(void) const;
+  int is_enchantstone(void) const;
   int is_engulfer(void) const;
   int is_equippable(void) const;
   int is_ethereal_mob(void) const;
@@ -1893,7 +1893,7 @@ public:
   int is_shield(void) const;
   int is_shovable_and_sticky(void) const;
   int is_shovable(void) const;
-  int is_skill_stone(void) const;
+  int is_skillstone(void) const;
   int is_skill(void) const;
   int is_slime(void) const;
   int is_slippery(void) const;
@@ -2489,7 +2489,7 @@ public:
   void is_eater_of_weapons_set(int v);
   void is_enchantable_as_a_group_set(int v);
   void is_enchantable_set(int v);
-  void is_enchant_stone_set(int v);
+  void is_enchantstone_set(int v);
   void is_engulfer_set(int v);
   void is_equippable_set(int v);
   void is_ethereal_mob_set(int v);
@@ -2643,7 +2643,7 @@ public:
   void is_shovable_and_sticky_set(int v);
   void is_shovable_set(int v);
   void is_skill_set(int v);
-  void is_skill_stone_set(int v);
+  void is_skillstone_set(int v);
   void is_slime_set(int v);
   void is_slippery_set(int v);
   void is_smoke_set(int v);

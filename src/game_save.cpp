@@ -417,7 +417,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_dirt                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_door                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_dry_grass                     ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_enchant_stone                  ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_enchantstone                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_fire                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_floor                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_foliage                       ? 1LLU : 0LLU) << shift; shift++;
@@ -463,7 +463,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_secret_door                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_shallow_water                 ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_shovable                      ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_skill_stone                    ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_skillstone                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_smoke                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_spiderweb                     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_staff                         ? 1LLU : 0LLU) << shift; shift++;
@@ -590,7 +590,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_dirt);
   out << bits(my.t->_is_door);
   out << bits(my.t->_is_dry_grass);
-  out << bits(my.t->_is_enchant_stone);
+  out << bits(my.t->_is_enchantstone);
   out << bits(my.t->_is_fire);
   out << bits(my.t->_is_floor);
   out << bits(my.t->_is_foliage);
@@ -618,7 +618,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_secret_door);
   out << bits(my.t->_is_shallow_water);
   out << bits(my.t->_is_shovable);
-  out << bits(my.t->_is_skill_stone);
+  out << bits(my.t->_is_skillstone);
   out << bits(my.t->_is_smoke);
   out << bits(my.t->_is_steam);
   out << bits(my.t->_is_spiderweb);

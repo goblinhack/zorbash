@@ -2321,8 +2321,8 @@ bool Thing::ai_tick(bool recursing)
       break;
     case MONST_STATE_REPACK_INVENTORY :
     case MONST_STATE_OPEN_INVENTORY :
-    case MONST_STATE_USING_ENCHANT_STONE :
-    case MONST_STATE_USING_SKILL_STONE : break;
+    case MONST_STATE_USING_ENCHANTSTONE :
+    case MONST_STATE_USING_SKILLSTONE : break;
   }
 
   //
@@ -2388,8 +2388,8 @@ bool Thing::ai_tick(bool recursing)
     case MONST_STATE_SLEEPING :
     case MONST_STATE_REPACK_INVENTORY :
     case MONST_STATE_OPEN_INVENTORY :
-    case MONST_STATE_USING_ENCHANT_STONE :
-    case MONST_STATE_USING_SKILL_STONE : break;
+    case MONST_STATE_USING_ENCHANTSTONE :
+    case MONST_STATE_USING_SKILLSTONE : break;
   }
 
   if (is_debug_type()) {
@@ -2489,22 +2489,22 @@ bool Thing::ai_tick(bool recursing)
         }
         break;
       }
-    case MONST_STATE_USING_ENCHANT_STONE :
+    case MONST_STATE_USING_ENCHANTSTONE :
       {
-        dbg("AI: state use enchant_stone");
+        dbg("AI: state use enchantstone");
         TRACE_AND_INDENT();
 
-        if (state_using_enchant_stone()) {
+        if (state_using_enchantstone()) {
           return true;
         }
         break;
       }
-    case MONST_STATE_USING_SKILL_STONE :
+    case MONST_STATE_USING_SKILLSTONE :
       {
-        dbg("AI: state use skill_stone");
+        dbg("AI: state use skillstone");
         TRACE_AND_INDENT();
 
-        if (state_using_skill_stone()) {
+        if (state_using_skillstone()) {
           return true;
         }
         break;
