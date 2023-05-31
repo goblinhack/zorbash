@@ -1121,10 +1121,10 @@ int Thing::is_crab(void)
   TRACE_NO_INDENT();
   return (tp()->is_crab());
 }
-int Thing::is_equippable(void)
+int Thing::is_able_to_be_equipped(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_equippable());
+  return (tp()->is_able_to_be_equipped());
 }
 int Thing::is_ant(void)
 {

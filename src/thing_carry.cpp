@@ -7,7 +7,7 @@
 #include "my_monst.hpp"
 #include "my_thing.hpp"
 
-bool Thing::carry(Thingp item, CarryReason reason)
+bool Thing::carry(Thingp item, CarryOptions carry_options)
 {
   if (! item) {
     err("No thing to carry");
@@ -87,8 +87,8 @@ bool Thing::carry(Thingp item, CarryReason reason)
   // If we have no weapon yet, equip it
   //
   bool equipped = false;
-  if (reason.is_being_equipped && is_able_to_use_weapons() && item->is_auto_equipped() && item->is_weapon()
-      && ! equip_id(MONST_EQUIP_WEAPON)) {
+  if (carry_options.is_able_to_be_equipped && is_able_to_use_weapons() && item->is_auto_equipped()
+      && item->is_weapon() && ! equip_id(MONST_EQUIP_WEAPON)) {
     dbg("Yes, equip weapon");
     TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_WEAPON)) {
@@ -100,7 +100,7 @@ bool Thing::carry(Thingp item, CarryReason reason)
   //
   // If we have no armor yet, equip it
   //
-  if (reason.is_being_equipped && is_able_to_use_armor() && item->is_auto_equipped() && item->is_armor()
+  if (carry_options.is_able_to_be_equipped && is_able_to_use_armor() && item->is_auto_equipped() && item->is_armor()
       && ! equip_id(MONST_EQUIP_ARMOR)) {
     dbg("Yes, equip armor");
     TRACE_AND_INDENT();
@@ -113,7 +113,7 @@ bool Thing::carry(Thingp item, CarryReason reason)
   //
   // If we have no helmet yet, equip it
   //
-  if (reason.is_being_equipped && is_able_to_use_helmet() && item->is_auto_equipped() && item->is_helmet()
+  if (carry_options.is_able_to_be_equipped && is_able_to_use_helmet() && item->is_auto_equipped() && item->is_helmet()
       && ! equip_id(MONST_EQUIP_HELMET)) {
     dbg("Yes, equip helmet");
     TRACE_AND_INDENT();
@@ -126,7 +126,7 @@ bool Thing::carry(Thingp item, CarryReason reason)
   //
   // If we have no amulet yet, equip it
   //
-  if (reason.is_being_equipped && is_able_to_use_amulet() && item->is_auto_equipped() && item->is_amulet()
+  if (carry_options.is_able_to_be_equipped && is_able_to_use_amulet() && item->is_auto_equipped() && item->is_amulet()
       && ! equip_id(MONST_EQUIP_AMULET)) {
     dbg("Yes, equip amulet");
     TRACE_AND_INDENT();
@@ -139,7 +139,7 @@ bool Thing::carry(Thingp item, CarryReason reason)
   //
   // If we have no boots yet, equip it
   //
-  if (reason.is_being_equipped && is_able_to_use_boots() && item->is_auto_equipped() && item->is_boots()
+  if (carry_options.is_able_to_be_equipped && is_able_to_use_boots() && item->is_auto_equipped() && item->is_boots()
       && ! equip_id(MONST_EQUIP_BOOTS)) {
     dbg("Yes, equip boots");
     TRACE_AND_INDENT();
@@ -152,8 +152,8 @@ bool Thing::carry(Thingp item, CarryReason reason)
   //
   // If we have no gauntlet yet, equip it
   //
-  if (reason.is_being_equipped && is_able_to_use_gauntlet() && item->is_auto_equipped() && item->is_gauntlet()
-      && ! equip_id(MONST_EQUIP_GAUNTLET)) {
+  if (carry_options.is_able_to_be_equipped && is_able_to_use_gauntlet() && item->is_auto_equipped()
+      && item->is_gauntlet() && ! equip_id(MONST_EQUIP_GAUNTLET)) {
     dbg("Yes, equip gauntlet");
     TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_GAUNTLET)) {
@@ -165,7 +165,7 @@ bool Thing::carry(Thingp item, CarryReason reason)
   //
   // If we have no cloak yet, equip it
   //
-  if (reason.is_being_equipped && is_able_to_use_cloak() && item->is_auto_equipped() && item->is_cloak()
+  if (carry_options.is_able_to_be_equipped && is_able_to_use_cloak() && item->is_auto_equipped() && item->is_cloak()
       && ! equip_id(MONST_EQUIP_CLOAK)) {
     dbg("Yes, equip cloak");
     TRACE_AND_INDENT();
@@ -178,7 +178,7 @@ bool Thing::carry(Thingp item, CarryReason reason)
   //
   // If we have no shield yet, equip it
   //
-  if (reason.is_being_equipped && is_able_to_use_shield() && item->is_auto_equipped() && item->is_shield()
+  if (carry_options.is_able_to_be_equipped && is_able_to_use_shield() && item->is_auto_equipped() && item->is_shield()
       && ! equip_id(MONST_EQUIP_SHIELD)) {
     dbg("Yes, equip shield");
     TRACE_AND_INDENT();
@@ -191,7 +191,7 @@ bool Thing::carry(Thingp item, CarryReason reason)
   //
   // If we have no rings yet, equip it
   //
-  if (reason.is_being_equipped && is_able_to_use_rings() && item->is_auto_equipped() && item->is_ring()
+  if (carry_options.is_able_to_be_equipped && is_able_to_use_rings() && item->is_auto_equipped() && item->is_ring()
       && ! equip_id(MONST_EQUIP_RING1)) {
     dbg("Yes, equip ring1");
     TRACE_AND_INDENT();
@@ -199,8 +199,8 @@ bool Thing::carry(Thingp item, CarryReason reason)
       dbg("Equipped ring1");
       equipped = true;
     }
-  } else if (reason.is_being_equipped && is_able_to_use_rings() && item->is_auto_equipped() && item->is_ring()
-             && ! equip_id(MONST_EQUIP_RING2)) {
+  } else if (carry_options.is_able_to_be_equipped && is_able_to_use_rings() && item->is_auto_equipped()
+             && item->is_ring() && ! equip_id(MONST_EQUIP_RING2)) {
     dbg("Yes, equip ring2");
     TRACE_AND_INDENT();
     if (equip(item, MONST_EQUIP_RING2)) {
@@ -228,9 +228,9 @@ bool Thing::carry(Thingp item, CarryReason reason)
       //
       dbg("Already owned: %s", item->to_short_string().c_str());
     } else {
-      DropReason reason;
-      reason.is_being_equipped = true;
-      existing_owner->drop(item, reason);
+      DropOptions drop_options;
+      drop_options.is_able_to_be_equipped = true;
+      existing_owner->drop(item, drop_options);
     }
   }
 
@@ -365,7 +365,7 @@ bool Thing::carry(Thingp item, CarryReason reason)
         if (level->player && (level->tick_created < game->tick_current)) {
           if (get(level->player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
             if (! already_carried) {
-              if (reason.is_being_stolen) {
+              if (carry_options.is_being_stolen) {
                 msg("%s has shiny new equipment.", text_The().c_str());
               } else {
                 msg("%s collects %s.", text_The().c_str(), item->text_the().c_str());
@@ -381,7 +381,7 @@ bool Thing::carry(Thingp item, CarryReason reason)
         }
       } else if (level->player && (level->tick_created < game->tick_current)) {
         if (get(level->player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
-          if (reason.is_being_stolen) {
+          if (carry_options.is_being_stolen) {
             msg("%s looks shifty.", text_The().c_str());
           } else {
             msg("%s collects %s.", text_The().c_str(), item->text_the().c_str());
@@ -397,7 +397,7 @@ bool Thing::carry(Thingp item, CarryReason reason)
   if (item->is_bag_item_container()) {
     for (const auto t : item->carried_item_only_vector()) {
       if (! t->is_bag_item()) {
-        if (! carry(t, reason)) {
+        if (! carry(t, carry_options)) {
           err("Could not auto carry %s's non item: %s", item->to_short_string().c_str(),
               t->to_short_string().c_str());
         }
@@ -426,10 +426,10 @@ bool Thing::carry(Thingp item, CarryReason reason)
   return true;
 }
 
-bool Thing::try_to_carry(Thingp item, CarryReason reason)
+bool Thing::try_to_carry(Thingp item, CarryOptions carry_options)
 {
   TRACE_NO_INDENT();
-  return carry(item, reason);
+  return carry(item, carry_options);
 }
 
 std::list< ThingId > Thing::anything_to_carry_at(point at)
@@ -541,7 +541,7 @@ std::list< ThingId > Thing::anything_to_carry(void)
   return anything_to_carry_at(curr_at);
 }
 
-bool Thing::check_anything_to_carry(CarryReason reason)
+bool Thing::check_anything_to_carry(CarryOptions carry_options)
 {
   //
   // Can't pick things up whilst being swallowed!
@@ -577,8 +577,8 @@ bool Thing::check_anything_to_carry(CarryReason reason)
     }
 
     if (t->is_auto_collect_item()) {
-      if (reason.is_auto_collect_allowed) {
-        carry(t, reason);
+      if (carry_options.is_auto_collect_allowed) {
+        carry(t, carry_options);
         continue;
       }
     }
@@ -590,17 +590,17 @@ bool Thing::check_anything_to_carry(CarryReason reason)
   return false;
 }
 
-void Thing::try_to_carry(const std::list< Thingp > &items, CarryReason reason)
+void Thing::try_to_carry(const std::list< Thingp > &items, CarryOptions carry_options)
 {
   for (auto item : items) {
-    try_to_carry(item, reason);
+    try_to_carry(item, carry_options);
   }
 }
 
 //
 // Returns true if we tried to collect or drop something to make space
 //
-bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item, CarryReason reason)
+bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item, CarryOptions carry_options)
 {
   dbg("Try to carry if worthwhile: %s", item->to_short_string().c_str());
   TRACE_AND_INDENT();
@@ -616,7 +616,7 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item, Car
     TRACE_AND_INDENT();
 
     for (const auto t : item->carried_item_only_vector()) {
-      if (! try_to_carry_if_worthwhile_dropping_items_if_needed(t, reason)) {
+      if (! try_to_carry_if_worthwhile_dropping_items_if_needed(t, carry_options)) {
         return false;
       }
       tried_to_carry_a_bag_item = true;
@@ -656,7 +656,7 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item, Car
     return true;
   }
 
-  if (try_to_carry(item, reason)) {
+  if (try_to_carry(item, carry_options)) {
     dbg("Carry check: @(%s, %d,%d %d/%dh) collected %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y,
         health(), health_max(), item->to_short_string().c_str());
 

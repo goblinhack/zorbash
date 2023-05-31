@@ -405,8 +405,10 @@ PyObject *thing_carry(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  CarryReason reason;
-  if (! t->carry(item, reason)) {
+  CarryOptions carry_options;
+  carry_options.is_able_to_be_equipped = true;
+
+  if (! t->carry(item, carry_options)) {
     t->err("Could not carry %s", what);
     Py_RETURN_NONE;
   }
@@ -570,10 +572,10 @@ PyObject *thing_teleport_randomly(PyObject *obj, PyObject *args, PyObject *keywd
     Py_RETURN_NONE;
   }
 
-  TeleportReason reason;
-  reason.teleport_self  = true;
-  reason.teleport_limit = true;
-  t->teleport_randomly(reason);
+  TeleportOptions options;
+  options.teleport_self  = true;
+  options.teleport_limit = true;
+  t->teleport_randomly(options);
   Py_RETURN_NONE;
 }
 
@@ -618,10 +620,10 @@ PyObject *thing_teleport(PyObject *obj, PyObject *args, PyObject *keywds)
 
   bool too_far = false;
 
-  TeleportReason reason;
-  reason.teleport_self  = true;
-  reason.teleport_limit = false;
-  t->teleport_carefree(reason, point(x, y), &too_far);
+  TeleportOptions teleport_options;
+  teleport_options.teleport_self  = true;
+  teleport_options.teleport_limit = false;
+  t->teleport_carefree(teleport_options, point(x, y), &too_far);
   Py_RETURN_NONE;
 }
 

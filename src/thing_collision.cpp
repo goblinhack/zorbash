@@ -51,6 +51,9 @@ bool Thing::collision_find_best_target(ThingAttackOptionsp attack_options)
   auto       me   = this;
   ThingColl *best = nullptr;
 
+  CarryOptions carry_options;
+  carry_options.is_able_to_be_equipped = true;
+
   attack_options->victim_attacked = false;
   attack_options->victim_overlaps = false;
 
@@ -212,8 +215,7 @@ bool Thing::collision_find_best_target(ThingAttackOptionsp attack_options)
             }
           } else if (owner->is_player()) {
             owner->log("Carry %s", victim->to_short_string().c_str());
-            CarryReason reason;
-            if (owner->try_to_carry_if_worthwhile_dropping_items_if_needed(victim, reason)) {
+            if (owner->try_to_carry_if_worthwhile_dropping_items_if_needed(victim, carry_options)) {
               attack_options->victim_attacked = true;
               ret                             = true;
             }
@@ -230,9 +232,8 @@ bool Thing::collision_find_best_target(ThingAttackOptionsp attack_options)
           //
           // Eat corpse?
           //
-          CarryReason reason;
           if (is_item_carrier() && is_edible(victim)
-              && try_to_carry_if_worthwhile_dropping_items_if_needed(victim, reason)) {
+              && try_to_carry_if_worthwhile_dropping_items_if_needed(victim, carry_options)) {
             dbg2("Don't eat, try to carry %s", victim->to_short_string().c_str());
             attack_options->victim_attacked = true;
             ret                             = true;
@@ -256,8 +257,7 @@ bool Thing::collision_find_best_target(ThingAttackOptionsp attack_options)
 
           if (is_player()) {
             dbg2("Don't attack, try to carry %s", victim->to_short_string().c_str());
-            CarryReason reason;
-            if (try_to_carry_if_worthwhile_dropping_items_if_needed(victim, reason)) {
+            if (try_to_carry_if_worthwhile_dropping_items_if_needed(victim, carry_options)) {
               attack_options->victim_attacked = true;
               ret                             = true;
             }

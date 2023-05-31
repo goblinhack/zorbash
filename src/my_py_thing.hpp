@@ -146,6 +146,7 @@ PyObject *thing_initial_charge_count(PyObject *obj, PyObject *args, PyObject *ke
 PyObject *thing_is_able_to_amplify_footsteps(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_attack_mobs(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_attack_owner(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_be_equipped(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_be_surprised(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_be_teleported(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_break_down_doors(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -335,7 +336,6 @@ PyObject *thing_is_enchantable_as_a_group(PyObject *obj, PyObject *args, PyObjec
 PyObject *thing_is_enchantable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_enchantstone(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_engulfer(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_equippable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ethereal_mob(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ethereal(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ettin(PyObject *obj, PyObject *args, PyObject *keywds);

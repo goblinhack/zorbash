@@ -255,6 +255,7 @@ private:
   int _is_able_to_amplify_footsteps {};
   int _is_able_to_attack_mobs {};
   int _is_able_to_attack_owner {};
+  int _is_able_to_be_equipped {};
   int _is_able_to_be_resurrected {};
   int _is_able_to_be_surprised {};
   int _is_able_to_be_teleported {};
@@ -431,7 +432,6 @@ private:
   int _is_enchantable_as_a_group {};
   int _is_enchantstone {};
   int _is_engulfer {};
-  int _is_equippable {};
   int _is_ethereal {};
   int _is_ethereal_mob {};
   int _is_ettin {};
@@ -1566,6 +1566,7 @@ public:
   int is_able_to_amplify_footsteps(void) const;
   int is_able_to_attack_mobs(void) const;
   int is_able_to_attack_owner(void) const;
+  int is_able_to_be_equipped(void) const;
   int is_able_to_be_resurrected(void) const;
   int is_able_to_be_surprised(void) const;
   int is_able_to_be_teleported(void) const;
@@ -1742,7 +1743,6 @@ public:
   int is_enchantable(void) const;
   int is_enchantstone(void) const;
   int is_engulfer(void) const;
-  int is_equippable(void) const;
   int is_ethereal_mob(void) const;
   int is_ethereal(void) const;
   int is_ettin(void) const;
@@ -2314,6 +2314,7 @@ public:
   void is_able_to_amplify_footsteps_set(int v);
   void is_able_to_attack_mobs_set(int v);
   void is_able_to_attack_owner_set(int v);
+  void is_able_to_be_equipped_set(int v);
   void is_able_to_be_resurrected_set(int v);
   void is_able_to_be_surprised_set(int v);
   void is_able_to_be_teleported_set(int v);
@@ -2491,7 +2492,6 @@ public:
   void is_enchantable_set(int v);
   void is_enchantstone_set(int v);
   void is_engulfer_set(int v);
-  void is_equippable_set(int v);
   void is_ethereal_mob_set(int v);
   void is_ethereal_set(int v);
   void is_ettin_set(int v);

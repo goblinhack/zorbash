@@ -295,7 +295,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
         wid_set_text(w, "Use (choose target)");
         y_at += 3;
       }
-    } else if (item_option->is_equippable() && ! player->is_equipped(item_option)) {
+    } else if (item_option->is_able_to_be_equipped() && ! player->is_equipped(item_option)) {
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;
       auto w = wid_new_square_button(p, "use");
@@ -329,7 +329,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
         wid_set_text(w, "Use");
       }
       y_at += 3;
-    } else if (item_option->is_equippable() && player->is_equipped(item_option)) {
+    } else if (item_option->is_able_to_be_equipped() && player->is_equipped(item_option)) {
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;
       auto w = wid_new_square_button(p, "use");

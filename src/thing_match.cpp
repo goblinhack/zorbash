@@ -61,6 +61,7 @@ bool Tp::matches(const std::string &what)
   if (is_able_to_amplify_footsteps() && (what == "is_able_to_amplify_footsteps")) { return true; }
   if (is_able_to_attack_mobs() && (what == "is_able_to_attack_mobs")) { return true; }
   if (is_able_to_attack_owner() && (what == "is_able_to_attack_owner")) { return true; }
+  if (is_able_to_be_equipped() && (what == "is_able_to_be_equipped")) { return true; }
   if (is_able_to_be_resurrected() && (what == "is_able_to_be_resurrected")) { return true; }
   if (is_able_to_be_surprised() && (what == "is_able_to_be_surprised")) { return true; }
   if (is_able_to_be_teleported() && (what == "is_able_to_be_teleported")) { return true; }
@@ -236,7 +237,6 @@ bool Tp::matches(const std::string &what)
   if (is_enchantable() && (what == "is_enchantable")) { return true; }
   if (is_enchantstone() && (what == "is_enchantstone")) { return true; }
   if (is_engulfer() && (what == "is_engulfer")) { return true; }
-  if (is_equippable() && (what == "is_equippable")) { return true; }
   if (is_ethereal_mob() && (what == "is_ethereal_mob")) { return true; }
   if (is_ethereal() && (what == "is_ethereal")) { return true; }
   if (is_ettin() && (what == "is_ettin")) { return true; }
@@ -663,6 +663,7 @@ bool Thing::matches(const std::string &what)
   if (is_able_to_amplify_footsteps() && (what == "is_able_to_amplify_footsteps")) { return true; }
   if (is_able_to_attack_mobs() && (what == "is_able_to_attack_mobs")) { return true; }
   if (is_able_to_attack_owner() && (what == "is_able_to_attack_owner")) { return true; }
+  if (is_able_to_be_equipped() && (what == "is_able_to_be_equipped")) { return true; }
   if (is_able_to_be_resurrected() && (what == "is_able_to_be_resurrected")) { return true; }
   if (is_able_to_be_surprised() && (what == "is_able_to_be_surprised")) { return true; }
   if (is_able_to_be_teleported() && (what == "is_able_to_be_teleported")) { return true; }
@@ -840,7 +841,6 @@ bool Thing::matches(const std::string &what)
   if (is_enchantable() && (what == "is_enchantable")) { return true; }
   if (is_enchantstone() && (what == "is_enchantstone")) { return true; }
   if (is_engulfer() && (what == "is_engulfer")) { return true; }
-  if (is_equippable() && (what == "is_equippable")) { return true; }
   if (is_ethereal_mob() && (what == "is_ethereal_mob")) { return true; }
   if (is_ethereal() && (what == "is_ethereal")) { return true; }
   if (is_ettin() && (what == "is_ettin")) { return true; }
@@ -1264,6 +1264,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_able_to_amplify_footsteps") { return &Thing::is_able_to_amplify_footsteps; }
   if (what == "is_able_to_attack_mobs") { return &Thing::is_able_to_attack_mobs; }
   if (what == "is_able_to_attack_owner") { return &Thing::is_able_to_attack_owner; }
+  if (what == "is_able_to_be_equipped") { return &Thing::is_able_to_be_equipped; }
   if (what == "is_able_to_be_resurrected") { return &Thing::is_able_to_be_resurrected; }
   if (what == "is_able_to_be_surprised") { return &Thing::is_able_to_be_surprised; }
   if (what == "is_able_to_be_teleported") { return &Thing::is_able_to_be_teleported; }
@@ -1437,7 +1438,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_enchantable") { return &Thing::is_enchantable; }
   if (what == "is_enchantstone") { return &Thing::is_enchantstone; }
   if (what == "is_engulfer") { return &Thing::is_engulfer; }
-  if (what == "is_equippable") { return &Thing::is_equippable; }
   if (what == "is_ethereal_mob") { return &Thing::is_ethereal_mob; }
   if (what == "is_ethereal") { return &Thing::is_ethereal; }
   if (what == "is_ettin") { return &Thing::is_ettin; }

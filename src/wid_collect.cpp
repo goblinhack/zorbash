@@ -60,9 +60,9 @@ static void wid_collect_slot(int slot)
     }
   }
 
-  CarryReason reason;
-  auto        collect_me_id = collect_items[ slot ];
-  auto        collect_me    = level->thing_find_optional(collect_me_id);
+  CarryOptions carry_options;
+  auto         collect_me_id = collect_items[ slot ];
+  auto         collect_me    = level->thing_find_optional(collect_me_id);
   if (collect_me) {
     //
     // If we just picked up a bag, then we also pick up all the items in the bag, so remove them
@@ -72,12 +72,12 @@ static void wid_collect_slot(int slot)
     if (collect_me->is_bag_item_container()) {
       auto bag_items = collect_me->carried_item_only_vector();
 
-      if (! player->try_to_carry(collect_me, reason)) {
+      if (! player->try_to_carry(collect_me, carry_options)) {
         DBG2("Failed to collect slot %d", slot);
         return;
       }
     } else {
-      if (! player->try_to_carry(collect_me, reason)) {
+      if (! player->try_to_carry(collect_me, carry_options)) {
         DBG2("Failed to collect slot %d", slot);
         return;
       }

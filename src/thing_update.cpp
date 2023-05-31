@@ -278,7 +278,7 @@ void Thing::update(void)
     }
   }
 
-  CarryReason reason;
+  CarryOptions carry_options;
 
   //
   // Auto carry of weapons?
@@ -291,21 +291,21 @@ void Thing::update(void)
       dbg("New weapon class A");
       auto W = level->thing_new(tp_random_weapon_class_A(), curr_at, this);
       if (W) {
-        carried += carry(W, reason);
+        carried += carry(W, carry_options);
       }
     }
     if (d1000() < chance_d1000_carrier_of_weapon_class_B()) {
       dbg("New weapon class B");
       auto W = level->thing_new(tp_random_weapon_class_B(), curr_at, this);
       if (W) {
-        carried += carry(W, reason);
+        carried += carry(W, carry_options);
       }
     }
     if (d1000() < chance_d1000_carrier_of_weapon_class_C()) {
       dbg("New weapon class C");
       auto W = level->thing_new(tp_random_weapon_class_C(), curr_at, this);
       if (W) {
-        carried += carry(W, reason);
+        carried += carry(W, carry_options);
       }
     }
   }
@@ -318,21 +318,21 @@ void Thing::update(void)
       dbg("New staff class A");
       auto W = level->thing_new(tp_random_staff_class_A(), curr_at, this);
       if (W) {
-        carried += carry(W, reason);
+        carried += carry(W, carry_options);
       }
     }
     if (d1000() < chance_d1000_carrier_of_treasure_class_B()) {
       dbg("New staff class B");
       auto W = level->thing_new(tp_random_staff_class_B(), curr_at, this);
       if (W) {
-        carried += carry(W, reason);
+        carried += carry(W, carry_options);
       }
     }
     if (d1000() < chance_d1000_carrier_of_treasure_class_C()) {
       dbg("New staff class C");
       auto W = level->thing_new(tp_random_staff_class_C(), curr_at, this);
       if (W) {
-        carried += carry(W, reason);
+        carried += carry(W, carry_options);
       }
     }
   }
@@ -345,21 +345,21 @@ void Thing::update(void)
       dbg("New ring class A");
       auto W = level->thing_new(tp_random_ring_class_A(), curr_at, this);
       if (W) {
-        carried += carry(W, reason);
+        carried += carry(W, carry_options);
       }
     }
     if (d1000() < chance_d1000_carrier_of_treasure_class_B()) {
       dbg("New ring class B");
       auto W = level->thing_new(tp_random_ring_class_B(), curr_at, this);
       if (W) {
-        carried += carry(W, reason);
+        carried += carry(W, carry_options);
       }
     }
     if (d1000() < chance_d1000_carrier_of_treasure_class_C()) {
       dbg("New ring class C");
       auto W = level->thing_new(tp_random_ring_class_C(), curr_at, this);
       if (W) {
-        carried += carry(W, reason);
+        carried += carry(W, carry_options);
       }
     }
   }
@@ -372,21 +372,21 @@ void Thing::update(void)
       dbg("New item class A");
       auto W = level->thing_new(tp_random_item_not_a_container_class_A(), curr_at, this);
       if (W) {
-        carried += carry(W, reason);
+        carried += carry(W, carry_options);
       }
     }
     if (d1000() < chance_d1000_carrier_of_treasure_class_B()) {
       dbg("New item class B");
       auto W = level->thing_new(tp_random_item_not_a_container_class_B(), curr_at, this);
       if (W) {
-        carried += carry(W, reason);
+        carried += carry(W, carry_options);
       }
     }
     if (d1000() < chance_d1000_carrier_of_treasure_class_C()) {
       dbg("New item class C");
       auto W = level->thing_new(tp_random_item_not_a_container_class_C(), curr_at, this);
       if (W) {
-        carried += carry(W, reason);
+        carried += carry(W, carry_options);
       }
     }
   } else if (is_item_carrier()) {
@@ -397,21 +397,21 @@ void Thing::update(void)
       dbg("New item class A");
       auto W = level->thing_new(tp_random_item_class_A(), curr_at, this);
       if (W) {
-        carried += carry(W, reason);
+        carried += carry(W, carry_options);
       }
     }
     if (d1000() < chance_d1000_carrier_of_treasure_class_B()) {
       dbg("New item class B");
       auto W = level->thing_new(tp_random_item_class_B(), curr_at, this);
       if (W) {
-        carried += carry(W, reason);
+        carried += carry(W, carry_options);
       }
     }
     if (d1000() < chance_d1000_carrier_of_treasure_class_C()) {
       dbg("New item class C");
       auto W = level->thing_new(tp_random_item_class_C(), curr_at, this);
       if (W) {
-        carried += carry(W, reason);
+        carried += carry(W, carry_options);
       }
     }
   }

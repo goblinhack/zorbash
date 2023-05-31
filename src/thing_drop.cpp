@@ -41,7 +41,7 @@ void Thing::on_dropped(void)
   }
 }
 
-bool Thing::drop(Thingp what, Thingp target, DropReason reason)
+bool Thing::drop(Thingp what, Thingp target, DropOptions drop_options)
 {
   TRACE_NO_INDENT();
 
@@ -51,19 +51,19 @@ bool Thing::drop(Thingp what, Thingp target, DropReason reason)
     return false;
   }
 
-  if (reason.is_being_stolen) {
+  if (drop_options.is_being_stolen) {
     if (target) {
       dbg("Drop (being stolen) %s at %s", what->to_short_string().c_str(), target->to_short_string().c_str());
     } else {
       dbg("Drop (being stolen) %s", what->to_short_string().c_str());
     }
-  } else if (reason.is_being_equipped) {
+  } else if (drop_options.is_able_to_be_equipped) {
     if (target) {
       dbg("Drop (being equipped) %s at %s", what->to_short_string().c_str(), target->to_short_string().c_str());
     } else {
       dbg("Drop (being equipped) %s", what->to_short_string().c_str());
     }
-  } else if (reason.is_being_thrown) {
+  } else if (drop_options.is_being_thrown) {
     if (target) {
       dbg("Drop (being thrown) %s at %s", what->to_short_string().c_str(), target->to_short_string().c_str());
     } else {
@@ -105,9 +105,9 @@ bool Thing::drop(Thingp what, Thingp target, DropReason reason)
   what->is_being_dropped = true;
   if (is_player()) {
     if (target) {
-      inventory_shortcuts_remove(what, target, reason);
+      inventory_shortcuts_remove(what, target, drop_options);
     } else {
-      inventory_shortcuts_remove(what, reason);
+      inventory_shortcuts_remove(what, drop_options);
     }
   }
 
@@ -145,7 +145,7 @@ bool Thing::drop(Thingp what, Thingp target, DropReason reason)
     immediate_owner->itemsp()->carrying.remove(what->id);
   }
 
-  if (! reason.is_being_stolen) {
+  if (! drop_options.is_being_stolen) {
     //
     // Prevent too soon re-carry
     //
@@ -162,11 +162,11 @@ bool Thing::drop(Thingp what, Thingp target, DropReason reason)
   wid_inventory_fini();
   wid_thing_info_fini("drop item");
 
-  if (reason.is_being_thrown) {
+  if (drop_options.is_being_thrown) {
     //
     // A message should already have been shown
     //
-  } else if (reason.is_being_stolen) {
+  } else if (drop_options.is_being_stolen) {
     dbg("Dropped (being stolen) %s", what->to_short_string().c_str());
     if (is_player()) {
       if (! is_dead_or_dying()) {
@@ -188,12 +188,12 @@ bool Thing::drop(Thingp what, Thingp target, DropReason reason)
         level->noisemap_in_incr(curr_at.x, curr_at.y, what->noise_on_dropping());
       }
     } else if (is_bag_item_container()) {
-      if (! reason.is_being_thrown && ! reason.is_being_equipped && ! reason.is_being_stolen) {
+      if (! drop_options.is_being_thrown && ! drop_options.is_able_to_be_equipped && ! drop_options.is_being_stolen) {
         msg("%s falls out of %s.", what->text_The().c_str(), text_the().c_str());
         level->noisemap_in_incr(curr_at.x, curr_at.y, what->noise_on_dropping());
       }
     } else if (is_monst()) {
-      if (! reason.is_being_thrown && ! reason.is_being_equipped && ! reason.is_being_stolen) {
+      if (! drop_options.is_being_thrown && ! drop_options.is_able_to_be_equipped && ! drop_options.is_being_stolen) {
         msg("%s drops %s.", text_The().c_str(), what->text_the().c_str());
         level->noisemap_in_incr(curr_at.x, curr_at.y, what->noise_on_dropping());
       }
@@ -203,7 +203,7 @@ bool Thing::drop(Thingp what, Thingp target, DropReason reason)
   what->is_being_dropped = false;
   what->tick_last_dropped_set(game->tick_current);
   if (! is_dead_or_dying()) {
-    if (! reason.is_being_thrown && ! reason.is_being_equipped && ! reason.is_being_stolen) {
+    if (! drop_options.is_being_thrown && ! drop_options.is_able_to_be_equipped && ! drop_options.is_being_stolen) {
       what->on_dropped();
     }
   }
@@ -252,8 +252,8 @@ bool Thing::drop_into_ether(Thingp what)
     }
 
     if (top_owner->is_player()) {
-      DropReason reason;
-      top_owner->inventory_shortcuts_remove(what, reason);
+      DropOptions drop_options;
+      top_owner->inventory_shortcuts_remove(what, drop_options);
     }
   } else {
     //
@@ -311,8 +311,8 @@ bool Thing::drop_from_ether(Thingp what)
   //
   // Remove from the inventory
   //
-  DropReason reason;
-  inventory_shortcuts_remove(what, reason);
+  DropOptions drop_options;
+  inventory_shortcuts_remove(what, drop_options);
 
   wid_inventory_fini();
   wid_thing_info_fini("drop from ether");
@@ -357,11 +357,11 @@ bool Thing::drop_from_ether(Thingp what)
 
 bool Thing::drop(Thingp what)
 {
-  DropReason reason;
-  return drop(what, nullptr, reason);
+  DropOptions drop_options;
+  return drop(what, nullptr, drop_options);
 }
 
-bool Thing::drop(Thingp what, DropReason reason) { return drop(what, nullptr, reason); }
+bool Thing::drop(Thingp what, DropOptions drop_options) { return drop(what, nullptr, drop_options); }
 
 void Thing::drop_all(void)
 {

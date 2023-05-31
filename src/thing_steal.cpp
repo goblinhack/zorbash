@@ -62,24 +62,24 @@ bool Thing::steal_treasure_from(Thingp it)
 
   dbg("Steal treasure %s", chosen->to_string().c_str());
   {
-    DropReason reason;
-    reason.is_being_stolen = true;
-    if (! it->drop(chosen, this, reason)) {
+    DropOptions drop_options;
+    drop_options.is_being_stolen = true;
+    if (! it->drop(chosen, this, drop_options)) {
       return false;
     }
   }
 
   {
-    CarryReason reason;
-    reason.is_being_stolen = true;
+    CarryOptions carry_options;
+    carry_options.is_being_stolen = true;
     if (! it->is_dead) {
-      carry(chosen, reason);
+      carry(chosen, carry_options);
     }
   }
   chosen->hide();
 
   if (it->is_player()) {
-    if (chosen->is_equippable()) {
+    if (chosen->is_able_to_be_equipped()) {
       it->popup(string_sprintf("%%fg=white$Where's my equipment?!"));
       it->msg("%%fg=orange$You feel naked...%%fg=reset$");
     } else {
@@ -119,14 +119,14 @@ bool Thing::steal_item_from(Thingp it)
 
   dbg("Yes, steal: %s", chosen->to_string().c_str());
 
-  DropReason reason;
-  reason.is_being_stolen = true;
-  it->drop(chosen, this, reason);
+  DropOptions drop_options;
+  drop_options.is_being_stolen = true;
+  it->drop(chosen, this, drop_options);
 
   if (! chosen->is_dead) {
-    CarryReason reason;
-    reason.is_being_stolen = true;
-    carry(chosen, reason);
+    CarryOptions carry_options;
+    carry_options.is_being_stolen = true;
+    carry(chosen, carry_options);
   }
 
   chosen->hide();

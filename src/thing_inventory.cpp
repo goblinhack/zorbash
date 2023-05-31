@@ -275,8 +275,8 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
     // ground that are not auto collected, then describe them
     //
     if (game->state == Game::STATE_NORMAL) {
-      CarryReason reason;
-      if (is_player() && check_anything_to_carry(reason)) {
+      CarryOptions carry_options;
+      if (is_player() && check_anything_to_carry(carry_options)) {
         level->describe(curr_at);
       }
     }
@@ -295,8 +295,8 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
     // ground that are not auto collected, then describe them
     //
     if (game->state == Game::STATE_NORMAL) {
-      CarryReason reason;
-      if (is_player() && check_anything_to_carry(reason)) {
+      CarryOptions carry_options;
+      if (is_player() && check_anything_to_carry(carry_options)) {
         level->describe(curr_at);
       }
     }
@@ -374,7 +374,7 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
   return true;
 }
 
-bool Thing::inventory_shortcuts_remove(Thingp item, DropReason reason)
+bool Thing::inventory_shortcuts_remove(Thingp item, DropOptions options)
 {
   TRACE_NO_INDENT();
 
@@ -426,7 +426,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item, DropReason reason)
     if (item->tp() == t->tp()) {
       game->set_request_to_remake_rightbar();
 
-      if (! reason.is_being_stolen) {
+      if (! options.is_being_stolen) {
         inventory_particle(item, i, this);
       }
 
@@ -473,7 +473,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item, DropReason reason)
   return false;
 }
 
-bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target, DropReason reason)
+bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target, DropOptions options)
 {
   TRACE_NO_INDENT();
   dbg("Inventory remove %s with target %s", item->to_short_string().c_str(),
@@ -525,7 +525,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target, Drop
     if (item->tp() == t->tp()) {
       game->set_request_to_remake_rightbar();
 
-      if (! reason.is_being_stolen) {
+      if (! options.is_being_stolen) {
         if (particle_target) {
           inventory_particle(item, i, particle_target);
         }

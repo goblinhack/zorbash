@@ -341,6 +341,7 @@ int Tp::internal_has_hp_anim(void) const { return _internal_has_hp_anim; }
 int Tp::is_able_to_amplify_footsteps(void) const { return _is_able_to_amplify_footsteps; }
 int Tp::is_able_to_attack_mobs(void) const { return _is_able_to_attack_mobs; }
 int Tp::is_able_to_attack_owner(void) const { return _is_able_to_attack_owner; }
+int Tp::is_able_to_be_equipped(void) const { return _is_able_to_be_equipped; }
 int Tp::is_able_to_be_resurrected(void) const { return _is_able_to_be_resurrected; }
 int Tp::is_able_to_be_surprised(void) const { return _is_able_to_be_surprised; }
 int Tp::is_able_to_be_teleported(void) const { return _is_able_to_be_teleported; }
@@ -517,7 +518,6 @@ int Tp::is_enchantable_as_a_group(void) const { return _is_enchantable_as_a_grou
 int Tp::is_enchantable(void) const { return _is_enchantable; }
 int Tp::is_enchantstone(void) const { return _is_enchantstone; }
 int Tp::is_engulfer(void) const { return _is_engulfer; }
-int Tp::is_equippable(void) const { return _is_equippable; }
 int Tp::is_ethereal_mob(void) const { return _is_ethereal_mob; }
 int Tp::is_ethereal(void) const { return _is_ethereal; }
 int Tp::is_ettin(void) const { return _is_ettin; }
@@ -1089,6 +1089,7 @@ void Tp::internal_has_hp_anim_set(int v) { _internal_has_hp_anim = v; }
 void Tp::is_able_to_amplify_footsteps_set(int v) { _is_able_to_amplify_footsteps = v; }
 void Tp::is_able_to_attack_mobs_set(int v) { _is_able_to_attack_mobs = v; }
 void Tp::is_able_to_attack_owner_set(int v) { _is_able_to_attack_owner = v; }
+void Tp::is_able_to_be_equipped_set(int v) { _is_able_to_be_equipped = v; }
 void Tp::is_able_to_be_resurrected_set(int v) { _is_able_to_be_resurrected = v; }
 void Tp::is_able_to_be_surprised_set(int v) { _is_able_to_be_surprised = v; }
 void Tp::is_able_to_be_teleported_set(int v) { _is_able_to_be_teleported = v; }
@@ -1266,7 +1267,6 @@ void Tp::is_enchantable_as_a_group_set(int v) { _is_enchantable_as_a_group = v; 
 void Tp::is_enchantable_set(int v) { _is_enchantable = v; }
 void Tp::is_enchantstone_set(int v) { _is_enchantstone = v; }
 void Tp::is_engulfer_set(int v) { _is_engulfer = v; }
-void Tp::is_equippable_set(int v) { _is_equippable = v; }
 void Tp::is_ethereal_mob_set(int v) { _is_ethereal_mob = v; }
 void Tp::is_ethereal_set(int v) { _is_ethereal = v; }
 void Tp::is_ettin_set(int v) { _is_ettin = v; }

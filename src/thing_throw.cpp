@@ -348,17 +348,17 @@ bool Thing::throw_at(Thingp what, Thingp target)
     TRACE_AND_INDENT();
     used(what, target, true /* remove_after_use */);
   } else {
-    DropReason reason;
-    reason.is_being_thrown = true;
+    DropOptions drop_options;
+    drop_options.is_being_thrown = true;
 
     if (target && target->is_portal()) {
       dbg("Drop into portal");
       TRACE_AND_INDENT();
-      drop(what, target, reason);
+      drop(what, target, drop_options);
     } else {
       dbg("Drop thrown item");
       TRACE_AND_INDENT();
-      drop(what, target, reason);
+      drop(what, target, drop_options);
     }
   }
 

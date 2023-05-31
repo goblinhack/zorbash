@@ -405,11 +405,11 @@ bool Thing::ai_create_path_to_single_goal_do(int minx, int miny, int maxx, int m
     } else {
       ai->move_path = new_move_path;
 
-      TeleportReason reason;
-      reason.teleport_self   = true;
-      reason.teleport_closer = true;
-      reason.teleport_limit  = true;
-      if (teleport_self(reason, goal.what)) {
+      TeleportOptions teleport_options;
+      teleport_options.teleport_self   = true;
+      teleport_options.teleport_closer = true;
+      teleport_options.teleport_limit  = true;
+      if (teleport_self(teleport_options, goal.what)) {
         return true;
       }
 
@@ -1687,6 +1687,9 @@ bool Thing::ai_choose_immediately_adjacent_goal(int dx, int dy)
 
   ThingAttackOptions attack_options {};
 
+  CarryOptions carry_options;
+  carry_options.is_able_to_be_equipped = true;
+
   attack_options.shove_allowed  = false;
   attack_options.attack_allowed = true;
 
@@ -1796,10 +1799,9 @@ bool Thing::ai_choose_immediately_adjacent_goal(int dx, int dy)
     auto items = anything_to_carry_at(at);
     if (items.size() >= 1) {
       AI_LOG("Yes, something to carry here");
-      CarryReason reason;
       for (auto itemid : items) {
         auto t = level->thing_find(itemid);
-        if (try_to_carry_if_worthwhile_dropping_items_if_needed(t, reason)) {
+        if (try_to_carry_if_worthwhile_dropping_items_if_needed(t, carry_options)) {
           return true;
         }
       }

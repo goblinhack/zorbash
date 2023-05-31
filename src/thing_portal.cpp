@@ -45,9 +45,9 @@ void Thing::portal_tick(void)
   dbg("Portal tick");
   TRACE_AND_INDENT();
 
-  TeleportReason reason;
-  reason.teleport_carefully = false;
-  reason.teleport_limit     = false;
+  TeleportOptions teleport_options;
+  teleport_options.teleport_carefully = false;
+  teleport_options.teleport_limit     = false;
 
   auto radius = TELEPORT_DISTANCE_MAX;
 
@@ -82,13 +82,13 @@ void Thing::portal_tick(void)
   if (choices.size()) {
     bool too_far;
     auto to = pcg_one_of(choices);
-    teleport(reason, to, &too_far);
+    teleport(teleport_options, to, &too_far);
     return;
   }
 
   dbg("Did not find a portal, teleport randomly");
 
-  teleport_randomly(reason, radius);
+  teleport_randomly(teleport_options, radius);
 }
 
 bool Thing::teleport_portal(Thingp portal)
@@ -97,9 +97,9 @@ bool Thing::teleport_portal(Thingp portal)
 
   dbg("Entering a portal: %s", portal->to_short_string().c_str());
 
-  TeleportReason reason;
-  reason.teleport_carefully = false;
-  reason.teleport_limit     = false;
+  TeleportOptions teleport_options;
+  teleport_options.teleport_carefully = false;
+  teleport_options.teleport_limit     = false;
 
   auto radius = TELEPORT_DISTANCE_MAX;
 
@@ -130,13 +130,13 @@ bool Thing::teleport_portal(Thingp portal)
       //
       bool too_far = false;
 
-      return teleport(reason, point(px, py), &too_far);
+      return teleport(teleport_options, point(px, py), &too_far);
     }
   }
 
   dbg("Did not find a portal, teleport randomly");
 
-  return teleport_randomly(reason, radius);
+  return teleport_randomly(teleport_options, radius);
 }
 
 bool Thing::teleport_portal_find_target(point &other_end_of_portal)

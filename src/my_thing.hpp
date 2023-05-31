@@ -67,25 +67,25 @@ typedef struct {
   bool radial_effect;
 } UseOptions;
 
-typedef class DropReason_
+typedef class DropOptions_
 {
 public:
-  bool is_being_equipped {};
+  bool is_able_to_be_equipped {};
   bool is_being_unequipped {};
   bool is_being_thrown {};
   bool is_being_stolen {};
   bool is_being_used {};
-} DropReason;
+} DropOptions;
 
-typedef class CarryReason_
+typedef class CarryOptions_
 {
 public:
   bool is_being_stolen {};
-  bool is_being_equipped {};
+  bool is_able_to_be_equipped {};
   bool is_auto_collect_allowed {};
-} CarryReason;
+} CarryOptions;
 
-typedef class TeleportReason_
+typedef class TeleportOptions_
 {
 public:
   //
@@ -112,7 +112,7 @@ public:
   // Limit distance you can teleport.
   //
   bool teleport_limit {};
-} TeleportReason;
+} TeleportOptions;
 
 typedef class Thing_
 {
@@ -481,8 +481,8 @@ public:
   bool cannot_avoid(Thingp attacker);
   bool can_see_is_invisible(Thingp);
   bool carrying_anything(void);
-  bool carry(Thingp w, CarryReason);
-  bool check_anything_to_carry(CarryReason);
+  bool carry(Thingp w, CarryOptions);
+  bool check_anything_to_carry(CarryOptions);
   bool close_door(Thingp door);
   bool close(Thingp it);
   bool close(void);
@@ -522,8 +522,8 @@ public:
   bool drop_from_ether(Thingp w);
   bool drop_into_ether(Thingp w);
   bool drop(Thingp w);
-  bool drop(Thingp w, DropReason);
-  bool drop(Thingp w, Thingp target, DropReason);
+  bool drop(Thingp w, DropOptions);
+  bool drop(Thingp w, Thingp target, DropOptions);
   bool eat_something(void);
   bool eat(Thingp it);
   bool enchant_random_item_with_stone(void);
@@ -545,8 +545,8 @@ public:
   bool if_matches_then_dead(const std::string &what, const point p);
   bool initial_temperature_is_set(void);
   bool inventory_shortcuts_insert(Thingp what);
-  bool inventory_shortcuts_remove(Thingp what, DropReason);
-  bool inventory_shortcuts_remove(Thingp what, Thingp target, DropReason);
+  bool inventory_shortcuts_remove(Thingp what, DropOptions);
+  bool inventory_shortcuts_remove(Thingp what, Thingp target, DropOptions);
   bool is_adjacent(const Thingp);
   bool is_blocking_terrain(const Thingp it);
   bool is_bloodied(void);
@@ -640,17 +640,17 @@ public:
   bool state_using_skillstone(void);
   bool steal_item_from(Thingp);
   bool steal_treasure_from(Thingp);
-  bool teleport_carefree(TeleportReason, point to);
-  bool teleport_carefree(TeleportReason, point to, bool *too_far);
-  bool teleport_carefully(TeleportReason, point to);
-  bool teleport_carefully(TeleportReason, point to, bool *too_far);
+  bool teleport_carefree(TeleportOptions, point to);
+  bool teleport_carefree(TeleportOptions, point to, bool *too_far);
+  bool teleport_carefully(TeleportOptions, point to);
+  bool teleport_carefully(TeleportOptions, point to, bool *too_far);
   bool teleport_portal_find_target(point &target);
   bool teleport_portal(Thingp portal);
-  bool teleport_randomly_away_from_player(TeleportReason);
-  bool teleport_randomly(TeleportReason, float max_distance = 0.0);
-  bool teleport_randomly_towards_player(TeleportReason);
-  bool teleport_self(TeleportReason, Thingp it = nullptr);
-  bool teleport(TeleportReason, point to, bool *too_far);
+  bool teleport_randomly_away_from_player(TeleportOptions);
+  bool teleport_randomly(TeleportOptions, float max_distance = 0.0);
+  bool teleport_randomly_towards_player(TeleportOptions);
+  bool teleport_self(TeleportOptions, Thingp it = nullptr);
+  bool teleport(TeleportOptions, point to, bool *too_far);
   bool temperature_max_is_set(void);
   bool temperature_min_is_set(void);
   bool thing_check_for_cold_dmg(void);
@@ -668,9 +668,9 @@ public:
   bool too_far_from_mob(void);
   bool torch_tick(void);
   bool try_harder_to_jump(void);
-  bool try_harder_to_teleport(TeleportReason);
-  bool try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp it, CarryReason);
-  bool try_to_carry(Thingp w, CarryReason);
+  bool try_harder_to_teleport(TeleportOptions);
+  bool try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp it, CarryOptions);
+  bool try_to_carry(Thingp w, CarryOptions);
   bool try_to_enchant_items(void);
   bool try_to_escape(void);
   bool try_to_jump_away_from_player(void);
@@ -1300,6 +1300,7 @@ public:
   int is_able_to_amplify_footsteps(void);
   int is_able_to_attack_mobs(void);
   int is_able_to_attack_owner(void);
+  int is_able_to_be_equipped(void);
   int is_able_to_be_resurrected(void);
   int is_able_to_be_surprised(void);
   int is_able_to_be_teleported(void);
@@ -1502,7 +1503,6 @@ public:
   int is_enchantable(void);
   int is_enchantstone(void);
   int is_engulfer(void);
-  int is_equippable(void);
   int is_ethereal_mob(void);
   int is_ethereal(void);
   int is_ettin(void);
@@ -2788,7 +2788,7 @@ public:
   void topcon(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void topcon_(const char *fmt, va_list args); // compile error without
   void trap_tick(void);
-  void try_to_carry(const std::list< Thingp > &items, CarryReason);
+  void try_to_carry(const std::list< Thingp > &items, CarryOptions);
   void unleash_minions(void);
   void unleash_spawners_things(void);
   void unpleasant(void);
