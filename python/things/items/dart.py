@@ -11,6 +11,8 @@ def on_thrown(owner, me, x, y):
 
     if my.pcg_randint(1, 100) < 90:
         my.thing_dead(me, "used")
+        if my.thing_is_player(owner):
+            my.topcon("Your dart shatters on impact!")
 
 
 def tp_init(name, text_long_name, text_short_name):

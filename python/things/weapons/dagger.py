@@ -2,6 +2,21 @@ import my
 import tp
 
 
+def on_thrown(owner, me, x, y):
+    # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
+    # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
+    for it in my.level_get_all(me, x, y):
+        if my.thing_is_interesting(it):
+            if it == me:
+                continue
+            my.thing_hit_dmg_missile(owner, me, it, thrown=True)
+
+    if my.pcg_randint(1, 100) < 10:
+        my.thing_dead(me, "broken")
+        if my.thing_is_player(owner):
+            my.topcon("Your dagger shatters on impact!")
+
+
 def on_swing(owner, item, x, y):
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_swing{my.non_pcg_randint(1, 3)}")
 
@@ -63,6 +78,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_loggable(self, True)
     my.is_metal(self, True)
     my.is_moveable(self, True)
+    my.is_throwable(self, True)
+    my.is_thrown_as_a_weapon(self, True)
     my.is_treasure_class_A(self, True)
     my.is_treasure_type(self, True)
     my.is_usable(self, True)
@@ -74,6 +91,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_equip_do(self, "me.on_equip()")
     my.on_owner_attack_dmg_melee_do(self, "me.on_owner_attack_dmg_melee()")
     my.on_swing_do(self, "me.on_swing()")
+    my.on_thrown_do(self, "me.on_thrown()")
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_COMMON)
     my.stamina_drain_on_attacking(self, 0)
