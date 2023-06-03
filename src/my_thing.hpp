@@ -142,11 +142,12 @@ public:
 
   point last_at;       // Previous hop where we were.
   point curr_at;       // Grid coordinates.
-  point last_attached; // Where we were last pushed onto the map/
+  point last_attached; // Where we were last pushed onto the map
   point last_ascii_at; // Last ascii tile on screen position
   point last_blit_br;  // Last blit coords
   point last_blit_tl;  // Offset from top left of map
   point last_blit_at;  // Center of the above
+  point blit_offset;   // Used to arrange for non overlapping popups
 
   uint16_t tile_curr {};
   int16_t  tp_id {-1}; // Common settings

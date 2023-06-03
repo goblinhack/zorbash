@@ -426,7 +426,7 @@ public:
   //
   // Temporary list of popups.
   //
-  std::map< Thingp, bool > popups;
+  std::list< Thingp > popups;
 
   //
   // Temporary. An item being moved between bags

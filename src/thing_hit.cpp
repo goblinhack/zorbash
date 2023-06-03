@@ -1808,6 +1808,11 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   add_enemy(real_hitter);
 
   //
+  // If sufficiently far away, the hitter message might be hard to associate
+  //
+  auto second_message_distance = 2;
+
+  //
   // Visible hit indication
   //
   if (is_player()) {
@@ -1815,19 +1820,39 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     // Player being hit
     //
     if (attack_options->crit) {
-      popup(string_sprintf("%%fg=red$It CRITS you -%d", damage));
+      real_hitter->popup(string_sprintf("%%fg=red$It CRITS you -%d", damage));
+      if (distance(real_hitter->curr_at, curr_at) > second_message_distance) {
+        popup(string_sprintf("%%fg=red$-%d", damage));
+      }
     } else if (hitter->is_missile()) {
-      popup(string_sprintf("%%fg=orange$It strikes you -%d", damage));
+      real_hitter->popup(string_sprintf("%%fg=orange$It strikes you -%d", damage));
+      if (distance(real_hitter->curr_at, curr_at) > second_message_distance) {
+        popup(string_sprintf("%%fg=orange$-%d", damage));
+      }
     } else if (hitter->is_fire() || real_hitter->is_fire()) {
-      popup(string_sprintf("%%fg=orange$Burning -%d", damage));
+      if (distance(real_hitter->curr_at, curr_at) > second_message_distance) {
+        popup(string_sprintf("%%fg=orange$Burns -%d", damage));
+      }
     } else if (hitter->is_projectile()) {
-      popup(string_sprintf("%%fg=orange$Hits -%d", damage));
+      real_hitter->popup(string_sprintf("%%fg=orange$Hits you -%d", damage));
+      if (distance(real_hitter->curr_at, curr_at) > second_message_distance) {
+        popup(string_sprintf("%%fg=orange$-%d", damage));
+      }
     } else if (hitter->is_staff()) {
-      popup(string_sprintf("%%fg=orange$Zaps -%d", damage));
+      real_hitter->popup(string_sprintf("%%fg=orange$Zaps you -%d", damage));
+      if (distance(real_hitter->curr_at, curr_at) > second_message_distance) {
+        popup(string_sprintf("%%fg=orange$-%d", damage));
+      }
     } else if (hitter->is_monst() || real_hitter->is_monst()) {
-      popup(string_sprintf("%%fg=orange$It %s you -%d", real_hitter->text_hits().c_str(), damage));
+      real_hitter->popup(string_sprintf("%%fg=orange$It %s you -%d", real_hitter->text_hits().c_str(), damage));
+      if (distance(real_hitter->curr_at, curr_at) > second_message_distance) {
+        popup(string_sprintf("%%fg=orange$-%d", damage));
+      }
     } else {
-      popup(string_sprintf("%%fg=orange$-%d", damage));
+      real_hitter->popup(string_sprintf("%%fg=orange$Hits you for -%d", damage));
+      if (distance(real_hitter->curr_at, curr_at) > second_message_distance) {
+        popup(string_sprintf("%%fg=orange$-%d", damage));
+      }
     }
   } else if (is_monst()) {
     //
@@ -1838,9 +1863,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       // Thing being hit by player
       //
       if (attack_options->crit) {
-        popup(string_sprintf("%%fg=red$You CRIT it -%d", damage));
+        real_hitter->popup(string_sprintf("%%fg=red$You CRIT it -%d", damage));
       } else {
-        popup(string_sprintf("%%fg=orange$You hit it -%d", damage));
+        real_hitter->popup(string_sprintf("%%fg=orange$You hit it -%d", damage));
       }
     } else {
       //

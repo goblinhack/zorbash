@@ -5,6 +5,7 @@
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_thing.hpp"
+#include "my_ui.hpp"
 
 void Thing::popup(std::string const &m)
 {
@@ -24,25 +25,58 @@ void Thing::popup(std::string const &m)
     return;
   }
 
-  //
-  // Stop msgs piling up in the same tick
-  //
-  // con("POPUP: %s", m.c_str());
-
-  //
-  // Make sure only one popup per thing
-  //
-  for (auto k : game->popups) {
-    auto p = k.first;
-    if (p->infop()->popup_owner_id == id) {
-      p->dead("too many popups");
-    }
-  }
-
-  // dbg("Popup: %s delta %d,%d", m.c_str(), dx, dy);
   auto msg = level->thing_new("msg", curr_at);
   msg->msg_set(m);
-  msg->fadeup(6.0, 0.01, 2500);
+  msg->fadeup(8.0, 0.02, 3000);
   msg->infop()->popup_owner_id = id;
-  game->popups[ msg ]          = true;
+
+  //
+  // Walk all current popups and place this new popup so it does not overlap
+  // any other in the vertical plane
+  //
+  while (true) {
+    Tilep tile = {};
+    point blit_tl, blit_br;
+
+    if (! msg->map_offset_coords_get(blit_tl, blit_br, tile, false)) {
+      break;
+    }
+
+    bool overlaps = {};
+    for (auto existing_msg : game->popups) {
+
+      last_blit_tl = existing_msg->last_blit_tl;
+      last_blit_br = existing_msg->last_blit_tl + point(0, UI_FONT_SMALL_HEIGHT);
+
+      if (last_blit_tl == point(0, 0) && (last_blit_br == point(0, 0))) {
+        existing_msg->map_offset_coords_get(last_blit_tl, last_blit_br, tile, false);
+        last_blit_br = existing_msg->last_blit_tl + point(0, UI_FONT_SMALL_HEIGHT);
+      }
+
+      if ((last_blit_tl.y >= blit_tl.y) && (last_blit_tl.y <= blit_br.y)) {
+        overlaps = true;
+        break;
+      }
+      if ((last_blit_br.y >= blit_tl.y) && (last_blit_br.y <= blit_br.y)) {
+        overlaps = true;
+        break;
+      }
+    }
+
+    if (! overlaps) {
+      //
+      // No overlap with existing messages
+      //
+      break;
+    }
+
+    //
+    // Try again, but with a bit of an offset to hopefully not overlap
+    //
+    msg->blit_offset.y += UI_FONT_SMALL_HEIGHT;
+  }
+
+  game->popups.push_front(msg);
+
+  log("POPUP: %s", m.c_str());
 }

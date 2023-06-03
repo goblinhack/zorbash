@@ -382,9 +382,18 @@ void Thing::blit_text(std::string const &text, color fg, point oblit_tl, point o
   int l = blit_msg_strlen(text);
 
   point blit_tl, blit_br;
+
+  //
+  // How wide is the message? Centered? or left justified?
+  // It seems more intuitive to place the message left justified over the initiator
+  //
   blit_tl.x = ((oblit_br.x + oblit_tl.x) / 2) - (UI_FONT_SMALL_WIDTH * (l / 2));
+  blit_tl.x = oblit_tl.x;
   blit_br.x = blit_tl.x + UI_FONT_SMALL_WIDTH;
 
+  //
+  // How tall is the message?
+  //
   blit_tl.y = oblit_tl.y;
   blit_br.y = oblit_tl.y + UI_FONT_SMALL_HEIGHT;
 
@@ -696,6 +705,12 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
       blit_br.y -= fadeup;
     }
   }
+
+  //
+  // For non overlapping text
+  //
+  blit_tl += blit_offset;
+  blit_br += blit_offset;
 
   return blit;
 }

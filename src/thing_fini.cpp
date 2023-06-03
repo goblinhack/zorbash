@@ -115,11 +115,24 @@ void Thing::destroy(void)
     }
   }
 
+  //
+  // Erase from the leftbar list
+  //
   {
-    if (std::find(level->wid_leftbar_things.begin(), level->wid_leftbar_things.end(), id)
-        != level->wid_leftbar_things.end()) {
+    auto found = std::find(level->wid_leftbar_things.begin(), level->wid_leftbar_things.end(), id);
+    if (found != level->wid_leftbar_things.end()) {
       dbg2("Remove from wid leftbar");
-      level->wid_leftbar_things.remove(id);
+      level->wid_leftbar_things.erase(found);
+    }
+  }
+
+  //
+  // Erase from the popup list
+  //
+  {
+    auto found = std::find(game->popups.begin(), game->popups.end(), this);
+    if (found != game->popups.end()) {
+      game->popups.erase(found);
     }
   }
 
@@ -127,8 +140,6 @@ void Thing::destroy(void)
     dbg2("Removed cursor");
     level->cursor = nullptr;
   }
-
-  game->popups.erase(this);
 
   if (game->request_to_throw_item == this) {
     game->request_to_throw_item  = nullptr;
