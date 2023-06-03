@@ -206,7 +206,7 @@ Content:
 - 19 x treasure
 - 13 x weapons
 - 13 x items
-- 11 x buffs
+- 12 x buffs
 - 6 x staffs
 - 6 x shield
 - 6 x boots

@@ -94,6 +94,7 @@ std::initializer_list< std::string > tps = {
     "bridge_ud",
     "bridge_x",
     "buff_full",
+    "buff_raging",
     "buff_is_immune_to_cold",
     "buff_is_immune_to_fire",
     "buff_is_immune_to_negation",

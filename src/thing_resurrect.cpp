@@ -160,3 +160,33 @@ int Thing::tick_resurrect_when_incr(void)
   auto n = (infop()->tick_resurrect_when++);
   return n;
 }
+
+const Dice &Thing::resurrect_dice(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->resurrect_dice());
+}
+
+const std::string &Thing::resurrect_dice_str(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->resurrect_dice_str());
+}
+
+int Thing::resurrect_when(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->resurrect_dice().roll());
+}
+
+int Thing::is_able_to_be_resurrected(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_able_to_be_resurrected());
+}
+
+int Thing::is_resurrected_or_resurrecting(void)
+{
+  TRACE_NO_INDENT();
+  return (is_resurrected || is_resurrecting);
+}

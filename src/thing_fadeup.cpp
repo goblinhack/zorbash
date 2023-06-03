@@ -3,6 +3,7 @@
 //
 
 #include "my_math.hpp"
+#include "my_monst.hpp"
 #include "my_thing.hpp"
 
 #include <math.h>
@@ -42,4 +43,42 @@ float Thing::fadeup_curr(void)
   height *= fadeup_height_curr();
 
   return height;
+}
+
+////////////////////////////////////////////////////////////////////////////
+// fadeup_height
+////////////////////////////////////////////////////////////////////////////
+float Thing::fadeup_height_curr(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->fadeup_height);
+  }
+  return 0;
+}
+
+void Thing::fadeup_height_set(float v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  infop()->fadeup_height = v;
+}
+
+////////////////////////////////////////////////////////////////////////////
+// fadeup_fade
+////////////////////////////////////////////////////////////////////////////
+float Thing::fadeup_fade_curr(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->fadeup_fade);
+  }
+  return 0;
+}
+
+void Thing::fadeup_fade_set(float v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  infop()->fadeup_fade = v;
 }

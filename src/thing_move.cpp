@@ -1014,3 +1014,9 @@ int Thing::movement_remaining_incr(void)
   auto n = (infop()->movement_remaining++);
   return n;
 }
+
+int Thing::is_moveable(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_moveable());
+}

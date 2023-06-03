@@ -463,6 +463,7 @@ PyObject *thing_is_portal(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_potion(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_pressure_plate(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_projectile(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_raging(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ranged_weapon(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rat(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_red_blooded(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -562,7 +563,6 @@ PyObject *thing_is_unused_flag138(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag139(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag13(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag140(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag141(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag142(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag14(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag15(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -715,6 +715,8 @@ PyObject *thing_poisoned_amount_set(PyObject *obj, PyObject *args, PyObject *key
 PyObject *thing_polymorph(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_popup(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_raging(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_raging_set(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_resurrect(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_score_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_score_incr(PyObject *obj, PyObject *args, PyObject *keywds);

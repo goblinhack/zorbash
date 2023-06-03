@@ -81,3 +81,57 @@ int Thing::idle_count_incr(void)
   new_aip();
   return (aip()->idle_count++);
 }
+
+const Dice &Thing::on_idle_tick_freq_dice(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_idle_tick_freq_dice());
+}
+
+const std::string &Thing::on_idle_tick_freq_dice_str(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_idle_tick_freq_dice_str());
+}
+
+int Thing::on_idle_tick_freq(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_idle_tick_freq_dice().roll());
+}
+
+int Thing::stat_att_penalty_when_idle_max(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->stat_att_penalty_when_idle_max());
+}
+
+int Thing::stat_att_penalty_when_idle(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->stat_att_penalty_when_idle());
+}
+
+int Thing::stat_def_penalty_when_idle_max(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->stat_def_penalty_when_idle_max());
+}
+
+int Thing::stat_def_penalty_when_idle(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->stat_def_penalty_when_idle());
+}
+
+int Thing::is_able_to_move_diagonally(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_able_to_move_diagonally());
+}
+
+const std::string &Thing::on_move_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_move_do());
+}

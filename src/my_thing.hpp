@@ -205,6 +205,7 @@ public:
   uint64_t is_minion_set                                : 1 {}; // overrides is_minion in template
   uint64_t is_moving                                    : 1 {}; // is currently moving tiles
   uint64_t is_open                                      : 1 {};
+  uint64_t is_raging_val                                : 1 {};
   uint64_t is_resurrected                               : 1 {}; // has finished resurrecting
   uint64_t is_resurrecting                              : 1 {}; // is currently resurrecing
   uint64_t is_resurrection_blocked                      : 1 {}; // blocked from resurrection
@@ -566,6 +567,8 @@ public:
   bool is_obs_ai(fpoint);
   bool is_obs_ai(Thingp);
   bool is_on_fire(void);
+  bool is_raging_set(bool);
+  bool is_raging(void);
   bool is_state_sleeping(void);
   bool is_stuck_check(void);
   bool is_stuck_currently(void);
@@ -611,6 +614,7 @@ public:
   bool possible_to_attack(const Thingp it);
   bool projectile_anim_exists(void);
   bool projectile_choose_target(Thingp item, Thingp victim = nullptr);
+  bool raging_set(bool val);
   bool same_leader_or_owner(Thingp it);
   bool same_mob(Thingp it);
   bool shoot_at_and_choose_target(Thingp, UseOptions *options = nullptr);
@@ -1330,6 +1334,7 @@ public:
   int is_able_to_melt(void);
   int is_able_to_move_diagonally(void);
   int is_able_to_open_doors(void);
+  int is_able_to_rage(void);
   int is_able_to_regenerate(void);
   int is_able_to_rest(void);
   int is_able_to_run_away_after_stealing(void);
@@ -1736,7 +1741,6 @@ public:
   int is_unused_flag139(void);
   int is_unused_flag13(void);
   int is_unused_flag140(void);
-  int is_unused_flag141(void);
   int is_unused_flag142(void);
   int is_unused_flag14(void);
   int is_unused_flag15(void);
@@ -2752,6 +2756,7 @@ public:
   void polymorph(Tpp);
   void popup(const std::string &);
   void portal_tick(void);
+  void rage_tick(void);
   void reinit(void);
   void release_followers(void);
   void remove_all_references(void);

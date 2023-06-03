@@ -175,3 +175,28 @@ ts_t Thing::ts_lunge_end_incr(void)
   new_infop();
   return (infop()->ts_lunge_end++);
 }
+
+int Thing::is_able_to_lunge(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_able_to_lunge());
+}
+
+////////////////////////////////////////////////////////////////////////////
+// lunge_to
+////////////////////////////////////////////////////////////////////////////
+point Thing::lunge_to_get(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->lunge_to);
+  }
+  return (point(0, 0));
+}
+
+void Thing::lunge_to_set(point v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  infop()->lunge_to = v;
+}

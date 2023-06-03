@@ -86,6 +86,8 @@ THING_BODY_SET_INT(thing_health_decr, health_decr)
 THING_BODY_SET_INT(thing_health_incr, health_incr)
 THING_BODY_SET_INT(thing_health_set, health_set)
 
+THING_BODY_SET_INT(thing_raging_set, raging_set)
+
 THING_BODY_SET_INT(thing_gold_decr, gold_decr)
 THING_BODY_SET_INT(thing_gold_incr, gold_incr)
 THING_BODY_SET_INT(thing_gold_set, gold_set)

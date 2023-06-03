@@ -2,9 +2,11 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include <math.h>
-
+#include "my_monst.hpp"
 #include "my_thing.hpp"
+#include "my_thing_template.hpp"
+
+#include <math.h>
 
 void Thing::wobble(float wobble)
 {
@@ -36,4 +38,29 @@ float Thing::update_wobble(void)
   wobble_set(new_w);
 
   return w;
+}
+
+////////////////////////////////////////////////////////////////////////////
+// wobble
+////////////////////////////////////////////////////////////////////////////
+float Thing::wobble_curr(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->wobble);
+  }
+  return 0;
+}
+
+void Thing::wobble_set(float v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  infop()->wobble = v;
+}
+
+int Thing::gfx_pixelart_wobbles_when_hit(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->gfx_pixelart_wobbles_when_hit());
 }

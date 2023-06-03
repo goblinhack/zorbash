@@ -359,6 +359,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_minion_set                                ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_moving                                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_open                                      ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_raging_val                                ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_resurrected                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_resurrecting                              ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_resurrection_blocked                      ? 1LLU : 0LLU) << shift; shift++;

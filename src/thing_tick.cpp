@@ -96,6 +96,14 @@ void Thing::achieve_goals_in_life(void)
   }
 
   //
+  // Auto rage for some monsters
+  //
+  rage_tick();
+  if (is_dead) {
+    return;
+  }
+
+  //
   // Regenerate health
   //
   health_regenerate();

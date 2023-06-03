@@ -284,6 +284,7 @@ private:
   int _is_able_to_melt {};
   int _is_able_to_move_diagonally {};
   int _is_able_to_open_doors {};
+  int _is_able_to_rage {};
   int _is_able_to_regenerate {};
   int _is_able_to_rest {};
   int _is_able_to_run_away_after_stealing {};
@@ -666,7 +667,6 @@ private:
   int _is_unused_flag139 {};
   int _is_unused_flag14 {};
   int _is_unused_flag140 {};
-  int _is_unused_flag141 {};
   int _is_unused_flag142 {};
   int _is_unused_flag15 {};
   int _is_unused_flag16 {};
@@ -1595,6 +1595,7 @@ public:
   int is_able_to_melt(void) const;
   int is_able_to_move_diagonally(void) const;
   int is_able_to_open_doors(void) const;
+  int is_able_to_rage(void) const;
   int is_able_to_regenerate(void) const;
   int is_able_to_rest(void) const;
   int is_able_to_run_away_after_stealing(void) const;
@@ -1974,7 +1975,6 @@ public:
   int is_unused_flag139(void) const;
   int is_unused_flag13(void) const;
   int is_unused_flag140(void) const;
-  int is_unused_flag141(void) const;
   int is_unused_flag142(void) const;
   int is_unused_flag14(void) const;
   int is_unused_flag15(void) const;
@@ -2343,6 +2343,7 @@ public:
   void is_able_to_melt_set(int v);
   void is_able_to_move_diagonally_set(int v);
   void is_able_to_open_doors_set(int v);
+  void is_able_to_rage_set(int v);
   void is_able_to_regenerate_set(int v);
   void is_able_to_rest_set(int v);
   void is_able_to_run_away_after_stealing_set(int v);
@@ -2723,7 +2724,6 @@ public:
   void is_unused_flag139_set(int v);
   void is_unused_flag13_set(int v);
   void is_unused_flag140_set(int v);
-  void is_unused_flag141_set(int v);
   void is_unused_flag142_set(int v);
   void is_unused_flag14_set(int v);
   void is_unused_flag15_set(int v);

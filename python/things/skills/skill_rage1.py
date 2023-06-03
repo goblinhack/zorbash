@@ -5,7 +5,8 @@ self = None
 
 
 def on_tick_when_deactivated(owner, skill, x, y):
-    if owner and (my.thing_health(owner) < my.thing_health_max(owner) / 4):
+    if owner and (my.thing_health(owner) < my.thing_health_max(owner) / 10):
+        my.thing_raging_set(owner, True)
         if my.thing_is_player(owner):
             my.thing_msg(owner, "%%fg=red$You feel primal rage coursing through your veins!%%fg=reset$")
         my.thing_skill_activate(owner, skill)
@@ -16,7 +17,13 @@ def on_tick_when_deactivated(owner, skill, x, y):
 
 def on_tick_when_activated(owner, skill, x, y):
     if owner:
-        my.thing_stamina_decr(owner, 5)
+        if (my.thing_health(owner) < my.thing_health_max(owner) / 10):
+            if my.pcg_randint(1, 100) < 10:
+                my.thing_stamina_decr(owner, 5)
+        else:
+            my.thing_raging_set(owner, False)
+            if my.thing_is_player(owner):
+                my.thing_msg(owner, "You feel your primal rage dissipate.")
     return False  # didn't do anything
 
 

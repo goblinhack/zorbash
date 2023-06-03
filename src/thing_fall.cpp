@@ -591,3 +591,22 @@ ts_t Thing::ts_fall_end_incr(void)
   new_infop();
   return (infop()->ts_fall_end++);
 }
+
+////////////////////////////////////////////////////////////////////////////
+// fall_height
+////////////////////////////////////////////////////////////////////////////
+float Thing::fall_height_curr(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->fall_height);
+  }
+  return 0;
+}
+
+void Thing::fall_height_set(float v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  infop()->fall_height = v;
+}

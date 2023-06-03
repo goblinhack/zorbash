@@ -304,6 +304,15 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     damage = victim->total_dmg_for_on_receiving_dmg_melee(hitter, real_hitter, damage);
   }
 
+  //
+  // Auto rage; the player does this via a skill
+  //
+  if (real_hitter->is_able_to_rage()) {
+    if (real_hitter->is_raging()) {
+      damage += 2;
+    }
+  }
+
   std::string dmg_type;
   bool        attack_set = false;
 

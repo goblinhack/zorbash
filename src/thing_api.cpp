@@ -12,23 +12,6 @@
 //
 // Dice
 //
-const Dice &Thing::on_idle_tick_freq_dice(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_idle_tick_freq_dice());
-}
-
-const std::string &Thing::on_idle_tick_freq_dice_str(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_idle_tick_freq_dice_str());
-}
-
-int Thing::on_idle_tick_freq(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_idle_tick_freq_dice().roll());
-}
 
 const Dice &Thing::spawn_group_size_dice(void)
 {
@@ -66,24 +49,6 @@ int Thing::lifespan_initial(void)
   return (tp()->lifespan_dice().roll());
 }
 
-const Dice &Thing::resurrect_dice(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->resurrect_dice());
-}
-
-const std::string &Thing::resurrect_dice_str(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->resurrect_dice_str());
-}
-
-int Thing::resurrect_when(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->resurrect_dice().roll());
-}
-
 float Thing::distance_avoid_get(void)
 {
   TRACE_NO_INDENT();
@@ -100,12 +65,6 @@ int Thing::is_obs_ai(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_obs_ai());
-}
-
-int Thing::is_able_to_lunge(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_able_to_lunge());
 }
 
 int Thing::chance_d1000_shove(void)
@@ -257,18 +216,6 @@ int Thing::gfx_pixelart_attack_anim(void)
 {
   TRACE_NO_INDENT();
   return (tp()->gfx_pixelart_attack_anim());
-}
-
-int Thing::gfx_pixelart_bounce_always(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->gfx_pixelart_bounce_always());
-}
-
-int Thing::gfx_pixelart_bounce_on_move(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->gfx_pixelart_bounce_on_move());
 }
 
 int Thing::is_unused_flag1(void)
@@ -970,11 +917,6 @@ int Thing::is_unused_flag140(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag140());
-}
-int Thing::is_unused_flag141(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_unused_flag141());
 }
 int Thing::is_unused_flag142(void)
 {
@@ -2020,12 +1962,6 @@ int Thing::is_monst(void)
   return (tp()->is_monst());
 }
 
-int Thing::is_moveable(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_moveable());
-}
-
 int Thing::is_obs_wall_or_door(void)
 {
   TRACE_NO_INDENT();
@@ -2096,18 +2032,6 @@ int Thing::is_removable_if_out_of_slots(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_removable_if_out_of_slots());
-}
-
-int Thing::is_able_to_be_resurrected(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_able_to_be_resurrected());
-}
-
-int Thing::is_resurrected_or_resurrecting(void)
-{
-  TRACE_NO_INDENT();
-  return (is_resurrected || is_resurrecting);
 }
 
 int Thing::is_ripple(void)
@@ -2686,12 +2610,6 @@ int Thing::is_tireless(void)
   return (tp()->is_tireless());
 }
 
-int Thing::gfx_pixelart_wobbles_when_hit(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->gfx_pixelart_wobbles_when_hit());
-}
-
 int Thing::is_snake(void)
 {
   TRACE_NO_INDENT();
@@ -2961,18 +2879,6 @@ int Thing::stat_att_penalty_when_in_shallow_water(void)
   return (tp()->stat_att_penalty_when_in_shallow_water());
 }
 
-int Thing::stat_att_penalty_when_idle_max(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->stat_att_penalty_when_idle_max());
-}
-
-int Thing::stat_att_penalty_when_idle(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->stat_att_penalty_when_idle());
-}
-
 int Thing::stat_att_penalty_when_stuck(void)
 {
   TRACE_NO_INDENT();
@@ -2991,12 +2897,6 @@ int Thing::stat_def_penalty_when_stuck_max(void)
   return (tp()->stat_def_penalty_when_stuck_max());
 }
 
-int Thing::stat_def_penalty_when_idle_max(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->stat_def_penalty_when_idle_max());
-}
-
 int Thing::stat_def_penalty_when_in_deep_water(void)
 {
   TRACE_NO_INDENT();
@@ -3013,18 +2913,6 @@ int Thing::stat_def_penalty_when_stuck(void)
 {
   TRACE_NO_INDENT();
   return (tp()->stat_def_penalty_when_stuck());
-}
-
-int Thing::stat_def_penalty_when_idle(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->stat_def_penalty_when_idle());
-}
-
-int Thing::is_able_to_move_diagonally(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_able_to_move_diagonally());
 }
 
 int Thing::is_able_to_melt(void)
@@ -3893,178 +3781,6 @@ int Thing::rarity(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// lunge_to
-////////////////////////////////////////////////////////////////////////////
-point Thing::lunge_to_get(void)
-{
-  TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->lunge_to);
-  }
-  return (point(0, 0));
-}
-
-void Thing::lunge_to_set(point v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  infop()->lunge_to = v;
-}
-
-////////////////////////////////////////////////////////////////////////////
-// bounce_height
-////////////////////////////////////////////////////////////////////////////
-float Thing::bounce_height_curr(void)
-{
-  TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->bounce_height);
-  }
-  return 0;
-}
-
-void Thing::bounce_height_set(float v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  infop()->bounce_height = v;
-}
-
-////////////////////////////////////////////////////////////////////////////
-// fall_height
-////////////////////////////////////////////////////////////////////////////
-float Thing::fall_height_curr(void)
-{
-  TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->fall_height);
-  }
-  return 0;
-}
-
-void Thing::fall_height_set(float v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  infop()->fall_height = v;
-}
-
-////////////////////////////////////////////////////////////////////////////
-// bounce_fade
-////////////////////////////////////////////////////////////////////////////
-float Thing::bounce_fade_curr(void)
-{
-  TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->bounce_fade);
-  }
-  return 0;
-}
-
-void Thing::bounce_fade_set(float v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  infop()->bounce_fade = v;
-}
-
-////////////////////////////////////////////////////////////////////////////
-// born
-////////////////////////////////////////////////////////////////////////////
-point3d Thing::born_get(void)
-{
-  TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->born);
-  }
-  die("No born location");
-  return (point3d(-1, -1, -1));
-}
-
-void Thing::born_set(point3d v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  infop()->born = v;
-}
-
-////////////////////////////////////////////////////////////////////////////
-// bounce_count
-////////////////////////////////////////////////////////////////////////////
-int Thing::bounce_count(void)
-{
-  TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->bounce_count);
-  }
-  return 0;
-}
-
-void Thing::bounce_count_set(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  infop()->bounce_count = v;
-}
-
-////////////////////////////////////////////////////////////////////////////
-// fadeup_height
-////////////////////////////////////////////////////////////////////////////
-float Thing::fadeup_height_curr(void)
-{
-  TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->fadeup_height);
-  }
-  return 0;
-}
-
-void Thing::fadeup_height_set(float v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  infop()->fadeup_height = v;
-}
-
-////////////////////////////////////////////////////////////////////////////
-// fadeup_fade
-////////////////////////////////////////////////////////////////////////////
-float Thing::fadeup_fade_curr(void)
-{
-  TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->fadeup_fade);
-  }
-  return 0;
-}
-
-void Thing::fadeup_fade_set(float v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  infop()->fadeup_fade = v;
-}
-
-////////////////////////////////////////////////////////////////////////////
-// wobble
-////////////////////////////////////////////////////////////////////////////
-float Thing::wobble_curr(void)
-{
-  TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->wobble);
-  }
-  return 0;
-}
-
-void Thing::wobble_set(float v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  infop()->wobble = v;
-}
-
-////////////////////////////////////////////////////////////////////////////
 // msg
 ////////////////////////////////////////////////////////////////////////////
 const std::string &Thing::msg_get(void)
@@ -4684,12 +4400,6 @@ const std::string &Thing::on_you_nat_attack_success_do(void)
   return (tp()->on_you_nat_attack_success_do());
 }
 
-const std::string &Thing::on_born_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_born_do());
-}
-
 const std::string &Thing::on_resting_do(void)
 {
   TRACE_NO_INDENT();
@@ -4802,12 +4512,6 @@ const std::string &Thing::on_hit_dodge_do(void)
 {
   TRACE_NO_INDENT();
   return (tp()->on_hit_dodge_do());
-}
-
-const std::string &Thing::on_move_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_move_do());
 }
 
 const std::string &Thing::on_tick_do(void)

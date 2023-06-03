@@ -26,6 +26,15 @@ int Thing::stat_att_total()
   }
 
   //
+  // Auto rage; the player does this via a skill
+  //
+  if (is_able_to_rage()) {
+    if (is_raging()) {
+      stat += 2;
+    }
+  }
+
+  //
   // Add str bonus to att
   //
   if (is_monst() || is_player()) {

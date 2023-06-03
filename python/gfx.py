@@ -450,7 +450,7 @@ def init_tiles_16x16_1():
         "buff_is_immune_to_water",
         "buff_is_invisible",
         "buff_is_immune_to_teleport_attack",
-        "",
+        "buff_raging",
         "",
         "",
         "",

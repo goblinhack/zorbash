@@ -180,3 +180,72 @@ ts_t Thing::ts_bounce_end_incr(void)
   new_infop();
   return (infop()->ts_bounce_end++);
 }
+
+////////////////////////////////////////////////////////////////////////////
+// bounce_height
+////////////////////////////////////////////////////////////////////////////
+float Thing::bounce_height_curr(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->bounce_height);
+  }
+  return 0;
+}
+
+void Thing::bounce_height_set(float v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  infop()->bounce_height = v;
+}
+
+////////////////////////////////////////////////////////////////////////////
+// bounce_fade
+////////////////////////////////////////////////////////////////////////////
+float Thing::bounce_fade_curr(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->bounce_fade);
+  }
+  return 0;
+}
+
+void Thing::bounce_fade_set(float v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  infop()->bounce_fade = v;
+}
+
+int Thing::gfx_pixelart_bounce_always(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->gfx_pixelart_bounce_always());
+}
+
+int Thing::gfx_pixelart_bounce_on_move(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->gfx_pixelart_bounce_on_move());
+}
+
+////////////////////////////////////////////////////////////////////////////
+// bounce_count
+////////////////////////////////////////////////////////////////////////////
+int Thing::bounce_count(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->bounce_count);
+  }
+  return 0;
+}
+
+void Thing::bounce_count_set(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  infop()->bounce_count = v;
+}

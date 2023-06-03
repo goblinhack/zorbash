@@ -42,6 +42,7 @@ bool Thing::buff_add(Thingp what)
     wid_buffbox_init();
   }
 
+  game->set_request_to_remake_rightbar();
   return true;
 }
 
@@ -72,6 +73,7 @@ bool Thing::buff_remove(Thingp what)
   game->set_request_to_remake_buffbox();
 
   dbg("Removed %s", what->to_short_string().c_str());
+  game->set_request_to_remake_rightbar();
   return true;
 }
 
