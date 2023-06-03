@@ -140,7 +140,7 @@ def tp_init(name, text_long_name):
     my.rarity(self, my.RARITY_COMMON)  # how rare within this monster class
     my.stamina(self, 100)
     my.stat_con(self, 11)
-    my.stat_def(self, 12)
+    my.stat_def(self, 8)
     my.stat_dex(self, 12)
     my.stat_luck(self, 8)
     my.stat_str(self, 8)

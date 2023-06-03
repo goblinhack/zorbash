@@ -45,7 +45,7 @@ void Thing::rage_tick(void)
   }
 
   bool was_raging = is_raging();
-  raging_set(health() < (health_max() / 10));
+  raging_set(health() < (health_max() / 4));
   bool am_raging = is_raging();
 
   if (! was_raging && am_raging) {
