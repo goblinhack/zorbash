@@ -34,7 +34,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_str_bonus(self, 2)
     my.text_description_long4(self, "When activated, 50 percent of your stamina will be converted to damage.")
     my.text_description_long5(self, "When activated, 10 percent chance of draining stamina by 1.")
-    my.text_description_very_short(self, "DevtThr 3")
+    my.text_description_very_short(self, "DevThrst3")
     # end sort marker
     skill_devoted_thrust0.tp_init(self)
     my.tp_update(self)

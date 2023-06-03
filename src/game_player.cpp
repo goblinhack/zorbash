@@ -131,7 +131,7 @@ void Game::place_player(void)
         t->skill_add(w);
       }
       if (0) {
-        auto w = level->thing_new("skill_secondary_attack1", point(x, y));
+        auto w = level->thing_new("skill_double_strike1", point(x, y));
         t->skill_add(w);
       }
 

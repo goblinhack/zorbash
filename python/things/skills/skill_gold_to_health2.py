@@ -31,7 +31,7 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.stat_dex_bonus(self, -2)
     my.text_description_long3(self, "Conversion rate is 4 gold per turn to 2 health.")
-    my.text_description_very_short(self, "GldToHp 2")
+    my.text_description_very_short(self, "GoldtoHp2")
     my.skill_replaces(self, "skill_gold_to_health1")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)

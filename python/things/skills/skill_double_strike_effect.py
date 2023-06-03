@@ -26,7 +26,7 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="skill_secondary_attack_effect")
+    tp_init(name="skill_double_strike_effect")
 
 
 init()
