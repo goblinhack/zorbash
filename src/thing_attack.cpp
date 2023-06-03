@@ -1602,7 +1602,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         }
 
         if (attack_eater()) {
-          if (victim->is_dead()) {
+          if (victim->is_dead_or_dying()) {
             health_boost(victim, victim->nutrition_get());
             hunger_boost(victim->nutrition_get());
           }
