@@ -1,5 +1,6 @@
 import my
 import tp
+import skill_artful_dodging0
 
 self = None
 
@@ -22,25 +23,13 @@ def tp_init(name, text_long_name, text_short_name):
     global self
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.gfx_ascii_shown(self, True)
-    my.is_auto_activated(self, True)
-    my.is_loggable(self, True)
-    my.is_skill(self, True)
-    my.is_tickable(self, True)
-    my.on_tick_when_activated_do(self, "me.on_tick_when_activated()")
-    my.skill_base_name(self, "skill_artful_dodging")
-    my.skill_replaces(self, "skill_artful_dodging1")
     my.stat_def_bonus(self, 1)
     my.stat_dex_bonus(self, 2)
-    my.text_description_long2(self, "As a result of your training you will be able to recover stamina with a 20 percent chance per move.")
-    my.text_description_long(self, "Artfully dodging blows that rain down upon you with enhanced defense and dexterity bonuses.")
-    my.text_description_short(self, "Artful dodging skill.")
+    my.skill_replaces(self, "skill_artful_dodging1")
+    my.text_description_long3(self, "Stamina will be recovered at a rate of 1 with a 20 percent chance per move.")
     my.text_description_very_short(self, "ArtDodge2")
-    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
-    my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
-    my.tile(self, tile="skill_artful_dodging_activated")
-    my.tile(self, tile="skill_artful_dodging")
+    skill_artful_dodging0.tp_init(self)
     my.tp_update(self)
 
 
