@@ -1,5 +1,6 @@
 import my
 import tp
+import skill_rage0
 
 self = None
 
@@ -39,25 +40,16 @@ def tp_init(name, text_long_name, text_short_name):
     global self
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.gfx_ascii_shown(self, True)
-    my.is_loggable(self, True)
-    my.is_skill(self, True)
-    my.is_tickable(self, True)
-    my.on_tick_when_activated_do(self, "me.on_tick_when_activated()")
-    my.on_tick_when_deactivated_do(self, "me.on_tick_when_deactivated()")
-    my.on_use_do(self, "me.on_use()")
-    my.skill_base_name(self, "skill_rage")
     my.stat_att_bonus(self, 2)
     my.stat_str_bonus(self, 2)
-    my.text_description_long2(self, "When activated your stamina will drain rapidly.")
-    my.text_description_long(self, "While raging you gain 2 damage points per attack and gain additional strength bonuses.")
-    my.text_description_short(self, "Rage skill.")
+    my.text_description_long3(self, "While raging you gain 2 damage points per attack and gain additional strength bonuses.")
+    my.text_description_long4(self, "Raging will auto activate at 10 percent of your health.")
     my.text_description_very_short(self, "Rage    1")
-    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
-    my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
     my.tile(self, tile="skill_rage_activated")
     my.tile(self, tile="skill_rage")
+
+    skill_rage0.tp_init(self)
     my.tp_update(self)
 
 
