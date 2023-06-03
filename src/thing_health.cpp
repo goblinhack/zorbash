@@ -14,7 +14,7 @@ int Thing::health_boost(Thingp victim, int v)
   }
 
   //
-  // So carcas creepers can consume each other
+  // So carcass creepers can consume each other
   //
   if (v < 0) {
     if (victim && victim->is_poisonous_danger_level()) {
