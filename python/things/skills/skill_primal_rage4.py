@@ -6,7 +6,7 @@ self = None
 
 
 def on_tick_when_deactivated(owner, skill, x, y):
-    if owner and (my.thing_health(owner) < my.thing_health_max(owner) / 10):
+    if owner and (my.thing_health(owner) < my.thing_health_max(owner) / 20):
         my.thing_raging_set(owner, True)
         if my.thing_is_player(owner):
             my.thing_msg(owner, "%%fg=red$You feel primal rage coursing through your veins!%%fg=reset$")
@@ -18,9 +18,9 @@ def on_tick_when_deactivated(owner, skill, x, y):
 
 def on_tick_when_activated(owner, skill, x, y):
     if owner:
-        if (my.thing_health(owner) < my.thing_health_max(owner) / 10):
-            if my.pcg_randint(1, 100) < 10:
-                my.thing_stamina_decr(owner, 5)
+        if (my.thing_health(owner) < my.thing_health_max(owner) / 25):
+            if my.pcg_randint(1, 100) < 5:
+                my.thing_stamina_decr(owner, )
         else:
             my.thing_raging_set(owner, False)
             if my.thing_is_player(owner):
@@ -30,7 +30,7 @@ def on_tick_when_activated(owner, skill, x, y):
 
 def on_use(owner, skill, target, x, y):
     my.spawn_using_items_radius_range(owner, skill, target, "skill_primal_rage_effect")
-    bonus = 2
+    bonus = 6
     my.thing_dmg_current_incr(owner, bonus)
     if my.thing_is_player(owner):
         my.thing_msg(owner, f"%%fg=red$You rage hit for {bonus} additional damage.%%fg=reset$")
@@ -40,12 +40,14 @@ def tp_init(name, text_long_name, text_short_name):
     global self
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.stat_att_bonus(self, 2)
-    my.stat_str_bonus(self, 2)
-    my.text_description_long3(self, "While raging you gain 2 damage points per attack and gain additional strength bonuses.")
-    my.text_description_long4(self, "Raging will auto activate at 10 percent of your health.")
-    my.text_description_long5(self, "With this level of skill have a 10 percent chance of draining stamina.")
-    my.text_description_very_short(self, "PrimRage1")
+    my.stat_att_bonus(self, 3)
+    my.stat_str_bonus(self, 3)
+    my.stat_def_bonus(self, 1)
+    my.skill_replaces(self, "skill_primal_rage3")
+    my.text_description_long3(self, "While raging you gain 6 damage points per attack and gain additional strength bonuses.")
+    my.text_description_long4(self, "Raging will auto activate at 20 percent of your health and deactivate at 25 percent.")
+    my.text_description_long5(self, "With this level of skill you only have a 5 percent chance of draining stamina giving you near tireless rage.")
+    my.text_description_very_short(self, "TireRage3")
     # end sort marker
     my.tile(self, tile="skill_primal_rage_activated")
     my.tile(self, tile="skill_primal_rage")
@@ -55,7 +57,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="skill_primal_rage1", text_long_name="primal rage 1", text_short_name="primal rage 1")
+    tp_init(name="skill_primal_rage4", text_long_name="tireless rage 1", text_short_name="tireless rage 1")
 
 
 init()
