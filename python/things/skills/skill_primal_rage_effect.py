@@ -26,7 +26,7 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="skill_rage_effect")
+    tp_init(name="skill_primal_rage_effect")
 
 
 init()

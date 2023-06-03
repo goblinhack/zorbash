@@ -122,8 +122,8 @@ void Game::place_player(void)
         level->thing_new("potion_health", point(x - 2, y));
       }
 
-      if (1) {
-        auto w = level->thing_new("skill_rage1", point(x, y));
+      if (0) {
+        auto w = level->thing_new("skill_primal_rage1", point(x, y));
         t->skill_add(w);
       }
       if (0) {

@@ -1,6 +1,6 @@
 import my
 import tp
-import skill_rage0
+import skill_primal_rage0
 
 self = None
 
@@ -29,7 +29,7 @@ def on_tick_when_activated(owner, skill, x, y):
 
 
 def on_use(owner, skill, target, x, y):
-    my.spawn_using_items_radius_range(owner, skill, target, "skill_rage_effect")
+    my.spawn_using_items_radius_range(owner, skill, target, "skill_primal_rage_effect")
     bonus = 2
     my.thing_dmg_current_incr(owner, bonus)
     if my.thing_is_player(owner):
@@ -44,17 +44,17 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_str_bonus(self, 2)
     my.text_description_long3(self, "While raging you gain 2 damage points per attack and gain additional strength bonuses.")
     my.text_description_long4(self, "Raging will auto activate at 10 percent of your health.")
-    my.text_description_very_short(self, "Rage    1")
+    my.text_description_very_short(self, "PrimRage1")
     # end sort marker
-    my.tile(self, tile="skill_rage_activated")
-    my.tile(self, tile="skill_rage")
+    my.tile(self, tile="skill_primal_rage_activated")
+    my.tile(self, tile="skill_primal_rage")
 
-    skill_rage0.tp_init(self)
+    skill_primal_rage0.tp_init(self)
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="skill_rage1", text_long_name="rage 1", text_short_name="rage 1")
+    tp_init(name="skill_primal_rage1", text_long_name="primal rage 1", text_short_name="primal rage 1")
 
 
 init()
