@@ -31,24 +31,6 @@ int Thing::spawn_group_size(void)
   return (tp()->spawn_group_size_dice().roll());
 }
 
-const Dice &Thing::lifespan_dice(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->lifespan_dice());
-}
-
-const std::string &Thing::lifespan_dice_str(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->lifespan_dice_str());
-}
-
-int Thing::lifespan_initial(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->lifespan_dice().roll());
-}
-
 float Thing::distance_avoid_get(void)
 {
   TRACE_NO_INDENT();
@@ -4500,12 +4482,6 @@ const std::string &Thing::on_hit_and_now_dead_do(void)
 {
   TRACE_NO_INDENT();
   return (tp()->on_hit_and_now_dead_do());
-}
-
-const std::string &Thing::on_lifespan_tick_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_lifespan_tick_do());
 }
 
 const std::string &Thing::on_hit_dodge_do(void)

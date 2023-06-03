@@ -32,7 +32,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_con_bonus(self, 1)
     my.stat_dex_bonus(self, -3)
     my.text_description_long3(self, "Conversion rate is 6 gold per turn to 3 health.")
-    my.text_description_very_short(self, "GoldtoHp3")
+    my.text_description_very_short(self, "GoldToHp3")
     my.skill_replaces(self, "skill_gold_to_health2")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)

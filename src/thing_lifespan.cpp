@@ -123,3 +123,27 @@ int Thing::lifespan_incr(void)
   new_infop();
   return (infop()->lifespan++);
 }
+
+const Dice &Thing::lifespan_dice(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->lifespan_dice());
+}
+
+const std::string &Thing::lifespan_dice_str(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->lifespan_dice_str());
+}
+
+int Thing::lifespan_initial(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->lifespan_dice().roll());
+}
+
+const std::string &Thing::on_lifespan_tick_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_lifespan_tick_do());
+}
