@@ -36,14 +36,14 @@ void Game::place_player(void)
         t->carry(k, carry_options);
       }
       if (1) {
-        auto w = level->thing_new("dagger", point(x, y));
-        t->carry(w, carry_options);
-      }
-      if (1) {
         auto w = level->thing_new("sword_wood", point(x, y));
         t->carry(w, carry_options);
       }
       if (1) {
+        auto w = level->thing_new("dagger", point(x, y));
+        t->carry(w, carry_options);
+      }
+      if (0) {
         auto w = level->thing_new("potion_health", point(x, y));
         t->carry(w, carry_options);
       }
