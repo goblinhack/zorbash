@@ -43,7 +43,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="skill_double_strike3", text_long_name="secondary attack 3", text_short_name="double attack 3")
+    tp_init(name="skill_double_strike3", text_long_name="double strike 3", text_short_name="double attack 3")
 
 
 init()

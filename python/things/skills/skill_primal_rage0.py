@@ -7,7 +7,7 @@ def tp_init(self):
     my.is_loggable(self, True)
     my.is_skill(self, True)
     my.is_tickable(self, True)
-    my.on_tick_when_activated_do(self, "me.on_tick_when_activated()")
+    my.on_tick_when_activated_do(self, "mg e.on_tick_when_activated()")
     my.on_tick_when_deactivated_do(self, "me.on_tick_when_deactivated()")
     my.on_use_do(self, "me.on_use()")
     my.skill_base_name(self, "skill_primal_rage")

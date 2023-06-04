@@ -26,10 +26,10 @@ static PyObject *thing_hit_common(PyObject *obj, PyObject *args, PyObject *keywd
     Py_RETURN_NONE;
   }
 
-  Thingp owner = game->thing_find_optional(owner_id);
+  Thingp real_hitter = game->thing_find_optional(owner_id);
 
   if (! hitter_id) {
-    ERR("%s: No hitter thing ID set", __FUNCTION__);
+    ERR("%s: No real_hitter thing ID set", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
@@ -60,7 +60,7 @@ static PyObject *thing_hit_common(PyObject *obj, PyObject *args, PyObject *keywd
   attack_options.thrown         = thrown ? true : false;
   attack_options.crit           = crit ? true : false;
   attack_options.attack[ type ] = true;
-  attack_options.real_hitter    = owner;
+  attack_options.real_hitter    = real_hitter;
 
   if (attack_options.real_hitter) {
     if (damage) {
