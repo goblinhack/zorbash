@@ -15,6 +15,6 @@ def tp_init(self):
     my.text_description_short(self, "Double strike skill.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
-    my.tile(self, tile="skill_double_strike_activated")
-    my.tile(self, tile="skill_double_strike")
     # end sort marker
+    my.tile(self, tile="skill_double_strike")
+    my.tile(self, tile="skill_double_strike_activated")

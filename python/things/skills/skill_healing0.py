@@ -12,7 +12,7 @@ def tp_init(self):
     my.text_description_long(self, "With this skill you are able to heal yourself quickly at the expense of your stamina.")
     my.text_description_short(self, "Accelerated healing.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
-    my.tile(self, tile="skill_healing")
-    my.tile(self, tile="skill_healing_activated")
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
+    my.tile(self, tile="skill_healing_activated")
+    my.tile(self, tile="skill_healing")

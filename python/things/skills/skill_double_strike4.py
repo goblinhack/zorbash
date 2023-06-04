@@ -35,7 +35,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.skill_replaces(self, "skill_double_strike3")
     my.text_description_long2(self, "The additional attack will be 75 percent of the initial attack.")
     my.text_description_long3(self, "When activated, 10 percent chance of draining stamina by 1 per move.")
-    my.text_description_short(self, "Double strike skill.")
+    my.text_description_short(self, "double strike skill.")
     my.text_description_very_short(self, "DbStrike4")
     # end sort marker
     skill_double_strike0.tp_init(self)

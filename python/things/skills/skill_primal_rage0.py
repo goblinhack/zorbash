@@ -13,9 +13,9 @@ def tp_init(self):
     my.skill_base_name(self, "skill_primal_rage")
     my.text_description_long2(self, "When raging your stamina will drain rapidly.")
     my.text_description_long(self, "Engage your primal spirit with the ability to rage when low on health. In such a state of frenzy you will gain strength, to-hit and damage bonuses.")
-    my.text_description_short(self, "Primal rage skill.")
+    my.text_description_short(self, "primal rage skill.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
+    # end sort marker
     my.tile(self, tile="skill_primal_rage_activated")
     my.tile(self, tile="skill_primal_rage")
-    # end sort marker

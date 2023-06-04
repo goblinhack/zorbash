@@ -15,7 +15,7 @@ def tp_init(self):
     my.text_description_long(self, "With devotion to the god, gods, or whatever it is that you worship, you willingly sacrifice life energy in the pursuit of maximal damage.")
     my.text_description_short(self, "Devoted thrust skill.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
-    my.tile(self, tile="skill_devoted_thrust")
-    my.tile(self, tile="skill_devoted_thrust_activated")
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
+    my.tile(self, tile="skill_devoted_thrust_activated")
+    my.tile(self, tile="skill_devoted_thrust")

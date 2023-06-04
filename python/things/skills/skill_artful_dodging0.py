@@ -16,7 +16,7 @@ def tp_init(self):
     my.text_description_long(self, "This skill allows you to artfully dodge blows that rains down upon you with cat-like reflexes.")
     my.text_description_short(self, "Artful dodging skill.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
-    my.tile(self, tile="skill_artful_dodging")
-    my.tile(self, tile="skill_artful_dodging_activated")
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
+    my.tile(self, tile="skill_artful_dodging_activated")
+    my.tile(self, tile="skill_artful_dodging")

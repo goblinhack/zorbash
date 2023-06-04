@@ -49,8 +49,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.text_description_long5(self, "With this level of skill you only have a 5 percent chance of draining stamina giving you near tireless rage.")
     my.text_description_very_short(self, "TireRage3")
     # end sort marker
-    my.tile(self, tile="skill_primal_rage_activated")
-    my.tile(self, tile="skill_primal_rage")
 
     skill_primal_rage0.tp_init(self)
     my.tp_update(self)
