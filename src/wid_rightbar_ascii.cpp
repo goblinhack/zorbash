@@ -537,7 +537,7 @@ bool wid_rightbar_ascii_create(void)
   //
   // Display the shortcuts
   //
-  if (1) {
+  {
     {
       TRACE_AND_INDENT();
       y_at++;
@@ -591,7 +591,7 @@ bool wid_rightbar_ascii_create(void)
   //
   // Active skills
   //
-  if (1) {
+  {
     bool got_one = false;
 
     for (auto id : itemsp->skills) {
@@ -645,7 +645,7 @@ bool wid_rightbar_ascii_create(void)
   //
   // Inactive skills
   //
-  if (1) {
+  {
     bool got_one = false;
 
     for (auto id : itemsp->skills) {
@@ -699,7 +699,7 @@ bool wid_rightbar_ascii_create(void)
   //
   // Print buffs
   //
-  if (1) {
+  {
     bool    got_one = false;
     ThingId unused;
     FOR_ALL_BUFFS_FOR(player, id)
@@ -750,7 +750,7 @@ bool wid_rightbar_ascii_create(void)
   //
   // Debuffs
   //
-  if (1) {
+  {
     bool    got_one = false;
     ThingId unused;
     FOR_ALL_DEBUFFS_FOR(player, id)

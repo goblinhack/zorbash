@@ -145,6 +145,14 @@ int Thing::total_dmg_for_on_receiving_dmg_drown(Thingp hitter, Thingp real_hitte
     }
   }
 
+  FOR_ALL_SKILLS(item)
+  {
+    auto iter = level->thing_find(item.id);
+    if (iter) {
+      damage = iter->on_owner_receive_dmg_drown(this, hitter, real_hitter, damage);
+    }
+  }
+
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
@@ -260,6 +268,14 @@ int Thing::total_dmg_for_on_attacking_dmg_drown(Thingp victim, int damage)
   }
 
   FOR_ALL_DEBUFFS(item)
+  {
+    auto iter = level->thing_find(item.id);
+    if (iter) {
+      damage = iter->on_owner_attack_dmg_drown(this, victim, damage);
+    }
+  }
+
+  FOR_ALL_SKILLS(item)
   {
     auto iter = level->thing_find(item.id);
     if (iter) {

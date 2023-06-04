@@ -267,6 +267,14 @@ int Thing::total_dmg_for_on_attacking_dmg_necrosis(Thingp victim, int damage)
     }
   }
 
+  FOR_ALL_SKILLS(item)
+  {
+    auto iter = level->thing_find(item.id);
+    if (iter) {
+      damage = iter->on_owner_attack_dmg_necrosis(this, victim, damage);
+    }
+  }
+
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);

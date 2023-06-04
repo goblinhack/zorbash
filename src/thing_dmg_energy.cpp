@@ -145,6 +145,14 @@ int Thing::total_dmg_for_on_receiving_dmg_energy(Thingp hitter, Thingp real_hitt
     }
   }
 
+  FOR_ALL_SKILLS(item)
+  {
+    auto iter = level->thing_find(item.id);
+    if (iter) {
+      damage = iter->on_owner_receive_dmg_energy(this, hitter, real_hitter, damage);
+    }
+  }
+
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
@@ -260,6 +268,14 @@ int Thing::total_dmg_for_on_attacking_dmg_energy(Thingp victim, int damage)
   }
 
   FOR_ALL_DEBUFFS(item)
+  {
+    auto iter = level->thing_find(item.id);
+    if (iter) {
+      damage = iter->on_owner_attack_dmg_energy(this, victim, damage);
+    }
+  }
+
+  FOR_ALL_SKILLS(item)
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
