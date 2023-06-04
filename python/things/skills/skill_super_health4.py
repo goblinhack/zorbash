@@ -19,14 +19,43 @@ def on_tick_when_activated(owner, skill, x, y):
     return False  # did nothing
 
 
+def on_owner_receive_dmg_poison(me, owner, hitter, real_hitter, x, y, damage):
+    new_damage = int(damage / 5)
+    if owner and my.thing_is_player(owner):
+        my.thing_msg(owner, f"Your superior health reduces the poison damage to {new_damage}.")
+    return new_damage
+
+
+def on_owner_receive_dmg_cold(me, owner, hitter, real_hitter, x, y, damage):
+    new_damage = int(damage / 5)
+    if owner and my.thing_is_player(owner):
+        my.thing_msg(owner, f"Your superior health reduces the cold damage to {new_damage}.")
+    return new_damage
+
+
+def on_owner_receive_dmg_necrosis(me, owner, hitter, real_hitter, x, y, damage):
+    new_damage = int(damage / 5)
+    if owner and my.thing_is_player(owner):
+        my.thing_msg(owner, f"Your superior health reduces the necrosis damage to {new_damage}.")
+    return new_damage
+
+
+def on_owner_receive_dmg_stat_con(me, owner, hitter, real_hitter, x, y, damage):
+    new_damage = int(damage / 5)
+    if owner and my.thing_is_player(owner):
+        my.thing_msg(owner, f"Your superior health reduces the constitution damage to {new_damage}.")
+    return new_damage
+
+
 def tp_init(name, text_long_name, text_short_name):
     global self
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.stat_con_bonus(self, 6)
-    my.text_description_long3(self, "You will gain 8 stamina and 4 health at a 75 percent chance per turn.")
-    my.text_description_very_short(self, "SupHealt4")
     my.skill_replaces(self, "skill_super_health3")
+    my.stat_con_bonus(self, 6)
+    my.text_description_long4(self, "You will gain 8 stamina and 4 health at a 75 percent chance per turn.")
+    my.text_description_long5(self, "Cold, poison, necrosis and constitution damage will be reduced by 80 percent.")
+    my.text_description_very_short(self, "SupHealt4")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker

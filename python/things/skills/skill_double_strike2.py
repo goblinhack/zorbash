@@ -30,9 +30,9 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.dmg_num_of_attacks(self, 2)
+    my.skill_replaces(self, "skill_double_strike1")
     my.stat_def_bonus(self, -1)
     my.stat_str_bonus(self, 1)
-    my.skill_replaces(self, "skill_double_strike1")
     my.text_description_long2(self, "The additional attack will be 30 percent of the initial attack.")
     my.text_description_long3(self, "When activated, 10 percent chance of draining stamina by 1 per move.")
     my.text_description_short(self, "Double strike skill.")

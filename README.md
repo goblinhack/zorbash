@@ -202,11 +202,11 @@ Content:
 <!-- begin type marker -->
 - 103 x monsters
 - 52 x food
-- 22 x skills
 - 19 x treasure
 - 13 x weapons
 - 13 x items
 - 12 x buffs
+- 9 x skills
 - 6 x staffs
 - 6 x shield
 - 6 x boots

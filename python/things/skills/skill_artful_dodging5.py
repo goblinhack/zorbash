@@ -23,9 +23,9 @@ def tp_init(name, text_long_name, text_short_name):
     global self
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
+    my.skill_replaces(self, "skill_artful_dodging4")
     my.stat_def_bonus(self, 3)
     my.stat_dex_bonus(self, 3)
-    my.skill_replaces(self, "skill_artful_dodging4")
     my.text_description_long3(self, "Stamina will be recovered at a rate of 1 with a 50 percent chance per move.")
     my.text_description_very_short(self, "ArtDodge5")
     # end sort marker

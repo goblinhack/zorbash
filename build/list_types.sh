@@ -9,7 +9,7 @@ IN=README.md
 
 for i in amulets armor boots buffs cloaks debuffs doors food gauntlets items keys mobs monsters player potions rings shield skills staffs treasure weapons traps
 do
-  num_of_this_type=$(ls python/things/$i/*.py | grep -v swing | grep -v carry | grep -v radial | grep -v laser | grep -v effect | grep -v projectile | wc -l)
+  num_of_this_type=$(ls python/things/$i/*.py | grep -v "skill.*[12345]" | grep -v swing | grep -v carry | grep -v radial | grep -v laser | grep -v effect | grep -v projectile | wc -l)
   echo "- $num_of_this_type x $i" >> $PAYLOAD
 done
 

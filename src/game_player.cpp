@@ -325,12 +325,12 @@ void Game::place_player(void)
         d->wake("");
       }
       if (0) {
+        level->thing_new("scorpion_death", point(x + 2, y + 1));
         level->thing_new("yeti", point(x + 2, y + 1));
         level->thing_new("mantisman", point(x + 2, y + 1));
         level->thing_new("iceman", point(x + 2, y + 1));
         level->thing_new("molekin", point(x + 2, y + 1));
         level->thing_new("gnome_rock", point(x + 2, y + 1));
-        level->thing_new("scorpion_death", point(x + 2, y + 1));
         level->thing_new("bloodbug", point(x + 2, y + 1));
         level->thing_new("death_hornet", point(x + 2, y + 1));
         level->thing_new("bear_undead", point(x + 2, y + 1));

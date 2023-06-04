@@ -40,9 +40,9 @@ def tp_init(name, text_long_name, text_short_name):
     global self
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
+    my.skill_replaces(self, "skill_primal_rage2")
     my.stat_att_bonus(self, 3)
     my.stat_str_bonus(self, 3)
-    my.skill_replaces(self, "skill_primal_rage2")
     my.text_description_long3(self, "While raging you gain 6 damage points per attack and gain additional strength bonuses. This is the maximum ability of primal raging. Beyond this, other types of rage specialization become possible.")
     my.text_description_long4(self, "Raging will auto activate at 20 percent of your health and deactivate at 25 percent.")
     my.text_description_long5(self, "With this level of skill have a 10 percent chance of draining stamina.")

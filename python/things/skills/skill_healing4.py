@@ -27,10 +27,10 @@ def tp_init(name, text_long_name, text_short_name):
     global self
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.stat_con_bonus(self, 4)
-    my.text_description_long3(self, "Conversion rate is 8 stamina per turn to 4 health.")
-    my.text_description_very_short(self, "AccHeal 4")
     my.skill_replaces(self, "skill_healing3")
+    my.stat_con_bonus(self, 4)
+    my.text_description_long2(self, "Conversion rate is 8 stamina per turn to 4 health.")
+    my.text_description_very_short(self, "AccHeal 4")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
