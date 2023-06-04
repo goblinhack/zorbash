@@ -479,38 +479,40 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
     }
   }
 
-  if (is_currently_invisible && is_player()) {
-    static uint8_t a    = 128;
-    static int     step = 10;
-    static int     dir  = 1;
-    a += dir * step;
-    if (a > 250) {
-      dir = -1;
-    } else if (a < 100) {
-      dir = 1;
+  if (! is_dead) {
+    if (is_currently_invisible && is_player()) {
+      static uint8_t a    = 128;
+      static int     step = 10;
+      static int     dir  = 1;
+      a += dir * step;
+      if (a > 250) {
+        dir = -1;
+      } else if (a < 100) {
+        dir = 1;
+      }
+      color outline_color = WHITE;
+      outline_color.a     = a;
+      ascii_set_bg(p.x, p.y, outline_color);
+      ascii_set_fg(p.x, p.y, WHITE);
     }
-    color outline_color = WHITE;
-    outline_color.a     = a;
-    ascii_set_bg(p.x, p.y, outline_color);
-    ascii_set_fg(p.x, p.y, WHITE);
-  }
 
-  if (! is_currently_invisible || is_player()) {
-    if (is_raging()) {
-      if ((this == game->current_wid_thing_info) || (level->cursor && (this->curr_at == level->cursor->curr_at))) {
-        static uint8_t a    = 128;
-        static int     step = 30;
-        static int     dir  = 1;
-        a += dir * step;
-        if (a > 250) {
-          dir = -1;
-        } else if (a < 100) {
-          dir = 1;
+    if (! is_currently_invisible || is_player()) {
+      if (is_raging()) {
+        if ((this == game->current_wid_thing_info) || (level->cursor && (this->curr_at == level->cursor->curr_at))) {
+          static uint8_t a    = 128;
+          static int     step = 30;
+          static int     dir  = 1;
+          a += dir * step;
+          if (a > 250) {
+            dir = -1;
+          } else if (a < 100) {
+            dir = 1;
+          }
+          color outline_color = ORANGE;
+          outline_color.a     = a;
+          ascii_set_bg(p.x, p.y, outline_color);
+          ascii_set_fg(p.x, p.y, WHITE);
         }
-        color outline_color = ORANGE;
-        outline_color.a     = a;
-        ascii_set_bg(p.x, p.y, outline_color);
-        ascii_set_fg(p.x, p.y, WHITE);
       }
     }
   }

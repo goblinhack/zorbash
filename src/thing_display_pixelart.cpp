@@ -827,26 +827,10 @@ void Thing::blit_outline_highlight(const Tilep tile, const point blit_tl, const 
 {
   TRACE_NO_INDENT();
 
-  if (is_currently_invisible && is_player()) {
-    static uint8_t a    = 128;
-    static int     step = 2;
-    static int     dir  = 1;
-    a += dir * step;
-    if (a > 250) {
-      dir = -1;
-    } else if (a < 50) {
-      dir = 1;
-    }
-
-    color outline_color = WHITE;
-    outline_color.a     = a;
-    tile_blit_outline_only(tile, blit_tl, blit_br, outline_color);
-  }
-
-  if (! is_currently_invisible || is_player()) {
-    if (is_raging()) {
+  if (! is_dead) {
+    if (is_currently_invisible && is_player()) {
       static uint8_t a    = 128;
-      static int     step = 5;
+      static int     step = 2;
       static int     dir  = 1;
       a += dir * step;
       if (a > 250) {
@@ -855,9 +839,27 @@ void Thing::blit_outline_highlight(const Tilep tile, const point blit_tl, const 
         dir = 1;
       }
 
-      color outline_color = ORANGE;
+      color outline_color = WHITE;
       outline_color.a     = a;
       tile_blit_outline_only(tile, blit_tl, blit_br, outline_color);
+    }
+
+    if (! is_currently_invisible || is_player()) {
+      if (is_raging()) {
+        static uint8_t a    = 128;
+        static int     step = 5;
+        static int     dir  = 1;
+        a += dir * step;
+        if (a > 250) {
+          dir = -1;
+        } else if (a < 50) {
+          dir = 1;
+        }
+
+        color outline_color = ORANGE;
+        outline_color.a     = a;
+        tile_blit_outline_only(tile, blit_tl, blit_br, outline_color);
+      }
     }
   }
 
