@@ -1439,8 +1439,8 @@ def init_tiles_16x16_1():
         "",
         ############################################################
         "medal_of_valor",
-        "bag_s",
-        "bag_l",
+        "bag_small",
+        "bag_large",
         "thunderstone",
         "enchantstone",
         "skillstone",

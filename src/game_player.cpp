@@ -272,11 +272,11 @@ void Game::place_player(void)
         t->carry(w, carry_options);
       }
       if (0) {
-        auto b = level->thing_new("bag_s", point(x, y));
+        auto b = level->thing_new("bag_small", point(x, y));
         t->carry(b, carry_options);
       }
-      if (0) {
-        level->thing_new("bag_s", point(x + 1, y));
+      if (1) {
+        level->thing_new("bag_large", point(x + 1, y));
       }
       if (0) {
         auto b = level->thing_new("enchantstone", point(x, y));

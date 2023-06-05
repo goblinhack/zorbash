@@ -45,8 +45,8 @@ def tp_init(name, text_long_name):
     my.is_throwable(self, True)
     my.is_treasure_class_A(self, True)
     my.is_treasure(self, True)
-    my.item_height(self, 8)
-    my.item_width(self, 8)
+    my.item_height(self, 4)
+    my.item_width(self, 4)
     my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.on_death_drop_all_items(self, True)
@@ -60,12 +60,12 @@ def tp_init(name, text_long_name):
 
     my.tile(self,
             ascii_fg_char="down_triangle", ascii_bg_col_name="", ascii_fg_col_name="white",
-            tile="bag_l", delay_ms=1000)
+            tile="bag_large", delay_ms=1000)
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="bag_l", text_long_name="large bag")
+    tp_init(name="bag_large", text_long_name="large bag")
 
 
 init()

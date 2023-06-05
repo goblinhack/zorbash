@@ -1,7 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - bag collect fail                                                                                                                           -->
-<!-- - shld in enchant window                                                                                                                     -->
 <!-- - heal skill on level 2 of pondscum not working                                                                                              -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
