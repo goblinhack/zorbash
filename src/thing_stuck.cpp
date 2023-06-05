@@ -32,7 +32,7 @@ void Thing::on_stuck(void)
       mod = name();
     }
 
-    dbg2("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(), (int) curr_at.x,
+    dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(), (int) curr_at.x,
          (int) curr_at.y);
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
@@ -254,7 +254,22 @@ bool Thing::is_stuck_check(void)
 
 void Thing::is_stuck_update(void)
 {
-  dbg("Stuck check");
+  //
+  // Don't do silly things like have stuck skills.
+  //
+  auto owner = top_owner();
+  if (owner) {
+    return;
+  }
+
+  //
+  // Plants, grass etc...
+  //
+  if (! is_moveable()) {
+    return;
+  }
+
+  dbg2("Stuck check");
   TRACE_AND_INDENT();
 
   //

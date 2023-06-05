@@ -1,5 +1,6 @@
 #!/bin/bash
 # Credit to https://janakerman.co.uk/docker-git-clone/ for the SSH idea
+cd ..
 cd build/docker
 DOCKER_FILE=debian.dockerfile
 DOCKER_IMAGE=zorbash.debian

@@ -35,7 +35,7 @@ void Thing::on_enchant(void)
       mod = name();
     }
 
-    dbg2("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
+    dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
@@ -90,7 +90,7 @@ bool Thing::enchant_with_stone(Thingp what)
   for (const auto t : carried_item_only_vector()) {
     if (t->is_enchantstone()) {
       t->is_drained = true;
-      t->dead("used");
+      t->dead("drained and used");
       found = true;
       break;
     }

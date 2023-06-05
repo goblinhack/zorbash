@@ -267,7 +267,7 @@ bool Thing::skill_add(Tpp what)
   for (const auto t : carried_item_only_vector()) {
     if (t->is_skillstone()) {
       t->is_drained = true;
-      t->dead("used");
+      t->dead("drained and used");
       found = true;
       break;
     }

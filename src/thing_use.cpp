@@ -36,7 +36,7 @@ void Thing::on_use(Thingp what)
       mod = what->name();
     }
 
-    dbg2("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, 0U, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
@@ -72,7 +72,7 @@ void Thing::on_swing(Thingp what)
       mod = what->name();
     }
 
-    dbg2("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
@@ -109,8 +109,8 @@ void Thing::on_use(Thingp what, Thingp target)
         mod = what->name();
       }
 
-      dbg2("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
-           what->to_short_string().c_str(), target->to_short_string().c_str());
+      dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
+          what->to_short_string().c_str(), target->to_short_string().c_str());
 
       py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, target->id.id, (unsigned int) curr_at.x,
                       (unsigned int) curr_at.y);
@@ -146,7 +146,7 @@ void Thing::on_final_use(Thingp what)
       mod = what->name();
     }
 
-    dbg2("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, 0U, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
@@ -185,8 +185,8 @@ void Thing::on_final_use(Thingp what, Thingp target)
         mod = what->name();
       }
 
-      dbg2("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
-           what->to_short_string().c_str(), target->to_short_string().c_str());
+      dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
+          what->to_short_string().c_str(), target->to_short_string().c_str());
 
       py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, target->id.id, (unsigned int) curr_at.x,
                       (unsigned int) curr_at.y);
@@ -231,20 +231,32 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
     }
 
     //
-    // Stamina drain on use
+    // Stamina drain on use?
     //
-    if (d20_le(stat_con_total())) {
+    if (what->stamina_drain_on_using()) {
       //
-      // Only half stamina damage if you pass con roll
+      // Yes.
       //
-      auto s = what->stamina_drain_on_using();
-      if (s) {
-        s /= 2;
-        if (! s) {
-          s = 1;
+      if (d20_le(stat_con_total())) {
+        //
+        // Only half stamina damage if you pass con roll
+        //
+        auto s = what->stamina_drain_on_using();
+        if (s) {
+          s /= 2;
+          if (! s) {
+            s = 1;
+          }
+        }
+        if (s) {
+          stamina_decr(s);
         }
       }
-      stamina_decr(s);
+    }
+
+    if (what->is_skill()) {
+      dbg("Used skill %s", what->to_short_string().c_str());
+      return;
     }
 
     auto existing_owner = what->top_owner();
@@ -260,6 +272,9 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
       }
     }
 
+    //
+    // Monsters do not deplete staffs. Because.
+    //
     if (is_monst()) {
       dbg("Used %s (do not deplete %d charges)", what->to_short_string().c_str(), what->charge_count());
       return;

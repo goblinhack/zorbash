@@ -33,7 +33,7 @@ bool Thing::on_tick(void)
     }
 
     auto owner = top_owner();
-    dbg2("Call %s.%s(owner=%s, item=%s, %d, %d)", mod.c_str(), fn.c_str(),
+    dbg("Call %s.%s(owner=%s, item=%s, %d, %d)", mod.c_str(), fn.c_str(),
          owner ? owner->to_short_string().c_str() : "<>", to_string().c_str(), (unsigned int) curr_at.x,
          (unsigned int) curr_at.y);
     return py_call_bool_fn(mod.c_str(), fn.c_str(), owner ? owner->id.id : 0, id.id, (unsigned int) curr_at.x,

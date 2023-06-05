@@ -69,7 +69,7 @@ int Thing::on_owner_receive_dmg_cold(Thingp owner, Thingp hitter, Thingp real_hi
       mod = name();
     }
 
-    dbg2("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
+    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
          owner->to_short_string().c_str(), hitter->to_short_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, hitter->id.id, real_hitter->id.id,
@@ -109,7 +109,7 @@ int Thing::on_receiving_dmg_cold(Thingp hitter, Thingp real_hitter, int damage)
       mod = name();
     }
 
-    dbg2("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
+    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
          hitter->to_short_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) curr_at.x,
@@ -193,7 +193,7 @@ int Thing::on_attacking_dmg_cold(Thingp victim, int damage)
       mod = name();
     }
 
-    dbg2("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
+    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
          victim->to_short_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, victim->id.id, (unsigned int) curr_at.x,
@@ -239,7 +239,7 @@ int Thing::on_owner_attack_dmg_cold(Thingp owner, Thingp victim, int damage)
       mod = name();
     }
 
-    dbg2("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
+    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
          owner->to_short_string().c_str(), victim->to_short_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, victim->id.id, (unsigned int) curr_at.x,

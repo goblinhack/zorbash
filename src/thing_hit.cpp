@@ -41,7 +41,7 @@ void Thing::on_hit_and_still_alive(Thingp hitter,      // an arrow / monst /...
       mod = name();
     }
 
-    dbg2("Call %s.%s(%s, %s, %s, crit=%d, damage=%d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
+    dbg("Call %s.%s(%s, %s, %s, crit=%d, damage=%d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
          hitter->to_short_string().c_str(), real_hitter->to_short_string().c_str(), crit, damage);
 
     //
@@ -78,7 +78,7 @@ void Thing::on_hit_and_now_dead(Thingp hitter,      // an arrow / monst /...
       mod = name();
     }
 
-    dbg2("Call %s.%s(%s, %s, %s, crit=%d, damage=%d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
+    dbg("Call %s.%s(%s, %s, %s, crit=%d, damage=%d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
          hitter->to_short_string().c_str(), real_hitter->to_short_string().c_str(), crit, damage);
 
     //
@@ -120,7 +120,7 @@ void Thing::on_hit_dodge_do(Thingp hitter)
       mod = name();
     }
 
-    dbg2("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), hitter->to_short_string().c_str());
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), hitter->to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
@@ -155,7 +155,7 @@ void Thing::on_you_nat_attack_attempt(void)
       mod = name();
     }
 
-    dbg2("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
+    dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
@@ -189,7 +189,7 @@ void Thing::on_you_nat_attack_success(void)
       mod = name();
     }
 
-    dbg2("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
+    dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
