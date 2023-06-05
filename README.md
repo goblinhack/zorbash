@@ -1,11 +1,30 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - bag collect fail                                                                                                                           -->
+<!-- - shld in enchant window                                                                                                                     -->
+<!-- - heal skill on level 2 of pondscum not working                                                                                              -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
 <!-- ------                                                                                                                                       -->
 <!-- sudo operf ./zorbash-game --playername discobob --seed victimlake --nodebug --quick-start                                                    -->
 <!-- opreport  --demangle=smart --symbols| less                                                                                                   -->
+<!-- ------                                                                                                                                       -->
+<!--                                                                                                                                              -->
+<!-- Skills                                                                                                                                       -->
+<!-- ------                                                                                                                                       -->
+<!-- - skill, dodge                                                                                                                               -->
+<!-- - skill, instakill, once per level                                                                                                           -->
+<!-- - skill, heroic charge, rush enemy                                                                                                           -->
+<!-- - skill, guaranteed hit, but you have no defense in the next move                                                                            -->
+<!-- - skill, whirl attack, attack 2 or 3 enemies                                                                                                 -->
+<!-- - skill, defensive mode, recover stamina                                                                                                     -->
+<!-- - skill, kneecap, hobble enemy                                                                                                               -->
+<!-- - skill, switch to defensive                                                                                                                 -->
+<!-- - skill, blind strike, attack the eyes                                                                                                       -->
+<!-- - skill, slash and roll                                                                                                                      -->
+<!-- - skill, slash and jump                                                                                                                      -->
+<!-- - skill, spring attack, give up a round for 2.5 times damage                                                                                 -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
@@ -17,8 +36,6 @@
 <!-- - paralysis dart                                                                                                                             -->
 <!-- - cloak of slime                                                                                                                             -->
 <!-- - sword of slime                                                                                                                             -->
-<!-- - vampiric damage                                                                                                                            -->
-<!-- - vampiric skill                                                                                                                             -->
 <!-- - spider web spawn small spiders?                                                                                                            -->
 <!-- - monsters with random buffs like vampirism would be interesting                                                                             -->
 <!-- - chaos bell of summoning                                                                                                                    -->
@@ -75,28 +92,6 @@
 <!-- Traps                                                                                                                                        -->
 <!-- ------                                                                                                                                       -->
 <!-- - moving blocks?                                                                                                                             -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
-<!-- Sound                                                                                                                                        -->
-<!-- ------                                                                                                                                       -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
-<!-- Skills                                                                                                                                       -->
-<!-- ------                                                                                                                                       -->
-<!-- - challenging learning spot to acquire skills?                                                                                               -->
-<!-- - skills                                                                                                                                     -->
-<!-- - skill, dodge                                                                                                                               -->
-<!-- - skill, instakill, once per level                                                                                                           -->
-<!-- - skill, heroic charge, rush enemy                                                                                                           -->
-<!-- - skill, guaranteed hit, but you have no defense in the next move                                                                            -->
-<!-- - skill, whirl attack, attack 2 or 3 enemies                                                                                                 -->
-<!-- - skill, defensive mode, recover stamina                                                                                                     -->
-<!-- - skill, kneecap, hobble enemy                                                                                                               -->
-<!-- - skill, switch to defensive                                                                                                                 -->
-<!-- - skill, blind strike, attack the eyes                                                                                                       -->
-<!-- - skill, slash and roll                                                                                                                      -->
-<!-- - skill, slash and jump                                                                                                                      -->
-<!-- - skill, spring attack, give up a round for 2.5 times damage                                                                                 -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Poison                                                                                                                                       -->

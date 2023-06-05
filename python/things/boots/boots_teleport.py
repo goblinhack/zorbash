@@ -92,7 +92,7 @@ def init():
     tp_init(
         name="boots_teleport",
         text_long_name="boots of teleport",
-        text_short_name="boots, tele",
+        text_short_name="boots, teleport",
     )
 
 
