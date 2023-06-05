@@ -593,8 +593,8 @@ fi
 
 cd ..
 
-echo make $CORES "$@" all
-make $CORES "$@" all
+echo make -f build/Makefile $CORES "$@" all
+make -f build/Makefile $CORES "$@" all
 
 if [ $? -eq 0 ]
 then
