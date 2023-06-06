@@ -56,7 +56,7 @@ void Thing::on_born(void)
     }
 
     dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(), (int) curr_at.x,
-         (int) curr_at.y);
+        (int) curr_at.y);
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {

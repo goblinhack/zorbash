@@ -1,14 +1,13 @@
 1
 2
 3
-src/*.tmp
-src/*.saved
 appdata
 build.log
 build/windows/python.version.sh
 build/windows/windows.xml
 data/gfx
 data/sounds
+Makefile
 python/__pycache__
 python/things/amulets/__pycache__
 python/things/armor/__pycache__/
@@ -59,6 +58,8 @@ src/ramdisk_data_7.S
 src/ramdisk_data_8.S
 src/ramdisk_data_9.S
 src/ramdisk_data.cpp
+src/*.saved
+src/*.tmp
 src/zorbash-game
 src/zorbash-game.exe
 zorbash-game

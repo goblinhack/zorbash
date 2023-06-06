@@ -70,7 +70,7 @@ int Thing::on_owner_receive_dmg_necrosis(Thingp owner, Thingp hitter, Thingp rea
     }
 
     dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
-         owner->to_short_string().c_str(), hitter->to_short_string().c_str(), damage);
+        owner->to_short_string().c_str(), hitter->to_short_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, hitter->id.id, real_hitter->id.id,
                           (unsigned int) curr_at.x, (unsigned int) curr_at.y, (unsigned int) damage);
@@ -110,7 +110,7 @@ int Thing::on_receiving_dmg_necrosis(Thingp hitter, Thingp real_hitter, int dama
     }
 
     dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
-         hitter->to_short_string().c_str(), damage);
+        hitter->to_short_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) curr_at.x,
                           (unsigned int) curr_at.y, (unsigned int) damage);
@@ -186,7 +186,7 @@ int Thing::on_attacking_dmg_necrosis(Thingp victim, int damage)
     }
 
     dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
-         victim->to_short_string().c_str(), damage);
+        victim->to_short_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, victim->id.id, (unsigned int) curr_at.x,
                           (unsigned int) curr_at.y, (unsigned int) damage);
@@ -232,7 +232,7 @@ int Thing::on_owner_attack_dmg_necrosis(Thingp owner, Thingp victim, int damage)
     }
 
     dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
-         owner->to_short_string().c_str(), victim->to_short_string().c_str(), damage);
+        owner->to_short_string().c_str(), victim->to_short_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, victim->id.id, (unsigned int) curr_at.x,
                           (unsigned int) curr_at.y, (unsigned int) damage);

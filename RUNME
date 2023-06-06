@@ -200,6 +200,10 @@ if [ $? -ne 0 ]; then
     log_err "Or file an issue at https://github.com/goblinhack/zorbash"
     exit 1
 else
+    #
+    # For quick re-makes
+    #
+    ln -sf build/Makefile .
     log "Built successfully"
     rm $LOG
 fi

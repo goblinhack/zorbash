@@ -48,7 +48,10 @@ my.map_load_skill_tree(
         "s4", "skill_intimidating_strength4",
         "s5", "skill_intimidating_strength5",
         "[]", "",
-    ],
+    ])
+
+my.map_load_skill_tree(
+    tree_name="martial",
     tree_data=[
         "d1->d2->d3->d4->d5                      ",
         "        v                               ",

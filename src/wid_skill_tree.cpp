@@ -13,6 +13,8 @@
 #include "my_wid_thing_info.hpp"
 #include "my_wid_tp_info.hpp"
 
+#include <ranges>
+
 WidPopup                 *wid_skills;
 static std::vector< Tpp > skills;
 
@@ -210,24 +212,27 @@ void wid_skill_over_end(Widp w)
 //
 static bool skill_has_precursor(Skillp skill_curr)
 {
-  for (auto x = 0; x < SKILL_TREE_ACROSS; x++) {
-    for (auto y = 0; y < SKILL_TREE_DOWN; y++) {
-      auto skill = get(game->skill_tree, x, y);
-      if (! skill) {
-        continue;
-      }
+  for (auto iter : game->skill_tree) {
+    auto tree_name = iter.first;
+    for (auto x = 0; x < SKILL_TREE_ACROSS; x++) {
+      for (auto y = 0; y < SKILL_TREE_DOWN; y++) {
+        auto skill = get(game->skill_tree[ tree_name ], x, y);
+        if (! skill) {
+          continue;
+        }
 
-      if (skill->skill_up == skill_curr) {
-        return true;
-      }
-      if (skill->skill_down == skill_curr) {
-        return true;
-      }
-      if (skill->skill_left == skill_curr) {
-        return true;
-      }
-      if (skill->skill_right == skill_curr) {
-        return true;
+        if (skill->skill_up == skill_curr) {
+          return true;
+        }
+        if (skill->skill_down == skill_curr) {
+          return true;
+        }
+        if (skill->skill_left == skill_curr) {
+          return true;
+        }
+        if (skill->skill_right == skill_curr) {
+          return true;
+        }
       }
     }
   }
@@ -239,24 +244,27 @@ static bool skill_has_precursor(Skillp skill_curr)
 //
 static bool skill_is_available(Skillp skill_next)
 {
-  for (auto x = 0; x < SKILL_TREE_ACROSS; x++) {
-    for (auto y = 0; y < SKILL_TREE_DOWN; y++) {
-      auto skill_curr = get(game->skill_tree, x, y);
-      if (! skill_curr) {
-        continue;
-      }
+  for (auto iter : game->skill_tree) {
+    auto tree_name = iter.first;
+    for (auto x = 0; x < SKILL_TREE_ACROSS; x++) {
+      for (auto y = 0; y < SKILL_TREE_DOWN; y++) {
+        auto skill_curr = get(game->skill_tree[ tree_name ], x, y);
+        if (! skill_curr) {
+          continue;
+        }
 
-      //
-      // We walk all the other skills, looking for one that points at the next skill
-      // and that we have activated the precursors
-      //
-      if ((skill_curr->skill_up == skill_next) || (skill_curr->skill_down == skill_next)
-          || (skill_curr->skill_left == skill_next) || (skill_curr->skill_right == skill_next)) {
-        FOR_ALL_SKILLS_FOR(game->level->player, id)
-        {
-          auto known_skill = game->level->thing_find(id);
-          if (known_skill && (skill_curr->tpp == known_skill->tp())) {
-            return true;
+        //
+        // We walk all the other skills, looking for one that points at the next skill
+        // and that we have activated the precursors
+        //
+        if ((skill_curr->skill_up == skill_next) || (skill_curr->skill_down == skill_next)
+            || (skill_curr->skill_left == skill_next) || (skill_curr->skill_right == skill_next)) {
+          FOR_ALL_SKILLS_FOR(game->level->player, id)
+          {
+            auto known_skill = game->level->thing_find(id);
+            if (known_skill && (skill_curr->tpp == known_skill->tp())) {
+              return true;
+            }
           }
         }
       }
@@ -265,7 +273,9 @@ static bool skill_is_available(Skillp skill_next)
   return false;
 }
 
-void Game::wid_choose_skill(void)
+void Game::wid_choose_skill(void) { wid_choose_from_skill_tree("martial"); }
+
+void Game::wid_choose_from_skill_tree(std::string tree_name)
 {
   TRACE_AND_INDENT();
   BOTCON("You lucky thing. Time to learn some new skill.");
@@ -345,7 +355,7 @@ void Game::wid_choose_skill(void)
   //
   for (auto x = 0; x < SKILL_TREE_ACROSS; x++) {
     for (auto y = 0; y < SKILL_TREE_DOWN; y++) {
-      auto skill = get(game->skill_tree, x, y);
+      auto skill = get(game->skill_tree[ tree_name ], x, y);
       if (! skill) {
         continue;
       }

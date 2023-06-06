@@ -453,8 +453,11 @@ public:
   //
   // Skill tree
   //
-  std::map< std::string, std::string >                                   skill_aliases;
-  std::array< std::array< Skillp, SKILL_TREE_DOWN >, SKILL_TREE_ACROSS > skill_tree {};
+  std::map< std::string, std::string > skill_aliases;
+  //
+  // The key is the type of skill tree, e.g. martial, magical, healing, diabolic
+  //
+  std::map< std::string, std::array< std::array< Skillp, SKILL_TREE_DOWN >, SKILL_TREE_ACROSS > > skill_tree {};
 
   //
   // Temporary. Dampens mouse clicks
@@ -568,6 +571,7 @@ public:
   void unset_request_to_update_inventory_with_thing_over(void);
   void unset_request_to_update_inventory_with_thing_selected(void);
   void unset_request_to_update_same_level(void);
+  void wid_choose_from_skill_tree(std::string tree_name);
   void wid_choose_initial_dungeons(void);
   void wid_choose_next_dungeons(Levelp, bool is_ascending, bool is_descending);
   void wid_choose_player_name_select(void);
