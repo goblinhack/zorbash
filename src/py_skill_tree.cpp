@@ -17,7 +17,7 @@ PyObject *map_load_skill_tree_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   PyObject   *py_skill_data = nullptr;
   PyObject   *py_tree_data  = nullptr;
-  const char *py_tree_name;
+  const char *py_tree_name  = nullptr;
 
   static char *kwlist[] = {(char *) "skill_data", (char *) "tree_data", (char *) "tree_name", nullptr};
 
