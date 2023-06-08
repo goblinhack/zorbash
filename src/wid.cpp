@@ -368,6 +368,26 @@ void wid_set_pos_pct(Widp w, fpoint tl, fpoint br)
   wid_tree_attach(w);
 }
 
+void wid_set_string_context(Widp w, std::string string_context)
+{
+  TRACE_NO_INDENT();
+  if (! w) {
+    ERR("NULL postringer");
+    return;
+  }
+  w->string_context = string_context;
+}
+
+std::string wid_get_string_context(Widp w)
+{
+  TRACE_NO_INDENT();
+  if (! w) {
+    ERR("NULL postringer");
+    return 0;
+  }
+  return (w->string_context);
+}
+
 void wid_set_int_context(Widp w, int int_context)
 {
   TRACE_NO_INDENT();

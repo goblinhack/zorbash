@@ -17,6 +17,7 @@
 
 WidPopup                 *wid_skills;
 static std::vector< Tpp > skills;
+static std::string        current_skill_tree;
 
 void wid_choose_skill_destroy(void)
 {
@@ -194,6 +195,19 @@ void wid_skill_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
   game->wid_tp_info_create(skill->tpp);
 }
 
+void wid_skill_tree_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
+{
+  auto new_skill_tree = wid_get_string_context(w);
+
+  if (new_skill_tree == current_skill_tree) {
+    return;
+  }
+
+  current_skill_tree = new_skill_tree;
+  wid_choose_skill_destroy();
+  game->wid_choose_skill();
+}
+
 void wid_skill_over_end(Widp w)
 {
   TRACE_NO_INDENT();
@@ -273,9 +287,19 @@ static bool skill_is_available(Skillp skill_next)
   return false;
 }
 
-void Game::wid_choose_skill(void) { wid_choose_from_skill_tree("martial"); }
+void Game::wid_choose_skill(void)
+{
+  //
+  // Default tree
+  //
+  if (current_skill_tree == "") {
+    current_skill_tree = "martial";
+  }
 
-void Game::wid_choose_from_skill_tree(std::string tree_name)
+  wid_choose_from_skill_tree(current_skill_tree);
+}
+
+void Game::wid_choose_from_skill_tree(std::string current_tree_name)
 {
   TRACE_AND_INDENT();
   BOTCON("You lucky thing. Time to learn some new skill.");
@@ -323,6 +347,8 @@ void Game::wid_choose_from_skill_tree(std::string tree_name)
 
   change_state(Game::STATE_CHOOSING_SKILLS, "choose skills");
 
+  int WID_SKILL_LEFT_PADDING  = 15;
+  int WID_SKILL_LEFT_BUTTON   = 13;
   int WID_SKILL_BUTTON_WIDTH  = 4;
   int WID_SKILL_BUTTON_HEIGHT = 4;
 
@@ -337,7 +363,7 @@ void Game::wid_choose_from_skill_tree(std::string tree_name)
   //
   // Main window
   //
-  auto  skills_width  = (WID_SKILL_BUTTON_WIDTH * SKILL_TREE_ACROSS) + 3;
+  auto  skills_width  = (WID_SKILL_BUTTON_WIDTH * SKILL_TREE_ACROSS) + 3 + WID_SKILL_LEFT_PADDING;
   auto  skills_height = (WID_SKILL_BUTTON_HEIGHT * SKILL_TREE_DOWN) + 3;
   point tl;
   point br(skills_width, skills_height);
@@ -355,7 +381,7 @@ void Game::wid_choose_from_skill_tree(std::string tree_name)
   //
   for (auto x = 0; x < SKILL_TREE_ACROSS; x++) {
     for (auto y = 0; y < SKILL_TREE_DOWN; y++) {
-      auto skill = get(game->skill_tree[ tree_name ], x, y);
+      auto skill = get(game->skill_tree[ current_tree_name ], x, y);
       if (! skill) {
         continue;
       }
@@ -366,7 +392,7 @@ void Game::wid_choose_from_skill_tree(std::string tree_name)
       Widp  b = wid_new_square_button(skills_container, "wid skill grid button");
       point tl;
       point br;
-      tl.x = WID_SKILL_BUTTON_WIDTH * x + 2;
+      tl.x = WID_SKILL_BUTTON_WIDTH * x + 2 + WID_SKILL_LEFT_PADDING;
       tl.y = WID_SKILL_BUTTON_HEIGHT * y + 3;
       if (! g_opt_ascii) {
         tl.y += 1;
@@ -583,6 +609,36 @@ void Game::wid_choose_from_skill_tree(std::string tree_name)
       wid_set_on_mouse_up(w, wid_skill_close);
     }
   }
+
+  //
+  // Buttons on the left for the various skill trees
+  //
+  int                      y = 1;
+  std::list< std::string > skill_trees;
+
+  for (auto iter : game->skill_tree) {
+    auto tree_name = iter.first;
+    skill_trees.push_back(tree_name);
+  }
+
+  for (auto tree_name : skill_trees) {
+    y += 4;
+    auto  w = wid_new_square_button(skills_container, "wid skills window close");
+    point tl(1, y);
+    point br(WID_SKILL_LEFT_BUTTON, y + 2);
+    wid_set_pos(w, tl, br);
+
+    if (tree_name == current_tree_name) {
+      wid_set_style(w, UI_WID_STYLE_GREEN);
+    } else {
+      wid_set_style(w, UI_WID_STYLE_DARK);
+    }
+    wid_set_text(w, tree_name);
+    wid_set_string_context(w, tree_name);
+    wid_set_on_mouse_over_begin(w, wid_skill_tree_over_begin);
+  }
+
+  wid_update(skills_container);
 
   wid_actionbar_init();
 }

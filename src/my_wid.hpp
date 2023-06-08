@@ -107,8 +107,9 @@ int wid_get_br_y(Widp w);
 int wid_get_tl_x(Widp w);
 int wid_get_tl_y(Widp w);
 
-int wid_count(Widp w, int depth);
-int wid_get_int_context(Widp);
+int         wid_count(Widp w, int depth);
+int         wid_get_int_context(Widp);
+std::string wid_get_string_context(Widp);
 
 #define WID_THING_ID_MAX_CONTEXT 2
 ThingId wid_get_thing_id_context(Widp, int which);
@@ -219,6 +220,7 @@ void wid_set_focus(Widp);
 void wid_set_ignore_events(Widp, uint8_t);
 void wid_set_ignore_scroll_events(Widp, uint8_t);
 void wid_set_int_context(Widp w, int);
+void wid_set_string_context(Widp w, std::string);
 void wid_set_mode(Widp, wid_mode mode);
 void wid_set_moveable_bounded(Widp, uint8_t val);
 void wid_set_moveable_horiz(Widp, uint8_t val);
@@ -497,6 +499,7 @@ public:
   //
   // Client context
   //
+  std::string                                     string_context;
   int                                             int_context {-1};
   void                                           *void_context {};
   std::array< ThingId, WID_THING_ID_MAX_CONTEXT > thing_id_context {NoThingId};
