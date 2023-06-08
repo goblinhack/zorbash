@@ -14,6 +14,27 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: configure
+      run: apt-get install -y build-essential
+      run: apt-get install -y g++
+      run: apt-get install -y libegl1
+      run: apt-get install -y libfishsound1-dev
+      run: apt-get install -y libflac-dev
+      run: apt-get install -y libfluidsynth-dev
+      run: apt-get install -y libfreetype6-dev
+      run: apt-get install -y libgl1
+      run: apt-get install -y libglvnd0
+      run: apt-get install -y libglx0
+      run: apt-get install -y libmikmod-dev
+      run: apt-get install -y liboggz2-dev
+      run: apt-get install -y libsdl2-2.0-0
+      run: apt-get install -y libsdl2-dev
+      run: apt-get install -y libsdl2-mixer-2.0-0
+      run: apt-get install -y libsdl2-mixer-dev
+      run: apt-get install -y libsmpeg-dev
+      run: apt-get install -y libx11-6
+      run: apt-get install -y libxext6
+      run: apt-get install -y python3
+      run: apt-get install -y python3-dev
       run: ./RUNME
     - name: make
       run: make
