@@ -13,50 +13,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: build-essential
-      run: sudo apt-get install -y build-essential
-    - name: g++
-      run: sudo apt-get install -y g++
-    - name: libegl1
-      run: sudo apt-get install -y libegl1
-    - name: libfishsound1-dev
-      run: sudo apt-get install -y libfishsound1-dev
-    - name: libflac-dev
-      run: sudo apt-get install -y libflac-dev
-    - name: libfluidsynth-dev
-      run: sudo apt-get install -y libfluidsynth-dev
-    - name: libfreetype6-dev
-      run: sudo apt-get install -y libfreetype6-dev
-    - name: libgl1
-      run: sudo apt-get install -y libgl1
-    - name: libglvnd0
-      run: sudo apt-get install -y libglvnd0
-    - name: libglx0
-      run: sudo apt-get install -y libglx0
-    - name: libmikmod-dev
-      run: sudo apt-get install -y libmikmod-dev
-    - name: liboggz2-dev
-      run: sudo apt-get install -y liboggz2-dev
-    - name: libsdl2-2.0-0
-      run: sudo apt-get install -y libsdl2-2.0-0
-    - name: libsdl2-dev
-      run: sudo apt-get install -y libsdl2-dev
-    - name: libsdl2-mixer-2.0-0
-      run: sudo apt-get install -y libsdl2-mixer-2.0-0
-    - name: libsdl2-mixer-dev
-      run: sudo apt-get install -y libsdl2-mixer-dev
-    - name: libsmpeg-dev
-      run: sudo apt-get install -y libsmpeg-dev
-    - name: libx11-6
-      run: sudo apt-get install -y libx11-6
-    - name: libxext6
-      run: sudo apt-get install -y libxext6
-    - name: python3
-      run: sudo apt-get install -y python3
-    - name: python3-dev
-      run: sudo apt-get install -y python3-dev
+    - uses: awalsh128/cache-apt-pkgs-action@latest
+      with:
+        packages: build-essential g++ libegl1 libfishsound1-dev libflac-dev libfluidsynth-dev libfreetype6-dev libgl1 libglvnd0 libglx0 libmikmod-dev liboggz2-dev libsdl2-2.0-0 libsdl2-dev libsdl2-mixer-2.0-0 libsdl2-mixer-dev libsmpeg-dev libx11-6 libxext6 python3 python3-dev
+        version: 1.0
     - name: configure
       run: ./RUNME
-    - name: make
-      run: make
 
