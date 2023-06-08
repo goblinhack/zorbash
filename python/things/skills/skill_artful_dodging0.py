@@ -9,7 +9,6 @@ def tp_init(self):
     my.is_skill(self, True)
     my.is_tickable(self, True)
     my.on_tick_when_activated_do(self, "me.on_tick_when_activated()")
-    my.on_use_do(self, "me.on_use()")
     my.skill_base_name(self, "skill_artful_dodging")
     my.skill_base_name(self, "skill_devoted_thrust")
     my.text_description_long2(self, "As part of your training you will receive enhanced dexterity and defensive bonuses and the ability to recover stamina more quickly.")
