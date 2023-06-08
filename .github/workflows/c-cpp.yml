@@ -13,28 +13,49 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: configure
+    - name: build-essential
       run: apt-get install -y build-essential
+    - name: g++
       run: apt-get install -y g++
+    - name: libegl1
       run: apt-get install -y libegl1
+    - name: libfishsound1-dev
       run: apt-get install -y libfishsound1-dev
+    - name: libflac-dev
       run: apt-get install -y libflac-dev
+    - name: libfluidsynth-dev
       run: apt-get install -y libfluidsynth-dev
+    - name: libfreetype6-dev
       run: apt-get install -y libfreetype6-dev
+    - name: libgl1
       run: apt-get install -y libgl1
+    - name: libglvnd0
       run: apt-get install -y libglvnd0
+    - name: libglx0
       run: apt-get install -y libglx0
+    - name: libmikmod-dev
       run: apt-get install -y libmikmod-dev
+    - name: liboggz2-dev
       run: apt-get install -y liboggz2-dev
+    - name: libsdl2-2.0-0
       run: apt-get install -y libsdl2-2.0-0
+    - name: libsdl2-dev
       run: apt-get install -y libsdl2-dev
+    - name: libsdl2-mixer-2.0-0
       run: apt-get install -y libsdl2-mixer-2.0-0
+    - name: libsdl2-mixer-dev
       run: apt-get install -y libsdl2-mixer-dev
+    - name: libsmpeg-dev
       run: apt-get install -y libsmpeg-dev
+    - name: libx11-6
       run: apt-get install -y libx11-6
+    - name: libxext6
       run: apt-get install -y libxext6
+    - name: python3
       run: apt-get install -y python3
+    - name: python3-dev
       run: apt-get install -y python3-dev
+    - name: configure
       run: ./RUNME
     - name: make
       run: make
