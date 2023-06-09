@@ -381,6 +381,7 @@ case "$MY_OS_NAME" in
         ;;
     *MING*)
         PATH=/mingw64/bin:$PATH
+        find /ming*
 
         EXE=".exe"
         # gcc only
@@ -613,7 +614,6 @@ then
 
     rm -f Makefile.bak
 else
-    find / 2>/dev/null | grep ming
     log_die "Build failed"
     exit 1
 fi
