@@ -72,7 +72,7 @@ jobs:
             mingw-w64-ucrt-x86_64-windows-default-manifest
             mingw-w64-ucrt-x86_64-winpthreads-git
             mingw-w64-ucrt-x86_64-xz
-            mingw-w64-ucrt-x86_64-zl
+            mingw-w64-ucrt-x86_64-zlib
       - name: CI-Build
         run: |
           echo 'Running in MSYS2!'
