@@ -19,6 +19,119 @@
 
 . ./build/common.sh
 
+help_full()
+{
+    case $(uname) in
+    Linux)
+      log_warn "For Fedora, you may need to install:"
+      log_warn "  dnf install -y findutils"
+      log_warn "  dnf install -y SDL2_mixer-devel SDL2_mixer"
+      log_warn "  dnf install -y SDL2 SDL2-devel"
+      log_warn "  dnf install -y SDL2_image SDL2_image-devel"
+      log_warn "  dnf install -y python3"
+      log_warn "  dnf install -y python3-devel"
+      log_warn "  dnf install -y git"
+      log_warn "  dnf install -y make automake gcc-c++"
+      log_warn "  dnf install -y vim"
+      log_warn "  dnf install -y libmikmod-devel"
+      log_warn "  dnf install -y libfishsound-devel"
+      log_warn " "
+      log_warn "For Ubuntu, you may need to install:"
+      log_warn "  apt-get install -y build-essential"
+      log_warn "  apt-get install -y g++"
+      log_warn "  apt-get install -y git"
+      log_warn "  apt-get install -y libegl1"
+      log_warn "  apt-get install -y libfishsound1-dev"
+      log_warn "  apt-get install -y libflac-dev"
+      log_warn "  apt-get install -y libfluidsynth-dev"
+      log_warn "  apt-get install -y libfreetype6-dev"
+      log_warn "  apt-get install -y libgl1"
+      log_warn "  apt-get install -y libglvnd0"
+      log_warn "  apt-get install -y libglx0"
+      log_warn "  apt-get install -y libmikmod-dev"
+      log_warn "  apt-get install -y liboggz2-dev"
+      log_warn "  apt-get install -y libsdl2-2.0-0"
+      log_warn "  apt-get install -y libsdl2-dev"
+      log_warn "  apt-get install -y libsdl2-mixer-2.0-0"
+      log_warn "  apt-get install -y libsdl2-mixer-dev"
+      log_warn "  apt-get install -y libsmpeg-dev"
+      log_warn "  apt-get install -y libx11-6"
+      log_warn "  apt-get install -y libxext6"
+      log_warn "  apt-get install -y python3"
+      log_warn "  apt-get install -y python3-dev"
+      log_warn "  apt-get install -y ssh"
+      log_warn "  apt-get install -y vim"
+      log_warn "  apt-get install -y xutils-dev"
+      ;;
+    *MING*|*MSYS*)
+      log_warn "  git"
+      log_warn "  make"
+      log_warn "  mingw-w64-ucrt-x86_64-gcc"
+      log_warn "  mingw-w64-ucrt-x86_64-SDL"
+      log_warn "  mingw-w64-ucrt-x86_64-SDL2"
+      log_warn "  mingw-w64-ucrt-x86_64-SDL2_gfx"
+      log_warn "  mingw-w64-ucrt-x86_64-SDL2_image"
+      log_warn "  mingw-w64-ucrt-x86_64-SDL2_mixer"
+      log_warn "  mingw-w64-ucrt-x86_64-SDL2_net"
+      log_warn "  mingw-w64-ucrt-x86_64-SDL2_ttf"
+      log_warn "  mingw-w64-ucrt-x86_64-binutils"
+      log_warn "  mingw-w64-ucrt-x86_64-bzip2"
+      log_warn "  mingw-w64-ucrt-x86_64-clang"
+      log_warn "  mingw-w64-ucrt-x86_64-clang-tools-extra"
+      log_warn "  mingw-w64-ucrt-x86_64-crt-git"
+      log_warn "  mingw-w64-ucrt-x86_64-expat"
+      log_warn "  mingw-w64-ucrt-x86_64-flac"
+      log_warn "  mingw-w64-ucrt-x86_64-fluidsynth"
+      log_warn "  mingw-w64-ucrt-x86_64-gcc"
+      log_warn "  mingw-w64-ucrt-x86_64-gcc-libs"
+      log_warn "  mingw-w64-ucrt-x86_64-gdb"
+      log_warn "  mingw-w64-ucrt-x86_64-gdbm"
+      log_warn "  mingw-w64-ucrt-x86_64-gettext"
+      log_warn "  mingw-w64-ucrt-x86_64-giflib"
+      log_warn "  mingw-w64-ucrt-x86_64-glib2"
+      log_warn "  mingw-w64-ucrt-x86_64-gmp"
+      log_warn "  mingw-w64-ucrt-x86_64-headers-git"
+      log_warn "  mingw-w64-ucrt-x86_64-isl"
+      log_warn "  mingw-w64-ucrt-x86_64-libffi"
+      log_warn "  mingw-w64-ucrt-x86_64-libiconv"
+      log_warn "  mingw-w64-ucrt-x86_64-libjpeg-turbo"
+      log_warn "  mingw-w64-ucrt-x86_64-libmad"
+      log_warn "  mingw-w64-ucrt-x86_64-libmodplug"
+      log_warn "  mingw-w64-ucrt-x86_64-libogg"
+      log_warn "  mingw-w64-ucrt-x86_64-libpng"
+      log_warn "  mingw-w64-ucrt-x86_64-libsndfile"
+      log_warn "  mingw-w64-ucrt-x86_64-libsystre"
+      log_warn "  mingw-w64-ucrt-x86_64-libtiff"
+      log_warn "  mingw-w64-ucrt-x86_64-libtre-git"
+      log_warn "  mingw-w64-ucrt-x86_64-libvorbis"
+      log_warn "  mingw-w64-ucrt-x86_64-libwebp"
+      log_warn "  mingw-w64-ucrt-x86_64-libwinpthread-git"
+      log_warn "  mingw-w64-ucrt-x86_64-mpc"
+      log_warn "  mingw-w64-ucrt-x86_64-mpfr"
+      log_warn "  mingw-w64-ucrt-x86_64-ncurses"
+      log_warn "  mingw-w64-ucrt-x86_64-openssl"
+      log_warn "  mingw-w64-ucrt-x86_64-portaudio"
+      log_warn "  mingw-w64-ucrt-x86_64-python3"
+      log_warn "  mingw-w64-ucrt-x86_64-python3-pip"
+      log_warn "  mingw-w64-ucrt-x86_64-python3-py"
+      log_warn "  mingw-w64-ucrt-x86_64-readline"
+      log_warn "  mingw-w64-ucrt-x86_64-smpeg2"
+      log_warn "  mingw-w64-ucrt-x86_64-speex"
+      log_warn "  mingw-w64-ucrt-x86_64-speexdsp"
+      log_warn "  mingw-w64-ucrt-x86_64-termcap"
+      log_warn "  mingw-w64-ucrt-x86_64-windows-default-manifest"
+      log_warn "  mingw-w64-ucrt-x86_64-winpthreads-git"
+      log_warn "  mingw-w64-ucrt-x86_64-xz"
+      log_warn "  mingw-w64-ucrt-x86_64-zlib"
+      ;;
+    *Darwin*)
+      log_warn "Install MAC ports then install:"
+      log_warn "  sudo port install libsdl2"
+      log_warn "  sudo port install libsdl2_mixer"
+      ;;
+  esac
+}
+
 MY_OS_NAME=$(uname)
 case "$MY_OS_NAME" in
     *MING*|*MSYS*)
@@ -46,90 +159,17 @@ case "$MY_OS_NAME" in
     ;;
 esac
 
-ubuntu_help_full()
-{
-    log_warn "For Fedora, you may need to install:"
-    log_warn "  dnf install -y findutils"
-    log_warn "  dnf install -y SDL2_mixer-devel SDL2_mixer"
-    log_warn "  dnf install -y SDL2 SDL2-devel"
-    log_warn "  dnf install -y SDL2_image SDL2_image-devel"
-    log_warn "  dnf install -y python3"
-    log_warn "  dnf install -y python3-devel"
-    log_warn "  dnf install -y git"
-    log_warn "  dnf install -y make automake gcc-c++"
-    log_warn "  dnf install -y vim"
-    log_warn "  dnf install -y libmikmod-devel"
-    log_warn "  dnf install -y libfishsound-devel"
-    log_warn " "
-    log_warn "For Ubuntu, you may need to install:"
-    log_warn "  apt-get install -y build-essential"
-    log_warn "  apt-get install -y g++"
-    log_warn "  apt-get install -y git"
-    log_warn "  apt-get install -y libegl1"
-    log_warn "  apt-get install -y libfishsound1-dev"
-    log_warn "  apt-get install -y libflac-dev"
-    log_warn "  apt-get install -y libfluidsynth-dev"
-    log_warn "  apt-get install -y libfreetype6-dev"
-    log_warn "  apt-get install -y libgl1"
-    log_warn "  apt-get install -y libglvnd0"
-    log_warn "  apt-get install -y libglx0"
-    log_warn "  apt-get install -y libmikmod-dev"
-    log_warn "  apt-get install -y liboggz2-dev"
-    log_warn "  apt-get install -y libsdl2-2.0-0"
-    log_warn "  apt-get install -y libsdl2-dev"
-    log_warn "  apt-get install -y libsdl2-mixer-2.0-0"
-    log_warn "  apt-get install -y libsdl2-mixer-dev"
-    log_warn "  apt-get install -y libsmpeg-dev"
-    log_warn "  apt-get install -y libx11-6"
-    log_warn "  apt-get install -y libxext6"
-    log_warn "  apt-get install -y python3"
-    log_warn "  apt-get install -y python3-dev"
-    log_warn "  apt-get install -y ssh"
-    log_warn "  apt-get install -y vim"
-    log_warn "  apt-get install -y xutils-dev"
-}
-
 sdl_help()
 {
     log_err "No SDL2 found"
-
-    case $MY_OS_NAME in
-    *MING*|*MSYS*)
-        log_warn "Try:"
-        log_warn "  pacman -S mingw-w64-ucrt-x86_64-SDL2"
-        log_warn "  pacman -S mingw-w64-ucrt-x86_64-SDL2_mixer"
-        ;;
-    *Darwin*)
-        log_warn "Install MAC ports then install:"
-        log_warn "  sudo port install libsdl2"
-        log_warn "  sudo port install libsdl2_mixer"
-        ;;
-    *)
-        ubuntu_help_full
-        ;;
-    esac
+    help_full
     exit 1
 }
 
 gcc_help()
 {
     log_err "No g++ or clang compiler found"
-
-    case $MY_OS_NAME in
-    *MING*|*MSYS*)
-        log_warn "Try:"
-        log_warn "  pacman -S base-devel"
-        log_warn "  pacman -S mingw-w64-ucrt-x86_64-gcc"
-        log_warn "  pacman -S mingw-w64-ucrt-x86_64-gdb"
-        ;;
-    *Darwin*)
-        log_warn "Install MAC ports then install:"
-        log_warn "  sudo port install g++"
-        ;;
-    *)
-        ubuntu_help_full
-        ;;
-    esac
+    help_full
     exit 1
 }
 
@@ -245,20 +285,7 @@ esac
 python_help()
 {
     log_warn "No python3 found"
-
-    case $MY_OS_NAME in
-    *MING*|*MSYS*)
-        log_warn "Try:"
-        log_warn "  pacman -S mingw-w64-ucrt-python3.9"
-        ;;
-    *Darwin*)
-        log_warn "Install MAC ports then install:"
-        log_warn "   sudo port install python3*"
-        ;;
-    *)
-        ubuntu_help_full
-        ;;
-    esac
+    help_full
     exit 1
 }
 
