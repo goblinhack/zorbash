@@ -31,7 +31,9 @@ void callstack_dump(void)
 #ifdef ENABLE_CRASH_HANDLER
 
 #include <assert.h>
+#ifndef _WIN32
 #include <sys/wait.h>
+#endif
 #include <unistd.h>
 
 #if defined(__linux__)
