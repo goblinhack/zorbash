@@ -19,6 +19,19 @@
 
 . ./build/common.sh
 
+ucrt64
+
+# The default MINGW32 and MINGW64 environments build binaries using the older
+#  MSVCRT library that should be present on all Windows systems.
+MINGW_TYPE=mingw64
+MINGW_PKG_TYPE=mingw-w64
+
+# The MINGW UCRT environments build binaries using the newer UCRT library that
+# is only known to be present on Windows 10. It should produce binaries more
+# compatible with MSVC-compiled binaries, but not with the MSVCRT environment.
+MINGW_TYPE=ucrt64
+MINGW_PKG_TYPE=mingw-w64-ucrt
+
 help_full()
 {
     case $(uname) in
@@ -66,63 +79,63 @@ help_full()
     *MING*|*MSYS*)
       log_warn "  git"
       log_warn "  make"
-      log_warn "  mingw-w64-ucrt-x86_64-gcc"
-      log_warn "  mingw-w64-ucrt-x86_64-SDL"
-      log_warn "  mingw-w64-ucrt-x86_64-SDL2"
-      log_warn "  mingw-w64-ucrt-x86_64-SDL2_gfx"
-      log_warn "  mingw-w64-ucrt-x86_64-SDL2_image"
-      log_warn "  mingw-w64-ucrt-x86_64-SDL2_mixer"
-      log_warn "  mingw-w64-ucrt-x86_64-SDL2_net"
-      log_warn "  mingw-w64-ucrt-x86_64-SDL2_ttf"
-      log_warn "  mingw-w64-ucrt-x86_64-binutils"
-      log_warn "  mingw-w64-ucrt-x86_64-bzip2"
-      log_warn "  mingw-w64-ucrt-x86_64-clang"
-      log_warn "  mingw-w64-ucrt-x86_64-clang-tools-extra"
-      log_warn "  mingw-w64-ucrt-x86_64-crt-git"
-      log_warn "  mingw-w64-ucrt-x86_64-expat"
-      log_warn "  mingw-w64-ucrt-x86_64-flac"
-      log_warn "  mingw-w64-ucrt-x86_64-fluidsynth"
-      log_warn "  mingw-w64-ucrt-x86_64-gcc"
-      log_warn "  mingw-w64-ucrt-x86_64-gcc-libs"
-      log_warn "  mingw-w64-ucrt-x86_64-gdb"
-      log_warn "  mingw-w64-ucrt-x86_64-gdbm"
-      log_warn "  mingw-w64-ucrt-x86_64-gettext"
-      log_warn "  mingw-w64-ucrt-x86_64-giflib"
-      log_warn "  mingw-w64-ucrt-x86_64-glib2"
-      log_warn "  mingw-w64-ucrt-x86_64-gmp"
-      log_warn "  mingw-w64-ucrt-x86_64-headers-git"
-      log_warn "  mingw-w64-ucrt-x86_64-isl"
-      log_warn "  mingw-w64-ucrt-x86_64-libffi"
-      log_warn "  mingw-w64-ucrt-x86_64-libiconv"
-      log_warn "  mingw-w64-ucrt-x86_64-libjpeg-turbo"
-      log_warn "  mingw-w64-ucrt-x86_64-libmad"
-      log_warn "  mingw-w64-ucrt-x86_64-libmodplug"
-      log_warn "  mingw-w64-ucrt-x86_64-libogg"
-      log_warn "  mingw-w64-ucrt-x86_64-libpng"
-      log_warn "  mingw-w64-ucrt-x86_64-libsndfile"
-      log_warn "  mingw-w64-ucrt-x86_64-libsystre"
-      log_warn "  mingw-w64-ucrt-x86_64-libtiff"
-      log_warn "  mingw-w64-ucrt-x86_64-libtre-git"
-      log_warn "  mingw-w64-ucrt-x86_64-libvorbis"
-      log_warn "  mingw-w64-ucrt-x86_64-libwebp"
-      log_warn "  mingw-w64-ucrt-x86_64-libwinpthread-git"
-      log_warn "  mingw-w64-ucrt-x86_64-mpc"
-      log_warn "  mingw-w64-ucrt-x86_64-mpfr"
-      log_warn "  mingw-w64-ucrt-x86_64-ncurses"
-      log_warn "  mingw-w64-ucrt-x86_64-openssl"
-      log_warn "  mingw-w64-ucrt-x86_64-portaudio"
-      log_warn "  mingw-w64-ucrt-x86_64-python3"
-      log_warn "  mingw-w64-ucrt-x86_64-python3-pip"
-      log_warn "  mingw-w64-ucrt-x86_64-python3-py"
-      log_warn "  mingw-w64-ucrt-x86_64-readline"
-      log_warn "  mingw-w64-ucrt-x86_64-smpeg2"
-      log_warn "  mingw-w64-ucrt-x86_64-speex"
-      log_warn "  mingw-w64-ucrt-x86_64-speexdsp"
-      log_warn "  mingw-w64-ucrt-x86_64-termcap"
-      log_warn "  mingw-w64-ucrt-x86_64-windows-default-manifest"
-      log_warn "  mingw-w64-ucrt-x86_64-winpthreads-git"
-      log_warn "  mingw-w64-ucrt-x86_64-xz"
-      log_warn "  mingw-w64-ucrt-x86_64-zlib"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-gcc"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-SDL"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-SDL2"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-SDL2_gfx"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-SDL2_image"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-SDL2_mixer"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-SDL2_net"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-SDL2_ttf"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-binutils"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-bzip2"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-clang"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-clang-tools-extra"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-crt-git"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-expat"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-flac"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-fluidsynth"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-gcc"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-gcc-libs"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-gdb"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-gdbm"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-gettext"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-giflib"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-glib2"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-gmp"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-headers-git"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-isl"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libffi"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libiconv"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libjpeg-turbo"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libmad"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libmodplug"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libogg"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libpng"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libsndfile"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libsystre"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libtiff"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libtre-git"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libvorbis"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libwebp"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libwinpthread-git"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-mpc"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-mpfr"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-ncurses"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-openssl"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-portaudio"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-python3"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-python3-pip"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-python3-py"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-readline"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-smpeg2"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-speex"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-speexdsp"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-termcap"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-windows-default-manifest"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-winpthreads-git"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-xz"
+      log_warn "  ${MINGW_PKG_TYPE}-x86_64-zlib"
       ;;
     *Darwin*)
       log_warn "Install MAC ports then install:"
@@ -137,7 +150,7 @@ case "$MY_OS_NAME" in
     *MING*|*MSYS*)
         for i in \
             $(which sdl2-config) \
-            /ucrt64/bin/sdl2-config
+            /${MINGW_TYPE}/bin/sdl2-config
         do
             if [ -x "$i" ]; then
                 SDL2_CONFIG=$i
@@ -234,7 +247,7 @@ case $MY_OS_NAME in
     *MING*|*MSYS*)
         for i in \
             $(which python3-config) \
-            /ucrt64/bin/python3-config
+            /${MINGW_TYPE}/bin/python3-config
         do
             if [ -x "$i" ]; then
                 Python3_CONFIG=$i
@@ -260,7 +273,7 @@ case $MY_OS_NAME in
     *MING*|*MSYS*)
         for i in \
             $(which python3) \
-            /ucrt64/bin/python3
+            /${MINGW_TYPE}/bin/python3
         do
             if [ -x "$i" ]; then
                 Python3=$i
@@ -415,47 +428,27 @@ case "$MY_OS_NAME" in
         exit 1
         ;;
     *MING*)
-        PATH=/ucrt64/bin:$PATH
-        ls -la /ucrt64/bin/*
-        ls -la /ucrt64/lib/*
-
+        PATH=/${MINGW_TYPE}/bin:$PATH
         EXE=".exe"
-        # gcc only
-        C_FLAGS+=" -I/ucrt64/ginclude "
-
-        LDLIBS="$LDLIBS -L/ucrt64/glib/"
+        C_FLAGS+=" -I/${MINGW_TYPE}/ginclude "
+        LDLIBS+=" -L/${MINGW_TYPE}/glib/"
         LDLIBS=$(echo $LDLIBS | sed -e 's/-lmingw32 //g')
-        LDLIBS="$LDLIBS -funwind-tables"
-        #LDLIBS="$LDLIBS -static"
-        LDLIBS="$LDLIBS -static-libstdc++"
-        LDLIBS="$LDLIBS -static-libgcc"
-        LDLIBS="$LDLIBS -Wl,-Bstatic -lstdc++ -lpthread -Wl,-Bdynamic"
-        LDLIBS="$LDLIBS -lopengl32"
-        LDLIBS="$LDLIBS -lpthread"
-        LDLIBS="$LDLIBS /ucrt64/lib/libSDL2_mixer.a"
-
-        #
-        # Except it does not work and does not generate pdb files for clang
-        #
-        #C_FLAGS+="-gcodeview"
-        # And use this later
-        # echo "CC=clang++.exe # AUTOGEN" >> .Makefile
-
-        #
-        # For symbol decode StackTrace that doesn't really work without
-        # visual studio. sigh
-        #
-        LDLIBS="$LDLIBS -L/ucrt64/lib/binutils -lbfd -lintl -ldbghelp -liberty -lz"
+        LDLIBS+=" -funwind-tables"
+        LDLIBS+=" -static-libstdc++"
+        LDLIBS+=" -static-libgcc"
+        LDLIBS+=" -Wl,-Bstatic -lstdc++ -lpthread -Wl,-Bdynamic"
+        LDLIBS+=" -lopengl32"
+        LDLIBS+=" -lpthread"
+        LDLIBS+=" /${MINGW_TYPE}/lib/libSDL2_mixer.a"
+        LDLIBS+=" -L/${MINGW_TYPE}/lib/binutils -lbfd -lintl -ldbghelp -liberty -lz"
         ;;
     *Darwin*)
         EXE=""
-        LDLIBS="$LDLIBS -funwind-tables"
-        LDLIBS="$LDLIBS -rdynamic"
-        LDLIBS="$LDLIBS -Wl,-framework,Opengl"
+        LDLIBS+=" -funwind-tables"
+        LDLIBS+=" -rdynamic"
+        LDLIBS+=" -Wl,-framework,Opengl"
         DSYM="dsymutil ../zorbash-game"
-        #
-        # Can't get this to work
-        #
+
         if [[ $OPT_DEV2 != "" ]]; then
             C_FLAGS+=" -fsanitize=address -fno-omit-frame-pointer"
             LDFLAGS+=" -fsanitize=address"
@@ -463,11 +456,9 @@ case "$MY_OS_NAME" in
         ;;
     *inux*)
         EXE=""
-        # These seem to make no difference
-        #C_FLAGS+='-fasynchronous-unwind-tables '
-        #C_FLAGS+='-funwind-tables '
         LDFLAGS+=' -rdynamic'
         LDLIBS+="-lGL "
+
         if [[ $OPT_DEV2 != "" ]]; then
             ASAN_OPTIONS=fast_unwind_on_malloc
             export ASAN_OPTIONS
@@ -499,8 +490,8 @@ fi
 echo "#define MYVER \"$MYVER\"" >> $CONFIG_H
 echo "#define PYVER \"$PYVER\"" >> $CONFIG_H
 
-log_info "PYVER                      : $PYVER"
-log_info "PYTHONPATH                 : $PYTHONPATH"
+# log_info "PYVER                      : $PYVER"
+# log_info "PYTHONPATH                 : $PYTHONPATH"
 log_info "VERSION (game)             : $MYVER"
 
 cd src || exit
@@ -563,11 +554,11 @@ fi
 
 case "$MY_OS_NAME" in
     *MING*)
-        echo "CC=/ucrt64/bin/clang++.exe # AUTOGEN" >> .Makefile
+        echo "CC=/${MINGW_TYPE}/bin/clang++.exe # AUTOGEN" >> .Makefile
         #
         # To resolve WinMain, add these at the end again
         #
-        LDLIBS="$LDLIBS -lmingw32 -lSDL2main -lSDL2 -mwindows /ucrt64/lib/libSDL2main.a -L/ucrt64/lib -lSDL2main -lSDL2"
+        LDLIBS="$LDLIBS -lmingw32 -lSDL2main -lSDL2 -mwindows /${MINGW_TYPE}/lib/libSDL2main.a -L/${MINGW_TYPE}/lib -lSDL2main -lSDL2"
     ;;
 esac
 
@@ -629,8 +620,8 @@ then
     case "$MY_OS_NAME" in
         *MING*)
             log_info "Run:"
-            echo "  export PYTHONPATH=/ucrt64/lib/python${PYVER}/:/ucrt64/lib/python${PYVER}/lib-dynload:/ucrt64/lib/python${PYVER}/site-packages"
-            echo "  export PYTHONHOME=/ucrt64/bin"
+            echo "  export PYTHONPATH=/${MINGW_TYPE}/lib/python${PYVER}/:/${MINGW_TYPE}/lib/python${PYVER}/lib-dynload:/${MINGW_TYPE}/lib/python${PYVER}/site-packages"
+            echo "  export PYTHONHOME=/${MINGW_TYPE}/bin"
             echo "  ./zorbash-game.exe"
             ;;
         *)

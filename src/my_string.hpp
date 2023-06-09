@@ -74,4 +74,8 @@ void     strrepc(char *s, const char *replace_set, char replace_with);
 extern std::vector< std::string > split_tokens(const std::string &s, const char delimiter);
 void replace(std::string &input, const std::string &pattern, const std::string &replace_with);
 
+#ifdef _WIN32
+#define strerror_r(_errno_, _buf_, _len_) strerror_s(_buf_, _len_, _errno_)
+#endif
+
 #endif
