@@ -14,10 +14,62 @@ jobs:
           msystem: UCRT64
           update: true
           install: git make mingw-w64-ucrt-x86_64-gcc \
-              mingw-w64-ucrt-x86_64-SDL2 \
-              mingw-w64-ucrt-x86_64-SDL2_mixer
+							mingw-w64-ucrt-x86_64-SDL \
+							mingw-w64-ucrt-x86_64-SDL2 \
+							mingw-w64-ucrt-x86_64-SDL2_gfx \
+							mingw-w64-ucrt-x86_64-SDL2_image \
+							mingw-w64-ucrt-x86_64-SDL2_mixer \
+							mingw-w64-ucrt-x86_64-SDL2_net \
+							mingw-w64-ucrt-x86_64-SDL2_ttf \
+							mingw-w64-ucrt-x86_64-binutils \
+							mingw-w64-ucrt-x86_64-bzip2 \
 							mingw-w64-ucrt-x86_64-clang \
-							mingw-w64-ucrt-x86_64-clang-tools-extra
+							mingw-w64-ucrt-x86_64-clang-tools-extra \
+							mingw-w64-ucrt-x86_64-crt-git \
+							mingw-w64-ucrt-x86_64-expat \
+							mingw-w64-ucrt-x86_64-flac \
+							mingw-w64-ucrt-x86_64-fluidsynth \
+							mingw-w64-ucrt-x86_64-gcc \
+							mingw-w64-ucrt-x86_64-gcc-libs \
+							mingw-w64-ucrt-x86_64-gdb \
+							mingw-w64-ucrt-x86_64-gdbm \
+							mingw-w64-ucrt-x86_64-gettext \
+							mingw-w64-ucrt-x86_64-giflib \
+							mingw-w64-ucrt-x86_64-glib2 \
+							mingw-w64-ucrt-x86_64-gmp \
+							mingw-w64-ucrt-x86_64-headers-git \
+							mingw-w64-ucrt-x86_64-isl \
+							mingw-w64-ucrt-x86_64-libffi \
+							mingw-w64-ucrt-x86_64-libiconv \
+							mingw-w64-ucrt-x86_64-libjpeg-turbo \
+							mingw-w64-ucrt-x86_64-libmad \
+							mingw-w64-ucrt-x86_64-libmodplug \
+							mingw-w64-ucrt-x86_64-libogg \
+							mingw-w64-ucrt-x86_64-libpng \
+							mingw-w64-ucrt-x86_64-libsndfile \
+							mingw-w64-ucrt-x86_64-libsystre \
+							mingw-w64-ucrt-x86_64-libtiff \
+							mingw-w64-ucrt-x86_64-libtre-git \
+							mingw-w64-ucrt-x86_64-libvorbis \
+							mingw-w64-ucrt-x86_64-libwebp \
+							mingw-w64-ucrt-x86_64-libwinpthread-git \
+							mingw-w64-ucrt-x86_64-mpc \
+							mingw-w64-ucrt-x86_64-mpfr \
+							mingw-w64-ucrt-x86_64-ncurses \
+							mingw-w64-ucrt-x86_64-openssl \
+							mingw-w64-ucrt-x86_64-portaudio \
+							mingw-w64-ucrt-x86_64-python3 \
+							mingw-w64-ucrt-x86_64-python3-pip \
+							mingw-w64-ucrt-x86_64-python3-py \
+							mingw-w64-ucrt-x86_64-readline \
+							mingw-w64-ucrt-x86_64-smpeg2 \
+							mingw-w64-ucrt-x86_64-speex \
+							mingw-w64-ucrt-x86_64-speexdsp \
+							mingw-w64-ucrt-x86_64-termcap \
+							mingw-w64-ucrt-x86_64-windows-default-manifest \
+							mingw-w64-ucrt-x86_64-winpthreads-git \
+							mingw-w64-ucrt-x86_64-xz \
+							mingw-w64-ucrt-x86_64-zlib
       - name: CI-Build
         run: |
           echo 'Running in MSYS2!'
