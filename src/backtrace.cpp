@@ -6,7 +6,8 @@
 #include <string.h>
 #ifndef _WIN32
 #include <execinfo.h> // do not remove
-#include <windows.h>  // do not remove
+#else
+#include <windows.h> // do not remove
 #endif
 #include <cxxabi.h>
 #ifdef HAVE_LIBUNWIND
