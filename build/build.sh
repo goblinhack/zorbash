@@ -24,8 +24,7 @@ case "$MY_OS_NAME" in
     *MING*|*MSYS*)
         for i in \
             $(which sdl2-config) \
-            /mingw/bin/sdl2-config \
-            /mingw64/bin/sdl2-config
+            /ucrt64/bin/sdl2-config
         do
             if [ -x "$i" ]; then
                 SDL2_CONFIG=$i
@@ -190,8 +189,7 @@ case $MY_OS_NAME in
     *MING*|*MSYS*)
         for i in \
             $(which python3-config) \
-            /mingw/bin/python3-config \
-            /mingw64/bin/python3-config
+            /ucrt64/bin/python3-config
         do
             if [ -x "$i" ]; then
                 Python3_CONFIG=$i
@@ -217,8 +215,7 @@ case $MY_OS_NAME in
     *MING*|*MSYS*)
         for i in \
             $(which python3) \
-            /mingw/bin/python3 \
-            /mingw64/bin/python3
+            /ucrt64/bin/python3
         do
             if [ -x "$i" ]; then
                 Python3=$i
@@ -380,13 +377,13 @@ case "$MY_OS_NAME" in
         exit 1
         ;;
     *MING*)
-        PATH=/mingw64/bin:$PATH
-        find / 2>/dev/null -name "*g++*"
+        PATH=/ucrt64/bin:$PATH
+        ls -la /ucrt64/bin/*
 
         EXE=".exe"
         # gcc only
         C_FLAGS+=" -mwin32 "
-        C_FLAGS+=" -I/mingw64/x86_64-w64-ucrt-mingw32/include "
+        C_FLAGS+=" -I/ucrt64/x86_64-w64-ucrt-mingw32/include "
 
         #
         # Does not seem to work
@@ -395,7 +392,7 @@ case "$MY_OS_NAME" in
         # C_FLAGS+="$LDLIBS -Wl,--stack,128777216 "
         #
 
-        LDLIBS="$LDLIBS -L/mingw64/x86_64-w64-ucrt-mingw32/lib/"
+        LDLIBS="$LDLIBS -L/ucrt64/x86_64-w64-ucrt-mingw32/lib/"
         LDLIBS=$(echo $LDLIBS | sed -e 's/-lmingw32 //g')
         LDLIBS="$LDLIBS -funwind-tables"
         #LDLIBS="$LDLIBS -static"
@@ -404,7 +401,7 @@ case "$MY_OS_NAME" in
         LDLIBS="$LDLIBS -Wl,-Bstatic -lstdc++ -lpthread -Wl,-Bdynamic"
         LDLIBS="$LDLIBS -lopengl32"
         LDLIBS="$LDLIBS -lpthread"
-        LDLIBS="$LDLIBS /mingw64/lib/libSDL2_mixer.a"
+        LDLIBS="$LDLIBS /ucrt64/lib/libSDL2_mixer.a"
 
         #
         # Except it does not work and does not generate pdb files for clang
@@ -418,7 +415,7 @@ case "$MY_OS_NAME" in
         # For symbol decode StackTrace that doesn't really work without
         # visual studio. sigh
         #
-        LDLIBS="$LDLIBS -L/mingw64/lib/binutils -lbfd -lintl -ldbghelp -liberty -lz"
+        LDLIBS="$LDLIBS -L/ucrt64/lib/binutils -lbfd -lintl -ldbghelp -liberty -lz"
         ;;
     *Darwin*)
         EXE=""
@@ -536,11 +533,11 @@ fi
 
 case "$MY_OS_NAME" in
     *MING*)
-        echo "CC=/mingw64/bin/x86_64-w64-ucrt-mingw32-g++.exe # AUTOGEN" >> .Makefile
+        echo "CC=/ucrt64/bin/x86_64-w64-ucrt-mingw32-g++.exe # AUTOGEN" >> .Makefile
         #
         # To resolve WinMain, add these at the end again
         #
-        LDLIBS="$LDLIBS -lmingw32 -lSDL2main -lSDL2 -mwindows /mingw64/lib/libSDL2main.a -L/mingw64/lib -lSDL2main -lSDL2"
+        LDLIBS="$LDLIBS -lmingw32 -lSDL2main -lSDL2 -mwindows /ucrt64/lib/libSDL2main.a -L/ucrt64/lib -lSDL2main -lSDL2"
     ;;
 esac
 
@@ -602,8 +599,8 @@ then
     case "$MY_OS_NAME" in
         *MING*)
             log_info "Run:"
-            echo "  export PYTHONPATH=/mingw64/lib/python${PYVER}/:/mingw64/lib/python${PYVER}/lib-dynload:/mingw64/lib/python${PYVER}/site-packages"
-            echo "  export PYTHONHOME=/mingw64/bin"
+            echo "  export PYTHONPATH=/ucrt64/lib/python${PYVER}/:/ucrt64/lib/python${PYVER}/lib-dynload:/ucrt64/lib/python${PYVER}/site-packages"
+            echo "  export PYTHONHOME=/ucrt64/bin"
             echo "  ./zorbash-game.exe"
             ;;
         *)
