@@ -149,6 +149,11 @@ fi
 
 log_info "SDL2 config                : $SDL2_CONFIG"
 log_info "SDL2 version               : "$($SDL2_CONFIG --version)
+log_info "SDL2 libs                  : "$($SDL2_CONFIG --libs)
+log_info "SDL2 static libs           : "$($SDL2_CONFIG --static-libs)
+log_info "SDL2 cflags                : "$($SDL2_CONFIG --cflags)
+log_info "SDL2 prefix                : "$($SDL2_CONFIG --prefix)
+log_info "SDL2 exec-prefix           : "$($SDL2_CONFIG --exec-prefix)
 log_info "SDL2 include path          : $SDL2_INC_PATH"
 log_info "SDL2 mixer.h               : $SDL2_MIXER"
 #log_info "SDL2 found                 : $SDL2_SCORE"
@@ -383,15 +388,7 @@ case "$MY_OS_NAME" in
 
         EXE=".exe"
         # gcc only
-        C_FLAGS+=" -mwin32 "
         C_FLAGS+=" -I/ucrt64/ginclude "
-
-        #
-        # Does not seem to work
-        #
-        # https://stackoverflow.com/questions/156510/increase-stack-size-on-windows-gcc
-        # C_FLAGS+="$LDLIBS -Wl,--stack,128777216 "
-        #
 
         LDLIBS="$LDLIBS -L/ucrt64/glib/"
         LDLIBS=$(echo $LDLIBS | sed -e 's/-lmingw32 //g')
@@ -408,7 +405,6 @@ case "$MY_OS_NAME" in
         # Except it does not work and does not generate pdb files for clang
         #
         #C_FLAGS+="-gcodeview"
-        #C_FLAGS=`echo $C_FLAGS | sed -e 's/-mwin32 //g'`
         # And use this later
         # echo "CC=clang++.exe # AUTOGEN" >> .Makefile
 
