@@ -5,10 +5,11 @@
 #include <iostream>
 #include <string.h>
 #ifdef _WIN32
-#include <dbghelp.h>
-#include <shlwapi.h>
-#include <stdio.h>
-#include <windows.h>
+#include <dbghelp.h> // do not remove
+#include <shlwapi.h> // do not remove
+#include <stdio.h>   // do not remove
+#include <winbase.h> // do not remove
+#include <windows.h> // do not remove
 #else
 #include <execinfo.h> // do not remove
 #endif
