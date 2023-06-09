@@ -1,29 +1,48 @@
-name: windows
+name: Windows msys2
 
 on:
   push:
-    branches: [ "master" ]
   pull_request:
-    branches: [ "master" ]
-
-defaults:
-  run:
-    shell: msys2 {0}
+  schedule:
+    - cron: '0 0 * * 3'
+  workflow_dispatch:
 
 jobs:
   build:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { icon: '⬛', sys: mingw32 }
+          - { icon: '🟦', sys: mingw64 }
+          - { icon: '🟨', sys: ucrt64  }
+          - { icon: '🟧', sys: clang64 }
+    name: 🚧${{ matrix.icon }} ${{ matrix.sys }}
+    defaults:
+      run:
+        shell: msys2 {0}
     steps:
-    - uses: msys2/setup-msys2@v2
+    - name: '🧰 Checkout'
+      uses: actions/checkout@v3
       with:
+        fetch-depth: 0
+    - name: '${{ matrix.icon }} Setup MSYS2'
+      with:
+        msystem: ${{matrix.sys}}
         update: true
         install: >-
-          curl
           git
-    - uses: actions/checkout@v3
-    - shell: msys2 {0}
+          make
+        pacboy: >-
+          toolchain:p
+          cmake:p
+          SDL2:p
+          SDL2_mixer:p
+          base-devel:p
+          gcc:p
+          python3.9:p
+    - name: '🚧 Build TOOL'
       run: |
-        makepkg-mingw -sCLfc --noconfirm --noprogressbar
-        pacman --noconfirm -U mingw-w64-*-any.pkg.tar.xz
-    - run: |
-        set MSYSTEM=UCRT64
-        msys2 -c 'RUNME'
+        RUNME
+
