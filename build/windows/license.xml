@@ -1,13 +1,12 @@
 <license>
-    <issueDate>2014-12-08</issueDate>
+    <issueDate>2020-01-28</issueDate>
     <licenseSchemaVersion>1.2</licenseSchemaVersion>
     <licenseType>standard</licenseType>
-    <majorVersion>9</majorVersion>
-    <minorVersion>5</minorVersion>
-    <organization>Neil McGill - none - Open Source License</organization>
-    <patchVersion>3</patchVersion>
+    <majorVersion>19</majorVersion>
+    <minorVersion>12</minorVersion>
+    <organization>Neil McGill - Open Source License</organization>
+    <patchVersion>0</patchVersion>
     <product>BitRock InstallBuilder Multiplatform Enterprise</product>
-    <project>gorynlich</project>
-    <signature>caad09673ec506d0b35a8a4e2428531b</signature>
+    <project>Zorbash</project>
+    <signature>f70a9f81d7bba6749d6b590150b0a1d2</signature>
 </license>
-

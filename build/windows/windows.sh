@@ -13,10 +13,10 @@ echo Zipping python files
 echo ====================
 tar -cf python${PYVER}.tar \
   --exclude __pycache__ \
-  --exclude /mingw64/lib/python3.8/test \
-  --exclude /mingw64/lib/python3.8/tkinter \
-  --exclude /mingw64/lib/python3.8/turtledemo \
-  --exclude /mingw64/lib/python3.8/unittest \
+  --exclude /mingw64/lib/python${PYVER}/test \
+  --exclude /mingw64/lib/python${PYVER}/tkinter \
+  --exclude /mingw64/lib/python${PYVER}/turtledemo \
+  --exclude /mingw64/lib/python${PYVER}/unittest \
   /mingw64/lib/python${PYVER}
 
 ls -la python${PYVER}.tar
