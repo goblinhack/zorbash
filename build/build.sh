@@ -205,7 +205,7 @@ if [[ $SDL2_SCORE != "1" ]]; then
 fi
 
 #
-# Gives warings at runtime on MACOS
+# Gives warnings at runtime on MACOS
 #
 SDL_LIBS=$($SDL2_CONFIG --libs)
 if [ $? -ne 0 ]
@@ -305,8 +305,14 @@ fi
 if [[ "$Python3_CONFIG" != "" ]]; then
     log_info "Python3                    : $Python3"
     log_info "Python3 config             : $Python3_CONFIG"
-    log_info "Python3 exec               : "$($Python3_CONFIG --exec-prefix)
     log_info "Python3 include path       : $Python3_INC_PATH"
+    log_info "Python3 prefix             : "$($Python3_CONFIG --prefix)
+    log_info "Pythin3 exec-prefix        : "$($Python3_CONFIG --exec-prefix)
+    log_info "Python3 includes           : "$($Python3_CONFIG --includes)
+    log_info "Python3 libs               : "$($Python3_CONFIG --libs)
+    log_info "Python3 cflags             : "$($Python3_CONFIG --cflags)
+    log_info "Python3 ldflags            : "$($Python3_CONFIG --ldflags)
+    log_info "Pythin3 embed              : "$($Python3_CONFIG --embed)
     #log_info "Python3 found              : $Python3_SCORE"
 fi
 
