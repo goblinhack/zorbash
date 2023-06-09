@@ -131,7 +131,11 @@ typedef unsigned int uint32_t;
 
 #ifndef _UINT64_T
 #define _UINT64_T
+#ifndef __MINGW32__
+#ifndef __MINGW64__
 typedef unsigned long int uint64_t;
+#endif
+#endif
 #endif // _UINT64_T
 #endif
 
