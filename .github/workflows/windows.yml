@@ -1,0 +1,27 @@
+name: windows
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+defaults:
+  run:
+    shell: msys2 {0}
+
+steps:
+- uses: msys2/setup-msys2@v2
+  with:
+    update: true
+    install: >-
+      curl
+      git
+- uses: actions/checkout@v3
+- shell: msys2 {0}
+  run: |
+    makepkg-mingw -sCLfc --noconfirm --noprogressbar
+    pacman --noconfirm -U mingw-w64-*-any.pkg.tar.xz
+- run: |
+    set MSYSTEM=UCRT64
+    msys2 -c 'RUNME'
