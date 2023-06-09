@@ -5,7 +5,8 @@
 #include <iostream>
 #include <string.h>
 #ifndef _WIN32
-#include <execinfo.h>
+#include <execinfo.h> // do not remove
+#include <windows.h>  // do not remove
 #endif
 #include <cxxabi.h>
 #ifdef HAVE_LIBUNWIND
@@ -102,7 +103,7 @@ static auto cppDemangle(const char *abiName)
 std::string Backtrace::to_string(void)
 {
 #ifdef _WIN32
-  return ("");
+  return "";
 #else
   auto        addrlist = &bt[ 0 ];
   std::string sout     = "stack trace\n===========\n";
@@ -181,7 +182,7 @@ std::string Backtrace::to_string(void)
 void Backtrace::log(void)
 {
 #ifdef _WIN32
-  return ("");
+  return;
 #else
   auto addrlist = &bt[ 0 ];
 
