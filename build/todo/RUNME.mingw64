@@ -161,7 +161,7 @@ fi
 
 for i in colored hexdump flake8
 do
-    /mingw64-ucrt/bin/pip3 install $i
+    /mingw64-ucrt-ucrt/bin/pip3 install $i
     if [[ $? -ne 0 ]];
     then
             log_err "Install failed for pip3 hexdump I'll try and continue."

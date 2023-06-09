@@ -97,8 +97,8 @@ sdl_help()
     case $MY_OS_NAME in
     *MING*|*MSYS*)
         log_warn "Try:"
-        log_warn "  pacman -S mingw-w64-x86_64-SDL2"
-        log_warn "  pacman -S mingw-w64-x86_64-SDL2_mixer"
+        log_warn "  pacman -S mingw-w64-ucrt-x86_64-SDL2"
+        log_warn "  pacman -S mingw-w64-ucrt-x86_64-SDL2_mixer"
         ;;
     *Darwin*)
         log_warn "Install MAC ports then install:"
@@ -120,8 +120,8 @@ gcc_help()
     *MING*|*MSYS*)
         log_warn "Try:"
         log_warn "  pacman -S base-devel"
-        log_warn "  pacman -S mingw-w64-x86_64-gcc"
-        log_warn "  pacman -S mingw-w64-x86_64-gdb"
+        log_warn "  pacman -S mingw-w64-ucrt-x86_64-gcc"
+        log_warn "  pacman -S mingw-w64-ucrt-x86_64-gdb"
         ;;
     *Darwin*)
         log_warn "Install MAC ports then install:"
@@ -247,7 +247,7 @@ python_help()
     case $MY_OS_NAME in
     *MING*|*MSYS*)
         log_warn "Try:"
-        log_warn "  pacman -S mingw-w64-python3.9"
+        log_warn "  pacman -S mingw-w64-ucrt-python3.9"
         ;;
     *Darwin*)
         log_warn "Install MAC ports then install:"
@@ -385,7 +385,7 @@ case "$MY_OS_NAME" in
         EXE=".exe"
         # gcc only
         C_FLAGS+=" -mwin32 "
-        C_FLAGS+=" -I/mingw64/x86_64-w64-mingw32/include "
+        C_FLAGS+=" -I/mingw64/x86_64-w64-ucrt-mingw32/include "
 
         #
         # Does not seem to work
@@ -394,7 +394,7 @@ case "$MY_OS_NAME" in
         # C_FLAGS+="$LDLIBS -Wl,--stack,128777216 "
         #
 
-        LDLIBS="$LDLIBS -L/mingw64/x86_64-w64-mingw32/lib/"
+        LDLIBS="$LDLIBS -L/mingw64/x86_64-w64-ucrt-mingw32/lib/"
         LDLIBS=$(echo $LDLIBS | sed -e 's/-lmingw32 //g')
         LDLIBS="$LDLIBS -funwind-tables"
         #LDLIBS="$LDLIBS -static"
@@ -535,7 +535,7 @@ fi
 
 case "$MY_OS_NAME" in
     *MING*)
-        echo "CC=/mingw64/bin/x86_64-w64-mingw32-g++.exe # AUTOGEN" >> .Makefile
+        echo "CC=/mingw64/bin/x86_64-w64-ucrt-mingw32-g++.exe # AUTOGEN" >> .Makefile
         #
         # To resolve WinMain, add these at the end again
         #
