@@ -379,11 +379,12 @@ case "$MY_OS_NAME" in
     *MING*)
         PATH=/ucrt64/bin:$PATH
         ls -la /ucrt64/bin/*
+        ls -la /ucrt64/lib/*
 
         EXE=".exe"
         # gcc only
         C_FLAGS+=" -mwin32 "
-        C_FLAGS+=" -I/ucrt64/x86_64-w64-ucrt-mingw32/include "
+        C_FLAGS+=" -I/ucrt64/ginclude "
 
         #
         # Does not seem to work
@@ -392,7 +393,7 @@ case "$MY_OS_NAME" in
         # C_FLAGS+="$LDLIBS -Wl,--stack,128777216 "
         #
 
-        LDLIBS="$LDLIBS -L/ucrt64/x86_64-w64-ucrt-mingw32/lib/"
+        LDLIBS="$LDLIBS -L/ucrt64/glib/"
         LDLIBS=$(echo $LDLIBS | sed -e 's/-lmingw32 //g')
         LDLIBS="$LDLIBS -funwind-tables"
         #LDLIBS="$LDLIBS -static"
@@ -533,7 +534,7 @@ fi
 
 case "$MY_OS_NAME" in
     *MING*)
-        echo "CC=/ucrt64/bin/x86_64-w64-ucrt-mingw32-g++.exe # AUTOGEN" >> .Makefile
+        echo "CC=/ucrt64/bin/clang++.exe # AUTOGEN" >> .Makefile
         #
         # To resolve WinMain, add these at the end again
         #
