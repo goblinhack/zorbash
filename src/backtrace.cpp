@@ -5,11 +5,13 @@
 #include <iostream>
 #include <string.h>
 #ifdef _WIN32
-#include <dbghelp.h> // do not remove
-#include <shlwapi.h> // do not remove
+// clang-format off
 #include <stdio.h>   // do not remove
-#include <winbase.h> // do not remove
 #include <windows.h> // do not remove
+#include <shlwapi.h> // do not remove
+#include <winbase.h> // do not remove
+#include <dbghelp.h> // do not remove
+// clang-format on
 #else
 #include <execinfo.h> // do not remove
 #endif
