@@ -613,6 +613,7 @@ then
 
     rm -f Makefile.bak
 else
+    find / 2>/dev/null | grep ming
     log_die "Build failed"
     exit 1
 fi
