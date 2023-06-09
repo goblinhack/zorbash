@@ -188,7 +188,7 @@ unsigned char *file_io_read(const char *filename, int *out_len)
     return nullptr;
   }
 
-  len = (uint) ftell(file);
+  len = (unsigned int) ftell(file);
   if (len == -1) {
     fprintf(MY_STDERR, "Failed to get size of file \"%s\": %s\n", filename, strerror(errno));
     fclose(file);

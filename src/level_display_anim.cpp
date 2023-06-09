@@ -12,7 +12,7 @@ void Level::display_tick_animation(void)
     anim_speed = time_ms_cached();
   }
 
-  if ((time_ms_cached() - anim_speed) < (uint) 20) {
+  if ((time_ms_cached() - anim_speed) < (unsigned int) 20) {
     return;
   }
 

@@ -31,7 +31,7 @@ void Level::display_pixelart_blood(void)
     last_pulse_when = time_ms_cached();
   }
 
-  if ((time_ms_cached() - last_pulse_when) > (uint) 100) {
+  if ((time_ms_cached() - last_pulse_when) > (unsigned int) 100) {
     last_pulse_when = time_ms_cached();
 
     if (player->is_dead) {
