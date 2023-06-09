@@ -381,9 +381,9 @@ case "$MY_OS_NAME" in
         ;;
     *MING*)
         PATH=/mingw64/bin:$PATH
-        find /mingw64/bin
-        find /mingw64/include
-        find /mingw64/lib
+        ls /mingw64/bin/*
+        ls /mingw64/include/*
+        ls /mingw64/lib/*
 
         EXE=".exe"
         # gcc only
