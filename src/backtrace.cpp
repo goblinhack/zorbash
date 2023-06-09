@@ -4,10 +4,11 @@
 
 #include <iostream>
 #include <string.h>
-#ifndef _WIN32
-#include <execinfo.h> // do not remove
-#else
+#ifdef _WIN32
+#include <dbghelp.h> // do not remove
 #include <windows.h> // do not remove
+#else
+#include <execinfo.h> // do not remove
 #endif
 #include <cxxabi.h>
 #ifdef HAVE_LIBUNWIND
