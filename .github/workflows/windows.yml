@@ -1,4 +1,4 @@
-name: Windows msys2
+name: Example CMake
 
 on:
   push:
@@ -8,6 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
+
   build:
     runs-on: windows-latest
     strategy:
@@ -23,10 +24,12 @@ jobs:
       run:
         shell: msys2 {0}
     steps:
+
     - name: '🧰 Checkout'
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
+
     - name: '${{ matrix.icon }} Setup MSYS2'
       with:
         msystem: ${{matrix.sys}}
@@ -37,12 +40,9 @@ jobs:
         pacboy: >-
           toolchain:p
           cmake:p
-          SDL2:p
-          SDL2_mixer:p
-          base-devel:p
-          gcc:p
-          python3.9:p
+          ninja:p
+
     - name: '🚧 Build TOOL'
       run: |
-        RUNME
-
+        cmake -G Ninja -B build -DCMAKE_BUILD_TYPE=Release
+        cmake --build build
