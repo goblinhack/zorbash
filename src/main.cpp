@@ -51,8 +51,10 @@ void quit(void)
   signal(SIGSEGV, nullptr); // uninstall our handler
   signal(SIGABRT, nullptr); // uninstall our handler
   signal(SIGINT, nullptr);  // uninstall our handler
+#ifndef _WIN32
   signal(SIGPIPE, nullptr); // uninstall our handler
-  signal(SIGFPE, nullptr);  // uninstall our handler
+#endif
+  signal(SIGFPE, nullptr); // uninstall our handler
 #endif
 
   if (game) {
@@ -743,7 +745,9 @@ int main(int argc, char *argv[])
   signal(SIGABRT, segv_handler);
   signal(SIGINT, ctrlc_handler);
   signal(SIGILL, ctrlc_handler);
+#ifndef _WIN32
   signal(SIGPIPE, ctrlc_handler);
+#endif
   signal(SIGFPE, ctrlc_handler);
 #endif
 
