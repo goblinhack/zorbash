@@ -17,6 +17,7 @@ tar -cf python${PYVER}.tar \
   --exclude /ucrt64/lib/python${PYVER}/tkinter \
   --exclude /ucrt64/lib/python${PYVER}/turtledemo \
   --exclude /ucrt64/lib/python${PYVER}/unittest \
+  --exclude /ucrt64/lib/python${PYVER}/site-packages \
   /ucrt64/lib/python${PYVER}
 
 ls -la python${PYVER}.tar

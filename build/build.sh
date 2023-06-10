@@ -647,11 +647,13 @@ then
 ###############################################################################
 # Execute the following to build the release
 ###############################################################################
+sed -i "s/<version>.*/<version>$MYVER<\/version>/g" build/windows/windows.xml
 (cd build/windows/ ; ./windows.sh)
 %%
             chmod +x zorbash-create-release.sh
 
             cat >zorbash.sh <<%%
+
 #!/bin/sh
 ###############################################################################
 # Execute the following, or run ./zorbash.sh
