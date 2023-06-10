@@ -1,4 +1,5 @@
 
+
 source ./python.version.sh
 if [[ "$PYVER" = "" ]]; then
     echo "$0: python.version.sh does not have PYVER set"
@@ -13,11 +14,11 @@ echo Zipping python files
 echo ====================
 tar -cf python${PYVER}.tar \
   --exclude __pycache__ \
-  --exclude /mingw64/lib/python${PYVER}/test \
-  --exclude /mingw64/lib/python${PYVER}/tkinter \
-  --exclude /mingw64/lib/python${PYVER}/turtledemo \
-  --exclude /mingw64/lib/python${PYVER}/unittest \
-  /mingw64/lib/python${PYVER}
+  --exclude /ucrt64/lib/python${PYVER}/test \
+  --exclude /ucrt64/lib/python${PYVER}/tkinter \
+  --exclude /ucrt64/lib/python${PYVER}/turtledemo \
+  --exclude /ucrt64/lib/python${PYVER}/unittest \
+  /ucrt64/lib/python${PYVER}
 
 ls -la python${PYVER}.tar
 
@@ -27,8 +28,8 @@ echo ======================
 echo tar -xf python${PYVER}.tar
 tar -xf python${PYVER}.tar
 
-mv mingw64/lib/python${PYVER} .
-/bin/rm -rf mingw64
+mv ucrt64/lib/python${PYVER} .
+/bin/rm -rf ucrt64
 
 echo
 echo Final files to package
@@ -38,7 +39,8 @@ ls -la
 echo
 echo Package with bitrock
 echo ====================
-"/c/Program Files (x86)/BitRock InstallBuilder Enterprise 19.12.0/bin/builder-cli.exe" build windows.xml
+"/c/Program Files/InstallBuilder Enterprise 23.4.0/bin/builder-cli.exe" build windows.xml
+
 if [[ $? -ne 0 ]];
 then
     exit 1
@@ -47,5 +49,5 @@ fi
 echo
 echo Installer
 echo =========
-ls -la /c/Users/nmcgill/Documents/InstallBuilder/output/
-cp /c/Users/nmcgill/Documents/InstallBuilder/output/* ..
+ls -la /c/Users/neila/Documents/InstallBuilder/output/
+cp /c/Users/neila/Documents/InstallBuilder/output/* ..

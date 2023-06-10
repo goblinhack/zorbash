@@ -4,7 +4,6 @@
 appdata
 build.log
 build/windows/python.version.sh
-build/windows/windows.xml
 data/gfx
 data/sounds
 Makefile

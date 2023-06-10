@@ -3,9 +3,8 @@
     <fullName>Zorbash</fullName>
     <version>0.1.1</version>
     <installerFilename></installerFilename>
-    <licenseFile>C:/msys64/home/nmcgill/zorbash/build/LICENSE</licenseFile>
-    <logoImage>C:/msys64/home/nmcgill/zorbash/build/windowszorbash-logo.png</logoImage>
-    <title_splashImage>C:/msys64/home/nmcgill/zorbash/build/windowszorbash-title_splash.png</title_splashImage>
+    <licenseFile>C:/msys64/home/neila/zorbash/LICENSE</licenseFile>
+    <logoImage>C:/msys64/home/neila/zorbash/build/windows/zorbash-logo.png</logoImage>
     <componentList>
         <component>
             <name>default</name>
@@ -17,10 +16,10 @@
                 <shortcut>
                     <comment>zorbash</comment>
                     <exec>${installdir}/zorbash/zorbash</exec>
-                    <icon>${installdir}/zorbash//build/windowszorbash.ico</icon>
+                    <icon>${installdir}/zorbash//build/windows/zorbash.ico</icon>
                     <name>zorbash</name>
                     <path>${installdir}/zorbash</path>
-                    <platforms>all</platforms>
+                    <platforms>windows-x64</platforms>
                     <runAsAdmin>0</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
                     <windowsExec>${installdir}/zorbash.exe</windowsExec>
@@ -34,7 +33,7 @@
                     <description>Program Files</description>
                     <destination>${installdir}</destination>
                     <name>programfiles</name>
-                    <platforms>all</platforms>
+                    <platforms>windows-x64</platforms>
                     <shortcutList>
                         <shortcut>
                             <comment>Uninstall</comment>
@@ -42,7 +41,7 @@
                             <icon></icon>
                             <name>Uninstall ${product_fullname}</name>
                             <path>${installdir}</path>
-                            <platforms>all</platforms>
+                            <platforms>windows-x64</platforms>
                             <runAsAdmin>0</runAsAdmin>
                             <runInTerminal>0</runInTerminal>
                             <windowsExec>${installdir}/${uninstallerName}.exe</windowsExec>
@@ -62,112 +61,109 @@
                     <description>Program Files</description>
                     <destination>${installdir}</destination>
                     <name>programfileswindows</name>
-                    <platforms>windows</platforms>
+                    <platforms>windows-x64</platforms>
                     <distributionFileList>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/SDL2.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/SDL2.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/SDL2_ttf.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/SDL2_ttf.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/SDL2_mixer.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/SDL2_mixer.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libpythonPYVER.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libpython3.10.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/home/nmcgill/zorbash/build/windowspythonPYVER</origin>
+                            <origin>C:/msys64/home/neila/zorbash/build/windows/python3.10</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libwinpthread-1.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libwinpthread-1.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libFLAC-8.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libFLAC.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libfluidsynth-2.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libfluidsynth-3.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libmad-0.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libmad-0.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libmodplug-1.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libmodplug-1.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libvorbisfile-3.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libvorbisfile-3.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libogg-0.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libogg-0.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libstdc++-6.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libstdc++-6.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libglib-2.0-0.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libglib-2.0-0.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libportaudio-2.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libportaudio.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libsndfile-1.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libsndfile-1.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libgcc_s_seh-1.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libgcc_s_seh-1.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libvorbis-0.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libvorbis-0.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libintl-8.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libintl-8.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libspeex-1.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libspeex-1.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libfreetype-6.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libfreetype-6.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libvorbisenc-2.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libvorbisenc-2.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libiconv-2.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libiconv-2.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libbz2-1.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libbz2-1.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/liblzma-5.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/liblzma-5.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libharfbuzz-0.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libharfbuzz-0.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libgraphite2.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libgraphite2.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libpcre-1.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libpcre-1.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/libpng16-16.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libpng16-16.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/mingw64/bin/zlib1.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/zlib1.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/home/nmcgill/zorbash/zorbash.exe</origin>
+                            <origin>C:/msys64/home/neila/zorbash/zorbash-game.exe</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/home/nmcgill/zorbash/build/windowspythonPYVER</origin>
+                            <origin>C:/msys64/home/neila/zorbash/python</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/home/nmcgill/zorbash/python</origin>
+                            <origin>C:/msys64/home/neila/zorbash/data</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/home/nmcgill/zorbash/data</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>C:/msys64/home/nmcgill/zorbash/build/windowszorbash.ico</origin>
+                            <origin>C:/msys64/home/neila/zorbash/build/windows/zorbash.ico</origin>
                         </distributionFile>
                     </distributionFileList>
                 </folder>
@@ -196,7 +192,7 @@
                     <runInTerminal>0</runInTerminal>
                     <windowsExec>${installdir}/zorbash/zorbash/src/zorbash.exe</windowsExec>
                     <windowsExecArgs></windowsExecArgs>
-                    <windowsIcon>${installdir}/zorbash/zorbash/build/windowszorbash.ico</windowsIcon>
+                    <windowsIcon>${installdir}/zorbash/zorbash/build/windows/zorbash.ico</windowsIcon>
                     <windowsPath>${installdir}/zorbash/zorbash</windowsPath>
                 </startMenuShortcut>
             </startMenuShortcutList>
