@@ -136,6 +136,65 @@ help_full()
       log_warn "  ${MINGW_PKG_TYPE}-x86_64-winpthreads-git"
       log_warn "  ${MINGW_PKG_TYPE}-x86_64-xz"
       log_warn "  ${MINGW_PKG_TYPE}-x86_64-zlib"
+      pacman -S -y git \
+	      make \
+	      ${MINGW_PKG_TYPE}-x86_64-gcc \
+	      ${MINGW_PKG_TYPE}-x86_64-SDL \
+	      ${MINGW_PKG_TYPE}-x86_64-SDL2 \
+	      ${MINGW_PKG_TYPE}-x86_64-SDL2_gfx \
+	      ${MINGW_PKG_TYPE}-x86_64-SDL2_image \
+	      ${MINGW_PKG_TYPE}-x86_64-SDL2_mixer \
+	      ${MINGW_PKG_TYPE}-x86_64-SDL2_net \
+	      ${MINGW_PKG_TYPE}-x86_64-SDL2_ttf \
+	      ${MINGW_PKG_TYPE}-x86_64-binutils \
+	      ${MINGW_PKG_TYPE}-x86_64-bzip2 \
+	      ${MINGW_PKG_TYPE}-x86_64-clang \
+	      ${MINGW_PKG_TYPE}-x86_64-clang-tools-extra \
+	      ${MINGW_PKG_TYPE}-x86_64-crt-git \
+	      ${MINGW_PKG_TYPE}-x86_64-expat \
+	      ${MINGW_PKG_TYPE}-x86_64-flac \
+	      ${MINGW_PKG_TYPE}-x86_64-fluidsynth \
+	      ${MINGW_PKG_TYPE}-x86_64-gcc \
+	      ${MINGW_PKG_TYPE}-x86_64-gcc-libs \
+	      ${MINGW_PKG_TYPE}-x86_64-gdb \
+	      ${MINGW_PKG_TYPE}-x86_64-gdbm \
+	      ${MINGW_PKG_TYPE}-x86_64-gettext \
+	      ${MINGW_PKG_TYPE}-x86_64-giflib \
+	      ${MINGW_PKG_TYPE}-x86_64-glib2 \
+	      ${MINGW_PKG_TYPE}-x86_64-gmp \
+	      ${MINGW_PKG_TYPE}-x86_64-headers-git \
+	      ${MINGW_PKG_TYPE}-x86_64-isl \
+	      ${MINGW_PKG_TYPE}-x86_64-libffi \
+	      ${MINGW_PKG_TYPE}-x86_64-libiconv \
+	      ${MINGW_PKG_TYPE}-x86_64-libjpeg-turbo \
+	      ${MINGW_PKG_TYPE}-x86_64-libmad \
+	      ${MINGW_PKG_TYPE}-x86_64-libmodplug \
+	      ${MINGW_PKG_TYPE}-x86_64-libogg \
+	      ${MINGW_PKG_TYPE}-x86_64-libpng \
+	      ${MINGW_PKG_TYPE}-x86_64-libsndfile \
+	      ${MINGW_PKG_TYPE}-x86_64-libsystre \
+	      ${MINGW_PKG_TYPE}-x86_64-libtiff \
+	      ${MINGW_PKG_TYPE}-x86_64-libtre-git \
+	      ${MINGW_PKG_TYPE}-x86_64-libvorbis \
+	      ${MINGW_PKG_TYPE}-x86_64-libwebp \
+	      ${MINGW_PKG_TYPE}-x86_64-libwinpthread-git \
+	      ${MINGW_PKG_TYPE}-x86_64-mpc \
+	      ${MINGW_PKG_TYPE}-x86_64-mpfr \
+	      ${MINGW_PKG_TYPE}-x86_64-ncurses \
+	      ${MINGW_PKG_TYPE}-x86_64-openssl \
+	      ${MINGW_PKG_TYPE}-x86_64-portaudio \
+	      ${MINGW_PKG_TYPE}-x86_64-python3 \
+	      ${MINGW_PKG_TYPE}-x86_64-python3-pip \
+	      ${MINGW_PKG_TYPE}-x86_64-python3-py \
+	      ${MINGW_PKG_TYPE}-x86_64-readline \
+	      ${MINGW_PKG_TYPE}-x86_64-smpeg2 \
+	      ${MINGW_PKG_TYPE}-x86_64-speex \
+	      ${MINGW_PKG_TYPE}-x86_64-speexdsp \
+	      ${MINGW_PKG_TYPE}-x86_64-termcap \
+	      ${MINGW_PKG_TYPE}-x86_64-windows-default-manifest \
+	      ${MINGW_PKG_TYPE}-x86_64-winpthreads-git \
+	      ${MINGW_PKG_TYPE}-x86_64-xz \
+	      ${MINGW_PKG_TYPE}-x86_64-zlib 
       ;;
     *Darwin*)
       log_warn "Install MAC ports then install:"
