@@ -506,14 +506,14 @@ public:
 
   bool init_level(point3d world_at, point grid_at, int difficulty_depth, int dungeon_walk_order_level_no);
   bool load(std::string save_file, class Game &target);
+  bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wait, bool jump);
+  bool player_tick_(bool left, bool right, bool up, bool down, bool attack, bool wait, bool jump);
   bool save(std::string save_file);
   bool tick_end();
   bool wid_bag_move_item(Thingp t);
-
   bool wid_thing_info_create_list(std::vector< Thingp > &ts);
   bool wid_thing_info_create(Thingp, bool when_hovering_over = false);
   bool wid_thing_info_push_popup(Thingp t);
-
   bool wid_tp_info_create_list(std::vector< Tpp > &ts);
   bool wid_tp_info_create(Tpp, bool when_hovering_over = false);
   bool wid_tp_info_push_popup(Tpp t);

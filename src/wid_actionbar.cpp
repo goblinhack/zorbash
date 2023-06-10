@@ -3,6 +3,7 @@
 //
 
 #include "my_game.hpp"
+#include "my_player.hpp"
 #include "my_sdl_proto.hpp"
 #include "my_thing.hpp"
 #include "my_ui.hpp"
@@ -793,7 +794,7 @@ static uint8_t wid_actionbar_wait(Widp w, int x, int y, uint32_t button)
 
   wid_actionbar_close_all_popups();
   TOPCON("You pass the time...");
-  game->tick_begin("wait");
+  game->player_tick(false, false, false, false, false, true, false);
 
   return true;
 }

@@ -1731,7 +1731,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(int dx, int dy)
 
         AI_LOG("Trying to break down a door", it);
         if (is_player()) {
-          player_tick(left, right, up, down, attack, wait, jump);
+          game->player_tick(left, right, up, down, attack, wait, jump);
         } else if (is_moveable()) {
           move(curr_at, up, down, left, right, attack, wait, &attack_options);
         }
@@ -1758,7 +1758,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(int dx, int dy)
 
         AI_LOG("Trying to break out of a web", it);
         if (is_player()) {
-          player_tick(left, right, up, down, attack, wait, jump);
+          game->player_tick(left, right, up, down, attack, wait, jump);
         } else if (is_moveable()) {
           move(curr_at, up, down, left, right, attack, wait, &attack_options);
         }
@@ -1785,7 +1785,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(int dx, int dy)
 
         AI_LOG("Trying to break out of ice", it);
         if (is_player()) {
-          player_tick(left, right, up, down, attack, wait, jump);
+          game->player_tick(left, right, up, down, attack, wait, jump);
         } else if (is_moveable()) {
           move(curr_at, up, down, left, right, attack, wait, &attack_options);
         }
@@ -2525,7 +2525,7 @@ bool Thing::ai_tick(bool recursing)
 
   if (do_something) {
     if (is_player()) {
-      player_tick(left, right, up, down, attack, wait, jump);
+      game->player_tick(left, right, up, down, attack, wait, jump);
     } else if (is_moveable()) {
       ThingAttackOptions attack_options {};
       move(curr_at, up, down, left, right, attack, wait, &attack_options);

@@ -103,7 +103,7 @@ void Level::handle_input_events(void)
     game->request_player_to_wait_or_collect = false;
 
     if (up || down || left || right || wait_or_collect) {
-      if (player_tick(left, right, up, down, attack, wait_or_collect, jump)) {
+      if (game->player_tick(left, right, up, down, attack, wait_or_collect, jump)) {
         tick_begin_now();
       }
     }

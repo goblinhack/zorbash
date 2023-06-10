@@ -8,11 +8,11 @@
 #include "my_wid_console.hpp"
 #include "my_wid_thing_info.hpp"
 
-static bool player_tick_(bool left, bool right, bool up, bool down, bool attack, bool wait, bool jump)
+bool Game::player_tick_(bool left, bool right, bool up, bool down, bool attack, bool wait, bool jump)
 {
   TRACE_AND_INDENT();
 
-  auto level = game->get_current_level();
+  auto level = get_current_level();
   if (! level) {
     LOG("Player tick; ignore, no level");
     return false;
@@ -42,7 +42,7 @@ static bool player_tick_(bool left, bool right, bool up, bool down, bool attack,
     return false;
   }
 
-  if (! g_opt_ascii && game->level->ts_fade_out_begin) {
+  if (! g_opt_ascii && level->ts_fade_out_begin) {
     LOG("Player tick; ignore, level fading im/out");
     return false;
   }
@@ -50,7 +50,7 @@ static bool player_tick_(bool left, bool right, bool up, bool down, bool attack,
   //
   // Trying to move when moving items?
   //
-  switch (game->state) {
+  switch (state) {
     case Game::STATE_NORMAL : break;
     case Game::STATE_OPTIONS_FOR_ITEM_MENU : LOG("Ignore player action when choosing item options"); return false;
     case Game::STATE_INVENTORY : // Currently managing inventory
@@ -98,16 +98,16 @@ static bool player_tick_(bool left, bool right, bool up, bool down, bool attack,
   }
 
   if (jump) {
-    game->tick_begin("player jumped");
+    tick_begin("player jumped");
     DBG("Player jumped");
 
-    if (game->cursor_move_path.size()) {
+    if (cursor_move_path.size()) {
       //
       // A path to the target exists.
       //
-      for (auto i = game->cursor_move_path.rbegin(); i != game->cursor_move_path.rend(); i++) {
+      for (auto i = cursor_move_path.rbegin(); i != cursor_move_path.rend(); i++) {
         auto p = *i;
-        // for (auto p : std::ranges::reverse_view(game->cursor_move_path)) {
+        // for (auto p : std::ranges::reverse_view(cursor_move_path)) {
         if (player->try_to_jump_carefree(make_point(p.x, p.y))) {
           player->clear_move_path("Tried to jump");
           break;
@@ -166,7 +166,7 @@ static bool player_tick_(bool left, bool right, bool up, bool down, bool attack,
     // If something was being described and we moved, clear it now
     //
     bool was_moving     = player->is_moving;
-    auto old_thing_info = game->current_wid_thing_info;
+    auto old_thing_info = current_wid_thing_info;
     auto future_pos     = player->curr_at + dir;
 
     ThingAttackOptions attack_options {};
@@ -191,7 +191,7 @@ static bool player_tick_(bool left, bool right, bool up, bool down, bool attack,
     //
     if (moved) {
       DBG("Player moved");
-      if (! was_moving && old_thing_info && (old_thing_info == game->current_wid_thing_info)) {
+      if (! was_moving && old_thing_info && (old_thing_info == current_wid_thing_info)) {
         DBG("Player moved; clear thing info");
         wid_thing_info_fini("player moved");
       }
@@ -201,7 +201,7 @@ static bool player_tick_(bool left, bool right, bool up, bool down, bool attack,
   return true;
 }
 
-bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wait, bool jump)
+bool Game::player_tick(bool left, bool right, bool up, bool down, bool attack, bool wait, bool jump)
 {
   pcg_random_allowed++;
   auto ret = player_tick_(left, right, up, down, attack, wait, jump);
