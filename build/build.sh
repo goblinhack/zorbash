@@ -649,6 +649,9 @@ then
 ###############################################################################
 sed -i "s/<version>.*/<version>$MYVER<\/version>/g" build/windows/windows.xml
 (cd build/windows/ ; ./windows.sh)
+
+git tag -a v$MYVER
+git push origin --tags
 %%
             chmod +x zorbash-create-release.sh
 
