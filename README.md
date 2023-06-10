@@ -1,5 +1,9 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- Death by jumping in the abyss, crash on new game (I add a save). Not reproduced. -->
+<!-- Distinction between depth & jumpable plateform not always clear. I saw my char jumped to their death but didnt know why. I thought the floor broke under. -->
+<!-- Maybe auto-pause when damage taken? (Like walking on lava) -->
+<!-- I died by being burn alive by some "beacon of light" / brazier. -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
