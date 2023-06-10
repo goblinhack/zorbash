@@ -19,8 +19,6 @@
 
 . ./build/common.sh
 
-ucrt64
-
 # The default MINGW32 and MINGW64 environments build binaries using the older
 #  MSVCRT library that should be present on all Windows systems.
 MINGW_TYPE=mingw64
