@@ -13,8 +13,6 @@
 #include "my_wid_thing_info.hpp"
 #include "my_wid_tp_info.hpp"
 
-#include <ranges>
-
 WidPopup                 *wid_skills;
 static std::vector< Tpp > skills;
 static std::string        current_skill_tree;
