@@ -334,7 +334,7 @@ void glcolorfast(color s);
     if (likely(errCode == GL_NO_ERROR)) {                                                                            \
       /* CON("GFX: ok at %s:%s line %u", SRC_FILE_NAME, SRC_FUNC_NAME, SRC_LINE_NUM); */                             \
     } else {                                                                                                         \
-      ERR("GFX: error at %s:%s line %u", SRC_FILE_NAME, SRC_FUNC_NAME, SRC_LINE_NUM);                                \
+      LOG("GFX: error at %s:%s line %u", SRC_FILE_NAME, SRC_FUNC_NAME, SRC_LINE_NUM);                                \
       gl_error(errCode);                                                                                             \
     }                                                                                                                \
   }
