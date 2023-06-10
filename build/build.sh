@@ -642,6 +642,15 @@ then
         *MING*|*MSYS*)
             log_info "Run:"
 
+            cat >zorbash-create-release.sh <<%%
+#!/bin/sh
+###############################################################################
+# Execute the following to build the release
+###############################################################################
+(cd build/windows/ ; ./windows.sh)
+%%
+            chmod +x zorbash-create-release.sh
+
             cat >zorbash.sh <<%%
 #!/bin/sh
 ###############################################################################
@@ -651,6 +660,7 @@ export PYTHONPATH=/${MINGW_TYPE}/lib/python${PYVER}/:/${MINGW_TYPE}/lib/python${
 export PYTHONHOME=/${MINGW_TYPE}/bin
 ./zorbash-game.exe
 %%
+
             cat zorbash.sh
             chmod +x zorbash.sh
             ;;
