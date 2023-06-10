@@ -377,7 +377,7 @@ bool Thing::fall_to_next_level(void)
       //
       int fall_dmg = 0;
       if (is_player()) {
-        fall_dmg = pcg_random_range(20, 50);
+        fall_dmg = pcg_random_range(5, 30);
       }
 
       if (is_staff() || is_potion() || is_mob() || is_monst()) {
