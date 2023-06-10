@@ -134,6 +134,7 @@ help_full()
 	      ${MINGW_PKG_TYPE}-x86_64-windows-default-manifest \
 	      ${MINGW_PKG_TYPE}-x86_64-winpthreads-git \
 	      ${MINGW_PKG_TYPE}-x86_64-xz \
+	      ${MINGW_PKG_TYPE}-x86_64-ag \
 	      ${MINGW_PKG_TYPE}-x86_64-zlib 
       log_warn "Now re-run RUNME"
       ;;

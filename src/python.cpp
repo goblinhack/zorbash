@@ -56,14 +56,23 @@ void py_add_to_path(const char *path)
 {
   TRACE_AND_INDENT();
 
-  LOG("Add python path: %s", path);
+  //
+  // Windows hack
+  //
+  auto tmp      = strsub(path, "\\", "@@@@", "path");
+  auto tmp2      = strsub(tmp, "@@@@", "\\\\", "path");
+
+  CON("Add python path: %s", path);
 
   //
   // NOTE: PySys_SetPath is deprecated.
   //
   std::string cmd = "import sys\n";
-  cmd += "sys.path.append('";
-  cmd += std::string(path);
-  cmd += "')\n";
+  cmd += "sys.path.append(\"";
+  cmd += std::string(tmp2);
+  cmd += "\")\n";
   PyRun_SimpleString(cmd.c_str());
+
+  myfree(tmp);
+  myfree(tmp2);
 }
