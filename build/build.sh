@@ -30,6 +30,26 @@ MINGW_PKG_TYPE=mingw-w64
 MINGW_TYPE=ucrt64
 MINGW_PKG_TYPE=mingw-w64-ucrt
 
+# Determine OS platform
+# https://askubuntu.com/questions/459402/how-to-know-if-the-running-platform-is-ubuntu-or-centos-with-help-of-a-bash-scri
+UNAME=$(uname | tr "[:upper:]" "[:lower:]")
+# If Linux, try to determine specific distribution
+if [ "$UNAME" == "linux" ]; then
+    # If available, use LSB to identify distribution
+    if [ -f /etc/lsb-release -o -d /etc/lsb-release.d ]; then
+        export DISTRO=$(lsb_release -i | cut -d: -f2 | sed s/'^\t'//)
+    # Otherwise, use release info file
+    else
+        export DISTRO=$(ls -d /etc/[A-Za-z]*[_-][rv]e[lr]* | grep -v "lsb" | cut -d'/' -f3 | cut -d'-' -f1 | cut -d'_' -f1)
+    fi
+fi
+
+# For everything else (or if above failed), just use generic identifier
+[ "$DISTRO" == "" ] && export DISTRO=$UNAME
+unset UNAME
+
+log_info "Distro                     : $DISTRO"
+
 help_full()
 {
     case $(uname) in
@@ -47,95 +67,100 @@ help_full()
       log_warn "  dnf install -y libmikmod-devel"
       log_warn "  dnf install -y libfishsound-devel"
       log_warn " "
-      log_warn "For Ubuntu, you may need to install:"
-      log_warn "  apt-get install -y build-essential"
-      log_warn "  apt-get install -y g++"
-      log_warn "  apt-get install -y git"
-      log_warn "  apt-get install -y libegl1"
-      log_warn "  apt-get install -y libfishsound1-dev"
-      log_warn "  apt-get install -y libflac-dev"
-      log_warn "  apt-get install -y libfluidsynth-dev"
-      log_warn "  apt-get install -y libfreetype6-dev"
-      log_warn "  apt-get install -y libgl1"
-      log_warn "  apt-get install -y libglvnd0"
-      log_warn "  apt-get install -y libglx0"
-      log_warn "  apt-get install -y libmikmod-dev"
-      log_warn "  apt-get install -y liboggz2-dev"
-      log_warn "  apt-get install -y libsdl2-2.0-0"
-      log_warn "  apt-get install -y libsdl2-dev"
-      log_warn "  apt-get install -y libsdl2-mixer-2.0-0"
-      log_warn "  apt-get install -y libsdl2-mixer-dev"
-      log_warn "  apt-get install -y libsmpeg-dev"
-      log_warn "  apt-get install -y libx11-6"
-      log_warn "  apt-get install -y libxext6"
-      log_warn "  apt-get install -y python3"
-      log_warn "  apt-get install -y python3-dev"
-      log_warn "  apt-get install -y ssh"
-      log_warn "  apt-get install -y vim"
-      log_warn "  apt-get install -y xutils-dev"
+      set -x
+      log_warn "Install the following for Ubuntu?"
+      apt-get install -y build-essential \
+                      g++ \
+                      git \
+                      libegl1 \
+                      libfishsound1-dev \
+                      libflac-dev \
+                      libfluidsynth-dev \
+                      libfreetype6-dev \
+                      libgl1 \
+                      libglvnd0 \
+                      libglx0 \
+                      libmikmod-dev \
+                      liboggz2-dev \
+                      libsdl2-2.0-0 \
+                      libsdl2-dev \
+                      libsdl2-mixer-2.0-0 \
+                      libsdl2-mixer-dev \
+                      libsmpeg-dev \
+                      libx11-6 \
+                      libxext6 \
+                      python3 \
+                      python3-dev \
+                      ssh \
+                      vim \
+                      xutils-dev
+      set +x
+      log_warn "Now re-run RUNME"
       ;;
     *MING*|*MSYS*)
       log_warn "Install the following?"
+      set -x
       pacman -S git \
-	      make \
-	      ${MINGW_PKG_TYPE}-x86_64-gcc \
-	      ${MINGW_PKG_TYPE}-x86_64-SDL \
-	      ${MINGW_PKG_TYPE}-x86_64-SDL2 \
-	      ${MINGW_PKG_TYPE}-x86_64-SDL2_gfx \
-	      ${MINGW_PKG_TYPE}-x86_64-SDL2_image \
-	      ${MINGW_PKG_TYPE}-x86_64-SDL2_mixer \
-	      ${MINGW_PKG_TYPE}-x86_64-SDL2_net \
-	      ${MINGW_PKG_TYPE}-x86_64-SDL2_ttf \
-	      ${MINGW_PKG_TYPE}-x86_64-binutils \
-	      ${MINGW_PKG_TYPE}-x86_64-bzip2 \
-	      ${MINGW_PKG_TYPE}-x86_64-clang \
-	      ${MINGW_PKG_TYPE}-x86_64-clang-tools-extra \
-	      ${MINGW_PKG_TYPE}-x86_64-crt-git \
-	      ${MINGW_PKG_TYPE}-x86_64-expat \
-	      ${MINGW_PKG_TYPE}-x86_64-flac \
-	      ${MINGW_PKG_TYPE}-x86_64-fluidsynth \
-	      ${MINGW_PKG_TYPE}-x86_64-gcc \
-	      ${MINGW_PKG_TYPE}-x86_64-gcc-libs \
-	      ${MINGW_PKG_TYPE}-x86_64-gdb \
-	      ${MINGW_PKG_TYPE}-x86_64-gdbm \
-	      ${MINGW_PKG_TYPE}-x86_64-gettext \
-	      ${MINGW_PKG_TYPE}-x86_64-giflib \
-	      ${MINGW_PKG_TYPE}-x86_64-glib2 \
-	      ${MINGW_PKG_TYPE}-x86_64-gmp \
-	      ${MINGW_PKG_TYPE}-x86_64-headers-git \
-	      ${MINGW_PKG_TYPE}-x86_64-isl \
-	      ${MINGW_PKG_TYPE}-x86_64-libffi \
-	      ${MINGW_PKG_TYPE}-x86_64-libiconv \
-	      ${MINGW_PKG_TYPE}-x86_64-libjpeg-turbo \
-	      ${MINGW_PKG_TYPE}-x86_64-libmad \
-	      ${MINGW_PKG_TYPE}-x86_64-libmodplug \
-	      ${MINGW_PKG_TYPE}-x86_64-libogg \
-	      ${MINGW_PKG_TYPE}-x86_64-libpng \
-	      ${MINGW_PKG_TYPE}-x86_64-libsndfile \
-	      ${MINGW_PKG_TYPE}-x86_64-libsystre \
-	      ${MINGW_PKG_TYPE}-x86_64-libtiff \
-	      ${MINGW_PKG_TYPE}-x86_64-libtre-git \
-	      ${MINGW_PKG_TYPE}-x86_64-libvorbis \
-	      ${MINGW_PKG_TYPE}-x86_64-libwebp \
-	      ${MINGW_PKG_TYPE}-x86_64-libwinpthread-git \
-	      ${MINGW_PKG_TYPE}-x86_64-mpc \
-	      ${MINGW_PKG_TYPE}-x86_64-mpfr \
-	      ${MINGW_PKG_TYPE}-x86_64-ncurses \
-	      ${MINGW_PKG_TYPE}-x86_64-openssl \
-	      ${MINGW_PKG_TYPE}-x86_64-portaudio \
-	      ${MINGW_PKG_TYPE}-x86_64-python3 \
-	      ${MINGW_PKG_TYPE}-x86_64-python3-pip \
-	      ${MINGW_PKG_TYPE}-x86_64-python3-py \
-	      ${MINGW_PKG_TYPE}-x86_64-readline \
-	      ${MINGW_PKG_TYPE}-x86_64-smpeg2 \
-	      ${MINGW_PKG_TYPE}-x86_64-speex \
-	      ${MINGW_PKG_TYPE}-x86_64-speexdsp \
-	      ${MINGW_PKG_TYPE}-x86_64-termcap \
-	      ${MINGW_PKG_TYPE}-x86_64-windows-default-manifest \
-	      ${MINGW_PKG_TYPE}-x86_64-winpthreads-git \
-	      ${MINGW_PKG_TYPE}-x86_64-xz \
-	      ${MINGW_PKG_TYPE}-x86_64-ag \
-	      ${MINGW_PKG_TYPE}-x86_64-zlib 
+        make \
+        ${MINGW_PKG_TYPE}-x86_64-gcc \
+        ${MINGW_PKG_TYPE}-x86_64-SDL \
+        ${MINGW_PKG_TYPE}-x86_64-SDL2 \
+        ${MINGW_PKG_TYPE}-x86_64-SDL2_gfx \
+        ${MINGW_PKG_TYPE}-x86_64-SDL2_image \
+        ${MINGW_PKG_TYPE}-x86_64-SDL2_mixer \
+        ${MINGW_PKG_TYPE}-x86_64-SDL2_net \
+        ${MINGW_PKG_TYPE}-x86_64-SDL2_ttf \
+        ${MINGW_PKG_TYPE}-x86_64-binutils \
+        ${MINGW_PKG_TYPE}-x86_64-bzip2 \
+        ${MINGW_PKG_TYPE}-x86_64-clang \
+        ${MINGW_PKG_TYPE}-x86_64-clang-tools-extra \
+        ${MINGW_PKG_TYPE}-x86_64-crt-git \
+        ${MINGW_PKG_TYPE}-x86_64-expat \
+        ${MINGW_PKG_TYPE}-x86_64-flac \
+        ${MINGW_PKG_TYPE}-x86_64-fluidsynth \
+        ${MINGW_PKG_TYPE}-x86_64-gcc \
+        ${MINGW_PKG_TYPE}-x86_64-gcc-libs \
+        ${MINGW_PKG_TYPE}-x86_64-gdb \
+        ${MINGW_PKG_TYPE}-x86_64-gdbm \
+        ${MINGW_PKG_TYPE}-x86_64-gettext \
+        ${MINGW_PKG_TYPE}-x86_64-giflib \
+        ${MINGW_PKG_TYPE}-x86_64-glib2 \
+        ${MINGW_PKG_TYPE}-x86_64-gmp \
+        ${MINGW_PKG_TYPE}-x86_64-headers-git \
+        ${MINGW_PKG_TYPE}-x86_64-isl \
+        ${MINGW_PKG_TYPE}-x86_64-libffi \
+        ${MINGW_PKG_TYPE}-x86_64-libiconv \
+        ${MINGW_PKG_TYPE}-x86_64-libjpeg-turbo \
+        ${MINGW_PKG_TYPE}-x86_64-libmad \
+        ${MINGW_PKG_TYPE}-x86_64-libmodplug \
+        ${MINGW_PKG_TYPE}-x86_64-libogg \
+        ${MINGW_PKG_TYPE}-x86_64-libpng \
+        ${MINGW_PKG_TYPE}-x86_64-libsndfile \
+        ${MINGW_PKG_TYPE}-x86_64-libsystre \
+        ${MINGW_PKG_TYPE}-x86_64-libtiff \
+        ${MINGW_PKG_TYPE}-x86_64-libtre-git \
+        ${MINGW_PKG_TYPE}-x86_64-libvorbis \
+        ${MINGW_PKG_TYPE}-x86_64-libwebp \
+        ${MINGW_PKG_TYPE}-x86_64-libwinpthread-git \
+        ${MINGW_PKG_TYPE}-x86_64-mpc \
+        ${MINGW_PKG_TYPE}-x86_64-mpfr \
+        ${MINGW_PKG_TYPE}-x86_64-ncurses \
+        ${MINGW_PKG_TYPE}-x86_64-openssl \
+        ${MINGW_PKG_TYPE}-x86_64-portaudio \
+        ${MINGW_PKG_TYPE}-x86_64-python3 \
+        ${MINGW_PKG_TYPE}-x86_64-python3-pip \
+        ${MINGW_PKG_TYPE}-x86_64-python3-py \
+        ${MINGW_PKG_TYPE}-x86_64-readline \
+        ${MINGW_PKG_TYPE}-x86_64-smpeg2 \
+        ${MINGW_PKG_TYPE}-x86_64-speex \
+        ${MINGW_PKG_TYPE}-x86_64-speexdsp \
+        ${MINGW_PKG_TYPE}-x86_64-termcap \
+        ${MINGW_PKG_TYPE}-x86_64-windows-default-manifest \
+        ${MINGW_PKG_TYPE}-x86_64-winpthreads-git \
+        ${MINGW_PKG_TYPE}-x86_64-xz \
+        ${MINGW_PKG_TYPE}-x86_64-ag \
+        ${MINGW_PKG_TYPE}-x86_64-zlib
+      set +x
       log_warn "Now re-run RUNME"
       ;;
     *Darwin*)
@@ -342,11 +367,6 @@ PYVER=$($Python --version | sed -e 's/Python //g' -e 's/\.[0-9]*$//g')
 echo "PYVER=$PYVER" > build/windows/python.version.sh
 
 log_info "Python lib version         : $PYVER"
-
-cat build/windows/windows.xml.tmpl | \
-    sed -e "s/PYVER/$PYVER/g" \
-        -e "s/MYVER/$MYVER/g" \
-    > build/windows/windows.xml
 
 /bin/rm -f data/zorbash-hiscore.txt data/zorbash-config.txt
 
@@ -621,9 +641,18 @@ then
     case "$MY_OS_NAME" in
         *MING*|*MSYS*)
             log_info "Run:"
-            echo "  export PYTHONPATH=/${MINGW_TYPE}/lib/python${PYVER}/:/${MINGW_TYPE}/lib/python${PYVER}/lib-dynload:/${MINGW_TYPE}/lib/python${PYVER}/site-packages"
-            echo "  export PYTHONHOME=/${MINGW_TYPE}/bin"
-            echo "  ./zorbash-game.exe"
+
+            cat >zorbash.sh <<%%
+#!/bin/sh
+###############################################################################
+# Execute the following, or run ./zorbash.sh
+###############################################################################
+export PYTHONPATH=/${MINGW_TYPE}/lib/python${PYVER}/:/${MINGW_TYPE}/lib/python${PYVER}/lib-dynload:/${MINGW_TYPE}/lib/python${PYVER}/site-packages
+export PYTHONHOME=/${MINGW_TYPE}/bin
+./zorbash-game.exe
+%%
+            cat zorbash.sh
+            chmod +x zorbash.sh
             ;;
         *)
             log_info "Run:"

@@ -7,12 +7,11 @@
 #define _MY_ALLOC_H
 
 #if defined(__MINGW32__)
-// https://stackoverflow.com/questions/10862121/undefined-reference-to-posix-memalign-using-mingw32
 #define HEAP_ALLOC(var, size)                                                                                        \
   void *var;                                                                                                         \
-  var = _aligned_malloc(sizeof(lzo_align_t), size + size / 16 + 64 + 3);                                             \
+  var = malloc(size + size / 16 + 64 + 3);                                             \
   if (! var) {                                                                                                       \
-    ERR("posix_memalign failed for size %" PRIu32, (uint32_t) size);                                                 \
+    ERR("malloc failed for size %" PRIu32, (uint32_t) size);                                                 \
   }
 #else
 #define HEAP_ALLOC(var, size)                                                                                        \
