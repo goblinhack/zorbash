@@ -18,11 +18,12 @@
                     <exec>${installdir}/zorbash/zorbash</exec>
                     <icon>${installdir}/zorbash//build/windows/zorbash.ico</icon>
                     <name>zorbash</name>
+                    <noPinToStart>0</noPinToStart>
                     <path>${installdir}/zorbash</path>
                     <platforms>windows-x64</platforms>
                     <runAsAdmin>0</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
-                    <windowsExec>${installdir}/zorbash.exe</windowsExec>
+                    <windowsExec>${installdir}/zorbash-game.exe</windowsExec>
                     <windowsExecArgs></windowsExecArgs>
                     <windowsIcon>${installdir}/zorbash.ico</windowsIcon>
                     <windowsPath>${installdir}/</windowsPath>
@@ -164,6 +165,21 @@
                         </distributionFile>
                         <distributionFile>
                             <origin>C:/msys64/home/neila/zorbash/build/windows/zorbash.ico</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>C:/msys64/ucrt64/bin/libmpg123-0.dll</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>C:/msys64/ucrt64/bin/libopusfile-0.dll</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>C:/msys64/ucrt64/bin/libopusurl-0.dll</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>C:/msys64/ucrt64/bin/libopus-0.dll</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>C:/msys64/ucrt64/bin/libopusfile-0.dll</origin>
                         </distributionFile>
                     </distributionFileList>
                 </folder>

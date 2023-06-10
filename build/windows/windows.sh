@@ -1,8 +1,7 @@
 
-
 source ./python.version.sh
 if [[ "$PYVER" = "" ]]; then
-    echo "$0: python.version.sh does not have PYVER set"
+    echo "$0: python.version.sh does not have PYVER set. Did you do a RUNME first ?"
     exit 1
 fi
 
@@ -46,8 +45,8 @@ then
     exit 1
 fi
 
-echo
 echo Installer
 echo =========
 ls -la /c/Users/neila/Documents/InstallBuilder/output/
-cp /c/Users/neila/Documents/InstallBuilder/output/* ..
+cp /c/Users/neila/Documents/InstallBuilder/output/* ../..
+cp /c/Users/neila/Documents/InstallBuilder/output/* /c/Documents\ and\ Settings/neila/Desktop/
