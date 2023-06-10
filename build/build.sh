@@ -75,66 +75,8 @@ help_full()
       log_warn "  apt-get install -y xutils-dev"
       ;;
     *MING*|*MSYS*)
-      log_warn "  git"
-      log_warn "  make"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-gcc"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-SDL"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-SDL2"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-SDL2_gfx"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-SDL2_image"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-SDL2_mixer"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-SDL2_net"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-SDL2_ttf"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-binutils"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-bzip2"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-clang"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-clang-tools-extra"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-crt-git"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-expat"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-flac"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-fluidsynth"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-gcc"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-gcc-libs"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-gdb"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-gdbm"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-gettext"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-giflib"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-glib2"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-gmp"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-headers-git"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-isl"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libffi"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libiconv"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libjpeg-turbo"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libmad"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libmodplug"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libogg"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libpng"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libsndfile"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libsystre"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libtiff"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libtre-git"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libvorbis"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libwebp"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-libwinpthread-git"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-mpc"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-mpfr"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-ncurses"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-openssl"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-portaudio"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-python3"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-python3-pip"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-python3-py"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-readline"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-smpeg2"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-speex"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-speexdsp"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-termcap"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-windows-default-manifest"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-winpthreads-git"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-xz"
-      log_warn "  ${MINGW_PKG_TYPE}-x86_64-zlib"
-      pacman -S -y git \
+      log_warn "Install the following?"
+      pacman -S git \
 	      make \
 	      ${MINGW_PKG_TYPE}-x86_64-gcc \
 	      ${MINGW_PKG_TYPE}-x86_64-SDL \
@@ -193,6 +135,7 @@ help_full()
 	      ${MINGW_PKG_TYPE}-x86_64-winpthreads-git \
 	      ${MINGW_PKG_TYPE}-x86_64-xz \
 	      ${MINGW_PKG_TYPE}-x86_64-zlib 
+      log_warn "Now re-run RUNME"
       ;;
     *Darwin*)
       log_warn "Install MAC ports then install:"
@@ -484,7 +427,7 @@ case "$MY_OS_NAME" in
         log_err "Please compile for ming64, not msys"
         exit 1
         ;;
-    *MING*)
+    *MING*|*MSYS*)
         PATH=/${MINGW_TYPE}/bin:$PATH
         EXE=".exe"
         C_FLAGS+=" -I/${MINGW_TYPE}/ginclude "
@@ -610,7 +553,7 @@ if [[ $GOT_CC = "" ]]; then
 fi
 
 case "$MY_OS_NAME" in
-    *MING*)
+    *MING*|*MSYS*)
         echo "CC=/${MINGW_TYPE}/bin/clang++.exe # AUTOGEN" >> .Makefile
         #
         # To resolve WinMain, add these at the end again
@@ -653,7 +596,7 @@ case "$MY_OS_NAME" in
     *inux*)
       CORES=$(grep -c "cpu cores" /proc/cpuinfo)
     ;;
-    MSYS*)
+    *MING*|*MSYS*)
       CORES=$(grep -c "cpu cores" /proc/cpuinfo)
     ;;
 esac
