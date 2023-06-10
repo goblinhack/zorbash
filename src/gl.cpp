@@ -89,7 +89,7 @@ void gl_enter_2d_mode(void)
   // 2D projection
   //
   if (! game->config.game_pix_width || ! game->config.game_pix_height) {
-    ERR("Cannot call glOrtho(%d,%d)", game->config.game_pix_width, game->config.game_pix_height);
+    LOG("Cannot call glOrtho(%d,%d)", game->config.game_pix_width, game->config.game_pix_height);
     return;
   }
 
@@ -337,11 +337,11 @@ static void gl_init_fbo_(int fbo, GLuint *render_buf_id, GLuint *fbo_id, GLuint 
   DBG2("OpenGl: - glCheckFramebufferStatus_EXT");
   GLenum status = glCheckFramebufferStatus_EXT(GL_FRAMEBUFFER);
   if (status && (status != GL_FRAMEBUFFER_COMPLETE)) {
-    ERR("Failed to create framebuffer, error: %d", status);
+    LOG("Failed to create framebuffer, error: %d", status);
 
 #ifdef GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT
     if (status == GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT) {
-      ERR("OpenGl: - GFX: GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT Not all framebuffer attachment points "
+      LOG("OpenGl: - GFX: GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT Not all framebuffer attachment points "
           "are framebuffer attachment complete. This means that at least one attachment point with a "
           "renderbuffer or texture attached has its attached object no longer in existence or has an "
           "attached image with a width or height of zero, or the color attachment point has a "
@@ -353,29 +353,29 @@ static void gl_init_fbo_(int fbo, GLuint *render_buf_id, GLuint *fbo_id, GLuint 
 #endif
 #ifdef GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS
     if (status == GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS) {
-      ERR("OpenGl: - GFX: GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS Not all attached images have the same "
+      LOG("OpenGl: - GFX: GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS Not all attached images have the same "
           "width and height.");
     }
 #endif
 #ifdef GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT
     if (status == GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT) {
-      ERR("OpenGl: - GFX: GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT No images are attached to the framebuffer.");
+      LOG("OpenGl: - GFX: GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT No images are attached to the framebuffer.");
     }
 #endif
 #ifdef GL_FRAMEBUFFER_UNSUPPORTED
     if (status == GL_FRAMEBUFFER_UNSUPPORTED) {
-      ERR("OpenGl: - GFX: GL_FRAMEBUFFER_UNSUPPORTED The combination of internal formats of the attached images "
+      LOG("OpenGl: - GFX: GL_FRAMEBUFFER_UNSUPPORTED The combination of internal formats of the attached images "
           "violates an implementation-dependent set of restrictions.");
     }
 #endif
 #ifdef GL_FRAMEBUFFER_UNSUPPORTED
     if (status == GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER) {
-      ERR("OpenGl: - GFX: GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER");
+      LOG("OpenGl: - GFX: GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER");
     }
 #endif
 #ifdef GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER
     if (status == GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER) {
-      ERR("OpenGl: - GFX: GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER");
+      LOG("OpenGl: - GFX: GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER");
     }
 #endif
   }
@@ -1257,19 +1257,19 @@ void gl_ext_init(void) { TRACE_AND_INDENT(); }
 void gl_error(GLenum errCode)
 {
   if (errCode == GL_INVALID_ENUM) {
-    ERR("GFX: error, GL_INVALID_ENUM");
+    LOG("GFX: error, GL_INVALID_ENUM");
   } else if (errCode == GL_INVALID_VALUE) {
-    ERR("GFX: error, GL_INVALID_VALUE");
+    LOG("GFX: error, GL_INVALID_VALUE");
   } else if (errCode == GL_INVALID_OPERATION) {
-    ERR("GFX: error, GL_INVALID_OPERATION");
+    LOG("GFX: error, GL_INVALID_OPERATION");
   } else if (errCode == GL_STACK_OVERFLOW) {
-    ERR("GFX: error, GL_STACK_OVERFLOW");
+    LOG("GFX: error, GL_STACK_OVERFLOW");
   } else if (errCode == GL_STACK_UNDERFLOW) {
-    ERR("GFX: error, GL_STACK_UNDERFLOW");
+    LOG("GFX: error, GL_STACK_UNDERFLOW");
   } else if (errCode == GL_OUT_OF_MEMORY) {
-    ERR("GFX: error, GL_OUT_OF_MEMORY");
+    LOG("GFX: error, GL_OUT_OF_MEMORY");
   } else {
-    ERR("GFX: unknown error, %d", errCode);
+    LOG("GFX: unknown error, %d", errCode);
   }
 }
 
@@ -1299,7 +1299,7 @@ void gl_push(float **P, float *p_end, uint8_t first, float tex_left, float tex_t
   float *p = *P;
 
   if (unlikely(p >= p_end)) {
-    ERR("overflow on gl bug %s", __FUNCTION__);
+    LOG("overflow on gl bug %s", __FUNCTION__);
     return;
   }
 

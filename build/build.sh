@@ -618,7 +618,7 @@ make -f build/Makefile $CORES "$@" all
 if [ $? -eq 0 ]
 then
     case "$MY_OS_NAME" in
-        *MING*)
+        *MING*|*MSYS*)
             log_info "Run:"
             echo "  export PYTHONPATH=/${MINGW_TYPE}/lib/python${PYVER}/:/${MINGW_TYPE}/lib/python${PYVER}/lib-dynload:/${MINGW_TYPE}/lib/python${PYVER}/site-packages"
             echo "  export PYTHONHOME=/${MINGW_TYPE}/bin"
