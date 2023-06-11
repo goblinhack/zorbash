@@ -617,10 +617,10 @@ case "$MY_OS_NAME" in
       CORES=$(/usr/sbin/system_profiler -detailLevel full SPHardwareDataType  | grep Cores | sed 's/.*: //g' | awk '{print $1}')
     ;;
     *inux*)
-      CORES=$(grep -c "cpu cores" /proc/cpuinfo)
+      CORES=$(egrep -c "cpu cores|processor" /proc/cpuinfo)
     ;;
     *MING*|*MSYS*)
-      CORES=$(grep -c "cpu cores" /proc/cpuinfo)
+      CORES=$(egrep -c "cpu cores|processor" /proc/cpuinfo)
     ;;
 esac
 
