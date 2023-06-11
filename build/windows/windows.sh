@@ -41,7 +41,7 @@ ls -la
 echo
 echo Package with bitrock
 echo ====================
-rm /c/Users/${LOGNAME}/Documents/InstallBuilder/output/*orbash*exe
+/bin/rm -f /c/Users/${LOGNAME}/Documents/InstallBuilder/output/*orbash*exe
 ls -la /c/Users/${LOGNAME}/Documents/InstallBuilder/output/
 "/c/Program Files/InstallBuilder Enterprise 23.4.0/bin/builder-cli.exe" build windows.xml
 
@@ -56,7 +56,7 @@ ls -la /c/Users/${LOGNAME}/Documents/InstallBuilder/output/
 
 echo Installer
 echo =========
-rm ../../*installer.exe
+/bin/rm -f ../../*installer.exe
 ls -la /c/Users/${LOGNAME}/Documents/InstallBuilder/output/
 cp /c/Users/${LOGNAME}/Documents/InstallBuilder/output/* ../..
 cp /c/Users/${LOGNAME}/Documents/InstallBuilder/output/* /c/Documents\ and\ Settings/${LOGNAME}/Desktop/
