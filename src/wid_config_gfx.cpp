@@ -39,11 +39,16 @@ static uint8_t wid_config_gfx_save(Widp w, int x, int y, uint32_t button)
   TRACE_AND_INDENT();
   CON("INF: Save config");
   game->save_config();
+
   wid_config_gfx_destroy();
-  game->wid_config_top_menu();
+
   if (local_g_need_restart) {
     g_need_restart = true;
+    wid_main_menu_destroy();
+  } else {
+    game->wid_config_top_menu();
   }
+
   return true;
 }
 

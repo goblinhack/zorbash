@@ -180,16 +180,25 @@ void restart(void)
   strncpy(original_program_name_arg, original_program_name.c_str(), sizeof(original_program_name_arg));
 
   wid_visible(wid_console_window);
+  wid_raise(wid_console_window);
+  wid_update(wid_console_window);
 
   CON("FIN: Restarting the program... Wish me luck.");
-  sdl_flush_display(true);
-
   CON("FIN: Run \"%s\"", original_program_name_arg);
   sdl_flush_display(true);
 
   args[ 0 ] = original_program_name_arg;
 
   sleep(5);
+
+#ifdef _WIN32
+  //
+  // Windows has spaces in the path name and that ends up being incorrectly
+  // split by execve on the 2nd boot. So, just avoid the issue.
+  //
+  executable = (char *) "zorbash.exe";
+#endif
+
   execve(executable, (char *const *) args, nullptr);
 }
 
