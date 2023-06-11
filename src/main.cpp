@@ -198,6 +198,7 @@ void restart(void)
 
   args[ 0 ] = executable;
   execve(executable, (char *const *) args, nullptr);
+  DIE("Failed to restart");
 }
 
 void die(void)
@@ -1024,7 +1025,13 @@ loop:
   flush_the_console();
 
   if (g_need_restart) {
+    g_need_restart = false;
+#ifdef _WIN32
     restart();
+#else
+    CON("FIN: Restart");
+    execv(argv[ 0 ], argv);
+#endif
   }
 
   LOG("FIN: Leave 2D mode");
