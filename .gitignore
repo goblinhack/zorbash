@@ -65,3 +65,8 @@ zorbash-game
 zorbash-game.dSYM
 zorbash-game.exe
 zorbash-game.exe.dSYM
+Zorbash-*-windows-x64-installer.exe
+build/windows/python*
+build/windows/windows.xml.backup
+zorbash-create-release.sh
+zorbash-game.sh
