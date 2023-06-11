@@ -793,31 +793,17 @@ int main(int argc, char *argv[])
   CON("INI: Load game config");
   game = new Game(std::string(appdata));
   game->load_config();
-#if 0
-  game->save_config();
-  int x = 1;
-  if (x) {
-  exit(0);
-  }
-#endif
 
   if (! sdl_init()) {
     ERR("SDL: Init");
   }
 
-  game->config.gfx_vsync_locked = SDL_GL_GetSwapInterval();
-
-  if (! game->config.gfx_vsync_locked) {
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    GL_ERROR_CHECK();
-
-    if (game->config.gfx_vsync_enable) {
-      SDL_GL_SetSwapInterval(1);
-    } else {
-      SDL_GL_SetSwapInterval(0);
-    }
-    GL_ERROR_CHECK();
-  }
+  //
+  // For some reason this is needed on windows to force the console
+  // to appear.
+  //
+  auto save_gfx_vsync_locked    = game->config.gfx_vsync_locked;
+  game->config.gfx_vsync_locked = 1;
 
   //
   // Check for overrides.
@@ -1024,8 +1010,9 @@ int main(int argc, char *argv[])
 
 loop:
 
-  wid_toggle_hidden(wid_console_window);
+  wid_hide(wid_console_window);
 
+  game->config.gfx_vsync_locked = save_gfx_vsync_locked;
   config_gfx_vsync_update();
   pcg_random_allowed--;
 
