@@ -19,6 +19,8 @@
 
 . ./build/common.sh
 
+TARGET=zorbash-game
+
 # The default MINGW32 and MINGW64 environments build binaries using the older
 #  MSVCRT library that should be present on all Windows systems.
 MINGW_TYPE=mingw64
@@ -468,7 +470,7 @@ case "$MY_OS_NAME" in
         LDLIBS+=" -funwind-tables"
         LDLIBS+=" -rdynamic"
         LDLIBS+=" -Wl,-framework,Opengl"
-        DSYM="dsymutil ../zorbash-game"
+        DSYM="dsymutil ../${TARGET}"
 
         if [[ $OPT_DEV2 != "" ]]; then
             C_FLAGS+=" -fsanitize=address -fno-omit-frame-pointer"
@@ -650,28 +652,36 @@ then
 sed -i "s/<version>.*/<version>$MYVER<\/version>/g" build/windows/windows.xml
 (cd build/windows/ ; ./windows.sh)
 
+#
+# Lay a tag
+#
 git tag -a v$MYVER
 git push origin --tags
+
+#
+# All commits since last tag
+#
+git log \$(git describe --tags --abbrev=0)..HEAD --oneline | grep "bug:"
 %%
             chmod +x zorbash-create-release.sh
 
-            cat >zorbash.sh <<%%
+            cat >${TARGET}.sh <<%%
 
 #!/bin/sh
 ###############################################################################
-# Execute the following, or run ./zorbash.sh
+# Execute the following, or run ./${TARGET}.sh
 ###############################################################################
 export PYTHONPATH=/${MINGW_TYPE}/lib/python${PYVER}/:/${MINGW_TYPE}/lib/python${PYVER}/lib-dynload:/${MINGW_TYPE}/lib/python${PYVER}/site-packages
 export PYTHONHOME=/${MINGW_TYPE}/bin
-./zorbash-game.exe
+./${TARGET}.exe \$*
 %%
 
-            cat zorbash.sh
-            chmod +x zorbash.sh
+            cat ${TARGET}.sh
+            chmod +x ${TARGET}.sh
             ;;
         *)
             log_info "Run:"
-            echo "  ./zorbash-game"
+            echo "  ./${TARGET}"
             ;;
     esac
 
