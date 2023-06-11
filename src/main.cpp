@@ -174,22 +174,14 @@ void quit(void)
 void restart(void)
 {
   TRACE_AND_INDENT();
-  char       *args[]     = {nullptr, nullptr};
-  char       *executable = (char *) original_program_name.c_str();
-  static char original_program_name_arg[ MAXSTR ];
-  strncpy(original_program_name_arg, original_program_name.c_str(), sizeof(original_program_name_arg));
+  char *args[] = {nullptr, nullptr};
+  char *executable;
 
   wid_visible(wid_console_window);
   wid_raise(wid_console_window);
   wid_update(wid_console_window);
 
-  CON("FIN: Restarting the program... Wish me luck.");
-  CON("FIN: Run \"%s\"", original_program_name_arg);
-  sdl_flush_display(true);
-
-  args[ 0 ] = original_program_name_arg;
-
-  sleep(5);
+  executable = (char *) original_program_name.c_str();
 
 #ifdef _WIN32
   //
@@ -199,6 +191,12 @@ void restart(void)
   executable = (char *) "zorbash.exe";
 #endif
 
+  CON("FIN: Restarting the program... Wish me luck.");
+  CON("FIN: Run \"%s\"", executable);
+  sdl_flush_display(true);
+  sleep(5);
+
+  args[ 0 ] = executable;
   execve(executable, (char *const *) args, nullptr);
 }
 
