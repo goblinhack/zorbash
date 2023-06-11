@@ -104,6 +104,7 @@ help_full()
       set -x
       pacman -S git \
         make \
+        base-devel --needed \
         ${MINGW_PKG_TYPE}-x86_64-gcc \
         ${MINGW_PKG_TYPE}-x86_64-SDL \
         ${MINGW_PKG_TYPE}-x86_64-SDL2 \
