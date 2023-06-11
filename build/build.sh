@@ -684,6 +684,8 @@ git log \$(git describe --tags --abbrev=0)..HEAD --oneline | grep "bug:"
 echo \$0: laying a tag
 git tag -m "tag: $MYVER" -a v$MYVER
 git push origin --tags
+
+echo \$0: all done
 %%
             chmod +x ${TARGET}-create-release.sh
 

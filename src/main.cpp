@@ -184,7 +184,7 @@ void restart(void)
   CON("FIN: Restarting the program... Wish me luck.");
   sdl_flush_display(true);
 
-  CON("FIN: Run %s", original_program_name_arg);
+  CON("FIN: Run \"%s\"", original_program_name_arg);
   sdl_flush_display(true);
 
   args[ 0 ] = original_program_name_arg;
@@ -871,15 +871,8 @@ int main(int argc, char *argv[])
   //
   // Need to preserve spaces for restarting via exec
   //
-  std::string tmp(argv[ 0 ]);
-  auto        tmp2      = strsub(tmp.c_str(), " ", "@@@@", "path");
-  auto        tmp3      = strsub(tmp2, "@@@@", "\\ ", "path");
-  original_program_name = std::string(tmp3);
-  CON("INI: Original program name: %s", tmp.c_str());
-  flush_the_console();
-  myfree(tmp2);
-  myfree(tmp3);
-  CON("INI: Saved program name: %s", original_program_name.c_str());
+  original_program_name = std::string(argv[ 0 ]);
+  CON("INI: Original program name: %s", original_program_name.c_str());
   flush_the_console();
 
   CON("INI: Load UI tiles");
