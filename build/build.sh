@@ -693,9 +693,7 @@ git push origin --tags
 ###############################################################################
 # Execute the following, or run ./${TARGET}.sh
 ###############################################################################
-export PYTHONPATH=/${MINGW_TYPE}/lib/python${PYVER}/:/${MINGW_TYPE}/lib/python${PYVER}/lib-dynload:/${MINGW_TYPE}/lib/python${PYVER}/site-packages
-export PYTHONHOME=/${MINGW_TYPE}/bin
-./${TARGET}.exe \$*
+PYTHONPATH=/${MINGW_TYPE}/lib/python${PYVER}/:/${MINGW_TYPE}/lib/python${PYVER}/lib-dynload:/${MINGW_TYPE}/lib/python${PYVER}/site-packages PYTHONHOME=/${MINGW_TYPE}/bin ./${TARGET}.exe \$*
 %%
 
             cat ${TARGET}.sh

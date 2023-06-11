@@ -30,5 +30,6 @@ void myerr(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
 void quit(void);
 void restart(void);
 void segv_handler(int sig);
+void flush_the_console(void);
 
 #endif

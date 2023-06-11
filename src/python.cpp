@@ -59,10 +59,11 @@ void py_add_to_path(const char *path)
   //
   // Windows hack
   //
-  auto tmp      = strsub(path, "\\", "@@@@", "path");
-  auto tmp2      = strsub(tmp, "@@@@", "\\\\", "path");
+  auto tmp  = strsub(path, "\\", "@@@@", "path");
+  auto tmp2 = strsub(tmp, "@@@@", "\\\\", "path");
 
-  CON("Add python path: %s", path);
+  CON("INI: Add python path: %s", path);
+  flush_the_console();
 
   //
   // NOTE: PySys_SetPath is deprecated.

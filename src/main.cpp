@@ -28,12 +28,15 @@ std::default_random_engine rng;
 #include "my_room.hpp"
 #include "my_sdl_proto.hpp"
 #include "my_sound.hpp"
+#include "my_string.hpp"
 #include "my_wid_actionbar.hpp"
 #include "my_wid_botcon.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_topcon.hpp"
 
 static char **ARGV;
+
+static std::string original_program_name;
 
 void quit(void)
 {
@@ -171,13 +174,22 @@ void quit(void)
 void restart(void)
 {
   TRACE_AND_INDENT();
-  char *args[]     = {nullptr, nullptr};
-  char *executable = ARGV[ 0 ];
+  char       *args[]     = {nullptr, nullptr};
+  char       *executable = (char *) original_program_name.c_str();
+  static char original_program_name_arg[ MAXSTR ];
+  strncpy(original_program_name_arg, original_program_name.c_str(), sizeof(original_program_name_arg));
 
-  LOG("Run %s", executable);
+  wid_visible(wid_console_window);
 
-  args[ 0 ] = executable;
+  CON("FIN: Restarting the program... Wish me luck.");
+  sdl_flush_display(true);
 
+  CON("FIN: Run %s", original_program_name_arg);
+  sdl_flush_display(true);
+
+  args[ 0 ] = original_program_name_arg;
+
+  sleep(5);
   execve(executable, (char *const *) args, nullptr);
 }
 
@@ -698,6 +710,17 @@ static std::string create_appdata_dir(void)
   return std::string(appdata);
 }
 
+void flush_the_console(void)
+{
+  //
+  // Easier to see progress on windows where there is no console
+  //
+#ifdef _WIN32
+  wid_visible(wid_console_window);
+  sdl_flush_display(true);
+#endif
+}
+
 int main(int argc, char *argv[])
 {
   TRACE_NO_INDENT();
@@ -782,6 +805,20 @@ int main(int argc, char *argv[])
     ERR("SDL: Init");
   }
 
+  game->config.gfx_vsync_locked = SDL_GL_GetSwapInterval();
+
+  if (! game->config.gfx_vsync_locked) {
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    GL_ERROR_CHECK();
+
+    if (game->config.gfx_vsync_enable) {
+      SDL_GL_SetSwapInterval(1);
+    } else {
+      SDL_GL_SetSwapInterval(0);
+    }
+    GL_ERROR_CHECK();
+  }
+
   //
   // Check for overrides.
   //
@@ -794,9 +831,7 @@ int main(int argc, char *argv[])
   sdl_config_update_all();
 
   if (g_need_restart) {
-    CON("FIN: Restart needed: \"%s\"", argv[ 0 ]);
-    g_need_restart = false;
-    execv(argv[ 0 ], argv);
+    restart();
   }
 
   gl_init_2d_mode();
@@ -845,87 +880,101 @@ int main(int argc, char *argv[])
     ERR("Wid_console init");
   }
   wid_toggle_hidden(wid_console_window);
-  sdl_flush_display();
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
+  flush_the_console();
+
+  //
+  // Need to preserve spaces for restarting via exec
+  //
+  std::string tmp(argv[ 0 ]);
+  auto        tmp2      = strsub(tmp.c_str(), " ", "@@@@", "path");
+  auto        tmp3      = strsub(tmp2, "@@@@", "\\ ", "path");
+  original_program_name = std::string(tmp3);
+  CON("INI: Original program name: %s", tmp.c_str());
+  flush_the_console();
+  myfree(tmp2);
+  myfree(tmp3);
+  CON("INI: Saved program name: %s", original_program_name.c_str());
+  flush_the_console();
 
   CON("INI: Load UI tiles");
   if (! wid_tiles_init()) {
     ERR("Wid tiles init");
   }
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
+  flush_the_console();
 
   CON("INI: Load other tiles");
   if (! tile_init()) {
     ERR("Tile init");
   }
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
+  flush_the_console();
 
   CON("INI: Load textures");
   if (! tex_init()) {
     ERR("Tex init");
   }
-  LOG("INI: Inited textures");
+  CON("INI: Inited textures");
+  flush_the_console();
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
   CON("INI: Init audio");
   if (! audio_init()) {
     ERR("Audio init");
   }
-  LOG("INI: Inited audio");
+  CON("INI: Inited audio");
+  flush_the_console();
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
   CON("INI: Load music");
   if (! music_init()) {
     ERR("Music init");
   }
-  LOG("INI: Loaded music");
+  CON("INI: Loaded music");
+  flush_the_console();
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
   CON("INI: Load sound");
   if (! sound_init()) {
     ERR("Sound init");
   }
+  flush_the_console();
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
-  LOG("INI: Init UI topcon");
+  CON("INI: Init UI topcon");
   if (! wid_topcon_init()) {
     ERR("Wid_topcon init");
   }
+  flush_the_console();
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
-  LOG("INI: Init UI actionar");
+  CON("INI: Init UI actionar");
   wid_actionbar_init();
+  flush_the_console();
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
-  LOG("INI: Init UI botcon");
+  CON("INI: Init UI botcon");
   if (! wid_botcon_init()) {
     ERR("Wid_botcon init");
   }
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
+  flush_the_console();
 
-  LOG("INI: Find resource locations for gfx and music");
+  CON("INI: Find resource locations for gfx and music");
   find_file_locations();
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
+  flush_the_console();
 
   CON("INI: Load UI commands");
   if (! command_init()) {
     ERR("Command init");
   }
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
+  flush_the_console();
 
   CON("INI: Load dungeon character maps");
   Charmap::init_charmaps();
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
+  flush_the_console();
 
-  LOG("INI: Python init");
+  CON("INI: Python init");
   py_init(argv);
   if (g_errored) {
     goto loop;
   }
+  flush_the_console();
 
   py_call_void("init2");
-  LOG("INI: Python inited");
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
+  CON("INI: Python inited");
+  flush_the_console();
 
   CON("INI: Load monster templates");
   pcg_random_allowed++;
@@ -933,7 +982,7 @@ int main(int argc, char *argv[])
   if (g_errored) {
     goto loop;
   }
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
+  flush_the_console();
 
   //
   // Create a fresh game if none was loaded
@@ -943,12 +992,11 @@ int main(int argc, char *argv[])
   if (g_errored) {
     goto loop;
   }
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
+  flush_the_console();
 
   wid_topcon_flush();
   wid_botcon_flush();
-  sdl_flush_display();
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
+  flush_the_console();
 
   if (g_opt_tests) {
     //
@@ -972,10 +1020,9 @@ int main(int argc, char *argv[])
       game->load_snapshot();
     }
   }
+  flush_the_console();
 
 loop:
-  sdl_flush_display();
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   wid_toggle_hidden(wid_console_window);
 
@@ -987,18 +1034,17 @@ loop:
   TRACE_NO_INDENT();
   sdl_loop();
   LOG("FIN: SDL loop finished");
+  flush_the_console();
+
+  if (g_need_restart) {
+    restart();
+  }
 
   LOG("FIN: Leave 2D mode");
   gl_leave_2d_mode();
 
   CON("FIN: Quit");
   quit();
-
-  if (g_need_restart) {
-    CON("FIN: Restarting: \"%s\"", argv[ 0 ]);
-    g_need_restart = false;
-    execv(argv[ 0 ], argv);
-  }
 
   CON("FIN: Goodbye my friend and take care until next time!");
   return 0;
