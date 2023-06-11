@@ -111,7 +111,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   //
   // Toggle gfx mode. Do this outside the level tick loop to avoid issues with moving things.
   //
-  if (sdlk_eq(*key, game->config.key_gfx_toggle)) {
+  if (sdlk_eq(*key, game->config.key_gfx_toggle) || sdlk_eq(*key, game->config.key_alt_gfx_toggle)) {
     game->request_to_toggle_gfx = true;
     return false; // To avoid click noise
   }

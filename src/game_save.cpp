@@ -864,6 +864,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my)
   out << bits(my.t.key_console);
   out << bits(my.t.key_descend);
   out << bits(my.t.key_gfx_toggle);
+  out << bits(my.t.key_alt_gfx_toggle);
   out << bits(my.t.key_drop);
   out << bits(my.t.key_eat);
   out << bits(my.t.key_help);

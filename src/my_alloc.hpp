@@ -9,9 +9,9 @@
 #if defined(__MINGW32__)
 #define HEAP_ALLOC(var, size)                                                                                        \
   void *var;                                                                                                         \
-  var = malloc(size + size / 16 + 64 + 3);                                             \
+  var = malloc(size + size / 16 + 64 + 3);                                                                           \
   if (! var) {                                                                                                       \
-    ERR("malloc failed for size %" PRIu32, (uint32_t) size);                                                 \
+    ERR("malloc failed for size %" PRIu32, (uint32_t) size);                                                         \
   }
 #else
 #define HEAP_ALLOC(var, size)                                                                                        \

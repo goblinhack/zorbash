@@ -105,7 +105,7 @@ static void __attribute__((noinline)) sdl_event_keydown(SDL_Keysym *key, SDL_Eve
   sdl.event_count++;
 
   LOG("SDL: Keyboard: Key pressed keycode 0x%08" PRIX32 " = %s %d", event->key.keysym.sym,
-      SDL_GetKeyName(event->key.keysym.sym), key->mod);
+      to_string(event->key.keysym).c_str(), key->mod);
 
   //
   // SDL2 has no auto repeat.
@@ -127,7 +127,7 @@ static void __attribute__((noinline)) sdl_event_keyup(SDL_Keysym *key, SDL_Event
   sdl.event_count++;
   if (g_grab_next_key) {
     LOG("SDL: Keyboard: Grabbed 0x%08" PRIX32 " = %s / %s", event->key.keysym.sym,
-        SDL_GetKeyName(event->key.keysym.sym), SDL_GetScancodeName(event->key.keysym.scancode));
+        to_string(event->key.keysym).c_str(), SDL_GetScancodeName(event->key.keysym.scancode));
 
     g_grab_next_key = false;
     sdl.grabbed_key = sdlk_normalize(event->key.keysym);
@@ -143,7 +143,7 @@ static void __attribute__((noinline)) sdl_event_keyup(SDL_Keysym *key, SDL_Event
   memset(&last_key_pressed, 0, sizeof(last_key_pressed));
 
   LOG("SDL: Keyboard: Key released keycode 0x%08" PRIX32 " = %s", event->key.keysym.sym,
-      SDL_GetKeyName(event->key.keysym.sym));
+      to_string(event->key.keysym).c_str());
 
   key = &event->key.keysym;
 

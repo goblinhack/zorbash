@@ -905,74 +905,74 @@ std::string to_string(const SDL_Keysym &k)
   std::string out;
 
   if (k.mod & KMOD_LSHIFT) {
-    out += "L-shift ";
+    out += "<L-shift> ";
   }
   if (k.mod == KMOD_RSHIFT) {
-    out += "R-shift ";
+    out += "<R-shift> ";
   }
   if (k.mod == KMOD_LCTRL) {
-    out += "L-ctrl ";
+    out += "<L-ctrl> ";
   }
   if (k.mod == KMOD_RCTRL) {
-    out += "R-ctrl ";
+    out += "<R-ctrl> ";
   }
   if (k.mod == KMOD_LALT) {
-    out += "L-alt ";
+    out += "<L-alt> ";
   }
   if (k.mod == KMOD_RALT) {
-    out += "R-alt ";
+    out += "<R-alt> ";
   }
   if (k.mod == KMOD_LGUI) {
-    out += "L-gui ";
+    out += "<L-gui> ";
   }
   if (k.mod == KMOD_RGUI) {
-    out += "R-gui ";
+    out += "<R-gui> ";
   }
   if (k.mod == KMOD_NUM) {
-    out += "Num ";
+    out += "<Numpad> ";
   }
   if (k.mod == KMOD_CAPS) {
-    out += "Caps ";
+    out += "<Caps> ";
   }
 
   if ((k.scancode == SDL_SCANCODE_LALT) || (k.sym == SDLK_LALT)) {
-    out = "L-Alt";
+    out = "<L-Alt>";
   }
 
   if ((k.scancode == SDL_SCANCODE_LCTRL) || (k.sym == SDLK_LCTRL)) {
-    out = "L-Ctrl";
+    out = "<L-Ctrl>";
   }
 
   if ((k.scancode == SDL_SCANCODE_LEFT) || (k.sym == SDLK_LEFT)) {
-    out = "Left";
+    out = "<Left>";
   }
 
   if ((k.scancode == SDL_SCANCODE_LGUI) || (k.sym == SDLK_LGUI)) {
-    out = "L-GUI";
+    out = "<L-GUI>";
   }
 
   if ((k.scancode == SDL_SCANCODE_LSHIFT) || (k.sym == SDLK_LSHIFT)) {
-    out = "L-Shift";
+    out = "<L-Shift>";
   }
 
   if ((k.scancode == SDL_SCANCODE_RALT) || (k.sym == SDLK_RALT)) {
-    out = "R-Alt";
+    out = "<R-Alt>";
   }
 
   if ((k.scancode == SDL_SCANCODE_RCTRL) || (k.sym == SDLK_RCTRL)) {
-    out = "R-Ctrl";
+    out = "<R-Ctrl>";
   }
 
   if ((k.scancode == SDL_SCANCODE_RGUI) || (k.sym == SDLK_RGUI)) {
-    out = "R-GUI";
+    out = "<R-GUI>";
   }
 
   if ((k.scancode == SDL_SCANCODE_RIGHT) || (k.sym == SDLK_RIGHT)) {
-    out = "Right";
+    out = "<Right>";
   }
 
   if ((k.scancode == SDL_SCANCODE_RSHIFT) || (k.sym == SDLK_RSHIFT)) {
-    out = "R-Shift";
+    out = "<R-Shift>";
   }
 
   return out + to_string_ignoring_mods(k);

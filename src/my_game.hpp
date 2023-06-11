@@ -81,6 +81,7 @@ public:
   SDL_Keysym key_action7         = {};
   SDL_Keysym key_action8         = {};
   SDL_Keysym key_action9         = {};
+  SDL_Keysym key_alt_gfx_toggle  = {};
   SDL_Keysym key_ascend          = {};
   SDL_Keysym key_attack          = {};
   SDL_Keysym key_console         = {};

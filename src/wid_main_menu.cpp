@@ -132,7 +132,7 @@ static uint8_t wid_main_menu_key_down(Widp w, const struct SDL_Keysym *key)
   //
   // Toggle gfx mode
   //
-  if (sdlk_eq(*key, game->config.key_gfx_toggle)) {
+  if (sdlk_eq(*key, game->config.key_gfx_toggle) || sdlk_eq(*key, game->config.key_alt_gfx_toggle)) {
     g_opt_ascii = ! g_opt_ascii;
     sdl_display_reset();
     if (g_opt_ascii) {

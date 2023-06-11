@@ -111,6 +111,8 @@ void Config::reset(void)
   key_console.mod         = KMOD_SHIFT;
   key_robot_mode.sym      = SDLK_r;
   key_gfx_toggle.sym      = SDLK_TAB;
+  key_alt_gfx_toggle.sym  = SDLK_TAB;
+  key_alt_gfx_toggle.mod  = KMOD_NUM;
   key_descend.sym         = SDLK_GREATER;
   key_ascend.sym          = SDLK_LESS;
   key_use.sym             = SDLK_u;
