@@ -1,4 +1,6 @@
 
+LOGNAME=$(whoami)
+
 source ./python.version.sh
 if [[ "$PYVER" = "" ]]; then
     echo "$0: python.version.sh does not have PYVER set. Did you do a RUNME first ?"
@@ -39,18 +41,22 @@ ls -la
 echo
 echo Package with bitrock
 echo ====================
+rm /c/Users/${LOGNAME}/Documents/InstallBuilder/output/*orbash*exe
+ls -la /c/Users/${LOGNAME}/Documents/InstallBuilder/output/
 "/c/Program Files/InstallBuilder Enterprise 23.4.0/bin/builder-cli.exe" build windows.xml
 
 if [[ $? -ne 0 ]];
 then
     exit 1
 fi
+ls -la /c/Users/${LOGNAME}/Documents/InstallBuilder/output/
 
 /bin/rm -rf python${PYVER}
 /bin/rm -rf python${PYVER}.tar
 
 echo Installer
 echo =========
-ls -la /c/Users/neila/Documents/InstallBuilder/output/
-cp /c/Users/neila/Documents/InstallBuilder/output/* ../..
-cp /c/Users/neila/Documents/InstallBuilder/output/* /c/Documents\ and\ Settings/neila/Desktop/
+rm ../../*installer.exe
+ls -la /c/Users/${LOGNAME}/Documents/InstallBuilder/output/
+cp /c/Users/${LOGNAME}/Documents/InstallBuilder/output/* ../..
+cp /c/Users/${LOGNAME}/Documents/InstallBuilder/output/* /c/Documents\ and\ Settings/${LOGNAME}/Desktop/
