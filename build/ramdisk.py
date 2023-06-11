@@ -21,40 +21,40 @@ root = pathlib.Path(".")
 # target. If so we need to rebuild the ramdisk.
 #
 try:
-    with open("zorbash-game") as unused:
+    with open("zorbash") as unused:
         newer = False
         for filepath in root.rglob(r"data/fonts/*.tga"):
-            if os.path.getctime("zorbash-game") < os.path.getctime(filepath):
+            if os.path.getctime("zorbash") < os.path.getctime(filepath):
                 print("{} is newer".format(filepath))
                 newer = True
                 break
 
         for filepath in root.rglob(r"data/gfx/*.tga"):
-            if os.path.getctime("zorbash-game") < os.path.getctime(filepath):
+            if os.path.getctime("zorbash") < os.path.getctime(filepath):
                 print("{} is newer".format(filepath))
                 newer = True
                 break
 
         for filepath in root.rglob(r"data/gfx/*/*.tga"):
-            if os.path.getctime("zorbash-game") < os.path.getctime(filepath):
+            if os.path.getctime("zorbash") < os.path.getctime(filepath):
                 print("{} is newer".format(filepath))
                 newer = True
                 break
 
         for filepath in root.rglob(r"data/gfx/*/*/*.tga"):
-            if os.path.getctime("zorbash-game") < os.path.getctime(filepath):
+            if os.path.getctime("zorbash") < os.path.getctime(filepath):
                 print("{} is newer".format(filepath))
                 newer = True
                 break
 
         for filepath in root.rglob(r"data/sounds/*/*/.wav"):
-            if os.path.getctime("zorbash-game") < os.path.getctime(filepath):
+            if os.path.getctime("zorbash") < os.path.getctime(filepath):
                 print("{} is newer".format(filepath))
                 newer = True
                 break
 
         for filepath in root.rglob(r"data/music/*.ogg"):
-            if os.path.getctime("zorbash-game") < os.path.getctime(filepath):
+            if os.path.getctime("zorbash") < os.path.getctime(filepath):
                 print("{} is newer".format(filepath))
                 newer = True
                 break

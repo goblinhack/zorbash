@@ -46,6 +46,9 @@ then
     exit 1
 fi
 
+/bin/rm -rf python${PYVER}
+/bin/rm -rf python${PYVER}.tar
+
 echo Installer
 echo =========
 ls -la /c/Users/neila/Documents/InstallBuilder/output/

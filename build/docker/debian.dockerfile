@@ -54,5 +54,5 @@ RUN mkdir -p $HOME/.ssh/                                                      &&
     git clone git@github.com:goblinhack/zorbash.git                           && \
     rm -rf $HOME/.ssh/
 
-RUN cd zorbash && sh ./RUNME && ./zorbash-game
+RUN cd zorbash && sh ./RUNME && ./zorbash
 RUN bash

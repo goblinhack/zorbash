@@ -2,11 +2,12 @@
 <!-- ------                                                                                                                                       -->
 <!-- Maybe auto-pause when damage taken? (Like walking on lava) -->
 <!-- I died by being burn alive by some "beacon of light" / brazier. -->
+<!-- some issue with key handling on chromebook                      -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
 <!-- ------                                                                                                                                       -->
-<!-- sudo operf ./zorbash-game --playername discobob --seed victimlake --nodebug --quick-start                                                    -->
+<!-- sudo operf ./zorbash --playername discobob --seed victimlake --nodebug --quick-start                                                    -->
 <!-- opreport  --demangle=smart --symbols| less                                                                                                   -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
