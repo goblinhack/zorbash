@@ -1,7 +1,7 @@
 <project>
     <shortName>Zorbash</shortName>
     <fullName>Zorbash</fullName>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
     <installerFilename></installerFilename>
     <licenseFile>C:/msys64/home/neila/zorbash/LICENSE</licenseFile>
     <logoImage>C:/msys64/home/neila/zorbash/build/windows/zorbash-logo.png</logoImage>

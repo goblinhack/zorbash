@@ -19,7 +19,7 @@
 
 . ./build/common.sh
 
-TARGET=zorbash-game
+TARGET=zorbash
 
 # The default MINGW32 and MINGW64 environments build binaries using the older
 #  MSVCRT library that should be present on all Windows systems.
@@ -585,6 +585,9 @@ case "$MY_OS_NAME" in
     ;;
 esac
 
+#
+# Create the makefile
+#
 cat >>.Makefile <<%%
 EXE=$EXE # AUTOGEN
 DSYM=$DSYM # AUTOGEN
@@ -607,9 +610,15 @@ else
     exit 1
 fi
 
+#
+# Cleanup pre-build
+#
 log_info "Cleaning"
 make clobber | sed 's/^/  /g'
 
+#
+# How many cores?
+#
 CORES=""
 
 case "$MY_OS_NAME" in
@@ -644,18 +653,26 @@ then
         *MING*|*MSYS*)
             log_info "Run:"
 
-            cat >zorbash-create-release.sh <<%%
+            cat >${TARGET}-create-release.sh <<%%
 #!/bin/sh
 ###############################################################################
 # Execute the following to build the release
 ###############################################################################
+#
+# Clean up the old installs
+#
+rm ${TARGET}.*installer.exe
+
+#
+# Update the version
+#
 sed -i "s/<version>.*/<version>$MYVER<\/version>/g" build/windows/windows.xml
 (cd build/windows/ ; ./windows.sh)
 
 #
 # Lay a tag
 #
-git tag -a v$MYVER
+git tag -m "tag: $MYVER" -a v$MYVER
 git push origin --tags
 
 #
@@ -663,7 +680,7 @@ git push origin --tags
 #
 git log \$(git describe --tags --abbrev=0)..HEAD --oneline | grep "bug:"
 %%
-            chmod +x zorbash-create-release.sh
+            chmod +x ${TARGET}-create-release.sh
 
             cat >${TARGET}.sh <<%%
 
