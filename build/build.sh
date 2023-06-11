@@ -667,19 +667,23 @@ rm ${TARGET}.*installer.exe
 #
 # Update the version
 #
+echo \$0: updating the version to $MYVER
 sed -i "s/<version>.*/<version>$MYVER<\/version>/g" build/windows/windows.xml
 (cd build/windows/ ; ./windows.sh)
 
-#
-# Lay a tag
-#
-git tag -m "tag: $MYVER" -a v$MYVER
-git push origin --tags
 
 #
 # All commits since last tag
 #
+echo \$0: all commits since last tag
 git log \$(git describe --tags --abbrev=0)..HEAD --oneline | grep "bug:"
+
+#
+# Lay a tag
+#
+echo \$0: laying a tag
+git tag -m "tag: $MYVER" -a v$MYVER
+git push origin --tags
 %%
             chmod +x ${TARGET}-create-release.sh
 

@@ -794,7 +794,7 @@ int main(int argc, char *argv[])
   sdl_config_update_all();
 
   if (g_need_restart) {
-    CON("FIN: Restart");
+    CON("FIN: Restart needed: \"%s\"", argv[ 0 ]);
     g_need_restart = false;
     execv(argv[ 0 ], argv);
   }
@@ -995,7 +995,7 @@ loop:
   quit();
 
   if (g_need_restart) {
-    CON("FIN: Restart");
+    CON("FIN: Restarting: \"%s\"", argv[ 0 ]);
     g_need_restart = false;
     execv(argv[ 0 ], argv);
   }
