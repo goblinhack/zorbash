@@ -175,7 +175,7 @@ sdl_event_mousemotion(SDL_Keysym *key, SDL_Event *event, bool &processed_mouse_m
   last_mx = mx;
   last_my = my;
 
-  LOG("SDL: Mouse: Moved to %d,%d (rel %d,%d) state %d (actually at %d,%d)", event->motion.x, event->motion.y,
+  DBG("SDL: Mouse: Moved to %d,%d (rel %d,%d) state %d (actually at %d,%d)", event->motion.x, event->motion.y,
       event->motion.xrel, event->motion.yrel, sdl.mouse_down, mx, my);
 
   wid_mouse_visible = 1;
@@ -196,7 +196,7 @@ static void __attribute__((noinline)) sdl_event_mousedown(SDL_Keysym *key, SDL_E
   sdl.held_mouse_x              = sdl.mouse_x;
   sdl.held_mouse_y              = sdl.mouse_y;
 
-  LOG("SDL: Mouse DOWN: button %d pressed at %d,%d state %X", event->button.button, event->button.x, event->button.y,
+  DBG("SDL: Mouse DOWN: button %d pressed at %d,%d state %X", event->button.button, event->button.x, event->button.y,
       sdl.mouse_down);
 
   auto now             = time_ms();
@@ -217,7 +217,7 @@ static void __attribute__((noinline)) sdl_event_mouseup(SDL_Keysym *key, SDL_Eve
   sdl.held_mouse_x              = 0;
   sdl.held_mouse_y              = 0;
 
-  LOG("SDL: Mouse UP: button %d released at %d,%d state %d", event->button.button, event->button.x, event->button.y,
+  DBG("SDL: Mouse UP: button %d released at %d,%d state %d", event->button.button, event->button.x, event->button.y,
       sdl.mouse_down);
 
   pcg_random_allowed++;
@@ -247,7 +247,7 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
     case SDL_MOUSEWHEEL :
       {
         sdl.event_count++;
-        LOG("SDL: Mouse: Wheel scrolled %d in x and %d in y in window %d", event->wheel.x, event->wheel.y,
+        DBG("SDL: Mouse: Wheel scrolled %d in x and %d in y in window %d", event->wheel.x, event->wheel.y,
             event->wheel.windowID);
 
         sdl_get_mouse();

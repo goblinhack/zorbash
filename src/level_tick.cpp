@@ -71,6 +71,14 @@ void Level::handle_input_events(void)
   // key presses.
   //
   if (((player && player->aip()->move_path.size()) || game->request_player_move)) {
+
+    //
+    // Need to wait enough time to allow the player to do diagonal moves
+    //
+    if (! time_have_x_hundredths_passed_since(SDL_KEY_DIAGONAL_DELAY_HUNDREDTHS, game->request_player_move)) {
+      return;
+    }
+
     //
     // Move time along a bit if the player is waiting to move. This will cause movements and jumps to complete
     // sooner and should result in the flag below being cleared.
