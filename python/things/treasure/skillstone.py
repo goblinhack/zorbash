@@ -29,10 +29,6 @@ def on_fire(me, x, y):
     explode(me, x, y)
 
 
-def on_fall(me, x, y):
-    explode(me, x, y)
-
-
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
@@ -54,7 +50,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_biome_ice(self, True)
     my.is_biome_lava(self, True)
     my.is_collectable(self, True)
-    my.is_combustible(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_droppable(self, True)
     my.is_interesting(self, True)
@@ -73,7 +68,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.item_width(self, 4)
     my.noise_on_dropping(self, 10)
     my.normal_placement_rules(self, True)
-    my.on_fall_do(self, "me.on_fall()")
     my.on_hit_and_now_dead_do(self, "me.on_hit_and_now_dead()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.text_a_or_an(self, "a")
