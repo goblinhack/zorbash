@@ -934,6 +934,7 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
   in >> bits(my.t.config_pix_height);
   in >> bits(my.t.config_pix_width);
   in >> bits(my.t.debug_mode);
+  in >> bits(my.t.disable_player_warnings);
   in >> bits(my.t.fps_counter);
   in >> bits(my.t.game_pix_height);
   in >> bits(my.t.game_pix_scale_height);
@@ -1094,6 +1095,8 @@ std::istream &operator>>(std::istream &in, Bits< class Game & > my)
   in >> bits(my.t.started);
   in >> bits(my.t.things_are_moving);
   in >> bits(my.t.player_is_ready_for_messages);
+  in >> bits(my.t.warning_shown_jump_into_chasm);
+  in >> bits(my.t.warning_shown_jump_into_lava);
   in >> bits(MAP_WIDTH);
   in >> bits(MAP_HEIGHT);
 

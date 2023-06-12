@@ -62,6 +62,18 @@ static uint8_t wid_config_debug_mode_toggle(Widp w, int x, int y, uint32_t butto
   return true;
 }
 
+static uint8_t wid_config_disable_player_warnings_toggle(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  config_changed = true;
+  CON("INF: Toggle disable_player_warnings");
+  game->config.disable_player_warnings = ! game->config.disable_player_warnings;
+  CON("INF: Save config");
+  game->save_config();
+  game->wid_config_other_select();
+  return true;
+}
+
 static uint8_t wid_config_other_sdl_delay_incr(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
@@ -155,8 +167,8 @@ void Game::wid_config_other_select(void)
   auto m                   = TERM_WIDTH / 2;
   auto h                   = TERM_HEIGHT / 2;
 
-  point tl    = make_point(m - 20, h - 6);
-  point br    = make_point(m + 20, h + 6);
+  point tl    = make_point(m - UI_WID_POPUP_WIDTH_NORMAL, h - 6);
+  point br    = make_point(m + UI_WID_POPUP_WIDTH_NORMAL, h + 6);
   auto  width = br.x - tl.x - 2;
 
   wid_config_other_window = new WidPopup("Config other select", tl, br, nullptr, "", false, false);
@@ -219,9 +231,46 @@ void Game::wid_config_other_select(void)
   }
 
   //////////////////////////////////////////////////////////////////////
-  // Debug mode
+  // Warning messages
   //////////////////////////////////////////////////////////////////////
   y_at += 4;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_other_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "player warnings");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Disable player warnings");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_other_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "player warnings value");
+
+    point tl = make_point(width / 2 + 6, y_at);
+    point br = make_point(width / 2 + 12, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_on_mouse_up(w, wid_config_disable_player_warnings_toggle);
+
+    if (game->config.disable_player_warnings) {
+      wid_set_text(w, "True");
+    } else {
+      wid_set_text(w, "False");
+    }
+  }
+
+  //////////////////////////////////////////////////////////////////////
+  // Debug mode
+  //////////////////////////////////////////////////////////////////////
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
@@ -232,7 +281,7 @@ void Game::wid_config_other_select(void)
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
     wid_set_text_lhs(w, true);
-    wid_set_text(w, "Debug (restart)");
+    wid_set_text(w, "Debug mode (restart needed)");
   }
   {
     TRACE_AND_INDENT();
@@ -262,14 +311,14 @@ void Game::wid_config_other_select(void)
   {
     TRACE_AND_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "Snapshot turn freq");
+    auto w = wid_new_square_button(p, "Snapshot auto save frequency");
 
     point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
     wid_set_text_lhs(w, true);
-    wid_set_text(w, "Snapshot turn freq");
+    wid_set_text(w, "Snapshot auto save frequency");
   }
   {
     TRACE_AND_INDENT();
@@ -320,14 +369,14 @@ void Game::wid_config_other_select(void)
   {
     TRACE_AND_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "Delay ms per frame");
+    auto w = wid_new_square_button(p, "Delay milliseconds per frame");
 
     point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
     wid_set_text_lhs(w, true);
-    wid_set_text(w, "Delay ms per frame");
+    wid_set_text(w, "Delay milliseconds per frame");
   }
   {
     TRACE_AND_INDENT();

@@ -1,8 +1,8 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- popup for jumping into a chasm                                                                                                               -->
 <!-- Maybe auto-pause when damage taken? (Like walking on lava)                                                                                   -->
 <!-- I died by being burn alive by some "beacon of light" / brazier.                                                                              -->
+<!-- crash when falling - try to repro                                                                                                            -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

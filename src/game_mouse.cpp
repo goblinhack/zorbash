@@ -4,9 +4,11 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
+#include "my_sdl_proto.hpp"
 #include "my_thing.hpp"
 #include "my_wid_thing_info.hpp"
 #include "my_wid_tp_info.hpp"
+#include "my_wid_warning.hpp"
 
 static uint8_t game_mouse_down_(int x, int y, uint32_t button)
 {
@@ -284,10 +286,22 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
       {
         if (t->is_cursor_can_hover_over_x2_click()) {
           IF_DEBUG2 { player->log("Needs double click"); }
+          TOPCON("Double click to jump into the abyss.");
           if (level->is_chasm(to)) {
-            TOPCON("Double click to jump into the abyss.");
+            if (! game->warning_shown_jump_into_chasm) {
+              game->warning_shown_jump_into_chasm = true;
+              std::string msg
+                  = "Double click or press '" + ::to_string(game->config.key_jump) + "' to leap into a chasm.";
+              wid_warning(msg);
+            }
           } else if (level->is_lava(to)) {
             TOPCON("Double click to jump into the lava.");
+            if (! game->warning_shown_jump_into_lava) {
+              game->warning_shown_jump_into_lava = true;
+              std::string msg
+                  = "Double click or press '" + ::to_string(game->config.key_jump) + "' to leap into lava.";
+              wid_warning(msg);
+            }
           } else {
             TOPCON("Double click to move to move onto that.");
           }

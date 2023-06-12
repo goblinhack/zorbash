@@ -40,16 +40,17 @@ public:
   uint32_t ui_gfx_term_height   = {};
   uint32_t ui_gfx_term_width    = {};
 
-  bool debug_mode             = {};
-  bool fps_counter            = {};
-  bool gfx_allow_highdpi      = {};
-  bool gfx_borderless         = {};
-  bool gfx_fullscreen         = {};
-  bool gfx_fullscreen_desktop = {};
-  bool gfx_inverted           = {};
-  bool gfx_show_hidden        = {};
-  bool gfx_vsync_enable       = {};
-  bool gfx_vsync_locked       = {};
+  bool debug_mode              = {};
+  bool disable_player_warnings = {};
+  bool fps_counter             = {};
+  bool gfx_allow_highdpi       = {};
+  bool gfx_borderless          = {};
+  bool gfx_fullscreen          = {};
+  bool gfx_fullscreen_desktop  = {};
+  bool gfx_inverted            = {};
+  bool gfx_show_hidden         = {};
+  bool gfx_vsync_enable        = {};
+  bool gfx_vsync_locked        = {};
 
   bool mouse_wheel_lr_negated = {};
   bool mouse_wheel_ud_negated = {};
@@ -221,6 +222,12 @@ public:
   // Things in this tick are still moving. Only really used in pixel art mode.
   //
   bool things_are_moving {};
+
+  //
+  // Player warnings
+  //
+  bool warning_shown_jump_into_chasm {};
+  bool warning_shown_jump_into_lava {};
 
   //
   // Player ready to see console messages
