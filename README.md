@@ -1,14 +1,13 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- popup for jumping into a chasm                             -->
-<!-- Maybe auto-pause when damage taken? (Like walking on lava) -->
-<!-- I died by being burn alive by some "beacon of light" / brazier. -->
-<!-- some issue with key handling on chromebook                      -->
+<!-- popup for jumping into a chasm                                                                                                               -->
+<!-- Maybe auto-pause when damage taken? (Like walking on lava)                                                                                   -->
+<!-- I died by being burn alive by some "beacon of light" / brazier.                                                                              -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
 <!-- ------                                                                                                                                       -->
-<!-- sudo operf ./zorbash --playername discobob --seed victimlake --nodebug --quick-start                                                    -->
+<!-- sudo operf ./zorbash --playername discobob --seed victimlake --nodebug --quick-start                                                         -->
 <!-- opreport  --demangle=smart --symbols| less                                                                                                   -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

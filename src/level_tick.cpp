@@ -157,7 +157,11 @@ void Level::tick_(void)
     // Create the cursor if not yet.
     //
     if (! cursor) {
-      cursor = thing_new("cursor", player->curr_at);
+      if (is_hazard(player->curr_at)) {
+        cursor = thing_new("cursor_hazard", player->curr_at);
+      } else {
+        cursor = thing_new("cursor", player->curr_at);
+      }
     }
 
     //
