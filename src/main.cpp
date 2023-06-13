@@ -709,8 +709,8 @@ static std::string create_appdata_dir(void)
   char *err    = dynprintf("%s%s%s%s%s", appdata, DIR_SEP, "zorbash", DIR_SEP, "stderr.txt");
   g_log_stderr = fopen(err, "w+");
 
-  LOG("INI: Will use STDOUT as '%s'", out);
-  LOG("INI: Will use STDERR as '%s'", err);
+  CON("INI: Will use STDOUT as '%s'", out);
+  CON("INI: Will use STDERR as '%s'", err);
 
   myfree(out);
   myfree(err);
@@ -799,8 +799,23 @@ int main(int argc, char *argv[])
   // Create and load the last saved game
   //
   CON("INI: Load game config");
-  game = new Game(std::string(appdata));
-  game->load_config();
+  game              = new Game(std::string(appdata));
+  auto config_error = game->load_config();
+  if (! config_error.empty()) {
+    std::string version = "" MYVER "";
+    if (game->config.version.c_str() != version.c_str()) {
+      SDL_MSG_BOX(
+          "Config version change error: %s. Will need to reset config. Found version [%s]. Expected version [%s].",
+          config_error.c_str(), game->config.version.c_str(), version.c_str());
+    } else {
+      SDL_MSG_BOX("Config load error: %s. Will need to reset config. Found version [%s]. Expected version [%s].",
+                  config_error.c_str(), game->config.version.c_str(), version.c_str());
+    }
+
+    game->config.reset();
+    game->save_config();
+    g_errored = false;
+  }
 
   if (! sdl_init()) {
     ERR("SDL: Init");

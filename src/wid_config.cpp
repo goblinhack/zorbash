@@ -20,6 +20,7 @@ void Config::fini(void) { TRACE_AND_INDENT(); }
 void Config::reset(void)
 {
   TRACE_AND_INDENT();
+  version                 = "" MYVER "";
   debug_mode              = false;
   disable_player_warnings = false;
   fps_counter             = false;

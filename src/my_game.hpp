@@ -18,6 +18,8 @@ class WidPopup;
 using Config = class Config_
 {
 public:
+  std::string version = "" MYVER "";
+
   uint32_t serialized_size = {};
   //
   // Keep flags int size so the header size will change on a new flag.
@@ -512,6 +514,8 @@ public:
   WidPopup *wid_tp_info_create_popup(Tpp t, point tl, point be);
   WidPopup *wid_tp_info_create_popup_compact(const std::vector< Tpp > &);
 
+  std::string load_config(void);
+
   bool init_level(point3d world_at, point grid_at, int difficulty_depth, int dungeon_walk_order_level_no);
   bool load(std::string save_file, class Game &target);
   bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wait, bool jump);
@@ -534,7 +538,6 @@ public:
   void fini(void);
   void init_jump_paths(void);
   void init(void);
-  void load_config(void);
   void load(int slot);
   void load_snapshot(void);
   void load(void);

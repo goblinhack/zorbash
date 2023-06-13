@@ -21,7 +21,8 @@ void      wid_save_destroy(void);
 
 extern bool     game_load_headers_only;
 bool            game_save_config_only;
-int             GAME_SAVE_MARKER_EOL = 123456;
+int             GAME_SAVE_MARKER_EOL    = 123456;
+int             GAME_SAVE_MARKER_CONFIG = 987654;
 extern uint32_t csum(char *mem, uint32_t len);
 
 #define WRITE_MAGIC(m)                                                                                               \
@@ -814,6 +815,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const class World & > const my
 std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my)
 {
   TRACE_AND_INDENT();
+  out << bits(my.t.version);
   uint32_t serialized_size = sizeof(Config);
   out << bits(serialized_size);
 
@@ -914,6 +916,9 @@ std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my)
 
   out << bits(g_opt_seed_name);
   out << bits(my.t.hiscores);
+
+  auto eol = GAME_SAVE_MARKER_CONFIG;
+  out << bits(eol);
 
   return out;
 }

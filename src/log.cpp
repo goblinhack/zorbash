@@ -400,6 +400,7 @@ static void croak_(const char *fmt, va_list args)
 
   fprintf(stderr, "%s\n", buf);
 
+  SDL_MSG_BOX("%s", buf + tslen);
   ERR("%s", buf + tslen);
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 
@@ -409,6 +410,7 @@ static void croak_(const char *fmt, va_list args)
   py_trace();
 
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
+
   die();
 }
 
