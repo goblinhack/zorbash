@@ -10,6 +10,9 @@
 #include "my_wid_tp_info.hpp"
 #include "my_wid_warning.hpp"
 
+//
+// Return true on the event being consumed
+//
 static uint8_t game_mouse_down_(int x, int y, uint32_t button)
 {
   DBG("Game mouse down");
@@ -309,6 +312,10 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
         }
       }
       FOR_ALL_THINGS_END()
+    }
+
+    if (wid_warning_window) {
+      return true;
     }
 
     //

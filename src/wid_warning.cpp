@@ -12,7 +12,7 @@
 #include "my_wid_popups.hpp"
 #include "my_wid_topcon.hpp"
 
-static WidPopup *wid_warning_window;
+WidPopup *wid_warning_window;
 
 static void wid_warning_destroy(void)
 {

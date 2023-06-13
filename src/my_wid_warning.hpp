@@ -3,4 +3,8 @@
 //
 
 #pragma once
-extern void wid_warning(std::string error);
+
+#include "my_wid_popup.hpp"
+
+extern void      wid_warning(std::string error);
+extern WidPopup *wid_warning_window;
