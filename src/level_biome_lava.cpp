@@ -471,14 +471,20 @@ void Level::create_biome_lava_place_rocks(Dungeonp d, int variant, int block_wid
           cnt++;
         }
 
-        auto t    = thing_new(what, point(X, Y));
-        auto tile = tile_find(tilename);
-        if (unlikely(! tile)) {
-          ERR("Rock tile %s not found", tilename.c_str());
-          return;
+        auto t = thing_new(what, point(X, Y));
+        if (! t) {
+          continue;
         }
 
-        t->tile_curr = tile->global_index;
+        if (t) {
+          auto tile = tile_find(tilename);
+          if (unlikely(! tile)) {
+            ERR("Rock tile %s not found", tilename.c_str());
+            return;
+          }
+
+          t->tile_curr = tile->global_index;
+        }
       }
     }
   }
@@ -726,7 +732,11 @@ void Level::create_biome_lava_place_floors(Dungeonp d, std::string what, int flo
           cnt++;
         }
 
-        auto t    = thing_new(new_thing, point(X, Y));
+        auto t = thing_new(new_thing, point(X, Y));
+        if (! t) {
+          continue;
+        }
+
         auto tile = tile_find(tilename);
         if (unlikely(! tile)) {
           ERR("Floor tile %s not found", tilename.c_str());

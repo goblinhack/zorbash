@@ -13,6 +13,7 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_show_outlined(self, True)
     my.is_able_to_fall(self, True)
     my.is_loggable(self, True)
+    my.is_only_one_per_tile(self, True)
     my.is_red_splatter(self, True)
     my.is_removable_if_out_of_slots(self, True)
     my.is_splatter(self, True)

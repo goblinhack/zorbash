@@ -32,6 +32,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_obs_shooting(self, True)
     my.is_obs_spawn_monst(self, True)
     my.is_obs_throwing(self, True)
+    my.is_only_one_per_tile(self, True)
     my.is_portal(self, True)
     my.light_color(self, "purple")
     my.light_dist(self, 3)

@@ -638,6 +638,7 @@ int Tp::is_obs_throwing(void) const { return _is_obs_throwing; }
 int Tp::is_obs_wall_or_door(void) const { return _is_obs_wall_or_door; }
 int Tp::is_obs_when_dead(void) const { return _is_obs_when_dead; }
 int Tp::is_ogre(void) const { return _is_ogre; }
+int Tp::is_only_one_per_tile(void) const { return _is_only_one_per_tile; }
 int Tp::is_openable(void) const { return _is_openable; }
 int Tp::is_organic(void) const { return _is_organic; }
 int Tp::is_pillar(void) const { return _is_pillar; }
@@ -749,7 +750,6 @@ int Tp::is_unused_flag137(void) const { return _is_unused_flag137; }
 int Tp::is_unused_flag138(void) const { return _is_unused_flag138; }
 int Tp::is_unused_flag139(void) const { return _is_unused_flag139; }
 int Tp::is_unused_flag13(void) const { return _is_unused_flag13; }
-int Tp::is_unused_flag140(void) const { return _is_unused_flag140; }
 int Tp::is_unused_flag142(void) const { return _is_unused_flag142; }
 int Tp::is_unused_flag14(void) const { return _is_unused_flag14; }
 int Tp::is_unused_flag15(void) const { return _is_unused_flag15; }
@@ -1387,6 +1387,7 @@ void Tp::is_obs_throwing_set(int v) { _is_obs_throwing = v; }
 void Tp::is_obs_wall_or_door_set(int v) { _is_obs_wall_or_door = v; }
 void Tp::is_obs_when_dead_set(int v) { _is_obs_when_dead = v; }
 void Tp::is_ogre_set(int v) { _is_ogre = v; }
+void Tp::is_only_one_per_tile_set(int v) { _is_only_one_per_tile = v; }
 void Tp::is_openable_set(int v) { _is_openable = v; }
 void Tp::is_organic_set(int v) { _is_organic = v; }
 void Tp::is_pillar_set(int v) { _is_pillar = v; }
@@ -1498,7 +1499,6 @@ void Tp::is_unused_flag137_set(int v) { _is_unused_flag137 = v; }
 void Tp::is_unused_flag138_set(int v) { _is_unused_flag138 = v; }
 void Tp::is_unused_flag139_set(int v) { _is_unused_flag139 = v; }
 void Tp::is_unused_flag13_set(int v) { _is_unused_flag13 = v; }
-void Tp::is_unused_flag140_set(int v) { _is_unused_flag140 = v; }
 void Tp::is_unused_flag142_set(int v) { _is_unused_flag142 = v; }
 void Tp::is_unused_flag14_set(int v) { _is_unused_flag14 = v; }
 void Tp::is_unused_flag15_set(int v) { _is_unused_flag15 = v; }

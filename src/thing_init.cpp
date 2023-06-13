@@ -16,6 +16,7 @@ Thingp Level::thing_new(Tpp tp, const point at, Thingp owner)
     err("No tp provided for thing creation");
     return nullptr;
   }
+
   return thing_new(tp->name(), at, owner);
 }
 
@@ -26,6 +27,25 @@ Thingp Level::thing_new(const std::string &tp_name, Thingp owner)
 
 Thingp Level::thing_new(const std::string &name, const point at, Thingp owner)
 {
+  auto tp = tp_find(name);
+  if (! tp) {
+    return nullptr;
+  }
+
+  //
+  // Ensure things like chasms don't pile up on the same tile.
+  //
+  if (tp->is_only_one_per_tile()) {
+    FOR_ALL_THINGS_AT_DEPTH(this, o, at.x, at.y, tp->z_depth)
+    {
+      if (o->tp() == tp) {
+        dbg("Do not create %s as already exist at %s", name.c_str(), at.to_string().c_str());
+        return nullptr;
+      }
+    }
+    FOR_ALL_THINGS_END()
+  }
+
   auto t = new class Thing_();
   t->init(this, name, at, owner);
   return t;

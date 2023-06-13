@@ -553,6 +553,7 @@ private:
   int _is_obs_wall_or_door {};
   int _is_obs_when_dead {};
   int _is_ogre {};
+  int _is_only_one_per_tile {};
   int _is_openable {};
   int _is_organic {};
   int _is_pillar {};
@@ -666,7 +667,6 @@ private:
   int _is_unused_flag138 {};
   int _is_unused_flag139 {};
   int _is_unused_flag14 {};
-  int _is_unused_flag140 {};
   int _is_unused_flag142 {};
   int _is_unused_flag15 {};
   int _is_unused_flag16 {};
@@ -1863,6 +1863,7 @@ public:
   int is_obs_wall_or_door(void) const;
   int is_obs_when_dead(void) const;
   int is_ogre(void) const;
+  int is_only_one_per_tile(void) const;
   int is_openable(void) const;
   int is_organic(void) const;
   int is_pillar(void) const;
@@ -1974,7 +1975,6 @@ public:
   int is_unused_flag138(void) const;
   int is_unused_flag139(void) const;
   int is_unused_flag13(void) const;
-  int is_unused_flag140(void) const;
   int is_unused_flag142(void) const;
   int is_unused_flag14(void) const;
   int is_unused_flag15(void) const;
@@ -2612,6 +2612,7 @@ public:
   void is_obs_wall_or_door_set(int v);
   void is_obs_when_dead_set(int v);
   void is_ogre_set(int v);
+  void is_only_one_per_tile_set(int v);
   void is_openable_set(int v);
   void is_organic_set(int v);
   void is_pillar_set(int v);
@@ -2723,7 +2724,6 @@ public:
   void is_unused_flag138_set(int v);
   void is_unused_flag139_set(int v);
   void is_unused_flag13_set(int v);
-  void is_unused_flag140_set(int v);
   void is_unused_flag142_set(int v);
   void is_unused_flag14_set(int v);
   void is_unused_flag15_set(int v);

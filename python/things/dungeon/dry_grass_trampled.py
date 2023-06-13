@@ -30,6 +30,7 @@ def tp_init(name, tiles=[]):
     my.is_dry_grass_trampled(self, True)
     my.is_grass(self, True)
     my.is_interesting(self, True)
+    my.is_only_one_per_tile(self, True)
     my.nutrition_dice(self, "1d3")
     my.on_hit_and_now_dead_do(self, "me.on_hit_and_now_dead()")
     my.temperature_max(self, 50)

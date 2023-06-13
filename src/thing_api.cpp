@@ -895,10 +895,10 @@ int Thing::is_unused_flag139(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag139());
 }
-int Thing::is_unused_flag140(void)
+int Thing::is_only_one_per_tile(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag140());
+  return (tp()->is_only_one_per_tile());
 }
 int Thing::is_unused_flag142(void)
 {

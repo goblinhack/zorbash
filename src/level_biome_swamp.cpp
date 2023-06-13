@@ -373,7 +373,11 @@ void Level::create_biome_swamp_place_rocks(Dungeonp d, int variant, int block_wi
           cnt++;
         }
 
-        auto t    = thing_new(what, point(X, Y));
+        auto t = thing_new(what, point(X, Y));
+        if (! t) {
+          continue;
+        }
+
         auto tile = tile_find(tilename);
         if (unlikely(! tile)) {
           ERR("Rock tile %s not found", tilename.c_str());

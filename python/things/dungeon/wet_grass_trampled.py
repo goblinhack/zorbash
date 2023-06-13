@@ -21,6 +21,7 @@ def tp_init(name, tiles=[]):
     my.is_described_when_hovering_over(self, True)
     my.is_grass(self, True)
     my.is_interesting(self, True)
+    my.is_only_one_per_tile(self, True)
     my.is_wet_grass(self, True)
     my.is_wet_grass_trampled(self, True)
     my.nutrition_dice(self, "1d4")

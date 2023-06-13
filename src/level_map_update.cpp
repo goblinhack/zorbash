@@ -73,8 +73,10 @@ void Level::update_water_next_to_lava(bool &changed)
                   if (! is_starting) {
                     if (! is_steam(x, y)) {
                       auto steam = thing_new("steam", point(x, y));
-                      changed    = true;
-                      steam->lifespan_set(pcg_random_range(1, 10));
+                      if (steam) {
+                        changed = true;
+                        steam->lifespan_set(pcg_random_range(1, 10));
+                      }
                     }
                   }
                 }
@@ -101,8 +103,10 @@ void Level::update_water_next_to_lava(bool &changed)
                   if (! is_starting) {
                     if (! is_steam(x, y)) {
                       auto steam = thing_new("steam", point(x, y));
-                      changed    = true;
-                      steam->lifespan_set(pcg_random_range(1, 10));
+                      if (steam) {
+                        changed = true;
+                        steam->lifespan_set(pcg_random_range(1, 10));
+                      }
                     }
                   }
                 }

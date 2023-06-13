@@ -43,6 +43,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_fire(self, True)
     my.is_floating(self, True)
     my.is_loggable(self, True)
+    my.is_only_one_per_tile(self, True)
     my.light_color(self, "yellow")
     my.light_dist(self, 4)
     my.noise_on_born(self, 100)

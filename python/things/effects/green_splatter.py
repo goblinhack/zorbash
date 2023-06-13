@@ -15,6 +15,7 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_show_outlined(self, True)
     my.is_green_splatter(self, True)
     my.is_moveable(self, True)
+    my.is_only_one_per_tile(self, True)
     my.is_removable_if_out_of_slots(self, True)
     my.is_splatter(self, True)
     my.is_tmp_thing(self, True)

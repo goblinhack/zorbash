@@ -23,6 +23,7 @@ def tp_init(name, tiles=[], left1_tiles=[], bot3_tiles=[]):
     my.is_described_when_hovering_over(self, True)
     my.is_dirt(self, True)
     my.is_flat(self, True)
+    my.is_only_one_per_tile(self, True)
     my.text_a_or_an(self, "the")
     my.text_description_short(self, "Some exciting dirt")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

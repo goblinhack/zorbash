@@ -538,6 +538,10 @@ void Level::place_random_treasure(Dungeonp d)
       // Be nice and enchant this lost treasure.
       //
       auto t = thing_new(tp->name(), point(x, y));
+      if (! t) {
+        continue;
+      }
+
       if (pcg_random_range(0, 100) < 20) {
         t->enchant_randomly();
       }

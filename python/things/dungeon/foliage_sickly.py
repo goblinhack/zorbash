@@ -36,6 +36,7 @@ def tp_init(name, tiles=[]):
     my.is_hittable(self, True)
     my.is_interesting(self, True)
     my.is_light_blocker_for_monst(self, True)  # to give cover to the player
+    my.is_only_one_per_tile(self, True)
     my.noise_blocker(self, True)
     my.nutrition_dice(self, "1d3")
     my.temperature_max(self, 50)

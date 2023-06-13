@@ -444,7 +444,11 @@ void Level::create_biome_chasms_place_floors(Dungeonp d, std::string what, int f
           cnt++;
         }
 
-        auto t    = thing_new(new_thing, point(X, Y));
+        auto t = thing_new(new_thing, point(X, Y));
+        if (! t) {
+          continue;
+        }
+
         auto tile = tile_find(tilename);
         if (unlikely(! tile)) {
           ERR("Floor tile %s not found", tilename.c_str());

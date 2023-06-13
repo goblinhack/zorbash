@@ -446,7 +446,11 @@ void Level::create_biome_sewer_place_walls(int variant, int block_width, int blo
           cnt++;
         }
 
-        auto t    = thing_new(what, point(X, Y));
+        auto t = thing_new(what, point(X, Y));
+        if (! t) {
+          continue;
+        }
+
         auto tile = tile_find(tilename);
         if (unlikely(! tile)) {
           ERR("wall tile %s not found", tilename.c_str());

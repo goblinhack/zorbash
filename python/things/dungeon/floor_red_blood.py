@@ -20,6 +20,7 @@ def tp_init(name, text_long_name):
     my.is_described_when_hovering_over(self, True)
     my.is_flat(self, True)
     my.is_interesting(self, True)
+    my.is_only_one_per_tile(self, True)
     my.is_red_blood(self, True)
     my.is_removable_if_out_of_slots(self, True)
     my.normal_placement_rules(self, True)

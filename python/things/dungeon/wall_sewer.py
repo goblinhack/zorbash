@@ -52,6 +52,7 @@ def tp_init(
     my.is_obs_spawn(self, True)
     my.is_obs_throwing(self, True)
     my.is_obs_wall_or_door(self, True)
+    my.is_only_one_per_tile(self, True)
     my.is_sewer_wall(self, True)
     my.is_stone(self, True)
     my.is_wall(self, True)

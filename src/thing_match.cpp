@@ -355,6 +355,7 @@ bool Tp::matches(const std::string &what)
   if (is_obs_wall_or_door() && (what == "is_obs_wall_or_door")) { return true; }
   if (is_obs_when_dead() && (what == "is_obs_when_dead")) { return true; }
   if (is_ogre() && (what == "is_ogre")) { return true; }
+  if (is_only_one_per_tile() && (what == "is_only_one_per_tile")) { return true; }
   if (is_openable() && (what == "is_openable")) { return true; }
   if (is_organic() && (what == "is_organic")) { return true; }
   if (is_pillar() && (what == "is_pillar")) { return true; }
@@ -462,7 +463,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag138() && (what == "is_unused_flag138")) { return true; }
   if (is_unused_flag139() && (what == "is_unused_flag139")) { return true; }
   if (is_unused_flag13() && (what == "is_unused_flag13")) { return true; }
-  if (is_unused_flag140() && (what == "is_unused_flag140")) { return true; }
   if (is_unused_flag142() && (what == "is_unused_flag142")) { return true; }
   if (is_unused_flag14() && (what == "is_unused_flag14")) { return true; }
   if (is_unused_flag15() && (what == "is_unused_flag15")) { return true; }
@@ -958,6 +958,7 @@ bool Thing::matches(const std::string &what)
   if (is_obs_wall_or_door() && (what == "is_obs_wall_or_door")) { return true; }
   if (is_obs_when_dead() && (what == "is_obs_when_dead")) { return true; }
   if (is_ogre() && (what == "is_ogre")) { return true; }
+  if (is_only_one_per_tile() && (what == "is_only_one_per_tile")) { return true; }
   if (is_openable() && (what == "is_openable")) { return true; }
   if (is_organic() && (what == "is_organic")) { return true; }
   if (is_pillar() && (what == "is_pillar")) { return true; }
@@ -1066,7 +1067,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag138() && (what == "is_unused_flag138")) { return true; }
   if (is_unused_flag139() && (what == "is_unused_flag139")) { return true; }
   if (is_unused_flag13() && (what == "is_unused_flag13")) { return true; }
-  if (is_unused_flag140() && (what == "is_unused_flag140")) { return true; }
   if (is_unused_flag142() && (what == "is_unused_flag142")) { return true; }
   if (is_unused_flag14() && (what == "is_unused_flag14")) { return true; }
   if (is_unused_flag15() && (what == "is_unused_flag15")) { return true; }
@@ -1551,6 +1551,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_obs_wall_or_door") { return &Thing::is_obs_wall_or_door; }
   if (what == "is_obs_when_dead") { return &Thing::is_obs_when_dead; }
   if (what == "is_ogre") { return &Thing::is_ogre; }
+  if (what == "is_only_one_per_tile") { return &Thing::is_only_one_per_tile; }
   if (what == "is_openable") { return &Thing::is_openable; }
   if (what == "is_organic") { return &Thing::is_organic; }
   if (what == "is_pillar") { return &Thing::is_pillar; }
@@ -1658,7 +1659,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag138") { return &Thing::is_unused_flag138; }
   if (what == "is_unused_flag139") { return &Thing::is_unused_flag139; }
   if (what == "is_unused_flag13") { return &Thing::is_unused_flag13; }
-  if (what == "is_unused_flag140") { return &Thing::is_unused_flag140; }
   if (what == "is_unused_flag142") { return &Thing::is_unused_flag142; }
   if (what == "is_unused_flag14") { return &Thing::is_unused_flag14; }
   if (what == "is_unused_flag15") { return &Thing::is_unused_flag15; }

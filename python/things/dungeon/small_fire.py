@@ -30,6 +30,7 @@ def tp_init(name, text_long_name):
     my.is_interesting(self, True)
     my.is_loggable(self, True)
     my.is_moveable(self, True)
+    my.is_only_one_per_tile(self, True)
     my.is_tickable(self, True)
     my.lifespan_dice(self, "1d10+10")
     my.light_color(self, "orange")

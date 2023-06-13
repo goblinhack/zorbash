@@ -21,6 +21,7 @@ def tp_init(name, tiles=[]):
     my.is_dry_grass(self, True)
     my.is_grass(self, True)
     my.is_interesting(self, True)
+    my.is_only_one_per_tile(self, True)
     my.nutrition_dice(self, "1d2")
     my.temperature_max(self, 50)
     my.temperature_min(self, 0)

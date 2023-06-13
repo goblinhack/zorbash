@@ -1629,6 +1629,7 @@ public:
   int is_obs_wall_or_door(void);
   int is_obs_when_dead(void);
   int is_ogre(void);
+  int is_only_one_per_tile(void);
   int is_openable(void);
   int is_organic(void);
   int is_pillar(void);
@@ -1740,7 +1741,6 @@ public:
   int is_unused_flag138(void);
   int is_unused_flag139(void);
   int is_unused_flag13(void);
-  int is_unused_flag140(void);
   int is_unused_flag142(void);
   int is_unused_flag14(void);
   int is_unused_flag15(void);

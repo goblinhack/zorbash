@@ -451,6 +451,7 @@ PyObject *thing_is_obs_wall_or_door(PyObject *obj, PyObject *args, PyObject *key
 PyObject *thing_is_obs_when_dead(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ogre(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_on_fire(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_only_one_per_tile(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_openable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_organic(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_pack(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -562,7 +563,6 @@ PyObject *thing_is_unused_flag137(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag138(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag139(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag13(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag140(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag142(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag14(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag15(PyObject *obj, PyObject *args, PyObject *keywds);
