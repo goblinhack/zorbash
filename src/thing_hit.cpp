@@ -895,6 +895,24 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   }
 
   //
+  // Allow rocks on the main level to be destroyed; but not in the border
+  //
+  if (is_very_hard()) {
+    if ((curr_at.x < MAP_BORDER_ROCK) || (curr_at.y < MAP_BORDER_ROCK) || (curr_at.x >= MAP_WIDTH - MAP_BORDER_ROCK)
+        || (curr_at.y >= MAP_HEIGHT - MAP_BORDER_ROCK)) {
+      IF_DEBUG { hitter->log("Cannot hit: %s is border rock", to_short_string().c_str()); }
+      if (real_hitter->is_player()) {
+        msg("%s is indestructable!", text_The().c_str());
+      }
+      if (hitter->is_weapon()) {
+        weapon_check_for_dmg(hitter, this);
+      }
+      wobble(20);
+      return false;
+    }
+  }
+
+  //
   // If the thing is dead, then allow an additional eat attack.
   //
   if (is_dead || is_dying) {
@@ -2300,17 +2318,6 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
       IF_DEBUG { hitter->log("Cannot hit dead thing, but can eat: %s", to_short_string().c_str()); }
     } else {
       IF_DEBUG { hitter->log("Cannot hit: %s is dead", to_short_string().c_str()); }
-      return false;
-    }
-  }
-
-  //
-  // Allow rocks on the main level to be destroyed; but not in the border
-  //
-  if (is_very_hard()) {
-    if ((curr_at.x < MAP_BORDER_ROCK) || (curr_at.y < MAP_BORDER_ROCK) || (curr_at.x >= MAP_WIDTH - MAP_BORDER_ROCK)
-        || (curr_at.y >= MAP_HEIGHT - MAP_BORDER_ROCK)) {
-      IF_DEBUG { hitter->log("Cannot hit: %s is very_hard", to_short_string().c_str()); }
       return false;
     }
   }

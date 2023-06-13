@@ -33,7 +33,7 @@ float Thing::update_wobble(void)
   }
 
   auto new_w = w;
-  new_w *= 0.90;
+  new_w *= 0.99;
   new_w = -new_w;
   wobble_set(new_w);
 

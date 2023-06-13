@@ -131,7 +131,11 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
 
         int x = level->cursor->curr_at.x;
         int y = level->cursor->curr_at.y;
-        FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)
+
+        //
+        // Need to check if we can hit a wall. This helps us escape from pools we fall into.
+        //
+        FOR_ALL_COLLISION_THINGS(level, t, x, y)
         {
           if (t == level->player) {
             continue;

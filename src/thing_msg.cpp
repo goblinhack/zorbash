@@ -134,18 +134,26 @@ void Thing::msg(const char *fmt, ...)
     // If a ghost is in a wall and trying to attack the player, we must allow that even though the DMAP will say wall.
     //
     if (! is_ethereal()) {
-      int distance = distance_to_player();
-      if (distance >= DMAP_IS_PASSABLE) {
-        if (why.find('%') != std::string::npos) {
-          //
-          // Be careful as the fmt string has arguments
-          //
-          dbg("Too far to see (dist %d)", distance);
-        } else {
-          dbg("Too far to see (dist %d) msg: %s", distance, why.c_str());
+      //
+      // If something is adjacent then always show the message
+      //
+      if (distance(player->curr_at, curr_at) > 1) {
+        //
+        // Else use the dmap distance to see if we can see it
+        //
+        int distance = distance_to_player();
+        if (distance >= DMAP_IS_PASSABLE) {
+          if (why.find('%') != std::string::npos) {
+            //
+            // Be careful as the fmt string has arguments
+            //
+            dbg("Too far to see (dist %d)", distance);
+          } else {
+            dbg("Too far to see (dist %d) msg: %s", distance, why.c_str());
+          }
+          TRACE_AND_INDENT();
+          return;
         }
-        TRACE_AND_INDENT();
-        return;
       }
     }
 
