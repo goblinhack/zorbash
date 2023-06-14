@@ -196,7 +196,9 @@ extern PFNGLGENBUFFERSARBPROC           glGenBuffersARB_EXT;
 extern PFNGLBINDBUFFERARBPROC           glBindBufferARB_EXT;
 extern PFNGLBUFFERDATAARBPROC           glBufferDataARB_EXT;
 extern PFNGLDELETEBUFFERSARBPROC        glDeleteBuffersARB_EXT;
+extern PFNGLDEBUGMESSAGECALLBACKPROC    glDebugMessageCallback_EXT;
 #else
+#define glDebugMessageCallback_EXT    glDebugMessageCallbackEXT
 #define glCreateProgram_EXT           glCreateProgramEXT
 #define glDeleteProgram_EXT           glDeleteProgramEXT
 #define glIsProgram_EXT               glIsProgramEXT
@@ -332,7 +334,7 @@ void glcolorfast(color s);
   {                                                                                                                  \
     auto errCode = glGetError();                                                                                     \
     if (likely(errCode == GL_NO_ERROR)) {                                                                            \
-      /* CON("GFX: ok at %s:%s line %u", SRC_FILE_NAME, SRC_FUNC_NAME, SRC_LINE_NUM); */                             \
+      /* LOG("GFX: ok at %s:%s line %u", SRC_FILE_NAME, SRC_FUNC_NAME, SRC_LINE_NUM); */                             \
     } else {                                                                                                         \
       LOG("GFX: error at %s:%s line %u", SRC_FILE_NAME, SRC_FUNC_NAME, SRC_LINE_NUM);                                \
       gl_error(errCode);                                                                                             \

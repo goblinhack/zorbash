@@ -16,6 +16,13 @@ std::array< GLuint, MAX_FBO > fbo_id        = {};
 std::array< GLuint, MAX_FBO > fbo_tex_id    = {};
 std::array< isize, MAX_FBO >  fbo_size      = {};
 
+void GLAPIENTRY MessageCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length,
+                                const GLchar *message, const void *userParam)
+{
+  CON("GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
+      (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""), type, severity, message);
+}
+
 void gl_init_2d_mode(void)
 {
   TRACE_AND_INDENT();
@@ -269,6 +276,7 @@ static void gl_init_fbo_(int fbo, GLuint *render_buf_id, GLuint *fbo_id, GLuint 
 
   DBG2("OpenGl: - glTexImage2D");
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, tex_width, tex_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+  GL_ERROR_CHECK();
   glBindTexture(GL_TEXTURE_2D, 0);
   GL_ERROR_CHECK();
 
@@ -335,9 +343,9 @@ static void gl_init_fbo_(int fbo, GLuint *render_buf_id, GLuint *fbo_id, GLuint 
   // Check FBO status
   //
   DBG2("OpenGl: - glCheckFramebufferStatus_EXT");
-  GLenum status = glCheckFramebufferStatus_EXT(GL_FRAMEBUFFER);
+  auto status = glCheckFramebufferStatus_EXT(GL_FRAMEBUFFER);
   if (status && (status != GL_FRAMEBUFFER_COMPLETE)) {
-    LOG("Failed to create framebuffer, error: %d", status);
+    LOG("Failed to create framebuffer, error: %d/0x%x", status, status);
 
 #ifdef GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT
     if (status == GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT) {
@@ -813,6 +821,7 @@ HPALETTE hPalette;
 const char g_szClassName[] = "myWindowClass";
 
 PFNGLCREATEPROGRAMPROC           glCreateProgram_EXT;
+PFNGLDEBUGMESSAGECALLBACKPROC    glDebugMessageCallback_EXT;
 PFNGLDELETEPROGRAMPROC           glDeleteProgram_EXT;
 PFNGLISPROGRAMPROC               glIsProgram_EXT;
 PFNGLCREATESHADERPROC            glCreateShader_EXT;
@@ -849,6 +858,19 @@ PFNGLDELETEBUFFERSARBPROC        glDeleteBuffersARB_EXT;
 
 static void gl_ext_load(void)
 {
+  TRACE_AND_INDENT();
+  glDebugMessageCallback_EXT = (__typeof__(glDebugMessageCallback_EXT)) wglGetProcAddress("glDebugMessageCallback");
+  if (! glDebugMessageCallback_EXT) {
+    LOG("OpenGl: - glDebugMessageCallback_EXT - NOT present");
+  } else {
+    LOG("OpenGl: - glDebugMessageCallback_EXT - present");
+  }
+
+  if (glDebugMessageCallback_EXT) {
+    glEnable(GL_DEBUG_OUTPUT);
+    glDebugMessageCallback_EXT(MessageCallback, 0);
+  }
+
   TRACE_AND_INDENT();
   glCreateProgram_EXT = (__typeof__(glCreateProgram_EXT)) wglGetProcAddress("glCreateProgram");
   if (! glCreateProgram_EXT) {
@@ -1048,7 +1070,7 @@ static void gl_ext_load(void)
   }
 
   glCheckFramebufferStatus_EXT
-      = (__typeof__(glCheckFramebufferStatus_EXT)) wglGetProcAddress("glFramebufferRenderbuffer");
+      = (__typeof__(glCheckFramebufferStatus_EXT)) wglGetProcAddress("glCheckFramebufferStatus");
   if (! glCheckFramebufferStatus_EXT) {
     LOG("OpenGl: - glCheckFramebufferStatus_EXT - NOT present");
   } else {
