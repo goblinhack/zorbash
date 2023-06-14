@@ -478,6 +478,10 @@ bool Thing::equip(Thingp item, int equip)
 
   TRACE_NO_INDENT();
   auto carry_anim = level->thing_new(carry_anim_as, this);
+  if (! carry_anim) {
+    err("Could not equip %s as has no carry anim thing", item->to_short_string().c_str());
+    return false;
+  }
 
   //
   // Set the id so we can use it later
@@ -692,23 +696,25 @@ bool Thing::equip_use(bool forced, int equip, ThingAttackOptionsp attack_options
         //
         // If not attacking something at a point, then use the direction of the wielder.
         //
-        auto use_anim            = level->thing_new(attack_options->used_as, attack_options->attack_at);
-        use_anim->dir            = dir;
-        use_anim->is_facing_left = is_facing_left;
+        auto use_anim = level->thing_new(attack_options->used_as, attack_options->attack_at);
+        if (use_anim) {
+          use_anim->dir            = dir;
+          use_anim->is_facing_left = is_facing_left;
 
-        //
-        // Not sure why we have this. If you are on a web and hit the web then this moves
-        // the animation off of the web.
-        //
-        if (0) {
-          if (attack_options->attack_at == curr_at) {
-            auto p = attack_options->attack_at + dir_to_direction();
-            use_anim->move_to(p);
+          //
+          // Not sure why we have this. If you are on a web and hit the web then this moves
+          // the animation off of the web.
+          //
+          if (0) {
+            if (attack_options->attack_at == curr_at) {
+              auto p = attack_options->attack_at + dir_to_direction();
+              use_anim->move_to(p);
+            }
           }
-        }
 
-        use_anim->owner_set(this);
-        equip_use_anim_set(use_anim, equip);
+          use_anim->owner_set(this);
+          equip_use_anim_set(use_anim, equip);
+        }
       } else {
         dbg("Not ok to have swing animation for monster");
       }
@@ -731,8 +737,10 @@ bool Thing::equip_use(bool forced, int equip, ThingAttackOptionsp attack_options
       //
       if (! equip_use_anim(equip)) {
         auto use_anim = level->thing_new(attack_options->used_as, this);
-        use_anim->owner_set(this);
-        equip_use_anim_set(use_anim, equip);
+        if (use_anim) {
+          use_anim->owner_set(this);
+          equip_use_anim_set(use_anim, equip);
+        }
       }
     } else {
       return false;

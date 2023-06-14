@@ -222,55 +222,71 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   }
 
   dbg("Hit actual, damage %d", damage);
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto victim = this;
   if (attack_options->attack[ THING_ATTACK_POISON ]) {
+    TRACE_NO_INDENT();
     damage = real_hitter->total_dmg_for_on_attacking_dmg_poison(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_poison(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_BITE ]) {
+    TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_bite(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_bite(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_CLAW ]) {
+    TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_claw(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_claw(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_FIRE ]) {
+    TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_fire(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_fire(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
+    TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_crush(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_crush(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_LIGHTNING ]) {
+    TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_lightning(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_lightning(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_ENERGY ]) {
+    TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_energy(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_energy(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_NEGATION ]) {
+    TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_negation(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_negation(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_ACID ]) {
+    TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_acid(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_acid(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_ACID ]) {
+    TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_acid(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_acid(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_WATER ]) {
+    TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_water(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_water(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_DIGEST ]) {
+    TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_digest(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_digest(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
+    TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_necrosis(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_necrosis(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
+    TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_draining(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_draining(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_NATURAL ]) {
+    TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_nat_att(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_nat_att(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_COLD ]) {
+    TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_cold(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_cold(hitter, real_hitter, damage);
 
@@ -281,18 +297,24 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       on_fire_unset();
 
       auto smoke = level->thing_new("smoke", curr_at);
-      smoke->lifespan_set(pcg_random_range(1, 10));
+      if (smoke) {
+        smoke->lifespan_set(pcg_random_range(1, 10));
+      }
     }
   } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
+    TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_drown(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_drown(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
+    TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_missile(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_missile(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
+    TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_heat(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_heat(hitter, real_hitter, damage);
   } else {
+    TRACE_NO_INDENT();
     //
     // The real hitter could be a sword. The hitter, the player.
     // Use this to see if we increase the damage due to any buffs of abilities of the sword.
@@ -303,6 +325,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     //
     damage = victim->total_dmg_for_on_receiving_dmg_melee(hitter, real_hitter, damage);
   }
+
+  TRACE_NO_INDENT();
 
   //
   // Auto rage; the player does this via a skill
@@ -319,7 +343,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   /////////////////////////////////////////////////////////////////////////
   // Poison damage
   /////////////////////////////////////////////////////////////////////////
+  TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_POISON ]) {
+    TRACE_NO_INDENT();
     attack_set = true;
     if (is_immune_to_poison()) {
       if (real_hitter->is_player()) {
@@ -358,11 +384,13 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   /////////////////////////////////////////////////////////////////////////
   // Drown damage
   /////////////////////////////////////////////////////////////////////////
+  TRACE_NO_INDENT();
   if (! is_air_breather()) {
     attack_options->attack[ THING_ATTACK_DROWN ] = false;
   }
 
   if (attack_options->attack[ THING_ATTACK_DROWN ]) {
+    TRACE_NO_INDENT();
     attack_set = true;
     if (! damage) {
       if (is_player()) {
@@ -381,7 +409,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   /////////////////////////////////////////////////////////////////////////
   // Bite damage
   /////////////////////////////////////////////////////////////////////////
+  TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_BITE ]) {
+    TRACE_NO_INDENT();
     attack_set = true;
     if (! damage) {
       if (is_player()) {
@@ -400,7 +430,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   /////////////////////////////////////////////////////////////////////////
   // Claw damage
   /////////////////////////////////////////////////////////////////////////
+  TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_CLAW ]) {
+    TRACE_NO_INDENT();
     attack_set = true;
     if (! damage) {
       if (is_player()) {
@@ -419,7 +451,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   /////////////////////////////////////////////////////////////////////////
   // Cold damage
   /////////////////////////////////////////////////////////////////////////
+  TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_COLD ]) {
+    TRACE_NO_INDENT();
     attack_set = true;
     if (is_immune_to_cold()) {
       if (real_hitter->is_player()) {
@@ -462,7 +496,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   /////////////////////////////////////////////////////////////////////////
   // Fire damage
   /////////////////////////////////////////////////////////////////////////
+  TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_FIRE ]) {
+    TRACE_NO_INDENT();
     attack_set = true;
     if (is_immune_to_fire()) {
       if (real_hitter->is_player()) {
@@ -504,7 +540,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   /////////////////////////////////////////////////////////////////////////
   // Crush damage
   /////////////////////////////////////////////////////////////////////////
+  TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
+    TRACE_NO_INDENT();
     attack_set = true;
 
     if (! damage || ! is_crushable()) {
@@ -524,7 +562,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   /////////////////////////////////////////////////////////////////////////
   // Lightning / electricity damage
   /////////////////////////////////////////////////////////////////////////
+  TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_LIGHTNING ]) {
+    TRACE_NO_INDENT();
     if (is_immune_to_electricity()) {
       if (real_hitter->is_player()) {
         if (is_player()) {
@@ -564,7 +604,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   /////////////////////////////////////////////////////////////////////////
   // Energy damage
   /////////////////////////////////////////////////////////////////////////
+  TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_ENERGY ]) {
+    TRACE_NO_INDENT();
     attack_set = true;
     if (! damage) {
       if (is_player()) {
@@ -590,7 +632,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   /////////////////////////////////////////////////////////////////////////
   // Negation damage
   /////////////////////////////////////////////////////////////////////////
+  TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_NEGATION ]) {
+    TRACE_NO_INDENT();
     attack_set = true;
 
     if (is_immune_to_negation()) {
@@ -624,7 +668,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   /////////////////////////////////////////////////////////////////////////
   // Acid damage
   /////////////////////////////////////////////////////////////////////////
+  TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_ACID ]) {
+    TRACE_NO_INDENT();
     attack_set = true;
     if (is_immune_to_acid()) {
       if (real_hitter->is_player()) {
@@ -663,7 +709,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   /////////////////////////////////////////////////////////////////////////
   // Water damage
   /////////////////////////////////////////////////////////////////////////
+  TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_WATER ]) {
+    TRACE_NO_INDENT();
     attack_set = true;
     if (is_immune_to_water()) {
       if (real_hitter->is_player()) {
@@ -704,7 +752,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   /////////////////////////////////////////////////////////////////////////
   // Digest damage
   /////////////////////////////////////////////////////////////////////////
+  TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_DIGEST ]) {
+    TRACE_NO_INDENT();
     attack_set = true;
     if (! damage) {
       if (is_player()) {
@@ -723,7 +773,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   /////////////////////////////////////////////////////////////////////////
   // Necrosis damage
   /////////////////////////////////////////////////////////////////////////
+  TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
+    TRACE_NO_INDENT();
     attack_set = true;
     if (is_immune_to_necrosis()) {
       if (real_hitter->is_player()) {
@@ -762,7 +814,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   /////////////////////////////////////////////////////////////////////////
   // Draining damage
   /////////////////////////////////////////////////////////////////////////
+  TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
+    TRACE_NO_INDENT();
     attack_set = true;
     if (is_immune_to_draining()) {
       if (real_hitter->is_player()) {
@@ -796,7 +850,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   /////////////////////////////////////////////////////////////////////////
   // Missile damage
   /////////////////////////////////////////////////////////////////////////
+  TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
+    TRACE_NO_INDENT();
     attack_set = true;
 
     if (! damage || is_very_hard()) {
@@ -816,7 +872,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   /////////////////////////////////////////////////////////////////////////
   // Heat damage
   /////////////////////////////////////////////////////////////////////////
+  TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_HEAT ]) {
+    TRACE_NO_INDENT();
     attack_set = true;
     if (is_immune_to_fire()) {
       if (real_hitter->is_player()) {
@@ -858,7 +916,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   /////////////////////////////////////////////////////////////////////////
   // Natural damage
   /////////////////////////////////////////////////////////////////////////
+  TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_NATURAL ]) {
+    TRACE_NO_INDENT();
     attack_set = true;
     if (! damage) {
       dmg_type = real_hitter->dmg_nat_att_type();
@@ -875,6 +935,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     dmg_type = real_hitter->dmg_nat_att_type() + " ";
   }
 
+  TRACE_NO_INDENT();
   if (! attack_set) {
     if (! damage) {
       if (is_player()) {
@@ -897,6 +958,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   // Allow rocks on the main level to be destroyed; but not in the border
   //
+  TRACE_NO_INDENT();
   if (is_very_hard()) {
     if ((curr_at.x < MAP_BORDER_ROCK) || (curr_at.y < MAP_BORDER_ROCK) || (curr_at.x >= MAP_WIDTH - MAP_BORDER_ROCK)
         || (curr_at.y >= MAP_HEIGHT - MAP_BORDER_ROCK)) {
@@ -915,6 +977,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   // If the thing is dead, then allow an additional eat attack.
   //
+  TRACE_NO_INDENT();
   if (is_dead || is_dying) {
     if (real_hitter->can_eat(this)) {
       IF_DEBUG { hitter->log("Thing is dead, allow it to be eaten"); }
@@ -931,6 +994,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
 
   auto delta = curr_at - hitter->curr_at;
 
+  TRACE_NO_INDENT();
   if (real_hitter != this) {
     if (real_hitter->tp()->gfx_pixelart_bounce_on_move()) {
       if (real_hitter->bounce(0.5, 0.1, 100, 3)) {
@@ -939,7 +1003,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     }
   }
 
+  TRACE_NO_INDENT();
   if (real_hitter->is_able_to_tire()) {
+    TRACE_NO_INDENT();
     if (! real_hitter->stamina()) {
       if (real_hitter->is_player()) {
         msg("You are too tired to attack.");
@@ -982,7 +1048,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   // Check for immunity
   //
+  TRACE_NO_INDENT();
   if (is_immune_to_fire()) {
+    TRACE_NO_INDENT();
     if (hitter->is_fire() || real_hitter->is_fire()) {
       if (is_player()) {
         msg("You bask in the fire!");
@@ -996,6 +1064,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   // Try to push the thing into a hazard if we can just to be sneaky
   //
+  TRACE_NO_INDENT();
   if (this == hitter) {
     //
     // On fire?
@@ -1011,6 +1080,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   // Try to steal instead of attacking?
   //
+  TRACE_NO_INDENT();
   if (real_hitter->is_thief()) {
     if (real_hitter->is_adjacent(this)) {
       if (real_hitter->steal_item_from(this)) {
@@ -1026,7 +1096,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   // Poison attack
   //
+  TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_POISON ]) {
+    TRACE_NO_INDENT();
     if (is_immune_to_poison()) {
       if (hitter->is_poisonous_danger_level() || real_hitter->is_poisonous_danger_level()) {
         if (is_player()) {
@@ -1052,7 +1124,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   // Necrotic attack
   //
+  TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
+    TRACE_NO_INDENT();
     if (is_undead() || is_ethereal()) {
       if (hitter->is_necrotic_danger_level() || real_hitter->is_necrotic_danger_level()) {
         if (is_player()) {
@@ -1145,7 +1219,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   // If a staff is firing a laser, then get the damage from the
   // staff so we can add in enchants.
   //
+  TRACE_NO_INDENT();
   if (hitter->is_laser()) {
+    TRACE_NO_INDENT();
     auto owner = hitter->immediate_owner();
     if (owner) {
       if (owner->dmg_current()) {
@@ -1155,8 +1231,10 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     }
   }
 
+  TRACE_NO_INDENT();
   real_hitter->attack_num_set(attack_options->attack_num);
   if (real_hitter->maybe_itemsp()) {
+    TRACE_NO_INDENT();
     FOR_ALL_SKILLS_FOR(real_hitter, oid)
     {
       auto skill = level->thing_find(oid);
@@ -1171,6 +1249,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     }
   }
 
+  TRACE_NO_INDENT();
   if (victim->is_frozen) {
     damage *= 3;
     IF_DEBUG { hitter->log("Hit %s (health %d) for shatter damage %d", text_the().c_str(), health(), damage); }
@@ -1184,6 +1263,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   // If hit by something then abort following any path
   //
+  TRACE_NO_INDENT();
   if (is_player()) {
     if (game->robot_mode) {
       if (infop()->monst_state == MONST_STATE_MOVING) {
@@ -1209,17 +1289,18 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   // If possessions are destroyed, let the player know.
   //
+  TRACE_NO_INDENT();
   auto o_top = top_owner();
   if (is_dead || is_dying) {
     //
     // Limit to possessions and not things like a sword thing animation.
     //
     dbg("Dead or dying");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
 
     if (is_item()) {
       dbg("Dead or dying item");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
 
       if (o_top && o_top->is_player()) {
         dbg("Player is onwer of dead or dying thing");
@@ -1243,7 +1324,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     }
   }
 
+  TRACE_NO_INDENT();
   if (is_player()) {
+    TRACE_NO_INDENT();
     //
     // Player being hit
     //
@@ -1436,6 +1519,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       level->wobble_set(damage / THING_DAMAGE_SHAKE_SCALE);
     }
   } else if (real_hitter->is_player()) {
+    TRACE_NO_INDENT();
     //
     // Player hitting something else
     //
@@ -1665,6 +1749,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       }
     }
   } else if (hitter->is_lightning()) {
+    TRACE_NO_INDENT();
     //
     // Fork lightning passes through water.
     //
@@ -1675,6 +1760,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       hitter->msg("%s electrifies %s for %d damage.", hitter->text_The().c_str(), text_the().c_str(), damage);
     }
   } else if (real_hitter == this) {
+    TRACE_NO_INDENT();
     if (o_top && o_top->is_player()) {
       if (attack_options->attack[ THING_ATTACK_POISON ]) {
         msg("Your %s is being poisoned.", text_long_name().c_str());
@@ -1785,6 +1871,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       }
     }
   } else if (real_hitter->is_monst() && (real_hitter != hitter)) {
+    TRACE_NO_INDENT();
     if (attack_options->attack[ THING_ATTACK_NATURAL ]) {
       real_hitter->msg("%s %s %s with %s.", real_hitter->text_The().c_str(), real_hitter->text_hits().c_str(),
                        text_the().c_str(), hitter->text_the().c_str());
@@ -1793,6 +1880,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
                        hitter->text_the().c_str());
     }
   } else if (real_hitter != this) {
+    TRACE_NO_INDENT();
     //
     // Something else hitting something else. But don't show a message for things
     // like rocks being hit by explosions.
@@ -1815,6 +1903,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   // Check for staff of fire projectiles (this is the non real hitter case)
   //
+  TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_FIRE ] || hitter->is_fire() || hitter->is_lava() || real_hitter->is_fire()
       || real_hitter->is_lava()) {
     on_fire_set("hit by fire");
@@ -1842,40 +1931,49 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   // Visible hit indication
   //
+  TRACE_NO_INDENT();
   if (is_player()) {
+    TRACE_NO_INDENT();
     //
     // Player being hit
     //
     if (attack_options->crit) {
+      TRACE_NO_INDENT();
       real_hitter->popup(string_sprintf("%%fg=red$It CRITS you -%d", damage));
       if (distance(real_hitter->curr_at, curr_at) > second_message_distance) {
         popup(string_sprintf("%%fg=red$-%d", damage));
       }
     } else if (hitter->is_missile()) {
+      TRACE_NO_INDENT();
       real_hitter->popup(string_sprintf("%%fg=orange$It strikes you -%d", damage));
       if (distance(real_hitter->curr_at, curr_at) > second_message_distance) {
         popup(string_sprintf("%%fg=orange$-%d", damage));
       }
     } else if (hitter->is_fire() || real_hitter->is_fire()) {
+      TRACE_NO_INDENT();
       if (distance(real_hitter->curr_at, curr_at) > second_message_distance) {
         popup(string_sprintf("%%fg=orange$Burns -%d", damage));
       }
     } else if (hitter->is_projectile()) {
+      TRACE_NO_INDENT();
       real_hitter->popup(string_sprintf("%%fg=orange$Hits you -%d", damage));
       if (distance(real_hitter->curr_at, curr_at) > second_message_distance) {
         popup(string_sprintf("%%fg=orange$-%d", damage));
       }
     } else if (hitter->is_staff()) {
+      TRACE_NO_INDENT();
       real_hitter->popup(string_sprintf("%%fg=orange$Zaps you -%d", damage));
       if (distance(real_hitter->curr_at, curr_at) > second_message_distance) {
         popup(string_sprintf("%%fg=orange$-%d", damage));
       }
     } else if (hitter->is_monst() || real_hitter->is_monst()) {
+      TRACE_NO_INDENT();
       real_hitter->popup(string_sprintf("%%fg=orange$It %s you -%d", real_hitter->text_hits().c_str(), damage));
       if (distance(real_hitter->curr_at, curr_at) > second_message_distance) {
         popup(string_sprintf("%%fg=orange$-%d", damage));
       }
     } else {
+      TRACE_NO_INDENT();
       real_hitter->popup(string_sprintf("%%fg=orange$Hits you for -%d", damage));
       if (distance(real_hitter->curr_at, curr_at) > second_message_distance) {
         popup(string_sprintf("%%fg=orange$-%d", damage));
@@ -1885,10 +1983,12 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     //
     // Thing being hit
     //
+    TRACE_NO_INDENT();
     if (hitter->is_player() || real_hitter->is_player()) {
       //
       // Thing being hit by player
       //
+      TRACE_NO_INDENT();
       if (attack_options->crit) {
         real_hitter->popup(string_sprintf("%%fg=red$You CRIT it -%d", damage));
       } else {
@@ -1898,6 +1998,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       //
       // Monster hitting monst, or self attack damage like cold or fire
       //
+      TRACE_NO_INDENT();
       if (attack_options->crit) {
         popup(string_sprintf("%%fg=red$-%d", damage));
       } else {
@@ -1906,6 +2007,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     }
   }
 
+  TRACE_NO_INDENT();
   real_hitter->tick_last_did_something_set(game->tick_current);
 
   //
@@ -1915,6 +2017,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     //
     // If offscreen, avoid as we never see it.
     //
+    TRACE_NO_INDENT();
     if (is_visible_to_player) {
       if (is_green_blooded()) {
         level->thing_new(tp_random_green_splatter()->name(), curr_at);
@@ -1930,6 +2033,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     }
   }
 
+  TRACE_NO_INDENT();
   if (real_hitter != this) {
     if (gfx_pixelart_wobbles_when_hit()) {
       wobble(20);
@@ -1940,6 +2044,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   // Python callback. Poison looks like an attack on self, so avoid.
   //
+  TRACE_NO_INDENT();
   if (real_hitter != this) {
     //
     // Are we carrying a weapon? If not, see if we can do a claw attack
@@ -1960,8 +2065,10 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         auto claws = real_hitter->tp()->gfx_anim_use();
         if (claws != "") {
           auto nat_att_effect = level->thing_new(claws, curr_at, real_hitter);
-          if (nat_att_effect->bounce(0.1, 0.1, 100, 3)) {
-            nat_att_effect->move_set_dir_from_delta(delta);
+          if (nat_att_effect) {
+            if (nat_att_effect->bounce(0.1, 0.1, 100, 3)) {
+              nat_att_effect->move_set_dir_from_delta(delta);
+            }
           }
         }
       }
@@ -1973,6 +2080,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   // Not sure if stamina of 0 should kill. I vote yes.
   //
+  TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
     auto h = stamina_decr(damage);
     if (h <= 0) {
@@ -1990,10 +2098,12 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   /////////////////////////////////////////////////////////////////////////
   // Negation damage
   /////////////////////////////////////////////////////////////////////////
+  TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_NEGATION ]) {
     negation_dmg(damage, is_killed);
   }
 
+  TRACE_NO_INDENT();
   if (is_killed) {
     //
     // Record who dun it.
@@ -2100,6 +2210,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   // Used by AI to know if we can relax
   //
+  TRACE_NO_INDENT();
   tick_last_i_was_attacked_set(game->tick_current);
 
   //
@@ -2115,6 +2226,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   // This might trigger more damage. Interesting effects here, like being attacked by defrosted creature will
   // make you colder.
   //
+  TRACE_NO_INDENT();
   if (real_hitter != this) {
     //
     // Only if the temperature is extreme enough.
@@ -2128,7 +2240,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   // Python callback
   //
+  TRACE_NO_INDENT();
   if (is_dead || is_dying) {
+    TRACE_NO_INDENT();
     on_hit_and_now_dead(hitter, real_hitter, attack_options->crit, damage);
 
     //
@@ -2140,6 +2254,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     // e.g. Gargoyle being attacked by ice and does not wake.
     //
   } else {
+    TRACE_NO_INDENT();
     on_hit_and_still_alive(hitter, real_hitter, attack_options->crit, damage);
 
     //
@@ -2164,7 +2279,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   // Python callback. Poison looks like an attack on self, so avoid.
   //
+  TRACE_NO_INDENT();
   if (real_hitter != this) {
+    TRACE_NO_INDENT();
     //
     // Are we carrying a weapon? If not, see if we can do a claw attack
     //
@@ -2184,6 +2301,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       real_hitter->on_you_nat_attack_success();
     }
   }
+  TRACE_NO_INDENT();
 
   return true;
 }

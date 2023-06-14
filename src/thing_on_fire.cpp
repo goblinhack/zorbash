@@ -135,9 +135,11 @@ bool Thing::on_fire_set(const std::string &why)
     TRACE_NO_INDENT();
 
     auto on_fire_anim = level->thing_new("fire", this);
-    on_fire_anim_id_set(on_fire_anim->id);
-    on_fire_anim->owner_set(this);
-    move_carried_items();
+    if (on_fire_anim) {
+      on_fire_anim_id_set(on_fire_anim->id);
+      on_fire_anim->owner_set(this);
+      move_carried_items();
+    }
 
     on_fire();
 

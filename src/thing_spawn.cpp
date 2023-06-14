@@ -151,7 +151,9 @@ bool Thing::spawn_next_to(const std::string &what)
 
   auto chosen = possible[ pcg_random_range(0, cands) ];
   auto it     = level->thing_new(what, chosen);
-  spawned_newborn(it);
+  if (it) {
+    spawned_newborn(it);
+  }
 
   return true;
 }
@@ -218,7 +220,9 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
   auto chosen = possible[ pcg_random_range(0, cands) ];
 
   auto it = level->thing_new(what, chosen);
-  spawned_newborn(it);
+  if (it) {
+    spawned_newborn(it);
+  }
 
   return true;
 }
@@ -296,7 +300,9 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
 
       auto it = level->thing_new(what, point(x, y));
       spawned_newborn(it);
-      it->ts_anim_delay_end_set(time_game_ms_cached() + dist * 100);
+      if (it) {
+        it->ts_anim_delay_end_set(time_game_ms_cached() + dist * 100);
+      }
     }
   }
 
@@ -349,8 +355,10 @@ bool Thing::spawn_radius_range(const std::string &what, int radius_min, int radi
       }
 
       auto it = level->thing_new(what, point(x, y));
-      spawned_newborn(it);
-      it->ts_anim_delay_end_set(time_game_ms_cached() + dist * 100);
+      if (it) {
+        spawned_newborn(it);
+        it->ts_anim_delay_end_set(time_game_ms_cached() + dist * 100);
+      }
     }
   }
 
@@ -472,10 +480,11 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, i
       }
 
       auto it = level->thing_new(what, spawn_at);
-      spawned_newborn(it);
-      it->ts_anim_delay_end_set(time_game_ms_cached() + dist * 100);
-
-      spawned++;
+      if (it) {
+        spawned_newborn(it);
+        it->ts_anim_delay_end_set(time_game_ms_cached() + dist * 100);
+        spawned++;
+      }
       break;
     }
   }
@@ -542,7 +551,9 @@ bool Thing::spawn_set_fire_to_things_around_me(const std::string &what, int radi
         }
 
         auto f = level->thing_new(what, point(x, y));
-        spawned_newborn(f);
+        if (f) {
+          spawned_newborn(f);
+        }
       }
       FOR_ALL_THINGS_END()
     }
@@ -635,7 +646,9 @@ bool Thing::spawn_things_around_me(const std::string &what, int radius)
       }
 
       auto f = level->thing_new(tp, point(x, y));
-      spawned_newborn(f);
+      if (f) {
+        spawned_newborn(f);
+      }
     }
   }
 
@@ -740,7 +753,9 @@ Thingp Thing::spawn_at_if_possible(const std::string &what)
   }
 
   auto it = level->thing_new(what, chosen);
-  spawned_newborn(it);
+  if (it) {
+    spawned_newborn(it);
+  }
 
   return it;
 }
@@ -758,7 +773,9 @@ Thingp Thing::spawn_at(const std::string &what, point p)
   } else {
     it = level->thing_new(what, p);
   }
-  spawned_newborn(it);
+  if (it) {
+    spawned_newborn(it);
+  }
 
   return it;
 }
@@ -769,7 +786,9 @@ Thingp Thing::spawn_owned_thing_at_my_position(const std::string &what)
   TRACE_AND_INDENT();
 
   auto it = level->thing_new(what, curr_at, this);
-  spawned_newborn(it);
+  if (it) {
+    spawned_newborn(it);
+  }
 
   return it;
 }
@@ -780,6 +799,9 @@ Thingp Thing::spawn_minion_at_my_position(const std::string &what)
   TRACE_AND_INDENT();
 
   auto it = level->thing_new(what, curr_at, nullptr /* no owner */);
+  if (! it) {
+    return it;
+  }
 
   //
   // Allow non normal minions to also be minions. No minion left behind.

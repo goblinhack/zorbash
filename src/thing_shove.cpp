@@ -313,7 +313,9 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta, bool force)
         // Must check at the new location
         //
         auto n = level->thing_new(spawn_what, spawn_at);
-        n->location_check();
+        if (n) {
+          n->location_check();
+        }
       }
     }
   }

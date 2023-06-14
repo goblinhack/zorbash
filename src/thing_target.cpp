@@ -465,8 +465,10 @@ bool Thing::victim_attack_swing(int equip, Thingp best, point best_hit_at, Thing
 
       if (create_swing_animation) {
         auto use_anim = level->thing_new(attack_options->used_as, best_hit_at);
-        use_anim->owner_set(this);
-        equip_use_anim_set(use_anim, equip);
+        if (use_anim) {
+          use_anim->owner_set(this);
+          equip_use_anim_set(use_anim, equip);
+        }
       }
     }
   } else if (use_anim && (best_hit_at != use_anim->curr_at)) {
@@ -481,8 +483,10 @@ bool Thing::victim_attack_swing(int equip, Thingp best, point best_hit_at, Thing
     //
     if (! attack_options->used_as.empty()) {
       auto use_anim = level->thing_new(attack_options->used_as, best_hit_at);
-      use_anim->owner_set(this);
-      equip_use_anim_set(use_anim, equip);
+      if (use_anim) {
+        use_anim->owner_set(this);
+        equip_use_anim_set(use_anim, equip);
+      }
     }
   }
 

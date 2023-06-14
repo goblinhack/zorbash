@@ -57,7 +57,9 @@ bool Thing::thing_check_for_heat_dmg(void)
           //
           if (! level->is_smoke(at.x, at.y)) {
             auto smoke = level->thing_new("smoke", at);
-            smoke->lifespan_set(pcg_random_range(1, 10));
+            if (smoke) {
+              smoke->lifespan_set(pcg_random_range(1, 10));
+            }
           }
         }
       }
@@ -125,7 +127,9 @@ bool Thing::thing_check_for_heat_dmg(void)
   } else if (level->is_lava(at.x, at.y)) {
     if (! level->is_smoke(at.x, at.y)) {
       auto smoke = level->thing_new("smoke", at);
-      smoke->lifespan_set(pcg_random_range(1, 10));
+      if (smoke) {
+        smoke->lifespan_set(pcg_random_range(1, 10));
+      }
     }
 
     if (is_able_to_melt() || is_burnable() || is_combustible() || is_very_combustible()) {
@@ -140,7 +144,9 @@ bool Thing::thing_check_for_heat_dmg(void)
   } else if (level->is_fire(at.x, at.y)) {
     if (! level->is_smoke(at.x, at.y)) {
       auto smoke = level->thing_new("smoke", at);
-      smoke->lifespan_set(pcg_random_range(1, 10));
+      if (smoke) {
+        smoke->lifespan_set(pcg_random_range(1, 10));
+      }
     }
 
     //
@@ -192,7 +198,9 @@ bool Thing::thing_check_for_heat_dmg(void)
 
     if (! level->is_smoke(at.x, at.y)) {
       auto smoke = level->thing_new("smoke", at);
-      smoke->lifespan_set(pcg_random_range(1, 10));
+      if (smoke) {
+        smoke->lifespan_set(pcg_random_range(1, 10));
+      }
     }
   }
 

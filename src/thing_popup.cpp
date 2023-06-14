@@ -26,6 +26,10 @@ void Thing::popup(std::string const &m)
   }
 
   auto msg = level->thing_new("msg", curr_at);
+  if (! msg) {
+    return;
+  }
+
   msg->msg_set(m);
   msg->fadeup(8.0, 0.02, 3000);
   msg->infop()->popup_owner_id = id;

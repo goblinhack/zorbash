@@ -30,7 +30,9 @@ void Thing::water_tick(void)
     }
 
     auto smoke = level->thing_new("smoke", curr_at);
-    smoke->lifespan_set(pcg_random_range(1, 10));
+    if (smoke) {
+      smoke->lifespan_set(pcg_random_range(1, 10));
+    }
     return;
   }
 
