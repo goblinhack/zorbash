@@ -158,6 +158,9 @@
                             <origin>C:/msys64/home/neila/zorbash/zorbash.exe</origin>
                         </distributionFile>
                         <distributionFile>
+                            <origin>C:/msys64/home/neila/zorbash/zorbash.pdb</origin>
+                        </distributionFile>
+                        <distributionFile>
                             <origin>C:/msys64/home/neila/zorbash/python</origin>
                         </distributionFile>
                         <distributionFile>
