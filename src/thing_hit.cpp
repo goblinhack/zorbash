@@ -206,8 +206,6 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
 
   bool is_killed = false;
 
-  auto smoke = level->thing_new("sxmoke", curr_at);
-  smoke->log("");
   if (damage < 0) {
     err("Negative damage: %d", damage);
     return false;
