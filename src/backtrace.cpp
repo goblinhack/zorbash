@@ -30,12 +30,19 @@
 void Backtrace::init(void)
 {
 #ifdef HAVE_LIBUNWIND
-  size = unw_backtrace(&bt[ 0 ], bt.size());
-#else
-#ifndef _WIN32
-  size                 = backtrace(&bt[ 0 ], bt.size());
-#else
+#ifdef _WIN32
+  //
+  // Just did not seem to work on mingw
+  //
   size = 0;
+#else
+  size = unw_backtrace(&bt[ 0 ], bt.size());
+#endif
+#else
+#ifdef _WIN32
+  size                 = 0;
+#else
+  size = backtrace(&bt[ 0 ], bt.size());
 #endif
 #endif
 }
@@ -267,6 +274,57 @@ void Backtrace::log(void)
 #endif
 }
 
+#ifdef _WIN32
+#include <errno.h>
+#include <windows.h>
+
+void backtrace_dump()
+{
+  {
+    int error = errno;
+    fprintf(stderr, "errno = %d: %s\n", error, strerror(error));
+  }
+  {
+    DWORD error = GetLastError();
+    char  buf[ 1024 ];
+    FormatMessageA(FORMAT_MESSAGE_FROM_SYSTEM, NULL, error, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), buf,
+                   sizeof(buf), NULL);
+    fprintf(stderr, "GetLastError = %d: %s", error, buf);
+  }
+
+  const int max_symbol_len = 1024;
+
+  HANDLE process = GetCurrentProcess();
+  SymInitialize(process, NULL, TRUE);
+
+  void *stack[ 128 ];
+  WORD  num_frames = CaptureStackBackTrace(0, 128, stack, NULL);
+
+  for (WORD i = 0; i < num_frames; i++) {
+    char         symbol_mem[ sizeof(SYMBOL_INFO) + max_symbol_len * sizeof(TCHAR) ];
+    SYMBOL_INFO *symbol  = (SYMBOL_INFO *) symbol_mem;
+    symbol->MaxNameLen   = max_symbol_len;
+    symbol->SizeOfStruct = sizeof(SYMBOL_INFO);
+
+    DWORD64 addr64 = DWORD64(stack[ i ]);
+    SymFromAddr(process, addr64, NULL, symbol);
+
+    IMAGEHLP_LINE64 line;
+    DWORD           col;
+    line.SizeOfStruct  = sizeof(line);
+    BOOL has_file_info = SymGetLineFromAddr64(process, addr64, &col, &line);
+
+    if (has_file_info) {
+      fprintf(stderr, "s (%s:%d - 0x%08I64x)\n", symbol->Name, line.FileName, line.LineNumber, symbol->Address);
+    } else {
+      fprintf(stderr, "s (%s, 0x%08I64x)\n", symbol->Name, symbol->Address);
+    }
+  }
+
+  __debugbreak();
+}
+
+#else
 void backtrace_dump(void)
 {
   auto bt = new Backtrace();
@@ -274,133 +332,5 @@ void backtrace_dump(void)
   auto s = bt->to_string();
   std::cerr << s << std::endl;
   fprintf(MY_STDERR, "%s", s.c_str());
-}
-
-#ifdef _WIN32
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#define MAX_SYMBOL_LEN 1024
-
-typedef struct CallstackEntry {
-  DWORD64 offset; // if 0, we have no valid entry
-  CHAR    name[ MAX_SYMBOL_LEN ];
-  CHAR    undName[ MAX_SYMBOL_LEN ];
-  CHAR    undFullName[ MAX_SYMBOL_LEN ];
-  DWORD64 offsetFromSmybol;
-  DWORD   offsetFromLine;
-  DWORD   lineNumber;
-  CHAR    lineFileName[ MAX_SYMBOL_LEN ];
-  DWORD   symType;
-  LPCSTR  symTypeString;
-  CHAR    moduleName[ MAX_SYMBOL_LEN ];
-  DWORD64 baseOfImage;
-  CHAR    loadedImageName[ MAX_SYMBOL_LEN ];
-} CallstackEntry;
-
-typedef enum CallstackEntryType { firstEntry, nextEntry, lastEntry } CallstackEntryType;
-
-void _backtrace(void)
-{
-  HANDLE process = ::GetCurrentProcess();
-  HANDLE thread  = GetCurrentThread();
-
-  if (! SymInitialize(process, 0, true)) {
-    wprintf(L"SymInitialize unable to find process!! Error: %d\r\n", GetLastError());
-  }
-
-  DWORD symOptions = SymGetOptions();
-  symOptions |= SYMOPT_LOAD_LINES;
-  symOptions |= SYMOPT_FAIL_CRITICAL_ERRORS;
-  symOptions = SymSetOptions(symOptions);
-
-  char szSearchPath[ MAX_SYMBOL_LEN ] = {0};
-  SymGetSearchPath(process, szSearchPath, MAX_SYMBOL_LEN);
-
-  char  szUserName[ MAX_SYMBOL_LEN ] = {0};
-  DWORD dwSize                       = MAX_SYMBOL_LEN;
-  GetUserNameA(szUserName, &dwSize);
-
-  CHAR   search_path_debug[ MAX_SYMBOL_LEN ];
-  size_t maxLen = MAX_SYMBOL_LEN;
-#if _MSC_VER >= 1400
-  maxLen = _TRUNCATE;
-#endif
-  _snprintf_s(search_path_debug, maxLen, "SymInit: Symbol-SearchPath: '%s', symOptions: %d, UserName: '%s'\n",
-              szSearchPath, symOptions, szUserName);
-  search_path_debug[ MAX_SYMBOL_LEN - 1 ] = 0;
-  printf(search_path_debug);
-
-  // Initalize more memory
-  CONTEXT context;
-  memset(&context, 0, sizeof(CONTEXT));
-  context.ContextFlags = CONTEXT_FULL;
-  RtlCaptureContext(&context);
-
-  // Initalize a few things here and there
-  STACKFRAME stack;
-  memset(&stack, 0, sizeof(STACKFRAME));
-  stack.AddrPC.Offset    = context.Rip;
-  stack.AddrPC.Mode      = AddrModeFlat;
-  stack.AddrStack.Offset = context.Rsp;
-  stack.AddrStack.Mode   = AddrModeFlat;
-  stack.AddrFrame.Offset = context.Rbp;
-  stack.AddrFrame.Mode   = AddrModeFlat;
-
-#ifdef _M_IX86
-  auto machine = IMAGE_FILE_MACHINE_I386;
-#elif _M_X64
-  auto machine = IMAGE_FILE_MACHINE_AMD64;
-#elif _M_IA64
-  auto machine = IMAGE_FILE_MACHINE_IA64;
-#else
-#error "platform not supported!"
-#endif
-  for (ULONG frame = 0;; frame++) {
-    BOOL result
-        = StackWalk(machine, process, thread, &stack, &context, 0, SymFunctionTableAccess, SymGetModuleBase, 0);
-
-    CallstackEntry csEntry;
-    csEntry.offset               = stack.AddrPC.Offset;
-    csEntry.name[ 0 ]            = 0;
-    csEntry.undName[ 0 ]         = 0;
-    csEntry.undFullName[ 0 ]     = 0;
-    csEntry.offsetFromSmybol     = 0;
-    csEntry.offsetFromLine       = 0;
-    csEntry.lineFileName[ 0 ]    = 0;
-    csEntry.lineNumber           = 0;
-    csEntry.loadedImageName[ 0 ] = 0;
-    csEntry.moduleName[ 0 ]      = 0;
-
-    IMAGEHLP_SYMBOL64 symbol {};
-    symbol.SizeOfStruct  = sizeof(IMAGEHLP_SYMBOL64);
-    symbol.MaxNameLength = MAX_SYMBOL_LEN;
-
-    // Initalize more memory and clear it out
-    if (SymGetSymFromAddr64(process, stack.AddrPC.Offset, &csEntry.offsetFromSmybol, &symbol)) {
-    }
-
-    IMAGEHLP_LINE64 line {};
-    line.SizeOfStruct = sizeof(line);
-
-    if (SymGetLineFromAddr64(process, stack.AddrPC.Offset, &csEntry.offsetFromLine, &line)) {
-    }
-
-    printf(
-        "Frame %lu:\n"
-        "    Symbol name:    %s\n"
-        "    PC address:     0x%08LX\n"
-        "    Stack address:  0x%08LX\n"
-        "    Frame address:  0x%08LX\n"
-        "\n",
-        frame, symbol.Name, (ULONG64) stack.AddrPC.Offset, (ULONG64) stack.AddrStack.Offset,
-        (ULONG64) stack.AddrFrame.Offset);
-
-    // If nothing else to do break loop
-    if (! result) {
-      break;
-    }
-  }
 }
 #endif

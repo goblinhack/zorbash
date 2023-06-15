@@ -14,6 +14,7 @@
 std::default_random_engine rng;
 
 #include "my_audio.hpp"
+#include "my_backtrace.hpp"
 #include "my_command.hpp"
 #include "my_dir.hpp"
 #include "my_file.hpp"

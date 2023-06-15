@@ -103,9 +103,7 @@ help_full()
       log_warn "Install the following?"
       set -x
       pacman -S git \
-        make \
-        base-devel --needed \
-        ${MINGW_PKG_TYPE}-x86_64-gcc \
+        make vim base-devel --needed \
         ${MINGW_PKG_TYPE}-x86_64-SDL \
         ${MINGW_PKG_TYPE}-x86_64-SDL2 \
         ${MINGW_PKG_TYPE}-x86_64-SDL2_gfx \
@@ -113,6 +111,7 @@ help_full()
         ${MINGW_PKG_TYPE}-x86_64-SDL2_mixer \
         ${MINGW_PKG_TYPE}-x86_64-SDL2_net \
         ${MINGW_PKG_TYPE}-x86_64-SDL2_ttf \
+        ${MINGW_PKG_TYPE}-x86_64-ag \
         ${MINGW_PKG_TYPE}-x86_64-binutils \
         ${MINGW_PKG_TYPE}-x86_64-bzip2 \
         ${MINGW_PKG_TYPE}-x86_64-clang \
@@ -142,9 +141,11 @@ help_full()
         ${MINGW_PKG_TYPE}-x86_64-libsystre \
         ${MINGW_PKG_TYPE}-x86_64-libtiff \
         ${MINGW_PKG_TYPE}-x86_64-libtre-git \
+        ${MINGW_PKG_TYPE}-x86_64-libunwind \
         ${MINGW_PKG_TYPE}-x86_64-libvorbis \
         ${MINGW_PKG_TYPE}-x86_64-libwebp \
         ${MINGW_PKG_TYPE}-x86_64-libwinpthread-git \
+        ${MINGW_PKG_TYPE}-x86_64-lld \
         ${MINGW_PKG_TYPE}-x86_64-mpc \
         ${MINGW_PKG_TYPE}-x86_64-mpfr \
         ${MINGW_PKG_TYPE}-x86_64-ncurses \
@@ -161,7 +162,6 @@ help_full()
         ${MINGW_PKG_TYPE}-x86_64-windows-default-manifest \
         ${MINGW_PKG_TYPE}-x86_64-winpthreads-git \
         ${MINGW_PKG_TYPE}-x86_64-xz \
-        ${MINGW_PKG_TYPE}-x86_64-ag \
         ${MINGW_PKG_TYPE}-x86_64-zlib
       set +x
       log_warn "Now re-run RUNME"
@@ -349,12 +349,12 @@ if [[ "$Python3_CONFIG" != "" ]]; then
     log_info "Python3 config             : $Python3_CONFIG"
     log_info "Python3 include path       : $Python3_INC_PATH"
     log_info "Python3 prefix             : "$($Python3_CONFIG --prefix)
-    log_info "Pythin3 exec-prefix        : "$($Python3_CONFIG --exec-prefix)
+    log_info "Python3 exec-prefix        : "$($Python3_CONFIG --exec-prefix)
     log_info "Python3 includes           : "$($Python3_CONFIG --includes)
     log_info "Python3 libs               : "$($Python3_CONFIG --libs)
     log_info "Python3 cflags             : "$($Python3_CONFIG --cflags)
     log_info "Python3 ldflags            : "$($Python3_CONFIG --ldflags)
-    log_info "Pythin3 embed              : "$($Python3_CONFIG --embed)
+    log_info "Python3 embed              : "$($Python3_CONFIG --embed)
     #log_info "Python3 found              : $Python3_SCORE"
 fi
 
@@ -465,6 +465,21 @@ case "$MY_OS_NAME" in
         LDLIBS+=" -lpthread"
         LDLIBS+=" /${MINGW_TYPE}/lib/libSDL2_mixer.a"
         LDLIBS+=" -L/${MINGW_TYPE}/lib/binutils -lbfd -lintl -ldbghelp -liberty -lz"
+
+        if [ -f /${MINGW_TYPE}/lib/libunwind.a ]; then
+          echo "#define HAVE_LIBUNWIND" >> $CONFIG_H
+          LDLIBS+=" -lunwind"
+          log_info "Have libunwind             : Yes"
+        else
+          log_info "Have libunwind             : No"
+        fi
+
+        #
+        # Clang supports PDB debug file creation, but you need to do
+        # the following to enable it.
+        #
+        C_FLAGS+=" -g -gcodeview"
+        LDFLAGS+=" -fuse-ld=lld -g -Wl,--pdb= "
         ;;
     *Darwin*)
         EXE=""
@@ -492,8 +507,11 @@ case "$MY_OS_NAME" in
 
         pkg-config --print-provides libunwind >/dev/null 2>/dev/null
         if [[ $? -eq 0 ]]; then
-            echo "#define HAVE_LIBUNWIND" >> $CONFIG_H
-            LDLIBS+=" -lunwind"
+          echo "#define HAVE_LIBUNWIND" >> $CONFIG_H
+          LDLIBS+=" -lunwind"
+          log_info "Have libunwind             : Yes"
+        else
+          log_info "Have libunwind             : No"
         fi
         ;;
     *)

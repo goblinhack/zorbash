@@ -357,28 +357,38 @@ Ascii Screenshots
 How to build
 ------------
 
-- On Linux: (Ubuntu 22.10, Fedora 37 + Python 3.11)
+Linux
+=====
+- Tested on Ubuntu 22.10
+- Tested on Fedora 37
 <pre>
     sh ./RUNME
 </pre>
-- On MacOS (needs Mac Ports/Homebrew).
+
+Windows
+=======
+- Tested on Windows 10
+- Please install msys2 first via https://www.msys2.org/
+<pre>
+    sh ./RUNME
+</pre>
+
+Macos
+=====
+- Install Mac Ports/Homebrew first.
 - Does not work with anaconda (help wanted as I do not use anaconda):
 <pre>
     sh ./RUNME
 </pre>
+
+Docker
+======
 - Docker (experimental, it builds but cannot find a video display):
 <pre>
     sh ./RUNME.docker.ubuntu
     sh ./RUNME.docker.fedora
     sh ./RUNME.docker.debian
 </pre>
-- On Windows (todo)
-<!-- - On Windows (todo): (install msys2 first via https://www.msys2.org/) -->
-<!-- <pre>                                                                 -->
-<!--     sh ./RUNME.windows.mingw64                                        -->
-<!-- </pre>                                                                -->
-
-If it doesn't build, just email goblinhack@gmail.com for help
 
 Hardware Specs
 --------------
