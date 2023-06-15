@@ -322,10 +322,10 @@ std::string backtrace_string(void)
     BOOL has_file_info = SymGetLineFromAddr64(process, addr64, &col, &line);
 
     if (has_file_info) {
-      snprintf(tmp + strlen(tmp), sizeof(tmp) - strlen(tmp), "s (%s:%d - 0x%08I64x)\n", symbol->Name, line.FileName,
+      snprintf(tmp + strlen(tmp), sizeof(tmp) - strlen(tmp), "(%s:%d - 0x%08I64x)\n", symbol->Name, line.FileName,
                line.LineNumber, symbol->Address);
     } else {
-      snprintf(tmp + strlen(tmp), sizeof(tmp) - strlen(tmp), "s (%s, 0x%08I64x)\n", symbol->Name, symbol->Address);
+      snprintf(tmp + strlen(tmp), sizeof(tmp) - strlen(tmp), "(%s, 0x%08I64x)\n", symbol->Name, symbol->Address);
     }
   }
 

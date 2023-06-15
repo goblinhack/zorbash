@@ -17,14 +17,14 @@ void callstack_dump(void)
   fprintf(MY_STDERR, "==========\n");
   for (auto depth = 0; depth < g_callframes_depth; depth++) {
     auto iter = &callframes[ depth ];
-    fprintf(MY_STDERR, "(stack) %d %s, line %u\n", depth, iter->func, iter->line);
+    fprintf(MY_STDERR, "(trace) %d %s, line %u\n", depth, iter->func, iter->line);
   }
 
   CON("code trace");
   CON("==========");
   for (auto depth = 0; depth < g_callframes_depth; depth++) {
     auto iter = &callframes[ depth ];
-    CON("(stack) %d %s, line %u", depth, iter->func, iter->line);
+    CON("(trace) %d %s, line %u", depth, iter->func, iter->line);
   }
 }
 
@@ -36,7 +36,7 @@ std::string callstack_string(void)
 
   for (auto depth = 0; depth < g_callframes_depth; depth++) {
     auto iter = &callframes[ depth ];
-    snprintf(tmp + strlen(tmp), sizeof(tmp) - strlen(tmp), "(stack) %d %s, line %u\n", depth, iter->func, iter->line);
+    snprintf(tmp + strlen(tmp), sizeof(tmp) - strlen(tmp), "(trace) %d %s, line %u\n", depth, iter->func, iter->line);
   }
 
   return std::string(tmp);
