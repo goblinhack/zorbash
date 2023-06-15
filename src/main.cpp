@@ -704,11 +704,13 @@ static std::string create_appdata_dir(void)
 #endif
   myfree(dir);
 
-  char *out    = dynprintf("%s%s%s%s%s", appdata, DIR_SEP, "zorbash", DIR_SEP, "stdout.txt");
-  g_log_stdout = fopen(out, "w+");
+  char *out             = dynprintf("%s%s%s%s%s", appdata, DIR_SEP, "zorbash", DIR_SEP, "stdout.txt");
+  g_log_stdout_filename = std::string(out);
+  g_log_stdout          = fopen(out, "w+");
 
-  char *err    = dynprintf("%s%s%s%s%s", appdata, DIR_SEP, "zorbash", DIR_SEP, "stderr.txt");
-  g_log_stderr = fopen(err, "w+");
+  char *err             = dynprintf("%s%s%s%s%s", appdata, DIR_SEP, "zorbash", DIR_SEP, "stderr.txt");
+  g_log_stderr_filename = std::string(out);
+  g_log_stderr          = fopen(err, "w+");
 
   CON("INI: Will use STDOUT as '%s'", out);
   CON("INI: Will use STDERR as '%s'", err);
@@ -760,6 +762,12 @@ int main(int argc, char *argv[])
 #endif
 
   parse_args(argc, argv);
+
+  //
+  // This is just too handy for folks to report issues, so let's see if leaving
+  // it on is fast enough.
+  //
+  g_opt_debug1 = true;
 
   LOG("INI: Ramdisk");
   ramdisk_init();

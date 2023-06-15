@@ -278,18 +278,25 @@ void Backtrace::log(void)
 #include <errno.h>
 #include <windows.h>
 
-void backtrace_dump()
+void backtrace_dump() { fprintf(MY_STDERR, "%s", backtrace_string().c_str()); }
+
+std::string backtrace_string(void)
 {
+  char tmp[ 10000 ];
+
+  *tmp = '\0';
+
   {
     int error = errno;
-    fprintf(stderr, "errno = %d: %s\n", error, strerror(error));
+    snprintf(tmp + strlen(tmp), sizeof(tmp) - strlen(tmp), "errno = %d: %s\n", error, strerror(error));
   }
+
   {
     DWORD error = GetLastError();
     char  buf[ 1024 ];
     FormatMessageA(FORMAT_MESSAGE_FROM_SYSTEM, NULL, error, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), buf,
                    sizeof(buf), NULL);
-    fprintf(stderr, "GetLastError = %d: %s", error, buf);
+    snprintf(tmp + strlen(tmp), sizeof(tmp) - strlen(tmp), "GetLastError = %d: %s", error, buf);
   }
 
   const int max_symbol_len = 1024;
@@ -315,22 +322,30 @@ void backtrace_dump()
     BOOL has_file_info = SymGetLineFromAddr64(process, addr64, &col, &line);
 
     if (has_file_info) {
-      fprintf(stderr, "s (%s:%d - 0x%08I64x)\n", symbol->Name, line.FileName, line.LineNumber, symbol->Address);
+      snprintf(tmp + strlen(tmp), sizeof(tmp) - strlen(tmp), "s (%s:%d - 0x%08I64x)\n", symbol->Name, line.FileName,
+               line.LineNumber, symbol->Address);
     } else {
-      fprintf(stderr, "s (%s, 0x%08I64x)\n", symbol->Name, symbol->Address);
+      snprintf(tmp + strlen(tmp), sizeof(tmp) - strlen(tmp), "s (%s, 0x%08I64x)\n", symbol->Name, symbol->Address);
     }
   }
 
-  __debugbreak();
+  // __debugbreak();
+
+  std::string ret(tmp);
+  return tmp;
 }
 
 #else
-void backtrace_dump(void)
+std::string backtrace_string(void)
 {
   auto bt = new Backtrace();
   bt->init();
-  auto s = bt->to_string();
-  std::cerr << s << std::endl;
+  return bt->to_string();
+}
+
+void backtrace_dump(void)
+{
+  auto bt = backtrace_string();
   fprintf(MY_STDERR, "%s", s.c_str());
 }
 #endif

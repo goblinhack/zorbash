@@ -28,6 +28,20 @@ void callstack_dump(void)
   }
 }
 
+std::string callstack_string(void)
+{
+  char tmp[ 10000 ];
+
+  *tmp = '\0';
+
+  for (auto depth = 0; depth < g_callframes_depth; depth++) {
+    auto iter = &callframes[ depth ];
+    snprintf(tmp + strlen(tmp), sizeof(tmp) - strlen(tmp), "(stack) %d %s, line %u\n", depth, iter->func, iter->line);
+  }
+
+  return std::string(tmp);
+}
+
 #ifdef ENABLE_CRASH_HANDLER
 
 #include <assert.h>
@@ -119,8 +133,32 @@ void segv_handler(int sig)
   }
 
   crashed = 1;
+
   fprintf(MY_STDERR, "Crash!!!");
-  backtrace_dump();
+
+  std::string tech_support = "Sorry, a crash has occurred!\n";
+  tech_support += "\n";
+
+  if (game) {
+    tech_support += "Seed name: " + game->seed_name + "\n";
+    tech_support += "\n";
+  }
+  tech_support += "Could you please email goblinhack@gmail.com and attach the following files and trace info?\n";
+  tech_support += g_log_stdout_filename;
+  tech_support += "\n";
+  tech_support += g_log_stderr_filename;
+  tech_support += "\n";
+  tech_support += "\n";
+  tech_support += "Backtrace:";
+  tech_support += backtrace_string();
+  tech_support += "\n";
+  tech_support += "Trace:";
+  tech_support += callstack_string();
+  tech_support += "\n";
+  tech_support += "The goblin responsible for this shall be punished!!!\n";
+
+  SDL_MSG_BOX("%s", tech_support.c_str());
+
   ERR("Crashed");
 
 #if defined __linux__

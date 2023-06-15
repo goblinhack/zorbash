@@ -14,8 +14,10 @@ char *GFX_PATH;
 char *TTF_PATH;
 char *WORLD_PATH;
 
-FILE *g_log_stdout;
-FILE *g_log_stderr;
+FILE       *g_log_stdout;
+FILE       *g_log_stderr;
+std::string g_log_stderr_filename;
+std::string g_log_stdout_filename;
 
 bool g_die_occurred;             // Fatal error has occurred
 bool g_do_screenshot;            // Grab a screen shot next fram

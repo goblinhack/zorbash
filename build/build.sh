@@ -479,7 +479,18 @@ case "$MY_OS_NAME" in
         # the following to enable it.
         #
         C_FLAGS+=" -g -gcodeview"
-        LDFLAGS+=" -fuse-ld=lld -g -Wl,--pdb= "
+
+        #
+        # Needed to create PDB files
+        #
+        if [ -x /${MINGW_TYPE}/bin/lld ]; then
+          LDFLAGS+=" -fuse-ld=lld "
+        fi
+
+        #
+        # The space after pdb= is intentional to use the executable name for PDB file generation.
+        #
+        LDFLAGS+=" -g -Wl,--pdb= "
         ;;
     *Darwin*)
         EXE=""

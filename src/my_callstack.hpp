@@ -7,6 +7,7 @@
 
 #include "my_globals.hpp"
 #include "my_sys.hpp"
+#include <string>
 
 #define CAT(A, B)  A##B
 #define CAT2(A, B) CAT(A, B)
@@ -51,57 +52,58 @@ extern unsigned char    g_callframes_indent;
 #endif
 #endif
 
-extern void callstack_dump(void);
+extern void        callstack_dump(void);
+extern std::string callstack_string(void);
 
 struct tracer_t {
   inline tracer_t(const char *func, const unsigned short line)
   {
-    // useful for code tracing in real time
-    // fprintf(stderr, "%s %s() line %d\n", file, func, line);
-    if (DEBUG1) {
-      if (unlikely(g_callframes_depth < MAXCALLFRAME)) {
-        g_callframes_indent++;
-        callframe *c = &callframes[ g_callframes_depth++ ];
-        c->func      = func;
-        c->line      = line;
-      }
+// useful for code tracing in real time
+// fprintf(stderr, "%s %s() line %d\n", file, func, line);
+#ifdef ENABLE_DEBUG_TRACE
+    if (unlikely(g_callframes_depth < MAXCALLFRAME)) {
+      g_callframes_indent++;
+      callframe *c = &callframes[ g_callframes_depth++ ];
+      c->func      = func;
+      c->line      = line;
     }
+#endif
   }
 
   inline ~tracer_t()
   {
-    if (DEBUG1) {
-      if (g_callframes_indent > 0) {
-        g_callframes_indent--;
-      }
-      if (g_callframes_depth > 0) {
-        g_callframes_depth--;
-      }
+#ifdef ENABLE_DEBUG_TRACE
+    if (g_callframes_indent > 0) {
+      g_callframes_indent--;
     }
+    if (g_callframes_depth > 0) {
+      g_callframes_depth--;
+    }
+#endif
   }
 };
 
 struct tracer_no_indent_t {
   inline tracer_no_indent_t(const char *func, const unsigned short line)
   {
-    // useful for code tracing in real time
-    // fprintf(stderr, "%s %s() line %d\n", file, func, line);
-    if (DEBUG1) {
-      if (unlikely(g_callframes_depth < MAXCALLFRAME)) {
-        callframe *c = &callframes[ g_callframes_depth++ ];
-        c->func      = func;
-        c->line      = line;
-      }
+// useful for code tracing in real time
+// fprintf(stderr, "%s %s() line %d\n", file, func, line);
+#ifdef ENABLE_DEBUG_TRACE
+    if (unlikely(g_callframes_depth < MAXCALLFRAME)) {
+      callframe *c = &callframes[ g_callframes_depth++ ];
+      c->func      = func;
+      c->line      = line;
     }
+#endif
   }
 
   inline ~tracer_no_indent_t()
   {
-    if (DEBUG1) {
-      if (g_callframes_depth > 0) {
-        g_callframes_depth--;
-      }
+#ifdef ENABLE_DEBUG_TRACE
+    if (g_callframes_depth > 0) {
+      g_callframes_depth--;
     }
+#endif
   }
 };
 #endif
