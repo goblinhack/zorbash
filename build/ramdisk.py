@@ -16,45 +16,51 @@ number_of_ramdisk_files = 10
 
 root = pathlib.Path(".")
 
+if sys.platform == 'win32':
+    target="zorbash.exe"
+else:
+    target="zorbash"
+
 #
 # If the make target exists, see if any graphics are newer than the
 # target. If so we need to rebuild the ramdisk.
 #
 try:
-    with open("zorbash") as unused:
+    with open(target) as unused:
+        target_ctime = os.path.getctime(target)
         newer = False
         for filepath in root.rglob(r"data/fonts/*.tga"):
-            if os.path.getctime("zorbash") < os.path.getctime(filepath):
+            if target_ctime < os.path.getctime(filepath):
                 print("{} is newer".format(filepath))
                 newer = True
                 break
 
         for filepath in root.rglob(r"data/gfx/*.tga"):
-            if os.path.getctime("zorbash") < os.path.getctime(filepath):
+            if target_ctime < os.path.getctime(filepath):
                 print("{} is newer".format(filepath))
                 newer = True
                 break
 
         for filepath in root.rglob(r"data/gfx/*/*.tga"):
-            if os.path.getctime("zorbash") < os.path.getctime(filepath):
+            if target_ctime < os.path.getctime(filepath):
                 print("{} is newer".format(filepath))
                 newer = True
                 break
 
         for filepath in root.rglob(r"data/gfx/*/*/*.tga"):
-            if os.path.getctime("zorbash") < os.path.getctime(filepath):
+            if target_ctime < os.path.getctime(filepath):
                 print("{} is newer".format(filepath))
                 newer = True
                 break
 
         for filepath in root.rglob(r"data/sounds/*/*/.wav"):
-            if os.path.getctime("zorbash") < os.path.getctime(filepath):
+            if target_ctime < os.path.getctime(filepath):
                 print("{} is newer".format(filepath))
                 newer = True
                 break
 
         for filepath in root.rglob(r"data/music/*.ogg"):
-            if os.path.getctime("zorbash") < os.path.getctime(filepath):
+            if target_ctime < os.path.getctime(filepath):
                 print("{} is newer".format(filepath))
                 newer = True
                 break
