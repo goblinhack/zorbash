@@ -111,8 +111,108 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   //
   // Toggle gfx mode. Do this outside the level tick loop to avoid issues with moving things.
   //
-  if (sdlk_eq(*key, game->config.key_gfx_toggle) || sdlk_eq(*key, game->config.key_alt_gfx_toggle)) {
+  if (sdlk_eq(*key, game->config.key_gfx_toggle)) {
     game->request_to_toggle_gfx = true;
+    return false; // To avoid click noise
+  }
+
+  if (sdlk_eq(*key, game->config.key_unused1)) {
+    // TODO
+    return false; // To avoid click noise
+  }
+
+  if (sdlk_eq(*key, game->config.key_unused2)) {
+    // TODO
+    return false; // To avoid click noise
+  }
+
+  if (sdlk_eq(*key, game->config.key_unused3)) {
+    // TODO
+    return false; // To avoid click noise
+  }
+
+  if (sdlk_eq(*key, game->config.key_unused4)) {
+    // TODO
+    return false; // To avoid click noise
+  }
+
+  if (sdlk_eq(*key, game->config.key_unused5)) {
+    // TODO
+    return false; // To avoid click noise
+  }
+
+  if (sdlk_eq(*key, game->config.key_unused6)) {
+    // TODO
+    return false; // To avoid click noise
+  }
+
+  if (sdlk_eq(*key, game->config.key_unused7)) {
+    // TODO
+    return false; // To avoid click noise
+  }
+
+  if (sdlk_eq(*key, game->config.key_unused8)) {
+    // TODO
+    return false; // To avoid click noise
+  }
+
+  if (sdlk_eq(*key, game->config.key_unused9)) {
+    // TODO
+    return false; // To avoid click noise
+  }
+
+  if (sdlk_eq(*key, game->config.key_unused10)) {
+    // TODO
+    return false; // To avoid click noise
+  }
+
+  if (sdlk_eq(*key, game->config.key_unused11)) {
+    // TODO
+    return false; // To avoid click noise
+  }
+
+  if (sdlk_eq(*key, game->config.key_unused12)) {
+    // TODO
+    return false; // To avoid click noise
+  }
+
+  if (sdlk_eq(*key, game->config.key_unused13)) {
+    // TODO
+    return false; // To avoid click noise
+  }
+
+  if (sdlk_eq(*key, game->config.key_unused14)) {
+    // TODO
+    return false; // To avoid click noise
+  }
+
+  if (sdlk_eq(*key, game->config.key_unused15)) {
+    // TODO
+    return false; // To avoid click noise
+  }
+
+  if (sdlk_eq(*key, game->config.key_unused16)) {
+    // TODO
+    return false; // To avoid click noise
+  }
+
+  if (sdlk_eq(*key, game->config.key_unused17)) {
+    // TODO
+    return false; // To avoid click noise
+  }
+
+  if (sdlk_eq(*key, game->config.key_unused18)) {
+    // TODO
+    return false; // To avoid click noise
+  }
+
+  if (sdlk_eq(*key, game->config.key_unused19)) {
+    // TODO
+    return false; // To avoid click noise
+  }
+
+  if (sdlk_eq(*key, game->config.key_unused20)) {
+    // TODO
     return false; // To avoid click noise
   }
 

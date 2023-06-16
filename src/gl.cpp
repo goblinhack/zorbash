@@ -16,11 +16,10 @@ std::array< GLuint, MAX_FBO > fbo_id        = {};
 std::array< GLuint, MAX_FBO > fbo_tex_id    = {};
 std::array< isize, MAX_FBO >  fbo_size      = {};
 
-void MessageCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length,
-                                const GLchar *message, const void *userParam)
+void MessageCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message,
+                     const void *userParam)
 {
-  CON("GL CALLBACK: type = 0x%x, severity = 0x%x, message = %s\n",
-      type, severity, message);
+  CON("GL CALLBACK: type = 0x%x, severity = 0x%x, message = %s\n", type, severity, message);
 }
 
 void gl_init_2d_mode(void)

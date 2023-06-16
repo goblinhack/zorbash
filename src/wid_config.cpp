@@ -113,8 +113,6 @@ void Config::reset(void)
   key_console.mod         = KMOD_SHIFT;
   key_robot_mode.sym      = SDLK_r;
   key_gfx_toggle.sym      = SDLK_TAB;
-  key_alt_gfx_toggle.sym  = SDLK_TAB;
-  key_alt_gfx_toggle.mod  = KMOD_NUM;
   key_descend.sym         = SDLK_GREATER;
   key_ascend.sym          = SDLK_LESS;
   key_use.sym             = SDLK_u;
@@ -125,6 +123,47 @@ void Config::reset(void)
   sdl_delay               = 1;
   snapshot_freq           = ENABLE_SAVE_SNAPSHOT_FREQ;
   sound_volume            = {MIX_MAX_VOLUME / 2};
+
+  // key_unused1.sym  = SDLK_TAB;
+  // key_unused1.mod  = KMOD_NUM;
+  // key_unused2.sym  = SDLK_TAB;
+  // key_unused2.mod  = KMOD_NUM;
+  // key_unused3.sym  = SDLK_TAB;
+  // key_unused3.mod  = KMOD_NUM;
+  // key_unused4.sym  = SDLK_TAB;
+  // key_unused4.mod  = KMOD_NUM;
+  // key_unused5.sym  = SDLK_TAB;
+  // key_unused5.mod  = KMOD_NUM;
+  // key_unused6.sym  = SDLK_TAB;
+  // key_unused6.mod  = KMOD_NUM;
+  // key_unused7.sym  = SDLK_TAB;
+  // key_unused7.mod  = KMOD_NUM;
+  // key_unused8.sym  = SDLK_TAB;
+  // key_unused8.mod  = KMOD_NUM;
+  // key_unused9.sym  = SDLK_TAB;
+  // key_unused9.mod  = KMOD_NUM;
+  // key_unused10.sym  = SDLK_TAB;
+  // key_unused10.mod  = KMOD_NUM;
+  // key_unused11.sym  = SDLK_TAB;
+  // key_unused11.mod  = KMOD_NUM;
+  // key_unused12.sym  = SDLK_TAB;
+  // key_unused12.mod  = KMOD_NUM;
+  // key_unused13.sym  = SDLK_TAB;
+  // key_unused13.mod  = KMOD_NUM;
+  // key_unused14.sym  = SDLK_TAB;
+  // key_unused14.mod  = KMOD_NUM;
+  // key_unused15.sym  = SDLK_TAB;
+  // key_unused15.mod  = KMOD_NUM;
+  // key_unused16.sym  = SDLK_TAB;
+  // key_unused16.mod  = KMOD_NUM;
+  // key_unused17.sym  = SDLK_TAB;
+  // key_unused17.mod  = KMOD_NUM;
+  // key_unused18.sym  = SDLK_TAB;
+  // key_unused18.mod  = KMOD_NUM;
+  // key_unused19.sym  = SDLK_TAB;
+  // key_unused19.mod  = KMOD_NUM;
+  // key_unused20.sym  = SDLK_TAB;
+  // key_unused20.mod  = KMOD_NUM;
 }
 
 static void wid_config_top_destroy(void)

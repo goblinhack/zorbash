@@ -186,9 +186,85 @@ static void wid_config_check_for_conflicts(SDL_Keysym code)
     TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key gfx toggle%%fg=reset$");
     game->config.key_gfx_toggle = {};
   }
-  if (sdlk_eq(game->config.key_alt_gfx_toggle, code)) {
-    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key gfx toggle2%%fg=reset$");
-    game->config.key_alt_gfx_toggle = {};
+  if (sdlk_eq(game->config.key_unused1, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key unused1%%fg=reset$");
+    game->config.key_unused1 = {};
+  }
+  if (sdlk_eq(game->config.key_unused2, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key unused2%%fg=reset$");
+    game->config.key_unused2 = {};
+  }
+  if (sdlk_eq(game->config.key_unused3, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key unused3%%fg=reset$");
+    game->config.key_unused3 = {};
+  }
+  if (sdlk_eq(game->config.key_unused4, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key unused4%%fg=reset$");
+    game->config.key_unused4 = {};
+  }
+  if (sdlk_eq(game->config.key_unused5, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key unused5%%fg=reset$");
+    game->config.key_unused5 = {};
+  }
+  if (sdlk_eq(game->config.key_unused6, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key unused6%%fg=reset$");
+    game->config.key_unused6 = {};
+  }
+  if (sdlk_eq(game->config.key_unused7, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key unused7%%fg=reset$");
+    game->config.key_unused7 = {};
+  }
+  if (sdlk_eq(game->config.key_unused8, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key unused8%%fg=reset$");
+    game->config.key_unused8 = {};
+  }
+  if (sdlk_eq(game->config.key_unused9, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key unused9%%fg=reset$");
+    game->config.key_unused9 = {};
+  }
+  if (sdlk_eq(game->config.key_unused10, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key unused10%%fg=reset$");
+    game->config.key_unused10 = {};
+  }
+  if (sdlk_eq(game->config.key_unused11, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key unused11%%fg=reset$");
+    game->config.key_unused11 = {};
+  }
+  if (sdlk_eq(game->config.key_unused12, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key unused12%%fg=reset$");
+    game->config.key_unused12 = {};
+  }
+  if (sdlk_eq(game->config.key_unused13, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key unused13%%fg=reset$");
+    game->config.key_unused13 = {};
+  }
+  if (sdlk_eq(game->config.key_unused14, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key unused14%%fg=reset$");
+    game->config.key_unused14 = {};
+  }
+  if (sdlk_eq(game->config.key_unused15, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key unused15%%fg=reset$");
+    game->config.key_unused15 = {};
+  }
+  if (sdlk_eq(game->config.key_unused16, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key unused16%%fg=reset$");
+    game->config.key_unused16 = {};
+  }
+  if (sdlk_eq(game->config.key_unused17, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key unused17%%fg=reset$");
+    game->config.key_unused17 = {};
+  }
+  if (sdlk_eq(game->config.key_unused18, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key unused18%%fg=reset$");
+    game->config.key_unused18 = {};
+  }
+  if (sdlk_eq(game->config.key_unused19, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key unused19%%fg=reset$");
+    game->config.key_unused19 = {};
+  }
+  if (sdlk_eq(game->config.key_unused20, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key unused20%%fg=reset$");
+    game->config.key_unused20 = {};
   }
   if (sdlk_eq(game->config.key_descend, code)) {
     TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key descend%%fg=reset$");
@@ -462,13 +538,203 @@ static void wid_config_key_gfx_toggle_set(SDL_Keysym code)
   game->wid_config_keyboard_select();
 }
 
-static void wid_config_key_alt_gfx_toggle_set(SDL_Keysym code)
+static void wid_config_key_unused1_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  config_changed                  = true;
-  game->config.key_alt_gfx_toggle = {};
+  config_changed           = true;
+  game->config.key_unused1 = {};
   wid_config_check_for_conflicts(code);
-  game->config.key_alt_gfx_toggle = code;
+  game->config.key_unused1 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_unused2_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed           = true;
+  game->config.key_unused2 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_unused2 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_unused3_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed           = true;
+  game->config.key_unused3 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_unused3 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_unused4_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed           = true;
+  game->config.key_unused4 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_unused4 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_unused5_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed           = true;
+  game->config.key_unused5 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_unused5 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_unused6_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed           = true;
+  game->config.key_unused6 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_unused6 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_unused7_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed           = true;
+  game->config.key_unused7 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_unused7 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_unused8_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed           = true;
+  game->config.key_unused8 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_unused8 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_unused9_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed           = true;
+  game->config.key_unused9 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_unused9 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_unused10_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed            = true;
+  game->config.key_unused10 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_unused10 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_unused11_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed            = true;
+  game->config.key_unused11 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_unused11 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_unused12_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed            = true;
+  game->config.key_unused12 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_unused12 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_unused13_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed            = true;
+  game->config.key_unused13 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_unused13 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_unused14_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed            = true;
+  game->config.key_unused14 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_unused14 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_unused15_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed            = true;
+  game->config.key_unused15 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_unused15 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_unused16_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed            = true;
+  game->config.key_unused16 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_unused16 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_unused17_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed            = true;
+  game->config.key_unused17 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_unused17 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_unused18_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed            = true;
+  game->config.key_unused18 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_unused18 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_unused19_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed            = true;
+  game->config.key_unused19 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_unused19 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_unused20_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed            = true;
+  game->config.key_unused20 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_unused20 = code;
   game->wid_config_keyboard_select();
 }
 
@@ -1034,11 +1300,182 @@ static uint8_t wid_config_key_gfx_toggle(Widp w, int x, int y, uint32_t button)
   return true;
 }
 
-static uint8_t wid_config_key_alt_gfx_toggle(Widp w, int x, int y, uint32_t button)
+static uint8_t wid_config_key_unused1(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  grab_key("item alt_gfx_toggle");
-  sdl.on_sdl_key_grab = wid_config_key_alt_gfx_toggle_set;
+  grab_key("item unused1");
+  sdl.on_sdl_key_grab = wid_config_key_unused1_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_unused2(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("item unused2");
+  sdl.on_sdl_key_grab = wid_config_key_unused2_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_unused3(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("item unused3");
+  sdl.on_sdl_key_grab = wid_config_key_unused3_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_unused4(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("item unused4");
+  sdl.on_sdl_key_grab = wid_config_key_unused4_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_unused5(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("item unused5");
+  sdl.on_sdl_key_grab = wid_config_key_unused5_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_unused6(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("item unused6");
+  sdl.on_sdl_key_grab = wid_config_key_unused6_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_unused7(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("item unused7");
+  sdl.on_sdl_key_grab = wid_config_key_unused7_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_unused8(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("item unused8");
+  sdl.on_sdl_key_grab = wid_config_key_unused8_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_unused9(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("item unused9");
+  sdl.on_sdl_key_grab = wid_config_key_unused9_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_unused10(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("item unused10");
+  sdl.on_sdl_key_grab = wid_config_key_unused10_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_unused11(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("item unused11");
+  sdl.on_sdl_key_grab = wid_config_key_unused11_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_unused12(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("item unused12");
+  sdl.on_sdl_key_grab = wid_config_key_unused12_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_unused13(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("item unused13");
+  sdl.on_sdl_key_grab = wid_config_key_unused13_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_unused14(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("item unused14");
+  sdl.on_sdl_key_grab = wid_config_key_unused14_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_unused15(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("item unused15");
+  sdl.on_sdl_key_grab = wid_config_key_unused15_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_unused16(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("item unused16");
+  sdl.on_sdl_key_grab = wid_config_key_unused16_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_unused17(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("item unused17");
+  sdl.on_sdl_key_grab = wid_config_key_unused17_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_unused18(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("item unused18");
+  sdl.on_sdl_key_grab = wid_config_key_unused18_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_unused19(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("item unused19");
+  sdl.on_sdl_key_grab = wid_config_key_unused19_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_unused20(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("item unused20");
+  sdl.on_sdl_key_grab = wid_config_key_unused20_set;
   config_changed      = true;
   return true;
 }
@@ -1795,39 +2232,6 @@ void Game::wid_config_keyboard_select(void)
     wid_set_text(w, ::to_string(game->config.key_gfx_toggle));
     wid_set_on_mouse_up(w, wid_config_key_gfx_toggle);
   }
-
-  ///////////////////////////////////////////////////////////////////////
-  // alt_gfx_toggle
-  ///////////////////////////////////////////////////////////////////////
-  y_at++;
-  {
-    TRACE_AND_INDENT();
-    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "alt_gfx_toggle");
-
-    point tl = make_point(1, y_at);
-    point br = make_point(width / 2, y_at);
-    wid_set_shape_none(w);
-    wid_set_pos(w, tl, br);
-    wid_set_text_lhs(w, true);
-    wid_set_text(w, "Alt gfx toggle");
-  }
-  {
-    TRACE_AND_INDENT();
-    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "value");
-
-    point tl = make_point(width / 2 + rhs_button_left, y_at);
-    point br = make_point(width / 2 + rhs_button_right, y_at);
-    wid_set_mode(w, WID_MODE_OVER);
-    wid_set_style(w, box_highlight_style);
-    wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_style(w, box_style);
-    wid_set_pos(w, tl, br);
-    wid_set_text(w, ::to_string(game->config.key_alt_gfx_toggle));
-    wid_set_on_mouse_up(w, wid_config_key_alt_gfx_toggle);
-  }
-  y_at++;
 
   ///////////////////////////////////////////////////////////////////////
   // attack
@@ -3066,6 +3470,647 @@ void Game::wid_config_keyboard_select(void)
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_help));
     wid_set_on_mouse_up(w, wid_config_key_help);
+  }
+
+  y_at++;
+  ///////////////////////////////////////////////////////////////////////
+  // unused1
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "unused1");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Unused1");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_unused1));
+    wid_set_on_mouse_up(w, wid_config_key_unused1);
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  // unused2
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "unused2");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Unused2");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_unused2));
+    wid_set_on_mouse_up(w, wid_config_key_unused2);
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  // unused3
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "unused3");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Unused3");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_unused3));
+    wid_set_on_mouse_up(w, wid_config_key_unused3);
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  // unused4
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "unused4");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Unused4");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_unused4));
+    wid_set_on_mouse_up(w, wid_config_key_unused4);
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  // unused5
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "unused5");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Unused5");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_unused5));
+    wid_set_on_mouse_up(w, wid_config_key_unused5);
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  // unused6
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "unused6");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Unused6");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_unused6));
+    wid_set_on_mouse_up(w, wid_config_key_unused6);
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  // unused7
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "unused7");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Unused7");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_unused7));
+    wid_set_on_mouse_up(w, wid_config_key_unused7);
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  // unused8
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "unused8");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Unused8");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_unused8));
+    wid_set_on_mouse_up(w, wid_config_key_unused8);
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  // unused9
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "unused9");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Unused9");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_unused9));
+    wid_set_on_mouse_up(w, wid_config_key_unused9);
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  // unused10
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "unused10");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Unused10");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_unused10));
+    wid_set_on_mouse_up(w, wid_config_key_unused10);
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  // unused11
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "unused11");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Unused11");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_unused11));
+    wid_set_on_mouse_up(w, wid_config_key_unused11);
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  // unused12
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "unused12");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Unused12");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_unused12));
+    wid_set_on_mouse_up(w, wid_config_key_unused12);
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  // unused13
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "unused13");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Unused13");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_unused13));
+    wid_set_on_mouse_up(w, wid_config_key_unused13);
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  // unused14
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "unused14");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Unused14");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_unused14));
+    wid_set_on_mouse_up(w, wid_config_key_unused14);
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  // unused15
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "unused15");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Unused15");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_unused15));
+    wid_set_on_mouse_up(w, wid_config_key_unused15);
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  // unused16
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "unused16");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Unused16");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_unused16));
+    wid_set_on_mouse_up(w, wid_config_key_unused16);
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  // unused17
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "unused17");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Unused17");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_unused17));
+    wid_set_on_mouse_up(w, wid_config_key_unused17);
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  // unused18
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "unused18");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Unused18");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_unused18));
+    wid_set_on_mouse_up(w, wid_config_key_unused18);
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  // unused19
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "unused19");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Unused19");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_unused19));
+    wid_set_on_mouse_up(w, wid_config_key_unused19);
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  // unused20
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "unused20");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Unused20");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_unused20));
+    wid_set_on_mouse_up(w, wid_config_key_unused20);
   }
 
   wid_update(wid_config_keyboard_window->wid_text_area->wid_text_area);
