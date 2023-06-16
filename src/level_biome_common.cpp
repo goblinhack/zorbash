@@ -259,7 +259,7 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
       //
       // Make sure we have a floor under a portal for example
       //
-      if (! is_chasm(x, y) && ! is_floor(x, y) && ! is_dirt(x, y) && ! is_corridor(x, y)) {
+      if (! is_bridge(x, y) && ! is_chasm(x, y) && ! is_floor(x, y) && ! is_dirt(x, y) && ! is_corridor(x, y)) {
         if (biome == BIOME_CHASMS) {
           //
           // The void.
