@@ -243,6 +243,13 @@ void Game::place_player(void)
         auto w = level->thing_new("axe", point(x, y));
         t->carry(w, carry_options);
       }
+      level->thing_new("torch", point(x + 1, y));
+      level->thing_new("torch", point(x + 1, y));
+      level->thing_new("torch", point(x + 1, y));
+      {
+        auto w = level->thing_new("staff_energy", point(x, y));
+        t->carry(w, carry_options);
+      }
       if (1) {
         auto w = level->thing_new("torch", point(x, y));
         t->carry(w, carry_options);

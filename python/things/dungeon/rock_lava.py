@@ -61,7 +61,7 @@ def tp_init(
     my.is_very_hard(self, True)
     my.is_wall(self, True)
     my.noise_blocker(self, True)
-    my.temperature(self, -100)
+    my.temperature(self, 100)
     my.text_a_or_an(self, "the")
     my.text_description_short(self, "Melting rock.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

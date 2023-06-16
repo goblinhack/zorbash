@@ -10,6 +10,8 @@ void Thing::temperature_tick(void)
 {
   TRACE_NO_INDENT();
 
+  int  location_temp_max = 0;
+  int  location_temp_min = 0;
   int  location_temp     = 0;
   bool location_temp_set = false;
 
@@ -167,8 +169,22 @@ void Thing::temperature_tick(void)
     // consider the torch.
     //
     if (abs(t->temperature) >= TEMPERATURE_THRESHOLD) {
-      location_temp += t->temperature;
+      if (! location_temp_max) {
+        location_temp_max = t->temperature;
+        location_temp_min = t->temperature;
+      } else {
+        location_temp_max = std::max(location_temp_max, (int) t->temperature);
+        location_temp_min = std::min(location_temp_min, (int) t->temperature);
+      }
       location_temp_set = true;
+
+      if (location_temp_max && location_temp_min) {
+        location_temp = (location_temp_max + location_temp_min) / 2;
+      } else if (location_temp_max) {
+        location_temp = location_temp_max;
+      } else {
+        location_temp = location_temp_min;
+      }
 
       dbg("Location temp now %d due to %s (%d)", location_temp, t->to_short_string().c_str(), t->temperature);
 
