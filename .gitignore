@@ -70,3 +70,5 @@ build/windows/python*
 build/windows/windows.xml.backup
 zorbash-create-release.sh
 zorbash.sh
+src/zorbash.pdb
+zorbash.pdb
