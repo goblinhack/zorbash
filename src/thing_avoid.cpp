@@ -11,7 +11,7 @@ bool Thing::will_avoid_monst(const Thingp it)
   TRACE_NO_INDENT();
   auto me = tp();
 
-  // dbg("Avoid %s?", it->to_short_string().c_str());
+  // dbg2("Avoid %s?", it->to_short_string().c_str());
 
   //
   // Avoid flaming things; even friends.
@@ -19,12 +19,12 @@ bool Thing::will_avoid_monst(const Thingp it)
   if (! is_fire_elemental()) {
     if (environ_dislikes_fire() > 10) {
       if (it->is_fire()) {
-        dbg("Avoid fire: %s", it->to_short_string().c_str());
+        dbg2("Avoid fire: %s", it->to_short_string().c_str());
         return true;
       }
 
       if (it->is_on_fire()) {
-        dbg("Avoid on fire: %s", it->to_short_string().c_str());
+        dbg2("Avoid on fire: %s", it->to_short_string().c_str());
         return true;
       }
     }
@@ -36,14 +36,14 @@ bool Thing::will_avoid_monst(const Thingp it)
   if (! is_fearless()) {
     if (is_cautious()) {
       if (health() < health_max() / 2) {
-        dbg("Avoid %s? yes as low on health", it->to_short_string().c_str());
+        dbg2("Avoid %s? yes as low on health", it->to_short_string().c_str());
         return false;
       }
     }
 
     if (is_daring()) {
       if (health() < health_max() / 3) {
-        dbg("Avoid %s? yes as low on health", it->to_short_string().c_str());
+        dbg2("Avoid %s? yes as low on health", it->to_short_string().c_str());
         return false;
       }
     }
@@ -53,7 +53,7 @@ bool Thing::will_avoid_monst(const Thingp it)
   // Not moving?
   //
   if (it->idle_count() > 5) {
-    dbg("Avoid %s? no it's idle", it->to_short_string().c_str());
+    dbg2("Avoid %s? no it's idle", it->to_short_string().c_str());
     return false;
   }
 
@@ -61,29 +61,29 @@ bool Thing::will_avoid_monst(const Thingp it)
   // It's stuck?
   //
   if (it->stuck_count() > 5) {
-    dbg("Avoid %s? no it's stuck", it->to_short_string().c_str());
+    dbg2("Avoid %s? no it's stuck", it->to_short_string().c_str());
     return false;
   }
 
   if (is_friend(it) || same_mob(it)) {
-    dbg("Avoid %s? no it's a friend", it->to_short_string().c_str());
+    dbg2("Avoid %s? no it's a friend", it->to_short_string().c_str());
     return false;
   }
 
   if (is_dangerous(it)) {
-    dbg("Avoid dangerous: %s", it->to_short_string().c_str());
+    dbg2("Avoid dangerous: %s", it->to_short_string().c_str());
     return true;
   }
 
   if (it->is_edible(this) && is_dangerous(it)) {
-    dbg("Avoid dangerous eater: %s", it->to_short_string().c_str());
+    dbg2("Avoid dangerous eater: %s", it->to_short_string().c_str());
     return true;
   }
 
   if (me->is_humanoid()) {
     if (it->attack_humanoid()) {
       if (is_dangerous(it)) {
-        dbg("Avoid dangerous humanoid: %s", it->to_short_string().c_str());
+        dbg2("Avoid dangerous humanoid: %s", it->to_short_string().c_str());
         return true;
       }
     }
@@ -92,7 +92,7 @@ bool Thing::will_avoid_monst(const Thingp it)
   if (me->is_living()) {
     if (it->attack_living()) {
       if (is_dangerous(it)) {
-        dbg("Avoid dangerous monst: %s", it->to_short_string().c_str());
+        dbg2("Avoid dangerous monst: %s", it->to_short_string().c_str());
         return true;
       }
     }
@@ -101,7 +101,7 @@ bool Thing::will_avoid_monst(const Thingp it)
   if (me->is_meat()) {
     if (it->attack_meat()) {
       if (is_dangerous(it)) {
-        dbg("Avoid dangerous monst: %s", it->to_short_string().c_str());
+        dbg2("Avoid dangerous monst: %s", it->to_short_string().c_str());
         return true;
       }
     }
@@ -110,7 +110,7 @@ bool Thing::will_avoid_monst(const Thingp it)
   if (me->is_red_blooded() || me->is_green_blooded() || me->is_red_blood() || me->is_green_blood()) {
     if (it->attack_blood()) {
       if (is_dangerous(it)) {
-        dbg("Avoid dangerous monst: %s", it->to_short_string().c_str());
+        dbg2("Avoid dangerous monst: %s", it->to_short_string().c_str());
         return true;
       }
     }
@@ -119,7 +119,7 @@ bool Thing::will_avoid_monst(const Thingp it)
   if (me->is_undead()) {
     if (it->attack_undead()) {
       if (is_dangerous(it)) {
-        dbg("Avoid dangerous monst: %s", it->to_short_string().c_str());
+        dbg2("Avoid dangerous monst: %s", it->to_short_string().c_str());
         return true;
       }
     }
@@ -165,7 +165,7 @@ bool Thing::will_avoid_monst(const point p)
       if (it->is_player()) {
         if (is_dangerous(it)) {
           if (health() < health_max() / 4) {
-            dbg("Avoid dangerous as I am weak: %s", it->to_short_string().c_str());
+            dbg2("Avoid dangerous as I am weak: %s", it->to_short_string().c_str());
             return true;
           }
         }
@@ -174,7 +174,7 @@ bool Thing::will_avoid_monst(const point p)
 
     if (it->is_edible(this) && is_dangerous(it)) {
       if (health() < health_max() / 4) {
-        dbg("Avoid meat eater as I am weak: %s", it->to_short_string().c_str());
+        dbg2("Avoid meat eater as I am weak: %s", it->to_short_string().c_str());
         return true;
       }
     }
@@ -183,7 +183,7 @@ bool Thing::will_avoid_monst(const point p)
       if (it->attack_humanoid()) {
         if (is_dangerous(it)) {
           if (health() < health_max() / 4) {
-            dbg("Avoid humanoid eater as I am weak: %s", it->to_short_string().c_str());
+            dbg2("Avoid humanoid eater as I am weak: %s", it->to_short_string().c_str());
             return true;
           }
         }
@@ -194,7 +194,7 @@ bool Thing::will_avoid_monst(const point p)
       if (it->attack_living()) {
         if (is_dangerous(it)) {
           if (health() < health_max() / 4) {
-            dbg("Avoid living eater as I am weak: %s", it->to_short_string().c_str());
+            dbg2("Avoid living eater as I am weak: %s", it->to_short_string().c_str());
             return true;
           }
         }
@@ -205,7 +205,7 @@ bool Thing::will_avoid_monst(const point p)
       if (it->attack_meat()) {
         if (is_dangerous(it)) {
           if (health() < health_max() / 4) {
-            dbg("Avoid meat eater as I am weak: %s", it->to_short_string().c_str());
+            dbg2("Avoid meat eater as I am weak: %s", it->to_short_string().c_str());
             return true;
           }
         }
@@ -216,7 +216,7 @@ bool Thing::will_avoid_monst(const point p)
       if (it->attack_blood()) {
         if (is_dangerous(it)) {
           if (health() < health_max() / 4) {
-            dbg("Avoid blood eater as I am weak: %s", it->to_short_string().c_str());
+            dbg2("Avoid blood eater as I am weak: %s", it->to_short_string().c_str());
             return true;
           }
         }
@@ -227,7 +227,7 @@ bool Thing::will_avoid_monst(const point p)
       if (it->attack_undead()) {
         if (is_dangerous(it)) {
           if (health() < health_max() / 4) {
-            dbg("Avoid undead eater as I am weak: %s", it->to_short_string().c_str());
+            dbg2("Avoid undead eater as I am weak: %s", it->to_short_string().c_str());
             return true;
           }
         }
@@ -236,7 +236,7 @@ bool Thing::will_avoid_monst(const point p)
 
     if (is_dangerous(it)) {
       if (health() < health_max() / 4) {
-        dbg("Avoid dangerous: %s", it->to_short_string().c_str());
+        dbg2("Avoid dangerous: %s", it->to_short_string().c_str());
         return true;
       }
     }
@@ -292,13 +292,13 @@ void Thing::avoid_tick(void)
     }
 
     if (attacker->is_dead) {
-      dbg("Remove avoid, is dead: %s", attacker->to_string().c_str());
+      dbg2("Remove avoid, is dead: %s", attacker->to_string().c_str());
       aip()->avoid.erase(p.first);
       return;
     }
 
     if (--p.second > 0) {
-      dbg("Avoid: %s (%d count)", attacker->to_string().c_str(), p.second);
+      dbg2("Avoid: %s (%d count)", attacker->to_string().c_str(), p.second);
       continue;
     }
 
@@ -306,7 +306,7 @@ void Thing::avoid_tick(void)
     // If far enough away start to forget this enemy
     //
     if (distance(attacker->curr_at, curr_at) > distance_avoid_get()) {
-      dbg("Remove avoid: %s", attacker->to_string().c_str());
+      dbg2("Remove avoid: %s", attacker->to_string().c_str());
       aip()->avoid.erase(p.first);
       return;
     }
@@ -334,10 +334,10 @@ void Thing::add_avoid(Thingp attacker)
   }
 
   if (! aip()->avoid[ attacker->id ]) {
-    dbg("Add new avoid %s", attacker->to_string().c_str());
+    dbg2("Add new avoid %s", attacker->to_string().c_str());
     aip()->avoid[ attacker->id ] += 2;
   } else {
-    dbg("Increment old avoid %s", attacker->to_string().c_str());
+    dbg2("Increment old avoid %s", attacker->to_string().c_str());
     aip()->avoid[ attacker->id ] += 2;
 
     if (aip()->avoid[ attacker->id ] > THING_AI_MAX_AVOID_COUNT) {
