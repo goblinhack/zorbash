@@ -1340,6 +1340,7 @@ void Game::wid_save_select(void)
         s += tmp.save_meta;
       }
       wid_set_style(w, UI_WID_STYLE_HORIZ_LIGHT);
+      wid_set_style(w, UI_WID_STYLE_GREEN);
     }
 
     if (slot == UI_WID_SAVE_SLOTS - 1) {
