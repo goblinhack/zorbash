@@ -186,7 +186,7 @@ bool Tp::matches(const std::string &what)
   if (is_crushable() && (what == "is_crushable")) { return true; }
   if (is_crystal() && (what == "is_crystal")) { return true; }
   if (is_cursor_can_hover_over() && (what == "is_cursor_can_hover_over")) { return true; }
-  if (is_cursor_can_hover_over_x2_click() && (what == "is_cursor_can_hover_over_x2_click")) { return true; }
+  if (is_cursor_can_hover_over_needs_confirm() && (what == "is_cursor_can_hover_over_needs_confirm")) { return true; }
   if (is_cursor_path_blocker() && (what == "is_cursor_path_blocker")) { return true; }
   if (is_cursor_path_hazard() && (what == "is_cursor_path_hazard")) { return true; }
   if (is_cursor_path() && (what == "is_cursor_path")) { return true; }
@@ -789,7 +789,7 @@ bool Thing::matches(const std::string &what)
   if (is_crushable() && (what == "is_crushable")) { return true; }
   if (is_crystal() && (what == "is_crystal")) { return true; }
   if (is_cursor_can_hover_over() && (what == "is_cursor_can_hover_over")) { return true; }
-  if (is_cursor_can_hover_over_x2_click() && (what == "is_cursor_can_hover_over_x2_click")) { return true; }
+  if (is_cursor_can_hover_over_needs_confirm() && (what == "is_cursor_can_hover_over_needs_confirm")) { return true; }
   if (is_cursor_path_blocker() && (what == "is_cursor_path_blocker")) { return true; }
   if (is_cursor_path_hazard() && (what == "is_cursor_path_hazard")) { return true; }
   if (is_cursor_path() && (what == "is_cursor_path")) { return true; }
@@ -1390,7 +1390,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_crushable") { return &Thing::is_crushable; }
   if (what == "is_crystal") { return &Thing::is_crystal; }
   if (what == "is_cursor_can_hover_over") { return &Thing::is_cursor_can_hover_over; }
-  if (what == "is_cursor_can_hover_over_x2_click") { return &Thing::is_cursor_can_hover_over_x2_click; }
+  if (what == "is_cursor_can_hover_over_needs_confirm") { return &Thing::is_cursor_can_hover_over_needs_confirm; }
   if (what == "is_cursor_path_blocker") { return &Thing::is_cursor_path_blocker; }
   if (what == "is_cursor_path_hazard") { return &Thing::is_cursor_path_hazard; }
   if (what == "is_cursor_path") { return &Thing::is_cursor_path; }

@@ -10,6 +10,7 @@
 #include "my_wid_bag.hpp"
 #include "my_wid_popups.hpp"
 #include "my_wid_thing_info.hpp"
+#include "my_wid_warning.hpp"
 
 void Level::cursor_warp_check(void)
 {
@@ -152,6 +153,13 @@ void Level::cursor_recreate(point curr_at)
 
   if (player->is_dead) {
     dbg("Recreate cursor; player dead");
+    return;
+  }
+
+  //
+  // If move confirmation is present, do not recreate the cursor
+  //
+  if (wid_warning_window) {
     return;
   }
 

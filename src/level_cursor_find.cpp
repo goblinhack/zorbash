@@ -6,6 +6,7 @@
 #include "my_game.hpp"
 #include "my_thing.hpp"
 #include "my_wid_thing_info.hpp"
+#include "my_wid_warning.hpp"
 
 void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny, const int16_t maxx,
                                           const int16_t maxy)
@@ -51,6 +52,13 @@ void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny
     return;
   }
 
+  //
+  // If move confirmation is present, do not recreate the cursor
+  //
+  if (wid_warning_window) {
+    return;
+  }
+
   dbg3("Cursor find on visible things");
   TRACE_AND_INDENT();
   pcg_random_allowed++;
@@ -64,7 +72,7 @@ void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny
       if (cursor) {
         FOR_ALL_NON_INTERNAL_THINGS(this, t, to.x, to.y)
         {
-          if (t->is_cursor_can_hover_over_x2_click()) {
+          if (t->is_cursor_can_hover_over_needs_confirm()) {
             goto done;
           }
         }

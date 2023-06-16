@@ -31,7 +31,7 @@ def lava_init(name, text_long_name, tiles=[]):
     my.is_biome_chasms(self, True)
     my.is_biome_dungeon(self, True)
     my.is_biome_lava(self, True)
-    my.is_cursor_can_hover_over_x2_click(self, True)
+    my.is_cursor_can_hover_over_needs_confirm(self, True)
     my.is_cursor_path_hazard(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_flat(self, True)

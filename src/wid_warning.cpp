@@ -5,6 +5,7 @@
 #include "my_backtrace.hpp"
 #include "my_game.hpp"
 #include "my_sdl_proto.hpp"
+#include "my_thing.hpp"
 #include "my_ui.hpp"
 #include "my_wid_actionbar.hpp"
 #include "my_wid_botcon.hpp"
@@ -18,7 +19,8 @@ static void wid_warning_destroy(void)
 {
   TRACE_AND_INDENT();
   delete wid_warning_window;
-  wid_warning_window = nullptr;
+  wid_warning_window                          = nullptr;
+  game->warning_popup_exists_for_move_confirm = point(-1, -1);
 }
 
 static uint8_t wid_warning_key_up(Widp w, const struct SDL_Keysym *key)
@@ -65,7 +67,29 @@ static uint8_t wid_warning_key_down(Widp w, const struct SDL_Keysym *key)
   return true;
 }
 
-static uint8_t wid_quit_yes(Widp w, int x, int y, uint32_t button)
+static uint8_t wid_warning_yes(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_NO_INDENT();
+
+  //
+  // Move confirmation
+  //
+  if (game->warning_popup_exists_for_move_confirm != point(-1, -1)) {
+    auto level = game->get_current_level();
+    if (level) {
+      auto player = level->player;
+      if (player) {
+        player->player_cursor_path_pop_first_move(THING_MOVE_REASON_MOUSE);
+      }
+    }
+  }
+
+  wid_warning_destroy();
+
+  return true;
+}
+
+static uint8_t wid_warning_no(Widp w, int x, int y, uint32_t button)
 {
   TRACE_NO_INDENT();
   wid_warning_destroy();
@@ -98,20 +122,32 @@ void wid_warning(std::string warning)
   wid_warning_window->log(UI_LOGGING_EMPTY_LINE);
   wid_warning_window->log(warning);
   wid_warning_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_warning_window->log("Press ESCAPE to dismiss this window");
 
   auto y_at = 4;
   {
     TRACE_NO_INDENT();
     auto p = wid_warning_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "No");
+
+    point tl = make_point(width / 2 - 12, y_at + 2);
+    point br = make_point(width / 2 - 2, y_at + 4);
+    wid_set_style(w, UI_WID_STYLE_RED);
+    wid_set_on_mouse_down(w, wid_warning_no);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "No");
+  }
+
+  {
+    TRACE_NO_INDENT();
+    auto p = wid_warning_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Yes");
 
-    point tl = make_point(width / 2 - 8, y_at + 2);
-    point br = make_point(width / 2 + 8, y_at + 4);
+    point tl = make_point(width / 2 + 0, y_at + 2);
+    point br = make_point(width / 2 + 10, y_at + 4);
     wid_set_style(w, UI_WID_STYLE_GREEN);
-    wid_set_on_mouse_down(w, wid_quit_yes);
+    wid_set_on_mouse_down(w, wid_warning_yes);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, "Ok");
+    wid_set_text(w, "Yes");
   }
   wid_update(wid_warning_window->wid_text_area->wid_text_area);
 }

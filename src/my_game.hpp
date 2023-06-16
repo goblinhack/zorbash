@@ -245,12 +245,6 @@ public:
   bool things_are_moving {};
 
   //
-  // Player warnings
-  //
-  bool warning_shown_jump_into_chasm {};
-  bool warning_shown_jump_into_lava {};
-
-  //
   // Player ready to see console messages
   //
   bool player_is_ready_for_messages {};
@@ -312,6 +306,11 @@ public:
   // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
   // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
   /////////////////////////////////////////////////////////////////////////
+
+  //
+  // Player warnings on moving onto bad terrain.
+  //
+  point warning_popup_exists_for_move_confirm = point(-1, -1);
 
   //
   // Game is paused choosing a level? Prrvents the level tick from running.

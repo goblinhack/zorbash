@@ -1454,7 +1454,7 @@ public:
   int is_crushable(void);
   int is_crystal(void);
   int is_cursor_can_hover_over(void);
-  int is_cursor_can_hover_over_x2_click(void);
+  int is_cursor_can_hover_over_needs_confirm(void);
   int is_cursor_path_blocker(void);
   int is_cursor_path_hazard(void);
   int is_cursor_path(void);

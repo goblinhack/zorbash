@@ -83,7 +83,7 @@ PyObject *level_is_crushable_at(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *level_is_crystal_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cursor_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cursor_can_hover_over_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_cursor_can_hover_over_x2_click_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_cursor_can_hover_over_needs_confirm_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cursor_path_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cursor_path_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cursor_path_hazard_at(PyObject *obj, PyObject *args, PyObject *keywds);

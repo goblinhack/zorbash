@@ -58,6 +58,13 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
     return false;
   }
 
+  //
+  // Waiting on move confirmation
+  //
+  if (wid_warning_window) {
+    return true;
+  }
+
   if (game->state == Game::STATE_CHOOSING_LEVEL) {
     DBG2("Game mouse down; choosing level");
     return false;
@@ -287,40 +294,31 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
     //
     // If hovering over a double click thing then don't jump in unless the user really means it.
     //
-    if (! wid_mouse_two_clicks) {
-      auto to = level->cursor->curr_at;
-      FOR_ALL_NON_INTERNAL_THINGS(level, t, to.x, to.y)
-      {
-        if (t->is_cursor_can_hover_over_x2_click()) {
-          IF_DEBUG2 { player->log("Needs double click"); }
-          TOPCON("Double click to jump into the abyss.");
-          if (level->is_chasm(to)) {
-            if (! game->warning_shown_jump_into_chasm) {
-              game->warning_shown_jump_into_chasm = true;
-              std::string msg
-                  = "Double click or press '" + ::to_string(game->config.key_jump) + "' to leap into a chasm.";
-              wid_warning(msg);
-            }
-          } else if (level->is_lava(to)) {
-            TOPCON("Double click to jump into the lava.");
-            if (! game->warning_shown_jump_into_lava) {
-              game->warning_shown_jump_into_lava = true;
-              std::string msg
-                  = "Double click or press '" + ::to_string(game->config.key_jump) + "' to leap into lava.";
-              wid_warning(msg);
-            }
-          } else {
-            TOPCON("Double click to move to move onto that.");
+    auto to = level->cursor->curr_at;
+    FOR_ALL_NON_INTERNAL_THINGS(level, t, to.x, to.y)
+    {
+      if (t->is_cursor_can_hover_over_needs_confirm()) {
+        IF_DEBUG2 { player->log("Needs confirm"); }
+
+        if (level->is_chasm(to)) {
+          if (! player->is_ethereal() && ! player->is_floating() && ! player->is_flying()) {
+            std::string msg                             = "Do you really want to leap into a chasm.";
+            game->warning_popup_exists_for_move_confirm = to;
+            wid_warning(msg);
+            return true;
           }
-          return true;
+        } else if (level->is_lava(to)) {
+          if (! player->is_immune_to_fire() && ! player->is_ethereal() && ! player->is_floating()
+              && ! player->is_flying()) {
+            std::string msg                             = "Do you really want to leap into lava.";
+            game->warning_popup_exists_for_move_confirm = to;
+            wid_warning(msg);
+            return true;
+          }
         }
       }
-      FOR_ALL_THINGS_END()
     }
-
-    if (wid_warning_window) {
-      return true;
-    }
+    FOR_ALL_THINGS_END()
 
     //
     // Have we moved close enough to collect? Do this after the double
@@ -376,6 +374,14 @@ static uint8_t game_mouse_motion_(int x, int y, int relx, int rely, int wheelx, 
   }
 
   if (wid_some_recent_event_occurred()) {
+    return false;
+  }
+
+  //
+  // If move confirmation exists, do not remake the cursor or the path will end up
+  // under the Yes buttion
+  //
+  if (wid_warning_window) {
     return false;
   }
 

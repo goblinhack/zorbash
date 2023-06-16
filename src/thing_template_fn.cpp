@@ -467,7 +467,7 @@ int Tp::is_critical_to_level(void) const { return _is_critical_to_level; }
 int Tp::is_crushable(void) const { return _is_crushable; }
 int Tp::is_crystal(void) const { return _is_crystal; }
 int Tp::is_cursor_can_hover_over(void) const { return _is_cursor_can_hover_over; }
-int Tp::is_cursor_can_hover_over_x2_click(void) const { return _is_cursor_can_hover_over_x2_click; }
+int Tp::is_cursor_can_hover_over_needs_confirm(void) const { return _is_cursor_can_hover_over_needs_confirm; }
 int Tp::is_cursor_path_blocker(void) const { return _is_cursor_path_blocker; }
 int Tp::is_cursor_path_hazard(void) const { return _is_cursor_path_hazard; }
 int Tp::is_cursor_path(void) const { return _is_cursor_path; }
@@ -1216,7 +1216,7 @@ void Tp::is_critical_to_level_set(int v) { _is_critical_to_level = v; }
 void Tp::is_crushable_set(int v) { _is_crushable = v; }
 void Tp::is_crystal_set(int v) { _is_crystal = v; }
 void Tp::is_cursor_can_hover_over_set(int v) { _is_cursor_can_hover_over = v; }
-void Tp::is_cursor_can_hover_over_x2_click_set(int v) { _is_cursor_can_hover_over_x2_click = v; }
+void Tp::is_cursor_can_hover_over_needs_confirm_set(int v) { _is_cursor_can_hover_over_needs_confirm = v; }
 void Tp::is_cursor_path_blocker_set(int v) { _is_cursor_path_blocker = v; }
 void Tp::is_cursor_path_hazard_set(int v) { _is_cursor_path_hazard = v; }
 void Tp::is_cursor_path_set(int v) { _is_cursor_path = v; }

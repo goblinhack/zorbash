@@ -1560,10 +1560,10 @@ int Thing::is_critical_to_level(void)
   return (tp()->is_critical_to_level());
 }
 
-int Thing::is_cursor_can_hover_over_x2_click(void)
+int Thing::is_cursor_can_hover_over_needs_confirm(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_cursor_can_hover_over_x2_click());
+  return (tp()->is_cursor_can_hover_over_needs_confirm());
 }
 
 int Thing::is_cursor_can_hover_over(void)

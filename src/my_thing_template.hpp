@@ -382,7 +382,7 @@ private:
   int _is_crystal {};
   int _is_cursor {};
   int _is_cursor_can_hover_over {};
-  int _is_cursor_can_hover_over_x2_click {};
+  int _is_cursor_can_hover_over_needs_confirm {};
   int _is_cursor_path {};
   int _is_cursor_path_blocker {};
   int _is_cursor_path_hazard {};
@@ -1692,7 +1692,7 @@ public:
   int is_crushable(void) const;
   int is_crystal(void) const;
   int is_cursor_can_hover_over(void) const;
-  int is_cursor_can_hover_over_x2_click(void) const;
+  int is_cursor_can_hover_over_needs_confirm(void) const;
   int is_cursor_path_blocker(void) const;
   int is_cursor_path_hazard(void) const;
   int is_cursor_path(void) const;
@@ -2441,7 +2441,7 @@ public:
   void is_crushable_set(int v);
   void is_crystal_set(int v);
   void is_cursor_can_hover_over_set(int v);
-  void is_cursor_can_hover_over_x2_click_set(int v);
+  void is_cursor_can_hover_over_needs_confirm_set(int v);
   void is_cursor_path_blocker_set(int v);
   void is_cursor_path_hazard_set(int v);
   void is_cursor_path_set(int v);
