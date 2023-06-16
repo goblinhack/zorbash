@@ -6,7 +6,6 @@
 #ifndef _MY_MATH_UTIL_HPP_
 #define _MY_MATH_UTIL_HPP_
 
-double gauss(const double m, const double s);
 double gaussrand(double mean, double stddev);
 
 #ifdef __APPLE__

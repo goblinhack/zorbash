@@ -36,28 +36,3 @@ double gaussrand(double mean, double stddev)
 
   return val;
 }
-
-double gauss(const double m, const double s)
-{
-  static int    use_last = 0;
-  static double y2;
-  double        x1, x2, w, y1;
-
-  if (use_last) {
-    y1 = y2;
-  } else {
-    do { // ming don't have random
-      x1 = 2.0 * ((double) non_pcg_rand() / (double) (((uint32_t) -1))) - 1.0;
-      x2 = 2.0 * ((double) non_pcg_rand() / (double) (((uint32_t) -1))) - 1.0;
-      w  = x1 * x1 + x2 * x2;
-    } while (w >= 1.0);
-
-    w  = sqrt((-2.0 * log(w)) / w);
-    y1 = x1 * w;
-    y2 = x2 * w;
-  }
-
-  use_last = ! use_last;
-
-  return (m + y1 * s);
-}

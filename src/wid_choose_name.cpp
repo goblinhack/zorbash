@@ -17,8 +17,10 @@ static Widp wid_keyboard_wid_choose_player_name;
 
 static void selected(Widp w, const std::wstring &text)
 {
+  std::string s = wstring_to_string(text);
+  CON("INF: choose name [%s]", s.c_str());
   wid_destroy(&wid_keyboard_wid_choose_player_name);
-  g_opt_player_name = wstring_to_string(text);
+  g_opt_player_name = s;
   game->save_config();
   game->wid_main_menu_select();
 }

@@ -721,33 +721,6 @@ static void wid_keyboard_tick(Widp w)
   }
 }
 
-static void wid_keyboard_destroy_begin(Widp w)
-{
-  TRACE_AND_INDENT();
-  wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
-  verify(MTYPE_MISC, ctx);
-
-  /*
-   * Zoom buttons in
-   */
-  int x, y;
-
-  for (x = 0; x < WID_KEYBOARD_ACROSS; x++) {
-    for (y = 0; y < WID_KEYBOARD_DOWN; y++) {
-
-      Widp b = ctx->buttons[ y ][ x ];
-
-      float x = gauss(0.0, 2.0);
-      float y = gauss(0.0, 2.0);
-
-      x *= TERM_WIDTH;
-      y *= TERM_HEIGHT;
-
-      wid_move_to_pct_centered_in(b, x, y, 500);
-    }
-  }
-}
-
 static void wid_keyboard_bg_tick(Widp w)
 {
   TRACE_AND_INDENT();
@@ -802,7 +775,6 @@ Widp wid_keyboard(const std::wstring &text, const std::wstring &title, wid_keybo
 
     wid_set_pos(window, tl, br);
     wid_set_style(window, UI_WID_STYLE_NORMAL);
-    wid_set_on_destroy_begin(window, wid_keyboard_destroy_begin);
     wid_set_on_key_down(window, wid_keyboard_parent_key_down);
     wid_set_on_joy_button(window, wid_keyboard_parent_joy_button);
     wid_set_on_destroy(window, wid_keyboard_destroy);
