@@ -763,12 +763,6 @@ int main(int argc, char *argv[])
 
   parse_args(argc, argv);
 
-  //
-  // This is just too handy for folks to report issues, so let's see if leaving
-  // it on is fast enough.
-  //
-  g_opt_debug1 = true;
-
   LOG("INI: Ramdisk");
   ramdisk_init();
 
