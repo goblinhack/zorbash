@@ -140,10 +140,14 @@ redo:
     set_max_depth();
 
     int placed;
-    if (depth == 1) {
-      placed = snake_walk(depth, 4, pass);
+    if (is_dungeon) {
+      if (depth == 1) {
+        placed = snake_walk(depth, 4, pass);
+      } else {
+        placed = snake_walk(depth, 3, pass);
+      }
     } else {
-      placed = snake_walk(depth, 3, pass);
+      placed = snake_walk(depth, 6, pass);
     }
 
     if (debug_enabled) {
@@ -158,19 +162,29 @@ redo:
     // We need at least 2 nodes per depth as one can be a lock
     // and the other a key per depth
     //
-    if (depth == 1) {
-      //
-      // Need an extra one on level one for the entrance
-      //
-      if (placed < 3) {
-        debug("failed initial level, did not place enough nodes");
-        if (debug_enabled) {
-          LOG("Node-grid: Failed level depth %d placed only %d nodes, redo", depth, placed);
+    if (is_dungeon) {
+      if (depth == 1) {
+        //
+        // Need an extra one on level one for the entrance
+        //
+        if (placed < 3) {
+          debug("failed initial level, did not place enough nodes");
+          if (debug_enabled) {
+            LOG("Node-grid: Failed level depth %d placed only %d nodes, redo", depth, placed);
+          }
+          goto redo;
         }
-        goto redo;
+      } else {
+        if (placed < 2) {
+          debug("failed level, did not place enough nodes at depth");
+          if (debug_enabled) {
+            LOG("Node-grid: Failed level depth %d placed only %d nodes, redo", depth, placed);
+          }
+          goto redo;
+        }
       }
     } else {
-      if (placed < 2) {
+      if (placed < 6) {
         debug("failed level, did not place enough nodes at depth");
         if (debug_enabled) {
           LOG("Node-grid: Failed level depth %d placed only %d nodes, redo", depth, placed);
