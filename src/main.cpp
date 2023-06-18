@@ -709,7 +709,7 @@ static std::string create_appdata_dir(void)
   g_log_stdout          = fopen(out, "w+");
 
   char *err             = dynprintf("%s%s%s%s%s", appdata, DIR_SEP, "zorbash", DIR_SEP, "stderr.txt");
-  g_log_stderr_filename = std::string(out);
+  g_log_stderr_filename = std::string(err);
   g_log_stderr          = fopen(err, "w+");
 
   CON("INI: Will use STDOUT as '%s'", out);

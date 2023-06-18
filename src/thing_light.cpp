@@ -222,7 +222,7 @@ int Thing::light_distance_update(void)
     {
       if (get_no_check(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) {
         //
-        // In chasm levels we can see further and offscreen. Limit to what is onscreen.
+        // In chasm levels we can see further and off-screen. Limit to what is onscreen.
         //
         if (t->tile_is_offscreen()) {
           continue;
@@ -232,9 +232,19 @@ int Thing::light_distance_update(void)
 
         FOR_ALL_EQUIP(e)
         {
-          auto anim = t->equip_carry_anim(e);
-          if (anim) {
-            anim->is_visible_to_player = true;
+          auto it = t->equip_carry_anim(e);
+          if (it) {
+            it->is_visible_to_player = true;
+          }
+        }
+
+        FOR_ALL_BODYPART(e)
+        {
+          if (bodypart_id_get(e).ok()) {
+            auto it = level->thing_find(bodypart_id_get(e));
+            if (it) {
+              it->is_visible_to_player = true;
+            }
           }
         }
       }

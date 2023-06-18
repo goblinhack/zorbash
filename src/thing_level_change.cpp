@@ -83,6 +83,16 @@ void Thing::level_change(Levelp l)
     }
   }
 
+  FOR_ALL_BODYPART(e)
+  {
+    if (bodypart_id_get(e).ok()) {
+      auto it = level->thing_find(bodypart_id_get(e));
+      if (it) {
+        it->level_change(l);
+      }
+    }
+  }
+
   {
     auto id = on_fire_anim_id();
     if (id.ok()) {
@@ -90,14 +100,6 @@ void Thing::level_change(Levelp l)
       if (it) {
         it->level_change(l);
       }
-    }
-  }
-
-  FOR_ALL_EQUIP(e)
-  {
-    auto iter = equip_get(e);
-    if (iter) {
-      iter->level_change(l);
     }
   }
 

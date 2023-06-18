@@ -417,16 +417,26 @@ void Thing::level_push(void)
     FOR_ALL_EQUIP(e)
     {
       if (equip_id_carry_anim(e).ok()) {
-        auto w = level->thing_find(equip_id_carry_anim(e));
-        if (w) {
-          w->level_push();
+        auto it = level->thing_find(equip_id_carry_anim(e));
+        if (it) {
+          it->level_push();
         }
       }
 
       if (equip_id_use_anim(e).ok()) {
-        auto w = level->thing_find(equip_id_use_anim(e));
-        if (w) {
-          w->level_push();
+        auto it = level->thing_find(equip_id_use_anim(e));
+        if (it) {
+          it->level_push();
+        }
+      }
+    }
+
+    FOR_ALL_BODYPART(e)
+    {
+      if (bodypart_id_get(e).ok()) {
+        auto it = level->thing_find(bodypart_id_get(e));
+        if (it) {
+          it->level_push();
         }
       }
     }
@@ -434,9 +444,9 @@ void Thing::level_push(void)
     auto on_fire_id = on_fire_anim_id();
     if (on_fire_id.ok()) {
       TRACE_NO_INDENT();
-      auto w = level->thing_find(on_fire_id);
-      if (w) {
-        w->level_push();
+      auto it = level->thing_find(on_fire_id);
+      if (it) {
+        it->level_push();
       }
     }
   }

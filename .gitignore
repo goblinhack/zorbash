@@ -9,6 +9,7 @@ data/sounds
 Makefile
 python/__pycache__
 python/things/amulets/__pycache__
+python/things/bodyparts/__pycache__
 python/things/armor/__pycache__/
 python/things/boots/__pycache__
 python/things/buffs/__pycache__

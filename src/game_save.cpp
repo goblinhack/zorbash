@@ -209,6 +209,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingItemsp & > const my)
   out << bits(my.t->equip_id);
   out << bits(my.t->equip_id_carry_anim);
   out << bits(my.t->equip_id_use_anim);
+  out << bits(my.t->bodypart_id);
   out << bits(my.t->bag_position);
   out << bits(my.t->last_bag_position);
   out << bits(my.t->where_i_dropped_an_item_last);

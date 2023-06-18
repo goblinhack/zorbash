@@ -358,6 +358,16 @@ void Thing::level_pop(void)
         }
       }
 
+      FOR_ALL_BODYPART(e)
+      {
+        if (bodypart_id_get(e).ok()) {
+          auto w = level->thing_find(bodypart_id_get(e));
+          if (w) {
+            w->level_pop();
+          }
+        }
+      }
+
       auto on_fire_id = on_fire_anim_id();
       if (on_fire_id.ok()) {
         TRACE_NO_INDENT();

@@ -9,9 +9,7 @@
 static Tpidmap tp_ascend_dungeon;
 static Tpidmap tp_ascend_sewer;
 static Tpidmap tp_barrel;
-static Tpidmap tp_red_blood;
-static Tpidmap tp_green_blood;
-static Tpidmap tp_red_splatter;
+static Tpidmap tp_bodypart[ BODYPART_MAX ];
 static Tpidmap tp_bones;
 static Tpidmap tp_brazier;
 static Tpidmap tp_deco;
@@ -20,54 +18,57 @@ static Tpidmap tp_descend_sewer;
 static Tpidmap tp_dirt;
 static Tpidmap tp_door;
 static Tpidmap tp_dry_grass;
-static Tpidmap tp_wet_grass;
 static Tpidmap tp_ethereal_mob;
 static Tpidmap tp_floor;
 static Tpidmap tp_foliage;
 static Tpidmap tp_food;
-static Tpidmap tp_mob;
-static Tpidmap tp_trap;
 static Tpidmap tp_gold;
+static Tpidmap tp_green_blood;
 static Tpidmap tp_green_splatter;
 static Tpidmap tp_item_class_A;
 static Tpidmap tp_item_class_B;
 static Tpidmap tp_item_class_C;
+static Tpidmap tp_item_not_a_container_class_A;
+static Tpidmap tp_item_not_a_container_class_B;
+static Tpidmap tp_item_not_a_container_class_C;
+static Tpidmap tp_key;
+static Tpidmap tp_large_ripples;
+static Tpidmap tp_magic_stone;
+static Tpidmap tp_mob;
 static Tpidmap tp_monst_class_A;
 static Tpidmap tp_monst_class_B;
 static Tpidmap tp_monst_class_C;
 static Tpidmap tp_monst_class_D;
 static Tpidmap tp_monst_class_E;
-static Tpidmap tp_item_not_a_container_class_A;
-static Tpidmap tp_item_not_a_container_class_B;
-static Tpidmap tp_item_not_a_container_class_C;
-static Tpidmap tp_key;
+static Tpidmap tp_portal;
 static Tpidmap tp_potion;
+static Tpidmap tp_red_blood;
+static Tpidmap tp_red_splatter;
 static Tpidmap tp_ring;
 static Tpidmap tp_ring_class_A;
 static Tpidmap tp_ring_class_B;
 static Tpidmap tp_ring_class_C;
-static Tpidmap tp_small_ripples;
-static Tpidmap tp_large_ripples;
 static Tpidmap tp_rock;
 static Tpidmap tp_secret_door;
 static Tpidmap tp_sewer_wall;
 static Tpidmap tp_skills;
-static Tpidmap tp_magic_stone;
+static Tpidmap tp_small_ripples;
 static Tpidmap tp_spiderweb;
-static Tpidmap tp_portal;
-static Tpidmap tp_treasure;
-static Tpidmap tp_wall_dungeon;
 static Tpidmap tp_staff;
 static Tpidmap tp_staff_class_A;
 static Tpidmap tp_staff_class_B;
 static Tpidmap tp_staff_class_C;
+static Tpidmap tp_trap;
+static Tpidmap tp_treasure;
+static Tpidmap tp_treasure_class_A;
+static Tpidmap tp_treasure_class_B;
+static Tpidmap tp_treasure_class_C;
+static Tpidmap tp_wall_dungeon;
 static Tpidmap tp_weapon;
 static Tpidmap tp_weapon_class_A;
 static Tpidmap tp_weapon_class_B;
 static Tpidmap tp_weapon_class_C;
-static Tpidmap tp_treasure_class_A;
-static Tpidmap tp_treasure_class_B;
-static Tpidmap tp_treasure_class_C;
+static Tpidmap tp_wet_grass;
 
 void tp_random_init(void)
 {
@@ -75,6 +76,24 @@ void tp_random_init(void)
   for (auto &tp : tp_id_map) {
     if (tp->is_ascend_dungeon()) {
       tp_ascend_dungeon.push_back(tp);
+    }
+    if (tp->is_bodypart_hat()) {
+      tp_bodypart[ BODYPART_HAT ].push_back(tp);
+    }
+    if (tp->is_bodypart_eyes()) {
+      tp_bodypart[ BODYPART_EYES ].push_back(tp);
+    }
+    if (tp->is_bodypart_hair()) {
+      tp_bodypart[ BODYPART_HAIR ].push_back(tp);
+    }
+    if (tp->is_bodypart_face()) {
+      tp_bodypart[ BODYPART_FACE ].push_back(tp);
+    }
+    if (tp->is_bodypart_torso()) {
+      tp_bodypart[ BODYPART_TORSO ].push_back(tp);
+    }
+    if (tp->is_bodypart_legs()) {
+      tp_bodypart[ BODYPART_LEGS ].push_back(tp);
     }
     if (tp->is_ascend_sewer()) {
       tp_ascend_sewer.push_back(tp);
@@ -1205,4 +1224,14 @@ const Tpidmap &tp_get_skills(void)
 {
   TRACE_NO_INDENT();
   return tp_skills;
+}
+
+Tpp tp_random_bodypart(int bodypart)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_bodypart[ bodypart ].size())) {
+    ERR("No bodypart type %d found", bodypart);
+    return nullptr;
+  }
+  return tp_get_with_no_rarity_filter(tp_bodypart[ bodypart ]);
 }

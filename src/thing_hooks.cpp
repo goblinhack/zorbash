@@ -108,6 +108,14 @@ void Thing::hooks_remove_from(Thingp o)
       err("Weapon carry anim is still attached");
     }
   }
+
+  FOR_ALL_BODYPART(e)
+  {
+    if (id == o->bodypart_id_get(e)) {
+      o->bodypart_remove(e);
+      o->bodypart_id_set(NoThingId.id, e);
+    }
+  }
 }
 
 void Thing::hooks_remove()
@@ -180,6 +188,18 @@ void Thing::hooks_remove()
       equip_use_anim_set(nullptr, e);
       item->owner_unset();
       item->dead("weapon use-anim owner defeated");
+    }
+  }
+
+  FOR_ALL_BODYPART(e)
+  {
+    if (bodypart_id_get(e).ok()) {
+      auto item = level->thing_find(bodypart_id_get(e));
+      if (item) {
+        bodypart_id_set(NoThingId.id, e);
+        item->owner_unset();
+        item->dead("bodypart removed");
+      }
     }
   }
 

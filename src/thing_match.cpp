@@ -160,6 +160,12 @@ bool Tp::matches(const std::string &what)
   if (is_bleeder() && (what == "is_bleeder")) { return true; }
   if (is_block_of_ice() && (what == "is_block_of_ice")) { return true; }
   if (is_bloodbug() && (what == "is_bloodbug")) { return true; }
+  if (is_bodypart_eyes() && (what == "is_bodypart_eyes")) { return true; }
+  if (is_bodypart_face() && (what == "is_bodypart_face")) { return true; }
+  if (is_bodypart_hair() && (what == "is_bodypart_hair")) { return true; }
+  if (is_bodypart_hat() && (what == "is_bodypart_hat")) { return true; }
+  if (is_bodypart_legs() && (what == "is_bodypart_legs")) { return true; }
+  if (is_bodypart_torso() && (what == "is_bodypart_torso")) { return true; }
   if (is_bones() && (what == "is_bones")) { return true; }
   if (is_boots() && (what == "is_boots")) { return true; }
   if (is_brazier() && (what == "is_brazier")) { return true; }
@@ -185,8 +191,8 @@ bool Tp::matches(const std::string &what)
   if (is_critical_to_level() && (what == "is_critical_to_level")) { return true; }
   if (is_crushable() && (what == "is_crushable")) { return true; }
   if (is_crystal() && (what == "is_crystal")) { return true; }
-  if (is_cursor_can_hover_over() && (what == "is_cursor_can_hover_over")) { return true; }
   if (is_cursor_can_hover_over_needs_confirm() && (what == "is_cursor_can_hover_over_needs_confirm")) { return true; }
+  if (is_cursor_can_hover_over() && (what == "is_cursor_can_hover_over")) { return true; }
   if (is_cursor_path_blocker() && (what == "is_cursor_path_blocker")) { return true; }
   if (is_cursor_path_hazard() && (what == "is_cursor_path_hazard")) { return true; }
   if (is_cursor_path() && (what == "is_cursor_path")) { return true; }
@@ -456,12 +462,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag131() && (what == "is_unused_flag131")) { return true; }
   if (is_unused_flag132() && (what == "is_unused_flag132")) { return true; }
   if (is_unused_flag133() && (what == "is_unused_flag133")) { return true; }
-  if (is_unused_flag134() && (what == "is_unused_flag134")) { return true; }
-  if (is_unused_flag135() && (what == "is_unused_flag135")) { return true; }
-  if (is_unused_flag136() && (what == "is_unused_flag136")) { return true; }
-  if (is_unused_flag137() && (what == "is_unused_flag137")) { return true; }
-  if (is_unused_flag138() && (what == "is_unused_flag138")) { return true; }
-  if (is_unused_flag139() && (what == "is_unused_flag139")) { return true; }
   if (is_unused_flag13() && (what == "is_unused_flag13")) { return true; }
   if (is_unused_flag142() && (what == "is_unused_flag142")) { return true; }
   if (is_unused_flag14() && (what == "is_unused_flag14")) { return true; }
@@ -762,6 +762,12 @@ bool Thing::matches(const std::string &what)
   if (is_bleeder() && (what == "is_bleeder")) { return true; }
   if (is_block_of_ice() && (what == "is_block_of_ice")) { return true; }
   if (is_bloodbug() && (what == "is_bloodbug")) { return true; }
+  if (is_bodypart_eyes() && (what == "is_bodypart_eyes")) { return true; }
+  if (is_bodypart_face() && (what == "is_bodypart_face")) { return true; }
+  if (is_bodypart_hair() && (what == "is_bodypart_hair")) { return true; }
+  if (is_bodypart_hat() && (what == "is_bodypart_hat")) { return true; }
+  if (is_bodypart_legs() && (what == "is_bodypart_legs")) { return true; }
+  if (is_bodypart_torso() && (what == "is_bodypart_torso")) { return true; }
   if (is_bones() && (what == "is_bones")) { return true; }
   if (is_boots() && (what == "is_boots")) { return true; }
   if (is_brazier() && (what == "is_brazier")) { return true; }
@@ -788,8 +794,8 @@ bool Thing::matches(const std::string &what)
   if (is_critical_to_level() && (what == "is_critical_to_level")) { return true; }
   if (is_crushable() && (what == "is_crushable")) { return true; }
   if (is_crystal() && (what == "is_crystal")) { return true; }
-  if (is_cursor_can_hover_over() && (what == "is_cursor_can_hover_over")) { return true; }
   if (is_cursor_can_hover_over_needs_confirm() && (what == "is_cursor_can_hover_over_needs_confirm")) { return true; }
+  if (is_cursor_can_hover_over() && (what == "is_cursor_can_hover_over")) { return true; }
   if (is_cursor_path_blocker() && (what == "is_cursor_path_blocker")) { return true; }
   if (is_cursor_path_hazard() && (what == "is_cursor_path_hazard")) { return true; }
   if (is_cursor_path() && (what == "is_cursor_path")) { return true; }
@@ -1060,12 +1066,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag131() && (what == "is_unused_flag131")) { return true; }
   if (is_unused_flag132() && (what == "is_unused_flag132")) { return true; }
   if (is_unused_flag133() && (what == "is_unused_flag133")) { return true; }
-  if (is_unused_flag134() && (what == "is_unused_flag134")) { return true; }
-  if (is_unused_flag135() && (what == "is_unused_flag135")) { return true; }
-  if (is_unused_flag136() && (what == "is_unused_flag136")) { return true; }
-  if (is_unused_flag137() && (what == "is_unused_flag137")) { return true; }
-  if (is_unused_flag138() && (what == "is_unused_flag138")) { return true; }
-  if (is_unused_flag139() && (what == "is_unused_flag139")) { return true; }
   if (is_unused_flag13() && (what == "is_unused_flag13")) { return true; }
   if (is_unused_flag142() && (what == "is_unused_flag142")) { return true; }
   if (is_unused_flag14() && (what == "is_unused_flag14")) { return true; }
@@ -1363,6 +1363,12 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_bleeder") { return &Thing::is_bleeder; }
   if (what == "is_block_of_ice") { return &Thing::is_block_of_ice; }
   if (what == "is_bloodbug") { return &Thing::is_bloodbug; }
+  if (what == "is_bodypart_eyes") { return &Thing::is_bodypart_eyes; }
+  if (what == "is_bodypart_face") { return &Thing::is_bodypart_face; }
+  if (what == "is_bodypart_hair") { return &Thing::is_bodypart_hair; }
+  if (what == "is_bodypart_hat") { return &Thing::is_bodypart_hat; }
+  if (what == "is_bodypart_legs") { return &Thing::is_bodypart_legs; }
+  if (what == "is_bodypart_torso") { return &Thing::is_bodypart_torso; }
   if (what == "is_bones") { return &Thing::is_bones; }
   if (what == "is_boots") { return &Thing::is_boots; }
   if (what == "is_brazier") { return &Thing::is_brazier; }
@@ -1389,8 +1395,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_critical_to_level") { return &Thing::is_critical_to_level; }
   if (what == "is_crushable") { return &Thing::is_crushable; }
   if (what == "is_crystal") { return &Thing::is_crystal; }
-  if (what == "is_cursor_can_hover_over") { return &Thing::is_cursor_can_hover_over; }
   if (what == "is_cursor_can_hover_over_needs_confirm") { return &Thing::is_cursor_can_hover_over_needs_confirm; }
+  if (what == "is_cursor_can_hover_over") { return &Thing::is_cursor_can_hover_over; }
   if (what == "is_cursor_path_blocker") { return &Thing::is_cursor_path_blocker; }
   if (what == "is_cursor_path_hazard") { return &Thing::is_cursor_path_hazard; }
   if (what == "is_cursor_path") { return &Thing::is_cursor_path; }
@@ -1652,12 +1658,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag131") { return &Thing::is_unused_flag131; }
   if (what == "is_unused_flag132") { return &Thing::is_unused_flag132; }
   if (what == "is_unused_flag133") { return &Thing::is_unused_flag133; }
-  if (what == "is_unused_flag134") { return &Thing::is_unused_flag134; }
-  if (what == "is_unused_flag135") { return &Thing::is_unused_flag135; }
-  if (what == "is_unused_flag136") { return &Thing::is_unused_flag136; }
-  if (what == "is_unused_flag137") { return &Thing::is_unused_flag137; }
-  if (what == "is_unused_flag138") { return &Thing::is_unused_flag138; }
-  if (what == "is_unused_flag139") { return &Thing::is_unused_flag139; }
   if (what == "is_unused_flag13") { return &Thing::is_unused_flag13; }
   if (what == "is_unused_flag142") { return &Thing::is_unused_flag142; }
   if (what == "is_unused_flag14") { return &Thing::is_unused_flag14; }

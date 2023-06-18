@@ -3,6 +3,7 @@
 //
 
 #include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_thing.hpp"
 
 void Game::place_player(void)
@@ -30,13 +31,23 @@ void Game::place_player(void)
       CarryOptions carry_options;
       carry_options.is_able_to_be_equipped = true;
 
-      auto t = level->thing_new("player2", point(x, y));
+      auto t = level->thing_new("player1", point(x, y));
+      if (! t) {
+        DIE("Failed to create player");
+      }
+
+      FOR_ALL_BODYPART(e)
+      {
+        auto b = level->thing_new(tp_random_bodypart(e), point(x, y));
+        t->bodypart_add(b, e);
+      }
+
       if (0) {
         auto k = level->thing_new("key", point(x, y));
         t->carry(k, carry_options);
       }
       if (1) {
-        auto w = level->thing_new("sword_wood", point(x, y));
+        auto w = level->thing_new("sword_rusty", point(x, y));
         t->carry(w, carry_options);
       }
       if (1) {
@@ -217,6 +228,10 @@ void Game::place_player(void)
       }
       if (0) {
         auto r1 = level->thing_new("ring_shield", point(x, y));
+        t->carry(r1, carry_options);
+      }
+      if (0) {
+        auto r1 = level->thing_new("shield_eagle", point(x, y));
         t->carry(r1, carry_options);
       }
       if (0) {

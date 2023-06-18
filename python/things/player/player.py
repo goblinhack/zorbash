@@ -214,10 +214,6 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.gfx_pixelart_bounce_on_move(self, True)
     my.gfx_pixelart_flickers(self, True)
     my.gfx_pixelart_reflection(self, True)
-    my.gfx_pixelart_shadow(self, True)
-    my.gfx_pixelart_shadow_short(self, True)
-    my.gfx_pixelart_show_outlined(self, True)
-    my.gfx_pixelart_show_square_outlined(self, True)
     my.gfx_pixelart_submergible(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "100")
@@ -323,9 +319,12 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.thing_size(self, my.THING_SIZE_NORMAL)
     my.tick_prio(self, my.MAP_TICK_PRIO_HIGH)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_Z_PRIO_PLAYER)
+    my.z_prio(self, my.MAP_Z_PRIO_PLAYER_TORSO)
     # end sort marker
 
+    #
+    # The player tiles are not really used - just as a sync mechanism for the body parts
+    #
     delay = 900
     my.tile(self, ascii_fg_char="@", ascii_fg_col_name="pink", ascii_bg_col_name="",
             tile=name + ".1", is_dir_left=True, is_moving=True, delay_ms=delay, frame=1)
@@ -453,12 +452,6 @@ def tp_init(name, text_long_name, text_short_name, title):
 def init():
     tp_init(
         name="player1",
-        text_long_name="noble warrior",
-        title="Ser Hackalot",
-        text_short_name="you",
-    )
-    tp_init(
-        name="player2",
         text_long_name="noble warrior",
         title="Ser Deadalot",
         text_short_name="you",

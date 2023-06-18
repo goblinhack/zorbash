@@ -383,6 +383,9 @@ public:
   ThingId equip_id_carry_anim_set(ThingId, int equip);
   ThingId equip_id_use_anim_set(ThingId, int equip);
 
+  ThingId bodypart_id_get(int bodypart);
+  void    bodypart_id_set(ThingId, int bodypart);
+
   ThingDangerLevel danger_level(Thingp it);
 
   Thingp bag_what_is_at(point pos);
@@ -391,7 +394,9 @@ public:
   Thingp buff_find(const std::string &);
   Thingp debuff_find(const std::string &);
   Thingp equip_carry_anim(int equip);
+  Thingp bodypart_carry_anim(int bodypart);
   Thingp equip_get(int equip);
+  Thingp bodypart_get(int bodypart);
   Thingp equip_use_anim(int equip);
   Thingp immediate_mob(void);
   Thingp immediate_owner(void);
@@ -455,6 +460,7 @@ public:
   bool bag_place_at(Thingp item, point pos);
   bool bag_remove_at(Thingp item, point pos);
   bool bag_remove(Thingp);
+  bool bodypart_add(Thingp w, int bodypart);
   bool bounce(float bounce_height, float bounce_fade, ts_t ms, int bounce_count);
   bool buff_add_if_not_found(Tpp what);
   bool buff_add(Thingp it);
@@ -552,6 +558,7 @@ public:
   bool is_adjacent(const Thingp);
   bool is_blocking_terrain(const Thingp it);
   bool is_bloodied(void);
+  bool is_bodypart(Thingp item);
   bool is_carrying_an_item(void);
   bool is_carrying_treasure(void);
   bool is_disliked_by_me(const point p);
@@ -1425,6 +1432,12 @@ public:
   int is_block_of_ice(void);
   int is_bloodbug(void);
   int is_blood(void);
+  int is_bodypart_eyes(void);
+  int is_bodypart_face(void);
+  int is_bodypart_hair(void);
+  int is_bodypart_hat(void);
+  int is_bodypart_legs(void);
+  int is_bodypart_torso(void);
   int is_bones(void);
   int is_boots(void);
   int is_brazier(void);
@@ -1453,8 +1466,8 @@ public:
   int is_critical_to_level(void);
   int is_crushable(void);
   int is_crystal(void);
-  int is_cursor_can_hover_over(void);
   int is_cursor_can_hover_over_needs_confirm(void);
+  int is_cursor_can_hover_over(void);
   int is_cursor_path_blocker(void);
   int is_cursor_path_hazard(void);
   int is_cursor_path(void);
@@ -1734,12 +1747,6 @@ public:
   int is_unused_flag131(void);
   int is_unused_flag132(void);
   int is_unused_flag133(void);
-  int is_unused_flag134(void);
-  int is_unused_flag135(void);
-  int is_unused_flag136(void);
-  int is_unused_flag137(void);
-  int is_unused_flag138(void);
-  int is_unused_flag139(void);
   int is_unused_flag13(void);
   int is_unused_flag142(void);
   int is_unused_flag14(void);
@@ -2551,6 +2558,7 @@ public:
   void blit_wall_cladding(point tl, point br, const ThingTiles *tiles);
   void blit_wall_shadow(point tl, point br, const ThingTiles *tiles);
   void block_of_ice_tick(void);
+  void bodypart_remove(int equip);
   void born_set(point3d);
   void botcon(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void botcon_(const char *fmt, va_list args); // compile error without
@@ -2859,6 +2867,7 @@ bool things_overlap(Thingp t, fpoint t_at, Thingp o);
 int bag_estimate_volume(const std::list< Thingp > &items);
 
 std::string equip_name(int equip);
+std::string bodypart_name(int bodypart);
 
 extern Thingp g_debug_thing;
 

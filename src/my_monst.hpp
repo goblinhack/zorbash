@@ -57,6 +57,16 @@ enum {
   MONST_EQUIP_MAX,
 };
 
+enum {
+  BODYPART_HAT,
+  BODYPART_HAIR,
+  BODYPART_FACE,
+  BODYPART_TORSO,
+  BODYPART_LEGS,
+  BODYPART_EYES,
+  BODYPART_MAX,
+};
+
 //
 // Search priorities in order
 //
@@ -70,6 +80,8 @@ enum {
 #define MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED 6
 
 #define FOR_ALL_EQUIP(_equip_) for (auto _equip_ = 0; _equip_ < MONST_EQUIP_MAX; _equip_++)
+
+#define FOR_ALL_BODYPART(_bodypart_) for (auto _bodypart_ = 0; _bodypart_ < BODYPART_MAX; _bodypart_++)
 
 #define FOR_ALL_BUFFS(_id_)          for (auto _id_ : itemsp()->buffs)
 #define FOR_ALL_BUFFS_FOR(_t_, _id_) for (auto _id_ : (_t_)->itemsp()->buffs)
@@ -290,6 +302,7 @@ public:
   std::array< ThingId, MONST_EQUIP_MAX > equip_id {};
   std::array< ThingId, MONST_EQUIP_MAX > equip_id_carry_anim {};
   std::array< ThingId, MONST_EQUIP_MAX > equip_id_use_anim {};
+  std::array< ThingId, BODYPART_MAX >    bodypart_id {};
 
   point bag_position {-1, -1};
   point last_bag_position {-1, -1};

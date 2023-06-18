@@ -41,6 +41,16 @@ void Thing::hide(void)
     }
   }
 
+  FOR_ALL_BODYPART(e)
+  {
+    if (bodypart_id_get(e).ok()) {
+      auto w = level->thing_find(bodypart_id_get(e));
+      if (w) {
+        w->hide();
+      }
+    }
+  }
+
   auto id = on_fire_anim_id();
   if (id.ok()) {
     TRACE_NO_INDENT();

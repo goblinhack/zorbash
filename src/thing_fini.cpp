@@ -63,6 +63,8 @@ void Thing::destroy(void)
 
   FOR_ALL_EQUIP(e) { unequip("unequip item as owner is destroyed", e, false); }
 
+  FOR_ALL_BODYPART(e) { bodypart_remove(e); }
+
   //
   // Remove buffs etc... in destroy as it can be intereting for the player to be
   // able to see what they had when dead.

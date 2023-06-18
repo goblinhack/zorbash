@@ -20,7 +20,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
     if (game->tick_current_is_too_slow) {
 #ifdef DEBUG_ANIM
       if (debug || is_debug_type()) {
-        con("Animate: too slow, kill tmp thing");
+        dbg("Animate: too slow, kill tmp thing");
       }
 #endif
       dead_scheduled("by end of anim; too slow");

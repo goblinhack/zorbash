@@ -440,6 +440,12 @@ int Tp::is_biome_unused(void) const { return _is_biome_unused; }
 int Tp::is_bleeder(void) const { return _is_bleeder; }
 int Tp::is_block_of_ice(void) const { return _is_block_of_ice; }
 int Tp::is_bloodbug(void) const { return _is_bloodbug; }
+int Tp::is_bodypart_eyes(void) const { return _is_bodypart_eyes; }
+int Tp::is_bodypart_face(void) const { return _is_bodypart_face; }
+int Tp::is_bodypart_hair(void) const { return _is_bodypart_hair; }
+int Tp::is_bodypart_hat(void) const { return _is_bodypart_hat; }
+int Tp::is_bodypart_legs(void) const { return _is_bodypart_legs; }
+int Tp::is_bodypart_torso(void) const { return _is_bodypart_torso; }
 int Tp::is_bones(void) const { return _is_bones; }
 int Tp::is_boots(void) const { return _is_boots; }
 int Tp::is_brazier(void) const { return _is_brazier; }
@@ -466,8 +472,8 @@ int Tp::is_crab(void) const { return _is_crab; }
 int Tp::is_critical_to_level(void) const { return _is_critical_to_level; }
 int Tp::is_crushable(void) const { return _is_crushable; }
 int Tp::is_crystal(void) const { return _is_crystal; }
-int Tp::is_cursor_can_hover_over(void) const { return _is_cursor_can_hover_over; }
 int Tp::is_cursor_can_hover_over_needs_confirm(void) const { return _is_cursor_can_hover_over_needs_confirm; }
+int Tp::is_cursor_can_hover_over(void) const { return _is_cursor_can_hover_over; }
 int Tp::is_cursor_path_blocker(void) const { return _is_cursor_path_blocker; }
 int Tp::is_cursor_path_hazard(void) const { return _is_cursor_path_hazard; }
 int Tp::is_cursor_path(void) const { return _is_cursor_path; }
@@ -743,12 +749,6 @@ int Tp::is_unused_flag130(void) const { return _is_unused_flag130; }
 int Tp::is_unused_flag131(void) const { return _is_unused_flag131; }
 int Tp::is_unused_flag132(void) const { return _is_unused_flag132; }
 int Tp::is_unused_flag133(void) const { return _is_unused_flag133; }
-int Tp::is_unused_flag134(void) const { return _is_unused_flag134; }
-int Tp::is_unused_flag135(void) const { return _is_unused_flag135; }
-int Tp::is_unused_flag136(void) const { return _is_unused_flag136; }
-int Tp::is_unused_flag137(void) const { return _is_unused_flag137; }
-int Tp::is_unused_flag138(void) const { return _is_unused_flag138; }
-int Tp::is_unused_flag139(void) const { return _is_unused_flag139; }
 int Tp::is_unused_flag13(void) const { return _is_unused_flag13; }
 int Tp::is_unused_flag142(void) const { return _is_unused_flag142; }
 int Tp::is_unused_flag14(void) const { return _is_unused_flag14; }
@@ -1189,6 +1189,12 @@ void Tp::is_biome_unused_set(int v) { _is_biome_unused = v; }
 void Tp::is_bleeder_set(int v) { _is_bleeder = v; }
 void Tp::is_block_of_ice_set(int v) { _is_block_of_ice = v; }
 void Tp::is_bloodbug_set(int v) { _is_bloodbug = v; }
+void Tp::is_bodypart_eyes_set(int v) { _is_bodypart_eyes = v; }
+void Tp::is_bodypart_face_set(int v) { _is_bodypart_face = v; }
+void Tp::is_bodypart_hair_set(int v) { _is_bodypart_hair = v; }
+void Tp::is_bodypart_hat_set(int v) { _is_bodypart_hat = v; }
+void Tp::is_bodypart_legs_set(int v) { _is_bodypart_legs = v; }
+void Tp::is_bodypart_torso_set(int v) { _is_bodypart_torso = v; }
 void Tp::is_bones_set(int v) { _is_bones = v; }
 void Tp::is_boots_set(int v) { _is_boots = v; }
 void Tp::is_brazier_set(int v) { _is_brazier = v; }
@@ -1215,8 +1221,8 @@ void Tp::is_crab_set(int v) { _is_crab = v; }
 void Tp::is_critical_to_level_set(int v) { _is_critical_to_level = v; }
 void Tp::is_crushable_set(int v) { _is_crushable = v; }
 void Tp::is_crystal_set(int v) { _is_crystal = v; }
-void Tp::is_cursor_can_hover_over_set(int v) { _is_cursor_can_hover_over = v; }
 void Tp::is_cursor_can_hover_over_needs_confirm_set(int v) { _is_cursor_can_hover_over_needs_confirm = v; }
+void Tp::is_cursor_can_hover_over_set(int v) { _is_cursor_can_hover_over = v; }
 void Tp::is_cursor_path_blocker_set(int v) { _is_cursor_path_blocker = v; }
 void Tp::is_cursor_path_hazard_set(int v) { _is_cursor_path_hazard = v; }
 void Tp::is_cursor_path_set(int v) { _is_cursor_path = v; }
@@ -1492,12 +1498,6 @@ void Tp::is_unused_flag130_set(int v) { _is_unused_flag130 = v; }
 void Tp::is_unused_flag131_set(int v) { _is_unused_flag131 = v; }
 void Tp::is_unused_flag132_set(int v) { _is_unused_flag132 = v; }
 void Tp::is_unused_flag133_set(int v) { _is_unused_flag133 = v; }
-void Tp::is_unused_flag134_set(int v) { _is_unused_flag134 = v; }
-void Tp::is_unused_flag135_set(int v) { _is_unused_flag135 = v; }
-void Tp::is_unused_flag136_set(int v) { _is_unused_flag136 = v; }
-void Tp::is_unused_flag137_set(int v) { _is_unused_flag137 = v; }
-void Tp::is_unused_flag138_set(int v) { _is_unused_flag138 = v; }
-void Tp::is_unused_flag139_set(int v) { _is_unused_flag139 = v; }
 void Tp::is_unused_flag13_set(int v) { _is_unused_flag13 = v; }
 void Tp::is_unused_flag142_set(int v) { _is_unused_flag142 = v; }
 void Tp::is_unused_flag14_set(int v) { _is_unused_flag14 = v; }

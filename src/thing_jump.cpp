@@ -433,24 +433,24 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   {
     if (equip_id_carry_anim(e).ok()) {
       auto id = equip_id_carry_anim(e);
-      auto w  = level->thing_find(id);
-      if (w) {
-        w->move_to_immediately(curr_at);
+      auto it = level->thing_find(id);
+      if (it) {
+        it->move_to_immediately(curr_at);
         if (g_opt_ascii || ! is_visible_to_player) {
           //
           // Ascii mode, jump is immediate
           //
         } else {
-          w->is_jumping = true;
+          it->is_jumping = true;
 
           auto callback = std::bind(&Thing::visible, this);
           if (! is_being_destroyed) {
             if (is_player()) {
-              level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
-                                           (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()), callback);
+              level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(it->tile_curr),
+                                           (it->is_dir_br() || it->is_dir_right() || it->is_dir_tr()), callback);
             } else {
-              level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
-                                           (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()), callback);
+              level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(it->tile_curr),
+                                           (it->is_dir_br() || it->is_dir_right() || it->is_dir_tr()), callback);
             }
           }
         }
@@ -459,15 +459,15 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
 
     if (equip_id_use_anim(e).ok()) {
       auto id = equip_id_use_anim(e);
-      auto w  = level->thing_find(equip_id_use_anim(e));
-      if (w) {
-        w->move_to_immediately(curr_at);
+      auto it = level->thing_find(equip_id_use_anim(e));
+      if (it) {
+        it->move_to_immediately(curr_at);
         if (g_opt_ascii || ! is_visible_to_player) {
           //
           // Ascii mode, jump is immediate
           //
         } else {
-          w->is_jumping = true;
+          it->is_jumping = true;
 
           //
           // No, the weapon is shown as carry anim
@@ -475,11 +475,40 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
           auto callback = std::bind(&Thing::visible, this);
           if (! is_being_destroyed) {
             if (is_player()) {
-              level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
-                                           (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()), callback);
+              level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(it->tile_curr),
+                                           (it->is_dir_br() || it->is_dir_right() || it->is_dir_tr()), callback);
             } else {
-              level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
-                                           (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()), callback);
+              level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(it->tile_curr),
+                                           (it->is_dir_br() || it->is_dir_right() || it->is_dir_tr()), callback);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  FOR_ALL_BODYPART(e)
+  {
+    auto id = bodypart_id_get(e);
+    if (id.ok()) {
+      auto it = level->thing_find(id);
+      if (it) {
+        it->move_to_immediately(curr_at);
+        if (g_opt_ascii || ! is_visible_to_player) {
+          //
+          // Ascii mode, jump is immediate
+          //
+        } else {
+          it->is_jumping = true;
+
+          auto callback = std::bind(&Thing::visible, this);
+          if (! is_being_destroyed) {
+            if (is_player()) {
+              level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(it->tile_curr),
+                                           (it->is_dir_br() || it->is_dir_right() || it->is_dir_tr()), callback);
+            } else {
+              level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(it->tile_curr),
+                                           (it->is_dir_br() || it->is_dir_right() || it->is_dir_tr()), callback);
             }
           }
         }
@@ -491,23 +520,23 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   if (on_fire_id.ok()) {
     TRACE_NO_INDENT();
     auto id = on_fire_id;
-    auto w  = level->thing_find(id);
-    if (w) {
-      w->move_to_immediately(curr_at);
+    auto it = level->thing_find(id);
+    if (it) {
+      it->move_to_immediately(curr_at);
       if (g_opt_ascii || ! is_visible_to_player) {
         //
         // Ascii mode, jump is immediate
         //
       } else {
-        w->is_jumping = true;
+        it->is_jumping = true;
       }
       if (! is_being_destroyed) {
         if (is_player()) {
-          level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
-                                       (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
+          level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(it->tile_curr),
+                                       (it->is_dir_br() || it->is_dir_right() || it->is_dir_tr()));
         } else {
-          level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
-                                       (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
+          level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(it->tile_curr),
+                                       (it->is_dir_br() || it->is_dir_right() || it->is_dir_tr()));
         }
       }
     }
@@ -786,22 +815,33 @@ void Thing::jump_end(void)
   //
   FOR_ALL_EQUIP(e)
   {
-    auto w = equip_get(e);
-    if (w) {
-      w->is_jumping = false;
+    auto it = equip_get(e);
+    if (it) {
+      it->is_jumping = false;
     }
 
     if (equip_id_carry_anim(e).ok()) {
-      auto w = level->thing_find(equip_id_carry_anim(e));
-      if (w) {
-        w->is_jumping = false;
+      auto it = level->thing_find(equip_id_carry_anim(e));
+      if (it) {
+        it->is_jumping = false;
       }
     }
 
     if (equip_id_use_anim(e).ok()) {
-      auto w = level->thing_find(equip_id_use_anim(e));
-      if (w) {
-        w->is_jumping = false;
+      auto it = level->thing_find(equip_id_use_anim(e));
+      if (it) {
+        it->is_jumping = false;
+      }
+    }
+  }
+
+  FOR_ALL_BODYPART(e)
+  {
+    auto id = bodypart_id_get(e);
+    if (id.ok()) {
+      auto it = level->thing_find(id);
+      if (it) {
+        it->is_jumping = false;
       }
     }
   }
@@ -817,9 +857,9 @@ void Thing::jump_end(void)
   auto on_fire_id = on_fire_anim_id();
   if (on_fire_id.ok()) {
     TRACE_NO_INDENT();
-    auto w = level->thing_find(on_fire_id);
-    if (w) {
-      w->is_jumping = false;
+    auto it = level->thing_find(on_fire_id);
+    if (it) {
+      it->is_jumping = false;
     }
   }
 

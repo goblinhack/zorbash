@@ -1179,21 +1179,20 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
           //
           // Compensate for the one pixel of outline
           //
-          tile_blit_outline(tile, point(blit_tl.x, blit_tl.y - 1), point(blit_br.x, blit_br.y - 1), c,
-                            square_outline);
+          tile_blit_outline(tile, point(blit_tl.x, blit_tl.y), point(blit_br.x, blit_br.y), c, square_outline);
         } else {
           tile_blit(tile, blit_tl, blit_br);
         }
         if (is_frozen) {
           if (outline) {
-            tile_blit_frozen(tile, point(blit_tl.x, blit_tl.y - 1), point(blit_br.x, blit_br.y - 1));
+            tile_blit_frozen(tile, point(blit_tl.x, blit_tl.y), point(blit_br.x, blit_br.y));
           } else {
             tile_blit_frozen(tile, blit_tl, blit_br);
           }
         }
         if (is_burnt) {
           if (outline) {
-            tile_blit_burnt(tile, point(blit_tl.x, blit_tl.y - 1), point(blit_br.x, blit_br.y - 1));
+            tile_blit_burnt(tile, point(blit_tl.x, blit_tl.y), point(blit_br.x, blit_br.y));
           } else {
             tile_blit_burnt(tile, blit_tl, blit_br);
           }

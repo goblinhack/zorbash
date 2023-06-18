@@ -46,7 +46,12 @@ void py_my_module_add_stat_consts(void)
   PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_ITEM", MAP_Z_PRIO_ITEM);
   PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_MONST", MAP_Z_PRIO_MONST);
   PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_BIG_MONST", MAP_Z_PRIO_BIG_MONST);
-  PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_PLAYER", MAP_Z_PRIO_PLAYER);
+  PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_PLAYER_LEGS", MAP_Z_PRIO_PLAYER_LEGS);
+  PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_PLAYER_TORSO", MAP_Z_PRIO_PLAYER_TORSO);
+  PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_PLAYER_FACE", MAP_Z_PRIO_PLAYER_FACE);
+  PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_PLAYER_EYES", MAP_Z_PRIO_PLAYER_EYES);
+  PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_PLAYER_HAIR", MAP_Z_PRIO_PLAYER_HAIR);
+  PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_PLAYER_HAT", MAP_Z_PRIO_PLAYER_HAT);
   PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_RING", MAP_Z_PRIO_RING);
   PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_SWING", MAP_Z_PRIO_SWING);
   PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_WEB", MAP_Z_PRIO_WEB);

@@ -233,6 +233,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingItemsp & > my)
   in >> bits(my.t->equip_id);
   in >> bits(my.t->equip_id_carry_anim);
   in >> bits(my.t->equip_id_use_anim);
+  in >> bits(my.t->bodypart_id);
   in >> bits(my.t->bag_position);
   in >> bits(my.t->last_bag_position);
   in >> bits(my.t->where_i_dropped_an_item_last);

@@ -22,7 +22,7 @@ enum {
 };
 
 //
-// This is a sub level of sorting in addition ot MAP_DEPTH. It allows
+// This is a sub level of sorting in addition to MAP_DEPTH. It allows
 // for example OBJs to be sorted. It's really only used for that layer
 // but could potentially be used by others.
 //
@@ -34,7 +34,12 @@ enum {
   MAP_Z_PRIO_FIRE,          // Flames!
   MAP_Z_PRIO_MONST,         // Spiders and more! Want monsters in front of fire, so you can see bats for e.g.
   MAP_Z_PRIO_FOLIAGE,       // In front of monsters so they hide
-  MAP_Z_PRIO_PLAYER,        // In front of foliage else we get lost!
+  MAP_Z_PRIO_PLAYER_LEGS,   // In front of foliage else we get lost!
+  MAP_Z_PRIO_PLAYER_TORSO,  // In front of foliage else we get lost!
+  MAP_Z_PRIO_PLAYER_FACE,   // In front of foliage else we get lost!
+  MAP_Z_PRIO_PLAYER_EYES,   // In front of foliage else we get lost!
+  MAP_Z_PRIO_PLAYER_HAIR,   // In front of foliage else we get lost!
+  MAP_Z_PRIO_PLAYER_HAT,    // In front of foliage else we get lost!
   MAP_Z_PRIO_CARRY,         // e.g. armor, swords
   MAP_Z_PRIO_CLOAK,         // Clock should be over armor?
   MAP_Z_PRIO_RING,          // Carried rings

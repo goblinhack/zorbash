@@ -402,7 +402,7 @@ bool Thing::unequip_me_from_owner(const char *why, bool allowed_to_recarry)
 
   auto o = top_owner();
   if (! o) {
-    err("Could not unequp; no owner");
+    err("Could not unequip; no owner");
     return false;
   }
 
@@ -412,7 +412,7 @@ bool Thing::unequip_me_from_owner(const char *why, bool allowed_to_recarry)
       return o->unequip(why, e, allowed_to_recarry);
     }
   }
-  err("Could not unequp; item not found in equipment");
+  err("Could not unequip; item not found in equipment");
   return false;
 }
 
