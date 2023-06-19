@@ -12,6 +12,11 @@ void Level::cursor_describe(void)
     return;
   }
 
+  //
+  // Clear the botcon if moving the mouse around.
+  //
+  BOTCON(" ");
+
   dbg("Cursor describe");
   if (! cursor) {
     return;
