@@ -600,6 +600,7 @@ public:
   void unset_request_to_update_inventory_with_thing_over(void);
   void unset_request_to_update_inventory_with_thing_selected(void);
   void unset_request_to_update_same_level(void);
+  void wid_choose_avatar_select(void);
   void wid_choose_from_skill_tree(std::string tree_name);
   void wid_choose_initial_dungeons(void);
   void wid_choose_next_dungeons(Levelp, bool is_ascending, bool is_descending);

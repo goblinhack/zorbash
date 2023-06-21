@@ -64,6 +64,14 @@ static uint8_t wid_choose_player_name(Widp w, int x, int y, uint32_t button)
   return false;
 }
 
+static uint8_t wid_choose_avatar(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  game->wid_choose_avatar_select();
+  wid_main_menu_destroy();
+  return false;
+}
+
 static uint8_t wid_main_menu_credits_game(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
@@ -390,7 +398,7 @@ void Game::wid_main_menu_select(void)
   if (g_opt_ascii) {
     menu_height = 14;
   } else {
-    menu_height = 22;
+    menu_height = 25;
   }
 
   point tl;
@@ -446,6 +454,24 @@ void Game::wid_main_menu_select(void)
     wid_set_on_mouse_up(w, wid_choose_player_name);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=" UI_TEXT_COLOR_STR "$Choose player name");
+  }
+  if (! g_opt_ascii) {
+    y_at += box_step;
+    {
+      TRACE_NO_INDENT();
+      auto p = wid_main_menu_window->wid_text_area->wid_text_area;
+      auto w = wid_new_square_button(p, "Choose avatar");
+
+      point tl = make_point(0, y_at);
+      point br = make_point(width, y_at + box_height - 1);
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
+      wid_set_on_mouse_up(w, wid_choose_avatar);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, "%%fg=" UI_TEXT_COLOR_STR "$Choose avatar (TODO)");
+    }
   }
   y_at += box_step;
   {
