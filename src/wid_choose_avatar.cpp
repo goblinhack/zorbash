@@ -6,6 +6,7 @@
 #include "my_game.hpp"
 #include "my_globals_extra.hpp"
 #include "my_monst.hpp"
+#include "my_sdl_proto.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_ui.hpp"
@@ -15,7 +16,61 @@
 #include "my_wid_skillbox.hpp"
 #include "my_wid_thing_info.hpp"
 
-WidPopup *wid_avatar;
+WidPopup *wid_choose_avatar;
+
+static void wid_choose_avatar_destroy(void)
+{
+  TRACE_AND_INDENT();
+  delete wid_choose_avatar;
+  wid_choose_avatar = nullptr;
+}
+
+static uint8_t wid_choose_avatar_cancel(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  wid_choose_avatar_destroy();
+  game->wid_main_menu_select();
+  return true;
+}
+
+static uint8_t wid_choose_avatar_key_up(Widp w, const struct SDL_Keysym *key)
+{
+  TRACE_AND_INDENT();
+
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
+
+  switch (key->mod) {
+    case KMOD_LCTRL :
+    case KMOD_RCTRL :
+    default :
+      switch (key->sym) {
+        default :
+          {
+            TRACE_AND_INDENT();
+            auto c = wid_event_to_char(key);
+            switch (c) {
+              case 'b' :
+              case SDLK_ESCAPE : wid_choose_avatar_cancel(nullptr, 0, 0, 0); return true;
+            }
+          }
+      }
+  }
+
+  return false;
+}
+
+static uint8_t wid_choose_avatar_key_down(Widp w, const struct SDL_Keysym *key)
+{
+  TRACE_AND_INDENT();
+
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
+
+  return true;
+}
 
 void Game::wid_choose_avatar_select(void)
 {
@@ -32,11 +87,14 @@ void Game::wid_choose_avatar_select(void)
   auto  avatar_height = TERM_HEIGHT / 4 * 3;
   point tl;
   point br(avatar_width, avatar_height);
-  wid_avatar = new WidPopup("Avatar", tl, br, nullptr, "", true, false);
-  wid_avatar->log("Choose an avatar, pathetic mortal");
-  auto avatar_container = wid_avatar->wid_popup_container;
-  avatar_container      = wid_avatar->wid_popup_container;
+  wid_choose_avatar = new WidPopup("Avatar", tl, br, nullptr, "", true, false);
+  wid_choose_avatar->log("Choose an avatar, pathetic mortal");
+  auto avatar_container = wid_choose_avatar->wid_popup_container;
+  avatar_container      = wid_choose_avatar->wid_popup_container;
   wid_move_to_pct_centered(avatar_container, 0.5, 0.5);
+
+  wid_set_on_key_up(avatar_container, wid_choose_avatar_key_up);
+  wid_set_on_key_down(avatar_container, wid_choose_avatar_key_down);
 
   auto button_width        = 6;
   auto y_at                = 4;
@@ -44,13 +102,10 @@ void Game::wid_choose_avatar_select(void)
   auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
 
   for (auto bodypart = 0; bodypart < BODYPART_MAX; bodypart++) {
-    /////////////////////////////////////////////////////////////////////////
-    // resolution
-    /////////////////////////////////////////////////////////////////////////
     y_at += 4;
     {
       TRACE_AND_INDENT();
-      auto p = wid_avatar->wid_text_area->wid_text_area;
+      auto p = wid_choose_avatar->wid_text_area->wid_text_area;
       auto w = wid_new_square_button(p, "body part");
 
       point tl = make_point(0, y_at);
@@ -62,7 +117,7 @@ void Game::wid_choose_avatar_select(void)
     }
     {
       TRACE_AND_INDENT();
-      auto p = wid_avatar->wid_text_area->wid_text_area;
+      auto p = wid_choose_avatar->wid_text_area->wid_text_area;
       auto w = wid_new_square_button(p, "<");
 
       point tl = make_point(button_width + 0, y_at - 1);
@@ -72,12 +127,12 @@ void Game::wid_choose_avatar_select(void)
       wid_set_mode(w, WID_MODE_NORMAL);
       wid_set_style(w, box_style);
       wid_set_pos(w, tl, br);
-      // wid_set_on_mouse_up(w, wid_config_gfx_resolution_incr);
+      // wid_set_on_mouse_up(w, xxx);
       wid_set_text(w, "<");
     }
     {
       TRACE_AND_INDENT();
-      auto p = wid_avatar->wid_text_area->wid_text_area;
+      auto p = wid_choose_avatar->wid_text_area->wid_text_area;
       auto w = wid_new_square_button(p, ">");
 
       point tl = make_point(button_width + 5, y_at - 1);
@@ -87,14 +142,14 @@ void Game::wid_choose_avatar_select(void)
       wid_set_mode(w, WID_MODE_NORMAL);
       wid_set_style(w, box_style);
       wid_set_pos(w, tl, br);
-      // wid_set_on_mouse_up(w, wid_config_gfx_resolution_decr);
+      // wid_set_on_mouse_up(w, xxx);
       wid_set_text(w, ">");
     }
   }
 
   {
     TRACE_AND_INDENT();
-    auto p = wid_avatar->wid_text_area->wid_text_area;
+    auto p = wid_choose_avatar->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "avatar");
 
     point tl = make_point(button_width + 11, 3);
@@ -106,6 +161,5 @@ void Game::wid_choose_avatar_select(void)
     wid_set_color(w, WID_COLOR_BG, BLACK);
     wid_set_style(w, UI_WID_STYLE_SOLID_DEFAULT);
     wid_set_pos(w, tl, br);
-    // wid_set_on_mouse_up(w, wid_config_gfx_resolution_decr);
   }
 }
