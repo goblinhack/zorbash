@@ -316,7 +316,7 @@ void Game::wid_choose_from_skill_tree(std::string current_tree_name)
   // Once skills are maxxed out, that's it
   //
   if (player->itemsp()->skills.size() >= UI_INVENTORY_QUICK_ITEMS_MAX) {
-    player->msg("%%fg=red$Your brain is full and cannot fit in any more skillsj%%fg=reset$");
+    player->msg("%%fg=red$Your brain is full and cannot fit in any more skills%%fg=reset$");
     return;
   }
 
