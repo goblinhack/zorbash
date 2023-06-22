@@ -119,6 +119,12 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     return nullptr;
   }
 
+  if (t->text_description_long().empty()) {
+    IF_DEBUG1 { t->log("Create thing info popup; no, has no text"); }
+    wid_thing_info_fini("has no text");
+    t->show_botcon_description();
+    return nullptr;
+  }
   auto tp    = t->tp();
   auto tiles = &tp->tiles;
   auto tile  = tile_first(tiles);
@@ -127,19 +133,12 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     return nullptr;
   }
 
-  if (t->text_description_long().empty()) {
-    IF_DEBUG1 { t->log("Create thing info popup; no, has no text"); }
-    wid_thing_info_fini("has no text");
-    t->show_botcon_description();
-    return nullptr;
-  }
-
   //  backtrace_dump();
   auto wid_popup_window = new WidPopup("Thing info", tl, br, nullptr, "", true, false);
 
   wid_popup_window->t = t;
 
-  if (! g_opt_ascii) {
+  if (! t->is_player() && ! g_opt_ascii) {
     if (tile->pix_height <= 32) {
       {
         TRACE_AND_INDENT();
