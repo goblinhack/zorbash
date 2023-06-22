@@ -819,6 +819,7 @@ int main(int argc, char *argv[])
     game->save_config();
     g_errored = false;
   }
+  CON("INI: Loaded");
 
   if (! sdl_init()) {
     ERR("SDL: Init");
@@ -855,11 +856,12 @@ int main(int argc, char *argv[])
 
   CON("INI: Load early gfx tiles, text, UI etc...");
   gfx_init();
+  CON("INI: Loaded");
 
   //
   // Random number
   //
-  CON("INI: Init random seed");
+  LOG("INI: Init random seed");
   double                             mean = 1.0;
   double                             std  = 0.5;
   std::normal_distribution< double > distribution;
@@ -877,20 +879,23 @@ int main(int argc, char *argv[])
   }
 #endif
 
-  CON("INI: Load UI fonts");
+  CON("INI: Load fonts");
   if (! font_init()) {
     ERR("Font init");
   }
+  CON("INI: Loaded");
 
-  CON("INI: Load UI widgets");
+  CON("INI: Load widgets");
   if (! wid_init()) {
     ERR("Wid init");
   }
+  CON("INI: Loaded");
 
-  CON("INI: Load UI console");
+  CON("INI: Load console");
   if (! wid_console_init()) {
     ERR("Wid_console init");
   }
+  CON("INI: Loaded");
   wid_toggle_hidden(wid_console_window);
   flush_the_console();
 
@@ -901,92 +906,94 @@ int main(int argc, char *argv[])
   CON("INI: Original program name: %s", original_program_name.c_str());
   flush_the_console();
 
-  CON("INI: Load UI tiles");
+  CON("INI: Load tiles");
   if (! wid_tiles_init()) {
     ERR("Wid tiles init");
   }
-  flush_the_console();
 
-  CON("INI: Load other tiles");
   if (! tile_init()) {
     ERR("Tile init");
   }
+  CON("INI: Loaded");
   flush_the_console();
 
   CON("INI: Load textures");
   if (! tex_init()) {
     ERR("Tex init");
   }
-  CON("INI: Inited textures");
+  CON("INI: Loaded");
   flush_the_console();
 
-  CON("INI: Init audio");
+  CON("INI: Load audio");
   if (! audio_init()) {
     ERR("Audio init");
   }
-  CON("INI: Inited audio");
+  CON("INI: Loaded");
   flush_the_console();
 
   CON("INI: Load music");
   if (! music_init()) {
     ERR("Music init");
   }
-  CON("INI: Loaded music");
+  CON("INI: Loaded");
   flush_the_console();
 
   CON("INI: Load sound");
   if (! sound_init()) {
     ERR("Sound init");
   }
+  CON("INI: Loaded");
   flush_the_console();
 
-  CON("INI: Init UI topcon");
+  LOG("INI: Init UI topcon");
   if (! wid_topcon_init()) {
     ERR("Wid_topcon init");
   }
-  flush_the_console();
 
-  CON("INI: Init UI actionar");
+  LOG("INI: Init UI actionar");
   wid_actionbar_init();
-  flush_the_console();
 
-  CON("INI: Init UI botcon");
+  LOG("INI: Init UI botcon");
   if (! wid_botcon_init()) {
     ERR("Wid_botcon init");
   }
-  flush_the_console();
 
-  CON("INI: Find resource locations for gfx and music");
+  LOG("INI: Find resource locations for gfx and music");
   find_file_locations();
   flush_the_console();
 
-  CON("INI: Load UI commands");
+  CON("INI: Load commands");
   if (! command_init()) {
     ERR("Command init");
   }
+  CON("INI: Loaded");
   flush_the_console();
 
   CON("INI: Load dungeon character maps");
   Charmap::init_charmaps();
+  CON("INI: Loaded");
   flush_the_console();
 
-  CON("INI: Python init");
+  CON("INI: Load python");
   py_init(argv);
   if (g_errored) {
     goto loop;
   }
+  CON("INI: Loaded");
   flush_the_console();
 
+  CON("INI: Load python modules");
   py_call_void("init2");
-  CON("INI: Python inited");
+  CON("INI: Loaded");
   flush_the_console();
 
-  CON("INI: Load monster templates");
+  CON("INI: Load monsters");
   pcg_random_allowed++;
   tp_init();
   if (g_errored) {
     goto loop;
   }
+  CON("INI: Loaded");
   flush_the_console();
 
   //
@@ -997,6 +1004,7 @@ int main(int argc, char *argv[])
   if (g_errored) {
     goto loop;
   }
+  CON("INI: Loaded");
   flush_the_console();
 
   wid_topcon_flush();
