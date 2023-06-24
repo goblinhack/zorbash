@@ -5,6 +5,7 @@
 #include "my_ascii.hpp"
 #include "my_game.hpp"
 #include "my_thing.hpp"
+#include "my_wid.hpp"
 
 void Level::display_ascii_lasers(point tl, point br)
 {
@@ -66,7 +67,7 @@ void Level::display_ascii_lasers(point tl, point br)
 
       color c = tile->ascii_fg_col_value;
       c.a     = tile->ascii_fg_alpha;
-      ascii_draw_line_fg4(x0, y0, x1, y1, tile->ascii_fg_char, c);
+      ascii_draw_line(WID_DEPTH_FG_3, x0, y0, x1, y1, tile->ascii_fg_char, c);
     }
 
     return false;

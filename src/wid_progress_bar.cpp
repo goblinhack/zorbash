@@ -72,7 +72,7 @@ void wid_progress_bar(const std::string &title, float pct)
     point br = make_point(x_at + progress_steps - 1, y_at + 3);
     wid_set_pos(w, tl, br);
     wid_set_style(w, UI_WID_STYLE_DARK);
-    wid_set_fg2_tilename(w, tilename);
+    wid_set_tilename(WID_DEPTH_FG_1, w, tilename);
   }
 
   wid_update(wid_progress_bar_window->wid_text_area->wid_text_area);

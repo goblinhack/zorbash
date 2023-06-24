@@ -880,7 +880,7 @@ void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, const c
         wid_set_color(w, WID_COLOR_TEXT_FG, tile->ascii_fg_col_value);
       }
     } else {
-      wid_set_bg_tile(w, t);
+      wid_set_tile(WID_DEPTH_BG_0, w, t);
     }
 
     wid_set_style(w, UI_WID_STYLE_DARK);
@@ -906,14 +906,14 @@ void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, const c
       if (g_opt_ascii) {
         wid_set_text(w, std::to_string(slot + 1));
       } else {
-        wid_set_fg_tilename(w, "key_" + std::to_string(slot + 1));
+        wid_set_tilename(WID_DEPTH_FG_0, w, "key_" + std::to_string(slot + 1));
       }
       wid_set_text_lhs(w, true);
       wid_set_text_top(w, true);
     }
   } else {
     if (! g_opt_ascii) {
-      wid_set_bg_tilename(w, tile_name);
+      wid_set_tilename(WID_DEPTH_BG_0, w, tile_name);
     }
     wid_set_style(w, UI_WID_STYLE_DARK);
   }

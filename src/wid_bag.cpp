@@ -9,6 +9,7 @@
 #include "my_sound.hpp"
 #include "my_thing.hpp"
 #include "my_ui.hpp"
+#include "my_wid.hpp"
 #include "my_wid_bag.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_rightbar.hpp"
@@ -91,7 +92,7 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
         wid_set_color(w, WID_COLOR_TEXT_FG, tile->ascii_fg_col_value);
       }
     } else {
-      wid_set_fg_tile(w, tile);
+      wid_set_tile(WID_DEPTH_FG_0, w, tile);
     }
 
     //
@@ -104,7 +105,7 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
       if (g_opt_ascii) {
         wid_set_text(w, std::to_string(slot + 1));
       } else {
-        wid_set_fg_tilename(w, "key_" + std::to_string(slot + 1));
+        wid_set_tilename(WID_DEPTH_FG_0, w, "key_" + std::to_string(slot + 1));
       }
       wid_set_text_lhs(w, true);
       wid_set_text_top(w, true);
@@ -698,7 +699,7 @@ bool Game::wid_bag_move_item(Thingp t)
   wid_set_do_not_lower(game->in_transit_item, true);
   wid_set_thing_context(game->in_transit_item, t, 0);
   wid_set_on_mouse_up(game->in_transit_item, wid_in_transit_item_place);
-  wid_set_fg_tile(game->in_transit_item, t);
+  wid_set_tile(WID_DEPTH_FG_0, game->in_transit_item, t);
 
   wid_set_moveable(game->in_transit_item, true);
   wid_update(game->in_transit_item);

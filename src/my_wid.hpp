@@ -25,6 +25,22 @@ typedef enum {
 } wid_color;
 
 typedef enum {
+  WID_DEPTH_BG_0,
+  WID_DEPTH_BG_1,
+  WID_DEPTH_FG_0,
+  WID_DEPTH_FG_1,
+  WID_DEPTH_FG_2,
+  WID_DEPTH_FG_3,
+  WID_DEPTH_FG_4,
+  WID_DEPTH_FG_5,
+  WID_DEPTH_FG_6,
+  WID_DEPTH_FG_7,
+  WID_DEPTH_FG_8,
+  WID_DEPTH_FG_9,
+  WID_DEPTH_MAX,
+} wid_depth;
+
+typedef enum {
   WID_MODE_NORMAL,
   WID_MODE_OVER,
   WID_MODE_FOCUS,
@@ -165,6 +181,7 @@ void wid_get_children_size(Widp, int *width, int *height);
 void wid_get_pct(Widp w, double *x, double *y);
 void wid_get_tl_x_tl_y_br_x_br_y(Widp w, int *tl_x, int *tl_y, int *br_x, int *br_y);
 void wid_hide(Widp);
+void wid_ignore_events_briefly(void);
 void wid_joy_button(int x, int y);
 void wid_key_down(const struct SDL_Keysym *, int x, int y);
 void wid_key_up(const struct SDL_Keysym *, int x, int y);
@@ -206,21 +223,16 @@ void wid_resize(Widp w, int width, int height);
 void wid_scroll_text(Widp);
 void wid_scroll_with_input(Widp, std::wstring str);
 void wid_set_active(Widp);
-void wid_set_bg_tilename(Widp, std::string name);
 void wid_set_color(Widp, wid_color col, color val);
 void wid_set_cursor(Widp, uint32_t val);
 void wid_set_debug(Widp, uint8_t);
 void wid_set_do_not_lower(Widp, uint8_t val);
 void wid_set_do_not_raise(Widp, uint8_t val);
-void wid_set_fg2_tilename(Widp, std::string name);
-void wid_set_fg3_tilename(Widp, std::string name);
-void wid_set_fg_tilename(Widp, std::string name);
 void wid_set_focusable(Widp, uint8_t val);
 void wid_set_focus(Widp);
 void wid_set_ignore_events(Widp, uint8_t);
 void wid_set_ignore_scroll_events(Widp, uint8_t);
 void wid_set_int_context(Widp w, int);
-void wid_set_string_context(Widp w, std::string);
 void wid_set_mode(Widp, wid_mode mode);
 void wid_set_moveable_bounded(Widp, uint8_t val);
 void wid_set_moveable_horiz(Widp, uint8_t val);
@@ -251,6 +263,8 @@ void wid_set_received_input(Widp, uint8_t val);
 void wid_set_shape_none(Widp);
 void wid_set_shape_square(Widp);
 void wid_set_show_cursor(Widp, uint8_t val);
+void wid_set_string_context(Widp w, std::string);
+void wid_set_style(Widp w, int style);
 void wid_set_tex_br(Widp, fsize val);
 void wid_set_text_bot(Widp, uint8_t val);
 void wid_set_text_centerx(Widp, uint8_t val);
@@ -264,6 +278,9 @@ void wid_set_text_top(Widp, uint8_t val);
 void wid_set_text(Widp, int);
 void wid_set_text(Widp, std::string);
 void wid_set_text(Widp, std::wstring);
+void wid_set_tile(int depth, Widp w, class Thing_ *t);
+void wid_set_tile(int depth, Widp w, Tilep tile);
+void wid_set_tilename(int depth, Widp, std::string name);
 void wid_set_top(Widp, uint8_t val);
 void wid_set_void_context(Widp w, void *);
 void wid_this_visible(Widp);
@@ -471,10 +488,7 @@ public:
   point abs_tl {};
   point abs_br {};
 
-  Tilep bg_tile {};
-  Tilep fg_tile {};
-  Tilep fg2_tile {};
-  Tilep fg3_tile {};
+  Tilep tiles[ WID_DEPTH_MAX ] = {};
 
   fsize texuv {};
 
@@ -583,16 +597,6 @@ public:
 
 uint8_t wid_is_moving(Widp w);
 
-void wid_set_style(Widp w, int style);
-void wid_set_bg_tile(Widp w, Tilep tile);
-void wid_set_fg_tile(Widp w, Tilep tile);
-void wid_set_fg2_tile(Widp w, Tilep tile);
-void wid_set_fg3_tile(Widp w, Tilep tile);
-void wid_set_bg_tile(Widp w, class Thing_ *t);
-void wid_set_fg_tile(Widp w, class Thing_ *t);
-void wid_set_fg2_tile(Widp w, class Thing_ *t);
-void wid_set_fg3_tile(Widp w, class Thing_ *t);
-void wid_ignore_events_briefly(void);
 bool wid_some_recent_event_occurred(void);
 
 extern bool                                                              wid_mouse_two_clicks;

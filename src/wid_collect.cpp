@@ -512,7 +512,7 @@ void Game::wid_collect_create(const std::list< ThingId > items /* intentional co
             auto tile = tile_first(tiles);
             if (tile) {
               wid_set_style(wid_icon, UI_WID_STYLE_DARK);
-              wid_set_fg_tile(wid_icon, tile);
+              wid_set_tile(WID_DEPTH_FG_0, wid_icon, tile);
             }
           }
         }
@@ -613,7 +613,7 @@ void Game::wid_collect_create(const std::list< ThingId > items /* intentional co
       point tl(0, 0);
       point br(3, 3);
       wid_set_pos(w, tl, br);
-      wid_set_bg_tilename(w, "ui_icon_close");
+      wid_set_tilename(WID_DEPTH_BG_0, w, "ui_icon_close");
       wid_set_on_mouse_down(w, wid_collect_close);
     }
 
@@ -622,7 +622,7 @@ void Game::wid_collect_create(const std::list< ThingId > items /* intentional co
       point tl(wid_width - 3, 0);
       point br(wid_width - 0, 3);
       wid_set_pos(w, tl, br);
-      wid_set_bg_tilename(w, "ui_icon_close");
+      wid_set_tilename(WID_DEPTH_BG_0, w, "ui_icon_close");
       wid_set_on_mouse_down(w, wid_collect_close);
     }
   }

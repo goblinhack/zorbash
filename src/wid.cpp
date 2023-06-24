@@ -1572,39 +1572,9 @@ void wid_set_text_pos(Widp w, uint8_t val, int x, int y)
   w->text_pos_set = val;
 }
 
-static Tilep wid_get_bg_tile(Widp w)
-{
-  TRACE_NO_INDENT();
-  return (w->bg_tile);
-}
+void wid_set_tile(int depth, Widp w, Tilep tile) { w->tiles[ depth ] = tile; }
 
-static Tilep wid_get_fg_tile(Widp w)
-{
-  TRACE_NO_INDENT();
-  return (w->fg_tile);
-}
-
-static Tilep wid_get_fg2_tile(Widp w)
-{
-  TRACE_NO_INDENT();
-  return (w->fg2_tile);
-}
-
-static Tilep wid_get_fg3_tile(Widp w)
-{
-  TRACE_NO_INDENT();
-  return (w->fg3_tile);
-}
-
-void wid_set_bg_tile(Widp w, Tilep tile) { w->bg_tile = tile; }
-
-void wid_set_fg_tile(Widp w, Tilep tile) { w->fg_tile = tile; }
-
-void wid_set_fg2_tile(Widp w, Tilep tile) { w->fg2_tile = tile; }
-
-void wid_set_fg3_tile(Widp w, Tilep tile) { w->fg3_tile = tile; }
-
-void wid_set_bg_tilename(Widp w, std::string name)
+void wid_set_tilename(int depth, Widp w, std::string name)
 {
   TRACE_NO_INDENT();
   Tilep tile = tile_find(name);
@@ -1616,66 +1586,10 @@ void wid_set_bg_tilename(Widp w, std::string name)
     DIE("Widget does not exist to set tile %s", name.c_str());
   }
 
-  w->bg_tile = tile;
+  w->tiles[ depth ] = tile;
 }
 
-void wid_set_fg_tilename(Widp w, std::string name)
-{
-  TRACE_NO_INDENT();
-  Tilep tile = tile_find(name);
-  if (unlikely(! tile)) {
-    ERR("Failed to find wid tile %s", name.c_str());
-  }
-
-  if (unlikely(! w)) {
-    DIE("Widget does not exist to set tile %s", name.c_str());
-  }
-
-  w->fg_tile = tile;
-}
-
-void wid_set_fg2_tilename(Widp w, std::string name)
-{
-  TRACE_NO_INDENT();
-  Tilep tile = tile_find(name);
-  if (unlikely(! tile)) {
-    ERR("Failed to find wid tile %s", name.c_str());
-  }
-
-  if (unlikely(! w)) {
-    DIE("Widget does not exist to set tile %s", name.c_str());
-  }
-
-  w->fg2_tile = tile;
-}
-
-void wid_set_fg3_tilename(Widp w, std::string name)
-{
-  TRACE_NO_INDENT();
-  Tilep tile = tile_find(name);
-  if (unlikely(! tile)) {
-    ERR("Failed to find wid tile %s", name.c_str());
-  }
-
-  if (unlikely(! w)) {
-    DIE("Widget does not exist to set tile %s", name.c_str());
-  }
-
-  w->fg3_tile = tile;
-}
-
-void wid_set_bg_tile(Widp w, Thingp t)
-{
-  auto tpp   = t->tp();
-  auto tiles = &tpp->tiles;
-
-  auto tile = tile_first(tiles);
-  if (tile) {
-    wid_set_bg_tile(w, tile);
-  }
-}
-
-void wid_set_fg_tile(Widp w, Thingp t)
+void wid_set_tile(int depth, Widp w, Thingp t)
 {
   auto tpp   = t->tp();
   auto tiles = &tpp->tiles;
@@ -1692,30 +1606,8 @@ void wid_set_fg_tile(Widp w, Thingp t)
         wid_set_color(w, WID_COLOR_TEXT_FG, tile->ascii_fg_col_value);
       }
     } else {
-      wid_set_fg_tile(w, tile);
+      wid_set_tile(depth, w, tile);
     }
-  }
-}
-
-void wid_set_fg2_tile(Widp w, Thingp t)
-{
-  auto tpp   = t->tp();
-  auto tiles = &tpp->tiles;
-
-  auto tile = tile_first(tiles);
-  if (tile) {
-    wid_set_fg2_tile(w, tile);
-  }
-}
-
-void wid_set_fg3_tile(Widp w, Thingp t)
-{
-  auto tpp   = t->tp();
-  auto tiles = &tpp->tiles;
-
-  auto tile = tile_first(tiles);
-  if (tile) {
-    wid_set_fg3_tile(w, tile);
   }
 }
 
@@ -6390,12 +6282,8 @@ static void wid_display(Widp w, uint8_t disable_scissor, uint8_t *updated_scisso
 #endif
   }
 
-  auto  width    = wid_get_width(w);
-  auto  height   = wid_get_height(w);
-  Tilep bg_tile  = wid_get_bg_tile(w);
-  Tilep fg_tile  = wid_get_fg_tile(w);
-  Tilep fg2_tile = wid_get_fg2_tile(w);
-  Tilep fg3_tile = wid_get_fg3_tile(w);
+  auto width  = wid_get_width(w);
+  auto height = wid_get_height(w);
 
   point tl;
   point br;
@@ -6432,7 +6320,7 @@ static void wid_display(Widp w, uint8_t disable_scissor, uint8_t *updated_scisso
   }
 
   if (w->square) {
-    ascii_put_box(w_box_args, wid_get_style(w), bg_tile, fg_tile, fg2_tile, fg3_tile, L"");
+    ascii_put_box(w_box_args, wid_get_style(w), w->tiles, L"");
   } else {
     // shape none
   }

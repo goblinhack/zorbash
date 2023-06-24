@@ -11,6 +11,7 @@
 #include "my_string.hpp"
 #include "my_ui.hpp"
 #include "my_unicode.hpp"
+#include "my_wid.hpp"
 
 struct ascii_ ascii;
 
@@ -22,67 +23,19 @@ int16_t ascii_mouse_y;
 class AsciiCell
 {
 public:
-  Tilep fg_tile {};
-  Tilep fg2_tile {};
-  Tilep fg3_tile {};
-  Tilep fg4_tile {};
-  Tilep bg_tile {};
-  Tilep bg2_tile {};
+  Tilep tile[ WID_DEPTH_MAX ] {};
 
-  Texp tex {};
+  Texp tex[ WID_DEPTH_MAX ] {};
 
-  //
-  // For background tex
-  //
-  float tx {};
-  float ty {};
-  float dx {};
-  float dy {};
+  float tx[ WID_DEPTH_MAX ] {};
+  float ty[ WID_DEPTH_MAX ] {};
+  float dx[ WID_DEPTH_MAX ] {};
+  float dy[ WID_DEPTH_MAX ] {};
 
-  //
-  // For background tex
-  //
-  float bg2_tx {};
-  float bg2_ty {};
-  float bg2_dx {};
-  float bg2_dy {};
-  float fg2_tx {};
-  float fg2_ty {};
-  float fg2_dx {};
-  float fg2_dy {};
-  float fg3_tx {};
-  float fg3_ty {};
-  float fg3_dx {};
-  float fg3_dy {};
-  float fg4_tx {};
-  float fg4_ty {};
-  float fg4_dx {};
-  float fg4_dy {};
-
-  color fg_color_tl;
-  color fg_color_bl;
-  color fg_color_tr;
-  color fg_color_br;
-  color bg_color_tl;
-  color bg_color_bl;
-  color bg_color_tr;
-  color bg_color_br;
-  color bg2_color_tl;
-  color bg2_color_bl;
-  color bg2_color_tr;
-  color bg2_color_br;
-  color fg2_color_tl;
-  color fg2_color_bl;
-  color fg2_color_tr;
-  color fg2_color_br;
-  color fg3_color_tl;
-  color fg3_color_bl;
-  color fg3_color_tr;
-  color fg3_color_br;
-  color fg4_color_tl;
-  color fg4_color_bl;
-  color fg4_color_tr;
-  color fg4_color_br;
+  color color_tl[ WID_DEPTH_MAX ];
+  color color_bl[ WID_DEPTH_MAX ];
+  color color_tr[ WID_DEPTH_MAX ];
+  color color_br[ WID_DEPTH_MAX ];
 
   //
   // Is reset each frame, and so although a pointer potentially should be
@@ -210,31 +163,19 @@ int ascii_ok_for_scissors(int x, int y)
 bool ascii_is_empty(int x, int y)
 {
   AsciiCell *cell = &getref_no_check(cells, x, y);
-  if (cell->fg_tile) {
-    return false;
-  }
-  if (cell->bg_tile) {
-    return false;
-  }
-  if (cell->bg2_tile) {
-    return false;
-  }
-  if (cell->fg2_tile) {
-    return false;
-  }
-  if (cell->fg3_tile) {
-    return false;
-  }
-  if (cell->fg4_tile) {
-    return false;
-  }
-  if (cell->tex) {
-    return false;
+
+  for (auto depth = 0; depth < WID_DEPTH_MAX; depth++) {
+    if (cell->tile[ depth ]) {
+      return false;
+    }
+    if (cell->tex[ depth ]) {
+      return false;
+    }
   }
   return true;
 }
 
-void ascii_set_fg(int x, int y, color col)
+void ascii_set(int depth, int x, int y, color col)
 {
   if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
@@ -242,80 +183,10 @@ void ascii_set_fg(int x, int y, color col)
 
   AsciiCell *cell = &getref_no_check(cells, x, y);
 
-  cell->fg_color_tl = col;
-  cell->fg_color_tr = col;
-  cell->fg_color_bl = col;
-  cell->fg_color_br = col;
-}
-
-void ascii_set_bg(int x, int y, color col)
-{
-  if (unlikely(! ascii_ok_for_scissors(x, y))) {
-    return;
-  }
-
-  AsciiCell *cell = &getref_no_check(cells, x, y);
-
-  cell->bg_color_tl = col;
-  cell->bg_color_tr = col;
-  cell->bg_color_bl = col;
-  cell->bg_color_br = col;
-}
-
-void ascii_set_bg2(int x, int y, color col)
-{
-  if (unlikely(! ascii_ok_for_scissors(x, y))) {
-    return;
-  }
-
-  AsciiCell *cell = &getref_no_check(cells, x, y);
-
-  cell->bg2_color_tl = col;
-  cell->bg2_color_tr = col;
-  cell->bg2_color_bl = col;
-  cell->bg2_color_br = col;
-}
-
-void ascii_set_fg2(int x, int y, color col)
-{
-  if (unlikely(! ascii_ok_for_scissors(x, y))) {
-    return;
-  }
-
-  AsciiCell *cell = &getref_no_check(cells, x, y);
-
-  cell->fg2_color_tl = col;
-  cell->fg2_color_tr = col;
-  cell->fg2_color_bl = col;
-  cell->fg2_color_br = col;
-}
-
-void ascii_set_fg3(int x, int y, color col)
-{
-  if (unlikely(! ascii_ok_for_scissors(x, y))) {
-    return;
-  }
-
-  AsciiCell *cell = &getref_no_check(cells, x, y);
-
-  cell->fg3_color_tl = col;
-  cell->fg3_color_tr = col;
-  cell->fg3_color_bl = col;
-  cell->fg3_color_br = col;
-}
-
-void ascii_set_fg4(int x, int y, color col)
-{
-  if (unlikely(! ascii_ok_for_scissors(x, y))) {
-    return;
-  }
-
-  AsciiCell *cell = &getref_no_check(cells, x, y);
-
-  cell->fg4_color_tl = col;
-  cell->fg4_color_tr = col;
-  cell->fg4_color_bl = col;
-  cell->fg4_color_br = col;
+  cell->color_tl[ depth ] = col;
+  cell->color_tr[ depth ] = col;
+  cell->color_bl[ depth ] = col;
+  cell->color_br[ depth ] = col;
 }
 
 void ascii_set_context(int x, int y, void *context)
@@ -344,7 +215,7 @@ void *ascii_get_stat_context(int x, int y)
   return (cell->context);
 }
 
-void ascii_set_bg(int x, int y, const Texp tex, float tx, float ty, float dx, float dy)
+void ascii_set(int depth, int x, int y, const Texp tex, float tx, float ty, float dx, float dy)
 {
   if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
@@ -352,14 +223,14 @@ void ascii_set_bg(int x, int y, const Texp tex, float tx, float ty, float dx, fl
 
   AsciiCell *cell = &getref_no_check(cells, x, y);
 
-  cell->tex = tex;
-  cell->tx  = tx;
-  cell->ty  = ty;
-  cell->dx  = dx;
-  cell->dy  = dy;
+  cell->tex[ depth ] = tex;
+  cell->tx[ depth ]  = tx;
+  cell->ty[ depth ]  = ty;
+  cell->dx[ depth ]  = dx;
+  cell->dy[ depth ]  = dy;
 }
 
-void ascii_set_bg(int x, int y, const Tilep tile)
+void ascii_set(int depth, int x, int y, const Tilep tile)
 {
   if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
@@ -367,14 +238,14 @@ void ascii_set_bg(int x, int y, const Tilep tile)
 
   AsciiCell *cell = &getref_no_check(cells, x, y);
 
-  cell->bg_tile = tile;
-  cell->tx      = 0;
-  cell->ty      = 0;
-  cell->dx      = 1;
-  cell->dy      = 1;
+  cell->tile[ depth ] = tile;
+  cell->tx[ depth ]   = 0;
+  cell->ty[ depth ]   = 0;
+  cell->dx[ depth ]   = 1;
+  cell->dy[ depth ]   = 1;
 }
 
-void ascii_set_bg2(int x, int y, const Tilep tile)
+void ascii_set(int depth, int x, int y, const Tilep tile, float tx, float ty, float dx, float dy)
 {
   if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
@@ -382,171 +253,16 @@ void ascii_set_bg2(int x, int y, const Tilep tile)
 
   AsciiCell *cell = &getref_no_check(cells, x, y);
 
-  cell->bg2_tile = tile;
-  cell->bg2_tx   = 0;
-  cell->bg2_ty   = 0;
-  cell->bg2_dx   = 1;
-  cell->bg2_dy   = 1;
+  cell->tile[ depth ] = tile;
+  cell->tx[ depth ]   = tx;
+  cell->ty[ depth ]   = ty;
+  cell->dx[ depth ]   = dx;
+  cell->dy[ depth ]   = dy;
 }
 
-void ascii_set_bg2(int x, int y, const Tilep tile, float tx, float ty, float dx, float dy)
-{
-  if (unlikely(! ascii_ok_for_scissors(x, y))) {
-    return;
-  }
+void ascii_set(int depth, int x, int y, const char *tilename) { ascii_set(depth, x, y, tile_find(tilename)); }
 
-  AsciiCell *cell = &getref_no_check(cells, x, y);
-
-  cell->bg2_tile = tile;
-  cell->bg2_tx   = tx;
-  cell->bg2_ty   = ty;
-  cell->bg2_dx   = dx;
-  cell->bg2_dy   = dy;
-}
-
-void ascii_set_bg(int x, int y, const char *tilename) { ascii_set_bg(x, y, tile_find(tilename)); }
-
-void ascii_set_bg(int x, int y, const wchar_t ch) { ascii_set_bg(x, y, font_ui->unicode_to_tile(ch)); }
-
-void ascii_set_bg2(int x, int y, const char *tilename) { ascii_set_bg2(x, y, tile_find(tilename)); }
-
-void ascii_set_bg2(int x, int y, const wchar_t ch) { ascii_set_bg2(x, y, font_ui->unicode_to_tile(ch)); }
-
-void ascii_set_fg(int x, int y, const Texp tex, float tx, float ty, float dx, float dy)
-{
-  if (unlikely(! ascii_ok_for_scissors(x, y))) {
-    return;
-  }
-
-  AsciiCell *cell = &getref_no_check(cells, x, y);
-
-  cell->tex = tex;
-  cell->tx  = tx;
-  cell->ty  = ty;
-  cell->dx  = dx;
-  cell->dy  = dy;
-}
-
-void ascii_set_fg(int x, int y, const Tilep tile)
-{
-  if (unlikely(! ascii_ok_for_scissors(x, y))) {
-    return;
-  }
-
-  AsciiCell *cell = &getref_no_check(cells, x, y);
-
-  cell->fg_tile = tile;
-  cell->tx      = 0;
-  cell->ty      = 0;
-  cell->dx      = 1;
-  cell->dy      = 1;
-}
-
-void ascii_set_fg2(int x, int y, const Tilep tile)
-{
-  if (unlikely(! ascii_ok_for_scissors(x, y))) {
-    return;
-  }
-
-  AsciiCell *cell = &getref_no_check(cells, x, y);
-
-  cell->fg2_tile = tile;
-  cell->fg2_tx   = 0;
-  cell->fg2_ty   = 0;
-  cell->fg2_dx   = 1;
-  cell->fg2_dy   = 1;
-}
-
-void ascii_set_fg3(int x, int y, const Tilep tile)
-{
-  if (unlikely(! ascii_ok_for_scissors(x, y))) {
-    return;
-  }
-
-  AsciiCell *cell = &getref_no_check(cells, x, y);
-
-  cell->fg3_tile = tile;
-  cell->fg3_tx   = 0;
-  cell->fg3_ty   = 0;
-  cell->fg3_dx   = 1;
-  cell->fg3_dy   = 1;
-}
-
-void ascii_set_fg4(int x, int y, const Tilep tile)
-{
-  if (unlikely(! ascii_ok_for_scissors(x, y))) {
-    return;
-  }
-
-  AsciiCell *cell = &getref_no_check(cells, x, y);
-
-  cell->fg4_tile = tile;
-  cell->fg4_tx   = 0;
-  cell->fg4_ty   = 0;
-  cell->fg4_dx   = 1;
-  cell->fg4_dy   = 1;
-}
-
-void ascii_set_fg2(int x, int y, const Tilep tile, float tx, float ty, float dx, float dy)
-{
-  if (unlikely(! ascii_ok_for_scissors(x, y))) {
-    return;
-  }
-
-  AsciiCell *cell = &getref_no_check(cells, x, y);
-
-  cell->fg2_tile = tile;
-  cell->fg2_tx   = tx;
-  cell->fg2_ty   = ty;
-  cell->fg2_dx   = dx;
-  cell->fg2_dy   = dy;
-}
-
-void ascii_set_fg3(int x, int y, const Tilep tile, float tx, float ty, float dx, float dy)
-{
-  if (unlikely(! ascii_ok_for_scissors(x, y))) {
-    return;
-  }
-
-  AsciiCell *cell = &getref_no_check(cells, x, y);
-
-  cell->fg3_tile = tile;
-  cell->fg3_tx   = tx;
-  cell->fg3_ty   = ty;
-  cell->fg3_dx   = dx;
-  cell->fg3_dy   = dy;
-}
-
-void ascii_set_fg4(int x, int y, const Tilep tile, float tx, float ty, float dx, float dy)
-{
-  if (unlikely(! ascii_ok_for_scissors(x, y))) {
-    return;
-  }
-
-  AsciiCell *cell = &getref_no_check(cells, x, y);
-
-  cell->fg4_tile = tile;
-  cell->fg4_tx   = tx;
-  cell->fg4_ty   = ty;
-  cell->fg4_dx   = dx;
-  cell->fg4_dy   = dy;
-}
-
-void ascii_set_fg(int x, int y, const char *tilename) { ascii_set_fg(x, y, tile_find(tilename)); }
-
-void ascii_set_fg(int x, int y, const wchar_t ch) { ascii_set_fg(x, y, font_ui->unicode_to_tile(ch)); }
-
-void ascii_set_fg2(int x, int y, const char *tilename) { ascii_set_fg2(x, y, tile_find(tilename)); }
-
-void ascii_set_fg2(int x, int y, const wchar_t ch) { ascii_set_fg2(x, y, font_ui->unicode_to_tile(ch)); }
-
-void ascii_set_fg3(int x, int y, const char *tilename) { ascii_set_fg3(x, y, tile_find(tilename)); }
-
-void ascii_set_fg3(int x, int y, const wchar_t ch) { ascii_set_fg3(x, y, font_ui->unicode_to_tile(ch)); }
-
-void ascii_set_fg4(int x, int y, const char *tilename) { ascii_set_fg4(x, y, tile_find(tilename)); }
-
-void ascii_set_fg4(int x, int y, const wchar_t ch) { ascii_set_fg4(x, y, font_ui->unicode_to_tile(ch)); }
+void ascii_set(int depth, int x, int y, const wchar_t ch) { ascii_set(depth, x, y, font_ui->unicode_to_tile(ch)); }
 
 void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
 {
@@ -696,34 +412,37 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
 
     AsciiCell *cell = &getref_no_check(cells, x++, y);
 
-    cell->fg_tile = tile;
+    auto depth = WID_DEPTH_FG_0;
 
-    cell->fg_color_tl = fg;
-    cell->fg_color_tr = fg;
-    cell->fg_color_bl = fg;
-    cell->fg_color_br = fg;
+    cell->tile[ depth ]     = tile;
+    cell->color_tl[ depth ] = fg;
+    cell->color_tr[ depth ] = fg;
+    cell->color_bl[ depth ] = fg;
+    cell->color_br[ depth ] = fg;
 
     if (bg_set) {
       //
       // If we are displaying a color in the background then use a solid tile.
       //
+      auto depth = WID_DEPTH_BG_0;
+
       if (bg.r || bg.g || bg.b || bg.a) {
         static Tilep tile;
         if (unlikely(! tile)) {
           tile = tile_find_mand(UNICODE_BLOCK_STR);
         }
-        cell->bg_tile = tile;
+        cell->tile[ depth ] = tile;
       } else {
         //
         // Else clear the background
         //
-        cell->bg_tile = nullptr;
+        cell->tile[ depth ] = nullptr;
       }
 
-      cell->bg_color_tl = bg;
-      cell->bg_color_tr = bg;
-      cell->bg_color_bl = bg;
-      cell->bg_color_br = bg;
+      cell->color_tl[ depth ] = bg;
+      cell->color_tr[ depth ] = bg;
+      cell->color_bl[ depth ] = bg;
+      cell->color_br[ depth ] = bg;
     }
 
     if (unlikely(is_cursor)) {
@@ -1079,8 +798,8 @@ void ascii_put_bg_square(int tlx, int tly, int brx, int bry, Tilep tile, color c
 
   for (x = tlx; x <= brx; x++) {
     for (y = tly; y <= bry; y++) {
-      ascii_set_bg(x, y, tile);
-      ascii_set_bg(x, y, col);
+      ascii_set(WID_DEPTH_BG_0, x, y, tile);
+      ascii_set(WID_DEPTH_BG_0, x, y, col);
     }
   }
 }
@@ -1097,26 +816,23 @@ void ascii_put_bg_square(int tlx, int tly, int brx, int bry, wchar_t what, color
   ascii_put_bg_square(tlx, tly, brx, bry, font_ui->unicode_to_tile(what), col);
 }
 
-static void ascii_map_thing_replace(int x, int y, Tilep tile, color col)
+static void ascii_map_thing_replace(int depth, int x, int y, Tilep tile, color col)
 {
-  TRACE_NO_INDENT();
-  ascii_set_bg(x, y, tile);
-  ascii_set_bg(x, y, col);
+  ascii_set(depth, x, y, tile);
+  ascii_set(depth, x, y, col);
 }
 
-typedef void (*ascii_draw_char_fn)(int x, int y, wchar_t ch);
-typedef void (*ascii_draw_col_fn)(int x, int y, color col);
+typedef void (*ascii_draw_char_fn)(int depth, int x, int y, wchar_t ch);
+typedef void (*ascii_draw_col_fn)(int depth, int x, int y, color col);
 
-static void ascii_draw_line_fn(int x0, int y0, int x1, int y1, wchar_t ch, color col, ascii_draw_char_fn fn1,
-                               ascii_draw_col_fn fn2)
+void ascii_draw_line(int depth, int x0, int y0, int x1, int y1, Tilep tile, color col)
 {
   int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
   int dy = -abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
   int err = dx + dy, e2; /* error value e_xy */
 
   for (;;) { /* loop */
-    (*fn1)(x0, y0, ch);
-    (*fn2)(x0, y0, col);
+    ascii_map_thing_replace(depth, x0, y0, tile, col);
     if (x0 == x1 && y0 == y1) {
       break;
     }
@@ -1132,69 +848,16 @@ static void ascii_draw_line_fn(int x0, int y0, int x1, int y1, wchar_t ch, color
   }
 }
 
-void ascii_draw_line_fg4(int x0, int y0, int x1, int y1, wchar_t ch, color col)
-{
-  ascii_draw_line_fn(x0, y0, x1, y1, ch, col, ascii_set_fg4, ascii_set_fg4);
-}
-
-void ascii_draw_line_fg3(int x0, int y0, int x1, int y1, wchar_t ch, color col)
-{
-  ascii_draw_line_fn(x0, y0, x1, y1, ch, col, ascii_set_fg3, ascii_set_fg3);
-}
-
-void ascii_draw_line_fg2(int x0, int y0, int x1, int y1, wchar_t ch, color col)
-{
-  ascii_draw_line_fn(x0, y0, x1, y1, ch, col, ascii_set_fg2, ascii_set_fg2);
-}
-
-void ascii_draw_line_fg(int x0, int y0, int x1, int y1, wchar_t ch, color col)
-{
-  ascii_draw_line_fn(x0, y0, x1, y1, ch, col, ascii_set_fg, ascii_set_fg);
-}
-
-void ascii_draw_line_bg2(int x0, int y0, int x1, int y1, wchar_t ch, color col)
-{
-  ascii_draw_line_fn(x0, y0, x1, y1, ch, col, ascii_set_bg2, ascii_set_bg2);
-}
-
-void ascii_draw_line_bg(int x0, int y0, int x1, int y1, wchar_t ch, color col)
-{
-  ascii_draw_line_fn(x0, y0, x1, y1, ch, col, ascii_set_bg, ascii_set_bg);
-}
-
-void ascii_draw_line(int x0, int y0, int x1, int y1, Tilep tile, color col)
-{
-  int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
-  int dy = -abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
-  int err = dx + dy, e2; /* error value e_xy */
-
-  for (;;) { /* loop */
-    ascii_map_thing_replace(x0, y0, tile, col);
-    if (x0 == x1 && y0 == y1) {
-      break;
-    }
-    e2 = 2 * err;
-    if (e2 >= dy) {
-      err += dy;
-      x0 += sx;
-    } /* e_xy+e_x > 0 */
-    if (e2 <= dx) {
-      err += dx;
-      y0 += sy;
-    } /* e_xy+e_y < 0 */
-  }
-}
-
-void ascii_draw_line(int x0, int y0, int x1, int y1, wchar_t what, color col)
+void ascii_draw_line(int depth, int x0, int y0, int x1, int y1, wchar_t what, color col)
 {
   TRACE_NO_INDENT();
-  ascii_draw_line(x0, y0, x1, y1, font_ui->unicode_to_tile(what), col);
+  ascii_draw_line(depth, x0, y0, x1, y1, font_ui->unicode_to_tile(what), col);
 }
 
-void ascii_draw_line(int x0, int y0, int x1, int y1, const char *tilename, color col)
+void ascii_draw_line(int depth, int x0, int y0, int x1, int y1, const char *tilename, color col)
 {
   TRACE_NO_INDENT();
-  ascii_draw_line(x0, y0, x1, y1, tile_find(tilename), col);
+  ascii_draw_line(depth, x0, y0, x1, y1, tile_find(tilename), col);
 }
 
 //
@@ -1250,18 +913,19 @@ static void ascii_blit(void)
       //
       // Background
       //
-      if (cell->tex) {
-        Texp tex = cell->tex;
+      auto depth = WID_DEPTH_BG_0;
+      if (cell->tex[ depth ]) {
+        Texp tex = cell->tex[ depth ];
 
-        blit(tex_get_gl_binding(tex), cell->tx, cell->ty, cell->tx + cell->dx, cell->ty + cell->dy, tile_tl.x,
-             tile_tl.y, tile_br.x, tile_br.y);
-      } else if (cell->bg_tile) {
-        color bg_color_tl = cell->bg_color_tl;
-        color bg_color_tr = cell->bg_color_tr;
-        color bg_color_bl = cell->bg_color_bl;
-        color bg_color_br = cell->bg_color_br;
+        blit(tex_get_gl_binding(tex), cell->tx[ depth ], cell->ty[ depth ], cell->tx[ depth ] + cell->dx[ depth ],
+             cell->ty[ depth ] + cell->dy[ depth ], tile_tl.x, tile_tl.y, tile_br.x, tile_br.y);
+      } else if (cell->tile[ depth ]) {
+        color bg_color_tl = cell->color_tl[ depth ];
+        color bg_color_tr = cell->color_tr[ depth ];
+        color bg_color_bl = cell->color_bl[ depth ];
+        color bg_color_br = cell->color_br[ depth ];
 
-        tile_blit_colored_fat(nullptr, cell->bg_tile, tile_tl, tile_br, bg_color_tl, bg_color_tr, bg_color_bl,
+        tile_blit_colored_fat(nullptr, cell->tile[ depth ], tile_tl, tile_br, bg_color_tl, bg_color_tr, bg_color_bl,
                               bg_color_br);
       }
 
@@ -1290,48 +954,33 @@ static void ascii_blit(void)
       tile_br.x = tile_x + dw;
       tile_br.y = tile_y + dh;
 
-      if (cell->bg2_tile) {
-        color bg2_color_tl = cell->bg2_color_tl;
-        color bg2_color_tr = cell->bg2_color_tr;
-        color bg2_color_bl = cell->bg2_color_bl;
-        color bg2_color_br = cell->bg2_color_br;
+      {
+        auto depth = WID_DEPTH_BG_1;
+        if (cell->tile[ depth ]) {
+          color color_tl = cell->color_tl[ depth ];
+          color color_tr = cell->color_tr[ depth ];
+          color color_bl = cell->color_bl[ depth ];
+          color color_br = cell->color_br[ depth ];
 
-        tile_blit_section_colored(cell->bg2_tile, fpoint(cell->bg2_tx, cell->bg2_ty),
-                                  fpoint(cell->bg2_tx + cell->bg2_dx, cell->bg2_ty + cell->bg2_dy), tile_tl, tile_br,
-                                  bg2_color_tl, bg2_color_tr, bg2_color_bl, bg2_color_br);
+          tile_blit_section_colored(
+              cell->tile[ depth ], fpoint(cell->tx[ depth ], cell->ty[ depth ]),
+              fpoint(cell->tx[ depth ] + cell->dx[ depth ], cell->ty[ depth ] + cell->dy[ depth ]), tile_tl, tile_br,
+              color_tl, color_tr, color_bl, color_br);
+        }
       }
 
-      if (cell->fg2_tile) {
-        color fg2_color_tl = cell->fg2_color_tl;
-        color fg2_color_tr = cell->fg2_color_tr;
-        color fg2_color_bl = cell->fg2_color_bl;
-        color fg2_color_br = cell->fg2_color_br;
+      for (int depth = WID_DEPTH_FG_1; depth < WID_DEPTH_MAX; depth++) {
+        if (cell->tile[ depth ]) {
+          color color_tl = cell->color_tl[ depth ];
+          color color_tr = cell->color_tr[ depth ];
+          color color_bl = cell->color_bl[ depth ];
+          color color_br = cell->color_br[ depth ];
 
-        tile_blit_section_colored(cell->fg2_tile, fpoint(cell->fg2_tx, cell->fg2_ty),
-                                  fpoint(cell->fg2_tx + cell->fg2_dx, cell->fg2_ty + cell->fg2_dy), tile_tl, tile_br,
-                                  fg2_color_tl, fg2_color_tr, fg2_color_bl, fg2_color_br);
-      }
-
-      if (cell->fg3_tile) {
-        color fg3_color_tl = cell->fg3_color_tl;
-        color fg3_color_tr = cell->fg3_color_tr;
-        color fg3_color_bl = cell->fg3_color_bl;
-        color fg3_color_br = cell->fg3_color_br;
-
-        tile_blit_section_colored(cell->fg3_tile, fpoint(cell->fg3_tx, cell->fg3_ty),
-                                  fpoint(cell->fg3_tx + cell->fg3_dx, cell->fg3_ty + cell->fg3_dy), tile_tl, tile_br,
-                                  fg3_color_tl, fg3_color_tr, fg3_color_bl, fg3_color_br);
-      }
-
-      if (cell->fg4_tile) {
-        color fg4_color_tl = cell->fg4_color_tl;
-        color fg4_color_tr = cell->fg4_color_tr;
-        color fg4_color_bl = cell->fg4_color_bl;
-        color fg4_color_br = cell->fg4_color_br;
-
-        tile_blit_section_colored(cell->fg4_tile, fpoint(cell->fg4_tx, cell->fg4_ty),
-                                  fpoint(cell->fg4_tx + cell->fg4_dx, cell->fg4_ty + cell->fg4_dy), tile_tl, tile_br,
-                                  fg4_color_tl, fg4_color_tr, fg4_color_bl, fg4_color_br);
+          tile_blit_section_colored(
+              cell->tile[ depth ], fpoint(cell->tx[ depth ], cell->ty[ depth ]),
+              fpoint(cell->tx[ depth ] + cell->dx[ depth ], cell->ty[ depth ] + cell->dy[ depth ]), tile_tl, tile_br,
+              color_tl, color_tr, color_bl, color_br);
+        }
       }
 
       tile_x += dw;
@@ -1358,14 +1007,15 @@ static void ascii_blit(void)
       // Foreground
       //
       {
+        auto depth = WID_DEPTH_FG_0;
         tile_br.x  = tile_x + dw;
-        Tilep tile = cell->fg_tile;
+        Tilep tile = cell->tile[ depth ];
 
         if (tile) {
-          color fg_color_tl = cell->fg_color_tl;
-          color fg_color_tr = cell->fg_color_tr;
-          color fg_color_bl = cell->fg_color_bl;
-          color fg_color_br = cell->fg_color_br;
+          color fg_color_tl = cell->color_tl[ depth ];
+          color fg_color_tr = cell->color_tr[ depth ];
+          color fg_color_bl = cell->color_bl[ depth ];
+          color fg_color_br = cell->color_br[ depth ];
 
           tile_blit_colored_fat(nullptr, tile, tile_tl, tile_br, fg_color_tl, fg_color_tr, fg_color_bl, fg_color_br);
         }

@@ -198,7 +198,7 @@ bool wid_rightbar_ascii_create(void)
     i         = std::min(i, UI_HEALTH_BAR_STEPS - 1);
     i         = std::max(i, 0);
     auto icon = "health_bar_ascii_" + std::to_string(i);
-    wid_set_fg_tilename(w, icon);
+    wid_set_tilename(WID_DEPTH_FG_0, w, icon);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
   }
@@ -246,7 +246,7 @@ bool wid_rightbar_ascii_create(void)
     i         = std::min(i, UI_HEALTH_BAR_STEPS - 1);
     i         = std::max(i, 0);
     auto icon = "health_bar_ascii_" + std::to_string(i);
-    wid_set_fg_tilename(w, icon);
+    wid_set_tilename(WID_DEPTH_FG_0, w, icon);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
   }

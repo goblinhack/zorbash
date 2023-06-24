@@ -51,7 +51,7 @@ WidPopup::WidPopup(const std::string name, point tl, point br, Tilep title_tile,
     wid_set_pos(wid_popup_container, tl, br);
     wid_set_style(wid_popup_container, UI_WID_STYLE_SOLID_NONE);
     if (background != "") {
-      wid_set_bg_tile(wid_popup_container, tile_find_mand(background));
+      wid_set_tile(WID_DEPTH_BG_0, wid_popup_container, tile_find_mand(background));
     } else {
       wid_set_style(wid_popup_container, UI_WID_STYLE_NORMAL);
     }
@@ -64,7 +64,7 @@ WidPopup::WidPopup(const std::string name, point tl, point br, Tilep title_tile,
     wid_set_pos(w, point(title_x + 0, 1), point(title_x + tile_size - 1, tile_size));
     wid_set_style(w, UI_WID_STYLE_DARK);
     wid_set_style(w, UI_WID_STYLE_SPARSE_NONE);
-    wid_set_fg_tile(w, title_tile);
+    wid_set_tile(WID_DEPTH_FG_0, w, title_tile);
   }
 
   {

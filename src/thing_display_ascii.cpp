@@ -8,6 +8,7 @@
 #include "my_game.hpp"
 #include "my_thing.hpp"
 #include "my_unicode.hpp"
+#include "my_wid.hpp"
 
 //
 // For things like walls we color them differently so it is easier to see.
@@ -316,7 +317,7 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
   }
 
   if (! g_opt_ascii) {
-    ascii_set_fg4(p.x, p.y, tile);
+    ascii_set(WID_DEPTH_FG_3, p.x, p.y, tile);
     return;
   }
 
@@ -345,22 +346,22 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
       // e.g dungeon floor
       //
       if (tile->ascii_bg_col_value != COLOR_NONE) {
-        ascii_set_bg(p.x, p.y, UNICODE_BLOCK);
+        ascii_set(WID_DEPTH_BG_0, p.x, p.y, UNICODE_BLOCK);
         color c = tile->ascii_bg_col_value;
         c.a     = tile->ascii_bg_alpha;
         blit_ascii_adjust_color(c, bg, left_bar);
-        ascii_set_bg(p.x, p.y, c);
+        ascii_set(WID_DEPTH_BG_0, p.x, p.y, c);
       }
 
       if (tile->ascii_bg_char) {
-        ascii_set_bg(p.x, p.y, tile->ascii_bg_char);
+        ascii_set(WID_DEPTH_BG_0, p.x, p.y, tile->ascii_bg_char);
       }
 
       if (tile->ascii_bg_col_value != COLOR_NONE) {
         color c = tile->ascii_bg_col_value;
         c.a     = tile->ascii_bg_alpha;
         blit_ascii_adjust_color(c, bg, left_bar);
-        ascii_set_bg(p.x, p.y, c);
+        ascii_set(WID_DEPTH_BG_0, p.x, p.y, c);
       }
 
       color c = tile->ascii_fg_col_value;
@@ -369,17 +370,17 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
 
       if (tile->ascii_fg_char) {
         if (c.a != 255) {
-          ascii_set_fg2(p.x, p.y, tile->ascii_fg_char);
+          ascii_set(WID_DEPTH_FG_1, p.x, p.y, tile->ascii_fg_char);
         } else {
-          ascii_set_fg(p.x, p.y, tile->ascii_fg_char);
+          ascii_set(WID_DEPTH_FG_0, p.x, p.y, tile->ascii_fg_char);
         }
       }
 
       if (tile->ascii_fg_col_value != COLOR_NONE) {
         if (c.a != 255) {
-          ascii_set_fg2(p.x, p.y, c);
+          ascii_set(WID_DEPTH_FG_1, p.x, p.y, c);
         } else {
-          ascii_set_fg(p.x, p.y, c);
+          ascii_set(WID_DEPTH_FG_0, p.x, p.y, c);
         }
       }
     } else if (get(level->can_see_ever.can_see, curr_at.x, curr_at.y) || g_opt_debug2) {
@@ -403,7 +404,7 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
 
       if (shown_in_bg) {
         if (tile->ascii_bg_col_value != COLOR_NONE) {
-          ascii_set_bg(p.x, p.y, UNICODE_BLOCK);
+          ascii_set(WID_DEPTH_BG_0, p.x, p.y, UNICODE_BLOCK);
           color c = tile->ascii_bg_col_value;
           //
           // Apply a nice tint.
@@ -414,11 +415,11 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
           c.a = tile->ascii_fg_alpha;
           blit_ascii_adjust_color(c, bg, left_bar);
 
-          ascii_set_bg(p.x, p.y, c);
+          ascii_set(WID_DEPTH_BG_0, p.x, p.y, c);
         }
 
         if (tile->ascii_bg_char) {
-          ascii_set_bg(p.x, p.y, tile->ascii_bg_char);
+          ascii_set(WID_DEPTH_BG_0, p.x, p.y, tile->ascii_bg_char);
           color c = tile->ascii_bg_col_value;
           //
           // Apply a nice tint.
@@ -429,11 +430,11 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
           c.a = tile->ascii_fg_alpha;
           blit_ascii_adjust_color(c, bg, left_bar);
 
-          ascii_set_bg(p.x, p.y, c);
+          ascii_set(WID_DEPTH_BG_0, p.x, p.y, c);
         }
 
         if (tile->ascii_fg_char) {
-          ascii_set_fg(p.x, p.y, tile->ascii_fg_char);
+          ascii_set(WID_DEPTH_FG_0, p.x, p.y, tile->ascii_fg_char);
           color c = tile->ascii_fg_col_value;
 
           //
@@ -455,7 +456,7 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
           }
           blit_ascii_adjust_color(c, fg, left_bar);
 
-          ascii_set_fg(p.x, p.y, c);
+          ascii_set(WID_DEPTH_FG_0, p.x, p.y, c);
         }
       }
     }
@@ -474,8 +475,8 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
       }
       color outline_color = ORANGE;
       outline_color.a     = a;
-      ascii_set_bg(p.x, p.y, outline_color);
-      ascii_set_fg(p.x, p.y, WHITE);
+      ascii_set(WID_DEPTH_BG_0, p.x, p.y, outline_color);
+      ascii_set(WID_DEPTH_FG_0, p.x, p.y, WHITE);
     }
   }
 
@@ -492,8 +493,8 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
       }
       color outline_color = WHITE;
       outline_color.a     = a;
-      ascii_set_bg(p.x, p.y, outline_color);
-      ascii_set_fg(p.x, p.y, WHITE);
+      ascii_set(WID_DEPTH_BG_0, p.x, p.y, outline_color);
+      ascii_set(WID_DEPTH_FG_0, p.x, p.y, WHITE);
     }
 
     if (! is_currently_invisible || is_player()) {
@@ -510,8 +511,8 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
           }
           color outline_color = ORANGE;
           outline_color.a     = a;
-          ascii_set_bg(p.x, p.y, outline_color);
-          ascii_set_fg(p.x, p.y, WHITE);
+          ascii_set(WID_DEPTH_BG_0, p.x, p.y, outline_color);
+          ascii_set(WID_DEPTH_FG_0, p.x, p.y, WHITE);
         }
       }
     }

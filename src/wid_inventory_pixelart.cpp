@@ -58,7 +58,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
     wid_inventory_window = wid_new_square_window("wid inventory");
     wid_set_pos(wid_inventory_window, tl, br);
     wid_set_style(wid_inventory_window, UI_WID_STYLE_SOLID_NONE);
-    wid_set_bg_tilename(wid_inventory_window, "ui_inventory");
+    wid_set_tilename(WID_DEPTH_BG_0, wid_inventory_window, "ui_inventory");
     wid_set_on_key_up(wid_inventory_window, wid_inventory_key_up);
     wid_set_on_key_down(wid_inventory_window, wid_inventory_key_down);
     wid_raise(wid_inventory_window);
@@ -69,7 +69,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
     point tl(inventory_width - 3, 0);
     point br(inventory_width - 1, 2);
     wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "ui_icon_close");
+    wid_set_tilename(WID_DEPTH_BG_0, w, "ui_icon_close");
     wid_set_on_mouse_up(w, wid_inventory_close);
   }
 
@@ -78,7 +78,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
     point tl(0, 0);
     point br(2, 2);
     wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "ui_icon_close");
+    wid_set_tilename(WID_DEPTH_BG_0, w, "ui_icon_close");
     wid_set_on_mouse_up(w, wid_inventory_close);
   }
 
@@ -88,9 +88,9 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
     point br = point(25, 4);
     wid_set_pos(w, tl, br);
     if (wid_inventory_tab == WID_INVENTORY_TAB_BAG1) {
-      wid_set_fg_tilename(w, "ui_tab_bag1");
+      wid_set_tilename(WID_DEPTH_FG_0, w, "ui_tab_bag1");
     } else {
-      wid_set_fg_tilename(w, "ui_tab_bag1_dark");
+      wid_set_tilename(WID_DEPTH_FG_0, w, "ui_tab_bag1_dark");
     }
     wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag1);
   }
@@ -131,9 +131,9 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
     point br = point(28, 4);
     wid_set_pos(w, tl, br);
     if (wid_inventory_tab == WID_INVENTORY_TAB_BAG2) {
-      wid_set_fg_tilename(w, "ui_tab_bag2");
+      wid_set_tilename(WID_DEPTH_FG_0, w, "ui_tab_bag2");
     } else {
-      wid_set_fg_tilename(w, "ui_tab_bag2_dark");
+      wid_set_tilename(WID_DEPTH_FG_0, w, "ui_tab_bag2_dark");
     }
     wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
   }
@@ -178,7 +178,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
             auto tile = tile_first(tiles);
             if (tile) {
               wid_set_style(wid_icon, UI_WID_STYLE_DARK);
-              wid_set_fg_tile(wid_icon, tile);
+              wid_set_tile(WID_DEPTH_FG_0, wid_icon, tile);
             }
           }
 

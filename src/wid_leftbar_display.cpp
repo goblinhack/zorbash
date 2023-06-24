@@ -14,7 +14,7 @@
 
 static point wid_leftbar_last_thing_position;
 
-static void wid_leftbar_display_display(Widp w, point tl, point br)
+static void wid_leftbar_display(Widp w, point tl, point br)
 {
   TRACE_NO_INDENT();
 
@@ -116,15 +116,15 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     }
     if (t->immediate_owner()) {
       if (g_opt_ascii) {
-        wid_set_bg_tilename(w, "status_bar_ascii_dark");
+        wid_set_tilename(WID_DEPTH_BG_0, w, "status_bar_ascii_dark");
       } else {
-        wid_set_bg_tilename(w, "status_bar_pixelart_dark");
+        wid_set_tilename(WID_DEPTH_BG_0, w, "status_bar_pixelart_dark");
       }
     } else {
       if (g_opt_ascii) {
-        wid_set_bg_tilename(w, "status_bar_ascii_normal");
+        wid_set_tilename(WID_DEPTH_BG_0, w, "status_bar_ascii_normal");
       } else {
-        wid_set_bg_tilename(w, "status_bar_pixelart_normal");
+        wid_set_tilename(WID_DEPTH_BG_0, w, "status_bar_pixelart_normal");
       }
     }
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
@@ -140,7 +140,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     point br = make_point(width + 1, y_at);
     wid_set_pos(w, tl, br);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
-    wid_set_on_display(w, wid_leftbar_display_display);
+    wid_set_on_display(w, wid_leftbar_display);
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
     wid_set_thing_context(w, t, 0);
@@ -155,9 +155,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     wid_set_pos(w, tl, br);
     wid_set_text(w, "(On fire)");
     if (g_opt_ascii) {
-      wid_set_fg_tilename(w, "status_bar_ascii_red");
+      wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_ascii_red");
     } else {
-      wid_set_fg_tilename(w, "status_bar_pixelart_red");
+      wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_pixelart_red");
     }
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
@@ -173,9 +173,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     wid_set_pos(w, tl, br);
     wid_set_text(w, "(Frozen)");
     if (g_opt_ascii) {
-      wid_set_fg_tilename(w, "status_bar_ascii_blue");
+      wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_ascii_blue");
     } else {
-      wid_set_fg_tilename(w, "status_bar_pixelart_blue");
+      wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_pixelart_blue");
     }
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
@@ -191,9 +191,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     wid_set_pos(w, tl, br);
     wid_set_text(w, "(Burnt)");
     if (g_opt_ascii) {
-      wid_set_fg_tilename(w, "status_bar_ascii_brown");
+      wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_ascii_brown");
     } else {
-      wid_set_fg_tilename(w, "status_bar_pixelart_brown");
+      wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_pixelart_brown");
     }
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
@@ -209,9 +209,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     wid_set_pos(w, tl, br);
     wid_set_text(w, "(Falling)");
     if (g_opt_ascii) {
-      wid_set_fg_tilename(w, "status_bar_ascii_red");
+      wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_ascii_red");
     } else {
-      wid_set_fg_tilename(w, "status_bar_pixelart_red");
+      wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_pixelart_red");
     }
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
@@ -233,9 +233,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       wid_set_text(w, "(Broken)");
     }
     if (g_opt_ascii) {
-      wid_set_fg_tilename(w, "status_bar_ascii_dark");
+      wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_ascii_dark");
     } else {
-      wid_set_fg_tilename(w, "status_bar_pixelart_dark");
+      wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_pixelart_dark");
     }
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
@@ -250,9 +250,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       wid_set_pos(w, tl, br);
       wid_set_text(w, "(Attacking)");
       if (g_opt_ascii) {
-        wid_set_fg_tilename(w, "status_bar_ascii_red");
+        wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_ascii_red");
       } else {
-        wid_set_fg_tilename(w, "status_bar_pixelart_red");
+        wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_pixelart_red");
       }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
@@ -266,9 +266,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       wid_set_pos(w, tl, br);
       wid_set_text(w, "(Missed)");
       if (g_opt_ascii) {
-        wid_set_fg_tilename(w, "status_bar_ascii_orange");
+        wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_ascii_orange");
       } else {
-        wid_set_fg_tilename(w, "status_bar_pixelart_orange");
+        wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_pixelart_orange");
       }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
@@ -282,9 +282,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       wid_set_pos(w, tl, br);
       wid_set_text(w, "(Stuck)");
       if (g_opt_ascii) {
-        wid_set_fg_tilename(w, "status_bar_ascii_orange");
+        wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_ascii_orange");
       } else {
-        wid_set_fg_tilename(w, "status_bar_pixelart_orange");
+        wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_pixelart_orange");
       }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
@@ -298,9 +298,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       wid_set_pos(w, tl, br);
       wid_set_text(w, "(Sleeping)");
       if (g_opt_ascii) {
-        wid_set_fg_tilename(w, "status_bar_ascii_dark");
+        wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_ascii_dark");
       } else {
-        wid_set_fg_tilename(w, "status_bar_pixelart_dark");
+        wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_pixelart_dark");
       }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
@@ -314,9 +314,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       wid_set_pos(w, tl, br);
       wid_set_text(w, "(Idle)");
       if (g_opt_ascii) {
-        wid_set_fg_tilename(w, "status_bar_ascii_dark");
+        wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_ascii_dark");
       } else {
-        wid_set_fg_tilename(w, "status_bar_pixelart_dark");
+        wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_pixelart_dark");
       }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
@@ -332,9 +332,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       wid_set_pos(w, tl, br);
       wid_set_text(w, "(Raging)");
       if (g_opt_ascii) {
-        wid_set_fg_tilename(w, "status_bar_ascii_red");
+        wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_ascii_red");
       } else {
-        wid_set_fg_tilename(w, "status_bar_pixelart_red");
+        wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_pixelart_red");
       }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
@@ -352,9 +352,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
           wid_set_pos(w, tl, br);
           wid_set_text(w, "(Hunting)");
           if (g_opt_ascii) {
-            wid_set_fg_tilename(w, "status_bar_ascii_dark");
+            wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_ascii_dark");
           } else {
-            wid_set_fg_tilename(w, "status_bar_pixelart_dark");
+            wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_pixelart_dark");
           }
           wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
           wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
@@ -374,9 +374,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       wid_set_pos(w, tl, br);
       wid_set_text(w, "(Open)");
       if (g_opt_ascii) {
-        wid_set_fg_tilename(w, "status_bar_ascii_green");
+        wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_ascii_green");
       } else {
-        wid_set_fg_tilename(w, "status_bar_pixelart_green");
+        wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_pixelart_green");
       }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
@@ -398,9 +398,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       }
       wid_set_style(w, UI_WID_STYLE_DARK);
       if (g_opt_ascii) {
-        wid_set_fg_tilename(w, "status_bar_ascii_dark");
+        wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_ascii_dark");
       } else {
-        wid_set_fg_tilename(w, "status_bar_pixelart_dark");
+        wid_set_tilename(WID_DEPTH_FG_0, w, "status_bar_pixelart_dark");
       }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
@@ -422,7 +422,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
         i         = std::min(i, UI_HEALTH_BAR_STEPS - 1);
         i         = std::max(i, 0);
         auto icon = "health_bar_ascii_" + std::to_string(i);
-        wid_set_fg_tilename(w, icon);
+        wid_set_tilename(WID_DEPTH_FG_0, w, icon);
         wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
         wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
         wid_set_thing_context(w, t, 0);

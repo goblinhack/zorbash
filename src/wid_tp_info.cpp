@@ -147,7 +147,7 @@ WidPopup *Game::wid_tp_info_create_popup(Tpp t, point tl, point br)
         point br = make_point(17, 6);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
-        wid_set_bg_tilename(w, "ui_circle");
+        wid_set_tilename(WID_DEPTH_BG_0, w, "ui_circle");
         wid_set_color(w, WID_COLOR_BG, WHITE);
         wid_set_style(w, UI_WID_STYLE_SPARSE_NONE);
       }
@@ -159,8 +159,8 @@ WidPopup *Game::wid_tp_info_create_popup(Tpp t, point tl, point br)
         point br = make_point(16, 5);
         wid_set_ignore_events(w, true);
         wid_set_pos(w, tl, br);
-        wid_set_bg_tilename(w, "ui_tile_bg");
-        wid_set_fg_tilename(w, tile->name);
+        wid_set_tilename(WID_DEPTH_BG_0, w, "ui_tile_bg");
+        wid_set_tilename(WID_DEPTH_FG_0, w, tile->name);
         wid_set_color(w, WID_COLOR_BG, WHITE);
       }
 

@@ -6,6 +6,7 @@
 #include "my_game.hpp"
 #include "my_thing.hpp"
 #include "my_vector_bounds_check.hpp"
+#include "my_wid.hpp"
 
 void Level::display_ascii_projectiles(point tl, point br)
 {
@@ -67,8 +68,8 @@ void Level::display_ascii_projectiles(point tl, point br)
       int  y       = tl.y + get(points, index).y;
 
       color c = tile->ascii_fg_col_value;
-      ascii_set_fg4(x, y, tile->ascii_fg_char);
-      ascii_set_fg4(x, y, c);
+      ascii_set(WID_DEPTH_FG_3, x, y, tile->ascii_fg_char);
+      ascii_set(WID_DEPTH_FG_3, x, y, c);
     }
 
     return false;

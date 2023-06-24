@@ -6,6 +6,7 @@
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
 #include "my_unicode.hpp"
+#include "my_wid.hpp"
 
 void Level::display_ascii_gas(point tl, point br, int16_t minx, int16_t miny, int16_t maxx, int16_t maxy)
 {
@@ -32,12 +33,12 @@ void Level::display_ascii_gas(point tl, point br, int16_t minx, int16_t miny, in
       int   tx = tl.x + (p.x - minx);
       int   ty = tl.y + (p.y - miny);
 
-      ascii_set_fg2(tx, ty, UNICODE_BLOCK);
+      ascii_set(WID_DEPTH_FG_1, tx, ty, UNICODE_BLOCK);
 
       color c = LIMEGREEN;
       c       = color_change_hue(c, non_pcg_random_range(0, 50));
       c.a     = intensity / 2;
-      ascii_set_fg2(tx, ty, c);
+      ascii_set(WID_DEPTH_FG_1, tx, ty, c);
     }
   }
 }
