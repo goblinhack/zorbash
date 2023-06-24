@@ -3,6 +3,18 @@ import tp
 import random
 
 
+def random_title():
+    title = ("ser", "ser")
+    names1 = ("dead", "disco", "giant", "blood", "swift", "dim", "bright", "wolf",
+              "moor", "ape", "sorrow", "goblin", "holy", "basil", "york", "short",
+              "tall", "wide", "slim")
+    names2 = ("pool", "smith", "spike", "mercy", "thirst", "mare", "ness", "anvil",
+              "max", "dragon", "heart", "bane", "rose", "pond", "scum", "bob", "hack",
+              "might", "grace", "brush", "wood", "worm", "able", "rock", "shock",
+              "fire", "iceice")
+    return random.choice(title) + " " + random.choice(names1) + random.choice(names2)
+
+
 # hitter: arrow / monst
 # real_hitter: who fired the arrow
 def on_hit_and_still_alive(me, hitter, real_hitter, x, y, crit, damage):
@@ -453,7 +465,7 @@ def init():
     tp_init(
         name="player1",
         text_long_name="noble warrior",
-        title="Ser Deadalot",
+        title=random_title(),
         text_short_name="you",
     )
 

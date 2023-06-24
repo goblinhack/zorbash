@@ -87,7 +87,7 @@ bool wid_rightbar_ascii_create(void)
     point br = make_point(width - 1, y_at);
 
     wid_set_pos(w, tl, br);
-    wid_set_text(w, player->title());
+    wid_set_text(w, capitalise(player->title()));
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
