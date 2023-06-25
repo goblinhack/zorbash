@@ -263,6 +263,12 @@ int wid_get_br_y(Widp w)
 void wid_get_tl_x_tl_y_br_x_br_y(Widp w, int *tl_x, int *tl_y, int *br_x, int *br_y)
 {
   TRACE_NO_INDENT();
+
+  if (! w) {
+    ERR("NULL wid");
+    return;
+  }
+
   const int tlx = w->key.tl.x;
   const int tly = w->key.tl.y;
   const int brx = w->key.br.x;
@@ -3567,6 +3573,7 @@ static uint8_t wid_scroll_trough_mouse_motion(Widp w, int x, int y, int relx, in
 static void wid_adjust_scrollbar(Widp scrollbar, Widp owner)
 {
   TRACE_NO_INDENT();
+
   double  height       = wid_get_height(owner);
   double  width        = wid_get_width(owner);
   double  child_height = 0;
@@ -3621,6 +3628,7 @@ static void wid_adjust_scrollbar(Widp scrollbar, Widp owner)
     }
   }
 
+  TRACE_NO_INDENT();
   int ptl_x, ptl_y, pbr_x, pbr_y;
   wid_get_tl_x_tl_y_br_x_br_y(owner, &ptl_x, &ptl_y, &pbr_x, &pbr_y);
 
@@ -3642,6 +3650,7 @@ static void wid_adjust_scrollbar(Widp scrollbar, Widp owner)
     child_height = maxy - miny + 1;
   }
 
+  TRACE_NO_INDENT();
   if (owner->scrollbar_vert) {
     if (wid_get_moveable_vert(scrollbar)) {
       trough_height    = wid_get_height(owner->scrollbar_vert->parent);
@@ -3668,6 +3677,7 @@ static void wid_adjust_scrollbar(Widp scrollbar, Widp owner)
     }
   }
 
+  TRACE_NO_INDENT();
   if (owner->scrollbar_horiz) {
     if (wid_get_moveable_horiz(scrollbar)) {
       trough_width    = wid_get_width(owner->scrollbar_horiz->parent);

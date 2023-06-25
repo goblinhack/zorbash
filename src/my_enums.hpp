@@ -52,6 +52,8 @@ enum {
   MAP_Z_PRIO_LAST,
 };
 
+#define MAP_Z_PRIO_PLAYER_FIRST MAP_Z_PRIO_PLAYER_TORSO
+
 enum {
   MAP_TICK_PRIO_VERY_HIGH, // e.g. Lasers
   MAP_TICK_PRIO_HIGH,      // Player

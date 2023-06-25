@@ -1269,5 +1269,5 @@ Tpp tp_get_next_bodypart(int bodypart, const std::string &which)
 Tpp tp_get_prev_bodypart(int bodypart, const std::string &which)
 {
   TRACE_NO_INDENT();
-  return tp_get_bodypart(bodypart, which, -1);
+  return tp_get_bodypart(bodypart, which, -2);
 }

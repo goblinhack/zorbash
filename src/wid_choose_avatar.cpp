@@ -22,6 +22,7 @@ WidPopup *wid_choose_avatar;
 static void wid_choose_avatar_destroy(void)
 {
   TRACE_AND_INDENT();
+
   delete wid_choose_avatar;
   wid_choose_avatar = nullptr;
 }
@@ -29,6 +30,7 @@ static void wid_choose_avatar_destroy(void)
 static uint8_t wid_choose_avatar_cancel(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
+
   wid_choose_avatar_destroy();
   game->wid_main_menu_select();
   return true;
@@ -75,6 +77,8 @@ static uint8_t wid_choose_avatar_key_down(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_choose_avatar_bodypart_next(Widp w, int x, int y, uint32_t button)
 {
+  TRACE_AND_INDENT();
+
   auto bodypart         = wid_get_int_context(w);
   auto current_bodypart = get(game->config.player_bodyparts, bodypart);
   auto next_bodypart    = tp_get_next_bodypart(bodypart, current_bodypart);
@@ -87,6 +91,8 @@ static uint8_t wid_choose_avatar_bodypart_next(Widp w, int x, int y, uint32_t bu
 
 static uint8_t wid_choose_avatar_bodypart_prev(Widp w, int x, int y, uint32_t button)
 {
+  TRACE_AND_INDENT();
+
   auto bodypart         = wid_get_int_context(w);
   auto current_bodypart = get(game->config.player_bodyparts, bodypart);
   auto next_bodypart    = tp_get_prev_bodypart(bodypart, current_bodypart);
@@ -130,7 +136,15 @@ void Game::wid_choose_avatar_select(void)
   {
     TRACE_NO_INDENT();
 
-    y_at += 4;
+    switch (iter) {
+      case BODYPART_HAT : y_at = 6; break;
+      case BODYPART_HAIR : y_at = 10; break;
+      case BODYPART_FACE : y_at = 18; break;
+      case BODYPART_TORSO : y_at = 32; break;
+      case BODYPART_LEGS : y_at = 50; break;
+      case BODYPART_EYES : y_at = 14; break;
+    }
+
     {
       TRACE_AND_INDENT();
       auto p = wid_choose_avatar->wid_text_area->wid_text_area;
@@ -194,14 +208,32 @@ void Game::wid_choose_avatar_select(void)
     FOR_ALL_BODYPART(iter)
     {
       TRACE_NO_INDENT();
+
       if (game->config.player_bodyparts[ iter ].empty()) {
         auto tp_bodypart = tp_random_bodypart(iter);
         set(game->config.player_bodyparts, iter, tp_bodypart->name());
       }
 
-      wid_set_tilename(TILE_LAYER_FG_0 + iter, w, game->config.player_bodyparts[ iter ] + ".1");
+      int z = MAP_Z_PRIO_PLAYER_FIRST;
+
+      switch (iter) {
+        case BODYPART_HAT : z = MAP_Z_PRIO_PLAYER_HAT; break;
+        case BODYPART_HAIR : z = MAP_Z_PRIO_PLAYER_HAIR; break;
+        case BODYPART_FACE : z = MAP_Z_PRIO_PLAYER_FACE; break;
+        case BODYPART_TORSO : z = MAP_Z_PRIO_PLAYER_TORSO; break;
+        case BODYPART_LEGS : z = MAP_Z_PRIO_PLAYER_LEGS; break;
+        case BODYPART_EYES : z = MAP_Z_PRIO_PLAYER_EYES; break;
+      }
+
+      TRACE_NO_INDENT();
+
+      wid_set_tilename(TILE_LAYER_FG_0 + (z - MAP_Z_PRIO_PLAYER_FIRST), w,
+                       game->config.player_bodyparts[ iter ] + ".1");
     }
 
     wid_set_pos(w, tl, br);
   }
+
+  TRACE_NO_INDENT();
+  wid_update(wid_choose_avatar->wid_text_area->wid_text_area);
 }
