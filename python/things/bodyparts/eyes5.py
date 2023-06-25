@@ -15,12 +15,12 @@ def tp_init(name):
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.is_loggable(self, True)
-    my.is_bodypart_torso(self, True)
+    my.is_bodypart_eyes(self, True)
     my.is_moveable(self, True)
     my.text_a_or_an(self, "a")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_Z_PRIO_PLAYER_LEGS)
+    my.z_prio(self, my.MAP_Z_PRIO_PLAYER_TORSO)
     # end sort marker
 
     # This should be synced with its owner, but just in case it is not, we have delay set
@@ -93,7 +93,7 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="bodypart_torso4")
+    tp_init(name="bodypart_eyes5")
 
 
 init()

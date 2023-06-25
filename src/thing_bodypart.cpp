@@ -91,7 +91,7 @@ void Thing::bodypart_remove(int which)
 std::string bodypart_name(int which)
 {
   switch (which) {
-    case BODYPART_HAT : return "hat";
+    case BODYPART_HAT : return "bling";
     case BODYPART_HAIR : return "hair";
     case BODYPART_FACE : return "face";
     case BODYPART_TORSO : return "torso";

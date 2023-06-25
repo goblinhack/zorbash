@@ -103,6 +103,20 @@ static uint8_t wid_choose_avatar_bodypart_prev(Widp w, int x, int y, uint32_t bu
   return false;
 }
 
+static void wid_choose_avatar_tick(Widp w)
+{
+  TRACE_NO_INDENT();
+
+  static auto last = time_ms_cached();
+  if (! time_have_x_tenths_passed_since(5, last)) {
+    return;
+  }
+  last = time_ms();
+
+  wid_choose_avatar_destroy();
+  game->wid_choose_avatar_select();
+}
+
 void Game::wid_choose_avatar_select(void)
 {
   TRACE_AND_INDENT();
@@ -113,6 +127,14 @@ void Game::wid_choose_avatar_select(void)
   wid_inventory_fini();
   wid_skillbox_fini();
   wid_thing_info_fini("choose avatar");
+
+  //
+  // The tile needs to be optional, as we do not always have a tile, e.g. hats
+  //
+  static int avatar_anim_fram = 1;
+  if (++avatar_anim_fram > 6) {
+    avatar_anim_fram = 1;
+  }
 
   auto  avatar_width  = TERM_WIDTH / 4 * 2;
   auto  avatar_height = TERM_HEIGHT / 4 * 3;
@@ -227,13 +249,26 @@ void Game::wid_choose_avatar_select(void)
 
       TRACE_NO_INDENT();
 
-      wid_set_tilename(TILE_LAYER_FG_0 + (z - MAP_Z_PRIO_PLAYER_FIRST), w,
-                       game->config.player_bodyparts[ iter ] + ".1");
-    }
+      auto tilename = game->config.player_bodyparts[ iter ] + "." + std::to_string(avatar_anim_fram);
+      if (tile_find(tilename)) {
+        wid_set_tilename(TILE_LAYER_FG_0 + (z - MAP_Z_PRIO_PLAYER_FIRST), w, tilename);
+      }
 
-    wid_set_pos(w, tl, br);
+      //
+      // Animate a sword on top
+      //
+      tilename = "sword_wood_demo_carry." + std::to_string(avatar_anim_fram);
+      if (tile_find(tilename)) {
+        wid_set_tilename(TILE_LAYER_FG_0 + (MAP_Z_PRIO_PLAYER_EYES - MAP_Z_PRIO_PLAYER_FIRST) + 3, w, tilename);
+      }
+
+      wid_set_pos(w, tl, br);
+    }
   }
 
   TRACE_NO_INDENT();
-  wid_update(wid_choose_avatar->wid_text_area->wid_text_area);
+
+  auto w = wid_choose_avatar->wid_text_area->wid_text_area;
+  wid_set_on_tick(w, wid_choose_avatar_tick);
+  wid_update(w);
 }

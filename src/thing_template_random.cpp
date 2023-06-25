@@ -1243,11 +1243,11 @@ static Tpp tp_get_bodypart(const int bodypart, const std::string &which, int ste
   bool found {};
 
   for (auto b : tp_bodypart[ bodypart ]) {
-    index++;
     if (b->name() == which) {
       found = true;
       break;
     }
+    index++;
   }
 
   if (! found) {
@@ -1269,5 +1269,5 @@ Tpp tp_get_next_bodypart(int bodypart, const std::string &which)
 Tpp tp_get_prev_bodypart(int bodypart, const std::string &which)
 {
   TRACE_NO_INDENT();
-  return tp_get_bodypart(bodypart, which, -2);
+  return tp_get_bodypart(bodypart, which, -1);
 }

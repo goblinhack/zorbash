@@ -20,7 +20,7 @@ def tp_init(name):
     my.text_a_or_an(self, "a")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_Z_PRIO_PLAYER_TORSO)
+    my.z_prio(self, my.MAP_Z_PRIO_PLAYER_LEGS)
     # end sort marker
 
     # This should be synced with its owner, but just in case it is not, we have delay set

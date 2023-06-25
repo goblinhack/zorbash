@@ -93,7 +93,7 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="bodypart_torso4")
+    tp_init(name="bodypart_torso10")
 
 
 init()
