@@ -23,7 +23,7 @@ void Thing::blit_tile_at(point p, bool lit, bool left_bar)
   }
 
   if (! g_opt_ascii) {
-    ascii_set(WID_DEPTH_FG_3, p.x, p.y, tile);
+    ascii_set(TILE_LAYER_FG_3, p.x, p.y, tile);
     return;
   }
 

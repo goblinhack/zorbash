@@ -187,7 +187,7 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
 
   if (! g_opt_ascii) {
     if (! bg_tilename.empty()) {
-      wid_set_tilename(WID_DEPTH_BG_0, b, bg_tilename);
+      wid_set_tilename(TILE_LAYER_BG_0, b, bg_tilename);
     }
   }
 
@@ -236,7 +236,7 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
 
     if (! g_opt_ascii) {
       if (! fg_tilename.empty()) {
-        wid_set_tilename(WID_DEPTH_FG_0, b, fg_tilename);
+        wid_set_tilename(TILE_LAYER_FG_0, b, fg_tilename);
       }
     }
 
@@ -1315,7 +1315,7 @@ void Game::wid_choose_initial_dungeons(void)
 
           wid_set_pos(b, tl, br);
           if (! g_opt_ascii) {
-            wid_set_tilename(WID_DEPTH_FG_1, b, "ud_icon");
+            wid_set_tilename(TILE_LAYER_FG_1, b, "ud_icon");
           } else {
             wid_set_text(b, "|");
           }
@@ -1334,7 +1334,7 @@ void Game::wid_choose_initial_dungeons(void)
 
           wid_set_pos(b, tl, br);
           if (! g_opt_ascii) {
-            wid_set_tilename(WID_DEPTH_FG_1, b, "lr_icon");
+            wid_set_tilename(TILE_LAYER_FG_1, b, "lr_icon");
           } else {
             wid_set_text(b, "_");
           }
@@ -1353,7 +1353,7 @@ void Game::wid_choose_initial_dungeons(void)
 
           wid_set_pos(b, tl, br);
           if (! g_opt_ascii) {
-            wid_set_tilename(WID_DEPTH_FG_1, b, "lr_icon");
+            wid_set_tilename(TILE_LAYER_FG_1, b, "lr_icon");
           } else {
             wid_set_text(b, "_");
           }
@@ -1371,7 +1371,7 @@ void Game::wid_choose_initial_dungeons(void)
 
           wid_set_pos(b, tl, br);
           if (! g_opt_ascii) {
-            wid_set_tilename(WID_DEPTH_FG_1, b, "ud_icon");
+            wid_set_tilename(TILE_LAYER_FG_1, b, "ud_icon");
           } else {
             wid_set_text(b, "|");
           }
@@ -1496,7 +1496,7 @@ void Game::wid_choose_initial_dungeons(void)
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
       if (! g_opt_ascii) {
-        wid_set_tilename(WID_DEPTH_BG_0, b, "biome_dungeon");
+        wid_set_tilename(TILE_LAYER_BG_0, b, "biome_dungeon");
       }
 
       tl.x += 3;
@@ -1517,7 +1517,7 @@ void Game::wid_choose_initial_dungeons(void)
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
       if (! g_opt_ascii) {
-        wid_set_tilename(WID_DEPTH_BG_0, b, "biome_swamp");
+        wid_set_tilename(TILE_LAYER_BG_0, b, "biome_swamp");
       }
 
       tl.x += 2;
@@ -1538,7 +1538,7 @@ void Game::wid_choose_initial_dungeons(void)
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
       if (! g_opt_ascii) {
-        wid_set_tilename(WID_DEPTH_BG_0, b, "biome_flooded");
+        wid_set_tilename(TILE_LAYER_BG_0, b, "biome_flooded");
       }
 
       tl.x += 3;
@@ -1559,7 +1559,7 @@ void Game::wid_choose_initial_dungeons(void)
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
       if (! g_opt_ascii) {
-        wid_set_tilename(WID_DEPTH_BG_0, b, "biome_chasms");
+        wid_set_tilename(TILE_LAYER_BG_0, b, "biome_chasms");
       }
 
       tl.x += 2;
@@ -1580,7 +1580,7 @@ void Game::wid_choose_initial_dungeons(void)
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
       if (! g_opt_ascii) {
-        wid_set_tilename(WID_DEPTH_BG_0, b, "biome_ice");
+        wid_set_tilename(TILE_LAYER_BG_0, b, "biome_ice");
       }
 
       tl.x += 2;
@@ -1601,7 +1601,7 @@ void Game::wid_choose_initial_dungeons(void)
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
       if (! g_opt_ascii) {
-        wid_set_tilename(WID_DEPTH_BG_0, b, "biome_lava");
+        wid_set_tilename(TILE_LAYER_BG_0, b, "biome_lava");
       }
 
       tl.x += 2;

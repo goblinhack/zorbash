@@ -1011,6 +1011,12 @@ int main(int argc, char *argv[])
   wid_botcon_flush();
   flush_the_console();
 
+  //
+  // Now all templates are loaded, make sure we have some default config.
+  // for example, for bodyparts.
+  //
+  game->config.final_init();
+
   if (g_opt_tests) {
     //
     // Run tests

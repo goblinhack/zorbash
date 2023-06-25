@@ -68,8 +68,8 @@ void Level::display_ascii_projectiles(point tl, point br)
       int  y       = tl.y + get(points, index).y;
 
       color c = tile->ascii_fg_col_value;
-      ascii_set(WID_DEPTH_FG_3, x, y, tile->ascii_fg_char);
-      ascii_set(WID_DEPTH_FG_3, x, y, c);
+      ascii_set(TILE_LAYER_FG_3, x, y, tile->ascii_fg_char);
+      ascii_set(TILE_LAYER_FG_3, x, y, c);
     }
 
     return false;

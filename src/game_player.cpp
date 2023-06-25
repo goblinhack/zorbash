@@ -2,6 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_thing.hpp"
@@ -36,10 +37,12 @@ void Game::place_player(void)
         DIE("Failed to create player");
       }
 
-      FOR_ALL_BODYPART(e)
+      FOR_ALL_BODYPART(iter)
       {
-        auto b = level->thing_new(tp_random_bodypart(e), point(x, y));
-        t->bodypart_add(b, e);
+        TRACE_NO_INDENT();
+        auto preferred_bodypart = get(game->config.player_bodyparts, iter);
+        auto my_bodypart        = level->thing_new(preferred_bodypart, point(x, y));
+        t->bodypart_add(my_bodypart, iter);
       }
 
       if (0) {

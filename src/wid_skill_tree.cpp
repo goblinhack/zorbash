@@ -465,7 +465,7 @@ void Game::wid_choose_from_skill_tree(std::string current_tree_name)
                 if (tiles) {
                   auto tile = tile_n(tiles, skill_is_active_or_available ? 0 : 1);
                   if (tile) {
-                    wid_set_tile(WID_DEPTH_FG_0, b, tile);
+                    wid_set_tile(TILE_LAYER_FG_0, b, tile);
                   }
                 }
               }
@@ -497,7 +497,7 @@ void Game::wid_choose_from_skill_tree(std::string current_tree_name)
         if (g_opt_ascii) {
           wid_set_text(b, "v");
         } else {
-          wid_set_tilename(WID_DEPTH_FG_1, b, "tile_down");
+          wid_set_tilename(TILE_LAYER_FG_1, b, "tile_down");
         }
         wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
       }
@@ -517,7 +517,7 @@ void Game::wid_choose_from_skill_tree(std::string current_tree_name)
         if (g_opt_ascii) {
           wid_set_text(b, "^");
         } else {
-          wid_set_tilename(WID_DEPTH_FG_1, b, "tile_up");
+          wid_set_tilename(TILE_LAYER_FG_1, b, "tile_up");
         }
         wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
       }
@@ -538,7 +538,7 @@ void Game::wid_choose_from_skill_tree(std::string current_tree_name)
         if (g_opt_ascii) {
           wid_set_text(b, "<");
         } else {
-          wid_set_tilename(WID_DEPTH_FG_1, b, "tile_left");
+          wid_set_tilename(TILE_LAYER_FG_1, b, "tile_left");
         }
         wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
       }
@@ -561,7 +561,7 @@ void Game::wid_choose_from_skill_tree(std::string current_tree_name)
         if (g_opt_ascii) {
           wid_set_text(b, ">");
         } else {
-          wid_set_tilename(WID_DEPTH_FG_1, b, "tile_right");
+          wid_set_tilename(TILE_LAYER_FG_1, b, "tile_right");
         }
         wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
       }
@@ -594,7 +594,7 @@ void Game::wid_choose_from_skill_tree(std::string current_tree_name)
       point tl(skills_width - 2, 0);
       point br(skills_width, 2);
       wid_set_pos(w, tl, br);
-      wid_set_tilename(WID_DEPTH_BG_0, w, "ui_icon_close");
+      wid_set_tilename(TILE_LAYER_BG_0, w, "ui_icon_close");
       wid_set_on_mouse_up(w, wid_skill_close);
     }
 
@@ -603,7 +603,7 @@ void Game::wid_choose_from_skill_tree(std::string current_tree_name)
       point tl(0, 0);
       point br(2, 2);
       wid_set_pos(w, tl, br);
-      wid_set_tilename(WID_DEPTH_BG_0, w, "ui_icon_close");
+      wid_set_tilename(TILE_LAYER_BG_0, w, "ui_icon_close");
       wid_set_on_mouse_up(w, wid_skill_close);
     }
   }

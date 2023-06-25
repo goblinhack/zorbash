@@ -13,9 +13,9 @@
 
 bool Thing::is_bodypart(Thingp item)
 {
-  FOR_ALL_BODYPART(e)
+  FOR_ALL_BODYPART(iter)
   {
-    if (item == bodypart_get(e)) {
+    if (item == bodypart_get(iter)) {
       return true;
     }
   }

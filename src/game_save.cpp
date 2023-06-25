@@ -936,6 +936,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my)
 
   out << bits(g_opt_seed_name);
   out << bits(my.t.hiscores);
+  out << bits(my.t.player_bodyparts);
 
   auto eol = GAME_SAVE_MARKER_CONFIG;
   out << bits(eol);
@@ -1300,7 +1301,7 @@ void Game::wid_save_select(void)
       point tl(width - 3, 0);
       point br(width - 0, 3);
       wid_set_pos(w, tl, br);
-      wid_set_tilename(WID_DEPTH_BG_0, w, "ui_icon_close");
+      wid_set_tilename(TILE_LAYER_BG_0, w, "ui_icon_close");
     }
     wid_set_on_mouse_up(w, wid_save_cancel);
   }

@@ -3175,6 +3175,9 @@ class Tp *tp_random_weapon_class_C(void);
 class Tp *tp_random_weapon(void);
 class Tp *tp_random_wet_grass(void);
 
+class Tp *tp_get_next_bodypart(int which, const std::string &curr);
+class Tp *tp_get_prev_bodypart(int which, const std::string &curr);
+
 const Tpidmap &tp_get_skills(void);
 
 Tilep tp_first_tile(class Tp *);

@@ -544,7 +544,7 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
 
   if (! g_opt_ascii) {
     if (! bg_tilename.empty()) {
-      wid_set_tilename(WID_DEPTH_BG_0, b, bg_tilename);
+      wid_set_tilename(TILE_LAYER_BG_0, b, bg_tilename);
     }
   }
 
@@ -554,11 +554,11 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
 
   if (! g_opt_ascii) {
     if (! bg_tilename.empty()) {
-      wid_set_tilename(WID_DEPTH_BG_0, b, bg_tilename);
+      wid_set_tilename(TILE_LAYER_BG_0, b, bg_tilename);
     }
 
     if (! fg_tilename.empty()) {
-      wid_set_tilename(WID_DEPTH_FG_0, b, fg_tilename);
+      wid_set_tilename(TILE_LAYER_FG_0, b, fg_tilename);
     }
   }
 
@@ -878,7 +878,7 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
 
           wid_set_pos(b, tl, br);
           if (! g_opt_ascii) {
-            wid_set_tilename(WID_DEPTH_FG_1, b, "ud_icon");
+            wid_set_tilename(TILE_LAYER_FG_1, b, "ud_icon");
           } else {
             wid_set_text(b, "|");
           }
@@ -897,7 +897,7 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
 
           wid_set_pos(b, tl, br);
           if (! g_opt_ascii) {
-            wid_set_tilename(WID_DEPTH_FG_1, b, "lr_icon");
+            wid_set_tilename(TILE_LAYER_FG_1, b, "lr_icon");
           } else {
             wid_set_text(b, "_");
           }
@@ -916,7 +916,7 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
 
           wid_set_pos(b, tl, br);
           if (! g_opt_ascii) {
-            wid_set_tilename(WID_DEPTH_FG_1, b, "lr_icon");
+            wid_set_tilename(TILE_LAYER_FG_1, b, "lr_icon");
           } else {
             wid_set_text(b, "_");
           }
@@ -934,7 +934,7 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
 
           wid_set_pos(b, tl, br);
           if (! g_opt_ascii) {
-            wid_set_tilename(WID_DEPTH_FG_1, b, "ud_icon");
+            wid_set_tilename(TILE_LAYER_FG_1, b, "ud_icon");
           } else {
             wid_set_text(b, "|");
           }

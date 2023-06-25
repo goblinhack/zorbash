@@ -152,7 +152,13 @@ public:
   //
   HiScores hiscores;
 
+  //
+  // Preferred bodyparts
+  //
+  std::array< std::string, BODYPART_MAX > player_bodyparts = {};
+
   void fini(void);
+  void final_init(void);
   void reset(void);
 };
 

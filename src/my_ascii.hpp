@@ -6,6 +6,7 @@
 #ifndef _MY_ASCII_HPP_
 #define _MY_ASCII_HPP_
 
+#include "my_enums.hpp"
 #include "my_tex.hpp"
 #include "my_tile.hpp"
 
@@ -21,6 +22,8 @@
 using ascii_key_down_callback   = int (*)(int, int, const struct SDL_Keysym *);
 using ascii_mouse_down_callback = int (*)(int, int, int);
 using ascii_mouse_over_callback = int (*)(int, int);
+
+typedef std::array< Tilep, TILE_LAYER_MAX > TileLayers;
 
 struct ascii_ {
   //
@@ -116,7 +119,7 @@ void ascii_init(void);
 void ascii_put_bg_square(int tlx, int tly, int brx, int bry, Tilep what, color c);
 void ascii_put_bg_square(int tlx, int tly, int brx, int bry, const char *tilename, color c);
 void ascii_put_bg_square(int tlx, int tly, int brx, int bry, wchar_t what, color c);
-void ascii_put_box(box_args b, int style, Tilep *tiles, const wchar_t *fmt, ...);
+void ascii_put_box(box_args b, int style, const TileLayers, const wchar_t *fmt, ...);
 void ascii_putf(int x, int y, color fg, color bg, const std::wstring fmt, ...);
 void ascii_putf(int x, int y, color fg, color bg, const wchar_t *fmt, ...);
 void ascii_putf(int x, int y, color fg, const std::wstring fmt, ...);

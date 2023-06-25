@@ -414,27 +414,27 @@ void Thing::level_push(void)
     // Need to push all animations also; so if we are changing state, like being
     // submerged, then when we push again, the animations are also suitably submerged.
     //
-    FOR_ALL_EQUIP(e)
+    FOR_ALL_EQUIP(iter)
     {
-      if (equip_id_carry_anim(e).ok()) {
-        auto it = level->thing_find(equip_id_carry_anim(e));
+      if (equip_id_carry_anim(iter).ok()) {
+        auto it = level->thing_find(equip_id_carry_anim(iter));
         if (it) {
           it->level_push();
         }
       }
 
-      if (equip_id_use_anim(e).ok()) {
-        auto it = level->thing_find(equip_id_use_anim(e));
+      if (equip_id_use_anim(iter).ok()) {
+        auto it = level->thing_find(equip_id_use_anim(iter));
         if (it) {
           it->level_push();
         }
       }
     }
 
-    FOR_ALL_BODYPART(e)
+    FOR_ALL_BODYPART(iter)
     {
-      if (bodypart_id_get(e).ok()) {
-        auto it = level->thing_find(bodypart_id_get(e));
+      if (bodypart_id_get(iter).ok()) {
+        auto it = level->thing_find(bodypart_id_get(iter));
         if (it) {
           it->level_push();
         }

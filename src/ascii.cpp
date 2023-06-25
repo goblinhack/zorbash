@@ -23,19 +23,19 @@ int16_t ascii_mouse_y;
 class AsciiCell
 {
 public:
-  Tilep tile[ WID_DEPTH_MAX ] {};
+  Tilep tile[ TILE_LAYER_MAX ] {};
 
-  Texp tex[ WID_DEPTH_MAX ] {};
+  Texp tex[ TILE_LAYER_MAX ] {};
 
-  float tx[ WID_DEPTH_MAX ] {};
-  float ty[ WID_DEPTH_MAX ] {};
-  float dx[ WID_DEPTH_MAX ] {};
-  float dy[ WID_DEPTH_MAX ] {};
+  float tx[ TILE_LAYER_MAX ] {};
+  float ty[ TILE_LAYER_MAX ] {};
+  float dx[ TILE_LAYER_MAX ] {};
+  float dy[ TILE_LAYER_MAX ] {};
 
-  color color_tl[ WID_DEPTH_MAX ];
-  color color_bl[ WID_DEPTH_MAX ];
-  color color_tr[ WID_DEPTH_MAX ];
-  color color_br[ WID_DEPTH_MAX ];
+  color color_tl[ TILE_LAYER_MAX ];
+  color color_bl[ TILE_LAYER_MAX ];
+  color color_tr[ TILE_LAYER_MAX ];
+  color color_br[ TILE_LAYER_MAX ];
 
   //
   // Is reset each frame, and so although a pointer potentially should be
@@ -164,7 +164,7 @@ bool ascii_is_empty(int x, int y)
 {
   AsciiCell *cell = &getref_no_check(cells, x, y);
 
-  for (auto depth = 0; depth < WID_DEPTH_MAX; depth++) {
+  for (auto depth = 0; depth < TILE_LAYER_MAX; depth++) {
     if (cell->tile[ depth ]) {
       return false;
     }
@@ -412,7 +412,7 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
 
     AsciiCell *cell = &getref_no_check(cells, x++, y);
 
-    auto depth = WID_DEPTH_FG_0;
+    auto depth = TILE_LAYER_FG_0;
 
     cell->tile[ depth ]     = tile;
     cell->color_tl[ depth ] = fg;
@@ -424,7 +424,7 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
       //
       // If we are displaying a color in the background then use a solid tile.
       //
-      auto depth = WID_DEPTH_BG_0;
+      auto depth = TILE_LAYER_BG_0;
 
       if (bg.r || bg.g || bg.b || bg.a) {
         static Tilep tile;
@@ -798,8 +798,8 @@ void ascii_put_bg_square(int tlx, int tly, int brx, int bry, Tilep tile, color c
 
   for (x = tlx; x <= brx; x++) {
     for (y = tly; y <= bry; y++) {
-      ascii_set(WID_DEPTH_BG_0, x, y, tile);
-      ascii_set(WID_DEPTH_BG_0, x, y, col);
+      ascii_set(TILE_LAYER_BG_0, x, y, tile);
+      ascii_set(TILE_LAYER_BG_0, x, y, col);
     }
   }
 }
@@ -913,7 +913,7 @@ static void ascii_blit(void)
       //
       // Background
       //
-      auto depth = WID_DEPTH_BG_0;
+      auto depth = TILE_LAYER_BG_0;
       if (cell->tex[ depth ]) {
         Texp tex = cell->tex[ depth ];
 
@@ -955,7 +955,7 @@ static void ascii_blit(void)
       tile_br.y = tile_y + dh;
 
       {
-        auto depth = WID_DEPTH_BG_1;
+        auto depth = TILE_LAYER_BG_1;
         if (cell->tile[ depth ]) {
           color color_tl = cell->color_tl[ depth ];
           color color_tr = cell->color_tr[ depth ];
@@ -969,7 +969,7 @@ static void ascii_blit(void)
         }
       }
 
-      for (int depth = WID_DEPTH_FG_1; depth < WID_DEPTH_MAX; depth++) {
+      for (int depth = TILE_LAYER_FG_1; depth < TILE_LAYER_MAX; depth++) {
         if (cell->tile[ depth ]) {
           color color_tl = cell->color_tl[ depth ];
           color color_tr = cell->color_tr[ depth ];
@@ -1007,7 +1007,7 @@ static void ascii_blit(void)
       // Foreground
       //
       {
-        auto depth = WID_DEPTH_FG_0;
+        auto depth = TILE_LAYER_FG_0;
         tile_br.x  = tile_x + dw;
         Tilep tile = cell->tile[ depth ];
 

@@ -42,36 +42,36 @@ void Thing::hooks_remove_from(Thingp o)
     o->on_fire_unset();
   }
 
-  FOR_ALL_EQUIP(e)
+  FOR_ALL_EQUIP(iter)
   {
-    if (id == o->equip_id(e)) {
-      o->unequip("remove hooks for equip id", e, false);
+    if (id == o->equip_id(iter)) {
+      o->unequip("remove hooks for equip id", iter, false);
 
       if (is_loggable()) {
         dbg2("Detach equip_id from o %s", o->to_string().c_str());
       }
-      o->equip_id_set(NoThingId.id, e);
+      o->equip_id_set(NoThingId.id, iter);
     }
 
-    if (id == o->equip_id_carry_anim(e)) {
-      o->unequip("remove hooks for carry-anim", e, false);
+    if (id == o->equip_id_carry_anim(iter)) {
+      o->unequip("remove hooks for carry-anim", iter, false);
 
       if (is_loggable()) {
         dbg2("Detach carry-anim from o %s", o->to_string().c_str());
       }
-      o->equip_carry_anim_id_set(NoThingId.id, e);
+      o->equip_carry_anim_id_set(NoThingId.id, iter);
     }
 
-    if (id == o->equip_id_use_anim(e)) {
+    if (id == o->equip_id_use_anim(iter)) {
       if (is_loggable()) {
         dbg2("Detach use_anim from owner %s", o->to_string().c_str());
       }
-      o->equip_use_anim_id_set(NoThingId.id, e);
+      o->equip_use_anim_id_set(NoThingId.id, iter);
 
       //
       // End of the use-animation, make the sword visible again.
       //
-      auto carry_anim = o->equip_carry_anim(e);
+      auto carry_anim = o->equip_carry_anim(iter);
       if (carry_anim) {
         dbg2("Make carry weapon visible %s", o->to_string().c_str());
         TRACE_AND_INDENT();
@@ -93,27 +93,27 @@ void Thing::hooks_remove_from(Thingp o)
         if (is_loggable()) {
           dbg2("No carry-anim for owner %s", o->to_string().c_str());
         }
-        auto id = o->equip_id(e);
+        auto id = o->equip_id(iter);
         if (id.ok()) {
-          o->equip(o->equip_get(e), e);
+          o->equip(o->equip_get(iter), iter);
         }
       }
     }
 
-    if (id == o->equip_id_use_anim(e)) {
+    if (id == o->equip_id_use_anim(iter)) {
       err("Weapon use anim is still attached");
     }
 
-    if (id == o->equip_id_carry_anim(e)) {
+    if (id == o->equip_id_carry_anim(iter)) {
       err("Weapon carry anim is still attached");
     }
   }
 
-  FOR_ALL_BODYPART(e)
+  FOR_ALL_BODYPART(iter)
   {
-    if (id == o->bodypart_id_get(e)) {
-      o->bodypart_remove(e);
-      o->bodypart_id_set(NoThingId.id, e);
+    if (id == o->bodypart_id_get(iter)) {
+      o->bodypart_remove(iter);
+      o->bodypart_id_set(NoThingId.id, iter);
     }
   }
 }
@@ -163,40 +163,40 @@ void Thing::hooks_remove()
   //
   // We own things like a sword. i.e. we are a player.
   //
-  FOR_ALL_EQUIP(e)
+  FOR_ALL_EQUIP(iter)
   {
-    Thingp item = equip_carry_anim(e);
+    Thingp item = equip_carry_anim(iter);
     if (item) {
       verify(MTYPE_THING, item);
       if (is_loggable()) {
         dbg2("Hooks remove carry-anim");
       }
-      equip_carry_anim_set(nullptr, e);
+      equip_carry_anim_set(nullptr, iter);
       item->owner_unset();
       item->dead("weapon carry-anim owner defeated");
     }
   }
 
-  FOR_ALL_EQUIP(e)
+  FOR_ALL_EQUIP(iter)
   {
-    Thingp item = equip_use_anim(e);
+    Thingp item = equip_use_anim(iter);
     if (item) {
       verify(MTYPE_THING, item);
       if (is_loggable()) {
         dbg2("Hooks remove use-anim");
       }
-      equip_use_anim_set(nullptr, e);
+      equip_use_anim_set(nullptr, iter);
       item->owner_unset();
       item->dead("weapon use-anim owner defeated");
     }
   }
 
-  FOR_ALL_BODYPART(e)
+  FOR_ALL_BODYPART(iter)
   {
-    if (bodypart_id_get(e).ok()) {
-      auto item = level->thing_find(bodypart_id_get(e));
+    if (bodypart_id_get(iter).ok()) {
+      auto item = level->thing_find(bodypart_id_get(iter));
       if (item) {
-        bodypart_id_set(NoThingId.id, e);
+        bodypart_id_set(NoThingId.id, iter);
         item->owner_unset();
         item->dead("bodypart removed");
       }

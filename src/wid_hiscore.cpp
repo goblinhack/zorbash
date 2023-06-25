@@ -190,7 +190,7 @@ void Game::wid_hiscores_show(void)
       point tl(width - 3, 0);
       point br(width - 0, 3);
       wid_set_pos(w, tl, br);
-      wid_set_tilename(WID_DEPTH_BG_0, w, "ui_icon_close");
+      wid_set_tilename(TILE_LAYER_BG_0, w, "ui_icon_close");
     }
     wid_set_on_mouse_up(w, wid_hiscore_mouse_up);
   }

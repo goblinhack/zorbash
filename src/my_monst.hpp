@@ -11,6 +11,7 @@
 #include <map>
 
 #include "my_color.hpp"
+#include "my_enums.hpp"
 #include "my_level_fov.hpp"
 #include "my_light.hpp"
 #include "my_point3d.hpp"
@@ -21,51 +22,6 @@
 constexpr uint32_t THING_MAGIC_BEGIN = 11221122;
 constexpr uint32_t THING_MAGIC_END   = 22112211;
 constexpr uint32_t THING_MAGIC_FINAL = 33333333;
-
-enum {
-  THING_SIZE_NOT_SET,
-  THING_SIZE_TINY,
-  THING_SIZE_SMALL,
-  THING_SIZE_NORMAL,
-  THING_SIZE_LARGE,
-  THING_SIZE_GIANT,
-  THING_SIZE_GARGANTUAN,
-};
-
-enum {
-  MONST_STATE_IDLE,
-  MONST_STATE_MOVING,
-  MONST_STATE_SLEEPING,
-  MONST_STATE_RESTING,
-  MONST_STATE_OPEN_INVENTORY,
-  MONST_STATE_USING_ENCHANTSTONE,
-  MONST_STATE_USING_SKILLSTONE,
-  MONST_STATE_REPACK_INVENTORY,
-};
-
-enum {
-  MONST_EQUIP_HELMET,
-  MONST_EQUIP_AMULET,
-  MONST_EQUIP_GAUNTLET,
-  MONST_EQUIP_CLOAK,
-  MONST_EQUIP_SHIELD,
-  MONST_EQUIP_ARMOR,
-  MONST_EQUIP_WEAPON,
-  MONST_EQUIP_RING1,
-  MONST_EQUIP_BOOTS,
-  MONST_EQUIP_RING2,
-  MONST_EQUIP_MAX,
-};
-
-enum {
-  BODYPART_HAT,
-  BODYPART_HAIR,
-  BODYPART_FACE,
-  BODYPART_TORSO,
-  BODYPART_LEGS,
-  BODYPART_EYES,
-  BODYPART_MAX,
-};
 
 //
 // Search priorities in order
@@ -78,10 +34,6 @@ enum {
 #define MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED       4
 #define MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP      5
 #define MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED 6
-
-#define FOR_ALL_EQUIP(_equip_) for (auto _equip_ = 0; _equip_ < MONST_EQUIP_MAX; _equip_++)
-
-#define FOR_ALL_BODYPART(_bodypart_) for (auto _bodypart_ = 0; _bodypart_ < BODYPART_MAX; _bodypart_++)
 
 #define FOR_ALL_BUFFS(_id_)          for (auto _id_ : itemsp()->buffs)
 #define FOR_ALL_BUFFS_FOR(_t_, _id_) for (auto _id_ : (_t_)->itemsp()->buffs)

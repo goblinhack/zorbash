@@ -1230,8 +1230,44 @@ Tpp tp_random_bodypart(int bodypart)
 {
   TRACE_NO_INDENT();
   if (unlikely(! tp_bodypart[ bodypart ].size())) {
-    ERR("No bodypart type %d found", bodypart);
     return nullptr;
   }
   return tp_get_with_no_rarity_filter(tp_bodypart[ bodypart ]);
+}
+
+static Tpp tp_get_bodypart(const int bodypart, const std::string &which, int step)
+{
+  TRACE_NO_INDENT();
+
+  int  index = 0;
+  bool found {};
+
+  for (auto b : tp_bodypart[ bodypart ]) {
+    index++;
+    if (b->name() == which) {
+      found = true;
+      break;
+    }
+  }
+
+  if (! found) {
+    index = 0;
+  }
+
+  index += step;
+  index %= tp_bodypart[ bodypart ].size();
+
+  return tp_bodypart[ bodypart ][ index ];
+}
+
+Tpp tp_get_next_bodypart(int bodypart, const std::string &which)
+{
+  TRACE_NO_INDENT();
+  return tp_get_bodypart(bodypart, which, 1);
+}
+
+Tpp tp_get_prev_bodypart(int bodypart, const std::string &which)
+{
+  TRACE_NO_INDENT();
+  return tp_get_bodypart(bodypart, which, -1);
 }

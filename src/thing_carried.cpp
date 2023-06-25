@@ -94,9 +94,9 @@ std::list< Thingp > Thing::carried_and_equipped_item_list(void)
     return empty;
   }
 
-  FOR_ALL_EQUIP(e)
+  FOR_ALL_EQUIP(iter)
   {
-    auto t = equip_get(e);
+    auto t = equip_get(iter);
     if (t) {
       verify(MTYPE_THING, t);
       out.push_back(t);
@@ -137,9 +137,9 @@ std::vector< Thingp > Thing::carried_and_equipped_item_vector(void)
     return empty;
   }
 
-  FOR_ALL_EQUIP(e)
+  FOR_ALL_EQUIP(iter)
   {
-    auto t = equip_get(e);
+    auto t = equip_get(iter);
     if (t) {
       verify(MTYPE_THING, t);
       out.push_back(t);
@@ -182,16 +182,16 @@ void Thing::move_carried_items(void)
   //
   // Weapons follow also.
   //
-  FOR_ALL_EQUIP(e)
+  FOR_ALL_EQUIP(iter)
   {
-    auto w = equip_get(e);
+    auto w = equip_get(iter);
     if (w) {
       w->move_to_immediately(curr_at);
       w->dir = dir;
     }
 
-    if (equip_id_carry_anim(e).ok()) {
-      auto w = level->thing_find(equip_id_carry_anim(e));
+    if (equip_id_carry_anim(iter).ok()) {
+      auto w = level->thing_find(equip_id_carry_anim(iter));
       if (w) {
         w->move_to(curr_at);
         w->dir = dir;
@@ -204,8 +204,8 @@ void Thing::move_carried_items(void)
     // we're not sure where the first swing was.
     //
     if (0) {
-      if (equip_id_use_anim(e).ok()) {
-        auto w = level->thing_find(equip_id_use_anim(e));
+      if (equip_id_use_anim(iter).ok()) {
+        auto w = level->thing_find(equip_id_use_anim(iter));
         if (w) {
           w->move_to(curr_at);
           w->dir = dir;
@@ -214,10 +214,10 @@ void Thing::move_carried_items(void)
     }
   }
 
-  FOR_ALL_BODYPART(e)
+  FOR_ALL_BODYPART(iter)
   {
-    if (bodypart_id_get(e).ok()) {
-      auto w = level->thing_find(bodypart_id_get(e));
+    if (bodypart_id_get(iter).ok()) {
+      auto w = level->thing_find(bodypart_id_get(iter));
       if (w) {
         w->move_to(curr_at);
         w->dir = dir;
@@ -286,24 +286,24 @@ void Thing::move_carried_items_immediately(void)
   //
   // Weapons follow also.
   //
-  FOR_ALL_EQUIP(e)
+  FOR_ALL_EQUIP(iter)
   {
-    auto w = equip_get(e);
+    auto w = equip_get(iter);
     if (w) {
       w->move_to_immediately(curr_at);
       w->dir = dir;
     }
 
-    if (equip_id_carry_anim(e).ok()) {
-      auto w = level->thing_find(equip_id_carry_anim(e));
+    if (equip_id_carry_anim(iter).ok()) {
+      auto w = level->thing_find(equip_id_carry_anim(iter));
       if (w) {
         w->move_to_immediately(curr_at);
         w->dir = dir;
       }
     }
 
-    if (equip_id_use_anim(e).ok()) {
-      auto w = level->thing_find(equip_id_use_anim(e));
+    if (equip_id_use_anim(iter).ok()) {
+      auto w = level->thing_find(equip_id_use_anim(iter));
       if (w) {
         w->move_to_immediately(curr_at);
         w->dir = dir;
@@ -311,10 +311,10 @@ void Thing::move_carried_items_immediately(void)
     }
   }
 
-  FOR_ALL_BODYPART(e)
+  FOR_ALL_BODYPART(iter)
   {
-    if (bodypart_id_get(e).ok()) {
-      auto w = level->thing_find(bodypart_id_get(e));
+    if (bodypart_id_get(iter).ok()) {
+      auto w = level->thing_find(bodypart_id_get(iter));
       if (w) {
         w->move_to_immediately(curr_at);
         w->dir = dir;

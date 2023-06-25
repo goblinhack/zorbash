@@ -341,27 +341,27 @@ void Thing::level_pop(void)
       // Need to pop all animations also; so if we are changing state, like being
       // submerged, then when we push again, the animations are also suitably submerged.
       //
-      FOR_ALL_EQUIP(e)
+      FOR_ALL_EQUIP(iter)
       {
-        if (equip_id_carry_anim(e).ok()) {
-          auto w = level->thing_find(equip_id_carry_anim(e));
+        if (equip_id_carry_anim(iter).ok()) {
+          auto w = level->thing_find(equip_id_carry_anim(iter));
           if (w) {
             w->level_pop();
           }
         }
 
-        if (equip_id_use_anim(e).ok()) {
-          auto w = level->thing_find(equip_id_use_anim(e));
+        if (equip_id_use_anim(iter).ok()) {
+          auto w = level->thing_find(equip_id_use_anim(iter));
           if (w) {
             w->level_pop();
           }
         }
       }
 
-      FOR_ALL_BODYPART(e)
+      FOR_ALL_BODYPART(iter)
       {
-        if (bodypart_id_get(e).ok()) {
-          auto w = level->thing_find(bodypart_id_get(e));
+        if (bodypart_id_get(iter).ok()) {
+          auto w = level->thing_find(bodypart_id_get(iter));
           if (w) {
             w->level_pop();
           }

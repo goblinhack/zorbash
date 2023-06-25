@@ -429,10 +429,10 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   // Weapons follow also.
   //
-  FOR_ALL_EQUIP(e)
+  FOR_ALL_EQUIP(iter)
   {
-    if (equip_id_carry_anim(e).ok()) {
-      auto id = equip_id_carry_anim(e);
+    if (equip_id_carry_anim(iter).ok()) {
+      auto id = equip_id_carry_anim(iter);
       auto it = level->thing_find(id);
       if (it) {
         it->move_to_immediately(curr_at);
@@ -457,9 +457,9 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       }
     }
 
-    if (equip_id_use_anim(e).ok()) {
-      auto id = equip_id_use_anim(e);
-      auto it = level->thing_find(equip_id_use_anim(e));
+    if (equip_id_use_anim(iter).ok()) {
+      auto id = equip_id_use_anim(iter);
+      auto it = level->thing_find(equip_id_use_anim(iter));
       if (it) {
         it->move_to_immediately(curr_at);
         if (g_opt_ascii || ! is_visible_to_player) {
@@ -487,9 +487,9 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     }
   }
 
-  FOR_ALL_BODYPART(e)
+  FOR_ALL_BODYPART(iter)
   {
-    auto id = bodypart_id_get(e);
+    auto id = bodypart_id_get(iter);
     if (id.ok()) {
       auto it = level->thing_find(id);
       if (it) {
@@ -813,31 +813,31 @@ void Thing::jump_end(void)
   //
   // Weapons follow also.
   //
-  FOR_ALL_EQUIP(e)
+  FOR_ALL_EQUIP(iter)
   {
-    auto it = equip_get(e);
+    auto it = equip_get(iter);
     if (it) {
       it->is_jumping = false;
     }
 
-    if (equip_id_carry_anim(e).ok()) {
-      auto it = level->thing_find(equip_id_carry_anim(e));
+    if (equip_id_carry_anim(iter).ok()) {
+      auto it = level->thing_find(equip_id_carry_anim(iter));
       if (it) {
         it->is_jumping = false;
       }
     }
 
-    if (equip_id_use_anim(e).ok()) {
-      auto it = level->thing_find(equip_id_use_anim(e));
+    if (equip_id_use_anim(iter).ok()) {
+      auto it = level->thing_find(equip_id_use_anim(iter));
       if (it) {
         it->is_jumping = false;
       }
     }
   }
 
-  FOR_ALL_BODYPART(e)
+  FOR_ALL_BODYPART(iter)
   {
-    auto id = bodypart_id_get(e);
+    auto id = bodypart_id_get(iter);
     if (id.ok()) {
       auto it = level->thing_find(id);
       if (it) {

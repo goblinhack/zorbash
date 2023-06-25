@@ -25,22 +25,6 @@ typedef enum {
 } wid_color;
 
 typedef enum {
-  WID_DEPTH_BG_0,
-  WID_DEPTH_BG_1,
-  WID_DEPTH_FG_0,
-  WID_DEPTH_FG_1,
-  WID_DEPTH_FG_2,
-  WID_DEPTH_FG_3,
-  WID_DEPTH_FG_4,
-  WID_DEPTH_FG_5,
-  WID_DEPTH_FG_6,
-  WID_DEPTH_FG_7,
-  WID_DEPTH_FG_8,
-  WID_DEPTH_FG_9,
-  WID_DEPTH_MAX,
-} wid_depth;
-
-typedef enum {
   WID_MODE_NORMAL,
   WID_MODE_OVER,
   WID_MODE_FOCUS,
@@ -488,7 +472,10 @@ public:
   point abs_tl {};
   point abs_br {};
 
-  Tilep tiles[ WID_DEPTH_MAX ] = {};
+  //
+  // Lots of layers of tiles for widgets.
+  //
+  TileLayers tiles = {};
 
   fsize texuv {};
 

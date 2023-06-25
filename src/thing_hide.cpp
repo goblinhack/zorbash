@@ -24,27 +24,27 @@ void Thing::hide(void)
   //
   // Hide the weapon too or it just floats in the air.
   //
-  FOR_ALL_EQUIP(e)
+  FOR_ALL_EQUIP(iter)
   {
-    if (equip_id_carry_anim(e).ok()) {
-      auto w = level->thing_find(equip_id_carry_anim(e));
+    if (equip_id_carry_anim(iter).ok()) {
+      auto w = level->thing_find(equip_id_carry_anim(iter));
       if (w) {
         w->hide();
       }
     }
 
-    if (equip_id_use_anim(e).ok()) {
-      auto w = level->thing_find(equip_id_use_anim(e));
+    if (equip_id_use_anim(iter).ok()) {
+      auto w = level->thing_find(equip_id_use_anim(iter));
       if (w) {
         w->hide();
       }
     }
   }
 
-  FOR_ALL_BODYPART(e)
+  FOR_ALL_BODYPART(iter)
   {
-    if (bodypart_id_get(e).ok()) {
-      auto w = level->thing_find(bodypart_id_get(e));
+    if (bodypart_id_get(iter).ok()) {
+      auto w = level->thing_find(bodypart_id_get(iter));
       if (w) {
         w->hide();
       }

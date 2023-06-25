@@ -46,7 +46,7 @@ bool wid_rightbar_pixelart_create(void)
       wid_set_style(wid_rightbar, UI_WID_STYLE_NORMAL);
     } else {
       wid_set_style(wid_rightbar, UI_WID_STYLE_SOLID_NONE);
-      wid_set_tilename(WID_DEPTH_BG_0, wid_rightbar, "ui_rightbar");
+      wid_set_tilename(TILE_LAYER_BG_0, wid_rightbar, "ui_rightbar");
     }
     wid_lower(wid_rightbar);
   }
@@ -157,7 +157,7 @@ bool wid_rightbar_pixelart_create(void)
     i         = std::min(i, UI_HEALTH_BAR_STEPS - 1);
     i         = std::max(i, 0);
     auto icon = "health_bar_" + std::to_string(i);
-    wid_set_tilename(WID_DEPTH_FG_0, w, icon);
+    wid_set_tilename(TILE_LAYER_FG_0, w, icon);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
   }
@@ -195,7 +195,7 @@ bool wid_rightbar_pixelart_create(void)
     i         = std::min(i, UI_HEALTH_BAR_STEPS - 1);
     i         = std::max(i, 0);
     auto icon = "health_bar_" + std::to_string(i);
-    wid_set_tilename(WID_DEPTH_FG_0, w, icon);
+    wid_set_tilename(TILE_LAYER_FG_0, w, icon);
   }
   {
     TRACE_NO_INDENT();
@@ -405,7 +405,7 @@ bool wid_rightbar_pixelart_create(void)
           continue;
         }
 
-        wid_set_tile(WID_DEPTH_FG_0, w, tile);
+        wid_set_tile(TILE_LAYER_FG_0, w, tile);
 
         //
         // If choosing a target, highlight the item
@@ -433,7 +433,7 @@ bool wid_rightbar_pixelart_create(void)
             } else {
               wid_set_color(w, WID_COLOR_TEXT_FG, GRAY90);
             }
-            wid_set_tile(WID_DEPTH_FG_1, w, tile);
+            wid_set_tile(TILE_LAYER_FG_1, w, tile);
           }
         }
 
@@ -443,10 +443,10 @@ bool wid_rightbar_pixelart_create(void)
         auto item_count = player->item_slot_charge_count(i);
         if (item_count > 9) {
           auto tile = tile_find_mand("item_count_N");
-          wid_set_tile(WID_DEPTH_FG_2, w, tile);
+          wid_set_tile(TILE_LAYER_FG_2, w, tile);
         } else if (item_count > 1) {
           auto tile = tile_find_mand("item_count_" + std::to_string(item_count));
-          wid_set_tile(WID_DEPTH_FG_2, w, tile);
+          wid_set_tile(TILE_LAYER_FG_2, w, tile);
         }
 
         //
@@ -456,10 +456,10 @@ bool wid_rightbar_pixelart_create(void)
         auto enchant_count = player->item_enchant_count(i);
         if (enchant_count > 9) {
           auto tile = tile_find_mand("item_enchant_N");
-          wid_set_tile(WID_DEPTH_FG_2, w, tile);
+          wid_set_tile(TILE_LAYER_FG_2, w, tile);
         } else if (enchant_count > 0) {
           auto tile = tile_find_mand("item_enchant_" + std::to_string(enchant_count));
-          wid_set_tile(WID_DEPTH_FG_2, w, tile);
+          wid_set_tile(TILE_LAYER_FG_2, w, tile);
         }
 
         wid_set_on_mouse_over_begin(w, wid_rightbar_inventory_over_begin);
@@ -532,7 +532,7 @@ bool wid_rightbar_pixelart_create(void)
           continue;
         }
 
-        wid_set_tile(WID_DEPTH_FG_0, w, tile);
+        wid_set_tile(TILE_LAYER_FG_0, w, tile);
 
         //
         // If choosing a target, highlight the item
@@ -617,7 +617,7 @@ bool wid_rightbar_pixelart_create(void)
           continue;
         }
 
-        wid_set_tile(WID_DEPTH_FG_0, w, tile);
+        wid_set_tile(TILE_LAYER_FG_0, w, tile);
 
         //
         // If choosing a target, highlight the item
@@ -694,7 +694,7 @@ bool wid_rightbar_pixelart_create(void)
           continue;
         }
 
-        wid_set_tile(WID_DEPTH_FG_0, w, tile);
+        wid_set_tile(TILE_LAYER_FG_0, w, tile);
 
         //
         // If choosing a target, highlight the item
@@ -723,7 +723,7 @@ bool wid_rightbar_pixelart_create(void)
 
     wid_set_pos(w, tl, br);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-    wid_set_tilename(WID_DEPTH_BG_0, w, "ui_minimap");
+    wid_set_tilename(TILE_LAYER_BG_0, w, "ui_minimap");
     wid_set_style(w, UI_WID_STYLE_SOLID_NONE);
     wid_set_ignore_events(w, true);
     wid_set_ignore_scroll_events(w, true);

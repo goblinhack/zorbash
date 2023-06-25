@@ -230,18 +230,18 @@ int Thing::light_distance_update(void)
 
         t->is_visible_to_player = true;
 
-        FOR_ALL_EQUIP(e)
+        FOR_ALL_EQUIP(iter)
         {
-          auto it = t->equip_carry_anim(e);
+          auto it = t->equip_carry_anim(iter);
           if (it) {
             it->is_visible_to_player = true;
           }
         }
 
-        FOR_ALL_BODYPART(e)
+        FOR_ALL_BODYPART(iter)
         {
-          if (bodypart_id_get(e).ok()) {
-            auto it = level->thing_find(bodypart_id_get(e));
+          if (bodypart_id_get(iter).ok()) {
+            auto it = level->thing_find(bodypart_id_get(iter));
             if (it) {
               it->is_visible_to_player = true;
             }

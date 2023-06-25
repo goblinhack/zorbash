@@ -1572,21 +1572,25 @@ void wid_set_text_pos(Widp w, uint8_t val, int x, int y)
   w->text_pos_set = val;
 }
 
-void wid_set_tile(int depth, Widp w, Tilep tile) { w->tiles[ depth ] = tile; }
+void wid_set_tile(int depth, Widp w, Tilep tile)
+{
+  set(w->tiles, depth, tile);
+  TRACE_NO_INDENT();
+}
 
 void wid_set_tilename(int depth, Widp w, std::string name)
 {
   TRACE_NO_INDENT();
   Tilep tile = tile_find(name);
   if (unlikely(! tile)) {
-    ERR("Failed to find wid tile %s", name.c_str());
+    ERR("Failed to find wid tile [%s]", name.c_str());
   }
 
   if (unlikely(! w)) {
     DIE("Widget does not exist to set tile %s", name.c_str());
   }
 
-  w->tiles[ depth ] = tile;
+  set(w->tiles, depth, tile);
 }
 
 void wid_set_tile(int depth, Widp w, Thingp t)
@@ -1606,7 +1610,7 @@ void wid_set_tile(int depth, Widp w, Thingp t)
         wid_set_color(w, WID_COLOR_TEXT_FG, tile->ascii_fg_col_value);
       }
     } else {
-      wid_set_tile(depth, w, tile);
+      set(w->tiles, depth, tile);
     }
   }
 }

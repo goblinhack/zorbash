@@ -9,7 +9,7 @@
 #include "my_wid_actionbar.hpp"
 
 //
-// Get rid of all the hooks to other things that this thing has. e.g. the
+// Get rid of all the hooks to other things that this thing has. iter.g. the
 // weapons it carries etc.
 //
 void Thing::level_change(Levelp l)
@@ -65,28 +65,28 @@ void Thing::level_change(Levelp l)
     }
   }
 
-  FOR_ALL_EQUIP(e)
+  FOR_ALL_EQUIP(iter)
   {
-    auto it = equip_get(e);
+    auto it = equip_get(iter);
     if (it) {
       it->level_change(l);
     }
 
-    it = equip_carry_anim(e);
+    it = equip_carry_anim(iter);
     if (it) {
       it->level_change(l);
     }
 
-    it = equip_use_anim(e);
+    it = equip_use_anim(iter);
     if (it) {
       it->level_change(l);
     }
   }
 
-  FOR_ALL_BODYPART(e)
+  FOR_ALL_BODYPART(iter)
   {
-    if (bodypart_id_get(e).ok()) {
-      auto it = level->thing_find(bodypart_id_get(e));
+    if (bodypart_id_get(iter).ok()) {
+      auto it = level->thing_find(bodypart_id_get(iter));
       if (it) {
         it->level_change(l);
       }

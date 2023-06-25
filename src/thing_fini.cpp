@@ -61,9 +61,9 @@ void Thing::destroy(void)
   level_pop();
   level_leave();
 
-  FOR_ALL_EQUIP(e) { unequip("unequip item as owner is destroyed", e, false); }
+  FOR_ALL_EQUIP(iter) { unequip("unequip item as owner is destroyed", iter, false); }
 
-  FOR_ALL_BODYPART(e) { bodypart_remove(e); }
+  FOR_ALL_BODYPART(iter) { bodypart_remove(iter); }
 
   //
   // Remove buffs etc... in destroy as it can be intereting for the player to be

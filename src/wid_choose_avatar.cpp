@@ -2,6 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_array_bounds_check.hpp"
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
 #include "my_globals_extra.hpp"
@@ -72,6 +73,30 @@ static uint8_t wid_choose_avatar_key_down(Widp w, const struct SDL_Keysym *key)
   return true;
 }
 
+static uint8_t wid_choose_avatar_bodypart_next(Widp w, int x, int y, uint32_t button)
+{
+  auto bodypart         = wid_get_int_context(w);
+  auto current_bodypart = get(game->config.player_bodyparts, bodypart);
+  auto next_bodypart    = tp_get_next_bodypart(bodypart, current_bodypart);
+  set(game->config.player_bodyparts, bodypart, next_bodypart->name());
+  game->save_config();
+  wid_choose_avatar_destroy();
+  game->wid_choose_avatar_select();
+  return false;
+}
+
+static uint8_t wid_choose_avatar_bodypart_prev(Widp w, int x, int y, uint32_t button)
+{
+  auto bodypart         = wid_get_int_context(w);
+  auto current_bodypart = get(game->config.player_bodyparts, bodypart);
+  auto next_bodypart    = tp_get_prev_bodypart(bodypart, current_bodypart);
+  set(game->config.player_bodyparts, bodypart, next_bodypart->name());
+  game->save_config();
+  wid_choose_avatar_destroy();
+  game->wid_choose_avatar_select();
+  return false;
+}
+
 void Game::wid_choose_avatar_select(void)
 {
   TRACE_AND_INDENT();
@@ -101,7 +126,10 @@ void Game::wid_choose_avatar_select(void)
   auto box_style           = UI_WID_STYLE_DARK;
   auto box_highlight_style = UI_WID_STYLE_NORMAL;
 
-  for (auto bodypart = 0; bodypart < BODYPART_MAX; bodypart++) {
+  FOR_ALL_BODYPART(iter)
+  {
+    TRACE_NO_INDENT();
+
     y_at += 4;
     {
       TRACE_AND_INDENT();
@@ -113,7 +141,7 @@ void Game::wid_choose_avatar_select(void)
       wid_set_shape_none(w);
       wid_set_pos(w, tl, br);
       wid_set_text_lhs(w, true);
-      wid_set_text(w, capitalise(bodypart_name(bodypart)));
+      wid_set_text(w, capitalise(bodypart_name(iter)));
     }
     {
       TRACE_AND_INDENT();
@@ -127,7 +155,8 @@ void Game::wid_choose_avatar_select(void)
       wid_set_mode(w, WID_MODE_NORMAL);
       wid_set_style(w, box_style);
       wid_set_pos(w, tl, br);
-      // wid_set_on_mouse_up(w, xxx);
+      wid_set_on_mouse_up(w, wid_choose_avatar_bodypart_prev);
+      wid_set_int_context(w, iter);
       wid_set_text(w, "<");
     }
     {
@@ -142,7 +171,8 @@ void Game::wid_choose_avatar_select(void)
       wid_set_mode(w, WID_MODE_NORMAL);
       wid_set_style(w, box_style);
       wid_set_pos(w, tl, br);
-      // wid_set_on_mouse_up(w, xxx);
+      wid_set_on_mouse_up(w, wid_choose_avatar_bodypart_next);
+      wid_set_int_context(w, iter);
       wid_set_text(w, ">");
     }
   }
@@ -160,12 +190,18 @@ void Game::wid_choose_avatar_select(void)
     wid_set_mode(w, WID_MODE_NORMAL);
     wid_set_color(w, WID_COLOR_BG, GRAY50);
     wid_set_style(w, UI_WID_STYLE_SOLID_DEFAULT);
-    wid_set_tilename(WID_DEPTH_FG_0, w, "bodypart_torso1.1");
-    wid_set_tilename(WID_DEPTH_FG_1, w, "bodypart_legs1.1");
-    wid_set_tilename(WID_DEPTH_FG_2, w, "bodypart_face1.1");
-    wid_set_tilename(WID_DEPTH_FG_3, w, "bodypart_eyes1.1");
-    wid_set_tilename(WID_DEPTH_FG_4, w, "bodypart_hair1.1");
-    wid_set_tilename(WID_DEPTH_FG_3, w, "bodypart_hat1.1");
+
+    FOR_ALL_BODYPART(iter)
+    {
+      TRACE_NO_INDENT();
+      if (game->config.player_bodyparts[ iter ].empty()) {
+        auto tp_bodypart = tp_random_bodypart(iter);
+        set(game->config.player_bodyparts, iter, tp_bodypart->name());
+      }
+
+      wid_set_tilename(TILE_LAYER_FG_0 + iter, w, game->config.player_bodyparts[ iter ] + ".1");
+    }
+
     wid_set_pos(w, tl, br);
   }
 }

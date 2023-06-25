@@ -67,7 +67,7 @@ void Level::display_ascii_lasers(point tl, point br)
 
       color c = tile->ascii_fg_col_value;
       c.a     = tile->ascii_fg_alpha;
-      ascii_draw_line(WID_DEPTH_FG_3, x0, y0, x1, y1, tile->ascii_fg_char, c);
+      ascii_draw_line(TILE_LAYER_FG_3, x0, y0, x1, y1, tile->ascii_fg_char, c);
     }
 
     return false;
