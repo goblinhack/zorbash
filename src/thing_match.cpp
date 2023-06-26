@@ -160,12 +160,6 @@ bool Tp::matches(const std::string &what)
   if (is_bleeder() && (what == "is_bleeder")) { return true; }
   if (is_block_of_ice() && (what == "is_block_of_ice")) { return true; }
   if (is_bloodbug() && (what == "is_bloodbug")) { return true; }
-  if (is_bodypart_eyes() && (what == "is_bodypart_eyes")) { return true; }
-  if (is_bodypart_face() && (what == "is_bodypart_face")) { return true; }
-  if (is_bodypart_hair() && (what == "is_bodypart_hair")) { return true; }
-  if (is_bodypart_hat() && (what == "is_bodypart_hat")) { return true; }
-  if (is_bodypart_legs() && (what == "is_bodypart_legs")) { return true; }
-  if (is_bodypart_torso() && (what == "is_bodypart_torso")) { return true; }
   if (is_bones() && (what == "is_bones")) { return true; }
   if (is_boots() && (what == "is_boots")) { return true; }
   if (is_brazier() && (what == "is_brazier")) { return true; }
@@ -461,7 +455,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag130() && (what == "is_unused_flag130")) { return true; }
   if (is_unused_flag131() && (what == "is_unused_flag131")) { return true; }
   if (is_unused_flag132() && (what == "is_unused_flag132")) { return true; }
-  if (is_unused_flag133() && (what == "is_unused_flag133")) { return true; }
   if (is_unused_flag13() && (what == "is_unused_flag13")) { return true; }
   if (is_unused_flag142() && (what == "is_unused_flag142")) { return true; }
   if (is_unused_flag14() && (what == "is_unused_flag14")) { return true; }
@@ -762,12 +755,6 @@ bool Thing::matches(const std::string &what)
   if (is_bleeder() && (what == "is_bleeder")) { return true; }
   if (is_block_of_ice() && (what == "is_block_of_ice")) { return true; }
   if (is_bloodbug() && (what == "is_bloodbug")) { return true; }
-  if (is_bodypart_eyes() && (what == "is_bodypart_eyes")) { return true; }
-  if (is_bodypart_face() && (what == "is_bodypart_face")) { return true; }
-  if (is_bodypart_hair() && (what == "is_bodypart_hair")) { return true; }
-  if (is_bodypart_hat() && (what == "is_bodypart_hat")) { return true; }
-  if (is_bodypart_legs() && (what == "is_bodypart_legs")) { return true; }
-  if (is_bodypart_torso() && (what == "is_bodypart_torso")) { return true; }
   if (is_bones() && (what == "is_bones")) { return true; }
   if (is_boots() && (what == "is_boots")) { return true; }
   if (is_brazier() && (what == "is_brazier")) { return true; }
@@ -1065,7 +1052,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag130() && (what == "is_unused_flag130")) { return true; }
   if (is_unused_flag131() && (what == "is_unused_flag131")) { return true; }
   if (is_unused_flag132() && (what == "is_unused_flag132")) { return true; }
-  if (is_unused_flag133() && (what == "is_unused_flag133")) { return true; }
   if (is_unused_flag13() && (what == "is_unused_flag13")) { return true; }
   if (is_unused_flag142() && (what == "is_unused_flag142")) { return true; }
   if (is_unused_flag14() && (what == "is_unused_flag14")) { return true; }
@@ -1363,12 +1349,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_bleeder") { return &Thing::is_bleeder; }
   if (what == "is_block_of_ice") { return &Thing::is_block_of_ice; }
   if (what == "is_bloodbug") { return &Thing::is_bloodbug; }
-  if (what == "is_bodypart_eyes") { return &Thing::is_bodypart_eyes; }
-  if (what == "is_bodypart_face") { return &Thing::is_bodypart_face; }
-  if (what == "is_bodypart_hair") { return &Thing::is_bodypart_hair; }
-  if (what == "is_bodypart_hat") { return &Thing::is_bodypart_hat; }
-  if (what == "is_bodypart_legs") { return &Thing::is_bodypart_legs; }
-  if (what == "is_bodypart_torso") { return &Thing::is_bodypart_torso; }
   if (what == "is_bones") { return &Thing::is_bones; }
   if (what == "is_boots") { return &Thing::is_boots; }
   if (what == "is_brazier") { return &Thing::is_brazier; }
@@ -1657,7 +1637,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag130") { return &Thing::is_unused_flag130; }
   if (what == "is_unused_flag131") { return &Thing::is_unused_flag131; }
   if (what == "is_unused_flag132") { return &Thing::is_unused_flag132; }
-  if (what == "is_unused_flag133") { return &Thing::is_unused_flag133; }
   if (what == "is_unused_flag13") { return &Thing::is_unused_flag13; }
   if (what == "is_unused_flag142") { return &Thing::is_unused_flag142; }
   if (what == "is_unused_flag14") { return &Thing::is_unused_flag14; }

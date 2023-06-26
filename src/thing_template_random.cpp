@@ -77,22 +77,22 @@ void tp_random_init(void)
     if (tp->is_ascend_dungeon()) {
       tp_ascend_dungeon.push_back(tp);
     }
-    if (tp->is_bodypart_hat()) {
+    if (tp->is_player_bodypart_hat()) {
       tp_bodypart[ BODYPART_HAT ].push_back(tp);
     }
-    if (tp->is_bodypart_eyes()) {
+    if (tp->is_player_bodypart_eyes()) {
       tp_bodypart[ BODYPART_EYES ].push_back(tp);
     }
-    if (tp->is_bodypart_hair()) {
+    if (tp->is_player_bodypart_hair()) {
       tp_bodypart[ BODYPART_HAIR ].push_back(tp);
     }
-    if (tp->is_bodypart_face()) {
+    if (tp->is_player_bodypart_face()) {
       tp_bodypart[ BODYPART_FACE ].push_back(tp);
     }
-    if (tp->is_bodypart_torso()) {
+    if (tp->is_player_bodypart_torso()) {
       tp_bodypart[ BODYPART_TORSO ].push_back(tp);
     }
-    if (tp->is_bodypart_legs()) {
+    if (tp->is_player_bodypart_legs()) {
       tp_bodypart[ BODYPART_LEGS ].push_back(tp);
     }
     if (tp->is_ascend_sewer()) {
@@ -1255,7 +1255,14 @@ static Tpp tp_get_bodypart(const int bodypart, const std::string &which, int ste
   }
 
   index += step;
-  index %= tp_bodypart[ bodypart ].size();
+
+  if (index < 0) {
+    index = tp_bodypart[ bodypart ].size() - 1;
+  }
+
+  if (index >= tp_bodypart[ bodypart ].size()) {
+    index = 0;
+  }
 
   return tp_bodypart[ bodypart ][ index ];
 }

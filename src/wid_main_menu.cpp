@@ -470,7 +470,7 @@ void Game::wid_main_menu_select(void)
       wid_set_style(w, box_style);
       wid_set_on_mouse_up(w, wid_choose_avatar);
       wid_set_pos(w, tl, br);
-      wid_set_text(w, "%%fg=" UI_TEXT_COLOR_STR "$Choose avatar (TODO)");
+      wid_set_text(w, "%%fg=" UI_TEXT_COLOR_STR "$Choose avatar");
     }
   }
   y_at += box_step;

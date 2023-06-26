@@ -860,40 +860,40 @@ int Thing::is_unused_flag132(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag132());
 }
-int Thing::is_unused_flag133(void)
+int Thing::is_player_bodypart(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag133());
+  return (tp()->is_player_bodypart());
 }
-int Thing::is_bodypart_legs(void)
+int Thing::is_player_bodypart_legs(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_bodypart_legs());
+  return (tp()->is_player_bodypart_legs());
 }
-int Thing::is_bodypart_torso(void)
+int Thing::is_player_bodypart_torso(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_bodypart_torso());
+  return (tp()->is_player_bodypart_torso());
 }
-int Thing::is_bodypart_hair(void)
+int Thing::is_player_bodypart_hair(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_bodypart_hair());
+  return (tp()->is_player_bodypart_hair());
 }
-int Thing::is_bodypart_eyes(void)
+int Thing::is_player_bodypart_eyes(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_bodypart_eyes());
+  return (tp()->is_player_bodypart_eyes());
 }
-int Thing::is_bodypart_face(void)
+int Thing::is_player_bodypart_face(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_bodypart_face());
+  return (tp()->is_player_bodypart_face());
 }
-int Thing::is_bodypart_hat(void)
+int Thing::is_player_bodypart_hat(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_bodypart_hat());
+  return (tp()->is_player_bodypart_hat());
 }
 int Thing::is_only_one_per_tile(void)
 {

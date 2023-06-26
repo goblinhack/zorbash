@@ -17,7 +17,8 @@
 #include "my_wid_skillbox.hpp"
 #include "my_wid_thing_info.hpp"
 
-WidPopup *wid_choose_avatar;
+static WidPopup *wid_choose_avatar;
+static bool      config_changed;
 
 static void wid_choose_avatar_destroy(void)
 {
@@ -25,12 +26,38 @@ static void wid_choose_avatar_destroy(void)
 
   delete wid_choose_avatar;
   wid_choose_avatar = nullptr;
+  config_changed    = false;
 }
 
 static uint8_t wid_choose_avatar_cancel(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
+  CON("INF: Reload config");
+  if (config_changed) {
+    config_changed = false;
+    game->load_config();
+    sdl_config_update_all();
+  }
+  wid_choose_avatar_destroy();
+  game->wid_main_menu_select();
+  return true;
+}
 
+static uint8_t wid_choose_avatar_save(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  CON("INF: Save config");
+  game->save_config();
+
+  wid_choose_avatar_destroy();
+  game->wid_main_menu_select();
+
+  return true;
+}
+
+static uint8_t wid_choose_avatar_back(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
   wid_choose_avatar_destroy();
   game->wid_main_menu_select();
   return true;
@@ -79,11 +106,11 @@ static uint8_t wid_choose_avatar_bodypart_next(Widp w, int x, int y, uint32_t bu
 {
   TRACE_AND_INDENT();
 
+  config_changed        = true;
   auto bodypart         = wid_get_int_context(w);
   auto current_bodypart = get(game->config.player_bodyparts, bodypart);
   auto next_bodypart    = tp_get_next_bodypart(bodypart, current_bodypart);
   set(game->config.player_bodyparts, bodypart, next_bodypart->name());
-  game->save_config();
   wid_choose_avatar_destroy();
   game->wid_choose_avatar_select();
   return false;
@@ -93,11 +120,11 @@ static uint8_t wid_choose_avatar_bodypart_prev(Widp w, int x, int y, uint32_t bu
 {
   TRACE_AND_INDENT();
 
+  config_changed        = true;
   auto bodypart         = wid_get_int_context(w);
   auto current_bodypart = get(game->config.player_bodyparts, bodypart);
   auto next_bodypart    = tp_get_prev_bodypart(bodypart, current_bodypart);
   set(game->config.player_bodyparts, bodypart, next_bodypart->name());
-  game->save_config();
   wid_choose_avatar_destroy();
   game->wid_choose_avatar_select();
   return false;
@@ -108,7 +135,7 @@ static void wid_choose_avatar_tick(Widp w)
   TRACE_NO_INDENT();
 
   static auto last = time_ms_cached();
-  if (! time_have_x_tenths_passed_since(5, last)) {
+  if (! time_have_x_tenths_passed_since(2, last)) {
     return;
   }
   last = time_ms();
@@ -136,10 +163,14 @@ void Game::wid_choose_avatar_select(void)
     avatar_anim_fram = 1;
   }
 
-  auto  avatar_width  = TERM_WIDTH / 4 * 2;
-  auto  avatar_height = TERM_HEIGHT / 4 * 3;
+  auto avatar_width  = TERM_WIDTH / 4 * 2;
+  auto avatar_height = TERM_HEIGHT / 4 * 3;
+
   point tl;
   point br(avatar_width, avatar_height);
+  auto  width  = br.x - tl.x - 2;
+  auto  height = br.y - tl.y - 2;
+
   wid_choose_avatar = new WidPopup("Avatar", tl, br, nullptr, "", true, false);
   wid_choose_avatar->log("Choose an avatar, whimpering mortal!");
   auto avatar_container = wid_choose_avatar->wid_popup_container;
@@ -215,17 +246,33 @@ void Game::wid_choose_avatar_select(void)
 
   {
     TRACE_AND_INDENT();
-    auto p = wid_choose_avatar->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "avatar");
+    auto p                = wid_choose_avatar->wid_text_area->wid_text_area;
+    auto avatar_container = wid_new_square_button(p, "avatar");
 
-    point tl = make_point(button_width + 11, 3);
-    point br = make_point(avatar_width - 2, avatar_height - 2);
-    wid_set_mode(w, WID_MODE_OVER);
-    wid_set_color(w, WID_COLOR_BG, GRAY50);
-    wid_set_style(w, UI_WID_STYLE_SOLID_DEFAULT);
-    wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_color(w, WID_COLOR_BG, GRAY50);
-    wid_set_style(w, UI_WID_STYLE_SOLID_DEFAULT);
+    {
+      point tl = make_point(button_width + 11, 3);
+      point br = make_point(avatar_width - 2, avatar_height - 6);
+      wid_set_mode(avatar_container, WID_MODE_OVER);
+      wid_set_color(avatar_container, WID_COLOR_BG, GRAY50);
+      wid_set_style(avatar_container, UI_WID_STYLE_SOLID_DEFAULT);
+      wid_set_mode(avatar_container, WID_MODE_NORMAL);
+      wid_set_color(avatar_container, WID_COLOR_BG, GRAY50);
+      wid_set_style(avatar_container, UI_WID_STYLE_SOLID_DEFAULT);
+      wid_set_pos(avatar_container, tl, br);
+    }
+
+    auto avatar_box = wid_new_square_button(avatar_container, "avatar box");
+    {
+      point tl(2, 2);
+      point br(wid_get_width(avatar_container) - 3, wid_get_height(avatar_container) - 3);
+      wid_set_mode(avatar_box, WID_MODE_OVER);
+      wid_set_color(avatar_box, WID_COLOR_BG, BLACK);
+      wid_set_style(avatar_box, UI_WID_STYLE_SOLID_DEFAULT);
+      wid_set_mode(avatar_box, WID_MODE_NORMAL);
+      wid_set_color(avatar_box, WID_COLOR_BG, BLACK);
+      wid_set_style(avatar_box, UI_WID_STYLE_SOLID_DEFAULT);
+      wid_set_pos(avatar_box, tl, br);
+    }
 
     FOR_ALL_BODYPART(iter)
     {
@@ -251,7 +298,7 @@ void Game::wid_choose_avatar_select(void)
 
       auto tilename = game->config.player_bodyparts[ iter ] + "." + std::to_string(avatar_anim_fram);
       if (tile_find(tilename)) {
-        wid_set_tilename(TILE_LAYER_FG_0 + (z - MAP_Z_PRIO_PLAYER_FIRST), w, tilename);
+        wid_set_tilename(TILE_LAYER_FG_0 + (z - MAP_Z_PRIO_PLAYER_FIRST), avatar_box, tilename);
       }
 
       //
@@ -259,16 +306,53 @@ void Game::wid_choose_avatar_select(void)
       //
       tilename = "sword_wood_demo_carry." + std::to_string(avatar_anim_fram);
       if (tile_find(tilename)) {
-        wid_set_tilename(TILE_LAYER_FG_0 + (MAP_Z_PRIO_PLAYER_EYES - MAP_Z_PRIO_PLAYER_FIRST) + 3, w, tilename);
+        wid_set_tilename(TILE_LAYER_FG_0 + (MAP_Z_PRIO_PLAYER_EYES - MAP_Z_PRIO_PLAYER_FIRST) + 3, avatar_box,
+                         tilename);
       }
-
-      wid_set_pos(w, tl, br);
     }
   }
 
-  TRACE_NO_INDENT();
+  y_at = height - 2;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_choose_avatar->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Back");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(6, y_at + 2);
+    wid_set_style(w, UI_WID_STYLE_DARK);
+    wid_set_on_mouse_up(w, wid_choose_avatar_back);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "%%fg=white$B%%fg=reset$ack");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_choose_avatar->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Save");
+
+    point tl = make_point(width - 15, y_at);
+    point br = make_point(width - 10, y_at + 2);
+    wid_set_style(w, UI_WID_STYLE_GREEN);
+    wid_set_on_mouse_up(w, wid_choose_avatar_save);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "%%fg=white$S%%fg=reset$ave");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_choose_avatar->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Cancel");
+
+    point tl = make_point(width - 8, y_at);
+    point br = make_point(width - 1, y_at + 2);
+    wid_set_style(w, UI_WID_STYLE_RED);
+    wid_set_on_mouse_up(w, wid_choose_avatar_cancel);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "%%fg=white$C%%fg=reset$ancel");
+  }
 
   auto w = wid_choose_avatar->wid_text_area->wid_text_area;
   wid_set_on_tick(w, wid_choose_avatar_tick);
   wid_update(w);
+
+  TRACE_NO_INDENT();
 }

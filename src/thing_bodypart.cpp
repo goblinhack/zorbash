@@ -11,7 +11,7 @@
 #include "my_thing.hpp"
 #include "my_thing_attack_options.hpp"
 
-bool Thing::is_bodypart(Thingp item)
+bool Thing::is_player_bodypart(Thingp item)
 {
   FOR_ALL_BODYPART(iter)
   {

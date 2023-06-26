@@ -558,7 +558,6 @@ public:
   bool is_adjacent(const Thingp);
   bool is_blocking_terrain(const Thingp it);
   bool is_bloodied(void);
-  bool is_bodypart(Thingp item);
   bool is_carrying_an_item(void);
   bool is_carrying_treasure(void);
   bool is_disliked_by_me(const point p);
@@ -574,6 +573,7 @@ public:
   bool is_obs_ai(fpoint);
   bool is_obs_ai(Thingp);
   bool is_on_fire(void);
+  bool is_player_bodypart(Thingp item);
   bool is_raging_set(bool);
   bool is_raging(void);
   bool is_state_sleeping(void);
@@ -1432,12 +1432,6 @@ public:
   int is_block_of_ice(void);
   int is_bloodbug(void);
   int is_blood(void);
-  int is_bodypart_eyes(void);
-  int is_bodypart_face(void);
-  int is_bodypart_hair(void);
-  int is_bodypart_hat(void);
-  int is_bodypart_legs(void);
-  int is_bodypart_torso(void);
   int is_bones(void);
   int is_boots(void);
   int is_brazier(void);
@@ -1648,6 +1642,13 @@ public:
   int is_pillar(void);
   int is_piranha(void);
   int is_plant(void);
+  int is_player_bodypart_eyes(void);
+  int is_player_bodypart_face(void);
+  int is_player_bodypart_hair(void);
+  int is_player_bodypart_hat(void);
+  int is_player_bodypart_legs(void);
+  int is_player_bodypart_torso(void);
+  int is_player_bodypart(void);
   int is_player(void);
   int is_poisonous_danger_level(void);
   int is_portal(void);
@@ -1746,7 +1747,6 @@ public:
   int is_unused_flag130(void);
   int is_unused_flag131(void);
   int is_unused_flag132(void);
-  int is_unused_flag133(void);
   int is_unused_flag13(void);
   int is_unused_flag142(void);
   int is_unused_flag14(void);
