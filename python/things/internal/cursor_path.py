@@ -10,6 +10,8 @@ def tp_init(name):
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
+    my.gfx_pixelart_show_outlined(self, True)
+    my.gfx_pixelart_show_square_outlined(self, True)
     my.is_cursor_path(self, True)
     my.is_floating(self, True)
     my.is_internal(self, True)
