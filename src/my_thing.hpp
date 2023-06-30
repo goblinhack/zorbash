@@ -40,6 +40,14 @@ typedef enum {
   THING_DANGER_LEVEL_CRITICAL,
 } ThingDangerLevel;
 
+typedef class BlitOptions_
+{
+public:
+  bool player_bodyparts_background {};
+  bool player_bodyparts_foreground {};
+  bool reflection {};
+} BlitOptions;
+
 typedef struct {
   uint16_t tile_outline;
   uint16_t bl1_tile;
@@ -2546,9 +2554,10 @@ public:
   void blit_end_reflection_submerged(uint8_t submerged);
   void blit_end_submerged(uint8_t submerged);
   void blit_floor_chasm(point tl, point br, const ThingTiles *tiles);
-  void blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep tile, color c, const bool reflection);
+  void blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep tile, color c, BlitOptions *);
   void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const point tl, const point br);
   void blit_outline_highlight(const Tilep tile, const point blit_tl, const point blit_br);
+  void blit_pixelart_do(int fbo, BlitOptions *);
   void blit_pixelart(int fbo);
   void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, const point tl, const point br);
   void blit_shadow(const Tpp &tp, const Tilep &tile, const point tl, const point br);
