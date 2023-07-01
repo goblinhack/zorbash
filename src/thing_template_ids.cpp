@@ -123,6 +123,7 @@ std::initializer_list< std::string > tps = {
     "bodypart_face7",
     "bodypart_face8",
     "bodypart_face9",
+    "bodypart_hair0",
     "bodypart_hair1",
     "bodypart_hair10",
     "bodypart_hair11",

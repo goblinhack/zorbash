@@ -252,10 +252,10 @@ void Game::wid_choose_avatar_select(void)
       point tl = make_point(button_width + 11, 3);
       point br = make_point(avatar_width - 2, avatar_height - 6);
       wid_set_mode(avatar_container, WID_MODE_OVER);
-      wid_set_color(avatar_container, WID_COLOR_BG, GRAY50);
+      wid_set_color(avatar_container, WID_COLOR_BG, GRAY70);
       wid_set_style(avatar_container, UI_WID_STYLE_SOLID_DEFAULT);
       wid_set_mode(avatar_container, WID_MODE_NORMAL);
-      wid_set_color(avatar_container, WID_COLOR_BG, GRAY50);
+      wid_set_color(avatar_container, WID_COLOR_BG, GRAY70);
       wid_set_style(avatar_container, UI_WID_STYLE_SOLID_DEFAULT);
       wid_set_pos(avatar_container, tl, br);
     }
@@ -265,10 +265,10 @@ void Game::wid_choose_avatar_select(void)
       point tl(2, 2);
       point br(wid_get_width(avatar_container) - 3, wid_get_height(avatar_container) - 3);
       wid_set_mode(avatar_box, WID_MODE_OVER);
-      wid_set_color(avatar_box, WID_COLOR_BG, BLACK);
+      wid_set_color(avatar_box, WID_COLOR_BG, GRAY50);
       wid_set_style(avatar_box, UI_WID_STYLE_SOLID_DEFAULT);
       wid_set_mode(avatar_box, WID_MODE_NORMAL);
-      wid_set_color(avatar_box, WID_COLOR_BG, BLACK);
+      wid_set_color(avatar_box, WID_COLOR_BG, GRAY50);
       wid_set_style(avatar_box, UI_WID_STYLE_SOLID_DEFAULT);
       wid_set_pos(avatar_box, tl, br);
     }
