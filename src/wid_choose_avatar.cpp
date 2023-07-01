@@ -99,7 +99,10 @@ static uint8_t wid_choose_avatar_key_down(Widp w, const struct SDL_Keysym *key)
     return false;
   }
 
-  return true;
+  //
+  // So screenshots can work
+  //
+  return false;
 }
 
 static uint8_t wid_choose_avatar_bodypart_next(Widp w, int x, int y, uint32_t button)

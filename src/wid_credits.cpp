@@ -64,7 +64,10 @@ static uint8_t wid_credits_key_down(Widp w, const struct SDL_Keysym *key)
     return false;
   }
 
-  return true;
+  //
+  // So screenshots can work
+  //
+  return false;
 }
 
 static uint8_t wid_credits_mouse_up(Widp w, int x, int y, uint32_t button)

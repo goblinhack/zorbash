@@ -46,7 +46,10 @@ static uint8_t wid_hiscore_key_up(Widp w, const struct SDL_Keysym *key)
       }
   }
 
-  return true;
+  //
+  // So screenshots can work
+  //
+  return false;
 }
 
 static uint8_t wid_hiscore_key_down(Widp w, const struct SDL_Keysym *key)
