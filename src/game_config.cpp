@@ -158,6 +158,12 @@ void Config::reset(void)
   // key_unused19.mod  = KMOD_NUM;
   // key_unused20.sym  = SDLK_TAB;
   // key_unused20.mod  = KMOD_NUM;
+  //
+  player_bodyparts[ BODYPART_EYES ]  = "bodypart_eyes1";
+  player_bodyparts[ BODYPART_FACE ]  = "bodypart_face1";
+  player_bodyparts[ BODYPART_TORSO ] = "bodypart_torso1";
+  player_bodyparts[ BODYPART_LEGS ]  = "bodypart_legs1";
+  player_bodyparts[ BODYPART_HAT ]   = "bodypart_hat1";
 }
 
 //
