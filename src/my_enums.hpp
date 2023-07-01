@@ -116,12 +116,12 @@ enum {
 #define FOR_ALL_EQUIP(_equip_) for (auto _equip_ = 0; _equip_ < MONST_EQUIP_MAX; _equip_++)
 
 enum {
-  BODYPART_HAT,
-  BODYPART_HAIR,
-  BODYPART_FACE,
-  BODYPART_TORSO,
-  BODYPART_LEGS,
-  BODYPART_EYES,
+  BODYPART_TORSO, // In front of foliage else we get lost!
+  BODYPART_LEGS,  // Boots in front of torso
+  BODYPART_FACE,  // Player's face
+  BODYPART_EYES,  // Eyes in front of faces obviously
+  BODYPART_HAIR,  // Hair over eyes
+  BODYPART_HAT,   // And a hat to top it off
   BODYPART_MAX,
 };
 #define FOR_ALL_BODYPART(_bodypart_) for (auto _bodypart_ = 0; _bodypart_ < BODYPART_MAX; _bodypart_++)

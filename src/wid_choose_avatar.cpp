@@ -32,7 +32,7 @@ static void wid_choose_avatar_destroy(void)
 static uint8_t wid_choose_avatar_cancel(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("INF: Reload config");
+  CON("INF: Reload config for avatar");
   if (config_changed) {
     config_changed = false;
     game->load_config();
@@ -46,7 +46,7 @@ static uint8_t wid_choose_avatar_cancel(Widp w, int x, int y, uint32_t button)
 static uint8_t wid_choose_avatar_save(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("INF: Save config");
+  CON("INF: Save config for avatar");
   game->save_config();
 
   wid_choose_avatar_destroy();
@@ -147,7 +147,6 @@ static void wid_choose_avatar_tick(Widp w)
 void Game::wid_choose_avatar_select(void)
 {
   TRACE_AND_INDENT();
-  CON("INF: Choose avatar");
 
   wid_rightbar_fini();
   wid_leftbar_fini();
