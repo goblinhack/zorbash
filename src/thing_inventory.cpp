@@ -12,8 +12,24 @@
 
 void Thing::inventory_particle(Thingp item, int slot)
 {
-  dbg("Create inventory particle? %s", item->to_short_string().c_str());
+  dbg("Create inventory particle to slot %d? %s", slot, item->to_short_string().c_str());
   TRACE_AND_INDENT();
+
+  auto itemsp = maybe_itemsp();
+  if (! itemsp) {
+    ERR("No itemsp for player");
+    return;
+  }
+
+  if (slot < 0) {
+    DBG("Slot %d out of range, max %d", slot, (int) itemsp->inventory_shortcuts.size());
+    return ;
+  }
+
+  if (slot >= (int) itemsp->inventory_shortcuts.size()) {
+    DBG("Slot %d out of range, max %d", slot, (int) itemsp->inventory_shortcuts.size());
+    return ;
+  }
 
   //
   // No animations at the start
@@ -635,6 +651,11 @@ Thingp Level::inventory_get(const int slot)
   auto itemsp = player->maybe_itemsp();
   if (! itemsp) {
     ERR("No itemsp for player");
+    return nullptr;
+  }
+
+  if (slot < 0) {
+    DBG("Slot %d out of range, max %d", slot, (int) itemsp->inventory_shortcuts.size());
     return nullptr;
   }
 
