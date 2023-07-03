@@ -23,12 +23,12 @@ void Thing::inventory_particle(Thingp item, int slot)
 
   if (slot < 0) {
     DBG("Slot %d out of range, max %d", slot, (int) itemsp->inventory_shortcuts.size());
-    return ;
+    return;
   }
 
   if (slot >= (int) itemsp->inventory_shortcuts.size()) {
     DBG("Slot %d out of range, max %d", slot, (int) itemsp->inventory_shortcuts.size());
-    return ;
+    return;
   }
 
   //
