@@ -70,6 +70,14 @@ void Thing::update(void)
       stamina_max_set(v);
     }
   }
+  if (! magic()) {
+    TRACE_NO_INDENT();
+    auto v = tpp->magic();
+    if (unlikely(v)) {
+      magic_set(v);
+      magic_max_set(v);
+    }
+  }
   {
     TRACE_NO_INDENT();
     auto v = tpp->distance_throw();

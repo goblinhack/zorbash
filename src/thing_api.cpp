@@ -2705,18 +2705,6 @@ int Thing::collision_hit_180(void)
   return (tp()->collision_hit_180());
 }
 
-int Thing::stamina_drain_on_attacking(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->stamina_drain_on_attacking());
-}
-
-int Thing::stamina_drain_on_using(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->stamina_drain_on_using());
-}
-
 int Thing::collision_hit_360(void)
 {
   TRACE_NO_INDENT();

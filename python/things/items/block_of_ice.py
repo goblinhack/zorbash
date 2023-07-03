@@ -72,9 +72,9 @@ def tp_init(name, text_long_name):
     my.is_gas_blocker(self, True)
     my.is_hittable(self, True)
     my.is_immune_to_cold(self, True)
-    my.is_immune_to_draining(self, True)
     my.is_immune_to_necrosis(self, True)
     my.is_immune_to_poison(self, True)
+    my.is_immune_to_stamina_drain(self, True)
     my.is_interesting(self, True)  # so it can be shoved
     my.is_light_blocker_for_monst(self, True)  # to give cover to the player
     my.is_light_blocker(self, True)

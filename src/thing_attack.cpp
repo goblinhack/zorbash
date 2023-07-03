@@ -665,8 +665,10 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
       dbg("Attack type already set: attack[THING_ATTACK_DIGEST]");
     } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
       dbg("Attack type already set: attack[THING_ATTACK_NECROSIS]");
-    } else if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
-      dbg("Attack type already set: attack[THING_ATTACK_DRAINING]");
+    } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
+      dbg("Attack type already set: attack[THING_ATTACK_STAMINA_DRAIN]");
+    } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
+      dbg("Attack type already set: attack[THING_ATTACK_MAGIC_DRAIN]");
     }
 
     //
@@ -1197,15 +1199,15 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     //
     // Chance of stamina damage?
     //
-    if (! attack_options->attack[ THING_ATTACK_DRAINING ]) {
+    if (! attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
       if (! attack_options->dmg_set) {
-        if (d1000() < dmg_chance_d1000_draining(attack_options->attack_num)) {
-          int dmg_draining_val = dmg_draining(victim);
-          if (dmg_draining_val > 0) {
-            attack_options->damage                          = dmg_draining_val;
-            attack_options->dmg_set                         = true;
-            attack_options->attack[ THING_ATTACK_DRAINING ] = true;
-            dbg("Set drain damage %d", attack_options->damage);
+        if (d1000() < dmg_chance_d1000_stamina_drain(attack_options->attack_num)) {
+          int dmg_stamina_val = dmg_stamina(victim);
+          if (dmg_stamina_val > 0) {
+            attack_options->damage                               = dmg_stamina_val;
+            attack_options->dmg_set                              = true;
+            attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ] = true;
+            dbg("Set stamina drain damage %d", attack_options->damage);
           }
         }
       }
@@ -1213,12 +1215,40 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
       //
       // Here we've indicated the attack type is mandatory, but not set the damage
       //
-      int dmg_draining_val = dmg_draining(victim);
-      if (dmg_draining_val > 0) {
-        attack_options->damage                          = dmg_draining_val;
-        attack_options->dmg_set                         = true;
-        attack_options->attack[ THING_ATTACK_DRAINING ] = true;
-        dbg("Set drain damage %d", attack_options->damage);
+      int dmg_stamina_val = dmg_stamina(victim);
+      if (dmg_stamina_val > 0) {
+        attack_options->damage                               = dmg_stamina_val;
+        attack_options->dmg_set                              = true;
+        attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ] = true;
+        dbg("Set stamina drain damage %d", attack_options->damage);
+      }
+    }
+
+    //
+    // Chance of magic damage?
+    //
+    if (! attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
+      if (! attack_options->dmg_set) {
+        if (d1000() < dmg_chance_d1000_magic_drain(attack_options->attack_num)) {
+          int dmg_magic_val = dmg_magic(victim);
+          if (dmg_magic_val > 0) {
+            attack_options->damage                             = dmg_magic_val;
+            attack_options->dmg_set                            = true;
+            attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ] = true;
+            dbg("Set magical drain damage %d", attack_options->damage);
+          }
+        }
+      }
+    } else if (! attack_options->dmg_set) {
+      //
+      // Here we've indicated the attack type is mandatory, but not set the damage
+      //
+      int dmg_magic_val = dmg_magic(victim);
+      if (dmg_magic_val > 0) {
+        attack_options->damage                             = dmg_magic_val;
+        attack_options->dmg_set                            = true;
+        attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ] = true;
+        dbg("Set magical drain damage %d", attack_options->damage);
       }
     }
 
@@ -1755,15 +1785,30 @@ int Thing::is_attacked_with_dmg_necrosis(Thingp hitter, Thingp real_hitter, int 
   return is_hit(hitter, &attack_options, damage);
 }
 
-int Thing::is_attacked_with_dmg_draining(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::is_attacked_with_dmg_stamina(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   ThingAttackOptions attack_options {};
-  attack_options.attack[ THING_ATTACK_DRAINING ] = true;
-  attack_options.real_hitter                     = real_hitter;
+  attack_options.attack[ THING_ATTACK_STAMINA_DRAIN ] = true;
+  attack_options.real_hitter                          = real_hitter;
   IF_DEBUG
   {
-    hitter->log("Draining attack %s, real hitter %s", to_short_string().c_str(),
+    hitter->log("Physical draining attack %s, real hitter %s", to_short_string().c_str(),
+                real_hitter->to_short_string().c_str());
+  }
+  TRACE_AND_INDENT();
+  return is_hit(hitter, &attack_options, damage);
+}
+
+int Thing::is_attacked_with_dmg_magic(Thingp hitter, Thingp real_hitter, int damage)
+{
+  TRACE_NO_INDENT();
+  ThingAttackOptions attack_options {};
+  attack_options.attack[ THING_ATTACK_MAGIC_DRAIN ] = true;
+  attack_options.real_hitter                        = real_hitter;
+  IF_DEBUG
+  {
+    hitter->log("Magical draining attack %s, real hitter %s", to_short_string().c_str(),
                 real_hitter->to_short_string().c_str());
   }
   TRACE_AND_INDENT();

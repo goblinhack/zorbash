@@ -14,7 +14,7 @@ def on_unequip(owner, me, x, y):
         my.thing_msg_if_not_dead_or_dying(me, "Your feel your normal tired old self!")
 
 
-def on_owner_receive_dmg_draining(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_receive_dmg_stamina(me, owner, hitter, real_hitter, x, y, damage):
     damage = int(damage / 2)
     enchant = my.thing_enchant_count_get(me)
     damage -= 10 * enchant
@@ -61,7 +61,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.noise_on_dropping(self, 50)
     my.normal_placement_rules(self, True)
     my.on_equip_do(self, "me.on_equip()")
-    my.on_owner_receive_dmg_draining_do(self, "me.on_owner_receive_dmg_draining()")
+    my.on_owner_receive_dmg_stamina_do(self, "me.on_owner_receive_dmg_stamina()")
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_RARE)
     my.text_a_or_an(self, "a")

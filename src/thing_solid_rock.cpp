@@ -29,7 +29,7 @@ void Thing::solid_rock_tick(void)
 
   if (stamina() <= 0) {
     if (is_player()) {
-      msg("Your agonized face is carved in stone for the rest of time as you sufficate inside solid rock.");
+      msg("Your agonized face is carved in stone for the rest of time as you suffocate inside solid rock.");
     }
     dead("by suffocation inside solid rock");
   } else {

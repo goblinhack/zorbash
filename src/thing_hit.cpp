@@ -277,10 +277,14 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_necrosis(victim, damage);
     damage = victim->total_dmg_for_on_receiving_dmg_necrosis(hitter, real_hitter, damage);
-  } else if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
+  } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
     TRACE_NO_INDENT();
-    real_hitter->total_dmg_for_on_attacking_dmg_draining(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_draining(hitter, real_hitter, damage);
+    real_hitter->total_dmg_for_on_attacking_dmg_stamina(victim, damage);
+    damage = victim->total_dmg_for_on_receiving_dmg_stamina(hitter, real_hitter, damage);
+  } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
+    TRACE_NO_INDENT();
+    real_hitter->total_dmg_for_on_attacking_dmg_magic(victim, damage);
+    damage = victim->total_dmg_for_on_receiving_dmg_magic(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_NATURAL ]) {
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_nat_att(victim, damage);
@@ -815,36 +819,72 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   // Draining damage
   /////////////////////////////////////////////////////////////////////////
   TRACE_NO_INDENT();
-  if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
+  if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
     TRACE_NO_INDENT();
     attack_set = true;
-    if (is_immune_to_draining()) {
+    if (is_immune_to_stamina_drain()) {
       if (real_hitter->is_player()) {
         if (is_player()) {
-          msg("You are immune to draining!");
+          msg("You are immune to physical draining!");
         } else if (is_item() || is_alive_monst()) {
-          msg("%s is immune to draining attacks!", text_The().c_str());
+          msg("%s is immune to physical draining attacks!", text_The().c_str());
         } else {
-          dbg("Is immune to draining damage");
+          dbg("Is immune to physical draining damage");
         }
       } else {
-        dbg("Is immune to draining damage");
+        dbg("Is immune to physical draining damage");
       }
       return false;
     }
 
     if (! damage) {
       if (is_player()) {
-        msg("You take no stamina damage!");
+        msg("You take no physical draining damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no stamina damage!", text_The().c_str());
+        msg("%s takes no physical draining damage!", text_The().c_str());
       } else {
-        dbg("Takes no draining damage");
+        dbg("Takes no physical draining damage");
       }
       return false;
     }
-    IF_DEBUG { real_hitter->log("Attack stamina damage %d on %s", damage, to_short_string().c_str()); }
-    dmg_type = "draining ";
+    IF_DEBUG { real_hitter->log("Attack physical draining damage %d on %s", damage, to_short_string().c_str()); }
+    dmg_type = "physical draining ";
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // Magical draining damage
+  /////////////////////////////////////////////////////////////////////////
+  TRACE_NO_INDENT();
+  if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
+    TRACE_NO_INDENT();
+    attack_set = true;
+    if (is_immune_to_magic_drain()) {
+      if (real_hitter->is_player()) {
+        if (is_player()) {
+          msg("You are immune to magical draining!");
+        } else if (is_item() || is_alive_monst()) {
+          msg("%s is immune to magical draining attacks!", text_The().c_str());
+        } else {
+          dbg("Is immune to magical draining damage");
+        }
+      } else {
+        dbg("Is immune to magical draining damage");
+      }
+      return false;
+    }
+
+    if (! damage) {
+      if (is_player()) {
+        msg("You take no magical draining damage!");
+      } else if (real_hitter->is_player()) {
+        msg("%s takes no magical draining damage!", text_The().c_str());
+      } else {
+        dbg("Takes no draining damageal draining");
+      }
+      return false;
+    }
+    IF_DEBUG { real_hitter->log("Attack magic damage %d on %s", damage, to_short_string().c_str()); }
+    dmg_type = "magical draining ";
   }
 
   /////////////////////////////////////////////////////////////////////////
@@ -1361,8 +1401,10 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         real_hitter->msg("%%fg=cyan$Your skin blisters for %d %sdamage!%%fg=reset$", damage, dmg_type.c_str());
       } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
         real_hitter->msg("%%fg=limegreen$Your skin is falling away in chunks!%%fg=reset$");
-      } else if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
+      } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
         real_hitter->msg("%%fg=limegreen$Your stamina feels drained!%%fg=reset$");
+      } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
+        real_hitter->msg("%%fg=limegreen$Your magical powers feel drained!%%fg=reset$");
       } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
         real_hitter->msg("%%fg=orange$You take %d %sdamage!%%fg=reset$", damage, dmg_type.c_str());
       } else {
@@ -1378,8 +1420,10 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           msg("%%fg=red$%s's fangs suck the last sustenance from you!%%fg=reset$", real_hitter->text_The().c_str());
         } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
           msg("%%fg=red$%s's withering touch finishes you off!%%fg=reset$", real_hitter->text_The().c_str());
-        } else if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
-          msg("%%fg=red$%s's draining touch finishes you off!%%fg=reset$", real_hitter->text_The().c_str());
+        } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
+          msg("%%fg=red$%s's physical draining touch finishes you off!%%fg=reset$", real_hitter->text_The().c_str());
+        } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
+          msg("%%fg=red$%s's magical draining touch finishes you off!%%fg=reset$", real_hitter->text_The().c_str());
         } else if (hitter->is_barrel()) {
           if (is_air_breather()) {
             msg("%%fg=red$You are drowned in a barrel!%%fg=reset$");
@@ -1443,8 +1487,10 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
               damage, dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
           msg("%%fg=limegreen$%s's withering touch rots your skin!%%fg=reset$", real_hitter->text_The().c_str());
-        } else if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
-          msg("%%fg=limegreen$%s's draining touch weakens you!%%fg=reset$", real_hitter->text_The().c_str());
+        } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
+          msg("%%fg=limegreen$%s's physical draining touch weakens you!%%fg=reset$", real_hitter->text_The().c_str());
+        } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
+          msg("%%fg=limegreen$%s's magical draining touch weakens you!%%fg=reset$", real_hitter->text_The().c_str());
         } else if (hitter->is_barrel()) {
           if (is_air_breather()) {
             msg("%%fg=orange$You are drowning in a barrel!%%fg=reset$");
@@ -1556,8 +1602,10 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("Your %s is dissolving.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
         msg("Your %s is unpleasant.", text_long_name().c_str());
-      } else if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
-        msg("Your %s is drained.", text_long_name().c_str());
+      } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
+        msg("Your %s is physically drained.", text_long_name().c_str());
+      } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
+        msg("Your %s is magically drained.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
         msg("Your %s is being drowned.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
@@ -1582,12 +1630,15 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
             real_hitter->msg("You rot %s for %d %sdamage with %s.", text_the().c_str(), damage, dmg_type.c_str(),
                              hitter->text_the().c_str());
-          } else if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
+          } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
             real_hitter->msg("You tire %s for %d %sdamage with %s.", text_the().c_str(), damage, dmg_type.c_str(),
                              hitter->text_the().c_str());
+          } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
+            real_hitter->msg("You are drained %s for %d %sdamage with %s.", text_the().c_str(), damage,
+                             dmg_type.c_str(), hitter->text_the().c_str());
           } else if (hitter->is_weapon()) {
-            real_hitter->msg("You hit %s for %d %sdamage with %s.", text_the().c_str(), damage, dmg_type.c_str(),
-                             hitter->text_the().c_str());
+            real_hitter->msg("You are drained %s for %d %sdamage with %s.", text_the().c_str(), damage,
+                             dmg_type.c_str(), hitter->text_the().c_str());
           } else if (hitter->is_laser()) {
             real_hitter->msg("You zap %s for %d %sdamage with %s.", text_the().c_str(), damage, dmg_type.c_str(),
                              hitter->text_the().c_str());
@@ -1627,8 +1678,10 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
             real_hitter->msg("You digest %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
           } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
             real_hitter->msg("You rot %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
-          } else if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
-            real_hitter->msg("You tire %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+          } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
+            real_hitter->msg("You are drained %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+          } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
+            real_hitter->msg("You are drained %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
           } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
             real_hitter->msg("You drown %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
           } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
@@ -1684,8 +1737,10 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           real_hitter->msg("You magically digest %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
           real_hitter->msg("You magically rot %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
-        } else if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
-          real_hitter->msg("You magically tire %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+        } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
+          real_hitter->msg("You are drained %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+        } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
+          real_hitter->msg("You are drained %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
           real_hitter->msg("You magically drown %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
@@ -1786,8 +1841,10 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("Your %s is dissolving.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
         msg("Your %s is unpleasant.", text_long_name().c_str());
-      } else if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
-        msg("Your %s is drained.", text_long_name().c_str());
+      } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
+        msg("Your %s is physically drained.", text_long_name().c_str());
+      } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
+        msg("Your %s is magically drained.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
         msg("Your %s is being drowned.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
@@ -1822,8 +1879,10 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         msg("Your %s is dissolving.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
         msg("Your %s is unpleasant.", text_long_name().c_str());
-      } else if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
-        msg("Your %s is drained.", text_long_name().c_str());
+      } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
+        msg("Your %s is physically drained.", text_long_name().c_str());
+      } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
+        msg("Your %s is magically drained.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
         msg("Your %s is being drowned.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
@@ -1858,8 +1917,10 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         real_hitter->msg("%s is being digested.", text_The().c_str());
       } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
         real_hitter->msg("%s is unpleasant.", text_The().c_str());
-      } else if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
-        real_hitter->msg("%s is being drained.", text_The().c_str());
+      } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
+        real_hitter->msg("%s is being physically drained.", text_The().c_str());
+      } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
+        real_hitter->msg("%s is being magically drained.", text_The().c_str());
       } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
         real_hitter->msg("%s is drowning.", text_The().c_str());
       } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
@@ -2081,7 +2142,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   // Not sure if stamina of 0 should kill. I vote yes.
   //
   TRACE_NO_INDENT();
-  if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
+  if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
     auto h = stamina_decr(damage);
     if (h <= 0) {
       h         = stamina_set(0);
@@ -2092,6 +2153,22 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     if (h <= 0) {
       h         = health_set(0);
       is_killed = true;
+    }
+  }
+
+  //
+  // Magical draining has no physical effect.
+  //
+  TRACE_NO_INDENT();
+  if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
+    auto h = magic_decr(damage);
+    if (h <= 0) {
+      h = magic_set(0);
+    }
+  } else {
+    auto h = health_decr(damage);
+    if (h <= 0) {
+      h = health_set(0);
     }
   }
 
@@ -2175,8 +2252,10 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         reason = "by digestion";
       } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
         reason = "by unpleasant";
-      } else if (attack_options->attack[ THING_ATTACK_DRAINING ]) {
-        reason = "by draining";
+      } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
+        reason = "by stamina draining";
+      } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
+        reason = "by magical draining";
       } else if (attack_options->attack[ THING_ATTACK_NATURAL ]) {
         reason = "by over friendly biting";
       } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {

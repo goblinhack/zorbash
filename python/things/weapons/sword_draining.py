@@ -6,8 +6,8 @@ def on_swing(owner, item, x, y):
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_swing{my.non_pcg_randint(1, 3)}")
 
 
-def on_owner_attack_dmg_draining(me, owner, victim, x, y, damage):
-    # my.con("on_owner_attack_dmg_draining")
+def on_owner_attack_dmg_stamina(me, owner, victim, x, y, damage):
+    # my.con("on_owner_attack_dmg_stamina")
     # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
     # my.con("victim  {} {:X}".format(my.thing_name_get(victim), victim))
     # my.con("damage  {}".format(damage))
@@ -28,11 +28,11 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.chance_d10000_damaged(self, 5)
-    my.dmg_chance_d1000_draining(self, 1, 1000)
     my.dmg_chance_d1000_melee(self, 0, 1000)
-    my.dmg_draining_dice(self, "1d20")
+    my.dmg_chance_d1000_stamina_drain(self, 1, 1000)
     my.dmg_melee_dice(self, "1d8")
     my.dmg_num_of_attacks(self, 2)
+    my.dmg_stamina_dice(self, "1d20")
     my.equip_carry_anim(self, "sword_draining_carry")
     my.gfx_anim_use(self, "sword_draining_swing")
     my.gfx_ascii_fade_with_dist(self, True)
@@ -60,7 +60,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_described_when_hovering_over(self, True)
     my.is_droppable(self, True)
     my.is_enchantable(self, True)
-    my.is_immune_to_draining(self, True)
+    my.is_immune_to_stamina_drain(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)
     my.is_loggable(self, True)
@@ -75,7 +75,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.item_width(self, 4)
     my.noise_on_dropping(self, 5)
     my.on_equip_do(self, "me.on_equip()")
-    my.on_owner_attack_dmg_draining_do(self, "me.on_owner_attack_dmg_draining()")
+    my.on_owner_attack_dmg_stamina_do(self, "me.on_owner_attack_dmg_stamina()")
     my.on_swing_do(self, "me.on_swing()")
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_VERY_RARE)

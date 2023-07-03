@@ -278,13 +278,14 @@ bool Tp::matches(const std::string &what)
   if (is_iceman() && (what == "is_iceman")) { return true; }
   if (is_immune_to_acid() && (what == "is_immune_to_acid")) { return true; }
   if (is_immune_to_cold() && (what == "is_immune_to_cold")) { return true; }
-  if (is_immune_to_draining() && (what == "is_immune_to_draining")) { return true; }
   if (is_immune_to_electricity() && (what == "is_immune_to_electricity")) { return true; }
   if (is_immune_to_fire() && (what == "is_immune_to_fire")) { return true; }
+  if (is_immune_to_magic_drain() && (what == "is_immune_to_magic_drain")) { return true; }
   if (is_immune_to_necrosis() && (what == "is_immune_to_necrosis")) { return true; }
   if (is_immune_to_negation() && (what == "is_immune_to_negation")) { return true; }
   if (is_immune_to_poison() && (what == "is_immune_to_poison")) { return true; }
   if (is_immune_to_spiderwebs() && (what == "is_immune_to_spiderwebs")) { return true; }
+  if (is_immune_to_stamina_drain() && (what == "is_immune_to_stamina_drain")) { return true; }
   if (is_immune_to_teleport_attack() && (what == "is_immune_to_teleport_attack")) { return true; }
   if (is_immune_to_water() && (what == "is_immune_to_water")) { return true; }
   if (is_intelligent() && (what == "is_intelligent")) { return true; }
@@ -874,13 +875,14 @@ bool Thing::matches(const std::string &what)
   if (is_iceman() && (what == "is_iceman")) { return true; }
   if (is_immune_to_acid() && (what == "is_immune_to_acid")) { return true; }
   if (is_immune_to_cold() && (what == "is_immune_to_cold")) { return true; }
-  if (is_immune_to_draining() && (what == "is_immune_to_draining")) { return true; }
   if (is_immune_to_electricity() && (what == "is_immune_to_electricity")) { return true; }
   if (is_immune_to_fire() && (what == "is_immune_to_fire")) { return true; }
+  if (is_immune_to_magic_drain() && (what == "is_immune_to_magic_drain")) { return true; }
   if (is_immune_to_necrosis() && (what == "is_immune_to_necrosis")) { return true; }
   if (is_immune_to_negation() && (what == "is_immune_to_negation")) { return true; }
   if (is_immune_to_poison() && (what == "is_immune_to_poison")) { return true; }
   if (is_immune_to_spiderwebs() && (what == "is_immune_to_spiderwebs")) { return true; }
+  if (is_immune_to_stamina_drain() && (what == "is_immune_to_stamina_drain")) { return true; }
   if (is_immune_to_teleport_attack() && (what == "is_immune_to_teleport_attack")) { return true; }
   if (is_immune_to_water() && (what == "is_immune_to_water")) { return true; }
   if (is_intelligent() && (what == "is_intelligent")) { return true; }
@@ -1464,13 +1466,14 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_iceman") { return &Thing::is_iceman; }
   if (what == "is_immune_to_acid") { return &Thing::is_immune_to_acid; }
   if (what == "is_immune_to_cold") { return &Thing::is_immune_to_cold; }
-  if (what == "is_immune_to_draining") { return &Thing::is_immune_to_draining; }
   if (what == "is_immune_to_electricity") { return &Thing::is_immune_to_electricity; }
   if (what == "is_immune_to_fire") { return &Thing::is_immune_to_fire; }
+  if (what == "is_immune_to_magic_drain") { return &Thing::is_immune_to_magic_drain; }
   if (what == "is_immune_to_necrosis") { return &Thing::is_immune_to_necrosis; }
   if (what == "is_immune_to_negation") { return &Thing::is_immune_to_negation; }
   if (what == "is_immune_to_poison") { return &Thing::is_immune_to_poison; }
   if (what == "is_immune_to_spiderwebs") { return &Thing::is_immune_to_spiderwebs; }
+  if (what == "is_immune_to_stamina_drain") { return &Thing::is_immune_to_stamina_drain; }
   if (what == "is_immune_to_teleport_attack") { return &Thing::is_immune_to_teleport_attack; }
   if (what == "is_immune_to_water") { return &Thing::is_immune_to_water; }
   if (what == "is_intelligent") { return &Thing::is_intelligent; }

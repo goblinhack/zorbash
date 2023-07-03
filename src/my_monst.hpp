@@ -96,6 +96,8 @@ public:
   int keys                = {};
   int lifespan            = {}; // How many things this thing owns.
   int light_dist          = {}; // Current strength, including torches
+  int magic               = {};
+  int magic_max           = {};
   int monst_state         = {};
   int move_count          = {};
   int movement_remaining  = {};

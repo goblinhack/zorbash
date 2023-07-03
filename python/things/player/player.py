@@ -292,6 +292,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.is_tickable(self, True)
     my.jump_distance(self, 2)
     my.light_dist(self, 10)
+    my.magic(self, 10)
     my.move_speed(self, 100)
     my.noise_additional_on_jump_end(self, 20)
     my.noise_decibels_hearing(self, 30)

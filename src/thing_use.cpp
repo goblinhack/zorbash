@@ -254,6 +254,30 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
       }
     }
 
+    //
+    // Magic drain on use?
+    //
+    if (what->magic_drain_on_using()) {
+      //
+      // Yes.
+      //
+      if (d20_le(stat_con_total())) {
+        //
+        // Only half magic damage if you pass con roll
+        //
+        auto s = what->magic_drain_on_using();
+        if (s) {
+          s /= 2;
+          if (! s) {
+            s = 1;
+          }
+        }
+        if (s) {
+          magic_decr(s);
+        }
+      }
+    }
+
     if (what->is_skill()) {
       dbg("Used skill %s", what->to_short_string().c_str());
       return;

@@ -38,7 +38,7 @@ def do_vampiric_touch(me, owner, hitter, real_hitter, x, y, damage, damage_reduc
                     my.thing_msg(owner, f"Vampiric touch replenishes you for {stamina_boost} and drains the {real_hitter_name} for {dmg_reduction} stamina.")
 
         target = real_hitter
-        my.thing_hit_dmg_draining(me, me, target, dmg_reduction)
+        my.thing_hit_dmg_stamina(me, me, target, dmg_reduction)
 
     return damage - dmg_reduction
 

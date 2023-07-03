@@ -236,7 +236,7 @@ bool wid_rightbar_ascii_create(void)
   y_at++;
   {
     TRACE_AND_INDENT();
-    auto w = wid_new_plain(wid_rightbar, "Health-bar");
+    auto w = wid_new_plain(wid_rightbar, "Stamina-bar");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at);
     point br = make_point(tl.x + width - 1, tl.y);
@@ -252,7 +252,7 @@ bool wid_rightbar_ascii_create(void)
   }
   {
     TRACE_AND_INDENT();
-    auto  w  = wid_new_plain(wid_rightbar, "Health");
+    auto  w  = wid_new_plain(wid_rightbar, "Stamina");
     point tl = make_point(0, y_at);
     point br = make_point(width - 1, y_at);
     wid_set_pos(w, tl, br);
@@ -272,6 +272,54 @@ bool wid_rightbar_ascii_create(void)
     wid_set_shape_none(w);
 
     std::string s = std::to_string(player->stamina()) + "/" + std::to_string(player->stamina_max());
+    wid_set_text(w, s);
+    wid_set_text_rhs(w, true);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
+  }
+
+  ///////////////////////////////////////////////////////////////////////////
+  // Magic
+  ///////////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "Magic-bar");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(0, y_at);
+    point br = make_point(tl.x + width - 1, tl.y);
+    wid_set_pos(w, tl, br);
+
+    int i     = (((float) player->magic() / ((float) player->magic_max()))) * ((float) UI_HEALTH_BAR_STEPS - 1);
+    i         = std::min(i, UI_HEALTH_BAR_STEPS - 1);
+    i         = std::max(i, 0);
+    auto icon = "health_bar_ascii_" + std::to_string(i);
+    wid_set_tilename(TILE_LAYER_FG_0, w, icon);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
+  }
+  {
+    TRACE_AND_INDENT();
+    auto  w  = wid_new_plain(wid_rightbar, "Magic");
+    point tl = make_point(0, y_at);
+    point br = make_point(width - 1, y_at);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "Magic");
+    wid_set_shape_none(w);
+    wid_set_text_lhs(w, true);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
+  }
+  {
+    TRACE_AND_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "magic-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(3, y_at);
+    point br = make_point(tl.x + width - 4, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+
+    std::string s = std::to_string(player->magic()) + "/" + std::to_string(player->magic_max());
     wid_set_text(w, s);
     wid_set_text_rhs(w, true);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);

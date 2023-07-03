@@ -68,13 +68,22 @@ int Thing::is_immune_to_necrosis(void)
   return (tp()->is_immune_to_necrosis());
 }
 
-int Thing::is_immune_to_draining(void)
+int Thing::is_immune_to_stamina_drain(void)
 {
   TRACE_NO_INDENT();
-  if (buff_is_immune_to_draining()) {
+  if (buff_is_immune_to_stamina_drain()) {
     return true;
   }
-  return (tp()->is_immune_to_draining());
+  return (tp()->is_immune_to_stamina_drain());
+}
+
+int Thing::is_immune_to_magic_drain(void)
+{
+  TRACE_NO_INDENT();
+  if (buff_is_immune_to_magic_drain()) {
+    return true;
+  }
+  return (tp()->is_immune_to_magic_drain());
 }
 
 int Thing::is_immune_to_spiderwebs(void)

@@ -108,7 +108,7 @@ void tp_fixup(void)
       tp->is_immune_to_poison_set(true);
       tp->is_immune_to_spiderwebs_set(true);
       tp->is_immune_to_necrosis_set(true);
-      tp->is_immune_to_draining_set(true);
+      tp->is_immune_to_stamina_drain_set(true);
       tp->is_immune_to_fire_set(true);
       tp->is_immune_to_cold_set(true);
       if (tp->is_crushable()) {
@@ -168,7 +168,7 @@ void tp_fixup(void)
     if (tp->is_undead()) {
       tp->is_immune_to_poison_set(true);
       tp->is_immune_to_necrosis_set(true);
-      tp->is_immune_to_draining_set(true);
+      tp->is_immune_to_stamina_drain_set(true);
       tp->is_immune_to_cold_set(true);
       tp->dmg_received_doubled_from_fire_set(true);
     }
@@ -387,7 +387,8 @@ void tp_fixup(void)
     num_attack_types += tp->dmg_water() ? 1 : 0;
     num_attack_types += tp->dmg_digest() ? 1 : 0;
     num_attack_types += tp->dmg_necrosis() ? 1 : 0;
-    num_attack_types += tp->dmg_draining() ? 1 : 0;
+    num_attack_types += tp->dmg_stamina() ? 1 : 0;
+    num_attack_types += tp->dmg_magic() ? 1 : 0;
 
     //
     // If only a single attack type then make sure it is 1000%
@@ -447,8 +448,11 @@ void tp_fixup(void)
         if (tp->dmg_necrosis() > 0) {
           tp->dmg_chance_d1000_necrosis_set(attack_index, 1000);
         }
-        if (tp->dmg_draining() > 0) {
-          tp->dmg_chance_d1000_draining_set(attack_index, 1000);
+        if (tp->dmg_stamina() > 0) {
+          tp->dmg_chance_d1000_stamina_drain_set(attack_index, 1000);
+        }
+        if (tp->dmg_magic() > 0) {
+          tp->dmg_chance_d1000_magic_drain_set(attack_index, 1000);
         }
         if (tp->dmg_poison() > 0) {
           tp->dmg_chance_d1000_poison_set(attack_index, 1000);
@@ -467,7 +471,8 @@ void tp_fixup(void)
             + tp->dmg_chance_d1000_energy(i) + tp->dmg_chance_d1000_negation(i) + tp->dmg_chance_d1000_fire(i)
             + tp->dmg_chance_d1000_heat(i) + tp->dmg_chance_d1000_drown(i) + tp->dmg_chance_d1000_bite(i)
             + tp->dmg_chance_d1000_claw(i) + tp->dmg_chance_d1000_lightning(i) + tp->dmg_chance_d1000_melee(i)
-            + tp->dmg_chance_d1000_nat_att(i) + tp->dmg_chance_d1000_necrosis(i) + tp->dmg_chance_d1000_draining(i)
+            + tp->dmg_chance_d1000_nat_att(i) + tp->dmg_chance_d1000_necrosis(i)
+            + tp->dmg_chance_d1000_stamina_drain(i) + tp->dmg_chance_d1000_magic_drain(i)
             + tp->dmg_chance_d1000_poison(i);
 
         if (! total_damange_for_this_attack_round) {

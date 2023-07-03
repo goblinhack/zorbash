@@ -111,6 +111,13 @@ THING_BODY_SET_INT(thing_stamina_max_incr, stamina_max_incr)
 THING_BODY_SET_INT(thing_stamina_max_set, stamina_max_set)
 THING_BODY_SET_INT(thing_stamina_set, stamina_set)
 
+THING_BODY_SET_INT(thing_magic_decr, magic_decr)
+THING_BODY_SET_INT(thing_magic_incr, magic_incr)
+THING_BODY_SET_INT(thing_magic_max_decr, magic_max_decr)
+THING_BODY_SET_INT(thing_magic_max_incr, magic_max_incr)
+THING_BODY_SET_INT(thing_magic_max_set, magic_max_set)
+THING_BODY_SET_INT(thing_magic_set, magic_set)
+
 THING_BODY_SET_INT(thing_stat_att_incr, stat_att_incr)
 THING_BODY_SET_INT(thing_stat_att_decr, stat_att_decr)
 THING_BODY_SET_INT(thing_stat_att_set, stat_att_set)

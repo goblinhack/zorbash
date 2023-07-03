@@ -264,7 +264,7 @@ bool Thing::buff_is_immune_to_water(void)
   return false;
 }
 
-bool Thing::buff_is_immune_to_draining(void)
+bool Thing::buff_is_immune_to_stamina_drain(void)
 {
   TRACE_NO_INDENT();
 
@@ -276,7 +276,7 @@ bool Thing::buff_is_immune_to_draining(void)
   {
     auto t = level->thing_find(id);
     if (t) {
-      if (t->is_immune_to_draining()) {
+      if (t->is_immune_to_stamina_drain()) {
         return true;
       }
     }
@@ -288,7 +288,41 @@ bool Thing::buff_is_immune_to_draining(void)
     {
       auto iter = level->thing_find(item.id);
       if (iter) {
-        if (iter->is_immune_to_draining()) {
+        if (iter->is_immune_to_stamina_drain()) {
+          return true;
+        }
+      }
+    }
+  }
+
+  return false;
+}
+
+bool Thing::buff_is_immune_to_magic_drain(void)
+{
+  TRACE_NO_INDENT();
+
+  if (! maybe_itemsp()) {
+    return false;
+  }
+
+  FOR_ALL_BUFFS(id)
+  {
+    auto t = level->thing_find(id);
+    if (t) {
+      if (t->is_immune_to_magic_drain()) {
+        return true;
+      }
+    }
+  }
+
+  auto owner = top_owner();
+  if (owner) {
+    FOR_ALL_BUFFS_FOR(owner, item)
+    {
+      auto iter = level->thing_find(item.id);
+      if (iter) {
+        if (iter->is_immune_to_magic_drain()) {
           return true;
         }
       }

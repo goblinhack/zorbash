@@ -73,7 +73,7 @@ int Thing::stamina_decr(int v)
   TRACE_NO_INDENT();
   new_infop();
 
-  v = total_dmg_for_on_receiving_dmg_draining(this, this, v);
+  v = total_dmg_for_on_receiving_dmg_stamina(this, this, v);
 
   FOR_ALL_EQUIP(e)
   {
@@ -204,4 +204,16 @@ int Thing::stamina_max_incr(void)
   new_infop();
   auto n = (infop()->stamina_max++);
   return n;
+}
+
+int Thing::stamina_drain_on_attacking(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->stamina_drain_on_attacking());
+}
+
+int Thing::stamina_drain_on_using(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->stamina_drain_on_using());
 }

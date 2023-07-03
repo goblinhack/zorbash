@@ -262,7 +262,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     wid_thing_info_add_dmg_acid(wid_popup_window, t, attack_index);
     wid_thing_info_add_dmg_digest(wid_popup_window, t, attack_index);
     wid_thing_info_add_dmg_necrosis(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_draining(wid_popup_window, t, attack_index);
+    wid_thing_info_add_dmg_stamina(wid_popup_window, t, attack_index);
     wid_thing_info_add_dmgd_chance(wid_popup_window, t);
     wid_thing_info_add_crit_chance(wid_popup_window, t);
     wid_thing_info_add_stat_att(wid_popup_window, t);
@@ -1543,7 +1543,7 @@ void Game::wid_thing_info_add_dmg_necrosis(WidPopup *w, Thingp t, int index)
   }
 }
 
-void Game::wid_thing_info_add_dmg_draining(WidPopup *w, Thingp t, int index)
+void Game::wid_thing_info_add_dmg_stamina(WidPopup *w, Thingp t, int index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
@@ -1558,22 +1558,22 @@ void Game::wid_thing_info_add_dmg_draining(WidPopup *w, Thingp t, int index)
       return;
     }
 
-    auto attack_swallow_dice = t->dmg_draining_dice();
+    auto attack_swallow_dice = t->dmg_stamina_dice();
     auto min_value           = attack_swallow_dice.min_roll();
     auto max_value           = attack_swallow_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_draining_dice_str().c_str());
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_stamina_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Drain dmg  %18s", tmp2);
       } else {
         min_value += t->enchant_count_get();
         max_value += t->enchant_count_get();
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_draining_dice_str().c_str());
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_stamina_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Drain dmg  %18s", tmp2);
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_chance_d1000_draining(index))) / 1000.0) * 100.0);
+      int chance = (int) (((((float) tp->dmg_chance_d1000_stamina_drain(index))) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);

@@ -212,6 +212,42 @@ bool wid_rightbar_pixelart_create(void)
     wid_set_text(w, s);
     wid_set_text_rhs(w, true);
   }
+  y_at += 2;
+
+  ///////////////////////////////////////////////////////////////////////////
+  // magic
+  ///////////////////////////////////////////////////////////////////////////
+  {
+    TRACE_NO_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "magic-bar");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(0, y_at);
+    point br = make_point(tl.x + width - 1, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
+
+    int i     = (((float) player->magic() / ((float) player->magic_max()))) * ((float) UI_HEALTH_BAR_STEPS - 1);
+    i         = std::min(i, UI_HEALTH_BAR_STEPS - 1);
+    i         = std::max(i, 0);
+    auto icon = "health_bar_" + std::to_string(i);
+    wid_set_tilename(TILE_LAYER_FG_0, w, icon);
+  }
+  {
+    TRACE_NO_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "magic-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(3, y_at + 1);
+    point br = make_point(tl.x + width - 5, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
+
+    std::string s = std::to_string(player->magic()) + "/" + std::to_string(player->magic_max());
+    wid_set_text(w, s);
+    wid_set_text_rhs(w, true);
+  }
   y_at += 3;
 
   ///////////////////////////////////////////////////////////////////////////
