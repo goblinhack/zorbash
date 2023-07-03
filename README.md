@@ -184,7 +184,7 @@
 
 Welcome to the lair of the dread tentacleye, Zorbash. Collect the crystals of Zorb and confront Zorbash to win.
 
-Latest release [found here](https://github.com/goblinhack/zorbash/releases/tag/v0.0.7)
+Itch.io [found here](https://goblinhackgmailcom.itch.io/zorbash)
 
 Content:
 - Dungeon, sewer, swamp, ice, lava, chasms and flooded dungeon biomes
