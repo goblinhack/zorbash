@@ -259,7 +259,7 @@ bool Level::spellbox_chosen(const int slot)
   }
 
   if (slot >= (int) itemsp->spellbox_id.size()) {
-    DBG2("Spellbox: Nothing in slot %d", slot);
+    TOPCON("No spell at slot %d.", slot + 1);
     return false;
   }
 
@@ -281,7 +281,7 @@ bool Level::spellbox_chosen(const int slot)
   }
 
   if (! what) {
-    DBG2("Spellbox: No thing at slot %d", slot);
+    TOPCON("No spell at slot %d.", slot + 1);
     return false;
   }
 
@@ -299,6 +299,7 @@ bool Level::spell_chosen(Thingp what)
   }
 
   if (! what) {
+    TOPCON("No spell there.");
     return false;
   }
 

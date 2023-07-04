@@ -259,7 +259,7 @@ bool Level::skillbox_chosen(const int slot)
   }
 
   if (slot >= (int) itemsp->skillbox_id.size()) {
-    DBG2("Skillbox: Nothing in slot %d", slot);
+    TOPCON("No skill in slot %d.", slot + 1);
     return false;
   }
 
@@ -281,7 +281,7 @@ bool Level::skillbox_chosen(const int slot)
   }
 
   if (! what) {
-    DBG2("Skillbox: No thing at slot %d", slot);
+    TOPCON("No skill in slot %d.", slot + 1);
     return false;
   }
 
@@ -299,6 +299,7 @@ bool Level::skill_chosen(Thingp what)
   }
 
   if (! what) {
+    TOPCON("No skill there.");
     return false;
   }
 

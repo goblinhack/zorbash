@@ -20,7 +20,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.dmg_energy_dice(self, "1d6")
     my.gfx_targetted_laser(self, "laser_energy")
     my.is_loggable(self, True)
-    my.is_magical(self, True)
     my.is_target_select(self, True)
     my.is_usable(self, True)
     my.is_spell(self, True)
