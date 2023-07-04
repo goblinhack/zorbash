@@ -18,7 +18,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.spell_cost(self, 2)
     my.dmg_chance_d1000_energy(self, 0, 1000)
     my.dmg_energy_dice(self, "1d6")
-    my.gfx_targetted_laser(self, "laser_energy")
+    my.gfx_targetted_projectile(self, "projectile_magic_missile")
     my.is_loggable(self, True)
     my.is_target_select(self, True)
     my.is_usable(self, True)

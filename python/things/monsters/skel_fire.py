@@ -32,7 +32,7 @@ def on_death(me, x, y):
 
 def on_want_to_shoot_at(me, target, x, y):  # Return True on doing an action
     if my.pcg_randint(1, 100) < 10:
-        my.thing_shoot_at(me, "staff_fire_projectile", target)
+        my.thing_shoot_at(me, "projectile_fire", target)
         my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
         return True
     return False

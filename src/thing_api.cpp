@@ -4580,10 +4580,10 @@ const std::string &Thing::on_death_of_my_leader_do(void)
   return (tp()->on_death_of_my_leader_do());
 }
 
-const std::string &Thing::target_name_projectile(void)
+const std::string &Thing::gfx_targetted_projectile(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->target_name_projectile());
+  return (tp()->gfx_targetted_projectile());
 }
 
 const std::string &Thing::spawn_on_shoved(void)

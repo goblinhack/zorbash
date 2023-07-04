@@ -25,8 +25,8 @@ bool Thing::projectile_choose_target(Thingp item, Thingp victim /* can be null *
 
     used(item, victim, true);
 
-    if (! item->target_name_projectile().empty()) {
-      projectile_shoot_at(item, item->target_name_projectile(), victim);
+    if (! item->gfx_targetted_projectile().empty()) {
+      projectile_shoot_at(item, item->gfx_targetted_projectile(), victim);
     } else {
       err("Unknown projectile: %s.", item->text_the().c_str());
       return false;
@@ -48,7 +48,7 @@ bool Thing::projectile_choose_target(Thingp item, Thingp victim /* can be null *
   return is_target_select(item);
 }
 
-Thingp Thing::projectile_shoot_at(Thingp item, const std::string &target_name_projectile, Thingp target)
+Thingp Thing::projectile_shoot_at(Thingp item, const std::string &gfx_targetted_projectile, Thingp target)
 {
   //
   // NOTE: the item can be null here if this is monster firing with its
@@ -63,7 +63,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &target_name_pr
     owner = nullptr;
   }
 
-  if (target_name_projectile == "") {
+  if (gfx_targetted_projectile == "") {
     die("No projectile name");
   }
 
@@ -131,7 +131,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &target_name_pr
     game->change_state(Game::STATE_NORMAL, "player fired a projectile");
   }
 
-  auto projectile = level->thing_new(target_name_projectile, target->curr_at, owner);
+  auto projectile = level->thing_new(gfx_targetted_projectile, target->curr_at, owner);
   if (! projectile) {
     err("No projectile to fire");
     if (is_player()) {
@@ -164,7 +164,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &target_name_pr
         FOR_ALL_GRID_THINGS(level, grid_thing, second_portal_target.x, second_portal_target.y)
         {
           if (grid_thing->is_the_grid) {
-            second_portal->projectile_shoot_at(item, target_name_projectile, grid_thing);
+            second_portal->projectile_shoot_at(item, gfx_targetted_projectile, grid_thing);
           }
           break;
         }
@@ -208,7 +208,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &target_name_pr
   return projectile;
 }
 
-Thingp Thing::projectile_shoot_at(Thingp item, const std::string &target_name_projectile, point at)
+Thingp Thing::projectile_shoot_at(Thingp item, const std::string &gfx_targetted_projectile, point at)
 {
   //
   // NOTE: the item can be null here if this is monster firing with its
@@ -218,7 +218,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &target_name_pr
   Thingp best = nullptr;
   point  best_hit_at;
 
-  dbg("Projectile fire %s at %s", target_name_projectile.c_str(), at.to_string().c_str());
+  dbg("Projectile fire %s at %s", gfx_targetted_projectile.c_str(), at.to_string().c_str());
   TRACE_AND_INDENT();
 
   //
@@ -227,7 +227,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &target_name_pr
   if (item->range_max()) {
     float dist = distance(item->curr_at, at);
     if (dist > item->range_max()) {
-      dbg("Projectile fire %s at point %s is out of range, dist %f, max %d", target_name_projectile.c_str(),
+      dbg("Projectile fire %s at point %s is out of range, dist %f, max %d", gfx_targetted_projectile.c_str(),
           at.to_string().c_str(), dist, item->range_max());
       float dx = (float) at.x - (float) item->curr_at.x;
       float dy = (float) at.y - (float) item->curr_at.y;
@@ -238,7 +238,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &target_name_pr
       at = curr_at + point(dx, dy);
 
       float dist = distance(item->curr_at, at);
-      dbg("Projectile fire %s at new point %s, dist %f, max %d", target_name_projectile.c_str(),
+      dbg("Projectile fire %s at new point %s, dist %f, max %d", gfx_targetted_projectile.c_str(),
           at.to_string().c_str(), dist, item->range_max());
     }
   }
@@ -246,13 +246,13 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &target_name_pr
   ThingAttackOptions attack_options  = {};
   attack_options.allow_hitting_walls = true;
   if (victim_attack_choose_best(nullptr, at, &best, &best_hit_at, &attack_options)) {
-    return projectile_shoot_at(item, target_name_projectile, best);
+    return projectile_shoot_at(item, gfx_targetted_projectile, best);
   }
 
   FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
   {
     if (t->is_the_grid) {
-      return projectile_shoot_at(item, target_name_projectile, t);
+      return projectile_shoot_at(item, gfx_targetted_projectile, t);
     }
   }
   FOR_ALL_THINGS_END()

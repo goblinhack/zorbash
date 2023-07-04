@@ -891,6 +891,7 @@ private:
   std::string _equip_carry_anim;
   std::string _gfx_anim_use;
   std::string _gfx_targetted_laser;
+  std::string _gfx_targetted_projectile;
   std::string _gfx_targetted_radial;
   std::string _gold_value_dice_str;
   std::string _health_initial_dice_str;
@@ -1048,7 +1049,6 @@ private:
   std::string _str1;
   std::string _str2;
   std::string _str4;
-  std::string _target_name_projectile;
   std::string _text_a_or_an;
   std::string _text_debuff;
   std::string _text_description_enchant;
@@ -1252,6 +1252,7 @@ public:
   const std::string &equip_carry_anim(void) const;
   const std::string &gfx_anim_use(void) const;
   const std::string &gfx_targetted_laser(void) const;
+  const std::string &gfx_targetted_projectile(void) const;
   const std::string &gfx_targetted_radial(void) const;
   const std::string &gold_value_dice_str(void) const;
   const std::string &health_initial_dice_str(void) const;
@@ -1409,7 +1410,6 @@ public:
   const std::string &str1(void) const;
   const std::string &str2(void) const;
   const std::string &str4(void) const;
-  const std::string &target_name_projectile(void) const;
   const std::string &text_debuff(void) const;
   const std::string &text_description_enchant(void) const;
   const std::string &text_description_long2(void) const;
@@ -2335,6 +2335,7 @@ public:
   void gfx_pixelart_submergible_set(int v);
   void gfx_pixelart_wobbles_when_hit_set(int v);
   void gfx_targetted_laser_set(const std::string &v);
+  void gfx_targetted_projectile_set(const std::string &v);
   void gfx_targetted_radial_set(const std::string &v);
   void gfx_water_set(int v);
   void hunger_clock_tick_freq_set(int v);
@@ -3084,7 +3085,6 @@ public:
   void str1_set(const std::string &v);
   void str2_set(const std::string &v);
   void str4_set(const std::string &v);
-  void target_name_projectile_set(const std::string &v);
   void teleport_distance_set(int v);
   void temperature_max_set(int v);
   void temperature_min_set(int v);

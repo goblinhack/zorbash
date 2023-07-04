@@ -35,7 +35,7 @@ def on_want_to_shoot_at(me, target, target_x, target_y):  # Return True on doing
         sound = f"growl{my.non_pcg_randint(1, 10)}"
         if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
             my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
-        my.thing_shoot_at(me, "staff_cold_projectile", target)
+        my.thing_shoot_at(me, "projectile_cold", target)
         return True
     return False
 

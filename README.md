@@ -3,6 +3,7 @@
 <!-- Deactivate spell if cancelling target                                                                                                        -->
 <!-- Deactivate spell on use                                                                                                                      -->
 <!-- Spell cost                                                                                                                                   -->
+<!-- Need energy projectile                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

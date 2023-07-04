@@ -36,6 +36,7 @@ const std::string &Tp::dmg_nat_att_type(void) const { return _dmg_nat_att_type; 
 const std::string &Tp::equip_carry_anim(void) const { return _equip_carry_anim; }
 const std::string &Tp::gfx_anim_use(void) const { return _gfx_anim_use; }
 const std::string &Tp::gfx_targetted_laser(void) const { return _gfx_targetted_laser; }
+const std::string &Tp::gfx_targetted_projectile(void) const { return _gfx_targetted_projectile; }
 const std::string &Tp::gfx_targetted_radial(void) const { return _gfx_targetted_radial; }
 const std::string &Tp::is_allied_with(void) const { return _is_allied_with; }
 const std::string &Tp::light_color(void) const { return _light_color; }
@@ -185,7 +186,6 @@ const std::string &Tp::spell_replaces(void) const { return _spell_replaces; }
 const std::string &Tp::str1(void) const { return _str1; }
 const std::string &Tp::str2(void) const { return _str2; }
 const std::string &Tp::str4(void) const { return _str4; }
-const std::string &Tp::target_name_projectile(void) const { return _target_name_projectile; }
 const std::string &Tp::text_debuff(void) const { return _text_debuff; }
 const std::string &Tp::text_description_enchant(void) const { return _text_description_enchant; }
 const std::string &Tp::text_description_long2(void) const { return _text_description_long2; }
@@ -1090,6 +1090,7 @@ void Tp::gfx_pixelart_show_square_outlined_set(int v) { _gfx_pixelart_show_squar
 void Tp::gfx_pixelart_submergible_set(int v) { _gfx_pixelart_submergible = v; }
 void Tp::gfx_pixelart_wobbles_when_hit_set(int v) { _gfx_pixelart_wobbles_when_hit = v; }
 void Tp::gfx_targetted_laser_set(const std::string &v) { _gfx_targetted_laser = v; }
+void Tp::gfx_targetted_projectile_set(const std::string &v) { _gfx_targetted_projectile = v; }
 void Tp::gfx_targetted_radial_set(const std::string &v) { _gfx_targetted_radial = v; }
 void Tp::gfx_water_set(int v) { _gfx_water = v; }
 void Tp::hunger_clock_tick_freq_set(int v) { _hunger_clock_tick_freq = v; }
@@ -1839,7 +1840,6 @@ void Tp::stat_str_set(int v) { _stat_str = v; }
 void Tp::str1_set(const std::string &v) { _str1 = v; }
 void Tp::str2_set(const std::string &v) { _str2 = v; }
 void Tp::str4_set(const std::string &v) { _str4 = v; }
-void Tp::target_name_projectile_set(const std::string &v) { _target_name_projectile = v; }
 void Tp::teleport_distance_set(int v) { _teleport_distance = v; }
 void Tp::temperature_sensitive_set(int v) { _temperature_sensitive = v; }
 void Tp::temperature_sensitive_to_sudden_changes_set(int v) { _temperature_sensitive_to_sudden_changes = v; }

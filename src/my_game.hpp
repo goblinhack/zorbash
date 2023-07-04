@@ -702,13 +702,13 @@ public:
   void wid_thing_info_add_enchant(WidPopup *w, Thingp t);
   void wid_thing_info_add_general_info(WidPopup *w, Thingp t);
   void wid_thing_info_add_gold_value(WidPopup *w, Thingp t);
-  void wid_thing_info_add_spell_cost(WidPopup *w, Thingp t);
   void wid_thing_info_add_health(WidPopup *w, Thingp t);
   void wid_thing_info_add_jump_distance(WidPopup *w, Thingp t);
   void wid_thing_info_add_move_speed(WidPopup *w, Thingp t);
   void wid_thing_info_add_noise(WidPopup *w, Thingp t);
   void wid_thing_info_add_nutrition(WidPopup *w, Thingp t);
   void wid_thing_info_add_shove_strength(WidPopup *w, Thingp t);
+  void wid_thing_info_add_spell_cost(WidPopup *w, Thingp t);
   void wid_thing_info_add_stat_att(WidPopup *w, Thingp t);
   void wid_thing_info_add_stat_con(WidPopup *w, Thingp t);
   void wid_thing_info_add_stat_def(WidPopup *w, Thingp t);

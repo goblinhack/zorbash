@@ -833,6 +833,7 @@ public:
   const std::string &equip_carry_anim(void);
   const std::string &gfx_anim_use(void);
   const std::string &gfx_targetted_laser(void);
+  const std::string &gfx_targetted_projectile(void);
   const std::string &gfx_targetted_radial(void);
   const std::string &gold_value_dice_str(void);
   const std::string &health_initial_dice_str(void);
@@ -992,7 +993,6 @@ public:
   const std::string &str1(void);
   const std::string &str2(void);
   const std::string &str4(void);
-  const std::string &target_name_projectile(void);
   const std::string &text_debuff(void);
   const std::string &text_description_enchant(void);
   const std::string &text_description_short(void);
