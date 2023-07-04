@@ -98,6 +98,18 @@ int Thing::stat_str_total(void)
         }
       }
     }
+
+    FOR_ALL_SPELLS(id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter && iter->is_activated) {
+        stat += iter->stat_str_bonus();
+        if (stat != prev) {
+          prev = stat;
+          dbg3("Str: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_str_total(), stat);
+        }
+      }
+    }
   }
 
   if (stat_str_bonus()) {

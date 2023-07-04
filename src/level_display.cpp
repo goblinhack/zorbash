@@ -68,6 +68,8 @@ bool Level::should_display_map(void)
       return true;
     case Game::STATE_CHOOSING_SKILLS : // Choosing skills
       return true;
+    case Game::STATE_CHOOSING_SPELLS : // Choosing spells
+      return true;
     case Game::STATE_CHOOSING_TARGET : // Looking to somewhere to throw at
       return true;
     case Game::STATE_CHOOSING_LEVEL : // Choosing the next level

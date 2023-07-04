@@ -316,6 +316,14 @@ void Game::place_player(void)
           }
         }
       }
+      if (1) {
+        {
+          for (auto sk = 0; sk < 1; sk++) {
+            auto b = level->thing_new("spellbook", point(x, y));
+            t->carry(b, carry_options);
+          }
+        }
+      }
       if (0) {
         auto b = level->thing_new("thunderstone", point(x, y));
         t->carry(b, carry_options);

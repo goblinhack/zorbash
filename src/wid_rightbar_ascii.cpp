@@ -15,6 +15,7 @@
 #include "my_wid_inventory.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_skillbox.hpp"
+#include "my_wid_spellbox.hpp"
 
 bool wid_rightbar_ascii_create(void)
 {
@@ -736,6 +737,114 @@ bool wid_rightbar_ascii_create(void)
               wid_set_on_mouse_up(w, wid_skill_item_mouse_up);
               wid_set_text_lhs(w, true);
               wid_set_text(w, skill->text_short_and_state_capitalised());
+              wid_update(w);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  //
+  // Active spells
+  //
+  {
+    bool got_one = false;
+
+    for (auto id : itemsp->spells) {
+      auto spell = level->thing_find(id);
+      if (spell) {
+        if (spell->is_activated) {
+          got_one = true;
+          break;
+        }
+      }
+    }
+    if (got_one) {
+      {
+        TRACE_AND_INDENT();
+        y_at++;
+        auto w = wid_new_square_button(wid_rightbar, "Spells");
+        wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "Active Spells");
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
+        wid_update(w);
+      }
+      {
+        for (auto id : itemsp->spells) {
+          auto spell = level->thing_find(id);
+          if (spell) {
+            if (spell->is_activated) {
+              y_at++;
+              auto  w  = wid_new_plain(wid_rightbar, "Spell");
+              point tl = make_point(0, y_at);
+              point br = make_point(width - 1, y_at);
+
+              wid_set_pos(w, tl, br);
+              wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
+              wid_set_thing_context(w, spell, 0);
+              wid_set_on_mouse_over_begin(w, wid_spell_mouse_over_begin);
+              wid_set_on_mouse_over_end(w, wid_spell_mouse_over_end);
+              wid_set_on_mouse_up(w, wid_spell_item_mouse_up);
+              wid_set_text_lhs(w, true);
+              wid_set_text(w, spell->text_short_and_state_capitalised());
+              wid_update(w);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  //
+  // Inactive spells
+  //
+  {
+    bool got_one = false;
+
+    for (auto id : itemsp->spells) {
+      auto spell = level->thing_find(id);
+      if (spell) {
+        if (! spell->is_activated) {
+          got_one = true;
+          break;
+        }
+      }
+    }
+    if (got_one) {
+      {
+        TRACE_AND_INDENT();
+        y_at++;
+        auto w = wid_new_square_button(wid_rightbar, "Spells");
+        wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "Inactive Spells");
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
+        wid_update(w);
+      }
+      {
+        for (auto id : itemsp->spells) {
+          auto spell = level->thing_find(id);
+          if (spell) {
+            if (! spell->is_activated) {
+              y_at++;
+              auto  w  = wid_new_plain(wid_rightbar, "Spell");
+              point tl = make_point(0, y_at);
+              point br = make_point(width - 1, y_at);
+
+              wid_set_pos(w, tl, br);
+              wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
+              wid_set_thing_context(w, spell, 0);
+              wid_set_on_mouse_over_begin(w, wid_spell_mouse_over_begin);
+              wid_set_on_mouse_over_end(w, wid_spell_mouse_over_end);
+              wid_set_on_mouse_up(w, wid_spell_item_mouse_up);
+              wid_set_text_lhs(w, true);
+              wid_set_text(w, spell->text_short_and_state_capitalised());
               wid_update(w);
             }
           }

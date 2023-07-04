@@ -98,6 +98,18 @@ int Thing::stat_luck_total(void)
         }
       }
     }
+
+    FOR_ALL_SPELLS(id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter && iter->is_activated) {
+        stat += iter->stat_luck_bonus();
+        if (stat != prev) {
+          prev = stat;
+          dbg3("Luck: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_luck_total(), stat);
+        }
+      }
+    }
   }
 
   if (stat_luck_bonus()) {

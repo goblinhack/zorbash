@@ -182,3 +182,6 @@ THING_BODY_SET_INT(thing_noise_set, noise_set)
 
 THING_BODY_SET_THING(thing_skill_activate, skill_activate)
 THING_BODY_SET_THING(thing_skill_deactivate, skill_deactivate)
+
+THING_BODY_SET_THING(thing_spell_activate, spell_activate)
+THING_BODY_SET_THING(thing_spell_deactivate, spell_deactivate)

@@ -26,6 +26,10 @@ void Thing::hooks_remove_from(Thingp o)
       o->skill_remove(this);
     }
 
+    if (is_spell()) {
+      o->spell_remove(this);
+    }
+
     if (is_buff()) {
       o->buff_remove(this);
     }

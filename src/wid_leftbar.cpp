@@ -56,6 +56,8 @@ bool wid_leftbar_create(void)
       return false;
     case Game::STATE_CHOOSING_SKILLS : // Choosing skills
       return false;
+    case Game::STATE_CHOOSING_SPELLS : // Choosing spells
+      return false;
     case Game::STATE_CHOOSING_TARGET : // Looking to somewhere to throw at
       break;
     case Game::STATE_CHOOSING_LEVEL : // Choosing the next level

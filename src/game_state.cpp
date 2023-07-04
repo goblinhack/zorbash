@@ -23,6 +23,7 @@ std::string gama_state_to_string(int state)
     case Game::STATE_COLLECTING_ITEMS : return "COLLECTING_ITEMS";
     case Game::STATE_ENCHANTING_ITEMS : return "ENCHANTING_ITEMS";
     case Game::STATE_CHOOSING_SKILLS : return "CHOOSING_SKILLS";
+    case Game::STATE_CHOOSING_SPELLS : return "CHOOSING_SPELLS";
     case Game::STATE_CHOOSING_TARGET : return "CHOOSING_TARGET";
     case Game::STATE_CHOOSING_LEVEL : return "CHOOSING_LEVEL";
     case Game::STATE_KEYBOARD_MENU : return "KEYBOARD_MENU";
@@ -94,6 +95,7 @@ void Game::change_state(int new_state, const std::string &why)
       wid_collect_destroy();
       wid_enchant_destroy();
       wid_choose_skill_destroy();
+      wid_choose_spell_destroy();
       wid_load_destroy();
       wid_save_destroy();
       wid_inventory_fini();
@@ -118,6 +120,10 @@ void Game::change_state(int new_state, const std::string &why)
       wid_choose_skill_destroy();
       wid_actionbar_init();
       break;
+    case STATE_CHOOSING_SPELLS :
+      wid_choose_spell_destroy();
+      wid_actionbar_init();
+      break;
     case STATE_CHOOSING_TARGET : // Looking to somewhere to throw at
       wid_thing_info_fini("change state");
       wid_tp_info_fini("change state");
@@ -135,6 +141,7 @@ void Game::change_state(int new_state, const std::string &why)
       request_to_remake_inventory = false;
       request_to_remake_actionbar = false;
       request_to_remake_skillbox  = false;
+      request_to_remake_spellbox  = false;
       request_to_remake_debuffbox = false;
       request_to_remake_buffbox   = false;
       break;
@@ -162,6 +169,7 @@ void Game::change_state(int new_state, const std::string &why)
     case STATE_COLLECTING_ITEMS : // Collecting en masse from the level
     case STATE_ENCHANTING_ITEMS :
     case STATE_CHOOSING_SKILLS :
+    case STATE_CHOOSING_SPELLS :
       if (level) {
         level->cursor_recreate();
         if (level->cursor) {

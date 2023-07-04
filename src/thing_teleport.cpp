@@ -121,6 +121,15 @@ int Thing::teleport_distance_get(void)
         // it->dbg("TELEPORT %d", dist);
       }
     }
+
+    FOR_ALL_SPELLS_FOR(this, id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter && iter->is_activated) {
+        dist += iter->teleport_distance_get();
+        // it->dbg("TELEPORT %d", dist);
+      }
+    }
   }
 
   return dist;

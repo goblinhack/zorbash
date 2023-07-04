@@ -39,6 +39,7 @@ void wid_actionbar_close_all_popups(void)
   wid_collect_destroy();
   wid_enchant_destroy();
   wid_choose_skill_destroy();
+  wid_choose_spell_destroy();
   wid_load_destroy();
   wid_save_destroy();
   wid_inventory_fini();

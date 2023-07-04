@@ -89,6 +89,7 @@ void sdl_display_reset(void)
   game->set_request_to_remake_inventory();
   game->set_request_to_remake_actionbar();
   game->set_request_to_remake_skillbox();
+  game->set_request_to_remake_spellbox();
   game->set_request_to_remake_debuffbox();
   game->set_request_to_remake_buffbox();
 

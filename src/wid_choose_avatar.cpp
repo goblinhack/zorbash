@@ -15,6 +15,7 @@
 #include "my_wid_leftbar.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_skillbox.hpp"
+#include "my_wid_spellbox.hpp"
 #include "my_wid_thing_info.hpp"
 
 static WidPopup *wid_choose_avatar;
@@ -155,6 +156,7 @@ void Game::wid_choose_avatar_select(void)
   wid_leftbar_fini();
   wid_inventory_fini();
   wid_skillbox_fini();
+  wid_spellbox_fini();
   wid_thing_info_fini("choose avatar");
 
   //

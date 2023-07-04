@@ -15,6 +15,7 @@
 #include "my_wid_inventory.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_skillbox.hpp"
+#include "my_wid_spellbox.hpp"
 
 bool wid_rightbar_pixelart_create(void)
 {
@@ -593,6 +594,91 @@ bool wid_rightbar_pixelart_create(void)
   }
 
   //
+  // Spells
+  //
+  y_at += 7;
+  {
+    std::vector< Widp > wid_spellbox_items;
+
+    uint8_t item = 0;
+    for (auto i = 0U; i < UI_INVENTORY_QUICK_ITEMS_MAX; i++) {
+      //
+      // slot number
+      //
+      auto slot(std::to_string(i));
+
+      //
+      // Always create the slot even if empty as we use this for particles
+      //
+      auto s = "spell slot" + std::to_string(i);
+      auto w = wid_new_plain(wid_rightbar, s);
+      auto x = (i % 5) * 3 + 2;
+      auto y = (i / 5) * 3 + 1 + y_at;
+      x++;
+
+      point tl = make_point(x - 1, y - 1);
+      point br = make_point(x + 1, y + 1);
+
+      wid_set_pos(w, tl, br);
+      wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+
+      if (item < itemsp->spellbox_id.size()) {
+        auto thing_id = get(itemsp->spellbox_id, item);
+        if (! thing_id) {
+          item++;
+          continue;
+        }
+
+        auto t         = level->thing_find(thing_id);
+        bool activated = false;
+
+        for (auto id : itemsp->spells) {
+          auto o = level->thing_find(id);
+          if (o) {
+            if (o == t) {
+              activated = o->is_activated;
+            }
+          }
+        }
+
+        auto tiles = &t->tp()->tiles;
+
+        if (! tiles) {
+          item++;
+          continue;
+        }
+
+        auto tile = tile_find_mand(t->tp()->spell_base_name() + (activated ? "_activated" : ""));
+        if (unlikely(! tile)) {
+          item++;
+          continue;
+        }
+
+        wid_set_tile(TILE_LAYER_FG_0, w, tile);
+
+        //
+        // If choosing a target, highlight the item
+        //
+        if (i == game->spellbox_highlight_slot) {
+          wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+        } else {
+          wid_set_color(w, WID_COLOR_TEXT_FG, GRAY60);
+        }
+
+        if (activated) {
+          wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+        }
+
+        wid_set_on_mouse_over_begin(w, wid_spellbox_mouse_over_begin);
+        wid_set_on_mouse_over_end(w, wid_spellbox_mouse_over_end);
+        wid_set_on_mouse_up(w, wid_spellbox_item_mouse_up);
+        wid_set_int_context(w, i);
+      }
+      item++;
+    }
+  }
+
+  //
   // Buffs
   //
   y_at += 7;
@@ -746,7 +832,7 @@ bool wid_rightbar_pixelart_create(void)
     }
   }
 
-  y_at += 11;
+  y_at += 8;
 
   //
   // Map

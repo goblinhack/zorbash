@@ -243,10 +243,12 @@ std::istream &operator>>(std::istream &in, Bits< ThingItemsp & > my)
   in >> bits(my.t->bag);
   in >> bits(my.t->carrying);
   in >> bits(my.t->skills);
+  in >> bits(my.t->spells);
   in >> bits(my.t->buffs);
   in >> bits(my.t->debuffs);
   in >> bits(my.t->inventory_shortcuts);
   in >> bits(my.t->skillbox_id);
+  in >> bits(my.t->spellbox_id);
   in >> bits(my.t->buffbox_id);
   in >> bits(my.t->debuffbox_id);
   /////////////////////////////////////////////////////////////////////////
@@ -517,6 +519,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->i_set_is_shovable                      = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_skillstone                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_smoke                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_spellbook                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_spiderweb                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_staff                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_steam                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -664,6 +667,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_shallow_water);
   in >> bits(my.t->_is_shovable);
   in >> bits(my.t->_is_skillstone);
+  in >> bits(my.t->_is_spellbook);
   in >> bits(my.t->_is_smoke);
   in >> bits(my.t->_is_steam);
   in >> bits(my.t->_is_spiderweb);
@@ -1002,6 +1006,16 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
   in >> bits(my.t.key_skill7);
   in >> bits(my.t.key_skill8);
   in >> bits(my.t.key_skill9);
+  in >> bits(my.t.key_spell0);
+  in >> bits(my.t.key_spell1);
+  in >> bits(my.t.key_spell2);
+  in >> bits(my.t.key_spell3);
+  in >> bits(my.t.key_spell4);
+  in >> bits(my.t.key_spell5);
+  in >> bits(my.t.key_spell6);
+  in >> bits(my.t.key_spell7);
+  in >> bits(my.t.key_spell8);
+  in >> bits(my.t.key_spell9);
   in >> bits(my.t.key_ascend);
   in >> bits(my.t.key_attack);
   in >> bits(my.t.key_console);
@@ -1261,6 +1275,7 @@ std::istream &operator>>(std::istream &in, Bits< class Game & > my)
   in >> bits(my.t.inventory_highlight_slot);
   in >> bits(my.t.previous_slot);
   in >> bits(my.t.skillbox_highlight_slot);
+  in >> bits(my.t.spellbox_highlight_slot);
 
   std::vector< std::wstring > s;
   in >> bits(s);

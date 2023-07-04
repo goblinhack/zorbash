@@ -99,6 +99,46 @@ static void wid_config_check_for_conflicts(SDL_Keysym code)
     TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key skill9%%fg=reset$");
     game->config.key_skill9 = {};
   }
+  if (sdlk_eq(game->config.key_spell0, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key spell0%%fg=reset$");
+    game->config.key_spell0 = {};
+  }
+  if (sdlk_eq(game->config.key_spell1, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key spell1%%fg=reset$");
+    game->config.key_spell1 = {};
+  }
+  if (sdlk_eq(game->config.key_spell2, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key spell2%%fg=reset$");
+    game->config.key_spell2 = {};
+  }
+  if (sdlk_eq(game->config.key_spell3, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key spell3%%fg=reset$");
+    game->config.key_spell3 = {};
+  }
+  if (sdlk_eq(game->config.key_spell4, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key spell4%%fg=reset$");
+    game->config.key_spell4 = {};
+  }
+  if (sdlk_eq(game->config.key_spell5, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key spell5%%fg=reset$");
+    game->config.key_spell5 = {};
+  }
+  if (sdlk_eq(game->config.key_spell6, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key spell6%%fg=reset$");
+    game->config.key_spell6 = {};
+  }
+  if (sdlk_eq(game->config.key_spell7, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key spell7%%fg=reset$");
+    game->config.key_spell7 = {};
+  }
+  if (sdlk_eq(game->config.key_spell8, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key spell8%%fg=reset$");
+    game->config.key_spell8 = {};
+  }
+  if (sdlk_eq(game->config.key_spell9, code)) {
+    TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key spell9%%fg=reset$");
+    game->config.key_spell9 = {};
+  }
   if (sdlk_eq(game->config.key_attack, code)) {
     TOPCON("%%fg=orange$Conflicting keyboard mapping, disabling key attack.%%fg=reset$");
     game->config.key_attack = {};
@@ -956,6 +996,105 @@ static void wid_config_key_skill9_set(SDL_Keysym code)
   game->wid_config_keyboard_select();
 }
 
+static void wid_config_key_spell0_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed          = true;
+  game->config.key_spell0 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_spell0 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_spell1_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed          = true;
+  game->config.key_spell1 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_spell1 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_spell2_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed          = true;
+  game->config.key_spell2 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_spell2 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_spell3_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed          = true;
+  game->config.key_spell3 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_spell3 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_spell4_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed          = true;
+  game->config.key_spell4 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_spell4 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_spell5_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed          = true;
+  game->config.key_spell5 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_spell5 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_spell6_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed          = true;
+  game->config.key_spell6 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_spell6 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_spell7_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed          = true;
+  game->config.key_spell7 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_spell7 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_spell8_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed          = true;
+  game->config.key_spell8 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_spell8 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_spell9_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  game->config.key_spell9 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_spell9 = code;
+  game->wid_config_keyboard_select();
+}
+
 static void wid_config_key_save_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
@@ -1683,6 +1822,96 @@ static uint8_t wid_config_key_skill9(Widp w, int x, int y, uint32_t button)
   TRACE_AND_INDENT();
   grab_key("skill 9");
   sdl.on_sdl_key_grab = wid_config_key_skill9_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_spell0(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("spell 0");
+  sdl.on_sdl_key_grab = wid_config_key_spell0_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_spell1(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("spell 1");
+  sdl.on_sdl_key_grab = wid_config_key_spell1_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_spell2(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("spell 2");
+  sdl.on_sdl_key_grab = wid_config_key_spell2_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_spell3(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("spell 3");
+  sdl.on_sdl_key_grab = wid_config_key_spell3_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_spell4(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("spell 4");
+  sdl.on_sdl_key_grab = wid_config_key_spell4_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_spell5(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("spell 5");
+  sdl.on_sdl_key_grab = wid_config_key_spell5_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_spell6(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("spell 6");
+  sdl.on_sdl_key_grab = wid_config_key_spell6_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_spell7(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("spell 7");
+  sdl.on_sdl_key_grab = wid_config_key_spell7_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_spell8(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("spell 8");
+  sdl.on_sdl_key_grab = wid_config_key_spell8_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_spell9(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("spell 9");
+  sdl.on_sdl_key_grab = wid_config_key_spell9_set;
   config_changed      = true;
   return true;
 }
@@ -3166,6 +3395,321 @@ void Game::wid_config_keyboard_select(void)
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_skill9));
     wid_set_on_mouse_up(w, wid_config_key_skill9);
+  }
+
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  ///////////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////////
+  // spell0
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Inventory spell 0");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Activate spell 0");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_spell0));
+    wid_set_on_mouse_up(w, wid_config_key_spell0);
+  }
+  ///////////////////////////////////////////////////////////////////////
+  // spell1
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Inventory spell 1");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Activate spell 1");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_spell1));
+    wid_set_on_mouse_up(w, wid_config_key_spell1);
+  }
+  ///////////////////////////////////////////////////////////////////////
+  // spell2
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Inventory spell 2");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Activate spell 2");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_spell2));
+    wid_set_on_mouse_up(w, wid_config_key_spell2);
+  }
+  ///////////////////////////////////////////////////////////////////////
+  // spell3
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Inventory spell 3");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Activate spell 3");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_spell3));
+    wid_set_on_mouse_up(w, wid_config_key_spell3);
+  }
+  ///////////////////////////////////////////////////////////////////////
+  // spell4
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Inventory spell 4");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Activate spell 4");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_spell4));
+    wid_set_on_mouse_up(w, wid_config_key_spell4);
+  }
+  ///////////////////////////////////////////////////////////////////////
+  // spell5
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Inventory spell 5");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Activate spell 5");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_spell5));
+    wid_set_on_mouse_up(w, wid_config_key_spell5);
+  }
+  ///////////////////////////////////////////////////////////////////////
+  // spell6
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Inventory spell 6");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Activate spell 6");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, to_string(game->config.key_spell6));
+    wid_set_on_mouse_up(w, wid_config_key_spell6);
+  }
+  ///////////////////////////////////////////////////////////////////////
+  // spell7
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Inventory spell 7");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Activate spell 7");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_spell7));
+    wid_set_on_mouse_up(w, wid_config_key_spell7);
+  }
+  ///////////////////////////////////////////////////////////////////////
+  // spell8
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Inventory spell 8");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Activate spell 8");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_spell8));
+    wid_set_on_mouse_up(w, wid_config_key_spell8);
+  }
+  ///////////////////////////////////////////////////////////////////////
+  // spell9
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Inventory spell 9");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Activate spell 9");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_spell9));
+    wid_set_on_mouse_up(w, wid_config_key_spell9);
   }
 
   ///////////////////////////////////////////////////////////////////////

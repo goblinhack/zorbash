@@ -95,6 +95,7 @@ void Game::fini(void)
   request_to_remake_inventory                     = {};
   request_to_remake_rightbar                      = {};
   request_to_remake_skillbox                      = {};
+  request_to_remake_spellbox                      = {};
   request_to_save_snapshot                        = {};
   request_to_toggle_gfx                           = {};
   request_to_update_inventory_with_thing_over     = {};

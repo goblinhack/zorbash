@@ -19,6 +19,7 @@ PyObject *err_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *log_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *map_load_skill_tree_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *map_load_spell_tree_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *music_load_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *music_play_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *music_halt_(PyObject *obj, PyObject *args, PyObject *keywds);

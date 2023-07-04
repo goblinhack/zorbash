@@ -37,7 +37,7 @@ void Level::describe(point p)
       || (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_ENCHANTING_ITEMS)
       || (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU)
       || (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_QUIT_MENU)
-      || (game->state == Game::STATE_CHOOSING_SKILLS)) {
+      || (game->state == Game::STATE_CHOOSING_SKILLS) || (game->state == Game::STATE_CHOOSING_SPELLS)) {
     dbg2("Level describe @%d,%d; no wrong state", p.x, p.y);
     return;
   }

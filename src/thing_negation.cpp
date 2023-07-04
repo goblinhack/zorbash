@@ -51,6 +51,14 @@ void Thing::negation_dmg(int dmg, bool &is_killed)
         iter->negation_dmg(dmg, is_killed);
       }
     }
+
+    FOR_ALL_SPELLS(id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter && iter->is_activated) {
+        iter->negation_dmg(dmg, is_killed);
+      }
+    }
   }
 
   //

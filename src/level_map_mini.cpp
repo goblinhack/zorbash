@@ -170,6 +170,8 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           c = YELLOW;
         } else if (is_skillstone(x, y)) {
           c = RED;
+        } else if (is_spellbook(x, y)) {
+          c = CYAN;
         } else if (is_foliage(x, y)) {
           c = DARKGREEN;
         } else if (is_carnivorous_plant(x, y)) {
@@ -257,7 +259,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         } else if (show_monst || is_block_of_ice(x, y) || is_mob(x, y)) {
           c = RED;
         } else if (is_key(x, y) || is_food(x, y) || is_treasure_type(x, y) || is_skillstone(x, y)
-                   || is_enchantstone(x, y)) {
+                   || is_spellbook(x, y) || is_enchantstone(x, y)) {
           c   = GOLD2;
           c.a = 255;
         } else if (is_wall(x, y) || is_rock(x, y)) {
@@ -379,6 +381,8 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           c = YELLOW;
         } else if (is_skillstone(x, y)) {
           c = RED;
+        } else if (is_spellbook(x, y)) {
+          c = CYAN;
         } else if (is_foliage(x, y)) {
           c = DARKGREEN;
         } else if (is_carnivorous_plant(x, y)) {

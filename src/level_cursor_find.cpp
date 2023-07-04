@@ -33,6 +33,8 @@ void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny
       return;
     case Game::STATE_CHOOSING_SKILLS : // Choosing skills
       return;
+    case Game::STATE_CHOOSING_SPELLS : // Choosing spells
+      return;
     case Game::STATE_CHOOSING_TARGET : // Looking to somewhere to throw at
       break;
     case Game::STATE_CHOOSING_LEVEL : // Choosing the next level

@@ -52,6 +52,14 @@ int Thing::dmg_num_of_attacks(void)
         attacks = std::max(attacks, iter->dmg_num_of_attacks());
       }
     }
+
+    FOR_ALL_SPELLS(id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter && iter->is_activated) {
+        attacks = std::max(attacks, iter->dmg_num_of_attacks());
+      }
+    }
   }
 
   return attacks;

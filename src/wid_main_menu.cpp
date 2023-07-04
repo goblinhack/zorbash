@@ -14,6 +14,7 @@
 #include "my_wid_leftbar.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_skillbox.hpp"
+#include "my_wid_spellbox.hpp"
 #include "my_wid_thing_info.hpp"
 #include "my_wid_topcon.hpp"
 
@@ -383,6 +384,7 @@ void Game::wid_main_menu_select(void)
   wid_leftbar_fini();
   wid_inventory_fini();
   wid_skillbox_fini();
+  wid_spellbox_fini();
   wid_thing_info_fini("main menu select");
   wid_actionbar_fini();
   wid_topcon_fini();

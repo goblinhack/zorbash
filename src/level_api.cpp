@@ -964,6 +964,44 @@ void Level::is_skillstone_unset(const int x, const int y)
   decr(_is_skillstone, x, y, (uint8_t) 1);
 }
 
+uint8_t Level::is_spellbook(const point p)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
+  return (get(_is_spellbook, p.x, p.y));
+}
+
+uint8_t Level::is_spellbook(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
+  return (get(_is_spellbook, x, y));
+}
+
+void Level::is_spellbook_set(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  is_map_changed = true;
+  incr(_is_spellbook, x, y, (uint8_t) 1);
+}
+
+void Level::is_spellbook_unset(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  is_map_changed = true;
+  decr(_is_spellbook, x, y, (uint8_t) 1);
+}
+
 uint8_t Level::is_spiderweb(const point p)
 {
   TRACE_NO_INDENT();

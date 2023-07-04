@@ -303,6 +303,7 @@ public:
   uint64_t i_set_is_shovable                  : 1 {};
   uint64_t i_set_is_skillstone                : 1 {};
   uint64_t i_set_is_smoke                     : 1 {};
+  uint64_t i_set_is_spellbook                 : 1 {};
   uint64_t i_set_is_spiderweb                 : 1 {};
   uint64_t i_set_is_staff                     : 1 {};
   uint64_t i_set_is_steam                     : 1 {};
@@ -494,7 +495,8 @@ public:
   bool can_eat(const Thingp it);
   bool can_eat_something(void);
   bool can_enchant_something(void);
-  bool can_learn_something(void);
+  bool can_learn_a_skill(void);
+  bool can_learn_a_spell(void);
   bool cannot_avoid(Thingp attacker);
   bool can_see_is_invisible(Thingp);
   bool carrying_anything(void);
@@ -555,6 +557,7 @@ public:
   bool fall(void);
   bool fire_choose_target(Thingp item);
   bool has_skill(Tpp skill);
+  bool has_spell(Tpp spell);
   bool has_temperature(void);
   bool health_boost_would_occur(int v);
   bool hunger_boost_would_occur(int v);
@@ -597,6 +600,7 @@ public:
   bool laser_shoot_at(Thingp staff, const std::string &item, point at, UseOptions *use_options = nullptr);
   bool laser_shoot_at(Thingp staff, const std::string &item, Thingp target, UseOptions *use_options = nullptr);
   bool learn_random_skill(void);
+  bool learn_random_spell(void);
   bool map_offset_coords_get(point &blit_tl, point &blit_br, Tilep &tile, bool reflection);
   bool map_treasure_available(void);
   bool matches(const std::string &what);
@@ -651,6 +655,12 @@ public:
   bool spawn_radius_range(Thingp parent, Thingp target, const std::string &what, int rad_min, int rad_max);
   bool spawn_set_fire_to_things_around_me(const std::string &what, int radius);
   bool spawn_things_around_me(const std::string &what, int radius);
+  bool spell_add(Thingp it);
+  bool spell_add(Tpp what);
+  bool spellbox_id_insert(Thingp what);
+  bool spellbox_id_remove(Thingp what);
+  bool spell_remove(Thingp it);
+  bool spell_use(Thingp it);
   bool state_idle(Thingp threat, int minx, int miny, int maxx, int maxy);
   bool state_moving(void);
   bool state_open_inventory(void);
@@ -659,6 +669,7 @@ public:
   bool state_sleeping(bool &do_something, bool &wait);
   bool state_using_enchantstone(void);
   bool state_using_skillstone(void);
+  bool state_using_spellbook(void);
   bool steal_item_from(Thingp);
   bool steal_treasure_from(Thingp);
   bool teleport_carefree(TeleportOptions, point to);
@@ -976,6 +987,8 @@ public:
   const std::string &skill_replaces(void);
   const std::string &spawn_group_size_dice_str(void);
   const std::string &spawn_on_shoved(void);
+  const std::string &spell_base_name(void);
+  const std::string &spell_replaces(void);
   const std::string &str1(void);
   const std::string &str2(void);
   const std::string &str4(void);
@@ -1353,6 +1366,7 @@ public:
   int is_able_to_jump(void);
   int is_able_to_jump_without_tiring(void);
   int is_able_to_learn_skills(void);
+  int is_able_to_learn_spells(void);
   int is_able_to_live_out_of_water(void);
   int is_able_to_lunge(void);
   int is_able_to_melt(void);
@@ -1702,6 +1716,8 @@ public:
   int is_smoke(void);
   int is_snake(void);
   int is_soft(void);
+  int is_spellbook(void);
+  int is_spell(void);
   int is_spider(void);
   int is_spiderweb(void);
   int is_splatter(void);
@@ -2104,7 +2120,6 @@ public:
   int shove_strength_total(void);
   int shove_strength(void);
   int size_modifier(void);
-  int skill_enchant_count(const int slot);
   int skillstone_count(void);
   int sleep_count_decr(int);
   int sleep_count_decr(void);
@@ -2116,6 +2131,7 @@ public:
   int spawn_group_radius(void);
   int spawn_group_size(void);
   int spawn_randomly_in_radius_range(const std::string &what, int amount, int radius_min, int radius_max);
+  int spellbook_count(void);
   int stamina_decr(int);
   int stamina_decr(void);
   int stamina_drain_on_attacking(void);
@@ -2827,6 +2843,9 @@ public:
   void spawned_newborn(Thingp it);
   void spawner_set(Thingp spawner_owner);
   void spawner_unset(void);
+  void spell_activate(Thingp what);
+  void spell_deactivate(Thingp what);
+  void spell_remove_all(void);
   void stamina_boost(int v);
   void stats_tick(void);
   void stuck(const std::string &why);

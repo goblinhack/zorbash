@@ -41,3 +41,21 @@ bool Thing::state_using_skillstone(void)
 
   return true;
 }
+
+bool Thing::state_using_spellbook(void)
+{
+  TRACE_NO_INDENT();
+
+  //
+  // Choose a spell
+  //
+  learn_random_spell();
+  if (is_player()) {
+    change_state(MONST_STATE_REPACK_INVENTORY, "added spell");
+    game->tick_begin("Robot finished adding spells");
+  } else {
+    change_state(MONST_STATE_IDLE, "added spell");
+  }
+
+  return true;
+}

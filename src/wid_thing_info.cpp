@@ -89,6 +89,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     case Game::STATE_COLLECTING_ITEMS : return nullptr;
     case Game::STATE_ENCHANTING_ITEMS : return nullptr;
     case Game::STATE_CHOOSING_SKILLS : return nullptr;
+    case Game::STATE_CHOOSING_SPELLS : return nullptr;
     case Game::STATE_CHOOSING_TARGET : return nullptr;
     case Game::STATE_CHOOSING_LEVEL : return nullptr;
     case Game::STATE_KEYBOARD_MENU : return nullptr;
@@ -306,6 +307,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     case Game::STATE_COLLECTING_ITEMS : return nullptr;
     case Game::STATE_ENCHANTING_ITEMS : return nullptr;
     case Game::STATE_CHOOSING_SKILLS : return nullptr;
+    case Game::STATE_CHOOSING_SPELLS : return nullptr;
     case Game::STATE_CHOOSING_TARGET : return nullptr;
     case Game::STATE_CHOOSING_LEVEL : return nullptr;
     case Game::STATE_KEYBOARD_MENU : return nullptr;
@@ -1694,6 +1696,21 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
           }
         }
       }
+
+      FOR_ALL_SPELLS_FOR(t, id)
+      {
+        auto iter = level->thing_find(id);
+        if (iter && iter->is_activated) {
+          char tmp2[ MAXSHORTSTR ];
+          char iter_name[ MAXSHORTSTR ];
+          if (iter->stat_def_bonus()) {
+            snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_def_total() - 10).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
+            w->log(tmp);
+          }
+        }
+      }
     } else if (t->is_player() || t->is_monst()) {
       char tmp2[ MAXSHORTSTR ];
       snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", def_total, stat_to_bonus_slash_str(def_total).c_str());
@@ -1715,6 +1732,9 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
     w->log(tmp);
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
+    }
+    if (t->is_spell()) {
+      w->log("%%fg=pink$(while spell is active)");
     }
   }
 }
@@ -1830,6 +1850,21 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
           }
         }
       }
+
+      FOR_ALL_SPELLS_FOR(t, id)
+      {
+        auto iter = level->thing_find(id);
+        if (iter && iter->is_activated) {
+          char tmp2[ MAXSHORTSTR ];
+          char iter_name[ MAXSHORTSTR ];
+          if (iter->stat_att_bonus()) {
+            snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
+            w->log(tmp);
+          }
+        }
+      }
     } else if (t->is_player() || t->is_monst()) {
       char tmp2[ MAXSHORTSTR ];
       snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", att_total, stat_to_bonus_slash_str(att_total).c_str());
@@ -1851,6 +1886,9 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
     w->log(tmp);
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
+    }
+    if (t->is_spell()) {
+      w->log("%%fg=pink$(while spell is active)");
     }
   }
 }
@@ -1960,6 +1998,21 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
           }
         }
       }
+
+      FOR_ALL_SPELLS_FOR(t, id)
+      {
+        auto iter = level->thing_find(id);
+        if (iter && iter->is_activated) {
+          char tmp2[ MAXSHORTSTR ];
+          char iter_name[ MAXSHORTSTR ];
+          if (iter->stat_str_bonus()) {
+            snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_str_total() - 10).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
+            w->log(tmp);
+          }
+        }
+      }
     }
   } else if (t->is_dead && (t->is_monst() || t->is_player())) {
     //
@@ -1971,6 +2024,9 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
     w->log(tmp);
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
+    }
+    if (t->is_spell()) {
+      w->log("%%fg=pink$(while spell is active)");
     }
   }
 }
@@ -2080,6 +2136,21 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
           }
         }
       }
+
+      FOR_ALL_SPELLS_FOR(t, id)
+      {
+        auto iter = level->thing_find(id);
+        if (iter && iter->is_activated) {
+          char tmp2[ MAXSHORTSTR ];
+          char iter_name[ MAXSHORTSTR ];
+          if (iter->stat_dex_bonus()) {
+            snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_dex_total() - 10).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
+            w->log(tmp);
+          }
+        }
+      }
     }
   } else if (t->stat_dex_bonus()) {
     auto stat = t->stat_dex_bonus();
@@ -2087,6 +2158,9 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
     w->log(tmp);
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
+    }
+    if (t->is_spell()) {
+      w->log("%%fg=pink$(while spell is active)");
     }
   }
 }
@@ -2196,6 +2270,21 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
           }
         }
       }
+
+      FOR_ALL_SPELLS_FOR(t, id)
+      {
+        auto iter = level->thing_find(id);
+        if (iter && iter->is_activated) {
+          char tmp2[ MAXSHORTSTR ];
+          char iter_name[ MAXSHORTSTR ];
+          if (iter->stat_luck_bonus()) {
+            snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_luck_total() - 10).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
+            w->log(tmp);
+          }
+        }
+      }
     }
   } else if (t->stat_luck_bonus()) {
     auto stat = t->stat_luck_bonus();
@@ -2203,6 +2292,9 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
     w->log(tmp);
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
+    }
+    if (t->is_spell()) {
+      w->log("%%fg=pink$(while spell is active)");
     }
   }
 }
@@ -2312,6 +2404,21 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
           }
         }
       }
+
+      FOR_ALL_SPELLS_FOR(t, id)
+      {
+        auto iter = level->thing_find(id);
+        if (iter && iter->is_activated) {
+          char tmp2[ MAXSHORTSTR ];
+          char iter_name[ MAXSHORTSTR ];
+          if (iter->stat_con_bonus()) {
+            snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
+            w->log(tmp);
+          }
+        }
+      }
     }
   } else if (t->is_dead && (t->is_monst() || t->is_player())) {
     //
@@ -2323,6 +2430,9 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
     w->log(tmp);
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
+    }
+    if (t->is_spell()) {
+      w->log("%%fg=pink$(while spell is active)");
     }
   }
 }
@@ -2374,6 +2484,9 @@ void Game::wid_thing_info_add_move_speed(WidPopup *w, Thingp t)
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
     }
+    if (t->is_spell()) {
+      w->log("%%fg=pink$(while spell is active)");
+    }
   }
 }
 
@@ -2399,6 +2512,9 @@ void Game::wid_thing_info_add_shove_strength(WidPopup *w, Thingp t)
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
     }
+    if (t->is_spell()) {
+      w->log("%%fg=pink$(while spell is active)");
+    }
   }
 }
 
@@ -2423,6 +2539,9 @@ void Game::wid_thing_info_add_jump_distance(WidPopup *w, Thingp t)
     w->log(tmp);
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
+    }
+    if (t->is_spell()) {
+      w->log("%%fg=pink$(while spell is active)");
     }
   }
 }
@@ -2545,13 +2664,8 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
 
   TRACE_AND_INDENT();
   if (t->enchant_count_get()) {
-    if (t->is_skill()) {
-      w->log("This skill is enchanted.", TEXT_FORMAT_LHS);
-      printed_something = true;
-    } else {
-      w->log("Item is enchanted.", TEXT_FORMAT_LHS);
-      printed_something = true;
-    }
+    w->log("Item is enchanted.", TEXT_FORMAT_LHS);
+    printed_something = true;
   }
 
   auto tp = t->tp();
@@ -2710,7 +2824,7 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
     }
   }
 
-  if (t->is_skill() || t->is_item() || t->is_monst() || t->is_player() || printed_something) {
+  if (t->is_skill() || t->is_spell() || t->is_item() || t->is_monst() || t->is_player() || printed_something) {
     w->log(UI_LOGGING_EMPTY_LINE);
   }
 }

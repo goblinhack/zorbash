@@ -308,6 +308,8 @@ void Thing::killed(Thingp defeater, const char *reason)
             msg("Your %s is drained and vanishes.", text_long_name().c_str());
           } else if (is_skillstone()) {
             msg("Your %s is drained and vanishes.", text_long_name().c_str());
+          } else if (is_spellbook()) {
+            msg("Your %s vanishes.", text_long_name().c_str());
           } else {
             msg("Your %s is drained.", text_long_name().c_str());
           }

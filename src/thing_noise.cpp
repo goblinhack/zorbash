@@ -77,6 +77,15 @@ int Thing::noise_total(void)
         // iter->con("NOISE %d", decibels);
       }
     }
+
+    FOR_ALL_SPELLS_FOR(this, id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter && iter->is_activated) {
+        decibels += iter->noise();
+        // iter->con("NOISE %d", decibels);
+      }
+    }
   }
   // con("NOISE %d", decibels);
 
@@ -157,6 +166,15 @@ int Thing::noise_on_jumping(void)
         // iter->con("NOISE %d", decibels);
       }
     }
+
+    FOR_ALL_SPELLS_FOR(this, id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter && iter->is_activated) {
+        decibels += iter->noise_additional_on_jump_end();
+        // iter->con("NOISE %d", decibels);
+      }
+    }
   }
 
   if (is_player() || is_monst()) {
@@ -227,6 +245,15 @@ int Thing::noise_on_teleporting(void)
     }
 
     FOR_ALL_SKILLS_FOR(this, id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter && iter->is_activated) {
+        decibels += iter->noise_additional_on_teleporting();
+        // iter->con("NOISE %d", decibels);
+      }
+    }
+
+    FOR_ALL_SPELLS_FOR(this, id)
     {
       auto iter = level->thing_find(id);
       if (iter && iter->is_activated) {

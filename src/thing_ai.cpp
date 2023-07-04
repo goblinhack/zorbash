@@ -2324,7 +2324,8 @@ bool Thing::ai_tick(bool recursing)
     case MONST_STATE_REPACK_INVENTORY :
     case MONST_STATE_OPEN_INVENTORY :
     case MONST_STATE_USING_ENCHANTSTONE :
-    case MONST_STATE_USING_SKILLSTONE : break;
+    case MONST_STATE_USING_SKILLSTONE :
+    case MONST_STATE_USING_SPELLBOOK : break;
   }
 
   //
@@ -2391,7 +2392,8 @@ bool Thing::ai_tick(bool recursing)
     case MONST_STATE_REPACK_INVENTORY :
     case MONST_STATE_OPEN_INVENTORY :
     case MONST_STATE_USING_ENCHANTSTONE :
-    case MONST_STATE_USING_SKILLSTONE : break;
+    case MONST_STATE_USING_SKILLSTONE :
+    case MONST_STATE_USING_SPELLBOOK : break;
   }
 
   if (is_debug_type()) {
@@ -2507,6 +2509,16 @@ bool Thing::ai_tick(bool recursing)
         TRACE_AND_INDENT();
 
         if (state_using_skillstone()) {
+          return true;
+        }
+        break;
+      }
+    case MONST_STATE_USING_SPELLBOOK :
+      {
+        dbg2("AI: state use spellbook");
+        TRACE_AND_INDENT();
+
+        if (state_using_spellbook()) {
           return true;
         }
         break;

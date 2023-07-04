@@ -168,7 +168,7 @@ def init_ui_rightbar():
         file="data/gfx/ui/pixelart/pixelart_ui_rightbar.tga",
         name="ui_rightbar",
         width=144,
-        height=432,
+        height=472,
         arr=tiles,
     )
 
@@ -1444,6 +1444,7 @@ def init_tiles_16x16_main():
         "thunderstone",
         "enchantstone",
         "skillstone",
+        "spellbook",
         "map_treasure",
         "map_beast",
         "horseshoe",
@@ -1451,7 +1452,6 @@ def init_tiles_16x16_main():
         "projectile_rock",
         "rock",
         "rock2",
-        "",
         "",
         "",
         "",

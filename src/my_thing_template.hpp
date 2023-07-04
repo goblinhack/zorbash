@@ -281,6 +281,7 @@ private:
   int _is_able_to_jump_onto {};
   int _is_able_to_jump_without_tiring {};
   int _is_able_to_learn_skills {};
+  int _is_able_to_learn_spells {};
   int _is_able_to_live_out_of_water {};
   int _is_able_to_lunge {};
   int _is_able_to_melt {};
@@ -602,6 +603,8 @@ private:
   int _is_smoke {};
   int _is_snake {};
   int _is_soft {};
+  int _is_spell {};
+  int _is_spellbook {};
   int _is_spider {};
   int _is_spiderweb {};
   int _is_splatter {};
@@ -1040,6 +1043,8 @@ private:
   std::string _skill_replaces;
   std::string _spawn_group_size_dice_str;
   std::string _spawn_on_shoved;
+  std::string _spell_base_name;
+  std::string _spell_replaces;
   std::string _str1;
   std::string _str2;
   std::string _str4;
@@ -1399,6 +1404,8 @@ public:
   const std::string &skill_replaces(void) const;
   const std::string &spawn_group_size_dice_str(void) const;
   const std::string &spawn_on_shoved(void) const;
+  const std::string &spell_base_name(void) const;
+  const std::string &spell_replaces(void) const;
   const std::string &str1(void) const;
   const std::string &str2(void) const;
   const std::string &str4(void) const;
@@ -1609,6 +1616,7 @@ public:
   int is_able_to_jump(void) const;
   int is_able_to_jump_without_tiring(void) const;
   int is_able_to_learn_skills(void) const;
+  int is_able_to_learn_spells(void) const;
   int is_able_to_live_out_of_water(void) const;
   int is_able_to_lunge(void) const;
   int is_able_to_melt(void) const;
@@ -1929,6 +1937,8 @@ public:
   int is_smoke(void) const;
   int is_snake(void) const;
   int is_soft(void) const;
+  int is_spellbook(void) const;
+  int is_spell(void) const;
   int is_spider(void) const;
   int is_spiderweb(void) const;
   int is_splatter(void) const;
@@ -2360,6 +2370,7 @@ public:
   void is_able_to_jump_set(int v);
   void is_able_to_jump_without_tiring_set(int v);
   void is_able_to_learn_skills_set(int v);
+  void is_able_to_learn_spells_set(int v);
   void is_able_to_live_out_of_water_set(int v);
   void is_able_to_lunge_set(int v);
   void is_able_to_melt_set(int v);
@@ -2681,6 +2692,8 @@ public:
   void is_smoke_set(int v);
   void is_snake_set(int v);
   void is_soft_set(int v);
+  void is_spellbook_set(int v);
+  void is_spell_set(int v);
   void is_spider_set(int v);
   void is_spiderweb_set(int v);
   void is_splatter_set(int v);
@@ -3032,6 +3045,8 @@ public:
   void skill_replaces_set(const std::string &v);
   void spawn_group_radius_set(int v);
   void spawn_on_shoved_set(const std::string &v);
+  void spell_base_name_set(const std::string &v);
+  void spell_replaces_set(const std::string &v);
   void stamina_drain_on_attacking_set(int v);
   void stamina_drain_on_using_set(int v);
   void stamina_set(int v);
@@ -3209,6 +3224,7 @@ class Tp *tp_get_next_bodypart(int which, const std::string &curr);
 class Tp *tp_get_prev_bodypart(int which, const std::string &curr);
 
 const Tpidmap &tp_get_skills(void);
+const Tpidmap &tp_get_spells(void);
 
 Tilep tp_first_tile(class Tp *);
 

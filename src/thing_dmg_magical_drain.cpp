@@ -153,6 +153,14 @@ int Thing::total_dmg_for_on_receiving_dmg_magic(Thingp hitter, Thingp real_hitte
     }
   }
 
+  FOR_ALL_SPELLS(item)
+  {
+    auto iter = level->thing_find(item.id);
+    if (iter) {
+      damage = iter->on_owner_receive_dmg_magic(this, hitter, real_hitter, damage);
+    }
+  }
+
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
@@ -276,6 +284,14 @@ int Thing::total_dmg_for_on_attacking_dmg_magic(Thingp victim, int damage)
   }
 
   FOR_ALL_SKILLS(item)
+  {
+    auto iter = level->thing_find(item.id);
+    if (iter) {
+      damage = iter->on_owner_attack_dmg_magic(this, victim, damage);
+    }
+  }
+
+  FOR_ALL_SPELLS(item)
   {
     auto iter = level->thing_find(item.id);
     if (iter) {

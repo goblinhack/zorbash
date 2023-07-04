@@ -61,6 +61,7 @@ bool Game::player_tick_(bool left, bool right, bool up, bool down, bool attack, 
       return false;
     case Game::STATE_ENCHANTING_ITEMS : LOG("Ignore player action when enchanting items"); return false;
     case Game::STATE_CHOOSING_SKILLS : LOG("Ignore player action when choosing skills"); return false;
+    case Game::STATE_CHOOSING_SPELLS : LOG("Ignore player action when choosing spells"); return false;
     case Game::STATE_CHOOSING_LEVEL : LOG("Ignore player action when choosing level"); return false;
     case Game::STATE_CHOOSING_TARGET : // Looking to somewhere to throw at
       LOG("Ignore player action when choosing target");

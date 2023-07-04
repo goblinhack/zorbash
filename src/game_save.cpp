@@ -219,10 +219,12 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingItemsp & > const my)
   out << bits(my.t->bag);
   out << bits(my.t->carrying);
   out << bits(my.t->skills);
+  out << bits(my.t->spells);
   out << bits(my.t->buffs);
   out << bits(my.t->debuffs);
   out << bits(my.t->inventory_shortcuts);
   out << bits(my.t->skillbox_id);
+  out << bits(my.t->spellbox_id);
   out << bits(my.t->buffbox_id);
   out << bits(my.t->debuffbox_id);
   /////////////////////////////////////////////////////////////////////////
@@ -470,6 +472,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_shovable                      ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_skillstone                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_smoke                         ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_spellbook                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_spiderweb                     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_staff                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_steam                         ? 1LLU : 0LLU) << shift; shift++;
@@ -624,6 +627,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_shallow_water);
   out << bits(my.t->_is_shovable);
   out << bits(my.t->_is_skillstone);
+  out << bits(my.t->_is_spellbook);
   out << bits(my.t->_is_smoke);
   out << bits(my.t->_is_steam);
   out << bits(my.t->_is_spiderweb);
@@ -865,6 +869,16 @@ std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my)
   out << bits(my.t.key_skill7);
   out << bits(my.t.key_skill8);
   out << bits(my.t.key_skill9);
+  out << bits(my.t.key_spell0);
+  out << bits(my.t.key_spell1);
+  out << bits(my.t.key_spell2);
+  out << bits(my.t.key_spell3);
+  out << bits(my.t.key_spell4);
+  out << bits(my.t.key_spell5);
+  out << bits(my.t.key_spell6);
+  out << bits(my.t.key_spell7);
+  out << bits(my.t.key_spell8);
+  out << bits(my.t.key_spell9);
   out << bits(my.t.key_ascend);
   out << bits(my.t.key_attack);
   out << bits(my.t.key_console);
@@ -979,6 +993,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const class Game & > const my)
   out << bits(my.t.inventory_highlight_slot);
   out << bits(my.t.previous_slot);
   out << bits(my.t.skillbox_highlight_slot);
+  out << bits(my.t.spellbox_highlight_slot);
 
   out << bits(wid_topcon_serialize());
   out << bits(wid_console_serialize());

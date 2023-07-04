@@ -117,6 +117,16 @@ public:
   SDL_Keysym key_skill7          = {};
   SDL_Keysym key_skill8          = {};
   SDL_Keysym key_skill9          = {};
+  SDL_Keysym key_spell0          = {};
+  SDL_Keysym key_spell1          = {};
+  SDL_Keysym key_spell2          = {};
+  SDL_Keysym key_spell3          = {};
+  SDL_Keysym key_spell4          = {};
+  SDL_Keysym key_spell5          = {};
+  SDL_Keysym key_spell6          = {};
+  SDL_Keysym key_spell7          = {};
+  SDL_Keysym key_spell8          = {};
+  SDL_Keysym key_spell9          = {};
   SDL_Keysym key_throw           = {};
   SDL_Keysym key_unused1         = {};
   SDL_Keysym key_unused10        = {};
@@ -180,6 +190,26 @@ public:
   Skillp skill_up    = {};
   Skillp skill_left  = {};
   Skillp skill_right = {};
+};
+
+class Spell
+{
+public:
+  //
+  // Current spell
+  //
+  std::string spell_alias;
+  //
+  // Populated when the menu is made.
+  //
+  Tpp tpp = {};
+  //
+  // Next spells in the tree
+  //
+  Spellp spell_down  = {};
+  Spellp spell_up    = {};
+  Spellp spell_left  = {};
+  Spellp spell_right = {};
 };
 
 class Game
@@ -306,6 +336,7 @@ public:
   uint8_t inventory_highlight_slot {};
   uint8_t previous_slot {};
   uint8_t skillbox_highlight_slot {};
+  uint8_t spellbox_highlight_slot {};
 
   /////////////////////////////////////////////////////////////////////////
   // not worth saving
@@ -366,6 +397,7 @@ public:
     STATE_COLLECTING_ITEMS,      // Collecting en masse from the level
     STATE_ENCHANTING_ITEMS,      // Upgrading items
     STATE_CHOOSING_SKILLS,       // Choosing skills
+    STATE_CHOOSING_SPELLS,       // Choosing spells
     STATE_CHOOSING_TARGET,       // Looking to somewhere to throw at
     STATE_CHOOSING_LEVEL,        // Choosing the next level
     STATE_KEYBOARD_MENU,         // Keyboard optionds
@@ -417,6 +449,7 @@ public:
   bool request_to_remake_inventory {};
   bool request_to_remake_rightbar {};
   bool request_to_remake_skillbox {};
+  bool request_to_remake_spellbox {};
   bool request_to_save_snapshot {}; // Something has requested a game snapshot
   bool request_to_toggle_gfx {};
   bool request_to_update_inventory_with_thing_over {};
@@ -492,6 +525,15 @@ public:
   // The key is the type of skill tree, e.g. martial, magical, healing, diabolic
   //
   std::map< std::string, std::array< std::array< Skillp, SKILL_TREE_DOWN >, SKILL_TREE_ACROSS > > skill_tree {};
+
+  //
+  // Spell tree
+  //
+  std::map< std::string, std::string > spell_aliases;
+  //
+  // The key is the type of spell tree, e.g. martial, magical, healing, diabolic
+  //
+  std::map< std::string, std::array< std::array< Spellp, SPELL_TREE_DOWN >, SPELL_TREE_ACROSS > > spell_tree {};
 
   //
   // Temporary. Dampens mouse clicks
@@ -584,6 +626,7 @@ public:
   void set_request_to_remake_inventory(void);
   void set_request_to_remake_rightbar(void);
   void set_request_to_remake_skillbox(void);
+  void set_request_to_remake_spellbox(void);
   void set_request_to_save_snapshot(void);
   void set_request_to_update_inventory_with_thing_over(void);
   void set_request_to_update_inventory_with_thing_selected(void);
@@ -602,17 +645,20 @@ public:
   void unset_request_to_remake_inventory(void);
   void unset_request_to_remake_rightbar(void);
   void unset_request_to_remake_skillbox(void);
+  void unset_request_to_remake_spellbox(void);
   void unset_request_to_save_snapshot(void);
   void unset_request_to_update_inventory_with_thing_over(void);
   void unset_request_to_update_inventory_with_thing_selected(void);
   void unset_request_to_update_same_level(void);
   void wid_choose_avatar_select(void);
   void wid_choose_from_skill_tree(std::string tree_name);
+  void wid_choose_from_spell_tree(std::string tree_name);
   void wid_choose_initial_dungeons(void);
   void wid_choose_next_dungeons(Levelp, bool is_ascending, bool is_descending);
   void wid_choose_player_name_select(void);
   void wid_choose_seed_select(void);
   void wid_choose_skill(void);
+  void wid_choose_spell(void);
   void wid_collect_create(const std::list< ThingId > items);
   void wid_config_gfx_select(void);
   void wid_config_keyboard_select(void);

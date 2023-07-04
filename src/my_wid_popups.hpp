@@ -9,6 +9,7 @@
 extern void wid_collect_destroy(void);
 extern void wid_enchant_destroy(void);
 extern void wid_choose_skill_destroy(void);
+extern void wid_choose_spell_destroy(void);
 extern void wid_load_destroy(void);
 extern void wid_save_destroy(void);
 extern void wid_quit_destroy(void);
@@ -17,6 +18,7 @@ extern bool wid_popup_exists(void);
 
 extern WidPopup *wid_collect;
 extern WidPopup *wid_skills;
+extern WidPopup *wid_spells;
 extern WidPopup *wid_enchant;
 extern WidPopup *wid_load;
 extern WidPopup *wid_save;

@@ -52,6 +52,7 @@ static Tpidmap tp_rock;
 static Tpidmap tp_secret_door;
 static Tpidmap tp_sewer_wall;
 static Tpidmap tp_skills;
+static Tpidmap tp_spells;
 static Tpidmap tp_small_ripples;
 static Tpidmap tp_spiderweb;
 static Tpidmap tp_staff;
@@ -194,6 +195,9 @@ void tp_random_init(void)
     }
     if (tp->is_skill()) {
       tp_skills.push_back(tp);
+    }
+    if (tp->is_spell()) {
+      tp_spells.push_back(tp);
     }
     if (tp->is_treasure_type()) {
       tp_treasure.push_back(tp);
@@ -485,6 +489,9 @@ void tp_random_init(void)
   }
   if (tp_skills.empty()) {
     DIE("No things for type:tp_skills");
+  }
+  if (tp_spells.empty()) {
+    CON("No things for type:tp_spells");
   }
   if (tp_spiderweb.empty()) {
     DIE("No things for type:tp_spiderweb");
@@ -1224,6 +1231,12 @@ const Tpidmap &tp_get_skills(void)
 {
   TRACE_NO_INDENT();
   return tp_skills;
+}
+
+const Tpidmap &tp_get_spells(void)
+{
+  TRACE_NO_INDENT();
+  return tp_spells;
 }
 
 Tpp tp_random_bodypart(int bodypart)

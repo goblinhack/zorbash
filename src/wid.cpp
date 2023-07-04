@@ -6572,12 +6572,13 @@ static void wid_handle_requests(void)
       //
       // If we need to remake the rightbar, do so
       //
-      if (game->request_to_remake_rightbar || game->request_to_remake_skillbox) {
+      if (game->request_to_remake_rightbar || game->request_to_remake_skillbox || game->request_to_remake_spellbox) {
         DBG("Handle request to remake rightbar");
         wid_leftbar_init();
         if (wid_rightbar_init()) {
           game->unset_request_to_remake_rightbar();
           game->unset_request_to_remake_skillbox();
+          game->unset_request_to_remake_spellbox();
         }
         wid_actionbar_init();
         game->unset_request_to_remake_actionbar();
@@ -6589,6 +6590,7 @@ static void wid_handle_requests(void)
     case Game::STATE_COLLECTING_ITEMS :
     case Game::STATE_ENCHANTING_ITEMS :
     case Game::STATE_CHOOSING_SKILLS :
+    case Game::STATE_CHOOSING_SPELLS :
     case Game::STATE_CHOOSING_TARGET :
     case Game::STATE_CHOOSING_LEVEL :
     case Game::STATE_LOAD_MENU :
@@ -6717,6 +6719,7 @@ static void wid_handle_requests(void)
     case Game::STATE_COLLECTING_ITEMS :
     case Game::STATE_ENCHANTING_ITEMS :
     case Game::STATE_CHOOSING_SKILLS :
+    case Game::STATE_CHOOSING_SPELLS :
     case Game::STATE_CHOOSING_TARGET :
     case Game::STATE_CHOOSING_LEVEL :
     case Game::STATE_LOAD_MENU :

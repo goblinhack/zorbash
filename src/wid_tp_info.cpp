@@ -89,6 +89,7 @@ WidPopup *Game::wid_tp_info_create_popup(Tpp t, point tl, point br)
     case Game::STATE_COLLECTING_ITEMS : return nullptr;
     case Game::STATE_ENCHANTING_ITEMS : return nullptr;
     case Game::STATE_CHOOSING_SKILLS : break;
+    case Game::STATE_CHOOSING_SPELLS : break;
     case Game::STATE_CHOOSING_TARGET : return nullptr;
     case Game::STATE_CHOOSING_LEVEL : return nullptr;
     case Game::STATE_KEYBOARD_MENU : return nullptr;
@@ -266,6 +267,7 @@ WidPopup *Game::wid_tp_info_create_popup_compact(const std::vector< Tpp > &ts)
     case Game::STATE_COLLECTING_ITEMS : return nullptr;
     case Game::STATE_ENCHANTING_ITEMS : return nullptr;
     case Game::STATE_CHOOSING_SKILLS : return nullptr;
+    case Game::STATE_CHOOSING_SPELLS : return nullptr;
     case Game::STATE_CHOOSING_TARGET : return nullptr;
     case Game::STATE_CHOOSING_LEVEL : return nullptr;
     case Game::STATE_KEYBOARD_MENU : return nullptr;
@@ -1307,6 +1309,9 @@ void Game::wid_tp_info_add_stat_def(WidPopup *w, Tpp t)
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
     }
+    if (t->is_spell()) {
+      w->log("%%fg=pink$(while spell is active)");
+    }
   }
 }
 
@@ -1328,6 +1333,9 @@ void Game::wid_tp_info_add_stat_att(WidPopup *w, Tpp t)
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
     }
+    if (t->is_spell()) {
+      w->log("%%fg=pink$(while spell is active)");
+    }
   }
 }
 
@@ -1346,6 +1354,9 @@ void Game::wid_tp_info_add_stat_str(WidPopup *w, Tpp t)
     auto stat = t->stat_str_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength bonus           %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
     }
@@ -1370,6 +1381,9 @@ void Game::wid_tp_info_add_stat_dex(WidPopup *w, Tpp t)
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
     }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
   }
 }
 
@@ -1388,6 +1402,9 @@ void Game::wid_tp_info_add_stat_luck(WidPopup *w, Tpp t)
     auto stat = t->stat_luck_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Luck bonus               %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
     }
@@ -1412,6 +1429,9 @@ void Game::wid_tp_info_add_stat_con(WidPopup *w, Tpp t)
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
     }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
   }
 }
 
@@ -1428,6 +1448,9 @@ void Game::wid_tp_info_add_move_speed(WidPopup *w, Tpp t)
     auto speed = t->move_speed_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Move speed bonus         %4d", speed);
     w->log(tmp);
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
     }
@@ -1452,6 +1475,9 @@ void Game::wid_tp_info_add_shove_strength(WidPopup *w, Tpp t)
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
     }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
   }
 }
 
@@ -1470,6 +1496,9 @@ void Game::wid_tp_info_add_jump_distance(WidPopup *w, Tpp t)
     auto dist = t->jump_distance_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Jump distance bonus      %4d", dist);
     w->log(tmp);
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
     }
@@ -1617,7 +1646,8 @@ void Game::wid_tp_info_add_general_info(WidPopup *w, Tpp t)
     }
   }
 
-  if (t->is_skill() || t->is_item() || t->is_monst() || t->is_player() || t->is_skill() || printed_something) {
+  if (t->is_skill() || t->is_spell() || t->is_item() || t->is_monst() || t->is_player() || t->is_skill()
+      || printed_something) {
     w->log(UI_LOGGING_EMPTY_LINE);
   }
 }

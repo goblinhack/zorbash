@@ -3112,6 +3112,12 @@ int Thing::is_able_to_learn_skills(void)
   return (tp()->is_able_to_learn_skills());
 }
 
+int Thing::is_able_to_learn_spells(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_able_to_learn_spells());
+}
+
 int Thing::is_able_to_enchant_items(void)
 {
   TRACE_NO_INDENT();
@@ -3230,6 +3236,18 @@ int Thing::is_skill(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_skill());
+}
+
+int Thing::is_spellbook(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_spellbook());
+}
+
+int Thing::is_spell(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_spell());
 }
 
 int Thing::is_smoke(void)
@@ -4632,6 +4650,18 @@ const std::string &Thing::skill_replaces(void)
 {
   TRACE_NO_INDENT();
   return (tp()->skill_replaces());
+}
+
+const std::string &Thing::spell_base_name(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->spell_base_name());
+}
+
+const std::string &Thing::spell_replaces(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->spell_replaces());
 }
 
 const std::string &Thing::text_debuff(void)

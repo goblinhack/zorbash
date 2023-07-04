@@ -1273,17 +1273,35 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
 
   TRACE_NO_INDENT();
   real_hitter->attack_num_set(attack_options->attack_num);
-  if (real_hitter->maybe_itemsp()) {
+
+  //
+  // Allow the damage to be modified for skills
+  //
+  if (real_hitter->is_monst() || real_hitter->is_player()) {
     TRACE_NO_INDENT();
     FOR_ALL_SKILLS_FOR(real_hitter, oid)
     {
       auto skill = level->thing_find(oid);
       if (skill && skill->is_activated) {
+        real_hitter->dmg_current_set(damage);
+        real_hitter->use(skill);
+        damage = real_hitter->dmg_current();
+      }
+    }
+
+    //
+    // Allow the damage to be modified for spells
+    //
+    TRACE_NO_INDENT();
+    FOR_ALL_SPELLS_FOR(real_hitter, oid)
+    {
+      auto spell = level->thing_find(oid);
+      if (spell && spell->is_activated) {
         //
         // Allow the damage to be modified
         //
         real_hitter->dmg_current_set(damage);
-        real_hitter->use(skill);
+        real_hitter->use(spell);
         damage = real_hitter->dmg_current();
       }
     }

@@ -99,6 +99,10 @@ void Thing::level_push(void)
     i_set_is_skillstone = true;
     level->is_skillstone_set(x, y);
   }
+  if (is_spellbook()) {
+    i_set_is_spellbook = true;
+    level->is_spellbook_set(x, y);
+  }
   if (is_foliage()) {
     i_set_is_foliage = true;
     level->is_foliage_set(x, y);

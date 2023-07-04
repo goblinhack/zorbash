@@ -44,6 +44,14 @@ void Game::set_request_to_remake_skillbox(void)
   request_to_remake_skillbox = true;
 }
 
+void Game::set_request_to_remake_spellbox(void)
+{
+  if (request_to_remake_spellbox)
+    return;
+  DBG("Set request_to_remake_spellbox");
+  request_to_remake_spellbox = true;
+}
+
 void Game::set_request_to_remake_debuffbox(void)
 {
   if (request_to_remake_debuffbox)
@@ -138,6 +146,14 @@ void Game::unset_request_to_remake_skillbox(void)
     return;
   DBG("Unset request_to_remake_skillbox");
   request_to_remake_skillbox = false;
+}
+
+void Game::unset_request_to_remake_spellbox(void)
+{
+  if (! request_to_remake_spellbox)
+    return;
+  DBG("Unset request_to_remake_spellbox");
+  request_to_remake_spellbox = false;
 }
 
 void Game::unset_request_to_remake_debuffbox(void)

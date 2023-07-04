@@ -66,6 +66,7 @@ void Level::clear(void)
   _is_shallow_water                  = {};
   _is_shovable                       = {};
   _is_skillstone                     = {};
+  _is_spellbook                      = {};
   _is_smoke                          = {};
   _is_spiderweb                      = {};
   _is_steam                          = {};

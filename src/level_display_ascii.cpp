@@ -112,7 +112,8 @@ void Level::display_ascii_treasure_map(point tl, point br)
 
           FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
           {
-            if (t->is_key() || t->is_food() || t->is_treasure_type() || t->is_skillstone() || t->is_enchantstone()) {
+            if (t->is_key() || t->is_food() || t->is_treasure_type() || t->is_skillstone() || t->is_spellbook()
+                || t->is_enchantstone()) {
               if (t->gfx_ascii_animated) {
                 t->animate();
               }

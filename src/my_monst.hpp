@@ -44,6 +44,9 @@ constexpr uint32_t THING_MAGIC_FINAL = 33333333;
 #define FOR_ALL_SKILLS(_id_)          for (auto _id_ : itemsp()->skills)
 #define FOR_ALL_SKILLS_FOR(_t_, _id_) for (auto _id_ : (_t_)->itemsp()->skills)
 
+#define FOR_ALL_SPELLS(_id_)          for (auto _id_ : itemsp()->spells)
+#define FOR_ALL_SPELLS_FOR(_t_, _id_) for (auto _id_ : (_t_)->itemsp()->spells)
+
 #define FOR_ALL_CARRYING(_id_)        for (auto _id_ : itemsp()->carrying)
 #define FOR_ALL_CARRIED_BY(_t_, _id_) for (auto _id_ : (_t_)->itemsp()->carrying)
 
@@ -265,11 +268,13 @@ public:
 
   std::list< ThingId > carrying;
   std::list< ThingId > skills;
+  std::list< ThingId > spells;
   std::list< ThingId > buffs;
   std::list< ThingId > debuffs;
 
   std::vector< ThingId > inventory_shortcuts; // Which items are in which slot
   std::vector< ThingId > skillbox_id;         // Which skills are in which slot
+  std::vector< ThingId > spellbox_id;         // Which spells are in which slot
   std::vector< ThingId > buffbox_id;          // Which buffs are in which slot
   std::vector< ThingId > debuffbox_id;        // Which debuffs are in which slot
 

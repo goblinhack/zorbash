@@ -428,6 +428,9 @@ void Thing::show_botcon_description(void)
     case Game::STATE_CHOOSING_SKILLS : // Looking to somewhere to throw at
       skip_showing_keys_to_use = true;
       break;
+    case Game::STATE_CHOOSING_SPELLS : // Looking to somewhere to throw at
+      skip_showing_keys_to_use = true;
+      break;
     case Game::STATE_LOAD_MENU : skip_showing_keys_to_use = true; break;
     case Game::STATE_SAVE_MENU : skip_showing_keys_to_use = true; break;
     case Game::STATE_QUIT_MENU : skip_showing_keys_to_use = true; break;
@@ -541,6 +544,9 @@ void Tp::show_botcon_description(void)
       skip_showing_keys_to_use = true;
       break;
     case Game::STATE_CHOOSING_SKILLS : // Looking to somewhere to throw at
+      skip_showing_keys_to_use = true;
+      break;
+    case Game::STATE_CHOOSING_SPELLS : // Looking to somewhere to throw at
       skip_showing_keys_to_use = true;
       break;
     case Game::STATE_LOAD_MENU : skip_showing_keys_to_use = true; break;

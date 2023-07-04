@@ -119,6 +119,18 @@ int Thing::stat_att_total()
         }
       }
     }
+
+    FOR_ALL_SPELLS(id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter && iter->is_activated) {
+        stat += iter->stat_att_bonus();
+        if (stat != prev) {
+          prev = stat;
+          dbg("Att: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_att_total(), stat);
+        }
+      }
+    }
   }
 
   if (stat_att_bonus()) {

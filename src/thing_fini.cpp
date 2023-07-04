@@ -70,6 +70,7 @@ void Thing::destroy(void)
   // able to see what they had when dead.
   //
   skill_remove_all();
+  spell_remove_all();
   buff_remove_all();
   debuff_remove_all();
 

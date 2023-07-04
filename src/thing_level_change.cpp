@@ -135,6 +135,14 @@ void Thing::level_change(Levelp l)
         iter->level_change(l);
       }
     }
+
+    FOR_ALL_SPELLS(id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter && iter->is_activated) {
+        iter->level_change(l);
+      }
+    }
   }
 
   for (auto l : light_get()) {

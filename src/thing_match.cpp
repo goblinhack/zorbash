@@ -85,6 +85,7 @@ bool Tp::matches(const std::string &what)
   if (is_able_to_jump() && (what == "is_able_to_jump")) { return true; }
   if (is_able_to_jump_without_tiring() && (what == "is_able_to_jump_without_tiring")) { return true; }
   if (is_able_to_learn_skills() && (what == "is_able_to_learn_skills")) { return true; }
+  if (is_able_to_learn_spells() && (what == "is_able_to_learn_spells")) { return true; }
   if (is_able_to_live_out_of_water() && (what == "is_able_to_live_out_of_water")) { return true; }
   if (is_able_to_lunge() && (what == "is_able_to_lunge")) { return true; }
   if (is_able_to_melt() && (what == "is_able_to_melt")) { return true; }
@@ -395,6 +396,8 @@ bool Tp::matches(const std::string &what)
   if (is_smoke() && (what == "is_smoke")) { return true; }
   if (is_snake() && (what == "is_snake")) { return true; }
   if (is_soft() && (what == "is_soft")) { return true; }
+  if (is_spellbook() && (what == "is_spellbook")) { return true; }
+  if (is_spell() && (what == "is_spell")) { return true; }
   if (is_spiderweb() && (what == "is_spiderweb")) { return true; }
   if (is_spider() && (what == "is_spider")) { return true; }
   if (is_splatter() && (what == "is_splatter")) { return true; }
@@ -681,6 +684,7 @@ bool Thing::matches(const std::string &what)
   if (is_able_to_jump() && (what == "is_able_to_jump")) { return true; }
   if (is_able_to_jump_without_tiring() && (what == "is_able_to_jump_without_tiring")) { return true; }
   if (is_able_to_learn_skills() && (what == "is_able_to_learn_skills")) { return true; }
+  if (is_able_to_learn_spells() && (what == "is_able_to_learn_spells")) { return true; }
   if (is_able_to_live_out_of_water() && (what == "is_able_to_live_out_of_water")) { return true; }
   if (is_able_to_lunge() && (what == "is_able_to_lunge")) { return true; }
   if (is_able_to_melt() && (what == "is_able_to_melt")) { return true; }
@@ -993,6 +997,8 @@ bool Thing::matches(const std::string &what)
   if (is_smoke() && (what == "is_smoke")) { return true; }
   if (is_snake() && (what == "is_snake")) { return true; }
   if (is_soft() && (what == "is_soft")) { return true; }
+  if (is_spellbook() && (what == "is_spellbook")) { return true; }
+  if (is_spell() && (what == "is_spell")) { return true; }
   if (is_spiderweb() && (what == "is_spiderweb")) { return true; }
   if (is_spider() && (what == "is_spider")) { return true; }
   if (is_splatter() && (what == "is_splatter")) { return true; }
@@ -1276,6 +1282,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_able_to_jump") { return &Thing::is_able_to_jump; }
   if (what == "is_able_to_jump_without_tiring") { return &Thing::is_able_to_jump_without_tiring; }
   if (what == "is_able_to_learn_skills") { return &Thing::is_able_to_learn_skills; }
+  if (what == "is_able_to_learn_spells") { return &Thing::is_able_to_learn_spells; }
   if (what == "is_able_to_live_out_of_water") { return &Thing::is_able_to_live_out_of_water; }
   if (what == "is_able_to_lunge") { return &Thing::is_able_to_lunge; }
   if (what == "is_able_to_melt") { return &Thing::is_able_to_melt; }
@@ -1580,6 +1587,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_smoke") { return &Thing::is_smoke; }
   if (what == "is_snake") { return &Thing::is_snake; }
   if (what == "is_soft") { return &Thing::is_soft; }
+  if (what == "is_spellbook") { return &Thing::is_spellbook; }
+  if (what == "is_spell") { return &Thing::is_spell; }
   if (what == "is_spider") { return &Thing::is_spider; }
   if (what == "is_spiderweb") { return &Thing::is_spiderweb; }
   if (what == "is_splatter") { return &Thing::is_splatter; }

@@ -19,7 +19,7 @@ bool Thing::on_tick_when_deactivated(void)
     return false;
   }
 
-  if (! is_skill()) {
+  if (! is_skill() && ! is_spell()) {
     return false;
   }
 

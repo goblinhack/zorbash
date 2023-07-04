@@ -77,9 +77,10 @@ uint8_t wid_right_bar_inventory_open(Widp w, int x, int y, uint32_t button)
 
   if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state == Game::STATE_CHOOSING_TARGET)
       || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_COLLECTING_ITEMS)
-      || (game->state == Game::STATE_CHOOSING_SKILLS) || (game->state == Game::STATE_SAVE_MENU)
-      || (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU)
-      || (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+      || (game->state == Game::STATE_CHOOSING_SKILLS) || (game->state == Game::STATE_CHOOSING_SPELLS)
+      || (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU)
+      || (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_KEYBOARD_MENU)
+      || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     return true;
   }
 

@@ -102,6 +102,19 @@ int Thing::shove_strength_total(void)
         }
       }
     }
+
+    FOR_ALL_SPELLS(id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter && iter->is_activated) {
+        stat += iter->shove_strength_total();
+        if (stat != prev) {
+          prev = stat;
+          dbg3("Shove strength: with (%s %s): %d", iter->to_short_string().c_str(),
+               bonus_to_string(iter->shove_bonus()).c_str(), stat);
+        }
+      }
+    }
   }
 
   return stat;

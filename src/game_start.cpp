@@ -10,6 +10,7 @@
 #include "my_wid_leftbar.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_skillbox.hpp"
+#include "my_wid_spellbox.hpp"
 #include "my_wid_thing_info.hpp"
 #include "my_wid_topcon.hpp"
 #include "my_wid_tp_info.hpp"
@@ -38,6 +39,9 @@ void Game::start(void)
 
   wid_skillbox_fini();
   wid_skillbox_init();
+
+  wid_spellbox_fini();
+  wid_spellbox_init();
 
   wid_actionbar_init();
   wid_asciimap_init();

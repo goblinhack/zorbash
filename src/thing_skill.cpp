@@ -184,31 +184,6 @@ void Thing::skill_activate(Thingp what)
   }
 }
 
-int Thing::skill_enchant_count(const int slot)
-{
-  TRACE_NO_INDENT();
-  if (! maybe_itemsp()) {
-    return 0;
-  }
-
-  auto thing_id = get(itemsp()->skillbox_id, slot);
-  if (! thing_id) {
-    return 0;
-  }
-
-  FOR_ALL_SKILLS(oid)
-  {
-    auto o = game->level->thing_find(oid);
-    if (o) {
-      if (o->id == thing_id) {
-        return o->enchant_count_get();
-      }
-    }
-  }
-
-  return 0;
-}
-
 bool Thing::has_skill(Tpp skill)
 {
   TRACE_NO_INDENT();
@@ -293,7 +268,7 @@ int Thing::skillstone_count(void)
   return v;
 }
 
-bool Thing::can_learn_something(void)
+bool Thing::can_learn_a_skill(void)
 {
   TRACE_NO_INDENT();
 

@@ -9,14 +9,10 @@
 bool Thing::try_to_enchant_items(void)
 {
   //
-  // Be a bit more careful if there is somethjing that might want to
+  // Be a bit more careful if there is something that might want to
   // attack us, even if it is not a threat. i.e. a harmless goblin
   // could push us off of a cliff while we're doing other stuff.
   //
-  if (! is_able_to_enchant_items() && ! is_able_to_learn_skills()) {
-    return false;
-  }
-
   AI_LOG("Unfriendly monst check");
   TRACE_NO_INDENT();
 
@@ -43,14 +39,27 @@ bool Thing::try_to_enchant_items(void)
   //
   // Can we learn some skills?
   //
-  AI_LOG("Enchant check");
   if (is_able_to_learn_skills()) {
-    if (skillstone_count() && can_learn_something()) {
+    if (skillstone_count() && can_learn_a_skill()) {
       AI_LOG("Try to use a skillstone");
       if (is_player()) {
         game->tick_begin("Robot can learn something");
       }
       change_state(MONST_STATE_USING_SKILLSTONE, "can learn something");
+      return true;
+    }
+  }
+
+  //
+  // Can we learn some spells?
+  //
+  if (is_able_to_learn_spells()) {
+    if (spellbook_count() && can_learn_a_spell()) {
+      AI_LOG("Try to use a spellbook");
+      if (is_player()) {
+        game->tick_begin("Robot can learn something");
+      }
+      change_state(MONST_STATE_USING_SPELLBOOK, "can learn something");
       return true;
     }
   }

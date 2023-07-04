@@ -100,6 +100,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_shovable {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_skillstone {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_smoke {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_spellbook {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_spiderweb {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_staff {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_steam {};
@@ -666,6 +667,9 @@ public:
   Thingp skillbox_describe(const int slot);
   Thingp skillbox_get(const int slot);
   Thingp skillbox_get(void);
+  Thingp spellbox_describe(const int slot);
+  Thingp spellbox_get(const int slot);
+  Thingp spellbox_get(void);
   Thingp thing_find(const ThingId id);
   Thingp thing_find_optional(const ThingId id);
   Thingp thing_new(Tpp, const point at, Thingp owner = nullptr);
@@ -772,6 +776,9 @@ public:
   bool skillbox_chosen(const int slot);
   bool skillbox_over(const int slot);
   bool skill_chosen(Thingp);
+  bool spellbox_chosen(const int slot);
+  bool spellbox_over(const int slot);
+  bool spell_chosen(Thingp);
   bool update_map_mini_should_show_monst(int x, int y);
   // end sort marker2 }
 
@@ -914,6 +921,8 @@ public:
   uint8_t is_skillstone(const point p);
   uint8_t is_smoke(const int x, const int y);
   uint8_t is_smoke(const point p);
+  uint8_t is_spellbook(const int x, const int y);
+  uint8_t is_spellbook(const point p);
   uint8_t is_spiderweb(const int x, const int y);
   uint8_t is_spiderweb(const point p);
   uint8_t is_staff(const int x, const int y);
@@ -1249,6 +1258,8 @@ public:
   void is_skillstone_unset(const int x, const int y);
   void is_smoke_set(const int x, const int y);
   void is_smoke_unset(const int x, const int y);
+  void is_spellbook_set(const int x, const int y);
+  void is_spellbook_unset(const int x, const int y);
   void is_spiderweb_set(const int x, const int y);
   void is_spiderweb_unset(const int x, const int y);
   void is_staff_set(const int x, const int y);

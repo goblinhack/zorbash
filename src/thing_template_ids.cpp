@@ -595,6 +595,7 @@ std::initializer_list< std::string > tps = {
     "skill_primal_rage5",
     "skill_primal_rage_effect",
     "skillstone",
+    "spellbook",
     "skill_super_health1",
     "skill_super_health2",
     "skill_super_health3",

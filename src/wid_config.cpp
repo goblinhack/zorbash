@@ -9,6 +9,7 @@
 #include "my_wid_leftbar.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_skillbox.hpp"
+#include "my_wid_spellbox.hpp"
 #include "my_wid_thing_info.hpp"
 #include "my_wid_tp_info.hpp"
 #include <SDL_mixer.h>
@@ -125,6 +126,7 @@ void Game::wid_config_top_menu(void)
   wid_leftbar_fini();
   wid_inventory_fini();
   wid_skillbox_fini();
+  wid_spellbox_fini();
   wid_thing_info_fini("confg top menu");
   wid_tp_info_fini("confg top menu");
 

@@ -283,6 +283,11 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
       return;
     }
 
+    if (what->is_spell()) {
+      dbg("Used spell %s", what->to_short_string().c_str());
+      return;
+    }
+
     auto existing_owner = what->top_owner();
     if (existing_owner != this) {
       if (is_dead) {
@@ -393,6 +398,10 @@ bool Thing::use(Thingp what, UseOptions *use_options)
     dbg("Trying to use skill: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
     skill_use(what);
+  } else if (what->is_spell()) {
+    dbg("Trying to use spell: %s", what->to_short_string().c_str());
+    TRACE_NO_INDENT();
+    spell_use(what);
   } else if (what->is_enchantstone()) {
     dbg("Trying to use enchantstone: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
@@ -404,6 +413,12 @@ bool Thing::use(Thingp what, UseOptions *use_options)
     TRACE_NO_INDENT();
     if (is_player()) {
       game->wid_choose_skill();
+    }
+  } else if (what->is_spellbook()) {
+    dbg("Trying to use spellbook: %s", what->to_short_string().c_str());
+    TRACE_NO_INDENT();
+    if (is_player()) {
+      game->wid_choose_spell();
     }
   } else if (what->is_weapon()) {
     dbg("Trying to use weapon: %s", what->to_short_string().c_str());

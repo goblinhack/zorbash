@@ -343,7 +343,8 @@ void tp_fixup(void)
       tp->hunger_is_hunger_level_starving_at_pct_set(10);
     }
 
-    if (tp->is_skill() || tp->is_buff() || tp->is_debuff() || tp->is_item() || tp->is_monst() || tp->is_player()) {
+    if (tp->is_skill() || tp->is_spell() || tp->is_buff() || tp->is_debuff() || tp->is_item() || tp->is_monst()
+        || tp->is_player()) {
       if (! tp->stat_att()) {
         tp->stat_att_set(10);
       }

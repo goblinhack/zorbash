@@ -43,12 +43,17 @@ void Thing::change_state(int new_state, const std::string &why)
     case MONST_STATE_USING_ENCHANTSTONE :
       sleep_count_set(0);
       is_sleeping = false;
-      to          = "MONST-USING-MAGIC_STONE";
+      to          = "MONST-USING-ENCHANTSTONE";
       break;
     case MONST_STATE_USING_SKILLSTONE :
       sleep_count_set(0);
       is_sleeping = false;
-      to          = "MONST-USING-MAGIC_STONE";
+      to          = "MONST-USING-SKILLSTONE";
+      break;
+    case MONST_STATE_USING_SPELLBOOK :
+      sleep_count_set(0);
+      is_sleeping = false;
+      to          = "MONST-USING-SPELLBOOK";
       break;
     case MONST_STATE_REPACK_INVENTORY :
       sleep_count_set(0);
@@ -75,15 +80,21 @@ void Thing::change_state(int new_state, const std::string &why)
     case MONST_STATE_REPACK_INVENTORY : from = "MONST-REPACK"; break;
     case MONST_STATE_OPEN_INVENTORY : from = "MONST-OPEN-INVENTORY"; break;
     case MONST_STATE_USING_ENCHANTSTONE :
-      from = "MONST-USING-MAGIC_STONE";
+      from = "MONST-USING-ENCHANTSTONE";
       if (is_player()) {
         wid_enchant_destroy();
       }
       break;
     case MONST_STATE_USING_SKILLSTONE :
-      from = "MONST-USING-MAGIC_STONE";
+      from = "MONST-USING-SKILLSTONE";
       if (is_player()) {
         wid_choose_skill_destroy();
+      }
+      break;
+    case MONST_STATE_USING_SPELLBOOK :
+      from = "MONST-USING-SPELLBOOK";
+      if (is_player()) {
+        wid_choose_spell_destroy();
       }
       break;
     case MONST_STATE_SLEEPING : from = "MONST-SLEEPING"; break;
@@ -112,6 +123,11 @@ void Thing::change_state(int new_state, const std::string &why)
     case MONST_STATE_USING_SKILLSTONE :
       if (is_player()) {
         game->wid_choose_skill();
+      }
+      break;
+    case MONST_STATE_USING_SPELLBOOK :
+      if (is_player()) {
+        game->wid_choose_spell();
       }
       break;
   }

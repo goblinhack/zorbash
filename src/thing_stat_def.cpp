@@ -110,6 +110,18 @@ int Thing::stat_def_total(void)
         }
       }
     }
+
+    FOR_ALL_SPELLS(id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter && iter->is_activated) {
+        stat += iter->stat_def_bonus();
+        if (stat != prev) {
+          prev = stat;
+          dbg("Def: with (%s %d): %d", iter->to_short_string().c_str(), iter->stat_def_total(), stat);
+        }
+      }
+    }
   }
 
   if (stat_def_bonus()) {

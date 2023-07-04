@@ -85,6 +85,10 @@ void Thing::level_pop(void)
       i_set_is_skillstone = false;
       level->is_skillstone_unset(x, y);
     }
+    if (i_set_is_spellbook) {
+      i_set_is_spellbook = false;
+      level->is_spellbook_unset(x, y);
+    }
     if (i_set_is_foliage) {
       i_set_is_foliage = false;
       level->is_foliage_unset(x, y);

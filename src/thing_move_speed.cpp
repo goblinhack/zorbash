@@ -100,6 +100,19 @@ int Thing::move_speed_total(void)
         }
       }
     }
+
+    FOR_ALL_SPELLS(id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter && iter->is_activated) {
+        stat += iter->move_speed_total();
+        if (stat != prev) {
+          prev = stat;
+          // dbg("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
+          //               bonus_to_string(iter->move_speed_bonus()).c_str(), stat);
+        }
+      }
+    }
   }
 
   return stat;
