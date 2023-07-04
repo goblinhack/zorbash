@@ -291,7 +291,7 @@ void Game::wid_choose_spell(void)
   // Default tree
   //
   if (current_spell_tree == "") {
-    current_spell_tree = "martial";
+    current_spell_tree = "combat";
   }
 
   wid_choose_from_spell_tree(current_spell_tree);

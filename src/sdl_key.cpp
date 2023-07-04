@@ -904,30 +904,50 @@ std::string to_string(const SDL_Keysym &k)
 {
   std::string out;
 
-  if (k.mod & KMOD_LSHIFT) {
-    out += "<L-shift> ";
+  if (k.mod == KMOD_SHIFT) {
+    out += "<Shift> ";
+  } else {
+    if (k.mod & KMOD_LSHIFT) {
+      out += "<L-shift> ";
+    }
+    if (k.mod & KMOD_RSHIFT) {
+      out += "<R-shift> ";
+    }
   }
-  if (k.mod == KMOD_RSHIFT) {
-    out += "<R-shift> ";
+
+  if (k.mod == KMOD_CTRL) {
+    out += "<Ctrl> ";
+  } else {
+    if (k.mod & KMOD_LCTRL) {
+      out += "<L-ctrl> ";
+    }
+    if (k.mod & KMOD_RCTRL) {
+      out += "<R-ctrl> ";
+    }
   }
-  if (k.mod == KMOD_LCTRL) {
-    out += "<L-ctrl> ";
+
+  if (k.mod == KMOD_ALT) {
+    out += "<Alt> ";
+  } else {
+    if (k.mod & KMOD_LALT) {
+      out += "<L-alt> ";
+    }
+    if (k.mod & KMOD_RALT) {
+      out += "<R-alt> ";
+    }
   }
-  if (k.mod == KMOD_RCTRL) {
-    out += "<R-ctrl> ";
+
+  if (k.mod == KMOD_GUI) {
+    out += "<Gui> ";
+  } else {
+    if (k.mod & KMOD_LGUI) {
+      out += "<L-gui> ";
+    }
+    if (k.mod & KMOD_RGUI) {
+      out += "<R-gui> ";
+    }
   }
-  if (k.mod == KMOD_LALT) {
-    out += "<L-alt> ";
-  }
-  if (k.mod == KMOD_RALT) {
-    out += "<R-alt> ";
-  }
-  if (k.mod == KMOD_LGUI) {
-    out += "<L-gui> ";
-  }
-  if (k.mod == KMOD_RGUI) {
-    out += "<R-gui> ";
-  }
+
   if (k.mod == KMOD_NUM) {
     out += "<Numpad> ";
   }

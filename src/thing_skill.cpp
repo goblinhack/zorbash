@@ -75,7 +75,7 @@ bool Thing::skill_add(Thingp new_skill)
 
   if (is_player()) {
     wid_skillbox_init();
-    sound_play("skillup");
+    sound_play("powerup");
   }
 
   if (new_skill->is_auto_activated()) {
@@ -157,8 +157,13 @@ void Thing::skill_remove_all(void)
 bool Thing::skill_use(Thingp what)
 {
   TRACE_NO_INDENT();
-  dbg("Try to use skill %s", what->to_short_string().c_str());
+  msg("You use %s.", what->text_the().c_str());
   used(what, this, false /* remove after use */);
+
+  if (what->is_target_select()) {
+    return item_choose_target(what);
+  }
+
   return true;
 }
 

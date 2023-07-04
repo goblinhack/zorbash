@@ -6568,6 +6568,11 @@ static void wid_handle_requests(void)
   // updating it if the player is waiting.
   //
   switch (game->state) {
+    case Game::STATE_CHOOSING_TARGET :
+      //
+      // Allow to remake the skillbox when choosing a target, so that we can highlight
+      // the skill or spell as active whilst choosing.
+      // /
     case Game::STATE_NORMAL :
       //
       // If we need to remake the rightbar, do so
@@ -6591,7 +6596,6 @@ static void wid_handle_requests(void)
     case Game::STATE_ENCHANTING_ITEMS :
     case Game::STATE_CHOOSING_SKILLS :
     case Game::STATE_CHOOSING_SPELLS :
-    case Game::STATE_CHOOSING_TARGET :
     case Game::STATE_CHOOSING_LEVEL :
     case Game::STATE_LOAD_MENU :
     case Game::STATE_KEYBOARD_MENU :

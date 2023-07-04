@@ -3415,7 +3415,7 @@ void Game::wid_config_keyboard_select(void)
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
     wid_set_text_lhs(w, true);
-    wid_set_text(w, "Activate spell 0");
+    wid_set_text(w, "Cast spell 0");
   }
   {
     TRACE_AND_INDENT();
@@ -3446,7 +3446,7 @@ void Game::wid_config_keyboard_select(void)
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
     wid_set_text_lhs(w, true);
-    wid_set_text(w, "Activate spell 1");
+    wid_set_text(w, "Cast spell 1");
   }
   {
     TRACE_AND_INDENT();
@@ -3477,7 +3477,7 @@ void Game::wid_config_keyboard_select(void)
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
     wid_set_text_lhs(w, true);
-    wid_set_text(w, "Activate spell 2");
+    wid_set_text(w, "Cast spell 2");
   }
   {
     TRACE_AND_INDENT();
@@ -3508,7 +3508,7 @@ void Game::wid_config_keyboard_select(void)
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
     wid_set_text_lhs(w, true);
-    wid_set_text(w, "Activate spell 3");
+    wid_set_text(w, "Cast spell 3");
   }
   {
     TRACE_AND_INDENT();
@@ -3539,7 +3539,7 @@ void Game::wid_config_keyboard_select(void)
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
     wid_set_text_lhs(w, true);
-    wid_set_text(w, "Activate spell 4");
+    wid_set_text(w, "Cast spell 4");
   }
   {
     TRACE_AND_INDENT();
@@ -3570,7 +3570,7 @@ void Game::wid_config_keyboard_select(void)
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
     wid_set_text_lhs(w, true);
-    wid_set_text(w, "Activate spell 5");
+    wid_set_text(w, "Cast spell 5");
   }
   {
     TRACE_AND_INDENT();
@@ -3601,7 +3601,7 @@ void Game::wid_config_keyboard_select(void)
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
     wid_set_text_lhs(w, true);
-    wid_set_text(w, "Activate spell 6");
+    wid_set_text(w, "Cast spell 6");
   }
   {
     TRACE_AND_INDENT();
@@ -3632,7 +3632,7 @@ void Game::wid_config_keyboard_select(void)
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
     wid_set_text_lhs(w, true);
-    wid_set_text(w, "Activate spell 7");
+    wid_set_text(w, "Cast spell 7");
   }
   {
     TRACE_AND_INDENT();
@@ -3663,7 +3663,7 @@ void Game::wid_config_keyboard_select(void)
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
     wid_set_text_lhs(w, true);
-    wid_set_text(w, "Activate spell 8");
+    wid_set_text(w, "Cast spell 8");
   }
   {
     TRACE_AND_INDENT();
@@ -3694,7 +3694,7 @@ void Game::wid_config_keyboard_select(void)
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
     wid_set_text_lhs(w, true);
-    wid_set_text(w, "Activate spell 9");
+    wid_set_text(w, "Cast spell 9");
   }
   {
     TRACE_AND_INDENT();

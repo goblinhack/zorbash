@@ -285,15 +285,7 @@ bool Level::skillbox_chosen(const int slot)
     return false;
   }
 
-  what->is_activated = ! what->is_activated;
-  IF_DEBUG2 { what->log("Chosen skillbox item"); }
-
-  if (what->is_activated) {
-    player->msg("You activate %s skill.", what->text_the().c_str());
-  } else {
-    player->msg("You deactivate %s skill.", what->text_the().c_str());
-  }
-  sound_play("coin");
+  player->level->skill_chosen(what);
 
   return true;
 }
@@ -322,6 +314,7 @@ bool Level::skill_chosen(Thingp what)
     player->msg("You deactivate %s skill.", what->text_the().c_str());
   }
   sound_play("coin");
+  player->skill_use(what);
 
   return true;
 }

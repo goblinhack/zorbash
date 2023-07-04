@@ -762,7 +762,7 @@ Tilep tile_find_mand(std::string name)
 {
   TRACE_AND_INDENT();
   if (name == "") {
-    ERR("No tile name give");
+    ERR("No tile name given");
     return nullptr;
   }
 
