@@ -19,7 +19,7 @@ def tp_init(name):
     my.noise_on_born(self, 21)
     my.tick_prio(self, my.MAP_TICK_PRIO_VERY_HIGH)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
+    my.z_prio(self, my.MAP_Z_PRIO_EFFECT)
     # end sort marker
 
     delay = 200  # too fast and you don't see it

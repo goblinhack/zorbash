@@ -1281,27 +1281,10 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     TRACE_NO_INDENT();
     FOR_ALL_SKILLS_FOR(real_hitter, oid)
     {
-      auto skill = level->thing_find(oid);
-      if (skill && skill->is_activated) {
+      auto iter = level->thing_find(oid);
+      if (iter && iter->is_activated) {
         real_hitter->dmg_current_set(damage);
-        real_hitter->use(skill);
-        damage = real_hitter->dmg_current();
-      }
-    }
-
-    //
-    // Allow the damage to be modified for spells
-    //
-    TRACE_NO_INDENT();
-    FOR_ALL_SPELLS_FOR(real_hitter, oid)
-    {
-      auto spell = level->thing_find(oid);
-      if (spell && spell->is_activated) {
-        //
-        // Allow the damage to be modified
-        //
-        real_hitter->dmg_current_set(damage);
-        real_hitter->use(spell);
+        real_hitter->use(iter);
         damage = real_hitter->dmg_current();
       }
     }

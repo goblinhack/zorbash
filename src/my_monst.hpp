@@ -35,20 +35,40 @@ constexpr uint32_t THING_MAGIC_FINAL = 33333333;
 #define MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP      5
 #define MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED 6
 
-#define FOR_ALL_BUFFS(_id_)          for (auto _id_ : itemsp()->buffs)
-#define FOR_ALL_BUFFS_FOR(_t_, _id_) for (auto _id_ : (_t_)->itemsp()->buffs)
+#define FOR_ALL_BUFFS(_id_)                                                                                          \
+  if (maybe_itemsp())                                                                                                \
+    for (auto _id_ : itemsp()->buffs)
+#define FOR_ALL_BUFFS_FOR(_t_, _id_)                                                                                 \
+  if ((_t_)->maybe_itemsp())                                                                                         \
+    for (auto _id_ : (_t_)->itemsp()->buffs)
 
-#define FOR_ALL_DEBUFFS(_id_)          for (auto _id_ : itemsp()->debuffs)
-#define FOR_ALL_DEBUFFS_FOR(_t_, _id_) for (auto _id_ : (_t_)->itemsp()->debuffs)
+#define FOR_ALL_DEBUFFS(_id_)                                                                                        \
+  if (maybe_itemsp())                                                                                                \
+    for (auto _id_ : itemsp()->debuffs)
+#define FOR_ALL_DEBUFFS_FOR(_t_, _id_)                                                                               \
+  if ((_t_)->maybe_itemsp())                                                                                         \
+    for (auto _id_ : (_t_)->itemsp()->debuffs)
 
-#define FOR_ALL_SKILLS(_id_)          for (auto _id_ : itemsp()->skills)
-#define FOR_ALL_SKILLS_FOR(_t_, _id_) for (auto _id_ : (_t_)->itemsp()->skills)
+#define FOR_ALL_SKILLS(_id_)                                                                                         \
+  if (maybe_itemsp())                                                                                                \
+    for (auto _id_ : itemsp()->skills)
+#define FOR_ALL_SKILLS_FOR(_t_, _id_)                                                                                \
+  if ((_t_)->maybe_itemsp())                                                                                         \
+    for (auto _id_ : (_t_)->itemsp()->skills)
 
-#define FOR_ALL_SPELLS(_id_)          for (auto _id_ : itemsp()->spells)
-#define FOR_ALL_SPELLS_FOR(_t_, _id_) for (auto _id_ : (_t_)->itemsp()->spells)
+#define FOR_ALL_SPELLS(_id_)                                                                                         \
+  if (maybe_itemsp())                                                                                                \
+    for (auto _id_ : itemsp()->spells)
+#define FOR_ALL_SPELLS_FOR(_t_, _id_)                                                                                \
+  if ((_t_)->maybe_itemsp())                                                                                         \
+    for (auto _id_ : (_t_)->itemsp()->spells)
 
-#define FOR_ALL_CARRYING(_id_)        for (auto _id_ : itemsp()->carrying)
-#define FOR_ALL_CARRIED_BY(_t_, _id_) for (auto _id_ : (_t_)->itemsp()->carrying)
+#define FOR_ALL_CARRYING(_id_)                                                                                       \
+  if (maybe_itemsp())                                                                                                \
+    for (auto _id_ : itemsp()->carrying)
+#define FOR_ALL_CARRIED_BY(_t_, _id_)                                                                                \
+  if ((_t_)->maybe_itemsp())                                                                                         \
+    for (auto _id_ : (_t_)->itemsp()->carrying)
 
 //
 // Extra thing info. Needed for monsters and items.

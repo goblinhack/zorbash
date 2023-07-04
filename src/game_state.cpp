@@ -161,7 +161,14 @@ void Game::change_state(int new_state, const std::string &why)
 
   request_destination_ok = false;
   request_to_throw_item  = nullptr;
-  request_to_use_item    = nullptr;
+  if (request_to_use_item) {
+    if (request_to_use_item->is_spell()) {
+      if (level->player) {
+        level->player->spell_deactivate(request_to_use_item);
+      }
+    }
+  }
+  request_to_use_item = nullptr;
 
   switch (old_state) {
     case STATE_NORMAL :

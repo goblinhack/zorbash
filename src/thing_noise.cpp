@@ -28,44 +28,44 @@ int Thing::noise_total(void)
 
   FOR_ALL_EQUIP(e)
   {
-    auto it = equip_get(e);
-    if (it) {
-      decibels += it->noise();
-      // it->con("NOISE %d", decibels);
+    auto iter = equip_get(e);
+    if (iter) {
+      decibels += iter->noise();
+      // iter->con("NOISE %d", decibels);
     }
   }
 
   if (maybe_itemsp()) {
     FOR_ALL_CARRYING(id)
     {
-      auto it = level->thing_find(id);
-      if (it) {
+      auto iter = level->thing_find(id);
+      if (iter) {
         //
         // Don't count boots for example twice
         //
-        if (is_equipped(it)) {
+        if (is_equipped(iter)) {
           continue;
         }
-        decibels += it->noise();
-        // it->con("NOISE %d", decibels);
+        decibels += iter->noise();
+        // iter->con("NOISE %d", decibels);
       }
     }
 
     FOR_ALL_BUFFS_FOR(this, id)
     {
-      auto it = level->thing_find(id);
-      if (it) {
-        decibels += it->noise();
-        // it->con("NOISE %d", decibels);
+      auto iter = level->thing_find(id);
+      if (iter) {
+        decibels += iter->noise();
+        // iter->con("NOISE %d", decibels);
       }
     }
 
     FOR_ALL_DEBUFFS_FOR(this, id)
     {
-      auto it = level->thing_find(id);
-      if (it) {
-        decibels += it->noise();
-        // it->con("NOISE %d", decibels);
+      auto iter = level->thing_find(id);
+      if (iter) {
+        decibels += iter->noise();
+        // iter->con("NOISE %d", decibels);
       }
     }
 
@@ -117,44 +117,44 @@ int Thing::noise_on_jumping(void)
 
   FOR_ALL_EQUIP(e)
   {
-    auto it = equip_get(e);
-    if (it) {
-      decibels += it->noise_additional_on_jump_end();
-      // it->con("NOISE %d", decibels);
+    auto iter = equip_get(e);
+    if (iter) {
+      decibels += iter->noise_additional_on_jump_end();
+      // iter->con("NOISE %d", decibels);
     }
   }
 
   if (maybe_itemsp()) {
     FOR_ALL_CARRYING(id)
     {
-      auto it = level->thing_find(id);
-      if (it) {
+      auto iter = level->thing_find(id);
+      if (iter) {
         //
         // Don't count boots for example twice
         //
-        if (is_equipped(it)) {
+        if (is_equipped(iter)) {
           continue;
         }
-        decibels += it->noise_additional_on_jump_end();
-        // it->con("NOISE %d", decibels);
+        decibels += iter->noise_additional_on_jump_end();
+        // iter->con("NOISE %d", decibels);
       }
     }
 
     FOR_ALL_BUFFS_FOR(this, id)
     {
-      auto it = level->thing_find(id);
-      if (it) {
-        decibels += it->noise_additional_on_jump_end();
-        // it->con("NOISE %d", decibels);
+      auto iter = level->thing_find(id);
+      if (iter) {
+        decibels += iter->noise_additional_on_jump_end();
+        // iter->con("NOISE %d", decibels);
       }
     }
 
     FOR_ALL_DEBUFFS_FOR(this, id)
     {
-      auto it = level->thing_find(id);
-      if (it) {
-        decibels += it->noise_additional_on_jump_end();
-        // it->con("NOISE %d", decibels);
+      auto iter = level->thing_find(id);
+      if (iter) {
+        decibels += iter->noise_additional_on_jump_end();
+        // iter->con("NOISE %d", decibels);
       }
     }
 
@@ -203,44 +203,44 @@ int Thing::noise_on_teleporting(void)
 
   FOR_ALL_EQUIP(e)
   {
-    auto it = equip_get(e);
-    if (it) {
-      decibels += it->noise_additional_on_teleporting();
-      // it->con("NOISE %d", decibels);
+    auto iter = equip_get(e);
+    if (iter) {
+      decibels += iter->noise_additional_on_teleporting();
+      // iter->con("NOISE %d", decibels);
     }
   }
 
   if (maybe_itemsp()) {
     FOR_ALL_CARRYING(id)
     {
-      auto it = level->thing_find(id);
-      if (it) {
+      auto iter = level->thing_find(id);
+      if (iter) {
         //
         // Don't count boots for example twice
         //
-        if (is_equipped(it)) {
+        if (is_equipped(iter)) {
           continue;
         }
-        decibels += it->noise_additional_on_teleporting();
-        // it->con("NOISE %d", decibels);
+        decibels += iter->noise_additional_on_teleporting();
+        // iter->con("NOISE %d", decibels);
       }
     }
 
     FOR_ALL_BUFFS_FOR(this, id)
     {
-      auto it = level->thing_find(id);
-      if (it) {
-        decibels += it->noise_additional_on_teleporting();
-        // it->con("NOISE %d", decibels);
+      auto iter = level->thing_find(id);
+      if (iter) {
+        decibels += iter->noise_additional_on_teleporting();
+        // iter->con("NOISE %d", decibels);
       }
     }
 
     FOR_ALL_DEBUFFS_FOR(this, id)
     {
-      auto it = level->thing_find(id);
-      if (it) {
-        decibels += it->noise_additional_on_teleporting();
-        // it->con("NOISE %d", decibels);
+      auto iter = level->thing_find(id);
+      if (iter) {
+        decibels += iter->noise_additional_on_teleporting();
+        // iter->con("NOISE %d", decibels);
       }
     }
 

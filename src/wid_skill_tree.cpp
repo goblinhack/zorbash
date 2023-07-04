@@ -273,8 +273,8 @@ static bool skill_is_available(Skillp skill_next)
             || (skill_curr->skill_left == skill_next) || (skill_curr->skill_right == skill_next)) {
           FOR_ALL_SKILLS_FOR(game->level->player, id)
           {
-            auto known_skill = game->level->thing_find(id);
-            if (known_skill && (skill_curr->tpp == known_skill->tp())) {
+            auto iter = game->level->thing_find(id);
+            if (iter && (skill_curr->tpp == iter->tp())) {
               return true;
             }
           }

@@ -91,7 +91,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
     owner = nullptr;
   }
 
-  dbg("Laser fire %s at %s", gfx_targetted_laser.c_str(), target->to_short_string().c_str());
+  dbg("Laser shoot %s at %s", gfx_targetted_laser.c_str(), target->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   auto start = last_blit_at;
@@ -100,7 +100,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
   if (! start.x && ! start.y) {
     if (is_player()) {
       msg("Misfire!");
-      game->tick_begin("failed to fire laser");
+      game->tick_begin("failed to shoot laser");
     }
     return false;
   }
@@ -108,7 +108,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
   if (! end.x && ! end.y) {
     if (is_player()) {
       msg("Misfire!");
-      game->tick_begin("failed to fire laser");
+      game->tick_begin("failed to shoot laser");
     } else {
       msg("%s misfires.", text_The().c_str());
     }
@@ -157,9 +157,9 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
     if (! gfx_targetted_laser.empty()) {
       laser = level->thing_new(gfx_targetted_laser, target->curr_at, owner);
       if (! laser) {
-        err("No laser to fire");
+        err("No laser to shoot");
         if (is_player()) {
-          game->tick_begin("failed to fire laser");
+          game->tick_begin("failed to shoot laser");
         }
         return false;
       }
@@ -221,16 +221,16 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
         if (! gfx_targetted_laser.empty()) {
           laser = level->thing_new(gfx_targetted_laser, target->curr_at, owner);
           if (! laser) {
-            err("No laser to fire");
+            err("No laser to shoot");
             if (is_player()) {
-              game->tick_begin("failed to fire laser");
+              game->tick_begin("failed to shoot laser");
             }
             return false;
           }
         }
 
         //
-        // Find the end of the portal which is where we will fire the new laser.
+        // Find the end of the portal which is where we will shoot the new laser.
         //
         if (target && target->is_portal()) {
           auto  delta = target->curr_at - curr_at;
@@ -335,9 +335,9 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
 
       auto laser = level->thing_new(gfx_targetted_laser, target->curr_at, owner);
       if (! laser) {
-        err("No laser to fire");
+        err("No laser to shoot");
         if (is_player()) {
-          game->tick_begin("failed to fire laser");
+          game->tick_begin("failed to shoot laser");
         }
         return false;
       }
@@ -395,7 +395,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
   Thingp best = nullptr;
   point  best_hit_at;
 
-  dbg("Laser fire %s at point %s", gfx_targetted_laser.c_str(), at.to_string().c_str());
+  dbg("Laser shoot %s at point %s", gfx_targetted_laser.c_str(), at.to_string().c_str());
   TRACE_AND_INDENT();
 
   //
@@ -404,8 +404,8 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
   if (item->range_max()) {
     float dist = distance(item->curr_at, at);
     if (dist > item->range_max()) {
-      dbg("Laser fire %s at point %s is out of range, dist %f, max %d", gfx_targetted_laser.c_str(),
-          at.to_string().c_str(), dist, item->range_max());
+      dbg("Laser shoot %s at point %s->%s is out of range, dist %f, max %d", gfx_targetted_laser.c_str(),
+          item->curr_at.to_string().c_str(), at.to_string().c_str(), dist, item->range_max());
       float dx = (float) at.x - (float) item->curr_at.x;
       float dy = (float) at.y - (float) item->curr_at.y;
       dx /= dist;
@@ -415,8 +415,8 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
       at = curr_at + point(dx, dy);
 
       float dist = distance(item->curr_at, at);
-      dbg("Laser fire %s at new point %s, dist %f, max %d", gfx_targetted_laser.c_str(), at.to_string().c_str(), dist,
-          item->range_max());
+      dbg("Laser shoot %s at new point %s, dist %f, max %d", gfx_targetted_laser.c_str(), at.to_string().c_str(),
+          dist, item->range_max());
     }
   }
 

@@ -105,7 +105,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &gfx_targetted_
   if (! start.x && ! start.y) {
     if (is_player()) {
       msg("Misfire!");
-      game->tick_begin("failed to fire projectile");
+      game->tick_begin("failed to shoot projectile");
     } else {
       msg("%s misfires.", text_The().c_str());
     }
@@ -115,7 +115,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &gfx_targetted_
   if (! end.x && ! end.y) {
     if (is_player()) {
       msg("Misfire!");
-      game->tick_begin("failed to fire projectile");
+      game->tick_begin("failed to shoot projectile");
     } else {
       msg("%s misfires.", text_The().c_str());
     }
@@ -133,15 +133,15 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &gfx_targetted_
 
   auto projectile = level->thing_new(gfx_targetted_projectile, target->curr_at, owner);
   if (! projectile) {
-    err("No projectile to fire");
+    err("No projectile to shoot");
     if (is_player()) {
-      game->tick_begin("failed to fire projectile");
+      game->tick_begin("failed to shoot projectile");
     }
     return nullptr;
   }
 
   //
-  // Find the end of the portal which is where we will fire the new projectile.
+  // Find the end of the portal which is where we will shoot the new projectile.
   //
   if (target && target->is_portal()) {
     auto  delta = target->curr_at - curr_at;
@@ -180,7 +180,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &gfx_targetted_
 
   if (! projectile->is_projectile()) {
     if (is_player()) {
-      msg("I don't know how to fire projectile %s.", projectile->text_the().c_str());
+      msg("I don't know how to shoot projectile %s.", projectile->text_the().c_str());
       game->tick_begin("player tried to use something they could not");
     }
     return nullptr;
@@ -193,7 +193,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &gfx_targetted_
   info.map_stop             = target->curr_at;
   info.follow_moving_target = true;
   info.pixel_map_at         = level->pixel_map_at;
-  level->new_projectile(projectile->id, target->id, info, game->current_move_speed);
+  level->new_projectile(projectile->id, target->id, info, game->current_move_speed * 2);
 
   on_use(projectile, target);
 
@@ -218,7 +218,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &gfx_targetted_
   Thingp best = nullptr;
   point  best_hit_at;
 
-  dbg("Projectile fire %s at %s", gfx_targetted_projectile.c_str(), at.to_string().c_str());
+  dbg("Projectile shoot %s at %s", gfx_targetted_projectile.c_str(), at.to_string().c_str());
   TRACE_AND_INDENT();
 
   //
@@ -227,8 +227,8 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &gfx_targetted_
   if (item->range_max()) {
     float dist = distance(item->curr_at, at);
     if (dist > item->range_max()) {
-      dbg("Projectile fire %s at point %s is out of range, dist %f, max %d", gfx_targetted_projectile.c_str(),
-          at.to_string().c_str(), dist, item->range_max());
+      dbg("Projectile shoot %s at point %s->%s is out of range, dist %f, max %d", gfx_targetted_projectile.c_str(),
+          item->curr_at.to_string().c_str(), at.to_string().c_str(), dist, item->range_max());
       float dx = (float) at.x - (float) item->curr_at.x;
       float dy = (float) at.y - (float) item->curr_at.y;
       dx /= dist;
@@ -238,7 +238,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &gfx_targetted_
       at = curr_at + point(dx, dy);
 
       float dist = distance(item->curr_at, at);
-      dbg("Projectile fire %s at new point %s, dist %f, max %d", gfx_targetted_projectile.c_str(),
+      dbg("Projectile shoot %s at new point %s, dist %f, max %d", gfx_targetted_projectile.c_str(),
           at.to_string().c_str(), dist, item->range_max());
     }
   }

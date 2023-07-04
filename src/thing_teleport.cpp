@@ -72,44 +72,44 @@ int Thing::teleport_distance_get(void)
 
   FOR_ALL_EQUIP(e)
   {
-    auto it = equip_get(e);
-    if (it) {
-      dist += it->teleport_distance_get();
-      // it->dbg("TELEPORT %d", dist);
+    auto iter = equip_get(e);
+    if (iter) {
+      dist += iter->teleport_distance_get();
+      // iter->dbg("TELEPORT %d", dist);
     }
   }
 
   if (maybe_itemsp()) {
     FOR_ALL_CARRYING(id)
     {
-      auto it = level->thing_find(id);
-      if (it) {
+      auto iter = level->thing_find(id);
+      if (iter) {
         //
         // Don't count boots for example twice
         //
-        if (is_equipped(it)) {
+        if (is_equipped(iter)) {
           continue;
         }
-        dist += it->teleport_distance_get();
-        // it->dbg("TELEPORT %d", dist);
+        dist += iter->teleport_distance_get();
+        // iter->dbg("TELEPORT %d", dist);
       }
     }
 
     FOR_ALL_BUFFS_FOR(this, id)
     {
-      auto it = level->thing_find(id);
-      if (it) {
-        dist += it->teleport_distance_get();
-        // it->dbg("TELEPORT %d", dist);
+      auto iter = level->thing_find(id);
+      if (iter) {
+        dist += iter->teleport_distance_get();
+        // iter->dbg("TELEPORT %d", dist);
       }
     }
 
     FOR_ALL_DEBUFFS_FOR(this, id)
     {
-      auto it = level->thing_find(id);
-      if (it) {
-        dist += it->teleport_distance_get();
-        // it->dbg("TELEPORT %d", dist);
+      auto iter = level->thing_find(id);
+      if (iter) {
+        dist += iter->teleport_distance_get();
+        // iter->dbg("TELEPORT %d", dist);
       }
     }
 
@@ -118,7 +118,7 @@ int Thing::teleport_distance_get(void)
       auto iter = level->thing_find(id);
       if (iter && iter->is_activated) {
         dist += iter->teleport_distance_get();
-        // it->dbg("TELEPORT %d", dist);
+        // iter->dbg("TELEPORT %d", dist);
       }
     }
 
@@ -127,7 +127,7 @@ int Thing::teleport_distance_get(void)
       auto iter = level->thing_find(id);
       if (iter && iter->is_activated) {
         dist += iter->teleport_distance_get();
-        // it->dbg("TELEPORT %d", dist);
+        // iter->dbg("TELEPORT %d", dist);
       }
     }
   }
