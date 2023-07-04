@@ -855,10 +855,10 @@ int Thing::is_unused_flag131(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag131());
 }
-int Thing::is_unused_flag132(void)
+int Thing::spell_cost(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag132());
+  return (tp()->spell_cost());
 }
 int Thing::is_player_bodypart(void)
 {

@@ -697,6 +697,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
 
   in >> bits(l->is_final_boss_level);
   in >> bits(l->is_crystal_level);
+  in >> bits(l->is_entered);
 
   in >> bits(l->d1000_chance_creating_mob_challenge_class_A);
   in >> bits(l->d1000_chance_creating_mob_challenge_class_B);

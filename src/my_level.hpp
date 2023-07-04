@@ -176,6 +176,11 @@ public:
   bool is_crystal_level {};
 
   //
+  // If this level is new to the player, we reset magic on entering.
+  //
+  bool is_entered {};
+
+  //
   // Chances for various things to appear
   //
   std::array< std::array< int, MONST_CLASS_MAX >, MONST_ENVIRON_MAX > d1000_chance_creating_monst {};

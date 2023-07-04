@@ -249,7 +249,7 @@ bool wid_rightbar_pixelart_create(void)
     wid_set_text(w, s);
     wid_set_text_rhs(w, true);
   }
-  y_at += 3;
+  y_at += 2;
 
   ///////////////////////////////////////////////////////////////////////////
   // DEF

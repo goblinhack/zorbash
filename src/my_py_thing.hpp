@@ -567,7 +567,6 @@ PyObject *thing_is_unused_flag129(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag12(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag130(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag131(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag132(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag13(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag142(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag14(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -748,6 +747,7 @@ PyObject *thing_skill_deactivate(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_spawn_group_radius(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_speaks(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_spell_activate(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_spell_cost(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_spell_deactivate(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stamina_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stamina_drain_on_attacking(PyObject *obj, PyObject *args, PyObject *keywds);

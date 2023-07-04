@@ -458,7 +458,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag12() && (what == "is_unused_flag12")) { return true; }
   if (is_unused_flag130() && (what == "is_unused_flag130")) { return true; }
   if (is_unused_flag131() && (what == "is_unused_flag131")) { return true; }
-  if (is_unused_flag132() && (what == "is_unused_flag132")) { return true; }
   if (is_unused_flag13() && (what == "is_unused_flag13")) { return true; }
   if (is_unused_flag142() && (what == "is_unused_flag142")) { return true; }
   if (is_unused_flag14() && (what == "is_unused_flag14")) { return true; }
@@ -585,6 +584,7 @@ bool Tp::matches(const std::string &what)
   if (on_death_is_stone() && (what == "on_death_is_stone")) { return true; }
   if (range_max() && (what == "range_max")) { return true; }
   if (shove_strength() && (what == "shove_strength")) { return true; }
+  if (spell_cost() && (what == "spell_cost")) { return true; }
   if (stat_att_penalty_when_idle_max() && (what == "stat_att_penalty_when_idle_max")) { return true; }
   if (stat_att_penalty_when_idle() && (what == "stat_att_penalty_when_idle")) { return true; }
   if (stat_att_penalty_when_in_deep_water() && (what == "stat_att_penalty_when_in_deep_water")) { return true; }
@@ -1059,7 +1059,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag12() && (what == "is_unused_flag12")) { return true; }
   if (is_unused_flag130() && (what == "is_unused_flag130")) { return true; }
   if (is_unused_flag131() && (what == "is_unused_flag131")) { return true; }
-  if (is_unused_flag132() && (what == "is_unused_flag132")) { return true; }
   if (is_unused_flag13() && (what == "is_unused_flag13")) { return true; }
   if (is_unused_flag142() && (what == "is_unused_flag142")) { return true; }
   if (is_unused_flag14() && (what == "is_unused_flag14")) { return true; }
@@ -1186,6 +1185,7 @@ bool Thing::matches(const std::string &what)
   if (on_death_is_stone() && (what == "on_death_is_stone")) { return true; }
   if (range_max() && (what == "range_max")) { return true; }
   if (shove_strength() && (what == "shove_strength")) { return true; }
+  if (spell_cost() && (what == "spell_cost")) { return true; }
   if (stat_att_penalty_when_idle_max() && (what == "stat_att_penalty_when_idle_max")) { return true; }
   if (stat_att_penalty_when_idle() && (what == "stat_att_penalty_when_idle")) { return true; }
   if (stat_att_penalty_when_in_deep_water() && (what == "stat_att_penalty_when_in_deep_water")) { return true; }
@@ -1648,7 +1648,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag12") { return &Thing::is_unused_flag12; }
   if (what == "is_unused_flag130") { return &Thing::is_unused_flag130; }
   if (what == "is_unused_flag131") { return &Thing::is_unused_flag131; }
-  if (what == "is_unused_flag132") { return &Thing::is_unused_flag132; }
   if (what == "is_unused_flag13") { return &Thing::is_unused_flag13; }
   if (what == "is_unused_flag142") { return &Thing::is_unused_flag142; }
   if (what == "is_unused_flag14") { return &Thing::is_unused_flag14; }
@@ -1776,6 +1775,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "on_death_is_stone") { return &Thing::on_death_is_stone; }
   if (what == "range_max") { return &Thing::range_max; }
   if (what == "shove_strength") { return &Thing::shove_strength; }
+  if (what == "spell_cost") { return &Thing::spell_cost; }
   if (what == "stat_att_penalty_when_idle_max") { return &Thing::stat_att_penalty_when_idle_max; }
   if (what == "stat_att_penalty_when_idle") { return &Thing::stat_att_penalty_when_idle; }
   if (what == "stat_att_penalty_when_in_deep_water") { return &Thing::stat_att_penalty_when_in_deep_water; }

@@ -758,7 +758,6 @@ int Tp::is_unused_flag129(void) const { return _is_unused_flag129; }
 int Tp::is_unused_flag12(void) const { return _is_unused_flag12; }
 int Tp::is_unused_flag130(void) const { return _is_unused_flag130; }
 int Tp::is_unused_flag131(void) const { return _is_unused_flag131; }
-int Tp::is_unused_flag132(void) const { return _is_unused_flag132; }
 int Tp::is_unused_flag13(void) const { return _is_unused_flag13; }
 int Tp::is_unused_flag142(void) const { return _is_unused_flag142; }
 int Tp::is_unused_flag14(void) const { return _is_unused_flag14; }
@@ -903,6 +902,7 @@ int Tp::rarity(void) const { return _rarity; }
 int Tp::shove_bonus(void) const { return _shove_bonus; }
 int Tp::shove_strength(void) const { return _shove_strength; }
 int Tp::spawn_group_radius(void) const { return _spawn_group_radius; }
+int Tp::spell_cost(void) const { return _spell_cost; }
 int Tp::stamina_drain_on_attacking(void) const { return _stamina_drain_on_attacking; }
 int Tp::stamina_drain_on_using(void) const { return _stamina_drain_on_using; }
 int Tp::stamina(void) const { return _stamina; }
@@ -1513,7 +1513,6 @@ void Tp::is_unused_flag129_set(int v) { _is_unused_flag129 = v; }
 void Tp::is_unused_flag12_set(int v) { _is_unused_flag12 = v; }
 void Tp::is_unused_flag130_set(int v) { _is_unused_flag130 = v; }
 void Tp::is_unused_flag131_set(int v) { _is_unused_flag131 = v; }
-void Tp::is_unused_flag132_set(int v) { _is_unused_flag132 = v; }
 void Tp::is_unused_flag13_set(int v) { _is_unused_flag13 = v; }
 void Tp::is_unused_flag142_set(int v) { _is_unused_flag142 = v; }
 void Tp::is_unused_flag14_set(int v) { _is_unused_flag14 = v; }
@@ -1801,6 +1800,7 @@ void Tp::skill_replaces_set(const std::string &v) { _skill_replaces = v; }
 void Tp::spawn_group_radius_set(int v) { _spawn_group_radius = v; }
 void Tp::spawn_on_shoved_set(const std::string &v) { _spawn_on_shoved = v; }
 void Tp::spell_base_name_set(const std::string &v) { _spell_base_name = v; }
+void Tp::spell_cost_set(int v) { _spell_cost = v; }
 void Tp::spell_replaces_set(const std::string &v) { _spell_replaces = v; }
 void Tp::stamina_drain_on_attacking_set(int v) { _stamina_drain_on_attacking = v; }
 void Tp::stamina_drain_on_using_set(int v) { _stamina_drain_on_using = v; }

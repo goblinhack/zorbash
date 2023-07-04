@@ -671,7 +671,6 @@ private:
   int _is_unused_flag13 {};
   int _is_unused_flag130 {};
   int _is_unused_flag131 {};
-  int _is_unused_flag132 {};
   int _is_unused_flag14 {};
   int _is_unused_flag142 {};
   int _is_unused_flag15 {};
@@ -814,6 +813,7 @@ private:
   int _shove_bonus {};
   int _shove_strength {};
   int _spawn_group_radius {};
+  int _spell_cost {};
   int _stamina {};
   int _stamina_drain_on_attacking {};
   int _stamina_drain_on_using {};
@@ -2003,7 +2003,6 @@ public:
   int is_unused_flag12(void) const;
   int is_unused_flag130(void) const;
   int is_unused_flag131(void) const;
-  int is_unused_flag132(void) const;
   int is_unused_flag13(void) const;
   int is_unused_flag142(void) const;
   int is_unused_flag14(void) const;
@@ -2148,6 +2147,7 @@ public:
   int shove_bonus(void) const;
   int shove_strength(void) const;
   int spawn_group_radius(void) const;
+  int spell_cost(void) const;
   int stamina_drain_on_attacking(void) const;
   int stamina_drain_on_using(void) const;
   int stamina(void) const;
@@ -2758,7 +2758,6 @@ public:
   void is_unused_flag12_set(int v);
   void is_unused_flag130_set(int v);
   void is_unused_flag131_set(int v);
-  void is_unused_flag132_set(int v);
   void is_unused_flag13_set(int v);
   void is_unused_flag142_set(int v);
   void is_unused_flag14_set(int v);
@@ -3046,6 +3045,7 @@ public:
   void spawn_group_radius_set(int v);
   void spawn_on_shoved_set(const std::string &v);
   void spell_base_name_set(const std::string &v);
+  void spell_cost_set(int v);
   void spell_replaces_set(const std::string &v);
   void stamina_drain_on_attacking_set(int v);
   void stamina_drain_on_using_set(int v);

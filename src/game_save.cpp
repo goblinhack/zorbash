@@ -657,6 +657,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
 
   out << bits(my.t->is_final_boss_level);
   out << bits(my.t->is_crystal_level);
+  out << bits(my.t->is_entered);
 
   out << bits(my.t->d1000_chance_creating_mob_challenge_class_A);
   out << bits(my.t->d1000_chance_creating_mob_challenge_class_B);

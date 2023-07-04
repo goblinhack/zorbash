@@ -146,6 +146,15 @@ void Thing::level_enter(bool rejoin)
   is_waiting_to_leave_level_has_completed_fall = false;
 
   if (is_player()) {
+
+    //
+    // Reset magic upon entering a new level
+    //
+    if (! level->is_entered) {
+      level->is_entered = true;
+      magic_set(magic_max());
+    }
+
     game->set_request_to_remake_rightbar();
 
     dbg2("Level entered");

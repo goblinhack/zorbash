@@ -237,6 +237,8 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   //
   wid_thing_info_add_gold_value(wid_popup_window, t);
 
+  wid_thing_info_add_spell_cost(wid_popup_window, t);
+
   if (t->is_mimic() && t->is_sleeping) {
     //
     // Do not describe
@@ -727,6 +729,20 @@ void Game::wid_thing_info_add_gold_value(WidPopup *w, Thingp t)
       snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->gold_value_dice_str().c_str());
     }
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Value in zorkmids %11s", tmp2);
+    w->log(tmp);
+  }
+}
+
+void Game::wid_thing_info_add_spell_cost(WidPopup *w, Thingp t)
+{
+  TRACE_AND_INDENT();
+  char tmp[ MAXSHORTSTR ];
+  char tmp2[ MAXSHORTSTR ];
+
+  auto cost = t->spell_cost();
+  if (cost > 0) {
+    snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->gold_value_dice_str().c_str());
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Spell cost %11s", tmp2);
     w->log(tmp);
   }
 }

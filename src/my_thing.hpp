@@ -1781,7 +1781,6 @@ public:
   int is_unused_flag12(void);
   int is_unused_flag130(void);
   int is_unused_flag131(void);
-  int is_unused_flag132(void);
   int is_unused_flag13(void);
   int is_unused_flag142(void);
   int is_unused_flag14(void);
@@ -2132,6 +2131,7 @@ public:
   int spawn_group_size(void);
   int spawn_randomly_in_radius_range(const std::string &what, int amount, int radius_min, int radius_max);
   int spellbook_count(void);
+  int spell_cost(void);
   int stamina_decr(int);
   int stamina_decr(void);
   int stamina_drain_on_attacking(void);
