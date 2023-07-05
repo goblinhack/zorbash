@@ -101,6 +101,14 @@ std::string Thing::text_the(bool include_owner)
 
   out += tpp->text_long_name();
 
+  if (tpp->is_spell()) {
+    out += " spell";
+  }
+
+  if (tpp->is_skill()) {
+    out += " skill";
+  }
+
   return out;
 }
 

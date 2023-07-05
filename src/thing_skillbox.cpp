@@ -310,9 +310,9 @@ bool Level::skill_chosen(Thingp what)
   IF_DEBUG2 { what->log("Chosen skillbox item"); }
 
   if (what->is_activated) {
-    player->msg("You activate %s skill.", what->text_the().c_str());
+    player->msg("You activate %s.", what->text_the().c_str());
   } else {
-    player->msg("You deactivate %s skill.", what->text_the().c_str());
+    player->msg("You deactivate %s.", what->text_the().c_str());
   }
   sound_play("coin");
   player->skill_use(what);

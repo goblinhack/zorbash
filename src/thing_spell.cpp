@@ -78,10 +78,6 @@ bool Thing::spell_add(Thingp new_spell)
     sound_play("powerup");
   }
 
-  if (new_spell->is_auto_activated()) {
-    spell_activate(new_spell);
-  }
-
 redo:
   //
   // If this new spell supersedes another spell(s), then remove them.
@@ -157,6 +153,16 @@ void Thing::spell_remove_all(void)
 bool Thing::spell_use(Thingp what)
 {
   TRACE_NO_INDENT();
+
+  if (what->spell_cost() > magic()) {
+    if (is_player()) {
+      msg("You do not have enough magic points to cast %s. You need %d.", what->text_the().c_str(),
+          what->spell_cost());
+    }
+    return false;
+  }
+
+  magic_decr(what->spell_cost());
   msg("You cast %s.", what->text_the().c_str());
   used(what, this, false /* remove after use */);
 
@@ -173,7 +179,6 @@ void Thing::spell_deactivate(Thingp what)
   what->is_activated = false;
   game->set_request_to_remake_spellbox();
   if (is_player()) {
-    msg("You deactivate %s spell.", what->text_the().c_str());
     sound_play("coin");
   }
 }
@@ -184,7 +189,6 @@ void Thing::spell_activate(Thingp what)
   what->is_activated = true;
   game->set_request_to_remake_spellbox();
   if (is_player()) {
-    msg("You activate %s spell.", what->text_the().c_str());
     sound_play("coin");
   }
 }
@@ -235,7 +239,7 @@ bool Thing::spell_add(Tpp what)
   }
 
   if (is_player()) {
-    msg("You learn %s spell.", t->text_the().c_str());
+    msg("You learn %s.", t->text_the().c_str());
   }
 
   spell_add(t);

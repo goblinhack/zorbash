@@ -173,7 +173,7 @@ void Thing::skill_deactivate(Thingp what)
   what->is_activated = false;
   game->set_request_to_remake_skillbox();
   if (is_player()) {
-    msg("You deactivate %s skill.", what->text_the().c_str());
+    msg("You deactivate %s.", what->text_the().c_str());
     sound_play("coin");
   }
 }
@@ -184,7 +184,7 @@ void Thing::skill_activate(Thingp what)
   what->is_activated = true;
   game->set_request_to_remake_skillbox();
   if (is_player()) {
-    msg("You activate %s skill.", what->text_the().c_str());
+    msg("You activate %s.", what->text_the().c_str());
     sound_play("coin");
   }
 }
@@ -235,7 +235,7 @@ bool Thing::skill_add(Tpp what)
   }
 
   if (is_player()) {
-    msg("You learn %s skill.", t->text_the().c_str());
+    msg("You learn %s.", t->text_the().c_str());
   }
 
   skill_add(t);
