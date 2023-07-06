@@ -23,8 +23,8 @@ def on_targetted(me, x, y):
 def on_targetted_radially(me, x, y):
     radius = my.thing_effect_radius_get(me)
     radius += 1
-    # my.con("targetted radially {} {:X}".format(my.thing_name_get(me), me))
 
+    # my.con("targetted radially {} {:X}".format(my.thing_name_get(me), me))
     for dx in range(-radius, radius + 1):
         for dy in range(-radius, radius + 1):
             if dx == 0 and dy == 0:
@@ -122,7 +122,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_targetted_radial(self, "staff_negation_radial")
     my.gold_value_dice(self, "300")
     my.health_initial_dice(self, "20+1d10")
-    my.health_initial_dice(self, "50")
     my.is_able_to_be_teleported(self, True)
     my.is_able_to_fall(self, True)
     # my.is_able_to_spawn_things(self, False) else we end up owning effects

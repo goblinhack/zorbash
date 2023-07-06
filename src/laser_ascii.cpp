@@ -60,10 +60,10 @@ void Level::display_ascii_lasers(point tl, point br)
     auto tiles = &t->tp()->tiles;
     auto tile  = tile_n(tiles, frame);
     if (tile) {
-      int x0 = tl.x + (start.x - minx);
-      int y0 = tl.y + (start.y - miny);
-      int x1 = tl.x + (stop.x - minx);
-      int y1 = tl.y + (stop.y - miny);
+      int x0 = tl.x + (start.x - minx) - (MAP_BORDER_ROCK - 1);
+      int y0 = tl.y + (start.y - miny) - (MAP_BORDER_ROCK - 1);
+      int x1 = tl.x + (stop.x - minx) - (MAP_BORDER_ROCK - 1);
+      int y1 = tl.y + (stop.y - miny) - (MAP_BORDER_ROCK - 1);
 
       color c = tile->ascii_fg_col_value;
       c.a     = tile->ascii_fg_alpha;

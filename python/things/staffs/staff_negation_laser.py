@@ -2,10 +2,14 @@ import my
 import tp
 
 
+#
+# This is an internal only object to fire projectiles from staffs
+#
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.gfx_ascii_shown(self, True)
+    my.is_able_to_be_teleported(self, True)
     my.is_laser(self, True)
     my.is_loggable(self, True)
     my.is_no_tile(self, True)

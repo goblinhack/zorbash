@@ -69,6 +69,15 @@ Projectile_::Projectile_(Levelp level, ThingId thing_id, ThingId victim_id, Proj
   // "projectile_green.{frame}.15",
   // "projectile_green.{frame}.16",
   //
+  //
+  // Use the preferred name if set.
+  //
+  if (proj_tp) {
+    if (! proj_tp->gfx_targetted_projectile().empty()) {
+      name = proj_tp->gfx_targetted_projectile();
+    }
+  }
+
   for (int frame = 0; frame < max_frames; frame++) {
     tiles.push_back(tile_find_mand(name + "." + std::to_string(frame + 1)));
   }

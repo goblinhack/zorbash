@@ -8,6 +8,7 @@
 #include "my_monst.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
+#include "my_thing_attack_options.hpp"
 #include "my_ui.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_inventory.hpp"
@@ -247,25 +248,27 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     wid_thing_info_add_nutrition(wid_popup_window, t);
     wid_thing_info_add_health(wid_popup_window, t);
     wid_thing_info_add_noise(wid_popup_window, t);
-    int attack_index = 0;
-    wid_thing_info_add_dmg_nat_att(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_melee(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_poison(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_drown(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_bite(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_claw(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_cold(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_fire(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_heat(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_crush(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_missile(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_lightning(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_energy(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_negation(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_acid(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_digest(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_necrosis(wid_popup_window, t, attack_index);
-    wid_thing_info_add_dmg_stamina(wid_popup_window, t, attack_index);
+    wid_thing_info_add_dmg_melee(wid_popup_window, t);
+
+    for (auto attack_index = 0; attack_index < (int) THING_ATTACK_MAX; attack_index++) {
+      wid_thing_info_add_dmg_nat_att(wid_popup_window, t, attack_index);
+      wid_thing_info_add_dmg_poison(wid_popup_window, t, attack_index);
+      wid_thing_info_add_dmg_drown(wid_popup_window, t, attack_index);
+      wid_thing_info_add_dmg_bite(wid_popup_window, t, attack_index);
+      wid_thing_info_add_dmg_claw(wid_popup_window, t, attack_index);
+      wid_thing_info_add_dmg_cold(wid_popup_window, t, attack_index);
+      wid_thing_info_add_dmg_fire(wid_popup_window, t, attack_index);
+      wid_thing_info_add_dmg_heat(wid_popup_window, t, attack_index);
+      wid_thing_info_add_dmg_crush(wid_popup_window, t, attack_index);
+      wid_thing_info_add_dmg_missile(wid_popup_window, t, attack_index);
+      wid_thing_info_add_dmg_lightning(wid_popup_window, t, attack_index);
+      wid_thing_info_add_dmg_energy(wid_popup_window, t, attack_index);
+      wid_thing_info_add_dmg_negation(wid_popup_window, t, attack_index);
+      wid_thing_info_add_dmg_acid(wid_popup_window, t, attack_index);
+      wid_thing_info_add_dmg_digest(wid_popup_window, t, attack_index);
+      wid_thing_info_add_dmg_necrosis(wid_popup_window, t, attack_index);
+      wid_thing_info_add_dmg_stamina(wid_popup_window, t, attack_index);
+    }
     wid_thing_info_add_dmgd_chance(wid_popup_window, t);
     wid_thing_info_add_crit_chance(wid_popup_window, t);
     wid_thing_info_add_stat_att(wid_popup_window, t);
@@ -848,13 +851,15 @@ void Game::wid_thing_info_add_crit_chance(WidPopup *w, Thingp t)
   }
 }
 
-void Game::wid_thing_info_add_dmg_melee(WidPopup *w, Thingp t, int index)
+void Game::wid_thing_info_add_dmg_melee(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
+
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
-  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -908,14 +913,19 @@ void Game::wid_thing_info_add_dmg_melee(WidPopup *w, Thingp t, int index)
   }
 }
 
-void Game::wid_thing_info_add_dmg_poison(WidPopup *w, Thingp t, int index)
+void Game::wid_thing_info_add_dmg_poison(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (! tp->dmg_chance_d1000_poison(attack_index)) {
+    return;
+  }
+
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -938,24 +948,32 @@ void Game::wid_thing_info_add_dmg_poison(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_chance_d1000_poison(index))) / 1000.0) * 100.0);
-      if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
-        w->log(tmp);
+      int chance = (int) (((((float) tp->dmg_chance_d1000_poison(attack_index))) / 1000.0) * 100.0);
+
+      if (! t->is_player()) {
+        if (chance > 0) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+          w->log(tmp);
+        }
       }
     }
   }
 }
 
-void Game::wid_thing_info_add_dmg_drown(WidPopup *w, Thingp t, int index)
+void Game::wid_thing_info_add_dmg_drown(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (! tp->dmg_chance_d1000_drown(attack_index)) {
+    return;
+  }
+
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -978,24 +996,32 @@ void Game::wid_thing_info_add_dmg_drown(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_chance_d1000_drown(index))) / 1000.0) * 100.0);
-      if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
-        w->log(tmp);
+      int chance = (int) (((((float) tp->dmg_chance_d1000_drown(attack_index))) / 1000.0) * 100.0);
+
+      if (! t->is_player()) {
+        if (chance > 0) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+          w->log(tmp);
+        }
       }
     }
   }
 }
 
-void Game::wid_thing_info_add_dmg_bite(WidPopup *w, Thingp t, int index)
+void Game::wid_thing_info_add_dmg_bite(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (! tp->dmg_chance_d1000_bite(attack_index)) {
+    return;
+  }
+
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1018,24 +1044,32 @@ void Game::wid_thing_info_add_dmg_bite(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_chance_d1000_bite(index))) / 1000.0) * 100.0);
-      if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
-        w->log(tmp);
+      int chance = (int) (((((float) tp->dmg_chance_d1000_bite(attack_index))) / 1000.0) * 100.0);
+
+      if (! t->is_player()) {
+        if (chance > 0) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+          w->log(tmp);
+        }
       }
     }
   }
 }
 
-void Game::wid_thing_info_add_dmg_claw(WidPopup *w, Thingp t, int index)
+void Game::wid_thing_info_add_dmg_claw(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (! tp->dmg_chance_d1000_claw(attack_index)) {
+    return;
+  }
+
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1058,24 +1092,32 @@ void Game::wid_thing_info_add_dmg_claw(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_chance_d1000_claw(index))) / 1000.0) * 100.0);
-      if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
-        w->log(tmp);
+      int chance = (int) (((((float) tp->dmg_chance_d1000_claw(attack_index))) / 1000.0) * 100.0);
+
+      if (! t->is_player()) {
+        if (chance > 0) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+          w->log(tmp);
+        }
       }
     }
   }
 }
 
-void Game::wid_thing_info_add_dmg_cold(WidPopup *w, Thingp t, int index)
+void Game::wid_thing_info_add_dmg_cold(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (! tp->dmg_chance_d1000_cold(attack_index)) {
+    return;
+  }
+
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1098,24 +1140,32 @@ void Game::wid_thing_info_add_dmg_cold(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_chance_d1000_cold(index))) / 1000.0) * 100.0);
-      if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
-        w->log(tmp);
+      int chance = (int) (((((float) tp->dmg_chance_d1000_cold(attack_index))) / 1000.0) * 100.0);
+
+      if (! t->is_player()) {
+        if (chance > 0) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+          w->log(tmp);
+        }
       }
     }
   }
 }
 
-void Game::wid_thing_info_add_dmg_fire(WidPopup *w, Thingp t, int index)
+void Game::wid_thing_info_add_dmg_fire(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (! tp->dmg_chance_d1000_fire(attack_index)) {
+    return;
+  }
+
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1138,24 +1188,32 @@ void Game::wid_thing_info_add_dmg_fire(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_chance_d1000_fire(index))) / 1000.0) * 100.0);
-      if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
-        w->log(tmp);
+      int chance = (int) (((((float) tp->dmg_chance_d1000_fire(attack_index))) / 1000.0) * 100.0);
+
+      if (! t->is_player()) {
+        if (chance > 0) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+          w->log(tmp);
+        }
       }
     }
   }
 }
 
-void Game::wid_thing_info_add_dmg_heat(WidPopup *w, Thingp t, int index)
+void Game::wid_thing_info_add_dmg_heat(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (! tp->dmg_chance_d1000_heat(attack_index)) {
+    return;
+  }
+
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1178,24 +1236,32 @@ void Game::wid_thing_info_add_dmg_heat(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_chance_d1000_heat(index))) / 1000.0) * 100.0);
-      if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
-        w->log(tmp);
+      int chance = (int) (((((float) tp->dmg_chance_d1000_heat(attack_index))) / 1000.0) * 100.0);
+
+      if (! t->is_player()) {
+        if (chance > 0) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+          w->log(tmp);
+        }
       }
     }
   }
 }
 
-void Game::wid_thing_info_add_dmg_crush(WidPopup *w, Thingp t, int index)
+void Game::wid_thing_info_add_dmg_crush(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (! tp->dmg_chance_d1000_crush(attack_index)) {
+    return;
+  }
+
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1218,24 +1284,32 @@ void Game::wid_thing_info_add_dmg_crush(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_chance_d1000_crush(index))) / 1000.0) * 100.0);
-      if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
-        w->log(tmp);
+      int chance = (int) (((((float) tp->dmg_chance_d1000_crush(attack_index))) / 1000.0) * 100.0);
+
+      if (! t->is_player()) {
+        if (chance > 0) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+          w->log(tmp);
+        }
       }
     }
   }
 }
 
-void Game::wid_thing_info_add_dmg_missile(WidPopup *w, Thingp t, int index)
+void Game::wid_thing_info_add_dmg_missile(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (! tp->dmg_chance_d1000_missile(attack_index)) {
+    return;
+  }
+
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1258,24 +1332,32 @@ void Game::wid_thing_info_add_dmg_missile(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_chance_d1000_missile(index))) / 1000.0) * 100.0);
-      if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
-        w->log(tmp);
+      int chance = (int) (((((float) tp->dmg_chance_d1000_missile(attack_index))) / 1000.0) * 100.0);
+
+      if (! t->is_player()) {
+        if (chance > 0) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+          w->log(tmp);
+        }
       }
     }
   }
 }
 
-void Game::wid_thing_info_add_dmg_lightning(WidPopup *w, Thingp t, int index)
+void Game::wid_thing_info_add_dmg_lightning(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (! tp->dmg_chance_d1000_lightning(attack_index)) {
+    return;
+  }
+
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1298,24 +1380,32 @@ void Game::wid_thing_info_add_dmg_lightning(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_chance_d1000_lightning(index))) / 1000.0) * 100.0);
-      if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
-        w->log(tmp);
+      int chance = (int) (((((float) tp->dmg_chance_d1000_lightning(attack_index))) / 1000.0) * 100.0);
+
+      if (! t->is_player()) {
+        if (chance > 0) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+          w->log(tmp);
+        }
       }
     }
   }
 }
 
-void Game::wid_thing_info_add_dmg_energy(WidPopup *w, Thingp t, int index)
+void Game::wid_thing_info_add_dmg_energy(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (! tp->dmg_chance_d1000_energy(attack_index)) {
+    return;
+  }
+
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1338,24 +1428,32 @@ void Game::wid_thing_info_add_dmg_energy(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_chance_d1000_energy(index))) / 1000.0) * 100.0);
-      if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
-        w->log(tmp);
+      int chance = (int) (((((float) tp->dmg_chance_d1000_energy(attack_index))) / 1000.0) * 100.0);
+
+      if (! t->is_player()) {
+        if (chance > 0) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+          w->log(tmp);
+        }
       }
     }
   }
 }
 
-void Game::wid_thing_info_add_dmg_negation(WidPopup *w, Thingp t, int index)
+void Game::wid_thing_info_add_dmg_negation(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (! tp->dmg_chance_d1000_negation(attack_index)) {
+    return;
+  }
+
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1378,24 +1476,32 @@ void Game::wid_thing_info_add_dmg_negation(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_chance_d1000_negation(index))) / 1000.0) * 100.0);
-      if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
-        w->log(tmp);
+      int chance = (int) (((((float) tp->dmg_chance_d1000_negation(attack_index))) / 1000.0) * 100.0);
+
+      if (! t->is_player()) {
+        if (chance > 0) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+          w->log(tmp);
+        }
       }
     }
   }
 }
 
-void Game::wid_thing_info_add_dmg_acid(WidPopup *w, Thingp t, int index)
+void Game::wid_thing_info_add_dmg_acid(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (! tp->dmg_chance_d1000_acid(attack_index)) {
+    return;
+  }
+
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1418,24 +1524,32 @@ void Game::wid_thing_info_add_dmg_acid(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_chance_d1000_acid(index))) / 1000.0) * 100.0);
-      if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
-        w->log(tmp);
+      int chance = (int) (((((float) tp->dmg_chance_d1000_acid(attack_index))) / 1000.0) * 100.0);
+
+      if (! t->is_player()) {
+        if (chance > 0) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+          w->log(tmp);
+        }
       }
     }
   }
 }
 
-void Game::wid_thing_info_add_dmg_nat_att(WidPopup *w, Thingp t, int index)
+void Game::wid_thing_info_add_dmg_nat_att(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (! tp->dmg_chance_d1000_nat_att(attack_index)) {
+    return;
+  }
+
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1471,24 +1585,32 @@ void Game::wid_thing_info_add_dmg_nat_att(WidPopup *w, Thingp t, int index)
         w->log(tmp);
       }
 
-      int chance = (int) (((((float) tp->dmg_chance_d1000_nat_att(index))) / 1000.0) * 100.0);
-      if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
-        w->log(tmp);
+      int chance = (int) (((((float) tp->dmg_chance_d1000_nat_att(attack_index))) / 1000.0) * 100.0);
+
+      if (! t->is_player()) {
+        if (chance > 0) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+          w->log(tmp);
+        }
       }
     }
   }
 }
 
-void Game::wid_thing_info_add_dmg_digest(WidPopup *w, Thingp t, int index)
+void Game::wid_thing_info_add_dmg_digest(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (! tp->dmg_chance_d1000_digest(attack_index)) {
+    return;
+  }
+
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1511,24 +1633,32 @@ void Game::wid_thing_info_add_dmg_digest(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_chance_d1000_digest(index))) / 1000.0) * 100.0);
-      if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
-        w->log(tmp);
+      int chance = (int) (((((float) tp->dmg_chance_d1000_digest(attack_index))) / 1000.0) * 100.0);
+
+      if (! t->is_player()) {
+        if (chance > 0) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+          w->log(tmp);
+        }
       }
     }
   }
 }
 
-void Game::wid_thing_info_add_dmg_necrosis(WidPopup *w, Thingp t, int index)
+void Game::wid_thing_info_add_dmg_necrosis(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (! tp->dmg_chance_d1000_necrosis(attack_index)) {
+    return;
+  }
+
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1551,24 +1681,32 @@ void Game::wid_thing_info_add_dmg_necrosis(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_chance_d1000_necrosis(index))) / 1000.0) * 100.0);
-      if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
-        w->log(tmp);
+      int chance = (int) (((((float) tp->dmg_chance_d1000_necrosis(attack_index))) / 1000.0) * 100.0);
+
+      if (! t->is_player()) {
+        if (chance > 0) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+          w->log(tmp);
+        }
       }
     }
   }
 }
 
-void Game::wid_thing_info_add_dmg_stamina(WidPopup *w, Thingp t, int index)
+void Game::wid_thing_info_add_dmg_stamina(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (! tp->dmg_chance_d1000_stamina_drain(attack_index)) {
+    return;
+  }
+
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1591,11 +1729,14 @@ void Game::wid_thing_info_add_dmg_stamina(WidPopup *w, Thingp t, int index)
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->dmg_chance_d1000_stamina_drain(index))) / 1000.0) * 100.0);
-      if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
-        w->log(tmp);
+      int chance = (int) (((((float) tp->dmg_chance_d1000_stamina_drain(attack_index))) / 1000.0) * 100.0);
+
+      if (! t->is_player()) {
+        if (chance > 0) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+          w->log(tmp);
+        }
       }
     }
   }
@@ -1606,7 +1747,8 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
-  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
@@ -1760,7 +1902,8 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
-  if (t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
     //
     // Don't display for dead monsters
     //

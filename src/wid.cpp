@@ -5870,8 +5870,8 @@ void wid_key_down(const struct SDL_Keysym *key, int x, int y)
   }
 #endif
   if (wid_focus && ! wid_is_hidden(wid_focus) && (wid_focus->on_key_down)) {
-
     if ((wid_focus->on_key_down)(wid_focus, key)) {
+      CON("WID: key grabbed by focused wid: %s for (%d,%d)", wid_focus->name.c_str(), ascii_mouse_x, ascii_mouse_y);
       sound_play("keypress");
       //
       // Do not raise, gets in the way of popups the callback creates.
@@ -5894,14 +5894,17 @@ void wid_key_down(const struct SDL_Keysym *key, int x, int y)
     return;
   }
 
-  if ((w->on_key_down)(w, key)) {
-    sound_play("click");
-
-    //
-    // Do not raise, gets in the way of popups the callback creates.
-    //
-    // CON("wid did not handle");
-    return;
+  {
+    CON("WID: key over by wid: %s for (%d,%d)", w->name.c_str(), ascii_mouse_x, ascii_mouse_y);
+    if ((w->on_key_down)(w, key)) {
+      CON("WID: key grabbed by wid: %s for (%d,%d)", w->name.c_str(), ascii_mouse_x, ascii_mouse_y);
+      sound_play("click");
+      //
+      // Do not raise, gets in the way of popups the callback creates.
+      //
+      // CON("wid did not handle");
+      return;
+    }
   }
 
 try_parent:
@@ -5914,6 +5917,7 @@ try_parent:
   while (w) {
     if (w->on_key_down) {
       if ((w->on_key_down)(w, key)) {
+        CON("WID: key grabbed by wid: %s for (%d,%d)", w->name.c_str(), ascii_mouse_x, ascii_mouse_y);
         sound_play("click");
         //
         // Do not raise, gets in the way of popups the callback
@@ -5929,7 +5933,10 @@ try_parent:
   //
   // If no-one handles it, feed it to the default handler, the console.
   //
-  wid_receive_unhandled_input(key);
+  {
+    CON("WID: key is unhandled");
+    wid_receive_unhandled_input(key);
+  }
 }
 
 void wid_key_up(const struct SDL_Keysym *key, int x, int y)

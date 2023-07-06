@@ -64,8 +64,8 @@ void Level::display_ascii_projectiles(point tl, point br)
       auto points  = ::line(start, stop);
       auto npoints = points.size();
       auto index   = (int) ((((float) npoints) / ((float) Projectile::max_frames)) * ((float) frame));
-      int  x       = tl.x + get(points, index).x;
-      int  y       = tl.y + get(points, index).y;
+      int  x       = tl.x + get(points, index).x - (MAP_BORDER_ROCK - 1);
+      int  y       = tl.y + get(points, index).y - (MAP_BORDER_ROCK - 1);
 
       color c = tile->ascii_fg_col_value;
       ascii_set(TILE_LAYER_FG_3, x, y, tile->ascii_fg_char);

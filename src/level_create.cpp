@@ -183,7 +183,6 @@ int Level::total_monst_dmg_level(void)
       damage += t->dmg_lightning_dice().max_roll();
       damage += t->dmg_energy_dice().max_roll();
       damage += t->dmg_negation_dice().max_roll();
-      damage += t->dmg_negation_dice().max_roll();
       damage += t->dmg_acid_dice().max_roll();
       damage += t->dmg_water_dice().max_roll();
       damage += t->dmg_digest_dice().max_roll();

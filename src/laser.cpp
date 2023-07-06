@@ -51,6 +51,16 @@ Laser_::Laser_(Levelp level, ThingId thing_id, ThingId victim_id, LaserInfo info
   //
   tiles.resize(max_frames);
 
+  //
+  // Use the preferred name if set.
+  //
+  auto laser_tp = tp_find(name);
+  if (laser_tp) {
+    if (! laser_tp->gfx_targetted_laser().empty()) {
+      name = laser_tp->gfx_targetted_laser();
+    }
+  }
+
   for (int frame = 0; frame < max_frames; frame++) {
     tiles[ frame ].push_back(tile_find_mand(name + "." + std::to_string(frame + 1) + ".start"));
     for (int mid = 0; mid < max_frames - 2; mid++) {
@@ -78,7 +88,7 @@ void Level::new_laser(ThingId id, ThingId victim_id, LaserInfo info, uint32_t du
   //
   // The ascii display is a bit slower, so to avoid not seeing the laser in all its glory, bump the duration.
   //
-  dur *= 4;
+  dur *= 5;
 
   info.ts_stop = now + dur;
 

@@ -15,13 +15,31 @@ def on_targetted(me, x, y):
                 continue
 
             my.place_at(me, "fire", x1, y1)
+            for it in my.level_get_all(me, x1, y1):
+                if my.thing_possible_to_attack(me, it):
+                    my.thing_hit(0, me, it)
 
 
 def on_targetted_radially(me, x, y):
     radius = my.thing_effect_radius_get(me)
     radius += 1
+
     # my.con("targetted radially {} {:X}".format(my.thing_name_get(me), me))
-    my.spawn_things_around_me(me, "fire", radius)
+    for dx in range(-radius, radius + 1):
+        for dy in range(-radius, radius + 1):
+            if dx == 0 and dy == 0:
+                continue
+            x1 = x + dx
+            y1 = y + dy
+            distance = (((x1 - x)**2 + (y1 - y)**2)**0.5)
+            if distance > radius + 0.5:
+                continue
+
+            my.place_at(me, "fire", x1, y1)
+            for it in my.level_get_all(me, x1, y1):
+                if my.thing_possible_to_attack(me, it):
+                    my.thing_hit(0, me, it)
+
     my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
 
 
@@ -83,6 +101,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.dmg_received_doubled_from_cold(self, True)
     my.effect_has_blast_radius(self, True)
     my.environ_dislikes_water(self, 100)
+    my.dmg_chance_d1000_fire(self, 1, 1000)
+    my.dmg_fire_dice(self, "1d10+10")
+    my.dmg_num_of_attacks(self, 1)
     my.equip_carry_anim(self, "staff_fire_carry")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
@@ -91,10 +112,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
-    my.gfx_targetted_projectile(self, "projectile_fire")
+    my.gfx_targetted_projectile(self, "staff_projectile_fire")
     my.gold_value_dice(self, "300")
     my.health_initial_dice(self, "20+1d10")
-    my.health_initial_dice(self, "50")
     my.is_able_to_be_teleported(self, True)
     my.is_able_to_fall(self, True)
     # my.is_able_to_spawn_things(self, False) else we end up owning fire
