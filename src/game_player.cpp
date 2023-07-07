@@ -191,7 +191,7 @@ void Game::place_player(void)
         auto w = level->thing_new("staff_lightning", point(x, y));
         t->carry(w, carry_options);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("staff_fire", point(x, y));
         // w->enchant_randomly();
         // w->enchant_randomly();
@@ -335,7 +335,7 @@ void Game::place_player(void)
         auto w = level->thing_new("wooden_cross", point(x, y));
         b->carry(w, carry_options);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_energy", point(x, y));
         t->carry(w, carry_options);
         t->enchant_without_stone(w);

@@ -17,9 +17,9 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.collision_check(self, True)
-    my.gfx_ascii_shown(self, True)
-    my.dmg_energy_dice(self, "1d6")
     my.dmg_chance_d1000_energy(self, 0, 1000)
+    my.dmg_energy_dice(self, "1d6")
+    my.gfx_ascii_shown(self, True)
     my.is_able_to_be_teleported(self, True)
     my.is_dead_on_falling(self, True)
     my.is_loggable(self, True)

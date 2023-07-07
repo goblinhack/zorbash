@@ -641,7 +641,7 @@ std::initializer_list< std::string > tps = {
     "staff_lightning_laser_fork",
     "staff_negation",
     "staff_negation_carry",
-    "staff_negation_laser",
+    "laser_negation",
     "staff_negation_radial",
     "steak",
     "steam",
