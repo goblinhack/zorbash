@@ -187,7 +187,7 @@ void Game::place_player(void)
         auto w = level->thing_new("amulet_teleport_attack", point(x, y - 2));
         t->carry(w, carry_options);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_lightning", point(x, y));
         t->carry(w, carry_options);
       }

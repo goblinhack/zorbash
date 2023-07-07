@@ -31,7 +31,7 @@ def on_want_to_shoot_at(me, target, target_x, target_y):  # Return True on doing
         return False
     if my.pcg_randint(1, 10) < 8:
         my.thing_sound_play_channel(me, my.CHANNEL_WEAPON, "lightning_a")
-        my.thing_shoot_at(me, "staff_lightning_laser", target)
+        my.thing_shoot_at(me, "laser_lightning", target)
         return True
     return False
 

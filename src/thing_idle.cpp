@@ -16,8 +16,9 @@ bool Thing::idle_check(void)
 
   if (! std::empty(on_idle_tick_freq_dice_str())) {
     auto roll = on_idle_tick_freq();
-    // con("current: %d roll: %d roll last-did-something: %d", game->tick_current, tick_last_did_something(), roll);
+    // con("current:%d last-did-something:%d roll:%d", game->tick_current, tick_last_did_something(), roll);
     if (game->tick_current - tick_last_did_something() >= roll) {
+      // con("do it: %d last-did-something:%d roll:%d", game->tick_current, tick_last_did_something(), roll);
       auto d   = on_idle_tick_freq_dice();
       auto mod = d.python_mod;
 

@@ -2,16 +2,6 @@ import my
 import tp
 
 
-def on_targetted(me, x, y):
-    # my.con("targetted {} {:X}".format(my.thing_name_get(me), me))
-
-    my.thing_sound_play_channel(me, my.CHANNEL_WEAPON, "lightning_a")
-    my.place_at(me, "explosion_fire", x, y)
-    for it in my.level_get_all(me, x, y):
-        if my.thing_possible_to_attack(me, it):
-            my.thing_hit(0, me, it)
-
-
 def on_idle(me, x, y):
     #
     # Random recharge
@@ -41,7 +31,8 @@ def explode(me, x, y):
 
     my.spawn_at_my_position(me, "explosion_major")
     my.spawn_set_fire_to_things_around_me(me, "fire")
-    on_targetted(me, x, y)
+    my.thing_sound_play_channel(me, my.CHANNEL_WEAPON, "lightning_a")
+    my.place_at(me, "explosion_fire", x, y)
     my.thing_dead(me, "exploded")
 
 
@@ -73,9 +64,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.chance_d10000_set_on_fire(self, 5000)
     my.charge_count(self, 3)
     my.collision_hit_priority(self, 6)
-    my.dmg_chance_d1000_lightning(self, 0, 1000)
-    my.dmg_lightning_dice(self, "1d20+8")
     my.equip_carry_anim(self, "staff_lightning_carry")
+    my.dmg_chance_d1000_lightning(self, 0, 1000)  # for electric eel attack
+    my.dmg_lightning_dice(self, "1d10+4")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
@@ -83,7 +74,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
-    my.gfx_targetted_laser(self, "staff_lightning_laser")
+    my.gfx_targetted_laser(self, "laser_lightning")
     my.gold_value_dice(self, "300")
     my.health_initial_dice(self, "20+1d10")
     my.is_able_to_attack_owner(self, True)
@@ -122,7 +113,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_fall_do(self, "me.on_fall()")
     my.on_hit_and_now_dead_do(self, "me.on_hit_and_now_dead()")
     my.on_idle_tick_freq_dice(self, "1d200+200:me.on_idle()")
-    my.on_targetted_do(self, "me.on_targetted()")
     my.on_thrown_do(self, "me.on_thrown()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.range_max(self, 7)

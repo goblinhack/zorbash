@@ -1,6 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- Sword of duck summoning                                                                                                                      -->
+<!-- Dogman sword lags                                                                                                                            -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

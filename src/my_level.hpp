@@ -454,10 +454,6 @@ public:
       auto t = i->second;                                                                                            \
       /* LOG("ID %08x -> %p", i->first.id, t); */                                                                    \
       i++;                                                                                                           \
-      if (t->is_hidden) {                                                                                            \
-        t->tick_last_did_something_set(game->tick_current);                                                          \
-        continue;                                                                                                    \
-      }                                                                                                              \
                                                                                                                      \
     /* verify(MTYPE_THING, t); */
 

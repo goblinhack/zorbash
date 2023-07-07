@@ -67,7 +67,7 @@ def on_hit_dodge_do(me, hitter, x, y):
 
 def on_want_to_shoot_at(me, target, target_x, target_y):  # Return True on doing an action
     if my.pcg_randint(1, 10) < 3:
-        my.thing_shoot_at(me, "staff_lightning_laser", target)
+        my.thing_shoot_at(me, "laser_lightning", target)
         return True
     return False
 
