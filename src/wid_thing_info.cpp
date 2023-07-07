@@ -1873,7 +1873,10 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
       snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", def_total, stat_to_bonus_slash_str(def_total).c_str());
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense                %6s", tmp2);
       w->log(tmp);
-    } else if (def) {
+    } else if (def != 10) {
+      //
+      // No point showing the default value if say this is a staff and it provides no bonus essentially.
+      //
       char tmp2[ MAXSHORTSTR ];
       snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", def_total, stat_to_bonus_slash_str(def_total).c_str());
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense                %6s", tmp2);
@@ -2028,7 +2031,10 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
       snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", att_total, stat_to_bonus_slash_str(att_total).c_str());
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack                 %6s", tmp2);
       w->log(tmp);
-    } else if (att) {
+    } else if (att != 10) {
+      //
+      // No point showing the default value if say this is a staff and it provides no bonus essentially.
+      //
       char tmp2[ MAXSHORTSTR ];
       snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", att_total, stat_to_bonus_slash_str(att_total).c_str());
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack                 %6s", tmp2);

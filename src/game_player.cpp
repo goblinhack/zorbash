@@ -50,10 +50,10 @@ void Game::place_player(void)
         t->carry(k, carry_options);
       }
       if (1) {
-        auto w = level->thing_new("sword_rusty", point(x, y));
+        auto w = level->thing_new("sword_wood", point(x, y));
         t->carry(w, carry_options);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("dagger", point(x, y));
         t->carry(w, carry_options);
       }
@@ -98,7 +98,7 @@ void Game::place_player(void)
         auto w = level->thing_new("sword_plutonium", point(x, y));
         t->carry(w, carry_options);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_descent", point(x, y));
         t->carry(w, carry_options);
       }
@@ -310,7 +310,7 @@ void Game::place_player(void)
         auto b = level->thing_new("enchantstone", point(x, y));
         t->carry(b, carry_options);
       }
-      if (1) {
+      if (0) {
         {
           for (auto sk = 0; sk < 1; sk++) {
             auto b = level->thing_new("skillstone", point(x, y));
@@ -318,7 +318,7 @@ void Game::place_player(void)
           }
         }
       }
-      if (1) {
+      if (0) {
         {
           for (auto sk = 0; sk < 1; sk++) {
             auto b = level->thing_new("spellbook", point(x, y));
@@ -335,7 +335,7 @@ void Game::place_player(void)
         auto w = level->thing_new("wooden_cross", point(x, y));
         b->carry(w, carry_options);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("staff_energy", point(x, y));
         t->carry(w, carry_options);
         t->enchant_without_stone(w);
@@ -348,7 +348,7 @@ void Game::place_player(void)
         auto w = level->thing_new("map_beast", point(x, y));
         t->carry(w, carry_options);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("staff_negation", point(x, y));
         t->carry(w, carry_options);
       }
