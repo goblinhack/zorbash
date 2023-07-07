@@ -1436,17 +1436,33 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
             msg("%%fg=red$You are killed by a barrel!%%fg=reset$");
           }
         } else if (hitter->is_weapon()) {
-          msg("%%fg=red$%s cuts you down with %s!%%fg=reset$", real_hitter->text_The().c_str(),
-              hitter->text_the(false).c_str());
+          if (hitter == real_hitter) {
+            msg("%%fg=red$%s cuts you down!%%fg=reset$", real_hitter->text_The().c_str());
+          } else {
+            msg("%%fg=red$%s cuts you down with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                hitter->text_the(false).c_str());
+          }
         } else if (hitter->is_laser()) {
-          msg("%%fg=red$%s zaps you apart with %s!%%fg=reset$", real_hitter->text_The().c_str(),
-              hitter->text_the().c_str());
+          if (hitter == real_hitter) {
+            msg("%%fg=red$%s zaps you apart!%%fg=reset$", real_hitter->text_The().c_str());
+          } else {
+            msg("%%fg=red$%s zaps you apart with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                hitter->text_the().c_str());
+          }
         } else if (hitter->is_magical() && hitter->is_item()) {
-          msg("%%fg=red$%s blasts you into pieces with %s!%%fg=reset$", real_hitter->text_The().c_str(),
-              hitter->text_the().c_str());
+          if (hitter == real_hitter) {
+            msg("%%fg=red$%s blasts you into pieces!%%fg=reset$", real_hitter->text_The().c_str());
+          } else {
+            msg("%%fg=red$%s blasts you into pieces with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                hitter->text_the().c_str());
+          }
         } else if (hitter->is_projectile() || hitter->is_laser()) {
-          msg("%%fg=red$%s blasted you into bits with %s!%%fg=reset$", real_hitter->text_The().c_str(),
-              hitter->text_the().c_str());
+          if (hitter == real_hitter) {
+            msg("%%fg=red$%s blasted you into bits!%%fg=reset$", real_hitter->text_The().c_str());
+          } else {
+            msg("%%fg=red$%s blasted you into bits with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                hitter->text_the().c_str());
+          }
         } else if (attack_options->attack[ THING_ATTACK_ACID ]) {
           msg("%%fg=red$%s dissolves your body!%%fg=reset$", real_hitter->text_The().c_str());
         } else if (attack_options->attack[ THING_ATTACK_NATURAL ]) {
@@ -1467,11 +1483,19 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
           msg("%%fg=red$You are drowned by %s!%%fg=reset$", real_hitter->text_the().c_str());
         } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
-          msg("%%fg=red$%s strikes you with %s!%%fg=reset$", real_hitter->text_The().c_str(),
-              hitter->text_the().c_str());
+          if (hitter == real_hitter) {
+            msg("%%fg=red$%s strikes you!%%fg=reset$", real_hitter->text_The().c_str());
+          } else {
+            msg("%%fg=red$%s strikes you with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                hitter->text_the().c_str());
+          }
         } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
-          msg("%%fg=red$%s burns you with %s!%%fg=reset$", real_hitter->text_The().c_str(),
-              hitter->text_the().c_str());
+          if (hitter == real_hitter) {
+            msg("%%fg=red$%s burns you!%%fg=reset$", real_hitter->text_The().c_str());
+          } else {
+            msg("%%fg=red$%s burns you with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                hitter->text_the().c_str());
+          }
         } else {
           msg("%%fg=red$%s %s you fatally!%%fg=reset$", real_hitter->text_The().c_str(),
               real_hitter->text_hits().c_str());
@@ -1499,17 +1523,37 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
             msg("%%fg=orange$You are being crushed by a barrel!%%fg=reset$");
           }
         } else if (hitter->is_weapon()) {
-          msg("%%fg=orange$%s hits you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-              dmg_type.c_str(), hitter->text_the(false).c_str());
+          if (hitter == real_hitter) {
+            msg("%%fg=orange$%s hits you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
+                dmg_type.c_str());
+          } else {
+            msg("%%fg=orange$%s hits you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                damage, dmg_type.c_str(), hitter->text_the(false).c_str());
+          }
         } else if (hitter->is_laser()) {
-          msg("%%fg=orange$%s zaps you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-              dmg_type.c_str(), hitter->text_the().c_str());
+          if (hitter == real_hitter) {
+            msg("%%fg=orange$%s zaps you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
+                dmg_type.c_str());
+          } else {
+            msg("%%fg=orange$%s zaps you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                damage, dmg_type.c_str(), hitter->text_the().c_str());
+          }
         } else if (hitter->is_magical() && hitter->is_item()) {
-          msg("%%fg=orange$%s blasts you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
-              damage, dmg_type.c_str(), hitter->text_the().c_str());
+          if (hitter == real_hitter) {
+            msg("%%fg=orange$%s blasts you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
+                dmg_type.c_str());
+          } else {
+            msg("%%fg=orange$%s blasts you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                damage, dmg_type.c_str(), hitter->text_the().c_str());
+          }
         } else if (hitter->is_projectile() || hitter->is_laser()) {
-          msg("%%fg=orange$%s blasted you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
-              damage, dmg_type.c_str(), hitter->text_the().c_str());
+          if (hitter == real_hitter) {
+            msg("%%fg=orange$%s blasted you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
+                dmg_type.c_str());
+          } else {
+            msg("%%fg=orange$%s blasted you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                damage, dmg_type.c_str(), hitter->text_the().c_str());
+          }
         } else if (attack_options->attack[ THING_ATTACK_ACID ]) {
           msg("%%fg=orange$%s burns you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
               dmg_type.c_str());
@@ -1550,8 +1594,13 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           msg("%%fg=orange$%s strikes you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
               damage, dmg_type.c_str(), hitter->text_the().c_str());
         } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
-          msg("%%fg=orange$%s burns you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-              dmg_type.c_str(), hitter->text_the().c_str());
+          if (hitter == real_hitter) {
+            msg("%%fg=orange$%s burns you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
+                dmg_type.c_str());
+          } else {
+            msg("%%fg=orange$%s burns you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                damage, dmg_type.c_str(), hitter->text_the().c_str());
+          }
         } else {
           msg("%%fg=orange$%s %s you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(),
               real_hitter->text_hits().c_str(), damage, dmg_type.c_str());
