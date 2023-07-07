@@ -15,13 +15,34 @@ def on_targetted(me, x, y):
                 continue
 
             my.place_at(me, "block_of_ice", x1, y1)
+            for it in my.level_get_all(me, x1, y1):
+                if my.thing_possible_to_attack(me, it):
+                    my.thing_hit(0, me, it)
+
+    my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
 
 
 def on_targetted_radially(me, x, y):
     radius = my.thing_effect_radius_get(me)
     radius += 1
+
     # my.con("targetted radially {} {:X}".format(my.thing_name_get(me), me))
-    my.spawn_things_around_me(me, "block_of_ice", radius)
+    for dx in range(-radius, radius + 1):
+        for dy in range(-radius, radius + 1):
+            if dx == 0 and dy == 0:
+                continue
+            x1 = x + dx
+            y1 = y + dy
+            distance = (((x1 - x)**2 + (y1 - y)**2)**0.5)
+            if distance > radius + 0.5:
+                continue
+
+            my.place_at(me, "block_of_ice", x1, y1)
+            for it in my.level_get_all(me, x1, y1):
+                if my.thing_possible_to_attack(me, it):
+                    my.thing_hit(0, me, it)
+
+    my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
 
 
 def on_idle(me, x, y):
@@ -52,7 +73,7 @@ def explode(me, x, y):
         my.thing_msg(me, "The staff of ice explodes.")
 
     my.spawn_at_my_position(me, "explosion_major")
-    my.spawn_at_my_position(me, "block_of_ice")
+    on_targetted(me, x, y)
     my.thing_dead(me, "exploded")
 
 
@@ -80,6 +101,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.chance_d10000_set_on_fire(self, 5000)
     my.charge_count(self, 5)
     my.collision_hit_priority(self, 6)
+    my.dmg_chance_d1000_cold(self, 1, 1000)
+    my.dmg_cold_dice(self, "1d10+10")
+    my.dmg_num_of_attacks(self, 1)
     my.dmg_received_doubled_from_fire(self, True)
     my.effect_has_blast_radius(self, True)
     my.environ_dislikes_fire(self, 100)
@@ -91,7 +115,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
-    my.gfx_targetted_projectile(self, "projectile_cold")
+    my.gfx_targetted_projectile(self, "staff_projectile_cold")
     my.gold_value_dice(self, "300")
     my.health_initial_dice(self, "20+1d10")
     my.is_able_to_be_teleported(self, True)
@@ -138,6 +162,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, -10)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 radius")
+    my.text_description_long2(self, "When enchanted is ideal for building igloos.")
     my.text_description_long(self, "Discharges a single ball of ice at an ungrateful recipient...")
     my.text_description_short(self, "A staff of ice.")
     my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
