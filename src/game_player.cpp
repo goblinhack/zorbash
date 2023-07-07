@@ -357,6 +357,7 @@ void Game::place_player(void)
         d->wake("");
       }
       if (0) {
+        level->thing_new("tentacleye", point(x + 1, y + 1));
         level->thing_new("scorpion_death", point(x + 2, y + 1));
         level->thing_new("yeti", point(x + 2, y + 1));
         level->thing_new("mantisman", point(x + 2, y + 1));
@@ -400,7 +401,6 @@ void Game::place_player(void)
         level->thing_new("zorb_priest", point(x + 1, y + 3));
         level->thing_new("mummy_necro", point(x + 1, y));
         level->thing_new("reaper", point(x + 3, y));
-        level->thing_new("tentacleye", point(x + 1, y + 1));
         level->thing_new("tentacleye", point(x + 1, y + 2));
         level->thing_new("zorb_eldster", point(x + 1, y + 3));
         level->thing_new("flameskull", point(x + 1, y + 4));
