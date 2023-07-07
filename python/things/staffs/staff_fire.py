@@ -19,6 +19,8 @@ def on_targetted(me, x, y):
                 if my.thing_possible_to_attack(me, it):
                     my.thing_hit(0, me, it)
 
+    my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
+
 
 def on_targetted_radially(me, x, y):
     radius = my.thing_effect_radius_get(me)
@@ -160,7 +162,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 radius")
     my.text_description_long(self, "Discharges a single fireball at an ungrateful recipient...")
-    my.text_description_short(self, "A staff of fire.")
+    my.text_description_long2(self, "When enchanted, creates a blast radius effect. Ideal for taking out multiple enemies.")
+    my.text_description_long3(self, "Please use responsibly.")
+    my.text_description_short(self, "A staff of fireballs.")
     my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -189,7 +193,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_fire", text_long_name="staff of fire", text_short_name="staff of fire")
+    tp_init(name="staff_fire", text_long_name="staff of fireballs", text_short_name="staff of fireballs")
 
 
 init()

@@ -627,7 +627,15 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
   bool tried_to_attack = false;
   int  attack_count    = 0;
 
-  auto attacks = owner ? owner->dmg_num_of_attacks() : dmg_num_of_attacks();
+  //
+  // For melee attacks, skills can increase the number of attacks
+  // Don't allow skills for melee to increase the number of attacks for magical items.
+  //
+  auto attacks = dmg_num_of_attacks();
+  if (owner && is_weapon()) {
+    attacks = owner->dmg_num_of_attacks();
+  }
+
   dbg("Attack count #%d", attacks);
   TRACE_AND_INDENT();
 

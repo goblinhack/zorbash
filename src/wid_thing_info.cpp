@@ -233,13 +233,6 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     wid_thing_info_add_carry_info(wid_popup_window, t);
   }
 
-  //
-  // Not sure if we will have shops
-  //
-  wid_thing_info_add_gold_value(wid_popup_window, t);
-
-  wid_thing_info_add_spell_cost(wid_popup_window, t);
-
   if (t->is_mimic() && t->is_sleeping) {
     //
     // Do not describe
@@ -286,6 +279,12 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     wid_thing_info_add_charge_count(wid_popup_window, t);
     wid_thing_info_add_danger_level(wid_popup_window, t);
   }
+
+  //
+  // Not sure if we will have shops
+  //
+  wid_thing_info_add_gold_value(wid_popup_window, t);
+  wid_thing_info_add_spell_cost(wid_popup_window, t);
 
   t->show_botcon_description();
 

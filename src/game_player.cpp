@@ -193,6 +193,8 @@ void Game::place_player(void)
       }
       if (1) {
         auto w = level->thing_new("staff_fire", point(x, y));
+        // w->enchant_randomly();
+        // w->enchant_randomly();
         t->carry(w, carry_options);
       }
       if (0) {

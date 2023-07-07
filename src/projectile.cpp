@@ -100,10 +100,6 @@ void Level::new_projectile(ThingId id, ThingId victim_id, ProjectileInfo info, u
   uint32_t now  = time_game_ms();
   info.ts_start = now;
 
-  if (g_opt_ascii) {
-    dur *= 2;
-  }
-
   info.ts_stop = now + dur;
   new_projectiles.push_back(Projectile(this, id, victim_id, info));
 }

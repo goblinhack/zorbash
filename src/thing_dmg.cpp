@@ -21,14 +21,6 @@ int Thing::dmg_num_of_attacks(void)
   }
 
   if (maybe_itemsp()) {
-    FOR_ALL_CARRYING(id)
-    {
-      auto iter = level->thing_find(id);
-      if (iter) {
-        attacks = std::max(attacks, iter->dmg_num_of_attacks());
-      }
-    }
-
     FOR_ALL_BUFFS(id)
     {
       auto iter = level->thing_find(id);
