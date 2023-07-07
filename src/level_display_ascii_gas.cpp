@@ -30,8 +30,8 @@ void Level::display_ascii_gas(point tl, point br, int16_t minx, int16_t miny, in
       }
 
       point p(x, y);
-      int   tx = tl.x + (p.x - minx);
-      int   ty = tl.y + (p.y - miny);
+      int   tx = tl.x + (p.x - minx) - (MAP_BORDER_ROCK - 1);
+      int   ty = tl.y + (p.y - miny) - (MAP_BORDER_ROCK - 1);
 
       ascii_set(TILE_LAYER_FG_1, tx, ty, UNICODE_BLOCK);
 

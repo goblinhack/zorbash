@@ -569,6 +569,9 @@ void Thing::blit_ascii(point tl, point br, point p, bool left_bar)
     return;
   }
 
+  //
+  // If this code changes make sure and update gas, lasers and projectiles for ascii mode.
+  //
   int x = tl.x + (p.x - level->minx) - (MAP_BORDER_ROCK - 1);
   int y = tl.y + (p.y - level->miny) - (MAP_BORDER_ROCK - 1);
 
