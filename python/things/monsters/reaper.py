@@ -74,6 +74,7 @@ def tp_init(name, text_long_name):
     my.is_very_intelligent(self, True)
     my.move_speed(self, 100)
     my.noise_decibels_hearing(self, 0)
+    my.noise_on_moving(self, 0)
     my.normal_placement_rules(self, True)
     my.on_you_nat_attack_attempt_do(self, "me.on_you_nat_attack_attempt()")
     my.rarity(self, my.RARITY_COMMON)  # how rare within this monster class

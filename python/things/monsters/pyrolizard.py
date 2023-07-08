@@ -120,6 +120,7 @@ def tp_init(name, text_long_name):
     my.is_tickable(self, True)
     my.move_speed(self, 100)
     my.noise_decibels_hearing(self, 50)
+    my.noise_on_moving(self, 25)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "1d4")
     my.on_born_do(self, "me.on_born()")

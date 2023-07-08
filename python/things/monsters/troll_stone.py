@@ -107,6 +107,7 @@ def tp_init(name, text_long_name):
     my.is_troll(self, True)
     my.move_speed(self, 50)
     my.noise_decibels_hearing(self, 50)
+    my.noise_on_moving(self, 55)
     my.normal_placement_rules(self, True)
     my.on_born_do(self, "me.on_born()")
     my.on_death_do(self, "me.on_death()")

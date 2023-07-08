@@ -97,6 +97,7 @@ def tp_init(name, text_long_name):
     my.jump_distance(self, 2)
     my.move_speed(self, 25)
     my.noise_decibels_hearing(self, 0)
+    my.noise_on_moving(self, 25)
     my.normal_placement_rules(self, True)
     my.on_born_do(self, "me.on_born()")
     my.on_death_do(self, "me.on_death()")

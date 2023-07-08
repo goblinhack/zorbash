@@ -101,6 +101,7 @@ def tp_init(name, text_long_name):
     my.is_undead(self, True)
     my.move_speed(self, 80)
     my.noise_decibels_hearing(self, 50)
+    my.noise_on_moving(self, 30)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")

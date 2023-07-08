@@ -112,6 +112,7 @@ def tp_init(name, text_long_name):
     my.jump_distance(self, 2)
     my.move_speed(self, 50)
     my.noise_decibels_hearing(self, 10)
+    my.noise_on_moving(self, 25)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "-10")
     my.on_awake_do(self, "me.on_awake()")

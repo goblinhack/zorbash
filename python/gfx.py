@@ -2565,18 +2565,19 @@ def init_tiles_16x16_main():
         "duck3.5",
         "duck3.6",
         "duck3.dead",
+        "jackalope.1",
+        "jackalope.2",
+        "jackalope.3",
+        "jackalope.4",
+        "jackalope.5",
+        "jackalope.6",
+        "jackalope.7",
+        "jackalope.dead",
         "",
         "",
         "",
         "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
+        ############################################################
     ]
 
     my.tile_load_arr_sprites(

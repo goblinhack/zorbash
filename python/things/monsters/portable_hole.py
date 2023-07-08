@@ -48,6 +48,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.light_dist(self, 1)
     my.move_speed(self, 50)
     my.noise_decibels_hearing(self, 5)
+    my.noise_on_moving(self, 1)
     my.normal_placement_rules(self, True)
     my.rarity(self, my.RARITY_UNCOMMON)  # how rare within this monster class
     my.stat_con(self, 10)

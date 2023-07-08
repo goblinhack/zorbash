@@ -1574,12 +1574,12 @@ void Game::wid_thing_info_add_dmg_nat_att(WidPopup *w, Thingp t, int attack_inde
       } else {
         if (min_value == max_value) {
           snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_nat_att_dice_str().c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dmg:%-9s%16s", capitalise(t->dmg_nat_att_type()).c_str(), tmp2);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dmg:%-13s%12s", capitalise(t->dmg_nat_att_type()).c_str(), tmp2);
         } else {
           min_value += t->enchant_count_get();
           max_value += t->enchant_count_get();
           snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_nat_att_dice_str().c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dmg:%-9s%16s", capitalise(t->dmg_nat_att_type()).c_str(), tmp2);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dmg:%-13s%12s", capitalise(t->dmg_nat_att_type()).c_str(), tmp2);
         }
         w->log(tmp);
       }
@@ -2726,6 +2726,13 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
   w->log(danger_level);
 
   auto monst_max_dmg = t->dmg_max();
+
+  monst_max_dmg *= t->dmg_num_of_attacks();
+
+  if (t->move_speed()) {
+    monst_max_dmg *= t->move_speed() / player->move_speed();
+  }
+
   if (monst_max_dmg != 0) {
     auto monst_defeat_count = player->health() / monst_max_dmg;
 
