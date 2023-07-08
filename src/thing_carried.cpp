@@ -250,41 +250,6 @@ void Thing::move_carried_items(void)
     }
   }
 
-  //
-  // Weapons follow also.
-  //
-  FOR_ALL_EQUIP(iter)
-  {
-    auto w = equip_get(iter);
-    if (w) {
-      w->move_to_immediately(curr_at);
-      w->dir = dir;
-    }
-
-    if (equip_id_carry_anim(iter).ok()) {
-      auto w = level->thing_find(equip_id_carry_anim(iter));
-      if (w) {
-        w->move_to(curr_at);
-        w->dir = dir;
-      }
-    }
-
-    //
-    // Don't move the swing animation. This messes up when we have multiple
-    // swings for things like axes, such that this moving animation means
-    // we're not sure where the first swing was.
-    //
-    if (0) {
-      if (equip_id_use_anim(iter).ok()) {
-        auto w = level->thing_find(equip_id_use_anim(iter));
-        if (w) {
-          w->move_to(curr_at);
-          w->dir = dir;
-        }
-      }
-    }
-  }
-
   FOR_ALL_BODYPART(iter)
   {
     if (bodypart_id_get(iter).ok()) {
