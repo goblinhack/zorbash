@@ -81,8 +81,9 @@ int Tp::get_danger_level(void)
   if (is_able_to_teleport_attack()) {
     danger_level *= 2;
   }
-
-  danger_level += aggression_pct() / 10;
+  if (is_able_to_teleport_attack()) {
+    danger_level *= 2;
+  }
 
   danger_level += dmg_melee_dice().max_roll();
   danger_level += dmg_poison_dice().max_roll();
@@ -106,6 +107,8 @@ int Tp::get_danger_level(void)
   //
   // Don't include crush damage as it is non typical
   //
+
+  // danger_level *= dmg_num_of_attacks();
 
   // CON("level %d", danger_level);
   return danger_level;
@@ -215,6 +218,8 @@ int Thing::danger_initial_level(void)
   //
   // Don't include crush damage as it is non typical
   //
+
+  // danger_level *= dmg_num_of_attacks();
 
   return danger_level;
 }
@@ -333,6 +338,8 @@ int Thing::danger_current_level(void)
   if (health() < health_max() / 10) {
     danger_level /= 10;
   }
+
+  // danger_level *= dmg_num_of_attacks();
 
   return danger_level;
 }

@@ -489,6 +489,7 @@ void Game::place_player(void)
         // d->dead("killed");
       }
       // level->thing_new("golem_flesh", point(x + 1, y + 3));
+      // level->thing_new("murder_bunny", point(x + 2, y + 2));
       IF_DEBUG2
       {
         if (0) {

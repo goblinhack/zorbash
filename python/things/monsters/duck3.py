@@ -142,22 +142,22 @@ def tp_init(name, text_long_name):
 
     delay = 200
     my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="yellow",
+            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="brown",
             tile=name + ".1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="yellow",
+            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="brown",
             tile=name + ".2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="yellow",
+            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="brown",
             tile=name + ".3", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="yellow",
+            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="brown",
             tile=name + ".4", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="yellow",
+            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="brown",
             tile=name + ".5", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="yellow",
+            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="brown",
             tile=name + ".6", delay_ms=delay)
 
     my.tile(self,
