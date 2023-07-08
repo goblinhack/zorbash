@@ -64,9 +64,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.chance_d10000_set_on_fire(self, 5000)
     my.charge_count(self, 3)
     my.collision_hit_priority(self, 6)
-    my.equip_carry_anim(self, "staff_lightning_carry")
     my.dmg_chance_d1000_lightning(self, 0, 1000)  # for electric eel attack
     my.dmg_lightning_dice(self, "1d10+4")
+    my.equip_carry_anim(self, "staff_lightning_carry")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)

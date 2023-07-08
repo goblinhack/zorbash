@@ -506,6 +506,7 @@ void Game::place_player(void)
         if (0) {
           level->thing_new("staff_energy", point(x, y + 1));
         }
+        // level->thing_new("duck2", point(x + 3, y + 2));
         // level->thing_new("gargoyle_moving", point(x + 2, y - 5));
         // level->thing_new("rat_giant", point(x - 1, y));
         // level->thing_new("rat_giant", point(x + 1, y));

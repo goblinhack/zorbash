@@ -850,10 +850,10 @@ int Thing::is_unused_flag130(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag130());
 }
-int Thing::is_unused_flag131(void)
+int Thing::is_duck(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag131());
+  return (tp()->is_duck());
 }
 int Thing::spell_cost(void)
 {

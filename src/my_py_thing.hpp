@@ -313,6 +313,7 @@ PyObject *thing_is_door(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_droppable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dry_grass(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dry_grass_trampled(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_duck(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_eater_of_amulets(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_eater_of_armor(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_eater_of_blood(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -566,7 +567,6 @@ PyObject *thing_is_unused_flag128(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag129(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag12(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag130(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag131(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag13(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag142(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag14(PyObject *obj, PyObject *args, PyObject *keywds);

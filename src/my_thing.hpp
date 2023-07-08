@@ -659,9 +659,9 @@ public:
   bool spell_add(Tpp what);
   bool spellbox_id_insert(Thingp what);
   bool spellbox_id_remove(Thingp what);
+  bool spell_can_use(Thingp);
   bool spell_remove(Thingp it);
   bool spell_use(Thingp it);
-  bool spell_can_use(Thingp);
   bool state_idle(Thingp threat, int minx, int miny, int maxx, int maxy);
   bool state_moving(void);
   bool state_open_inventory(void);
@@ -1523,6 +1523,7 @@ public:
   int is_droppable(void);
   int is_dry_grass_trampled(void);
   int is_dry_grass(void);
+  int is_duck(void);
   int is_eater_of_amulets(void);
   int is_eater_of_armor(void);
   int is_eater_of_blood(void);
@@ -1781,7 +1782,6 @@ public:
   int is_unused_flag129(void);
   int is_unused_flag12(void);
   int is_unused_flag130(void);
-  int is_unused_flag131(void);
   int is_unused_flag13(void);
   int is_unused_flag142(void);
   int is_unused_flag14(void);

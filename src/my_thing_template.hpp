@@ -410,6 +410,7 @@ private:
   int _is_droppable {};
   int _is_dry_grass {};
   int _is_dry_grass_trampled {};
+  int _is_duck {};
   int _is_eater_of_amulets {};
   int _is_eater_of_armor {};
   int _is_eater_of_blood {};
@@ -670,7 +671,6 @@ private:
   int _is_unused_flag129 {};
   int _is_unused_flag13 {};
   int _is_unused_flag130 {};
-  int _is_unused_flag131 {};
   int _is_unused_flag14 {};
   int _is_unused_flag142 {};
   int _is_unused_flag15 {};
@@ -1745,6 +1745,7 @@ public:
   int is_droppable(void) const;
   int is_dry_grass_trampled(void) const;
   int is_dry_grass(void) const;
+  int is_duck(void) const;
   int is_eater_of_amulets(void) const;
   int is_eater_of_armor(void) const;
   int is_eater_of_blood(void) const;
@@ -2002,7 +2003,6 @@ public:
   int is_unused_flag129(void) const;
   int is_unused_flag12(void) const;
   int is_unused_flag130(void) const;
-  int is_unused_flag131(void) const;
   int is_unused_flag13(void) const;
   int is_unused_flag142(void) const;
   int is_unused_flag14(void) const;
@@ -2501,6 +2501,7 @@ public:
   void is_droppable_set(int v);
   void is_dry_grass_set(int v);
   void is_dry_grass_trampled_set(int v);
+  void is_duck_set(int v);
   void is_eater_of_amulets_set(int v);
   void is_eater_of_armor_set(int v);
   void is_eater_of_blood_set(int v);
@@ -2758,7 +2759,6 @@ public:
   void is_unused_flag129_set(int v);
   void is_unused_flag12_set(int v);
   void is_unused_flag130_set(int v);
-  void is_unused_flag131_set(int v);
   void is_unused_flag13_set(int v);
   void is_unused_flag142_set(int v);
   void is_unused_flag14_set(int v);

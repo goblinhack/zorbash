@@ -500,6 +500,7 @@ int Tp::is_door(void) const { return _is_door; }
 int Tp::is_droppable(void) const { return _is_droppable; }
 int Tp::is_dry_grass_trampled(void) const { return _is_dry_grass_trampled; }
 int Tp::is_dry_grass(void) const { return _is_dry_grass; }
+int Tp::is_duck(void) const { return _is_duck; }
 int Tp::is_eater_of_amulets(void) const { return _is_eater_of_amulets; }
 int Tp::is_eater_of_armor(void) const { return _is_eater_of_armor; }
 int Tp::is_eater_of_blood(void) const { return _is_eater_of_blood; }
@@ -757,7 +758,6 @@ int Tp::is_unused_flag128(void) const { return _is_unused_flag128; }
 int Tp::is_unused_flag129(void) const { return _is_unused_flag129; }
 int Tp::is_unused_flag12(void) const { return _is_unused_flag12; }
 int Tp::is_unused_flag130(void) const { return _is_unused_flag130; }
-int Tp::is_unused_flag131(void) const { return _is_unused_flag131; }
 int Tp::is_unused_flag13(void) const { return _is_unused_flag13; }
 int Tp::is_unused_flag142(void) const { return _is_unused_flag142; }
 int Tp::is_unused_flag14(void) const { return _is_unused_flag14; }
@@ -1256,6 +1256,7 @@ void Tp::is_door_set(int v) { _is_door = v; }
 void Tp::is_droppable_set(int v) { _is_droppable = v; }
 void Tp::is_dry_grass_set(int v) { _is_dry_grass = v; }
 void Tp::is_dry_grass_trampled_set(int v) { _is_dry_grass_trampled = v; }
+void Tp::is_duck_set(int v) { _is_duck = v; }
 void Tp::is_eater_of_amulets_set(int v) { _is_eater_of_amulets = v; }
 void Tp::is_eater_of_armor_set(int v) { _is_eater_of_armor = v; }
 void Tp::is_eater_of_blood_set(int v) { _is_eater_of_blood = v; }
@@ -1513,7 +1514,6 @@ void Tp::is_unused_flag128_set(int v) { _is_unused_flag128 = v; }
 void Tp::is_unused_flag129_set(int v) { _is_unused_flag129 = v; }
 void Tp::is_unused_flag12_set(int v) { _is_unused_flag12 = v; }
 void Tp::is_unused_flag130_set(int v) { _is_unused_flag130 = v; }
-void Tp::is_unused_flag131_set(int v) { _is_unused_flag131 = v; }
 void Tp::is_unused_flag13_set(int v) { _is_unused_flag13 = v; }
 void Tp::is_unused_flag142_set(int v) { _is_unused_flag142 = v; }
 void Tp::is_unused_flag14_set(int v) { _is_unused_flag14 = v; }

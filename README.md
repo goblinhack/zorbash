@@ -1,7 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- Sword of duck summoning                                                                                                                      -->
-<!-- Dogman sword lags                                                                                                                            -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -194,7 +193,7 @@ Content:
 - Multiple skill trees
 - Looking for feedback
 <!-- begin type marker -->
-- 103 x monsters
+- 106 x monsters
 - 52 x food
 - 20 x treasure
 - 13 x weapons
