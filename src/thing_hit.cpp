@@ -1684,11 +1684,14 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
             real_hitter->msg("You tire %s for %d %sdamage with %s.", text_the().c_str(), damage, dmg_type.c_str(),
                              hitter->text_the().c_str());
           } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
-            real_hitter->msg("You are drained %s for %d %sdamage with %s.", text_the().c_str(), damage,
-                             dmg_type.c_str(), hitter->text_the().c_str());
+            real_hitter->msg("You drain %s for %d %sdamage with %s.", text_the().c_str(), damage, dmg_type.c_str(),
+                             hitter->text_the().c_str());
+          } else if (hitter->is_sword()) {
+            real_hitter->msg("You slash %s for %d %sdamage with %s.", text_the().c_str(), damage, dmg_type.c_str(),
+                             hitter->text_the().c_str());
           } else if (hitter->is_weapon()) {
-            real_hitter->msg("You are drained %s for %d %sdamage with %s.", text_the().c_str(), damage,
-                             dmg_type.c_str(), hitter->text_the().c_str());
+            real_hitter->msg("You hit %s for %d %sdamage with %s.", text_the().c_str(), damage, dmg_type.c_str(),
+                             hitter->text_the().c_str());
           } else if (hitter->is_laser()) {
             real_hitter->msg("You zap %s for %d %sdamage with %s.", text_the().c_str(), damage, dmg_type.c_str(),
                              hitter->text_the().c_str());
