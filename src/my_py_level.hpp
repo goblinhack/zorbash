@@ -167,7 +167,7 @@ PyObject *level_is_item_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_item_carrier_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_item_collector_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_item_organic_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_item_targetted_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_item_targeted_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_key_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_key_special_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_lava_at(PyObject *obj, PyObject *args, PyObject *keywds);

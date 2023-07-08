@@ -9,7 +9,7 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.gfx_ascii_shown(self, True)
-    my.gfx_targetted_projectile(self, "projectile_cold")
+    my.gfx_targeted_projectile(self, "projectile_cold")
     my.is_able_to_be_teleported(self, True)
     my.is_cold(self, True)
     my.is_loggable(self, True)

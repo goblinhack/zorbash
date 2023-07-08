@@ -272,11 +272,11 @@ bool Thing::throw_at(Thingp what, Thingp target)
         //
         // Ascii animations happen inside the level as projectils
         //
-        if (! what->gfx_targetted_projectile().empty()) {
+        if (! what->gfx_targeted_projectile().empty()) {
           //
           // Fire the ascii projectile which should not really interact.
           //
-          projectile_shoot_at(what, what->gfx_targetted_projectile(), throw_at);
+          projectile_shoot_at(what, what->gfx_targeted_projectile(), throw_at);
 
           //
           // Make sure the thrown item appears.
@@ -292,11 +292,11 @@ bool Thing::throw_at(Thingp what, Thingp target)
         //
         // Ascii animations happen inside the level as projectils
         //
-        if (! what->gfx_targetted_projectile().empty()) {
+        if (! what->gfx_targeted_projectile().empty()) {
           //
           // Fire the ascii projectile which should not really interact.
           //
-          projectile_shoot_at(what, what->gfx_targetted_projectile(), throw_at);
+          projectile_shoot_at(what, what->gfx_targeted_projectile(), throw_at);
 
           //
           // Make sure the thrown item appears.

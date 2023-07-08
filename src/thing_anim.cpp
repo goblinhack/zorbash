@@ -946,14 +946,14 @@ const std::string &Thing::gfx_anim_use(void)
   return (tp()->gfx_anim_use());
 }
 
-const std::string &Thing::gfx_targetted_laser(void)
+const std::string &Thing::gfx_targeted_laser(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_targetted_laser());
+  return (tp()->gfx_targeted_laser());
 }
 
-const std::string &Thing::gfx_targetted_radial(void)
+const std::string &Thing::gfx_targeted_radial(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_targetted_radial());
+  return (tp()->gfx_targeted_radial());
 }

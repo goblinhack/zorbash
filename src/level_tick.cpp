@@ -745,12 +745,6 @@ void Level::update_all_ticks(void)
 {
   TRACE_NO_INDENT();
 
-  FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
-  {
-    for (auto &i : interesting_things) {
-      auto t = i.second;
-      t->update_tick();
-    }
-  }
+  FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) { t->update_tick(); }
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
 }

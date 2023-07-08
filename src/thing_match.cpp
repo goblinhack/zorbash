@@ -297,7 +297,7 @@ bool Tp::matches(const std::string &what)
   if (is_item_carrier() && (what == "is_item_carrier")) { return true; }
   if (is_item_collector() && (what == "is_item_collector")) { return true; }
   if (is_item_organic() && (what == "is_item_organic")) { return true; }
-  if (is_item_targetted() && (what == "is_item_targetted")) { return true; }
+  if (is_item_targeted() && (what == "is_item_targeted")) { return true; }
   if (is_item() && (what == "is_item")) { return true; }
   if (is_kept_after_final_use() && (what == "is_kept_after_final_use")) { return true; }
   if (is_key_special() && (what == "is_key_special")) { return true; }
@@ -897,7 +897,7 @@ bool Thing::matches(const std::string &what)
   if (is_item_carrier() && (what == "is_item_carrier")) { return true; }
   if (is_item_collector() && (what == "is_item_collector")) { return true; }
   if (is_item_organic() && (what == "is_item_organic")) { return true; }
-  if (is_item_targetted() && (what == "is_item_targetted")) { return true; }
+  if (is_item_targeted() && (what == "is_item_targeted")) { return true; }
   if (is_item() && (what == "is_item")) { return true; }
   if (is_kept_after_final_use() && (what == "is_kept_after_final_use")) { return true; }
   if (is_key_special() && (what == "is_key_special")) { return true; }
@@ -1491,7 +1491,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_item_collector") { return &Thing::is_item_collector; }
   if (what == "is_item_organic") { return &Thing::is_item_organic; }
   if (what == "is_item") { return &Thing::is_item; }
-  if (what == "is_item_targetted") { return &Thing::is_item_targetted; }
+  if (what == "is_item_targeted") { return &Thing::is_item_targeted; }
   if (what == "is_kept_after_final_use") { return &Thing::is_kept_after_final_use; }
   if (what == "is_key") { return &Thing::is_key; }
   if (what == "is_key_special") { return &Thing::is_key_special; }

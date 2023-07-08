@@ -59,7 +59,7 @@ void Level::display_ascii_projectiles(point tl, point br)
     if (tile) {
       //
       // Draw an ascii line and then find where we are in that line. This is so the path for the projectile
-      // takes the same path as we targetted.
+      // takes the same path as we targeted.
       //
       auto points  = ::line(start, stop);
       auto npoints = points.size();

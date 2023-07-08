@@ -87,7 +87,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
         // e.g. boots of teleport trying to enter a wall ?
         //
         auto item = game->request_to_use_item;
-        if (item && item->is_item_targetted()) {
+        if (item && item->is_item_targeted()) {
           player->msg("You cannot target that location.");
           return true;
         }
@@ -107,12 +107,12 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
       //
       // The laser name is provided by the likes of wand
       //
-      if (! item->gfx_targetted_laser().empty()) {
-        player->laser_shoot_at(item, item->gfx_targetted_laser(), level->cursor->curr_at);
-      } else if (! item->gfx_targetted_projectile().empty()) {
-        player->projectile_shoot_at(item, item->gfx_targetted_projectile(), level->cursor->curr_at);
-      } else if (item->is_item_targetted()) {
-        player->item_targetted_use_at(item, level->cursor->curr_at);
+      if (! item->gfx_targeted_laser().empty()) {
+        player->laser_shoot_at(item, item->gfx_targeted_laser(), level->cursor->curr_at);
+      } else if (! item->gfx_targeted_projectile().empty()) {
+        player->projectile_shoot_at(item, item->gfx_targeted_projectile(), level->cursor->curr_at);
+      } else if (item->is_item_targeted()) {
+        player->item_targeted_use_at(item, level->cursor->curr_at);
       } else {
         TOPCON("Unknown beam weapon: %s.", item->text_the().c_str());
       }

@@ -22,7 +22,7 @@ Laser_::Laser_(Levelp level, ThingId thing_id, ThingId victim_id, LaserInfo info
   if (t->is_laser()) {
     name = t->tp()->name();
   } else {
-    name = t->gfx_targetted_laser();
+    name = t->gfx_targeted_laser();
     if (name.empty()) {
       t->err("no laser name");
       return;
@@ -56,8 +56,8 @@ Laser_::Laser_(Levelp level, ThingId thing_id, ThingId victim_id, LaserInfo info
   //
   auto laser_tp = tp_find(name);
   if (laser_tp) {
-    if (! laser_tp->gfx_targetted_laser().empty()) {
-      name = laser_tp->gfx_targetted_laser();
+    if (! laser_tp->gfx_targeted_laser().empty()) {
+      name = laser_tp->gfx_targeted_laser();
     }
   }
 

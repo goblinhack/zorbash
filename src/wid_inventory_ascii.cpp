@@ -250,17 +250,17 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
   //
   // Highlight the thing we're over, or the selected thing with preference.
   //
-  Thingp item_option = wid_inventory_thing_over;
+  Thingp item = wid_inventory_thing_over;
   if (wid_inventory_thing_selected) {
-    item_option = wid_inventory_thing_selected;
+    item = wid_inventory_thing_selected;
   }
 
-  if (item_option) {
+  if (item) {
     int y_at  = 25;
     int x_off = 22;
     int width = 21;
 
-    if (player->can_eat(item_option)) {
+    if (player->can_eat(item)) {
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;
       auto w = wid_new_square_button(p, "eat");
@@ -275,9 +275,9 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
       wid_set_pos(w, tl, br);
       wid_set_text(w, "Eat");
       y_at += 2;
-    } else if (! item_option->gfx_targetted_laser().empty()) {
+    } else if (! item->gfx_targeted_laser().empty()) {
       TRACE_AND_INDENT();
-      if (item_option->charge_count()) {
+      if (item->charge_count()) {
         auto p = wid_inventory_window;
         auto w = wid_new_square_button(p, "use");
 
@@ -292,7 +292,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
         wid_set_text(w, "Use (choose target)");
         y_at += 2;
       }
-    } else if (item_option->is_able_to_be_equipped() && ! player->is_equipped(item_option)) {
+    } else if (item->is_able_to_be_equipped() && ! player->is_equipped(item)) {
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;
       auto w = wid_new_square_button(p, "use");
@@ -305,31 +305,31 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
       wid_set_style(w, box_style);
       wid_set_on_mouse_up(w, wid_inventory_item_option_use);
       wid_set_pos(w, tl, br);
-      if (item_option->is_weapon()) {
+      if (item->is_weapon()) {
         wid_set_text(w, "Equip");
-      } else if (item_option->is_potion()) {
+      } else if (item->is_potion()) {
         wid_set_text(w, "Drink");
-      } else if (item_option->is_staff()) {
+      } else if (item->is_staff()) {
         wid_set_text(w, "Shoot");
-      } else if (item_option->is_ring()) {
+      } else if (item->is_ring()) {
         wid_set_text(w, "Wear");
-      } else if (item_option->is_shield()) {
+      } else if (item->is_shield()) {
         wid_set_text(w, "Wield");
-      } else if (item_option->is_gauntlet()) {
+      } else if (item->is_gauntlet()) {
         wid_set_text(w, "Wear)");
-      } else if (item_option->is_armor()) {
+      } else if (item->is_armor()) {
         wid_set_text(w, "Wear");
-      } else if (item_option->is_cloak()) {
+      } else if (item->is_cloak()) {
         wid_set_text(w, "Wear");
-      } else if (item_option->is_boots()) {
+      } else if (item->is_boots()) {
         wid_set_text(w, "Wear");
-      } else if (item_option->is_amulet()) {
+      } else if (item->is_amulet()) {
         wid_set_text(w, "Wear)");
       } else {
         wid_set_text(w, "Use");
       }
       y_at += 2;
-    } else if (item_option->is_able_to_be_equipped() && player->is_equipped(item_option)) {
+    } else if (item->is_able_to_be_equipped() && player->is_equipped(item)) {
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;
       auto w = wid_new_square_button(p, "use");
@@ -342,23 +342,23 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
       wid_set_style(w, box_style);
       wid_set_on_mouse_up(w, wid_inventory_item_option_unequip);
       wid_set_pos(w, tl, br);
-      if (item_option->is_weapon()) {
+      if (item->is_weapon()) {
         wid_set_text(w, "Unwield");
-      } else if (item_option->is_staff()) {
+      } else if (item->is_staff()) {
         wid_set_text(w, "Unwield");
-      } else if (item_option->is_ring()) {
+      } else if (item->is_ring()) {
         wid_set_text(w, "Remove");
-      } else if (item_option->is_shield()) {
+      } else if (item->is_shield()) {
         wid_set_text(w, "Unwield");
-      } else if (item_option->is_gauntlet()) {
+      } else if (item->is_gauntlet()) {
         wid_set_text(w, "Remove)");
-      } else if (item_option->is_armor()) {
+      } else if (item->is_armor()) {
         wid_set_text(w, "Remove");
-      } else if (item_option->is_cloak()) {
+      } else if (item->is_cloak()) {
         wid_set_text(w, "Remove");
-      } else if (item_option->is_boots()) {
+      } else if (item->is_boots()) {
         wid_set_text(w, "Remove");
-      } else if (item_option->is_amulet()) {
+      } else if (item->is_amulet()) {
         wid_set_text(w, "Remove");
       } else {
         wid_set_text(w, "Unwield");
@@ -369,32 +369,51 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
     //
     // Some swords can be used, e.g. duck summoning!
     //
-    if (item_option->is_usable()) {
-      //
-      // For example boots of teleport or an enchantstone
-      //
-      TRACE_AND_INDENT();
-      auto p = wid_inventory_window;
-      auto w = wid_new_square_button(p, "use");
+    if (item->is_usable()) {
+      if (item->initial_charge_count() && ! item->charge_count()) {
+        //
+        // Can no longer be used
+        //
+        TRACE_AND_INDENT();
+        auto p = wid_inventory_window;
+        auto w = wid_new_square_button(p, "use");
 
-      point tl = make_point(x_off, y_at);
-      point br = make_point(x_off + width, y_at);
-      wid_set_mode(w, WID_MODE_OVER);
-      wid_set_style(w, box_highlight_style);
-      wid_set_mode(w, WID_MODE_NORMAL);
-      wid_set_style(w, box_style);
-      wid_set_on_mouse_up(w, wid_inventory_item_option_use);
-      wid_set_pos(w, tl, br);
-      wid_set_text(w, "Use");
-      y_at += 2;
+        point tl = make_point(x_off, y_at);
+        point br = make_point(x_off + width, y_at);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_style(w, box_highlight_style);
+        wid_set_mode(w, WID_MODE_NORMAL);
+        wid_set_style(w, box_style);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "%%fg=red$Spent");
+        y_at += 2;
+      } else {
+        //
+        // For example boots of teleport or an enchantstone
+        //
+        TRACE_AND_INDENT();
+        auto p = wid_inventory_window;
+        auto w = wid_new_square_button(p, "use");
+
+        point tl = make_point(x_off, y_at);
+        point br = make_point(x_off + width, y_at);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_style(w, box_highlight_style);
+        wid_set_mode(w, WID_MODE_NORMAL);
+        wid_set_style(w, box_style);
+        wid_set_on_mouse_up(w, wid_inventory_item_option_use);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "Use");
+        y_at += 2;
+      }
     }
 
     //
     // "You shall not pass" mode
     //
-    if (item_option->is_target_radial()) {
+    if (item->is_target_radial()) {
       TRACE_AND_INDENT();
-      if (item_option->charge_count()) {
+      if (item->charge_count()) {
         auto p = wid_inventory_window;
         auto w = wid_new_square_button(p, "use");
 
@@ -411,7 +430,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
       }
     }
 
-    if (item_option->is_throwable()) {
+    if (item->is_throwable()) {
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;
       auto w = wid_new_square_button(p, "throw");

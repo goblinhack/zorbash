@@ -496,7 +496,7 @@ private:
   int _is_item_carrier0 {};
   int _is_item_collector {};
   int _is_item_organic {};
-  int _is_item_targetted {};
+  int _is_item_targeted {};
   int _is_kept_after_final_use {};
   int _is_key {};
   int _is_key_special {};
@@ -890,9 +890,9 @@ private:
   std::string _dmg_water_dice_str;
   std::string _equip_carry_anim;
   std::string _gfx_anim_use;
-  std::string _gfx_targetted_laser;
-  std::string _gfx_targetted_projectile;
-  std::string _gfx_targetted_radial;
+  std::string _gfx_targeted_laser;
+  std::string _gfx_targeted_projectile;
+  std::string _gfx_targeted_radial;
   std::string _gold_value_dice_str;
   std::string _health_initial_dice_str;
   std::string _health_regenerate_amount_dice_str;
@@ -1023,8 +1023,8 @@ private:
   std::string _on_stealing_do;
   std::string _on_stuck_do;
   std::string _on_swing_do;
-  std::string _on_targetted_do;
-  std::string _on_targetted_radially_do;
+  std::string _on_targeted_do;
+  std::string _on_targeted_radially_do;
   std::string _on_teleport_do;
   std::string _on_thrown_do;
   std::string _on_tick_do;
@@ -1251,9 +1251,9 @@ public:
   const std::string &dmg_water_dice_str(void) const;
   const std::string &equip_carry_anim(void) const;
   const std::string &gfx_anim_use(void) const;
-  const std::string &gfx_targetted_laser(void) const;
-  const std::string &gfx_targetted_projectile(void) const;
-  const std::string &gfx_targetted_radial(void) const;
+  const std::string &gfx_targeted_laser(void) const;
+  const std::string &gfx_targeted_projectile(void) const;
+  const std::string &gfx_targeted_radial(void) const;
   const std::string &gold_value_dice_str(void) const;
   const std::string &health_initial_dice_str(void) const;
   const std::string &health_regenerate_amount_dice_str(void) const;
@@ -1384,8 +1384,8 @@ public:
   const std::string &on_stealing_do(void) const;
   const std::string &on_stuck_do(void) const;
   const std::string &on_swing_do(void) const;
-  const std::string &on_targetted_do(void) const;
-  const std::string &on_targetted_radially_do(void) const;
+  const std::string &on_targeted_do(void) const;
+  const std::string &on_targeted_radially_do(void) const;
   const std::string &on_teleport_do(void) const;
   const std::string &on_thrown_do(void) const;
   const std::string &on_tick_do(void) const;
@@ -1829,7 +1829,7 @@ public:
   int is_item_carrier(void) const;
   int is_item_collector(void) const;
   int is_item_organic(void) const;
-  int is_item_targetted(void) const;
+  int is_item_targeted(void) const;
   int is_item(void) const;
   int is_kept_after_final_use(void) const;
   int is_key_special(void) const;
@@ -2334,9 +2334,9 @@ public:
   void gfx_pixelart_show_square_outlined_set(int v);
   void gfx_pixelart_submergible_set(int v);
   void gfx_pixelart_wobbles_when_hit_set(int v);
-  void gfx_targetted_laser_set(const std::string &v);
-  void gfx_targetted_projectile_set(const std::string &v);
-  void gfx_targetted_radial_set(const std::string &v);
+  void gfx_targeted_laser_set(const std::string &v);
+  void gfx_targeted_projectile_set(const std::string &v);
+  void gfx_targeted_radial_set(const std::string &v);
   void gfx_water_set(int v);
   void hunger_clock_tick_freq_set(int v);
   void hunger_is_hunger_level_hungry_at_pct_set(int v);
@@ -2586,7 +2586,7 @@ public:
   void is_item_collector_set(int v);
   void is_item_organic_set(int v);
   void is_item_set(int v);
-  void is_item_targetted_set(int v);
+  void is_item_targeted_set(int v);
   void is_kept_after_final_use_set(int v);
   void is_key_set(int v);
   void is_key_special_set(int v);
@@ -3021,8 +3021,8 @@ public:
   void on_stealing_do_set(const std::string &v);
   void on_stuck_do_set(const std::string &v);
   void on_swing_do_set(const std::string &v);
-  void on_targetted_do_set(const std::string &v);
-  void on_targetted_radially_do_set(const std::string &v);
+  void on_targeted_do_set(const std::string &v);
+  void on_targeted_radially_do_set(const std::string &v);
   void on_teleport_do_set(const std::string &v);
   void on_thrown_do_set(const std::string &v);
   void on_tick_do_set(const std::string &v);

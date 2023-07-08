@@ -2598,10 +2598,10 @@ int Thing::is_snake(void)
   return (tp()->is_snake());
 }
 
-int Thing::is_item_targetted(void)
+int Thing::is_item_targeted(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_item_targetted());
+  return (tp()->is_item_targeted());
 }
 
 int Thing::chance_d1000_teleport_self(void)
@@ -4430,16 +4430,16 @@ const std::string &Thing::on_thrown_do(void)
   return (tp()->on_thrown_do());
 }
 
-const std::string &Thing::on_targetted_do(void)
+const std::string &Thing::on_targeted_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_targetted_do());
+  return (tp()->on_targeted_do());
 }
 
-const std::string &Thing::on_targetted_radially_do(void)
+const std::string &Thing::on_targeted_radially_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_targetted_radially_do());
+  return (tp()->on_targeted_radially_do());
 }
 
 const std::string &Thing::on_dropped_do(void)
@@ -4580,10 +4580,10 @@ const std::string &Thing::on_death_of_my_leader_do(void)
   return (tp()->on_death_of_my_leader_do());
 }
 
-const std::string &Thing::gfx_targetted_projectile(void)
+const std::string &Thing::gfx_targeted_projectile(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_targetted_projectile());
+  return (tp()->gfx_targeted_projectile());
 }
 
 const std::string &Thing::spawn_on_shoved(void)

@@ -2,9 +2,9 @@ import my
 import tp
 
 
-def on_targetted(me, x, y):
+def on_targeted(me, x, y):
     radius = my.thing_effect_radius_get(me)
-    # my.con("targetted {} {:X}".format(my.thing_name_get(me), me))
+    # my.con("targeted {} {:X}".format(my.thing_name_get(me), me))
 
     for dx in range(-radius, radius + 1):
         for dy in range(-radius, radius + 1):
@@ -20,11 +20,11 @@ def on_targetted(me, x, y):
                     my.thing_hit(0, me, it)
 
 
-def on_targetted_radially(me, x, y):
+def on_targeted_radially(me, x, y):
     radius = my.thing_effect_radius_get(me)
     radius += 1
 
-    # my.con("targetted radially {} {:X}".format(my.thing_name_get(me), me))
+    # my.con("targeted radially {} {:X}".format(my.thing_name_get(me), me))
     for dx in range(-radius, radius + 1):
         for dy in range(-radius, radius + 1):
             if dx == 0 and dy == 0:
@@ -118,8 +118,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
-    my.gfx_targetted_laser(self, "laser_negation")
-    my.gfx_targetted_radial(self, "staff_negation_radial")
+    my.gfx_targeted_laser(self, "laser_negation")
+    my.gfx_targeted_radial(self, "staff_negation_radial")
     my.gold_value_dice(self, "300")
     my.health_initial_dice(self, "20+1d10")
     my.is_able_to_be_teleported(self, True)
@@ -159,8 +159,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_hit_and_now_dead_do(self, "me.on_hit_and_now_dead()")
     my.on_idle_tick_freq_dice(self, "1d200+200:me.on_idle()")
     my.on_receiving_dmg_negation_do(self, "me.on_receiving_dmg_negation()")
-    my.on_targetted_do(self, "me.on_targetted()")
-    my.on_targetted_radially_do(self, "me.on_targetted_radially()")
+    my.on_targeted_do(self, "me.on_targeted()")
+    my.on_targeted_radially_do(self, "me.on_targeted_radially()")
     my.on_thrown_do(self, "me.on_thrown()")
     my.range_max(self, 7)
     my.temperature(self, 30)

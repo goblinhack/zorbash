@@ -216,17 +216,10 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
     TRACE_AND_INDENT();
 
     if (is_player()) {
-      msg("%s is spent.", what->text_The().c_str());
+      msg("%s is unable to be used.", what->text_The().c_str());
     }
 
     on_final_use(what);
-
-    //
-    // So magical swords do not vanish on the last charge!
-    //
-    if (what->is_kept_after_final_use()) {
-      return;
-    }
   } else {
     //
     // Still have some charges.
@@ -235,6 +228,7 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
       on_use(what, target);
     } else {
       on_use(what);
+      game->change_state(Game::STATE_NORMAL, "choosing a target");
     }
 
     //
@@ -356,6 +350,13 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
         inventory_shortcuts_remove(what, drop_options);
       }
     }
+  }
+
+  //
+  // So magical swords do not vanish on the last charge!
+  //
+  if (what->is_kept_after_final_use()) {
+    return;
   }
 
   if (remove_after_use) {

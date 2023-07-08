@@ -9,16 +9,16 @@
 #include "my_thing.hpp"
 #include "my_thing_attack_options.hpp"
 
-void Thing::on_targetted_radially(void)
+void Thing::on_targeted_radially(void)
 {
   TRACE_NO_INDENT();
 
-  auto on_targetted_radially = tp()->on_targetted_radially_do();
-  if (std::empty(on_targetted_radially)) {
+  auto on_targeted_radially = tp()->on_targeted_radially_do();
+  if (std::empty(on_targeted_radially)) {
     return;
   }
 
-  auto t = split_tokens(on_targetted_radially, '.');
+  auto t = split_tokens(on_targeted_radially, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -35,22 +35,22 @@ void Thing::on_targetted_radially(void)
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
-    ERR("Bad on_targetted_radially call [%s] expected mod:function, got %d elems", on_targetted_radially.c_str(),
-        (int) on_targetted_radially.size());
+    ERR("Bad on_targeted_radially call [%s] expected mod:function, got %d elems", on_targeted_radially.c_str(),
+        (int) on_targeted_radially.size());
   }
 }
 
-void Thing::on_targetted(point target)
+void Thing::on_targeted(point target)
 {
   TRACE_NO_INDENT();
 
-  auto on_targetted = tp()->on_targetted_do();
-  if (std::empty(on_targetted)) {
+  auto on_targeted = tp()->on_targeted_do();
+  if (std::empty(on_targeted)) {
     return;
   }
 
   TRACE_NO_INDENT();
-  auto t = split_tokens(on_targetted, '.');
+  auto t = split_tokens(on_targeted, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -67,14 +67,19 @@ void Thing::on_targetted(point target)
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) target.x, (unsigned int) target.y);
   } else {
-    ERR("Bad on_targetted call [%s] expected mod:function, got %d elems", on_targetted.c_str(),
-        (int) on_targetted.size());
+    ERR("Bad on_targeted call [%s] expected mod:function, got %d elems", on_targeted.c_str(),
+        (int) on_targeted.size());
   }
 }
 
 bool Thing::is_target_select(Thingp item)
 {
   TRACE_NO_INDENT();
+
+  if (item->initial_charge_count() && ! item->charge_count()) {
+    msg("%s is unable to be used.", item->text_The().c_str());
+    return false;
+  }
 
   if (game->state != Game::STATE_CHOOSING_TARGET) {
     msg("Choose a target to use %s at.", item->text_the().c_str());
@@ -136,6 +141,14 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
         } else {
           dbg2("Target-attack-best: %s no dead or dying", t->to_short_string().c_str());
         }
+        continue;
+      }
+
+      //
+      // If not blitted yet, then ignore. This could be a thing that has just been created,
+      // e.g. a summoned monster and we can't immediately hit it.
+      //
+      if (t->last_blit_at == point(0, 0)) {
         continue;
       }
 
@@ -251,6 +264,14 @@ bool Thing::victim_attack_best_attempt_2(Thingp item, point at, Thingp *best, po
         }
       }
 
+      //
+      // If not blitted yet, then ignore. This could be a thing that has just been created,
+      // e.g. a summoned monster and we can't immediately hit it.
+      //
+      if (t->last_blit_at == point(0, 0)) {
+        continue;
+      }
+
       if (is_friend(t) || same_mob(t)) {
         dbg2("Target-attack-best: %s no same leader", t->to_short_string().c_str());
         continue;
@@ -359,6 +380,14 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
         } else {
           dbg2("Target-attack-best: %s no dead or dying", t->to_short_string().c_str());
         }
+        continue;
+      }
+
+      //
+      // If not blitted yet, then ignore. This could be a thing that has just been created,
+      // e.g. a summoned monster and we can't immediately hit it.
+      //
+      if (t->last_blit_at == point(0, 0)) {
         continue;
       }
 

@@ -35,8 +35,8 @@ void Thing::killed(Thingp defeater, const char *reason)
 
   TRACE_NO_INDENT();
   if (is_loggable()) {
-    if (reason) {
-      dbg("Killed, reason: %s", reason);
+    if (reason && *reason) {
+      dbg("Killed, reason: \"%s\"", reason);
     } else {
       dbg("Killed");
     }

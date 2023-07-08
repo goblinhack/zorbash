@@ -413,8 +413,8 @@ public:
   Thingp in_the_way_for_jumping(const point s, const point e, int x, int y);
   Thingp in_the_way_for_shooting(const point s, const point e, int x, int y);
   Thingp in_the_way_for_throwing(const point s, const point e, int x, int y);
-  Thingp item_targetted_use_at(Thingp wand, point at);
-  Thingp item_targetted_use_at(Thingp wand, Thingp target);
+  Thingp item_targeted_use_at(Thingp wand, point at);
+  Thingp item_targeted_use_at(Thingp wand, Thingp target);
   Thingp leader(void);
   Thingp most_dangerous_adjacent_thing(void);
   Thingp most_dangerous_visible_thing(void);
@@ -833,9 +833,9 @@ public:
   const std::string &dmg_nat_att_type(void);
   const std::string &equip_carry_anim(void);
   const std::string &gfx_anim_use(void);
-  const std::string &gfx_targetted_laser(void);
-  const std::string &gfx_targetted_projectile(void);
-  const std::string &gfx_targetted_radial(void);
+  const std::string &gfx_targeted_laser(void);
+  const std::string &gfx_targeted_projectile(void);
+  const std::string &gfx_targeted_radial(void);
   const std::string &gold_value_dice_str(void);
   const std::string &health_initial_dice_str(void);
   const std::string &health_regenerate_amount_dice_str(void);
@@ -967,8 +967,8 @@ public:
   const std::string &on_stealing_do(void);
   const std::string &on_stuck_do(void);
   const std::string &on_swing_do(void);
-  const std::string &on_targetted_do(void);
-  const std::string &on_targetted_radially_do(void);
+  const std::string &on_targeted_do(void);
+  const std::string &on_targeted_radially_do(void);
   const std::string &on_teleport_do(void);
   const std::string &on_thrown_do(void);
   const std::string &on_tick_do(void);
@@ -1608,7 +1608,7 @@ public:
   int is_item_carrier(void);
   int is_item_collector(void);
   int is_item_organic(void);
-  int is_item_targetted(void);
+  int is_item_targeted(void);
   int is_item(void);
   int is_kept_after_final_use(void);
   int is_key_special(void);
@@ -2794,10 +2794,10 @@ public:
   void on_stealing(Thingp from, Thingp what);
   void on_stuck(void);
   void on_swing(Thingp what);
-  void on_targetted(point target);
-  void on_targetted_radially(void);
-  void on_targetted_radial(void);
-  void on_targetted(void);
+  void on_targeted(point target);
+  void on_targeted_radially(void);
+  void on_targeted_radial(void);
+  void on_targeted(void);
   void on_teleport(void);
   void on_thrown_callback(ThingId owner_id_when_thrown);
   void on_thrown(ThingId owner_id_when_thrown);

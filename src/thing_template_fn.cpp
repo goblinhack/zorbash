@@ -35,9 +35,9 @@ bool Tp::temperature_max_is_set(void) const { return _temperature_max_set; }
 const std::string &Tp::dmg_nat_att_type(void) const { return _dmg_nat_att_type; }
 const std::string &Tp::equip_carry_anim(void) const { return _equip_carry_anim; }
 const std::string &Tp::gfx_anim_use(void) const { return _gfx_anim_use; }
-const std::string &Tp::gfx_targetted_laser(void) const { return _gfx_targetted_laser; }
-const std::string &Tp::gfx_targetted_projectile(void) const { return _gfx_targetted_projectile; }
-const std::string &Tp::gfx_targetted_radial(void) const { return _gfx_targetted_radial; }
+const std::string &Tp::gfx_targeted_laser(void) const { return _gfx_targeted_laser; }
+const std::string &Tp::gfx_targeted_projectile(void) const { return _gfx_targeted_projectile; }
+const std::string &Tp::gfx_targeted_radial(void) const { return _gfx_targeted_radial; }
 const std::string &Tp::is_allied_with(void) const { return _is_allied_with; }
 const std::string &Tp::light_color(void) const { return _light_color; }
 const std::string &Tp::name(void) const { return _name; }
@@ -162,8 +162,8 @@ const std::string &Tp::on_resting_do(void) const { return _on_resting_do; }
 const std::string &Tp::on_stealing_do(void) const { return _on_stealing_do; }
 const std::string &Tp::on_stuck_do(void) const { return _on_stuck_do; }
 const std::string &Tp::on_swing_do(void) const { return _on_swing_do; }
-const std::string &Tp::on_targetted_do(void) const { return _on_targetted_do; }
-const std::string &Tp::on_targetted_radially_do(void) const { return _on_targetted_radially_do; }
+const std::string &Tp::on_targeted_do(void) const { return _on_targeted_do; }
+const std::string &Tp::on_targeted_radially_do(void) const { return _on_targeted_radially_do; }
 const std::string &Tp::on_teleport_do(void) const { return _on_teleport_do; }
 const std::string &Tp::on_thrown_do(void) const { return _on_thrown_do; }
 const std::string &Tp::on_tick_do(void) const { return _on_tick_do; }
@@ -584,7 +584,7 @@ int Tp::is_invisible(void) const { return _is_invisible; }
 int Tp::is_item_carrier(void) const { return _is_item_carrier; }
 int Tp::is_item_collector(void) const { return _is_item_collector; }
 int Tp::is_item_organic(void) const { return _is_item_organic; }
-int Tp::is_item_targetted(void) const { return _is_item_targetted; }
+int Tp::is_item_targeted(void) const { return _is_item_targeted; }
 int Tp::is_item(void) const { return _is_item; }
 int Tp::is_kept_after_final_use(void) const { return _is_kept_after_final_use; }
 int Tp::is_key_special(void) const { return _is_key_special; }
@@ -1089,9 +1089,9 @@ void Tp::gfx_pixelart_show_outlined_set(int v) { _gfx_pixelart_show_outlined = v
 void Tp::gfx_pixelart_show_square_outlined_set(int v) { _gfx_pixelart_show_square_outlined = v; }
 void Tp::gfx_pixelart_submergible_set(int v) { _gfx_pixelart_submergible = v; }
 void Tp::gfx_pixelart_wobbles_when_hit_set(int v) { _gfx_pixelart_wobbles_when_hit = v; }
-void Tp::gfx_targetted_laser_set(const std::string &v) { _gfx_targetted_laser = v; }
-void Tp::gfx_targetted_projectile_set(const std::string &v) { _gfx_targetted_projectile = v; }
-void Tp::gfx_targetted_radial_set(const std::string &v) { _gfx_targetted_radial = v; }
+void Tp::gfx_targeted_laser_set(const std::string &v) { _gfx_targeted_laser = v; }
+void Tp::gfx_targeted_projectile_set(const std::string &v) { _gfx_targeted_projectile = v; }
+void Tp::gfx_targeted_radial_set(const std::string &v) { _gfx_targeted_radial = v; }
 void Tp::gfx_water_set(int v) { _gfx_water = v; }
 void Tp::hunger_clock_tick_freq_set(int v) { _hunger_clock_tick_freq = v; }
 void Tp::hunger_is_hunger_level_hungry_at_pct_set(int v) { _hunger_is_hunger_level_hungry_at_pct = v; }
@@ -1341,7 +1341,7 @@ void Tp::is_item_carrier_set(int v) { _is_item_carrier = v; }
 void Tp::is_item_collector_set(int v) { _is_item_collector = v; }
 void Tp::is_item_organic_set(int v) { _is_item_organic = v; }
 void Tp::is_item_set(int v) { _is_item = v; }
-void Tp::is_item_targetted_set(int v) { _is_item_targetted = v; }
+void Tp::is_item_targeted_set(int v) { _is_item_targeted = v; }
 void Tp::is_kept_after_final_use_set(int v) { _is_kept_after_final_use = v; }
 void Tp::is_key_set(int v) { _is_key = v; }
 void Tp::is_key_special_set(int v) { _is_key_special = v; }
@@ -1776,8 +1776,8 @@ void Tp::on_resting_do_set(const std::string &v) { _on_resting_do = v; }
 void Tp::on_stealing_do_set(const std::string &v) { _on_stealing_do = v; }
 void Tp::on_stuck_do_set(const std::string &v) { _on_stuck_do = v; }
 void Tp::on_swing_do_set(const std::string &v) { _on_swing_do = v; }
-void Tp::on_targetted_do_set(const std::string &v) { _on_targetted_do = v; }
-void Tp::on_targetted_radially_do_set(const std::string &v) { _on_targetted_radially_do = v; }
+void Tp::on_targeted_do_set(const std::string &v) { _on_targeted_do = v; }
+void Tp::on_targeted_radially_do_set(const std::string &v) { _on_targeted_radially_do = v; }
 void Tp::on_teleport_do_set(const std::string &v) { _on_teleport_do = v; }
 void Tp::on_thrown_do_set(const std::string &v) { _on_thrown_do = v; }
 void Tp::on_tick_do_set(const std::string &v) { _on_tick_do = v; }

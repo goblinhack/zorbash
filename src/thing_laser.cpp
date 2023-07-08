@@ -25,7 +25,7 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
 
     used(item, victim, true);
 
-    if (! item->gfx_targetted_laser().empty()) {
+    if (! item->gfx_targeted_laser().empty()) {
       UseOptions use_options = {};
 
       //
@@ -38,12 +38,12 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
           //
           use_options.radial_effect = true;
           victim                    = this;
-          laser_shoot_at(item, item->gfx_targetted_radial(), victim, &use_options);
+          laser_shoot_at(item, item->gfx_targeted_radial(), victim, &use_options);
         } else {
-          laser_shoot_at(item, item->gfx_targetted_laser(), victim, &use_options);
+          laser_shoot_at(item, item->gfx_targeted_laser(), victim, &use_options);
         }
       } else {
-        laser_shoot_at(item, item->gfx_targetted_laser(), victim, &use_options);
+        laser_shoot_at(item, item->gfx_targeted_laser(), victim, &use_options);
       }
     } else {
       if (item) {
@@ -75,7 +75,7 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
   return is_target_select(item);
 }
 
-bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, Thingp target,
+bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targeted_laser, Thingp target,
                            UseOptions *use_options)
 {
   //
@@ -91,7 +91,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
     owner = nullptr;
   }
 
-  dbg("Laser shoot %s at %s", gfx_targetted_laser.c_str(), target->to_short_string().c_str());
+  dbg("Laser shoot %s at %s", gfx_targeted_laser.c_str(), target->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   auto start = last_blit_at;
@@ -154,8 +154,8 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
     TRACE_AND_INDENT();
 
     Thingp laser = nullptr;
-    if (! gfx_targetted_laser.empty()) {
-      laser = level->thing_new(gfx_targetted_laser, target->curr_at, owner);
+    if (! gfx_targeted_laser.empty()) {
+      laser = level->thing_new(gfx_targeted_laser, target->curr_at, owner);
       if (! laser) {
         err("No laser to shoot");
         if (is_player()) {
@@ -172,7 +172,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
       dbg("Firing laser");
     }
 
-    item->on_targetted_radially();
+    item->on_targeted_radially();
   } else {
     dbg("Firing laser effect");
     TRACE_AND_INDENT();
@@ -218,8 +218,8 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
         end = target->last_blit_at;
 
         Thingp laser = nullptr;
-        if (! gfx_targetted_laser.empty()) {
-          laser = level->thing_new(gfx_targetted_laser, target->curr_at, owner);
+        if (! gfx_targeted_laser.empty()) {
+          laser = level->thing_new(gfx_targeted_laser, target->curr_at, owner);
           if (! laser) {
             err("No laser to shoot");
             if (is_player()) {
@@ -253,7 +253,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
               FOR_ALL_GRID_THINGS(level, grid_thing, second_portal_target.x, second_portal_target.y)
               {
                 if (grid_thing->is_the_grid) {
-                  second_portal->laser_shoot_at(item, gfx_targetted_laser, grid_thing, use_options);
+                  second_portal->laser_shoot_at(item, gfx_targeted_laser, grid_thing, use_options);
                 }
                 break;
               }
@@ -301,7 +301,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
         }
 
         if (item) {
-          item->on_targetted(target->curr_at);
+          item->on_targeted(target->curr_at);
         }
       }
     } else {
@@ -333,7 +333,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
         }
       }
 
-      auto laser = level->thing_new(gfx_targetted_laser, target->curr_at, owner);
+      auto laser = level->thing_new(gfx_targeted_laser, target->curr_at, owner);
       if (! laser) {
         err("No laser to shoot");
         if (is_player()) {
@@ -377,7 +377,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
       }
 
       if (item) {
-        item->on_targetted(target->curr_at);
+        item->on_targeted(target->curr_at);
       }
     }
   }
@@ -385,7 +385,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
   return true;
 }
 
-bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, point at, UseOptions *use_options)
+bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targeted_laser, point at, UseOptions *use_options)
 {
   //
   // NOTE: the item can be null here if this is monster firing with its
@@ -395,7 +395,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
   Thingp best = nullptr;
   point  best_hit_at;
 
-  dbg("Laser shoot %s at point %s", gfx_targetted_laser.c_str(), at.to_string().c_str());
+  dbg("Laser shoot %s at point %s", gfx_targeted_laser.c_str(), at.to_string().c_str());
   TRACE_AND_INDENT();
 
   //
@@ -404,7 +404,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
   if (item->range_max()) {
     float dist = distance(item->curr_at, at);
     if (dist > item->range_max()) {
-      dbg("Laser shoot %s at point %s->%s is out of range, dist %f, max %d", gfx_targetted_laser.c_str(),
+      dbg("Laser shoot %s at point %s->%s is out of range, dist %f, max %d", gfx_targeted_laser.c_str(),
           item->curr_at.to_string().c_str(), at.to_string().c_str(), dist, item->range_max());
       float dx = (float) at.x - (float) item->curr_at.x;
       float dy = (float) at.y - (float) item->curr_at.y;
@@ -415,7 +415,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
       at = curr_at + point(dx, dy);
 
       float dist = distance(item->curr_at, at);
-      dbg("Laser shoot %s at new point %s, dist %f, max %d", gfx_targetted_laser.c_str(), at.to_string().c_str(),
+      dbg("Laser shoot %s at new point %s, dist %f, max %d", gfx_targeted_laser.c_str(), at.to_string().c_str(),
           dist, item->range_max());
     }
   }
@@ -423,13 +423,13 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targetted_laser, 
   ThingAttackOptions attack_options  = {};
   attack_options.allow_hitting_walls = true;
   if (victim_attack_choose_best(nullptr, at, &best, &best_hit_at, &attack_options)) {
-    return laser_shoot_at(item, gfx_targetted_laser, best, use_options);
+    return laser_shoot_at(item, gfx_targeted_laser, best, use_options);
   }
 
   FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
   {
     if (t->is_the_grid) {
-      return laser_shoot_at(item, gfx_targetted_laser, t, use_options);
+      return laser_shoot_at(item, gfx_targeted_laser, t, use_options);
     }
   }
   FOR_ALL_THINGS_END()

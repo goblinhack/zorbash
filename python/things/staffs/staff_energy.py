@@ -96,7 +96,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
-    my.gfx_targetted_laser(self, "laser_energy")
+    my.gfx_targeted_laser(self, "laser_energy")
     my.gold_value_dice(self, "200")
     my.health_initial_dice(self, "20+1d10")
     my.is_able_to_be_teleported(self, True)

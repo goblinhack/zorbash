@@ -22,7 +22,7 @@ Projectile_::Projectile_(Levelp level, ThingId thing_id, ThingId victim_id, Proj
   if (t->is_projectile()) {
     name = t->tp()->name();
   } else {
-    name = t->gfx_targetted_projectile();
+    name = t->gfx_targeted_projectile();
     if (name.empty()) {
       t->err("no projectile name");
       return;
@@ -73,8 +73,8 @@ Projectile_::Projectile_(Levelp level, ThingId thing_id, ThingId victim_id, Proj
   // Use the preferred name if set.
   //
   if (proj_tp) {
-    if (! proj_tp->gfx_targetted_projectile().empty()) {
-      name = proj_tp->gfx_targetted_projectile();
+    if (! proj_tp->gfx_targeted_projectile().empty()) {
+      name = proj_tp->gfx_targeted_projectile();
     }
   }
 

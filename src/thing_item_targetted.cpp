@@ -25,7 +25,7 @@ bool Thing::item_choose_target(Thingp item, Thingp victim /* can be null */)
 
     used(item, victim, true);
 
-    item_targetted_use_at(item, victim);
+    item_targeted_use_at(item, victim);
 
     //
     // Get the damage from the enchanted wand, so the blast inflicts that damage.
@@ -43,7 +43,7 @@ bool Thing::item_choose_target(Thingp item, Thingp victim /* can be null */)
   return is_target_select(item);
 }
 
-Thingp Thing::item_targetted_use_at(Thingp item, Thingp target)
+Thingp Thing::item_targeted_use_at(Thingp item, Thingp target)
 {
   //
   // NOTE: the item can be null here if this is monster firing with its
@@ -65,6 +65,7 @@ Thingp Thing::item_targetted_use_at(Thingp item, Thingp target)
     if (is_player()) {
       msg("Failed to use, no start!");
       game->tick_begin("failed to use item");
+      game->change_state(Game::STATE_NORMAL, "player used an item");
     }
     return nullptr;
   }
@@ -73,13 +74,14 @@ Thingp Thing::item_targetted_use_at(Thingp item, Thingp target)
     if (is_player()) {
       msg("Failed to use, no target!");
       game->tick_begin("failed to use item");
+      game->change_state(Game::STATE_NORMAL, "player used an item");
     }
     return nullptr;
   }
 
   //
   // The attack is immediate when we create the item blast at the target.
-  // Sp, we need to bump the game tick at this point.
+  // So, we need to bump the game tick at this point.
   //
   if (is_player()) {
     game->tick_begin("player used an item");
@@ -88,7 +90,7 @@ Thingp Thing::item_targetted_use_at(Thingp item, Thingp target)
 
   dbg("Using named item with: %s at %s", item->to_short_string().c_str(), target->to_short_string().c_str());
 
-  if (! item->is_item_targetted()) {
+  if (! item->is_item_targeted()) {
     if (is_player()) {
       msg("I don't know how to use %s.", item->text_the().c_str());
       game->tick_begin("player tried to use something they could not");
@@ -99,7 +101,7 @@ Thingp Thing::item_targetted_use_at(Thingp item, Thingp target)
   return item;
 }
 
-Thingp Thing::item_targetted_use_at(Thingp item, point at)
+Thingp Thing::item_targeted_use_at(Thingp item, point at)
 {
   //
   // NOTE: the item can be null here if this is monster firing with its
@@ -109,19 +111,19 @@ Thingp Thing::item_targetted_use_at(Thingp item, point at)
   Thingp best = nullptr;
   point  best_hit_at;
 
-  dbg("Use %s at %s", item->to_short_string().c_str(), at.to_string().c_str());
+  dbg("Use targeted item %s at %s", item->to_short_string().c_str(), at.to_string().c_str());
   TRACE_AND_INDENT();
 
   ThingAttackOptions attack_options  = {};
   attack_options.allow_hitting_walls = true;
   if (victim_attack_choose_best(nullptr, at, &best, &best_hit_at, &attack_options)) {
-    return item_targetted_use_at(item, best);
+    return item_targeted_use_at(item, best);
   }
 
   FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
   {
     if (t->is_the_grid) {
-      return item_targetted_use_at(item, t);
+      return item_targeted_use_at(item, t);
     }
   }
   FOR_ALL_THINGS_END()

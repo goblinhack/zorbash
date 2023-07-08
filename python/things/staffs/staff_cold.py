@@ -2,9 +2,9 @@ import my
 import tp
 
 
-def on_targetted(me, x, y):
+def on_targeted(me, x, y):
     radius = my.thing_effect_radius_get(me)
-    # my.con("targetted {} {:X} radius {}".format(my.thing_name_get(me), me, radius))
+    # my.con("targeted {} {:X} radius {}".format(my.thing_name_get(me), me, radius))
 
     for dx in range(-radius, radius + 1):
         for dy in range(-radius, radius + 1):
@@ -22,11 +22,11 @@ def on_targetted(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
 
 
-def on_targetted_radially(me, x, y):
+def on_targeted_radially(me, x, y):
     radius = my.thing_effect_radius_get(me)
     radius += 1
 
-    # my.con("targetted radially {} {:X}".format(my.thing_name_get(me), me))
+    # my.con("targeted radially {} {:X}".format(my.thing_name_get(me), me))
     for dx in range(-radius, radius + 1):
         for dy in range(-radius, radius + 1):
             if dx == 0 and dy == 0:
@@ -73,7 +73,7 @@ def explode(me, x, y):
         my.thing_msg(me, "The staff of ice explodes.")
 
     my.spawn_at_my_position(me, "explosion_major")
-    on_targetted(me, x, y)
+    on_targeted(me, x, y)
     my.thing_dead(me, "exploded")
 
 
@@ -115,7 +115,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
-    my.gfx_targetted_projectile(self, "staff_projectile_cold")
+    my.gfx_targeted_projectile(self, "staff_projectile_cold")
     my.gold_value_dice(self, "300")
     my.health_initial_dice(self, "20+1d10")
     my.is_able_to_be_teleported(self, True)
@@ -155,8 +155,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_fall_do(self, "me.on_fall()")
     my.on_hit_and_now_dead_do(self, "me.on_hit_and_now_dead()")
     my.on_idle_tick_freq_dice(self, "1d200+200:me.on_idle()")
-    my.on_targetted_do(self, "me.on_targetted()")
-    my.on_targetted_radially_do(self, "me.on_targetted_radially()")
+    my.on_targeted_do(self, "me.on_targeted()")
+    my.on_targeted_radially_do(self, "me.on_targeted_radially()")
     my.on_thrown_do(self, "me.on_thrown()")
     my.range_max(self, 7)
     my.temperature(self, -10)

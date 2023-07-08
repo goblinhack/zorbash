@@ -2,9 +2,9 @@ import my
 import tp
 
 
-def on_targetted(me, x, y):
+def on_targeted(me, x, y):
     radius = my.thing_effect_radius_get(me)
-    # my.con("targetted {} {:X} at {} {} radius {}".format(my.thing_name_get(me), me, x, y, radius))
+    # my.con("targeted {} {:X} at {} {} radius {}".format(my.thing_name_get(me), me, x, y, radius))
 
     for dx in range(-radius, radius + 1):
         for dy in range(-radius, radius + 1):
@@ -20,10 +20,10 @@ def on_targetted(me, x, y):
                     my.thing_hit(0, me, it)
 
 
-def on_targetted_radially(me, x, y):
+def on_targeted_radially(me, x, y):
     radius = my.thing_effect_radius_get(me)
     radius += 1
-    # my.con("targetted radially {} {:X}".format(my.thing_name_get(me), me))
+    # my.con("targeted radially {} {:X}".format(my.thing_name_get(me), me))
     my.spawn_things_around_me(me, "explosion_destroy_floor", radius)
     owner = my.thing_top_owner_id_get(me)
     my.thing_popup(owner, "You shall not pass!")
@@ -58,7 +58,7 @@ def explode(me, x, y):
 
     my.spawn_at_my_position(me, "explosion_major")
     my.thing_msg(me, "The earth shakes.")
-    on_targetted(me, x, y)
+    on_targeted(me, x, y)
     my.thing_dead(me, "exploded")
 
 
@@ -104,8 +104,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
-    my.gfx_targetted_laser(self, "staff_descent_laser")
-    my.gfx_targetted_radial(self, "staff_descent_radial")
+    my.gfx_targeted_laser(self, "staff_descent_laser")
+    my.gfx_targeted_radial(self, "staff_descent_radial")
     my.gold_value_dice(self, "500")
     my.health_initial_dice(self, "20+1d10")
     my.is_able_to_be_teleported(self, True)
@@ -144,8 +144,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_final_use_do(self, "me.on_final_use()")
     my.on_hit_and_now_dead_do(self, "me.on_hit_and_now_dead()")
     my.on_idle_tick_freq_dice(self, "1d1000+200:me.on_idle()")
-    my.on_targetted_do(self, "me.on_targetted()")
-    my.on_targetted_radially_do(self, "me.on_targetted_radially()")
+    my.on_targeted_do(self, "me.on_targeted()")
+    my.on_targeted_radially_do(self, "me.on_targeted_radially()")
     my.on_thrown_do(self, "me.on_thrown()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.range_max(self, 7)

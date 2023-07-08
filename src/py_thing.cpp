@@ -158,7 +158,7 @@ PyObject *thing_shoot_at(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
   if (itemp->is_usable()) {
-    if (owner->item_targetted_use_at(nullptr /* staff */, target)) {
+    if (owner->item_targeted_use_at(nullptr /* staff */, target)) {
       Py_RETURN_TRUE;
     }
     Py_RETURN_FALSE;
@@ -522,7 +522,6 @@ PyObject *thing_friend_add(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_NO_INDENT();
   uint32_t     id       = 0;
   uint32_t     it_id    = 0;
-  char        *what     = nullptr;
   static char *kwlist[] = {(char *) "me", (char *) "it", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &it_id)) {

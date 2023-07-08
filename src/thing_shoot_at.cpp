@@ -239,9 +239,9 @@ bool Thing::shoot_at_and_choose_target(Thingp item, UseOptions *use_options)
   TRACE_AND_INDENT();
 
   if (use_options && use_options->radial_effect) {
-    return laser_shoot_at(item, item->gfx_targetted_radial(), this, use_options);
+    return laser_shoot_at(item, item->gfx_targeted_radial(), this, use_options);
   }
-  if (! item->gfx_targetted_laser().empty()) {
+  if (! item->gfx_targeted_laser().empty()) {
     return laser_choose_target(item);
   }
   return projectile_choose_target(item);
@@ -256,7 +256,7 @@ bool Thing::shoot_at(Thingp item, Thingp target)
   }
   TRACE_AND_INDENT();
 
-  if (item->gfx_targetted_laser().empty()) {
+  if (item->gfx_targeted_laser().empty()) {
     return projectile_choose_target(item, target);
   }
   return laser_choose_target(item, target);

@@ -561,7 +561,7 @@ void Game::wid_collect_create(const std::list< ThingId > items /* intentional co
         if (! t->gold_value_dice_str().empty()) {
           if (t->initial_charge_count() && ! t->charge_count()) {
             //
-            // Spent staffs aew worthless
+            // Spent staffs are worthless
             //
           } else {
             //

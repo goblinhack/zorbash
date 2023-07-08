@@ -400,7 +400,7 @@ PyObject *thing_is_item_carrier(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *thing_is_item_collector(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_item_organic(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_item(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_item_targetted(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_item_targeted(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_kept_after_final_use(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_key(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_key_special(PyObject *obj, PyObject *args, PyObject *keywds);
