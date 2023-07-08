@@ -661,6 +661,7 @@ public:
   bool spellbox_id_remove(Thingp what);
   bool spell_remove(Thingp it);
   bool spell_use(Thingp it);
+  bool spell_can_use(Thingp);
   bool state_idle(Thingp threat, int minx, int miny, int maxx, int maxy);
   bool state_moving(void);
   bool state_open_inventory(void);

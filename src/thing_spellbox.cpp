@@ -309,7 +309,6 @@ bool Level::spell_chosen(Thingp what)
   what->is_activated = ! what->is_activated;
   IF_DEBUG2 { what->log("Chosen spellbox item"); }
 
-  sound_play("coin");
   player->spell_use(what);
 
   return true;

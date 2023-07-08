@@ -150,15 +150,32 @@ void Thing::spell_remove_all(void)
   }
 }
 
-bool Thing::spell_use(Thingp what)
+bool Thing::spell_can_use(Thingp what)
 {
   TRACE_NO_INDENT();
 
+  //
+  // Have enough points?
+  //
   if (what->spell_cost() > magic()) {
     if (is_player()) {
       msg("You do not have enough magic points to cast %s. You need %d.", what->text_the().c_str(),
           what->spell_cost());
+      sound_play("bonk");
     }
+    return false;
+  }
+  return true;
+}
+
+bool Thing::spell_use(Thingp what)
+{
+  TRACE_NO_INDENT();
+
+  //
+  // Have enough points?
+  //
+  if (! spell_can_use(what)) {
     return false;
   }
 
@@ -186,6 +203,14 @@ void Thing::spell_deactivate(Thingp what)
 void Thing::spell_activate(Thingp what)
 {
   TRACE_NO_INDENT();
+
+  //
+  // Have enough points?
+  //
+  if (! spell_can_use(what)) {
+    return;
+  }
+
   what->is_activated = true;
   game->set_request_to_remake_spellbox();
   if (is_player()) {

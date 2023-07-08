@@ -104,7 +104,7 @@ static void __attribute__((noinline)) sdl_event_keydown(SDL_Keysym *key, SDL_Eve
 {
   sdl.event_count++;
 
-  CON("SDL: Keyboard: Key pressed keycode 0x%08" PRIX32 " = %s %d", event->key.keysym.sym,
+  LOG("SDL: Keyboard: Key pressed keycode 0x%08" PRIX32 " = %s %d", event->key.keysym.sym,
       to_string(event->key.keysym).c_str(), key->mod);
 
   //
@@ -126,7 +126,7 @@ static void __attribute__((noinline)) sdl_event_keyup(SDL_Keysym *key, SDL_Event
 {
   sdl.event_count++;
   if (g_grab_next_key) {
-    CON("SDL: Keyboard: Grabbed 0x%08" PRIX32 " = %s / %s", event->key.keysym.sym,
+    LOG("SDL: Keyboard: Grabbed 0x%08" PRIX32 " = %s / %s", event->key.keysym.sym,
         to_string(event->key.keysym).c_str(), SDL_GetScancodeName(event->key.keysym.scancode));
 
     g_grab_next_key = false;
@@ -142,7 +142,7 @@ static void __attribute__((noinline)) sdl_event_keyup(SDL_Keysym *key, SDL_Event
 
   memset(&last_key_pressed, 0, sizeof(last_key_pressed));
 
-  CON("SDL: Keyboard: Key released keycode 0x%08" PRIX32 " = %s", event->key.keysym.sym,
+  LOG("SDL: Keyboard: Key released keycode 0x%08" PRIX32 " = %s", event->key.keysym.sym,
       to_string(event->key.keysym).c_str());
 
   key = &event->key.keysym;
@@ -241,7 +241,7 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
     case SDL_TEXTINPUT :
       {
         sdl.event_count++;
-        CON("SDL: Keyboard: Text input \"%s\" in window %d", event->text.text, event->text.windowID);
+        LOG("SDL: Keyboard: Text input \"%s\" in window %d", event->text.text, event->text.windowID);
         break;
       }
     case SDL_MOUSEWHEEL :
