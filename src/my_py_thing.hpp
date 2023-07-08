@@ -97,6 +97,7 @@ PyObject *thing_environ_likes_lava(PyObject *obj, PyObject *args, PyObject *keyw
 PyObject *thing_environ_likes_shallow_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_freeze(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_friend(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_friend_add(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_idle_count(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_noise(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_stuck_count(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -400,6 +401,7 @@ PyObject *thing_is_item_collector(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_item_organic(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_item(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_item_targetted(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_kept_after_final_use(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_key(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_key_special(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_laser(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -566,7 +568,6 @@ PyObject *thing_is_unused_flag127(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag128(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag129(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag12(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag130(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag13(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag142(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag14(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -1610,6 +1610,7 @@ public:
   int is_item_organic(void);
   int is_item_targetted(void);
   int is_item(void);
+  int is_kept_after_final_use(void);
   int is_key_special(void);
   int is_key(void);
   int is_laser(void);
@@ -1781,7 +1782,6 @@ public:
   int is_unused_flag128(void);
   int is_unused_flag129(void);
   int is_unused_flag12(void);
-  int is_unused_flag130(void);
   int is_unused_flag13(void);
   int is_unused_flag142(void);
   int is_unused_flag14(void);

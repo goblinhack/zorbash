@@ -364,7 +364,12 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
         wid_set_text(w, "Unwield");
       }
       y_at += 2;
-    } else if (item_option->is_usable()) {
+    }
+
+    //
+    // Some swords can be used, e.g. duck summoning!
+    //
+    if (item_option->is_usable()) {
       //
       // For example boots of teleport or an enchantstone
       //

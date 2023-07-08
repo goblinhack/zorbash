@@ -63,7 +63,7 @@ Thingp Thing::item_targetted_use_at(Thingp item, Thingp target)
 
   if (! start.x && ! start.y) {
     if (is_player()) {
-      msg("Failed to use!");
+      msg("Failed to use, no start!");
       game->tick_begin("failed to use item");
     }
     return nullptr;
@@ -71,7 +71,7 @@ Thingp Thing::item_targetted_use_at(Thingp item, Thingp target)
 
   if (! end.x && ! end.y) {
     if (is_player()) {
-      msg("Failed to use!");
+      msg("Failed to use, no target!");
       game->tick_begin("failed to use item");
     }
     return nullptr;

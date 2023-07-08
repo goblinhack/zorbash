@@ -472,7 +472,7 @@ PyObject *thing_friend(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_NO_INDENT();
   uint32_t     id       = 0;
   char        *what     = nullptr;
-  static char *kwlist[] = {(char *) "t", (char *) "what", nullptr};
+  static char *kwlist[] = {(char *) "me", (char *) "what", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -513,6 +513,46 @@ PyObject *thing_friend(PyObject *obj, PyObject *args, PyObject *keywds)
     t->err("Could not find template to add as friend %s", what);
     Py_RETURN_NONE;
   }
+
+  Py_RETURN_TRUE;
+}
+
+PyObject *thing_friend_add(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     id       = 0;
+  uint32_t     it_id    = 0;
+  char        *what     = nullptr;
+  static char *kwlist[] = {(char *) "me", (char *) "it", nullptr};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &it_id)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! id) {
+    ERR("%s: No thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! it_id) {
+    ERR("%s: No friend thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp t = game->thing_find(id);
+  if (! t) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    Py_RETURN_NONE;
+  }
+
+  Thingp it = game->thing_find(it_id);
+  if (! it) {
+    ERR("%s: Cannot find friend thing ID %u", __FUNCTION__, id);
+    Py_RETURN_NONE;
+  }
+
+  t->add_friend(it);
 
   Py_RETURN_TRUE;
 }

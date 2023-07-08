@@ -497,6 +497,7 @@ private:
   int _is_item_collector {};
   int _is_item_organic {};
   int _is_item_targetted {};
+  int _is_kept_after_final_use {};
   int _is_key {};
   int _is_key_special {};
   int _is_laser {};
@@ -670,7 +671,6 @@ private:
   int _is_unused_flag128 {};
   int _is_unused_flag129 {};
   int _is_unused_flag13 {};
-  int _is_unused_flag130 {};
   int _is_unused_flag14 {};
   int _is_unused_flag142 {};
   int _is_unused_flag15 {};
@@ -1831,6 +1831,7 @@ public:
   int is_item_organic(void) const;
   int is_item_targetted(void) const;
   int is_item(void) const;
+  int is_kept_after_final_use(void) const;
   int is_key_special(void) const;
   int is_key(void) const;
   int is_laser(void) const;
@@ -2002,7 +2003,6 @@ public:
   int is_unused_flag128(void) const;
   int is_unused_flag129(void) const;
   int is_unused_flag12(void) const;
-  int is_unused_flag130(void) const;
   int is_unused_flag13(void) const;
   int is_unused_flag142(void) const;
   int is_unused_flag14(void) const;
@@ -2587,6 +2587,7 @@ public:
   void is_item_organic_set(int v);
   void is_item_set(int v);
   void is_item_targetted_set(int v);
+  void is_kept_after_final_use_set(int v);
   void is_key_set(int v);
   void is_key_special_set(int v);
   void is_laser_set(int v);
@@ -2758,7 +2759,6 @@ public:
   void is_unused_flag128_set(int v);
   void is_unused_flag129_set(int v);
   void is_unused_flag12_set(int v);
-  void is_unused_flag130_set(int v);
   void is_unused_flag13_set(int v);
   void is_unused_flag142_set(int v);
   void is_unused_flag14_set(int v);

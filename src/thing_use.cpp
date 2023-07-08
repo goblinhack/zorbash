@@ -220,6 +220,13 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
     }
 
     on_final_use(what);
+
+    //
+    // So magical swords do not vanish on the last charge!
+    //
+    if (what->is_kept_after_final_use()) {
+      return;
+    }
   } else {
     //
     // Still have some charges.
@@ -429,6 +436,15 @@ bool Thing::use(Thingp what, UseOptions *use_options)
     if (equip(what, preferred_equip)) {
       if (is_player()) {
         game->tick_begin("player changed weapon");
+      }
+    }
+
+    //
+    // For duck summoning
+    //
+    if (is_equipped(what)) {
+      if (what->is_target_select()) {
+        return item_choose_target(what);
       }
     }
   } else if (what->is_armor()) {
