@@ -58,6 +58,17 @@ bool Thing::steal_treasure_from(Thingp it)
     dbg("No, nothing to steal");
     return false;
   }
+
+  //
+  // Give the target a chance to detect, and the attacker a bonus.
+  //
+  if (d20_le(it->stat_thv_total() - stat_thv_bonus())) {
+    if (it->is_player()) {
+      it->msg("You feel fingers prying at your pockets!");
+    }
+    return false;
+  }
+
   auto chosen = cands[ pcg_random_range(0, cands.size()) ];
 
   dbg("Steal treasure %s", chosen->to_string().c_str());
