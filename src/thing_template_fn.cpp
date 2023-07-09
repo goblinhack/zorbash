@@ -926,8 +926,12 @@ int Tp::stat_def_penalty_when_stuck(void) const { return _stat_def_penalty_when_
 int Tp::stat_def(void) const { return _stat_def; }
 int Tp::stat_dex_bonus(void) const { return _stat_dex_bonus; }
 int Tp::stat_dex(void) const { return _stat_dex; }
+int Tp::stat_int_bonus(void) const { return _stat_int_bonus; }
+int Tp::stat_int(void) const { return _stat_int; }
 int Tp::stat_luck_bonus(void) const { return _stat_luck_bonus; }
 int Tp::stat_luck(void) const { return _stat_luck; }
+int Tp::stat_psi_bonus(void) const { return _stat_psi_bonus; }
+int Tp::stat_psi(void) const { return _stat_psi; }
 int Tp::stats02(void) const { return _stats02; }
 int Tp::stats03(void) const { return _stats03; }
 int Tp::stats04(void) const { return _stats04; }
@@ -937,6 +941,8 @@ int Tp::stats07(void) const { return _stats07; }
 int Tp::stats09(void) const { return _stats09; }
 int Tp::stat_str_bonus(void) const { return _stat_str_bonus; }
 int Tp::stat_str(void) const { return _stat_str; }
+int Tp::stat_thv_bonus(void) const { return _stat_thv_bonus; }
+int Tp::stat_thv(void) const { return _stat_thv; }
 int Tp::teleport_distance(void) const { return _teleport_distance; }
 int Tp::temperature_max(void) const { return _temperature_max; }
 int Tp::temperature_min(void) const { return _temperature_min; }
@@ -1826,8 +1832,12 @@ void Tp::stat_def_penalty_when_stuck_set(int v) { _stat_def_penalty_when_stuck =
 void Tp::stat_def_set(int v) { _stat_def = v; }
 void Tp::stat_dex_bonus_set(int v) { _stat_dex_bonus = v; }
 void Tp::stat_dex_set(int v) { _stat_dex = v; }
+void Tp::stat_int_bonus_set(int v) { _stat_int_bonus = v; }
+void Tp::stat_int_set(int v) { _stat_int = v; }
 void Tp::stat_luck_bonus_set(int v) { _stat_luck_bonus = v; }
 void Tp::stat_luck_set(int v) { _stat_luck = v; }
+void Tp::stat_psi_bonus_set(int v) { _stat_psi_bonus = v; }
+void Tp::stat_psi_set(int v) { _stat_psi = v; }
 void Tp::stats02_set(int v) { _stats02 = v; }
 void Tp::stats03_set(int v) { _stats03 = v; }
 void Tp::stats04_set(int v) { _stats04 = v; }
@@ -1837,6 +1847,8 @@ void Tp::stats07_set(int v) { _stats07 = v; }
 void Tp::stats09_set(int v) { _stats09 = v; }
 void Tp::stat_str_bonus_set(int v) { _stat_str_bonus = v; }
 void Tp::stat_str_set(int v) { _stat_str = v; }
+void Tp::stat_thv_bonus_set(int v) { _stat_thv_bonus = v; }
+void Tp::stat_thv_set(int v) { _stat_thv = v; }
 void Tp::str1_set(const std::string &v) { _str1 = v; }
 void Tp::str2_set(const std::string &v) { _str2 = v; }
 void Tp::str4_set(const std::string &v) { _str4 = v; }

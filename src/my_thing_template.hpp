@@ -837,8 +837,12 @@ private:
   int _stat_def_penalty_when_stuck_max {};
   int _stat_dex {};
   int _stat_dex_bonus {};
+  int _stat_int {};
+  int _stat_int_bonus {};
   int _stat_luck {};
   int _stat_luck_bonus {};
+  int _stat_psi {};
+  int _stat_psi_bonus {};
   int _stats02 {};
   int _stats03 {};
   int _stats04 {};
@@ -848,6 +852,8 @@ private:
   int _stats09 {};
   int _stat_str {};
   int _stat_str_bonus {};
+  int _stat_thv {};
+  int _stat_thv_bonus {};
   int _teleport_distance {};
   int _temperature_max {};
   int _temperature_min {};
@@ -2171,8 +2177,12 @@ public:
   int stat_def(void) const;
   int stat_dex_bonus(void) const;
   int stat_dex(void) const;
+  int stat_int_bonus(void) const;
+  int stat_int(void) const;
   int stat_luck_bonus(void) const;
   int stat_luck(void) const;
+  int stat_psi_bonus(void) const;
+  int stat_psi(void) const;
   int stats02(void) const;
   int stats03(void) const;
   int stats04(void) const;
@@ -2182,6 +2192,8 @@ public:
   int stats09(void) const;
   int stat_str_bonus(void) const;
   int stat_str(void) const;
+  int stat_thv_bonus(void) const;
+  int stat_thv(void) const;
   int teleport_distance(void) const;
   int temperature_max(void) const;
   int temperature_min(void) const;
@@ -3071,8 +3083,12 @@ public:
   void stat_def_set(int v);
   void stat_dex_bonus_set(int v);
   void stat_dex_set(int v);
+  void stat_int_bonus_set(int v);
+  void stat_int_set(int v);
   void stat_luck_bonus_set(int v);
   void stat_luck_set(int v);
+  void stat_psi_bonus_set(int v);
+  void stat_psi_set(int v);
   void stats02_set(int v);
   void stats03_set(int v);
   void stats04_set(int v);
@@ -3082,6 +3098,8 @@ public:
   void stats09_set(int v);
   void stat_str_bonus_set(int v);
   void stat_str_set(int v);
+  void stat_thv_bonus_set(int v);
+  void stat_thv_set(int v);
   void str1_set(const std::string &v);
   void str2_set(const std::string &v);
   void str4_set(const std::string &v);

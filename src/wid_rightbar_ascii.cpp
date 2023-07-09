@@ -542,6 +542,107 @@ bool wid_rightbar_ascii_create(void)
   }
   y_at++;
 
+  ///////////////////////////////////////////////////////////////////////////
+  // THV
+  ///////////////////////////////////////////////////////////////////////////
+  {
+    TRACE_AND_INDENT();
+    auto  w  = wid_new_plain(wid_rightbar, "Thv");
+    point tl = make_point(0, y_at);
+    point br = make_point(2, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "Thv");
+    wid_set_shape_none(w);
+    wid_set_text_lhs(w, true);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_thv_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+    wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+  }
+  {
+    TRACE_AND_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(3, y_at);
+    point br = make_point(4, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_thv_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+
+    char tmp[ width + 1 ];
+    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_thv_total());
+    wid_set_text(w, tmp);
+    wid_set_text_lhs(w, true);
+    wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
+  }
+  ///////////////////////////////////////////////////////////////////////////
+  // PSI
+  ///////////////////////////////////////////////////////////////////////////
+  {
+    TRACE_AND_INDENT();
+    auto  w  = wid_new_plain(wid_rightbar, "Psi");
+    point tl = make_point(6, y_at);
+    point br = make_point(8, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "Psi");
+    wid_set_shape_none(w);
+    wid_set_text_lhs(w, true);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_psi_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+    wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+  }
+  {
+    TRACE_AND_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(9, y_at);
+    point br = make_point(10, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_psi_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+
+    char tmp[ width + 1 ];
+    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_psi_total());
+    wid_set_text(w, tmp);
+    wid_set_text_lhs(w, true);
+    wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
+  }
+  ///////////////////////////////////////////////////////////////////////////
+  // LUCK
+  ///////////////////////////////////////////////////////////////////////////
+  {
+    TRACE_AND_INDENT();
+    auto  w  = wid_new_plain(wid_rightbar, "Int");
+    point tl = make_point(12, y_at);
+    point br = make_point(14, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "Int");
+    wid_set_shape_none(w);
+    wid_set_text_lhs(w, true);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_int_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+    wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+  }
+  {
+    TRACE_AND_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(15, y_at);
+    point br = make_point(16, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_int_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+
+    char tmp[ width + 1 ];
+    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_int_total());
+    wid_set_text(w, tmp);
+    wid_set_text_lhs(w, true);
+    wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
+  }
+  y_at++;
+
   auto itemsp = player->maybe_itemsp();
   if (! itemsp) {
     ERR("No itemsp for player");

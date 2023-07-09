@@ -13,6 +13,9 @@ void wid_rightbar_stats_over_stat_att_b(Widp w, int relx, int rely, int wheelx, 
 void wid_rightbar_stats_over_stat_con_b(Widp w, int relx, int rely, int wheelx, int wheely);
 void wid_rightbar_stats_over_stat_dex_b(Widp w, int relx, int rely, int wheelx, int wheely);
 void wid_rightbar_stats_over_stat_luck_b(Widp w, int relx, int rely, int wheelx, int wheely);
+void wid_rightbar_stats_over_stat_thv_b(Widp w, int relx, int rely, int wheelx, int wheely);
+void wid_rightbar_stats_over_stat_psi_b(Widp w, int relx, int rely, int wheelx, int wheely);
+void wid_rightbar_stats_over_stat_int_b(Widp w, int relx, int rely, int wheelx, int wheely);
 void wid_rightbar_stats_over_popup_e(Widp w);
 void wid_rightbar_inventory_over_begin(Widp w, int relx, int rely, int wheelx, int wheely);
 void wid_rightbar_inventory_over_end(Widp w);

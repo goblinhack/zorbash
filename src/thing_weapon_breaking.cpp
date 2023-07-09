@@ -143,7 +143,7 @@ void Thing::weapon_check_for_dmg(Thingp weapon, Thingp victim)
   //
   // If you roll under luck, no damage.
   //
-  if (d20_le(stat_luck_total())) {
+  if (d20_le(stat_luck_bonus())) {
     damaged_chance = 0;
   }
 

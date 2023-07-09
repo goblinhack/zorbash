@@ -73,6 +73,16 @@ bool Thing::open_door(Thingp door)
       if (is_player()) {
         msg("You unlock the door.");
       }
+    } else if (d20_le(stat_thv_bonus())) {
+      //
+      // Managed to unlock the door
+      //
+      dbg("No keys to open door: %s", door->to_short_string().c_str());
+      TRACE_AND_INDENT();
+
+      if (is_player()) {
+        msg("You manage to skillfully unlock the door.");
+      }
     } else {
       //
       // No keys ?
@@ -174,12 +184,12 @@ bool Thing::close_door(Thingp door)
     //
     // If we're lucky, give the key back.
     //
-    if (d20_le(stat_luck_total() - 5)) {
+    if (d20_le(stat_thv_bonus())) {
       door->is_key_in_lock = false;
       keys_incr(1);
 
       if (is_player()) {
-        msg("The door closes. You manage to remove the key from the rusty lock.");
+        msg("The door closes. You skillfully manage to remove the key from the rusty lock.");
       }
     } else {
       //

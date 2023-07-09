@@ -133,6 +133,12 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->stat_dex_bonus);
    in >> bits(my.t->stat_luck);
    in >> bits(my.t->stat_luck_bonus);
+   in >> bits(my.t->stat_thv);
+   in >> bits(my.t->stat_thv_bonus);
+   in >> bits(my.t->stat_psi);
+   in >> bits(my.t->stat_psi_bonus);
+   in >> bits(my.t->stat_int);
+   in >> bits(my.t->stat_int_bonus);
    in >> bits(my.t->stats02);
    in >> bits(my.t->stats03);
    in >> bits(my.t->stats04);

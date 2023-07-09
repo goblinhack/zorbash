@@ -363,6 +363,15 @@ void tp_fixup(void)
       if (! tp->stat_luck()) {
         tp->stat_luck_set(10);
       }
+      if (! tp->stat_thv()) {
+        tp->stat_thv_set(10);
+      }
+      if (! tp->stat_psi()) {
+        tp->stat_psi_set(10);
+      }
+      if (! tp->stat_int()) {
+        tp->stat_int_set(10);
+      }
     }
 
     //

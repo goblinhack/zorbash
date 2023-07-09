@@ -447,6 +447,216 @@ void wid_rightbar_stats_over_stat_luck_b(Widp w, int relx, int rely, int wheelx,
   game->wid_thing_info_create(level->player);
 }
 
+void wid_rightbar_stats_over_stat_thv_b(Widp w, int relx, int rely, int wheelx, int wheely)
+{
+  TRACE_NO_INDENT();
+
+  if (wid_popup_exists()) {
+    return;
+  }
+
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
+  wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
+
+  int width  = 40;
+  int height = 20;
+
+  tlx -= width + 4;
+  brx = tlx + width;
+  bry += height;
+
+  point tl(tlx, tly);
+  point br(brx, bry);
+
+  wid_rightbar_popup = new WidPopup("Robot", tl, br, nullptr, "", false, false);
+  wid_rightbar_popup->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Thieving");
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  wid_rightbar_popup->log("Your thieving factor. 10 is for a normal trustworthy human and gives no bonus.",
+                          TEXT_FORMAT_LHS);
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  wid_rightbar_popup->log(
+      "Thieving skills help you avoid being pick-pocketed by sneaky gnomes and gives bonuses in unlocking doors",
+      TEXT_FORMAT_LHS);
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+
+  auto level = game->get_current_level();
+  if (! level) {
+    return;
+  }
+
+  auto player = level->player;
+  if (! player) {
+    return;
+  }
+
+  {
+    auto val = player->stat_thv();
+    char tmp[ MAXSHORTSTR ];
+    snprintf(tmp, sizeof(tmp) - 1, "Your thieving stat is %d.", val);
+    wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
+    wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  }
+
+  {
+    auto val = player->stat_thv();
+    auto tot = player->stat_thv_total();
+    if (val != tot) {
+      char tmp[ MAXSHORTSTR ];
+      snprintf(tmp, sizeof(tmp) - 1, "Your total thieving stat including all items and modifiers is %d.", val);
+      wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
+    } else {
+      wid_rightbar_popup->log("You currently have no thieving bonuses", TEXT_FORMAT_LHS);
+    }
+  }
+
+  wid_rightbar_popup->compress();
+
+  game->wid_thing_info_create(level->player);
+}
+
+void wid_rightbar_stats_over_stat_psi_b(Widp w, int relx, int rely, int wheelx, int wheely)
+{
+  TRACE_NO_INDENT();
+
+  if (wid_popup_exists()) {
+    return;
+  }
+
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
+  wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
+
+  int width  = 40;
+  int height = 20;
+
+  tlx -= width + 4;
+  brx = tlx + width;
+  bry += height;
+
+  point tl(tlx, tly);
+  point br(brx, bry);
+
+  wid_rightbar_popup = new WidPopup("Robot", tl, br, nullptr, "", false, false);
+  wid_rightbar_popup->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Psi");
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  wid_rightbar_popup->log("Your psi factor. 10 is for a normal non psychic human and gives no bonus.",
+                          TEXT_FORMAT_LHS);
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  wid_rightbar_popup->log(
+      "Not to be confused with pounds per square inch, Psi gives you the ability to defend yourself against dominion "
+      "attacks",
+      TEXT_FORMAT_LHS);
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+
+  auto level = game->get_current_level();
+  if (! level) {
+    return;
+  }
+
+  auto player = level->player;
+  if (! player) {
+    return;
+  }
+
+  {
+    auto val = player->stat_psi();
+    char tmp[ MAXSHORTSTR ];
+    snprintf(tmp, sizeof(tmp) - 1, "Your psi is %d.", val);
+    wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
+    wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  }
+
+  {
+    auto val = player->stat_psi();
+    auto tot = player->stat_psi_total();
+    if (val != tot) {
+      char tmp[ MAXSHORTSTR ];
+      snprintf(tmp, sizeof(tmp) - 1, "Your total psi including all items and modifiers is %d.", val);
+      wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
+    } else {
+      wid_rightbar_popup->log("You currently have no psi bonuses", TEXT_FORMAT_LHS);
+    }
+  }
+
+  wid_rightbar_popup->compress();
+
+  game->wid_thing_info_create(level->player);
+}
+
+void wid_rightbar_stats_over_stat_int_b(Widp w, int relx, int rely, int wheelx, int wheely)
+{
+  TRACE_NO_INDENT();
+
+  if (wid_popup_exists()) {
+    return;
+  }
+
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
+  wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
+
+  int width  = 40;
+  int height = 20;
+
+  tlx -= width + 4;
+  brx = tlx + width;
+  bry += height;
+
+  point tl(tlx, tly);
+  point br(brx, bry);
+
+  wid_rightbar_popup = new WidPopup("Robot", tl, br, nullptr, "", false, false);
+  wid_rightbar_popup->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Intelligence");
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  wid_rightbar_popup->log("Your intelligence factor. 10 is for a normal dumb human and gives no bonus.",
+                          TEXT_FORMAT_LHS);
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  wid_rightbar_popup->log("Intelligence helps you learn more spells and succeed in dominion attacks",
+                          TEXT_FORMAT_LHS);
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+
+  auto level = game->get_current_level();
+  if (! level) {
+    return;
+  }
+
+  auto player = level->player;
+  if (! player) {
+    return;
+  }
+
+  {
+    auto val = player->stat_int();
+    char tmp[ MAXSHORTSTR ];
+    snprintf(tmp, sizeof(tmp) - 1, "Your intelligence is %d.", val);
+    wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
+    wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  }
+
+  {
+    auto val = player->stat_int();
+    auto tot = player->stat_int_total();
+    if (val != tot) {
+      char tmp[ MAXSHORTSTR ];
+      snprintf(tmp, sizeof(tmp) - 1, "Your total int including all items and modifiers is %d.", val);
+      wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
+    } else {
+      wid_rightbar_popup->log("You currently have no int bonuses", TEXT_FORMAT_LHS);
+    }
+  }
+
+  wid_rightbar_popup->compress();
+
+  game->wid_thing_info_create(level->player);
+}
+
 void wid_rightbar_stats_over_popup_e(Widp w)
 {
   TRACE_NO_INDENT();

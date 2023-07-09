@@ -124,14 +124,12 @@ bool wid_rightbar_pixelart_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
   }
 
-  y_at++;
-
   {
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "score and move count");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
-    point tl = make_point(1, y_at - 2);
-    point br = make_point(width - 1, y_at - 2);
+    point tl = make_point(1, y_at - 1);
+    point br = make_point(width - 1, y_at - 1);
 
     wid_set_pos(w, tl, br);
     auto g = dynprintf("  %06d   %-6d", player->score(), player->move_count());
@@ -364,6 +362,65 @@ bool wid_rightbar_pixelart_create(void)
 
     char tmp[ width + 1 ];
     snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_luck_total());
+    wid_set_text(w, tmp);
+    wid_set_text_lhs(w, true);
+  }
+  y_at++;
+
+  ///////////////////////////////////////////////////////////////////////////
+  // THV
+  ///////////////////////////////////////////////////////////////////////////
+  {
+    TRACE_NO_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(4, y_at + 1);
+    point br = make_point(4 + tl.x + width - 1, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_thv_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+
+    char tmp[ width + 1 ];
+    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_thv_total());
+    wid_set_text(w, tmp);
+    wid_set_text_lhs(w, true);
+  }
+  ///////////////////////////////////////////////////////////////////////////
+  // PSI
+  ///////////////////////////////////////////////////////////////////////////
+  {
+    TRACE_NO_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(9, y_at + 1);
+    point br = make_point(9 + tl.x + width - 1, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_psi_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+
+    char tmp[ width + 1 ];
+    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_psi_total());
+    wid_set_text(w, tmp);
+    wid_set_text_lhs(w, true);
+  }
+  ///////////////////////////////////////////////////////////////////////////
+  // INT
+  ///////////////////////////////////////////////////////////////////////////
+  {
+    TRACE_NO_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(14, y_at + 1);
+    point br = make_point(14 + tl.x + width - 1, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_int_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+
+    char tmp[ width + 1 ];
+    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_int_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }

@@ -713,8 +713,11 @@ public:
   void wid_thing_info_add_stat_con(WidPopup *w, Thingp t);
   void wid_thing_info_add_stat_def(WidPopup *w, Thingp t);
   void wid_thing_info_add_stat_dex(WidPopup *w, Thingp t);
+  void wid_thing_info_add_stat_int(WidPopup *w, Thingp t);
   void wid_thing_info_add_stat_luck(WidPopup *w, Thingp t);
+  void wid_thing_info_add_stat_psi(WidPopup *w, Thingp t);
   void wid_thing_info_add_stat_str(WidPopup *w, Thingp t);
+  void wid_thing_info_add_stat_thv(WidPopup *w, Thingp t);
   void wid_thing_info_clear_popup(void);
   void wid_thing_info_destroy_deferred(void);
   void wid_thing_info_destroy_immediate(void);
@@ -751,8 +754,11 @@ public:
   void wid_tp_info_add_stat_con(WidPopup *w, Tpp t);
   void wid_tp_info_add_stat_def(WidPopup *w, Tpp t);
   void wid_tp_info_add_stat_dex(WidPopup *w, Tpp t);
+  void wid_tp_info_add_stat_int(WidPopup *w, Tpp t);
   void wid_tp_info_add_stat_luck(WidPopup *w, Tpp t);
+  void wid_tp_info_add_stat_psi(WidPopup *w, Tpp t);
   void wid_tp_info_add_stat_str(WidPopup *w, Tpp t);
+  void wid_tp_info_add_stat_thv(WidPopup *w, Tpp t);
   void wid_tp_info_clear_popup(void);
   void wid_tp_info_destroy_deferred(void);
   void wid_tp_info_destroy_immediate(void);

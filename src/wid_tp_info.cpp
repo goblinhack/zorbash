@@ -237,6 +237,9 @@ WidPopup *Game::wid_tp_info_create_popup(Tpp t, point tl, point br)
   wid_tp_info_add_stat_con(wid_popup_window, t);
   wid_tp_info_add_stat_dex(wid_popup_window, t);
   wid_tp_info_add_stat_luck(wid_popup_window, t);
+  wid_tp_info_add_stat_thv(wid_popup_window, t);
+  wid_tp_info_add_stat_psi(wid_popup_window, t);
+  wid_tp_info_add_stat_int(wid_popup_window, t);
   wid_tp_info_add_move_speed(wid_popup_window, t);
   wid_tp_info_add_shove_strength(wid_popup_window, t);
   wid_tp_info_add_jump_distance(wid_popup_window, t);
@@ -1401,6 +1404,78 @@ void Game::wid_tp_info_add_stat_luck(WidPopup *w, Tpp t)
   } else if (t->stat_luck_bonus()) {
     auto stat = t->stat_luck_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Luck bonus               %4s", bonus_to_string(stat).c_str());
+    w->log(tmp);
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
+  }
+}
+
+void Game::wid_tp_info_add_stat_thv(WidPopup *w, Tpp t)
+{
+  TRACE_AND_INDENT();
+  char tmp[ MAXSHORTSTR ];
+
+  if (t->is_monst() || t->is_player()) {
+    auto stat = t->stat_thv();
+    char tmp2[ MAXSHORTSTR ];
+    snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Thieving               %6s", tmp2);
+    w->log(tmp);
+  } else if (t->stat_thv_bonus()) {
+    auto stat = t->stat_thv_bonus();
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Thieving bonus           %4s", bonus_to_string(stat).c_str());
+    w->log(tmp);
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
+  }
+}
+
+void Game::wid_tp_info_add_stat_psi(WidPopup *w, Tpp t)
+{
+  TRACE_AND_INDENT();
+  char tmp[ MAXSHORTSTR ];
+
+  if (t->is_monst() || t->is_player()) {
+    auto stat = t->stat_psi();
+    char tmp2[ MAXSHORTSTR ];
+    snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Psi                    %6s", tmp2);
+    w->log(tmp);
+  } else if (t->stat_psi_bonus()) {
+    auto stat = t->stat_psi_bonus();
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Psi bonus                %4s", bonus_to_string(stat).c_str());
+    w->log(tmp);
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
+  }
+}
+
+void Game::wid_tp_info_add_stat_int(WidPopup *w, Tpp t)
+{
+  TRACE_AND_INDENT();
+  char tmp[ MAXSHORTSTR ];
+
+  if (t->is_monst() || t->is_player()) {
+    auto stat = t->stat_int();
+    char tmp2[ MAXSHORTSTR ];
+    snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Intel                  %6s", tmp2);
+    w->log(tmp);
+  } else if (t->stat_int_bonus()) {
+    auto stat = t->stat_int_bonus();
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Intel bonus              %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");

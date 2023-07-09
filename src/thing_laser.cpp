@@ -75,8 +75,7 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
   return is_target_select(item);
 }
 
-bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targeted_laser, Thingp target,
-                           UseOptions *use_options)
+bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targeted_laser, Thingp target, UseOptions *use_options)
 {
   //
   // NOTE: the item can be null here if this is monster firing with its
@@ -415,8 +414,8 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targeted_laser, p
       at = curr_at + point(dx, dy);
 
       float dist = distance(item->curr_at, at);
-      dbg("Laser shoot %s at new point %s, dist %f, max %d", gfx_targeted_laser.c_str(), at.to_string().c_str(),
-          dist, item->range_max());
+      dbg("Laser shoot %s at new point %s, dist %f, max %d", gfx_targeted_laser.c_str(), at.to_string().c_str(), dist,
+          item->range_max());
     }
   }
 

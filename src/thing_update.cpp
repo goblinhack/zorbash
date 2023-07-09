@@ -197,6 +197,52 @@ void Thing::update(void)
       stat_luck_set(v);
     }
   }
+
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stat_thv_bonus();
+    if (unlikely(v)) {
+      stat_thv_bonus_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stat_thv();
+    if (unlikely(v)) {
+      stat_thv_set(v);
+    }
+  }
+
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stat_psi_bonus();
+    if (unlikely(v)) {
+      stat_psi_bonus_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stat_psi();
+    if (unlikely(v)) {
+      stat_psi_set(v);
+    }
+  }
+
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stat_int_bonus();
+    if (unlikely(v)) {
+      stat_int_bonus_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stat_int();
+    if (unlikely(v)) {
+      stat_int_set(v);
+    }
+  }
+
   {
     TRACE_NO_INDENT();
     auto v = tpp->stats02();

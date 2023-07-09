@@ -144,8 +144,12 @@ public:
   int stat_def_bonus      = {};
   int stat_dex            = {};
   int stat_dex_bonus      = {};
+  int stat_int            = {};
+  int stat_int_bonus      = {};
   int stat_luck           = {};
   int stat_luck_bonus     = {};
+  int stat_psi            = {};
+  int stat_psi_bonus      = {};
   int stats02             = {};
   int stats03             = {};
   int stats04             = {};
@@ -155,6 +159,8 @@ public:
   int stats09             = {};
   int stat_str            = {};
   int stat_str_bonus      = {};
+  int stat_thv            = {};
+  int stat_thv_bonus      = {};
   int submerged_offset    = {}; // Pixels
   int tick_resurrect_when = {};
   // end sort marker1 }
