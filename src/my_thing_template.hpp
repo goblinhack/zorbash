@@ -669,7 +669,6 @@ private:
   int _is_unused_flag126 {};
   int _is_unused_flag127 {};
   int _is_unused_flag128 {};
-  int _is_unused_flag129 {};
   int _is_unused_flag13 {};
   int _is_unused_flag14 {};
   int _is_unused_flag142 {};
@@ -868,6 +867,7 @@ private:
   int _unused_chance4_d1000 {};
   int _unused_chance5_d1000 {};
   int _unused_chance6_d1000 {};
+  int _unused_flag129 {};
   int _weapon_dmg {};
   int _weapon_use_distance {};
   // end sort marker1 }
@@ -2007,7 +2007,6 @@ public:
   int is_unused_flag126(void) const;
   int is_unused_flag127(void) const;
   int is_unused_flag128(void) const;
-  int is_unused_flag129(void) const;
   int is_unused_flag12(void) const;
   int is_unused_flag13(void) const;
   int is_unused_flag142(void) const;
@@ -2208,6 +2207,7 @@ public:
   int unused_chance4_d1000(void) const;
   int unused_chance5_d1000(void) const;
   int unused_chance6_d1000(void) const;
+  int unused_flag129(void) const;
   int weapon_dmg(void) const;
   // end sort marker4 }
 
@@ -2769,7 +2769,6 @@ public:
   void is_unused_flag126_set(int v);
   void is_unused_flag127_set(int v);
   void is_unused_flag128_set(int v);
-  void is_unused_flag129_set(int v);
   void is_unused_flag12_set(int v);
   void is_unused_flag13_set(int v);
   void is_unused_flag142_set(int v);
@@ -3136,6 +3135,7 @@ public:
   void unused_chance4_d1000_set(int v);
   void unused_chance5_d1000_set(int v);
   void unused_chance6_d1000_set(int v);
+  void unused_flag129_set(int v);
   void weapon_dmg_set(int v);
   void weapon_use_distance_set(int v);
   void z_depth_set(int v);

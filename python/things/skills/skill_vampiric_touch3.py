@@ -88,6 +88,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.skill_replaces(self, "skill_vampiric_touch2")
     my.stat_con_bonus(self, -6)
     my.stat_luck_bonus(self, -6)
+    my.stat_psi_bonus(self, 3)
     my.text_description_long4(self, "Damage reduction is 30 percent of damage dealt. Of that, the damage reduction will be applied to your stamina, and conversely will drain the attacker for the same amount. Health will improve at 50 percent of the damage reduction")
     my.text_description_very_short(self, "VamTouch3")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

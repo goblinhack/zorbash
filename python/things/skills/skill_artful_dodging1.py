@@ -25,6 +25,7 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.stat_def_bonus(self, 1)
     my.stat_dex_bonus(self, 1)
+    my.stat_thv_bonus(self, 1)
     my.text_description_long3(self, "Stamina will be recovered at a rate of 1 with a 10 percent chance per move.")
     my.text_description_very_short(self, "ArtDodge1")
     # end sort marker

@@ -663,6 +663,7 @@ std::initializer_list< std::string > tps = {
     "sword_draining_carry",
     "sword_draining_swing",
     "sword_duck_summoning",
+    "sword_duck_summoning_carry",
     "sword_duck_summoning_swing",
     "sword_plutonium",
     "sword_plutonium_carry",

@@ -756,7 +756,6 @@ int Tp::is_unused_flag125(void) const { return _is_unused_flag125; }
 int Tp::is_unused_flag126(void) const { return _is_unused_flag126; }
 int Tp::is_unused_flag127(void) const { return _is_unused_flag127; }
 int Tp::is_unused_flag128(void) const { return _is_unused_flag128; }
-int Tp::is_unused_flag129(void) const { return _is_unused_flag129; }
 int Tp::is_unused_flag12(void) const { return _is_unused_flag12; }
 int Tp::is_unused_flag13(void) const { return _is_unused_flag13; }
 int Tp::is_unused_flag142(void) const { return _is_unused_flag142; }
@@ -957,6 +956,7 @@ int Tp::unused_chance3_d1000(void) const { return _unused_chance3_d1000; }
 int Tp::unused_chance4_d1000(void) const { return _unused_chance4_d1000; }
 int Tp::unused_chance5_d1000(void) const { return _unused_chance5_d1000; }
 int Tp::unused_chance6_d1000(void) const { return _unused_chance6_d1000; }
+int Tp::unused_flag129(void) const { return _unused_flag129; }
 int Tp::weapon_dmg(void) const { return _weapon_dmg; }
 // end sort marker2 }
 
@@ -1518,7 +1518,6 @@ void Tp::is_unused_flag125_set(int v) { _is_unused_flag125 = v; }
 void Tp::is_unused_flag126_set(int v) { _is_unused_flag126 = v; }
 void Tp::is_unused_flag127_set(int v) { _is_unused_flag127 = v; }
 void Tp::is_unused_flag128_set(int v) { _is_unused_flag128 = v; }
-void Tp::is_unused_flag129_set(int v) { _is_unused_flag129 = v; }
 void Tp::is_unused_flag12_set(int v) { _is_unused_flag12 = v; }
 void Tp::is_unused_flag13_set(int v) { _is_unused_flag13 = v; }
 void Tp::is_unused_flag142_set(int v) { _is_unused_flag142 = v; }
@@ -1882,6 +1881,7 @@ void Tp::unused_chance3_d1000_set(int v) { _unused_chance3_d1000 = v; }
 void Tp::unused_chance4_d1000_set(int v) { _unused_chance4_d1000 = v; }
 void Tp::unused_chance5_d1000_set(int v) { _unused_chance5_d1000 = v; }
 void Tp::unused_chance6_d1000_set(int v) { _unused_chance6_d1000 = v; }
+void Tp::unused_flag129_set(int v) { _unused_flag129 = v; }
 void Tp::weapon_dmg_set(int v) { _weapon_dmg = v; }
 void Tp::weapon_use_distance_set(int v) { _weapon_use_distance = v; }
 void Tp::z_depth_set(int v) { z_depth = v; }

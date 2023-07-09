@@ -83,6 +83,7 @@ def tp_init(name, text_long_name):
     my.stat_def(self, 25)
     my.stat_dex(self, 10)
     my.stat_luck(self, 10)
+    my.stat_psi(self, 20)
     my.stat_str(self, 25)
     my.temperature(self, -10)
     my.text_a_or_an(self, "a")

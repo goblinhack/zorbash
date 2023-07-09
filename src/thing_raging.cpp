@@ -9,7 +9,7 @@
 bool Thing::is_raging(void)
 {
   TRACE_NO_INDENT();
-  return is_raging_val;
+  return is_raging_currently;
 }
 
 int Thing::is_able_to_rage(void)
@@ -33,7 +33,7 @@ bool Thing::raging_set(bool val)
     }
   }
 
-  return is_raging_val = val;
+  return is_raging_currently = val;
 }
 
 void Thing::rage_tick(void)

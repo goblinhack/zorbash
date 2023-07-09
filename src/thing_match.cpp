@@ -456,7 +456,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag126() && (what == "is_unused_flag126")) { return true; }
   if (is_unused_flag127() && (what == "is_unused_flag127")) { return true; }
   if (is_unused_flag128() && (what == "is_unused_flag128")) { return true; }
-  if (is_unused_flag129() && (what == "is_unused_flag129")) { return true; }
   if (is_unused_flag12() && (what == "is_unused_flag12")) { return true; }
   if (is_unused_flag13() && (what == "is_unused_flag13")) { return true; }
   if (is_unused_flag142() && (what == "is_unused_flag142")) { return true; }
@@ -598,6 +597,7 @@ bool Tp::matches(const std::string &what)
   if (stat_def_penalty_when_stuck_max() && (what == "stat_def_penalty_when_stuck_max")) { return true; }
   if (stat_def_penalty_when_stuck() && (what == "stat_def_penalty_when_stuck")) { return true; }
   if (tick_prio() && (what == "tick_prio")) { return true; }
+  if (unused_flag129() && (what == "unused_flag129")) { return true; }
   // end sort marker1 }
 
   // Any water type
@@ -1057,7 +1057,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag126() && (what == "is_unused_flag126")) { return true; }
   if (is_unused_flag127() && (what == "is_unused_flag127")) { return true; }
   if (is_unused_flag128() && (what == "is_unused_flag128")) { return true; }
-  if (is_unused_flag129() && (what == "is_unused_flag129")) { return true; }
   if (is_unused_flag12() && (what == "is_unused_flag12")) { return true; }
   if (is_unused_flag13() && (what == "is_unused_flag13")) { return true; }
   if (is_unused_flag142() && (what == "is_unused_flag142")) { return true; }
@@ -1199,6 +1198,7 @@ bool Thing::matches(const std::string &what)
   if (stat_def_penalty_when_stuck_max() && (what == "stat_def_penalty_when_stuck_max")) { return true; }
   if (stat_def_penalty_when_stuck() && (what == "stat_def_penalty_when_stuck")) { return true; }
   if (tick_prio() && (what == "tick_prio")) { return true; }
+  if (unused_flag129() && (what == "unused_flag129")) { return true; }
   // end sort marker2 }
   // clang-format on
 
@@ -1646,7 +1646,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag126") { return &Thing::is_unused_flag126; }
   if (what == "is_unused_flag127") { return &Thing::is_unused_flag127; }
   if (what == "is_unused_flag128") { return &Thing::is_unused_flag128; }
-  if (what == "is_unused_flag129") { return &Thing::is_unused_flag129; }
   if (what == "is_unused_flag12") { return &Thing::is_unused_flag12; }
   if (what == "is_unused_flag13") { return &Thing::is_unused_flag13; }
   if (what == "is_unused_flag142") { return &Thing::is_unused_flag142; }
@@ -1789,6 +1788,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "stat_def_penalty_when_stuck_max") { return &Thing::stat_def_penalty_when_stuck_max; }
   if (what == "stat_def_penalty_when_stuck") { return &Thing::stat_def_penalty_when_stuck; }
   if (what == "tick_prio") { return &Thing::tick_prio; }
+  if (what == "unused_flag129") { return &Thing::unused_flag129; }
   // end sort marker3 }
   // clang-format on
 

@@ -584,7 +584,6 @@ THING_BODY_GET_BOOL(thing_is_unused_flag125, is_unused_flag125)
 THING_BODY_GET_BOOL(thing_is_unused_flag126, is_unused_flag126)
 THING_BODY_GET_BOOL(thing_is_unused_flag127, is_unused_flag127)
 THING_BODY_GET_BOOL(thing_is_unused_flag128, is_unused_flag128)
-THING_BODY_GET_BOOL(thing_is_unused_flag129, is_unused_flag129)
 THING_BODY_GET_BOOL(thing_is_unused_flag12, is_unused_flag12)
 THING_BODY_GET_BOOL(thing_is_unused_flag13, is_unused_flag13)
 THING_BODY_GET_BOOL(thing_is_unused_flag142, is_unused_flag142)
@@ -735,6 +734,7 @@ THING_BODY_GET_BOOL(thing_teleport_distance, teleport_distance_get)
 THING_BODY_GET_BOOL(thing_temperature_max, temperature_max_get)
 THING_BODY_GET_BOOL(thing_temperature_min, temperature_min_get)
 THING_BODY_GET_BOOL(thing_tick_prio, tick_prio)
+THING_BODY_GET_BOOL(thing_unused_flag129, unused_flag129)
 // end sort marker1 }
 
 // begin sort marker2 {

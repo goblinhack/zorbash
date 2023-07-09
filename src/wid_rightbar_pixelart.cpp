@@ -256,6 +256,17 @@ bool wid_rightbar_pixelart_create(void)
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(1, y_at + 1);
+    point br = make_point(3 + tl.x + width - 1, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_def_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+  }
+  {
+    TRACE_NO_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(4, y_at + 1);
     point br = make_point(4 + tl.x + width - 1, tl.y);
     wid_set_pos(w, tl, br);
@@ -275,6 +286,17 @@ bool wid_rightbar_pixelart_create(void)
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(5, y_at + 1);
+    point br = make_point(8 + tl.x + width - 1, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_att_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+  }
+  {
+    TRACE_NO_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(9, y_at + 1);
     point br = make_point(9 + tl.x + width - 1, tl.y);
     wid_set_pos(w, tl, br);
@@ -290,6 +312,17 @@ bool wid_rightbar_pixelart_create(void)
   ///////////////////////////////////////////////////////////////////////////
   // STR
   ///////////////////////////////////////////////////////////////////////////
+  {
+    TRACE_NO_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(10, y_at + 1);
+    point br = make_point(13 + tl.x + width - 1, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_str_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+  }
   {
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
@@ -315,6 +348,17 @@ bool wid_rightbar_pixelart_create(void)
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(1, y_at + 1);
+    point br = make_point(3 + tl.x + width - 1, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_con_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+  }
+  {
+    TRACE_NO_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(4, y_at + 1);
     point br = make_point(4 + tl.x + width - 1, tl.y);
     wid_set_pos(w, tl, br);
@@ -334,6 +378,17 @@ bool wid_rightbar_pixelart_create(void)
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(5, y_at + 1);
+    point br = make_point(8 + tl.x + width - 1, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_dex_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+  }
+  {
+    TRACE_NO_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(9, y_at + 1);
     point br = make_point(9 + tl.x + width - 1, tl.y);
     wid_set_pos(w, tl, br);
@@ -349,6 +404,17 @@ bool wid_rightbar_pixelart_create(void)
   ///////////////////////////////////////////////////////////////////////////
   // LUCK
   ///////////////////////////////////////////////////////////////////////////
+  {
+    TRACE_NO_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(10, y_at + 1);
+    point br = make_point(13 + tl.x + width - 1, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_luck_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+  }
   {
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
@@ -374,6 +440,17 @@ bool wid_rightbar_pixelart_create(void)
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(1, y_at + 1);
+    point br = make_point(3 + tl.x + width - 1, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_thv_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+  }
+  {
+    TRACE_NO_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(4, y_at + 1);
     point br = make_point(4 + tl.x + width - 1, tl.y);
     wid_set_pos(w, tl, br);
@@ -393,6 +470,17 @@ bool wid_rightbar_pixelart_create(void)
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(5, y_at + 1);
+    point br = make_point(8 + tl.x + width - 1, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_psi_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+  }
+  {
+    TRACE_NO_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(9, y_at + 1);
     point br = make_point(9 + tl.x + width - 1, tl.y);
     wid_set_pos(w, tl, br);
@@ -408,6 +496,17 @@ bool wid_rightbar_pixelart_create(void)
   ///////////////////////////////////////////////////////////////////////////
   // INT
   ///////////////////////////////////////////////////////////////////////////
+  {
+    TRACE_NO_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(10, y_at + 1);
+    point br = make_point(13 + tl.x + width - 1, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_int_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+  }
   {
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");

@@ -840,10 +840,10 @@ int Thing::is_unused_flag128(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag128());
 }
-int Thing::is_unused_flag129(void)
+int Thing::unused_flag129(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag129());
+  return (tp()->unused_flag129());
 }
 int Thing::is_kept_after_final_use(void)
 {

@@ -182,59 +182,60 @@ public:
   // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
   /////////////////////////////////////////////////////////////////////////
   // begin sort marker1 {
-  uint64_t corpse_cleanup                               : 1 {};
-  uint64_t gfx_ascii_animated                           : 1 {};
-  uint64_t gfx_pixelart_animated                        : 1 {};
-  uint64_t has_attacked_player                          : 1 {};
-  uint64_t has_ever_moved                               : 1 {};
-  uint64_t has_light                                    : 1 {};
-  uint64_t has_projectile                               : 1 {}; // current projectile being fired
-  uint64_t has_seen_player_msg_shown                    : 1 {};
-  uint64_t is_activated                                 : 1 {}; // this skill is activated
-  uint64_t is_attached                                  : 1 {}; // is attached to the level
-  uint64_t is_being_destroyed                           : 1 {};
-  uint64_t is_bouncing                                  : 1 {};
-  uint64_t is_burnt                                     : 1 {}; // burnt by ice and cannot move
-  uint64_t is_changing_level                            : 1 {}; // is in the process of changing level
-  uint64_t is_dead                                      : 1 {};
-  uint64_t is_drained                                   : 1 {}; // e.g. enchant or skillstone used up
-  uint64_t is_dying                                     : 1 {}; // is currently in the throes of death
-  uint64_t is_facing_left                               : 1 {};
-  uint64_t is_fadeup                                    : 1 {}; // for text that fades upwards
-  uint64_t is_falling                                   : 1 {};
-  uint64_t is_frozen                                    : 1 {}; // frozen by ice and cannot move
-  uint64_t is_hidden                                    : 1 {};
-  uint64_t is_hunger_level_gorged                       : 1 {};
-  uint64_t is_hunger_level_hungry                       : 1 {};
-  uint64_t is_hunger_level_satiated                     : 1 {};
-  uint64_t is_hunger_level_starving                     : 1 {};
-  uint64_t is_jumping                                   : 1 {};
-  uint64_t is_key_in_lock                               : 1 {}; // key stuck in rusty lock?
-  uint64_t is_minion_set                                : 1 {}; // overrides is_minion in template
-  uint64_t is_moving                                    : 1 {}; // is currently moving tiles
-  uint64_t is_open                                      : 1 {};
-  uint64_t is_raging_val                                : 1 {};
-  uint64_t is_resurrected                               : 1 {}; // has finished resurrecting
-  uint64_t is_resurrecting                              : 1 {}; // is currently resurrecing
-  uint64_t is_resurrection_blocked                      : 1 {}; // blocked from resurrection
-  uint64_t is_ring2                                     : 1 {}; // for 2nd rings
-  uint64_t is_scheduled_for_death                       : 1 {}; // will die in next game loop
-  uint64_t is_scheduled_for_gc                          : 1 {};
-  uint64_t is_scheduled_for_jump_end                    : 1 {};
-  uint64_t is_seen_by_player_msg_shown                  : 1 {};
-  uint64_t is_sleeping                                  : 1 {};
-  uint64_t is_teleporting                               : 1 {};
-  uint64_t is_the_grid                                  : 1 {}; // is the backbone of the level
-  uint64_t is_the_player                                : 1 {};
-  uint64_t is_visible_to_player                         : 1 {};
-  uint64_t is_waiting                                   : 1 {}; // is waiting on this tick
-  uint64_t is_waiting_to_ascend_dungeon                 : 1 {};
-  uint64_t is_waiting_to_ascend_sewer                   : 1 {};
-  uint64_t is_waiting_to_descend_dungeon                : 1 {};
-  uint64_t is_waiting_to_descend_sewer                  : 1 {};
-  uint64_t is_waiting_to_leave_level_has_completed_fall : 1 {};
-  uint64_t is_wounded_msg                               : 1 {};
-  uint64_t was_frozen                                   : 1 {}; // was frozen at the start of the tick
+  uint64_t corpse_cleanup                               : 1 {}; // Used to remove corpses when eaten or burnt
+  uint64_t gfx_ascii_animated                           : 1 {}; // Animated in ascii mode?
+  uint64_t gfx_pixelart_animated                        : 1 {}; // Animated in pixelart mode?
+  uint64_t has_attacked_player                          : 1 {}; // Has it attacked the precious?
+  uint64_t has_ever_moved                               : 1 {}; // Has it ever moved? e.g. a gargoyle
+  uint64_t has_light                                    : 1 {}; // Has it a light source?
+  uint64_t has_projectile                               : 1 {}; // Current projectile being fired
+  uint64_t has_seen_player_msg_shown                    : 1 {}; // Seen by player has been shown
+  uint64_t is_activated                                 : 1 {}; // This skill is activated
+  uint64_t is_attached                                  : 1 {}; // Is attached to the level
+  uint64_t is_being_destroyed                           : 1 {}; // In the process of deleting the thing
+  uint64_t is_bouncing                                  : 1 {}; // Is graphically bouncing
+  uint64_t is_burnt                                     : 1 {}; // Burnt by ice and cannot move
+  uint64_t is_changing_level                            : 1 {}; // Is in the process of changing level
+  uint64_t is_dead                                      : 1 {}; // It's dead Jim
+  uint64_t is_discovered                                : 1 {}; // Can you see that secret door?
+  uint64_t is_drained                                   : 1 {}; // E.g. enchant or skillstone used up
+  uint64_t is_dying                                     : 1 {}; // Is currently in the throes of death
+  uint64_t is_facing_left                               : 1 {}; // It's in the process of dying
+  uint64_t is_fadeup                                    : 1 {}; // For text that fades upwards
+  uint64_t is_falling                                   : 1 {}; // Falling to a new level
+  uint64_t is_frozen                                    : 1 {}; // Frozen by ice and cannot move
+  uint64_t is_hidden                                    : 1 {}; // Carried perhaps and hence not visible
+  uint64_t is_hunger_level_gorged                       : 1 {}; // Hunger levels
+  uint64_t is_hunger_level_hungry                       : 1 {}; // Hunger levels
+  uint64_t is_hunger_level_satiated                     : 1 {}; // Hunger levels
+  uint64_t is_hunger_level_starving                     : 1 {}; // Hunger levels
+  uint64_t is_jumping                                   : 1 {}; // Is mid jump
+  uint64_t is_key_in_lock                               : 1 {}; // Key stuck in rusty lock?
+  uint64_t is_minion_set                                : 1 {}; // Overrides is_minion in template
+  uint64_t is_moving                                    : 1 {}; // Is currently moving tiles
+  uint64_t is_open                                      : 1 {}; // Door or chest is open
+  uint64_t is_raging_currently                          : 1 {}; // Is raging currently?
+  uint64_t is_resurrected                               : 1 {}; // Has finished resurrecting
+  uint64_t is_resurrecting                              : 1 {}; // Is currently resurrecing
+  uint64_t is_resurrection_blocked                      : 1 {}; // Blocked from resurrection
+  uint64_t is_ring2                                     : 1 {}; // For 2nd rings
+  uint64_t is_scheduled_for_death                       : 1 {}; // Will die in next game loop
+  uint64_t is_scheduled_for_gc                          : 1 {}; // Scheduled for garbage cleanup
+  uint64_t is_scheduled_for_jump_end                    : 1 {}; // Particle for jumping is present
+  uint64_t is_seen_by_player_msg_shown                  : 1 {}; // Seen by player message
+  uint64_t is_sleeping                                  : 1 {}; // Zzz
+  uint64_t is_teleporting                               : 1 {}; // Mid teleport
+  uint64_t is_the_grid                                  : 1 {}; // Is the backbone of the level
+  uint64_t is_the_player                                : 1 {}; // Brave player
+  uint64_t is_visible_to_player                         : 1 {}; // Can be seen by the player
+  uint64_t is_waiting                                   : 1 {}; // Is waiting on this tick
+  uint64_t is_waiting_to_ascend_dungeon                 : 1 {}; // Temporary state while changing levels
+  uint64_t is_waiting_to_ascend_sewer                   : 1 {}; // Temporary state while changing levels
+  uint64_t is_waiting_to_descend_dungeon                : 1 {}; // Temporary state while changing levels
+  uint64_t is_waiting_to_descend_sewer                  : 1 {}; // Temporary state while changing levels
+  uint64_t is_waiting_to_leave_level_has_completed_fall : 1 {}; // Has fallen to the next level
+  uint64_t is_wounded_msg                               : 1 {}; // Avoid duplicate messages
+  uint64_t was_frozen                                   : 1 {}; // Was frozen at the start of the tick
   // end sort marker1 }
 
   //
@@ -538,6 +539,7 @@ public:
   bool descend_sewer(void);
   bool describe_when_hovered_over_in_rightbar(void);
   bool describe_when_hovering_over(void);
+  bool discovered(void);
   bool drop_from_ether(Thingp w);
   bool drop_into_ether(Thingp w);
   bool drop(Thingp w);
@@ -1780,7 +1782,6 @@ public:
   int is_unused_flag126(void);
   int is_unused_flag127(void);
   int is_unused_flag128(void);
-  int is_unused_flag129(void);
   int is_unused_flag12(void);
   int is_unused_flag13(void);
   int is_unused_flag142(void);
@@ -2390,6 +2391,7 @@ public:
   int unused_chance4_d1000(void);
   int unused_chance5_d1000(void);
   int unused_chance6_d1000(void);
+  int unused_flag129(void);
   int value(const Thingp it);
   int weapon_dmgd_pct(void);
   int weapon_dmg_modify(int damage, Thingp victim = nullptr);
@@ -2715,6 +2717,7 @@ public:
   void dir_set_tl(void);
   void dir_set_tr(void);
   void dir_set_up(void);
+  void discovered_set(bool val);
   void dmap_modify_terrain_cost(point p, uint8_t *d, bool include_monst, bool include_dislike);
   void drop_all(void);
   void dump_equip(void);
