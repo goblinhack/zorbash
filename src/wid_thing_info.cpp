@@ -2743,7 +2743,7 @@ void Game::wid_thing_info_add_stat_int(WidPopup *w, Thingp t)
     auto stat = t->stat_int_total();
     char tmp2[ MAXSHORTSTR ];
     snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Intel                  %6s", tmp2);
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Intelligence           %6s", tmp2);
     w->log(tmp);
 
     auto intel     = t->stat_int();
@@ -2857,7 +2857,7 @@ void Game::wid_thing_info_add_stat_int(WidPopup *w, Thingp t)
     }
   } else if (t->stat_int_bonus()) {
     auto stat = t->stat_int_bonus();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Intel bonus              %4s", bonus_to_string(stat).c_str());
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Intel. bonus             %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
