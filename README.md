@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- secret doors in ascii mode flash too fast when the mouse is moving                                                                           -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -28,7 +27,6 @@
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
 <!-- - wort food ? fungus foods and some poisonous?                                                                                               -->
-<!-- - pressure plate, that monsters avoid                                                                                                        -->
 <!-- - stealth                                                                                                                                    -->
 <!-- - cracked walls                                                                                                                              -->
 <!-- - paralysis dart                                                                                                                             -->
@@ -43,7 +41,6 @@
 <!-- - luck trap                                                                                                                                  -->
 <!-- - runics on weapons, like vampirism, force, quietus, lightning                                                                               -->
 <!-- - ogre totems?                                                                                                                               -->
-<!-- - swamp level                                                                                                                                -->
 <!-- - boss 1 Mummy mummy, ankh of life                                                                                                           -->
 <!-- - boss 2 slime boss, spawns slimes, tries to jump splat the player                                                                           -->
 <!--          swamp tiles that allow 50% movement                                                                                                 -->
@@ -63,7 +60,6 @@
 <!-- - different sound for bosses                                                                                                                 -->
 <!-- - crystal collection                                                                                                                         -->
 <!-- - 4 bosses and final zorb boss                                                                                                               -->
-<!-- - char selection                                                                                                                             -->
 <!-- - level fall through to special level ?                                                                                                      -->
 <!-- - hub shop levels                                                                                                                            -->
 <!-- - basecamp level?                                                                                                                            -->
@@ -71,7 +67,6 @@
 <!--                                                                                                                                              -->
 <!-- UI                                                                                                                                           -->
 <!-- ------                                                                                                                                       -->
-<!-- - monst head should be on top of armor                                                                                                       -->
 <!-- - rest until better                                                                                                                          -->
 <!-- - auto explore                                                                                                                               -->
 <!-- ------                                                                                                                                       -->
@@ -94,7 +89,7 @@
 <!--                                                                                                                                              -->
 <!-- Poison                                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
-<!-- - chocolote frog cures poison?                                                                                                               -->
+<!-- - chocolate frog cures poison?                                                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Doors                                                                                                                                        -->
@@ -115,7 +110,7 @@
 <!-- Staffs                                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
 <!-- - staves that recharge                                                                                                                       -->
-<!-- - staff of death should stop regenerating monst                                                                                               -->
+<!-- - staff of death should stop regenerating monst                                                                                              -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Potions                                                                                                                                      -->
@@ -141,7 +136,7 @@
 <!--                                                                                                                                              -->
 <!-- Monsts                                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
-<!-- - chccolate golem fires chocolate                                                                                                            -->
+<!-- - chocolate golem fires chocolate                                                                                                            -->
 <!-- - chickens - battle chickens - lay eggs as food - and they get names                                                                         -->
 <!-- - acid jellies should damage weapons                                                                                                         -->
 <!-- - mold growth / floor puddings                                                                                                               -->
@@ -150,7 +145,6 @@
 <!-- - rat pack and king rat / cranium rat                                                                                                        -->
 <!-- - zombie camel?                                                                                                                              -->
 <!-- - sewer wolf?                                                                                                                                -->
-<!-- - invisible monst?                                                                                                                           -->
 <!-- - monster that runs from light ?                                                                                                             -->
 <!-- - tentacles out of the ground that try to surround you                                                                                       -->
 <!-- - dungeon walrus; long headed walrus with many tusks                                                                                         -->
@@ -158,7 +152,7 @@
 <!--                                                                                                                                              -->
 <!-- Gods                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - runes lean more torwards old gods                                                                                                          -->
+<!-- - runes lean more towards old gods                                                                                                           -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Gfx                                                                                                                                          -->
@@ -169,7 +163,7 @@
 <!-- Player                                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
 <!-- - weight factors into jumping                                                                                                                -->
-<!-- - carry eat slime mold and gain acid resis?                                                                                                  -->
+<!-- - carry eat slime mold and gain acid resist?                                                                                                 -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Spells                                                                                                                                       -->
