@@ -73,7 +73,7 @@ bool Thing::open_door(Thingp door)
       if (is_player()) {
         msg("You unlock the door.");
       }
-    } else if (d20_le(stat_thv_bonus())) {
+    } else if (d20_ge(stat_thv_total(), SAVING_ROLL_MODERATE)) {
       //
       // Managed to unlock the door
       //
@@ -184,7 +184,7 @@ bool Thing::close_door(Thingp door)
     //
     // If we're lucky, give the key back.
     //
-    if (d20_le(stat_thv_bonus())) {
+    if (d20_ge(stat_thv_total(), SAVING_ROLL_MODERATE)) {
       door->is_key_in_lock = false;
       keys_incr(1);
 

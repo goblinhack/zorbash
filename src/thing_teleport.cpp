@@ -265,7 +265,7 @@ bool Thing::teleport(TeleportOptions teleport_options, point to, bool *too_far)
       continue;
     }
 
-    if (d20_le(stat_str(), it->stat_str_total())) {
+    if (! d20_ge(stat_str_total(), it->stat_str_total())) {
       if (is_player()) {
         if (teleport_options.teleport_self) {
           msg("You are held in place!");

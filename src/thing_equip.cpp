@@ -625,7 +625,7 @@ bool Thing::equip_use(bool forced, int equip, ThingAttackOptionsp attack_options
   if (is_able_to_tire()) {
     if (stamina() < 5) {
       if (is_player()) {
-        if (d20_le(stat_con_total())) {
+        if (d20_ge(stat_con_total(), SAVING_ROLL_MODERATE)) {
           msg("You are so tired but dig deep and attack!");
         } else {
           msg("You are too tired to attack.");

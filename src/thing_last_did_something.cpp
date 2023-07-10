@@ -54,6 +54,54 @@ int Thing::tick_last_did_something_incr(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// tick_last_seen_by_player
+////////////////////////////////////////////////////////////////////////////
+int Thing::tick_last_seen_by_player(void)
+{
+  TRACE_NO_INDENT();
+
+  if (maybe_infop()) {
+    return (infop()->tick_last_seen_by_player);
+  }
+  return 0;
+}
+
+int Thing::tick_last_seen_by_player_set(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_seen_by_player = v);
+}
+
+int Thing::tick_last_seen_by_player_decr(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_seen_by_player -= v);
+}
+
+int Thing::tick_last_seen_by_player_incr(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_seen_by_player += v);
+}
+
+int Thing::tick_last_seen_by_player_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_seen_by_player--);
+}
+
+int Thing::tick_last_seen_by_player_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_seen_by_player++);
+}
+
+////////////////////////////////////////////////////////////////////////////
 // tick_last_dropped
 ////////////////////////////////////////////////////////////////////////////
 int Thing::tick_last_dropped(void)

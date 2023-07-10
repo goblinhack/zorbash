@@ -44,16 +44,16 @@ void Thing::on_stealing(Thingp from, Thingp what)
   }
 }
 
-bool Thing::steal_treasure_from(Thingp it)
+bool Thing::steal_treasure_from(Thingp victim)
 {
   TRACE_NO_INDENT();
   if (d1000() > tp()->chance_d1000_steal_item()) {
     return false;
   }
 
-  dbg("Steal treasure from %s", it->to_short_string().c_str());
+  dbg("Steal treasure from %s", victim->to_short_string().c_str());
   TRACE_NO_INDENT();
-  auto cands = it->treasure_vector();
+  auto cands = victim->treasure_vector();
   if (! cands.size()) {
     dbg("No, nothing to steal");
     return false;
@@ -62,9 +62,9 @@ bool Thing::steal_treasure_from(Thingp it)
   //
   // Give the target a chance to detect, and the attacker a bonus.
   //
-  if (d20_le(it->stat_thv_total() - stat_thv_bonus())) {
-    if (it->is_player()) {
-      it->msg("You feel fingers prying at your pockets!");
+  if (d20_ge(victim->stat_thv_total(), stat_thv_total())) {
+    if (victim->is_player()) {
+      victim->msg("You feel fingers prying at your pockets!");
     }
     return false;
   }
@@ -75,7 +75,7 @@ bool Thing::steal_treasure_from(Thingp it)
   {
     DropOptions drop_options;
     drop_options.is_being_stolen = true;
-    if (! it->drop(chosen, this, drop_options)) {
+    if (! victim->drop(chosen, this, drop_options)) {
       return false;
     }
   }
@@ -83,35 +83,35 @@ bool Thing::steal_treasure_from(Thingp it)
   {
     CarryOptions carry_options;
     carry_options.is_being_stolen = true;
-    if (! it->is_dead) {
+    if (! victim->is_dead) {
       carry(chosen, carry_options);
     }
   }
   chosen->hide();
 
-  if (it->is_player()) {
+  if (victim->is_player()) {
     if (chosen->is_able_to_be_equipped()) {
-      it->popup(string_sprintf("%%fg=white$Where's my equipment?!"));
-      it->msg("%%fg=orange$You feel naked...%%fg=reset$");
+      victim->popup(string_sprintf("%%fg=white$Where's my equipment?!"));
+      victim->msg("%%fg=orange$You feel naked...%%fg=reset$");
     } else {
-      it->popup(string_sprintf("%%fg=white$Where's my money?!"));
-      it->msg("%%fg=orange$You feel less wealthy somehow...%%fg=reset$");
+      victim->popup(string_sprintf("%%fg=white$Where's my money?!"));
+      victim->msg("%%fg=orange$You feel less wealthy somehow...%%fg=reset$");
     }
   }
 
   if (is_able_to_run_away_after_stealing()) {
-    add_avoid(it);
+    add_avoid(victim);
   }
 
-  on_stealing(it, chosen);
+  on_stealing(victim, chosen);
 
   return true;
 }
 
-bool Thing::steal_item_from(Thingp it)
+bool Thing::steal_item_from(Thingp victim)
 {
   TRACE_NO_INDENT();
-  dbg("Try to steal item from %s?", it->to_short_string().c_str());
+  dbg("Try to steal item from %s?", victim->to_short_string().c_str());
   TRACE_NO_INDENT();
 
   if (d1000() > tp()->chance_d1000_steal_item()) {
@@ -120,7 +120,7 @@ bool Thing::steal_item_from(Thingp it)
   }
   TRACE_NO_INDENT();
   dbg("Yes, steal out of this list:");
-  auto cands = it->carried_item_only_vector();
+  auto cands = victim->carried_item_only_vector();
   if (! cands.size()) {
     dbg("No, nothing to steal");
     return false;
@@ -132,7 +132,7 @@ bool Thing::steal_item_from(Thingp it)
 
   DropOptions drop_options;
   drop_options.is_being_stolen = true;
-  it->drop(chosen, this, drop_options);
+  victim->drop(chosen, this, drop_options);
 
   if (! chosen->is_dead) {
     CarryOptions carry_options;
@@ -142,9 +142,9 @@ bool Thing::steal_item_from(Thingp it)
 
   chosen->hide();
 
-  if (it->is_player()) {
-    it->popup(string_sprintf("%%fg=white$Where's my stuff?!"));
-    it->msg("%%fg=orange$You feel lighter somehow...%%fg=reset$");
+  if (victim->is_player()) {
+    victim->popup(string_sprintf("%%fg=white$Where's my stuff?!"));
+    victim->msg("%%fg=orange$You feel lighter somehow...%%fg=reset$");
   }
 
   //

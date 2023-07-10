@@ -522,9 +522,7 @@ public:
   bool collision_obstacle(Thingp);
   bool consume(Thingp it);
   bool coords_get(point &blit_tl, point &blit_br, point &pre_blit_tl, point &pre_blit_br, Tilep &tile, bool refl);
-  bool d20_ge(int stat_a, int stat_b);
-  bool d20_le(int stat_a, int stat_b);
-  bool d20_le(int stat_b);
+  bool d20_ge(int stat_total, int dice_roll_to_exceed);
   bool debuff_add_if_not_found(Tpp what);
   bool debuff_add(Thingp it);
   bool debuff_add(Tpp what);
@@ -2558,6 +2556,13 @@ public:
   int tick_last_did_something_set(uint32_t);
   int tick_last_did_something(void);
 
+  int tick_last_seen_by_player_decr(uint32_t);
+  int tick_last_seen_by_player_decr(void);
+  int tick_last_seen_by_player_incr(uint32_t);
+  int tick_last_seen_by_player_incr(void);
+  int tick_last_seen_by_player_set(uint32_t);
+  int tick_last_seen_by_player(void);
+
   int tick_last_dropped_decr(uint32_t);
   int tick_last_dropped_decr(void);
   int tick_last_dropped_incr(uint32_t);
@@ -2718,6 +2723,7 @@ public:
   void dir_set_tr(void);
   void dir_set_up(void);
   void discovered_set(bool val);
+  void discovered_set(Thingp what, bool val);
   void dmap_modify_terrain_cost(point p, uint8_t *d, bool include_monst, bool include_dislike);
   void drop_all(void);
   void dump_equip(void);

@@ -36,11 +36,11 @@ public:
   int operator()() const;
 };
 
-bool d20_ge(int stat_a, int stat_b);
-bool d20_ge(int stat_a, int stat_b, bool &fumble, bool &critical);
-bool d20_le(int stat_a, int stat_b);
-bool d20_le(int stat_a, int stat_b, bool &fumble, bool &critical);
-bool d20_le(int stat);
+#define SAVING_ROLL_MODERATE 10
+#define SAVING_ROLL_HARD     19
+
+bool d20_ge(int stat_total, const int dice_roll_to_exceed);
+bool d20_ge(int stat_total, const int dice_roll_to_exceed, bool &fumble, bool &critical);
 
 int stat_to_bonus(int stat);
 

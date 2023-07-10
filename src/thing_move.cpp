@@ -307,7 +307,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     if (is_able_to_tire()) {
       if (stamina() < 5) {
         if (is_player()) {
-          if (d20_le(stat_con_total())) {
+          if (d20_ge(stat_con_total(), SAVING_ROLL_MODERATE)) {
             msg("You are so tired but dig deep into your reserves to move!");
           } else {
             msg("You cannot move, you are so tired!");

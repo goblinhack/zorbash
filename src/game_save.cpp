@@ -127,6 +127,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->submerged_offset);
   out << bits(my.t->tick_last_awoke);
   out << bits(my.t->tick_last_did_something);
+  out << bits(my.t->tick_last_seen_by_player);
   out << bits(my.t->tick_last_dropped);
   out << bits(my.t->tick_last_teleported);
   out << bits(my.t->tick_last_escape);
@@ -372,7 +373,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_minion_set                                ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_moving                                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_open                                      ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->is_raging_currently                                ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_raging_currently                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_resurrected                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_resurrecting                              ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_resurrection_blocked                      ? 1LLU : 0LLU) << shift; shift++;
@@ -479,7 +480,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_shovable                      ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_skillstone                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_smoke                         ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_spellbook                    ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_spellbook                     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_spiderweb                     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_staff                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_steam                         ? 1LLU : 0LLU) << shift; shift++;

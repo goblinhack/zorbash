@@ -196,6 +196,10 @@ public:
   //
   int tick_last_did_something {-1 /* std::numeric_limits< uint32_t >::max() */};
   //
+  // Used to dampen checks for secret doors.
+  //
+  int tick_last_seen_by_player {-1 /* std::numeric_limits< uint32_t >::max() */};
+  //
   // When this thing was dropped
   //
   int tick_last_dropped {-1 /* std::numeric_limits< uint32_t >::max() */};

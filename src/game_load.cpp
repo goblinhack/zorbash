@@ -151,6 +151,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->submerged_offset);
    in >> bits(my.t->tick_last_awoke);
    in >> bits(my.t->tick_last_did_something);
+   in >> bits(my.t->tick_last_seen_by_player);
    in >> bits(my.t->tick_last_dropped);
    in >> bits(my.t->tick_last_teleported);
    in >> bits(my.t->tick_last_escape);
@@ -427,7 +428,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->is_minion_set                                = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_moving                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_open                                      = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->is_raging_currently                                = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->is_raging_currently                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_resurrected                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_resurrecting                              = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_resurrection_blocked                      = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -526,7 +527,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->i_set_is_shovable                      = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_skillstone                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_smoke                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->i_set_is_spellbook                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_spellbook                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_spiderweb                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_staff                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_steam                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;

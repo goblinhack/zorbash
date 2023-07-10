@@ -21,21 +21,25 @@ void Thing::can_see_you(point p)
   FOR_ALL_THINGS_THAT_INTERACT(level, t, p.x, p.y)
   {
     //
-    // Allow a chance to see secret doors
-    //
-    if (is_player()) {
-      if (t->is_secret_door() && ! t->discovered()) {
-        if (d20_le(stat_thv_bonus())) {
-          t->discovered_set(true);
-        }
-      }
-    }
-
-    //
     // See invisible things?
     //
     if (! can_detect(t)) {
       continue;
+    }
+
+    //
+    // Allow a chance to see secret doors
+    //
+    if (is_player()) {
+      if (t->is_secret_door() && ! t->discovered() && (t->tick_last_seen_by_player() < game->tick_current)) {
+        if (d20_ge(stat_thv_total(), SAVING_ROLL_HARD)) {
+          if (d100() < 10 + (stat_thv_bonus() * 10)) {
+            discovered_set(t, true);
+          }
+        }
+      }
+
+      t->tick_last_seen_by_player_set(game->tick_current);
     }
 
     //

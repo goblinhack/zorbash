@@ -10,175 +10,71 @@
 //
 // True if the a >= b
 //
-bool d20_ge(int stat_a, int stat_b, bool &fumble, bool &critical)
+bool d20_ge(int stat_total, const int dice_roll_to_exceed, bool &fumble, bool &critical)
 {
-  auto roll_a = pcg_random_range_inclusive(1, 20);
+  auto dice_roll = pcg_random_range_inclusive(1, 20);
 
   critical = false;
   fumble   = false;
 
-  if (roll_a == 20) {
+  if (dice_roll == 20) {
     critical = true;
     return true;
   }
 
-  if (roll_a == 1) {
+  if (dice_roll == 1) {
     fumble = true;
     return false;
   }
 
-  auto roll_b = pcg_random_range_inclusive(1, 20);
-  // TOPCON("a %d+(%d->%d) b %d+(%d->%d)", roll_a, stat_a, stat_to_bonus(stat_a), roll_b, stat_b,
-  // stat_to_bonus(stat_b));
-
-  return roll_a + stat_to_bonus(stat_a) >= roll_b + stat_to_bonus(stat_b);
+  return dice_roll + stat_to_bonus(stat_total) >= dice_roll_to_exceed;
 }
 
 //
 // Roll for stat modifier "a" to see if it beats "b"
 //
-bool d20_ge(int stat_a, int stat_b)
+bool d20_ge(int stat_total, const int dice_roll_to_exceed)
 {
-  auto roll_a = pcg_random_range_inclusive(1, 20);
+  auto dice_roll = pcg_random_range_inclusive(1, 20);
 
-  if (roll_a == 20) {
-    DBG("d20: success");
+  if (dice_roll == 20) {
+    DBG("d20: rolled a 20 => success");
     return true;
   }
 
-  if (roll_a == 1) {
+  if (dice_roll == 1) {
     DBG("d20: fumble");
     return false;
   }
 
-  auto roll_b = pcg_random_range_inclusive(1, 20);
+  DBG("d20: %d(rolled %d+%d) >= %d", dice_roll + stat_to_bonus(stat_total), dice_roll, stat_to_bonus(stat_total),
+      dice_roll_to_exceed);
 
-  DBG("d20: %d(%d+%d) >= %d(%d+%d)", roll_a + stat_to_bonus(stat_a), roll_a, stat_to_bonus(stat_a),
-      roll_b + stat_to_bonus(stat_b), roll_b, stat_to_bonus(stat_b));
+  dice_roll += stat_to_bonus(stat_total);
 
-  roll_a += stat_to_bonus(stat_a);
-  roll_b += stat_to_bonus(stat_b);
-
-  return roll_a >= roll_b;
+  return dice_roll >= dice_roll_to_exceed;
 }
 
-bool Thing::d20_ge(int stat_a, int stat_b)
+bool Thing::d20_ge(int stat_total, const int dice_roll_to_exceed)
 {
-  auto roll_a = pcg_random_range_inclusive(1, 20);
+  auto dice_roll = pcg_random_range_inclusive(1, 20);
 
-  if (roll_a == 20) {
-    dbg("d20: success");
+  if (dice_roll == 20) {
+    dbg("d20: rolled a 20 => success");
     return true;
   }
 
-  if (roll_a == 1) {
+  if (dice_roll == 1) {
     dbg("d20: fumble");
     return false;
   }
 
-  auto roll_b = pcg_random_range_inclusive(1, 20);
+  dbg("d20: %d(rolled %d+%d) >= %d", dice_roll + stat_to_bonus(stat_total), dice_roll, stat_to_bonus(stat_total),
+      dice_roll_to_exceed);
 
-  dbg("d20: %d(%d+%d) >= %d(%d+%d)", roll_a + stat_to_bonus(stat_a), roll_a, stat_to_bonus(stat_a),
-      roll_b + stat_to_bonus(stat_b), roll_b, stat_to_bonus(stat_b));
+  dice_roll += stat_to_bonus(stat_total);
 
-  roll_a += stat_to_bonus(stat_a);
-  roll_b += stat_to_bonus(stat_b);
-
-  return roll_a >= roll_b;
-}
-
-//
-// Roll for stat modifier "a" to see if it beats "b"
-//
-bool d20_le(int stat_a, int stat_b)
-{
-  auto roll_a = pcg_random_range_inclusive(1, 20);
-
-  if (roll_a == 20) {
-    DBG("d20: success");
-    return true;
-  }
-
-  if (roll_a == 1) {
-    DBG("d20: fumble");
-    return false;
-  }
-
-  auto roll_b = pcg_random_range_inclusive(1, 20);
-
-  DBG("d20: %d(%d+%d) <= %d(%d+%d)", roll_a + stat_to_bonus(stat_a), roll_a, stat_to_bonus(stat_a),
-      roll_b + stat_to_bonus(stat_b), roll_b, stat_to_bonus(stat_b));
-
-  roll_a += stat_to_bonus(stat_a);
-  roll_b += stat_to_bonus(stat_b);
-
-  return roll_a >= roll_b;
-}
-
-bool Thing::d20_le(int stat_a, int stat_b)
-{
-  auto roll_a = pcg_random_range_inclusive(1, 20);
-
-  if (roll_a == 20) {
-    dbg("d20: success");
-    return true;
-  }
-
-  if (roll_a == 1) {
-    dbg("d20: fumble");
-    return false;
-  }
-
-  auto roll_b = pcg_random_range_inclusive(1, 20);
-
-  dbg("d20: %d(%d+%d) <= %d(%d+%d)", roll_a + stat_to_bonus(stat_a), roll_a, stat_to_bonus(stat_a),
-      roll_b + stat_to_bonus(stat_b), roll_b, stat_to_bonus(stat_b));
-
-  roll_a += stat_to_bonus(stat_a);
-  roll_b += stat_to_bonus(stat_b);
-
-  return roll_a >= roll_b;
-}
-
-//
-// Succeed if we can roll under
-//
-bool Thing::d20_le(int stat)
-{
-  int roll = pcg_random_range_inclusive(1, 20);
-
-  if (roll == 20) {
-    dbg("d20: success");
-    return true;
-  }
-
-  if (roll == 1) {
-    dbg("d20: fumble");
-    return false;
-  }
-
-  dbg("d20: %d <= %d(%d+%d)", roll, stat + stat_to_bonus(stat), stat, stat_to_bonus(stat));
-
-  return roll <= stat + stat_to_bonus(stat);
-}
-
-bool d20_le(int stat)
-{
-  int roll = pcg_random_range_inclusive(1, 20);
-
-  if (roll == 20) {
-    DBG("d20: success");
-    return true;
-  }
-
-  if (roll == 1) {
-    DBG("d20: success");
-    return false;
-  }
-
-  DBG("d20: %d <= %d(%d+%d)", roll, stat + stat_to_bonus(stat), stat, stat_to_bonus(stat));
-
-  return roll <= stat + stat_to_bonus(stat);
+  return dice_roll >= dice_roll_to_exceed;
 }
 
 Dice::Dice(void) = default;

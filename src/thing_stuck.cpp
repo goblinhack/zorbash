@@ -242,7 +242,7 @@ bool Thing::is_stuck_check(void)
     }
 
     if (it->is_engulfer() || it->is_heavy()) {
-      if (d20_le(stat_str(), it->stat_str_total())) {
+      if (! d20_ge(stat_str_total(), it->stat_str_total())) {
         stuck = true;
       }
     }

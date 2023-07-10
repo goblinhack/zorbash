@@ -222,7 +222,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       continue;
     }
 
-    if (d20_le(stat_str(), it->stat_str_total())) {
+    if (! d20_ge(stat_str_total(), it->stat_str_total())) {
       if (is_player()) {
         msg("You are held in place!");
       }

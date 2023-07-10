@@ -238,7 +238,7 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
       //
       // Yes.
       //
-      if (d20_le(stat_con_total())) {
+      if (d20_ge(stat_con_total(), SAVING_ROLL_HARD)) {
         //
         // Only half stamina damage if you pass con roll
         //
@@ -260,9 +260,9 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
     //
     if (what->magic_drain_on_using()) {
       //
-      // Yes.
+      // Yes. But can it be reduced?
       //
-      if (d20_le(stat_con_total())) {
+      if (d20_ge(stat_psi_total(), SAVING_ROLL_HARD)) {
         //
         // Only half magic damage if you pass con roll
         //
