@@ -20,6 +20,7 @@ static PyObject *thing_hit_common(PyObject *obj, PyObject *args, PyObject *keywd
       (char *) "owner", (char *) "hitter", (char *) "target", (char *) "damage", (char *) "crit", (char *) "thrown",
       nullptr};
 
+  TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "III|iii", kwlist, &owner_id, &hitter_id, &victim_id, &damage,
                                     &crit, &thrown)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);

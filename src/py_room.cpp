@@ -53,6 +53,7 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
                            (char *) "depth",
                            nullptr};
 
+  TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "|Oiisiiiiiiiiiiiiiiii", kwlist, &py_room_data, &xxx, &yyy,
                                     &room_name, &up, &down, &left, &right, &is_ascend_dungeon, &is_descend_dungeon,
                                     &is_lock, &is_key, &is_secret, &biome_dungeon, &biome_swamp, &biome_ice,

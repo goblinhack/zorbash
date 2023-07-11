@@ -2563,6 +2563,13 @@ public:
   int tick_last_seen_by_player_set(uint32_t);
   int tick_last_seen_by_player(void);
 
+  int tick_born_decr(uint32_t);
+  int tick_born_decr(void);
+  int tick_born_incr(uint32_t);
+  int tick_born_incr(void);
+  int tick_born_set(uint32_t);
+  int tick_born(void);
+
   int tick_last_dropped_decr(uint32_t);
   int tick_last_dropped_decr(void);
   int tick_last_dropped_incr(uint32_t);

@@ -102,6 +102,54 @@ int Thing::tick_last_seen_by_player_incr(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// tick_born
+////////////////////////////////////////////////////////////////////////////
+int Thing::tick_born(void)
+{
+  TRACE_NO_INDENT();
+
+  if (maybe_infop()) {
+    return (infop()->tick_born);
+  }
+  return 0;
+}
+
+int Thing::tick_born_set(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_born = v);
+}
+
+int Thing::tick_born_decr(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_born -= v);
+}
+
+int Thing::tick_born_incr(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_born += v);
+}
+
+int Thing::tick_born_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_born--);
+}
+
+int Thing::tick_born_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_born++);
+}
+
+////////////////////////////////////////////////////////////////////////////
 // tick_last_dropped
 ////////////////////////////////////////////////////////////////////////////
 int Thing::tick_last_dropped(void)

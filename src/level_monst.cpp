@@ -73,8 +73,44 @@ Tpp Level::get_random_monst(point p, monst_environ_t monst_environ, monst_class_
   }
 }
 
+Tpp Level::get_random_monst(point p, monst_class_t monst_class, int difficulty_offset)
+{
+  TRACE_NO_INDENT();
+
+  auto monst_environ = MONST_ENVIRON_NORMAL;
+  if (is_deep_water(p)) {
+    monst_environ = MONST_ENVIRON_DEEP_WATER;
+  } else if (is_water(p)) {
+    monst_environ = MONST_ENVIRON_SHALLOW_WATER;
+  }
+
+  return get_random_monst(p, monst_environ, monst_class);
+}
+
 Tpp Level::get_random_monst(point p, monst_environ_t monst_environ, int difficulty_offset)
 {
+  TRACE_NO_INDENT();
+
+  for (int monst_class = MONST_CLASS_A; monst_class < MONST_CLASS_MAX; monst_class++) {
+    auto roll = d1000();
+    if (roll < d1000_chance_creating_monst[ monst_environ ][ monst_class ]) {
+      return get_random_monst(p, monst_environ, (monst_class_t) monst_class, difficulty_offset);
+    }
+  }
+  return get_random_monst(p, monst_environ, (monst_class_t) (MONST_CLASS_MAX - 1), difficulty_offset);
+}
+
+Tpp Level::get_random_monst(point p, int difficulty_offset)
+{
+  TRACE_NO_INDENT();
+
+  auto monst_environ = MONST_ENVIRON_NORMAL;
+  if (is_deep_water(p)) {
+    monst_environ = MONST_ENVIRON_DEEP_WATER;
+  } else if (is_water(p)) {
+    monst_environ = MONST_ENVIRON_SHALLOW_WATER;
+  }
+
   for (int monst_class = MONST_CLASS_A; monst_class < MONST_CLASS_MAX; monst_class++) {
     auto roll = d1000();
     if (roll < d1000_chance_creating_monst[ monst_environ ][ monst_class ]) {

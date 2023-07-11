@@ -14,6 +14,7 @@ PyObject *text_size_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   static char *kwlist[] = {(char *) "text", nullptr};
 
+  TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "u", kwlist, &text)) {
     ERR("text_size: Bad args");
     Py_RETURN_NONE;

@@ -83,6 +83,15 @@ void Thing::achieve_goals_in_life(void)
   is_stuck_update();
 
   //
+  // If newly spawned, do not immediately move. That looks strange with summon monst spell.
+  //
+  if (is_monst()) {
+    if (tick_born() >= game->tick_current - 1) {
+      return;
+    }
+  }
+
+  //
   // Check if invisible
   //
   invisible_tick();

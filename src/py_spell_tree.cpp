@@ -21,6 +21,7 @@ PyObject *map_load_spell_tree_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   static char *kwlist[] = {(char *) "spell_data", (char *) "tree_data", (char *) "tree_name", nullptr};
 
+  TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "|OOs", kwlist, &py_spell_data, &py_tree_data, &py_tree_name)) {
     DIE("map_load_spell_tree: Bad args");
     Py_RETURN_FALSE;

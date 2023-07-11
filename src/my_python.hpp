@@ -166,6 +166,7 @@ std::vector< std::string > py_call_std_vector_string_fn(const char *module, cons
                                                                                                                      \
     static char *kwlist[] = {#n1, #n2, #n3, 0};                                                                      \
                                                                                                                      \
+    TRACE_NO_INDENT();                                                                                               \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "ddi", kwlist, &d1, &d2, &i1)) {                                 \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
@@ -175,6 +176,7 @@ std::vector< std::string > py_call_std_vector_string_fn(const char *module, cons
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
+    TRACE_NO_INDENT();                                                                                               \
     (__fn__)(d1, d2, i1);                                                                                            \
                                                                                                                      \
     Py_RETURN_TRUE;                                                                                                  \
@@ -188,6 +190,7 @@ std::vector< std::string > py_call_std_vector_string_fn(const char *module, cons
                                                                                                                      \
     static char *kwlist[] = {#n1, #n2, 0};                                                                           \
                                                                                                                      \
+    TRACE_NO_INDENT();                                                                                               \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "dd", kwlist, &d1, &d2)) {                                       \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
@@ -197,6 +200,7 @@ std::vector< std::string > py_call_std_vector_string_fn(const char *module, cons
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
+    TRACE_NO_INDENT();                                                                                               \
     (__fn__)(d1, d2);                                                                                                \
                                                                                                                      \
     Py_RETURN_TRUE;                                                                                                  \
@@ -209,10 +213,12 @@ std::vector< std::string > py_call_std_vector_string_fn(const char *module, cons
                                                                                                                      \
     static char *kwlist[] = {"wid_id", #n1, 0};                                                                      \
                                                                                                                      \
+    TRACE_NO_INDENT();                                                                                               \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "d", kwlist, &d1)) {                                             \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
+    TRACE_NO_INDENT();                                                                                               \
     (__fn__)(d1);                                                                                                    \
                                                                                                                      \
     Py_RETURN_TRUE;                                                                                                  \
@@ -227,10 +233,12 @@ std::vector< std::string > py_call_std_vector_string_fn(const char *module, cons
                                                                                                                      \
     static char *kwlist[] = {#n1, #n2, #n3, 0};                                                                      \
                                                                                                                      \
+    TRACE_NO_INDENT();                                                                                               \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "iii", kwlist, &n1, &n2, &n3)) {                                 \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
+    TRACE_NO_INDENT();                                                                                               \
     (__fn__)(n1, n2, n3);                                                                                            \
                                                                                                                      \
     Py_RETURN_TRUE;                                                                                                  \
@@ -243,10 +251,12 @@ std::vector< std::string > py_call_std_vector_string_fn(const char *module, cons
                                                                                                                      \
     static char *kwlist[] = {(char *) #n1, 0};                                                                       \
                                                                                                                      \
+    TRACE_NO_INDENT();                                                                                               \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "i", kwlist, &n1)) {                                             \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
+    TRACE_NO_INDENT();                                                                                               \
     (__fn__)(n1);                                                                                                    \
                                                                                                                      \
     Py_RETURN_TRUE;                                                                                                  \
@@ -255,6 +265,7 @@ std::vector< std::string > py_call_std_vector_string_fn(const char *module, cons
 #define PY_BODY_VOID_FN(__fn__)                                                                                      \
   PyObject *__fn__##_(PyObject *obj, PyObject *args, PyObject *keywds)                                               \
   {                                                                                                                  \
+    TRACE_NO_INDENT();                                                                                               \
     (__fn__)();                                                                                                      \
                                                                                                                      \
     Py_RETURN_TRUE;                                                                                                  \

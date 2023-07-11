@@ -4,6 +4,7 @@
 
 #include "my_globals_extra.hpp"
 #include "my_log.hpp"
+#include "my_main.hpp"
 #include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"
@@ -21,7 +22,7 @@ static void py_log_(const char *fmt, va_list args)
   len = (int) strlen(buf);
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
-  putf(MY_STDOUT, buf);
+  DBG("%s", buf);
 }
 
 void PY_LOG(const char *fmt, ...)

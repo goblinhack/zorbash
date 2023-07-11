@@ -162,7 +162,6 @@ public:
   int stat_thv            = {};
   int stat_thv_bonus      = {};
   int submerged_offset    = {}; // Pixels
-  int tick_resurrect_when = {};
   // end sort marker1 }
 
   int8_t bounce_count       = {}; // Graphical bounce count
@@ -189,6 +188,10 @@ public:
   ts_t ts_lunge_end {};
   // end sort marker2 }
 
+  //
+  // When this thing came into being or was spawned
+  //
+  int tick_born {-1 /* std::numeric_limits< uint32_t >::max() */};
   //
   // Used for calling on_idle()
   //
@@ -239,6 +242,10 @@ public:
   // This is to ensure things do not wake and immediately attack
   //
   int tick_last_awoke {-1 /* std::numeric_limits< uint32_t >::max() */};
+  //
+  // When to resurrect
+  //
+  int tick_resurrect_when = {-1 /* std::numeric_limits< uint32_t >::max() */};
 
   //
   // List of things I own:

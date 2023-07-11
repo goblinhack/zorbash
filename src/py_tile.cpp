@@ -22,6 +22,7 @@ PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds)
   static char *kwlist[]
       = {(char *) "file", (char *) "name", (char *) "width", (char *) "height", (char *) "arr", nullptr};
 
+  TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "ssiiO", kwlist, &file, &name, &width, &height, &e)) {
     ERR("tile_load_arr: Bad args");
     Py_RETURN_FALSE;
@@ -95,6 +96,7 @@ PyObject *tile_load_arr_sprites_(PyObject *obj, PyObject *args, PyObject *keywds
   static char *kwlist[]
       = {(char *) "file", (char *) "name", (char *) "width", (char *) "height", (char *) "arr", nullptr};
 
+  TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "ssiiO", kwlist, &file, &name, &width, &height, &e)) {
     ERR("tile_load_arr: Bad args");
     Py_RETURN_FALSE;
@@ -245,6 +247,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
                            (char *) "is_resurrecting",
                            nullptr};
 
+  TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(
           args, keywds, "O|sssssiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", kwlist, &py_class, &tile_name,
           &ascii_fg_char_str, &ascii_bg_char_str, &ascii_bg_col_name, &ascii_fg_col_name, &ascii_bg_alpha,

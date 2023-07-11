@@ -3,7 +3,6 @@ import tp
 
 
 def on_targeted(me, x, y):
-    my.topcon("targetted me {} {},{}".format(my.thing_name_get(me), x, y))
     my.place_at(me, "random_monst_class_A", x, y)
 
 
@@ -21,7 +20,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.spell_base_name(self, name)
     my.spell_cost(self, 2)
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "Summon an unfriendly monster of the least dangerous type")
+    my.text_description_long(self, "Summon an unfriendly monster of the least dangerous type, class A if you want to get technical.")
     my.text_description_short(self, "Spell, summon monst A.")
     my.text_description_very_short(self, "SumMonstA")
     my.z_depth(self, my.MAP_DEPTH_OBJ)

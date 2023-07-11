@@ -18,6 +18,7 @@ PyObject *tex_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   static char *kwlist[] = {(char *) "file", (char *) "name", nullptr};
 
+  TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "ss", kwlist, &file, &name)) {
     ERR("tex_load: Bad arguments");
     Py_RETURN_FALSE;

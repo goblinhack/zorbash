@@ -207,6 +207,7 @@ Content:
 - 3 x doors
 - 3 x cloaks
 - 2 x traps
+- 2 x spells
 - 2 x potions
 - 1 x player
 <!-- end type marker -->

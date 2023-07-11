@@ -27,8 +27,13 @@ Thingp Level::thing_new(const std::string &tp_name, Thingp owner)
 
 Thingp Level::thing_new(const std::string &name, const point at, Thingp owner)
 {
-  auto tp = tp_find(name);
+  //
+  // Find a thing appropriate for the level and position (if it is something like "random_monst_class_A")
+  // Else just find the named thing.
+  //
+  auto tp = tp_find_wildcard(this, at, name);
   if (! tp) {
+    err("Could not create thing '%s'", name.c_str());
     return nullptr;
   }
 
@@ -84,7 +89,7 @@ void Thing::on_born(void)
   }
 }
 
-void Thing::init(Levelp level, const std::string &name, const point born, Thingp owner)
+void Thing::init(Levelp level, const std::string &name_in, const point born, Thingp owner)
 {
   TRACE_NO_INDENT();
 
@@ -97,15 +102,20 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   //
   // Try to find the thing by name
   //
-  if (name == "") {
+  if (name_in == "") {
     DIE("Thing template cannot be created: No name given");
   }
 
-  const auto tpp = tp_find_wildcard(name);
+  const auto tpp = tp_find_wildcard(name_in);
   if (unlikely(! tpp)) {
-    ERR("Thing template [%s] not found", name.c_str());
+    ERR("Thing template [%s] not found", name_in.c_str());
     return;
   }
+
+  //
+  // If the wildcard was "random_xxx" then use the real name from now on
+  //
+  auto name = tpp->name();
 
   //
   // Templates are shared for all things
@@ -275,6 +285,7 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
     //
     tick_last_location_check_set(game->tick_current);
     tick_last_did_something_set(game->tick_current);
+    tick_born_set(game->tick_current);
   }
 
   //

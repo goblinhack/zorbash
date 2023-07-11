@@ -240,6 +240,35 @@ Tpp tp_find_wildcard(const std::string &name)
   return nullptr;
 }
 
+Tpp tp_find_wildcard(Levelp l, point p, const std::string &name)
+{
+  TRACE_NO_INDENT();
+
+  auto result = tp_name_map.find(name);
+
+  if (unlikely(result != tp_name_map.end())) {
+    return (result->second);
+  }
+
+  if (name == "random_monst_class_A") {
+    return l->get_random_monst(p, MONST_CLASS_A);
+  }
+  if (name == "random_monst_class_B") {
+    return l->get_random_monst(p, MONST_CLASS_B);
+  }
+  if (name == "random_monst_class_C") {
+    return l->get_random_monst(p, MONST_CLASS_C);
+  }
+  if (name == "random_monst_class_D") {
+    return l->get_random_monst(p, MONST_CLASS_D);
+  }
+  if (name == "random_monst_class_E") {
+    return l->get_random_monst(p, MONST_CLASS_E);
+  }
+
+  return tp_find_wildcard(name);
+}
+
 Tpp tp_find(uint32_t id)
 {
   TRACE_NO_INDENT();
