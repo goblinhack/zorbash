@@ -195,6 +195,7 @@ Content:
 - 12 x buffs
 - 9 x skills
 - 6 x staffs
+- 6 x spells
 - 6 x shield
 - 6 x boots
 - 5 x rings
@@ -207,7 +208,6 @@ Content:
 - 3 x doors
 - 3 x cloaks
 - 2 x traps
-- 2 x spells
 - 2 x potions
 - 1 x player
 <!-- end type marker -->
