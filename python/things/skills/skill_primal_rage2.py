@@ -29,6 +29,8 @@ def on_tick_when_activated(owner, skill, x, y):
 
 
 def on_use(owner, skill, target, x, y):
+    if not target:
+        return
     my.spawn_using_items_radius_range(owner, skill, target, "skill_primal_rage_effect")
     bonus = 4
     my.thing_dmg_current_incr(owner, bonus)

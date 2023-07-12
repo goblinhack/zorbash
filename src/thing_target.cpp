@@ -568,12 +568,6 @@ bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point 
     dbg2("Target-attack-best: Try to attack with item");
     TRACE_AND_INDENT();
 
-    if (best) {
-      on_use(item, best);
-    } else {
-      on_use(item);
-    }
-
     if (item->collision_check_and_handle_at(best_hit_at, attack_options)) {
       lunge(best_hit_at);
     }

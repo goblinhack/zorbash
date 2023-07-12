@@ -17,6 +17,11 @@ def on_owner_attack_dmg_melee(me, owner, victim, x, y, damage):
 
 def on_use(owner, item, target, x, y):
     # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
+    # my.con("item    {} {:X}".format(my.thing_name_get(item), item))
+    if not target:
+        return
+    # my.con("target  {} {:X}".format(my.thing_name_get(target), target))
+
     nducks = my.pcg_randint(1, 6)
     for n in range(0, nducks):
         duck = my.spawn_at_my_position(target, "duck1")

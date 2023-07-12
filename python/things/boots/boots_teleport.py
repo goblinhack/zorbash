@@ -12,6 +12,8 @@ def on_enchant(me, x, y):
 
 
 def on_use(owner, item, target, x, y):
+    if not target:
+        return
     selection_x, selection_y = my.thing_coords_get(target)
     my.thing_teleport(owner, selection_x, selection_y)
 

@@ -12,6 +12,8 @@ def on_tick_when_activated(owner, skill, x, y):
 
 
 def on_use(owner, skill, target, x, y):
+    if not target:
+        return
     my.spawn_using_items_radius_range(owner, skill, target, "skill_devoted_thrust_effect")
     bonus = int(my.thing_stamina(owner) / 100) * 75
 

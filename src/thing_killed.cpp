@@ -391,9 +391,9 @@ void Thing::killed(Thingp defeater, const char *reason)
                 // Not sure what to show here yet.
                 //
               } else if (is_undead()) {
-                msg("%%fg=white$%s is vanquished %s.%%fg=reset$", The_no_dying.c_str(), reason);
+                msg("%%fg=white$%s is vanquished, %s.%%fg=reset$", The_no_dying.c_str(), reason);
               } else if (is_slime()) {
-                msg("%%fg=white$%s is splattered %s.%%fg=reset$", The_no_dying.c_str(), reason);
+                msg("%%fg=white$%s is splattered, %s.%%fg=reset$", The_no_dying.c_str(), reason);
               } else {
                 msg("%%fg=white$%s is dead, killed %s.%%fg=reset$", The_no_dying.c_str(), reason);
               }
@@ -424,9 +424,9 @@ void Thing::killed(Thingp defeater, const char *reason)
 
           if (is_monst()) {
             if (is_undead()) {
-              msg("%%fg=white$%s is vanquished %s.%%fg=reset$", The_no_dying.c_str(), reason);
+              msg("%%fg=white$%s is vanquished, %s.%%fg=reset$", The_no_dying.c_str(), reason);
             } else if (is_slime()) {
-              msg("%%fg=white$%s is splattered %s.%%fg=reset$", The_no_dying.c_str(), reason);
+              msg("%%fg=white$%s is splattered, %s.%%fg=reset$", The_no_dying.c_str(), reason);
             } else {
               msg("%%fg=white$%s is dead, killed %s.%%fg=reset$", The_no_dying.c_str(), reason);
             }
@@ -445,9 +445,9 @@ void Thing::killed(Thingp defeater, const char *reason)
           TRACE_NO_INDENT();
 
           if (is_undead()) {
-            msg("%%fg=white$%s is vanquished %s.%%fg=reset$", The_no_dying.c_str(), reason);
+            msg("%%fg=white$%s is vanquished, %s.%%fg=reset$", The_no_dying.c_str(), reason);
           } else if (is_slime()) {
-            msg("%%fg=white$%s is splattered %s.%%fg=reset$", The_no_dying.c_str(), reason);
+            msg("%%fg=white$%s is splattered, %s.%%fg=reset$", The_no_dying.c_str(), reason);
           } else {
             msg("%%fg=white$%s is dead, killed %s.%%fg=reset$", The_no_dying.c_str(), reason);
           }
@@ -476,9 +476,9 @@ void Thing::killed(Thingp defeater, const char *reason)
         TRACE_NO_INDENT();
         if (is_monst()) {
           if (is_undead()) {
-            msg("%%fg=white$%s is vanquished %s.%%fg=reset$", The_no_dying.c_str(), reason);
+            msg("%%fg=white$%s is vanquished, %s.%%fg=reset$", The_no_dying.c_str(), reason);
           } else if (is_slime()) {
-            msg("%%fg=white$%s is splattered %s.%%fg=reset$", The_no_dying.c_str(), reason);
+            msg("%%fg=white$%s is splattered, %s.%%fg=reset$", The_no_dying.c_str(), reason);
           } else if (level->is_gas_poison(curr_at.x, curr_at.y)) {
             msg("%%fg=white$%s succumbs to the gas, killed %s.%%fg=reset$", The_no_dying.c_str(), reason);
           } else if (level->is_trap(curr_at.x, curr_at.y)) {

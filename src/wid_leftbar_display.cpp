@@ -227,6 +227,8 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     wid_set_pos(w, tl, br);
     if (t->is_undead()) {
       wid_set_text(w, "(Vanquished)");
+    } else if (t->is_slime()) {
+      wid_set_text(w, "(Splatted)");
     } else if (t->is_monst()) {
       wid_set_text(w, "(Dead)");
     } else {

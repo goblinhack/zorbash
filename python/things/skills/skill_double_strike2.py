@@ -16,6 +16,8 @@ def on_use(owner, skill, target, x, y):
     if attack == 0:
         return
 
+    if not target:
+        return
     my.spawn_using_items_radius_range(owner, skill, target, "skill_double_strike_effect")
 
     dmg = my.thing_dmg_current(owner)

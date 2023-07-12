@@ -37,6 +37,8 @@ def on_fall(me, x, y):
 def on_use(owner, me, target, x, y):
     # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
     # my.con("me    {} {:X}".format(my.thing_name_get(me), me))
+    if not target:
+        return
     # my.con("target  {} {:X}".format(my.thing_name_get(target), target))
     my.spawn_at_my_position(target, "explosion_major")
     my.spawn_using_items_radius_range(owner, me, target, "explosion_destroy_floor")
