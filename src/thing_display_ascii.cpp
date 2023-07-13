@@ -480,7 +480,7 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
   //
   // Allow secret doors a chance to be seen
   //
-  if (is_secret_door() /* && discovered() */) {
+  if (is_secret_door() && discovered()) {
     color outline_color = ORANGE;
     outline_color.a     = alpha;
     ascii_set(TILE_LAYER_BG_0, p.x, p.y, outline_color);
