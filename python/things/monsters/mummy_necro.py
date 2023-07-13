@@ -23,16 +23,6 @@ def on_tick(owner, me, x, y):
 
         for follower in followers:
             if my.thing_is_dead_or_dying(follower):
-                my.topcon("XXXXXXX")
-                my.topcon("XXXXXXX")
-                my.topcon("XXXXXXX")
-                my.topcon("XXXXXXX")
-                my.topcon("XXXXXXX")
-                my.topcon("XXXXXXX")
-                my.topcon("XXXXXXX")
-                my.topcon("XXXXXXX")
-                my.topcon("XXXXXXX")
-                my.topcon("XXXXXXX")
                 if my.thing_resurrect(follower, "arise"):
                     my.thing_stat_con_decr(me, 1)
                     my.thing_msg(me, "Arise my minion!")

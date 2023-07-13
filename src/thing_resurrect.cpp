@@ -11,7 +11,11 @@ bool Thing::resurrect(void)
 {
   TRACE_NO_INDENT();
 
+  dbg("Resurrect attempt");
+  TRACE_AND_INDENT();
+
   if (! is_able_to_be_resurrected()) {
+    dbg("Cannot be resurrected");
     return false;
   }
 
@@ -20,6 +24,9 @@ bool Thing::resurrect(void)
   //
   auto v = health_max() / 2;
   if (v > 0) {
+    dbg("Resurrect is possible");
+    TRACE_AND_INDENT();
+
     is_resurrecting = true;
     tile_curr       = 0;
     animate();
@@ -43,6 +50,7 @@ bool Thing::resurrect(void)
     //
     // Must do this after turning off the dead flag, or the monster can appear as "extra dead".
     //
+    dbg("Is being resurrected");
     msg("%%fg=orange$%s rises from the grave!%%fg=reset$", text_The().c_str());
     return true;
   }

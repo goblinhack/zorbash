@@ -8,7 +8,7 @@ def on_you_are_declared_leader(me, x, y):
 
 def on_you_are_declared_a_follower(me, leader, x, y):
     r = my.non_pcg_randint(1, 100)
-    if r < 100:
+    if r < 80:
         my.thing_polymorph(me, "snake_asp")
         return
     my.thing_polymorph(me, "mummy")

@@ -369,7 +369,7 @@ PyObject *thing_resurrect(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  IF_DEBUG { t->log("Resurrected: reason %s", reason); }
+  IF_DEBUG { t->log("Resurrect attempt: reason %s", reason); }
   if (t->resurrect_forced()) {
     Py_RETURN_FALSE;
   } else {
