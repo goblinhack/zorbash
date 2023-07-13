@@ -201,11 +201,7 @@ void Level::cursor_recreate(point curr_at)
       game->request_destination_ok = true;
     }
   } else {
-    if (is_hazard(curr_at)) {
-      cursor = thing_new("cursor_hazard", curr_at);
-    } else {
-      cursor = thing_new("cursor", curr_at);
-    }
+    cursor                       = cursor_thing_new(curr_at);
     game->request_destination_ok = true;
   }
 

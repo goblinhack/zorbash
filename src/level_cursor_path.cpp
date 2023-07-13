@@ -269,12 +269,10 @@ bool Level::cursor_path_draw_line(Thingp it, point start, point end)
       }
     }
 
-    point curr_at(c.x, c.y);
-    if (is_hazard(curr_at)) {
-      thing_new("cursor_hazard_path", curr_at);
-    } else {
-      thing_new("cursor_path", curr_at);
-    }
+    //
+    // Create the cursor
+    //
+    cursor_path_thing_new(c);
   }
 
   pcg_random_allowed--;
@@ -307,12 +305,10 @@ void Level::cursor_path_draw_straight_line(Thingp it, point start, point end)
       }
     }
 
-    point curr_at(c.x, c.y);
-    if (is_hazard(curr_at)) {
-      thing_new("cursor_hazard_path", curr_at);
-    } else {
-      thing_new("cursor_path", curr_at);
-    }
+    //
+    // Create the cursor
+    //
+    cursor_path_thing_new(c);
   }
   pcg_random_allowed--;
 }
@@ -334,12 +330,10 @@ bool Level::cursor_path_draw_line(Thingp it, const std::vector< point > &move_pa
       }
     }
 
-    point curr_at(c.x, c.y);
-    if (is_hazard(curr_at)) {
-      thing_new("cursor_hazard_path", curr_at);
-    } else {
-      thing_new("cursor_path", curr_at);
-    }
+    //
+    // Create the cursor
+    //
+    cursor_path_thing_new(c);
   }
   pcg_random_allowed--;
   return true;

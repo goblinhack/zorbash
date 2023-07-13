@@ -2,10 +2,41 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_sdl_event.hpp"
 #include "my_thing.hpp"
 #include "my_wid_rightbar.hpp"
+
+//
+// Highlight the cursor differently if over hazards
+//
+Thingp Level::cursor_path_thing_new(point p)
+{
+  if (is_hazard(p)) {
+    if (get(can_see_ever.can_see, p.x, p.y)) {
+      return thing_new("cursor_hazard_path", p);
+    } else {
+      return thing_new("cursor_path", p);
+    }
+  }
+  return thing_new("cursor_path", p);
+}
+
+//
+// Highlight the cursor differently if over hazards
+//
+Thingp Level::cursor_thing_new(point p)
+{
+  if (is_hazard(p)) {
+    if (get(can_see_ever.can_see, p.x, p.y)) {
+      return thing_new("cursor_hazard", p);
+    } else {
+      return thing_new("cursor", p);
+    }
+  }
+  return thing_new("cursor", p);
+}
 
 void Thing::cursor_hover_over_check(void)
 {

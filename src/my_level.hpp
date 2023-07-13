@@ -660,6 +660,8 @@ public:
 
   Thingp buffbox_describe(const int slot);
   Thingp buffbox_get(const int slot);
+  Thingp cursor_path_thing_new(point p);
+  Thingp cursor_thing_new(point p);
   Thingp debuffbox_describe(const int slot);
   Thingp debuffbox_get(const int slot);
   Thingp inventory_describe(const int slot);
@@ -673,10 +675,10 @@ public:
   Thingp spellbox_get(void);
   Thingp thing_find(const ThingId id);
   Thingp thing_find_optional(const ThingId id);
-  Thingp thing_new(Tpp, const point at, Thingp owner = nullptr);
-  Thingp thing_new(const std::string &tp_name, Thingp owner = nullptr);
-  Thingp thing_new(const std::string &tp_name, const point at, Thingp owner = nullptr);
   Thingp thing_find_portal_at(point at);
+  Thingp thing_new(const std::string &tp_name, const point at, Thingp owner = nullptr);
+  Thingp thing_new(const std::string &tp_name, Thingp owner = nullptr);
+  Thingp thing_new(Tpp, const point at, Thingp owner = nullptr);
 
   Tpp tp_random_mob(const point p);
   Tpp tp_random_mob_challenge_class_A(const point p);
@@ -789,11 +791,10 @@ public:
   int total_monst_dmg_level(void);
   int total_loot_level(void);
   int total_food_level(void);
+  int inventory_slot(Thingp item);
 
   float wobble_curr(void) const;
   float update_wobble(void);
-
-  int inventory_slot(Thingp item);
 
   std::string to_string(void);
 
