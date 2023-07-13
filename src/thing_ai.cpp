@@ -2319,6 +2319,8 @@ bool Thing::ai_tick(bool recursing)
           change_state(MONST_STATE_IDLE, "resting interrupted by being on bad terrain");
           return ai_tick(true); /* try again to move now we are no longer resting or asleep */
         }
+
+        resting();
       }
       break;
     case MONST_STATE_REPACK_INVENTORY :
@@ -2377,8 +2379,6 @@ bool Thing::ai_tick(bool recursing)
         if (ai_dmap_can_see_init(minx, miny, maxx, maxy, MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED, true)) {
           AI_LOG("Something interrupted me while resting");
           TRACE_AND_INDENT();
-
-          resting();
 
           if (is_player()) {
             game->tick_begin("Robot rest interrupted by something");
