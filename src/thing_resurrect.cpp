@@ -7,9 +7,13 @@
 #include "my_monst.hpp"
 #include "my_thing.hpp"
 
-void Thing::resurrect(void)
+bool Thing::resurrect(void)
 {
   TRACE_NO_INDENT();
+
+  if (! is_able_to_be_resurrected()) {
+    return false;
+  }
 
   //
   // Resurrect, but weaker
@@ -40,21 +44,23 @@ void Thing::resurrect(void)
     // Must do this after turning off the dead flag, or the monster can appear as "extra dead".
     //
     msg("%%fg=orange$%s rises from the grave!%%fg=reset$", text_The().c_str());
-  } else {
-    dbg("Too weak to rise from the grave");
+    return true;
   }
+
+  dbg("Too weak to rise from the grave");
+  return false;
 }
 
-void Thing::resurrect_forced(void)
+bool Thing::resurrect_forced(void)
 {
   TRACE_NO_INDENT();
 
   if (is_resurrecting) {
     dbg("Already resurrecting");
-    return;
+    return false;
   }
 
-  resurrect();
+  return resurrect();
 }
 
 void Thing::resurrect_tick(void)

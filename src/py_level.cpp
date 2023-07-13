@@ -283,27 +283,27 @@ PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObjec
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iiis", kwlist, &id, &x, &y, &filter)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
-    Py_RETURN_FALSE;
+    Py_RETURN_NONE;
   }
 
   if (! id) {
     ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
-    Py_RETURN_FALSE;
+    Py_RETURN_NONE;
   }
 
   if (x == NO_VALUE) {
     ERR("%s: Missing 'x'", __FUNCTION__);
-    Py_RETURN_FALSE;
+    Py_RETURN_NONE;
   }
 
   if (y == NO_VALUE) {
     ERR("%s: Missing 'y'", __FUNCTION__);
-    Py_RETURN_FALSE;
+    Py_RETURN_NONE;
   }
 
   if (! filter) {
     ERR("%s: No filter specified %u", __FUNCTION__, id);
-    Py_RETURN_FALSE;
+    Py_RETURN_NONE;
   }
 
   Thingp t = game->thing_find(id);
@@ -340,22 +340,22 @@ PyObject *level_flood_fill_get_all_grid_things(PyObject *obj, PyObject *args, Py
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iiii", kwlist, &id, &x, &y, &distance)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
-    Py_RETURN_FALSE;
+    Py_RETURN_NONE;
   }
 
   if (! id) {
     ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
-    Py_RETURN_FALSE;
+    Py_RETURN_NONE;
   }
 
   if (x == NO_VALUE) {
     ERR("%s: Missing 'x'", __FUNCTION__);
-    Py_RETURN_FALSE;
+    Py_RETURN_NONE;
   }
 
   if (y == NO_VALUE) {
     ERR("%s: Missing 'y'", __FUNCTION__);
-    Py_RETURN_FALSE;
+    Py_RETURN_NONE;
   }
 
   Thingp t = game->thing_find(id);
@@ -389,12 +389,12 @@ PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywd
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
-    Py_RETURN_FALSE;
+    Py_RETURN_NONE;
   }
 
   if (! id) {
     ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
-    Py_RETURN_FALSE;
+    Py_RETURN_NONE;
   }
 
   Thingp t = game->thing_find(id);

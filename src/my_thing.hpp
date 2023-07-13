@@ -635,6 +635,8 @@ public:
   bool projectile_anim_exists(void);
   bool projectile_choose_target(Thingp item, Thingp victim = nullptr);
   bool raging_set(bool val);
+  bool resurrect_forced(void);
+  bool resurrect(void);
   bool same_leader_or_owner(Thingp it);
   bool same_mob(Thingp it);
   bool shoot_at_and_choose_target(Thingp, UseOptions *options = nullptr);
@@ -1655,6 +1657,7 @@ public:
   int is_msg_allowed_is_wounded(void);
   int is_msg_allowed_senses_danger(void);
   int is_msg(void);
+  int is_mummy(void);
   int is_necrotic_danger_level(void);
   int is_no_tile(void);
   int is_obj_spawning_monst(void);
@@ -1779,7 +1782,6 @@ public:
   int is_unused_flag125(void);
   int is_unused_flag126(void);
   int is_unused_flag127(void);
-  int is_unused_flag128(void);
   int is_unused_flag12(void);
   int is_unused_flag13(void);
   int is_unused_flag142(void);
@@ -2882,9 +2884,7 @@ public:
   void remove_all_references(void);
   void reset_goal_penalty(Thingp attacker);
   void resting(void);
-  void resurrect_forced(void);
   void resurrect_tick(void);
-  void resurrect(void);
   void score_add(Thingp victim = nullptr);
   void score_decr(int);
   void score_incr(int);

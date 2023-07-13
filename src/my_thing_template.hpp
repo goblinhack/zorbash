@@ -542,6 +542,7 @@ private:
   int _is_msg_allowed_is_surprised {};
   int _is_msg_allowed_is_wounded {};
   int _is_msg_allowed_senses_danger {};
+  int _is_mummy {};
   int _is_necrotic_danger_level {};
   int _is_no_tile {};
   int _is_obj_spawning {};
@@ -668,7 +669,6 @@ private:
   int _is_unused_flag125 {};
   int _is_unused_flag126 {};
   int _is_unused_flag127 {};
-  int _is_unused_flag128 {};
   int _is_unused_flag13 {};
   int _is_unused_flag14 {};
   int _is_unused_flag142 {};
@@ -1882,6 +1882,7 @@ public:
   int is_msg_allowed_is_wounded(void) const;
   int is_msg_allowed_senses_danger(void) const;
   int is_msg(void) const;
+  int is_mummy(void) const;
   int is_necrotic_danger_level(void) const;
   int is_no_tile(void) const;
   int is_obj_spawning_monst(void) const;
@@ -2006,7 +2007,6 @@ public:
   int is_unused_flag125(void) const;
   int is_unused_flag126(void) const;
   int is_unused_flag127(void) const;
-  int is_unused_flag128(void) const;
   int is_unused_flag12(void) const;
   int is_unused_flag13(void) const;
   int is_unused_flag142(void) const;
@@ -2644,6 +2644,7 @@ public:
   void is_msg_allowed_is_wounded_set(int v);
   void is_msg_allowed_senses_danger_set(int v);
   void is_msg_set(int v);
+  void is_mummy_set(int v);
   void is_necrotic_danger_level_set(int v);
   void is_no_tile_set(int v);
   void is_obj_spawning_monst_set(int v);
@@ -2768,7 +2769,6 @@ public:
   void is_unused_flag125_set(int v);
   void is_unused_flag126_set(int v);
   void is_unused_flag127_set(int v);
-  void is_unused_flag128_set(int v);
   void is_unused_flag12_set(int v);
   void is_unused_flag13_set(int v);
   void is_unused_flag142_set(int v);

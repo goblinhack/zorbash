@@ -443,6 +443,7 @@ PyObject *thing_is_msg_allowed_is_surprised(PyObject *obj, PyObject *args, PyObj
 PyObject *thing_is_msg_allowed_is_wounded(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_msg_allowed_senses_danger(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_msg(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_mummy(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_necrotic_danger_level(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_no_tile(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obj_spawning_monst(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -565,7 +566,6 @@ PyObject *thing_is_unused_flag124(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag125(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag126(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag127(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag128(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag12(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag13(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag142(PyObject *obj, PyObject *args, PyObject *keywds);

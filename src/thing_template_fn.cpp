@@ -631,6 +631,7 @@ int Tp::is_msg_allowed_is_surprised(void) const { return _is_msg_allowed_is_surp
 int Tp::is_msg_allowed_is_wounded(void) const { return _is_msg_allowed_is_wounded; }
 int Tp::is_msg_allowed_senses_danger(void) const { return _is_msg_allowed_senses_danger; }
 int Tp::is_msg(void) const { return _is_msg; }
+int Tp::is_mummy(void) const { return _is_mummy; }
 int Tp::is_necrotic_danger_level(void) const { return _is_necrotic_danger_level; }
 int Tp::is_no_tile(void) const { return _is_no_tile; }
 int Tp::is_obj_spawning_monst(void) const { return _is_obj_spawning_monst; }
@@ -755,7 +756,6 @@ int Tp::is_unused_flag124(void) const { return _is_unused_flag124; }
 int Tp::is_unused_flag125(void) const { return _is_unused_flag125; }
 int Tp::is_unused_flag126(void) const { return _is_unused_flag126; }
 int Tp::is_unused_flag127(void) const { return _is_unused_flag127; }
-int Tp::is_unused_flag128(void) const { return _is_unused_flag128; }
 int Tp::is_unused_flag12(void) const { return _is_unused_flag12; }
 int Tp::is_unused_flag13(void) const { return _is_unused_flag13; }
 int Tp::is_unused_flag142(void) const { return _is_unused_flag142; }
@@ -1393,6 +1393,7 @@ void Tp::is_msg_allowed_is_surprised_set(int v) { _is_msg_allowed_is_surprised =
 void Tp::is_msg_allowed_is_wounded_set(int v) { _is_msg_allowed_is_wounded = v; }
 void Tp::is_msg_allowed_senses_danger_set(int v) { _is_msg_allowed_senses_danger = v; }
 void Tp::is_msg_set(int v) { _is_msg = v; }
+void Tp::is_mummy_set(int v) { _is_mummy = v; }
 void Tp::is_necrotic_danger_level_set(int v) { _is_necrotic_danger_level = v; }
 void Tp::is_no_tile_set(int v) { _is_no_tile = v; }
 void Tp::is_obj_spawning_monst_set(int v) { _is_obj_spawning_monst = v; }
@@ -1517,7 +1518,6 @@ void Tp::is_unused_flag124_set(int v) { _is_unused_flag124 = v; }
 void Tp::is_unused_flag125_set(int v) { _is_unused_flag125 = v; }
 void Tp::is_unused_flag126_set(int v) { _is_unused_flag126 = v; }
 void Tp::is_unused_flag127_set(int v) { _is_unused_flag127 = v; }
-void Tp::is_unused_flag128_set(int v) { _is_unused_flag128 = v; }
 void Tp::is_unused_flag12_set(int v) { _is_unused_flag12 = v; }
 void Tp::is_unused_flag13_set(int v) { _is_unused_flag13 = v; }
 void Tp::is_unused_flag142_set(int v) { _is_unused_flag142 = v; }

@@ -24,31 +24,31 @@ static PyObject *thing_hit_common(PyObject *obj, PyObject *args, PyObject *keywd
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "III|iii", kwlist, &owner_id, &hitter_id, &victim_id, &damage,
                                     &crit, &thrown)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
-    Py_RETURN_NONE;
+    Py_RETURN_FALSE;
   }
 
   Thingp real_hitter = game->thing_find_optional(owner_id);
 
   if (! hitter_id) {
     ERR("%s: No real_hitter thing ID set", __FUNCTION__);
-    Py_RETURN_NONE;
+    Py_RETURN_FALSE;
   }
 
   Thingp hitter = game->thing_find(hitter_id);
   if (! hitter) {
     ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);
-    Py_RETURN_NONE;
+    Py_RETURN_FALSE;
   }
 
   if (! victim_id) {
     ERR("%s: No target thing ID set", __FUNCTION__);
-    Py_RETURN_NONE;
+    Py_RETURN_FALSE;
   }
 
   Thingp target = game->thing_find(victim_id);
   if (! target) {
     ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
-    Py_RETURN_NONE;
+    Py_RETURN_FALSE;
   }
 
   ThingAttackOptions attack_options {};

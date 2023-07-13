@@ -25,14 +25,13 @@ def on_tick(owner, me, x, y):
 
         for follower in followers:
             if my.thing_is_dead_or_dying(follower):
-                my.thing_polymorph(follower, "zoblin")
-                my.thing_resurrect(follower, "arise")
-                my.thing_stat_con_decr(me, 1)
-                my.thing_msg(me, "Arise my minion!")
-                my.thing_msg(follower, "Groan!")
-                if my.thing_stat_con(me) <= 1:
-                    return True
-                risen += 1
+                if my.thing_resurrect(follower, "arise"):
+                    my.thing_stat_con_decr(me, 1)
+                    my.thing_msg(me, "Arise my minion!")
+                    my.thing_msg(follower, "Groan!")
+                    if my.thing_stat_con(me) <= 1:
+                        return True
+                    risen += 1
 
     if risen > 0:
         return True

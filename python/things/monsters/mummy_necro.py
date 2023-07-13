@@ -23,14 +23,23 @@ def on_tick(owner, me, x, y):
 
         for follower in followers:
             if my.thing_is_dead_or_dying(follower):
-                my.thing_polymorph(follower, "mummy")
-                my.thing_resurrect(follower, "arise")
-                my.thing_stat_con_decr(me, 1)
-                my.thing_msg(me, "Arise my minion!")
-                my.thing_msg(follower, "Groan!")
-                if my.thing_stat_con(me) <= 1:
-                    return True
-                risen += 1
+                my.topcon("XXXXXXX")
+                my.topcon("XXXXXXX")
+                my.topcon("XXXXXXX")
+                my.topcon("XXXXXXX")
+                my.topcon("XXXXXXX")
+                my.topcon("XXXXXXX")
+                my.topcon("XXXXXXX")
+                my.topcon("XXXXXXX")
+                my.topcon("XXXXXXX")
+                my.topcon("XXXXXXX")
+                if my.thing_resurrect(follower, "arise"):
+                    my.thing_stat_con_decr(me, 1)
+                    my.thing_msg(me, "Arise my minion!")
+                    my.thing_msg(follower, "Groan!")
+                    if my.thing_stat_con(me) <= 1:
+                        return True
+                    risen += 1
 
     if risen > 0:
         return True
@@ -154,6 +163,7 @@ def tp_init(name, text_long_name):
     my.is_msg_allowed_is_surprised(self, True)
     my.is_msg_allowed_is_wounded(self, True)
     my.is_msg_allowed_senses_danger(self, True)
+    my.is_mummy(self, True)
     my.is_necrotic_danger_level(self, 1)  # danger level
     my.is_shovable(self, True)
     my.is_tickable(self, True)
