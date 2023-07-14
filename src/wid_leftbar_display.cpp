@@ -489,6 +489,13 @@ bool wid_leftbar_display_create(void)
     return false;
   }
 
+  //
+  // When dead, don't update as this will show all the player items
+  //
+  if (player->is_dead_or_dying()) {
+    return false;
+  }
+
   int width = UI_LEFTBAR_WIDTH;
   int y_at  = 0;
 

@@ -76,7 +76,7 @@ bool Game::player_tick_(bool left, bool right, bool up, bool down, bool attack, 
   if (left || right || up || down) {
     if (level && level->cursor) {
       level->cursor_path_clear();
-      level->cursor->hide();
+      level->cursor->hide("hide cursor, player is moving");
     }
   }
 

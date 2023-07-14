@@ -73,7 +73,7 @@ bool Thing::throw_item_choose_target(Thingp what)
 void Thing::on_thrown_callback(ThingId owner_id_when_thrown)
 {
   on_thrown(owner_id_when_thrown);
-  visible();
+  visible("thrown");
 }
 
 bool Thing::throw_at(Thingp what, Thingp target)
@@ -377,7 +377,7 @@ bool Thing::throw_at(Thingp what, Thingp target)
   // As there is no animation, no need to hide.
   //
   if (what->has_external_particle || what->has_internal_particle) {
-    what->hide();
+    what->hide("thrown");
   }
 
   if (is_player()) {

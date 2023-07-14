@@ -513,7 +513,7 @@ void Level::cursor_path_clear(void)
     for (auto x = 0; x < MAP_WIDTH; x++) {
       FOR_ALL_CURSOR_PATH_THINGS(level, t, x, y)
       {
-        t->hide();
+        t->hide("cursor path clear");
         t->dead("by running out of life");
       }
       FOR_ALL_THINGS_END()

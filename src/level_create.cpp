@@ -111,7 +111,7 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
   if (! cursor && player) {
     cursor = cursor_thing_new(player->curr_at);
     if (cursor) {
-      cursor->hide();
+      cursor->hide("level create, cursor hide");
     }
     is_map_mini_valid = true;
   }

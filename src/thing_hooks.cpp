@@ -87,7 +87,7 @@ void Thing::hooks_remove_from(Thingp o)
           if (is_loggable()) {
             dbg2("Reapply carry-anim for owner %s", o->to_string().c_str());
           }
-          carry_anim->visible();
+          carry_anim->visible("post swing");
         } else {
           if (is_loggable()) {
             dbg2("Do not reapply carry-anim for invisible owner %s", o->to_string().c_str());

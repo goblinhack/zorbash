@@ -754,7 +754,7 @@ bool Thing::equip_use(bool forced, int equip, ThingAttackOptionsp attack_options
   auto c = equip_carry_anim(equip);
   if (c) {
     dbg("Hide carry-anim %s while swinging", c->to_short_string().c_str());
-    c->hide();
+    c->hide("swinging");
   }
 
   //

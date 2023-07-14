@@ -209,7 +209,7 @@ bool Thing::collision_find_best_target(ThingAttackOptionsp attack_options)
               // Can't defeat victim twice, so hide victim
               //
               IF_DEBUG1 { owner->log("Eat corpse %s", victim->to_short_string().c_str()); }
-              victim->hide();
+              victim->hide("dead and eaten");
               attack_options->victim_attacked = true;
               ret                             = true;
             }
@@ -245,7 +245,7 @@ bool Thing::collision_find_best_target(ThingAttackOptionsp attack_options)
             // Can't defeat victim twice, so hide victim
             //
             dbg2("Ate corpse %s", victim->to_short_string().c_str());
-            victim->hide();
+            victim->hide("ate corpse");
             victim->gc();
             attack_options->victim_attacked = true;
             ret                             = true;

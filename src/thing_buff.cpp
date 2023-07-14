@@ -34,7 +34,7 @@ bool Thing::buff_add(Thingp what)
 
   itemsp()->buffs.push_front(what->id);
   what->owner_set(this);
-  what->hide();
+  what->hide("buff add");
 
   dbg("Add buff %s", what->to_short_string().c_str());
 

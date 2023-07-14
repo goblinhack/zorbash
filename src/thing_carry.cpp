@@ -338,7 +338,7 @@ bool Thing::carry(Thingp item, CarryOptions carry_options)
     }
   }
   item->owner_set(this);
-  item->hide();
+  item->hide("carry");
 
   if (game->state == Game::STATE_INVENTORY) {
     //

@@ -382,7 +382,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       //
       // So the player is visible above light
       //
-      auto callback = std::bind(&Thing::visible, this);
+      auto callback = std::bind(&Thing::visible_callback, this);
       if (! is_being_destroyed) {
         level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(tile_curr), false, callback);
       }
@@ -395,7 +395,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
         duration = 0;
       }
 
-      auto callback = std::bind(&Thing::visible, this);
+      auto callback = std::bind(&Thing::visible_callback, this);
       level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(tile_curr), false, callback);
     }
 
@@ -443,7 +443,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
         } else {
           it->is_jumping = true;
 
-          auto callback = std::bind(&Thing::visible, this);
+          auto callback = std::bind(&Thing::visible_callback, this);
           if (! is_being_destroyed) {
             if (is_player()) {
               level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(it->tile_curr),
@@ -472,7 +472,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
           //
           // No, the weapon is shown as carry anim
           //
-          auto callback = std::bind(&Thing::visible, this);
+          auto callback = std::bind(&Thing::visible_callback, this);
           if (! is_being_destroyed) {
             if (is_player()) {
               level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(it->tile_curr),
@@ -501,7 +501,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
         } else {
           it->is_jumping = true;
 
-          auto callback = std::bind(&Thing::visible, this);
+          auto callback = std::bind(&Thing::visible_callback, this);
           if (! is_being_destroyed) {
             if (is_player()) {
               level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(it->tile_curr),

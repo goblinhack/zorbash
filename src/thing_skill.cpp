@@ -69,7 +69,7 @@ bool Thing::skill_add(Thingp new_skill)
 
   itemsp()->skills.push_front(new_skill->id);
   new_skill->owner_set(this);
-  new_skill->hide();
+  new_skill->hide("skill add");
 
   dbg("Add skill %s", new_skill->to_short_string().c_str());
 

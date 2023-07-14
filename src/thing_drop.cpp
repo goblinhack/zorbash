@@ -120,17 +120,21 @@ bool Thing::drop(Thingp what, Thingp target, DropOptions drop_options)
       // Hide as the particle drop will reveal it
       //
       dbg("Defer making dropped player item visible: %s", what->to_short_string().c_str());
-      what->hide();
+      what->hide("defer making dropped player item visible");
     } else {
       //
       // No particle?
       //
-      dbg("Make dropped player item visible: %s", what->to_short_string().c_str());
-      what->visible();
+      if (! is_dead_or_dying()) {
+        dbg("Make dropped player item visible: %s", what->to_short_string().c_str());
+        what->visible("make dropped player item visible");
+      } else {
+        dbg("Keep dropped dead player item hidden: %s", what->to_short_string().c_str());
+      }
     }
   } else {
     dbg("Make dropped item visible: %s", what->to_short_string().c_str());
-    what->visible();
+    what->visible("make dropped item visible");
   }
 
   if (target) {
@@ -299,8 +303,8 @@ bool Thing::drop_from_ether(Thingp what)
 
   what->hooks_remove();
   what->owner_unset();
-  what->hide();
-  what->visible();
+  what->hide("drop from ether");
+  what->visible("drop from ether");
   what->move_to_immediately(curr_at);
 
   //
@@ -329,7 +333,7 @@ bool Thing::drop_from_ether(Thingp what)
   s.x    = (int) ((((float) game->config.game_pix_width) / ((float) TERM_WIDTH)) * ((float) s.x));
   s.y    = (int) ((((float) game->config.game_pix_height) / ((float) TERM_HEIGHT)) * ((float) s.y));
 
-  auto callback = std::bind(&Thing::visible, what);
+  auto callback = std::bind(&Thing::visible_callback, what);
 
   auto delay = 0;
 

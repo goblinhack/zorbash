@@ -4,17 +4,20 @@
 
 #include "my_level.hpp"
 #include "my_monst.hpp"
+#include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
-void Thing::hide(void)
+void Thing::hide(const std::string &reason)
 {
   TRACE_NO_INDENT();
+  verify(MTYPE_THING, this);
+
   if (is_hidden) {
     return;
   }
 
   if (is_loggable()) {
-    dbg("Hide");
+    dbg("Hide: %s", reason.c_str());
   }
 
   level_pop();
@@ -29,14 +32,14 @@ void Thing::hide(void)
     if (equip_id_carry_anim(iter).ok()) {
       auto w = level->thing_find(equip_id_carry_anim(iter));
       if (w) {
-        w->hide();
+        w->hide(reason);
       }
     }
 
     if (equip_id_use_anim(iter).ok()) {
       auto w = level->thing_find(equip_id_use_anim(iter));
       if (w) {
-        w->hide();
+        w->hide(reason);
       }
     }
   }
@@ -46,7 +49,7 @@ void Thing::hide(void)
     if (bodypart_id_get(iter).ok()) {
       auto w = level->thing_find(bodypart_id_get(iter));
       if (w) {
-        w->hide();
+        w->hide(reason);
       }
     }
   }
@@ -56,7 +59,9 @@ void Thing::hide(void)
     TRACE_NO_INDENT();
     auto w = level->thing_find(id);
     if (w) {
-      w->hide();
+      w->hide(reason);
     }
   }
 }
+
+void Thing::hide_callback(void) { hide("callback"); }

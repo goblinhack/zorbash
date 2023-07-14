@@ -391,7 +391,7 @@ static uint8_t game_mouse_motion_(int x, int y, int relx, int rely, int wheelx, 
   if (level->cursor) {
     if (level->ts_entered && time_have_x_tenths_passed_since(10, level->ts_entered)) {
       if (! player->is_dead) {
-        level->cursor->visible();
+        level->cursor->visible("entered level, make cursor visible");
       }
     }
   }

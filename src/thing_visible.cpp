@@ -7,16 +7,17 @@
 #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
-void Thing::visible(void)
+void Thing::visible(const std::string &reason)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
+
   if (! is_hidden) {
     return;
   }
 
   if (is_loggable()) {
-    dbg("Visible");
+    dbg("Visible: %s", reason.c_str());
   }
 
   //
@@ -47,14 +48,14 @@ void Thing::visible(void)
     if (equip_id_carry_anim(iter).ok()) {
       auto it = level->thing_find(equip_id_carry_anim(iter));
       if (it) {
-        it->visible();
+        it->visible(reason);
       }
     }
 
     if (equip_id_use_anim(iter).ok()) {
       auto it = level->thing_find(equip_id_use_anim(iter));
       if (it) {
-        it->visible();
+        it->visible(reason);
       }
     }
   }
@@ -64,7 +65,7 @@ void Thing::visible(void)
     if (bodypart_id_get(iter).ok()) {
       auto it = level->thing_find(bodypart_id_get(iter));
       if (it) {
-        it->visible();
+        it->visible(reason);
       }
     }
   }
@@ -74,7 +75,7 @@ void Thing::visible(void)
     TRACE_NO_INDENT();
     auto it = level->thing_find(on_fire_id);
     if (it) {
-      it->visible();
+      it->visible(reason);
     }
   }
 
@@ -86,3 +87,5 @@ uint8_t Thing::is_visible(void)
   TRACE_NO_INDENT();
   return (! is_hidden);
 }
+
+void Thing::visible_callback(void) { visible("callback"); }

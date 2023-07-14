@@ -87,7 +87,8 @@ bool Thing::steal_treasure_from(Thingp victim)
       carry(chosen, carry_options);
     }
   }
-  chosen->hide();
+
+  chosen->hide("stolen");
 
   if (victim->is_player()) {
     if (chosen->is_able_to_be_equipped()) {
@@ -140,7 +141,7 @@ bool Thing::steal_item_from(Thingp victim)
     carry(chosen, carry_options);
   }
 
-  chosen->hide();
+  chosen->hide("stolen");
 
   if (victim->is_player()) {
     victim->popup(string_sprintf("%%fg=white$Where's my stuff?!"));

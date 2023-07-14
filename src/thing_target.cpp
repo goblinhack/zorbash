@@ -88,7 +88,7 @@ bool Thing::is_target_select(Thingp item)
   game->change_state(Game::STATE_CHOOSING_TARGET, "choosing a target");
   level->cursor_recreate();
   if (level->cursor) {
-    level->cursor->visible();
+    level->cursor->visible("target select");
   }
   level->describe(item);
 

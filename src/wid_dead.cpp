@@ -99,7 +99,7 @@ void Game::wid_dead_select(const char *reason)
   if (level) {
     level->scroll_map_to_player();
     if (level->cursor) {
-      level->cursor->hide();
+      level->cursor->hide("wid dead");
     }
   }
 

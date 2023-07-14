@@ -2759,7 +2759,8 @@ public:
   void gc(void);
   void goal_penalty_tick(void);
   void grass_tick(void);
-  void hide(void);
+  void hide_callback(void);
+  void hide(const std::string &);
   void hooks_remove_from(Thingp);
   void hooks_remove(void);
   void hunger_clock_tick(void);
@@ -2929,7 +2930,8 @@ public:
   void update_tick(void);
   void update(void);
   void used(Thingp w, Thingp target, bool remove_after_use, UseOptions *options = nullptr);
-  void visible(void);
+  void visible_callback(void);
+  void visible(const std::string &);
   void waiting(void);
   void water_tick(void);
   void weapon_check_for_dmg(Thingp weapon, Thingp victim = nullptr);

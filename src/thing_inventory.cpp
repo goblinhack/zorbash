@@ -44,6 +44,11 @@ void Thing::inventory_particle(Thingp item, int slot)
     return;
   }
 
+  if (is_dead_or_dying()) {
+    dbg("Not while owner is dying");
+    return;
+  }
+
   auto delay = 0;
 
   if (g_opt_ascii) {
@@ -215,6 +220,11 @@ void Thing::inventory_particle(Thingp item, int slot, Thingp particle_target)
     return;
   }
 
+  if (is_dead_or_dying()) {
+    dbg("Not while owner is dying");
+    return;
+  }
+
   //
   // We can throw from the inventory or from the player. I think it
   // looks better to throw from the player.
@@ -239,7 +249,7 @@ void Thing::inventory_particle(Thingp item, int slot, Thingp particle_target)
 
   point where_to = (particle_target->last_blit_tl + particle_target->last_blit_br) / (short) 2;
 
-  auto callback = std::bind(&Thing::visible, item);
+  auto callback = std::bind(&Thing::visible_callback, item);
   if (! is_being_destroyed) {
     if (item->is_being_thrown && item->is_thrown_as_a_weapon()) {
       //

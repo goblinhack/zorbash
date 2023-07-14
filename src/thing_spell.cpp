@@ -69,7 +69,7 @@ bool Thing::spell_add(Thingp new_spell)
 
   itemsp()->spells.push_front(new_spell->id);
   new_spell->owner_set(this);
-  new_spell->hide();
+  new_spell->hide("spell added");
 
   dbg("Add spell %s", new_spell->to_short_string().c_str());
 

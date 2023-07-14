@@ -370,7 +370,7 @@ bool Thing::fall_to_next_level(void)
       if (is_player() || is_monst() || is_item()) {
         wobble(90);
       }
-      visible();
+      visible("fall to next level");
 
       //
       // Allow mobs to fall without damage
