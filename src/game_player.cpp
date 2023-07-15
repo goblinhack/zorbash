@@ -318,7 +318,7 @@ void Game::place_player(void)
           }
         }
       }
-      if (0) {
+      if (1) {
         {
           for (auto sk = 0; sk < 2; sk++) {
             auto b = level->thing_new("spellbook", point(x, y));

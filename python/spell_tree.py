@@ -10,6 +10,11 @@ my.map_load_spell_tree(
         "sC", "spell_summon_monst_C",
         "sD", "spell_summon_monst_D",
         "sE", "spell_summon_monst_E",
+        "dA", "spell_dominate_monst_A",
+        "dB", "spell_dominate_monst_B",
+        "dC", "spell_dominate_monst_C",
+        "dD", "spell_dominate_monst_D",
+        "dE", "spell_dominate_monst_E",
     ])
 
 my.map_load_spell_tree(
@@ -46,6 +51,32 @@ my.map_load_spell_tree(
         "rk                                      ",
         "                                        ",
         "sA->sB->sC->sD->sE                      ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+    ],
+)
+
+my.map_load_spell_tree(
+    tree_name="psi",
+    tree_data=[
+        "dA->dB->dC->dD->dE                      ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
         "                                        ",
         "                                        ",
         "                                        ",
