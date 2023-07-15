@@ -3,6 +3,7 @@ import my
 my.map_load_spell_tree(
     spell_data=[
         "fd", "spell_summon_food",
+        "rk", "spell_summon_rock",
         "mm", "spell_magic_missile",
         "sA", "spell_summon_monst_A",
         "sB", "spell_summon_monst_B",
@@ -42,9 +43,9 @@ my.map_load_spell_tree(
     tree_data=[
         "fd                                      ",
         "                                        ",
+        "rk                                      ",
+        "                                        ",
         "sA->sB->sC->sD->sE                      ",
-        "                                        ",
-        "                                        ",
         "                                        ",
         "                                        ",
         "                                        ",

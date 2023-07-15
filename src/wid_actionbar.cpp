@@ -7,12 +7,13 @@
 #include "my_sdl_proto.hpp"
 #include "my_thing.hpp"
 #include "my_ui.hpp"
+#include "my_wid_actionbar.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_popups.hpp"
 #include "my_wid_thing_info.hpp"
 #include "my_wid_tp_info.hpp"
 
-static Widp      wid_actionbar;
+Widp             wid_actionbar;
 static WidPopup *wid_over_robot_mode;
 static WidPopup *wid_over_quit;
 static WidPopup *wid_over_keyboard;
@@ -91,7 +92,7 @@ void wid_actionbar_fini(void)
   }
 }
 
-static uint8_t wid_actionbar_quit(Widp w, int x, int y, uint32_t button)
+uint8_t wid_actionbar_quit(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Actionbar quit");
   TRACE_NO_INDENT();
@@ -106,7 +107,7 @@ static uint8_t wid_actionbar_quit(Widp w, int x, int y, uint32_t button)
   return true;
 }
 
-static void wid_actionbar_quit_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
+void wid_actionbar_quit_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -143,7 +144,7 @@ static void wid_actionbar_quit_over_begin(Widp w, int relx, int rely, int wheelx
   wid_over_quit->compress();
 }
 
-static void wid_actionbar_quit_over_end(Widp w)
+void wid_actionbar_quit_over_end(Widp w)
 {
   TRACE_NO_INDENT();
 
@@ -199,14 +200,14 @@ void wid_actionbar_robot_mode_off(void)
   game->request_to_remake_actionbar = true;
 }
 
-static uint8_t wid_actionbar_robot(Widp w, int x, int y, uint32_t button)
+uint8_t wid_actionbar_robot(Widp w, int x, int y, uint32_t button)
 {
   TRACE_NO_INDENT();
   wid_actionbar_robot_mode_toggle();
   return true;
 }
 
-static void wid_actionbar_robot_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
+void wid_actionbar_robot_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -254,7 +255,7 @@ static void wid_actionbar_robot_over_begin(Widp w, int relx, int rely, int wheel
   wid_over_robot_mode->compress();
 }
 
-static void wid_actionbar_robot_over_end(Widp w)
+void wid_actionbar_robot_over_end(Widp w)
 {
   TRACE_NO_INDENT();
 
@@ -262,13 +263,13 @@ static void wid_actionbar_robot_over_end(Widp w)
   wid_over_robot_mode = nullptr;
 }
 
-static void wid_actionbar_ai_tick(Widp w)
+void wid_actionbar_ai_tick(Widp w)
 {
   TRACE_NO_INDENT();
   game->robot_mode_tick_requested = true;
 }
 
-static uint8_t wid_actionbar_close(Widp w, int x, int y, uint32_t button)
+uint8_t wid_actionbar_close(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Actionbar close");
   TRACE_NO_INDENT();
@@ -291,11 +292,11 @@ static uint8_t wid_actionbar_close(Widp w, int x, int y, uint32_t button)
   return true;
 }
 
-static void wid_actionbar_close_over_begin(Widp w, int relx, int rely, int wheelx, int wheely) { TRACE_NO_INDENT(); }
+void wid_actionbar_close_over_begin(Widp w, int relx, int rely, int wheelx, int wheely) { TRACE_NO_INDENT(); }
 
-static void wid_actionbar_close_over_end(Widp w) { TRACE_NO_INDENT(); }
+void wid_actionbar_close_over_end(Widp w) { TRACE_NO_INDENT(); }
 
-static uint8_t wid_actionbar_load(Widp w, int x, int y, uint32_t button)
+uint8_t wid_actionbar_load(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Actionbar load");
   TRACE_NO_INDENT();
@@ -324,7 +325,7 @@ static uint8_t wid_actionbar_load(Widp w, int x, int y, uint32_t button)
   return true;
 }
 
-static void wid_actionbar_load_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
+void wid_actionbar_load_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -364,7 +365,7 @@ static void wid_actionbar_load_over_begin(Widp w, int relx, int rely, int wheelx
   wid_over_load->compress();
 }
 
-static void wid_actionbar_load_over_end(Widp w)
+void wid_actionbar_load_over_end(Widp w)
 {
   TRACE_NO_INDENT();
 
@@ -372,7 +373,7 @@ static void wid_actionbar_load_over_end(Widp w)
   wid_over_load = nullptr;
 }
 
-static uint8_t wid_actionbar_save(Widp w, int x, int y, uint32_t button)
+uint8_t wid_actionbar_save(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Actionbar save");
   TRACE_NO_INDENT();
@@ -401,7 +402,7 @@ static uint8_t wid_actionbar_save(Widp w, int x, int y, uint32_t button)
   return true;
 }
 
-static void wid_actionbar_save_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
+void wid_actionbar_save_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -441,7 +442,7 @@ static void wid_actionbar_save_over_begin(Widp w, int relx, int rely, int wheelx
   wid_over_save->compress();
 }
 
-static void wid_actionbar_save_over_end(Widp w)
+void wid_actionbar_save_over_end(Widp w)
 {
   TRACE_NO_INDENT();
 
@@ -449,7 +450,7 @@ static void wid_actionbar_save_over_end(Widp w)
   wid_over_save = nullptr;
 }
 
-static uint8_t wid_actionbar_ascend(Widp w, int x, int y, uint32_t button)
+uint8_t wid_actionbar_ascend(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Actionbar ascend");
   TRACE_NO_INDENT();
@@ -476,7 +477,7 @@ static uint8_t wid_actionbar_ascend(Widp w, int x, int y, uint32_t button)
   return true;
 }
 
-static void wid_actionbar_ascend_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
+void wid_actionbar_ascend_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -517,7 +518,7 @@ static void wid_actionbar_ascend_over_begin(Widp w, int relx, int rely, int whee
   wid_over_ascend->compress();
 }
 
-static void wid_actionbar_ascend_over_end(Widp w)
+void wid_actionbar_ascend_over_end(Widp w)
 {
   TRACE_NO_INDENT();
 
@@ -525,7 +526,7 @@ static void wid_actionbar_ascend_over_end(Widp w)
   wid_over_ascend = nullptr;
 }
 
-static uint8_t wid_actionbar_descend(Widp w, int x, int y, uint32_t button)
+uint8_t wid_actionbar_descend(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Actionbar descend");
   TRACE_NO_INDENT();
@@ -552,7 +553,7 @@ static uint8_t wid_actionbar_descend(Widp w, int x, int y, uint32_t button)
   return true;
 }
 
-static void wid_actionbar_descend_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
+void wid_actionbar_descend_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -592,7 +593,7 @@ static void wid_actionbar_descend_over_begin(Widp w, int relx, int rely, int whe
   wid_over_descend->compress();
 }
 
-static void wid_actionbar_descend_over_end(Widp w)
+void wid_actionbar_descend_over_end(Widp w)
 {
   TRACE_NO_INDENT();
 
@@ -600,7 +601,7 @@ static void wid_actionbar_descend_over_end(Widp w)
   wid_over_descend = nullptr;
 }
 
-static uint8_t wid_actionbar_inventory(Widp w, int x, int y, uint32_t button)
+uint8_t wid_actionbar_inventory(Widp w, int x, int y, uint32_t button)
 {
   DBG("Actionbar inventory");
   TRACE_NO_INDENT();
@@ -636,7 +637,7 @@ static uint8_t wid_actionbar_inventory(Widp w, int x, int y, uint32_t button)
   return true;
 }
 
-static void wid_actionbar_inventory_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
+void wid_actionbar_inventory_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -676,7 +677,7 @@ static void wid_actionbar_inventory_over_begin(Widp w, int relx, int rely, int w
   wid_over_inventory->compress();
 }
 
-static void wid_actionbar_inventory_over_end(Widp w)
+void wid_actionbar_inventory_over_end(Widp w)
 {
   TRACE_NO_INDENT();
 
@@ -684,7 +685,7 @@ static void wid_actionbar_inventory_over_end(Widp w)
   wid_over_inventory = nullptr;
 }
 
-static uint8_t wid_actionbar_collect(Widp w, int x, int y, uint32_t button)
+uint8_t wid_actionbar_collect(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Actionbar collect");
   TRACE_NO_INDENT();
@@ -722,7 +723,7 @@ static uint8_t wid_actionbar_collect(Widp w, int x, int y, uint32_t button)
   return true;
 }
 
-static void wid_actionbar_collect_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
+void wid_actionbar_collect_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -762,14 +763,14 @@ static void wid_actionbar_collect_over_begin(Widp w, int relx, int rely, int whe
   wid_over_collect->compress();
 }
 
-static void wid_actionbar_collect_over_end(Widp w)
+void wid_actionbar_collect_over_end(Widp w)
 {
   TRACE_NO_INDENT();
   delete wid_over_collect;
   wid_over_collect = nullptr;
 }
 
-static uint8_t wid_actionbar_wait(Widp w, int x, int y, uint32_t button)
+uint8_t wid_actionbar_wait(Widp w, int x, int y, uint32_t button)
 {
   DBG("Actionbar wait");
   TRACE_NO_INDENT();
@@ -800,7 +801,7 @@ static uint8_t wid_actionbar_wait(Widp w, int x, int y, uint32_t button)
   return true;
 }
 
-static uint8_t wid_actionbar_repeat_wait(Widp w, int x, int y, uint32_t button)
+uint8_t wid_actionbar_repeat_wait(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Actionbar wait");
   TRACE_NO_INDENT();
@@ -839,7 +840,7 @@ static uint8_t wid_actionbar_repeat_wait(Widp w, int x, int y, uint32_t button)
   return true;
 }
 
-static void wid_actionbar_wait_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
+void wid_actionbar_wait_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -879,7 +880,7 @@ static void wid_actionbar_wait_over_begin(Widp w, int relx, int rely, int wheelx
   wid_over_wait->compress();
 }
 
-static void wid_actionbar_wait_over_end(Widp w)
+void wid_actionbar_wait_over_end(Widp w)
 {
   TRACE_NO_INDENT();
 
@@ -887,7 +888,7 @@ static void wid_actionbar_wait_over_end(Widp w)
   wid_over_wait = nullptr;
 }
 
-static uint8_t wid_actionbar_zoom_out(Widp w, int x, int y, uint32_t button)
+uint8_t wid_actionbar_zoom_out(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Actionbar zoom out");
   TRACE_NO_INDENT();
@@ -901,7 +902,7 @@ static uint8_t wid_actionbar_zoom_out(Widp w, int x, int y, uint32_t button)
   return true;
 }
 
-static uint8_t wid_actionbar_zoom_in(Widp w, int x, int y, uint32_t button)
+uint8_t wid_actionbar_zoom_in(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Actionbar zoom in");
   TRACE_NO_INDENT();
@@ -915,7 +916,7 @@ static uint8_t wid_actionbar_zoom_in(Widp w, int x, int y, uint32_t button)
   return true;
 }
 
-static void wid_actionbar_zoom_in_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
+void wid_actionbar_zoom_in_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -949,7 +950,7 @@ static void wid_actionbar_zoom_in_over_begin(Widp w, int relx, int rely, int whe
   wid_over_zoom_in->compress();
 }
 
-static void wid_actionbar_zoom_out_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
+void wid_actionbar_zoom_out_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -983,7 +984,7 @@ static void wid_actionbar_zoom_out_over_begin(Widp w, int relx, int rely, int wh
   wid_over_zoom_out->compress();
 }
 
-static void wid_actionbar_zoom_in_over_end(Widp w)
+void wid_actionbar_zoom_in_over_end(Widp w)
 {
   TRACE_NO_INDENT();
 
@@ -991,7 +992,7 @@ static void wid_actionbar_zoom_in_over_end(Widp w)
   wid_over_zoom_in = nullptr;
 }
 
-static void wid_actionbar_zoom_out_over_end(Widp w)
+void wid_actionbar_zoom_out_over_end(Widp w)
 {
   TRACE_NO_INDENT();
 
@@ -999,7 +1000,7 @@ static void wid_actionbar_zoom_out_over_end(Widp w)
   wid_over_zoom_out = nullptr;
 }
 
-static uint8_t wid_actionbar_configure(Widp w, int x, int y, uint32_t button)
+uint8_t wid_actionbar_configure(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Actionbar configure");
   TRACE_NO_INDENT();
@@ -1021,7 +1022,7 @@ static uint8_t wid_actionbar_configure(Widp w, int x, int y, uint32_t button)
   return true;
 }
 
-static void wid_actionbar_configure_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
+void wid_actionbar_configure_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -1055,7 +1056,7 @@ static void wid_actionbar_configure_over_begin(Widp w, int relx, int rely, int w
   wid_over_keyboard->compress();
 }
 
-static void wid_actionbar_configure_over_end(Widp w)
+void wid_actionbar_configure_over_end(Widp w)
 {
   TRACE_NO_INDENT();
 
@@ -1063,581 +1064,25 @@ static void wid_actionbar_configure_over_end(Widp w)
   wid_over_keyboard = nullptr;
 }
 
-void wid_actionbar_pixelart_init(void)
-{
-  DBG("Actionbar init");
-  TRACE_AND_INDENT();
-
-  if (! game->level) {
-    return;
-  }
-  auto level = game->level;
-
-  auto player = game->level->player;
-  if (! player) {
-    return;
-  }
-
-  if (player->is_dead) {
-    return;
-  }
-
-  //
-  // In case a scancode was used to open this widget
-  //
-  if (wid_actionbar) {
-    DBG("Actionbar init exists close it and recreate");
-    TRACE_AND_INDENT();
-    wid_actionbar_fini();
-  }
-
-  DBG("Actionbar init create in state %s", gama_state_to_string(game->state).c_str());
-  // backtrace_dump();
-  TRACE_AND_INDENT();
-
-  CarryOptions carry_options;
-  bool         ui_icon_collect = false;
-  if (player->check_anything_to_carry(carry_options)) {
-    ui_icon_collect = true;
-  }
-
-  //
-  // I don't like this - it is missing a key and makes things more complex?
-  //
-  ui_icon_collect = false;
-
-  bool ui_icon_close = false;
-
-  if (wid_popup_exists()) {
-    ui_icon_close = true;
-  }
-
-  int options = 6;
-
-  if (game->state == Game::STATE_NORMAL) {
-    options++;
-    options++;
-    IF_DEBUG2 { options++; }
-  }
-
-  if (ui_icon_collect) {
-    options++;
-  }
-
-  if (ui_icon_close) {
-    options++;
-    options++;
-  }
-
-  bool add_descend {};
-  if (level->is_descend_dungeon(player->curr_at.x, player->curr_at.y)
-      || level->is_descend_sewer(player->curr_at.x, player->curr_at.y)) {
-    options++;
-    add_descend = true;
-  }
-
-  bool add_ascend {};
-  if (level->dungeon_walk_order_level_no > 1) {
-    if (level->is_ascend_dungeon(player->curr_at.x, player->curr_at.y)
-        || level->is_ascend_sewer(player->curr_at.x, player->curr_at.y)) {
-      options++;
-      add_ascend = true;
-    }
-  }
-
-  int option_width = 4;
-  int w            = options * option_width;
-  int left_half    = w / 2;
-  int right_half   = w - left_half;
-
-  {
-    point tl = make_point(TERM_WIDTH / 2 - left_half, TERM_HEIGHT - (option_width + 1));
-    point br = make_point(TERM_WIDTH / 2 + right_half - 1, TERM_HEIGHT - 2);
-
-    wid_actionbar = wid_new_square_window("wid actionbar");
-    wid_set_ignore_scroll_events(wid_actionbar, true);
-    wid_set_pos(wid_actionbar, tl, br);
-    wid_set_style(wid_actionbar, UI_WID_STYLE_DARK);
-    wid_lower(wid_actionbar);
-  }
-
-  int x_at = 0;
-
-  if (ui_icon_close) {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar close");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_width - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_tilename(TILE_LAYER_BG_0, w, "ui_icon_close");
-    wid_set_on_mouse_up(w, wid_actionbar_close);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_close_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_close_over_end);
-    x_at += option_width;
-  }
-
-  {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar quit");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_width - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_tilename(TILE_LAYER_BG_0, w, "ui_icon_quit");
-    wid_set_on_mouse_up(w, wid_actionbar_quit);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_quit_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_quit_over_end);
-    x_at += option_width;
-  }
-
-  {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar config");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_width - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_tilename(TILE_LAYER_BG_0, w, "ui_icon_config");
-    wid_set_on_mouse_up(w, wid_actionbar_configure);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_configure_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_configure_over_end);
-    x_at += option_width;
-  }
-
-  IF_DEBUG2
-  {
-    if (game->state == Game::STATE_NORMAL) {
-      auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar robot");
-      point tl = make_point(x_at, 0);
-      point br = make_point(x_at + option_width - 1, option_width - 1);
-      wid_set_pos(w, tl, br);
-      wid_set_tilename(TILE_LAYER_BG_0, w, "ui_icon_robot");
-      wid_set_on_mouse_up(w, wid_actionbar_robot);
-      wid_set_on_mouse_over_begin(w, wid_actionbar_robot_over_begin);
-      wid_set_on_mouse_over_end(w, wid_actionbar_robot_over_end);
-      if (game->robot_mode) {
-        wid_set_tilename(TILE_LAYER_BG_0, w, "ui_icon_robot_on");
-        wid_set_on_tick(w, wid_actionbar_ai_tick);
-      }
-      wid_set_style(w, UI_WID_STYLE_RED);
-      x_at += option_width;
-    }
-  }
-
-  if (! game->request_player_to_ascend_level && add_ascend) {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar ascend");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_width - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_tilename(TILE_LAYER_BG_0, w, "ui_icon_ascend");
-    wid_set_on_mouse_up(w, wid_actionbar_ascend);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_ascend_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_ascend_over_end);
-    x_at += option_width;
-  }
-
-  if (! game->request_player_to_descend_level && add_descend) {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar descend");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_width - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_tilename(TILE_LAYER_BG_0, w, "ui_icon_descend");
-    wid_set_on_mouse_up(w, wid_actionbar_descend);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_descend_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_descend_over_end);
-    x_at += option_width;
-  }
-
-  if (game->state == Game::STATE_NORMAL) {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar save");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_width - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_tilename(TILE_LAYER_BG_0, w, "ui_icon_save");
-    wid_set_on_mouse_up(w, wid_actionbar_save);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_save_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_save_over_end);
-    x_at += option_width;
-  }
-
-  if (game->state == Game::STATE_NORMAL) {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar load");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_width - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_tilename(TILE_LAYER_BG_0, w, "ui_icon_load");
-    wid_set_on_mouse_up(w, wid_actionbar_load);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_load_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_load_over_end);
-    x_at += option_width;
-  }
-
-  {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar zoom_in");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_width - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_tilename(TILE_LAYER_BG_0, w, "ui_icon_zoom_in");
-    wid_set_on_mouse_up(w, wid_actionbar_zoom_in);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_zoom_in_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_zoom_in_over_end);
-    x_at += option_width;
-  }
-
-  {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar zoom_out");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_width - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_tilename(TILE_LAYER_BG_0, w, "ui_icon_zoom_out");
-    wid_set_on_mouse_up(w, wid_actionbar_zoom_out);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_zoom_out_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_zoom_out_over_end);
-    x_at += option_width;
-  }
-
-  {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar inventory");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_width - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_tilename(TILE_LAYER_BG_0, w, "ui_icon_inventory");
-    wid_set_on_mouse_up(w, wid_actionbar_inventory);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_inventory_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_inventory_over_end);
-    x_at += option_width;
-  }
-
-  {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar wait");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_width - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_tilename(TILE_LAYER_BG_0, w, "ui_icon_wait");
-    wid_set_on_mouse_down(w, wid_actionbar_wait);
-    wid_set_on_mouse_held(w, wid_actionbar_repeat_wait);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_wait_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_wait_over_end);
-    x_at += option_width;
-  }
-
-  if (ui_icon_collect) {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar collect");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_width - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_tilename(TILE_LAYER_BG_0, w, "ui_icon_collect");
-    wid_set_on_mouse_up(w, wid_actionbar_collect);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_collect_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_collect_over_end);
-    x_at += option_width;
-  }
-
-  if (ui_icon_close) {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar close");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_width - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_tilename(TILE_LAYER_BG_0, w, "ui_icon_close");
-    wid_set_on_mouse_up(w, wid_actionbar_close);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_close_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_close_over_end);
-    x_at += option_width;
-  }
-  wid_update(wid_actionbar);
-}
-
-void wid_actionbar_ascii_init(void)
-{
-  DBG("Actionbar init");
-  TRACE_AND_INDENT();
-
-  auto box_style           = UI_WID_STYLE_HORIZ_DARK;
-  auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
-
-  if (! game->level) {
-    return;
-  }
-  auto level = game->level;
-
-  auto player = game->level->player;
-  if (! player) {
-    return;
-  }
-
-  if (player->is_dead) {
-    return;
-  }
-
-  //
-  // In case a scancode was used to open this widget
-  //
-  if (wid_actionbar) {
-    DBG("Actionbar init exists close it and recreate");
-    TRACE_AND_INDENT();
-    wid_actionbar_fini();
-  }
-
-  DBG("Actionbar init create in state %s", gama_state_to_string(game->state).c_str());
-  // backtrace_dump();
-  TRACE_AND_INDENT();
-
-  CarryOptions carry_options;
-  bool         ui_icon_collect = false;
-  if (player->check_anything_to_carry(carry_options)) {
-    ui_icon_collect = true;
-  }
-  //
-  // I don't like this - it is missing a key and makes things more complex?
-  //
-  ui_icon_collect = false;
-
-  bool ui_icon_close = false;
-
-  if (wid_popup_exists()) {
-    ui_icon_close = true;
-  }
-
-  int options = 1;
-
-  if (game->state == Game::STATE_NORMAL) {
-    options = 8;
-  }
-
-  if (game->robot_mode) {
-    options = 2;
-  }
-
-  if (ui_icon_collect) {
-    options++;
-  }
-
-  if (ui_icon_close) {
-    options++;
-  }
-
-  bool add_descend {};
-  if (level->is_descend_dungeon(player->curr_at.x, player->curr_at.y)
-      || level->is_descend_sewer(player->curr_at.x, player->curr_at.y)) {
-    options++;
-    add_descend = true;
-  }
-
-  bool add_ascend {};
-  if (level->dungeon_walk_order_level_no > 1) {
-    if (level->is_ascend_dungeon(player->curr_at.x, player->curr_at.y)
-        || level->is_ascend_sewer(player->curr_at.x, player->curr_at.y)) {
-      options++;
-      add_ascend = true;
-    }
-  }
-
-  int option_width  = 8;
-  int option_height = 1;
-
-  int w          = options * (option_width + 1);
-  int left_half  = w / 2;
-  int right_half = w - left_half;
-
-  {
-    point tl = make_point(TERM_WIDTH / 2 - left_half, TERM_HEIGHT - (option_height + 1));
-    point br = make_point(TERM_WIDTH / 2 + right_half - 1, TERM_HEIGHT - 2);
-
-    wid_actionbar = wid_new_square_window("wid actionbar");
-    wid_set_ignore_scroll_events(wid_actionbar, true);
-    wid_set_pos(wid_actionbar, tl, br);
-    wid_set_shape_none(wid_actionbar);
-    wid_lower(wid_actionbar);
-  }
-
-  int x_at = 0;
-
-  {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar quit");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_height - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, wid_actionbar_quit);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_quit_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_quit_over_end);
-    wid_set_text(w, "Quit");
-    wid_set_mode(w, WID_MODE_OVER);
-    wid_set_style(w, box_highlight_style);
-    wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_style(w, box_style);
-    x_at += option_width + 1;
-  }
-
-  IF_DEBUG2
-  {
-    if (game->state == Game::STATE_NORMAL) {
-      auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar robot");
-      point tl = make_point(x_at, 0);
-      point br = make_point(x_at + option_width - 1, option_height - 1);
-      wid_set_pos(w, tl, br);
-      wid_set_on_mouse_up(w, wid_actionbar_robot);
-      wid_set_on_mouse_over_begin(w, wid_actionbar_robot_over_begin);
-      wid_set_on_mouse_over_end(w, wid_actionbar_robot_over_end);
-      wid_set_text(w, "Robo");
-      wid_set_mode(w, WID_MODE_OVER);
-      wid_set_style(w, box_highlight_style);
-      wid_set_mode(w, WID_MODE_NORMAL);
-      wid_set_style(w, box_style);
-      if (game->robot_mode) {
-        wid_set_on_tick(w, wid_actionbar_ai_tick);
-        wid_set_style(w, UI_WID_STYLE_RED);
-      }
-      x_at += option_width + 1;
-    }
-  }
-
-  if (! game->robot_mode) {
-    if (! game->request_player_to_ascend_level && add_ascend) {
-      auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar ascend");
-      point tl = make_point(x_at, 0);
-      point br = make_point(x_at + option_width - 1, option_height - 1);
-      wid_set_pos(w, tl, br);
-      wid_set_on_mouse_up(w, wid_actionbar_ascend);
-      wid_set_on_mouse_over_begin(w, wid_actionbar_ascend_over_begin);
-      wid_set_on_mouse_over_end(w, wid_actionbar_ascend_over_end);
-      wid_set_text(w, "Up");
-      wid_set_mode(w, WID_MODE_OVER);
-      wid_set_style(w, box_highlight_style);
-      wid_set_mode(w, WID_MODE_NORMAL);
-      wid_set_style(w, box_style);
-      x_at += option_width + 1;
-    }
-
-    if (! game->request_player_to_descend_level && add_descend) {
-      auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar descend");
-      point tl = make_point(x_at, 0);
-      point br = make_point(x_at + option_width - 1, option_height - 1);
-      wid_set_pos(w, tl, br);
-      wid_set_on_mouse_up(w, wid_actionbar_descend);
-      wid_set_on_mouse_over_begin(w, wid_actionbar_descend_over_begin);
-      wid_set_on_mouse_over_end(w, wid_actionbar_descend_over_end);
-      wid_set_text(w, "Down");
-      wid_set_mode(w, WID_MODE_OVER);
-      wid_set_style(w, box_highlight_style);
-      wid_set_mode(w, WID_MODE_NORMAL);
-      wid_set_style(w, box_style);
-      x_at += option_width + 1;
-    }
-
-    if (game->state == Game::STATE_NORMAL) {
-      auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar save");
-      point tl = make_point(x_at, 0);
-      point br = make_point(x_at + option_width - 1, option_height - 1);
-      wid_set_pos(w, tl, br);
-      wid_set_on_mouse_up(w, wid_actionbar_save);
-      wid_set_on_mouse_over_begin(w, wid_actionbar_save_over_begin);
-      wid_set_on_mouse_over_end(w, wid_actionbar_save_over_end);
-      wid_set_text(w, "Save");
-      wid_set_mode(w, WID_MODE_OVER);
-      wid_set_style(w, box_highlight_style);
-      wid_set_mode(w, WID_MODE_NORMAL);
-      wid_set_style(w, box_style);
-      x_at += option_width + 1;
-    }
-
-    if (game->state == Game::STATE_NORMAL) {
-      auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar load");
-      point tl = make_point(x_at, 0);
-      point br = make_point(x_at + option_width - 1, option_height - 1);
-      wid_set_pos(w, tl, br);
-      wid_set_on_mouse_up(w, wid_actionbar_load);
-      wid_set_on_mouse_over_begin(w, wid_actionbar_load_over_begin);
-      wid_set_on_mouse_over_end(w, wid_actionbar_load_over_end);
-      wid_set_text(w, "Load");
-      wid_set_mode(w, WID_MODE_OVER);
-      wid_set_style(w, box_highlight_style);
-      wid_set_mode(w, WID_MODE_NORMAL);
-      wid_set_style(w, box_style);
-      x_at += option_width + 1;
-    }
-
-    if (game->state == Game::STATE_NORMAL) {
-      auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar inventory");
-      point tl = make_point(x_at, 0);
-      point br = make_point(x_at + option_width - 1, option_height - 1);
-      wid_set_pos(w, tl, br);
-      wid_set_on_mouse_up(w, wid_actionbar_inventory);
-      wid_set_on_mouse_over_begin(w, wid_actionbar_inventory_over_begin);
-      wid_set_on_mouse_over_end(w, wid_actionbar_inventory_over_end);
-      wid_set_text(w, "Bag");
-      wid_set_mode(w, WID_MODE_OVER);
-      wid_set_style(w, box_highlight_style);
-      wid_set_mode(w, WID_MODE_NORMAL);
-      wid_set_style(w, box_style);
-      x_at += option_width + 1;
-    }
-
-    if (game->state == Game::STATE_NORMAL) {
-      auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar wait");
-      point tl = make_point(x_at, 0);
-      point br = make_point(x_at + option_width - 1, option_height - 1);
-      wid_set_pos(w, tl, br);
-      wid_set_on_mouse_down(w, wid_actionbar_wait);
-      wid_set_on_mouse_held(w, wid_actionbar_repeat_wait);
-      wid_set_on_mouse_over_begin(w, wid_actionbar_wait_over_begin);
-      wid_set_on_mouse_over_end(w, wid_actionbar_wait_over_end);
-      wid_set_text(w, "Wait");
-      wid_set_mode(w, WID_MODE_OVER);
-      wid_set_style(w, box_highlight_style);
-      wid_set_mode(w, WID_MODE_NORMAL);
-      wid_set_style(w, box_style);
-      x_at += option_width + 1;
-    }
-
-    if (game->state == Game::STATE_NORMAL) {
-      auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar collect");
-      point tl = make_point(x_at, 0);
-      point br = make_point(x_at + option_width - 1, option_height - 1);
-      wid_set_pos(w, tl, br);
-      wid_set_on_mouse_up(w, wid_actionbar_collect);
-      wid_set_on_mouse_over_begin(w, wid_actionbar_collect_over_begin);
-      wid_set_on_mouse_over_end(w, wid_actionbar_collect_over_end);
-      wid_set_text(w, "Grab");
-      wid_set_mode(w, WID_MODE_OVER);
-      wid_set_style(w, box_highlight_style);
-      wid_set_mode(w, WID_MODE_NORMAL);
-      wid_set_style(w, box_style);
-      x_at += option_width + 1;
-    }
-
-    if (game->state == Game::STATE_NORMAL) {
-      auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar config");
-      point tl = make_point(x_at, 0);
-      point br = make_point(x_at + option_width - 1, option_height - 1);
-      wid_set_pos(w, tl, br);
-      wid_set_on_mouse_up(w, wid_actionbar_configure);
-      wid_set_on_mouse_over_begin(w, wid_actionbar_configure_over_begin);
-      wid_set_on_mouse_over_end(w, wid_actionbar_configure_over_end);
-      wid_set_text(w, "Help");
-      wid_set_mode(w, WID_MODE_OVER);
-      wid_set_style(w, box_highlight_style);
-      wid_set_mode(w, WID_MODE_NORMAL);
-      wid_set_style(w, box_style);
-      x_at += option_width + 1;
-    }
-
-    if (ui_icon_close) {
-      auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar close");
-      point tl = make_point(x_at, 0);
-      point br = make_point(x_at + option_width - 1, option_height - 1);
-      wid_set_pos(w, tl, br);
-      wid_set_on_mouse_up(w, wid_actionbar_close);
-      wid_set_on_mouse_over_begin(w, wid_actionbar_close_over_begin);
-      wid_set_on_mouse_over_end(w, wid_actionbar_close_over_end);
-      wid_set_text(w, "Close");
-      wid_set_mode(w, WID_MODE_OVER);
-      wid_set_style(w, box_highlight_style);
-      wid_set_mode(w, WID_MODE_NORMAL);
-      wid_set_style(w, box_style);
-      x_at += option_width + 1;
-    }
-  }
-
-  wid_update(wid_actionbar);
-}
-
 void wid_actionbar_init(void)
 {
+  switch (game->state) {
+    case Game::STATE_NORMAL : break;
+    case Game::STATE_OPTIONS_FOR_ITEM_MENU : break;
+    case Game::STATE_INVENTORY : break;
+    case Game::STATE_COLLECTING_ITEMS : break;
+    case Game::STATE_ENCHANTING_ITEMS : break;
+    case Game::STATE_CHOOSING_SKILLS : break;
+    case Game::STATE_CHOOSING_SPELLS : break;
+    case Game::STATE_CHOOSING_TARGET : break;
+    case Game::STATE_CHOOSING_LEVEL : break;
+    case Game::STATE_KEYBOARD_MENU : break;
+    case Game::STATE_LOAD_MENU : break;
+    case Game::STATE_SAVE_MENU : break;
+    case Game::STATE_QUIT_MENU : break;
+    default : ERR("Unhandled game state"); break;
+  }
+
   if (g_opt_ascii) {
     wid_actionbar_ascii_init();
   } else {

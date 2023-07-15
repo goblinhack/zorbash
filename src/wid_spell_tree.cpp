@@ -399,8 +399,6 @@ void Game::wid_choose_from_spell_tree(std::string current_tree_name)
       br.y = tl.y + (WID_SPELL_BUTTON_HEIGHT - 1) - 1;
       wid_set_pos(b, tl, br);
 
-      bool spell_is_active_or_available = false;
-
       //
       // Do we have this spell?
       //
@@ -408,20 +406,17 @@ void Game::wid_choose_from_spell_tree(std::string current_tree_name)
         //
         // Yes
         //
-        spell_is_active_or_available = true;
         wid_set_style(b, UI_WID_STYLE_DARK);
       } else if (! spell_has_precursor(spell)) {
         //
         // Can we attain this spell?
         //
-        spell_is_active_or_available = true;
         wid_set_style(b, UI_WID_STYLE_GREEN);
         wid_set_on_mouse_up(b, wid_spells_mouse_up);
       } else if (spell_is_available(spell)) {
         //
         // Can we attain this spell?
         //
-        spell_is_active_or_available = true;
         wid_set_style(b, UI_WID_STYLE_GREEN);
         wid_set_on_mouse_up(b, wid_spells_mouse_up);
       } else {
@@ -463,7 +458,7 @@ void Game::wid_choose_from_spell_tree(std::string current_tree_name)
                 //
                 auto tiles = &tpp->tiles;
                 if (tiles) {
-                  auto tile = tile_n(tiles, spell_is_active_or_available ? 0 : 1);
+                  auto tile = tile_n(tiles, 0);
                   if (tile) {
                     wid_set_tile(TILE_LAYER_FG_0, b, tile);
                   }

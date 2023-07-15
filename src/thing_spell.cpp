@@ -180,13 +180,13 @@ bool Thing::spell_use(Thingp what)
     return false;
   }
 
-  magic_decr(what->spell_cost());
-  msg("You cast %s.", what->text_the().c_str());
-  used(what, this, false /* remove after use */);
-
   if (what->is_target_select()) {
+    msg("You prepare to cast %s.", what->text_the().c_str());
     return item_choose_target(what);
   }
+
+  msg("You cast %s.", what->text_the().c_str());
+  used(what, this, false /* remove after use */);
 
   return true;
 }

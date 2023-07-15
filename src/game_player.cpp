@@ -102,7 +102,7 @@ void Game::place_player(void)
         auto w = level->thing_new("sword_plutonium", point(x, y));
         t->carry(w, carry_options);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("staff_descent", point(x, y));
         t->carry(w, carry_options);
       }
@@ -267,10 +267,6 @@ void Game::place_player(void)
         auto w = level->thing_new("axe", point(x, y));
         t->carry(w, carry_options);
       }
-      if (0) {
-        auto w = level->thing_new("staff_energy", point(x, y));
-        t->carry(w, carry_options);
-      }
       if (1) {
         auto w = level->thing_new("torch", point(x, y));
         t->carry(w, carry_options);
@@ -322,9 +318,9 @@ void Game::place_player(void)
           }
         }
       }
-      if (1) {
+      if (0) {
         {
-          for (auto sk = 0; sk < 1; sk++) {
+          for (auto sk = 0; sk < 2; sk++) {
             auto b = level->thing_new("spellbook", point(x, y));
             t->carry(b, carry_options);
           }

@@ -629,6 +629,7 @@ std::initializer_list< std::string > tps = {
     "spellbook",
     "spell_magic_missile",
     "spell_summon_food",
+    "spell_summon_rock",
     "spell_summon_monst_A",
     "spell_summon_monst_B",
     "spell_summon_monst_C",

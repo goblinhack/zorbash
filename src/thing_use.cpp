@@ -228,7 +228,7 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
       on_use(what, target);
     } else {
       on_use(what);
-      game->change_state(Game::STATE_NORMAL, "choosing a target");
+      game->change_state(Game::STATE_NORMAL, "choose a target");
     }
 
     //
@@ -279,16 +279,6 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
       }
     }
 
-    if (what->is_skill()) {
-      dbg("Used skill %s", what->to_short_string().c_str());
-      return;
-    }
-
-    if (what->is_spell()) {
-      dbg("Used spell %s", what->to_short_string().c_str());
-      return;
-    }
-
     auto existing_owner = what->top_owner();
     if (existing_owner != this) {
       if (is_dead) {
@@ -317,9 +307,12 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
       what->charge_count_decr();
       if (what->charge_count()) {
         dbg("Used %s (has %d charges left)", what->to_short_string().c_str(), what->charge_count());
-        game->set_request_to_remake_rightbar();
         return;
       }
+    }
+
+    if (what->is_spell()) {
+      magic_decr(what->spell_cost());
     }
 
     if (target) {
@@ -327,6 +320,16 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
     } else {
       on_final_use(what);
     }
+  }
+
+  if (what->is_skill()) {
+    dbg("Used skill %s", what->to_short_string().c_str());
+    return;
+  }
+
+  if (what->is_spell()) {
+    dbg("Used spell %s", what->to_short_string().c_str());
+    return;
   }
 
   dbg("Used %s", what->to_short_string().c_str());
