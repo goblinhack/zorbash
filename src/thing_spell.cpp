@@ -159,8 +159,9 @@ bool Thing::spell_can_use(Thingp what)
   //
   if (what->spell_cost() > magic()) {
     if (is_player()) {
-      msg("You do not have enough magic points to cast %s. You need %d.", what->text_the().c_str(),
-          what->spell_cost());
+      msg("%%fg=orange$You do not have enough magic points to cast %s. You need %d.%%fg=reset$",
+          what->text_the().c_str(), what->spell_cost());
+      spell_deactivate(what);
       sound_play("bonk");
     }
     return false;

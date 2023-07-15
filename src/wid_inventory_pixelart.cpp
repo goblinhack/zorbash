@@ -281,20 +281,6 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
       wid_set_pos(w, tl, br);
       wid_set_text(w, "Eat");
       y_at += 3;
-    } else if (! item->gfx_targeted_laser().empty()) {
-      TRACE_AND_INDENT();
-      if (item->charge_count()) {
-        auto p = wid_inventory_window;
-        auto w = wid_new_square_button(p, "use");
-
-        point tl = make_point(x_off, y_at);
-        point br = make_point(x_off + width, y_at + 2);
-        wid_set_style(w, UI_WID_STYLE_NORMAL);
-        wid_set_on_mouse_up(w, wid_inventory_item_option_use);
-        wid_set_pos(w, tl, br);
-        wid_set_text(w, "Use (choose target)");
-        y_at += 3;
-      }
     } else if (item->is_able_to_be_equipped() && ! player->is_equipped(item)) {
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;
@@ -324,9 +310,9 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
       } else if (item->is_boots()) {
         wid_set_text(w, "Wear");
       } else if (item->is_amulet()) {
-        wid_set_text(w, "Wear)");
+        wid_set_text(w, "Wear");
       } else {
-        wid_set_text(w, "Use");
+        wid_set_text(w, "Equip");
       }
       y_at += 3;
     } else if (item->is_able_to_be_equipped() && player->is_equipped(item)) {
@@ -380,6 +366,18 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
         wid_set_style(w, UI_WID_STYLE_NORMAL);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=red$Spent");
+        y_at += 3;
+      } else if (! item->gfx_targeted_laser().empty()) {
+        TRACE_AND_INDENT();
+        auto p = wid_inventory_window;
+        auto w = wid_new_square_button(p, "use");
+
+        point tl = make_point(x_off, y_at);
+        point br = make_point(x_off + width, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
+        wid_set_on_mouse_up(w, wid_inventory_item_option_use);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "Use (choose target)");
         y_at += 3;
       } else {
         //
