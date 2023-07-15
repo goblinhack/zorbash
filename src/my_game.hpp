@@ -392,18 +392,17 @@ public:
   //
   enum {
     STATE_NORMAL,
-    STATE_OPTIONS_FOR_ITEM_MENU, // Drop, throw etc and item
-    STATE_INVENTORY,             // Currently managing inventory
-    STATE_COLLECTING_ITEMS,      // Collecting en masse from the level
-    STATE_ENCHANTING_ITEMS,      // Upgrading items
-    STATE_CHOOSING_SKILLS,       // Choosing skills
-    STATE_CHOOSING_SPELLS,       // Choosing spells
-    STATE_CHOOSING_TARGET,       // Looking to somewhere to throw at
-    STATE_CHOOSING_LEVEL,        // Choosing the next level
-    STATE_KEYBOARD_MENU,         // Keyboard optionds
-    STATE_LOAD_MENU,             // Loading a game
-    STATE_SAVE_MENU,             // Saving a game
-    STATE_QUIT_MENU,             // Pondering quitting
+    STATE_INVENTORY,        // Currently managing inventory
+    STATE_COLLECTING_ITEMS, // Collecting en masse from the level
+    STATE_ENCHANTING_ITEMS, // Upgrading items
+    STATE_CHOOSING_SKILLS,  // Choosing skills
+    STATE_CHOOSING_SPELLS,  // Choosing spells
+    STATE_CHOOSING_TARGET,  // Looking to somewhere to throw at
+    STATE_CHOOSING_LEVEL,   // Choosing the next level
+    STATE_KEYBOARD_MENU,    // Keyboard optionds
+    STATE_LOAD_MENU,        // Loading a game
+    STATE_SAVE_MENU,        // Saving a game
+    STATE_QUIT_MENU,        // Pondering quitting
   };
   int state {STATE_NORMAL};
 

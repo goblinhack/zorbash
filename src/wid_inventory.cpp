@@ -75,13 +75,20 @@ uint8_t wid_right_bar_inventory_open(Widp w, int x, int y, uint32_t button)
   DBG2("Inventory: open");
   TRACE_AND_INDENT();
 
-  if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state == Game::STATE_CHOOSING_TARGET)
-      || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_COLLECTING_ITEMS)
-      || (game->state == Game::STATE_CHOOSING_SKILLS) || (game->state == Game::STATE_CHOOSING_SPELLS)
-      || (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU)
-      || (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_KEYBOARD_MENU)
-      || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-    return true;
+  switch (game->state) {
+    case Game::STATE_NORMAL : break;
+    case Game::STATE_INVENTORY : return true;
+    case Game::STATE_COLLECTING_ITEMS : return true;
+    case Game::STATE_ENCHANTING_ITEMS : return true;
+    case Game::STATE_CHOOSING_SKILLS : return true;
+    case Game::STATE_CHOOSING_SPELLS : return true;
+    case Game::STATE_CHOOSING_TARGET : return true;
+    case Game::STATE_CHOOSING_LEVEL : return true;
+    case Game::STATE_KEYBOARD_MENU : return true;
+    case Game::STATE_LOAD_MENU : return true;
+    case Game::STATE_SAVE_MENU : return true;
+    case Game::STATE_QUIT_MENU : return true;
+    default : ERR("Unhandled game state"); return true;
   }
 
   game->level->inventory_chosen(wid_get_int_context(w));
@@ -791,10 +798,6 @@ void wid_slot_item_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int 
 {
   TRACE_NO_INDENT();
   if (game->in_transit_item) {
-    return;
-  }
-
-  if (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) {
     return;
   }
 

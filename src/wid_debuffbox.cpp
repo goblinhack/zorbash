@@ -22,13 +22,20 @@ void wid_debuffbox_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int 
   TRACE_AND_INDENT();
   DBG3("debuffbox: Begin over debuffbox");
   TRACE_AND_INDENT();
-  if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state == Game::STATE_CHOOSING_TARGET)
-      || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_INVENTORY)
-      || (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_SAVE_MENU)
-      || (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU)
-      || (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-    DBG3("debuffbox: Moving items; ignore");
-    return;
+  switch (game->state) {
+    case Game::STATE_NORMAL : break;
+    case Game::STATE_INVENTORY : return;
+    case Game::STATE_COLLECTING_ITEMS : return;
+    case Game::STATE_ENCHANTING_ITEMS : return;
+    case Game::STATE_CHOOSING_SKILLS : return;
+    case Game::STATE_CHOOSING_SPELLS : return;
+    case Game::STATE_CHOOSING_TARGET : return;
+    case Game::STATE_CHOOSING_LEVEL : return;
+    case Game::STATE_KEYBOARD_MENU : return;
+    case Game::STATE_LOAD_MENU : return;
+    case Game::STATE_SAVE_MENU : return;
+    case Game::STATE_QUIT_MENU : return;
+    default : ERR("Unhandled game state"); return;
   }
 
   if (game->in_transit_item) {
@@ -64,13 +71,20 @@ void wid_debuffbox_mouse_over_end(Widp w)
   TRACE_AND_INDENT();
   DBG3("debuffbox: End over debuffbox");
   TRACE_AND_INDENT();
-  if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state == Game::STATE_CHOOSING_TARGET)
-      || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_INVENTORY)
-      || (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_SAVE_MENU)
-      || (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU)
-      || (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-    DBG3("debuffbox: Moving items; ignore");
-    return;
+  switch (game->state) {
+    case Game::STATE_NORMAL : break;
+    case Game::STATE_INVENTORY : return;
+    case Game::STATE_COLLECTING_ITEMS : return;
+    case Game::STATE_ENCHANTING_ITEMS : return;
+    case Game::STATE_CHOOSING_SKILLS : return;
+    case Game::STATE_CHOOSING_SPELLS : return;
+    case Game::STATE_CHOOSING_TARGET : return;
+    case Game::STATE_CHOOSING_LEVEL : return;
+    case Game::STATE_KEYBOARD_MENU : return;
+    case Game::STATE_LOAD_MENU : return;
+    case Game::STATE_SAVE_MENU : return;
+    case Game::STATE_QUIT_MENU : return;
+    default : ERR("Unhandled game state"); return;
   }
 
   if (game->in_transit_item) {

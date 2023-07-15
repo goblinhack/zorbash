@@ -1068,7 +1068,6 @@ void wid_actionbar_init(void)
 {
   switch (game->state) {
     case Game::STATE_NORMAL : break;
-    case Game::STATE_OPTIONS_FOR_ITEM_MENU : break;
     case Game::STATE_INVENTORY : break;
     case Game::STATE_COLLECTING_ITEMS : break;
     case Game::STATE_ENCHANTING_ITEMS : break;

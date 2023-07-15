@@ -84,7 +84,6 @@ WidPopup *Game::wid_tp_info_create_popup(Tpp t, point tl, point br)
 
   switch (state) {
     case Game::STATE_NORMAL : break;
-    case Game::STATE_OPTIONS_FOR_ITEM_MENU : return nullptr;
     case Game::STATE_INVENTORY : break;
     case Game::STATE_COLLECTING_ITEMS : return nullptr;
     case Game::STATE_ENCHANTING_ITEMS : return nullptr;
@@ -265,7 +264,6 @@ WidPopup *Game::wid_tp_info_create_popup_compact(const std::vector< Tpp > &ts)
 
   switch (state) {
     case Game::STATE_NORMAL : break;
-    case Game::STATE_OPTIONS_FOR_ITEM_MENU : return nullptr;
     case Game::STATE_INVENTORY : break;
     case Game::STATE_COLLECTING_ITEMS : return nullptr;
     case Game::STATE_ENCHANTING_ITEMS : return nullptr;

@@ -18,7 +18,6 @@ std::string gama_state_to_string(int state)
 {
   switch (state) {
     case Game::STATE_NORMAL : return "NORMAL";
-    case Game::STATE_OPTIONS_FOR_ITEM_MENU : return "OPTIONS_FOR_ITEM_MENU";
     case Game::STATE_INVENTORY : return "INVENTORY";
     case Game::STATE_COLLECTING_ITEMS : return "COLLECTING_ITEMS";
     case Game::STATE_ENCHANTING_ITEMS : return "ENCHANTING_ITEMS";
@@ -102,7 +101,6 @@ void Game::change_state(int new_state, const std::string &why)
       wid_quit_destroy();
       wid_actionbar_init();
       break;
-    case STATE_OPTIONS_FOR_ITEM_MENU : break;
     case STATE_INVENTORY : // Currently managing inventory
       wid_actionbar_init();
       break;

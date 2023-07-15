@@ -459,18 +459,27 @@ void Level::cursor_path_create(Thingp it)
     return;
   }
 
-  if ((game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_INVENTORY)
-      || (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_SAVE_MENU)
-      || (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU)
-      || (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-    pcg_random_allowed--;
-    return;
+  switch (game->state) {
+    case Game::STATE_NORMAL : break;
+    case Game::STATE_INVENTORY : break;
+    case Game::STATE_COLLECTING_ITEMS : break;
+    case Game::STATE_ENCHANTING_ITEMS : break;
+    case Game::STATE_CHOOSING_SKILLS : break;
+    case Game::STATE_CHOOSING_SPELLS : break;
+    case Game::STATE_CHOOSING_TARGET :
+      //
+      // If not following the player, draw the path
+      //
+      cursor_path_draw(it, point(player->curr_at.x, player->curr_at.y), point(cursor_at.x, cursor_at.y));
+      break;
+    case Game::STATE_CHOOSING_LEVEL : break;
+    case Game::STATE_KEYBOARD_MENU : break;
+    case Game::STATE_LOAD_MENU : break;
+    case Game::STATE_SAVE_MENU : break;
+    case Game::STATE_QUIT_MENU : break;
+    default : ERR("Unhandled game state"); break;
   }
 
-  //
-  // If not following the player, draw the path
-  //
-  cursor_path_draw(it, point(player->curr_at.x, player->curr_at.y), point(cursor_at.x, cursor_at.y));
   pcg_random_allowed--;
 }
 

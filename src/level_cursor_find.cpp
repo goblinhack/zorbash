@@ -23,8 +23,6 @@ void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny
 
   switch (game->state) {
     case Game::STATE_NORMAL : break;
-    case Game::STATE_OPTIONS_FOR_ITEM_MENU : // Drop, throw etc and item
-      return;
     case Game::STATE_INVENTORY : // Currently managing inventory
       return;
     case Game::STATE_COLLECTING_ITEMS : // Collecting en masse from the level

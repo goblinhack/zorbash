@@ -52,7 +52,6 @@ bool Game::player_tick_(bool left, bool right, bool up, bool down, bool attack, 
   //
   switch (state) {
     case Game::STATE_NORMAL : break;
-    case Game::STATE_OPTIONS_FOR_ITEM_MENU : LOG("Ignore player action when choosing item options"); return false;
     case Game::STATE_INVENTORY : // Currently managing inventory
       LOG("Ignore player action when moving items");
       return false;

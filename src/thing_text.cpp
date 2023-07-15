@@ -422,7 +422,6 @@ void Thing::show_botcon_description(void)
   switch (game->state) {
     case Game::STATE_CHOOSING_LEVEL : return;
     case Game::STATE_NORMAL : skip_showing_keys_to_use = false; break;
-    case Game::STATE_OPTIONS_FOR_ITEM_MENU : skip_showing_keys_to_use = true; break;
     case Game::STATE_INVENTORY : // Currently managing inventory
       skip_showing_keys_to_use = false;
       break;
@@ -540,7 +539,6 @@ void Tp::show_botcon_description(void)
   switch (game->state) {
     case Game::STATE_CHOOSING_LEVEL : return;
     case Game::STATE_NORMAL : skip_showing_keys_to_use = false; break;
-    case Game::STATE_OPTIONS_FOR_ITEM_MENU : skip_showing_keys_to_use = true; break;
     case Game::STATE_INVENTORY : // Currently managing inventory
       skip_showing_keys_to_use = false;
       break;

@@ -33,13 +33,20 @@ void Level::describe(point p)
   dbg("Level describe @%d,%d", p.x, p.y);
   TRACE_AND_INDENT();
 
-  if ((game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU)
-      || (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_ENCHANTING_ITEMS)
-      || (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU)
-      || (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_QUIT_MENU)
-      || (game->state == Game::STATE_CHOOSING_SKILLS) || (game->state == Game::STATE_CHOOSING_SPELLS)) {
-    dbg2("Level describe @%d,%d; no wrong state", p.x, p.y);
-    return;
+  switch (game->state) {
+    case Game::STATE_NORMAL : break;
+    case Game::STATE_INVENTORY : return;
+    case Game::STATE_COLLECTING_ITEMS : return;
+    case Game::STATE_ENCHANTING_ITEMS : return;
+    case Game::STATE_CHOOSING_SKILLS : return;
+    case Game::STATE_CHOOSING_SPELLS : return;
+    case Game::STATE_CHOOSING_TARGET : return;
+    case Game::STATE_CHOOSING_LEVEL : return;
+    case Game::STATE_KEYBOARD_MENU : return;
+    case Game::STATE_LOAD_MENU : return;
+    case Game::STATE_SAVE_MENU : return;
+    case Game::STATE_QUIT_MENU : return;
+    default : ERR("Unhandled game state"); return;
   }
 
   std::vector< Thingp > hover_over_things;
@@ -456,12 +463,20 @@ void Level::describe(Thingp t)
   dbg2("Describe %s", t->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  if ((game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU)
-      || (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_SAVE_MENU)
-      || (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU)
-      || (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-    dbg2("Describe %s; no wrong state", t->to_short_string().c_str());
-    return;
+  switch (game->state) {
+    case Game::STATE_NORMAL : break;
+    case Game::STATE_INVENTORY : return;
+    case Game::STATE_COLLECTING_ITEMS : return;
+    case Game::STATE_ENCHANTING_ITEMS : return;
+    case Game::STATE_CHOOSING_SKILLS : return;
+    case Game::STATE_CHOOSING_SPELLS : return;
+    case Game::STATE_CHOOSING_TARGET : return;
+    case Game::STATE_CHOOSING_LEVEL : return;
+    case Game::STATE_KEYBOARD_MENU : return;
+    case Game::STATE_LOAD_MENU : return;
+    case Game::STATE_SAVE_MENU : return;
+    case Game::STATE_QUIT_MENU : return;
+    default : ERR("Unhandled game state"); return;
   }
 
   if (! t->is_described_when_hovering_over()) {

@@ -58,8 +58,6 @@ bool Level::should_display_map(void)
 {
   switch (game->state) {
     case Game::STATE_NORMAL : return true;
-    case Game::STATE_OPTIONS_FOR_ITEM_MENU : // Drop, throw etc and item
-      return true;
     case Game::STATE_INVENTORY : // Currently managing inventory
       return true;
     case Game::STATE_COLLECTING_ITEMS : // Collecting en masse from the level

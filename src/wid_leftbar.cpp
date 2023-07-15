@@ -46,8 +46,6 @@ bool wid_leftbar_create(void)
 
   switch (game->state) {
     case Game::STATE_NORMAL : break;
-    case Game::STATE_OPTIONS_FOR_ITEM_MENU : // Drop, throw etc and item
-      return false;
     case Game::STATE_INVENTORY : // Currently managing inventory
       return false;
     case Game::STATE_COLLECTING_ITEMS : // Collecting en masse from the level

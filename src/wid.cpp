@@ -6598,7 +6598,6 @@ static void wid_handle_requests(void)
       break;
 
     case Game::STATE_INVENTORY :
-    case Game::STATE_OPTIONS_FOR_ITEM_MENU :
     case Game::STATE_COLLECTING_ITEMS :
     case Game::STATE_ENCHANTING_ITEMS :
     case Game::STATE_CHOOSING_SKILLS :
@@ -6726,7 +6725,6 @@ static void wid_handle_requests(void)
         game->unset_request_to_remake_inventory();
       }
       break;
-    case Game::STATE_OPTIONS_FOR_ITEM_MENU :
     case Game::STATE_COLLECTING_ITEMS :
     case Game::STATE_ENCHANTING_ITEMS :
     case Game::STATE_CHOOSING_SKILLS :
