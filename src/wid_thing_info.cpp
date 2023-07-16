@@ -3400,6 +3400,15 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
     }
   }
 
+  if (t->is_always_activated()) {
+    w->log(UI_LOGGING_EMPTY_LINE);
+    if (t->is_skill()) {
+      w->log("This skill is always activated");
+    } else {
+      w->log("Is always activated");
+    }
+  }
+
   if (t->is_auto_activated()) {
     w->log(UI_LOGGING_EMPTY_LINE);
     if (t->is_skill()) {

@@ -303,6 +303,15 @@ bool Level::skill_chosen(Thingp what)
     return false;
   }
 
+  //
+  // e.g. rage activates itself when low on health
+  //
+  if (what->is_auto_activated()) {
+    player->msg("%%fg=orange$This skill activates when needed.%%fg=reset$");
+    sound_play("bonk");
+    return false;
+  }
+
   DBG2("Skillbox: Request to remake skillbox");
   game->set_request_to_remake_skillbox();
 

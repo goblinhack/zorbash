@@ -152,11 +152,36 @@ void Game::place_player(void)
         t->skill_add(w);
       }
       if (0) {
+        auto w = level->thing_new("skill_intimidating_strength1", point(x, y));
+        t->skill_add(w);
+      }
+      if (0) {
         auto w = level->thing_new("skill_devoted_thrust1", point(x, y));
         t->skill_add(w);
       }
       if (0) {
         auto w = level->thing_new("skill_double_strike1", point(x, y));
+        t->skill_add(w);
+      }
+      if (0) {
+        auto w = level->thing_new("skill_super_health5", point(x, y));
+        t->skill_add(w);
+      }
+      if (0) {
+        auto w = level->thing_new("skill_vampiric_touch5", point(x, y));
+        t->skill_add(w);
+      }
+      if (0) {
+        auto w = level->thing_new("skill_healing1", point(x, y));
+        t->skill_add(w);
+      }
+      if (0) {
+        auto w = level->thing_new("skill_artful_dodging1", point(x, y));
+        t->skill_add(w);
+      }
+      if (0) {
+        level->thing_new("gold6", point(x + 1, y));
+        auto w = level->thing_new("skill_gold_to_health1", point(x, y));
         t->skill_add(w);
       }
 
@@ -184,11 +209,6 @@ void Game::place_player(void)
         level->thing_new("dry_grass", point(x + 3, y + 1));
       }
 
-      if (0) {
-        level->thing_new("gold6", point(x + 1, y));
-        auto w = level->thing_new("skill_gold_to_health", point(x, y));
-        t->skill_add(w);
-      }
       if (0) {
         auto w = level->thing_new("amulet_endurance", point(x, y - 2));
         t->carry(w, carry_options);

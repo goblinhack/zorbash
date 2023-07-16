@@ -321,6 +321,7 @@ private:
   int _is_aerodynamic {};
   int _is_air_breather {};
   int _is_alive_on_end_of_anim {};
+  int _is_always_activated {};
   int _is_always_hit {};
   int _is_always_submerged_in_water {};
   int _is_amulet {};
@@ -668,7 +669,6 @@ private:
   int _is_unused_flag124 {};
   int _is_unused_flag125 {};
   int _is_unused_flag126 {};
-  int _is_unused_flag127 {};
   int _is_unused_flag13 {};
   int _is_unused_flag14 {};
   int _is_unused_flag142 {};
@@ -1664,6 +1664,7 @@ public:
   int is_aerodynamic(void) const;
   int is_air_breather(void) const;
   int is_alive_on_end_of_anim(void) const;
+  int is_always_activated(void) const;
   int is_always_hit(void) const;
   int is_always_submerged_in_water(void) const;
   int is_amulet(void) const;
@@ -2008,7 +2009,6 @@ public:
   int is_unused_flag124(void) const;
   int is_unused_flag125(void) const;
   int is_unused_flag126(void) const;
-  int is_unused_flag127(void) const;
   int is_unused_flag12(void) const;
   int is_unused_flag13(void) const;
   int is_unused_flag142(void) const;
@@ -2426,6 +2426,7 @@ public:
   void is_air_breather_set(int v);
   void is_alive_on_end_of_anim_set(int v);
   void is_allied_with_set(const std::string &v);
+  void is_always_activated_set(int v);
   void is_always_hit_set(int v);
   void is_always_submerged_in_water_set(int v);
   void is_amulet_set(int v);
@@ -2770,7 +2771,6 @@ public:
   void is_unused_flag124_set(int v);
   void is_unused_flag125_set(int v);
   void is_unused_flag126_set(int v);
-  void is_unused_flag127_set(int v);
   void is_unused_flag12_set(int v);
   void is_unused_flag13_set(int v);
   void is_unused_flag142_set(int v);

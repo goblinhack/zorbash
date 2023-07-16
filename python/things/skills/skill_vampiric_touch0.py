@@ -2,10 +2,10 @@ import my
 
 
 def do_vampiric_touch(me, owner, hitter, real_hitter, x, y, damage, damage_reduction_percent):
-    # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
-    # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
-    # my.con("hitter  {} {:X}".format(my.thing_name_get(hitter), hitter))
-    # my.con("rhitter {} {:X}".format(my.thing_name_get(real_hitter), real_hitter))
+    # my.topcon("me      {} {:X}".format(my.thing_name_get(me), me))
+    # my.topcon("owner   {} {:X}".format(my.thing_name_get(owner), owner))
+    # my.topcon("hitter  {} {:X}".format(my.thing_name_get(hitter), hitter))
+    # my.topcon("rhitter {} {:X}".format(my.thing_name_get(real_hitter), real_hitter))
 
     if real_hitter == me:
         return damage

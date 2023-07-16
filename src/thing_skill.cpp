@@ -32,6 +32,10 @@ bool Thing::skill_add(Thingp new_skill)
 {
   TRACE_NO_INDENT();
 
+  if (! new_skill) {
+    return false;
+  }
+
   dbg("Try to add skill %s", new_skill->to_short_string().c_str());
   TRACE_AND_INDENT();
 
@@ -78,7 +82,7 @@ bool Thing::skill_add(Thingp new_skill)
     sound_play("powerup");
   }
 
-  if (new_skill->is_auto_activated()) {
+  if (new_skill->is_always_activated()) {
     skill_activate(new_skill);
   }
 

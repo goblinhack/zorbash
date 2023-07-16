@@ -32,6 +32,10 @@ bool Thing::spell_add(Thingp new_spell)
 {
   TRACE_NO_INDENT();
 
+  if (! new_spell) {
+    return false;
+  }
+
   dbg("Try to add spell %s", new_spell->to_short_string().c_str());
   TRACE_AND_INDENT();
 

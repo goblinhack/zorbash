@@ -1710,6 +1710,15 @@ void Game::wid_tp_info_add_general_info(WidPopup *w, Tpp t)
     }
   }
 
+  if (t->is_always_activated()) {
+    w->log(UI_LOGGING_EMPTY_LINE);
+    if (t->is_skill()) {
+      w->log("This skill is always activated");
+    } else {
+      w->log("Is always activated");
+    }
+  }
+
   if (t->is_auto_activated()) {
     w->log(UI_LOGGING_EMPTY_LINE);
     if (t->is_skill()) {

@@ -1411,6 +1411,7 @@ public:
   int is_air_breather(void);
   int is_alive_monst(void);
   int is_alive_on_end_of_anim(void);
+  int is_always_activated(void);
   int is_always_hit(void);
   int is_always_submerged_in_water(void);
   int is_amulet(void);
@@ -1782,7 +1783,6 @@ public:
   int is_unused_flag124(void);
   int is_unused_flag125(void);
   int is_unused_flag126(void);
-  int is_unused_flag127(void);
   int is_unused_flag12(void);
   int is_unused_flag13(void);
   int is_unused_flag142(void);

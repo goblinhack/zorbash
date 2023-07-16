@@ -830,10 +830,10 @@ int Thing::is_unused_flag126(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag126());
 }
-int Thing::is_unused_flag127(void)
+int Thing::is_always_activated(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag127());
+  return (tp()->is_always_activated());
 }
 int Thing::is_mummy(void)
 {

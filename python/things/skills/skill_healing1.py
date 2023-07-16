@@ -6,8 +6,8 @@ self = None
 
 
 def on_tick_when_activated(owner, skill, x, y):
-    my.topcon("owner  {} {}".format(my.thing_name_get(owner), my.thing_health(owner)))
-    my.topcon("skill  {} {}".format(my.thing_name_get(skill), my.thing_health(skill)))
+    # my.topcon("owner  {} {}".format(my.thing_name_get(owner), my.thing_health(owner)))
+    # my.topcon("skill  {} {}".format(my.thing_name_get(skill), my.thing_health(skill)))
 
     if not owner:
         return False  # did nothing

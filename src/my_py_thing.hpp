@@ -210,6 +210,7 @@ PyObject *thing_is_aerodynamic(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_air_breather(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_alive_monst(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_alive_on_end_of_anim(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_always_activated(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_always_hit(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_always_submerged_in_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_amulet(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -566,7 +567,6 @@ PyObject *thing_is_unused_flag123(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag124(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag125(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag126(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag127(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag12(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag13(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag142(PyObject *obj, PyObject *args, PyObject *keywds);
