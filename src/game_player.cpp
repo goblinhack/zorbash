@@ -144,16 +144,18 @@ void Game::place_player(void)
         auto w = level->thing_new("spell_dominate_monst1", point(x, y));
         t->spell_add(w);
       }
-      level->thing_new("tentacleye", point(x + 1, y + 1));
-      if (1) {
+      if (0) {
+        level->thing_new("tentacleye", point(x + 1, y + 1));
+      }
+      if (0) {
         auto w = level->thing_new("skill_primal_rage1", point(x, y));
         t->skill_add(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("skill_devoted_thrust1", point(x, y));
         t->skill_add(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("skill_double_strike1", point(x, y));
         t->skill_add(w);
       }
@@ -408,11 +410,8 @@ void Game::place_player(void)
         level->thing_new("zorb_priest", point(x + 1, y + 3));
         level->thing_new("mummy_necro", point(x + 1, y));
         level->thing_new("reaper", point(x + 3, y));
-        level->thing_new("tentacleye", point(x + 1, y + 2));
         level->thing_new("zorb_eldster", point(x + 1, y + 3));
         level->thing_new("flameskull", point(x + 1, y + 4));
-        level->thing_new("tentacleye", point(x + 1, y + 1));
-        level->thing_new("tentacleye", point(x + 2, y + 2));
         level->thing_new("pyrolizard", point(x + 2, y + 3));
         level->thing_new("cleaner", point(x + 3, y + 1));
         level->thing_new("zorb_eldster", point(x + 3, y + 2));
