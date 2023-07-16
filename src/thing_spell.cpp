@@ -278,10 +278,15 @@ bool Thing::spell_add(Tpp what)
   // Drop a spellbook
   //
   auto found = false;
-  for (const auto t : carried_item_only_vector()) {
-    if (t->is_spellbook()) {
-      t->is_drained = true;
-      t->dead("drained and used");
+  for (const auto spellbook : carried_item_only_vector()) {
+    if (spellbook->is_spellbook()) {
+      if (spellbook->charge_count()) {
+        spellbook->charge_count_decr();
+        if (! spellbook->charge_count()) {
+          spellbook->is_drained = true;
+          spellbook->dead("drained and used");
+        }
+      }
       found = true;
       break;
     }

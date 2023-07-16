@@ -337,7 +337,7 @@ void Game::place_player(void)
         auto b = level->thing_new("enchantstone", point(x, y));
         t->carry(b, carry_options);
       }
-      if (1) {
+      if (0) {
         {
           for (auto sk = 0; sk < 1; sk++) {
             auto b = level->thing_new("skillstone", point(x, y));
@@ -346,12 +346,19 @@ void Game::place_player(void)
         }
       }
       if (0) {
-        {
-          for (auto sk = 0; sk < 2; sk++) {
-            auto b = level->thing_new("spellbook", point(x, y));
-            t->carry(b, carry_options);
-          }
-        }
+        level->thing_new("spellbook1", point(x + 1, y));
+      }
+      if (0) {
+        level->thing_new("spellbook2", point(x + 2, y));
+      }
+      if (0) {
+        level->thing_new("spellbook3", point(x + 3, y));
+      }
+      if (0) {
+        level->thing_new("spellbook4", point(x + 1, y + 1));
+      }
+      if (0) {
+        level->thing_new("spellbook5", point(x + 1, y + 2));
       }
       if (0) {
         auto b = level->thing_new("thunderstone", point(x, y));
