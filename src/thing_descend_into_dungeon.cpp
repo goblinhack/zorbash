@@ -4,6 +4,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_sdl_proto.hpp"
 #include "my_thing.hpp"
 
@@ -165,6 +166,24 @@ bool Thing::descend_dungeon(bool force, point3d next_level)
 
           if (game->robot_mode) {
             game->tick_begin("Begin exploring the new level");
+          }
+        }
+
+        //
+        // Followers, follow you! Not sure if they should ascend also.
+        // I'm also not sure if we should preserver the beholdenship or release them.
+        // Currently they are released and as magic resets each level, you need to redo the spell.
+        //
+        if (maybe_infop()) {
+          if (infop()->followers.size()) {
+            dbg("Move followers to next level");
+            auto followers = infop()->followers;
+            for (auto fid : followers) {
+              auto f = game->thing_find(fid);
+              if (f) {
+                f->descend_dungeon(force, next_level);
+              }
+            }
           }
         }
 

@@ -16,25 +16,25 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_target_select(self, True)
     my.is_usable(self, True)
     my.on_targeted_do(self, "me.on_targeted()")
-    my.range_max(self, 7)
+    my.range_max(self, 5)
     my.spell_base_name(self, name)
     my.spell_cost(self, 2)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "Summon an unfriendly monster of the least dangerous type, class A if you want to get technical.")
     my.text_description_long2(self, "The type of monster summoned should match that of the tile it is placed on. e.g. if you summon over water, you might get an eel. And who doesn't like a friendly eel?")
-    my.text_description_short(self, "Spell, summon monst A.")
+    my.text_description_short(self, "Spell, summon monst I.")
     my.text_description_very_short(self, "SumMonstA")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
 
-    my.tile(self, tile="spell_summon_monst_A")
-    my.tile(self, tile="spell_summon_monst_A_activated")
+    my.tile(self, tile="spell_summon_monst1")
+    my.tile(self, tile="spell_summon_monst1_activated")
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="spell_summon_monst_A", text_long_name="summon monst A", text_short_name="summon monst A")
+    tp_init(name="spell_summon_monst1", text_long_name="summon monst I", text_short_name="summon monst I")
 
 
 init()

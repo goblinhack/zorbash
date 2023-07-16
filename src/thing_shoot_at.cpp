@@ -86,6 +86,7 @@ Thingp Thing::best_shoot_at_target_get(void)
     ThingPossibleHit *cand = &thing_possible_hits[ i ];
 
     dbg("Possible shoot at cand: %s", cand->target->to_short_string().c_str());
+    TRACE_AND_INDENT();
 
     if (! best) {
       best = cand;
@@ -182,35 +183,42 @@ bool Thing::shoot_at_target(void)
         }
       }
 
-      FOR_ALL_THINGS_THAT_INTERACT(level, it, x, y)
+      FOR_ALL_THINGS_THAT_INTERACT(level, victim, x, y)
       {
-        if (this == it) {
+        if (this == victim) {
           continue;
         }
 
         //
         // No point in shooting at the dead
         //
-        if (it->is_dead) {
+        if (victim->is_dead) {
           continue;
         }
 
-        if (! can_detect(it)) {
+        if (! can_detect(victim)) {
+          continue;
+        }
+
+        //
+        // Don't attack thy leader or follower
+        //
+        if (same_leader_or_owner(victim) || is_friend(victim) || same_mob(victim)) {
           continue;
         }
 
         //
         // No shooting at blood!
         //
-        if (it->is_monst() || it->is_player()) {
-          dbg("Look for something to shoot at: %s", it->to_short_string().c_str());
+        if (victim->is_monst() || victim->is_player()) {
+          dbg("Look for something to shoot at: %s", victim->to_short_string().c_str());
           TRACE_AND_INDENT();
 
-          if (possible_to_attack(it)) {
-            dbg("Possible shoot at target: %s", it->to_short_string().c_str());
+          if (possible_to_attack(victim)) {
+            dbg("Possible shoot at target: %s", victim->to_short_string().c_str());
             TRACE_AND_INDENT();
 
-            thing_possible_hit_add(this, it);
+            thing_possible_hit_add(this, victim);
           }
         }
       }

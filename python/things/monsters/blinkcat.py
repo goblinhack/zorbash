@@ -121,6 +121,7 @@ def tp_init(name, text_long_name):
     my.stat_con(self, 10)
     my.stat_def(self, 12)
     my.stat_dex(self, 18)
+    my.stat_int(self, 8)
     my.stat_luck(self, 18)
     my.stat_str(self, 7)
     my.teleport_distance(self, 5)

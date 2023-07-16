@@ -460,16 +460,15 @@ void Level::cursor_path_create(Thingp it)
   }
 
   switch (game->state) {
-    case Game::STATE_NORMAL : break;
+    case Game::STATE_NORMAL :
+      cursor_path_draw(it, point(player->curr_at.x, player->curr_at.y), point(cursor_at.x, cursor_at.y));
+      break;
     case Game::STATE_INVENTORY : break;
     case Game::STATE_COLLECTING_ITEMS : break;
     case Game::STATE_ENCHANTING_ITEMS : break;
     case Game::STATE_CHOOSING_SKILLS : break;
     case Game::STATE_CHOOSING_SPELLS : break;
     case Game::STATE_CHOOSING_TARGET :
-      //
-      // If not following the player, draw the path
-      //
       cursor_path_draw(it, point(player->curr_at.x, player->curr_at.y), point(cursor_at.x, cursor_at.y));
       break;
     case Game::STATE_CHOOSING_LEVEL : break;

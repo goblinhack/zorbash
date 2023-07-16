@@ -1,9 +1,10 @@
 import my
 import tp
+import spell_dominate_monst0
 
 
 def on_targeted(me, x, y):
-    my.place_at(me, "random_monst_class_B", x, y)
+    return spell_dominate_monst0.on_targeted(me, x, y, 0)
 
 
 def tp_init(name, text_long_name, text_short_name):
@@ -15,26 +16,25 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_spell(self, True)
     my.is_target_select(self, True)
     my.is_usable(self, True)
-    my.spell_replaces(self, "spell_dominate_monst_A")
     my.on_targeted_do(self, "me.on_targeted()")
-    my.range_max(self, 7)
+    my.range_max(self, 5)
     my.spell_base_name(self, name)
-    my.spell_cost(self, 4)
+    my.spell_cost(self, 2)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "Attempt to dominate a monster with your mind.")
-    my.text_description_short(self, "Spell, dominate monst B.")
-    my.text_description_very_short(self, "DomMonstB")
+    my.text_description_short(self, "Spell, dominate monst I.")
+    my.text_description_very_short(self, "DomMonstA")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
 
-    my.tile(self, tile="spell_dominate_monst_B")
-    my.tile(self, tile="spell_dominate_monst_B_activated")
+    my.tile(self, tile="spell_dominate_monst1")
+    my.tile(self, tile="spell_dominate_monst1_activated")
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="spell_dominate_monst_B", text_long_name="dominate monst B", text_short_name="dominate monst B")
+    tp_init(name="spell_dominate_monst1", text_long_name="dominate monst I", text_short_name="dominate monst I")
 
 
 init()

@@ -352,7 +352,7 @@ bool Thing::same_leader_or_owner(Thingp it)
   // with the firer the leader. If you remove this check lightning can still
   // hit the firer.
   //
-  if (! is_monst()) {
+  if (! is_monst() && ! is_player()) {
     if (my_owner && my_owner->is_monst()) {
       //
       // Allow this; a sword being swung by a team member
@@ -363,7 +363,7 @@ bool Thing::same_leader_or_owner(Thingp it)
     }
   }
 
-  if (! it->is_monst()) {
+  if (! it->is_monst() && ! it->is_player()) {
     if (its_owner && its_owner->is_monst()) {
       //
       // Allow this; a sword being swung by a team member
@@ -410,12 +410,12 @@ bool Thing::same_leader_or_owner(Thingp it)
   Thingp my_leader  = me->leader();
   Thingp its_leader = it->leader();
 
-  if (0) {
+  if (1) {
     if (my_leader) {
-      dbg2("my leader: %s", my_leader->to_short_string().c_str());
+      // dbg2("my leader: %s", my_leader->to_short_string().c_str());
     }
     if (its_leader) {
-      dbg2("its leader: %s", its_leader->to_short_string().c_str());
+      // dbg2("its leader: %s", its_leader->to_short_string().c_str());
     }
   }
 

@@ -46,6 +46,7 @@ void Thing::level_change(Levelp l)
   // is not just sitting on the entrance.
   //
   if (is_monst()) {
+    dbg("Move away from entrance");
     move_away_from_entrance();
   }
 
@@ -65,6 +66,7 @@ void Thing::level_change(Levelp l)
     }
   }
 
+  dbg("Move all equip");
   FOR_ALL_EQUIP(iter)
   {
     auto it = equip_get(iter);

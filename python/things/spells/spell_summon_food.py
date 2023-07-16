@@ -16,7 +16,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_target_select(self, True)
     my.is_usable(self, True)
     my.on_targeted_do(self, "me.on_targeted()")
-    my.range_max(self, 7)
+    my.range_max(self, 3)
     my.spell_base_name(self, name)
     my.spell_cost(self, 5)
     my.text_a_or_an(self, "a")

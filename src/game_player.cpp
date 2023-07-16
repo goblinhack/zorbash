@@ -141,6 +141,10 @@ void Game::place_player(void)
       }
 
       if (0) {
+        auto w = level->thing_new("spell_dominate_monst1", point(x, y));
+        t->spell_add(w);
+      }
+      if (0) {
         auto w = level->thing_new("skill_primal_rage1", point(x, y));
         t->skill_add(w);
       }
@@ -318,7 +322,7 @@ void Game::place_player(void)
           }
         }
       }
-      if (1) {
+      if (0) {
         {
           for (auto sk = 0; sk < 2; sk++) {
             auto b = level->thing_new("spellbook", point(x, y));
@@ -357,6 +361,8 @@ void Game::place_player(void)
         d->wake("");
       }
       if (0) {
+        level->thing_new("exit1", point(x - 3, y + 2));
+        level->thing_new("gnome_rock", point(x + 2, y + 1));
         level->thing_new("tentacleye", point(x + 1, y + 1));
         level->thing_new("scorpion_death", point(x + 2, y + 1));
         level->thing_new("yeti", point(x + 2, y + 1));
@@ -484,8 +490,8 @@ void Game::place_player(void)
         // level->thing_new("cleaner", point(x + 2, y - 2));
       }
 
-      level->thing_new("door_secret", point(x + 2, y));
       if (0) {
+        level->thing_new("door_secret", point(x + 2, y));
         level->thing_new("door_metal", point(x + 2, y));
         // d->dead("killed");
       }

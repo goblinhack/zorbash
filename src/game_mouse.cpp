@@ -70,12 +70,11 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
     return false;
   }
 
-  IF_DEBUG2 { player->log("Mouse down"); }
   wid_thing_info_fini("mouse down");
   wid_tp_info_fini("mouse down");
 
   if (game->state == Game::STATE_CHOOSING_TARGET) {
-    IF_DEBUG2 { player->log("Game mouse down; in normal state"); }
+    DBG("Game mouse down and choosing target");
     TRACE_AND_INDENT();
 
     //
@@ -126,6 +125,9 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
   }
 
   if (game->state == Game::STATE_NORMAL) {
+    DBG("Game mouse down in normal state");
+    TRACE_AND_INDENT();
+
     //
     // Have we moved close enough to attack? Do this prior to checking for
     // double click so we can attack monsters sitting in lava

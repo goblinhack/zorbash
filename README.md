@@ -191,11 +191,11 @@ Content:
 - 52 x food
 - 20 x treasure
 - 14 x weapons
+- 14 x spells
 - 13 x items
 - 12 x buffs
 - 9 x skills
 - 6 x staffs
-- 6 x spells
 - 6 x shield
 - 6 x boots
 - 5 x rings

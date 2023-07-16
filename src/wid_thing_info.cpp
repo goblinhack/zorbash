@@ -3125,6 +3125,17 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
     return;
   }
 
+  //
+  // A possessed being?
+  //
+  if (! t->is_player()) {
+    auto l = t->leader();
+    if (l && (l == level->player)) {
+      w->log("%%fg=green$Is beholden to you");
+      return;
+    }
+  }
+
   const std::string danger_level = player->danger_level_str(t);
   w->log(danger_level);
 

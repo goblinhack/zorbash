@@ -3,7 +3,9 @@
 //
 
 #include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_python.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 
 static int NO_VALUE = -99999;
@@ -1449,4 +1451,44 @@ PyObject *spawn_at_if_possible(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_TRUE;
   }
   Py_RETURN_FALSE;
+}
+
+PyObject *thing_get_followers(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_AND_INDENT();
+  uint32_t     id       = 0;
+  static char *kwlist[] = {(char *) "id", nullptr};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! id) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    Py_RETURN_FALSE;
+  }
+
+  Thingp t = game->thing_find(id);
+  if (unlikely(! t)) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    Py_RETURN_NONE;
+  }
+
+  auto items = 0;
+
+  PyObject *lst  = PyList_New(items);
+  auto      item = 0;
+
+  if (! t->maybe_infop()) {
+    PyObject *lst = PyList_New(0);
+    return lst;
+  }
+
+  for (auto f : t->infop()->followers) {
+    PyList_SetItem(lst, item, Py_BuildValue("I", f.id));
+    item++;
+  }
+
+  return lst;
 }

@@ -82,6 +82,7 @@ def tp_init(name, text_long_name):
     my.stat_con(self, 25)
     my.stat_def(self, 25)
     my.stat_dex(self, 10)
+    my.stat_int(self, 25)
     my.stat_luck(self, 10)
     my.stat_psi(self, 20)
     my.stat_str(self, 25)
