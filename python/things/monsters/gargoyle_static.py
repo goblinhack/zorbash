@@ -10,7 +10,7 @@ def on_hit_and_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monster_roar")
 
     health = my.thing_health(me)
-    low_health = int((my.thing_health_max(me) / 100.0) * 90)
+    low_health = int(float(my.thing_health_max(me)) / 100.0 * 90.0)
     if health < low_health:
         my.thing_speaks(me, "Free at last!")
         my.thing_popup(me, "Free!")

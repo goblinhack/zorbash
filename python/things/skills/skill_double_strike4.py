@@ -22,7 +22,7 @@ def on_use_skill(owner, skill, target, x, y):
     my.spawn_using_items_radius_range(owner, skill, target, "skill_double_strike_effect")
 
     dmg = my.thing_dmg_current(owner)
-    dmg = int(dmg / 100) * 75
+    dmg = int(float(dmg) / 100.0 * 75.0)
     if (dmg == 0):
         dmg = 1
     my.thing_dmg_current_set(owner, dmg)

@@ -18,7 +18,7 @@ def on_waiting(me, x, y):
 
     if my.level_is_wall_at(owner, x, y):
         stamina = my.thing_stamina(owner)
-        new_stamina = int((stamina / 100.0) * 90)
+        new_stamina = int(float(stamina) / 100.0 * 90.0)
         my.thing_stamina_set(owner, new_stamina)
         if my.thing_is_player(owner):
             my.thing_msg(owner, "You wait inside the wall and feel drained.")
@@ -26,7 +26,7 @@ def on_waiting(me, x, y):
 
     if my.level_is_rock_at(owner, x, y):
         stamina = my.thing_stamina(owner)
-        new_stamina = int((stamina / 100.0) * 80)
+        new_stamina = int(float(stamina) / 100.0 * 80.0)
         my.thing_stamina_set(owner, new_stamina)
         if my.thing_is_player(owner):
             my.thing_msg(owner, "You wait inside solid rock and feel very drained.")
@@ -42,7 +42,7 @@ def on_move(me, x, y):
 
     if my.level_is_wall_at(owner, x, y):
         stamina = my.thing_stamina(owner)
-        new_stamina = int((stamina / 100.0) * 80)
+        new_stamina = int(float(stamina) / 100.0 * 80.0)
         my.thing_stamina_set(owner, new_stamina)
         if my.thing_is_player(owner):
             my.thing_msg(owner, "You pass into the wall, but feel drained.")
@@ -50,7 +50,7 @@ def on_move(me, x, y):
 
     if my.level_is_rock_at(owner, x, y):
         stamina = my.thing_stamina(owner)
-        new_stamina = int((stamina / 100.0) * 50)
+        new_stamina = int(float(stamina) / 100.0 * 50.0)
         my.thing_stamina_set(owner, new_stamina)
         if my.thing_is_player(owner):
             my.thing_msg(owner, "You pass into solid rock, but feel very drained.")

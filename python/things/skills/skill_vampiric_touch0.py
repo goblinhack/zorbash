@@ -16,14 +16,14 @@ def do_vampiric_touch(me, owner, hitter, real_hitter, x, y, damage, damage_reduc
     dmg_reduction = 0
 
     if my.thing_is_monst(real_hitter):
-        dmg_reduction = int((damage / 100) * damage_reduction_percent)
+        dmg_reduction = int(float(damage) / 100.0 * damage_reduction_percent)
         if dmg_reduction == 0:
             dmg_reduction = 1
 
     if dmg_reduction > 0:
         if owner and (my.thing_health(owner) < my.thing_health_max(owner)):
 
-            health_boost = int(dmg_reduction / 2)
+            health_boost = int(float(dmg_reduction) / 2.0)
             my.thing_health_incr(owner, health_boost)
 
             stamina_boost = dmg_reduction
