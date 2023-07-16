@@ -8,7 +8,7 @@ def tp_init(self):
     my.is_skill(self, True)
     my.is_tickable(self, True)
     my.on_tick_when_activated_do(self, "me.on_tick_when_activated()")
-    my.on_use_do(self, "me.on_use()")
+    my.on_use_skill_do(self, "me.on_use_skill()")
     my.skill_base_name(self, "skill_devoted_thrust")
     my.text_description_long2(self, "The Devoted Thrust skill directs your stamina into sheer vanquishing power.")
     my.text_description_long3(self, "Be warned that at high levels of this skill, you will become drained very quickly and may render yourself unable to move or jump, or escape a trap.")
@@ -17,5 +17,5 @@ def tp_init(self):
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
-    my.tile(self, tile="skill_devoted_thrust_activated")
     my.tile(self, tile="skill_devoted_thrust")
+    my.tile(self, tile="skill_devoted_thrust_activated")

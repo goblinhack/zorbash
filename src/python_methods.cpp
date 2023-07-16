@@ -1992,6 +1992,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(on_tick_when_deactivated_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_unequip_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_use_do),
+    MY_ADD_PYTHON_TP_FUNCTION(on_use_skill_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_waiting_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_want_to_shoot_at_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_you_are_declared_a_follower_do),

@@ -978,6 +978,7 @@ public:
   const std::string &on_tick_when_deactivated_do(void);
   const std::string &on_unequip_do(void);
   const std::string &on_use_do(void);
+  const std::string &on_use_skill_do(void);
   const std::string &on_waiting_do(void);
   const std::string &on_want_to_shoot_at_do(void);
   const std::string &on_you_are_declared_a_follower_do(void);
@@ -2860,6 +2861,8 @@ public:
   void on_thrown_callback(ThingId owner_id_when_thrown);
   void on_thrown(ThingId owner_id_when_thrown);
   void on_unequip(Thingp what);
+  void on_use_skill(Thingp what);
+  void on_use_skill(Thingp what, Thingp target);
   void on_use(Thingp what);
   void on_use(Thingp what, Thingp target);
   void on_waiting(void);

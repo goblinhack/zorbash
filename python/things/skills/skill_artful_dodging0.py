@@ -17,5 +17,5 @@ def tp_init(self):
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
-    my.tile(self, tile="skill_artful_dodging_activated")
     my.tile(self, tile="skill_artful_dodging")
+    my.tile(self, tile="skill_artful_dodging_activated")

@@ -45,6 +45,43 @@ void Thing::on_use(Thingp what)
   }
 }
 
+void Thing::on_use_skill(Thingp what)
+{
+  verify(MTYPE_THING, what);
+  if (! what) {
+    err("Cannot use null thing");
+    return;
+  }
+
+  auto on_use_skill = what->tp()->on_use_skill_do();
+  if (std::empty(on_use_skill)) {
+    dbg("Has no on use");
+    return;
+  }
+
+  auto t = split_tokens(on_use_skill, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    if (mod == "me") {
+      mod = what->name();
+    }
+
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
+
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, 0U, (unsigned int) curr_at.x,
+                    (unsigned int) curr_at.y);
+  } else {
+    ERR("Bad on_use_skill call [%s] expected mod:function, got %d elems", on_use_skill.c_str(),
+        (int) on_use_skill.size());
+  }
+}
+
 void Thing::on_swing(Thingp what)
 {
   verify(MTYPE_THING, what);
@@ -116,6 +153,47 @@ void Thing::on_use(Thingp what, Thingp target)
                       (unsigned int) curr_at.y);
     } else {
       ERR("Bad on_use call [%s] expected mod:function, got %d elems", on_use.c_str(), (int) on_use.size());
+    }
+  }
+}
+
+void Thing::on_use_skill(Thingp what, Thingp target)
+{
+  verify(MTYPE_THING, what);
+  if (! what) {
+    err("Cannot on_use_skill null thing");
+    return;
+  }
+
+  verify(MTYPE_THING, target);
+  if (! what) {
+    err("Cannot on_use_skill null target");
+    return;
+  }
+
+  auto on_use_skill = what->tp()->on_use_skill_do();
+  if (! std::empty(on_use_skill)) {
+    auto t = split_tokens(on_use_skill, '.');
+    if (t.size() == 2) {
+      auto        mod   = t[ 0 ];
+      auto        fn    = t[ 1 ];
+      std::size_t found = fn.find("()");
+      if (found != std::string::npos) {
+        fn = fn.replace(found, 2, "");
+      }
+
+      if (mod == "me") {
+        mod = what->name();
+      }
+
+      dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
+          what->to_short_string().c_str(), target->to_short_string().c_str());
+
+      py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, target->id.id, (unsigned int) curr_at.x,
+                      (unsigned int) curr_at.y);
+    } else {
+      ERR("Bad on_use_skill call [%s] expected mod:function, got %d elems", on_use_skill.c_str(),
+          (int) on_use_skill.size());
     }
   }
 }

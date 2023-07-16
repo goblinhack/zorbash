@@ -314,7 +314,7 @@ void Game::place_player(void)
         auto b = level->thing_new("enchantstone", point(x, y));
         t->carry(b, carry_options);
       }
-      if (0) {
+      if (1) {
         {
           for (auto sk = 0; sk < 1; sk++) {
             auto b = level->thing_new("skillstone", point(x, y));
@@ -360,6 +360,7 @@ void Game::place_player(void)
         auto d = level->thing_new("dogman", point(x + 2, y));
         d->wake("");
       }
+      level->thing_new("tentacleye", point(x + 1, y + 1));
       if (0) {
         level->thing_new("exit1", point(x - 3, y + 2));
         level->thing_new("gnome_rock", point(x + 2, y + 1));

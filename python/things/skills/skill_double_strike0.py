@@ -9,7 +9,7 @@ def tp_init(self):
     my.is_skill(self, True)
     my.is_tickable(self, True)
     my.on_tick_when_activated_do(self, "me.on_tick_when_activated()")
-    my.on_use_do(self, "me.on_use()")
+    my.on_use_skill_do(self, "me.on_use_skill()")
     my.skill_base_name(self, "skill_double_strike")
     my.text_description_long(self, "With this skill you will develop the ability to deliver a deadly second strike. Initially the extra damage will be minimal but over time you will become a true force to be reckoned with.")
     my.text_description_short(self, "Double strike skill.")

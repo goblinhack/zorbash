@@ -171,6 +171,7 @@ const std::string &Tp::on_tick_when_activated_do(void) const { return _on_tick_w
 const std::string &Tp::on_tick_when_deactivated_do(void) const { return _on_tick_when_deactivated_do; }
 const std::string &Tp::on_unequip_do(void) const { return _on_unequip_do; }
 const std::string &Tp::on_use_do(void) const { return _on_use_do; }
+const std::string &Tp::on_use_skill_do(void) const { return _on_use_skill_do; }
 const std::string &Tp::on_waiting_do(void) const { return _on_waiting_do; }
 const std::string &Tp::on_want_to_shoot_at_do(void) const { return _on_want_to_shoot_at_do; }
 const std::string &Tp::on_you_are_declared_a_follower_do(void) const { return _on_you_are_declared_a_follower_do; }
@@ -1790,6 +1791,7 @@ void Tp::on_tick_when_activated_do_set(const std::string &v) { _on_tick_when_act
 void Tp::on_tick_when_deactivated_do_set(const std::string &v) { _on_tick_when_deactivated_do = v; }
 void Tp::on_unequip_do_set(const std::string &v) { _on_unequip_do = v; }
 void Tp::on_use_do_set(const std::string &v) { _on_use_do = v; }
+void Tp::on_use_skill_do_set(const std::string &v) { _on_use_skill_do = v; }
 void Tp::on_waiting_do_set(const std::string &v) { _on_waiting_do = v; }
 void Tp::on_want_to_shoot_at_do_set(const std::string &v) { _on_want_to_shoot_at_do = v; }
 void Tp::on_you_are_declared_a_follower_do_set(const std::string &v) { _on_you_are_declared_a_follower_do = v; }

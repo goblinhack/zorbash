@@ -28,7 +28,7 @@ def on_tick_when_activated(owner, skill, x, y):
     return False  # didn't do anything
 
 
-def on_use(owner, skill, target, x, y):
+def on_use_skill(owner, skill, target, x, y):
     if not target:
         return
     my.spawn_using_items_radius_range(owner, skill, target, "skill_primal_rage_effect")

@@ -463,7 +463,7 @@ void Game::wid_choose_from_skill_tree(std::string current_tree_name)
                 //
                 auto tiles = &tpp->tiles;
                 if (tiles) {
-                  auto tile = tile_n(tiles, skill_is_active_or_available ? 0 : 1);
+                  auto tile = tile_n(tiles, 0);
                   if (tile) {
                     wid_set_tile(TILE_LAYER_FG_0, b, tile);
                   }

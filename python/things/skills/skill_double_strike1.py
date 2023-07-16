@@ -11,7 +11,7 @@ def on_tick_when_activated(owner, skill, x, y):
     return False  # didn't do anything
 
 
-def on_use(owner, skill, target, x, y):
+def on_use_skill(owner, skill, target, x, y):
     attack = my.thing_attack_num_get(owner)
     if attack == 0:
         return

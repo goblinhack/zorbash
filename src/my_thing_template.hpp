@@ -1038,6 +1038,7 @@ private:
   std::string _on_tick_when_deactivated_do;
   std::string _on_unequip_do;
   std::string _on_use_do;
+  std::string _on_use_skill_do;
   std::string _on_waiting_do;
   std::string _on_want_to_shoot_at_do;
   std::string _on_you_are_declared_a_follower_do;
@@ -1399,6 +1400,7 @@ public:
   const std::string &on_tick_when_deactivated_do(void) const;
   const std::string &on_unequip_do(void) const;
   const std::string &on_use_do(void) const;
+  const std::string &on_use_skill_do(void) const;
   const std::string &on_waiting_do(void) const;
   const std::string &on_want_to_shoot_at_do(void) const;
   const std::string &on_you_are_declared_a_follower_do(void) const;
@@ -3041,6 +3043,7 @@ public:
   void on_tick_when_deactivated_do_set(const std::string &v);
   void on_unequip_do_set(const std::string &v);
   void on_use_do_set(const std::string &v);
+  void on_use_skill_do_set(const std::string &v);
   void on_waiting_do_set(const std::string &v);
   void on_want_to_shoot_at_do_set(const std::string &v);
   void on_you_are_declared_a_follower_do_set(const std::string &v);
