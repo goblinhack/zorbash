@@ -144,7 +144,8 @@ void Game::place_player(void)
         auto w = level->thing_new("spell_dominate_monst1", point(x, y));
         t->spell_add(w);
       }
-      if (0) {
+      level->thing_new("tentacleye", point(x + 1, y + 1));
+      if (1) {
         auto w = level->thing_new("skill_primal_rage1", point(x, y));
         t->skill_add(w);
       }
@@ -152,7 +153,7 @@ void Game::place_player(void)
         auto w = level->thing_new("skill_devoted_thrust1", point(x, y));
         t->skill_add(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("skill_double_strike1", point(x, y));
         t->skill_add(w);
       }
@@ -361,7 +362,6 @@ void Game::place_player(void)
         d->wake("");
       }
       if (0) {
-        level->thing_new("tentacleye", point(x + 1, y + 1));
         level->thing_new("exit1", point(x - 3, y + 2));
         level->thing_new("gnome_rock", point(x + 2, y + 1));
         level->thing_new("tentacleye", point(x + 1, y + 1));

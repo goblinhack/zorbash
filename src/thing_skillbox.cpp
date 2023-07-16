@@ -315,7 +315,6 @@ bool Level::skill_chosen(Thingp what)
     player->msg("You deactivate %s.", what->text_the().c_str());
   }
   sound_play("coin");
-  player->skill_use(what);
 
   return true;
 }

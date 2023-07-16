@@ -1284,7 +1284,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       auto iter = level->thing_find(oid);
       if (iter && iter->is_activated) {
         real_hitter->dmg_current_set(damage);
-        real_hitter->use(iter);
+        real_hitter->on_use_skill(iter, this);
         damage = real_hitter->dmg_current();
       }
     }

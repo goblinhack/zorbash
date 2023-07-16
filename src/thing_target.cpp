@@ -572,19 +572,6 @@ bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point 
     if (item->collision_check_and_handle_at(best_hit_at, attack_options)) {
       lunge(best_hit_at);
     }
-
-    FOR_ALL_SKILLS_FOR(this, id)
-    {
-      auto iter = level->thing_find(id);
-      if (iter && iter->is_activated) {
-        if (best) {
-          on_use_skill(iter, best);
-        } else {
-          on_use_skill(iter);
-        }
-      }
-    }
-
   } else {
     dbg2("Target-attack-best: Try to attack with no item");
     TRACE_AND_INDENT();
