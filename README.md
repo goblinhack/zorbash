@@ -189,7 +189,7 @@ Content:
 <!-- begin type marker -->
 - 108 x monsters
 - 52 x food
-- 20 x treasure
+- 24 x treasure
 - 14 x weapons
 - 14 x spells
 - 13 x items

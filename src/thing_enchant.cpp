@@ -84,13 +84,18 @@ bool Thing::enchant_with_stone(Thingp what)
   }
 
   //
-  // Drop an enchantstone
+  // Drop a enchantstone
   //
   auto found = false;
-  for (const auto t : carried_item_only_vector()) {
-    if (t->is_enchantstone()) {
-      t->is_drained = true;
-      t->dead("drained and used");
+  for (const auto enchantstone : carried_item_only_vector()) {
+    if (enchantstone->is_enchantstone()) {
+      if (enchantstone->charge_count()) {
+        enchantstone->charge_count_decr();
+      }
+      if (! enchantstone->charge_count()) {
+        enchantstone->is_drained = true;
+        enchantstone->dead("drained and used");
+      }
       found = true;
       break;
     }

@@ -282,10 +282,10 @@ bool Thing::spell_add(Tpp what)
     if (spellbook->is_spellbook()) {
       if (spellbook->charge_count()) {
         spellbook->charge_count_decr();
-        if (! spellbook->charge_count()) {
-          spellbook->is_drained = true;
-          spellbook->dead("drained and used");
-        }
+      }
+      if (! spellbook->charge_count()) {
+        spellbook->is_drained = true;
+        spellbook->dead("drained and used");
       }
       found = true;
       break;

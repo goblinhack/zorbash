@@ -12,6 +12,11 @@
 int Thing::distance_to_player(void)
 {
   TRACE_AND_INDENT();
+
+  if (! game->level) {
+    return DMAP_IS_WALL;
+  }
+
   auto player = game->level->player;
   if (! player) {
     return DMAP_IS_WALL;
@@ -30,6 +35,11 @@ int Thing::distance_to_player(void)
 int Thing::distance_to_player_on_different_level(void)
 {
   TRACE_AND_INDENT();
+
+  if (! game->level) {
+    return DMAP_IS_WALL;
+  }
+
   auto player = game->level->player;
   if (! player) {
     return DMAP_IS_WALL;

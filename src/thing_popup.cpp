@@ -14,6 +14,26 @@ void Thing::popup(std::string const &m)
     return;
   }
 
+  if (! game->level) {
+    return;
+  }
+
+  auto player = game->level->player;
+  if (! player) {
+    return;
+  }
+
+  //
+  // Check we're on the same level
+  //
+  if (player->level != level) {
+    return;
+  }
+
+  if (level->is_starting) {
+    return;
+  }
+
   //
   // Get the top owner as that will be the popup owner. We keep track
   // of who created the popup so we can avoid > 1 popup per thing which

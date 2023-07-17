@@ -399,8 +399,6 @@ void Game::wid_choose_from_skill_tree(std::string current_tree_name)
       br.y = tl.y + (WID_SKILL_BUTTON_HEIGHT - 1) - 1;
       wid_set_pos(b, tl, br);
 
-      bool skill_is_active_or_available = false;
-
       //
       // Do we have this skill?
       //
@@ -408,20 +406,17 @@ void Game::wid_choose_from_skill_tree(std::string current_tree_name)
         //
         // Yes
         //
-        skill_is_active_or_available = true;
         wid_set_style(b, UI_WID_STYLE_DARK);
       } else if (! skill_has_precursor(skill)) {
         //
         // Can we attain this skill?
         //
-        skill_is_active_or_available = true;
         wid_set_style(b, UI_WID_STYLE_GREEN);
         wid_set_on_mouse_up(b, wid_skills_mouse_up);
       } else if (skill_is_available(skill)) {
         //
         // Can we attain this skill?
         //
-        skill_is_active_or_available = true;
         wid_set_style(b, UI_WID_STYLE_GREEN);
         wid_set_on_mouse_up(b, wid_skills_mouse_up);
       } else {

@@ -248,10 +248,15 @@ bool Thing::skill_add(Tpp what)
   // Drop a skillstone
   //
   auto found = false;
-  for (const auto t : carried_item_only_vector()) {
-    if (t->is_skillstone()) {
-      t->is_drained = true;
-      t->dead("drained and used");
+  for (const auto skillstone : carried_item_only_vector()) {
+    if (skillstone->is_skillstone()) {
+      if (skillstone->charge_count()) {
+        skillstone->charge_count_decr();
+      }
+      if (! skillstone->charge_count()) {
+        skillstone->is_drained = true;
+        skillstone->dead("drained and used");
+      }
       found = true;
       break;
     }
