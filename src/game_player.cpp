@@ -391,6 +391,8 @@ void Game::place_player(void)
         d->wake("");
       }
       if (0) {
+        level->thing_new("troll_stone", point(x + 2, y));
+        level->thing_new("troll_fire", point(x + 2, y + 2));
         level->thing_new("exit1", point(x - 3, y + 2));
         level->thing_new("gnome_rock", point(x + 2, y + 1));
         level->thing_new("tentacleye", point(x + 1, y + 1));
@@ -409,8 +411,6 @@ void Game::place_player(void)
         level->thing_new("centipede", point(x - 2, y + 1));
         level->thing_new("demon_fire", point(x + 4, y));
         level->thing_new("ogre", point(x + 4, y));
-        level->thing_new("troll_stone", point(x + 2, y));
-        level->thing_new("troll_fire", point(x + 2, y + 2));
         level->thing_new("ettin", point(x + 2, y));
         level->thing_new("cthulite", point(x + 2, y));
         level->thing_new("cyclops", point(x + 2, y));

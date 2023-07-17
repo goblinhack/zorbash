@@ -35,10 +35,29 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
   //
   if (gfx_pixelart_anim_synced_with_owner()) {
     if (owner) {
-      if (owner->is_dead || owner->is_sleeping) {
+      //
+      // If this is a sword animation, stop it moving once the owner is dead.
+      //
+      if (owner->is_dead_or_dying()) {
 #ifdef DEBUG_ANIM
         if (debug || is_debug_type()) {
-          con("Animate: no owner is dead or sleeping");
+          con("Animate: no owner is sleeping");
+        }
+#endif
+        //
+        // Even when dead, the bodyparts needs to fall down.
+        //
+        if (owner->is_player()) {
+          if (! is_player_bodypart()) {
+            return;
+          }
+        }
+      }
+
+      if (owner->is_sleeping) {
+#ifdef DEBUG_ANIM
+        if (debug || is_debug_type()) {
+          con("Animate: no owner is sleeping");
         }
 #endif
         return;
