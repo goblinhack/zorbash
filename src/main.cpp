@@ -821,8 +821,10 @@ int main(int argc, char *argv[])
   }
   CON("INI: Loaded");
 
-  if (! sdl_init()) {
-    ERR("SDL: Init");
+  if (! g_opt_tests) {
+    if (! sdl_init()) {
+      ERR("SDL: Init");
+    }
   }
 
   //

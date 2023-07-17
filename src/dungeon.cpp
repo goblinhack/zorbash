@@ -6,6 +6,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_dmap.hpp"
 #include "my_dungeon.hpp"
+#include "my_level.hpp"
 #include "my_level_static.hpp"
 #include "my_room.hpp"
 #include "my_template.hpp"
@@ -4857,15 +4858,24 @@ void dungeon_test(void)
 {
   static int dungeon_seed = 10000;
 
+  CON("Test dungeon seed: %d", dungeon_seed);
+
   //
   // smaller node numbers mean larger rooms
   //
-  CON("Test dungeon seed: %d", dungeon_seed);
-  pcg_random_allowed++;
+  auto    biome = get_biome(0);
+  point3d world_at;
+  point   grid_at;
 
-  delete new Dungeon(get_biome(0), MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT,
-                     dungeon_seed);
-  pcg_random_allowed--;
+  //
+  // Create the new level
+  //
+  auto new_level                   = new Level(biome);
+  auto difficulty_depth            = 0;
+  auto dungeon_walk_order_level_no = 0;
+
+  new_level->create(world_at, grid_at, dungeon_seed, difficulty_depth, dungeon_walk_order_level_no);
+  delete new_level;
 
   if (! dungeon_seed--) {
     DIE("end of test");

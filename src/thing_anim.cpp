@@ -35,10 +35,10 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
   //
   if (gfx_pixelart_anim_synced_with_owner()) {
     if (owner) {
-      if (owner->is_sleeping) {
+      if (owner->is_dead || owner->is_sleeping) {
 #ifdef DEBUG_ANIM
         if (debug || is_debug_type()) {
-          con("Animate: no owner is sleeping");
+          con("Animate: no owner is dead or sleeping");
         }
 #endif
         return;
