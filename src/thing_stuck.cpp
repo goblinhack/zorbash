@@ -179,7 +179,8 @@ bool Thing::is_stuck_check(void)
     }
   }
 
-  if (level->is_barrel(curr_at.x, curr_at.y)) {
+  if (level->is_rock(curr_at.x, curr_at.y) || level->is_wall(curr_at.x, curr_at.y)
+      || level->is_barrel(curr_at.x, curr_at.y)) {
     if (is_flying()) {
       //
       // ok

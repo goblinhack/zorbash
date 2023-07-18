@@ -67,7 +67,7 @@ def tp_init(
     my.text_description_short(self, "Rocky the rock.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
+    my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)  # has to be behind for cloak of stone to show player
     # end sort marker
 
     for t in tiles:

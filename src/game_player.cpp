@@ -141,6 +141,10 @@ void Game::place_player(void)
       }
 
       if (0) {
+        auto w = level->thing_new("spell_summon_rock", point(x, y));
+        t->spell_add(w);
+      }
+      if (0) {
         auto w = level->thing_new("spell_dominate_monst1", point(x, y));
         t->spell_add(w);
       }

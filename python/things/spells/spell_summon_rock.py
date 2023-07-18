@@ -4,6 +4,9 @@ import tp
 
 def on_targeted(me, x, y):
     my.place_at(me, "random_rock", x, y)
+    for it in my.level_get_all(me, x, y):
+        if my.thing_possible_to_attack(me, it):
+            my.thing_hit(0, me, it)
 
 
 def tp_init(name, text_long_name, text_short_name):
@@ -14,6 +17,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_loggable(self, True)
     my.is_spell(self, True)
     my.is_target_select(self, True)
+    my.dmg_chance_d1000_crush(self, 0, 1000)
+    my.dmg_crush_dice(self, "4d6")
     my.is_usable(self, True)
     my.on_targeted_do(self, "me.on_targeted()")
     my.range_max(self, 7)
