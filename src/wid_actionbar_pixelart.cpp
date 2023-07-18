@@ -67,7 +67,7 @@ void wid_actionbar_pixelart_init(void)
   if (game->state == Game::STATE_NORMAL) {
     options++;
     options++;
-    IF_DEBUG2 { options++; }
+    options++;
   }
 
   if (ui_icon_collect) {
@@ -149,7 +149,6 @@ void wid_actionbar_pixelart_init(void)
     x_at += option_width;
   }
 
-  IF_DEBUG2
   {
     if (game->state == Game::STATE_NORMAL) {
       auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar robot");

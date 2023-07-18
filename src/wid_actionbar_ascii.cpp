@@ -134,7 +134,6 @@ void wid_actionbar_ascii_init(void)
     x_at += option_width + 1;
   }
 
-  IF_DEBUG2
   {
     if (game->state == Game::STATE_NORMAL) {
       auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar robot");
