@@ -78,7 +78,7 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, bool force)
   // Annoy the thing being pushed
   //
   if (victim->is_alive_monst()) {
-    victim->add_enemy(this);
+    victim->add_attacker(this);
   }
 
   point shove_delta = delta;

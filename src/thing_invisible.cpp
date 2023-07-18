@@ -41,7 +41,7 @@ bool Thing::can_see_is_invisible(Thingp what)
   // If the thing is adjacent to us and has attacked us, then we should be aware
   // of a translucent enemy close to us.
   //
-  if (is_enemy(what)) {
+  if (is_attacker(what)) {
     if ((abs(what->curr_at.x - curr_at.x) <= 1) && (abs(what->curr_at.y - curr_at.y) <= 1)) {
       return true;
     }

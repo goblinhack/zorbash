@@ -28,204 +28,269 @@ Tpp tp_find(const std::string &name)
   return nullptr;
 }
 
-Tpp tp_find_wildcard(const std::string &name)
+std::vector< Tpp > tp_find_wildcard(const std::string &name)
 {
   TRACE_NO_INDENT();
 
-  auto result = tp_name_map.find(name);
+  std::vector< Tpp > out;
+  auto               result = tp_name_map.find(name);
 
   if (unlikely(result != tp_name_map.end())) {
-    return (result->second);
+    out.push_back(result->second);
+    return out;
   }
 
   if (name == "random_food") {
-    return tp_random_food();
+    out.push_back(tp_random_food());
+    return out;
   }
   if (name == "random_gold") {
-    return tp_random_gold();
+    out.push_back(tp_random_gold());
+    return out;
   }
   if (name == "random_treasure") {
-    return tp_random_treasure();
+    out.push_back(tp_random_treasure());
+    return out;
   }
   if (name == "random_item_class_A") {
-    return tp_random_item_class_A();
+    out.push_back(tp_random_item_class_A());
+    return out;
   }
   if (name == "random_item_class_B") {
-    return tp_random_item_class_B();
+    out.push_back(tp_random_item_class_B());
+    return out;
   }
   if (name == "random_item_class_C") {
-    return tp_random_item_class_C();
+    out.push_back(tp_random_item_class_C());
+    return out;
   }
   if (name == "random_monst_class_A") {
-    return tp_random_monst_class_A();
+    out.push_back(tp_random_monst_class_A());
+    return out;
   }
   if (name == "random_monst_class_B") {
-    return tp_random_monst_class_B();
+    out.push_back(tp_random_monst_class_B());
+    return out;
   }
   if (name == "random_monst_class_C") {
-    return tp_random_monst_class_C();
+    out.push_back(tp_random_monst_class_C());
+    return out;
   }
   if (name == "random_monst_class_D") {
-    return tp_random_monst_class_D();
+    out.push_back(tp_random_monst_class_D());
+    return out;
   }
   if (name == "random_monst_class_E") {
-    return tp_random_monst_class_E();
+    out.push_back(tp_random_monst_class_E());
+    return out;
   }
   if (name == "random_item_not_a_container_class_A") {
-    return tp_random_item_not_a_container_class_A();
+    out.push_back(tp_random_item_not_a_container_class_A());
+    return out;
   }
   if (name == "random_item_not_a_container_class_B") {
-    return tp_random_item_not_a_container_class_B();
+    out.push_back(tp_random_item_not_a_container_class_B());
+    return out;
   }
   if (name == "random_item_not_a_container_class_C") {
-    return tp_random_item_not_a_container_class_C();
+    out.push_back(tp_random_item_not_a_container_class_C());
+    return out;
   }
   if (name == "random_weapon_class_A") {
-    return tp_random_weapon_class_A();
+    out.push_back(tp_random_weapon_class_A());
+    return out;
   }
   if (name == "random_weapon_class_B") {
-    return tp_random_weapon_class_B();
+    out.push_back(tp_random_weapon_class_B());
+    return out;
   }
   if (name == "random_weapon_class_C") {
-    return tp_random_weapon_class_C();
+    out.push_back(tp_random_weapon_class_C());
+    return out;
   }
   if (name == "random_treasure_class_A") {
-    return tp_random_treasure_class_A();
+    out.push_back(tp_random_treasure_class_A());
+    return out;
   }
   if (name == "random_treasure_class_B") {
-    return tp_random_treasure_class_B();
+    out.push_back(tp_random_treasure_class_B());
+    return out;
   }
   if (name == "random_treasure_class_C") {
-    return tp_random_treasure_class_C();
+    out.push_back(tp_random_treasure_class_C());
+    return out;
   }
   if (name == "random_staff_class_A") {
-    return tp_random_staff_class_A();
+    out.push_back(tp_random_staff_class_A());
+    return out;
   }
   if (name == "random_staff_class_B") {
-    return tp_random_staff_class_B();
+    out.push_back(tp_random_staff_class_B());
+    return out;
   }
   if (name == "random_staff_class_C") {
-    return tp_random_staff_class_C();
+    out.push_back(tp_random_staff_class_C());
+    return out;
   }
   if (name == "random_ring_class_A") {
-    return tp_random_ring_class_A();
+    out.push_back(tp_random_ring_class_A());
+    return out;
   }
   if (name == "random_ring_class_B") {
-    return tp_random_ring_class_B();
+    out.push_back(tp_random_ring_class_B());
+    return out;
   }
   if (name == "random_ring_class_C") {
-    return tp_random_ring_class_C();
+    out.push_back(tp_random_ring_class_C());
+    return out;
   }
   if (name == "random_dirt") {
-    return tp_random_dirt();
+    out.push_back(tp_random_dirt());
+    return out;
   }
   if (name == "random_dry_grass") {
-    return tp_random_dry_grass();
+    out.push_back(tp_random_dry_grass());
+    return out;
   }
   if (name == "random_wet_grass") {
-    return tp_random_wet_grass();
+    out.push_back(tp_random_wet_grass());
+    return out;
   }
   if (name == "random_magic_stone") {
-    return tp_random_magic_stone();
+    out.push_back(tp_random_magic_stone());
+    return out;
   }
   if (name == "random_foliage") {
-    return tp_random_foliage();
+    out.push_back(tp_random_foliage());
+    return out;
   }
   if (name == "random_spiderweb") {
-    return tp_random_spiderweb();
+    out.push_back(tp_random_spiderweb());
+    return out;
   }
   if (name == "random_portal") {
-    return tp_random_portal();
+    out.push_back(tp_random_portal());
+    return out;
   }
   if (name == "random_small_ripple") {
-    return tp_random_small_ripple();
+    out.push_back(tp_random_small_ripple());
+    return out;
   }
   if (name == "random_large_ripple") {
-    return tp_random_large_ripple();
+    out.push_back(tp_random_large_ripple());
+    return out;
   }
   if (name == "random_red_splatter") {
-    return tp_random_red_splatter();
+    out.push_back(tp_random_red_splatter());
+    return out;
   }
   if (name == "random_green_splatter") {
-    return tp_random_green_splatter();
+    out.push_back(tp_random_green_splatter());
+    return out;
   }
   if (name == "random_key") {
-    return tp_random_key();
+    out.push_back(tp_random_key());
+    return out;
   }
   if (name == "random_potion") {
-    return tp_random_potion();
+    out.push_back(tp_random_potion());
+    return out;
   }
   if (name == "random_staff") {
-    return tp_random_staff();
+    out.push_back(tp_random_staff());
+    return out;
   }
   if (name == "random_ring") {
-    return tp_random_ring();
+    out.push_back(tp_random_ring());
+    return out;
   }
   if (name == "random_weapon") {
-    return tp_random_weapon();
+    out.push_back(tp_random_weapon());
+    return out;
   }
   if (name == "random_ascend_dungeon") {
-    return tp_random_ascend_dungeon();
+    out.push_back(tp_random_ascend_dungeon());
+    return out;
   }
   if (name == "random_descend_dungeon") {
-    return tp_random_descend_dungeon();
+    out.push_back(tp_random_descend_dungeon());
+    return out;
   }
   if (name == "random_brazier") {
-    return tp_random_brazier();
+    out.push_back(tp_random_brazier());
+    return out;
   }
   if (name == "random_barrel") {
-    return tp_random_barrel();
+    out.push_back(tp_random_barrel());
+    return out;
   }
   if (name == "random_door") {
-    return tp_random_door();
+    out.push_back(tp_random_door());
+    return out;
   }
   if (name == "random_secret_door") {
-    return tp_random_secret_door();
+    out.push_back(tp_random_secret_door());
+    return out;
   }
   if (name == "random_mob") {
-    return tp_random_mob();
+    out.push_back(tp_random_mob());
+    return out;
   }
   if (name == "random_trap") {
-    return tp_random_trap();
+    out.push_back(tp_random_trap());
+    return out;
   }
   if (name == "random_ethereal_mob") {
-    return tp_random_ethereal_mob();
+    out.push_back(tp_random_ethereal_mob());
+    return out;
   }
   if (name == "random_mob_challenge_class_A") {
-    return tp_random_mob_challenge_class_A();
+    out.push_back(tp_random_mob_challenge_class_A());
+    return out;
   }
   if (name == "random_mob_challenge_class_B") {
-    return tp_random_mob_challenge_class_B();
+    out.push_back(tp_random_mob_challenge_class_B());
+    return out;
   }
   if (name == "random_red_blood") {
-    return tp_random_red_blood();
+    out.push_back(tp_random_red_blood());
+    return out;
   }
   if (name == "random_green_blood") {
-    return tp_random_green_blood();
+    out.push_back(tp_random_green_blood());
+    return out;
   }
   if (name == "random_bones") {
-    return tp_random_bones();
+    out.push_back(tp_random_bones());
+    return out;
   }
   if (name == "random_wall_dungeon") {
-    return tp_random_wall_dungeon();
+    out.push_back(tp_random_wall_dungeon());
+    return out;
   }
   if (name == "random_sewer_wall") {
-    return tp_random_sewer_wall();
+    out.push_back(tp_random_sewer_wall());
+    return out;
   }
   if (name == "random_rock") {
-    return tp_random_rock();
+    out.push_back(tp_random_rock());
+    return out;
   }
   if (name == "random_floor") {
-    return tp_random_floor();
+    out.push_back(tp_random_floor());
+    return out;
   }
   if (name == "random_deco") {
-    return tp_random_deco();
+    out.push_back(tp_random_deco());
+    return out;
   }
   if (name == "random_ascend_sewer") {
-    return tp_random_ascend_sewer();
+    out.push_back(tp_random_ascend_sewer());
+    return out;
   }
   if (name == "random_descend_sewer") {
-    return tp_random_descend_sewer();
+    out.push_back(tp_random_descend_sewer());
+    return out;
   }
 
   //
@@ -233,37 +298,45 @@ Tpp tp_find_wildcard(const std::string &name)
   //
   for (auto &tp : tp_id_map) {
     if (tp->matches(name)) {
-      return tp;
+      out.push_back(tp);
     }
   }
 
-  return nullptr;
+  return out;
 }
 
-Tpp tp_find_wildcard(Levelp l, point p, const std::string &name)
+std::vector< Tpp > tp_find_wildcard(Levelp l, point p, const std::string &name)
 {
   TRACE_NO_INDENT();
+
+  std::vector< Tpp > out;
 
   auto result = tp_name_map.find(name);
 
   if (unlikely(result != tp_name_map.end())) {
-    return (result->second);
+    out.push_back(result->second);
+    return out;
   }
 
   if (name == "random_monst_class_A") {
-    return l->get_random_monst(p, MONST_CLASS_A);
+    out.push_back(l->get_random_monst(p, MONST_CLASS_A));
+    return out;
   }
   if (name == "random_monst_class_B") {
-    return l->get_random_monst(p, MONST_CLASS_B);
+    out.push_back(l->get_random_monst(p, MONST_CLASS_B));
+    return out;
   }
   if (name == "random_monst_class_C") {
-    return l->get_random_monst(p, MONST_CLASS_C);
+    out.push_back(l->get_random_monst(p, MONST_CLASS_C));
+    return out;
   }
   if (name == "random_monst_class_D") {
-    return l->get_random_monst(p, MONST_CLASS_D);
+    out.push_back(l->get_random_monst(p, MONST_CLASS_D));
+    return out;
   }
   if (name == "random_monst_class_E") {
-    return l->get_random_monst(p, MONST_CLASS_E);
+    out.push_back(l->get_random_monst(p, MONST_CLASS_E));
+    return out;
   }
 
   return tp_find_wildcard(name);

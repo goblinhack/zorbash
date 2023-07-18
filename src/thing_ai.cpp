@@ -12,10 +12,11 @@
 #include "my_thing_attack_options.hpp"
 
 #define GOAL_PRIO_VERY_HIGH 0
-#define GOAL_PRIO_HIGH      1
-#define GOAL_PRIO_MED       2
-#define GOAL_PRIO_LOW       3
-#define GOAL_PRIO_VERY_LOW  4
+#define GOAL_PRIO_HIGHER    1
+#define GOAL_PRIO_HIGH      2
+#define GOAL_PRIO_MED       3
+#define GOAL_PRIO_LOW       4
+#define GOAL_PRIO_VERY_LOW  5
 
 bool operator<(const class Goal &lhs, const class Goal &rhs)
 {
@@ -1124,27 +1125,27 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                  is_dangerous(it) ? ", is dangerous" : "", is_to_be_avoided(it) ? ", is to be avoided" : "");
             TRACE_AND_INDENT();
 
-            if (is_enemy(it) && (dist <= max_dist)) {
-              AI_LOG("Is enemy and is close");
+            if (is_attacker(it) && (dist <= max_dist)) {
+              AI_LOG("Is attacker and is close");
               if (! is_fearless() && (is_to_be_avoided(it) || is_dangerous(it)) && (health() < health_max() / 2)) {
                 //
-                // Low on health. Best to avoid this enemy.
+                // Low on health. Best to avoid this attacker.
                 //
-                AI_LOG("Low on health, best to avoid enemy");
+                AI_LOG("Low on health, best to avoid attacker");
                 if (cannot_avoid(it)) {
-                  AI_LOG("Cannot avoid enemy", it);
-                  GOAL_ADD(GOAL_PRIO_HIGH, (int) (max_dist - dist) * health_diff - goal_penalty,
-                           "attack-enemy-i-cannot-avoid", it);
+                  AI_LOG("Cannot avoid attacker", it);
+                  GOAL_ADD(GOAL_PRIO_VERY_HIGH, (int) (max_dist - dist) * health_diff - goal_penalty,
+                           "attack-attacker-i-cannot-avoid", it);
                 } else {
                   int avoid_score = ((max_dist - dist) * health_diff) - goal_penalty;
                   GOAL_AVOID_ADD(GOAL_PRIO_VERY_HIGH, avoid_score, "avoid-monst", it);
                 }
               } else {
                 //
-                // The closer an enemy is (something that attacked us), the higher the score
+                // The closer an attacker is (something that attacked us), the higher the score
                 //
                 GOAL_ADD(GOAL_PRIO_VERY_HIGH, aggression_pct() + (int) (max_dist - dist) * health_diff - goal_penalty,
-                         "attack-enemy", it);
+                         "attack-attacker", it);
               }
             } else if (! is_fearless() && (dist < distance_avoid_get()) && will_avoid_monst(it)) {
               //
@@ -1153,13 +1154,35 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
               AI_LOG("Not fearless and monst is close");
               if (cannot_avoid(it)) {
                 AI_LOG("Cannot avoid monst", it);
-                GOAL_ADD(GOAL_PRIO_HIGH, (int) (max_dist - dist) * health_diff, "attack-monst-i-cannot-avoid", it);
+                GOAL_ADD(GOAL_PRIO_HIGHER, (int) (max_dist - dist) * health_diff, "attack-monst-i-cannot-avoid", it);
               } else {
                 //
                 // Higher score the closer you are.
                 //
                 int avoid_score = ((max_dist - dist) * health_diff);
-                GOAL_AVOID_ADD(GOAL_PRIO_VERY_HIGH, avoid_score, "avoid-monst", it);
+                GOAL_AVOID_ADD(GOAL_PRIO_HIGHER, avoid_score, "avoid-monst", it);
+              }
+            } else if (is_enemy(it) && (dist <= max_dist)) {
+              AI_LOG("Is enemy and is close");
+              if (! is_fearless() && (is_to_be_avoided(it) || is_dangerous(it)) && (health() < health_max() / 2)) {
+                //
+                // Low on health. Best to avoid this enemy.
+                //
+                AI_LOG("Low on health, best to avoid enemy");
+                if (cannot_avoid(it)) {
+                  AI_LOG("Cannot avoid enemy", it);
+                  GOAL_ADD(GOAL_PRIO_HIGHER, (int) (max_dist - dist) * health_diff - goal_penalty,
+                           "attack-enemy-i-cannot-avoid", it);
+                } else {
+                  int avoid_score = ((max_dist - dist) * health_diff) - goal_penalty;
+                  GOAL_AVOID_ADD(GOAL_PRIO_HIGHER, avoid_score, "avoid-monst", it);
+                }
+              } else {
+                //
+                // The closer an enemy is (something that attacked us), the higher the score
+                //
+                GOAL_ADD(GOAL_PRIO_HIGHER, aggression_pct() + (int) (max_dist - dist) * health_diff - goal_penalty,
+                         "attack-enemy", it);
               }
             } else if (it->is_mob() && is_able_to_attack_mobs()) {
               //
@@ -1167,8 +1190,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
               //
               AI_LOG("Very close and can attack mob");
 
-              GOAL_ADD(GOAL_PRIO_VERY_HIGH,
-                       200 + aggression_pct() + (int) (max_dist - dist) * health_diff - goal_penalty,
+              GOAL_ADD(GOAL_PRIO_HIGH, 200 + aggression_pct() + (int) (max_dist - dist) * health_diff - goal_penalty,
                        "attack-nearby-mob", it);
             } else if ((it->is_alive_monst() || it->is_player()) && possible_to_attack(it)) {
               //

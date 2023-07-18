@@ -355,6 +355,13 @@ bool Thing::possible_to_attack(const Thingp victim)
     return true;
   }
 
+  if (is_attacker(victim)) {
+    if (is_debug_type()) {
+      dbg("Can attack attacker %s", victim->to_short_string().c_str());
+    }
+    return true;
+  }
+
   if (is_weapon()) {
     if (victim->is_sticky() || victim->is_spiderweb()) {
       if (is_able_to_break_out_of_webs()) {
@@ -1553,6 +1560,12 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         }
 
         //
+        // Hit or miss, an attempt at an attack counts
+        //
+        victim->wake("missed, but should still wake");
+        victim->add_attacker(this);
+
+        //
         // Cannot miss (if engulfing?)
         //
         if (victim->curr_at == curr_at) {
@@ -1590,13 +1603,6 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
 
           if (victim != this) {
             lunge(victim->curr_at);
-          }
-
-          //
-          // An attempt at an attack counts
-          //
-          if (victim->wake("missed, but should still wake")) {
-            victim->add_enemy(this);
           }
 
           //

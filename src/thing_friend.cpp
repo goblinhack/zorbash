@@ -35,12 +35,16 @@ void Thing::add_friend(Thingp f)
 {
   TRACE_NO_INDENT();
 
+  dbg("Add new friend: %s", f->to_string().c_str());
+
   aip()->thing_friends.insert(f->id);
 }
 
 void Thing::add_friend(Tpp f)
 {
   TRACE_NO_INDENT();
+
+  dbg("Add new perma friend: %s", f->to_string().c_str());
 
   aip()->perma_friends.insert(f->id);
 }

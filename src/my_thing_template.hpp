@@ -3169,12 +3169,13 @@ public:
   inline int gfx_pixelart_animated(void) const { return _gfx_pixelart_animated; }
 };
 
+std::vector< class Tp * > tp_find_wildcard(const std::string &name);
+std::vector< class Tp * > tp_find_wildcard(Levelp, point p, const std::string &name);
+
 class Tp *string2tp(const char **s);
 class Tp *string2tp(const std::string &s, int *len);
 class Tp *string2tp(const std::wstring &s, int *len);
 class Tp *tp_find(const std::string &name);
-class Tp *tp_find_wildcard(const std::string &name);
-class Tp *tp_find_wildcard(Levelp, point p, const std::string &name);
 class Tp *tp_find(uint32_t id);
 class Tp *tp_load(int id, const std::string &file, const std::string &long_name, const std::string &sh_name);
 class Tp *tp_random_ascend_dungeon(void);

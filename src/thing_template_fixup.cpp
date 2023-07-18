@@ -5,6 +5,7 @@
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_string.hpp"
+#include "my_template.hpp"
 #include "my_ui.hpp"
 
 void tp_fixup(void)
@@ -513,7 +514,8 @@ void tp_assign_allies(void)
   for (auto &tp : tp_id_map) {
     auto allies = tp->is_allied_with();
     for (auto ally : split_tokens(allies, ',')) {
-      auto tp2 = tp_find_wildcard(ally);
+      auto tp_cands = tp_find_wildcard(ally);
+      auto tp2      = pcg_one_of(tp_cands);
       if (! tp2) {
         DIE("Tp %s ally not found: %s", tp->name().c_str(), ally.c_str());
       }

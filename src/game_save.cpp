@@ -256,6 +256,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingAip & > const my)
   out << bits(my.t->can_see_currently.can_see);
   out << bits(my.t->can_see_ever.can_see);
   out << bits(my.t->thing_enemies);
+  out << bits(my.t->thing_attackers);
   out << bits(my.t->perma_enemies);
   out << bits(my.t->thing_friends);
   out << bits(my.t->perma_friends);

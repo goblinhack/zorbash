@@ -8,6 +8,7 @@
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_string.hpp"
+#include "my_template.hpp"
 #include "my_thing.hpp"
 
 Thingp Level::thing_new(Tpp tp, const point at, Thingp owner)
@@ -31,7 +32,8 @@ Thingp Level::thing_new(const std::string &name, const point at, Thingp owner)
   // Find a thing appropriate for the level and position (if it is something like "random_monst_class_A")
   // Else just find the named thing.
   //
-  auto tp = tp_find_wildcard(this, at, name);
+  auto cands = tp_find_wildcard(this, at, name);
+  auto tp    = pcg_one_of(cands);
   if (! tp) {
     err("Could not create thing '%s'", name.c_str());
     return nullptr;
@@ -106,7 +108,8 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
     DIE("Thing template cannot be created: No name given");
   }
 
-  const auto tpp = tp_find_wildcard(name_in);
+  auto cands = tp_find_wildcard(name_in);
+  auto tpp   = pcg_one_of(cands);
   if (unlikely(! tpp)) {
     ERR("Thing template [%s] not found", name_in.c_str());
     return;

@@ -568,6 +568,7 @@ public:
   bool inventory_shortcuts_remove(Thingp what, DropOptions);
   bool inventory_shortcuts_remove(Thingp what, Thingp target, DropOptions);
   bool is_adjacent(const Thingp);
+  bool is_attacker(Thingp it);
   bool is_blocking_terrain(const Thingp it);
   bool is_bloodied(void);
   bool is_carrying_an_item(void);
@@ -2634,6 +2635,7 @@ public:
   void achieve_goals_in_death(void);
   void achieve_goals_in_life(void);
   void acid_tick(void);
+  void add_attacker(Thingp attacker, bool is_recursing = false);
   void add_avoid(Thingp attacker);
   void add_enemy(Thingp attacker, bool is_recursing = false);
   void add_enemy(Tpp attacker);
@@ -2647,6 +2649,7 @@ public:
   void ai_log(const std::string &msg, Thingp it);
   void animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool *next_frame_please);
   void animate(void);
+  void attackers_tick(void);
   void avoid_tick(void);
   void awake(void);
   void barrel_tick(void);

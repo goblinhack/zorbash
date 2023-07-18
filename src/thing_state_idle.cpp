@@ -53,8 +53,10 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
   if (threat) {
     if (is_dangerous(threat)) {
       AI_LOG("A dangerous threat is near", threat);
+    } else if (is_attacker(threat)) {
+      AI_LOG("An attacker is near", threat);
     } else if (is_enemy(threat)) {
-      AI_LOG("An enemy threat is near", threat);
+      AI_LOG("An enemy is near", threat);
     } else if (is_to_be_avoided(threat)) {
       AI_LOG("An avoid threat is near", threat);
     } else {
@@ -65,7 +67,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
   //
   // Look for doors or things to collect, if not being attacked.
   //
-  if (threat && (is_dangerous(threat) || is_enemy(threat) || is_to_be_avoided(threat))) {
+  if (threat && (is_dangerous(threat) || is_attacker(threat) || is_enemy(threat) || is_to_be_avoided(threat))) {
     //
     // If not too close to the thread we can try and do something else like pick up a weapon.
     //

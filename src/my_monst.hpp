@@ -358,13 +358,14 @@ public:
 
   point wander_dest {0, 0};
 
-  std::set< TpId >    perma_enemies {};      // List of thing types that wronged us
-  std::set< TpId >    perma_friends {};      // List of friends
-  std::set< ThingId > thing_friends {};      // List of friends
-                                             //
-  std::map< ThingId, int > thing_enemies {}; // List of things that wronged us
-  std::map< ThingId, int > avoid {};         // List of things that wronged us and need to be avoided
-  std::map< ThingId, int > goal_penalty {};  // Helps to avoid goal oscillation
+  std::set< TpId >    perma_enemies {};        // List of thing types that wronged us
+  std::set< TpId >    perma_friends {};        // List of friends
+  std::set< ThingId > thing_friends {};        // List of friends
+                                               //
+  std::map< ThingId, int > thing_enemies {};   // List of things that we want to attack
+  std::map< ThingId, int > thing_attackers {}; // List of things that attacked us
+  std::map< ThingId, int > avoid {};           // List of things that wronged us and need to be avoided
+  std::map< ThingId, int > goal_penalty {};    // Helps to avoid goal oscillation
 
   std::vector< point > move_path;
 

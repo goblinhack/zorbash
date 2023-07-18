@@ -280,6 +280,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingAip & > my)
   in >> bits(my.t->can_see_currently.can_see);
   in >> bits(my.t->can_see_ever.can_see);
   in >> bits(my.t->thing_enemies);
+  in >> bits(my.t->thing_attackers);
   in >> bits(my.t->perma_enemies);
   in >> bits(my.t->thing_friends);
   in >> bits(my.t->perma_friends);

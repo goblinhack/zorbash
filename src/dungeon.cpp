@@ -1,6 +1,5 @@
 //
 // Copyright Neil McGill, goblinhack@gmail.com
-// See the LICENSE file for license.
 //
 
 #include "my_array_bounds_check.hpp"

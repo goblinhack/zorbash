@@ -150,6 +150,14 @@ void Thing::achieve_goals_in_life(void)
   }
 
   //
+  // Timeout attackers
+  //
+  attackers_tick();
+  if (is_dead) {
+    return;
+  }
+
+  //
   // Timeout goals
   //
   goal_penalty_tick();

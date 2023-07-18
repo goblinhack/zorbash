@@ -2035,7 +2035,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   // In player robot mode we want to keep track of enemies also
   //
-  add_enemy(real_hitter);
+  add_attacker(real_hitter);
 
   //
   // If sufficiently far away, the hitter message might be hard to associate
