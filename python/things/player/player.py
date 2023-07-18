@@ -300,7 +300,6 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.nutrition_dice(self, "2d10")
     my.on_born_do(self, "player.on_born()")
     my.on_death_do(self, "player.on_death()")
-    my.on_death_drop_all_items(self, True)
     my.on_fall_begin_do(self, "player.on_fall_begin()")
     my.on_hit_and_still_alive_do(self, "player.on_hit_and_still_alive()")
     my.on_move_do(self, "player.on_move()")
