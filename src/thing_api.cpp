@@ -820,15 +820,15 @@ int Thing::is_unused_flag124(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag124());
 }
-int Thing::is_unused_flag125(void)
+int Thing::is_dry_fungus(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag125());
+  return (tp()->is_dry_fungus());
 }
-int Thing::is_unused_flag126(void)
+int Thing::is_wet_fungus(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag126());
+  return (tp()->is_wet_fungus());
 }
 int Thing::is_always_activated(void)
 {

@@ -314,6 +314,7 @@ PyObject *thing_is_dir_tr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dir_up(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_door(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_droppable(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_dry_fungus(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dry_grass(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dry_grass_trampled(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_duck(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -565,8 +566,6 @@ PyObject *thing_is_unused_flag121(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag122(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag123(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag124(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag125(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag126(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag12(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag13(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag142(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -678,6 +677,7 @@ PyObject *thing_is_wall_dungeon(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *thing_is_wall(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_weapon(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_wet_fungus(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_wet_grass(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_wet_grass_trampled(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_wooden(PyObject *obj, PyObject *args, PyObject *keywds);

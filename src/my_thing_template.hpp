@@ -409,6 +409,7 @@ private:
   int _is_dirt {};
   int _is_door {};
   int _is_droppable {};
+  int _is_dry_fungus {};
   int _is_dry_grass {};
   int _is_dry_grass_trampled {};
   int _is_duck {};
@@ -667,8 +668,6 @@ private:
   int _is_unused_flag122 {};
   int _is_unused_flag123 {};
   int _is_unused_flag124 {};
-  int _is_unused_flag125 {};
-  int _is_unused_flag126 {};
   int _is_unused_flag13 {};
   int _is_unused_flag14 {};
   int _is_unused_flag142 {};
@@ -779,6 +778,7 @@ private:
   int _is_weapon_class_A {};
   int _is_weapon_class_B {};
   int _is_weapon_class_C {};
+  int _is_wet_fungus {};
   int _is_wet_grass {};
   int _is_wet_grass_trampled {};
   int _is_wooden {};
@@ -1752,6 +1752,7 @@ public:
   int is_dirt(void) const;
   int is_door(void) const;
   int is_droppable(void) const;
+  int is_dry_fungus(void) const;
   int is_dry_grass_trampled(void) const;
   int is_dry_grass(void) const;
   int is_duck(void) const;
@@ -2007,8 +2008,6 @@ public:
   int is_unused_flag122(void) const;
   int is_unused_flag123(void) const;
   int is_unused_flag124(void) const;
-  int is_unused_flag125(void) const;
-  int is_unused_flag126(void) const;
   int is_unused_flag12(void) const;
   int is_unused_flag13(void) const;
   int is_unused_flag142(void) const;
@@ -2121,6 +2120,7 @@ public:
   int is_weapon_class_B(void) const;
   int is_weapon_class_C(void) const;
   int is_weapon(void) const;
+  int is_wet_fungus(void) const;
   int is_wet_grass_trampled(void) const;
   int is_wet_grass(void) const;
   int is_wooden(void) const;
@@ -2514,6 +2514,7 @@ public:
   void is_dirt_set(int v);
   void is_door_set(int v);
   void is_droppable_set(int v);
+  void is_dry_fungus_set(int v);
   void is_dry_grass_set(int v);
   void is_dry_grass_trampled_set(int v);
   void is_duck_set(int v);
@@ -2769,8 +2770,6 @@ public:
   void is_unused_flag122_set(int v);
   void is_unused_flag123_set(int v);
   void is_unused_flag124_set(int v);
-  void is_unused_flag125_set(int v);
-  void is_unused_flag126_set(int v);
   void is_unused_flag12_set(int v);
   void is_unused_flag13_set(int v);
   void is_unused_flag142_set(int v);
@@ -2883,6 +2882,7 @@ public:
   void is_weapon_class_B_set(int v);
   void is_weapon_class_C_set(int v);
   void is_weapon_set(int v);
+  void is_wet_fungus_set(int v);
   void is_wet_grass_set(int v);
   void is_wet_grass_trampled_set(int v);
   void is_wooden_set(int v);

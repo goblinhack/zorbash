@@ -500,6 +500,7 @@ int Tp::is_destroyed_on_hitting(void) const { return _is_destroyed_on_hitting; }
 int Tp::is_dirt(void) const { return _is_dirt; }
 int Tp::is_door(void) const { return _is_door; }
 int Tp::is_droppable(void) const { return _is_droppable; }
+int Tp::is_dry_fungus(void) const { return _is_dry_fungus; }
 int Tp::is_dry_grass_trampled(void) const { return _is_dry_grass_trampled; }
 int Tp::is_dry_grass(void) const { return _is_dry_grass; }
 int Tp::is_duck(void) const { return _is_duck; }
@@ -755,8 +756,6 @@ int Tp::is_unused_flag121(void) const { return _is_unused_flag121; }
 int Tp::is_unused_flag122(void) const { return _is_unused_flag122; }
 int Tp::is_unused_flag123(void) const { return _is_unused_flag123; }
 int Tp::is_unused_flag124(void) const { return _is_unused_flag124; }
-int Tp::is_unused_flag125(void) const { return _is_unused_flag125; }
-int Tp::is_unused_flag126(void) const { return _is_unused_flag126; }
 int Tp::is_unused_flag12(void) const { return _is_unused_flag12; }
 int Tp::is_unused_flag13(void) const { return _is_unused_flag13; }
 int Tp::is_unused_flag142(void) const { return _is_unused_flag142; }
@@ -869,6 +868,7 @@ int Tp::is_weapon_class_A(void) const { return _is_weapon_class_A; }
 int Tp::is_weapon_class_B(void) const { return _is_weapon_class_B; }
 int Tp::is_weapon_class_C(void) const { return _is_weapon_class_C; }
 int Tp::is_weapon(void) const { return _is_weapon; }
+int Tp::is_wet_fungus(void) const { return _is_wet_fungus; }
 int Tp::is_wet_grass_trampled(void) const { return _is_wet_grass_trampled; }
 int Tp::is_wet_grass(void) const { return _is_wet_grass; }
 int Tp::is_wooden(void) const { return _is_wooden; }
@@ -1262,6 +1262,7 @@ void Tp::is_destroyed_on_hitting_set(int v) { _is_destroyed_on_hitting = v; }
 void Tp::is_dirt_set(int v) { _is_dirt = v; }
 void Tp::is_door_set(int v) { _is_door = v; }
 void Tp::is_droppable_set(int v) { _is_droppable = v; }
+void Tp::is_dry_fungus_set(int v) { _is_dry_fungus = v; }
 void Tp::is_dry_grass_set(int v) { _is_dry_grass = v; }
 void Tp::is_dry_grass_trampled_set(int v) { _is_dry_grass_trampled = v; }
 void Tp::is_duck_set(int v) { _is_duck = v; }
@@ -1517,8 +1518,6 @@ void Tp::is_unused_flag121_set(int v) { _is_unused_flag121 = v; }
 void Tp::is_unused_flag122_set(int v) { _is_unused_flag122 = v; }
 void Tp::is_unused_flag123_set(int v) { _is_unused_flag123 = v; }
 void Tp::is_unused_flag124_set(int v) { _is_unused_flag124 = v; }
-void Tp::is_unused_flag125_set(int v) { _is_unused_flag125 = v; }
-void Tp::is_unused_flag126_set(int v) { _is_unused_flag126 = v; }
 void Tp::is_unused_flag12_set(int v) { _is_unused_flag12 = v; }
 void Tp::is_unused_flag13_set(int v) { _is_unused_flag13 = v; }
 void Tp::is_unused_flag142_set(int v) { _is_unused_flag142 = v; }
@@ -1631,6 +1630,7 @@ void Tp::is_weapon_class_A_set(int v) { _is_weapon_class_A = v; }
 void Tp::is_weapon_class_B_set(int v) { _is_weapon_class_B = v; }
 void Tp::is_weapon_class_C_set(int v) { _is_weapon_class_C = v; }
 void Tp::is_weapon_set(int v) { _is_weapon = v; }
+void Tp::is_wet_fungus_set(int v) { _is_wet_fungus = v; }
 void Tp::is_wet_grass_set(int v) { _is_wet_grass = v; }
 void Tp::is_wet_grass_trampled_set(int v) { _is_wet_grass_trampled = v; }
 void Tp::is_wooden_set(int v) { _is_wooden = v; }

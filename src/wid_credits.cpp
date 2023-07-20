@@ -174,6 +174,7 @@ void Game::wid_credits_select(void)
   wid_credits_window->log("Oryx https://www.oryxdesignlab.com/");
   wid_credits_window->log("Henry Software https://henrysoftware.itch.io/");
   wid_credits_window->log("DeepDiveGameStudio https://deepdivegamestudio.itch.io/");
+  wid_credits_window->log("Mushrooms https://ssugmi.itch.io/fantasy-mushroom-pack");
   wid_credits_window->log("C.E.McGill");
   wid_credits_window->log("Neil McGill (goblinhack@gmail.com)");
   wid_credits_window->log(UI_LOGGING_EMPTY_LINE);

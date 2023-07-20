@@ -1526,6 +1526,7 @@ public:
   int is_dirt(void);
   int is_door(void);
   int is_droppable(void);
+  int is_dry_fungus(void);
   int is_dry_grass_trampled(void);
   int is_dry_grass(void);
   int is_duck(void);
@@ -1782,8 +1783,6 @@ public:
   int is_unused_flag122(void);
   int is_unused_flag123(void);
   int is_unused_flag124(void);
-  int is_unused_flag125(void);
-  int is_unused_flag126(void);
   int is_unused_flag12(void);
   int is_unused_flag13(void);
   int is_unused_flag142(void);
@@ -1897,6 +1896,7 @@ public:
   int is_weapon_class_B(void);
   int is_weapon_class_C(void);
   int is_weapon(void);
+  int is_wet_fungus(void);
   int is_wet_grass_trampled(void);
   int is_wet_grass(void);
   int is_wooden(void);

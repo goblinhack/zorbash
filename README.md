@@ -1,6 +1,10 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- when stuck in rock how to show?                                                                                                              -->
+<!-- skill offensive/defensive                                                                                                                    -->
+<!-- wet_fungus                                                                                                                                   -->
+<!-- fireball should ignite dry grass                                                                                                             -->
+<!-- - wort food ? wet_fungus foods and some poisonous?                                                                                           -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -27,7 +31,6 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - wort food ? fungus foods and some poisonous?                                                                                               -->
 <!-- - stealth                                                                                                                                    -->
 <!-- - cracked walls                                                                                                                              -->
 <!-- - paralysis dart                                                                                                                             -->
@@ -527,6 +530,7 @@ Sound effects
 - Monster death by Michel88 [found here](https://freesound.org/people/Michel88/)
 - Monster epic death [found here](https://freesound.org/people/Syna-Max/sounds/56304/)
 - Monster sound [found here](https://freesound.org/people/NicknameLarry/)
+- Mushrooms [found here](https://ssugmi.itch.io/fantasy-mushroom-pack)
 - Power up by GameAudio [found here](https://freesound.org/people/GameAudio/)
 - Pressure plate by Proolsen [found here](https://freesound.org/people/proolsen/sounds/466272/)
 - Rat growl by qubodup [found here](https://freesound.org/people/qubodup/)
