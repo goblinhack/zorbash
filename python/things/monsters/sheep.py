@@ -89,6 +89,7 @@ def tp_init(name, text_long_name):
     my.is_described_when_hovering_over(self, True)
     my.is_eater_of_foliage(self, True)
     my.is_eater_of_food(self, True)
+    my.is_eater_of_fungus(self, True)
     my.is_eater_of_grass(self, True)
     my.is_eater_of_plants(self, True)
     my.is_eater_of_red_blood(self, True)

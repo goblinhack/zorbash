@@ -1448,8 +1448,16 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           msg("%%fg=red$%s CRITS you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
               dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_POISON ]) {
-          msg("%%fg=yellow$%s's fangs poisons you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(),
-              damage, dmg_type.c_str());
+          if (real_hitter->is_fungus()) {
+            msg("%%fg=yellow$%s's toxins poisons you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(),
+                damage, dmg_type.c_str());
+          } else if (real_hitter->is_monst()) {
+            msg("%%fg=yellow$%s's fangs poisons you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(),
+                damage, dmg_type.c_str());
+          } else {
+            msg("%%fg=yellow$%s's poisons you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
+                dmg_type.c_str());
+          }
         } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
           msg("%%fg=limegreen$%s's withering touch rots your skin!%%fg=reset$", real_hitter->text_The().c_str());
         } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
@@ -2246,7 +2254,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     // engulfer maybe not.
     //
     if (is_engulfer()) {
-      if (real_hitter->can_eat(this)) { real_hitter->consume(this); }
+      if (real_hitter->can_eat(this)) { real_hitter->eat(this); }
     }
   } else {
     dbg("Is hit by (%s) %u damage, health now %d/%d", real_hitter->to_short_string().c_str(), damage, health(),

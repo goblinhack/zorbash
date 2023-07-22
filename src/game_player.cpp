@@ -83,6 +83,7 @@ void Game::place_player(void)
         }
       }
       if (1) {
+        // auto w = level->thing_new("bacon", point(x, y));
         auto w = level->thing_new("pottedmeat", point(x, y));
         t->carry(w, carry_options);
       }
@@ -192,6 +193,12 @@ void Game::place_player(void)
         level->thing_new("trap_pressure_plate_gas", point(x - 2, y));
         level->thing_new("rat_large", point(x + 1, y + 3));
         level->thing_new("trap_monster", point(x - 2, y));
+      }
+      if (0) {
+        level->thing_new("fungus_edible_1", point(x - 1, y));
+        level->thing_new("fungus_withered_1", point(x + 3, y));
+        auto f = level->thing_new("fungus_poison_1", point(x - 2, y));
+        t->carry(f, carry_options);
       }
       if (0) {
         level->thing_new("lava_ant", point(x - 2, y));

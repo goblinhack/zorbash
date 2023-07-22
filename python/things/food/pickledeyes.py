@@ -41,7 +41,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_organic(self, True)
     my.is_throwable(self, True)
     my.is_thrown_as_a_weapon(self, True)
-    my.is_usable(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.noise_on_dropping(self, 15)

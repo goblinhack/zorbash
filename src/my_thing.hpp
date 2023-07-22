@@ -523,7 +523,6 @@ public:
   bool collision_find_best_target(ThingAttackOptionsp);
   bool collision_obstacle(point);
   bool collision_obstacle(Thingp);
-  bool consume(Thingp it);
   bool coords_get(point &blit_tl, point &blit_br, point &pre_blit_tl, point &pre_blit_br, Tilep &tile, bool refl);
   bool d20_ge(int stat_total, int dice_roll_to_exceed);
   bool debuff_add_if_not_found(Tpp what);

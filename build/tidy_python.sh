@@ -23,6 +23,7 @@ for i in \
   dungeon \
   effects \
   food \
+  fungus \
   gauntlets \
   internal \
   items \
@@ -57,6 +58,7 @@ for IN in \
   dungeon/*py \
   effects/*py \
   food/*py \
+  fungus/*py \
   gauntlets/*py \
   internal/*py \
   items/*py \

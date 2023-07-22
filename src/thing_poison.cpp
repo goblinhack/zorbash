@@ -49,6 +49,7 @@ void Thing::poison_tick(void)
       }
     }
 
+    dbg("Poison level changed %d->%d", poison, new_poison);
     poisoned_amount_set(new_poison);
 
     if (! new_poison) { poison_reason_set(""); }
@@ -88,6 +89,7 @@ int Thing::poisoned_amount_set(int v)
   new_infop();
   auto n = (infop()->poison = v);
   if (infop()->poison < 0) { infop()->poison = 0; }
+  dbg("Poison level set: %d", infop()->poison);
   return n;
 }
 
@@ -97,6 +99,7 @@ int Thing::poisoned_amount_decr(int v)
   new_infop();
   auto n = (infop()->poison -= v);
   if (infop()->poison < 0) { infop()->poison = 0; }
+  dbg("Poison level decr, set: %d", infop()->poison);
   return n;
 }
 
@@ -106,6 +109,7 @@ int Thing::poisoned_amount_incr(int v)
   new_infop();
   auto n = (infop()->poison += v);
   if (infop()->poison < 0) { infop()->poison = 0; }
+  dbg("Poison level incr, set: %d", infop()->poison);
   return n;
 }
 
@@ -115,6 +119,7 @@ int Thing::poisoned_amount_decr(void)
   new_infop();
   auto n = (infop()->poison--);
   if (infop()->poison < 0) { infop()->poison = 0; }
+  dbg("Poison level decr, set: %d", infop()->poison);
   return n;
 }
 
@@ -123,6 +128,7 @@ int Thing::poisoned_amount_incr(void)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->poison++);
+  dbg("Poison level incr, set: %d", infop()->poison);
   return n;
 }
 

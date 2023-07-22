@@ -20,6 +20,7 @@ bool Thing::is_edible(Thingp itp)
   if (is_eater_of_slime() && itp->is_slime()) return true;
   if (is_eater_of_magical_items() && itp->is_magical()) return true;
   if (is_eater_of_meat() && itp->is_meat()) return true;
+  if (is_eater_of_fungus() && itp->is_fungus()) return true;
   if (is_eater_of_plants() && itp->is_plant()) return true;
   if (is_eater_of_foliage() && itp->is_foliage()) return true;
   if (is_eater_of_grass() && itp->is_grass()) return true;
@@ -45,6 +46,7 @@ bool Tp::is_edible(Thingp itp)
   if (is_eater_of_slime() && itp->is_slime()) return true;
   if (is_eater_of_magical_items() && itp->is_magical()) return true;
   if (is_eater_of_meat() && itp->is_meat()) return true;
+  if (is_eater_of_fungus() && itp->is_fungus()) return true;
   if (is_eater_of_plants() && itp->is_plant()) return true;
   if (is_eater_of_foliage() && itp->is_foliage()) return true;
   if (is_eater_of_grass() && itp->is_grass()) return true;
@@ -86,61 +88,7 @@ bool Tp::can_eat(const Thingp itp)
   return false;
 }
 
-//
-// Try to eat
-//
 bool Thing::eat(Thingp victim)
-{
-  TRACE_NO_INDENT();
-
-  verify(MTYPE_THING, victim);
-  if (! victim) {
-    err("Cannot eat null thing");
-    return false;
-  }
-
-  dbg("Eat %s", victim->to_short_string().c_str());
-  TRACE_AND_INDENT();
-
-  //
-  // Does the attacker feast on success?
-  //
-  if (is_player()) {
-    int got_health_boost = health_boost(victim, victim->nutrition_get());
-    int got_hunger_boost = hunger_boost(victim->nutrition_get());
-
-    if (got_health_boost) {
-      if (got_health_boost < 10) {
-        msg("You munch %s for a measly %d additional health.", victim->text_the().c_str(), got_health_boost);
-      } else {
-        msg("You munch %s for %d additional health.", victim->text_the().c_str(), got_health_boost);
-      }
-    } else if (got_hunger_boost) {
-      if (got_hunger_boost < 10) {
-        msg("You eat %s and feel a tiny bit less hungry.", victim->text_the().c_str());
-      } else {
-        msg("You eat %s and feel less hungry.", victim->text_the().c_str());
-      }
-    } else {
-      msg("You eat %s.", victim->text_the().c_str());
-    }
-
-    return true;
-  }
-
-  if (attack_eater()) {
-    if (is_edible(victim)) {
-      //
-      // If still alive, need to kill it first.
-      //
-      if (victim->is_alive_monst() || victim->is_player()) { return nat_att(victim); }
-      return consume(victim);
-    }
-  }
-  return false;
-}
-
-bool Thing::consume(Thingp victim)
 {
   TRACE_NO_INDENT();
 
@@ -153,19 +101,32 @@ bool Thing::consume(Thingp victim)
   dbg("Consume %s", victim->to_short_string().c_str());
   TRACE_AND_INDENT();
 
+  auto nutr   = victim->nutrition_get();
+  auto poison = victim->dmg_poison();
+
   //
   // Does the attacker feast on success?
   //
   if (is_player()) {
-    int got_health_boost = health_boost(victim, victim->nutrition_get());
-    int got_hunger_boost = hunger_boost(victim->nutrition_get());
+    int got_health_boost = health_boost(victim, nutr);
+    int got_hunger_boost = hunger_boost(nutr);
 
-    if (got_health_boost) {
-      msg("You munch %s for %d additional health.", victim->text_the().c_str(), got_health_boost);
-    } else if (got_hunger_boost) {
-      msg("You eat %s and feel less hungry.", victim->text_the().c_str());
+    if (poison) {
+      //
+      // Poisoned food?
+      //
+      if (! is_immune_to_poison()) {
+        poisoned_amount_incr(poison);
+        msg("You eat %s and feel queasy.", victim->text_the().c_str());
+      }
     } else {
-      msg("You eat %s.", victim->text_the().c_str());
+      if (got_health_boost) {
+        msg("You munch %s for %d additional health.", victim->text_the().c_str(), got_health_boost);
+      } else if (got_hunger_boost) {
+        msg("You eat %s and feel less hungry.", victim->text_the().c_str());
+      } else {
+        msg("You eat %s.", victim->text_the().c_str());
+      }
     }
 
     return true;
@@ -176,7 +137,6 @@ bool Thing::consume(Thingp victim)
     // Allow monsters to eat things in bite sized chunks so the food does not vanish too fast.
     //
     auto bite = consume_per_bite_amount();
-    auto nutr = victim->nutrition_get();
 
     if (bite < nutr) {
       //
@@ -194,55 +154,53 @@ bool Thing::consume(Thingp victim)
 
       dbg("Is eating %s", victim->to_short_string().c_str());
 
-      if (! is_player()) {
-        if (distance_to_player() < DMAP_IS_PASSABLE) {
-          if (victim->is_meat()) {
-            level->thing_new(tp_random_red_splatter()->name(), curr_at);
-          } else if (victim->is_red_blooded()) {
-            level->thing_new(tp_random_green_splatter()->name(), curr_at);
-          } else if (victim->is_green_blooded()) {
-            level->thing_new(tp_random_green_splatter()->name(), curr_at);
-          }
+      if (distance_to_player() < DMAP_IS_PASSABLE) {
+        if (victim->is_meat()) {
+          level->thing_new(tp_random_red_splatter()->name(), curr_at);
+        } else if (victim->is_red_blooded()) {
+          level->thing_new(tp_random_green_splatter()->name(), curr_at);
+        } else if (victim->is_green_blooded()) {
+          level->thing_new(tp_random_green_splatter()->name(), curr_at);
+        }
 
-          if (victim->is_visible_to_player) {
-            if (victim->is_player()) {
-              if (victim->is_dead || victim->is_dying) {
-                if (victim->is_burnt) {
-                  msg("%%fg=red$%s tears a chunk from your toasted corpse!%%fg=reset$", text_The().c_str());
-                } else if (victim->is_frozen) {
-                  msg("%%fg=red$%s tears a chunk from your frozen corpse!%%fg=reset$", text_The().c_str());
-                } else {
-                  msg("%%fg=red$%s tears a chunk from from your corpse!%%fg=reset$", text_The().c_str());
-                }
+        if (victim->is_visible_to_player) {
+          if (victim->is_player()) {
+            if (victim->is_dead || victim->is_dying) {
+              if (victim->is_burnt) {
+                msg("%%fg=red$%s tears a chunk from your toasted corpse!%%fg=reset$", text_The().c_str());
+              } else if (victim->is_frozen) {
+                msg("%%fg=red$%s tears a chunk from your frozen corpse!%%fg=reset$", text_The().c_str());
               } else {
-                msg("%%fg=orange$%s is eating you!%%fg=reset$", text_The().c_str());
-              }
-            } else if (victim->is_monst() || victim->is_player()) {
-              if (victim->is_dead || victim->is_dying) {
-                if (victim->is_burnt) {
-                  msg("%s feasts on the toasted corpse of %s!", text_The().c_str(), victim->text_the().c_str());
-                } else if (victim->is_frozen) {
-                  msg("%s feasts on the frozen corpse of %s!", text_The().c_str(), victim->text_the().c_str());
-                } else {
-                  msg("%s feasts on the corpse of %s!", text_The().c_str(), victim->text_the().c_str());
-                }
-              } else {
-                msg("%s is eating %s!", text_The().c_str(), victim->text_the().c_str());
-              }
-            } else if (victim->is_blood()) {
-              if (is_humanoid()) {
-                msg("%s laps up %s.", text_The().c_str(), victim->text_the().c_str());
-              } else {
-                msg("%s slurps at %s.", text_The().c_str(), victim->text_the().c_str());
+                msg("%%fg=red$%s tears a chunk from from your corpse!%%fg=reset$", text_The().c_str());
               }
             } else {
-              if (bite <= 3) {
-                msg("%s nibbles on %s.", text_The().c_str(), victim->text_the().c_str());
-              } else if (bite <= 10) {
-                msg("%s munches on %s.", text_The().c_str(), victim->text_the().c_str());
+              msg("%%fg=orange$%s is eating you!%%fg=reset$", text_The().c_str());
+            }
+          } else if (victim->is_monst() || victim->is_player()) {
+            if (victim->is_dead || victim->is_dying) {
+              if (victim->is_burnt) {
+                msg("%s feasts on the toasted corpse of %s!", text_The().c_str(), victim->text_the().c_str());
+              } else if (victim->is_frozen) {
+                msg("%s feasts on the frozen corpse of %s!", text_The().c_str(), victim->text_the().c_str());
               } else {
-                msg("%s chomps on %s.", text_The().c_str(), victim->text_the().c_str());
+                msg("%s feasts on the corpse of %s!", text_The().c_str(), victim->text_the().c_str());
               }
+            } else {
+              msg("%s is eating %s!", text_The().c_str(), victim->text_the().c_str());
+            }
+          } else if (victim->is_blood()) {
+            if (is_humanoid()) {
+              msg("%s laps up %s.", text_The().c_str(), victim->text_the().c_str());
+            } else {
+              msg("%s slurps at %s.", text_The().c_str(), victim->text_the().c_str());
+            }
+          } else {
+            if (bite <= 3) {
+              msg("%s nibbles on %s.", text_The().c_str(), victim->text_the().c_str());
+            } else if (bite <= 10) {
+              msg("%s munches on %s.", text_The().c_str(), victim->text_the().c_str());
+            } else {
+              msg("%s chomps on %s.", text_The().c_str(), victim->text_the().c_str());
             }
           }
         }
@@ -310,6 +268,16 @@ bool Thing::consume(Thingp victim)
         }
       }
       victim->dead("by being eaten");
+    }
+
+    if (poison) {
+      //
+      // Poisoned food?
+      //
+      if (! is_immune_to_poison()) {
+        poisoned_amount_incr(poison);
+        msg("%s looks ill.", text_The().c_str());
+      }
     }
     return true;
   }
