@@ -545,9 +545,10 @@ int Tp::is_floor(void) const { return _is_floor; }
 int Tp::is_flying(void) const { return _is_flying; }
 int Tp::is_foliage(void) const { return _is_foliage; }
 int Tp::is_food(void) const { return _is_food; }
-int Tp::is_fungus_withered(void) const { return _is_fungus_withered; }
-int Tp::is_fungus_poison(void) const { return _is_fungus_poison; }
 int Tp::is_fungus_edible(void) const { return _is_fungus_edible; }
+int Tp::is_fungus_poison(void) const { return _is_fungus_poison; }
+int Tp::is_fungus(void) const { return _is_fungus; }
+int Tp::is_fungus_withered(void) const { return _is_fungus_withered; }
 int Tp::is_gas_blocker(void) const { return _is_gas_blocker; }
 int Tp::is_gauntlet(void) const { return _is_gauntlet; }
 int Tp::is_gelatinous(void) const { return _is_gelatinous; }
@@ -559,7 +560,6 @@ int Tp::is_golem(void) const { return _is_golem; }
 int Tp::is_grass_dry_trampled(void) const { return _is_grass_dry_trampled; }
 int Tp::is_grass_dry(void) const { return _is_grass_dry; }
 int Tp::is_grass(void) const { return _is_grass; }
-int Tp::is_fungus(void) const { return _is_fungus; }
 int Tp::is_grass_wet_trampled(void) const { return _is_grass_wet_trampled; }
 int Tp::is_grass_wet(void) const { return _is_grass_wet; }
 int Tp::is_green_blooded(void) const { return _is_green_blooded; }
@@ -1309,9 +1309,10 @@ void Tp::is_floor_set(int v) { _is_floor = v; }
 void Tp::is_flying_set(int v) { _is_flying = v; }
 void Tp::is_foliage_set(int v) { _is_foliage = v; }
 void Tp::is_food_set(int v) { _is_food = v; }
-void Tp::is_fungus_withered_set(int v) { _is_fungus_withered = v; }
-void Tp::is_fungus_poison_set(int v) { _is_fungus_poison = v; }
 void Tp::is_fungus_edible_set(int v) { _is_fungus_edible = v; }
+void Tp::is_fungus_poison_set(int v) { _is_fungus_poison = v; }
+void Tp::is_fungus_set(int v) { _is_fungus = v; }
+void Tp::is_fungus_withered_set(int v) { _is_fungus_withered = v; }
 void Tp::is_gas_blocker_set(int v) { _is_gas_blocker = v; }
 void Tp::is_gauntlet_set(int v) { _is_gauntlet = v; }
 void Tp::is_gelatinous_set(int v) { _is_gelatinous = v; }
@@ -1323,7 +1324,6 @@ void Tp::is_golem_set(int v) { _is_golem = v; }
 void Tp::is_grass_dry_set(int v) { _is_grass_dry = v; }
 void Tp::is_grass_dry_trampled_set(int v) { _is_grass_dry_trampled = v; }
 void Tp::is_grass_set(int v) { _is_grass = v; }
-void Tp::is_fungus_set(int v) { _is_fungus = v; }
 void Tp::is_grass_wet_set(int v) { _is_grass_wet = v; }
 void Tp::is_grass_wet_trampled_set(int v) { _is_grass_wet_trampled = v; }
 void Tp::is_green_blooded_set(int v) { _is_green_blooded = v; }

@@ -1577,6 +1577,7 @@ public:
   int is_frozen_check(void);
   int is_fungus_edible(void);
   int is_fungus_poison(void);
+  int is_fungus(void);
   int is_fungus_withered(void);
   int is_gas_blocker(void);
   int is_gauntlet(void);
@@ -1589,7 +1590,6 @@ public:
   int is_grass_dry_trampled(void);
   int is_grass_dry(void);
   int is_grass(void);
-  int is_fungus(void);
   int is_grass_wet_trampled(void);
   int is_grass_wet(void);
   int is_green_blooded(void);

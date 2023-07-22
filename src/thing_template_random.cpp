@@ -80,7 +80,6 @@ void tp_random_init(void)
 {
   TRACE_NO_INDENT();
   for (auto &tp : tp_id_map) {
-    // begin sort marker2 {
     if (tp->is_ascend_dungeon()) {
       tp_ascend_dungeon.push_back(tp);
     }
@@ -192,7 +191,6 @@ void tp_random_init(void)
     if (tp->is_trap()) {
       tp_trap.push_back(tp);
     }
-    // end sort marker2 }
 
     if (tp->is_ripple()) {
       if (tp->thing_size() < THING_SIZE_NORMAL) {
@@ -366,7 +364,6 @@ void tp_random_init(void)
     }
   }
 
-  // begin sort marker3 {
   if (tp_ascend_dungeon.empty()) {
     DIE("No things for type:tp_ascend_dungeon");
   }
@@ -556,7 +553,6 @@ void tp_random_init(void)
   if (tp_weapon.empty()) {
     DIE("No things for type:tp_weapon");
   }
-  // end sort marker3 }
 }
 
 Tpp tp_get_with_rarity_filter(Tpidmap &m)

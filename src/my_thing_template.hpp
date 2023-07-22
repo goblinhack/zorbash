@@ -2565,9 +2565,9 @@ public:
   void is_flying_set(int v);
   void is_foliage_set(int v);
   void is_food_set(int v);
-  void is_fungus_set(int v);
   void is_fungus_edible_set(int v);
   void is_fungus_poison_set(int v);
+  void is_fungus_set(int v);
   void is_fungus_withered_set(int v);
   void is_gas_blocker_set(int v);
   void is_gauntlet_set(int v);
