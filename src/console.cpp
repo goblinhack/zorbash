@@ -15,9 +15,7 @@ static inline void term_puts_fg(unsigned char a)
       "[30m", "[31m", "[32m", "[33m", "[34m", "[35m", "[36m", "[37m", "\033[m",
   };
 
-  if (a >= ARRAY_SIZE(data)) {
-    ERR("Overflow");
-  }
+  if (a >= ARRAY_SIZE(data)) { ERR("Overflow"); }
 
   fputs(data[ a ], stdout);
 }

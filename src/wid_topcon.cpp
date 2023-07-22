@@ -56,18 +56,12 @@ uint8_t wid_topcon_init(void)
 uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
 {
   TRACE_NO_INDENT();
-  if (! game) {
-    return false;
-  }
+  if (! game) { return false; }
 
   auto level = game->get_current_level();
-  if (! level) {
-    return false;
-  }
+  if (! level) { return false; }
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   if (sdlk_eq(*key, game->config.key_robot_mode)) {
     CON("INF: Pressed robot mode key");
@@ -366,13 +360,9 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   if (sdlk_eq(*key, game->config.key_eat)) {
     CON("INF: Pressed eat key");
     TRACE_AND_INDENT();
-    if (game->state == Game::STATE_CHOOSING_TARGET) {
-      game->change_state(Game::STATE_NORMAL, "key press");
-    }
+    if (game->state == Game::STATE_CHOOSING_TARGET) { game->change_state(Game::STATE_NORMAL, "key press"); }
 
-    if (game->state == Game::STATE_COLLECTING_ITEMS) {
-      return false;
-    }
+    if (game->state == Game::STATE_COLLECTING_ITEMS) { return false; }
     auto what = level->inventory_get();
     if (what) {
       if (player && player->can_eat(what)) {
@@ -433,9 +423,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     if (sdlk_eq(*key, game->config.key_use)) {
       CON("INF: Pressed use key");
       TRACE_AND_INDENT();
-      if (game->state == Game::STATE_CHOOSING_TARGET || game->state == Game::STATE_COLLECTING_ITEMS) {
-        return false;
-      }
+      if (game->state == Game::STATE_CHOOSING_TARGET || game->state == Game::STATE_COLLECTING_ITEMS) { return false; }
       auto what = level->inventory_get();
       if (what && player) {
         player->use(what);
@@ -449,13 +437,9 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     if (sdlk_eq(*key, game->config.key_throw)) {
       CON("INF: Pressed throw key");
       TRACE_AND_INDENT();
-      if (game->state == Game::STATE_CHOOSING_TARGET || game->state == Game::STATE_COLLECTING_ITEMS) {
-        return false;
-      }
+      if (game->state == Game::STATE_CHOOSING_TARGET || game->state == Game::STATE_COLLECTING_ITEMS) { return false; }
       auto what = level->inventory_get();
-      if (what && player) {
-        player->throw_item_choose_target(what);
-      }
+      if (what && player) { player->throw_item_choose_target(what); }
       return true;
     }
 
@@ -658,9 +642,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       level->inventory_chosen(9);
       wid_rightbar_init();
       auto what = level->inventory_get();
-      if (what) {
-        wid_inventory_select_requested(what);
-      }
+      if (what) { wid_inventory_select_requested(what); }
       return true;
     }
     if (sdlk_eq(*key, game->config.key_action1)) {
@@ -671,9 +653,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       level->inventory_chosen(0);
       wid_rightbar_init();
       auto what = level->inventory_get();
-      if (what) {
-        wid_inventory_select_requested(what);
-      }
+      if (what) { wid_inventory_select_requested(what); }
       return true;
     }
     if (sdlk_eq(*key, game->config.key_action2)) {
@@ -684,9 +664,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       level->inventory_chosen(1);
       wid_rightbar_init();
       auto what = level->inventory_get();
-      if (what) {
-        wid_inventory_select_requested(what);
-      }
+      if (what) { wid_inventory_select_requested(what); }
       return true;
     }
     if (sdlk_eq(*key, game->config.key_action3)) {
@@ -697,9 +675,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       level->inventory_chosen(2);
       wid_rightbar_init();
       auto what = level->inventory_get();
-      if (what) {
-        wid_inventory_select_requested(what);
-      }
+      if (what) { wid_inventory_select_requested(what); }
       return true;
     }
     if (sdlk_eq(*key, game->config.key_action4)) {
@@ -710,9 +686,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       level->inventory_chosen(3);
       wid_rightbar_init();
       auto what = level->inventory_get();
-      if (what) {
-        wid_inventory_select_requested(what);
-      }
+      if (what) { wid_inventory_select_requested(what); }
       return true;
     }
     if (sdlk_eq(*key, game->config.key_action5)) {
@@ -723,9 +697,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       level->inventory_chosen(4);
       wid_rightbar_init();
       auto what = level->inventory_get();
-      if (what) {
-        wid_inventory_select_requested(what);
-      }
+      if (what) { wid_inventory_select_requested(what); }
       return true;
     }
     if (sdlk_eq(*key, game->config.key_action6)) {
@@ -736,9 +708,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       level->inventory_chosen(5);
       wid_rightbar_init();
       auto what = level->inventory_get();
-      if (what) {
-        wid_inventory_select_requested(what);
-      }
+      if (what) { wid_inventory_select_requested(what); }
       return true;
     }
     if (sdlk_eq(*key, game->config.key_action7)) {
@@ -749,9 +719,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       level->inventory_chosen(6);
       wid_rightbar_init();
       auto what = level->inventory_get();
-      if (what) {
-        wid_inventory_select_requested(what);
-      }
+      if (what) { wid_inventory_select_requested(what); }
       return true;
     }
     if (sdlk_eq(*key, game->config.key_action8)) {
@@ -762,9 +730,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       level->inventory_chosen(7);
       wid_rightbar_init();
       auto what = level->inventory_get();
-      if (what) {
-        wid_inventory_select_requested(what);
-      }
+      if (what) { wid_inventory_select_requested(what); }
       return true;
     }
     if (sdlk_eq(*key, game->config.key_action9)) {
@@ -775,9 +741,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       level->inventory_chosen(8);
       wid_rightbar_init();
       auto what = level->inventory_get();
-      if (what) {
-        wid_inventory_select_requested(what);
-      }
+      if (what) { wid_inventory_select_requested(what); }
       return true;
     }
   }
@@ -791,9 +755,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // 7 8 9
     // 4   6
     // 1 2 3
-    if (! game->request_player_move) {
-      game->request_player_move = time_ms();
-    }
+    if (! game->request_player_move) { game->request_player_move = time_ms(); }
     game->request_player_move_left = true;
     game->request_player_move_down = true;
     return false; // To avoid click noise
@@ -802,9 +764,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // 7 8 9
     // 4   6
     // 1 2 3
-    if (! game->request_player_move) {
-      game->request_player_move = time_ms();
-    }
+    if (! game->request_player_move) { game->request_player_move = time_ms(); }
     game->request_player_move_down = true;
     return false; // To avoid click noise
   }
@@ -812,9 +772,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // 7 8 9
     // 4   6
     // 1 2 3
-    if (! game->request_player_move) {
-      game->request_player_move = time_ms();
-    }
+    if (! game->request_player_move) { game->request_player_move = time_ms(); }
     game->request_player_move_right = true;
     game->request_player_move_down  = true;
     return false; // To avoid click noise
@@ -823,9 +781,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // 7 8 9
     // 4   6
     // 1 2 3
-    if (! game->request_player_move) {
-      game->request_player_move = time_ms();
-    }
+    if (! game->request_player_move) { game->request_player_move = time_ms(); }
     game->request_player_move_left = true;
     return false; // To avoid click noise
   }
@@ -833,9 +789,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // 7 8 9
     // 4   6
     // 1 2 3
-    if (! game->request_player_move) {
-      game->request_player_move = time_ms();
-    }
+    if (! game->request_player_move) { game->request_player_move = time_ms(); }
     game->request_player_move_right = true;
     return false; // To avoid click noise
   }
@@ -843,9 +797,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // 7 8 9
     // 4   6
     // 1 2 3
-    if (! game->request_player_move) {
-      game->request_player_move = time_ms();
-    }
+    if (! game->request_player_move) { game->request_player_move = time_ms(); }
     game->request_player_move_left = true;
     game->request_player_move_up   = true;
     return false; // To avoid click noise
@@ -854,9 +806,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // 7 8 9
     // 4   6
     // 1 2 3
-    if (! game->request_player_move) {
-      game->request_player_move = time_ms();
-    }
+    if (! game->request_player_move) { game->request_player_move = time_ms(); }
     game->request_player_move_up = true;
     return false; // To avoid click noise
   }
@@ -864,9 +814,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // 7 8 9
     // 4   6
     // 1 2 3
-    if (! game->request_player_move) {
-      game->request_player_move = time_ms();
-    }
+    if (! game->request_player_move) { game->request_player_move = time_ms(); }
     game->request_player_move_right = true;
     game->request_player_move_up    = true;
     return false; // To avoid click noise
@@ -879,9 +827,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     //
     // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
     //
-    if (! game->request_player_move) {
-      game->request_player_move = time_ms();
-    }
+    if (! game->request_player_move) { game->request_player_move = time_ms(); }
     game->request_player_to_wait_or_collect = true;
     return false; // To avoid click noise
   }
@@ -889,9 +835,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     //
     // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
     //
-    if (! game->request_player_move) {
-      game->request_player_move = time_ms();
-    }
+    if (! game->request_player_move) { game->request_player_move = time_ms(); }
     game->request_player_move_left = true;
     return false; // To avoid click noise
   }
@@ -899,9 +843,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     //
     // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
     //
-    if (! game->request_player_move) {
-      game->request_player_move = time_ms();
-    }
+    if (! game->request_player_move) { game->request_player_move = time_ms(); }
     game->request_player_move_right = true;
     return false; // To avoid click noise
   }
@@ -909,9 +851,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     //
     // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
     //
-    if (! game->request_player_move) {
-      game->request_player_move = time_ms();
-    }
+    if (! game->request_player_move) { game->request_player_move = time_ms(); }
     game->request_player_move_up = true;
     return false; // To avoid click noise
   }
@@ -919,9 +859,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     //
     // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
     //
-    if (! game->request_player_move) {
-      game->request_player_move = time_ms();
-    }
+    if (! game->request_player_move) { game->request_player_move = time_ms(); }
     game->request_player_move_down = true;
     return false; // To avoid click noise
   }
@@ -935,9 +873,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
 static void wid_topcon_reset_scroll(void)
 {
   TRACE_NO_INDENT();
-  if (! wid_topcon_vert_scroll) {
-    return;
-  }
+  if (! wid_topcon_vert_scroll) { return; }
 
   wid_move_to_bottom(wid_topcon_vert_scroll);
 }
@@ -953,9 +889,7 @@ static void wid_topcon_scroll(Widp w, std::wstring str)
   // Get the wid on the bottom of the list/screen.
   //
   tmp = wid_get_head(w);
-  if (tmp) {
-    wid_set_text(tmp, str);
-  }
+  if (tmp) { wid_set_text(tmp, str); }
 }
 
 static void wid_topcon_replace(Widp w, std::wstring str)
@@ -967,9 +901,7 @@ static void wid_topcon_replace(Widp w, std::wstring str)
   // Get the wid on the bottom of the list/screen.
   //
   tmp = wid_get_head(w);
-  if (tmp) {
-    wid_set_text(tmp, str);
-  }
+  if (tmp) { wid_set_text(tmp, str); }
 }
 
 //
@@ -980,9 +912,7 @@ static void wid_topcon_log_(std::wstring s)
   TRACE_NO_INDENT();
   static int log_wid_topcon_buffered_lines;
 
-  if (! s.size()) {
-    return;
-  }
+  if (! s.size()) { return; }
 
   wid_topcon_reset_scroll();
 
@@ -992,9 +922,7 @@ static void wid_topcon_log_(std::wstring s)
   if (! wid_topcon_input_line) {
     auto result = wid_topcon_lines.insert(std::make_pair(log_wid_topcon_buffered_lines++, s));
 
-    if (! result.second) {
-      DIE("Wid topcon lines insert name [%s] failed", wstring_to_string(s).c_str());
-    }
+    if (! result.second) { DIE("Wid topcon lines insert name [%s] failed", wstring_to_string(s).c_str()); }
 
     return;
   }
@@ -1043,9 +971,7 @@ void wid_topcon_log(std::string s)
   TRACE_NO_INDENT();
   int chars_per_line = UI_TOPCON_WIDTH;
 
-  if (! TERM_WIDTH) {
-    DIE("No TERM_WIDTH set");
-  }
+  if (! TERM_WIDTH) { DIE("No TERM_WIDTH set"); }
 
   auto d = split(s, chars_per_line);
 
@@ -1081,9 +1007,7 @@ static void wid_topcon_wid_create(void)
   TRACE_NO_INDENT();
   int h = UI_TOPCON_VIS_HEIGHT;
 
-  if (wid_topcon_window) {
-    wid_topcon_fini();
-  }
+  if (wid_topcon_window) { wid_topcon_fini(); }
 
   TRACE_NO_INDENT();
   {
@@ -1134,9 +1058,7 @@ static void wid_topcon_wid_create(void)
       wid_set_prev(child, prev);
       prev = child;
 
-      if (row == 0) {
-        wid_topcon_input_line = child;
-      }
+      if (row == 0) { wid_topcon_input_line = child; }
 
       wid_set_color(child, WID_COLOR_TEXT_FG, UI_TOPCON_TEXT_COLOR);
       wid_set_color(child, WID_COLOR_BG, COLOR_NONE);
@@ -1157,9 +1079,7 @@ std::vector< std::wstring > wid_topcon_serialize(void)
   auto                        tmp = wid_get_head(wid_topcon_input_line);
   while (tmp) {
     auto s = wid_get_text(tmp);
-    if (s.size()) {
-      r.push_back(wid_get_text(tmp));
-    }
+    if (s.size()) { r.push_back(wid_get_text(tmp)); }
     tmp = wid_get_next(tmp);
   }
   std::reverse(r.begin(), r.end());
@@ -1171,8 +1091,6 @@ void wid_topcon_deserialize(std::vector< std::wstring > r)
   TRACE_NO_INDENT();
   for (const auto &s : r) {
     auto tmp = wstring_to_string(s);
-    if (tmp.size()) {
-      TOPCON("%s", tmp.c_str());
-    }
+    if (tmp.size()) { TOPCON("%s", tmp.c_str()); }
   }
 }

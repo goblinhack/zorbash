@@ -10,20 +10,14 @@
 
 void Thing::trap_tick(void)
 {
-  if (is_trap() || is_floating() || is_flying() || is_ethereal()) {
-    return;
-  }
+  if (is_trap() || is_floating() || is_flying() || is_ethereal()) { return; }
 
   //
   // Prevents bushes on traps setting them off
   //
-  if (! has_ever_moved) {
-    return;
-  }
+  if (! has_ever_moved) { return; }
 
-  if (! level->is_trap(curr_at.x, curr_at.y)) {
-    return;
-  }
+  if (! level->is_trap(curr_at.x, curr_at.y)) { return; }
 
   dbg("Trap tick");
   TRACE_AND_INDENT();
@@ -33,9 +27,7 @@ void Thing::trap_tick(void)
   //
   FOR_ALL_THINGS_THAT_INTERACT(level, it, curr_at.x, curr_at.y)
   {
-    if (it->is_trap()) {
-      it->on_activated(this);
-    }
+    if (it->is_trap()) { it->on_activated(this); }
   }
   FOR_ALL_THINGS_END()
 }
@@ -43,27 +35,21 @@ void Thing::trap_tick(void)
 uint8_t Level::is_trap(const point p)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(p.x, p.y))) {
-    return false;
-  }
+  if (unlikely(is_oob(p.x, p.y))) { return false; }
   return (get(_is_trap, p.x, p.y));
 }
 
 uint8_t Level::is_trap(const int x, const int y)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return false;
-  }
+  if (unlikely(is_oob(x, y))) { return false; }
   return (get(_is_trap, x, y));
 }
 
 void Level::is_trap_set(const int x, const int y)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
+  if (unlikely(is_oob(x, y))) { return; }
   is_map_changed = true;
   incr(_is_trap, x, y, (uint8_t) 1);
 }
@@ -71,9 +57,7 @@ void Level::is_trap_set(const int x, const int y)
 void Level::is_trap_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
+  if (unlikely(is_oob(x, y))) { return; }
   is_map_changed = true;
   decr(_is_trap, x, y, (uint8_t) 1);
 }
@@ -85,22 +69,16 @@ void Thing::on_activated(Thingp victim)
 {
   TRACE_NO_INDENT();
   auto on_activated = tp()->on_activated_do();
-  if (std::empty(on_activated)) {
-    return;
-  }
+  if (std::empty(on_activated)) { return; }
 
   auto t = split_tokens(on_activated, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) {
-      fn = fn.replace(found, 2, "");
-    }
+    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
 
-    if (mod == "me") {
-      mod = name();
-    }
+    if (mod == "me") { mod = name(); }
 
     dbg("Call %s.%s(%s %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), victim->to_short_string().c_str());
 

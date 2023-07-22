@@ -27,9 +27,7 @@ void gl_init_2d_mode(void)
   TRACE_AND_INDENT();
   GL_ERROR_CHECK();
 
-  if (in_2d_mode) {
-    gl_leave_2d_mode();
-  }
+  if (in_2d_mode) { gl_leave_2d_mode(); }
 
   //
   // Enable Texture Worldping
@@ -73,9 +71,7 @@ void gl_init_2d_mode(void)
 void gl_enter_2d_mode(void)
 {
   TRACE_AND_INDENT();
-  if (in_2d_mode) {
-    gl_leave_2d_mode();
-  }
+  if (in_2d_mode) { gl_leave_2d_mode(); }
 
   //
   // Change to the projection matrix and set our viewing volume.
@@ -125,9 +121,7 @@ void gl_enter_2d_mode(void)
 void gl_enter_2d_mode(int w, int h)
 {
   TRACE_AND_INDENT();
-  if (in_2d_mode) {
-    gl_leave_2d_mode();
-  }
+  if (in_2d_mode) { gl_leave_2d_mode(); }
 
   //
   // Change to the projection matrix and set our viewing volume.
@@ -175,9 +169,7 @@ void gl_enter_2d_mode(int w, int h)
 void gl_leave_2d_mode(void)
 {
   TRACE_AND_INDENT();
-  if (! in_2d_mode) {
-    return;
-  }
+  if (! in_2d_mode) { return; }
   glMatrixMode(GL_MODELVIEW);
   GL_ERROR_CHECK();
   glPopMatrix();
@@ -386,9 +378,7 @@ static void gl_init_fbo_(int fbo, GLuint *render_buf_id, GLuint *fbo_id, GLuint 
     }
 #endif
   }
-  if (! status) {
-    glGetError();
-  }
+  if (! status) { glGetError(); }
   GL_ERROR_CHECK();
 
   // switch back to window-system-provided framebuffer
@@ -414,9 +404,7 @@ void gl_init_fbo(void)
     //
     // If no change in size (map_mini, bg map) then do not reset the FBO
     //
-    if (fbo_size[ i ] == isize(tex_width, tex_height)) {
-      continue;
-    }
+    if (fbo_size[ i ] == isize(tex_width, tex_height)) { continue; }
 
     gl_init_fbo_(i, &render_buf_id[ i ], &fbo_id[ i ], &fbo_tex_id[ i ], tex_width, tex_height);
     fbo_size[ i ] = isize(tex_width, tex_height);
@@ -532,17 +520,13 @@ void blit_fbo_pop(void) { glBindFramebuffer_EXT(GL_FRAMEBUFFER, fbo_id[ fbo_last
 void blit_fbo_bind(int fbo)
 {
   fbo_last = fbo;
-  if (fbo_locked != -1) {
-    DIE("Attempt to bind to another FBO %d when locked", fbo);
-  }
+  if (fbo_locked != -1) { DIE("Attempt to bind to another FBO %d when locked", fbo); }
   glBindFramebuffer_EXT(GL_FRAMEBUFFER, fbo_id[ fbo ]);
 }
 
 void blit_fbo_unbind(void)
 {
-  if (fbo_locked != -1) {
-    DIE("Attempt to unbind when locked");
-  }
+  if (fbo_locked != -1) { DIE("Attempt to unbind when locked"); }
   glBindFramebuffer_EXT(GL_FRAMEBUFFER, 0);
 }
 
@@ -629,9 +613,7 @@ void blit_fini(void)
 void blit_flush(void)
 {
   TRACE_AND_INDENT();
-  if (gl_array_buf == bufp) {
-    return;
-  }
+  if (gl_array_buf == bufp) { return; }
 
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -1265,9 +1247,7 @@ void gl_ext_init(void)
     wglDeleteContext(hGLRC);
   }
 
-  if (hPalette) {
-    DeleteObject(hPalette);
-  }
+  if (hPalette) { DeleteObject(hPalette); }
 
   ReleaseDC(hwnd, hDC);
 }

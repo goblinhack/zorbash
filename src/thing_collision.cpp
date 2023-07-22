@@ -65,9 +65,7 @@ bool Thing::collision_find_best_target(ThingAttackOptionsp attack_options)
     //
     // Don't be silly and hit yourself.
     //
-    if (t == me) {
-      continue;
-    }
+    if (t == me) { continue; }
 
     if (t == owner) {
       dbg2("Collision-candidate: %s no, my thing", t->to_short_string().c_str());
@@ -80,16 +78,12 @@ bool Thing::collision_find_best_target(ThingAttackOptionsp attack_options)
     // Skip things that aren't really hitable.
     //
     if (t->tp()->gfx_pixelart_equip_carry_anim()) {
-      if (is_loggable()) {
-        dbg2("Collision-candidate: Ignore %s skip, not hittable", t->to_short_string().c_str());
-      }
+      if (is_loggable()) { dbg2("Collision-candidate: Ignore %s skip, not hittable", t->to_short_string().c_str()); }
       continue;
     }
 
     if (! cand.priority) {
-      if (is_loggable()) {
-        dbg2("Collision-candidate: Ignore %s no priority", t->to_short_string().c_str());
-      }
+      if (is_loggable()) { dbg2("Collision-candidate: Ignore %s no priority", t->to_short_string().c_str()); }
       continue;
     }
 
@@ -139,9 +133,7 @@ bool Thing::collision_find_best_target(ThingAttackOptionsp attack_options)
         dbg2("Collision-candidate: Add %s", t->to_short_string().c_str());
       }
     } else {
-      if (is_loggable()) {
-        dbg2("Collision-candidate: Ignore %s", t->to_short_string().c_str());
-      }
+      if (is_loggable()) { dbg2("Collision-candidate: Ignore %s", t->to_short_string().c_str()); }
     }
   }
 
@@ -189,18 +181,14 @@ bool Thing::collision_find_best_target(ThingAttackOptionsp attack_options)
           //
           // This is an odd one.
           //
-          if (! is_able_to_attack_owner()) {
-            err("Trying to attack self: %s", victim->to_short_string().c_str());
-          }
+          if (! is_able_to_attack_owner()) { err("Trying to attack self: %s", victim->to_short_string().c_str()); }
         } else if (owner->can_eat(victim)) {
           //
           // Eat corpse?
           //
           IF_DEBUG2
           {
-            if (is_debug_type()) {
-              owner->log("Can eat %s", victim->to_short_string().c_str());
-            }
+            if (is_debug_type()) { owner->log("Can eat %s", victim->to_short_string().c_str()); }
           }
 
           if (victim->is_dead) {
@@ -281,9 +269,7 @@ bool Thing::collision_find_best_target(ThingAttackOptionsp attack_options)
           attack_options->victim_attacked = true;
           ret                             = true;
         } else {
-          if (is_loggable()) {
-            dbg2("Collision: Cannot hit %s", victim->to_short_string().c_str());
-          }
+          if (is_loggable()) { dbg2("Collision: Cannot hit %s", victim->to_short_string().c_str()); }
         }
       }
     }
@@ -400,9 +386,7 @@ bool Thing::collision_obstacle(point p)
     if (collision_obstacle(it)) {
       IF_DEBUG3
       {
-        if (it->is_loggable()) {
-          dbg2("Collision obstacle: %s", it->to_short_string().c_str());
-        }
+        if (it->is_loggable()) { dbg2("Collision obstacle: %s", it->to_short_string().c_str()); }
       }
       return true;
     }
@@ -422,9 +406,7 @@ bool Thing::is_obs_ai(fpoint p)
     //
     // "true" on collision
     //
-    if (is_obs_ai(it)) {
-      return true;
-    }
+    if (is_obs_ai(it)) { return true; }
   }
   FOR_ALL_THINGS_END();
 
@@ -443,9 +425,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos)
   //
   // Do not include hidden as we use the sword being carried here and when swinging, it is hidden
   //
-  if (is_falling || is_jumping || is_changing_level) {
-    return false;
-  }
+  if (is_falling || is_jumping || is_changing_level) { return false; }
 
   dbg2("Collision check only? @%d,%d with %s)", future_pos.x, future_pos.y, it->to_short_string().c_str());
   TRACE_AND_INDENT();
@@ -595,9 +575,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos)
     if (! it->is_dead && ! it->is_frozen) {
       if (things_overlap(me, future_pos, it)) {
         dbg2("Collision; overlaps and can open");
-        if (open_door(it)) {
-          return false;
-        }
+        if (open_door(it)) { return false; }
         if (things_overlap(me, future_pos, it)) {
           dbg2("Collision; overlaps and can attack door");
           return true;
@@ -636,9 +614,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos)
       if ((future_pos.x < MAP_BORDER_ROCK) || (future_pos.y < MAP_BORDER_ROCK)
           || (future_pos.x >= MAP_WIDTH - MAP_BORDER_ROCK) || (future_pos.y >= MAP_HEIGHT - MAP_BORDER_ROCK)) {
         dbg2("No collision; can pass through walls but too close to the edge");
-        if (is_player()) {
-          msg("The wall is too thick here to move");
-        }
+        if (is_player()) { msg("The wall is too thick here to move"); }
         return true;
       }
       dbg2("No collision; can pass through walls");
@@ -774,9 +750,7 @@ bool Thing::collision_check_and_handle(point future_pos, ThingAttackOptionsp att
   // Do not include hidden as we use the sword being carried here
   // and when swinging, it is hidden
   //
-  if (is_falling || is_jumping || is_changing_level) {
-    return false;
-  }
+  if (is_falling || is_jumping || is_changing_level) { return false; }
 
   dbg2("Collision handle");
   TRACE_AND_INDENT();
@@ -807,17 +781,11 @@ bool Thing::collision_check_and_handle(point future_pos, ThingAttackOptionsp att
       auto dy = y - future_pos.y;
       FOR_ALL_COLLISION_THINGS(level, it, x, y)
       {
-        if (this == it) {
-          continue;
-        }
+        if (this == it) { continue; }
 
-        if (it->is_hidden || it->is_falling || it->is_jumping || it->is_changing_level) {
-          continue;
-        }
+        if (it->is_hidden || it->is_falling || it->is_jumping || it->is_changing_level) { continue; }
 
-        if (it->top_owner()) {
-          continue;
-        }
+        if (it->top_owner()) { continue; }
 
         //
         // false is used to abort the walk
@@ -845,9 +813,7 @@ bool Thing::collision_check_and_handle(point future_pos, ThingAttackOptionsp att
 //
 bool Thing::collision_check_only(point future_pos)
 {
-  if (is_cursor()) {
-    return false;
-  }
+  if (is_cursor()) { return false; }
 
   dbg2("Collision check only");
   TRACE_AND_INDENT();
@@ -855,33 +821,21 @@ bool Thing::collision_check_only(point future_pos)
   //
   // Check we cannot walk off onto the map edge.
   //
-  if ((future_pos.x < MAP_BORDER_ROCK) || (future_pos.y < MAP_BORDER_ROCK)) {
-    return true;
-  }
+  if ((future_pos.x < MAP_BORDER_ROCK) || (future_pos.y < MAP_BORDER_ROCK)) { return true; }
 
-  if ((future_pos.x > MAP_WIDTH - MAP_BORDER_ROCK) || (future_pos.y > MAP_HEIGHT - MAP_BORDER_ROCK)) {
-    return true;
-  }
+  if ((future_pos.x > MAP_WIDTH - MAP_BORDER_ROCK) || (future_pos.y > MAP_HEIGHT - MAP_BORDER_ROCK)) { return true; }
 
   int minx = future_pos.x - thing_collision_tiles;
-  if (minx < MAP_BORDER_ROCK) {
-    minx = MAP_BORDER_ROCK;
-  }
+  if (minx < MAP_BORDER_ROCK) { minx = MAP_BORDER_ROCK; }
 
   int miny = future_pos.y - thing_collision_tiles;
-  if (miny < MAP_BORDER_ROCK) {
-    miny = MAP_BORDER_ROCK;
-  }
+  if (miny < MAP_BORDER_ROCK) { miny = MAP_BORDER_ROCK; }
 
   int maxx = future_pos.x + thing_collision_tiles;
-  if (maxx >= MAP_WIDTH - MAP_BORDER_ROCK) {
-    maxx = MAP_WIDTH - MAP_BORDER_ROCK;
-  }
+  if (maxx >= MAP_WIDTH - MAP_BORDER_ROCK) { maxx = MAP_WIDTH - MAP_BORDER_ROCK; }
 
   int maxy = future_pos.y + thing_collision_tiles;
-  if (maxy >= MAP_HEIGHT - MAP_BORDER_ROCK) {
-    maxy = MAP_HEIGHT - MAP_BORDER_ROCK;
-  }
+  if (maxy >= MAP_HEIGHT - MAP_BORDER_ROCK) { maxy = MAP_HEIGHT - MAP_BORDER_ROCK; }
 
   //
   // We allow for diagonal movement like when you are in a corridor and
@@ -917,9 +871,7 @@ bool Thing::collision_check_only(point future_pos)
 
   FOR_ALL_COLLISION_THINGS(level, it, future_pos.x, future_pos.y)
   {
-    if (this == it) {
-      continue;
-    }
+    if (this == it) { continue; }
 
     //
     // Skip things we cannot collide with

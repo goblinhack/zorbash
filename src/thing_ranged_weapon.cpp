@@ -20,24 +20,16 @@ std::list< Thingp > Thing::ranged_weapon_list(void)
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
-    if (unlikely(! t)) {
-      continue;
-    }
+    if (unlikely(! t)) { continue; }
     if (t->is_bag()) {
       FOR_ALL_CARRIED_BY(t, item)
       {
         auto t = level->thing_find(item.id);
-        if (unlikely(! t)) {
-          continue;
-        }
-        if (t->is_ranged_weapon()) {
-          out.push_back(t);
-        }
+        if (unlikely(! t)) { continue; }
+        if (t->is_ranged_weapon()) { out.push_back(t); }
       }
     }
-    if (t->is_ranged_weapon()) {
-      out.push_back(t);
-    }
+    if (t->is_ranged_weapon()) { out.push_back(t); }
   }
   return out;
 }
@@ -56,24 +48,16 @@ std::vector< Thingp > Thing::ranged_weapon_vector(void)
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
-    if (unlikely(! t)) {
-      continue;
-    }
+    if (unlikely(! t)) { continue; }
     if (t->is_bag()) {
       FOR_ALL_CARRIED_BY(t, item)
       {
         auto t = level->thing_find(item.id);
-        if (unlikely(! t)) {
-          continue;
-        }
-        if (t->is_ranged_weapon()) {
-          out.push_back(t);
-        }
+        if (unlikely(! t)) { continue; }
+        if (t->is_ranged_weapon()) { out.push_back(t); }
       }
     }
-    if (t->is_ranged_weapon()) {
-      out.push_back(t);
-    }
+    if (t->is_ranged_weapon()) { out.push_back(t); }
   }
   return out;
 }
@@ -83,9 +67,7 @@ int Thing::carried_ranged_weapon_count(void)
   TRACE_NO_INDENT();
   int count = 0;
 
-  if (! maybe_itemsp()) {
-    return count;
-  }
+  if (! maybe_itemsp()) { return count; }
 
   return ranged_weapon_list().size();
 }
@@ -96,9 +78,7 @@ int Thing::carried_ranged_weapon_least_value(Thingp *out)
   int least_value = -1;
 
   *out = nullptr;
-  if (! maybe_itemsp()) {
-    return least_value;
-  }
+  if (! maybe_itemsp()) { return least_value; }
 
   for (const auto t : ranged_weapon_list()) {
     auto v = value(t);
@@ -121,9 +101,7 @@ int Thing::carried_ranged_weapon_highest_value(Thingp *out)
   int highest_value = -1;
 
   *out = nullptr;
-  if (! maybe_itemsp()) {
-    return highest_value;
-  }
+  if (! maybe_itemsp()) { return highest_value; }
 
   for (const auto t : ranged_weapon_list()) {
     auto v = value(t);
@@ -146,15 +124,11 @@ int Thing::carried_ranged_weapon_highest_value_for_target(Thingp *out, Thingp ta
   int highest_value = -1;
 
   *out = nullptr;
-  if (! maybe_itemsp()) {
-    return highest_value;
-  }
+  if (! maybe_itemsp()) { return highest_value; }
 
   for (const auto t : ranged_weapon_list()) {
     if (t->initial_charge_count()) {
-      if (! t->charge_count()) {
-        continue;
-      }
+      if (! t->charge_count()) { continue; }
     }
 
     //
@@ -162,9 +136,7 @@ int Thing::carried_ranged_weapon_highest_value_for_target(Thingp *out, Thingp ta
     //
     if (is_intelligent()) {
       if (t->effect_radius()) {
-        if (distance(curr_at, target->curr_at) <= t->effect_radius() + 1) {
-          continue;
-        }
+        if (distance(curr_at, target->curr_at) <= t->effect_radius() + 1) { continue; }
       }
     }
 

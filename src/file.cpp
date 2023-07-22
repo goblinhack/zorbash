@@ -143,9 +143,7 @@ unsigned char *file_load(const char *filename, int *outlen)
     std::string alt_filename = mybasename(filename, "strip dir");
 
     out = file_io_read_if_exists(alt_filename.c_str(), outlen);
-    if (out) {
-      return out;
-    }
+    if (out) { return out; }
   }
 
   /*
@@ -214,9 +212,7 @@ unsigned char *file_io_read(const char *filename, int *out_len)
     return nullptr;
   }
 
-  if (out_len) {
-    *out_len = len;
-  }
+  if (out_len) { *out_len = len; }
 
   FILE_LOG("Read %s, %dMb, %d bytes", filename, len / (1024 * 1024), len);
 
@@ -269,9 +265,7 @@ uint8_t file_exists(const char *filename)
   struct stat buf;
 
   if (stat(filename, &buf) >= 0) {
-    if (S_ISDIR(buf.st_mode)) {
-      return 0;
-    }
+    if (S_ISDIR(buf.st_mode)) { return 0; }
 
     return 1;
   }
@@ -308,9 +302,7 @@ unsigned char *file_io_read_if_exists(const char *filename, int *out_len)
   myfree(mz_filename);
 #endif
 
-  if (file_exists(filename)) {
-    return (file_io_read(filename, out_len));
-  }
+  if (file_exists(filename)) { return (file_io_read(filename, out_len)); }
 
   return nullptr;
 }
@@ -323,9 +315,7 @@ int file_size(const char *filename)
   TRACE_AND_INDENT();
   struct stat buf;
 
-  if (stat(filename, &buf) >= 0) {
-    return int(buf.st_size);
-  }
+  if (stat(filename, &buf) >= 0) { return int(buf.st_size); }
 
   return (-1);
 }
@@ -336,13 +326,9 @@ int file_size(const char *filename)
 uint8_t file_non_zero_size_exists(const char *filename)
 {
   TRACE_AND_INDENT();
-  if (! file_exists(filename)) {
-    return 0;
-  }
+  if (! file_exists(filename)) { return 0; }
 
-  if (! file_size(filename)) {
-    return 0;
-  }
+  if (! file_size(filename)) { return 0; }
 
   return 1;
 }
@@ -353,9 +339,7 @@ uint8_t file_non_zero_size_exists(const char *filename)
 uint8_t file_unlink(const char *filename)
 {
   TRACE_AND_INDENT();
-  if (! file_exists(filename)) {
-    return 0;
-  }
+  if (! file_exists(filename)) { return 0; }
 
   unlink(filename);
 
@@ -370,9 +354,7 @@ double file_age(const char *filename)
   TRACE_AND_INDENT();
   struct stat buf;
 
-  if (stat(filename, &buf) < 0) {
-    return (-1);
-  }
+  if (stat(filename, &buf) < 0) { return (-1); }
 
   time_t now = time(nullptr);
 
@@ -389,13 +371,9 @@ uint8_t file_exists_and_is_newer_than(const char *filename1, const char *filenam
   struct stat buf2;
   double      delta;
 
-  if (stat(filename1, &buf1) < 0) {
-    return false;
-  }
+  if (stat(filename1, &buf1) < 0) { return false; }
 
-  if (stat(filename2, &buf2) < 0) {
-    return false;
-  }
+  if (stat(filename2, &buf2) < 0) { return false; }
 
   delta = difftime(buf1.st_mtime, buf2.st_mtime);
 

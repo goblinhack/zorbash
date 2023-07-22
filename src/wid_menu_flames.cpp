@@ -41,32 +41,22 @@ static void game_display_flames_tiles(int w, int h)
     static int hue = 0;
 
     hue = 1;
-    if (hue > 255) {
-      hue = 0;
-    }
+    if (hue > 255) { hue = 0; }
 
     fg   = color_change_hue(fg, hue);
     fg.a = 255;
 
-    if (fg.r + fg.g + fg.b < 100) {
-      fg = RED;
-    }
+    if (fg.r + fg.g + fg.b < 100) { fg = RED; }
 
     float bright = 1.01;
     int   r      = ((float) fg.r) * bright;
-    if (r > 255) {
-      r = 255;
-    }
+    if (r > 255) { r = 255; }
     fg.r  = r;
     int g = ((float) fg.g) * bright;
-    if (g > 255) {
-      g = 255;
-    }
+    if (g > 255) { g = 255; }
     fg.g  = g;
     int b = ((float) fg.b) * bright;
-    if (b > 255) {
-      b = 255;
-    }
+    if (b > 255) { b = 255; }
     fg.b = b;
 
     fg2 = fg;
@@ -85,9 +75,7 @@ static void game_display_flames_tiles(int w, int h)
     fg4.b /= 4;
   }
 
-  if (! g_opt_ascii) {
-    blit_init();
-  }
+  if (! g_opt_ascii) { blit_init(); }
 
   //
   // Display the flames
@@ -100,15 +88,9 @@ static void game_display_flames_tiles(int w, int h)
       int g = (int) ((((float) ((int) c.g))) * bright);
       int b = (int) ((((float) ((int) c.b))) * bright);
 
-      if (r > 255) {
-        r = 255;
-      }
-      if (g > 255) {
-        g = 255;
-      }
-      if (b > 255) {
-        b = 255;
-      }
+      if (r > 255) { r = 255; }
+      if (g > 255) { g = 255; }
+      if (b > 255) { b = 255; }
 
       color cn(r, g, b, 255);
 
@@ -167,9 +149,7 @@ static void game_display_flames_tiles(int w, int h)
     }
   }
 
-  if (! g_opt_ascii) {
-    blit_flush();
-  }
+  if (! g_opt_ascii) { blit_flush(); }
 
   //
   // Blit the ascii logo
@@ -197,9 +177,7 @@ static void game_display_flames_tiles(int w, int h)
 
     for (int y = 0; y < (int) ARRAY_SIZE(zorb); y++) {
       for (int x = 0; x < (int) strlen(zorb[ y ]); x++) {
-        if (zorb[ y ][ x ] == ' ') {
-          continue;
-        }
+        if (zorb[ y ][ x ] == ' ') { continue; }
 
         int atx = x + ((TERM_WIDTH - 50) / 2);
         int aty = y + ((TERM_HEIGHT / 2) - 15);
@@ -259,9 +237,7 @@ static void game_display_flames_change(int w, int h)
   //
   if (! g_opt_ascii) {
     for (auto x = 0; x < w; x++) {
-      if (non_pcg_random_range(0, 1000) < 995) {
-        continue;
-      }
+      if (non_pcg_random_range(0, 1000) < 995) { continue; }
 
       int sparks = 2;
       while (sparks--) {
@@ -285,14 +261,10 @@ static void game_display_flames_change(int w, int h)
   // Scroll the flames at different speeds
   //
   for (auto x = 0; x < w; x++) {
-    if (non_pcg_random_range(0, 100) < 99) {
-      continue;
-    }
+    if (non_pcg_random_range(0, 100) < 99) { continue; }
 
     int scroll = 5;
-    if (g_opt_ascii) {
-      scroll = 1;
-    }
+    if (g_opt_ascii) { scroll = 1; }
     while (scroll--) {
       for (auto y = 0; y < h - 1; y++) {
         auto c1      = bg[ x ][ y + 1 ];
@@ -305,14 +277,10 @@ static void game_display_flames_change(int w, int h)
   // Scroll the flames at different speeds
   //
   for (auto x = 0; x < w; x++) {
-    if (non_pcg_random_range(0, 100) < 95) {
-      continue;
-    }
+    if (non_pcg_random_range(0, 100) < 95) { continue; }
 
     int scroll = 3;
-    if (g_opt_ascii) {
-      scroll = 2;
-    }
+    if (g_opt_ascii) { scroll = 2; }
     while (scroll--) {
       for (auto y = 0; y < h - 1; y++) {
         auto c1      = bg[ x ][ y + 1 ];
@@ -325,13 +293,9 @@ static void game_display_flames_change(int w, int h)
   // Scroll the flames at different speeds
   //
   for (auto x = 0; x < w; x++) {
-    if (non_pcg_random_range(0, 100) < 50) {
-      continue;
-    }
+    if (non_pcg_random_range(0, 100) < 50) { continue; }
     int scroll = 3;
-    if (g_opt_ascii) {
-      scroll = 2;
-    }
+    if (g_opt_ascii) { scroll = 2; }
     while (scroll--) {
       for (auto y = 0; y < h - 1; y++) {
         auto c1      = bg[ x ][ y + 1 ];
@@ -345,15 +309,9 @@ static void game_display_flames_change(int w, int h)
   //
   static int blend_max = 2;
   if (g_opt_ascii) {
-    if (non_pcg_random_range(0, 100) < 20) {
-      blend_max = 1;
-    }
-    if (non_pcg_random_range(0, 100) < 20) {
-      blend_max = 2;
-    }
-    if (non_pcg_random_range(0, 100) < 20) {
-      blend_max = 3;
-    }
+    if (non_pcg_random_range(0, 100) < 20) { blend_max = 1; }
+    if (non_pcg_random_range(0, 100) < 20) { blend_max = 2; }
+    if (non_pcg_random_range(0, 100) < 20) { blend_max = 3; }
     for (auto blend = 0; blend < blend_max; blend++) {
       for (auto x = 1; x < w; x++) {
         for (auto y = 1; y < h; y++) {
@@ -432,7 +390,5 @@ void game_display_flames(void)
   }
 
   game_display_flames_tiles(w, h);
-  if (non_pcg_random_range(0, 100) < 50) {
-    game_display_flames_change(w, h);
-  }
+  if (non_pcg_random_range(0, 100) < 50) { game_display_flames_change(w, h); }
 }

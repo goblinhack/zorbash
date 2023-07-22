@@ -108,9 +108,7 @@ static uint8_t command_inited;
 void command_fini(void)
 {
   TRACE_NO_INDENT();
-  if (command_inited) {
-    command_inited = false;
-  }
+  if (command_inited) { command_inited = false; }
 }
 
 uint8_t command_init(void)
@@ -196,9 +194,7 @@ static int command_matches(const char *input, char *output, uint8_t show_ambiguo
     longest_match = std::max(t, longest_match);
   }
 
-  if (longest_match == -1) {
-    return 0;
-  }
+  if (longest_match == -1) { return 0; }
 
   /*
    * Repeat and optionally dump other possibilities if the command is
@@ -219,9 +215,7 @@ static int command_matches(const char *input, char *output, uint8_t show_ambiguo
         cnt = 0;
       }
 
-      if (cnt) {
-        break;
-      }
+      if (cnt) { break; }
     }
 
     // tokens_print_to(&command->readable_tokens, match, sizeof(match));
@@ -239,18 +233,14 @@ static int command_matches(const char *input, char *output, uint8_t show_ambiguo
           strlcat_(completes_to, " ", sizeof(completes_to));
         }
 
-        if (output) {
-          strlcpy_(output, completes_to, MAXSTR);
-        }
+        if (output) { strlcpy_(output, completes_to, MAXSTR); }
       }
 
       tokens_print_to(&command->input_tokens, match, sizeof(match));
 
       tokens_print_to(&command->readable_tokens, match2, sizeof(match2));
 
-      if (show_ambiguous) {
-        CON("  %s -- %s", match, match2);
-      }
+      if (show_ambiguous) { CON("  %s -- %s", match, match2); }
     } else {
       // CON("  NO MATCH \"%s\" [%d] longest %d", match,t,longest_match);
     }
@@ -278,9 +268,7 @@ static int command_matches(const char *input, char *output, uint8_t show_ambiguo
             cnt = 0;
           }
 
-          if (cnt) {
-            break;
-          }
+          if (cnt) { break; }
         }
 
         if (t == longest_match) {
@@ -310,15 +298,11 @@ static int command_matches(const char *input, char *output, uint8_t show_ambiguo
       /*
        * Expands to:
        */
-      if (output) {
-        strlcpy_(output, expands_to, MAXSTR);
-      }
+      if (output) { strlcpy_(output, expands_to, MAXSTR); }
     }
   }
 
-  if (execute_command && matched_command && (matches == 1)) {
-    (*matched_command->callback)(&input_tokens, context);
-  }
+  if (execute_command && matched_command && (matches == 1)) { (*matched_command->callback)(&input_tokens, context); }
 
   return matches;
 }
@@ -329,9 +313,7 @@ uint8_t command_handle(const char *input, char *expandedtext, uint8_t show_ambig
   TRACE_NO_INDENT();
   int matches;
 
-  if (expandedtext) {
-    *expandedtext = '\0';
-  }
+  if (expandedtext) { *expandedtext = '\0'; }
 
   /*
    * Check for ambiguous commands.
@@ -348,9 +330,7 @@ uint8_t command_handle(const char *input, char *expandedtext, uint8_t show_ambig
     history[ g_history_at ] = string_to_wstring(std::string(input));
 
     g_history_at++;
-    if (g_history_at >= HISTORY_MAX) {
-      g_history_at = 0;
-    }
+    if (g_history_at >= HISTORY_MAX) { g_history_at = 0; }
     g_history_walk = g_history_at;
 
     return true;
@@ -400,9 +380,7 @@ uint8_t command_handle(std::string input, std::string *expanded_text, uint8_t sh
 
   uint8_t r = command_handle(input.c_str(), &buf[ 0 ], show_ambiguous, show_complete, execute_command, context);
 
-  if (expanded_text) {
-    *expanded_text = std::string(buf);
-  }
+  if (expanded_text) { *expanded_text = std::string(buf); }
 
   return r;
 }
@@ -417,9 +395,7 @@ uint8_t command_handle(std::wstring input, std::wstring *expanded_text, uint8_t 
   uint8_t r = command_handle(wstring_to_string(input).c_str(), buf, show_ambiguous, show_complete, execute_command,
                              context);
 
-  if (expanded_text && buf[ 0 ]) {
-    *expanded_text = string_to_wstring(std::string(buf));
-  }
+  if (expanded_text && buf[ 0 ]) { *expanded_text = string_to_wstring(std::string(buf)); }
 
   return r;
 }

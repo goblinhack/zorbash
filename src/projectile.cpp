@@ -73,9 +73,7 @@ Projectile_::Projectile_(Levelp level, ThingId thing_id, ThingId victim_id, Proj
   // Use the preferred name if set.
   //
   if (proj_tp) {
-    if (! proj_tp->gfx_targeted_projectile().empty()) {
-      name = proj_tp->gfx_targeted_projectile();
-    }
+    if (! proj_tp->gfx_targeted_projectile().empty()) { name = proj_tp->gfx_targeted_projectile(); }
   }
 
   for (int frame = 0; frame < max_frames; frame++) {
@@ -89,9 +87,7 @@ void Level::new_projectile(ThingId id, ThingId victim_id, ProjectileInfo info, u
   if (id.ok()) {
     auto t = thing_find(id);
     if (t) {
-      if (t->has_projectile) {
-        return;
-      }
+      if (t->has_projectile) { return; }
       t->has_projectile = true;
       IF_DEBUG { t->log("New projectile"); }
     }
@@ -121,9 +117,7 @@ void Level::display_projectiles(point tl, point br)
   all_projectiles.insert(std::end(all_projectiles), std::begin(new_projectiles), std::end(new_projectiles));
   new_projectiles.clear();
 
-  if (all_projectiles.empty()) {
-    return;
-  }
+  if (all_projectiles.empty()) { return; }
 
   if (g_opt_ascii) {
     display_ascii_projectiles(tl, br);

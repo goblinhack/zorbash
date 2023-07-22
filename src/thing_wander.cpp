@@ -26,9 +26,7 @@ bool Thing::ai_blocked(void)
     auto t = at + d;
     auto x = t.x;
     auto y = t.y;
-    if (collision_obstacle(point(x, y))) {
-      count++;
-    }
+    if (collision_obstacle(point(x, y))) { count++; }
   }
   return count >= 4;
 }
@@ -46,22 +44,16 @@ bool Thing::ai_blocked_completely(void)
     auto t = at + d;
     auto x = t.x;
     auto y = t.y;
-    if (collision_obstacle(point(x, y))) {
-      count++;
-    }
+    if (collision_obstacle(point(x, y))) { count++; }
   }
   return count >= 5;
 }
 
 bool Thing::ai_create_path(point &nh, const point start, const point end)
 {
-  if (end == point(-1, -1)) {
-    return false;
-  }
+  if (end == point(-1, -1)) { return false; }
 
-  if (end == point(0, 0)) {
-    return false;
-  }
+  if (end == point(0, 0)) { return false; }
 
   dbg2("AI: create path from %d,%d to %d,%d", start.x, start.y, end.x, end.y);
   TRACE_AND_INDENT();
@@ -95,18 +87,10 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
   maxx += border;
   maxy += border;
 
-  if (minx < 0) {
-    minx = 0;
-  }
-  if (miny < 0) {
-    miny = 0;
-  }
-  if (maxx >= MAP_WIDTH) {
-    maxx = MAP_WIDTH - 1;
-  }
-  if (maxy >= MAP_HEIGHT) {
-    maxy = MAP_HEIGHT - 1;
-  }
+  if (minx < 0) { minx = 0; }
+  if (miny < 0) { miny = 0; }
+  if (maxx >= MAP_WIDTH) { maxx = MAP_WIDTH - 1; }
+  if (maxy >= MAP_HEIGHT) { maxy = MAP_HEIGHT - 1; }
 
   //
   // Set up obstacles for the search
@@ -154,9 +138,7 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
   auto [ result, fallback ] = astar_solve(nullptr, path_debug, start, end, &dmap, false /* allow diagonals */);
 
   if (result.cost == std::numeric_limits< int >::max()) {
-    if (fallback.path.size()) {
-      result = fallback;
-    }
+    if (fallback.path.size()) { result = fallback; }
   }
 
 #if 0
@@ -176,9 +158,7 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
     goal_path_str += " " + i.to_string();
   }
 
-  if (is_debug_type()) {
-    dbg2("AI: created path %s", goal_path_str.c_str());
-  }
+  if (is_debug_type()) { dbg2("AI: created path %s", goal_path_str.c_str()); }
 
   auto hops     = result.path;
   auto hops_len = hops.size();
@@ -219,9 +199,7 @@ bool Thing::ai_choose_wander(point &nh)
   dbg2("AI: choose wander dest (curr at %d,%d)", curr_at.x, curr_at.y);
   TRACE_AND_INDENT();
 
-  if (! maybe_aip()) {
-    err("No monst aip");
-  }
+  if (! maybe_aip()) { err("No monst aip"); }
 
   //
   // Reached the dest? Choose a new one.
@@ -235,9 +213,7 @@ bool Thing::ai_choose_wander(point &nh)
   //
   // Try to use the same location.
   //
-  if (ai_create_path(nh, curr_at, dest)) {
-    return true;
-  }
+  if (ai_create_path(nh, curr_at, dest)) { return true; }
 
   //
   // Choose a new wander location
@@ -254,9 +230,7 @@ bool Thing::ai_choose_wander(point &nh)
   // Minions are constrained but we should stop the movement if it gets too far.
   // There may be nowhere else for it to try to move.
   //
-  if (too_far_from_mob(dest)) {
-    dbg2("Too far off the leash but allow wander anyway to %d,%d", dest.x, dest.y);
-  }
+  if (too_far_from_mob(dest)) { dbg2("Too far off the leash but allow wander anyway to %d,%d", dest.x, dest.y); }
 
   if (too_far_from_leader(dest)) {
     if (distance_from_leader() > too_far_from_leader(dest)) {
@@ -282,9 +256,7 @@ bool Thing::ai_choose_wander(point &nh)
 #endif
   dbg2("Wander to %d,%d nh %d,%d", dest.x, dest.y, nh.x, nh.y);
 
-  if (game->robot_mode && is_player()) {
-    game->tick_begin("need to wander");
-  }
+  if (game->robot_mode && is_player()) { game->tick_begin("need to wander"); }
 
   return true;
 }
@@ -314,9 +286,7 @@ bool Thing::ai_wander(void)
 
   if (ai_blocked_completely()) {
     dbg2("AI: wander, blocked on all sides, try escape");
-    if (ai_escape()) {
-      return true;
-    }
+    if (ai_escape()) { return true; }
 
     if (is_able_to_jump()) {
       dbg2("AI: wander, blocked on all sides, try jumping");
@@ -324,13 +294,9 @@ bool Thing::ai_wander(void)
         //
         // May jump into something bad out of desperation
         //
-        if (try_harder_to_jump()) {
-          return true;
-        }
+        if (try_harder_to_jump()) { return true; }
       } else {
-        if (try_to_jump()) {
-          return true;
-        }
+        if (try_to_jump()) { return true; }
       }
     }
     dbg2("AI: wander blocked");
@@ -344,13 +310,9 @@ bool Thing::ai_wander(void)
       // May jump into something bad out of desperation
       //
       if (health() < health_max() / 5) {
-        if (try_to_jump()) {
-          return true;
-        }
+        if (try_to_jump()) { return true; }
       } else {
-        if (try_harder_to_jump()) {
-          return true;
-        }
+        if (try_harder_to_jump()) { return true; }
       }
     }
 
@@ -365,9 +327,7 @@ bool Thing::ai_wander(void)
   while (tries-- > 0) {
     point nh;
     if (ai_choose_wander(nh)) {
-      if (terrain_cost_get(nh) < DMAP_LESS_PREFERRED_TERRAIN) {
-        return true;
-      }
+      if (terrain_cost_get(nh) < DMAP_LESS_PREFERRED_TERRAIN) { return true; }
 
       //
       // Set this so next time we will choose another dest

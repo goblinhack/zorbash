@@ -167,9 +167,7 @@ std::vector< std::string > py_call_std_vector_string_fn(const char *module, cons
     static char *kwlist[] = {#n1, #n2, #n3, 0};                                                                      \
                                                                                                                      \
     TRACE_NO_INDENT();                                                                                               \
-    if (! PyArg_ParseTupleAndKeywords(args, keywds, "ddi", kwlist, &d1, &d2, &i1)) {                                 \
-      Py_RETURN_FALSE;                                                                                               \
-    }                                                                                                                \
+    if (! PyArg_ParseTupleAndKeywords(args, keywds, "ddi", kwlist, &d1, &d2, &i1)) { Py_RETURN_FALSE; }              \
                                                                                                                      \
     if (! py_class) {                                                                                                \
       ERR("%s, missing class", __FUNCTION__);                                                                        \
@@ -191,9 +189,7 @@ std::vector< std::string > py_call_std_vector_string_fn(const char *module, cons
     static char *kwlist[] = {#n1, #n2, 0};                                                                           \
                                                                                                                      \
     TRACE_NO_INDENT();                                                                                               \
-    if (! PyArg_ParseTupleAndKeywords(args, keywds, "dd", kwlist, &d1, &d2)) {                                       \
-      Py_RETURN_FALSE;                                                                                               \
-    }                                                                                                                \
+    if (! PyArg_ParseTupleAndKeywords(args, keywds, "dd", kwlist, &d1, &d2)) { Py_RETURN_FALSE; }                    \
                                                                                                                      \
     if (! py_class) {                                                                                                \
       ERR("%s, missing class", __FUNCTION__);                                                                        \
@@ -214,9 +210,7 @@ std::vector< std::string > py_call_std_vector_string_fn(const char *module, cons
     static char *kwlist[] = {"wid_id", #n1, 0};                                                                      \
                                                                                                                      \
     TRACE_NO_INDENT();                                                                                               \
-    if (! PyArg_ParseTupleAndKeywords(args, keywds, "d", kwlist, &d1)) {                                             \
-      Py_RETURN_FALSE;                                                                                               \
-    }                                                                                                                \
+    if (! PyArg_ParseTupleAndKeywords(args, keywds, "d", kwlist, &d1)) { Py_RETURN_FALSE; }                          \
                                                                                                                      \
     TRACE_NO_INDENT();                                                                                               \
     (__fn__)(d1);                                                                                                    \
@@ -234,9 +228,7 @@ std::vector< std::string > py_call_std_vector_string_fn(const char *module, cons
     static char *kwlist[] = {#n1, #n2, #n3, 0};                                                                      \
                                                                                                                      \
     TRACE_NO_INDENT();                                                                                               \
-    if (! PyArg_ParseTupleAndKeywords(args, keywds, "iii", kwlist, &n1, &n2, &n3)) {                                 \
-      Py_RETURN_FALSE;                                                                                               \
-    }                                                                                                                \
+    if (! PyArg_ParseTupleAndKeywords(args, keywds, "iii", kwlist, &n1, &n2, &n3)) { Py_RETURN_FALSE; }              \
                                                                                                                      \
     TRACE_NO_INDENT();                                                                                               \
     (__fn__)(n1, n2, n3);                                                                                            \
@@ -252,9 +244,7 @@ std::vector< std::string > py_call_std_vector_string_fn(const char *module, cons
     static char *kwlist[] = {(char *) #n1, 0};                                                                       \
                                                                                                                      \
     TRACE_NO_INDENT();                                                                                               \
-    if (! PyArg_ParseTupleAndKeywords(args, keywds, "i", kwlist, &n1)) {                                             \
-      Py_RETURN_FALSE;                                                                                               \
-    }                                                                                                                \
+    if (! PyArg_ParseTupleAndKeywords(args, keywds, "i", kwlist, &n1)) { Py_RETURN_FALSE; }                          \
                                                                                                                      \
     TRACE_NO_INDENT();                                                                                               \
     (__fn__)(n1);                                                                                                    \

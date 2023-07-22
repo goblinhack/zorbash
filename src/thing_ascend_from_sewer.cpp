@@ -9,9 +9,7 @@
 
 bool Thing::ascend_sewer_tick(void)
 {
-  if (! level->is_ascend_sewer(curr_at.x, curr_at.y)) {
-    return false;
-  }
+  if (! level->is_ascend_sewer(curr_at.x, curr_at.y)) { return false; }
 
   dbg("Ascend sewer tick");
   TRACE_AND_INDENT();
@@ -21,9 +19,7 @@ bool Thing::ascend_sewer_tick(void)
     // User has pressed a button, forcing the change
     //
   } else if (game->tick_current - tick_last_level_change() <= 1) {
-    if (is_player()) {
-      dbg("Location check, ascend, no too soon");
-    }
+    if (is_player()) { dbg("Location check, ascend, no too soon"); }
 
     return false;
   }
@@ -49,9 +45,7 @@ bool Thing::ascend_sewer(void)
     return false;
   }
 
-  if (! maybe_infop()) {
-    return false;
-  }
+  if (! maybe_infop()) { return false; }
 
   dbg("Ascend sewer");
   TRACE_AND_INDENT();
@@ -60,15 +54,11 @@ bool Thing::ascend_sewer(void)
 
   auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
   if (! l) {
-    if (is_player()) {
-      msg("The entrance is permanently blocked!");
-    }
+    if (is_player()) { msg("The entrance is permanently blocked!"); }
     return false;
   }
 
-  if (is_player()) {
-    game->current_level = next_level;
-  }
+  if (is_player()) { game->current_level = next_level; }
 
   int x = curr_at.x;
   int y = curr_at.y;
@@ -102,9 +92,7 @@ bool Thing::ascend_sewer(void)
   location_check_me();
   update_light();
 
-  if (is_player() && level->cursor) {
-    level->cursor->move_to_immediately(curr_at);
-  }
+  if (is_player() && level->cursor) { level->cursor->move_to_immediately(curr_at); }
 
   is_changing_level = false;
   dbg("Moved to previous level sewer entrance");
@@ -112,9 +100,7 @@ bool Thing::ascend_sewer(void)
     level->ts_fade_in_begin = time_ms_cached();
     level->update_new_level();
 
-    if (game->robot_mode) {
-      game->tick_begin("Begin exploring the new level");
-    }
+    if (game->robot_mode) { game->tick_begin("Begin exploring the new level"); }
   }
 
   return true;

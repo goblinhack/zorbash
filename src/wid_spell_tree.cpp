@@ -49,29 +49,19 @@ static uint8_t wid_spells_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
   auto level = game->get_current_level();
-  if (! level) {
-    return true;
-  }
+  if (! level) { return true; }
 
   auto player = level->player;
-  if (! player) {
-    return true;
-  }
+  if (! player) { return true; }
 
-  if (player->is_dead) {
-    return true;
-  }
+  if (player->is_dead) { return true; }
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   if (sdlk_eq(*key, game->config.key_drop)) {
     auto what = game->level->inventory_get();
     if (what) {
-      if (game->level->player->drop(what)) {
-        game->tick_begin("drop");
-      }
+      if (game->level->player->drop(what)) { game->tick_begin("drop"); }
     }
     CON("INF: Spell choose cancelled");
     game->change_state(Game::STATE_NORMAL, "cancel spell choose");
@@ -116,22 +106,14 @@ static uint8_t wid_spells_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
   auto level = game->get_current_level();
-  if (! level) {
-    return true;
-  }
+  if (! level) { return true; }
 
   auto player = level->player;
-  if (! player) {
-    return true;
-  }
+  if (! player) { return true; }
 
-  if (player->is_dead) {
-    return true;
-  }
+  if (player->is_dead) { return true; }
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   return true;
 }
@@ -140,23 +122,15 @@ static uint8_t wid_spells_mouse_up(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   auto level = game->get_current_level();
-  if (! level) {
-    return true;
-  }
+  if (! level) { return true; }
 
   auto player = level->player;
-  if (! player) {
-    return true;
-  }
+  if (! player) { return true; }
 
   Spellp spell = (Spellp) wid_get_void_context(w);
-  if (! spell) {
-    return true;
-  }
+  if (! spell) { return true; }
 
-  if (! spell->tpp) {
-    return true;
-  }
+  if (! spell->tpp) { return true; }
 
   player->spell_add(spell->tpp);
   wid_choose_spell_destroy();
@@ -180,14 +154,10 @@ void wid_spell_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
   TRACE_AND_INDENT();
 
   Spellp spell = (Spellp) wid_get_void_context(w);
-  if (! spell) {
-    return;
-  }
+  if (! spell) { return; }
 
   TRACE_NO_INDENT();
-  if (! spell->tpp) {
-    return;
-  }
+  if (! spell->tpp) { return; }
 
   TRACE_NO_INDENT();
   game->wid_tp_info_create(spell->tpp);
@@ -197,9 +167,7 @@ void wid_spell_tree_over_begin(Widp w, int relx, int rely, int wheelx, int wheel
 {
   auto new_spell_tree = wid_get_string_context(w);
 
-  if (new_spell_tree == current_spell_tree) {
-    return;
-  }
+  if (new_spell_tree == current_spell_tree) { return; }
 
   current_spell_tree = new_spell_tree;
   wid_choose_spell_destroy();
@@ -229,22 +197,12 @@ static bool spell_has_precursor(Spellp spell_curr)
     for (auto x = 0; x < SPELL_TREE_ACROSS; x++) {
       for (auto y = 0; y < SPELL_TREE_DOWN; y++) {
         auto spell = get(game->spell_tree[ tree_name ], x, y);
-        if (! spell) {
-          continue;
-        }
+        if (! spell) { continue; }
 
-        if (spell->spell_up == spell_curr) {
-          return true;
-        }
-        if (spell->spell_down == spell_curr) {
-          return true;
-        }
-        if (spell->spell_left == spell_curr) {
-          return true;
-        }
-        if (spell->spell_right == spell_curr) {
-          return true;
-        }
+        if (spell->spell_up == spell_curr) { return true; }
+        if (spell->spell_down == spell_curr) { return true; }
+        if (spell->spell_left == spell_curr) { return true; }
+        if (spell->spell_right == spell_curr) { return true; }
       }
     }
   }
@@ -261,9 +219,7 @@ static bool spell_is_available(Spellp spell_next)
     for (auto x = 0; x < SPELL_TREE_ACROSS; x++) {
       for (auto y = 0; y < SPELL_TREE_DOWN; y++) {
         auto spell_curr = get(game->spell_tree[ tree_name ], x, y);
-        if (! spell_curr) {
-          continue;
-        }
+        if (! spell_curr) { continue; }
 
         //
         // We walk all the other spells, looking for one that points at the next spell
@@ -274,9 +230,7 @@ static bool spell_is_available(Spellp spell_next)
           FOR_ALL_SPELLS_FOR(game->level->player, id)
           {
             auto known_spell = game->level->thing_find(id);
-            if (known_spell && (spell_curr->tpp == known_spell->tp())) {
-              return true;
-            }
+            if (known_spell && (spell_curr->tpp == known_spell->tp())) { return true; }
           }
         }
       }
@@ -290,9 +244,7 @@ void Game::wid_choose_spell(void)
   //
   // Default tree
   //
-  if (current_spell_tree == "") {
-    current_spell_tree = "combat";
-  }
+  if (current_spell_tree == "") { current_spell_tree = "combat"; }
 
   wid_choose_from_spell_tree(current_spell_tree);
 }
@@ -333,9 +285,7 @@ void Game::wid_choose_from_spell_tree(std::string current_tree_name)
         }
       }
     }
-    if (add) {
-      spells.push_back(tpp);
-    }
+    if (add) { spells.push_back(tpp); }
   }
 
   if (spells.empty()) {
@@ -380,9 +330,7 @@ void Game::wid_choose_from_spell_tree(std::string current_tree_name)
   for (auto x = 0; x < SPELL_TREE_ACROSS; x++) {
     for (auto y = 0; y < SPELL_TREE_DOWN; y++) {
       auto spell = get(game->spell_tree[ current_tree_name ], x, y);
-      if (! spell) {
-        continue;
-      }
+      if (! spell) { continue; }
 
       //
       // Create a button describing the spell
@@ -392,9 +340,7 @@ void Game::wid_choose_from_spell_tree(std::string current_tree_name)
       point br;
       tl.x = WID_SPELL_BUTTON_WIDTH * x + 2 + WID_SPELL_LEFT_PADDING;
       tl.y = WID_SPELL_BUTTON_HEIGHT * y + 3;
-      if (! g_opt_ascii) {
-        tl.y += 1;
-      }
+      if (! g_opt_ascii) { tl.y += 1; }
       br.x = tl.x + (WID_SPELL_BUTTON_WIDTH - 1) - 1;
       br.y = tl.y + (WID_SPELL_BUTTON_HEIGHT - 1) - 1;
       wid_set_pos(b, tl, br);
@@ -459,9 +405,7 @@ void Game::wid_choose_from_spell_tree(std::string current_tree_name)
                 auto tiles = &tpp->tiles;
                 if (tiles) {
                   auto tile = tile_n(tiles, 0);
-                  if (tile) {
-                    wid_set_tile(TILE_LAYER_FG_0, b, tile);
-                  }
+                  if (tile) { wid_set_tile(TILE_LAYER_FG_0, b, tile); }
                 }
               }
             } else {
@@ -524,9 +468,7 @@ void Game::wid_choose_from_spell_tree(std::string current_tree_name)
 
         tl2.x -= 1;
         tl2.y += 2;
-        if (g_opt_ascii) {
-          tl2.y--;
-        }
+        if (g_opt_ascii) { tl2.y--; }
         br2 = tl2;
 
         wid_set_pos(b, tl2, br2);
@@ -547,9 +489,7 @@ void Game::wid_choose_from_spell_tree(std::string current_tree_name)
         tl2.x -= 1;
         tl2.y += 1;
         tl2.y += 1;
-        if (g_opt_ascii) {
-          tl2.y--;
-        }
+        if (g_opt_ascii) { tl2.y--; }
         br2 = tl2;
 
         wid_set_pos(b, tl2, br2);

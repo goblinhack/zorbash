@@ -12,9 +12,7 @@ bool Thing::projectile_choose_target(Thingp item, Thingp victim /* can be null *
   TRACE_AND_INDENT();
 
   if (is_monst() || (game->robot_mode && is_player())) {
-    if (! victim) {
-      victim = best_visible_target_get();
-    }
+    if (! victim) { victim = best_visible_target_get(); }
     if (! victim) {
       dbg("No victim found");
       return false;
@@ -39,9 +37,7 @@ bool Thing::projectile_choose_target(Thingp item, Thingp victim /* can be null *
     return true;
   }
 
-  if (! is_target_select(item)) {
-    return false;
-  }
+  if (! is_target_select(item)) { return false; }
 
   game->request_to_use_item = item;
 
@@ -59,13 +55,9 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &gfx_targeted_p
   // Set the owner. If fork lightning in water, don't set water as the owner!
   //
   auto owner = item ? item : this;
-  if (! owner->maybe_infop()) {
-    owner = nullptr;
-  }
+  if (! owner->maybe_infop()) { owner = nullptr; }
 
-  if (gfx_targeted_projectile == "") {
-    die("No projectile name");
-  }
+  if (gfx_targeted_projectile == "") { die("No projectile name"); }
 
   //
   // Projectiles hit the first thing in the way. But ignore if it hits
@@ -134,9 +126,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &gfx_targeted_p
   auto projectile = level->thing_new(gfx_targeted_projectile, target->curr_at, owner);
   if (! projectile) {
     err("No projectile to shoot");
-    if (is_player()) {
-      game->tick_begin("failed to shoot projectile");
-    }
+    if (is_player()) { game->tick_begin("failed to shoot projectile"); }
     return nullptr;
   }
 
@@ -197,13 +187,9 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &gfx_targeted_p
 
   on_use(projectile, target);
 
-  if (item) {
-    item->on_targeted(target->curr_at);
-  }
+  if (item) { item->on_targeted(target->curr_at); }
 
-  if (projectile->is_fire()) {
-    level->line_set_all_on_fire(curr_at, target->curr_at, 0, "projectile");
-  }
+  if (projectile->is_fire()) { level->line_set_all_on_fire(curr_at, target->curr_at, 0, "projectile"); }
 
   return projectile;
 }
@@ -251,9 +237,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &gfx_targeted_p
 
   FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
   {
-    if (t->is_the_grid) {
-      return projectile_shoot_at(item, gfx_targeted_projectile, t);
-    }
+    if (t->is_the_grid) { return projectile_shoot_at(item, gfx_targeted_projectile, t); }
   }
   FOR_ALL_THINGS_END()
 

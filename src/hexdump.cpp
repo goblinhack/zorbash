@@ -31,16 +31,12 @@ void hexdump(const unsigned char *addr, size_t len)
 
   std::cout << std::dec << len << " bytes:" << std::endl;
 
-  if (! len) {
-    return;
-  }
+  if (! len) { return; }
 
   for (i = 0, x = 0; i < len; i++, x++) {
     if ((i % HEX_DUMP_WIDTH) == 0) {
       if (! skipping_blanks) {
-        if (i != 0) {
-          std::cout << " |" << std::setw(HEX_DUMP_WIDTH) << buf << "|" << std::endl;
-        }
+        if (i != 0) { std::cout << " |" << std::setw(HEX_DUMP_WIDTH) << buf << "|" << std::endl; }
       }
 
       /*
@@ -58,9 +54,7 @@ void hexdump(const unsigned char *addr, size_t len)
       x = 0;
     }
 
-    if (x && (((i % (HEX_DUMP_WIDTH / 2))) == 0)) {
-      std::cout << " ";
-    }
+    if (x && (((i % (HEX_DUMP_WIDTH / 2))) == 0)) { std::cout << " "; }
 
     skipping_blanks = false;
 
@@ -76,18 +70,14 @@ void hexdump(const unsigned char *addr, size_t len)
   }
 
   if (! buf[ 0 ]) {
-    if (skipping_blanks) {
-      std::cout << "  *\n";
-    }
+    if (skipping_blanks) { std::cout << "  *\n"; }
 
     return;
   }
 
   while ((i % HEX_DUMP_WIDTH) != 0) {
     std::cout << "   ";
-    if (i && (((i % (HEX_DUMP_WIDTH / 2))) == 0)) {
-      std::cout << " ";
-    }
+    if (i && (((i % (HEX_DUMP_WIDTH / 2))) == 0)) { std::cout << " "; }
 
     i++;
   }

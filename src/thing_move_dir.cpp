@@ -9,9 +9,7 @@ void Thing::dir_set_none(void)
 {
   TRACE_NO_INDENT();
 
-  if (tp()->gfx_pixelart_animated_no_dir()) {
-    return;
-  }
+  if (tp()->gfx_pixelart_animated_no_dir()) { return; }
 
   is_facing_left = true;
 
@@ -31,9 +29,7 @@ void Thing::dir_set_down(void)
 {
   TRACE_NO_INDENT();
 
-  if (tp()->gfx_pixelart_animated_no_dir()) {
-    return;
-  }
+  if (tp()->gfx_pixelart_animated_no_dir()) { return; }
 
   if (dir != THING_DIR_DOWN) {
     dir = THING_DIR_DOWN;
@@ -51,9 +47,7 @@ void Thing::dir_set_up(void)
 {
   TRACE_NO_INDENT();
 
-  if (tp()->gfx_pixelart_animated_no_dir()) {
-    return;
-  }
+  if (tp()->gfx_pixelart_animated_no_dir()) { return; }
 
   if (dir != THING_DIR_UP) {
     dir = THING_DIR_UP;
@@ -71,9 +65,7 @@ void Thing::dir_set_left(void)
 {
   TRACE_NO_INDENT();
 
-  if (tp()->gfx_pixelart_animated_no_dir()) {
-    return;
-  }
+  if (tp()->gfx_pixelart_animated_no_dir()) { return; }
 
   if (dir != THING_DIR_LEFT) {
     dir = THING_DIR_LEFT;
@@ -91,9 +83,7 @@ void Thing::dir_set_right(void)
 {
   TRACE_NO_INDENT();
 
-  if (tp()->gfx_pixelart_animated_no_dir()) {
-    return;
-  }
+  if (tp()->gfx_pixelart_animated_no_dir()) { return; }
 
   if (dir != THING_DIR_RIGHT) {
     dir = THING_DIR_RIGHT;
@@ -111,9 +101,7 @@ void Thing::dir_set_tl(void)
 {
   TRACE_NO_INDENT();
 
-  if (tp()->gfx_pixelart_animated_no_dir()) {
-    return;
-  }
+  if (tp()->gfx_pixelart_animated_no_dir()) { return; }
 
   if (dir != THING_DIR_TL) {
     dir = THING_DIR_TL;
@@ -131,9 +119,7 @@ void Thing::dir_set_bl(void)
 {
   TRACE_NO_INDENT();
 
-  if (tp()->gfx_pixelart_animated_no_dir()) {
-    return;
-  }
+  if (tp()->gfx_pixelart_animated_no_dir()) { return; }
 
   if (dir != THING_DIR_BL) {
     dir = THING_DIR_BL;
@@ -151,9 +137,7 @@ void Thing::dir_set_tr(void)
 {
   TRACE_NO_INDENT();
 
-  if (tp()->gfx_pixelart_animated_no_dir()) {
-    return;
-  }
+  if (tp()->gfx_pixelart_animated_no_dir()) { return; }
 
   if (dir != THING_DIR_TR) {
     dir = THING_DIR_TR;
@@ -171,9 +155,7 @@ void Thing::dir_set_br(void)
 {
   TRACE_NO_INDENT();
 
-  if (tp()->gfx_pixelart_animated_no_dir()) {
-    return;
-  }
+  if (tp()->gfx_pixelart_animated_no_dir()) { return; }
 
   if (dir != THING_DIR_BR) {
     dir = THING_DIR_BR;

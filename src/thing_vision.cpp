@@ -14,12 +14,8 @@ bool Level::can_see_unimpeded(int x0, int y0, int x1, int y1)
   int err = dx + dy, e2; /* error value e_xy */
 
   for (;;) { /* loop */
-    if (x0 == x1 && y0 == y1) {
-      break;
-    }
-    if (can_see_obstacle(x0, y0)) {
-      return false;
-    }
+    if (x0 == x1 && y0 == y1) { break; }
+    if (can_see_obstacle(x0, y0)) { return false; }
     e2 = 2 * err;
     if (e2 >= dy) {
       err += dy;
@@ -42,9 +38,7 @@ point Thing::vision_source_get(void)
 {
   if (distance_minion_vision_shared()) {
     auto mob = top_mob();
-    if (mob) {
-      return mob->curr_at;
-    }
+    if (mob) { return mob->curr_at; }
   }
   return curr_at;
 }
@@ -58,14 +52,10 @@ float Thing::distance_vision_get(void)
   //
   auto v = tp()->distance_vision();
 
-  if (is_able_to_see_in_the_dark()) {
-    return v;
-  }
+  if (is_able_to_see_in_the_dark()) { return v; }
 
   auto l = light_dist_get();
 
-  if (l < v) {
-    return l;
-  }
+  if (l < v) { return l; }
   return v;
 }

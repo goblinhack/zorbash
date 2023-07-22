@@ -20,24 +20,16 @@ std::list< Thingp > Thing::boots_list(void)
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
-    if (unlikely(! t)) {
-      continue;
-    }
+    if (unlikely(! t)) { continue; }
     if (t->is_bag()) {
       FOR_ALL_CARRIED_BY(t, item)
       {
         auto t = level->thing_find(item.id);
-        if (unlikely(! t)) {
-          continue;
-        }
-        if (t->is_boots()) {
-          out.push_back(t);
-        }
+        if (unlikely(! t)) { continue; }
+        if (t->is_boots()) { out.push_back(t); }
       }
     }
-    if (t->is_boots()) {
-      out.push_back(t);
-    }
+    if (t->is_boots()) { out.push_back(t); }
   }
   return out;
 }
@@ -56,24 +48,16 @@ std::vector< Thingp > Thing::boots_vector(void)
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
-    if (unlikely(! t)) {
-      continue;
-    }
+    if (unlikely(! t)) { continue; }
     if (t->is_bag()) {
       FOR_ALL_CARRIED_BY(t, item)
       {
         auto t = level->thing_find(item.id);
-        if (unlikely(! t)) {
-          continue;
-        }
-        if (t->is_boots()) {
-          out.push_back(t);
-        }
+        if (unlikely(! t)) { continue; }
+        if (t->is_boots()) { out.push_back(t); }
       }
     }
-    if (t->is_boots()) {
-      out.push_back(t);
-    }
+    if (t->is_boots()) { out.push_back(t); }
   }
   return out;
 }
@@ -83,14 +67,10 @@ int Thing::carried_boots_count(void)
   TRACE_NO_INDENT();
   int count = 0;
 
-  if (! maybe_itemsp()) {
-    return count;
-  }
+  if (! maybe_itemsp()) { return count; }
 
   for (const auto t : boots_list()) {
-    if (t->is_boots()) {
-      count++;
-    }
+    if (t->is_boots()) { count++; }
   }
   return count;
 }
@@ -101,14 +81,10 @@ int Thing::carried_boots_least_value(Thingp *out)
   int least_value = -1;
 
   *out = nullptr;
-  if (! maybe_itemsp()) {
-    return least_value;
-  }
+  if (! maybe_itemsp()) { return least_value; }
 
   for (const auto t : boots_list()) {
-    if (! t->is_boots()) {
-      continue;
-    }
+    if (! t->is_boots()) { continue; }
 
     auto v = value(t);
     if (! *out) {
@@ -130,14 +106,10 @@ int Thing::carried_boots_highest_value(Thingp *out)
   int highest_value = -1;
 
   *out = nullptr;
-  if (! maybe_itemsp()) {
-    return highest_value;
-  }
+  if (! maybe_itemsp()) { return highest_value; }
 
   for (const auto t : boots_list()) {
-    if (! t->is_boots()) {
-      continue;
-    }
+    if (! t->is_boots()) { continue; }
 
     auto v = value(t);
     if (! *out) {
@@ -159,26 +131,18 @@ int Thing::carried_boots_highest_value_for_target(Thingp *out, Thingp target)
   int highest_value = -1;
 
   *out = nullptr;
-  if (! maybe_itemsp()) {
-    return highest_value;
-  }
+  if (! maybe_itemsp()) { return highest_value; }
 
   for (const auto t : boots_list()) {
-    if (! t->is_boots()) {
-      continue;
-    }
+    if (! t->is_boots()) { continue; }
 
-    if (! t->charge_count()) {
-      continue;
-    }
+    if (! t->charge_count()) { continue; }
 
     //
     // If intelligent don't use a boots that will hit you also
     //
     if (is_intelligent()) {
-      if (distance(curr_at, target->curr_at) <= t->effect_radius()) {
-        continue;
-      }
+      if (distance(curr_at, target->curr_at) <= t->effect_radius()) { continue; }
     }
 
     auto v = value(t);

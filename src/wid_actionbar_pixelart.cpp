@@ -18,19 +18,13 @@ void wid_actionbar_pixelart_init(void)
   DBG("Actionbar init");
   TRACE_AND_INDENT();
 
-  if (! game->level) {
-    return;
-  }
+  if (! game->level) { return; }
   auto level = game->level;
 
   auto player = game->level->player;
-  if (! player) {
-    return;
-  }
+  if (! player) { return; }
 
-  if (player->is_dead) {
-    return;
-  }
+  if (player->is_dead) { return; }
 
   //
   // In case a scancode was used to open this widget
@@ -47,9 +41,7 @@ void wid_actionbar_pixelart_init(void)
 
   CarryOptions carry_options;
   bool         ui_icon_collect = false;
-  if (player->check_anything_to_carry(carry_options)) {
-    ui_icon_collect = true;
-  }
+  if (player->check_anything_to_carry(carry_options)) { ui_icon_collect = true; }
 
   //
   // I don't like this - it is missing a key and makes things more complex?
@@ -58,9 +50,7 @@ void wid_actionbar_pixelart_init(void)
 
   bool ui_icon_close = false;
 
-  if (wid_popup_exists()) {
-    ui_icon_close = true;
-  }
+  if (wid_popup_exists()) { ui_icon_close = true; }
 
   int options = 6;
 
@@ -70,9 +60,7 @@ void wid_actionbar_pixelart_init(void)
     options++;
   }
 
-  if (ui_icon_collect) {
-    options++;
-  }
+  if (ui_icon_collect) { options++; }
 
   if (ui_icon_close) {
     options++;

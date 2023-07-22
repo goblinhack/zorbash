@@ -30,9 +30,7 @@ Light::~Light(void)
   TRACE_NO_INDENT();
 
   verify(MTYPE_LIGHT, this);
-  if (is_being_destroyed) {
-    die("Death recursion");
-  }
+  if (is_being_destroyed) { die("Death recursion"); }
   is_being_destroyed = true;
   destroy();
   oldptr(MTYPE_LIGHT, this);
@@ -112,9 +110,7 @@ Lightp light_new(Thingp owner, point offset, int light_dist, color col, int fbo)
 
   l->offset     = offset;
   l->light_dist = light_dist;
-  if (! light_dist) {
-    DIE("No light power");
-  }
+  if (! light_dist) { DIE("No light power"); }
 
   l->owner = owner;
   l->col   = col;
@@ -174,34 +170,24 @@ void Light::reset(void)
 
 bool Light::calculate(void)
 {
-  if (! level) {
-    return false;
-  }
+  if (! level) { return false; }
 
   auto player = level->player;
-  if (! player) {
-    return false;
-  }
+  if (! player) { return false; }
 
-  if (! player->is_blitted) {
-    return false;
-  }
+  if (! player->is_blitted) { return false; }
 
   //
   // This stops lighting things up when moving to the player on a new level
   //
   if (! player->is_jumping) {
-    if (player->is_hidden) {
-      return false;
-    }
+    if (player->is_hidden) { return false; }
   }
 
   point light_pos = owner->last_blit_at + offset;
 
   if (cached_light_pos == light_pos) {
-    if (cached_pixel_map_at == level->pixel_map_at) {
-      return true;
-    }
+    if (cached_pixel_map_at == level->pixel_map_at) { return true; }
   }
 
   cached_gl_cmds.clear();
@@ -236,18 +222,14 @@ bool Light::calculate(void)
   }
 
   float light_dist_current = light_dist;
-  if (! light_dist_current) {
-    return false;
-  }
+  if (! light_dist_current) { return false; }
 
   //
   // Do not fade ray casting lights as that allows us to see light sources
   // that are distant even if out own light is poor.
   //
   if (! ray_cast_only) {
-    if (owner->is_player()) {
-      light_dist_current = ((float) light_dist_current) * light_power * 3;
-    }
+    if (owner->is_player()) { light_dist_current = ((float) light_dist_current) * light_power * 3; }
   }
 
   if (! owner->is_able_to_see_through_doors()) {
@@ -270,12 +252,8 @@ bool Light::calculate(void)
           last_x                      = -1;
           last_y                      = -1;
           for (;; step++) {
-            if (unlikely(step >= end_of_points)) {
-              break;
-            }
-            if (unlikely(rp->distance > light_dist_current)) {
-              break;
-            }
+            if (unlikely(step >= end_of_points)) { break; }
+            if (unlikely(rp->distance > light_dist_current)) { break; }
             const int16_t p1x = light_pos.x + rp->p.x;
             const int16_t p1y = light_pos.y + rp->p.y;
             const uint8_t x   = p1x / TILE_WIDTH;
@@ -289,9 +267,7 @@ bool Light::calculate(void)
             // This is for foliage so we don't obscure too much where
             // we stand
             //
-            if (step < TILE_WIDTH / 2) {
-              continue;
-            }
+            if (step < TILE_WIDTH / 2) { continue; }
 
             if (level->is_light_blocker_no_check(x, y)) {
               //
@@ -299,20 +275,14 @@ bool Light::calculate(void)
               //
               int16_t step2 = step;
               for (;;) {
-                if (unlikely(step2 >= end_of_points)) {
-                  break;
-                }
-                if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) {
-                  break;
-                }
+                if (unlikely(step2 >= end_of_points)) { break; }
+                if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) { break; }
                 const int16_t p1x = light_pos.x + rp->p.x;
                 const int16_t p1y = light_pos.y + rp->p.y;
                 const uint8_t x   = p1x / TILE_WIDTH;
                 const uint8_t y   = p1y / TILE_HEIGHT;
                 AVOID_LOOKING_AT_THE_SAME_TILE2()
-                if (! level->is_light_blocker_no_check(x, y)) {
-                  break;
-                }
+                if (! level->is_light_blocker_no_check(x, y)) { break; }
                 rp++;
                 step2++;
               }
@@ -331,12 +301,8 @@ bool Light::calculate(void)
           last_x                      = -1;
           last_y                      = -1;
           for (;; step++) {
-            if (unlikely(step >= end_of_points)) {
-              break;
-            }
-            if (unlikely(rp->distance > light_dist_current)) {
-              break;
-            }
+            if (unlikely(step >= end_of_points)) { break; }
+            if (unlikely(rp->distance > light_dist_current)) { break; }
             const int16_t p1x = light_pos.x + rp->p.x;
             const int16_t p1y = light_pos.y + rp->p.y;
             const uint8_t x   = p1x / TILE_WIDTH;
@@ -352,20 +318,14 @@ bool Light::calculate(void)
               //
               int16_t step2 = step;
               for (;;) {
-                if (unlikely(step2 >= end_of_points)) {
-                  break;
-                }
-                if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) {
-                  break;
-                }
+                if (unlikely(step2 >= end_of_points)) { break; }
+                if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) { break; }
                 const int16_t p1x = light_pos.x + rp->p.x;
                 const int16_t p1y = light_pos.y + rp->p.y;
                 const uint8_t x   = p1x / TILE_WIDTH;
                 const uint8_t y   = p1y / TILE_HEIGHT;
                 AVOID_LOOKING_AT_THE_SAME_TILE2()
-                if (! level->is_light_blocker_no_check(x, y)) {
-                  break;
-                }
+                if (! level->is_light_blocker_no_check(x, y)) { break; }
                 rp++;
                 step2++;
               }
@@ -389,20 +349,14 @@ bool Light::calculate(void)
           last_x                      = -1;
           last_y                      = -1;
           for (;; step++) {
-            if (unlikely(step >= end_of_points)) {
-              break;
-            }
-            if (unlikely(rp->distance > light_dist_current)) {
-              break;
-            }
+            if (unlikely(step >= end_of_points)) { break; }
+            if (unlikely(rp->distance > light_dist_current)) { break; }
             const int16_t p1x = light_pos.x + rp->p.x;
             const int16_t p1y = light_pos.y + rp->p.y;
             const uint8_t x   = p1x / TILE_WIDTH;
             const uint8_t y   = p1y / TILE_HEIGHT;
 
-            if (level->is_oob(x, y)) {
-              break;
-            }
+            if (level->is_oob(x, y)) { break; }
 
             AVOID_LOOKING_AT_THE_SAME_TILE()
             level->is_currently_pixelart_raycast_lit_set(x, y); // allows lights to fade
@@ -412,9 +366,7 @@ bool Light::calculate(void)
             // This is for foliage so we don't obscure too much where
             // we stand
             //
-            if (step < TILE_WIDTH / 2) {
-              continue;
-            }
+            if (step < TILE_WIDTH / 2) { continue; }
 
             if (level->is_light_blocker(x, y)) {
               //
@@ -423,20 +375,14 @@ bool Light::calculate(void)
               //
               int16_t step2 = step;
               for (;;) {
-                if (unlikely(step2 >= end_of_points)) {
-                  break;
-                }
-                if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) {
-                  break;
-                }
+                if (unlikely(step2 >= end_of_points)) { break; }
+                if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) { break; }
                 const int16_t p1x = light_pos.x + rp->p.x;
                 const int16_t p1y = light_pos.y + rp->p.y;
                 const uint8_t x   = p1x / TILE_WIDTH;
                 const uint8_t y   = p1y / TILE_HEIGHT;
                 AVOID_LOOKING_AT_THE_SAME_TILE2()
-                if (! level->is_light_blocker(x, y)) {
-                  break;
-                }
+                if (! level->is_light_blocker(x, y)) { break; }
                 rp++;
                 step2++;
               }
@@ -455,12 +401,8 @@ bool Light::calculate(void)
           last_x                      = -1;
           last_y                      = -1;
           for (;; step++) {
-            if (unlikely(step >= end_of_points)) {
-              break;
-            }
-            if (unlikely(rp->distance > light_dist_current)) {
-              break;
-            }
+            if (unlikely(step >= end_of_points)) { break; }
+            if (unlikely(rp->distance > light_dist_current)) { break; }
             const int16_t p1x = light_pos.x + rp->p.x;
             const int16_t p1y = light_pos.y + rp->p.y;
             const uint8_t x   = p1x / TILE_WIDTH;
@@ -476,20 +418,14 @@ bool Light::calculate(void)
               //
               int16_t step2 = step;
               for (;;) {
-                if (unlikely(step2 >= end_of_points)) {
-                  break;
-                }
-                if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) {
-                  break;
-                }
+                if (unlikely(step2 >= end_of_points)) { break; }
+                if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) { break; }
                 const int16_t p1x = light_pos.x + rp->p.x;
                 const int16_t p1y = light_pos.y + rp->p.y;
                 const uint8_t x   = p1x / TILE_WIDTH;
                 const uint8_t y   = p1y / TILE_HEIGHT;
                 AVOID_LOOKING_AT_THE_SAME_TILE2()
-                if (! level->is_light_blocker(x, y)) {
-                  break;
-                }
+                if (! level->is_light_blocker(x, y)) { break; }
                 rp++;
                 step2++;
               }
@@ -514,12 +450,8 @@ bool Light::calculate(void)
         last_x                      = -1;
         last_y                      = -1;
         for (;; step++) {
-          if (unlikely(step >= end_of_points)) {
-            break;
-          }
-          if (unlikely(rp->distance > light_dist_current)) {
-            break;
-          }
+          if (unlikely(step >= end_of_points)) { break; }
+          if (unlikely(rp->distance > light_dist_current)) { break; }
           const int16_t p1x = light_pos.x + rp->p.x;
           const int16_t p1y = light_pos.y + rp->p.y;
           const uint8_t x   = p1x / TILE_WIDTH;
@@ -533,13 +465,9 @@ bool Light::calculate(void)
           // This is for foliage so we don't obscure too much where
           // we stand
           //
-          if (step < TILE_WIDTH / 2) {
-            continue;
-          }
+          if (step < TILE_WIDTH / 2) { continue; }
 
-          if (level->is_door(x, y)) {
-            continue;
-          }
+          if (level->is_door(x, y)) { continue; }
 
           if (level->is_light_blocker(x, y)) {
             //
@@ -548,20 +476,14 @@ bool Light::calculate(void)
             //
             int16_t step2 = step;
             for (;;) {
-              if (unlikely(step2 >= end_of_points)) {
-                break;
-              }
-              if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) {
-                break;
-              }
+              if (unlikely(step2 >= end_of_points)) { break; }
+              if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) { break; }
               const int16_t p1x = light_pos.x + rp->p.x;
               const int16_t p1y = light_pos.y + rp->p.y;
               const uint8_t x   = p1x / TILE_WIDTH;
               const uint8_t y   = p1y / TILE_HEIGHT;
               AVOID_LOOKING_AT_THE_SAME_TILE2()
-              if (! level->is_light_blocker(x, y)) {
-                break;
-              }
+              if (! level->is_light_blocker(x, y)) { break; }
               rp++;
               step2++;
             }
@@ -580,12 +502,8 @@ bool Light::calculate(void)
         last_x                      = -1;
         last_y                      = -1;
         for (;; step++) {
-          if (unlikely(step >= end_of_points)) {
-            break;
-          }
-          if (unlikely(rp->distance > light_dist_current)) {
-            break;
-          }
+          if (unlikely(step >= end_of_points)) { break; }
+          if (unlikely(rp->distance > light_dist_current)) { break; }
           const int16_t p1x = light_pos.x + rp->p.x;
           const int16_t p1y = light_pos.y + rp->p.y;
           const uint8_t x   = p1x / TILE_WIDTH;
@@ -594,9 +512,7 @@ bool Light::calculate(void)
           AVOID_LOOKING_AT_THE_SAME_TILE()
           rp++;
 
-          if (level->is_door(x, y)) {
-            continue;
-          }
+          if (level->is_door(x, y)) { continue; }
 
           if (level->is_light_blocker(x, y)) {
             //
@@ -605,20 +521,14 @@ bool Light::calculate(void)
             //
             int16_t step2 = step;
             for (;;) {
-              if (unlikely(step2 >= end_of_points)) {
-                break;
-              }
-              if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) {
-                break;
-              }
+              if (unlikely(step2 >= end_of_points)) { break; }
+              if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) { break; }
               const int16_t p1x = light_pos.x + rp->p.x;
               const int16_t p1y = light_pos.y + rp->p.y;
               const uint8_t x   = p1x / TILE_WIDTH;
               const uint8_t y   = p1y / TILE_HEIGHT;
               AVOID_LOOKING_AT_THE_SAME_TILE2()
-              if (! level->is_light_blocker(x, y)) {
-                break;
-              }
+              if (! level->is_light_blocker(x, y)) { break; }
               rp++;
               step2++;
             }
@@ -710,17 +620,11 @@ void Light::render(int ray_cast_only)
     g_glow_overlay_texid = tex_get_gl_binding(g_glow_overlay_tex);
   }
 
-  if (! calculate()) {
-    return;
-  }
+  if (! calculate()) { return; }
 
-  if (ray_cast_only) {
-    return;
-  }
+  if (ray_cast_only) { return; }
 
-  if (g_opt_ascii) {
-    return;
-  }
+  if (g_opt_ascii) { return; }
 
   render_triangle_fans();
 }
@@ -750,9 +654,7 @@ void Level::lights_render(int minx, int miny, int maxx, int maxy, int fbo)
         continue;
       }
 
-      if (l->fbo == fbo) {
-        l->render(false);
-      }
+      if (l->fbo == fbo) { l->render(false); }
     }
   }
 
@@ -760,9 +662,7 @@ void Level::lights_render(int minx, int miny, int maxx, int maxy, int fbo)
   // Small point lights create a glow around the item and are not blocked by obstacles.
   // Useful for when you have no torches and want to see something.
   //
-  if (fbo != FBO_SMALL_POINT_LIGHTS) {
-    return;
-  }
+  if (fbo != FBO_SMALL_POINT_LIGHTS) { return; }
 
   //
   // Blit a dark background which we will fill with lights
@@ -805,42 +705,28 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
         //
         // So knocked over braziers do not light
         //
-        if (t->is_dead || t->is_corpse()) {
-          continue;
-        }
+        if (t->is_dead || t->is_corpse()) { continue; }
 
         for (auto &l : t->light_get()) {
 
           if (player && (l->owner == player)) {
-            if (! include_player_lights) {
-              continue;
-            }
-            if (l->ray_cast_only) {
-              continue;
-            }
-            if (l->fbo != fbo) {
-              continue;
-            }
+            if (! include_player_lights) { continue; }
+            if (l->ray_cast_only) { continue; }
+            if (l->fbo != fbo) { continue; }
           }
 
           //
           // Skip lights that are in blocked off rooms the player cannot see
           //
-          if (get(dmap_to_player.val, t->curr_at.x, t->curr_at.y) >= DMAP_IS_PASSABLE) {
-            continue;
-          }
+          if (get(dmap_to_player.val, t->curr_at.x, t->curr_at.y) >= DMAP_IS_PASSABLE) { continue; }
 
-          if (! is_currently_pixelart_raycast_lit_no_check(t->curr_at.x, t->curr_at.y)) {
-            continue;
-          }
+          if (! is_currently_pixelart_raycast_lit_no_check(t->curr_at.x, t->curr_at.y)) { continue; }
 
           auto  t = l->owner;
           point blit_tl, blit_br;
           Tilep tile = {};
 
-          if (! t->map_offset_coords_get(blit_tl, blit_br, tile, false)) {
-            continue;
-          }
+          if (! t->map_offset_coords_get(blit_tl, blit_br, tile, false)) { continue; }
 
           auto mid = (blit_br + blit_tl) / (short) 2;
 
@@ -892,51 +778,33 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
         //
         // So knocked over braziers do not light
         //
-        if (t->is_dead || t->is_corpse()) {
-          continue;
-        }
+        if (t->is_dead || t->is_corpse()) { continue; }
 
         for (auto &l : t->light_get()) {
 
           if (player && (l->owner == player)) {
-            if (! include_player_lights) {
-              continue;
-            }
-            if (l->ray_cast_only) {
-              continue;
-            }
-            if (l->fbo != fbo) {
-              continue;
-            }
+            if (! include_player_lights) { continue; }
+            if (l->ray_cast_only) { continue; }
+            if (l->fbo != fbo) { continue; }
           }
 
-          if (! t->gfx_glows()) {
-            continue;
-          }
+          if (! t->gfx_glows()) { continue; }
 
           //
           // Skip lights that are in blocked off rooms the player cannot see
           //
-          if (get(dmap_to_player.val, t->curr_at.x, t->curr_at.y) >= DMAP_IS_PASSABLE) {
-            continue;
-          }
+          if (get(dmap_to_player.val, t->curr_at.x, t->curr_at.y) >= DMAP_IS_PASSABLE) { continue; }
 
-          if (! is_currently_pixelart_raycast_lit_no_check(t->curr_at.x, t->curr_at.y)) {
-            continue;
-          }
+          if (! is_currently_pixelart_raycast_lit_no_check(t->curr_at.x, t->curr_at.y)) { continue; }
 
           auto  t = l->owner;
           point blit_tl, blit_br;
           Tilep tile = {};
 
-          if (! t->map_offset_coords_get(blit_tl, blit_br, tile, false)) {
-            continue;
-          }
+          if (! t->map_offset_coords_get(blit_tl, blit_br, tile, false)) { continue; }
 
           if (t->gfx_pixelart_flickers()) {
-            if (non_pcg_random_range(0, 100) < 10) {
-              l->flicker = non_pcg_random_range(0, 10);
-            }
+            if (non_pcg_random_range(0, 100) < 10) { l->flicker = non_pcg_random_range(0, 10); }
           }
 
           auto  s   = l->light_dist + l->flicker;
@@ -1001,9 +869,7 @@ void Level::lights_update_new_level(void)
         //
         // So knocked over braziers do not light
         //
-        if (t->is_dead || t->is_corpse()) {
-          continue;
-        }
+        if (t->is_dead || t->is_corpse()) { continue; }
 
         //
         // Need to do this as light position depends on blitting
@@ -1033,9 +899,7 @@ void Level::lights_update_same_level(void)
         //
         // So knocked over braziers do not light
         //
-        if (t->is_dead || t->is_corpse()) {
-          continue;
-        }
+        if (t->is_dead || t->is_corpse()) { continue; }
 
         for (auto &l : t->light_get()) {
           l->update();

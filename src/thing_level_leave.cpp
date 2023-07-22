@@ -13,9 +13,7 @@ void Thing::level_leave(void)
   // Too noisy at level destroy time.
   //
   if (is_loggable()) {
-    if (! level->is_being_destroyed) {
-      dbg2("Leave %s", level->to_string().c_str());
-    }
+    if (! level->is_being_destroyed) { dbg2("Leave %s", level->to_string().c_str()); }
   }
   TRACE_AND_INDENT();
 
@@ -34,23 +32,17 @@ void Thing::level_leave(void)
 
   {
     auto it = immediate_mob();
-    if (it) {
-      mob_unset();
-    }
+    if (it) { mob_unset(); }
   }
 
   {
     auto it = leader();
-    if (it) {
-      leader_unset();
-    }
+    if (it) { leader_unset(); }
   }
 
   {
     auto it = immediate_spawner();
-    if (it) {
-      spawner_unset();
-    }
+    if (it) { spawner_unset(); }
   }
 
   //

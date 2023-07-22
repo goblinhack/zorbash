@@ -12,15 +12,11 @@ void Level::display_pixelart_map(void)
 {
   TRACE_NO_INDENT();
 
-  if (! should_display_map()) {
-    return;
-  }
+  if (! should_display_map()) { return; }
 
   bool shake = screen_shake_begin();
   display_pixelart_map_all();
-  if (shake) {
-    screen_shake_end();
-  }
+  if (shake) { screen_shake_end(); }
 
   display_pixelart_external_particles();
 
@@ -28,9 +24,7 @@ void Level::display_pixelart_map(void)
     ts_redraw_bg = 0;
 
     auto delta = 0;
-    if (ts_fade_in_begin) {
-      delta = time_ms_cached() - ts_fade_in_begin;
-    }
+    if (ts_fade_in_begin) { delta = time_ms_cached() - ts_fade_in_begin; }
 
     g_render_black_and_white = true;
     display_pixelart_map_bg_things();
@@ -39,9 +33,7 @@ void Level::display_pixelart_map(void)
     //
     // Reset the fade in timestamp as the above is a bit slow
     //
-    if (ts_fade_in_begin) {
-      ts_fade_in_begin = time_ms_cached() - delta;
-    }
+    if (ts_fade_in_begin) { ts_fade_in_begin = time_ms_cached() - delta; }
   }
 
   if (player) {
@@ -49,9 +41,7 @@ void Level::display_pixelart_map(void)
     // If the player is no longer on the level (maybe choosing the next one)
     // then do not try to display.
     //
-    if (player->is_changing_level) {
-      return;
-    }
+    if (player->is_changing_level) { return; }
 
     //
     // If a sewer, then also show the level above as it helps navigation
@@ -61,9 +51,7 @@ void Level::display_pixelart_map(void)
         bool showing_two_levels = true;
         auto dungeon_level      = world_at + point3d(0, 0, -1);
         auto dungeon            = get(game->world.levels, dungeon_level.x, dungeon_level.y, dungeon_level.z);
-        if (dungeon) {
-          dungeon->update_map_mini(showing_two_levels, true /* faded */);
-        }
+        if (dungeon) { dungeon->update_map_mini(showing_two_levels, true /* faded */); }
         update_map_mini(showing_two_levels, false /* faded */);
       } else {
         update_map_mini(false /* showing_two_levels */, false /* faded */);
@@ -91,12 +79,8 @@ void Level::display_pixelart_map_bg_things(void)
         for (auto x = 0; x < MAP_WIDTH; x++) {
           FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
           {
-            if (! t->gfx_pixelart_shown_in_bg()) {
-              continue;
-            }
-            if (z <= MAP_DEPTH_FLOOR2) {
-              t->blit_pixelart(fbo);
-            }
+            if (! t->gfx_pixelart_shown_in_bg()) { continue; }
+            if (z <= MAP_DEPTH_FLOOR2) { t->blit_pixelart(fbo); }
           }
           FOR_ALL_THINGS_END()
         }
@@ -120,9 +104,7 @@ void Level::display_pixelart_map_bg_things(void)
         for (auto x = 0; x < MAP_WIDTH; x++) {
           FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
           {
-            if (! t->gfx_pixelart_shown_in_bg()) {
-              continue;
-            }
+            if (! t->gfx_pixelart_shown_in_bg()) { continue; }
             t->blit_pixelart(fbo);
           }
           FOR_ALL_THINGS_END()
@@ -186,9 +168,7 @@ void Level::display_pixelart_map_things(int fbo, const int16_t minx, const int16
         for (auto x = minx; x < maxx; x++) {
           FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
           {
-            if (t->z_prio() != z_prio) {
-              continue;
-            }
+            if (t->z_prio() != z_prio) { continue; }
             t->blit_pixelart(fbo);
           }
           FOR_ALL_THINGS_END()
@@ -220,9 +200,7 @@ void Level::display_pixelart_map_fg_things(int fbo, const int16_t minx, const in
         for (auto x = minx; x < maxx; x++) {
           FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
           {
-            if (t->z_prio() != z_prio) {
-              continue;
-            }
+            if (t->z_prio() != z_prio) { continue; }
 
             t->blit_pixelart(fbo);
 
@@ -288,18 +266,10 @@ void Level::display_pixelart_map_all(void)
   int light_miny   = miny - light_border;
   int light_maxy   = maxy + light_border;
 
-  if (light_maxx > MAP_WIDTH - 1) {
-    light_maxx = MAP_WIDTH - 1;
-  }
-  if (light_maxy > MAP_HEIGHT - 1) {
-    light_maxy = MAP_HEIGHT - 1;
-  }
-  if (light_minx < 0) {
-    light_minx = 0;
-  }
-  if (light_miny < 0) {
-    light_miny = 0;
-  }
+  if (light_maxx > MAP_WIDTH - 1) { light_maxx = MAP_WIDTH - 1; }
+  if (light_maxy > MAP_HEIGHT - 1) { light_maxy = MAP_HEIGHT - 1; }
+  if (light_minx < 0) { light_minx = 0; }
+  if (light_miny < 0) { light_miny = 0; }
 
   display_map_set_bounds();
   display_tick_animation();
@@ -313,9 +283,7 @@ void Level::display_pixelart_map_all(void)
       is_map_mini_valid = false;
       ts_fade_out_begin = 0;
       fade_out_finished = true;
-      if (player) {
-        DBG("Fade out of level finished");
-      }
+      if (player) { DBG("Fade out of level finished"); }
     }
   }
 
@@ -530,9 +498,7 @@ void Level::display_pixelart_map_all(void)
   blit_fbo_unbind();
 
   if (fade_out_finished) {
-    if (player) {
-      player->log("Level fade out finished");
-    }
+    if (player) { player->log("Level fade out finished"); }
 
     blit_fbo_bind(FBO_MAP_HIDDEN);
     glClear(GL_COLOR_BUFFER_BIT);

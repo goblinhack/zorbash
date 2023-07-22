@@ -9,24 +9,16 @@
 bool Thing::is_friend(Thingp f)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! maybe_aip())) {
-    return false;
-  }
+  if (unlikely(! maybe_aip())) { return false; }
 
-  if (aip()->thing_friends.find(f->id) != aip()->thing_friends.end()) {
-    return true;
-  }
+  if (aip()->thing_friends.find(f->id) != aip()->thing_friends.end()) { return true; }
 
-  if (aip()->perma_friends.find(f->tp()->id) != aip()->perma_friends.end()) {
-    return true;
-  }
+  if (aip()->perma_friends.find(f->tp()->id) != aip()->perma_friends.end()) { return true; }
 
   //
   // Don't attack your own tentacles
   //
-  if (same_leader_or_owner(f)) {
-    return true;
-  }
+  if (same_leader_or_owner(f)) { return true; }
 
   return false;
 }

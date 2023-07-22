@@ -25,22 +25,16 @@ std::string py_obj_to_std_string(const PyObject *py_str)
   }
 
   py_encstr = PyUnicode_AsEncodedString((PyObject *) py_str, "utf-8", nullptr);
-  if (! py_encstr) {
-    goto err_out;
-  }
+  if (! py_encstr) { goto err_out; }
 
   str = PyBytes_AS_STRING(py_encstr);
-  if (! str) {
-    goto err_out;
-  }
+  if (! str) { goto err_out; }
 
   outstr = std::string(str);
 
 err_out:
 
-  if (py_encstr) {
-    Py_XDECREF(py_encstr);
-  }
+  if (py_encstr) { Py_XDECREF(py_encstr); }
 
   return outstr;
 }

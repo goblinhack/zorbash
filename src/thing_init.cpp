@@ -65,22 +65,16 @@ void Thing::on_born(void)
   TRACE_NO_INDENT();
 
   auto on_born = tp()->on_born_do();
-  if (std::empty(on_born)) {
-    return;
-  }
+  if (std::empty(on_born)) { return; }
 
   auto t = split_tokens(on_born, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) {
-      fn = fn.replace(found, 2, "");
-    }
+    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
 
-    if (mod == "me") {
-      mod = name();
-    }
+    if (mod == "me") { mod = name(); }
 
     dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(), (int) curr_at.x,
         (int) curr_at.y);
@@ -104,9 +98,7 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
   //
   // Try to find the thing by name
   //
-  if (name_in == "") {
-    DIE("Thing template cannot be created: No name given");
-  }
+  if (name_in == "") { DIE("Thing template cannot be created: No name given"); }
 
   auto cands = tp_find_wildcard(name_in);
   auto tpp   = pcg_one_of(cands);
@@ -155,14 +147,10 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
   }
 
   TRACE_NO_INDENT();
-  if (is_player() || is_monst() || is_item()) {
-    new_itemsp();
-  }
+  if (is_player() || is_monst() || is_item()) { new_itemsp(); }
 
   TRACE_NO_INDENT();
-  if (is_player() || is_monst() || is_cursor()) {
-    new_aip();
-  }
+  if (is_player() || is_monst() || is_cursor()) { new_aip(); }
 
   //
   // Init the z depth
@@ -191,9 +179,7 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
   //
   // Important to set the owner before the on_born call as we use that for lasers.
   //
-  if (owner) {
-    owner_set(owner);
-  }
+  if (owner) { owner_set(owner); }
 
   //
   // Some things are symetrical and can flip.
@@ -218,9 +204,7 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
   // Change state prior to choosing the first tile so we get the
   // sleep anim immediately.
   //
-  if (is_asleep_initially()) {
-    change_state(MONST_STATE_SLEEPING, "asleep initially");
-  }
+  if (is_asleep_initially()) { change_state(MONST_STATE_SLEEPING, "asleep initially"); }
 
   //
   // Make sure and call this after any state changes so we get the
@@ -237,9 +221,7 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
   // Some things start life open
   //
   if (unlikely(is_ascend_dungeon())) {
-    if (level->dungeon_walk_order_level_no > 1) {
-      is_open = true;
-    }
+    if (level->dungeon_walk_order_level_no > 1) { is_open = true; }
   }
 
   //
@@ -254,9 +236,7 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
   // The grid is the perma background matrix like substrate that is the ether of this universe!
   //
   is_the_grid = tp()->is_the_grid();
-  if (is_the_grid) {
-    return;
-  }
+  if (is_the_grid) { return; }
 
   //
   // Create the large player dmap
@@ -294,9 +274,7 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
   //
   // e.g. keys
   //
-  if (gfx_pixelart_bounce_always()) {
-    bounce(0.3, 1.0, 400 + pcg_random_range(0, 100), 255);
-  }
+  if (gfx_pixelart_bounce_always()) { bounce(0.3, 1.0, 400 + pcg_random_range(0, 100), 255); }
 
   //
   // Init light sources like torches
@@ -311,9 +289,7 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
   //
   // e.g. staff charges
   //
-  if (unlikely(tpp->charge_count())) {
-    charge_count_set(tpp->charge_count());
-  }
+  if (unlikely(tpp->charge_count())) { charge_count_set(tpp->charge_count()); }
 
   //
   // Do on born actions.
@@ -323,9 +299,7 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
   //
   // In case we carry something here, check for equipping
   //
-  if (is_player() || is_monst()) {
-    update();
-  }
+  if (is_player() || is_monst()) { update(); }
 
   //
   // Mainly for explosions
@@ -338,43 +312,31 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
   static bool spawning_group;
   if (! spawning_group) {
     spawning_group = true;
-    if (spawn_group_size()) {
-      spawn_randomly_in_radius_range(name, spawn_group_size(), 1, spawn_group_radius());
-    }
+    if (spawn_group_size()) { spawn_randomly_in_radius_range(name, spawn_group_size(), 1, spawn_group_radius()); }
     spawning_group = false;
   }
 
   //
   // Items have gold set to -1 until we determine how many coins they have.
   //
-  if (is_player() || is_monst()) {
-    gold_value();
-  }
+  if (is_player() || is_monst()) { gold_value(); }
 
   //
   // Initially visible?
   //
-  if (get_no_check(level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
-    is_visible_to_player = true;
-  }
+  if (get_no_check(level->can_see_currently.can_see, curr_at.x, curr_at.y)) { is_visible_to_player = true; }
 
   //
   // Copy the owner offscreen status.
   //
-  if (is_player()) {
-    is_visible_to_player = true;
-  }
+  if (is_player()) { is_visible_to_player = true; }
 
-  if (owner) {
-    is_visible_to_player = owner->is_visible_to_player;
-  }
+  if (owner) { is_visible_to_player = owner->is_visible_to_player; }
 
   //
   // We should not create things until we have fully loaded.
   //
-  if (g_loading) {
-    err("Trying to create a thing during loading.");
-  }
+  if (g_loading) { err("Trying to create a thing during loading."); }
 }
 
 void Thing::reinit(void)
@@ -416,9 +378,7 @@ void Thing::reinit(void)
     return;
   }
 
-  if (is_loggable()) {
-    dbg("Recreated");
-  }
+  if (is_loggable()) { dbg("Recreated"); }
 
   //
   // Upon a load it was attached at save time but not now

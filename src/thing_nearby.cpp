@@ -21,27 +21,17 @@ Thingp Thing::most_dangerous_adjacent_thing(void)
     auto y = curr_at.y + d.y;
 
     point o(x, y);
-    if (level->is_oob(o)) {
-      continue;
-    }
+    if (level->is_oob(o)) { continue; }
 
-    if (! get(aip()->can_see_currently.can_see, o.x, o.y)) {
-      continue;
-    }
+    if (! get(aip()->can_see_currently.can_see, o.x, o.y)) { continue; }
 
     FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)
     {
-      if (t == this) {
-        continue;
-      }
+      if (t == this) { continue; }
 
-      if (t->is_dead) {
-        continue;
-      }
+      if (t->is_dead) { continue; }
 
-      if (! can_detect(t)) {
-        continue;
-      }
+      if (! can_detect(t)) { continue; }
 
       //
       // Treat as a threat so they attack
@@ -55,14 +45,10 @@ Thingp Thing::most_dangerous_adjacent_thing(void)
         }
       }
 
-      if (! t->is_mob() && ! t->is_monst() && ! t->is_player()) {
-        continue;
-      }
+      if (! t->is_mob() && ! t->is_monst() && ! t->is_player()) { continue; }
 
       auto score = t->health();
-      if (! will_avoid_monst(t)) {
-        continue;
-      }
+      if (! will_avoid_monst(t)) { continue; }
 
       score += t->health_max();
       possible.push_back(std::make_pair(t, score));
@@ -70,9 +56,7 @@ Thingp Thing::most_dangerous_adjacent_thing(void)
     FOR_ALL_THINGS_END()
   }
 
-  if (! possible.size()) {
-    return nullptr;
-  }
+  if (! possible.size()) { return nullptr; }
 
   sort(possible.begin(), possible.end(),
        [](const std::pair< Thingp, int > &a, const std::pair< Thingp, int > &b) -> bool {
@@ -91,31 +75,19 @@ Thingp Thing::most_dangerous_visible_thing(void)
   for (auto dx = -d; dx <= d; dx++) {
     for (auto dy = -d; dy <= d; dy++) {
       point o(curr_at.x + dx, curr_at.y + dy);
-      if (level->is_oob(o)) {
-        continue;
-      }
+      if (level->is_oob(o)) { continue; }
 
-      if (! get(aip()->can_see_currently.can_see, o.x, o.y)) {
-        continue;
-      }
+      if (! get(aip()->can_see_currently.can_see, o.x, o.y)) { continue; }
 
       FOR_ALL_THINGS_THAT_INTERACT(level, t, o.x, o.y)
       {
-        if (t == this) {
-          continue;
-        }
+        if (t == this) { continue; }
 
-        if (t->is_dead) {
-          continue;
-        }
+        if (t->is_dead) { continue; }
 
-        if (! can_detect(t)) {
-          continue;
-        }
+        if (! can_detect(t)) { continue; }
 
-        if (! t->is_monst() && ! t->is_player()) {
-          continue;
-        }
+        if (! t->is_monst() && ! t->is_player()) { continue; }
 
         if (! is_intelligent()) {
           //
@@ -134,13 +106,9 @@ Thingp Thing::most_dangerous_visible_thing(void)
         //
         // If we're being engulfed, this is a serious threat!
         //
-        if (t->curr_at == curr_at) {
-          score += 100;
-        }
+        if (t->curr_at == curr_at) { score += 100; }
 
-        if (! will_avoid_monst(t)) {
-          continue;
-        }
+        if (! will_avoid_monst(t)) { continue; }
 
         score += t->health_max();
         possible.push_back(std::make_pair(t, score));
@@ -150,9 +118,7 @@ Thingp Thing::most_dangerous_visible_thing(void)
     }
   }
 
-  if (! possible.size()) {
-    return nullptr;
-  }
+  if (! possible.size()) { return nullptr; }
 
   sort(possible.begin(), possible.end(),
        [](const std::pair< Thingp, int > &a, const std::pair< Thingp, int > &b) -> bool {
@@ -169,43 +135,25 @@ bool Thing::any_unfriendly_monst_visible(void)
   for (auto dx = -d; dx <= d; dx++) {
     for (auto dy = -d; dy <= d; dy++) {
       point o(curr_at.x + dx, curr_at.y + dy);
-      if (! dx && ! dy) {
-        continue;
-      }
+      if (! dx && ! dy) { continue; }
 
-      if (level->is_oob(o)) {
-        continue;
-      }
+      if (level->is_oob(o)) { continue; }
 
-      if (! get(aip()->can_see_currently.can_see, o.x, o.y)) {
-        continue;
-      }
+      if (! get(aip()->can_see_currently.can_see, o.x, o.y)) { continue; }
 
       FOR_ALL_THINGS_THAT_INTERACT(level, t, o.x, o.y)
       {
-        if (t == this) {
-          continue;
-        }
+        if (t == this) { continue; }
 
-        if (t->is_dead) {
-          continue;
-        }
+        if (t->is_dead) { continue; }
 
-        if (! can_detect(t)) {
-          continue;
-        }
+        if (! can_detect(t)) { continue; }
 
-        if (! t->is_monst() && ! t->is_player()) {
-          continue;
-        }
+        if (! t->is_monst() && ! t->is_player()) { continue; }
 
-        if (! can_detect(t)) {
-          continue;
-        }
+        if (! can_detect(t)) { continue; }
 
-        if (t->possible_to_attack(this)) {
-          return true;
-        }
+        if (t->possible_to_attack(this)) { return true; }
       }
       FOR_ALL_THINGS_END()
     }
@@ -225,31 +173,19 @@ bool Thing::any_adjacent_monst(void)
     auto y = curr_at.y + d.y;
 
     point o(x, y);
-    if (level->is_oob(o)) {
-      continue;
-    }
+    if (level->is_oob(o)) { continue; }
 
-    if (! get(aip()->can_see_currently.can_see, o.x, o.y)) {
-      continue;
-    }
+    if (! get(aip()->can_see_currently.can_see, o.x, o.y)) { continue; }
 
     FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)
     {
-      if (t == this) {
-        continue;
-      }
+      if (t == this) { continue; }
 
-      if (t->is_dead) {
-        continue;
-      }
+      if (t->is_dead) { continue; }
 
-      if (! can_detect(t)) {
-        continue;
-      }
+      if (! can_detect(t)) { continue; }
 
-      if (t->is_monst() || t->is_player()) {
-        return true;
-      }
+      if (t->is_monst() || t->is_player()) { return true; }
     }
     FOR_ALL_THINGS_END()
   }
@@ -266,59 +202,37 @@ Thingp Thing::best_visible_target_get(void)
   for (auto dx = -d; dx <= d; dx++) {
     for (auto dy = -d; dy <= d; dy++) {
       point o(curr_at.x + dx, curr_at.y + dy);
-      if (level->is_oob(o)) {
-        continue;
-      }
+      if (level->is_oob(o)) { continue; }
 
-      if (! get(aip()->can_see_currently.can_see, o.x, o.y)) {
-        continue;
-      }
+      if (! get(aip()->can_see_currently.can_see, o.x, o.y)) { continue; }
 
       FOR_ALL_THINGS_THAT_INTERACT(level, t, o.x, o.y)
       {
-        if (t == this) {
-          continue;
-        }
+        if (t == this) { continue; }
 
-        if (t->is_dead) {
-          continue;
-        }
+        if (t->is_dead) { continue; }
 
-        if (! can_detect(t)) {
-          continue;
-        }
+        if (! can_detect(t)) { continue; }
 
-        if (! t->is_monst() && ! t->is_player()) {
-          continue;
-        }
+        if (! t->is_monst() && ! t->is_player()) { continue; }
 
-        if (! t->possible_to_attack(this)) {
-          continue;
-        }
+        if (! t->possible_to_attack(this)) { continue; }
 
         //
         // If no clear shot, then ignore
         //
-        if (in_the_way_for_shooting(curr_at, t->curr_at, 1).size()) {
-          continue;
-        }
+        if (in_the_way_for_shooting(curr_at, t->curr_at, 1).size()) { continue; }
 
         auto score = t->health();
 
-        if (distance(t->curr_at, curr_at) < distance_avoid_get()) {
-          score += 100;
-        }
+        if (distance(t->curr_at, curr_at) < distance_avoid_get()) { score += 100; }
 
         //
         // If we're being engulfed, this is a serious threat!
         //
-        if (t->curr_at == curr_at) {
-          score += 100;
-        }
+        if (t->curr_at == curr_at) { score += 100; }
 
-        if (will_avoid_monst(t)) {
-          score += 100;
-        }
+        if (will_avoid_monst(t)) { score += 100; }
 
         score += t->health_max();
         possible.push_back(std::make_pair(t, score));
@@ -328,9 +242,7 @@ Thingp Thing::best_visible_target_get(void)
     }
   }
 
-  if (! possible.size()) {
-    return nullptr;
-  }
+  if (! possible.size()) { return nullptr; }
 
   sort(possible.begin(), possible.end(),
        [](const std::pair< Thingp, int > &a, const std::pair< Thingp, int > &b) -> bool {

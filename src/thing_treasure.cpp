@@ -9,18 +9,12 @@
 bool Thing::is_carrying_treasure(void)
 {
   TRACE_NO_INDENT();
-  if (! maybe_itemsp()) {
-    return false;
-  }
+  if (! maybe_itemsp()) { return false; }
 
-  if (! carried_and_equipped_item_vector().empty()) {
-    return true;
-  }
+  if (! carried_and_equipped_item_vector().empty()) { return true; }
 
   auto owner = top_owner();
-  if (owner) {
-    return owner->is_carrying_treasure();
-  }
+  if (owner) { return owner->is_carrying_treasure(); }
 
   return false;
 }
@@ -39,24 +33,16 @@ std::list< Thingp > Thing::treasure_list(void)
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
-    if (unlikely(! t)) {
-      continue;
-    }
+    if (unlikely(! t)) { continue; }
     if (t->is_bag()) {
       FOR_ALL_CARRIED_BY(t, item)
       {
         auto t = level->thing_find(item.id);
-        if (unlikely(! t)) {
-          continue;
-        }
-        if (t->is_treasure_type()) {
-          out.push_back(t);
-        }
+        if (unlikely(! t)) { continue; }
+        if (t->is_treasure_type()) { out.push_back(t); }
       }
     }
-    if (t->is_treasure_type()) {
-      out.push_back(t);
-    }
+    if (t->is_treasure_type()) { out.push_back(t); }
   }
   return out;
 }
@@ -75,24 +61,16 @@ std::vector< Thingp > Thing::treasure_vector(void)
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
-    if (unlikely(! t)) {
-      continue;
-    }
+    if (unlikely(! t)) { continue; }
     if (t->is_bag()) {
       FOR_ALL_CARRIED_BY(t, item)
       {
         auto t = level->thing_find(item.id);
-        if (unlikely(! t)) {
-          continue;
-        }
-        if (t->is_treasure_type()) {
-          out.push_back(t);
-        }
+        if (unlikely(! t)) { continue; }
+        if (t->is_treasure_type()) { out.push_back(t); }
       }
     }
-    if (t->is_treasure_type()) {
-      out.push_back(t);
-    }
+    if (t->is_treasure_type()) { out.push_back(t); }
   }
   return out;
 }

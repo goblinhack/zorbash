@@ -19,71 +19,39 @@ bool Level::create_biome_sewer(point3d at, uint32_t seed)
   chances_of_creating_set();
 
   place_the_grid();
-  if (g_errored) {
-    return false;
-  }
+  if (g_errored) { return false; }
 
   place_the_grid();
-  if (g_errored) {
-    return false;
-  }
+  if (g_errored) { return false; }
 
-  if (! create_biome_sewer_pipes(at)) {
-    return false;
-  }
-  if (g_errored) {
-    return false;
-  }
+  if (! create_biome_sewer_pipes(at)) { return false; }
+  if (g_errored) { return false; }
 
   auto tries = 10000;
   create_biome_sewer_place_walls(1, 6, 6, tries);
-  if (g_errored) {
-    return false;
-  }
+  if (g_errored) { return false; }
   create_biome_sewer_place_walls(1, 6, 3, tries);
-  if (g_errored) {
-    return false;
-  }
+  if (g_errored) { return false; }
   create_biome_sewer_place_walls(1, 3, 6, tries);
-  if (g_errored) {
-    return false;
-  }
+  if (g_errored) { return false; }
   create_biome_sewer_place_walls(1, 3, 3, tries);
-  if (g_errored) {
-    return false;
-  }
+  if (g_errored) { return false; }
   create_biome_sewer_place_walls(2, 3, 3, tries);
-  if (g_errored) {
-    return false;
-  }
+  if (g_errored) { return false; }
   create_biome_sewer_place_walls(1, 2, 2, tries);
-  if (g_errored) {
-    return false;
-  }
+  if (g_errored) { return false; }
   create_biome_sewer_place_walls(2, 2, 2, tries);
-  if (g_errored) {
-    return false;
-  }
+  if (g_errored) { return false; }
   create_biome_sewer_place_walls(3, 2, 2, tries);
-  if (g_errored) {
-    return false;
-  }
+  if (g_errored) { return false; }
   create_biome_sewer_place_walls(1, 2, 1, tries);
-  if (g_errored) {
-    return false;
-  }
+  if (g_errored) { return false; }
   create_biome_sewer_place_walls(2, 2, 1, tries);
-  if (g_errored) {
-    return false;
-  }
+  if (g_errored) { return false; }
   create_biome_sewer_place_walls(1, 1, 2, tries);
-  if (g_errored) {
-    return false;
-  }
+  if (g_errored) { return false; }
   create_biome_sewer_place_walls(2, 1, 2, tries);
-  if (g_errored) {
-    return false;
-  }
+  if (g_errored) { return false; }
 
   create_biome_sewer_place_remaining_walls("sewer_wall");
 
@@ -105,42 +73,30 @@ void Level::place_swimming_monsters(void)
 
     if (is_shallow_water(x, y)) {
       auto tp = get_biome_sewer_random_monst(point(x, y), MONST_ENVIRON_SHALLOW_WATER);
-      if (unlikely(! tp)) {
-        continue;
-      }
+      if (unlikely(! tp)) { continue; }
 
       (void) thing_new(tp->name(), point(x, y));
-      if (placed++ > 10) {
-        break;
-      }
+      if (placed++ > 10) { break; }
 
       //
       // This is for packs so that the monster count increases
       //
       assign_leaders_and_followers();
-      if (monst_count >= LEVEL_MONST_COUNT_INIT_MAX) {
-        return;
-      }
+      if (monst_count >= LEVEL_MONST_COUNT_INIT_MAX) { return; }
     }
 
     if (is_deep_water(x, y)) {
       auto tp = get_biome_sewer_random_monst(point(x, y), MONST_ENVIRON_DEEP_WATER);
-      if (unlikely(! tp)) {
-        continue;
-      }
+      if (unlikely(! tp)) { continue; }
 
       (void) thing_new(tp->name(), point(x, y));
-      if (placed++ > 10) {
-        break;
-      }
+      if (placed++ > 10) { break; }
 
       //
       // This is for packs so that the monster count increases
       //
       assign_leaders_and_followers();
-      if (monst_count >= LEVEL_MONST_COUNT_INIT_MAX) {
-        return;
-      }
+      if (monst_count >= LEVEL_MONST_COUNT_INIT_MAX) { return; }
     }
   }
 }
@@ -235,25 +191,15 @@ bool Level::create_biome_sewer_pipes(point3d at)
     }
 
     while (true) {
-      if (p.x >= MAP_WIDTH - MAP_BORDER_ROCK) {
-        break;
-      }
-      if (p.y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
-        break;
-      }
-      if (p.x < MAP_BORDER_ROCK) {
-        break;
-      }
-      if (p.y < MAP_BORDER_ROCK) {
-        break;
-      }
+      if (p.x >= MAP_WIDTH - MAP_BORDER_ROCK) { break; }
+      if (p.y >= MAP_HEIGHT - MAP_BORDER_ROCK) { break; }
+      if (p.x < MAP_BORDER_ROCK) { break; }
+      if (p.y < MAP_BORDER_ROCK) { break; }
 
       //
       // Try to follow the pipe template
       //
-      if (get(pipes_template, p.x, p.y)) {
-        break;
-      }
+      if (get(pipes_template, p.x, p.y)) { break; }
       set(pipes_template, p.x, p.y, true);
       p.x += dx;
       p.y += dy;
@@ -276,18 +222,10 @@ bool Level::create_biome_sewer_pipes(point3d at)
     while (tries < 1000) {
       set(final_pipes, a.x, a.y, true);
       set(walked, a.x, a.y, true);
-      if (a.x >= MAP_WIDTH - MAP_BORDER_ROCK) {
-        break;
-      }
-      if (a.y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
-        break;
-      }
-      if (a.x < MAP_BORDER_ROCK) {
-        break;
-      }
-      if (a.y < MAP_BORDER_ROCK) {
-        break;
-      }
+      if (a.x >= MAP_WIDTH - MAP_BORDER_ROCK) { break; }
+      if (a.y >= MAP_HEIGHT - MAP_BORDER_ROCK) { break; }
+      if (a.x < MAP_BORDER_ROCK) { break; }
+      if (a.y < MAP_BORDER_ROCK) { break; }
 
       //
       // Try to follow the pipe template
@@ -351,13 +289,9 @@ bool Level::create_biome_sewer_pipes(point3d at)
       point p(x, y);
       if (get(final_pipes, x, y)) {
         (void) thing_new("corridor2", p);
-        if (pcg_random_range(0, 100) < 25) {
-          (void) thing_new("water", p);
-        }
+        if (pcg_random_range(0, 100) < 25) { (void) thing_new("water", p); }
       }
-      if (get(sewer_pipe, x, y)) {
-        (void) thing_new("ascend_sewer1", p);
-      }
+      if (get(sewer_pipe, x, y)) { (void) thing_new("ascend_sewer1", p); }
     }
   }
 
@@ -419,14 +353,10 @@ void Level::create_biome_sewer_place_walls(int variant, int block_width, int blo
         }
       }
 
-      if (! can_place_here) {
-        break;
-      }
+      if (! can_place_here) { break; }
     }
 
-    if (! can_place_here) {
-      continue;
-    }
+    if (! can_place_here) { continue; }
 
     auto cnt = 1;
     for (auto dy = 0; dy < block_height; dy++) {
@@ -447,9 +377,7 @@ void Level::create_biome_sewer_place_walls(int variant, int block_width, int blo
         }
 
         auto t = thing_new(what, point(X, Y));
-        if (! t) {
-          continue;
-        }
+        if (! t) { continue; }
 
         auto tile = tile_find(tilename);
         if (unlikely(! tile)) {
@@ -479,9 +407,7 @@ void Level::create_biome_sewer_place_remaining_walls(const std::string &what)
         continue;
       }
 
-      if (is_wall(x, y)) {
-        continue;
-      }
+      if (is_wall(x, y)) { continue; }
 
       (void) thing_new(what, point(x, y));
 

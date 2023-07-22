@@ -7,9 +7,7 @@
 
 void Thing::gc(void)
 {
-  if (is_scheduled_for_gc) {
-    return;
-  }
+  if (is_scheduled_for_gc) { return; }
   is_scheduled_for_gc = true;
 
   TRACE_NO_INDENT();

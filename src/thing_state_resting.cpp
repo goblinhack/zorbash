@@ -19,9 +19,7 @@ bool Thing::state_resting(bool &do_something, bool &wait)
   //
   if ((health() >= (health_max() / 4) * 3) && (stamina() >= (stamina_max() / 4) * 3)) {
     AI_LOG("Rested enough. Back to work.");
-    if (is_player()) {
-      game->tick_begin("Robot has rested enough");
-    }
+    if (is_player()) { game->tick_begin("Robot has rested enough"); }
     change_state(MONST_STATE_IDLE, "rested enough");
     return true;
   }
@@ -31,9 +29,7 @@ bool Thing::state_resting(bool &do_something, bool &wait)
   //
   if (eat_something()) {
     AI_LOG("Ate an item.");
-    if (is_player()) {
-      game->tick_begin("Robot ate an item");
-    }
+    if (is_player()) { game->tick_begin("Robot ate an item"); }
     change_state(MONST_STATE_OPEN_INVENTORY, "eat something");
     return true;
   }
@@ -44,9 +40,7 @@ bool Thing::state_resting(bool &do_something, bool &wait)
   // Able to sleep?
   //
   if (is_able_to_sleep()) {
-    if (game->tick_current - tick_last_i_was_attacked() > 20) {
-      sleep();
-    }
+    if (game->tick_current - tick_last_i_was_attacked() > 20) { sleep(); }
   }
 
   do_something = true;

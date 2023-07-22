@@ -10,26 +10,18 @@
 
 bool Thing::bounce(float bounce_height, float bounce_fade, ts_t ms, int bounce_count)
 {
-  if (g_opt_ascii) {
-    return true;
-  }
+  if (g_opt_ascii) { return true; }
 
-  if (is_sleeping) {
-    return false;
-  }
+  if (is_sleeping) { return false; }
 
-  if (is_frozen || is_burnt || is_dead) {
-    return false;
-  }
+  if (is_frozen || is_burnt || is_dead) { return false; }
 
   //
   // Check if we can lunge
   //
   FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_OBJ)
   {
-    if (t == this) {
-      continue;
-    }
+    if (t == this) { continue; }
     if (t->is_block_of_ice()) {
       dbg("No bouncing when stuck in ice");
       return false;
@@ -54,9 +46,7 @@ bool Thing::bounce(float bounce_height, float bounce_fade, ts_t ms, int bounce_c
 
 float Thing::bounce_curr(void)
 {
-  if (! is_bouncing) {
-    return (0.0);
-  }
+  if (! is_bouncing) { return (0.0); }
 
   auto t = time_ms_cached();
 
@@ -93,9 +83,7 @@ float Thing::bounce_curr(void)
 ts_t Thing::ts_bounce_begin(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->ts_bounce_begin);
-  }
+  if (maybe_infop()) { return (infop()->ts_bounce_begin); }
   return 0;
 }
 
@@ -140,9 +128,7 @@ ts_t Thing::ts_bounce_begin_incr(void)
 ts_t Thing::ts_bounce_end(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->ts_bounce_end);
-  }
+  if (maybe_infop()) { return (infop()->ts_bounce_end); }
   return 0;
 }
 
@@ -187,9 +173,7 @@ ts_t Thing::ts_bounce_end_incr(void)
 float Thing::bounce_height_curr(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->bounce_height);
-  }
+  if (maybe_infop()) { return (infop()->bounce_height); }
   return 0;
 }
 
@@ -206,9 +190,7 @@ void Thing::bounce_height_set(float v)
 float Thing::bounce_fade_curr(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->bounce_fade);
-  }
+  if (maybe_infop()) { return (infop()->bounce_fade); }
   return 0;
 }
 
@@ -237,9 +219,7 @@ int Thing::gfx_pixelart_bounce_on_move(void)
 int Thing::bounce_count(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->bounce_count);
-  }
+  if (maybe_infop()) { return (infop()->bounce_count); }
   return 0;
 }
 

@@ -32,9 +32,7 @@ bool Thing::skill_add(Thingp new_skill)
 {
   TRACE_NO_INDENT();
 
-  if (! new_skill) {
-    return false;
-  }
+  if (! new_skill) { return false; }
 
   dbg("Try to add skill %s", new_skill->to_short_string().c_str());
   TRACE_AND_INDENT();
@@ -82,9 +80,7 @@ bool Thing::skill_add(Thingp new_skill)
     sound_play("powerup");
   }
 
-  if (new_skill->is_always_activated()) {
-    skill_activate(new_skill);
-  }
+  if (new_skill->is_always_activated()) { skill_activate(new_skill); }
 
 redo:
   //
@@ -128,9 +124,7 @@ bool Thing::skill_remove(Thingp what)
 
   Thingp o = what->top_owner();
   if (o) {
-    if (o->is_player()) {
-      o->skillbox_id_remove(what);
-    }
+    if (o->is_player()) { o->skillbox_id_remove(what); }
   }
 
   what->owner_unset();
@@ -144,16 +138,12 @@ bool Thing::skill_remove(Thingp what)
 void Thing::skill_remove_all(void)
 {
   TRACE_NO_INDENT();
-  if (! maybe_itemsp()) {
-    return;
-  }
+  if (! maybe_itemsp()) { return; }
 
   while (! itemsp()->skills.empty()) {
     auto id = *itemsp()->skills.begin();
     auto t  = level->thing_find(id);
-    if (unlikely(! t)) {
-      return;
-    }
+    if (unlikely(! t)) { return; }
     skill_remove(t);
   }
 }
@@ -164,9 +154,7 @@ bool Thing::skill_use(Thingp what)
   msg("You use %s.", what->text_the().c_str());
   used(what, this, false /* remove after use */);
 
-  if (what->is_target_select()) {
-    return item_choose_target(what);
-  }
+  if (what->is_target_select()) { return item_choose_target(what); }
 
   return true;
 }
@@ -196,22 +184,16 @@ void Thing::skill_activate(Thingp what)
 bool Thing::has_skill(Tpp skill)
 {
   TRACE_NO_INDENT();
-  if (! maybe_itemsp()) {
-    return 0;
-  }
+  if (! maybe_itemsp()) { return 0; }
 
-  if (! skill) {
-    return false;
-  }
+  if (! skill) { return false; }
 
   TRACE_NO_INDENT();
   FOR_ALL_SKILLS(oid)
   {
     auto learned_skill_iter = game->level->thing_find(oid);
     auto learned_skill      = learned_skill_iter->tp();
-    if (learned_skill == skill) {
-      return true;
-    }
+    if (learned_skill == skill) { return true; }
 
     //
     // Check if this skill has been acquired via a superseding skill
@@ -220,9 +202,7 @@ bool Thing::has_skill(Tpp skill)
     std::list< Tpp > preceding_skills;
     skill_get_replace_list(learned_skill, preceding_skills);
     for (auto preceding_skill : preceding_skills) {
-      if (preceding_skill == skill) {
-        return true;
-      }
+      if (preceding_skill == skill) { return true; }
     }
   }
 
@@ -238,9 +218,7 @@ bool Thing::skill_add(Tpp what)
     return false;
   }
 
-  if (is_player()) {
-    msg("You learn %s.", t->text_the().c_str());
-  }
+  if (is_player()) { msg("You learn %s.", t->text_the().c_str()); }
 
   skill_add(t);
 
@@ -250,9 +228,7 @@ bool Thing::skill_add(Tpp what)
   auto found = false;
   for (const auto skillstone : carried_item_only_vector()) {
     if (skillstone->is_skillstone()) {
-      if (skillstone->charge_count()) {
-        skillstone->charge_count_decr();
-      }
+      if (skillstone->charge_count()) { skillstone->charge_count_decr(); }
       if (! skillstone->charge_count()) {
         skillstone->is_drained = true;
         skillstone->dead("drained and used");
@@ -261,9 +237,7 @@ bool Thing::skill_add(Tpp what)
       break;
     }
   }
-  if (! found) {
-    err("no skillstone found");
-  }
+  if (! found) { err("no skillstone found"); }
 
   return true;
 }
@@ -273,9 +247,7 @@ int Thing::skillstone_count(void)
   TRACE_NO_INDENT();
   int v = 0;
   for (const auto t : carried_item_only_vector()) {
-    if (! t->is_skillstone()) {
-      continue;
-    }
+    if (! t->is_skillstone()) { continue; }
     dbg("Found a skillstone: %s", t->to_short_string().c_str());
     v++;
   }
@@ -289,9 +261,7 @@ bool Thing::can_learn_a_skill(void)
   //
   // Once skills are maxxed out, that's it
   //
-  if (itemsp()->skills.size() >= UI_INVENTORY_QUICK_ITEMS_MAX) {
-    return false;
-  }
+  if (itemsp()->skills.size() >= UI_INVENTORY_QUICK_ITEMS_MAX) { return false; }
 
   //
   // Look at the list of skills this thing knows. If we find
@@ -309,9 +279,7 @@ bool Thing::can_learn_a_skill(void)
         }
       }
     }
-    if (already_learned) {
-      continue;
-    }
+    if (already_learned) { continue; }
     return true;
   }
   return false;
@@ -334,14 +302,10 @@ bool Thing::learn_random_skill(void)
         }
       }
     }
-    if (add) {
-      cands.push_back(tpp);
-    }
+    if (add) { cands.push_back(tpp); }
   }
 
-  if (cands.empty()) {
-    return false;
-  }
+  if (cands.empty()) { return false; }
 
   auto chosen = cands[ pcg_random_range(0, cands.size()) ];
   dbg("Add this skill: %s", chosen->name().c_str());

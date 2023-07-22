@@ -23,22 +23,16 @@ void Thing::on_move(void)
   }
 
   auto on_move = tp()->on_move_do();
-  if (std::empty(on_move)) {
-    return;
-  }
+  if (std::empty(on_move)) { return; }
 
   auto t = split_tokens(on_move, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) {
-      fn = fn.replace(found, 2, "");
-    }
+    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
 
-    if (mod == "me") {
-      mod = name();
-    }
+    if (mod == "me") { mod = name(); }
 
     dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(), (int) curr_at.x,
         (int) curr_at.y);
@@ -53,9 +47,7 @@ void Thing::move_finish(void)
 {
   TRACE_NO_INDENT();
 
-  if (! is_moving) {
-    return;
-  }
+  if (! is_moving) { return; }
   is_moving = false;
 
   //
@@ -128,13 +120,9 @@ void Thing::move_finish(void)
       if (! immediate_owner()) {
         FOR_ALL_NON_INTERNAL_THINGS(level, it, curr_at.x, curr_at.y)
         {
-          if (it == this) {
-            continue;
-          }
+          if (it == this) { continue; }
 
-          if (! it->on_enter_do().empty()) {
-            it->on_enter(this);
-          }
+          if (! it->on_enter_do().empty()) { it->on_enter(this); }
         }
         FOR_ALL_THINGS_END()
       }
@@ -148,9 +136,7 @@ void Thing::move_finish(void)
 bool Thing::move(point future_pos)
 {
   TRACE_NO_INDENT();
-  if (! is_hidden) {
-    dbg2("Move to %d,%d", future_pos.x, future_pos.y);
-  }
+  if (! is_hidden) { dbg2("Move to %d,%d", future_pos.x, future_pos.y); }
 
   bool up              = future_pos.y < curr_at.y;
   bool down            = future_pos.y > curr_at.y;
@@ -250,9 +236,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   //
   // We need to update the minimap even if they player just waits
   //
-  if (is_player()) {
-    game->set_request_to_update_same_level();
-  }
+  if (is_player()) { game->set_request_to_update_same_level(); }
 
   //
   // Don't let minions wander too far from their mob.
@@ -281,16 +265,12 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
           //
           // Don't make spiders (minions to webs) lunge
           //
-          if (is_minion()) {
-            lunge(future_pos);
-          }
+          if (is_minion()) { lunge(future_pos); }
 
           //
           // Choose a new target
           //
-          if (ai) {
-            ai->wander_dest = point(0, 0);
-          }
+          if (ai) { ai->wander_dest = point(0, 0); }
           return false;
         }
       }
@@ -322,9 +302,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     // Monsters update this when they run AI. The player however we need to do it prior to
     // moving to avoid being able to escape pouncing monsters.
     //
-    if (is_player()) {
-      move_count_incr();
-    }
+    if (is_player()) { move_count_incr(); }
 
     is_stuck_update();
 
@@ -332,9 +310,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     // Able to move?
     //
     if (is_stuck_currently()) {
-      if (is_player()) {
-        game->tick_begin("could not move");
-      }
+      if (is_player()) { game->tick_begin("could not move"); }
       lunge(future_pos);
       return false;
     }
@@ -349,9 +325,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         if (up || down || left || right) {
           if (d20() > stat_con()) {
             if (pcg_random_range(0, 100) < 10) {
-              if (is_able_to_tire()) {
-                stamina_decr();
-              }
+              if (is_able_to_tire()) { stamina_decr(); }
             }
           }
         } else {
@@ -421,30 +395,22 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   //
   if (is_waiting_to_ascend_dungeon) {
     dbg2("Move; no, is waiting to ascend dungeon");
-    if (is_player()) {
-      game->tick_begin("player waiting to ascend");
-    }
+    if (is_player()) { game->tick_begin("player waiting to ascend"); }
     return false;
   }
   if (is_waiting_to_descend_sewer) {
     dbg2("Move; no, is waiting to descend sewer");
-    if (is_player()) {
-      game->tick_begin("player waiting to descend");
-    }
+    if (is_player()) { game->tick_begin("player waiting to descend"); }
     return false;
   }
   if (is_waiting_to_descend_dungeon) {
     dbg2("Move; no, is waiting to descend dungeon");
-    if (is_player()) {
-      game->tick_begin("player waiting to descend");
-    }
+    if (is_player()) { game->tick_begin("player waiting to descend"); }
     return false;
   }
   if (is_waiting_to_ascend_sewer) {
     dbg2("Move; no, is waiting to ascend sewer");
-    if (is_player()) {
-      game->tick_begin("player waiting to ascend");
-    }
+    if (is_player()) { game->tick_begin("player waiting to ascend"); }
     return false;
   }
 
@@ -458,9 +424,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   // Bounce rings and weapons
   //
   if (gfx_pixelart_bounce_on_move()) {
-    if (bounce_curr() == 0) {
-      bounce(0.2 /* height */, 0.1 /* fade */, 200, 3);
-    }
+    if (bounce_curr() == 0) { bounce(0.2 /* height */, 0.1 /* fade */, 200, 3); }
   }
 
   if (must_attack) {
@@ -471,18 +435,14 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     return false;
   }
 
-  if ((x == curr_at.x) && (y == curr_at.y)) {
-    return false;
-  }
+  if ((x == curr_at.x) && (y == curr_at.y)) { return false; }
 
   if (curr_at != future_pos) {
     //
     // Trail of blood?
     //
     place_blood();
-    if (is_dead) {
-      return false;
-    }
+    if (is_dead) { return false; }
 
     if (up) {
       dbg2("Try to move up; collision check");
@@ -502,9 +462,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
 
       if (attack_options->shove_allowed) {
         dbg2("Try to shove");
-        if (is_player()) {
-          game->tick_begin("player tried to shove");
-        }
+        if (is_player()) { game->tick_begin("player tried to shove"); }
         try_to_shove(future_pos);
       } else if (attack_options->attack_allowed) {
         dbg2("Try to attack at %s", future_pos.to_string().c_str());
@@ -535,17 +493,13 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       return false;
     }
 
-    if (is_player()) {
-      game->tick_begin("player moved");
-    }
+    if (is_player()) { game->tick_begin("player moved"); }
   }
 
   if (is_player()) {
     where_i_failed_to_collect_last_set(point(-1, -1));
 
-    if (! level->is_map_follow_player) {
-      level->is_map_follow_player = true;
-    }
+    if (! level->is_map_follow_player) { level->is_map_follow_player = true; }
   }
 
   //
@@ -595,17 +549,13 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         case THING_DIR_LEFT :
         case THING_DIR_TL :
         case THING_DIR_BL :
-          if (! is_facing_left && ! ts_flip_start_get()) {
-            ts_flip_start_set(time_ms_cached());
-          }
+          if (! is_facing_left && ! ts_flip_start_get()) { ts_flip_start_set(time_ms_cached()); }
           break;
 
         case THING_DIR_RIGHT :
         case THING_DIR_TR :
         case THING_DIR_BR :
-          if (is_facing_left && ! ts_flip_start_get()) {
-            ts_flip_start_set(time_ms_cached());
-          }
+          if (is_facing_left && ! ts_flip_start_get()) { ts_flip_start_set(time_ms_cached()); }
           break;
       }
     }
@@ -615,9 +565,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     //
     // This check is for things that can lunge attack but cannot move; like vampire roses.
     //
-    if (is_moveable()) {
-      move_delta(delta);
-    }
+    if (is_moveable()) { move_delta(delta); }
   }
 
   return true;
@@ -638,15 +586,11 @@ void Thing::update_interpolated_position(void)
 
     int  speed = 0;
     auto infop = maybe_infop();
-    if (infop) {
-      speed = move_speed_curr();
-    }
+    if (infop) { speed = move_speed_curr(); }
 
     if (speed) {
       step *= (((float) speed)) / player_speed;
-      if (step > 1) {
-        step = 1;
-      }
+      if (step > 1) { step = 1; }
     }
   }
 
@@ -727,9 +671,7 @@ void Thing::update_pos(point to, bool immediately)
   TRACE_NO_INDENT();
 
   point new_at((int) to.x, (int) to.y);
-  if (level->is_oob(new_at)) {
-    return;
-  }
+  if (level->is_oob(new_at)) { return; }
 
   point old_at((int) curr_at.x, (int) curr_at.y);
 
@@ -739,20 +681,14 @@ void Thing::update_pos(point to, bool immediately)
   //
   // If moving things on the non game level, move non smoothly
   //
-  if (level != game->level) {
-    immediately = true;
-  }
+  if (level != game->level) { immediately = true; }
 
   //
   // Keep track of where this thing is on the grid
   //
-  if (old_at == new_at) {
-    return;
-  }
+  if (old_at == new_at) { return; }
 
-  if (! is_hidden) {
-    dbg2("Move to %d,%d", to.x, to.y);
-  }
+  if (! is_hidden) { dbg2("Move to %d,%d", to.x, to.y); }
 
   if (is_player()) {
     if (((int) old_at.x != (int) new_at.x) || ((int) old_at.y != (int) new_at.y)) {
@@ -772,15 +708,11 @@ void Thing::update_pos(point to, bool immediately)
     level_push();
   }
 
-  if (! immediately) {
-    is_moving = true;
-  }
+  if (! immediately) { is_moving = true; }
 
   move_carried_items();
 
-  if (immediately) {
-    move_finish();
-  }
+  if (immediately) { move_finish(); }
 }
 
 void Thing::move_to(point to)
@@ -840,9 +772,7 @@ void Thing::move_to_immediately(point to)
   }
 
   if (is_player()) {
-    if (! level->is_map_follow_player) {
-      level->is_map_follow_player = true;
-    }
+    if (! level->is_map_follow_player) { level->is_map_follow_player = true; }
   }
 
   update_interpolated_position();
@@ -851,9 +781,7 @@ void Thing::move_to_immediately(point to)
   // If this move was initiated by a jump make sure and clear the move path
   // so we don't try to continua an AI move
   //
-  if (maybe_aip()) {
-    aip()->move_path.clear();
-  }
+  if (maybe_aip()) { aip()->move_path.clear(); }
 }
 
 bool Thing::move_to_try(const point nh, const bool escaping, bool check_only)
@@ -901,9 +829,7 @@ bool Thing::move_to_try(const point nh, const bool escaping, bool check_only)
     }
   }
 
-  if (! check_only) {
-    move(nh);
-  }
+  if (! check_only) { move(nh); }
   return true;
 }
 
@@ -949,9 +875,7 @@ void Thing::clear_move_path(const std::string &why)
 
   if (is_player()) {
     game->cursor_move_path.clear();
-    if (level) {
-      level->cursor_path_clear();
-    }
+    if (level) { level->cursor_path_clear(); }
   }
 
   change_state(MONST_STATE_IDLE, why);
@@ -969,9 +893,7 @@ void Thing::clear_move_path(const std::string &why)
 int Thing::movement_remaining(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->movement_remaining);
-  }
+  if (maybe_infop()) { return (infop()->movement_remaining); }
   return 0;
 }
 

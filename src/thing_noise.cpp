@@ -10,18 +10,14 @@
 int Thing::noise(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->noise);
-  }
+  if (maybe_infop()) { return (infop()->noise); }
   return 0;
 }
 
 int Thing::noise_total(void)
 {
   TRACE_NO_INDENT();
-  if (! maybe_infop()) {
-    return 0;
-  }
+  if (! maybe_infop()) { return 0; }
 
   auto decibels = noise();
   // con("NOISE %d", decibels);
@@ -43,9 +39,7 @@ int Thing::noise_total(void)
         //
         // Don't count boots for example twice
         //
-        if (is_equipped(iter)) {
-          continue;
-        }
+        if (is_equipped(iter)) { continue; }
         decibels += iter->noise();
         // iter->con("NOISE %d", decibels);
       }
@@ -89,16 +83,10 @@ int Thing::noise_total(void)
   }
   // con("NOISE %d", decibels);
 
-  if (is_player() || is_monst()) {
-    decibels -= stat_dex_bonus() * 10;
-  }
+  if (is_player() || is_monst()) { decibels -= stat_dex_bonus() * 10; }
 
-  if (level->is_able_to_dampen_footsteps(curr_at)) {
-    decibels /= 2;
-  }
-  if (level->is_able_to_amplify_footsteps(curr_at)) {
-    decibels *= 2;
-  }
+  if (level->is_able_to_dampen_footsteps(curr_at)) { decibels /= 2; }
+  if (level->is_able_to_amplify_footsteps(curr_at)) { decibels *= 2; }
 
   // con("NOISE %d", decibels);
 
@@ -108,9 +96,7 @@ int Thing::noise_total(void)
 int Thing::noise_on_jumping(void)
 {
   TRACE_NO_INDENT();
-  if (! maybe_infop()) {
-    return 0;
-  }
+  if (! maybe_infop()) { return 0; }
 
   auto decibels = noise_total();
   // con("NOISE %d", decibels);
@@ -132,9 +118,7 @@ int Thing::noise_on_jumping(void)
         //
         // Don't count boots for example twice
         //
-        if (is_equipped(iter)) {
-          continue;
-        }
+        if (is_equipped(iter)) { continue; }
         decibels += iter->noise_additional_on_jump_end();
         // iter->con("NOISE %d", decibels);
       }
@@ -177,16 +161,10 @@ int Thing::noise_on_jumping(void)
     }
   }
 
-  if (is_player() || is_monst()) {
-    decibels -= stat_dex_bonus() * 10;
-  }
+  if (is_player() || is_monst()) { decibels -= stat_dex_bonus() * 10; }
 
-  if (level->is_able_to_dampen_footsteps(curr_at)) {
-    decibels /= 2;
-  }
-  if (level->is_able_to_amplify_footsteps(curr_at)) {
-    decibels *= 2;
-  }
+  if (level->is_able_to_dampen_footsteps(curr_at)) { decibels /= 2; }
+  if (level->is_able_to_amplify_footsteps(curr_at)) { decibels *= 2; }
 
   return decibels;
 }
@@ -194,9 +172,7 @@ int Thing::noise_on_jumping(void)
 int Thing::noise_on_teleporting(void)
 {
   TRACE_NO_INDENT();
-  if (! maybe_infop()) {
-    return 0;
-  }
+  if (! maybe_infop()) { return 0; }
 
   auto decibels = noise_total();
   // con("NOISE %d", decibels);
@@ -218,9 +194,7 @@ int Thing::noise_on_teleporting(void)
         //
         // Don't count boots for example twice
         //
-        if (is_equipped(iter)) {
-          continue;
-        }
+        if (is_equipped(iter)) { continue; }
         decibels += iter->noise_additional_on_teleporting();
         // iter->con("NOISE %d", decibels);
       }
@@ -263,16 +237,10 @@ int Thing::noise_on_teleporting(void)
     }
   }
 
-  if (is_player() || is_monst()) {
-    decibels -= stat_dex_bonus() * 10;
-  }
+  if (is_player() || is_monst()) { decibels -= stat_dex_bonus() * 10; }
 
-  if (level->is_able_to_dampen_footsteps(curr_at)) {
-    decibels /= 2;
-  }
-  if (level->is_able_to_amplify_footsteps(curr_at)) {
-    decibels *= 2;
-  }
+  if (level->is_able_to_dampen_footsteps(curr_at)) { decibels /= 2; }
+  if (level->is_able_to_amplify_footsteps(curr_at)) { decibels *= 2; }
 
   return decibels;
 }
@@ -280,9 +248,7 @@ int Thing::noise_on_teleporting(void)
 int Thing::noise_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->noise = v);
   return n;
@@ -291,9 +257,7 @@ int Thing::noise_set(int v)
 int Thing::noise_decr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->noise -= v);
   return n;
@@ -302,9 +266,7 @@ int Thing::noise_decr(int v)
 int Thing::noise_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->noise += v);
   return n;
@@ -313,9 +275,7 @@ int Thing::noise_incr(int v)
 int Thing::noise_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->noise--);
   return n;
@@ -324,9 +284,7 @@ int Thing::noise_decr(void)
 int Thing::noise_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->noise++);
   return n;
@@ -335,27 +293,21 @@ int Thing::noise_incr(void)
 uint8_t Level::is_able_to_dampen_footsteps(const point p)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(p.x, p.y))) {
-    return false;
-  }
+  if (unlikely(is_oob(p.x, p.y))) { return false; }
   return (get(_is_able_to_dampen_footsteps, p.x, p.y));
 }
 
 uint8_t Level::is_able_to_dampen_footsteps(const int x, const int y)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return false;
-  }
+  if (unlikely(is_oob(x, y))) { return false; }
   return (get(_is_able_to_dampen_footsteps, x, y));
 }
 
 void Level::is_able_to_dampen_footsteps_set(const int x, const int y)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
+  if (unlikely(is_oob(x, y))) { return; }
   is_map_changed = true;
   incr(_is_able_to_dampen_footsteps, x, y, (uint8_t) 1);
 }
@@ -363,9 +315,7 @@ void Level::is_able_to_dampen_footsteps_set(const int x, const int y)
 void Level::is_able_to_dampen_footsteps_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
+  if (unlikely(is_oob(x, y))) { return; }
   is_map_changed = true;
   decr(_is_able_to_dampen_footsteps, x, y, (uint8_t) 1);
 }
@@ -373,27 +323,21 @@ void Level::is_able_to_dampen_footsteps_unset(const int x, const int y)
 uint8_t Level::is_able_to_amplify_footsteps(const point p)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(p.x, p.y))) {
-    return false;
-  }
+  if (unlikely(is_oob(p.x, p.y))) { return false; }
   return (get(_is_able_to_amplify_footsteps, p.x, p.y));
 }
 
 uint8_t Level::is_able_to_amplify_footsteps(const int x, const int y)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return false;
-  }
+  if (unlikely(is_oob(x, y))) { return false; }
   return (get(_is_able_to_amplify_footsteps, x, y));
 }
 
 void Level::is_able_to_amplify_footsteps_set(const int x, const int y)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
+  if (unlikely(is_oob(x, y))) { return; }
   is_map_changed = true;
   incr(_is_able_to_amplify_footsteps, x, y, (uint8_t) 1);
 }
@@ -401,9 +345,7 @@ void Level::is_able_to_amplify_footsteps_set(const int x, const int y)
 void Level::is_able_to_amplify_footsteps_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
+  if (unlikely(is_oob(x, y))) { return; }
   is_map_changed = true;
   decr(_is_able_to_amplify_footsteps, x, y, (uint8_t) 1);
 }

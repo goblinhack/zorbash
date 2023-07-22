@@ -31,9 +31,7 @@ void Level::display_pixelart_projectiles(point tl, point br)
     Thingp t;
 
     t = thing_find(p.id);
-    if (unlikely(! t)) {
-      return true;
-    }
+    if (unlikely(! t)) { return true; }
 
     if (dt > 1) {
       if (t) {
@@ -45,9 +43,7 @@ void Level::display_pixelart_projectiles(point tl, point br)
 
     if (p.info.follow_moving_target) {
       auto t = thing_find_optional(p.victim_id);
-      if (t) {
-        p.info.pixel_stop = t->last_blit_at;
-      }
+      if (t) { p.info.pixel_stop = t->last_blit_at; }
     }
 
     auto start = p.info.pixel_start - p.info.pixel_map_at;
@@ -64,9 +60,7 @@ void Level::display_pixelart_projectiles(point tl, point br)
     perp /= 2;
 
     int frame = (int) (((float) Projectile::max_frames) * dt);
-    if (frame >= Projectile::max_frames) {
-      frame = Projectile::max_frames - 1;
-    }
+    if (frame >= Projectile::max_frames) { frame = Projectile::max_frames - 1; }
 
     fpoint mid(start.x + (diff.x * dt), start.y + (diff.y * dt));
 

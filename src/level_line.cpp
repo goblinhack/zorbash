@@ -30,16 +30,12 @@ std::vector< Thingp > Level::line(const point s, const point e, size_t max_elems
       out.push_back(it);
 
       if (max_elems) {
-        if (out.size() >= max_elems) {
-          return out;
-        }
+        if (out.size() >= max_elems) { return out; }
       }
     }
     FOR_ALL_THINGS_END()
 
-    if (x0 == x1 && y0 == y1) {
-      break;
-    }
+    if (x0 == x1 && y0 == y1) { break; }
 
     e2 = 2 * err;
     if (e2 >= dy) {
@@ -73,16 +69,12 @@ void Level::line_set_all_on_fire(const point s, const point e, size_t max_elems,
     //
     // If over water then do not set things on fire.
     //
-    if (is_water(t->curr_at)) {
-      continue;
-    }
+    if (is_water(t->curr_at)) { continue; }
 
     //
     // Don't set fire to the location of the firer.
     //
-    if (t->curr_at == s) {
-      continue;
-    }
+    if (t->curr_at == s) { continue; }
 
     t->on_fire_set(why);
   }

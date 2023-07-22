@@ -135,31 +135,21 @@ bool Thing::will_avoid_monst(const point p)
 
   FOR_ALL_THINGS_THAT_INTERACT_UNSAFE(level, it, p.x, p.y)
   {
-    if (it == this) {
-      continue;
-    }
+    if (it == this) { continue; }
 
-    if (! can_detect(it)) {
-      continue;
-    }
+    if (! can_detect(it)) { continue; }
 
     //
     // Not moving?
     //
-    if (it->idle_count() > 5) {
-      continue;
-    }
+    if (it->idle_count() > 5) { continue; }
 
     //
     // It's stuck?
     //
-    if (it->stuck_count() > 5) {
-      continue;
-    }
+    if (it->stuck_count() > 5) { continue; }
 
-    if (is_friend(it) || same_mob(it)) {
-      return false;
-    }
+    if (is_friend(it) || same_mob(it)) { return false; }
 
     if (me->is_monst()) {
       if (it->is_player()) {
@@ -249,9 +239,7 @@ bool Thing::will_avoid_monst(const point p)
 bool Thing::is_to_be_avoided(Thingp attacker)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! maybe_aip())) {
-    return false;
-  }
+  if (unlikely(! maybe_aip())) { return false; }
 
   return aip()->avoid.find(attacker->id) != aip()->avoid.end();
 }
@@ -259,14 +247,10 @@ bool Thing::is_to_be_avoided(Thingp attacker)
 bool Thing::cannot_avoid(Thingp attacker)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! maybe_aip())) {
-    return false;
-  }
+  if (unlikely(! maybe_aip())) { return false; }
 
   auto f = aip()->avoid.find(attacker->id);
-  if (f == aip()->avoid.end()) {
-    return false;
-  }
+  if (f == aip()->avoid.end()) { return false; }
 
   //
   // If we hit this limit, then we're really failing to avoid
@@ -280,9 +264,7 @@ bool Thing::cannot_avoid(Thingp attacker)
 void Thing::avoid_tick(void)
 {
   TRACE_NO_INDENT();
-  if (! maybe_aip()) {
-    return;
-  }
+  if (! maybe_aip()) { return; }
 
   for (auto &p : aip()->avoid) {
     auto attacker = level->thing_find_optional(p.first);
@@ -320,18 +302,10 @@ void Thing::add_avoid(Thingp attacker)
 {
   TRACE_NO_INDENT();
 
-  if (attacker == this) {
-    return;
-  }
-  if (unlikely(! attacker->is_monst() && ! attacker->is_player())) {
-    return;
-  }
-  if (unlikely(! is_monst() && ! is_player())) {
-    return;
-  }
-  if (! distance_avoid_get()) {
-    return;
-  }
+  if (attacker == this) { return; }
+  if (unlikely(! attacker->is_monst() && ! attacker->is_player())) { return; }
+  if (unlikely(! is_monst() && ! is_player())) { return; }
+  if (! distance_avoid_get()) { return; }
 
   if (! aip()->avoid[ attacker->id ]) {
     dbg2("Add new avoid %s", attacker->to_string().c_str());

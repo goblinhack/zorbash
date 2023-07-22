@@ -12,9 +12,7 @@ void Thing::change_state(int new_state, const std::string &why)
 {
   TRACE_NO_INDENT();
 
-  if (infop()->monst_state == new_state) {
-    return;
-  }
+  if (infop()->monst_state == new_state) { return; }
 
   bool was_sleeping = is_sleeping;
 
@@ -66,9 +64,7 @@ void Thing::change_state(int new_state, const std::string &why)
       break;
   }
 
-  if (is_player()) {
-    wid_inventory_fini();
-  }
+  if (is_player()) { wid_inventory_fini(); }
 
   //
   // Current state
@@ -81,21 +77,15 @@ void Thing::change_state(int new_state, const std::string &why)
     case MONST_STATE_OPEN_INVENTORY : from = "MONST-OPEN-INVENTORY"; break;
     case MONST_STATE_USING_ENCHANTSTONE :
       from = "MONST-USING-ENCHANTSTONE";
-      if (is_player()) {
-        wid_enchant_destroy();
-      }
+      if (is_player()) { wid_enchant_destroy(); }
       break;
     case MONST_STATE_USING_SKILLSTONE :
       from = "MONST-USING-SKILLSTONE";
-      if (is_player()) {
-        wid_choose_skill_destroy();
-      }
+      if (is_player()) { wid_choose_skill_destroy(); }
       break;
     case MONST_STATE_USING_SPELLBOOK :
       from = "MONST-USING-SPELLBOOK";
-      if (is_player()) {
-        wid_choose_spell_destroy();
-      }
+      if (is_player()) { wid_choose_spell_destroy(); }
       break;
     case MONST_STATE_SLEEPING : from = "MONST-SLEEPING"; break;
   }
@@ -116,25 +106,17 @@ void Thing::change_state(int new_state, const std::string &why)
       }
       break;
     case MONST_STATE_USING_ENCHANTSTONE :
-      if (is_player()) {
-        game->wid_enchant_an_item();
-      }
+      if (is_player()) { game->wid_enchant_an_item(); }
       break;
     case MONST_STATE_USING_SKILLSTONE :
-      if (is_player()) {
-        game->wid_choose_skill();
-      }
+      if (is_player()) { game->wid_choose_skill(); }
       break;
     case MONST_STATE_USING_SPELLBOOK :
-      if (is_player()) {
-        game->wid_choose_spell();
-      }
+      if (is_player()) { game->wid_choose_spell(); }
       break;
   }
 
   if (is_sleeping != was_sleeping) {
-    if (! is_sleeping) {
-      awake();
-    }
+    if (! is_sleeping) { awake(); }
   }
 }

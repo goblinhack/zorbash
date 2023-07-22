@@ -15,22 +15,16 @@ void Thing::on_stuck(void)
   TRACE_NO_INDENT();
 
   auto on_stuck = tp()->on_stuck_do();
-  if (std::empty(on_stuck)) {
-    return;
-  }
+  if (std::empty(on_stuck)) { return; }
 
   auto t = split_tokens(on_stuck, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) {
-      fn = fn.replace(found, 2, "");
-    }
+    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
 
-    if (mod == "me") {
-      mod = name();
-    }
+    if (mod == "me") { mod = name(); }
 
     dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(), (int) curr_at.x,
         (int) curr_at.y);
@@ -52,9 +46,7 @@ void Thing::stuck(const std::string &why)
   {
     auto iter = equip_get(e);
     if (iter) {
-      if (! iter->on_stuck_do().empty()) {
-        iter->stuck(why);
-      }
+      if (! iter->on_stuck_do().empty()) { iter->stuck(why); }
     }
   }
 }
@@ -70,9 +62,7 @@ void Thing::unstuck(void)
   {
     auto iter = equip_get(e);
     if (iter) {
-      if (! iter->on_stuck_do().empty()) {
-        iter->unstuck();
-      }
+      if (! iter->on_stuck_do().empty()) { iter->unstuck(); }
     }
   }
 }
@@ -89,17 +79,11 @@ bool Thing::is_stuck_check(void)
   //
   // Makes sure ghosts (or the cursor!) do not get stuck in webs.
   //
-  if (is_ethereal()) {
-    return false;
-  }
+  if (is_ethereal()) { return false; }
 
-  if (! is_monst() && ! is_player()) {
-    return false;
-  }
+  if (! is_monst() && ! is_player()) { return false; }
 
-  if (is_frozen) {
-    return true;
-  }
+  if (is_frozen) { return true; }
 
   if (level->is_spiderweb(curr_at.x, curr_at.y)) {
     if (is_immune_to_spiderwebs()) {
@@ -234,18 +218,12 @@ bool Thing::is_stuck_check(void)
   //
   FOR_ALL_NON_INTERNAL_THINGS(level, it, curr_at.x, curr_at.y)
   {
-    if (it == this) {
-      continue;
-    }
+    if (it == this) { continue; }
 
-    if (! it->is_alive_monst()) {
-      continue;
-    }
+    if (! it->is_alive_monst()) { continue; }
 
     if (it->is_engulfer() || it->is_heavy()) {
-      if (! d20_ge(stat_str_total(), it->stat_str_total())) {
-        stuck = true;
-      }
+      if (! d20_ge(stat_str_total(), it->stat_str_total())) { stuck = true; }
     }
   }
   FOR_ALL_THINGS_END()
@@ -259,16 +237,12 @@ void Thing::is_stuck_update(void)
   // Don't do silly things like have stuck skills.
   //
   auto owner = top_owner();
-  if (owner) {
-    return;
-  }
+  if (owner) { return; }
 
   //
   // Plants, grass etc...
   //
-  if (! is_moveable()) {
-    return;
-  }
+  if (! is_moveable()) { return; }
 
   dbg2("Stuck check");
   TRACE_AND_INDENT();
@@ -295,9 +269,7 @@ void Thing::is_stuck_update(void)
     //
     // Are we newly stuck?
     //
-    if (! is_stuck_check()) {
-      return;
-    }
+    if (! is_stuck_check()) { return; }
 
     //
     // Yes.
@@ -342,18 +314,10 @@ void Thing::is_stuck_update(void)
   //
   FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y)
   {
-    if (t->is_player() || t->is_monst()) {
-      t->wobble(pcg_random_range(5, 20));
-    }
-    if (t->is_spiderweb()) {
-      t->wobble(5);
-    }
-    if (t->is_block_of_ice()) {
-      t->wobble(5);
-    }
-    if (t->is_barrel()) {
-      t->wobble(5);
-    }
+    if (t->is_player() || t->is_monst()) { t->wobble(pcg_random_range(5, 20)); }
+    if (t->is_spiderweb()) { t->wobble(5); }
+    if (t->is_block_of_ice()) { t->wobble(5); }
+    if (t->is_barrel()) { t->wobble(5); }
   }
   FOR_ALL_THINGS_END()
 }
@@ -364,13 +328,9 @@ int Thing::stuck_count(void)
 {
   TRACE_NO_INDENT();
 
-  if (! is_monst() && ! is_player()) {
-    return 0;
-  }
+  if (! is_monst() && ! is_player()) { return 0; }
 
-  if (maybe_aip()) {
-    return (aip()->stuck_count);
-  }
+  if (maybe_aip()) { return (aip()->stuck_count); }
   return 0;
 }
 

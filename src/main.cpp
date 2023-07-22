@@ -61,9 +61,7 @@ void quit(void)
   signal(SIGFPE, nullptr); // uninstall our handler
 #endif
 
-  if (game) {
-    game->fini();
-  }
+  if (game) { game->fini(); }
 
   LOG("FIN: room_fini");
   room_fini();
@@ -158,9 +156,7 @@ void quit(void)
   }
 
 #ifdef ENABLE_DEBUG_MEM_LEAKS
-  if (! g_die_occurred) {
-    ptrcheck_leak_print();
-  }
+  if (! g_die_occurred) { ptrcheck_leak_print(); }
 #endif
 
   LOG("FIN: Cleanup done");
@@ -329,21 +325,13 @@ cleanup:
   DBG3("Curr dir    : \"%s\"", curr_dir);
   DBG3("Full name   : \"%s\"", exec_expanded_name);
 
-  if (path) {
-    myfree(path);
-  }
+  if (path) { myfree(path); }
 
-  if (exec_expanded_name) {
-    myfree(exec_expanded_name);
-  }
+  if (exec_expanded_name) { myfree(exec_expanded_name); }
 
-  if (parent_dir) {
-    myfree(parent_dir);
-  }
+  if (parent_dir) { myfree(parent_dir); }
 
-  if (curr_dir) {
-    myfree(curr_dir);
-  }
+  if (curr_dir) { myfree(curr_dir); }
 }
 
 //
@@ -366,9 +354,7 @@ static void find_exec_dir(void)
   myfree(tmp2);
   myfree(tmp3);
   myfree(tmp4);
-  if (EXEC_DIR) {
-    myfree(EXEC_DIR);
-  }
+  if (EXEC_DIR) { myfree(EXEC_DIR); }
   EXEC_DIR = tmp5;
 
   CON("INI: Will use EXEC_DIR as '%s'", EXEC_DIR);
@@ -381,15 +367,11 @@ static void find_data_dir(void)
 {
   TRACE_AND_INDENT();
   DATA_PATH = dynprintf("%sdata" DIR_SEP, EXEC_DIR);
-  if (dir_exists(DATA_PATH)) {
-    return;
-  }
+  if (dir_exists(DATA_PATH)) { return; }
   myfree(DATA_PATH);
 
   DATA_PATH = dynprintf(".." DIR_SEP "data");
-  if (dir_exists(DATA_PATH)) {
-    return;
-  }
+  if (dir_exists(DATA_PATH)) { return; }
   myfree(DATA_PATH);
 
   DATA_PATH = dupstr(EXEC_DIR, __FUNCTION__);
@@ -411,15 +393,11 @@ static void find_world_dir(void)
 {
   TRACE_AND_INDENT();
   WORLD_PATH = dynprintf("%sdata" DIR_SEP "world" DIR_SEP, EXEC_DIR);
-  if (dir_exists(WORLD_PATH)) {
-    return;
-  }
+  if (dir_exists(WORLD_PATH)) { return; }
   myfree(WORLD_PATH);
 
   WORLD_PATH = dynprintf(".." DIR_SEP "world");
-  if (dir_exists(WORLD_PATH)) {
-    return;
-  }
+  if (dir_exists(WORLD_PATH)) { return; }
   myfree(WORLD_PATH);
 
   WORLD_PATH = dupstr(EXEC_DIR, __FUNCTION__);
@@ -432,15 +410,11 @@ static void find_ttf_dir(void)
 {
   TRACE_AND_INDENT();
   TTF_PATH = dynprintf("%sdata" DIR_SEP "ttf" DIR_SEP, EXEC_DIR);
-  if (dir_exists(TTF_PATH)) {
-    return;
-  }
+  if (dir_exists(TTF_PATH)) { return; }
   myfree(TTF_PATH);
 
   TTF_PATH = dynprintf(".." DIR_SEP "data" DIR_SEP "ttf" DIR_SEP);
-  if (dir_exists(TTF_PATH)) {
-    return;
-  }
+  if (dir_exists(TTF_PATH)) { return; }
   myfree(TTF_PATH);
 
   TTF_PATH = dupstr(EXEC_DIR, __FUNCTION__);
@@ -453,15 +427,11 @@ static void find_gfx_dir(void)
 {
   TRACE_AND_INDENT();
   GFX_PATH = dynprintf("%sdata" DIR_SEP "gfx" DIR_SEP, EXEC_DIR);
-  if (dir_exists(GFX_PATH)) {
-    return;
-  }
+  if (dir_exists(GFX_PATH)) { return; }
   myfree(GFX_PATH);
 
   GFX_PATH = dynprintf(".." DIR_SEP "gfx" DIR_SEP);
-  if (dir_exists(GFX_PATH)) {
-    return;
-  }
+  if (dir_exists(GFX_PATH)) { return; }
   myfree(GFX_PATH);
 
   GFX_PATH = dupstr(EXEC_DIR, __FUNCTION__);
@@ -489,9 +459,7 @@ static void usage(void)
   TRACE_AND_INDENT();
   static int whinged;
 
-  if (whinged) {
-    return;
-  }
+  if (whinged) { return; }
   whinged = true;
 
   CON("zorbash, options:");
@@ -536,9 +504,7 @@ static void parse_args(int argc, char *argv[])
     LOG("INI: + argument: \"%s\"", argv[ i ]);
   }
 
-  if (argc) {
-    g_opt_no_slow_log_flush = true;
-  }
+  if (argc) { g_opt_no_slow_log_flush = true; }
 
   for (i = 1; i < argc; i++) {
     if (! strcasecmp(argv[ i ], "--ascii") || ! strcasecmp(argv[ i ], "-ascii")) {
@@ -686,9 +652,7 @@ static std::string create_appdata_dir(void)
 {
   const char *appdata;
   appdata = getenv("APPDATA");
-  if (! appdata || ! appdata[ 0 ]) {
-    appdata = "appdata";
-  }
+  if (! appdata || ! appdata[ 0 ]) { appdata = "appdata"; }
 
 #ifdef _WIN32
   mkdir(appdata);
@@ -822,9 +786,7 @@ int main(int argc, char *argv[])
   CON("INI: Loaded");
 
   if (! g_opt_tests) {
-    if (! sdl_init()) {
-      ERR("SDL: Init");
-    }
+    if (! sdl_init()) { ERR("SDL: Init"); }
   }
 
   //
@@ -838,16 +800,12 @@ int main(int argc, char *argv[])
   // Check for overrides.
   //
   if (game) {
-    if (g_opt_ascii_override) {
-      parse_args(argc, argv);
-    }
+    if (g_opt_ascii_override) { parse_args(argc, argv); }
   }
 
   sdl_config_update_all();
 
-  if (g_need_restart) {
-    restart();
-  }
+  if (g_need_restart) { restart(); }
 
   gl_init_2d_mode();
 
@@ -882,21 +840,15 @@ int main(int argc, char *argv[])
 #endif
 
   CON("INI: Load fonts");
-  if (! font_init()) {
-    ERR("Font init");
-  }
+  if (! font_init()) { ERR("Font init"); }
   CON("INI: Loaded");
 
   CON("INI: Load widgets");
-  if (! wid_init()) {
-    ERR("Wid init");
-  }
+  if (! wid_init()) { ERR("Wid init"); }
   CON("INI: Loaded");
 
   CON("INI: Load console");
-  if (! wid_console_init()) {
-    ERR("Wid_console init");
-  }
+  if (! wid_console_init()) { ERR("Wid_console init"); }
   CON("INI: Loaded");
   wid_toggle_hidden(wid_console_window);
   flush_the_console();
@@ -909,65 +861,47 @@ int main(int argc, char *argv[])
   flush_the_console();
 
   CON("INI: Load tiles");
-  if (! wid_tiles_init()) {
-    ERR("Wid tiles init");
-  }
+  if (! wid_tiles_init()) { ERR("Wid tiles init"); }
 
-  if (! tile_init()) {
-    ERR("Tile init");
-  }
+  if (! tile_init()) { ERR("Tile init"); }
   CON("INI: Loaded");
   flush_the_console();
 
   CON("INI: Load textures");
-  if (! tex_init()) {
-    ERR("Tex init");
-  }
+  if (! tex_init()) { ERR("Tex init"); }
   CON("INI: Loaded");
   flush_the_console();
 
   CON("INI: Load audio");
-  if (! audio_init()) {
-    ERR("Audio init");
-  }
+  if (! audio_init()) { ERR("Audio init"); }
   CON("INI: Loaded");
   flush_the_console();
 
   CON("INI: Load music");
-  if (! music_init()) {
-    ERR("Music init");
-  }
+  if (! music_init()) { ERR("Music init"); }
   CON("INI: Loaded");
   flush_the_console();
 
   CON("INI: Load sound");
-  if (! sound_init()) {
-    ERR("Sound init");
-  }
+  if (! sound_init()) { ERR("Sound init"); }
   CON("INI: Loaded");
   flush_the_console();
 
   LOG("INI: Init UI topcon");
-  if (! wid_topcon_init()) {
-    ERR("Wid_topcon init");
-  }
+  if (! wid_topcon_init()) { ERR("Wid_topcon init"); }
 
   LOG("INI: Init UI actionar");
   wid_actionbar_init();
 
   LOG("INI: Init UI botcon");
-  if (! wid_botcon_init()) {
-    ERR("Wid_botcon init");
-  }
+  if (! wid_botcon_init()) { ERR("Wid_botcon init"); }
 
   LOG("INI: Find resource locations for gfx and music");
   find_file_locations();
   flush_the_console();
 
   CON("INI: Load commands");
-  if (! command_init()) {
-    ERR("Command init");
-  }
+  if (! command_init()) { ERR("Command init"); }
   CON("INI: Loaded");
   flush_the_console();
 
@@ -978,9 +912,7 @@ int main(int argc, char *argv[])
 
   CON("INI: Load python");
   py_init(argv);
-  if (g_errored) {
-    goto loop;
-  }
+  if (g_errored) { goto loop; }
   CON("INI: Loaded");
   flush_the_console();
 
@@ -992,9 +924,7 @@ int main(int argc, char *argv[])
   CON("INI: Load monsters");
   pcg_random_allowed++;
   tp_init();
-  if (g_errored) {
-    goto loop;
-  }
+  if (g_errored) { goto loop; }
   CON("INI: Loaded");
   flush_the_console();
 
@@ -1003,9 +933,7 @@ int main(int argc, char *argv[])
   //
   CON("INI: Load rooms");
   room_init();
-  if (g_errored) {
-    goto loop;
-  }
+  if (g_errored) { goto loop; }
   CON("INI: Loaded");
   flush_the_console();
 

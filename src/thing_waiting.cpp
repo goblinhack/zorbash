@@ -14,22 +14,16 @@ void Thing::on_waiting(void)
   TRACE_NO_INDENT();
 
   auto on_waiting = tp()->on_waiting_do();
-  if (std::empty(on_waiting)) {
-    return;
-  }
+  if (std::empty(on_waiting)) { return; }
 
   auto t = split_tokens(on_waiting, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) {
-      fn = fn.replace(found, 2, "");
-    }
+    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
 
-    if (mod == "me") {
-      mod = name();
-    }
+    if (mod == "me") { mod = name(); }
 
     dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(), (int) curr_at.x,
         (int) curr_at.y);
@@ -49,9 +43,7 @@ void Thing::waiting(void)
   {
     auto iter = equip_get(e);
     if (iter) {
-      if (! iter->on_waiting_do().empty()) {
-        iter->waiting();
-      }
+      if (! iter->on_waiting_do().empty()) { iter->waiting(); }
     }
   }
 

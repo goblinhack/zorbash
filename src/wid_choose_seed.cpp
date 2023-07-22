@@ -31,9 +31,7 @@ void Game::wid_choose_seed_select(void)
   CON("INF: Choose seed menu");
 
   auto seed = g_opt_seed_name;
-  if (seed.empty()) {
-    seed = game->seed_name;
-  }
+  if (seed.empty()) { seed = game->seed_name; }
   wid_choose_seed = wid_keyboard(string_to_wstring(seed), L"Enter a name or number for the dungeon seed", selected,
                                  cancelled, UI_RIGHTBAR_WIDTH);
 }

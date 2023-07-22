@@ -26,9 +26,7 @@ void Level::display_ascii_lasers(point tl, point br)
     Thingp t;
 
     t = thing_find(l.id);
-    if (unlikely(! t)) {
-      return true;
-    }
+    if (unlikely(! t)) { return true; }
 
     if (dt > 1) {
       if (t) {
@@ -44,18 +42,14 @@ void Level::display_ascii_lasers(point tl, point br)
 
     if (l.info.follow_moving_target) {
       auto t = thing_find_optional(l.victim_id);
-      if (t) {
-        l.info.map_stop = t->curr_at;
-      }
+      if (t) { l.info.map_stop = t->curr_at; }
     }
 
     auto start = l.info.map_start;
     auto stop  = l.info.map_stop;
 
     int frame = (int) (((float) Laser::max_frames) * dt);
-    if (frame >= Laser::max_frames) {
-      frame = Laser::max_frames - 1;
-    }
+    if (frame >= Laser::max_frames) { frame = Laser::max_frames - 1; }
 
     auto tiles = &t->tp()->tiles;
     auto tile  = tile_n(tiles, frame);

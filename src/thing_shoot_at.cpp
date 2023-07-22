@@ -21,16 +21,12 @@ static int              thing_possible_hit_size;
 
 int Thing::is_able_to_shoot_at(void)
 {
-  if (is_frozen) {
-    return false;
-  }
+  if (is_frozen) { return false; }
 
   //
   // If trapped in ice, cannot fire.
   //
-  if (level->is_block_of_ice(curr_at)) {
-    return false;
-  }
+  if (level->is_block_of_ice(curr_at)) { return false; }
 
   TRACE_NO_INDENT();
   return (tp()->is_able_to_shoot_at());
@@ -55,13 +51,9 @@ bool Thing::on_want_to_shoot_at(Thingp target)
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) {
-      fn = fn.replace(found, 2, "");
-    }
+    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
 
-    if (mod == "me") {
-      mod = name();
-    }
+    if (mod == "me") { mod = name(); }
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), target->to_short_string().c_str());
 
@@ -112,9 +104,7 @@ Thingp Thing::best_shoot_at_target_get(void)
   }
 
   thing_possible_hit_size = 0;
-  if (! best) {
-    return nullptr;
-  }
+  if (! best) { return nullptr; }
 
   return best->target;
 }
@@ -124,13 +114,9 @@ Thingp Thing::best_shoot_at_target_get(void)
  */
 static void thing_possible_hit_add(Thingp me, Thingp target)
 {
-  if (! get(me->aip()->can_see_currently.can_see, (int) target->curr_at.x, (int) target->curr_at.y)) {
-    return;
-  }
+  if (! get(me->aip()->can_see_currently.can_see, (int) target->curr_at.x, (int) target->curr_at.y)) { return; }
 
-  if (thing_possible_hit_size >= MAX_THING_POSSIBLE_HIT) {
-    return;
-  }
+  if (thing_possible_hit_size >= MAX_THING_POSSIBLE_HIT) { return; }
 
   ThingPossibleHit *h = &thing_possible_hits[ thing_possible_hit_size++ ];
   memset(h, 0, sizeof(*h));
@@ -143,9 +129,7 @@ static void thing_possible_hit_add(Thingp me, Thingp target)
 //
 bool Thing::shoot_at_target(void)
 {
-  if (! is_able_to_shoot_at()) {
-    return false;
-  }
+  if (! is_able_to_shoot_at()) { return false; }
 
   dbg("Shoot at a target?");
   TRACE_AND_INDENT();
@@ -168,44 +152,32 @@ bool Thing::shoot_at_target(void)
       // Too far?
       //
       float d = DISTANCE(x, y, curr_at.x, curr_at.y);
-      if (d > distance + 0.5) {
-        continue;
-      }
+      if (d > distance + 0.5) { continue; }
 
       //
       // Too close, use melee (that's if we are able to move, unlike a static gargoyle).
       //
       if (! is_able_to_shoot_at_close_range()) {
         if (is_moveable()) {
-          if (d < 2) {
-            continue;
-          }
+          if (d < 2) { continue; }
         }
       }
 
       FOR_ALL_THINGS_THAT_INTERACT(level, victim, x, y)
       {
-        if (this == victim) {
-          continue;
-        }
+        if (this == victim) { continue; }
 
         //
         // No point in shooting at the dead
         //
-        if (victim->is_dead) {
-          continue;
-        }
+        if (victim->is_dead) { continue; }
 
-        if (! can_detect(victim)) {
-          continue;
-        }
+        if (! can_detect(victim)) { continue; }
 
         //
         // Don't attack thy leader or follower
         //
-        if (same_leader_or_owner(victim) || is_friend(victim) || same_mob(victim)) {
-          continue;
-        }
+        if (same_leader_or_owner(victim) || is_friend(victim) || same_mob(victim)) { continue; }
 
         //
         // No shooting at blood!
@@ -226,9 +198,7 @@ bool Thing::shoot_at_target(void)
     }
 
   auto target = best_shoot_at_target_get();
-  if (! target) {
-    return false;
-  }
+  if (! target) { return false; }
 
   dbg("Want to shoot at %s", target->to_short_string().c_str());
   TRACE_AND_INDENT();
@@ -249,9 +219,7 @@ bool Thing::shoot_at_and_choose_target(Thingp item, UseOptions *use_options)
   if (use_options && use_options->radial_effect) {
     return laser_shoot_at(item, item->gfx_targeted_radial(), this, use_options);
   }
-  if (! item->gfx_targeted_laser().empty()) {
-    return laser_choose_target(item);
-  }
+  if (! item->gfx_targeted_laser().empty()) { return laser_choose_target(item); }
   return projectile_choose_target(item);
 }
 
@@ -264,29 +232,21 @@ bool Thing::shoot_at(Thingp item, Thingp target)
   }
   TRACE_AND_INDENT();
 
-  if (item->gfx_targeted_laser().empty()) {
-    return projectile_choose_target(item, target);
-  }
+  if (item->gfx_targeted_laser().empty()) { return projectile_choose_target(item, target); }
   return laser_choose_target(item, target);
 }
 
 bool Thing::shoot_at(Thingp target)
 {
   TRACE_AND_INDENT();
-  if (! is_able_to_shoot_at()) {
-    return false;
-  }
+  if (! is_able_to_shoot_at()) { return false; }
 
-  if (! target) {
-    return false;
-  }
+  if (! target) { return false; }
 
   //
   // It is possible to attack food, but really we want to eat it and not shoot it...
   //
-  if (target->is_item()) {
-    return false;
-  }
+  if (target->is_item()) { return false; }
 
   dbg("Shoot at %s if possible", target->to_short_string().c_str());
   TRACE_AND_INDENT();
@@ -357,9 +317,7 @@ bool Thing::shoot_at(Thingp target)
   dbg("Shoot with best weapon: %s", curr_weapon->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  if (! possible_to_attack(target)) {
-    return false;
-  }
+  if (! possible_to_attack(target)) { return false; }
 
   if (d100() > aggression_pct()) {
     dbg("Aggression check fail, do not shoot at");

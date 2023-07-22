@@ -25,15 +25,11 @@ void Thing::discovered_set(Thingp what, bool val)
 {
   TRACE_AND_INDENT();
 
-  if (val == what->is_discovered) {
-    return;
-  }
+  if (val == what->is_discovered) { return; }
 
   what->is_discovered = val;
 
   if (is_player()) {
-    if (what->is_discovered) {
-      msg("You can see a secret door!");
-    }
+    if (what->is_discovered) { msg("You can see a secret door!"); }
   }
 }

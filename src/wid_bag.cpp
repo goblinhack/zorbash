@@ -38,9 +38,7 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
   {
     TRACE_NO_INDENT();
     auto t = game->thing_find(item.id);
-    if (unlikely(! t)) {
-      continue;
-    }
+    if (unlikely(! t)) { continue; }
 
     auto tl = t->itemsp()->bag_position + point(1, 1);
 
@@ -56,9 +54,7 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
     wid_set_pos(w, tl, br);
     wid_set_style(w, UI_WID_STYLE_DARK);
 
-    if (t == wid_inventory_thing_selected) {
-      wid_set_style(w, UI_WID_STYLE_RED);
-    }
+    if (t == wid_inventory_thing_selected) { wid_set_style(w, UI_WID_STYLE_RED); }
 
     bag->log("+ item %s at %d,%d", t->to_short_string().c_str(), t->itemsp()->bag_position.x,
              t->itemsp()->bag_position.y);
@@ -131,13 +127,10 @@ static void wid_in_transit_item_place_in_bag(Widp wid_bag_container, Thingp bag,
 
   t->itemsp()->preferred_bag_position = point(-1, -1);
 
-  if (t->is_bag_item_container()) {
-    game->inventory_highlight_slot = game->previous_slot;
-  }
+  if (t->is_bag_item_container()) { game->inventory_highlight_slot = game->previous_slot; }
 
   t->log("Compress bag and request to remake inventory");
-  while (bag->bag_compress()) {
-  }
+  while (bag->bag_compress()) {}
   game->set_request_to_remake_rightbar();
 
   t->log("In transit item place completed");
@@ -155,9 +148,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
   DBG3("Place in transit item");
   TRACE_AND_INDENT();
   auto level = game->get_current_level();
-  if (! level) {
-    return false;
-  }
+  if (! level) { return false; }
 
   auto player = level->player;
   if (player && player->is_dead) {
@@ -566,15 +557,11 @@ uint8_t wid_bag_item_mouse_up(Widp w, int x, int y, uint32_t button)
 
   DBG3("Mouse down, item select");
   TRACE_AND_INDENT();
-  if (game->in_transit_item) {
-    return false;
-  }
+  if (game->in_transit_item) { return false; }
 
   auto id = wid_get_thing_id_context(w, 0);
   auto t  = game->thing_find(id);
-  if (unlikely(! t)) {
-    return false;
-  }
+  if (unlikely(! t)) { return false; }
 
   if (wid_inventory_thing_selected == t) {
     wid_inventory_select_requested(nullptr);
@@ -590,15 +577,11 @@ uint8_t wid_bag_item_mouse_held(Widp w, int x, int y, uint32_t button)
 
   DBG3("Mouse held down, item select");
   TRACE_AND_INDENT();
-  if (game->in_transit_item) {
-    return false;
-  }
+  if (game->in_transit_item) { return false; }
 
   auto id = wid_get_thing_id_context(w, 0);
   auto t  = game->thing_find(id);
-  if (unlikely(! t)) {
-    return false;
-  }
+  if (unlikely(! t)) { return false; }
 
   game->wid_bag_move_item(t);
 
@@ -613,9 +596,7 @@ bool Game::wid_bag_move_item(Thingp t)
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
-  if (! level) {
-    return false;
-  }
+  if (! level) { return false; }
 
   auto player = level->player;
   if (player && player->is_dead) {
@@ -671,23 +652,16 @@ bool Game::wid_bag_move_item(Thingp t)
   //
   auto old_owner = t->immediate_owner();
 
-  if (bag) {
-    bag->bag_remove(t);
-  }
+  if (bag) { bag->bag_remove(t); }
 
-  if (old_owner) {
-    old_owner->drop_into_ether(t);
-  }
+  if (old_owner) { old_owner->drop_into_ether(t); }
 
   if (bag) {
-    while (bag->bag_compress()) {
-    }
+    while (bag->bag_compress()) {}
   }
 
   t->describe_when_hovered_over_in_rightbar();
-  if (game->in_transit_item) {
-    wid_destroy(&game->in_transit_item);
-  }
+  if (game->in_transit_item) { wid_destroy(&game->in_transit_item); }
 
   auto tl = point(ascii_mouse_x, ascii_mouse_y);
   auto br = tl + point(t->item_width() - 1, t->item_height() - 1);
@@ -713,9 +687,7 @@ bool Game::wid_bag_move_item(Thingp t)
 
 void wid_bag_item_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
-  if (game->in_transit_item) {
-    return;
-  }
+  if (game->in_transit_item) { return; }
 
   auto id = wid_get_thing_id_context(w, 0);
   auto t  = game->thing_find(id);
@@ -738,9 +710,7 @@ void wid_bag_item_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int w
 
 void wid_bag_item_mouse_over_end(Widp w)
 {
-  if (game->in_transit_item) {
-    return;
-  }
+  if (game->in_transit_item) { return; }
 
   wid_inventory_over_requested(nullptr);
   BOTCON(" ");
@@ -770,9 +740,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
   }
 
   auto level = game->get_current_level();
-  if (! level) {
-    return false;
-  }
+  if (! level) { return false; }
 
   auto player = level->player;
   if (player && player->is_dead) {
@@ -794,9 +762,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
     }
   }
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   auto id   = wid_get_thing_id_context(w, 0);
   auto what = game->thing_find(id);
@@ -806,9 +772,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
   }
 
   if (sdlk_eq(*key, game->config.key_drop)) {
-    if (game->level->player->drop(what)) {
-      game->tick_begin("drop");
-    }
+    if (game->level->player->drop(what)) { game->tick_begin("drop"); }
 
     game->set_request_to_remake_rightbar();
     game->wid_thing_info_create(game->level->player, false);
@@ -895,9 +859,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
   if (sdlk_eq(*key, game->config.key_drop)) {
     DBG3("Pressed drop key");
     TRACE_AND_INDENT();
-    if (player->drop(what)) {
-      game->tick_begin("drop");
-    }
+    if (player->drop(what)) { game->tick_begin("drop"); }
     game->set_request_to_remake_rightbar();
     game->wid_thing_info_create(game->level->player, false);
     return true;
@@ -940,9 +902,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
 static void wid_bag_tick(Widp w)
 {
   TRACE_NO_INDENT();
-  if (game->in_transit_item) {
-    wid_move_to_abs(game->in_transit_item, ascii_mouse_x, ascii_mouse_y);
-  }
+  if (game->in_transit_item) { wid_move_to_abs(game->in_transit_item, ascii_mouse_x, ascii_mouse_y); }
 }
 
 WidBag::~WidBag()
@@ -952,15 +912,11 @@ WidBag::~WidBag()
   //
   // Thing may have been destroyed already.
   //
-  if (bag) {
-    bag->log("Destroy bag");
-  }
+  if (bag) { bag->log("Destroy bag"); }
   wid_destroy(&wid_bag_container);
 
   auto b = std::find(game->bags.begin(), game->bags.end(), this);
-  if (b != game->bags.end()) {
-    game->bags.erase(b);
-  }
+  if (b != game->bags.end()) { game->bags.erase(b); }
 }
 
 WidBag::WidBag(Widp parent, Thingp bag_, bool highlight, point tl, point br, const std::string &title)
@@ -1011,9 +967,7 @@ Widp is_mouse_over_any_bag(void)
     pixel_to_ascii(&x, &y);
 
     static int tlx, tly, brx, bry, cached;
-    if (cached != TERM_HEIGHT) {
-      cached = TERM_HEIGHT;
-    }
+    if (cached != TERM_HEIGHT) { cached = TERM_HEIGHT; }
 
     wid_get_tl_x_tl_y_br_x_br_y(w, &tlx, &tly, &brx, &bry);
 

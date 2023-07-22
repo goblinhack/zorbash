@@ -15,42 +15,32 @@ int Thing::dmg_num_of_attacks(void)
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
-    if (iter) {
-      attacks = std::max(attacks, iter->dmg_num_of_attacks());
-    }
+    if (iter) { attacks = std::max(attacks, iter->dmg_num_of_attacks()); }
   }
 
   if (maybe_itemsp()) {
     FOR_ALL_BUFFS(id)
     {
       auto iter = level->thing_find(id);
-      if (iter) {
-        attacks = std::max(attacks, iter->dmg_num_of_attacks());
-      }
+      if (iter) { attacks = std::max(attacks, iter->dmg_num_of_attacks()); }
     }
 
     FOR_ALL_DEBUFFS(id)
     {
       auto iter = level->thing_find(id);
-      if (iter) {
-        attacks = std::max(attacks, iter->dmg_num_of_attacks());
-      }
+      if (iter) { attacks = std::max(attacks, iter->dmg_num_of_attacks()); }
     }
 
     FOR_ALL_SKILLS(id)
     {
       auto iter = level->thing_find(id);
-      if (iter && iter->is_activated) {
-        attacks = std::max(attacks, iter->dmg_num_of_attacks());
-      }
+      if (iter && iter->is_activated) { attacks = std::max(attacks, iter->dmg_num_of_attacks()); }
     }
 
     FOR_ALL_SPELLS(id)
     {
       auto iter = level->thing_find(id);
-      if (iter && iter->is_activated) {
-        attacks = std::max(attacks, iter->dmg_num_of_attacks());
-      }
+      if (iter && iter->is_activated) { attacks = std::max(attacks, iter->dmg_num_of_attacks()); }
     }
   }
 
@@ -67,22 +57,16 @@ int Thing::dmg_current(Thingp victim)
 {
   TRACE_NO_INDENT();
   int v = 0;
-  if (maybe_infop()) {
-    v = infop()->dmg_current;
-  }
+  if (maybe_infop()) { v = infop()->dmg_current; }
   auto owner = immediate_owner();
-  if (owner && (owner != this)) {
-    v += owner->dmg_current();
-  }
+  if (owner && (owner != this)) { v += owner->dmg_current(); }
   return v;
 }
 
 int Thing::dmg_current_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->dmg_current = v);
   return n;
@@ -91,9 +75,7 @@ int Thing::dmg_current_set(int v)
 int Thing::dmg_current_decr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->dmg_current -= v);
   return n;
@@ -102,9 +84,7 @@ int Thing::dmg_current_decr(int v)
 int Thing::dmg_current_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->dmg_current += v);
   return n;
@@ -113,9 +93,7 @@ int Thing::dmg_current_incr(int v)
 int Thing::dmg_current_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->dmg_current--);
   return n;
@@ -124,9 +102,7 @@ int Thing::dmg_current_decr(void)
 int Thing::dmg_current_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->dmg_current++);
   return n;
@@ -158,9 +134,7 @@ int Thing::dmg_max(Thingp victim)
   // Add in weapons
   //
   Thingp curr_weapon = equip_get(MONST_EQUIP_WEAPON);
-  if (curr_weapon) {
-    max_dmg = std::max(max_dmg, curr_weapon->dmg_max());
-  }
+  if (curr_weapon) { max_dmg = std::max(max_dmg, curr_weapon->dmg_max()); }
 
   //
   // Don't include crush damage as it is non typical
@@ -195,9 +169,7 @@ int Thing::dmg_min(Thingp victim)
   // Add in weapons
   //
   Thingp curr_weapon = equip_get(MONST_EQUIP_WEAPON);
-  if (curr_weapon) {
-    min_dmg = std::min(min_dmg, curr_weapon->dmg_min());
-  }
+  if (curr_weapon) { min_dmg = std::min(min_dmg, curr_weapon->dmg_min()); }
 
   //
   // Don't include crush damage as it is non typical
@@ -211,9 +183,7 @@ int Thing::dmg_min(Thingp victim)
 int Thing::damaged_count(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->damaged_count);
-  }
+  if (maybe_infop()) { return (infop()->damaged_count); }
   return 0;
 }
 

@@ -10,9 +10,7 @@ void Level::debug_path_draw_line(const std::vector< point > &move_path)
   TRACE_AND_INDENT();
   for (auto &c : move_path) {
     if (cursor && cursor->is_visible()) {
-      if ((c.x == cursor_at.x) && (c.y == cursor_at.y)) {
-        continue;
-      }
+      if ((c.x == cursor_at.x) && (c.y == cursor_at.y)) { continue; }
     }
     thing_new("debug_path", point(c.x, c.y));
   }
@@ -21,9 +19,7 @@ void Level::debug_path_draw_line(const std::vector< point > &move_path)
 void Level::debug_path_draw(const std::vector< point > &move_path)
 {
   TRACE_AND_INDENT();
-  if (! player) {
-    return;
-  }
+  if (! player) { return; }
 
   debug_path_draw_line(move_path);
 }
@@ -31,9 +27,7 @@ void Level::debug_path_draw(const std::vector< point > &move_path)
 void Level::debug_path_create(const std::vector< point > &move_path)
 {
   TRACE_AND_INDENT();
-  if (! cursor) {
-    return;
-  }
+  if (! cursor) { return; }
 
   debug_path_clear();
 
@@ -48,9 +42,7 @@ void Level::debug_path_clear(void)
 {
   TRACE_AND_INDENT();
   auto level = game->get_current_level();
-  if (! level) {
-    return;
-  }
+  if (! level) { return; }
 
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {

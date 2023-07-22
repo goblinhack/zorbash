@@ -15,22 +15,16 @@ void Thing::on_targeted_radially(void)
   TRACE_NO_INDENT();
 
   auto on_targeted_radially = tp()->on_targeted_radially_do();
-  if (std::empty(on_targeted_radially)) {
-    return;
-  }
+  if (std::empty(on_targeted_radially)) { return; }
 
   auto t = split_tokens(on_targeted_radially, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) {
-      fn = fn.replace(found, 2, "");
-    }
+    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
 
-    if (mod == "me") {
-      mod = name();
-    }
+    if (mod == "me") { mod = name(); }
 
     dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
@@ -46,9 +40,7 @@ void Thing::on_targeted(point target)
   TRACE_NO_INDENT();
 
   auto on_targeted = tp()->on_targeted_do();
-  if (std::empty(on_targeted)) {
-    return;
-  }
+  if (std::empty(on_targeted)) { return; }
 
   TRACE_NO_INDENT();
   auto t = split_tokens(on_targeted, '.');
@@ -56,13 +48,9 @@ void Thing::on_targeted(point target)
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) {
-      fn = fn.replace(found, 2, "");
-    }
+    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
 
-    if (mod == "me") {
-      mod = name();
-    }
+    if (mod == "me") { mod = name(); }
 
     dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
@@ -82,15 +70,11 @@ bool Thing::is_target_select(Thingp item)
     return false;
   }
 
-  if (game->state != Game::STATE_CHOOSING_TARGET) {
-    msg("Choose a target to use %s at.", item->text_the().c_str());
-  }
+  if (game->state != Game::STATE_CHOOSING_TARGET) { msg("Choose a target to use %s at.", item->text_the().c_str()); }
 
   game->change_state(Game::STATE_CHOOSING_TARGET, "choosing a target");
   level->cursor_recreate();
-  if (level->cursor) {
-    level->cursor->visible("target select");
-  }
+  if (level->cursor) { level->cursor->visible("target select"); }
   level->describe(item);
 
   return true;
@@ -123,16 +107,12 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
       //
       // Don't allow attacking of the exit!
       //
-      if (t->is_critical_to_level()) {
-        continue;
-      }
+      if (t->is_critical_to_level()) { continue; }
 
       //
       // Don't attack things like sewers!
       //
-      if (! t->is_attackable_by_player() && ! t->is_attackable_by_monst()) {
-        continue;
-      }
+      if (! t->is_attackable_by_player() && ! t->is_attackable_by_monst()) { continue; }
 
       if (t->is_dead || t->is_dying) {
         if (t->is_frozen) {
@@ -149,9 +129,7 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
       // If not blitted yet, then ignore. This could be a thing that has just been created,
       // e.g. a summoned monster and we can't immediately hit it.
       //
-      if (t->last_blit_at == point(0, 0)) {
-        continue;
-      }
+      if (t->last_blit_at == point(0, 0)) { continue; }
 
       if (is_friend(t) || same_mob(t)) {
         dbg2("Target-attack-best: %s no same leader", t->to_short_string().c_str());
@@ -231,16 +209,12 @@ bool Thing::victim_attack_best_attempt_2(Thingp item, point at, Thingp *best, po
       //
       // Don't allow attacking of the exit!
       //
-      if (t->is_critical_to_level()) {
-        continue;
-      }
+      if (t->is_critical_to_level()) { continue; }
 
       //
       // Don't attack things like sewers!
       //
-      if (! t->is_attackable_by_player() && ! t->is_attackable_by_monst()) {
-        continue;
-      }
+      if (! t->is_attackable_by_player() && ! t->is_attackable_by_monst()) { continue; }
 
       //
       // Get the most important thing to hit.
@@ -269,9 +243,7 @@ bool Thing::victim_attack_best_attempt_2(Thingp item, point at, Thingp *best, po
       // If not blitted yet, then ignore. This could be a thing that has just been created,
       // e.g. a summoned monster and we can't immediately hit it.
       //
-      if (t->last_blit_at == point(0, 0)) {
-        continue;
-      }
+      if (t->last_blit_at == point(0, 0)) { continue; }
 
       if (is_friend(t) || same_mob(t)) {
         dbg2("Target-attack-best: %s no same leader", t->to_short_string().c_str());
@@ -344,18 +316,14 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
       //
       // Don't allow attacking of the exit!
       //
-      if (t->is_critical_to_level()) {
-        continue;
-      }
+      if (t->is_critical_to_level()) { continue; }
 
       auto edible = can_eat(t);
 
       //
       // Don't attack things like sewers!
       //
-      if (! t->is_attackable_by_player() && ! t->is_attackable_by_monst() && ! edible) {
-        continue;
-      }
+      if (! t->is_attackable_by_player() && ! t->is_attackable_by_monst() && ! edible) { continue; }
 
       //
       // Get the most important thing to hit.
@@ -388,9 +356,7 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
       // If not blitted yet, then ignore. This could be a thing that has just been created,
       // e.g. a summoned monster and we can't immediately hit it.
       //
-      if (t->last_blit_at == point(0, 0)) {
-        continue;
-      }
+      if (t->last_blit_at == point(0, 0)) { continue; }
 
       if (is_friend(t) || same_mob(t)) {
         dbg2("Target-attack-best: %s no same leader", t->to_short_string().c_str());
@@ -473,9 +439,7 @@ bool Thing::victim_attack_swing(int equip, Thingp best, point best_hit_at, Thing
     dbg2("Target-attack-best: No equipment use animation, so lunge");
     TRACE_AND_INDENT();
 
-    if (is_able_to_lunge()) {
-      lunge(best_hit_at);
-    }
+    if (is_able_to_lunge()) { lunge(best_hit_at); }
 
     //
     // A monst only wielding a staff can have no swing anim
@@ -558,9 +522,7 @@ bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point 
   //
   // If carrying a weapon, but attacking food, then do not use the weapon.
   //
-  if (attack_options->prefer_nat_att) {
-    item = nullptr;
-  }
+  if (attack_options->prefer_nat_att) { item = nullptr; }
 
   //
   // Try to attack
@@ -569,16 +531,12 @@ bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point 
     dbg2("Target-attack-best: Try to attack with item");
     TRACE_AND_INDENT();
 
-    if (item->collision_check_and_handle_at(best_hit_at, attack_options)) {
-      lunge(best_hit_at);
-    }
+    if (item->collision_check_and_handle_at(best_hit_at, attack_options)) { lunge(best_hit_at); }
   } else {
     dbg2("Target-attack-best: Try to attack with no item");
     TRACE_AND_INDENT();
 
-    if (collision_check_and_handle_at(best_hit_at, attack_options)) {
-      lunge(best_hit_at);
-    }
+    if (collision_check_and_handle_at(best_hit_at, attack_options)) { lunge(best_hit_at); }
   }
   return attack_options->victim_attacked;
 }
@@ -588,17 +546,11 @@ bool Thing::victim_attack_choose_best(Thingp item, point at, Thingp *best, point
 {
   std::vector< point > all_deltas = {point(0, 0)};
 
-  if (victim_attack_best_attempt_1(item, at, best, best_hit_at, all_deltas, attack_options)) {
-    return true;
-  }
+  if (victim_attack_best_attempt_1(item, at, best, best_hit_at, all_deltas, attack_options)) { return true; }
 
-  if (victim_attack_best_attempt_2(item, at, best, best_hit_at, all_deltas, attack_options)) {
-    return true;
-  }
+  if (victim_attack_best_attempt_2(item, at, best, best_hit_at, all_deltas, attack_options)) { return true; }
 
-  if (victim_attack_best_attempt_3(item, at, best, best_hit_at, all_deltas, attack_options)) {
-    return true;
-  }
+  if (victim_attack_best_attempt_3(item, at, best, best_hit_at, all_deltas, attack_options)) { return true; }
 
   return false;
 }
@@ -659,9 +611,7 @@ bool Thing::victim_attack_best_at(int equip, ThingAttackOptionsp attack_options)
   //
   FOR_ALL_COLLISION_THINGS(level, t, curr_at.x, curr_at.y)
   {
-    if (t == this) {
-      continue;
-    }
+    if (t == this) { continue; }
 
     if (t->is_engulfer()) {
       all_deltas = local_only;
@@ -734,17 +684,13 @@ bool Thing::victim_attack_best_at(int equip, ThingAttackOptionsp attack_options)
     }
   }
 
-  if (attack_options->attempt) {
-    return false;
-  }
+  if (attack_options->attempt) { return false; }
 
   //
   // If we clicked on a specific bit to hit, do not fallback to last resorts
   // as we end up swinging twice.
   //
-  if (attack_options->attack_at_set) {
-    return false;
-  }
+  if (attack_options->attack_at_set) { return false; }
 
   //
   // Last resort where we just try and hit where we are pointing.
@@ -776,17 +722,13 @@ bool Thing::victim_attack_best_(int equip, ThingAttackOptionsp attack_options)
   //
   // Always make the sword swishy noise.
   //
-  if (item) {
-    on_swing(item);
-  }
+  if (item) { on_swing(item); }
 
   //
   // Are we allowed to target walls?
   //
   if (attack_options->attack_at_set) {
-    if (level->is_obs_wall_or_door(attack_options->attack_at)) {
-      attack_options->allow_hitting_walls = true;
-    }
+    if (level->is_obs_wall_or_door(attack_options->attack_at)) { attack_options->allow_hitting_walls = true; }
   }
 
   //
@@ -809,16 +751,10 @@ bool Thing::victim_attack_best_(int equip, ThingAttackOptionsp attack_options)
         attack_options->attack_at_set = true;
         attack_options->attack_at     = at;
 
-        if (victim_attack_best_at(equip, attack_options)) {
-          ret = true;
-        }
-        if (attack_options->victim_attacked) {
-          ret = true;
-        }
+        if (victim_attack_best_at(equip, attack_options)) { ret = true; }
+        if (attack_options->victim_attacked) { ret = true; }
       }
-      if (ret) {
-        break;
-      }
+      if (ret) { break; }
     }
     return ret;
   }
@@ -839,16 +775,10 @@ bool Thing::victim_attack_best_(int equip, ThingAttackOptionsp attack_options)
         attack_options->attack_at_set = true;
         attack_options->attack_at     = at;
 
-        if (victim_attack_best_at(equip, attack_options)) {
-          ret = true;
-        }
-        if (attack_options->victim_attacked) {
-          ret = true;
-        }
+        if (victim_attack_best_at(equip, attack_options)) { ret = true; }
+        if (attack_options->victim_attacked) { ret = true; }
       }
-      if (ret) {
-        break;
-      }
+      if (ret) { break; }
     }
     return ret;
   }
@@ -870,16 +800,10 @@ bool Thing::victim_attack_best_(int equip, ThingAttackOptionsp attack_options)
         attack_options->attack_at_set = true;
         attack_options->attack_at     = at;
 
-        if (victim_attack_best_at(equip, attack_options)) {
-          ret = true;
-        }
-        if (attack_options->victim_attacked) {
-          ret = true;
-        }
+        if (victim_attack_best_at(equip, attack_options)) { ret = true; }
+        if (attack_options->victim_attacked) { ret = true; }
       }
-      if (ret) {
-        break;
-      }
+      if (ret) { break; }
     }
     return ret;
   }
@@ -952,16 +876,10 @@ bool Thing::victim_attack_best_(int equip, ThingAttackOptionsp attack_options)
         attack_options->attempt       = attempt;
         attack_options->attack_at_set = true;
         attack_options->attack_at     = at;
-        if (victim_attack_best_at(equip, attack_options)) {
-          ret = true;
-        }
-        if (attack_options->victim_attacked) {
-          ret = true;
-        }
+        if (victim_attack_best_at(equip, attack_options)) { ret = true; }
+        if (attack_options->victim_attacked) { ret = true; }
       }
-      if (ret) {
-        break;
-      }
+      if (ret) { break; }
     }
     return ret;
   }

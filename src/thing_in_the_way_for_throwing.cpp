@@ -15,32 +15,20 @@ Thingp Thing::in_the_way_for_throwing(const point s, const point e, int x, int y
 
   FOR_ALL_COLLISION_THINGS(level, t, x, y)
   {
-    if (t == this) {
-      continue;
-    }
+    if (t == this) { continue; }
 
     //
     // So missiles do not hit blood or maps
     //
-    if (t->is_flat()) {
-      continue;
-    }
+    if (t->is_flat()) { continue; }
 
-    if (t->is_dead) {
-      continue;
-    }
+    if (t->is_dead) { continue; }
 
-    if (t->is_open) {
-      continue;
-    }
+    if (t->is_open) { continue; }
 
-    if (t->is_ethereal()) {
-      continue;
-    }
+    if (t->is_ethereal()) { continue; }
 
-    if (thing_size() < (int) THING_SIZE_NORMAL) {
-      continue;
-    }
+    if (thing_size() < (int) THING_SIZE_NORMAL) { continue; }
 
     if (thing_size() > (int) THING_SIZE_NORMAL) {
       dbg("This is in the way: %s", t->to_short_string().c_str());
@@ -76,17 +64,13 @@ std::vector< Thingp > Thing::in_the_way_for_throwing(const point s, const point 
   int err = dx + dy, e2; /* error value e_xy */
 
   for (;;) { /* loop */
-    if (x0 == x1 && y0 == y1) {
-      break;
-    }
+    if (x0 == x1 && y0 == y1) { break; }
 
     auto it = in_the_way_for_throwing(s, e, x0, y0);
     if (it) {
       out.push_back(it);
       if (max_elems) {
-        if (out.size() >= max_elems) {
-          return out;
-        }
+        if (out.size() >= max_elems) { return out; }
       }
     }
 

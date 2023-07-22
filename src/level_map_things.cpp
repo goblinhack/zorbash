@@ -10,9 +10,7 @@ void Level::put_thing(int x, int y, ThingId id)
 {
   TRACE_NO_INDENT();
   auto t = thing_find(id);
-  if (unlikely(! t)) {
-    return;
-  }
+  if (unlikely(! t)) { return; }
 
   if (! id.id) {
     t->err("Null id at map (%d,%d)", x, y);
@@ -40,9 +38,7 @@ do_retry:
       return;
     }
 
-    if ((! idp->id) && (free_slot == -1)) {
-      free_slot = slot;
-    }
+    if ((! idp->id) && (free_slot == -1)) { free_slot = slot; }
   }
 
   if (free_slot != -1) {
@@ -67,9 +63,7 @@ do_retry:
       auto idp = &getref(all_things_id_at, x, y, slot);
       if (idp->id) {
         auto t = thing_find(*idp);
-        if (unlikely(! t)) {
-          continue;
-        }
+        if (unlikely(! t)) { continue; }
         t->log("- slot %u", slot);
         if (t->is_removable_if_out_of_slots()) {
           t->dead("by internal slot");
@@ -92,9 +86,7 @@ do_retry:
     auto idp = &getref(all_things_id_at, x, y, slot);
     if (idp->id) {
       auto t = thing_find(*idp);
-      if (unlikely(! t)) {
-        continue;
-      }
+      if (unlikely(! t)) { continue; }
       t->log("- slot %u", slot);
     } else {
       t->log("- empty slot %u", slot);
@@ -178,9 +170,7 @@ void Level::check_thing(Thingp t)
   int x = t->curr_at.x;
   int y = t->curr_at.y;
 
-  if (t->level != this) {
-    return;
-  }
+  if (t->level != this) { return; }
 
   if (unlikely(is_oob(x, y))) {
     t->err("Out of bounds thing");
@@ -189,9 +179,7 @@ void Level::check_thing(Thingp t)
 
   for (auto slot = 0; slot < MAP_SLOTS; slot++) {
     auto idp = &getref(all_things_id_at, x, y, slot);
-    if (idp->id == t->id.id) {
-      return;
-    }
+    if (idp->id == t->id.id) { return; }
   }
   t->err("Did not find thing in any slot");
 }

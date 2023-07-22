@@ -12,12 +12,8 @@
 
 WidTextBox::~WidTextBox()
 {
-  if (wid_horiz_scroll) {
-    wid_destroy(&wid_horiz_scroll);
-  }
-  if (wid_vert_scroll) {
-    wid_destroy(&wid_vert_scroll);
-  }
+  if (wid_horiz_scroll) { wid_destroy(&wid_horiz_scroll); }
+  if (wid_vert_scroll) { wid_destroy(&wid_vert_scroll); }
   wid_destroy(&wid_text_last);
   wid_destroy(&wid_text_area);
 }
@@ -94,9 +90,7 @@ WidTextBox::WidTextBox(point tl, point br, Widp parent, bool horiz_scroll, bool 
       wid_set_prev(child, prev);
       prev = child;
 
-      if (row == 0) {
-        wid_text_last = child;
-      }
+      if (row == 0) { wid_text_last = child; }
 
       wid_set_color(child, WID_COLOR_TEXT_FG, UI_POPUP_TEXT_COLOR);
       wid_set_name(child, "text_box output");
@@ -153,25 +147,17 @@ void WidTextBox::log_(std::wstring str, wid_text_format format, std::string colo
     } else {
       wid_scroll_text(wid_text_last);
       tmp = wid_get_head(wid_text_last);
-      if (tmp) {
-        wid_set_text(tmp, str);
-      }
+      if (tmp) { wid_set_text(tmp, str); }
       text_wid = tmp;
     }
 
-    if (wid_vert_scroll) {
-      wid_move_to_top(wid_vert_scroll);
-    }
+    if (wid_vert_scroll) { wid_move_to_top(wid_vert_scroll); }
     line_count++;
 
     int show_scrollbars_at = wid_get_height(wid_text_area);
     if (line_count > show_scrollbars_at) {
-      if (wid_horiz_scroll) {
-        wid_visible(wid_get_parent(wid_horiz_scroll));
-      }
-      if (wid_vert_scroll) {
-        wid_visible(wid_get_parent(wid_vert_scroll));
-      }
+      if (wid_horiz_scroll) { wid_visible(wid_get_parent(wid_horiz_scroll)); }
+      if (wid_vert_scroll) { wid_visible(wid_get_parent(wid_vert_scroll)); }
     }
   }
 
@@ -183,9 +169,7 @@ void WidTextBox::log_(std::wstring str, wid_text_format format, std::string colo
     }
   }
 
-  if (! color.empty()) {
-    wid_set_color(text_wid, WID_COLOR_TEXT_FG, color_find(color.c_str()));
-  }
+  if (! color.empty()) { wid_set_color(text_wid, WID_COLOR_TEXT_FG, color_find(color.c_str())); }
 }
 
 //
@@ -203,9 +187,7 @@ void WidTextBox::log(std::string s, wid_text_format format, std::string color)
       //
       // Handles %%fg=...$ with no text due to a split
       //
-      if (length_without_format(c)) {
-        log_(string_to_wstring(c), format, color);
-      }
+      if (length_without_format(c)) { log_(string_to_wstring(c), format, color); }
     }
   }
 }

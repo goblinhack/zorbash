@@ -58,9 +58,7 @@ static inline void sdl_list_video_size(void)
 void sdl_joy_rumble(float strength, uint32_t ms)
 {
   TRACE_NO_INDENT();
-  if (! sdl.haptic) {
-    return;
-  }
+  if (! sdl.haptic) { return; }
 
   SDL_HapticRumblePlay(sdl.haptic, strength, ms);
 }
@@ -207,9 +205,7 @@ uint8_t sdl_init(void)
     video_height = game->config.config_pix_height;
   }
 
-  if (! game->config.gfx_vsync_locked) {
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-  }
+  if (! game->config.gfx_vsync_locked) { SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1); }
 
   //
   // Don't use this. It seemed to mess up graphics on FireGL.
@@ -337,9 +333,7 @@ uint8_t sdl_init(void)
 
   LOG("SDL: Vsync       : %d", SDL_GL_GetSwapInterval());
 
-  if (game->config.gfx_vsync_locked) {
-    LOG("SDL: Vsync       : locked");
-  }
+  if (game->config.gfx_vsync_locked) { LOG("SDL: Vsync       : locked"); }
 
   return true;
 }
@@ -348,16 +342,12 @@ int sdl_get_mouse(void)
 {
   TRACE_NO_INDENT();
 
-  if (! wid_mouse_visible) {
-    return 0;
-  }
+  if (! wid_mouse_visible) { return 0; }
 
   int x, y;
   int button = SDL_GetMouseState(&x, &y);
 
-  if (! x && ! y) {
-    return button;
-  }
+  if (! x && ! y) { return button; }
 
   /*
    * I'm not sure we want this - at the least it needs rounding
@@ -497,49 +487,33 @@ void sdl_tick(void)
   static double accel = 1.0;
   static ts_t   ts;
 
-  if (time_have_x_tenths_passed_since(5, ts)) {
-    accel = 1.0;
-  }
+  if (time_have_x_tenths_passed_since(5, ts)) { accel = 1.0; }
 
   if ((mx != 0) || (my != 0)) {
     ts = time_ms();
 
     accel *= UI_SCROLL_JOY_SCALE;
 
-    if (accel > UI_SCROLL_JOY_SCALE_MAX) {
-      accel = UI_SCROLL_JOY_SCALE_MAX;
-    }
+    if (accel > UI_SCROLL_JOY_SCALE_MAX) { accel = UI_SCROLL_JOY_SCALE_MAX; }
 
     double x = sdl.mouse_x + ((double) mx * accel);
     double y = sdl.mouse_y + ((double) my * accel);
 
-    if (x < 0) {
-      x = 0;
-    }
+    if (x < 0) { x = 0; }
 
-    if (y < 0) {
-      y = 0;
-    }
+    if (y < 0) { y = 0; }
 
-    if (x > game->config.window_pix_width - 1) {
-      x = game->config.window_pix_width - 1;
-    }
+    if (x > game->config.window_pix_width - 1) { x = game->config.window_pix_width - 1; }
 
-    if (y > game->config.window_pix_height - 1) {
-      y = game->config.window_pix_height - 1;
-    }
+    if (y > game->config.window_pix_height - 1) { y = game->config.window_pix_height - 1; }
 
-    if (wid_mouse_visible) {
-      sdl_mouse_warp(x, y);
-    }
+    if (wid_mouse_visible) { sdl_mouse_warp(x, y); }
   }
 }
 
 void sdl_exit(void)
 {
-  if (! g_main_loop_running) {
-    return;
-  }
+  if (! g_main_loop_running) { return; }
 
   LOG("Finishing: SDL main loop is exiting...");
   TRACE_AND_INDENT();
@@ -655,9 +629,7 @@ void config_game_pix_zoom_in(void)
 {
   TRACE_NO_INDENT();
   game->config.game_pix_zoom++;
-  if (game->config.game_pix_zoom > GAME_MOST_ZOOMED_IN) {
-    game->config.game_pix_zoom = GAME_MOST_ZOOMED_IN;
-  }
+  if (game->config.game_pix_zoom > GAME_MOST_ZOOMED_IN) { game->config.game_pix_zoom = GAME_MOST_ZOOMED_IN; }
   LOG("Game zoom set to %f.", game->config.game_pix_zoom);
   sdl_config_update_all();
 }
@@ -666,9 +638,7 @@ void config_game_pix_zoom_out(void)
 {
   TRACE_NO_INDENT();
   game->config.game_pix_zoom--;
-  if (game->config.game_pix_zoom < GAME_MOST_ZOOMED_OUT) {
-    game->config.game_pix_zoom = GAME_MOST_ZOOMED_OUT;
-  }
+  if (game->config.game_pix_zoom < GAME_MOST_ZOOMED_OUT) { game->config.game_pix_zoom = GAME_MOST_ZOOMED_OUT; }
   LOG("Game zoom set to %f.", game->config.game_pix_zoom);
   sdl_config_update_all();
 }
@@ -688,9 +658,7 @@ uint8_t config_game_pix_zoom_set(class Tokens *tokens, void *context)
   } else {
     int val                    = strtol(s, nullptr, 10);
     game->config.game_pix_zoom = val;
-    if (game->config.game_pix_zoom < GAME_MOST_ZOOMED_OUT) {
-      game->config.game_pix_zoom = GAME_MOST_ZOOMED_OUT;
-    }
+    if (game->config.game_pix_zoom < GAME_MOST_ZOOMED_OUT) { game->config.game_pix_zoom = GAME_MOST_ZOOMED_OUT; }
     LOG("GFX: zoom set to %d", val);
   }
 
@@ -704,9 +672,7 @@ uint8_t config_game_pix_zoom_set(class Tokens *tokens, void *context)
 uint8_t config_gfx_vsync_enable(class Tokens *tokens, void *context)
 {
   TRACE_NO_INDENT();
-  if (game->config.gfx_vsync_locked) {
-    return true;
-  }
+  if (game->config.gfx_vsync_locked) { return true; }
 
   char *s = tokens->args[ 2 ];
 
@@ -731,9 +697,7 @@ uint8_t config_gfx_vsync_enable(class Tokens *tokens, void *context)
 void config_gfx_vsync_update(void)
 {
   TRACE_NO_INDENT();
-  if (game->config.gfx_vsync_locked) {
-    return;
-  }
+  if (game->config.gfx_vsync_locked) { return; }
 
   if (game->config.gfx_vsync_enable) {
     SDL_GL_SetSwapInterval(1);
@@ -764,9 +728,7 @@ void sdl_config_update_all(void)
   LOG("SDL: OpenGL enter 2D mode");
   gl_init_2d_mode();
 
-  if (game->level) {
-    game->level->update_same_level_immediately();
-  }
+  if (game->level) { game->level->update_same_level_immediately(); }
 }
 
 //
@@ -786,9 +748,7 @@ void sdl_flush_display(bool force)
 
   if (! force) {
     IF_NODEBUG { return; }
-    if (g_opt_no_slow_log_flush) {
-      return;
-    }
+    if (g_opt_no_slow_log_flush) { return; }
   }
 
   glEnable(GL_TEXTURE_2D);

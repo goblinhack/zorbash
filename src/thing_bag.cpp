@@ -23,9 +23,7 @@ bool Thing::bag_contains(Thingp item)
     for (auto y = 0; y < bh - h - 1; y++) {
       for (auto i = 0; i <= w; i++) {
         for (auto j = 0; j <= h; j++) {
-          if (get(bag, x + i, y + j) == item->id) {
-            return true;
-          }
+          if (get(bag, x + i, y + j) == item->id) { return true; }
         }
       }
     }
@@ -44,18 +42,12 @@ bool Thing::bag_add(Thingp item)
   // Only players can compress bag contents. Monst just carry everything
   //
   auto o = top_owner();
-  if (o && ! o->is_player()) {
-    return false;
-  }
+  if (o && ! o->is_player()) { return false; }
 
-  if (! log_quiet) {
-    dbg2("Bag: Add %s", item->to_short_string().c_str());
-  }
+  if (! log_quiet) { dbg2("Bag: Add %s", item->to_short_string().c_str()); }
 
   if (! item->is_bag_item()) {
-    if (! log_quiet) {
-      dbg2("Bag: Add %s; no, is not an item", item->to_short_string().c_str());
-    }
+    if (! log_quiet) { dbg2("Bag: Add %s; no, is not an item", item->to_short_string().c_str()); }
     return false;
   }
 
@@ -65,17 +57,12 @@ bool Thing::bag_add(Thingp item)
   item->new_itemsp();
 
   if (item->itemsp()->preferred_bag_position != point(-1, -1)) {
-    if (! log_quiet) {
-      dbg2("Bag: Add %s at preferred position", item->to_short_string().c_str());
-    }
+    if (! log_quiet) { dbg2("Bag: Add %s at preferred position", item->to_short_string().c_str()); }
     auto at = item->itemsp()->preferred_bag_position;
     if (bag_can_place_at(item, at)) {
       if (bag_place_at(item, at)) {
-        while (bag_compress()) {
-        }
-        if (! log_quiet) {
-          dbg2("Bag: Added %s at %d,%d", item->to_short_string().c_str(), at.x, at.y);
-        }
+        while (bag_compress()) {}
+        if (! log_quiet) { dbg2("Bag: Added %s at %d,%d", item->to_short_string().c_str(), at.x, at.y); }
         return true;
       }
     }
@@ -85,16 +72,12 @@ bool Thing::bag_add(Thingp item)
   auto bh = capacity_height();
   auto w  = item->item_width();
   auto h  = item->item_height();
-  if (! log_quiet) {
-    dbg2("Bag: Capacity %dx%d item %dx%d", bw, bh, w, h);
-  }
+  if (! log_quiet) { dbg2("Bag: Capacity %dx%d item %dx%d", bw, bh, w, h); }
 
   if ((w < bw) && (h < bh)) {
     int tries = 0;
 
-    if (! log_quiet) {
-      dbg2("Bag: Try to add %s randomly", item->to_short_string().c_str());
-    }
+    if (! log_quiet) { dbg2("Bag: Try to add %s randomly", item->to_short_string().c_str()); }
     while (tries < bw * bh) {
       tries++;
       auto  x = non_pcg_random_range(0, bw - w);
@@ -103,53 +86,39 @@ bool Thing::bag_add(Thingp item)
 
       if (bag_can_place_at(item, at)) {
         if (bag_place_at(item, at)) {
-          while (bag_compress()) {
-          }
-          if (! log_quiet) {
-            dbg2("Bag: Added %s at %d,%d", item->to_short_string().c_str(), x, y);
-          }
+          while (bag_compress()) {}
+          if (! log_quiet) { dbg2("Bag: Added %s at %d,%d", item->to_short_string().c_str(), x, y); }
           return true;
         }
       }
     }
   }
 
-  if (! log_quiet) {
-    dbg2("Bag: Add %s last chance", item->to_short_string().c_str());
-  }
+  if (! log_quiet) { dbg2("Bag: Add %s last chance", item->to_short_string().c_str()); }
   for (auto x = 0; x <= bw - w; x++) {
     for (auto y = 0; y <= bh - h; y++) {
       point at(x, y);
       if (bag_can_place_at(item, at)) {
         if (bag_place_at(item, at)) {
-          while (bag_compress()) {
-          }
-          if (! log_quiet) {
-            dbg2("Bag: Added %s at %d,%d", item->to_short_string().c_str(), x, y);
-          }
+          while (bag_compress()) {}
+          if (! log_quiet) { dbg2("Bag: Added %s at %d,%d", item->to_short_string().c_str(), x, y); }
           return true;
         }
       }
     }
   }
 
-  if (! log_quiet) {
-    dbg2("Bag: Add %s failed", item->to_short_string().c_str());
-  }
+  if (! log_quiet) { dbg2("Bag: Add %s failed", item->to_short_string().c_str()); }
   return false;
 }
 
 bool Thing::bag_add_test(Thingp item)
 {
   TRACE_NO_INDENT();
-  if (! log_quiet) {
-    dbg2("Bag: Add test %s", item->to_short_string().c_str());
-  }
+  if (! log_quiet) { dbg2("Bag: Add test %s", item->to_short_string().c_str()); }
 
   if (! item->is_bag_item()) {
-    if (! log_quiet) {
-      dbg2("Bag: Add test %s; no, is not an item", item->to_short_string().c_str());
-    }
+    if (! log_quiet) { dbg2("Bag: Add test %s; no, is not an item", item->to_short_string().c_str()); }
     return false;
   }
 
@@ -159,56 +128,40 @@ bool Thing::bag_add_test(Thingp item)
   item->new_itemsp();
 
   if (item->itemsp()->preferred_bag_position != point(-1, -1)) {
-    if (! log_quiet) {
-      dbg2("Bag: Add test %s at preferred position", item->to_short_string().c_str());
-    }
+    if (! log_quiet) { dbg2("Bag: Add test %s at preferred position", item->to_short_string().c_str()); }
     auto at = item->itemsp()->preferred_bag_position;
-    if (bag_can_place_at(item, at)) {
-      return true;
-    }
+    if (bag_can_place_at(item, at)) { return true; }
   }
 
   auto bw = capacity_width();
   auto bh = capacity_height();
   auto w  = item->item_width();
   auto h  = item->item_height();
-  if (! log_quiet) {
-    dbg2("Bag: Capacity %dx%d item %dx%d", bw, bh, w, h);
-  }
+  if (! log_quiet) { dbg2("Bag: Capacity %dx%d item %dx%d", bw, bh, w, h); }
 
   if ((w < bw) && (h < bh)) {
     int tries = 0;
 
-    if (! log_quiet) {
-      dbg2("Bag: Add test try to add %s randomly", item->to_short_string().c_str());
-    }
+    if (! log_quiet) { dbg2("Bag: Add test try to add %s randomly", item->to_short_string().c_str()); }
     while (tries < bw * bh) {
       tries++;
       auto  x = non_pcg_random_range(0, bw - w);
       auto  y = non_pcg_random_range(0, bh - h);
       point at(x, y);
 
-      if (bag_can_place_at(item, at)) {
-        return true;
-      }
+      if (bag_can_place_at(item, at)) { return true; }
     }
   }
 
-  if (! log_quiet) {
-    dbg2("Bag: Add test %s last chance", item->to_short_string().c_str());
-  }
+  if (! log_quiet) { dbg2("Bag: Add test %s last chance", item->to_short_string().c_str()); }
   for (auto x = 0; x <= bw - w; x++) {
     for (auto y = 0; y <= bh - h; y++) {
       point at(x, y);
-      if (bag_can_place_at(item, at)) {
-        return true;
-      }
+      if (bag_can_place_at(item, at)) { return true; }
     }
   }
 
-  if (! log_quiet) {
-    dbg2("Bag: Add test %s failed", item->to_short_string().c_str());
-  }
+  if (! log_quiet) { dbg2("Bag: Add test %s failed", item->to_short_string().c_str()); }
   return false;
 }
 
@@ -242,14 +195,10 @@ bool Thing::bag_compress(void)
   for (auto x = 0; x < bw; x++) {
     for (auto y = 0; y < bh; y++) {
       auto id = get(bag, x, y);
-      if (id == NoThingId) {
-        continue;
-      }
+      if (id == NoThingId) { continue; }
 
       auto t = game->thing_find(id);
-      if (unlikely(! t)) {
-        continue;
-      }
+      if (unlikely(! t)) { continue; }
 
       if (bag_remove_at(t, t->itemsp()->bag_position)) {
         if (bag_can_place_at(t, t->itemsp()->bag_position + point(0, 1))) {
@@ -270,9 +219,7 @@ bool Thing::bag_compress(void)
     if (! level->is_being_destroyed) {
       if (! game->request_to_remake_rightbar) {
         game->request_to_remake_rightbar |= did_something;
-        if (game->request_to_remake_rightbar) {
-          dbg2("Bag: Request to remake inventory");
-        }
+        if (game->request_to_remake_rightbar) { dbg2("Bag: Request to remake inventory"); }
       }
     }
   }
@@ -299,27 +246,17 @@ bool Thing::bag_remove_at(Thingp item, point pos)
   auto bw     = capacity_width();
   auto bh     = capacity_height();
 
-  if (pos.x < 0) {
-    return false;
-  }
-  if (pos.y < 0) {
-    return false;
-  }
-  if (pos.y >= bh) {
-    return false;
-  }
-  if (pos.x >= bw) {
-    return false;
-  }
+  if (pos.x < 0) { return false; }
+  if (pos.y < 0) { return false; }
+  if (pos.y >= bh) { return false; }
+  if (pos.x >= bw) { return false; }
 
   for (auto x = pos.x; x < pos.x + w; x++) {
     for (auto y = pos.y; y < pos.y + h; y++) {
       if (get(bag, x, y) == item->id) {
         if (! logged) {
           logged = true;
-          if (! log_quiet) {
-            dbg2("Bag: remove %s at %d,%d", item->to_short_string().c_str(), x, y);
-          }
+          if (! log_quiet) { dbg2("Bag: remove %s at %d,%d", item->to_short_string().c_str(), x, y); }
         }
         set(bag, x, y, NoThingId);
         ret = true;
@@ -385,15 +322,9 @@ bool Thing::bag_can_place_at(Thingp item, point pos)
   for (auto y = pos.y; y < pos.y + h; y++) {
     for (auto x = pos.x; x < pos.x + w; x++) {
       auto id = get(bag, x, y);
-      if (id == NoThingId) {
-        continue;
-      }
-      if (item->is_bag_item_container()) {
-        return false;
-      }
-      if (id == item->id) {
-        continue;
-      }
+      if (id == NoThingId) { continue; }
+      if (item->is_bag_item_container()) { return false; }
+      if (id == item->id) { continue; }
       return false;
     }
   }
@@ -401,9 +332,7 @@ bool Thing::bag_can_place_at(Thingp item, point pos)
   //
   // Do not set pos here
   //
-  if (! log_quiet) {
-    dbg2("Bag: Can place %s at %d,%d", item->to_short_string().c_str(), pos.x, pos.y);
-  }
+  if (! log_quiet) { dbg2("Bag: Can place %s at %d,%d", item->to_short_string().c_str(), pos.x, pos.y); }
   return true;
 }
 
@@ -419,16 +348,12 @@ bool Thing::bag_can_place_anywhere(Thingp item, point &pos)
   auto bh = capacity_height();
   auto w  = item->item_width();
   auto h  = item->item_height();
-  if (! log_quiet) {
-    dbg2("Bag: Capacity %dx%d item %dx%d", bw, bh, w, h);
-  }
+  if (! log_quiet) { dbg2("Bag: Capacity %dx%d item %dx%d", bw, bh, w, h); }
 
   if ((w < bw) && (h < bh)) {
     int tries = 0;
 
-    if (! log_quiet) {
-      dbg2("Bag: Can place: try to add %s randomly", item->to_short_string().c_str());
-    }
+    if (! log_quiet) { dbg2("Bag: Can place: try to add %s randomly", item->to_short_string().c_str()); }
     while (tries < bw * bh) {
       tries++;
       auto  x = non_pcg_random_range(0, bw - w);
@@ -441,9 +366,7 @@ bool Thing::bag_can_place_anywhere(Thingp item, point &pos)
     }
   }
 
-  if (! log_quiet) {
-    dbg2("Bag: Add %s last chance", item->to_short_string().c_str());
-  }
+  if (! log_quiet) { dbg2("Bag: Add %s last chance", item->to_short_string().c_str()); }
   for (auto x = 0; x <= bw - w; x++) {
     for (auto y = 0; y <= bh - h; y++) {
       point at(x, y);
@@ -465,18 +388,10 @@ bool Thing::bag_place_at(Thingp item, point pos)
   auto w   = item->item_width();
   auto h   = item->item_height();
 
-  if (pos.x < 0) {
-    return false;
-  }
-  if (pos.y < 0) {
-    return false;
-  }
-  if (pos.y + h - 1 >= bh) {
-    return false;
-  }
-  if (pos.x + w - 1 >= bw) {
-    return false;
-  }
+  if (pos.x < 0) { return false; }
+  if (pos.y < 0) { return false; }
+  if (pos.y + h - 1 >= bh) { return false; }
+  if (pos.x + w - 1 >= bw) { return false; }
 
   for (auto x = pos.x; x < pos.x + w; x++) {
     for (auto y = pos.y; y < pos.y + h; y++) {
@@ -515,23 +430,13 @@ Thingp Thing::bag_what_is_at(point pos)
   auto bw  = capacity_width();
   auto bh  = capacity_height();
 
-  if (pos.x < 0) {
-    return nullptr;
-  }
-  if (pos.y < 0) {
-    return nullptr;
-  }
-  if (pos.y - 1 >= bh) {
-    return nullptr;
-  }
-  if (pos.x - 1 >= bw) {
-    return nullptr;
-  }
+  if (pos.x < 0) { return nullptr; }
+  if (pos.y < 0) { return nullptr; }
+  if (pos.y - 1 >= bh) { return nullptr; }
+  if (pos.x - 1 >= bw) { return nullptr; }
 
   auto id = get(bag, pos.x, pos.y);
-  if (id == NoThingId) {
-    return nullptr;
-  }
+  if (id == NoThingId) { return nullptr; }
 
   return game->thing_find(id);
 }
@@ -544,9 +449,7 @@ bool Thing::bag_remove(Thingp item)
     return false;
   }
 
-  if (! log_quiet) {
-    dbg2("Bag: remove %s", item->to_short_string().c_str());
-  }
+  if (! log_quiet) { dbg2("Bag: remove %s", item->to_short_string().c_str()); }
 
   bool found = false;
   auto bag   = bag_get();
@@ -554,9 +457,7 @@ bool Thing::bag_remove(Thingp item)
   //
   // Watch out here as lasers can have owners and do not live in bags.
   //
-  if (! bag) {
-    return false;
-  }
+  if (! bag) { return false; }
 
   auto bw = capacity_width();
   auto bh = capacity_height();
@@ -594,13 +495,9 @@ bool Thing::bag_remove(Thingp item)
   }
 
   if (found) {
-    if (! log_quiet) {
-      dbg2("Bag: removed %s", item->to_short_string().c_str());
-    }
+    if (! log_quiet) { dbg2("Bag: removed %s", item->to_short_string().c_str()); }
   } else {
-    if (! log_quiet) {
-      dbg2("Bag: failed to remove %s", item->to_short_string().c_str());
-    }
+    if (! log_quiet) { dbg2("Bag: failed to remove %s", item->to_short_string().c_str()); }
   }
 
   if (! is_monst()) {
@@ -626,9 +523,7 @@ bool Thing::bag_remove(Thingp item)
     }
   }
 
-  if (found) {
-    item->itemsp()->bag_position = point(-1, -1);
-  }
+  if (found) { item->itemsp()->bag_position = point(-1, -1); }
 
   return found;
 }

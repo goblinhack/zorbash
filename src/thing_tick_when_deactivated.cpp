@@ -15,30 +15,20 @@
 bool Thing::on_tick_when_deactivated(void)
 {
   auto on_tick_when_deactivated = tp()->on_tick_when_deactivated_do();
-  if (std::empty(on_tick_when_deactivated)) {
-    return false;
-  }
+  if (std::empty(on_tick_when_deactivated)) { return false; }
 
-  if (! is_skill() && ! is_spell()) {
-    return false;
-  }
+  if (! is_skill() && ! is_spell()) { return false; }
 
-  if (is_activated) {
-    return false;
-  }
+  if (is_activated) { return false; }
 
   auto t = split_tokens(on_tick_when_deactivated, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) {
-      fn = fn.replace(found, 2, "");
-    }
+    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
 
-    if (mod == "me") {
-      mod = name();
-    }
+    if (mod == "me") { mod = name(); }
 
     auto owner = top_owner();
     dbg("Call %s.%s(owner=%s, item=%s, %d, %d)", mod.c_str(), fn.c_str(),

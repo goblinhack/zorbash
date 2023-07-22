@@ -38,18 +38,14 @@ bool Thing::debuff_add(Thingp what)
 
   dbg("Add debuff %s", what->to_short_string().c_str());
 
-  if (is_player()) {
-    wid_debuffbox_init();
-  }
+  if (is_player()) { wid_debuffbox_init(); }
 
   return true;
 }
 
 bool Thing::debuff_remove(Thingp what)
 {
-  if (! what) {
-    return false;
-  }
+  if (! what) { return false; }
 
   dbg("Removing debuff %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
@@ -62,9 +58,7 @@ bool Thing::debuff_remove(Thingp what)
 
   Thingp o = what->top_owner();
   if (o) {
-    if (o->is_player()) {
-      o->debuffbox_id_remove(what);
-    }
+    if (o->is_player()) { o->debuffbox_id_remove(what); }
   }
 
   what->owner_unset();
@@ -79,17 +73,13 @@ Thingp Thing::debuff_find(const std::string &what)
 {
   TRACE_NO_INDENT();
 
-  if (! maybe_itemsp()) {
-    return nullptr;
-  }
+  if (! maybe_itemsp()) { return nullptr; }
 
   FOR_ALL_DEBUFFS(id)
   {
     auto t = level->thing_find(id);
     if (t) {
-      if (t->name() == what) {
-        return t;
-      }
+      if (t->name() == what) { return t; }
     }
   }
   return nullptr;
@@ -99,16 +89,12 @@ void Thing::debuff_remove_all(void)
 {
   TRACE_NO_INDENT();
 
-  if (! maybe_itemsp()) {
-    return;
-  }
+  if (! maybe_itemsp()) { return; }
 
   while (! itemsp()->debuffs.empty()) {
     auto id = *itemsp()->debuffs.begin();
     auto t  = level->thing_find(id);
-    if (unlikely(! t)) {
-      return;
-    }
+    if (unlikely(! t)) { return; }
     debuff_remove(t);
   }
 }
@@ -124,17 +110,13 @@ bool Thing::debuff_use(Thingp what)
 
 bool Thing::debuff_add(Tpp what)
 {
-  if (! maybe_itemsp()) {
-    return false;
-  }
+  if (! maybe_itemsp()) { return false; }
 
   //
   // Need to allow for duplicates, so cannot check if the tp exists
   //
   auto t = level->thing_new(what, curr_at);
-  if (unlikely(! t)) {
-    return false;
-  }
+  if (unlikely(! t)) { return false; }
 
   dbg("Add debuff: %s", t->to_short_string().c_str());
   TRACE_AND_INDENT();
@@ -146,25 +128,19 @@ bool Thing::debuff_add(Tpp what)
 
 bool Thing::debuff_add_if_not_found(Tpp what)
 {
-  if (! maybe_itemsp()) {
-    return false;
-  }
+  if (! maybe_itemsp()) { return false; }
 
   FOR_ALL_DEBUFFS(item)
   {
     auto t = level->thing_find(item.id);
-    if (t && (t->tp() == what)) {
-      return true;
-    }
+    if (t && (t->tp() == what)) { return true; }
   }
 
   //
   // Need to allow for duplicates, so cannot check if the tp exists
   //
   auto t = level->thing_new(what, curr_at);
-  if (unlikely(! t)) {
-    return false;
-  }
+  if (unlikely(! t)) { return false; }
 
   dbg("Add debuff: %s", t->to_short_string().c_str());
   TRACE_AND_INDENT();
@@ -176,9 +152,7 @@ bool Thing::debuff_add_if_not_found(Tpp what)
 
 bool Thing::debuff_remove(Tpp what)
 {
-  if (! maybe_itemsp()) {
-    return false;
-  }
+  if (! maybe_itemsp()) { return false; }
 
   FOR_ALL_DEBUFFS(item)
   {
@@ -193,12 +167,8 @@ bool Thing::debuff_remove(Tpp what)
 
 void Thing::debuff_tick(void)
 {
-  if (! maybe_itemsp()) {
-    return;
-  }
-  if (itemsp()->debuffs.empty()) {
-    return;
-  }
+  if (! maybe_itemsp()) { return; }
+  if (itemsp()->debuffs.empty()) { return; }
 
   dbg("Debuff tick");
   TRACE_AND_INDENT();
@@ -208,12 +178,8 @@ void Thing::debuff_tick(void)
     auto t = level->thing_find(item.id);
     if (t) {
       dbg("Debuff (%s)", t->to_short_string().c_str());
-      if (! t->on_tick()) {
-        return;
-      }
-      if (is_dead) {
-        return;
-      }
+      if (! t->on_tick()) { return; }
+      if (is_dead) { return; }
     }
   }
 }

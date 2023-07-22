@@ -94,8 +94,7 @@ static auto cppDemangle(const char *abiName)
   char *ret = abi::__cxa_demangle(abiName, nullptr /* output buffer */, nullptr /* length */, &status);
 
   auto deallocator = ([](char *mem) {
-    if (mem)
-      free((void *) mem);
+    if (mem) free((void *) mem);
   });
 
   if (status) {
@@ -146,9 +145,7 @@ std::string Backtrace::to_string(void)
       size_t special = strcspn(cur, "_?");
       cur += special;
 
-      if (cur >= end) {
-        break;
-      }
+      if (cur >= end) { break; }
 
       size_t n_sym = 0;
       if (*cur == '?') {
@@ -167,9 +164,7 @@ std::string Backtrace::to_string(void)
       char tmp     = cur[ n_sym ];
       cur[ n_sym ] = '\0';
 
-      if (starts_with(cur, "__Z")) {
-        cur++;
-      }
+      if (starts_with(cur, "__Z")) { cur++; }
 
       auto demangled = cppDemangle(cur);
       if (demangled) {
@@ -182,9 +177,7 @@ std::string Backtrace::to_string(void)
       cur += n_sym;
     }
 
-    if (! done) {
-      sout += string_sprintf("%s%s\n", prefix, p);
-    }
+    if (! done) { sout += string_sprintf("%s%s\n", prefix, p); }
   }
 
   sout += string_sprintf("end-of-stack\n");
@@ -227,9 +220,7 @@ void Backtrace::log(void)
       size_t special = strcspn(cur, "_?");
       cur += special;
 
-      if (cur >= end) {
-        break;
-      }
+      if (cur >= end) { break; }
 
       size_t n_sym = 0;
       if (*cur == '?') {
@@ -248,9 +239,7 @@ void Backtrace::log(void)
       char tmp     = cur[ n_sym ];
       cur[ n_sym ] = '\0';
 
-      if (starts_with(cur, "__Z")) {
-        cur++;
-      }
+      if (starts_with(cur, "__Z")) { cur++; }
 
       auto demangled = cppDemangle(cur);
       if (demangled) {
@@ -263,9 +252,7 @@ void Backtrace::log(void)
       cur += n_sym;
     }
 
-    if (! done) {
-      LOG("%s%s", prefix, p);
-    }
+    if (! done) { LOG("%s%s", prefix, p); }
   }
 
   LOG("end-of-stack");

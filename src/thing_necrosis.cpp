@@ -12,9 +12,7 @@ void Thing::necrosis_tick(void)
 
   if ((is_alive_monst() || is_player()) && ! is_ethereal() && ! is_undead()) {
     auto old_necrosis = necrotized_amount();
-    if (! old_necrosis) {
-      return;
-    }
+    if (! old_necrosis) { return; }
 
     dbg("Necrosis tick");
     TRACE_AND_INDENT();
@@ -33,9 +31,7 @@ void Thing::necrosis_tick(void)
 
 void Thing::unpleasant(void)
 {
-  if (is_player()) {
-    debuff_add_if_not_found(tp_find("debuff_necrotized"));
-  }
+  if (is_player()) { debuff_add_if_not_found(tp_find("debuff_necrotized")); }
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -45,13 +41,9 @@ int Thing::necrotized_amount(void)
 {
   TRACE_NO_INDENT();
   int v = 0;
-  if (maybe_infop()) {
-    v = infop()->necrosis;
-  }
+  if (maybe_infop()) { v = infop()->necrosis; }
   auto owner = immediate_owner();
-  if (owner && (owner != this)) {
-    v += owner->necrotized_amount();
-  }
+  if (owner && (owner != this)) { v += owner->necrotized_amount(); }
   if (is_minion()) {
     auto mob = immediate_mob();
     if (mob) {
@@ -67,9 +59,7 @@ int Thing::necrotized_amount_set(int v)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->necrosis = v);
-  if (infop()->necrosis < 0) {
-    infop()->necrosis = 0;
-  }
+  if (infop()->necrosis < 0) { infop()->necrosis = 0; }
   return n;
 }
 
@@ -78,9 +68,7 @@ int Thing::necrotized_amount_decr(int v)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->necrosis -= v);
-  if (infop()->necrosis < 0) {
-    infop()->necrosis = 0;
-  }
+  if (infop()->necrosis < 0) { infop()->necrosis = 0; }
   return n;
 }
 
@@ -89,9 +77,7 @@ int Thing::necrotized_amount_incr(int v)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->necrosis += v);
-  if (infop()->necrosis < 0) {
-    infop()->necrosis = 0;
-  }
+  if (infop()->necrosis < 0) { infop()->necrosis = 0; }
   return n;
 }
 
@@ -100,9 +86,7 @@ int Thing::necrotized_amount_decr(void)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->necrosis--);
-  if (infop()->necrosis < 0) {
-    infop()->necrosis = 0;
-  }
+  if (infop()->necrosis < 0) { infop()->necrosis = 0; }
   return n;
 }
 

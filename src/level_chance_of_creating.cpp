@@ -161,54 +161,22 @@ void Level::chances_of_creating_set(void)
     }
   }
 
-  if (d1000_chance_creating_mob_challenge_class_A < 0) {
-    d1000_chance_creating_mob_challenge_class_A = -1;
-  }
-  if (d1000_chance_creating_mob_challenge_class_A > 1000) {
-    d1000_chance_creating_mob_challenge_class_A = 1000;
-  }
-  if (d1000_chance_creating_mob_challenge_class_B < 0) {
-    d1000_chance_creating_mob_challenge_class_B = -1;
-  }
-  if (d1000_chance_creating_mob_challenge_class_B > 1000) {
-    d1000_chance_creating_mob_challenge_class_B = 1000;
-  }
-  if (d1000_chance_creating_treasure_class_A < 0) {
-    d1000_chance_creating_treasure_class_A = -1;
-  }
-  if (d1000_chance_creating_treasure_class_A > 1000) {
-    d1000_chance_creating_treasure_class_A = 1000;
-  }
-  if (d1000_chance_creating_treasure_class_B < 0) {
-    d1000_chance_creating_treasure_class_B = -1;
-  }
-  if (d1000_chance_creating_treasure_class_B > 1000) {
-    d1000_chance_creating_treasure_class_B = 1000;
-  }
-  if (d1000_chance_creating_treasure_class_C < 0) {
-    d1000_chance_creating_treasure_class_C = -1;
-  }
-  if (d1000_chance_creating_treasure_class_C > 1000) {
-    d1000_chance_creating_treasure_class_C = 1000;
-  }
-  if (d1000_chance_creating_weapon_class_A < 0) {
-    d1000_chance_creating_weapon_class_A = -1;
-  }
-  if (d1000_chance_creating_weapon_class_A > 1000) {
-    d1000_chance_creating_weapon_class_A = 1000;
-  }
-  if (d1000_chance_creating_weapon_class_B < 0) {
-    d1000_chance_creating_weapon_class_B = -1;
-  }
-  if (d1000_chance_creating_weapon_class_B > 1000) {
-    d1000_chance_creating_weapon_class_B = 1000;
-  }
-  if (d1000_chance_creating_weapon_class_C < 0) {
-    d1000_chance_creating_weapon_class_C = -1;
-  }
-  if (d1000_chance_creating_weapon_class_C > 1000) {
-    d1000_chance_creating_weapon_class_C = 1000;
-  }
+  if (d1000_chance_creating_mob_challenge_class_A < 0) { d1000_chance_creating_mob_challenge_class_A = -1; }
+  if (d1000_chance_creating_mob_challenge_class_A > 1000) { d1000_chance_creating_mob_challenge_class_A = 1000; }
+  if (d1000_chance_creating_mob_challenge_class_B < 0) { d1000_chance_creating_mob_challenge_class_B = -1; }
+  if (d1000_chance_creating_mob_challenge_class_B > 1000) { d1000_chance_creating_mob_challenge_class_B = 1000; }
+  if (d1000_chance_creating_treasure_class_A < 0) { d1000_chance_creating_treasure_class_A = -1; }
+  if (d1000_chance_creating_treasure_class_A > 1000) { d1000_chance_creating_treasure_class_A = 1000; }
+  if (d1000_chance_creating_treasure_class_B < 0) { d1000_chance_creating_treasure_class_B = -1; }
+  if (d1000_chance_creating_treasure_class_B > 1000) { d1000_chance_creating_treasure_class_B = 1000; }
+  if (d1000_chance_creating_treasure_class_C < 0) { d1000_chance_creating_treasure_class_C = -1; }
+  if (d1000_chance_creating_treasure_class_C > 1000) { d1000_chance_creating_treasure_class_C = 1000; }
+  if (d1000_chance_creating_weapon_class_A < 0) { d1000_chance_creating_weapon_class_A = -1; }
+  if (d1000_chance_creating_weapon_class_A > 1000) { d1000_chance_creating_weapon_class_A = 1000; }
+  if (d1000_chance_creating_weapon_class_B < 0) { d1000_chance_creating_weapon_class_B = -1; }
+  if (d1000_chance_creating_weapon_class_B > 1000) { d1000_chance_creating_weapon_class_B = 1000; }
+  if (d1000_chance_creating_weapon_class_C < 0) { d1000_chance_creating_weapon_class_C = -1; }
+  if (d1000_chance_creating_weapon_class_C > 1000) { d1000_chance_creating_weapon_class_C = 1000; }
 
   dbg("Chance of creating at difficulty depth %d:", difficulty_depth);
   auto monst_type = MONST_ENVIRON_NORMAL;

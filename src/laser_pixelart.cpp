@@ -31,9 +31,7 @@ void Level::display_pixelart_lasers(point tl, point br)
     Thingp t;
 
     t = thing_find(l.id);
-    if (unlikely(! t)) {
-      return true;
-    }
+    if (unlikely(! t)) { return true; }
 
     if (dt > 1) {
       if (t) {
@@ -49,9 +47,7 @@ void Level::display_pixelart_lasers(point tl, point br)
 
     if (l.info.follow_moving_target) {
       auto t = thing_find_optional(l.victim_id);
-      if (t) {
-        l.info.pixel_stop = t->last_blit_at;
-      }
+      if (t) { l.info.pixel_stop = t->last_blit_at; }
     }
 
     auto start = l.info.pixel_start - l.info.pixel_map_at;
@@ -73,9 +69,7 @@ void Level::display_pixelart_lasers(point tl, point br)
     point old_p2;
 
     int frame = (int) (((float) Laser::max_frames) * dt);
-    if (frame >= Laser::max_frames) {
-      frame = Laser::max_frames - 1;
-    }
+    if (frame >= Laser::max_frames) { frame = Laser::max_frames - 1; }
 
     for (int animstep = 0; animstep <= steps; animstep++) {
       fpoint mid(start.x + step.x * animstep, start.y + step.y * animstep);
@@ -88,9 +82,7 @@ void Level::display_pixelart_lasers(point tl, point br)
       p2.x = mid.x + perp.x;
       p2.y = mid.y + perp.y;
 
-      if (animstep == 0) {
-        continue;
-      }
+      if (animstep == 0) { continue; }
 
       Tilep tile = nullptr;
 
@@ -108,9 +100,7 @@ void Level::display_pixelart_lasers(point tl, point br)
       }
 
       if (unlikely(! tile)) {
-        if (t) {
-          t->err("No tile for laser, animstep %d, frame %d, steps %d", animstep, frame, (int) steps);
-        }
+        if (t) { t->err("No tile for laser, animstep %d, frame %d, steps %d", animstep, frame, (int) steps); }
         break;
       }
 

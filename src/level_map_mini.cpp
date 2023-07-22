@@ -13,13 +13,9 @@
 //
 bool Level::update_map_mini_should_show_monst(int x, int y)
 {
-  if (! is_monst(x, y)) {
-    return false;
-  }
+  if (! is_monst(x, y)) { return false; }
 
-  if (player && (player->map_beast_count() > 0)) {
-    return true;
-  }
+  if (player && (player->map_beast_count() > 0)) { return true; }
 
   FOR_ALL_THINGS_THAT_INTERACT(this, t, x, y)
   {
@@ -28,13 +24,9 @@ bool Level::update_map_mini_should_show_monst(int x, int y)
       // Only show on the map once it has been seen.
       //
       if (t->is_always_submerged_in_water()) {
-        if (t->has_attacked_player) {
-          return true;
-        }
+        if (t->has_attacked_player) { return true; }
       } else {
-        if (t->is_seen_by_player_msg_shown) {
-          return true;
-        }
+        if (t->is_seen_by_player_msg_shown) { return true; }
       }
     }
   }
@@ -50,15 +42,11 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
   static int last_rendered;
   if (showing_two_levels) {
     if (show_faded) {
-      if (! time_have_x_tenths_passed_since(1, last_rendered)) {
-        return;
-      }
+      if (! time_have_x_tenths_passed_since(1, last_rendered)) { return; }
       last_rendered = time_ms_cached();
     }
   } else {
-    if (! time_have_x_tenths_passed_since(1, last_rendered)) {
-      return;
-    }
+    if (! time_have_x_tenths_passed_since(1, last_rendered)) { return; }
     last_rendered = time_ms_cached();
   }
 
@@ -72,9 +60,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
   // the map when drawing the dungeon as the "overlay" for the sewer.
   //
   if (showing_two_levels) {
-    if (show_faded) {
-      glClear(GL_COLOR_BUFFER_BIT);
-    }
+    if (show_faded) { glClear(GL_COLOR_BUFFER_BIT); }
   } else {
     glClear(GL_COLOR_BUFFER_BIT);
   }
@@ -89,9 +75,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
   // Check if carrying a treasure map
   //
   bool has_map_treasure = false;
-  if (player) {
-    has_map_treasure = player->map_treasure_available();
-  }
+  if (player) { has_map_treasure = player->map_treasure_available(); }
 
   static Texp map_treasure;
   static int  map_treasure_id;
@@ -203,13 +187,9 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         }
 
         if ((x > 0) && (y > 0) && (x < MAP_WIDTH) && (y < MAP_HEIGHT)) {
-          if ((game->map_mini_over.x == x) && (game->map_mini_over.y == y)) {
-            c = YELLOW;
-          }
+          if ((game->map_mini_over.x == x) && (game->map_mini_over.y == y)) { c = YELLOW; }
           if (! game->robot_mode) {
-            if ((cursor_at.x == x) && (cursor_at.y == y)) {
-              c = YELLOW;
-            }
+            if ((cursor_at.x == x) && (cursor_at.y == y)) { c = YELLOW; }
           }
         }
 
@@ -225,9 +205,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           }
         }
 
-        if (show_faded) {
-          c.a /= 2;
-        }
+        if (show_faded) { c.a /= 2; }
 
         glcolor(c);
 
@@ -285,13 +263,9 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         }
 
         if ((x > 0) && (y > 0) && (x < MAP_WIDTH) && (y < MAP_HEIGHT)) {
-          if ((game->map_mini_over.x == x) && (game->map_mini_over.y == y)) {
-            c = YELLOW;
-          }
+          if ((game->map_mini_over.x == x) && (game->map_mini_over.y == y)) { c = YELLOW; }
           if (! game->robot_mode) {
-            if ((cursor_at.x == x) && (cursor_at.y == y)) {
-              c = YELLOW;
-            }
+            if ((cursor_at.x == x) && (cursor_at.y == y)) { c = YELLOW; }
           }
         }
 
@@ -402,9 +376,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         }
 
         if ((x > 0) && (y > 0) && (x < MAP_WIDTH) && (y < MAP_HEIGHT)) {
-          if ((game->map_mini_over.x == x) && (game->map_mini_over.y == y)) {
-            c = YELLOW;
-          }
+          if ((game->map_mini_over.x == x) && (game->map_mini_over.y == y)) { c = YELLOW; }
         }
 
         if (showing_two_levels) {
@@ -419,9 +391,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           }
         }
 
-        if (show_faded) {
-          c.a /= 2;
-        }
+        if (show_faded) { c.a /= 2; }
 
         glcolor(c);
 

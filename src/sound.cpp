@@ -28,9 +28,7 @@ void sound_fini(void)
 
     for (;;) {
       auto iter = all_sound.begin();
-      if (iter == all_sound.end()) {
-        break;
-      }
+      if (iter == all_sound.end()) { break; }
       delete iter->second;
       iter = all_sound.erase(iter);
     }
@@ -53,9 +51,7 @@ bool sound_load(float volume, const std::string &file, const std::string &alias)
   TRACE_AND_INDENT();
   if (alias == "") {
     auto s = sound_find(alias);
-    if (s) {
-      return true;
-    }
+    if (s) { return true; }
   }
 
   auto *s = new sound(alias);

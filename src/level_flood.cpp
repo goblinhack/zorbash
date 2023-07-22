@@ -20,14 +20,10 @@ std::deque< point > Level::flood_fill(point p) const
     auto p = in.front();
     in.pop_front();
 
-    if (get(walked, p.x, p.y)) {
-      continue;
-    }
+    if (get(walked, p.x, p.y)) { continue; }
     set(walked, p.x, p.y, true);
 
-    if (is_obs_wall_or_door(p)) {
-      continue;
-    }
+    if (is_obs_wall_or_door(p)) { continue; }
 
     out.push_back(p);
 
@@ -77,14 +73,10 @@ std::deque< point > Level::flood_fill_points(point p, std::function< int(Thingp)
     auto p = in.front();
     in.pop_front();
 
-    if (get(walked, p.x, p.y)) {
-      continue;
-    }
+    if (get(walked, p.x, p.y)) { continue; }
     set(walked, p.x, p.y, true);
 
-    if (is_obs_wall_or_door(p)) {
-      continue;
-    }
+    if (is_obs_wall_or_door(p)) { continue; }
 
     bool got_one = false;
     FOR_ALL_NON_INTERNAL_THINGS(this, t, p.x, p.y)
@@ -96,9 +88,7 @@ std::deque< point > Level::flood_fill_points(point p, std::function< int(Thingp)
     }
     FOR_ALL_THINGS_END()
 
-    if (! got_one) {
-      continue;
-    }
+    if (! got_one) { continue; }
 
     out.push_back(p);
 
@@ -148,14 +138,10 @@ std::deque< Thingp > Level::flood_fill_things(point p, std::function< int(Thingp
     auto p = in.front();
     in.pop_front();
 
-    if (get(walked, p.x, p.y)) {
-      continue;
-    }
+    if (get(walked, p.x, p.y)) { continue; }
     set(walked, p.x, p.y, true);
 
-    if (is_obs_wall_or_door(p)) {
-      continue;
-    }
+    if (is_obs_wall_or_door(p)) { continue; }
 
     bool got_one = false;
     FOR_ALL_NON_INTERNAL_THINGS(this, t, p.x, p.y)
@@ -168,9 +154,7 @@ std::deque< Thingp > Level::flood_fill_things(point p, std::function< int(Thingp
     }
     FOR_ALL_THINGS_END()
 
-    if (! got_one) {
-      continue;
-    }
+    if (! got_one) { continue; }
 
     if (p.x <= MAP_WIDTH - MAP_BORDER_ROCK) {
       if (! get(pushed, p.x + 1, p.y)) {
@@ -220,18 +204,12 @@ std::deque< Thingp > Level::flood_fill_grid_things(point p, int dist)
     auto p = in.front();
     in.pop_front();
 
-    if (get(walked, p.x, p.y)) {
-      continue;
-    }
+    if (get(walked, p.x, p.y)) { continue; }
     set(walked, p.x, p.y, true);
 
-    if (is_obs_wall_or_door(p)) {
-      continue;
-    }
+    if (is_obs_wall_or_door(p)) { continue; }
 
-    if (distance(start, p) > dist) {
-      continue;
-    }
+    if (distance(start, p) > dist) { continue; }
 
     bool got_one = false;
     FOR_ALL_GRID_THINGS(this, t, p.x, p.y)
@@ -242,9 +220,7 @@ std::deque< Thingp > Level::flood_fill_grid_things(point p, int dist)
     }
     FOR_ALL_THINGS_END()
 
-    if (! got_one) {
-      continue;
-    }
+    if (! got_one) { continue; }
 
     if (p.x <= MAP_WIDTH - MAP_BORDER_ROCK) {
       if (! get(pushed, p.x + 1, p.y)) {

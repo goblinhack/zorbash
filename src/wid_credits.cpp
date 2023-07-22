@@ -27,9 +27,7 @@ static uint8_t wid_credits_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   switch (key->mod) {
     case KMOD_LCTRL :
@@ -60,9 +58,7 @@ static uint8_t wid_credits_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   //
   // So screenshots can work
@@ -79,9 +75,7 @@ static uint8_t wid_credits_mouse_up(Widp w, int x, int y, uint32_t button)
 
 static void game_display_credits_bg(void)
 {
-  if (g_opt_ascii) {
-    return;
-  }
+  if (g_opt_ascii) { return; }
 
   TRACE_AND_INDENT();
   glcolor(WHITE);
@@ -95,9 +89,7 @@ static void game_display_credits_bg(void)
 
 static void game_display_credits_fg(void)
 {
-  if (g_opt_ascii) {
-    return;
-  }
+  if (g_opt_ascii) { return; }
 
   TRACE_AND_INDENT();
   glcolor(WHITE);
@@ -122,9 +114,7 @@ void Game::wid_credits_select(void)
   TRACE_AND_INDENT();
   CON("INF: Credits");
 
-  if (wid_credits_window) {
-    wid_credits_destroy();
-  }
+  if (wid_credits_window) { wid_credits_destroy(); }
 
   point tl    = make_point(0, 0);
   point br    = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);

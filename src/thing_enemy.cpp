@@ -10,17 +10,11 @@
 bool Thing::is_enemy(Thingp attacker)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! maybe_aip())) {
-    return false;
-  }
+  if (unlikely(! maybe_aip())) { return false; }
 
-  if (aip()->thing_enemies.find(attacker->id) != aip()->thing_enemies.end()) {
-    return true;
-  }
+  if (aip()->thing_enemies.find(attacker->id) != aip()->thing_enemies.end()) { return true; }
 
-  if (aip()->perma_enemies.find(attacker->tp()->id) != aip()->perma_enemies.end()) {
-    return true;
-  }
+  if (aip()->perma_enemies.find(attacker->tp()->id) != aip()->perma_enemies.end()) { return true; }
 
   return false;
 }
@@ -31,9 +25,7 @@ bool Thing::is_enemy(Thingp attacker)
 void Thing::enemies_tick(void)
 {
   TRACE_NO_INDENT();
-  if (! maybe_aip()) {
-    return;
-  }
+  if (! maybe_aip()) { return; }
 
   for (auto &p : aip()->thing_enemies) {
     auto attacker = level->thing_find_optional(p.first);
@@ -74,25 +66,15 @@ void Thing::add_enemy(Thingp attacker, bool recursing)
 {
   TRACE_NO_INDENT();
 
-  if (attacker == this) {
-    return;
-  }
+  if (attacker == this) { return; }
 
-  if (unlikely(! attacker->is_monst() && ! attacker->is_player())) {
-    return;
-  }
+  if (unlikely(! attacker->is_monst() && ! attacker->is_player())) { return; }
 
-  if (unlikely(! is_monst() && ! is_player())) {
-    return;
-  }
+  if (unlikely(! is_monst() && ! is_player())) { return; }
 
-  if (! ai_resent_count()) {
-    return;
-  }
+  if (! ai_resent_count()) { return; }
 
-  if (is_friend(attacker) || same_mob(attacker)) {
-    return;
-  }
+  if (is_friend(attacker) || same_mob(attacker)) { return; }
 
   auto ai = aip();
 
@@ -112,9 +94,7 @@ void Thing::add_enemy(Thingp attacker, bool recursing)
   // The attack will wake the monst if it is sleeping anyway. We want to
   // delay waking if already dead to get a better message.
   //
-  if (! is_sleeping) {
-    change_state(MONST_STATE_IDLE, "move interrupted by an enemy");
-  }
+  if (! is_sleeping) { change_state(MONST_STATE_IDLE, "move interrupted by an enemy"); }
 
   //
   // For friends, also inherit the enemy status
@@ -123,23 +103,13 @@ void Thing::add_enemy(Thingp attacker, bool recursing)
     if (ai->thing_friends.size() || ai->perma_friends.size()) {
       for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
-          if (! get(ai->can_see_ever.can_see, x, y)) {
-            continue;
-          }
+          if (! get(ai->can_see_ever.can_see, x, y)) { continue; }
           FOR_ALL_THINGS_THAT_INTERACT(level, it, x, y)
           {
-            if (! can_detect(it)) {
-              continue;
-            }
-            if (! it->is_monst()) {
-              continue;
-            }
-            if (it == this) {
-              continue;
-            }
-            if (! is_friend(it)) {
-              continue;
-            }
+            if (! can_detect(it)) { continue; }
+            if (! it->is_monst()) { continue; }
+            if (it == this) { continue; }
+            if (! is_friend(it)) { continue; }
             it->add_enemy(attacker, true);
           }
           FOR_ALL_THINGS_END();

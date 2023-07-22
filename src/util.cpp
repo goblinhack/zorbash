@@ -13,9 +13,7 @@ void *myzalloc_(int size, const char *what, const char *file, const char *func, 
   TRACE_AND_INDENT();
   void *ptr = calloc(1, size);
 
-  if (! ptr) {
-    DIE("No memory, %s:%s():%u", file, func, line);
-  }
+  if (! ptr) { DIE("No memory, %s:%s():%u", file, func, line); }
 
   IF_DEBUG2 { ptrcheck_alloc(MTYPE_MISC, ptr, what, size, file, func, line); }
 
@@ -27,9 +25,7 @@ void *mymalloc_(int size, const char *what, const char *file, const char *func, 
   TRACE_AND_INDENT();
   void *ptr = malloc(size);
 
-  if (! ptr) {
-    DIE("No memory, %s:%s():%u", file, func, line);
-  }
+  if (! ptr) { DIE("No memory, %s:%s():%u", file, func, line); }
 
   IF_DEBUG2 { ptrcheck_alloc(MTYPE_MISC, ptr, what, size, file, func, line); }
 
@@ -42,9 +38,7 @@ void *myrealloc_(void *ptr, int size, const char *what, const char *file, const 
   IF_DEBUG2 { ptrcheck_free(MTYPE_MISC, ptr, file, func, line); }
 
   ptr = realloc(ptr, size);
-  if (! ptr) {
-    DIE("No memory, %s:%s():%u", file, func, line);
-  }
+  if (! ptr) { DIE("No memory, %s:%s():%u", file, func, line); }
 
   IF_DEBUG2 { ptrcheck_alloc(MTYPE_MISC, ptr, what, size, file, func, line); }
 
@@ -68,9 +62,7 @@ char *dupstr_(const char *in, const char *what, const char *file, const char *fu
   }
 
   char *ptr = strdup(in);
-  if (! ptr) {
-    DIE("No memory, %s:%s():%u", file, func, line);
-  }
+  if (! ptr) { DIE("No memory, %s:%s():%u", file, func, line); }
 
   int size = (__typeof__(size)) strlen(in);
 

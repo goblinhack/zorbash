@@ -21,19 +21,13 @@ void wid_actionbar_ascii_init(void)
   auto box_style           = UI_WID_STYLE_HORIZ_DARK;
   auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
 
-  if (! game->level) {
-    return;
-  }
+  if (! game->level) { return; }
   auto level = game->level;
 
   auto player = game->level->player;
-  if (! player) {
-    return;
-  }
+  if (! player) { return; }
 
-  if (player->is_dead) {
-    return;
-  }
+  if (player->is_dead) { return; }
 
   //
   // In case a scancode was used to open this widget
@@ -50,9 +44,7 @@ void wid_actionbar_ascii_init(void)
 
   CarryOptions carry_options;
   bool         ui_icon_collect = false;
-  if (player->check_anything_to_carry(carry_options)) {
-    ui_icon_collect = true;
-  }
+  if (player->check_anything_to_carry(carry_options)) { ui_icon_collect = true; }
   //
   // I don't like this - it is missing a key and makes things more complex?
   //
@@ -60,27 +52,17 @@ void wid_actionbar_ascii_init(void)
 
   bool ui_icon_close = false;
 
-  if (wid_popup_exists()) {
-    ui_icon_close = true;
-  }
+  if (wid_popup_exists()) { ui_icon_close = true; }
 
   int options = 1;
 
-  if (game->state == Game::STATE_NORMAL) {
-    options = 8;
-  }
+  if (game->state == Game::STATE_NORMAL) { options = 8; }
 
-  if (game->robot_mode) {
-    options = 2;
-  }
+  if (game->robot_mode) { options = 2; }
 
-  if (ui_icon_collect) {
-    options++;
-  }
+  if (ui_icon_collect) { options++; }
 
-  if (ui_icon_close) {
-    options++;
-  }
+  if (ui_icon_close) { options++; }
 
   bool add_descend {};
   if (level->is_descend_dungeon(player->curr_at.x, player->curr_at.y)

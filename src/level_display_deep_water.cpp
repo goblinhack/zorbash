@@ -108,15 +108,11 @@ void Level::display_pixelart_deep_water(int fbo, int16_t minx, int16_t miny, int
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   for (auto y = miny; y < maxy; y++) {
     for (auto x = minx; x < maxx; x++) {
-      if (likely(! is_deep_water(x, y))) {
-        continue;
-      }
+      if (likely(! is_deep_water(x, y))) { continue; }
       FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
       {
         auto tpp = t->tp();
-        if (! tpp->is_deep_water()) {
-          continue;
-        }
+        if (! tpp->is_deep_water()) { continue; }
         t->blit_pixelart(fbo);
       }
       FOR_ALL_THINGS_END()
@@ -135,9 +131,7 @@ void Level::display_pixelart_deep_water(int fbo, int16_t minx, int16_t miny, int
   auto tile_map = deep_water_tile_map;
   for (auto y = miny; y < maxy - 1; y += 2) {
     for (auto x = minx; x < maxx - 1; x += 2) {
-      if (likely(! get_no_check(tile_map, x, y))) {
-        continue;
-      }
+      if (likely(! get_no_check(tile_map, x, y))) { continue; }
       int tx  = (x & ~1);
       int ty  = (y & ~1);
       int tlx = tx * TILE_WIDTH;

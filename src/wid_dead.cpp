@@ -30,9 +30,7 @@ static uint8_t wid_dead_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   switch (key->mod) {
     case KMOD_LCTRL :
@@ -63,9 +61,7 @@ static uint8_t wid_dead_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   return false;
 }
@@ -86,9 +82,7 @@ void Game::wid_dead_select(const char *reason)
 
   game->change_state(Game::STATE_NORMAL, "player is dead");
 
-  if (wid_dead_window) {
-    wid_dead_destroy();
-  }
+  if (wid_dead_window) { wid_dead_destroy(); }
 
   //
   // Update this prior to pausing the game so we see the final level number
@@ -98,9 +92,7 @@ void Game::wid_dead_select(const char *reason)
   LOG("Open dead select: Pause");
   if (level) {
     level->scroll_map_to_player();
-    if (level->cursor) {
-      level->cursor->hide("wid dead");
-    }
+    if (level->cursor) { level->cursor->hide("wid dead"); }
   }
 
   auto  h     = TERM_HEIGHT / 2;

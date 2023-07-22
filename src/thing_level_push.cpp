@@ -27,25 +27,19 @@ void Thing::level_push(void)
   }
 #endif
 
-  if (is_the_grid) {
-    return;
-  }
+  if (is_the_grid) { return; }
 
   //
   // Don't have things like lasers or projectiles briefly setting fire on a tile
   // as that will cause interactions. And they really are brief, not long lived
   // like actual fire.
   //
-  if (is_tmp_thing()) {
-    return;
-  }
+  if (is_tmp_thing()) { return; }
 
   //
   // We don't want torches for example to act as if they are on the level/
   //
-  if (is_hidden) {
-    return;
-  }
+  if (is_hidden) { return; }
 
   if (is_acid()) {
     i_set_is_acid = true;
@@ -363,14 +357,10 @@ void Thing::level_push(void)
     // Set this on the first change, to avoid the redraw being pushed out too
     // far by subsequent changes.
     //
-    if (! level->ts_redraw_bg) {
-      level->ts_redraw_bg = time_ms_cached() + LEVEL_REDRAW_BG_DELAY_MS;
-    }
+    if (! level->ts_redraw_bg) { level->ts_redraw_bg = time_ms_cached() + LEVEL_REDRAW_BG_DELAY_MS; }
   }
 
-  if (is_lava() || is_fire()) {
-    level->is_heatmap_valid = false;
-  }
+  if (is_lava() || is_fire()) { level->is_heatmap_valid = false; }
 
   //
   // Keep track of what we are submerged in (or our owner).
@@ -379,16 +369,12 @@ void Thing::level_push(void)
 
   if (! is_water()) {
     is_in_water = level->is_water(curr_at);
-    if (o_top && o_top->is_in_water) {
-      is_in_water = true;
-    }
+    if (o_top && o_top->is_in_water) { is_in_water = true; }
   }
 
   if (! is_lava()) {
     is_in_lava = level->is_lava(curr_at);
-    if (o_top && o_top->is_in_lava) {
-      is_in_lava = true;
-    }
+    if (o_top && o_top->is_in_lava) { is_in_lava = true; }
   }
 
   //
@@ -396,9 +382,7 @@ void Thing::level_push(void)
   //
   if (gfx_pixelart_submergible()) {
     auto map_loc = curr_at;
-    if (o_top) {
-      map_loc = o_top->curr_at;
-    }
+    if (o_top) { map_loc = o_top->curr_at; }
 
     submerged_offset_set(0);
 
@@ -430,16 +414,12 @@ void Thing::level_push(void)
     {
       if (equip_id_carry_anim(iter).ok()) {
         auto it = level->thing_find(equip_id_carry_anim(iter));
-        if (it) {
-          it->level_push();
-        }
+        if (it) { it->level_push(); }
       }
 
       if (equip_id_use_anim(iter).ok()) {
         auto it = level->thing_find(equip_id_use_anim(iter));
-        if (it) {
-          it->level_push();
-        }
+        if (it) { it->level_push(); }
       }
     }
 
@@ -447,9 +427,7 @@ void Thing::level_push(void)
     {
       if (bodypart_id_get(iter).ok()) {
         auto it = level->thing_find(bodypart_id_get(iter));
-        if (it) {
-          it->level_push();
-        }
+        if (it) { it->level_push(); }
       }
     }
 
@@ -457,9 +435,7 @@ void Thing::level_push(void)
     if (on_fire_id.ok()) {
       TRACE_NO_INDENT();
       auto it = level->thing_find(on_fire_id);
-      if (it) {
-        it->level_push();
-      }
+      if (it) { it->level_push(); }
     }
   }
 

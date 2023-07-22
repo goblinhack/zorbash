@@ -33,9 +33,7 @@ uint8_t dir_exists(const char *indir)
   strchopc(dir, DIR_SEP_CHAR);
 
   rc = 0;
-  if (stat(dir, &buf) >= 0) {
-    rc = S_ISDIR(buf.st_mode);
-  }
+  if (stat(dir, &buf) >= 0) { rc = S_ISDIR(buf.st_mode); }
 
   myfree(dir);
 
@@ -66,9 +64,7 @@ char *dir_dotdot(char *s)
   char    *end;
 
   size = (uint32_t) strlen(s);
-  if (size <= 1) {
-    return s;
-  }
+  if (size <= 1) { return s; }
 
   /*
    * Skip trailing /
@@ -92,9 +88,7 @@ char *dospath2unix(char *in)
   char *s = in;
 
   while (*s) {
-    if (*s == '\\') {
-      *s = '/';
-    }
+    if (*s == '\\') { *s = '/'; }
 
     s++;
   }

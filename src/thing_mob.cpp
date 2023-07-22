@@ -10,9 +10,7 @@
 float Thing::distance_from_mob(void)
 {
   auto mob = top_mob();
-  if (! mob) {
-    return -1;
-  }
+  if (! mob) { return -1; }
 
   return distance(curr_at, mob->curr_at);
 }
@@ -20,9 +18,7 @@ float Thing::distance_from_mob(void)
 float Thing::distance_from_mob(point p)
 {
   auto mob = top_mob();
-  if (! mob) {
-    return -1;
-  }
+  if (! mob) { return -1; }
 
   return distance(p, mob->curr_at);
 }
@@ -30,9 +26,7 @@ float Thing::distance_from_mob(point p)
 bool Thing::too_far_from_mob(void)
 {
   auto mob = top_mob();
-  if (! mob) {
-    return false;
-  }
+  if (! mob) { return false; }
 
   auto m = distance_minion_from_mob_max_float();
   if (! m) {
@@ -40,9 +34,7 @@ bool Thing::too_far_from_mob(void)
     // This could be a thing that is not normally a minion.
     // Allow it to roam untethered.
     //
-    if (is_minion_set) {
-      return false;
-    }
+    if (is_minion_set) { return false; }
     err("distance_minion_from_mob_max() is not set for minion");
   }
 
@@ -52,9 +44,7 @@ bool Thing::too_far_from_mob(void)
 bool Thing::too_far_from_mob(point p)
 {
   auto mob = top_mob();
-  if (! mob) {
-    return false;
-  }
+  if (! mob) { return false; }
 
   auto m = distance_minion_from_mob_max_float();
   if (! m) {
@@ -62,9 +52,7 @@ bool Thing::too_far_from_mob(point p)
     // This could be a thing that is not normally a minion.
     // Allow it to roam untethered.
     //
-    if (is_minion_set) {
-      return false;
-    }
+    if (is_minion_set) { return false; }
     err("distance_minion_from_mob_max() is not set for minion");
   }
 
@@ -74,9 +62,7 @@ bool Thing::too_far_from_mob(point p)
 bool Thing::too_far_from_mob(point p, float delta)
 {
   auto mob = top_mob();
-  if (! mob) {
-    return false;
-  }
+  if (! mob) { return false; }
 
   auto m = distance_minion_from_mob_max_float();
   if (! m) {
@@ -84,9 +70,7 @@ bool Thing::too_far_from_mob(point p, float delta)
     // This could be a thing that is not normally a minion.
     // Allow it to roam untethered.
     //
-    if (is_minion_set) {
-      return false;
-    }
+    if (is_minion_set) { return false; }
     err("distance_minion_from_mob_max() is not set for minion");
   }
 
@@ -99,12 +83,8 @@ Thingp Thing::top_mob(void)
   auto id = immediate_mob_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
-    if (unlikely(! i)) {
-      return nullptr;
-    }
-    if (unlikely(i->immediate_mob_id().ok())) {
-      return i->immediate_mob();
-    }
+    if (unlikely(! i)) { return nullptr; }
+    if (unlikely(i->immediate_mob_id().ok())) { return i->immediate_mob(); }
     return i;
   }
   return nullptr;
@@ -116,9 +96,7 @@ Thingp Thing::immediate_mob(void)
   auto id = immediate_mob_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
-    if (unlikely(! i)) {
-      return nullptr;
-    }
+    if (unlikely(! i)) { return nullptr; }
     return i;
   }
   return nullptr;
@@ -140,9 +118,7 @@ void Thing::mob_set(Thingp mob)
 
   auto old_mob = immediate_mob();
   if (old_mob) {
-    if (old_mob == mob) {
-      return;
-    }
+    if (old_mob == mob) { return; }
 
     dbg("Will change mob %s->%s", old_mob->to_string().c_str(), mob->to_string().c_str());
 
@@ -160,9 +136,7 @@ void Thing::mob_unset(void)
   TRACE_NO_INDENT();
 
   auto old_mob = immediate_mob();
-  if (! old_mob) {
-    return;
-  }
+  if (! old_mob) { return; }
 
   dbg("Remove mob %s", old_mob->to_string().c_str());
 
@@ -181,13 +155,9 @@ void Thing::destroy_minions(Thingp defeater)
   // Warning defeater can be nullptr - e.g. when a mob falls to a new level
   //
 
-  if (! is_mob()) {
-    return;
-  }
+  if (! is_mob()) { return; }
 
-  if (! minion_count()) {
-    return;
-  }
+  if (! minion_count()) { return; }
 
   //
   // Slow, but not used too often
@@ -199,9 +169,7 @@ void Thing::destroy_minions(Thingp defeater)
     verify(MTYPE_THING, minion);
 
     auto o = minion->immediate_mob();
-    if (o && (o == this)) {
-      minions.push_back(minion);
-    }
+    if (o && (o == this)) { minions.push_back(minion); }
   }
 
   TRACE_NO_INDENT();
@@ -218,13 +186,9 @@ void Thing::destroy_minions(Thingp defeater)
 void Thing::unleash_minions(void)
 {
   TRACE_NO_INDENT();
-  if (! is_mob()) {
-    return;
-  }
+  if (! is_mob()) { return; }
 
-  if (! minion_count()) {
-    return;
-  }
+  if (! minion_count()) { return; }
 
   //
   // Slow, but not used too often
@@ -233,35 +197,25 @@ void Thing::unleash_minions(void)
     for (auto p : level->all_things) {
       auto minion = p.second;
       auto o      = minion->immediate_mob();
-      if (o && (o == this)) {
-        minion->mob_unset();
-      }
+      if (o && (o == this)) { minion->mob_unset(); }
     }
   }
 }
 
 bool Thing::same_mob(Thingp it)
 {
-  if (! it) {
-    return false;
-  }
+  if (! it) { return false; }
 
   auto its_mob = it->top_mob();
   if (its_mob) {
-    if (its_mob == this) {
-      return true;
-    }
+    if (its_mob == this) { return true; }
   }
 
   auto mob = top_mob();
   if (mob) {
-    if (mob == its_mob) {
-      return true;
-    }
+    if (mob == its_mob) { return true; }
 
-    if (mob == it) {
-      return true;
-    }
+    if (mob == it) { return true; }
   }
 
   return false;

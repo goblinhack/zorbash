@@ -14,9 +14,7 @@ bool Thing::is_invisible(void)
   auto old_is_currently_invisible = is_currently_invisible;
   bool new_is_currently_invisible = tp()->is_invisible();
 
-  if (buff_is_invisible()) {
-    new_is_currently_invisible = true;
-  }
+  if (buff_is_invisible()) { new_is_currently_invisible = true; }
 
   if (old_is_currently_invisible != new_is_currently_invisible) {
     level_pop();
@@ -29,22 +27,16 @@ bool Thing::is_invisible(void)
 
 bool Thing::can_see_is_invisible(Thingp what)
 {
-  if (! what->is_currently_invisible) {
-    return true;
-  }
+  if (! what->is_currently_invisible) { return true; }
 
-  if (is_able_to_see_invisible()) {
-    return true;
-  }
+  if (is_able_to_see_invisible()) { return true; }
 
   //
   // If the thing is adjacent to us and has attacked us, then we should be aware
   // of a translucent enemy close to us.
   //
   if (is_attacker(what)) {
-    if ((abs(what->curr_at.x - curr_at.x) <= 1) && (abs(what->curr_at.y - curr_at.y) <= 1)) {
-      return true;
-    }
+    if ((abs(what->curr_at.x - curr_at.x) <= 1) && (abs(what->curr_at.y - curr_at.y) <= 1)) { return true; }
   }
 
   return false;

@@ -64,9 +64,7 @@ PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds)
   for (i = 0; i < numLines; i++) {
     PyObject *strObj;
     strObj = PyList_GetItem(e, i); /* Can't fail */
-    if (! strObj) {
-      continue;
-    }
+    if (! strObj) { continue; }
 
     arr[ i ] = py_obj_to_string(strObj);
   }
@@ -74,9 +72,7 @@ PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds)
   tile_load_arr(std::string(file ? file : ""), std::string(name ? name : ""), width, height, numLines, arr);
 
   for (i = 0; i < numLines; i++) {
-    if (! arr[ i ]) {
-      continue;
-    }
+    if (! arr[ i ]) { continue; }
 
     myfree((char *) arr[ i ]);
   }
@@ -138,9 +134,7 @@ PyObject *tile_load_arr_sprites_(PyObject *obj, PyObject *args, PyObject *keywds
   for (i = 0; i < numLines; i++) {
     PyObject *strObj;
     strObj = PyList_GetItem(e, i); /* Can't fail */
-    if (! strObj) {
-      continue;
-    }
+    if (! strObj) { continue; }
 
     arr[ i ] = py_obj_to_string(strObj);
     PY_DBG("tile_load_arr:sprites(\"%s\")", arr[ i ]);
@@ -149,9 +143,7 @@ PyObject *tile_load_arr_sprites_(PyObject *obj, PyObject *args, PyObject *keywds
   tile_load_arr_sprites(std::string(file ? file : ""), std::string(name ? name : ""), width, height, numLines, arr);
 
   for (i = 0; i < numLines; i++) {
-    if (! arr[ i ]) {
-      continue;
-    }
+    if (! arr[ i ]) { continue; }
 
     myfree((char *) arr[ i ]);
   }
@@ -378,9 +370,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
       //
       // Copy thie tile and make a unique copy if someone has grabbed it.
       //
-      if (tile->in_use) {
-        tile = new Tile(tile);
-      }
+      if (tile->in_use) { tile = new Tile(tile); }
 
       tile->index = (*tiles).size();
       (*tiles).push_back(tile);
@@ -434,13 +424,9 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
       tile->is_end_of_anim         = is_end_of_anim;
       tile->is_end_of_ascii_anim   = is_end_of_ascii_anim;
       tile->is_dead_on_end_of_anim = is_dead_on_end_of_anim;
-      if (is_dead_on_end_of_anim) {
-        tp->is_dead_on_end_of_anim_set(true);
-      }
+      if (is_dead_on_end_of_anim) { tp->is_dead_on_end_of_anim_set(true); }
       tile->is_dead_on_end_of_ascii_anim = is_dead_on_end_of_ascii_anim;
-      if (is_alive_on_end_of_anim) {
-        tp->is_alive_on_end_of_anim_set(true);
-      }
+      if (is_alive_on_end_of_anim) { tp->is_alive_on_end_of_anim_set(true); }
       tile->is_alive_on_end_of_anim       = is_alive_on_end_of_anim;
       tile->is_alive_on_end_of_ascii_anim = is_alive_on_end_of_ascii_anim;
       tile->is_resurrecting               = is_resurrecting;
@@ -481,17 +467,13 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
         tile->dir = THING_DIR_NONE;
       }
 
-      if (tile->internal_has_dir_anim) {
-        tp->internal_has_dir_anim_set(true);
-      }
+      if (tile->internal_has_dir_anim) { tp->internal_has_dir_anim_set(true); }
     } else {
       (*tiles).push_back(nullptr);
     }
   }
 
-  if (tp_name) {
-    myfree(tp_name);
-  }
+  if (tp_name) { myfree(tp_name); }
 
   Py_RETURN_TRUE;
 }

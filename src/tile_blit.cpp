@@ -111,32 +111,20 @@ uint8_t tile_is_resurrecting(Tilep t) { return (t->is_resurrecting); }
 
 Tilep tile_first(Tilemap *tmap)
 {
-  if (unlikely(! tmap)) {
-    return nullptr;
-  }
+  if (unlikely(! tmap)) { return nullptr; }
   std::vector< Tilep > *tiles = &((*tmap));
-  if (unlikely(! tiles)) {
-    return nullptr;
-  }
-  if (unlikely(tiles->empty())) {
-    return nullptr;
-  }
+  if (unlikely(! tiles)) { return nullptr; }
+  if (unlikely(tiles->empty())) { return nullptr; }
   Tilep tile = (*tiles)[ 0 ];
   return tile_index_to_tile(tile->global_index);
 }
 
 Tilep tile_random(Tilemap *tmap)
 {
-  if (unlikely(! tmap)) {
-    return nullptr;
-  }
+  if (unlikely(! tmap)) { return nullptr; }
   std::vector< Tilep > *tiles = &((*tmap));
-  if (unlikely(! tiles)) {
-    return nullptr;
-  }
-  if (unlikely(tiles->empty())) {
-    return nullptr;
-  }
+  if (unlikely(! tiles)) { return nullptr; }
+  if (unlikely(tiles->empty())) { return nullptr; }
 
   int tries = 999999;
   while (tries--) {
@@ -146,9 +134,7 @@ Tilep tile_random(Tilemap *tmap)
     //
     // Don't really want dead tiles when choosing a random start tile.
     //
-    if (tile->is_dead) {
-      continue;
-    }
+    if (tile->is_dead) { continue; }
     if (unlikely(! tile)) {
       ERR("no tile at index #%d, max %d", (int) index, (int) tiles->size());
       return nullptr;
@@ -161,16 +147,10 @@ Tilep tile_random(Tilemap *tmap)
 
 Tilep tile_n(Tilemap *tmap, int n)
 {
-  if (unlikely(! tmap)) {
-    return nullptr;
-  }
+  if (unlikely(! tmap)) { return nullptr; }
   std::vector< Tilep > *tiles = &((*tmap));
-  if (unlikely(! tiles)) {
-    return nullptr;
-  }
-  if (unlikely(tiles->empty())) {
-    return nullptr;
-  }
+  if (unlikely(! tiles)) { return nullptr; }
+  if (unlikely(tiles->empty())) { return nullptr; }
   auto index = n % tiles->size();
   auto tile  = (*tiles)[ index ];
   if (unlikely(! tile)) {
@@ -184,9 +164,7 @@ int tile_get_n(Tilemap *tmap, Tile *p)
 {
   int n = 0;
   for (const auto t : *tmap) {
-    if (t == p) {
-      return n;
-    }
+    if (t == p) { return n; }
     n++;
   }
   return -1;
@@ -195,27 +173,19 @@ int tile_get_n(Tilemap *tmap, Tile *p)
 Tilep tile_get_frame(Tilemap *tmap, uint32_t frame)
 {
   for (const auto t : *tmap) {
-    if (t->frame == frame) {
-      return t;
-    }
+    if (t->frame == frame) { return t; }
   }
   return nullptr;
 }
 
 Tilep tile_next(Tilemap *tmap, Tilep in)
 {
-  if (unlikely(! tmap)) {
-    return nullptr;
-  }
+  if (unlikely(! tmap)) { return nullptr; }
   std::vector< Tilep > *tiles = &((*tmap));
-  if (unlikely(tiles->empty())) {
-    return nullptr;
-  }
+  if (unlikely(tiles->empty())) { return nullptr; }
   auto cursor = in->index;
   cursor++;
-  if (cursor >= tiles->size()) {
-    cursor = 0;
-  }
+  if (cursor >= tiles->size()) { cursor = 0; }
   auto tile = ((*tiles)[ cursor ]);
   return tile_index_to_tile(tile->global_index);
 }
@@ -249,9 +219,7 @@ void tile_blit_outline(const Tilep &tile, const point tl, const point br, const 
 {
   float x1, x2, y1, y2;
 
-  if (unlikely(! tile)) {
-    return;
-  }
+  if (unlikely(! tile)) { return; }
 
   x1 = tile->x1;
   x2 = tile->x2;
@@ -287,9 +255,7 @@ void tile_blit_outline(const Tilep &tile, const point tl, const point br, const 
 {
   float x1, x2, y1, y2;
 
-  if (unlikely(! tile)) {
-    return;
-  }
+  if (unlikely(! tile)) { return; }
 
   x1 = tile->x1;
   x2 = tile->x2;
@@ -328,9 +294,7 @@ void tile_blit(const Tilep &tile, const point tl, const point br, const color &c
 {
   float x1, x2, y1, y2;
 
-  if (unlikely(! tile)) {
-    return;
-  }
+  if (unlikely(! tile)) { return; }
 
   x1 = tile->x1;
   x2 = tile->x2;
@@ -350,9 +314,7 @@ static void tile_blit_outline_section(const Tilep &tile, const fpoint &tile_tl, 
 {
   float x1, x2, y1, y2;
 
-  if (unlikely(! tile)) {
-    return;
-  }
+  if (unlikely(! tile)) { return; }
 
   float tw = tile->x2 - tile->x1;
   float th = tile->y2 - tile->y1;
@@ -364,9 +326,7 @@ static void tile_blit_outline_section(const Tilep &tile, const fpoint &tile_tl, 
 
   glcolor(BLACK);
 
-  if (scale < 0.2) {
-    scale = 0.2;
-  }
+  if (scale < 0.2) { scale = 0.2; }
   const float dx = game->config.one_pixel_width * scale;
   const float dy = game->config.one_pixel_height * scale;
 
@@ -391,9 +351,7 @@ void tile_blit(const Tilep &tile, const point tl, const point br)
   // Only some walls have deco tiles, so the pointer is left null for
   // those that do not.
   //
-  if (unlikely(! tile)) {
-    return;
-  }
+  if (unlikely(! tile)) { return; }
 
   x1 = tile->x1;
   x2 = tile->x2;
@@ -411,9 +369,7 @@ void tile_blit(const Tilep &tile, const point tl, const point tr, const point bl
   // Only some walls have deco tiles, so the pointer is left null for
   // those that do not.
   //
-  if (unlikely(! tile)) {
-    return;
-  }
+  if (unlikely(! tile)) { return; }
 
   x1 = tile->x1;
   x2 = tile->x2;
@@ -433,9 +389,7 @@ void tile_blit_section(const Tilep &tile, const point tile_tl, const point tile_
   // Only some walls have deco tiles, so the pointer is left null for
   // those that do not.
   //
-  if (unlikely(! tile)) {
-    return;
-  }
+  if (unlikely(! tile)) { return; }
 
   float tw = tile->x2 - tile->x1;
   float th = tile->y2 - tile->y1;
@@ -462,9 +416,7 @@ void tile_blit_section_colored(const Tilep &tile, const fpoint &tile_tl, const f
   // Only some walls have deco tiles, so the pointer is left null for
   // those that do not.
   //
-  if (unlikely(! tile)) {
-    return;
-  }
+  if (unlikely(! tile)) { return; }
 
   float tw = tile->x2 - tile->x1;
   float th = tile->y2 - tile->y1;
@@ -516,9 +468,7 @@ void tile_blit_outline_section_colored(uint16_t index, const fpoint &tile_tl, co
 void tile_blit_frozen(const Tilep &tile, const point tl, const point br)
 {
   static Tilep tile_ice;
-  if (! tile_ice) {
-    tile_ice = tile_find_mand("ice");
-  }
+  if (! tile_ice) { tile_ice = tile_find_mand("ice"); }
 
   auto  width  = tl.x > br.x ? (tl.x - br.x) : (br.x - tl.x);
   auto  height = br.y - tl.y;
@@ -571,9 +521,7 @@ void tile_blit_frozen(const Tilep &tile, const point tl, const point br)
 void tile_blit_burnt(const Tilep &tile, const point tl, const point br)
 {
   static Tilep tile_burnt;
-  if (! tile_burnt) {
-    tile_burnt = tile_find_mand("burnt");
-  }
+  if (! tile_burnt) { tile_burnt = tile_find_mand("burnt"); }
 
   auto  width  = tl.x > br.x ? (tl.x - br.x) : (br.x - tl.x);
   auto  height = br.y - tl.y;

@@ -112,9 +112,7 @@ float angle_radians(const fpoint &p)
   float theta = asin(p.y / p.length());
 
   if (p.x > 0) {
-    if (p.y > 0) {
-      return theta;
-    }
+    if (p.y > 0) { return theta; }
     return (RAD_360 + theta);
   }
   return (RAD_180 - theta);
@@ -171,9 +169,7 @@ uint8_t get_line_intersection(fpoint p0, fpoint p1, fpoint p2, fpoint p3, fpoint
 {
   double denominator = ((p3.y - p2.y) * (p1.x - p0.x)) - ((p3.x - p2.x) * (p1.y - p0.y));
 
-  if (denominator == 0) {
-    return false;
-  }
+  if (denominator == 0) { return false; }
 
   double a = p0.y - p2.y;
   double b = p0.x - p2.x;
@@ -190,9 +186,7 @@ uint8_t get_line_intersection(fpoint p0, fpoint p1, fpoint p2, fpoint p3, fpoint
   intersect->y = p0.y + (a * (p1.y - p0.y));
 
   // if line1 is a segment and line2 is infinite, they intersect if:
-  if ((a >= 0) && (a <= 1.0) && (b >= 0) && (b <= 1.0)) {
-    return true;
-  }
+  if ((a >= 0) && (a <= 1.0) && (b >= 0) && (b <= 1.0)) { return true; }
 
   return false;
 }
@@ -201,9 +195,7 @@ uint8_t get_line_intersection(fpoint p0, fpoint p1, fpoint p2, fpoint p3)
 {
   double denominator = ((p3.y - p2.y) * (p1.x - p0.x)) - ((p3.x - p2.x) * (p1.y - p0.y));
 
-  if (denominator == 0) {
-    return false;
-  }
+  if (denominator == 0) { return false; }
 
   double a = p0.y - p2.y;
   double b = p0.x - p2.x;
@@ -215,9 +207,7 @@ uint8_t get_line_intersection(fpoint p0, fpoint p1, fpoint p2, fpoint p3)
   b = numerator2 / denominator;
 
   // if line1 is a segment and line2 is infinite, they intersect if:
-  if ((a >= 0) && (a <= 1.0) && (b >= 0) && (b <= 1.0)) {
-    return true;
-  }
+  if ((a >= 0) && (a <= 1.0) && (b >= 0) && (b <= 1.0)) { return true; }
 
   return false;
 }
@@ -229,9 +219,7 @@ uint8_t get_line_known_intersection(fpoint p0, fpoint p1, fpoint p2, fpoint p3, 
 {
   double denominator = ((p3.y - p2.y) * (p1.x - p0.x)) - ((p3.x - p2.x) * (p1.y - p0.y));
 
-  if (denominator == 0) {
-    return false;
-  }
+  if (denominator == 0) { return false; }
 
   double a = p0.y - p2.y;
   double b = p0.x - p2.x;
@@ -277,9 +265,7 @@ int distance_to_line(fpoint P0, fpoint L0, fpoint L1, float *dist, fpoint *inter
 
   *dist = distance(P0, intersect);
 
-  if (intersect_out) {
-    *intersect_out = intersect;
-  }
+  if (intersect_out) { *intersect_out = intersect; }
 
   if ((U < 0.0f) || (U > 1.0f)) {
     return 0; // closest P0 does not fall within the line segment

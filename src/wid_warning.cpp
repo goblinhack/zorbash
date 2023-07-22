@@ -27,9 +27,7 @@ static uint8_t wid_warning_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   switch (key->mod) {
     case KMOD_LCTRL :
@@ -60,9 +58,7 @@ static uint8_t wid_warning_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   return true;
 }
@@ -78,9 +74,7 @@ static uint8_t wid_warning_yes(Widp w, int x, int y, uint32_t button)
     auto level = game->get_current_level();
     if (level) {
       auto player = level->player;
-      if (player) {
-        player->player_cursor_path_pop_first_move(THING_MOVE_REASON_MOUSE);
-      }
+      if (player) { player->player_cursor_path_pop_first_move(THING_MOVE_REASON_MOUSE); }
     }
   }
 
@@ -100,13 +94,9 @@ void wid_warning(std::string warning)
 {
   TRACE_AND_INDENT();
 
-  if (game->config.disable_player_warnings) {
-    return;
-  }
+  if (game->config.disable_player_warnings) { return; }
 
-  if (wid_warning_window) {
-    wid_warning_destroy();
-  }
+  if (wid_warning_window) { wid_warning_destroy(); }
 
   auto  m     = TERM_WIDTH / 2;
   auto  n     = TERM_HEIGHT / 2;

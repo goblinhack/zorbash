@@ -21,18 +21,14 @@ void Level::new_external_particle(ThingId id, point start, point stop, isize sz,
   if (id.ok()) {
     auto t = thing_find(id);
     if (t) {
-      if (t->is_being_destroyed) {
-        return;
-      }
+      if (t->is_being_destroyed) { return; }
 
       if (g_opt_ascii) {
         callback();
         return;
       }
 
-      if (t->has_external_particle) {
-        return;
-      }
+      if (t->has_external_particle) { return; }
 
       t->has_external_particle = true;
     }
@@ -52,15 +48,11 @@ void Level::handle_external_particles(void)
 {
   TRACE_NO_INDENT();
 
-  if (all_external_particles.empty()) {
-    return;
-  }
+  if (all_external_particles.empty()) { return; }
 
   auto now = time_game_ms();
   auto e   = std::remove_if(all_external_particles.begin(), all_external_particles.end(), [ =, this ](Particle &p) {
-    if (p.removed) {
-      return true;
-    }
+    if (p.removed) { return true; }
 
     float t  = p.ts_stop - p.ts_start;
     float dt = (((float) (now) -p.ts_start)) / t;

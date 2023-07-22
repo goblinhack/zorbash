@@ -9,14 +9,10 @@
 void Thing::magic_boost(int v)
 {
   TRACE_NO_INDENT();
-  if (! v) {
-    return;
-  }
+  if (! v) { return; }
 
   auto max_magic = magic_max();
-  if (! max_magic) {
-    return;
-  }
+  if (! max_magic) { return; }
 
   auto old_magic = magic();
   auto new_magic = old_magic + v;
@@ -37,9 +33,7 @@ int Thing::magic(void)
 {
   TRACE_NO_INDENT();
   int v = 0;
-  if (maybe_infop()) {
-    v = infop()->magic;
-  }
+  if (maybe_infop()) { v = infop()->magic; }
   /*
    * Why do we do this? It makes looking at weapon health hard
   auto owner = immediate_owner();
@@ -60,9 +54,7 @@ int Thing::magic(void)
 int Thing::magic_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->magic = v);
   return n;
@@ -79,28 +71,20 @@ int Thing::magic_decr(int v)
   {
     auto iter = equip_get(e);
     if (iter) {
-      if (iter->is_tireless()) {
-        return true;
-      }
+      if (iter->is_tireless()) { return true; }
     }
   }
 
   auto n = (infop()->magic -= v);
-  if (infop()->magic < 0) {
-    infop()->magic = 0;
-  }
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (infop()->magic < 0) { infop()->magic = 0; }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   return n;
 }
 
 int Thing::magic_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->magic += v);
   if (n > magic_max()) {
@@ -113,23 +97,17 @@ int Thing::magic_incr(int v)
 int Thing::magic_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->magic--);
-  if (infop()->magic < 0) {
-    infop()->magic = 0;
-  }
+  if (infop()->magic < 0) { infop()->magic = 0; }
   return n;
 }
 
 int Thing::magic_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->magic++);
   if (n > magic_max()) {
@@ -145,18 +123,14 @@ int Thing::magic_incr(void)
 int Thing::magic_max(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->magic_max);
-  }
+  if (maybe_infop()) { return (infop()->magic_max); }
   return 0;
 }
 
 int Thing::magic_max_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->magic_max = v);
   return n;
@@ -165,9 +139,7 @@ int Thing::magic_max_set(int v)
 int Thing::magic_max_decr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->magic_max -= v);
   return n;
@@ -176,9 +148,7 @@ int Thing::magic_max_decr(int v)
 int Thing::magic_max_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->magic_max += v);
   return n;
@@ -187,9 +157,7 @@ int Thing::magic_max_incr(int v)
 int Thing::magic_max_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->magic_max--);
   return n;
@@ -198,9 +166,7 @@ int Thing::magic_max_decr(void)
 int Thing::magic_max_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->magic_max++);
   return n;

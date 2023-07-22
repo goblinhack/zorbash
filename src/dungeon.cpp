@@ -150,9 +150,7 @@ void Dungeon::make_dungeon(void)
     // Create a cyclic dungeon map.
     //
     DBG2("INF: Create cyclic rooms");
-    if (! create_cyclic_rooms(&grid)) {
-      continue;
-    }
+    if (! create_cyclic_rooms(&grid)) { continue; }
     TRACE_NO_INDENT();
     debug("create cyclic rooms");
 
@@ -169,9 +167,7 @@ void Dungeon::make_dungeon(void)
     //
     DBG2("INF: Move rooms closer");
 
-    if (rooms_move_closer_together()) {
-      break;
-    }
+    if (rooms_move_closer_together()) { break; }
 
     DBG2("INF: Failed, retry");
     debug("failed to place dungeon");
@@ -388,9 +384,7 @@ void Dungeon::make_dungeon(void)
 
 char *Dungeon::cell_addr(const int x, const int y, const int z)
 {
-  if (unlikely(is_oob(x, y, z))) {
-    return nullptr;
-  }
+  if (unlikely(is_oob(x, y, z))) { return nullptr; }
 
   return (getptr(cells, offset(x, y, z)));
 }
@@ -473,16 +467,10 @@ int Dungeon::offset(const int x, const int y)
 //
 void Dungeon::putc(const int x, const int y, const int z, const char c)
 {
-  if (! c) {
-    ERR("Putting nul char at %d,%d,%d", x, y, z);
-  }
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (! c) { ERR("Putting nul char at %d,%d,%d", x, y, z); }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
   auto p = cell_addr(x, y, z);
-  if (p != nullptr) {
-    *p = c;
-  }
+  if (p != nullptr) { *p = c; }
 }
 
 //
@@ -491,9 +479,7 @@ void Dungeon::putc(const int x, const int y, const int z, const char c)
 void Dungeon::putc_no_check(const int x, const int y, const int z, const char c)
 {
   auto p = cell_addr_no_check(x, y, z);
-  if (p != nullptr) {
-    *p = c;
-  }
+  if (p != nullptr) { *p = c; }
 }
 
 //
@@ -501,13 +487,9 @@ void Dungeon::putc_no_check(const int x, const int y, const int z, const char c)
 //
 char Dungeon::getc(const int x, const int y, const int z)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
   auto p = cell_addr(x, y, z);
-  if (p != nullptr) {
-    return (*p);
-  }
+  if (p != nullptr) { return (*p); }
   return (Charmap::NONE);
 }
 
@@ -517,17 +499,13 @@ char Dungeon::getc(const int x, const int y, const int z)
 char Dungeon::getc_no_check(const int x, const int y, const int z)
 {
   auto p = cell_addr_no_check(x, y, z);
-  if (p != nullptr) {
-    return (*p);
-  }
+  if (p != nullptr) { return (*p); }
   return (Charmap::NONE);
 }
 
 Roomp *Dungeon::cell_rooms_addr(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    return nullptr;
-  }
+  if (unlikely(is_oob(x, y))) { return nullptr; }
 
   return (getptr(cells_room, offset(x, y)));
 }
@@ -537,49 +515,37 @@ Roomp *Dungeon::cell_rooms_addr_no_check(const int x, const int y) { return (get
 void Dungeon::putr(const int x, const int y, Roomp r)
 {
   auto p = cell_rooms_addr(x, y);
-  if (p != nullptr) {
-    *p = r;
-  }
+  if (p != nullptr) { *p = r; }
 }
 
 Roomp Dungeon::getr(const int x, const int y)
 {
   auto p = cell_rooms_addr(x, y);
-  if (p != nullptr) {
-    return (*p);
-  }
+  if (p != nullptr) { return (*p); }
   return nullptr;
 }
 
 Roomp Dungeon::getr_no_check(const int x, const int y)
 {
   auto p = cell_rooms_addr_no_check(x, y);
-  if (p != nullptr) {
-    return (*p);
-  }
+  if (p != nullptr) { return (*p); }
   return nullptr;
 }
 
 bool Dungeon::is_anything_at(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
-    if ((c != Charmap::NONE) && (c != Charmap::SPACE)) {
-      return true;
-    }
+    if ((c != Charmap::NONE) && (c != Charmap::SPACE)) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_anything_at(const int x, const int y, const int z)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   auto c = getc(x, y, z);
   return (c != Charmap::NONE) && (c != Charmap::SPACE);
@@ -587,294 +553,224 @@ bool Dungeon::is_anything_at(const int x, const int y, const int z)
 
 int Dungeon::get_grid_depth_at(const int x, const int y)
 {
-  if (! nodes) {
-    return 0;
-  }
+  if (! nodes) { return 0; }
 
   auto r = getr(x, y);
-  if (r) {
-    return (r->depth);
-  }
+  if (r) { return (r->depth); }
   return 0;
 }
 
 bool Dungeon::is_floor(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_floor) {
-      return true;
-    }
+    if (v.is_floor) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_corridor(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_corridor) {
-      return true;
-    }
+    if (v.is_corridor) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_bridge(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_bridge) {
-      return true;
-    }
+    if (v.is_bridge) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_corridor_no_check(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc_no_check(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_corridor) {
-      return true;
-    }
+    if (v.is_corridor) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_dirt(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_dirt) {
-      return true;
-    }
+    if (v.is_dirt) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_dirt_no_check(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc_no_check(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_dirt) {
-      return true;
-    }
+    if (v.is_dirt) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_grass_dry(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_grass_dry) {
-      return true;
-    }
+    if (v.is_grass_dry) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_grass_wet(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_grass_wet) {
-      return true;
-    }
+    if (v.is_grass_wet) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_fungus_withered(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_fungus_withered) {
-      return true;
-    }
+    if (v.is_fungus_withered) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_fungus_poison(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_fungus_poison) {
-      return true;
-    }
+    if (v.is_fungus_poison) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_fungus_edible(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_fungus_edible) {
-      return true;
-    }
+    if (v.is_fungus_edible) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_magic_stone(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_magic_stone) {
-      return true;
-    }
+    if (v.is_magic_stone) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_foliage(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_foliage) {
-      return true;
-    }
+    if (v.is_foliage) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_spiderweb(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_spiderweb) {
-      return true;
-    }
+    if (v.is_spiderweb) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_portal(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_portal) {
-      return true;
-    }
+    if (v.is_portal) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_secret_corridor_at(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_secret_corridor) {
-      return true;
-    }
+    if (v.is_secret_corridor) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_wall(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   auto d = MAP_DEPTH_OBJ;
   auto c = getc(x, y, d);
@@ -884,707 +780,529 @@ bool Dungeon::is_wall(const int x, const int y)
 
 bool Dungeon::is_monst_class_A(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_monst_class_A) {
-      return true;
-    }
+    if (v.is_monst_class_A) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_monst_any(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_monst_class_A) {
-      return true;
-    }
-    if (v.is_monst_class_B) {
-      return true;
-    }
-    if (v.is_monst_class_C) {
-      return true;
-    }
-    if (v.is_monst_class_D) {
-      return true;
-    }
-    if (v.is_monst_class_E) {
-      return true;
-    }
+    if (v.is_monst_class_A) { return true; }
+    if (v.is_monst_class_B) { return true; }
+    if (v.is_monst_class_C) { return true; }
+    if (v.is_monst_class_D) { return true; }
+    if (v.is_monst_class_E) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_monst_class_B(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_monst_class_B) {
-      return true;
-    }
+    if (v.is_monst_class_B) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_monst_class_C(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_monst_class_C) {
-      return true;
-    }
+    if (v.is_monst_class_C) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_monst_class_D(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_monst_class_D) {
-      return true;
-    }
+    if (v.is_monst_class_D) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_monst_class_E(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_monst_class_E) {
-      return true;
-    }
+    if (v.is_monst_class_E) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_mob_any(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_mob_challenge_class_A) {
-      return true;
-    }
-    if (v.is_mob_challenge_class_B) {
-      return true;
-    }
+    if (v.is_mob_challenge_class_A) { return true; }
+    if (v.is_mob_challenge_class_B) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_mob_challenge_class_A(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_mob_challenge_class_A) {
-      return true;
-    }
+    if (v.is_mob_challenge_class_A) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_mob_challenge_class_B(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_mob_challenge_class_B) {
-      return true;
-    }
+    if (v.is_mob_challenge_class_B) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_food(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_food) {
-      return true;
-    }
+    if (v.is_food) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_brazier(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_brazier) {
-      return true;
-    }
+    if (v.is_brazier) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_barrel(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_barrel) {
-      return true;
-    }
+    if (v.is_barrel) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_trap(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_trap) {
-      return true;
-    }
+    if (v.is_trap) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_red_blood(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_red_blood) {
-      return true;
-    }
+    if (v.is_red_blood) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_rock(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_rock) {
-      return true;
-    }
+    if (v.is_rock) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_door(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_door) {
-      return true;
-    }
+    if (v.is_door) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_secret_door(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_secret_door) {
-      return true;
-    }
+    if (v.is_secret_door) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_ascend_dungeon(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_ascend_dungeon) {
-      return true;
-    }
+    if (v.is_ascend_dungeon) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_floor_deco_at(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_floor_deco) {
-      return true;
-    }
+    if (v.is_floor_deco) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_descend_sewer_at(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_descend_sewer) {
-      return true;
-    }
+    if (v.is_descend_sewer) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_descend_dungeon(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_descend_dungeon) {
-      return true;
-    }
+    if (v.is_descend_dungeon) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_descend_sewer(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_descend_sewer) {
-      return true;
-    }
+    if (v.is_descend_sewer) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_lava(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_lava) {
-      return true;
-    }
+    if (v.is_lava) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_block_of_ice(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_block_of_ice) {
-      return true;
-    }
+    if (v.is_block_of_ice) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_chasm(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_chasm) {
-      return true;
-    }
+    if (v.is_chasm) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_shallow_water(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_shallow_water) {
-      return true;
-    }
+    if (v.is_shallow_water) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_deep_water(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_deep_water) {
-      return true;
-    }
+    if (v.is_deep_water) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_hazard(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_deep_water) {
-      return true;
-    }
-    if (v.is_shallow_water) {
-      return true;
-    }
-    if (v.is_chasm) {
-      return true;
-    }
-    if (v.is_lava) {
-      return true;
-    }
-    if (v.is_block_of_ice) {
-      return true;
-    }
+    if (v.is_deep_water) { return true; }
+    if (v.is_shallow_water) { return true; }
+    if (v.is_chasm) { return true; }
+    if (v.is_lava) { return true; }
+    if (v.is_block_of_ice) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_treasure_type(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if ((v.is_treasure_class_A) || (v.is_treasure_class_B) || (v.is_treasure_class_C)) {
-      return true;
-    }
+    if ((v.is_treasure_class_A) || (v.is_treasure_class_B) || (v.is_treasure_class_C)) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_treasure_class_A(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_treasure_class_A) {
-      return true;
-    }
+    if (v.is_treasure_class_A) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_treasure_class_B(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_treasure_class_B) {
-      return true;
-    }
+    if (v.is_treasure_class_B) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_treasure_class_C(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_treasure_class_C) {
-      return true;
-    }
+    if (v.is_treasure_class_C) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_weapon_class_A(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_weapon_class_A) {
-      return true;
-    }
+    if (v.is_weapon_class_A) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_weapon_class_B(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_weapon_class_B) {
-      return true;
-    }
+    if (v.is_weapon_class_B) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_weapon_class_C(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_weapon_class_C) {
-      return true;
-    }
+    if (v.is_weapon_class_C) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_gold(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_gold) {
-      return true;
-    }
+    if (v.is_gold) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_key(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_key) {
-      return true;
-    }
+    if (v.is_key) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_potion(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_potion) {
-      return true;
-    }
+    if (v.is_potion) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_staff(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_staff) {
-      return true;
-    }
+    if (v.is_staff) { return true; }
   }
   return false;
 }
 
 bool Dungeon::is_ring(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) {
-    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
 
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_ring) {
-      return true;
-    }
+    if (v.is_ring) { return true; }
   }
   return false;
 }
@@ -1593,9 +1311,7 @@ bool Dungeon::is_anything_at_no_check(const int x, const int y)
 {
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc_no_check(x, y, d);
-    if ((c != Charmap::NONE) && (c != Charmap::SPACE)) {
-      return true;
-    }
+    if ((c != Charmap::NONE) && (c != Charmap::SPACE)) { return true; }
   }
   return false;
 }
@@ -1629,9 +1345,7 @@ bool Dungeon::is_chasm_no_check(const int x, const int y)
     auto c = getc_no_check(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_chasm) {
-      return true;
-    }
+    if (v.is_chasm) { return true; }
   }
   return false;
 }
@@ -1642,9 +1356,7 @@ bool Dungeon::is_shallow_water_no_check(const int x, const int y)
     auto c = getc_no_check(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_shallow_water) {
-      return true;
-    }
+    if (v.is_shallow_water) { return true; }
   }
   return false;
 }
@@ -1655,9 +1367,7 @@ bool Dungeon::is_deep_water_no_check(const int x, const int y)
     auto c = getc_no_check(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_deep_water) {
-      return true;
-    }
+    if (v.is_deep_water) { return true; }
   }
   return false;
 }
@@ -1686,29 +1396,21 @@ void Dungeon::dump(void)
       for (auto x = 0; x < map_width; x++) {
         bool got_one = false;
         for (auto d = map_depth - 1; d >= 0; d--) {
-          if (! is_anything_at(x, y, d)) {
-            continue;
-          }
+          if (! is_anything_at(x, y, d)) { continue; }
 
           auto m  = getc(x, y, d);
           auto cr = get(Charmap::all_charmaps, m);
           auto c  = cr.c;
 
-          if (! c) {
-            ERR("Unknown map char 0x%X/%c at x %d, y %d, depth %d", m, m, x, y, d);
-          }
+          if (! c) { ERR("Unknown map char 0x%X/%c at x %d, y %d, depth %d", m, m, x, y, d); }
 
-          if (is_wall(x, y)) {
-            c = 'X';
-          }
+          if (is_wall(x, y)) { c = 'X'; }
 
           s += c;
           got_one = true;
           break;
         }
-        if (! got_one) {
-          s += " ";
-        }
+        if (! got_one) { s += " "; }
       }
       if (s != "") {
         LOG("[%s]", s.c_str());
@@ -1727,25 +1429,19 @@ void Dungeon::dump(void)
     for (auto x = 0; x < map_width; x++) {
       bool got_one = false;
       for (auto d = map_depth - 1; d >= 0; d--) {
-        if (! is_anything_at(x, y, d)) {
-          continue;
-        }
+        if (! is_anything_at(x, y, d)) { continue; }
 
         auto m  = getc(x, y, d);
         auto cr = get(Charmap::all_charmaps, m);
         auto c  = cr.c;
 
-        if (! c) {
-          ERR("Unknown map char %c at x %d, y %d, depth %d", m, x, y, d);
-        }
+        if (! c) { ERR("Unknown map char %c at x %d, y %d, depth %d", m, x, y, d); }
 
         s += c;
         got_one = true;
         break;
       }
-      if (! got_one) {
-        s += " ";
-      }
+      if (! got_one) { s += " "; }
     }
     if (s != "") {
       LOG("[%s]", s.c_str());
@@ -1796,9 +1492,7 @@ void Dungeon::room_print_at(Roomp r, int x, int y)
     for (auto dy = 0; dy < r->height; dy++) {
       for (auto dx = 0; dx < r->width; dx++) {
         auto c = get(r->data, dx, dy, z);
-        if (c && (c != Charmap::SPACE)) {
-          putc(x + dx, y + dy, z, c);
-        }
+        if (c && (c != Charmap::SPACE)) { putc(x + dx, y + dy, z, c); }
       }
     }
   }
@@ -1811,9 +1505,7 @@ void Dungeon::room_print_only_doors_at(Roomp r, int x, int y)
     for (auto dy = 0; dy < r->height; dy++) {
       for (auto dx = 0; dx < r->width; dx++) {
         auto c = get(r->data, dx, dy, z);
-        if (c == Charmap::DOOR) {
-          putc(x + dx, y + dy, z, c);
-        }
+        if (c == Charmap::DOOR) { putc(x + dx, y + dy, z, c); }
       }
     }
   }
@@ -1825,14 +1517,10 @@ void Dungeon::room_print_only_doors(Grid *g)
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
       auto n = nodes->getn(x, y);
-      if (n->depth <= 0) {
-        continue;
-      }
+      if (n->depth <= 0) { continue; }
 
       Roomp r = get(g->node_rooms, x, y);
-      if (r) {
-        room_print_only_doors_at(r, r->at.x, r->at.y);
-      }
+      if (r) { room_print_only_doors_at(r, r->at.x, r->at.y); }
     }
   }
 }
@@ -1845,9 +1533,7 @@ bool Dungeon::rooms_print_all(Grid *g)
   // Try to juggle the rooms around a bit so the don't all line up due
   // to the grid placement approach we use.
   //
-  if (pcg_random_range(0, 10) < 5) {
-    return rooms_print_all_with_no_jiggle(g);
-  }
+  if (pcg_random_range(0, 10) < 5) { return rooms_print_all_with_no_jiggle(g); }
   return rooms_print_all_with_jiggle(g);
 }
 
@@ -1860,14 +1546,10 @@ bool Dungeon::rooms_print_all_with_no_jiggle(Grid *g)
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
       auto n = nodes->getn(x, y);
-      if (n->depth <= 0) {
-        continue;
-      }
+      if (n->depth <= 0) { continue; }
 
       Roomp r = get(g->node_rooms, x, y);
-      if (! r) {
-        return false;
-      }
+      if (! r) { return false; }
 
       auto rx = (x * (MAP_ROOM_WIDTH + MAP_BORDER_ROOM)) + MAP_BORDER_ROCK;
       auto ry = (y * (MAP_ROOM_HEIGHT + MAP_BORDER_ROOM)) + MAP_BORDER_ROCK;
@@ -1896,14 +1578,10 @@ bool Dungeon::rooms_print_all_with_jiggle(Grid *g)
     for (auto x = 0; x < grid_width; x++) {
       for (auto y = 0; y < grid_height; y++) {
         auto n = nodes->getn(x, y);
-        if (n->depth <= 0) {
-          continue;
-        }
+        if (n->depth <= 0) { continue; }
 
         Roomp r = get(g->node_rooms, x, y);
-        if (! r) {
-          return false;
-        }
+        if (! r) { return false; }
 
         auto rx = (x * (MAP_ROOM_WIDTH + MAP_BORDER_ROOM)) + MAP_BORDER_ROCK;
         auto ry = (y * (MAP_ROOM_HEIGHT + MAP_BORDER_ROOM)) + MAP_BORDER_ROCK;
@@ -1939,9 +1617,7 @@ bool Dungeon::rooms_print_all_with_jiggle(Grid *g)
           //
           // Still failed. Try the whole process over again.
           //
-          if (! placed) {
-            goto next;
-          }
+          if (! placed) { goto next; }
         }
       }
     }
@@ -1966,182 +1642,86 @@ bool Dungeon::rooms_print_all_with_jiggle(Grid *g)
 
 bool Dungeon::room_is_a_candidate(int x, int y, const DungeonNode *n, Roomp r)
 {
-  if (n->biome == BIOME_UNKNOWN) {
-    DIE("No biome set for DungeonNode");
-  }
+  if (n->biome == BIOME_UNKNOWN) { DIE("No biome set for DungeonNode"); }
 
-  if (n->biome != r->biome) {
-    return false;
-  }
+  if (n->biome != r->biome) { return false; }
 
   for (auto x = 0; x < nodes->grid_width; x++) {
     for (auto y = 0; y < nodes->grid_height; y++) {
       auto o = get(grid.node_rooms, x, y);
-      if (o == r) {
-        return false;
-      }
+      if (o == r) { return false; }
     }
   }
 
-  if ((n->has_door_down || n->has_secret_exit_down) && ! r->doors_down.size()) {
-    return false;
-  }
-  if ((n->has_door_up || n->has_secret_exit_up) && ! r->doors_up.size()) {
-    return false;
-  }
-  if ((n->has_door_left || n->has_secret_exit_left) && ! r->doors_left.size()) {
-    return false;
-  }
-  if ((n->has_door_right || n->has_secret_exit_right) && ! r->doors_right.size()) {
-    return false;
-  }
-  if (n->dir_left != r->dir_left) {
-    return false;
-  }
-  if (n->dir_right != r->dir_right) {
-    return false;
-  }
-  if (n->dir_up != r->dir_up) {
-    return false;
-  }
-  if (n->dir_down != r->dir_down) {
-    return false;
-  }
-  if (n->is_descend_dungeon) {
-    return (n->is_descend_dungeon == r->is_descend_dungeon);
-  }
-  if (n->is_ascend_dungeon) {
-    return (n->is_ascend_dungeon == r->is_ascend_dungeon);
-  }
-  if (n->is_lock) {
-    return (n->is_lock == r->is_lock);
-  }
-  if (n->is_key) {
-    return (n->is_key == r->is_key);
-  }
-  if (n->is_secret) {
-    return (n->is_secret == r->is_secret);
-  }
-  if (n->depth != r->depth) {
-    return false;
-  }
+  if ((n->has_door_down || n->has_secret_exit_down) && ! r->doors_down.size()) { return false; }
+  if ((n->has_door_up || n->has_secret_exit_up) && ! r->doors_up.size()) { return false; }
+  if ((n->has_door_left || n->has_secret_exit_left) && ! r->doors_left.size()) { return false; }
+  if ((n->has_door_right || n->has_secret_exit_right) && ! r->doors_right.size()) { return false; }
+  if (n->dir_left != r->dir_left) { return false; }
+  if (n->dir_right != r->dir_right) { return false; }
+  if (n->dir_up != r->dir_up) { return false; }
+  if (n->dir_down != r->dir_down) { return false; }
+  if (n->is_descend_dungeon) { return (n->is_descend_dungeon == r->is_descend_dungeon); }
+  if (n->is_ascend_dungeon) { return (n->is_ascend_dungeon == r->is_ascend_dungeon); }
+  if (n->is_lock) { return (n->is_lock == r->is_lock); }
+  if (n->is_key) { return (n->is_key == r->is_key); }
+  if (n->is_secret) { return (n->is_secret == r->is_secret); }
+  if (n->depth != r->depth) { return false; }
   return true;
 }
 
 bool Dungeon::room_is_a_candidate_less_restrictive(const DungeonNode *n, Roomp r)
 {
-  if (n->biome != r->biome) {
-    return false;
-  }
+  if (n->biome != r->biome) { return false; }
 
   for (auto x = 0; x < nodes->grid_width; x++) {
     for (auto y = 0; y < nodes->grid_height; y++) {
       auto o = get(grid.node_rooms, x, y);
-      if (o == r) {
-        return false;
-      }
+      if (o == r) { return false; }
     }
   }
 
-  if ((n->has_door_down || n->has_secret_exit_down) && ! r->doors_down.size()) {
-    return false;
-  }
-  if ((n->has_door_up || n->has_secret_exit_up) && ! r->doors_up.size()) {
-    return false;
-  }
-  if ((n->has_door_left || n->has_secret_exit_left) && ! r->doors_left.size()) {
-    return false;
-  }
-  if ((n->has_door_right || n->has_secret_exit_right) && ! r->doors_right.size()) {
-    return false;
-  }
-  if (r->dir_left) {
-    return false;
-  }
-  if (r->dir_right) {
-    return false;
-  }
-  if (r->dir_up) {
-    return false;
-  }
-  if (r->dir_down) {
-    return false;
-  }
-  if (n->is_descend_dungeon) {
-    return (n->is_descend_dungeon == r->is_descend_dungeon);
-  }
-  if (n->is_ascend_dungeon) {
-    return (n->is_ascend_dungeon == r->is_ascend_dungeon);
-  }
-  if (n->is_lock) {
-    return (n->is_lock == r->is_lock);
-  }
-  if (n->is_key) {
-    return (n->is_key == r->is_key);
-  }
-  if (n->is_secret) {
-    return (n->is_secret == r->is_secret);
-  }
-  if (n->depth > r->depth) {
-    return false;
-  }
+  if ((n->has_door_down || n->has_secret_exit_down) && ! r->doors_down.size()) { return false; }
+  if ((n->has_door_up || n->has_secret_exit_up) && ! r->doors_up.size()) { return false; }
+  if ((n->has_door_left || n->has_secret_exit_left) && ! r->doors_left.size()) { return false; }
+  if ((n->has_door_right || n->has_secret_exit_right) && ! r->doors_right.size()) { return false; }
+  if (r->dir_left) { return false; }
+  if (r->dir_right) { return false; }
+  if (r->dir_up) { return false; }
+  if (r->dir_down) { return false; }
+  if (n->is_descend_dungeon) { return (n->is_descend_dungeon == r->is_descend_dungeon); }
+  if (n->is_ascend_dungeon) { return (n->is_ascend_dungeon == r->is_ascend_dungeon); }
+  if (n->is_lock) { return (n->is_lock == r->is_lock); }
+  if (n->is_key) { return (n->is_key == r->is_key); }
+  if (n->is_secret) { return (n->is_secret == r->is_secret); }
+  if (n->depth > r->depth) { return false; }
   return true;
 }
 
 bool Dungeon::room_is_a_candidate_any_depth(const DungeonNode *n, Roomp r)
 {
-  if (n->biome != r->biome) {
-    return false;
-  }
+  if (n->biome != r->biome) { return false; }
 
   for (auto x = 0; x < nodes->grid_width; x++) {
     for (auto y = 0; y < nodes->grid_height; y++) {
       auto o = get(grid.node_rooms, x, y);
-      if (o == r) {
-        return false;
-      }
+      if (o == r) { return false; }
     }
   }
 
-  if ((n->has_door_down || n->has_secret_exit_down) && ! r->doors_down.size()) {
-    return false;
-  }
-  if ((n->has_door_up || n->has_secret_exit_up) && ! r->doors_up.size()) {
-    return false;
-  }
-  if ((n->has_door_left || n->has_secret_exit_left) && ! r->doors_left.size()) {
-    return false;
-  }
-  if ((n->has_door_right || n->has_secret_exit_right) && ! r->doors_right.size()) {
-    return false;
-  }
-  if (r->dir_left) {
-    return false;
-  }
-  if (r->dir_right) {
-    return false;
-  }
-  if (r->dir_up) {
-    return false;
-  }
-  if (r->dir_down) {
-    return false;
-  }
-  if (n->is_descend_dungeon) {
-    return (n->is_descend_dungeon == r->is_descend_dungeon);
-  }
-  if (n->is_ascend_dungeon) {
-    return (n->is_ascend_dungeon == r->is_ascend_dungeon);
-  }
-  if (n->is_lock) {
-    return (n->is_lock == r->is_lock);
-  }
-  if (n->is_key) {
-    return (n->is_key == r->is_key);
-  }
-  if (n->is_secret) {
-    return (n->is_secret == r->is_secret);
-  }
+  if ((n->has_door_down || n->has_secret_exit_down) && ! r->doors_down.size()) { return false; }
+  if ((n->has_door_up || n->has_secret_exit_up) && ! r->doors_up.size()) { return false; }
+  if ((n->has_door_left || n->has_secret_exit_left) && ! r->doors_left.size()) { return false; }
+  if ((n->has_door_right || n->has_secret_exit_right) && ! r->doors_right.size()) { return false; }
+  if (r->dir_left) { return false; }
+  if (r->dir_right) { return false; }
+  if (r->dir_up) { return false; }
+  if (r->dir_down) { return false; }
+  if (n->is_descend_dungeon) { return (n->is_descend_dungeon == r->is_descend_dungeon); }
+  if (n->is_ascend_dungeon) { return (n->is_ascend_dungeon == r->is_ascend_dungeon); }
+  if (n->is_lock) { return (n->is_lock == r->is_lock); }
+  if (n->is_key) { return (n->is_key == r->is_key); }
+  if (n->is_secret) { return (n->is_secret == r->is_secret); }
   return true;
 }
 
@@ -2149,24 +1729,16 @@ bool Dungeon::solve(int x, int y, Grid *g)
 {
   auto n = nodes->getn(x, y);
 
-  if (! nodes->node_is_a_room(n)) {
-    return true;
-  }
+  if (! nodes->node_is_a_room(n)) { return true; }
 
-  if (get(g->node_rooms, x, y)) {
-    return true;
-  }
+  if (get(g->node_rooms, x, y)) { return true; }
 
   std::vector< Roomp > candidates;
 
-  if (! Room::all_rooms.size()) {
-    DIE("Failed to load any rooms. Initialization error?");
-  }
+  if (! Room::all_rooms.size()) { DIE("Failed to load any rooms. Initialization error?"); }
 
   for (auto r : Room::all_rooms) {
-    if (! room_is_a_candidate(x, y, n, r)) {
-      continue;
-    }
+    if (! room_is_a_candidate(x, y, n, r)) { continue; }
 
     candidates.push_back(r);
   }
@@ -2174,9 +1746,7 @@ bool Dungeon::solve(int x, int y, Grid *g)
   auto ncandidates = candidates.size();
   if (! ncandidates) {
     for (auto r : Room::all_rooms) {
-      if (! room_is_a_candidate_less_restrictive(n, r)) {
-        continue;
-      }
+      if (! room_is_a_candidate_less_restrictive(n, r)) { continue; }
 
       candidates.push_back(r);
     }
@@ -2184,9 +1754,7 @@ bool Dungeon::solve(int x, int y, Grid *g)
     ncandidates = candidates.size();
     if (! ncandidates) {
       for (auto r : Room::all_rooms) {
-        if (! room_is_a_candidate_any_depth(n, r)) {
-          continue;
-        }
+        if (! room_is_a_candidate_any_depth(n, r)) { continue; }
 
         candidates.push_back(r);
       }
@@ -2208,30 +1776,22 @@ bool Dungeon::solve(int x, int y, Grid *g)
   if (n->has_door_down) {
     Grid old;
     std::copy(mbegin(g->node_rooms), mend(g->node_rooms), mbegin(old.node_rooms));
-    if (! solve(x, y + 1, g)) {
-      std::copy(mbegin(old.node_rooms), mend(old.node_rooms), mbegin(g->node_rooms));
-    }
+    if (! solve(x, y + 1, g)) { std::copy(mbegin(old.node_rooms), mend(old.node_rooms), mbegin(g->node_rooms)); }
   }
   if (n->has_door_up) {
     Grid old;
     std::copy(mbegin(g->node_rooms), mend(g->node_rooms), mbegin(old.node_rooms));
-    if (! solve(x, y - 1, g)) {
-      std::copy(mbegin(old.node_rooms), mend(old.node_rooms), mbegin(g->node_rooms));
-    }
+    if (! solve(x, y - 1, g)) { std::copy(mbegin(old.node_rooms), mend(old.node_rooms), mbegin(g->node_rooms)); }
   }
   if (n->has_door_right) {
     Grid old;
     std::copy(mbegin(g->node_rooms), mend(g->node_rooms), mbegin(old.node_rooms));
-    if (! solve(x + 1, y, g)) {
-      std::copy(mbegin(old.node_rooms), mend(old.node_rooms), mbegin(g->node_rooms));
-    }
+    if (! solve(x + 1, y, g)) { std::copy(mbegin(old.node_rooms), mend(old.node_rooms), mbegin(g->node_rooms)); }
   }
   if (n->has_door_left) {
     Grid old;
     std::copy(mbegin(g->node_rooms), mend(g->node_rooms), mbegin(old.node_rooms));
-    if (! solve(x - 1, y, g)) {
-      std::copy(mbegin(old.node_rooms), mend(old.node_rooms), mbegin(g->node_rooms));
-    }
+    if (! solve(x - 1, y, g)) { std::copy(mbegin(old.node_rooms), mend(old.node_rooms), mbegin(g->node_rooms)); }
   }
   return true;
 }
@@ -2241,9 +1801,7 @@ bool Dungeon::create_cyclic_rooms(Grid *g)
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
       auto n = nodes->getn(x, y);
-      if (! n->is_ascend_dungeon) {
-        continue;
-      }
+      if (! n->is_ascend_dungeon) { continue; }
       if (! solve(x, y, g)) {
         dump();
         DIE("Could not solve level at %d,%d", x, y);
@@ -2255,9 +1813,7 @@ bool Dungeon::create_cyclic_rooms(Grid *g)
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
       auto n = nodes->getn(x, y);
-      if (! n->is_secret) {
-        continue;
-      }
+      if (! n->is_secret) { continue; }
       solve(x, y, g);
     }
   }
@@ -2269,9 +1825,7 @@ void Dungeon::add_border(void)
 {
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_BORDER_ROCK; x++) {
-      if (! is_anything_at_no_check(x, y)) {
-        putc(x, y, MAP_DEPTH_OBJ, Charmap::ROCK);
-      }
+      if (! is_anything_at_no_check(x, y)) { putc(x, y, MAP_DEPTH_OBJ, Charmap::ROCK); }
       if (! is_anything_at_no_check(MAP_WIDTH - (x + 1), y)) {
         putc(MAP_WIDTH - (x + 1), y, MAP_DEPTH_OBJ, Charmap::ROCK);
       }
@@ -2279,9 +1833,7 @@ void Dungeon::add_border(void)
   }
   for (auto x = 0; x < MAP_WIDTH; x++) {
     for (auto y = 0; y < MAP_BORDER_ROCK; y++) {
-      if (! is_anything_at_no_check(x, y)) {
-        putc(x, y, MAP_DEPTH_OBJ, Charmap::ROCK);
-      }
+      if (! is_anything_at_no_check(x, y)) { putc(x, y, MAP_DEPTH_OBJ, Charmap::ROCK); }
       if (! is_anything_at_no_check(x, MAP_HEIGHT - (y + 1))) {
         putc(x, MAP_HEIGHT - (y + 1), MAP_DEPTH_OBJ, Charmap::ROCK);
       }
@@ -2306,36 +1858,18 @@ void Dungeon::add_corridor_walls(void)
 {
   for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
-      if (is_wall_no_check(x, y)) {
-        continue;
-      }
+      if (is_wall_no_check(x, y)) { continue; }
       if (is_corridor_no_check(x, y)) {
-        if (! is_anything_at_no_check(x - 1, y - 1)) {
-          putc(x - 1, y - 1, MAP_DEPTH_OBJ, Charmap::WALL);
-        }
-        if (! is_anything_at_no_check(x, y - 1)) {
-          putc(x, y - 1, MAP_DEPTH_OBJ, Charmap::WALL);
-        }
-        if (! is_anything_at_no_check(x + 1, y - 1)) {
-          putc(x + 1, y - 1, MAP_DEPTH_OBJ, Charmap::WALL);
-        }
+        if (! is_anything_at_no_check(x - 1, y - 1)) { putc(x - 1, y - 1, MAP_DEPTH_OBJ, Charmap::WALL); }
+        if (! is_anything_at_no_check(x, y - 1)) { putc(x, y - 1, MAP_DEPTH_OBJ, Charmap::WALL); }
+        if (! is_anything_at_no_check(x + 1, y - 1)) { putc(x + 1, y - 1, MAP_DEPTH_OBJ, Charmap::WALL); }
 
-        if (! is_anything_at_no_check(x - 1, y)) {
-          putc(x - 1, y, MAP_DEPTH_OBJ, Charmap::WALL);
-        }
-        if (! is_anything_at_no_check(x + 1, y)) {
-          putc(x + 1, y, MAP_DEPTH_OBJ, Charmap::WALL);
-        }
+        if (! is_anything_at_no_check(x - 1, y)) { putc(x - 1, y, MAP_DEPTH_OBJ, Charmap::WALL); }
+        if (! is_anything_at_no_check(x + 1, y)) { putc(x + 1, y, MAP_DEPTH_OBJ, Charmap::WALL); }
 
-        if (! is_anything_at_no_check(x - 1, y + 1)) {
-          putc(x - 1, y + 1, MAP_DEPTH_OBJ, Charmap::WALL);
-        }
-        if (! is_anything_at_no_check(x, y + 1)) {
-          putc(x, y + 1, MAP_DEPTH_OBJ, Charmap::WALL);
-        }
-        if (! is_anything_at_no_check(x + 1, y + 1)) {
-          putc(x + 1, y + 1, MAP_DEPTH_OBJ, Charmap::WALL);
-        }
+        if (! is_anything_at_no_check(x - 1, y + 1)) { putc(x - 1, y + 1, MAP_DEPTH_OBJ, Charmap::WALL); }
+        if (! is_anything_at_no_check(x, y + 1)) { putc(x, y + 1, MAP_DEPTH_OBJ, Charmap::WALL); }
+        if (! is_anything_at_no_check(x + 1, y + 1)) { putc(x + 1, y + 1, MAP_DEPTH_OBJ, Charmap::WALL); }
       }
     }
   }
@@ -2345,36 +1879,18 @@ void Dungeon::add_room_walls(void)
 {
   for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
-      if (is_wall_no_check(x, y)) {
-        continue;
-      }
+      if (is_wall_no_check(x, y)) { continue; }
       if (is_floor_no_check(x, y) || is_chasm_no_check(x, y)) {
-        if (! is_anything_at_no_check(x - 1, y - 1)) {
-          putc(x - 1, y - 1, MAP_DEPTH_OBJ, Charmap::WALL);
-        }
-        if (! is_anything_at_no_check(x, y - 1)) {
-          putc(x, y - 1, MAP_DEPTH_OBJ, Charmap::WALL);
-        }
-        if (! is_anything_at_no_check(x + 1, y - 1)) {
-          putc(x + 1, y - 1, MAP_DEPTH_OBJ, Charmap::WALL);
-        }
+        if (! is_anything_at_no_check(x - 1, y - 1)) { putc(x - 1, y - 1, MAP_DEPTH_OBJ, Charmap::WALL); }
+        if (! is_anything_at_no_check(x, y - 1)) { putc(x, y - 1, MAP_DEPTH_OBJ, Charmap::WALL); }
+        if (! is_anything_at_no_check(x + 1, y - 1)) { putc(x + 1, y - 1, MAP_DEPTH_OBJ, Charmap::WALL); }
 
-        if (! is_anything_at_no_check(x - 1, y)) {
-          putc(x - 1, y, MAP_DEPTH_OBJ, Charmap::WALL);
-        }
-        if (! is_anything_at_no_check(x + 1, y)) {
-          putc(x + 1, y, MAP_DEPTH_OBJ, Charmap::WALL);
-        }
+        if (! is_anything_at_no_check(x - 1, y)) { putc(x - 1, y, MAP_DEPTH_OBJ, Charmap::WALL); }
+        if (! is_anything_at_no_check(x + 1, y)) { putc(x + 1, y, MAP_DEPTH_OBJ, Charmap::WALL); }
 
-        if (! is_anything_at_no_check(x - 1, y + 1)) {
-          putc(x - 1, y + 1, MAP_DEPTH_OBJ, Charmap::WALL);
-        }
-        if (! is_anything_at_no_check(x, y + 1)) {
-          putc(x, y + 1, MAP_DEPTH_OBJ, Charmap::WALL);
-        }
-        if (! is_anything_at_no_check(x + 1, y + 1)) {
-          putc(x + 1, y + 1, MAP_DEPTH_OBJ, Charmap::WALL);
-        }
+        if (! is_anything_at_no_check(x - 1, y + 1)) { putc(x - 1, y + 1, MAP_DEPTH_OBJ, Charmap::WALL); }
+        if (! is_anything_at_no_check(x, y + 1)) { putc(x, y + 1, MAP_DEPTH_OBJ, Charmap::WALL); }
+        if (! is_anything_at_no_check(x + 1, y + 1)) { putc(x + 1, y + 1, MAP_DEPTH_OBJ, Charmap::WALL); }
       }
     }
   }
@@ -2388,18 +1904,12 @@ void Dungeon::choose_room_doors(void)
   for (auto x = 0; x < nodes->grid_width; x++) {
     for (auto y = 0; y < nodes->grid_height; y++) {
       auto n = nodes->getn(x, y);
-      if (n->depth <= 0) {
-        continue;
-      }
+      if (n->depth <= 0) { continue; }
 
-      if (n->depth == nodes->depth_obstacle) {
-        continue;
-      }
+      if (n->depth == nodes->depth_obstacle) { continue; }
 
       auto r = get(grid.node_rooms, x, y);
-      if (! r) {
-        continue;
-      }
+      if (! r) { continue; }
 
       if (n->has_door_down) {
         auto o = get(grid.node_rooms, x, y + 1);
@@ -2519,9 +2029,7 @@ void Dungeon::save_level(void)
 
   for (unsigned int rs = 0; rs < (unsigned int) all_placed_rooms.size(); rs++) {
     auto r = get(all_placed_rooms, rs);
-    if (r) {
-      r->rollback_at = r->at;
-    }
+    if (r) { r->rollback_at = r->at; }
   }
 }
 
@@ -2532,9 +2040,7 @@ void Dungeon::restore_level(void)
 
   for (unsigned int rs = 0; rs < (unsigned int) all_placed_rooms.size(); rs++) {
     auto r = get(all_placed_rooms, rs);
-    if (r) {
-      r->at = r->rollback_at;
-    }
+    if (r) { r->at = r->rollback_at; }
   }
 }
 
@@ -2545,12 +2051,8 @@ int Dungeon::draw_corridor(point start, point end, char w)
 
   DBG("draw corridor from %d,%d to %d,%d", start.x, start.y, end.x, end.y);
 
-  if ((start.x <= 0) || (start.y <= 0) || (start.x >= map_width - 1) || (start.y >= map_height - 1)) {
-    return 0;
-  }
-  if ((end.x <= 0) || (end.y <= 0) || (end.x >= map_width - 1) || (end.y >= map_height - 1)) {
-    return 0;
-  }
+  if ((start.x <= 0) || (start.y <= 0) || (start.x >= map_width - 1) || (start.y >= map_height - 1)) { return 0; }
+  if ((end.x <= 0) || (end.y <= 0) || (end.x >= map_width - 1) || (end.y >= map_height - 1)) { return 0; }
 
   //
   // Very close corridors we cannot use dmap as that will be len 0
@@ -2704,18 +2206,10 @@ int Dungeon::draw_corridor(point start, point end, char w)
   maxx += border;
   maxy += border;
 
-  if (minx < 0) {
-    minx = 0;
-  }
-  if (miny < 0) {
-    miny = 0;
-  }
-  if (maxx >= map_width) {
-    maxx = map_width - 1;
-  }
-  if (maxy >= map_height) {
-    maxy = map_height - 1;
-  }
+  if (minx < 0) { minx = 0; }
+  if (miny < 0) { miny = 0; }
+  if (maxx >= map_width) { maxx = map_width - 1; }
+  if (maxy >= map_height) { maxy = map_height - 1; }
 
   //
   // Set up obstacles for the corridor search
@@ -2898,18 +2392,12 @@ int Dungeon::draw_corridors(void)
     for (auto y = 0; y < nodes->grid_height; y++) {
 
       auto n = nodes->getn(x, y);
-      if (! n->depth) {
-        continue;
-      }
+      if (! n->depth) { continue; }
 
-      if (n->depth == nodes->depth_obstacle) {
-        continue;
-      }
+      if (n->depth == nodes->depth_obstacle) { continue; }
 
       auto r = get(grid.node_rooms, x, y);
-      if (! r) {
-        continue;
-      }
+      if (! r) { continue; }
 
       if (n->has_door_down) {
         auto o = get(grid.node_rooms, x, y + 1);
@@ -2927,9 +2415,7 @@ int Dungeon::draw_corridors(void)
         o->up_door_at   = end;
 
         auto len = draw_corridor(start, end, Charmap::CORRIDOR);
-        if (! len) {
-          return 0;
-        }
+        if (! len) { return 0; }
         total_len += len;
       }
 
@@ -2949,9 +2435,7 @@ int Dungeon::draw_corridors(void)
         o->left_door_at  = end;
 
         auto len = draw_corridor(start, end, Charmap::CORRIDOR);
-        if (! len) {
-          return 0;
-        }
+        if (! len) { return 0; }
         total_len += len;
       }
 
@@ -2971,9 +2455,7 @@ int Dungeon::draw_corridors(void)
         o->up_secret_door_at   = end;
 
         auto len = draw_corridor(start, end, Charmap::SECRET_CORRIDOR);
-        if (! len) {
-          return 0;
-        }
+        if (! len) { return 0; }
         total_len += len;
       }
 
@@ -2993,9 +2475,7 @@ int Dungeon::draw_corridors(void)
         o->left_secret_door_at  = end;
 
         auto len = draw_corridor(start, end, Charmap::SECRET_CORRIDOR);
-        if (! len) {
-          return 0;
-        }
+        if (! len) { return 0; }
         total_len += len;
       }
     }
@@ -3014,27 +2494,15 @@ void Dungeon::center_room_layout(void)
   for (auto x = 0; x < nodes->grid_width; x++) {
     for (auto y = 0; y < nodes->grid_height; y++) {
       auto n = nodes->getn(x, y);
-      if (n->depth <= 0) {
-        continue;
-      }
+      if (n->depth <= 0) { continue; }
 
       auto r = get(grid.node_rooms, x, y);
-      if (! r) {
-        continue;
-      }
+      if (! r) { continue; }
 
-      if (r->at.x < minx) {
-        minx = r->at.x;
-      }
-      if (r->at.y < miny) {
-        miny = r->at.y;
-      }
-      if (r->at.x + r->width > maxx) {
-        maxx = r->at.x + r->width;
-      }
-      if (r->at.y + r->height > maxy) {
-        maxy = r->at.y + r->height;
-      }
+      if (r->at.x < minx) { minx = r->at.x; }
+      if (r->at.y < miny) { miny = r->at.y; }
+      if (r->at.x + r->width > maxx) { maxx = r->at.x + r->width; }
+      if (r->at.y + r->height > maxy) { maxy = r->at.y + r->height; }
     }
   }
 
@@ -3044,14 +2512,10 @@ void Dungeon::center_room_layout(void)
   for (auto x = 0; x < nodes->grid_width; x++) {
     for (auto y = 0; y < nodes->grid_height; y++) {
       auto n = nodes->getn(x, y);
-      if (n->depth <= 0) {
-        continue;
-      }
+      if (n->depth <= 0) { continue; }
 
       auto r = get(grid.node_rooms, x, y);
-      if (! r) {
-        continue;
-      }
+      if (! r) { continue; }
 
       r->at.x -= minx;
       r->at.y -= miny;
@@ -3074,9 +2538,7 @@ void Dungeon::place_room(Roomp r, int x, int y)
     for (auto dy = 0; dy < r->height; dy++) {
       for (auto dx = 0; dx < r->width; dx++) {
         auto c = get(r->data, dx, dy, dz);
-        if ((c != Charmap::SPACE) && (c != Charmap::NONE)) {
-          putc_no_check(x + dx, y + dy, dz, c);
-        }
+        if ((c != Charmap::SPACE) && (c != Charmap::NONE)) { putc_no_check(x + dx, y + dy, dz, c); }
       }
     }
   }
@@ -3126,17 +2588,13 @@ void Dungeon::place_room(Roomp r, int x, int y)
 
 void Dungeon::place_level(LevelStaticp l)
 {
-  if ((l->width > MAP_WIDTH) || (l->height > MAP_HEIGHT)) {
-    ERR("Level has bad size %d,%d", l->width, l->height);
-  }
+  if ((l->width > MAP_WIDTH) || (l->height > MAP_HEIGHT)) { ERR("Level has bad size %d,%d", l->width, l->height); }
 
   for (auto z = 0; z < MAP_DEPTH; z++) {
     for (auto y = 0; y < l->height; y++) {
       for (auto x = 0; x < l->width; x++) {
         auto c = get(l->data, x, y, z);
-        if (c && (c != Charmap::SPACE)) {
-          putc(x, y, z, c);
-        }
+        if (c && (c != Charmap::SPACE)) { putc(x, y, z, c); }
       }
     }
   }
@@ -3148,17 +2606,13 @@ void Dungeon::place_level(LevelStaticp l)
 //
 void Dungeon::map_place_room_ptr(Roomp r, int x, int y)
 {
-  if (! r) {
-    ERR("No room to place");
-  }
+  if (! r) { ERR("No room to place"); }
 
   for (auto dz = 0; dz < MAP_DEPTH; dz++) {
     for (auto dy = 0; dy < r->height; dy++) {
       for (auto dx = 0; dx < r->width; dx++) {
         auto c = get(r->data, dx, dy, dz);
-        if (c != Charmap::SPACE) {
-          putr(x + dx, y + dy, r);
-        }
+        if (c != Charmap::SPACE) { putr(x + dx, y + dy, r); }
       }
     }
   }
@@ -3169,30 +2623,18 @@ void Dungeon::map_place_room_ptr(Roomp r, int x, int y)
 //
 bool Dungeon::can_place_room(Roomp r, int x, int y)
 {
-  if (x < MAP_BORDER_ROCK) {
-    return false;
-  }
-  if (y < MAP_BORDER_ROCK) {
-    return false;
-  }
-  if (x + r->width >= map_width - MAP_BORDER_ROCK) {
-    return false;
-  }
-  if (y + r->height >= map_height - MAP_BORDER_ROCK) {
-    return false;
-  }
+  if (x < MAP_BORDER_ROCK) { return false; }
+  if (y < MAP_BORDER_ROCK) { return false; }
+  if (x + r->width >= map_width - MAP_BORDER_ROCK) { return false; }
+  if (y + r->height >= map_height - MAP_BORDER_ROCK) { return false; }
 
   for (auto dz = 0; dz < MAP_DEPTH; dz++) {
     for (auto dy = 0; dy < r->height; dy++) {
       for (auto dx = 0; dx < r->width; dx++) {
-        if (is_oob(x + dx, y + dy)) {
-          return false;
-        }
+        if (is_oob(x + dx, y + dy)) { return false; }
         auto c = get(r->data, dx, dy, dz);
         if (c != Charmap::SPACE) {
-          if (is_anything_at_no_check(x + dx, y + dy)) {
-            return false;
-          }
+          if (is_anything_at_no_check(x + dx, y + dy)) { return false; }
 
           if (is_wall_no_check(x + dx - 1, y + dy) || is_wall_no_check(x + dx + 1, y + dy)
               || is_wall_no_check(x + dx, y + dy - 1) || is_wall_no_check(x + dx, y + dy + 1)) {
@@ -3224,14 +2666,10 @@ bool Dungeon::rooms_move_closer_together(void)
   for (auto x = 0; x < nodes->grid_width; x++) {
     for (auto y = 0; y < nodes->grid_height; y++) {
       auto n = nodes->getn(x, y);
-      if (n->depth <= 0) {
-        continue;
-      }
+      if (n->depth <= 0) { continue; }
 
       auto r = get(grid.node_rooms, x, y);
-      if (! r) {
-        continue;
-      }
+      if (! r) { continue; }
 
       all_placed_rooms.push_back(r);
       r->placed = true;
@@ -3283,14 +2721,10 @@ bool Dungeon::rooms_move_closer_together(void)
       for (auto x = 0; x < nodes->grid_width; x++) {
         for (auto y = 0; y < nodes->grid_height; y++) {
           auto n = nodes->getn(x, y);
-          if (n->depth <= 0) {
-            continue;
-          }
+          if (n->depth <= 0) { continue; }
 
           auto r = get(grid.node_rooms, x, y);
-          if (r) {
-            r->skip = (pcg_random_range(0, 100) < 50);
-          }
+          if (r) { r->skip = (pcg_random_range(0, 100) < 50); }
         }
       }
 
@@ -3300,17 +2734,11 @@ bool Dungeon::rooms_move_closer_together(void)
       for (auto x = 0; x < nodes->grid_width; x++) {
         for (auto y = 0; y < nodes->grid_height; y++) {
           auto n = nodes->getn(x, y);
-          if (n->depth <= 0) {
-            continue;
-          }
+          if (n->depth <= 0) { continue; }
 
           auto r = get(grid.node_rooms, x, y);
-          if (! r) {
-            continue;
-          }
-          if (! r->skip) {
-            place_room(r, r->at.x, r->at.y);
-          }
+          if (! r) { continue; }
+          if (! r->skip) { place_room(r, r->at.x, r->at.y); }
         }
       }
 
@@ -3321,18 +2749,12 @@ bool Dungeon::rooms_move_closer_together(void)
       for (auto x = 0; x < nodes->grid_width; x++) {
         for (auto y = 0; y < nodes->grid_height; y++) {
           auto n = nodes->getn(x, y);
-          if (n->depth <= 0) {
-            continue;
-          }
+          if (n->depth <= 0) { continue; }
 
           auto r = get(grid.node_rooms, x, y);
-          if (! r) {
-            continue;
-          }
+          if (! r) { continue; }
 
-          if (! r->skip) {
-            continue;
-          }
+          if (! r->skip) { continue; }
 
           delta = 1 + pcg_random_range(0, 2);
 
@@ -3472,9 +2894,7 @@ bool Dungeon::rooms_move_closer_together(void)
       auto new_total_corridor_len = draw_corridors();
       if (new_total_corridor_len >= corridor_count) {
         restore_level();
-        if (! draw_corridors()) {
-          ERR("Rolled back level was not solvable");
-        }
+        if (! draw_corridors()) { ERR("Rolled back level was not solvable"); }
 
         if (failed_to_make_shorter_corridors++ > 1000) {
           TRACE_NO_INDENT();
@@ -3485,9 +2905,7 @@ bool Dungeon::rooms_move_closer_together(void)
         restore_level();
       } else if (! new_total_corridor_len) {
         restore_level();
-        if (! draw_corridors()) {
-          ERR("Rolled back level was not solvable");
-        }
+        if (! draw_corridors()) { ERR("Rolled back level was not solvable"); }
 
         if (failed_to_place_all_corridors++ > 1000) {
           TRACE_NO_INDENT();
@@ -3518,14 +2936,10 @@ void Dungeon::assign_rooms_to_tiles(void)
   for (auto x = 0; x < nodes->grid_width; x++) {
     for (auto y = 0; y < nodes->grid_height; y++) {
       auto n = nodes->getn(x, y);
-      if (n->depth <= 0) {
-        continue;
-      }
+      if (n->depth <= 0) { continue; }
 
       auto r = get(grid.node_rooms, x, y);
-      if (r) {
-        map_place_room_ptr(r, r->at.x, r->at.y);
-      }
+      if (r) { map_place_room_ptr(r, r->at.x, r->at.y); }
     }
   }
 }
@@ -3566,20 +2980,14 @@ void Dungeon::place_doors_between_depth_changes(void)
   for (auto x = 0; x < nodes->grid_width; x++) {
     for (auto y = 0; y < nodes->grid_height; y++) {
       auto n = nodes->getn(x, y);
-      if (n->depth <= 0) {
-        continue;
-      }
+      if (n->depth <= 0) { continue; }
 
       auto r = get(grid.node_rooms, x, y);
-      if (! r) {
-        continue;
-      }
+      if (! r) { continue; }
 
       if (r->down_room) {
         auto o = r->down_room;
-        if (! o) {
-          ERR("Room linkage bug");
-        }
+        if (! o) { ERR("Room linkage bug"); }
 
         if (o->depth && (r->depth > o->depth)) {
           putc(r->down_door_at.x, r->down_door_at.y, MAP_DEPTH_OBJ, Charmap::DOOR);
@@ -3588,9 +2996,7 @@ void Dungeon::place_doors_between_depth_changes(void)
 
       if (r->up_room) {
         auto o = r->up_room;
-        if (! o) {
-          ERR("Room linkage bug");
-        }
+        if (! o) { ERR("Room linkage bug"); }
 
         if (o->depth && (r->depth > o->depth)) {
           putc(r->up_door_at.x, r->up_door_at.y, MAP_DEPTH_OBJ, Charmap::DOOR);
@@ -3599,9 +3005,7 @@ void Dungeon::place_doors_between_depth_changes(void)
 
       if (r->right_room) {
         auto o = r->right_room;
-        if (! o) {
-          ERR("Room linkage bug");
-        }
+        if (! o) { ERR("Room linkage bug"); }
 
         if (o->depth && (r->depth > o->depth)) {
           putc(r->right_door_at.x, r->right_door_at.y, MAP_DEPTH_OBJ, Charmap::DOOR);
@@ -3610,9 +3014,7 @@ void Dungeon::place_doors_between_depth_changes(void)
 
       if (r->left_room) {
         auto o = r->left_room;
-        if (! o) {
-          ERR("Room linkage bug");
-        }
+        if (! o) { ERR("Room linkage bug"); }
 
         if (o->depth && (r->depth > o->depth)) {
           putc(r->left_door_at.x, r->left_door_at.y, MAP_DEPTH_OBJ, Charmap::DOOR);
@@ -3621,9 +3023,7 @@ void Dungeon::place_doors_between_depth_changes(void)
 
       if (r->secret_down_room) {
         auto o = r->secret_down_room;
-        if (! o) {
-          ERR("Room linkage bug");
-        }
+        if (! o) { ERR("Room linkage bug"); }
 
         putc(r->down_secret_door_at.x, r->down_secret_door_at.y, MAP_DEPTH_OBJ, Charmap::SECRET_DOOR);
         putc(o->up_secret_door_at.x, o->up_secret_door_at.y, MAP_DEPTH_OBJ, Charmap::SECRET_DOOR);
@@ -3631,9 +3031,7 @@ void Dungeon::place_doors_between_depth_changes(void)
 
       if (r->secret_up_room) {
         auto o = r->secret_up_room;
-        if (! o) {
-          ERR("Room linkage bug");
-        }
+        if (! o) { ERR("Room linkage bug"); }
 
         putc(r->up_secret_door_at.x, r->up_secret_door_at.y, MAP_DEPTH_OBJ, Charmap::SECRET_DOOR);
         putc(o->down_secret_door_at.x, o->down_secret_door_at.y, MAP_DEPTH_OBJ, Charmap::SECRET_DOOR);
@@ -3641,9 +3039,7 @@ void Dungeon::place_doors_between_depth_changes(void)
 
       if (r->secret_right_room) {
         auto o = r->secret_right_room;
-        if (! o) {
-          ERR("Room linkage bug");
-        }
+        if (! o) { ERR("Room linkage bug"); }
 
         putc(r->right_secret_door_at.x, r->right_secret_door_at.y, MAP_DEPTH_OBJ, Charmap::SECRET_DOOR);
         putc(o->left_secret_door_at.x, o->left_secret_door_at.y, MAP_DEPTH_OBJ, Charmap::SECRET_DOOR);
@@ -3651,9 +3047,7 @@ void Dungeon::place_doors_between_depth_changes(void)
 
       if (r->secret_left_room) {
         auto o = r->secret_left_room;
-        if (! o) {
-          ERR("Room linkage bug");
-        }
+        if (! o) { ERR("Room linkage bug"); }
 
         putc(r->left_secret_door_at.x, r->left_secret_door_at.y, MAP_DEPTH_OBJ, Charmap::SECRET_DOOR);
         putc(o->right_secret_door_at.x, o->right_secret_door_at.y, MAP_DEPTH_OBJ, Charmap::SECRET_DOOR);
@@ -4128,9 +3522,7 @@ void Dungeon::cave_generation(void)
       ADJ(1, 0);
       ADJ(1, 1);
 
-      if (adjcount >= MAP_R1) {
-        continue;
-      }
+      if (adjcount >= MAP_R1) { continue; }
 
       ADJ(-2, -1);
       ADJ(-2, 0);
@@ -4170,9 +3562,7 @@ void Dungeon::water_fixup_shallows(void)
 {
   for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
-      if (! is_deep_water_no_check(x, y)) {
-        continue;
-      }
+      if (! is_deep_water_no_check(x, y)) { continue; }
 
       if (is_wall(x - 1, y - 1) || is_wall(x, y - 1) || is_wall(x + 1, y - 1) || is_wall(x - 1, y) || is_wall(x, y)
           || is_wall(x + 1, y) || is_wall(x - 1, y + 1) || is_wall(x, y + 1) || is_wall(x + 1, y + 1)
@@ -4218,9 +3608,7 @@ void Dungeon::add_remaining(void)
 {
   for (auto y = 2; y < MAP_HEIGHT - 2; y++) {
     for (auto x = 2; x < MAP_WIDTH - 2; x++) {
-      if (is_anything_at(x, y)) {
-        continue;
-      }
+      if (is_anything_at(x, y)) { continue; }
 
       if (biome == BIOME_CHASMS) {
         if (pcg_random_range(0, 1000) < 20) {
@@ -4246,9 +3634,7 @@ void Dungeon::add_remaining(void)
         continue;
       }
 
-      if (pcg_random_range(0, 100) < 95) {
-        putc(x, y, MAP_DEPTH_OBJ, Charmap::ROCK);
-      }
+      if (pcg_random_range(0, 100) < 95) { putc(x, y, MAP_DEPTH_OBJ, Charmap::ROCK); }
 
       putc(x, y, MAP_DEPTH_LIQUID, Charmap::SPACE);
       putc(x, y, MAP_DEPTH_FLOOR, Charmap::DIRT);
@@ -4264,13 +3650,9 @@ void Dungeon::add_remaining(void)
       } else if (pcg_random_range(0, 100) < 10) {
         putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FUNGUS_EDIBLE);
       } else if (is_dirt(x, y)) {
-        if (pcg_random_range(0, 100) < 20) {
-          putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOLIAGE);
-        }
+        if (pcg_random_range(0, 100) < 20) { putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOLIAGE); }
       } else if (is_corridor(x, y)) {
-        if (pcg_random_range(0, 100) < 20) {
-          putc(x, y, MAP_DEPTH_FLOOR2, Charmap::SPIDERWEB);
-        }
+        if (pcg_random_range(0, 100) < 20) { putc(x, y, MAP_DEPTH_FLOOR2, Charmap::SPIDERWEB); }
       }
     }
   }
@@ -4290,22 +3672,16 @@ void Dungeon::add_foliage_around_water(void)
       }
 
       if (is_dirt(x, y)) {
-        if (pcg_random_range(0, 100) > 95) {
-          continue;
-        }
+        if (pcg_random_range(0, 100) > 95) { continue; }
       }
 
       if (is_floor(x, y)) {
-        if (pcg_random_range(0, 100) > 10) {
-          continue;
-        }
+        if (pcg_random_range(0, 100) > 10) { continue; }
       }
 
       int foliage_ok = 0;
       for (auto dx = -2; dx <= 2; dx++) {
-        if (foliage_ok < 0) {
-          break;
-        }
+        if (foliage_ok < 0) { break; }
         for (auto dy = -2; dy <= 2; dy++) {
           if (is_block_of_ice(x + dx, y + dy) || is_bridge(x + dx, y + dy) || is_lava(x + dx, y + dy)
               || is_brazier(x + dx, y + dy) || is_chasm(x + dx, y + dy)) {
@@ -4342,9 +3718,7 @@ void Dungeon::add_foliage_around_water(void)
 
 void Dungeon::add_spiderweb(void)
 {
-  if (pcg_random_range(0, 10) > 1) {
-    return;
-  }
+  if (pcg_random_range(0, 10) > 1) { return; }
 
   for (auto y = 2; y < MAP_HEIGHT - 2; y++) {
     for (auto x = 2; x < MAP_WIDTH - 2; x++) {
@@ -4355,22 +3729,16 @@ void Dungeon::add_spiderweb(void)
       }
 
       if (is_corridor(x, y)) {
-        if (pcg_random_range(0, 1000) > 400) {
-          continue;
-        }
+        if (pcg_random_range(0, 1000) > 400) { continue; }
       } else if (is_floor(x, y)) {
-        if (pcg_random_range(0, 1000) > 1) {
-          continue;
-        }
+        if (pcg_random_range(0, 1000) > 1) { continue; }
       } else {
         continue;
       }
 
       int spiderweb_ok = 0;
       for (auto dx = -2; dx <= 2; dx++) {
-        if (spiderweb_ok == -1) {
-          break;
-        }
+        if (spiderweb_ok == -1) { break; }
         for (auto dy = -1; dy <= 1; dy++) {
           if (is_block_of_ice(x + dx, y + dy) || is_lava(x + dx, y + dy) || is_shallow_water(x + dx, y + dy)
               || is_deep_water(x + dx, y + dy) || is_brazier(x + dx, y + dy)) {
@@ -4386,9 +3754,7 @@ void Dungeon::add_spiderweb(void)
         }
       }
     next:
-      if (spiderweb_ok == 1) {
-        putc(x, y, MAP_DEPTH_FLOOR2, Charmap::SPIDERWEB);
-      }
+      if (spiderweb_ok == 1) { putc(x, y, MAP_DEPTH_FLOOR2, Charmap::SPIDERWEB); }
     }
   }
 }
@@ -4404,17 +3770,11 @@ void Dungeon::cave_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int m
   const int16_t maze_w = MAP_WIDTH - 2;
   const int16_t maze_h = MAP_HEIGHT - 2;
 
-  if (map_r1) {
-    MAP_R1 = map_r1;
-  }
+  if (map_r1) { MAP_R1 = map_r1; }
 
-  if (map_r2) {
-    MAP_R2 = map_r2;
-  }
+  if (map_r2) { MAP_R2 = map_r2; }
 
-  if (map_generations) {
-    MAP_GENERATIONS = map_generations;
-  }
+  if (map_generations) { MAP_GENERATIONS = map_generations; }
 
   int16_t x, y, i;
 
@@ -4422,9 +3782,7 @@ void Dungeon::cave_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int m
 
   for (x = 2; x < maze_w - 2; x++) {
     for (y = 2; y < maze_h - 2; y++) {
-      if (pcg_random_range(0, 10000) < map_fill_prob) {
-        set(map_curr, x, y, (uint8_t) 1);
-      }
+      if (pcg_random_range(0, 10000) < map_fill_prob) { set(map_curr, x, y, (uint8_t) 1); }
     }
   }
 
@@ -4437,15 +3795,11 @@ void Dungeon::cave_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int m
   for (x = 2; x < maze_w - 2; x++) {
     for (y = 2; y < maze_h - 2; y++) {
       if (get(map_curr, x, y)) {
-        if (is_anything_at(x, y)) {
-          continue;
-        }
+        if (is_anything_at(x, y)) { continue; }
 
         bool chasm_ok = true;
         for (auto dx = -1; dx <= 1; dx++) {
-          if (! chasm_ok) {
-            break;
-          }
+          if (! chasm_ok) { break; }
           for (auto dy = -1; dy <= 1; dy++) {
             if (is_lava(x + dx, y + dy)) {
               chasm_ok = false;
@@ -4480,17 +3834,11 @@ void Dungeon::dirt_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int m
   const int16_t maze_w = MAP_WIDTH - 2;
   const int16_t maze_h = MAP_HEIGHT - 2;
 
-  if (map_r1) {
-    MAP_R1 = map_r1;
-  }
+  if (map_r1) { MAP_R1 = map_r1; }
 
-  if (map_r2) {
-    MAP_R2 = map_r2;
-  }
+  if (map_r2) { MAP_R2 = map_r2; }
 
-  if (map_generations) {
-    MAP_GENERATIONS = map_generations;
-  }
+  if (map_generations) { MAP_GENERATIONS = map_generations; }
 
   int16_t x, y, i;
 
@@ -4498,9 +3846,7 @@ void Dungeon::dirt_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int m
 
   for (x = 2; x < maze_w - 2; x++) {
     for (y = 2; y < maze_h - 2; y++) {
-      if (pcg_random_range(0, 10000) < map_fill_prob) {
-        set(map_curr, x, y, (uint8_t) 1);
-      }
+      if (pcg_random_range(0, 10000) < map_fill_prob) { set(map_curr, x, y, (uint8_t) 1); }
     }
   }
 
@@ -4513,9 +3859,7 @@ void Dungeon::dirt_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int m
   for (x = 2; x < maze_w - 2; x++) {
     for (y = 2; y < maze_h - 2; y++) {
       if (get(map_curr, x, y)) {
-        if (! is_anything_at(x, y)) {
-          putc(x, y, MAP_DEPTH_FLOOR, Charmap::DIRT);
-        }
+        if (! is_anything_at(x, y)) { putc(x, y, MAP_DEPTH_FLOOR, Charmap::DIRT); }
       }
     }
   }
@@ -4529,17 +3873,11 @@ void Dungeon::grass_dry_gen(unsigned int map_fill_prob, int map_r1, int map_r2, 
   const int16_t maze_w = MAP_WIDTH - 2;
   const int16_t maze_h = MAP_HEIGHT - 2;
 
-  if (map_r1) {
-    MAP_R1 = map_r1;
-  }
+  if (map_r1) { MAP_R1 = map_r1; }
 
-  if (map_r2) {
-    MAP_R2 = map_r2;
-  }
+  if (map_r2) { MAP_R2 = map_r2; }
 
-  if (map_generations) {
-    MAP_GENERATIONS = map_generations;
-  }
+  if (map_generations) { MAP_GENERATIONS = map_generations; }
 
   int16_t x, y, i;
 
@@ -4547,9 +3885,7 @@ void Dungeon::grass_dry_gen(unsigned int map_fill_prob, int map_r1, int map_r2, 
 
   for (x = 2; x < maze_w - 2; x++) {
     for (y = 2; y < maze_h - 2; y++) {
-      if (pcg_random_range(0, 10000) < map_fill_prob) {
-        set(map_curr, x, y, (uint8_t) 1);
-      }
+      if (pcg_random_range(0, 10000) < map_fill_prob) { set(map_curr, x, y, (uint8_t) 1); }
     }
   }
 
@@ -4590,24 +3926,14 @@ void Dungeon::grass_dry_gen(unsigned int map_fill_prob, int map_r1, int map_r2, 
   for (x = 2; x < maze_w - 2; x++) {
     for (y = 2; y < maze_h - 2; y++) {
       if (get(map_curr, x, y)) {
-        if (is_wall(x, y) || is_rock(x, y) || is_chasm(x, y)) {
-          continue;
-        }
+        if (is_wall(x, y) || is_rock(x, y) || is_chasm(x, y)) { continue; }
 
         for (auto dx = -1; dx <= 1; dx++) {
           for (auto dy = -1; dy <= 1; dy++) {
-            if (is_lava(x + dx, y + dy)) {
-              goto next;
-            }
-            if (is_brazier(x + dx, y + dy)) {
-              goto next;
-            }
-            if (is_shallow_water(x + dx, y + dy)) {
-              goto next;
-            }
-            if (is_deep_water(x + dx, y + dy)) {
-              goto next;
-            }
+            if (is_lava(x + dx, y + dy)) { goto next; }
+            if (is_brazier(x + dx, y + dy)) { goto next; }
+            if (is_shallow_water(x + dx, y + dy)) { goto next; }
+            if (is_deep_water(x + dx, y + dy)) { goto next; }
           }
         }
 
@@ -4627,17 +3953,11 @@ void Dungeon::grass_wet_gen(unsigned int map_fill_prob, int map_r1, int map_r2, 
   const int16_t maze_w = MAP_WIDTH - 2;
   const int16_t maze_h = MAP_HEIGHT - 2;
 
-  if (map_r1) {
-    MAP_R1 = map_r1;
-  }
+  if (map_r1) { MAP_R1 = map_r1; }
 
-  if (map_r2) {
-    MAP_R2 = map_r2;
-  }
+  if (map_r2) { MAP_R2 = map_r2; }
 
-  if (map_generations) {
-    MAP_GENERATIONS = map_generations;
-  }
+  if (map_generations) { MAP_GENERATIONS = map_generations; }
 
   int16_t x, y, i;
 
@@ -4645,9 +3965,7 @@ void Dungeon::grass_wet_gen(unsigned int map_fill_prob, int map_r1, int map_r2, 
 
   for (x = 2; x < maze_w - 2; x++) {
     for (y = 2; y < maze_h - 2; y++) {
-      if (pcg_random_range(0, 10000) < map_fill_prob) {
-        set(map_curr, x, y, (uint8_t) 1);
-      }
+      if (pcg_random_range(0, 10000) < map_fill_prob) { set(map_curr, x, y, (uint8_t) 1); }
     }
   }
 
@@ -4688,19 +4006,13 @@ void Dungeon::grass_wet_gen(unsigned int map_fill_prob, int map_r1, int map_r2, 
   for (y = 2; y < maze_h - 2; y++) {
     for (x = 2; x < maze_w - 2; x++) {
       if (get(map_curr, x, y)) {
-        if (is_wall(x, y) || is_rock(x, y) || is_chasm(x, y)) {
-          continue;
-        }
-        if (is_deep_water(x, y)) {
-          continue;
-        }
+        if (is_wall(x, y) || is_rock(x, y) || is_chasm(x, y)) { continue; }
+        if (is_deep_water(x, y)) { continue; }
 
         bool ok_to_place = false;
         for (auto dx = -1; dx <= 1; dx++) {
           for (auto dy = -1; dy <= 1; dy++) {
-            if (is_lava(x + dx, y + dy)) {
-              goto next;
-            }
+            if (is_lava(x + dx, y + dy)) { goto next; }
             if (is_dirt(x + dx, y + dy)) {
               ok_to_place = true;
               break;
@@ -4716,9 +4028,7 @@ void Dungeon::grass_wet_gen(unsigned int map_fill_prob, int map_r1, int map_r2, 
           }
         }
 
-        if (ok_to_place) {
-          putc(x, y, MAP_DEPTH_FLOOR2, Charmap::GRASS_WET);
-        }
+        if (ok_to_place) { putc(x, y, MAP_DEPTH_FLOOR2, Charmap::GRASS_WET); }
       }
     next:
       continue;
@@ -4734,17 +4044,11 @@ void Dungeon::fungus_edible_gen(unsigned int map_fill_prob, int map_r1, int map_
   const int16_t maze_w = MAP_WIDTH - 2;
   const int16_t maze_h = MAP_HEIGHT - 2;
 
-  if (map_r1) {
-    MAP_R1 = map_r1;
-  }
+  if (map_r1) { MAP_R1 = map_r1; }
 
-  if (map_r2) {
-    MAP_R2 = map_r2;
-  }
+  if (map_r2) { MAP_R2 = map_r2; }
 
-  if (map_generations) {
-    MAP_GENERATIONS = map_generations;
-  }
+  if (map_generations) { MAP_GENERATIONS = map_generations; }
 
   int16_t x, y, i;
 
@@ -4752,9 +4056,7 @@ void Dungeon::fungus_edible_gen(unsigned int map_fill_prob, int map_r1, int map_
 
   for (x = 2; x < maze_w - 2; x++) {
     for (y = 2; y < maze_h - 2; y++) {
-      if (pcg_random_range(0, 10000) < map_fill_prob) {
-        set(map_curr, x, y, (uint8_t) 1);
-      }
+      if (pcg_random_range(0, 10000) < map_fill_prob) { set(map_curr, x, y, (uint8_t) 1); }
     }
   }
 
@@ -4795,19 +4097,13 @@ void Dungeon::fungus_edible_gen(unsigned int map_fill_prob, int map_r1, int map_
   for (y = 2; y < maze_h - 2; y++) {
     for (x = 2; x < maze_w - 2; x++) {
       if (get(map_curr, x, y)) {
-        if (is_wall(x, y) || is_rock(x, y) || is_chasm(x, y)) {
-          continue;
-        }
-        if (is_deep_water(x, y)) {
-          continue;
-        }
+        if (is_wall(x, y) || is_rock(x, y) || is_chasm(x, y)) { continue; }
+        if (is_deep_water(x, y)) { continue; }
 
         bool ok_to_place = false;
         for (auto dx = -1; dx <= 1; dx++) {
           for (auto dy = -1; dy <= 1; dy++) {
-            if (is_lava(x + dx, y + dy)) {
-              goto next;
-            }
+            if (is_lava(x + dx, y + dy)) { goto next; }
             if (is_dirt(x + dx, y + dy)) {
               ok_to_place = true;
               break;
@@ -4823,9 +4119,7 @@ void Dungeon::fungus_edible_gen(unsigned int map_fill_prob, int map_r1, int map_
           }
         }
 
-        if (ok_to_place) {
-          putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FUNGUS_EDIBLE);
-        }
+        if (ok_to_place) { putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FUNGUS_EDIBLE); }
       }
     next:
       continue;
@@ -4841,17 +4135,11 @@ void Dungeon::fungus_poison_gen(unsigned int map_fill_prob, int map_r1, int map_
   const int16_t maze_w = MAP_WIDTH - 2;
   const int16_t maze_h = MAP_HEIGHT - 2;
 
-  if (map_r1) {
-    MAP_R1 = map_r1;
-  }
+  if (map_r1) { MAP_R1 = map_r1; }
 
-  if (map_r2) {
-    MAP_R2 = map_r2;
-  }
+  if (map_r2) { MAP_R2 = map_r2; }
 
-  if (map_generations) {
-    MAP_GENERATIONS = map_generations;
-  }
+  if (map_generations) { MAP_GENERATIONS = map_generations; }
 
   int16_t x, y, i;
 
@@ -4859,9 +4147,7 @@ void Dungeon::fungus_poison_gen(unsigned int map_fill_prob, int map_r1, int map_
 
   for (x = 2; x < maze_w - 2; x++) {
     for (y = 2; y < maze_h - 2; y++) {
-      if (pcg_random_range(0, 10000) < map_fill_prob) {
-        set(map_curr, x, y, (uint8_t) 1);
-      }
+      if (pcg_random_range(0, 10000) < map_fill_prob) { set(map_curr, x, y, (uint8_t) 1); }
     }
   }
 
@@ -4902,19 +4188,13 @@ void Dungeon::fungus_poison_gen(unsigned int map_fill_prob, int map_r1, int map_
   for (y = 2; y < maze_h - 2; y++) {
     for (x = 2; x < maze_w - 2; x++) {
       if (get(map_curr, x, y)) {
-        if (is_wall(x, y) || is_rock(x, y) || is_chasm(x, y)) {
-          continue;
-        }
-        if (is_deep_water(x, y)) {
-          continue;
-        }
+        if (is_wall(x, y) || is_rock(x, y) || is_chasm(x, y)) { continue; }
+        if (is_deep_water(x, y)) { continue; }
 
         bool ok_to_place = false;
         for (auto dx = -1; dx <= 1; dx++) {
           for (auto dy = -1; dy <= 1; dy++) {
-            if (is_lava(x + dx, y + dy)) {
-              goto next;
-            }
+            if (is_lava(x + dx, y + dy)) { goto next; }
             if (is_dirt(x + dx, y + dy)) {
               ok_to_place = true;
               break;
@@ -4930,9 +4210,7 @@ void Dungeon::fungus_poison_gen(unsigned int map_fill_prob, int map_r1, int map_
           }
         }
 
-        if (ok_to_place) {
-          putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FUNGUS_POISON);
-        }
+        if (ok_to_place) { putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FUNGUS_POISON); }
       }
     next:
       continue;
@@ -4948,17 +4226,11 @@ void Dungeon::fungus_withered_gen(unsigned int map_fill_prob, int map_r1, int ma
   const int16_t maze_w = MAP_WIDTH - 2;
   const int16_t maze_h = MAP_HEIGHT - 2;
 
-  if (map_r1) {
-    MAP_R1 = map_r1;
-  }
+  if (map_r1) { MAP_R1 = map_r1; }
 
-  if (map_r2) {
-    MAP_R2 = map_r2;
-  }
+  if (map_r2) { MAP_R2 = map_r2; }
 
-  if (map_generations) {
-    MAP_GENERATIONS = map_generations;
-  }
+  if (map_generations) { MAP_GENERATIONS = map_generations; }
 
   int16_t x, y, i;
 
@@ -4966,9 +4238,7 @@ void Dungeon::fungus_withered_gen(unsigned int map_fill_prob, int map_r1, int ma
 
   for (x = 2; x < maze_w - 2; x++) {
     for (y = 2; y < maze_h - 2; y++) {
-      if (pcg_random_range(0, 10000) < map_fill_prob) {
-        set(map_curr, x, y, (uint8_t) 1);
-      }
+      if (pcg_random_range(0, 10000) < map_fill_prob) { set(map_curr, x, y, (uint8_t) 1); }
     }
   }
 
@@ -5009,19 +4279,13 @@ void Dungeon::fungus_withered_gen(unsigned int map_fill_prob, int map_r1, int ma
   for (y = 2; y < maze_h - 2; y++) {
     for (x = 2; x < maze_w - 2; x++) {
       if (get(map_curr, x, y)) {
-        if (is_wall(x, y) || is_rock(x, y) || is_chasm(x, y)) {
-          continue;
-        }
-        if (is_deep_water(x, y)) {
-          continue;
-        }
+        if (is_wall(x, y) || is_rock(x, y) || is_chasm(x, y)) { continue; }
+        if (is_deep_water(x, y)) { continue; }
 
         bool ok_to_place = false;
         for (auto dx = -1; dx <= 1; dx++) {
           for (auto dy = -1; dy <= 1; dy++) {
-            if (is_lava(x + dx, y + dy)) {
-              goto next;
-            }
+            if (is_lava(x + dx, y + dy)) { goto next; }
             if (is_dirt(x + dx, y + dy)) {
               ok_to_place = true;
               break;
@@ -5037,9 +4301,7 @@ void Dungeon::fungus_withered_gen(unsigned int map_fill_prob, int map_r1, int ma
           }
         }
 
-        if (ok_to_place) {
-          putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FUNGUS_WITHERED);
-        }
+        if (ok_to_place) { putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FUNGUS_WITHERED); }
       }
     next:
       continue;
@@ -5056,17 +4318,11 @@ void Dungeon::foliage_gen(unsigned int map_fill_prob, int map_r1, int map_r2, in
   const int16_t maze_w = MAP_WIDTH - 2;
   const int16_t maze_h = MAP_HEIGHT - 2;
 
-  if (map_r1) {
-    MAP_R1 = map_r1;
-  }
+  if (map_r1) { MAP_R1 = map_r1; }
 
-  if (map_r2) {
-    MAP_R2 = map_r2;
-  }
+  if (map_r2) { MAP_R2 = map_r2; }
 
-  if (map_generations) {
-    MAP_GENERATIONS = map_generations;
-  }
+  if (map_generations) { MAP_GENERATIONS = map_generations; }
 
   int16_t x, y, i;
 
@@ -5074,9 +4330,7 @@ void Dungeon::foliage_gen(unsigned int map_fill_prob, int map_r1, int map_r2, in
 
   for (x = 2; x < maze_w - 2; x++) {
     for (y = 2; y < maze_h - 2; y++) {
-      if (pcg_random_range(0, 10000) < map_fill_prob) {
-        set(map_curr, x, y, (uint8_t) 1);
-      }
+      if (pcg_random_range(0, 10000) < map_fill_prob) { set(map_curr, x, y, (uint8_t) 1); }
     }
   }
 
@@ -5090,21 +4344,13 @@ void Dungeon::foliage_gen(unsigned int map_fill_prob, int map_r1, int map_r2, in
     for (y = 2; y < maze_h - 2; y++) {
       if (get(map_curr, x, y)) {
         if (biome == BIOME_DUNGEON) {
-          if (is_wall(x, y) || is_rock(x, y) || is_chasm(x, y)) {
-            continue;
-          }
+          if (is_wall(x, y) || is_rock(x, y) || is_chasm(x, y)) { continue; }
 
           for (auto dx = -1; dx <= 1; dx++) {
             for (auto dy = -1; dy <= 1; dy++) {
-              if (is_lava(x + dx, y + dy)) {
-                goto next;
-              }
-              if (is_brazier(x + dx, y + dy)) {
-                goto next;
-              }
-              if (is_deep_water(x + dx, y + dy)) {
-                goto next;
-              }
+              if (is_lava(x + dx, y + dy)) { goto next; }
+              if (is_brazier(x + dx, y + dy)) { goto next; }
+              if (is_deep_water(x + dx, y + dy)) { goto next; }
             }
           }
         }
@@ -5125,17 +4371,11 @@ void Dungeon::water_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int 
   const int16_t maze_w = MAP_WIDTH - 2;
   const int16_t maze_h = MAP_HEIGHT - 2;
 
-  if (map_r1) {
-    MAP_R1 = map_r1;
-  }
+  if (map_r1) { MAP_R1 = map_r1; }
 
-  if (map_r2) {
-    MAP_R2 = map_r2;
-  }
+  if (map_r2) { MAP_R2 = map_r2; }
 
-  if (map_generations) {
-    MAP_GENERATIONS = map_generations;
-  }
+  if (map_generations) { MAP_GENERATIONS = map_generations; }
 
   int16_t x, y, i;
 
@@ -5143,9 +4383,7 @@ void Dungeon::water_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int 
 
   for (x = 2; x < maze_w - 2; x++) {
     for (y = 2; y < maze_h - 2; y++) {
-      if (pcg_random_range(0, 10000) < map_fill_prob) {
-        set(map_curr, x, y, (uint8_t) 1);
-      }
+      if (pcg_random_range(0, 10000) < map_fill_prob) { set(map_curr, x, y, (uint8_t) 1); }
     }
   }
 
@@ -5158,9 +4396,7 @@ void Dungeon::water_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int 
   for (x = 2; x < maze_w - 2; x++) {
     for (y = 2; y < maze_h - 2; y++) {
       if (get(map_curr, x, y)) {
-        if (! is_anything_at(x, y)) {
-          putc(x, y, MAP_DEPTH_LIQUID, Charmap::SHALLOW_WATER);
-        }
+        if (! is_anything_at(x, y)) { putc(x, y, MAP_DEPTH_LIQUID, Charmap::SHALLOW_WATER); }
       }
     }
   }
@@ -5174,17 +4410,11 @@ void Dungeon::lava_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int m
   const int16_t maze_w = MAP_WIDTH - 2;
   const int16_t maze_h = MAP_HEIGHT - 2;
 
-  if (map_r1) {
-    MAP_R1 = map_r1;
-  }
+  if (map_r1) { MAP_R1 = map_r1; }
 
-  if (map_r2) {
-    MAP_R2 = map_r2;
-  }
+  if (map_r2) { MAP_R2 = map_r2; }
 
-  if (map_generations) {
-    MAP_GENERATIONS = map_generations;
-  }
+  if (map_generations) { MAP_GENERATIONS = map_generations; }
 
   int16_t x, y, i;
 
@@ -5192,9 +4422,7 @@ void Dungeon::lava_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int m
 
   for (x = 2; x < maze_w - 2; x++) {
     for (y = 2; y < maze_h - 2; y++) {
-      if (pcg_random_range(0, 10000) < map_fill_prob) {
-        set(map_curr, x, y, (uint8_t) 1);
-      }
+      if (pcg_random_range(0, 10000) < map_fill_prob) { set(map_curr, x, y, (uint8_t) 1); }
     }
   }
 
@@ -5207,9 +4435,7 @@ void Dungeon::lava_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int m
   for (x = 2; x < maze_w - 2; x++) {
     for (y = 2; y < maze_h - 2; y++) {
       if (get(map_curr, x, y)) {
-        if (! is_anything_at(x, y)) {
-          putc(x, y, MAP_DEPTH_LIQUID, Charmap::LAVA);
-        }
+        if (! is_anything_at(x, y)) { putc(x, y, MAP_DEPTH_LIQUID, Charmap::LAVA); }
       }
     }
   }
@@ -5223,17 +4449,11 @@ void Dungeon::ice_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int ma
   const int16_t maze_w = MAP_WIDTH - 2;
   const int16_t maze_h = MAP_HEIGHT - 2;
 
-  if (map_r1) {
-    MAP_R1 = map_r1;
-  }
+  if (map_r1) { MAP_R1 = map_r1; }
 
-  if (map_r2) {
-    MAP_R2 = map_r2;
-  }
+  if (map_r2) { MAP_R2 = map_r2; }
 
-  if (map_generations) {
-    MAP_GENERATIONS = map_generations;
-  }
+  if (map_generations) { MAP_GENERATIONS = map_generations; }
 
   int16_t x, y, i;
 
@@ -5241,9 +4461,7 @@ void Dungeon::ice_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int ma
 
   for (x = 2; x < maze_w - 2; x++) {
     for (y = 2; y < maze_h - 2; y++) {
-      if (pcg_random_range(0, 10000) < map_fill_prob) {
-        set(map_curr, x, y, (uint8_t) 1);
-      }
+      if (pcg_random_range(0, 10000) < map_fill_prob) { set(map_curr, x, y, (uint8_t) 1); }
     }
   }
 
@@ -5256,9 +4474,7 @@ void Dungeon::ice_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int ma
   for (x = 2; x < maze_w - 2; x++) {
     for (y = 2; y < maze_h - 2; y++) {
       if (get(map_curr, x, y)) {
-        if (! is_anything_at(x, y)) {
-          putc(x, y, MAP_DEPTH_LIQUID, Charmap::ICE);
-        }
+        if (! is_anything_at(x, y)) { putc(x, y, MAP_DEPTH_LIQUID, Charmap::ICE); }
       }
     }
   }
@@ -5287,7 +4503,5 @@ void dungeon_test(void)
   new_level->create(world_at, grid_at, dungeon_seed, difficulty_depth, dungeon_walk_order_level_no);
   delete new_level;
 
-  if (! dungeon_seed--) {
-    DIE("end of test");
-  }
+  if (! dungeon_seed--) { DIE("end of test"); }
 }

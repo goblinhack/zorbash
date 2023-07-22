@@ -17,18 +17,12 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
-  if (! level) {
-    return false;
-  }
+  if (! level) { return false; }
 
   auto player = level->player;
-  if (! player) {
-    return false;
-  }
+  if (! player) { return false; }
 
-  if (player->is_dead) {
-    return false;
-  }
+  if (player->is_dead) { return false; }
 
   wid_inventory_fini(true /* remake */);
   wid_inventory_thing_over     = over;
@@ -38,9 +32,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
     wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected set");
   }
 
-  if (wid_inventory_thing_over) {
-    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected set");
-  }
+  if (wid_inventory_thing_over) { wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected set"); }
 
   static int inventory_width  = 110;
   static int inventory_height = 48;
@@ -151,9 +143,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
 
       if (slot < (int) player->itemsp()->inventory_shortcuts.size()) {
         auto thing_id = get(player->itemsp()->inventory_shortcuts, slot);
-        if (thing_id.ok()) {
-          t = level->thing_find(thing_id);
-        }
+        if (thing_id.ok()) { t = level->thing_find(thing_id); }
       }
 
       auto  wid_slot = wid_new_container(wid_inventory_window, "item slot parent");
@@ -183,9 +173,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
           }
 
           if (wid_inventory_thing_selected) {
-            if (wid_inventory_thing_selected == t) {
-              wid_set_style(wid_icon, UI_WID_STYLE_RED);
-            }
+            if (wid_inventory_thing_selected == t) { wid_set_style(wid_icon, UI_WID_STYLE_RED); }
           }
         } else {
           wid_set_style(wid_icon, UI_WID_STYLE_DARK);
@@ -214,9 +202,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
           }
 
           if (wid_inventory_thing_selected) {
-            if (wid_inventory_thing_selected == t) {
-              wid_set_style(wid_item, UI_WID_STYLE_RED);
-            }
+            if (wid_inventory_thing_selected == t) { wid_set_style(wid_item, UI_WID_STYLE_RED); }
           }
         } else {
           if (slot + 1 == 10) {
@@ -260,9 +246,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
   // Highlight the thing we're over, or the selected thing with preference.
   //
   Thingp item = wid_inventory_thing_over;
-  if (wid_inventory_thing_selected) {
-    item = wid_inventory_thing_selected;
-  }
+  if (wid_inventory_thing_selected) { item = wid_inventory_thing_selected; }
 
   if (item) {
     int y_at  = 28;

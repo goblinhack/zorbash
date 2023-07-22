@@ -100,9 +100,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
     value = 0;                                                                                                       \
                                                                                                                      \
   done:                                                                                                              \
-    if (tp_name) {                                                                                                   \
-      myfree(tp_name);                                                                                               \
-    }                                                                                                                \
+    if (tp_name) { myfree(tp_name); }                                                                                \
                                                                                                                      \
     Py_RETURN_TRUE;                                                                                                  \
   }
@@ -152,9 +150,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
     (__fn__)(tp);                                                                                                    \
                                                                                                                      \
   done:                                                                                                              \
-    if (tp_name) {                                                                                                   \
-      myfree(tp_name);                                                                                               \
-    }                                                                                                                \
+    if (tp_name) { myfree(tp_name); }                                                                                \
                                                                                                                      \
     Py_RETURN_TRUE;                                                                                                  \
   }
@@ -208,9 +204,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
     value = 0;                                                                                                       \
                                                                                                                      \
   done:                                                                                                              \
-    if (tp_name) {                                                                                                   \
-      myfree(tp_name);                                                                                               \
-    }                                                                                                                \
+    if (tp_name) { myfree(tp_name); }                                                                                \
                                                                                                                      \
     Py_RETURN_TRUE;                                                                                                  \
   }
@@ -253,9 +247,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
     tp->__field__##_set(value);                                                                                      \
                                                                                                                      \
   done:                                                                                                              \
-    if (tp_name) {                                                                                                   \
-      myfree(tp_name);                                                                                               \
-    }                                                                                                                \
+    if (tp_name) { myfree(tp_name); }                                                                                \
                                                                                                                      \
     Py_RETURN_TRUE;                                                                                                  \
   }
@@ -299,9 +291,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
     tp->__field__##_set(value, value2);                                                                              \
                                                                                                                      \
   done:                                                                                                              \
-    if (tp_name) {                                                                                                   \
-      myfree(tp_name);                                                                                               \
-    }                                                                                                                \
+    if (tp_name) { myfree(tp_name); }                                                                                \
                                                                                                                      \
     Py_RETURN_TRUE;                                                                                                  \
   }
@@ -343,9 +333,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
                                                                                                                      \
     tp->__field__##_set(value);                                                                                      \
   done:                                                                                                              \
-    if (tp_name) {                                                                                                   \
-      myfree(tp_name);                                                                                               \
-    }                                                                                                                \
+    if (tp_name) { myfree(tp_name); }                                                                                \
                                                                                                                      \
     Py_RETURN_TRUE;                                                                                                  \
   }
@@ -386,9 +374,7 @@ PyObject *tp_update_(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
 done:
-  if (tp_name) {
-    myfree(tp_name);
-  }
+  if (tp_name) { myfree(tp_name); }
 
   Py_RETURN_TRUE;
 }
@@ -425,9 +411,7 @@ PyObject *spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (t->spawn_next_to(std::string(what))) {
-    Py_RETURN_TRUE;
-  }
+  if (t->spawn_next_to(std::string(what))) { Py_RETURN_TRUE; }
   Py_RETURN_FALSE;
 }
 
@@ -463,9 +447,7 @@ PyObject *spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *ke
     Py_RETURN_FALSE;
   }
 
-  if (t->spawn_next_to_or_on_monst(std::string(what))) {
-    Py_RETURN_TRUE;
-  }
+  if (t->spawn_next_to_or_on_monst(std::string(what))) { Py_RETURN_TRUE; }
   Py_RETURN_FALSE;
 }
 
@@ -533,9 +515,7 @@ PyObject *spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObjec
   }
 
   if (! radius_max) {
-    if (t->effect_radius()) {
-      radius_max = t->effect_radius();
-    }
+    if (t->effect_radius()) { radius_max = t->effect_radius(); }
   }
 
   if (t->spawn_radius_range(parent, target, std::string(what), radius_min,
@@ -622,9 +602,7 @@ PyObject *if_matches_then_dead_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (unlikely(game->level->is_oob(x, y))) {
-    Py_RETURN_FALSE;
-  }
+  if (unlikely(game->level->is_oob(x, y))) { Py_RETURN_FALSE; }
 
   PY_DBG("%s(%X, %s, %d, %d)", __FUNCTION__, id, what, x, y);
 
@@ -634,9 +612,7 @@ PyObject *if_matches_then_dead_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (t->if_matches_then_dead(std::string(what), point(x, y))) {
-    Py_RETURN_TRUE;
-  }
+  if (t->if_matches_then_dead(std::string(what), point(x, y))) { Py_RETURN_TRUE; }
   Py_RETURN_FALSE;
 }
 
@@ -672,9 +648,7 @@ PyObject *if_matches_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (t->matches(std::string(what))) {
-    Py_RETURN_TRUE;
-  }
+  if (t->matches(std::string(what))) { Py_RETURN_TRUE; }
   Py_RETURN_FALSE;
 }
 
@@ -714,9 +688,7 @@ PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (unlikely(game->level->is_oob(x, y))) {
-    Py_RETURN_FALSE;
-  }
+  if (unlikely(game->level->is_oob(x, y))) { Py_RETURN_FALSE; }
 
   PY_DBG("%s(%X, %s, %d, %d)", __FUNCTION__, id, what, x, y);
 
@@ -726,9 +698,7 @@ PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (t->spawn_at(std::string(what), point(x, y))) {
-    Py_RETURN_TRUE;
-  }
+  if (t->spawn_at(std::string(what), point(x, y))) { Py_RETURN_TRUE; }
 
   Py_RETURN_FALSE;
 }
@@ -775,9 +745,7 @@ PyObject *place_at(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (unlikely(game->level->is_oob(x, y))) {
-    Py_RETURN_FALSE;
-  }
+  if (unlikely(game->level->is_oob(x, y))) { Py_RETURN_FALSE; }
 
   PY_DBG("%s(%s, %d, %d)", __FUNCTION__, what, x, y);
   TRACE_AND_INDENT();
@@ -788,9 +756,7 @@ PyObject *place_at(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (t->level->thing_new(std::string(what), point(x, y))) {
-    Py_RETURN_TRUE;
-  }
+  if (t->level->thing_new(std::string(what), point(x, y))) { Py_RETURN_TRUE; }
 
   Py_RETURN_FALSE;
 }

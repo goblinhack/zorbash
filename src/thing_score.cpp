@@ -11,17 +11,13 @@ void Thing::score_add(Thingp victim)
 {
   TRACE_NO_INDENT();
 
-  if (! is_player()) {
-    return;
-  }
+  if (! is_player()) { return; }
 
   if (victim->is_monst()) {
     auto score = danger_initial_level(victim);
     if (score > 0) {
       if (health() < health_max() / 10) {
-        if (is_player()) {
-          popup("%%fg=red$Glory defeat x10 score!%%fg=reset$");
-        }
+        if (is_player()) { popup("%%fg=red$Glory defeat x10 score!%%fg=reset$"); }
         score_incr(score * 10);
       } else {
         score_incr(score);

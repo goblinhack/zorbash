@@ -22,23 +22,15 @@ void wid_progress_bar(const std::string &title, float pct)
   DBG("Progress bar");
   TRACE_AND_INDENT();
 
-  if (wid_progress_bar_window) {
-    wid_progress_bar_destroy();
-  }
+  if (wid_progress_bar_window) { wid_progress_bar_destroy(); }
 
   int tile_num;
   tile_num = progress_steps * pct;
-  if (tile_num > progress_steps) {
-    tile_num = progress_steps;
-  }
-  if (tile_num < 1) {
-    tile_num = 1;
-  }
+  if (tile_num > progress_steps) { tile_num = progress_steps; }
+  if (tile_num < 1) { tile_num = 1; }
 
   std::string tilename = "progress_bar.pixelart." + std::to_string(tile_num);
-  if (g_opt_ascii) {
-    tilename = "progress_bar.ascii." + std::to_string(tile_num);
-  }
+  if (g_opt_ascii) { tilename = "progress_bar.ascii." + std::to_string(tile_num); }
 
   auto  m  = TERM_WIDTH / 2;
   auto  n  = TERM_HEIGHT / 2;

@@ -17,13 +17,9 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
   bool too_far = false;
 
   auto ai = maybe_aip();
-  if (! ai) {
-    return false;
-  }
+  if (! ai) { return false; }
 
-  if (! ai->move_path.size()) {
-    return false;
-  }
+  if (! ai->move_path.size()) { return false; }
 
   DBG2("Pop next move");
   TRACE_AND_INDENT();
@@ -124,9 +120,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
             return false;
           } else if (try_to_jump_carefully(jump_pos)) {
             DBG2("Long jump");
-            if (is_player()) {
-              game->tick_begin("Tried a long jump");
-            }
+            if (is_player()) { game->tick_begin("Tried a long jump"); }
             clear_move_path("long jump");
             return true;
           } else {
@@ -148,9 +142,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
           return false;
         } else if (try_to_jump_carefully(jump_pos, &too_far)) {
           DBG2("Jumped carefully");
-          if (is_player()) {
-            game->tick_begin("Jumped carefully");
-          }
+          if (is_player()) { game->tick_begin("Jumped carefully"); }
           clear_move_path("Jumped carefully");
           return true;
         } else {
@@ -162,14 +154,10 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
           //
           for (auto pit = ai->move_path.rbegin(); pit != ai->move_path.rend(); pit++) {
             jump_pos = *pit;
-            if (distance(curr_at, jump_pos) < 2) {
-              break;
-            }
+            if (distance(curr_at, jump_pos) < 2) { break; }
             if (try_to_jump_carefully(jump_pos, &too_far)) {
               DBG2("Jumped carefully; try entire path %d,%d", jump_pos.x, jump_pos.y);
-              if (is_player()) {
-                game->tick_begin("Jumped carefully");
-              }
+              if (is_player()) { game->tick_begin("Jumped carefully"); }
               clear_move_path("Jumped carefully");
               return true;
             }
@@ -181,14 +169,10 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
           for (auto pit = ai->move_path.rbegin(); pit != ai->move_path.rend(); pit++) {
             jump_pos   = *pit;
             jump_pos.y = curr_at.y;
-            if (distance(curr_at, jump_pos) < 2) {
-              break;
-            }
+            if (distance(curr_at, jump_pos) < 2) { break; }
             if (try_to_jump_carefully(jump_pos, &too_far)) {
               DBG2("Jumped carefully; try entire path %d,%d (horiz)", jump_pos.x, jump_pos.y);
-              if (is_player()) {
-                game->tick_begin("Jumped carefully");
-              }
+              if (is_player()) { game->tick_begin("Jumped carefully"); }
               clear_move_path("Jumped carefully");
               return true;
             }
@@ -200,14 +184,10 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
           for (auto pit = ai->move_path.rbegin(); pit != ai->move_path.rend(); pit++) {
             jump_pos   = *pit;
             jump_pos.x = curr_at.x;
-            if (distance(curr_at, jump_pos) < 2) {
-              break;
-            }
+            if (distance(curr_at, jump_pos) < 2) { break; }
             if (try_to_jump_carefully(jump_pos, &too_far)) {
               DBG2("Jumped carefully; try entire path %d,%d (vert)", jump_pos.x, jump_pos.y);
-              if (is_player()) {
-                game->tick_begin("Jumped carefully");
-              }
+              if (is_player()) { game->tick_begin("Jumped carefully"); }
               clear_move_path("Jumped carefully");
               return true;
             }
@@ -253,26 +233,20 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
 
       FOR_ALL_NON_INTERNAL_THINGS(level, t, future_pos.x, future_pos.y)
       {
-        if (! t->is_shovable()) {
-          continue;
-        }
+        if (! t->is_shovable()) { continue; }
 
         switch (try_to_shove_into_hazard(t, delta)) {
           case THING_SHOVE_TRIED_AND_FAILED :
             {
               DBG2("Tried to shove monst into hazard at %s but failed", future_pos.to_string().c_str());
-              if (is_player()) {
-                game->tick_begin("Tried to shove but failed");
-              }
+              if (is_player()) { game->tick_begin("Tried to shove but failed"); }
               clear_move_path("Tried to shove but failed");
               return false;
             }
           case THING_SHOVE_TRIED_AND_PASSED :
             {
               DBG2("Shoved monst at %s", future_pos.to_string().c_str());
-              if (is_player()) {
-                game->tick_begin("Tried to shove");
-              }
+              if (is_player()) { game->tick_begin("Tried to shove"); }
               clear_move_path("Tried to shove");
               return true;
             }
@@ -282,17 +256,13 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
       FOR_ALL_THINGS_END()
 
       DBG2("Move, no shove allowed, no attack allowed");
-      if (move_no_shove_no_attack(future_pos)) {
-        return true;
-      }
+      if (move_no_shove_no_attack(future_pos)) { return true; }
 
       //
       // Did we try or attempt to try to do something?
       //
       if (is_player()) {
-        if (! game->tick_requested.empty()) {
-          return true;
-        }
+        if (! game->tick_requested.empty()) { return true; }
       }
     }
 
@@ -309,9 +279,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
         DBG2("Hazard, but a monst is on it. Try to attack it.");
         TRACE_AND_INDENT();
 
-        if (move_no_shove_attack_allowed(future_pos)) {
-          return true;
-        }
+        if (move_no_shove_attack_allowed(future_pos)) { return true; }
       }
 
       DBG2("Cannot pass hazard at %s, failed to move", future_pos.to_string().c_str());
@@ -322,29 +290,21 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
     DBG2("Try to move (shoving not allowed, attack allowed) to %s", future_pos.to_string().c_str());
     TRACE_AND_INDENT();
 
-    if (move_no_shove_attack_allowed(future_pos)) {
-      return true;
-    }
+    if (move_no_shove_attack_allowed(future_pos)) { return true; }
 
     //
     // Did we try or attempt to try to do something?
     //
-    if (! game->tick_requested.empty()) {
-      return true;
-    }
+    if (! game->tick_requested.empty()) { return true; }
 
     DBG2("Try to move (shoving and attacking allowed) to %s", future_pos.to_string().c_str());
-    if (move(future_pos)) {
-      return true;
-    }
+    if (move(future_pos)) { return true; }
 
     //
     // Did we try or attempt to try to do something?
     //
     if (is_player()) {
-      if (! game->tick_requested.empty()) {
-        return true;
-      }
+      if (! game->tick_requested.empty()) { return true; }
     }
   }
 
@@ -361,22 +321,14 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
 
       FOR_ALL_NON_INTERNAL_THINGS(level, t, future_pos.x, future_pos.y)
       {
-        if (! t->is_shovable()) {
-          continue;
-        }
+        if (! t->is_shovable()) { continue; }
 
-        if (is_friend(t) || same_mob(t)) {
-          continue;
-        }
+        if (is_friend(t) || same_mob(t)) { continue; }
 
         t->move(curr_at);
-        if (t->is_player()) {
-          msg("You are grappled by %s.", text_the().c_str());
-        }
+        if (t->is_player()) { msg("You are grappled by %s.", text_the().c_str()); }
 
-        if (is_player()) {
-          game->tick_begin("Grapple");
-        }
+        if (is_player()) { game->tick_begin("Grapple"); }
         clear_move_path("Grapple");
         return true;
       }
@@ -429,9 +381,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
           // leave the destination on the path as that will stop us collecting items/
           //
           ai->move_path.clear();
-          if (move_no_shove_attack_allowed(mouse_at)) {
-            return true;
-          }
+          if (move_no_shove_attack_allowed(mouse_at)) { return true; }
         } else {
           //
           // If more than one hop away, we must jump if we cannot move to the next hop without hitting something.
@@ -439,9 +389,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
           DBG2("Cursor is not adjacent, try to move to the next hop first");
           TRACE_AND_INDENT();
 
-          if (move_no_shove_no_attack(future_pos)) {
-            return true;
-          }
+          if (move_no_shove_no_attack(future_pos)) { return true; }
 
           //
           // Ok something is in the way, try to jump.
@@ -466,56 +414,42 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
       DBG2("Try to move, no shove, attack allowed on next hop %s", future_pos.to_string().c_str());
       TRACE_AND_INDENT();
 
-      if (move_no_shove_attack_allowed(future_pos)) {
-        return true;
-      }
+      if (move_no_shove_attack_allowed(future_pos)) { return true; }
     } else {
       DBG2("Try to move, no shove, no attack as have move path");
       TRACE_AND_INDENT();
 
-      if (move_no_shove_no_attack(future_pos)) {
-        return true;
-      }
+      if (move_no_shove_no_attack(future_pos)) { return true; }
     }
   } else if (is_player() && ! game->robot_mode) {
     if (reason == THING_MOVE_REASON_MOUSE) {
       DBG2("Try to move player, no shove, attack allowed on next hop %s", future_pos.to_string().c_str());
       TRACE_AND_INDENT();
 
-      if (move_no_shove_attack_allowed(future_pos)) {
-        return true;
-      }
+      if (move_no_shove_attack_allowed(future_pos)) { return true; }
     } else {
       DBG2("Try to move player, no shove, no attack as have move path");
       TRACE_AND_INDENT();
 
-      if (move_no_shove_no_attack(future_pos)) {
-        return true;
-      }
+      if (move_no_shove_no_attack(future_pos)) { return true; }
     }
   } else {
     if (possible_to_attack_at(future_pos)) {
       DBG2("Try to move and attack");
       TRACE_AND_INDENT();
 
-      if (move_no_shove_attack_allowed(future_pos)) {
-        return true;
-      }
+      if (move_no_shove_attack_allowed(future_pos)) { return true; }
     } else {
       DBG2("Try to move, no shove, no attack");
       TRACE_AND_INDENT();
 
-      if (move_no_shove_no_attack(future_pos)) {
-        return true;
-      }
+      if (move_no_shove_no_attack(future_pos)) { return true; }
 
       if (possible_to_attack_at(future_pos)) {
         DBG2("Try to move, no shove, attack allowed");
         TRACE_AND_INDENT();
 
-        if (move_no_shove_attack_allowed(future_pos)) {
-          return true;
-        }
+        if (move_no_shove_attack_allowed(future_pos)) { return true; }
       }
     }
   }
@@ -582,9 +516,7 @@ bool Thing::player_cursor_path_pop_first_move(ThingMoveReason reason)
 
     if (player_or_monst_path_pop_next_move(reason)) {
       DBG2("Move to cursor next hop");
-      if (game->cursor_move_path.empty()) {
-        level->cursor_path_create(this);
-      }
+      if (game->cursor_move_path.empty()) { level->cursor_path_create(this); }
       return true;
     }
 
@@ -605,9 +537,7 @@ bool Thing::player_cursor_path_pop_first_move(ThingMoveReason reason)
   //
   // Not sure when/how this happens.
   //
-  if (future_pos == curr_at) {
-    return false;
-  }
+  if (future_pos == curr_at) { return false; }
 
   //
   // If adjacent, try to move there. There may be no path because perhaps a monster just moved but now we can
@@ -720,9 +650,7 @@ void Thing::path_shorten(std::vector< point > &path)
   }
 
   if (path.size()) {
-    if (path[ 0 ] == curr_at) {
-      path.erase(path.begin());
-    }
+    if (path[ 0 ] == curr_at) { path.erase(path.begin()); }
   }
 
   for (; /*ever*/;) {
@@ -730,9 +658,7 @@ void Thing::path_shorten(std::vector< point > &path)
     size_t i        = 0;
 
     for (; /*ever*/;) {
-      if (i + 2 >= path.size()) {
-        break;
-      }
+      if (i + 2 >= path.size()) { break; }
 
       auto p  = path[ i ];
       auto px = p.x;
@@ -797,8 +723,6 @@ void Thing::path_shorten(std::vector< point > &path)
       i++;
     }
 
-    if (! modified) {
-      break;
-    }
+    if (! modified) { break; }
   }
 }

@@ -18,9 +18,7 @@ PyObject *con_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (a) {
-    con(a);
-  }
+  if (a) { con(a); }
 
   Py_RETURN_TRUE;
 }
@@ -35,9 +33,7 @@ PyObject *topcon_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (a) {
-    topcon(a);
-  }
+  if (a) { topcon(a); }
 
   Py_RETURN_TRUE;
 }
@@ -69,9 +65,7 @@ PyObject *log_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (a) {
-    LOG("%s", a);
-  }
+  if (a) { LOG("%s", a); }
 
   Py_RETURN_TRUE;
 }
@@ -86,9 +80,7 @@ PyObject *err_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (a) {
-    ERR("%s", a);
-  }
+  if (a) { ERR("%s", a); }
 
   Py_RETURN_TRUE;
 }
@@ -103,9 +95,7 @@ PyObject *die_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (a) {
-    ERR("%s", a);
-  }
+  if (a) { ERR("%s", a); }
 
   Py_RETURN_TRUE;
 }
@@ -114,14 +104,10 @@ void py_err(void)
 {
   TRACE_AND_INDENT();
 
-  if (! my_mod) {
-    return;
-  }
+  if (! my_mod) { return; }
 
   PyObject *err = PyErr_Occurred();
-  if (! err) {
-    return;
-  }
+  if (! err) { return; }
 
   PyObject *ptype, *pvalue, *pbacktrace, *pyobj_str;
   PyObject *ret, *list, *string;

@@ -8,14 +8,10 @@
 void Level::display_pixelart_blood(void)
 {
   TRACE_NO_INDENT();
-  if (! player) {
-    return;
-  }
+  if (! player) { return; }
 
   float pct = player->health_pct();
-  if (pct > THING_HEALTH_BLOODIED_PCT1) {
-    return;
-  }
+  if (pct > THING_HEALTH_BLOODIED_PCT1) { return; }
 
   static int   up    = 8;
   static int   down  = -16;
@@ -27,9 +23,7 @@ void Level::display_pixelart_blood(void)
   static auto  t = "blood_0";
 
   static uint32_t last_pulse_when;
-  if (! last_pulse_when) {
-    last_pulse_when = time_ms_cached();
-  }
+  if (! last_pulse_when) { last_pulse_when = time_ms_cached(); }
 
   if ((time_ms_cached() - last_pulse_when) > (unsigned int) 100) {
     last_pulse_when = time_ms_cached();

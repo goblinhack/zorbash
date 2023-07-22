@@ -40,9 +40,7 @@ Thingp Level::cursor_thing_new(point p)
 
 void Thing::cursor_hover_over_check(void)
 {
-  if (! is_blitted) {
-    return;
-  }
+  if (! is_blitted) { return; }
 
   auto mx = sdl.mouse_x;
   auto my = sdl.mouse_y;
@@ -67,9 +65,7 @@ void Thing::cursor_hover_over_check(void)
   // Are we hovering over the last blit position of this thing?
   //
   if (mouse_is_over_this_thing) {
-    if (is_mouse_over_rightbar()) {
-      return;
-    }
+    if (is_mouse_over_rightbar()) { return; }
 
     if (level->cursor_at != curr_at) {
       level->cursor_at = curr_at;

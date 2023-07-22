@@ -15,9 +15,7 @@ int Thing::stat_att_total()
 
   stat = stat_att();
   prev = stat;
-  if (stat) {
-    dbg("Att: %d", stat);
-  }
+  if (stat) { dbg("Att: %d", stat); }
 
   stat += stat_att_bonus();
   if (stat != prev) {
@@ -29,9 +27,7 @@ int Thing::stat_att_total()
   // Auto rage; the player does this via a skill
   //
   if (is_able_to_rage()) {
-    if (is_raging()) {
-      stat += 2;
-    }
+    if (is_raging()) { stat += 2; }
   }
 
   //
@@ -66,16 +62,12 @@ int Thing::stat_att_total()
         //
         // Don't count boots for example twice
         //
-        if (is_equipped(iter)) {
-          continue;
-        }
+        if (is_equipped(iter)) { continue; }
         //
         // Things that are equipped must be equipped to get the benefit.
         // Other items give the benefit by just being carried.
         //
-        if (iter->is_auto_equipped()) {
-          continue;
-        }
+        if (iter->is_auto_equipped()) { continue; }
         stat += iter->stat_att_bonus();
         if (stat != prev) {
           prev = stat;
@@ -210,15 +202,9 @@ int Thing::stat_att_penalties_total(void)
     if (level->is_deep_water(curr_at)) {
       int p = stat_att_penalty_when_in_deep_water();
       if (p) {
-        if (is_able_to_swim()) {
-          p /= 2;
-        }
-        if (is_heavy()) {
-          p *= 2;
-        }
-        if (is_stone()) {
-          p *= 2;
-        }
+        if (is_able_to_swim()) { p /= 2; }
+        if (is_heavy()) { p *= 2; }
+        if (is_stone()) { p *= 2; }
         penalty += p;
         if (penalty != prev) {
           prev = penalty;
@@ -228,9 +214,7 @@ int Thing::stat_att_penalties_total(void)
     } else if (level->is_shallow_water(curr_at)) {
       int p = stat_att_penalty_when_in_shallow_water();
       if (p) {
-        if (is_able_to_swim()) {
-          p /= 2;
-        }
+        if (is_able_to_swim()) { p /= 2; }
         penalty += p;
         if (penalty != prev) {
           prev = penalty;
@@ -240,27 +224,21 @@ int Thing::stat_att_penalties_total(void)
     }
   }
 
-  if (penalty) {
-    dbg("Att penalty: %d", penalty);
-  }
+  if (penalty) { dbg("Att penalty: %d", penalty); }
   return penalty;
 }
 
 int Thing::stat_att(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->stat_att);
-  }
+  if (maybe_infop()) { return (infop()->stat_att); }
   return 0;
 }
 
 int Thing::stat_att_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->stat_att = v);
   return n;
@@ -269,9 +247,7 @@ int Thing::stat_att_set(int v)
 int Thing::stat_att_decr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->stat_att -= v);
   return n;
@@ -280,9 +256,7 @@ int Thing::stat_att_decr(int v)
 int Thing::stat_att_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->stat_att += v);
   return n;
@@ -291,9 +265,7 @@ int Thing::stat_att_incr(int v)
 int Thing::stat_att_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->stat_att--);
   return n;
@@ -302,9 +274,7 @@ int Thing::stat_att_decr(void)
 int Thing::stat_att_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->stat_att++);
   return n;
@@ -316,18 +286,14 @@ int Thing::stat_att_incr(void)
 int Thing::stat_att_bonus(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->stat_att_bonus);
-  }
+  if (maybe_infop()) { return (infop()->stat_att_bonus); }
   return 0;
 }
 
 int Thing::stat_att_bonus_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->stat_att_bonus = v);
   return n;
@@ -336,9 +302,7 @@ int Thing::stat_att_bonus_set(int v)
 int Thing::stat_att_bonus_decr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->stat_att_bonus -= v);
   return n;
@@ -347,9 +311,7 @@ int Thing::stat_att_bonus_decr(int v)
 int Thing::stat_att_bonus_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->stat_att_bonus += v);
   return n;
@@ -358,9 +320,7 @@ int Thing::stat_att_bonus_incr(int v)
 int Thing::stat_att_bonus_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->stat_att_bonus--);
   return n;
@@ -369,9 +329,7 @@ int Thing::stat_att_bonus_decr(void)
 int Thing::stat_att_bonus_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->stat_att_bonus++);
   return n;

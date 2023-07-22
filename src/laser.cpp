@@ -56,9 +56,7 @@ Laser_::Laser_(Levelp level, ThingId thing_id, ThingId victim_id, LaserInfo info
   //
   auto laser_tp = tp_find(name);
   if (laser_tp) {
-    if (! laser_tp->gfx_targeted_laser().empty()) {
-      name = laser_tp->gfx_targeted_laser();
-    }
+    if (! laser_tp->gfx_targeted_laser().empty()) { name = laser_tp->gfx_targeted_laser(); }
   }
 
   for (int frame = 0; frame < max_frames; frame++) {
@@ -112,9 +110,7 @@ void Level::display_lasers(point tl, point br)
   all_lasers.insert(std::end(all_lasers), std::begin(new_lasers), std::end(new_lasers));
   new_lasers.clear();
 
-  if (all_lasers.empty()) {
-    return;
-  }
+  if (all_lasers.empty()) { return; }
 
   if (g_opt_ascii) {
     display_ascii_lasers(tl, br);

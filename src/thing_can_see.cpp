@@ -23,9 +23,7 @@ void Thing::can_see_you(point p)
     //
     // See invisible things?
     //
-    if (! can_detect(t)) {
-      continue;
-    }
+    if (! can_detect(t)) { continue; }
 
     //
     // Allow a chance to see secret doors
@@ -33,9 +31,7 @@ void Thing::can_see_you(point p)
     if (is_player()) {
       if (t->is_secret_door() && ! t->discovered() && (t->tick_last_seen_by_player() < game->tick_current)) {
         if (d20_ge(stat_thv_total(), SAVING_ROLL_HARD)) {
-          if (d100() < 10 + (stat_thv_bonus() * 10)) {
-            discovered_set(t, true);
-          }
+          if (d100() < 10 + (stat_thv_bonus() * 10)) { discovered_set(t, true); }
         }
       }
 
@@ -69,9 +65,7 @@ void Thing::can_see_you(point p)
               FOR_ALL_EQUIP(e)
               {
                 auto item = t->equip_get(e);
-                if (! item) {
-                  continue;
-                }
+                if (! item) { continue; }
                 if (item->is_ring() || item->is_helmet() || item->is_amulet()) {
                   msg("%s was wearing %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
                 }
@@ -108,9 +102,7 @@ void Thing::can_see_you(point p)
               FOR_ALL_EQUIP(e)
               {
                 auto item = t->equip_get(e);
-                if (! item) {
-                  continue;
-                }
+                if (! item) { continue; }
                 if (item->is_ring() || item->is_helmet() || item->is_amulet()) {
                   msg("%s is wearing %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
                 }
@@ -136,9 +128,7 @@ void Thing::can_see_you(point p)
           if (t->is_bloodied()) {
             if (! t->is_wounded_msg) {
               t->is_wounded_msg = true;
-              if (t->is_msg_allowed_is_wounded()) {
-                msg("%s is wounded.", t->text_The().c_str());
-              }
+              if (t->is_msg_allowed_is_wounded()) { msg("%s is wounded.", t->text_The().c_str()); }
             }
           }
         }
@@ -169,15 +159,9 @@ bool Level::can_see_point_or_nearby(point p, int dist)
   for (auto dx = -dist; dx <= dist; dx++) {
     for (auto dy = -dist; dy <= dist; dy++) {
       point o(p.x + dx, p.y + dy);
-      if (is_oob(o)) {
-        continue;
-      }
-      if (get(can_see_ever.can_see, o.x, o.y)) {
-        return true;
-      }
-      if (get(can_see_currently.can_see, o.x, o.y)) {
-        return true;
-      }
+      if (is_oob(o)) { continue; }
+      if (get(can_see_ever.can_see, o.x, o.y)) { return true; }
+      if (get(can_see_currently.can_see, o.x, o.y)) { return true; }
     }
   }
   return false;

@@ -9,25 +9,17 @@
 
 void Thing::lunge(point to)
 {
-  if (is_sleeping) {
-    return;
-  }
+  if (is_sleeping) { return; }
 
-  if (is_frozen || is_burnt || is_dead) {
-    return;
-  }
+  if (is_frozen || is_burnt || is_dead) { return; }
 
-  if (! is_able_to_lunge()) {
-    return;
-  }
+  if (! is_able_to_lunge()) { return; }
 
   //
   // Already lunging? This can happen when swinging a weapon that hits in multiple
   // directions. Don't make the player dizzy and focus on the intial lunge.
   //
-  if (ts_lunge_begin()) {
-    return;
-  }
+  if (ts_lunge_begin()) { return; }
 
   dbg("Lunge to %d,%d", to.x, to.y);
   TRACE_AND_INDENT();
@@ -39,9 +31,7 @@ void Thing::lunge(point to)
   //
   FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_OBJ)
   {
-    if (t == this) {
-      continue;
-    }
+    if (t == this) { continue; }
     if (t->is_block_of_ice()) {
       dbg("No lunging when stuck in ice");
       return;
@@ -62,9 +52,7 @@ void Thing::lunge(point to)
 
 float Thing::lunge_curr(void)
 {
-  if (! ts_lunge_begin()) {
-    return 0;
-  }
+  if (! ts_lunge_begin()) { return 0; }
 
   auto t = time_ms_cached();
 
@@ -76,9 +64,7 @@ float Thing::lunge_curr(void)
 
   float time_step = ((float) (t) -ts_lunge_begin()) / ((float) (ts_lunge_end()) - ts_lunge_begin());
 
-  if (time_step > 0.5) {
-    return (1.0 - time_step);
-  }
+  if (time_step > 0.5) { return (1.0 - time_step); }
   return time_step;
 }
 
@@ -88,9 +74,7 @@ float Thing::lunge_curr(void)
 ts_t Thing::ts_lunge_begin(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->ts_lunge_begin);
-  }
+  if (maybe_infop()) { return (infop()->ts_lunge_begin); }
   return 0;
 }
 
@@ -135,9 +119,7 @@ ts_t Thing::ts_lunge_begin_incr(void)
 ts_t Thing::ts_lunge_end(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->ts_lunge_end);
-  }
+  if (maybe_infop()) { return (infop()->ts_lunge_end); }
   return 0;
 }
 
@@ -188,9 +170,7 @@ int Thing::is_able_to_lunge(void)
 point Thing::lunge_to_get(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->lunge_to);
-  }
+  if (maybe_infop()) { return (infop()->lunge_to); }
   return (point(0, 0));
 }
 

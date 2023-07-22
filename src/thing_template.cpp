@@ -21,9 +21,7 @@ Tpp tp_find(const std::string &name)
 
   auto result = tp_name_map.find(name);
 
-  if (unlikely(result != tp_name_map.end())) {
-    return (result->second);
-  }
+  if (unlikely(result != tp_name_map.end())) { return (result->second); }
 
   return nullptr;
 }
@@ -309,9 +307,7 @@ std::vector< Tpp > tp_find_wildcard(const std::string &name)
   // Try matching patterns e.g. is_monst_class_B
   //
   for (auto &tp : tp_id_map) {
-    if (tp->matches(name)) {
-      out.push_back(tp);
-    }
+    if (tp->matches(name)) { out.push_back(tp); }
   }
 
   return out;
@@ -358,9 +354,7 @@ Tpp tp_find(uint32_t id)
 {
   TRACE_NO_INDENT();
   auto result = get(tp_id_map, id - 1);
-  if (! result) {
-    ERR("Thing template %" PRIX32 " not found", id);
-  }
+  if (! result) { ERR("Thing template %" PRIX32 " not found", id); }
 
   return result;
 }
@@ -380,9 +374,7 @@ uint8_t tp_init(void)
 void tp_fini(void)
 {
   TRACE_NO_INDENT();
-  if (tp_init_done) {
-    tp_init_done = false;
-  }
+  if (tp_init_done) { tp_init_done = false; }
   for (auto &tp : tp_name_map) {
     delete tp.second;
   }
@@ -391,9 +383,7 @@ void tp_fini(void)
 Tpp tp_load(int id, std::string const &name, const std::string &text_long_name, const std::string &text_short_name)
 {
   TRACE_NO_INDENT();
-  if (tp_find(name)) {
-    ERR("Thing template name [%s] already loaded", name.c_str());
-  }
+  if (tp_find(name)) { ERR("Thing template name [%s] already loaded", name.c_str()); }
 
   auto tp = new Tp();
   tp->name_set(name);
@@ -401,9 +391,7 @@ Tpp tp_load(int id, std::string const &name, const std::string &text_long_name, 
   tp->text_short_name_set(text_short_name);
 
   auto result = tp_name_map.insert(std::make_pair(name, tp));
-  if (! result.second) {
-    ERR("Thing insert name [%s] failed", name.c_str());
-  }
+  if (! result.second) { ERR("Thing insert name [%s] failed", name.c_str()); }
 
   tp_id_map.push_back(tp);
   tp->id = tp_id_map.size();
@@ -416,9 +404,7 @@ Tilep tp_first_tile(Tpp tp)
   TRACE_NO_INDENT();
   auto tiles = &tp->tiles;
 
-  if (! tiles || tiles->empty()) {
-    ERR("Tp %s has no tiles", tp->name().c_str());
-  }
+  if (! tiles || tiles->empty()) { ERR("Tp %s has no tiles", tp->name().c_str()); }
 
   //
   // Get the first anim tile.

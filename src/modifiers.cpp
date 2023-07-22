@@ -68,12 +68,8 @@
 int stat_to_bonus(int stat)
 {
   int bonus = (stat - 10) / 2;
-  if (bonus < -20) {
-    return -20;
-  }
-  if (bonus > 20) {
-    return 20;
-  }
+  if (bonus < -20) { return -20; }
+  if (bonus > 20) { return 20; }
 
 #if 0
   //

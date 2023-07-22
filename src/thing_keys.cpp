@@ -8,18 +8,14 @@
 int Thing::keys(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->keys);
-  }
+  if (maybe_infop()) { return (infop()->keys); }
   return 0;
 }
 
 int Thing::keys_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->keys = v);
   return n;
@@ -28,23 +24,17 @@ int Thing::keys_set(int v)
 int Thing::keys_decr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->keys -= v);
-  if (infop()->keys < 0) {
-    infop()->keys = 0;
-  }
+  if (infop()->keys < 0) { infop()->keys = 0; }
   return n;
 }
 
 int Thing::keys_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->keys += v);
   return n;
@@ -53,23 +43,17 @@ int Thing::keys_incr(int v)
 int Thing::keys_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->keys--);
-  if (infop()->keys < 0) {
-    infop()->keys = 0;
-  }
+  if (infop()->keys < 0) { infop()->keys = 0; }
   return n;
 }
 
 int Thing::keys_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->keys++);
   return n;

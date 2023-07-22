@@ -16,22 +16,16 @@ std::vector< std::string > Thing::on_get_text_description_long(void)
   std::vector< std::string > out;
 
   auto on_get_text_description_long = tp()->on_get_text_description_long_do();
-  if (std::empty(on_get_text_description_long)) {
-    return out;
-  }
+  if (std::empty(on_get_text_description_long)) { return out; }
 
   auto t = split_tokens(on_get_text_description_long, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) {
-      fn = fn.replace(found, 2, "");
-    }
+    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
 
-    if (mod == "me") {
-      mod = name();
-    }
+    if (mod == "me") { mod = name(); }
 
     auto owner = top_owner();
     dbg("Call %s.%s(owner=%s, item=%s, %d, %d)", mod.c_str(), fn.c_str(),
@@ -63,9 +57,7 @@ const std::string Thing::text_description_long(void)
   auto override_description = on_get_text_description_long_do();
   if (! std::empty(override_description)) {
     auto d = on_get_text_description_long();
-    if (d.size()) {
-      return d[ 0 ];
-    }
+    if (d.size()) { return d[ 0 ]; }
   }
 
   return (tp()->text_description_long());

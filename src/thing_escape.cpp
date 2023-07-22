@@ -12,16 +12,12 @@ bool Thing::try_to_escape(void)
     auto health_max_val = health_max();
     auto health_val     = health();
 
-    if (health_val > health_max_val / 2) {
-      return false;
-    }
+    if (health_val > health_max_val / 2) { return false; }
 
     //
     // Don't try and escape too often else the player can never kill the monst!
     //
-    if (game->tick_current - tick_last_escape() < 20) {
-      return false;
-    }
+    if (game->tick_current - tick_last_escape() < 20) { return false; }
 
     if (d1000() < tp()->chance_d1000_jump_on_low_hp()) {
       if (try_to_jump_away_from_player()) {
@@ -79,15 +75,11 @@ bool Thing::ai_escape(void)
   }
 
   auto tries = THING_AI_ESCAPE_ATTEMPTS;
-  if (game->tick_current_is_too_slow || game->prev_tick_was_too_slow) {
-    tries = 1;
-  }
+  if (game->tick_current_is_too_slow || game->prev_tick_was_too_slow) { tries = 1; }
   while (tries-- > 0) {
     point nh;
     if (ai_choose_wander(nh)) {
-      if (move_to_or_attack(nh)) {
-        return true;
-      }
+      if (move_to_or_attack(nh)) { return true; }
 
       //
       // Set this so next time we will choose another target

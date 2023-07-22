@@ -12,13 +12,9 @@ void Thing::visible(const std::string &reason)
   TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
 
-  if (! is_hidden) {
-    return;
-  }
+  if (! is_hidden) { return; }
 
-  if (is_loggable()) {
-    dbg("Visible: %s", reason.c_str());
-  }
+  if (is_loggable()) { dbg("Visible: %s", reason.c_str()); }
 
   //
   // If this thing has an owner, should the thing stay hidden?
@@ -47,16 +43,12 @@ void Thing::visible(const std::string &reason)
   {
     if (equip_id_carry_anim(iter).ok()) {
       auto it = level->thing_find(equip_id_carry_anim(iter));
-      if (it) {
-        it->visible(reason);
-      }
+      if (it) { it->visible(reason); }
     }
 
     if (equip_id_use_anim(iter).ok()) {
       auto it = level->thing_find(equip_id_use_anim(iter));
-      if (it) {
-        it->visible(reason);
-      }
+      if (it) { it->visible(reason); }
     }
   }
 
@@ -64,9 +56,7 @@ void Thing::visible(const std::string &reason)
   {
     if (bodypart_id_get(iter).ok()) {
       auto it = level->thing_find(bodypart_id_get(iter));
-      if (it) {
-        it->visible(reason);
-      }
+      if (it) { it->visible(reason); }
     }
   }
 
@@ -74,9 +64,7 @@ void Thing::visible(const std::string &reason)
   if (on_fire_id.ok()) {
     TRACE_NO_INDENT();
     auto it = level->thing_find(on_fire_id);
-    if (it) {
-      it->visible(reason);
-    }
+    if (it) { it->visible(reason); }
   }
 
   move_finish();

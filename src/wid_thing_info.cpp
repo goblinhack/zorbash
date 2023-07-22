@@ -52,13 +52,9 @@ static void wid_thing_info_placement(point &tl, point &br, int height)
   int offset = 8;
 
   int x = ascii_mouse_x - UI_THING_INFO_WIDTH - offset;
-  if (x < 0) {
-    x = ascii_mouse_x + offset;
-  }
+  if (x < 0) { x = ascii_mouse_x + offset; }
 
-  if (ascii_mouse_x > TERM_WIDTH - UI_RIGHTBAR_WIDTH) {
-    x = UI_LEFTBAR_WIDTH + 1;
-  }
+  if (ascii_mouse_x > TERM_WIDTH - UI_RIGHTBAR_WIDTH) { x = UI_LEFTBAR_WIDTH + 1; }
 
   tl = make_point(x, TERM_HEIGHT - 2 - height);
   br = make_point(tl.x + UI_THING_INFO_WIDTH, TERM_HEIGHT - 2);
@@ -275,9 +271,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     wid_thing_info_add_move_speed(wid_popup_window, t);
     wid_thing_info_add_shove_strength(wid_popup_window, t);
     wid_thing_info_add_jump_distance(wid_popup_window, t);
-    if (t->is_alive_monst()) {
-      wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
-    }
+    if (t->is_alive_monst()) { wid_popup_window->log(UI_LOGGING_EMPTY_LINE); }
     wid_thing_info_add_charge_count(wid_popup_window, t);
     wid_thing_info_add_danger_level(wid_popup_window, t);
   }
@@ -322,9 +316,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
   }
 
   auto level = game->level;
-  if (! level) {
-    return nullptr;
-  }
+  if (! level) { return nullptr; }
 
   if (! level->should_display_map()) {
     ERR("Trying to display thing info when the map is not being displayed");
@@ -332,13 +324,9 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
   }
 
   auto player = level->player;
-  if (! player) {
-    return nullptr;
-  }
+  if (! player) { return nullptr; }
 
-  if (! player->player_is_ready_for_popups()) {
-    return nullptr;
-  }
+  if (! player->player_is_ready_for_popups()) { return nullptr; }
 
   //
   // If the mouse is too far to the left then do not obscure the map with the thing info
@@ -359,9 +347,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     auto name = t->text_long_and_state_capitalised();
     snprintf(tmp, sizeof(tmp) - 2, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$%-28s", name.c_str());
     for (auto c = tmp; c < tmp + sizeof(tmp); c++) {
-      if (*c == ' ') {
-        *c = '`';
-      }
+      if (*c == ' ') { *c = '`'; }
     }
     wid_popup_window->log(tmp);
 
@@ -452,9 +438,7 @@ bool Game::wid_thing_info_push_popup(Thingp t)
 void Game::wid_thing_info_clear_popup(void)
 {
   TRACE_AND_INDENT();
-  if (wid_thing_info_window.empty()) {
-    return;
-  }
+  if (wid_thing_info_window.empty()) { return; }
 
   BOTCON(" ");
 
@@ -510,16 +494,12 @@ bool Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
   }
 
   static bool recursion;
-  if (recursion) {
-    DIE("Recursion");
-  }
+  if (recursion) { DIE("Recursion"); }
   recursion = true;
   TRACE_AND_INDENT();
   IF_DEBUG1 { t->log("Yes; create window"); }
 
-  if (! game->in_transit_item) {
-    wid_thing_info_push_popup(t);
-  }
+  if (! game->in_transit_item) { wid_thing_info_push_popup(t); }
 
   //
   // Prefer to show the thing we are moving
@@ -527,9 +507,7 @@ bool Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
   if (game->in_transit_item) {
     auto id = wid_get_thing_id_context(game->in_transit_item, 0);
     auto o  = game->thing_find(id);
-    if (o) {
-      wid_thing_info_push_popup(o);
-    }
+    if (o) { wid_thing_info_push_popup(o); }
   }
 
   recursion = false;
@@ -594,9 +572,7 @@ bool Game::wid_thing_info_create_list(std::vector< Thingp > &ts)
       // If multiple things are shown at this location, try and show them all.
       //
       for (auto t : ts) {
-        if (t->is_floor() || t->is_corridor()) {
-          continue;
-        }
+        if (t->is_floor() || t->is_corridor()) { continue; }
         description += t->text_short_and_state_capitalised(UI_LEFTBAR_WIDTH);
         description += ".`"; // Why does space not work ?
       }
@@ -638,9 +614,7 @@ bool Game::wid_thing_info_create_list(std::vector< Thingp > &ts)
   //
   std::vector< Thingp > ts_new;
   for (auto t : ts) {
-    if (! t->text_description_long().empty()) {
-      ts_new.push_back(t);
-    }
+    if (! t->text_description_long().empty()) { ts_new.push_back(t); }
   }
   ts = ts_new;
 
@@ -648,26 +622,20 @@ bool Game::wid_thing_info_create_list(std::vector< Thingp > &ts)
   request_destroy_thing_info = 0;
 
   static bool recursion;
-  if (recursion) {
-    DIE("Recursion");
-  }
+  if (recursion) { DIE("Recursion"); }
   recursion = true;
 
   //
   // If too many items, use a compressed form
   //
   bool compact = false;
-  if (ts.size() > 2) {
-    compact = true;
-  }
+  if (ts.size() > 2) { compact = true; }
 
   bool ok = false;
 
   if (! compact) {
     for (auto t : ts) {
-      if (t->text_description_long().empty()) {
-        continue;
-      }
+      if (t->text_description_long().empty()) { continue; }
 
       IF_DEBUG2
       {
@@ -756,9 +724,7 @@ void Game::wid_thing_info_add_nutrition(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
-  if (! game->level->player) {
-    return;
-  }
+  if (! game->level->player) { return; }
 
   if (game->level->player->can_eat(t)) {
     auto nutrition_dice = t->nutrition_dice();
@@ -863,9 +829,7 @@ void Game::wid_thing_info_add_dmg_melee(WidPopup *w, Thingp t)
     //
     // Don't display for dead monsters
     //
-    if (t->is_dead) {
-      return;
-    }
+    if (t->is_dead) { return; }
 
     Thingp curr_weapon = t->equip_get(MONST_EQUIP_WEAPON);
 
@@ -920,18 +884,14 @@ void Game::wid_thing_info_add_dmg_poison(WidPopup *w, Thingp t, int attack_index
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (! tp->dmg_chance_d1000_poison(attack_index)) {
-    return;
-  }
+  if (! tp->dmg_chance_d1000_poison(attack_index)) { return; }
 
   if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
       || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
-    if (t->is_dead) {
-      return;
-    }
+    if (t->is_dead) { return; }
 
     auto dmg_poison_dice = t->dmg_poison_dice();
     auto min_value       = dmg_poison_dice.min_roll();
@@ -968,18 +928,14 @@ void Game::wid_thing_info_add_dmg_drown(WidPopup *w, Thingp t, int attack_index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (! tp->dmg_chance_d1000_drown(attack_index)) {
-    return;
-  }
+  if (! tp->dmg_chance_d1000_drown(attack_index)) { return; }
 
   if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
       || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
-    if (t->is_dead) {
-      return;
-    }
+    if (t->is_dead) { return; }
 
     auto dmg_drown_dice = t->dmg_drown_dice();
     auto min_value      = dmg_drown_dice.min_roll();
@@ -1016,18 +972,14 @@ void Game::wid_thing_info_add_dmg_bite(WidPopup *w, Thingp t, int attack_index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (! tp->dmg_chance_d1000_bite(attack_index)) {
-    return;
-  }
+  if (! tp->dmg_chance_d1000_bite(attack_index)) { return; }
 
   if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
       || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
-    if (t->is_dead) {
-      return;
-    }
+    if (t->is_dead) { return; }
 
     auto dmg_bite_dice = t->dmg_bite_dice();
     auto min_value     = dmg_bite_dice.min_roll();
@@ -1064,18 +1016,14 @@ void Game::wid_thing_info_add_dmg_claw(WidPopup *w, Thingp t, int attack_index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (! tp->dmg_chance_d1000_claw(attack_index)) {
-    return;
-  }
+  if (! tp->dmg_chance_d1000_claw(attack_index)) { return; }
 
   if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
       || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
-    if (t->is_dead) {
-      return;
-    }
+    if (t->is_dead) { return; }
 
     auto dmg_claw_dice = t->dmg_claw_dice();
     auto min_value     = dmg_claw_dice.min_roll();
@@ -1112,18 +1060,14 @@ void Game::wid_thing_info_add_dmg_cold(WidPopup *w, Thingp t, int attack_index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (! tp->dmg_chance_d1000_cold(attack_index)) {
-    return;
-  }
+  if (! tp->dmg_chance_d1000_cold(attack_index)) { return; }
 
   if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
       || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
-    if (t->is_dead) {
-      return;
-    }
+    if (t->is_dead) { return; }
 
     auto dmg_cold_dice = t->dmg_cold_dice();
     auto min_value     = dmg_cold_dice.min_roll();
@@ -1160,18 +1104,14 @@ void Game::wid_thing_info_add_dmg_fire(WidPopup *w, Thingp t, int attack_index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (! tp->dmg_chance_d1000_fire(attack_index)) {
-    return;
-  }
+  if (! tp->dmg_chance_d1000_fire(attack_index)) { return; }
 
   if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
       || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
-    if (t->is_dead) {
-      return;
-    }
+    if (t->is_dead) { return; }
 
     auto dmg_fire_dice = t->dmg_fire_dice();
     auto min_value     = dmg_fire_dice.min_roll();
@@ -1208,18 +1148,14 @@ void Game::wid_thing_info_add_dmg_heat(WidPopup *w, Thingp t, int attack_index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (! tp->dmg_chance_d1000_heat(attack_index)) {
-    return;
-  }
+  if (! tp->dmg_chance_d1000_heat(attack_index)) { return; }
 
   if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
       || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
-    if (t->is_dead) {
-      return;
-    }
+    if (t->is_dead) { return; }
 
     auto dmg_heat_dice = t->dmg_heat_dice();
     auto min_value     = dmg_heat_dice.min_roll();
@@ -1256,18 +1192,14 @@ void Game::wid_thing_info_add_dmg_crush(WidPopup *w, Thingp t, int attack_index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (! tp->dmg_chance_d1000_crush(attack_index)) {
-    return;
-  }
+  if (! tp->dmg_chance_d1000_crush(attack_index)) { return; }
 
   if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
       || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
-    if (t->is_dead) {
-      return;
-    }
+    if (t->is_dead) { return; }
 
     auto dmg_crush_dice = t->dmg_crush_dice();
     auto min_value      = dmg_crush_dice.min_roll();
@@ -1304,18 +1236,14 @@ void Game::wid_thing_info_add_dmg_missile(WidPopup *w, Thingp t, int attack_inde
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (! tp->dmg_chance_d1000_missile(attack_index)) {
-    return;
-  }
+  if (! tp->dmg_chance_d1000_missile(attack_index)) { return; }
 
   if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
       || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
-    if (t->is_dead) {
-      return;
-    }
+    if (t->is_dead) { return; }
 
     auto dmg_missile_dice = t->dmg_missile_dice();
     auto min_value        = dmg_missile_dice.min_roll();
@@ -1352,18 +1280,14 @@ void Game::wid_thing_info_add_dmg_lightning(WidPopup *w, Thingp t, int attack_in
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (! tp->dmg_chance_d1000_lightning(attack_index)) {
-    return;
-  }
+  if (! tp->dmg_chance_d1000_lightning(attack_index)) { return; }
 
   if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
       || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
-    if (t->is_dead) {
-      return;
-    }
+    if (t->is_dead) { return; }
 
     auto dmg_lightning_dice = t->dmg_lightning_dice();
     auto min_value          = dmg_lightning_dice.min_roll();
@@ -1400,18 +1324,14 @@ void Game::wid_thing_info_add_dmg_energy(WidPopup *w, Thingp t, int attack_index
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (! tp->dmg_chance_d1000_energy(attack_index)) {
-    return;
-  }
+  if (! tp->dmg_chance_d1000_energy(attack_index)) { return; }
 
   if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
       || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
-    if (t->is_dead) {
-      return;
-    }
+    if (t->is_dead) { return; }
 
     auto dmg_energy_dice = t->dmg_energy_dice();
     auto min_value       = dmg_energy_dice.min_roll();
@@ -1448,18 +1368,14 @@ void Game::wid_thing_info_add_dmg_negation(WidPopup *w, Thingp t, int attack_ind
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (! tp->dmg_chance_d1000_negation(attack_index)) {
-    return;
-  }
+  if (! tp->dmg_chance_d1000_negation(attack_index)) { return; }
 
   if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
       || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
-    if (t->is_dead) {
-      return;
-    }
+    if (t->is_dead) { return; }
 
     auto dmg_negation_dice = t->dmg_negation_dice();
     auto min_value         = dmg_negation_dice.min_roll();
@@ -1496,18 +1412,14 @@ void Game::wid_thing_info_add_dmg_acid(WidPopup *w, Thingp t, int attack_index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (! tp->dmg_chance_d1000_acid(attack_index)) {
-    return;
-  }
+  if (! tp->dmg_chance_d1000_acid(attack_index)) { return; }
 
   if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
       || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
-    if (t->is_dead) {
-      return;
-    }
+    if (t->is_dead) { return; }
 
     auto dmg_acid_dice = t->dmg_acid_dice();
     auto min_value     = dmg_acid_dice.min_roll();
@@ -1544,18 +1456,14 @@ void Game::wid_thing_info_add_dmg_nat_att(WidPopup *w, Thingp t, int attack_inde
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (! tp->dmg_chance_d1000_nat_att(attack_index)) {
-    return;
-  }
+  if (! tp->dmg_chance_d1000_nat_att(attack_index)) { return; }
 
   if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
       || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
-    if (t->is_dead) {
-      return;
-    }
+    if (t->is_dead) { return; }
 
     auto dmg_nat_att_dice = t->dmg_nat_att_dice();
     auto min_value        = dmg_nat_att_dice.min_roll();
@@ -1605,18 +1513,14 @@ void Game::wid_thing_info_add_dmg_digest(WidPopup *w, Thingp t, int attack_index
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (! tp->dmg_chance_d1000_digest(attack_index)) {
-    return;
-  }
+  if (! tp->dmg_chance_d1000_digest(attack_index)) { return; }
 
   if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
       || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
-    if (t->is_dead) {
-      return;
-    }
+    if (t->is_dead) { return; }
 
     auto attack_swallow_dice = t->dmg_digest_dice();
     auto min_value           = attack_swallow_dice.min_roll();
@@ -1653,18 +1557,14 @@ void Game::wid_thing_info_add_dmg_necrosis(WidPopup *w, Thingp t, int attack_ind
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (! tp->dmg_chance_d1000_necrosis(attack_index)) {
-    return;
-  }
+  if (! tp->dmg_chance_d1000_necrosis(attack_index)) { return; }
 
   if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
       || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
-    if (t->is_dead) {
-      return;
-    }
+    if (t->is_dead) { return; }
 
     auto attack_swallow_dice = t->dmg_necrosis_dice();
     auto min_value           = attack_swallow_dice.min_roll();
@@ -1701,18 +1601,14 @@ void Game::wid_thing_info_add_dmg_stamina(WidPopup *w, Thingp t, int attack_inde
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (! tp->dmg_chance_d1000_stamina_drain(attack_index)) {
-    return;
-  }
+  if (! tp->dmg_chance_d1000_stamina_drain(attack_index)) { return; }
 
   if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
       || t->is_magical()) {
     //
     // Don't display for dead monsters
     //
-    if (t->is_dead) {
-      return;
-    }
+    if (t->is_dead) { return; }
 
     auto attack_swallow_dice = t->dmg_stamina_dice();
     auto min_value           = attack_swallow_dice.min_roll();
@@ -1752,9 +1648,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
     //
     // Don't display for dead monsters
     //
-    if (t->is_dead) {
-      return;
-    }
+    if (t->is_dead) { return; }
 
     auto def       = t->stat_def();
     auto def_total = t->stat_def_total();
@@ -1786,16 +1680,12 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
           //
           // Don't count boots for example twice
           //
-          if (t->is_equipped(iter)) {
-            continue;
-          }
+          if (t->is_equipped(iter)) { continue; }
           //
           // Things that are equipped must be equipped to get the benefit.
           // Other items give the benefit by just being carried.
           //
-          if (iter->is_auto_equipped()) {
-            continue;
-          }
+          if (iter->is_auto_equipped()) { continue; }
 
           if (iter) {
             char tmp2[ MAXSHORTSTR ];
@@ -1891,12 +1781,8 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
     auto stat = t->stat_def_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense bonus            %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
-    if (t->is_skill()) {
-      w->log("%%fg=pink$(while skill is active)");
-    }
-    if (t->is_spell()) {
-      w->log("%%fg=pink$(while spell is active)");
-    }
+    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
+    if (t->is_spell()) { w->log("%%fg=pink$(while spell is active)"); }
   }
 }
 
@@ -1910,9 +1796,7 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
     //
     // Don't display for dead monsters
     //
-    if (t->is_dead) {
-      return;
-    }
+    if (t->is_dead) { return; }
 
     auto att       = t->stat_att();
     auto att_total = t->stat_att_total();
@@ -1944,16 +1828,12 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
           //
           // Don't count boots for example twice
           //
-          if (t->is_equipped(iter)) {
-            continue;
-          }
+          if (t->is_equipped(iter)) { continue; }
           //
           // Things that are equipped must be equipped to get the benefit.
           // Other items give the benefit by just being carried.
           //
-          if (iter->is_auto_equipped()) {
-            continue;
-          }
+          if (iter->is_auto_equipped()) { continue; }
 
           if (iter) {
             char tmp2[ MAXSHORTSTR ];
@@ -2049,12 +1929,8 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
     auto stat = t->stat_att_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack bonus             %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
-    if (t->is_skill()) {
-      w->log("%%fg=pink$(while skill is active)");
-    }
-    if (t->is_spell()) {
-      w->log("%%fg=pink$(while spell is active)");
-    }
+    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
+    if (t->is_spell()) { w->log("%%fg=pink$(while spell is active)"); }
   }
 }
 
@@ -2095,16 +1971,12 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
           //
           // Don't count boots for example twice
           //
-          if (t->is_equipped(iter)) {
-            continue;
-          }
+          if (t->is_equipped(iter)) { continue; }
           //
           // Things that are equipped must be equipped to get the benefit.
           // Other items give the benefit by just being carried.
           //
-          if (iter->is_auto_equipped()) {
-            continue;
-          }
+          if (iter->is_auto_equipped()) { continue; }
 
           if (iter) {
             char tmp2[ MAXSHORTSTR ];
@@ -2187,12 +2059,8 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
     auto stat = t->stat_str_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength bonus           %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
-    if (t->is_skill()) {
-      w->log("%%fg=pink$(while skill is active)");
-    }
-    if (t->is_spell()) {
-      w->log("%%fg=pink$(while spell is active)");
-    }
+    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
+    if (t->is_spell()) { w->log("%%fg=pink$(while spell is active)"); }
   }
 }
 
@@ -2233,16 +2101,12 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
           //
           // Don't count boots for example twice
           //
-          if (t->is_equipped(iter)) {
-            continue;
-          }
+          if (t->is_equipped(iter)) { continue; }
           //
           // Things that are equipped must be equipped to get the benefit.
           // Other items give the benefit by just being carried.
           //
-          if (iter->is_auto_equipped()) {
-            continue;
-          }
+          if (iter->is_auto_equipped()) { continue; }
 
           if (iter) {
             char tmp2[ MAXSHORTSTR ];
@@ -2321,12 +2185,8 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
     auto stat = t->stat_dex_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity bonus          %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
-    if (t->is_skill()) {
-      w->log("%%fg=pink$(while skill is active)");
-    }
-    if (t->is_spell()) {
-      w->log("%%fg=pink$(while spell is active)");
-    }
+    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
+    if (t->is_spell()) { w->log("%%fg=pink$(while spell is active)"); }
   }
 }
 
@@ -2367,16 +2227,12 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
           //
           // Don't count boots for example twice
           //
-          if (t->is_equipped(iter)) {
-            continue;
-          }
+          if (t->is_equipped(iter)) { continue; }
           //
           // Things that are equipped must be equipped to get the benefit.
           // Other items give the benefit by just being carried.
           //
-          if (iter->is_auto_equipped()) {
-            continue;
-          }
+          if (iter->is_auto_equipped()) { continue; }
 
           if (iter) {
             char tmp2[ MAXSHORTSTR ];
@@ -2455,12 +2311,8 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
     auto stat = t->stat_luck_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Luck bonus               %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
-    if (t->is_skill()) {
-      w->log("%%fg=pink$(while skill is active)");
-    }
-    if (t->is_spell()) {
-      w->log("%%fg=pink$(while spell is active)");
-    }
+    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
+    if (t->is_spell()) { w->log("%%fg=pink$(while spell is active)"); }
   }
 }
 
@@ -2501,16 +2353,12 @@ void Game::wid_thing_info_add_stat_thv(WidPopup *w, Thingp t)
           //
           // Don't count boots for example twice
           //
-          if (t->is_equipped(iter)) {
-            continue;
-          }
+          if (t->is_equipped(iter)) { continue; }
           //
           // Things that are equipped must be equipped to get the benefit.
           // Other items give the benefit by just being carried.
           //
-          if (iter->is_auto_equipped()) {
-            continue;
-          }
+          if (iter->is_auto_equipped()) { continue; }
 
           if (iter) {
             char tmp2[ MAXSHORTSTR ];
@@ -2589,12 +2437,8 @@ void Game::wid_thing_info_add_stat_thv(WidPopup *w, Thingp t)
     auto stat = t->stat_thv_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Thieving bonus           %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
-    if (t->is_skill()) {
-      w->log("%%fg=pink$(while skill is active)");
-    }
-    if (t->is_spell()) {
-      w->log("%%fg=pink$(while spell is active)");
-    }
+    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
+    if (t->is_spell()) { w->log("%%fg=pink$(while spell is active)"); }
   }
 }
 
@@ -2635,16 +2479,12 @@ void Game::wid_thing_info_add_stat_psi(WidPopup *w, Thingp t)
           //
           // Don't count boots for example twice
           //
-          if (t->is_equipped(iter)) {
-            continue;
-          }
+          if (t->is_equipped(iter)) { continue; }
           //
           // Things that are equipped must be equipped to get the benefit.
           // Other items give the benefit by just being carried.
           //
-          if (iter->is_auto_equipped()) {
-            continue;
-          }
+          if (iter->is_auto_equipped()) { continue; }
 
           if (iter) {
             char tmp2[ MAXSHORTSTR ];
@@ -2723,12 +2563,8 @@ void Game::wid_thing_info_add_stat_psi(WidPopup *w, Thingp t)
     auto stat = t->stat_psi_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Psi bonus                %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
-    if (t->is_skill()) {
-      w->log("%%fg=pink$(while skill is active)");
-    }
-    if (t->is_spell()) {
-      w->log("%%fg=pink$(while spell is active)");
-    }
+    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
+    if (t->is_spell()) { w->log("%%fg=pink$(while spell is active)"); }
   }
 }
 
@@ -2769,16 +2605,12 @@ void Game::wid_thing_info_add_stat_int(WidPopup *w, Thingp t)
           //
           // Don't count boots for example twice
           //
-          if (t->is_equipped(iter)) {
-            continue;
-          }
+          if (t->is_equipped(iter)) { continue; }
           //
           // Things that are equipped must be equipped to get the benefit.
           // Other items give the benefit by just being carried.
           //
-          if (iter->is_auto_equipped()) {
-            continue;
-          }
+          if (iter->is_auto_equipped()) { continue; }
 
           if (iter) {
             char tmp2[ MAXSHORTSTR ];
@@ -2857,12 +2689,8 @@ void Game::wid_thing_info_add_stat_int(WidPopup *w, Thingp t)
     auto stat = t->stat_int_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Intel. bonus             %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
-    if (t->is_skill()) {
-      w->log("%%fg=pink$(while skill is active)");
-    }
-    if (t->is_spell()) {
-      w->log("%%fg=pink$(while spell is active)");
-    }
+    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
+    if (t->is_spell()) { w->log("%%fg=pink$(while spell is active)"); }
   }
 }
 
@@ -2903,16 +2731,12 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
           //
           // Don't count boots for example twice
           //
-          if (t->is_equipped(iter)) {
-            continue;
-          }
+          if (t->is_equipped(iter)) { continue; }
           //
           // Things that are equipped must be equipped to get the benefit.
           // Other items give the benefit by just being carried.
           //
-          if (iter->is_auto_equipped()) {
-            continue;
-          }
+          if (iter->is_auto_equipped()) { continue; }
 
           if (iter) {
             char tmp2[ MAXSHORTSTR ];
@@ -2995,12 +2819,8 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
     auto stat = t->stat_con_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution bonus       %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
-    if (t->is_skill()) {
-      w->log("%%fg=pink$(while skill is active)");
-    }
-    if (t->is_spell()) {
-      w->log("%%fg=pink$(while spell is active)");
-    }
+    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
+    if (t->is_spell()) { w->log("%%fg=pink$(while spell is active)"); }
   }
 }
 
@@ -3048,12 +2868,8 @@ void Game::wid_thing_info_add_move_speed(WidPopup *w, Thingp t)
     auto speed = t->move_speed_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Move speed bonus         %4d", speed);
     w->log(tmp);
-    if (t->is_skill()) {
-      w->log("%%fg=pink$(while skill is active)");
-    }
-    if (t->is_spell()) {
-      w->log("%%fg=pink$(while spell is active)");
-    }
+    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
+    if (t->is_spell()) { w->log("%%fg=pink$(while spell is active)"); }
   }
 }
 
@@ -3076,12 +2892,8 @@ void Game::wid_thing_info_add_shove_strength(WidPopup *w, Thingp t)
     auto shove_strength = t->shove_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Shove strength bonus     %4d", shove_strength);
     w->log(tmp);
-    if (t->is_skill()) {
-      w->log("%%fg=pink$(while skill is active)");
-    }
-    if (t->is_spell()) {
-      w->log("%%fg=pink$(while spell is active)");
-    }
+    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
+    if (t->is_spell()) { w->log("%%fg=pink$(while spell is active)"); }
   }
 }
 
@@ -3104,12 +2916,8 @@ void Game::wid_thing_info_add_jump_distance(WidPopup *w, Thingp t)
     auto dist = t->jump_distance_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Jump distance bonus      %4d", dist);
     w->log(tmp);
-    if (t->is_skill()) {
-      w->log("%%fg=pink$(while skill is active)");
-    }
-    if (t->is_spell()) {
-      w->log("%%fg=pink$(while spell is active)");
-    }
+    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
+    if (t->is_spell()) { w->log("%%fg=pink$(while spell is active)"); }
   }
 }
 
@@ -3117,13 +2925,9 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
   auto player = game->level->player;
-  if (! player) {
-    return;
-  }
+  if (! player) { return; }
 
-  if (! t->is_alive_monst()) {
-    return;
-  }
+  if (! t->is_alive_monst()) { return; }
 
   //
   // A possessed being?
@@ -3143,9 +2947,7 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
 
   monst_max_dmg *= t->dmg_num_of_attacks();
 
-  if (t->move_speed()) {
-    monst_max_dmg *= t->move_speed() / player->move_speed();
-  }
+  if (t->move_speed()) { monst_max_dmg *= t->move_speed() / player->move_speed(); }
 
   if (monst_max_dmg != 0) {
     auto monst_defeat_count = player->health() / monst_max_dmg;
@@ -3153,9 +2955,7 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
     //
     // Oh dear. You my friend are toast.
     //
-    if (monst_defeat_count == 0) {
-      monst_defeat_count = 1;
-    }
+    if (monst_defeat_count == 0) { monst_defeat_count = 1; }
 
     if (monst_defeat_count == 1) {
       w->log("%%fg=red$Could defeat you in " + std::to_string(monst_defeat_count) + " hit!");
@@ -3175,9 +2975,7 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
     //
     // Oh dear. The monst is toast.
     //
-    if (player_defeat_count == 0) {
-      player_defeat_count = 1;
-    }
+    if (player_defeat_count == 0) { player_defeat_count = 1; }
 
     if (player_defeat_count == 1) {
       w->log("You could beat it in " + std::to_string(player_defeat_count) + " hit.");
@@ -3198,13 +2996,9 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
   auto player = game->level->player;
-  if (! player) {
-    return;
-  }
+  if (! player) { return; }
 
-  if (! t->maybe_itemsp()) {
-    return;
-  }
+  if (! t->maybe_itemsp()) { return; }
 
   auto items = t->itemsp()->carrying.size();
 
@@ -3288,36 +3082,28 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
 
   if (t->is_monst() && t->environ_hates_water()) {
     if (t->environ_hates_water() > 10) {
-      if (! hates.empty()) {
-        hates += "/";
-      }
+      if (! hates.empty()) { hates += "/"; }
       hates += "water";
     }
   }
 
   if (t->is_monst() && t->environ_hates_acid()) {
     if (t->environ_hates_acid() > 10) {
-      if (! hates.empty()) {
-        hates += "/";
-      }
+      if (! hates.empty()) { hates += "/"; }
       hates += "acid";
     }
   }
 
   if (t->is_monst() && t->environ_hates_cold()) {
     if (t->environ_hates_cold() > 10) {
-      if (! hates.empty()) {
-        hates += "/";
-      }
+      if (! hates.empty()) { hates += "/"; }
       hates += "cold";
     }
   }
 
   if (t->is_monst() && t->environ_hates_fire()) {
     if (t->environ_hates_fire() > 10) {
-      if (! hates.empty()) {
-        hates += "/";
-      }
+      if (! hates.empty()) { hates += "/"; }
       hates += "fire";
     }
   } else if (t->is_able_to_melt()) {
@@ -3430,13 +3216,9 @@ void Game::wid_thing_info_add_charge_count(WidPopup *w, Thingp t)
   char tmp2[ MAXSHORTSTR ];
 
   auto player = game->level->player;
-  if (! player) {
-    return;
-  }
+  if (! player) { return; }
 
-  if (t->is_ring()) {
-    return;
-  }
+  if (t->is_ring()) { return; }
 
   auto tp = t->tp();
   if (tp->charge_count()) {

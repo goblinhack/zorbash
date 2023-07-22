@@ -34,9 +34,7 @@ static uint8_t wid_notice_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   return true;
 }
@@ -44,9 +42,7 @@ static uint8_t wid_notice_key_down(Widp w, const struct SDL_Keysym *key)
 void wid_notice(std::string s)
 {
   TRACE_AND_INDENT();
-  if (wid_notice_window) {
-    wid_notice_destroy();
-  }
+  if (wid_notice_window) { wid_notice_destroy(); }
 
   auto  m  = TERM_WIDTH / 2;
   auto  n  = TERM_HEIGHT / 2;

@@ -13,12 +13,8 @@ Thingp Thing::top_spawner(void)
   auto id = immediate_spawner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
-    if (unlikely(! i)) {
-      return nullptr;
-    }
-    if (unlikely(i->immediate_spawner_id().ok())) {
-      return i->immediate_spawner();
-    }
+    if (unlikely(! i)) { return nullptr; }
+    if (unlikely(i->immediate_spawner_id().ok())) { return i->immediate_spawner(); }
     return i;
   }
   return nullptr;
@@ -30,9 +26,7 @@ Thingp Thing::immediate_spawner(void)
   auto id = immediate_spawner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
-    if (unlikely(! i)) {
-      return nullptr;
-    }
+    if (unlikely(! i)) { return nullptr; }
     return i;
   }
   return nullptr;
@@ -51,9 +45,7 @@ void Thing::spawner_set(Thingp spawner)
 
   auto old_spawner = immediate_spawner();
   if (old_spawner) {
-    if (old_spawner == spawner) {
-      return;
-    }
+    if (old_spawner == spawner) { return; }
 
     dbg("Will change spawner owner %s->%s", old_spawner->to_short_string().c_str(),
         spawner->to_short_string().c_str());
@@ -71,9 +63,7 @@ void Thing::spawner_unset(void)
   TRACE_NO_INDENT();
 
   auto old_spawner = immediate_spawner();
-  if (! old_spawner) {
-    return;
-  }
+  if (! old_spawner) { return; }
 
   dbg("Remove spawner owner %s", old_spawner->to_short_string().c_str());
   spawner_set(NoThingId);
@@ -91,13 +81,9 @@ void Thing::destroy_spawned(Thingp defeater)
   // a new level
   //
 
-  if (! is_able_to_spawn_things()) {
-    return;
-  }
+  if (! is_able_to_spawn_things()) { return; }
 
-  if (! spawned_count()) {
-    return;
-  }
+  if (! spawned_count()) { return; }
 
   //
   // Slow, but not used too often
@@ -107,9 +93,7 @@ void Thing::destroy_spawned(Thingp defeater)
   for (auto p : level->all_things) {
     auto spawner = p.second;
     auto o       = spawner->immediate_spawner();
-    if (o && (o == this)) {
-      things.push_back(spawner);
-    }
+    if (o && (o == this)) { things.push_back(spawner); }
   }
 
   TRACE_NO_INDENT();
@@ -122,13 +106,9 @@ void Thing::destroy_spawned(Thingp defeater)
 void Thing::unleash_spawners_things(void)
 {
   TRACE_NO_INDENT();
-  if (! is_able_to_spawn_things()) {
-    return;
-  }
+  if (! is_able_to_spawn_things()) { return; }
 
-  if (! spawned_count()) {
-    return;
-  }
+  if (! spawned_count()) { return; }
 
   //
   // Slow, but not used too often
@@ -137,9 +117,7 @@ void Thing::unleash_spawners_things(void)
     for (auto p : level->all_things) {
       auto spawner = p.second;
       auto o       = spawner->immediate_spawner();
-      if (o && (o == this)) {
-        spawner->spawner_unset();
-      }
+      if (o && (o == this)) { spawner->spawner_unset(); }
     }
   }
 }
@@ -150,8 +128,6 @@ void Thing::unleash_spawners_things(void)
 int Thing::spawned_count(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (int) infop()->spawned.size();
-  }
+  if (maybe_infop()) { return (int) infop()->spawned.size(); }
   return 0;
 }

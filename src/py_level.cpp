@@ -41,9 +41,7 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
   for (auto n = 0; n < MAP_WIDTH; n++) {
     for (auto y = 0; y < MAP_HEIGHT; y++) {
       auto o = PyList_GetItem(py_level_data, y); /* Can't fail */
-      if (! o) {
-        continue;
-      }
+      if (! o) { continue; }
 
       std::string floor_string;
       std::string floor2_string;
@@ -147,27 +145,13 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
       }
 
       for (auto x = 0; x < MAP_WIDTH; x++) {
-        if (floor_string[ x ] != ' ') {
-          set(l->data, x, y, MAP_DEPTH_FLOOR, floor_string[ x ]);
-        }
-        if (floor2_string[ x ] != ' ') {
-          set(l->data, x, y, MAP_DEPTH_FLOOR2, floor2_string[ x ]);
-        }
-        if (water_string[ x ] != ' ') {
-          set(l->data, x, y, MAP_DEPTH_LIQUID, water_string[ x ]);
-        }
-        if (lava_string[ x ] != ' ') {
-          set(l->data, x, y, MAP_DEPTH_LIQUID, lava_string[ x ]);
-        }
-        if (chasm_string[ x ] != ' ') {
-          set(l->data, x, y, MAP_DEPTH_CHASM, chasm_string[ x ]);
-        }
-        if (walls_string[ x ] != ' ') {
-          set(l->data, x, y, MAP_DEPTH_OBJ, walls_string[ x ]);
-        }
-        if (obj_strings[ x ] != ' ') {
-          set(l->data, x, y, MAP_DEPTH_OBJ, obj_strings[ x ]);
-        }
+        if (floor_string[ x ] != ' ') { set(l->data, x, y, MAP_DEPTH_FLOOR, floor_string[ x ]); }
+        if (floor2_string[ x ] != ' ') { set(l->data, x, y, MAP_DEPTH_FLOOR2, floor2_string[ x ]); }
+        if (water_string[ x ] != ' ') { set(l->data, x, y, MAP_DEPTH_LIQUID, water_string[ x ]); }
+        if (lava_string[ x ] != ' ') { set(l->data, x, y, MAP_DEPTH_LIQUID, lava_string[ x ]); }
+        if (chasm_string[ x ] != ' ') { set(l->data, x, y, MAP_DEPTH_CHASM, chasm_string[ x ]); }
+        if (walls_string[ x ] != ' ') { set(l->data, x, y, MAP_DEPTH_OBJ, walls_string[ x ]); }
+        if (obj_strings[ x ] != ' ') { set(l->data, x, y, MAP_DEPTH_OBJ, obj_strings[ x ]); }
       }
 
       if ((int) floor_string.size() != MAP_WIDTH) {
@@ -247,9 +231,7 @@ PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds)
     //
     // Don't include carried things else lasers will destroy all items carried!
     //
-    if (t->immediate_owner()) {
-      continue;
-    }
+    if (t->immediate_owner()) { continue; }
     items++;
   }
   FOR_ALL_THINGS_END()
@@ -262,9 +244,7 @@ PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds)
     //
     // Don't include carried things else lasers will destroy all items carried!
     //
-    if (t->immediate_owner()) {
-      continue;
-    }
+    if (t->immediate_owner()) { continue; }
     PyList_SetItem(lst, item, Py_BuildValue("I", t->id));
     item++;
   }
@@ -406,9 +386,7 @@ PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywd
 
   auto followers = t->all_followers_get();
 
-  if (followers.empty()) {
-    Py_RETURN_NONE;
-  }
+  if (followers.empty()) { Py_RETURN_NONE; }
 
   auto      items = followers.size();
   PyObject *lst   = PyList_New(items);
@@ -456,15 +434,11 @@ PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywd
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
-    if (t->level->is_oob(x, y)) {                                                                                    \
-      Py_RETURN_FALSE;                                                                                               \
-    }                                                                                                                \
+    if (t->level->is_oob(x, y)) { Py_RETURN_FALSE; }                                                                 \
                                                                                                                      \
     FOR_ALL_NON_INTERNAL_THINGS(t->level, t, x, y)                                                                   \
     {                                                                                                                \
-      if (t->__api__()) {                                                                                            \
-        Py_RETURN_TRUE;                                                                                              \
-      }                                                                                                              \
+      if (t->__api__()) { Py_RETURN_TRUE; }                                                                          \
     }                                                                                                                \
     FOR_ALL_THINGS_END()                                                                                             \
                                                                                                                      \

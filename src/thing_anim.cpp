@@ -19,9 +19,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
   if (is_tmp_thing()) {
     if (game->tick_current_is_too_slow) {
 #ifdef DEBUG_ANIM
-      if (debug || is_debug_type()) {
-        dbg("Animate: too slow, kill tmp thing");
-      }
+      if (debug || is_debug_type()) { dbg("Animate: too slow, kill tmp thing"); }
 #endif
       dead_scheduled("by end of anim; too slow");
       return;
@@ -40,25 +38,19 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
       //
       if (owner->is_dead_or_dying()) {
 #ifdef DEBUG_ANIM
-        if (debug || is_debug_type()) {
-          con("Animate: no owner is sleeping");
-        }
+        if (debug || is_debug_type()) { con("Animate: no owner is sleeping"); }
 #endif
         //
         // Even when dead, the bodyparts needs to fall down.
         //
         if (owner->is_player()) {
-          if (! is_player_bodypart()) {
-            return;
-          }
+          if (! is_player_bodypart()) { return; }
         }
       }
 
       if (owner->is_sleeping) {
 #ifdef DEBUG_ANIM
-        if (debug || is_debug_type()) {
-          con("Animate: no owner is sleeping");
-        }
+        if (debug || is_debug_type()) { con("Animate: no owner is sleeping"); }
 #endif
         return;
       }
@@ -70,9 +62,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
           tile_curr = ntile->global_index;
           dir       = owner->dir;
 #ifdef DEBUG_ANIM
-          if (debug || is_debug_type()) {
-            con("Animate: synced with owner");
-          }
+          if (debug || is_debug_type()) { con("Animate: synced with owner"); }
 #endif
           return;
         }
@@ -82,9 +72,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
 
   if (time_game_ms_cached() <= ts_anim_delay_end()) {
 #ifdef DEBUG_ANIM
-    if (debug || is_debug_type()) {
-      con("Animate: waiting on anim frame");
-    }
+    if (debug || is_debug_type()) { con("Animate: waiting on anim frame"); }
 #endif
     return;
   }
@@ -111,9 +99,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
     //
     if (ts_next_frame > time_game_ms_cached()) {
 #ifdef DEBUG_ANIM
-      if (debug || is_debug_type()) {
-        con("Animate: Same frame");
-      }
+      if (debug || is_debug_type()) { con("Animate: Same frame"); }
 #endif
       return;
     }
@@ -125,47 +111,33 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
       //
       // But need to have the final dead anim even if stuck
       //
-      if (! is_dead_or_dying()) {
-        return;
-      }
+      if (! is_dead_or_dying()) { return; }
     }
 
     //
     // Stop the animation here?
     //
     is_end_of_anim = tile_is_end_of_anim(tile);
-    if (g_opt_ascii) {
-      is_end_of_anim |= tile_is_end_of_ascii_anim(tile);
-    }
+    if (g_opt_ascii) { is_end_of_anim |= tile_is_end_of_ascii_anim(tile); }
 #ifdef DEBUG_ANIM
     if (is_end_of_anim) {
-      if (debug || is_debug_type()) {
-        con("Animation: is end of anim");
-      }
+      if (debug || is_debug_type()) { con("Animation: is end of anim"); }
     }
 #endif
 
     is_dead_on_end_of_anim = tile_is_dead_on_end_of_anim(tile);
-    if (g_opt_ascii) {
-      is_dead_on_end_of_anim |= tile_is_dead_on_end_of_ascii_anim(tile);
-    }
+    if (g_opt_ascii) { is_dead_on_end_of_anim |= tile_is_dead_on_end_of_ascii_anim(tile); }
 #ifdef DEBUG_ANIM
     if (is_dead_on_end_of_anim) {
-      if (debug || is_debug_type()) {
-        con("Animation: is dead on end of anim");
-      }
+      if (debug || is_debug_type()) { con("Animation: is dead on end of anim"); }
     }
 #endif
 
     is_alive_on_end_of_anim = tile_is_alive_on_end_of_anim(tile);
-    if (g_opt_ascii) {
-      is_alive_on_end_of_anim |= tile_is_alive_on_end_of_ascii_anim(tile);
-    }
+    if (g_opt_ascii) { is_alive_on_end_of_anim |= tile_is_alive_on_end_of_ascii_anim(tile); }
 #ifdef DEBUG_ANIM
     if (is_alive_on_end_of_anim) {
-      if (debug || is_debug_type()) {
-        con("Animation: is alive on end of anim");
-      }
+      if (debug || is_debug_type()) { con("Animation: is alive on end of anim"); }
     }
 #endif
 
@@ -174,30 +146,22 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
     //
     if (is_alive_on_end_of_anim) {
 #ifdef DEBUG_ANIM
-      if (debug || is_debug_type()) {
-        con("Animate: continue to allow alive on end of anim");
-      }
+      if (debug || is_debug_type()) { con("Animate: continue to allow alive on end of anim"); }
 #endif
     } else if (is_dead_on_end_of_anim && ! (is_dead || is_dying)) {
 #ifdef DEBUG_ANIM
-      if (debug || is_debug_type()) {
-        con("Animate: continue to allow dead on end of anim");
-      }
+      if (debug || is_debug_type()) { con("Animate: continue to allow dead on end of anim"); }
 #endif
     } else if (is_end_of_anim) {
 #ifdef DEBUG_ANIM
-      if (debug || is_debug_type()) {
-        con("Animate: is end of anim");
-      }
+      if (debug || is_debug_type()) { con("Animate: is end of anim"); }
 #endif
       return;
     }
   }
 
 #ifdef DEBUG_ANIM
-  if (debug || is_debug_type()) {
-    con("Animate: choose next tile");
-  }
+  if (debug || is_debug_type()) { con("Animate: choose next tile"); }
 #endif
 
   int chose_tile = false;
@@ -214,9 +178,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
 
       {
         new_tile = tile_next(tmap, tile);
-        if (! new_tile) {
-          new_tile = tile_first(tmap);
-        }
+        if (! new_tile) { new_tile = tile_first(tmap); }
 
         while (new_tile) {
           if (tile_is_dead(new_tile)) {
@@ -231,9 +193,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
 
           auto otile = new_tile;
           new_tile   = tile_next(tmap, new_tile);
-          if (new_tile == otile) {
-            ERR("Anim loop");
-          }
+          if (new_tile == otile) { ERR("Anim loop"); }
           continue;
         }
       }
@@ -285,14 +245,10 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
       //
       if (unlikely(! tile)) {
         tile = tile_first(tmap);
-        if (unlikely(! tile)) {
-          die("No tile");
-        }
+        if (unlikely(! tile)) { die("No tile"); }
 
 #ifdef DEBUG_ANIM
-        if (debug || is_debug_type()) {
-          con("Tile first: %s", tile_name(tile).c_str());
-        }
+        if (debug || is_debug_type()) { con("Tile first: %s", tile_name(tile).c_str()); }
 #endif
       }
       verify(MTYPE_TILE, tile);
@@ -326,9 +282,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
             if (! tile_is_hp_25_percent(tile)) {
               tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-              if (debug || is_debug_type()) {
-                con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
-              }
+              if (debug || is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
               continue;
             }
@@ -336,9 +290,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
             if (! tile_is_hp_50_percent(tile)) {
               tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-              if (debug || is_debug_type()) {
-                con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
-              }
+              if (debug || is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
               continue;
             }
@@ -346,18 +298,14 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
             if (! tile_is_hp_75_percent(tile)) {
               tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-              if (debug || is_debug_type()) {
-                con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
-              }
+              if (debug || is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
               continue;
             }
           } else {
             if (! tile_is_hp_100_percent(tile)) {
 #ifdef DEBUG_ANIM
-              if (debug || is_debug_type()) {
-                con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
-              }
+              if (debug || is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
               tile = tile_next(tmap, tile);
               continue;
@@ -369,9 +317,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
           if (tile_is_moving(tile)) {
             tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-            if (debug || is_debug_type()) {
-              con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
-            }
+            if (debug || is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
             continue;
           }
@@ -382,9 +328,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
         if (! tile_is_resurrecting(tile)) {
           tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-          if (debug || is_debug_type()) {
-            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
-          }
+          if (debug || is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
           continue;
         }
@@ -392,9 +336,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
         if (! tile_is_dead(tile)) {
           tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-          if (debug || is_debug_type()) {
-            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
-          }
+          if (debug || is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
           continue;
         }
@@ -402,9 +344,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
         if (! tile_is_sleeping(tile)) {
           tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-          if (debug || is_debug_type()) {
-            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
-          }
+          if (debug || is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
           continue;
         }
@@ -412,9 +352,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
         if (! tile_is_dir_up(tile)) {
           tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-          if (debug || is_debug_type()) {
-            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
-          }
+          if (debug || is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
           continue;
         }
@@ -422,9 +360,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
         if (! tile_is_dir_down(tile)) {
           tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-          if (debug || is_debug_type()) {
-            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
-          }
+          if (debug || is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
           continue;
         }
@@ -432,9 +368,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
         if (! tile_is_dir_left(tile)) {
           tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-          if (debug || is_debug_type()) {
-            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
-          }
+          if (debug || is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
           continue;
         }
@@ -442,9 +376,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
         if (! tile_is_dir_right(tile)) {
           tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-          if (debug || is_debug_type()) {
-            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
-          }
+          if (debug || is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
           continue;
         }
@@ -452,9 +384,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
         if (! tile_is_dir_none(tile)) {
           tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-          if (debug || is_debug_type()) {
-            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
-          }
+          if (debug || is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
           continue;
         }
@@ -462,9 +392,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
         if (! tile_is_open(tile)) {
           tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-          if (debug || is_debug_type()) {
-            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
-          }
+          if (debug || is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
           continue;
         }
@@ -472,9 +400,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
         if (tile_is_sleeping(tile)) {
           tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-          if (debug || is_debug_type()) {
-            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
-          }
+          if (debug || is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
           continue;
         }
@@ -482,9 +408,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
         if (tile_is_dead(tile)) {
           tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-          if (debug || is_debug_type()) {
-            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
-          }
+          if (debug || is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
           continue;
         }
@@ -492,9 +416,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
         if (tile_is_open(tile)) {
           tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
-          if (debug || is_debug_type()) {
-            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
-          }
+          if (debug || is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
 #endif
           continue;
         }
@@ -545,9 +467,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
 
   if (unlikely(! tile)) {
 #ifdef DEBUG_ANIM
-    if (debug || is_debug_type()) {
-      con("No tile");
-    }
+    if (debug || is_debug_type()) { con("No tile"); }
 #endif
     return;
   }
@@ -565,9 +485,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
     //
     // Try to be more deterministic in robot mode.
     //
-    if (! game->robot_mode) {
-      delay += (non_pcg_rand() % delay) / 2;
-    }
+    if (! game->robot_mode) { delay += (non_pcg_rand() % delay) / 2; }
   } else {
     //
     // This is for things like doors that do not need to look for their next frame
@@ -603,9 +521,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
       //
       // If we are waiting on this thing specifically, speed up the anim.
       //
-      if (is_waiting) {
-        delay = 1;
-      }
+      if (is_waiting) { delay = 1; }
     }
   }
 
@@ -648,18 +564,14 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
   if (is_end_of_anim) {
     if (is_dead_on_end_of_anim) {
 #ifdef DEBUG_ANIM
-      if (debug || is_debug_type()) {
-        con("Mark as dead");
-      }
+      if (debug || is_debug_type()) { con("Mark as dead"); }
 #endif
       dead_scheduled("by end of anim");
     }
 
     if (is_alive_on_end_of_anim) {
 #ifdef DEBUG_ANIM
-      if (debug || is_debug_type()) {
-        con("Mark as alive");
-      }
+      if (debug || is_debug_type()) { con("Mark as alive"); }
 #endif
       is_resurrecting = false;
       is_resurrected  = true;
@@ -671,9 +583,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
   //
   // Animated hue
   //
-  if (gfx_ascii_color_is_animated()) {
-    init_hue();
-  }
+  if (gfx_ascii_color_is_animated()) { init_hue(); }
 }
 
 void Thing::animate(void)
@@ -681,18 +591,14 @@ void Thing::animate(void)
   TRACE_NO_INDENT();
 
 #ifdef DEBUG_ANIM
-  if (debug || is_debug_type()) {
-    con("Animate");
-  }
+  if (debug || is_debug_type()) { con("Animate"); }
 #endif
 
   auto tpp  = tp();
   auto tmap = &tpp->tiles;
   if (unlikely(! tmap)) {
 #ifdef DEBUG_ANIM
-    if (debug || is_debug_type()) {
-      con("Animate: no tmap");
-    }
+    if (debug || is_debug_type()) { con("Animate: no tmap"); }
 #endif
     return;
   }
@@ -707,9 +613,7 @@ void Thing::animate(void)
     //
     if (is_monst() || is_player()) {
 #ifdef DEBUG_ANIM
-      if (debug || is_debug_type()) {
-        con("Animate: trapped in ice");
-      }
+      if (debug || is_debug_type()) { con("Animate: trapped in ice"); }
 #endif
       return;
     }
@@ -718,9 +622,7 @@ void Thing::animate(void)
   if (tile_curr && is_frozen) {
     if (is_monst() || is_player()) {
 #ifdef DEBUG_ANIM
-      if (debug || is_debug_type()) {
-        con("Animate: frozen");
-      }
+      if (debug || is_debug_type()) { con("Animate: frozen"); }
 #endif
       return;
     }
@@ -729,9 +631,7 @@ void Thing::animate(void)
   std::vector< Tilep > *tiles = &((*tmap));
   if (unlikely(! tiles || tiles->empty())) {
 #ifdef DEBUG_ANIM
-    if (debug || is_debug_type()) {
-      err("Has no tiles");
-    }
+    if (debug || is_debug_type()) { err("Has no tiles"); }
 #endif
     return;
   }
@@ -745,9 +645,7 @@ void Thing::animate(void)
     animate_choose_tile(tmap, tiles, &next_frame_please);
   }
 
-  if (tile_curr) {
-    return;
-  }
+  if (tile_curr) { return; }
 
   //
   // If for whatever reason we had no tile, but expect one, just choose the first.
@@ -756,17 +654,13 @@ void Thing::animate(void)
     auto tile = tile_first(tiles);
     if (tile) {
       tile_curr = tile->global_index;
-      if (debug || is_debug_type()) {
-        con("Tile init: %s", tile_name(tile).c_str());
-      }
+      if (debug || is_debug_type()) { con("Tile init: %s", tile_name(tile).c_str()); }
     }
   } else {
     auto tile = tile_random(tiles);
     if (tile) {
       tile_curr = tile->global_index;
-      if (debug || is_debug_type()) {
-        con("Tile init (random): %s", tile_name(tile).c_str());
-      }
+      if (debug || is_debug_type()) { con("Tile init (random): %s", tile_name(tile).c_str()); }
     }
   }
 }
@@ -777,9 +671,7 @@ void Thing::animate(void)
 ts_t Thing::ts_fadeup_begin(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->ts_fadeup_begin);
-  }
+  if (maybe_infop()) { return (infop()->ts_fadeup_begin); }
   return 0;
 }
 
@@ -824,9 +716,7 @@ ts_t Thing::ts_fadeup_begin_incr(void)
 ts_t Thing::ts_fadeup_end(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->ts_fadeup_end);
-  }
+  if (maybe_infop()) { return (infop()->ts_fadeup_end); }
   return 0;
 }
 
@@ -871,9 +761,7 @@ ts_t Thing::ts_fadeup_end_incr(void)
 ts_t Thing::ts_flip_start_get(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->ts_flip_start);
-  }
+  if (maybe_infop()) { return (infop()->ts_flip_start); }
   return 0;
 }
 
@@ -918,9 +806,7 @@ ts_t Thing::ts_flip_start_incr(void)
 ts_t Thing::ts_anim_delay_end(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->ts_anim_delay_end);
-  }
+  if (maybe_infop()) { return (infop()->ts_anim_delay_end); }
   return 0;
 }
 

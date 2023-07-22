@@ -17,9 +17,7 @@ point Thing::dest_random_get(int d)
       d = MAP_WIDTH / 2;
     } else {
       d = (int) distance_vision_get();
-      if (! d) {
-        err("Thing has no distance_vision set");
-      }
+      if (! d) { err("Thing has no distance_vision set"); }
     }
   }
 
@@ -57,9 +55,7 @@ point Thing::dest_random_get(int d)
     // Not too close. If we choose one tile adjacent then we may try to walk
     // onto adjacent lava instead of jumping over it.
     //
-    if ((abs(dx) <= 1) && (abs(dy) <= 1)) {
-      continue;
-    }
+    if ((abs(dx) <= 1) && (abs(dy) <= 1)) { continue; }
 
     dbg2("Try: %d,%d", start.x + dx, start.y + dy);
     TRACE_AND_INDENT();
@@ -91,9 +87,7 @@ point Thing::dest_random_get(int d)
     }
 
     if (is_player()) {
-      if (! get(level->can_see_currently.can_see, x, y)) {
-        continue;
-      }
+      if (! get(level->can_see_currently.can_see, x, y)) { continue; }
     }
 
     dbg("Got random target => %d,%d", x, y);
@@ -114,9 +108,7 @@ point Thing::dest_random_get(int d)
     // Not too close. If we choose one tile adjacent then we may try to walk
     // onto adjacent lava instead of jumping over it.
     //
-    if ((abs(dx) <= 1) && (abs(dy) <= 1)) {
-      continue;
-    }
+    if ((abs(dx) <= 1) && (abs(dy) <= 1)) { continue; }
 
     dbg2("Try (2): %d,%d", start.x + dx, start.y + dy);
     TRACE_AND_INDENT();
@@ -132,9 +124,7 @@ point Thing::dest_random_get(int d)
     }
 
     if (is_player()) {
-      if (! get(level->can_see_currently.can_see, x, y)) {
-        continue;
-      }
+      if (! get(level->can_see_currently.can_see, x, y)) { continue; }
     }
 
     dbg("Got random target => %d,%d", x, y);
@@ -152,9 +142,7 @@ point Thing::dest_random_get(int d)
   // Not too close. If we choose one tile adjacent then we may try to walk
   // onto adjacent lava instead of jumping over it.
   //
-  if ((abs(dx) <= 1) && (abs(dy) <= 1)) {
-    return start;
-  }
+  if ((abs(dx) <= 1) && (abs(dy) <= 1)) { return start; }
 
   dbg2("Try (3): %d,%d", start.x + dx, start.y + dy);
   TRACE_AND_INDENT();
@@ -163,9 +151,7 @@ point Thing::dest_random_get(int d)
   auto y = std::min(std::max(MAP_BORDER_ROCK, start.y + dy), MAP_HEIGHT - MAP_BORDER_ROCK);
 
   if (is_player()) {
-    if (! get(level->can_see_currently.can_see, x, y)) {
-      return point(x, y);
-    }
+    if (! get(level->can_see_currently.can_see, x, y)) { return point(x, y); }
   }
 
   dbg("Got random target => %d,%d", x, y);

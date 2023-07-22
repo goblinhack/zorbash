@@ -61,9 +61,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
   //
   // Waiting on move confirmation
   //
-  if (wid_warning_window) {
-    return true;
-  }
+  if (wid_warning_window) { return true; }
 
   if (game->state == Game::STATE_CHOOSING_LEVEL) {
     DBG2("Game mouse down; choosing level");
@@ -146,9 +144,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
         //
         FOR_ALL_COLLISION_THINGS(level, t, x, y)
         {
-          if (t == level->player) {
-            continue;
-          }
+          if (t == level->player) { continue; }
 
           IF_DEBUG { player->log("Yes; close enough to attack %s?", t->to_short_string().c_str()); }
           TRACE_AND_INDENT();
@@ -156,9 +152,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
           //
           // Don't attack dead monsters or broken doors
           //
-          if (t->is_dead) {
-            continue;
-          }
+          if (t->is_dead) { continue; }
 
           //
           // If the door is not broken, we can close it
@@ -238,9 +232,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
               //
               if (level->cursor) {
                 auto items = player->anything_to_carry_at(player->curr_at);
-                if (items.size()) {
-                  game->wid_collect_create(items);
-                }
+                if (items.size()) { game->wid_collect_create(items); }
               }
 
               return true;
@@ -271,16 +263,12 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
 
         FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)
         {
-          if (t == level->player) {
-            continue;
-          }
+          if (t == level->player) { continue; }
 
           //
           // Not sure if we want to be able to shove corpses via the mouse.
           //
-          if (t->is_dead && t->is_monst()) {
-            continue;
-          }
+          if (t->is_dead && t->is_monst()) { continue; }
 
           if (t->is_shovable()) {
             IF_DEBUG { player->log("Yes; close enough to shove %s?", t->to_short_string().c_str()); }
@@ -329,9 +317,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
     if (level->cursor) {
       if (player->curr_at == level->cursor->curr_at) {
         auto items = player->anything_to_carry_at(player->curr_at);
-        if (items.size()) {
-          game->wid_collect_create(items);
-        }
+        if (items.size()) { game->wid_collect_create(items); }
       }
     }
 
@@ -339,9 +325,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
     // Grab the current move path and start walking toward it. This will
     // consume one move by the player.
     //
-    if (player->player_cursor_path_pop_first_move(THING_MOVE_REASON_MOUSE)) {
-      return true;
-    }
+    if (player->player_cursor_path_pop_first_move(THING_MOVE_REASON_MOUSE)) { return true; }
   } else {
     IF_DEBUG2 { player->log("Game mouse down; not in normal state"); }
     TRACE_AND_INDENT();
@@ -366,35 +350,25 @@ static uint8_t game_mouse_motion_(int x, int y, int relx, int rely, int wheelx, 
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
-  if (! level) {
-    return false;
-  }
+  if (! level) { return false; }
 
   auto player = level->player;
-  if (! player) {
-    return false;
-  }
+  if (! player) { return false; }
 
-  if (wid_some_recent_event_occurred()) {
-    return false;
-  }
+  if (wid_some_recent_event_occurred()) { return false; }
 
   //
   // If move confirmation exists, do not remake the cursor or the path will end up
   // under the Yes buttion
   //
-  if (wid_warning_window) {
-    return false;
-  }
+  if (wid_warning_window) { return false; }
 
   //
   // Make the cursor visible once we enter a level.
   //
   if (level->cursor) {
     if (level->ts_entered && time_have_x_tenths_passed_since(10, level->ts_entered)) {
-      if (! player->is_dead) {
-        level->cursor->visible("entered level, make cursor visible");
-      }
+      if (! player->is_dead) { level->cursor->visible("entered level, make cursor visible"); }
     }
   }
 

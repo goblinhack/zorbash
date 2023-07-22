@@ -18,22 +18,16 @@ void Thing::on_teleport(void)
 {
   TRACE_NO_INDENT();
   auto on_teleport = tp()->on_teleport_do();
-  if (std::empty(on_teleport)) {
-    return;
-  }
+  if (std::empty(on_teleport)) { return; }
 
   auto t = split_tokens(on_teleport, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) {
-      fn = fn.replace(found, 2, "");
-    }
+    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
 
-    if (mod == "me") {
-      mod = name();
-    }
+    if (mod == "me") { mod = name(); }
 
     dbg("Call %s.%s(%ss)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
@@ -49,13 +43,9 @@ float Thing::teleport_distance_with_modifiers_get(void)
   TRACE_NO_INDENT();
   auto d = ((float) teleport_distance_get()) + ceil(0.5 + (pcg_random_range(0, 100) / 100.0));
 
-  if (stamina() < stamina_max() / 2) {
-    d /= 2;
-  }
+  if (stamina() < stamina_max() / 2) { d /= 2; }
 
-  if (stamina() < stamina_max() / 4) {
-    d /= 2;
-  }
+  if (stamina() < stamina_max() / 4) { d /= 2; }
 
   return d;
 }
@@ -63,9 +53,7 @@ float Thing::teleport_distance_with_modifiers_get(void)
 int Thing::teleport_distance_get(void)
 {
   TRACE_NO_INDENT();
-  if (! maybe_infop()) {
-    return 0;
-  }
+  if (! maybe_infop()) { return 0; }
 
   auto dist = teleport_distance();
   // dbg("TELEPORT %d", dist);
@@ -87,9 +75,7 @@ int Thing::teleport_distance_get(void)
         //
         // Don't count boots for example twice
         //
-        if (is_equipped(iter)) {
-          continue;
-        }
+        if (is_equipped(iter)) { continue; }
         dist += iter->teleport_distance_get();
         // iter->dbg("TELEPORT %d", dist);
       }
@@ -163,9 +149,7 @@ bool Thing::teleport(TeleportOptions teleport_options, point to, bool *too_far)
   //
   // Trying to teleport to the same location
   //
-  if (to == curr_at) {
-    return false;
-  }
+  if (to == curr_at) { return false; }
 
   //
   // Spider minions need to be leashed
@@ -207,9 +191,7 @@ bool Thing::teleport(TeleportOptions teleport_options, point to, bool *too_far)
 
   if (is_able_to_tire()) {
     if (! stamina()) {
-      if (is_player()) {
-        msg("You are too tired to teleport.");
-      }
+      if (is_player()) { msg("You are too tired to teleport."); }
       dbg("Too tired to teleport, stamina %d", stamina());
       return false;
     }
@@ -225,9 +207,7 @@ bool Thing::teleport(TeleportOptions teleport_options, point to, bool *too_far)
     TRACE_NO_INDENT();
     dbg("No, oob");
     if (is_player()) {
-      if (teleport_options.teleport_self) {
-        msg("You can't teleport into the void.");
-      }
+      if (teleport_options.teleport_self) { msg("You can't teleport into the void."); }
     }
     return false;
   }
@@ -238,9 +218,7 @@ bool Thing::teleport(TeleportOptions teleport_options, point to, bool *too_far)
   if (is_stuck_currently()) {
     dbg("You teleport out of trouble.");
     if (is_player()) {
-      if (teleport_options.teleport_self) {
-        msg("You teleport out of your sticky situation!");
-      }
+      if (teleport_options.teleport_self) { msg("You teleport out of your sticky situation!"); }
       game->tick_begin("teleport");
     }
     wobble(25);
@@ -251,13 +229,9 @@ bool Thing::teleport(TeleportOptions teleport_options, point to, bool *too_far)
   //
   FOR_ALL_NON_INTERNAL_THINGS(level, it, curr_at.x, curr_at.y)
   {
-    if (it == this) {
-      continue;
-    }
+    if (it == this) { continue; }
 
-    if (! it->is_alive_monst()) {
-      continue;
-    }
+    if (! it->is_alive_monst()) { continue; }
 
     if (is_friend(it) || same_mob(it)) {
       dbg("Friends are piling up, but allow teleporting");
@@ -267,9 +241,7 @@ bool Thing::teleport(TeleportOptions teleport_options, point to, bool *too_far)
 
     if (! d20_ge(stat_str_total(), it->stat_str_total())) {
       if (is_player()) {
-        if (teleport_options.teleport_self) {
-          msg("You are held in place!");
-        }
+        if (teleport_options.teleport_self) { msg("You are held in place!"); }
       }
       dbg("You are held in place");
       wobble(25);
@@ -306,9 +278,7 @@ bool Thing::teleport(TeleportOptions teleport_options, point to, bool *too_far)
 
       if (teleport_options.teleport_carefully) {
         dbg("Cannot teleport as far as it would like");
-        if (too_far) {
-          *too_far = true;
-        }
+        if (too_far) { *too_far = true; }
         if (! teleporting_home) {
           dbg("Too far");
           return false;
@@ -379,18 +349,14 @@ bool Thing::teleport(TeleportOptions teleport_options, point to, bool *too_far)
   wobble(25);
 
   if (! is_able_to_teleport_without_tiring()) {
-    if (d20() > stat_str()) {
-      stamina_decr(10);
-    }
+    if (d20() > stat_str()) { stamina_decr(10); }
   }
 
   on_teleport();
 
   tick_last_teleported_set(game->tick_current);
 
-  if (is_player()) {
-    msg("You fade out of existance!");
-  }
+  if (is_player()) { msg("You fade out of existance!"); }
 
   level->noisemap_in_incr(curr_at.x, curr_at.y, noise_on_teleporting());
   level->noisemap_in_incr(to.x, to.y, noise_on_teleporting());
@@ -497,27 +463,19 @@ bool Thing::teleport_randomly(TeleportOptions teleport_options, float max_distan
     //
     // Too close.
     //
-    if (distance(to, curr_at) <= 2) {
-      continue;
-    }
+    if (distance(to, curr_at) <= 2) { continue; }
 
     if (teleport_options.teleport_attack) {
       //
       // Too cruel to teleport attack into solid objects ?
       //
       if (d100() < 95) {
-        if (level->is_obs_wall_or_door(to) || level->is_obs_destructable(to)) {
-          continue;
-        }
+        if (level->is_obs_wall_or_door(to) || level->is_obs_destructable(to)) { continue; }
       }
 
-      if (teleport_carefree(teleport_options, to)) {
-        return true;
-      }
+      if (teleport_carefree(teleport_options, to)) { return true; }
     } else {
-      if (teleport_carefully(teleport_options, to)) {
-        return true;
-      }
+      if (teleport_carefully(teleport_options, to)) { return true; }
     }
   }
 
@@ -551,20 +509,14 @@ bool Thing::teleport_randomly_towards_player(TeleportOptions teleport_options)
     int y = pcg_random_range(curr_at.y - d, curr_at.y + d);
 
     auto new_dist = DISTANCE(x, y, player_at.x, player_at.y);
-    if (new_dist > curr_dist) {
-      continue;
-    }
+    if (new_dist > curr_dist) { continue; }
 
     //
     // Don't land on the player
     //
-    if (new_dist < 1) {
-      continue;
-    }
+    if (new_dist < 1) { continue; }
 
-    if (teleport_carefully(teleport_options, point(x, y))) {
-      return true;
-    }
+    if (teleport_carefully(teleport_options, point(x, y))) { return true; }
   }
 
   return false;
@@ -597,13 +549,9 @@ bool Thing::teleport_randomly_away_from_player(TeleportOptions teleport_options)
     int y = pcg_random_range(curr_at.y - d, curr_at.y + d);
 
     auto new_dist = DISTANCE(x, y, player_at.x, player_at.y);
-    if (new_dist < curr_dist) {
-      continue;
-    }
+    if (new_dist < curr_dist) { continue; }
 
-    if (teleport_carefree(teleport_options, point(x, y))) {
-      return true;
-    }
+    if (teleport_carefree(teleport_options, point(x, y))) { return true; }
   }
 
   return false;
@@ -625,9 +573,7 @@ bool Thing::try_harder_to_teleport(TeleportOptions teleport_options)
   while (tries-- > 0) {
     int x = pcg_random_range(curr_at.x - d, curr_at.x + d);
     int y = pcg_random_range(curr_at.y - d, curr_at.y + d);
-    if (teleport_carefree(teleport_options, point(x, y))) {
-      return true;
-    }
+    if (teleport_carefree(teleport_options, point(x, y))) { return true; }
   }
 
   return false;
@@ -653,9 +599,7 @@ void Thing::teleport_end(void)
   }
   wobble(25);
 
-  if (is_player()) {
-    msg("You fade back into existance!");
-  }
+  if (is_player()) { msg("You fade back into existance!"); }
 
   //
   // No sneaky teleporting onto doors to get passed them
@@ -686,9 +630,7 @@ void Thing::teleport_end(void)
 
 bool Thing::teleport_self(TeleportOptions teleport_options, Thingp maybe_victim)
 {
-  if (! is_able_to_teleport_self()) {
-    return false;
-  }
+  if (! is_able_to_teleport_self()) { return false; }
 
   teleport_options.teleport_self = true;
   idle_count_set(0);
@@ -750,9 +692,7 @@ bool Thing::teleport_self(TeleportOptions teleport_options, Thingp maybe_victim)
         dbg("Try to teleport onto weakly %s", maybe_victim->to_short_string().c_str());
         TRACE_AND_INDENT();
 
-        if (teleport_carefree(teleport_options, maybe_victim->curr_at)) {
-          return true;
-        }
+        if (teleport_carefree(teleport_options, maybe_victim->curr_at)) { return true; }
       }
     }
   }

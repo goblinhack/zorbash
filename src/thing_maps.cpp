@@ -11,9 +11,7 @@ void Thing::check_all_carried_maps(void)
   //
   // Obly the player gets to use maps
   //
-  if (! is_player()) {
-    return;
-  }
+  if (! is_player()) { return; }
 
   map_treasure_check();
   map_beast_check();

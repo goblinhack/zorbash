@@ -102,8 +102,7 @@ static void print_character_set(FILE *fp, const unsigned char *p, int len)
   int i;
 
   for (i = 0; i < len; i++) {
-    if (i > 0)
-      (void) fputc(',', fp);
+    if (i > 0) (void) fputc(',', fp);
     if (p[ i ] == 0) {
       i++;
       if (p[ i ] == 0)
@@ -377,8 +376,7 @@ int slre_compile(struct slre *r, const char *re)
   r->err_str   = nullptr;
   r->code_size = r->data_size = r->num_caps = r->anchored = 0;
 
-  if (*re == '^')
-    r->anchored++;
+  if (*re == '^') r->anchored++;
 
   emit(r, OPEN); /* This will capture what matches full RE */
   emit(r, 0);
@@ -386,14 +384,11 @@ int slre_compile(struct slre *r, const char *re)
   auto last_re = re;
   while (*re != '\0') {
     compile(r, &re);
-    if (re == last_re) {
-      break;
-    }
+    if (re == last_re) { break; }
     last_re = re;
   }
 
-  if (r->code[ 2 ] == BRANCH)
-    fixup_branch(r, 4);
+  if (r->code[ 2 ] == BRANCH) fixup_branch(r, 4);
 
   emit(r, CLOSE);
   emit(r, 0);
@@ -410,8 +405,7 @@ static void loop_greedy(const struct slre *r, int pc, const char *s, int len, in
 
   while (match(r, pc + 2, s, len, ofs, nullptr)) {
     saved_offset = *ofs;
-    if (match(r, pc + r->code[ pc + 1 ], s, len, ofs, nullptr))
-      matched_offset = saved_offset;
+    if (match(r, pc + r->code[ pc + 1 ], s, len, ofs, nullptr)) matched_offset = saved_offset;
     *ofs = saved_offset;
   }
 
@@ -424,8 +418,7 @@ static void loop_non_greedy(const struct slre *r, int pc, const char *s, int len
 
   while (match(r, pc + 2, s, len, ofs, nullptr)) {
     saved_offset = *ofs;
-    if (match(r, pc + r->code[ pc + 1 ], s, len, ofs, nullptr))
-      break;
+    if (match(r, pc + r->code[ pc + 1 ], s, len, ofs, nullptr)) break;
   }
 
   *ofs = saved_offset;
@@ -453,8 +446,7 @@ static int is_any_but(const unsigned char *p, int len, const char *s, int *ofs)
   ch = s[ *ofs ];
 
   for (i = 0; i < len; i++)
-    if (p[ i ] == ch)
-      return 0;
+    if (p[ i ] == ch) return 0;
 
   (*ofs)++;
   return 1;
@@ -491,8 +483,7 @@ static int match(const struct slre *r, int pc, const char *s, int len, int *ofs,
       case QUEST :
         res          = 1;
         saved_offset = *ofs;
-        if (! match(r, pc + 2, s, len, ofs, caps))
-          *ofs = saved_offset;
+        if (! match(r, pc + 2, s, len, ofs, caps)) *ofs = saved_offset;
         pc += r->code[ pc + 1 ];
         break;
       case STAR :
@@ -506,15 +497,13 @@ static int match(const struct slre *r, int pc, const char *s, int len, int *ofs,
         pc += r->code[ pc + 1 ];
         break;
       case PLUS :
-        if ((res = match(r, pc + 2, s, len, ofs, caps)) == 0)
-          break;
+        if ((res = match(r, pc + 2, s, len, ofs, caps)) == 0) break;
 
         loop_greedy(r, pc, s, len, ofs);
         pc += r->code[ pc + 1 ];
         break;
       case PLUSQ :
-        if ((res = match(r, pc + 2, s, len, ofs, caps)) == 0)
-          break;
+        if ((res = match(r, pc + 2, s, len, ofs, caps)) == 0) break;
 
         loop_non_greedy(r, pc, s, len, ofs);
         pc += r->code[ pc + 1 ];
@@ -553,14 +542,12 @@ static int match(const struct slre *r, int pc, const char *s, int len, int *ofs,
         break;
       case ANYOF :
         res = 0;
-        if (*ofs < len)
-          res = is_any_of(r->data + r->code[ pc + 1 ], r->code[ pc + 2 ], s, ofs);
+        if (*ofs < len) res = is_any_of(r->data + r->code[ pc + 1 ], r->code[ pc + 2 ], s, ofs);
         pc += 3;
         break;
       case ANYBUT :
         res = 0;
-        if (*ofs < len)
-          res = is_any_but(r->data + r->code[ pc + 1 ], r->code[ pc + 2 ], s, ofs);
+        if (*ofs < len) res = is_any_but(r->data + r->code[ pc + 1 ], r->code[ pc + 2 ], s, ofs);
         pc += 3;
         break;
       case BOL :
@@ -572,13 +559,11 @@ static int match(const struct slre *r, int pc, const char *s, int len, int *ofs,
         pc++;
         break;
       case OPEN :
-        if (caps != nullptr)
-          caps[ r->code[ pc + 1 ] ].ptr = s + *ofs;
+        if (caps != nullptr) caps[ r->code[ pc + 1 ] ].ptr = s + *ofs;
         pc += 2;
         break;
       case CLOSE :
-        if (caps != nullptr)
-          caps[ r->code[ pc + 1 ] ].len = (int) ((s + *ofs) - caps[ r->code[ pc + 1 ] ].ptr);
+        if (caps != nullptr) caps[ r->code[ pc + 1 ] ].len = (int) ((s + *ofs) - caps[ r->code[ pc + 1 ] ].ptr);
         pc += 2;
         break;
       case END : pc++; break;
@@ -640,8 +625,7 @@ int main(int argc, char *argv[])
     printf("Result: %d\n", res);
 
     for (i = 0; i < 20; i++)
-      if (caps[ i ].len > 0)
-        printf("Substring %d: [%.*s]\n", i, caps[ i ].len, caps[ i ].ptr);
+      if (caps[ i ].len > 0) printf("Substring %d: [%.*s]\n", i, caps[ i ].len, caps[ i ].ptr);
   }
 
   return 0;

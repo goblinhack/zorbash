@@ -18,9 +18,7 @@ void World::fini(void)
     for (auto y = 0; y < LEVELS_DOWN; ++y) {
       for (auto z = 0; z < LEVELS_DEEP; ++z) {
         auto l = get(levels, x, y, z);
-        if (l) {
-          count++;
-        }
+        if (l) { count++; }
       }
     }
   }
@@ -31,9 +29,7 @@ void World::fini(void)
         auto l = get(levels, x, y, z);
         if (l) {
           step++;
-          if (count > 1) {
-            wid_progress_bar("Dismantling the dungeon...", ((float) step) / ((float) count));
-          }
+          if (count > 1) { wid_progress_bar("Dismantling the dungeon...", ((float) step) / ((float) count)); }
           l->fini();
           delete l;
           set(levels, x, y, z, (Level *) nullptr);

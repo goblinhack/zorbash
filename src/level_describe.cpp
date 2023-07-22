@@ -13,21 +13,13 @@ void Level::describe(point p)
 {
   TRACE_NO_INDENT();
 
-  if (! player) {
-    return;
-  }
+  if (! player) { return; }
 
-  if (! player->player_is_player_is_ready_for_messages()) {
-    return;
-  }
+  if (! player->player_is_player_is_ready_for_messages()) { return; }
 
-  if (player->is_dead) {
-    return;
-  }
+  if (player->is_dead) { return; }
 
-  if (is_starting) {
-    return;
-  }
+  if (is_starting) { return; }
 
   bool got_one_with_long_text = false;
   dbg("Level describe @%d,%d", p.x, p.y);
@@ -62,18 +54,14 @@ void Level::describe(point p)
     //
     // We show the player info in the inventory, so skip it here.
     //
-    if (t->is_player()) {
-      continue;
-    }
+    if (t->is_player()) { continue; }
 
     //
     // In chasm levels we can see further and offscreen. Limit to what is onscreen.
     //
     IF_NODEBUG
     {
-      if (! t->is_visible_to_player) {
-        continue;
-      }
+      if (! t->is_visible_to_player) { continue; }
     }
 
     //
@@ -124,9 +112,7 @@ void Level::describe(point p)
       IF_DEBUG2 { t->log("Ignore for describe, not described"); }
     }
 
-    if (! hover_over) {
-      hover_over = t;
-    }
+    if (! hover_over) { hover_over = t; }
   }
   FOR_ALL_THINGS_END()
 
@@ -140,18 +126,14 @@ void Level::describe(point p)
     //
     // We show the player info in the inventory, so skip it here.
     //
-    if (t->is_player()) {
-      continue;
-    }
+    if (t->is_player()) { continue; }
 
     //
     // In chasm levels we can see further and offscreen. Limit to what is onscreen.
     //
     IF_NODEBUG
     {
-      if (! t->is_visible_to_player) {
-        continue;
-      }
+      if (! t->is_visible_to_player) { continue; }
     }
 
     //
@@ -210,9 +192,7 @@ void Level::describe(point p)
       IF_DEBUG2 { t->log("Ignore for describe, not described"); }
     }
 
-    if (! hover_over) {
-      hover_over = t;
-    }
+    if (! hover_over) { hover_over = t; }
   }
   FOR_ALL_THINGS_END()
 
@@ -226,18 +206,14 @@ void Level::describe(point p)
     //
     // We show the player info in the inventory, so skip it here.
     //
-    if (t->is_player()) {
-      continue;
-    }
+    if (t->is_player()) { continue; }
 
     //
     // In chasm levels we can see further and offscreen. Limit to what is onscreen.
     //
     IF_NODEBUG
     {
-      if (! t->is_visible_to_player) {
-        continue;
-      }
+      if (! t->is_visible_to_player) { continue; }
     }
 
     //
@@ -301,15 +277,11 @@ void Level::describe(point p)
       IF_DEBUG2 { t->log("Ignore for describe, not described"); }
     }
 
-    if (! hover_over) {
-      hover_over = t;
-    }
+    if (! hover_over) { hover_over = t; }
   }
   FOR_ALL_THINGS_END()
 
-  if (! got_one_with_long_text) {
-    dbg2("Describe @%d,%d; found nothing with long text", p.x, p.y);
-  }
+  if (! got_one_with_long_text) { dbg2("Describe @%d,%d; found nothing with long text", p.x, p.y); }
 
   dbg2("Describe @%d,%d; found %d things", p.x, p.y, (int) hover_over_things.size());
 
@@ -321,9 +293,7 @@ void Level::describe(point p)
     auto o = game->current_wid_thing_info;
     if (o) {
       dbg2("Currently describing %s", o->to_string().c_str());
-      if (o->is_hidden) {
-        dbg2("Currently describing %s; prefer me over current1", o->to_string().c_str());
-      }
+      if (o->is_hidden) { dbg2("Currently describing %s; prefer me over current1", o->to_string().c_str()); }
 
       //
       // If showing something under the player, then prefer
@@ -361,12 +331,8 @@ void Level::describe(point p)
   if (hover_over_things.size() > 1) {
     std::vector< Thingp > hover_over_things_tmp;
     for (auto t : hover_over_things) {
-      if (! t->is_interesting()) {
-        continue;
-      }
-      if (t->is_collectable()) {
-        something_to_collect = true;
-      }
+      if (! t->is_interesting()) { continue; }
+      if (t->is_collectable()) { something_to_collect = true; }
       hover_over_things_tmp.push_back(t);
     }
     hover_over_things = hover_over_things_tmp;
@@ -378,12 +344,8 @@ void Level::describe(point p)
   if (hover_over_things.size() > 1) {
     std::vector< Thingp > hover_over_things_tmp;
     for (auto t : hover_over_things) {
-      if (! t->gfx_pixelart_show_highlighted()) {
-        continue;
-      }
-      if (t->is_collectable()) {
-        something_to_collect = true;
-      }
+      if (! t->gfx_pixelart_show_highlighted()) { continue; }
+      if (t->is_collectable()) { something_to_collect = true; }
       hover_over_things_tmp.push_back(t);
     }
     hover_over_things = hover_over_things_tmp;
@@ -435,30 +397,20 @@ void Level::describe(Thingp t)
 {
   TRACE_NO_INDENT();
 
-  if (! player) {
-    return;
-  }
+  if (! player) { return; }
 
-  if (! player->player_is_player_is_ready_for_messages()) {
-    return;
-  }
+  if (! player->player_is_player_is_ready_for_messages()) { return; }
 
-  if (is_starting) {
-    return;
-  }
+  if (is_starting) { return; }
 
   if (unlikely(! t)) {
     err("Null thing");
     return;
   }
 
-  if (t->is_hidden) {
-    return;
-  }
+  if (t->is_hidden) { return; }
 
-  if (t->is_player()) {
-    return;
-  }
+  if (t->is_player()) { return; }
 
   dbg2("Describe %s", t->to_short_string().c_str());
   TRACE_AND_INDENT();
@@ -491,9 +443,7 @@ void Level::describe(Thingp t)
   auto o = game->current_wid_thing_info;
   if (o) {
     dbg2("Currently Describe %s", o->to_string().c_str());
-    if (o->is_hidden) {
-      dbg2("Currently Describe %s; prefer me over current5", o->to_string().c_str());
-    }
+    if (o->is_hidden) { dbg2("Currently Describe %s; prefer me over current5", o->to_string().c_str()); }
 
     //
     // If showing something under the player, then prefer to keep showing that if nothing else.

@@ -18,22 +18,16 @@ void Thing::on_jump(void)
 {
   TRACE_NO_INDENT();
   auto on_jump = tp()->on_jump_do();
-  if (std::empty(on_jump)) {
-    return;
-  }
+  if (std::empty(on_jump)) { return; }
 
   auto t = split_tokens(on_jump, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) {
-      fn = fn.replace(found, 2, "");
-    }
+    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
 
-    if (mod == "me") {
-      mod = name();
-    }
+    if (mod == "me") { mod = name(); }
 
     dbg("Call %s.%s(%ss)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
@@ -56,9 +50,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     return false;
   }
 
-  if (! maybe_aip()) {
-    return false;
-  }
+  if (! maybe_aip()) { return false; }
 
   //
   // Trying to jump to the same location
@@ -123,9 +115,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
 
   if (is_able_to_tire()) {
     if (! stamina()) {
-      if (is_player()) {
-        msg("You are too tired to jump.");
-      }
+      if (is_player()) { msg("You are too tired to jump."); }
       dbg("Too tired to jump, stamina %d", stamina());
       return false;
     }
@@ -140,9 +130,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   if (level->is_oob(x, y)) {
     TRACE_NO_INDENT();
     dbg("No, oob");
-    if (is_player()) {
-      msg("You can't jump into the void.");
-    }
+    if (is_player()) { msg("You can't jump into the void."); }
     return false;
   }
 
@@ -189,9 +177,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   FOR_ALL_COLLISION_THINGS(level, t, curr_at.x, curr_at.y)
   {
-    if (t == this) {
-      continue;
-    }
+    if (t == this) { continue; }
 
     //
     // If stuck in an engulfer, cannot jump
@@ -208,13 +194,9 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   FOR_ALL_NON_INTERNAL_THINGS(level, it, curr_at.x, curr_at.y)
   {
-    if (it == this) {
-      continue;
-    }
+    if (it == this) { continue; }
 
-    if (! it->is_alive_monst()) {
-      continue;
-    }
+    if (! it->is_alive_monst()) { continue; }
 
     if (is_friend(it) || same_mob(it)) {
       dbg("Friends are piling up, but allow jumping");
@@ -223,9 +205,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     }
 
     if (! d20_ge(stat_str_total(), it->stat_str_total())) {
-      if (is_player()) {
-        msg("You are held in place!");
-      }
+      if (is_player()) { msg("You are held in place!"); }
       dbg("You are held in place");
       wobble(25);
       return false;
@@ -263,9 +243,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       if (! get(level->can_see_ever.can_see, x, y)) {
         IF_DEBUG2 { dbg("No, is not lit or visited"); }
 
-        if (is_player()) {
-          msg("You can't jump into the unlit regions.");
-        }
+        if (is_player()) { msg("You can't jump into the unlit regions."); }
         dbg("You can't jump into the unlit regions.");
         return false;
       }
@@ -316,9 +294,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
 
     if (be_careful) {
       dbg("Cannot jump as far as it would like");
-      if (too_far) {
-        *too_far = true;
-      }
+      if (too_far) { *too_far = true; }
       if (! jumping_home) {
         dbg("Too far");
         return false;
@@ -374,9 +350,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     //
     // Check the number of things jumping is not slowing the game too much
     //
-    if (game->tick_current_is_too_slow || game->prev_tick_was_too_slow) {
-      duration /= 4;
-    }
+    if (game->tick_current_is_too_slow || game->prev_tick_was_too_slow) { duration /= 4; }
 
     if (is_player()) {
       //
@@ -566,9 +540,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   wobble(25);
 
   if (! is_able_to_jump_without_tiring()) {
-    if (d20() > stat_str()) {
-      stamina_decr(10);
-    }
+    if (d20() > stat_str()) { stamina_decr(10); }
   }
 
   //
@@ -636,9 +608,7 @@ bool Thing::try_to_jump(void)
 {
   TRACE_NO_INDENT();
 
-  if (! is_able_to_jump_attack()) {
-    return false;
-  }
+  if (! is_able_to_jump_attack()) { return false; }
 
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer
       || is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall
@@ -656,27 +626,21 @@ bool Thing::try_to_jump(void)
   while (tries-- > 0) {
     int x = pcg_random_range(curr_at.x - d, curr_at.x + d);
     int y = pcg_random_range(curr_at.y - d, curr_at.y + d);
-    if (try_to_jump_carefully(point(x, y))) {
-      return true;
-    }
+    if (try_to_jump_carefully(point(x, y))) { return true; }
   }
 
   tries = ntries;
   while (tries-- > 0) {
     int x = pcg_random_range(curr_at.x - d, curr_at.x + d);
     int y = curr_at.y;
-    if (try_to_jump_carefully(point(x, y))) {
-      return true;
-    }
+    if (try_to_jump_carefully(point(x, y))) { return true; }
   }
 
   tries = ntries;
   while (tries-- > 0) {
     int x = curr_at.x;
     int y = pcg_random_range(curr_at.y - d, curr_at.y + d);
-    if (try_to_jump_carefully(point(x, y))) {
-      return true;
-    }
+    if (try_to_jump_carefully(point(x, y))) { return true; }
   }
 
   return false;
@@ -686,9 +650,7 @@ bool Thing::try_to_jump_towards_player(void)
 {
   TRACE_NO_INDENT();
 
-  if (! is_able_to_jump_attack()) {
-    return false;
-  }
+  if (! is_able_to_jump_attack()) { return false; }
 
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer
       || is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall
@@ -709,20 +671,14 @@ bool Thing::try_to_jump_towards_player(void)
     int y = pcg_random_range(curr_at.y - d, curr_at.y + d);
 
     auto new_dist = DISTANCE(x, y, player_at.x, player_at.y);
-    if (new_dist > curr_dist) {
-      continue;
-    }
+    if (new_dist > curr_dist) { continue; }
 
     //
     // Don't land on the player
     //
-    if (new_dist < 1) {
-      continue;
-    }
+    if (new_dist < 1) { continue; }
 
-    if (try_to_jump_carefully(point(x, y))) {
-      return true;
-    }
+    if (try_to_jump_carefully(point(x, y))) { return true; }
   }
 
   return false;
@@ -749,13 +705,9 @@ bool Thing::try_to_jump_away_from_player(void)
     int y = pcg_random_range(curr_at.y - d, curr_at.y + d);
 
     auto new_dist = DISTANCE(x, y, player_at.x, player_at.y);
-    if (new_dist < curr_dist) {
-      continue;
-    }
+    if (new_dist < curr_dist) { continue; }
 
-    if (try_to_jump_carefree(point(x, y))) {
-      return true;
-    }
+    if (try_to_jump_carefree(point(x, y))) { return true; }
   }
 
   return false;
@@ -765,9 +717,7 @@ bool Thing::try_harder_to_jump(void)
 {
   TRACE_NO_INDENT();
 
-  if (! is_able_to_jump_attack()) {
-    return false;
-  }
+  if (! is_able_to_jump_attack()) { return false; }
 
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer
       || is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall
@@ -781,9 +731,7 @@ bool Thing::try_harder_to_jump(void)
   while (tries-- > 0) {
     int x = pcg_random_range(curr_at.x - d, curr_at.x + d);
     int y = pcg_random_range(curr_at.y - d, curr_at.y + d);
-    if (try_to_jump_carefree(point(x, y))) {
-      return true;
-    }
+    if (try_to_jump_carefree(point(x, y))) { return true; }
   }
 
   return false;
@@ -792,9 +740,7 @@ bool Thing::try_harder_to_jump(void)
 void Thing::jump_end(void)
 {
   TRACE_NO_INDENT();
-  if (! is_jumping) {
-    return;
-  }
+  if (! is_jumping) { return; }
 
   dbg("End of jump");
   TRACE_AND_INDENT();
@@ -816,22 +762,16 @@ void Thing::jump_end(void)
   FOR_ALL_EQUIP(iter)
   {
     auto it = equip_get(iter);
-    if (it) {
-      it->is_jumping = false;
-    }
+    if (it) { it->is_jumping = false; }
 
     if (equip_id_carry_anim(iter).ok()) {
       auto it = level->thing_find(equip_id_carry_anim(iter));
-      if (it) {
-        it->is_jumping = false;
-      }
+      if (it) { it->is_jumping = false; }
     }
 
     if (equip_id_use_anim(iter).ok()) {
       auto it = level->thing_find(equip_id_use_anim(iter));
-      if (it) {
-        it->is_jumping = false;
-      }
+      if (it) { it->is_jumping = false; }
     }
   }
 
@@ -840,9 +780,7 @@ void Thing::jump_end(void)
     auto id = bodypart_id_get(iter);
     if (id.ok()) {
       auto it = level->thing_find(id);
-      if (it) {
-        it->is_jumping = false;
-      }
+      if (it) { it->is_jumping = false; }
     }
   }
 
@@ -858,9 +796,7 @@ void Thing::jump_end(void)
   if (on_fire_id.ok()) {
     TRACE_NO_INDENT();
     auto it = level->thing_find(on_fire_id);
-    if (it) {
-      it->is_jumping = false;
-    }
+    if (it) { it->is_jumping = false; }
   }
 
   //
@@ -897,13 +833,9 @@ void Thing::jump_end(void)
 
 bool Thing::jump_attack(Thingp maybe_victim)
 {
-  if (! is_able_to_jump_attack()) {
-    return false;
-  }
+  if (! is_able_to_jump_attack()) { return false; }
 
-  if (! maybe_aip()) {
-    return false;
-  }
+  if (! maybe_aip()) { return false; }
 
   dbg("Jump attack maybe");
   TRACE_AND_INDENT();
@@ -955,18 +887,14 @@ bool Thing::jump_attack(Thingp maybe_victim)
         dbg("Try to jump onto weakly %s", maybe_victim->to_short_string().c_str());
         TRACE_AND_INDENT();
 
-        if (try_to_jump_carefree(maybe_victim->curr_at)) {
-          return true;
-        }
+        if (try_to_jump_carefree(maybe_victim->curr_at)) { return true; }
       }
 
       if (d1000() < tp()->chance_d1000_jump_onto()) {
         dbg("Try to jump onto %s", maybe_victim->to_short_string().c_str());
         TRACE_AND_INDENT();
 
-        if (try_to_jump_carefree(maybe_victim->curr_at)) {
-          return true;
-        }
+        if (try_to_jump_carefree(maybe_victim->curr_at)) { return true; }
       }
     }
   }

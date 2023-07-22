@@ -78,9 +78,7 @@ static PyObject *thing_hit_common(PyObject *obj, PyObject *args, PyObject *keywd
   }
   TRACE_AND_INDENT();
 
-  if (hitter->attack(target, &attack_options)) {
-    Py_RETURN_TRUE;
-  }
+  if (hitter->attack(target, &attack_options)) { Py_RETURN_TRUE; }
   Py_RETURN_FALSE;
 }
 

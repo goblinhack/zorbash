@@ -118,9 +118,7 @@ static uint8_t wid_config_other_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   switch (key->mod) {
     case KMOD_LCTRL :
@@ -148,9 +146,7 @@ static uint8_t wid_config_other_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   return true;
 }
@@ -158,9 +154,7 @@ static uint8_t wid_config_other_key_down(Widp w, const struct SDL_Keysym *key)
 void Game::wid_config_other_select(void)
 {
   TRACE_AND_INDENT();
-  if (wid_config_other_window) {
-    wid_config_other_destroy();
-  }
+  if (wid_config_other_window) { wid_config_other_destroy(); }
 
   auto box_style           = UI_WID_STYLE_HORIZ_DARK;
   auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;

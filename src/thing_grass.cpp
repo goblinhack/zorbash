@@ -10,20 +10,14 @@ void Thing::grass_tick(void)
 {
   TRACE_NO_INDENT();
 
-  if (! is_alive_monst() && ! is_player()) {
-    return;
-  }
+  if (! is_alive_monst() && ! is_player()) { return; }
 
-  if (is_floating() || is_flying() || is_ethereal()) {
-    return;
-  }
+  if (is_floating() || is_flying() || is_ethereal()) { return; }
 
   if (level->is_grass_wet(curr_at.x, curr_at.y)) {
     FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_FLOOR2)
     {
-      if (t->is_dead) {
-        continue;
-      }
+      if (t->is_dead) { continue; }
 
       if (t->name() == "grass_wet1") {
         if (t->is_grass_wet()) {
@@ -68,9 +62,7 @@ void Thing::grass_tick(void)
   if (level->is_grass_dry(curr_at.x, curr_at.y)) {
     FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_FLOOR2)
     {
-      if (t->is_dead) {
-        continue;
-      }
+      if (t->is_dead) { continue; }
 
       if (t->is_grass_dry()) {
         t->dead("trampled");
@@ -84,27 +76,21 @@ void Thing::grass_tick(void)
 uint8_t Level::is_grass_dry(const point p)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(p.x, p.y))) {
-    return false;
-  }
+  if (unlikely(is_oob(p.x, p.y))) { return false; }
   return (get(_is_grass_dry, p.x, p.y));
 }
 
 uint8_t Level::is_grass_dry(const int x, const int y)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return false;
-  }
+  if (unlikely(is_oob(x, y))) { return false; }
   return (get(_is_grass_dry, x, y));
 }
 
 void Level::is_grass_dry_set(const int x, const int y)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
+  if (unlikely(is_oob(x, y))) { return; }
   is_map_changed = true;
   incr(_is_grass_dry, x, y, (uint8_t) 1);
 }
@@ -112,9 +98,7 @@ void Level::is_grass_dry_set(const int x, const int y)
 void Level::is_grass_dry_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
+  if (unlikely(is_oob(x, y))) { return; }
   is_map_changed = true;
   decr(_is_grass_dry, x, y, (uint8_t) 1);
 }
@@ -122,27 +106,21 @@ void Level::is_grass_dry_unset(const int x, const int y)
 uint8_t Level::is_grass_wet(const point p)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(p.x, p.y))) {
-    return false;
-  }
+  if (unlikely(is_oob(p.x, p.y))) { return false; }
   return (get(_is_grass_wet, p.x, p.y));
 }
 
 uint8_t Level::is_grass_wet(const int x, const int y)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return false;
-  }
+  if (unlikely(is_oob(x, y))) { return false; }
   return (get(_is_grass_wet, x, y));
 }
 
 void Level::is_grass_wet_set(const int x, const int y)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
+  if (unlikely(is_oob(x, y))) { return; }
   is_map_changed = true;
   incr(_is_grass_wet, x, y, (uint8_t) 1);
 }
@@ -150,9 +128,7 @@ void Level::is_grass_wet_set(const int x, const int y)
 void Level::is_grass_wet_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
+  if (unlikely(is_oob(x, y))) { return; }
   is_map_changed = true;
   decr(_is_grass_wet, x, y, (uint8_t) 1);
 }

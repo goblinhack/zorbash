@@ -36,9 +36,7 @@ LevelStaticp LevelStatic::level_new(void)
 
 void LevelStatic::finalize(void)
 {
-  if (debug_enabled) {
-    dump();
-  }
+  if (debug_enabled) { dump(); }
 }
 
 void LevelStatic::dump(void)
@@ -53,9 +51,7 @@ void LevelStatic::dump(void)
   for (auto y = 0; y < height; y++) {
     for (auto x = 0; x < width; x++) {
       auto c = get(data, x, y, MAP_DEPTH_OBJ);
-      if (! c || (c == ' ')) {
-        c = get(data, x, y, MAP_DEPTH_FLOOR);
-      }
+      if (! c || (c == ' ')) { c = get(data, x, y, MAP_DEPTH_FLOOR); }
       set(tmp, x, y, c);
     }
   }

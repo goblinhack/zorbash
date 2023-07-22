@@ -20,16 +20,12 @@ int Thing::aggression_pct(void)
       //
       // If the leader is dead, be timid
       //
-      if (l->is_dead) {
-        return (aggression / 4);
-      }
+      if (l->is_dead) { return (aggression / 4); }
 
       //
       // If the leader is weak, be timid
       //
-      if (l->health() < l->health_max() / 3) {
-        return (aggression / 2);
-      }
+      if (l->health() < l->health_max() / 3) { return (aggression / 2); }
 
       //
       // A strong leader
@@ -40,9 +36,7 @@ int Thing::aggression_pct(void)
     }
   }
 
-  if (aggression > 100) {
-    aggression = 100;
-  }
+  if (aggression > 100) { aggression = 100; }
 
   return aggression;
 }

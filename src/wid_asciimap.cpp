@@ -19,9 +19,7 @@ void wid_asciimap_fini(void)
 
 bool wid_asciimap_init(void)
 {
-  if (! g_opt_ascii) {
-    return false;
-  }
+  if (! g_opt_ascii) { return false; }
 
   int width  = TERM_WIDTH - UI_LEFTBAR_WIDTH - UI_RIGHTBAR_WIDTH - 4;
   int height = TERM_HEIGHT - UI_TOPCON_VIS_HEIGHT - 2;
@@ -66,14 +64,10 @@ void wid_asciimap_update(void)
 static void wid_asciimap_display(Widp w, point tl, point br)
 {
   auto level = game->get_current_level();
-  if (! level) {
-    return;
-  }
+  if (! level) { return; }
 
   auto player = level->player;
-  if (! player) {
-    return;
-  }
+  if (! player) { return; }
 
   level->display_ascii_map(tl, br);
 }

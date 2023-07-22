@@ -13,22 +13,16 @@ void Thing::on_resting(void)
   TRACE_NO_INDENT();
 
   auto on_resting = tp()->on_resting_do();
-  if (std::empty(on_resting)) {
-    return;
-  }
+  if (std::empty(on_resting)) { return; }
 
   auto t = split_tokens(on_resting, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) {
-      fn = fn.replace(found, 2, "");
-    }
+    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
 
-    if (mod == "me") {
-      mod = name();
-    }
+    if (mod == "me") { mod = name(); }
 
     dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(), (int) curr_at.x,
         (int) curr_at.y);
@@ -51,22 +45,16 @@ void Thing::resting(void)
     health_boost(nullptr, 1);
     stamina_boost(1);
   } else {
-    if ((int) pcg_random_range(0, 200) < stat_str()) {
-      health_boost(nullptr, 1);
-    }
+    if ((int) pcg_random_range(0, 200) < stat_str()) { health_boost(nullptr, 1); }
 
-    if (d20() < stat_con()) {
-      stamina_boost(1);
-    }
+    if (d20() < stat_con()) { stamina_boost(1); }
   }
 
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
     if (iter) {
-      if (! iter->on_resting_do().empty()) {
-        iter->resting();
-      }
+      if (! iter->on_resting_do().empty()) { iter->resting(); }
     }
   }
 

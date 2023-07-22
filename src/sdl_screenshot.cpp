@@ -91,9 +91,7 @@ std::vector< uint8_t > sdl_fbo_save(int fbo)
 void sdl_fbo_load(int fbo, const std::vector< uint8_t > &pixels)
 {
   TRACE_AND_INDENT();
-  if (pixels.empty()) {
-    return;
-  }
+  if (pixels.empty()) { return; }
 
   int w;
   int h;

@@ -12,9 +12,7 @@
 //
 int Thing::weapon_dmgd_pct(void)
 {
-  if (! damaged_count()) {
-    return 0;
-  }
+  if (! damaged_count()) { return 0; }
   return int(((((float) damaged_count())) / (((float) health_max()))) * 100.0);
 }
 
@@ -23,23 +21,17 @@ int Thing::weapon_dmgd_pct(void)
 //
 int Thing::weapon_dmg_modify(int damage, Thingp victim)
 {
-  if (! damaged_count()) {
-    return damage;
-  }
+  if (! damaged_count()) { return damage; }
 
   //
   // Allow already damaged weapons to hit soft victims
   //
-  if (victim && victim->is_soft()) {
-    return damage;
-  }
+  if (victim && victim->is_soft()) { return damage; }
 
   int dmg_in = damage;
   damage -= (int) ceil(((((float) damage)) / 100.0) * ((float) weapon_dmgd_pct()));
   dbg("Weapon is damaged, hits for %d -> %d", dmg_in, damage);
-  if (damage < 0) {
-    damage = 0;
-  }
+  if (damage < 0) { damage = 0; }
   return damage;
 }
 
@@ -49,9 +41,7 @@ int Thing::weapon_dmg_modify(int damage, Thingp victim)
 void Thing::weapon_check_for_dmg(Thingp weapon, Thingp victim)
 {
   auto my_owner = weapon->top_owner();
-  if (! my_owner) {
-    return;
-  }
+  if (! my_owner) { return; }
 
   bool corrode = false;
   bool damaged = false;
@@ -60,9 +50,7 @@ void Thing::weapon_check_for_dmg(Thingp weapon, Thingp victim)
   // Enchantment is already factored in here
   //
   auto damaged_chance = weapon->chance_d10000_damaged();
-  if (victim->is_soft()) {
-    damaged_chance /= 4;
-  }
+  if (victim->is_soft()) { damaged_chance /= 4; }
 
   //
   // If we are attacking something that is of a form that we cannot withstand, then double damage
@@ -71,9 +59,7 @@ void Thing::weapon_check_for_dmg(Thingp weapon, Thingp victim)
     if (victim->is_acid()) {
       if (! weapon->is_immune_to_acid()) {
         damaged_chance *= 2;
-        if (weapon->dmg_received_doubled_from_acid()) {
-          damaged_chance *= 2;
-        }
+        if (weapon->dmg_received_doubled_from_acid()) { damaged_chance *= 2; }
       }
     }
   }
@@ -82,9 +68,7 @@ void Thing::weapon_check_for_dmg(Thingp weapon, Thingp victim)
     if (victim->is_cold()) {
       if (! weapon->is_immune_to_cold()) {
         damaged_chance *= 2;
-        if (weapon->dmg_received_doubled_from_cold()) {
-          damaged_chance *= 2;
-        }
+        if (weapon->dmg_received_doubled_from_cold()) { damaged_chance *= 2; }
       }
     }
   }
@@ -93,9 +77,7 @@ void Thing::weapon_check_for_dmg(Thingp weapon, Thingp victim)
     if (victim->is_fire()) {
       if (! weapon->is_immune_to_fire()) {
         damaged_chance *= 2;
-        if (weapon->dmg_received_doubled_from_fire()) {
-          damaged_chance *= 2;
-        }
+        if (weapon->dmg_received_doubled_from_fire()) { damaged_chance *= 2; }
       }
     }
   }
@@ -104,20 +86,14 @@ void Thing::weapon_check_for_dmg(Thingp weapon, Thingp victim)
     if (victim->is_water()) {
       if (! weapon->is_immune_to_water()) {
         damaged_chance *= 2;
-        if (weapon->dmg_received_doubled_from_water()) {
-          damaged_chance *= 2;
-        }
+        if (weapon->dmg_received_doubled_from_water()) { damaged_chance *= 2; }
       }
     }
   }
 
-  if (is_wooden()) {
-    damaged_chance *= 2;
-  }
+  if (is_wooden()) { damaged_chance *= 2; }
 
-  if (is_rusty()) {
-    damaged_chance *= 2;
-  }
+  if (is_rusty()) { damaged_chance *= 2; }
 
   //
   // If the thing we're hitting is harder than us, then increase
@@ -143,17 +119,13 @@ void Thing::weapon_check_for_dmg(Thingp weapon, Thingp victim)
   //
   // If lucky, no damage.
   //
-  if (d20_ge(stat_luck_total(), SAVING_ROLL_HARD)) {
-    damaged_chance = 0;
-  }
+  if (d20_ge(stat_luck_total(), SAVING_ROLL_HARD)) { damaged_chance = 0; }
 
   //
   // See if the weapon is damaged.
   //
   auto roll = d10000();
-  if (roll > damaged_chance) {
-    return;
-  }
+  if (roll > damaged_chance) { return; }
 
   weapon->damaged_count_incr(1);
 

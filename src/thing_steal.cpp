@@ -16,22 +16,16 @@ void Thing::on_stealing(Thingp from, Thingp what)
 {
   TRACE_NO_INDENT();
   auto on_stealing = tp()->on_stealing_do();
-  if (std::empty(on_stealing)) {
-    return;
-  }
+  if (std::empty(on_stealing)) { return; }
 
   auto t = split_tokens(on_stealing, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) {
-      fn = fn.replace(found, 2, "");
-    }
+    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
 
-    if (mod == "me") {
-      mod = name();
-    }
+    if (mod == "me") { mod = name(); }
 
     dbg("Call %s.%s(%s %s %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), from->to_short_string().c_str(),
         what->to_short_string().c_str());
@@ -47,9 +41,7 @@ void Thing::on_stealing(Thingp from, Thingp what)
 bool Thing::steal_treasure_from(Thingp victim)
 {
   TRACE_NO_INDENT();
-  if (d1000() > tp()->chance_d1000_steal_item()) {
-    return false;
-  }
+  if (d1000() > tp()->chance_d1000_steal_item()) { return false; }
 
   dbg("Steal treasure from %s", victim->to_short_string().c_str());
   TRACE_NO_INDENT();
@@ -63,9 +55,7 @@ bool Thing::steal_treasure_from(Thingp victim)
   // Give the target a chance to detect, and the attacker a bonus.
   //
   if (d20_ge(victim->stat_thv_total(), stat_thv_total())) {
-    if (victim->is_player()) {
-      victim->msg("You feel fingers prying at your pockets!");
-    }
+    if (victim->is_player()) { victim->msg("You feel fingers prying at your pockets!"); }
     return false;
   }
 
@@ -75,17 +65,13 @@ bool Thing::steal_treasure_from(Thingp victim)
   {
     DropOptions drop_options;
     drop_options.is_being_stolen = true;
-    if (! victim->drop(chosen, this, drop_options)) {
-      return false;
-    }
+    if (! victim->drop(chosen, this, drop_options)) { return false; }
   }
 
   {
     CarryOptions carry_options;
     carry_options.is_being_stolen = true;
-    if (! victim->is_dead) {
-      carry(chosen, carry_options);
-    }
+    if (! victim->is_dead) { carry(chosen, carry_options); }
   }
 
   chosen->hide("stolen");
@@ -100,9 +86,7 @@ bool Thing::steal_treasure_from(Thingp victim)
     }
   }
 
-  if (is_able_to_run_away_after_stealing()) {
-    add_avoid(victim);
-  }
+  if (is_able_to_run_away_after_stealing()) { add_avoid(victim); }
 
   on_stealing(victim, chosen);
 

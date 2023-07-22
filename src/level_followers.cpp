@@ -17,9 +17,7 @@ void Level::assign_leaders_and_followers(void)
   //
   FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
   {
-    if (t->is_able_to_follow()) {
-      cands.push_back(t);
-    }
+    if (t->is_able_to_follow()) { cands.push_back(t); }
   }
   FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
 
@@ -56,9 +54,7 @@ void Level::assign_leaders_and_followers(void)
         //
         // That are close enough
         //
-        if (distance(t->curr_at, m->curr_at) <= m->distance_recruitment_max_float()) {
-          group_cand = g.first;
-        }
+        if (distance(t->curr_at, m->curr_at) <= m->distance_recruitment_max_float()) { group_cand = g.first; }
       }
     }
     if (group_cand) {
@@ -90,9 +86,7 @@ void Level::assign_leaders_and_followers(void)
       if (! leader) {
         leader = m;
       } else {
-        if (m->danger_current_level() > leader->danger_current_level()) {
-          leader = m;
-        }
+        if (m->danger_current_level() > leader->danger_current_level()) { leader = m; }
       }
     }
 

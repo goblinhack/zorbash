@@ -25,17 +25,13 @@ void Game::place_player(void)
       //
       // Place the player at the ascend exit
       //
-      if (! level->is_ascend_dungeon(x, y)) {
-        continue;
-      }
+      if (! level->is_ascend_dungeon(x, y)) { continue; }
 
       CarryOptions carry_options;
       carry_options.is_able_to_be_equipped = true;
 
       auto t = level->thing_new("player1", point(x, y));
-      if (! t) {
-        DIE("Failed to create player");
-      }
+      if (! t) { DIE("Failed to create player"); }
 
       FOR_ALL_BODYPART(iter)
       {
@@ -148,9 +144,7 @@ void Game::place_player(void)
         auto w = level->thing_new("spell_dominate_monst1", point(x, y));
         t->spell_add(w);
       }
-      if (0) {
-        level->thing_new("tentacleye", point(x + 1, y + 1));
-      }
+      if (0) { level->thing_new("tentacleye", point(x + 1, y + 1)); }
       if (0) {
         auto w = level->thing_new("skill_primal_rage1", point(x, y));
         t->skill_add(w);
@@ -330,9 +324,7 @@ void Game::place_player(void)
         auto b = level->thing_new("bag_small", point(x, y));
         t->carry(b, carry_options);
       }
-      if (0) {
-        level->thing_new("bag_large", point(x + 1, y));
-      }
+      if (0) { level->thing_new("bag_large", point(x + 1, y)); }
       if (0) {
         auto b = level->thing_new("enchantstone", point(x, y));
         t->carry(b, carry_options);
@@ -349,21 +341,11 @@ void Game::place_player(void)
           }
         }
       }
-      if (0) {
-        level->thing_new("spellbook1", point(x + 1, y));
-      }
-      if (0) {
-        level->thing_new("spellbook2", point(x + 2, y));
-      }
-      if (0) {
-        level->thing_new("spellbook3", point(x + 3, y));
-      }
-      if (0) {
-        level->thing_new("spellbook4", point(x + 1, y + 1));
-      }
-      if (0) {
-        level->thing_new("spellbook5", point(x + 1, y + 2));
-      }
+      if (0) { level->thing_new("spellbook1", point(x + 1, y)); }
+      if (0) { level->thing_new("spellbook2", point(x + 2, y)); }
+      if (0) { level->thing_new("spellbook3", point(x + 3, y)); }
+      if (0) { level->thing_new("spellbook4", point(x + 1, y + 1)); }
+      if (0) { level->thing_new("spellbook5", point(x + 1, y + 2)); }
       if (0) {
         auto b = level->thing_new("thunderstone", point(x, y));
         t->carry(b, carry_options);
@@ -534,16 +516,12 @@ void Game::place_player(void)
           level->thing_new("lava", point(x + 2, y));
           level->thing_new("lava", point(x + 3, y));
         }
-        if (0) {
-          level->thing_new("coffin_mob", point(x + 2, y + 1));
-        }
+        if (0) { level->thing_new("coffin_mob", point(x + 2, y + 1)); }
         if (0) {
           level->thing_new("barrel", point(x + 2, y + 1));
           level->thing_new("rat_giant", point(x + 3, y + 1));
         }
-        if (0) {
-          level->thing_new("staff_energy", point(x, y + 1));
-        }
+        if (0) { level->thing_new("staff_energy", point(x, y + 1)); }
         // level->thing_new("murder_bunny", point(x + 2, y + 2));
         // level->thing_new("jackalope", point(x + 3, y + 2));
         // level->thing_new("duck2", point(x + 3, y + 2));
@@ -648,9 +626,7 @@ void Game::place_player(void)
       // level->thing_new("spiderweb", point(x, y));
       // level->thing_new("spider_onyx_widow", point(x + 2, y));
       // level->thing_new("spider_giant", point(x + 2, y));
-      if (0) {
-        level->thing_new("bat_lesser", point(x + 2, y + 1));
-      }
+      if (0) { level->thing_new("bat_lesser", point(x + 2, y + 1)); }
       // level->thing_new("golem_flesh", point(x, y + 3));
       // level->thing_new("lava", point(x, y + 5));
       // level->thing_new("lava", point(x, y + 6));

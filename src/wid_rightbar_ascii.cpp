@@ -23,14 +23,10 @@ bool wid_rightbar_ascii_create(void)
   DBG2("Remake rightbar");
 
   auto level = game->get_current_level();
-  if (! level) {
-    return false;
-  }
+  if (! level) { return false; }
 
   auto player = level->player;
-  if (! player) {
-    return false;
-  }
+  if (! player) { return false; }
 
   int width = UI_RIGHTBAR_WIDTH;
   int y_at  = 0;
@@ -705,14 +701,10 @@ bool wid_rightbar_ascii_create(void)
 
       if (slot < (int) player->itemsp()->inventory_shortcuts.size()) {
         auto thing_id = get(player->itemsp()->inventory_shortcuts, slot);
-        if (thing_id.ok()) {
-          t = level->thing_find(thing_id);
-        }
+        if (thing_id.ok()) { t = level->thing_find(thing_id); }
       }
 
-      if (! t) {
-        continue;
-      }
+      if (! t) { continue; }
 
       {
         y_at++;
@@ -722,9 +714,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_pos(w, tl, br);
         wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
 
-        if (slot == game->inventory_highlight_slot) {
-          wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
-        }
+        if (slot == game->inventory_highlight_slot) { wid_set_color(w, WID_COLOR_TEXT_FG, GREEN); }
 
         wid_set_int_context(w, slot);
         wid_set_text_lhs(w, true);

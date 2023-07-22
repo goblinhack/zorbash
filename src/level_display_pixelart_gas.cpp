@@ -63,21 +63,13 @@ void Level::display_pixelart_gas(int fbo, int16_t minx, int16_t miny, int16_t ma
             uint16_t gy        = y * DUNGEON_GAS_RESOLUTION + dy;
             uint8_t  intensity = gas_poison_cloud[ gx ][ gy ];
 
-            if (! intensity) {
-              continue;
-            }
+            if (! intensity) { continue; }
 
-            if (intensity == 255) {
-              continue;
-            }
+            if (intensity == 255) { continue; }
 
-            if (intensity > 7) {
-              intensity = 7;
-            }
+            if (intensity > 7) { intensity = 7; }
 
-            if (intensity != g) {
-              continue;
-            }
+            if (intensity != g) { continue; }
 
             // auto tile = tile_find_mand("player1.1"); // get_no_check(gas, 0); // g);
             auto tile = get_no_check(gas, (x + y + intensity + r) % 8);

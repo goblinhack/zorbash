@@ -29,9 +29,7 @@ void sdl_display(void)
       //
       // Draw the map
       //
-      if (likely(game->level != nullptr)) {
-        game->level->display_pixelart_map_mini();
-      }
+      if (likely(game->level != nullptr)) { game->level->display_pixelart_map_mini(); }
     }
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -93,9 +91,7 @@ void sdl_display_reset(void)
   game->set_request_to_remake_debuffbox();
   game->set_request_to_remake_buffbox();
 
-  if (game->level) {
-    game->level->scroll_map_to_player_immediately();
-  }
+  if (game->level) { game->level->scroll_map_to_player_immediately(); }
 
   wid_console_init();
   wid_hide(wid_console_window);

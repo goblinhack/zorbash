@@ -49,9 +49,7 @@ std::array< bool, UI_WID_SAVE_SLOTS > slot_valid;
 static ts_t load(ts_t T)
 {
   TRACE_AND_INDENT();
-  if (! T) {
-    return 0;
-  }
+  if (! T) { return 0; }
   return (T - old_ts_created + new_ts_created);
 }
 
@@ -780,9 +778,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto slot = 0; slot < MAP_SLOTS; slot++) {
           auto id = get(my.t->all_things_id_at, x, y, slot);
-          if (id.ok()) {
-            CON("Load save slot %d @ %d,%d : %" PRIX32, slot, x, y, id.id);
-          }
+          if (id.ok()) { CON("Load save slot %d @ %d,%d : %" PRIX32, slot, x, y, id.id); }
         }
       }
     }
@@ -806,9 +802,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
             auto t = new Thing();
             in >> bits(t);
 
-            if (! game_load_error.empty()) {
-              return in;
-            }
+            if (! game_load_error.empty()) { return in; }
 
             //
             // Cannot use t->log here as thing is no inited yet
@@ -914,17 +908,13 @@ std::istream &operator>>(std::istream &in, Bits< class World & > my)
 
         if (exists) {
           step++;
-          if (count > 1) {
-            wid_progress_bar("Loading...", ((float) step) / ((float) count));
-          }
+          if (count > 1) { wid_progress_bar("Loading...", ((float) step) / ((float) count)); }
 
           LOG("INF: Loading level %d,%d,%d", p.x, p.y, p.z);
           auto l = new Level(BIOME_UNKNOWN);
           set(my.t.levels, x, y, z, l);
           in >> bits(l);
-          if (! game_load_error.empty()) {
-            return in;
-          }
+          if (! game_load_error.empty()) { return in; }
 
           int eol;
           in >> bits(eol);
@@ -1140,9 +1130,7 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
   {
     std::string tmp;
     in >> bits(tmp);
-    if (g_opt_seed_name.empty()) {
-      g_opt_seed_name = tmp;
-    }
+    if (g_opt_seed_name.empty()) { g_opt_seed_name = tmp; }
   }
 
   in >> bits(my.t.hiscores);
@@ -1150,91 +1138,35 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
 
   int eol;
   in >> bits(eol);
-  if (eol != GAME_SAVE_MARKER_CONFIG) {
-    game_load_error += "end of config marker not found";
-  }
+  if (eol != GAME_SAVE_MARKER_CONFIG) { game_load_error += "end of config marker not found"; }
 
-  if (my.t.ascii_gl_height < 0) {
-    game_load_error += "ascii_gl_height is invalid";
-  }
-  if (my.t.ascii_gl_width < 0) {
-    game_load_error += "ascii_gl_width is invalid";
-  }
-  if (my.t.config_pix_height < 0) {
-    game_load_error += "config_pix_height is invalid";
-  }
-  if (my.t.config_pix_width < 0) {
-    game_load_error += "config_pix_width is invalid";
-  }
-  if (my.t.game_pix_height < 0) {
-    game_load_error += "game_pix_height is invalid";
-  }
-  if (my.t.game_pix_scale_height < 0) {
-    game_load_error += "game_pix_scale_height is invalid";
-  }
-  if (my.t.game_pix_scale_width < 0) {
-    game_load_error += "game_pix_scale_width is invalid";
-  }
-  if (my.t.game_pix_width < 0) {
-    game_load_error += "game_pix_width is invalid";
-  }
-  if (! my.t.game_pix_zoom) {
-    game_load_error += "game_pix_zoom is invalid";
-  }
-  if (my.t.one_pixel_height < 0) {
-    game_load_error += "one_pixel_height is invalid";
-  }
-  if (my.t.one_pixel_width < 0) {
-    game_load_error += "one_pixel_width is invalid";
-  }
-  if (my.t.tile_height < 0) {
-    game_load_error += "tile_height is invalid";
-  }
-  if (my.t.tile_pixel_height < 0) {
-    game_load_error += "tile_pixel_height is invalid";
-  }
-  if (my.t.tile_pixel_width < 0) {
-    game_load_error += "tile_pixel_width is invalid";
-  }
-  if (my.t.tile_pix_height < 0) {
-    game_load_error += "tile_pix_height is invalid";
-  }
-  if (my.t.tile_pix_width < 0) {
-    game_load_error += "tile_pix_width is invalid";
-  }
-  if (my.t.tile_width < 0) {
-    game_load_error += "tile_width is invalid";
-  }
-  if (my.t.ui_ascii_term_height < 0) {
-    game_load_error += "ui_ascii_term_height is invalid";
-  }
-  if (my.t.ui_ascii_term_width < 0) {
-    game_load_error += "ui_ascii_term_width is invalid";
-  }
-  if (my.t.ui_gfx_term_height < 0) {
-    game_load_error += "ui_gfx_term_height is invalid";
-  }
-  if (my.t.ui_gfx_term_width < 0) {
-    game_load_error += "ui_gfx_term_width is invalid";
-  }
-  if (my.t.ui_pix_height < 0) {
-    game_load_error += "ui_pix_height is invalid";
-  }
-  if (my.t.ui_pix_width < 0) {
-    game_load_error += "ui_pix_width is invalid";
-  }
-  if (my.t.ui_pix_zoom < 0) {
-    game_load_error += "ui_pix_zoom is invalid";
-  }
-  if (my.t.video_w_h_ratio < 0) {
-    game_load_error += "video_w_h_ratio is invalid";
-  }
-  if (my.t.window_pix_height < 0) {
-    game_load_error += "window_pix_height is invalid";
-  }
-  if (my.t.window_pix_width < 0) {
-    game_load_error += "window_pix_width is invalid";
-  }
+  if (my.t.ascii_gl_height < 0) { game_load_error += "ascii_gl_height is invalid"; }
+  if (my.t.ascii_gl_width < 0) { game_load_error += "ascii_gl_width is invalid"; }
+  if (my.t.config_pix_height < 0) { game_load_error += "config_pix_height is invalid"; }
+  if (my.t.config_pix_width < 0) { game_load_error += "config_pix_width is invalid"; }
+  if (my.t.game_pix_height < 0) { game_load_error += "game_pix_height is invalid"; }
+  if (my.t.game_pix_scale_height < 0) { game_load_error += "game_pix_scale_height is invalid"; }
+  if (my.t.game_pix_scale_width < 0) { game_load_error += "game_pix_scale_width is invalid"; }
+  if (my.t.game_pix_width < 0) { game_load_error += "game_pix_width is invalid"; }
+  if (! my.t.game_pix_zoom) { game_load_error += "game_pix_zoom is invalid"; }
+  if (my.t.one_pixel_height < 0) { game_load_error += "one_pixel_height is invalid"; }
+  if (my.t.one_pixel_width < 0) { game_load_error += "one_pixel_width is invalid"; }
+  if (my.t.tile_height < 0) { game_load_error += "tile_height is invalid"; }
+  if (my.t.tile_pixel_height < 0) { game_load_error += "tile_pixel_height is invalid"; }
+  if (my.t.tile_pixel_width < 0) { game_load_error += "tile_pixel_width is invalid"; }
+  if (my.t.tile_pix_height < 0) { game_load_error += "tile_pix_height is invalid"; }
+  if (my.t.tile_pix_width < 0) { game_load_error += "tile_pix_width is invalid"; }
+  if (my.t.tile_width < 0) { game_load_error += "tile_width is invalid"; }
+  if (my.t.ui_ascii_term_height < 0) { game_load_error += "ui_ascii_term_height is invalid"; }
+  if (my.t.ui_ascii_term_width < 0) { game_load_error += "ui_ascii_term_width is invalid"; }
+  if (my.t.ui_gfx_term_height < 0) { game_load_error += "ui_gfx_term_height is invalid"; }
+  if (my.t.ui_gfx_term_width < 0) { game_load_error += "ui_gfx_term_width is invalid"; }
+  if (my.t.ui_pix_height < 0) { game_load_error += "ui_pix_height is invalid"; }
+  if (my.t.ui_pix_width < 0) { game_load_error += "ui_pix_width is invalid"; }
+  if (my.t.ui_pix_zoom < 0) { game_load_error += "ui_pix_zoom is invalid"; }
+  if (my.t.video_w_h_ratio < 0) { game_load_error += "video_w_h_ratio is invalid"; }
+  if (my.t.window_pix_height < 0) { game_load_error += "window_pix_height is invalid"; }
+  if (my.t.window_pix_width < 0) { game_load_error += "window_pix_width is invalid"; }
 
   return in;
 }
@@ -1259,19 +1191,13 @@ std::istream &operator>>(std::istream &in, Bits< class Game & > my)
   in >> bits(my.t.save_slot);
   in >> bits(my.t.save_meta);
   in >> bits(my.t.save_file);
-  if (game_load_headers_only) {
-    return in;
-  }
+  if (game_load_headers_only) { return in; }
   in >> bits(my.t.appdata);
   in >> bits(my.t.saved_dir);
   in >> bits(my.t.config);
-  if (! game_load_error.empty()) {
-    return in;
-  }
+  if (! game_load_error.empty()) { return in; }
   in >> bits(my.t.world);
-  if (! game_load_error.empty()) {
-    return in;
-  }
+  if (! game_load_error.empty()) { return in; }
 
   in >> bits(my.t.started);
   in >> bits(my.t.things_are_moving);
@@ -1302,9 +1228,7 @@ std::istream &operator>>(std::istream &in, Bits< class Game & > my)
   LOG("Current level set to %s", my.t.current_level.to_string().c_str());
 
   my.t.level = get(my.t.world.levels, my.t.current_level.x, my.t.current_level.y, my.t.current_level.z);
-  if (my.t.level) {
-    my.t.level->log("This is the current level");
-  }
+  if (my.t.level) { my.t.level->log("This is the current level"); }
 
   return in;
 }
@@ -1336,9 +1260,7 @@ static std::vector< char > read_lzo_file(const std::string filename, lzo_uint *u
   if (ifs.is_open()) {
     // tellg is not ideal, look into <filesystem> post mojave
     std::ifstream::pos_type sz = ifs.tellg();
-    if (sz < 0) {
-      return (std::vector< char >());
-    }
+    if (sz < 0) { return (std::vector< char >()); }
 
     ifs.seekg(0, std::ios::beg);
     ifs.unsetf(std::ios::skipws);
@@ -1379,9 +1301,7 @@ bool Game::load(std::string file_to_load, class Game &target)
   uint32_t cs;
   auto     vec = read_lzo_file(file_to_load, &uncompressed_len, &cs);
   if (vec.size() <= 0) {
-    if (! game_load_headers_only) {
-      wid_error("load error, empty file [" + file_to_load + "] ?");
-    }
+    if (! game_load_headers_only) { wid_error("load error, empty file [" + file_to_load + "] ?"); }
     return false;
   }
 
@@ -1429,9 +1349,7 @@ bool Game::load(std::string file_to_load, class Game &target)
   game_load_error = "";
   in >> bits(target);
   if (! game_load_error.empty()) {
-    if (! game_load_headers_only) {
-      wid_error("load error, " + game_load_error);
-    }
+    if (! game_load_headers_only) { wid_error("load error, " + game_load_error); }
     return false;
   }
 
@@ -1467,9 +1385,7 @@ std::string Game::load_config(void)
 
   auto          filename = saved_dir + "config";
   std::ifstream in(filename);
-  if (in.is_open()) {
-    in >> bits(*(&game->config));
-  }
+  if (in.is_open()) { in >> bits(*(&game->config)); }
 
   return game_load_error;
 }
@@ -1497,13 +1413,9 @@ void Game::load(void)
 void Game::load(int slot)
 {
   TRACE_AND_INDENT();
-  if (slot < 0) {
-    return;
-  }
+  if (slot < 0) { return; }
 
-  if (slot >= UI_WID_SAVE_SLOTS) {
-    return;
-  }
+  if (slot >= UI_WID_SAVE_SLOTS) { return; }
 
   if (! get(slot_valid, slot)) {
     TOPCON("No game at that slot.");
@@ -1514,9 +1426,7 @@ void Game::load(int slot)
 
   auto save_file = saved_dir + "saved-slot-" + std::to_string(slot);
 
-  if (slot == UI_WID_SAVE_SLOTS - 1) {
-    save_file = saved_dir + "saved-snapshot";
-  }
+  if (slot == UI_WID_SAVE_SLOTS - 1) { save_file = saved_dir + "saved-snapshot"; }
 
   LOG("-");
   CON("INF: Loading %s", save_file.c_str());
@@ -1579,9 +1489,7 @@ static uint8_t wid_load_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   switch (key->mod) {
     case KMOD_LCTRL :
@@ -1632,9 +1540,7 @@ static uint8_t wid_load_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   return true;
 }
@@ -1667,9 +1573,7 @@ void Game::wid_load_select(void)
   TRACE_AND_INDENT();
   CON("INF: Loading a saved game, destroy old");
 
-  if (wid_load) {
-    return;
-  }
+  if (wid_load) { return; }
 
   game_load_error = "";
 
@@ -1677,9 +1581,7 @@ void Game::wid_load_select(void)
   auto  h  = TERM_HEIGHT / 2;
   point tl = make_point(m - 40, h - 7);
   point br = make_point(m + 40, h + 8);
-  if (! g_opt_ascii) {
-    br.y += 3;
-  }
+  if (! g_opt_ascii) { br.y += 3; }
   auto width = br.x - tl.x;
 
   wid_load = new WidPopup("Game load", tl, br, tile_find_mand("load"), "", false, false);
@@ -1718,9 +1620,7 @@ void Game::wid_load_select(void)
 
     wid_progress_bar("Scanning...", ((float) slot) / ((float) UI_WID_SAVE_SLOTS));
 
-    if (slot == UI_WID_SAVE_SLOTS - 1) {
-      tmp_file = saved_dir + "saved-snapshot";
-    }
+    if (slot == UI_WID_SAVE_SLOTS - 1) { tmp_file = saved_dir + "saved-snapshot"; }
 
     auto  p  = wid_load->wid_text_area->wid_text_area;
     auto  w  = wid_new_square_button(p, "load slot");

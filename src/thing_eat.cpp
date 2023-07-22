@@ -9,91 +9,51 @@
 
 bool Thing::is_edible(Thingp itp)
 {
-  if (is_eater_of_amulets() && itp->is_amulet())
-    return true;
-  if (is_eater_of_armor() && itp->is_armor())
-    return true;
-  if (is_eater_of_boots() && itp->is_boots())
-    return true;
-  if (is_eater_of_cloaks() && itp->is_cloak())
-    return true;
-  if (is_eater_of_food() && itp->is_food())
-    return true;
-  if (is_eater_of_gauntlets() && itp->is_gauntlet())
-    return true;
-  if (is_eater_of_green_blood() && itp->is_green_blood())
-    return true;
-  if (is_eater_of_helmets() && itp->is_helmet())
-    return true;
-  if (is_eater_of_slime() && itp->is_slime())
-    return true;
-  if (is_eater_of_magical_items() && itp->is_magical())
-    return true;
-  if (is_eater_of_meat() && itp->is_meat())
-    return true;
-  if (is_eater_of_plants() && itp->is_plant())
-    return true;
-  if (is_eater_of_foliage() && itp->is_foliage())
-    return true;
-  if (is_eater_of_grass() && itp->is_grass())
-    return true;
-  if (is_eater_of_potions() && itp->is_potion())
-    return true;
-  if (is_eater_of_red_blood() && itp->is_red_blood())
-    return true;
-  if (is_eater_of_rings() && itp->is_ring())
-    return true;
-  if (is_eater_of_treasure() && itp->is_treasure_type())
-    return true;
-  if (is_eater_of_staffs() && itp->is_staff())
-    return true;
-  if (is_eater_of_weapons() && itp->is_weapon())
-    return true;
+  if (is_eater_of_amulets() && itp->is_amulet()) return true;
+  if (is_eater_of_armor() && itp->is_armor()) return true;
+  if (is_eater_of_boots() && itp->is_boots()) return true;
+  if (is_eater_of_cloaks() && itp->is_cloak()) return true;
+  if (is_eater_of_food() && itp->is_food()) return true;
+  if (is_eater_of_gauntlets() && itp->is_gauntlet()) return true;
+  if (is_eater_of_green_blood() && itp->is_green_blood()) return true;
+  if (is_eater_of_helmets() && itp->is_helmet()) return true;
+  if (is_eater_of_slime() && itp->is_slime()) return true;
+  if (is_eater_of_magical_items() && itp->is_magical()) return true;
+  if (is_eater_of_meat() && itp->is_meat()) return true;
+  if (is_eater_of_plants() && itp->is_plant()) return true;
+  if (is_eater_of_foliage() && itp->is_foliage()) return true;
+  if (is_eater_of_grass() && itp->is_grass()) return true;
+  if (is_eater_of_potions() && itp->is_potion()) return true;
+  if (is_eater_of_red_blood() && itp->is_red_blood()) return true;
+  if (is_eater_of_rings() && itp->is_ring()) return true;
+  if (is_eater_of_treasure() && itp->is_treasure_type()) return true;
+  if (is_eater_of_staffs() && itp->is_staff()) return true;
+  if (is_eater_of_weapons() && itp->is_weapon()) return true;
   return false;
 }
 
 bool Tp::is_edible(Thingp itp)
 {
-  if (is_eater_of_amulets() && itp->is_amulet())
-    return true;
-  if (is_eater_of_armor() && itp->is_armor())
-    return true;
-  if (is_eater_of_boots() && itp->is_boots())
-    return true;
-  if (is_eater_of_cloaks() && itp->is_cloak())
-    return true;
-  if (is_eater_of_food() && itp->is_food())
-    return true;
-  if (is_eater_of_gauntlets() && itp->is_gauntlet())
-    return true;
-  if (is_eater_of_green_blood() && itp->is_green_blood())
-    return true;
-  if (is_eater_of_helmets() && itp->is_helmet())
-    return true;
-  if (is_eater_of_slime() && itp->is_slime())
-    return true;
-  if (is_eater_of_magical_items() && itp->is_magical())
-    return true;
-  if (is_eater_of_meat() && itp->is_meat())
-    return true;
-  if (is_eater_of_plants() && itp->is_plant())
-    return true;
-  if (is_eater_of_foliage() && itp->is_foliage())
-    return true;
-  if (is_eater_of_grass() && itp->is_grass())
-    return true;
-  if (is_eater_of_potions() && itp->is_potion())
-    return true;
-  if (is_eater_of_red_blood() && itp->is_red_blood())
-    return true;
-  if (is_eater_of_rings() && itp->is_ring())
-    return true;
-  if (is_eater_of_treasure() && itp->is_treasure_type())
-    return true;
-  if (is_eater_of_staffs() && itp->is_staff())
-    return true;
-  if (is_eater_of_weapons() && itp->is_weapon())
-    return true;
+  if (is_eater_of_amulets() && itp->is_amulet()) return true;
+  if (is_eater_of_armor() && itp->is_armor()) return true;
+  if (is_eater_of_boots() && itp->is_boots()) return true;
+  if (is_eater_of_cloaks() && itp->is_cloak()) return true;
+  if (is_eater_of_food() && itp->is_food()) return true;
+  if (is_eater_of_gauntlets() && itp->is_gauntlet()) return true;
+  if (is_eater_of_green_blood() && itp->is_green_blood()) return true;
+  if (is_eater_of_helmets() && itp->is_helmet()) return true;
+  if (is_eater_of_slime() && itp->is_slime()) return true;
+  if (is_eater_of_magical_items() && itp->is_magical()) return true;
+  if (is_eater_of_meat() && itp->is_meat()) return true;
+  if (is_eater_of_plants() && itp->is_plant()) return true;
+  if (is_eater_of_foliage() && itp->is_foliage()) return true;
+  if (is_eater_of_grass() && itp->is_grass()) return true;
+  if (is_eater_of_potions() && itp->is_potion()) return true;
+  if (is_eater_of_red_blood() && itp->is_red_blood()) return true;
+  if (is_eater_of_rings() && itp->is_ring()) return true;
+  if (is_eater_of_treasure() && itp->is_treasure_type()) return true;
+  if (is_eater_of_staffs() && itp->is_staff()) return true;
+  if (is_eater_of_weapons() && itp->is_weapon()) return true;
   return false;
 }
 
@@ -107,27 +67,21 @@ bool Thing::worth_eating(Thingp victim)
     return false;
   }
 
-  if (! can_eat(victim)) {
-    return false;
-  }
+  if (! can_eat(victim)) { return false; }
 
   return health_boost_would_occur(victim->nutrition_get()) || hunger_boost_would_occur(victim->nutrition_get());
 }
 
 bool Thing::can_eat(const Thingp itp)
 {
-  if (is_edible(itp)) {
-    return true;
-  }
+  if (is_edible(itp)) { return true; }
 
   return false;
 }
 
 bool Tp::can_eat(const Thingp itp)
 {
-  if (is_edible(itp)) {
-    return true;
-  }
+  if (is_edible(itp)) { return true; }
 
   return false;
 }
@@ -179,9 +133,7 @@ bool Thing::eat(Thingp victim)
       //
       // If still alive, need to kill it first.
       //
-      if (victim->is_alive_monst() || victim->is_player()) {
-        return nat_att(victim);
-      }
+      if (victim->is_alive_monst() || victim->is_player()) { return nat_att(victim); }
       return consume(victim);
     }
   }
@@ -374,13 +326,9 @@ bool Thing::eat_something(void)
   // Try for food first, ignoring potions
   //
   for (const auto t : carried_item_only_vector()) {
-    if (! can_eat(t)) {
-      continue;
-    }
+    if (! can_eat(t)) { continue; }
 
-    if (! worth_eating(t)) {
-      continue;
-    }
+    if (! worth_eating(t)) { continue; }
 
     if (! best) {
       best = t;
@@ -390,9 +338,7 @@ bool Thing::eat_something(void)
   }
 
   if (best) {
-    if (use(best)) {
-      return true;
-    }
+    if (use(best)) { return true; }
   }
 
   //
@@ -401,13 +347,9 @@ bool Thing::eat_something(void)
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
-    if (unlikely(! t)) {
-      continue;
-    }
+    if (unlikely(! t)) { continue; }
     if (t->is_health_booster()) {
-      if (use(t)) {
-        return true;
-      }
+      if (use(t)) { return true; }
     }
   }
 
@@ -422,12 +364,8 @@ bool Thing::can_eat_something(void)
   // Try for food first, ignoring potions
   //
   for (const auto t : carried_item_only_vector()) {
-    if (! can_eat(t)) {
-      continue;
-    }
-    if (! worth_eating(t)) {
-      continue;
-    }
+    if (! can_eat(t)) { continue; }
+    if (! worth_eating(t)) { continue; }
     return true;
   }
 
@@ -435,9 +373,7 @@ bool Thing::can_eat_something(void)
   // Try again but include potions
   //
   for (const auto t : carried_item_only_vector()) {
-    if (t->is_health_booster()) {
-      return true;
-    }
+    if (t->is_health_booster()) { return true; }
   }
 
   return false;

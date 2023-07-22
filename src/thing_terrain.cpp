@@ -40,9 +40,7 @@ void Thing::dmap_modify_terrain_cost(point p, uint8_t *d, bool include_monst, bo
     }
   }
 
-  if (pref > DMAP_MAX_LESS_PREFERRED_TERRAIN) {
-    pref = DMAP_MAX_LESS_PREFERRED_TERRAIN;
-  }
+  if (pref > DMAP_MAX_LESS_PREFERRED_TERRAIN) { pref = DMAP_MAX_LESS_PREFERRED_TERRAIN; }
 
   *d = (uint8_t) pref;
 }
@@ -61,21 +59,15 @@ bool Thing::will_prefer_terrain(const Thingp itp)
   auto it = itp->tp();
 
   if (me->is_immune_to_water() || me->is_able_to_swim()) {
-    if (it->is_shallow_water() || it->is_deep_water()) {
-      return true;
-    }
+    if (it->is_shallow_water() || it->is_deep_water()) { return true; }
   }
 
   if (me->is_immune_to_acid()) {
-    if (it->is_acid()) {
-      return true;
-    }
+    if (it->is_acid()) { return true; }
   }
 
   if (me->is_immune_to_fire()) {
-    if (it->is_fire() || it->is_lava()) {
-      return true;
-    }
+    if (it->is_fire() || it->is_lava()) { return true; }
   }
 
   return false;

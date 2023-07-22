@@ -341,9 +341,7 @@ void wid_config_keyboard_destroy(void)
   TRACE_AND_INDENT();
   config_changed = false;
 
-  if (! wid_config_keyboard_window) {
-    return;
-  }
+  if (! wid_config_keyboard_window) { return; }
 
   auto w                  = wid_config_keyboard_window->wid_text_area->wid_vert_scroll;
   last_vert_scroll_offset = wid_get_tl_y(w) - wid_get_tl_y(w->parent);
@@ -2001,9 +1999,7 @@ static uint8_t wid_config_keyboard_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   switch (key->mod) {
     case KMOD_LCTRL :
@@ -2029,9 +2025,7 @@ static uint8_t wid_config_keyboard_key_down(Widp w, const struct SDL_Keysym *key
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   return true;
 }
@@ -2041,9 +2035,7 @@ void Game::wid_config_keyboard_select(void)
   TRACE_AND_INDENT();
   wid_notice_destroy();
 
-  if (wid_config_keyboard_window) {
-    wid_config_keyboard_destroy();
-  }
+  if (wid_config_keyboard_window) { wid_config_keyboard_destroy(); }
 
   auto box_style           = UI_WID_STYLE_HORIZ_DARK;
   auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;

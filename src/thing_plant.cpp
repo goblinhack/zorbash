@@ -9,13 +9,9 @@
 
 void Thing::plant_tick(void)
 {
-  if (! level->is_carnivorous_plant(curr_at.x, curr_at.y)) {
-    return;
-  }
+  if (! level->is_carnivorous_plant(curr_at.x, curr_at.y)) { return; }
 
-  if (! is_meat()) {
-    return;
-  }
+  if (! is_meat()) { return; }
 
   bool hit;
 
@@ -33,12 +29,8 @@ void Thing::plant_tick(void)
     //
     FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_OBJ)
     {
-      if (! t->is_carnivorous_plant()) {
-        continue;
-      }
-      if (t == this) {
-        continue;
-      }
+      if (! t->is_carnivorous_plant()) { continue; }
+      if (t == this) { continue; }
       ThingAttackOptions attack_options {};
       t->attack(this, &attack_options);
       break;

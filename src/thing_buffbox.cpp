@@ -13,17 +13,11 @@
 bool Thing::buffbox_id_insert(Thingp what)
 {
   auto player = level->player;
-  if (! player) {
-    return false;
-  }
+  if (! player) { return false; }
 
-  if (! is_player()) {
-    return false;
-  }
+  if (! is_player()) { return false; }
 
-  if (! maybe_itemsp()) {
-    return false;
-  }
+  if (! maybe_itemsp()) { return false; }
 
   dbg("buffbox insert %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
@@ -33,20 +27,14 @@ bool Thing::buffbox_id_insert(Thingp what)
   for (auto i = 0U; i < buffbox_items; i++) {
     auto thing_id = itemsp()->buffbox_id[ i ];
     if (! thing_id) {
-      if (free_slot == -1) {
-        free_slot = i;
-      }
+      if (free_slot == -1) { free_slot = i; }
       continue;
     }
 
     auto t = level->thing_find(thing_id);
-    if (unlikely(! t)) {
-      continue;
-    }
+    if (unlikely(! t)) { continue; }
 
-    if (what == t) {
-      return true;
-    }
+    if (what == t) { return true; }
   }
 
   int item_slot = -1;
@@ -77,36 +65,24 @@ bool Thing::buffbox_id_insert(Thingp what)
 bool Thing::buffbox_id_remove(Thingp what)
 {
   auto player = level->player;
-  if (! player) {
-    return false;
-  }
+  if (! player) { return false; }
 
-  if (! is_player()) {
-    return false;
-  }
+  if (! is_player()) { return false; }
 
-  if (! maybe_itemsp()) {
-    return false;
-  }
+  if (! maybe_itemsp()) { return false; }
 
   dbg("buffbox remove %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   auto immediate_owner = what->immediate_owner();
-  if (immediate_owner) {
-    immediate_owner->bag_remove(what);
-  }
+  if (immediate_owner) { immediate_owner->bag_remove(what); }
 
   auto buffbox_items = player->itemsp()->buffbox_id.size();
   for (auto i = 0U; i < buffbox_items; i++) {
     auto thing_id = itemsp()->buffbox_id[ i ];
-    if (! thing_id) {
-      continue;
-    }
+    if (! thing_id) { continue; }
     auto t = level->thing_find(thing_id);
-    if (unlikely(! t)) {
-      continue;
-    }
+    if (unlikely(! t)) { continue; }
 
     if (what == t) {
       game->set_request_to_remake_buffbox();
@@ -198,9 +174,7 @@ bool Level::buffbox_over(const int slot)
   Thingp what;
 
   what = buffbox_describe(slot);
-  if (! what) {
-    return false;
-  }
+  if (! what) { return false; }
 
   IF_DEBUG2 { what->log("Over buffbox item"); }
   return true;

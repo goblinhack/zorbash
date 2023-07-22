@@ -19,14 +19,10 @@ static void wid_leftbar_display(Widp w, point tl, point br)
   TRACE_NO_INDENT();
 
   auto level = game->get_current_level();
-  if (! level) {
-    return;
-  }
+  if (! level) { return; }
 
   auto player = level->player;
-  if (! player) {
-    return;
-  }
+  if (! player) { return; }
 
   auto id = wid_get_thing_id_context(w, 0);
 
@@ -40,24 +36,18 @@ static void wid_leftbar_display(Widp w, point tl, point br)
   }
 
   auto t = level->thing_find(id);
-  if (t) {
-    t->blit_tile_at(tl, true /* lit */, true /* leftbar */);
-  }
+  if (t) { t->blit_tile_at(tl, true /* lit */, true /* leftbar */); }
 }
 
 static void wid_leftbar_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
-  if (game->state != Game::STATE_NORMAL) {
-    return;
-  }
+  if (game->state != Game::STATE_NORMAL) { return; }
 
   auto id = wid_get_thing_id_context(w, 0);
   auto t  = game->level->thing_find_optional(id);
-  if (unlikely(! t)) {
-    return;
-  }
+  if (unlikely(! t)) { return; }
 
   game->wid_thing_info_create(t);
 }
@@ -70,17 +60,13 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
   TRACE_NO_INDENT();
 
   auto player = level->player;
-  if (! player) {
-    return;
-  }
+  if (! player) { return; }
 
   //
   // Covers carried or equipped items
   //
   if (! allow_carried) {
-    if (t->immediate_owner()) {
-      return;
-    }
+    if (t->immediate_owner()) { return; }
   }
 
   if (t->immediate_owner()) {
@@ -491,9 +477,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     FOR_ALL_EQUIP(e)
     {
       auto iter = t->equip_get(e);
-      if (iter) {
-        wid_leftbar_display_describe(level, iter, y_at, width, "+ ");
-      }
+      if (iter) { wid_leftbar_display_describe(level, iter, y_at, width, "+ "); }
     }
   }
 }
@@ -504,21 +488,15 @@ bool wid_leftbar_display_create(void)
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
-  if (! level) {
-    return false;
-  }
+  if (! level) { return false; }
 
   auto player = level->player;
-  if (! player) {
-    return false;
-  }
+  if (! player) { return false; }
 
   //
   // When dead, don't update as this will show all the player items
   //
-  if (player->is_dead_or_dying()) {
-    return false;
-  }
+  if (player->is_dead_or_dying()) { return false; }
 
   int width = UI_LEFTBAR_WIDTH;
   int y_at  = 0;
@@ -544,19 +522,13 @@ bool wid_leftbar_display_create(void)
     std::vector< Thingp > m;
     FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
     {
-      if (! t->is_alive_monst()) {
-        continue;
-      }
+      if (! t->is_alive_monst()) { continue; }
 
       auto player = level->player;
 
-      if (! get(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) {
-        continue;
-      }
+      if (! get(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) { continue; }
 
-      if (! level->can_see_unimpeded(player->curr_at, t->curr_at)) {
-        continue;
-      }
+      if (! level->can_see_unimpeded(player->curr_at, t->curr_at)) { continue; }
 
       m.push_back(t);
     }
@@ -577,22 +549,14 @@ bool wid_leftbar_display_create(void)
     std::vector< Thingp > m;
     FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
     {
-      if (! t->is_dead && ! t->is_item()) {
-        continue;
-      }
+      if (! t->is_dead && ! t->is_item()) { continue; }
 
       auto player = level->player;
-      if (t->is_player()) {
-        continue;
-      }
+      if (t->is_player()) { continue; }
 
-      if (! get(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) {
-        continue;
-      }
+      if (! get(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) { continue; }
 
-      if (! level->can_see_unimpeded(player->curr_at, t->curr_at)) {
-        continue;
-      }
+      if (! level->can_see_unimpeded(player->curr_at, t->curr_at)) { continue; }
 
       m.push_back(t);
     }
@@ -620,17 +584,11 @@ bool wid_leftbar_display_create(void)
       }
 
       auto player = level->player;
-      if (t->is_player()) {
-        continue;
-      }
+      if (t->is_player()) { continue; }
 
-      if (! get(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) {
-        continue;
-      }
+      if (! get(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) { continue; }
 
-      if (! level->can_see_unimpeded(player->curr_at, t->curr_at)) {
-        continue;
-      }
+      if (! level->can_see_unimpeded(player->curr_at, t->curr_at)) { continue; }
 
       m.push_back(t);
     }

@@ -35,9 +35,7 @@ int Thing::is_able_to_sleep(void)
 int Thing::sleep_count(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->sleep_count);
-  }
+  if (maybe_infop()) { return (infop()->sleep_count); }
   return 0;
 }
 

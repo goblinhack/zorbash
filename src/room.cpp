@@ -240,22 +240,12 @@ void Room::room_flood_erase(
     }
   }
 
-  if (! found_something) {
-    return;
-  }
+  if (! found_something) { return; }
 
-  if (x > 0) {
-    room_flood_erase(room_copy, x - 1, y);
-  }
-  if (x < width - 1) {
-    room_flood_erase(room_copy, x + 1, y);
-  }
-  if (y > 0) {
-    room_flood_erase(room_copy, x, y - 1);
-  }
-  if (y < height - 1) {
-    room_flood_erase(room_copy, x, y + 1);
-  }
+  if (x > 0) { room_flood_erase(room_copy, x - 1, y); }
+  if (x < width - 1) { room_flood_erase(room_copy, x + 1, y); }
+  if (y > 0) { room_flood_erase(room_copy, x, y - 1); }
+  if (y < height - 1) { room_flood_erase(room_copy, x, y + 1); }
 }
 
 bool Room::room_do_any_doors_remain(
@@ -266,18 +256,10 @@ bool Room::room_do_any_doors_remain(
   //
   for (auto x : range< int >(0, width)) {
     for (auto y : range< int >(0, height)) {
-      if (get(room_copy, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_UP) {
-        return true;
-      }
-      if (get(room_copy, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_DOWN) {
-        return true;
-      }
-      if (get(room_copy, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_LEFT) {
-        return true;
-      }
-      if (get(room_copy, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_RIGHT) {
-        return true;
-      }
+      if (get(room_copy, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_UP) { return true; }
+      if (get(room_copy, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_DOWN) { return true; }
+      if (get(room_copy, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_LEFT) { return true; }
+      if (get(room_copy, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_RIGHT) { return true; }
     }
   }
   return false;
@@ -291,9 +273,7 @@ void Room::room_check_doors_can_reach_each_other(void)
   //
   // Chasms are more challenging
   //
-  if (biome == BIOME_CHASMS) {
-    return;
-  }
+  if (biome == BIOME_CHASMS) { return; }
 
   //
   // Erase everything that adjoins a door.
@@ -362,9 +342,7 @@ void Room::dump(std::array< std::array< std::array< char, MAP_DEPTH >, MAP_ROOM_
       for (auto x = 0; x < width; x++) {
         for (auto d = MAP_DEPTH - 1; d >= 0; d--) {
           auto m = get(data, x, y, d);
-          if (! m || (m == ' ')) {
-            continue;
-          }
+          if (! m || (m == ' ')) { continue; }
 
           auto cr = get(Charmap::all_charmaps, m);
           auto c  = cr.c;
@@ -407,9 +385,7 @@ void Room::con(void)
       for (auto x = 0; x < width; x++) {
         for (auto d = MAP_DEPTH - 1; d >= 0; d--) {
           auto m = get(data, x, y, d);
-          if (! m || (m == ' ')) {
-            continue;
-          }
+          if (! m || (m == ' ')) { continue; }
 
           auto cr = get(Charmap::all_charmaps, m);
           auto c  = cr.c;
@@ -440,9 +416,7 @@ bool Room::contains(int depth, char what)
   for (auto y = 0; y < height; y++) {
     for (auto x = 0; x < width; x++) {
       auto m = get(data, x, y, depth);
-      if (m == what) {
-        return true;
-      }
+      if (m == what) { return true; }
     }
   }
   return false;
@@ -453,9 +427,7 @@ bool Room::contains(int depth, char what1, char what2)
   for (auto y = 0; y < height; y++) {
     for (auto x = 0; x < width; x++) {
       auto m = get(data, x, y, depth);
-      if ((m == what1) || (m == what2)) {
-        return true;
-      }
+      if ((m == what1) || (m == what2)) { return true; }
     }
   }
   return false;
@@ -466,9 +438,7 @@ bool Room::contains(int depth, char what1, char what2, char what3)
   for (auto y = 0; y < height; y++) {
     for (auto x = 0; x < width; x++) {
       auto m = get(data, x, y, depth);
-      if ((m == what1) || (m == what2) || (m == what3)) {
-        return true;
-      }
+      if ((m == what1) || (m == what2) || (m == what3)) { return true; }
     }
   }
   return false;

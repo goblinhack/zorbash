@@ -11,9 +11,7 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, bool force)
 {
   TRACE_NO_INDENT();
 
-  if (! is_able_to_shove()) {
-    return (THING_SHOVE_NEVER_TRIED);
-  }
+  if (! is_able_to_shove()) { return (THING_SHOVE_NEVER_TRIED); }
 
   dbg("Try to shove, %s delta %d,%d", victim->to_short_string().c_str(), (int) delta.x, (int) delta.y);
   TRACE_AND_INDENT();
@@ -70,16 +68,12 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, bool force)
   //
   // If I'm on fire. set it on fire too!
   //
-  if (on_fire_anim_id().ok()) {
-    victim->on_fire_set("I am on fire, set it on fire too");
-  }
+  if (on_fire_anim_id().ok()) { victim->on_fire_set("I am on fire, set it on fire too"); }
 
   //
   // Annoy the thing being pushed
   //
-  if (victim->is_alive_monst()) {
-    victim->add_attacker(this);
-  }
+  if (victim->is_alive_monst()) { victim->add_attacker(this); }
 
   point shove_delta = delta;
   point shove_pos   = victim->curr_at + shove_delta;
@@ -123,17 +117,11 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, bool force)
 
       int its_strength = victim->stat_str_total() + victim->shove_strength_total();
 
-      if (victim->is_heavy()) {
-        its_strength += 10;
-      }
+      if (victim->is_heavy()) { its_strength += 10; }
 
-      if (victim->is_very_heavy()) {
-        its_strength += 10;
-      }
+      if (victim->is_very_heavy()) { its_strength += 10; }
 
-      if (was_sleeping) {
-        its_strength /= 4;
-      }
+      if (was_sleeping) { its_strength /= 4; }
 
       dbg("Shove: Its strength (+ mods) %d vs me %d (+ mods)", its_strength, stat_str() + shove_strength_total());
 
@@ -165,9 +153,7 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, bool force)
       }
 
       if (victim->is_monst()) {
-        if (! victim->is_dead) {
-          victim->popup(string_sprintf("%%fg=orange$!"));
-        }
+        if (! victim->is_dead) { victim->popup(string_sprintf("%%fg=orange$!")); }
       }
     }
   }
@@ -188,23 +174,15 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, bool force)
     //
     if (victim->is_brazier()) {
       if (! victim->is_dead) {
-        if (is_player()) {
-          msg("The brazier falls back on you!");
-        }
+        if (is_player()) { msg("The brazier falls back on you!"); }
         victim->move_to(curr_at);
       }
     } else if (victim->is_barrel()) {
-      if (is_player()) {
-        msg("The barrel will not budge!");
-      }
+      if (is_player()) { msg("The barrel will not budge!"); }
     } else if (victim->is_block_of_ice()) {
-      if (is_player()) {
-        msg("The block of ice will not budge!");
-      }
+      if (is_player()) { msg("The block of ice will not budge!"); }
     } else {
-      if (is_player()) {
-        msg("%s cannot be shoved! Something blocks the way.", text_The().c_str());
-      }
+      if (is_player()) { msg("%s cannot be shoved! Something blocks the way.", text_The().c_str()); }
     }
   } else {
     if (is_player()) {
@@ -278,9 +256,7 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, bool force)
         msg("%%fg=red$%s shoves you into the sticky web!%%fg=reset$", text_The().c_str());
       } else if (victim->is_dead) {
         if (d20_ge(stat_luck_total(), SAVING_ROLL_HARD)) {
-          if (is_monst()) {
-            msg("%s kicks your corpse for fun, but hurts itself!", text_The().c_str());
-          }
+          if (is_monst()) { msg("%s kicks your corpse for fun, but hurts itself!", text_The().c_str()); }
         } else {
           msg("%s kicks your corpse for fun!", text_The().c_str());
         }
@@ -313,9 +289,7 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, bool force)
         // Must check at the new location
         //
         auto n = level->thing_new(spawn_what, spawn_at);
-        if (n) {
-          n->location_check();
-        }
+        if (n) { n->location_check(); }
       }
     }
   }
@@ -341,14 +315,10 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, bool force)
         }
       } else if (pcg_random_range(0, 100) < 5) {
         if (is_player()) {
-          if (on_fire_set("set yourself on fire")) {
-            msg("%%fg=red$Clumsy! You set yourself on fire!%%fg=reset$");
-          }
+          if (on_fire_set("set yourself on fire")) { msg("%%fg=red$Clumsy! You set yourself on fire!%%fg=reset$"); }
         }
       } else {
-        if (is_player()) {
-          msg("%%fg=orange$It burns as you shove it, but you avoid the flames.%%fg=reset$");
-        }
+        if (is_player()) { msg("%%fg=orange$It burns as you shove it, but you avoid the flames.%%fg=reset$"); }
       }
     }
   }
@@ -363,21 +333,13 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, bool force)
     if (victim->is_shovable_and_sticky()) {
       FOR_ALL_NON_INTERNAL_THINGS(level, t, old_at.x, old_at.y)
       {
-        if (t == this) {
-          continue;
-        }
+        if (t == this) { continue; }
 
-        if (t == victim) {
-          continue;
-        }
+        if (t == victim) { continue; }
 
-        if (! t->is_shovable()) {
-          continue;
-        }
+        if (! t->is_shovable()) { continue; }
 
-        if (t->curr_at == victim->curr_at) {
-          continue;
-        }
+        if (t->curr_at == victim->curr_at) { continue; }
         try_to_shove(t, delta, true);
       }
 
@@ -397,20 +359,14 @@ bool Thing::shove_ok(point future_pos)
 
   FOR_ALL_COLLISION_THINGS(level, victim, future_pos.x, future_pos.y)
   {
-    if (this == victim) {
-      continue;
-    }
+    if (this == victim) { continue; }
 
     //
     // Skip things we cannot collide with
     //
-    if (victim->is_falling || victim->is_jumping || victim->is_changing_level) {
-      continue;
-    }
+    if (victim->is_falling || victim->is_jumping || victim->is_changing_level) { continue; }
 
-    if (victim->is_obs_shoving()) {
-      return false;
-    }
+    if (victim->is_obs_shoving()) { return false; }
   }
   FOR_ALL_THINGS_END()
 
@@ -447,18 +403,12 @@ ThingShoved Thing::try_to_shove(point future_pos)
   //
   FOR_ALL_THINGS_THAT_INTERACT(level, victim, p.x, p.y)
   {
-    if (this == victim) {
-      continue;
-    }
+    if (this == victim) { continue; }
     dbg("Shove candidate, %s", victim->to_short_string().c_str());
 
-    if (! victim->is_shovable()) {
-      continue;
-    }
+    if (! victim->is_shovable()) { continue; }
 
-    if (! victim->is_heavy()) {
-      continue;
-    }
+    if (! victim->is_heavy()) { continue; }
 
     dbg("Shove heavy candidate, %s", victim->to_short_string().c_str());
     point shove_delta = delta;
@@ -468,14 +418,10 @@ ThingShoved Thing::try_to_shove(point future_pos)
 
   FOR_ALL_THINGS_THAT_INTERACT(level, victim, p.x, p.y)
   {
-    if (this == victim) {
-      continue;
-    }
+    if (this == victim) { continue; }
     dbg("Shove candidate, %s", victim->to_short_string().c_str());
 
-    if (! victim->is_shovable()) {
-      continue;
-    }
+    if (! victim->is_shovable()) { continue; }
 
     dbg("Shove candidate, %s", victim->to_short_string().c_str());
     point shove_delta = delta;

@@ -52,16 +52,12 @@ static void __attribute__((noinline)) sdl_event_keydown_repeat(SDL_Keysym *key, 
     //
     // Fast repeat
     //
-    if (! time_have_x_hundredths_passed_since(SDL_KEY_REPEAT_HUNDREDTHS_NEXT, sdl.key_repeat_this_key)) {
-      return;
-    }
+    if (! time_have_x_hundredths_passed_since(SDL_KEY_REPEAT_HUNDREDTHS_NEXT, sdl.key_repeat_this_key)) { return; }
   } else {
     //
     // First press
     //
-    if (! time_have_x_hundredths_passed_since(SDL_KEY_REPEAT_HUNDREDTHS_FIRST, sdl.key_repeat_this_key)) {
-      return;
-    }
+    if (! time_have_x_hundredths_passed_since(SDL_KEY_REPEAT_HUNDREDTHS_FIRST, sdl.key_repeat_this_key)) { return; }
     sdl.key_repeat_count++;
   }
 
@@ -75,14 +71,11 @@ static bool __attribute__((noinline)) sdl_event_keydown_same_key(SDL_Keysym *key
   //
   // Do not use memcmp; SDL_Keysym has an unused field and this will trigger valgrind.
   //
-  if (key->scancode != last_key_pressed.scancode)
-    return false;
+  if (key->scancode != last_key_pressed.scancode) return false;
 
-  if (key->sym != last_key_pressed.sym)
-    return false;
+  if (key->sym != last_key_pressed.sym) return false;
 
-  if (key->mod != last_key_pressed.mod)
-    return false;
+  if (key->mod != last_key_pressed.mod) return false;
 
   return true;
 }
@@ -131,9 +124,7 @@ static void __attribute__((noinline)) sdl_event_keyup(SDL_Keysym *key, SDL_Event
 
     g_grab_next_key = false;
     sdl.grabbed_key = sdlk_normalize(event->key.keysym);
-    if (sdl.on_sdl_key_grab) {
-      (*sdl.on_sdl_key_grab)(sdl.grabbed_key);
-    }
+    if (sdl.on_sdl_key_grab) { (*sdl.on_sdl_key_grab)(sdl.grabbed_key); }
     return;
   }
 
@@ -168,9 +159,7 @@ sdl_event_mousemotion(SDL_Keysym *key, SDL_Event *event, bool &processed_mouse_m
   // Catch up with the latest mouse position; and dampen identical events.
   //
   SDL_GetMouseState(&mx, &my);
-  if ((mx == last_mx) && (my == last_my)) {
-    return;
-  }
+  if ((mx == last_mx) && (my == last_my)) { return; }
 
   last_mx = mx;
   last_my = my;
@@ -262,9 +251,7 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
           } else {
             accel *= UI_MOUSE_WHEEL_SCALE;
 
-            if (accel > UI_MOUSE_WHEEL_SCALE_MAX) {
-              accel = UI_MOUSE_WHEEL_SCALE_MAX;
-            }
+            if (accel > UI_MOUSE_WHEEL_SCALE_MAX) { accel = UI_MOUSE_WHEEL_SCALE_MAX; }
           }
 
           ts = time_ms();
@@ -276,13 +263,9 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
         //
         // Handle "natural" scrolling direction.
         //
-        if (! game->config.mouse_wheel_lr_negated) {
-          sdl.wheel_x = -sdl.wheel_x;
-        }
+        if (! game->config.mouse_wheel_lr_negated) { sdl.wheel_x = -sdl.wheel_x; }
 
-        if (game->config.mouse_wheel_ud_negated) {
-          sdl.wheel_y = -sdl.wheel_y;
-        }
+        if (game->config.mouse_wheel_ud_negated) { sdl.wheel_y = -sdl.wheel_y; }
 
         sdl.wheel_x *= accel;
         sdl.wheel_y *= accel;
@@ -305,9 +288,7 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
         int axis  = event->jaxis.axis;
         int value = event->jaxis.value;
 
-        if (! sdl.joy_axes) {
-          sdl.joy_axes = (int *) myzalloc(sizeof(int) * sdl.joy_naxes, "joy axes");
-        }
+        if (! sdl.joy_axes) { sdl.joy_axes = (int *) myzalloc(sizeof(int) * sdl.joy_naxes, "joy axes"); }
 
         sdl.joy_axes[ axis ] = value;
 
@@ -457,13 +438,9 @@ static void sdl_key_repeat_events_(void)
 {
   TRACE_NO_INDENT();
 
-  if (! game) {
-    return;
-  }
+  if (! game) { return; }
 
-  if (! game->level) {
-    return;
-  }
+  if (! game->level) { return; }
 
   const uint8_t *state = SDL_GetKeyboardState(nullptr);
 
@@ -476,9 +453,7 @@ static void sdl_key_repeat_events_(void)
   //
   // Keypad stuff is hardcoded.
   //
-  if (state[ SDL_SCANCODE_KP_PERIOD ]) {
-    wait = true;
-  }
+  if (state[ SDL_SCANCODE_KP_PERIOD ]) { wait = true; }
   if (state[ SDL_SCANCODE_KP_1 ]) {
     // 7 8 9
     // 4   6
@@ -551,9 +526,7 @@ static void sdl_key_repeat_events_(void)
         game->request_player_move_right         = right;
         game->request_player_to_wait_or_collect = wait;
 
-        if (! game->request_player_move) {
-          game->request_player_move = time_ms();
-        }
+        if (! game->request_player_move) { game->request_player_move = time_ms(); }
       }
     } else {
       //
@@ -568,16 +541,12 @@ static void sdl_key_repeat_events_(void)
         game->request_player_move_right         = right;
         game->request_player_to_wait_or_collect = wait;
 
-        if (! game->request_player_move) {
-          game->request_player_move = time_ms();
-        }
+        if (! game->request_player_move) { game->request_player_move = time_ms(); }
       }
     }
   }
 
-  if (game->level) {
-    game->level->handle_input_events();
-  }
+  if (game->level) { game->level->handle_input_events(); }
 }
 
 void sdl_key_repeat_events(void)

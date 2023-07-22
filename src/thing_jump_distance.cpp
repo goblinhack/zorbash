@@ -12,9 +12,7 @@ float Thing::jump_distance_current(void)
 
   auto d = (float) jump_distance_total();
 
-  if (is_player()) {
-    d += 0.5 + ((pcg_random_range(0, 100) / 100.0));
-  }
+  if (is_player()) { d += 0.5 + ((pcg_random_range(0, 100) / 100.0)); }
 
   //
   // Reduce jump distance if tired
@@ -44,9 +42,7 @@ int Thing::jump_distance_total(void)
 
   stat = jump_distance();
   prev = stat;
-  if (stat) {
-    dbg3("Jump distance: %d", stat);
-  }
+  if (stat) { dbg3("Jump distance: %d", stat); }
   TRACE_AND_INDENT();
 
   stat += jump_distance_bonus();
@@ -76,16 +72,12 @@ int Thing::jump_distance_total(void)
         //
         // Don't count boots for example twice
         //
-        if (is_equipped(iter)) {
-          continue;
-        }
+        if (is_equipped(iter)) { continue; }
         //
         // Things that are equipped must be equipped to get the benefit.
         // Other items give the benefit by just being carried.
         //
-        if (iter->is_auto_equipped()) {
-          continue;
-        }
+        if (iter->is_auto_equipped()) { continue; }
         stat += iter->jump_distance_total();
         if (stat != prev) {
           prev = stat;
@@ -163,18 +155,14 @@ int Thing::jump_distance(void)
 int Thing::jump_distance_bonus(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->jump_distance_bonus);
-  }
+  if (maybe_infop()) { return (infop()->jump_distance_bonus); }
   return 0;
 }
 
 int Thing::jump_distance_bonus_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->jump_distance_bonus = v);
   return n;
@@ -183,9 +171,7 @@ int Thing::jump_distance_bonus_set(int v)
 int Thing::jump_distance_bonus_decr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->jump_distance_bonus -= v);
   return n;
@@ -194,9 +180,7 @@ int Thing::jump_distance_bonus_decr(int v)
 int Thing::jump_distance_bonus_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->jump_distance_bonus += v);
   return n;
@@ -205,9 +189,7 @@ int Thing::jump_distance_bonus_incr(int v)
 int Thing::jump_distance_bonus_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->jump_distance_bonus--);
   return n;
@@ -216,9 +198,7 @@ int Thing::jump_distance_bonus_decr(void)
 int Thing::jump_distance_bonus_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->set_request_to_remake_rightbar();
-  }
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
   new_infop();
   auto n = (infop()->jump_distance_bonus++);
   return n;

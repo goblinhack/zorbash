@@ -15,9 +15,7 @@ bool Thing::open_door(Thingp door)
 
   if (is_on_fire()) {
     if (! door->is_on_fire()) {
-      if (is_player()) {
-        msg("The door is ablaze!");
-      }
+      if (is_player()) { msg("The door is ablaze!"); }
       door->on_fire_set("opened flaming door");
     }
   }
@@ -50,9 +48,7 @@ bool Thing::open_door(Thingp door)
     dbg("Door was unlocked: %s", door->to_short_string().c_str());
     TRACE_AND_INDENT();
 
-    if (is_player()) {
-      msg("The door was unlocked and creaks open.");
-    }
+    if (is_player()) { msg("The door was unlocked and creaks open."); }
   } else {
     //
     // We need a key to open it.
@@ -70,9 +66,7 @@ bool Thing::open_door(Thingp door)
       keys_decr();
       door->is_key_in_lock = true;
 
-      if (is_player()) {
-        msg("You unlock the door.");
-      }
+      if (is_player()) { msg("You unlock the door."); }
     } else if (d20_ge(stat_thv_total(), SAVING_ROLL_MODERATE)) {
       //
       // Managed to unlock the door
@@ -80,9 +74,7 @@ bool Thing::open_door(Thingp door)
       dbg("No keys to open door: %s", door->to_short_string().c_str());
       TRACE_AND_INDENT();
 
-      if (is_player()) {
-        msg("You manage to skillfully unlock the door.");
-      }
+      if (is_player()) { msg("You manage to skillfully unlock the door."); }
     } else {
       //
       // No keys ?
@@ -92,9 +84,7 @@ bool Thing::open_door(Thingp door)
 
       if (is_player()) {
         static int last_told_when;
-        if (! last_told_when || (game->tick_current >= last_told_when + 10)) {
-          msg("You need a key.");
-        }
+        if (! last_told_when || (game->tick_current >= last_told_when + 10)) { msg("You need a key."); }
         last_told_when = game->tick_current;
       }
       return false;
@@ -124,24 +114,16 @@ bool Thing::close_door(Thingp door)
 {
   if (is_on_fire()) {
     if (! door->is_on_fire()) {
-      if (is_player()) {
-        msg("The closed door is ablaze!");
-      }
+      if (is_player()) { msg("The closed door is ablaze!"); }
       door->on_fire_set("closed flaming door");
     }
   }
 
-  if (! door->is_door()) {
-    return false;
-  }
+  if (! door->is_door()) { return false; }
 
-  if (! door->is_open) {
-    return false;
-  }
+  if (! door->is_open) { return false; }
 
-  if (door->is_dead) {
-    return false;
-  }
+  if (door->is_dead) { return false; }
 
   dbg("Close door");
   TRACE_AND_INDENT();
@@ -156,17 +138,11 @@ bool Thing::close_door(Thingp door)
   //
   FOR_ALL_THINGS_THAT_INTERACT(level, t, door->curr_at.x, door->curr_at.y)
   {
-    if (t == this) {
-      continue;
-    }
+    if (t == this) { continue; }
 
-    if (! t->is_monst() && ! t->is_player()) {
-      continue;
-    }
+    if (! t->is_monst() && ! t->is_player()) { continue; }
 
-    if (t->thing_size() > thing_size()) {
-      msg("%s blocks the door from closing.", t->text_The().c_str());
-    }
+    if (t->thing_size() > thing_size()) { msg("%s blocks the door from closing.", t->text_The().c_str()); }
 
     if (is_player()) {
       if (t->is_ethereal()) {
@@ -188,16 +164,12 @@ bool Thing::close_door(Thingp door)
       door->is_key_in_lock = false;
       keys_incr(1);
 
-      if (is_player()) {
-        msg("The door closes. You skillfully manage to remove the key from the rusty lock.");
-      }
+      if (is_player()) { msg("The door closes. You skillfully manage to remove the key from the rusty lock."); }
     } else {
       //
       // No, the key is stuck.
       //
-      if (is_player()) {
-        msg("The door closes with the key firmly stuck in the lock.");
-      }
+      if (is_player()) { msg("The door closes with the key firmly stuck in the lock."); }
     }
   } else {
     msg("The door closes.");

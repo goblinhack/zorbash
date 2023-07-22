@@ -87,9 +87,7 @@ uint32_t pcg32_random() { return pcg32_random_r(&pcg32_global); }
 
 uint32_t pcg32_boundedrand_r(pcg32_random_t *rng, uint32_t bound)
 {
-  if (! bound) {
-    return 0;
-  }
+  if (! bound) { return 0; }
 
   // To avoid bias, we need to make the range of the RNG a multiple of
   // bound, which we do by dropping output less than a threshold.
@@ -116,9 +114,7 @@ uint32_t pcg32_boundedrand_r(pcg32_random_t *rng, uint32_t bound)
   // is eliminated.
   for (; /*ever*/;) {
     uint32_t r = pcg32_random_r(rng);
-    if (r >= threshold) {
-      return r % bound;
-    }
+    if (r >= threshold) { return r % bound; }
   }
 }
 

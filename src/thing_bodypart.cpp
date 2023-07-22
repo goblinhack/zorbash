@@ -15,9 +15,7 @@ bool Thing::is_player_bodypart(Thingp item)
 {
   FOR_ALL_BODYPART(iter)
   {
-    if (item == bodypart_get(iter)) {
-      return true;
-    }
+    if (item == bodypart_get(iter)) { return true; }
   }
   return false;
 }
@@ -37,9 +35,7 @@ Thingp Thing::bodypart_get(int which)
   }
 
   auto id = bodypart_id_get(which);
-  if (id.ok()) {
-    return (level->thing_find(id));
-  }
+  if (id.ok()) { return (level->thing_find(id)); }
 
   return nullptr;
 }
@@ -52,9 +48,7 @@ bool Thing::bodypart_add(Thingp bodypart, int which)
   dbg("Try to add bodypart: %s", bodypart->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  if (bodypart_get(which) == bodypart) {
-    return false;
-  }
+  if (bodypart_get(which) == bodypart) { return false; }
 
   bodypart_remove(which);
   bodypart_id_set(bodypart->id, which);
@@ -67,9 +61,7 @@ void Thing::bodypart_remove(int which)
 {
   TRACE_NO_INDENT();
   auto bodypart = bodypart_get(which);
-  if (! bodypart) {
-    return;
-  }
+  if (! bodypart) { return; }
 
   dbg("Remove bodypart %s", bodypart->to_short_string().c_str());
   TRACE_AND_INDENT();
@@ -106,9 +98,7 @@ ThingId Thing::bodypart_id_get(int which)
   TRACE_NO_INDENT();
   if (maybe_itemsp()) {
     auto id = get(itemsp()->bodypart_id, which);
-    if (id != NoThingId) {
-      verify(MTYPE_THING, level->thing_find(id));
-    }
+    if (id != NoThingId) { verify(MTYPE_THING, level->thing_find(id)); }
     return id;
   }
   return NoThingId;

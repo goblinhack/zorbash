@@ -18,9 +18,7 @@ static class Tokens *tokens_parse(const char *input, class Tokens *tokens)
 
   memset(tokens, 0, sizeof(*tokens));
 
-  if (strlen(input) >= MAXSHORTSTR) {
-    return tokens;
-  }
+  if (strlen(input) >= MAXSHORTSTR) { return tokens; }
 
   in   = input;
   out  = tokens->data;
@@ -40,9 +38,7 @@ static class Tokens *tokens_parse(const char *input, class Tokens *tokens)
     /*
      * End of line ?
      */
-    if (i == '\0') {
-      return tokens;
-    }
+    if (i == '\0') { return tokens; }
 
     /*
      * Skip leading pad.
@@ -54,9 +50,7 @@ static class Tokens *tokens_parse(const char *input, class Tokens *tokens)
     /*
      * End of line ?
      */
-    if (i == '\0') {
-      return tokens;
-    }
+    if (i == '\0') { return tokens; }
 
     /*
      * Read whole strings.
@@ -89,9 +83,7 @@ static class Tokens *tokens_parse(const char *input, class Tokens *tokens)
 
         *out++ = i;
 
-        if (i == '\0') {
-          break;
-        }
+        if (i == '\0') { break; }
       }
 
       continue;
@@ -100,9 +92,7 @@ static class Tokens *tokens_parse(const char *input, class Tokens *tokens)
     /*
      * End of line ?
      */
-    if (i == '\0') {
-      return tokens;
-    }
+    if (i == '\0') { return tokens; }
 
     tokens->args[ tokens->cnt++ ] = out;
 
@@ -119,9 +109,7 @@ static class Tokens *tokens_parse(const char *input, class Tokens *tokens)
 
       *out++ = i;
 
-      if (i == '\0') {
-        break;
-      }
+      if (i == '\0') { break; }
 
       i = *(in++);
     }
@@ -172,9 +160,7 @@ void tokens_print_to(class Tokens *tokens, char *output, int output_size)
     strlcat_(output, tokens->args[ cnt ], output_size);
     cnt++;
 
-    if (cnt < tokens->cnt) {
-      strlcat_(output, " ", output_size);
-    }
+    if (cnt < tokens->cnt) { strlcat_(output, " ", output_size); }
   }
 }
 

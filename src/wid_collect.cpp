@@ -36,14 +36,10 @@ static void wid_collect_slot(int slot)
   }
 
   auto level = game->get_current_level();
-  if (! level) {
-    return;
-  }
+  if (! level) { return; }
 
   auto player = level->player;
-  if (! player) {
-    return;
-  }
+  if (! player) { return; }
 
   DBG2("Old items");
   TRACE_AND_INDENT();
@@ -108,23 +104,17 @@ static void wid_collect_slot(int slot)
   //
   for (auto id : collect_items) {
     auto t = level->thing_find_optional(id);
-    if (! t) {
-      continue;
-    }
+    if (! t) { continue; }
 
     //
     // Skip collected coins that are now dead
     //
-    if (t->is_dead) {
-      continue;
-    }
+    if (t->is_dead) { continue; }
 
     //
     // Skip things already collected by the player
     //
-    if (t->top_owner() == player) {
-      continue;
-    }
+    if (t->top_owner() == player) { continue; }
 
     IF_DEBUG { player->log("Remaining collect items: %s", t->to_short_string().c_str()); }
     new_collect_items.push_back(t->id);
@@ -137,38 +127,26 @@ static void wid_collect_slot(int slot)
     return;
   }
 
-  if (collect_items.empty()) {
-    wid_collect_destroy();
-  }
+  if (collect_items.empty()) { wid_collect_destroy(); }
 }
 
 static uint8_t wid_collect_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
   auto level = game->get_current_level();
-  if (! level) {
-    return true;
-  }
+  if (! level) { return true; }
 
   auto player = level->player;
-  if (! player) {
-    return true;
-  }
+  if (! player) { return true; }
 
-  if (player->is_dead) {
-    return true;
-  }
+  if (player->is_dead) { return true; }
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   if (sdlk_eq(*key, game->config.key_drop)) {
     auto what = game->level->inventory_get();
     if (what) {
-      if (game->level->player->drop(what)) {
-        game->tick_begin("drop");
-      }
+      if (game->level->player->drop(what)) { game->tick_begin("drop"); }
     }
     CON("INF: collect cancelled");
     game->change_state(Game::STATE_NORMAL, "cancel collect");
@@ -213,22 +191,14 @@ static uint8_t wid_collect_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
   auto level = game->get_current_level();
-  if (! level) {
-    return true;
-  }
+  if (! level) { return true; }
 
   auto player = level->player;
-  if (! player) {
-    return true;
-  }
+  if (! player) { return true; }
 
-  if (player->is_dead) {
-    return true;
-  }
+  if (player->is_dead) { return true; }
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   return true;
 }
@@ -242,18 +212,12 @@ static uint8_t wid_collect_mouse_down(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   auto level = game->get_current_level();
-  if (! level) {
-    return true;
-  }
+  if (! level) { return true; }
 
   auto player = level->player;
-  if (! player) {
-    return true;
-  }
+  if (! player) { return true; }
 
-  if (player->is_dead) {
-    return true;
-  }
+  if (player->is_dead) { return true; }
 
   wid_collect_slot(wid_get_int_context(w));
   return true;
@@ -272,14 +236,10 @@ static void wid_collect_mouse_over_begin(Widp w, int relx, int rely, int wheelx,
   }
 
   auto level = game->get_current_level();
-  if (! level) {
-    return;
-  }
+  if (! level) { return; }
 
   auto player = level->player;
-  if (! player) {
-    return;
-  }
+  if (! player) { return; }
 
   auto id = collect_items[ slot ];
   auto t  = level->thing_find_optional(id);
@@ -344,9 +304,7 @@ void Game::wid_collect_create(const std::list< ThingId > items /* intentional co
     std::map< Thingp, bool > found;
     for (auto id : items) {
       auto t = level->thing_find_optional(id);
-      if (unlikely(! t)) {
-        continue;
-      }
+      if (unlikely(! t)) { continue; }
 
       IF_DEBUG { player->log("Collect item cand: %s", t->to_short_string().c_str()); }
       if (found.find(t) != found.end()) {
@@ -377,9 +335,7 @@ void Game::wid_collect_create(const std::list< ThingId > items /* intentional co
         //
         // Only one bag please
         //
-        if (already_carrying_a_bag) {
-          ok_to_carry = false;
-        }
+        if (already_carrying_a_bag) { ok_to_carry = false; }
       } else if (t->is_bag_item_container()) {
         //
         // Ignore chests
@@ -442,9 +398,7 @@ void Game::wid_collect_create(const std::list< ThingId > items /* intentional co
 
   bool scrollbar = false;
   auto sz        = collect_items.size();
-  if (! sz) {
-    sz = 1;
-  }
+  if (! sz) { sz = 1; }
   int height_max = (((int) sz * 3) + 6);
   int height;
   if (height_max > TERM_HEIGHT / 2) {
@@ -546,9 +500,7 @@ void Game::wid_collect_create(const std::list< ThingId > items /* intentional co
 
       if (t) {
         std::string text;
-        if (slot < 9) {
-          text = " " + std::to_string(slot + 1) + ". ";
-        }
+        if (slot < 9) { text = " " + std::to_string(slot + 1) + ". "; }
 
         //
         // The Item Name

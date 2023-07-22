@@ -36,9 +36,7 @@ bool operator<(const class Next_hop &lhs, const class Next_hop &rhs)
 
 bool operator<(const class Path &lhs, const class Path &rhs)
 {
-  if (lhs.cost == rhs.cost) {
-    return lhs.path.size() < rhs.path.size();
-  }
+  if (lhs.cost == rhs.cost) { return lhs.path.size() < rhs.path.size(); }
   return lhs.cost < rhs.cost; // Lower costs at the head
 }
 
@@ -219,16 +217,12 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
           if (ai_choose_avoid_goals(avoid, goal)) {
             for (const auto &inner_goal : avoid) {
               if (ai_create_path_to_single_goal(minx, miny, maxx, maxy, inner_goal, &saved_dmap)) {
-                if (goal.what) {
-                  add_goal_penalty(goal.what);
-                }
+                if (goal.what) { add_goal_penalty(goal.what); }
 
                 if (shooting_chance < chance_d1000_shooting()) {
                   AI_LOG("Processing shoot goal");
                   TRACE_AND_INDENT();
-                  if (shoot_at(goal.what)) {
-                    return true;
-                  }
+                  if (shoot_at(goal.what)) { return true; }
                 }
 
                 IF_DEBUG2
@@ -247,15 +241,11 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
         if (shooting_chance < chance_d1000_shooting()) {
           AI_LOG("Processing shoot goal");
           TRACE_AND_INDENT();
-          if (shoot_at(goal.what)) {
-            return true;
-          }
+          if (shoot_at(goal.what)) { return true; }
         }
 
         if (ai_create_path_to_single_goal(minx, miny, maxx, maxy, goal, &saved_dmap)) {
-          if (goal.what) {
-            add_goal_penalty(goal.what);
-          }
+          if (goal.what) { add_goal_penalty(goal.what); }
 
           IF_DEBUG2
           {
@@ -309,15 +299,11 @@ bool Thing::ai_create_path_to_single_goal_do(int minx, int miny, int maxx, int m
   // Make sure we do not want to stay in the same position by making
   // our current cell passable but the very least preferred it can be.
   //
-  if (get(dmap.val, start.x, start.y) > 0) {
-    set(dmap.val, start.x, start.y, DMAP_IS_PASSABLE);
-  }
+  if (get(dmap.val, start.x, start.y) > 0) { set(dmap.val, start.x, start.y, DMAP_IS_PASSABLE); }
 
   IF_DEBUG3
   {
-    if (is_debug_type()) {
-      dmap_print(&dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy));
-    }
+    if (is_debug_type()) { dmap_print(&dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy)); }
   }
 
   //
@@ -365,9 +351,7 @@ bool Thing::ai_create_path_to_single_goal_do(int minx, int miny, int maxx, int m
     if (new_move_path.empty()) {
       if (is_stuck_currently()) {
         AI_LOG("Stuck in something");
-        if (is_player()) {
-          game->tick_begin("Try to break free");
-        }
+        if (is_player()) { game->tick_begin("Try to break free"); }
         return true;
       }
       AI_LOG("Goal has no path");
@@ -410,13 +394,9 @@ bool Thing::ai_create_path_to_single_goal_do(int minx, int miny, int maxx, int m
       teleport_options.teleport_self   = true;
       teleport_options.teleport_closer = true;
       teleport_options.teleport_limit  = true;
-      if (teleport_self(teleport_options, goal.what)) {
-        return true;
-      }
+      if (teleport_self(teleport_options, goal.what)) { return true; }
 
-      if (jump_attack(goal.what)) {
-        return true;
-      }
+      if (jump_attack(goal.what)) { return true; }
 
       return true;
     }
@@ -470,9 +450,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
     case MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP : jump_allowed = false; break;
   }
 
-  if (! is_able_to_jump()) {
-    jump_allowed = false;
-  }
+  if (! is_able_to_jump()) { jump_allowed = false; }
 
   auto ai = aip();
 
@@ -538,9 +516,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
       //
       FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
       {
-        if (is_friend(it)) {
-          break;
-        }
+        if (is_friend(it)) { break; }
       }
       FOR_ALL_THINGS_END();
 
@@ -552,9 +528,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         continue;
       }
 
-      if (is_disliked_by_me(p)) {
-        set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
-      }
+      if (is_disliked_by_me(p)) { set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE); }
 
       //
       // Can jump but only if not tired.
@@ -568,39 +542,27 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           point jump_begin(p.x + jp.begin.x, p.y + jp.begin.y);
           point jump_end(p.x + jp.end.x, p.y + jp.end.y);
 
-          if (level->is_oob(jump_begin)) {
-            continue;
-          }
+          if (level->is_oob(jump_begin)) { continue; }
 
-          if (level->is_oob(jump_end)) {
-            continue;
-          }
+          if (level->is_oob(jump_end)) { continue; }
 
           //
           // No jump begin/end from a chasm or barrel for example
           //
-          if (is_disliked_by_me(jump_begin) || is_obs_ai_for_me(jump_begin)) {
-            continue;
-          }
+          if (is_disliked_by_me(jump_begin) || is_obs_ai_for_me(jump_begin)) { continue; }
 
-          if (is_disliked_by_me(jump_end) || is_obs_ai_for_me(jump_end)) {
-            continue;
-          }
+          if (is_disliked_by_me(jump_end) || is_obs_ai_for_me(jump_end)) { continue; }
 
           //
           // Must be able to see the begin/end.
           //
-          if (! get(ai->can_see_ever.can_see, jump_begin.x, jump_begin.y)) {
-            continue;
-          }
+          if (! get(ai->can_see_ever.can_see, jump_begin.x, jump_begin.y)) { continue; }
 
           //
           // Too far?
           //
           float dist = DISTANCE(jump_begin.x, jump_begin.y, jump_end.x, jump_end.y);
-          if (dist > jump_dist + 1) {
-            continue;
-          }
+          if (dist > jump_dist + 1) { continue; }
 
           //
           // Check we really need to jump over all things in the path.
@@ -610,9 +572,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           bool jump = true;
           for (const auto &jump_over : jp.path) {
             auto j = jump_over + p;
-            if (j == p) {
-              continue;
-            }
+            if (j == p) { continue; }
             if (level->is_obs_wall_or_door(j)) {
               jump = false;
               break;
@@ -691,25 +651,15 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   if (is_explorer()) {
     {
       for (int y = miny; y <= maxy; y++) {
-        if (y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
-          continue;
-        }
-        if (y < MAP_BORDER_ROCK) {
-          continue;
-        }
+        if (y >= MAP_HEIGHT - MAP_BORDER_ROCK) { continue; }
+        if (y < MAP_BORDER_ROCK) { continue; }
 
         for (int x = minx; x <= maxx; x++) {
-          if (x >= MAP_WIDTH - MAP_BORDER_ROCK) {
-            continue;
-          }
-          if (x < MAP_BORDER_ROCK) {
-            continue;
-          }
+          if (x >= MAP_WIDTH - MAP_BORDER_ROCK) { continue; }
+          if (x < MAP_BORDER_ROCK) { continue; }
 
           point p(x, y);
-          if (get(walked, x, y)) {
-            continue;
-          }
+          if (get(walked, x, y)) { continue; }
 
           //
           // Can't see past walls. However we can see over chasms to expand the search space
@@ -736,13 +686,9 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
             for (auto dy = -1; dy <= 1; dy++) {
               point o(p.x + dx, p.y + dy);
 
-              if (level->is_oob(o)) {
-                continue;
-              }
+              if (level->is_oob(o)) { continue; }
 
-              if (! dx && ! dy) {
-                continue;
-              }
+              if (! dx && ! dy) { continue; }
 
               if (level->is_door(o)) {
                 //
@@ -767,17 +713,11 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
 
                 FOR_ALL_THINGS_THAT_INTERACT(level, it, o.x, o.y)
                 {
-                  if (it == this) {
-                    continue;
-                  }
+                  if (it == this) { continue; }
 
-                  if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
-                    continue;
-                  }
+                  if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) { continue; }
 
-                  if (! can_see_is_invisible(it)) {
-                    continue;
-                  }
+                  if (! can_see_is_invisible(it)) { continue; }
 
                   if (worth_collecting(it) > 0) {
                     set(ai->interrupt_map.val, o.x, o.y, game->tick_current);
@@ -881,9 +821,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         //
         float dist     = distance(curr_at, point(x, y));
         float max_dist = distance_vision_get();
-        if (dist > max_dist) {
-          continue;
-        }
+        if (dist > max_dist) { continue; }
 
         //
         // If something changed from wall to passable or vice versa,
@@ -897,9 +835,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           AI_LOG("Interrupted by location change");
         }
 
-        if (level->is_obs_wall_or_door(x, y)) {
-          set(dmap_can_see_old->val, x, y, location_new);
-        }
+        if (level->is_obs_wall_or_door(x, y)) { set(dmap_can_see_old->val, x, y, location_new); }
       }
     }
   }
@@ -979,25 +915,15 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         //
         // Not sure why we would need to look at water when choosing goals.
         //
-        if (it->is_water()) {
-          continue;
-        }
+        if (it->is_water()) { continue; }
 
-        if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
-          continue;
-        }
+        if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) { continue; }
 
-        if (! can_detect(it)) {
-          continue;
-        }
+        if (! can_detect(it)) { continue; }
 
-        if (it == this) {
-          continue;
-        }
+        if (it == this) { continue; }
 
-        if (is_debug_type()) {
-          AI_LOG("Can see cand", it);
-        }
+        if (is_debug_type()) { AI_LOG("Can see cand", it); }
 
         //
         // Don't attack your own tentacles
@@ -1089,9 +1015,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         if (is_item_collector()) {
           if (it->is_collectable()) {
             auto score = worth_collecting(it);
-            if (score > 0) {
-              GOAL_ADD(GOAL_PRIO_LOW, score - goal_penalty, "collect", it);
-            }
+            if (score > 0) { GOAL_ADD(GOAL_PRIO_LOW, score - goal_penalty, "collect", it); }
           }
         }
 
@@ -1099,9 +1023,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         // Need more work before monsters can collect keys as they will be auto collected.
         //
         if (it->is_key()) {
-          if (is_able_to_collect_keys()) {
-            GOAL_ADD(GOAL_PRIO_LOW, -goal_penalty, "collect-key", it);
-          }
+          if (is_able_to_collect_keys()) { GOAL_ADD(GOAL_PRIO_LOW, -goal_penalty, "collect-key", it); }
         }
 
         if (it->is_door() && ! it->is_open && ! it->is_dead) {
@@ -1248,9 +1170,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           // Prefer certain terrains over others. i.e. I prefer water.
           //
           auto age = get(age_map->val, p.x, p.y);
-          if (age - game->tick_current < 10) {
-            GOAL_ADD(GOAL_PRIO_LOW, 1, "preferred-terrain", it);
-          }
+          if (age - game->tick_current < 10) { GOAL_ADD(GOAL_PRIO_LOW, 1, "preferred-terrain", it); }
         }
       }
       FOR_ALL_THINGS_END();
@@ -1279,50 +1199,30 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
   in.push_back(start);
   set(pushed, start.x, start.y, true);
 
-  if (! is_moveable()) {
-    return;
-  }
+  if (! is_moveable()) { return; }
 
   auto dmap_can_see = dmap_can_see_get();
   while (! in.empty()) {
     auto p = in.front();
     in.pop_front();
 
-    if (get(walked, p.x, p.y)) {
-      continue;
-    }
+    if (get(walked, p.x, p.y)) { continue; }
     set(walked, p.x, p.y, true);
 
-    if (p.x >= MAP_WIDTH - MAP_BORDER_ROCK) {
-      continue;
-    }
-    if (p.y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
-      continue;
-    }
-    if (p.x < MAP_BORDER_ROCK) {
-      continue;
-    }
-    if (p.y < MAP_BORDER_ROCK) {
-      continue;
-    }
-    if (level->is_obs_wall_or_door(p.x, p.y)) {
-      continue;
-    }
-    if (get(dmap_can_see->val, p.x, p.y) == DMAP_IS_WALL) {
-      continue;
-    }
+    if (p.x >= MAP_WIDTH - MAP_BORDER_ROCK) { continue; }
+    if (p.y >= MAP_HEIGHT - MAP_BORDER_ROCK) { continue; }
+    if (p.x < MAP_BORDER_ROCK) { continue; }
+    if (p.y < MAP_BORDER_ROCK) { continue; }
+    if (level->is_obs_wall_or_door(p.x, p.y)) { continue; }
+    if (get(dmap_can_see->val, p.x, p.y) == DMAP_IS_WALL) { continue; }
 
     //
     // Don't look too far beyond where we can go
     //
-    if (too_far_from_mob(p)) {
-      continue;
-    }
+    if (too_far_from_mob(p)) { continue; }
 
     if (too_far_from_leader(p)) {
-      if (distance_from_leader() < too_far_from_leader(p)) {
-        continue;
-      }
+      if (distance_from_leader() < too_far_from_leader(p)) { continue; }
     }
 
     bool skip_location = false;
@@ -1332,9 +1232,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     //
     FOR_ALL_NON_INTERNAL_THINGS(level, it, p.x, p.y)
     {
-      if (it == this) {
-        continue;
-      }
+      if (it == this) { continue; }
 
       if (is_friend(it) || same_mob(it)) {
         skip_location = true;
@@ -1343,9 +1241,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     }
     FOR_ALL_THINGS_END();
 
-    if (skip_location) {
-      continue;
-    }
+    if (skip_location) { continue; }
 
     auto ai = aip();
 
@@ -1366,9 +1262,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
 
     for (int dx = -1; dx <= 1; dx++) {
       for (int dy = -1; dy <= 1; dy++) {
-        if (! dx && ! dy) {
-          continue;
-        }
+        if (! dx && ! dy) { continue; }
 
         if (! get(pushed, p.x + dx, p.y + dy)) {
           set(pushed, p.x + dx, p.y + dy, true);
@@ -1394,50 +1288,30 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       for (int dy = -jump_distance; dy <= jump_distance; dy++) {
 
         point o(p.x + dx, p.y + dy);
-        if (level->is_oob(o)) {
-          continue;
-        }
+        if (level->is_oob(o)) { continue; }
 
-        if (get(dmap_can_see->val, o.x, o.y) == DMAP_IS_WALL) {
-          continue;
-        }
+        if (get(dmap_can_see->val, o.x, o.y) == DMAP_IS_WALL) { continue; }
 
-        if (get(walked, o.x, o.y)) {
-          continue;
-        }
+        if (get(walked, o.x, o.y)) { continue; }
 
-        if (get(searched, o.x, o.y)) {
-          continue;
-        }
+        if (get(searched, o.x, o.y)) { continue; }
         set(searched, o.x, o.y, true);
 
         if (level->is_door(o)) {
           //
           // A locked door is worth investigating
           //
-          if (! is_able_to_open_doors() && ! is_able_to_break_down_doors()) {
-            continue;
-          }
+          if (! is_able_to_open_doors() && ! is_able_to_break_down_doors()) { continue; }
         } else if (level->is_secret_door(o)) {
-          if (! ai_detect_secret_doors()) {
-            continue;
-          }
-          if (dist > THING_AI_CAN_SEE_SECRET_DOOR_DIST) {
-            continue;
-          }
+          if (! ai_detect_secret_doors()) { continue; }
+          if (dist > THING_AI_CAN_SEE_SECRET_DOOR_DIST) { continue; }
         } else if (level->is_descend_sewer(o)) {
           //
           // Worth investigating unless over
           //
-          if (! is_exit_finder()) {
-            continue;
-          }
-          if ((o.x == curr_at.x) && (o.y == curr_at.y)) {
-            continue;
-          }
-          if (search_type < MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
-            continue;
-          }
+          if (! is_exit_finder()) { continue; }
+          if ((o.x == curr_at.x) && (o.y == curr_at.y)) { continue; }
+          if (search_type < MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP) { continue; }
           IF_DEBUG2
           {
             auto s = string_sprintf("Choose possible descend sewer at @(%d,%d)", o.x, o.y);
@@ -1447,15 +1321,9 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           //
           // Worth investigating
           //
-          if (! is_exit_finder()) {
-            continue;
-          }
-          if ((o.x == curr_at.x) && (o.y == curr_at.y)) {
-            continue;
-          }
-          if (search_type < MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
-            continue;
-          }
+          if (! is_exit_finder()) { continue; }
+          if ((o.x == curr_at.x) && (o.y == curr_at.y)) { continue; }
+          if (search_type < MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP) { continue; }
           IF_DEBUG2
           {
             auto s = string_sprintf("Choose possible ascend sewer at @(%d,%d)", o.x, o.y);
@@ -1465,15 +1333,9 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           //
           // Worth investigating
           //
-          if (! is_exit_finder()) {
-            continue;
-          }
-          if ((o.x == curr_at.x) && (o.y == curr_at.y)) {
-            continue;
-          }
-          if (search_type < MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
-            continue;
-          }
+          if (! is_exit_finder()) { continue; }
+          if ((o.x == curr_at.x) && (o.y == curr_at.y)) { continue; }
+          if (search_type < MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP) { continue; }
           IF_DEBUG2
           {
             auto s = string_sprintf("Choose possible descend dungeon at @(%d,%d)", o.x, o.y);
@@ -1483,15 +1345,9 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           //
           // Worth investigating
           //
-          if (! is_exit_finder()) {
-            continue;
-          }
-          if ((o.x == curr_at.x) && (o.y == curr_at.y)) {
-            continue;
-          }
-          if (search_type < MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
-            continue;
-          }
+          if (! is_exit_finder()) { continue; }
+          if ((o.x == curr_at.x) && (o.y == curr_at.y)) { continue; }
+          if (search_type < MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP) { continue; }
           IF_DEBUG2
           {
             auto s = string_sprintf("Choose possible ascend dungeon at @(%d,%d)", o.x, o.y);
@@ -1501,13 +1357,9 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           //
           // If lit then we can already see it, so not worth exploring.
           //
-          if (get(ai->can_see_ever.can_see, o.x, o.y)) {
-            continue;
-          }
+          if (get(ai->can_see_ever.can_see, o.x, o.y)) { continue; }
 
-          if (level->is_obs_wall_or_door(o)) {
-            continue;
-          }
+          if (level->is_obs_wall_or_door(o)) { continue; }
         }
 
         can_reach_cands.push_back(o);
@@ -1582,9 +1434,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
             break;
           }
         }
-        if (! found) {
-          s += " ";
-        }
+        if (! found) { s += " "; }
       }
       con("%s", s.c_str());
     }
@@ -1597,17 +1447,11 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     //
     // Avoid sewer descend/ascend loop
     //
-    if ((p.x == curr_at.x) && (p.y == curr_at.y)) {
-      continue;
-    }
+    if ((p.x == curr_at.x) && (p.y == curr_at.y)) { continue; }
 
-    if (too_far_from_mob(p, 1)) {
-      continue;
-    }
+    if (too_far_from_mob(p, 1)) { continue; }
 
-    if (too_far_from_leader(p, 1)) {
-      continue;
-    }
+    if (too_far_from_leader(p, 1)) { continue; }
 
     //
     // No search destinations that are, for example, a chasm
@@ -1652,9 +1496,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     // Choose doors etc... as a last resort when nothing else
     //
     if (is_explorer()) {
-      if (level->is_door(p)) {
-        total_score -= 100;
-      }
+      if (level->is_door(p)) { total_score -= 100; }
     }
 
     if (is_exit_finder()) {
@@ -1689,9 +1531,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       GOAL_ADD(GOAL_PRIO_VERY_LOW, total_score, msg.c_str(), nullptr);
     } else {
       auto msg = string_sprintf("search cand @(%d,%d) no-owner", p.x, p.y);
-      if (is_debug_type()) {
-        con("search cand @(%d,%d) score %d", p.x, p.y, total_score);
-      }
+      if (is_debug_type()) { con("search cand @(%d,%d) score %d", p.x, p.y, total_score); }
       GOAL_ADD(GOAL_PRIO_VERY_LOW, total_score, msg.c_str(), nullptr);
     }
   }
@@ -1716,9 +1556,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(int dx, int dy)
   attack_options.attack_allowed = true;
 
   point at(curr_at.x + dx, curr_at.y + dy);
-  if (level->is_oob(at)) {
-    return false;
-  }
+  if (level->is_oob(at)) { return false; }
 
   FOR_ALL_NON_INTERNAL_THINGS(level, it, at.x, at.y)
   {
@@ -1727,9 +1565,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(int dx, int dy)
         if (keys()) {
           if (open_door(it)) {
             AI_LOG("Opened a door", it);
-            if (is_player()) {
-              game->tick_begin("Robot opened a door");
-            }
+            if (is_player()) { game->tick_begin("Robot opened a door"); }
             return true;
           }
         }
@@ -1823,9 +1659,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(int dx, int dy)
       AI_LOG("Yes, something to carry here");
       for (auto itemid : items) {
         auto t = level->thing_find(itemid);
-        if (try_to_carry_if_worthwhile_dropping_items_if_needed(t, carry_options)) {
-          return true;
-        }
+        if (try_to_carry_if_worthwhile_dropping_items_if_needed(t, carry_options)) { return true; }
       }
     }
   }
@@ -1841,9 +1675,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
   AI_LOG("Choose current location goal");
   TRACE_AND_INDENT();
 
-  if (ai_choose_immediately_adjacent_goal(0, 0)) {
-    return true;
-  }
+  if (ai_choose_immediately_adjacent_goal(0, 0)) { return true; }
 
   AI_LOG("Choose immediately adjacent goals");
   TRACE_AND_INDENT();
@@ -1856,13 +1688,9 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
       // up an adjaceny item that is (x,y+1) but continually dropping and pickup
       // up a worse item at (x,y)
       //
-      if (! dx && ! dy) {
-        continue;
-      }
+      if (! dx && ! dy) { continue; }
 
-      if (ai_choose_immediately_adjacent_goal(dx, dy)) {
-        return true;
-      }
+      if (ai_choose_immediately_adjacent_goal(dx, dy)) { return true; }
     }
   }
 
@@ -1877,9 +1705,7 @@ void Thing::ai_get_next_hop(void)
   //
   // Find the best goal to go to
   //
-  if (ai_tick()) {
-    return;
-  }
+  if (ai_tick()) { return; }
 
   //
   // Ok our attempted move is done. We failed.
@@ -1910,17 +1736,11 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
   TRACE_AND_INDENT();
 
   auto d = distance_vision_get();
-  if (! d) {
-    d = 2;
-  }
+  if (! d) { d = 2; }
 
-  if (ai_wanderer() || is_intelligent()) {
-    d *= 2;
-  }
+  if (ai_wanderer() || is_intelligent()) { d *= 2; }
 
-  if (is_very_intelligent()) {
-    d *= 2;
-  }
+  if (is_very_intelligent()) { d *= 2; }
 
   std::vector< std::pair< Thingp, int > > possible;
 
@@ -1928,22 +1748,14 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
     for (auto dy = -d; dy <= d; dy++) {
 
       point p(curr_at.x + dx, curr_at.y + dy);
-      if (level->is_oob(p)) {
-        continue;
-      }
+      if (level->is_oob(p)) { continue; }
 
-      if (! dx && ! dy) {
-        continue;
-      }
+      if (! dx && ! dy) { continue; }
 
       float dist = distance(curr_at + point(dx, dy), it->curr_at);
-      if (dist < distance_avoid_get()) {
-        continue;
-      }
+      if (dist < distance_avoid_get()) { continue; }
 
-      if (is_obs_ai_for_me(p)) {
-        continue;
-      }
+      if (is_obs_ai_for_me(p)) { continue; }
 
       int terrain_cost = terrain_cost_get(p);
       score -= (int) terrain_cost;
@@ -1971,13 +1783,9 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
     for (auto dy = -d; dy <= d; dy++) {
 
       point p(curr_at.x + dx, curr_at.y + dy);
-      if (level->is_oob(p)) {
-        continue;
-      }
+      if (level->is_oob(p)) { continue; }
 
-      if (is_obs_ai_for_me(p)) {
-        continue;
-      }
+      if (is_obs_ai_for_me(p)) { continue; }
 
       float dist         = distance(curr_at + point(dx, dy), it->curr_at);
       int   terrain_cost = terrain_cost_get(p);
@@ -2008,13 +1816,9 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
     for (auto dy = -d; dy <= d; dy++) {
 
       point p(curr_at.x + dx, curr_at.y + dy);
-      if (level->is_oob(p)) {
-        continue;
-      }
+      if (level->is_oob(p)) { continue; }
 
-      if (level->is_obs_wall_or_door(p)) {
-        continue;
-      }
+      if (level->is_obs_wall_or_door(p)) { continue; }
 
       float dist         = distance(curr_at + point(dx, dy), it->curr_at);
       int   terrain_cost = terrain_cost_get(p);
@@ -2045,9 +1849,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
   // Last resorts
   //
   if (is_monst()) {
-    if (ai_escape()) {
-      return true;
-    }
+    if (ai_escape()) { return true; }
   }
 
   AI_LOG("Could not avoid", it);
@@ -2070,18 +1872,12 @@ bool Thing::ai_tick(bool recursing)
   ai_tried_to_wander = false;
 
   if (is_player()) {
-    if (game->things_are_moving) {
-      return false;
-    }
+    if (game->things_are_moving) { return false; }
 
-    if (game->tick_completed != game->tick_current) {
-      return false;
-    }
+    if (game->tick_completed != game->tick_current) { return false; }
   }
 
-  if (is_dead) {
-    return false;
-  }
+  if (is_dead) { return false; }
 
   if (is_changing_level || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer
       || is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall
@@ -2089,9 +1885,7 @@ bool Thing::ai_tick(bool recursing)
     return false;
   }
 
-  if (! g_opt_ascii && level->ts_fade_in_begin) {
-    return false;
-  }
+  if (! g_opt_ascii && level->ts_fade_in_begin) { return false; }
 
   //
   // Set up the extent of the AI, choosing smaller areas for monsters for speed.
@@ -2135,13 +1929,9 @@ bool Thing::ai_tick(bool recursing)
     //
     if (noise_decibels_hearing()) {
       if (LEVEL_LOUDEST_SOUND - level->noisemap(curr_at) > noise_decibels_hearing()) {
-        if (is_msg_allowed_hears_something()) {
-          msg("%s hears something!", text_The().c_str());
-        }
+        if (is_msg_allowed_hears_something()) { msg("%s hears something!", text_The().c_str()); }
 
-        if (! wake("heard something")) {
-          return false;
-        }
+        if (! wake("heard something")) { return false; }
       }
     }
 
@@ -2149,12 +1939,8 @@ bool Thing::ai_tick(bool recursing)
     // Wake up if the flames are nearby
     //
     if (environ_dislikes_fire() && level->heatmap(curr_at)) {
-      if (is_msg_allowed_senses_danger()) {
-        msg("%s senses danger!", text_The().c_str());
-      }
-      if (! wake("senses heat")) {
-        return false;
-      }
+      if (is_msg_allowed_senses_danger()) { msg("%s senses danger!", text_The().c_str()); }
+      if (! wake("senses heat")) { return false; }
     }
   }
 
@@ -2187,18 +1973,10 @@ bool Thing::ai_tick(bool recursing)
       int  additional_maxy          = std::min(MAP_HEIGHT - 1, (int) (additional_vision_source.y + dy));
       level->fov_calculate(this, &ai->can_see_currently, &ai->can_see_ever, additional_vision_source.x,
                            additional_vision_source.y, distance_vision_get() + 1, is_player() /* light walls */);
-      if (additional_minx < minx) {
-        minx = additional_minx;
-      }
-      if (additional_miny < miny) {
-        miny = additional_miny;
-      }
-      if (additional_maxx > maxx) {
-        maxx = additional_maxx;
-      }
-      if (additional_maxy > maxy) {
-        maxy = additional_maxy;
-      }
+      if (additional_minx < minx) { minx = additional_minx; }
+      if (additional_miny < miny) { miny = additional_miny; }
+      if (additional_maxx > maxx) { maxx = additional_maxx; }
+      if (additional_maxy > maxy) { maxy = additional_maxy; }
     }
   }
 
@@ -2251,17 +2029,13 @@ bool Thing::ai_tick(bool recursing)
       //
       // if we are called 2nd time around, then we left some kind of other state and want to try moving.
       //
-      if (recursing) {
-        break;
-      }
+      if (recursing) { break; }
     case MONST_STATE_MOVING :
       {
         //
         // Prevent loops; should never hit this
         //
-        if (recursing) {
-          return true;
-        }
+        if (recursing) { return true; }
 
         //
         // If on fire terrain, change to idle state and try again to move
@@ -2270,9 +2044,7 @@ bool Thing::ai_tick(bool recursing)
           AI_LOG("I am on fire!");
           TRACE_AND_INDENT();
 
-          if (is_player()) {
-            game->tick_begin("Robot move interrupted by being on fire");
-          }
+          if (is_player()) { game->tick_begin("Robot move interrupted by being on fire"); }
           change_state(MONST_STATE_IDLE, "move interrupted by being on fire!");
           return ai_tick(true); /* try again to move now we are no longer resting or asleep */
         }
@@ -2284,9 +2056,7 @@ bool Thing::ai_tick(bool recursing)
           AI_LOG("I am on some bad terrain!");
           TRACE_AND_INDENT();
 
-          if (is_player()) {
-            game->tick_begin("Robot move interrupted by bad terrain");
-          }
+          if (is_player()) { game->tick_begin("Robot move interrupted by bad terrain"); }
           change_state(MONST_STATE_IDLE, "move interrupted by being on bad terrain");
           return ai_tick(true); /* try again to move now we are no longer resting or asleep */
         }
@@ -2298,9 +2068,7 @@ bool Thing::ai_tick(bool recursing)
         //
         // Prevent loops; should never hit this
         //
-        if (recursing) {
-          return true;
-        }
+        if (recursing) { return true; }
 
         //
         // If on fire terrain, change to idle state and try again to move
@@ -2315,9 +2083,7 @@ bool Thing::ai_tick(bool recursing)
           //
           resting();
 
-          if (is_player()) {
-            game->tick_begin("Robot resting interrupted by being on fire");
-          }
+          if (is_player()) { game->tick_begin("Robot resting interrupted by being on fire"); }
           change_state(MONST_STATE_IDLE, "resting interrupted by being on fire!");
           return ai_tick(true); /* try again to move now we are no longer resting or asleep */
         }
@@ -2335,9 +2101,7 @@ bool Thing::ai_tick(bool recursing)
           //
           resting();
 
-          if (is_player()) {
-            game->tick_begin("Robot resting interrupted by bad terrain");
-          }
+          if (is_player()) { game->tick_begin("Robot resting interrupted by bad terrain"); }
           change_state(MONST_STATE_IDLE, "resting interrupted by being on bad terrain");
           return ai_tick(true); /* try again to move now we are no longer resting or asleep */
         }
@@ -2355,9 +2119,7 @@ bool Thing::ai_tick(bool recursing)
   //
   // Do this after the resting state check, else we never rest if there is a bad guy around.
   //
-  if (threat) {
-    change_state(MONST_STATE_IDLE, "threat is present");
-  }
+  if (threat) { change_state(MONST_STATE_IDLE, "threat is present"); }
 
   //
   // Check for less critical interruptions.
@@ -2367,9 +2129,7 @@ bool Thing::ai_tick(bool recursing)
       //
       // if we are called 2nd time around, then we left some kind of other state and want to try moving.
       //
-      if (recursing) {
-        break;
-      }
+      if (recursing) { break; }
     case MONST_STATE_MOVING :
       {
         //
@@ -2382,9 +2142,7 @@ bool Thing::ai_tick(bool recursing)
           AI_LOG("Something interrupted me while moving");
           TRACE_AND_INDENT();
 
-          if (is_player()) {
-            game->tick_begin("Robot move interrupted by something");
-          }
+          if (is_player()) { game->tick_begin("Robot move interrupted by something"); }
           change_state(MONST_STATE_IDLE, "move interrupted by a change");
           return ai_tick(true); /* try again to move now we are no longer resting or asleep */
         }
@@ -2402,9 +2160,7 @@ bool Thing::ai_tick(bool recursing)
           AI_LOG("Something interrupted me while resting");
           TRACE_AND_INDENT();
 
-          if (is_player()) {
-            game->tick_begin("Robot rest interrupted by something");
-          }
+          if (is_player()) { game->tick_begin("Robot rest interrupted by something"); }
           change_state(MONST_STATE_IDLE, "rest interrupted by a change");
           return ai_tick(true); /* try again to move now we are no longer resting or asleep */
         }
@@ -2470,9 +2226,7 @@ bool Thing::ai_tick(bool recursing)
         dbg2("AI: state idle");
         TRACE_AND_INDENT();
 
-        if (state_idle(threat, minx, miny, maxx, maxy)) {
-          return true;
-        }
+        if (state_idle(threat, minx, miny, maxx, maxy)) { return true; }
         break;
       }
     case MONST_STATE_MOVING :
@@ -2480,9 +2234,7 @@ bool Thing::ai_tick(bool recursing)
         dbg2("AI: state moving");
         TRACE_AND_INDENT();
 
-        if (state_moving()) {
-          return true;
-        }
+        if (state_moving()) { return true; }
         break;
       }
     case MONST_STATE_SLEEPING :
@@ -2490,9 +2242,7 @@ bool Thing::ai_tick(bool recursing)
         dbg2("AI: state sleeping");
         TRACE_AND_INDENT();
 
-        if (state_sleeping(do_something, wait)) {
-          return true;
-        }
+        if (state_sleeping(do_something, wait)) { return true; }
         break;
       }
     case MONST_STATE_RESTING :
@@ -2500,9 +2250,7 @@ bool Thing::ai_tick(bool recursing)
         dbg2("AI: state resting");
         TRACE_AND_INDENT();
 
-        if (state_resting(do_something, wait)) {
-          return true;
-        }
+        if (state_resting(do_something, wait)) { return true; }
         break;
       }
     case MONST_STATE_OPEN_INVENTORY :
@@ -2510,9 +2258,7 @@ bool Thing::ai_tick(bool recursing)
         dbg2("AI: state open inventory");
         TRACE_AND_INDENT();
 
-        if (state_open_inventory()) {
-          return true;
-        }
+        if (state_open_inventory()) { return true; }
         break;
       }
     case MONST_STATE_USING_ENCHANTSTONE :
@@ -2520,9 +2266,7 @@ bool Thing::ai_tick(bool recursing)
         dbg2("AI: state use enchantstone");
         TRACE_AND_INDENT();
 
-        if (state_using_enchantstone()) {
-          return true;
-        }
+        if (state_using_enchantstone()) { return true; }
         break;
       }
     case MONST_STATE_USING_SKILLSTONE :
@@ -2530,9 +2274,7 @@ bool Thing::ai_tick(bool recursing)
         dbg2("AI: state use skillstone");
         TRACE_AND_INDENT();
 
-        if (state_using_skillstone()) {
-          return true;
-        }
+        if (state_using_skillstone()) { return true; }
         break;
       }
     case MONST_STATE_USING_SPELLBOOK :
@@ -2540,9 +2282,7 @@ bool Thing::ai_tick(bool recursing)
         dbg2("AI: state use spellbook");
         TRACE_AND_INDENT();
 
-        if (state_using_spellbook()) {
-          return true;
-        }
+        if (state_using_spellbook()) { return true; }
         break;
       }
     case MONST_STATE_REPACK_INVENTORY :
@@ -2550,9 +2290,7 @@ bool Thing::ai_tick(bool recursing)
         dbg2("AI: state repack inventory");
         TRACE_AND_INDENT();
 
-        if (state_repack_inventory()) {
-          return true;
-        }
+        if (state_repack_inventory()) { return true; }
         break;
       }
   }

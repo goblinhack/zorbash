@@ -13,29 +13,19 @@ void Level::display_target(void)
   auto what = game->request_to_use_item;
   if (! what) {
     what = game->request_to_throw_item;
-    if (! what) {
-      return;
-    }
+    if (! what) { return; }
   }
 
-  if (! cursor) {
-    return;
-  }
+  if (! cursor) { return; }
 
-  if (! player) {
-    return;
-  }
+  if (! player) { return; }
 
   auto start = player->last_blit_at;
   auto end   = cursor->last_blit_at;
 
-  if (! start.x && ! start.y) {
-    return;
-  }
+  if (! start.x && ! start.y) { return; }
 
-  if (! end.x && ! end.y) {
-    return;
-  }
+  if (! end.x && ! end.y) { return; }
 
   start -= pixel_map_at;
   end -= pixel_map_at;

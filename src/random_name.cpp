@@ -9,9 +9,7 @@ std::string random_name(int len)
   for (;;) {
     std::string d1(dict1_name());
     std::string d2(dict2_name());
-    if ((int) (d1.size() + d2.size()) > len) {
-      continue;
-    }
+    if ((int) (d1.size() + d2.size()) > len) { continue; }
 
     return d1 + d2;
   }

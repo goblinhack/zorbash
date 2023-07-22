@@ -49,29 +49,19 @@ static uint8_t wid_skills_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
   auto level = game->get_current_level();
-  if (! level) {
-    return true;
-  }
+  if (! level) { return true; }
 
   auto player = level->player;
-  if (! player) {
-    return true;
-  }
+  if (! player) { return true; }
 
-  if (player->is_dead) {
-    return true;
-  }
+  if (player->is_dead) { return true; }
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   if (sdlk_eq(*key, game->config.key_drop)) {
     auto what = game->level->inventory_get();
     if (what) {
-      if (game->level->player->drop(what)) {
-        game->tick_begin("drop");
-      }
+      if (game->level->player->drop(what)) { game->tick_begin("drop"); }
     }
     CON("INF: Skill choose cancelled");
     game->change_state(Game::STATE_NORMAL, "cancel skill choose");
@@ -116,22 +106,14 @@ static uint8_t wid_skills_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
   auto level = game->get_current_level();
-  if (! level) {
-    return true;
-  }
+  if (! level) { return true; }
 
   auto player = level->player;
-  if (! player) {
-    return true;
-  }
+  if (! player) { return true; }
 
-  if (player->is_dead) {
-    return true;
-  }
+  if (player->is_dead) { return true; }
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   return true;
 }
@@ -140,23 +122,15 @@ static uint8_t wid_skills_mouse_up(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   auto level = game->get_current_level();
-  if (! level) {
-    return true;
-  }
+  if (! level) { return true; }
 
   auto player = level->player;
-  if (! player) {
-    return true;
-  }
+  if (! player) { return true; }
 
   Skillp skill = (Skillp) wid_get_void_context(w);
-  if (! skill) {
-    return true;
-  }
+  if (! skill) { return true; }
 
-  if (! skill->tpp) {
-    return true;
-  }
+  if (! skill->tpp) { return true; }
 
   player->skill_add(skill->tpp);
   wid_choose_skill_destroy();
@@ -180,14 +154,10 @@ void wid_skill_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
   TRACE_AND_INDENT();
 
   Skillp skill = (Skillp) wid_get_void_context(w);
-  if (! skill) {
-    return;
-  }
+  if (! skill) { return; }
 
   TRACE_NO_INDENT();
-  if (! skill->tpp) {
-    return;
-  }
+  if (! skill->tpp) { return; }
 
   TRACE_NO_INDENT();
   game->wid_tp_info_create(skill->tpp);
@@ -197,9 +167,7 @@ void wid_skill_tree_over_begin(Widp w, int relx, int rely, int wheelx, int wheel
 {
   auto new_skill_tree = wid_get_string_context(w);
 
-  if (new_skill_tree == current_skill_tree) {
-    return;
-  }
+  if (new_skill_tree == current_skill_tree) { return; }
 
   current_skill_tree = new_skill_tree;
   wid_choose_skill_destroy();
@@ -229,22 +197,12 @@ static bool skill_has_precursor(Skillp skill_curr)
     for (auto x = 0; x < SKILL_TREE_ACROSS; x++) {
       for (auto y = 0; y < SKILL_TREE_DOWN; y++) {
         auto skill = get(game->skill_tree[ tree_name ], x, y);
-        if (! skill) {
-          continue;
-        }
+        if (! skill) { continue; }
 
-        if (skill->skill_up == skill_curr) {
-          return true;
-        }
-        if (skill->skill_down == skill_curr) {
-          return true;
-        }
-        if (skill->skill_left == skill_curr) {
-          return true;
-        }
-        if (skill->skill_right == skill_curr) {
-          return true;
-        }
+        if (skill->skill_up == skill_curr) { return true; }
+        if (skill->skill_down == skill_curr) { return true; }
+        if (skill->skill_left == skill_curr) { return true; }
+        if (skill->skill_right == skill_curr) { return true; }
       }
     }
   }
@@ -261,9 +219,7 @@ static bool skill_is_available(Skillp skill_next)
     for (auto x = 0; x < SKILL_TREE_ACROSS; x++) {
       for (auto y = 0; y < SKILL_TREE_DOWN; y++) {
         auto skill_curr = get(game->skill_tree[ tree_name ], x, y);
-        if (! skill_curr) {
-          continue;
-        }
+        if (! skill_curr) { continue; }
 
         //
         // We walk all the other skills, looking for one that points at the next skill
@@ -274,9 +230,7 @@ static bool skill_is_available(Skillp skill_next)
           FOR_ALL_SKILLS_FOR(game->level->player, id)
           {
             auto iter = game->level->thing_find(id);
-            if (iter && (skill_curr->tpp == iter->tp())) {
-              return true;
-            }
+            if (iter && (skill_curr->tpp == iter->tp())) { return true; }
           }
         }
       }
@@ -290,9 +244,7 @@ void Game::wid_choose_skill(void)
   //
   // Default tree
   //
-  if (current_skill_tree == "") {
-    current_skill_tree = "martial";
-  }
+  if (current_skill_tree == "") { current_skill_tree = "martial"; }
 
   wid_choose_from_skill_tree(current_skill_tree);
 }
@@ -333,9 +285,7 @@ void Game::wid_choose_from_skill_tree(std::string current_tree_name)
         }
       }
     }
-    if (add) {
-      skills.push_back(tpp);
-    }
+    if (add) { skills.push_back(tpp); }
   }
 
   if (skills.empty()) {
@@ -380,9 +330,7 @@ void Game::wid_choose_from_skill_tree(std::string current_tree_name)
   for (auto x = 0; x < SKILL_TREE_ACROSS; x++) {
     for (auto y = 0; y < SKILL_TREE_DOWN; y++) {
       auto skill = get(game->skill_tree[ current_tree_name ], x, y);
-      if (! skill) {
-        continue;
-      }
+      if (! skill) { continue; }
 
       //
       // Create a button describing the skill
@@ -392,9 +340,7 @@ void Game::wid_choose_from_skill_tree(std::string current_tree_name)
       point br;
       tl.x = WID_SKILL_BUTTON_WIDTH * x + 2 + WID_SKILL_LEFT_PADDING;
       tl.y = WID_SKILL_BUTTON_HEIGHT * y + 3;
-      if (! g_opt_ascii) {
-        tl.y += 1;
-      }
+      if (! g_opt_ascii) { tl.y += 1; }
       br.x = tl.x + (WID_SKILL_BUTTON_WIDTH - 1) - 1;
       br.y = tl.y + (WID_SKILL_BUTTON_HEIGHT - 1) - 1;
       wid_set_pos(b, tl, br);
@@ -459,9 +405,7 @@ void Game::wid_choose_from_skill_tree(std::string current_tree_name)
                 auto tiles = &tpp->tiles;
                 if (tiles) {
                   auto tile = tile_n(tiles, 0);
-                  if (tile) {
-                    wid_set_tile(TILE_LAYER_FG_0, b, tile);
-                  }
+                  if (tile) { wid_set_tile(TILE_LAYER_FG_0, b, tile); }
                 }
               }
             } else {
@@ -524,9 +468,7 @@ void Game::wid_choose_from_skill_tree(std::string current_tree_name)
 
         tl2.x -= 1;
         tl2.y += 2;
-        if (g_opt_ascii) {
-          tl2.y--;
-        }
+        if (g_opt_ascii) { tl2.y--; }
         br2 = tl2;
 
         wid_set_pos(b, tl2, br2);
@@ -547,9 +489,7 @@ void Game::wid_choose_from_skill_tree(std::string current_tree_name)
         tl2.x -= 1;
         tl2.y += 1;
         tl2.y += 1;
-        if (g_opt_ascii) {
-          tl2.y--;
-        }
+        if (g_opt_ascii) { tl2.y--; }
         br2 = tl2;
 
         wid_set_pos(b, tl2, br2);

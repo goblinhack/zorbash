@@ -12,33 +12,19 @@ int Thing::value(Thingp it)
   TRACE_NO_INDENT();
   int value = 0;
 
-  if (it->is_treasure_type()) {
-    value++;
-  }
+  if (it->is_treasure_type()) { value++; }
 
-  if (it->is_treasure_class_A()) {
-    value++;
-  }
+  if (it->is_treasure_class_A()) { value++; }
 
-  if (it->is_treasure_class_B()) {
-    value++;
-  }
+  if (it->is_treasure_class_B()) { value++; }
 
-  if (it->is_treasure_class_C()) {
-    value++;
-  }
+  if (it->is_treasure_class_C()) { value++; }
 
-  if (it->is_weapon_class_A()) {
-    value++;
-  }
+  if (it->is_weapon_class_A()) { value++; }
 
-  if (it->is_weapon_class_B()) {
-    value++;
-  }
+  if (it->is_weapon_class_B()) { value++; }
 
-  if (it->is_weapon_class_C()) {
-    value++;
-  }
+  if (it->is_weapon_class_C()) { value++; }
 
   //
   // Things are more "valuable" if we need them now for a health boost

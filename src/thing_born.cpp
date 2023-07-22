@@ -9,9 +9,7 @@
 point3d Thing::born_get(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->born);
-  }
+  if (maybe_infop()) { return (infop()->born); }
   die("No born location");
   return (point3d(-1, -1, -1));
 }

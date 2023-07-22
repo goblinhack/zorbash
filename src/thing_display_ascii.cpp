@@ -30,12 +30,8 @@ void Thing::blit_ascii_adjust_color_hue(color &c, bool fg)
       if (gfx_ascii_fg_color_spread_red()) {
         int adjust  = ((int) blit_fg_color.r - 128);
         int new_col = ((int) c.r) + adjust;
-        if (new_col < 0) {
-          new_col = 0;
-        }
-        if (new_col > 255) {
-          new_col = 255;
-        }
+        if (new_col < 0) { new_col = 0; }
+        if (new_col > 255) { new_col = 255; }
         c.r = new_col;
       }
     }
@@ -44,12 +40,8 @@ void Thing::blit_ascii_adjust_color_hue(color &c, bool fg)
       if (gfx_ascii_fg_color_spread_green()) {
         int adjust  = ((int) blit_fg_color.g - 128);
         int new_col = ((int) c.g) + adjust;
-        if (new_col < 0) {
-          new_col = 0;
-        }
-        if (new_col > 255) {
-          new_col = 255;
-        }
+        if (new_col < 0) { new_col = 0; }
+        if (new_col > 255) { new_col = 255; }
         c.g = new_col;
       }
     }
@@ -58,12 +50,8 @@ void Thing::blit_ascii_adjust_color_hue(color &c, bool fg)
       if (gfx_ascii_fg_color_spread_blue()) {
         int adjust  = ((int) blit_fg_color.b - 128);
         int new_col = ((int) c.b) + adjust;
-        if (new_col < 0) {
-          new_col = 0;
-        }
-        if (new_col > 255) {
-          new_col = 255;
-        }
+        if (new_col < 0) { new_col = 0; }
+        if (new_col > 255) { new_col = 255; }
         c.b = new_col;
       }
     }
@@ -72,12 +60,8 @@ void Thing::blit_ascii_adjust_color_hue(color &c, bool fg)
       if (gfx_ascii_fg_color_spread_alpha()) {
         int adjust  = ((int) blit_fg_color.a - 128);
         int new_col = ((int) c.a) + adjust;
-        if (new_col < 0) {
-          new_col = 0;
-        }
-        if (new_col > 255) {
-          new_col = 255;
-        }
+        if (new_col < 0) { new_col = 0; }
+        if (new_col > 255) { new_col = 255; }
         c.a = new_col;
       }
     }
@@ -96,12 +80,8 @@ void Thing::blit_ascii_adjust_color_hue(color &c, bool fg)
       if (gfx_ascii_bg_color_spread_red()) {
         int adjust  = ((int) blit_bg_color.r - 128);
         int new_col = ((int) c.r) + adjust;
-        if (new_col < 0) {
-          new_col = 0;
-        }
-        if (new_col > 255) {
-          new_col = 255;
-        }
+        if (new_col < 0) { new_col = 0; }
+        if (new_col > 255) { new_col = 255; }
         c.r = new_col;
       }
     }
@@ -110,12 +90,8 @@ void Thing::blit_ascii_adjust_color_hue(color &c, bool fg)
       if (gfx_ascii_bg_color_spread_green()) {
         int adjust  = ((int) blit_bg_color.g - 128);
         int new_col = ((int) c.g) + adjust;
-        if (new_col < 0) {
-          new_col = 0;
-        }
-        if (new_col > 255) {
-          new_col = 255;
-        }
+        if (new_col < 0) { new_col = 0; }
+        if (new_col > 255) { new_col = 255; }
         c.g = new_col;
       }
     }
@@ -124,12 +100,8 @@ void Thing::blit_ascii_adjust_color_hue(color &c, bool fg)
       if (gfx_ascii_bg_color_spread_blue()) {
         int adjust  = ((int) blit_bg_color.b - 128);
         int new_col = ((int) c.b) + adjust;
-        if (new_col < 0) {
-          new_col = 0;
-        }
-        if (new_col > 255) {
-          new_col = 255;
-        }
+        if (new_col < 0) { new_col = 0; }
+        if (new_col > 255) { new_col = 255; }
         c.b = new_col;
       }
     }
@@ -138,12 +110,8 @@ void Thing::blit_ascii_adjust_color_hue(color &c, bool fg)
       if (gfx_ascii_bg_color_spread_alpha()) {
         int adjust  = ((int) blit_bg_color.a - 128);
         int new_col = ((int) c.a) + adjust;
-        if (new_col < 0) {
-          new_col = 0;
-        }
-        if (new_col > 255) {
-          new_col = 255;
-        }
+        if (new_col < 0) { new_col = 0; }
+        if (new_col > 255) { new_col = 255; }
         c.a = new_col;
       }
     }
@@ -176,25 +144,19 @@ void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
   // Don't adjust hues if we cannot see it. This helps make the visible area
   // look a lot brighter in comparison to the unlit areas.
   //
-  if (! get(level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
-    return;
-  }
+  if (! get(level->can_see_currently.can_see, curr_at.x, curr_at.y)) { return; }
 
   //
   // Keep the cursor path easy to see
   //
-  if (is_cursor_path()) {
-    return;
-  }
+  if (is_cursor_path()) { return; }
 
   //
   // Poor thing is frozen?
   //
   if (fg) {
     if (is_frozen) {
-      if (! is_block_of_ice()) {
-        c = LIGHTBLUE;
-      }
+      if (! is_block_of_ice()) { c = LIGHTBLUE; }
     } else if (is_burnt) {
       c = BROWN;
     }
@@ -215,9 +177,7 @@ void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
   //
   // If shown on the left bar we want the original color
   //
-  if (left_bar) {
-    return;
-  }
+  if (left_bar) { return; }
 
   //
   // Adjust for hue etc
@@ -227,16 +187,12 @@ void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
   //
   // Do not brighten things like wall fg that is black
   //
-  if (c == BLACK) {
-    return;
-  }
+  if (c == BLACK) { return; }
 
   //
   // Should light sources keep their color ?
   //
-  if (has_light) {
-    return;
-  }
+  if (has_light) { return; }
 
   //
   // For monsters and the like, if we combine colors then we lose information, like what type of snake it is. It's
@@ -244,9 +200,7 @@ void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
   //
   if (gfx_ascii_fade_with_dist()) {
     float light_dist = level->player ? level->player->light_dist_get() : 1.0;
-    if (light_dist <= 0.1) {
-      light_dist = 0.1;
-    }
+    if (light_dist <= 0.1) { light_dist = 0.1; }
     float brightness = 1.0 - (((float) distance_to_player() - 1) / light_dist);
 
     IF_DEBUG2 { brightness = 1.0; }
@@ -263,42 +217,30 @@ void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
     // This prevents the L in lava from appearing reddish. Not sure if I want this for other things too.
     //
     if (fg) {
-      if (gfx_ascii_color_fg_unchanged_by_lights()) {
-        return;
-      }
+      if (gfx_ascii_color_fg_unchanged_by_lights()) { return; }
     } else {
-      if (gfx_ascii_color_bg_unchanged_by_lights()) {
-        return;
-      }
+      if (gfx_ascii_color_bg_unchanged_by_lights()) { return; }
     }
 
     //
     // Get the combined light on this tile
     //
     fcolor combined_light = level->ascii_light_source_no_check(curr_at);
-    if (combined_light == COLOR_NONE) {
-      return;
-    }
+    if (combined_light == COLOR_NONE) { return; }
 
     float dim                  = 0.5;
     color combined_light_color = combined_light.tocolor();
 
     int r = (((float) c.r) * dim) + combined_light_color.r;
-    if (r > 255) {
-      r = 255;
-    }
+    if (r > 255) { r = 255; }
     c.r = r;
 
     int g = (((float) c.g) * dim) + combined_light_color.g;
-    if (g > 255) {
-      g = 255;
-    }
+    if (g > 255) { g = 255; }
     c.g = g;
 
     int b = (((float) c.b) * dim) + combined_light_color.b;
-    if (b > 255) {
-      b = 255;
-    }
+    if (b > 255) { b = 255; }
     c.b = b;
   }
 }
@@ -307,14 +249,10 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
 {
   TRACE_NO_INDENT();
 
-  if (is_no_tile()) {
-    return;
-  }
+  if (is_no_tile()) { return; }
 
   auto tile = tile_index_to_tile(tile_curr);
-  if (! tile) {
-    return;
-  }
+  if (! tile) { return; }
 
   if (! g_opt_ascii) {
     ascii_set(TILE_LAYER_FG_3, p.x, p.y, tile);
@@ -368,9 +306,7 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
         ascii_set(TILE_LAYER_BG_0, p.x, p.y, c);
       }
 
-      if (tile->ascii_bg_char) {
-        ascii_set(TILE_LAYER_BG_0, p.x, p.y, tile->ascii_bg_char);
-      }
+      if (tile->ascii_bg_char) { ascii_set(TILE_LAYER_BG_0, p.x, p.y, tile->ascii_bg_char); }
 
       if (tile->ascii_bg_col_value != COLOR_NONE) {
         color c = tile->ascii_bg_col_value;
@@ -411,9 +347,7 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
         //
         if (! shown_in_bg) {
           fcolor combined_light = level->ascii_light_source_no_check(curr_at);
-          if (combined_light != COLOR_NONE) {
-            shown_in_bg = true;
-          }
+          if (combined_light != COLOR_NONE) { shown_in_bg = true; }
         }
       }
 
@@ -532,9 +466,7 @@ void Thing::blit_ascii(point tl, point br, point p, bool left_bar)
     //
     // Hide weapons that have swung
     //
-    if (is_dead) {
-      blit = false;
-    }
+    if (is_dead) { blit = false; }
   } else if (is_cursor() || is_cursor_path() || is_the_grid) {
     blit = true;
   }
@@ -544,28 +476,20 @@ void Thing::blit_ascii(point tl, point br, point p, bool left_bar)
     //
     // Prevent items inside bags/chests being seen. This also works for falling.
     //
-    if (owner->is_bag_item_container()) {
-      blit = false;
-    }
+    if (owner->is_bag_item_container()) { blit = false; }
 
     //
     // In ascii mode we do not show equipped items
     //
-    if (is_usable() && owner->is_equipped(this)) {
-      blit = false;
-    }
+    if (is_usable() && owner->is_equipped(this)) { blit = false; }
 
     //
     // In ascii mode we do not show carried items
     //
-    if (gfx_pixelart_equip_carry_anim()) {
-      blit = false;
-    }
+    if (gfx_pixelart_equip_carry_anim()) { blit = false; }
   }
 
-  if (! blit) {
-    return;
-  }
+  if (! blit) { return; }
 
   //
   // If this code changes make sure and update gas, lasers and projectiles for ascii mode.
@@ -589,9 +513,7 @@ void Thing::blit_ascii(point tl, point br, point p, bool left_bar)
 
   IF_DEBUG2 { lit = true; }
 
-  if (left_bar || is_cursor() || is_cursor_path()) {
-    lit = true;
-  }
+  if (left_bar || is_cursor() || is_cursor_path()) { lit = true; }
 
   blit_ascii_at(point(x, y), lit, left_bar);
 

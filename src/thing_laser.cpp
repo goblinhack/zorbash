@@ -12,9 +12,7 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
   TRACE_AND_INDENT();
 
   if (is_monst() || (game->robot_mode && is_player())) {
-    if (! victim) {
-      victim = best_visible_target_get();
-    }
+    if (! victim) { victim = best_visible_target_get(); }
     if (! victim) {
       dbg("No victim found");
       return false;
@@ -86,9 +84,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targeted_laser, T
   // Set the owner. If fork lightning in water, don't set water as the owner!
   //
   auto owner = item ? item : this;
-  if (! owner->maybe_infop()) {
-    owner = nullptr;
-  }
+  if (! owner->maybe_infop()) { owner = nullptr; }
 
   dbg("Laser shoot %s at %s", gfx_targeted_laser.c_str(), target->to_short_string().c_str());
   TRACE_AND_INDENT();
@@ -157,9 +153,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targeted_laser, T
       laser = level->thing_new(gfx_targeted_laser, target->curr_at, owner);
       if (! laser) {
         err("No laser to shoot");
-        if (is_player()) {
-          game->tick_begin("failed to shoot laser");
-        }
+        if (is_player()) { game->tick_begin("failed to shoot laser"); }
         return false;
       }
     }
@@ -210,9 +204,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targeted_laser, T
         //
         // Ignore things that are too close
         //
-        if (target->curr_at == curr_at) {
-          continue;
-        }
+        if (target->curr_at == curr_at) { continue; }
 
         end = target->last_blit_at;
 
@@ -221,9 +213,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targeted_laser, T
           laser = level->thing_new(gfx_targeted_laser, target->curr_at, owner);
           if (! laser) {
             err("No laser to shoot");
-            if (is_player()) {
-              game->tick_begin("failed to shoot laser");
-            }
+            if (is_player()) { game->tick_begin("failed to shoot laser"); }
             return false;
           }
         }
@@ -294,14 +284,10 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targeted_laser, T
           //
           // Set everything in the way on fire.
           //
-          if (laser->is_fire()) {
-            level->line_set_all_on_fire(curr_at, target->curr_at, 0, "laser");
-          }
+          if (laser->is_fire()) { level->line_set_all_on_fire(curr_at, target->curr_at, 0, "laser"); }
         }
 
-        if (item) {
-          item->on_targeted(target->curr_at);
-        }
+        if (item) { item->on_targeted(target->curr_at); }
       }
     } else {
       //
@@ -335,9 +321,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targeted_laser, T
       auto laser = level->thing_new(gfx_targeted_laser, target->curr_at, owner);
       if (! laser) {
         err("No laser to shoot");
-        if (is_player()) {
-          game->tick_begin("failed to shoot laser");
-        }
+        if (is_player()) { game->tick_begin("failed to shoot laser"); }
         return false;
       }
 
@@ -370,14 +354,10 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targeted_laser, T
         //
         // Set everything in the way on fire.
         //
-        if (laser->is_fire()) {
-          level->line_set_all_on_fire(curr_at, target->curr_at, 0, "laser");
-        }
+        if (laser->is_fire()) { level->line_set_all_on_fire(curr_at, target->curr_at, 0, "laser"); }
       }
 
-      if (item) {
-        item->on_targeted(target->curr_at);
-      }
+      if (item) { item->on_targeted(target->curr_at); }
     }
   }
 
@@ -427,9 +407,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targeted_laser, p
 
   FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
   {
-    if (t->is_the_grid) {
-      return laser_shoot_at(item, gfx_targeted_laser, t, use_options);
-    }
+    if (t->is_the_grid) { return laser_shoot_at(item, gfx_targeted_laser, t, use_options); }
   }
   FOR_ALL_THINGS_END()
 

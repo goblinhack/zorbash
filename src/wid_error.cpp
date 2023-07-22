@@ -35,9 +35,7 @@ static uint8_t wid_error_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   switch (key->mod) {
     case KMOD_LCTRL :
@@ -68,9 +66,7 @@ static uint8_t wid_error_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) {
-    return false;
-  }
+  if (sdlk_eq(*key, game->config.key_console)) { return false; }
 
   return true;
 }
@@ -80,9 +76,7 @@ void wid_error(std::string error)
   TRACE_AND_INDENT();
   CON("ERROR: %s", error.c_str());
 
-  if (wid_error_window) {
-    wid_error_destroy();
-  }
+  if (wid_error_window) { wid_error_destroy(); }
 
   point tl = make_point(5, 5);
   point br = make_point(TERM_WIDTH - 5, TERM_HEIGHT - 5);

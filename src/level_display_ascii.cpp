@@ -21,29 +21,21 @@ void Level::update_light_ascii_map(void)
         //
         // So knocked over braziers do not light
         //
-        if (t->is_dead || t->is_corpse()) {
-          continue;
-        }
+        if (t->is_dead || t->is_corpse()) { continue; }
 
         for (auto &l : t->light_get()) {
           //
           // In pixel art mode we have more lights. Ignore those.
           //
-          if (l->fbo != FBO_PLAYER_VISIBLE_LIGHTING) {
-            continue;
-          }
+          if (l->fbo != FBO_PLAYER_VISIBLE_LIGHTING) { continue; }
 
           auto t = l->owner;
-          if (t->is_player()) {
-            continue;
-          }
+          if (t->is_player()) { continue; }
 
           //
           // Skip lights that are in blocked off rooms the player cannot see
           //
-          if (get(dmap_to_player.val, t->curr_at.x, t->curr_at.y) >= DMAP_IS_PASSABLE) {
-            continue;
-          }
+          if (get(dmap_to_player.val, t->curr_at.x, t->curr_at.y) >= DMAP_IS_PASSABLE) { continue; }
 
           int light_scale = l->light_dist / TILE_WIDTH;
 
@@ -51,9 +43,7 @@ void Level::update_light_ascii_map(void)
             int x = t->curr_at.x + dx;
             for (int dy = -light_scale; dy <= light_scale; dy++) {
               int y = t->curr_at.y + dy;
-              if (is_oob(x, y)) {
-                continue;
-              }
+              if (is_oob(x, y)) { continue; }
 
               float d = DISTANCE(0, 0, dx, dy);
 
@@ -100,9 +90,7 @@ void Level::display_ascii_treasure_map(point tl, point br)
 {
   TRACE_NO_INDENT();
 
-  if (! player) {
-    return;
-  }
+  if (! player) { return; }
 
   if (player->map_treasure_available()) {
     for (auto z = (int) 0; z < MAP_DEPTH; z++) {
@@ -114,9 +102,7 @@ void Level::display_ascii_treasure_map(point tl, point br)
           {
             if (t->is_key() || t->is_food() || t->is_treasure_type() || t->is_skillstone() || t->is_spellbook()
                 || t->is_enchantstone()) {
-              if (t->gfx_ascii_animated) {
-                t->animate();
-              }
+              if (t->gfx_ascii_animated) { t->animate(); }
 
               t->blit_ascii(tl, br, p, true);
             }
@@ -135,9 +121,7 @@ void Level::display_ascii_beast_map(point tl, point br)
 {
   TRACE_NO_INDENT();
 
-  if (! player) {
-    return;
-  }
+  if (! player) { return; }
 
   if (player->map_beast_count() > 0) {
     for (auto z = (int) 0; z < MAP_DEPTH; z++) {
@@ -148,9 +132,7 @@ void Level::display_ascii_beast_map(point tl, point br)
           FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
           {
             if (t->is_monst() || t->is_spiderweb() || t->is_mob()) {
-              if (t->gfx_ascii_animated) {
-                t->animate();
-              }
+              if (t->gfx_ascii_animated) { t->animate(); }
 
               t->blit_ascii(tl, br, p, true);
             }
@@ -166,9 +148,7 @@ void Level::display_ascii_map(point tl, point br)
 {
   TRACE_NO_INDENT();
 
-  if (! should_display_map()) {
-    return;
-  }
+  if (! should_display_map()) { return; }
 
   display_map_set_bounds();
   display_tick_animation();
@@ -187,9 +167,7 @@ void Level::display_ascii_map(point tl, point br)
 
         FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
         {
-          if (t->gfx_ascii_animated) {
-            t->animate();
-          }
+          if (t->gfx_ascii_animated) { t->animate(); }
           t->blit_ascii(tl, br, p);
         }
         FOR_ALL_THINGS_END()

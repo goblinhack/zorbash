@@ -18,9 +18,7 @@ biome_t get_biome(point3d world_at, int difficulty_depth)
   //
   // Sewers are in alternate z depths
   //
-  if (! (world_at.z & 1)) {
-    biome = BIOME_SEWER;
-  }
+  if (! (world_at.z & 1)) { biome = BIOME_SEWER; }
 
   return biome;
 }
@@ -43,25 +41,15 @@ biome_t get_biome(int difficulty_depth)
     default : biome = BIOME_DUNGEON; break;
   }
 
-  if (g_opt_biome_flooded) {
-    biome = BIOME_FLOODED;
-  }
+  if (g_opt_biome_flooded) { biome = BIOME_FLOODED; }
 
-  if (g_opt_biome_swamp) {
-    biome = BIOME_SWAMP;
-  }
+  if (g_opt_biome_swamp) { biome = BIOME_SWAMP; }
 
-  if (g_opt_biome_ice) {
-    biome = BIOME_ICE;
-  }
+  if (g_opt_biome_ice) { biome = BIOME_ICE; }
 
-  if (g_opt_biome_chasms) {
-    biome = BIOME_CHASMS;
-  }
+  if (g_opt_biome_chasms) { biome = BIOME_CHASMS; }
 
-  if (g_opt_biome_lava) {
-    biome = BIOME_LAVA;
-  }
+  if (g_opt_biome_lava) { biome = BIOME_LAVA; }
 
   return biome;
 }

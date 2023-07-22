@@ -17,22 +17,16 @@ void Thing::on_fire(void)
 {
   TRACE_NO_INDENT();
   auto on_fire = tp()->on_you_are_on_fire_do();
-  if (std::empty(on_fire)) {
-    return;
-  }
+  if (std::empty(on_fire)) { return; }
 
   auto t = split_tokens(on_fire, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) {
-      fn = fn.replace(found, 2, "");
-    }
+    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
 
-    if (mod == "me") {
-      mod = name();
-    }
+    if (mod == "me") { mod = name(); }
 
     dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
@@ -47,9 +41,7 @@ bool Thing::is_on_fire(void)
   TRACE_NO_INDENT();
 
   auto id = on_fire_anim_id();
-  if (! id) {
-    return false;
-  }
+  if (! id) { return false; }
 
   return id.ok();
 }
@@ -58,14 +50,10 @@ void Thing::on_fire_unset(void)
 {
   TRACE_NO_INDENT();
 
-  if (! is_on_fire()) {
-    return;
-  }
+  if (! is_on_fire()) { return; }
 
   auto id = on_fire_anim_id();
-  if (! id) {
-    return;
-  }
+  if (! id) { return; }
 
   auto fire_anim = level->thing_find(id);
   if (fire_anim) {
@@ -79,29 +67,19 @@ bool Thing::on_fire_set(const std::string &why)
 {
   TRACE_NO_INDENT();
 
-  if (is_frozen) {
-    return false;
-  }
+  if (is_frozen) { return false; }
 
-  if (level->is_block_of_ice(curr_at)) {
-    return false;
-  }
+  if (level->is_block_of_ice(curr_at)) { return false; }
 
-  if (level->is_water(curr_at)) {
-    return false;
-  }
+  if (level->is_water(curr_at)) { return false; }
 
-  if (! is_burnable() && ! is_combustible()) {
-    return false;
-  }
+  if (! is_burnable() && ! is_combustible()) { return false; }
 
   //
   // Give some things more of a chance of catching on fire, to be less cruel
   //
   if (chance_d10000_set_on_fire()) {
-    if (d10000() > chance_d10000_set_on_fire()) {
-      return false;
-    }
+    if (d10000() > chance_d10000_set_on_fire()) { return false; }
   }
 
   if (is_immune_to_fire()) {
@@ -109,9 +87,7 @@ bool Thing::on_fire_set(const std::string &why)
     return false;
   }
 
-  if (is_on_fire()) {
-    return true;
-  }
+  if (is_on_fire()) { return true; }
 
   if (is_dead) {
     //
@@ -120,16 +96,12 @@ bool Thing::on_fire_set(const std::string &why)
     corpse_cleanup = true;
     dead("corpse cleanup");
 
-    if (on_fire_anim_id().ok()) {
-      return false;
-    }
+    if (on_fire_anim_id().ok()) { return false; }
 
     con("Spawn fire, %s", why.c_str());
     level->thing_new("fire", this);
   } else {
-    if (on_fire_anim_id().ok()) {
-      return false;
-    }
+    if (on_fire_anim_id().ok()) { return false; }
 
     dbg("Set on fire, %s", why.c_str());
     TRACE_NO_INDENT();
@@ -146,9 +118,7 @@ bool Thing::on_fire_set(const std::string &why)
     dbg("Is now on fire, %s", why.c_str());
     TRACE_NO_INDENT();
 
-    if (is_player()) {
-      msg("%%fg=red$You are literally ON FIRE!%%fg=reset$");
-    }
+    if (is_player()) { msg("%%fg=red$You are literally ON FIRE!%%fg=reset$"); }
 
     //
     // I mean, it's likely this will cause you to wake.
@@ -202,18 +172,10 @@ bool Thing::ai_create_on_fire_path(point &nh, const point start, const point end
   maxx += border;
   maxy += border;
 
-  if (minx < 0) {
-    minx = 0;
-  }
-  if (miny < 0) {
-    miny = 0;
-  }
-  if (maxx >= MAP_WIDTH) {
-    maxx = MAP_WIDTH - 1;
-  }
-  if (maxy >= MAP_HEIGHT) {
-    maxy = MAP_HEIGHT - 1;
-  }
+  if (minx < 0) { minx = 0; }
+  if (miny < 0) { miny = 0; }
+  if (maxx >= MAP_WIDTH) { maxx = MAP_WIDTH - 1; }
+  if (maxy >= MAP_HEIGHT) { maxy = MAP_HEIGHT - 1; }
 
   //
   // Set up obstacles for the search. Don't avoid all bad things
@@ -282,9 +244,7 @@ bool Thing::ai_on_fire_choose_target(point &nh)
   }
 
   if (target != point(0, 0)) {
-    if (ai_create_on_fire_path(nh, start, target)) {
-      return true;
-    }
+    if (ai_create_on_fire_path(nh, start, target)) { return true; }
   }
 
   //
@@ -371,9 +331,7 @@ bool Thing::ai_on_fire(void)
     point nh;
     dbg("On fire, try %d", tries);
     if (ai_on_fire_choose_target(nh)) {
-      if (move_to_or_escape(nh)) {
-        return true;
-      }
+      if (move_to_or_escape(nh)) { return true; }
 
       //
       // Set this so next time we will choose another target
@@ -391,9 +349,7 @@ bool Thing::ai_on_fire(void)
 ThingId Thing::on_fire_anim_id(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->on_fire_id_anim);
-  }
+  if (maybe_infop()) { return (infop()->on_fire_id_anim); }
   return NoThingId;
 }
 

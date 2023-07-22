@@ -22,27 +22,17 @@ void Thing::hooks_remove_from(Thingp o)
       o->inventory_shortcuts_remove(this, drop_options);
     }
 
-    if (is_skill()) {
-      o->skill_remove(this);
-    }
+    if (is_skill()) { o->skill_remove(this); }
 
-    if (is_spell()) {
-      o->spell_remove(this);
-    }
+    if (is_spell()) { o->spell_remove(this); }
 
-    if (is_buff()) {
-      o->buff_remove(this);
-    }
+    if (is_buff()) { o->buff_remove(this); }
 
-    if (is_debuff()) {
-      o->debuff_remove(this);
-    }
+    if (is_debuff()) { o->debuff_remove(this); }
   }
 
   if (id == o->on_fire_anim_id()) {
-    if (is_loggable()) {
-      dbg2("Detach on_fire_anim_id from owner %s", o->to_string().c_str());
-    }
+    if (is_loggable()) { dbg2("Detach on_fire_anim_id from owner %s", o->to_string().c_str()); }
     o->on_fire_unset();
   }
 
@@ -51,25 +41,19 @@ void Thing::hooks_remove_from(Thingp o)
     if (id == o->equip_id(iter)) {
       o->unequip("remove hooks for equip id", iter, false);
 
-      if (is_loggable()) {
-        dbg2("Detach equip_id from o %s", o->to_string().c_str());
-      }
+      if (is_loggable()) { dbg2("Detach equip_id from o %s", o->to_string().c_str()); }
       o->equip_id_set(NoThingId.id, iter);
     }
 
     if (id == o->equip_id_carry_anim(iter)) {
       o->unequip("remove hooks for carry-anim", iter, false);
 
-      if (is_loggable()) {
-        dbg2("Detach carry-anim from o %s", o->to_string().c_str());
-      }
+      if (is_loggable()) { dbg2("Detach carry-anim from o %s", o->to_string().c_str()); }
       o->equip_carry_anim_id_set(NoThingId.id, iter);
     }
 
     if (id == o->equip_id_use_anim(iter)) {
-      if (is_loggable()) {
-        dbg2("Detach use_anim from owner %s", o->to_string().c_str());
-      }
+      if (is_loggable()) { dbg2("Detach use_anim from owner %s", o->to_string().c_str()); }
       o->equip_use_anim_id_set(NoThingId.id, iter);
 
       //
@@ -84,33 +68,21 @@ void Thing::hooks_remove_from(Thingp o)
         // But only if the owner is visible.
         //
         if (o->is_visible()) {
-          if (is_loggable()) {
-            dbg2("Reapply carry-anim for owner %s", o->to_string().c_str());
-          }
+          if (is_loggable()) { dbg2("Reapply carry-anim for owner %s", o->to_string().c_str()); }
           carry_anim->visible("post swing");
         } else {
-          if (is_loggable()) {
-            dbg2("Do not reapply carry-anim for invisible owner %s", o->to_string().c_str());
-          }
+          if (is_loggable()) { dbg2("Do not reapply carry-anim for invisible owner %s", o->to_string().c_str()); }
         }
       } else {
-        if (is_loggable()) {
-          dbg2("No carry-anim for owner %s", o->to_string().c_str());
-        }
+        if (is_loggable()) { dbg2("No carry-anim for owner %s", o->to_string().c_str()); }
         auto id = o->equip_id(iter);
-        if (id.ok()) {
-          o->equip(o->equip_get(iter), iter);
-        }
+        if (id.ok()) { o->equip(o->equip_get(iter), iter); }
       }
     }
 
-    if (id == o->equip_id_use_anim(iter)) {
-      err("Weapon use anim is still attached");
-    }
+    if (id == o->equip_id_use_anim(iter)) { err("Weapon use anim is still attached"); }
 
-    if (id == o->equip_id_carry_anim(iter)) {
-      err("Weapon carry anim is still attached");
-    }
+    if (id == o->equip_id_carry_anim(iter)) { err("Weapon carry anim is still attached"); }
   }
 
   FOR_ALL_BODYPART(iter)
@@ -139,16 +111,12 @@ void Thing::hooks_remove()
   //
   // If a carried sword is on fire, then we need to detach.
   //
-  if (i) {
-    hooks_remove_from(i);
-  }
+  if (i) { hooks_remove_from(i); }
 
   if (o && (o != i)) {
     hooks_remove_from(o);
 
-    if (id == i->on_fire_anim_id()) {
-      i->on_fire_anim_id_set(NoThingId.id);
-    }
+    if (id == i->on_fire_anim_id()) { i->on_fire_anim_id_set(NoThingId.id); }
   }
 
   //
@@ -159,9 +127,7 @@ void Thing::hooks_remove()
     //
     // Don't try to drop lasers; as they are also owned.
     //
-    if (is_item()) {
-      o->drop_into_ether(this);
-    }
+    if (is_item()) { o->drop_into_ether(this); }
   }
 
   //
@@ -172,9 +138,7 @@ void Thing::hooks_remove()
     Thingp item = equip_carry_anim(iter);
     if (item) {
       verify(MTYPE_THING, item);
-      if (is_loggable()) {
-        dbg2("Hooks remove carry-anim");
-      }
+      if (is_loggable()) { dbg2("Hooks remove carry-anim"); }
       equip_carry_anim_set(nullptr, iter);
       item->owner_unset();
       item->dead("weapon carry-anim owner defeated");
@@ -186,9 +150,7 @@ void Thing::hooks_remove()
     Thingp item = equip_use_anim(iter);
     if (item) {
       verify(MTYPE_THING, item);
-      if (is_loggable()) {
-        dbg2("Hooks remove use-anim");
-      }
+      if (is_loggable()) { dbg2("Hooks remove use-anim"); }
       equip_use_anim_set(nullptr, iter);
       item->owner_unset();
       item->dead("weapon use-anim owner defeated");

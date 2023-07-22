@@ -12,13 +12,9 @@ void Thing::hide(const std::string &reason)
   TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
 
-  if (is_hidden) {
-    return;
-  }
+  if (is_hidden) { return; }
 
-  if (is_loggable()) {
-    dbg("Hide: %s", reason.c_str());
-  }
+  if (is_loggable()) { dbg("Hide: %s", reason.c_str()); }
 
   level_pop();
   is_hidden = true;
@@ -31,16 +27,12 @@ void Thing::hide(const std::string &reason)
   {
     if (equip_id_carry_anim(iter).ok()) {
       auto w = level->thing_find(equip_id_carry_anim(iter));
-      if (w) {
-        w->hide(reason);
-      }
+      if (w) { w->hide(reason); }
     }
 
     if (equip_id_use_anim(iter).ok()) {
       auto w = level->thing_find(equip_id_use_anim(iter));
-      if (w) {
-        w->hide(reason);
-      }
+      if (w) { w->hide(reason); }
     }
   }
 
@@ -48,9 +40,7 @@ void Thing::hide(const std::string &reason)
   {
     if (bodypart_id_get(iter).ok()) {
       auto w = level->thing_find(bodypart_id_get(iter));
-      if (w) {
-        w->hide(reason);
-      }
+      if (w) { w->hide(reason); }
     }
   }
 
@@ -58,9 +48,7 @@ void Thing::hide(const std::string &reason)
   if (id.ok()) {
     TRACE_NO_INDENT();
     auto w = level->thing_find(id);
-    if (w) {
-      w->hide(reason);
-    }
+    if (w) { w->hide(reason); }
   }
 }
 

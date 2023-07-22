@@ -277,13 +277,9 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
   TRACE_AND_INDENT();
 
   auto player = level->player;
-  if (! player) {
-    return false;
-  }
+  if (! player) { return false; }
 
-  if (! is_player()) {
-    return false;
-  }
+  if (! is_player()) { return false; }
 
   auto itemsp = maybe_itemsp();
   if (! itemsp) {
@@ -302,9 +298,7 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
     //
     if (game->state == Game::STATE_NORMAL) {
       CarryOptions carry_options;
-      if (is_player() && check_anything_to_carry(carry_options)) {
-        level->describe(curr_at);
-      }
+      if (is_player() && check_anything_to_carry(carry_options)) { level->describe(curr_at); }
     }
 
     return true;
@@ -322,9 +316,7 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
     //
     if (game->state == Game::STATE_NORMAL) {
       CarryOptions carry_options;
-      if (is_player() && check_anything_to_carry(carry_options)) {
-        level->describe(curr_at);
-      }
+      if (is_player() && check_anything_to_carry(carry_options)) { level->describe(curr_at); }
     }
 
     return true;
@@ -335,16 +327,12 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
   for (auto i = 0U; i < inventory_items; i++) {
     auto thing_id = get(itemsp->inventory_shortcuts, i);
     if (! thing_id) {
-      if (free_slot == -1) {
-        free_slot = i;
-      }
+      if (free_slot == -1) { free_slot = i; }
       continue;
     }
 
     auto t = level->thing_find(thing_id);
-    if (unlikely(! t)) {
-      continue;
-    }
+    if (unlikely(! t)) { continue; }
 
     if (item->tp() == t->tp()) {
       if (item->is_bag_item_not_stackable()) {
@@ -408,13 +396,9 @@ bool Thing::inventory_shortcuts_remove(Thingp item, DropOptions options)
   TRACE_AND_INDENT();
 
   auto player = level->player;
-  if (! player) {
-    return false;
-  }
+  if (! player) { return false; }
 
-  if (! is_player()) {
-    return false;
-  }
+  if (! is_player()) { return false; }
 
   auto itemsp = maybe_itemsp();
   if (! itemsp) {
@@ -423,9 +407,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item, DropOptions options)
   }
 
   auto immediate_owner = item->immediate_owner();
-  if (immediate_owner) {
-    immediate_owner->bag_remove(item);
-  }
+  if (immediate_owner) { immediate_owner->bag_remove(item); }
 
   /*
    * Keep a count of the items of the same type so that we do not remove
@@ -433,28 +415,20 @@ bool Thing::inventory_shortcuts_remove(Thingp item, DropOptions options)
    */
   auto same_item_count = 0;
   for (auto oitem : player->carried_and_equipped_item_list()) {
-    if (item->tp() == oitem->tp()) {
-      same_item_count++;
-    }
+    if (item->tp() == oitem->tp()) { same_item_count++; }
   }
 
   auto inventory_items = itemsp->inventory_shortcuts.size();
   for (auto i = 0U; i < inventory_items; i++) {
     auto thing_id = get(itemsp->inventory_shortcuts, i);
-    if (! thing_id) {
-      continue;
-    }
+    if (! thing_id) { continue; }
     auto t = level->thing_find(thing_id);
-    if (unlikely(! t)) {
-      continue;
-    }
+    if (unlikely(! t)) { continue; }
 
     if (item->tp() == t->tp()) {
       game->set_request_to_remake_rightbar();
 
-      if (! options.is_being_stolen) {
-        inventory_particle(item, i, this);
-      }
+      if (! options.is_being_stolen) { inventory_particle(item, i, this); }
 
       //
       // If you use one dart and have more, do not remove the shortcut
@@ -477,9 +451,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item, DropOptions options)
         // Switch to the next dart (for example)
         //
         for (auto oitem : player->carried_and_equipped_item_list()) {
-          if (item == oitem) {
-            continue;
-          }
+          if (item == oitem) { continue; }
           if (item->tp() == oitem->tp()) {
             set(itemsp->inventory_shortcuts, i, oitem->id);
             level->inventory_describe(game->inventory_highlight_slot);
@@ -507,13 +479,9 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target, Drop
   TRACE_AND_INDENT();
 
   auto player = level->player;
-  if (! player) {
-    return false;
-  }
+  if (! player) { return false; }
 
-  if (! is_player()) {
-    return false;
-  }
+  if (! is_player()) { return false; }
 
   auto itemsp = maybe_itemsp();
   if (! itemsp) {
@@ -522,9 +490,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target, Drop
   }
 
   auto immediate_owner = item->immediate_owner();
-  if (immediate_owner) {
-    immediate_owner->bag_remove(item);
-  }
+  if (immediate_owner) { immediate_owner->bag_remove(item); }
 
   /*
    * Keep a count of the items of the same type so that we do not remove
@@ -532,29 +498,21 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target, Drop
    */
   auto same_item_count = 0;
   for (auto oitem : player->carried_and_equipped_item_list()) {
-    if (item->tp() == oitem->tp()) {
-      same_item_count++;
-    }
+    if (item->tp() == oitem->tp()) { same_item_count++; }
   }
 
   auto inventory_items = itemsp->inventory_shortcuts.size();
   for (auto i = 0U; i < inventory_items; i++) {
     auto thing_id = get(itemsp->inventory_shortcuts, i);
-    if (! thing_id) {
-      continue;
-    }
+    if (! thing_id) { continue; }
     auto t = level->thing_find(thing_id);
-    if (unlikely(! t)) {
-      continue;
-    }
+    if (unlikely(! t)) { continue; }
 
     if (item->tp() == t->tp()) {
       game->set_request_to_remake_rightbar();
 
       if (! options.is_being_stolen) {
-        if (particle_target) {
-          inventory_particle(item, i, particle_target);
-        }
+        if (particle_target) { inventory_particle(item, i, particle_target); }
       }
 
       if (same_item_count <= 1) {
@@ -577,9 +535,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target, Drop
         // Switch to the next dart (for example)
         //
         for (auto oitem : player->carried_and_equipped_item_list()) {
-          if (item == oitem) {
-            continue;
-          }
+          if (item == oitem) { continue; }
           if (item->tp() == oitem->tp()) {
             set(itemsp->inventory_shortcuts, i, oitem->id);
             level->inventory_describe(game->inventory_highlight_slot);
@@ -604,19 +560,13 @@ int Thing::item_slot_charge_count(const int slot)
   TRACE_NO_INDENT();
 
   auto itemsp = maybe_itemsp();
-  if (! itemsp) {
-    return 0;
-  }
+  if (! itemsp) { return 0; }
 
   auto thing_id = get(itemsp->inventory_shortcuts, slot);
-  if (! thing_id) {
-    return 0;
-  }
+  if (! thing_id) { return 0; }
 
   auto t = level->thing_find(thing_id);
-  if (unlikely(! t)) {
-    return 0;
-  }
+  if (unlikely(! t)) { return 0; }
 
   return item_count_including_charges(t->tp());
 }
@@ -626,20 +576,14 @@ int Thing::item_enchant_count(const int slot)
   TRACE_NO_INDENT();
 
   auto itemsp = maybe_itemsp();
-  if (! itemsp) {
-    return 0;
-  }
+  if (! itemsp) { return 0; }
 
   auto thing_id = get(itemsp->inventory_shortcuts, slot);
-  if (! thing_id) {
-    return 0;
-  }
+  if (! thing_id) { return 0; }
 
   for (const auto o : carried_and_equipped_item_vector()) {
     if (o->id == thing_id) {
-      if (o->enchant_count_get()) {
-        return o->enchant_count_get();
-      }
+      if (o->enchant_count_get()) { return o->enchant_count_get(); }
     }
   }
 
@@ -737,9 +681,7 @@ bool Level::inventory_over(const int slot)
     item = inventory_describe(game->inventory_highlight_slot);
   }
 
-  if (! item) {
-    return false;
-  }
+  if (! item) { return false; }
 
   IF_DEBUG2 { item->log("Over inventory item"); }
   return true;
@@ -752,9 +694,7 @@ bool Level::inventory_chosen(const int slot)
   DBG("Inventory: Chosen inventory slot %d", slot);
   TRACE_AND_INDENT();
 
-  if (! player) {
-    return false;
-  }
+  if (! player) { return false; }
 
   auto itemsp = player->maybe_itemsp();
   if (! itemsp) {
@@ -815,9 +755,7 @@ bool Level::inventory_assign(const int slot, Thingp item)
   DBG("Inventory: Assign inventory slot %d", slot);
   TRACE_AND_INDENT();
 
-  if (! player) {
-    return false;
-  }
+  if (! player) { return false; }
 
   auto itemsp = player->maybe_itemsp();
   if (! itemsp) {
@@ -825,22 +763,16 @@ bool Level::inventory_assign(const int slot, Thingp item)
     return false;
   }
 
-  if (slot >= (int) itemsp->inventory_shortcuts.size()) {
-    itemsp->inventory_shortcuts.resize(slot + 1);
-  }
+  if (slot >= (int) itemsp->inventory_shortcuts.size()) { itemsp->inventory_shortcuts.resize(slot + 1); }
 
   game->set_request_to_remake_rightbar();
 
   auto inventory_items = itemsp->inventory_shortcuts.size();
   for (auto i = 0U; i < inventory_items; i++) {
     auto thing_id = get(itemsp->inventory_shortcuts, i);
-    if (! thing_id) {
-      continue;
-    }
+    if (! thing_id) { continue; }
     auto t = thing_find(thing_id);
-    if (unlikely(! t)) {
-      continue;
-    }
+    if (unlikely(! t)) { continue; }
 
     if (item->tp() == t->tp()) {
       set(itemsp->inventory_shortcuts, i, NoThingId);
@@ -862,9 +794,7 @@ void Level::inventory_dump(void)
 {
   TRACE_NO_INDENT();
 
-  if (! player) {
-    return;
-  }
+  if (! player) { return; }
 
   dbg("Inventory: slots:");
   TRACE_AND_INDENT();
@@ -877,13 +807,9 @@ void Level::inventory_dump(void)
 
   for (auto i = 0U; i < itemsp->inventory_shortcuts.size(); i++) {
     auto thing_id = get(itemsp->inventory_shortcuts, i);
-    if (! thing_id) {
-      continue;
-    }
+    if (! thing_id) { continue; }
     auto t = thing_find(thing_id);
-    if (unlikely(! t)) {
-      continue;
-    }
+    if (unlikely(! t)) { continue; }
 
     dbg("Inventory: slot: %d -> %s", i + 1, t->text_short_name().c_str());
   }
@@ -902,17 +828,11 @@ int Level::inventory_slot(Thingp item)
   auto inventory_items = itemsp->inventory_shortcuts.size();
   for (auto i = 0U; i < inventory_items; i++) {
     auto thing_id = get(itemsp->inventory_shortcuts, i);
-    if (! thing_id) {
-      continue;
-    }
+    if (! thing_id) { continue; }
     auto t = thing_find(thing_id);
-    if (unlikely(! t)) {
-      continue;
-    }
+    if (unlikely(! t)) { continue; }
 
-    if (item->tp() == t->tp()) {
-      return i;
-    }
+    if (item->tp() == t->tp()) { return i; }
   }
 
   return -1;

@@ -13,21 +13,15 @@ void Level::display_ascii_gas(point tl, point br, int16_t minx, int16_t miny, in
   TRACE_NO_INDENT();
 
   static uint32_t last_anim_change;
-  if (time_have_x_tenths_passed_since(5, last_anim_change)) {
-    last_anim_change = time_ms();
-  }
+  if (time_have_x_tenths_passed_since(5, last_anim_change)) { last_anim_change = time_ms(); }
 
   for (auto y = miny; y < maxy - 1; y++) {
     for (auto x = minx; x < maxx - 1; x++) {
 
       int intensity = is_gas_poison(x, y);
-      if (intensity == 0) {
-        continue;
-      }
+      if (intensity == 0) { continue; }
 
-      if (intensity > 255) {
-        intensity = 255;
-      }
+      if (intensity > 255) { intensity = 255; }
 
       point p(x, y);
       int   tx = tl.x + (p.x - minx) - (MAP_BORDER_ROCK - 1);

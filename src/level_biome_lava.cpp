@@ -43,9 +43,7 @@ bool Level::create_biome_lava(point3d at, uint32_t seed)
     {
       for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
-          if (dungeon->is_ascend_dungeon(x, y)) {
-            goto have_dungeon_start;
-          }
+          if (dungeon->is_ascend_dungeon(x, y)) { goto have_dungeon_start; }
         }
       }
       ERR("Did not find dungeon entrance");
@@ -62,9 +60,7 @@ bool Level::create_biome_lava(point3d at, uint32_t seed)
       uint32_t start = time_ms();
       dbg2("INF: Place the grid");
       place_the_grid();
-      if (g_errored) {
-        return false;
-      }
+      if (g_errored) { return false; }
 
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
@@ -87,53 +83,29 @@ bool Level::create_biome_lava(point3d at, uint32_t seed)
       uint32_t start = time_ms();
       dbg2("INF: Place rocks");
       create_biome_lava_place_rocks(dungeon, 1, 6, 6, tries);
-      if (g_errored) {
-        return false;
-      }
+      if (g_errored) { return false; }
       create_biome_lava_place_rocks(dungeon, 1, 6, 3, tries);
-      if (g_errored) {
-        return false;
-      }
+      if (g_errored) { return false; }
       create_biome_lava_place_rocks(dungeon, 1, 3, 6, tries);
-      if (g_errored) {
-        return false;
-      }
+      if (g_errored) { return false; }
       create_biome_lava_place_rocks(dungeon, 1, 3, 3, tries);
-      if (g_errored) {
-        return false;
-      }
+      if (g_errored) { return false; }
       create_biome_lava_place_rocks(dungeon, 2, 3, 3, tries);
-      if (g_errored) {
-        return false;
-      }
+      if (g_errored) { return false; }
       create_biome_lava_place_rocks(dungeon, 1, 2, 2, tries);
-      if (g_errored) {
-        return false;
-      }
+      if (g_errored) { return false; }
       create_biome_lava_place_rocks(dungeon, 2, 2, 2, tries);
-      if (g_errored) {
-        return false;
-      }
+      if (g_errored) { return false; }
       create_biome_lava_place_rocks(dungeon, 3, 2, 2, tries);
-      if (g_errored) {
-        return false;
-      }
+      if (g_errored) { return false; }
       create_biome_lava_place_rocks(dungeon, 1, 2, 1, tries);
-      if (g_errored) {
-        return false;
-      }
+      if (g_errored) { return false; }
       create_biome_lava_place_rocks(dungeon, 2, 2, 1, tries);
-      if (g_errored) {
-        return false;
-      }
+      if (g_errored) { return false; }
       create_biome_lava_place_rocks(dungeon, 1, 1, 2, tries);
-      if (g_errored) {
-        return false;
-      }
+      if (g_errored) { return false; }
       create_biome_lava_place_rocks(dungeon, 2, 1, 2, tries);
-      if (g_errored) {
-        return false;
-      }
+      if (g_errored) { return false; }
 
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
@@ -153,127 +125,67 @@ bool Level::create_biome_lava(point3d at, uint32_t seed)
       while (nloops--) {
         auto tries = 20;
         create_biome_lava_place_floors(dungeon, s, floor_type, 1, 6, 6, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 2, 6, 6, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 1, 6, 3, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 2, 6, 3, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 1, 3, 6, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 2, 3, 6, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 1, 3, 3, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 2, 3, 3, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 3, 3, 3, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 4, 3, 3, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 1, 2, 2, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 2, 2, 2, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 3, 2, 2, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 4, 2, 2, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 5, 2, 2, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 6, 2, 2, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 1, 2, 1, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 2, 2, 1, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 3, 2, 1, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 4, 2, 1, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 5, 2, 1, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 6, 2, 1, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 7, 2, 1, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 8, 2, 1, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 1, 1, 2, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 2, 1, 2, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 3, 1, 2, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, 4, 1, 2, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
         create_biome_lava_place_floors(dungeon, s, floor_type, pcg_random_range_inclusive(1, 38), 1, 1, tries);
-        if (g_errored) {
-          return false;
-        }
+        if (g_errored) { return false; }
       }
 
       create_biome_ice_place_remaining_floor(dungeon, s + std::to_string(floor_type));
-      if (g_errored) {
-        return false;
-      }
+      if (g_errored) { return false; }
 
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
@@ -286,9 +198,7 @@ bool Level::create_biome_lava(point3d at, uint32_t seed)
       uint32_t start = time_ms();
       dbg2("INF: Place bridges");
       create_biome_lava_place_bridge(dungeon);
-      if (g_errored) {
-        return false;
-      }
+      if (g_errored) { return false; }
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
@@ -300,9 +210,7 @@ bool Level::create_biome_lava(point3d at, uint32_t seed)
       uint32_t start = time_ms();
       dbg2("INF: Place lava");
       create_biome_lava_place_lava(dungeon, "lava");
-      if (g_errored) {
-        return false;
-      }
+      if (g_errored) { return false; }
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
@@ -319,9 +227,7 @@ bool Level::create_biome_lava(point3d at, uint32_t seed)
       uint32_t start = time_ms();
       dbg2("INF: Place braziers");
       create_biome_lava_place_braziers(dungeon, "brazier");
-      if (g_errored) {
-        return false;
-      }
+      if (g_errored) { return false; }
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
@@ -336,9 +242,7 @@ bool Level::create_biome_lava(point3d at, uint32_t seed)
       uint32_t start = time_ms();
       dbg2("INF: Place items");
       place_objects_with_normal_placement_rules(dungeon);
-      if (g_errored) {
-        return false;
-      }
+      if (g_errored) { return false; }
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
@@ -353,9 +257,7 @@ bool Level::create_biome_lava(point3d at, uint32_t seed)
       uint32_t start = time_ms();
       dbg2("INF: Place random treasure");
       place_random_treasure(dungeon);
-      if (g_errored) {
-        return false;
-      }
+      if (g_errored) { return false; }
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
@@ -369,9 +271,7 @@ bool Level::create_biome_lava(point3d at, uint32_t seed)
     {
       uint32_t start = time_ms();
       place_random_torches(dungeon);
-      if (g_errored) {
-        return false;
-      }
+      if (g_errored) { return false; }
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
@@ -426,9 +326,7 @@ void Level::create_biome_lava_place_rocks(Dungeonp d, int variant, int block_wid
       for (auto dy = 0; dy < block_height; dy++) {
         auto Y = y + dy;
 
-        if (d->is_oob(X, Y)) {
-          continue;
-        }
+        if (d->is_oob(X, Y)) { continue; }
 
         if (! d->is_rock(X, Y) && ! d->is_wall(X, Y)) {
           can_place_here = false;
@@ -441,14 +339,10 @@ void Level::create_biome_lava_place_rocks(Dungeonp d, int variant, int block_wid
         }
       }
 
-      if (! can_place_here) {
-        break;
-      }
+      if (! can_place_here) { break; }
     }
 
-    if (! can_place_here) {
-      continue;
-    }
+    if (! can_place_here) { continue; }
 
     auto cnt = 1;
     for (auto dy = 0; dy < block_height; dy++) {
@@ -469,9 +363,7 @@ void Level::create_biome_lava_place_rocks(Dungeonp d, int variant, int block_wid
         }
 
         auto t = thing_new(what, point(X, Y));
-        if (! t) {
-          continue;
-        }
+        if (! t) { continue; }
 
         if (t) {
           auto tile = tile_find(tilename);
@@ -493,24 +385,16 @@ void Level::create_biome_lava_place_lava(Dungeonp d, const std::string &what)
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
 
-      if (is_lava(x, y) || is_dirt(x, y) || is_rock(x, y)) {
-        continue;
-      }
+      if (is_lava(x, y) || is_dirt(x, y) || is_rock(x, y)) { continue; }
 
-      if (! d->is_lava(x, y)) {
-        continue;
-      }
+      if (! d->is_lava(x, y)) { continue; }
 
       if (d100() < 50) {
         static auto tp = tp_find("floor_lava1");
-        if (tp) {
-          (void) thing_new(tp->name(), point(x, y));
-        }
+        if (tp) { (void) thing_new(tp->name(), point(x, y)); }
       } else if (d100() < 10) {
         static auto tp = tp_find("rock_lava1");
-        if (tp) {
-          (void) thing_new(tp->name(), point(x, y));
-        }
+        if (tp) { (void) thing_new(tp->name(), point(x, y)); }
       } else {
         (void) thing_new(what, point(x, y));
       }
@@ -523,13 +407,9 @@ void Level::create_biome_lava_place_braziers(Dungeonp d, const std::string &what
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-      if (is_brazier(x, y)) {
-        continue;
-      }
+      if (is_brazier(x, y)) { continue; }
 
-      if (! d->is_brazier(x, y)) {
-        continue;
-      }
+      if (! d->is_brazier(x, y)) { continue; }
 
       (void) thing_new(what, point(x, y));
     }
@@ -541,15 +421,11 @@ void Level::create_biome_lava_place_remaining_rocks(Dungeonp d)
   TRACE_AND_INDENT();
   for (auto x = 0; x < MAP_WIDTH; x++) {
     for (auto y = 0; y < MAP_HEIGHT; y++) {
-      if (is_rock(x, y)) {
-        continue;
-      }
+      if (is_rock(x, y)) { continue; }
 
       if (! is_floor(x, y)) {
         static auto tp = tp_find("floor_lava1");
-        if (tp) {
-          (void) thing_new(tp->name(), point(x, y));
-        }
+        if (tp) { (void) thing_new(tp->name(), point(x, y)); }
       }
 
       if (d->is_wall(x, y) || d->is_rock(x, y)) {
@@ -560,9 +436,7 @@ void Level::create_biome_lava_place_remaining_rocks(Dungeonp d)
         int  entrance_distance = MAP_BORDER_ROCK - 1;
         for (auto dx = -entrance_distance; dx <= entrance_distance; dx++) {
           for (auto dy = -entrance_distance; dy <= entrance_distance; dy++) {
-            if (d->is_oob(x + dx, y + dy)) {
-              continue;
-            }
+            if (d->is_oob(x + dx, y + dy)) { continue; }
 
             if (d->is_door(x + dx, y + dy)) {
               needed = true;
@@ -574,9 +448,7 @@ void Level::create_biome_lava_place_remaining_rocks(Dungeonp d)
               break;
             }
           }
-          if (needed) {
-            break;
-          }
+          if (needed) { break; }
         }
 
         if (needed) {
@@ -657,9 +529,7 @@ void Level::create_biome_lava_place_floors(Dungeonp d, std::string what, int flo
       for (auto dy = 0; dy < block_height; dy++) {
         auto Y = y + dy;
 
-        if (d->is_oob(X, Y)) {
-          continue;
-        }
+        if (d->is_oob(X, Y)) { continue; }
 
         if (! d->is_floor(X, Y) && ! d->is_corridor(X, Y)) {
           can_place_here = false;
@@ -681,14 +551,10 @@ void Level::create_biome_lava_place_floors(Dungeonp d, std::string what, int flo
         }
       }
 
-      if (! can_place_here) {
-        break;
-      }
+      if (! can_place_here) { break; }
     }
 
-    if (! can_place_here) {
-      continue;
-    }
+    if (! can_place_here) { continue; }
 
     if (bridge_count > 1) {
       if ((block_width == 1) && (block_height == 1)) {
@@ -730,9 +596,7 @@ void Level::create_biome_lava_place_floors(Dungeonp d, std::string what, int flo
         }
 
         auto t = thing_new(new_thing, point(X, Y));
-        if (! t) {
-          continue;
-        }
+        if (! t) { continue; }
 
         auto tile = tile_find(tilename);
         if (unlikely(! tile)) {

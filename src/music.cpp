@@ -41,9 +41,7 @@ bool music_init(void)
   //
   int flags   = MIX_INIT_OGG;
   int initted = Mix_Init(flags);
-  if ((initted & flags) != flags) {
-    ERR("Mix_Init: Failed to init required OGG support");
-  }
+  if ((initted & flags) != flags) { ERR("Mix_Init: Failed to init required OGG support"); }
 
   music_init_done = true;
   return true;
@@ -71,9 +69,7 @@ bool music_load(uint32_t rate, const std::string &file, const std::string &name_
   TRACE_AND_INDENT();
   if (name_alias == "") {
     auto m = music_find(name_alias);
-    if (m) {
-      return true;
-    }
+    if (m) { return true; }
   }
 
   auto *m = new music(name_alias);
@@ -132,9 +128,7 @@ void music_update_volume(void)
 bool music_play(const std::string &name)
 {
   TRACE_AND_INDENT();
-  if (name == music_current) {
-    return true;
-  }
+  if (name == music_current) { return true; }
   music_current = name;
 
   music_update_volume();
