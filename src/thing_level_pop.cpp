@@ -65,17 +65,25 @@ void Thing::level_pop(void)
       i_set_is_dirt = false;
       level->is_dirt_unset(x, y);
     }
-    if (i_set_is_dry_grass) {
-      i_set_is_dry_grass = false;
-      level->is_dry_grass_unset(x, y);
+    if (i_set_is_grass_dry) {
+      i_set_is_grass_dry = false;
+      level->is_grass_dry_unset(x, y);
     }
-    if (i_set_is_wet_grass) {
-      i_set_is_wet_grass = false;
-      level->is_wet_grass_unset(x, y);
+    if (i_set_is_grass_wet) {
+      i_set_is_grass_wet = false;
+      level->is_grass_wet_unset(x, y);
     }
-    if (i_set_is_dry_grass) {
-      i_set_is_dry_grass = false;
-      level->is_dry_grass_unset(x, y);
+    if (i_set_is_fungus_withered) {
+      i_set_is_fungus_withered = false;
+      level->is_fungus_withered_unset(x, y);
+    }
+    if (i_set_is_fungus_edible) {
+      i_set_is_fungus_edible = false;
+      level->is_fungus_edible_unset(x, y);
+    }
+    if (i_set_is_fungus_poison) {
+      i_set_is_fungus_poison = false;
+      level->is_fungus_poison_unset(x, y);
     }
     if (i_set_is_enchantstone) {
       i_set_is_enchantstone = false;

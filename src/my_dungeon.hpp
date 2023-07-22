@@ -107,13 +107,17 @@ public:
   bool is_dirt_no_check(const int x, const int y);
   bool is_door(const int x, const int y);
   bool is_door_no_check(const int x, const int y);
-  bool is_dry_grass(const int x, const int y);
   bool is_floor(const int x, const int y);
   bool is_floor_deco_at(const int x, const int y);
   bool is_floor_no_check(const int x, const int y);
   bool is_foliage(const int x, const int y);
   bool is_food(const int x, const int y);
+  bool is_fungus_withered(const int x, const int y);
+  bool is_fungus_edible(const int x, const int y);
+  bool is_fungus_poison(const int x, const int y);
   bool is_gold(const int x, const int y);
+  bool is_grass_dry(const int x, const int y);
+  bool is_grass_wet(const int x, const int y);
   bool is_hazard(const int x, const int y);
   bool is_ice_no_check(const int x, const int y);
   bool is_key(const int x, const int y);
@@ -152,7 +156,6 @@ public:
   bool is_weapon_class_A(const int x, const int y);
   bool is_weapon_class_B(const int x, const int y);
   bool is_weapon_class_C(const int x, const int y);
-  bool is_wet_grass(const int x, const int y);
   bool room_is_a_candidate_any_depth(const DungeonNode *n, Roomp r);
   bool room_is_a_candidate(int x, int y, const DungeonNode *n, Roomp r);
   bool room_is_a_candidate_less_restrictive(const DungeonNode *n, Roomp r);
@@ -189,9 +192,13 @@ public:
   void debug(const std::string s);
   void dirt_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
   void dmap_set_is_walls(Dmapp d);
-  void dry_grass_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
   void dump(void);
   void foliage_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
+  void fungus_edible_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
+  void fungus_poison_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
+  void fungus_withered_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
+  void grass_dry_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
+  void grass_wet_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
   void ice_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
   void lava_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
   void make_dungeon(void);
@@ -212,7 +219,6 @@ public:
   void water_fixup_shallows(void);
   void water_fixup(void);
   void water_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
-  void wet_grass_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
   // end sort marker2 }
 
   unsigned int MAP_FILL_PROB   = 10;

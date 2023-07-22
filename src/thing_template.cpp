@@ -148,12 +148,24 @@ std::vector< Tpp > tp_find_wildcard(const std::string &name)
     out.push_back(tp_random_dirt());
     return out;
   }
-  if (name == "random_dry_grass") {
-    out.push_back(tp_random_dry_grass());
+  if (name == "random_grass_dry") {
+    out.push_back(tp_random_grass_dry());
     return out;
   }
-  if (name == "random_wet_grass") {
-    out.push_back(tp_random_wet_grass());
+  if (name == "random_grass_wet") {
+    out.push_back(tp_random_grass_wet());
+    return out;
+  }
+  if (name == "random_fungus_edible") {
+    out.push_back(tp_random_fungus_edible());
+    return out;
+  }
+  if (name == "random_fungus_poison") {
+    out.push_back(tp_random_fungus_poison());
+    return out;
+  }
+  if (name == "random_fungus_withered") {
+    out.push_back(tp_random_fungus_withered());
     return out;
   }
   if (name == "random_magic_stone") {

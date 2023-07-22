@@ -202,15 +202,15 @@ void Game::place_player(void)
       if (0) {
         level->thing_new("lava_ant", point(x - 2, y));
         level->thing_new("dogman", point(x + 1, y + 3));
-        level->thing_new("wet_grass1", point(x + 1, y));
-        level->thing_new("wet_grass2", point(x + 2, y));
-        level->thing_new("wet_grass4", point(x + 3, y));
-        level->thing_new("wet_grass1", point(x + 1, y + 2));
-        level->thing_new("wet_grass2", point(x + 2, y + 2));
-        level->thing_new("wet_grass4", point(x + 3, y + 2));
-        level->thing_new("dry_grass", point(x + 1, y + 1));
-        level->thing_new("dry_grass", point(x + 2, y + 1));
-        level->thing_new("dry_grass", point(x + 3, y + 1));
+        level->thing_new("grass_wet1", point(x + 1, y));
+        level->thing_new("grass_wet2", point(x + 2, y));
+        level->thing_new("grass_wet4", point(x + 3, y));
+        level->thing_new("grass_wet1", point(x + 1, y + 2));
+        level->thing_new("grass_wet2", point(x + 2, y + 2));
+        level->thing_new("grass_wet4", point(x + 3, y + 2));
+        level->thing_new("grass_dry", point(x + 1, y + 1));
+        level->thing_new("grass_dry", point(x + 2, y + 1));
+        level->thing_new("grass_dry", point(x + 3, y + 1));
       }
 
       if (0) {

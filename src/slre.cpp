@@ -227,7 +227,6 @@ static void anyof(struct slre *r, const char **re)
   }
 
   while (**re != '\0')
-
     switch (*(*re)++) {
       case ']' :
         emit(r, op);

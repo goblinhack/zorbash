@@ -216,6 +216,7 @@ wchar_t unicode_alias_to_char(const std::string &i);
 #define UNICODE_0x89                 /* 137 */ 137 //	solid_circle
 #define UNICODE_SOLID_CIRCLE         UNICODE_0x89
 #define UNICODE_0x8a                 /* 138 */ 138 //
+#define UNICODE_LOLLIPOP             UNICODE_0x8a
 #define UNICODE_0x8b                 /* 139 */ 139 //
 #define UNICODE_0x8c                 /* 140 */ 140 //
 #define UNICODE_0x8d                 /* 141 */ 141 //

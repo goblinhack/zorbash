@@ -221,9 +221,6 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
     //
     dbg2("INF: Final update heatmap");
 
-    //
-    // Make sure and place dry grass after this
-    //
     {
       uint32_t start = time_ms();
       update_heatmap();
@@ -240,7 +237,7 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
     {
       uint32_t start = time_ms();
       dbg2("INF: Place dry grass");
-      create_biome_swamp_place_dry_grass(dungeon);
+      create_biome_swamp_place_grass_dry(dungeon);
       if (g_errored) {
         return false;
       }
@@ -254,7 +251,7 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
     {
       uint32_t start = time_ms();
       dbg2("INF: Place wet grass");
-      create_biome_swamp_place_wet_grass(dungeon);
+      create_biome_swamp_place_grass_wet(dungeon);
       if (g_errored) {
         return false;
       }
@@ -262,6 +259,51 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
       if (took > slowest_so_far) {
         slowest_so_far       = took;
         slowest_so_far_which = "placing wet grass";
+      }
+    }
+
+    //
+    // Place some fungus
+    //
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place withered fungus");
+      create_biome_swamp_place_fungus_withered(dungeon);
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing withered fungus";
+      }
+    }
+
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place edible fungus");
+      create_biome_swamp_place_fungus_edible(dungeon);
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing edible fungus";
+      }
+    }
+
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place poison fungus");
+      create_biome_swamp_place_fungus_poison(dungeon);
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing poison fungus";
       }
     }
 
@@ -574,7 +616,7 @@ void Level::create_biome_swamp_place_foliage(Dungeonp d)
   }
 }
 
-void Level::create_biome_swamp_place_dry_grass(Dungeonp d)
+void Level::create_biome_swamp_place_grass_dry(Dungeonp d)
 {
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
@@ -582,8 +624,8 @@ void Level::create_biome_swamp_place_dry_grass(Dungeonp d)
       if (is_rock(x, y)) {
         continue;
       }
-      if (d->is_dry_grass(x, y)) {
-        auto tp = tp_random_dry_grass();
+      if (d->is_grass_dry(x, y)) {
+        auto tp = tp_random_grass_dry();
         if (unlikely(! tp)) {
           return;
         }
@@ -594,7 +636,7 @@ void Level::create_biome_swamp_place_dry_grass(Dungeonp d)
   }
 }
 
-void Level::create_biome_swamp_place_wet_grass(Dungeonp d)
+void Level::create_biome_swamp_place_grass_wet(Dungeonp d)
 {
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
@@ -602,8 +644,68 @@ void Level::create_biome_swamp_place_wet_grass(Dungeonp d)
       if (is_rock(x, y)) {
         continue;
       }
-      if (d->is_wet_grass(x, y)) {
-        auto tp = tp_random_wet_grass();
+      if (d->is_grass_wet(x, y)) {
+        auto tp = tp_random_grass_wet();
+        if (unlikely(! tp)) {
+          return;
+        }
+
+        (void) thing_new(tp->name(), point(x, y));
+      }
+    }
+  }
+}
+
+void Level::create_biome_swamp_place_fungus_withered(Dungeonp d)
+{
+  TRACE_AND_INDENT();
+  for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
+    for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
+      if (is_rock(x, y)) {
+        continue;
+      }
+      if (d->is_fungus_withered(x, y)) {
+        auto tp = tp_random_fungus_withered();
+        if (unlikely(! tp)) {
+          return;
+        }
+
+        (void) thing_new(tp->name(), point(x, y));
+      }
+    }
+  }
+}
+
+void Level::create_biome_swamp_place_fungus_poison(Dungeonp d)
+{
+  TRACE_AND_INDENT();
+  for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
+    for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
+      if (is_rock(x, y)) {
+        continue;
+      }
+      if (d->is_fungus_poison(x, y)) {
+        auto tp = tp_random_fungus_poison();
+        if (unlikely(! tp)) {
+          return;
+        }
+
+        (void) thing_new(tp->name(), point(x, y));
+      }
+    }
+  }
+}
+
+void Level::create_biome_swamp_place_fungus_edible(Dungeonp d)
+{
+  TRACE_AND_INDENT();
+  for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
+    for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
+      if (is_rock(x, y)) {
+        continue;
+      }
+      if (d->is_fungus_edible(x, y)) {
+        auto tp = tp_random_fungus_edible();
         if (unlikely(! tp)) {
           return;
         }

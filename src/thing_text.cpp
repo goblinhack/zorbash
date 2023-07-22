@@ -450,7 +450,6 @@ void Thing::show_botcon_description(void)
   //
   if (immediate_owner()) {
     if (is_droppable()) {
-
       text += " %%fg=orange$" + ::to_string(game->config.key_drop) + "%%fg=reset$ to drop.";
     }
   }

@@ -28,13 +28,17 @@ public:
     DOOR_LEFT           = '<',
     DOOR_RIGHT          = '>',
     DOOR_UP             = '^',
-    DRY_GRASS           = '\'',
     ENTRANCE            = 'S',
     EXIT                = 'E',
     FLOOR               = '.',
     FOLIAGE             = '`',
     FOOD                = 'f',
+    FUNGUS_EDIBLE       = 'n',
+    FUNGUS_POISON       = 'n',
+    FUNGUS_WITHERED     = 'n',
     GOLD                = 'o',
+    GRASS_DRY           = '\'',
+    GRASS_WET           = '"',
     ICE                 = 'I',
     KEY                 = 'k',
     LAVA                = 'L',
@@ -66,7 +70,6 @@ public:
     WEAPON_CLASS_A      = '(',
     WEAPON_CLASS_B      = ')',
     WEAPON_CLASS_C      = '-',
-    WET_GRASS           = '"',
     // end sort marker1 }
   };
 
@@ -83,12 +86,16 @@ public:
   bool is_descend_sewer {false};
   bool is_dirt {false};
   bool is_door {false};
-  bool is_dry_grass {false};
   bool is_floor_deco {false};
   bool is_floor {false};
   bool is_foliage {false};
   bool is_food {false};
+  bool is_fungus_edible {false};
+  bool is_fungus_poison {false};
+  bool is_fungus_withered {false};
   bool is_gold {false};
+  bool is_grass_dry {false};
+  bool is_grass_wet {false};
   bool is_key {false};
   bool is_lava {false};
   bool is_magic_stone {false};
@@ -117,7 +124,6 @@ public:
   bool is_weapon_class_A {false};
   bool is_weapon_class_B {false};
   bool is_weapon_class_C {false};
-  bool is_wet_grass {false};
   // end sort marker2 }
 
   char c;

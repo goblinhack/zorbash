@@ -520,7 +520,7 @@ bool Level::create_biome_flooded(point3d at, uint32_t seed)
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
-        slowest_so_far_which = "placing dry grass";
+        slowest_so_far_which = "placing swimming monsters";
       }
     }
 

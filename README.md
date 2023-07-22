@@ -2,9 +2,9 @@
 <!-- ------                                                                                                                                       -->
 <!-- when stuck in rock how to show?                                                                                                              -->
 <!-- skill offensive/defensive                                                                                                                    -->
-<!-- wet_fungus                                                                                                                                   -->
+<!-- fungus_withered                                                                                                                                   -->
 <!-- fireball should ignite dry grass                                                                                                             -->
-<!-- - wort food ? wet_fungus foods and some poisonous?                                                                                           -->
+<!-- - wort food ? fungus_withered foods and some poisonous?                                                                                           -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

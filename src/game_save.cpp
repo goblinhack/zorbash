@@ -331,7 +331,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   uint64_t bits64 = 0;
   int      shift  = 0;
   // clang-format off
-  // begin sort marker1
+  // begin sort marker1 {
   bits64 |= (my.t->corpse_cleanup                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->gfx_ascii_animated                           ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->gfx_pixelart_animated                        ? 1LLU : 0LLU) << shift; shift++;
@@ -340,7 +340,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->has_light                                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->has_projectile                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->has_seen_player_msg_shown                    ? 1LLU : 0LLU) << shift; shift++;
-  // end sort marker1
+  // end sort marker1 }
   // clang-format on
   if (shift >= (int) (sizeof(bits64) * 8)) {
     ERR("Ran out of bits in serialization (1)");
@@ -350,7 +350,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 = 0;
   shift  = 0;
   // clang-format off
-  // begin sort marker2
+  // begin sort marker2 {
   bits64 |= (my.t->is_activated                                 ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_attached                                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_being_destroyed                           ? 1LLU : 0LLU) << shift; shift++;
@@ -397,7 +397,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_waiting_to_leave_level_has_completed_fall ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_wounded_msg                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->was_frozen                                   ? 1LLU : 0LLU) << shift; shift++;
-  // end sort marker2
+  // end sort marker2 }
   // clang-format on
   if (shift >= (int) (sizeof(bits64) * 8)) {
     ERR("Ran out of bits in serialization (2)");
@@ -407,7 +407,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 = 0;
   shift  = 0;
   // clang-format off
-  // begin sort marker3
+  // begin sort marker3 {
   bits64 |= (my.t->i_set_is_able_to_amplify_footsteps     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_able_to_dampen_footsteps      ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_acid                          ? 1LLU : 0LLU) << shift; shift++;
@@ -433,7 +433,6 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_descend_sewer                 ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_dirt                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_door                          ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_dry_grass                     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_enchantstone                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_fire                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_floor                         ? 1LLU : 0LLU) << shift; shift++;
@@ -459,7 +458,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_obs_when_dead                 ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_portal                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_trap                          ? 1LLU : 0LLU) << shift; shift++;
-  // end sort marker3
+  // end sort marker3 }
   // clang-format on
   if (shift >= (int) (sizeof(bits64) * 8)) {
     ERR("Ran out of bits in serialization (3)");
@@ -469,8 +468,12 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 = 0;
   shift  = 0;
   // clang-format off
-  // begin sort marker4
-  bits64 |= (my.t->i_set_is_dry_grass                     ? 1LLU : 0LLU) << shift; shift++;
+  // begin sort marker4 {
+  bits64 |= (my.t->i_set_is_fungus_edible                 ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_fungus_poison                 ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_fungus_withered               ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_grass_dry                     ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_grass_wet                     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_poisonous_danger_level        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_potion                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_red_blood                     ? 1LLU : 0LLU) << shift; shift++;
@@ -491,10 +494,9 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_torch                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_treasure_type                 ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_wall                          ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_wet_grass                     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_noise_blocker                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_water                            ? 1LLU : 0LLU) << shift; shift++;
-  // end sort marker4
+  // end sort marker4 }
   // clang-format on
   if (shift >= (int) (sizeof(bits64) * 8)) {
     ERR("Ran out of bits in serialization (4)");
@@ -569,32 +571,25 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
 
   out << bits(my.t->gas_poison_cloud);
 
-  out << bits(my.t->_is_gas_blocker);
-  out << bits(my.t->_noise_blocker);
-  out << bits(my.t->_is_light_blocker);
-  out << bits(my.t->_is_light_blocker_for_monst);
-  out << bits(my.t->_is_walked);
-  out << bits(my.t->_is_obs_destructable);
-  out << bits(my.t->_is_obs_wall_or_door);
-  out << bits(my.t->_is_obs_when_dead);
-  out << bits(my.t->_is_obs_jump_end);
-  out << bits(my.t->_is_obs_spawn);
-  out << bits(my.t->_is_obs_spawn_monst);
-
+  // begin sort marker5 {
   out << bits(my.t->_fade_in_map);
   out << bits(my.t->_gfx_water);
   out << bits(my.t->_heatmap);
+  out << bits(my.t->_is_able_to_amplify_footsteps);
+  out << bits(my.t->_is_able_to_dampen_footsteps);
   out << bits(my.t->_is_able_to_stand_on);
-  out << bits(my.t->_is_portal);
   out << bits(my.t->_is_acid);
   out << bits(my.t->_is_ascend_dungeon);
   out << bits(my.t->_is_ascend_sewer);
+  out << bits(my.t->_is_attackable_by_monst);
+  out << bits(my.t->_is_attackable_by_player);
   out << bits(my.t->_is_barrel);
-  out << bits(my.t->_is_trap);
   out << bits(my.t->_is_basalt);
+  out << bits(my.t->_is_block_of_ice);
   out << bits(my.t->_is_brazier);
   out << bits(my.t->_is_bridge);
   out << bits(my.t->_is_burnable);
+  out << bits(my.t->_is_carnivorous_plant);
   out << bits(my.t->_is_chasm);
   out << bits(my.t->_is_combustible);
   out << bits(my.t->_is_corpse);
@@ -607,27 +602,35 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_descend_sewer);
   out << bits(my.t->_is_dirt);
   out << bits(my.t->_is_door);
-  out << bits(my.t->_is_dry_grass);
   out << bits(my.t->_is_enchantstone);
   out << bits(my.t->_is_fire);
   out << bits(my.t->_is_floor);
   out << bits(my.t->_is_foliage);
-  out << bits(my.t->_is_carnivorous_plant);
   out << bits(my.t->_is_food);
+  out << bits(my.t->_is_fungus_edible);
+  out << bits(my.t->_is_fungus_poison);
+  out << bits(my.t->_is_fungus_withered);
+  out << bits(my.t->_is_gas_blocker);
   out << bits(my.t->_is_gas_poison);
   out << bits(my.t->_is_gold);
+  out << bits(my.t->_is_grass_dry);
+  out << bits(my.t->_is_grass_wet);
   out << bits(my.t->_is_green_blood);
   out << bits(my.t->_is_hazard);
   out << bits(my.t->_is_heavy);
-  out << bits(my.t->_is_block_of_ice);
-  out << bits(my.t->_is_able_to_dampen_footsteps);
-  out << bits(my.t->_is_able_to_amplify_footsteps);
-  out << bits(my.t->_is_attackable_by_monst);
-  out << bits(my.t->_is_attackable_by_player);
   out << bits(my.t->_is_key);
   out << bits(my.t->_is_lava);
+  out << bits(my.t->_is_light_blocker);
+  out << bits(my.t->_is_light_blocker_for_monst);
   out << bits(my.t->_is_mob);
   out << bits(my.t->_is_monst);
+  out << bits(my.t->_is_obs_destructable);
+  out << bits(my.t->_is_obs_jump_end);
+  out << bits(my.t->_is_obs_spawn);
+  out << bits(my.t->_is_obs_spawn_monst);
+  out << bits(my.t->_is_obs_wall_or_door);
+  out << bits(my.t->_is_obs_when_dead);
+  out << bits(my.t->_is_portal);
   out << bits(my.t->_is_potion);
   out << bits(my.t->_is_red_blood);
   out << bits(my.t->_is_ring);
@@ -637,20 +640,22 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_shallow_water);
   out << bits(my.t->_is_shovable);
   out << bits(my.t->_is_skillstone);
-  out << bits(my.t->_is_spellbook);
   out << bits(my.t->_is_smoke);
-  out << bits(my.t->_is_steam);
+  out << bits(my.t->_is_spellbook);
   out << bits(my.t->_is_spiderweb);
+  out << bits(my.t->_is_staff);
+  out << bits(my.t->_is_steam);
   out << bits(my.t->_is_sticky);
   out << bits(my.t->_is_tentacle);
   out << bits(my.t->_is_torch);
+  out << bits(my.t->_is_trap);
   out << bits(my.t->_is_treasure_type);
+  out << bits(my.t->_is_walked);
   out << bits(my.t->_is_wall);
-  out << bits(my.t->_is_staff);
-  out << bits(my.t->_is_wet_grass);
-  out << bits(my.t->_is_dry_grass);
+  out << bits(my.t->_noise_blocker);
   out << bits(my.t->_noisemap);
   out << bits(my.t->_noisemap_in);
+  // end sort marker5 }
 
   out << bits(my.t->can_see_currently);
   out << bits(my.t->can_see_ever);

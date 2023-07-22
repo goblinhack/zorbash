@@ -74,14 +74,18 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_descend_sewer {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_dirt {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_door {};
-  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_dry_grass {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_enchantstone {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_fire {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_floor {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_foliage {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_food {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_fungus_withered {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_fungus_poison {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_fungus_edible {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_gas_poison {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_gold {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_grass_dry {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_grass_wet {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_green_blood {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_hazard {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_heavy {};
@@ -110,7 +114,6 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_trap {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_treasure_type {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_wall {};
-  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_wet_grass {};
   // end sort marker1 }
 
   //
@@ -870,8 +873,6 @@ public:
   uint8_t is_dirt(const point p);
   uint8_t is_door(const int x, const int y);
   uint8_t is_door(const point p);
-  uint8_t is_dry_grass(const int x, const int y);
-  uint8_t is_dry_grass(const point p);
   uint8_t is_enchantstone(const int x, const int y);
   uint8_t is_enchantstone(const point p);
   uint8_t is_fire(const int x, const int y);
@@ -883,12 +884,22 @@ public:
   uint8_t is_foliage(const point p);
   uint8_t is_food(const int x, const int y);
   uint8_t is_food(const point p);
+  uint8_t is_fungus_withered(const int x, const int y);
+  uint8_t is_fungus_withered(const point p);
+  uint8_t is_fungus_edible(const int x, const int y);
+  uint8_t is_fungus_edible(const point p);
+  uint8_t is_fungus_poison(const int x, const int y);
+  uint8_t is_fungus_poison(const point p);
   uint8_t is_gas_poison(const int x, const int y) const;
   uint8_t is_gas_poison(const point p) const;
   uint8_t is_gas_poison_no_check(const int x, const int y) const;
   uint8_t is_gas_poison_no_check(const point p) const;
   uint8_t is_gold(const int x, const int y);
   uint8_t is_gold(const point p);
+  uint8_t is_grass_dry(const int x, const int y);
+  uint8_t is_grass_dry(const point p);
+  uint8_t is_grass_wet(const int x, const int y);
+  uint8_t is_grass_wet(const point p);
   uint8_t is_green_blood(const int x, const int y);
   uint8_t is_green_blood(const point p);
   uint8_t is_hazard(const int x, const int y);
@@ -955,8 +966,6 @@ public:
   uint8_t is_weapon_class_C(const point p);
   uint8_t is_weapon_type(const int x, const int y);
   uint8_t is_weapon_type(const point p);
-  uint8_t is_wet_grass(const int x, const int y);
-  uint8_t is_wet_grass(const point p);
   uint8_t noisemap(const int x, const int y);
   uint8_t noisemap(const point p);
   uint8_t noisemap_in(const int x, const int y);
@@ -983,10 +992,14 @@ public:
   void create_biome_dungeon_place_chasm(Dungeonp d, const std::string &what);
   void create_biome_dungeon_place_corridor(Dungeonp d, const std::string what, int depth);
   void create_biome_dungeon_place_deep_water(Dungeonp d, const std::string &what);
-  void create_biome_dungeon_place_dry_grass(Dungeonp d);
   void create_biome_dungeon_place_floor_deco(Dungeonp d);
   void create_biome_dungeon_place_floors(Dungeonp d, const std::string, int depth, int var, int w, int h, int tries);
   void create_biome_dungeon_place_foliage(Dungeonp d);
+  void create_biome_dungeon_place_fungus_withered(Dungeonp d);
+  void create_biome_dungeon_place_fungus_edible(Dungeonp d);
+  void create_biome_dungeon_place_fungus_poison(Dungeonp d);
+  void create_biome_dungeon_place_grass_dry(Dungeonp d);
+  void create_biome_dungeon_place_grass_wet(Dungeonp d);
   void create_biome_dungeon_place_lava(Dungeonp d, const std::string &what);
   void create_biome_dungeon_place_lava_smoke(Dungeonp d);
   void create_biome_dungeon_place_place_shallow_water(Dungeonp d, const std::string &what);
@@ -998,7 +1011,6 @@ public:
   void create_biome_dungeon_place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries);
   void create_biome_dungeon_place_sewer_pipes(Dungeonp d);
   void create_biome_dungeon_place_walls(Dungeonp d, Tpp tp, int, int block_width, int block_height, int tries);
-  void create_biome_dungeon_place_wet_grass(Dungeonp d);
   void create_biome_flooded_place_bridge(Dungeonp d);
   void create_biome_flooded_place_corridor(Dungeonp d, const std::string what, int depth);
   void create_biome_flooded_place_deep_water(Dungeonp d, const std::string &what);
@@ -1030,12 +1042,15 @@ public:
   void create_biome_sewer_place_walls(int variant, int block_width, int block_height, int tries);
   void create_biome_swamp_place_deep_water(Dungeonp d, const std::string &what);
   void create_biome_swamp_place_dirt(Dungeonp d);
-  void create_biome_swamp_place_dry_grass(Dungeonp d);
   void create_biome_swamp_place_foliage(Dungeonp d);
+  void create_biome_swamp_place_fungus_withered(Dungeonp d);
+  void create_biome_swamp_place_fungus_edible(Dungeonp d);
+  void create_biome_swamp_place_fungus_poison(Dungeonp d);
+  void create_biome_swamp_place_grass_dry(Dungeonp d);
+  void create_biome_swamp_place_grass_wet(Dungeonp d);
   void create_biome_swamp_place_place_shallow_water(Dungeonp d, const std::string &what);
   void create_biome_swamp_place_remaining_rocks(Dungeonp d);
   void create_biome_swamp_place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries);
-  void create_biome_swamp_place_wet_grass(Dungeonp d);
   void created(void);
   void create(point3d world_at, point grid_at, uint32_t seed, int difficulty_depth, int dungeon_walk_order_level_no);
   void cursor_describe(void);
@@ -1170,8 +1185,6 @@ public:
   void is_dirt_unset(const int x, const int y);
   void is_door_set(const int x, const int y);
   void is_door_unset(const int x, const int y);
-  void is_dry_grass_set(const int x, const int y);
-  void is_dry_grass_unset(const int x, const int y);
   void is_enchantstone_set(const int x, const int y);
   void is_enchantstone_unset(const int x, const int y);
   void is_fire_set(const int x, const int y);
@@ -1182,6 +1195,12 @@ public:
   void is_foliage_unset(const int x, const int y);
   void is_food_set(const int x, const int y);
   void is_food_unset(const int x, const int y);
+  void is_fungus_withered_set(const int x, const int y);
+  void is_fungus_withered_unset(const int x, const int y);
+  void is_fungus_edible_set(const int x, const int y);
+  void is_fungus_edible_unset(const int x, const int y);
+  void is_fungus_poison_set(const int x, const int y);
+  void is_fungus_poison_unset(const int x, const int y);
   void is_gas_blocker_no_check_set(const int x, const int y);
   void is_gas_blocker_no_check_unset(const int x, const int y);
   void is_gas_blocker_set(const int x, const int y);
@@ -1192,6 +1211,10 @@ public:
   void is_gas_poison_unset(const int x, const int y);
   void is_gold_set(const int x, const int y);
   void is_gold_unset(const int x, const int y);
+  void is_grass_dry_set(const int x, const int y);
+  void is_grass_dry_unset(const int x, const int y);
+  void is_grass_wet_set(const int x, const int y);
+  void is_grass_wet_unset(const int x, const int y);
   void is_green_blood_set(const int x, const int y);
   void is_green_blood_unset(const int x, const int y);
   void is_hazard_set(const int x, const int y);
@@ -1286,8 +1309,6 @@ public:
   void is_walked_unset(const int x, const int y);
   void is_wall_set(const int x, const int y);
   void is_wall_unset(const int x, const int y);
-  void is_wet_grass_set(const int x, const int y);
-  void is_wet_grass_unset(const int x, const int y);
   void lights_fade(void);
   void lights_render(int minx, int miny, int maxx, int maxy, int fbo);
   void lights_render_small_lights(int minx, int miny, int maxx, int maxy, int fbo, bool include_player_lights);

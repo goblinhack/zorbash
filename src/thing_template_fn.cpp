@@ -500,9 +500,6 @@ int Tp::is_destroyed_on_hitting(void) const { return _is_destroyed_on_hitting; }
 int Tp::is_dirt(void) const { return _is_dirt; }
 int Tp::is_door(void) const { return _is_door; }
 int Tp::is_droppable(void) const { return _is_droppable; }
-int Tp::is_dry_fungus(void) const { return _is_dry_fungus; }
-int Tp::is_dry_grass_trampled(void) const { return _is_dry_grass_trampled; }
-int Tp::is_dry_grass(void) const { return _is_dry_grass; }
 int Tp::is_duck(void) const { return _is_duck; }
 int Tp::is_eater_of_amulets(void) const { return _is_eater_of_amulets; }
 int Tp::is_eater_of_armor(void) const { return _is_eater_of_armor; }
@@ -511,6 +508,7 @@ int Tp::is_eater_of_boots(void) const { return _is_eater_of_boots; }
 int Tp::is_eater_of_cloaks(void) const { return _is_eater_of_cloaks; }
 int Tp::is_eater_of_foliage(void) const { return _is_eater_of_foliage; }
 int Tp::is_eater_of_food(void) const { return _is_eater_of_food; }
+int Tp::is_eater_of_fungus(void) const { return _is_eater_of_fungus; }
 int Tp::is_eater_of_gauntlets(void) const { return _is_eater_of_gauntlets; }
 int Tp::is_eater_of_grass(void) const { return _is_eater_of_grass; }
 int Tp::is_eater_of_green_blood(void) const { return _is_eater_of_green_blood; }
@@ -547,6 +545,9 @@ int Tp::is_floor(void) const { return _is_floor; }
 int Tp::is_flying(void) const { return _is_flying; }
 int Tp::is_foliage(void) const { return _is_foliage; }
 int Tp::is_food(void) const { return _is_food; }
+int Tp::is_fungus_withered(void) const { return _is_fungus_withered; }
+int Tp::is_fungus_poison(void) const { return _is_fungus_poison; }
+int Tp::is_fungus_edible(void) const { return _is_fungus_edible; }
 int Tp::is_gas_blocker(void) const { return _is_gas_blocker; }
 int Tp::is_gauntlet(void) const { return _is_gauntlet; }
 int Tp::is_gelatinous(void) const { return _is_gelatinous; }
@@ -555,7 +556,12 @@ int Tp::is_gnome(void) const { return _is_gnome; }
 int Tp::is_goat(void) const { return _is_goat; }
 int Tp::is_gold(void) const { return _is_gold; }
 int Tp::is_golem(void) const { return _is_golem; }
+int Tp::is_grass_dry_trampled(void) const { return _is_grass_dry_trampled; }
+int Tp::is_grass_dry(void) const { return _is_grass_dry; }
 int Tp::is_grass(void) const { return _is_grass; }
+int Tp::is_fungus(void) const { return _is_fungus; }
+int Tp::is_grass_wet_trampled(void) const { return _is_grass_wet_trampled; }
+int Tp::is_grass_wet(void) const { return _is_grass_wet; }
 int Tp::is_green_blooded(void) const { return _is_green_blooded; }
 int Tp::is_green_blood(void) const { return _is_green_blood; }
 int Tp::is_green_splatter(void) const { return _is_green_splatter; }
@@ -755,7 +761,6 @@ int Tp::is_unused_flag120(void) const { return _is_unused_flag120; }
 int Tp::is_unused_flag121(void) const { return _is_unused_flag121; }
 int Tp::is_unused_flag122(void) const { return _is_unused_flag122; }
 int Tp::is_unused_flag123(void) const { return _is_unused_flag123; }
-int Tp::is_unused_flag124(void) const { return _is_unused_flag124; }
 int Tp::is_unused_flag12(void) const { return _is_unused_flag12; }
 int Tp::is_unused_flag13(void) const { return _is_unused_flag13; }
 int Tp::is_unused_flag142(void) const { return _is_unused_flag142; }
@@ -868,9 +873,6 @@ int Tp::is_weapon_class_A(void) const { return _is_weapon_class_A; }
 int Tp::is_weapon_class_B(void) const { return _is_weapon_class_B; }
 int Tp::is_weapon_class_C(void) const { return _is_weapon_class_C; }
 int Tp::is_weapon(void) const { return _is_weapon; }
-int Tp::is_wet_fungus(void) const { return _is_wet_fungus; }
-int Tp::is_wet_grass_trampled(void) const { return _is_wet_grass_trampled; }
-int Tp::is_wet_grass(void) const { return _is_wet_grass; }
 int Tp::is_wooden(void) const { return _is_wooden; }
 int Tp::is_yeti(void) const { return _is_yeti; }
 int Tp::item_height(void) const { return _item_height ? _item_height : 1; }
@@ -1262,9 +1264,6 @@ void Tp::is_destroyed_on_hitting_set(int v) { _is_destroyed_on_hitting = v; }
 void Tp::is_dirt_set(int v) { _is_dirt = v; }
 void Tp::is_door_set(int v) { _is_door = v; }
 void Tp::is_droppable_set(int v) { _is_droppable = v; }
-void Tp::is_dry_fungus_set(int v) { _is_dry_fungus = v; }
-void Tp::is_dry_grass_set(int v) { _is_dry_grass = v; }
-void Tp::is_dry_grass_trampled_set(int v) { _is_dry_grass_trampled = v; }
 void Tp::is_duck_set(int v) { _is_duck = v; }
 void Tp::is_eater_of_amulets_set(int v) { _is_eater_of_amulets = v; }
 void Tp::is_eater_of_armor_set(int v) { _is_eater_of_armor = v; }
@@ -1273,6 +1272,7 @@ void Tp::is_eater_of_boots_set(int v) { _is_eater_of_boots = v; }
 void Tp::is_eater_of_cloaks_set(int v) { _is_eater_of_cloaks = v; }
 void Tp::is_eater_of_foliage_set(int v) { _is_eater_of_foliage = v; }
 void Tp::is_eater_of_food_set(int v) { _is_eater_of_food = v; }
+void Tp::is_eater_of_fungus_set(int v) { _is_eater_of_fungus = v; }
 void Tp::is_eater_of_gauntlets_set(int v) { _is_eater_of_gauntlets = v; }
 void Tp::is_eater_of_grass_set(int v) { _is_eater_of_grass = v; }
 void Tp::is_eater_of_green_blood_set(int v) { _is_eater_of_green_blood = v; }
@@ -1309,6 +1309,9 @@ void Tp::is_floor_set(int v) { _is_floor = v; }
 void Tp::is_flying_set(int v) { _is_flying = v; }
 void Tp::is_foliage_set(int v) { _is_foliage = v; }
 void Tp::is_food_set(int v) { _is_food = v; }
+void Tp::is_fungus_withered_set(int v) { _is_fungus_withered = v; }
+void Tp::is_fungus_poison_set(int v) { _is_fungus_poison = v; }
+void Tp::is_fungus_edible_set(int v) { _is_fungus_edible = v; }
 void Tp::is_gas_blocker_set(int v) { _is_gas_blocker = v; }
 void Tp::is_gauntlet_set(int v) { _is_gauntlet = v; }
 void Tp::is_gelatinous_set(int v) { _is_gelatinous = v; }
@@ -1317,7 +1320,12 @@ void Tp::is_gnome_set(int v) { _is_gnome = v; }
 void Tp::is_goat_set(int v) { _is_goat = v; }
 void Tp::is_gold_set(int v) { _is_gold = v; }
 void Tp::is_golem_set(int v) { _is_golem = v; }
+void Tp::is_grass_dry_set(int v) { _is_grass_dry = v; }
+void Tp::is_grass_dry_trampled_set(int v) { _is_grass_dry_trampled = v; }
 void Tp::is_grass_set(int v) { _is_grass = v; }
+void Tp::is_fungus_set(int v) { _is_fungus = v; }
+void Tp::is_grass_wet_set(int v) { _is_grass_wet = v; }
+void Tp::is_grass_wet_trampled_set(int v) { _is_grass_wet_trampled = v; }
 void Tp::is_green_blooded_set(int v) { _is_green_blooded = v; }
 void Tp::is_green_blood_set(int v) { _is_green_blood = v; }
 void Tp::is_green_splatter_set(int v) { _is_green_splatter = v; }
@@ -1517,7 +1525,6 @@ void Tp::is_unused_flag120_set(int v) { _is_unused_flag120 = v; }
 void Tp::is_unused_flag121_set(int v) { _is_unused_flag121 = v; }
 void Tp::is_unused_flag122_set(int v) { _is_unused_flag122 = v; }
 void Tp::is_unused_flag123_set(int v) { _is_unused_flag123 = v; }
-void Tp::is_unused_flag124_set(int v) { _is_unused_flag124 = v; }
 void Tp::is_unused_flag12_set(int v) { _is_unused_flag12 = v; }
 void Tp::is_unused_flag13_set(int v) { _is_unused_flag13 = v; }
 void Tp::is_unused_flag142_set(int v) { _is_unused_flag142 = v; }
@@ -1630,9 +1637,6 @@ void Tp::is_weapon_class_A_set(int v) { _is_weapon_class_A = v; }
 void Tp::is_weapon_class_B_set(int v) { _is_weapon_class_B = v; }
 void Tp::is_weapon_class_C_set(int v) { _is_weapon_class_C = v; }
 void Tp::is_weapon_set(int v) { _is_weapon = v; }
-void Tp::is_wet_fungus_set(int v) { _is_wet_fungus = v; }
-void Tp::is_wet_grass_set(int v) { _is_wet_grass = v; }
-void Tp::is_wet_grass_trampled_set(int v) { _is_wet_grass_trampled = v; }
 void Tp::is_wooden_set(int v) { _is_wooden = v; }
 void Tp::is_yeti_set(int v) { _is_yeti = v; }
 void Tp::item_height_set(int v) { _item_height = v; }

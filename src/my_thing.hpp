@@ -268,14 +268,18 @@ public:
   uint64_t i_set_is_descend_sewer             : 1 {};
   uint64_t i_set_is_dirt                      : 1 {};
   uint64_t i_set_is_door                      : 1 {};
-  uint64_t i_set_is_dry_grass                 : 1 {};
   uint64_t i_set_is_enchantstone              : 1 {};
   uint64_t i_set_is_fire                      : 1 {};
   uint64_t i_set_is_floor                     : 1 {};
   uint64_t i_set_is_foliage                   : 1 {};
   uint64_t i_set_is_food                      : 1 {};
+  uint64_t i_set_is_fungus_edible             : 1 {};
+  uint64_t i_set_is_fungus_poison             : 1 {};
+  uint64_t i_set_is_fungus_withered           : 1 {};
   uint64_t i_set_is_gas_blocker               : 1 {};
   uint64_t i_set_is_gold                      : 1 {};
+  uint64_t i_set_is_grass_dry                 : 1 {};
+  uint64_t i_set_is_grass_wet                 : 1 {};
   uint64_t i_set_is_green_blood               : 1 {};
   uint64_t i_set_is_hazard                    : 1 {};
   uint64_t i_set_is_heavy                     : 1 {};
@@ -314,7 +318,6 @@ public:
   uint64_t i_set_is_trap                      : 1 {};
   uint64_t i_set_is_treasure_type             : 1 {};
   uint64_t i_set_is_wall                      : 1 {};
-  uint64_t i_set_is_wet_grass                 : 1 {};
   uint64_t i_set_noise_blocker                : 1 {};
   uint64_t i_set_water                        : 1 {};
   // end sort marker2 }
@@ -1526,9 +1529,6 @@ public:
   int is_dirt(void);
   int is_door(void);
   int is_droppable(void);
-  int is_dry_fungus(void);
-  int is_dry_grass_trampled(void);
-  int is_dry_grass(void);
   int is_duck(void);
   int is_eater_of_amulets(void);
   int is_eater_of_armor(void);
@@ -1537,6 +1537,7 @@ public:
   int is_eater_of_cloaks(void);
   int is_eater_of_foliage(void);
   int is_eater_of_food(void);
+  int is_eater_of_fungus(void);
   int is_eater_of_gauntlets(void);
   int is_eater_of_grass(void);
   int is_eater_of_green_blood(void);
@@ -1574,6 +1575,9 @@ public:
   int is_foliage(void);
   int is_food(void);
   int is_frozen_check(void);
+  int is_fungus_edible(void);
+  int is_fungus_poison(void);
+  int is_fungus_withered(void);
   int is_gas_blocker(void);
   int is_gauntlet(void);
   int is_gelatinous(void);
@@ -1582,7 +1586,12 @@ public:
   int is_goat(void);
   int is_gold(void);
   int is_golem(void);
+  int is_grass_dry_trampled(void);
+  int is_grass_dry(void);
   int is_grass(void);
+  int is_fungus(void);
+  int is_grass_wet_trampled(void);
+  int is_grass_wet(void);
   int is_green_blooded(void);
   int is_green_blood(void);
   int is_green_splatter(void);
@@ -1782,7 +1791,6 @@ public:
   int is_unused_flag121(void);
   int is_unused_flag122(void);
   int is_unused_flag123(void);
-  int is_unused_flag124(void);
   int is_unused_flag12(void);
   int is_unused_flag13(void);
   int is_unused_flag142(void);
@@ -1896,9 +1904,6 @@ public:
   int is_weapon_class_B(void);
   int is_weapon_class_C(void);
   int is_weapon(void);
-  int is_wet_fungus(void);
-  int is_wet_grass_trampled(void);
-  int is_wet_grass(void);
   int is_wooden(void);
   int is_yeti(void);
   int item_count_excluding_charges(Tpp item);

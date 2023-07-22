@@ -6,6 +6,7 @@
 #include "my_monst.hpp"
 #include "my_vector_bounds_check.hpp"
 
+// begin sort marker1 {
 static Tpidmap tp_ascend_dungeon;
 static Tpidmap tp_ascend_sewer;
 static Tpidmap tp_barrel;
@@ -17,12 +18,16 @@ static Tpidmap tp_descend_dungeon;
 static Tpidmap tp_descend_sewer;
 static Tpidmap tp_dirt;
 static Tpidmap tp_door;
-static Tpidmap tp_dry_grass;
 static Tpidmap tp_ethereal_mob;
 static Tpidmap tp_floor;
 static Tpidmap tp_foliage;
 static Tpidmap tp_food;
+static Tpidmap tp_fungus_edible;
+static Tpidmap tp_fungus_poison;
+static Tpidmap tp_fungus_withered;
 static Tpidmap tp_gold;
+static Tpidmap tp_grass_dry;
+static Tpidmap tp_grass_wet;
 static Tpidmap tp_green_blood;
 static Tpidmap tp_green_splatter;
 static Tpidmap tp_item_class_A;
@@ -52,8 +57,8 @@ static Tpidmap tp_rock;
 static Tpidmap tp_secret_door;
 static Tpidmap tp_sewer_wall;
 static Tpidmap tp_skills;
-static Tpidmap tp_spells;
 static Tpidmap tp_small_ripples;
+static Tpidmap tp_spells;
 static Tpidmap tp_spiderweb;
 static Tpidmap tp_staff;
 static Tpidmap tp_staff_class_A;
@@ -69,53 +74,21 @@ static Tpidmap tp_weapon;
 static Tpidmap tp_weapon_class_A;
 static Tpidmap tp_weapon_class_B;
 static Tpidmap tp_weapon_class_C;
-static Tpidmap tp_wet_grass;
+// end sort marker1 }
 
 void tp_random_init(void)
 {
   TRACE_NO_INDENT();
   for (auto &tp : tp_id_map) {
+    // begin sort marker2 {
     if (tp->is_ascend_dungeon()) {
       tp_ascend_dungeon.push_back(tp);
-    }
-    if (tp->is_player_bodypart_hat()) {
-      tp_bodypart[ BODYPART_HAT ].push_back(tp);
-    }
-    if (tp->is_player_bodypart_eyes()) {
-      tp_bodypart[ BODYPART_EYES ].push_back(tp);
-    }
-    if (tp->is_player_bodypart_hair()) {
-      tp_bodypart[ BODYPART_HAIR ].push_back(tp);
-    }
-    if (tp->is_player_bodypart_face()) {
-      tp_bodypart[ BODYPART_FACE ].push_back(tp);
-    }
-    if (tp->is_player_bodypart_torso()) {
-      tp_bodypart[ BODYPART_TORSO ].push_back(tp);
-    }
-    if (tp->is_player_bodypart_legs()) {
-      tp_bodypart[ BODYPART_LEGS ].push_back(tp);
     }
     if (tp->is_ascend_sewer()) {
       tp_ascend_sewer.push_back(tp);
     }
     if (tp->is_barrel()) {
       tp_barrel.push_back(tp);
-    }
-    if (tp->is_trap()) {
-      tp_trap.push_back(tp);
-    }
-    if (tp->is_red_blood()) {
-      tp_red_blood.push_back(tp);
-    }
-    if (tp->is_green_blood()) {
-      tp_green_blood.push_back(tp);
-    }
-    if (tp->is_red_splatter()) {
-      tp_red_splatter.push_back(tp);
-    }
-    if (tp->is_green_splatter()) {
-      tp_green_splatter.push_back(tp);
     }
     if (tp->is_bones()) {
       tp_bones.push_back(tp);
@@ -135,48 +108,92 @@ void tp_random_init(void)
     if (tp->is_door()) {
       tp_door.push_back(tp);
     }
-    if (tp->is_dry_grass()) {
-      tp_dry_grass.push_back(tp);
-    }
-    if (tp->is_wet_grass()) {
-      tp_wet_grass.push_back(tp);
-    }
-    if (tp->is_magic_stone()) {
-      tp_magic_stone.push_back(tp);
-    }
     if (tp->is_ethereal_mob()) {
       tp_ethereal_mob.push_back(tp);
-    }
-    if (tp->is_floor()) {
-      tp_floor.push_back(tp);
     }
     if (tp->is_floor_deco()) {
       tp_deco.push_back(tp);
     }
+    if (tp->is_floor()) {
+      tp_floor.push_back(tp);
+    }
     if (tp->is_foliage()) {
       tp_foliage.push_back(tp);
-    }
-    if (tp->is_spiderweb()) {
-      tp_spiderweb.push_back(tp);
-    }
-    if (tp->is_portal()) {
-      tp_portal.push_back(tp);
     }
     if (tp->is_food()) {
       tp_food.push_back(tp);
     }
+    if (tp->is_fungus_edible()) {
+      tp_fungus_edible.push_back(tp);
+    }
+    if (tp->is_fungus_poison()) {
+      tp_fungus_poison.push_back(tp);
+    }
+    if (tp->is_fungus_withered()) {
+      tp_fungus_withered.push_back(tp);
+    }
     if (tp->is_gold()) {
       tp_gold.push_back(tp);
+    }
+    if (tp->is_grass_dry()) {
+      tp_grass_dry.push_back(tp);
+    }
+    if (tp->is_grass_wet()) {
+      tp_grass_wet.push_back(tp);
+    }
+    if (tp->is_green_blood()) {
+      tp_green_blood.push_back(tp);
+    }
+    if (tp->is_green_splatter()) {
+      tp_green_splatter.push_back(tp);
     }
     if (tp->is_key()) {
       tp_key.push_back(tp);
     }
+    if (tp->is_magic_stone()) {
+      tp_magic_stone.push_back(tp);
+    }
     if (tp->is_mob()) {
       tp_mob.push_back(tp);
+    }
+    if (tp->is_player_bodypart_eyes()) {
+      tp_bodypart[ BODYPART_EYES ].push_back(tp);
+    }
+    if (tp->is_player_bodypart_face()) {
+      tp_bodypart[ BODYPART_FACE ].push_back(tp);
+    }
+    if (tp->is_player_bodypart_hair()) {
+      tp_bodypart[ BODYPART_HAIR ].push_back(tp);
+    }
+    if (tp->is_player_bodypart_hat()) {
+      tp_bodypart[ BODYPART_HAT ].push_back(tp);
+    }
+    if (tp->is_player_bodypart_legs()) {
+      tp_bodypart[ BODYPART_LEGS ].push_back(tp);
+    }
+    if (tp->is_player_bodypart_torso()) {
+      tp_bodypart[ BODYPART_TORSO ].push_back(tp);
+    }
+    if (tp->is_portal()) {
+      tp_portal.push_back(tp);
     }
     if (tp->is_potion()) {
       tp_potion.push_back(tp);
     }
+    if (tp->is_red_blood()) {
+      tp_red_blood.push_back(tp);
+    }
+    if (tp->is_red_splatter()) {
+      tp_red_splatter.push_back(tp);
+    }
+    if (tp->is_spiderweb()) {
+      tp_spiderweb.push_back(tp);
+    }
+    if (tp->is_trap()) {
+      tp_trap.push_back(tp);
+    }
+    // end sort marker2 }
+
     if (tp->is_ripple()) {
       if (tp->thing_size() < THING_SIZE_NORMAL) {
         tp_small_ripples.push_back(tp);
@@ -349,6 +366,7 @@ void tp_random_init(void)
     }
   }
 
+  // begin sort marker3 {
   if (tp_ascend_dungeon.empty()) {
     DIE("No things for type:tp_ascend_dungeon");
   }
@@ -357,15 +375,6 @@ void tp_random_init(void)
   }
   if (tp_barrel.empty()) {
     DIE("No things for type:tp_barrel");
-  }
-  if (tp_red_blood.empty()) {
-    DIE("No things for type:tp_red_blood");
-  }
-  if (tp_green_blood.empty()) {
-    DIE("No things for type:tp_green_blood");
-  }
-  if (tp_red_splatter.empty()) {
-    DIE("No things for type:tp_red_splatter");
   }
   if (tp_bones.empty()) {
     DIE("No things for type:tp_bones");
@@ -388,15 +397,6 @@ void tp_random_init(void)
   if (tp_door.empty()) {
     DIE("No things for type:tp_door");
   }
-  if (tp_dry_grass.empty()) {
-    DIE("No things for type:tp_dry_grass");
-  }
-  if (tp_wet_grass.empty()) {
-    DIE("No things for type:tp_wet_grass");
-  }
-  if (tp_magic_stone.empty()) {
-    DIE("No things for type:tp_magic_stone");
-  }
   if (tp_ethereal_mob.empty()) {
     DIE("No things for type:tp_ethereal_mob");
   }
@@ -409,14 +409,17 @@ void tp_random_init(void)
   if (tp_food.empty()) {
     DIE("No things for type:tp_food");
   }
-  if (tp_mob.empty()) {
-    DIE("No things for type:tp_mob");
-  }
-  if (tp_trap.empty()) {
-    DIE("No things for type:tp_trap");
-  }
   if (tp_gold.empty()) {
     DIE("No things for type:tp_gold");
+  }
+  if (tp_grass_dry.empty()) {
+    DIE("No things for type:tp_grass_dry");
+  }
+  if (tp_grass_wet.empty()) {
+    DIE("No things for type:tp_grass_wet");
+  }
+  if (tp_green_blood.empty()) {
+    DIE("No things for type:tp_green_blood");
   }
   if (tp_green_splatter.empty()) {
     DIE("No things for type:tp_green_splatter");
@@ -429,6 +432,27 @@ void tp_random_init(void)
   }
   if (tp_item_class_C.empty()) {
     DIE("No things for type:tp_item_class_C");
+  }
+  if (tp_item_not_a_container_class_A.empty()) {
+    DIE("No things for type:tp_item_not_a_container_class_A");
+  }
+  if (tp_item_not_a_container_class_B.empty()) {
+    DIE("No things for type:tp_item_not_a_container_class_B");
+  }
+  if (tp_item_not_a_container_class_C.empty()) {
+    DIE("No things for type:tp_item_not_a_container_class_C");
+  }
+  if (tp_key.empty()) {
+    DIE("No things for type:tp_key");
+  }
+  if (tp_large_ripples.empty()) {
+    DIE("No things for type:tp_large_ripples");
+  }
+  if (tp_magic_stone.empty()) {
+    DIE("No things for type:tp_magic_stone");
+  }
+  if (tp_mob.empty()) {
+    DIE("No things for type:tp_mob");
   }
   if (tp_monst_class_A.empty()) {
     DIE("No things for type:tp_monst_class_A");
@@ -445,23 +469,17 @@ void tp_random_init(void)
   if (tp_monst_class_E.empty()) {
     DIE("No things for type:tp_monst_class_E");
   }
-  if (tp_item_not_a_container_class_A.empty()) {
-    DIE("No things for type:tp_item_not_a_container_class_A");
-  }
-  if (tp_item_not_a_container_class_B.empty()) {
-    DIE("No things for type:tp_item_not_a_container_class_B");
-  }
-  if (tp_item_not_a_container_class_C.empty()) {
-    DIE("No things for type:tp_item_not_a_container_class_C");
-  }
-  if (tp_key.empty()) {
-    DIE("No things for type:tp_key");
+  if (tp_portal.empty()) {
+    DIE("No things for type:tp_portal");
   }
   if (tp_potion.empty()) {
     DIE("No things for type:tp_potion");
   }
-  if (tp_ring.empty()) {
-    DIE("No things for type:tp_ring");
+  if (tp_red_blood.empty()) {
+    DIE("No things for type:tp_red_blood");
+  }
+  if (tp_red_splatter.empty()) {
+    DIE("No things for type:tp_red_splatter");
   }
   if (tp_ring_class_A.empty()) {
     DIE("No things for type:tp_ring_class_A");
@@ -472,11 +490,8 @@ void tp_random_init(void)
   if (tp_ring_class_C.empty()) {
     DIE("No things for type:tp_ring_class_C");
   }
-  if (tp_small_ripples.empty()) {
-    DIE("No things for type:tp_small_ripples");
-  }
-  if (tp_large_ripples.empty()) {
-    DIE("No things for type:tp_large_ripples");
+  if (tp_ring.empty()) {
+    DIE("No things for type:tp_ring");
   }
   if (tp_rock.empty()) {
     DIE("No things for type:tp_rock");
@@ -490,23 +505,14 @@ void tp_random_init(void)
   if (tp_skills.empty()) {
     DIE("No things for type:tp_skills");
   }
+  if (tp_small_ripples.empty()) {
+    DIE("No things for type:tp_small_ripples");
+  }
   if (tp_spells.empty()) {
     CON("No things for type:tp_spells");
   }
   if (tp_spiderweb.empty()) {
     DIE("No things for type:tp_spiderweb");
-  }
-  if (tp_portal.empty()) {
-    DIE("No things for type:tp_portal");
-  }
-  if (tp_treasure.empty()) {
-    DIE("No things for type:tp_treasure");
-  }
-  if (tp_wall_dungeon.empty()) {
-    DIE("No things for type:tp_wall_dungeon");
-  }
-  if (tp_staff.empty()) {
-    DIE("No things for type:tp_staff");
   }
   if (tp_staff_class_A.empty()) {
     DIE("No things for type:tp_staff_class_A");
@@ -517,17 +523,11 @@ void tp_random_init(void)
   if (tp_staff_class_C.empty()) {
     DIE("No things for type:tp_staff_class_C");
   }
-  if (tp_weapon.empty()) {
-    DIE("No things for type:tp_weapon");
+  if (tp_staff.empty()) {
+    DIE("No things for type:tp_staff");
   }
-  if (tp_weapon_class_A.empty()) {
-    DIE("No things for type:tp_weapon_class_A");
-  }
-  if (tp_weapon_class_B.empty()) {
-    DIE("No things for type:tp_weapon_class_B");
-  }
-  if (tp_weapon_class_C.empty()) {
-    DIE("No things for type:tp_weapon_class_C");
+  if (tp_trap.empty()) {
+    DIE("No things for type:tp_trap");
   }
   if (tp_treasure_class_A.empty()) {
     DIE("No things for type:tp_treasure_class_A");
@@ -538,6 +538,25 @@ void tp_random_init(void)
   if (tp_treasure_class_C.empty()) {
     DIE("No things for type:tp_treasure_class_C");
   }
+  if (tp_treasure.empty()) {
+    DIE("No things for type:tp_treasure");
+  }
+  if (tp_wall_dungeon.empty()) {
+    DIE("No things for type:tp_wall_dungeon");
+  }
+  if (tp_weapon_class_A.empty()) {
+    DIE("No things for type:tp_weapon_class_A");
+  }
+  if (tp_weapon_class_B.empty()) {
+    DIE("No things for type:tp_weapon_class_B");
+  }
+  if (tp_weapon_class_C.empty()) {
+    DIE("No things for type:tp_weapon_class_C");
+  }
+  if (tp_weapon.empty()) {
+    DIE("No things for type:tp_weapon");
+  }
+  // end sort marker3 }
 }
 
 Tpp tp_get_with_rarity_filter(Tpidmap &m)
@@ -883,24 +902,54 @@ Tpp tp_random_dirt(void)
   return tp_get_with_no_rarity_filter(tp_dirt);
 }
 
-Tpp tp_random_dry_grass(void)
+Tpp tp_random_grass_dry(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_dry_grass.size())) {
-    ERR("No dry_grass found");
+  if (unlikely(! tp_grass_dry.size())) {
+    ERR("No grass_dry found");
     return nullptr;
   }
-  return tp_get_with_no_rarity_filter(tp_dry_grass);
+  return tp_get_with_no_rarity_filter(tp_grass_dry);
 }
 
-Tpp tp_random_wet_grass(void)
+Tpp tp_random_grass_wet(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_wet_grass.size())) {
-    ERR("No wet_grass found");
+  if (unlikely(! tp_grass_wet.size())) {
+    ERR("No grass_wet found");
     return nullptr;
   }
-  return tp_get_with_no_rarity_filter(tp_wet_grass);
+  return tp_get_with_no_rarity_filter(tp_grass_wet);
+}
+
+Tpp tp_random_fungus_edible(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_fungus_edible.size())) {
+    ERR("No fungus_edible found");
+    return nullptr;
+  }
+  return tp_get_with_no_rarity_filter(tp_fungus_edible);
+}
+
+Tpp tp_random_fungus_poison(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_fungus_poison.size())) {
+    ERR("No fungus_poison found");
+    return nullptr;
+  }
+  return tp_get_with_no_rarity_filter(tp_fungus_poison);
+}
+
+Tpp tp_random_fungus_withered(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_fungus_withered.size())) {
+    ERR("No fungus_withered found");
+    return nullptr;
+  }
+  return tp_get_with_no_rarity_filter(tp_fungus_withered);
 }
 
 Tpp tp_random_magic_stone(void)

@@ -321,9 +321,6 @@ bool Level::create_biome_chasms(point3d at, uint32_t seed)
     //
     dbg2("INF: Final update heatmap");
 
-    //
-    // Make sure and place dry grass after this
-    //
     {
       uint32_t start = time_ms();
       update_heatmap();

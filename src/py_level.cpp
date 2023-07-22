@@ -71,7 +71,8 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
           floor_string += Charmap::SPACE;
         }
 
-        if (m.is_foliage || m.is_spiderweb || m.is_block_of_ice || m.is_dry_grass || m.is_wet_grass) {
+        if (m.is_foliage || m.is_spiderweb || m.is_block_of_ice || m.is_grass_dry || m.is_grass_wet
+            || m.is_fungus_withered || m.is_fungus_edible || m.is_fungus_poison) {
           floor2_string += c;
         } else {
           floor2_string += Charmap::SPACE;
@@ -569,7 +570,6 @@ LEVEL_BODY_GET_BOOL_AT(level_is_dir_tr_at, is_dir_tr)
 LEVEL_BODY_GET_BOOL_AT(level_is_dir_up_at, is_dir_up)
 LEVEL_BODY_GET_BOOL_AT(level_is_door_at, is_door)
 LEVEL_BODY_GET_BOOL_AT(level_is_droppable_at, is_droppable)
-LEVEL_BODY_GET_BOOL_AT(level_is_dry_grass_at, is_dry_grass)
 LEVEL_BODY_GET_BOOL_AT(level_is_eater_of_food_at, is_eater_of_food)
 LEVEL_BODY_GET_BOOL_AT(level_is_eater_of_green_blood_at, is_eater_of_green_blood)
 LEVEL_BODY_GET_BOOL_AT(level_is_eater_of_magical_items_at, is_eater_of_magical_items)
@@ -595,11 +595,16 @@ LEVEL_BODY_GET_BOOL_AT(level_is_floor_deco_at, is_floor_deco)
 LEVEL_BODY_GET_BOOL_AT(level_is_flying_at, is_flying)
 LEVEL_BODY_GET_BOOL_AT(level_is_foliage_at, is_foliage)
 LEVEL_BODY_GET_BOOL_AT(level_is_food_at, is_food)
+LEVEL_BODY_GET_BOOL_AT(level_is_fungus_edible_at, is_fungus_edible)
+LEVEL_BODY_GET_BOOL_AT(level_is_fungus_poison_at, is_fungus_poison)
+LEVEL_BODY_GET_BOOL_AT(level_is_fungus_withered_at, is_fungus_withered)
 LEVEL_BODY_GET_BOOL_AT(level_is_gas_blocker_at, is_gas_blocker)
 LEVEL_BODY_GET_BOOL_AT(level_is_gauntlet_at, is_gauntlet)
 LEVEL_BODY_GET_BOOL_AT(level_is_gelatinous_at, is_gelatinous)
 LEVEL_BODY_GET_BOOL_AT(level_is_glass_at, is_glass)
 LEVEL_BODY_GET_BOOL_AT(level_is_gold_at, is_gold)
+LEVEL_BODY_GET_BOOL_AT(level_is_grass_dry_at, is_grass_dry)
+LEVEL_BODY_GET_BOOL_AT(level_is_grass_wet_at, is_grass_wet)
 LEVEL_BODY_GET_BOOL_AT(level_is_green_blood_at, is_green_blood)
 LEVEL_BODY_GET_BOOL_AT(level_is_green_blooded_at, is_green_blooded)
 LEVEL_BODY_GET_BOOL_AT(level_is_green_splatter_at, is_green_splatter)
@@ -720,7 +725,6 @@ LEVEL_BODY_GET_BOOL_AT(level_is_wall_at, is_wall)
 LEVEL_BODY_GET_BOOL_AT(level_is_wall_dungeon_at, is_wall_dungeon)
 LEVEL_BODY_GET_BOOL_AT(level_is_water_at, is_water)
 LEVEL_BODY_GET_BOOL_AT(level_is_weapon_at, is_weapon)
-LEVEL_BODY_GET_BOOL_AT(level_is_wet_grass_at, is_wet_grass)
 LEVEL_BODY_GET_BOOL_AT(level_is_wooden_at, is_wooden)
 LEVEL_BODY_GET_BOOL_AT(level_magic_drain_on_using, magic_drain_on_using)
 LEVEL_BODY_GET_BOOL_AT(level_move_speed_at, move_speed)

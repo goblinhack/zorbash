@@ -58,15 +58,30 @@ void Charmap::init_charmaps(void)
   c->c       = char_index;
   c->is_dirt = true;
 
-  char_index      = Charmap::DRY_GRASS;
+  char_index      = Charmap::GRASS_DRY;
   c               = &all_charmaps[ char_index ];
   c->c            = char_index;
-  c->is_dry_grass = true;
+  c->is_grass_dry = true;
 
-  char_index      = Charmap::WET_GRASS;
+  char_index      = Charmap::GRASS_WET;
   c               = &all_charmaps[ char_index ];
   c->c            = char_index;
-  c->is_wet_grass = true;
+  c->is_grass_wet = true;
+
+  char_index            = Charmap::FUNGUS_WITHERED;
+  c                     = &all_charmaps[ char_index ];
+  c->c                  = char_index;
+  c->is_fungus_withered = true;
+
+  char_index          = Charmap::FUNGUS_EDIBLE;
+  c                   = &all_charmaps[ char_index ];
+  c->c                = char_index;
+  c->is_fungus_edible = true;
+
+  char_index          = Charmap::FUNGUS_POISON;
+  c                   = &all_charmaps[ char_index ];
+  c->c                = char_index;
+  c->is_fungus_poison = true;
 
   char_index        = Charmap::MAGIC_STONE;
   c                 = &all_charmaps[ char_index ];

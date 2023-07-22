@@ -390,7 +390,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   in >> bits(bits64);
   int shift = 0;
   // clang-format off
-  // begin sort marker1
+  // begin sort marker1 {
              my.t->corpse_cleanup                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->gfx_ascii_animated                           = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->gfx_pixelart_animated                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -399,13 +399,13 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->has_light                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->has_projectile                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->has_seen_player_msg_shown                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-  // end sort marker1
+  // end sort marker1 }
   // clang-format on
 
   in >> bits(bits64);
   shift = 0;
   // clang-format off
-  // begin sort marker2
+  // begin sort marker2 {
              my.t->is_activated                                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_attached                                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_being_destroyed                           = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -452,13 +452,13 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->is_waiting_to_leave_level_has_completed_fall = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_wounded_msg                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->was_frozen                                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-  // end sort marker2
+  // end sort marker2 }
   // clang-format on
 
   in >> bits(bits64);
   shift = 0;
   // clang-format off
-  // begin sort marker3
+  // begin sort marker3 {
              my.t->i_set_is_able_to_amplify_footsteps     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_able_to_dampen_footsteps      = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_acid                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -484,7 +484,6 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->i_set_is_descend_sewer                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_dirt                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_door                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->i_set_is_dry_grass                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_enchantstone                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_fire                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_floor                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -510,14 +509,18 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->i_set_is_obs_when_dead                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_portal                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_trap                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-  // end sort marker3
+  // end sort marker3 }
   // clang-format on
 
   in >> bits(bits64);
   shift = 0;
   // clang-format off
-  // begin sort marker4
-             my.t->i_set_is_dry_grass                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+  // begin sort marker4 {
+             my.t->i_set_is_fungus_edible                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_fungus_poison                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_fungus_withered               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_grass_dry                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_grass_wet                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_poisonous_danger_level        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_potion                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_red_blood                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -538,10 +541,9 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->i_set_is_torch                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_treasure_type                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_wall                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->i_set_is_wet_grass                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_noise_blocker                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_water                            = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-  // end sort marker4
+  // end sort marker4 }
   // clang-format on
 
   /////////////////////////////////////////////////////////////////////////
@@ -609,32 +611,25 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
 
   in >> bits(my.t->gas_poison_cloud);
 
-  in >> bits(my.t->_is_gas_blocker);
-  in >> bits(my.t->_noise_blocker);
-  in >> bits(my.t->_is_light_blocker);
-  in >> bits(my.t->_is_light_blocker_for_monst);
-  in >> bits(my.t->_is_walked);
-  in >> bits(my.t->_is_obs_destructable);
-  in >> bits(my.t->_is_obs_wall_or_door);
-  in >> bits(my.t->_is_obs_when_dead);
-  in >> bits(my.t->_is_obs_jump_end);
-  in >> bits(my.t->_is_obs_spawn);
-  in >> bits(my.t->_is_obs_spawn_monst);
-
+  // begin sort marker5 {
   in >> bits(my.t->_fade_in_map);
   in >> bits(my.t->_gfx_water);
   in >> bits(my.t->_heatmap);
+  in >> bits(my.t->_is_able_to_amplify_footsteps);
+  in >> bits(my.t->_is_able_to_dampen_footsteps);
   in >> bits(my.t->_is_able_to_stand_on);
-  in >> bits(my.t->_is_portal);
   in >> bits(my.t->_is_acid);
   in >> bits(my.t->_is_ascend_dungeon);
   in >> bits(my.t->_is_ascend_sewer);
+  in >> bits(my.t->_is_attackable_by_monst);
+  in >> bits(my.t->_is_attackable_by_player);
   in >> bits(my.t->_is_barrel);
-  in >> bits(my.t->_is_trap);
   in >> bits(my.t->_is_basalt);
+  in >> bits(my.t->_is_block_of_ice);
   in >> bits(my.t->_is_brazier);
   in >> bits(my.t->_is_bridge);
   in >> bits(my.t->_is_burnable);
+  in >> bits(my.t->_is_carnivorous_plant);
   in >> bits(my.t->_is_chasm);
   in >> bits(my.t->_is_combustible);
   in >> bits(my.t->_is_corpse);
@@ -647,27 +642,35 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_descend_sewer);
   in >> bits(my.t->_is_dirt);
   in >> bits(my.t->_is_door);
-  in >> bits(my.t->_is_dry_grass);
   in >> bits(my.t->_is_enchantstone);
   in >> bits(my.t->_is_fire);
   in >> bits(my.t->_is_floor);
   in >> bits(my.t->_is_foliage);
-  in >> bits(my.t->_is_carnivorous_plant);
   in >> bits(my.t->_is_food);
+  in >> bits(my.t->_is_fungus_edible);
+  in >> bits(my.t->_is_fungus_poison);
+  in >> bits(my.t->_is_fungus_withered);
+  in >> bits(my.t->_is_gas_blocker);
   in >> bits(my.t->_is_gas_poison);
   in >> bits(my.t->_is_gold);
+  in >> bits(my.t->_is_grass_dry);
+  in >> bits(my.t->_is_grass_wet);
   in >> bits(my.t->_is_green_blood);
   in >> bits(my.t->_is_hazard);
   in >> bits(my.t->_is_heavy);
-  in >> bits(my.t->_is_block_of_ice);
-  in >> bits(my.t->_is_able_to_dampen_footsteps);
-  in >> bits(my.t->_is_able_to_amplify_footsteps);
-  in >> bits(my.t->_is_attackable_by_monst);
-  in >> bits(my.t->_is_attackable_by_player);
   in >> bits(my.t->_is_key);
   in >> bits(my.t->_is_lava);
+  in >> bits(my.t->_is_light_blocker);
+  in >> bits(my.t->_is_light_blocker_for_monst);
   in >> bits(my.t->_is_mob);
   in >> bits(my.t->_is_monst);
+  in >> bits(my.t->_is_obs_destructable);
+  in >> bits(my.t->_is_obs_jump_end);
+  in >> bits(my.t->_is_obs_spawn);
+  in >> bits(my.t->_is_obs_spawn_monst);
+  in >> bits(my.t->_is_obs_wall_or_door);
+  in >> bits(my.t->_is_obs_when_dead);
+  in >> bits(my.t->_is_portal);
   in >> bits(my.t->_is_potion);
   in >> bits(my.t->_is_red_blood);
   in >> bits(my.t->_is_ring);
@@ -677,20 +680,22 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_shallow_water);
   in >> bits(my.t->_is_shovable);
   in >> bits(my.t->_is_skillstone);
-  in >> bits(my.t->_is_spellbook);
   in >> bits(my.t->_is_smoke);
-  in >> bits(my.t->_is_steam);
+  in >> bits(my.t->_is_spellbook);
   in >> bits(my.t->_is_spiderweb);
+  in >> bits(my.t->_is_staff);
+  in >> bits(my.t->_is_steam);
   in >> bits(my.t->_is_sticky);
   in >> bits(my.t->_is_tentacle);
   in >> bits(my.t->_is_torch);
+  in >> bits(my.t->_is_trap);
   in >> bits(my.t->_is_treasure_type);
+  in >> bits(my.t->_is_walked);
   in >> bits(my.t->_is_wall);
-  in >> bits(my.t->_is_staff);
-  in >> bits(my.t->_is_wet_grass);
-  in >> bits(my.t->_is_dry_grass);
+  in >> bits(my.t->_noise_blocker);
   in >> bits(my.t->_noisemap);
   in >> bits(my.t->_noisemap_in);
+  // end sort marker5 }
 
   in >> bits(my.t->can_see_currently);
   in >> bits(my.t->can_see_ever);
@@ -1149,9 +1154,6 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
     game_load_error += "end of config marker not found";
   }
 
-  if (! my.t.game_pix_zoom) {
-    game_load_error += "game_pix_zoom is invalid";
-  }
   if (my.t.ascii_gl_height < 0) {
     game_load_error += "ascii_gl_height is invalid";
   }
@@ -1175,6 +1177,9 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
   }
   if (my.t.game_pix_width < 0) {
     game_load_error += "game_pix_width is invalid";
+  }
+  if (! my.t.game_pix_zoom) {
+    game_load_error += "game_pix_zoom is invalid";
   }
   if (my.t.one_pixel_height < 0) {
     game_load_error += "one_pixel_height is invalid";
@@ -1200,15 +1205,6 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
   if (my.t.tile_width < 0) {
     game_load_error += "tile_width is invalid";
   }
-  if (my.t.ui_pix_height < 0) {
-    game_load_error += "ui_pix_height is invalid";
-  }
-  if (my.t.ui_pix_width < 0) {
-    game_load_error += "ui_pix_width is invalid";
-  }
-  if (my.t.ui_pix_zoom < 0) {
-    game_load_error += "ui_pix_zoom is invalid";
-  }
   if (my.t.ui_ascii_term_height < 0) {
     game_load_error += "ui_ascii_term_height is invalid";
   }
@@ -1220,6 +1216,15 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
   }
   if (my.t.ui_gfx_term_width < 0) {
     game_load_error += "ui_gfx_term_width is invalid";
+  }
+  if (my.t.ui_pix_height < 0) {
+    game_load_error += "ui_pix_height is invalid";
+  }
+  if (my.t.ui_pix_width < 0) {
+    game_load_error += "ui_pix_width is invalid";
+  }
+  if (my.t.ui_pix_zoom < 0) {
+    game_load_error += "ui_pix_zoom is invalid";
   }
   if (my.t.video_w_h_ratio < 0) {
     game_load_error += "video_w_h_ratio is invalid";

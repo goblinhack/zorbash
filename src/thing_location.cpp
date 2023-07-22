@@ -154,7 +154,7 @@ void Thing::location_check(Thingp filter_to)
     }
   }
 
-  if (! filter_to || filter_to->is_dry_grass()) {
+  if (! filter_to || filter_to->is_grass_dry()) {
     grass_tick();
     if (is_dead) {
       return;
