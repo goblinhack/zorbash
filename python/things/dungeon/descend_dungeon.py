@@ -27,6 +27,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_critical_to_level(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_descend_dungeon(self, True)
+    my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_interesting(self, True)
     my.is_obs_spawn_monst(self, True)

@@ -15,6 +15,7 @@ def tp_init(name):
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
+    my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_interesting(self, True)
     my.is_loggable(self, True)

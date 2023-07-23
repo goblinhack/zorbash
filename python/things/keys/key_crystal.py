@@ -29,6 +29,7 @@ def key_init(name, text_long_name):
     my.is_collectable(self, True)
     my.is_collected_as_keys(self, True)
     my.is_crystal(self, True)
+    my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)

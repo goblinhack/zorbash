@@ -320,6 +320,9 @@ bool Level::create_biome_sewer_pipes(point3d at)
 void Level::create_biome_sewer_place_walls(int variant, int block_width, int block_height, int tries)
 {
   TRACE_AND_INDENT();
+  //
+  // Have the same rock type for the level
+  //
   auto tp = tp_random_sewer_wall();
   if (unlikely(! tp)) {
     ERR("Place walls failed");

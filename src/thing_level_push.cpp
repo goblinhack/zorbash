@@ -45,17 +45,41 @@ void Thing::level_push(void)
     i_set_is_acid = true;
     level->is_acid_set(x, y);
   }
-  if (is_red_blood()) {
-    i_set_is_red_blood = true;
-    level->is_red_blood_set(x, y);
+  if (is_ascend_dungeon()) {
+    i_set_is_ascend_dungeon = true;
+    level->is_ascend_dungeon_set(x, y);
   }
-  if (is_green_blood()) {
-    i_set_is_green_blood = true;
-    level->is_green_blood_set(x, y);
+  if (is_ascend_sewer()) {
+    i_set_is_ascend_sewer = true;
+    level->is_ascend_sewer_set(x, y);
+  }
+  if (is_basalt()) {
+    i_set_is_basalt = true;
+    level->is_basalt_set(x, y);
+  }
+  if (is_block_of_ice()) {
+    i_set_is_block_of_ice = true;
+    level->is_block_of_ice_set(x, y);
+  }
+  if (is_bridge()) {
+    i_set_is_bridge = true;
+    level->is_bridge_set(x, y);
+  }
+  if (is_burnable()) {
+    i_set_is_burnable = true;
+    level->is_burnable_set(x, y);
+  }
+  if (is_carnivorous_plant()) {
+    i_set_is_carnivorous_plant = true;
+    level->is_carnivorous_plant_set(x, y);
   }
   if (is_chasm()) {
     i_set_is_chasm = true;
     level->is_chasm_set(x, y);
+  }
+  if (is_combustible()) {
+    i_set_is_combustible = true;
+    level->is_combustible_set(x, y);
   }
   if (is_corpse()) {
     i_set_is_corpse = true;
@@ -65,25 +89,37 @@ void Thing::level_push(void)
     i_set_is_corridor = true;
     level->is_corridor_set(x, y);
   }
-  if (is_bridge()) {
-    i_set_is_bridge = true;
-    level->is_bridge_set(x, y);
+  if (is_descend_dungeon()) {
+    i_set_is_descend_dungeon = true;
+    level->is_descend_dungeon_set(x, y);
+  }
+  if (is_descend_sewer()) {
+    i_set_is_descend_sewer = true;
+    level->is_descend_sewer_set(x, y);
   }
   if (is_dirt()) {
     i_set_is_dirt = true;
     level->is_dirt_set(x, y);
   }
-  if (is_grass_dry()) {
-    i_set_is_grass_dry = true;
-    level->is_grass_dry_set(x, y);
+  if (is_door() && ! is_open) {
+    i_set_is_door = true;
+    level->is_door_set(x, y);
   }
-  if (is_grass_wet()) {
-    i_set_is_grass_wet = true;
-    level->is_grass_wet_set(x, y);
+  if (is_enchantstone()) {
+    i_set_is_enchantstone = true;
+    level->is_enchantstone_set(x, y);
   }
-  if (is_fungus_withered()) {
-    i_set_is_fungus_withered = true;
-    level->is_fungus_withered_set(x, y);
+  if (is_floor() || is_corridor()) {
+    i_set_is_floor = true;
+    level->is_floor_set(x, y);
+  }
+  if (is_foliage()) {
+    i_set_is_foliage = true;
+    level->is_foliage_set(x, y);
+  }
+  if (is_food()) {
+    i_set_is_food = true;
+    level->is_food_set(x, y);
   }
   if (is_fungus_edible()) {
     i_set_is_fungus_edible = true;
@@ -93,93 +129,25 @@ void Thing::level_push(void)
     i_set_is_fungus_poison = true;
     level->is_fungus_poison_set(x, y);
   }
-  if (is_enchantstone()) {
-    i_set_is_enchantstone = true;
-    level->is_enchantstone_set(x, y);
-  }
-  if (is_skillstone()) {
-    i_set_is_skillstone = true;
-    level->is_skillstone_set(x, y);
-  }
-  if (is_spellbook()) {
-    i_set_is_spellbook = true;
-    level->is_spellbook_set(x, y);
-  }
-  if (is_foliage()) {
-    i_set_is_foliage = true;
-    level->is_foliage_set(x, y);
-  }
-  if (is_carnivorous_plant()) {
-    i_set_is_carnivorous_plant = true;
-    level->is_carnivorous_plant_set(x, y);
-  }
-  if (is_spiderweb()) {
-    i_set_is_spiderweb = true;
-    level->is_spiderweb_set(x, y);
-  }
-  if (is_block_of_ice()) {
-    i_set_is_block_of_ice = true;
-    level->is_block_of_ice_set(x, y);
-  }
-  if (is_sticky()) {
-    i_set_is_sticky = true;
-    level->is_sticky_set(x, y);
-  }
-  if (is_shovable()) {
-    i_set_is_shovable = true;
-    level->is_shovable_set(x, y);
-  }
-  if (is_door() && ! is_open) {
-    i_set_is_door = true;
-    level->is_door_set(x, y);
-  }
-  if (is_ascend_dungeon()) {
-    i_set_is_ascend_dungeon = true;
-    level->is_ascend_dungeon_set(x, y);
-  }
-  if (is_descend_dungeon()) {
-    i_set_is_descend_dungeon = true;
-    level->is_descend_dungeon_set(x, y);
-  }
-  if (is_ascend_sewer()) {
-    i_set_is_ascend_sewer = true;
-    level->is_ascend_sewer_set(x, y);
-  }
-  if (is_portal()) {
-    i_set_is_portal = true;
-    level->is_portal_set(x, y);
-  }
-  if (is_descend_sewer()) {
-    i_set_is_descend_sewer = true;
-    level->is_descend_sewer_set(x, y);
-  }
-  if (is_floor() || is_corridor()) {
-    i_set_is_floor = true;
-    level->is_floor_set(x, y);
-  }
-  if (is_food()) {
-    i_set_is_food = true;
-    level->is_food_set(x, y);
-  }
-  if (is_mob()) {
-    i_set_is_mob = true;
-    level->is_mob_set(x, y);
+  if (is_fungus_withered()) {
+    i_set_is_fungus_withered = true;
+    level->is_fungus_withered_set(x, y);
   }
   if (is_gold()) {
     i_set_is_gold = true;
     level->is_gold_set(x, y);
   }
-  if (is_combustible()) {
-    i_set_is_combustible = true;
-    level->is_combustible_set(x, y);
+  if (is_grass_dry()) {
+    i_set_is_grass_dry = true;
+    level->is_grass_dry_set(x, y);
   }
-  if (is_torch()) {
-    i_set_is_torch = true;
-    level->is_torch_set(x, y);
+  if (is_grass_wet()) {
+    i_set_is_grass_wet = true;
+    level->is_grass_wet_set(x, y);
   }
-  if (is_burnable()) {
-    i_set_is_burnable = true;
-    level->is_burnable_set(x, y);
+  if (is_green_blood()) {
+    i_set_is_green_blood = true;
+    level->is_green_blood_set(x, y);
   }
   if (is_key()) {
     i_set_is_key = true;
@@ -189,17 +157,21 @@ void Thing::level_push(void)
     i_set_is_lava = true;
     level->is_lava_set(x, y);
   }
-  if (is_basalt()) {
-    i_set_is_basalt = true;
-    level->is_basalt_set(x, y);
+  if (is_mob()) {
+    i_set_is_mob = true;
+    level->is_mob_set(x, y);
+  }
+  if (is_portal()) {
+    i_set_is_portal = true;
+    level->is_portal_set(x, y);
   }
   if (is_potion()) {
     i_set_is_potion = true;
     level->is_potion_set(x, y);
   }
-  if (is_staff()) {
-    i_set_is_staff = true;
-    level->is_staff_set(x, y);
+  if (is_red_blood()) {
+    i_set_is_red_blood = true;
+    level->is_red_blood_set(x, y);
   }
   if (is_ring()) {
     i_set_is_ring = true;
@@ -213,13 +185,41 @@ void Thing::level_push(void)
     i_set_is_rock = true;
     level->is_rock_set(x, y);
   }
+  if (is_shovable()) {
+    i_set_is_shovable = true;
+    level->is_shovable_set(x, y);
+  }
+  if (is_skillstone()) {
+    i_set_is_skillstone = true;
+    level->is_skillstone_set(x, y);
+  }
   if (is_smoke()) {
     i_set_is_smoke = true;
     level->is_smoke_set(x, y);
   }
+  if (is_spellbook()) {
+    i_set_is_spellbook = true;
+    level->is_spellbook_set(x, y);
+  }
+  if (is_spiderweb()) {
+    i_set_is_spiderweb = true;
+    level->is_spiderweb_set(x, y);
+  }
+  if (is_staff()) {
+    i_set_is_staff = true;
+    level->is_staff_set(x, y);
+  }
   if (is_steam()) {
     i_set_is_steam = true;
     level->is_steam_set(x, y);
+  }
+  if (is_sticky()) {
+    i_set_is_sticky = true;
+    level->is_sticky_set(x, y);
+  }
+  if (is_torch()) {
+    i_set_is_torch = true;
+    level->is_torch_set(x, y);
   }
   if (is_treasure_type()) {
     i_set_is_treasure_type = true;
@@ -229,6 +229,7 @@ void Thing::level_push(void)
     i_set_is_wall = true;
     level->is_wall_set(x, y);
   }
+
   if (is_shallow_water() || is_deep_water()) {
     i_set_water = true;
     level->gfx_water_set(x, y);
@@ -334,6 +335,14 @@ void Thing::level_push(void)
       i_set_is_monst = true;
       level->monst_count++;
       level->is_monst_set(x, y);
+    }
+    if (is_barrel()) {
+      i_set_is_barrel = true;
+      level->is_barrel_set(x, y);
+    }
+    if (is_fungus()) {
+      i_set_is_fungus = true;
+      level->is_fungus_set(x, y);
     }
     if (is_brazier()) {
       //

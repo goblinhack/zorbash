@@ -481,6 +481,9 @@ void Level::create_biome_flooded_place_walls(Dungeonp d, Tpp tp, int variant, in
 void Level::create_biome_flooded_place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries)
 {
   TRACE_AND_INDENT();
+  //
+  // Have the same rock type for the level
+  //
   auto tp = tp_random_rock();
   if (unlikely(! tp)) {
     ERR("Place rocks failed");

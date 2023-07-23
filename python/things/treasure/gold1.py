@@ -27,6 +27,7 @@ def gold_init(name, text_long_name, text_short_name):
     my.is_biome_lava(self, True)
     my.is_collectable(self, True)
     my.is_collected_as_gold(self, True)
+    my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_gold(self, True)
     my.is_interesting(self, True)

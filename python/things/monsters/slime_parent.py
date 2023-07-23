@@ -99,6 +99,7 @@ def tp_init(name, text_long_name):
     my.is_bleeder(self, True)
     my.is_burnable(self, True)
     my.is_crushable(self, True)
+    my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_eater_of_green_blood(self, True)
     my.is_eater_of_magical_items(self, True)

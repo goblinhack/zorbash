@@ -273,6 +273,7 @@ public:
   uint64_t i_set_is_floor                     : 1 {};
   uint64_t i_set_is_foliage                   : 1 {};
   uint64_t i_set_is_food                      : 1 {};
+  uint64_t i_set_is_fungus                    : 1 {};
   uint64_t i_set_is_fungus_edible             : 1 {};
   uint64_t i_set_is_fungus_poison             : 1 {};
   uint64_t i_set_is_fungus_withered           : 1 {};
@@ -1520,6 +1521,7 @@ public:
   int is_demon(void);
   int is_descend_dungeon(void);
   int is_descend_sewer(void);
+  int is_described_in_leftbar(void);
   int is_described_when_hovering_over(void);
   int is_destroyed_on_hit_or_miss(void);
   int is_destroyed_on_hitting(void);
@@ -1787,7 +1789,6 @@ public:
   int is_unused_flag120(void);
   int is_unused_flag121(void);
   int is_unused_flag122(void);
-  int is_unused_flag123(void);
   int is_unused_flag12(void);
   int is_unused_flag13(void);
   int is_unused_flag142(void);

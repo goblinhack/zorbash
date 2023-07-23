@@ -403,6 +403,7 @@ private:
   int _is_demon {};
   int _is_descend_dungeon {};
   int _is_descend_sewer {};
+  int _is_described_in_leftbar {};
   int _is_described_when_hovering_over {};
   int _is_destroyed_on_hit_or_miss {};
   int _is_destroyed_on_hitting {};
@@ -672,7 +673,6 @@ private:
   int _is_unused_flag120 {};
   int _is_unused_flag121 {};
   int _is_unused_flag122 {};
-  int _is_unused_flag123 {};
   int _is_unused_flag124 {};
   int _is_unused_flag13 {};
   int _is_unused_flag14 {};
@@ -1749,6 +1749,7 @@ public:
   int is_demon(void) const;
   int is_descend_dungeon(void) const;
   int is_descend_sewer(void) const;
+  int is_described_in_leftbar(void) const;
   int is_described_when_hovering_over(void) const;
   int is_destroyed_on_hit_or_miss(void) const;
   int is_destroyed_on_hitting(void) const;
@@ -2015,7 +2016,6 @@ public:
   int is_unused_flag120(void) const;
   int is_unused_flag121(void) const;
   int is_unused_flag122(void) const;
-  int is_unused_flag123(void) const;
   int is_unused_flag124(void) const;
   int is_unused_flag12(void) const;
   int is_unused_flag13(void) const;
@@ -2514,6 +2514,7 @@ public:
   void is_demon_set(int v);
   void is_descend_dungeon_set(int v);
   void is_descend_sewer_set(int v);
+  void is_described_in_leftbar_set(int v);
   void is_described_when_hovering_over_set(int v);
   void is_destroyed_on_hit_or_miss_set(int v);
   void is_destroyed_on_hitting_set(int v);
@@ -2780,7 +2781,6 @@ public:
   void is_unused_flag120_set(int v);
   void is_unused_flag121_set(int v);
   void is_unused_flag122_set(int v);
-  void is_unused_flag123_set(int v);
   void is_unused_flag124_set(int v);
   void is_unused_flag12_set(int v);
   void is_unused_flag13_set(int v);

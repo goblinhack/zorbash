@@ -197,6 +197,14 @@ void Game::place_player(void)
       if (0) {
         level->thing_new("fungus_edible_1", point(x - 1, y));
         level->thing_new("fungus_withered_1", point(x + 3, y));
+        level->thing_new("fungus_withered_1", point(x + 3, y + 1));
+        level->thing_new("fungus_withered_1", point(x + 3, y + 2));
+        level->thing_new("fungus_withered_1", point(x + 2, y));
+        level->thing_new("fungus_withered_1", point(x + 2, y + 1));
+        level->thing_new("fungus_withered_1", point(x + 2, y + 2));
+        level->thing_new("fungus_withered_1", point(x + 1, y));
+        level->thing_new("fungus_withered_1", point(x + 1, y + 1));
+        level->thing_new("fungus_withered_1", point(x + 1, y + 2));
         auto f = level->thing_new("fungus_poison_1", point(x - 2, y));
         t->carry(f, carry_options);
       }

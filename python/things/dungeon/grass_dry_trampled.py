@@ -25,6 +25,7 @@ def tp_init(name, tiles=[]):
     my.is_burnable(self, True)
     my.is_combustible(self, True)
     my.is_cursor_can_hover_over(self, True)
+    my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_grass_dry(self, True)
     my.is_grass_dry_trampled(self, True)

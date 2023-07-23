@@ -309,75 +309,68 @@ void Dungeon::make_dungeon(void)
   if (biome != BIOME_CHASMS) {
     DBG2("INF: Add spiderwebs");
     add_spiderweb();
+  }
 
-    if (biome != BIOME_CHASMS) {
-      DBG2("INF: Generate dry grass");
-      grass_dry_gen(1500, // fill prob
-                    10,   // R1
-                    5,    // R2
-                    1 /* generations */);
-      fungus_withered_gen(1500, // fill prob
-                          10,   // R1
-                          5,    // R2
-                          1 /* generations */);
-      fungus_poison_gen(300, // fill prob
-                        10,  // R1
-                        5,   // R2
-                        1 /* generations */);
-      fungus_edible_gen(300, // fill prob
-                        10,  // R1
-                        5,   // R2
-                        1 /* generations */);
-    }
-
-    if (biome == BIOME_SWAMP) {
-      grass_dry_gen(1500, // fill prob
-                    10,   // R1
-                    5,    // R2
-                    1 /* generations */);
-      fungus_withered_gen(1500, // fill prob
-                          10,   // R1
-                          5,    // R2
-                          1 /* generations */);
-      fungus_poison_gen(300, // fill prob
-                        10,  // R1
-                        5,   // R2
-                        1 /* generations */);
-      fungus_edible_gen(300, // fill prob
-                        10,  // R1
-                        5,   // R2
-                        1 /* generations */);
-    }
-
-    DBG2("INF: Generate wet grass");
-    grass_wet_gen(1000, // fill prob
+  if (biome != BIOME_CHASMS) {
+    DBG2("INF: Generate dry grass");
+    grass_dry_gen(1500, // fill prob
                   10,   // R1
                   5,    // R2
-                  1 /* generations */);
-
-    DBG2("INF: Generate withered fungus");
-    fungus_withered_gen(1000, // fill prob
-                        10,   // R1
-                        5,    // R2
-                        1 /* generations */);
-    fungus_poison_gen(300, // fill prob
-                      10,  // R1
-                      5,   // R2
-                      1 /* generations */);
-    fungus_edible_gen(300, // fill prob
-                      10,  // R1
-                      5,   // R2
-                      1 /* generations */);
-
-    DBG2("INF: Generate foliage");
-    foliage_gen(10, // fill prob
-                10, // R1
-                5,  // R2
-                4 /* generations */);
-
-    DBG2("INF: Add foliage around water");
-    add_foliage_around_water();
+                  2 /* generations */);
   }
+
+  if (biome == BIOME_SWAMP) {
+    DBG2("INF: Generate dry grass");
+    grass_dry_gen(1500, // fill prob
+                  10,   // R1
+                  5,    // R2
+                  2 /* generations */);
+
+    DBG2("INF: Generate fungus");
+    fungus_withered_gen(100, // fill prob
+                        3,   // R1
+                        1,   // R2
+                        2 /* generations */);
+    fungus_poison_gen(100, // fill prob
+                      10,  // R1
+                      1,   // R2
+                      2 /* generations */);
+    fungus_edible_gen(100, // fill prob
+                      10,  // R1
+                      1,   // R2
+                      2 /* generations */);
+  }
+
+  if (biome == BIOME_DUNGEON) {
+    DBG2("INF: Generate fungus");
+    fungus_withered_gen(50, // fill prob
+                        3,  // R1
+                        1,  // R2
+                        2 /* generations */);
+    fungus_poison_gen(30, // fill prob
+                      10, // R1
+                      1,  // R2
+                      2 /* generations */);
+    fungus_edible_gen(20, // fill prob
+                      10, // R1
+                      1,  // R2
+                      2 /* generations */);
+  }
+
+  DBG2("INF: Generate wet grass");
+  grass_wet_gen(1000, // fill prob
+                10,   // R1
+                5,    // R2
+                2 /* generations */);
+
+  DBG2("INF: Generate foliage");
+  foliage_gen(10, // fill prob
+              10, // R1
+              5,  // R2
+              2 /* generations */);
+
+  DBG2("INF: Add foliage around water");
+  add_foliage_around_water();
 
   dump();
 }
@@ -935,6 +928,19 @@ bool Dungeon::is_barrel(const int x, const int y)
     auto v = get(Charmap::all_charmaps, c);
 
     if (v.is_barrel) { return true; }
+  }
+  return false;
+}
+
+bool Dungeon::is_fungus(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
+
+  for (auto d = 0; d < map_depth; d++) {
+    auto c = getc(x, y, d);
+    auto v = get(Charmap::all_charmaps, c);
+
+    if (v.is_fungus) { return true; }
   }
   return false;
 }
@@ -3643,12 +3649,6 @@ void Dungeon::add_remaining(void)
         putc(x, y, MAP_DEPTH_FLOOR2, Charmap::GRASS_DRY);
       } else if (pcg_random_range(0, 100) < 20) {
         putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOLIAGE);
-      } else if (pcg_random_range(0, 100) < 10) {
-        putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FUNGUS_WITHERED);
-      } else if (pcg_random_range(0, 100) < 10) {
-        putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FUNGUS_POISON);
-      } else if (pcg_random_range(0, 100) < 10) {
-        putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FUNGUS_EDIBLE);
       } else if (is_dirt(x, y)) {
         if (pcg_random_range(0, 100) < 20) { putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOLIAGE); }
       } else if (is_corridor(x, y)) {
@@ -3706,10 +3706,6 @@ void Dungeon::add_foliage_around_water(void)
           putc(x, y, MAP_DEPTH_FLOOR2, Charmap::GRASS_WET);
         } else if (pcg_random_range(0, 100) > 20) {
           putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOLIAGE);
-        } else if (pcg_random_range(0, 100) > 30) {
-          putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FUNGUS_POISON);
-        } else if (pcg_random_range(0, 100) > 20) {
-          putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FUNGUS_EDIBLE);
         }
       }
     }
@@ -4099,20 +4095,27 @@ void Dungeon::fungus_edible_gen(unsigned int map_fill_prob, int map_r1, int map_
       if (get(map_curr, x, y)) {
         if (is_wall(x, y) || is_rock(x, y) || is_chasm(x, y)) { continue; }
         if (is_deep_water(x, y)) { continue; }
+        if (is_floor(x, y)) {
+          if (d100() < 90) { continue; }
+        }
+        if (is_corridor(x, y)) {
+          if (d100() < 80) { continue; }
+        }
 
         bool ok_to_place = false;
         for (auto dx = -1; dx <= 1; dx++) {
           for (auto dy = -1; dy <= 1; dy++) {
             if (is_lava(x + dx, y + dy)) { goto next; }
+            if (is_deep_water(x + dx, y + dy)) { goto next; }
+            if (is_floor(x + dx, y + dy)) {
+              ok_to_place = true;
+              break;
+            }
             if (is_dirt(x + dx, y + dy)) {
               ok_to_place = true;
               break;
             }
             if (is_shallow_water(x + dx, y + dy)) {
-              ok_to_place = true;
-              break;
-            }
-            if (is_deep_water(x + dx, y + dy)) {
               ok_to_place = true;
               break;
             }
@@ -4190,20 +4193,27 @@ void Dungeon::fungus_poison_gen(unsigned int map_fill_prob, int map_r1, int map_
       if (get(map_curr, x, y)) {
         if (is_wall(x, y) || is_rock(x, y) || is_chasm(x, y)) { continue; }
         if (is_deep_water(x, y)) { continue; }
+        if (is_floor(x, y)) {
+          if (d100() < 90) { continue; }
+        }
+        if (is_corridor(x, y)) {
+          if (d100() < 80) { continue; }
+        }
 
         bool ok_to_place = false;
         for (auto dx = -1; dx <= 1; dx++) {
           for (auto dy = -1; dy <= 1; dy++) {
             if (is_lava(x + dx, y + dy)) { goto next; }
+            if (is_deep_water(x + dx, y + dy)) { goto next; }
+            if (is_floor(x + dx, y + dy)) {
+              ok_to_place = true;
+              break;
+            }
             if (is_dirt(x + dx, y + dy)) {
               ok_to_place = true;
               break;
             }
             if (is_shallow_water(x + dx, y + dy)) {
-              ok_to_place = true;
-              break;
-            }
-            if (is_deep_water(x + dx, y + dy)) {
               ok_to_place = true;
               break;
             }
@@ -4280,21 +4290,20 @@ void Dungeon::fungus_withered_gen(unsigned int map_fill_prob, int map_r1, int ma
     for (x = 2; x < maze_w - 2; x++) {
       if (get(map_curr, x, y)) {
         if (is_wall(x, y) || is_rock(x, y) || is_chasm(x, y)) { continue; }
+        if (is_shallow_water(x, y)) { continue; }
         if (is_deep_water(x, y)) { continue; }
 
         bool ok_to_place = false;
         for (auto dx = -1; dx <= 1; dx++) {
           for (auto dy = -1; dy <= 1; dy++) {
             if (is_lava(x + dx, y + dy)) { goto next; }
+            if (is_shallow_water(x + dx, y + dy)) { goto next; }
+            if (is_deep_water(x + dx, y + dy)) { goto next; }
+            if (is_floor(x + dx, y + dy)) {
+              ok_to_place = true;
+              break;
+            }
             if (is_dirt(x + dx, y + dy)) {
-              ok_to_place = true;
-              break;
-            }
-            if (is_shallow_water(x + dx, y + dy)) {
-              ok_to_place = true;
-              break;
-            }
-            if (is_deep_water(x + dx, y + dy)) {
               ok_to_place = true;
               break;
             }

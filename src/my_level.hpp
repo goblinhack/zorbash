@@ -79,6 +79,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_floor {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_foliage {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_food {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_fungus {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_fungus_edible {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_fungus_poison {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_fungus_withered {};
@@ -824,6 +825,8 @@ public:
   uint8_t is_foliage(const point p);
   uint8_t is_food(const int x, const int y);
   uint8_t is_food(const point p);
+  uint8_t is_fungus(const int x, const int y);
+  uint8_t is_fungus(const point p);
   uint8_t is_fungus_edible(const int x, const int y);
   uint8_t is_fungus_edible(const point p);
   uint8_t is_fungus_poison(const int x, const int y);
@@ -1139,6 +1142,8 @@ public:
   void is_fungus_edible_unset(const int x, const int y);
   void is_fungus_poison_set(const int x, const int y);
   void is_fungus_poison_unset(const int x, const int y);
+  void is_fungus_set(const int x, const int y);
+  void is_fungus_unset(const int x, const int y);
   void is_fungus_withered_set(const int x, const int y);
   void is_fungus_withered_unset(const int x, const int y);
   void is_gas_blocker_no_check_set(const int x, const int y);

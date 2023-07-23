@@ -31,6 +31,7 @@ def tp_init(name, tiles=[], bot3_tiles=[]):
     my.is_bridge(self, True)
     my.is_burnable(self, True)
     my.is_cursor_can_hover_over(self, True)
+    my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_flat(self, True)
     my.is_interesting(self, True)

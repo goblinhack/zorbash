@@ -26,6 +26,7 @@ def tp_init(name, text_long_name):
     my.is_biome_lava(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_cursor_path_blocker(self, True)
+    my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_gas_blocker(self, True)
     my.is_interesting(self, True)

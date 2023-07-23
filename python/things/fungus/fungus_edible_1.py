@@ -23,6 +23,7 @@ def tp_init(name, tiles=[]):
     my.is_biome_swamp(self, True)
     my.is_collectable(self, True)
     my.is_cursor_can_hover_over(self, True)
+    my.is_described_in_leftbar(self, False)
     my.is_described_when_hovering_over(self, True)
     my.is_food(self, True)
     my.is_fungus_edible(self, True)
@@ -44,7 +45,7 @@ def tp_init(name, tiles=[]):
     my.text_description_long(self, "An enormous mushroom with a white stem and brown spots on its cap.")
     my.text_description_short(self, "An enormous mushroom.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
-    my.z_depth(self, my.MAP_DEPTH_FLOOR2)  # if you change this, change fungus_tick
+    my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
 

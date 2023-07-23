@@ -23,6 +23,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_biome_flooded(self, True)
     my.is_biome_swamp(self, True)
     my.is_deep_water(self, True)
+    my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_flat(self, True)
     my.is_hazard(self, True)

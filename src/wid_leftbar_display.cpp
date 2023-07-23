@@ -524,6 +524,8 @@ bool wid_leftbar_display_create(void)
     {
       if (! t->is_alive_monst()) { continue; }
 
+      if (! t->is_described_in_leftbar()) { continue; }
+
       auto player = level->player;
 
       if (! get(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) { continue; }
@@ -550,6 +552,8 @@ bool wid_leftbar_display_create(void)
     FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
     {
       if (! t->is_dead && ! t->is_item()) { continue; }
+
+      if (! t->is_described_in_leftbar()) { continue; }
 
       auto player = level->player;
       if (t->is_player()) { continue; }
@@ -579,9 +583,11 @@ bool wid_leftbar_display_create(void)
     {
       if (! t->is_door() && ! t->is_ascend_sewer() && ! t->is_descend_sewer() && ! t->is_ascend_dungeon()
           && ! t->is_descend_dungeon() && ! t->is_brazier() && ! t->is_spiderweb() && ! t->is_barrel()
-          && ! t->is_portal() && ! t->is_block_of_ice()) {
+          && ! t->is_portal() && ! t->is_block_of_ice() && ! t->is_fungus()) {
         continue;
       }
+
+      if (! t->is_described_in_leftbar()) { continue; }
 
       auto player = level->player;
       if (t->is_player()) { continue; }

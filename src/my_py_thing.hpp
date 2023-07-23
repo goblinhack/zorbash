@@ -299,6 +299,7 @@ PyObject *thing_is_deep_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_demon(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_descend_dungeon(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_descend_sewer(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_described_in_leftbar(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_described_when_hovering_over(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_destroyed_on_hit_or_miss(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_destroyed_on_hitting(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -570,7 +571,6 @@ PyObject *thing_is_unused_flag11(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag120(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag121(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag122(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag123(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag12(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag13(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag142(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -69,6 +69,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_biome_swamp(self, True)
     my.is_combustible(self, True)
     my.is_crushable(self, True)
+    my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_eater_of_meat(self, True)
     my.is_eater_of_red_blood(self, True)

@@ -21,6 +21,7 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     my.gfx_pixelart_show_outlined(self, True)
     my.is_biome_dungeon(self, True)
     my.is_descend_sewer(self, True)
+    my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_interesting(self, True)
     my.is_loggable(self, True)

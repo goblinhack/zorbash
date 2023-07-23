@@ -112,6 +112,7 @@ public:
   bool is_floor_no_check(const int x, const int y);
   bool is_foliage(const int x, const int y);
   bool is_food(const int x, const int y);
+  bool is_fungus(const int x, const int y);
   bool is_fungus_edible(const int x, const int y);
   bool is_fungus_poison(const int x, const int y);
   bool is_fungus_withered(const int x, const int y);

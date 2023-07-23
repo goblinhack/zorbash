@@ -137,6 +137,7 @@ PyObject *level_is_floor_deco_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_is_flying_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_foliage_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_food_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_fungus_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_fungus_edible_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_fungus_poison_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_fungus_withered_at(PyObject *obj, PyObject *args, PyObject *keywds);

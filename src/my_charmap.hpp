@@ -33,8 +33,8 @@ public:
     FLOOR               = '.',
     FOLIAGE             = '`',
     FOOD                = 'f',
-    FUNGUS_EDIBLE       = 'n',
-    FUNGUS_POISON       = 'n',
+    FUNGUS_EDIBLE       = 'e',
+    FUNGUS_POISON       = 'p',
     FUNGUS_WITHERED     = 'n',
     GOLD                = 'o',
     GRASS_DRY           = '\'',
@@ -91,6 +91,7 @@ public:
   bool is_foliage {false};
   bool is_food {false};
   bool is_fungus_edible {false};
+  bool is_fungus {false};
   bool is_fungus_poison {false};
   bool is_fungus_withered {false};
   bool is_gold {false};

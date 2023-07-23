@@ -302,6 +302,9 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
 void Level::create_biome_swamp_place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries)
 {
   TRACE_AND_INDENT();
+  //
+  // Have the same rock type for the level
+  //
   auto tp = tp_random_rock();
   if (unlikely(! tp)) {
     ERR("Place rocks failed");
@@ -549,13 +552,22 @@ void Level::create_biome_swamp_place_grass_wet(Dungeonp d)
 void Level::create_biome_swamp_place_fungus_withered(Dungeonp d)
 {
   TRACE_AND_INDENT();
+  //
+  // Have the same fungus type for the level
+  //
+  auto tp = tp_random_fungus_withered();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
       if (is_rock(x, y)) { continue; }
       if (d->is_fungus_withered(x, y)) {
-        auto tp = tp_random_fungus_withered();
         if (unlikely(! tp)) { return; }
 
+        if (is_fungus(x, y)) { continue; }
+
+        //
+        // Change mushroom type
+        //
+        if (d100() < 10) { tp = tp_random_fungus_withered(); }
         (void) thing_new(tp->name(), point(x, y));
       }
     }
@@ -565,13 +577,22 @@ void Level::create_biome_swamp_place_fungus_withered(Dungeonp d)
 void Level::create_biome_swamp_place_fungus_poison(Dungeonp d)
 {
   TRACE_AND_INDENT();
+  //
+  // Have the same fungus type for the level
+  //
+  auto tp = tp_random_fungus_poison();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
       if (is_rock(x, y)) { continue; }
       if (d->is_fungus_poison(x, y)) {
-        auto tp = tp_random_fungus_poison();
         if (unlikely(! tp)) { return; }
 
+        if (is_fungus(x, y)) { continue; }
+
+        //
+        // Change mushroom type
+        //
+        if (d100() < 10) { tp = tp_random_fungus_poison(); }
         (void) thing_new(tp->name(), point(x, y));
       }
     }
@@ -581,13 +602,22 @@ void Level::create_biome_swamp_place_fungus_poison(Dungeonp d)
 void Level::create_biome_swamp_place_fungus_edible(Dungeonp d)
 {
   TRACE_AND_INDENT();
+  //
+  // Have the same rock type for the level
+  //
+  auto tp = tp_random_fungus_edible();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
       if (is_rock(x, y)) { continue; }
       if (d->is_fungus_edible(x, y)) {
-        auto tp = tp_random_fungus_edible();
         if (unlikely(! tp)) { return; }
 
+        if (is_fungus(x, y)) { continue; }
+
+        //
+        // Change mushroom type
+        //
+        if (d100() < 10) { tp = tp_random_fungus_edible(); }
         (void) thing_new(tp->name(), point(x, y));
       }
     }

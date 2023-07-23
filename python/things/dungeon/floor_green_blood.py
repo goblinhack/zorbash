@@ -17,6 +17,7 @@ def tp_init(name, text_long_name):
     my.health_initial_dice(self, "1d4")
     my.is_able_to_fall(self, True)
     my.is_attackable_by_monst(self, True)
+    my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_flat(self, True)
     my.is_green_blood(self, True)

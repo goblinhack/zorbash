@@ -48,6 +48,7 @@ def tp_init(name, text_long_name, text_short_name, tiles=[]):
     my.is_biome_lava(self, True)
     my.is_burnable(self, True)
     my.is_collectable(self, True)
+    my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_droppable(self, True)
     my.is_hittable(self, True)

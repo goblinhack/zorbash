@@ -487,6 +487,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->i_set_is_floor                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_foliage                       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_food                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_fungus                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_gas_blocker                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_gold                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_green_blood                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -645,6 +646,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_floor);
   in >> bits(my.t->_is_foliage);
   in >> bits(my.t->_is_food);
+  in >> bits(my.t->_is_fungus);
   in >> bits(my.t->_is_fungus_edible);
   in >> bits(my.t->_is_fungus_poison);
   in >> bits(my.t->_is_fungus_withered);

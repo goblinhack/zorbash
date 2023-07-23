@@ -808,10 +808,10 @@ int Thing::is_unused_flag122(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag122());
 }
-int Thing::is_unused_flag123(void)
+int Thing::is_described_in_leftbar(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag123());
+  return (tp()->is_described_in_leftbar());
 }
 int Thing::is_always_activated(void)
 {
