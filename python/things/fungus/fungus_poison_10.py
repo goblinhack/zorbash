@@ -60,7 +60,7 @@ def tp_init(name, tiles=[]):
 
 
 def init():
-    tp_init(name="fungus_poison_1", tiles=["fungus_poison_1"])
+    tp_init(name="fungus_poison_10", tiles=["fungus_poison_10"])
 
 
 init()

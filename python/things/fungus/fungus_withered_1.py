@@ -3,7 +3,7 @@ import tp
 
 
 def tp_init(name, tiles=[]):
-    self = tp.Tp(name, "chopped wood fungus", "wood fungus")
+    self = tp.Tp(name, "withered fungus", "withered fungus")
     # begin sort marker
     my.collision_hit_priority(self, 1)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
@@ -42,7 +42,7 @@ def tp_init(name, tiles=[]):
     my.temperature_sensitive_to_sudden_changes(self, True)
     my.text_a_or_an(self, "the")
     my.text_description_long2(self, "When even the mushrooms die, you know this is not the place to be...")
-    my.text_description_long(self, "A dry husk of a mushroom that resembles chopped wood.")
+    my.text_description_long(self, "A dry husk of a mushroom.")
     my.text_description_short(self, "A withered mushroom.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)

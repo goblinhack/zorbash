@@ -3,11 +3,9 @@ import tp
 
 
 def tp_init(name, tiles=[]):
-    self = tp.Tp(name, "lime stalker fungus", "lime stlkr fungus")
+    self = tp.Tp(name, "redwood cap fungus", "redwood cap fungus")
     # begin sort marker
     my.collision_hit_priority(self, 1)
-    my.dmg_chance_d1000_poison(self, 0, 1000)
-    my.dmg_poison_dice(self, "1d10")
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)
@@ -28,7 +26,7 @@ def tp_init(name, tiles=[]):
     my.is_described_in_leftbar(self, False)
     my.is_described_when_hovering_over(self, True)
     my.is_food(self, True)
-    my.is_fungus_poison(self, True)
+    my.is_fungus_edible(self, True)
     my.is_fungus(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)
@@ -37,15 +35,15 @@ def tp_init(name, tiles=[]):
     my.is_throwable(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.nutrition_dice(self, "1d5")
+    my.nutrition_dice(self, "1d3")
     my.temperature_max(self, 50)
     my.temperature_min(self, 0)
     my.temperature_sensitive(self, True)
     my.temperature_sensitive_to_sudden_changes(self, True)
     my.text_a_or_an(self, "the")
     my.text_description_long2(self, "Is it poisonous? Who can tell... Well you probably, if you dare to eat it.")
-    my.text_description_long(self, "An enormous pale mushroom with a ghostly stem and lime green spots on its cap.")
-    my.text_description_short(self, "An enormous mushroom.")
+    my.text_description_long(self, "An enormous mushroom with a deep red hue cap.")
+    my.text_description_short(self, "An enormous redwood mushroom.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -53,14 +51,14 @@ def tp_init(name, tiles=[]):
 
     for t in tiles:
         my.tile(self, delay_ms=300,
-                ascii_fg_char="lollipop", ascii_bg_col_name="", ascii_fg_col_name="lime",
+                ascii_fg_char="lollipop", ascii_bg_col_name="", ascii_fg_col_name="red",
                 tile=t)
 
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="fungus_poison_1", tiles=["fungus_poison_1"])
+    tp_init(name="fungus_edible_3", tiles=["fungus_edible_3"])
 
 
 init()

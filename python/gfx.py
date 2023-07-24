@@ -1376,7 +1376,7 @@ def init_tiles_16x16_main():
         "fungus_edible_15",
         "fungus_edible_16",
         "fungus_edible_17",
-        "fungus_edible_19",
+        "fungus_edible_18",
         ############################################################
         "",
         "fungus_withered_1",
@@ -1396,7 +1396,7 @@ def init_tiles_16x16_main():
         "fungus_withered_15",
         "fungus_withered_16",
         "fungus_withered_17",
-        "fungus_withered_19",
+        "fungus_withered_18",
         ############################################################
         "",
         "fungus_poison_1",
@@ -1416,7 +1416,7 @@ def init_tiles_16x16_main():
         "fungus_poison_15",
         "fungus_poison_16",
         "fungus_poison_17",
-        "fungus_poison_19",
+        "fungus_poison_18",
         ############################################################
         "",
         "",
