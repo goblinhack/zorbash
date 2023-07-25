@@ -4,7 +4,6 @@ import tp
 
 def on_death(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "pressure_plate")
-    # my.spawn_gas_poison_around_thing(me, 3)
     for it in my.level_flood_fill_get_all_grid_things(me, x, y, 3):
         my.spawn_gas_poison_around_thing(it, 1)
 

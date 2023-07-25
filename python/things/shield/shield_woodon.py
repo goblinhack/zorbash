@@ -60,8 +60,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_dex_bonus(self, -1)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 DEF")
-    my.text_description_long2(self, "This shield gives a measly +1 to defense and is liable to break. 30 day return policy.")
-    my.text_description_long3(self, "30 day return policy.")
+    my.text_description_long2(self, "This shield gives a measly +1 to defense and is liable to break.")
+    my.text_description_long3(self, "No 30 day return policy.")
     my.text_description_long(self, "Woodon shield. Yes. Woodon. This is a low quality foam shield sprayed with patented Woodon (tm), to give a nice woody sheen. Not to be confused with an actual wooden shield made of actual wood.")
     my.text_description_short(self, "Woodon shield.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -70,7 +70,7 @@ def tp_init(name, text_long_name, text_short_name):
     # end sort marker
 
     my.tile(self,
-            ascii_fg_char="[", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="[", ascii_bg_col_name="", ascii_fg_col_name="pink",
             tile=name)
 
     my.tp_update(self)

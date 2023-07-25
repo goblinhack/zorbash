@@ -2,9 +2,6 @@
 <!-- ------                                                                                                                                       -->
 <!-- when stuck in rock how to show?                                                                                                              -->
 <!-- skill offensive/defensive                                                                                                                    -->
-<!-- fungus_withered                                                                                                                                   -->
-<!-- fireball should ignite dry grass                                                                                                             -->
-<!-- - wort food ? fungus_withered foods and some poisonous?                                                                                           -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -78,7 +75,6 @@
 <!-- Level                                                                                                                                        -->
 <!-- ------                                                                                                                                       -->
 <!-- - tomb of past player ? or random player ? leads to random small room?                                                                       -->
-<!-- - gold needs to do something - shop? buy/sell                                                                                                -->
 <!-- - totems are like mobs, but do not spawn except initially. The worshippers are imbued with power but do not die when the totem does.         -->
 <!-- - vaults                                                                                                                                     -->
 <!-- - portable hunger - teleports you to a room full of digestive juices                                                                         -->
