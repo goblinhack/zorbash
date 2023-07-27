@@ -217,6 +217,10 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       wid_set_text(w, "(Splatted)");
     } else if (t->is_monst()) {
       wid_set_text(w, "(Dead)");
+    } else if (t->is_brazier()) {
+      wid_set_text(w, "(Tipped over)");
+    } else if (t->is_treasure_chest()) {
+      wid_set_text(w, "(Smashed)");
     } else {
       wid_set_text(w, "(Broken)");
     }
