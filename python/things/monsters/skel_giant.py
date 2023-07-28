@@ -130,6 +130,7 @@ def tp_init(name, text_long_name):
     my.temperature(self, 5)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "A monstrous skeleton. It towers above you. It seems unhappy. Quite what body this skeleton came from, you hope not to find out. Water and fire are your friends here with creatures like this. Watch, these can rise again!")
+    my.text_description_long2(self, "Takes half damage from pointy weapons.")
     my.text_description_short(self, "A monstrous skeleton, possibly unfriendly.")
     my.text_hits(self, "claws")
     my.thing_size(self, my.THING_SIZE_GIANT)
