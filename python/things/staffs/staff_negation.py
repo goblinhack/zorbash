@@ -84,7 +84,7 @@ def on_thrown(owner, me, x, y):
     explode(me, x, y)
 
 
-def on_receiving_dmg_negation(me, hitter, x, y, damage):
+def on_receiving_dmg_negation(me, hitter, real_hitter, x, y, damage):
     explode(me, x, y)
     return damage
 

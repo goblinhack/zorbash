@@ -527,6 +527,7 @@ void Game::place_player(void)
       // level->thing_new("golem_flesh", point(x + 1, y + 3));
       IF_DEBUG2
       {
+        level->thing_new("skeleton", point(x + 3, y + 1));
         if (0) {
           level->thing_new("lava", point(x + 1, y));
           level->thing_new("lava", point(x + 2, y));

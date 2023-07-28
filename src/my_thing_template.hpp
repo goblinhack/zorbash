@@ -583,6 +583,7 @@ private:
   int _is_player_bodypart_hat {};
   int _is_player_bodypart_legs {};
   int _is_player_bodypart_torso {};
+  int _is_pointy {};
   int _is_poisonous_danger_level {};
   int _is_portal {};
   int _is_potion {};
@@ -608,6 +609,7 @@ private:
   int _is_shield {};
   int _is_shovable {};
   int _is_shovable_and_sticky {};
+  int _is_skeleton {};
   int _is_skill {};
   int _is_skillstone {};
   int _is_slime {};
@@ -671,8 +673,6 @@ private:
   int _is_unused_flag119 {};
   int _is_unused_flag12 {};
   int _is_unused_flag120 {};
-  int _is_unused_flag121 {};
-  int _is_unused_flag122 {};
   int _is_unused_flag124 {};
   int _is_unused_flag13 {};
   int _is_unused_flag14 {};
@@ -1928,6 +1928,7 @@ public:
   int is_player_bodypart_torso(void) const;
   int is_player_bodypart(void) const;
   int is_player(void) const;
+  int is_pointy(void) const;
   int is_poisonous_danger_level(void) const;
   int is_portal(void) const;
   int is_potion(void) const;
@@ -1953,6 +1954,7 @@ public:
   int is_shield(void) const;
   int is_shovable_and_sticky(void) const;
   int is_shovable(void) const;
+  int is_skeleton(void) const;
   int is_skillstone(void) const;
   int is_skill(void) const;
   int is_slime(void) const;
@@ -2014,8 +2016,6 @@ public:
   int is_unused_flag119(void) const;
   int is_unused_flag11(void) const;
   int is_unused_flag120(void) const;
-  int is_unused_flag121(void) const;
-  int is_unused_flag122(void) const;
   int is_unused_flag124(void) const;
   int is_unused_flag12(void) const;
   int is_unused_flag13(void) const;
@@ -2693,6 +2693,7 @@ public:
   void is_player_bodypart_set(int v);
   void is_player_bodypart_torso_set(int v);
   void is_player_set(int v);
+  void is_pointy_set(int v);
   void is_poisonous_danger_level_set(int v);
   void is_portal_set(int v);
   void is_potion_set(int v);
@@ -2718,6 +2719,7 @@ public:
   void is_shield_set(int v);
   void is_shovable_and_sticky_set(int v);
   void is_shovable_set(int v);
+  void is_skeleton_set(int v);
   void is_skill_set(int v);
   void is_skillstone_set(int v);
   void is_slime_set(int v);
@@ -2779,8 +2781,6 @@ public:
   void is_unused_flag119_set(int v);
   void is_unused_flag11_set(int v);
   void is_unused_flag120_set(int v);
-  void is_unused_flag121_set(int v);
-  void is_unused_flag122_set(int v);
   void is_unused_flag124_set(int v);
   void is_unused_flag12_set(int v);
   void is_unused_flag13_set(int v);

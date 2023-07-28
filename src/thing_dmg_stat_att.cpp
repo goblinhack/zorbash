@@ -71,10 +71,10 @@ int Thing::on_receiving_dmg_stat_att(Thingp hitter, Thingp real_hitter, int dama
 
     if (mod == "me") { mod = name(); }
 
-    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
-        hitter->to_short_string().c_str(), damage);
+    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
+        hitter->to_short_string().c_str(), real_hitter->to_short_string().c_str(), damage);
 
-    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) curr_at.x,
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, real_hitter->id.id, (unsigned int) curr_at.x,
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 

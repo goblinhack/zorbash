@@ -19,7 +19,7 @@ def on_hit_dodge_do(me, hitter, x, y):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
 
-def on_receiving_dmg_lightning(me, hitter, x, y, damage):
+def on_receiving_dmg_lightning(me, hitter, real_hitter, x, y, damage):
     # my.topcon("hitter  {} {}".format(my.thing_name_get(hitter), my.thing_health(hitter)))
     owner = my.thing_top_owner_id_get(hitter)
     if (owner and my.thing_is_player(owner)) or my.thing_is_player(hitter):

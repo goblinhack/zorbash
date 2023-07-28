@@ -673,6 +673,7 @@ int Tp::is_player_bodypart_legs(void) const { return _is_player_bodypart_legs; }
 int Tp::is_player_bodypart_torso(void) const { return _is_player_bodypart_torso; }
 int Tp::is_player_bodypart(void) const { return _is_player_bodypart; }
 int Tp::is_player(void) const { return _is_player; }
+int Tp::is_pointy(void) const { return _is_pointy; }
 int Tp::is_poisonous_danger_level(void) const { return _is_poisonous_danger_level; }
 int Tp::is_portal(void) const { return _is_portal; }
 int Tp::is_potion(void) const { return _is_potion; }
@@ -698,6 +699,7 @@ int Tp::is_sheep(void) const { return _is_sheep; }
 int Tp::is_shield(void) const { return _is_shield; }
 int Tp::is_shovable_and_sticky(void) const { return _is_shovable_and_sticky; }
 int Tp::is_shovable(void) const { return _is_shovable; }
+int Tp::is_skeleton(void) const { return _is_skeleton; }
 int Tp::is_skillstone(void) const { return _is_skillstone; }
 int Tp::is_skill(void) const { return _is_skill; }
 int Tp::is_slime(void) const { return _is_slime; }
@@ -759,8 +761,6 @@ int Tp::is_unused_flag118(void) const { return _is_unused_flag118; }
 int Tp::is_unused_flag119(void) const { return _is_unused_flag119; }
 int Tp::is_unused_flag11(void) const { return _is_unused_flag11; }
 int Tp::is_unused_flag120(void) const { return _is_unused_flag120; }
-int Tp::is_unused_flag121(void) const { return _is_unused_flag121; }
-int Tp::is_unused_flag122(void) const { return _is_unused_flag122; }
 int Tp::is_unused_flag12(void) const { return _is_unused_flag12; }
 int Tp::is_unused_flag13(void) const { return _is_unused_flag13; }
 int Tp::is_unused_flag142(void) const { return _is_unused_flag142; }
@@ -1437,6 +1437,7 @@ void Tp::is_player_bodypart_legs_set(int v) { _is_player_bodypart_legs = v; }
 void Tp::is_player_bodypart_set(int v) { _is_player_bodypart = v; }
 void Tp::is_player_bodypart_torso_set(int v) { _is_player_bodypart_torso = v; }
 void Tp::is_player_set(int v) { _is_player = v; }
+void Tp::is_pointy_set(int v) { _is_pointy = v; }
 void Tp::is_poisonous_danger_level_set(int v) { _is_poisonous_danger_level = v; }
 void Tp::is_portal_set(int v) { _is_portal = v; }
 void Tp::is_potion_set(int v) { _is_potion = v; }
@@ -1462,6 +1463,7 @@ void Tp::is_sheep_set(int v) { _is_sheep = v; }
 void Tp::is_shield_set(int v) { _is_shield = v; }
 void Tp::is_shovable_and_sticky_set(int v) { _is_shovable_and_sticky = v; }
 void Tp::is_shovable_set(int v) { _is_shovable = v; }
+void Tp::is_skeleton_set(int v) { _is_skeleton = v; }
 void Tp::is_skill_set(int v) { _is_skill = v; }
 void Tp::is_skillstone_set(int v) { _is_skillstone = v; }
 void Tp::is_slime_set(int v) { _is_slime = v; }
@@ -1523,8 +1525,6 @@ void Tp::is_unused_flag118_set(int v) { _is_unused_flag118 = v; }
 void Tp::is_unused_flag119_set(int v) { _is_unused_flag119 = v; }
 void Tp::is_unused_flag11_set(int v) { _is_unused_flag11 = v; }
 void Tp::is_unused_flag120_set(int v) { _is_unused_flag120 = v; }
-void Tp::is_unused_flag121_set(int v) { _is_unused_flag121 = v; }
-void Tp::is_unused_flag122_set(int v) { _is_unused_flag122 = v; }
 void Tp::is_unused_flag12_set(int v) { _is_unused_flag12 = v; }
 void Tp::is_unused_flag13_set(int v) { _is_unused_flag13 = v; }
 void Tp::is_unused_flag142_set(int v) { _is_unused_flag142 = v; }

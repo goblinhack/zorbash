@@ -798,15 +798,15 @@ int Thing::is_unused_flag120(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag120());
 }
-int Thing::is_unused_flag121(void)
+int Thing::is_skeleton(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag121());
+  return (tp()->is_skeleton());
 }
-int Thing::is_unused_flag122(void)
+int Thing::is_pointy(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag122());
+  return (tp()->is_pointy());
 }
 int Thing::is_described_in_leftbar(void)
 {

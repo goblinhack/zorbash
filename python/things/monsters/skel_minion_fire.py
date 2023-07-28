@@ -38,6 +38,16 @@ def on_want_to_shoot_at(me, target, x, y):  # Return True on doing an action
     return False
 
 
+def on_receiving_dmg_melee(me, hitter, real_hitter, x, y, damage):
+    # my.topcon("hitter  {} {}".format(my.thing_name_get(hitter), my.thing_health(hitter)))
+    if my.thing_is_pointy(hitter):
+        if my.thing_is_player(real_hitter):
+            my.thing_msg(me, "The {} takes half damage from your {}.".format(
+                         my.thing_name_get(me), my.thing_name_get(hitter)))
+        return int(damage / 2)
+    return damage
+
+
 def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
@@ -115,6 +125,7 @@ def tp_init(name, text_long_name):
     my.is_msg_allowed_is_wounded(self, True)
     my.is_msg_allowed_senses_danger(self, True)
     my.is_shovable(self, True)
+    my.is_skeleton(self, True)
     my.is_tickable(self, True)
     my.is_undead(self, True)
     my.light_color(self, "yellow")
@@ -126,6 +137,7 @@ def tp_init(name, text_long_name):
     my.on_death_do(self, "me.on_death()")
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
+    my.on_receiving_dmg_melee_do(self, "me.on_receiving_dmg_melee()")
     my.on_want_to_shoot_at_do(self, "me.on_want_to_shoot_at()")
     my.on_you_nat_attack_attempt_do(self, "me.on_you_nat_attack_attempt()")
     my.rarity(self, my.RARITY_COMMON)  # how rare within this monster class

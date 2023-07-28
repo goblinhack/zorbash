@@ -484,6 +484,7 @@ PyObject *thing_is_player_bodypart_legs(PyObject *obj, PyObject *args, PyObject 
 PyObject *thing_is_player_bodypart(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_player_bodypart_torso(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_player(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_pointy(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_poisonous_danger_level(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_portal(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_potion(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -511,6 +512,7 @@ PyObject *thing_is_sheep(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_shield(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_shovable_and_sticky(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_shovable(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_skeleton(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_skill(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_skillstone(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_sleeping(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -569,8 +571,6 @@ PyObject *thing_is_unused_flag118(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag119(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag11(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag120(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag121(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag122(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag12(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag13(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag142(PyObject *obj, PyObject *args, PyObject *keywds);

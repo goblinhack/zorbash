@@ -128,7 +128,13 @@ void Thing::can_see_you(point p)
           if (t->is_bloodied()) {
             if (! t->is_wounded_msg) {
               t->is_wounded_msg = true;
-              if (t->is_msg_allowed_is_wounded()) { msg("%s is wounded.", t->text_The().c_str()); }
+              if (t->is_msg_allowed_is_wounded()) {
+                if (t->is_skeleton()) {
+                  msg("%s bone's rattle.", t->text_The().c_str());
+                } else {
+                  msg("%s is wounded.", t->text_The().c_str());
+                }
+              }
             }
           }
         }

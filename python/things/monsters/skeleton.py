@@ -28,6 +28,15 @@ def on_death(me, x, y):
             my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "bones2")
 
 
+def on_receiving_dmg_melee(me, hitter, real_hitter, x, y, damage):
+    # my.topcon("hitter  {} {}".format(my.thing_name_get(hitter), my.thing_health(hitter)))
+    if my.thing_is_pointy(hitter):
+        if my.thing_is_player(real_hitter):
+            my.thing_msg(me, "The skeleton takes half damage from your {}.".format(my.thing_name_get(hitter)))
+        return int(damage / 2)
+    return damage
+
+
 def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
@@ -110,6 +119,7 @@ def tp_init(name, text_long_name):
     my.on_death_do(self, "me.on_death()")
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
+    my.on_receiving_dmg_melee_do(self, "me.on_receiving_dmg_melee()")
     my.on_you_nat_attack_attempt_do(self, "me.on_you_nat_attack_attempt()")
     my.rarity(self, my.RARITY_COMMON)  # how rare within this monster class
     my.resurrect_dice(self, "1d20+30")
@@ -123,6 +133,7 @@ def tp_init(name, text_long_name):
     my.temperature(self, 5)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "A collection of tortured bones, driven to wander the dungeon forever. Or at least until you release them. Such creatures abhor the cleansing powers of water.")
+    my.text_description_long(self, "Takes half damage from pointy weapons.")
     my.text_description_short(self, "The bones of one surprised to be moving again.")
     my.text_hits(self, "claws")
     my.thing_size(self, my.THING_SIZE_NORMAL)

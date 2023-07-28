@@ -86,6 +86,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_kept_after_final_use(self, True)
     my.is_loggable(self, True)
     my.is_moveable(self, True)
+    my.is_pointy(self, True)
     my.is_sword(self, True)
     my.is_target_select(self, True)
     my.is_tickable(self, True)

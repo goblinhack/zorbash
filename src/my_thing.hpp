@@ -1701,6 +1701,7 @@ public:
   int is_player_bodypart_torso(void);
   int is_player_bodypart(void);
   int is_player(void);
+  int is_pointy(void);
   int is_poisonous_danger_level(void);
   int is_portal(void);
   int is_potion(void);
@@ -1727,6 +1728,7 @@ public:
   int is_shield(void);
   int is_shovable_and_sticky(void);
   int is_shovable(void);
+  int is_skeleton(void);
   int is_skillstone(void);
   int is_skill(void);
   int is_slime(void);
@@ -1787,8 +1789,6 @@ public:
   int is_unused_flag119(void);
   int is_unused_flag11(void);
   int is_unused_flag120(void);
-  int is_unused_flag121(void);
-  int is_unused_flag122(void);
   int is_unused_flag12(void);
   int is_unused_flag13(void);
   int is_unused_flag142(void);
