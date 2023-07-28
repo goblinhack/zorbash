@@ -291,11 +291,11 @@ void Thing::level_push(void)
       i_set_is_cursor_path_blocker = true;
       level->is_cursor_path_blocker_set(x, y);
     }
-    if (is_light_blocker() && ! is_open && ! is_currently_invisible) {
+    if (is_light_blocker() && ! is_open && ! is_invisible_currently()) {
       i_set_is_light_blocker = true;
       level->is_light_blocker_set(x, y);
     }
-    if (is_light_blocker_for_monst() && ! is_open && ! is_currently_invisible) {
+    if (is_light_blocker_for_monst() && ! is_open && ! is_invisible_currently()) {
       i_set_is_light_blocker_for_monst = true;
       level->is_light_blocker_for_monst_set(x, y);
     }

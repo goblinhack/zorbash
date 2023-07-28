@@ -258,8 +258,10 @@ extern PFNGLDEBUGMESSAGECALLBACKPROC    glDebugMessageCallback_EXT;
 #define FBO_FINAL                    17
 #define FBO_SCREEN_FADE_IN_AND_OUT   18
 #define FBO_SMALL_POINT_LIGHTS       19
-#define FBO_SPRITE                   20
-#define FBO_MAP_DEBUG                21 // MUST BE LAST, as we generate more from this point
+#define FBO_SPRITE1                  20
+#define FBO_SPRITE2                  21
+#define FBO_SPRITE3                  22
+#define FBO_MAP_DEBUG                23 // MUST BE LAST, as we generate more from this point
 #define FBO_MAP_DEBUG_END            (FBO_MAP_DEBUG + (DUNGEONS_GRID_CHUNK_WIDTH * DUNGEONS_GRID_CHUNK_HEIGHT))
 #define MAX_FBO                      (FBO_MAP_DEBUG_END + 1)
 

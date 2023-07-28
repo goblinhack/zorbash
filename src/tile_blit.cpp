@@ -361,6 +361,24 @@ void tile_blit(const Tilep &tile, const point tl, const point br)
   blit(tile->gl_binding(), x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
 }
 
+void tile_blit_mask(const Tilep &tile, const point tl, const point br)
+{
+  float x1, x2, y1, y2;
+
+  //
+  // Only some walls have deco tiles, so the pointer is left null for
+  // those that do not.
+  //
+  if (unlikely(! tile)) { return; }
+
+  x1 = tile->x1;
+  x2 = tile->x2;
+  y1 = tile->y1;
+  y2 = tile->y2;
+
+  blit(tile->gl_binding_mask(), x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
+}
+
 void tile_blit(const Tilep &tile, const point tl, const point tr, const point bl, const point br)
 {
   float x1, x2, y1, y2;
@@ -477,7 +495,7 @@ void tile_blit_frozen(const Tilep &tile, const point tl, const point br)
 
   blit_flush();
 
-  blit_fbo_push(FBO_SPRITE);
+  blit_fbo_push(FBO_SPRITE1);
   glClear(GL_COLOR_BUFFER_BIT);
   {
     glcolor(WHITE);
@@ -513,7 +531,7 @@ void tile_blit_frozen(const Tilep &tile, const point tl, const point br)
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   blit_init();
   {
-    blit(fbo_tex_id[ FBO_SPRITE ], 0, 1, tw, 1.0 - th, tl.x, tl.y, br.x, br.y);
+    blit(fbo_tex_id[ FBO_SPRITE1 ], 0, 1, tw, 1.0 - th, tl.x, tl.y, br.x, br.y);
   }
   blit_flush();
 }
@@ -530,7 +548,7 @@ void tile_blit_burnt(const Tilep &tile, const point tl, const point br)
 
   blit_flush();
 
-  blit_fbo_push(FBO_SPRITE);
+  blit_fbo_push(FBO_SPRITE1);
   glClear(GL_COLOR_BUFFER_BIT);
   {
     glcolor(WHITE);
@@ -566,7 +584,7 @@ void tile_blit_burnt(const Tilep &tile, const point tl, const point br)
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   blit_init();
   {
-    blit(fbo_tex_id[ FBO_SPRITE ], 0, 1, tw, 1.0 - th, tl.x, tl.y, br.x, br.y);
+    blit(fbo_tex_id[ FBO_SPRITE1 ], 0, 1, tw, 1.0 - th, tl.x, tl.y, br.x, br.y);
   }
   blit_flush();
 }
@@ -578,7 +596,7 @@ void tile_blit_outline_only(const Tilep &tile, const point tl, const point br, c
 
   blit_flush();
 
-  blit_fbo_push(FBO_SPRITE);
+  blit_fbo_push(FBO_SPRITE1);
   glClear(GL_COLOR_BUFFER_BIT);
   blit_init();
   {
@@ -618,9 +636,9 @@ void tile_blit_outline_only(const Tilep &tile, const point tl, const point br, c
   float tw = ((float) width + 2) / ((float) game->config.game_pix_width);
   float th = ((float) height + 2) / ((float) game->config.game_pix_height);
   if (tl.x > br.x) {
-    blit(fbo_tex_id[ FBO_SPRITE ], 0, 1, tw, 1 - th, br.x - 1 - 0, tl.y - 2, tl.x + 1 - 0, br.y + 0);
+    blit(fbo_tex_id[ FBO_SPRITE1 ], 0, 1, tw, 1 - th, br.x - 1 - 0, tl.y - 2, tl.x + 1 - 0, br.y + 0);
   } else {
-    blit(fbo_tex_id[ FBO_SPRITE ], 0, 1, tw, 1 - th, br.x + 1 - 0, tl.y - 2, tl.x - 1 - 0, br.y + 0);
+    blit(fbo_tex_id[ FBO_SPRITE1 ], 0, 1, tw, 1 - th, br.x + 1 - 0, tl.y - 2, tl.x - 1 - 0, br.y + 0);
   }
   blit_flush();
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

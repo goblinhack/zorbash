@@ -43,7 +43,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.text_description_short(self, "A magical portal.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
+    my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
 
     delay = 100

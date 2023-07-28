@@ -43,8 +43,6 @@ typedef enum {
 typedef class BlitOptions_
 {
 public:
-  bool player_bodyparts_background {};
-  bool player_bodyparts_foreground {};
   bool reflection {};
 } BlitOptions;
 
@@ -209,6 +207,7 @@ public:
   uint64_t is_hunger_level_hungry                       : 1 {}; // Hunger levels
   uint64_t is_hunger_level_satiated                     : 1 {}; // Hunger levels
   uint64_t is_hunger_level_starving                     : 1 {}; // Hunger levels
+  uint64_t is_invisible_                                : 1 {}; // Updated per tick
   uint64_t is_jumping                                   : 1 {}; // Is mid jump
   uint64_t is_key_in_lock                               : 1 {}; // Key stuck in rusty lock?
   uint64_t is_minion_set                                : 1 {}; // Overrides is_minion in template
@@ -331,17 +330,16 @@ public:
   // and always update game_load.cpp and game_save.cpp
   /////////////////////////////////////////////////////////////////////////
   // Fields not worth saving
-  uint64_t ai_tried_to_wander     : 1 {}; // tried to wander
-  uint64_t debug                  : 1 {};
-  uint64_t has_external_particle  : 1 {}; // current in motion particle
-  uint64_t has_internal_particle  : 1 {}; // current in motion particle
-  uint64_t inited_tiles           : 1 {};
-  uint64_t is_being_dropped       : 1 {};
-  uint64_t is_being_thrown        : 1 {};
-  uint64_t is_blitted             : 1 {};
-  uint64_t is_currently_invisible : 1 {}; // Updated per tick
-  uint64_t is_in_lava             : 1 {}; // Updated on level pop/push
-  uint64_t is_in_water            : 1 {}; // Updated on level pop/push
+  uint64_t ai_tried_to_wander    : 1 {}; // tried to wander
+  uint64_t debug                 : 1 {};
+  uint64_t has_external_particle : 1 {}; // current in motion particle
+  uint64_t has_internal_particle : 1 {}; // current in motion particle
+  uint64_t inited_tiles          : 1 {};
+  uint64_t is_being_dropped      : 1 {};
+  uint64_t is_being_thrown       : 1 {};
+  uint64_t is_blitted            : 1 {};
+  uint64_t is_in_lava            : 1 {}; // Updated on level pop/push
+  uint64_t is_in_water           : 1 {}; // Updated on level pop/push
 #ifdef ENABLE_DEBUG_THING_SER
   std::string debug_str;
 #endif
@@ -474,6 +472,7 @@ public:
   bool bag_place_at(Thingp item, point pos);
   bool bag_remove_at(Thingp item, point pos);
   bool bag_remove(Thingp);
+  bool blit_outline_should_be_shown(color &outline_color);
   bool bodypart_add(Thingp w, int bodypart);
   bool bounce(float bounce_height, float bounce_fade, ts_t ms, int bounce_count);
   bool buff_add_if_not_found(Tpp what);
@@ -584,6 +583,7 @@ public:
   bool is_friend(Thingp it);
   bool is_hated_by_me(const point p);
   bool is_hated_by_me(const Thingp it);
+  bool is_invisible_currently(void);
   bool is_invisible(void);
   bool is_obs_ai_for_me(point);
   bool is_obs_ai(fpoint);
@@ -2659,6 +2659,7 @@ public:
   void blit_ascii_adjust_color(color &c, bool fg, bool leftbar);
   void blit_ascii_adjust_color_hue(color &c, bool fg);
   void blit_ascii_at(point tl, bool lit = true, bool leftbar = false);
+  void blit_ascii_outline(point tl, bool lit = true, bool leftbar = false);
   void blit_ascii(point tl, point br, point p, bool leftbar = false);
   void blit_end_reflection_submerged(uint8_t submerged);
   void blit_end_submerged(uint8_t submerged);
@@ -2672,6 +2673,7 @@ public:
   void blit_shadow(const Tpp &tp, const Tilep &tile, const point tl, const point br);
   void blit_text(std::string const &, color c, point tl, point br);
   void blit_tile_at(point tl, bool lit = true, bool leftbar = false);
+  void blit_to_tex(void);
   void blit_upside_down(int fbo);
   void blit_wall_cladding(point tl, point br, const ThingTiles *tiles);
   void blit_wall_shadow(point tl, point br, const ThingTiles *tiles);

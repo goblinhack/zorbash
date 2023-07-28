@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- when stuck in rock how to show?                                                                                                              -->
 <!-- skill offensive/defensive                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

@@ -628,6 +628,15 @@ void Thing::animate(void)
     }
   }
 
+  if (tile_curr && is_burnt) {
+    if (is_monst() || is_player()) {
+#ifdef DEBUG_ANIM
+      if (debug || is_debug_type()) { con("Animate: burnt"); }
+#endif
+      return;
+    }
+  }
+
   std::vector< Tilep > *tiles = &((*tmap));
   if (unlikely(! tiles || tiles->empty())) {
 #ifdef DEBUG_ANIM

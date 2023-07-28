@@ -208,6 +208,7 @@ uint8_t tile_is_yyy8(Tilep);
 uint8_t tile_is_yyy9(Tilep);
 
 void tile_blit(const Tilep &tile, const point tl, const point br);
+void tile_blit_mask(const Tilep &tile, const point tl, const point br);
 void tile_blit(const Tilep &tile, const point tl, const point br, const color &c);
 void tile_blit(const Tilep &tile, const point tl, const point tr, const point bl, const point br);
 void tile_blit(const Tilep &tile, const point at);

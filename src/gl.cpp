@@ -467,7 +467,9 @@ void fbo_get_size(int fbo, int &w, int &h)
       w = game->config.window_pix_width;
       h = game->config.window_pix_height;
       break;
-    case FBO_SPRITE :
+    case FBO_SPRITE1 :
+    case FBO_SPRITE2 :
+    case FBO_SPRITE3 :
       w = game->config.game_pix_width;
       h = game->config.game_pix_height;
       break;

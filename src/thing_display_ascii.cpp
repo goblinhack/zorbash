@@ -245,6 +245,18 @@ void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
   }
 }
 
+void Thing::blit_ascii_outline(point p, bool lit, bool left_bar)
+{
+  TRACE_NO_INDENT();
+
+  color outline_color;
+  if (blit_outline_should_be_shown(outline_color)) {
+    TRACE_NO_INDENT();
+    ascii_set(TILE_LAYER_BG_0, p.x, p.y, outline_color);
+    ascii_set(TILE_LAYER_FG_0, p.x, p.y, WHITE);
+  }
+}
+
 void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
 {
   TRACE_NO_INDENT();
@@ -431,14 +443,14 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
   }
 
   if (! is_dead) {
-    if (is_currently_invisible && is_player()) {
+    if (is_invisible_currently() && is_player()) {
       color outline_color = WHITE;
       outline_color.a     = alpha;
       ascii_set(TILE_LAYER_BG_0, p.x, p.y, outline_color);
       ascii_set(TILE_LAYER_FG_0, p.x, p.y, WHITE);
     }
 
-    if (! is_currently_invisible || is_player()) {
+    if (! is_invisible_currently() || is_player()) {
       if (is_raging()) {
         if ((this == game->current_wid_thing_info) || (level->cursor && (this->curr_at == level->cursor->curr_at))) {
           color outline_color = ORANGE;

@@ -423,6 +423,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->is_hunger_level_hungry                       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_hunger_level_satiated                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_hunger_level_starving                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->is_invisible_                                = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_jumping                                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_key_in_lock                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_minion_set                                = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;

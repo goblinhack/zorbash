@@ -7,8 +7,11 @@
 #include "my_font.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
+#include "my_sdl_proto.hpp"
 #include "my_thing.hpp"
 #include "my_ui.hpp"
+
+static Tilep player_tile;
 
 bool Thing::tile_is_offscreen(void)
 {
@@ -41,7 +44,7 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
 
   if (g_render_black_and_white) { return; }
 
-  if (is_currently_invisible) { return; }
+  if (is_invisible_currently()) { return; }
 
   if (! level->player) { return; }
 
@@ -214,7 +217,7 @@ void Thing::blit_player_owned_shadow(const Tpp &tpp, const Tilep &tile, const po
 
   if (g_render_black_and_white) { return; }
 
-  if (is_currently_invisible) { return; }
+  if (is_invisible_currently()) { return; }
 
   point shadow_tl = blit_tl;
   point shadow_br = blit_br;
@@ -247,7 +250,7 @@ void Thing::blit_shadow(const Tpp &tpp, const Tilep &tile, const point blit_tl, 
 
   if (g_render_black_and_white) { return; }
 
-  if (is_currently_invisible) { return; }
+  if (is_invisible_currently()) { return; }
 
   if (! gfx_pixelart_shadow()) { return; }
 
@@ -466,6 +469,11 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
     }
   } else {
     tile = {};
+  }
+
+  if (is_player()) {
+    tile = player_tile;
+    if (! player_tile) { DIE("no player tile"); }
   }
 
   //
@@ -759,77 +767,10 @@ void Thing::blit_outline_highlight(const Tilep tile, const point blit_tl, const 
 {
   TRACE_NO_INDENT();
 
-  //
-  // Allow secret doors a chance to be seen
-  //
-  if (is_secret_door() && discovered()) {
-    static uint8_t a    = 128;
-    static int     step = 2;
-    static int     dir  = 1;
-    a += dir * step;
-    if (a > 250) {
-      dir = -1;
-    } else if (a < 50) {
-      dir = 1;
-    }
-
-    color outline_color = RED;
-    outline_color.a     = a;
+  color outline_color;
+  if (blit_outline_should_be_shown(outline_color)) {
+    TRACE_NO_INDENT();
     tile_blit_outline_only(tile, blit_tl, blit_br, outline_color);
-  }
-
-  if (! is_dead) {
-    if (is_currently_invisible && is_player()) {
-      static uint8_t a    = 128;
-      static int     step = 2;
-      static int     dir  = 1;
-      a += dir * step;
-      if (a > 250) {
-        dir = -1;
-      } else if (a < 50) {
-        dir = 1;
-      }
-
-      color outline_color = WHITE;
-      outline_color.a     = a;
-      tile_blit_outline_only(tile, blit_tl, blit_br, outline_color);
-    }
-
-    if (! is_currently_invisible || is_player()) {
-      if (is_raging()) {
-        static uint8_t a    = 128;
-        static int     step = 5;
-        static int     dir  = 1;
-        a += dir * step;
-        if (a > 250) {
-          dir = -1;
-        } else if (a < 50) {
-          dir = 1;
-        }
-
-        color outline_color = ORANGE;
-        outline_color.a     = a;
-        tile_blit_outline_only(tile, blit_tl, blit_br, outline_color);
-      }
-    }
-  }
-
-  if (gfx_pixelart_show_highlighted() && ! immediate_owner()) {
-    if ((this == game->current_wid_thing_info) || (level->cursor && (this->curr_at == level->cursor->curr_at))) {
-      static uint8_t a    = 128;
-      static int     step = 2;
-      static int     dir  = 1;
-      a += dir * step;
-      if (a > 250) {
-        dir = -1;
-      } else if (a < 50) {
-        dir = 1;
-      }
-
-      color outline_color = RED;
-      outline_color.a     = a;
-      tile_blit_outline_only(tile, blit_tl, blit_br, outline_color);
-    }
   }
 }
 
@@ -850,25 +791,18 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   //
   if (! g_render_black_and_white) {
     //
-    // We render the player in two steps. A solid black outline and then the
-    // bodyparts. When rendering the bodyparts, don't cast shadows over other
-    // bodyparts.
+    // Blit shadows?
     //
-    if (! blit_options->player_bodyparts_foreground) {
+    if (unlikely(tpp->gfx_pixelart_shadow_very_short() || tpp->gfx_pixelart_shadow_short()
+                 || tpp->gfx_pixelart_shadow_long())) {
       //
-      // Blit shadows?
+      // Submerged shadow?
       //
-      if (unlikely(tpp->gfx_pixelart_shadow_very_short() || tpp->gfx_pixelart_shadow_short()
-                   || tpp->gfx_pixelart_shadow_long())) {
-        //
-        // Submerged shadow?
-        //
-        if (auto submerged = blit_begin_submerged()) {
-          blit_shadow(tpp, tile, blit_tl, blit_br);
-          blit_end_submerged(submerged);
-        } else {
-          blit_shadow(tpp, tile, blit_tl, blit_br);
-        }
+      if (auto submerged = blit_begin_submerged()) {
+        blit_shadow(tpp, tile, blit_tl, blit_br);
+        blit_end_submerged(submerged);
+      } else {
+        blit_shadow(tpp, tile, blit_tl, blit_br);
       }
     }
   }
@@ -1105,19 +1039,13 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
       //
       // Not drawing a reflection + submerged.
       //
-      if (! is_currently_invisible) {
+      if (! is_invisible_currently()) {
         if (outline) {
           //
           // Compensate for the one pixel of outline
           //
-          if (blit_options->player_bodyparts_background) {
-            tile_blit_outline(tile, point(blit_tl.x, blit_tl.y - 1), point(blit_br.x, blit_br.y - 1), BLACK);
-          } else if (blit_options->player_bodyparts_foreground) {
-            tile_blit(tile, blit_tl, blit_br);
-          } else {
-            tile_blit_outline(tile, point(blit_tl.x, blit_tl.y - 1), point(blit_br.x, blit_br.y - 1), c,
-                              square_outline);
-          }
+          tile_blit_outline(tile, point(blit_tl.x, blit_tl.y - 1), point(blit_br.x, blit_br.y - 1), c,
+                            square_outline);
         } else {
           tile_blit(tile, blit_tl, blit_br);
         }
@@ -1146,18 +1074,12 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
       //
       // Not drawing a reflection + not submerged.
       //
-      if (! is_currently_invisible) {
+      if (! is_invisible_currently()) {
         if (outline) {
           //
           // Compensate for the one pixel of outline
           //
-          if (blit_options->player_bodyparts_background) {
-            tile_blit_outline(tile, point(blit_tl.x, blit_tl.y), point(blit_br.x, blit_br.y), BLACK, square_outline);
-          } else if (blit_options->player_bodyparts_foreground) {
-            tile_blit(tile, blit_tl, blit_br);
-          } else {
-            tile_blit_outline(tile, point(blit_tl.x, blit_tl.y), point(blit_br.x, blit_br.y), c, square_outline);
-          }
+          tile_blit_outline(tile, point(blit_tl.x, blit_tl.y), point(blit_br.x, blit_br.y), c, square_outline);
         } else {
           tile_blit(tile, blit_tl, blit_br);
         }
@@ -1209,6 +1131,67 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   is_blitted = true;
 }
 
+void Thing::blit_to_tex(void)
+{
+  if (! player_tile) { player_tile = new Tile(); }
+
+  point tl, br;
+  auto  tile = tile_index_to_tile(tile_curr);
+  if (! map_offset_coords_get(tl, br, tile, false)) { return; }
+
+  auto  width  = tl.x > br.x ? (tl.x - br.x) : (br.x - tl.x);
+  auto  height = br.y - tl.y;
+  float tw     = ((float) width) / ((float) game->config.game_pix_width);
+  float th     = ((float) height) / ((float) game->config.game_pix_height);
+
+  blit_flush();
+
+  blit_fbo_push(FBO_SPRITE2);
+  glClear(GL_COLOR_BUFFER_BIT);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  {
+    glcolor(WHITE);
+    blit_init();
+    {
+      FOR_ALL_BODYPART(iter)
+      {
+        auto b    = bodypart_get(iter);
+        auto tile = tile_index_to_tile(b->tile_curr);
+        tile_blit(tile, point(0, 0), point(width, height));
+      }
+    }
+    blit_flush();
+  }
+  blit_fbo_pop();
+
+  blit_fbo_push(FBO_SPRITE3);
+  glClear(GL_COLOR_BUFFER_BIT);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  {
+    glcolor(WHITE);
+    blit_init();
+    {
+      FOR_ALL_BODYPART(iter)
+      {
+        auto b    = bodypart_get(iter);
+        auto tile = tile_index_to_tile(b->tile_curr);
+        tile_blit_mask(tile, point(0, 0), point(width, height));
+      }
+    }
+    blit_flush();
+  }
+  blit_fbo_pop();
+
+  player_tile->pix_width  = tw;
+  player_tile->pix_height = th;
+  player_tile->set_gl_binding(fbo_tex_id[ FBO_SPRITE2 ]);
+  player_tile->set_gl_binding_mask(fbo_tex_id[ FBO_SPRITE3 ]);
+  player_tile->x1 = 0;
+  player_tile->y1 = 1;
+  player_tile->x2 = tw;
+  player_tile->y2 = 1.0 - th;
+}
+
 //
 // Blit the thing
 //
@@ -1222,30 +1205,8 @@ void Thing::blit_pixelart(int fbo)
   if (is_player_bodypart()) { return; }
 
   BlitOptions blit_options;
+  if (is_player()) { blit_to_tex(); }
   blit_pixelart_do(fbo, &blit_options);
-
-  //
-  // We render the player in two steps. A solid black outline and then the
-  // bodyparts. When rendering the bodyparts, don't cast shadows over other
-  // bodyparts.
-  //
-  if (is_player()) {
-    blit_options.player_bodyparts_foreground = false;
-    blit_options.player_bodyparts_background = true;
-    FOR_ALL_BODYPART(iter)
-    {
-      auto b = bodypart_get(iter);
-      if (b) { b->blit_pixelart_do(fbo, &blit_options); }
-    }
-
-    blit_options.player_bodyparts_foreground = true;
-    blit_options.player_bodyparts_background = false;
-    FOR_ALL_BODYPART(iter)
-    {
-      auto b = bodypart_get(iter);
-      if (b) { b->blit_pixelart_do(fbo, &blit_options); }
-    }
-  }
 }
 
 //
