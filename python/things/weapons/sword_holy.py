@@ -76,6 +76,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_very_hard(self, True)
     my.is_weapon_class_C(self, True)
     my.is_weapon(self, True)
+    my.is_holy(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.light_color(self, "white")

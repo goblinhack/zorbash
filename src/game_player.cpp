@@ -45,11 +45,12 @@ void Game::place_player(void)
         auto k = level->thing_new("key", point(x, y));
         t->carry(k, carry_options);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("sword_swood", point(x, y));
         t->carry(w, carry_options);
       }
-      if (1) {
+      if (0) {
+        level->thing_new("skeleton", point(x, y + 3));
         auto w = level->thing_new("sword_holy", point(x, y));
         t->carry(w, carry_options);
       }

@@ -301,17 +301,6 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   bool        attack_set = false;
 
   /////////////////////////////////////////////////////////////////////////
-  // Undead double damage
-  /////////////////////////////////////////////////////////////////////////
-  if (real_hitter->is_holy() || hitter->is_holy()) {
-    if (victim->is_undead()) {
-      damage *= 2;
-      dmg_type = "double " + dmg_type;
-      dbg("Double damage from holy item");
-    }
-  }
-
-  /////////////////////////////////////////////////////////////////////////
   // Poison damage
   /////////////////////////////////////////////////////////////////////////
   TRACE_NO_INDENT();
@@ -1313,6 +1302,16 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           }
         }
       }
+    }
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // Undead double damage
+  /////////////////////////////////////////////////////////////////////////
+  if (real_hitter->is_holy() || hitter->is_holy()) {
+    if (victim->is_undead()) {
+      damage *= 2;
+      dmg_type += "(x2 holy smite) ";
     }
   }
 
