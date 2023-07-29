@@ -202,6 +202,7 @@ void Game::place_player(void)
       }
 
       if (0) {
+        level->thing_new("trap_paralysis", point(x - 2, y));
         level->thing_new("wall_dungeon.1", point(x - 2, y + 2));
         level->thing_new("wall_dungeon.1", point(x - 1, y + 2));
         level->thing_new("wall_dungeon.1", point(x, y + 2));

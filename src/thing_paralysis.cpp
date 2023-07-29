@@ -3,6 +3,7 @@
 //
 
 #include "my_array_bounds_check.hpp"
+#include "my_game.hpp"
 #include "my_level.hpp"
 #include "my_monst.hpp"
 #include "my_python.hpp"
@@ -13,12 +14,18 @@
 void Thing::paralysis_tick(void)
 {
   if (paralysis_count() > 0) { paralysis_count_decr(); }
+  paralysis_update();
+}
 
+void Thing::paralysis_update(void)
+{
   if (is_player()) {
     if (paralysis_count()) {
       buff_add_if_not_found(tp_find("debuff_paralysis"));
+      game->set_request_to_remake_rightbar();
     } else {
       buff_remove(tp_find("debuff_paralysis"));
+      game->set_request_to_remake_rightbar();
     }
   }
 }
@@ -37,6 +44,7 @@ int Thing::paralysis_count_set(int v)
 {
   TRACE_NO_INDENT();
   new_aip();
+  paralysis_update();
   return (aip()->paralysis_count = v);
 }
 
@@ -46,6 +54,7 @@ int Thing::paralysis_count_decr(int v)
   new_aip();
   aip()->paralysis_count -= v;
   if (aip()->paralysis_count < 0) { aip()->paralysis_count = 0; }
+  paralysis_update();
   return aip()->paralysis_count;
 }
 
@@ -56,6 +65,7 @@ int Thing::paralysis_count_incr(int v)
   new_aip();
   aip()->paralysis_count += v;
   if (aip()->paralysis_count < 0) { aip()->paralysis_count = 0; }
+  paralysis_update();
   return aip()->paralysis_count;
 }
 
@@ -65,6 +75,7 @@ int Thing::paralysis_count_decr(void)
   new_aip();
   aip()->paralysis_count--;
   if (aip()->paralysis_count < 0) { aip()->paralysis_count = 0; }
+  paralysis_update();
   return aip()->paralysis_count;
 }
 
@@ -75,5 +86,6 @@ int Thing::paralysis_count_incr(void)
   new_aip();
   aip()->paralysis_count++;
   if (aip()->paralysis_count < 0) { aip()->paralysis_count = 0; }
+  paralysis_update();
   return aip()->paralysis_count;
 }

@@ -4,18 +4,18 @@ import tp
 
 def on_death(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "pressure_plate")
-    for it in my.level_flood_fill_get_all_grid_things(me, x, y, 3):
-        my.spawn_gas_poison_around_thing(it, 1)
+    for it in my.level_get_all(me, x, y):
+        if my.thing_paralysis_count_incr(it, 10):
+            if my.thing_is_player(it):
+                my.thing_popup(it, "!!!")
 
 
 def on_activated(me, victim, x, y):
     if my.thing_is_player(victim):
         my.thing_msg(victim, "You hear a pressure plate click beneath you...")
-        my.thing_msg(victim, "%%fg=red$Gas surrounds you!%%fg=reset$")
     else:
         my.thing_msg(victim, "The pressure plate clicks...")
     my.thing_dead(me, "activated")
-    my.thing_popup(victim, "!!!")
 
 
 def tp_init(name, text_long_name):
@@ -55,7 +55,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="trap_pressure_plate_gas", text_long_name="inconspicuous floor tile")
+    tp_init(name="trap_paralysis", text_long_name="inconspicuous floor tile")
 
 
 init()

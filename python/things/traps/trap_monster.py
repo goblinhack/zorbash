@@ -14,6 +14,7 @@ def on_activated(me, victim, x, y):
         my.thing_msg(victim, "%%fg=red$Surprise!%%fg=reset$")
     else:
         my.thing_msg(victim, "The pressure plate clicks...")
+    my.thing_popup(victim, "!!!")
     my.thing_dead(me, "activated")
 
 
@@ -54,7 +55,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="trap_monster", text_long_name="inconspicious floor tile")
+    tp_init(name="trap_monster", text_long_name="inconspicuous floor tile")
 
 
 init()

@@ -1,5 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- player reflection off                                                                                                                        -->
+<!-- insta death from onyx widow                                                                                                                  -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -196,14 +198,14 @@ Content:
 - 6 x boots
 - 5 x rings
 - 5 x keys
+- 5 x debuffs
 - 4 x gauntlets
-- 4 x debuffs
 - 4 x armor
 - 4 x amulets
+- 3 x traps
 - 3 x mobs
 - 3 x doors
 - 3 x cloaks
-- 2 x traps
 - 2 x potions
 - 1 x player
 <!-- end type marker -->

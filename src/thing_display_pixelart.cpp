@@ -473,7 +473,7 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
 
   if (is_player()) {
     tile = player_tile;
-    if (! player_tile) { DIE("no player tile"); }
+    if (! player_tile) { tile = {}; }
   }
 
   //

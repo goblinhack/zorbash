@@ -2647,7 +2647,6 @@ public:
   void achieve_goals_in_death(void);
   void achieve_goals_in_life(void);
   void acid_tick(void);
-  void paralysis_tick(void);
   void add_attacker(Thingp attacker, bool is_recursing = false);
   void add_avoid(Thingp attacker);
   void add_enemy(Thingp attacker, bool is_recursing = false);
@@ -2890,6 +2889,8 @@ public:
   void on_you_nat_attack_success(void);
   void owner_set(Thingp owner);
   void owner_unset(void);
+  void paralysis_tick(void);
+  void paralysis_update(void);
   void path_shorten(std::vector< point > &path);
   void physical_training_tick(void);
   void place_blood(bool force = false);
