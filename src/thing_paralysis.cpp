@@ -13,6 +13,14 @@
 void Thing::paralysis_tick(void)
 {
   if (paralysis_count() > 0) { paralysis_count_decr(); }
+
+  if (is_player()) {
+    if (paralysis_count()) {
+      buff_add_if_not_found(tp_find("debuff_paralysis"));
+    } else {
+      buff_remove(tp_find("debuff_paralysis"));
+    }
+  }
 }
 
 int Thing::paralysis_count(void)

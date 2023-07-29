@@ -483,7 +483,7 @@ def init_tiles_16x16_main():
         "debuff_necrotized",
         "debuff_hungry",
         "debuff_starving",
-        "",
+        "debuff_paralysis",
         "",
         "",
         "",
