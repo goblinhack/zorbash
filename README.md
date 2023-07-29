@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- skill offensive/defensive                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -44,7 +43,6 @@
 <!-- - boss 1 Mummy mummy, ankh of life                                                                                                           -->
 <!-- - boss 2 slime boss, spawns slimes, tries to jump splat the player                                                                           -->
 <!--          swamp tiles that allow 50% movement                                                                                                 -->
-<!--          boss will eat swamp wort to spawn                                                                                                   -->
 <!--          explode bog tiles to kill boss                                                                                                      -->
 <!-- - boss 3 rat king boss, sewer like level with rats coming out of the walls                                                                   -->
 <!-- - boss 4 goblin king boss, will be happy if the rat king crown is given                                                                      -->

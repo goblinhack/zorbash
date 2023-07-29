@@ -46,7 +46,7 @@ void Game::place_player(void)
         t->carry(k, carry_options);
       }
       if (1) {
-        auto w = level->thing_new("sword_swood", point(x, y));
+        auto w = level->thing_new("sword_wood", point(x, y));
         t->carry(w, carry_options);
       }
       if (0) {
@@ -151,6 +151,14 @@ void Game::place_player(void)
         t->spell_add(w);
       }
       if (0) { level->thing_new("tentacleye", point(x + 1, y + 1)); }
+      if (0) {
+        auto w = level->thing_new("skill_iron_defense1", point(x, y));
+        t->skill_add(w);
+      }
+      if (0) {
+        auto w = level->thing_new("skill_power_attack1", point(x, y));
+        t->skill_add(w);
+      }
       if (0) {
         auto w = level->thing_new("skill_primal_rage1", point(x, y));
         t->skill_add(w);
