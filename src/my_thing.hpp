@@ -1573,6 +1573,7 @@ public:
   int is_flying(void);
   int is_foliage(void);
   int is_food(void);
+  int is_four_leaf_clover(void);
   int is_frozen_check(void);
   int is_fungus_edible(void);
   int is_fungus_poison(void);
@@ -1602,6 +1603,8 @@ public:
   int is_herbivore(void);
   int is_hittable(void);
   int is_hit(Thingp hitter, ThingAttackOptionsp, int damage);
+  int is_holy(void);
+  int is_holy_water(void);
   int is_humanoid(void);
   int is_iceman(void);
   int is_immune_to_acid(void);
@@ -1785,10 +1788,7 @@ public:
   int is_unused_flag115(void);
   int is_unused_flag116(void);
   int is_unused_flag117(void);
-  int is_unused_flag118(void);
-  int is_unused_flag119(void);
   int is_unused_flag11(void);
-  int is_unused_flag120(void);
   int is_unused_flag12(void);
   int is_unused_flag13(void);
   int is_unused_flag142(void);

@@ -191,7 +191,7 @@ Content:
 - 24 x treasure
 - 14 x weapons
 - 14 x spells
-- 13 x items
+- 14 x items
 - 12 x buffs
 - 9 x skills
 - 6 x staffs

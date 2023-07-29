@@ -247,9 +247,6 @@ void Thing::location_check_me(void)
 
     if (t == this) { continue; }
 
-    IF_DEBUG2 { t->log("Do location check"); }
-    TRACE_AND_INDENT();
-
     //
     // Check but filter only to this thing
     //

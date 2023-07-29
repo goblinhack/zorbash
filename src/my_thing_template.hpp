@@ -455,6 +455,7 @@ private:
   int _is_flying {};
   int _is_foliage {};
   int _is_food {};
+  int _is_four_leaf_clover {};
   int _is_fungus {};
   int _is_fungus_edible {};
   int _is_fungus_poison {};
@@ -482,6 +483,8 @@ private:
   int _is_helmet {};
   int _is_herbivore {};
   int _is_hittable {};
+  int _is_holy {};
+  int _is_holy_water {};
   int _is_humanoid {};
   int _is_iceman {};
   int _is_immune_to_acid {};
@@ -669,10 +672,7 @@ private:
   int _is_unused_flag115 {};
   int _is_unused_flag116 {};
   int _is_unused_flag117 {};
-  int _is_unused_flag118 {};
-  int _is_unused_flag119 {};
   int _is_unused_flag12 {};
-  int _is_unused_flag120 {};
   int _is_unused_flag124 {};
   int _is_unused_flag13 {};
   int _is_unused_flag14 {};
@@ -1801,6 +1801,7 @@ public:
   int is_flying(void) const;
   int is_foliage(void) const;
   int is_food(void) const;
+  int is_four_leaf_clover(void) const;
   int is_fungus_edible(void) const;
   int is_fungus_poison(void) const;
   int is_fungus(void) const;
@@ -1828,6 +1829,8 @@ public:
   int is_helmet(void) const;
   int is_herbivore(void) const;
   int is_hittable(void) const;
+  int is_holy(void) const;
+  int is_holy_water(void) const;
   int is_humanoid(void) const;
   int is_iceman(void) const;
   int is_immune_to_acid(void) const;
@@ -2012,10 +2015,7 @@ public:
   int is_unused_flag115(void) const;
   int is_unused_flag116(void) const;
   int is_unused_flag117(void) const;
-  int is_unused_flag118(void) const;
-  int is_unused_flag119(void) const;
   int is_unused_flag11(void) const;
-  int is_unused_flag120(void) const;
   int is_unused_flag124(void) const;
   int is_unused_flag12(void) const;
   int is_unused_flag13(void) const;
@@ -2566,6 +2566,7 @@ public:
   void is_flying_set(int v);
   void is_foliage_set(int v);
   void is_food_set(int v);
+  void is_four_leaf_clover_set(int v);
   void is_fungus_edible_set(int v);
   void is_fungus_poison_set(int v);
   void is_fungus_set(int v);
@@ -2593,6 +2594,8 @@ public:
   void is_helmet_set(int v);
   void is_herbivore_set(int v);
   void is_hittable_set(int v);
+  void is_holy_set(int v);
+  void is_holy_water_set(int v);
   void is_humanoid_set(int v);
   void is_iceman_set(int v);
   void is_immune_to_acid_set(int v);
@@ -2777,10 +2780,7 @@ public:
   void is_unused_flag115_set(int v);
   void is_unused_flag116_set(int v);
   void is_unused_flag117_set(int v);
-  void is_unused_flag118_set(int v);
-  void is_unused_flag119_set(int v);
   void is_unused_flag11_set(int v);
-  void is_unused_flag120_set(int v);
   void is_unused_flag124_set(int v);
   void is_unused_flag12_set(int v);
   void is_unused_flag13_set(int v);

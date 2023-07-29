@@ -1476,7 +1476,7 @@ def init_tiles_16x16_main():
         "projectile_rock",
         "rock",
         "rock2",
-        "",
+        "holy_water",
         ############################################################
         "sword_wood",
         "sword_rusty",

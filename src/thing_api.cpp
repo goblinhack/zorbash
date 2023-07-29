@@ -783,20 +783,20 @@ int Thing::is_unused_flag117(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag117());
 }
-int Thing::is_unused_flag118(void)
+int Thing::is_holy(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag118());
+  return (tp()->is_holy());
 }
-int Thing::is_unused_flag119(void)
+int Thing::is_holy_water(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag119());
+  return (tp()->is_holy_water());
 }
-int Thing::is_unused_flag120(void)
+int Thing::is_four_leaf_clover(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag120());
+  return (tp()->is_four_leaf_clover());
 }
 int Thing::is_skeleton(void)
 {

@@ -46,7 +46,7 @@ bool Level::is_obs_spawn(point p, Tpp it)
 void Thing::spawned_newborn(Thingp it)
 {
   TRACE_NO_INDENT();
-  dbg("Spawned thing %s", it->to_short_string().c_str());
+  dbg("Spawned newborn thing %s", it->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   it->inherit_from(this);
@@ -74,6 +74,8 @@ void Thing::spawned_newborn(Thingp it)
   // Or if something we spawned at needs to react to us
   // If a tick is pending there should be no need, as we will do a location check.
   //
+  dbg("Spawned newborn thing location checks %s", it->to_short_string().c_str());
+  TRACE_AND_INDENT();
   it->location_check_me();
 }
 
@@ -633,6 +635,10 @@ Thingp Thing::spawn_at(const std::string &what, point p)
   } else {
     it = level->thing_new(what, p);
   }
+
+  dbg("Spawned thing at: %s", what.c_str());
+  TRACE_AND_INDENT();
+
   if (it) { spawned_newborn(it); }
 
   return it;

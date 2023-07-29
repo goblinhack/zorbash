@@ -191,6 +191,8 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &gfx_targeted_p
 
   if (projectile->is_fire()) { level->line_set_all_on_fire(curr_at, target->curr_at, 0, "projectile"); }
 
+  if (projectile->is_holy()) { level->line_set_all_undead_on_fire(curr_at, target->curr_at, 0, "projectile"); }
+
   return projectile;
 }
 

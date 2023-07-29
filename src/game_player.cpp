@@ -525,9 +525,18 @@ void Game::place_player(void)
         // d->dead("killed");
       }
       // level->thing_new("golem_flesh", point(x + 1, y + 3));
+      if (0) {
+        level->thing_new("skeleton", point(x, y + 3));
+        auto h = level->thing_new("holy_water", point(x, y + 2));
+        t->carry(h, carry_options);
+      }
+      if (0) {
+        level->thing_new("skeleton", point(x, y + 3));
+        auto w = level->thing_new("potion_health", point(x, y));
+        t->carry(w, carry_options);
+      }
       IF_DEBUG2
       {
-        level->thing_new("skeleton", point(x + 3, y + 1));
         if (0) {
           level->thing_new("lava", point(x + 1, y));
           level->thing_new("lava", point(x + 2, y));

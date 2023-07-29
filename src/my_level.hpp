@@ -1363,7 +1363,9 @@ public:
 
   std::vector< point >  cursor_path_draw_line_attempt(Thingp, point start, point end, int);
   std::vector< Thingp > line(const point s, const point e, size_t max_elems = 0);
-  void                  line_set_all_on_fire(const point s, const point e, size_t max_elems, const std::string &why);
+
+  void line_set_all_on_fire(const point s, const point e, size_t max_elems, const std::string &why);
+  void line_set_all_undead_on_fire(const point s, const point e, size_t max_elems, const std::string &why);
 
   void scan(Thingp me, struct FovMap_ *fov_curr, struct FovMap_ *fov_ever, int pov_x, int pov_y,
             int   distance, // Polar distance from POV.

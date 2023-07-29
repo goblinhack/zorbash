@@ -221,6 +221,7 @@ wchar_t unicode_alias_to_char(const std::string &i);
 #define UNICODE_0x8c                 /* 140 */ 140 //
 #define UNICODE_0x8d                 /* 141 */ 141 //
 #define UNICODE_0x8e                 /* 142 */ 142 //
+#define UNICODE_THREE_DOTS           UNICODE_0x8e
 #define UNICODE_0x8f                 /* 143 */ 143 //
 #define UNICODE_0x90                 /* 144 */ 144 //	up_arrow
 #define UNICODE_UP_ARROW             UNICODE_0x90
@@ -277,6 +278,7 @@ wchar_t unicode_alias_to_char(const std::string &i);
 #define UNICODE_0xb8                 /* 184 */ L'¸'
 #define UNICODE_0xb9                 /* 185 */ L'¹'
 #define UNICODE_0xba                 /* 186 */ L'º'
+#define UNICODE_HALO                 UNICODE_0xba
 #define UNICODE_0xbb                 /* 187 */ L'»'
 #define UNICODE_0xbc                 /* 188 */ L'¼'
 #define UNICODE_0xbd                 /* 189 */ L'½'

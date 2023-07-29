@@ -342,6 +342,16 @@ bool Thing::possible_to_attack(const Thingp victim)
       return true;
     }
 
+    if (is_potion()) {
+      if (is_debug_type()) { dbg("Can attack as laser %s", victim->to_short_string().c_str()); }
+      return true;
+    }
+
+    if (is_holy_water()) {
+      if (is_debug_type()) { dbg("Can attack as laser %s", victim->to_short_string().c_str()); }
+      return true;
+    }
+
     if (is_projectile()) {
       if (is_debug_type()) { dbg("Can attack as projectile %s", victim->to_short_string().c_str()); }
       return true;
@@ -436,6 +446,8 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
   }
 
   if (attack_options->thrown) {
+    dbg("Throw attack on %s", victim->to_short_string().c_str());
+
     //
     // Allow things like horseshoes to attack, which would not normally be themselves...
     //
@@ -443,18 +455,27 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
       //
       // Can't throw darts at ghosts
       //
-      return false;
+      if (! is_holy_water()) {
+        dbg("Can't attack ethereal things: %s", victim->to_short_string().c_str());
+        return false;
+      }
     }
 
     //
     // Don't allow attacking of the exit!
     //
-    if (victim->is_critical_to_level()) { return false; }
+    if (victim->is_critical_to_level()) {
+      dbg("Can't attack critical to level things: %s", victim->to_short_string().c_str());
+      return false;
+    }
 
     //
     // Don't attack things like sewers!
     //
-    if (! victim->is_attackable_by_player() && ! victim->is_attackable_by_monst()) { return false; }
+    if (! victim->is_attackable_by_player() && ! victim->is_attackable_by_monst()) {
+      dbg("Can't attack, not attackable: %s", victim->to_short_string().c_str());
+      return false;
+    }
   } else {
     //
     // Check this thing can attack

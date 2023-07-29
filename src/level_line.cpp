@@ -79,3 +79,20 @@ void Level::line_set_all_on_fire(const point s, const point e, size_t max_elems,
     t->on_fire_set(why);
   }
 }
+
+/*
+ * Set everthing that is in the way on fire.
+ */
+void Level::line_set_all_undead_on_fire(const point s, const point e, size_t max_elems, const std::string &why)
+{
+  TRACE_NO_INDENT();
+
+  for (auto t : line(s, e, max_elems)) {
+    //
+    // Don't set fire to the location of the firer.
+    //
+    if (t->curr_at == s) { continue; }
+
+    if (t->is_undead()) { t->on_fire_set(why); }
+  }
+}

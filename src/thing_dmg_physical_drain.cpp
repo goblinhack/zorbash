@@ -61,7 +61,7 @@ int Thing::on_owner_receive_dmg_stamina(Thingp owner, Thingp hitter, Thingp real
 
     if (mod == "me") { mod = name(); }
 
-    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
+    dbg("Call %s.%s(%s, %s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
         owner->to_short_string().c_str(), hitter->to_short_string().c_str(), real_hitter->to_short_string().c_str(),
         damage);
 

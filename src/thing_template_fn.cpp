@@ -546,6 +546,7 @@ int Tp::is_floor(void) const { return _is_floor; }
 int Tp::is_flying(void) const { return _is_flying; }
 int Tp::is_foliage(void) const { return _is_foliage; }
 int Tp::is_food(void) const { return _is_food; }
+int Tp::is_four_leaf_clover(void) const { return _is_four_leaf_clover; }
 int Tp::is_fungus_edible(void) const { return _is_fungus_edible; }
 int Tp::is_fungus_poison(void) const { return _is_fungus_poison; }
 int Tp::is_fungus(void) const { return _is_fungus; }
@@ -573,6 +574,8 @@ int Tp::is_heavy(void) const { return _is_heavy; }
 int Tp::is_helmet(void) const { return _is_helmet; }
 int Tp::is_herbivore(void) const { return _is_herbivore; }
 int Tp::is_hittable(void) const { return _is_hittable; }
+int Tp::is_holy(void) const { return _is_holy; }
+int Tp::is_holy_water(void) const { return _is_holy_water; }
 int Tp::is_humanoid(void) const { return _is_humanoid; }
 int Tp::is_iceman(void) const { return _is_iceman; }
 int Tp::is_immune_to_acid(void) const { return _is_immune_to_acid; }
@@ -757,10 +760,7 @@ int Tp::is_unused_flag114(void) const { return _is_unused_flag114; }
 int Tp::is_unused_flag115(void) const { return _is_unused_flag115; }
 int Tp::is_unused_flag116(void) const { return _is_unused_flag116; }
 int Tp::is_unused_flag117(void) const { return _is_unused_flag117; }
-int Tp::is_unused_flag118(void) const { return _is_unused_flag118; }
-int Tp::is_unused_flag119(void) const { return _is_unused_flag119; }
 int Tp::is_unused_flag11(void) const { return _is_unused_flag11; }
-int Tp::is_unused_flag120(void) const { return _is_unused_flag120; }
 int Tp::is_unused_flag12(void) const { return _is_unused_flag12; }
 int Tp::is_unused_flag13(void) const { return _is_unused_flag13; }
 int Tp::is_unused_flag142(void) const { return _is_unused_flag142; }
@@ -1310,6 +1310,7 @@ void Tp::is_floor_set(int v) { _is_floor = v; }
 void Tp::is_flying_set(int v) { _is_flying = v; }
 void Tp::is_foliage_set(int v) { _is_foliage = v; }
 void Tp::is_food_set(int v) { _is_food = v; }
+void Tp::is_four_leaf_clover_set(int v) { _is_four_leaf_clover = v; }
 void Tp::is_fungus_edible_set(int v) { _is_fungus_edible = v; }
 void Tp::is_fungus_poison_set(int v) { _is_fungus_poison = v; }
 void Tp::is_fungus_set(int v) { _is_fungus = v; }
@@ -1337,6 +1338,8 @@ void Tp::is_heavy_set(int v) { _is_heavy = v; }
 void Tp::is_helmet_set(int v) { _is_helmet = v; }
 void Tp::is_herbivore_set(int v) { _is_herbivore = v; }
 void Tp::is_hittable_set(int v) { _is_hittable = v; }
+void Tp::is_holy_set(int v) { _is_holy = v; }
+void Tp::is_holy_water_set(int v) { _is_holy_water = v; }
 void Tp::is_humanoid_set(int v) { _is_humanoid = v; }
 void Tp::is_iceman_set(int v) { _is_iceman = v; }
 void Tp::is_immune_to_acid_set(int v) { _is_immune_to_acid = v; }
@@ -1521,10 +1524,7 @@ void Tp::is_unused_flag114_set(int v) { _is_unused_flag114 = v; }
 void Tp::is_unused_flag115_set(int v) { _is_unused_flag115 = v; }
 void Tp::is_unused_flag116_set(int v) { _is_unused_flag116 = v; }
 void Tp::is_unused_flag117_set(int v) { _is_unused_flag117 = v; }
-void Tp::is_unused_flag118_set(int v) { _is_unused_flag118 = v; }
-void Tp::is_unused_flag119_set(int v) { _is_unused_flag119 = v; }
 void Tp::is_unused_flag11_set(int v) { _is_unused_flag11 = v; }
-void Tp::is_unused_flag120_set(int v) { _is_unused_flag120 = v; }
 void Tp::is_unused_flag12_set(int v) { _is_unused_flag12 = v; }
 void Tp::is_unused_flag13_set(int v) { _is_unused_flag13 = v; }
 void Tp::is_unused_flag142_set(int v) { _is_unused_flag142 = v; }

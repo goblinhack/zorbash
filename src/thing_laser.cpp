@@ -285,6 +285,8 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targeted_laser, T
           // Set everything in the way on fire.
           //
           if (laser->is_fire()) { level->line_set_all_on_fire(curr_at, target->curr_at, 0, "laser"); }
+
+          if (laser->is_holy()) { level->line_set_all_undead_on_fire(curr_at, target->curr_at, 0, "laser"); }
         }
 
         if (item) { item->on_targeted(target->curr_at); }
@@ -355,6 +357,8 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targeted_laser, T
         // Set everything in the way on fire.
         //
         if (laser->is_fire()) { level->line_set_all_on_fire(curr_at, target->curr_at, 0, "laser"); }
+
+        if (laser->is_holy()) { level->line_set_all_undead_on_fire(curr_at, target->curr_at, 0, "laser"); }
       }
 
       if (item) { item->on_targeted(target->curr_at); }
