@@ -702,6 +702,7 @@ public:
   void wid_thing_info_add_general_info(WidPopup *w, Thingp t);
   void wid_thing_info_add_gold_value(WidPopup *w, Thingp t);
   void wid_thing_info_add_health(WidPopup *w, Thingp t);
+  void wid_thing_info_add_immunity(WidPopup *w, Thingp t);
   void wid_thing_info_add_jump_distance(WidPopup *w, Thingp t);
   void wid_thing_info_add_move_speed(WidPopup *w, Thingp t);
   void wid_thing_info_add_noise(WidPopup *w, Thingp t);

@@ -75,6 +75,7 @@ void tp_fixup(void)
     }
 
     if (tp->is_ethereal()) {
+      tp->is_immune_to_paralysis_set(true);
       tp->is_immune_to_poison_set(true);
       tp->is_immune_to_spiderwebs_set(true);
       tp->is_immune_to_necrosis_set(true);

@@ -306,6 +306,7 @@ std::initializer_list< std::string > tps = {
     "dagger_carry",
     "dagger_swing",
     "dart",
+    "dart_paralysis",
     "dart_metal",
     "dart_poison",
     "death_hornet",

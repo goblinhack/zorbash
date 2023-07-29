@@ -10,6 +10,11 @@
 #include "my_string.hpp"
 #include "my_thing.hpp"
 
+void Thing::paralysis_tick(void)
+{
+  if (paralysis_count() > 0) { paralysis_count_decr(); }
+}
+
 int Thing::paralysis_count(void)
 {
   TRACE_NO_INDENT();
@@ -31,26 +36,36 @@ int Thing::paralysis_count_decr(int v)
 {
   TRACE_NO_INDENT();
   new_aip();
-  return (aip()->paralysis_count -= v);
+  aip()->paralysis_count -= v;
+  if (aip()->paralysis_count < 0) { aip()->paralysis_count = 0; }
+  return aip()->paralysis_count;
 }
 
 int Thing::paralysis_count_incr(int v)
 {
   TRACE_NO_INDENT();
+  if (is_immune_to_paralysis()) { return 0; }
   new_aip();
-  return (aip()->paralysis_count += v);
+  aip()->paralysis_count += v;
+  if (aip()->paralysis_count < 0) { aip()->paralysis_count = 0; }
+  return aip()->paralysis_count;
 }
 
 int Thing::paralysis_count_decr(void)
 {
   TRACE_NO_INDENT();
   new_aip();
-  return (aip()->paralysis_count--);
+  aip()->paralysis_count--;
+  if (aip()->paralysis_count < 0) { aip()->paralysis_count = 0; }
+  return aip()->paralysis_count;
 }
 
 int Thing::paralysis_count_incr(void)
 {
   TRACE_NO_INDENT();
+  if (is_immune_to_paralysis()) { return 0; }
   new_aip();
-  return (aip()->paralysis_count++);
+  aip()->paralysis_count++;
+  if (aip()->paralysis_count < 0) { aip()->paralysis_count = 0; }
+  return aip()->paralysis_count;
 }

@@ -2,6 +2,8 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_thing.hpp"
 
 //
@@ -29,4 +31,42 @@ void Thing::score_add(Thingp victim)
       score_incr(victim->health_max());
     }
   }
+}
+
+////////////////////////////////////////////////////////////////////////////
+// score
+////////////////////////////////////////////////////////////////////////////
+int Thing::score(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) { return (infop()->score); }
+  return 0;
+}
+
+int Thing::score_set(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  new_infop();
+  return infop()->score = v;
+}
+
+int Thing::score_incr(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  new_infop();
+  return infop()->score += v;
+}
+
+int Thing::score_decr(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  new_infop();
+  infop()->score -= v;
+
+  if (infop()->score < 0) { infop()->score = 0; }
+
+  return infop()->score;
 }

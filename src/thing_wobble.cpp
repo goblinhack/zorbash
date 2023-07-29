@@ -10,7 +10,7 @@
 
 void Thing::wobble(float wobble)
 {
-  if (is_frozen || is_burnt || is_dead) { return; }
+  if ((paralysis_count() > 0) || is_frozen || is_burnt || is_dead) { return; }
 
   if (non_pcg_random_range(0, 100) < 50) {
     wobble_set(wobble);

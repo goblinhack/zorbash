@@ -494,6 +494,7 @@ private:
   int _is_immune_to_magic_drain {};
   int _is_immune_to_necrosis {};
   int _is_immune_to_negation {};
+  int _is_immune_to_paralysis {};
   int _is_immune_to_poison {};
   int _is_immune_to_spiderwebs {};
   int _is_immune_to_stamina_drain {};
@@ -671,7 +672,6 @@ private:
   int _is_unused_flag114 {};
   int _is_unused_flag115 {};
   int _is_unused_flag116 {};
-  int _is_unused_flag117 {};
   int _is_unused_flag12 {};
   int _is_unused_flag124 {};
   int _is_unused_flag13 {};
@@ -1840,6 +1840,7 @@ public:
   int is_immune_to_magic_drain(void) const;
   int is_immune_to_necrosis(void) const;
   int is_immune_to_negation(void) const;
+  int is_immune_to_paralysis(void) const;
   int is_immune_to_poison(void) const;
   int is_immune_to_spiderwebs(void) const;
   int is_immune_to_stamina_drain(void) const;
@@ -2014,7 +2015,6 @@ public:
   int is_unused_flag114(void) const;
   int is_unused_flag115(void) const;
   int is_unused_flag116(void) const;
-  int is_unused_flag117(void) const;
   int is_unused_flag11(void) const;
   int is_unused_flag124(void) const;
   int is_unused_flag12(void) const;
@@ -2605,6 +2605,7 @@ public:
   void is_immune_to_magic_drain_set(int v);
   void is_immune_to_necrosis_set(int v);
   void is_immune_to_negation_set(int v);
+  void is_immune_to_paralysis_set(int v);
   void is_immune_to_poison_set(int v);
   void is_immune_to_spiderwebs_set(int v);
   void is_immune_to_stamina_drain_set(int v);
@@ -2779,7 +2780,6 @@ public:
   void is_unused_flag114_set(int v);
   void is_unused_flag115_set(int v);
   void is_unused_flag116_set(int v);
-  void is_unused_flag117_set(int v);
   void is_unused_flag11_set(int v);
   void is_unused_flag124_set(int v);
   void is_unused_flag12_set(int v);

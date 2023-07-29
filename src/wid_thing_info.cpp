@@ -271,6 +271,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     wid_thing_info_add_move_speed(wid_popup_window, t);
     wid_thing_info_add_shove_strength(wid_popup_window, t);
     wid_thing_info_add_jump_distance(wid_popup_window, t);
+    wid_thing_info_add_immunity(wid_popup_window, t);
     if (t->is_alive_monst()) { wid_popup_window->log(UI_LOGGING_EMPTY_LINE); }
     wid_thing_info_add_charge_count(wid_popup_window, t);
     wid_thing_info_add_danger_level(wid_popup_window, t);
@@ -714,6 +715,49 @@ void Game::wid_thing_info_add_spell_cost(WidPopup *w, Thingp t)
   if (cost > 0) {
     snprintf(tmp2, sizeof(tmp2) - 1, "%d", t->spell_cost());
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Spell cost %11s", tmp2);
+    w->log(tmp);
+  }
+}
+
+void Game::wid_thing_info_add_immunity(WidPopup *w, Thingp t)
+{
+  TRACE_AND_INDENT();
+  char tmp[ MAXSHORTSTR ];
+
+  if (t->is_immune_to_cold()) {
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Cold");
+    w->log(tmp);
+  }
+  if (t->is_immune_to_fire()) {
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Fire");
+    w->log(tmp);
+  }
+  if (t->is_immune_to_magic_drain()) {
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Draining");
+    w->log(tmp);
+  }
+  if (t->is_immune_to_necrosis()) {
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Necrosis");
+    w->log(tmp);
+  }
+  if (t->is_immune_to_negation()) {
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Negation");
+    w->log(tmp);
+  }
+  if (t->is_immune_to_poison()) {
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Poison");
+    w->log(tmp);
+  }
+  if (t->is_immune_to_stamina_drain()) {
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Stamina drain");
+    w->log(tmp);
+  }
+  if (t->is_immune_to_teleport_attack()) {
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Teleport att");
+    w->log(tmp);
+  }
+  if (t->is_immune_to_water()) {
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Water");
     w->log(tmp);
   }
 }

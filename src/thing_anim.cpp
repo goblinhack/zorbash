@@ -619,6 +619,15 @@ void Thing::animate(void)
     }
   }
 
+  if (tile_curr && paralysis_count()) {
+    if (is_monst() || is_player()) {
+#ifdef DEBUG_ANIM
+      if (debug || is_debug_type()) { con("Animate: paralysis"); }
+#endif
+      return;
+    }
+  }
+
   if (tile_curr && is_frozen) {
     if (is_monst() || is_player()) {
 #ifdef DEBUG_ANIM

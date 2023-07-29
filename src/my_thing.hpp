@@ -1614,6 +1614,7 @@ public:
   int is_immune_to_magic_drain(void);
   int is_immune_to_necrosis(void);
   int is_immune_to_negation(void);
+  int is_immune_to_paralysis(void);
   int is_immune_to_poison(void);
   int is_immune_to_spiderwebs(void);
   int is_immune_to_stamina_drain(void);
@@ -1787,7 +1788,6 @@ public:
   int is_unused_flag114(void);
   int is_unused_flag115(void);
   int is_unused_flag116(void);
-  int is_unused_flag117(void);
   int is_unused_flag11(void);
   int is_unused_flag12(void);
   int is_unused_flag13(void);
@@ -2122,6 +2122,9 @@ public:
   int range_max(void);
   int rarity(void);
   int resurrect_when(void);
+  int score_decr(int);
+  int score_incr(int);
+  int score_set(int);
   int score(void);
   int shove_bonus_decr(int);
   int shove_bonus_decr(void);
@@ -2644,6 +2647,7 @@ public:
   void achieve_goals_in_death(void);
   void achieve_goals_in_life(void);
   void acid_tick(void);
+  void paralysis_tick(void);
   void add_attacker(Thingp attacker, bool is_recursing = false);
   void add_avoid(Thingp attacker);
   void add_enemy(Thingp attacker, bool is_recursing = false);
@@ -2904,9 +2908,6 @@ public:
   void resting(void);
   void resurrect_tick(void);
   void score_add(Thingp victim = nullptr);
-  void score_decr(int);
-  void score_incr(int);
-  void score_set(int);
   void secret_door_tick(void);
   void show_botcon_description(void);
   void skill_activate(Thingp what);

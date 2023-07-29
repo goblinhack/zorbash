@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- Need paralysed debuff                                                                                                                        -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -187,8 +188,8 @@ Content:
 - 52 x food
 - 24 x treasure
 - 15 x weapons
+- 15 x items
 - 14 x spells
-- 14 x items
 - 12 x buffs
 - 11 x skills
 - 6 x staffs

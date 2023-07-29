@@ -81,6 +81,11 @@ bool Thing::is_stuck_check(void)
   //
   if (is_ethereal()) { return false; }
 
+  //
+  // Paralysed
+  //
+  if (paralysis_count() > 0) { return true; }
+
   if (! is_monst() && ! is_player()) { return false; }
 
   if (is_frozen) { return true; }

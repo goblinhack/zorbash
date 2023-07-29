@@ -1475,8 +1475,8 @@ def init_tiles_16x16_main():
         "",
         "",
         "",
-        "",
-        "",
+        "dart_paralysis",
+        "projectile_dart_paralysis",
         ############################################################
         "sword_wood",
         "sword_rusty",

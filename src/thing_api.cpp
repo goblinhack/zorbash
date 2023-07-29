@@ -778,10 +778,10 @@ int Thing::is_unused_flag116(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag116());
 }
-int Thing::is_unused_flag117(void)
+int Thing::is_immune_to_paralysis(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag117());
+  return (tp()->is_immune_to_paralysis());
 }
 int Thing::is_holy(void)
 {
@@ -3784,42 +3784,6 @@ void Thing::submerged_offset_set(int v)
   TRACE_NO_INDENT();
   new_infop();
   infop()->submerged_offset = v;
-}
-
-////////////////////////////////////////////////////////////////////////////
-// score
-////////////////////////////////////////////////////////////////////////////
-int Thing::score(void)
-{
-  TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->score); }
-  return 0;
-}
-
-void Thing::score_set(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
-  new_infop();
-  infop()->score = v;
-}
-
-void Thing::score_incr(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
-  new_infop();
-  infop()->score += v;
-}
-
-void Thing::score_decr(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
-  new_infop();
-  infop()->score -= v;
-
-  if (infop()->score < 0) { infop()->score = 0; }
 }
 
 ////////////////////////////////////////////////////////////////////////////

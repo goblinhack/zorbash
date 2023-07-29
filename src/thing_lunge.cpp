@@ -11,7 +11,7 @@ void Thing::lunge(point to)
 {
   if (is_sleeping) { return; }
 
-  if (is_frozen || is_burnt || is_dead) { return; }
+  if ((paralysis_count() > 0) || is_frozen || is_burnt || is_dead) { return; }
 
   if (! is_able_to_lunge()) { return; }
 
