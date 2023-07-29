@@ -58,6 +58,14 @@ bool Thing::will_avoid_monst(const Thingp it)
   }
 
   //
+  // It's really stuck?
+  //
+  if (it->paralysis_count()) {
+    dbg2("Avoid %s? no it's paralysis", it->to_short_string().c_str());
+    return false;
+  }
+
+  //
   // It's stuck?
   //
   if (it->stuck_count() > 5) {
@@ -143,6 +151,11 @@ bool Thing::will_avoid_monst(const point p)
     // Not moving?
     //
     if (it->idle_count() > 5) { continue; }
+
+    //
+    // It's really stuck?
+    //
+    if (it->paralysis_count()) { continue; }
 
     //
     // It's stuck?

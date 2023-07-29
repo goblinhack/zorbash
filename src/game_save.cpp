@@ -266,6 +266,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingAip & > const my)
   out << bits(my.t->wander_dest);
   out << bits(my.t->idle_count);
   out << bits(my.t->stuck_count);
+  out << bits(my.t->paralysis_count);
   return out;
 }
 

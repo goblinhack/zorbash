@@ -2101,6 +2101,12 @@ public:
   int on_receiving_dmg_stat_str(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_water(Thingp hitter, Thingp real_hitter, int damage);
   int owned_count(void);
+  int paralysis_count_decr(int);
+  int paralysis_count_decr(void);
+  int paralysis_count_incr(int);
+  int paralysis_count_incr(void);
+  int paralysis_count_set(int);
+  int paralysis_count(void);
   int poisoned_amount_decr(int);
   int poisoned_amount_decr(void);
   int poisoned_amount_incr(int);

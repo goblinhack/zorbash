@@ -1134,11 +1134,9 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 if (d100() < aggression_pct()) {
                   if (possible_to_attack(it)) {
                     int desirable_target = 0;
-                    if (it->is_sleeping) {
-                      desirable_target += 20;
-                    } else if (it->stuck_count()) {
-                      desirable_target += 20;
-                    }
+                    if (it->paralysis_count()) { desirable_target += 100; }
+                    if (it->is_sleeping) { desirable_target += 20; }
+                    if (it->stuck_count()) { desirable_target += 20; }
                     GOAL_ADD(GOAL_PRIO_MED, desirable_target + aggression_pct() + -health_diff - goal_penalty,
                              "can-attack-monst-unprovoked", it);
                     //

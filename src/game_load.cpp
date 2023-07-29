@@ -288,6 +288,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingAip & > my)
   in >> bits(my.t->wander_dest);
   in >> bits(my.t->idle_count);
   in >> bits(my.t->stuck_count);
+  in >> bits(my.t->paralysis_count);
   return in;
 }
 

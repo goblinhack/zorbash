@@ -342,8 +342,9 @@ public:
   AgeMap interrupt_map;    // If we've ever interrupt this tile and when
   Dmap   dmap_can_see_old; // Used for detecting changes in dmaps
 
-  uint8_t idle_count  = {}; // How long we have not moved
-  uint8_t stuck_count = {}; // How long we have not moved due to being stuck
+  uint8_t idle_count      = {}; // How long we have not moved
+  uint8_t stuck_count     = {}; // How long we have not moved due to being stuck
+  uint8_t paralysis_count = {}; // How long we have not moved due to paralysis
 
   Dmap dmap_can_see; // What the monster can reach during AI
 

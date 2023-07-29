@@ -58,9 +58,15 @@ bool Thing::thing_check_for_heat_dmg(void)
         }
       }
     } else {
-      if (stuck_count() || idle_count()) {
+      if (paralysis_count() || stuck_count() || idle_count()) {
+        //
+        // If stuck, you're going to get burnt.
+        //
         hit = true;
       } else {
+        //
+        // Give the thing a chance
+        //
         hit = (d100() < 70);
       }
     }

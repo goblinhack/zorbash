@@ -10,7 +10,6 @@
 <!--                                                                                                                                              -->
 <!-- Skills                                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
-<!-- - skill, dodge                                                                                                                               -->
 <!-- - skill, instakill, once per level                                                                                                           -->
 <!-- - skill, heroic charge, rush enemy                                                                                                           -->
 <!-- - skill, guaranteed hit, but you have no defense in the next move                                                                            -->
@@ -187,11 +186,11 @@ Content:
 - 108 x monsters
 - 52 x food
 - 24 x treasure
-- 14 x weapons
+- 15 x weapons
 - 14 x spells
 - 14 x items
 - 12 x buffs
-- 9 x skills
+- 11 x skills
 - 6 x staffs
 - 6 x shield
 - 6 x boots

@@ -1302,7 +1302,14 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         //
         // If hitting a rock with a damaged weapon, give more feedback as to why there is no damage.
         //
-        if (stuck_count()) {
+        if (paralysis_count()) {
+          msg("%%fg=orange$You find it impossible to move and inflict no damage on %s.%%fg=reset$",
+              victim->text_the().c_str());
+          //
+          // This popup is handy when you have secondary attacks to give some feedback.
+          //
+          popup("Paralysis, no damage!");
+        } else if (stuck_count()) {
           msg("%%fg=orange$You find it hard to move and inflict no damage on %s.%%fg=reset$",
               victim->text_the().c_str());
           //
@@ -1414,6 +1421,10 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
       } else if (victim->is_frozen) {
         //
         // If frozen, it cannot avoid the hits.
+        //
+      } else if (victim->paralysis_count()) {
+        //
+        // If paralysis, it cannot avoid the hits.
         //
       } else if (victim->stuck_count()) {
         //

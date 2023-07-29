@@ -9,8 +9,8 @@ def tp_init(name, text_long_name, text_short_name):
     global self
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.stat_def_bonus(self, -2)
     my.stat_att_bonus(self, 2)
+    my.stat_def_bonus(self, -2)
     my.text_description_very_short(self, "IronDef1")
     # end sort marker
     skill_power_attack0.tp_init(self)

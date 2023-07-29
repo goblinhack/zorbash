@@ -101,6 +101,7 @@ PyObject *thing_friend(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_followers(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_idle_count(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_noise(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_get_paralysis_count(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_stuck_count(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_ascii_color_bg_unchanged_by_lights(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_ascii_color_fg_unchanged_by_lights(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -724,6 +725,8 @@ PyObject *thing_noise_on_moving(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *thing_noise_on_open_or_close(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_noise_set(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_on_death_is_stone(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_paralysis_count_decr(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_paralysis_count_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_perma_death(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_poisoned_amount_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_poisoned_amount_get(PyObject *obj, PyObject *args, PyObject *keywds);

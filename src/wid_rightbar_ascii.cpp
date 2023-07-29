@@ -148,7 +148,16 @@ bool wid_rightbar_ascii_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
   }
 
-  if (player->stuck_count() > 1) {
+  if (player->paralysis_count()) {
+    y_at++;
+    TRACE_NO_INDENT();
+    auto  w  = wid_new_square_button(wid_rightbar, "(Paralysis)");
+    point tl = make_point(0, y_at);
+    point br = make_point(width - 1, y_at);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "(Paralysis)");
+    wid_set_style(w, UI_WID_STYLE_RED);
+  } else if (player->stuck_count() > 1) {
     y_at++;
     TRACE_NO_INDENT();
     auto  w  = wid_new_square_button(wid_rightbar, "(Stuck)");
@@ -1045,8 +1054,9 @@ bool wid_rightbar_ascii_create(void)
       }
     }
 
-    if (player->is_on_fire() || player->stuck_count() || player->is_sleeping || player->is_frozen
-        || (player->stamina() < player->stamina_max() / 2) || (player->health() < player->health_max() / 2)) {
+    if (player->is_on_fire() || player->paralysis_count() || player->stuck_count() || player->is_sleeping
+        || player->is_frozen || (player->stamina() < player->stamina_max() / 2)
+        || (player->health() < player->health_max() / 2)) {
       {
         TRACE_AND_INDENT();
         y_at++;
@@ -1103,7 +1113,21 @@ bool wid_rightbar_ascii_create(void)
         wid_set_text(w, "Sleeping");
         wid_update(w);
       }
-      if (player->stuck_count()) {
+      if (player->paralysis_count()) {
+        y_at++;
+        TRACE_AND_INDENT();
+        auto  w  = wid_new_square_button(wid_rightbar, "state");
+        point tl = make_point(0, y_at);
+        point br = make_point(width - 1, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_TEXT_FG, RED);
+        wid_set_mode(w, WID_MODE_NORMAL);
+        wid_set_color(w, WID_COLOR_TEXT_FG, RED);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Paralysis!");
+        wid_update(w);
+      } else if (player->stuck_count()) {
         y_at++;
         TRACE_AND_INDENT();
         auto  w  = wid_new_square_button(wid_rightbar, "state");
