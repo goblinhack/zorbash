@@ -134,6 +134,16 @@ bool Thing::eat(Thingp victim)
 
   if (attack_eater() && is_edible(victim)) {
     //
+    // Can't eat players until they are dead.
+    //
+    if (victim->is_player() && ! victim->is_dead_or_dying()) { return false; }
+
+    //
+    // Can't eat monsters until they are dead.
+    //
+    if (victim->is_monst() && ! victim->is_dead_or_dying()) { return false; }
+
+    //
     // Allow monsters to eat things in bite sized chunks so the food does not vanish too fast.
     //
     auto bite = consume_per_bite_amount();

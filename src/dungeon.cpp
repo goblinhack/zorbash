@@ -4619,6 +4619,7 @@ void dungeon_test(void)
   auto dungeon_walk_order_level_no = 0;
 
   new_level->create(world_at, grid_at, dungeon_seed, difficulty_depth, dungeon_walk_order_level_no);
+  new_level->tick();
   delete new_level;
 
   if (! dungeon_seed--) { DIE("end of test"); }
