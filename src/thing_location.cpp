@@ -134,6 +134,7 @@ void Thing::location_check(Thingp filter_to)
   }
 
   gas_poison_tick();
+  gas_healing_tick();
 
   if (! is_able_to_change_levels()) { return; }
 

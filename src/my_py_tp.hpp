@@ -15,6 +15,7 @@ PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_set_fire_to_things_around_me(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_things_around_me(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *spawn_gas_healing_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_owned_thing_at_my_position(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -441,6 +442,7 @@ TP_SET_PROTO(is_food)
 TP_SET_PROTO(is_four_leaf_clover)
 TP_SET_PROTO(is_fungus)
 TP_SET_PROTO(is_fungus_edible)
+TP_SET_PROTO(is_fungus_healing)
 TP_SET_PROTO(is_fungus_poison)
 TP_SET_PROTO(is_fungus_withered)
 TP_SET_PROTO(is_gas_blocker)
@@ -658,7 +660,6 @@ TP_SET_PROTO(is_unused_flag112)
 TP_SET_PROTO(is_unused_flag113)
 TP_SET_PROTO(is_unused_flag114)
 TP_SET_PROTO(is_unused_flag115)
-TP_SET_PROTO(is_unused_flag116)
 TP_SET_PROTO(is_unused_flag12)
 TP_SET_PROTO(is_unused_flag13)
 TP_SET_PROTO(is_unused_flag14)

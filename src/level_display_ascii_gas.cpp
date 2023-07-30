@@ -19,20 +19,36 @@ void Level::display_ascii_gas(point tl, point br, int16_t minx, int16_t miny, in
     for (auto x = minx; x < maxx - 1; x++) {
 
       int intensity = is_gas_poison(x, y);
-      if (intensity == 0) { continue; }
+      if (intensity != 0) {
+        if (intensity > 255) { intensity = 255; }
 
-      if (intensity > 255) { intensity = 255; }
+        point p(x, y);
+        int   tx = tl.x + (p.x - minx) - (MAP_BORDER_ROCK - 1);
+        int   ty = tl.y + (p.y - miny) - (MAP_BORDER_ROCK - 1);
 
-      point p(x, y);
-      int   tx = tl.x + (p.x - minx) - (MAP_BORDER_ROCK - 1);
-      int   ty = tl.y + (p.y - miny) - (MAP_BORDER_ROCK - 1);
+        ascii_set(TILE_LAYER_FG_1, tx, ty, UNICODE_BLOCK);
 
-      ascii_set(TILE_LAYER_FG_1, tx, ty, UNICODE_BLOCK);
+        color c = LIMEGREEN;
+        c       = color_change_hue(c, non_pcg_random_range(0, 50));
+        c.a     = intensity / 2;
+        ascii_set(TILE_LAYER_FG_1, tx, ty, c);
+      }
 
-      color c = LIMEGREEN;
-      c       = color_change_hue(c, non_pcg_random_range(0, 50));
-      c.a     = intensity / 2;
-      ascii_set(TILE_LAYER_FG_1, tx, ty, c);
+      intensity = is_gas_healing(x, y);
+      if (intensity != 0) {
+        if (intensity > 255) { intensity = 255; }
+
+        point p(x, y);
+        int   tx = tl.x + (p.x - minx) - (MAP_BORDER_ROCK - 1);
+        int   ty = tl.y + (p.y - miny) - (MAP_BORDER_ROCK - 1);
+
+        ascii_set(TILE_LAYER_FG_2, tx, ty, UNICODE_BLOCK);
+
+        color c = PINK;
+        c       = color_change_hue(c, non_pcg_random_range(0, 50));
+        c.a     = intensity / 2;
+        ascii_set(TILE_LAYER_FG_2, tx, ty, c);
+      }
     }
   }
 }

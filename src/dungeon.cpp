@@ -331,6 +331,10 @@ void Dungeon::make_dungeon(void)
                         3,   // R1
                         1,   // R2
                         2 /* generations */);
+    fungus_healing_gen(100, // fill prob
+                       3,   // R1
+                       1,   // R2
+                       2 /* generations */);
     fungus_poison_gen(100, // fill prob
                       10,  // R1
                       1,   // R2
@@ -347,6 +351,10 @@ void Dungeon::make_dungeon(void)
                         3,  // R1
                         1,  // R2
                         2 /* generations */);
+    fungus_healing_gen(50, // fill prob
+                       3,  // R1
+                       1,  // R2
+                       2 /* generations */);
     fungus_poison_gen(30, // fill prob
                       10, // R1
                       1,  // R2
@@ -666,6 +674,19 @@ bool Dungeon::is_fungus_withered(const int x, const int y)
     auto v = get(Charmap::all_charmaps, c);
 
     if (v.is_fungus_withered) { return true; }
+  }
+  return false;
+}
+
+bool Dungeon::is_fungus_healing(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) { DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y); }
+
+  for (auto d = 0; d < map_depth; d++) {
+    auto c = getc(x, y, d);
+    auto v = get(Charmap::all_charmaps, c);
+
+    if (v.is_fungus_healing) { return true; }
   }
   return false;
 }
@@ -4311,6 +4332,94 @@ void Dungeon::fungus_withered_gen(unsigned int map_fill_prob, int map_r1, int ma
         }
 
         if (ok_to_place) { putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FUNGUS_WITHERED); }
+      }
+    next:
+      continue;
+    }
+  }
+}
+
+void Dungeon::fungus_healing_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations)
+{
+  map_save = {};
+  map_curr = {};
+
+  const int16_t maze_w = MAP_WIDTH - 2;
+  const int16_t maze_h = MAP_HEIGHT - 2;
+
+  if (map_r1) { MAP_R1 = map_r1; }
+
+  if (map_r2) { MAP_R2 = map_r2; }
+
+  if (map_generations) { MAP_GENERATIONS = map_generations; }
+
+  int16_t x, y, i;
+
+  map_curr = {};
+
+  for (x = 2; x < maze_w - 2; x++) {
+    for (y = 2; y < maze_h - 2; y++) {
+      if (pcg_random_range(0, 10000) < map_fill_prob) { set(map_curr, x, y, (uint8_t) 1); }
+    }
+  }
+
+  if (0) {
+    printf("initial fungus\n");
+    for (y = 2; y < maze_h - 2; y++) {
+      for (x = 2; x < maze_w - 2; x++) {
+        if (get(map_curr, x, y)) {
+          printf(".");
+        } else {
+          printf(" ");
+        }
+      }
+      printf("\n");
+    }
+  }
+
+  for (i = 0; i < MAP_GENERATIONS; i++) {
+    cave_generation();
+    std::copy(mbegin(map_save), mend(map_save), mbegin(map_curr));
+    map_save = {};
+  }
+
+  if (0) {
+    printf("final fungus\n");
+    for (y = 2; y < maze_h - 2; y++) {
+      for (x = 2; x < maze_w - 2; x++) {
+        if (get(map_curr, x, y)) {
+          printf(".");
+        } else {
+          printf(" ");
+        }
+      }
+      printf("\n");
+    }
+  }
+
+  for (y = 2; y < maze_h - 2; y++) {
+    for (x = 2; x < maze_w - 2; x++) {
+      if (get(map_curr, x, y)) {
+        if (is_wall(x, y) || is_rock(x, y) || is_chasm(x, y)) { continue; }
+        if (is_shallow_water(x, y)) { continue; }
+
+        bool ok_to_place = false;
+        for (auto dx = -1; dx <= 1; dx++) {
+          for (auto dy = -1; dy <= 1; dy++) {
+            if (is_lava(x + dx, y + dy)) { goto next; }
+            if (is_shallow_water(x + dx, y + dy)) { goto next; }
+            if (is_floor(x + dx, y + dy)) {
+              ok_to_place = true;
+              break;
+            }
+            if (is_dirt(x + dx, y + dy)) {
+              ok_to_place = true;
+              break;
+            }
+          }
+        }
+
+        if (ok_to_place) { putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FUNGUS_HEALING); }
       }
     next:
       continue;

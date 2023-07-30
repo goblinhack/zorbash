@@ -46,9 +46,11 @@ void Level::clear(void)
   _is_foliage                        = {};
   _is_food                           = {};
   _is_fungus_edible                  = {};
+  _is_fungus_healing                 = {};
   _is_fungus_poison                  = {};
   _is_fungus_withered                = {};
   _is_gas_blocker                    = {};
+  _is_gas_healing                    = {};
   _is_gas_poison                     = {};
   _is_gold                           = {};
   _is_grass_dry                      = {};

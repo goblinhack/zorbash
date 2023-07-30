@@ -548,6 +548,7 @@ int Tp::is_foliage(void) const { return _is_foliage; }
 int Tp::is_food(void) const { return _is_food; }
 int Tp::is_four_leaf_clover(void) const { return _is_four_leaf_clover; }
 int Tp::is_fungus_edible(void) const { return _is_fungus_edible; }
+int Tp::is_fungus_healing(void) const { return _is_fungus_healing; }
 int Tp::is_fungus_poison(void) const { return _is_fungus_poison; }
 int Tp::is_fungus(void) const { return _is_fungus; }
 int Tp::is_fungus_withered(void) const { return _is_fungus_withered; }
@@ -759,7 +760,6 @@ int Tp::is_unused_flag112(void) const { return _is_unused_flag112; }
 int Tp::is_unused_flag113(void) const { return _is_unused_flag113; }
 int Tp::is_unused_flag114(void) const { return _is_unused_flag114; }
 int Tp::is_unused_flag115(void) const { return _is_unused_flag115; }
-int Tp::is_unused_flag116(void) const { return _is_unused_flag116; }
 int Tp::is_unused_flag11(void) const { return _is_unused_flag11; }
 int Tp::is_unused_flag12(void) const { return _is_unused_flag12; }
 int Tp::is_unused_flag13(void) const { return _is_unused_flag13; }
@@ -1312,6 +1312,7 @@ void Tp::is_foliage_set(int v) { _is_foliage = v; }
 void Tp::is_food_set(int v) { _is_food = v; }
 void Tp::is_four_leaf_clover_set(int v) { _is_four_leaf_clover = v; }
 void Tp::is_fungus_edible_set(int v) { _is_fungus_edible = v; }
+void Tp::is_fungus_healing_set(int v) { _is_fungus_healing = v; }
 void Tp::is_fungus_poison_set(int v) { _is_fungus_poison = v; }
 void Tp::is_fungus_set(int v) { _is_fungus = v; }
 void Tp::is_fungus_withered_set(int v) { _is_fungus_withered = v; }
@@ -1523,7 +1524,6 @@ void Tp::is_unused_flag112_set(int v) { _is_unused_flag112 = v; }
 void Tp::is_unused_flag113_set(int v) { _is_unused_flag113 = v; }
 void Tp::is_unused_flag114_set(int v) { _is_unused_flag114 = v; }
 void Tp::is_unused_flag115_set(int v) { _is_unused_flag115 = v; }
-void Tp::is_unused_flag116_set(int v) { _is_unused_flag116 = v; }
 void Tp::is_unused_flag11_set(int v) { _is_unused_flag11 = v; }
 void Tp::is_unused_flag12_set(int v) { _is_unused_flag12 = v; }
 void Tp::is_unused_flag13_set(int v) { _is_unused_flag13 = v; }

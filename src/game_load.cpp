@@ -157,7 +157,8 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->tick_last_i_attacked);
    in >> bits(my.t->tick_last_i_tried_to_attack);
    in >> bits(my.t->tick_last_i_was_attacked);
-   in >> bits(my.t->tick_last_poison_gas_exposure);
+   in >> bits(my.t->tick_last_gas_poison_exposure);
+   in >> bits(my.t->tick_last_gas_healing_exposure);
    in >> bits(my.t->tick_last_level_change);
    in >> bits(my.t->tick_last_location_check);
    in >> bits(my.t->tick_resurrect_when);
@@ -518,6 +519,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   // clang-format off
   // begin sort marker4 {
              my.t->i_set_is_fungus_edible                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_fungus_healing                = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_fungus_poison                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_fungus_withered               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_grass_dry                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -611,6 +613,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(l->ts_fade_in_begin);
 
   in >> bits(my.t->gas_poison_cloud);
+  in >> bits(my.t->gas_healing_cloud);
 
   // begin sort marker5 {
   in >> bits(my.t->_fade_in_map);
@@ -650,10 +653,10 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_food);
   in >> bits(my.t->_is_fungus);
   in >> bits(my.t->_is_fungus_edible);
-  in >> bits(my.t->_is_fungus_poison);
+  in >> bits(my.t->_is_fungus_healing);
   in >> bits(my.t->_is_fungus_withered);
   in >> bits(my.t->_is_gas_blocker);
-  in >> bits(my.t->_is_gas_poison);
+  in >> bits(my.t->_is_gas_healing);
   in >> bits(my.t->_is_gold);
   in >> bits(my.t->_is_grass_dry);
   in >> bits(my.t->_is_grass_wet);

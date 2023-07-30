@@ -166,6 +166,10 @@ std::vector< Tpp > tp_find_wildcard(const std::string &name)
     out.push_back(tp_random_fungus_withered());
     return out;
   }
+  if (name == "random_fungus_healing") {
+    out.push_back(tp_random_fungus_healing());
+    return out;
+  }
   if (name == "random_magic_stone") {
     out.push_back(tp_random_magic_stone());
     return out;

@@ -235,6 +235,18 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
 
     {
       uint32_t start = time_ms();
+      dbg2("INF: Place healing fungus");
+      create_biome_swamp_place_fungus_healing(dungeon);
+      if (g_errored) { return false; }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing healing fungus";
+      }
+    }
+
+    {
+      uint32_t start = time_ms();
       dbg2("INF: Place edible fungus");
       create_biome_swamp_place_fungus_edible(dungeon);
       if (g_errored) { return false; }
@@ -568,6 +580,31 @@ void Level::create_biome_swamp_place_fungus_withered(Dungeonp d)
         // Change mushroom type
         //
         if (d100() < 10) { tp = tp_random_fungus_withered(); }
+        (void) thing_new(tp->name(), point(x, y));
+      }
+    }
+  }
+}
+
+void Level::create_biome_swamp_place_fungus_healing(Dungeonp d)
+{
+  TRACE_AND_INDENT();
+  //
+  // Have the same fungus type for the level
+  //
+  auto tp = tp_random_fungus_healing();
+  for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
+    for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
+      if (is_rock(x, y)) { continue; }
+      if (d->is_fungus_healing(x, y)) {
+        if (unlikely(! tp)) { return; }
+
+        if (is_fungus(x, y)) { continue; }
+
+        //
+        // Change mushroom type
+        //
+        if (d100() < 10) { tp = tp_random_fungus_healing(); }
         (void) thing_new(tp->name(), point(x, y));
       }
     }

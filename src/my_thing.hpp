@@ -274,6 +274,7 @@ public:
   uint64_t i_set_is_food                      : 1 {};
   uint64_t i_set_is_fungus                    : 1 {};
   uint64_t i_set_is_fungus_edible             : 1 {};
+  uint64_t i_set_is_fungus_healing            : 1 {};
   uint64_t i_set_is_fungus_poison             : 1 {};
   uint64_t i_set_is_fungus_withered           : 1 {};
   uint64_t i_set_is_gas_blocker               : 1 {};
@@ -654,6 +655,7 @@ public:
   bool skillbox_id_remove(Thingp what);
   bool skill_remove(Thingp it);
   bool skill_use(Thingp it);
+  bool spawn_gas_healing_around_thing(int radius);
   bool spawn_gas_poison_around_thing(int radius);
   bool spawn_next_to(const std::string &what);
   bool spawn_next_to_or_on_monst(const std::string &what);
@@ -1576,6 +1578,7 @@ public:
   int is_four_leaf_clover(void);
   int is_frozen_check(void);
   int is_fungus_edible(void);
+  int is_fungus_healing(void);
   int is_fungus_poison(void);
   int is_fungus(void);
   int is_fungus_withered(void);
@@ -1787,7 +1790,6 @@ public:
   int is_unused_flag113(void);
   int is_unused_flag114(void);
   int is_unused_flag115(void);
-  int is_unused_flag116(void);
   int is_unused_flag11(void);
   int is_unused_flag12(void);
   int is_unused_flag13(void);
@@ -2537,12 +2539,19 @@ public:
   int tick_last_i_was_attacked_set(uint32_t);
   int tick_last_i_was_attacked(void);
 
-  int tick_last_poison_gas_exposure_decr(uint32_t);
-  int tick_last_poison_gas_exposure_decr(void);
-  int tick_last_poison_gas_exposure_incr(uint32_t);
-  int tick_last_poison_gas_exposure_incr(void);
-  int tick_last_poison_gas_exposure_set(uint32_t);
-  int tick_last_poison_gas_exposure(void);
+  int tick_last_gas_poison_exposure_decr(uint32_t);
+  int tick_last_gas_poison_exposure_decr(void);
+  int tick_last_gas_poison_exposure_incr(uint32_t);
+  int tick_last_gas_poison_exposure_incr(void);
+  int tick_last_gas_poison_exposure_set(uint32_t);
+  int tick_last_gas_poison_exposure(void);
+
+  int tick_last_gas_healing_exposure_decr(uint32_t);
+  int tick_last_gas_healing_exposure_decr(void);
+  int tick_last_gas_healing_exposure_incr(uint32_t);
+  int tick_last_gas_healing_exposure_incr(void);
+  int tick_last_gas_healing_exposure_set(uint32_t);
+  int tick_last_gas_healing_exposure(void);
 
   int tick_last_i_attacked_decr(uint32_t);
   int tick_last_i_attacked_decr(void);
@@ -2773,6 +2782,7 @@ public:
   void fall_into_the_void(void);
   void frozen_set(void);
   void frozen_unset(bool quiet = false);
+  void gas_healing_tick(void);
   void gas_poison_tick(void);
   void gc(void);
   void goal_penalty_tick(void);

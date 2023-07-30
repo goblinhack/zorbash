@@ -424,6 +424,7 @@ std::initializer_list< std::string > tps = {
     "fungus_poison_7",
     "fungus_poison_8",
     "fungus_poison_9",
+    "fungus_healing",
     "fungus_withered_1",
     "fungus_withered_10",
     "fungus_withered_11",

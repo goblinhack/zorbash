@@ -407,7 +407,8 @@ void Level::display_pixelart_map_all(void)
     //
     display_pixelart_internal_particles();
 
-    display_pixelart_gas(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
+    display_pixelart_gas_poison(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
+    display_pixelart_gas_healing(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
 
     IF_NODEBUG2
     {

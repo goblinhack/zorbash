@@ -71,6 +71,7 @@ void Game::tick_begin_now(void)
   if (level) {
     level->lights_fade();
     level->tick_gas_poison();
+    level->tick_gas_healing();
 
     //
     // Update the heatmap before the next tick

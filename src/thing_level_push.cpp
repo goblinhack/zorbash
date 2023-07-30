@@ -129,9 +129,9 @@ void Thing::level_push(void)
     i_set_is_fungus_poison = true;
     level->is_fungus_poison_set(x, y);
   }
-  if (is_fungus_withered()) {
-    i_set_is_fungus_withered = true;
-    level->is_fungus_withered_set(x, y);
+  if (is_fungus_healing()) {
+    i_set_is_fungus_healing = true;
+    level->is_fungus_healing_set(x, y);
   }
   if (is_gold()) {
     i_set_is_gold = true;

@@ -773,11 +773,6 @@ int Thing::is_unused_flag115(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag115());
 }
-int Thing::is_unused_flag116(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_unused_flag116());
-}
 int Thing::is_immune_to_paralysis(void)
 {
   TRACE_NO_INDENT();

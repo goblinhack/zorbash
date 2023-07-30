@@ -23,6 +23,7 @@ static Tpidmap tp_floor;
 static Tpidmap tp_foliage;
 static Tpidmap tp_food;
 static Tpidmap tp_fungus_edible;
+static Tpidmap tp_fungus_healing;
 static Tpidmap tp_fungus_poison;
 static Tpidmap tp_fungus_withered;
 static Tpidmap tp_gold;
@@ -97,6 +98,7 @@ void tp_random_init(void)
     if (tp->is_fungus_edible()) { tp_fungus_edible.push_back(tp); }
     if (tp->is_fungus_poison()) { tp_fungus_poison.push_back(tp); }
     if (tp->is_fungus_withered()) { tp_fungus_withered.push_back(tp); }
+    if (tp->is_fungus_healing()) { tp_fungus_healing.push_back(tp); }
     if (tp->is_gold()) { tp_gold.push_back(tp); }
     if (tp->is_grass_dry()) { tp_grass_dry.push_back(tp); }
     if (tp->is_grass_wet()) { tp_grass_wet.push_back(tp); }
@@ -598,6 +600,16 @@ Tpp tp_random_fungus_withered(void)
     return nullptr;
   }
   return tp_get_with_no_rarity_filter(tp_fungus_withered);
+}
+
+Tpp tp_random_fungus_healing(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_fungus_healing.size())) {
+    ERR("No fungus_healing found");
+    return nullptr;
+  }
+  return tp_get_with_no_rarity_filter(tp_fungus_healing);
 }
 
 Tpp tp_random_magic_stone(void)

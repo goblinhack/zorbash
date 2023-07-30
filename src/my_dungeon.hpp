@@ -114,6 +114,7 @@ public:
   bool is_food(const int x, const int y);
   bool is_fungus(const int x, const int y);
   bool is_fungus_edible(const int x, const int y);
+  bool is_fungus_healing(const int x, const int y);
   bool is_fungus_poison(const int x, const int y);
   bool is_fungus_withered(const int x, const int y);
   bool is_gold(const int x, const int y);
@@ -196,6 +197,7 @@ public:
   void dump(void);
   void foliage_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
   void fungus_edible_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
+  void fungus_healing_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
   void fungus_poison_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
   void fungus_withered_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
   void grass_dry_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);

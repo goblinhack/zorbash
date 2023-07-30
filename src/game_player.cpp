@@ -213,6 +213,14 @@ void Game::place_player(void)
         level->thing_new("trap_monster", point(x - 2, y));
       }
       if (0) {
+        auto d = level->thing_new("belcher", point(x - 3, y + 1));
+        d->wake("");
+      }
+      if (0) {
+        level->thing_new("fungus_healing", point(x + 3, y));
+        level->thing_new("lava", point(x + 3, y));
+      }
+      if (0) {
         level->thing_new("fungus_poison_18", point(x - 1, y));
         level->thing_new("fungus_edible_1", point(x - 1, y));
         level->thing_new("fungus_withered_1", point(x + 3, y));

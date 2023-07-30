@@ -73,6 +73,11 @@ void Charmap::init_charmaps(void)
   c->c                  = char_index;
   c->is_fungus_withered = true;
 
+  char_index           = Charmap::FUNGUS_HEALING;
+  c                    = &all_charmaps[ char_index ];
+  c->c                 = char_index;
+  c->is_fungus_healing = true;
+
   char_index          = Charmap::FUNGUS_EDIBLE;
   c                   = &all_charmaps[ char_index ];
   c->c                = char_index;

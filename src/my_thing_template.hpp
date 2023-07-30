@@ -458,6 +458,7 @@ private:
   int _is_four_leaf_clover {};
   int _is_fungus {};
   int _is_fungus_edible {};
+  int _is_fungus_healing {};
   int _is_fungus_poison {};
   int _is_fungus_withered {};
   int _is_gas_blocker {};
@@ -671,7 +672,6 @@ private:
   int _is_unused_flag113 {};
   int _is_unused_flag114 {};
   int _is_unused_flag115 {};
-  int _is_unused_flag116 {};
   int _is_unused_flag12 {};
   int _is_unused_flag124 {};
   int _is_unused_flag13 {};
@@ -1803,6 +1803,7 @@ public:
   int is_food(void) const;
   int is_four_leaf_clover(void) const;
   int is_fungus_edible(void) const;
+  int is_fungus_healing(void) const;
   int is_fungus_poison(void) const;
   int is_fungus(void) const;
   int is_fungus_withered(void) const;
@@ -2014,7 +2015,6 @@ public:
   int is_unused_flag113(void) const;
   int is_unused_flag114(void) const;
   int is_unused_flag115(void) const;
-  int is_unused_flag116(void) const;
   int is_unused_flag11(void) const;
   int is_unused_flag124(void) const;
   int is_unused_flag12(void) const;
@@ -2568,6 +2568,7 @@ public:
   void is_food_set(int v);
   void is_four_leaf_clover_set(int v);
   void is_fungus_edible_set(int v);
+  void is_fungus_healing_set(int v);
   void is_fungus_poison_set(int v);
   void is_fungus_set(int v);
   void is_fungus_withered_set(int v);
@@ -2779,7 +2780,6 @@ public:
   void is_unused_flag113_set(int v);
   void is_unused_flag114_set(int v);
   void is_unused_flag115_set(int v);
-  void is_unused_flag116_set(int v);
   void is_unused_flag11_set(int v);
   void is_unused_flag124_set(int v);
   void is_unused_flag12_set(int v);
@@ -3199,6 +3199,7 @@ class Tp *tp_random_descend_sewer(void);
 class Tp *tp_random_dirt(void);
 class Tp *tp_random_door(void);
 class Tp *tp_random_grass_dry(void);
+class Tp *tp_random_fungus_healing(void);
 class Tp *tp_random_fungus_withered(void);
 class Tp *tp_random_fungus_edible(void);
 class Tp *tp_random_fungus_poison(void);

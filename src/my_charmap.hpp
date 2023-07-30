@@ -34,6 +34,7 @@ public:
     FOLIAGE             = '`',
     FOOD                = 'f',
     FUNGUS_EDIBLE       = 'e',
+    FUNGUS_HEALING      = 'F',
     FUNGUS_POISON       = 'p',
     FUNGUS_WITHERED     = 'n',
     GOLD                = 'o',
@@ -92,6 +93,7 @@ public:
   bool is_food {false};
   bool is_fungus_edible {false};
   bool is_fungus {false};
+  bool is_fungus_healing {false};
   bool is_fungus_poison {false};
   bool is_fungus_withered {false};
   bool is_gold {false};

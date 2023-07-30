@@ -70,7 +70,7 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
         }
 
         if (m.is_foliage || m.is_spiderweb || m.is_block_of_ice || m.is_grass_dry || m.is_grass_wet
-            || m.is_fungus_withered || m.is_fungus_edible || m.is_fungus_poison) {
+            || m.is_fungus_withered || m.is_fungus_healing || m.is_fungus_edible || m.is_fungus_poison) {
           floor2_string += c;
         } else {
           floor2_string += Charmap::SPACE;
@@ -571,6 +571,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_foliage_at, is_foliage)
 LEVEL_BODY_GET_BOOL_AT(level_is_food_at, is_food)
 LEVEL_BODY_GET_BOOL_AT(level_is_fungus_at, is_fungus)
 LEVEL_BODY_GET_BOOL_AT(level_is_fungus_edible_at, is_fungus_edible)
+LEVEL_BODY_GET_BOOL_AT(level_is_fungus_healing_at, is_fungus_healing)
 LEVEL_BODY_GET_BOOL_AT(level_is_fungus_poison_at, is_fungus_poison)
 LEVEL_BODY_GET_BOOL_AT(level_is_fungus_withered_at, is_fungus_withered)
 LEVEL_BODY_GET_BOOL_AT(level_is_gas_blocker_at, is_gas_blocker)

@@ -159,6 +159,10 @@ void Thing::level_pop(void)
       i_set_is_fungus_withered = false;
       level->is_fungus_withered_unset(x, y);
     }
+    if (i_set_is_fungus_healing) {
+      i_set_is_fungus_healing = false;
+      level->is_fungus_healing_unset(x, y);
+    }
     if (i_set_is_gas_blocker) {
       i_set_is_gas_blocker = false;
       level->is_gas_blocker_unset(x, y);
