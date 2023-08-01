@@ -95,6 +95,7 @@ void wid_actionbar_ascii_init(void)
     wid_set_ignore_scroll_events(wid_actionbar, true);
     wid_set_pos(wid_actionbar, tl, br);
     wid_set_shape_none(wid_actionbar);
+    if (g_opt_test_dungeon_gen) { wid_set_shape_none(wid_actionbar); }
     wid_lower(wid_actionbar);
   }
 
@@ -113,6 +114,7 @@ void wid_actionbar_ascii_init(void)
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
     wid_set_style(w, box_style);
+    if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
     x_at += option_width + 1;
   }
 
@@ -134,6 +136,7 @@ void wid_actionbar_ascii_init(void)
         wid_set_on_tick(w, wid_actionbar_ai_tick);
         wid_set_style(w, UI_WID_STYLE_RED);
       }
+      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
       x_at += option_width + 1;
     }
   }
@@ -152,6 +155,7 @@ void wid_actionbar_ascii_init(void)
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);
       wid_set_style(w, box_style);
+      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
       x_at += option_width + 1;
     }
 
@@ -168,6 +172,7 @@ void wid_actionbar_ascii_init(void)
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);
       wid_set_style(w, box_style);
+      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
       x_at += option_width + 1;
     }
 
@@ -184,6 +189,7 @@ void wid_actionbar_ascii_init(void)
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);
       wid_set_style(w, box_style);
+      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
       x_at += option_width + 1;
     }
 
@@ -200,6 +206,7 @@ void wid_actionbar_ascii_init(void)
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);
       wid_set_style(w, box_style);
+      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
       x_at += option_width + 1;
     }
 
@@ -216,6 +223,7 @@ void wid_actionbar_ascii_init(void)
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);
       wid_set_style(w, box_style);
+      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
       x_at += option_width + 1;
     }
 
@@ -233,6 +241,7 @@ void wid_actionbar_ascii_init(void)
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);
       wid_set_style(w, box_style);
+      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
       x_at += option_width + 1;
     }
 
@@ -249,6 +258,7 @@ void wid_actionbar_ascii_init(void)
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);
       wid_set_style(w, box_style);
+      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
       x_at += option_width + 1;
     }
 
@@ -265,6 +275,7 @@ void wid_actionbar_ascii_init(void)
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);
       wid_set_style(w, box_style);
+      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
       x_at += option_width + 1;
     }
 
@@ -281,6 +292,7 @@ void wid_actionbar_ascii_init(void)
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);
       wid_set_style(w, box_style);
+      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
       x_at += option_width + 1;
     }
   }

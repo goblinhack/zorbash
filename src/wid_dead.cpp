@@ -109,6 +109,7 @@ void Game::wid_dead_select(const char *reason)
   wid_set_on_key_up(wid_dead_window->wid_popup_container, wid_dead_key_up);
   wid_set_on_key_down(wid_dead_window->wid_popup_container, wid_dead_key_down);
   wid_raise(wid_dead_window->wid_popup_container);
+  if (g_opt_test_dungeon_gen) { wid_set_shape_none(wid_dead_window->wid_popup_container); }
 
   // Want console to be able to be on top
   // wid_set_do_not_lower(wid_dead_window->wid_popup_container, true);

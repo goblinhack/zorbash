@@ -113,6 +113,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
         wid_set_tilename(TILE_LAYER_BG_0, w, "status_bar_pixelart_normal");
       }
     }
+    if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
     wid_set_thing_context(w, t, 0);
@@ -127,6 +128,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     wid_set_pos(w, tl, br);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_on_display(w, wid_leftbar_display);
+    if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
     wid_set_thing_context(w, t, 0);
@@ -145,6 +147,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     } else {
       wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_red");
     }
+    if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
     wid_set_thing_context(w, t, 0);
@@ -163,6 +166,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     } else {
       wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_blue");
     }
+    if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
     wid_set_thing_context(w, t, 0);
@@ -181,6 +185,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     } else {
       wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_brown");
     }
+    if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
     wid_set_thing_context(w, t, 0);
@@ -199,6 +204,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     } else {
       wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_red");
     }
+    if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
     wid_set_thing_context(w, t, 0);
@@ -229,6 +235,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     } else {
       wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_dark");
     }
+    if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
     wid_set_thing_context(w, t, 0);
@@ -246,6 +253,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       } else {
         wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_red");
       }
+      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_context(w, t, 0);
@@ -262,6 +270,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       } else {
         wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_orange");
       }
+      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_context(w, t, 0);
@@ -278,6 +287,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       } else {
         wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_red");
       }
+      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_context(w, t, 0);
@@ -294,6 +304,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       } else {
         wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_orange");
       }
+      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_context(w, t, 0);
@@ -310,6 +321,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       } else {
         wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_dark");
       }
+      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_context(w, t, 0);
@@ -326,6 +338,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       } else {
         wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_dark");
       }
+      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_context(w, t, 0);
@@ -344,6 +357,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       } else {
         wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_red");
       }
+      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_context(w, t, 0);
@@ -364,6 +378,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
           } else {
             wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_dark");
           }
+          if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
           wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
           wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
           wid_set_thing_context(w, t, 0);
@@ -389,6 +404,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
         } else {
           wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_green");
         }
+        if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
         wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
         wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
         wid_set_thing_context(w, t, 0);
@@ -410,6 +426,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       } else {
         wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_green");
       }
+      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_context(w, t, 0);
@@ -434,6 +451,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       } else {
         wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_dark");
       }
+      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_context(w, t, 0);
@@ -455,6 +473,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
         i         = std::max(i, 0);
         auto icon = "health_bar_ascii_" + std::to_string(i);
         wid_set_tilename(TILE_LAYER_FG_0, w, icon);
+        if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
         wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
         wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
         wid_set_thing_context(w, t, 0);
@@ -468,6 +487,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
         wid_set_text(w, "Health");
         wid_set_shape_none(w);
         wid_set_text_lhs(w, true);
+        if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
         wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
         wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
         wid_set_thing_context(w, t, 0);
@@ -482,6 +502,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
         std::string s = std::to_string(t->health()) + "/" + std::to_string(t->health_max());
         wid_set_text(w, s);
         wid_set_text_rhs(w, true);
+        if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
         wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
         wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
         wid_set_thing_context(w, t, 0);
@@ -530,7 +551,7 @@ bool wid_leftbar_display_create(void)
     wid_set_ignore_scroll_events(wid_leftbar, true);
     wid_set_ignore_events(wid_leftbar, true);
     wid_set_pos(wid_leftbar, tl, br);
-    wid_set_style(wid_leftbar, UI_WID_STYLE_SOLID_NONE);
+    wid_set_shape_none(wid_leftbar);
     wid_lower(wid_leftbar);
   }
 

@@ -974,8 +974,9 @@ void ascii_dump(void)
 {
   TRACE_NO_INDENT();
 
-  int x;
-  int y;
+  char fgstr[ 200 ];
+  int  x;
+  int  y;
 
   putchar('+');
   for (x = 0; x < TERM_WIDTH; x++) {
@@ -993,32 +994,34 @@ void ascii_dump(void)
       color fg = COLOR_NONE;
 
       for (int depth = TILE_LAYER_BG_0; depth < TILE_LAYER_FG_0; depth++) {
+        if (! cell->tile[ depth ]) { continue; }
+        if (cell->tex[ depth ]) { continue; }
         auto col = cell->color_tl[ depth ];
         if (col != COLOR_NONE) { bg = col; }
       }
 
       for (int depth = TILE_LAYER_FG_0; depth < TILE_LAYER_MAX; depth++) {
+        if (! cell->tile[ depth ]) { continue; }
+        if (cell->tex[ depth ]) { continue; }
         auto col = cell->color_tl[ depth ];
         if (col != COLOR_NONE) { fg = col; }
       }
 
-      char fgstr[ 80 ];
       if ((fg != COLOR_NONE) && (bg != COLOR_NONE)) {
         snprintf(fgstr, sizeof(fgstr), "\e[38;2;%u;%u;%u;48;2;%u;%u;%um", fg.r, fg.g, fg.b, bg.r, bg.g, bg.b);
-        fputs(fgstr, stdout);
       } else if (fg != COLOR_NONE) {
         snprintf(fgstr, sizeof(fgstr), "\e[38;2;%u;%u;%um", fg.r, fg.g, fg.b);
-        fputs(fgstr, stdout);
       } else if (bg != COLOR_NONE) {
         snprintf(fgstr, sizeof(fgstr), "\e[48;2;%u;%u;%um", bg.r, bg.g, bg.b);
-        fputs(fgstr, stdout);
       } else {
         snprintf(fgstr, sizeof(fgstr), "\e[39m\e[49m");
-        fputs(fgstr, stdout);
       }
+      fputs(fgstr, stdout);
 
       bool got_one = false;
       for (int depth = TILE_LAYER_MAX - 1; depth >= 0; depth--) {
+        if (! cell->tile[ depth ]) { continue; }
+        if (cell->tex[ depth ]) { continue; }
         if (cell->ch[ depth ]) {
           putwchar(cell->ch[ depth ]);
           got_one = true;
@@ -1027,6 +1030,10 @@ void ascii_dump(void)
       }
       if (! got_one) { putchar(' '); }
     }
+
+    snprintf(fgstr, sizeof(fgstr), "\e[39m\e[49m");
+    fputs(fgstr, stdout);
+
     putchar('|');
     putchar('\n');
   }
