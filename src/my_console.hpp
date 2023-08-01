@@ -6,6 +6,8 @@
 #ifndef _MY_TERM_HPP_
 #define _MY_TERM_HPP_
 
+#include "my_color.hpp"
+
 using term_color = enum {
   TERM_COLOR_BLACK,
   TERM_COLOR_RED,
@@ -21,5 +23,6 @@ using term_color = enum {
 
 extern void term_log(const wchar_t *buf);
 extern void term_log(const char *buf);
+extern int  term_color_to_console_color(color);
 
 #endif

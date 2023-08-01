@@ -5,6 +5,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_ascii.hpp"
 #include "my_color_defs.hpp"
+#include "my_console.hpp"
 #include "my_font.hpp"
 #include "my_game.hpp"
 #include "my_sdl_event.hpp"
@@ -23,7 +24,8 @@ int16_t ascii_mouse_y;
 class AsciiCell
 {
 public:
-  Tilep tile[ TILE_LAYER_MAX ] {};
+  wchar_t ch[ TILE_LAYER_MAX ] {};
+  Tilep   tile[ TILE_LAYER_MAX ] {};
 
   Texp tex[ TILE_LAYER_MAX ] {};
 
@@ -181,6 +183,7 @@ void ascii_set(int depth, int x, int y, const Texp tex, float tx, float ty, floa
 
   AsciiCell *cell = &getref_no_check(cells, x, y);
 
+  cell->ch[ depth ]  = 0;
   cell->tex[ depth ] = tex;
   cell->tx[ depth ]  = tx;
   cell->ty[ depth ]  = ty;
@@ -194,6 +197,21 @@ void ascii_set(int depth, int x, int y, const Tilep tile)
 
   AsciiCell *cell = &getref_no_check(cells, x, y);
 
+  cell->ch[ depth ]   = 0;
+  cell->tile[ depth ] = tile;
+  cell->tx[ depth ]   = 0;
+  cell->ty[ depth ]   = 0;
+  cell->dx[ depth ]   = 1;
+  cell->dy[ depth ]   = 1;
+}
+
+void ascii_set(int depth, int x, int y, const Tilep tile, wchar_t ch)
+{
+  if (unlikely(! ascii_ok_for_scissors(x, y))) { return; }
+
+  AsciiCell *cell = &getref_no_check(cells, x, y);
+
+  cell->ch[ depth ]   = ch;
   cell->tile[ depth ] = tile;
   cell->tx[ depth ]   = 0;
   cell->ty[ depth ]   = 0;
@@ -207,6 +225,7 @@ void ascii_set(int depth, int x, int y, const Tilep tile, float tx, float ty, fl
 
   AsciiCell *cell = &getref_no_check(cells, x, y);
 
+  cell->ch[ depth ]   = 0;
   cell->tile[ depth ] = tile;
   cell->tx[ depth ]   = tx;
   cell->ty[ depth ]   = ty;
@@ -216,7 +235,10 @@ void ascii_set(int depth, int x, int y, const Tilep tile, float tx, float ty, fl
 
 void ascii_set(int depth, int x, int y, const char *tilename) { ascii_set(depth, x, y, tile_find(tilename)); }
 
-void ascii_set(int depth, int x, int y, const wchar_t ch) { ascii_set(depth, x, y, font_ui->unicode_to_tile(ch)); }
+void ascii_set(int depth, int x, int y, const wchar_t ch)
+{
+  ascii_set(depth, x, y, font_ui->unicode_to_tile(ch), ch);
+}
 
 void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
 {
@@ -357,6 +379,7 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
     auto depth = TILE_LAYER_FG_0;
 
     cell->tile[ depth ]     = tile;
+    cell->ch[ depth ]       = ch;
     cell->color_tl[ depth ] = fg;
     cell->color_tr[ depth ] = fg;
     cell->color_bl[ depth ] = fg;
@@ -379,6 +402,7 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
         cell->tile[ depth ] = nullptr;
       }
 
+      cell->ch[ depth ]       = ch;
       cell->color_tl[ depth ] = bg;
       cell->color_tr[ depth ] = bg;
       cell->color_bl[ depth ] = bg;
@@ -944,6 +968,75 @@ static void ascii_blit(void)
 
     tile_y += dh;
   }
+}
+
+void ascii_dump(void)
+{
+  TRACE_NO_INDENT();
+
+  int x;
+  int y;
+
+  putchar('+');
+  for (x = 0; x < TERM_WIDTH; x++) {
+    putchar('-');
+  }
+  putchar('+');
+  putchar('\n');
+
+  for (y = 0; y < TERM_HEIGHT; y++) {
+    putchar('|');
+    for (x = 0; x < TERM_WIDTH; x++) {
+      const AsciiCell *cell = &getref_no_check(cells, x, y);
+
+      color bg = COLOR_NONE;
+      color fg = COLOR_NONE;
+
+      for (int depth = TILE_LAYER_BG_0; depth < TILE_LAYER_FG_0; depth++) {
+        auto col = cell->color_tl[ depth ];
+        if (col != COLOR_NONE) { bg = col; }
+      }
+
+      for (int depth = TILE_LAYER_FG_0; depth < TILE_LAYER_MAX; depth++) {
+        auto col = cell->color_tl[ depth ];
+        if (col != COLOR_NONE) { fg = col; }
+      }
+
+      char fgstr[ 80 ];
+      if ((fg != COLOR_NONE) && (bg != COLOR_NONE)) {
+        snprintf(fgstr, sizeof(fgstr), "\e[38;2;%u;%u;%u;48;2;%u;%u;%um", fg.r, fg.g, fg.b, bg.r, bg.g, bg.b);
+        fputs(fgstr, stdout);
+      } else if (fg != COLOR_NONE) {
+        snprintf(fgstr, sizeof(fgstr), "\e[38;2;%u;%u;%um", fg.r, fg.g, fg.b);
+        fputs(fgstr, stdout);
+      } else if (bg != COLOR_NONE) {
+        snprintf(fgstr, sizeof(fgstr), "\e[48;2;%u;%u;%um", bg.r, bg.g, bg.b);
+        fputs(fgstr, stdout);
+      } else {
+        snprintf(fgstr, sizeof(fgstr), "\e[39m\e[49m");
+        fputs(fgstr, stdout);
+      }
+
+      bool got_one = false;
+      for (int depth = TILE_LAYER_MAX - 1; depth >= 0; depth--) {
+        if (cell->ch[ depth ]) {
+          putwchar(cell->ch[ depth ]);
+          got_one = true;
+          break;
+        }
+      }
+      if (! got_one) { putchar(' '); }
+    }
+    putchar('|');
+    putchar('\n');
+  }
+
+  putchar('+');
+  for (x = 0; x < TERM_WIDTH; x++) {
+    putchar('-');
+  }
+  putchar('+');
+  putchar('\n');
 }
 
 //

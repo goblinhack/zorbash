@@ -118,11 +118,22 @@ void Level::handle_input_events(void)
 
 void Level::tick_(void)
 {
-  if (! game->started) { return; }
+  TRACE_NO_INDENT();
 
-  if (game->paused) { return; }
+  if (g_opt_test_dungeon_gen) {
+    //
+    // Testing the dungeon
+    //
+  } else {
+    //
+    // Normal play
+    //
+    if (! game->started) { return; }
 
-  if (! g_opt_ascii && ts_fade_in_begin) { return; }
+    if (game->paused) { return; }
+
+    if (! g_opt_ascii && ts_fade_in_begin) { return; }
+  }
 
   game->tick_update();
 
@@ -134,7 +145,7 @@ void Level::tick_(void)
   // Update the cursor position. But only if the mouse has moved. So if the player is moving via keyboard alone, we
   // don't pollute the screen.
   //
-  if (g_opt_ascii) {
+  if (g_opt_test_dungeon_gen || g_opt_ascii) {
     cursor_move();
   } else {
     if ((sdl.wheel_x != 0) || (sdl.wheel_y != 0)) {
@@ -144,6 +155,7 @@ void Level::tick_(void)
     }
   }
 
+  TRACE_NO_INDENT();
   if (player) {
     //
     // Create the cursor if not yet.
@@ -164,6 +176,7 @@ void Level::tick_(void)
   //
   // Even if a tick is not running, we need to animate all things
   //
+  TRACE_NO_INDENT();
   {
     TRACE_NO_INDENT();
     FOR_ALL_ANIMATED_THINGS_LEVEL(this, t)
@@ -188,11 +201,12 @@ void Level::tick_(void)
   //
   // Is there a tick in progress?
   //
+  TRACE_NO_INDENT();
   if (! game->tick_begin_ms) {
     //
     // If the level has started, we can enter robot mode.
     //
-    if (g_opt_ascii || ! ts_fade_in_begin) {
+    if (g_opt_test_dungeon_gen || g_opt_ascii || ! ts_fade_in_begin) {
       if (game->robot_mode_requested != game->robot_mode) {
         LOG("INF: Pressed requested robot change");
         game->robot_mode                = game->robot_mode_requested;
@@ -210,7 +224,7 @@ void Level::tick_(void)
     //
     // Check for level transitions
     //
-    if (g_opt_ascii || fade_out_finished) {
+    if (g_opt_test_dungeon_gen || g_opt_ascii || fade_out_finished) {
       if (player && player->is_waiting_to_descend_dungeon) {
         if (! player->descend_dungeon()) { player->err("Failed to descend dungeon"); }
       }
@@ -236,6 +250,7 @@ void Level::tick_(void)
     return;
   }
 
+  TRACE_NO_INDENT();
   if (game->things_are_moving) {
     dbg("Tick (things are moving)");
   } else {
@@ -262,6 +277,7 @@ void Level::tick_(void)
   // Tick things in a priority order, so lasers hit first, then the player,
   // then monsters etc...
   //
+  TRACE_NO_INDENT();
   for (uint8_t tick_prio = MAP_TICK_PRIO_VERY_HIGH; tick_prio < MAP_TICK_PRIO; tick_prio++) {
     TRACE_NO_INDENT();
     FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
@@ -541,7 +557,7 @@ void Level::tick_(void)
   //
   // Check for robot mode changes
   //
-  if (g_opt_ascii || ! ts_fade_in_begin) {
+  if (g_opt_test_dungeon_gen || g_opt_ascii || ! ts_fade_in_begin) {
     if (game->robot_mode_requested != game->robot_mode) {
       LOG("INF: Pressed requested robot change");
       game->robot_mode                = game->robot_mode_requested;

@@ -2,6 +2,8 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_color.hpp"
+#include "my_color_defs.hpp"
 #include "my_console.hpp"
 #include "my_main.hpp"
 #include "my_sys.hpp"
@@ -193,4 +195,51 @@ void term_log(const char *s)
 
     putchar(c);
   }
+}
+
+int term_color_to_console_color(color c)
+{
+  if (c == BLACK) return TERM_COLOR_BLACK;
+  if (c == BLUE) return TERM_COLOR_BLACK;
+  if (c == BROWN) return TERM_COLOR_BLACK;
+  if (c == COLOR_NONE) return TERM_COLOR_RESET;
+  if (c == CYAN) return TERM_COLOR_CYAN;
+  if (c == DARKBLUE) return TERM_COLOR_BLUE;
+  if (c == DARKGRAY) return TERM_COLOR_BLACK;
+  if (c == DARKGREEN) return TERM_COLOR_GREEN;
+  if (c == DARKOLIVEGREEN2) return TERM_COLOR_GREEN;
+  if (c == DARKOLIVEGREEN) return TERM_COLOR_GREEN;
+  if (c == DARKRED) return TERM_COLOR_RED;
+  if (c == DEEPWATER) return TERM_COLOR_BLUE;
+  if (c == FORESTGREEN) return TERM_COLOR_GREEN;
+  if (c == GOLD) return TERM_COLOR_YELLOW;
+  if (c == GRAY10) return TERM_COLOR_BLUE;
+  if (c == GRAY30) return TERM_COLOR_BLUE;
+  if (c == GRAY40) return TERM_COLOR_BLUE;
+  if (c == GRAY50) return TERM_COLOR_BLUE;
+  if (c == GRAY5) return TERM_COLOR_BLUE;
+  if (c == GRAY60) return TERM_COLOR_WHITE;
+  if (c == GRAY70) return TERM_COLOR_WHITE;
+  if (c == GRAY80) return TERM_COLOR_WHITE;
+  if (c == GRAY90) return TERM_COLOR_WHITE;
+  if (c == GRAY) return TERM_COLOR_WHITE;
+  if (c == GREEN) return TERM_COLOR_GREEN;
+  if (c == LAVA) return TERM_COLOR_RED;
+  if (c == LIGHTBLUE) return TERM_COLOR_BLUE;
+  if (c == LIGHTGREEN) return TERM_COLOR_GREEN;
+  if (c == LIMEGREEN) return TERM_COLOR_GREEN;
+  if (c == LIME) return TERM_COLOR_GREEN;
+  if (c == MAGENTA) return TERM_COLOR_PINK;
+  if (c == ORANGE) return TERM_COLOR_RED;
+  if (c == PEACHPUFF) return TERM_COLOR_RED;
+  if (c == PINK) return TERM_COLOR_RED;
+  if (c == PURPLE) return TERM_COLOR_PINK;
+  if (c == RED) return TERM_COLOR_RED;
+  if (c == SILVER) return TERM_COLOR_WHITE;
+  if (c == STEELBLUE) return TERM_COLOR_WHITE;
+  if (c == WATER) return TERM_COLOR_CYAN;
+  if (c == WHITE) return TERM_COLOR_WHITE;
+  if (c == YELLOW) return TERM_COLOR_YELLOW;
+  if (c == PURPLE) return TERM_COLOR_BLUE;
+  return TERM_COLOR_BLUE;
 }

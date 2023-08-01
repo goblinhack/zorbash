@@ -28,6 +28,7 @@
  * your project.
  */
 
+#include "my_backtrace.hpp"
 #include "my_game.hpp"
 
 // state for global RNGs
@@ -51,7 +52,9 @@ uint32_t pcg32_random_r(pcg32_random_t *rng)
 {
   if (! pcg_random_allowed) {
     TRACE_AND_INDENT();
-    DIE("Trying to use pcg randomness outside of game logic part");
+    backtrace_dump();
+    CON("Trying to use pcg randomness outside of game logic part");
+    IF_DEBUG { DIE("Trying to use pcg randomness outside of game logic part"); }
   }
 
   uint64_t oldstate   = rng->state;

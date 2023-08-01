@@ -1883,7 +1883,7 @@ bool Thing::ai_tick(bool recursing)
     return false;
   }
 
-  if (! g_opt_ascii && level->ts_fade_in_begin) { return false; }
+  if (! g_opt_test_dungeon_gen && ! g_opt_ascii && level->ts_fade_in_begin) { return false; }
 
   //
   // Set up the extent of the AI, choosing smaller areas for monsters for speed.

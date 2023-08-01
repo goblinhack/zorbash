@@ -19,7 +19,7 @@ void wid_asciimap_fini(void)
 
 bool wid_asciimap_init(void)
 {
-  if (! g_opt_ascii) { return false; }
+  if (! g_opt_test_dungeon_gen && ! g_opt_ascii) { return false; }
 
   int width  = TERM_WIDTH - UI_LEFTBAR_WIDTH - UI_RIGHTBAR_WIDTH - 4;
   int height = TERM_HEIGHT - UI_TOPCON_VIS_HEIGHT - 2;
