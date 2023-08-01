@@ -29,8 +29,8 @@ Thingp Level::thing_new(const std::string &tp_name, Thingp owner)
 Thingp Level::thing_new(const std::string &name, const point at, Thingp owner)
 {
   //
-  // Find a thing appropriate for the level and position (if it is something like "random_monst_class_A")
-  // Else just find the named thing.
+  // Find a thing appropriate for the level and position (if it is something
+  // like "random_monst_class_A") Else just find the named thing.
   //
   auto cands = tp_find_wildcard(this, at, name);
   auto tp    = pcg_one_of(cands);
@@ -177,7 +177,8 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
   }
 
   //
-  // Important to set the owner before the on_born call as we use that for lasers.
+  // Important to set the owner before the on_born call as we use that for
+  // lasers.
   //
   if (owner) { owner_set(owner); }
 
@@ -233,7 +234,8 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
   }
 
   //
-  // The grid is the perma background matrix like substrate that is the ether of this universe!
+  // The grid is the perma background matrix like substrate that is the ether of
+  // this universe!
   //
   is_the_grid = tp()->is_the_grid();
   if (is_the_grid) { return; }
