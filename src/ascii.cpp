@@ -343,7 +343,7 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
     //
     if (unlikely(! tile)) {
       tile = font_ui->unicode_to_tile(ch);
-      if (tile == nullptr) { tile = tile_find_mand(UNICODE_UNKNOWN_STR); }
+      if (tile == nullptr) { tile = tile_find_mand(UNICODE_ALIAS_FOR_UNKNOWN_STR); }
     }
 
     auto saved_fg = fg;
@@ -351,7 +351,7 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
     //
     // Use a special char to represent the cursor. A bit of a hack.
     //
-    auto is_cursor = (ch == UNICODE_CURSOR);
+    auto is_cursor = (ch == UNICODE_ALIAS_FOR_CURSOR);
     if (unlikely(is_cursor)) {
       static uint32_t last;
       static uint8_t  first = true;
@@ -393,7 +393,7 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
 
       if (bg.r || bg.g || bg.b || bg.a) {
         static Tilep tile;
-        if (unlikely(! tile)) { tile = tile_find_mand(UNICODE_BLOCK_STR); }
+        if (unlikely(! tile)) { tile = tile_find_mand(UNICODE_ALIAS_FOR_BLOCK_STR); }
         cell->tile[ depth ] = tile;
       } else {
         //

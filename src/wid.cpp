@@ -1100,7 +1100,7 @@ static std::wstring wid_get_text_with_cursor(Widp w)
   if (! w->received_input) { w->cursor = (uint32_t) w->text.length(); }
 
   std::wstring t = w->text;
-  std::wstring o = t.substr(0, w->cursor) + UNICODE_CURSOR + t.substr(w->cursor);
+  std::wstring o = t.substr(0, w->cursor) + UNICODE_ALIAS_FOR_CURSOR + t.substr(w->cursor);
 
   return o;
 }

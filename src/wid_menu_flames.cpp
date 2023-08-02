@@ -15,7 +15,7 @@ static void game_display_flames_tiles(int w, int h)
   TRACE_NO_INDENT();
   float bright = 2.5;
 
-  auto tile = tile_find_mand(UNICODE_BLOCK_STR);
+  auto tile = tile_find_mand(UNICODE_ALIAS_FOR_BLOCK_STR);
   int  tw   = game->config.ascii_gl_width / 2;
   int  th   = game->config.ascii_gl_height / 2;
 

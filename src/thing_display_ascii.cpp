@@ -311,7 +311,7 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
       // e.g dungeon floor
       //
       if (tile->ascii_bg_col_value != COLOR_NONE) {
-        ascii_set(TILE_LAYER_BG_0, p.x, p.y, UNICODE_BLOCK);
+        ascii_set(TILE_LAYER_BG_0, p.x, p.y, UNICODE_ALIAS_FOR_BLOCK);
         color c = tile->ascii_bg_col_value;
         c.a     = tile->ascii_bg_alpha;
         blit_ascii_adjust_color(c, bg, left_bar);
@@ -365,7 +365,7 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
 
       if (shown_in_bg) {
         if (tile->ascii_bg_col_value != COLOR_NONE) {
-          ascii_set(TILE_LAYER_BG_0, p.x, p.y, UNICODE_BLOCK);
+          ascii_set(TILE_LAYER_BG_0, p.x, p.y, UNICODE_ALIAS_FOR_BLOCK);
           color c = tile->ascii_bg_col_value;
           //
           // Apply a nice tint.

@@ -234,7 +234,7 @@ static void wid_console_wid_create(void)
         wid_set_text_lhs(prefix, true);
         wid_set_shape_none(prefix);
         std::wstring s;
-        s += UNICODE_NEWLINE;
+        s += UNICODE_ALIAS_FOR_NEWLINE;
         wid_set_text(prefix, s);
         wid_set_color(child, WID_COLOR_BG, COLOR_NONE);
         wid_set_color(child, WID_COLOR_TEXT_FG, UI_CONSOLE_INPUT_COLOR);

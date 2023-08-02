@@ -54,35 +54,35 @@ wchar_t unicode_alias_to_char(const std::string &s)
   if (s == "right_curly_bracket") { return UNICODE_RIGHT_CURLY_BRACKET; }
   if (s == "tilde") { return UNICODE_TILDE; }
   if (s == "delete") { return UNICODE_DELETE; }
-  if (s == "middle_dot") { return UNICODE_MIDDLE_DOT; }
-  if (s == "four_dots") { return UNICODE_FOUR_DOTS; }
-  if (s == "diamond") { return UNICODE_DIAMOND; }
-  if (s == "inverted_v") { return UNICODE_INVERTED_V; }
-  if (s == "aries") { return UNICODE_ARIES; }
-  if (s == "ankh") { return UNICODE_ANKH; }
-  if (s == "music_note") { return UNICODE_MUSIC_NOTE; }
-  if (s == "circle") { return UNICODE_CIRCLE; }
-  if (s == "solid_circle") { return UNICODE_SOLID_CIRCLE; }
-  if (s == "lollipop") { return UNICODE_LOLLIPOP; }
-  if (s == "three_dots") { return UNICODE_THREE_DOTS; }
-  if (s == "up_arrow") { return UNICODE_UP_ARROW; }
-  if (s == "down_arrow") { return UNICODE_DOWN_ARROW; }
-  if (s == "left_arrow") { return UNICODE_LEFT_ARROW; }
-  if (s == "right_arrow") { return UNICODE_RIGHT_ARROW; }
-  if (s == "up_triangle") { return UNICODE_UP_TRIANGLE; }
-  if (s == "down_triangle") { return UNICODE_DOWN_TRIANGLE; }
-  if (s == "omega") { return UNICODE_OMEGA; }
-  if (s == "theta") { return UNICODE_THETA; }
-  if (s == "lambda") { return UNICODE_LAMBDA; }
-  if (s == "strike") { return UNICODE_STRIKE; }
-  if (s == "diamond_solid") { return UNICODE_DIAMOND_SOLID; }
-  if (s == "cross") { return UNICODE_CROSS; }
-  if (s == "cursor") { return UNICODE_CURSOR; }
-  if (s == "block") { return UNICODE_BLOCK; }
-  if (s == "pointer") { return UNICODE_POINTER; }
-  if (s == "wtf") { return UNICODE_0xc3; }
-  if (s == "newline") { return UNICODE_NEWLINE; }
-  if (s == "halo") { return UNICODE_HALO; }
+  if (s == "middle_dot") { return UNICODE_ALIAS_FOR_MIDDLE_DOT; }
+  if (s == "four_dots") { return UNICODE_ALIAS_FOR_FOUR_DOTS; }
+  if (s == "diamond") { return UNICODE_ALIAS_FOR_DIAMOND; }
+  if (s == "inverted_v") { return UNICODE_ALIAS_FOR_INVERTED_V; }
+  if (s == "aries") { return UNICODE_ALIAS_FOR_ARIES; }
+  if (s == "ankh") { return UNICODE_ALIAS_FOR_ANKH; }
+  if (s == "music_note") { return UNICODE_ALIAS_FOR_MUSIC_NOTE; }
+  if (s == "circle") { return UNICODE_ALIAS_FOR_CIRCLE; }
+  if (s == "solid_circle") { return UNICODE_ALIAS_FOR_SOLID_CIRCLE; }
+  if (s == "lollipop") { return UNICODE_ALIAS_FOR_LOLLIPOP; }
+  if (s == "three_dots") { return UNICODE_ALIAS_FOR_THREE_DOTS; }
+  if (s == "up_arrow") { return UNICODE_ALIAS_FOR_UP_ARROW; }
+  if (s == "down_arrow") { return UNICODE_ALIAS_FOR_DOWN_ARROW; }
+  if (s == "left_arrow") { return UNICODE_ALIAS_FOR_LEFT_ARROW; }
+  if (s == "right_arrow") { return UNICODE_ALIAS_FOR_RIGHT_ARROW; }
+  if (s == "up_triangle") { return UNICODE_ALIAS_FOR_UP_TRIANGLE; }
+  if (s == "down_triangle") { return UNICODE_ALIAS_FOR_DOWN_TRIANGLE; }
+  if (s == "omega") { return UNICODE_ALIAS_FOR_OMEGA; }
+  if (s == "theta") { return UNICODE_ALIAS_FOR_THETA; }
+  if (s == "lambda") { return UNICODE_ALIAS_FOR_LAMBDA; }
+  if (s == "strike") { return UNICODE_ALIAS_FOR_STRIKE; }
+  if (s == "diamond_solid") { return UNICODE_ALIAS_FOR_DIAMOND_SOLID; }
+  if (s == "cross") { return UNICODE_ALIAS_FOR_CROSS; }
+  if (s == "cursor") { return UNICODE_ALIAS_FOR_CURSOR; }
+  if (s == "block") { return UNICODE_ALIAS_FOR_BLOCK; }
+  if (s == "pointer") { return UNICODE_ALIAS_FOR_POINTER; }
+  if (s == "wtf") { return UNICODE_ALIAS_FOR_UNKNOWN; }
+  if (s == "newline") { return UNICODE_ALIAS_FOR_NEWLINE; }
+  if (s == "halo") { return UNICODE_ALIAS_FOR_HALO; }
 
   if (s.size() > 1) { ERR("Bad unicode string [%s]", s.c_str()); }
 

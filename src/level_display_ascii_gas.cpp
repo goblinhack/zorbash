@@ -26,7 +26,7 @@ void Level::display_ascii_gas(point tl, point br, int16_t minx, int16_t miny, in
         int   tx = tl.x + (p.x - minx) - (MAP_BORDER_ROCK - 1);
         int   ty = tl.y + (p.y - miny) - (MAP_BORDER_ROCK - 1);
 
-        ascii_set(TILE_LAYER_FG_1, tx, ty, UNICODE_BLOCK);
+        ascii_set(TILE_LAYER_FG_1, tx, ty, UNICODE_ALIAS_FOR_BLOCK);
 
         color c = LIMEGREEN;
         c       = color_change_hue(c, non_pcg_random_range(0, 50));
@@ -42,7 +42,7 @@ void Level::display_ascii_gas(point tl, point br, int16_t minx, int16_t miny, in
         int   tx = tl.x + (p.x - minx) - (MAP_BORDER_ROCK - 1);
         int   ty = tl.y + (p.y - miny) - (MAP_BORDER_ROCK - 1);
 
-        ascii_set(TILE_LAYER_FG_2, tx, ty, UNICODE_BLOCK);
+        ascii_set(TILE_LAYER_FG_2, tx, ty, UNICODE_ALIAS_FOR_BLOCK);
 
         color c = PINK;
         c       = color_change_hue(c, non_pcg_random_range(0, 50));
