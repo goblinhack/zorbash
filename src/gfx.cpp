@@ -568,6 +568,23 @@ static void gfx_init_font_ascii(void)
       "3.94",
       "3.95",
       //////////////////////////////////////////////////////////////////
+      // MIDDLE_DOT
+      // FOUR_DOTS
+      // DIAMOND
+      // INVERTED_V
+      // ARIES
+      // ANKH
+      // MUSIC_NOTE
+      // CIRCLE
+      // SOLID_CIRCLE
+      // LOLLIPOP
+      // THREE_DOTS
+      // CURSOR
+      // BLOCK
+      // POINTER
+      // UNKNOWN
+      // NEWLINE
+      //////////////////////////////////////////////////////////////////
       "3.96",
       "3.97",
       "3.98",
@@ -584,6 +601,20 @@ static void gfx_init_font_ascii(void)
       "3.109",
       "3.110",
       "3.111",
+      //////////////////////////////////////////////////////////////////
+      // UP_ARROW
+      // DOWN_ARROW
+      // LEFT_ARROW
+      // RIGHT_ARROW
+      // UP_TRIANGLE
+      // DOWN_TRIANGLE
+      // OMEGA
+      // THETA
+      // LAMBDA
+      // STRIKE
+      // DIAMOND_SOLID
+      // CROSS
+      // HALO
       //////////////////////////////////////////////////////////////////
       "3.112",
       "3.113",

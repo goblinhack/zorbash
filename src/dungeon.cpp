@@ -4649,12 +4649,18 @@ void dungeon_test(void)
   game->tick_begin_now();
   pcg_random_allowed--;
 
+  auto last_tick = -1;
   while (game->tick_current < 100) {
     SDL_Delay(5);
     game->level->tick();
+
     wid_gc_all();
     wid_display_all();
-    ascii_dump();
+
+    if (game->tick_current != last_tick) {
+      last_tick = game->tick_current;
+      ascii_dump();
+    }
   }
   delete new_level;
 

@@ -17,10 +17,18 @@ void Game::tick_begin(const std::string &why)
   if (level) {
     auto player = level->player;
 
-    if (player) {
-      DBG("Seed (%s) tick requested (%s): %s", game->seed_name.c_str(), why.c_str(), player->to_string().c_str());
+    if (g_opt_test_dungeon_gen) {
+      if (player) {
+        CON("Seed (%s) tick requested (%s): %s", game->seed_name.c_str(), why.c_str(), player->to_string().c_str());
+      } else {
+        CON("Seed (%s) tick requested (%s): %s", game->seed_name.c_str(), why.c_str(), level->to_string().c_str());
+      }
     } else {
-      DBG("Seed (%s) tick requested (%s): %s", game->seed_name.c_str(), why.c_str(), level->to_string().c_str());
+      if (player) {
+        DBG("Seed (%s) tick requested (%s): %s", game->seed_name.c_str(), why.c_str(), player->to_string().c_str());
+      } else {
+        DBG("Seed (%s) tick requested (%s): %s", game->seed_name.c_str(), why.c_str(), level->to_string().c_str());
+      }
     }
   }
 }
@@ -50,17 +58,32 @@ void Game::tick_begin_now(void)
   tick_set_speed();
 
   auto level = game->get_current_level();
-  if (level) {
-    auto player = level->player;
-    if (player) {
-      DBG("Seed (%s) tick %d begin (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
-          player->to_string().c_str());
+  if (g_opt_test_dungeon_gen) {
+    if (level) {
+      auto player = level->player;
+      if (player) {
+        CON("Seed (%s) tick %d begin (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
+            player->to_string().c_str());
+      } else {
+        CON("Seed (%s) tick %d begin (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
+            level->to_string().c_str());
+      }
     } else {
-      DBG("Seed (%s) tick %d begin (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
-          level->to_string().c_str());
+      CON("Seed (%s) tick %d begin (%s)", game->seed_name.c_str(), game->tick_current, why.c_str());
     }
   } else {
-    DBG("Seed (%s) tick %d begin (%s)", game->seed_name.c_str(), game->tick_current, why.c_str());
+    if (level) {
+      auto player = level->player;
+      if (player) {
+        DBG("Seed (%s) tick %d begin (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
+            player->to_string().c_str());
+      } else {
+        DBG("Seed (%s) tick %d begin (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
+            level->to_string().c_str());
+      }
+    } else {
+      DBG("Seed (%s) tick %d begin (%s)", game->seed_name.c_str(), game->tick_current, why.c_str());
+    }
   }
 
   TRACE_AND_INDENT();
@@ -123,18 +146,35 @@ bool Game::tick_end(void)
   game->tick_current_is_too_slow = false;
 
   auto level = game->get_current_level();
-  if (level) {
-    auto player = level->player;
-    if (player) {
-      DBG("Seed (%s) tick %d end, duration %d ms: %s", game->seed_name.c_str(), game->tick_current,
-          time_ms() - game->tick_begin_ms, player->to_string().c_str());
+
+  if (g_opt_test_dungeon_gen) {
+    if (level) {
+      auto player = level->player;
+      if (player) {
+        CON("Seed (%s) tick %d end, duration %d ms: %s", game->seed_name.c_str(), game->tick_current,
+            time_ms() - game->tick_begin_ms, player->to_string().c_str());
+      } else {
+        CON("Seed (%s) tick %d end, duration %d ms: %s", game->seed_name.c_str(), game->tick_current,
+            time_ms() - game->tick_begin_ms, level->to_string().c_str());
+      }
     } else {
-      DBG("Seed (%s) tick %d end, duration %d ms: %s", game->seed_name.c_str(), game->tick_current,
-          time_ms() - game->tick_begin_ms, level->to_string().c_str());
+      CON("Seed (%s) tick %d end, duration %d ms", game->seed_name.c_str(), game->tick_current,
+          time_ms() - game->tick_begin_ms);
     }
   } else {
-    DBG("Seed (%s) tick %d end, duration %d ms", game->seed_name.c_str(), game->tick_current,
-        time_ms() - game->tick_begin_ms);
+    if (level) {
+      auto player = level->player;
+      if (player) {
+        DBG("Seed (%s) tick %d end, duration %d ms: %s", game->seed_name.c_str(), game->tick_current,
+            time_ms() - game->tick_begin_ms, player->to_string().c_str());
+      } else {
+        DBG("Seed (%s) tick %d end, duration %d ms: %s", game->seed_name.c_str(), game->tick_current,
+            time_ms() - game->tick_begin_ms, level->to_string().c_str());
+      }
+    } else {
+      DBG("Seed (%s) tick %d end, duration %d ms", game->seed_name.c_str(), game->tick_current,
+          time_ms() - game->tick_begin_ms);
+    }
   }
 
   CON("-");

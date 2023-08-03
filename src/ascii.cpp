@@ -1023,7 +1023,12 @@ void ascii_dump(void)
         if (! cell->tile[ depth ]) { continue; }
         if (cell->tex[ depth ]) { continue; }
         if (cell->ch[ depth ]) {
-          putwchar(cell->ch[ depth ]);
+          wchar_t out = unicode_alias_to_char(cell->ch[ depth ]);
+          if (out > 128) {
+            printf("%lc", out);
+          } else {
+            putchar(out);
+          }
           got_one = true;
           break;
         }
