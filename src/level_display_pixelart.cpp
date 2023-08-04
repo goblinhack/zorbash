@@ -26,9 +26,9 @@ void Level::display_pixelart_map(void)
     auto delta = 0;
     if (ts_fade_in_begin) { delta = time_ms_cached() - ts_fade_in_begin; }
 
-    g_render_black_and_white = true;
+    g_render_monochrome = true;
     display_pixelart_map_bg_things();
-    g_render_black_and_white = false;
+    g_render_monochrome = false;
 
     //
     // Reset the fade in timestamp as the above is a bit slow

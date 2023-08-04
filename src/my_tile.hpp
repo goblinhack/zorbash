@@ -78,7 +78,7 @@ public:
   float py2 {};
 
   class Tex *tex {};
-  class Tex *tex_black_and_white {};
+  class Tex *tex_monochrome {};
   class Tex *tex_mask {};
 
   std::array< std::array< uint8_t, TILE_HEIGHT_MAX >, TILE_WIDTH_MAX > pix {};
@@ -133,15 +133,15 @@ public:
 
 private:
   int _gl_binding {};
-  int _gl_binding_black_and_white {};
+  int _gl_binding_monochrome {};
   int _gl_binding_mask {};
 
 public:
   int  gl_binding(void) const;
-  int  gl_binding_black_and_white(void) const;
+  int  gl_binding_monochrome(void) const;
   int  gl_binding_mask(void) const;
   void set_gl_binding(int v);
-  void set_gl_binding_black_and_white(int v);
+  void set_gl_binding_monochrome(int v);
   void set_gl_binding_mask(int v);
 };
 

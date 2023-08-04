@@ -50,6 +50,7 @@ public:
   bool gfx_fullscreen          = {};
   bool gfx_fullscreen_desktop  = {};
   bool gfx_inverted            = {};
+  bool gfx_monochrome          = {};
   bool gfx_show_hidden         = {};
   bool gfx_vsync_enable        = {};
   bool gfx_vsync_locked        = {};

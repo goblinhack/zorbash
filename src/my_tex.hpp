@@ -28,6 +28,6 @@ uint8_t tex_init(void);
 
 void tex_fini(void);
 void tex_free(Texp tex);
-void tex_load(Texp *tex, Texp *tex_black_and_white, Texp *tex_mask, std::string file, std::string name, int mode);
+void tex_load(Texp *tex, Texp *tex_monochrome, Texp *tex_mask, std::string file, std::string name, int mode);
 
 #endif

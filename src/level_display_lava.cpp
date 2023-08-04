@@ -158,7 +158,11 @@ void Level::display_pixelart_lava(int fbo, int16_t minx, int16_t miny, int16_t m
       y1 += one_pix * lava_step2;
       y2 += one_pix * lava_step2;
 
-      blit(tile->gl_binding(), x1, y2, x2, y1, tlx, bry, brx, tly);
+      if (g_opt_gfx_monochrome) {
+        blit(tile->gl_binding_monochrome(), x1, y2, x2, y1, tlx, bry, brx, tly);
+      } else {
+        blit(tile->gl_binding(), x1, y2, x2, y1, tlx, bry, brx, tly);
+      }
     }
   }
   blit_flush();
@@ -211,7 +215,7 @@ void Level::display_pixelart_lava(int fbo, int16_t minx, int16_t miny, int16_t m
   glTranslatef(0, -5, 0);
 
   color y = ORANGE;
-  if (g_render_black_and_white) { y = GRAY; }
+  if (g_render_monochrome) { y = GRAY; }
   glcolor(y);
   glTranslatef(0, -3, 0);
   blit_fbo(fbo_mask1);
@@ -242,7 +246,7 @@ void Level::display_pixelart_lava(int fbo, int16_t minx, int16_t miny, int16_t m
   glTranslatef(-2, -2, 0);
 
   color c = RED;
-  if (g_render_black_and_white) { c = GRAY; }
+  if (g_render_monochrome) { c = GRAY; }
   glcolor(c);
   glTranslatef(-1, -2, 0);
   blit_fbo(fbo_mask1);

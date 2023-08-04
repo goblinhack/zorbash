@@ -230,7 +230,11 @@ void Level::display_pixelart_water(int fbo, int16_t minx, int16_t miny, int16_t 
       y1 += one_pix * water_step2;
       y2 += one_pix * water_step2;
 
-      blit(tile->gl_binding(), x1, y2, x2, y1, tlx, bry, brx, tly);
+      if (g_opt_gfx_monochrome) {
+        blit(tile->gl_binding_monochrome(), x1, y2, x2, y1, tlx, bry, brx, tly);
+      } else {
+        blit(tile->gl_binding(), x1, y2, x2, y1, tlx, bry, brx, tly);
+      }
     }
   }
   blit_flush();

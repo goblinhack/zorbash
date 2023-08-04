@@ -139,6 +139,18 @@ static uint8_t wid_config_gfx_inverted_toggle(Widp w, int x, int y, uint32_t but
   return true;
 }
 
+static uint8_t wid_config_gfx_monochrome_toggle(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  config_changed = true;
+  CON("INF: Toggle monochrome");
+  game->config.gfx_monochrome = ! game->config.gfx_monochrome;
+  g_opt_gfx_monochrome        = game->config.gfx_monochrome;
+  game->wid_config_gfx_select();
+  local_g_need_restart = true;
+  return true;
+}
+
 static uint8_t wid_config_other_fps_counter_toggle(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
@@ -359,8 +371,8 @@ void Game::wid_config_gfx_select(void)
   auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
   auto m                   = TERM_WIDTH / 2;
 
-  point tl = make_point(m - 20, TERM_HEIGHT / 2 - 10);
-  point br = make_point(m + 20, TERM_HEIGHT / 2 + 11);
+  point tl = make_point(m - 20, TERM_HEIGHT / 2 - 11);
+  point br = make_point(m + 20, TERM_HEIGHT / 2 + 13);
 
   auto width = br.x - tl.x - 2;
 
@@ -900,6 +912,43 @@ void Game::wid_config_gfx_select(void)
     wid_set_on_mouse_up(w, wid_config_gfx_inverted_toggle);
 
     if (game->config.gfx_inverted) {
+      wid_set_text(w, "True");
+    } else {
+      wid_set_text(w, "False");
+    }
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // Inverted graphics
+  /////////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Monochrome graphics");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Monochrome");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Monochrome value");
+
+    point tl = make_point(29, y_at);
+    point br = make_point(37, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_on_mouse_up(w, wid_config_gfx_monochrome_toggle);
+
+    if (game->config.gfx_monochrome) {
       wid_set_text(w, "True");
     } else {
       wid_set_text(w, "False");

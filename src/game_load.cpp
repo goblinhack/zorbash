@@ -954,51 +954,29 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
   }
 
   in >> bits(g_opt_player_name);
-  LOG("Read config: g_opt_player_name            = [%s]", g_opt_player_name.c_str());
   in >> bits(my.t.ascii_gl_height);
-  LOG("Read config: ascii_gl_height              = %d", my.t.ascii_gl_height);
   in >> bits(my.t.ascii_gl_width);
-  LOG("Read config: ascii_gl_width               = %d", my.t.ascii_gl_width);
   in >> bits(g_opt_ascii);
-  LOG("Read config: g_opt_ascii                  = %d", g_opt_ascii);
   in >> bits(my.t.config_pix_height);
-  LOG("Read config: config_pix_height            = %d", my.t.config_pix_height);
   in >> bits(my.t.config_pix_width);
-  LOG("Read config: config_pix_width             = %d", my.t.config_pix_width);
   in >> bits(my.t.debug_mode);
-  LOG("Read config: debug_mode                   = %d", my.t.debug_mode);
   in >> bits(my.t.disable_player_warnings);
-  LOG("Read config: disable_player_warnings      = %d", my.t.disable_player_warnings);
   in >> bits(my.t.fps_counter);
-  LOG("Read config: fps_counter                  = %d", my.t.fps_counter);
   in >> bits(my.t.game_pix_height);
-  LOG("Read config: game_pix_height              = %d", my.t.game_pix_height);
   in >> bits(my.t.game_pix_scale_height);
-  LOG("Read config: game_pix_scale_height        = %f", my.t.game_pix_scale_height);
   in >> bits(my.t.game_pix_scale_width);
-  LOG("Read config: game_pix_scale_width         = %f", my.t.game_pix_scale_width);
   in >> bits(my.t.game_pix_width);
-  LOG("Read config: game_pix_width               = %d", my.t.game_pix_width);
   in >> bits(my.t.game_pix_zoom);
-  LOG("Read config: game_pix_zoom                = %f", my.t.game_pix_zoom);
   in >> bits(my.t.gfx_allow_highdpi);
-  LOG("Read config: gfx_allow_highdpi            = %d", my.t.gfx_allow_highdpi);
   in >> bits(my.t.gfx_borderless);
-  LOG("Read config: gfx_borderless               = %d", my.t.gfx_borderless);
   in >> bits(my.t.gfx_fullscreen);
-  LOG("Read config: gfx_fullscreen               = %d", my.t.gfx_fullscreen);
   in >> bits(my.t.gfx_fullscreen_desktop);
-  LOG("Read config: gfx_fullscreen_desktop       = %d", my.t.gfx_fullscreen_desktop);
   in >> bits(my.t.gfx_inverted);
-  LOG("Read config: gfx_inverted                 = %d", my.t.gfx_inverted);
   in >> bits(my.t.gfx_show_hidden);
-  LOG("Read config: gfx_show_hidden              = %d", my.t.gfx_show_hidden);
+  in >> bits(my.t.gfx_monochrome);
   in >> bits(my.t.gfx_vsync_enable);
-  LOG("Read config: gfx_vsync_enable             = %d", my.t.gfx_vsync_enable);
   in >> bits(my.t.mouse_wheel_lr_negated);
-  LOG("Read config: mouse_wheel_lr_negated       = %d", my.t.mouse_wheel_lr_negated);
   in >> bits(my.t.mouse_wheel_ud_negated);
-  LOG("Read config: mouse_wheel_ud_negated       = %d", my.t.mouse_wheel_ud_negated);
   in >> bits(my.t.key_action0);
   in >> bits(my.t.key_action1);
   in >> bits(my.t.key_action2);
@@ -1078,48 +1056,73 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
   in >> bits(my.t.key_zoom_in);
   in >> bits(my.t.key_zoom_out);
   in >> bits(my.t.music_volume);
-  LOG("Read config: music_volume                 = %d", my.t.music_volume);
   in >> bits(my.t.one_pixel_height);
-  LOG("Read config: one_pixel_height             = %f", my.t.one_pixel_height);
   in >> bits(my.t.one_pixel_width);
-  LOG("Read config: one_pixel_width              = %f", my.t.one_pixel_width);
   in >> bits(my.t.sdl_delay);
-  LOG("Read config: sdl_delay                    = %d", my.t.sdl_delay);
   in >> bits(my.t.snapshot_freq);
-  LOG("Read config: snapshot_freq                = %d", my.t.snapshot_freq);
   in >> bits(my.t.sound_volume);
-  LOG("Read config: sound_volume                 = %d", my.t.sound_volume);
   in >> bits(my.t.tile_height);
-  LOG("Read config: tile_height                  = %d", my.t.tile_height);
   in >> bits(my.t.tile_pixel_height);
-  LOG("Read config: tile_pixel_height            = %f", my.t.tile_pixel_height);
   in >> bits(my.t.tile_pixel_width);
-  LOG("Read config: tile_pixel_width             = %f", my.t.tile_pixel_width);
   in >> bits(my.t.tile_pix_height);
-  LOG("Read config: tile_pix_height              = %f", my.t.tile_pix_height);
   in >> bits(my.t.tile_pix_width);
-  LOG("Read config: tile_pix_width               = %f", my.t.tile_pix_width);
   in >> bits(my.t.tile_width);
-  LOG("Read config: tile_width                   = %d", my.t.tile_width);
   in >> bits(my.t.ui_pix_height);
-  LOG("Read config: ui_pix_height                = %d", my.t.ui_pix_height);
   in >> bits(my.t.ui_pix_width);
-  LOG("Read config: ui_pix_width                 = %d", my.t.ui_pix_width);
   in >> bits(my.t.ui_pix_zoom);
-  LOG("Read config: ui_pix_zoom                  = %f", my.t.ui_pix_zoom);
   in >> bits(my.t.ui_ascii_term_height);
-  LOG("Read config: ui_ascii_term_height         = %d", my.t.ui_ascii_term_height);
   in >> bits(my.t.ui_ascii_term_width);
-  LOG("Read config: ui_ascii_term_width          = %d", my.t.ui_ascii_term_width);
   in >> bits(my.t.ui_gfx_term_height);
-  LOG("Read config: ui_gfx_term_height           = %d", my.t.ui_gfx_term_height);
   in >> bits(my.t.ui_gfx_term_width);
-  LOG("Read config: ui_gfx_term_width            = %d", my.t.ui_gfx_term_width);
   in >> bits(my.t.video_w_h_ratio);
-  LOG("Read config: video_w_h_ratio              = %f", my.t.video_w_h_ratio);
   in >> bits(my.t.window_pix_height);
-  LOG("Read config: window_pix_height            = %d", my.t.window_pix_height);
   in >> bits(my.t.window_pix_width);
+
+  LOG("Read config: ascii_gl_height              = %d", my.t.ascii_gl_height);
+  LOG("Read config: ascii_gl_width               = %d", my.t.ascii_gl_width);
+  LOG("Read config: config_pix_height            = %d", my.t.config_pix_height);
+  LOG("Read config: config_pix_width             = %d", my.t.config_pix_width);
+  LOG("Read config: debug_mode                   = %d", my.t.debug_mode);
+  LOG("Read config: disable_player_warnings      = %d", my.t.disable_player_warnings);
+  LOG("Read config: fps_counter                  = %d", my.t.fps_counter);
+  LOG("Read config: game_pix_height              = %d", my.t.game_pix_height);
+  LOG("Read config: game_pix_scale_height        = %f", my.t.game_pix_scale_height);
+  LOG("Read config: game_pix_scale_width         = %f", my.t.game_pix_scale_width);
+  LOG("Read config: game_pix_width               = %d", my.t.game_pix_width);
+  LOG("Read config: game_pix_zoom                = %f", my.t.game_pix_zoom);
+  LOG("Read config: gfx_allow_highdpi            = %d", my.t.gfx_allow_highdpi);
+  LOG("Read config: gfx_borderless               = %d", my.t.gfx_borderless);
+  LOG("Read config: gfx_fullscreen_desktop       = %d", my.t.gfx_fullscreen_desktop);
+  LOG("Read config: gfx_fullscreen               = %d", my.t.gfx_fullscreen);
+  LOG("Read config: gfx_inverted                 = %d", my.t.gfx_inverted);
+  LOG("Read config: gfx_monochrome                 = %d", my.t.gfx_monochrome);
+  LOG("Read config: gfx_show_hidden              = %d", my.t.gfx_show_hidden);
+  LOG("Read config: gfx_vsync_enable             = %d", my.t.gfx_vsync_enable);
+  LOG("Read config: g_opt_ascii                  = %d", g_opt_ascii);
+  LOG("Read config: g_opt_player_name            = [%s]", g_opt_player_name.c_str());
+  LOG("Read config: mouse_wheel_lr_negated       = %d", my.t.mouse_wheel_lr_negated);
+  LOG("Read config: mouse_wheel_ud_negated       = %d", my.t.mouse_wheel_ud_negated);
+  LOG("Read config: music_volume                 = %d", my.t.music_volume);
+  LOG("Read config: one_pixel_height             = %f", my.t.one_pixel_height);
+  LOG("Read config: one_pixel_width              = %f", my.t.one_pixel_width);
+  LOG("Read config: sdl_delay                    = %d", my.t.sdl_delay);
+  LOG("Read config: snapshot_freq                = %d", my.t.snapshot_freq);
+  LOG("Read config: sound_volume                 = %d", my.t.sound_volume);
+  LOG("Read config: tile_height                  = %d", my.t.tile_height);
+  LOG("Read config: tile_pixel_height            = %f", my.t.tile_pixel_height);
+  LOG("Read config: tile_pixel_width             = %f", my.t.tile_pixel_width);
+  LOG("Read config: tile_pix_height              = %f", my.t.tile_pix_height);
+  LOG("Read config: tile_pix_width               = %f", my.t.tile_pix_width);
+  LOG("Read config: tile_width                   = %d", my.t.tile_width);
+  LOG("Read config: ui_ascii_term_height         = %d", my.t.ui_ascii_term_height);
+  LOG("Read config: ui_ascii_term_width          = %d", my.t.ui_ascii_term_width);
+  LOG("Read config: ui_gfx_term_height           = %d", my.t.ui_gfx_term_height);
+  LOG("Read config: ui_gfx_term_width            = %d", my.t.ui_gfx_term_width);
+  LOG("Read config: ui_pix_height                = %d", my.t.ui_pix_height);
+  LOG("Read config: ui_pix_width                 = %d", my.t.ui_pix_width);
+  LOG("Read config: ui_pix_zoom                  = %f", my.t.ui_pix_zoom);
+  LOG("Read config: video_w_h_ratio              = %f", my.t.video_w_h_ratio);
+  LOG("Read config: window_pix_height            = %d", my.t.window_pix_height);
   LOG("Read config: window_pix_width             = %d", my.t.window_pix_width);
   // seed name handled below
 
@@ -1130,6 +1133,8 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
       g_opt_debug1 = true;
     }
   }
+
+  if (my.t.gfx_monochrome) { g_opt_gfx_monochrome = true; }
 
   //
   // Allow the command line to override.

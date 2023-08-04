@@ -867,6 +867,22 @@ static void ascii_blit(void)
         color bg_color_bl = cell->color_bl[ depth ];
         color bg_color_br = cell->color_br[ depth ];
 
+        if (g_opt_gfx_monochrome) {
+          int avg       = ((int) bg_color_tl.r + (int) bg_color_tl.g + (int) bg_color_tl.b) / 3;
+          bg_color_tl.r = avg;
+          bg_color_tl.g = avg;
+          bg_color_tl.b = avg;
+          bg_color_tr.r = avg;
+          bg_color_tr.g = avg;
+          bg_color_tr.b = avg;
+          bg_color_bl.r = avg;
+          bg_color_bl.g = avg;
+          bg_color_bl.b = avg;
+          bg_color_br.r = avg;
+          bg_color_br.g = avg;
+          bg_color_br.b = avg;
+        }
+
         tile_blit_colored_fat(nullptr, cell->tile[ depth ], tile_tl, tile_br, bg_color_tl, bg_color_tr, bg_color_bl,
                               bg_color_br);
       }
@@ -904,6 +920,22 @@ static void ascii_blit(void)
           color color_bl = cell->color_bl[ depth ];
           color color_br = cell->color_br[ depth ];
 
+          if (g_opt_gfx_monochrome) {
+            int avg    = ((int) color_tl.r + (int) color_tl.g + (int) color_tl.b) / 3;
+            color_tl.r = avg;
+            color_tl.g = avg;
+            color_tl.b = avg;
+            color_tr.r = avg;
+            color_tr.g = avg;
+            color_tr.b = avg;
+            color_bl.r = avg;
+            color_bl.g = avg;
+            color_bl.b = avg;
+            color_br.r = avg;
+            color_br.g = avg;
+            color_br.b = avg;
+          }
+
           tile_blit_section_colored(
               cell->tile[ depth ], fpoint(cell->tx[ depth ], cell->ty[ depth ]),
               fpoint(cell->tx[ depth ] + cell->dx[ depth ], cell->ty[ depth ] + cell->dy[ depth ]), tile_tl, tile_br,
@@ -917,6 +949,22 @@ static void ascii_blit(void)
           color color_tr = cell->color_tr[ depth ];
           color color_bl = cell->color_bl[ depth ];
           color color_br = cell->color_br[ depth ];
+
+          if (g_opt_gfx_monochrome) {
+            int avg    = ((int) color_tl.r + (int) color_tl.g + (int) color_tl.b) / 3;
+            color_tl.r = avg;
+            color_tl.g = avg;
+            color_tl.b = avg;
+            color_tr.r = avg;
+            color_tr.g = avg;
+            color_tr.b = avg;
+            color_bl.r = avg;
+            color_bl.g = avg;
+            color_bl.b = avg;
+            color_br.r = avg;
+            color_br.g = avg;
+            color_br.b = avg;
+          }
 
           tile_blit_section_colored(
               cell->tile[ depth ], fpoint(cell->tx[ depth ], cell->ty[ depth ]),
@@ -959,6 +1007,22 @@ static void ascii_blit(void)
           color fg_color_bl = cell->color_bl[ depth ];
           color fg_color_br = cell->color_br[ depth ];
 
+          if (g_opt_gfx_monochrome) {
+            int avg       = ((int) fg_color_tl.r + (int) fg_color_tl.g + (int) fg_color_tl.b) / 3;
+            fg_color_tl.r = avg;
+            fg_color_tl.g = avg;
+            fg_color_tl.b = avg;
+            fg_color_tr.r = avg;
+            fg_color_tr.g = avg;
+            fg_color_tr.b = avg;
+            fg_color_bl.r = avg;
+            fg_color_bl.g = avg;
+            fg_color_bl.b = avg;
+            fg_color_br.r = avg;
+            fg_color_br.g = avg;
+            fg_color_br.b = avg;
+          }
+
           tile_blit_colored_fat(nullptr, tile, tile_tl, tile_br, fg_color_tl, fg_color_tr, fg_color_bl, fg_color_br);
         }
       }
@@ -970,7 +1034,7 @@ static void ascii_blit(void)
   }
 }
 
-void ascii_dump(void)
+void ascii_dump(bool use_color)
 {
   TRACE_NO_INDENT();
 
@@ -1007,16 +1071,18 @@ void ascii_dump(void)
         if (col != COLOR_NONE) { fg = col; }
       }
 
-      if ((fg != COLOR_NONE) && (bg != COLOR_NONE)) {
-        snprintf(fgstr, sizeof(fgstr), "\e[38;2;%u;%u;%u;48;2;%u;%u;%um", fg.r, fg.g, fg.b, bg.r, bg.g, bg.b);
-      } else if (fg != COLOR_NONE) {
-        snprintf(fgstr, sizeof(fgstr), "\e[38;2;%u;%u;%um", fg.r, fg.g, fg.b);
-      } else if (bg != COLOR_NONE) {
-        snprintf(fgstr, sizeof(fgstr), "\e[48;2;%u;%u;%um", bg.r, bg.g, bg.b);
-      } else {
-        snprintf(fgstr, sizeof(fgstr), "\e[39m\e[49m");
+      if (use_color) {
+        if ((fg != COLOR_NONE) && (bg != COLOR_NONE)) {
+          snprintf(fgstr, sizeof(fgstr), "\e[38;2;%u;%u;%u;48;2;%u;%u;%um", fg.r, fg.g, fg.b, bg.r, bg.g, bg.b);
+        } else if (fg != COLOR_NONE) {
+          snprintf(fgstr, sizeof(fgstr), "\e[38;2;%u;%u;%um", fg.r, fg.g, fg.b);
+        } else if (bg != COLOR_NONE) {
+          snprintf(fgstr, sizeof(fgstr), "\e[48;2;%u;%u;%um", bg.r, bg.g, bg.b);
+        } else {
+          snprintf(fgstr, sizeof(fgstr), "\e[39m\e[49m");
+        }
+        fputs(fgstr, stdout);
       }
-      fputs(fgstr, stdout);
 
       bool got_one = false;
       for (int depth = TILE_LAYER_MAX - 1; depth >= 0; depth--) {
@@ -1036,8 +1102,10 @@ void ascii_dump(void)
       if (! got_one) { putchar(' '); }
     }
 
-    snprintf(fgstr, sizeof(fgstr), "\e[39m\e[49m");
-    fputs(fgstr, stdout);
+    if (use_color) {
+      snprintf(fgstr, sizeof(fgstr), "\e[39m\e[49m");
+      fputs(fgstr, stdout);
+    }
 
     putchar('|');
     putchar('\n');

@@ -846,6 +846,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my)
   out << bits(my.t.gfx_fullscreen);
   out << bits(my.t.gfx_fullscreen_desktop);
   out << bits(my.t.gfx_inverted);
+  out << bits(my.t.gfx_monochrome);
   out << bits(my.t.gfx_show_hidden);
   out << bits(my.t.gfx_vsync_enable);
   out << bits(my.t.mouse_wheel_lr_negated);

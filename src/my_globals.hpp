@@ -31,13 +31,14 @@ extern bool g_opt_biome_flooded;        // Force this biome
 extern bool g_opt_no_slow_log_flush;    // Do not flush after each console log at start
 extern bool g_opt_override_debug_level; // Temporary, used to disable existing debugs
 extern bool g_opt_resume;               // Load last snapshot
+extern bool g_opt_gfx_monochrome;       // Black and white
 extern bool g_opt_test_dungeon_gen;     // Enable dungeon tests
 extern bool g_opt_test_level_start;     // Start in the game immediately
 extern bool g_opt_tests;                // Any test enabled?
 extern bool g_opt_test_save_load;       // Enable save load tests
 extern bool g_opt_test_skip_main_menu;  // Start in the dungeon menu
 extern bool g_quitting;                 // Exitting the game
-extern bool g_render_black_and_white;   // Rendering map in black and white
+extern bool g_render_monochrome;        // Rendering map in black and white
 extern bool g_saved_snapshot;           // Just saved a snapshot
 
 // --debug  Basic debug

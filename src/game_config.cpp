@@ -38,6 +38,7 @@ void Config::reset(void)
   video_w_h_ratio         = {};
   gfx_fullscreen_desktop  = true;
   gfx_inverted            = false;
+  gfx_monochrome          = g_opt_gfx_monochrome;
   gfx_show_hidden         = false;
   gfx_vsync_enable        = true;
   gfx_vsync_locked        = false;

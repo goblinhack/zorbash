@@ -48,7 +48,7 @@ public:
 };
 
 static std::map< std::string, Texp > textures;
-static std::map< std::string, Texp > textures_black_and_white;
+static std::map< std::string, Texp > textures_monochrome;
 static std::map< std::string, Texp > textures_mask;
 
 uint8_t tex_init(void)
@@ -63,7 +63,7 @@ void tex_fini(void)
   for (auto &t : textures) {
     delete t.second;
   }
-  for (auto &t : textures_black_and_white) {
+  for (auto &t : textures_monochrome) {
     delete t.second;
   }
   for (auto &t : textures_mask) {
@@ -75,7 +75,7 @@ void tex_free(Texp tex)
 {
   TRACE_AND_INDENT();
   textures.erase(tex->name);
-  textures_black_and_white.erase(tex->name);
+  textures_monochrome.erase(tex->name);
   textures_mask.erase(tex->name);
   delete (tex);
 }
@@ -279,11 +279,11 @@ Texp tex_load(std::string file, std::string name, int mode)
 //
 static std::pair< Texp, Texp > tex_sprite(SDL_Surface *in, std::string file, std::string name, int mode)
 {
-  auto n1 = name + "_black_and_white";
+  auto n1 = name + "_monochrome";
   auto n2 = name + "_mask";
   Texp t1 = new Tex(n1);
   Texp t2 = new Tex(n2);
-  textures_black_and_white.insert(std::make_pair(n1, t1));
+  textures_monochrome.insert(std::make_pair(n1, t1));
   textures_mask.insert(std::make_pair(n2, t2));
   uint32_t rmask, gmask, bmask, amask;
 
@@ -364,7 +364,7 @@ static std::pair< Texp, Texp > tex_sprite(SDL_Surface *in, std::string file, std
   return (std::make_pair(t1, t2));
 }
 
-void tex_load(Texp *tex, Texp *tex_black_and_white, Texp *tex_mask, std::string file, std::string name, int mode)
+void tex_load(Texp *tex, Texp *tex_monochrome, Texp *tex_mask, std::string file, std::string name, int mode)
 {
   TRACE_AND_INDENT();
   Texp t = tex_find(name);
@@ -380,19 +380,19 @@ void tex_load(Texp *tex, Texp *tex_black_and_white, Texp *tex_mask, std::string 
   }
 
   DBG2("- create textures '%s', '%s'", file.c_str(), name.c_str());
-  SDL_Surface *surface                 = nullptr;
-  SDL_Surface *surface_black_and_white = nullptr;
+  SDL_Surface *surface            = nullptr;
+  SDL_Surface *surface_monochrome = nullptr;
 
-  load_images(&surface, &surface_black_and_white, file);
+  load_images(&surface, &surface_monochrome, file);
 
   if (! surface) { ERR("Could not make surface from file '%s'", file.c_str()); }
 
-  if (! surface_black_and_white) { ERR("Could not make black and white surface from file '%s'", file.c_str()); }
+  if (! surface_monochrome) { ERR("Could not make black and white surface from file '%s'", file.c_str()); }
 
-  *tex                 = tex_from_surface(surface, file, name, mode);
-  auto p               = tex_sprite(surface_black_and_white, file, name, mode);
-  *tex_black_and_white = p.first;
-  *tex_mask            = p.second;
+  *tex            = tex_from_surface(surface, file, name, mode);
+  auto p          = tex_sprite(surface_monochrome, file, name, mode);
+  *tex_monochrome = p.first;
+  *tex_mask       = p.second;
 
   DBG2("- loaded texture '%s', '%s'", file.c_str(), name.c_str());
 }

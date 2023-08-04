@@ -467,6 +467,7 @@ static void usage(void)
   CON("Commonly used options:");
   CON(" --ascii                     -- Enable ascii graphics.");
   CON(" --pixelart                  -- Enable pixelart graphics.");
+  CON(" --monochrome                -- Enable monochrome graphics.");
   CON(" --player-name 'disco bob'   -- Set your name.");
   CON(" --seed <name/number>        -- Set the random dungeon seed.");
   CON(" --resume                    -- Load last snapshot.");
@@ -546,6 +547,11 @@ static void parse_args(int argc, char *argv[])
 
     if (! strcasecmp(argv[ i ], "--test-biome-resume") || ! strcasecmp(argv[ i ], "-test-biome-resume")) {
       g_opt_resume = true;
+      continue;
+    }
+
+    if (! strcasecmp(argv[ i ], "--monochrome") || ! strcasecmp(argv[ i ], "-monochrome")) {
+      g_opt_gfx_monochrome = true;
       continue;
     }
 

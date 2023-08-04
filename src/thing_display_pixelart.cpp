@@ -42,7 +42,7 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
   TRACE_NO_INDENT();
   IF_DEBUG2 { return; }
 
-  if (g_render_black_and_white) { return; }
+  if (g_render_monochrome) { return; }
 
   if (is_invisible_currently()) { return; }
 
@@ -215,7 +215,7 @@ void Thing::blit_player_owned_shadow(const Tpp &tpp, const Tilep &tile, const po
   TRACE_NO_INDENT();
   IF_DEBUG2 { return; }
 
-  if (g_render_black_and_white) { return; }
+  if (g_render_monochrome) { return; }
 
   if (is_invisible_currently()) { return; }
 
@@ -248,7 +248,7 @@ void Thing::blit_shadow(const Tpp &tpp, const Tilep &tile, const point blit_tl, 
   TRACE_NO_INDENT();
   IF_DEBUG2 { return; }
 
-  if (g_render_black_and_white) { return; }
+  if (g_render_monochrome) { return; }
 
   if (is_invisible_currently()) { return; }
 
@@ -789,7 +789,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   //
   // If rendering the background, no shadows
   //
-  if (! g_render_black_and_white) {
+  if (! g_render_monochrome) {
     //
     // Blit shadows?
     //
@@ -949,7 +949,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   bool square_outline = tpp->gfx_pixelart_show_square_outlined();
   bool outline        = tpp->gfx_pixelart_show_outlined() || square_outline;
 
-  if (! g_render_black_and_white) {
+  if (! g_render_monochrome) {
     if (blit_options->reflection) {
       //
       // Drawing a reflection

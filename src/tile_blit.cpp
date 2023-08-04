@@ -46,7 +46,12 @@ void tile_blit_colored_fat(Tpp tp, Tilep tile, point tl, point br, color color_t
     y2 += bot_off * pct_h;
   }
 
-  blit_colored(tile->gl_binding(), x1, y2, x2, y1, tl.x, br.y, br.x, tl.y, color_tl, color_tr, color_bl, color_br);
+  if (g_opt_gfx_monochrome) {
+    blit_colored(tile->gl_binding_monochrome(), x1, y2, x2, y1, tl.x, br.y, br.x, tl.y, color_tl, color_tr, color_bl,
+                 color_br);
+  } else {
+    blit_colored(tile->gl_binding(), x1, y2, x2, y1, tl.x, br.y, br.x, tl.y, color_tl, color_tr, color_bl, color_br);
+  }
 }
 
 void tile_blit_colored(Tilep tile, point tl, point br, color color_tl, color color_tr, color color_bl, color color_br)
@@ -56,7 +61,12 @@ void tile_blit_colored(Tilep tile, point tl, point br, color color_tl, color col
   float y1 = tile->y1;
   float y2 = tile->y2;
 
-  blit_colored(tile->gl_binding(), x1, y2, x2, y1, tl.x, br.y, br.x, tl.y, color_tl, color_tr, color_bl, color_br);
+  if (g_opt_gfx_monochrome) {
+    blit_colored(tile->gl_binding_monochrome(), x1, y2, x2, y1, tl.x, br.y, br.x, tl.y, color_tl, color_tr, color_bl,
+                 color_br);
+  } else {
+    blit_colored(tile->gl_binding(), x1, y2, x2, y1, tl.x, br.y, br.x, tl.y, color_tl, color_tr, color_bl, color_br);
+  }
 }
 
 std::string tile_name(Tilep t)
@@ -192,21 +202,21 @@ Tilep tile_next(Tilemap *tmap, Tilep in)
 
 int Tile::gl_binding(void) const
 {
-  if (g_render_black_and_white) {
-    if (_gl_binding_black_and_white) {
+  if (g_render_monochrome) {
+    if (_gl_binding_monochrome) {
     } else {
       return (_gl_binding);
     }
-    return (_gl_binding_black_and_white);
+    return (_gl_binding_monochrome);
   }
   return (_gl_binding);
 }
 
 void Tile::set_gl_binding(int v) { _gl_binding = v; }
 
-int Tile::gl_binding_black_and_white(void) const { return (_gl_binding_black_and_white); }
+int Tile::gl_binding_monochrome(void) const { return (_gl_binding_monochrome); }
 
-void Tile::set_gl_binding_black_and_white(int v) { _gl_binding_black_and_white = v; }
+void Tile::set_gl_binding_monochrome(int v) { _gl_binding_monochrome = v; }
 
 int Tile::gl_binding_mask(void) const { return (_gl_binding_mask); }
 

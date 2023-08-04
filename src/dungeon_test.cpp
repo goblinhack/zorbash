@@ -38,6 +38,9 @@ void dungeon_test(void)
   point3d world_at;
   point   grid_at;
 
+  //
+  // Needed to set the terminal size
+  //
   g_opt_ascii = true;
   sdl_display_reset();
 
@@ -72,7 +75,7 @@ void dungeon_test(void)
 
     if (game->tick_current != last_tick) {
       last_tick = game->tick_current;
-      ascii_dump();
+      ascii_dump(! g_opt_gfx_monochrome);
     }
   }
   delete new_level;

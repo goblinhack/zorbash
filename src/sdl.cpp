@@ -625,6 +625,47 @@ uint8_t config_gfx_inverted_set(class Tokens *tokens, void *context)
 //
 // User has entered a command, run it
 //
+void config_gfx_monochrome_toggle(void)
+{
+  TRACE_NO_INDENT();
+
+  if (! game->config.gfx_monochrome) {
+    game->config.gfx_monochrome = true;
+    TOPCON("GFX monochrome enabled.");
+  } else {
+    game->config.gfx_monochrome = false;
+    TOPCON("GFX monochrome disabled.");
+  }
+}
+
+//
+// User has entered a command, run it
+//
+uint8_t config_gfx_monochrome_set(class Tokens *tokens, void *context)
+{
+  TRACE_NO_INDENT();
+
+  char *s = tokens->args[ 3 ];
+
+  if (! s || (*s == '\0')) {
+    game->config.gfx_monochrome = true;
+    TOPCON("GFX monochrome enabled (default).");
+  } else {
+    int val                     = strtol(s, nullptr, 10) ? 1 : 0;
+    game->config.gfx_monochrome = val;
+    if (game->config.gfx_monochrome) {
+      TOPCON("GFX monochrome enabled.");
+    } else {
+      TOPCON("GFX monochrome disabled.");
+    }
+  }
+
+  return true;
+}
+
+//
+// User has entered a command, run it
+//
 void config_game_pix_zoom_in(void)
 {
   TRACE_NO_INDENT();

@@ -93,7 +93,12 @@ void Level::display_pixelart_gas_poison(int fbo, int16_t minx, int16_t miny, int
 
             // int d   = 2; // (TILE_WIDTH / DUNGEON_GAS_RESOLUTION) * 2;
             // blit(tile->gl_binding(), x1, y2, x2, y1, tlx + ox - d, gbry + oy + d, gbrx + ox + d, tly + oy - d);
-            blit(tile->gl_binding(), x1, y2, x2, y1, gtlx, gbry, gbrx, gtly);
+
+            if (g_opt_gfx_monochrome) {
+              blit(tile->gl_binding_monochrome(), x1, y2, x2, y1, gtlx, gbry, gbrx, gtly);
+            } else {
+              blit(tile->gl_binding(), x1, y2, x2, y1, gtlx, gbry, gbrx, gtly);
+            }
           }
         }
       }
@@ -229,7 +234,12 @@ void Level::display_pixelart_gas_healing(int fbo, int16_t minx, int16_t miny, in
 
             // int d   = 2; // (TILE_WIDTH / DUNGEON_GAS_RESOLUTION) * 2;
             // blit(tile->gl_binding(), x1, y2, x2, y1, tlx + ox - d, gbry + oy + d, gbrx + ox + d, tly + oy - d);
-            blit(tile->gl_binding(), x1, y2, x2, y1, gtlx, gbry, gbrx, gtly);
+
+            if (g_opt_gfx_monochrome) {
+              blit(tile->gl_binding_monochrome(), x1, y2, x2, y1, gtlx, gbry, gbrx, gtly);
+            } else {
+              blit(tile->gl_binding(), x1, y2, x2, y1, gtlx, gbry, gbrx, gtly);
+            }
           }
         }
       }

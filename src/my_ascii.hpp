@@ -111,7 +111,7 @@ void ascii_clear_display(void);
 void ascii_clear_scissors(void);
 void ascii_dim(int x, int y, int z, float alpha);
 void ascii_display(void);
-void ascii_dump(void);
+void ascii_dump(bool no_color);
 void ascii_draw_line(int x0, int y0, int x1, int y1, Tilep what, color c);
 void ascii_draw_line(int x0, int y0, int x1, int y1, const char *tilename, color c);
 void ascii_draw_line(int x0, int y0, int x1, int y1, wchar_t what, color c);
