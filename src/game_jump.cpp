@@ -195,7 +195,8 @@ void Game::init_jump_paths()
   auto last = std::unique(cands.begin(), cands.end());
   cands.erase(last, cands.end());
 
-  std::cout << std::endl;
+  if (debug) { std::cout << std::endl; }
+
   for (const auto &s : cands) {
     if (debug) {
       std::cout << "[" << s << "]"

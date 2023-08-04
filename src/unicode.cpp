@@ -189,7 +189,7 @@ wchar_t unicode_alias_to_char(wchar_t in)
     case UNICODE_0x7e : return UNICODE_0x7e; /* 126	  ~ */
     case UNICODE_0x7f : return UNICODE_0x7f; /* 127	  - */
     case UNICODE_ALIAS_FOR_MIDDLE_DOT : return L'·';
-    case UNICODE_ALIAS_FOR_FOUR_DOTS : return L'𐧹';
+    case UNICODE_ALIAS_FOR_FOUR_DOTS : return L'∷';
     case UNICODE_ALIAS_FOR_DIAMOND : return L'◇';
     case UNICODE_ALIAS_FOR_INVERTED_V : return L'∧';
     case UNICODE_ALIAS_FOR_ARIES : return L'ψ';
@@ -201,7 +201,7 @@ wchar_t unicode_alias_to_char(wchar_t in)
     case UNICODE_ALIAS_FOR_THREE_DOTS : return L'∴';
     case UNICODE_ALIAS_FOR_CURSOR : return L'_';
     case UNICODE_ALIAS_FOR_BLOCK : return L'█';
-    case UNICODE_ALIAS_FOR_POINTER : return L'🮰';
+    case UNICODE_ALIAS_FOR_POINTER : return L'⊹';
     case UNICODE_ALIAS_FOR_UNKNOWN : return L'⁇';
     case UNICODE_ALIAS_FOR_NEWLINE : return L'⮒';
     case UNICODE_ALIAS_FOR_UP_ARROW : return L'↑';
