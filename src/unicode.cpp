@@ -195,7 +195,7 @@ wchar_t unicode_alias_to_char(wchar_t in)
     case UNICODE_ALIAS_FOR_ARIES : return L'ψ';
     case UNICODE_ALIAS_FOR_ANKH : return L'☥';
     case UNICODE_ALIAS_FOR_MUSIC_NOTE : return L'♪';
-    case UNICODE_ALIAS_FOR_CIRCLE : return L'⃝';
+    case UNICODE_ALIAS_FOR_CIRCLE : return L'o';
     case UNICODE_ALIAS_FOR_SOLID_CIRCLE : return L'⏺';
     case UNICODE_ALIAS_FOR_LOLLIPOP : return L'⚲';
     case UNICODE_ALIAS_FOR_THREE_DOTS : return L'…';
