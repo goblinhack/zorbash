@@ -198,7 +198,7 @@ wchar_t unicode_alias_to_char(wchar_t in)
     case UNICODE_ALIAS_FOR_CIRCLE : return L'⃝';
     case UNICODE_ALIAS_FOR_SOLID_CIRCLE : return L'⏺';
     case UNICODE_ALIAS_FOR_LOLLIPOP : return L'⚲';
-    case UNICODE_ALIAS_FOR_THREE_DOTS : return L'∴';
+    case UNICODE_ALIAS_FOR_THREE_DOTS : return L'…';
     case UNICODE_ALIAS_FOR_CURSOR : return L'_';
     case UNICODE_ALIAS_FOR_BLOCK : return L'█';
     case UNICODE_ALIAS_FOR_POINTER : return L'⊹';

@@ -827,39 +827,45 @@ void config_game_gfx_update(void)
   game->config.one_pixel_height = 1;
 
   if (! game->config.game_pix_zoom) {
-    ERR("Game->config.game_pix_zoom is zero");
     game->config.game_pix_zoom = GAME_DEFAULT_PIX_ZOOM;
-    return;
+    if (! g_opt_test_dungeon_gen) { ERR("Game->config.game_pix_zoom is zero"); }
   }
 
   if (! game->config.ui_pix_zoom) {
-    ERR("Game->config.ui_pix_zoom is zero");
     game->config.ui_pix_zoom = GAME_DEFAULT_UI_ZOOM;
-    return;
+    if (! g_opt_test_dungeon_gen) { ERR("Game->config.ui_pix_zoom is zero"); }
   }
 
   game->config.game_pix_scale_width  = game->config.game_pix_zoom;
   game->config.game_pix_scale_height = game->config.game_pix_zoom;
 
   if (! game->config.game_pix_scale_width) {
-    ERR("Game->config.game_pix_scale_width is zero");
-    return;
+    if (! g_opt_test_dungeon_gen) {
+      ERR("Game->config.game_pix_scale_width is zero");
+      return;
+    }
   }
 
   if (! game->config.game_pix_scale_height) {
-    ERR("Game->config.game_pix_scale_height is zero");
-    return;
+    if (! g_opt_test_dungeon_gen) {
+      ERR("Game->config.game_pix_scale_height is zero");
+      return;
+    }
   }
 
   game->config.game_pix_width  = game->config.window_pix_width / game->config.game_pix_scale_width;
   game->config.game_pix_height = game->config.window_pix_height / game->config.game_pix_scale_height;
   if (! game->config.game_pix_width) {
-    ERR("game->config.game_pix_width is zero");
-    return;
+    if (! g_opt_test_dungeon_gen) {
+      ERR("game->config.game_pix_width is zero");
+      return;
+    }
   }
   if (! game->config.game_pix_height) {
-    ERR("game->config.game_pix_height is zero");
-    return;
+    if (! g_opt_test_dungeon_gen) {
+      ERR("game->config.game_pix_height is zero");
+      return;
+    }
   }
 
   game->config.ui_pix_width  = game->config.window_pix_width;

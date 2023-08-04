@@ -13,6 +13,9 @@
 static inline void term_puts_fg(unsigned char a)
 {
   TRACE_AND_INDENT();
+
+  if (g_opt_gfx_monochrome) { return; }
+
   static const char *data[] = {
       "[30m", "[31m", "[32m", "[33m", "[34m", "[35m", "[36m", "[37m", "\033[m",
   };
@@ -25,6 +28,9 @@ static inline void term_puts_fg(unsigned char a)
 static void term_puts_fgbg(unsigned char fg, unsigned char bg)
 {
   TRACE_AND_INDENT();
+
+  if (g_opt_gfx_monochrome) { return; }
+
   static const char *data[] = {
       "[40;30m", "[40;31m", "[40;32m", "[40;33m", "[40;34m", "[40;35m", "[40;36m", "[40;37m",
       "[41;30m", "[41;31m", "[41;32m", "[41;33m", "[41;34m", "[41;35m", "[41;36m", "[41;37m",
@@ -95,6 +101,9 @@ static term_color term_color_string_to_index(const wchar_t **s)
 static term_color term_color_string_to_index(const char **s)
 {
   TRACE_AND_INDENT();
+
+  if (g_opt_gfx_monochrome) { TERM_COLOR_WHITE; }
+
   if (! strncmp(*s, "black$", sizeof("black$") - 1)) {
     *s += sizeof("black$") - 1;
     return (TERM_COLOR_BLACK);
@@ -199,6 +208,8 @@ void term_log(const char *s)
 
 int term_color_to_console_color(color c)
 {
+  if (g_opt_gfx_monochrome) { TERM_COLOR_WHITE; }
+
   if (c == BLACK) return TERM_COLOR_BLACK;
   if (c == BLUE) return TERM_COLOR_BLACK;
   if (c == BROWN) return TERM_COLOR_BLACK;

@@ -46,7 +46,7 @@ void tile_blit_colored_fat(Tpp tp, Tilep tile, point tl, point br, color color_t
     y2 += bot_off * pct_h;
   }
 
-  if (g_opt_gfx_monochrome) {
+  if (g_opt_gfx_monochrome && tile->gl_binding_monochrome()) {
     blit_colored(tile->gl_binding_monochrome(), x1, y2, x2, y1, tl.x, br.y, br.x, tl.y, color_tl, color_tr, color_bl,
                  color_br);
   } else {
@@ -61,7 +61,7 @@ void tile_blit_colored(Tilep tile, point tl, point br, color color_tl, color col
   float y1 = tile->y1;
   float y2 = tile->y2;
 
-  if (g_opt_gfx_monochrome) {
+  if (g_opt_gfx_monochrome && tile->gl_binding_monochrome()) {
     blit_colored(tile->gl_binding_monochrome(), x1, y2, x2, y1, tl.x, br.y, br.x, tl.y, color_tl, color_tr, color_bl,
                  color_br);
   } else {
