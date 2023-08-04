@@ -3,7 +3,7 @@ import tp
 
 
 def on_you_nat_attack_attempt(me, x, y):
-    sound = f"hiss{my.non_pcg_randint(1, 10)}"
+    sound = f"hiss{my.py_non_pcg_random_range_inclusive(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
 
 

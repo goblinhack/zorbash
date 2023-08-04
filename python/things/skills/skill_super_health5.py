@@ -12,7 +12,7 @@ def on_tick_when_activated(owner, skill, x, y):
     if not owner:
         return False  # did nothing
 
-    if my.pcg_randint(1, 100) < 75:
+    if my.py_pcg_random_range_inclusive(1, 100) < 75:
         my.thing_stamina_incr(owner, 10)
         my.thing_health_incr(owner, 5)
 

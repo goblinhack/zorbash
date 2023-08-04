@@ -16,16 +16,16 @@ def try_to_grow(me, x, y, dx, dy):
        my.level_is_water_at(me, x + dx, y + dy):
         return
     if my.level_is_floor_at(me, x + dx, y + dy):
-        if my.pcg_randint(1, 100) < 10:
+        if my.py_pcg_random_range_inclusive(1, 100) < 10:
             my.spawn_at(me, "vampire_rose_stem1", x + dx, y + dy)
             return
-        if my.pcg_randint(1, 100) < 10:
+        if my.py_pcg_random_range_inclusive(1, 100) < 10:
             my.spawn_at(me, "vampire_rose_stem2", x + dx, y + dy)
             return
         if my.level_is_monst_at(me, x + dx, y + dy) or \
            my.level_is_player_at(me, x + dx, y + dy):
             return
-        if my.pcg_randint(1, 100) < 5:
+        if my.py_pcg_random_range_inclusive(1, 100) < 5:
             my.spawn_at(me, "vampire_rose", x + dx, y + dy)
 
 

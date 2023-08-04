@@ -6141,6 +6141,19 @@ printf("========================================= %d\n", wid_total_count);
   TRACE_NO_INDENT();
   ascii_display();
 
+  //
+  // Dump the level output as ascii, useful in debugging.
+  //
+  IF_DEBUG
+  {
+    static auto last_tick = -1;
+    if (game->tick_current != last_tick) {
+      last_tick = game->tick_current;
+      TRACE_NO_INDENT();
+      ascii_dump(! g_opt_gfx_monochrome);
+    }
+  }
+
   TRACE_NO_INDENT();
   blit_fbo_unbind_locked();
 

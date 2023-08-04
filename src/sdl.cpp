@@ -918,16 +918,23 @@ void config_game_gfx_update(void)
   game->config.video_w_h_ratio = (double) game->config.game_pix_width / (double) game->config.game_pix_height;
 
   if (! TILES_VISIBLE_ACROSS) {
-    ERR("TILES_VISIBLE_ACROSS is zero");
-    return;
-  }
-  if (! TILES_VISIBLE_DOWN) {
-    ERR("TILES_VISIBLE_DOWN is zero");
-    return;
+    if (! g_opt_test_dungeon_gen) {
+      ERR("TILES_VISIBLE_ACROSS is zero");
+      return;
+    }
   }
 
-  game->config.tile_pixel_width  = game->config.game_pix_width / TILES_VISIBLE_ACROSS;
-  game->config.tile_pixel_height = game->config.game_pix_height / TILES_VISIBLE_DOWN;
+  if (! TILES_VISIBLE_DOWN) {
+    if (! g_opt_test_dungeon_gen) {
+      ERR("TILES_VISIBLE_DOWN is zero");
+      return;
+    }
+  }
+
+  if (! g_opt_test_dungeon_gen) {
+    game->config.tile_pixel_width  = game->config.game_pix_width / TILES_VISIBLE_ACROSS;
+    game->config.tile_pixel_height = game->config.game_pix_height / TILES_VISIBLE_DOWN;
+  }
 
   LOG("SDL: Window:");
   LOG("SDL: - config pixel size    : %dx%d", game->config.config_pix_width, game->config.config_pix_height);

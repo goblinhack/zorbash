@@ -107,6 +107,9 @@ bool sound_find(const std::string &alias)
 bool sound_play(const std::string &alias)
 {
   TRACE_AND_INDENT();
+
+  if (g_opt_silent) { return true; }
+
   DBG2("Play sound %s", alias.c_str());
 
   auto sound = all_sound.find(alias);
@@ -148,6 +151,9 @@ bool sound_play(const std::string &alias)
 bool sound_play_channel(int channel, const std::string &alias)
 {
   TRACE_AND_INDENT();
+
+  if (g_opt_silent) { return true; }
+
   DBG2("Play sound %s on channel %d", alias.c_str(), channel);
 
   auto sound = all_sound.find(alias);

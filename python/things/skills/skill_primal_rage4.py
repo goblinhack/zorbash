@@ -19,7 +19,7 @@ def on_tick_when_deactivated(owner, skill, x, y):
 def on_tick_when_activated(owner, skill, x, y):
     if owner:
         if (my.thing_health(owner) < my.thing_health_max(owner) / 25):
-            if my.pcg_randint(1, 100) < 5:
+            if my.py_pcg_random_range_inclusive(1, 100) < 5:
                 my.thing_stamina_decr(owner, )
         else:
             my.thing_raging_set(owner, False)

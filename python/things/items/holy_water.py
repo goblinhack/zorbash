@@ -63,7 +63,7 @@ def shatters(me, x, y):
         # my.con("it      {} {:X}".format(my.thing_name_get(it), it))
         if my.thing_is_undead(it):
             # my.con("hit it  {} {:X}".format(my.thing_name_get(it), it))
-            my.thing_hit_dmg_energy(owner, me, it, my.pcg_randint(10, 20))
+            my.thing_hit_dmg_energy(owner, me, it, my.py_pcg_random_range_inclusive(10, 20))
             my.spawn_at_my_position(me, "explosion_fire")
 
     my.spawn_at_my_position(me, "water")

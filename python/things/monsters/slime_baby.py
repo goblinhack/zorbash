@@ -11,7 +11,7 @@ def on_hit_and_still_alive(me, hitter, real_hitter, x, y, crit, damage):
 
 
 def on_death(me, x, y):
-    my.thing_sound_play_channel(me, my.CHANNEL_MONST, f"slime{my.non_pcg_randint(1, 9)}")
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, f"slime{my.py_non_pcg_random_range_inclusive(1, 9)}")
 
 
 def on_jump(me, x, y):

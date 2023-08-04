@@ -26,7 +26,7 @@ def on_targeted(me, x, y, bonus):
             my.thing_msg(me, f"The {my.thing_name_get(it)} cannot be possessed.")
             continue
 
-        roll = my.pcg_randint(1, 20) + bonus
+        roll = my.py_pcg_random_range_inclusive(1, 20) + bonus
         if my.thing_stat_psi_total(owner) > roll + my.thing_stat_int_bonus(it) + existing_mental_load:
             my.thing_msg(me, f"The {my.thing_name_get(it)}'s mind is beholden to you.")
         else:

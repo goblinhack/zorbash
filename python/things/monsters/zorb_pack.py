@@ -7,7 +7,7 @@ def on_born(me, x, y):
 
 
 def on_you_are_declared_leader(me, x, y):
-    r = my.non_pcg_randint(1, 100)
+    r = my.py_non_pcg_random_range_inclusive(1, 100)
     if r < 60:
         my.thing_polymorph(me, "zorb_captain")
     elif r < 70:
@@ -21,7 +21,7 @@ def on_you_are_declared_leader(me, x, y):
 
 
 def on_you_are_declared_a_follower(me, leader, x, y):
-    r = my.non_pcg_randint(1, 100)
+    r = my.py_non_pcg_random_range_inclusive(1, 100)
     if r < 90:
         my.thing_polymorph(me, "zorb_soldier")
     else:

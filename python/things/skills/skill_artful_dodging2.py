@@ -12,7 +12,7 @@ def on_tick_when_activated(owner, skill, x, y):
     if my.thing_stamina(owner) >= my.thing_stamina_max(owner):
         return False  # did nothing
 
-    if owner and my.pcg_randint(1, 100) < 20:
+    if owner and my.py_pcg_random_range_inclusive(1, 100) < 20:
         my.thing_stamina_incr(owner, 1)
         return False  # did nothing
 

@@ -1,6 +1,5 @@
 import my
 import tp
-import random
 
 
 def random_title():
@@ -12,7 +11,10 @@ def random_title():
               "max", "dragon", "heart", "bane", "rose", "pond", "scum", "bob", "hack",
               "might", "grace", "brush", "wood", "worm", "able", "rock", "shock",
               "fire", "iceice")
-    return random.choice(title) + " " + random.choice(names1) + random.choice(names2)
+    a = my.py_pcg_random_range_inclusive(0, len(title) - 1)
+    b = my.py_pcg_random_range_inclusive(0, len(names1) - 1)
+    c = my.py_pcg_random_range_inclusive(0, len(names2) - 1)
+    return title[a] + " " + names1[b] + names2[c]
 
 
 # hitter: arrow / monst
@@ -20,7 +22,7 @@ def random_title():
 def on_hit_and_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     # my.con("I'm hit {} {:X} {},{} damage {}".format(my.thing_name_get(me), me, x, y, damage))
     if damage <= 5:
-        my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, f"player_hit{my.non_pcg_randint(1, 4)}")
+        my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, f"player_hit{my.py_non_pcg_random_range_inclusive(1, 4)}")
     else:
         my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "player_hit5")
 
@@ -170,7 +172,8 @@ def on_death(me, x, y):
         "You went to the restaurant at the end of the universe.",
         "You went to the spirit in the sky.",
     ]
-    my.topcon(f"{random.choice(messages)}")
+    a = my.py_pcg_random_range_inclusive(0, len(messages) - 1)
+    my.topcon(f"{messages[a]}")
 
 
 # Don't repeat footsteps and wait for the current channel to finish so sounds do not overlap
@@ -181,16 +184,16 @@ def on_move(me, x, y):
     global last_footstep
 
     if my.level_is_water_at(me, x, y):
-        footstep = my.non_pcg_randint(1, 6)
+        footstep = my.py_non_pcg_random_range_inclusive(1, 6)
         while footstep == last_footstep:
-            footstep = my.non_pcg_randint(1, 6)
+            footstep = my.py_non_pcg_random_range_inclusive(1, 6)
 
         if my.thing_sound_play_channel(me, my.CHANNEL_FOOTSTEPS, f"splash{footstep}"):
             last_footstep = footstep
     else:
-        footstep = my.non_pcg_randint(1, 8)
+        footstep = my.py_non_pcg_random_range_inclusive(1, 8)
         while footstep == last_footstep:
-            footstep = my.non_pcg_randint(1, 8)
+            footstep = my.py_non_pcg_random_range_inclusive(1, 8)
 
         if my.thing_sound_play_channel(me, my.CHANNEL_FOOTSTEPS, f"footsteps{footstep}"):
             last_footstep = footstep

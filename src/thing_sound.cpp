@@ -12,7 +12,7 @@ bool Thing::thing_sound_play(const std::string &alias)
 {
   TRACE_NO_INDENT();
 
-  if (g_opt_silent) { return false; }
+  if (g_opt_silent) { return true; }
 
   //
   // No sound if in a locked room
@@ -88,7 +88,7 @@ bool Thing::thing_sound_play_channel(int channel, const std::string &alias)
 {
   TRACE_NO_INDENT();
 
-  if (g_opt_silent) { return false; }
+  if (g_opt_silent) { return true; }
 
   auto level = game->get_current_level();
   if (! level) { return false; }

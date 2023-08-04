@@ -17,7 +17,7 @@ def on_thrown(owner, me, x, y):
                     else:
                         my.thing_msg(owner, f"%%fg=red$You paralyse the {my.thing_name_get(it)}!%%fg=reset$")
 
-    if my.pcg_randint(1, 100) < 90:
+    if my.py_pcg_random_range_inclusive(1, 100) < 90:
         my.thing_dead(me, "used")
 
 

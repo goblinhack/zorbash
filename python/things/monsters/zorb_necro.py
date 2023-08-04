@@ -14,7 +14,7 @@ def on_death_of_a_follower(me, leader, x, y):
 
 
 def on_tick(owner, me, x, y):
-    if my.pcg_randint(1, 100) < 90:
+    if my.py_pcg_random_range_inclusive(1, 100) < 90:
         return False
 
     risen = 0

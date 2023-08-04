@@ -3,7 +3,7 @@ import tp
 
 
 def on_hit_and_still_alive(me, hitter, real_hitter, x, y, crit, damage):
-    my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, f"door_hit{my.non_pcg_randint(1, 2)}")
+    my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, f"door_hit{my.py_non_pcg_random_range_inclusive(1, 2)}")
 
 
 def on_death(me, x, y):

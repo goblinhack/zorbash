@@ -7,7 +7,7 @@
 #include "my_callstack.hpp"
 #include "my_random.hpp"
 
-PyObject *pcg_randint(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *py_pcg_random_range_inclusive(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   int x = 0;
@@ -25,7 +25,7 @@ PyObject *pcg_randint(PyObject *obj, PyObject *args, PyObject *keywds)
   return (Py_BuildValue("i", pcg_random_range_inclusive(x, y)));
 }
 
-PyObject *non_pcg_randint(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *py_non_pcg_random_range_inclusive(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   int x = 0;

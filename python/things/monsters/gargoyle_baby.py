@@ -3,12 +3,12 @@ import tp
 
 
 def on_you_nat_attack_attempt(me, x, y):
-    sound = f"growl{my.non_pcg_randint(1, 10)}"
+    sound = f"growl{my.py_non_pcg_random_range_inclusive(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
 
 
 def on_hit_and_still_alive(me, hitter, real_hitter, x, y, crit, damage):
-    sound = f"growl{my.non_pcg_randint(1, 10)}"
+    sound = f"growl{my.py_non_pcg_random_range_inclusive(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
 
 
@@ -21,15 +21,15 @@ def on_death(me, x, y):
 
 
 def on_awake(me, x, y):
-    sound = f"growl{my.non_pcg_randint(1, 10)}"
+    sound = f"growl{my.py_non_pcg_random_range_inclusive(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
     my.thing_speaks(me, "Who dares wake me?")
     my.thing_popup(me, "Tiny roar!")
 
 
 def on_want_to_shoot_at(me, target, x, y):  # Return True on doing an action
-    if my.pcg_randint(1, 10) < 4:
-        sound = f"growl{my.non_pcg_randint(1, 10)}"
+    if my.py_pcg_random_range_inclusive(1, 10) < 4:
+        sound = f"growl{my.py_non_pcg_random_range_inclusive(1, 10)}"
         my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
         my.thing_shoot_at(me, "projectile_fire", target)
         return True

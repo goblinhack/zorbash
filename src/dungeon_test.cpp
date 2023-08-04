@@ -29,6 +29,7 @@ void dungeon_test(void)
 {
   static int dungeon_seed = 10000;
 
+  TRACE_NO_INDENT();
   CON("Test dungeon seed: %d", dungeon_seed);
 
   //
@@ -41,44 +42,55 @@ void dungeon_test(void)
   //
   // Needed to set the terminal size
   //
-  g_opt_ascii = true;
+  g_opt_ascii  = true;
+  g_opt_debug1 = true;
+  TRACE_NO_INDENT();
   sdl_display_reset();
 
   //
   // Create the new level
   //
+  TRACE_NO_INDENT();
   game->init();
 
   auto new_level                   = new Level(biome);
   auto difficulty_depth            = 0;
   auto dungeon_walk_order_level_no = 0;
 
+  TRACE_NO_INDENT();
   new_level->create(world_at, grid_at, dungeon_seed, difficulty_depth, dungeon_walk_order_level_no);
   game->level = new_level;
 
   pcg_random_allowed++;
   game->robot_mode_requested = true;
+  TRACE_NO_INDENT();
   game->start();
+  TRACE_NO_INDENT();
   game->tick_begin_now();
+  TRACE_NO_INDENT();
   game->tick_end();
+  TRACE_NO_INDENT();
   game->tick_begin_now();
   pcg_random_allowed--;
 
-  auto last_tick = -1;
   while (! game->level->player->is_dead) {
+    TRACE_NO_INDENT();
     SDL_Delay(5);
+
+    TRACE_NO_INDENT();
     game->level->tick();
 
+    TRACE_NO_INDENT();
     wid_gc_all();
-    wid_display_all();
 
-    if (game->tick_current != last_tick) {
-      last_tick = game->tick_current;
-      ascii_dump(! g_opt_gfx_monochrome);
-    }
+    TRACE_NO_INDENT();
+    wid_display_all();
   }
+
+  TRACE_NO_INDENT();
   delete new_level;
 
+  TRACE_NO_INDENT();
   game->fini();
   DIE("x");
 

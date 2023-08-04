@@ -19,6 +19,33 @@
 #define TERM_WIDTH_MAX  (std::max(TERM_GFX_WIDTH_DEF + 10, TERM_ASCII_WIDTH_DEF))
 #define TERM_HEIGHT_MAX (std::max(TERM_GFX_HEIGHT_DEF + 10, TERM_ASCII_HEIGHT_DEF))
 
+class AsciiCell
+{
+public:
+  wchar_t ch[ TILE_LAYER_MAX ] {};
+  Tilep   tile[ TILE_LAYER_MAX ] {};
+
+  Texp tex[ TILE_LAYER_MAX ] {};
+
+  float tx[ TILE_LAYER_MAX ] {};
+  float ty[ TILE_LAYER_MAX ] {};
+  float dx[ TILE_LAYER_MAX ] {};
+  float dy[ TILE_LAYER_MAX ] {};
+
+  color color_tl[ TILE_LAYER_MAX ];
+  color color_bl[ TILE_LAYER_MAX ];
+  color color_tr[ TILE_LAYER_MAX ];
+  color color_br[ TILE_LAYER_MAX ];
+
+  //
+  // Is reset each frame, and so although a pointer potentially should be
+  // zeroed out on game load once it is used.
+  //
+  void *context {};
+
+  AsciiCell(void) = default;
+};
+
 using ascii_key_down_callback   = int (*)(int, int, const struct SDL_Keysym *);
 using ascii_mouse_down_callback = int (*)(int, int, int);
 using ascii_mouse_over_callback = int (*)(int, int);
@@ -111,23 +138,23 @@ void ascii_clear_display(void);
 void ascii_clear_scissors(void);
 void ascii_dim(int x, int y, int z, float alpha);
 void ascii_display(void);
-void ascii_dump(bool no_color);
-void ascii_draw_line(int x0, int y0, int x1, int y1, Tilep what, color c);
-void ascii_draw_line(int x0, int y0, int x1, int y1, const char *tilename, color c);
-void ascii_draw_line(int x0, int y0, int x1, int y1, wchar_t what, color c);
 void ascii_draw_line(int depth, int x0, int y0, int x1, int y1, wchar_t ch, color c);
+void ascii_draw_line(int x0, int y0, int x1, int y1, const char *tilename, color c);
+void ascii_draw_line(int x0, int y0, int x1, int y1, Tilep what, color c);
+void ascii_draw_line(int x0, int y0, int x1, int y1, wchar_t what, color c);
+void ascii_dump(bool no_color);
 void ascii_init(void);
-void ascii_put_bg_square(int tlx, int tly, int brx, int bry, Tilep what, color c);
 void ascii_put_bg_square(int tlx, int tly, int brx, int bry, const char *tilename, color c);
+void ascii_put_bg_square(int tlx, int tly, int brx, int bry, Tilep what, color c);
 void ascii_put_bg_square(int tlx, int tly, int brx, int bry, wchar_t what, color c);
 void ascii_put_box(box_args b, int style, const TileLayers, const wchar_t *fmt, ...);
 void ascii_putf(int x, int y, color fg, color bg, const std::wstring fmt, ...);
+void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text);
 void ascii_putf(int x, int y, color fg, color bg, const wchar_t *fmt, ...);
 void ascii_putf(int x, int y, color fg, const std::wstring fmt, ...);
 void ascii_putf(int x, int y, color fg, const wchar_t *fmt, ...);
 void ascii_putf(int x, int y, const std::wstring fmt, ...);
 void ascii_putf(int x, int y, const wchar_t *fmt, ...);
-void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text);
 void ascii_set_context(int x, int y, void *context);
 void ascii_set(int depth, int x, int y, color c);
 void ascii_set(int depth, int x, int y, const char *tilename, const wchar_t);
@@ -140,10 +167,14 @@ void ascii_set_scissors(point tl, point br);
 void ascii_shade(void);
 void pixel_to_ascii(int *x, int *y);
 
-extern float         tile_pix_w;
-extern float         tile_pix_h;
-extern int16_t       ascii_mouse_x;
-extern int16_t       ascii_mouse_y;
+extern float tile_pix_w;
+extern float tile_pix_h;
+
+extern int16_t ascii_mouse_x;
+extern int16_t ascii_mouse_y;
+
 extern struct ascii_ ascii;
+
+extern std::array< std::array< AsciiCell, TERM_HEIGHT_MAX >, TERM_WIDTH_MAX > cells;
 
 #endif

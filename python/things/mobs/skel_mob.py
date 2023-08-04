@@ -8,10 +8,10 @@ def on_idle_tick_freq_dice(me, x, y):
     #
     # Make sure to only spawn minions so they have the is_minion flag set
     #
-    if my.pcg_randint(1, 100) < 10:
+    if my.py_pcg_random_range_inclusive(1, 100) < 10:
         if my.spawn_next_to(me, "skel_minion_fire"):
             my.thing_sound_play_channel(me, my.CHANNEL_MONST_BIRTH, "bones1")
-    elif my.pcg_randint(1, 100) < 10:
+    elif my.py_pcg_random_range_inclusive(1, 100) < 10:
         if my.spawn_next_to(me, "skel_minion_wander"):
             my.thing_sound_play_channel(me, my.CHANNEL_MONST_BIRTH, "bones1")
     else:
@@ -20,7 +20,7 @@ def on_idle_tick_freq_dice(me, x, y):
 
 
 def on_death(me, x, y):
-    if my.non_pcg_randint(1, 2) == 1:
+    if my.py_non_pcg_random_range_inclusive(1, 2) == 1:
         if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, "bones1"):
             my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "bones1")
     else:

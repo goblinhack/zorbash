@@ -7,7 +7,7 @@ def on_you_are_declared_leader(me, x, y):
 
 
 def on_you_are_declared_a_follower(me, leader, x, y):
-    r = my.non_pcg_randint(1, 100)
+    r = my.py_non_pcg_random_range_inclusive(1, 100)
     if r < 80:
         my.thing_polymorph(me, "snake_asp")
         return

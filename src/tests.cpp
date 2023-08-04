@@ -7,6 +7,8 @@
 
 void run_tests()
 {
+  TRACE_NO_INDENT();
+
   if (g_opt_test_save_load) {
     CON("save load test");
     CON("==============");

@@ -16,23 +16,23 @@ def on_death(me, x, y):
         return
     if my.thing_is_burnt(me):
         return
-    if my.pcg_randint(1, 100) < 80:
+    if my.py_pcg_random_range_inclusive(1, 100) < 80:
         my.spawn_next_to(me, "slime_baby")
         splits = True
-    if my.pcg_randint(1, 100) < 80:
+    if my.py_pcg_random_range_inclusive(1, 100) < 80:
         my.spawn_next_to(me, "slime_baby")
         splits = True
-    if my.pcg_randint(1, 100) < 40:
+    if my.py_pcg_random_range_inclusive(1, 100) < 40:
         my.spawn_next_to(me, "slime_baby")
         splits = True
-    if my.pcg_randint(1, 100) < 40:
+    if my.py_pcg_random_range_inclusive(1, 100) < 40:
         my.spawn_next_to(me, "slime_baby")
         splits = True
 
     if splits:
         my.thing_msg(me, "The slime splits!")
 
-    my.thing_sound_play_channel(me, my.CHANNEL_MONST, f"slime{my.non_pcg_randint(1, 9)}")
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, f"slime{my.py_non_pcg_random_range_inclusive(1, 9)}")
 
 
 def on_jump(me, x, y):

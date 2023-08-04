@@ -21,34 +21,7 @@ int16_t TERM_HEIGHT;
 int16_t ascii_mouse_x;
 int16_t ascii_mouse_y;
 
-class AsciiCell
-{
-public:
-  wchar_t ch[ TILE_LAYER_MAX ] {};
-  Tilep   tile[ TILE_LAYER_MAX ] {};
-
-  Texp tex[ TILE_LAYER_MAX ] {};
-
-  float tx[ TILE_LAYER_MAX ] {};
-  float ty[ TILE_LAYER_MAX ] {};
-  float dx[ TILE_LAYER_MAX ] {};
-  float dy[ TILE_LAYER_MAX ] {};
-
-  color color_tl[ TILE_LAYER_MAX ];
-  color color_bl[ TILE_LAYER_MAX ];
-  color color_tr[ TILE_LAYER_MAX ];
-  color color_br[ TILE_LAYER_MAX ];
-
-  //
-  // Is reset each frame, and so although a pointer potentially should be
-  // zeroed out on game load once it is used.
-  //
-  void *context {};
-
-  AsciiCell(void) = default;
-};
-
-static std::array< std::array< AsciiCell, TERM_HEIGHT_MAX >, TERM_WIDTH_MAX > cells;
+std::array< std::array< AsciiCell, TERM_HEIGHT_MAX >, TERM_WIDTH_MAX > cells;
 
 void ascii_init(void) {}
 
@@ -1032,104 +1005,6 @@ static void ascii_blit(void)
 
     tile_y += dh;
   }
-}
-
-void ascii_dump(bool use_color)
-{
-  TRACE_NO_INDENT();
-
-  char fgstr[ 200 ];
-  int  x;
-  int  y;
-
-  putchar('+');
-  for (x = 0; x < TERM_WIDTH; x++) {
-    putchar('-');
-  }
-  putchar('+');
-  putchar('\n');
-
-  for (y = 0; y < TERM_HEIGHT; y++) {
-    putchar('|');
-    for (x = 0; x < TERM_WIDTH; x++) {
-      const AsciiCell *cell = &getref_no_check(cells, x, y);
-
-      color bg = COLOR_NONE;
-      color fg = COLOR_NONE;
-
-      for (int depth = TILE_LAYER_BG_0; depth < TILE_LAYER_FG_0; depth++) {
-        if (! cell->tile[ depth ]) { continue; }
-        if (cell->tex[ depth ]) { continue; }
-        auto col = cell->color_tl[ depth ];
-        if (col != COLOR_NONE) { bg = col; }
-      }
-
-      for (int depth = TILE_LAYER_FG_0; depth < TILE_LAYER_MAX; depth++) {
-        if (! cell->tile[ depth ]) { continue; }
-        if (cell->tex[ depth ]) { continue; }
-        auto col = cell->color_tl[ depth ];
-        if (col != COLOR_NONE) { fg = col; }
-      }
-
-      if (use_color) {
-        if ((fg != COLOR_NONE) && (bg != COLOR_NONE)) {
-          snprintf(fgstr, sizeof(fgstr), "\e[38;2;%u;%u;%u;48;2;%u;%u;%um", fg.r, fg.g, fg.b, bg.r, bg.g, bg.b);
-        } else if (fg != COLOR_NONE) {
-          snprintf(fgstr, sizeof(fgstr), "\e[38;2;%u;%u;%um", fg.r, fg.g, fg.b);
-        } else if (bg != COLOR_NONE) {
-          snprintf(fgstr, sizeof(fgstr), "\e[48;2;%u;%u;%um", bg.r, bg.g, bg.b);
-        } else {
-          snprintf(fgstr, sizeof(fgstr), "\e[39m\e[49m");
-        }
-        fputs(fgstr, stdout);
-      }
-
-      bool got_one = false;
-      for (int depth = TILE_LAYER_MAX - 1; depth >= 0; depth--) {
-        if (! cell->tile[ depth ]) { continue; }
-        if (cell->tex[ depth ]) { continue; }
-        if (cell->ch[ depth ]) {
-          wchar_t out = unicode_alias_to_char(cell->ch[ depth ]);
-          if (out > 128) {
-            printf("%lc", out);
-          } else {
-            putchar(out);
-          }
-          got_one = true;
-          break;
-        }
-      }
-      if (! got_one) {
-        wchar_t bg = L' ';
-        for (int depth = TILE_LAYER_MAX - 1; depth >= 0; depth--) {
-          if (cell->tile[ depth ]) {
-            bg = L'x';
-            break;
-          }
-          if (cell->tex[ depth ]) {
-            bg = L'x';
-            break;
-          }
-        }
-        putchar(bg);
-      }
-    }
-
-    if (use_color) {
-      snprintf(fgstr, sizeof(fgstr), "\e[39m\e[49m");
-      fputs(fgstr, stdout);
-    }
-
-    putchar('|');
-    putchar('\n');
-  }
-
-  putchar('+');
-  for (x = 0; x < TERM_WIDTH; x++) {
-    putchar('-');
-  }
-  putchar('+');
-  putchar('\n');
 }
 
 //

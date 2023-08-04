@@ -18,7 +18,7 @@ def on_death_of_my_leader(me, x, y):
 
 
 def on_stealing(me, victim, what, x, y):
-    if my.pcg_randint(1, 100) < 100:
+    if my.py_pcg_random_range_inclusive(1, 100) < 100:
         if not my.thing_is_dead_or_dying(me):
             my.thing_msg(me, "The gnome thief cackles with glee and vanishes!")
         my.thing_teleport_randomly(me)

@@ -3,7 +3,7 @@ import tp
 
 
 def on_swing(owner, item, x, y):
-    my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_swing{my.non_pcg_randint(1, 3)}")
+    my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_swing{my.py_non_pcg_random_range_inclusive(1, 3)}")
 
 
 def on_owner_attack_dmg_stamina(me, owner, victim, x, y, damage):
@@ -11,7 +11,7 @@ def on_owner_attack_dmg_stamina(me, owner, victim, x, y, damage):
     # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
     # my.con("victim  {} {:X}".format(my.thing_name_get(victim), victim))
     # my.con("damage  {}".format(damage))
-    my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_impact{my.non_pcg_randint(1, 4)}")
+    my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_impact{my.py_non_pcg_random_range_inclusive(1, 4)}")
     return damage + my.thing_enchant_count_get(me) * 3
 
 

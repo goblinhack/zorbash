@@ -3,24 +3,24 @@ import tp
 
 
 def on_you_nat_attack_attempt(me, x, y):
-    sound = f"hiss{my.non_pcg_randint(1, 10)}"
+    sound = f"hiss{my.py_non_pcg_random_range_inclusive(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
 
 
 def on_hit_and_still_alive(me, hitter, real_hitter, x, y, crit, damage):
-    sound = f"hiss{my.non_pcg_randint(1, 10)}"
+    sound = f"hiss{my.py_non_pcg_random_range_inclusive(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
 
 
 def on_hit_dodge_do(me, hitter, x, y):
-    sound = f"hiss{my.non_pcg_randint(1, 10)}"
+    sound = f"hiss{my.py_non_pcg_random_range_inclusive(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
 
 
 def on_death(me, x, y):
     my.thing_msg(me, "The ogre howls mournfully and dies!")
 
-    sound = f"growl{my.non_pcg_randint(1, 10)}"
+    sound = f"growl{my.py_non_pcg_random_range_inclusive(1, 10)}"
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 

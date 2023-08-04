@@ -6,7 +6,7 @@ self = None
 
 
 def on_tick_when_activated(owner, skill, x, y):
-    if owner and my.pcg_randint(1, 100) < 10:
+    if owner and my.py_pcg_random_range_inclusive(1, 100) < 10:
         my.thing_stamina_decr(owner, 1)
     return False  # didn't do anything
 
