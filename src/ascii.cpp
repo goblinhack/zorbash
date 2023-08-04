@@ -1099,7 +1099,20 @@ void ascii_dump(bool use_color)
           break;
         }
       }
-      if (! got_one) { putchar(' '); }
+      if (! got_one) {
+        wchar_t bg = L' ';
+        for (int depth = TILE_LAYER_MAX - 1; depth >= 0; depth--) {
+          if (cell->tile[ depth ]) {
+            bg = L'x';
+            break;
+          }
+          if (cell->tex[ depth ]) {
+            bg = L'x';
+            break;
+          }
+        }
+        putchar(bg);
+      }
     }
 
     if (use_color) {

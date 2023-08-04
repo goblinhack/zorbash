@@ -462,14 +462,17 @@ static void usage(void)
   if (whinged) { return; }
   whinged = true;
 
-  CON("zorbash, options:");
+  CON("Zorbash, options:");
   CON(" ");
   CON("Commonly used options:");
   CON(" --ascii                     -- Enable ascii graphics.");
   CON(" --pixelart                  -- Enable pixelart graphics.");
-  CON(" --monochrome                -- Enable monochrome graphics.");
   CON(" --player-name 'disco bob'   -- Set your name.");
   CON(" --seed <name/number>        -- Set the random dungeon seed.");
+  CON(" ");
+  CON("Less commonly used options:");
+  CON(" --monochrome                -- Enable monochrome graphics.");
+  CON(" --silent                    -- No sound.");
   CON(" --resume                    -- Load last snapshot.");
   CON(" ");
   CON("Debugging options:");
@@ -552,6 +555,11 @@ static void parse_args(int argc, char *argv[])
 
     if (! strcasecmp(argv[ i ], "--monochrome") || ! strcasecmp(argv[ i ], "-monochrome")) {
       g_opt_gfx_monochrome = true;
+      continue;
+    }
+
+    if (! strcasecmp(argv[ i ], "--silent") || ! strcasecmp(argv[ i ], "-silent")) {
+      g_opt_silent = true;
       continue;
     }
 

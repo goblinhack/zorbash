@@ -128,6 +128,9 @@ void music_update_volume(void)
 bool music_play(const std::string &name)
 {
   TRACE_AND_INDENT();
+
+  if (g_opt_silent) { return false; }
+
   if (name == music_current) { return true; }
   music_current = name;
 

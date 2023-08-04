@@ -57,7 +57,6 @@ void dungeon_test(void)
   game->level = new_level;
 
   pcg_random_allowed++;
-  game->place_player();
   game->robot_mode_requested = true;
   game->start();
   game->tick_begin_now();
@@ -66,7 +65,7 @@ void dungeon_test(void)
   pcg_random_allowed--;
 
   auto last_tick = -1;
-  while (game->tick_current < 100) {
+  while (! game->level->player->is_dead) {
     SDL_Delay(5);
     game->level->tick();
 
@@ -81,6 +80,7 @@ void dungeon_test(void)
   delete new_level;
 
   game->fini();
+  DIE("x");
 
   if (! dungeon_seed--) { DIE("end of test"); }
 }

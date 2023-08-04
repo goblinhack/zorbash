@@ -135,13 +135,16 @@ void WARN(const char *fmt, ...)
 static void con_(const char *fmt, va_list args)
 {
   char buf[ MAXLONGSTR ];
-  int  len;
+  int  len = 0;
 
   buf[ 0 ] = '\0';
-  get_timestamp(buf, MAXLONGSTR);
-  len = (int) strlen(buf);
-  vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
+  if (! g_opt_test_dungeon_gen) {
+    get_timestamp(buf, MAXLONGSTR);
+    len = (int) strlen(buf);
+  }
+
+  vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
   putf(MY_STDOUT, buf);
 
   term_log(buf);
@@ -154,7 +157,7 @@ static void con_(const char *fmt, va_list args)
 
 static void con_(const wchar_t *fmt, va_list args)
 {
-  {
+  if (! g_opt_test_dungeon_gen) {
     char buf[ MAXLONGSTR ];
 
     buf[ 0 ] = '\0';
@@ -187,7 +190,7 @@ static void con_(const wchar_t *fmt, va_list args)
 
 void con(const wchar_t *fmt)
 {
-  {
+  if (! g_opt_test_dungeon_gen) {
     char buf[ MAXLONGSTR ];
 
     buf[ 0 ] = '\0';
@@ -210,13 +213,16 @@ void topcon_(const char *fmt, va_list args)
 {
   char buf[ MAXLONGSTR ];
   char ts[ MAXLONGSTR / 2 ];
-  int  len;
+  int  len = 0;
 
   buf[ 0 ] = '\0';
-  get_timestamp(ts, MAXLONGSTR);
-  snprintf(buf, sizeof(buf) - 1, "%s", ts);
-  len = (int) strlen(buf);
-  vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
+
+  if (! g_opt_test_dungeon_gen) {
+    get_timestamp(ts, MAXLONGSTR);
+    snprintf(buf, sizeof(buf) - 1, "%s", ts);
+    len = (int) strlen(buf);
+    vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
+  }
 
   putf(MY_STDOUT, buf);
 
@@ -230,7 +236,7 @@ void topcon_(const char *fmt, va_list args)
 
 void topcon_(const wchar_t *fmt, va_list args)
 {
-  {
+  if (! g_opt_test_dungeon_gen) {
     char ts[ MAXLONGSTR ];
     ts[ 0 ] = '\0';
     get_timestamp(ts, MAXLONGSTR);
@@ -263,7 +269,7 @@ void topcon_(const wchar_t *fmt, va_list args)
 
 void topcon(const wchar_t *fmt)
 {
-  {
+  if (! g_opt_test_dungeon_gen) {
     char ts[ MAXLONGSTR ];
     ts[ 0 ] = '\0';
     get_timestamp(ts, MAXLONGSTR);

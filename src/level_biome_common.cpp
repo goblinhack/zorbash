@@ -289,14 +289,14 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
           if (prev_levels.size()) { t->open(); }
         } else if (t->is_weapon()) {
           if (r && r->is_secret) { t->enchant_randomly(); }
-          con("INF: Placed weapon '%s'", t->text_short_capitalised().c_str());
+          dbg("INF: Placed weapon '%s'", t->text_short_capitalised().c_str());
         } else if (t->is_treasure_type()) {
           if (r && r->is_secret) { t->enchant_randomly(); }
-          con("INF: Placed treasure '%s'", t->text_short_capitalised().c_str());
+          dbg("INF: Placed treasure '%s'", t->text_short_capitalised().c_str());
         } else if (t->is_bag()) {
-          con("INF: Placed '%s'", t->text_short_capitalised().c_str());
+          dbg("INF: Placed '%s'", t->text_short_capitalised().c_str());
         } else if (t->is_monst()) {
-          con("INF: Placed monster '%s'", t->text_short_capitalised().c_str());
+          dbg("INF: Placed monster '%s'", t->text_short_capitalised().c_str());
         } else {
           //
           // Doors etc... don't log, not as interesting

@@ -102,8 +102,6 @@ static term_color term_color_string_to_index(const char **s)
 {
   TRACE_AND_INDENT();
 
-  if (g_opt_gfx_monochrome) { TERM_COLOR_WHITE; }
-
   if (! strncmp(*s, "black$", sizeof("black$") - 1)) {
     *s += sizeof("black$") - 1;
     return (TERM_COLOR_BLACK);
@@ -208,8 +206,6 @@ void term_log(const char *s)
 
 int term_color_to_console_color(color c)
 {
-  if (g_opt_gfx_monochrome) { TERM_COLOR_WHITE; }
-
   if (c == BLACK) return TERM_COLOR_BLACK;
   if (c == BLUE) return TERM_COLOR_BLACK;
   if (c == BROWN) return TERM_COLOR_BLACK;

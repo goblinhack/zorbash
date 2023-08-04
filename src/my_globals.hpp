@@ -24,14 +24,15 @@ extern bool g_need_restart;             // Need to restart game
 extern bool g_opt_ascii;                // Ascii mode
 extern bool g_opt_ascii_override;       // Ascii mode forced
 extern bool g_opt_biome_chasms;         // Force this biome
+extern bool g_opt_biome_flooded;        // Force this biome
 extern bool g_opt_biome_ice;            // Force this biome
 extern bool g_opt_biome_lava;           // Force this biome
 extern bool g_opt_biome_swamp;          // Force this biome
-extern bool g_opt_biome_flooded;        // Force this biome
+extern bool g_opt_gfx_monochrome;       // Black and white
 extern bool g_opt_no_slow_log_flush;    // Do not flush after each console log at start
 extern bool g_opt_override_debug_level; // Temporary, used to disable existing debugs
 extern bool g_opt_resume;               // Load last snapshot
-extern bool g_opt_gfx_monochrome;       // Black and white
+extern bool g_opt_silent;               // No audio
 extern bool g_opt_test_dungeon_gen;     // Enable dungeon tests
 extern bool g_opt_test_level_start;     // Start in the game immediately
 extern bool g_opt_tests;                // Any test enabled?
