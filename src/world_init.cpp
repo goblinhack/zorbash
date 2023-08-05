@@ -21,8 +21,7 @@ void World::clear(void)
   }
 }
 
-Levelp World::new_level_at(point3d world_at, point grid_at, uint32_t seed, int difficulty_depth,
-                           int dungeon_walk_order_level_no)
+Levelp World::new_level_at(point3d world_at, point grid_at, int difficulty_depth, int dungeon_walk_order_level_no)
 {
   TRACE_AND_INDENT();
 
@@ -42,7 +41,7 @@ Levelp World::new_level_at(point3d world_at, point grid_at, uint32_t seed, int d
   //
   auto new_level = new Level(biome);
   set(levels, world_at.x, world_at.y, world_at.z, new_level);
-  new_level->create(world_at, grid_at, seed, difficulty_depth, dungeon_walk_order_level_no);
+  new_level->create(world_at, grid_at, difficulty_depth, dungeon_walk_order_level_no);
 
   return new_level;
 }

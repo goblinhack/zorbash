@@ -15,13 +15,12 @@ bool Game::init_level(point3d world_at, point grid_at, int difficulty_depth, int
     return false;
   }
 
-  auto level_seed = seed + world_at.x + world_at.y + world_at.z;
   TRACE_AND_INDENT();
   auto l = get(world.levels, world_at.x, world_at.y, world_at.z);
   TRACE_AND_INDENT();
   if (! l) {
     DBG("Create new level at: %d,%d,%d", world_at.x, world_at.y, world_at.z);
-    world.new_level_at(world_at, grid_at, level_seed, difficulty_depth, dungeon_walk_order_level_no);
+    world.new_level_at(world_at, grid_at, difficulty_depth, dungeon_walk_order_level_no);
     l = get(world.levels, world_at.x, world_at.y, world_at.z);
     if (! l) {
       ERR("No level created at: %d,%d,%d", game->current_level.x, game->current_level.y, game->current_level.z);

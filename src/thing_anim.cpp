@@ -128,12 +128,12 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
     // If stuck in a web then don't flap wings.
     //
     if (is_stuck_currently()) {
-      //
-      // But need to have the final dead anim even if stuck
-      //
-      if (! is_dead_or_dying()) {
-        return;
+#ifdef DEBUG_ANIM
+      if (debug || is_debug_type()) {
+        con("Animate: Is stuck ");
       }
+#endif
+      return;
     }
 
     //
@@ -143,6 +143,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
     if (g_opt_ascii) {
       is_end_of_anim |= tile_is_end_of_ascii_anim(tile);
     }
+
 #ifdef DEBUG_ANIM
     if (is_end_of_anim) {
       if (debug || is_debug_type()) {
@@ -155,6 +156,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
     if (g_opt_ascii) {
       is_dead_on_end_of_anim |= tile_is_dead_on_end_of_ascii_anim(tile);
     }
+
 #ifdef DEBUG_ANIM
     if (is_dead_on_end_of_anim) {
       if (debug || is_debug_type()) {

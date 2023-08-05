@@ -1067,7 +1067,7 @@ public:
   void create_biome_swamp_place_remaining_rocks(Dungeonp d);
   void create_biome_swamp_place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries);
   void created(void);
-  void create(point3d world_at, point grid_at, uint32_t seed, int difficulty_depth, int dungeon_walk_order_level_no);
+  void create(point3d world_at, point grid_at, int difficulty_depth, int dungeon_walk_order_level_no);
   void cursor_describe(void);
   void cursor_find_on_visible_things(const int16_t minx, const int16_t miny, const int16_t maxx, const int16_t maxy);
   void cursor_move(void);

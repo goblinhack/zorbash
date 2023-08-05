@@ -325,7 +325,12 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
       //
       wid_actionbar_robot_mode_off();
     }
-    msg("%%fg=orange$Robot is stuck and needs human intervention.%%fg=reset$");
+
+    if (g_opt_test_dungeon_gen) {
+      dead("Robot is stuck.");
+    } else {
+      msg("%%fg=orange$Robot is stuck and needs human intervention.%%fg=reset$");
+    }
   }
 
   return ai_wander();

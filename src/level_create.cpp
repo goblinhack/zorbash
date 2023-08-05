@@ -5,8 +5,7 @@
 #include "my_game.hpp"
 #include "my_thing.hpp"
 
-void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficulty_depth,
-                   int dungeon_walk_order_level_no)
+void Level::create(point3d world_at, point grid_at, int difficulty_depth, int dungeon_walk_order_level_no)
 {
   TRACE_NO_INDENT();
 

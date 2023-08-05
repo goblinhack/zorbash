@@ -1,0 +1,71 @@
+#!/bin/sh
+#
+# Copyright (C) 2014 Neil McGill
+#
+# This game is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Library General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later version.
+#
+# This game is distributed in the hope that it will be fun,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Library General Public License for more details.
+#
+# You should have received a copy of the GNU Library General Public
+# License along with this game; if not, write to the Free
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+
+. ./build/VERSION
+. ./build/common.sh
+
+if [ ! -x zorbash ]; then
+  RUNME
+  if [ ! -x zorbash ]; then
+    exit 1
+  fi
+fi
+
+for seed in \
+  seadragon \
+  terrorlake \
+  badmonkey \
+  snowdrop \
+  firebelow \
+  umbermonk \
+  discobob \
+  drakestone \
+  hearthstone \
+  goblinhack \
+  apecastle \
+  deathpool \
+  hellfire \
+  pondscum \
+  victimlake
+do
+  mkdir -p tests/$seed/output/
+  mkdir -p tests/$seed/expected_output
+
+  printf "%-60s ... " "Running seed ($seed)"
+  ./zorbash --debug --seed $seed --test-dungeon-gen --ascii --monochrome > tests/$seed/output/console
+  cp appdata/zorbash/stdout* tests/$seed/output/
+
+  grep -q ERROR appdata/zorbash/*
+  if [ $? -eq 0 ]; then
+    printf "$RED[%s]$RESET\n" "ERROR"
+    continue
+  fi
+
+  if [ ! -f tests/$seed/expected_output/stdout.txt ]; then
+    cp -r tests/$seed/output/* tests/$seed/expected_output
+    printf "$GREEN[%s]$RESET\n" "CREATED"
+  else
+    diff -q tests/$seed/output/stdout.txt tests/$seed/expected_output/stdout.txt
+    if [ $? -ne 0 ]; then
+      printf "$RED[%s]$RESET\n" "CHANGED"
+    else
+      printf "$GREEN[%s]$RESET\n" "OK"
+    fi
+  fi
+done

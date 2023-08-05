@@ -37,8 +37,7 @@ public:
   void realloc_thing_id(Thingp t);
   void free_thing_id(Thingp t);
 
-  Levelp new_level_at(point3d at, point grid_at, uint32_t seed, int difficulty_depth,
-                      int dungeon_walk_order_level_no);
+  Levelp new_level_at(point3d at, point grid_at, int difficulty_depth, int dungeon_walk_order_level_no);
 
   Thingp thing_find_optional(ThingId id);
   Thingp thing_find(ThingId id);

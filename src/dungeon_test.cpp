@@ -27,10 +27,7 @@
 
 void dungeon_test(void)
 {
-  static int dungeon_seed = 10000;
-
   TRACE_NO_INDENT();
-  CON("Test dungeon seed: %d", dungeon_seed);
 
   //
   // smaller node numbers mean larger rooms
@@ -43,11 +40,6 @@ void dungeon_test(void)
   // Needed to set the terminal size
   //
   g_opt_ascii = true;
-
-  //
-  // Useful to see what is going on
-  //
-  g_opt_debug1 = true;
 
   //
   // No monster sounds when testin
@@ -68,7 +60,7 @@ void dungeon_test(void)
   auto dungeon_walk_order_level_no = 0;
 
   TRACE_NO_INDENT();
-  new_level->create(world_at, grid_at, dungeon_seed, difficulty_depth, dungeon_walk_order_level_no);
+  new_level->create(world_at, grid_at, difficulty_depth, dungeon_walk_order_level_no);
   game->level = new_level;
 
   {
@@ -110,9 +102,7 @@ void dungeon_test(void)
 
   TRACE_NO_INDENT();
   game->fini();
-  DIE("x");
 
-  if (! dungeon_seed--) {
-    DIE("end of test");
-  }
+  CON("end of test");
+  exit(0);
 }

@@ -327,6 +327,11 @@ void Thing::achieve_goals_in_death(void)
   dbg("Achieve death goals at tick %u", game->tick_current);
   TRACE_AND_INDENT();
 
+  //
+  // Check if stuck in a web
+  //
+  is_stuck_update();
+
   resurrect_tick();
   update_tick();
 }

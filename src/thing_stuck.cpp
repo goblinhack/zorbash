@@ -94,6 +94,21 @@ bool Thing::is_stuck_check(void)
   }
 
   //
+  // If things are dead should they remain stuck ? It can cause resurrecting things to be stuck,
+  // so I say no.
+  //
+  if (is_dead_or_dying()) {
+    return false;
+  }
+
+  //
+  // Don't block resurrection as the anim will never end.
+  //
+  if (is_resurrecting) {
+    return false;
+  }
+
+  //
   // Paralysed
   //
   if (paralysis_count() > 0) {
