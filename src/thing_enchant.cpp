@@ -18,16 +18,22 @@ void Thing::on_enchant(void)
   TRACE_NO_INDENT();
 
   auto on_enchant = tp()->on_enchant_do();
-  if (std::empty(on_enchant)) { return; }
+  if (std::empty(on_enchant)) {
+    return;
+  }
 
   auto t = split_tokens(on_enchant, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = name(); }
+    if (mod == "me") {
+      mod = name();
+    }
 
     dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
@@ -73,7 +79,9 @@ bool Thing::enchant_with_stone(Thingp what)
     what->damaged_count_set(0);
   }
 
-  if (is_player()) { sound_play("powerup"); }
+  if (is_player()) {
+    sound_play("powerup");
+  }
 
   //
   // Drop a enchantstone
@@ -81,7 +89,9 @@ bool Thing::enchant_with_stone(Thingp what)
   auto found = false;
   for (const auto enchantstone : carried_item_only_vector()) {
     if (enchantstone->is_enchantstone()) {
-      if (enchantstone->charge_count()) { enchantstone->charge_count_decr(); }
+      if (enchantstone->charge_count()) {
+        enchantstone->charge_count_decr();
+      }
       if (! enchantstone->charge_count()) {
         enchantstone->is_drained = true;
         enchantstone->dead("drained and used");
@@ -125,7 +135,9 @@ bool Thing::enchant_without_stone(Thingp what)
     what->damaged_count_set(0);
   }
 
-  if (is_player()) { sound_play("powerup"); }
+  if (is_player()) {
+    sound_play("powerup");
+  }
 
   return true;
 }
@@ -134,11 +146,15 @@ void Thing::enchant_randomly(void)
 {
   TRACE_NO_INDENT();
 
-  if (! is_enchantable()) { return; }
+  if (! is_enchantable()) {
+    return;
+  }
 
   enchant_count_incr(1);
   while (pcg_random_range(0, 100) < 20 + level->num() * 2) {
-    if (enchant_count_get() >= enchant_max_current_get()) { break; }
+    if (enchant_count_get() >= enchant_max_current_get()) {
+      break;
+    }
     enchant_count_incr(1);
   }
   damaged_count_set(0);
@@ -150,7 +166,9 @@ int Thing::enchantstone_count(void)
 
   int v = 0;
   for (const auto t : carried_item_only_vector()) {
-    if (! t->is_enchantstone()) { continue; }
+    if (! t->is_enchantstone()) {
+      continue;
+    }
     dbg("Found an enchantstone: %s", t->to_short_string().c_str());
     v++;
   }
@@ -174,11 +192,15 @@ bool Thing::enchant_random_item_with_stone(void)
   TRACE_NO_INDENT();
   std::vector< Thingp > cands;
   for (const auto t : carried_and_equipped_item_vector()) {
-    if (! t->is_enchantable()) { continue; }
+    if (! t->is_enchantable()) {
+      continue;
+    }
     cands.push_back(t);
   }
 
-  if (cands.empty()) { return false; }
+  if (cands.empty()) {
+    return false;
+  }
 
   auto chosen = cands[ pcg_random_range(0, cands.size()) ];
   dbg("Enchant this randomly: %s", chosen->to_string().c_str());
@@ -189,9 +211,13 @@ int Thing::enchant_count_get(void)
 {
   TRACE_NO_INDENT();
   int v = 0;
-  if (maybe_infop()) { v = infop()->enchant; }
+  if (maybe_infop()) {
+    v = infop()->enchant;
+  }
   auto owner = immediate_owner();
-  if (owner && (owner != this)) { v += owner->enchant_count_get(); }
+  if (owner && (owner != this)) {
+    v += owner->enchant_count_get();
+  }
   if (is_minion()) {
     auto mob = immediate_mob();
     if (mob) {
@@ -215,7 +241,9 @@ int Thing::enchant_count_decr(int v)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->enchant -= v);
-  if (infop()->enchant < 0) { infop()->enchant = 0; }
+  if (infop()->enchant < 0) {
+    infop()->enchant = 0;
+  }
   return n;
 }
 
@@ -232,7 +260,9 @@ int Thing::enchant_count_decr(void)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->enchant--);
-  if (infop()->enchant < 0) { infop()->enchant = 0; }
+  if (infop()->enchant < 0) {
+    infop()->enchant = 0;
+  }
   return n;
 }
 
@@ -250,14 +280,18 @@ int Thing::enchant_count_incr(void)
 int Thing::enchant_max_current_get(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->enchant_max); }
+  if (maybe_infop()) {
+    return (infop()->enchant_max);
+  }
   return 0;
 }
 
 int Thing::enchant_max_current_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->enchant_max = v);
   return n;
@@ -266,7 +300,9 @@ int Thing::enchant_max_current_set(int v)
 int Thing::enchant_max_current_decr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->enchant_max -= v);
   return n;
@@ -275,7 +311,9 @@ int Thing::enchant_max_current_decr(int v)
 int Thing::enchant_max_current_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->enchant_max += v);
   return n;
@@ -284,7 +322,9 @@ int Thing::enchant_max_current_incr(int v)
 int Thing::enchant_max_current_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->enchant_max--);
   return n;
@@ -293,7 +333,9 @@ int Thing::enchant_max_current_decr(void)
 int Thing::enchant_max_current_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->enchant_max++);
   return n;

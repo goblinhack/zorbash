@@ -283,15 +283,21 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
 
   bool monst_info_present = (my.t->maybe_infop() != nullptr);
   out << bits(monst_info_present);
-  if (monst_info_present) { out << bits(my.t->_infop); }
+  if (monst_info_present) {
+    out << bits(my.t->_infop);
+  }
 
   bool monst_item_present = (my.t->maybe_itemsp() != nullptr);
   out << bits(monst_item_present);
-  if (monst_item_present) { out << bits(my.t->_itemsp); }
+  if (monst_item_present) {
+    out << bits(my.t->_itemsp);
+  }
 
   bool monst_ai_present = (my.t->maybe_aip() != nullptr);
   out << bits(monst_ai_present);
-  if (monst_ai_present) { out << bits(my.t->_aip); }
+  if (monst_ai_present) {
+    out << bits(my.t->_aip);
+  }
 
   out << bits(my.t->tp_id);
   out << bits(my.t->id);
@@ -338,7 +344,9 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->has_seen_player_msg_shown                    ? 1LLU : 0LLU) << shift; shift++;
   // end sort marker1 }
   // clang-format on
-  if (shift >= (int) (sizeof(bits64) * 8)) { ERR("Ran out of bits in serialization (1)"); }
+  if (shift >= (int) (sizeof(bits64) * 8)) {
+    ERR("Ran out of bits in serialization (1)");
+  }
   out << bits(bits64);
 
   bits64 = 0;
@@ -394,7 +402,9 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->was_frozen                                   ? 1LLU : 0LLU) << shift; shift++;
   // end sort marker2 }
   // clang-format on
-  if (shift >= (int) (sizeof(bits64) * 8)) { ERR("Ran out of bits in serialization (2)"); }
+  if (shift >= (int) (sizeof(bits64) * 8)) {
+    ERR("Ran out of bits in serialization (2)");
+  }
   out << bits(bits64);
 
   bits64 = 0;
@@ -454,7 +464,9 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_trap                          ? 1LLU : 0LLU) << shift; shift++;
   // end sort marker3 }
   // clang-format on
-  if (shift >= (int) (sizeof(bits64) * 8)) { ERR("Ran out of bits in serialization (3)"); }
+  if (shift >= (int) (sizeof(bits64) * 8)) {
+    ERR("Ran out of bits in serialization (3)");
+  }
   out << bits(bits64);
 
   bits64 = 0;
@@ -491,7 +503,9 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_water                            ? 1LLU : 0LLU) << shift; shift++;
   // end sort marker4 }
   // clang-format on
-  if (shift >= (int) (sizeof(bits64) * 8)) { ERR("Ran out of bits in serialization (4)"); }
+  if (shift >= (int) (sizeof(bits64) * 8)) {
+    ERR("Ran out of bits in serialization (4)");
+  }
   out << bits(bits64);
 
   /////////////////////////////////////////////////////////////////////////
@@ -546,7 +560,9 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
     for (auto p : my.t->all_things) {
       auto t = p.second;
       csum += t->curr_at.x + t->curr_at.y + t->id.id;
-      if (t->level != my.t) { t->err("Cannot save thing, is on wrong level"); }
+      if (t->level != my.t) {
+        t->err("Cannot save thing, is on wrong level");
+      }
       // t->con("SAVE %d,%d %d", t->curr_at.x, t->curr_at.y, t->id.id);
     }
   }
@@ -734,7 +750,9 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto slot = 0; slot < MAP_SLOTS; slot++) {
           auto id = get(my.t->all_things_id_at, x, y, slot);
-          if (id.ok()) { LOG("save slot %d @ %d,%d : %" PRIX32, slot, x, y, id.id); }
+          if (id.ok()) {
+            LOG("save slot %d @ %d,%d : %" PRIX32, slot, x, y, id.id);
+          }
         }
       }
     }
@@ -784,7 +802,9 @@ std::ostream &operator<<(std::ostream &out, Bits< const class World & > const my
       for (auto z = 0; z < LEVELS_DEEP; ++z) {
         point3d p(x, y, z);
         auto    l = get(my.t.levels, x, y, z);
-        if (l) { count++; }
+        if (l) {
+          count++;
+        }
       }
     }
   }
@@ -798,7 +818,9 @@ std::ostream &operator<<(std::ostream &out, Bits< const class World & > const my
         auto    l = get(my.t.levels, x, y, z);
         if (l) {
           step++;
-          if (count > 1) { wid_progress_bar("Saving...", ((float) step) / ((float) count)); }
+          if (count > 1) {
+            wid_progress_bar("Saving...", ((float) step) / ((float) count));
+          }
 
           exists = true;
           LOG("INF: Save level %d,%d,%d", p.x, p.y, p.z);
@@ -1030,7 +1052,9 @@ bool Game::save(std::string file_to_save)
   }
 #endif
 
-  if (lzo_init() != LZO_E_OK) { ERR("LZO init fail: Enable '-DLZO_DEBUG' for diagnostics)"); }
+  if (lzo_init() != LZO_E_OK) {
+    ERR("LZO init fail: Enable '-DLZO_DEBUG' for diagnostics)");
+  }
 
   HEAP_ALLOC(wrkmem, LZO1X_1_MEM_COMPRESS);
 
@@ -1058,7 +1082,9 @@ bool Game::save(std::string file_to_save)
     int      r = lzo1x_decompress((lzo_bytep) tmp_compressed, compressed_len, (lzo_bytep) tmp_uncompressed, &new_len,
                                   nullptr);
     if (r == LZO_E_OK && new_len == uncompressed_len) {
-      if (memcmp(tmp_uncompressed, uncompressed, uncompressed_len)) { ERR("LZO compress-decompress failed"); }
+      if (memcmp(tmp_uncompressed, uncompressed, uncompressed_len)) {
+        ERR("LZO compress-decompress failed");
+      }
     } else {
       /* this should NEVER happen */
       ERR("LZO internal error - decompression failed: %d", r);
@@ -1113,16 +1139,22 @@ void Game::save(void)
 void Game::save(int slot)
 {
   TRACE_AND_INDENT();
-  if (slot < 0) { return; }
+  if (slot < 0) {
+    return;
+  }
 
-  if (slot >= UI_WID_SAVE_SLOTS) { return; }
+  if (slot >= UI_WID_SAVE_SLOTS) {
+    return;
+  }
 
   for (auto x = 0; x < LEVELS_ACROSS; ++x) {
     for (auto y = 0; y < LEVELS_DOWN; ++y) {
       for (auto z = 0; z < LEVELS_DEEP; ++z) {
         point3d p(x, y, z);
         auto    l = get(game->world.levels, x, y, z);
-        if (l) { l->things_gc_force(); }
+        if (l) {
+          l->things_gc_force();
+        }
       }
     }
   }
@@ -1154,7 +1186,9 @@ void Game::save_snapshot(void)
       for (auto z = 0; z < LEVELS_DEEP; ++z) {
         point3d p(x, y, z);
         auto    l = get(game->world.levels, x, y, z);
-        if (l) { l->things_gc_force(); }
+        if (l) {
+          l->things_gc_force();
+        }
       }
     }
   }
@@ -1199,7 +1233,9 @@ static uint8_t wid_save_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   switch (key->mod) {
     case KMOD_LCTRL :
@@ -1248,7 +1284,9 @@ static uint8_t wid_save_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   return true;
 }
@@ -1272,13 +1310,17 @@ static uint8_t wid_save_cancel(Widp w, int x, int y, uint32_t button)
 void Game::wid_save_select(void)
 {
   TRACE_AND_INDENT();
-  if (wid_save) { return; }
+  if (wid_save) {
+    return;
+  }
 
   auto  m  = TERM_WIDTH / 2;
   auto  h  = TERM_HEIGHT / 2;
   point tl = make_point(m - 40, h - 7);
   point br = make_point(m + 40, h + 8);
-  if (! g_opt_ascii) { br.y += 3; }
+  if (! g_opt_ascii) {
+    br.y += 3;
+  }
   auto width = br.x - tl.x;
 
   wid_save = new WidPopup("Game save", tl, br, tile_find_mand("save"), "", false, false);
@@ -1315,7 +1357,9 @@ void Game::wid_save_select(void)
     Game tmp;
     auto tmp_file = saved_dir + "saved-slot-" + std::to_string(slot);
 
-    if (slot == UI_WID_SAVE_SLOTS - 1) { tmp_file = saved_dir + "saved-snapshot"; }
+    if (slot == UI_WID_SAVE_SLOTS - 1) {
+      tmp_file = saved_dir + "saved-snapshot";
+    }
 
     auto  p  = wid_save->wid_text_area->wid_text_area;
     auto  w  = wid_new_square_button(p, "save slot");

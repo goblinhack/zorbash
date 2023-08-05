@@ -10,16 +10,22 @@
 void Thing::on_open(void)
 {
   auto on_open = tp()->on_open_do();
-  if (std::empty(on_open)) { return; }
+  if (std::empty(on_open)) {
+    return;
+  }
 
   auto t = split_tokens(on_open, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = name(); }
+    if (mod == "me") {
+      mod = name();
+    }
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
@@ -31,15 +37,25 @@ bool Thing::open(Thingp it)
 {
   TRACE_NO_INDENT();
 
-  if (it->is_door()) { return open_door(it); }
+  if (it->is_door()) {
+    return open_door(it);
+  }
 
-  if (! is_monst() && ! is_player()) { return false; }
+  if (! is_monst() && ! is_player()) {
+    return false;
+  }
 
-  if (! it->is_openable()) { return false; }
+  if (! it->is_openable()) {
+    return false;
+  }
 
-  if (it->is_open) { return false; }
+  if (it->is_open) {
+    return false;
+  }
 
-  if (it->is_dead) { return false; }
+  if (it->is_dead) {
+    return false;
+  }
 
   IF_DEBUG1 { it->log("Open"); }
 
@@ -60,13 +76,21 @@ bool Thing::open(void)
 {
   TRACE_NO_INDENT();
 
-  if (is_door()) { return open_door(this); }
+  if (is_door()) {
+    return open_door(this);
+  }
 
-  if (! is_openable()) { return false; }
+  if (! is_openable()) {
+    return false;
+  }
 
-  if (is_open) { return false; }
+  if (is_open) {
+    return false;
+  }
 
-  if (is_dead) { return false; }
+  if (is_dead) {
+    return false;
+  }
 
   IF_DEBUG1 { log("Open"); }
 

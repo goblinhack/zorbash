@@ -22,7 +22,9 @@ static inline void lock(SDL_Surface *surface)
   //
   // Is this needed? unlocking seems slow
   //
-  if (SDL_MUSTLOCK(surface)) { SDL_LockSurface(surface); }
+  if (SDL_MUSTLOCK(surface)) {
+    SDL_LockSurface(surface);
+  }
 }
 
 //
@@ -33,7 +35,9 @@ static inline void unlock(SDL_Surface *surface)
   //
   // Is this needed? unlocking seems slow
   //
-  if (SDL_MUSTLOCK(surface)) { SDL_UnlockSurface(surface); }
+  if (SDL_MUSTLOCK(surface)) {
+    SDL_UnlockSurface(surface);
+  }
 }
 
 //

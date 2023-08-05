@@ -73,8 +73,12 @@ struct tracer_t {
   inline ~tracer_t()
   {
 #ifdef ENABLE_DEBUG_TRACE
-    if (g_callframes_indent > 0) { g_callframes_indent--; }
-    if (g_callframes_depth > 0) { g_callframes_depth--; }
+    if (g_callframes_indent > 0) {
+      g_callframes_indent--;
+    }
+    if (g_callframes_depth > 0) {
+      g_callframes_depth--;
+    }
 #endif
   }
 };
@@ -96,7 +100,9 @@ struct tracer_no_indent_t {
   inline ~tracer_no_indent_t()
   {
 #ifdef ENABLE_DEBUG_TRACE
-    if (g_callframes_depth > 0) { g_callframes_depth--; }
+    if (g_callframes_depth > 0) {
+      g_callframes_depth--;
+    }
 #endif
   }
 };

@@ -23,7 +23,9 @@ void Level::update_hazard_tile_map(void)
         for (auto dx = -2; dx <= 2; dx++) {
           for (auto dy = -2; dy <= 2; dy++) {
             incr(water_tile_map, x + dx, y + dy, (uint8_t) 1);
-            if (is_deep_water(x, y)) { incr(deep_water_tile_map, x + dx, y + dy, (uint8_t) 1); }
+            if (is_deep_water(x, y)) {
+              incr(deep_water_tile_map, x + dx, y + dy, (uint8_t) 1);
+            }
           }
         }
       }
@@ -133,13 +135,17 @@ void Level::update_things_next_to_a_chasm(bool &changed)
 
               FOR_ALL_NON_INTERNAL_THINGS(this, t, x, y)
               {
-                if (t->is_falling) { continue; }
+                if (t->is_falling) {
+                  continue;
+                }
 
                 //
                 // Deep water next to a chasm changes to
                 // regular water
                 //
-                if (t->is_deep_water()) { place_shallow_water = true; }
+                if (t->is_deep_water()) {
+                  place_shallow_water = true;
+                }
 
                 if (t->is_shallow_water() || t->is_deep_water() || t->is_lava()) {
                   t->log("Over a chasm");
@@ -167,7 +173,9 @@ void Level::update_deep_water(bool &changed)
       //
       // Don't remove water a monster is sitting in, else piranhas get stuck
       //
-      if (is_monst(x, y)) { continue; }
+      if (is_monst(x, y)) {
+        continue;
+      }
 
       //
       // Deep water must be surrounded by water
@@ -248,7 +256,9 @@ void Level::update_map_things_to_stand_on(void)
 
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-      if (is_floor(x, y) || is_corridor(x, y) || is_dirt(x, y) || is_bridge(x, y)) { is_able_to_stand_on_set(x, y); }
+      if (is_floor(x, y) || is_corridor(x, y) || is_dirt(x, y) || is_bridge(x, y)) {
+        is_able_to_stand_on_set(x, y);
+      }
     }
   }
 }

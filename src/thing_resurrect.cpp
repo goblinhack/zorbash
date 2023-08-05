@@ -104,7 +104,9 @@ void Thing::resurrect_tick(void)
 
   FOR_ALL_THINGS_THAT_INTERACT(level, t, curr_at.x, curr_at.x)
   {
-    if (t == this) { continue; }
+    if (t == this) {
+      continue;
+    }
 
     if (t->is_player()) {
       msg("The ground trembles beneath you...");
@@ -127,7 +129,9 @@ void Thing::resurrect_tick(void)
 int Thing::tick_resurrect_when(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->tick_resurrect_when); }
+  if (maybe_infop()) {
+    return (infop()->tick_resurrect_when);
+  }
   return 0;
 }
 

@@ -8,7 +8,9 @@
 void Level::cursor_describe(void)
 {
   TRACE_AND_INDENT();
-  if (game->robot_mode) { return; }
+  if (game->robot_mode) {
+    return;
+  }
 
   //
   // Clear the botcon if moving the mouse around.
@@ -16,7 +18,9 @@ void Level::cursor_describe(void)
   BOTCON(" ");
 
   dbg("Cursor describe");
-  if (! cursor) { return; }
+  if (! cursor) {
+    return;
+  }
 
   auto p = cursor->curr_at;
   describe(p);

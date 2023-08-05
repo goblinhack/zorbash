@@ -51,9 +51,13 @@ static void wid_tp_info_placement(point &tl, point &br, int height)
   int offset = 8;
 
   int x = ascii_mouse_x - UI_THING_INFO_WIDTH - offset;
-  if (x < 0) { x = ascii_mouse_x + offset; }
+  if (x < 0) {
+    x = ascii_mouse_x + offset;
+  }
 
-  if (ascii_mouse_x > TERM_WIDTH - UI_RIGHTBAR_WIDTH) { x = UI_LEFTBAR_WIDTH + 1; }
+  if (ascii_mouse_x > TERM_WIDTH - UI_RIGHTBAR_WIDTH) {
+    x = UI_LEFTBAR_WIDTH + 1;
+  }
 
   tl = make_point(x, TERM_HEIGHT - 2 - height);
   br = make_point(tl.x + UI_THING_INFO_WIDTH, TERM_HEIGHT - 2);
@@ -274,7 +278,9 @@ WidPopup *Game::wid_tp_info_create_popup_compact(const std::vector< Tpp > &ts)
   }
 
   auto level = game->level;
-  if (! level) { return nullptr; }
+  if (! level) {
+    return nullptr;
+  }
 
   if (! level->should_display_map()) {
     ERR("Trying to display tp info when the map is not being displayed");
@@ -282,9 +288,13 @@ WidPopup *Game::wid_tp_info_create_popup_compact(const std::vector< Tpp > &ts)
   }
 
   auto player = level->player;
-  if (! player) { return nullptr; }
+  if (! player) {
+    return nullptr;
+  }
 
-  if (! player->player_is_ready_for_popups()) { return nullptr; }
+  if (! player->player_is_ready_for_popups()) {
+    return nullptr;
+  }
 
   //
   // If the mouse is too far to the left then do not obscure the map with the tp info
@@ -305,7 +315,9 @@ WidPopup *Game::wid_tp_info_create_popup_compact(const std::vector< Tpp > &ts)
     auto name = t->text_long_capitalised();
     snprintf(tmp, sizeof(tmp) - 2, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$%-28s", name.c_str());
     for (auto c = tmp; c < tmp + sizeof(tmp); c++) {
-      if (*c == ' ') { *c = '`'; }
+      if (*c == ' ') {
+        *c = '`';
+      }
     }
     wid_popup_window->log(tmp);
 
@@ -396,7 +408,9 @@ bool Game::wid_tp_info_push_popup(Tpp t)
 void Game::wid_tp_info_clear_popup(void)
 {
   TRACE_AND_INDENT();
-  if (wid_tp_info_window.empty()) { return; }
+  if (wid_tp_info_window.empty()) {
+    return;
+  }
 
   BOTCON(" ");
 
@@ -432,7 +446,9 @@ bool Game::wid_tp_info_create(Tpp t, bool when_hovering_over)
   }
 
   static bool recursion;
-  if (recursion) { DIE("Recursion"); }
+  if (recursion) {
+    DIE("Recursion");
+  }
   recursion = true;
   TRACE_AND_INDENT();
   DBG2("XXX Create wid tp info for %s", t->to_short_string().c_str());
@@ -497,7 +513,9 @@ bool Game::wid_tp_info_create_list(std::vector< Tpp > &ts)
       // If multiple things are shown at this location, try and show them all.
       //
       for (auto t : ts) {
-        if (t->is_floor() || t->is_corridor()) { continue; }
+        if (t->is_floor() || t->is_corridor()) {
+          continue;
+        }
         description += t->text_short_capitalised();
         description += ".`"; // Why does space not work ?
       }
@@ -539,7 +557,9 @@ bool Game::wid_tp_info_create_list(std::vector< Tpp > &ts)
   //
   std::vector< Tpp > ts_new;
   for (auto t : ts) {
-    if (! t->text_description_long().empty()) { ts_new.push_back(t); }
+    if (! t->text_description_long().empty()) {
+      ts_new.push_back(t);
+    }
   }
   ts = ts_new;
 
@@ -547,20 +567,26 @@ bool Game::wid_tp_info_create_list(std::vector< Tpp > &ts)
   request_destroy_tp_info = 0;
 
   static bool recursion;
-  if (recursion) { DIE("Recursion"); }
+  if (recursion) {
+    DIE("Recursion");
+  }
   recursion = true;
 
   //
   // If too many items, use a compressed form
   //
   bool compact = false;
-  if (ts.size() > 2) { compact = true; }
+  if (ts.size() > 2) {
+    compact = true;
+  }
 
   bool ok = false;
 
   if (! compact) {
     for (auto t : ts) {
-      if (t->text_description_long().empty()) { continue; }
+      if (t->text_description_long().empty()) {
+        continue;
+      }
 
       if (! wid_tp_info_push_popup(t)) {
         IF_DEBUG1 { t->log("Failed to push item"); }
@@ -614,7 +640,9 @@ void Game::wid_tp_info_add_nutrition(WidPopup *w, Tpp t)
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
-  if (! game->level->player) { return; }
+  if (! game->level->player) {
+    return;
+  }
 
   auto nutrition_dice = t->nutrition_dice();
   auto min_value      = nutrition_dice.min_roll();
@@ -1279,8 +1307,12 @@ void Game::wid_tp_info_add_stat_def(WidPopup *w, Tpp t)
     auto stat = t->stat_def_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense bonus            %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
-    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
-    if (t->is_spell()) { w->log("%%fg=pink$(while spell is active)"); }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
+    if (t->is_spell()) {
+      w->log("%%fg=pink$(while spell is active)");
+    }
   }
 }
 
@@ -1299,8 +1331,12 @@ void Game::wid_tp_info_add_stat_att(WidPopup *w, Tpp t)
     auto stat = t->stat_att_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack bonus             %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
-    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
-    if (t->is_spell()) { w->log("%%fg=pink$(while spell is active)"); }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
+    if (t->is_spell()) {
+      w->log("%%fg=pink$(while spell is active)");
+    }
   }
 }
 
@@ -1319,8 +1355,12 @@ void Game::wid_tp_info_add_stat_str(WidPopup *w, Tpp t)
     auto stat = t->stat_str_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength bonus           %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
-    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
-    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
   }
 }
 
@@ -1339,8 +1379,12 @@ void Game::wid_tp_info_add_stat_dex(WidPopup *w, Tpp t)
     auto stat = t->stat_dex_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity bonus          %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
-    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
-    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
   }
 }
 
@@ -1359,8 +1403,12 @@ void Game::wid_tp_info_add_stat_luck(WidPopup *w, Tpp t)
     auto stat = t->stat_luck_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Luck bonus               %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
-    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
-    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
   }
 }
 
@@ -1379,8 +1427,12 @@ void Game::wid_tp_info_add_stat_thv(WidPopup *w, Tpp t)
     auto stat = t->stat_thv_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Thieving bonus           %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
-    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
-    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
   }
 }
 
@@ -1399,8 +1451,12 @@ void Game::wid_tp_info_add_stat_psi(WidPopup *w, Tpp t)
     auto stat = t->stat_psi_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Psi bonus                %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
-    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
-    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
   }
 }
 
@@ -1419,8 +1475,12 @@ void Game::wid_tp_info_add_stat_int(WidPopup *w, Tpp t)
     auto stat = t->stat_int_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Intel bonus              %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
-    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
-    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
   }
 }
 
@@ -1439,8 +1499,12 @@ void Game::wid_tp_info_add_stat_con(WidPopup *w, Tpp t)
     auto stat = t->stat_con_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution bonus       %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
-    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
-    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
   }
 }
 
@@ -1457,8 +1521,12 @@ void Game::wid_tp_info_add_move_speed(WidPopup *w, Tpp t)
     auto speed = t->move_speed_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Move speed bonus         %4d", speed);
     w->log(tmp);
-    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
-    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
   }
 }
 
@@ -1477,8 +1545,12 @@ void Game::wid_tp_info_add_shove_strength(WidPopup *w, Tpp t)
     auto shove_strength = t->shove_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Shove strength bonus     %4d", shove_strength);
     w->log(tmp);
-    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
-    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
   }
 }
 
@@ -1497,8 +1569,12 @@ void Game::wid_tp_info_add_jump_distance(WidPopup *w, Tpp t)
     auto dist = t->jump_distance_bonus();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Jump distance bonus      %4d", dist);
     w->log(tmp);
-    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
-    if (t->is_skill()) { w->log("%%fg=pink$(while skill is active)"); }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
+    if (t->is_skill()) {
+      w->log("%%fg=pink$(while skill is active)");
+    }
   }
 }
 
@@ -1541,28 +1617,36 @@ void Game::wid_tp_info_add_general_info(WidPopup *w, Tpp t)
 
   if (t->is_monst() && t->environ_hates_water()) {
     if (t->environ_hates_water() > 10) {
-      if (! hates.empty()) { hates += "/"; }
+      if (! hates.empty()) {
+        hates += "/";
+      }
       hates += "water";
     }
   }
 
   if (t->is_monst() && t->environ_hates_acid()) {
     if (t->environ_hates_acid() > 10) {
-      if (! hates.empty()) { hates += "/"; }
+      if (! hates.empty()) {
+        hates += "/";
+      }
       hates += "acid";
     }
   }
 
   if (t->is_monst() && t->environ_hates_cold()) {
     if (t->environ_hates_cold() > 10) {
-      if (! hates.empty()) { hates += "/"; }
+      if (! hates.empty()) {
+        hates += "/";
+      }
       hates += "cold";
     }
   }
 
   if (t->is_monst() && t->environ_hates_fire()) {
     if (t->environ_hates_fire() > 10) {
-      if (! hates.empty()) { hates += "/"; }
+      if (! hates.empty()) {
+        hates += "/";
+      }
       hates += "fire";
     }
   } else if (t->is_able_to_melt()) {

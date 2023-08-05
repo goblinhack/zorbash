@@ -7,9 +7,13 @@
 
 void Thing::chasm_tick(void)
 {
-  if (! is_able_to_fall()) { return; }
+  if (! is_able_to_fall()) {
+    return;
+  }
 
-  if (! level->is_chasm(curr_at.x, curr_at.y)) { return; }
+  if (! level->is_chasm(curr_at.x, curr_at.y)) {
+    return;
+  }
 
   dbg("Over a chasm");
   TRACE_AND_INDENT();

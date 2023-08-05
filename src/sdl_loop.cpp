@@ -83,12 +83,16 @@ void sdl_loop(void)
     //
     // If enabled, run some tests
     //
-    if (unlikely(g_opt_tests)) { run_tests(); }
+    if (unlikely(g_opt_tests)) {
+      run_tests();
+    }
 
     //
     // Reset joystick handling before we poll and update.
     //
-    if (unlikely(sdl.joy_axes != nullptr)) { sdl_tick(); }
+    if (unlikely(sdl.joy_axes != nullptr)) {
+      sdl_tick();
+    }
 
     static bool old_g_errored;
     if (unlikely(g_errored)) {
@@ -131,7 +135,9 @@ void sdl_loop(void)
       ui_ts_very_slow_last = ts_now;
 
       if (likely(! g_errored)) {
-        if (likely(game->level != nullptr)) { game->level->tick(); }
+        if (likely(game->level != nullptr)) {
+          game->level->tick();
+        }
       }
 
       wid_display_all();
@@ -232,14 +238,18 @@ void sdl_loop(void)
       //
       if (likely(! g_errored)) {
         if (likely(game->level != nullptr)) {
-          if (found || game->tick_begin_ms) { game->level->tick(); }
+          if (found || game->tick_begin_ms) {
+            game->level->tick();
+          }
         }
       }
 
       //
       // If the user has moved the mouse or we're in the intro, update the widgets.
       //
-      if (processed_mouse_motion_event || ! game->level) { wid_display_all(); }
+      if (processed_mouse_motion_event || ! game->level) {
+        wid_display_all();
+      }
     }
 
     gl_leave_2d_mode();
@@ -257,12 +267,18 @@ void sdl_loop(void)
     //
     // Config change?
     //
-    if (unlikely(g_need_restart)) { break; }
+    if (unlikely(g_need_restart)) {
+      break;
+    }
 
     IF_DEBUG2
     {
-      if (unlikely(pcg_random_allowed > 10)) { ERR("pcg_random_allowed lock error"); }
-      if (unlikely(pcg_random_allowed < -10)) { ERR("pcg_random_allowed unlock error"); }
+      if (unlikely(pcg_random_allowed > 10)) {
+        ERR("pcg_random_allowed lock error");
+      }
+      if (unlikely(pcg_random_allowed < -10)) {
+        ERR("pcg_random_allowed unlock error");
+      }
     }
 
     //
@@ -272,7 +288,9 @@ void sdl_loop(void)
       static uint32_t ts_begin;
       static uint32_t ts_now;
 
-      if (unlikely(! ts_begin)) { ts_begin = time_ms(); }
+      if (unlikely(! ts_begin)) {
+        ts_begin = time_ms();
+      }
 
       if (unlikely(frames >= 100)) {
         ts_now          = time_ms();

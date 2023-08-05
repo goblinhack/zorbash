@@ -14,17 +14,25 @@ void Thing::popup(std::string const &m)
     return;
   }
 
-  if (! game->level) { return; }
+  if (! game->level) {
+    return;
+  }
 
   auto player = game->level->player;
-  if (! player) { return; }
+  if (! player) {
+    return;
+  }
 
   //
   // Check we're on the same level
   //
-  if (player->level != level) { return; }
+  if (player->level != level) {
+    return;
+  }
 
-  if (level->is_starting) { return; }
+  if (level->is_starting) {
+    return;
+  }
 
   //
   // Get the top owner as that will be the popup owner. We keep track
@@ -38,7 +46,9 @@ void Thing::popup(std::string const &m)
   }
 
   auto msg = level->thing_new("msg", curr_at);
-  if (! msg) { return; }
+  if (! msg) {
+    return;
+  }
 
   msg->msg_set(m);
   msg->fadeup(8.0, 0.02, 3000);
@@ -52,7 +62,9 @@ void Thing::popup(std::string const &m)
     Tilep tile = {};
     point blit_tl, blit_br;
 
-    if (! msg->map_offset_coords_get(blit_tl, blit_br, tile, false)) { break; }
+    if (! msg->map_offset_coords_get(blit_tl, blit_br, tile, false)) {
+      break;
+    }
 
     bool overlaps = {};
     for (auto existing_msg : game->popups) {

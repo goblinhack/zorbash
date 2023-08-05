@@ -15,7 +15,9 @@ void Thing::water_tick(void)
     // Check for fish out of water.
     //
     if (is_always_submerged_in_water()) {
-      if (! is_able_to_live_out_of_water()) { dead("out of water"); }
+      if (! is_able_to_live_out_of_water()) {
+        dead("out of water");
+      }
     }
     return;
   }
@@ -23,14 +25,20 @@ void Thing::water_tick(void)
   if (is_on_fire()) {
     on_fire_unset();
 
-    if (is_player()) { msg("%%fg=green$You quench the flames!%%fg=reset$"); }
+    if (is_player()) {
+      msg("%%fg=green$You quench the flames!%%fg=reset$");
+    }
 
     auto smoke = level->thing_new("smoke", curr_at);
-    if (smoke) { smoke->lifespan_set(pcg_random_range(1, 10)); }
+    if (smoke) {
+      smoke->lifespan_set(pcg_random_range(1, 10));
+    }
     return;
   }
 
-  if (! environ_dislikes_water()) { return; }
+  if (! environ_dislikes_water()) {
+    return;
+  }
 
   if (is_fire()) {
     dead("by a watery end");
@@ -43,7 +51,9 @@ void Thing::water_tick(void)
     //
     FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_LIQUID)
     {
-      if (! t->is_water()) { continue; }
+      if (! t->is_water()) {
+        continue;
+      }
       is_attacked_with_dmg_water(t, t, t->dmg_water());
     }
     FOR_ALL_THINGS_END()

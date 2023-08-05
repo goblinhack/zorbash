@@ -63,7 +63,9 @@ void wid_buffbox_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int wh
   level->buffbox_describe(slot);
 
   auto t = level->buffbox_get(slot);
-  if (t) { game->wid_thing_info_create(t); }
+  if (t) {
+    game->wid_thing_info_create(t);
+  }
 }
 
 void wid_buffbox_mouse_over_end(Widp w)
@@ -103,7 +105,9 @@ void wid_buffbox_mouse_over_end(Widp w)
 
   DBG3("buffbox: Over buffbox slot %d", slot);
   TRACE_AND_INDENT();
-  if (! level->buffbox_over(slot)) { return; }
+  if (! level->buffbox_over(slot)) {
+    return;
+  }
 
   game->wid_thing_info_destroy_deferred();
 

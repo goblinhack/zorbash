@@ -16,16 +16,22 @@ void Thing::on_fall(void)
 {
   TRACE_NO_INDENT();
   auto on_fall = tp()->on_fall_do();
-  if (std::empty(on_fall)) { return; }
+  if (std::empty(on_fall)) {
+    return;
+  }
 
   auto t = split_tokens(on_fall, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = name(); }
+    if (mod == "me") {
+      mod = name();
+    }
 
     dbg("Call %s.%s(%ss)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
@@ -39,16 +45,22 @@ void Thing::on_fall_begin(void)
 {
   TRACE_NO_INDENT();
   auto on_fall_begin = tp()->on_fall_begin_do();
-  if (std::empty(on_fall_begin)) { return; }
+  if (std::empty(on_fall_begin)) {
+    return;
+  }
 
   auto t = split_tokens(on_fall_begin, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = name(); }
+    if (mod == "me") {
+      mod = name();
+    }
 
     dbg("Call %s.%s(%ss)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
@@ -100,7 +112,9 @@ bool Thing::fall(void)
     //
     // Check the number of things jumping is not slowing the game too much
     //
-    if (game->tick_current_is_too_slow || game->prev_tick_was_too_slow) { duration /= 4; }
+    if (game->tick_current_is_too_slow || game->prev_tick_was_too_slow) {
+      duration /= 4;
+    }
   }
 
   auto t = ts_fall_begin_set(time_ms_cached());
@@ -127,16 +141,24 @@ bool Thing::fall(void)
   //
   // If a mob falls, the connection to the minions is severed
   //
-  if (is_mob()) { destroy_minions(nullptr); }
+  if (is_mob()) {
+    destroy_minions(nullptr);
+  }
 
-  if (is_able_to_spawn_things()) { destroy_spawned(nullptr); }
+  if (is_able_to_spawn_things()) {
+    destroy_spawned(nullptr);
+  }
 
   if (is_on_fire()) {
-    if (is_player()) { msg("%%fg=green$The fall puts out the flames!%%fg=reset$"); }
+    if (is_player()) {
+      msg("%%fg=green$The fall puts out the flames!%%fg=reset$");
+    }
     on_fire_unset();
   }
 
-  if (is_player() || is_monst() || is_item()) { wobble(360); }
+  if (is_player() || is_monst() || is_item()) {
+    wobble(360);
+  }
 
   return true;
 }
@@ -145,7 +167,9 @@ float Thing::fall_curr(void)
 {
   TRACE_NO_INDENT();
 
-  if (! is_falling) { return 0; }
+  if (! is_falling) {
+    return 0;
+  }
 
   auto ts = time_ms_cached();
 
@@ -160,7 +184,9 @@ float Thing::fall_curr(void)
     //
     // Things that do not tick, like bones, need to fall on the end of the tick
     //
-    if (! is_tickable()) { level->all_things_pending_fall.insert(std::pair(id, this)); }
+    if (! is_tickable()) {
+      level->all_things_pending_fall.insert(std::pair(id, this));
+    }
     return 0;
   }
 
@@ -175,7 +201,9 @@ float Thing::fall_curr(void)
 
     if (is_player()) {
       dbg("Player is waiting to complete the fall");
-      if (! g_opt_ascii) { level->ts_fade_out_begin = time_ms_cached(); }
+      if (! g_opt_ascii) {
+        level->ts_fade_out_begin = time_ms_cached();
+      }
     }
 
     is_waiting_to_leave_level_has_completed_fall = true;
@@ -188,7 +216,9 @@ float Thing::fall_curr(void)
 
 bool Thing::fall_to_next_level(void)
 {
-  if (! maybe_infop()) { return false; }
+  if (! maybe_infop()) {
+    return false;
+  }
 
   dbg("Try to fall to next level");
   TRACE_AND_INDENT();
@@ -197,7 +227,9 @@ bool Thing::fall_to_next_level(void)
   // Fall to the next level that exists beneath. If nothing exists, fall into the void.
   //
   auto fall_to = level->world_at;
-  if (level->biome == BIOME_SEWER) { fall_to.z--; }
+  if (level->biome == BIOME_SEWER) {
+    fall_to.z--;
+  }
 
   Levelp l = nullptr;
 
@@ -210,7 +242,9 @@ bool Thing::fall_to_next_level(void)
     }
 
     l = get(game->world.levels, fall_to.x, fall_to.y, fall_to.z);
-    if (l) { break; }
+    if (l) {
+      break;
+    }
   }
 
   if (! l) {
@@ -218,7 +252,9 @@ bool Thing::fall_to_next_level(void)
     return false;
   }
 
-  if (is_player()) { game->current_level = fall_to; }
+  if (is_player()) {
+    game->current_level = fall_to;
+  }
 
   dbg("Try to fall where to fall in the next level at depth %d", fall_to.z);
   TRACE_AND_INDENT();
@@ -258,7 +294,9 @@ bool Thing::fall_to_next_level(void)
     }
 
     dbg("Try to fall to %d,%d", x, y);
-    if (! l->is_able_to_stand_on(x, y)) { continue; }
+    if (! l->is_able_to_stand_on(x, y)) {
+      continue;
+    }
 
     if (l->is_ascend_dungeon(x, y) || l->is_monst(x, y) || l->is_rock(x, y) || l->is_door(x, y)
         || l->is_secret_door(x, y) || l->is_mob(x, y) || l->is_chasm(x, y) || l->is_wall(x, y)
@@ -294,7 +332,9 @@ bool Thing::fall_to_next_level(void)
           if (is_monst()) {
             msg("%s tumbles into the void!", text_The().c_str());
             if (is_humanoid()) {
-              if (! is_dead) { popup("Curses!"); }
+              if (! is_dead) {
+                popup("Curses!");
+              }
             }
           } else if (is_item()) {
             msg("%s falls into the void!", text_The().c_str());
@@ -327,38 +367,58 @@ bool Thing::fall_to_next_level(void)
       }
 
       fall_height_set(0);
-      if (is_player() || is_monst() || is_item()) { wobble(90); }
+      if (is_player() || is_monst() || is_item()) {
+        wobble(90);
+      }
       visible("fall to next level");
 
       //
       // Allow mobs to fall without damage
       //
       int fall_dmg = 0;
-      if (is_player()) { fall_dmg = pcg_random_range(5, 30); }
+      if (is_player()) {
+        fall_dmg = pcg_random_range(5, 30);
+      }
 
-      if (is_staff() || is_potion() || is_mob() || is_monst()) { fall_dmg = health() / 2; }
+      if (is_staff() || is_potion() || is_mob() || is_monst()) {
+        fall_dmg = health() / 2;
+      }
 
-      if (is_ring()) { fall_dmg = 0; }
+      if (is_ring()) {
+        fall_dmg = 0;
+      }
 
-      if (is_brittle()) { fall_dmg *= 2; }
+      if (is_brittle()) {
+        fall_dmg *= 2;
+      }
 
       dbg("Level change where you landed");
       auto new_pos = make_point(x, y);
       if (l->is_lava(new_pos)) {
-        if (is_player()) { msg("%%fg=orange$You plunge into lava! This must be the end for you!%%fg=reset$"); }
+        if (is_player()) {
+          msg("%%fg=orange$You plunge into lava! This must be the end for you!%%fg=reset$");
+        }
         fall_dmg *= 3;
       } else if (l->is_fire(new_pos)) {
-        if (is_player()) { msg("%%fg=orange$You plunge into flames! Not a good move!%%fg=reset$"); }
+        if (is_player()) {
+          msg("%%fg=orange$You plunge into flames! Not a good move!%%fg=reset$");
+        }
         fall_dmg *= 2;
       } else if (l->is_deep_water(new_pos)) {
-        if (is_player()) { msg("%%fg=yellow$The deep water lessens the fall!%%fg=reset$"); }
+        if (is_player()) {
+          msg("%%fg=yellow$The deep water lessens the fall!%%fg=reset$");
+        }
         fall_dmg /= 4;
       } else if (l->is_shallow_water(new_pos)) {
-        if (is_player()) { msg("%%fg=yellow$The water lessens the fall!%%fg=reset$"); }
+        if (is_player()) {
+          msg("%%fg=yellow$The water lessens the fall!%%fg=reset$");
+        }
         fall_dmg /= 2;
       }
 
-      if (is_player()) { msg("%%fg=red$You take %u fall damage!%%fg=reset$", fall_dmg); }
+      if (is_player()) {
+        msg("%%fg=red$You take %u fall damage!%%fg=reset$", fall_dmg);
+      }
 
       if (is_monst() || is_player()) {
         bounce(2.0 /* height */, 0.5 /* fade */, 100, 3);
@@ -409,13 +469,19 @@ bool Thing::fall_to_next_level(void)
       //
       if (is_frozen) {
         if (l->is_deep_water(new_pos)) {
-          if (is_player()) { msg("%%fg=lightblue$You plunge into the water and defrost!%%fg=reset$"); }
+          if (is_player()) {
+            msg("%%fg=lightblue$You plunge into the water and defrost!%%fg=reset$");
+          }
           frozen_unset();
         } else if (l->is_lava(new_pos)) {
-          if (is_player()) { msg("%%fg=red$You defrost and then vaporize!%%fg=reset$"); }
+          if (is_player()) {
+            msg("%%fg=red$You defrost and then vaporize!%%fg=reset$");
+          }
           dead("by vaporizing");
         } else {
-          if (is_player()) { msg("%%fg=red$You shatter into tiny frozen pieces!%%fg=reset$"); }
+          if (is_player()) {
+            msg("%%fg=red$You shatter into tiny frozen pieces!%%fg=reset$");
+          }
           dead("by shattering");
         }
       }
@@ -438,7 +504,9 @@ bool Thing::fall_to_next_level(void)
 ts_t Thing::ts_fall_begin(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->ts_fall_begin); }
+  if (maybe_infop()) {
+    return (infop()->ts_fall_begin);
+  }
   return 0;
 }
 
@@ -483,7 +551,9 @@ ts_t Thing::ts_fall_begin_incr(void)
 ts_t Thing::ts_fall_end(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->ts_fall_end); }
+  if (maybe_infop()) {
+    return (infop()->ts_fall_end);
+  }
   return 0;
 }
 
@@ -528,7 +598,9 @@ ts_t Thing::ts_fall_end_incr(void)
 float Thing::fall_height_curr(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->fall_height); }
+  if (maybe_infop()) {
+    return (infop()->fall_height);
+  }
   return 0;
 }
 

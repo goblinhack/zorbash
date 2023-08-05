@@ -19,26 +19,38 @@ Thingp Thing::in_the_way_for_shooting(const point s, const point e, int x, int y
 
   FOR_ALL_COLLISION_THINGS(level, t, x, y)
   {
-    if (t == this) { continue; }
+    if (t == this) {
+      continue;
+    }
 
     //
     // Occasionally allow goblins to fire through comrades
     //
     if (is_friend(t) || same_mob(t)) {
-      if (d1000() > chance_d1000_shooting_avoid_friends()) { return t; }
+      if (d1000() > chance_d1000_shooting_avoid_friends()) {
+        return t;
+      }
       continue;
     }
 
-    if (t->is_flat()) { continue; }
+    if (t->is_flat()) {
+      continue;
+    }
 
     //
     // So missiles do not hit blood or maps
     //
-    if (t->is_dead) { continue; }
+    if (t->is_dead) {
+      continue;
+    }
 
-    if (t->is_open) { continue; }
+    if (t->is_open) {
+      continue;
+    }
 
-    if (t->is_ethereal()) { continue; }
+    if (t->is_ethereal()) {
+      continue;
+    }
 
     //
     // Webballs do not hit spiders or other webs. We assume the spider is good at avoiding them.
@@ -99,13 +111,17 @@ std::vector< Thingp > Thing::in_the_way_for_shooting(const point s, const point 
   int err = dx + dy, e2; /* error value e_xy */
 
   for (;;) { /* loop */
-    if (x0 == x1 && y0 == y1) { break; }
+    if (x0 == x1 && y0 == y1) {
+      break;
+    }
 
     auto it = in_the_way_for_shooting(s, e, x0, y0);
     if (it) {
       out.push_back(it);
       if (max_elems) {
-        if (out.size() >= max_elems) { return out; }
+        if (out.size() >= max_elems) {
+          return out;
+        }
       }
     }
 

@@ -19,7 +19,9 @@ const std::string Thing::dmg_negation_dice_str(void)
 {
   TRACE_NO_INDENT();
 
-  if (enchant_count_get()) { return tp()->dmg_negation_dice_str() + bonus_to_string(enchant_count_get()); }
+  if (enchant_count_get()) {
+    return tp()->dmg_negation_dice_str() + bonus_to_string(enchant_count_get());
+  }
 
   return (tp()->dmg_negation_dice_str());
 }
@@ -50,16 +52,22 @@ int Thing::on_owner_receive_dmg_negation(Thingp owner, Thingp hitter, Thingp rea
   }
 
   auto on_owner_receive_dmg_negation = on_owner_receive_dmg_negation_do();
-  if (std::empty(on_owner_receive_dmg_negation)) { return damage; }
+  if (std::empty(on_owner_receive_dmg_negation)) {
+    return damage;
+  }
 
   auto t = split_tokens(on_owner_receive_dmg_negation, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = name(); }
+    if (mod == "me") {
+      mod = name();
+    }
 
     dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
         owner->to_short_string().c_str(), hitter->to_short_string().c_str(), damage);
@@ -84,16 +92,22 @@ int Thing::on_receiving_dmg_negation(Thingp hitter, Thingp real_hitter, int dama
   }
 
   auto on_receiving_dmg_negation = on_receiving_dmg_negation_do();
-  if (std::empty(on_receiving_dmg_negation)) { return damage; }
+  if (std::empty(on_receiving_dmg_negation)) {
+    return damage;
+  }
 
   auto t = split_tokens(on_receiving_dmg_negation, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = name(); }
+    if (mod == "me") {
+      mod = name();
+    }
 
     dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
         hitter->to_short_string().c_str(), real_hitter->to_short_string().c_str(), damage);
@@ -111,24 +125,32 @@ int Thing::on_receiving_dmg_negation(Thingp hitter, Thingp real_hitter, int dama
 int Thing::total_dmg_for_on_receiving_dmg_negation(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  if (! maybe_itemsp()) { return damage; }
+  if (! maybe_itemsp()) {
+    return damage;
+  }
 
   FOR_ALL_BUFFS(item)
   {
     auto iter = level->thing_find(item.id);
-    if (iter) { damage = iter->on_owner_receive_dmg_negation(this, hitter, real_hitter, damage); }
+    if (iter) {
+      damage = iter->on_owner_receive_dmg_negation(this, hitter, real_hitter, damage);
+    }
   }
 
   FOR_ALL_DEBUFFS(item)
   {
     auto iter = level->thing_find(item.id);
-    if (iter) { damage = iter->on_owner_receive_dmg_negation(this, hitter, real_hitter, damage); }
+    if (iter) {
+      damage = iter->on_owner_receive_dmg_negation(this, hitter, real_hitter, damage);
+    }
   }
 
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
-    if (iter) { damage = iter->on_owner_receive_dmg_negation(this, hitter, real_hitter, damage); }
+    if (iter) {
+      damage = iter->on_owner_receive_dmg_negation(this, hitter, real_hitter, damage);
+    }
   }
 
   damage = on_receiving_dmg_negation(hitter, real_hitter, damage);
@@ -146,16 +168,22 @@ int Thing::on_attacking_dmg_negation(Thingp victim, int damage)
   }
 
   auto on_attacking_dmg_negation = on_attacking_dmg_negation_do();
-  if (std::empty(on_attacking_dmg_negation)) { return damage; }
+  if (std::empty(on_attacking_dmg_negation)) {
+    return damage;
+  }
 
   auto t = split_tokens(on_attacking_dmg_negation, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = name(); }
+    if (mod == "me") {
+      mod = name();
+    }
 
     dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
         victim->to_short_string().c_str(), damage);
@@ -186,16 +214,22 @@ int Thing::on_owner_attack_dmg_negation(Thingp owner, Thingp victim, int damage)
   }
 
   auto on_owner_attack_dmg_negation = on_owner_attack_dmg_negation_do();
-  if (std::empty(on_owner_attack_dmg_negation)) { return damage; }
+  if (std::empty(on_owner_attack_dmg_negation)) {
+    return damage;
+  }
 
   auto t = split_tokens(on_owner_attack_dmg_negation, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = name(); }
+    if (mod == "me") {
+      mod = name();
+    }
 
     dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
         owner->to_short_string().c_str(), victim->to_short_string().c_str(), damage);
@@ -213,36 +247,48 @@ int Thing::on_owner_attack_dmg_negation(Thingp owner, Thingp victim, int damage)
 int Thing::total_dmg_for_on_attacking_dmg_negation(Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
-  if (! maybe_itemsp()) { return damage; }
+  if (! maybe_itemsp()) {
+    return damage;
+  }
 
   FOR_ALL_BUFFS(item)
   {
     auto iter = level->thing_find(item.id);
-    if (iter) { damage = iter->on_owner_attack_dmg_negation(this, victim, damage); }
+    if (iter) {
+      damage = iter->on_owner_attack_dmg_negation(this, victim, damage);
+    }
   }
 
   FOR_ALL_DEBUFFS(item)
   {
     auto iter = level->thing_find(item.id);
-    if (iter) { damage = iter->on_owner_attack_dmg_negation(this, victim, damage); }
+    if (iter) {
+      damage = iter->on_owner_attack_dmg_negation(this, victim, damage);
+    }
   }
 
   FOR_ALL_SKILLS(item)
   {
     auto iter = level->thing_find(item.id);
-    if (iter) { damage = iter->on_owner_attack_dmg_negation(this, victim, damage); }
+    if (iter) {
+      damage = iter->on_owner_attack_dmg_negation(this, victim, damage);
+    }
   }
 
   FOR_ALL_SPELLS(item)
   {
     auto iter = level->thing_find(item.id);
-    if (iter) { damage = iter->on_owner_attack_dmg_negation(this, victim, damage); }
+    if (iter) {
+      damage = iter->on_owner_attack_dmg_negation(this, victim, damage);
+    }
   }
 
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
-    if (iter) { damage = iter->on_owner_attack_dmg_negation(this, victim, damage); }
+    if (iter) {
+      damage = iter->on_owner_attack_dmg_negation(this, victim, damage);
+    }
   }
 
   damage = on_attacking_dmg_negation(victim, damage);
@@ -282,7 +328,9 @@ const std::string &Thing::on_owner_receive_dmg_negation_do(void)
 
 int Tp::dmg_chance_d1000_negation(int index) const
 {
-  if (index >= (int) _dmg_chance_d1000_negation.size()) { return 0; }
+  if (index >= (int) _dmg_chance_d1000_negation.size()) {
+    return 0;
+  }
   return _dmg_chance_d1000_negation[ index ];
 }
 

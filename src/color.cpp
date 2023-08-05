@@ -26,7 +26,9 @@ void color_set(std::string name, color *c, uint8_t r, uint8_t g, uint8_t b, uint
   c->a = a;
 
   auto result = color_map.insert(std::make_pair(name, *c));
-  if (! result.second) { ERR("Color insert name [%s] failed", name.c_str()); }
+  if (! result.second) {
+    ERR("Color insert name [%s] failed", name.c_str());
+  }
 }
 
 void color_init(void)
@@ -73,17 +75,23 @@ color string2color(const char **s)
   char              *t      = tmp;
 
   while (t < eo_tmp) {
-    if ((*c == '\0') || (*c == '$')) { break; }
+    if ((*c == '\0') || (*c == '$')) {
+      break;
+    }
 
     *t++ = *c++;
   }
 
-  if (c == eo_tmp) { return WHITE; }
+  if (c == eo_tmp) {
+    return WHITE;
+  }
 
   *t++ = '\0';
   *s += (t - tmp);
 
-  if (! strcasecmp(tmp, "reset")) { return (UI_TEXT_COLOR); }
+  if (! strcasecmp(tmp, "reset")) {
+    return (UI_TEXT_COLOR);
+  }
 
   auto result = color_map.find(std::string(tmp));
 
@@ -106,17 +114,23 @@ color string2color(const wchar_t **s)
   wchar_t              *t      = tmp;
 
   while (t < eo_tmp) {
-    if ((*c == '\0') || (*c == '$')) { break; }
+    if ((*c == '\0') || (*c == '$')) {
+      break;
+    }
 
     *t++ = *c++;
   }
 
-  if (c == eo_tmp) { return WHITE; }
+  if (c == eo_tmp) {
+    return WHITE;
+  }
 
   *t++ = '\0';
   *s += (t - tmp);
 
-  if (! wcscmp(tmp, L"reset")) { return (UI_TEXT_COLOR); }
+  if (! wcscmp(tmp, L"reset")) {
+    return (UI_TEXT_COLOR);
+  }
 
   std::string f      = wstring_to_string(std::wstring(tmp));
   auto        result = color_map.find(f);
@@ -140,15 +154,21 @@ color string2color(std::string &s, int *len)
   while (iter != s.end()) {
     auto c = *iter;
 
-    if ((c == '\0') || (c == '$')) { break; }
+    if ((c == '\0') || (c == '$')) {
+      break;
+    }
 
     out += c;
     iter++;
   }
 
-  if (len) { *len = iter - s.begin(); }
+  if (len) {
+    *len = iter - s.begin();
+  }
 
-  if (out == "reset") { return (UI_TEXT_COLOR); }
+  if (out == "reset") {
+    return (UI_TEXT_COLOR);
+  }
 
   auto result = color_map.find(out);
 
@@ -170,13 +190,17 @@ color string2color(std::string &s)
   while (iter != s.end()) {
     auto c = *iter;
 
-    if ((c == '\0') || (c == '$')) { break; }
+    if ((c == '\0') || (c == '$')) {
+      break;
+    }
 
     out += c;
     iter++;
   }
 
-  if (out == "reset") { return (UI_TEXT_COLOR); }
+  if (out == "reset") {
+    return (UI_TEXT_COLOR);
+  }
 
   auto result = color_map.find(out);
 
@@ -206,17 +230,23 @@ const char *string2colorname(const char **s)
   char              *t      = tmp;
 
   while (t < eo_tmp) {
-    if ((*c == '\0') || (*c == '$')) { break; }
+    if ((*c == '\0') || (*c == '$')) {
+      break;
+    }
 
     *t++ = *c++;
   }
 
-  if (c == eo_tmp) { return nullptr; }
+  if (c == eo_tmp) {
+    return nullptr;
+  }
 
   *t++ = '\0';
   *s += (t - tmp);
 
-  if (! strcasecmp(tmp, "reset")) { return (UI_TEXT_COLOR_STR); }
+  if (! strcasecmp(tmp, "reset")) {
+    return (UI_TEXT_COLOR_STR);
+  }
 
   auto result = color_map.find(std::string(tmp));
 
@@ -236,18 +266,24 @@ std::string string2colorname(std::string &s)
   auto        iter = s.begin();
   std::string out;
 
-  if (s == "") { return ("white"); }
+  if (s == "") {
+    return ("white");
+  }
 
   while (iter != s.end()) {
     auto c = *iter;
 
-    if ((c == '\0') || (c == '$')) { break; }
+    if ((c == '\0') || (c == '$')) {
+      break;
+    }
 
     out += c;
     iter++;
   }
 
-  if (out == "reset") { return (UI_TEXT_COLOR_STR); }
+  if (out == "reset") {
+    return (UI_TEXT_COLOR_STR);
+  }
 
   auto result = color_map.find(out);
 
@@ -264,9 +300,13 @@ std::string string2colorname(std::string &s)
 color color_find(const char *s)
 {
   TRACE_AND_INDENT();
-  if (! s) { return WHITE; }
+  if (! s) {
+    return WHITE;
+  }
 
-  if (! strcmp(s, "")) { return WHITE; }
+  if (! strcmp(s, "")) {
+    return WHITE;
+  }
 
   auto result = color_map.find(std::string(s));
 

@@ -13,7 +13,9 @@ std::vector< std::string > py_call_std_vector_string_fn(const char *module, cons
 
   TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (! pmod) { return out; }
+  if (! pmod) {
+    return out;
+  }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
@@ -46,7 +48,9 @@ std::list< std::string > py_call_std_list_string_fn(const char *module, const ch
 
   TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (! pmod) { return out; }
+  if (! pmod) {
+    return out;
+  }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {

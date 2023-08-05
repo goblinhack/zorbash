@@ -14,11 +14,15 @@ void Level::update_new_level(void)
   is_map_mini_valid = false;
   is_heatmap_valid  = false;
 
-  if (game->level == this) { log("Updating current level"); }
+  if (game->level == this) {
+    log("Updating current level");
+  }
 
   if (player) {
     dbg("Update new level with player present");
-    if (game->level != this) { dbg("Game level is not set yet."); }
+    if (game->level != this) {
+      dbg("Game level is not set yet.");
+    }
   } else {
     dbg("Update new level with no player present");
   }

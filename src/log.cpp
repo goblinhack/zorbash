@@ -347,7 +347,9 @@ static void dying_(const char *fmt, va_list args)
 static void err_(const char *fmt, va_list args)
 {
   static bool nested_error;
-  if (nested_error) { return; }
+  if (nested_error) {
+    return;
+  }
   nested_error = true;
 
   callstack_dump();
@@ -461,7 +463,9 @@ void DYING(const char *fmt, ...)
 void myerr(const char *fmt, ...)
 {
   static bool nested_error;
-  if (nested_error) { return; }
+  if (nested_error) {
+    return;
+  }
   bool old_nested_error = nested_error;
   nested_error          = true;
 
@@ -487,7 +491,9 @@ void myerr(const char *fmt, ...)
   wid_hide(wid_topcon_window);
   nested_error = false;
 
-  if (g_quitting) { DIE("Error while quitting"); }
+  if (g_quitting) {
+    DIE("Error while quitting");
+  }
 }
 
 static void msgerr_(const char *fmt, va_list args)

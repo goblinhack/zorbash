@@ -14,7 +14,8 @@ PyObject *my_mod;
 static std::string get_env(const char *env)
 {
   auto t = std::getenv(env);
-  if (t) return t;
+  if (t)
+    return t;
   return "";
 }
 
@@ -32,7 +33,9 @@ void py_init(char *argv[])
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   auto newpath = pythonpath;
-  if (pythonpath.size()) { newpath += PATHSEP; }
+  if (pythonpath.size()) {
+    newpath += PATHSEP;
+  }
   newpath += EXEC_PYTHONPATH;
   newpath += PATHSEP;
   newpath += EXEC_DIR;
@@ -65,7 +68,9 @@ void py_init(char *argv[])
 
   LOG("INI: Calling Py_Initialize");
   Py_Initialize();
-  if (g_errored) { return; }
+  if (g_errored) {
+    return;
+  }
 
   sdl_flush_display();
   ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -109,7 +114,9 @@ PyObject *py_add_module(const char *mod)
   auto name = std::string(mod);
   auto pmod = py_mods[ name ];
 
-  if (pmod != nullptr) { return pmod; }
+  if (pmod != nullptr) {
+    return pmod;
+  }
 
   pmod = PyImport_ImportModule(mod);
   if (pmod == nullptr) {
@@ -125,5 +132,7 @@ PyObject *py_add_module(const char *mod)
 void py_fini(void)
 {
   TRACE_AND_INDENT();
-  if (my_mod) { Py_Finalize(); }
+  if (my_mod) {
+    Py_Finalize();
+  }
 }

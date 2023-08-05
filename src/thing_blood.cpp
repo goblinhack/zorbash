@@ -10,15 +10,21 @@
 //
 void Thing::place_blood(bool force)
 {
-  if (! is_bleeder()) { return; }
+  if (! is_bleeder()) {
+    return;
+  }
 
   if (! force) {
-    if (! is_bloodied()) { return; }
+    if (! is_bloodied()) {
+      return;
+    }
 
     //
     // Not too much blood
     //
-    if (pcg_random_range(1, 100) <= 80) { return; }
+    if (pcg_random_range(1, 100) <= 80) {
+      return;
+    }
   }
 
   auto placed_blood = false;
@@ -53,7 +59,9 @@ void Thing::place_blood(bool force)
       }
     } else {
       h = health_decr();
-      if (h <= 0) { health_set(0); }
+      if (h <= 0) {
+        health_set(0);
+      }
     }
   }
 }

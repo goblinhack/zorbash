@@ -89,7 +89,9 @@ static uint8_t wid_config_gfx_fullscreen_toggle(Widp w, int x, int y, uint32_t b
   config_changed = true;
   CON("INF: Toggle gfx fullscreen");
   game->config.gfx_fullscreen = ! game->config.gfx_fullscreen;
-  if (game->config.gfx_fullscreen) { game->config.gfx_fullscreen_desktop = false; }
+  if (game->config.gfx_fullscreen) {
+    game->config.gfx_fullscreen_desktop = false;
+  }
   game->wid_config_gfx_select();
   local_g_need_restart = true;
   return true;
@@ -101,7 +103,9 @@ static uint8_t wid_config_gfx_fullscreen_desktop_toggle(Widp w, int x, int y, ui
   config_changed = true;
   CON("INF: Toggle gfx fullscreen desktop");
   game->config.gfx_fullscreen_desktop = ! game->config.gfx_fullscreen_desktop;
-  if (game->config.gfx_fullscreen_desktop) { game->config.gfx_fullscreen = false; }
+  if (game->config.gfx_fullscreen_desktop) {
+    game->config.gfx_fullscreen = false;
+  }
   game->wid_config_gfx_select();
   local_g_need_restart = true;
   return true;
@@ -174,7 +178,9 @@ static uint8_t wid_config_gfx_resolution_incr(Widp w, int x, int y, uint32_t but
     SDL_GetDisplayMode(0, i, &mode);
     auto cand = std::to_string(mode.w) + "x" + std::to_string(mode.h);
     CON(" - candidate: %s", cand.c_str());
-    if (res == cand) { chosen = i - 1; }
+    if (res == cand) {
+      chosen = i - 1;
+    }
   }
   for (int i = 0; i < n; ++i) {
     SDL_DisplayMode mode;
@@ -206,7 +212,9 @@ static uint8_t wid_config_gfx_resolution_decr(Widp w, int x, int y, uint32_t but
     SDL_GetDisplayMode(0, i, &mode);
     auto cand = std::to_string(mode.w) + "x" + std::to_string(mode.h);
     CON(" - candidate: %s", cand.c_str());
-    if (res == cand) { chosen = i + 1; }
+    if (res == cand) {
+      chosen = i + 1;
+    }
   }
   for (int i = 0; i < n; ++i) {
     SDL_DisplayMode mode;
@@ -329,7 +337,9 @@ static uint8_t wid_config_gfx_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   switch (key->mod) {
     case KMOD_LCTRL :
@@ -357,7 +367,9 @@ static uint8_t wid_config_gfx_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   return true;
 }
@@ -365,7 +377,9 @@ static uint8_t wid_config_gfx_key_down(Widp w, const struct SDL_Keysym *key)
 void Game::wid_config_gfx_select(void)
 {
   TRACE_AND_INDENT();
-  if (wid_config_gfx_window) { wid_config_gfx_destroy(); }
+  if (wid_config_gfx_window) {
+    wid_config_gfx_destroy();
+  }
 
   auto box_style           = UI_WID_STYLE_HORIZ_DARK;
   auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;

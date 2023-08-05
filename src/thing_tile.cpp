@@ -13,7 +13,9 @@ void Thing::tiles_get()
   auto tpp = tp();
   auto out = &tiles;
 
-  if (inited_tiles) { return; }
+  if (inited_tiles) {
+    return;
+  }
   inited_tiles = true;
 
   auto tiles = &tpp->left1_tiles;

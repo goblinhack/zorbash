@@ -37,7 +37,9 @@ void Game::change_state(int new_state, const std::string &why)
 {
   TRACE_NO_INDENT();
 
-  if (game->state == new_state) { return; }
+  if (game->state == new_state) {
+    return;
+  }
 
   //
   // Check we are in the game loop. If not, do the reset later.
@@ -54,7 +56,9 @@ void Game::change_state(int new_state, const std::string &why)
   // Hide the cursor path if over a popup
   //
   if (wid_over) {
-    if (game->level) { game->level->cursor_path_clear(); }
+    if (game->level) {
+      game->level->cursor_path_clear();
+    }
   }
 
   auto old_state = state;
@@ -157,7 +161,9 @@ void Game::change_state(int new_state, const std::string &why)
   request_to_throw_item  = nullptr;
   if (request_to_use_item) {
     if (request_to_use_item->is_spell()) {
-      if (level->player) { level->player->spell_deactivate(request_to_use_item); }
+      if (level->player) {
+        level->player->spell_deactivate(request_to_use_item);
+      }
     }
   }
   request_to_use_item = nullptr;
@@ -171,7 +177,9 @@ void Game::change_state(int new_state, const std::string &why)
     case STATE_CHOOSING_SPELLS :
       if (level) {
         level->cursor_recreate();
-        if (level->cursor) { level->cursor->clear_move_path("Game state change"); }
+        if (level->cursor) {
+          level->cursor->clear_move_path("Game state change");
+        }
       }
       break;
     case STATE_CHOOSING_LEVEL :

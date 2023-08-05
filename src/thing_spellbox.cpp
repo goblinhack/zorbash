@@ -19,25 +19,37 @@ bool Thing::spellbox_id_insert(Thingp what)
   TRACE_AND_INDENT();
 
   auto player = level->player;
-  if (! player) { return false; }
+  if (! player) {
+    return false;
+  }
 
-  if (! is_player()) { return false; }
+  if (! is_player()) {
+    return false;
+  }
 
-  if (! maybe_itemsp()) { return false; }
+  if (! maybe_itemsp()) {
+    return false;
+  }
 
   int  free_slot      = -1;
   auto spellbox_items = player->itemsp()->spellbox_id.size();
   for (auto i = 0U; i < spellbox_items; i++) {
     auto thing_id = itemsp()->spellbox_id[ i ];
     if (! thing_id) {
-      if (free_slot == -1) { free_slot = i; }
+      if (free_slot == -1) {
+        free_slot = i;
+      }
       continue;
     }
 
     auto t = level->thing_find(thing_id);
-    if (unlikely(! t)) { continue; }
+    if (unlikely(! t)) {
+      continue;
+    }
 
-    if (what == t) { return true; }
+    if (what == t) {
+      return true;
+    }
   }
 
   int item_slot = -1;
@@ -73,21 +85,33 @@ bool Thing::spellbox_id_remove(Thingp what)
   TRACE_AND_INDENT();
 
   auto player = level->player;
-  if (! player) { return false; }
+  if (! player) {
+    return false;
+  }
 
-  if (! is_player()) { return false; }
+  if (! is_player()) {
+    return false;
+  }
 
-  if (! maybe_itemsp()) { return false; }
+  if (! maybe_itemsp()) {
+    return false;
+  }
 
   auto immediate_owner = what->immediate_owner();
-  if (immediate_owner) { immediate_owner->bag_remove(what); }
+  if (immediate_owner) {
+    immediate_owner->bag_remove(what);
+  }
 
   auto spellbox_items = player->itemsp()->spellbox_id.size();
   for (auto i = 0U; i < spellbox_items; i++) {
     auto thing_id = itemsp()->spellbox_id[ i ];
-    if (! thing_id) { continue; }
+    if (! thing_id) {
+      continue;
+    }
     auto t = level->thing_find(thing_id);
-    if (unlikely(! t)) { continue; }
+    if (unlikely(! t)) {
+      continue;
+    }
 
     if (what == t) {
       game->set_request_to_remake_spellbox();
@@ -224,7 +248,9 @@ bool Level::spellbox_chosen(const int slot)
   DBG2("Spellbox: Chosen spellbox slot %d", slot);
   TRACE_AND_INDENT();
 
-  if (! player) { return false; }
+  if (! player) {
+    return false;
+  }
 
   auto itemsp = player->maybe_itemsp();
   if (! itemsp) {
@@ -268,7 +294,9 @@ bool Level::spell_chosen(Thingp what)
 {
   TRACE_NO_INDENT();
 
-  if (! player) { return false; }
+  if (! player) {
+    return false;
+  }
 
   if (! what) {
     TOPCON("No spell there.");

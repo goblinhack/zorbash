@@ -58,7 +58,9 @@ static uint8_t wid_config_sound_effects_volume_incr(Widp w, int x, int y, uint32
   config_changed = true;
   CON("INF: Increment sound volume");
   game->config.sound_volume++;
-  if (game->config.sound_volume > MIX_MAX_VOLUME) { game->config.sound_volume = MIX_MAX_VOLUME; }
+  if (game->config.sound_volume > MIX_MAX_VOLUME) {
+    game->config.sound_volume = MIX_MAX_VOLUME;
+  }
   game->wid_config_sound_select();
   return true;
 }
@@ -83,7 +85,9 @@ static uint8_t wid_config_sound_music_volume_incr(Widp w, int x, int y, uint32_t
   config_changed = true;
   CON("INF: Increment music volume");
   game->config.music_volume++;
-  if (game->config.music_volume > MIX_MAX_VOLUME) { game->config.music_volume = MIX_MAX_VOLUME; }
+  if (game->config.music_volume > MIX_MAX_VOLUME) {
+    game->config.music_volume = MIX_MAX_VOLUME;
+  }
   game->wid_config_sound_select();
   music_update_volume();
   return true;
@@ -108,7 +112,9 @@ static uint8_t wid_config_sound_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   switch (key->mod) {
     case KMOD_LCTRL :
@@ -136,7 +142,9 @@ static uint8_t wid_config_sound_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   return true;
 }
@@ -144,7 +152,9 @@ static uint8_t wid_config_sound_key_down(Widp w, const struct SDL_Keysym *key)
 void Game::wid_config_sound_select(void)
 {
   TRACE_AND_INDENT();
-  if (wid_config_sound_window) { wid_config_sound_destroy(); }
+  if (wid_config_sound_window) {
+    wid_config_sound_destroy();
+  }
 
   auto box_style           = UI_WID_STYLE_HORIZ_DARK;
   auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;

@@ -19,10 +19,14 @@ static void wid_leftbar_display(Widp w, point tl, point br)
   TRACE_NO_INDENT();
 
   auto level = game->get_current_level();
-  if (! level) { return; }
+  if (! level) {
+    return;
+  }
 
   auto player = level->player;
-  if (! player) { return; }
+  if (! player) {
+    return;
+  }
 
   auto id = wid_get_thing_id_context(w, 0);
 
@@ -36,18 +40,24 @@ static void wid_leftbar_display(Widp w, point tl, point br)
   }
 
   auto t = level->thing_find(id);
-  if (t) { t->blit_tile_at(tl, true /* lit */, true /* leftbar */); }
+  if (t) {
+    t->blit_tile_at(tl, true /* lit */, true /* leftbar */);
+  }
 }
 
 static void wid_leftbar_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
-  if (game->state != Game::STATE_NORMAL) { return; }
+  if (game->state != Game::STATE_NORMAL) {
+    return;
+  }
 
   auto id = wid_get_thing_id_context(w, 0);
   auto t  = game->level->thing_find_optional(id);
-  if (unlikely(! t)) { return; }
+  if (unlikely(! t)) {
+    return;
+  }
 
   game->wid_thing_info_create(t);
 }
@@ -60,13 +70,17 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
   TRACE_NO_INDENT();
 
   auto player = level->player;
-  if (! player) { return; }
+  if (! player) {
+    return;
+  }
 
   //
   // Covers carried or equipped items
   //
   if (! allow_carried) {
-    if (t->immediate_owner()) { return; }
+    if (t->immediate_owner()) {
+      return;
+    }
   }
 
   if (t->immediate_owner()) {
@@ -113,7 +127,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
         wid_set_tilename(TILE_LAYER_BG_0, w, "status_bar_pixelart_normal");
       }
     }
-    if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+    if (g_opt_test_dungeon_gen) {
+      wid_set_shape_none(w);
+    }
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
     wid_set_thing_context(w, t, 0);
@@ -128,7 +144,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     wid_set_pos(w, tl, br);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_on_display(w, wid_leftbar_display);
-    if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+    if (g_opt_test_dungeon_gen) {
+      wid_set_shape_none(w);
+    }
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
     wid_set_thing_context(w, t, 0);
@@ -147,7 +165,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     } else {
       wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_red");
     }
-    if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+    if (g_opt_test_dungeon_gen) {
+      wid_set_shape_none(w);
+    }
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
     wid_set_thing_context(w, t, 0);
@@ -166,7 +186,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     } else {
       wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_blue");
     }
-    if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+    if (g_opt_test_dungeon_gen) {
+      wid_set_shape_none(w);
+    }
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
     wid_set_thing_context(w, t, 0);
@@ -185,7 +207,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     } else {
       wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_brown");
     }
-    if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+    if (g_opt_test_dungeon_gen) {
+      wid_set_shape_none(w);
+    }
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
     wid_set_thing_context(w, t, 0);
@@ -204,7 +228,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     } else {
       wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_red");
     }
-    if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+    if (g_opt_test_dungeon_gen) {
+      wid_set_shape_none(w);
+    }
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
     wid_set_thing_context(w, t, 0);
@@ -235,7 +261,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     } else {
       wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_dark");
     }
-    if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+    if (g_opt_test_dungeon_gen) {
+      wid_set_shape_none(w);
+    }
     wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
     wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
     wid_set_thing_context(w, t, 0);
@@ -253,7 +281,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       } else {
         wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_red");
       }
-      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+      if (g_opt_test_dungeon_gen) {
+        wid_set_shape_none(w);
+      }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_context(w, t, 0);
@@ -270,7 +300,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       } else {
         wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_orange");
       }
-      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+      if (g_opt_test_dungeon_gen) {
+        wid_set_shape_none(w);
+      }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_context(w, t, 0);
@@ -287,7 +319,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       } else {
         wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_red");
       }
-      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+      if (g_opt_test_dungeon_gen) {
+        wid_set_shape_none(w);
+      }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_context(w, t, 0);
@@ -304,7 +338,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       } else {
         wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_orange");
       }
-      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+      if (g_opt_test_dungeon_gen) {
+        wid_set_shape_none(w);
+      }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_context(w, t, 0);
@@ -321,7 +357,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       } else {
         wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_dark");
       }
-      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+      if (g_opt_test_dungeon_gen) {
+        wid_set_shape_none(w);
+      }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_context(w, t, 0);
@@ -338,7 +376,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       } else {
         wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_dark");
       }
-      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+      if (g_opt_test_dungeon_gen) {
+        wid_set_shape_none(w);
+      }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_context(w, t, 0);
@@ -357,7 +397,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       } else {
         wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_red");
       }
-      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+      if (g_opt_test_dungeon_gen) {
+        wid_set_shape_none(w);
+      }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_context(w, t, 0);
@@ -378,7 +420,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
           } else {
             wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_dark");
           }
-          if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+          if (g_opt_test_dungeon_gen) {
+            wid_set_shape_none(w);
+          }
           wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
           wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
           wid_set_thing_context(w, t, 0);
@@ -404,7 +448,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
         } else {
           wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_green");
         }
-        if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+        if (g_opt_test_dungeon_gen) {
+          wid_set_shape_none(w);
+        }
         wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
         wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
         wid_set_thing_context(w, t, 0);
@@ -426,7 +472,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       } else {
         wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_green");
       }
-      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+      if (g_opt_test_dungeon_gen) {
+        wid_set_shape_none(w);
+      }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_context(w, t, 0);
@@ -451,7 +499,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       } else {
         wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_dark");
       }
-      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+      if (g_opt_test_dungeon_gen) {
+        wid_set_shape_none(w);
+      }
       wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
       wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
       wid_set_thing_context(w, t, 0);
@@ -473,7 +523,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
         i         = std::max(i, 0);
         auto icon = "health_bar_ascii_" + std::to_string(i);
         wid_set_tilename(TILE_LAYER_FG_0, w, icon);
-        if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+        if (g_opt_test_dungeon_gen) {
+          wid_set_shape_none(w);
+        }
         wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
         wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
         wid_set_thing_context(w, t, 0);
@@ -487,7 +539,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
         wid_set_text(w, "Health");
         wid_set_shape_none(w);
         wid_set_text_lhs(w, true);
-        if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+        if (g_opt_test_dungeon_gen) {
+          wid_set_shape_none(w);
+        }
         wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
         wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
         wid_set_thing_context(w, t, 0);
@@ -502,7 +556,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
         std::string s = std::to_string(t->health()) + "/" + std::to_string(t->health_max());
         wid_set_text(w, s);
         wid_set_text_rhs(w, true);
-        if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+        if (g_opt_test_dungeon_gen) {
+          wid_set_shape_none(w);
+        }
         wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
         wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
         wid_set_thing_context(w, t, 0);
@@ -518,7 +574,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     FOR_ALL_EQUIP(e)
     {
       auto iter = t->equip_get(e);
-      if (iter) { wid_leftbar_display_describe(level, iter, y_at, width, "+ "); }
+      if (iter) {
+        wid_leftbar_display_describe(level, iter, y_at, width, "+ ");
+      }
     }
   }
 }
@@ -529,15 +587,21 @@ bool wid_leftbar_display_create(void)
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
-  if (! level) { return false; }
+  if (! level) {
+    return false;
+  }
 
   auto player = level->player;
-  if (! player) { return false; }
+  if (! player) {
+    return false;
+  }
 
   //
   // When dead, don't update as this will show all the player items
   //
-  if (player->is_dead_or_dying()) { return false; }
+  if (player->is_dead_or_dying()) {
+    return false;
+  }
 
   int width = UI_LEFTBAR_WIDTH;
   int y_at  = 0;
@@ -563,15 +627,23 @@ bool wid_leftbar_display_create(void)
     std::vector< Thingp > m;
     FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
     {
-      if (! t->is_alive_monst()) { continue; }
+      if (! t->is_alive_monst()) {
+        continue;
+      }
 
-      if (! t->is_described_in_leftbar()) { continue; }
+      if (! t->is_described_in_leftbar()) {
+        continue;
+      }
 
       auto player = level->player;
 
-      if (! get(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) { continue; }
+      if (! get(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) {
+        continue;
+      }
 
-      if (! level->can_see_unimpeded(player->curr_at, t->curr_at)) { continue; }
+      if (! level->can_see_unimpeded(player->curr_at, t->curr_at)) {
+        continue;
+      }
 
       m.push_back(t);
     }
@@ -592,16 +664,26 @@ bool wid_leftbar_display_create(void)
     std::vector< Thingp > m;
     FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
     {
-      if (! t->is_dead && ! t->is_item()) { continue; }
+      if (! t->is_dead && ! t->is_item()) {
+        continue;
+      }
 
-      if (! t->is_described_in_leftbar()) { continue; }
+      if (! t->is_described_in_leftbar()) {
+        continue;
+      }
 
       auto player = level->player;
-      if (t->is_player()) { continue; }
+      if (t->is_player()) {
+        continue;
+      }
 
-      if (! get(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) { continue; }
+      if (! get(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) {
+        continue;
+      }
 
-      if (! level->can_see_unimpeded(player->curr_at, t->curr_at)) { continue; }
+      if (! level->can_see_unimpeded(player->curr_at, t->curr_at)) {
+        continue;
+      }
 
       m.push_back(t);
     }
@@ -628,14 +710,22 @@ bool wid_leftbar_display_create(void)
         continue;
       }
 
-      if (! t->is_described_in_leftbar()) { continue; }
+      if (! t->is_described_in_leftbar()) {
+        continue;
+      }
 
       auto player = level->player;
-      if (t->is_player()) { continue; }
+      if (t->is_player()) {
+        continue;
+      }
 
-      if (! get(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) { continue; }
+      if (! get(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) {
+        continue;
+      }
 
-      if (! level->can_see_unimpeded(player->curr_at, t->curr_at)) { continue; }
+      if (! level->can_see_unimpeded(player->curr_at, t->curr_at)) {
+        continue;
+      }
 
       m.push_back(t);
     }

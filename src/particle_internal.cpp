@@ -19,14 +19,18 @@ void Level::new_internal_particle(ThingId id, point start, point stop, isize sz,
   if (id.ok()) {
     auto t = thing_find(id);
     if (t) {
-      if (t->is_being_destroyed) { return; }
+      if (t->is_being_destroyed) {
+        return;
+      }
 
       if (g_opt_ascii) {
         callback();
         return;
       }
 
-      if (t->has_internal_particle) { return; }
+      if (t->has_internal_particle) {
+        return;
+      }
 
       t->has_internal_particle = true;
     }
@@ -46,7 +50,9 @@ void Level::handle_internal_particles(void)
 {
   TRACE_NO_INDENT();
 
-  if (all_internal_particles.empty()) { return; }
+  if (all_internal_particles.empty()) {
+    return;
+  }
 
   //
   // std::remove_if iterates over the whole vector and moves all "selected"
@@ -60,7 +66,9 @@ void Level::handle_internal_particles(void)
   blit_init();
   auto now = time_game_ms();
   auto e   = std::remove_if(all_internal_particles.begin(), all_internal_particles.end(), [ =, this ](Particle &p) {
-    if (p.removed) { return true; }
+    if (p.removed) {
+      return true;
+    }
 
     float t  = p.ts_stop - p.ts_start;
     float dt = (((float) (now) -p.ts_start)) / t;

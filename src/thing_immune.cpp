@@ -8,63 +8,81 @@
 int Thing::is_immune_to_cold(void)
 {
   TRACE_NO_INDENT();
-  if (buff_is_immune_to_cold()) { return true; }
+  if (buff_is_immune_to_cold()) {
+    return true;
+  }
   return (tp()->is_immune_to_cold());
 }
 
 int Thing::is_immune_to_negation(void)
 {
   TRACE_NO_INDENT();
-  if (buff_is_immune_to_negation()) { return true; }
+  if (buff_is_immune_to_negation()) {
+    return true;
+  }
   return (tp()->is_immune_to_negation());
 }
 
 int Thing::is_immune_to_teleport_attack(void)
 {
   TRACE_NO_INDENT();
-  if (buff_is_immune_to_teleport_attack()) { return true; }
+  if (buff_is_immune_to_teleport_attack()) {
+    return true;
+  }
   return (tp()->is_immune_to_teleport_attack());
 }
 
 int Thing::is_immune_to_fire(void)
 {
   TRACE_NO_INDENT();
-  if (buff_is_immune_to_fire()) { return true; }
+  if (buff_is_immune_to_fire()) {
+    return true;
+  }
   return (tp()->is_immune_to_fire());
 }
 
 int Thing::is_immune_to_poison(void)
 {
   TRACE_NO_INDENT();
-  if (buff_is_immune_to_poison()) { return true; }
+  if (buff_is_immune_to_poison()) {
+    return true;
+  }
   return (tp()->is_immune_to_poison());
 }
 
 int Thing::is_immune_to_water(void)
 {
   TRACE_NO_INDENT();
-  if (buff_is_immune_to_water()) { return true; }
+  if (buff_is_immune_to_water()) {
+    return true;
+  }
   return (tp()->is_immune_to_water());
 }
 
 int Thing::is_immune_to_necrosis(void)
 {
   TRACE_NO_INDENT();
-  if (buff_is_immune_to_necrosis()) { return true; }
+  if (buff_is_immune_to_necrosis()) {
+    return true;
+  }
   return (tp()->is_immune_to_necrosis());
 }
 
 int Thing::is_immune_to_stamina_drain(void)
 {
   TRACE_NO_INDENT();
-  if (buff_is_immune_to_stamina_drain()) { return true; }
+  if (buff_is_immune_to_stamina_drain()) {
+    return true;
+  }
   return (tp()->is_immune_to_stamina_drain());
 }
 
 int Thing::is_immune_to_magic_drain(void)
 {
   TRACE_NO_INDENT();
-  if (buff_is_immune_to_magic_drain()) { return true; }
+  if (buff_is_immune_to_magic_drain()) {
+    return true;
+  }
   return (tp()->is_immune_to_magic_drain());
 }
 

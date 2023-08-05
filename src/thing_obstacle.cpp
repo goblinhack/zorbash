@@ -15,16 +15,24 @@ bool Thing::is_obs_ai_for_me(point p)
   //
   {
     for (auto &t : get(level->all_things_ptr_at, p.x, p.y)) {
-      if (unlikely(! t)) { continue; }
+      if (unlikely(! t)) {
+        continue;
+      }
 
-      if (t->is_hidden || t->is_internal()) { continue; }
+      if (t->is_hidden || t->is_internal()) {
+        continue;
+      }
 
-      if (t->is_floor() || t->is_corridor()) { continue; }
+      if (t->is_floor() || t->is_corridor()) {
+        continue;
+      }
 
       //
       // "true" on collision
       //
-      if (is_obs_ai(t)) { return true; }
+      if (is_obs_ai(t)) {
+        return true;
+      }
     }
   }
 
@@ -40,16 +48,24 @@ bool Tp::is_obs_ai_for_me(Levelp level, point p)
   //
   {
     for (auto &t : get(level->all_things_ptr_at, p.x, p.y)) {
-      if (unlikely(! t)) { continue; }
+      if (unlikely(! t)) {
+        continue;
+      }
 
-      if (t->is_hidden || t->is_internal()) { continue; }
+      if (t->is_hidden || t->is_internal()) {
+        continue;
+      }
 
-      if (t->is_floor() || t->is_corridor()) { continue; }
+      if (t->is_floor() || t->is_corridor()) {
+        continue;
+      }
 
       //
       // "true" on collision
       //
-      if (is_obs_ai(t)) { return true; }
+      if (is_obs_ai(t)) {
+        return true;
+      }
     }
   }
 
@@ -63,7 +79,9 @@ bool Thing::collision_obstacle(Thingp it)
 {
   auto p = point(it->curr_at.x, it->curr_at.y);
 
-  if (it == this) { return false; }
+  if (it == this) {
+    return false;
+  }
 
   //
   // Skip things we cannot collide with
@@ -77,15 +95,23 @@ bool Thing::collision_obstacle(Thingp it)
   //
   if (is_swimmer()) {
     if (environ_likes_deep_water() && environ_likes_shallow_water()) {
-      if (! level->is_water(it->curr_at)) { return true; }
+      if (! level->is_water(it->curr_at)) {
+        return true;
+      }
     } else if (environ_likes_deep_water()) {
-      if (! level->is_deep_water(it->curr_at)) { return true; }
+      if (! level->is_deep_water(it->curr_at)) {
+        return true;
+      }
     } else if (environ_likes_shallow_water()) {
       if (! level->is_shallow_water(it->curr_at)) {
-        if (! is_able_to_live_out_of_water()) { return true; }
+        if (! is_able_to_live_out_of_water()) {
+          return true;
+        }
       }
     } else {
-      if (! level->is_water(it->curr_at)) { return true; }
+      if (! level->is_water(it->curr_at)) {
+        return true;
+      }
     }
   }
 
@@ -93,7 +119,9 @@ bool Thing::collision_obstacle(Thingp it)
   // Allow cleaners to engulf/swallow attack
   //
   if (is_engulfer() && can_eat(it)) {
-    if (it->thing_size() > thing_size()) { return false; }
+    if (it->thing_size() > thing_size()) {
+      return false;
+    }
   }
 
   //
@@ -120,7 +148,9 @@ bool Thing::collision_obstacle(Thingp it)
   // Allow movement through open doors only
   //
   if (it->is_obs_wall_or_door()) {
-    if (is_able_to_walk_through_walls()) { return false; }
+    if (is_able_to_walk_through_walls()) {
+      return false;
+    }
 
     if (! it->is_open) {
       IF_DEBUG3 { dbg("Collision obstacle (not open): %s", it->to_short_string().c_str()); }
@@ -150,7 +180,9 @@ bool Thing::collision_obstacle(Thingp it)
     // Allow cleaners to engulf/swallow attack
     //
     if (is_engulfer()) {
-      if (! it->is_engulfer()) { return false; }
+      if (! it->is_engulfer()) {
+        return false;
+      }
     }
 
     if (level->is_corpse(p)) {
@@ -211,7 +243,9 @@ bool Thing::collision_obstacle(Thingp it)
       //
       // Allow cleaners to engulf/swallow attack
       //
-      if (is_engulfer()) { return false; }
+      if (is_engulfer()) {
+        return false;
+      }
 
       IF_DEBUG3 { dbg("Collision obstacle (monst or player): %s", it->to_short_string().c_str()); }
       return true;
@@ -240,7 +274,9 @@ bool Thing::is_obs_ai(Thingp it)
 {
   const bool debug = false;
 
-  if (it == this) { return false; }
+  if (it == this) {
+    return false;
+  }
 
   //
   // Skip things we cannot collide with
@@ -496,7 +532,9 @@ bool Thing::is_obs_ai(Thingp it)
     }
   }
 
-  if (debug && is_debug_type()) { con("check collision with %s, no at line %d", it->to_string().c_str(), __LINE__); }
+  if (debug && is_debug_type()) {
+    con("check collision with %s, no at line %d", it->to_string().c_str(), __LINE__);
+  }
 
   return false;
 }
@@ -517,80 +555,108 @@ bool Tp::is_obs_ai(Thingp it)
   // Intelligent monsters avoid traps
   //
   if (is_intelligent()) {
-    if (it->is_trap()) { return true; }
+    if (it->is_trap()) {
+      return true;
+    }
   }
 
   //
   // Allow cleaners to engulf/swallow attack
   //
   if (is_engulfer() && can_eat(it)) {
-    if (it->thing_size() > thing_size()) { return true; }
+    if (it->thing_size() > thing_size()) {
+      return true;
+    }
   }
 
   //
   // Lava, acid etc...
   //
-  if (is_disliked_by_me(it->level, it->curr_at)) { return true; }
+  if (is_disliked_by_me(it->level, it->curr_at)) {
+    return true;
+  }
 
   //
   // Stop tentacleyes piling on top of each other
   //
   if (it->is_floating() || it->is_flying()) {
-    if (is_floating() || is_flying()) { return true; }
+    if (is_floating() || is_flying()) {
+      return true;
+    }
   }
 
   //
   // Stop ghosts piling on top of each other
   //
   if (it->is_ethereal()) {
-    if (is_ethereal()) { return true; }
+    if (is_ethereal()) {
+      return true;
+    }
   }
 
   //
   // Stop entities piling on top of each other
   //
   if (it->is_able_to_walk_through_walls()) {
-    if (is_able_to_walk_through_walls()) { return true; }
+    if (is_able_to_walk_through_walls()) {
+      return true;
+    }
   }
 
   //
   // Allow movement through open doors only
   //
   if (it->is_able_to_see_through_doors()) {
-    if (it->is_door()) { return false; }
+    if (it->is_door()) {
+      return false;
+    }
   }
 
   if (it->is_brazier() || it->is_barrel() || it->is_portal() || it->is_block_of_ice() || it->is_obs_wall_or_door()) {
-    if (is_able_to_walk_through_walls()) { return false; }
+    if (is_able_to_walk_through_walls()) {
+      return false;
+    }
 
     //
     // Dead/extinguished braziers
     //
-    if (it->is_dead) { return false; }
+    if (it->is_dead) {
+      return false;
+    }
 
     if (! it->is_open) {
       if (it->is_door()) {
-        if (is_able_to_open_doors()) { return false; }
-        if (is_able_to_break_down_doors()) { return false; }
+        if (is_able_to_open_doors()) {
+          return false;
+        }
+        if (is_able_to_break_down_doors()) {
+          return false;
+        }
       }
       return true;
     }
   }
 
-  if (it->is_secret_door()) { return false; }
+  if (it->is_secret_door()) {
+    return false;
+  }
 
   if (! is_ethereal()) {
     //
     // This lets you skip around mobs to avoid ghosts
     //
     if (is_minion()) {
-      if (it->is_mob()) { return true; }
+      if (it->is_mob()) {
+        return true;
+      }
     }
   }
 
   if (is_monst() || (is_player() && game->robot_mode)) {
     if (it->is_chasm()) {
-      if (! is_floating() && ! is_flying()) { return true; }
+      if (! is_floating() && ! is_flying()) {
+        return true;
+      }
     }
   } else if (is_player()) {
     if (it->is_alive_monst()) {
@@ -606,7 +672,9 @@ bool Tp::is_obs_ai(Thingp it)
       //
       // Allow passing over corpses
       //
-      if (it->is_obs_when_dead()) { return true; }
+      if (it->is_obs_when_dead()) {
+        return true;
+      }
     }
   }
 

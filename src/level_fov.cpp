@@ -101,14 +101,18 @@ void Level::scan(Thingp me, FovMap *fov_curr, FovMap *fov_ever, int pov_x, int p
     //
     auto light_blocker = is_light_blocker(map_x, map_y);
     if (me->is_monst()) {
-      if (! light_blocker) { light_blocker = is_light_blocker_for_monst(map_x, map_y); }
+      if (! light_blocker) {
+        light_blocker = is_light_blocker_for_monst(map_x, map_y);
+      }
     }
 
     if (angle * angle + distance_from_origin * distance_from_origin <= radius_squared
         && (light_walls || ! light_blocker)) {
       set_no_check(fov_curr->can_see, map_x, map_y, true);
 
-      if (fov_ever) { set_no_check(fov_ever->can_see, map_x, map_y, true); }
+      if (fov_ever) {
+        set_no_check(fov_ever->can_see, map_x, map_y, true);
+      }
 
       //
       // Always call this, even for cells we can see, as a monster may have just walked onto

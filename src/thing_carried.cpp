@@ -25,12 +25,16 @@ std::list< Thingp > Thing::carried_item_only_list(void)
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
-    if (unlikely(! t)) { continue; }
+    if (unlikely(! t)) {
+      continue;
+    }
     if (t->is_bag()) {
       FOR_ALL_CARRIED_BY(t, item)
       {
         auto t = level->thing_find(item.id);
-        if (unlikely(! t)) { continue; }
+        if (unlikely(! t)) {
+          continue;
+        }
         verify(MTYPE_THING, t);
         out.push_back(t);
       }
@@ -55,12 +59,16 @@ std::vector< Thingp > Thing::carried_item_only_vector(void)
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
-    if (unlikely(! t)) { continue; }
+    if (unlikely(! t)) {
+      continue;
+    }
     if (t->is_bag()) {
       FOR_ALL_CARRIED_BY(t, item)
       {
         auto t = level->thing_find(item.id);
-        if (unlikely(! t)) { continue; }
+        if (unlikely(! t)) {
+          continue;
+        }
         verify(MTYPE_THING, t);
         out.push_back(t);
       }
@@ -98,12 +106,16 @@ std::list< Thingp > Thing::carried_and_equipped_item_list(void)
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
-    if (unlikely(! t)) { continue; }
+    if (unlikely(! t)) {
+      continue;
+    }
     if (t->is_bag()) {
       FOR_ALL_CARRIED_BY(t, item)
       {
         auto t = level->thing_find(item.id);
-        if (unlikely(! t)) { continue; }
+        if (unlikely(! t)) {
+          continue;
+        }
         verify(MTYPE_THING, t);
         out.push_back(t);
       }
@@ -137,12 +149,16 @@ std::vector< Thingp > Thing::carried_and_equipped_item_vector(void)
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
-    if (unlikely(! t)) { continue; }
+    if (unlikely(! t)) {
+      continue;
+    }
     if (t->is_bag()) {
       FOR_ALL_CARRIED_BY(t, item)
       {
         auto t = level->thing_find(item.id);
-        if (unlikely(! t)) { continue; }
+        if (unlikely(! t)) {
+          continue;
+        }
         verify(MTYPE_THING, t);
         out.push_back(t);
       }
@@ -367,12 +383,18 @@ void Thing::move_carried_items_immediately(void)
 bool Thing::is_carrying_an_item(void)
 {
   TRACE_NO_INDENT();
-  if (! maybe_itemsp()) { return false; }
+  if (! maybe_itemsp()) {
+    return false;
+  }
 
-  if (itemsp()->carrying.size()) { return true; }
+  if (itemsp()->carrying.size()) {
+    return true;
+  }
 
   auto owner = top_owner();
-  if (owner) { return owner->is_carrying_an_item(); }
+  if (owner) {
+    return owner->is_carrying_an_item();
+  }
 
   return false;
 }

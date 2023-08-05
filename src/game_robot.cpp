@@ -8,12 +8,18 @@
 void Game::robot_mode_tick(void)
 {
   TRACE_AND_INDENT();
-  if (! game->robot_mode) { return; }
+  if (! game->robot_mode) {
+    return;
+  }
 
-  if (! level) { return; }
+  if (! level) {
+    return;
+  }
 
   auto player = level->player;
-  if (! player) { return; }
+  if (! player) {
+    return;
+  }
 
   player->ai_tick();
 }

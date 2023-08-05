@@ -37,7 +37,9 @@ public:
     func = other.func;
     line = other.line;
     strcpy(ts, other.ts);
-    if (other.bt) { bt = new Backtrace(other.bt); }
+    if (other.bt) {
+      bt = new Backtrace(other.bt);
+    }
   }
 };
 
@@ -213,7 +215,9 @@ static void hash_add(hash_t *hash_table, Ptrcheck *pc)
   hash_elem_t **slot;
   hash_elem_t  *elem;
 
-  if (! pc) { return; }
+  if (! pc) {
+    return;
+  }
 
   if (! hash_table) {
     delete pc;
@@ -245,7 +249,9 @@ static hash_elem_t *hash_find(hash_t *hash_table, void *ptr)
   hash_elem_t **slot;
   hash_elem_t  *elem;
 
-  if (! hash_table) { return nullptr; }
+  if (! hash_table) {
+    return nullptr;
+  }
 
   slot = ptr2hash(hash_table, ptr);
   elem = *slot;
@@ -265,9 +271,13 @@ static void hash_free(hash_t *hash_table, void *ptr)
   hash_elem_t  *prev;
   hash_elem_t  *elem;
 
-  if (! hash_table) { return; }
+  if (! hash_table) {
+    return;
+  }
 
-  if (! ptr) { return; }
+  if (! ptr) {
+    return;
+  }
 
   slot = ptr2hash(hash_table, ptr);
   elem = *slot;
@@ -278,7 +288,9 @@ static void hash_free(hash_t *hash_table, void *ptr)
     elem = elem->next;
   }
 
-  if (! elem) { return; }
+  if (! elem) {
+    return;
+  }
 
   if (prev) {
     prev->next = elem->next;
@@ -316,12 +328,16 @@ static Ptrcheck *ptrcheck_describe_pointer(int mtype, const void *ptr)
 #ifdef ENABLE_PTRCHECK_HISTORY
     int h = pc->last_seen_at;
     for (auto j = 0; j < pc->last_seen_size; j++) {
-      if (--h < 0) { h = ENABLE_PTRCHECK_HISTORY - 1; }
+      if (--h < 0) {
+        h = ENABLE_PTRCHECK_HISTORY - 1;
+      }
 
       auto H = pc->last_seen[ h ];
       if (H) {
         fprintf(stderr, "PTRCHECK: Last seen at [%u] at %s:%s line %u at %s\n", j, H->file, H->func, H->line, H->ts);
-        if (H->bt) { fprintf(stderr, "%s", H->bt->to_string().c_str()); }
+        if (H->bt) {
+          fprintf(stderr, "%s", H->bt->to_string().c_str());
+        }
       }
     }
 #endif
@@ -333,7 +349,9 @@ static Ptrcheck *ptrcheck_describe_pointer(int mtype, const void *ptr)
   pc = &ringbuf_next[ mtype ][ 0 ];
   pc--;
 
-  if (pc < ringbuf_base[ mtype ]) { pc = ringbuf_base[ mtype ] + ringbuf_max_size - 1; }
+  if (pc < ringbuf_base[ mtype ]) {
+    pc = ringbuf_base[ mtype ] + ringbuf_max_size - 1;
+  }
 
   ring_ptr_size = ringbuf_current_size[ mtype ];
 
@@ -376,7 +394,9 @@ static Ptrcheck *ptrcheck_describe_pointer(int mtype, const void *ptr)
 #ifdef ENABLE_PTRCHECK_HISTORY
       int h = pc->last_seen_at;
       for (auto i = 0; i < pc->last_seen_size; i++) {
-        if (--h < 0) { h = ENABLE_PTRCHECK_HISTORY - 1; }
+        if (--h < 0) {
+          h = ENABLE_PTRCHECK_HISTORY - 1;
+        }
 
         auto H = pc->last_seen[ h ];
         if (H) {
@@ -403,7 +423,9 @@ static Ptrcheck *ptrcheck_describe_pointer(int mtype, const void *ptr)
     //
     // Handle wraps.
     //
-    if (pc < ringbuf_base[ mtype ]) { pc = ringbuf_base[ mtype ] + ringbuf_max_size - 1; }
+    if (pc < ringbuf_base[ mtype ]) {
+      pc = ringbuf_base[ mtype ] + ringbuf_max_size - 1;
+    }
   }
 
   CON("^^^^^ End of pointer history for %p ^^^^^", ptr);
@@ -444,7 +466,9 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, const char 
     IF_DEBUG2
     {
       auto l = pc->last_seen[ pc->last_seen_at ];
-      if (! l) { l = pc->last_seen[ pc->last_seen_at ] = new Ptrcheck_history(); }
+      if (! l) {
+        l = pc->last_seen[ pc->last_seen_at ] = new Ptrcheck_history();
+      }
       l->file = file;
       l->func = func;
       l->line = line;
@@ -462,9 +486,13 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, const char 
       pc->last_seen_at++;
       pc->last_seen_size++;
 
-      if (pc->last_seen_at >= ENABLE_PTRCHECK_HISTORY) { pc->last_seen_at = 0; }
+      if (pc->last_seen_at >= ENABLE_PTRCHECK_HISTORY) {
+        pc->last_seen_at = 0;
+      }
 
-      if (pc->last_seen_size >= ENABLE_PTRCHECK_HISTORY) { pc->last_seen_size = ENABLE_PTRCHECK_HISTORY; }
+      if (pc->last_seen_size >= ENABLE_PTRCHECK_HISTORY) {
+        pc->last_seen_size = ENABLE_PTRCHECK_HISTORY;
+      }
     }
 #endif
     return pc;
@@ -497,7 +525,9 @@ void *ptrcheck_alloc(int mtype, const void *ptr, const char *what, int size, con
           line);
 #endif
 
-  if (! ptr) { ERR("Null pointer"); }
+  if (! ptr) {
+    ERR("Null pointer");
+  }
 
   //
   // Create a hash table to store pointers.
@@ -508,7 +538,9 @@ void *ptrcheck_alloc(int mtype, const void *ptr, const char *what, int size, con
     //
     hash[ mtype ] = hash_init(1046527 /* prime */);
 
-    if (! hash[ mtype ]) { return ((void *) ptr); }
+    if (! hash[ mtype ]) {
+      return ((void *) ptr);
+    }
 
     //
     // And a ring buffer to store old pointer into.
@@ -614,7 +646,9 @@ int ptrcheck_free(int mtype, void *ptr, const char *func, const char *file, int 
   //
   // Increment the ring buffer used size up to the limit.
   //
-  if (ringbuf_current_size[ mtype ] < ringbuf_max_size) { ringbuf_current_size[ mtype ]++; }
+  if (ringbuf_current_size[ mtype ] < ringbuf_max_size) {
+    ringbuf_current_size[ mtype ]++;
+  }
 
   hash_free(hash[ mtype ], ptr);
 
@@ -642,7 +676,9 @@ void ptrcheck_leak_print(int mtype)
 
   leak = 0;
 
-  if (! hash[ mtype ]) { return; }
+  if (! hash[ mtype ]) {
+    return;
+  }
 
   for (i = 0; i < hash[ mtype ]->hash_size; i++) {
     slot = &hash[ mtype ]->elements[ i ];
@@ -668,23 +704,31 @@ void ptrcheck_leak_print(int mtype)
 #ifdef ENABLE_PTRCHECK_HISTORY
       int h = pc->last_seen_at;
       for (auto j = 0; j < pc->last_seen_size; j++) {
-        if (--h < 0) { h = ENABLE_PTRCHECK_HISTORY - 1; }
+        if (--h < 0) {
+          h = ENABLE_PTRCHECK_HISTORY - 1;
+        }
 
         auto H = pc->last_seen[ h ];
         if (H) {
           fprintf(stderr, "PTRCHECK: Last seen at [%u] at %s:%s line %u at %s\n", j, H->file, H->func, H->line,
                   H->ts);
-          if (H->bt) { fprintf(stderr, "%s", H->bt->to_string().c_str()); }
+          if (H->bt) {
+            fprintf(stderr, "%s", H->bt->to_string().c_str());
+          }
         }
       }
 #endif
-      if (elem->next == elem) { ERR("Hash table corruption"); }
+      if (elem->next == elem) {
+        ERR("Hash table corruption");
+      }
 
       elem = elem->next;
     }
   }
 
-  if (! leak) { CON("No memory leaks!"); }
+  if (! leak) {
+    CON("No memory leaks!");
+  }
 }
 
 void ptrcheck_leak_print(void)

@@ -9,7 +9,9 @@
 int Thing::map_beast_count(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->map_beast_count); }
+  if (maybe_infop()) {
+    return (infop()->map_beast_count);
+  }
   return 0;
 }
 
@@ -24,7 +26,9 @@ int Thing::map_beast_carried_count(void)
 {
   TRACE_NO_INDENT();
 
-  if (! maybe_infop()) { return 0; }
+  if (! maybe_infop()) {
+    return 0;
+  }
 
   int v = 0;
   for (const auto t : carried_item_only_vector()) {
@@ -42,7 +46,9 @@ void Thing::map_beast_check(void)
   //
   auto count = map_beast_carried_count();
   if (map_beast_count() != count) {
-    if (is_player()) { level->is_map_mini_valid = false; }
+    if (is_player()) {
+      level->is_map_mini_valid = false;
+    }
   }
   map_beast_count_set(count);
 }

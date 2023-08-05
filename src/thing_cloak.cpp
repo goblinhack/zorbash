@@ -20,16 +20,24 @@ std::list< Thingp > Thing::cloak_list(void)
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
-    if (unlikely(! t)) { continue; }
+    if (unlikely(! t)) {
+      continue;
+    }
     if (t->is_bag()) {
       FOR_ALL_CARRIED_BY(t, item)
       {
         auto t = level->thing_find(item.id);
-        if (unlikely(! t)) { continue; }
-        if (t->is_cloak()) { out.push_back(t); }
+        if (unlikely(! t)) {
+          continue;
+        }
+        if (t->is_cloak()) {
+          out.push_back(t);
+        }
       }
     }
-    if (t->is_cloak()) { out.push_back(t); }
+    if (t->is_cloak()) {
+      out.push_back(t);
+    }
   }
   return out;
 }
@@ -48,16 +56,24 @@ std::vector< Thingp > Thing::cloak_vector(void)
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
-    if (unlikely(! t)) { continue; }
+    if (unlikely(! t)) {
+      continue;
+    }
     if (t->is_bag()) {
       FOR_ALL_CARRIED_BY(t, item)
       {
         auto t = level->thing_find(item.id);
-        if (unlikely(! t)) { continue; }
-        if (t->is_cloak()) { out.push_back(t); }
+        if (unlikely(! t)) {
+          continue;
+        }
+        if (t->is_cloak()) {
+          out.push_back(t);
+        }
       }
     }
-    if (t->is_cloak()) { out.push_back(t); }
+    if (t->is_cloak()) {
+      out.push_back(t);
+    }
   }
   return out;
 }
@@ -67,10 +83,14 @@ int Thing::carried_cloak_count(void)
   TRACE_NO_INDENT();
   int count = 0;
 
-  if (! maybe_itemsp()) { return count; }
+  if (! maybe_itemsp()) {
+    return count;
+  }
 
   for (const auto t : cloak_list()) {
-    if (t->is_cloak()) { count++; }
+    if (t->is_cloak()) {
+      count++;
+    }
   }
   return count;
 }
@@ -81,10 +101,14 @@ int Thing::carried_cloak_least_value(Thingp *out)
   int least_value = -1;
 
   *out = nullptr;
-  if (! maybe_itemsp()) { return least_value; }
+  if (! maybe_itemsp()) {
+    return least_value;
+  }
 
   for (const auto t : cloak_list()) {
-    if (! t->is_cloak()) { continue; }
+    if (! t->is_cloak()) {
+      continue;
+    }
 
     auto v = value(t);
     if (! *out) {
@@ -106,10 +130,14 @@ int Thing::carried_cloak_highest_value(Thingp *out)
   int highest_value = -1;
 
   *out = nullptr;
-  if (! maybe_itemsp()) { return highest_value; }
+  if (! maybe_itemsp()) {
+    return highest_value;
+  }
 
   for (const auto t : cloak_list()) {
-    if (! t->is_cloak()) { continue; }
+    if (! t->is_cloak()) {
+      continue;
+    }
 
     auto v = value(t);
     if (! *out) {
@@ -131,18 +159,26 @@ int Thing::carried_cloak_highest_value_for_target(Thingp *out, Thingp target)
   int highest_value = -1;
 
   *out = nullptr;
-  if (! maybe_itemsp()) { return highest_value; }
+  if (! maybe_itemsp()) {
+    return highest_value;
+  }
 
   for (const auto t : cloak_list()) {
-    if (! t->is_cloak()) { continue; }
+    if (! t->is_cloak()) {
+      continue;
+    }
 
-    if (! t->charge_count()) { continue; }
+    if (! t->charge_count()) {
+      continue;
+    }
 
     //
     // If intelligent don't use a cloak that will hit you also
     //
     if (is_intelligent()) {
-      if (distance(curr_at, target->curr_at) <= t->effect_radius()) { continue; }
+      if (distance(curr_at, target->curr_at) <= t->effect_radius()) {
+        continue;
+      }
     }
 
     auto v = value(t);

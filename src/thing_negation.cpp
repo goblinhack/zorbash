@@ -14,38 +14,50 @@ void Thing::negation_dmg(int dmg, bool &is_killed)
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
-    if (iter) { iter->negation_dmg(dmg, is_killed); }
+    if (iter) {
+      iter->negation_dmg(dmg, is_killed);
+    }
   }
 
   if (maybe_itemsp()) {
     FOR_ALL_CARRYING(id)
     {
       auto iter = level->thing_find(id);
-      if (iter) { iter->negation_dmg(dmg, is_killed); }
+      if (iter) {
+        iter->negation_dmg(dmg, is_killed);
+      }
     }
 
     FOR_ALL_BUFFS(id)
     {
       auto iter = level->thing_find(id);
-      if (iter) { iter->negation_dmg(dmg, is_killed); }
+      if (iter) {
+        iter->negation_dmg(dmg, is_killed);
+      }
     }
 
     FOR_ALL_DEBUFFS(id)
     {
       auto iter = level->thing_find(id);
-      if (iter) { iter->negation_dmg(dmg, is_killed); }
+      if (iter) {
+        iter->negation_dmg(dmg, is_killed);
+      }
     }
 
     FOR_ALL_SKILLS(id)
     {
       auto iter = level->thing_find(id);
-      if (iter && iter->is_activated) { iter->negation_dmg(dmg, is_killed); }
+      if (iter && iter->is_activated) {
+        iter->negation_dmg(dmg, is_killed);
+      }
     }
 
     FOR_ALL_SPELLS(id)
     {
       auto iter = level->thing_find(id);
-      if (iter && iter->is_activated) { iter->negation_dmg(dmg, is_killed); }
+      if (iter && iter->is_activated) {
+        iter->negation_dmg(dmg, is_killed);
+      }
     }
   }
 

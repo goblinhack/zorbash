@@ -13,7 +13,9 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
   DBG("Create level");
   pcg_random_allowed++;
 
-  if (difficulty_depth > DUNGEONS_MAX_DIFFICULTY_LEVEL) { difficulty_depth = DUNGEONS_MAX_DIFFICULTY_LEVEL; }
+  if (difficulty_depth > DUNGEONS_MAX_DIFFICULTY_LEVEL) {
+    difficulty_depth = DUNGEONS_MAX_DIFFICULTY_LEVEL;
+  }
 
   uint32_t seedval;
 
@@ -52,7 +54,9 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
   //
   game->level_being_created = this;
 
-  if (player) { TOPCON("A new dungeon level is coming into being..."); }
+  if (player) {
+    TOPCON("A new dungeon level is coming into being...");
+  }
 
   bool ret;
   switch (biome) {
@@ -75,7 +79,9 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
       // Ignore for testing
       //
     } else {
-      if (biome != BIOME_SEWER) { err("No monsters placed on level, difficulty_depth %d", difficulty_depth); }
+      if (biome != BIOME_SEWER) {
+        err("No monsters placed on level, difficulty_depth %d", difficulty_depth);
+      }
     }
   }
 
@@ -89,7 +95,9 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
     log("-");
   }
 
-  if (! ret) { err("Failed to create level"); }
+  if (! ret) {
+    err("Failed to create level");
+  }
 
   update_map();
 
@@ -102,7 +110,9 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
 
   if (! cursor && player) {
     cursor = cursor_thing_new(player->curr_at);
-    if (cursor) { cursor->hide("level create, cursor hide"); }
+    if (cursor) {
+      cursor->hide("level create, cursor hide");
+    }
     is_map_mini_valid = true;
   }
 
@@ -138,9 +148,13 @@ int Level::total_monst_hp_level(void)
   int hp = 0;
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
-    if (t->is_monst()) { hp += t->health_max(); }
+    if (t->is_monst()) {
+      hp += t->health_max();
+    }
 
-    if (t->is_mob()) { hp += t->health_max() * t->minion_limit(); }
+    if (t->is_mob()) {
+      hp += t->health_max() * t->minion_limit();
+    }
   }
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
   return hp;
@@ -181,7 +195,9 @@ int Level::total_loot_level(void)
   int value = 0;
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
-    if (t->is_treasure() || t->is_weapon() || t->is_staff()) { value += t->gold_value(); }
+    if (t->is_treasure() || t->is_weapon() || t->is_staff()) {
+      value += t->gold_value();
+    }
   }
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
   return value;
@@ -192,7 +208,9 @@ int Level::total_food_level(void)
   int value = 0;
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
-    if (t->is_food()) { value += t->nutrition_get(); }
+    if (t->is_food()) {
+      value += t->nutrition_get();
+    }
   }
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
   return value;

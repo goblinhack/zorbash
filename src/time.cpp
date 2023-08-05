@@ -66,7 +66,9 @@ const char *time2str(ts_t ms, char *buf, int len)
   buf[ 0 ] = '\0';
   snprintf(buf, len, "%02d:%02d:%02d.%03d: ", log_hrs, log_mins, log_secs, log_msec);
 
-  if (buf) { return buf; }
+  if (buf) {
+    return buf;
+  }
 
   return buf_;
 }
@@ -90,7 +92,9 @@ const char *timestamp(char *buf, int len)
   buf[ 0 ] = '\0';
   snprintf(buf, len, "%02d:%02d:%02d.%03d: ", log_hrs, log_mins, log_secs, log_msec);
 
-  if (buf) { return buf; }
+  if (buf) {
+    return buf;
+  }
 
   return buf_;
 }
@@ -227,7 +231,9 @@ std::string &string_timestamp(void)
   auto               time_now = time_ms();
 
   if (last_timestamp.length()) {
-    if (time_now - time_last < 1000) { return last_timestamp; }
+    if (time_now - time_last < 1000) {
+      return last_timestamp;
+    }
   }
 
   time_last          = time_now;

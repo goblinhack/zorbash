@@ -23,7 +23,9 @@ Tile::~Tile(void) { oldptr(MTYPE_TILE, this); }
 
 Tilep tile_index_to_tile(uint16_t i)
 {
-  if (unlikely(! i)) { return nullptr; }
+  if (unlikely(! i)) {
+    return nullptr;
+  }
   return all_tiles_array[ i - 1 ];
 }
 
@@ -39,7 +41,9 @@ uint8_t tile_init(void)
 void tile_fini(void)
 {
   TRACE_AND_INDENT();
-  if (tile_init_done) { tile_init_done = false; }
+  if (tile_init_done) {
+    tile_init_done = false;
+  }
 
   for (auto &t : all_tiles) {
     verify(MTYPE_TILE, t.second);
@@ -74,7 +78,9 @@ Tile::Tile(const class Tile *tile)
 #endif
 
   set_gl_binding(tile->gl_binding());
-  if (g_opt_gfx_monochrome) { set_gl_binding(tile->gl_binding_monochrome()); }
+  if (g_opt_gfx_monochrome) {
+    set_gl_binding(tile->gl_binding_monochrome());
+  }
   set_gl_binding_monochrome(tile->gl_binding_monochrome());
   set_gl_binding_mask(tile->gl_binding_mask());
 
@@ -135,7 +141,9 @@ Tile::Tile(const class Tile *tile)
   name         = tile->name + " " + std::to_string(global_index);
 
   auto result = all_tiles.insert(std::make_pair(name, this));
-  if (! result.second) { ERR("Tile copy insert name [%s] failed", name.c_str()); }
+  if (! result.second) {
+    ERR("Tile copy insert name [%s] failed", name.c_str());
+  }
   all_tiles_array.push_back(this);
 }
 
@@ -164,11 +172,15 @@ void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t 
     std::string name = arr[ idx++ ];
 
     if (name != "") {
-      if (tile_find(name)) { ERR("Tile name [%s] already used", name.c_str()); }
+      if (tile_find(name)) {
+        ERR("Tile name [%s] already used", name.c_str());
+      }
 
       auto t      = new Tile(); // std::make_shared< class Tile >();
       auto result = all_tiles.insert(std::make_pair(name, t));
-      if (! result.second) { ERR("Tile insert name [%s] failed", name.c_str()); }
+      if (! result.second) {
+        ERR("Tile insert name [%s] failed", name.c_str());
+      }
 
       //
       // Global array of all tiles
@@ -182,7 +194,9 @@ void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t 
       t->pix_height = height;
       t->tex        = tex;
       t->set_gl_binding(tex_get_gl_binding(tex));
-      if (g_opt_gfx_monochrome) { t->set_gl_binding(tex_get_gl_binding(tex_monochrome)); }
+      if (g_opt_gfx_monochrome) {
+        t->set_gl_binding(tex_get_gl_binding(tex_monochrome));
+      }
 
       t->x1 = fw * ((float) (x));
       t->y1 = fh * ((float) (y));
@@ -234,7 +248,9 @@ void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t 
 #ifdef ENABLE_DEBUG_TILE
               printf("X");
 #endif
-              if ((x1 < TILE_WIDTH_MAX) && (y1 < TILE_HEIGHT_MAX)) { set(t->pix, x1, y1, (uint8_t) 1); }
+              if ((x1 < TILE_WIDTH_MAX) && (y1 < TILE_HEIGHT_MAX)) {
+                set(t->pix, x1, y1, (uint8_t) 1);
+              }
             } else if (p.a > 0) {
 #ifdef ENABLE_DEBUG_TILE
               printf(".");
@@ -307,11 +323,15 @@ void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t 
     idx++;
 
     if (name != "") {
-      if (tile_find(name)) { ERR("Tile name [%s] already used", name.c_str()); }
+      if (tile_find(name)) {
+        ERR("Tile name [%s] already used", name.c_str());
+      }
 
       auto t      = new Tile(); // std::make_shared< class Tile >();
       auto result = all_tiles.insert(std::make_pair(name, t));
-      if (! result.second) { ERR("Tile insert name [%s] failed", name.c_str()); }
+      if (! result.second) {
+        ERR("Tile insert name [%s] failed", name.c_str());
+      }
 
       //
       // Global array of all tiles
@@ -325,7 +345,9 @@ void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t 
       t->pix_height = height;
       t->tex        = tex;
       t->set_gl_binding(tex_get_gl_binding(tex));
-      if (g_opt_gfx_monochrome) { t->set_gl_binding(tex_get_gl_binding(tex_monochrome)); }
+      if (g_opt_gfx_monochrome) {
+        t->set_gl_binding(tex_get_gl_binding(tex_monochrome));
+      }
 
       t->x1 = fw * ((float) (x));
       t->y1 = fh * ((float) (y));
@@ -377,7 +399,9 @@ void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t 
 #ifdef ENABLE_DEBUG_TILE
               printf("X");
 #endif
-              if ((x1 < TILE_WIDTH_MAX) && (y1 < TILE_HEIGHT_MAX)) { set(t->pix, x1, y1, (uint8_t) 1); }
+              if ((x1 < TILE_WIDTH_MAX) && (y1 < TILE_HEIGHT_MAX)) {
+                set(t->pix, x1, y1, (uint8_t) 1);
+              }
             } else if (p.a > 0) {
 #ifdef ENABLE_DEBUG_TILE
               printf(".");
@@ -451,13 +475,17 @@ void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, u
     std::string name = arr[ idx++ ];
 
     if (name != "") {
-      if (tile_find(name)) { ERR("Tile name [%s] already used", name.c_str()); }
+      if (tile_find(name)) {
+        ERR("Tile name [%s] already used", name.c_str());
+      }
 
       IF_DEBUG3 { LOG("Add tile name [%s]", name.c_str()); }
 
       auto t      = new Tile(); // std::make_shared< class Tile >();
       auto result = all_tiles.insert(std::make_pair(name, t));
-      if (! result.second) { ERR("Tile insert name [%s] failed", name.c_str()); }
+      if (! result.second) {
+        ERR("Tile insert name [%s] failed", name.c_str());
+      }
 
       //
       // Global array of all tiles
@@ -475,7 +503,9 @@ void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, u
       t->tex_mask = tex_mask;
 
       t->set_gl_binding(tex_get_gl_binding(t->tex));
-      if (g_opt_gfx_monochrome) { t->set_gl_binding(tex_get_gl_binding(tex_monochrome)); }
+      if (g_opt_gfx_monochrome) {
+        t->set_gl_binding(tex_get_gl_binding(tex_monochrome));
+      }
       t->set_gl_binding_monochrome(tex_get_gl_binding(t->tex_monochrome));
       t->set_gl_binding_mask(tex_get_gl_binding(t->tex_mask));
 
@@ -529,7 +559,9 @@ void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, u
 #ifdef ENABLE_DEBUG_TILE
               printf("X");
 #endif
-              if ((x1 < TILE_WIDTH_MAX) && (y1 < TILE_HEIGHT_MAX)) { set(t->pix, x1, y1, (uint8_t) 1); }
+              if ((x1 < TILE_WIDTH_MAX) && (y1 < TILE_HEIGHT_MAX)) {
+                set(t->pix, x1, y1, (uint8_t) 1);
+              }
             } else if (p.a > 0) {
 #ifdef ENABLE_DEBUG_TILE
               printf(".");
@@ -601,11 +633,15 @@ void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, u
 
   for (auto &name : arr) {
     if (name != "") {
-      if (tile_find(name)) { ERR("Tile name [%s] already used", name.c_str()); }
+      if (tile_find(name)) {
+        ERR("Tile name [%s] already used", name.c_str());
+      }
 
       auto t      = new Tile(); // std::make_shared< class Tile >();
       auto result = all_tiles.insert(std::make_pair(name, t));
-      if (! result.second) { ERR("Tile insert name [%s] failed", name.c_str()); }
+      if (! result.second) {
+        ERR("Tile insert name [%s] failed", name.c_str());
+      }
 
       //
       // Global array of all tiles
@@ -621,7 +657,9 @@ void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, u
       t->tex_monochrome = tex_monochrome;
       t->tex_mask       = tex_mask;
       t->set_gl_binding(tex_get_gl_binding(t->tex));
-      if (g_opt_gfx_monochrome) { t->set_gl_binding(tex_get_gl_binding(tex_monochrome)); }
+      if (g_opt_gfx_monochrome) {
+        t->set_gl_binding(tex_get_gl_binding(tex_monochrome));
+      }
       t->set_gl_binding_monochrome(tex_get_gl_binding(t->tex_monochrome));
       t->set_gl_binding_mask(tex_get_gl_binding(t->tex_mask));
 
@@ -674,7 +712,9 @@ void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, u
 #ifdef ENABLE_DEBUG_TILE
               printf("X");
 #endif
-              if ((x1 < TILE_WIDTH_MAX) && (y1 < TILE_HEIGHT_MAX)) { set(t->pix, x1, y1, (uint8_t) 1); }
+              if ((x1 < TILE_WIDTH_MAX) && (y1 < TILE_HEIGHT_MAX)) {
+                set(t->pix, x1, y1, (uint8_t) 1);
+              }
             } else if (p.a > 0) {
 #ifdef ENABLE_DEBUG_TILE
               printf(".");
@@ -728,10 +768,14 @@ void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, u
 Tilep tile_find(std::string name)
 {
   TRACE_AND_INDENT();
-  if (name == "") { return nullptr; }
+  if (name == "") {
+    return nullptr;
+  }
 
   auto result = all_tiles.find(name);
-  if (result == all_tiles.end()) { return nullptr; }
+  if (result == all_tiles.end()) {
+    return nullptr;
+  }
 
   return (result->second);
 }
@@ -780,12 +824,16 @@ Tilep string2tile(const char **s)
   char              *t       = name;
 
   while (t < eo_name) {
-    if ((*c == '\0') || (*c == '$')) { break; }
+    if ((*c == '\0') || (*c == '$')) {
+      break;
+    }
 
     *t++ = *c++;
   }
 
-  if (c == eo_name) { return nullptr; }
+  if (c == eo_name) {
+    return nullptr;
+  }
 
   *t++ = '\0';
   *s += (t - name);
@@ -808,18 +856,26 @@ Tilep string2tile(std::string &s, int *len)
   while (iter != s.end()) {
     auto c = *iter;
 
-    if ((c == '\0') || (c == '$')) { break; }
+    if ((c == '\0') || (c == '$')) {
+      break;
+    }
 
     name += c;
     iter++;
   }
 
-  if (iter == s.end()) { ERR("Unknown tile [%s]", name.c_str()); }
+  if (iter == s.end()) {
+    ERR("Unknown tile [%s]", name.c_str());
+  }
 
-  if (len) { *len = iter - s.begin(); }
+  if (len) {
+    *len = iter - s.begin();
+  }
 
   auto result = all_tiles.find(name);
-  if (result == all_tiles.end()) { ERR("Unknown tile [%s]", name.c_str()); }
+  if (result == all_tiles.end()) {
+    ERR("Unknown tile [%s]", name.c_str());
+  }
 
   return (result->second);
 }

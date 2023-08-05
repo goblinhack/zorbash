@@ -13,10 +13,14 @@ void Thing::blit_tile_at(point p, bool lit, bool left_bar)
 {
   TRACE_NO_INDENT();
 
-  if (is_no_tile()) { return; }
+  if (is_no_tile()) {
+    return;
+  }
 
   auto tile = tile_index_to_tile(tile_curr);
-  if (! tile) { return; }
+  if (! tile) {
+    return;
+  }
 
   if (! g_opt_ascii) {
     ascii_set(TILE_LAYER_FG_3, p.x, p.y, tile);

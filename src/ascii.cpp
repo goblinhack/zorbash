@@ -38,31 +38,47 @@ static bool  scissors_enabled = false;
 
 int ascii_ok(int x, int y)
 {
-  if (unlikely(x < 0)) { return false; }
+  if (unlikely(x < 0)) {
+    return false;
+  }
 
-  if (unlikely(x >= TERM_WIDTH)) { return false; }
+  if (unlikely(x >= TERM_WIDTH)) {
+    return false;
+  }
 
-  if (unlikely(y < 0)) { return false; }
+  if (unlikely(y < 0)) {
+    return false;
+  }
 
-  if (unlikely(y >= TERM_HEIGHT)) { return false; }
+  if (unlikely(y >= TERM_HEIGHT)) {
+    return false;
+  }
 
   return true;
 }
 
 int ascii_x_ok(int x)
 {
-  if (unlikely(x < 0)) { return false; }
+  if (unlikely(x < 0)) {
+    return false;
+  }
 
-  if (unlikely(x >= TERM_WIDTH)) { return false; }
+  if (unlikely(x >= TERM_WIDTH)) {
+    return false;
+  }
 
   return true;
 }
 
 int ascii_y_ok(int y)
 {
-  if (unlikely(y < 0)) { return false; }
+  if (unlikely(y < 0)) {
+    return false;
+  }
 
-  if (unlikely(y >= TERM_HEIGHT)) { return false; }
+  if (unlikely(y >= TERM_HEIGHT)) {
+    return false;
+  }
 
   return true;
 }
@@ -81,14 +97,20 @@ void pixel_to_ascii(int *x, int *y)
   float mx = *x;
   float my = *y;
 
-  if (unlikely(! game)) { DIE("No game"); }
+  if (unlikely(! game)) {
+    DIE("No game");
+  }
 
   mx /= game->config.ascii_gl_width;
   my /= game->config.ascii_gl_height;
 
-  if (mx >= TERM_WIDTH - 1) { mx = TERM_WIDTH - 1; }
+  if (mx >= TERM_WIDTH - 1) {
+    mx = TERM_WIDTH - 1;
+  }
 
-  if (my >= TERM_HEIGHT - 1) { my = TERM_HEIGHT - 1; }
+  if (my >= TERM_HEIGHT - 1) {
+    my = TERM_HEIGHT - 1;
+  }
 
   *x = mx;
   *y = my;
@@ -96,12 +118,18 @@ void pixel_to_ascii(int *x, int *y)
 
 int ascii_ok_for_scissors(int x, int y)
 {
-  if ((x < 0) || (y < 0) || (x >= TERM_WIDTH) || (y >= TERM_HEIGHT)) { return false; }
+  if ((x < 0) || (y < 0) || (x >= TERM_WIDTH) || (y >= TERM_HEIGHT)) {
+    return false;
+  }
 
   if (scissors_enabled) {
-    if ((x < scissors_tl.x) || (x > scissors_br.x)) { return false; }
+    if ((x < scissors_tl.x) || (x > scissors_br.x)) {
+      return false;
+    }
 
-    if ((y < scissors_tl.y) || (y > scissors_br.y)) { return false; }
+    if ((y < scissors_tl.y) || (y > scissors_br.y)) {
+      return false;
+    }
   }
 
   return (ascii_ok(x, y));
@@ -112,15 +140,21 @@ bool ascii_is_empty(int x, int y)
   AsciiCell *cell = &getref_no_check(cells, x, y);
 
   for (auto depth = 0; depth < TILE_LAYER_MAX; depth++) {
-    if (cell->tile[ depth ]) { return false; }
-    if (cell->tex[ depth ]) { return false; }
+    if (cell->tile[ depth ]) {
+      return false;
+    }
+    if (cell->tex[ depth ]) {
+      return false;
+    }
   }
   return true;
 }
 
 void ascii_set(int depth, int x, int y, color col)
 {
-  if (unlikely(! ascii_ok_for_scissors(x, y))) { return; }
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
+    return;
+  }
 
   AsciiCell *cell = &getref_no_check(cells, x, y);
 
@@ -132,9 +166,13 @@ void ascii_set(int depth, int x, int y, color col)
 
 void ascii_set_context(int x, int y, void *context)
 {
-  if (! context) { return; }
+  if (! context) {
+    return;
+  }
 
-  if (unlikely(! ascii_ok_for_scissors(x, y))) { return; }
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
+    return;
+  }
 
   AsciiCell *cell = &getref_no_check(cells, x, y);
 
@@ -143,7 +181,9 @@ void ascii_set_context(int x, int y, void *context)
 
 void *ascii_get_stat_context(int x, int y)
 {
-  if (! ascii_ok(x, y)) { return nullptr; }
+  if (! ascii_ok(x, y)) {
+    return nullptr;
+  }
 
   AsciiCell *cell = &getref_no_check(cells, x, y);
 
@@ -152,7 +192,9 @@ void *ascii_get_stat_context(int x, int y)
 
 void ascii_set(int depth, int x, int y, const Texp tex, float tx, float ty, float dx, float dy)
 {
-  if (unlikely(! ascii_ok_for_scissors(x, y))) { return; }
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
+    return;
+  }
 
   AsciiCell *cell = &getref_no_check(cells, x, y);
 
@@ -166,7 +208,9 @@ void ascii_set(int depth, int x, int y, const Texp tex, float tx, float ty, floa
 
 void ascii_set(int depth, int x, int y, const Tilep tile)
 {
-  if (unlikely(! ascii_ok_for_scissors(x, y))) { return; }
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
+    return;
+  }
 
   AsciiCell *cell = &getref_no_check(cells, x, y);
 
@@ -180,7 +224,9 @@ void ascii_set(int depth, int x, int y, const Tilep tile)
 
 void ascii_set(int depth, int x, int y, const Tilep tile, wchar_t ch)
 {
-  if (unlikely(! ascii_ok_for_scissors(x, y))) { return; }
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
+    return;
+  }
 
   AsciiCell *cell = &getref_no_check(cells, x, y);
 
@@ -194,7 +240,9 @@ void ascii_set(int depth, int x, int y, const Tilep tile, wchar_t ch)
 
 void ascii_set(int depth, int x, int y, const Tilep tile, float tx, float ty, float dx, float dy)
 {
-  if (unlikely(! ascii_ok_for_scissors(x, y))) { return; }
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
+    return;
+  }
 
   AsciiCell *cell = &getref_no_check(cells, x, y);
 
@@ -228,21 +276,31 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
   //
   // Check for out of bounds. Cannot check for x here as a message could start off screen and end on screen.
   //
-  if (unlikely(y < 0)) { return; }
+  if (unlikely(y < 0)) {
+    return;
+  }
 
-  if (unlikely(y >= TERM_HEIGHT)) { return; }
+  if (unlikely(y >= TERM_HEIGHT)) {
+    return;
+  }
 
-  if (bg != COLOR_NONE) { bg_set = true; }
+  if (bg != COLOR_NONE) {
+    bg_set = true;
+  }
 
   tile            = nullptr;
   bool    got_pct = false;
   wchar_t ch      = 0;
 
   for (;;) {
-    if (text.end() - text_iter <= 0) { break; }
+    if (text.end() - text_iter <= 0) {
+      break;
+    }
 
     if (text_iter == text.end()) {
-      if (! got_pct) { break; }
+      if (! got_pct) {
+        break;
+      }
       got_pct = false;
     } else {
       ch = *text_iter;
@@ -316,7 +374,9 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
     //
     if (unlikely(! tile)) {
       tile = font_ui->unicode_to_tile(ch);
-      if (tile == nullptr) { tile = tile_find_mand(UNICODE_ALIAS_FOR_UNKNOWN_STR); }
+      if (tile == nullptr) {
+        tile = tile_find_mand(UNICODE_ALIAS_FOR_UNKNOWN_STR);
+      }
     }
 
     auto saved_fg = fg;
@@ -366,7 +426,9 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
 
       if (bg.r || bg.g || bg.b || bg.a) {
         static Tilep tile;
-        if (unlikely(! tile)) { tile = tile_find_mand(UNICODE_ALIAS_FOR_BLOCK_STR); }
+        if (unlikely(! tile)) {
+          tile = tile_find_mand(UNICODE_ALIAS_FOR_BLOCK_STR);
+        }
         cell->tile[ depth ] = tile;
       } else {
         //
@@ -382,7 +444,9 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
       cell->color_br[ depth ] = bg;
     }
 
-    if (unlikely(is_cursor)) { fg = saved_fg; }
+    if (unlikely(is_cursor)) {
+      fg = saved_fg;
+    }
 
     tile = nullptr;
   }
@@ -398,10 +462,14 @@ int ascii_strlen(std::wstring const &text)
   wchar_t ch      = 0;
 
   for (;;) {
-    if (text.end() - text_iter <= 0) { break; }
+    if (text.end() - text_iter <= 0) {
+      break;
+    }
 
     if (text_iter == text.end()) {
-      if (! got_pct) { break; }
+      if (! got_pct) {
+        break;
+      }
       got_pct = false;
     } else {
       ch = *text_iter;
@@ -410,7 +478,9 @@ int ascii_strlen(std::wstring const &text)
       if (text_iter != text.end()) {
         if (ch == L'%') {
           if (text_iter != text.end()) {
-            if (*text_iter == L'%') { text_iter++; }
+            if (*text_iter == L'%') {
+              text_iter++;
+            }
           }
 
           auto len = text.end() - text_iter;
@@ -481,11 +551,15 @@ int ascii_strlen(std::wstring const &text, std::wstring *col)
     auto ch = *text_iter;
     text_iter++;
 
-    if (ch == L'\0') { break; }
+    if (ch == L'\0') {
+      break;
+    }
 
     if (ch == L'%') {
       if (text_iter != text.end()) {
-        if (*text_iter == L'%') { text_iter++; }
+        if (*text_iter == L'%') {
+          text_iter++;
+        }
       }
 
       if (std::string(text_iter, text_iter + 3) == "fg=") {
@@ -547,11 +621,15 @@ std::string ascii_strip(std::string const &text)
     auto ch = *text_iter;
     text_iter++;
 
-    if (ch == '\0') { break; }
+    if (ch == '\0') {
+      break;
+    }
 
     if (ch == '%') {
       if (text_iter != text.end()) {
-        if (*text_iter == '%') { text_iter++; }
+        if (*text_iter == '%') {
+          text_iter++;
+        }
       }
 
       if (std::string(text_iter, text_iter + 3) == "fg=") {
@@ -606,7 +684,9 @@ static void ascii_putf_(int x, int y, color fg, color bg, std::wstring const fmt
   //
   // Only a single nul is written, but as we read 2 at a time...
   //
-  if (wrote && (wrote < MAXLONGSTR - 1)) { buf[ wrote + 1 ] = '\0'; }
+  if (wrote && (wrote < MAXLONGSTR - 1)) {
+    buf[ wrote + 1 ] = '\0';
+  }
 
   auto b = std::wstring(buf);
 
@@ -623,7 +703,9 @@ static void ascii_putf_(int x, int y, color fg, color bg, const wchar_t *fmt, va
   //
   // Only a single nul is written, but as we read 2 at a time...
   //
-  if (wrote && (wrote < MAXLONGSTR - 1)) { buf[ wrote + 1 ] = '\0'; }
+  if (wrote && (wrote < MAXLONGSTR - 1)) {
+    buf[ wrote + 1 ] = '\0';
+  }
 
   auto b = std::wstring(buf);
 
@@ -750,7 +832,9 @@ void ascii_draw_line(int depth, int x0, int y0, int x1, int y1, Tilep tile, colo
 
   for (;;) { /* loop */
     ascii_map_thing_replace(depth, x0, y0, tile, col);
-    if (x0 == x1 && y0 == y1) { break; }
+    if (x0 == x1 && y0 == y1) {
+      break;
+    }
     e2 = 2 * err;
     if (e2 >= dy) {
       err += dy;
@@ -1021,7 +1105,9 @@ void ascii_display(void)
   blit_flush();
 
 #ifdef ENABLE_UI_ASCII_MOUSE
-  if (mouse_found) { ascii_display_mouse(mouse_tile_tl, mouse_tile_br, ascii.mouse_at); }
+  if (mouse_found) {
+    ascii_display_mouse(mouse_tile_tl, mouse_tile_br, ascii.mouse_at);
+  }
 #endif
 }
 

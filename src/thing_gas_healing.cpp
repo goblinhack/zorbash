@@ -12,17 +12,23 @@ void Thing::gas_healing_tick(void)
 
   if (is_lava() || is_fire() || is_fire_elemental()) {
     auto intensity = level->is_gas_healing(curr_at.x, curr_at.y) / 10;
-    if (intensity) { level->gas_healing_explosion(curr_at); }
+    if (intensity) {
+      level->gas_healing_explosion(curr_at);
+    }
     return;
   }
 
-  if (! is_air_breather()) { return; }
+  if (! is_air_breather()) {
+    return;
+  }
 
   //
   // How strong is the gas?
   //
   auto intensity = level->is_gas_healing(curr_at.x, curr_at.y) / 20;
-  if (! intensity) { return; }
+  if (! intensity) {
+    return;
+  }
 
   dbg("Healing gas tick");
   TRACE_AND_INDENT();
@@ -31,11 +37,15 @@ void Thing::gas_healing_tick(void)
   // Due to location checks, we check the start and end move so we end
   // up being healing twice per move. As this is a bit cruel, check
   //
-  if (game->tick_current == tick_last_gas_healing_exposure()) { return; }
+  if (game->tick_current == tick_last_gas_healing_exposure()) {
+    return;
+  }
   tick_last_gas_healing_exposure_set(game->tick_current);
 
   if (is_alive_monst() || is_player()) {
-    if (is_player()) { msg("%%fg=pink$You breath in the healing gas!%%fg=reset$"); }
+    if (is_player()) {
+      msg("%%fg=pink$You breath in the healing gas!%%fg=reset$");
+    }
     health_incr(d6());
     stamina_incr(d6());
   }
@@ -47,7 +57,9 @@ void Thing::gas_healing_tick(void)
 int Thing::tick_last_gas_healing_exposure(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->tick_last_gas_healing_exposure); }
+  if (maybe_infop()) {
+    return (infop()->tick_last_gas_healing_exposure);
+  }
   return 0;
 }
 

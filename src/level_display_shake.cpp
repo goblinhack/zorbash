@@ -8,9 +8,13 @@
 float Level::update_wobble(void)
 {
   auto w = wobble_curr();
-  if (w == 0.0) { return 0.0; }
+  if (w == 0.0) {
+    return 0.0;
+  }
 
-  if (fabs(w) < 0.01) { return 0.0; }
+  if (fabs(w) < 0.01) {
+    return 0.0;
+  }
 
   auto new_w = w;
   new_w *= 0.75;
@@ -30,7 +34,9 @@ void Level::wobble_set(float v)
 {
   TRACE_NO_INDENT();
 
-  if (g_opt_ascii) { return; }
+  if (g_opt_ascii) {
+    return;
+  }
 
   wobble = v;
 }
@@ -38,9 +44,13 @@ void Level::wobble_set(float v)
 bool Level::screen_shake_begin(void)
 {
   TRACE_NO_INDENT();
-  if (g_opt_ascii) { return false; }
+  if (g_opt_ascii) {
+    return false;
+  }
 
-  if (! player || ! player->is_bloodied()) { return false; }
+  if (! player || ! player->is_bloodied()) {
+    return false;
+  }
 
   auto wobble = update_wobble();
   if (wobble != 0.0) {
@@ -57,7 +67,9 @@ void Level::screen_shake_end(void)
 {
   TRACE_NO_INDENT();
 
-  if (g_opt_ascii) { return; }
+  if (g_opt_ascii) {
+    return;
+  }
 
   glPopMatrix();
 }

@@ -28,11 +28,14 @@ static int _vscprintf_so(const char *format, va_list pargs)
 int vasprintf(char **strp, const char *fmt, va_list ap)
 {
   int len = _vscprintf_so(fmt, ap);
-  if (len == -1) return -1;
+  if (len == -1)
+    return -1;
   char *str = (char *) malloc((size_t) len + 1);
-  if (! str) return -1;
+  if (! str)
+    return -1;
   int r = vsnprintf(str, len + 1, fmt, ap); /* "secure" version of vsprintf */
-  if (r == -1) return free(str), -1;
+  if (r == -1)
+    return free(str), -1;
   *strp = str;
   return r;
 }
@@ -56,7 +59,9 @@ std::string string_sprintf(const char *format, ...)
 
   va_start(args, format);
 
-  if (vasprintf(&buf, format, args) == -1) { throw std::bad_alloc(); }
+  if (vasprintf(&buf, format, args) == -1) {
+    throw std::bad_alloc();
+  }
 
   std::string ret = buf;
   free(buf);
@@ -70,7 +75,9 @@ std::string string_sprintf(const char *format, va_list args)
 {
   char *buf;
 
-  if (asprintf(&buf, format, args) == -1) { throw std::bad_alloc(); }
+  if (asprintf(&buf, format, args) == -1) {
+    throw std::bad_alloc();
+  }
 
   std::string ret = buf;
   free(buf);

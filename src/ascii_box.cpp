@@ -206,7 +206,9 @@ static void ascii_put_box_(int style, const TileLayers tiles, int x, int y, int 
     //
     // Only a single nul is written, but as we read 2 at a time...
     //
-    if (wrote && (wrote < MAXLONGSTR - 1)) { buf[ wrote + 1 ] = '\0'; }
+    if (wrote && (wrote < MAXLONGSTR - 1)) {
+      buf[ wrote + 1 ] = '\0';
+    }
 
     auto b   = std::wstring(buf);
     int  len = ascii_strlen(b);
@@ -255,9 +257,13 @@ void ascii_put_box(box_args b, int style, const TileLayers tiles, const wchar_t 
   y2 = y + h;
 
   for (x = x1; x <= x2; x++) {
-    if (unlikely(! ascii_x_ok(x))) { continue; }
+    if (unlikely(! ascii_x_ok(x))) {
+      continue;
+    }
     for (y = y1; y <= y2; y++) {
-      if (unlikely(! ascii_y_ok(y))) { continue; }
+      if (unlikely(! ascii_y_ok(y))) {
+        continue;
+      }
 
       set(ascii.sdl_mod, x, y, b.sdl_mod);
       set(ascii.sdl_key, x, y, b.sdl_key);

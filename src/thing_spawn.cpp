@@ -11,7 +11,9 @@
 bool Level::is_obs_spawn(int x, int y, Thingp it)
 {
   if (it->is_monst()) {
-    if (is_obs_spawn_monst(x, y)) { return true; }
+    if (is_obs_spawn_monst(x, y)) {
+      return true;
+    }
   }
   return is_obs_spawn(x, y);
 }
@@ -19,7 +21,9 @@ bool Level::is_obs_spawn(int x, int y, Thingp it)
 bool Level::is_obs_spawn(point p, Thingp it)
 {
   if (it->is_monst()) {
-    if (is_obs_spawn_monst(p)) { return true; }
+    if (is_obs_spawn_monst(p)) {
+      return true;
+    }
   }
   return is_obs_spawn(p);
 }
@@ -27,7 +31,9 @@ bool Level::is_obs_spawn(point p, Thingp it)
 bool Level::is_obs_spawn(int x, int y, Tpp it)
 {
   if (it->is_monst()) {
-    if (is_obs_spawn_monst(x, y)) { return true; }
+    if (is_obs_spawn_monst(x, y)) {
+      return true;
+    }
   }
   return is_obs_spawn(x, y);
 }
@@ -35,7 +41,9 @@ bool Level::is_obs_spawn(int x, int y, Tpp it)
 bool Level::is_obs_spawn(point p, Tpp it)
 {
   if (it->is_monst()) {
-    if (is_obs_spawn_monst(p)) { return true; }
+    if (is_obs_spawn_monst(p)) {
+      return true;
+    }
   }
   return is_obs_spawn(p);
 }
@@ -125,21 +133,31 @@ bool Thing::spawn_next_to(const std::string &what)
     //
     // No spawning onto chasms for example
     //
-    if (tpp->is_disliked_by_me(level, p)) { continue; }
+    if (tpp->is_disliked_by_me(level, p)) {
+      continue;
+    }
 
-    if (collision_obstacle(p)) { continue; }
+    if (collision_obstacle(p)) {
+      continue;
+    }
 
-    if (tpp->is_obs_ai_for_me(level, p)) { continue; }
+    if (tpp->is_obs_ai_for_me(level, p)) {
+      continue;
+    }
 
     possible.push_back(p);
   }
 
   auto cands = possible.size();
-  if (! cands) { return false; }
+  if (! cands) {
+    return false;
+  }
 
   auto chosen = possible[ pcg_random_range(0, cands) ];
   auto it     = level->thing_new(what, chosen);
-  if (it) { spawned_newborn(it); }
+  if (it) {
+    spawned_newborn(it);
+  }
 
   return true;
 }
@@ -177,27 +195,39 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
     auto y = curr_at.y + d.y;
     auto p = point(x, y);
 
-    if (level->is_obs_spawn(x, y, tpp)) { continue; }
+    if (level->is_obs_spawn(x, y, tpp)) {
+      continue;
+    }
 
     //
     // No spawning onto chasms for example
     //
-    if (tpp->is_disliked_by_me(level, p)) { continue; }
+    if (tpp->is_disliked_by_me(level, p)) {
+      continue;
+    }
 
-    if (collision_obstacle(p)) { continue; }
+    if (collision_obstacle(p)) {
+      continue;
+    }
 
-    if (is_obs_ai_for_me(p)) { continue; }
+    if (is_obs_ai_for_me(p)) {
+      continue;
+    }
 
     possible.push_back(p);
   }
 
   auto cands = possible.size();
-  if (! cands) { return false; }
+  if (! cands) {
+    return false;
+  }
 
   auto chosen = possible[ pcg_random_range(0, cands) ];
 
   auto it = level->thing_new(what, chosen);
-  if (it) { spawned_newborn(it); }
+  if (it) {
+    spawned_newborn(it);
+  }
 
   return true;
 }
@@ -231,7 +261,9 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
   //
   // For radial effects
   //
-  if (radius_min && ! radius_max) { radius_max = item->tp()->effect_radius(); }
+  if (radius_min && ! radius_max) {
+    radius_max = item->tp()->effect_radius();
+  }
 
   dbg("Spawn %s in radius range %u to %u at %s", what.c_str(), radius_min, radius_max,
       target->to_short_string().c_str());
@@ -252,22 +284,32 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
   for (auto x = target_at.x - radius_max; x <= target_at.x + radius_max; x++) {
     for (auto y = target_at.y - radius_max; y <= target_at.y + radius_max; y++) {
       float dist = DISTANCE(x, y, target_at.x, target_at.y);
-      if (level->is_oob(x, y)) { continue; }
+      if (level->is_oob(x, y)) {
+        continue;
+      }
 
       //
       // Radius needs to be the same as the check in carried_staff_highest_value_for_target
       //
-      if (dist > radius_max + 0.5) { continue; }
+      if (dist > radius_max + 0.5) {
+        continue;
+      }
 
-      if (dist < radius_min) { continue; }
+      if (dist < radius_min) {
+        continue;
+      }
 
-      if (level->is_obs_spawn(x, y, tpp)) { continue; }
+      if (level->is_obs_spawn(x, y, tpp)) {
+        continue;
+      }
 
       dbg("%d,%d ok", x, y);
 
       auto it = level->thing_new(what, point(x, y));
       spawned_newborn(it);
-      if (it) { it->ts_anim_delay_end_set(time_game_ms_cached() + dist * 100); }
+      if (it) {
+        it->ts_anim_delay_end_set(time_game_ms_cached() + dist * 100);
+      }
     }
   }
 
@@ -301,16 +343,24 @@ bool Thing::spawn_radius_range(const std::string &what, int radius_min, int radi
   for (auto x = curr_at.x - radius_max; x <= curr_at.x + radius_max; x++) {
     for (auto y = curr_at.y - radius_max; y <= curr_at.y + radius_max; y++) {
       float dist = DISTANCE(x, y, curr_at.x, curr_at.y);
-      if (level->is_oob(x, y)) { continue; }
+      if (level->is_oob(x, y)) {
+        continue;
+      }
 
       //
       // Radius needs to be the same as the check in carried_staff_highest_value_for_target
       //
-      if (dist > radius_max + 0.5) { continue; }
+      if (dist > radius_max + 0.5) {
+        continue;
+      }
 
-      if (dist < radius_min) { continue; }
+      if (dist < radius_min) {
+        continue;
+      }
 
-      if (level->is_obs_spawn(x, y, tpp)) { continue; }
+      if (level->is_obs_spawn(x, y, tpp)) {
+        continue;
+      }
 
       auto it = level->thing_new(what, point(x, y));
       if (it) {
@@ -353,34 +403,58 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, i
     while (tries--) {
       int x = pcg_random_range(radius_min, radius_max);
       int d = pcg_random_range(0, 10);
-      if (d < 5) { x = -x; }
+      if (d < 5) {
+        x = -x;
+      }
 
       int y = pcg_random_range(radius_min, radius_max);
       d     = pcg_random_range(0, 10);
-      if (d < 5) { y = -y; }
+      if (d < 5) {
+        y = -y;
+      }
 
       point spawn_at = curr_at + point(x, y);
 
-      if (spawn_at.x < MAP_BORDER_ROCK) { continue; }
-      if (spawn_at.x >= MAP_WIDTH - MAP_BORDER_ROCK) { continue; }
-      if (spawn_at.y < MAP_BORDER_ROCK) { continue; }
-      if (spawn_at.y >= MAP_HEIGHT - MAP_BORDER_ROCK) { continue; }
+      if (spawn_at.x < MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (spawn_at.x >= MAP_WIDTH - MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (spawn_at.y < MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (spawn_at.y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
+        continue;
+      }
 
       //
       // Radius needs to be the same as the check in carried_staff_highest_value_for_target
       //
       float dist = distance(spawn_at, curr_at);
-      if (dist > radius_max + 0.5) { continue; }
+      if (dist > radius_max + 0.5) {
+        continue;
+      }
 
-      if (dist < radius_min) { continue; }
+      if (dist < radius_min) {
+        continue;
+      }
 
-      if (level->is_obs_spawn(spawn_at.x, spawn_at.y, tpp)) { continue; }
+      if (level->is_obs_spawn(spawn_at.x, spawn_at.y, tpp)) {
+        continue;
+      }
 
-      if (tpp->is_disliked_by_me(level, spawn_at)) { continue; }
+      if (tpp->is_disliked_by_me(level, spawn_at)) {
+        continue;
+      }
 
-      if (collision_obstacle(spawn_at)) { continue; }
+      if (collision_obstacle(spawn_at)) {
+        continue;
+      }
 
-      if (is_obs_ai_for_me(spawn_at)) { continue; }
+      if (is_obs_ai_for_me(spawn_at)) {
+        continue;
+      }
 
       //
       // Monster packs are not declared monsters until they polymorph. Until that
@@ -401,13 +475,17 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, i
         }
         FOR_ALL_THINGS_END()
       }
-      if (skip) { continue; }
+      if (skip) {
+        continue;
+      }
 
       //
       // For pack spawning make sure all followers can see each other
       //
       if (is_able_to_follow()) {
-        if (! level->can_see_unimpeded(spawn_at, curr_at)) { continue; }
+        if (! level->can_see_unimpeded(spawn_at, curr_at)) {
+          continue;
+        }
       }
 
       auto it = level->thing_new(what, spawn_at);
@@ -430,7 +508,9 @@ bool Thing::spawn_set_fire_to_things_around_me(const std::string &what, int radi
   dbg("Spawn fire around thing of type: %s", what.c_str());
   TRACE_AND_INDENT();
 
-  if (! radius) { radius = 1; }
+  if (! radius) {
+    radius = 1;
+  }
 
   auto tp = tp_find(what);
 
@@ -440,29 +520,49 @@ bool Thing::spawn_set_fire_to_things_around_me(const std::string &what, int radi
       auto x = curr_at.x + dx;
       auto y = curr_at.y + dy;
 
-      if (! dx && ! dy) { continue; }
-      if (x < MAP_BORDER_ROCK) { continue; }
-      if (x >= MAP_WIDTH - MAP_BORDER_ROCK) { continue; }
-      if (y < MAP_BORDER_ROCK) { continue; }
-      if (y >= MAP_HEIGHT - MAP_BORDER_ROCK) { continue; }
+      if (! dx && ! dy) {
+        continue;
+      }
+      if (x < MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (x >= MAP_WIDTH - MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (y < MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
+        continue;
+      }
 
       float dist = DISTANCE(x, y, curr_at.x, curr_at.y);
 
       //
       // Radius needs to be the same as the check in carried_staff_highest_value_for_target
       //
-      if (dist > (float) radius + 0.5) { continue; }
+      if (dist > (float) radius + 0.5) {
+        continue;
+      }
 
-      if (level->is_obs_spawn(x, y, tp)) { continue; }
+      if (level->is_obs_spawn(x, y, tp)) {
+        continue;
+      }
 
-      if (level->is_fire(x, y)) { continue; }
+      if (level->is_fire(x, y)) {
+        continue;
+      }
 
       FOR_ALL_NON_INTERNAL_THINGS(level, it, x, y)
       {
-        if (! it->is_combustible() && ! it->is_burnable() && ! it->is_able_to_melt()) { continue; }
+        if (! it->is_combustible() && ! it->is_burnable() && ! it->is_able_to_melt()) {
+          continue;
+        }
 
         auto f = level->thing_new(what, point(x, y));
-        if (f) { spawned_newborn(f); }
+        if (f) {
+          spawned_newborn(f);
+        }
       }
       FOR_ALL_THINGS_END()
     }
@@ -478,7 +578,9 @@ bool Thing::spawn_things_around_me(const std::string &what, int radius)
   dbg("Spawn around thing of type: %s", what.c_str());
   TRACE_AND_INDENT();
 
-  if (! radius) { radius = 1; }
+  if (! radius) {
+    radius = 1;
+  }
 
   auto tp = tp_find(what);
 
@@ -488,33 +590,51 @@ bool Thing::spawn_things_around_me(const std::string &what, int radius)
       auto x = curr_at.x + dx;
       auto y = curr_at.y + dy;
 
-      if (! dx && ! dy) { continue; }
-      if (x < MAP_BORDER_ROCK) { continue; }
-      if (x >= MAP_WIDTH - MAP_BORDER_ROCK) { continue; }
-      if (y < MAP_BORDER_ROCK) { continue; }
-      if (y >= MAP_HEIGHT - MAP_BORDER_ROCK) { continue; }
+      if (! dx && ! dy) {
+        continue;
+      }
+      if (x < MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (x >= MAP_WIDTH - MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (y < MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
+        continue;
+      }
 
       float dist = DISTANCE(x, y, curr_at.x, curr_at.y);
 
       //
       // Radius needs to be the same as the check in carried_staff_highest_value_for_target
       //
-      if (dist > (float) radius + 0.5) { continue; }
+      if (dist > (float) radius + 0.5) {
+        continue;
+      }
 
-      if (level->is_obs_spawn(x, y, tp)) { continue; }
+      if (level->is_obs_spawn(x, y, tp)) {
+        continue;
+      }
 
       FOR_ALL_NON_INTERNAL_THINGS(level, it, x, y)
       {
         if (it->is_player()) {
           if (! it->is_on_fire()) {
-            if (it->on_fire_set("sparks")) { it->msg("The fire spread to your clothing!"); }
+            if (it->on_fire_set("sparks")) {
+              it->msg("The fire spread to your clothing!");
+            }
           } else {
             level->player->msg("You dance in the fire!");
           }
         }
         if (it->is_alive_monst()) {
           if (! it->is_on_fire()) {
-            if (it->on_fire_set("sparks")) { it->msg("The fire spread to %s!", it->text_the().c_str()); }
+            if (it->on_fire_set("sparks")) {
+              it->msg("The fire spread to %s!", it->text_the().c_str());
+            }
           } else {
             it->msg("%s dances in the flames!", it->text_The().c_str());
           }
@@ -527,12 +647,18 @@ bool Thing::spawn_things_around_me(const std::string &what, int radius)
       //
       auto tp_cands = tp_find_wildcard(what);
       auto tp       = pcg_one_of(tp_cands);
-      if (! tp) { return false; }
+      if (! tp) {
+        return false;
+      }
 
-      if (tp->is_disliked_by_me(level, point(x, y))) { continue; }
+      if (tp->is_disliked_by_me(level, point(x, y))) {
+        continue;
+      }
 
       auto f = level->thing_new(tp, point(x, y));
-      if (f) { spawned_newborn(f); }
+      if (f) {
+        spawned_newborn(f);
+      }
     }
   }
 
@@ -554,25 +680,41 @@ bool Thing::spawn_gas_poison_around_thing(int radius)
       auto x = curr_at.x + dx;
       auto y = curr_at.y + dy;
 
-      if (x < MAP_BORDER_ROCK) { continue; }
-      if (x >= MAP_WIDTH - MAP_BORDER_ROCK) { continue; }
-      if (y < MAP_BORDER_ROCK) { continue; }
-      if (y >= MAP_HEIGHT - MAP_BORDER_ROCK) { continue; }
+      if (x < MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (x >= MAP_WIDTH - MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (y < MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
+        continue;
+      }
 
       float dist = DISTANCE(x, y, curr_at.x, curr_at.y);
 
       //
       // Radius needs to be the same as the check in carried_staff_highest_value_for_target
       //
-      if (dist > radius) { continue; }
+      if (dist > radius) {
+        continue;
+      }
 
-      if (level->is_obs_spawn(x, y)) { continue; }
+      if (level->is_obs_spawn(x, y)) {
+        continue;
+      }
 
       auto p = point(x, y);
 
-      if (collision_obstacle(p)) { continue; }
+      if (collision_obstacle(p)) {
+        continue;
+      }
 
-      if (is_obs_ai_for_me(p)) { continue; }
+      if (is_obs_ai_for_me(p)) {
+        continue;
+      }
 
       if (pcg_random_range(0, 100) < 100 - dist * 20) {
         uint16_t gx
@@ -610,25 +752,41 @@ bool Thing::spawn_gas_healing_around_thing(int radius)
       auto x = curr_at.x + dx;
       auto y = curr_at.y + dy;
 
-      if (x < MAP_BORDER_ROCK) { continue; }
-      if (x >= MAP_WIDTH - MAP_BORDER_ROCK) { continue; }
-      if (y < MAP_BORDER_ROCK) { continue; }
-      if (y >= MAP_HEIGHT - MAP_BORDER_ROCK) { continue; }
+      if (x < MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (x >= MAP_WIDTH - MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (y < MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
+        continue;
+      }
 
       float dist = DISTANCE(x, y, curr_at.x, curr_at.y);
 
       //
       // Radius needs to be the same as the check in carried_staff_highest_value_for_target
       //
-      if (dist > radius) { continue; }
+      if (dist > radius) {
+        continue;
+      }
 
-      if (level->is_obs_spawn(x, y)) { continue; }
+      if (level->is_obs_spawn(x, y)) {
+        continue;
+      }
 
       auto p = point(x, y);
 
-      if (collision_obstacle(p)) { continue; }
+      if (collision_obstacle(p)) {
+        continue;
+      }
 
-      if (is_obs_ai_for_me(p)) { continue; }
+      if (is_obs_ai_for_me(p)) {
+        continue;
+      }
 
       if (pcg_random_range(0, 100) < 100 - dist * 20) {
         uint16_t gx
@@ -664,16 +822,22 @@ Thingp Thing::spawn_at_if_possible(const std::string &what)
   possible.push_back(p);
 
   auto cands = possible.size();
-  if (! cands) { return nullptr; }
+  if (! cands) {
+    return nullptr;
+  }
 
   auto chosen = possible[ pcg_random_range(0, cands) ];
 
   auto tp = tp_find(what);
 
-  if (level->is_obs_spawn(p, tp)) { return nullptr; }
+  if (level->is_obs_spawn(p, tp)) {
+    return nullptr;
+  }
 
   auto it = level->thing_new(what, chosen);
-  if (it) { spawned_newborn(it); }
+  if (it) {
+    spawned_newborn(it);
+  }
 
   return it;
 }
@@ -695,7 +859,9 @@ Thingp Thing::spawn_at(const std::string &what, point p)
   dbg("Spawned thing at: %s", what.c_str());
   TRACE_AND_INDENT();
 
-  if (it) { spawned_newborn(it); }
+  if (it) {
+    spawned_newborn(it);
+  }
 
   return it;
 }
@@ -706,7 +872,9 @@ Thingp Thing::spawn_owned_thing_at_my_position(const std::string &what)
   TRACE_AND_INDENT();
 
   auto it = level->thing_new(what, curr_at, this);
-  if (it) { spawned_newborn(it); }
+  if (it) {
+    spawned_newborn(it);
+  }
 
   return it;
 }
@@ -717,12 +885,16 @@ Thingp Thing::spawn_minion_at_my_position(const std::string &what)
   TRACE_AND_INDENT();
 
   auto it = level->thing_new(what, curr_at, nullptr /* no owner */);
-  if (! it) { return it; }
+  if (! it) {
+    return it;
+  }
 
   //
   // Allow non normal minions to also be minions. No minion left behind.
   //
-  if (! it->is_minion()) { it->is_minion_set = true; }
+  if (! it->is_minion()) {
+    it->is_minion_set = true;
+  }
 
   spawned_newborn(it);
 

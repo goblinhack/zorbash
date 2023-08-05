@@ -10,9 +10,13 @@
 
 bool Thing::wake(const std::string &reason)
 {
-  if (is_dead || is_dying) { return false; }
+  if (is_dead || is_dying) {
+    return false;
+  }
 
-  if (! is_sleeping) { return true; }
+  if (! is_sleeping) {
+    return true;
+  }
 
   dbg("Wake %s", reason.c_str());
   TRACE_AND_INDENT();
@@ -43,7 +47,9 @@ bool Thing::wake(const std::string &reason)
 //
 void Thing::awake(void)
 {
-  if (is_dead || is_dying) { return; }
+  if (is_dead || is_dying) {
+    return;
+  }
 
   dbg("Awake");
   TRACE_AND_INDENT();
@@ -66,9 +72,13 @@ void Thing::awake(void)
         auto        mod   = t[ 0 ];
         auto        fn    = t[ 1 ];
         std::size_t found = fn.find("()");
-        if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+        if (found != std::string::npos) {
+          fn = fn.replace(found, 2, "");
+        }
 
-        if (mod == "me") { mod = name(); }
+        if (mod == "me") {
+          mod = name();
+        }
 
         dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 

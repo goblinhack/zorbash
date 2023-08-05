@@ -150,7 +150,9 @@ void Game::init_jump_paths()
   std::vector< std::string > cands;
 
   for (const auto &s : jump_data) {
-    if (s.length() != JUMP_WIDTH * JUMP_WIDTH) { DIE("bad jump data"); }
+    if (s.length() != JUMP_WIDTH * JUMP_WIDTH) {
+      DIE("bad jump data");
+    }
 
     //
     // Read the jump data
@@ -187,7 +189,9 @@ void Game::init_jump_paths()
       }
 
       cands.push_back(out);
-      if (out.length() != JUMP_WIDTH * JUMP_WIDTH) { DIE("bad derived jump data"); }
+      if (out.length() != JUMP_WIDTH * JUMP_WIDTH) {
+        DIE("bad derived jump data");
+      }
     }
   }
 
@@ -195,7 +199,9 @@ void Game::init_jump_paths()
   auto last = std::unique(cands.begin(), cands.end());
   cands.erase(last, cands.end());
 
-  if (debug) { std::cout << std::endl; }
+  if (debug) {
+    std::cout << std::endl;
+  }
 
   for (const auto &s : cands) {
     if (debug) {
@@ -203,16 +209,22 @@ void Game::init_jump_paths()
                 << " ";
     }
 
-    if (s.length() != JUMP_WIDTH * JUMP_WIDTH) { DIE("bad derived jump data 2"); }
+    if (s.length() != JUMP_WIDTH * JUMP_WIDTH) {
+      DIE("bad derived jump data 2");
+    }
 
     //
     // Path must have a start and end.
     //
     std::size_t start = s.find("s");
-    if (start == std::string::npos) { DIE("no start jump char"); }
+    if (start == std::string::npos) {
+      DIE("no start jump char");
+    }
 
     std::size_t end = s.find("e");
-    if (end == std::string::npos) { DIE("no end jump char"); }
+    if (end == std::string::npos) {
+      DIE("no end jump char");
+    }
 
     //
     // Copy the current jump path to an array we can walk to get
@@ -245,7 +257,9 @@ void Game::init_jump_paths()
       for (auto y = 0; y < JUMP_WIDTH; y++) {
         for (auto x = 0; x < JUMP_WIDTH; x++) {
           auto ch = get(tmp, x, y);
-          if (ch != c) { continue; }
+          if (ch != c) {
+            continue;
+          }
           point p(point(x - offset, y - offset));
           if (debug) {
             std::cout << "(" << p.x << "," << p.y << ")"
@@ -265,7 +279,9 @@ void Game::init_jump_paths()
       continue;
     }
 
-    if (debug) { std::cout << std::endl; }
+    if (debug) {
+      std::cout << std::endl;
+    }
 
     jump_paths.push_back(jp);
   }

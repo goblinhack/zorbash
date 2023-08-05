@@ -15,7 +15,9 @@ int Thing::stat_int_total(void)
 
   stat = stat_int();
   prev = stat;
-  if (stat) { dbg3("Int: %d", stat); }
+  if (stat) {
+    dbg3("Int: %d", stat);
+  }
 
   stat += stat_int_bonus();
   if (stat != prev) {
@@ -43,12 +45,16 @@ int Thing::stat_int_total(void)
         //
         // Don't count boots for example twice
         //
-        if (is_equipped(iter)) { continue; }
+        if (is_equipped(iter)) {
+          continue;
+        }
         //
         // Things that are equipped must be equipped to get the benefit.
         // Other items give the benefit by just being carried.
         //
-        if (iter->is_auto_equipped()) { continue; }
+        if (iter->is_auto_equipped()) {
+          continue;
+        }
         stat += iter->stat_int_bonus();
         if (stat != prev) {
           prev = stat;
@@ -121,14 +127,18 @@ int Thing::stat_int_total(void)
 int Thing::stat_int(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->stat_int); }
+  if (maybe_infop()) {
+    return (infop()->stat_int);
+  }
   return 0;
 }
 
 int Thing::stat_int_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stat_int = v);
   return n;
@@ -137,7 +147,9 @@ int Thing::stat_int_set(int v)
 int Thing::stat_int_decr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stat_int -= v);
   return n;
@@ -146,7 +158,9 @@ int Thing::stat_int_decr(int v)
 int Thing::stat_int_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stat_int += v);
   return n;
@@ -155,7 +169,9 @@ int Thing::stat_int_incr(int v)
 int Thing::stat_int_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stat_int--);
   return n;
@@ -164,7 +180,9 @@ int Thing::stat_int_decr(void)
 int Thing::stat_int_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stat_int++);
   return n;
@@ -176,14 +194,18 @@ int Thing::stat_int_incr(void)
 int Thing::stat_int_bonus(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->stat_int_bonus); }
+  if (maybe_infop()) {
+    return (infop()->stat_int_bonus);
+  }
   return 0;
 }
 
 int Thing::stat_int_bonus_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stat_int_bonus = v);
   return n;
@@ -192,7 +214,9 @@ int Thing::stat_int_bonus_set(int v)
 int Thing::stat_int_bonus_decr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stat_int_bonus -= v);
   return n;
@@ -201,7 +225,9 @@ int Thing::stat_int_bonus_decr(int v)
 int Thing::stat_int_bonus_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stat_int_bonus += v);
   return n;
@@ -210,7 +236,9 @@ int Thing::stat_int_bonus_incr(int v)
 int Thing::stat_int_bonus_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stat_int_bonus--);
   return n;
@@ -219,7 +247,9 @@ int Thing::stat_int_bonus_decr(void)
 int Thing::stat_int_bonus_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stat_int_bonus++);
   return n;

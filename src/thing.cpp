@@ -11,15 +11,21 @@ Thingp g_debug_thing;
 
 const Tpp Thing::tp_or_update(void)
 {
-  if (likely(mytp != nullptr)) { return mytp; }
-  if (unlikely(tp_id == -1)) { return nullptr; }
+  if (likely(mytp != nullptr)) {
+    return mytp;
+  }
+  if (unlikely(tp_id == -1)) {
+    return nullptr;
+  }
   mytp = tp_id_map[ tp_id - 1 ];
   return mytp;
 }
 
 const Tpp Thing::tp_slow(void)
 {
-  if (likely(mytp != nullptr)) { return mytp; }
+  if (likely(mytp != nullptr)) {
+    return mytp;
+  }
 
   if (unlikely(tp_id == -1)) {
     err("no tp set for tp_id %d", tp_id);
@@ -45,14 +51,18 @@ uint8_t Thing::z_prio(void)
 
 std::size_t Thing::light_count(void)
 {
-  if (! maybe_infop()) { return 0; }
+  if (! maybe_infop()) {
+    return 0;
+  }
   return (infop()->light.size());
 }
 
 const ThingId &Thing::immediate_mob_id(void)
 {
   TRACE_NO_INDENT();
-  if (! maybe_infop()) { return (NoThingId); }
+  if (! maybe_infop()) {
+    return (NoThingId);
+  }
   return (infop()->mob_id);
 }
 
@@ -66,7 +76,9 @@ const ThingId &Thing::mob_id_set(const ThingId &v)
 const ThingId &Thing::leader_id(void)
 {
   TRACE_NO_INDENT();
-  if (! maybe_infop()) { return (NoThingId); }
+  if (! maybe_infop()) {
+    return (NoThingId);
+  }
   return (infop()->leader_id);
 }
 

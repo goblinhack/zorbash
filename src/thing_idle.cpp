@@ -22,7 +22,9 @@ bool Thing::idle_check(void)
       auto d   = on_idle_tick_freq_dice();
       auto mod = d.python_mod;
 
-      if (mod == "me") { mod = name(); }
+      if (mod == "me") {
+        mod = name();
+      }
 
       py_call_void_fn(mod.c_str(), d.python_func.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
       tick_last_did_something_set(game->tick_current);
@@ -36,9 +38,13 @@ int Thing::idle_count(void)
 {
   TRACE_NO_INDENT();
 
-  if (! is_monst() && ! is_player()) { return 0; }
+  if (! is_monst() && ! is_player()) {
+    return 0;
+  }
 
-  if (maybe_aip()) { return (aip()->idle_count); }
+  if (maybe_aip()) {
+    return (aip()->idle_count);
+  }
   return 0;
 }
 

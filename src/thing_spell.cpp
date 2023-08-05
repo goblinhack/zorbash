@@ -32,7 +32,9 @@ bool Thing::spell_add(Thingp new_spell)
 {
   TRACE_NO_INDENT();
 
-  if (! new_spell) { return false; }
+  if (! new_spell) {
+    return false;
+  }
 
   dbg("Try to add spell %s", new_spell->to_short_string().c_str());
   TRACE_AND_INDENT();
@@ -122,7 +124,9 @@ bool Thing::spell_remove(Thingp what)
 
   Thingp o = what->top_owner();
   if (o) {
-    if (o->is_player()) { o->spellbox_id_remove(what); }
+    if (o->is_player()) {
+      o->spellbox_id_remove(what);
+    }
   }
 
   what->owner_unset();
@@ -136,12 +140,16 @@ bool Thing::spell_remove(Thingp what)
 void Thing::spell_remove_all(void)
 {
   TRACE_NO_INDENT();
-  if (! maybe_itemsp()) { return; }
+  if (! maybe_itemsp()) {
+    return;
+  }
 
   while (! itemsp()->spells.empty()) {
     auto id = *itemsp()->spells.begin();
     auto t  = level->thing_find(id);
-    if (unlikely(! t)) { return; }
+    if (unlikely(! t)) {
+      return;
+    }
     spell_remove(t);
   }
 }
@@ -172,7 +180,9 @@ bool Thing::spell_use(Thingp what)
   //
   // Have enough points?
   //
-  if (! spell_can_use(what)) { return false; }
+  if (! spell_can_use(what)) {
+    return false;
+  }
 
   if (what->is_target_select()) {
     msg("You prepare to cast %s.", what->text_the().c_str());
@@ -190,7 +200,9 @@ void Thing::spell_deactivate(Thingp what)
   TRACE_NO_INDENT();
   what->is_activated = false;
   game->set_request_to_remake_spellbox();
-  if (is_player()) { sound_play("coin"); }
+  if (is_player()) {
+    sound_play("coin");
+  }
 }
 
 void Thing::spell_activate(Thingp what)
@@ -200,26 +212,36 @@ void Thing::spell_activate(Thingp what)
   //
   // Have enough points?
   //
-  if (! spell_can_use(what)) { return; }
+  if (! spell_can_use(what)) {
+    return;
+  }
 
   what->is_activated = true;
   game->set_request_to_remake_spellbox();
-  if (is_player()) { sound_play("coin"); }
+  if (is_player()) {
+    sound_play("coin");
+  }
 }
 
 bool Thing::has_spell(Tpp spell)
 {
   TRACE_NO_INDENT();
-  if (! maybe_itemsp()) { return 0; }
+  if (! maybe_itemsp()) {
+    return 0;
+  }
 
-  if (! spell) { return false; }
+  if (! spell) {
+    return false;
+  }
 
   TRACE_NO_INDENT();
   FOR_ALL_SPELLS(oid)
   {
     auto learned_spell_iter = game->level->thing_find(oid);
     auto learned_spell      = learned_spell_iter->tp();
-    if (learned_spell == spell) { return true; }
+    if (learned_spell == spell) {
+      return true;
+    }
 
     //
     // Check if this spell has been acquired via a superseding spell
@@ -228,7 +250,9 @@ bool Thing::has_spell(Tpp spell)
     std::list< Tpp > preceding_spells;
     spell_get_replace_list(learned_spell, preceding_spells);
     for (auto preceding_spell : preceding_spells) {
-      if (preceding_spell == spell) { return true; }
+      if (preceding_spell == spell) {
+        return true;
+      }
     }
   }
 
@@ -244,7 +268,9 @@ bool Thing::spell_add(Tpp what)
     return false;
   }
 
-  if (is_player()) { msg("You learn %s.", t->text_the().c_str()); }
+  if (is_player()) {
+    msg("You learn %s.", t->text_the().c_str());
+  }
 
   spell_add(t);
 
@@ -254,7 +280,9 @@ bool Thing::spell_add(Tpp what)
   auto found = false;
   for (const auto spellbook : carried_item_only_vector()) {
     if (spellbook->is_spellbook()) {
-      if (spellbook->charge_count()) { spellbook->charge_count_decr(); }
+      if (spellbook->charge_count()) {
+        spellbook->charge_count_decr();
+      }
       if (! spellbook->charge_count()) {
         spellbook->is_drained = true;
         spellbook->dead("drained and used");
@@ -263,7 +291,9 @@ bool Thing::spell_add(Tpp what)
       break;
     }
   }
-  if (! found) { err("no spellbook found"); }
+  if (! found) {
+    err("no spellbook found");
+  }
 
   return true;
 }
@@ -273,7 +303,9 @@ int Thing::spellbook_count(void)
   TRACE_NO_INDENT();
   int v = 0;
   for (const auto t : carried_item_only_vector()) {
-    if (! t->is_spellbook()) { continue; }
+    if (! t->is_spellbook()) {
+      continue;
+    }
     dbg("Found a spellbook: %s", t->to_short_string().c_str());
     v++;
   }
@@ -287,7 +319,9 @@ bool Thing::can_learn_a_spell(void)
   //
   // Once spells are maxxed out, that's it
   //
-  if (itemsp()->spells.size() >= UI_INVENTORY_QUICK_ITEMS_MAX) { return false; }
+  if (itemsp()->spells.size() >= UI_INVENTORY_QUICK_ITEMS_MAX) {
+    return false;
+  }
 
   //
   // Look at the list of spells this thing knows. If we find
@@ -305,7 +339,9 @@ bool Thing::can_learn_a_spell(void)
         }
       }
     }
-    if (already_learned) { continue; }
+    if (already_learned) {
+      continue;
+    }
     return true;
   }
   return false;
@@ -328,10 +364,14 @@ bool Thing::learn_random_spell(void)
         }
       }
     }
-    if (add) { cands.push_back(tpp); }
+    if (add) {
+      cands.push_back(tpp);
+    }
   }
 
-  if (cands.empty()) { return false; }
+  if (cands.empty()) {
+    return false;
+  }
 
   auto chosen = cands[ pcg_random_range(0, cands.size()) ];
   dbg("Add this spell: %s", chosen->name().c_str());

@@ -313,14 +313,26 @@ public:
 struct tree_wid_key_cmp {
   bool operator()(const tree_wid_key &lhs, const tree_wid_key &rhs) const
   {
-    if (lhs.priority < rhs.priority) { return true; }
-    if (lhs.priority > rhs.priority) { return false; }
+    if (lhs.priority < rhs.priority) {
+      return true;
+    }
+    if (lhs.priority > rhs.priority) {
+      return false;
+    }
 
-    if (lhs.br.y < rhs.br.y) { return true; }
-    if (lhs.br.y > rhs.br.y) { return false; }
+    if (lhs.br.y < rhs.br.y) {
+      return true;
+    }
+    if (lhs.br.y > rhs.br.y) {
+      return false;
+    }
 
-    if (lhs.key < rhs.key) { return true; }
-    if (lhs.key > rhs.key) { return false; }
+    if (lhs.key < rhs.key) {
+      return true;
+    }
+    if (lhs.key > rhs.key) {
+      return false;
+    }
 
     return false;
   }

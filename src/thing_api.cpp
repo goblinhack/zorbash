@@ -146,7 +146,9 @@ int Thing::effect_radius(void)
   TRACE_NO_INDENT();
 
   int radius = tp()->effect_radius();
-  if (tp()->effect_has_blast_radius()) { radius += enchant_count_get(); }
+  if (tp()->effect_has_blast_radius()) {
+    radius += enchant_count_get();
+  }
   return radius;
 }
 
@@ -1302,7 +1304,9 @@ int Thing::is_able_to_fall(void)
   // Dead bats fall...
   //
   if (is_dead) {
-    if (is_corpse_on_death()) { return true; }
+    if (is_corpse_on_death()) {
+      return true;
+    }
   }
 
   return (tp()->is_able_to_fall());
@@ -1316,7 +1320,9 @@ int Thing::is_able_to_see_through_doors(void)
   {
     auto iter = equip_get(e);
     if (iter) {
-      if (iter->is_able_to_see_through_doors()) { return true; }
+      if (iter->is_able_to_see_through_doors()) {
+        return true;
+      }
     }
   }
 
@@ -1331,7 +1337,9 @@ int Thing::is_able_to_walk_through_walls(void)
   {
     auto iter = equip_get(e);
     if (iter) {
-      if (iter->is_able_to_walk_through_walls()) { return true; }
+      if (iter->is_able_to_walk_through_walls()) {
+        return true;
+      }
     }
   }
 
@@ -2608,7 +2616,9 @@ int Thing::is_able_to_teleport_without_tiring(void)
   {
     auto iter = equip_get(e);
     if (iter) {
-      if (iter->is_able_to_teleport_without_tiring()) { return true; }
+      if (iter->is_able_to_teleport_without_tiring()) {
+        return true;
+      }
     }
   }
 
@@ -2923,7 +2933,9 @@ int Thing::is_able_to_jump_without_tiring(void)
   {
     auto iter = equip_get(e);
     if (iter) {
-      if (iter->is_able_to_jump_without_tiring()) { return true; }
+      if (iter->is_able_to_jump_without_tiring()) {
+        return true;
+      }
     }
   }
 
@@ -3528,7 +3540,9 @@ void Thing::new_aip(void)
 ThingInfop Thing::get_or_alloc_infop(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! _infop)) { new_infop(); }
+  if (unlikely(! _infop)) {
+    new_infop();
+  }
   IF_DEBUG3 { verify(MTYPE_INFOP, _infop); }
   return _infop;
 }
@@ -3536,7 +3550,9 @@ ThingInfop Thing::get_or_alloc_infop(void)
 ThingItemsp Thing::get_or_alloc_itemsp(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! _itemsp)) { new_itemsp(); }
+  if (unlikely(! _itemsp)) {
+    new_itemsp();
+  }
   IF_DEBUG3 { verify(MTYPE_ITEMP, _itemsp); }
   return _itemsp;
 }
@@ -3544,7 +3560,9 @@ ThingItemsp Thing::get_or_alloc_itemsp(void)
 ThingAip Thing::get_or_alloc_aip(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! _aip)) { new_aip(); }
+  if (unlikely(! _aip)) {
+    new_aip();
+  }
   IF_DEBUG3 { verify(MTYPE_AIP, _aip); }
   return _aip;
 }
@@ -3552,7 +3570,9 @@ ThingAip Thing::get_or_alloc_aip(void)
 ThingInfop Thing::infop(void)
 {
   TRACE_NO_INDENT();
-  if (! _infop) { die("no _infop"); }
+  if (! _infop) {
+    die("no _infop");
+  }
   IF_DEBUG3 { verify(MTYPE_INFOP, _infop); }
   return _infop;
 }
@@ -3560,7 +3580,9 @@ ThingInfop Thing::infop(void)
 ThingItemsp Thing::itemsp(void)
 {
   TRACE_NO_INDENT();
-  if (! _itemsp) { die("no _itemsp"); }
+  if (! _itemsp) {
+    die("no _itemsp");
+  }
   IF_DEBUG3 { verify(MTYPE_ITEMP, _itemsp); }
   return _itemsp;
 }
@@ -3568,7 +3590,9 @@ ThingItemsp Thing::itemsp(void)
 ThingAip Thing::aip(void)
 {
   TRACE_NO_INDENT();
-  if (! _aip) { die("no _aip"); }
+  if (! _aip) {
+    die("no _aip");
+  }
   IF_DEBUG3 { verify(MTYPE_AIP, _aip); }
   return _aip;
 }
@@ -3696,7 +3720,9 @@ int Thing::capacity_height(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  if (infop()->capacity_height) { return infop()->capacity_height; }
+  if (infop()->capacity_height) {
+    return infop()->capacity_height;
+  }
   return (tp()->capacity_height());
 }
 
@@ -3704,7 +3730,9 @@ int Thing::capacity_width(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  if (infop()->capacity_width) { return infop()->capacity_width; }
+  if (infop()->capacity_width) {
+    return infop()->capacity_width;
+  }
   return (tp()->capacity_width());
 }
 
@@ -3726,7 +3754,9 @@ int Thing::rarity(void)
 const std::string &Thing::msg_get(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->msg); }
+  if (maybe_infop()) {
+    return (infop()->msg);
+  }
   static std::string empty;
   return empty;
 }
@@ -3744,7 +3774,9 @@ void Thing::msg_set(const std::string &v)
 const std::string &Thing::dead_reason_get(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->dead_reason); }
+  if (maybe_infop()) {
+    return (infop()->dead_reason);
+  }
   static std::string empty;
   return empty;
 }
@@ -3752,7 +3784,9 @@ const std::string &Thing::dead_reason_get(void)
 void Thing::dead_reason_set(const std::string &v)
 {
   TRACE_NO_INDENT();
-  if (! maybe_infop()) { return; }
+  if (! maybe_infop()) {
+    return;
+  }
   new_infop();
   infop()->dead_reason = v;
 }
@@ -3767,7 +3801,9 @@ int Thing::submerged_offset_get(void)
     //
     // Floating when dead?
     //
-    if (is_dead) { return (infop()->submerged_offset / 2); }
+    if (is_dead) {
+      return (infop()->submerged_offset / 2);
+    }
 
     return (infop()->submerged_offset);
   }
@@ -3787,14 +3823,18 @@ void Thing::submerged_offset_set(int v)
 int Thing::stats02(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->stats02); }
+  if (maybe_infop()) {
+    return (infop()->stats02);
+  }
   return 0;
 }
 
 int Thing::stats02_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats02 = v);
   return n;
@@ -3803,7 +3843,9 @@ int Thing::stats02_set(int v)
 int Thing::stats02_decr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats02 -= v);
   return n;
@@ -3812,7 +3854,9 @@ int Thing::stats02_decr(int v)
 int Thing::stats02_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats02 += v);
   return n;
@@ -3821,7 +3865,9 @@ int Thing::stats02_incr(int v)
 int Thing::stats02_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats02--);
   return n;
@@ -3830,7 +3876,9 @@ int Thing::stats02_decr(void)
 int Thing::stats02_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats02++);
   return n;
@@ -3842,14 +3890,18 @@ int Thing::stats02_incr(void)
 int Thing::stats03(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->stats03); }
+  if (maybe_infop()) {
+    return (infop()->stats03);
+  }
   return 0;
 }
 
 int Thing::stats03_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats03 = v);
   return n;
@@ -3858,7 +3910,9 @@ int Thing::stats03_set(int v)
 int Thing::stats03_decr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats03 -= v);
   return n;
@@ -3867,7 +3921,9 @@ int Thing::stats03_decr(int v)
 int Thing::stats03_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats03 += v);
   return n;
@@ -3876,7 +3932,9 @@ int Thing::stats03_incr(int v)
 int Thing::stats03_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats03--);
   return n;
@@ -3885,7 +3943,9 @@ int Thing::stats03_decr(void)
 int Thing::stats03_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats03++);
   return n;
@@ -3897,14 +3957,18 @@ int Thing::stats03_incr(void)
 int Thing::stats04(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->stats04); }
+  if (maybe_infop()) {
+    return (infop()->stats04);
+  }
   return 0;
 }
 
 int Thing::stats04_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats04 = v);
   return n;
@@ -3913,7 +3977,9 @@ int Thing::stats04_set(int v)
 int Thing::stats04_decr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats04 -= v);
   return n;
@@ -3922,7 +3988,9 @@ int Thing::stats04_decr(int v)
 int Thing::stats04_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats04 += v);
   return n;
@@ -3931,7 +3999,9 @@ int Thing::stats04_incr(int v)
 int Thing::stats04_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats04--);
   return n;
@@ -3940,7 +4010,9 @@ int Thing::stats04_decr(void)
 int Thing::stats04_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats04++);
   return n;
@@ -3952,14 +4024,18 @@ int Thing::stats04_incr(void)
 int Thing::stats05(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->stats05); }
+  if (maybe_infop()) {
+    return (infop()->stats05);
+  }
   return 0;
 }
 
 int Thing::stats05_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats05 = v);
   return n;
@@ -3968,7 +4044,9 @@ int Thing::stats05_set(int v)
 int Thing::stats05_decr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats05 -= v);
   return n;
@@ -3977,7 +4055,9 @@ int Thing::stats05_decr(int v)
 int Thing::stats05_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats05 += v);
   return n;
@@ -3986,7 +4066,9 @@ int Thing::stats05_incr(int v)
 int Thing::stats05_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats05--);
   return n;
@@ -3995,7 +4077,9 @@ int Thing::stats05_decr(void)
 int Thing::stats05_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats05++);
   return n;
@@ -4007,14 +4091,18 @@ int Thing::stats05_incr(void)
 int Thing::stats06(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->stats06); }
+  if (maybe_infop()) {
+    return (infop()->stats06);
+  }
   return 0;
 }
 
 int Thing::stats06_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats06 = v);
   return n;
@@ -4023,7 +4111,9 @@ int Thing::stats06_set(int v)
 int Thing::stats06_decr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats06 -= v);
   return n;
@@ -4032,7 +4122,9 @@ int Thing::stats06_decr(int v)
 int Thing::stats06_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats06 += v);
   return n;
@@ -4041,7 +4133,9 @@ int Thing::stats06_incr(int v)
 int Thing::stats06_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats06--);
   return n;
@@ -4050,7 +4144,9 @@ int Thing::stats06_decr(void)
 int Thing::stats06_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats06++);
   return n;
@@ -4062,14 +4158,18 @@ int Thing::stats06_incr(void)
 int Thing::stats07(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->stats07); }
+  if (maybe_infop()) {
+    return (infop()->stats07);
+  }
   return 0;
 }
 
 int Thing::stats07_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats07 = v);
   return n;
@@ -4078,7 +4178,9 @@ int Thing::stats07_set(int v)
 int Thing::stats07_decr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats07 -= v);
   return n;
@@ -4087,7 +4189,9 @@ int Thing::stats07_decr(int v)
 int Thing::stats07_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats07 += v);
   return n;
@@ -4096,7 +4200,9 @@ int Thing::stats07_incr(int v)
 int Thing::stats07_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats07--);
   return n;
@@ -4105,7 +4211,9 @@ int Thing::stats07_decr(void)
 int Thing::stats07_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats07++);
   return n;
@@ -4117,14 +4225,18 @@ int Thing::stats07_incr(void)
 int Thing::stats09(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->stats09); }
+  if (maybe_infop()) {
+    return (infop()->stats09);
+  }
   return 0;
 }
 
 int Thing::stats09_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats09 = v);
   return n;
@@ -4133,7 +4245,9 @@ int Thing::stats09_set(int v)
 int Thing::stats09_decr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats09 -= v);
   return n;
@@ -4142,7 +4256,9 @@ int Thing::stats09_decr(int v)
 int Thing::stats09_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats09 += v);
   return n;
@@ -4151,7 +4267,9 @@ int Thing::stats09_incr(int v)
 int Thing::stats09_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats09--);
   return n;
@@ -4160,7 +4278,9 @@ int Thing::stats09_decr(void)
 int Thing::stats09_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stats09++);
   return n;
@@ -4517,7 +4637,9 @@ const std::string &Thing::equip_carry_anim(void)
 std::array< std::array< ThingId, MAX_BAG_HEIGHT >, MAX_BAG_WIDTH > *Thing::bag_get(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_itemsp()) { return (&itemsp()->bag); }
+  if (maybe_itemsp()) {
+    return (&itemsp()->bag);
+  }
   //
   // Watch out here as lasers can have owners and do not live in bags.
   //
@@ -4528,7 +4650,9 @@ std::array< std::array< ThingId, MAX_BAG_HEIGHT >, MAX_BAG_WIDTH > *Thing::bag_g
 const std::array< std::array< ThingId, MAX_BAG_HEIGHT >, MAX_BAG_WIDTH > *Thing::stat_const_bag(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_itemsp()) { return (&itemsp()->bag); }
+  if (maybe_itemsp()) {
+    return (&itemsp()->bag);
+  }
   //
   // Watch out here as lasers can have owners and do not live in bags.
   //
@@ -4538,6 +4662,8 @@ const std::array< std::array< ThingId, MAX_BAG_HEIGHT >, MAX_BAG_WIDTH > *Thing:
 
 const std::string &Thing::title(void)
 {
-  if (g_opt_player_name.empty()) { return text_title(); }
+  if (g_opt_player_name.empty()) {
+    return text_title();
+  }
   return g_opt_player_name;
 }

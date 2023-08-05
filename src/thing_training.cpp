@@ -10,7 +10,9 @@ void Thing::physical_training_tick(void)
   //
   // Place a limit on how much we can gain from training
   //
-  if (physical_training() > 5) { return; }
+  if (physical_training() > 5) {
+    return;
+  }
 
   //
   // Improvements get harder over time
@@ -42,7 +44,9 @@ void Thing::physical_training_tick(void)
 int Thing::physical_training(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->physical_training); }
+  if (maybe_infop()) {
+    return (infop()->physical_training);
+  }
   return 0;
 }
 

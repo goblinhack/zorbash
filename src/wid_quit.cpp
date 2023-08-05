@@ -38,7 +38,9 @@ static uint8_t wid_quit_yes(Widp w, int x, int y, uint32_t button)
         //
         // Poor player
         //
-        if (! player->score()) { player->score_incr(1); }
+        if (! player->score()) {
+          player->score_incr(1);
+        }
 
         if (game->config.hiscores.is_new_hiscore(player)) {
           if (game->robot_mode) {
@@ -88,7 +90,9 @@ static uint8_t wid_quit_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_NO_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   switch (key->mod) {
     case KMOD_LCTRL :
@@ -116,7 +120,9 @@ static uint8_t wid_quit_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_NO_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   return true;
 }
@@ -126,13 +132,19 @@ void Game::quit_select(void)
   TRACE_NO_INDENT();
   LOG("Quit select");
 
-  if (level && level->player) { wid_actionbar_robot_mode_off(); }
+  if (level && level->player) {
+    wid_actionbar_robot_mode_off();
+  }
 
-  if (wid_quit_window) { wid_quit_destroy(); }
+  if (wid_quit_window) {
+    wid_quit_destroy();
+  }
 
   auto m = TERM_WIDTH / 2;
   auto n = TERM_HEIGHT / 2;
-  if (game->started) { n = TERM_HEIGHT / 3; }
+  if (game->started) {
+    n = TERM_HEIGHT / 3;
+  }
   point tl    = make_point(m - UI_WID_POPUP_WIDTH_NORMAL / 2, n - 3);
   point br    = make_point(m + UI_WID_POPUP_WIDTH_NORMAL / 2, n + 3);
   auto  width = br.x - tl.x;

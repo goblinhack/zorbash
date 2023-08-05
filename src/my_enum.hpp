@@ -35,9 +35,13 @@ typedef std::map< std::string, uint32_t > enum_map;
   {                                                                                                                  \
     static const char *arr[] = {ENUM_NAME(ENUM_LIST_MACRO_STRING)};                                                  \
                                                                                                                      \
-    if (val >= (__typeof__(val)) ARRAY_SIZE(arr)) { return ("[bad]"); }                                              \
+    if (val >= (__typeof__(val)) ARRAY_SIZE(arr)) {                                                                  \
+      return ("[bad]");                                                                                              \
+    }                                                                                                                \
                                                                                                                      \
-    if (! arr[ val ]) { return ("[undefined]"); }                                                                    \
+    if (! arr[ val ]) {                                                                                              \
+      return ("[undefined]");                                                                                        \
+    }                                                                                                                \
                                                                                                                      \
     return (arr[ val ]);                                                                                             \
   }                                                                                                                  \
@@ -62,7 +66,9 @@ typedef std::map< std::string, uint32_t > enum_map;
       {                                                                                                              \
         auto result = enum_name##_tree.insert(std::make_pair(std::string(*iter), (uint32_t) (iter - arr)));          \
                                                                                                                      \
-        if (result.second == false) { ERR("enum insert name [%s] failed", *iter); }                                  \
+        if (result.second == false) {                                                                                \
+          ERR("enum insert name [%s] failed", *iter);                                                                \
+        }                                                                                                            \
       }                                                                                                              \
     }                                                                                                                \
                                                                                                                      \
@@ -71,7 +77,9 @@ typedef std::map< std::string, uint32_t > enum_map;
      */                                                                                                              \
     auto result = enum_name##_tree.find(std::string(val));                                                           \
                                                                                                                      \
-    if (result == enum_name##_tree.end()) { return ((enum_name) -1); }                                               \
+    if (result == enum_name##_tree.end()) {                                                                          \
+      return ((enum_name) -1);                                                                                       \
+    }                                                                                                                \
                                                                                                                      \
     return ((__typeof__(enum_name)) result->second);                                                                 \
   }                                                                                                                  \

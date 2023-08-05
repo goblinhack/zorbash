@@ -10,21 +10,37 @@
 point Thing::dir_to_direction(void)
 {
   TRACE_NO_INDENT();
-  if (is_dir_tl()) { return point(-1, -1); }
+  if (is_dir_tl()) {
+    return point(-1, -1);
+  }
 
-  if (is_dir_tr()) { return point(1, -1); }
+  if (is_dir_tr()) {
+    return point(1, -1);
+  }
 
-  if (is_dir_bl()) { return point(-1, 1); }
+  if (is_dir_bl()) {
+    return point(-1, 1);
+  }
 
-  if (is_dir_br()) { return point(1, 1); }
+  if (is_dir_br()) {
+    return point(1, 1);
+  }
 
-  if (is_dir_down()) { return point(0, 1); }
+  if (is_dir_down()) {
+    return point(0, 1);
+  }
 
-  if (is_dir_up()) { return point(0, -1); }
+  if (is_dir_up()) {
+    return point(0, -1);
+  }
 
-  if (is_dir_right()) { return point(1, 0); }
+  if (is_dir_right()) {
+    return point(1, 0);
+  }
 
-  if (is_dir_left()) { return point(-1, 0); }
+  if (is_dir_left()) {
+    return point(-1, 0);
+  }
   return point(0, 0);
 }
 
@@ -63,7 +79,9 @@ void Thing::move_set_dir_from_delta(point delta)
   // If not moving and this is the first move then break out of the
   // idle animation.
   //
-  if (is_dir_none()) { ts_next_frame = time_game_ms_cached(); }
+  if (is_dir_none()) {
+    ts_next_frame = time_game_ms_cached();
+  }
 
   if (delta.x < 0) {
     if (delta.y > 0) {

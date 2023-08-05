@@ -12,22 +12,32 @@ bool Thing::thing_sound_play(const std::string &alias)
 {
   TRACE_NO_INDENT();
 
-  if (g_opt_silent) { return true; }
+  if (g_opt_silent) {
+    return true;
+  }
 
   //
   // No sound if in a locked room
   //
   auto level = game->get_current_level();
-  if (! level) { return false; }
+  if (! level) {
+    return false;
+  }
   auto player = level->player;
-  if (! player) { return false; }
+  if (! player) {
+    return false;
+  }
   //
   // Avoid initial equip sounds
   //
-  if (! game->player_is_ready_for_messages) { return false; }
+  if (! game->player_is_ready_for_messages) {
+    return false;
+  }
 
   int distance = distance_to_player();
-  if (distance >= DMAP_IS_PASSABLE) { return true; }
+  if (distance >= DMAP_IS_PASSABLE) {
+    return true;
+  }
 
   auto sound = all_sound.find(alias);
   if (sound == all_sound.end()) {
@@ -64,7 +74,9 @@ bool Thing::thing_sound_play(const std::string &alias)
     }
   }
 
-  if (volume <= 0) { return true; }
+  if (volume <= 0) {
+    return true;
+  }
 
   Mix_VolumeChunk(sound->second->chunk, volume);
 
@@ -88,16 +100,24 @@ bool Thing::thing_sound_play_channel(int channel, const std::string &alias)
 {
   TRACE_NO_INDENT();
 
-  if (g_opt_silent) { return true; }
+  if (g_opt_silent) {
+    return true;
+  }
 
   auto level = game->get_current_level();
-  if (! level) { return false; }
+  if (! level) {
+    return false;
+  }
   auto player = level->player;
-  if (! player) { return false; }
+  if (! player) {
+    return false;
+  }
   //
   // Avoid initial equip sounds
   //
-  if (! game->player_is_ready_for_messages) { return false; }
+  if (! game->player_is_ready_for_messages) {
+    return false;
+  }
 
   int distance = distance_to_player();
   if (distance == DMAP_IS_WALL) {
@@ -152,7 +172,9 @@ bool Thing::thing_sound_play_channel(int channel, const std::string &alias)
     }
   }
 
-  if (volume <= 0) { return true; }
+  if (volume <= 0) {
+    return true;
+  }
 
   // con("  - vol(final) %f", volume);
 

@@ -100,7 +100,9 @@ static uint8_t wid_main_menu_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   switch (key->mod) {
     case KMOD_LCTRL :
@@ -132,7 +134,9 @@ static uint8_t wid_main_menu_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   //
   // Toggle gfx mode
@@ -156,7 +160,9 @@ static uint8_t wid_main_menu_key_down(Widp w, const struct SDL_Keysym *key)
 
 static void game_display_title_bg(void)
 {
-  if (g_opt_ascii) { return; }
+  if (g_opt_ascii) {
+    return;
+  }
 
   TRACE_AND_INDENT();
   glcolor(WHITE);
@@ -171,7 +177,9 @@ static void game_display_title_bg(void)
 static void game_display_title_fg1(void)
 {
   TRACE_AND_INDENT();
-  if (g_opt_ascii) { return; }
+  if (g_opt_ascii) {
+    return;
+  }
 
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -185,7 +193,9 @@ static void game_display_title_fg1(void)
 static void game_display_title_fg2(void)
 {
   TRACE_AND_INDENT();
-  if (g_opt_ascii) { return; }
+  if (g_opt_ascii) {
+    return;
+  }
 
   static color fg    = WHITE;
   static int   delta = 10;
@@ -216,8 +226,10 @@ static void game_display_title_fg2(void)
 
 static uint8_t clamp(float v) // define a function to bound and round the input float value to 0-255
 {
-  if (v < 0) return 0;
-  if (v > 255) return 255;
+  if (v < 0)
+    return 0;
+  if (v > 255)
+    return 255;
   return (uint8_t) v;
 }
 
@@ -248,28 +260,40 @@ color color_change_hue(const color &in, const float fHue)
 static void game_display_title_fg3(void)
 {
   TRACE_AND_INDENT();
-  if (g_opt_ascii) { return; }
+  if (g_opt_ascii) {
+    return;
+  }
 
   static color fg  = RED;
   static int   hue = 0;
 
   hue = 1;
-  if (hue > 255) { hue = 0; }
+  if (hue > 255) {
+    hue = 0;
+  }
 
   fg   = color_change_hue(fg, hue);
   fg.a = 255;
 
-  if (fg.r + fg.g + fg.b < 100) { fg = RED; }
+  if (fg.r + fg.g + fg.b < 100) {
+    fg = RED;
+  }
 
   float bright = 1.01;
   int   r      = ((float) fg.r) * bright;
-  if (r > 255) { r = 255; }
+  if (r > 255) {
+    r = 255;
+  }
   fg.r  = r;
   int g = ((float) fg.g) * bright;
-  if (g > 255) { g = 255; }
+  if (g > 255) {
+    g = 255;
+  }
   fg.g  = g;
   int b = ((float) fg.b) * bright;
-  if (b > 255) { b = 255; }
+  if (b > 255) {
+    b = 255;
+  }
   fg.b = b;
 
   glcolor(fg);
@@ -285,7 +309,9 @@ static void game_display_title_fg3(void)
 static void game_display_title_fg4(void)
 {
   TRACE_AND_INDENT();
-  if (g_opt_ascii) { return; }
+  if (g_opt_ascii) {
+    return;
+  }
 
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -295,7 +321,9 @@ static void game_display_title_fg4(void)
 
   if (time_have_x_tenths_passed_since(5, ts)) {
     frame++;
-    if (frame > 64) { frame = 1; }
+    if (frame > 64) {
+      frame = 1;
+    }
     ts = time_ms_cached();
   }
 
@@ -315,7 +343,9 @@ static void wid_main_menu_tick(Widp w)
   game_display_title_fg3();
   game_display_title_fg4();
 
-  if (game->started) { wid_main_menu_destroy(); }
+  if (game->started) {
+    wid_main_menu_destroy();
+  }
 
   //
   // Only show details on the main window; to avoid having to handle ascii mode changes in sub menus
@@ -347,7 +377,9 @@ void Game::wid_main_menu_select(void)
 
   py_call_void_fn("events", "on_main_menu_select", 0);
 
-  if (wid_main_menu_window) { wid_main_menu_destroy(); }
+  if (wid_main_menu_window) {
+    wid_main_menu_destroy();
+  }
   wid_rightbar_fini();
   wid_leftbar_fini();
   wid_inventory_fini();

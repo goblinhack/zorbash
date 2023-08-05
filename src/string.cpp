@@ -41,7 +41,9 @@ void strrepc(char *s, const char *replace_set, char replace_with)
   char *c;
 
   for (c = s; *c; c++) {
-    if (strchr(replace_set, *c)) { *c = replace_with; }
+    if (strchr(replace_set, *c)) {
+      *c = replace_with;
+    }
   }
 }
 
@@ -112,7 +114,9 @@ char *strsub_(const char *in, const char *look_for, const char *replace_with, co
   int         oldlen;
   int         len;
 
-  if (! in || ! look_for || ! replace_with) { return nullptr; }
+  if (! in || ! look_for || ! replace_with) {
+    return nullptr;
+  }
 
   // printf("in %s\n", in);
   // printf("  look for %s\n", look_for);
@@ -128,14 +132,18 @@ char *strsub_(const char *in, const char *look_for, const char *replace_with, co
 
   len = (uint32_t) strlen(in) - oldlen + newlen;
   buf = (__typeof__(buf)) myzalloc_(len + sizeof((char) '\0'), what, file, func, line);
-  if (! buf) { return nullptr; }
+  if (! buf) {
+    return nullptr;
+  }
 
   *buf = '\0';
   strlcpy_(buf, in, at - in + 1);
   strcat(buf, replace_with);
   strcat(buf, at + oldlen);
 
-  if (! strcmp(buf, in)) { return buf; }
+  if (! strcmp(buf, in)) {
+    return buf;
+  }
 
   auto out = strsub_(buf, look_for, replace_with, what, file, func, line);
   myfree(buf);
@@ -154,12 +162,16 @@ char *strappend(const char *in, const char *append)
   int   newlen;
   int   len;
 
-  if (! in || ! append) { return nullptr; }
+  if (! in || ! append) {
+    return nullptr;
+  }
 
   newlen = (uint32_t) strlen(append);
   len    = (uint32_t) strlen(in) + newlen;
   buf    = (__typeof__(buf)) myzalloc(len + sizeof((char) '\0'), "strappend");
-  if (! buf) { return nullptr; }
+  if (! buf) {
+    return nullptr;
+  }
 
   strcpy(buf, in);
   strcat(buf, append);
@@ -179,12 +191,16 @@ char *strprepend(const char *in, const char *prepend)
   int   newlen;
   int   len;
 
-  if (! in || ! prepend) { return nullptr; }
+  if (! in || ! prepend) {
+    return nullptr;
+  }
 
   newlen = (uint32_t) strlen(prepend);
   len    = (uint32_t) strlen(in) + newlen;
   buf    = (__typeof__(buf)) myzalloc(len + sizeof((char) '\0'), "strprepend");
-  if (! buf) { return nullptr; }
+  if (! buf) {
+    return nullptr;
+  }
 
   strcpy(buf, prepend);
   strcat(buf, in);
@@ -220,7 +236,9 @@ void strchop(char *s)
   char    *end;
 
   size = (uint32_t) strlen(s);
-  if (! size) { return; }
+  if (! size) {
+    return;
+  }
 
   end = s + size - 1;
   while ((end >= s) && (*end == ' ')) {
@@ -240,7 +258,9 @@ void strchopc(char *s, char c)
   char    *end;
 
   size = (uint32_t) strlen(s);
-  if (! size) { return; }
+  if (! size) {
+    return;
+  }
 
   end = s + size - 1;
   while ((end >= s) && (*end == c)) {
@@ -290,7 +310,9 @@ size_t strlcat_(char *dst, const char *src, size_t max_len)
   TRACE_NO_INDENT();
   uint32_t dstlen = strlen(dst);
   uint32_t srclen = strlen(src);
-  if (dstlen < max_len) { strlcpy_(dst + dstlen, src, max_len - dstlen); }
+  if (dstlen < max_len) {
+    strlcpy_(dst + dstlen, src, max_len - dstlen);
+  }
   return (dstlen + srclen);
 }
 
@@ -442,7 +464,8 @@ char *strcasestr_(const char *s, const char *find)
     len = strlen(find);
     do {
       do {
-        if ((sc = *s++) == 0) return nullptr;
+        if ((sc = *s++) == 0)
+          return nullptr;
       } while ((char) tolower((unsigned char) sc) != c);
     } while (strncasecmp(s, find, len) != 0);
     s--;
@@ -463,7 +486,9 @@ shared_vector_string split(const char *text, int max_line_len)
   char              c;
   const char *const text_start = text;
 
-  if (! text) { return nullptr; }
+  if (! text) {
+    return nullptr;
+  }
 
   auto result = std::make_shared< std::vector< std::string > >();
 
@@ -476,7 +501,9 @@ shared_vector_string split(const char *text, int max_line_len)
      * of them is forced.
      */
     if (text != text_start) {
-      if (*text == '\n') { text++; }
+      if (*text == '\n') {
+        text++;
+      }
     }
 
     while (*text == ' ') {
@@ -490,11 +517,15 @@ shared_vector_string split(const char *text, int max_line_len)
 
     while (line_len < max_line_len) {
       c = *text;
-      if ((c == '\n') || (c == '\0')) { break; }
+      if ((c == '\n') || (c == '\0')) {
+        break;
+      }
       line_len++;
 
       if (! found_format_string) {
-        if (c == '%') { found_format_string = true; }
+        if (c == '%') {
+          found_format_string = true;
+        }
       } else if (found_format_string) {
         if (! strncmp(text, "fg=", 3)) {
           text += 3;
@@ -554,7 +585,9 @@ shared_vector_string split(const char *text, int max_line_len)
       break;
     }
 
-    if (line_end == line_start) { line_end = text; }
+    if (line_end == line_start) {
+      line_end = text;
+    }
 
     /*
      * Skip leading junk.
@@ -579,10 +612,14 @@ shared_vector_string split(const char *text, int max_line_len)
     result->push_back(tmp);
 
     text = line_end;
-    if (! *text) { break; }
+    if (! *text) {
+      break;
+    }
 
     if (text == text_start) {
-      if (line_len == 0) { text++; }
+      if (line_len == 0) {
+        text++;
+      }
     }
   }
 
@@ -600,9 +637,13 @@ shared_vector_string split(const std::string &text, int max_line_len)
   auto    line_start = text_start;
   auto    line_end   = text_start;
 
-  if (max_line_len < 0) { DIE("bad max line len"); }
+  if (max_line_len < 0) {
+    DIE("bad max line len");
+  }
 
-  if (! text.length()) { return nullptr; }
+  if (! text.length()) {
+    return nullptr;
+  }
 
   // printf("SPLIT1 [%s] max_line_len %d\n", text.c_str(), max_line_len);
 
@@ -617,7 +658,9 @@ shared_vector_string split(const std::string &text, int max_line_len)
      * of them is forced.
      */
     if (text_iter != text_start) {
-      if (*text_iter == '\n') { text_iter++; }
+      if (*text_iter == '\n') {
+        text_iter++;
+      }
     }
 
     while (*text_iter == ' ') {
@@ -631,11 +674,15 @@ shared_vector_string split(const std::string &text, int max_line_len)
 
     while (line_len < max_line_len) {
       c = *text_iter;
-      if ((c == '\n') || (c == '\0')) { break; }
+      if ((c == '\n') || (c == '\0')) {
+        break;
+      }
       line_len++;
 
       if (! found_format_string) {
-        if (c == '%') { found_format_string = true; }
+        if (c == '%') {
+          found_format_string = true;
+        }
       } else if (found_format_string) {
         if (std::string(text_iter, text_iter + 3) == "fg=") {
           text_iter += 3;
@@ -718,7 +765,9 @@ shared_vector_string split(const std::string &text, int max_line_len)
       break;
     }
 
-    if (line_end == line_start) { line_end = text_iter; }
+    if (line_end == line_start) {
+      line_end = text_iter;
+    }
 
     /*
      * Skip leading junk.
@@ -743,10 +792,14 @@ shared_vector_string split(const std::string &text, int max_line_len)
     result->push_back(tmp);
 
     text_iter = line_end;
-    if (! *text_iter) { break; }
+    if (! *text_iter) {
+      break;
+    }
 
     if (text_iter == text_start) {
-      if (line_len == 0) { text_iter++; }
+      if (line_len == 0) {
+        text_iter++;
+      }
     }
   }
 
@@ -764,7 +817,9 @@ shared_vector_wstring split(const std::wstring &text, int max_line_len)
   auto    line_start = text_start;
   auto    line_end   = text_start;
 
-  if (! text.length()) { return nullptr; }
+  if (! text.length()) {
+    return nullptr;
+  }
   // printf("SPLIT2 [%s] max_line_len %d\n", wstring_to_string(text).c_str(),
   // max_line_len);
 
@@ -779,7 +834,9 @@ shared_vector_wstring split(const std::wstring &text, int max_line_len)
      * of them is forced.
      */
     if (text_iter != text_start) {
-      if (*text_iter == '\n') { text_iter++; }
+      if (*text_iter == '\n') {
+        text_iter++;
+      }
     }
 
     while (*text_iter == ' ') {
@@ -793,11 +850,15 @@ shared_vector_wstring split(const std::wstring &text, int max_line_len)
 
     while (line_len < max_line_len) {
       c = *text_iter;
-      if ((c == '\n') || (c == '\0')) { break; }
+      if ((c == '\n') || (c == '\0')) {
+        break;
+      }
       line_len++;
 
       if (! found_format_string) {
-        if (c == '%') { found_format_string = true; }
+        if (c == '%') {
+          found_format_string = true;
+        }
       } else if (found_format_string) {
         if (std::wstring(text_iter, text_iter + 3) == L"fg=") {
           text_iter += 3;
@@ -877,7 +938,9 @@ shared_vector_wstring split(const std::wstring &text, int max_line_len)
       break;
     }
 
-    if (line_end == line_start) { line_end = text_iter; }
+    if (line_end == line_start) {
+      line_end = text_iter;
+    }
 
     /*
      * Skip leading junk.
@@ -903,10 +966,14 @@ shared_vector_wstring split(const std::wstring &text, int max_line_len)
     result->push_back(tmp);
 
     text_iter = line_end;
-    if (! *text_iter) { break; }
+    if (! *text_iter) {
+      break;
+    }
 
     if (text_iter == text_start) {
-      if (line_len == 0) { text_iter++; }
+      if (line_len == 0) {
+        text_iter++;
+      }
     }
   }
 
@@ -926,11 +993,15 @@ int length_without_format(const std::string &text)
 
   for (;;) {
     c = *text_iter;
-    if (! c) { break; }
+    if (! c) {
+      break;
+    }
     line_len++;
 
     if (! found_format_string) {
-      if (c == '%') { found_format_string = true; }
+      if (c == '%') {
+        found_format_string = true;
+      }
     } else if (found_format_string) {
       if (std::string(text_iter, text_iter + 3) == "fg=") {
         text_iter += 3;
@@ -1010,11 +1081,15 @@ int length_without_format(const std::wstring &text)
 
   for (;;) {
     c = *text_iter;
-    if (! c) { break; }
+    if (! c) {
+      break;
+    }
     line_len++;
 
     if (! found_format_string) {
-      if (c == '%') { found_format_string = true; }
+      if (c == '%') {
+        found_format_string = true;
+      }
     } else if (found_format_string) {
       if (std::string(text_iter, text_iter + 3) == "fg=") {
         text_iter += 3;
@@ -1090,7 +1165,9 @@ Tpp string2tp(const char **s)
   char              *t      = tmp;
 
   while (t < eo_tmp) {
-    if ((*c == '\0') || (*c == '$')) { break; }
+    if ((*c == '\0') || (*c == '$')) {
+      break;
+    }
 
     *t++ = *c++;
   }
@@ -1104,7 +1181,9 @@ Tpp string2tp(const char **s)
   *s += (t - tmp);
 
   Tpp tp = tp_find(tmp);
-  if (unlikely(! tp)) { ERR("Tp name [%s] not found", tmp); }
+  if (unlikely(! tp)) {
+    ERR("Tp name [%s] not found", tmp);
+  }
 
   return tp;
 }
@@ -1118,13 +1197,17 @@ Tpp string2tp(const std::string &s, int *len)
   while (iter != s.end()) {
     auto c = *iter;
 
-    if ((c == '\0') || (c == '$')) { break; }
+    if ((c == '\0') || (c == '$')) {
+      break;
+    }
 
     out += c;
     iter++;
   }
 
-  if (len) { *len = iter - s.begin(); }
+  if (len) {
+    *len = iter - s.begin();
+  }
 
   if (iter == s.end()) {
     ERR("Tp name %s is too long", out.c_str());
@@ -1132,7 +1215,9 @@ Tpp string2tp(const std::string &s, int *len)
   }
 
   Tpp tp = tp_find(out);
-  if (unlikely(! tp)) { ERR("Tp name [%s] not found", out.c_str()); }
+  if (unlikely(! tp)) {
+    ERR("Tp name [%s] not found", out.c_str());
+  }
 
   return tp;
 }
@@ -1164,14 +1249,22 @@ int snprintf_realloc(char **str, int *size, int *used, const char *fmt, ...)
   va_list ap;
   char   *tmp;
 
-  if (! str) { return (-1); }
+  if (! str) {
+    return (-1);
+  }
 
-  if (! size) { return (-1); }
+  if (! size) {
+    return (-1);
+  }
 
   if (! *str) {
-    if (! *size) { *size = 128; }
+    if (! *size) {
+      *size = 128;
+    }
 
-    if (used) { *used = 0; }
+    if (used) {
+      *used = 0;
+    }
 
     *str = (char *) mymalloc(*size, "snprintf alloc");
     if (! *str) {
@@ -1200,7 +1293,9 @@ int snprintf_realloc(char **str, int *size, int *used, const char *fmt, ...)
     freespace = *size - usedspace;
 
     if (needspace < freespace) {
-      if (used) { *used += needspace; }
+      if (used) {
+        *used += needspace;
+      }
       strcat(*str, add);
 
       return 0;
@@ -1317,12 +1412,16 @@ std::string strerror_to_string(const int err)
   // GNU version returns a string pointer
   //
   const char *str = strerror_r(errno, err_out, MAX_ERRNO_BUF_SIZE);
-  if (str) { return std::string(str); }
+  if (str) {
+    return std::string(str);
+  }
 #else
   //
   // XSI version returns 0 on success
   //
-  if (! strerror_r(err, err_out, sizeof(err_out))) { return std::string(err_out); }
+  if (! strerror_r(err, err_out, sizeof(err_out))) {
+    return std::string(err_out);
+  }
 #endif
   return "Could not decode errno: " + std::to_string(err) + " strerror_r errno=" + std::to_string(errno);
 }
@@ -1341,7 +1440,9 @@ std::string capitalise(std::string in)
   bool  word_start = true;
   while (c < e) {
     if (word_start) {
-      if (islower(*c)) { *c = toupper(*c); }
+      if (islower(*c)) {
+        *c = toupper(*c);
+      }
       word_start = false;
     } else if (*c == ' ') {
       word_start = true;
@@ -1361,7 +1462,9 @@ void replace(std::string &input, const std::string &pattern, const std::string &
   size_t pos = 0;
   for (;;) {
     pos = input.find(pattern, pos);
-    if (pos == std::string::npos) { return; }
+    if (pos == std::string::npos) {
+      return;
+    }
     input.replace(pos, pattern.length(), replace_with);
     pos += replace_with.length();
   }

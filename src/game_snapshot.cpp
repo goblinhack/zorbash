@@ -9,11 +9,17 @@ void Game::save_snapshot_check(void)
 {
   TRACE_AND_INDENT();
 
-  if (! level) { return; }
+  if (! level) {
+    return;
+  }
 
-  if (! level->player) { return; }
+  if (! level->player) {
+    return;
+  }
 
-  if (level->player->is_dead) { return; }
+  if (level->player->is_dead) {
+    return;
+  }
 
   //
   // Periodic snapshot saves

@@ -39,7 +39,9 @@ void wid_rightbar_stats_over_def_b(Widp w, int relx, int rely, int wheelx, int w
 {
   TRACE_NO_INDENT();
 
-  if (wid_popup_exists()) { return; }
+  if (wid_popup_exists()) {
+    return;
+  }
 
   int tlx;
   int tly;
@@ -67,10 +69,14 @@ void wid_rightbar_stats_over_def_b(Widp w, int relx, int rely, int wheelx, int w
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
 
   auto level = game->get_current_level();
-  if (! level) { return; }
+  if (! level) {
+    return;
+  }
 
   auto player = level->player;
-  if (! player) { return; }
+  if (! player) {
+    return;
+  }
 
   {
     auto val = player->stat_def();
@@ -101,7 +107,9 @@ void wid_rightbar_stats_over_stat_str_b(Widp w, int relx, int rely, int wheelx, 
 {
   TRACE_NO_INDENT();
 
-  if (wid_popup_exists()) { return; }
+  if (wid_popup_exists()) {
+    return;
+  }
 
   int tlx;
   int tly;
@@ -128,10 +136,14 @@ void wid_rightbar_stats_over_stat_str_b(Widp w, int relx, int rely, int wheelx, 
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
 
   auto level = game->get_current_level();
-  if (! level) { return; }
+  if (! level) {
+    return;
+  }
 
   auto player = level->player;
-  if (! player) { return; }
+  if (! player) {
+    return;
+  }
 
   {
     auto val = player->stat_str();
@@ -161,7 +173,9 @@ void wid_rightbar_stats_over_stat_att_b(Widp w, int relx, int rely, int wheelx, 
 {
   TRACE_NO_INDENT();
 
-  if (wid_popup_exists()) { return; }
+  if (wid_popup_exists()) {
+    return;
+  }
 
   int tlx;
   int tly;
@@ -188,10 +202,14 @@ void wid_rightbar_stats_over_stat_att_b(Widp w, int relx, int rely, int wheelx, 
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
 
   auto level = game->get_current_level();
-  if (! level) { return; }
+  if (! level) {
+    return;
+  }
 
   auto player = level->player;
-  if (! player) { return; }
+  if (! player) {
+    return;
+  }
 
   {
     auto val = player->stat_att();
@@ -222,7 +240,9 @@ void wid_rightbar_stats_over_stat_con_b(Widp w, int relx, int rely, int wheelx, 
 {
   TRACE_NO_INDENT();
 
-  if (wid_popup_exists()) { return; }
+  if (wid_popup_exists()) {
+    return;
+  }
 
   int tlx;
   int tly;
@@ -252,10 +272,14 @@ void wid_rightbar_stats_over_stat_con_b(Widp w, int relx, int rely, int wheelx, 
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
 
   auto level = game->get_current_level();
-  if (! level) { return; }
+  if (! level) {
+    return;
+  }
 
   auto player = level->player;
-  if (! player) { return; }
+  if (! player) {
+    return;
+  }
 
   {
     auto val = player->stat_con();
@@ -286,7 +310,9 @@ void wid_rightbar_stats_over_stat_dex_b(Widp w, int relx, int rely, int wheelx, 
 {
   TRACE_NO_INDENT();
 
-  if (wid_popup_exists()) { return; }
+  if (wid_popup_exists()) {
+    return;
+  }
 
   int tlx;
   int tly;
@@ -317,10 +343,14 @@ void wid_rightbar_stats_over_stat_dex_b(Widp w, int relx, int rely, int wheelx, 
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
 
   auto level = game->get_current_level();
-  if (! level) { return; }
+  if (! level) {
+    return;
+  }
 
   auto player = level->player;
-  if (! player) { return; }
+  if (! player) {
+    return;
+  }
 
   {
     auto val = player->stat_dex();
@@ -351,7 +381,9 @@ void wid_rightbar_stats_over_stat_luck_b(Widp w, int relx, int rely, int wheelx,
 {
   TRACE_NO_INDENT();
 
-  if (wid_popup_exists()) { return; }
+  if (wid_popup_exists()) {
+    return;
+  }
 
   int tlx;
   int tly;
@@ -381,10 +413,14 @@ void wid_rightbar_stats_over_stat_luck_b(Widp w, int relx, int rely, int wheelx,
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
 
   auto level = game->get_current_level();
-  if (! level) { return; }
+  if (! level) {
+    return;
+  }
 
   auto player = level->player;
-  if (! player) { return; }
+  if (! player) {
+    return;
+  }
 
   {
     auto val = player->stat_luck();
@@ -415,7 +451,9 @@ void wid_rightbar_stats_over_stat_thv_b(Widp w, int relx, int rely, int wheelx, 
 {
   TRACE_NO_INDENT();
 
-  if (wid_popup_exists()) { return; }
+  if (wid_popup_exists()) {
+    return;
+  }
 
   int tlx;
   int tly;
@@ -445,10 +483,14 @@ void wid_rightbar_stats_over_stat_thv_b(Widp w, int relx, int rely, int wheelx, 
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
 
   auto level = game->get_current_level();
-  if (! level) { return; }
+  if (! level) {
+    return;
+  }
 
   auto player = level->player;
-  if (! player) { return; }
+  if (! player) {
+    return;
+  }
 
   {
     auto val = player->stat_thv();
@@ -479,7 +521,9 @@ void wid_rightbar_stats_over_stat_psi_b(Widp w, int relx, int rely, int wheelx, 
 {
   TRACE_NO_INDENT();
 
-  if (wid_popup_exists()) { return; }
+  if (wid_popup_exists()) {
+    return;
+  }
 
   int tlx;
   int tly;
@@ -510,10 +554,14 @@ void wid_rightbar_stats_over_stat_psi_b(Widp w, int relx, int rely, int wheelx, 
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
 
   auto level = game->get_current_level();
-  if (! level) { return; }
+  if (! level) {
+    return;
+  }
 
   auto player = level->player;
-  if (! player) { return; }
+  if (! player) {
+    return;
+  }
 
   {
     auto val = player->stat_psi();
@@ -544,7 +592,9 @@ void wid_rightbar_stats_over_stat_int_b(Widp w, int relx, int rely, int wheelx, 
 {
   TRACE_NO_INDENT();
 
-  if (wid_popup_exists()) { return; }
+  if (wid_popup_exists()) {
+    return;
+  }
 
   int tlx;
   int tly;
@@ -573,10 +623,14 @@ void wid_rightbar_stats_over_stat_int_b(Widp w, int relx, int rely, int wheelx, 
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
 
   auto level = game->get_current_level();
-  if (! level) { return; }
+  if (! level) {
+    return;
+  }
 
   auto player = level->player;
-  if (! player) { return; }
+  if (! player) {
+    return;
+  }
 
   {
     auto val = player->stat_int();
@@ -645,7 +699,9 @@ void wid_rightbar_inventory_over_begin(Widp w, int relx, int rely, int wheelx, i
   level->inventory_describe(slot);
 
   auto t = level->inventory_get(slot);
-  if (t) { game->wid_thing_info_create(t); }
+  if (t) {
+    game->wid_thing_info_create(t);
+  }
 }
 
 void wid_rightbar_inventory_over_end(Widp w)
@@ -674,7 +730,9 @@ void wid_rightbar_inventory_over_end(Widp w)
 
   DBG2("Inventory: Over inventory slot %d", slot);
   TRACE_AND_INDENT();
-  if (! level->inventory_over(slot)) { return; }
+  if (! level->inventory_over(slot)) {
+    return;
+  }
 
   game->wid_thing_info_destroy_deferred();
 
@@ -748,18 +806,26 @@ bool wid_rightbar_create(void)
   wid_rightbar_fini();
 
   auto level = game->get_current_level();
-  if (! level) { return false; }
+  if (! level) {
+    return false;
+  }
 
   auto player = level->player;
-  if (! player) { return false; }
+  if (! player) {
+    return false;
+  }
 
-  if (g_opt_ascii) { return wid_rightbar_ascii_create(); }
+  if (g_opt_ascii) {
+    return wid_rightbar_ascii_create();
+  }
   return wid_rightbar_pixelart_create();
 }
 
 bool is_mouse_over_rightbar(void)
 {
-  if (! wid_rightbar) { return false; }
+  if (! wid_rightbar) {
+    return false;
+  }
 
   //
   // If we are in the portion of the lower screen above the itembar
@@ -770,7 +836,9 @@ bool is_mouse_over_rightbar(void)
   pixel_to_ascii(&x, &y);
 
   static int tlx, tly, brx, bry, cached;
-  if (cached != TERM_HEIGHT) { cached = TERM_HEIGHT; }
+  if (cached != TERM_HEIGHT) {
+    cached = TERM_HEIGHT;
+  }
 
   wid_get_tl_x_tl_y_br_x_br_y(wid_rightbar, &tlx, &tly, &brx, &bry);
 

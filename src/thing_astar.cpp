@@ -24,8 +24,12 @@ public:
 
   bool operator<(const Nodecost &rhs) const
   {
-    if (cost < rhs.cost) { return true; }
-    if (cost > rhs.cost) { return false; }
+    if (cost < rhs.cost) {
+      return true;
+    }
+    if (cost > rhs.cost) {
+      return false;
+    }
     return (tiebreak < rhs.tiebreak);
   }
 
@@ -121,13 +125,19 @@ public:
     }
 
     // Ignore walls.
-    if (get(dmap->val, next_hop.x, next_hop.y) == DMAP_IS_WALL) { return; }
+    if (get(dmap->val, next_hop.x, next_hop.y) == DMAP_IS_WALL) {
+      return;
+    }
 
     // If in the closed set already, ignore.
-    if (closed[ next_hop.x ][ next_hop.y ]) { return; }
+    if (closed[ next_hop.x ][ next_hop.y ]) {
+      return;
+    }
 
     int distance_to_next_hop = get(dmap->val, next_hop.x, next_hop.y);
-    if (distance_to_next_hop == DMAP_IS_PASSABLE) { distance_to_next_hop = 0; }
+    if (distance_to_next_hop == DMAP_IS_PASSABLE) {
+      distance_to_next_hop = 0;
+    }
 
     int  cost     = current->cost.cost + distance_to_next_hop + heuristic(next_hop);
     auto neighbor = get(open, next_hop.x, next_hop.y);
@@ -151,8 +161,12 @@ public:
   {
     for (auto y = 0; y < MAP_HEIGHT; y++) {
       for (auto x = 0; x < MAP_WIDTH; x++) {
-        if (open[ x ][ y ]) { delete (open[ x ][ y ]); }
-        if (closed[ x ][ y ]) { delete (closed[ x ][ y ]); }
+        if (open[ x ][ y ]) {
+          delete (open[ x ][ y ]);
+        }
+        if (closed[ x ][ y ]) {
+          delete (closed[ x ][ y ]);
+        }
       }
     }
   }
@@ -210,7 +224,9 @@ public:
         auto [ path, cost ] = create_path(dmap, current);
 
         if (cost < best.cost) {
-          if (goalp) { best.goal = *goalp; }
+          if (goalp) {
+            best.goal = *goalp;
+          }
           best.path = path;
           best.cost = cost;
 #ifdef ENABLE_DEBUG_AI_ASTAR
@@ -238,7 +254,9 @@ public:
         if (dist < fallback_dist) {
           fallback_dist       = dist;
           auto [ path, cost ] = create_path(dmap, current);
-          if (goalp) { fallback.goal = *goalp; }
+          if (goalp) {
+            fallback.goal = *goalp;
+          }
           fallback.path = path;
           fallback.cost = cost;
         }
@@ -288,12 +306,20 @@ void astar_dump(const Dmap *dmap, const point at, const point start, const point
   for (y = start.y - 10; y < end.y + 10; y++) {
     std::string s;
 
-    if (y < 0) { continue; }
-    if (y >= MAP_WIDTH) { continue; }
+    if (y < 0) {
+      continue;
+    }
+    if (y >= MAP_WIDTH) {
+      continue;
+    }
 
     for (x = start.x - 10; x < end.x + 10; x++) {
-      if (x < 0) { continue; }
-      if (x >= MAP_WIDTH) { continue; }
+      if (x < 0) {
+        continue;
+      }
+      if (x >= MAP_WIDTH) {
+        continue;
+      }
 
       uint16_t e = get(dmap->val, x, y);
 
@@ -308,10 +334,14 @@ void astar_dump(const Dmap *dmap, const point at, const point start, const point
         buf = "*  ";
       }
 
-      if (point(x, y) == at) { buf = " @ "; }
+      if (point(x, y) == at) {
+        buf = " @ ";
+      }
 
 #ifdef ENABLE_DEBUG_AI_ASTAR
-      if (get(astar_debug, x, y)) { buf[ 2 ] = get(astar_debug, x, y); }
+      if (get(astar_debug, x, y)) {
+        buf[ 2 ] = get(astar_debug, x, y);
+      }
 #endif
       s += buf;
     }

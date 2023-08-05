@@ -9,7 +9,9 @@
 
 uint8_t Level::heatmap(const point p)
 {
-  if (unlikely(is_oob(p.x, p.y))) { return false; }
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
   return (get(_heatmap, p.x, p.y));
 }
 
@@ -17,7 +19,9 @@ uint8_t Level::heatmap_no_check(const point p) { return (get_no_check(_heatmap, 
 
 uint8_t Level::heatmap(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) { return false; }
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
   return (get(_heatmap, x, y));
 }
 
@@ -25,26 +29,36 @@ uint8_t Level::heatmap_no_check(const int x, const int y) { return (get_no_check
 
 void Level::heatmap_incr(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) { return; }
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
   uint8_t v = get(_heatmap, x, y);
-  if (v < 255) { set(_heatmap, x, y, (uint8_t) (v + 1)); }
+  if (v < 255) {
+    set(_heatmap, x, y, (uint8_t) (v + 1));
+  }
 }
 
 void Level::heatmap_no_check_incr(const int x, const int y, int dv)
 {
   uint8_t v = get_no_check(_heatmap, x, y);
-  if (v < 255) { set_no_check(_heatmap, x, y, (uint8_t) (v + dv)); }
+  if (v < 255) {
+    set_no_check(_heatmap, x, y, (uint8_t) (v + dv));
+  }
 }
 
 void Level::heatmap_no_check_incr(const int x, const int y)
 {
   uint8_t v = get_no_check(_heatmap, x, y);
-  if (v < 255) { set_no_check(_heatmap, x, y, (uint8_t) (v + 1)); }
+  if (v < 255) {
+    set_no_check(_heatmap, x, y, (uint8_t) (v + 1));
+  }
 }
 
 void Level::heatmap_unset(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) { return; }
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
   set(_heatmap, x, y, (uint8_t) 0);
 }
 
@@ -69,7 +83,9 @@ void Level::update_heatmap(void)
         heatmap_no_check_incr(x - 1, y - 1);
       }
 
-      if (is_brazier_no_check(x, y)) { heatmap_no_check_incr(x, y, 5); }
+      if (is_brazier_no_check(x, y)) {
+        heatmap_no_check_incr(x, y, 5);
+      }
 
       if (is_fire_no_check(x, y)) {
         heatmap_no_check_incr(x + 1, y + 1);
@@ -109,10 +125,18 @@ void Level::heatmap_print(point at, point tl, point br)
     maxy = tl.y;
   }
 
-  if (minx < 0) { minx = 0; }
-  if (miny < 0) { miny = 0; }
-  if (maxx >= MAP_WIDTH) { maxx = MAP_WIDTH - 1; }
-  if (maxy >= MAP_HEIGHT) { maxy = MAP_HEIGHT - 1; }
+  if (minx < 0) {
+    minx = 0;
+  }
+  if (miny < 0) {
+    miny = 0;
+  }
+  if (maxx >= MAP_WIDTH) {
+    maxx = MAP_WIDTH - 1;
+  }
+  if (maxy >= MAP_HEIGHT) {
+    maxy = MAP_HEIGHT - 1;
+  }
 
   bool all_walls;
 
@@ -124,7 +148,9 @@ void Level::heatmap_print(point at, point tl, point br)
     for (y = miny; (y < maxy) && all_walls; y++) {
       all_walls = is_wall(x, y);
     }
-    if (all_walls) { minx = x; }
+    if (all_walls) {
+      minx = x;
+    }
   }
 
   all_walls = true;
@@ -132,7 +158,9 @@ void Level::heatmap_print(point at, point tl, point br)
     for (y = miny; (y < maxy) && all_walls; y++) {
       all_walls = is_wall(x, y);
     }
-    if (all_walls) { maxx = x; }
+    if (all_walls) {
+      maxx = x;
+    }
   }
 
   all_walls = true;
@@ -140,7 +168,9 @@ void Level::heatmap_print(point at, point tl, point br)
     for (x = minx; (x < maxx) && all_walls; x++) {
       all_walls = is_wall(x, y);
     }
-    if (all_walls) { miny = y; }
+    if (all_walls) {
+      miny = y;
+    }
   }
 
   all_walls = true;
@@ -148,7 +178,9 @@ void Level::heatmap_print(point at, point tl, point br)
     for (x = minx; (x < maxx) && all_walls; x++) {
       all_walls = is_wall(x, y);
     }
-    if (all_walls) { maxy = y; }
+    if (all_walls) {
+      maxy = y;
+    }
   }
 
   LOG("HEATMAP: tl %d,%d br %d %d at %d,%d", minx, miny, maxx, maxy, at.x, at.y);

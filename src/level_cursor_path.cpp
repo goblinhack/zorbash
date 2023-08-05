@@ -38,22 +38,34 @@ void Level::cursor_path_draw_circle(void)
   auto dist    = distance(player->curr_at, curr_at);
 
   if (game->request_to_throw_item) {
-    if (dist > player->distance_throw_get()) { too_far = true; }
+    if (dist > player->distance_throw_get()) {
+      too_far = true;
+    }
   } else if (game->request_to_use_item) {
-    if (dist > what->range_max()) { too_far = true; }
+    if (dist > what->range_max()) {
+      too_far = true;
+    }
   }
 
   for (auto x = curr_at.x - radius_max; x <= curr_at.x + radius_max; x++) {
     for (auto y = curr_at.y - radius_max; y <= curr_at.y + radius_max; y++) {
       float dist = DISTANCE(x, y, curr_at.x, curr_at.y);
 
-      if (unlikely(is_oob(x, y))) { continue; }
+      if (unlikely(is_oob(x, y))) {
+        continue;
+      }
 
-      if (dist > radius_max + 0.5) { continue; }
+      if (dist > radius_max + 0.5) {
+        continue;
+      }
 
-      if (dist < radius_min) { continue; }
+      if (dist < radius_min) {
+        continue;
+      }
 
-      if (is_rock(x, y) || is_wall(x, y)) { continue; }
+      if (is_rock(x, y) || is_wall(x, y)) {
+        continue;
+      }
 
       if (too_far) {
         game->request_destination_ok = false;
@@ -87,7 +99,9 @@ std::vector< point > Level::cursor_path_draw_line_attempt(Thingp it, point start
   //
   // Allow the player to see into the shadows
   //
-  if (! can_see_point_or_nearby(end, THING_CAN_SEE_INTO_SHADOWS_DISTANCE)) { return empty; }
+  if (! can_see_point_or_nearby(end, THING_CAN_SEE_INTO_SHADOWS_DISTANCE)) {
+    return empty;
+  }
 
   int minx, miny, maxx, maxy;
   if (dmap_start.x < dmap_end.x) {
@@ -111,15 +125,25 @@ std::vector< point > Level::cursor_path_draw_line_attempt(Thingp it, point start
   maxx += border;
   maxy += border;
 
-  if (minx < 0) { minx = 0; }
-  if (miny < 0) { miny = 0; }
-  if (maxx >= MAP_WIDTH) { maxx = MAP_WIDTH - 1; }
-  if (maxy >= MAP_HEIGHT) { maxy = MAP_HEIGHT - 1; }
+  if (minx < 0) {
+    minx = 0;
+  }
+  if (miny < 0) {
+    miny = 0;
+  }
+  if (maxx >= MAP_WIDTH) {
+    maxx = MAP_WIDTH - 1;
+  }
+  if (maxy >= MAP_HEIGHT) {
+    maxy = MAP_HEIGHT - 1;
+  }
 
   //
   // If clicking on a wall, don't walk into it.
   //
-  if (cursor && is_cursor_path_blocker(it, cursor->curr_at.x, cursor->curr_at.y)) { return empty; }
+  if (cursor && is_cursor_path_blocker(it, cursor->curr_at.x, cursor->curr_at.y)) {
+    return empty;
+  }
 
   //
   // If standing on a hazard, then plot a course that allows travel over hazards.
@@ -157,12 +181,16 @@ std::vector< point > Level::cursor_path_draw_line_attempt(Thingp it, point start
   if (attempt == 1) {
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
-        if (! is_walked(x, y)) { set(d.val, x, y, DMAP_IS_WALL); }
+        if (! is_walked(x, y)) {
+          set(d.val, x, y, DMAP_IS_WALL);
+        }
 
         //
         // Probably best to not use tiles where there is a monster
         //
-        if (is_monst(x, y)) { set(d.val, x, y, DMAP_IS_WALL); }
+        if (is_monst(x, y)) {
+          set(d.val, x, y, DMAP_IS_WALL);
+        }
       }
     }
   }
@@ -236,7 +264,9 @@ bool Level::cursor_path_draw_line(Thingp it, point start, point end)
 
   for (auto &c : best) {
     if (cursor && cursor->is_visible()) {
-      if ((c.x == cursor_at.x) && (c.y == cursor_at.y)) { continue; }
+      if ((c.x == cursor_at.x) && (c.y == cursor_at.y)) {
+        continue;
+      }
     }
 
     //
@@ -270,7 +300,9 @@ void Level::cursor_path_draw_straight_line(Thingp it, point start, point end)
 
   for (auto &c : ::line(start, end)) {
     if (cursor && cursor->is_visible()) {
-      if ((c.x == cursor_at.x) && (c.y == cursor_at.y)) { continue; }
+      if ((c.x == cursor_at.x) && (c.y == cursor_at.y)) {
+        continue;
+      }
     }
 
     //
@@ -293,7 +325,9 @@ bool Level::cursor_path_draw_line(Thingp it, const std::vector< point > &move_pa
 
   for (auto &c : move_path) {
     if (cursor && cursor->is_visible()) {
-      if ((c.x == cursor_at.x) && (c.y == cursor_at.y)) { continue; }
+      if ((c.x == cursor_at.x) && (c.y == cursor_at.y)) {
+        continue;
+      }
     }
 
     //
@@ -379,7 +413,9 @@ void Level::cursor_path_draw(Thingp it)
     return;
   }
 
-  if (game->request_to_throw_item) { cursor_path_draw_circle(); }
+  if (game->request_to_throw_item) {
+    cursor_path_draw_circle();
+  }
 
   //
   // Let's see the path
@@ -497,21 +533,27 @@ void Level::cursor_path_clear(void)
 uint8_t Level::is_cursor_path_hazard(const point p)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(p.x, p.y))) { return false; }
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
   return (get(_is_cursor_path_hazard, p.x, p.y));
 }
 
 uint8_t Level::is_cursor_path_hazard(const int x, const int y)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) { return false; }
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
   return (get(_is_cursor_path_hazard, x, y));
 }
 
 void Level::is_cursor_path_hazard_set(const int x, const int y)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) { return; }
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
   is_map_changed = true;
   incr(_is_cursor_path_hazard, x, y, (uint8_t) 1);
 }
@@ -519,7 +561,9 @@ void Level::is_cursor_path_hazard_set(const int x, const int y)
 void Level::is_cursor_path_hazard_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) { return; }
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
   is_map_changed = true;
   decr(_is_cursor_path_hazard, x, y, (uint8_t) 1);
 }
@@ -530,10 +574,14 @@ uint8_t Level::is_cursor_path_blocker(Thingp it, const int x, const int y)
 {
   TRACE_NO_INDENT();
 
-  if (unlikely(is_oob(x, y))) { return true; }
+  if (unlikely(is_oob(x, y))) {
+    return true;
+  }
 
   if (it && it->is_able_to_walk_through_walls()) {
-    if (is_obs_wall_or_door(x, y)) { return false; }
+    if (is_obs_wall_or_door(x, y)) {
+      return false;
+    }
   }
 
   return (get(_is_cursor_path_blocker, x, y));
@@ -542,7 +590,9 @@ uint8_t Level::is_cursor_path_blocker(Thingp it, const int x, const int y)
 void Level::is_cursor_path_blocker_set(const int x, const int y)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) { return; }
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
   is_map_changed = true;
   incr(_is_cursor_path_blocker, x, y, (uint8_t) 1);
 }
@@ -550,7 +600,9 @@ void Level::is_cursor_path_blocker_set(const int x, const int y)
 void Level::is_cursor_path_blocker_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) { return; }
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
   is_map_changed = true;
   decr(_is_cursor_path_blocker, x, y, (uint8_t) 1);
 }

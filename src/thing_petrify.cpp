@@ -15,7 +15,9 @@ int Thing::is_stone(void)
 {
   TRACE_NO_INDENT();
   if (on_death_is_stone()) {
-    if (is_dead) { return true; }
+    if (is_dead) {
+      return true;
+    }
   }
   return (tp()->is_stone());
 }

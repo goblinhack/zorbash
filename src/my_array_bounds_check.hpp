@@ -37,7 +37,9 @@ static inline void decr(std::array< TYPE, XDIM > &container, std::size_t X, TYPE
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
   }
-  if (container[ X ]) { container[ X ] -= v; }
+  if (container[ X ]) {
+    container[ X ] -= v;
+  }
 }
 
 template < class TYPE, std::size_t XDIM > static inline void incr(std::array< TYPE, XDIM > &container, std::size_t X)
@@ -146,7 +148,9 @@ static inline void decr(std::array< std::array< TYPE, YDIM >, XDIM > &container,
     ASSERT_EX(Y, >=, 0)
     ASSERT_EX(Y, <, container[ X ].size())
   }
-  if (container[ X ][ Y ]) { container[ X ][ Y ] -= v; }
+  if (container[ X ][ Y ]) {
+    container[ X ][ Y ] -= v;
+  }
 }
 
 template < class TYPE, std::size_t XDIM, std::size_t YDIM >

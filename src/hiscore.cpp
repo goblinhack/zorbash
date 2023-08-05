@@ -61,7 +61,9 @@ bool HiScores::is_new_hiscore(Thingp player)
   }
 
   while (h != hiscores.end()) {
-    if (player->score() > h->score) { return true; }
+    if (player->score() > h->score) {
+      return true;
+    }
     h++;
   }
 
@@ -102,7 +104,9 @@ const char *HiScores::place_str(Thingp player)
   auto h = hiscores.begin();
 
   while (h != hiscores.end()) {
-    if (player->score() > h->score) { return (which[ h - hiscores.begin() ]); }
+    if (player->score() > h->score) {
+      return (which[ h - hiscores.begin() ]);
+    }
     h++;
   }
   return ("");
@@ -116,7 +120,9 @@ std::istream &operator>>(std::istream &in, Bits< HiScore & > my)
   in >> bits(my.t.defeated_by);
   in >> bits(my.t.score);
   in >> bits(my.t.level_reached);
-  if (my.t.defeated_by.empty()) { my.t.defeated_by = "No one"; }
+  if (my.t.defeated_by.empty()) {
+    my.t.defeated_by = "No one";
+  }
   return in;
 }
 

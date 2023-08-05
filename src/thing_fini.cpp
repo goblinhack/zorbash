@@ -48,8 +48,12 @@ void Thing::destroy(void)
     auto i_o = immediate_owner();
     if (i_o) {
       auto top_o = top_owner();
-      if (top_o) { dbg2("Is being destroyed, has top owner: %s", top_o->to_string().c_str()); }
-      if (top_o != i_o) { dbg2("Is being destroyed, has immediate owner: %s", i_o->to_string().c_str()); }
+      if (top_o) {
+        dbg2("Is being destroyed, has top owner: %s", top_o->to_string().c_str());
+      }
+      if (top_o != i_o) {
+        dbg2("Is being destroyed, has immediate owner: %s", i_o->to_string().c_str());
+      }
     }
   }
   TRACE_AND_INDENT();
@@ -96,14 +100,22 @@ void Thing::destroy(void)
     }
   }
 
-  if (level->hover_over == this) { level->hover_over = nullptr; }
+  if (level->hover_over == this) {
+    level->hover_over = nullptr;
+  }
 
-  if (level->highlight == this) { level->highlight = nullptr; }
+  if (level->highlight == this) {
+    level->highlight = nullptr;
+  }
 
-  if (level->player == this) { level->player = nullptr; }
+  if (level->player == this) {
+    level->player = nullptr;
+  }
 
   for (auto b : game->bags) {
-    if (b->bag == this) { b->bag = nullptr; }
+    if (b->bag == this) {
+      b->bag = nullptr;
+    }
   }
 
   //
@@ -122,7 +134,9 @@ void Thing::destroy(void)
   //
   {
     auto found = std::find(game->popups.begin(), game->popups.end(), this);
-    if (found != game->popups.end()) { game->popups.erase(found); }
+    if (found != game->popups.end()) {
+      game->popups.erase(found);
+    }
   }
 
   if (level->cursor == this) {
@@ -140,15 +154,25 @@ void Thing::destroy(void)
     game->request_destination_ok = false;
   }
 
-  if (game->current_wid_thing_info == this) { game->current_wid_thing_info = nullptr; }
+  if (game->current_wid_thing_info == this) {
+    game->current_wid_thing_info = nullptr;
+  }
 
-  if (game->request_inventory_thing_over == this) { game->request_inventory_thing_over = nullptr; }
+  if (game->request_inventory_thing_over == this) {
+    game->request_inventory_thing_over = nullptr;
+  }
 
-  if (game->request_inventory_thing_selected == this) { game->request_inventory_thing_selected = nullptr; }
+  if (game->request_inventory_thing_selected == this) {
+    game->request_inventory_thing_selected = nullptr;
+  }
 
-  if (wid_inventory_thing_over == this) { wid_inventory_thing_over = nullptr; }
+  if (wid_inventory_thing_over == this) {
+    wid_inventory_thing_over = nullptr;
+  }
 
-  if (wid_inventory_thing_selected == this) { wid_inventory_thing_selected = nullptr; }
+  if (wid_inventory_thing_selected == this) {
+    wid_inventory_thing_selected = nullptr;
+  }
 
   for (const auto w : wid_thing_info_window) {
     if (w->t == this) {
@@ -157,9 +181,13 @@ void Thing::destroy(void)
     }
   }
 
-  if (has_external_particle) { err("Still has external particle"); }
+  if (has_external_particle) {
+    err("Still has external particle");
+  }
 
-  if (has_internal_particle) { err("Still has external particle"); }
+  if (has_internal_particle) {
+    err("Still has external particle");
+  }
 
   game->world.free_thing_id(this);
 

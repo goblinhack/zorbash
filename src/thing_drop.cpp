@@ -16,16 +16,22 @@ void Thing::on_dropped(void)
   TRACE_NO_INDENT();
 
   auto on_dropped = tp()->on_dropped_do();
-  if (std::empty(on_dropped)) { return; }
+  if (std::empty(on_dropped)) {
+    return;
+  }
 
   auto t = split_tokens(on_dropped, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = name(); }
+    if (mod == "me") {
+      mod = name();
+    }
 
     dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
@@ -166,7 +172,9 @@ bool Thing::drop(Thingp what, Thingp target, DropOptions drop_options)
   } else if (drop_options.is_being_stolen) {
     dbg("Dropped (being stolen) %s", what->to_short_string().c_str());
     if (is_player()) {
-      if (! is_dead_or_dying()) { msg("You feel lighter."); }
+      if (! is_dead_or_dying()) {
+        msg("You feel lighter.");
+      }
     }
   } else {
     dbg("Dropped %s", what->to_short_string().c_str());
@@ -241,7 +249,9 @@ bool Thing::drop_into_ether(Thingp what)
   if (top_owner) {
     FOR_ALL_EQUIP(e)
     {
-      if (what == top_owner->equip_get(e)) { top_owner->unequip("moved into ether", e, true); }
+      if (what == top_owner->equip_get(e)) {
+        top_owner->unequip("moved into ether", e, true);
+      }
     }
 
     if (top_owner->is_player()) {
@@ -358,12 +368,16 @@ bool Thing::drop(Thingp what, DropOptions drop_options) { return drop(what, null
 void Thing::drop_all(void)
 {
   TRACE_NO_INDENT();
-  if (! maybe_itemsp()) { return; }
+  if (! maybe_itemsp()) {
+    return;
+  }
 
   while (! itemsp()->carrying.empty()) {
     auto id = *itemsp()->carrying.begin();
     auto t  = level->thing_find(id);
-    if (unlikely(! t)) { return; }
+    if (unlikely(! t)) {
+      return;
+    }
     drop(t);
   }
 }

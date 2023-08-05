@@ -16,7 +16,9 @@ void wid_leftbar_fini(void)
   wid_destroy(&wid_leftbar);
 
   auto level = game->get_current_level();
-  if (level) { level->wid_leftbar_things = {}; }
+  if (level) {
+    level->wid_leftbar_things = {};
+  }
 }
 
 bool wid_leftbar_init(void)
@@ -31,12 +33,16 @@ bool wid_leftbar_create(void)
   wid_leftbar_fini();
 
   auto level = game->get_current_level();
-  if (! level) { return false; }
+  if (! level) {
+    return false;
+  }
 
   level->wid_leftbar_things = {};
 
   auto player = level->player;
-  if (! player) { return false; }
+  if (! player) {
+    return false;
+  }
 
   switch (game->state) {
     case Game::STATE_NORMAL : break;

@@ -87,7 +87,9 @@ void wid_actionbar_close_all_popups(void)
 void wid_actionbar_fini(void)
 {
   TRACE_NO_INDENT();
-  if (wid_actionbar) { wid_destroy_nodelay(&wid_actionbar); }
+  if (wid_actionbar) {
+    wid_destroy_nodelay(&wid_actionbar);
+  }
 }
 
 uint8_t wid_actionbar_quit(Widp w, int x, int y, uint32_t button)
@@ -109,7 +111,9 @@ void wid_actionbar_quit_over_begin(Widp w, int relx, int rely, int wheelx, int w
 {
   TRACE_NO_INDENT();
 
-  if (wid_popup_exists()) { return; }
+  if (wid_popup_exists()) {
+    return;
+  }
 
   int tlx;
   int tly;
@@ -166,7 +170,9 @@ void wid_actionbar_robot_mode_update(void)
 
   wid_actionbar_close_all_popups();
   if (game->level) {
-    if (game->level->player) { game->level->player->clear_move_path("Quit selected"); }
+    if (game->level->player) {
+      game->level->player->clear_move_path("Quit selected");
+    }
     game->level->debug_path_clear();
   }
   game->request_to_remake_actionbar = true;
@@ -175,14 +181,18 @@ void wid_actionbar_robot_mode_update(void)
 void wid_actionbar_robot_mode_off(void)
 {
   TRACE_NO_INDENT();
-  if (! game->robot_mode) { return; }
+  if (! game->robot_mode) {
+    return;
+  }
 
   DBG3("Actionbar robot");
   TRACE_NO_INDENT();
 
   wid_actionbar_close_all_popups();
   if (game->level) {
-    if (game->level->player) { game->level->player->clear_move_path("Quit selected"); }
+    if (game->level->player) {
+      game->level->player->clear_move_path("Quit selected");
+    }
     game->level->debug_path_clear();
   }
   game->robot_mode_requested        = false;
@@ -201,7 +211,9 @@ void wid_actionbar_robot_over_begin(Widp w, int relx, int rely, int wheelx, int 
 {
   TRACE_NO_INDENT();
 
-  if (wid_popup_exists()) { return; }
+  if (wid_popup_exists()) {
+    return;
+  }
 
   int tlx;
   int tly;
@@ -262,12 +274,18 @@ uint8_t wid_actionbar_close(Widp w, int x, int y, uint32_t button)
   DBG3("Actionbar close");
   TRACE_NO_INDENT();
 
-  if (! game->level) { return true; }
+  if (! game->level) {
+    return true;
+  }
 
   auto player = game->level->player;
-  if (! player) { return true; }
+  if (! player) {
+    return true;
+  }
 
-  if (player->is_dead) { return true; }
+  if (player->is_dead) {
+    return true;
+  }
 
   wid_actionbar_close_all_popups();
   game->request_to_remake_actionbar = true;
@@ -283,12 +301,18 @@ uint8_t wid_actionbar_load(Widp w, int x, int y, uint32_t button)
   DBG3("Actionbar load");
   TRACE_NO_INDENT();
 
-  if (! game->level) { return true; }
+  if (! game->level) {
+    return true;
+  }
 
   auto player = game->level->player;
-  if (! player) { return true; }
+  if (! player) {
+    return true;
+  }
 
-  if (player->is_dead) { return true; }
+  if (player->is_dead) {
+    return true;
+  }
 
   wid_actionbar_close_all_popups();
   if (wid_load) {
@@ -305,7 +329,9 @@ void wid_actionbar_load_over_begin(Widp w, int relx, int rely, int wheelx, int w
 {
   TRACE_NO_INDENT();
 
-  if (wid_popup_exists()) { return; }
+  if (wid_popup_exists()) {
+    return;
+  }
 
   int tlx;
   int tly;
@@ -352,12 +378,18 @@ uint8_t wid_actionbar_save(Widp w, int x, int y, uint32_t button)
   DBG3("Actionbar save");
   TRACE_NO_INDENT();
 
-  if (! game->level) { return true; }
+  if (! game->level) {
+    return true;
+  }
 
   auto player = game->level->player;
-  if (! player) { return true; }
+  if (! player) {
+    return true;
+  }
 
-  if (player->is_dead) { return true; }
+  if (player->is_dead) {
+    return true;
+  }
 
   wid_actionbar_close_all_popups();
   if (wid_save) {
@@ -374,7 +406,9 @@ void wid_actionbar_save_over_begin(Widp w, int relx, int rely, int wheelx, int w
 {
   TRACE_NO_INDENT();
 
-  if (wid_popup_exists()) { return; }
+  if (wid_popup_exists()) {
+    return;
+  }
 
   int tlx;
   int tly;
@@ -421,12 +455,18 @@ uint8_t wid_actionbar_ascend(Widp w, int x, int y, uint32_t button)
   DBG3("Actionbar ascend");
   TRACE_NO_INDENT();
 
-  if (! game->level) { return true; }
+  if (! game->level) {
+    return true;
+  }
 
   auto player = game->level->player;
-  if (! player) { return true; }
+  if (! player) {
+    return true;
+  }
 
-  if (player->is_dead) { return true; }
+  if (player->is_dead) {
+    return true;
+  }
 
   wid_actionbar_close_all_popups();
   game->request_player_to_ascend_level = true;
@@ -441,7 +481,9 @@ void wid_actionbar_ascend_over_begin(Widp w, int relx, int rely, int wheelx, int
 {
   TRACE_NO_INDENT();
 
-  if (wid_popup_exists()) { return; }
+  if (wid_popup_exists()) {
+    return;
+  }
 
   int tlx;
   int tly;
@@ -489,12 +531,18 @@ uint8_t wid_actionbar_descend(Widp w, int x, int y, uint32_t button)
   DBG3("Actionbar descend");
   TRACE_NO_INDENT();
 
-  if (! game->level) { return true; }
+  if (! game->level) {
+    return true;
+  }
 
   auto player = game->level->player;
-  if (! player) { return true; }
+  if (! player) {
+    return true;
+  }
 
-  if (player->is_dead) { return true; }
+  if (player->is_dead) {
+    return true;
+  }
 
   wid_actionbar_close_all_popups();
   game->request_player_to_descend_level = true;
@@ -509,7 +557,9 @@ void wid_actionbar_descend_over_begin(Widp w, int relx, int rely, int wheelx, in
 {
   TRACE_NO_INDENT();
 
-  if (wid_popup_exists()) { return; }
+  if (wid_popup_exists()) {
+    return;
+  }
 
   int tlx;
   int tly;
@@ -559,14 +609,22 @@ uint8_t wid_actionbar_inventory(Widp w, int x, int y, uint32_t button)
   game->request_destroy_thing_info = false;
   game->request_destroy_tp_info    = false;
 
-  if (! game->level) { return true; }
+  if (! game->level) {
+    return true;
+  }
 
   auto player = game->level->player;
-  if (! player) { return true; }
+  if (! player) {
+    return true;
+  }
 
-  if (player->is_dead) { return true; }
+  if (player->is_dead) {
+    return true;
+  }
 
-  if (game->in_transit_item) { return true; }
+  if (game->in_transit_item) {
+    return true;
+  }
 
   wid_actionbar_close_all_popups();
   if (game->state == Game::STATE_INVENTORY) {
@@ -583,7 +641,9 @@ void wid_actionbar_inventory_over_begin(Widp w, int relx, int rely, int wheelx, 
 {
   TRACE_NO_INDENT();
 
-  if (wid_popup_exists()) { return; }
+  if (wid_popup_exists()) {
+    return;
+  }
 
   int tlx;
   int tly;
@@ -630,14 +690,22 @@ uint8_t wid_actionbar_collect(Widp w, int x, int y, uint32_t button)
   DBG3("Actionbar collect");
   TRACE_NO_INDENT();
 
-  if (! game->level) { return true; }
+  if (! game->level) {
+    return true;
+  }
 
   auto player = game->level->player;
-  if (! player) { return true; }
+  if (! player) {
+    return true;
+  }
 
-  if (player->is_dead) { return true; }
+  if (player->is_dead) {
+    return true;
+  }
 
-  if (game->in_transit_item) { return true; }
+  if (game->in_transit_item) {
+    return true;
+  }
 
   wid_actionbar_close_all_popups();
   if (wid_collect) {
@@ -659,7 +727,9 @@ void wid_actionbar_collect_over_begin(Widp w, int relx, int rely, int wheelx, in
 {
   TRACE_NO_INDENT();
 
-  if (wid_popup_exists()) { return; }
+  if (wid_popup_exists()) {
+    return;
+  }
 
   int tlx;
   int tly;
@@ -705,14 +775,22 @@ uint8_t wid_actionbar_wait(Widp w, int x, int y, uint32_t button)
   DBG("Actionbar wait");
   TRACE_NO_INDENT();
 
-  if (! game->level) { return true; }
+  if (! game->level) {
+    return true;
+  }
 
   auto player = game->level->player;
-  if (! player) { return true; }
+  if (! player) {
+    return true;
+  }
 
-  if (player->is_dead) { return true; }
+  if (player->is_dead) {
+    return true;
+  }
 
-  if (game->in_transit_item) { return true; }
+  if (game->in_transit_item) {
+    return true;
+  }
 
   wid_last_wait = time_ms_cached();
 
@@ -728,18 +806,30 @@ uint8_t wid_actionbar_repeat_wait(Widp w, int x, int y, uint32_t button)
   DBG3("Actionbar wait");
   TRACE_NO_INDENT();
 
-  if (! game->level) { return true; }
+  if (! game->level) {
+    return true;
+  }
 
   auto player = game->level->player;
-  if (! player) { return true; }
+  if (! player) {
+    return true;
+  }
 
-  if (player->is_dead) { return true; }
+  if (player->is_dead) {
+    return true;
+  }
 
-  if (game->in_transit_item) { return true; }
+  if (game->in_transit_item) {
+    return true;
+  }
 
-  if (! time_have_x_tenths_passed_since(5, wid_last_wait)) { return true; }
+  if (! time_have_x_tenths_passed_since(5, wid_last_wait)) {
+    return true;
+  }
 
-  if (! time_have_x_tenths_passed_since(1, wid_last_wait_repeat)) { return true; }
+  if (! time_have_x_tenths_passed_since(1, wid_last_wait_repeat)) {
+    return true;
+  }
 
   wid_last_wait_repeat = time_ms_cached();
 
@@ -803,7 +893,9 @@ uint8_t wid_actionbar_zoom_out(Widp w, int x, int y, uint32_t button)
   DBG3("Actionbar zoom out");
   TRACE_NO_INDENT();
 
-  if (! game->level) { return true; }
+  if (! game->level) {
+    return true;
+  }
 
   wid_actionbar_close_all_popups();
   config_game_pix_zoom_out();
@@ -815,7 +907,9 @@ uint8_t wid_actionbar_zoom_in(Widp w, int x, int y, uint32_t button)
   DBG3("Actionbar zoom in");
   TRACE_NO_INDENT();
 
-  if (! game->level) { return true; }
+  if (! game->level) {
+    return true;
+  }
 
   wid_actionbar_close_all_popups();
   config_game_pix_zoom_in();
@@ -911,7 +1005,9 @@ uint8_t wid_actionbar_configure(Widp w, int x, int y, uint32_t button)
   DBG3("Actionbar configure");
   TRACE_NO_INDENT();
 
-  if (! game->level) { return true; }
+  if (! game->level) {
+    return true;
+  }
 
   wid_actionbar_close_all_popups();
   if (wid_config_keyboard_window) {

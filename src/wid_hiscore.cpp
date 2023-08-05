@@ -22,7 +22,9 @@ static uint8_t wid_hiscore_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   switch (key->mod) {
     case KMOD_LCTRL :
@@ -55,7 +57,9 @@ static uint8_t wid_hiscore_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   return true;
 }
@@ -70,7 +74,9 @@ static uint8_t wid_hiscore_mouse_up(Widp w, int x, int y, uint32_t button)
 void Game::wid_hiscores_show(void)
 {
   TRACE_AND_INDENT();
-  if (wid_hiscore_window) { wid_hiscore_destroy(); }
+  if (wid_hiscore_window) {
+    wid_hiscore_destroy();
+  }
 
   auto  m  = TERM_WIDTH / 2;
   auto  mh = TERM_HEIGHT / 2;
@@ -118,7 +124,9 @@ void Game::wid_hiscores_show(void)
 
   while (h != game->config.hiscores.hiscores.end()) {
 
-    if (index >= (int) ARRAY_SIZE(colors)) { break; }
+    if (index >= (int) ARRAY_SIZE(colors)) {
+      break;
+    }
 
     char tmp[ 200 ];
 
@@ -141,22 +149,32 @@ void Game::wid_hiscores_show(void)
     }
 
     std::string name = h->name.c_str();
-    if ((int) name.length() > name_field_len) { name[ name_field_len ] = '\0'; }
+    if ((int) name.length() > name_field_len) {
+      name[ name_field_len ] = '\0';
+    }
 
     std::string when = h->when.c_str();
-    if ((int) when.length() > when_field_len) { when[ when_field_len ] = '\0'; }
+    if ((int) when.length() > when_field_len) {
+      when[ when_field_len ] = '\0';
+    }
 
     std::string defeated_by = h->defeated_by.c_str();
-    if ((int) defeated_by.length() > defeated_by_field_len) { defeated_by[ defeated_by_field_len ] = '\0'; }
+    if ((int) defeated_by.length() > defeated_by_field_len) {
+      defeated_by[ defeated_by_field_len ] = '\0';
+    }
 
-    if (defeated_by.empty()) { defeated_by = "-"; }
+    if (defeated_by.empty()) {
+      defeated_by = "-";
+    }
 
     auto color = colors[ index++ ];
     snprintf(tmp, sizeof(tmp) - 1, "%%%%fg=%s$%07u  %-*s %-*s %-5u %*s", color, h->score, name_field_len,
              name.c_str(), when_field_len, when.c_str(), h->level_reached, defeated_by_field_len,
              defeated_by.c_str());
 
-    if (! g_opt_ascii) { wid_hiscore_window->log(UI_LOGGING_EMPTY_LINE); }
+    if (! g_opt_ascii) {
+      wid_hiscore_window->log(UI_LOGGING_EMPTY_LINE);
+    }
     wid_hiscore_window->log(tmp);
     h++;
   }

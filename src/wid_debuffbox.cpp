@@ -61,7 +61,9 @@ void wid_debuffbox_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int 
   level->debuffbox_describe(slot);
 
   auto t = level->debuffbox_get(slot);
-  if (t) { game->wid_thing_info_create(t); }
+  if (t) {
+    game->wid_thing_info_create(t);
+  }
 }
 
 void wid_debuffbox_mouse_over_end(Widp w)
@@ -100,7 +102,9 @@ void wid_debuffbox_mouse_over_end(Widp w)
 
   DBG3("debuffbox: Over debuffbox slot %d", slot);
   TRACE_AND_INDENT();
-  if (! level->debuffbox_over(slot)) { return; }
+  if (! level->debuffbox_over(slot)) {
+    return;
+  }
 
   game->wid_thing_info_destroy_deferred();
 

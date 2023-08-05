@@ -52,7 +52,9 @@ void Level::fini(void)
             LOG("Clean thing %" PRIX32 " at %d,%d", id.id, x, y);
 #endif
             auto t = thing_find(id);
-            if (unlikely(! t)) { continue; }
+            if (unlikely(! t)) {
+              continue;
+            }
 #ifdef ENABLE_THING_ID_LOGS
             t->log("Call delete");
 #endif
@@ -79,7 +81,9 @@ void Level::fini(void)
           if (id.ok()) {
             err("Level fini: Did not detach thing id %" PRIX32 " at %d,%d,%d", id.id, x, y, z);
             auto t = thing_find(id);
-            if (unlikely(! t)) { continue; }
+            if (unlikely(! t)) {
+              continue;
+            }
             t->err("Level fini: Did not detach thing id from all_things_id_at");
           }
         }
@@ -90,7 +94,9 @@ void Level::fini(void)
   //
   // And finally the player
   //
-  if (player) { err("Level fini: Did not detach player, player %p still set on level", player); }
+  if (player) {
+    err("Level fini: Did not detach player, player %p still set on level", player);
+  }
 
   IF_DEBUG2
   {

@@ -11,16 +11,22 @@
 void Thing::on_lifespan_tick(Thingp what)
 {
   auto on_lifespan_tick = what->tp()->on_lifespan_tick_do();
-  if (std::empty(on_lifespan_tick)) { return; }
+  if (std::empty(on_lifespan_tick)) {
+    return;
+  }
 
   auto t = split_tokens(on_lifespan_tick, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = what->name(); }
+    if (mod == "me") {
+      mod = what->name();
+    }
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
 
@@ -39,16 +45,24 @@ void Thing::lifespan_tick(void)
   // Torches only tick when carried
   //
   auto owner = immediate_owner();
-  if (is_torch() && ! owner) { return; }
+  if (is_torch() && ! owner) {
+    return;
+  }
 
-  if (! lifespan_get()) { return; }
+  if (! lifespan_get()) {
+    return;
+  }
 
   lifespan_decr();
 
-  if (lifespan_get()) { return; }
+  if (lifespan_get()) {
+    return;
+  }
 
   auto o = top_owner();
-  if (o) { o->on_lifespan_tick(this); }
+  if (o) {
+    o->on_lifespan_tick(this);
+  }
 
   //
   // This is for torches
@@ -69,7 +83,9 @@ void Thing::lifespan_tick(void)
 int Thing::lifespan_get(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->lifespan); }
+  if (maybe_infop()) {
+    return (infop()->lifespan);
+  }
   return 0;
 }
 

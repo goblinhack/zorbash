@@ -14,9 +14,13 @@ bool Thing::player_is_player_is_ready_for_messages(void)
 {
   verify(MTYPE_THING, this);
 
-  if (! level) { return false; }
+  if (! level) {
+    return false;
+  }
 
-  if (g_opt_test_dungeon_gen) { return true; }
+  if (g_opt_test_dungeon_gen) {
+    return true;
+  }
 
   auto player = level->player;
   if (! player) {
@@ -60,12 +64,16 @@ bool Thing::player_is_player_is_ready_for_messages(std::string &why)
     return false;
   }
 
-  if (! game->player_is_ready_for_messages) { return false; }
+  if (! game->player_is_ready_for_messages) {
+    return false;
+  }
 
   //
   // Cut down on post death messages.
   //
-  if (player->is_dead) { return false; }
+  if (player->is_dead) {
+    return false;
+  }
 
   if (level->is_starting) {
     why = "level is starting";

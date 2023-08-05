@@ -161,7 +161,9 @@ void Thing::topcon(const char *fmt, ...)
 void Thing::err_(const char *fmt, va_list args)
 {
   static bool nested_error;
-  if (nested_error) { return; }
+  if (nested_error) {
+    return;
+  }
   nested_error = true;
 
   callstack_dump();
@@ -195,7 +197,9 @@ void Thing::err_(const char *fmt, va_list args)
 void Thing::err(const char *fmt, ...)
 {
   static bool nested_error;
-  if (nested_error) { return; }
+  if (nested_error) {
+    return;
+  }
   bool old_nested_error = nested_error;
   nested_error          = true;
 

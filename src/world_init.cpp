@@ -13,7 +13,9 @@ void World::clear(void)
     for (auto y = 0; y < LEVELS_DOWN; ++y) {
       for (auto z = 0; z < LEVELS_DEEP; ++z) {
         auto l = get(levels, x, y, z);
-        if (l) { l->clear(); }
+        if (l) {
+          l->clear();
+        }
       }
     }
   }

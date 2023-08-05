@@ -9,9 +9,13 @@ int Thing::health_regenerate(void)
 {
   TRACE_NO_INDENT();
 
-  if (! is_able_to_regenerate()) { return false; }
+  if (! is_able_to_regenerate()) {
+    return false;
+  }
 
-  if (d1000() > chance_d1000_regenerate()) { return false; }
+  if (d1000() > chance_d1000_regenerate()) {
+    return false;
+  }
 
   health_boost(nullptr, health_regenerate_amount());
 

@@ -18,16 +18,22 @@ void Thing::on_you_are_declared_a_follower(Thingp leader)
   }
 
   auto on_you_are_declared_a_follower = on_you_are_declared_a_follower_do();
-  if (std::empty(on_you_are_declared_a_follower)) { return; }
+  if (std::empty(on_you_are_declared_a_follower)) {
+    return;
+  }
 
   auto t = split_tokens(on_you_are_declared_a_follower, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = name(); }
+    if (mod == "me") {
+      mod = name();
+    }
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), leader->to_string().c_str());
 
@@ -48,7 +54,9 @@ void Thing::on_death_of_a_follower(Thingp leader)
   }
 
   auto on_death_of_a_follower = on_death_of_a_follower_do();
-  if (std::empty(on_death_of_a_follower)) { return; }
+  if (std::empty(on_death_of_a_follower)) {
+    return;
+  }
 
   //
   // Don't call this on death of the follower to avoid spurious post RIP messages
@@ -63,9 +71,13 @@ void Thing::on_death_of_a_follower(Thingp leader)
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = leader->name(); }
+    if (mod == "me") {
+      mod = leader->name();
+    }
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), leader->to_string().c_str());
 
@@ -80,6 +92,8 @@ void Thing::on_death_of_a_follower(Thingp leader)
 int Thing::follower_count(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (int) infop()->followers.size(); }
+  if (maybe_infop()) {
+    return (int) infop()->followers.size();
+  }
   return 0;
 }

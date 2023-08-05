@@ -40,7 +40,9 @@ static uint8_t wid_config_mouse_save(Widp w, int x, int y, uint32_t button)
   game->save_config();
   wid_config_mouse_destroy();
   game->wid_config_top_menu();
-  if (local_g_need_restart) { g_need_restart = true; }
+  if (local_g_need_restart) {
+    g_need_restart = true;
+  }
   return true;
 }
 
@@ -76,7 +78,9 @@ static uint8_t wid_config_mouse_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   switch (key->mod) {
     case KMOD_LCTRL :
@@ -104,7 +108,9 @@ static uint8_t wid_config_mouse_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   return true;
 }
@@ -112,7 +118,9 @@ static uint8_t wid_config_mouse_key_down(Widp w, const struct SDL_Keysym *key)
 void Game::wid_config_mouse_select(void)
 {
   TRACE_AND_INDENT();
-  if (wid_config_mouse_window) { wid_config_mouse_destroy(); }
+  if (wid_config_mouse_window) {
+    wid_config_mouse_destroy();
+  }
 
   auto box_style           = UI_WID_STYLE_HORIZ_DARK;
   auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;

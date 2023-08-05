@@ -22,16 +22,22 @@ void Thing::on_owner_add(Thingp owner)
   owner_id_set(owner->id);
 
   auto on_owner_add = on_owner_add_do();
-  if (std::empty(on_owner_add)) { return; }
+  if (std::empty(on_owner_add)) {
+    return;
+  }
 
   auto t = split_tokens(on_owner_add, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = name(); }
+    if (mod == "me") {
+      mod = name();
+    }
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), owner->to_short_string().c_str());
 
@@ -55,7 +61,9 @@ void Thing::on_owner_unset(Thingp owner)
   owner_id_set(NoThingId);
 
   auto on_owner_unset = on_owner_unset_do();
-  if (std::empty(on_owner_unset)) { return; }
+  if (std::empty(on_owner_unset)) {
+    return;
+  }
 
   //
   // Don't call this on death of the owner to avoid spurious post RIP messages
@@ -75,9 +83,13 @@ void Thing::on_owner_unset(Thingp owner)
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = name(); }
+    if (mod == "me") {
+      mod = name();
+    }
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), owner->to_short_string().c_str());
 
@@ -92,13 +104,19 @@ Thingp Thing::top_owner_internal(void)
 {
   TRACE_NO_INDENT();
 
-  if (! maybe_infop()) { return this; }
+  if (! maybe_infop()) {
+    return this;
+  }
 
   auto oid = immediate_owner_id();
   if (likely(oid.ok())) {
     auto i = level->thing_find(oid);
-    if (unlikely(! i)) { return nullptr; }
-    if (unlikely(i->immediate_owner_id().ok())) { return i->top_owner_internal(); }
+    if (unlikely(! i)) {
+      return nullptr;
+    }
+    if (unlikely(i->immediate_owner_id().ok())) {
+      return i->top_owner_internal();
+    }
     return i;
   }
   return nullptr;
@@ -124,8 +142,12 @@ Thingp Thing::top_owner(void)
   auto oid = immediate_owner_id();
   if (likely(oid.ok())) {
     auto i = level->thing_find(oid);
-    if (unlikely(! i)) { return nullptr; }
-    if (unlikely(i->immediate_owner_id().ok())) { return i->top_owner_internal(); }
+    if (unlikely(! i)) {
+      return nullptr;
+    }
+    if (unlikely(i->immediate_owner_id().ok())) {
+      return i->top_owner_internal();
+    }
     return i;
   }
   return nullptr;
@@ -150,10 +172,14 @@ Thingp Thing::immediate_owner(void)
 
   auto oid = immediate_owner_id();
   if (likely(oid.ok())) {
-    if (oid == id) { DIE("Self owned %" PRIX32 "", id.id); }
+    if (oid == id) {
+      DIE("Self owned %" PRIX32 "", id.id);
+    }
 
     auto i = level->thing_find(oid);
-    if (unlikely(! i)) { return nullptr; }
+    if (unlikely(! i)) {
+      return nullptr;
+    }
     return i;
   }
   return nullptr;
@@ -199,7 +225,9 @@ void Thing::owner_set(Thingp owner)
 
   auto old_owner = immediate_owner();
   if (old_owner) {
-    if (old_owner == owner) { return; }
+    if (old_owner == owner) {
+      return;
+    }
 
     on_owner_unset(old_owner);
 
@@ -220,14 +248,18 @@ void Thing::owner_set(Thingp owner)
   dbg2("Set owner to %s", owner->to_short_string().c_str());
 
   auto i = immediate_owner();
-  if (! i) { err("Failed to set owner to %s", owner->to_short_string().c_str()); }
+  if (! i) {
+    err("Failed to set owner to %s", owner->to_short_string().c_str());
+  }
 }
 
 void Thing::owner_unset(void)
 {
   TRACE_NO_INDENT();
   auto old_owner = immediate_owner();
-  if (! old_owner) { return; }
+  if (! old_owner) {
+    return;
+  }
 
   dbg2("Remove owner %s", old_owner->to_short_string().c_str());
   on_owner_unset(old_owner);
@@ -244,7 +276,9 @@ void Thing::owner_unset(void)
 int Thing::owned_count(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (int) infop()->owned.size(); }
+  if (maybe_infop()) {
+    return (int) infop()->owned.size();
+  }
   return 0;
 }
 
@@ -258,7 +292,9 @@ const ThingId &Thing::owner_id_set(const ThingId &v)
 const ThingId &Thing::immediate_owner_id(void)
 {
   TRACE_NO_INDENT();
-  if (! maybe_infop()) { return (NoThingId); }
+  if (! maybe_infop()) {
+    return (NoThingId);
+  }
   return (infop()->owner_id);
 }
 
@@ -266,14 +302,18 @@ const ThingId &Thing::top_owner_id(void)
 {
   TRACE_NO_INDENT();
   auto t = top_owner();
-  if (t) { return t->id; }
+  if (t) {
+    return t->id;
+  }
   return (NoThingId);
 }
 
 const ThingId &Thing::immediate_spawner_id(void)
 {
   TRACE_NO_INDENT();
-  if (! maybe_infop()) { return (NoThingId); }
+  if (! maybe_infop()) {
+    return (NoThingId);
+  }
   return (infop()->spawner_owner_id);
 }
 

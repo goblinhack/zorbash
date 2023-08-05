@@ -17,7 +17,9 @@ void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny
   // If we are over the left bar looking at a thing and then move the mouse, do not
   // try to find the cursor as that then removes the popup.
   //
-  if (wid_over) { return; }
+  if (wid_over) {
+    return;
+  }
 
   switch (game->state) {
     case Game::STATE_NORMAL : break;
@@ -46,12 +48,16 @@ void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny
     default : err("Unhandled game state"); return;
   }
 
-  if (wid_find_under_mouse()) { return; }
+  if (wid_find_under_mouse()) {
+    return;
+  }
 
   //
   // If move confirmation is present, do not recreate the cursor
   //
-  if (wid_warning_window) { return; }
+  if (wid_warning_window) {
+    return;
+  }
 
   dbg3("Cursor find on visible things");
   TRACE_AND_INDENT();
@@ -66,12 +72,16 @@ void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny
       if (cursor) {
         FOR_ALL_NON_INTERNAL_THINGS(this, t, to.x, to.y)
         {
-          if (t->is_cursor_can_hover_over_needs_confirm()) { goto done; }
+          if (t->is_cursor_can_hover_over_needs_confirm()) {
+            goto done;
+          }
         }
         FOR_ALL_THINGS_END()
       }
     }
-    if (cursor) { cursor->curr_at = to; }
+    if (cursor) {
+      cursor->curr_at = to;
+    }
   } else {
     //
     // What tile are we over?
@@ -83,7 +93,9 @@ void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny
         FOR_ALL_GRID_THINGS(this, t, x, y)
         {
           t->cursor_hover_over_check();
-          if (is_cursor_found) { goto done; }
+          if (is_cursor_found) {
+            goto done;
+          }
         }
         FOR_ALL_THINGS_END();
       }

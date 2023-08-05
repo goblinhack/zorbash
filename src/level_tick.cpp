@@ -111,7 +111,9 @@ void Level::handle_input_events(void)
     game->request_player_to_wait_or_collect = false;
 
     if (up || down || left || right || wait_or_collect) {
-      if (game->player_tick(left, right, up, down, attack, wait_or_collect, jump)) { tick_begin_now(); }
+      if (game->player_tick(left, right, up, down, attack, wait_or_collect, jump)) {
+        tick_begin_now();
+      }
     }
   }
 }
@@ -128,11 +130,17 @@ void Level::tick_(void)
     //
     // Normal play
     //
-    if (! game->started) { return; }
+    if (! game->started) {
+      return;
+    }
 
-    if (game->paused) { return; }
+    if (game->paused) {
+      return;
+    }
 
-    if (! g_opt_ascii && ts_fade_in_begin) { return; }
+    if (! g_opt_ascii && ts_fade_in_begin) {
+      return;
+    }
   }
 
   game->tick_update();
@@ -160,7 +168,9 @@ void Level::tick_(void)
     //
     // Create the cursor if not yet.
     //
-    if (! cursor) { cursor = cursor_thing_new(player->curr_at); }
+    if (! cursor) {
+      cursor = cursor_thing_new(player->curr_at);
+    }
 
     //
     // Recalculate the player FOV if needed. This also triggers events like, if we see a monster.
@@ -169,7 +179,9 @@ void Level::tick_(void)
       //
       // But only do this is no tick is pending, as the achieve goals function should do this.
       //
-      if (game->tick_requested.empty()) { player->light_distance_update(); }
+      if (game->tick_requested.empty()) {
+        player->light_distance_update();
+      }
     }
   }
 
@@ -226,27 +238,41 @@ void Level::tick_(void)
     //
     if (g_opt_test_dungeon_gen || g_opt_ascii || fade_out_finished) {
       if (player && player->is_waiting_to_descend_dungeon) {
-        if (! player->descend_dungeon()) { player->err("Failed to descend dungeon"); }
+        if (! player->descend_dungeon()) {
+          player->err("Failed to descend dungeon");
+        }
       }
       if (player && player->is_waiting_to_ascend_dungeon) {
-        if (! player->ascend_dungeon()) { player->err("Failed to ascend dungeon"); }
+        if (! player->ascend_dungeon()) {
+          player->err("Failed to ascend dungeon");
+        }
       }
       if (player && player->is_waiting_to_descend_sewer) {
-        if (! player->descend_sewer()) { player->err("Failed to descend sewer"); }
+        if (! player->descend_sewer()) {
+          player->err("Failed to descend sewer");
+        }
       }
       if (player && player->is_waiting_to_ascend_sewer) {
-        if (! player->ascend_sewer()) { player->err("Failed to ascend sewer"); }
+        if (! player->ascend_sewer()) {
+          player->err("Failed to ascend sewer");
+        }
       }
-      if (player && player->is_waiting_to_leave_level_has_completed_fall) { player->fall_to_next_level(); }
+      if (player && player->is_waiting_to_leave_level_has_completed_fall) {
+        player->fall_to_next_level();
+      }
       fade_out_finished = false;
     }
 
-    if (game->things_are_moving) { ERR("No tick in progress but things are still moving"); }
+    if (game->things_are_moving) {
+      ERR("No tick in progress but things are still moving");
+    }
 
     //
     // The last tick is done, but there is work to do in the next tick
     //
-    if (! game->tick_requested.empty()) { tick_begin_now(); }
+    if (! game->tick_requested.empty()) {
+      tick_begin_now();
+    }
     return;
   }
 
@@ -282,12 +308,18 @@ void Level::tick_(void)
     TRACE_NO_INDENT();
     FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
     {
-      if (likely(t->tick_prio() != tick_prio)) { continue; }
+      if (likely(t->tick_prio() != tick_prio)) {
+        continue;
+      }
 
       int remaining = t->movement_remaining();
-      if (remaining <= 0) { continue; }
+      if (remaining <= 0) {
+        continue;
+      }
 
-      if (t->is_waiting) { continue; }
+      if (t->is_waiting) {
+        continue;
+      }
 
       //
       // While moves remain, things are still moving
@@ -514,14 +546,18 @@ void Level::tick_(void)
     t->is_waiting = false;
   }
   FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
-  if (work_to_do) { return; }
+  if (work_to_do) {
+    return;
+  }
 
   //
   // Stop rapid pickup/drop events if particles are still in progress
   // Don't move this priot to update_interpolated_position or see flicker
   // in jumping.
   //
-  if (player && player->particle_anim_exists()) { return; }
+  if (player && player->particle_anim_exists()) {
+    return;
+  }
 
   //
   // The robot needs to be more deterministic and less loosy goosey
@@ -530,21 +566,37 @@ void Level::tick_(void)
     //
     // No moving if weapons have not finished firing
     //
-    if (all_projectiles.size()) { return; }
+    if (all_projectiles.size()) {
+      return;
+    }
 
-    if (new_projectiles.size()) { return; }
+    if (new_projectiles.size()) {
+      return;
+    }
 
-    if (all_lasers.size()) { return; }
+    if (all_lasers.size()) {
+      return;
+    }
 
-    if (new_lasers.size()) { return; }
+    if (new_lasers.size()) {
+      return;
+    }
 
-    if (all_internal_particles.size()) { return; }
+    if (all_internal_particles.size()) {
+      return;
+    }
 
-    if (new_internal_particles.size()) { return; }
+    if (new_internal_particles.size()) {
+      return;
+    }
 
-    if (all_external_particles.size()) { return; }
+    if (all_external_particles.size()) {
+      return;
+    }
 
-    if (new_external_particles.size()) { return; }
+    if (new_external_particles.size()) {
+      return;
+    }
   }
 
   //
@@ -664,7 +716,9 @@ void Level::tick_begin_now(void)
   //
   // A new game event has occurred?
   //
-  if (game->tick_requested.empty()) { return; }
+  if (game->tick_requested.empty()) {
+    return;
+  }
 
   dbg("Tick begin now");
   TRACE_AND_INDENT();
@@ -692,7 +746,9 @@ void Level::tick_begin_now(void)
     // Allow the same thing to hit us again
     //
     auto aip = t->maybe_aip();
-    if (aip) { aip->recently_hit_by.clear(); }
+    if (aip) {
+      aip->recently_hit_by.clear();
+    }
   }
   FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
 }

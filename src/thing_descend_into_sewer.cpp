@@ -9,7 +9,9 @@
 
 bool Thing::descend_sewer_tick(void)
 {
-  if (! level->is_descend_sewer(curr_at.x, curr_at.y)) { return false; }
+  if (! level->is_descend_sewer(curr_at.x, curr_at.y)) {
+    return false;
+  }
 
   dbg("Descend sewer tick");
   TRACE_AND_INDENT();
@@ -19,14 +21,18 @@ bool Thing::descend_sewer_tick(void)
     // User has pressed a button, forcing the change
     //
   } else if (game->tick_current - tick_last_level_change() <= 1) {
-    if (is_player()) { dbg("Location check, descend, no too soon"); }
+    if (is_player()) {
+      dbg("Location check, descend, no too soon");
+    }
 
     return false;
   } else if (game->tick_current - tick_last_i_attacked() <= 1) {
     //
     // If this is the robot and we attack something next to a sewer, don't automatically descend.
     //
-    if (is_player()) { dbg("Location check, descend, no busy attacking"); }
+    if (is_player()) {
+      dbg("Location check, descend, no busy attacking");
+    }
 
     return false;
   }
@@ -97,7 +103,9 @@ bool Thing::descend_sewer(void)
   if (! l) {
     if (! game->init_level(next_level, level->grid_at + point(0, 1), level->difficulty_depth,
                            level->dungeon_walk_order_level_no + 1)) {
-      if (is_player()) { msg("The sewer is permanently blocked!"); }
+      if (is_player()) {
+        msg("The sewer is permanently blocked!");
+      }
       return false;
     }
 
@@ -108,7 +116,9 @@ bool Thing::descend_sewer(void)
     }
   }
 
-  if (is_player()) { game->current_level = next_level; }
+  if (is_player()) {
+    game->current_level = next_level;
+  }
 
   int x = player->curr_at.x;
   int y = player->curr_at.y;
@@ -142,7 +152,9 @@ bool Thing::descend_sewer(void)
   location_check_me();
   update_light();
 
-  if (is_player() && level->cursor) { level->cursor->move_to_immediately(curr_at); }
+  if (is_player() && level->cursor) {
+    level->cursor->move_to_immediately(curr_at);
+  }
 
   is_changing_level = false;
   dbg("Moved to next level sewer");
@@ -150,7 +162,9 @@ bool Thing::descend_sewer(void)
     level->ts_fade_in_begin = time_ms_cached();
     level->update_new_level();
 
-    if (game->robot_mode) { game->tick_begin("Begin exploring the new level"); }
+    if (game->robot_mode) {
+      game->tick_begin("Begin exploring the new level");
+    }
   }
 
   return true;

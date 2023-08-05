@@ -28,7 +28,9 @@ void sound_fini(void)
 
     for (;;) {
       auto iter = all_sound.begin();
-      if (iter == all_sound.end()) { break; }
+      if (iter == all_sound.end()) {
+        break;
+      }
       delete iter->second;
       iter = all_sound.erase(iter);
     }
@@ -51,7 +53,9 @@ bool sound_load(float volume, const std::string &file, const std::string &alias)
   TRACE_AND_INDENT();
   if (alias == "") {
     auto s = sound_find(alias);
-    if (s) { return true; }
+    if (s) {
+      return true;
+    }
   }
 
   auto *s = new sound(alias);
@@ -108,7 +112,9 @@ bool sound_play(const std::string &alias)
 {
   TRACE_AND_INDENT();
 
-  if (g_opt_silent) { return true; }
+  if (g_opt_silent) {
+    return true;
+  }
 
   DBG2("Play sound %s", alias.c_str());
 
@@ -152,7 +158,9 @@ bool sound_play_channel(int channel, const std::string &alias)
 {
   TRACE_AND_INDENT();
 
-  if (g_opt_silent) { return true; }
+  if (g_opt_silent) {
+    return true;
+  }
 
   DBG2("Play sound %s on channel %d", alias.c_str(), channel);
 

@@ -105,7 +105,9 @@ void Level::tick_gas_poison(void)
       //
       // If a rock ignore
       //
-      if (gn == 255) { continue; }
+      if (gn == 255) {
+        continue;
+      }
 
       uint8_t ga = get_no_check(old_gas_poison_cloud, x - 1, y - 1);
       uint8_t gb = get_no_check(old_gas_poison_cloud, x, y - 1);
@@ -120,15 +122,33 @@ void Level::tick_gas_poison(void)
       //
       // If a rock then it does not contribute to gas strength
       //
-      if (ga == 255) { ga = 0; }
-      if (gb == 255) { gb = 0; }
-      if (gc == 255) { gc = 0; }
-      if (gd == 255) { gd = 0; }
-      if (ge == 255) { ge = 0; }
-      if (gf == 255) { gf = 0; }
-      if (gg == 255) { gg = 0; }
-      if (gh == 255) { gh = 0; }
-      if (gi == 255) { gi = 0; }
+      if (ga == 255) {
+        ga = 0;
+      }
+      if (gb == 255) {
+        gb = 0;
+      }
+      if (gc == 255) {
+        gc = 0;
+      }
+      if (gd == 255) {
+        gd = 0;
+      }
+      if (ge == 255) {
+        ge = 0;
+      }
+      if (gf == 255) {
+        gf = 0;
+      }
+      if (gg == 255) {
+        gg = 0;
+      }
+      if (gh == 255) {
+        gh = 0;
+      }
+      if (gi == 255) {
+        gi = 0;
+      }
 
       uint8_t nn = (ga + gb + gc + gd + ge + gf + gg + gh + gi) / reduction;
       set_no_check(gas_poison_cloud, x, y, nn);
@@ -148,11 +168,15 @@ void Level::tick_gas_poison(void)
           uint16_t gx = x * DUNGEON_GAS_RESOLUTION + dx;
           uint16_t gy = y * DUNGEON_GAS_RESOLUTION + dy;
           int      i  = gas_poison_cloud[ gx ][ gy ];
-          if (i == 255) { continue; }
+          if (i == 255) {
+            continue;
+          }
           g += i;
         }
       }
-      if (g > 254) { g = 254; }
+      if (g > 254) {
+        g = 254;
+      }
       is_gas_poison_no_check_set(x, y, g);
     }
   }
@@ -162,7 +186,9 @@ void Level::gas_poison_explosion(point at)
 {
   TRACE_NO_INDENT();
 
-  if (is_gas_poison_no_check(at.x, at.y) < 5) { return; }
+  if (is_gas_poison_no_check(at.x, at.y) < 5) {
+    return;
+  }
 
   for (auto dx = 0; dx < DUNGEON_GAS_RESOLUTION; dx++) {
     for (auto dy = 0; dy < DUNGEON_GAS_RESOLUTION; dy++) {
@@ -182,7 +208,9 @@ void Level::gas_poison_explosion(point at)
 
 uint8_t Level::is_gas_poison(const point p) const
 {
-  if (unlikely(is_oob(p.x, p.y))) { return 0; }
+  if (unlikely(is_oob(p.x, p.y))) {
+    return 0;
+  }
   return (get(_is_gas_poison, p.x, p.y));
 }
 
@@ -190,7 +218,9 @@ uint8_t Level::is_gas_poison_no_check(const point p) const { return (get_no_chec
 
 uint8_t Level::is_gas_poison(const int x, const int y) const
 {
-  if (unlikely(is_oob(x, y))) { return false; }
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
   return (get(_is_gas_poison, x, y));
 }
 
@@ -198,7 +228,9 @@ uint8_t Level::is_gas_poison_no_check(const int x, const int y) const { return (
 
 void Level::is_gas_poison_set(const int x, const int y, uint8_t val)
 {
-  if (unlikely(is_oob(x, y))) { return; }
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
   set(_is_gas_poison, x, y, val);
 }
 
@@ -209,7 +241,9 @@ void Level::is_gas_poison_no_check_set(const int x, const int y, uint8_t val)
 
 void Level::is_gas_poison_unset(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) { return; }
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
   set(_is_gas_poison, x, y, (uint8_t) 0);
 }
 

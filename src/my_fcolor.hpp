@@ -87,9 +87,15 @@ public:
       c.b = b / count;
     }
 
-    if (c.r > 255) { c.r = 255; }
-    if (c.g > 255) { c.g = 255; }
-    if (c.b > 255) { c.b = 255; }
+    if (c.r > 255) {
+      c.r = 255;
+    }
+    if (c.g > 255) {
+      c.g = 255;
+    }
+    if (c.b > 255) {
+      c.b = 255;
+    }
     c.a = 255;
 
     return c;

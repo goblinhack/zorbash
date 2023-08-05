@@ -9,7 +9,9 @@
 int Thing::minion_count(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (int) infop()->minions.size(); }
+  if (maybe_infop()) {
+    return (int) infop()->minions.size();
+  }
   return 0;
 }
 

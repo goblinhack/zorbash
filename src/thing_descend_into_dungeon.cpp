@@ -10,7 +10,9 @@
 
 bool Thing::descend_dungeon_tick(void)
 {
-  if (! level->is_descend_dungeon(curr_at.x, curr_at.y)) { return false; }
+  if (! level->is_descend_dungeon(curr_at.x, curr_at.y)) {
+    return false;
+  }
 
   dbg("Descend dungeon tick");
   TRACE_AND_INDENT();
@@ -20,7 +22,9 @@ bool Thing::descend_dungeon_tick(void)
     // User has pressed a button, forcing the change
     //
   } else if (game->tick_current - tick_last_level_change() <= 1) {
-    if (is_player()) { dbg("Location check, descend, no too soon"); }
+    if (is_player()) {
+      dbg("Location check, descend, no too soon");
+    }
 
     return false;
   }
@@ -48,7 +52,9 @@ bool Thing::descend_dungeon(bool force, point3d next_level)
     }
   }
 
-  if (! maybe_infop()) { return false; }
+  if (! maybe_infop()) {
+    return false;
+  }
 
   dbg("Descend dungeon");
   TRACE_AND_INDENT();
@@ -69,7 +75,9 @@ bool Thing::descend_dungeon(bool force, point3d next_level)
     }
   }
 
-  if (next_level == point3d(0, 0, 0)) { next_level = level->world_at + point3d(0, 0, 2); }
+  if (next_level == point3d(0, 0, 0)) {
+    next_level = level->world_at + point3d(0, 0, 2);
+  }
 
   if (next_level.z >= LEVELS_DEEP) {
     fall_into_the_void();
@@ -81,7 +89,9 @@ bool Thing::descend_dungeon(bool force, point3d next_level)
   if (! l) {
     if (! game->init_level(next_level, level->grid_at + point(0, 1), level->difficulty_depth,
                            level->dungeon_walk_order_level_no + 1)) {
-      if (is_player()) { msg("The exit is permanently blocked!"); }
+      if (is_player()) {
+        msg("The exit is permanently blocked!");
+      }
       return false;
     }
 
@@ -92,7 +102,9 @@ bool Thing::descend_dungeon(bool force, point3d next_level)
     }
   }
 
-  if (is_player()) { game->current_level = next_level; }
+  if (is_player()) {
+    game->current_level = next_level;
+  }
 
   for (auto x = 0; x < MAP_WIDTH; x++) {
     for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -142,7 +154,9 @@ bool Thing::descend_dungeon(bool force, point3d next_level)
         location_check_me();
         update_light();
 
-        if (is_player() && level->cursor) { level->cursor->move_to_immediately(curr_at); }
+        if (is_player() && level->cursor) {
+          level->cursor->move_to_immediately(curr_at);
+        }
 
         is_changing_level = false;
         dbg("Moved to next level entrance");
@@ -150,7 +164,9 @@ bool Thing::descend_dungeon(bool force, point3d next_level)
           level->ts_fade_in_begin = time_ms_cached();
           level->update_new_level();
 
-          if (game->robot_mode) { game->tick_begin("Begin exploring the new level"); }
+          if (game->robot_mode) {
+            game->tick_begin("Begin exploring the new level");
+          }
         }
 
         //
@@ -164,7 +180,9 @@ bool Thing::descend_dungeon(bool force, point3d next_level)
             auto followers = infop()->followers;
             for (auto fid : followers) {
               auto f = game->thing_find(fid);
-              if (f) { f->descend_dungeon(force, next_level); }
+              if (f) {
+                f->descend_dungeon(force, next_level);
+              }
             }
           }
         }

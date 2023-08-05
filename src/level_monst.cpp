@@ -36,7 +36,9 @@ Tpp Level::get_random_monst(point p, monst_environ_t monst_environ, monst_class_
         //
         // If we've tried too many times, try the next lower class
         //
-        if (monst_class == MONST_CLASS_A) { return get_random_monst(p, monst_environ, monst_class); }
+        if (monst_class == MONST_CLASS_A) {
+          return get_random_monst(p, monst_environ, monst_class);
+        }
 
         tries = 0;
         dbg("INF: Try the next lowest class for -- biome %d type %d class %d -- %d", biome, monst_environ,
@@ -48,7 +50,9 @@ Tpp Level::get_random_monst(point p, monst_environ_t monst_environ, monst_class_
       // Filter according to monster rarity
       //
       auto tp = tp_get_with_rarity_filter(tp_monst[ biome ][ monst_environ ][ monst_class ]);
-      if (! tp) { continue; }
+      if (! tp) {
+        continue;
+      }
 
       //
       // Filter locations that are not appropriate
@@ -62,7 +66,9 @@ Tpp Level::get_random_monst(point p, monst_environ_t monst_environ, monst_class_
       return tp;
     }
   } else {
-    if (monst_class == MONST_CLASS_A) { return get_random_monst(p, monst_environ, monst_class); }
+    if (monst_class == MONST_CLASS_A) {
+      return get_random_monst(p, monst_environ, monst_class);
+    }
     return get_random_monst(p, monst_environ, (monst_class_t) (((int) monst_class) - 1), difficulty_offset);
   }
 }
@@ -271,19 +277,33 @@ void tp_monst_add(Tpp tp)
   std::vector< int > biomes;
   std::vector< int > monst_types;
 
-  if (tp->is_biome_dungeon()) { biomes.push_back(BIOME_DUNGEON); }
+  if (tp->is_biome_dungeon()) {
+    biomes.push_back(BIOME_DUNGEON);
+  }
 
-  if (tp->is_biome_flooded()) { biomes.push_back(BIOME_FLOODED); }
+  if (tp->is_biome_flooded()) {
+    biomes.push_back(BIOME_FLOODED);
+  }
 
-  if (tp->is_biome_sewer()) { biomes.push_back(BIOME_SEWER); }
+  if (tp->is_biome_sewer()) {
+    biomes.push_back(BIOME_SEWER);
+  }
 
-  if (tp->is_biome_swamp()) { biomes.push_back(BIOME_SWAMP); }
+  if (tp->is_biome_swamp()) {
+    biomes.push_back(BIOME_SWAMP);
+  }
 
-  if (tp->is_biome_ice()) { biomes.push_back(BIOME_ICE); }
+  if (tp->is_biome_ice()) {
+    biomes.push_back(BIOME_ICE);
+  }
 
-  if (tp->is_biome_chasms()) { biomes.push_back(BIOME_CHASMS); }
+  if (tp->is_biome_chasms()) {
+    biomes.push_back(BIOME_CHASMS);
+  }
 
-  if (tp->is_biome_lava()) { biomes.push_back(BIOME_LAVA); }
+  if (tp->is_biome_lava()) {
+    biomes.push_back(BIOME_LAVA);
+  }
 
   if (tp->is_swimmer()) {
     if (! tp->environ_likes_shallow_water() && ! tp->environ_likes_deep_water()) {
@@ -292,9 +312,13 @@ void tp_monst_add(Tpp tp)
     }
   }
 
-  if (tp->environ_likes_shallow_water()) { monst_types.push_back(MONST_ENVIRON_SHALLOW_WATER); }
+  if (tp->environ_likes_shallow_water()) {
+    monst_types.push_back(MONST_ENVIRON_SHALLOW_WATER);
+  }
 
-  if (tp->environ_likes_deep_water()) { monst_types.push_back(MONST_ENVIRON_DEEP_WATER); }
+  if (tp->environ_likes_deep_water()) {
+    monst_types.push_back(MONST_ENVIRON_DEEP_WATER);
+  }
 
   if (! tp->environ_likes_shallow_water() && ! tp->environ_likes_deep_water()) {
     monst_types.push_back(MONST_ENVIRON_NORMAL);
@@ -302,12 +326,24 @@ void tp_monst_add(Tpp tp)
 
   for (auto biome : biomes) {
     for (auto monst_environ : monst_types) {
-      if (tp->is_monst()) { tp_monst[ biome ][ monst_environ ][ MONST_CLASS_ANY ].push_back(tp); }
-      if (tp->is_monst_class_A()) { tp_monst[ biome ][ monst_environ ][ MONST_CLASS_A ].push_back(tp); }
-      if (tp->is_monst_class_B()) { tp_monst[ biome ][ monst_environ ][ MONST_CLASS_B ].push_back(tp); }
-      if (tp->is_monst_class_C()) { tp_monst[ biome ][ monst_environ ][ MONST_CLASS_C ].push_back(tp); }
-      if (tp->is_monst_class_D()) { tp_monst[ biome ][ monst_environ ][ MONST_CLASS_D ].push_back(tp); }
-      if (tp->is_monst_class_E()) { tp_monst[ biome ][ monst_environ ][ MONST_CLASS_E ].push_back(tp); }
+      if (tp->is_monst()) {
+        tp_monst[ biome ][ monst_environ ][ MONST_CLASS_ANY ].push_back(tp);
+      }
+      if (tp->is_monst_class_A()) {
+        tp_monst[ biome ][ monst_environ ][ MONST_CLASS_A ].push_back(tp);
+      }
+      if (tp->is_monst_class_B()) {
+        tp_monst[ biome ][ monst_environ ][ MONST_CLASS_B ].push_back(tp);
+      }
+      if (tp->is_monst_class_C()) {
+        tp_monst[ biome ][ monst_environ ][ MONST_CLASS_C ].push_back(tp);
+      }
+      if (tp->is_monst_class_D()) {
+        tp_monst[ biome ][ monst_environ ][ MONST_CLASS_D ].push_back(tp);
+      }
+      if (tp->is_monst_class_E()) {
+        tp_monst[ biome ][ monst_environ ][ MONST_CLASS_E ].push_back(tp);
+      }
     }
   }
 }

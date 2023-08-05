@@ -24,16 +24,22 @@ char *py_obj_to_string(const PyObject *py_str)
   }
 
   py_encstr = PyUnicode_AsEncodedString((PyObject *) py_str, "utf-8", nullptr);
-  if (! py_encstr) { goto err_out; }
+  if (! py_encstr) {
+    goto err_out;
+  }
 
   str = PyBytes_AS_STRING(py_encstr);
-  if (! str) { goto err_out; }
+  if (! str) {
+    goto err_out;
+  }
 
   outstr = dupstr(str, __FUNCTION__);
 
 err_out:
 
-  if (py_encstr) { Py_XDECREF(py_encstr); }
+  if (py_encstr) {
+    Py_XDECREF(py_encstr);
+  }
 
   return outstr;
 }
@@ -53,7 +59,9 @@ int py_obj_to_int(PyObject *py_obj)
   val = PyLong_AsLong(py_obj);
 
 err_out:
-  if (PyErr_Occurred()) { ERR("Int conversion failed"); }
+  if (PyErr_Occurred()) {
+    ERR("Int conversion failed");
+  }
 
   return val;
 }
@@ -73,7 +81,9 @@ int py_obj_to_bool(PyObject *py_obj)
   val = PyLong_AsLong(py_obj);
 
 err_out:
-  if (PyErr_Occurred()) { ERR("Int(bool) conversion failed"); }
+  if (PyErr_Occurred()) {
+    ERR("Int(bool) conversion failed");
+  }
 
   return (val != 0);
 }
@@ -94,7 +104,9 @@ uint64_t py_obj_to_uint64(PyObject *py_obj)
 
 err_out:
 
-  if (PyErr_Occurred()) { ERR("Int conversion failed"); }
+  if (PyErr_Occurred()) {
+    ERR("Int conversion failed");
+  }
 
   return val;
 }
@@ -117,7 +129,9 @@ double py_obj_to_double(PyObject *py_obj)
 
 err_out:
 
-  if (PyErr_Occurred()) { ERR("Int conversion failed"); }
+  if (PyErr_Occurred()) {
+    ERR("Int conversion failed");
+  }
 
   return val;
 }
@@ -136,14 +150,20 @@ int py_obj_attr_int(const PyObject *py_obj, const char *attr)
   }
 
   py_encstr = PyObject_GetAttrString((PyObject *) py_obj, attr);
-  if (! py_encstr) { goto err_out; }
+  if (! py_encstr) {
+    goto err_out;
+  }
 
   i = py_obj_to_int(py_encstr);
 
 err_out:
-  if (py_encstr) { Py_XDECREF(py_encstr); }
+  if (py_encstr) {
+    Py_XDECREF(py_encstr);
+  }
 
-  if (PyErr_Occurred()) { ERR("Int conversion failed"); }
+  if (PyErr_Occurred()) {
+    ERR("Int conversion failed");
+  }
 
   return i;
 }
@@ -162,14 +182,20 @@ uint64_t py_obj_attr_uint64(const PyObject *py_obj, const char *attr)
   }
 
   py_encstr = PyObject_GetAttrString((PyObject *) py_obj, attr);
-  if (! py_encstr) { goto err_out; }
+  if (! py_encstr) {
+    goto err_out;
+  }
 
   i = py_obj_to_uint64(py_encstr);
 
 err_out:
-  if (py_encstr) { Py_XDECREF(py_encstr); }
+  if (py_encstr) {
+    Py_XDECREF(py_encstr);
+  }
 
-  if (PyErr_Occurred()) { ERR("Int conversion failed"); }
+  if (PyErr_Occurred()) {
+    ERR("Int conversion failed");
+  }
 
   return i;
 }
@@ -188,14 +214,20 @@ double py_obj_attr_double(const PyObject *py_obj, const char *attr)
   }
 
   py_encstr = PyObject_GetAttrString((PyObject *) py_obj, attr);
-  if (! py_encstr) { goto err_out; }
+  if (! py_encstr) {
+    goto err_out;
+  }
 
   i = py_obj_to_double(py_encstr);
 
 err_out:
-  if (py_encstr) { Py_XDECREF(py_encstr); }
+  if (py_encstr) {
+    Py_XDECREF(py_encstr);
+  }
 
-  if (PyErr_Occurred()) { ERR("Int conversion failed"); }
+  if (PyErr_Occurred()) {
+    ERR("Int conversion failed");
+  }
 
   return i;
 }
@@ -216,16 +248,22 @@ char *py_obj_attr_str(const PyObject *py_obj, const char *attr)
   }
 
   py_encstr = PyObject_GetAttrString((PyObject *) py_obj, attr);
-  if (! py_encstr) { goto err_out; }
+  if (! py_encstr) {
+    goto err_out;
+  }
 
   str = py_obj_to_string(py_encstr);
-  if (! str) { goto err_out; }
+  if (! str) {
+    goto err_out;
+  }
 
   outstr = str;
 
 err_out:
 
-  if (py_encstr) { Py_XDECREF(py_encstr); }
+  if (py_encstr) {
+    Py_XDECREF(py_encstr);
+  }
 
   return outstr;
 }
@@ -243,14 +281,20 @@ PyObject *py_obj_attr(const PyObject *py_obj, const char *attr)
   }
 
   py_encstr = PyObject_GetAttrString((PyObject *) py_obj, attr);
-  if (! py_encstr) { goto err_out; }
+  if (! py_encstr) {
+    goto err_out;
+  }
 
   return (py_encstr);
 
 err_out:
-  if (py_encstr) { Py_XDECREF(py_encstr); }
+  if (py_encstr) {
+    Py_XDECREF(py_encstr);
+  }
 
-  if (PyErr_Occurred()) { ERR("Obj lookup conversion failed"); }
+  if (PyErr_Occurred()) {
+    ERR("Obj lookup conversion failed");
+  }
 
   Py_RETURN_NONE;
 }

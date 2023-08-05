@@ -14,13 +14,17 @@ static inline void term_puts_fg(unsigned char a)
 {
   TRACE_AND_INDENT();
 
-  if (g_opt_gfx_monochrome) { return; }
+  if (g_opt_gfx_monochrome) {
+    return;
+  }
 
   static const char *data[] = {
       "[30m", "[31m", "[32m", "[33m", "[34m", "[35m", "[36m", "[37m", "\033[m",
   };
 
-  if (a >= ARRAY_SIZE(data)) { ERR("Overflow"); }
+  if (a >= ARRAY_SIZE(data)) {
+    ERR("Overflow");
+  }
 
   fputs(data[ a ], stdout);
 }
@@ -29,7 +33,9 @@ static void term_puts_fgbg(unsigned char fg, unsigned char bg)
 {
   TRACE_AND_INDENT();
 
-  if (g_opt_gfx_monochrome) { return; }
+  if (g_opt_gfx_monochrome) {
+    return;
+  }
 
   static const char *data[] = {
       "[40;30m", "[40;31m", "[40;32m", "[40;33m", "[40;34m", "[40;35m", "[40;36m", "[40;37m",
@@ -206,47 +212,89 @@ void term_log(const char *s)
 
 int term_color_to_console_color(color c)
 {
-  if (c == BLACK) return TERM_COLOR_BLACK;
-  if (c == BLUE) return TERM_COLOR_BLACK;
-  if (c == BROWN) return TERM_COLOR_BLACK;
-  if (c == COLOR_NONE) return TERM_COLOR_RESET;
-  if (c == CYAN) return TERM_COLOR_CYAN;
-  if (c == DARKBLUE) return TERM_COLOR_BLUE;
-  if (c == DARKGRAY) return TERM_COLOR_BLACK;
-  if (c == DARKGREEN) return TERM_COLOR_GREEN;
-  if (c == DARKOLIVEGREEN2) return TERM_COLOR_GREEN;
-  if (c == DARKOLIVEGREEN) return TERM_COLOR_GREEN;
-  if (c == DARKRED) return TERM_COLOR_RED;
-  if (c == DEEPWATER) return TERM_COLOR_BLUE;
-  if (c == FORESTGREEN) return TERM_COLOR_GREEN;
-  if (c == GOLD) return TERM_COLOR_YELLOW;
-  if (c == GRAY10) return TERM_COLOR_BLUE;
-  if (c == GRAY30) return TERM_COLOR_BLUE;
-  if (c == GRAY40) return TERM_COLOR_BLUE;
-  if (c == GRAY50) return TERM_COLOR_BLUE;
-  if (c == GRAY5) return TERM_COLOR_BLUE;
-  if (c == GRAY60) return TERM_COLOR_WHITE;
-  if (c == GRAY70) return TERM_COLOR_WHITE;
-  if (c == GRAY80) return TERM_COLOR_WHITE;
-  if (c == GRAY90) return TERM_COLOR_WHITE;
-  if (c == GRAY) return TERM_COLOR_WHITE;
-  if (c == GREEN) return TERM_COLOR_GREEN;
-  if (c == LAVA) return TERM_COLOR_RED;
-  if (c == LIGHTBLUE) return TERM_COLOR_BLUE;
-  if (c == LIGHTGREEN) return TERM_COLOR_GREEN;
-  if (c == LIMEGREEN) return TERM_COLOR_GREEN;
-  if (c == LIME) return TERM_COLOR_GREEN;
-  if (c == MAGENTA) return TERM_COLOR_PINK;
-  if (c == ORANGE) return TERM_COLOR_RED;
-  if (c == PEACHPUFF) return TERM_COLOR_RED;
-  if (c == PINK) return TERM_COLOR_RED;
-  if (c == PURPLE) return TERM_COLOR_PINK;
-  if (c == RED) return TERM_COLOR_RED;
-  if (c == SILVER) return TERM_COLOR_WHITE;
-  if (c == STEELBLUE) return TERM_COLOR_WHITE;
-  if (c == WATER) return TERM_COLOR_CYAN;
-  if (c == WHITE) return TERM_COLOR_WHITE;
-  if (c == YELLOW) return TERM_COLOR_YELLOW;
-  if (c == PURPLE) return TERM_COLOR_BLUE;
+  if (c == BLACK)
+    return TERM_COLOR_BLACK;
+  if (c == BLUE)
+    return TERM_COLOR_BLACK;
+  if (c == BROWN)
+    return TERM_COLOR_BLACK;
+  if (c == COLOR_NONE)
+    return TERM_COLOR_RESET;
+  if (c == CYAN)
+    return TERM_COLOR_CYAN;
+  if (c == DARKBLUE)
+    return TERM_COLOR_BLUE;
+  if (c == DARKGRAY)
+    return TERM_COLOR_BLACK;
+  if (c == DARKGREEN)
+    return TERM_COLOR_GREEN;
+  if (c == DARKOLIVEGREEN2)
+    return TERM_COLOR_GREEN;
+  if (c == DARKOLIVEGREEN)
+    return TERM_COLOR_GREEN;
+  if (c == DARKRED)
+    return TERM_COLOR_RED;
+  if (c == DEEPWATER)
+    return TERM_COLOR_BLUE;
+  if (c == FORESTGREEN)
+    return TERM_COLOR_GREEN;
+  if (c == GOLD)
+    return TERM_COLOR_YELLOW;
+  if (c == GRAY10)
+    return TERM_COLOR_BLUE;
+  if (c == GRAY30)
+    return TERM_COLOR_BLUE;
+  if (c == GRAY40)
+    return TERM_COLOR_BLUE;
+  if (c == GRAY50)
+    return TERM_COLOR_BLUE;
+  if (c == GRAY5)
+    return TERM_COLOR_BLUE;
+  if (c == GRAY60)
+    return TERM_COLOR_WHITE;
+  if (c == GRAY70)
+    return TERM_COLOR_WHITE;
+  if (c == GRAY80)
+    return TERM_COLOR_WHITE;
+  if (c == GRAY90)
+    return TERM_COLOR_WHITE;
+  if (c == GRAY)
+    return TERM_COLOR_WHITE;
+  if (c == GREEN)
+    return TERM_COLOR_GREEN;
+  if (c == LAVA)
+    return TERM_COLOR_RED;
+  if (c == LIGHTBLUE)
+    return TERM_COLOR_BLUE;
+  if (c == LIGHTGREEN)
+    return TERM_COLOR_GREEN;
+  if (c == LIMEGREEN)
+    return TERM_COLOR_GREEN;
+  if (c == LIME)
+    return TERM_COLOR_GREEN;
+  if (c == MAGENTA)
+    return TERM_COLOR_PINK;
+  if (c == ORANGE)
+    return TERM_COLOR_RED;
+  if (c == PEACHPUFF)
+    return TERM_COLOR_RED;
+  if (c == PINK)
+    return TERM_COLOR_RED;
+  if (c == PURPLE)
+    return TERM_COLOR_PINK;
+  if (c == RED)
+    return TERM_COLOR_RED;
+  if (c == SILVER)
+    return TERM_COLOR_WHITE;
+  if (c == STEELBLUE)
+    return TERM_COLOR_WHITE;
+  if (c == WATER)
+    return TERM_COLOR_CYAN;
+  if (c == WHITE)
+    return TERM_COLOR_WHITE;
+  if (c == YELLOW)
+    return TERM_COLOR_YELLOW;
+  if (c == PURPLE)
+    return TERM_COLOR_BLUE;
   return TERM_COLOR_BLUE;
 }

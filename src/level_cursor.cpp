@@ -20,7 +20,9 @@ void Level::cursor_warp_check(void)
     if (cursor) {
       if (player) {
         auto d = distance(player->curr_at, cursor->curr_at);
-        if (d > std::min(TILES_VISIBLE_ACROSS, TILES_VISIBLE_DOWN)) { cursor->move_to_immediately(player->curr_at); }
+        if (d > std::min(TILES_VISIBLE_ACROSS, TILES_VISIBLE_DOWN)) {
+          cursor->move_to_immediately(player->curr_at);
+        }
       }
     }
   }
@@ -33,18 +35,30 @@ void Level::cursor_move(void)
 {
   TRACE_NO_INDENT();
 
-  if (is_mouse_over_any_bag()) { return; }
+  if (is_mouse_over_any_bag()) {
+    return;
+  }
 
-  if (wid_find_under_mouse()) { return; }
+  if (wid_find_under_mouse()) {
+    return;
+  }
 
-  if (game->robot_mode) { return; }
+  if (game->robot_mode) {
+    return;
+  }
 
-  if ((game->state != Game::STATE_NORMAL) && (game->state != Game::STATE_CHOOSING_TARGET)) { return; }
+  if ((game->state != Game::STATE_NORMAL) && (game->state != Game::STATE_CHOOSING_TARGET)) {
+    return;
+  }
 
-  if (wid_popup_exists()) { return; }
+  if (wid_popup_exists()) {
+    return;
+  }
 
   if ((sdl.wheel_x != 0) || (sdl.wheel_y != 0)) {
-    if (wid_find_under_mouse_when_scrolling()) { return; }
+    if (wid_find_under_mouse_when_scrolling()) {
+      return;
+    }
 
     float dx = -sdl.wheel_x;
     float dy = -sdl.wheel_y;
@@ -85,7 +99,9 @@ void Level::cursor_move(void)
   //
   // Check for dead after scrolling so we can look around when dead
   //
-  if (player && player->is_dead) { return; }
+  if (player && player->is_dead) {
+    return;
+  }
 
   //
   // Dampen mouse moves at level start
@@ -143,15 +159,23 @@ void Level::cursor_recreate(point curr_at)
   //
   // If move confirmation is present, do not recreate the cursor
   //
-  if (wid_warning_window) { return; }
+  if (wid_warning_window) {
+    return;
+  }
 
-  if (game->robot_mode) { return; }
+  if (game->robot_mode) {
+    return;
+  }
 
   auto what = game->request_to_throw_item;
-  if (! what) { what = game->request_to_use_item; }
+  if (! what) {
+    what = game->request_to_use_item;
+  }
 
   if (cursor) {
-    if (curr_at == point(-1, -1)) { curr_at = cursor->curr_at; }
+    if (curr_at == point(-1, -1)) {
+      curr_at = cursor->curr_at;
+    }
     cursor->dead("update");
   } else {
     curr_at = player->curr_at;
@@ -161,9 +185,13 @@ void Level::cursor_recreate(point curr_at)
     bool too_far = false;
     auto dist    = DISTANCE(player->curr_at.x, player->curr_at.y, curr_at.x, curr_at.y);
 
-    if (player->distance_throw_get()) { too_far = dist > player->distance_throw_get(); }
+    if (player->distance_throw_get()) {
+      too_far = dist > player->distance_throw_get();
+    }
 
-    if (what->range_max()) { too_far = too_far || dist > what->range_max(); }
+    if (what->range_max()) {
+      too_far = too_far || dist > what->range_max();
+    }
 
     if (too_far) {
       cursor                       = thing_new("cursor_select_fail", curr_at);

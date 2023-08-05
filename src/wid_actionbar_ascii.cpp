@@ -21,13 +21,19 @@ void wid_actionbar_ascii_init(void)
   auto box_style           = UI_WID_STYLE_HORIZ_DARK;
   auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
 
-  if (! game->level) { return; }
+  if (! game->level) {
+    return;
+  }
   auto level = game->level;
 
   auto player = game->level->player;
-  if (! player) { return; }
+  if (! player) {
+    return;
+  }
 
-  if (player->is_dead) { return; }
+  if (player->is_dead) {
+    return;
+  }
 
   //
   // In case a scancode was used to open this widget
@@ -44,7 +50,9 @@ void wid_actionbar_ascii_init(void)
 
   CarryOptions carry_options;
   bool         ui_icon_collect = false;
-  if (player->check_anything_to_carry(carry_options)) { ui_icon_collect = true; }
+  if (player->check_anything_to_carry(carry_options)) {
+    ui_icon_collect = true;
+  }
   //
   // I don't like this - it is missing a key and makes things more complex?
   //
@@ -52,17 +60,27 @@ void wid_actionbar_ascii_init(void)
 
   bool ui_icon_close = false;
 
-  if (wid_popup_exists()) { ui_icon_close = true; }
+  if (wid_popup_exists()) {
+    ui_icon_close = true;
+  }
 
   int options = 1;
 
-  if (game->state == Game::STATE_NORMAL) { options = 8; }
+  if (game->state == Game::STATE_NORMAL) {
+    options = 8;
+  }
 
-  if (game->robot_mode) { options = 2; }
+  if (game->robot_mode) {
+    options = 2;
+  }
 
-  if (ui_icon_collect) { options++; }
+  if (ui_icon_collect) {
+    options++;
+  }
 
-  if (ui_icon_close) { options++; }
+  if (ui_icon_close) {
+    options++;
+  }
 
   bool add_descend {};
   if (level->is_descend_dungeon(player->curr_at.x, player->curr_at.y)
@@ -95,7 +113,9 @@ void wid_actionbar_ascii_init(void)
     wid_set_ignore_scroll_events(wid_actionbar, true);
     wid_set_pos(wid_actionbar, tl, br);
     wid_set_shape_none(wid_actionbar);
-    if (g_opt_test_dungeon_gen) { wid_set_shape_none(wid_actionbar); }
+    if (g_opt_test_dungeon_gen) {
+      wid_set_shape_none(wid_actionbar);
+    }
     wid_lower(wid_actionbar);
   }
 
@@ -114,7 +134,9 @@ void wid_actionbar_ascii_init(void)
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
     wid_set_style(w, box_style);
-    if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+    if (g_opt_test_dungeon_gen) {
+      wid_set_shape_none(w);
+    }
     x_at += option_width + 1;
   }
 
@@ -136,7 +158,9 @@ void wid_actionbar_ascii_init(void)
         wid_set_on_tick(w, wid_actionbar_ai_tick);
         wid_set_style(w, UI_WID_STYLE_RED);
       }
-      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+      if (g_opt_test_dungeon_gen) {
+        wid_set_shape_none(w);
+      }
       x_at += option_width + 1;
     }
   }
@@ -155,7 +179,9 @@ void wid_actionbar_ascii_init(void)
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);
       wid_set_style(w, box_style);
-      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+      if (g_opt_test_dungeon_gen) {
+        wid_set_shape_none(w);
+      }
       x_at += option_width + 1;
     }
 
@@ -172,7 +198,9 @@ void wid_actionbar_ascii_init(void)
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);
       wid_set_style(w, box_style);
-      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+      if (g_opt_test_dungeon_gen) {
+        wid_set_shape_none(w);
+      }
       x_at += option_width + 1;
     }
 
@@ -189,7 +217,9 @@ void wid_actionbar_ascii_init(void)
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);
       wid_set_style(w, box_style);
-      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+      if (g_opt_test_dungeon_gen) {
+        wid_set_shape_none(w);
+      }
       x_at += option_width + 1;
     }
 
@@ -206,7 +236,9 @@ void wid_actionbar_ascii_init(void)
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);
       wid_set_style(w, box_style);
-      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+      if (g_opt_test_dungeon_gen) {
+        wid_set_shape_none(w);
+      }
       x_at += option_width + 1;
     }
 
@@ -223,7 +255,9 @@ void wid_actionbar_ascii_init(void)
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);
       wid_set_style(w, box_style);
-      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+      if (g_opt_test_dungeon_gen) {
+        wid_set_shape_none(w);
+      }
       x_at += option_width + 1;
     }
 
@@ -241,7 +275,9 @@ void wid_actionbar_ascii_init(void)
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);
       wid_set_style(w, box_style);
-      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+      if (g_opt_test_dungeon_gen) {
+        wid_set_shape_none(w);
+      }
       x_at += option_width + 1;
     }
 
@@ -258,7 +294,9 @@ void wid_actionbar_ascii_init(void)
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);
       wid_set_style(w, box_style);
-      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+      if (g_opt_test_dungeon_gen) {
+        wid_set_shape_none(w);
+      }
       x_at += option_width + 1;
     }
 
@@ -275,7 +313,9 @@ void wid_actionbar_ascii_init(void)
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);
       wid_set_style(w, box_style);
-      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+      if (g_opt_test_dungeon_gen) {
+        wid_set_shape_none(w);
+      }
       x_at += option_width + 1;
     }
 
@@ -292,7 +332,9 @@ void wid_actionbar_ascii_init(void)
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);
       wid_set_style(w, box_style);
-      if (g_opt_test_dungeon_gen) { wid_set_shape_none(w); }
+      if (g_opt_test_dungeon_gen) {
+        wid_set_shape_none(w);
+      }
       x_at += option_width + 1;
     }
   }

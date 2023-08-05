@@ -99,7 +99,9 @@ void Game::tick_begin_now(void)
     //
     // Update the heatmap before the next tick
     //
-    if (! level->is_heatmap_valid) { level->update_heatmap(); }
+    if (! level->is_heatmap_valid) {
+      level->update_heatmap();
+    }
 
     //
     // Update the noisemap before the next tick
@@ -131,12 +133,16 @@ bool Game::tick_end(void)
   //
   // Sanity
   //
-  if (game->things_are_moving) { ERR("Trying to end a tick while things are still moving"); }
+  if (game->things_are_moving) {
+    ERR("Trying to end a tick while things are still moving");
+  }
 
   //
   // Move when all things are done moving
   //
-  if (game->tick_completed == game->tick_current) { return false; }
+  if (game->tick_completed == game->tick_current) {
+    return false;
+  }
   game->tick_completed = game->tick_current;
 
   save_snapshot_check();
@@ -182,7 +188,9 @@ bool Game::tick_end(void)
     //
     // This is to update things that are now onscreen at the end of the tick.
     //
-    if (level->player) { level->player->light_distance_update(); }
+    if (level->player) {
+      level->player->light_distance_update();
+    }
 #if 0
     //
     // For debugging consistent randomness
@@ -230,6 +238,8 @@ void Game::tick_update(void)
     float move_duration = game->current_move_speed;
     game->tick_dt       = move_at / move_duration;
 
-    if (game->tick_dt > 1) { game->tick_dt = 1; }
+    if (game->tick_dt > 1) {
+      game->tick_dt = 1;
+    }
   }
 }

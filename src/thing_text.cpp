@@ -14,7 +14,9 @@ std::string Thing::text_a_or_an(size_t max_len)
   auto tpp = tp();
   verify(MTYPE_THING, this);
   verify(MTYPE_TP, tpp);
-  if (unlikely(! tpp)) { return ("<no name>"); }
+  if (unlikely(! tpp)) {
+    return ("<no name>");
+  }
 
   std::string out = "";
 
@@ -46,7 +48,9 @@ std::string Thing::text_a_or_an(size_t max_len)
   }
 
   if (max_len) {
-    if (out.size() >= max_len) { ::abbreviate(out); }
+    if (out.size() >= max_len) {
+      ::abbreviate(out);
+    }
   }
 
   return out;
@@ -58,7 +62,9 @@ std::string Thing::text_the(bool include_owner)
   auto tpp = tp();
   verify(MTYPE_THING, this);
   verify(MTYPE_TP, tpp);
-  if (unlikely(! tpp)) { return ("<no name>"); }
+  if (unlikely(! tpp)) {
+    return ("<no name>");
+  }
 
   std::string out = "the ";
 
@@ -95,9 +101,13 @@ std::string Thing::text_the(bool include_owner)
 
   out += tpp->text_long_name();
 
-  if (tpp->is_spell()) { out += " spell"; }
+  if (tpp->is_spell()) {
+    out += " spell";
+  }
 
-  if (tpp->is_skill()) { out += " skill"; }
+  if (tpp->is_skill()) {
+    out += " skill";
+  }
 
   return out;
 }
@@ -108,7 +118,9 @@ std::string Thing::text_the_no_dying(bool include_owner)
   auto tpp = tp();
   verify(MTYPE_THING, this);
   verify(MTYPE_TP, tpp);
-  if (unlikely(! tpp)) { return ("<no name>"); }
+  if (unlikely(! tpp)) {
+    return ("<no name>");
+  }
 
   std::string out = "the ";
 
@@ -150,7 +162,9 @@ std::string Thing::text_short_a_or_an(size_t max_len)
   auto tpp = tp();
   verify(MTYPE_THING, this);
   verify(MTYPE_TP, tpp);
-  if (unlikely(! tpp)) { return ("<no name>"); }
+  if (unlikely(! tpp)) {
+    return ("<no name>");
+  }
 
   std::string out = "";
 
@@ -182,7 +196,9 @@ std::string Thing::text_short_a_or_an(size_t max_len)
   }
 
   if (max_len) {
-    if (out.size() >= max_len) { abbreviate(out); }
+    if (out.size() >= max_len) {
+      abbreviate(out);
+    }
   }
 
   return out;
@@ -195,7 +211,9 @@ std::string Thing::text_short_the(size_t max_len)
 
   verify(MTYPE_THING, this);
   verify(MTYPE_TP, tpp);
-  if (unlikely(! tpp)) { return ("<no name>"); }
+  if (unlikely(! tpp)) {
+    return ("<no name>");
+  }
 
   std::string out = "the ";
 
@@ -212,7 +230,9 @@ std::string Thing::text_short_the(size_t max_len)
   out += tpp->text_short_name();
 
   if (max_len) {
-    if (out.size() >= max_len) { abbreviate(out); }
+    if (out.size() >= max_len) {
+      abbreviate(out);
+    }
   }
 
   return out;
@@ -248,7 +268,9 @@ std::string Thing::text_short_capitalised(size_t max_len)
   bool  word_start = true;
   while (c < e) {
     if (word_start) {
-      if (islower(*c)) { *c = toupper(*c); }
+      if (islower(*c)) {
+        *c = toupper(*c);
+      }
       word_start = false;
     } else if (*c == ' ') {
       word_start = true;
@@ -271,7 +293,9 @@ std::string Thing::text_long_capitalised(size_t max_len)
   bool  word_start = true;
   while (c < e) {
     if (word_start) {
-      if (islower(*c)) { *c = toupper(*c); }
+      if (islower(*c)) {
+        *c = toupper(*c);
+      }
       word_start = false;
     } else if (*c == ' ') {
       word_start = true;
@@ -290,7 +314,9 @@ std::string Thing::text_short_and_state_capitalised(size_t max_len)
 
   verify(MTYPE_THING, this);
   verify(MTYPE_TP, tpp);
-  if (unlikely(! tpp)) { return ("<no name>"); }
+  if (unlikely(! tpp)) {
+    return ("<no name>");
+  }
 
   std::string out;
 
@@ -322,7 +348,9 @@ std::string Thing::text_short_and_state_capitalised(size_t max_len)
   bool  word_start = true;
   while (c < e) {
     if (word_start) {
-      if (islower(*c)) { *c = toupper(*c); }
+      if (islower(*c)) {
+        *c = toupper(*c);
+      }
       word_start = false;
     } else if (*c == ' ') {
       word_start = true;
@@ -332,7 +360,9 @@ std::string Thing::text_short_and_state_capitalised(size_t max_len)
   }
 
   if (max_len) {
-    if (out.size() >= max_len) { abbreviate(out); }
+    if (out.size() >= max_len) {
+      abbreviate(out);
+    }
   }
 
   return out;
@@ -363,7 +393,9 @@ std::string Thing::text_long_and_state_capitalised(size_t max_len)
   bool  word_start = true;
   while (c < e) {
     if (word_start) {
-      if (islower(*c)) { *c = toupper(*c); }
+      if (islower(*c)) {
+        *c = toupper(*c);
+      }
       word_start = false;
     } else if (*c == ' ') {
       word_start = true;
@@ -373,7 +405,9 @@ std::string Thing::text_long_and_state_capitalised(size_t max_len)
   }
 
   if (max_len) {
-    if (out.size() >= max_len) { abbreviate(out); }
+    if (out.size() >= max_len) {
+      abbreviate(out);
+    }
   }
 
   return out;
@@ -415,23 +449,33 @@ void Thing::show_botcon_description(void)
   // Want to show that you can drop a bag if you select it.
   //
   if (immediate_owner()) {
-    if (is_droppable()) { text += " %%fg=orange$" + ::to_string(game->config.key_drop) + "%%fg=reset$ to drop."; }
+    if (is_droppable()) {
+      text += " %%fg=orange$" + ::to_string(game->config.key_drop) + "%%fg=reset$ to drop.";
+    }
   }
 
   //
   // Unless a bag.
   //
   if (skip_showing_keys_to_use) {
-    if (text.empty()) { return; }
+    if (text.empty()) {
+      return;
+    }
     BOTCON("%s", text.c_str());
     return;
   }
 
-  if (is_weapon()) { text += " Damage %%fg=red$" + tp()->dmg_melee_dice_str() + "%%fg=reset$."; }
+  if (is_weapon()) {
+    text += " Damage %%fg=red$" + tp()->dmg_melee_dice_str() + "%%fg=reset$.";
+  }
 
-  if (is_poisonous_danger_level()) { text += " Poisons. "; }
+  if (is_poisonous_danger_level()) {
+    text += " Poisons. ";
+  }
 
-  if (is_necrotic_danger_level()) { text += " Necrotic. "; }
+  if (is_necrotic_danger_level()) {
+    text += " Necrotic. ";
+  }
 
   if (immediate_owner()) {
     if (is_usable()) {
@@ -452,11 +496,15 @@ void Thing::show_botcon_description(void)
       text += " %%fg=purple$" + ::to_string(game->config.key_throw) + "%%fg=reset$ to throw.";
     }
 
-    if (is_bag_item_container()) { text += " Use mouse to drag items."; }
+    if (is_bag_item_container()) {
+      text += " Use mouse to drag items.";
+    }
   }
 
   if (is_on_fire()) {
-    if (is_alive_monst() || is_player()) { text += " %%fg=red$Is on fire!"; }
+    if (is_alive_monst() || is_player()) {
+      text += " %%fg=red$Is on fire!";
+    }
   }
 
   if (! is_hidden) {
@@ -516,22 +564,32 @@ void Tp::show_botcon_description(void)
   //
   // Want to show that you can drop a bag if you select it.
   //
-  if (is_droppable()) { text += " %%fg=orange$" + ::to_string(game->config.key_drop) + "%%fg=reset$ to drop."; }
+  if (is_droppable()) {
+    text += " %%fg=orange$" + ::to_string(game->config.key_drop) + "%%fg=reset$ to drop.";
+  }
 
   //
   // Unless a bag.
   //
   if (skip_showing_keys_to_use) {
-    if (text.empty()) { return; }
+    if (text.empty()) {
+      return;
+    }
     BOTCON("%s", text.c_str());
     return;
   }
 
-  if (is_weapon()) { text += " Damage %%fg=red$" + dmg_melee_dice_str() + "%%fg=reset$."; }
+  if (is_weapon()) {
+    text += " Damage %%fg=red$" + dmg_melee_dice_str() + "%%fg=reset$.";
+  }
 
-  if (is_poisonous_danger_level()) { text += " Poisons. "; }
+  if (is_poisonous_danger_level()) {
+    text += " Poisons. ";
+  }
 
-  if (is_necrotic_danger_level()) { text += " Necrotic. "; }
+  if (is_necrotic_danger_level()) {
+    text += " Necrotic. ";
+  }
 
   if (is_usable()) {
     if (is_food()) {
@@ -551,7 +609,9 @@ void Tp::show_botcon_description(void)
     text += " %%fg=purple$" + ::to_string(game->config.key_throw) + "%%fg=reset$ to throw.";
   }
 
-  if (is_bag_item_container()) { text += " Use mouse to drag items."; }
+  if (is_bag_item_container()) {
+    text += " Use mouse to drag items.";
+  }
 
   if (text.size()) {
     if ((text[ text.size() - 1 ] == '.') || (text[ text.size() - 1 ] == '!')) {
@@ -573,10 +633,14 @@ const std::string Thing::text_long_name(size_t max_len)
     out = tp()->text_long_name();
   }
 
-  if (enchant_count_get()) { out += " +" + std::to_string(enchant_count_get()); }
+  if (enchant_count_get()) {
+    out += " +" + std::to_string(enchant_count_get());
+  }
 
   if (max_len) {
-    if (out.size() >= max_len) { abbreviate(out); }
+    if (out.size() >= max_len) {
+      abbreviate(out);
+    }
   }
 
   return out;
@@ -593,10 +657,14 @@ const std::string Thing::text_short_name(size_t max_len)
     out = tp()->text_short_name();
   }
 
-  if (enchant_count_get()) { out += " +" + std::to_string(enchant_count_get()); }
+  if (enchant_count_get()) {
+    out += " +" + std::to_string(enchant_count_get());
+  }
 
   if (max_len) {
-    if (out.size() >= max_len) { abbreviate(out); }
+    if (out.size() >= max_len) {
+      abbreviate(out);
+    }
   }
 
   return out;
@@ -619,7 +687,9 @@ std::string Tp::text_short_capitalised(void) const
 
   while (c < e) {
     if (word_start) {
-      if (islower(*c)) { *c = toupper(*c); }
+      if (islower(*c)) {
+        *c = toupper(*c);
+      }
       word_start = false;
     } else if (*c == ' ') {
       word_start = true;
@@ -646,7 +716,9 @@ std::string Tp::text_long_capitalised(void) const
 
   while (c < e) {
     if (word_start) {
-      if (islower(*c)) { *c = toupper(*c); }
+      if (islower(*c)) {
+        *c = toupper(*c);
+      }
       word_start = false;
     } else if (*c == ' ') {
       word_start = true;

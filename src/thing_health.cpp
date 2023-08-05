@@ -9,16 +9,22 @@
 int Thing::health_boost(Thingp victim, int v)
 {
   TRACE_NO_INDENT();
-  if (! v) { return false; }
+  if (! v) {
+    return false;
+  }
 
   //
   // So carcass creepers can consume each other
   //
   if (v < 0) {
     if (victim && victim->is_poisonous_danger_level()) {
-      if (is_able_to_eat_poisonous_food()) { v = -v; }
+      if (is_able_to_eat_poisonous_food()) {
+        v = -v;
+      }
     } else if (victim && victim->is_necrotic_danger_level()) {
-      if (is_able_to_eat_rotting_food()) { v = -v; }
+      if (is_able_to_eat_rotting_food()) {
+        v = -v;
+      }
     } else if (is_able_to_eat_unpleasant_food()) {
       v = -v;
     }
@@ -75,7 +81,9 @@ int Thing::health_boost(Thingp victim, int v)
 bool Thing::health_boost_would_occur(int v)
 {
   TRACE_NO_INDENT();
-  if (! v) { return false; }
+  if (! v) {
+    return false;
+  }
 
   auto old_health = health();
   auto max_health = health_max();
@@ -103,7 +111,9 @@ int Thing::health(void)
 {
   TRACE_NO_INDENT();
   int v = 0;
-  if (maybe_infop()) { v = infop()->health; }
+  if (maybe_infop()) {
+    v = infop()->health;
+  }
   /*
    * Why do we do this? It makes looking at weapon health hard
   auto owner = immediate_owner();
@@ -117,7 +127,9 @@ int Thing::health(void)
 int Thing::health_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->health = v);
   return n;
@@ -126,7 +138,9 @@ int Thing::health_set(int v)
 int Thing::health_decr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->health -= v);
   return n;
@@ -135,7 +149,9 @@ int Thing::health_decr(int v)
 int Thing::health_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->health += v);
   if (n > health_max()) {
@@ -148,7 +164,9 @@ int Thing::health_incr(int v)
 int Thing::health_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->health--);
   return n;
@@ -157,7 +175,9 @@ int Thing::health_decr(void)
 int Thing::health_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->health++);
   if (n > health_max()) {
@@ -173,14 +193,18 @@ int Thing::health_incr(void)
 int Thing::health_max(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->health_max); }
+  if (maybe_infop()) {
+    return (infop()->health_max);
+  }
   return 0;
 }
 
 int Thing::health_max_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->health_max = v);
   return n;
@@ -189,7 +213,9 @@ int Thing::health_max_set(int v)
 int Thing::health_max_decr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->health_max -= v);
   return n;
@@ -198,7 +224,9 @@ int Thing::health_max_decr(int v)
 int Thing::health_max_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->health_max += v);
   return n;
@@ -207,7 +235,9 @@ int Thing::health_max_incr(int v)
 int Thing::health_max_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->health_max--);
   return n;
@@ -216,7 +246,9 @@ int Thing::health_max_decr(void)
 int Thing::health_max_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->health_max++);
   return n;

@@ -9,10 +9,14 @@
 void Thing::stamina_boost(int v)
 {
   TRACE_NO_INDENT();
-  if (! v) { return; }
+  if (! v) {
+    return;
+  }
 
   auto max_stamina = stamina_max();
-  if (! max_stamina) { return; }
+  if (! max_stamina) {
+    return;
+  }
 
   auto old_stamina = stamina();
   auto new_stamina = old_stamina + v;
@@ -33,7 +37,9 @@ int Thing::stamina(void)
 {
   TRACE_NO_INDENT();
   int v = 0;
-  if (maybe_infop()) { v = infop()->stamina; }
+  if (maybe_infop()) {
+    v = infop()->stamina;
+  }
   /*
    * Why do we do this? It makes looking at weapon health hard
   auto owner = immediate_owner();
@@ -54,7 +60,9 @@ int Thing::stamina(void)
 int Thing::stamina_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stamina = v);
   return n;
@@ -71,20 +79,28 @@ int Thing::stamina_decr(int v)
   {
     auto iter = equip_get(e);
     if (iter) {
-      if (iter->is_tireless()) { return true; }
+      if (iter->is_tireless()) {
+        return true;
+      }
     }
   }
 
   auto n = (infop()->stamina -= v);
-  if (infop()->stamina < 0) { infop()->stamina = 0; }
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (infop()->stamina < 0) {
+    infop()->stamina = 0;
+  }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   return n;
 }
 
 int Thing::stamina_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stamina += v);
   if (n > stamina_max()) {
@@ -97,17 +113,23 @@ int Thing::stamina_incr(int v)
 int Thing::stamina_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stamina--);
-  if (infop()->stamina < 0) { infop()->stamina = 0; }
+  if (infop()->stamina < 0) {
+    infop()->stamina = 0;
+  }
   return n;
 }
 
 int Thing::stamina_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stamina++);
   if (n > stamina_max()) {
@@ -123,14 +145,18 @@ int Thing::stamina_incr(void)
 int Thing::stamina_max(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->stamina_max); }
+  if (maybe_infop()) {
+    return (infop()->stamina_max);
+  }
   return 0;
 }
 
 int Thing::stamina_max_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stamina_max = v);
   return n;
@@ -139,7 +165,9 @@ int Thing::stamina_max_set(int v)
 int Thing::stamina_max_decr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stamina_max -= v);
   return n;
@@ -148,7 +176,9 @@ int Thing::stamina_max_decr(int v)
 int Thing::stamina_max_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stamina_max += v);
   return n;
@@ -157,7 +187,9 @@ int Thing::stamina_max_incr(int v)
 int Thing::stamina_max_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stamina_max--);
   return n;
@@ -166,7 +198,9 @@ int Thing::stamina_max_decr(void)
 int Thing::stamina_max_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->stamina_max++);
   return n;

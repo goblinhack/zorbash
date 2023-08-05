@@ -22,7 +22,9 @@ void Thing::location_check(Thingp filter_to)
   //
   // Don't do location checks for the cursor, that's silly
   //
-  if (is_internal()) { return; }
+  if (is_internal()) {
+    return;
+  }
 
   //
   // Prevent interactions that might generate things like smoke.
@@ -67,17 +69,23 @@ void Thing::location_check(Thingp filter_to)
   //
   if (! filter_to || filter_to->is_chasm()) {
     chasm_tick();
-    if (is_dead) { return; }
+    if (is_dead) {
+      return;
+    }
   }
 
   if (! filter_to || filter_to->is_trap()) {
     trap_tick();
-    if (is_dead) { return; }
+    if (is_dead) {
+      return;
+    }
   }
 
   if (! filter_to || filter_to->is_portal()) {
     portal_tick();
-    if (is_dead) { return; }
+    if (is_dead) {
+      return;
+    }
   }
 
   //
@@ -85,58 +93,80 @@ void Thing::location_check(Thingp filter_to)
   //
   if (! filter_to || (filter_to->is_wall() || filter_to->is_rock())) {
     solid_rock_tick();
-    if (is_dead) { return; }
+    if (is_dead) {
+      return;
+    }
   }
 
   if (! filter_to || filter_to->is_acid()) {
     corrode_tick();
-    if (is_dead) { return; }
+    if (is_dead) {
+      return;
+    }
   }
 
   if (! filter_to || filter_to->is_barrel()) {
     barrel_tick();
-    if (is_dead) { return; }
+    if (is_dead) {
+      return;
+    }
   }
 
   if (! filter_to || filter_to->is_block_of_ice()) {
     block_of_ice_tick();
-    if (is_dead) { return; }
+    if (is_dead) {
+      return;
+    }
   }
 
   if (! filter_to || filter_to->is_secret_door()) {
     secret_door_tick();
-    if (is_dead) { return; }
+    if (is_dead) {
+      return;
+    }
   }
 
   if (! filter_to || filter_to->is_brazier()) {
     brazier_tick();
-    if (is_dead) { return; }
+    if (is_dead) {
+      return;
+    }
   }
 
   if (! filter_to || filter_to->is_water()) {
     water_tick();
-    if (is_dead) { return; }
+    if (is_dead) {
+      return;
+    }
   }
 
   if (! filter_to || filter_to->is_acid()) {
     acid_tick();
-    if (is_dead) { return; }
+    if (is_dead) {
+      return;
+    }
   }
 
   if (! filter_to || filter_to->is_plant()) {
     plant_tick();
-    if (is_dead) { return; }
+    if (is_dead) {
+      return;
+    }
   }
 
   if (! filter_to || filter_to->is_grass_dry()) {
     grass_tick();
-    if (is_dead) { return; }
+    if (is_dead) {
+      return;
+    }
   }
 
   gas_poison_tick();
   gas_healing_tick();
 
-  if (! is_able_to_change_levels()) { return; }
+  if (! is_able_to_change_levels()) {
+    return;
+  }
 
   auto descend_check = false;
   auto ascend_check  = false;
@@ -228,12 +258,16 @@ void Thing::location_check_me(void)
   //
   // Don't do location checks for the cursor, that's silly
   //
-  if (is_internal()) { return; }
+  if (is_internal()) {
+    return;
+  }
 
   //
   // If we're about to check as part of a tick, do it then.
   //
-  if (! game->tick_requested.empty()) { return; }
+  if (! game->tick_requested.empty()) {
+    return;
+  }
 
   location_check();
 
@@ -246,7 +280,9 @@ void Thing::location_check_me(void)
   {
     verify(MTYPE_THING, t);
 
-    if (t == this) { continue; }
+    if (t == this) {
+      continue;
+    }
 
     //
     // Check but filter only to this thing

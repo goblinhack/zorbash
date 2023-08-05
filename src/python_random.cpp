@@ -16,7 +16,9 @@ PyObject *py_pcg_random_range_inclusive(PyObject *obj, PyObject *args, PyObject 
   static char *kwlist[] = {(char *) "x", (char *) "y", nullptr};
 
   TRACE_NO_INDENT();
-  if (! PyArg_ParseTupleAndKeywords(args, keywds, "ii", kwlist, &x, &y)) { return nullptr; }
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "ii", kwlist, &x, &y)) {
+    return nullptr;
+  }
 
   //
   // Python style. We don't use pythons so we can get consistent random
@@ -34,7 +36,9 @@ PyObject *py_non_pcg_random_range_inclusive(PyObject *obj, PyObject *args, PyObj
   static char *kwlist[] = {(char *) "x", (char *) "y", nullptr};
 
   TRACE_NO_INDENT();
-  if (! PyArg_ParseTupleAndKeywords(args, keywds, "ii", kwlist, &x, &y)) { return nullptr; }
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "ii", kwlist, &x, &y)) {
+    return nullptr;
+  }
 
   //
   // Python style. We don't use pythons so we can get consistent random

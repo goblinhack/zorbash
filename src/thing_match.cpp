@@ -13,7 +13,9 @@ bool Tp::matches(const std::string &what)
     struct slre slre;
     if (slre_compile(&slre, what.c_str())) {
       auto name = text_short_name();
-      if (slre_match(&slre, name.c_str(), name.size(), nullptr /* captures */)) { return true; }
+      if (slre_match(&slre, name.c_str(), name.size(), nullptr /* captures */)) {
+        return true;
+      }
     }
     return false;
   }
@@ -612,7 +614,9 @@ bool Thing::matches(const std::string &what)
     struct slre slre;
     if (slre_compile(&slre, what.c_str())) {
       auto name = text_short_name();
-      if (slre_match(&slre, name.c_str(), name.size(), nullptr /* captures */)) { return true; }
+      if (slre_match(&slre, name.c_str(), name.size(), nullptr /* captures */)) {
+        return true;
+      }
     }
     return false;
   }
@@ -1203,7 +1207,9 @@ bool Thing::matches(const std::string &what)
   //
   // Any water type
   //
-  if ((is_shallow_water() || is_deep_water()) && (what == "is_water")) { return true; }
+  if ((is_shallow_water() || is_deep_water()) && (what == "is_water")) {
+    return true;
+  }
 
   return (what == text_short_name());
 }

@@ -153,15 +153,21 @@ PyObject *thing_shoot_at(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   if (itemp->is_projectile()) {
-    if (owner->projectile_shoot_at(nullptr /* staff */, std::string(item), target)) { Py_RETURN_TRUE; }
+    if (owner->projectile_shoot_at(nullptr /* staff */, std::string(item), target)) {
+      Py_RETURN_TRUE;
+    }
     Py_RETURN_FALSE;
   }
   if (itemp->is_laser()) {
-    if (owner->laser_shoot_at(nullptr /* staff */, std::string(item), target)) { Py_RETURN_TRUE; }
+    if (owner->laser_shoot_at(nullptr /* staff */, std::string(item), target)) {
+      Py_RETURN_TRUE;
+    }
     Py_RETURN_FALSE;
   }
   if (itemp->is_usable()) {
-    if (owner->item_targeted_use_at(nullptr /* staff */, target)) { Py_RETURN_TRUE; }
+    if (owner->item_targeted_use_at(nullptr /* staff */, target)) {
+      Py_RETURN_TRUE;
+    }
     Py_RETURN_FALSE;
   }
   owner->err("Cannot fire %s at %s", item, target->to_short_string().c_str());
@@ -1005,7 +1011,9 @@ PyObject *thing_msg_if_not_dead_or_dying(PyObject *obj, PyObject *args, PyObject
   //
   // To avoid logs when unequipping when dying, for example.
   //
-  if (owner->is_dead_or_dying()) { Py_RETURN_FALSE; }
+  if (owner->is_dead_or_dying()) {
+    Py_RETURN_FALSE;
+  }
 
   if (! msg) {
     ERR("%s: No msg thing ID set", __FUNCTION__);
@@ -1049,7 +1057,9 @@ PyObject *thing_popup(PyObject *obj, PyObject *args, PyObject *keywds)
   //
   // If not reachable, suppress the popup
   //
-  if (owner->distance_to_player() < DMAP_IS_PASSABLE) { owner->popup(msg); }
+  if (owner->distance_to_player() < DMAP_IS_PASSABLE) {
+    owner->popup(msg);
+  }
 
   Py_RETURN_TRUE;
 }
@@ -1087,7 +1097,9 @@ PyObject *thing_sound_play_(PyObject *obj, PyObject *args, PyObject *keywds)
   PY_DBG("thing_sound_play(name=%s)", name);
 
   std::string alias = name;
-  if (! owner->thing_sound_play(alias)) { Py_RETURN_FALSE; }
+  if (! owner->thing_sound_play(alias)) {
+    Py_RETURN_FALSE;
+  }
 
   Py_RETURN_TRUE;
 }
@@ -1125,7 +1137,9 @@ PyObject *thing_sound_play_channel_(PyObject *obj, PyObject *args, PyObject *key
   PY_DBG("sound_play_channel(channel=%d, name=%s)", channel, name);
 
   std::string alias = name;
-  if (! owner->thing_sound_play_channel(channel, alias)) { Py_RETURN_FALSE; }
+  if (! owner->thing_sound_play_channel(channel, alias)) {
+    Py_RETURN_FALSE;
+  }
 
   Py_RETURN_TRUE;
 }
@@ -1157,7 +1171,9 @@ PyObject *spawn_set_fire_to_things_around_me(PyObject *obj, PyObject *args, PyOb
   PY_DBG("%s(%X, %s)", __FUNCTION__, id, what);
 
   auto level = game->get_current_level();
-  if (! level) { Py_RETURN_FALSE; }
+  if (! level) {
+    Py_RETURN_FALSE;
+  }
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
@@ -1165,7 +1181,9 @@ PyObject *spawn_set_fire_to_things_around_me(PyObject *obj, PyObject *args, PyOb
     Py_RETURN_FALSE;
   }
 
-  if (t->spawn_set_fire_to_things_around_me(std::string(what), 1)) { Py_RETURN_TRUE; }
+  if (t->spawn_set_fire_to_things_around_me(std::string(what), 1)) {
+    Py_RETURN_TRUE;
+  }
   Py_RETURN_FALSE;
 }
 
@@ -1197,7 +1215,9 @@ PyObject *spawn_things_around_me(PyObject *obj, PyObject *args, PyObject *keywds
   PY_DBG("%s(%X, %s)", __FUNCTION__, id, what);
 
   auto level = game->get_current_level();
-  if (! level) { Py_RETURN_FALSE; }
+  if (! level) {
+    Py_RETURN_FALSE;
+  }
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
@@ -1205,7 +1225,9 @@ PyObject *spawn_things_around_me(PyObject *obj, PyObject *args, PyObject *keywds
     Py_RETURN_FALSE;
   }
 
-  if (t->spawn_things_around_me(std::string(what), radius)) { Py_RETURN_TRUE; }
+  if (t->spawn_things_around_me(std::string(what), radius)) {
+    Py_RETURN_TRUE;
+  }
   Py_RETURN_FALSE;
 }
 
@@ -1231,7 +1253,9 @@ PyObject *spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyObject 
   PY_DBG("%s(%X, %d)", __FUNCTION__, id, radius);
 
   auto level = game->get_current_level();
-  if (! level) { Py_RETURN_FALSE; }
+  if (! level) {
+    Py_RETURN_FALSE;
+  }
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
@@ -1239,7 +1263,9 @@ PyObject *spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyObject 
     Py_RETURN_FALSE;
   }
 
-  if (t->spawn_gas_poison_around_thing(radius)) { Py_RETURN_TRUE; }
+  if (t->spawn_gas_poison_around_thing(radius)) {
+    Py_RETURN_TRUE;
+  }
   Py_RETURN_FALSE;
 }
 
@@ -1265,7 +1291,9 @@ PyObject *spawn_gas_healing_around_thing(PyObject *obj, PyObject *args, PyObject
   PY_DBG("%s(%X, %d)", __FUNCTION__, id, radius);
 
   auto level = game->get_current_level();
-  if (! level) { Py_RETURN_FALSE; }
+  if (! level) {
+    Py_RETURN_FALSE;
+  }
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
@@ -1273,7 +1301,9 @@ PyObject *spawn_gas_healing_around_thing(PyObject *obj, PyObject *args, PyObject
     Py_RETURN_FALSE;
   }
 
-  if (t->spawn_gas_healing_around_thing(radius)) { Py_RETURN_TRUE; }
+  if (t->spawn_gas_healing_around_thing(radius)) {
+    Py_RETURN_TRUE;
+  }
   Py_RETURN_FALSE;
 }
 
@@ -1304,7 +1334,9 @@ PyObject *spawn_at_my_position(PyObject *obj, PyObject *args, PyObject *keywds)
   PY_DBG("%s(%X, %s)", __FUNCTION__, id, what);
 
   auto level = game->get_current_level();
-  if (! level) { Py_RETURN_FALSE; }
+  if (! level) {
+    Py_RETURN_FALSE;
+  }
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
@@ -1313,7 +1345,9 @@ PyObject *spawn_at_my_position(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   auto it = t->spawn_at(std::string(what));
-  if (it) { return Py_BuildValue("I", it->id); }
+  if (it) {
+    return Py_BuildValue("I", it->id);
+  }
   Py_RETURN_FALSE;
 }
 
@@ -1344,7 +1378,9 @@ PyObject *spawn_owned_thing_at_my_position(PyObject *obj, PyObject *args, PyObje
   PY_DBG("%s(%X, %s)", __FUNCTION__, id, what);
 
   auto level = game->get_current_level();
-  if (! level) { Py_RETURN_FALSE; }
+  if (! level) {
+    Py_RETURN_FALSE;
+  }
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
@@ -1353,7 +1389,9 @@ PyObject *spawn_owned_thing_at_my_position(PyObject *obj, PyObject *args, PyObje
   }
 
   auto it = t->spawn_owned_thing_at_my_position(std::string(what));
-  if (it) { return Py_BuildValue("I", it->id); }
+  if (it) {
+    return Py_BuildValue("I", it->id);
+  }
   Py_RETURN_FALSE;
 }
 
@@ -1384,7 +1422,9 @@ PyObject *spawn_minion_at_my_position(PyObject *obj, PyObject *args, PyObject *k
   PY_DBG("%s(%X, %s)", __FUNCTION__, id, what);
 
   auto level = game->get_current_level();
-  if (! level) { Py_RETURN_FALSE; }
+  if (! level) {
+    Py_RETURN_FALSE;
+  }
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
@@ -1393,7 +1433,9 @@ PyObject *spawn_minion_at_my_position(PyObject *obj, PyObject *args, PyObject *k
   }
 
   auto it = t->spawn_minion_at_my_position(std::string(what));
-  if (it) { return Py_BuildValue("I", it->id); }
+  if (it) {
+    return Py_BuildValue("I", it->id);
+  }
   Py_RETURN_FALSE;
 }
 
@@ -1424,7 +1466,9 @@ PyObject *spawn_at_if_possible(PyObject *obj, PyObject *args, PyObject *keywds)
   PY_DBG("%s(%X, %s)", __FUNCTION__, id, what);
 
   auto level = game->get_current_level();
-  if (! level) { Py_RETURN_FALSE; }
+  if (! level) {
+    Py_RETURN_FALSE;
+  }
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
@@ -1432,7 +1476,9 @@ PyObject *spawn_at_if_possible(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (t->spawn_at_if_possible(std::string(what))) { Py_RETURN_TRUE; }
+  if (t->spawn_at_if_possible(std::string(what))) {
+    Py_RETURN_TRUE;
+  }
   Py_RETURN_FALSE;
 }
 

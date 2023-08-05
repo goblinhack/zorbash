@@ -25,7 +25,9 @@ void Level::display_pixelart_internal_particles(void)
                                 std::end(new_internal_particles));
   new_internal_particles.clear();
 
-  if (all_internal_particles.empty()) { return; }
+  if (all_internal_particles.empty()) {
+    return;
+  }
 
   //
   // std::remove_if iterates over the whole vector and moves all "selected"
@@ -58,8 +60,12 @@ void Level::display_pixelart_internal_particles(void)
     point at((d.x * dt) + p.start.x, (d.y * dt) + p.start.y);
 
     auto sz = p.sz;
-    if (sz.w < 0) { sz.w = -sz.w; }
-    if (sz.h < 0) { sz.h = -sz.h; }
+    if (sz.w < 0) {
+      sz.w = -sz.w;
+    }
+    if (sz.h < 0) {
+      sz.h = -sz.h;
+    }
 
     point blit_tl(at.x - (sz.w / 2), at.y - (sz.h / 2));
     point blit_br(at.x + (sz.w / 2), at.y + (sz.h / 2));
@@ -72,7 +78,9 @@ void Level::display_pixelart_internal_particles(void)
     Tpp tpp = {};
     if (p.id.id) {
       auto t = thing_find(p.id);
-      if (t) { tpp = t->tp(); }
+      if (t) {
+        tpp = t->tp();
+      }
     }
 
     auto  tile            = p.tile;
@@ -109,9 +117,13 @@ void Level::display_pixelart_internal_particles(void)
     blit_tl -= pixel_map_at - p.pixel_map_at;
     blit_br -= pixel_map_at - p.pixel_map_at;
 
-    if (p.hflip) { std::swap(blit_tl.x, blit_br.x); }
+    if (p.hflip) {
+      std::swap(blit_tl.x, blit_br.x);
+    }
 
-    if (! g_opt_ascii) { tile_blit_outline(tile, blit_tl, blit_br, WHITE); }
+    if (! g_opt_ascii) {
+      tile_blit_outline(tile, blit_tl, blit_br, WHITE);
+    }
   }
 
   blit_flush();

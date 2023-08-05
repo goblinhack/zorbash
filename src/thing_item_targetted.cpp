@@ -12,7 +12,9 @@ bool Thing::item_choose_target(Thingp item, Thingp victim /* can be null */)
   TRACE_AND_INDENT();
 
   if (is_monst() || (game->robot_mode && is_player())) {
-    if (! victim) { victim = best_visible_target_get(); }
+    if (! victim) {
+      victim = best_visible_target_get();
+    }
     if (! victim) {
       dbg("No victim found");
       return false;
@@ -32,7 +34,9 @@ bool Thing::item_choose_target(Thingp item, Thingp victim /* can be null */)
     return true;
   }
 
-  if (! is_target_select(item)) { return false; }
+  if (! is_target_select(item)) {
+    return false;
+  }
 
   game->request_to_use_item = item;
 
@@ -50,7 +54,9 @@ Thingp Thing::item_targeted_use_at(Thingp item, Thingp target)
   dbg("Use item %s at %s", item->to_short_string().c_str(), target->curr_at.to_string().c_str());
 
   auto collatoral_dmg = in_the_way_for_shooting(curr_at, target->curr_at, 1);
-  if (collatoral_dmg.size()) { target = collatoral_dmg[ 0 ]; }
+  if (collatoral_dmg.size()) {
+    target = collatoral_dmg[ 0 ];
+  }
 
   auto start = last_blit_at;
   auto end   = target->last_blit_at;
@@ -116,7 +122,9 @@ Thingp Thing::item_targeted_use_at(Thingp item, point at)
 
   FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
   {
-    if (t->is_the_grid) { return item_targeted_use_at(item, t); }
+    if (t->is_the_grid) {
+      return item_targeted_use_at(item, t);
+    }
   }
   FOR_ALL_THINGS_END()
 

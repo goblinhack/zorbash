@@ -33,13 +33,15 @@ void backtrace_unwind(void **buffer, int size)
 
     if (! unw_get_proc_name(&cursor, symbol, sizeof(symbol), &off)) {
       int status;
-      if ((name = abi::__cxa_demangle(symbol, nullptr, nullptr, &status)) == nullptr) name = symbol;
+      if ((name = abi::__cxa_demangle(symbol, nullptr, nullptr, &status)) == nullptr)
+        name = symbol;
     }
 
     printf("#%-2d 0x%016" PRIxPTR " sp=0x%016" PRIxPTR " %s + 0x%" PRIxPTR "\n", ++n, static_cast< uintptr_t >(ip),
            static_cast< uintptr_t >(sp), name, static_cast< uintptr_t >(off));
 
-    if (name != symbol) free(name);
+    if (name != symbol)
+      free(name);
   }
 }
 #endif

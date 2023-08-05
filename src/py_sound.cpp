@@ -63,7 +63,9 @@ PyObject *sound_play_(PyObject *obj, PyObject *args, PyObject *keywds)
   PY_DBG("sound_play(name=%s)", name);
 
   std::string alias = name;
-  if (! sound_play(alias)) { Py_RETURN_FALSE; }
+  if (! sound_play(alias)) {
+    Py_RETURN_FALSE;
+  }
 
   Py_RETURN_TRUE;
 }
@@ -90,7 +92,9 @@ PyObject *sound_play_channel_(PyObject *obj, PyObject *args, PyObject *keywds)
   PY_DBG("sound_play_channel(channel=%d, name=%s)", channel, name);
 
   std::string alias = name;
-  if (! sound_play_channel(channel, alias)) { Py_RETURN_FALSE; }
+  if (! sound_play_channel(channel, alias)) {
+    Py_RETURN_FALSE;
+  }
 
   Py_RETURN_TRUE;
 }

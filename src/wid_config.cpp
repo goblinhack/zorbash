@@ -74,7 +74,9 @@ static uint8_t wid_config_top_back(Widp w, int x, int y, uint32_t button)
 static uint8_t wid_config_top_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   switch (key->mod) {
     case KMOD_LCTRL :
@@ -105,7 +107,9 @@ static uint8_t wid_config_top_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   return true;
 }
@@ -115,7 +119,9 @@ void Game::wid_config_top_menu(void)
   TRACE_AND_INDENT();
   CON("INF: Config menu");
 
-  if (wid_config_top_window) { wid_config_top_destroy(); }
+  if (wid_config_top_window) {
+    wid_config_top_destroy();
+  }
   wid_rightbar_fini();
   wid_leftbar_fini();
   wid_inventory_fini();

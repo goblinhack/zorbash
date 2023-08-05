@@ -51,7 +51,9 @@ float Thing::fadeup_curr(void)
 float Thing::fadeup_height_curr(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->fadeup_height); }
+  if (maybe_infop()) {
+    return (infop()->fadeup_height);
+  }
   return 0;
 }
 
@@ -68,7 +70,9 @@ void Thing::fadeup_height_set(float v)
 float Thing::fadeup_fade_curr(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->fadeup_fade); }
+  if (maybe_infop()) {
+    return (infop()->fadeup_fade);
+  }
   return 0;
 }
 

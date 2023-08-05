@@ -24,7 +24,9 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
     TRACE_AND_INDENT();
 
     if (is_intelligent()) {
-      if (ai_on_fire()) { return true; }
+      if (ai_on_fire()) {
+        return true;
+      }
     }
   }
 
@@ -35,13 +37,17 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
     AI_LOG("I am on bad terrain, escape");
     TRACE_AND_INDENT();
 
-    if (ai_escape()) { return true; }
+    if (ai_escape()) {
+      return true;
+    }
 
     ai->wander_dest = point(0, 0);
     AI_LOG("I am on bad terrain, and cannot escape. Try to wander.");
     TRACE_AND_INDENT();
 
-    if (ai_wander()) { return true; }
+    if (ai_wander()) {
+      return true;
+    }
   }
 
   if (threat) {
@@ -78,7 +84,9 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
       // Look around for something nearby to do; like collect an item.
       //
       AI_LOG("Look around for some immediately adjacent goal as threat is not too close");
-      if (ai_choose_immediately_adjacent_goal()) { return true; }
+      if (ai_choose_immediately_adjacent_goal()) {
+        return true;
+      }
     }
 
     //
@@ -92,7 +100,9 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
       //
       if (is_able_to_tire() && (stamina() < stamina_max() / 10)) {
         AI_LOG("Very low on stamina, forced to rest");
-        if (is_player()) { game->tick_begin("Robot is forced to rest, very low on stamina"); }
+        if (is_player()) {
+          game->tick_begin("Robot is forced to rest, very low on stamina");
+        }
         change_state(MONST_STATE_RESTING, "need to rest, very low on stamina");
         return true;
       }
@@ -104,7 +114,9 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
       if (health() < health_max() / 10) {
         if (can_eat_something()) {
           AI_LOG("Very low on health, forced to rest");
-          if (is_player()) { game->tick_begin("Robot needs to rest, very low on health"); }
+          if (is_player()) {
+            game->tick_begin("Robot needs to rest, very low on health");
+          }
           change_state(MONST_STATE_RESTING, "need to rest, very low on health");
           return true;
         }
@@ -126,7 +138,9 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
       AI_LOG("Idle, rest check");
       if (is_able_to_tire() && (stamina() < stamina_max() / 3)) {
         AI_LOG("Low on stamina, rest");
-        if (is_player()) { game->tick_begin("Robot is low on stamina"); }
+        if (is_player()) {
+          game->tick_begin("Robot is low on stamina");
+        }
         change_state(MONST_STATE_RESTING, "need to rest, low on stamina");
         return true;
       }
@@ -139,7 +153,9 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
         AI_LOG("Idle, eat check as a bit hungry");
         if (can_eat_something()) {
           AI_LOG("Low on health, rest");
-          if (is_player()) { game->tick_begin("Robot is low on health"); }
+          if (is_player()) {
+            game->tick_begin("Robot is low on health");
+          }
           change_state(MONST_STATE_RESTING, "need to rest, low on health");
           return true;
         }
@@ -155,23 +171,45 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
     if (game->tick_current - tick_last_i_was_attacked() < 2) {
       AI_LOG("Skip trying on items as I was recently attacked");
     } else {
-      if (try_to_enchant_items()) { return true; }
-      if (try_to_use_weapon()) { return true; }
-      if (try_to_use_armor()) { return true; }
-      if (try_to_use_helmet()) { return true; }
-      if (try_to_use_amulet()) { return true; }
-      if (try_to_use_boots()) { return true; }
-      if (try_to_use_gauntlet()) { return true; }
-      if (try_to_use_shield()) { return true; }
-      if (try_to_use_cloak()) { return true; }
-      if (try_to_use_rings()) { return true; }
+      if (try_to_enchant_items()) {
+        return true;
+      }
+      if (try_to_use_weapon()) {
+        return true;
+      }
+      if (try_to_use_armor()) {
+        return true;
+      }
+      if (try_to_use_helmet()) {
+        return true;
+      }
+      if (try_to_use_amulet()) {
+        return true;
+      }
+      if (try_to_use_boots()) {
+        return true;
+      }
+      if (try_to_use_gauntlet()) {
+        return true;
+      }
+      if (try_to_use_shield()) {
+        return true;
+      }
+      if (try_to_use_cloak()) {
+        return true;
+      }
+      if (try_to_use_rings()) {
+        return true;
+      }
     }
 
     //
     // Look around for something nearby to do; like collect an item.
     //
     AI_LOG("Look around for some immediately adjacent goal");
-    if (ai_choose_immediately_adjacent_goal()) { return true; }
+    if (ai_choose_immediately_adjacent_goal()) {
+      return true;
+    }
   }
 
   //
@@ -204,7 +242,9 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
 
   for (int search_type = 0; search_type < search_type_max; search_type++) {
     if (ai_create_path_to_goal(minx, miny, maxx, maxy, search_type)) {
-      if (ai->move_path.size()) { change_state(MONST_STATE_MOVING, "found a new goal"); }
+      if (ai->move_path.size()) {
+        change_state(MONST_STATE_MOVING, "found a new goal");
+      }
       return true;
     }
   }
@@ -215,7 +255,9 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
   if (ai->wander_dest != point(0, 0)) {
     if (pcg_random_range(0, 100) < 50) {
       dbg3("Try to continue wander");
-      if (ai_wander()) { return true; }
+      if (ai_wander()) {
+        return true;
+      }
     }
   }
 
@@ -229,7 +271,9 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
   //
   if ((health() <= (health_max() / 4) * 3)) {
     if (is_able_to_tire()) {
-      if (stamina() <= (stamina_max() / 4) * 3) { rest = true; }
+      if (stamina() <= (stamina_max() / 4) * 3) {
+        rest = true;
+      }
     } else {
       rest = true;
     }
@@ -238,11 +282,15 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
   //
   // Are we able to rest?
   //
-  if (! is_able_to_rest()) { rest = false; }
+  if (! is_able_to_rest()) {
+    rest = false;
+  }
 
   if (rest) {
     AI_LOG("Nothing to do. Rest.");
-    if (is_player()) { game->tick_begin("nothing to do, rest"); }
+    if (is_player()) {
+      game->tick_begin("nothing to do, rest");
+    }
     change_state(MONST_STATE_RESTING, "nothing to do, rest");
     return true;
   }

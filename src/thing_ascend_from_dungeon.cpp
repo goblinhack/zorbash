@@ -9,7 +9,9 @@
 
 bool Thing::ascend_dungeon_tick(void)
 {
-  if (! level->is_ascend_dungeon(curr_at.x, curr_at.y)) { return false; }
+  if (! level->is_ascend_dungeon(curr_at.x, curr_at.y)) {
+    return false;
+  }
 
   dbg("Ascend dungeon tick");
   TRACE_AND_INDENT();
@@ -19,7 +21,9 @@ bool Thing::ascend_dungeon_tick(void)
     // User has pressed a button, forcing the change
     //
   } else if (game->tick_current - tick_last_level_change() <= 1) {
-    if (is_player()) { dbg("Location check, ascend, no too soon"); }
+    if (is_player()) {
+      dbg("Location check, ascend, no too soon");
+    }
 
     return false;
   }
@@ -28,7 +32,9 @@ bool Thing::ascend_dungeon_tick(void)
     //
     // Robot only goes down
     //
-    if (game->robot_mode) { return false; }
+    if (game->robot_mode) {
+      return false;
+    }
     dbg("Location check, ascend");
   }
 
@@ -40,13 +46,17 @@ bool Thing::ascend_dungeon_tick(void)
       }
       is_waiting_to_ascend_dungeon = true;
 
-      if (is_player()) { dbg("Location check, is now waiting to ascend"); }
+      if (is_player()) {
+        dbg("Location check, is now waiting to ascend");
+      }
       return true;
     }
     return ascend_dungeon();
   }
 
-  if (is_player()) { msg("The exit is blocked. You are stuck here!"); }
+  if (is_player()) {
+    msg("The exit is blocked. You are stuck here!");
+  }
 
   return false;
 }
@@ -63,7 +73,9 @@ bool Thing::ascend_dungeon(bool force, point3d next_level)
     }
   }
 
-  if (! maybe_infop()) { return false; }
+  if (! maybe_infop()) {
+    return false;
+  }
 
   dbg("Ascend dungeon");
   TRACE_AND_INDENT();
@@ -75,15 +87,21 @@ bool Thing::ascend_dungeon(bool force, point3d next_level)
     }
   }
 
-  if (next_level == point3d(0, 0, 0)) { next_level = level->world_at + point3d(0, 0, -2); }
+  if (next_level == point3d(0, 0, 0)) {
+    next_level = level->world_at + point3d(0, 0, -2);
+  }
 
   auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
   if (! l) {
-    if (is_player()) { msg("The entrance is permanently blocked!"); }
+    if (is_player()) {
+      msg("The entrance is permanently blocked!");
+    }
     return false;
   }
 
-  if (is_player()) { game->current_level = next_level; }
+  if (is_player()) {
+    game->current_level = next_level;
+  }
 
   for (auto x = 0; x < MAP_WIDTH; x++) {
     for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -117,7 +135,9 @@ bool Thing::ascend_dungeon(bool force, point3d next_level)
         location_check_me();
         update_light();
 
-        if (is_player() && level->cursor) { level->cursor->move_to_immediately(curr_at); }
+        if (is_player() && level->cursor) {
+          level->cursor->move_to_immediately(curr_at);
+        }
 
         is_changing_level = false;
         dbg("Moved to previous level exit");
@@ -125,7 +145,9 @@ bool Thing::ascend_dungeon(bool force, point3d next_level)
           level->ts_fade_in_begin = time_ms_cached();
           level->update_new_level();
 
-          if (game->robot_mode) { game->tick_begin("Begin exploring the new level"); }
+          if (game->robot_mode) {
+            game->tick_begin("Begin exploring the new level");
+          }
         }
         return true;
       }

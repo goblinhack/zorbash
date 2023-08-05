@@ -12,7 +12,9 @@ int Thing::tick_last_did_something(void)
 {
   TRACE_NO_INDENT();
 
-  if (maybe_infop()) { return (infop()->tick_last_did_something); }
+  if (maybe_infop()) {
+    return (infop()->tick_last_did_something);
+  }
   return 0;
 }
 
@@ -58,7 +60,9 @@ int Thing::tick_last_seen_by_player(void)
 {
   TRACE_NO_INDENT();
 
-  if (maybe_infop()) { return (infop()->tick_last_seen_by_player); }
+  if (maybe_infop()) {
+    return (infop()->tick_last_seen_by_player);
+  }
   return 0;
 }
 
@@ -104,7 +108,9 @@ int Thing::tick_born(void)
 {
   TRACE_NO_INDENT();
 
-  if (maybe_infop()) { return (infop()->tick_born); }
+  if (maybe_infop()) {
+    return (infop()->tick_born);
+  }
   return 0;
 }
 
@@ -150,7 +156,9 @@ int Thing::tick_last_dropped(void)
 {
   TRACE_NO_INDENT();
 
-  if (maybe_infop()) { return (infop()->tick_last_dropped); }
+  if (maybe_infop()) {
+    return (infop()->tick_last_dropped);
+  }
   return 0;
 }
 
@@ -196,7 +204,9 @@ int Thing::tick_last_teleported(void)
 {
   TRACE_NO_INDENT();
 
-  if (maybe_infop()) { return (infop()->tick_last_teleported); }
+  if (maybe_infop()) {
+    return (infop()->tick_last_teleported);
+  }
   return 0;
 }
 
@@ -241,7 +251,9 @@ int Thing::tick_last_teleported_incr(void)
 int Thing::tick_last_location_check(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->tick_last_location_check); }
+  if (maybe_infop()) {
+    return (infop()->tick_last_location_check);
+  }
   return 0;
 }
 
@@ -286,7 +298,9 @@ int Thing::tick_last_location_check_incr(void)
 int Thing::tick_last_escape(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->tick_last_escape); }
+  if (maybe_infop()) {
+    return (infop()->tick_last_escape);
+  }
   return 0;
 }
 
@@ -331,7 +345,9 @@ int Thing::tick_last_escape_incr(void)
 int Thing::tick_last_level_change(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->tick_last_level_change); }
+  if (maybe_infop()) {
+    return (infop()->tick_last_level_change);
+  }
   return 0;
 }
 
@@ -376,7 +392,9 @@ int Thing::tick_last_level_change_incr(void)
 int Thing::tick_last_i_was_attacked(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->tick_last_i_was_attacked); }
+  if (maybe_infop()) {
+    return (infop()->tick_last_i_was_attacked);
+  }
   return 0;
 }
 
@@ -421,7 +439,9 @@ int Thing::tick_last_i_was_attacked_incr(void)
 int Thing::tick_last_i_attacked(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->tick_last_i_attacked); }
+  if (maybe_infop()) {
+    return (infop()->tick_last_i_attacked);
+  }
   return 0;
 }
 
@@ -466,7 +486,9 @@ int Thing::tick_last_i_attacked_incr(void)
 int Thing::tick_last_i_tried_to_attack(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->tick_last_i_tried_to_attack); }
+  if (maybe_infop()) {
+    return (infop()->tick_last_i_tried_to_attack);
+  }
   return 0;
 }
 
@@ -511,7 +533,9 @@ int Thing::tick_last_i_tried_to_attack_incr(void)
 point Thing::where_i_dropped_an_item_last_get(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_itemsp()) { return (itemsp()->where_i_dropped_an_item_last); }
+  if (maybe_itemsp()) {
+    return (itemsp()->where_i_dropped_an_item_last);
+  }
   return (point(-1, -1));
 }
 
@@ -531,7 +555,9 @@ point Thing::where_i_dropped_an_item_last_set(point v)
 point Thing::where_i_failed_to_collect_last_get(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_itemsp()) { return (itemsp()->where_i_failed_to_collect_last); }
+  if (maybe_itemsp()) {
+    return (itemsp()->where_i_failed_to_collect_last);
+  }
   return (point(-1, -1));
 }
 

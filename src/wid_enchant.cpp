@@ -46,19 +46,29 @@ static uint8_t wid_enchant_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
   auto level = game->get_current_level();
-  if (! level) { return true; }
+  if (! level) {
+    return true;
+  }
 
   auto player = level->player;
-  if (! player) { return true; }
+  if (! player) {
+    return true;
+  }
 
-  if (player->is_dead) { return true; }
+  if (player->is_dead) {
+    return true;
+  }
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   if (sdlk_eq(*key, game->config.key_drop)) {
     auto what = game->level->inventory_get();
     if (what) {
-      if (game->level->player->drop(what)) { game->tick_begin("drop"); }
+      if (game->level->player->drop(what)) {
+        game->tick_begin("drop");
+      }
     }
     CON("INF: Enchant cancelled");
     game->change_state(Game::STATE_NORMAL, "enchant cancel");
@@ -103,14 +113,22 @@ static uint8_t wid_enchant_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
   auto level = game->get_current_level();
-  if (! level) { return true; }
+  if (! level) {
+    return true;
+  }
 
   auto player = level->player;
-  if (! player) { return true; }
+  if (! player) {
+    return true;
+  }
 
-  if (player->is_dead) { return true; }
+  if (player->is_dead) {
+    return true;
+  }
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   return true;
 }
@@ -119,12 +137,18 @@ static uint8_t wid_enchant_mouse_up(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   auto level = game->get_current_level();
-  if (! level) { return true; }
+  if (! level) {
+    return true;
+  }
 
   auto player = level->player;
-  if (! player) { return true; }
+  if (! player) {
+    return true;
+  }
 
-  if (player->is_dead) { return true; }
+  if (player->is_dead) {
+    return true;
+  }
 
   wid_enchant_slot(wid_get_int_context(w));
   return true;
@@ -163,21 +187,29 @@ void Game::wid_enchant_an_item(void)
   {
     auto t = player->equip_get(e);
     if (t) {
-      if (found.find(t) != found.end()) { continue; }
-      if (! t->is_enchantable()) { continue; }
+      if (found.find(t) != found.end()) {
+        continue;
+      }
+      if (! t->is_enchantable()) {
+        continue;
+      }
 
       //
       // Only show one dart, not all of them
       //
       if (t->is_enchantable_as_a_group()) {
-        if (found_group.find(t->tp()) != found_group.end()) { continue; }
+        if (found_group.find(t->tp()) != found_group.end()) {
+          continue;
+        }
       }
 
       //
       // Don't over enchant
       //
       if (t->enchant_max_current_get()) {
-        if (t->enchant_count_get() >= t->enchant_max_current_get()) { continue; }
+        if (t->enchant_count_get() >= t->enchant_max_current_get()) {
+          continue;
+        }
       }
 
       found[ t ]             = true;
@@ -191,19 +223,29 @@ void Game::wid_enchant_an_item(void)
     {
       auto t = level->thing_find(id);
       if (t) {
-        if (found.find(t) != found.end()) { continue; }
-        if (player->is_equipped(t)) { continue; }
-        if (! t->is_enchantable()) { continue; }
+        if (found.find(t) != found.end()) {
+          continue;
+        }
+        if (player->is_equipped(t)) {
+          continue;
+        }
+        if (! t->is_enchantable()) {
+          continue;
+        }
 
         //
         // Only show one dart, not all of them
         //
         if (t->is_enchantable_as_a_group()) {
-          if (found_group.find(t->tp()) != found_group.end()) { continue; }
+          if (found_group.find(t->tp()) != found_group.end()) {
+            continue;
+          }
         }
 
         if (t->enchant_max_current_get()) {
-          if (t->enchant_count_get() >= t->enchant_max_current_get()) { continue; }
+          if (t->enchant_count_get() >= t->enchant_max_current_get()) {
+            continue;
+          }
         }
         found[ t ]             = true;
         found_group[ t->tp() ] = true;
@@ -222,7 +264,9 @@ void Game::wid_enchant_an_item(void)
 
   bool scrollbar = false;
   auto sz        = enchant_items.size();
-  if (! sz) { sz = 1; }
+  if (! sz) {
+    sz = 1;
+  }
   int height_max = (((int) sz * 3) + 6);
   int height;
   if (height_max > TERM_HEIGHT / 2) {
@@ -332,10 +376,14 @@ void Game::wid_enchant_an_item(void)
       FOR_ALL_EQUIP(e)
       {
         auto iter = player->equip_get(e);
-        if (iter == t) { s += " (equipped)"; }
+        if (iter == t) {
+          s += " (equipped)";
+        }
       }
 
-      if ((int) s.size() > width) { abbreviate(s); }
+      if ((int) s.size() > width) {
+        abbreviate(s);
+      }
 
       wid_set_text(wid_item, s);
 

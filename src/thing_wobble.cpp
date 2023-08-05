@@ -10,7 +10,9 @@
 
 void Thing::wobble(float wobble)
 {
-  if ((paralysis_count() > 0) || is_frozen || is_burnt || is_dead) { return; }
+  if ((paralysis_count() > 0) || is_frozen || is_burnt || is_dead) {
+    return;
+  }
 
   if (non_pcg_random_range(0, 100) < 50) {
     wobble_set(wobble);
@@ -22,9 +24,13 @@ void Thing::wobble(float wobble)
 float Thing::update_wobble(void)
 {
   auto w = wobble_curr();
-  if (w == 0.0) { return 0.0; }
+  if (w == 0.0) {
+    return 0.0;
+  }
 
-  if (fabs(w) < 0.01) { return 0.0; }
+  if (fabs(w) < 0.01) {
+    return 0.0;
+  }
 
   auto new_w = w;
   new_w *= 0.99;
@@ -40,7 +46,9 @@ float Thing::update_wobble(void)
 float Thing::wobble_curr(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->wobble); }
+  if (maybe_infop()) {
+    return (infop()->wobble);
+  }
   return 0;
 }
 

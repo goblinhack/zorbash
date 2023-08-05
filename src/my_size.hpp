@@ -124,7 +124,8 @@ public:
   //
   friend bool operator>(my_asize3d a, my_asize3d b)
   {
-    if ((a.d == 0) && (b.d == 0)) return (a.w * a.h) > (b.w * b.h);
+    if ((a.d == 0) && (b.d == 0))
+      return (a.w * a.h) > (b.w * b.h);
     return (a.w * a.h * a.d) > (b.w * b.h * b.d);
   }
 
@@ -135,7 +136,8 @@ public:
   //
   friend bool operator<(my_asize3d a, my_asize3d b)
   {
-    if ((a.d == 0) && (b.d == 0)) return (a.w * a.h) < (b.w * b.h);
+    if ((a.d == 0) && (b.d == 0))
+      return (a.w * a.h) < (b.w * b.h);
     return (a.w * a.h * a.d) < (b.w * b.h * b.d);
   }
 };

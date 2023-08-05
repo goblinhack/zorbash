@@ -28,9 +28,13 @@ void Thing::on_use(Thingp what)
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = what->name(); }
+    if (mod == "me") {
+      mod = what->name();
+    }
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
 
@@ -60,9 +64,13 @@ void Thing::on_use_skill(Thingp what)
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = what->name(); }
+    if (mod == "me") {
+      mod = what->name();
+    }
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
 
@@ -93,9 +101,13 @@ void Thing::on_swing(Thingp what)
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = what->name(); }
+    if (mod == "me") {
+      mod = what->name();
+    }
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
 
@@ -126,9 +138,13 @@ void Thing::on_use(Thingp what, Thingp target)
       auto        mod   = t[ 0 ];
       auto        fn    = t[ 1 ];
       std::size_t found = fn.find("()");
-      if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+      if (found != std::string::npos) {
+        fn = fn.replace(found, 2, "");
+      }
 
-      if (mod == "me") { mod = what->name(); }
+      if (mod == "me") {
+        mod = what->name();
+      }
 
       dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
           what->to_short_string().c_str(), target->to_short_string().c_str());
@@ -162,9 +178,13 @@ void Thing::on_use_skill(Thingp what, Thingp target)
       auto        mod   = t[ 0 ];
       auto        fn    = t[ 1 ];
       std::size_t found = fn.find("()");
-      if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+      if (found != std::string::npos) {
+        fn = fn.replace(found, 2, "");
+      }
 
-      if (mod == "me") { mod = what->name(); }
+      if (mod == "me") {
+        mod = what->name();
+      }
 
       dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
           what->to_short_string().c_str(), target->to_short_string().c_str());
@@ -187,16 +207,22 @@ void Thing::on_final_use(Thingp what)
   }
 
   auto on_final_use = what->tp()->on_final_use_do();
-  if (std::empty(on_final_use)) { return; }
+  if (std::empty(on_final_use)) {
+    return;
+  }
 
   auto t = split_tokens(on_final_use, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = what->name(); }
+    if (mod == "me") {
+      mod = what->name();
+    }
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
 
@@ -229,9 +255,13 @@ void Thing::on_final_use(Thingp what, Thingp target)
       auto        mod   = t[ 0 ];
       auto        fn    = t[ 1 ];
       std::size_t found = fn.find("()");
-      if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+      if (found != std::string::npos) {
+        fn = fn.replace(found, 2, "");
+      }
 
-      if (mod == "me") { mod = what->name(); }
+      if (mod == "me") {
+        mod = what->name();
+      }
 
       dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
           what->to_short_string().c_str(), target->to_short_string().c_str());
@@ -263,7 +293,9 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
     dbg("Attempt to use drained %s", what->to_short_string().c_str());
     TRACE_AND_INDENT();
 
-    if (is_player()) { msg("%s is unable to be used.", what->text_The().c_str()); }
+    if (is_player()) {
+      msg("%s is unable to be used.", what->text_The().c_str());
+    }
 
     on_final_use(what);
   } else {
@@ -291,9 +323,13 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
         auto s = what->stamina_drain_on_using();
         if (s) {
           s /= 2;
-          if (! s) { s = 1; }
+          if (! s) {
+            s = 1;
+          }
         }
-        if (s) { stamina_decr(s); }
+        if (s) {
+          stamina_decr(s);
+        }
       }
     }
 
@@ -311,9 +347,13 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
         auto s = what->magic_drain_on_using();
         if (s) {
           s /= 2;
-          if (! s) { s = 1; }
+          if (! s) {
+            s = 1;
+          }
         }
-        if (s) { magic_decr(s); }
+        if (s) {
+          magic_decr(s);
+        }
       }
     }
 
@@ -349,7 +389,9 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
       }
     }
 
-    if (what->is_spell()) { magic_decr(what->spell_cost()); }
+    if (what->is_spell()) {
+      magic_decr(what->spell_cost());
+    }
 
     if (target) {
       on_final_use(what, target);
@@ -394,11 +436,15 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
   //
   // So magical swords do not vanish on the last charge!
   //
-  if (what->is_kept_after_final_use()) { return; }
+  if (what->is_kept_after_final_use()) {
+    return;
+  }
 
   if (remove_after_use) {
     auto immediate_owner = what->immediate_owner();
-    if (immediate_owner) { immediate_owner->bag_remove(what); }
+    if (immediate_owner) {
+      immediate_owner->bag_remove(what);
+    }
 
     what->hooks_remove();
     what->owner_unset();
@@ -420,7 +466,9 @@ bool Thing::use(Thingp what, UseOptions *use_options)
   }
 
   int preferred_equip = -1;
-  if (use_options && use_options->preferred_equip_set) { preferred_equip = use_options->preferred_equip; }
+  if (use_options && use_options->preferred_equip_set) {
+    preferred_equip = use_options->preferred_equip;
+  }
 
   dbg("Trying to use: %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
@@ -446,133 +494,201 @@ bool Thing::use(Thingp what, UseOptions *use_options)
   } else if (what->is_enchantstone()) {
     dbg("Trying to use enchantstone: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
-    if (is_player()) { game->wid_enchant_an_item(); }
+    if (is_player()) {
+      game->wid_enchant_an_item();
+    }
   } else if (what->is_skillstone()) {
     dbg("Trying to use skillstone: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
-    if (is_player()) { game->wid_choose_skill(); }
+    if (is_player()) {
+      game->wid_choose_skill();
+    }
   } else if (what->is_spellbook()) {
     dbg("Trying to use spellbook: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
-    if (is_player()) { game->wid_choose_spell(); }
+    if (is_player()) {
+      game->wid_choose_spell();
+    }
   } else if (what->is_weapon()) {
     dbg("Trying to use weapon: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
-    if (preferred_equip == -1) { preferred_equip = MONST_EQUIP_WEAPON; }
+    if (preferred_equip == -1) {
+      preferred_equip = MONST_EQUIP_WEAPON;
+    }
     if (equip(what, preferred_equip)) {
-      if (is_player()) { game->tick_begin("player changed weapon"); }
+      if (is_player()) {
+        game->tick_begin("player changed weapon");
+      }
     }
 
     //
     // For duck summoning
     //
     if (is_equipped(what)) {
-      if (what->is_target_select()) { return item_choose_target(what); }
+      if (what->is_target_select()) {
+        return item_choose_target(what);
+      }
     }
   } else if (what->is_armor()) {
     dbg("Trying to use armor: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
-    if (preferred_equip == -1) { preferred_equip = MONST_EQUIP_ARMOR; }
+    if (preferred_equip == -1) {
+      preferred_equip = MONST_EQUIP_ARMOR;
+    }
     if (equip(what, preferred_equip)) {
-      if (is_player()) { game->tick_begin("player changed armor"); }
+      if (is_player()) {
+        game->tick_begin("player changed armor");
+      }
     }
   } else if (what->is_cloak()) {
     dbg("Trying to use cloak: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
-    if (preferred_equip == -1) { preferred_equip = MONST_EQUIP_CLOAK; }
+    if (preferred_equip == -1) {
+      preferred_equip = MONST_EQUIP_CLOAK;
+    }
     if (equip(what, preferred_equip)) {
-      if (is_player()) { game->tick_begin("player changed cloak"); }
+      if (is_player()) {
+        game->tick_begin("player changed cloak");
+      }
     }
   } else if (what->is_amulet()) {
     dbg("Trying to use amulet: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
-    if (preferred_equip == -1) { preferred_equip = MONST_EQUIP_AMULET; }
+    if (preferred_equip == -1) {
+      preferred_equip = MONST_EQUIP_AMULET;
+    }
     if (equip(what, preferred_equip)) {
-      if (is_player()) { game->tick_begin("player changed amulet"); }
+      if (is_player()) {
+        game->tick_begin("player changed amulet");
+      }
     }
   } else if (what->is_boots()) {
     dbg("Trying to use boots: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
-    if (preferred_equip == -1) { preferred_equip = MONST_EQUIP_BOOTS; }
+    if (preferred_equip == -1) {
+      preferred_equip = MONST_EQUIP_BOOTS;
+    }
 
     //
     // For boots of teleport
     //
     if (is_equipped(what)) {
-      if (what->is_target_select()) { return item_choose_target(what); }
+      if (what->is_target_select()) {
+        return item_choose_target(what);
+      }
     }
 
     if (what->is_usable() && is_equipped(what)) {
       used(what, this, false /* remove after use */, use_options);
-      if (is_player()) { game->tick_begin("player used a special ability"); }
+      if (is_player()) {
+        game->tick_begin("player used a special ability");
+      }
     } else if (equip(what, preferred_equip)) {
-      if (is_player()) { game->tick_begin("player changed boots"); }
+      if (is_player()) {
+        game->tick_begin("player changed boots");
+      }
     }
   } else if (what->is_helmet()) {
     dbg("Trying to use helmet: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
-    if (preferred_equip == -1) { preferred_equip = MONST_EQUIP_HELMET; }
+    if (preferred_equip == -1) {
+      preferred_equip = MONST_EQUIP_HELMET;
+    }
     if (equip(what, preferred_equip)) {
-      if (is_player()) { game->tick_begin("player changed helmet"); }
+      if (is_player()) {
+        game->tick_begin("player changed helmet");
+      }
     }
   } else if (what->is_amulet()) {
     dbg("Trying to use amulet: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
-    if (preferred_equip == -1) { preferred_equip = MONST_EQUIP_AMULET; }
+    if (preferred_equip == -1) {
+      preferred_equip = MONST_EQUIP_AMULET;
+    }
     if (equip(what, preferred_equip)) {
-      if (is_player()) { game->tick_begin("player changed amulet"); }
+      if (is_player()) {
+        game->tick_begin("player changed amulet");
+      }
     }
   } else if (what->is_gauntlet()) {
     dbg("Trying to use gauntlet: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
-    if (preferred_equip == -1) { preferred_equip = MONST_EQUIP_GAUNTLET; }
+    if (preferred_equip == -1) {
+      preferred_equip = MONST_EQUIP_GAUNTLET;
+    }
     if (equip(what, preferred_equip)) {
-      if (is_player()) { game->tick_begin("player changed gauntlet"); }
+      if (is_player()) {
+        game->tick_begin("player changed gauntlet");
+      }
     }
   } else if (what->is_shield()) {
     dbg("Trying to use shield: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
-    if (preferred_equip == -1) { preferred_equip = MONST_EQUIP_SHIELD; }
+    if (preferred_equip == -1) {
+      preferred_equip = MONST_EQUIP_SHIELD;
+    }
     if (equip(what, preferred_equip)) {
-      if (is_player()) { game->tick_begin("player changed shield"); }
+      if (is_player()) {
+        game->tick_begin("player changed shield");
+      }
     }
   } else if (what->is_auto_throw()) {
     dbg("Trying to throw item: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
     throw_item_choose_target(what);
-    if (is_player()) { level->describe(what); }
+    if (is_player()) {
+      level->describe(what);
+    }
   } else if (what->is_target_select()) {
     dbg("Trying to target something: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
     if (is_monst()) {
-      if (preferred_equip == -1) { preferred_equip = MONST_EQUIP_SHIELD; }
-      if (! what->equip_carry_anim().empty()) { equip(what, preferred_equip); }
+      if (preferred_equip == -1) {
+        preferred_equip = MONST_EQUIP_SHIELD;
+      }
+      if (! what->equip_carry_anim().empty()) {
+        equip(what, preferred_equip);
+      }
     }
     ret = shoot_at_and_choose_target(what, use_options);
-    if (is_player()) { level->describe(what); }
+    if (is_player()) {
+      level->describe(what);
+    }
   } else if (what->is_auto_use()) {
     dbg("Trying to auto use: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
     use(what);
-    if (is_player()) { level->describe(what); }
+    if (is_player()) {
+      level->describe(what);
+    }
   } else if (what->is_food()) {
     dbg("Trying to eat: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
     eat(what);
     used(what, this, true /* remove after use */);
-    if (is_player()) { game->tick_begin("player ate an item"); }
+    if (is_player()) {
+      game->tick_begin("player ate an item");
+    }
   } else if (what->is_potion()) {
     dbg("Trying to drink: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
-    if (is_player()) { msg("You quaff %s.", what->text_the().c_str()); }
+    if (is_player()) {
+      msg("You quaff %s.", what->text_the().c_str());
+    }
     used(what, this, true /* remove after use */);
-    if (is_player()) { game->tick_begin("player drunk an item"); }
+    if (is_player()) {
+      game->tick_begin("player drunk an item");
+    }
   } else if (what->is_staff()) {
     dbg("Trying to use: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
-    if (is_player()) { msg("You use %s.", what->text_the().c_str()); }
+    if (is_player()) {
+      msg("You use %s.", what->text_the().c_str());
+    }
     used(what, this, false /* remove after use */, use_options);
-    if (is_player()) { game->tick_begin("player used a staff"); }
+    if (is_player()) {
+      game->tick_begin("player used a staff");
+    }
   } else if (what->is_ring()) {
     dbg("Trying to put on: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
@@ -590,7 +706,9 @@ bool Thing::use(Thingp what, UseOptions *use_options)
     }
 
     if (equip(what, preferred_equip)) {
-      if (is_player()) { game->tick_begin("player wore a ring"); }
+      if (is_player()) {
+        game->tick_begin("player wore a ring");
+      }
     }
   } else if (! what->is_usable()) {
     dbg("Trying to use, last resort: %s", what->to_short_string().c_str());

@@ -44,7 +44,9 @@ void Thing::frozen_unset(bool quiet)
 {
   TRACE_NO_INDENT();
 
-  if (! is_frozen) { return; }
+  if (! is_frozen) {
+    return;
+  }
 
   level_pop();
   is_frozen = false;

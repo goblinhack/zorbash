@@ -24,11 +24,15 @@ void Game::set_meta_data(Levelp l)
   TRACE_AND_INDENT();
   save_meta = "";
 
-  if (l && l->player) { save_meta += l->player->title() + ", "; }
+  if (l && l->player) {
+    save_meta += l->player->title() + ", ";
+  }
 
   save_meta += "seed " + seed_name + ", ";
 
-  if (l) { save_meta += l->to_string() + ", "; }
+  if (l) {
+    save_meta += l->to_string() + ", ";
+  }
 
   save_meta += string_timestamp();
 }
@@ -41,7 +45,11 @@ int Game::get_move_speed(void)
 
 Levelp Game::get_current_level(void)
 {
-  if (level) { return level; }
-  if (level_being_created) { return level_being_created; }
+  if (level) {
+    return level;
+  }
+  if (level_being_created) {
+    return level_being_created;
+  }
   return nullptr;
 }

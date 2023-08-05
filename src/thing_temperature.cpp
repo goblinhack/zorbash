@@ -19,13 +19,17 @@ void Thing::temperature_tick(void)
   // Not sure what I should do with things like pillars and smoke. Do we want them
   // to change temperature? I guess if so, set an initial temp.
   //
-  if (! initial_temperature_is_set()) { return; }
+  if (! initial_temperature_is_set()) {
+    return;
+  }
 
   //
   // Don't allow things inside chests to catch fire.
   //
   auto o_top = top_owner();
-  if (o_top && ! o_top->initial_temperature_is_set()) { return; }
+  if (o_top && ! o_top->initial_temperature_is_set()) {
+    return;
+  }
 
   if (is_ethereal()) {
     //
@@ -63,24 +67,32 @@ void Thing::temperature_tick(void)
 
   FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y)
   {
-    if (t->is_floor() || t->is_corridor()) { continue; }
+    if (t->is_floor() || t->is_corridor()) {
+      continue;
+    }
 
     //
     // Do not count hidden (carried) items
     //
-    if (t->is_hidden) { continue; }
+    if (t->is_hidden) {
+      continue;
+    }
 
     //
     // Without this check a player will heat themselves up ridiculously
     //
     if (t == this) {
-      if (! is_frozen) { continue; }
+      if (! is_frozen) {
+        continue;
+      }
     }
 
     //
     // Should "dead" fire skeletons cause fire damage to those standing on the same tile ?
     //
-    if (t->is_dead) { continue; }
+    if (t->is_dead) {
+      continue;
+    }
 
     //
     // If the player is standing in the same tile as a torch, don't burn them.
@@ -124,21 +136,29 @@ void Thing::temperature_tick(void)
       //
       // Ignore carried things
       //
-      if (t->top_owner() == this) { continue; }
+      if (t->top_owner() == this) {
+        continue;
+      }
 
       //
       // If a bag, ignore the temperature of the carrier.
       //
-      if (o_top == t) { continue; }
+      if (o_top == t) {
+        continue;
+      }
     }
 
-    if (! t->has_temperature()) { continue; }
+    if (! t->has_temperature()) {
+      continue;
+    }
 
     //
     // So bats can fly over lava
     //
     if (t->is_lava()) {
-      if (is_flying()) { continue; }
+      if (is_flying()) {
+        continue;
+      }
     }
 
     //
@@ -179,7 +199,9 @@ void Thing::temperature_tick(void)
 
   int thing_temp = temperature;
   if (is_able_to_freeze()) {
-    if ((thing_temp > 0) && is_frozen) { frozen_unset(); }
+    if ((thing_temp > 0) && is_frozen) {
+      frozen_unset();
+    }
   }
 
   if (thing_temp < 0) {
@@ -206,7 +228,9 @@ void Thing::temperature_tick(void)
     }
   }
 
-  if (! location_temp_set) { return; }
+  if (! location_temp_set) {
+    return;
+  }
 
   dbg("Temperature tick, my temp %d, location temp: %d", thing_temp, location_temp);
   TRACE_AND_INDENT();
@@ -215,7 +239,9 @@ void Thing::temperature_tick(void)
   // Items being carried in side a chest are insulated.
   //
   auto owner = immediate_owner();
-  if (owner && owner->is_bag_item_container()) { thing_temp = TEMPERATURE_ROOM; }
+  if (owner && owner->is_bag_item_container()) {
+    thing_temp = TEMPERATURE_ROOM;
+  }
 
   //
   // Over time we gradually get closer to the location temperature.
@@ -223,7 +249,9 @@ void Thing::temperature_tick(void)
   if (thing_temp != location_temp) {
     int delta = (location_temp - thing_temp) / 2;
 
-    if (is_lava() || is_wall() || is_door() || is_rock()) { delta = (location_temp - thing_temp) / 10; }
+    if (is_lava() || is_wall() || is_door() || is_rock()) {
+      delta = (location_temp - thing_temp) / 10;
+    }
 
     temperature_incr(delta);
 
@@ -231,7 +259,9 @@ void Thing::temperature_tick(void)
     dbg2("Temperature tick, my temp now %d, location temp: %d", thing_temp, location_temp);
   }
 
-  if (game->tick_current == tick_last_i_was_attacked()) { return; }
+  if (game->tick_current == tick_last_i_was_attacked()) {
+    return;
+  }
 
   if ((thing_temp <= -200) && is_stone()) {
     if (thing_check_for_heat_dmg()) {
@@ -374,7 +404,9 @@ void Thing::temperature_tick(void)
           //
           // Should be obvious you are too hot!
           //
-          if (is_immune_to_fire()) { msg("You bask in the lava."); }
+          if (is_immune_to_fire()) {
+            msg("You bask in the lava.");
+          }
         } else {
           if (is_immune_to_fire()) {
             msg("You bask in the heat.");
@@ -494,7 +526,9 @@ bool Thing::temperature_max_is_set(void)
 int Thing::temperature_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   temperature = v;
   return v;
 }
@@ -505,9 +539,13 @@ void Thing::temperature_incr(int temperature_change)
 {
   TRACE_NO_INDENT();
 
-  if (! temperature_change) { return; }
+  if (! temperature_change) {
+    return;
+  }
 
-  if (is_flying()) { return; }
+  if (is_flying()) {
+    return;
+  }
 
   int temperature_curr = temperature_get();
   dbg2("Increment temp by %d, current temp %d", temperature_change, temperature_curr);
@@ -571,7 +609,9 @@ void Thing::temperature_incr(int temperature_change)
     }
   }
 
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
 
   temperature += temperature_change;
 

@@ -11,7 +11,9 @@ PyObject *map_load_spell_tree_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
 
-  if (! game) { DIE("map_load_spell_tree: no game object"); }
+  if (! game) {
+    DIE("map_load_spell_tree: no game object");
+  }
 
   PyObject   *py_spell_data = nullptr;
   PyObject   *py_tree_data  = nullptr;
@@ -26,7 +28,9 @@ PyObject *map_load_spell_tree_(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   std::string tree_name;
-  if (py_tree_name) { tree_name = std::string(py_tree_name); }
+  if (py_tree_name) {
+    tree_name = std::string(py_tree_name);
+  }
 
   //
   // First read all the spell aliases
@@ -35,10 +39,14 @@ PyObject *map_load_spell_tree_(PyObject *obj, PyObject *args, PyObject *keywds)
     TRACE_NO_INDENT();
     for (auto y = 0; y < PyList_Size(py_spell_data) / 2; y++) {
       auto alias_o = PyList_GetItem(py_spell_data, y * 2); /* Can't fail */
-      if (! alias_o) { continue; }
+      if (! alias_o) {
+        continue;
+      }
 
       auto name_o = PyList_GetItem(py_spell_data, y * 2 + 1); /* Can't fail */
-      if (! name_o) { continue; }
+      if (! name_o) {
+        continue;
+      }
 
       auto alias = py_obj_to_std_string(alias_o);
       auto name  = py_obj_to_std_string(name_o);
@@ -61,7 +69,9 @@ PyObject *map_load_spell_tree_(PyObject *obj, PyObject *args, PyObject *keywds)
     TRACE_NO_INDENT();
     for (auto y = 0; y < SPELL_TREE_DOWN; y++) {
       auto o = PyList_GetItem(py_tree_data, y * 2); /* Can't fail */
-      if (! o) { continue; }
+      if (! o) {
+        continue;
+      }
 
       auto s = py_obj_to_std_string(o);
       if (s.size() != SPELL_TREE_ACROSS * 4) {
@@ -93,7 +103,9 @@ PyObject *map_load_spell_tree_(PyObject *obj, PyObject *args, PyObject *keywds)
     TRACE_NO_INDENT();
     for (auto y = 0; y < SPELL_TREE_DOWN * 2; y++) {
       auto o = PyList_GetItem(py_tree_data, y); /* Can't fail */
-      if (! o) { continue; }
+      if (! o) {
+        continue;
+      }
 
       auto s = py_obj_to_std_string(o);
 
@@ -186,7 +198,9 @@ PyObject *map_load_spell_tree_(PyObject *obj, PyObject *args, PyObject *keywds)
       for (auto x = 0; x < SPELL_TREE_ACROSS; x++) {
         TRACE_NO_INDENT();
         auto spell = get(game->spell_tree[ tree_name ], x, y);
-        if (! spell) { continue; }
+        if (! spell) {
+          continue;
+        }
 
         TRACE_NO_INDENT();
         set(spell_tree_debug, x * 4, y * 2, spell->spell_alias[ 0 ]);

@@ -12,10 +12,14 @@ void Level::display_pixelart_fade_out(void)
   int   lines = 1000;
   float step  = RAD_360 / ((float) lines);
   float ts    = ((float) (time_ms_cached()) - ts_fade_out_begin) / LEVEL_FADE_OUT_MS;
-  if (ts >= 1) { return; }
+  if (ts >= 1) {
+    return;
+  }
 
   point at(game->config.game_pix_width / 2, game->config.game_pix_height / 2);
-  if (player) { at = ((player->last_blit_tl + player->last_blit_br) / (short) 2); }
+  if (player) {
+    at = ((player->last_blit_tl + player->last_blit_br) / (short) 2);
+  }
 
   blit_fbo_bind(FBO_SCREEN_FADE_IN_AND_OUT);
   glClear(GL_COLOR_BUFFER_BIT);
@@ -56,10 +60,14 @@ void Level::display_pixelart_fade_in(void)
   int   lines = 1000;
   float step  = RAD_360 / ((float) lines);
   float ts    = ((float) (time_ms_cached()) - ts_fade_in_begin) / LEVEL_FADE_IN_MS;
-  if (ts >= 1) { return; }
+  if (ts >= 1) {
+    return;
+  }
 
   point at(game->config.game_pix_width / 2, game->config.game_pix_height / 2);
-  if (player) { at = ((player->last_blit_tl + player->last_blit_br) / (short) 2); }
+  if (player) {
+    at = ((player->last_blit_tl + player->last_blit_br) / (short) 2);
+  }
 
   blit_fbo_bind(FBO_SCREEN_FADE_IN_AND_OUT);
   glClear(GL_COLOR_BUFFER_BIT);

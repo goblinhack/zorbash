@@ -13,15 +13,21 @@ int Thing::distance_to_player(void)
 {
   TRACE_AND_INDENT();
 
-  if (! game->level) { return DMAP_IS_WALL; }
+  if (! game->level) {
+    return DMAP_IS_WALL;
+  }
 
   auto player = game->level->player;
-  if (! player) { return DMAP_IS_WALL; }
+  if (! player) {
+    return DMAP_IS_WALL;
+  }
 
   //
   // Check we're on the same level
   //
-  if (player->level != level) { return DMAP_IS_WALL; }
+  if (player->level != level) {
+    return DMAP_IS_WALL;
+  }
 
   return get(&game->level->dmap_to_player.val, (int) curr_at.x, (int) curr_at.y);
 }
@@ -30,10 +36,14 @@ int Thing::distance_to_player_on_different_level(void)
 {
   TRACE_AND_INDENT();
 
-  if (! game->level) { return DMAP_IS_WALL; }
+  if (! game->level) {
+    return DMAP_IS_WALL;
+  }
 
   auto player = game->level->player;
-  if (! player) { return DMAP_IS_WALL; }
+  if (! player) {
+    return DMAP_IS_WALL;
+  }
 
   return get(&player->level->dmap_to_player.val, (int) curr_at.x, (int) curr_at.y);
 }
@@ -41,7 +51,9 @@ int Thing::distance_to_player_on_different_level(void)
 void Level::dmap_to_player_update(void)
 {
   TRACE_AND_INDENT();
-  if (! player) { return; }
+  if (! player) {
+    return;
+  }
 
 #if 0
   //

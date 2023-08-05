@@ -20,7 +20,9 @@ bool Thing::thing_check_for_heat_dmg(void)
   //
   // Can't be burnt when encased in ice. However if frozen, we can defrost.
   //
-  if (level->is_block_of_ice(curr_at)) { return false; }
+  if (level->is_block_of_ice(curr_at)) {
+    return false;
+  }
 
   if (is_able_to_melt() || is_burnable() || is_combustible() || is_very_combustible()) {
     //
@@ -30,7 +32,9 @@ bool Thing::thing_check_for_heat_dmg(void)
     return false;
   }
 
-  if (is_immune_to_fire()) { return false; }
+  if (is_immune_to_fire()) {
+    return false;
+  }
 
   bool  hit = false;
   point at  = curr_at;
@@ -53,7 +57,9 @@ bool Thing::thing_check_for_heat_dmg(void)
           //
           if (! level->is_smoke(at.x, at.y)) {
             auto smoke = level->thing_new("smoke", at);
-            if (smoke) { smoke->lifespan_set(pcg_random_range(1, 10)); }
+            if (smoke) {
+              smoke->lifespan_set(pcg_random_range(1, 10));
+            }
           }
         }
       }
@@ -80,7 +86,9 @@ bool Thing::thing_check_for_heat_dmg(void)
       //
       if (! level->is_lava(at.x, at.y)) {
         if (d20_ge(stat_luck_total(), SAVING_ROLL_HARD)) {
-          if (is_player()) { msg("%%fg=green$Luckily the flames go out!%%fg=reset$"); }
+          if (is_player()) {
+            msg("%%fg=green$Luckily the flames go out!%%fg=reset$");
+          }
 
           dbg("Remove the flames");
           TRACE_AND_INDENT();
@@ -95,13 +103,17 @@ bool Thing::thing_check_for_heat_dmg(void)
     // Too close to the flames
     //
     hit = true;
-    if (hit) { dbg("Heat damage check: very is_combustible and too close to the flames"); }
+    if (hit) {
+      dbg("Heat damage check: very is_combustible and too close to the flames");
+    }
   } else if (is_combustible() && (level->heatmap(at.x, at.y) > 2)) {
     //
     // Too close to the flames
     //
     hit = (d100() < 70);
-    if (hit) { dbg("Heat damage check: is_combustible and too close to the flames"); }
+    if (hit) {
+      dbg("Heat damage check: is_combustible and too close to the flames");
+    }
   } else if (is_able_to_melt() && (level->heatmap(at.x, at.y) > 0)) {
     //
     // Too close to the flames?
@@ -115,22 +127,32 @@ bool Thing::thing_check_for_heat_dmg(void)
 
     dbg("Heat damage check, total chance of melting: %d", melt_chance);
     hit = d1000() < melt_chance;
-    if (hit) { dbg("Heat damage check: is melting"); }
+    if (hit) {
+      dbg("Heat damage check: is melting");
+    }
   } else if (level->is_lava(at.x, at.y)) {
     if (! level->is_smoke(at.x, at.y)) {
       auto smoke = level->thing_new("smoke", at);
-      if (smoke) { smoke->lifespan_set(pcg_random_range(1, 10)); }
+      if (smoke) {
+        smoke->lifespan_set(pcg_random_range(1, 10));
+      }
     }
 
-    if (is_able_to_melt() || is_burnable() || is_combustible() || is_very_combustible()) { hit = true; }
+    if (is_able_to_melt() || is_burnable() || is_combustible() || is_very_combustible()) {
+      hit = true;
+    }
 
     if (hit) {
-      if (is_player()) { msg("%%fg=red$You swim in lava!%%fg=reset$"); }
+      if (is_player()) {
+        msg("%%fg=red$You swim in lava!%%fg=reset$");
+      }
     }
   } else if (level->is_fire(at.x, at.y)) {
     if (! level->is_smoke(at.x, at.y)) {
       auto smoke = level->thing_new("smoke", at);
-      if (smoke) { smoke->lifespan_set(pcg_random_range(1, 10)); }
+      if (smoke) {
+        smoke->lifespan_set(pcg_random_range(1, 10));
+      }
     }
 
     //
@@ -138,17 +160,25 @@ bool Thing::thing_check_for_heat_dmg(void)
     //
     hit = (d100() < 20);
 
-    if (is_able_to_melt() || is_burnable() || is_combustible() || is_very_combustible()) { hit = true; }
+    if (is_able_to_melt() || is_burnable() || is_combustible() || is_very_combustible()) {
+      hit = true;
+    }
 
     if (hit) {
       if (d20_ge(stat_luck_total(), SAVING_ROLL_HARD)) {
-        if (is_player()) { msg("%%fg=red$The flames wrap around you but you luckily avoid them!%%fg=reset$"); }
+        if (is_player()) {
+          msg("%%fg=red$The flames wrap around you but you luckily avoid them!%%fg=reset$");
+        }
         hit = false;
       } else {
-        if (is_player()) { msg("%%fg=red$The flames wrap around you!%%fg=reset$"); }
+        if (is_player()) {
+          msg("%%fg=red$The flames wrap around you!%%fg=reset$");
+        }
       }
     } else {
-      if (is_player()) { msg("%%fg=red$You dodge the flames.%%fg=reset$"); }
+      if (is_player()) {
+        msg("%%fg=red$You dodge the flames.%%fg=reset$");
+      }
       hit = false;
     }
   } else if (level->is_steam(at.x, at.y)) {
@@ -157,7 +187,9 @@ bool Thing::thing_check_for_heat_dmg(void)
     //
     if (is_alive_monst() || is_player()) {
       hit = true;
-      if (is_player()) { msg("%%fg=red$The steam burns you!%%fg=reset$"); }
+      if (is_player()) {
+        msg("%%fg=red$The steam burns you!%%fg=reset$");
+      }
     }
   }
 
@@ -166,11 +198,15 @@ bool Thing::thing_check_for_heat_dmg(void)
     TRACE_AND_INDENT();
     hit = true;
 
-    if (! is_on_fire()) { on_fire_set("caught fire"); }
+    if (! is_on_fire()) {
+      on_fire_set("caught fire");
+    }
 
     if (! level->is_smoke(at.x, at.y)) {
       auto smoke = level->thing_new("smoke", at);
-      if (smoke) { smoke->lifespan_set(pcg_random_range(1, 10)); }
+      if (smoke) {
+        smoke->lifespan_set(pcg_random_range(1, 10));
+      }
     }
   }
 
@@ -178,7 +214,9 @@ bool Thing::thing_check_for_heat_dmg(void)
   // Rapid defrosting?
   //
   if (is_frozen) {
-    if (is_player()) { msg("%%fg=red$You defrost rapidly!%%fg=reset$"); }
+    if (is_player()) {
+      msg("%%fg=red$You defrost rapidly!%%fg=reset$");
+    }
     frozen_unset(true /* quiet */);
   }
 
@@ -198,14 +236,18 @@ bool Thing::thing_check_for_cold_dmg(void)
     return false;
   }
 
-  if (is_immune_to_cold()) { return false; }
+  if (is_immune_to_cold()) {
+    return false;
+  }
 
   dbg("Cold hit");
   TRACE_AND_INDENT();
 
   if (! is_frozen) {
     is_frozen = true;
-    if (is_player()) { msg("%%fg=lightblue$You freeze!%%fg=reset$"); }
+    if (is_player()) {
+      msg("%%fg=lightblue$You freeze!%%fg=reset$");
+    }
   }
 
   on_fire_unset();

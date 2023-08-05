@@ -10,7 +10,9 @@ void Thing::level_pop(void)
 {
   TRACE_NO_INDENT();
 
-  if (! is_attached) { return; }
+  if (! is_attached) {
+    return;
+  }
   is_attached = false;
 
 #if 0
@@ -333,14 +335,18 @@ void Thing::level_pop(void)
       level->monst_count--;
       level->is_monst_unset(x, y);
     }
-    if (is_lava() || is_fire()) { level->is_heatmap_valid = false; }
+    if (is_lava() || is_fire()) {
+      level->is_heatmap_valid = false;
+    }
 
     if (gfx_pixelart_shown_in_bg()) {
       //
       // Set this on the first change, to avoid the redraw being pushed out too
       // far by subsequent changes.
       //
-      if (! level->ts_redraw_bg) { level->ts_redraw_bg = time_ms_cached() + LEVEL_REDRAW_BG_DELAY_MS; }
+      if (! level->ts_redraw_bg) {
+        level->ts_redraw_bg = time_ms_cached() + LEVEL_REDRAW_BG_DELAY_MS;
+      }
     }
 
     //
@@ -355,12 +361,16 @@ void Thing::level_pop(void)
       {
         if (equip_id_carry_anim(iter).ok()) {
           auto w = level->thing_find(equip_id_carry_anim(iter));
-          if (w) { w->level_pop(); }
+          if (w) {
+            w->level_pop();
+          }
         }
 
         if (equip_id_use_anim(iter).ok()) {
           auto w = level->thing_find(equip_id_use_anim(iter));
-          if (w) { w->level_pop(); }
+          if (w) {
+            w->level_pop();
+          }
         }
       }
 
@@ -368,7 +378,9 @@ void Thing::level_pop(void)
       {
         if (bodypart_id_get(iter).ok()) {
           auto w = level->thing_find(bodypart_id_get(iter));
-          if (w) { w->level_pop(); }
+          if (w) {
+            w->level_pop();
+          }
         }
       }
 
@@ -376,7 +388,9 @@ void Thing::level_pop(void)
       if (on_fire_id.ok()) {
         TRACE_NO_INDENT();
         auto w = level->thing_find(on_fire_id);
-        if (w) { w->level_pop(); }
+        if (w) {
+          w->level_pop();
+        }
       }
     }
   }

@@ -48,7 +48,9 @@ uint8_t wid_botcon_init(void)
 static void wid_botcon_reset_scroll(void)
 {
   TRACE_AND_INDENT();
-  if (! wid_botcon_vert_scroll) { return; }
+  if (! wid_botcon_vert_scroll) {
+    return;
+  }
 
   wid_move_to_bottom(wid_botcon_vert_scroll);
 }
@@ -64,7 +66,9 @@ static void wid_botcon_scroll(Widp w, std::wstring str)
   // Get the wid on the bottom of the list/screen.
   //
   tmp = wid_get_head(w);
-  if (tmp) { wid_set_text(tmp, str); }
+  if (tmp) {
+    wid_set_text(tmp, str);
+  }
 }
 
 void wid_botcon_clear(void)
@@ -94,7 +98,9 @@ static void wid_botcon_log_(std::wstring s)
   if (! wid_botcon_input_line) {
     auto result = wid_botcon_lines.insert(std::make_pair(log_wid_botcon_buffered_lines++, s));
 
-    if (! result.second) { DIE("Wid botcon lines insert name [%s] failed", wstring_to_string(s).c_str()); }
+    if (! result.second) {
+      DIE("Wid botcon lines insert name [%s] failed", wstring_to_string(s).c_str());
+    }
 
     return;
   }
@@ -211,7 +217,9 @@ static void wid_botcon_wid_create(void)
       wid_set_prev(child, prev);
       prev = child;
 
-      if (row == 0) { wid_botcon_input_line = child; }
+      if (row == 0) {
+        wid_botcon_input_line = child;
+      }
 
       wid_set_color(child, WID_COLOR_TEXT_FG, UI_BOTCON_TEXT_COLOR);
       wid_set_color(child, WID_COLOR_BG, COLOR_NONE);
@@ -235,7 +243,9 @@ std::vector< std::wstring > wid_botcon_serialize(void)
   auto                        tmp = wid_get_head(wid_botcon_input_line);
   while (tmp) {
     auto s = wid_get_text(tmp);
-    if (s.size()) { r.push_back(wid_get_text(tmp)); }
+    if (s.size()) {
+      r.push_back(wid_get_text(tmp));
+    }
     tmp = wid_get_next(tmp);
   }
   std::reverse(r.begin(), r.end());
@@ -247,6 +257,8 @@ void wid_botcon_deserialize(std::vector< std::wstring > r)
   TRACE_AND_INDENT();
   for (const auto &s : r) {
     auto tmp = wstring_to_string(s);
-    if (tmp.size()) { BOTCON("%s", tmp.c_str()); }
+    if (tmp.size()) {
+      BOTCON("%s", tmp.c_str());
+    }
   }
 }

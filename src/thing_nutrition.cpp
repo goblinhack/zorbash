@@ -22,7 +22,9 @@ int Thing::nutrition_init(void)
 {
   TRACE_NO_INDENT();
 
-  if (tp()->nutrition_dice_str().empty()) { return 0; }
+  if (tp()->nutrition_dice_str().empty()) {
+    return 0;
+  }
 
   new_infop();
 
@@ -35,7 +37,9 @@ int Thing::nutrition_get(void)
   TRACE_NO_INDENT();
 
   auto infop = maybe_infop();
-  if (! infop) { return 0; }
+  if (! infop) {
+    return 0;
+  }
 
   return infop->nutrition;
 }
@@ -45,10 +49,14 @@ int Thing::nutrition_decr(int v)
   TRACE_NO_INDENT();
 
   auto infop = maybe_infop();
-  if (! infop) { return 0; }
+  if (! infop) {
+    return 0;
+  }
 
   infop->nutrition -= v;
-  if (infop->nutrition < 0) { infop->nutrition = 0; }
+  if (infop->nutrition < 0) {
+    infop->nutrition = 0;
+  }
 
   return infop->nutrition;
 }

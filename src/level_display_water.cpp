@@ -33,9 +33,13 @@ void Level::display_pixelart_water(int fbo, int16_t minx, int16_t miny, int16_t 
   static std::array< std::array< Tilep, WATER_DOWN >, WATER_ACROSS > water[ 2 ];
 
   int water_type = 0;
-  if (biome == BIOME_SEWER) { water_type = 1; }
+  if (biome == BIOME_SEWER) {
+    water_type = 1;
+  }
 
-  if (biome == BIOME_SWAMP) { water_type = 1; }
+  if (biome == BIOME_SWAMP) {
+    water_type = 1;
+  }
 
   if (! water[ 0 ][ 0 ][ 0 ]) {
     set(water[ 0 ], 0, 0, tile_find("water1a"));
@@ -182,11 +186,15 @@ void Level::display_pixelart_water(int fbo, int16_t minx, int16_t miny, int16_t 
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   for (auto y = miny; y < maxy; y++) {
     for (auto x = minx; x < maxx; x++) {
-      if (likely(! gfx_water(x, y))) { continue; }
+      if (likely(! gfx_water(x, y))) {
+        continue;
+      }
       FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
       {
         auto tpp = t->tp();
-        if (! tpp->gfx_water()) { continue; }
+        if (! tpp->gfx_water()) {
+          continue;
+        }
         t->blit_pixelart(fbo);
       }
       FOR_ALL_THINGS_END()
@@ -205,7 +213,9 @@ void Level::display_pixelart_water(int fbo, int16_t minx, int16_t miny, int16_t 
   auto tile_map = water_tile_map;
   for (auto y = miny; y < maxy - 1; y += 2) {
     for (auto x = minx; x < maxx - 1; x += 2) {
-      if (likely(! get_no_check(tile_map, x, y))) { continue; }
+      if (likely(! get_no_check(tile_map, x, y))) {
+        continue;
+      }
       int tx  = (x & ~1);
       int ty  = (y & ~1);
       int tlx = tx * TILE_WIDTH;
@@ -247,7 +257,9 @@ void Level::display_pixelart_water(int fbo, int16_t minx, int16_t miny, int16_t 
   for (int z = MAP_DEPTH_OBJ; z < MAP_DEPTH; z++) {
     for (auto y = miny; y < maxy - 1; y++) {
       for (auto x = minx; x < maxx - 1; x++) {
-        if (likely(! get_no_check(tile_map, x, y + 1))) { continue; }
+        if (likely(! get_no_check(tile_map, x, y + 1))) {
+          continue;
+        }
 
         FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z) { t->blit_upside_down(fbo); }
         FOR_ALL_THINGS_END()
@@ -274,7 +286,9 @@ void Level::display_pixelart_water(int fbo, int16_t minx, int16_t miny, int16_t 
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   color c = WHITE;
   c.a     = 100;
-  if (biome == BIOME_SEWER) { c = DARKGREEN; }
+  if (biome == BIOME_SEWER) {
+    c = DARKGREEN;
+  }
   glcolor(c);
   glTranslatef(-2, -2, 0);
   blit_fbo(fbo_mask1);

@@ -15,16 +15,22 @@ void Thing::on_thrown(ThingId owner_id_when_thrown)
   TRACE_NO_INDENT();
 
   auto on_thrown = tp()->on_thrown_do();
-  if (std::empty(on_thrown)) { return; }
+  if (std::empty(on_thrown)) {
+    return;
+  }
 
   auto t = split_tokens(on_thrown, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = name(); }
+    if (mod == "me") {
+      mod = name();
+    }
 
     dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
@@ -54,7 +60,9 @@ bool Thing::throw_item_choose_target(Thingp what)
     return false;
   }
 
-  if (! is_target_select(what)) { return false; }
+  if (! is_target_select(what)) {
+    return false;
+  }
 
   game->request_to_throw_item  = what;
   game->request_destination_ok = false;
@@ -71,7 +79,9 @@ void Thing::on_thrown_callback(ThingId owner_id_when_thrown)
 bool Thing::throw_at(Thingp what, Thingp target)
 {
   TRACE_NO_INDENT();
-  if (! what) { what = game->request_to_throw_item; }
+  if (! what) {
+    what = game->request_to_throw_item;
+  }
 
   verify(MTYPE_THING, what);
   if (! what) {
@@ -141,17 +151,27 @@ bool Thing::throw_at(Thingp what, Thingp target)
   // Allow darts to be thrown further
   //
   if (what) {
-    if (what->is_missile()) { max_dist *= 2; }
-    if (what->is_heavy()) { max_dist /= 2; }
-    if (what->is_light()) { max_dist *= 2; }
-    if (what->is_aerodynamic()) { max_dist *= 2; }
+    if (what->is_missile()) {
+      max_dist *= 2;
+    }
+    if (what->is_heavy()) {
+      max_dist /= 2;
+    }
+    if (what->is_light()) {
+      max_dist *= 2;
+    }
+    if (what->is_aerodynamic()) {
+      max_dist *= 2;
+    }
   }
 
   what->is_being_thrown = true;
 
   if (dist > max_dist) {
     if (! need_to_choose_a_new_target) {
-      if (is_player()) { msg("You fail to throw %s that far.", what->text_the().c_str()); }
+      if (is_player()) {
+        msg("You fail to throw %s that far.", what->text_the().c_str());
+      }
     }
 
     float dx = (float) throw_at.x - (float) curr_at.x;
@@ -189,7 +209,9 @@ bool Thing::throw_at(Thingp what, Thingp target)
     }
     FOR_ALL_THINGS_END()
   } else {
-    if (is_player()) { msg("You throw %s.", what->text_the().c_str()); }
+    if (is_player()) {
+      msg("You throw %s.", what->text_the().c_str());
+    }
   }
 
   dbg("Throw item %s", what->to_short_string().c_str());
@@ -354,9 +376,13 @@ bool Thing::throw_at(Thingp what, Thingp target)
   //
   // As there is no animation, no need to hide.
   //
-  if (what->has_external_particle || what->has_internal_particle) { what->hide("thrown"); }
+  if (what->has_external_particle || what->has_internal_particle) {
+    what->hide("thrown");
+  }
 
-  if (is_player()) { game->tick_begin("player threw an item"); }
+  if (is_player()) {
+    game->tick_begin("player threw an item");
+  }
 
   if (game->state == Game::STATE_CHOOSING_TARGET) {
     game->change_state(Game::STATE_NORMAL, "finished choosing a target");
@@ -371,7 +397,9 @@ bool Thing::throw_at(Thingp what, Thingp target)
 float Thing::distance_throw_get(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->distance_throw); }
+  if (maybe_infop()) {
+    return (infop()->distance_throw);
+  }
   return 0;
 }
 

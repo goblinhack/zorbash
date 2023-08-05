@@ -30,7 +30,9 @@ static uint8_t wid_dead_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   switch (key->mod) {
     case KMOD_LCTRL :
@@ -61,7 +63,9 @@ static uint8_t wid_dead_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   return false;
 }
@@ -82,7 +86,9 @@ void Game::wid_dead_select(const char *reason)
 
   game->change_state(Game::STATE_NORMAL, "player is dead");
 
-  if (wid_dead_window) { wid_dead_destroy(); }
+  if (wid_dead_window) {
+    wid_dead_destroy();
+  }
 
   //
   // Update this prior to pausing the game so we see the final level number
@@ -92,7 +98,9 @@ void Game::wid_dead_select(const char *reason)
   LOG("Open dead select: Pause");
   if (level) {
     level->scroll_map_to_player();
-    if (level->cursor) { level->cursor->hide("wid dead"); }
+    if (level->cursor) {
+      level->cursor->hide("wid dead");
+    }
   }
 
   auto  h     = TERM_HEIGHT / 2;
@@ -109,7 +117,9 @@ void Game::wid_dead_select(const char *reason)
   wid_set_on_key_up(wid_dead_window->wid_popup_container, wid_dead_key_up);
   wid_set_on_key_down(wid_dead_window->wid_popup_container, wid_dead_key_down);
   wid_raise(wid_dead_window->wid_popup_container);
-  if (g_opt_test_dungeon_gen) { wid_set_shape_none(wid_dead_window->wid_popup_container); }
+  if (g_opt_test_dungeon_gen) {
+    wid_set_shape_none(wid_dead_window->wid_popup_container);
+  }
 
   // Want console to be able to be on top
   // wid_set_do_not_lower(wid_dead_window->wid_popup_container, true);

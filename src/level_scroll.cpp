@@ -20,23 +20,41 @@ void Level::scroll_map_set_bounds(void)
     map_at.x = 0;
     map_at.y = 0;
   } else {
-    if (map_at.x > MAP_WIDTH - 1) { map_at.x = MAP_WIDTH - 1; }
-    if (map_at.y > MAP_HEIGHT - 1) { map_at.y = MAP_HEIGHT - 1; }
+    if (map_at.x > MAP_WIDTH - 1) {
+      map_at.x = MAP_WIDTH - 1;
+    }
+    if (map_at.y > MAP_HEIGHT - 1) {
+      map_at.y = MAP_HEIGHT - 1;
+    }
   }
-  if (map_at.x < 0) { map_at.x = 0; }
-  if (map_at.y < 0) { map_at.y = 0; }
+  if (map_at.x < 0) {
+    map_at.x = 0;
+  }
+  if (map_at.y < 0) {
+    map_at.y = 0;
+  }
 
-  if (map_wanted_at.x > MAP_WIDTH - 1) { map_wanted_at.x = MAP_WIDTH - 1; }
-  if (map_wanted_at.y > MAP_HEIGHT - 1) { map_wanted_at.y = MAP_HEIGHT - 1; }
-  if (map_wanted_at.x < 0) { map_wanted_at.x = 0; }
-  if (map_wanted_at.y < 0) { map_wanted_at.y = 0; }
+  if (map_wanted_at.x > MAP_WIDTH - 1) {
+    map_wanted_at.x = MAP_WIDTH - 1;
+  }
+  if (map_wanted_at.y > MAP_HEIGHT - 1) {
+    map_wanted_at.y = MAP_HEIGHT - 1;
+  }
+  if (map_wanted_at.x < 0) {
+    map_wanted_at.x = 0;
+  }
+  if (map_wanted_at.y < 0) {
+    map_wanted_at.y = 0;
+  }
 }
 
 void Level::scroll_map_do(bool fast)
 {
   TRACE_NO_INDENT();
 
-  if (game->is_being_destroyed || is_being_destroyed) { return; }
+  if (game->is_being_destroyed || is_being_destroyed) {
+    return;
+  }
 
   const float vbigstep  = 1;
   const float bigstep   = 4;
@@ -46,11 +64,17 @@ void Level::scroll_map_do(bool fast)
   auto dx = map_at.x - map_wanted_at.x;
   auto dy = map_at.y - map_wanted_at.y;
 
-  if (fabs(dx) < 0.1) { dx = 0; }
+  if (fabs(dx) < 0.1) {
+    dx = 0;
+  }
 
-  if (fabs(dy) < 0.1) { dy = 0; }
+  if (fabs(dy) < 0.1) {
+    dy = 0;
+  }
 
-  if ((dx == 0) && (dy == 0)) { return; }
+  if ((dx == 0) && (dy == 0)) {
+    return;
+  }
 
 #if 0
   if (player) {
@@ -176,7 +200,9 @@ void Level::scroll_map_to_player(void)
 {
   TRACE_NO_INDENT();
 
-  if (! player) { return; }
+  if (! player) {
+    return;
+  }
 
   mouse_at             = -1;
   mouse_old            = -1;
@@ -198,7 +224,9 @@ void Level::scroll_map_to_player_immediately(void)
 {
   TRACE_NO_INDENT();
 
-  if (! player) { return; }
+  if (! player) {
+    return;
+  }
   scroll_map_to_player();
 
   int tries = 0;
@@ -206,7 +234,9 @@ void Level::scroll_map_to_player_immediately(void)
     auto dx = map_at.x - map_wanted_at.x;
     auto dy = map_at.y - map_wanted_at.y;
 
-    if ((dx == 0) && (dy == 0)) { return; }
+    if ((dx == 0) && (dy == 0)) {
+      return;
+    }
 
     scroll_map_to_player();
 
@@ -215,7 +245,9 @@ void Level::scroll_map_to_player_immediately(void)
     //
     auto ndx = map_at.x - map_wanted_at.x;
     auto ndy = map_at.y - map_wanted_at.y;
-    if ((ndx == dx) && (ndy == dy)) { return; }
+    if ((ndx == dx) && (ndy == dy)) {
+      return;
+    }
   }
   err("Could not scroll map to player");
 }
@@ -260,18 +292,34 @@ void Level::scroll_map_set_target(void)
       //
       // Scroll if at the edges of the map
       //
-      if (player->curr_at.x >= MAP_WIDTH - scroll_border) { auto_scroll = true; }
-      if (player->curr_at.x < scroll_border) { auto_scroll = true; }
-      if (player->curr_at.y >= MAP_HEIGHT - scroll_border) { auto_scroll = true; }
-      if (player->curr_at.y < scroll_border) { auto_scroll = true; }
+      if (player->curr_at.x >= MAP_WIDTH - scroll_border) {
+        auto_scroll = true;
+      }
+      if (player->curr_at.x < scroll_border) {
+        auto_scroll = true;
+      }
+      if (player->curr_at.y >= MAP_HEIGHT - scroll_border) {
+        auto_scroll = true;
+      }
+      if (player->curr_at.y < scroll_border) {
+        auto_scroll = true;
+      }
 
       //
       // Scroll if at the edges of the screen
       //
-      if (player->last_ascii_at.x >= TERM_WIDTH - scroll_border) { auto_scroll = true; }
-      if (player->last_ascii_at.x < scroll_border) { auto_scroll = true; }
-      if (player->last_ascii_at.y >= TERM_HEIGHT - scroll_border) { auto_scroll = true; }
-      if (player->last_ascii_at.y < scroll_border) { auto_scroll = true; }
+      if (player->last_ascii_at.x >= TERM_WIDTH - scroll_border) {
+        auto_scroll = true;
+      }
+      if (player->last_ascii_at.x < scroll_border) {
+        auto_scroll = true;
+      }
+      if (player->last_ascii_at.y >= TERM_HEIGHT - scroll_border) {
+        auto_scroll = true;
+      }
+      if (player->last_ascii_at.y < scroll_border) {
+        auto_scroll = true;
+      }
     }
 
     //
@@ -290,25 +338,43 @@ void Level::scroll_map_set_target(void)
       // Auto scroll
       //
       float dx = follow.x - map_wanted_at.x;
-      if (dx > x2) { map_wanted_at.x++; }
-      if (dx < x1) { map_wanted_at.x--; }
+      if (dx > x2) {
+        map_wanted_at.x++;
+      }
+      if (dx < x1) {
+        map_wanted_at.x--;
+      }
 
       float dy = follow.y - map_wanted_at.y;
-      if (dy > y2) { map_wanted_at.y++; }
-      if (dy < y1) { map_wanted_at.y--; }
+      if (dy > y2) {
+        map_wanted_at.y++;
+      }
+      if (dy < y1) {
+        map_wanted_at.y--;
+      }
     }
   } else if (cursor && ! is_map_follow_player) {
     //
     // Allow the player to scroll around the scene of carnage once dead
     //
-    if (player && player->is_dead) { return; }
+    if (player && player->is_dead) {
+      return;
+    }
 
     auto d = 0.3;
 
-    if (sdl.mouse_x >= game->config.window_pix_width - 1) { map_wanted_at.x += d; }
-    if (sdl.mouse_x <= 1) { map_wanted_at.x -= d; }
-    if (sdl.mouse_y >= game->config.window_pix_height - 1) { map_wanted_at.y += d; }
-    if (sdl.mouse_y <= 1) { map_wanted_at.y -= d; }
+    if (sdl.mouse_x >= game->config.window_pix_width - 1) {
+      map_wanted_at.x += d;
+    }
+    if (sdl.mouse_x <= 1) {
+      map_wanted_at.x -= d;
+    }
+    if (sdl.mouse_y >= game->config.window_pix_height - 1) {
+      map_wanted_at.y += d;
+    }
+    if (sdl.mouse_y <= 1) {
+      map_wanted_at.y -= d;
+    }
   }
 
   //

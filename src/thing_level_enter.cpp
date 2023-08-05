@@ -11,11 +11,15 @@ void Thing::level_enter(bool rejoin)
 {
   TRACE_NO_INDENT();
 
-  if (is_loggable()) { dbg2("Enter level %s", level->to_string().c_str()); }
+  if (is_loggable()) {
+    dbg2("Enter level %s", level->to_string().c_str());
+  }
 
   auto result = level->all_things.insert(std::pair(id, this));
   if (! result.second) {
-    if (! rejoin) { err("Failed to insert into thing map"); }
+    if (! rejoin) {
+      err("Failed to insert into thing map");
+    }
   }
 
   if (is_interesting()) {
@@ -32,7 +36,9 @@ void Thing::level_enter(bool rejoin)
         //
         // If polymorphing then we are already on the level.
         //
-        if (! rejoin) { err("Failed to insert into active thing map"); }
+        if (! rejoin) {
+          err("Failed to insert into active thing map");
+        }
       }
       dbg3("Added to interesting things");
     }
@@ -52,7 +58,9 @@ void Thing::level_enter(bool rejoin)
         //
         // If polymorphing then we are already on the level.
         //
-        if (! rejoin) { err("Failed to insert into active thing map"); }
+        if (! rejoin) {
+          err("Failed to insert into active thing map");
+        }
       }
       dbg3("Added to tickable things");
     }
@@ -69,7 +77,9 @@ void Thing::level_enter(bool rejoin)
     } else {
       auto result = level->describable_things.insert(std::pair(id, this));
       if (! result.second) {
-        if (! rejoin) { err("Failed to insert into active thing map"); }
+        if (! rejoin) {
+          err("Failed to insert into active thing map");
+        }
       }
       dbg3("Added to describable things");
     }
@@ -86,7 +96,9 @@ void Thing::level_enter(bool rejoin)
     } else {
       auto result = level->animated_things.insert(std::pair(id, this));
       if (! result.second) {
-        if (! rejoin) { err("Failed to insert into animated thing map"); }
+        if (! rejoin) {
+          err("Failed to insert into animated thing map");
+        }
       }
       dbg3("Added to pending things");
     }
@@ -115,7 +127,9 @@ void Thing::level_enter(bool rejoin)
   //
   // Make sure the light is refreshed.
   //
-  if (is_player()) { update_light(); }
+  if (is_player()) {
+    update_light();
+  }
 
   //
   // Blit location is now invalid
@@ -157,7 +171,9 @@ void Thing::level_enter(bool rejoin)
       //
       // Except when loading; as this involves counting torches which may not yet be loaded.
       //
-      if (! g_loading) { light_distance_update(); }
+      if (! g_loading) {
+        light_distance_update();
+      }
     }
   }
 }

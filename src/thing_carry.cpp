@@ -298,7 +298,9 @@ bool Thing::carry(Thingp item, CarryOptions carry_options)
 
   bool already_carried = false;
   for (const auto t : carried_item_only_vector()) {
-    if (t == item) { already_carried = true; }
+    if (t == item) {
+      already_carried = true;
+    }
   }
 
   if (is_player()) {
@@ -403,17 +405,23 @@ bool Thing::carry(Thingp item, CarryOptions carry_options)
     }
   }
 
-  if (item->is_torch()) { light_distance_update(); }
+  if (item->is_torch()) {
+    light_distance_update();
+  }
 
   //
   // Pack bags when items are added to them
   //
-  if (is_bag_item_container()) { bag_compress(); }
+  if (is_bag_item_container()) {
+    bag_compress();
+  }
 
   //
   // For items that modifys stats, like rings, need to update the display.
   //
-  if (is_player()) { game->request_to_remake_rightbar = true; }
+  if (is_player()) {
+    game->request_to_remake_rightbar = true;
+  }
 
   return true;
 }
@@ -436,26 +444,40 @@ std::list< ThingId > Thing::anything_to_carry_at(point at)
   //
   FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y) // curr_at is correct
   {
-    if (t->is_dead) { continue; }
+    if (t->is_dead) {
+      continue;
+    }
 
-    if (t == this) { continue; }
+    if (t == this) {
+      continue;
+    }
 
     //
     // If there is an engulfer here, we're inside them!
     //
-    if (t->is_engulfer()) { goto end; }
+    if (t->is_engulfer()) {
+      goto end;
+    }
   }
   FOR_ALL_THINGS_END()
 
   FOR_ALL_NON_INTERNAL_THINGS(level, t, at.x, at.y)
   {
-    if (! t->is_collectable()) { continue; }
+    if (! t->is_collectable()) {
+      continue;
+    }
 
-    if (t->is_dead) { continue; }
+    if (t->is_dead) {
+      continue;
+    }
 
-    if (t->immediate_owner()) { continue; }
+    if (t->immediate_owner()) {
+      continue;
+    }
 
-    if ((int) game->tick_current - (int) t->tick_last_dropped() <= 1) { continue; }
+    if ((int) game->tick_current - (int) t->tick_last_dropped() <= 1) {
+      continue;
+    }
 
     if (t->is_bag_item_container()) {
       //
@@ -465,7 +487,9 @@ std::list< ThingId > Thing::anything_to_carry_at(point at)
 
       for (const auto t : t->carried_item_only_vector()) {
         {
-          if ((int) game->tick_current - (int) t->tick_last_dropped() <= 1) { continue; }
+          if ((int) game->tick_current - (int) t->tick_last_dropped() <= 1) {
+            continue;
+          }
 
           TRACE_AND_INDENT();
           if (worth_collecting(t) < 0) {
@@ -479,7 +503,9 @@ std::list< ThingId > Thing::anything_to_carry_at(point at)
       }
     }
 
-    if (t->is_treasure_chest()) { continue; }
+    if (t->is_treasure_chest()) {
+      continue;
+    }
 
     {
       TRACE_AND_INDENT();
@@ -522,21 +548,33 @@ bool Thing::check_anything_to_carry(CarryOptions carry_options)
   //
   FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y)
   {
-    if (t->is_dead) { continue; }
+    if (t->is_dead) {
+      continue;
+    }
 
-    if (t == this) { continue; }
+    if (t == this) {
+      continue;
+    }
 
-    if (t->is_engulfer()) { return false; }
+    if (t->is_engulfer()) {
+      return false;
+    }
   }
   FOR_ALL_THINGS_END()
 
   FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y)
   {
-    if (t->is_dead) { continue; }
+    if (t->is_dead) {
+      continue;
+    }
 
-    if (t->immediate_owner()) { continue; }
+    if (t->immediate_owner()) {
+      continue;
+    }
 
-    if (! t->is_collectable()) { continue; }
+    if (! t->is_collectable()) {
+      continue;
+    }
 
     if (t->is_auto_collect_item()) {
       if (carry_options.is_auto_collect_allowed) {
@@ -578,7 +616,9 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item, Car
     TRACE_AND_INDENT();
 
     for (const auto t : item->carried_item_only_vector()) {
-      if (! try_to_carry_if_worthwhile_dropping_items_if_needed(t, carry_options)) { return false; }
+      if (! try_to_carry_if_worthwhile_dropping_items_if_needed(t, carry_options)) {
+        return false;
+      }
       tried_to_carry_a_bag_item = true;
     }
     return tried_to_carry_a_bag_item;
@@ -641,16 +681,22 @@ bool Thing::carrying_anything(void)
 {
   TRACE_NO_INDENT();
 
-  if (! maybe_itemsp()) { return false; }
+  if (! maybe_itemsp()) {
+    return false;
+  }
 
-  if (itemsp()->carrying.empty()) { return false; }
+  if (itemsp()->carrying.empty()) {
+    return false;
+  }
 
   return true;
 }
 
 void Thing::check_all_carried_items_are_owned(void)
 {
-  if (! maybe_itemsp()) { return; }
+  if (! maybe_itemsp()) {
+    return;
+  }
 
   if (carrying_anything()) {
     dbg("Carried items:");
@@ -686,7 +732,9 @@ void Thing::check_all_carried_items_are_owned(void)
     FOR_ALL_EQUIP(e)
     {
       auto what = equip_get(e);
-      if (what) { dbg("Equipped slot %s: %s", equip_name(e).c_str(), what->to_short_string().c_str()); }
+      if (what) {
+        dbg("Equipped slot %s: %s", equip_name(e).c_str(), what->to_short_string().c_str());
+      }
     }
   }
 }

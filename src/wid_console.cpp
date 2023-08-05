@@ -28,7 +28,9 @@ void wid_console_fini(void)
   TRACE_AND_INDENT();
   wid_console_exiting = true;
 
-  if (wid_console_inited) { wid_console_inited = false; }
+  if (wid_console_inited) {
+    wid_console_inited = false;
+  }
 
   wid_destroy(&wid_console_container);
   wid_destroy(&wid_console_vert_scroll);
@@ -72,7 +74,9 @@ uint8_t wid_console_init(void)
 static void wid_console_reset_scroll(void)
 {
   TRACE_AND_INDENT();
-  if (! wid_console_vert_scroll) { return; }
+  if (! wid_console_vert_scroll) {
+    return;
+  }
 
   wid_move_to_bottom(wid_console_vert_scroll);
 }
@@ -85,7 +89,9 @@ static void wid_console_log_(std::wstring s)
   TRACE_AND_INDENT();
   static int log_wid_console_buffered_lines;
 
-  if (wid_console_exiting) { return; }
+  if (wid_console_exiting) {
+    return;
+  }
 
   wid_console_reset_scroll();
 
@@ -95,7 +101,9 @@ static void wid_console_log_(std::wstring s)
   if (! wid_console_input_line) {
     auto result = wid_console_lines.insert(std::make_pair(log_wid_console_buffered_lines++, s));
 
-    if (! result.second) { DIE("Wid console lines insert name [%s] failed", wstring_to_string(s).c_str()); }
+    if (! result.second) {
+      DIE("Wid console lines insert name [%s] failed", wstring_to_string(s).c_str());
+    }
 
     return;
   }
@@ -120,7 +128,9 @@ void wid_console_log(std::string s)
 {
   TRACE_AND_INDENT();
   int chars_per_line = UI_CONSOLE_WIDTH;
-  if (chars_per_line <= 0) { chars_per_line = 80; }
+  if (chars_per_line <= 0) {
+    chars_per_line = 80;
+  }
 
   auto d = split(s, chars_per_line);
 
@@ -138,7 +148,9 @@ void wid_console_log(std::wstring s)
 {
   TRACE_AND_INDENT();
   int chars_per_line = UI_CONSOLE_WIDTH;
-  if (chars_per_line <= 0) { chars_per_line = 80; }
+  if (chars_per_line <= 0) {
+    chars_per_line = 80;
+  }
 
   auto d = split(s, chars_per_line);
 
@@ -268,7 +280,9 @@ std::vector< std::wstring > wid_console_serialize(void)
   auto                        tmp = wid_get_head(wid_console_input_line);
   while (tmp) {
     auto s = wid_get_text(tmp);
-    if (s.size()) { r.push_back(wid_get_text(tmp)); }
+    if (s.size()) {
+      r.push_back(wid_get_text(tmp));
+    }
     tmp = wid_get_next(tmp);
   }
   std::reverse(r.begin(), r.end());
@@ -282,7 +296,9 @@ void wid_console_deserialize(std::vector< std::wstring > r)
   DBG3("Vvvvvvvvvvvvvvvvvvvvvvvvvvv");
   for (auto s : r) {
     auto tmp = wstring_to_string(s);
-    if (tmp.size()) { wid_console_log(s); }
+    if (tmp.size()) {
+      wid_console_log(s);
+    }
   }
   DBG3("^^^^^^^^^^^^^^^^^^^^^^^^^^^");
   DBG3("End of replaying of old log");

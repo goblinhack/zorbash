@@ -13,7 +13,9 @@
 
 void Thing::paralysis_tick(void)
 {
-  if (paralysis_count() > 0) { paralysis_count_decr(); }
+  if (paralysis_count() > 0) {
+    paralysis_count_decr();
+  }
   paralysis_update();
 }
 
@@ -34,9 +36,13 @@ int Thing::paralysis_count(void)
 {
   TRACE_NO_INDENT();
 
-  if (! is_monst() && ! is_player()) { return 0; }
+  if (! is_monst() && ! is_player()) {
+    return 0;
+  }
 
-  if (maybe_aip()) { return (aip()->paralysis_count); }
+  if (maybe_aip()) {
+    return (aip()->paralysis_count);
+  }
   return 0;
 }
 
@@ -53,7 +59,9 @@ int Thing::paralysis_count_decr(int v)
   TRACE_NO_INDENT();
   new_aip();
   aip()->paralysis_count -= v;
-  if (aip()->paralysis_count < 0) { aip()->paralysis_count = 0; }
+  if (aip()->paralysis_count < 0) {
+    aip()->paralysis_count = 0;
+  }
   paralysis_update();
   return aip()->paralysis_count;
 }
@@ -61,10 +69,14 @@ int Thing::paralysis_count_decr(int v)
 int Thing::paralysis_count_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_immune_to_paralysis()) { return 0; }
+  if (is_immune_to_paralysis()) {
+    return 0;
+  }
   new_aip();
   aip()->paralysis_count += v;
-  if (aip()->paralysis_count < 0) { aip()->paralysis_count = 0; }
+  if (aip()->paralysis_count < 0) {
+    aip()->paralysis_count = 0;
+  }
   paralysis_update();
   return aip()->paralysis_count;
 }
@@ -74,7 +86,9 @@ int Thing::paralysis_count_decr(void)
   TRACE_NO_INDENT();
   new_aip();
   aip()->paralysis_count--;
-  if (aip()->paralysis_count < 0) { aip()->paralysis_count = 0; }
+  if (aip()->paralysis_count < 0) {
+    aip()->paralysis_count = 0;
+  }
   paralysis_update();
   return aip()->paralysis_count;
 }
@@ -82,10 +96,14 @@ int Thing::paralysis_count_decr(void)
 int Thing::paralysis_count_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_immune_to_paralysis()) { return 0; }
+  if (is_immune_to_paralysis()) {
+    return 0;
+  }
   new_aip();
   aip()->paralysis_count++;
-  if (aip()->paralysis_count < 0) { aip()->paralysis_count = 0; }
+  if (aip()->paralysis_count < 0) {
+    aip()->paralysis_count = 0;
+  }
   paralysis_update();
   return aip()->paralysis_count;
 }

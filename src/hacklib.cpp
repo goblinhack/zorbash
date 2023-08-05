@@ -45,7 +45,8 @@ int phase_of_the_moon(void) /* 0-7, with 0: new, 4: full */
   diy   = lt->tm_yday;
   goldn = (lt->tm_year % 19) + 1;
   epact = (11 * goldn + 18) % 30;
-  if ((epact == 25 && goldn > 11) || epact == 24) epact++;
+  if ((epact == 25 && goldn > 11) || epact == 24)
+    epact++;
 
   return ((((((diy + epact) * 6) + 11) % 177) / 22) & 7);
 }

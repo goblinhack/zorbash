@@ -12,16 +12,22 @@ void Thing::on_polymorphed(void)
 {
   TRACE_NO_INDENT();
   auto on_polymorphed = tp()->on_polymorphed_do();
-  if (std::empty(on_polymorphed)) { return; }
+  if (std::empty(on_polymorphed)) {
+    return;
+  }
 
   auto t = split_tokens(on_polymorphed, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = name(); }
+    if (mod == "me") {
+      mod = name();
+    }
 
     dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(), (int) curr_at.x,
         (int) curr_at.y);
@@ -45,13 +51,21 @@ void Thing::polymorph(Tpp into)
   //
   // Make sure we have the ability to carry items.
   //
-  if (is_player() || is_monst() || is_item() || is_cursor()) { new_infop(); }
+  if (is_player() || is_monst() || is_item() || is_cursor()) {
+    new_infop();
+  }
 
-  if (is_player() || is_monst() || is_item()) { new_itemsp(); }
+  if (is_player() || is_monst() || is_item()) {
+    new_itemsp();
+  }
 
-  if (is_player() || is_monst() || is_cursor()) { new_aip(); }
+  if (is_player() || is_monst() || is_cursor()) {
+    new_aip();
+  }
 
-  if (! is_item_collector()) { drop_all(); }
+  if (! is_item_collector()) {
+    drop_all();
+  }
 
   level_pop();
   z_depth = tp()->z_depth;

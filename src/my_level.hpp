@@ -466,7 +466,9 @@ public:
     /* verify(MTYPE_THING, t); */
 
 #define FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(level)                                                               \
-  if (i == level->interesting_things.end()) { break; }                                                               \
+  if (i == level->interesting_things.end()) {                                                                        \
+    break;                                                                                                           \
+  }                                                                                                                  \
   }                                                                                                                  \
   level->interesting_things_walk_in_progress = false;                                                                \
   }
@@ -486,7 +488,9 @@ public:
     /* verify(MTYPE_THING, t); */
 
 #define FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(level)                                                                  \
-  if (i == level->tickable_things.end()) { break; }                                                                  \
+  if (i == level->tickable_things.end()) {                                                                           \
+    break;                                                                                                           \
+  }                                                                                                                  \
   }                                                                                                                  \
   level->tickable_things_walk_in_progress = false;                                                                   \
   }
@@ -506,7 +510,9 @@ public:
     /* verify(MTYPE_THING, t); */
 
 #define FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(level)                                                               \
-  if (i == level->describable_things.end()) { break; }                                                               \
+  if (i == level->describable_things.end()) {                                                                        \
+    break;                                                                                                           \
+  }                                                                                                                  \
   }                                                                                                                  \
   level->describable_things_walk_in_progress = false;                                                                \
   }
@@ -522,43 +528,69 @@ public:
     /* verify(MTYPE_THING, t); */
 
 #define FOR_ALL_ANIMATED_THINGS_LEVEL_END(level)                                                                     \
-  if (i == level->animated_things.end()) { break; }                                                                  \
+  if (i == level->animated_things.end()) {                                                                           \
+    break;                                                                                                           \
+  }                                                                                                                  \
   }                                                                                                                  \
   level->animated_things_walk_in_progress = false;                                                                   \
   }
 
 #define FOR_ALL_NON_INTERNAL_THINGS(level, t, x, y)                                                                  \
   FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)                                                                         \
-  if (t->is_internal()) { continue; }
+  if (t->is_internal()) {                                                                                            \
+    continue;                                                                                                        \
+  }
 
 #define FOR_ALL_GRID_THINGS(level, t, x, y)                                                                          \
   FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
-  if (! t->is_the_grid) { continue; }
+  if (! t->is_the_grid) {                                                                                            \
+    continue;                                                                                                        \
+  }
 
 #define FOR_ALL_THINGS_AT_DEPTH_UNSAFE(level, t, x, y, z)                                                            \
   FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
-  if (t->z_depth != z) { continue; }                                                                                 \
-  if (t->is_hidden) { continue; }
+  if (t->z_depth != z) {                                                                                             \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_hidden) {                                                                                                \
+    continue;                                                                                                        \
+  }
 
 #define FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z)                                                                   \
   FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)                                                                         \
-  if (t->z_depth != z) { continue; }                                                                                 \
-  if (t->is_hidden) { continue; }
+  if (t->z_depth != z) {                                                                                             \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_hidden) {                                                                                                \
+    continue;                                                                                                        \
+  }
 
 #define FOR_ALL_LIGHTS_AT(level, t, x, y)                                                                            \
   FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
-  if (likely(! t->has_light)) { continue; }                                                                          \
-  if (t->is_hidden) { continue; }
+  if (likely(! t->has_light)) {                                                                                      \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_hidden) {                                                                                                \
+    continue;                                                                                                        \
+  }
 
 //
 // Things that move around
 //
 #define FOR_ALL_THINGS_THAT_DO_STUFF(level, t, x, y)                                                                 \
   FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)                                                                         \
-  if (t->is_internal()) { continue; }                                                                                \
-  if (t->is_floor() || t->is_corridor()) { continue; }                                                               \
-  if (t->is_hidden) { continue; }                                                                                    \
-  if (! t->is_tickable()) { continue; }
+  if (t->is_internal()) {                                                                                            \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_floor() || t->is_corridor()) {                                                                           \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_hidden) {                                                                                                \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (! t->is_tickable()) {                                                                                          \
+    continue;                                                                                                        \
+  }
 
 //
 // Things that move around and things that do not, but are interesting
@@ -566,26 +598,48 @@ public:
 //
 #define FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)                                                                 \
   FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)                                                                         \
-  if (t->is_internal()) { continue; }                                                                                \
-  if (t->is_floor() || t->is_corridor()) { continue; }                                                               \
-  if (t->is_hidden) { continue; }                                                                                    \
-  if (! t->is_interesting()) { continue; }
+  if (t->is_internal()) {                                                                                            \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_floor() || t->is_corridor()) {                                                                           \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_hidden) {                                                                                                \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (! t->is_interesting()) {                                                                                       \
+    continue;                                                                                                        \
+  }
 
 #define FOR_ALL_THINGS_THAT_INTERACT_UNSAFE(level, t, x, y)                                                          \
   FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
-  if (t->is_internal()) { continue; }                                                                                \
-  if (t->is_floor() || t->is_corridor()) { continue; }                                                               \
-  if (t->is_hidden) { continue; }                                                                                    \
-  if (! t->is_interesting()) { continue; }
+  if (t->is_internal()) {                                                                                            \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_floor() || t->is_corridor()) {                                                                           \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_hidden) {                                                                                                \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (! t->is_interesting()) {                                                                                       \
+    continue;                                                                                                        \
+  }
 
 //
 // Things you can bump into
 //
 #define FOR_ALL_COLLISION_THINGS(level, t, x, y)                                                                     \
   FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)                                                                         \
-  if (t->is_internal()) { continue; }                                                                                \
-  if (t->is_floor() || t->is_corridor()) { continue; }                                                               \
-  if (t->is_hidden) { continue; }                                                                                    \
+  if (t->is_internal()) {                                                                                            \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_floor() || t->is_corridor()) {                                                                           \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_hidden) {                                                                                                \
+    continue;                                                                                                        \
+  }                                                                                                                  \
   if (t->is_interesting() || t->is_attackable_by_monst() || t->is_attackable_by_player() || t->is_obs_ai()) {        \
   } else {                                                                                                           \
     continue;                                                                                                        \
@@ -593,18 +647,24 @@ public:
 
 #define FOR_ALL_MONSTS(level, t, x, y)                                                                               \
   FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)                                                                         \
-  if (! t->is_monst()) { continue; }
+  if (! t->is_monst()) {                                                                                             \
+    continue;                                                                                                        \
+  }
 
 //
 // Cursor path is the highlighted path the player follows.
 //
 #define FOR_ALL_CURSOR_PATH_THINGS(level, t, x, y)                                                                   \
   FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
-  if (! t->is_cursor_path()) { continue; }
+  if (! t->is_cursor_path()) {                                                                                       \
+    continue;                                                                                                        \
+  }
 
 #define FOR_ALL_DEBUG_PATH_THINGS(level, t, x, y)                                                                    \
   FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
-  if (! t->is_debug_path()) { continue; }
+  if (! t->is_debug_path()) {                                                                                        \
+    continue;                                                                                                        \
+  }
 
   Thingp buffbox_describe(const int slot);
   Thingp buffbox_get(const int slot);

@@ -62,7 +62,9 @@ void wid_skillbox_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int w
   level->skillbox_describe(slot);
 
   auto t = level->skillbox_get(slot);
-  if (t) { game->wid_thing_info_create(t); }
+  if (t) {
+    game->wid_thing_info_create(t);
+  }
 }
 
 void wid_skillbox_mouse_over_end(Widp w)
@@ -101,7 +103,9 @@ void wid_skillbox_mouse_over_end(Widp w)
 
   DBG3("Skillbox: Over skillbox slot %d", slot);
   TRACE_AND_INDENT();
-  if (! level->skillbox_over(slot)) { return; }
+  if (! level->skillbox_over(slot)) {
+    return;
+  }
 
   game->wid_thing_info_destroy_deferred();
 
@@ -133,12 +137,18 @@ uint8_t wid_skillbox_item_mouse_up(Widp w, int x, int y, uint32_t button)
   }
 
   auto level = game->get_current_level();
-  if (! level) { return true; }
+  if (! level) {
+    return true;
+  }
 
   auto player = level->player;
-  if (! player) { return true; }
+  if (! player) {
+    return true;
+  }
 
-  if (player->is_dead) { return true; }
+  if (player->is_dead) {
+    return true;
+  }
 
   if (! level->skillbox_chosen(slot)) {
     DBG3("Skillbox: Nothing on skill slot %d", slot);
@@ -181,10 +191,14 @@ void wid_skill_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int whee
   }
 
   auto id = wid_get_thing_id_context(w, 0);
-  if (id == NoThingId) { return; }
+  if (id == NoThingId) {
+    return;
+  }
 
   auto t = level->thing_find(id);
-  if (t) { game->wid_thing_info_create(t); }
+  if (t) {
+    game->wid_thing_info_create(t);
+  }
 }
 
 void wid_skill_mouse_over_end(Widp w)
@@ -249,15 +263,23 @@ uint8_t wid_skill_item_mouse_up(Widp w, int x, int y, uint32_t button)
   }
 
   auto level = game->get_current_level();
-  if (! level) { return true; }
+  if (! level) {
+    return true;
+  }
 
   auto player = level->player;
-  if (! player) { return true; }
+  if (! player) {
+    return true;
+  }
 
-  if (player->is_dead) { return true; }
+  if (player->is_dead) {
+    return true;
+  }
 
   auto id = wid_get_thing_id_context(w, 0);
-  if (id == NoThingId) { return true; }
+  if (id == NoThingId) {
+    return true;
+  }
 
   auto t = level->thing_find(id);
   if (t) {

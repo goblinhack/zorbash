@@ -98,27 +98,34 @@ extern int TILES_VISIBLE_DOWN;
 
 #define dbg                                                                                                          \
   TRACE_NO_INDENT();                                                                                                 \
-  if (DEBUG1) log
+  if (DEBUG1)                                                                                                        \
+  log
 #define dbg2                                                                                                         \
   TRACE_NO_INDENT();                                                                                                 \
-  if (DEBUG2) log
+  if (DEBUG2)                                                                                                        \
+  log
 #define dbg3                                                                                                         \
   TRACE_NO_INDENT();                                                                                                 \
-  if (DEBUG3) log
+  if (DEBUG3)                                                                                                        \
+  log
 
 #define DBG                                                                                                          \
   TRACE_NO_INDENT();                                                                                                 \
-  if (DEBUG1) LOG
+  if (DEBUG1)                                                                                                        \
+  LOG
 #define DBG2                                                                                                         \
   TRACE_NO_INDENT();                                                                                                 \
-  if (DEBUG2) LOG
+  if (DEBUG2)                                                                                                        \
+  LOG
 #define DBG3                                                                                                         \
   TRACE_NO_INDENT();                                                                                                 \
-  if (DEBUG3) LOG
+  if (DEBUG3)                                                                                                        \
+  LOG
 
 #define AI_LOG                                                                                                       \
   TRACE_NO_INDENT();                                                                                                 \
-  if (DEBUG1) ai_log
+  if (DEBUG1)                                                                                                        \
+  ai_log
 
 //
 // Used to fill in gaps in log depth

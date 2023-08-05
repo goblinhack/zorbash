@@ -14,7 +14,7 @@
 #include "my_unicode.hpp"
 #include "my_wid.hpp"
 
-void ascii_dump(bool use_color)
+void ascii_dump_to_console(bool use_color)
 {
   TRACE_NO_INDENT();
 
@@ -45,32 +45,48 @@ void ascii_dump(bool use_color)
         // Get the background colors
         //
         for (int depth = TILE_LAYER_BG_0; depth < TILE_LAYER_FG_0; depth++) {
-          if (cell->tex[ depth ]) { continue; }
-          if (! cell->tile[ depth ]) { continue; }
+          if (cell->tex[ depth ]) {
+            continue;
+          }
+          if (! cell->tile[ depth ]) {
+            continue;
+          }
           auto col = cell->color_tl[ depth ];
-          if (col != COLOR_NONE) { bg = col; }
+          if (col != COLOR_NONE) {
+            bg = col;
+          }
         }
 
         //
         // Get the foreground colors
         //
         for (int depth = TILE_LAYER_FG_0; depth < TILE_LAYER_MAX; depth++) {
-          if (cell->tex[ depth ]) { continue; }
-          if (! cell->tile[ depth ]) { continue; }
+          if (cell->tex[ depth ]) {
+            continue;
+          }
+          if (! cell->tile[ depth ]) {
+            continue;
+          }
           auto col = cell->color_tl[ depth ];
-          if (col != COLOR_NONE) { fg = col; }
+          if (col != COLOR_NONE) {
+            fg = col;
+          }
         }
 
         //
         // Avoid white on white
         //
-        if ((bg == WHITE) && (fg == WHITE)) { bg = GRAY50; }
+        if ((bg == WHITE) && (fg == WHITE)) {
+          bg = GRAY50;
+        }
 
         //
         // Fake the window backgrounds that are just big textures
         //
         for (int depth = TILE_LAYER_BG_0; depth < TILE_LAYER_MAX; depth++) {
-          if (cell->tile[ depth ]) { continue; }
+          if (cell->tile[ depth ]) {
+            continue;
+          }
 
           if ((cell->tx[ depth ] != 0) || (cell->ty[ depth ] != 0) || (cell->dx[ depth ] != 0)
               || (cell->dy[ depth ] != 0)) {
@@ -99,8 +115,12 @@ void ascii_dump(bool use_color)
       //
       bool got_one = false;
       for (int depth = TILE_LAYER_MAX - 1; depth >= 0; depth--) {
-        if (! cell->tile[ depth ]) { continue; }
-        if (cell->tex[ depth ]) { continue; }
+        if (! cell->tile[ depth ]) {
+          continue;
+        }
+        if (cell->tex[ depth ]) {
+          continue;
+        }
         if (cell->ch[ depth ]) {
           wchar_t out = unicode_alias_to_char(cell->ch[ depth ]);
           if (out > 128) {
@@ -116,7 +136,9 @@ void ascii_dump(bool use_color)
       //
       // Nothing at all?
       //
-      if (! got_one) { putchar(' '); }
+      if (! got_one) {
+        putchar(' ');
+      }
 
       //
       // Reset colors

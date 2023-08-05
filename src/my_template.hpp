@@ -17,7 +17,9 @@ bool contains(C< T > *c, T t)
   typename C< T >::iterator i = c->begin();
 
   while (i != c->end()) {
-    if (*i == t) { return true; }
+    if (*i == t) {
+      return true;
+    }
     i++;
   }
   return false;
@@ -33,7 +35,9 @@ void push_back_if_unique(C< T > &c, T d)
   while (so != eo) {
     T t = *so;
 
-    if (t == d) { return; }
+    if (t == d) {
+      return;
+    }
     so++;
   }
   c.push_back(d);

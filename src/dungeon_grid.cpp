@@ -117,7 +117,9 @@ static bool debug_enabled = false;
 
 void Nodes::finish_constructor(biome_t biome)
 {
-  if (biome == BIOME_UNKNOWN) { DIE("No biome set for Nodes constructor"); }
+  if (biome == BIOME_UNKNOWN) {
+    DIE("No biome set for Nodes constructor");
+  }
 
 redo:
   this->biome = biome;
@@ -131,7 +133,9 @@ redo:
   auto pass        = 1;
   auto depth       = 1;
   auto depth_limit = DUNGEON_MAX_DEPTH;
-  if (! is_dungeon) { depth_limit = DUNGEONS_MAX_DIFFICULTY_LEVEL; }
+  if (! is_dungeon) {
+    depth_limit = DUNGEONS_MAX_DIFFICULTY_LEVEL;
+  }
   while (depth <= depth_limit) {
     set_max_depth();
 
@@ -146,9 +150,13 @@ redo:
       placed = snake_walk(depth, 6, pass);
     }
 
-    if (debug_enabled) { LOG("Node-grid: Level depth %d placed %d nodes", depth, placed); }
+    if (debug_enabled) {
+      LOG("Node-grid: Level depth %d placed %d nodes", depth, placed);
+    }
 
-    if (! placed) { break; }
+    if (! placed) {
+      break;
+    }
 
     //
     // We need at least 2 nodes per depth as one can be a lock
@@ -161,20 +169,26 @@ redo:
         //
         if (placed < 3) {
           debug("failed initial level, did not place enough nodes");
-          if (debug_enabled) { LOG("Node-grid: Failed level depth %d placed only %d nodes, redo", depth, placed); }
+          if (debug_enabled) {
+            LOG("Node-grid: Failed level depth %d placed only %d nodes, redo", depth, placed);
+          }
           goto redo;
         }
       } else {
         if (placed < 2) {
           debug("failed level, did not place enough nodes at depth");
-          if (debug_enabled) { LOG("Node-grid: Failed level depth %d placed only %d nodes, redo", depth, placed); }
+          if (debug_enabled) {
+            LOG("Node-grid: Failed level depth %d placed only %d nodes, redo", depth, placed);
+          }
           goto redo;
         }
       }
     } else {
       if (placed < 6) {
         debug("failed level, did not place enough nodes at depth");
-        if (debug_enabled) { LOG("Node-grid: Failed level depth %d placed only %d nodes, redo", depth, placed); }
+        if (debug_enabled) {
+          LOG("Node-grid: Failed level depth %d placed only %d nodes, redo", depth, placed);
+        }
         goto redo;
       }
     }
@@ -228,9 +242,13 @@ redo:
     while (secret_depth < 10) {
       auto placed = snake_walk(secret_depth, 10, pass);
 
-      if (debug_enabled) { LOG("Node-grid: Level depth %d placed %d secret nodes", secret_depth, placed); }
+      if (debug_enabled) {
+        LOG("Node-grid: Level depth %d placed %d secret nodes", secret_depth, placed);
+      }
 
-      if (! placed) { break; }
+      if (! placed) {
+        break;
+      }
 
       join_nodes_of_same_depth(secret_depth, pass);
       secret_depth++;
@@ -390,10 +408,18 @@ void Nodes::dump(void)
         set(out, ox + 1, oy, '?');
         set(out, ox + 2, oy, '?');
       }
-      if (node->dir_up) { set(out, ox - 1, oy + 1, '^'); }
-      if (node->dir_down) { set(out, ox + 1, oy - 1, 'v'); }
-      if (node->dir_left) { set(out, ox - 1, oy + 1, '<'); }
-      if (node->dir_right) { set(out, ox + 1, oy + 1, '>'); }
+      if (node->dir_up) {
+        set(out, ox - 1, oy + 1, '^');
+      }
+      if (node->dir_down) {
+        set(out, ox + 1, oy - 1, 'v');
+      }
+      if (node->dir_left) {
+        set(out, ox - 1, oy + 1, '<');
+      }
+      if (node->dir_right) {
+        set(out, ox + 1, oy + 1, '>');
+      }
 
       auto t = 0;
       if (node->is_ascend_dungeon) {
@@ -429,7 +455,9 @@ void Nodes::dump(void)
       } else {
         set(out, ox, oy, '.');
       }
-      if (node->on_critical_path) { set(out, ox - 1, oy - 1, '*'); }
+      if (node->on_critical_path) {
+        set(out, ox - 1, oy - 1, '*');
+      }
     }
   }
 
@@ -438,35 +466,53 @@ void Nodes::dump(void)
     for (auto x = 0; x < grid_width * step; x++) {
       s += get(out, x, y);
     }
-    if (s != "") { LOG("Node-grid: [%s]", s.c_str()); }
+    if (s != "") {
+      LOG("Node-grid: [%s]", s.c_str());
+    }
   }
 
   for (auto y = 0; y < grid_height; y++) {
     for (auto x = 0; x < grid_width; x++) {
       auto node = getn(x, y);
       if (node->has_door_down) {
-        if (y == grid_height - 1) { ERR("DungeonNode %d,%d has exit down off end of map", x, y); }
+        if (y == grid_height - 1) {
+          ERR("DungeonNode %d,%d has exit down off end of map", x, y);
+        }
       }
       if (node->has_door_right) {
-        if (x == grid_width - 1) { ERR("DungeonNode %d,%d has exit right off end of map", x, y); }
+        if (x == grid_width - 1) {
+          ERR("DungeonNode %d,%d has exit right off end of map", x, y);
+        }
       }
       if (node->has_door_left) {
-        if (x == 0) { ERR("DungeonNode %d,%d has exit left off end of map", x, y); }
+        if (x == 0) {
+          ERR("DungeonNode %d,%d has exit left off end of map", x, y);
+        }
       }
       if (node->has_door_up) {
-        if (y == 0) { ERR("DungeonNode %d,%d has exit up off end of map", x, y); }
+        if (y == 0) {
+          ERR("DungeonNode %d,%d has exit up off end of map", x, y);
+        }
       }
       if (node->has_secret_exit_down) {
-        if (y == grid_height - 1) { ERR("DungeonNode %d,%d has secret exit down off end of map", x, y); }
+        if (y == grid_height - 1) {
+          ERR("DungeonNode %d,%d has secret exit down off end of map", x, y);
+        }
       }
       if (node->has_secret_exit_right) {
-        if (x == grid_width - 1) { ERR("DungeonNode %d,%d has secret exit right off end of map", x, y); }
+        if (x == grid_width - 1) {
+          ERR("DungeonNode %d,%d has secret exit right off end of map", x, y);
+        }
       }
       if (node->has_secret_exit_left) {
-        if (x == 0) { ERR("DungeonNode %d,%d has secret exit left off end of map", x, y); }
+        if (x == 0) {
+          ERR("DungeonNode %d,%d has secret exit left off end of map", x, y);
+        }
       }
       if (node->has_secret_exit_up) {
-        if (y == 0) { ERR("DungeonNode %d,%d has secret exit up off end of map", x, y); }
+        if (y == 0) {
+          ERR("DungeonNode %d,%d has secret exit up off end of map", x, y);
+        }
       }
     }
   }
@@ -476,35 +522,51 @@ void Nodes::dump(void)
       auto node = getn(x, y);
       if (node->has_door_down) {
         auto o = getn(x, y + 1);
-        if (! o || ! o->depth) { ERR("DungeonNode %d,%d has exit down but no node exists", x, y); }
+        if (! o || ! o->depth) {
+          ERR("DungeonNode %d,%d has exit down but no node exists", x, y);
+        }
       }
       if (node->has_door_right) {
         auto o = getn(x + 1, y);
-        if (! o || ! o->depth) { ERR("DungeonNode %d,%d has exit right but no node exists", x, y); }
+        if (! o || ! o->depth) {
+          ERR("DungeonNode %d,%d has exit right but no node exists", x, y);
+        }
       }
       if (node->has_door_left) {
         auto o = getn(x - 1, y);
-        if (! o || ! o->depth) { ERR("DungeonNode %d,%d has exit left but no node exists", x, y); }
+        if (! o || ! o->depth) {
+          ERR("DungeonNode %d,%d has exit left but no node exists", x, y);
+        }
       }
       if (node->has_door_up) {
         auto o = getn(x, y - 1);
-        if (! o || ! o->depth) { ERR("DungeonNode %d,%d has exit up but no node exists", x, y); }
+        if (! o || ! o->depth) {
+          ERR("DungeonNode %d,%d has exit up but no node exists", x, y);
+        }
       }
       if (node->has_secret_exit_down) {
         auto o = getn(x, y + 1);
-        if (! o || ! o->depth) { ERR("DungeonNode %d,%d has secret exit down but no node exists", x, y); }
+        if (! o || ! o->depth) {
+          ERR("DungeonNode %d,%d has secret exit down but no node exists", x, y);
+        }
       }
       if (node->has_secret_exit_right) {
         auto o = getn(x + 1, y);
-        if (! o || ! o->depth) { ERR("DungeonNode %d,%d has secret exit right but no node exists", x, y); }
+        if (! o || ! o->depth) {
+          ERR("DungeonNode %d,%d has secret exit right but no node exists", x, y);
+        }
       }
       if (node->has_secret_exit_left) {
         auto o = getn(x - 1, y);
-        if (! o || ! o->depth) { ERR("DungeonNode %d,%d has secret exit left but no node exists", x, y); }
+        if (! o || ! o->depth) {
+          ERR("DungeonNode %d,%d has secret exit left but no node exists", x, y);
+        }
       }
       if (node->has_secret_exit_up) {
         auto o = getn(x, y - 1);
-        if (! o || ! o->depth) { ERR("DungeonNode %d,%d has secret exit up but no node exists", x, y); }
+        if (! o || ! o->depth) {
+          ERR("DungeonNode %d,%d has secret exit up but no node exists", x, y);
+        }
       }
     }
   }
@@ -514,7 +576,9 @@ void Nodes::dump(void)
       auto node = getn(x, y);
       if (node->has_door_down) {
         auto o = getn(x, y + 1);
-        if (o->depth == depth_obstacle) { ERR("DungeonNode %d,%d has exit down but that node is an obstacle", x, y); }
+        if (o->depth == depth_obstacle) {
+          ERR("DungeonNode %d,%d has exit down but that node is an obstacle", x, y);
+        }
       }
       if (node->has_door_right) {
         auto o = getn(x + 1, y);
@@ -524,11 +588,15 @@ void Nodes::dump(void)
       }
       if (node->has_door_left) {
         auto o = getn(x - 1, y);
-        if (o->depth == depth_obstacle) { ERR("DungeonNode %d,%d has exit left but that node is an obstacle", x, y); }
+        if (o->depth == depth_obstacle) {
+          ERR("DungeonNode %d,%d has exit left but that node is an obstacle", x, y);
+        }
       }
       if (node->has_door_up) {
         auto o = getn(x, y - 1);
-        if (o->depth == depth_obstacle) { ERR("DungeonNode %d,%d has exit up but that node is an obstacle", x, y); }
+        if (o->depth == depth_obstacle) {
+          ERR("DungeonNode %d,%d has exit up but that node is an obstacle", x, y);
+        }
       }
       if (node->has_secret_exit_down) {
         auto o = getn(x, y + 1);
@@ -561,16 +629,24 @@ void Nodes::dump(void)
     for (auto x = 0; x < grid_width; x++) {
       auto node = getn(x, y);
       if (node->has_door_down) {
-        if (node->has_secret_exit_down) { ERR("DungeonNode %d,%d has both normal and secret exits down", x, y); }
+        if (node->has_secret_exit_down) {
+          ERR("DungeonNode %d,%d has both normal and secret exits down", x, y);
+        }
       }
       if (node->has_door_right) {
-        if (node->has_secret_exit_right) { ERR("DungeonNode %d,%d has both normal and secret exits right", x, y); }
+        if (node->has_secret_exit_right) {
+          ERR("DungeonNode %d,%d has both normal and secret exits right", x, y);
+        }
       }
       if (node->has_door_left) {
-        if (node->has_secret_exit_left) { ERR("DungeonNode %d,%d has both normal and secret exits left", x, y); }
+        if (node->has_secret_exit_left) {
+          ERR("DungeonNode %d,%d has both normal and secret exits left", x, y);
+        }
       }
       if (node->has_door_up) {
-        if (node->has_secret_exit_up) { ERR("DungeonNode %d,%d has both normal and secret exits up", x, y); }
+        if (node->has_secret_exit_up) {
+          ERR("DungeonNode %d,%d has both normal and secret exits up", x, y);
+        }
       }
     }
   }
@@ -578,7 +654,9 @@ void Nodes::dump(void)
 
 void Nodes::debug(std::string msg)
 {
-  if (! debug_enabled) { return; }
+  if (! debug_enabled) {
+    return;
+  }
 
   dump();
   LOG("Node-grid: ^^^^^ %s ^^^^^", msg.c_str());
@@ -599,7 +677,9 @@ bool Nodes::is_oob(const int x, const int y)
 
 DungeonNode *Nodes::node_addr(const int x, const int y)
 {
-  if (unlikely(is_oob(x, y))) { return nullptr; }
+  if (unlikely(is_oob(x, y))) {
+    return nullptr;
+  }
 
   return (&nodes[ offset(x, y) ]);
 }
@@ -607,7 +687,9 @@ DungeonNode *Nodes::node_addr(const int x, const int y)
 void Nodes::putn(const int x, const int y, const DungeonNode n)
 {
   auto p = node_addr(x, y);
-  if (p != nullptr) { *p = n; }
+  if (p != nullptr) {
+    *p = n;
+  }
 }
 
 DungeonNode *Nodes::getn(const int x, const int y)
@@ -668,7 +750,9 @@ void Nodes::random_dir(int *dx, int *dy)
 //
 void Nodes::init_nodes(void)
 {
-  if (biome == BIOME_UNKNOWN) { DIE("No biome set for Nodes class"); }
+  if (biome == BIOME_UNKNOWN) {
+    DIE("No biome set for Nodes class");
+  }
 
   nodes.resize(grid_width * grid_height);
 
@@ -704,7 +788,9 @@ void Nodes::init_nodes(void)
 
   auto obstacles = ((grid_width * grid_height) / 6) * 2;
 
-  if (! is_dungeon) { obstacles /= 10; }
+  if (! is_dungeon) {
+    obstacles /= 10;
+  }
 
   while (obstacles--) {
     auto x = pcg_random_range(0, grid_width);
@@ -754,7 +840,9 @@ int Nodes::snake_walk(int depth, int max_placed, int pass)
         }
       }
 
-      if (tries < 0) { return 0; }
+      if (tries < 0) {
+        return 0;
+      }
     } else {
       //
       // Start adjacent to a non hidden level node and connect to it
@@ -794,7 +882,9 @@ int Nodes::snake_walk(int depth, int max_placed, int pass)
         }
       }
 
-      if (tries < 0) { return 0; }
+      if (tries < 0) {
+        return 0;
+      }
     }
   } else {
     if (pass == 1) {
@@ -837,7 +927,9 @@ int Nodes::snake_walk(int depth, int max_placed, int pass)
         }
       }
 
-      if (tries < 0) { return 0; }
+      if (tries < 0) {
+        return 0;
+      }
     } else {
       //
       // Else start adjacent next to the old secret depth
@@ -877,7 +969,9 @@ int Nodes::snake_walk(int depth, int max_placed, int pass)
         }
       }
 
-      if (tries < 0) { return 0; }
+      if (tries < 0) {
+        return 0;
+      }
     }
   }
 
@@ -895,9 +989,13 @@ int Nodes::snake_walk(int depth, int max_placed, int pass)
     // Get next empty cell
     //
     auto n = getn(x, y);
-    if (! n || n->depth) { continue; }
+    if (! n || n->depth) {
+      continue;
+    }
 
-    if (n->pass && (n->pass != pass)) { continue; }
+    if (n->pass && (n->pass != pass)) {
+      continue;
+    }
 
     placed++;
     n->depth = depth;
@@ -908,10 +1006,14 @@ int Nodes::snake_walk(int depth, int max_placed, int pass)
     //
     random_dir(&dx, &dy);
     if (dy < 0) {
-      if (pcg_random_range(0, 100) < 20) { dy = 0; }
+      if (pcg_random_range(0, 100) < 20) {
+        dy = 0;
+      }
     }
     if (dy > 0) {
-      if (pcg_random_range(0, 100) < 20) { dy = 0; }
+      if (pcg_random_range(0, 100) < 20) {
+        dy = 0;
+      }
     }
 
     auto old = n;
@@ -957,7 +1059,9 @@ int Nodes::snake_walk(int depth, int max_placed, int pass)
           }
         }
       }
-      if (dy < 0) { dy = 0; }
+      if (dy < 0) {
+        dy = 0;
+      }
 
       //
       // Get the next move, or change dir again if blocked.
@@ -968,18 +1072,30 @@ int Nodes::snake_walk(int depth, int max_placed, int pass)
         while (tries--) {
           random_dir(&dx, &dy);
           n = getn(x + dx, y + dy);
-          if (node_is_free(n)) { break; }
+          if (node_is_free(n)) {
+            break;
+          }
         }
 
-        if (tries < 0) { continue; }
+        if (tries < 0) {
+          continue;
+        }
       }
 
       s.push_back(point(x + dx, y + dy));
 
-      if (dx == 1) { old->set_has_door_right(true); }
-      if (dx == -1) { old->set_has_door_left(true); }
-      if (dy == 1) { old->set_has_door_down(true); }
-      if (dy == -1) { old->set_has_door_up(true); }
+      if (dx == 1) {
+        old->set_has_door_right(true);
+      }
+      if (dx == -1) {
+        old->set_has_door_left(true);
+      }
+      if (dy == 1) {
+        old->set_has_door_down(true);
+      }
+      if (dy == -1) {
+        old->set_has_door_up(true);
+      }
     }
 
   } while (s.size());
@@ -995,9 +1111,13 @@ void Nodes::join_nodes_of_same_depth(int depth, int pass)
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
       auto o = getn(x, y);
-      if (o->depth != depth) { continue; }
+      if (o->depth != depth) {
+        continue;
+      }
 
-      if (o->pass && (o->pass != pass)) { continue; }
+      if (o->pass && (o->pass != pass)) {
+        continue;
+      }
 
       if (o->has_door_right) {
         auto n = getn(x + 1, y);
@@ -1048,8 +1168,12 @@ void Nodes::join_depth_to_next_depth(int depth, int pass)
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
       auto o = getn(x, y);
-      if (o->depth != depth) { continue; }
-      if (o->pass && (o->pass != pass)) { continue; }
+      if (o->depth != depth) {
+        continue;
+      }
+      if (o->pass && (o->pass != pass)) {
+        continue;
+      }
 
       auto n = getn(x + 1, y);
       if (n && (n->pass == pass) && (n->depth == depth + 1)) {
@@ -1083,7 +1207,9 @@ void Nodes::join_depth_to_next_depth(int depth, int pass)
 
   auto r = pcg_random_range(0, s.size());
 
-  if (! r) { r = 1; }
+  if (! r) {
+    r = 1;
+  }
 
   while (r--) {
     auto i = pcg_random_range(0, s.size());
@@ -1095,9 +1221,13 @@ void Nodes::join_depth_to_next_depth(int depth, int pass)
     auto dy = b.y - a.y;
 
     auto n = getn(b.x, b.y);
-    if (! n) { DIE("No new pos"); }
+    if (! n) {
+      DIE("No new pos");
+    }
     auto o = getn(a.x, a.y);
-    if (! o) { DIE("No old pos"); }
+    if (! o) {
+      DIE("No old pos");
+    }
 
     if (dx == 1) {
       o->set_has_door_right(true);
@@ -1128,8 +1258,12 @@ void Nodes::join_depth_secret(int depth, int pass)
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
       auto o = getn(x, y);
-      if (o->depth != depth) { continue; }
-      if (o->pass && (o->pass != pass)) { continue; }
+      if (o->depth != depth) {
+        continue;
+      }
+      if (o->pass && (o->pass != pass)) {
+        continue;
+      }
 
       if (pass == 1) {
         auto n = getn(x + 1, y);
@@ -1175,12 +1309,18 @@ void Nodes::join_depth_secret(int depth, int pass)
     }
   }
 
-  if (! s.size()) { return; }
+  if (! s.size()) {
+    return;
+  }
 
   auto r = pcg_random_range(0, s.size());
-  if (! r) { r = 1; }
+  if (! r) {
+    r = 1;
+  }
 
-  if (pass == 2) { r = s.size() / 2; }
+  if (pass == 2) {
+    r = s.size() / 2;
+  }
 
   while (r--) {
     auto i = pcg_random_range(0, s.size());
@@ -1192,9 +1332,13 @@ void Nodes::join_depth_secret(int depth, int pass)
     auto dy = b.y - a.y;
 
     auto n = getn(b.x, b.y);
-    if (! n) { DIE("No new pos"); }
+    if (! n) {
+      DIE("No new pos");
+    }
     auto o = getn(a.x, a.y);
-    if (! o) { DIE("No old pos"); }
+    if (! o) {
+      DIE("No old pos");
+    }
 
     if (dx == 1) {
       o->set_has_secret_exit_right(true);
@@ -1225,11 +1369,21 @@ bool Nodes::place_lock(int depth, int pass)
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
       auto o = getn(x, y);
-      if (o->pass != pass) { continue; }
-      if (o->depth != depth) { continue; }
-      if (o->is_descend_dungeon) { continue; }
-      if (o->is_ascend_dungeon) { continue; }
-      if (! o->on_critical_path) { continue; }
+      if (o->pass != pass) {
+        continue;
+      }
+      if (o->depth != depth) {
+        continue;
+      }
+      if (o->is_descend_dungeon) {
+        continue;
+      }
+      if (o->is_ascend_dungeon) {
+        continue;
+      }
+      if (! o->on_critical_path) {
+        continue;
+      }
 
       auto n = getn(x + 1, y);
       if (n && (n->on_critical_path) && (n->pass == pass) && (n->depth == depth - 1) && o->has_door_right) {
@@ -1252,7 +1406,9 @@ bool Nodes::place_lock(int depth, int pass)
 
   if (! s.size()) {
     debug("no lock placed for depth");
-    if (debug_enabled) { LOG("No lock placed for depth %d", depth); }
+    if (debug_enabled) {
+      LOG("No lock placed for depth %d", depth);
+    }
     return false;
   }
 
@@ -1270,9 +1426,15 @@ void Nodes::hide_other_locks(int depth, int pass)
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
       auto o = getn(x, y);
-      if (o->pass != pass) { continue; }
-      if (o->depth != depth) { continue; }
-      if (o->is_lock) { continue; }
+      if (o->pass != pass) {
+        continue;
+      }
+      if (o->depth != depth) {
+        continue;
+      }
+      if (o->is_lock) {
+        continue;
+      }
 
       auto n = getn(x + 1, y);
       if (n && (n->pass == pass) && (n->depth == depth - 1) && o->has_door_right) {
@@ -1313,12 +1475,24 @@ bool Nodes::place_key(int depth, int pass)
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
       auto o = getn(x, y);
-      if (o->pass != pass) { continue; }
-      if (o->depth != depth) { continue; }
-      if (o->is_lock) { continue; }
-      if (o->is_ascend_dungeon) { continue; }
-      if (o->is_descend_dungeon) { continue; }
-      if (! o->on_critical_path) { continue; }
+      if (o->pass != pass) {
+        continue;
+      }
+      if (o->depth != depth) {
+        continue;
+      }
+      if (o->is_lock) {
+        continue;
+      }
+      if (o->is_ascend_dungeon) {
+        continue;
+      }
+      if (o->is_descend_dungeon) {
+        continue;
+      }
+      if (! o->on_critical_path) {
+        continue;
+      }
 
       s.push_back(point(x, y));
     }
@@ -1326,7 +1500,9 @@ bool Nodes::place_key(int depth, int pass)
 
   if (! s.size()) {
     debug("no key placed");
-    if (debug_enabled) { LOG("No key placed for depth %d", depth); }
+    if (debug_enabled) {
+      LOG("No key placed for depth %d", depth);
+    }
     return false;
   }
 
@@ -1344,12 +1520,24 @@ bool Nodes::place_entrance(void)
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
       auto o = getn(x, y);
-      if (o->pass != 1) { continue; }
-      if (o->depth != 1) { continue; }
-      if (o->is_key) { continue; }
-      if (o->is_lock) { continue; }
-      if (o->is_ascend_dungeon) { continue; }
-      if (o->is_descend_dungeon) { continue; }
+      if (o->pass != 1) {
+        continue;
+      }
+      if (o->depth != 1) {
+        continue;
+      }
+      if (o->is_key) {
+        continue;
+      }
+      if (o->is_lock) {
+        continue;
+      }
+      if (o->is_ascend_dungeon) {
+        continue;
+      }
+      if (o->is_descend_dungeon) {
+        continue;
+      }
 
       s.push_back(point(x, y));
     }
@@ -1375,13 +1563,25 @@ bool Nodes::place_exit(void)
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
       auto o = getn(x, y);
-      if (o->pass != 1) { continue; }
+      if (o->pass != 1) {
+        continue;
+      }
 
-      if (o->is_key) { continue; }
-      if (o->is_lock) { continue; }
-      if (o->is_ascend_dungeon) { continue; }
-      if (o->is_descend_dungeon) { continue; }
-      if (o->depth == max_depth) { s.push_back(point(x, y)); }
+      if (o->is_key) {
+        continue;
+      }
+      if (o->is_lock) {
+        continue;
+      }
+      if (o->is_ascend_dungeon) {
+        continue;
+      }
+      if (o->is_descend_dungeon) {
+        continue;
+      }
+      if (o->depth == max_depth) {
+        s.push_back(point(x, y));
+      }
     }
   }
 
@@ -1408,35 +1608,51 @@ void Nodes::remove_stubs(void)
 
       if (node->has_door_down) {
         auto o = getn(x, y + 1);
-        if (! o->has_door_up) { node->set_has_door_down(false); }
+        if (! o->has_door_up) {
+          node->set_has_door_down(false);
+        }
       }
       if (node->has_door_up) {
         auto o = getn(x, y - 1);
-        if (! o->has_door_down) { node->set_has_door_up(false); }
+        if (! o->has_door_down) {
+          node->set_has_door_up(false);
+        }
       }
       if (node->has_door_right) {
         auto o = getn(x + 1, y);
-        if (! o->has_door_left) { node->set_has_door_right(false); }
+        if (! o->has_door_left) {
+          node->set_has_door_right(false);
+        }
       }
       if (node->has_door_left) {
         auto o = getn(x - 1, y);
-        if (! o->has_door_right) { node->set_has_door_left(false); }
+        if (! o->has_door_right) {
+          node->set_has_door_left(false);
+        }
       }
       if (node->has_secret_exit_down) {
         auto o = getn(x, y + 1);
-        if (! o->has_secret_exit_up) { node->set_has_secret_exit_down(false); }
+        if (! o->has_secret_exit_up) {
+          node->set_has_secret_exit_down(false);
+        }
       }
       if (node->has_secret_exit_up) {
         auto o = getn(x, y - 1);
-        if (! o->has_secret_exit_down) { node->set_has_secret_exit_up(false); }
+        if (! o->has_secret_exit_down) {
+          node->set_has_secret_exit_up(false);
+        }
       }
       if (node->has_secret_exit_right) {
         auto o = getn(x + 1, y);
-        if (! o->has_secret_exit_left) { node->set_has_secret_exit_right(false); }
+        if (! o->has_secret_exit_left) {
+          node->set_has_secret_exit_right(false);
+        }
       }
       if (node->has_secret_exit_left) {
         auto o = getn(x - 1, y);
-        if (! o->has_secret_exit_right) { node->set_has_secret_exit_left(false); }
+        if (! o->has_secret_exit_right) {
+          node->set_has_secret_exit_left(false);
+        }
       }
     }
   }
@@ -1478,9 +1694,15 @@ bool Nodes::create_path_to_exit(int pass)
   for (auto y = 0; y < grid_height; y++) {
     for (auto x = 0; x < grid_width; x++) {
       auto n = getn(x, y);
-      if (! n) { continue; }
-      if (n->is_ascend_dungeon) { start = point(x, y); }
-      if (n->is_descend_dungeon) { end = point(x, y); }
+      if (! n) {
+        continue;
+      }
+      if (n->is_ascend_dungeon) {
+        start = point(x, y);
+      }
+      if (n->is_descend_dungeon) {
+        end = point(x, y);
+      }
     }
   }
 
@@ -1509,10 +1731,18 @@ bool Nodes::create_path_to_exit(int pass)
         auto X = (x * 2) + 1;
         auto Y = (y * 2) + 1;
         if (n && node_is_a_room(n)) {
-          if (n->has_door_up || n->has_secret_exit_up) { set(d.val, X, Y - 1, DMAP_IS_PASSABLE); }
-          if (n->has_door_down || n->has_secret_exit_down) { set(d.val, X, Y + 1, DMAP_IS_PASSABLE); }
-          if (n->has_door_right || n->has_secret_exit_right) { set(d.val, X + 1, Y, DMAP_IS_PASSABLE); }
-          if (n->has_door_left || n->has_secret_exit_left) { set(d.val, X - 1, Y, DMAP_IS_PASSABLE); }
+          if (n->has_door_up || n->has_secret_exit_up) {
+            set(d.val, X, Y - 1, DMAP_IS_PASSABLE);
+          }
+          if (n->has_door_down || n->has_secret_exit_down) {
+            set(d.val, X, Y + 1, DMAP_IS_PASSABLE);
+          }
+          if (n->has_door_right || n->has_secret_exit_right) {
+            set(d.val, X + 1, Y, DMAP_IS_PASSABLE);
+          }
+          if (n->has_door_left || n->has_secret_exit_left) {
+            set(d.val, X - 1, Y, DMAP_IS_PASSABLE);
+          }
           set(d.val, X, Y, DMAP_IS_PASSABLE);
         } else {
           set(d.val, X, Y, DMAP_IS_WALL);
@@ -1526,10 +1756,18 @@ bool Nodes::create_path_to_exit(int pass)
         auto X = (x * 2) + 1;
         auto Y = (y * 2) + 1;
         if (n && node_is_a_room(n)) {
-          if (n->has_door_up) { set(d.val, X, Y - 1, DMAP_IS_PASSABLE); }
-          if (n->has_door_down) { set(d.val, X, Y + 1, DMAP_IS_PASSABLE); }
-          if (n->has_door_right) { set(d.val, X + 1, Y, DMAP_IS_PASSABLE); }
-          if (n->has_door_left) { set(d.val, X - 1, Y, DMAP_IS_PASSABLE); }
+          if (n->has_door_up) {
+            set(d.val, X, Y - 1, DMAP_IS_PASSABLE);
+          }
+          if (n->has_door_down) {
+            set(d.val, X, Y + 1, DMAP_IS_PASSABLE);
+          }
+          if (n->has_door_right) {
+            set(d.val, X + 1, Y, DMAP_IS_PASSABLE);
+          }
+          if (n->has_door_left) {
+            set(d.val, X - 1, Y, DMAP_IS_PASSABLE);
+          }
           set(d.val, X, Y, DMAP_IS_PASSABLE);
         } else {
           set(d.val, X, Y, DMAP_IS_WALL);
@@ -1552,7 +1790,9 @@ bool Nodes::create_path_to_exit(int pass)
   if (pass == 2) {
     auto s = point(start.x * 2 + 1, start.y * 2 + 1);
     auto p = dmap_solve_manhattan(&d, s);
-    if (p.size() < (unsigned) (grid_width * 2)) { return false; }
+    if (p.size() < (unsigned) (grid_width * 2)) {
+      return false;
+    }
   }
 
   for (auto y = 0; y < grid_height; y++) {
@@ -1620,13 +1860,19 @@ void Nodes::create_path_lock_to_key(int depth)
   for (auto y = 0; y < grid_height; y++) {
     for (auto x = 0; x < grid_width; x++) {
       auto n = getn(x, y);
-      if (! n) { continue; }
+      if (! n) {
+        continue;
+      }
       if (n->depth == depth) {
-        if (n->is_key) { end = point(x, y); }
+        if (n->is_key) {
+          end = point(x, y);
+        }
         continue;
       }
       if (n->depth == depth + 1) {
-        if (n->is_lock) { start = point(x, y); }
+        if (n->is_lock) {
+          start = point(x, y);
+        }
       }
     }
   }
@@ -1655,10 +1901,18 @@ void Nodes::create_path_lock_to_key(int depth)
       auto X = (x * 2) + 1;
       auto Y = (y * 2) + 1;
       if (n && (n->pass == 1) && (n->depth == depth) && node_is_a_room(n)) {
-        if (n->has_door_up) { set(d.val, X, Y - 1, DMAP_IS_PASSABLE); }
-        if (n->has_door_down) { set(d.val, X, Y + 1, DMAP_IS_PASSABLE); }
-        if (n->has_door_right) { set(d.val, X + 1, Y, DMAP_IS_PASSABLE); }
-        if (n->has_door_left) { set(d.val, X - 1, Y, DMAP_IS_PASSABLE); }
+        if (n->has_door_up) {
+          set(d.val, X, Y - 1, DMAP_IS_PASSABLE);
+        }
+        if (n->has_door_down) {
+          set(d.val, X, Y + 1, DMAP_IS_PASSABLE);
+        }
+        if (n->has_door_right) {
+          set(d.val, X + 1, Y, DMAP_IS_PASSABLE);
+        }
+        if (n->has_door_left) {
+          set(d.val, X - 1, Y, DMAP_IS_PASSABLE);
+        }
         set(d.val, X, Y, DMAP_IS_PASSABLE);
       } else {
         set(d.val, X, Y, DMAP_IS_WALL);
@@ -1680,7 +1934,9 @@ void Nodes::create_path_lock_to_key(int depth)
       auto X = x * 2 + 1;
       auto Y = y * 2 + 1;
 
-      if (get(d.val, X, Y) == DMAP_IS_WALL) { continue; }
+      if (get(d.val, X, Y) == DMAP_IS_WALL) {
+        continue;
+      }
       if (n && node_is_a_room(n)) {
         if (get(d.val, X + 1, Y) < d.val[ X ][ Y ]) {
           auto o = getn(x + 1, y);
@@ -1726,9 +1982,15 @@ void Nodes::make_paths_off_critical_path_reachable(void)
   for (auto y = 0; y < grid_height; y++) {
     for (auto x = 0; x < grid_width; x++) {
       auto n = getn(x, y);
-      if (! n) { continue; }
-      if (n->is_ascend_dungeon) { start = point(x, y); }
-      if (n->is_descend_dungeon) { end = point(x, y); }
+      if (! n) {
+        continue;
+      }
+      if (n->is_ascend_dungeon) {
+        start = point(x, y);
+      }
+      if (n->is_descend_dungeon) {
+        end = point(x, y);
+      }
     }
   }
 
@@ -1757,10 +2019,18 @@ void Nodes::make_paths_off_critical_path_reachable(void)
       auto Y = (y * 2) + 1;
 
       if (node_is_a_room(n)) {
-        if (n->has_door_up) { set(d.val, X, Y - 1, DMAP_IS_PASSABLE); }
-        if (n->has_door_down) { set(d.val, X, Y + 1, DMAP_IS_PASSABLE); }
-        if (n->has_door_right) { set(d.val, X + 1, Y, DMAP_IS_PASSABLE); }
-        if (n->has_door_left) { set(d.val, X - 1, Y, DMAP_IS_PASSABLE); }
+        if (n->has_door_up) {
+          set(d.val, X, Y - 1, DMAP_IS_PASSABLE);
+        }
+        if (n->has_door_down) {
+          set(d.val, X, Y + 1, DMAP_IS_PASSABLE);
+        }
+        if (n->has_door_right) {
+          set(d.val, X + 1, Y, DMAP_IS_PASSABLE);
+        }
+        if (n->has_door_left) {
+          set(d.val, X - 1, Y, DMAP_IS_PASSABLE);
+        }
         set(d.val, X, Y, DMAP_IS_PASSABLE);
       }
     }
@@ -1787,10 +2057,18 @@ void Nodes::make_paths_off_critical_path_reachable(void)
     auto X = (c.x - 1) / 2;
     auto Y = (c.y - 1) / 2;
 
-    if (X >= grid_width) { ERR("Bug"); }
-    if (Y >= grid_height) { ERR("Bug"); }
-    if (X < 0) { ERR("Bug"); }
-    if (Y < 0) { ERR("Bug"); }
+    if (X >= grid_width) {
+      ERR("Bug");
+    }
+    if (Y >= grid_height) {
+      ERR("Bug");
+    }
+    if (X < 0) {
+      ERR("Bug");
+    }
+    if (Y < 0) {
+      ERR("Bug");
+    }
 
     set(on_critical_path, X, Y, true);
     auto n = getn(X, Y);
@@ -1802,9 +2080,13 @@ void Nodes::make_paths_off_critical_path_reachable(void)
     for (auto x = 0; x < grid_width; x++) {
       auto n = getn(x, y);
 
-      if (on_critical_path[ x ][ y ]) { continue; }
+      if (on_critical_path[ x ][ y ]) {
+        continue;
+      }
 
-      if (! node_is_a_room(n)) { continue; }
+      if (! node_is_a_room(n)) {
+        continue;
+      }
 
       if (n->has_door_up) {
         auto o = getn(x, y - 1);
@@ -1853,8 +2135,12 @@ void Nodes::set_max_depth(void)
       }
       o->is_secret = false;
 
-      if (o->depth > max_depth_) { max_depth_ = o->depth; }
-      if (y > max_vdepth_) { max_vdepth_ = y; }
+      if (o->depth > max_depth_) {
+        max_depth_ = o->depth;
+      }
+      if (y > max_vdepth_) {
+        max_vdepth_ = y;
+      }
     }
   }
 
@@ -1867,7 +2153,9 @@ void Nodes::remove_redundant_directions(void)
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
       auto node = getn(x, y);
-      if (! node_is_a_room(node)) { continue; }
+      if (! node_is_a_room(node)) {
+        continue;
+      }
 
       auto e = 0;
       auto d = 0;

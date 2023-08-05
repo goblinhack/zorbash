@@ -46,7 +46,9 @@ bool Thing::state_repack_inventory(void)
     while (bag_compress()) {}
     AI_LOG("Repacked inventory.");
   }
-  if (is_player()) { game->tick_begin("repacked bag"); }
+  if (is_player()) {
+    game->tick_begin("repacked bag");
+  }
 
   TRACE_AND_INDENT();
 

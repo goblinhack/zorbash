@@ -10,19 +10,25 @@ bool Level::create_wandering_monster(void)
   switch (biome) {
     case BIOME_DUNGEON :
     case BIOME_FLOODED :
-      if (game->tick_current % 100) { return false; }
+      if (game->tick_current % 100) {
+        return false;
+      }
       break;
     case BIOME_SWAMP :
     case BIOME_LAVA :
     case BIOME_ICE :
     case BIOME_CHASMS :
     case BIOME_SEWER :
-      if (game->tick_current % 50) { return false; }
+      if (game->tick_current % 50) {
+        return false;
+      }
       break;
     default : return false;
   }
 
-  if (monst_count >= LEVEL_MONST_COUNT_ABS_MAX) { return false; }
+  if (monst_count >= LEVEL_MONST_COUNT_ABS_MAX) {
+    return false;
+  }
 
   TRACE_AND_INDENT();
   dbg("Place wandering monster");
@@ -35,7 +41,9 @@ bool Level::create_wandering_monster(void)
     auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK);
     auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK);
 
-    if (get(can_see_currently.can_see, x, y)) { return false; }
+    if (get(can_see_currently.can_see, x, y)) {
+      return false;
+    }
 
     if (is_ascend_dungeon(x, y) || is_monst(x, y) || is_rock(x, y) || is_door(x, y) || is_secret_door(x, y)
         || is_mob(x, y) || is_chasm(x, y) || is_wall(x, y) || is_ascend_sewer(x, y) || is_descend_sewer(x, y)
@@ -44,7 +52,9 @@ bool Level::create_wandering_monster(void)
     }
 
     if (biome == BIOME_DUNGEON) {
-      if (is_corridor(x, y) || is_bridge(x, y) || is_hazard(x, y)) { continue; }
+      if (is_corridor(x, y) || is_bridge(x, y) || is_hazard(x, y)) {
+        continue;
+      }
     }
 
     point p(x, y);

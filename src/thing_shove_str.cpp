@@ -13,7 +13,9 @@ int Thing::shove_strength_total(void)
 
   stat = shove_strength();
   prev = stat;
-  if (stat) { dbg3("Shove strength: %d", stat); }
+  if (stat) {
+    dbg3("Shove strength: %d", stat);
+  }
   TRACE_AND_INDENT();
 
   stat += shove_bonus();
@@ -43,12 +45,16 @@ int Thing::shove_strength_total(void)
         //
         // Don't count boots for example twice
         //
-        if (is_equipped(iter)) { continue; }
+        if (is_equipped(iter)) {
+          continue;
+        }
         //
         // Things that are equipped must be equipped to get the benefit.
         // Other items give the benefit by just being carried.
         //
-        if (iter->is_auto_equipped()) { continue; }
+        if (iter->is_auto_equipped()) {
+          continue;
+        }
         stat += iter->shove_strength_total();
         if (stat != prev) {
           prev = stat;
@@ -126,14 +132,18 @@ int Thing::shove_strength(void)
 int Thing::shove_bonus(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->shove_bonus); }
+  if (maybe_infop()) {
+    return (infop()->shove_bonus);
+  }
   return 0;
 }
 
 int Thing::shove_bonus_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->shove_bonus = v);
   return n;
@@ -142,7 +152,9 @@ int Thing::shove_bonus_set(int v)
 int Thing::shove_bonus_decr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->shove_bonus -= v);
   return n;
@@ -151,7 +163,9 @@ int Thing::shove_bonus_decr(int v)
 int Thing::shove_bonus_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->shove_bonus += v);
   return n;
@@ -160,7 +174,9 @@ int Thing::shove_bonus_incr(int v)
 int Thing::shove_bonus_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->shove_bonus--);
   return n;
@@ -169,7 +185,9 @@ int Thing::shove_bonus_decr(void)
 int Thing::shove_bonus_incr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) { game->set_request_to_remake_rightbar(); }
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
   new_infop();
   auto n = (infop()->shove_bonus++);
   return n;

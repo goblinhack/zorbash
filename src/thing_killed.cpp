@@ -25,9 +25,13 @@ void Thing::killed(Thingp defeater, const char *reason)
   //
   // Check we're not in a death loop
   //
-  if (is_dying) { return; }
+  if (is_dying) {
+    return;
+  }
 
-  if (! is_dead) { is_dying = true; }
+  if (! is_dead) {
+    is_dying = true;
+  }
 
   TRACE_NO_INDENT();
   if (is_loggable()) {
@@ -58,14 +62,18 @@ void Thing::killed(Thingp defeater, const char *reason)
   //
   if (is_dead) {
     TRACE_NO_INDENT();
-    if (is_loggable()) { dbg("Already dead"); }
+    if (is_loggable()) {
+      dbg("Already dead");
+    }
 
     //
     // Unless it is already a corpse. In such a case, if a corpse is
     // eaten we want to remove it.
     //
     if (! is_corpse_currently && ! corpse_cleanup) {
-      if (is_loggable()) { dbg("Already a corpse, can't die again"); }
+      if (is_loggable()) {
+        dbg("Already a corpse, can't die again");
+      }
       return;
     }
 
@@ -91,7 +99,9 @@ void Thing::killed(Thingp defeater, const char *reason)
   //
   TRACE_NO_INDENT();
   auto i_o = immediate_owner();
-  if (i_o) { i_o->bag_remove(this); }
+  if (i_o) {
+    i_o->bag_remove(this);
+  }
 
   //
   // If a minion mob dies, kill all minions
@@ -113,7 +123,9 @@ void Thing::killed(Thingp defeater, const char *reason)
   //
   if (! is_resurrection_blocked) {
     TRACE_NO_INDENT();
-    if (is_able_to_be_resurrected()) { tick_resurrect_when_set(game->tick_current + resurrect_when()); }
+    if (is_able_to_be_resurrected()) {
+      tick_resurrect_when_set(game->tick_current + resurrect_when());
+    }
   }
 
   //
@@ -324,7 +336,9 @@ void Thing::killed(Thingp defeater, const char *reason)
     // Tell the leader I am dead
     //
     auto l = leader();
-    if (l) { on_death_of_a_follower(l); }
+    if (l) {
+      on_death_of_a_follower(l);
+    }
 
     if (is_player()) {
       //
@@ -334,7 +348,9 @@ void Thing::killed(Thingp defeater, const char *reason)
       //
       // Poor player
       //
-      if (! score()) { score_incr(1); }
+      if (! score()) {
+        score_incr(1);
+      }
 
       if (game->config.hiscores.is_new_hiscore(this)) {
         if (game->robot_mode) {
@@ -352,7 +368,9 @@ void Thing::killed(Thingp defeater, const char *reason)
       // Something else (non player) is dead.
       //
       TRACE_NO_INDENT();
-      if (is_loggable()) { dbg("%s is killed, %s", The_no_dying.c_str(), reason); }
+      if (is_loggable()) {
+        dbg("%s is killed, %s", The_no_dying.c_str(), reason);
+      }
 
       if (defeater && (defeater != this)) {
         //
@@ -489,7 +507,9 @@ void Thing::killed(Thingp defeater, const char *reason)
           TRACE_NO_INDENT();
           dbg("Can place final bones");
           auto tpp = tp_random_bones();
-          if (tpp) { (void) level->thing_new(tpp, curr_at); }
+          if (tpp) {
+            (void) level->thing_new(tpp, curr_at);
+          }
         }
       }
     } else if (is_corpse_on_death()) {
@@ -539,9 +559,13 @@ void Thing::killed(Thingp defeater, const char *reason)
               auto        mod   = t[ 0 ];
               auto        fn    = t[ 1 ];
               std::size_t found = fn.find("()");
-              if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+              if (found != std::string::npos) {
+                fn = fn.replace(found, 2, "");
+              }
 
-              if (mod == "me") { mod = name(); }
+              if (mod == "me") {
+                mod = name();
+              }
 
               dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
@@ -577,9 +601,13 @@ void Thing::killed(Thingp defeater, const char *reason)
         auto        mod   = t[ 0 ];
         auto        fn    = t[ 1 ];
         std::size_t found = fn.find("()");
-        if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+        if (found != std::string::npos) {
+          fn = fn.replace(found, 2, "");
+        }
 
-        if (mod == "me") { mod = name(); }
+        if (mod == "me") {
+          mod = name();
+        }
 
         dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
@@ -604,7 +632,9 @@ void Thing::killed(Thingp defeater, const char *reason)
   TRACE_NO_INDENT();
   level_leave();
 
-  if (is_loggable()) { dbg("Need to garbage collect"); }
+  if (is_loggable()) {
+    dbg("Need to garbage collect");
+  }
   TRACE_AND_INDENT();
 
   gc();

@@ -56,7 +56,9 @@ void wid_inventory_fini(bool remake)
   if (wid_inventory_window) {
     wid_destroy(&wid_inventory_window);
     game->set_request_to_remake_rightbar();
-    if (! remake) { game->change_state(Game::STATE_NORMAL, "inventory close"); }
+    if (! remake) {
+      game->change_state(Game::STATE_NORMAL, "inventory close");
+    }
   }
 }
 
@@ -120,7 +122,9 @@ void wid_inventory_mouse_over_tab_bag1(Widp w, int x, int y, int wheelx, int whe
   if (game->in_transit_item) {
     auto id = wid_get_thing_id_context(game->in_transit_item, 0);
     auto t  = game->thing_find(id);
-    if (t && t->is_bag()) { return; }
+    if (t && t->is_bag()) {
+      return;
+    }
   }
 
   wid_inventory_fini();
@@ -139,7 +143,9 @@ void wid_inventory_mouse_over_tab_bag2(Widp w, int x, int y, int wheelx, int whe
   if (game->in_transit_item) {
     auto id = wid_get_thing_id_context(game->in_transit_item, 0);
     auto t  = game->thing_find(id);
-    if (t && t->is_bag()) { return; }
+    if (t && t->is_bag()) {
+      return;
+    }
   }
 
   wid_inventory_fini();
@@ -153,14 +159,22 @@ uint8_t wid_inventory_key_down(Widp w, const struct SDL_Keysym *key)
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
-  if (! level) { return true; }
+  if (! level) {
+    return true;
+  }
 
   auto player = level->player;
-  if (! player) { return true; }
+  if (! player) {
+    return true;
+  }
 
-  if (player->is_dead) { return true; }
+  if (player->is_dead) {
+    return true;
+  }
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   //
   // So screenshots can work
@@ -174,21 +188,31 @@ uint8_t wid_inventory_item_option_use(Widp w, int x, int y, uint32_t button)
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
-  if (! level) { return true; }
+  if (! level) {
+    return true;
+  }
 
   auto player = level->player;
-  if (! player) { return true; }
+  if (! player) {
+    return true;
+  }
 
-  if (player->is_dead) { return true; }
+  if (player->is_dead) {
+    return true;
+  }
 
   if (wid_inventory_thing_selected) {
     wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected use");
   }
 
-  if (wid_inventory_thing_over) { wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected use"); }
+  if (wid_inventory_thing_over) {
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected use");
+  }
 
   auto what = wid_inventory_thing_selected;
-  if (! what) { what = wid_inventory_thing_over; }
+  if (! what) {
+    what = wid_inventory_thing_over;
+  }
 
   if (what) {
     wid_inventory_fini();
@@ -209,21 +233,31 @@ uint8_t wid_inventory_item_option_unequip(Widp w, int x, int y, uint32_t button)
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
-  if (! level) { return true; }
+  if (! level) {
+    return true;
+  }
 
   auto player = level->player;
-  if (! player) { return true; }
+  if (! player) {
+    return true;
+  }
 
-  if (player->is_dead) { return true; }
+  if (player->is_dead) {
+    return true;
+  }
 
   if (wid_inventory_thing_selected) {
     wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected use");
   }
 
-  if (wid_inventory_thing_over) { wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected use"); }
+  if (wid_inventory_thing_over) {
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected use");
+  }
 
   auto what = wid_inventory_thing_selected;
-  if (! what) { what = wid_inventory_thing_over; }
+  if (! what) {
+    what = wid_inventory_thing_over;
+  }
 
   if (what) {
     wid_inventory_fini();
@@ -253,21 +287,31 @@ uint8_t wid_inventory_item_option_use_radial(Widp w, int x, int y, uint32_t butt
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
-  if (! level) { return true; }
+  if (! level) {
+    return true;
+  }
 
   auto player = level->player;
-  if (! player) { return true; }
+  if (! player) {
+    return true;
+  }
 
-  if (player->is_dead) { return true; }
+  if (player->is_dead) {
+    return true;
+  }
 
   if (wid_inventory_thing_selected) {
     wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected select");
   }
 
-  if (wid_inventory_thing_over) { wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected select"); }
+  if (wid_inventory_thing_over) {
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected select");
+  }
 
   auto what = wid_inventory_thing_selected;
-  if (! what) { what = wid_inventory_thing_over; }
+  if (! what) {
+    what = wid_inventory_thing_over;
+  }
 
   if (what) {
     UseOptions use_options {};
@@ -290,21 +334,31 @@ uint8_t wid_inventory_item_option_eat(Widp w, int x, int y, uint32_t button)
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
-  if (! level) { return true; }
+  if (! level) {
+    return true;
+  }
 
   auto player = level->player;
-  if (! player) { return true; }
+  if (! player) {
+    return true;
+  }
 
-  if (player->is_dead) { return true; }
+  if (player->is_dead) {
+    return true;
+  }
 
   if (wid_inventory_thing_selected) {
     wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected eat");
   }
 
-  if (wid_inventory_thing_over) { wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected eat"); }
+  if (wid_inventory_thing_over) {
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected eat");
+  }
 
   auto what = wid_inventory_thing_selected;
-  if (! what) { what = wid_inventory_thing_over; }
+  if (! what) {
+    what = wid_inventory_thing_over;
+  }
 
   if (what) {
     if (! player->can_eat(what)) {
@@ -326,21 +380,31 @@ uint8_t wid_inventory_item_option_throw(Widp w, int x, int y, uint32_t button)
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
-  if (! level) { return true; }
+  if (! level) {
+    return true;
+  }
 
   auto player = level->player;
-  if (! player) { return true; }
+  if (! player) {
+    return true;
+  }
 
-  if (player->is_dead) { return true; }
+  if (player->is_dead) {
+    return true;
+  }
 
   if (wid_inventory_thing_selected) {
     wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected throw");
   }
 
-  if (wid_inventory_thing_over) { wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected throw"); }
+  if (wid_inventory_thing_over) {
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected throw");
+  }
 
   auto what = wid_inventory_thing_selected;
-  if (! what) { what = wid_inventory_thing_over; }
+  if (! what) {
+    what = wid_inventory_thing_over;
+  }
 
   if (what) {
     if (! what->is_throwable()) {
@@ -361,21 +425,31 @@ uint8_t wid_inventory_item_option_drop(Widp w, int x, int y, uint32_t button)
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
-  if (! level) { return true; }
+  if (! level) {
+    return true;
+  }
 
   auto player = level->player;
-  if (! player) { return true; }
+  if (! player) {
+    return true;
+  }
 
-  if (player->is_dead) { return true; }
+  if (player->is_dead) {
+    return true;
+  }
 
   if (wid_inventory_thing_selected) {
     wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected drop");
   }
 
-  if (wid_inventory_thing_over) { wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected drop"); }
+  if (wid_inventory_thing_over) {
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected drop");
+  }
 
   auto what = wid_inventory_thing_selected;
-  if (! what) { what = wid_inventory_thing_over; }
+  if (! what) {
+    what = wid_inventory_thing_over;
+  }
 
   if (what) {
     wid_inventory_fini();
@@ -400,7 +474,9 @@ uint8_t wid_inventory_item_option_drop(Widp w, int x, int y, uint32_t button)
   }
   wid_inventory_thing_selected = nullptr;
 
-  if (wid_inventory_thing_over) { wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected port drop"); }
+  if (wid_inventory_thing_over) {
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected port drop");
+  }
   wid_inventory_thing_over = nullptr;
 
   return true;
@@ -412,14 +488,22 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
-  if (! level) { return true; }
+  if (! level) {
+    return true;
+  }
 
   auto player = level->player;
-  if (! player) { return true; }
+  if (! player) {
+    return true;
+  }
 
-  if (player->is_dead) { return true; }
+  if (player->is_dead) {
+    return true;
+  }
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   if (key->scancode == SDL_SCANCODE_ESCAPE) {
     if (game->in_transit_item) {
@@ -457,7 +541,9 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     level->inventory_chosen(9);
     wid_rightbar_init();
     auto what = level->inventory_get();
-    if (what) { wid_inventory_select_requested(what); }
+    if (what) {
+      wid_inventory_select_requested(what);
+    }
     return true;
   }
   if (sdlk_eq(*key, game->config.key_action1)) {
@@ -467,7 +553,9 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     level->inventory_chosen(0);
     wid_rightbar_init();
     auto what = level->inventory_get();
-    if (what) { wid_inventory_select_requested(what); }
+    if (what) {
+      wid_inventory_select_requested(what);
+    }
     return true;
   }
   if (sdlk_eq(*key, game->config.key_action2)) {
@@ -477,7 +565,9 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     level->inventory_chosen(1);
     wid_rightbar_init();
     auto what = level->inventory_get();
-    if (what) { wid_inventory_select_requested(what); }
+    if (what) {
+      wid_inventory_select_requested(what);
+    }
     return true;
   }
   if (sdlk_eq(*key, game->config.key_action3)) {
@@ -487,7 +577,9 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     level->inventory_chosen(2);
     wid_rightbar_init();
     auto what = level->inventory_get();
-    if (what) { wid_inventory_select_requested(what); }
+    if (what) {
+      wid_inventory_select_requested(what);
+    }
     return true;
   }
   if (sdlk_eq(*key, game->config.key_action4)) {
@@ -497,7 +589,9 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     level->inventory_chosen(3);
     wid_rightbar_init();
     auto what = level->inventory_get();
-    if (what) { wid_inventory_select_requested(what); }
+    if (what) {
+      wid_inventory_select_requested(what);
+    }
     return true;
   }
   if (sdlk_eq(*key, game->config.key_action5)) {
@@ -507,7 +601,9 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     level->inventory_chosen(4);
     wid_rightbar_init();
     auto what = level->inventory_get();
-    if (what) { wid_inventory_select_requested(what); }
+    if (what) {
+      wid_inventory_select_requested(what);
+    }
     return true;
   }
   if (sdlk_eq(*key, game->config.key_action6)) {
@@ -517,7 +613,9 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     level->inventory_chosen(5);
     wid_rightbar_init();
     auto what = level->inventory_get();
-    if (what) { wid_inventory_select_requested(what); }
+    if (what) {
+      wid_inventory_select_requested(what);
+    }
     return true;
   }
   if (sdlk_eq(*key, game->config.key_action7)) {
@@ -527,7 +625,9 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     level->inventory_chosen(6);
     wid_rightbar_init();
     auto what = level->inventory_get();
-    if (what) { wid_inventory_select_requested(what); }
+    if (what) {
+      wid_inventory_select_requested(what);
+    }
     return true;
   }
   if (sdlk_eq(*key, game->config.key_action8)) {
@@ -537,7 +637,9 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     level->inventory_chosen(7);
     wid_rightbar_init();
     auto what = level->inventory_get();
-    if (what) { wid_inventory_select_requested(what); }
+    if (what) {
+      wid_inventory_select_requested(what);
+    }
     return true;
   }
   if (sdlk_eq(*key, game->config.key_action9)) {
@@ -547,7 +649,9 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     level->inventory_chosen(8);
     wid_rightbar_init();
     auto what = level->inventory_get();
-    if (what) { wid_inventory_select_requested(what); }
+    if (what) {
+      wid_inventory_select_requested(what);
+    }
     return true;
   }
 
@@ -609,8 +713,12 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
 void wid_inventory_over_requested(Thingp over)
 {
   TRACE_NO_INDENT();
-  if (over == wid_inventory_thing_over) { return; }
-  if (over) { over->log("Inventory over this thing"); }
+  if (over == wid_inventory_thing_over) {
+    return;
+  }
+  if (over) {
+    over->log("Inventory over this thing");
+  }
   game->request_inventory_thing_over = over;
   game->set_request_to_update_inventory_with_thing_over();
 }
@@ -618,8 +726,12 @@ void wid_inventory_over_requested(Thingp over)
 void wid_inventory_select_requested(Thingp selected)
 {
   TRACE_NO_INDENT();
-  if (selected == wid_inventory_thing_selected) { return; }
-  if (selected) { selected->log("Inventory over this thing"); }
+  if (selected == wid_inventory_thing_selected) {
+    return;
+  }
+  if (selected) {
+    selected->log("Inventory over this thing");
+  }
   game->request_inventory_thing_selected = selected;
   game->set_request_to_update_inventory_with_thing_selected();
 }
@@ -646,7 +758,9 @@ bool wid_inventory_over(Thingp over)
     wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected over");
   }
 
-  if (wid_inventory_thing_over) { wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected over"); }
+  if (wid_inventory_thing_over) {
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected over");
+  }
 
   DBG2("Inventory: create inventory for this thing");
   return wid_inventory_create(wid_inventory_thing_selected, over);
@@ -656,7 +770,9 @@ bool wid_inventory_select(Thingp selected)
 {
   DBG2("Inventory: select");
   TRACE_NO_INDENT();
-  if (selected == wid_inventory_thing_selected) { return true; }
+  if (selected == wid_inventory_thing_selected) {
+    return true;
+  }
 
   if (selected) {
     if (! selected->immediate_owner()) {
@@ -671,7 +787,9 @@ bool wid_inventory_select(Thingp selected)
     wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected create");
   }
 
-  if (wid_inventory_thing_over) { wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected create"); }
+  if (wid_inventory_thing_over) {
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected create");
+  }
 
   return wid_inventory_create(selected, wid_inventory_thing_over);
 }
@@ -679,11 +797,15 @@ bool wid_inventory_select(Thingp selected)
 void wid_slot_item_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
-  if (game->in_transit_item) { return; }
+  if (game->in_transit_item) {
+    return;
+  }
 
   int  slot = wid_get_int_context(w);
   auto t    = game->level->inventory_get(slot);
-  if (unlikely(! t)) { return; }
+  if (unlikely(! t)) {
+    return;
+  }
 
   //
   // Create the wid info over the inventory
@@ -700,7 +822,9 @@ void wid_slot_item_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int 
 void wid_slot_item_mouse_over_end(Widp w)
 {
   TRACE_NO_INDENT();
-  if (game->in_transit_item) { return; }
+  if (game->in_transit_item) {
+    return;
+  }
 
   wid_inventory_over_requested(nullptr);
   BOTCON(" ");
@@ -711,11 +835,15 @@ uint8_t wid_slot_item_mouse_up(Widp w, int x, int y, uint32_t button)
   DBG2("Inventory: Mouse down, item select");
   TRACE_AND_INDENT();
 
-  if (game->in_transit_item) { return false; }
+  if (game->in_transit_item) {
+    return false;
+  }
 
   int  slot = wid_get_int_context(w);
   auto t    = game->level->inventory_get(slot);
-  if (unlikely(! t)) { return true; }
+  if (unlikely(! t)) {
+    return true;
+  }
 
   if (wid_inventory_thing_selected == t) {
     wid_inventory_select_requested(nullptr);
@@ -732,10 +860,14 @@ void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, const c
   wid_set_pos(w, tl, br);
 
   auto level = game->get_current_level();
-  if (! level) { return; }
+  if (! level) {
+    return;
+  }
 
   auto player = level->player;
-  if (! player) { return; }
+  if (! player) {
+    return;
+  }
 
   auto t = player->equip_get(equip);
   if (t) {
@@ -757,7 +889,9 @@ void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, const c
 
     wid_set_style(w, UI_WID_STYLE_DARK);
     if (wid_inventory_thing_selected) {
-      if (wid_inventory_thing_selected == t) { wid_set_style(w, UI_WID_STYLE_RED); }
+      if (wid_inventory_thing_selected == t) {
+        wid_set_style(w, UI_WID_STYLE_RED);
+      }
     }
 
     wid_set_on_mouse_over_begin(w, wid_bag_item_mouse_over_begin);
@@ -782,7 +916,9 @@ void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, const c
       wid_set_text_top(w, true);
     }
   } else {
-    if (! g_opt_ascii) { wid_set_tilename(TILE_LAYER_BG_0, w, tile_name); }
+    if (! g_opt_ascii) {
+      wid_set_tilename(TILE_LAYER_BG_0, w, tile_name);
+    }
     wid_set_style(w, UI_WID_STYLE_DARK);
   }
 
@@ -824,6 +960,8 @@ void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, const c
 
 bool wid_inventory_create(Thingp selected, Thingp over)
 {
-  if (g_opt_ascii) { return wid_inventory_create_ascii(selected, over); }
+  if (g_opt_ascii) {
+    return wid_inventory_create_ascii(selected, over);
+  }
   return wid_inventory_create_pixelart(selected, over);
 }

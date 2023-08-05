@@ -68,7 +68,9 @@ static uint8_t wid_choose_avatar_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   switch (key->mod) {
     case KMOD_LCTRL :
@@ -94,7 +96,9 @@ static uint8_t wid_choose_avatar_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(*key, game->config.key_console)) { return false; }
+  if (sdlk_eq(*key, game->config.key_console)) {
+    return false;
+  }
 
   //
   // So screenshots can work
@@ -135,7 +139,9 @@ static void wid_choose_avatar_tick(Widp w)
   TRACE_NO_INDENT();
 
   static auto last = time_ms_cached();
-  if (! time_have_x_tenths_passed_since(2, last)) { return; }
+  if (! time_have_x_tenths_passed_since(2, last)) {
+    return;
+  }
   last = time_ms();
 
   wid_choose_avatar_destroy();
@@ -157,7 +163,9 @@ void Game::wid_choose_avatar_select(void)
   // The tile needs to be optional, as we do not always have a tile, e.g. hats
   //
   static int avatar_anim_fram = 1;
-  if (++avatar_anim_fram > 6) { avatar_anim_fram = 1; }
+  if (++avatar_anim_fram > 6) {
+    avatar_anim_fram = 1;
+  }
 
   auto avatar_width  = TERM_WIDTH / 4 * 2;
   auto avatar_height = TERM_HEIGHT / 4 * 3;

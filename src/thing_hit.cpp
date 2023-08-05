@@ -18,20 +18,28 @@ void Thing::on_hit_and_still_alive(Thingp hitter,      // an arrow / monst /...
                                    Thingp real_hitter, // who fired the arrow?
                                    bool crit, int damage)
 {
-  if (is_dead) { return; }
+  if (is_dead) {
+    return;
+  }
 
   TRACE_NO_INDENT();
   auto on_hit_and_still_alive = tp()->on_hit_and_still_alive_do();
-  if (std::empty(on_hit_and_still_alive)) { return; }
+  if (std::empty(on_hit_and_still_alive)) {
+    return;
+  }
 
   auto t = split_tokens(on_hit_and_still_alive, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = name(); }
+    if (mod == "me") {
+      mod = name();
+    }
 
     dbg("Call %s.%s(%s, %s, %s, crit=%d, damage=%d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
         hitter->to_short_string().c_str(), real_hitter->to_short_string().c_str(), crit, damage);
@@ -53,16 +61,22 @@ void Thing::on_hit_and_now_dead(Thingp hitter,      // an arrow / monst /...
 {
   TRACE_NO_INDENT();
   auto on_hit_and_now_dead = tp()->on_hit_and_now_dead_do();
-  if (std::empty(on_hit_and_now_dead)) { return; }
+  if (std::empty(on_hit_and_now_dead)) {
+    return;
+  }
 
   auto t = split_tokens(on_hit_and_now_dead, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = name(); }
+    if (mod == "me") {
+      mod = name();
+    }
 
     dbg("Call %s.%s(%s, %s, %s, crit=%d, damage=%d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
         hitter->to_short_string().c_str(), real_hitter->to_short_string().c_str(), crit, damage);
@@ -83,20 +97,28 @@ void Thing::on_hit_and_now_dead(Thingp hitter,      // an arrow / monst /...
 //
 void Thing::on_hit_dodge_do(Thingp hitter)
 {
-  if (is_dead) { return; }
+  if (is_dead) {
+    return;
+  }
 
   TRACE_NO_INDENT();
   auto on_hit_dodge_do = tp()->on_hit_dodge_do();
-  if (std::empty(on_hit_dodge_do)) { return; }
+  if (std::empty(on_hit_dodge_do)) {
+    return;
+  }
 
   auto t = split_tokens(on_hit_dodge_do, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = name(); }
+    if (mod == "me") {
+      mod = name();
+    }
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), hitter->to_short_string().c_str());
 
@@ -110,20 +132,28 @@ void Thing::on_hit_dodge_do(Thingp hitter)
 
 void Thing::on_you_nat_attack_attempt(void)
 {
-  if (is_dead) { return; }
+  if (is_dead) {
+    return;
+  }
 
   TRACE_NO_INDENT();
   auto on_you_nat_attack_attempt = tp()->on_you_nat_attack_attempt_do();
-  if (std::empty(on_you_nat_attack_attempt)) { return; }
+  if (std::empty(on_you_nat_attack_attempt)) {
+    return;
+  }
 
   auto t = split_tokens(on_you_nat_attack_attempt, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = name(); }
+    if (mod == "me") {
+      mod = name();
+    }
 
     dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
@@ -136,20 +166,28 @@ void Thing::on_you_nat_attack_attempt(void)
 
 void Thing::on_you_nat_attack_success(void)
 {
-  if (is_dead) { return; }
+  if (is_dead) {
+    return;
+  }
 
   TRACE_NO_INDENT();
   auto on_you_nat_attack_success = tp()->on_you_nat_attack_success_do();
-  if (std::empty(on_you_nat_attack_success)) { return; }
+  if (std::empty(on_you_nat_attack_success)) {
+    return;
+  }
 
   auto t = split_tokens(on_you_nat_attack_success, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = name(); }
+    if (mod == "me") {
+      mod = name();
+    }
 
     dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
@@ -257,11 +295,15 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     damage = victim->total_dmg_for_on_receiving_dmg_cold(hitter, real_hitter, damage);
 
     if (is_on_fire()) {
-      if (is_player()) { msg("%%fg=green$The cold attack puts out the flames!%%fg=reset$"); }
+      if (is_player()) {
+        msg("%%fg=green$The cold attack puts out the flames!%%fg=reset$");
+      }
       on_fire_unset();
 
       auto smoke = level->thing_new("smoke", curr_at);
-      if (smoke) { smoke->lifespan_set(pcg_random_range(1, 10)); }
+      if (smoke) {
+        smoke->lifespan_set(pcg_random_range(1, 10));
+      }
     }
   } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
     TRACE_NO_INDENT();
@@ -294,7 +336,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   // Auto rage; the player does this via a skill
   //
   if (real_hitter->is_able_to_rage()) {
-    if (real_hitter->is_raging()) { damage += 2; }
+    if (real_hitter->is_raging()) {
+      damage += 2;
+    }
   }
 
   std::string dmg_type;
@@ -345,7 +389,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   // Drown damage
   /////////////////////////////////////////////////////////////////////////
   TRACE_NO_INDENT();
-  if (! is_air_breather()) { attack_options->attack[ THING_ATTACK_DROWN ] = false; }
+  if (! is_air_breather()) {
+    attack_options->attack[ THING_ATTACK_DROWN ] = false;
+  }
 
   if (attack_options->attack[ THING_ATTACK_DROWN ]) {
     TRACE_NO_INDENT();
@@ -957,8 +1003,12 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     if ((curr_at.x < MAP_BORDER_ROCK) || (curr_at.y < MAP_BORDER_ROCK) || (curr_at.x >= MAP_WIDTH - MAP_BORDER_ROCK)
         || (curr_at.y >= MAP_HEIGHT - MAP_BORDER_ROCK)) {
       IF_DEBUG { hitter->log("Cannot hit: %s is border rock", to_short_string().c_str()); }
-      if (real_hitter->is_player()) { msg("%s is indestructable!", text_The().c_str()); }
-      if (hitter->is_weapon()) { weapon_check_for_dmg(hitter, this); }
+      if (real_hitter->is_player()) {
+        msg("%s is indestructable!", text_The().c_str());
+      }
+      if (hitter->is_weapon()) {
+        weapon_check_for_dmg(hitter, this);
+      }
       wobble(20);
       return false;
     }
@@ -987,7 +1037,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   TRACE_NO_INDENT();
   if (real_hitter != this) {
     if (real_hitter->tp()->gfx_pixelart_bounce_on_move()) {
-      if (real_hitter->bounce(0.5, 0.1, 100, 3)) { real_hitter->move_set_dir_from_delta(delta); }
+      if (real_hitter->bounce(0.5, 0.1, 100, 3)) {
+        real_hitter->move_set_dir_from_delta(delta);
+      }
     }
   }
 
@@ -1016,7 +1068,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           auto s = hitter->stamina_drain_on_attacking();
           if (s) {
             s /= 2;
-            if (! s) { s = 1; }
+            if (! s) {
+              s = 1;
+            }
           }
           real_hitter->stamina_decr(s);
         }
@@ -1069,9 +1123,13 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   TRACE_NO_INDENT();
   if (real_hitter->is_thief()) {
     if (real_hitter->is_adjacent(this)) {
-      if (real_hitter->steal_item_from(this)) { return true; }
+      if (real_hitter->steal_item_from(this)) {
+        return true;
+      }
 
-      if (real_hitter->steal_treasure_from(this)) { return true; }
+      if (real_hitter->steal_treasure_from(this)) {
+        return true;
+      }
     }
   }
 
@@ -1096,7 +1154,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         return false;
       }
     } else {
-      if (real_hitter->is_poisonous_danger_level()) { poisoned_amount_incr(damage / 2); }
+      if (real_hitter->is_poisonous_danger_level()) {
+        poisoned_amount_incr(damage / 2);
+      }
       poisoned();
     }
   }
@@ -1661,7 +1721,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
                              hitter->text_the().c_str());
           }
 
-          if (game->robot_mode) { BOTCON("Robot attacks %s.", text_the().c_str()); }
+          if (game->robot_mode) {
+            BOTCON("Robot attacks %s.", text_the().c_str());
+          }
         } else {
           if (attack_options->attack[ THING_ATTACK_POISON ]) {
             real_hitter->msg("You are poisoned %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
@@ -1707,7 +1769,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
             real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
           }
 
-          if (game->robot_mode) { BOTCON("Robot attacks %s.", text_the().c_str()); }
+          if (game->robot_mode) {
+            BOTCON("Robot attacks %s.", text_the().c_str());
+          }
         }
       }
     } else if (is_item()) {
@@ -1762,7 +1826,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         real_hitter->msg("You hit %s.", text_the().c_str());
       }
 
-      if (game->robot_mode) { BOTCON("Robot attacks %s.", text_the().c_str()); }
+      if (game->robot_mode) {
+        BOTCON("Robot attacks %s.", text_the().c_str());
+      }
     } else if (is_rock() || is_wall_dungeon()) {
       //
       // Provide some more interesting messages for when hitting rocks...
@@ -1787,7 +1853,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         hitter->msg("You hit %s.", text_the().c_str());
       }
 
-      if (game->robot_mode) { BOTCON("Robot attacks %s.", text_the().c_str()); }
+      if (game->robot_mode) {
+        BOTCON("Robot attacks %s.", text_the().c_str());
+      }
     } else {
       //
       // Player hitting something.
@@ -1802,7 +1870,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
       }
 
-      if (game->robot_mode) { BOTCON("Robot attacks %s.", text_the().c_str()); }
+      if (game->robot_mode) {
+        BOTCON("Robot attacks %s.", text_the().c_str());
+      }
     }
   } else if (hitter->is_lightning()) {
     TRACE_NO_INDENT();
@@ -1971,7 +2041,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     on_fire_set("hit by fire");
   } else if (is_on_fire()) {
     if (is_player()) {
-      if (real_hitter->is_monst()) { msg("%%fg=red$You burn whilst being attacked!%%fg=reset$"); }
+      if (real_hitter->is_monst()) {
+        msg("%%fg=red$You burn whilst being attacked!%%fg=reset$");
+      }
     }
     if (hitter->on_fire_set("hit by fire due to attacking")) {
       msg("%s sets itself on fire!", hitter->text_The().c_str());
@@ -2126,7 +2198,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         if (claws != "") {
           auto nat_att_effect = level->thing_new(claws, curr_at, real_hitter);
           if (nat_att_effect) {
-            if (nat_att_effect->bounce(0.1, 0.1, 100, 3)) { nat_att_effect->move_set_dir_from_delta(delta); }
+            if (nat_att_effect->bounce(0.1, 0.1, 100, 3)) {
+              nat_att_effect->move_set_dir_from_delta(delta);
+            }
           }
         }
       }
@@ -2159,24 +2233,32 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
     auto h = magic_decr(damage);
-    if (h <= 0) { h = magic_set(0); }
+    if (h <= 0) {
+      h = magic_set(0);
+    }
   } else {
     auto h = health_decr(damage);
-    if (h <= 0) { h = health_set(0); }
+    if (h <= 0) {
+      h = health_set(0);
+    }
   }
 
   /////////////////////////////////////////////////////////////////////////
   // Negation damage
   /////////////////////////////////////////////////////////////////////////
   TRACE_NO_INDENT();
-  if (attack_options->attack[ THING_ATTACK_NEGATION ]) { negation_dmg(damage, is_killed); }
+  if (attack_options->attack[ THING_ATTACK_NEGATION ]) {
+    negation_dmg(damage, is_killed);
+  }
 
   TRACE_NO_INDENT();
   if (is_killed) {
     //
     // Record who dun it.
     //
-    if (is_loggable()) { dbg("Is killed by (%s) %u damage", real_hitter->to_short_string().c_str(), damage); }
+    if (is_loggable()) {
+      dbg("Is killed by (%s) %u damage", real_hitter->to_short_string().c_str(), damage);
+    }
     std::string defeater = real_hitter->text_a_or_an();
 
     //
@@ -2196,7 +2278,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       }
     }
 
-    if ((real_hitter->curr_at == curr_at) && real_hitter->is_engulfer()) { reason = "in the bowels of " + defeater; }
+    if ((real_hitter->curr_at == curr_at) && real_hitter->is_engulfer()) {
+      reason = "in the bowels of " + defeater;
+    }
 
     if (real_hitter == this) {
       if (attack_options->attack[ THING_ATTACK_POISON ]) {
@@ -2264,7 +2348,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     // engulfer maybe not.
     //
     if (is_engulfer()) {
-      if (real_hitter->can_eat(this)) { real_hitter->eat(this); }
+      if (real_hitter->can_eat(this)) {
+        real_hitter->eat(this);
+      }
     }
   } else {
     dbg("Is hit by (%s) %u damage, health now %d/%d", real_hitter->to_short_string().c_str(), damage, health(),
@@ -2282,7 +2368,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   real_hitter->tick_last_i_attacked_set(game->tick_current);
 
-  if (is_player()) { score_incr(damage); }
+  if (is_player()) {
+    score_incr(damage);
+  }
 
   //
   // This might trigger more damage. Interesting effects here, like being attacked by defrosted creature will
@@ -2294,7 +2382,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     // Only if the temperature is extreme enough.
     //
     auto hitter_temp = hitter->temperature_get();
-    if (abs(hitter_temp) >= TEMPERATURE_THRESHOLD) { temperature_incr(hitter_temp / 10); }
+    if (abs(hitter_temp) >= TEMPERATURE_THRESHOLD) {
+      temperature_incr(hitter_temp / 10);
+    }
   }
 
   //
@@ -2327,7 +2417,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     //
     if (is_monst() || (is_player() && game->robot_mode)) {
       if (is_sleeping) {
-        if (wake("was attacked")) { change_state(MONST_STATE_IDLE, "was attacked and woken"); }
+        if (wake("was attacked")) {
+          change_state(MONST_STATE_IDLE, "was attacked and woken");
+        }
       } else {
         change_state(MONST_STATE_IDLE, "was attacked");
       }
@@ -2417,11 +2509,15 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
       //
       if (real_hitter) {
         if (real_hitter->is_fire()) {
-          if (real_hitter == this) { real_hitter = nullptr; }
+          if (real_hitter == this) {
+            real_hitter = nullptr;
+          }
         }
       }
 
-      if (! real_hitter) { real_hitter = hitter; }
+      if (! real_hitter) {
+        real_hitter = hitter;
+      }
     }
   }
 
@@ -2570,7 +2666,9 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
     //
     // Rocky/ninja training mode
     //
-    if (training) { hitter->physical_training_tick(); }
+    if (training) {
+      hitter->physical_training_tick();
+    }
 
     if (hitter->is_fire()) {
       IF_DEBUG { hitter->log("Fire attack"); }

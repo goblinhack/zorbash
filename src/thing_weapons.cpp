@@ -20,16 +20,24 @@ std::list< Thingp > Thing::weapon_list(void)
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
-    if (unlikely(! t)) { continue; }
+    if (unlikely(! t)) {
+      continue;
+    }
     if (t->is_bag()) {
       FOR_ALL_CARRIED_BY(t, item)
       {
         auto t = level->thing_find(item.id);
-        if (unlikely(! t)) { continue; }
-        if (t->is_weapon()) { out.push_back(t); }
+        if (unlikely(! t)) {
+          continue;
+        }
+        if (t->is_weapon()) {
+          out.push_back(t);
+        }
       }
     }
-    if (t->is_weapon()) { out.push_back(t); }
+    if (t->is_weapon()) {
+      out.push_back(t);
+    }
   }
 
   //
@@ -52,16 +60,24 @@ std::vector< Thingp > Thing::weapon_vector(void)
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
-    if (unlikely(! t)) { continue; }
+    if (unlikely(! t)) {
+      continue;
+    }
     if (t->is_bag()) {
       FOR_ALL_CARRIED_BY(t, item)
       {
         auto t = level->thing_find(item.id);
-        if (unlikely(! t)) { continue; }
-        if (t->is_weapon()) { out.push_back(t); }
+        if (unlikely(! t)) {
+          continue;
+        }
+        if (t->is_weapon()) {
+          out.push_back(t);
+        }
       }
     }
-    if (t->is_weapon()) { out.push_back(t); }
+    if (t->is_weapon()) {
+      out.push_back(t);
+    }
   }
   return out;
 }
@@ -71,10 +87,14 @@ int Thing::carried_weapon_count(void)
   TRACE_NO_INDENT();
   int count = 0;
 
-  if (! maybe_itemsp()) { return count; }
+  if (! maybe_itemsp()) {
+    return count;
+  }
 
   for (const auto t : weapon_list()) {
-    if (t->is_weapon()) { count++; }
+    if (t->is_weapon()) {
+      count++;
+    }
   }
   return count;
 }
@@ -85,10 +105,14 @@ int Thing::carried_weapon_least_value(Thingp *out)
   int least_value = -1;
 
   *out = nullptr;
-  if (! maybe_itemsp()) { return least_value; }
+  if (! maybe_itemsp()) {
+    return least_value;
+  }
 
   for (const auto t : weapon_list()) {
-    if (! t->is_weapon()) { continue; }
+    if (! t->is_weapon()) {
+      continue;
+    }
 
     auto v = value(t);
     dbg("Carried weapon: %s: value %d", t->to_short_string().c_str(), v);
@@ -103,7 +127,9 @@ int Thing::carried_weapon_least_value(Thingp *out)
       }
     }
   }
-  if (*out) { dbg("Carried weapon(worst): %s: value %d", (*out)->to_short_string().c_str(), least_value); }
+  if (*out) {
+    dbg("Carried weapon(worst): %s: value %d", (*out)->to_short_string().c_str(), least_value);
+  }
   return least_value;
 }
 
@@ -113,10 +139,14 @@ int Thing::carried_weapon_highest_value(Thingp *out)
   int highest_value = -1;
 
   *out = nullptr;
-  if (! maybe_itemsp()) { return highest_value; }
+  if (! maybe_itemsp()) {
+    return highest_value;
+  }
 
   for (const auto t : weapon_list()) {
-    if (! t->is_weapon()) { continue; }
+    if (! t->is_weapon()) {
+      continue;
+    }
 
     auto v = value(t);
     dbg("Carried weapon: %s: value %d", t->to_short_string().c_str(), v);
@@ -131,6 +161,8 @@ int Thing::carried_weapon_highest_value(Thingp *out)
       }
     }
   }
-  if (*out) { dbg("Carried weapon(best): %s: value %d", (*out)->to_short_string().c_str(), highest_value); }
+  if (*out) {
+    dbg("Carried weapon(best): %s: value %d", (*out)->to_short_string().c_str(), highest_value);
+  }
   return highest_value;
 }

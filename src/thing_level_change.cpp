@@ -16,7 +16,9 @@ void Thing::level_change(Levelp l)
 {
   TRACE_NO_INDENT();
 
-  if (level == l) { return; }
+  if (level == l) {
+    return;
+  }
 
   auto old_level = level;
 
@@ -59,27 +61,37 @@ void Thing::level_change(Levelp l)
 
   {
     auto it = immediate_owner();
-    if (it) { it->level_change(l); }
+    if (it) {
+      it->level_change(l);
+    }
   }
 
   dbg("Move all equip");
   FOR_ALL_EQUIP(iter)
   {
     auto it = equip_get(iter);
-    if (it) { it->level_change(l); }
+    if (it) {
+      it->level_change(l);
+    }
 
     it = equip_carry_anim(iter);
-    if (it) { it->level_change(l); }
+    if (it) {
+      it->level_change(l);
+    }
 
     it = equip_use_anim(iter);
-    if (it) { it->level_change(l); }
+    if (it) {
+      it->level_change(l);
+    }
   }
 
   FOR_ALL_BODYPART(iter)
   {
     if (bodypart_id_get(iter).ok()) {
       auto it = level->thing_find(bodypart_id_get(iter));
-      if (it) { it->level_change(l); }
+      if (it) {
+        it->level_change(l);
+      }
     }
   }
 
@@ -87,7 +99,9 @@ void Thing::level_change(Levelp l)
     auto id = on_fire_anim_id();
     if (id.ok()) {
       auto it = level->thing_find(id);
-      if (it) { it->level_change(l); }
+      if (it) {
+        it->level_change(l);
+      }
     }
   }
 
@@ -95,31 +109,41 @@ void Thing::level_change(Levelp l)
     FOR_ALL_CARRYING(id)
     {
       auto iter = level->thing_find(id);
-      if (iter) { iter->level_change(l); }
+      if (iter) {
+        iter->level_change(l);
+      }
     }
 
     FOR_ALL_BUFFS(id)
     {
       auto iter = level->thing_find(id);
-      if (iter) { iter->level_change(l); }
+      if (iter) {
+        iter->level_change(l);
+      }
     }
 
     FOR_ALL_DEBUFFS(id)
     {
       auto iter = level->thing_find(id);
-      if (iter) { iter->level_change(l); }
+      if (iter) {
+        iter->level_change(l);
+      }
     }
 
     FOR_ALL_SKILLS(id)
     {
       auto iter = level->thing_find(id);
-      if (iter && iter->is_activated) { iter->level_change(l); }
+      if (iter && iter->is_activated) {
+        iter->level_change(l);
+      }
     }
 
     FOR_ALL_SPELLS(id)
     {
       auto iter = level->thing_find(id);
-      if (iter && iter->is_activated) { iter->level_change(l); }
+      if (iter && iter->is_activated) {
+        iter->level_change(l);
+      }
     }
   }
 
@@ -162,16 +186,22 @@ void Thing::level_change(Levelp l)
 //
 bool Thing::move_away_from_entrance(void)
 {
-  if (! level) { return false; }
+  if (! level) {
+    return false;
+  }
 
-  if (! level->player) { return false; }
+  if (! level->player) {
+    return false;
+  }
 
   dbg("Try to move away from entrance");
   TRACE_AND_INDENT();
 
   auto d = distance_to_player_on_different_level();
   d *= 2;
-  if (d < 2) { d = 2; }
+  if (d < 2) {
+    d = 2;
+  }
 
   auto tries = 1000;
   while (tries-- > 0) {
@@ -179,17 +209,29 @@ bool Thing::move_away_from_entrance(void)
     int   y = curr_at.y + pcg_random_range(-d, d);
     point p(x, y);
 
-    if (x < MAP_BORDER_ROCK) { continue; }
+    if (x < MAP_BORDER_ROCK) {
+      continue;
+    }
 
-    if (y < MAP_BORDER_ROCK) { continue; }
+    if (y < MAP_BORDER_ROCK) {
+      continue;
+    }
 
-    if (x >= MAP_WIDTH - MAP_BORDER_ROCK) { continue; }
+    if (x >= MAP_WIDTH - MAP_BORDER_ROCK) {
+      continue;
+    }
 
-    if (y >= MAP_HEIGHT - MAP_BORDER_ROCK) { continue; }
+    if (y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
+      continue;
+    }
 
-    if (level->is_oob(p)) { continue; }
+    if (level->is_oob(p)) {
+      continue;
+    }
 
-    if (is_hated_by_me(p)) { continue; }
+    if (is_hated_by_me(p)) {
+      continue;
+    }
 
     dbg("Move away from entrance, to %d,%d", x, y);
     TRACE_AND_INDENT();

@@ -15,16 +15,22 @@ void Thing::on_enter(Thingp victim)
 {
   TRACE_NO_INDENT();
   auto on_enter = tp()->on_enter_do();
-  if (std::empty(on_enter)) { return; }
+  if (std::empty(on_enter)) {
+    return;
+  }
 
   auto t = split_tokens(on_enter, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
-    if (found != std::string::npos) { fn = fn.replace(found, 2, ""); }
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
 
-    if (mod == "me") { mod = name(); }
+    if (mod == "me") {
+      mod = name();
+    }
 
     dbg("Call %s.%s(%s %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), victim->to_short_string().c_str());
 

@@ -11,7 +11,9 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
   TRACE_AND_INDENT();
   dbg("INF: Create swamp");
 
-  if (player) { TOPCON("A new swamp level is coming into being..."); }
+  if (player) {
+    TOPCON("A new swamp level is coming into being...");
+  }
 
   biome = BIOME_SWAMP;
 
@@ -45,7 +47,9 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
     {
       for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
-          if (dungeon->is_ascend_dungeon(x, y)) { goto have_dungeon_start; }
+          if (dungeon->is_ascend_dungeon(x, y)) {
+            goto have_dungeon_start;
+          }
         }
       }
       ERR("Did not find swamp entrance");
@@ -62,7 +66,9 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
       uint32_t start = time_ms();
       dbg2("INF: Place the grid");
       place_the_grid();
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
 
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
@@ -77,29 +83,53 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
       uint32_t start = time_ms();
       dbg2("INF: Place rocks");
       create_biome_swamp_place_rocks(dungeon, 1, 6, 6, tries);
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       create_biome_swamp_place_rocks(dungeon, 1, 6, 3, tries);
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       create_biome_swamp_place_rocks(dungeon, 1, 3, 6, tries);
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       create_biome_swamp_place_rocks(dungeon, 1, 3, 3, tries);
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       create_biome_swamp_place_rocks(dungeon, 2, 3, 3, tries);
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       create_biome_swamp_place_rocks(dungeon, 1, 2, 2, tries);
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       create_biome_swamp_place_rocks(dungeon, 2, 2, 2, tries);
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       create_biome_swamp_place_rocks(dungeon, 3, 2, 2, tries);
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       create_biome_swamp_place_rocks(dungeon, 1, 2, 1, tries);
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       create_biome_swamp_place_rocks(dungeon, 2, 2, 1, tries);
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       create_biome_swamp_place_rocks(dungeon, 1, 1, 2, tries);
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       create_biome_swamp_place_rocks(dungeon, 2, 1, 2, tries);
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
 
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
@@ -114,7 +144,9 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
       uint32_t start = time_ms();
       dbg2("INF: Place dirt");
       create_biome_swamp_place_dirt(dungeon);
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
@@ -126,7 +158,9 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
       uint32_t start = time_ms();
       dbg2("INF: Place deep water");
       create_biome_swamp_place_deep_water(dungeon, "deep_water");
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
@@ -138,7 +172,9 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
       uint32_t start = time_ms();
       dbg2("INF: Place shallow water");
       create_biome_swamp_place_place_shallow_water(dungeon, "water");
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
@@ -153,7 +189,9 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
       uint32_t start = time_ms();
       dbg2("INF: Place items");
       place_objects_with_normal_placement_rules(dungeon);
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
@@ -168,7 +206,9 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
       uint32_t start = time_ms();
       dbg2("INF: Place random treasure");
       place_random_treasure(dungeon);
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
@@ -198,7 +238,9 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
       uint32_t start = time_ms();
       dbg2("INF: Place dry grass");
       create_biome_swamp_place_grass_dry(dungeon);
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
@@ -210,7 +252,9 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
       uint32_t start = time_ms();
       dbg2("INF: Place wet grass");
       create_biome_swamp_place_grass_wet(dungeon);
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
@@ -225,7 +269,9 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
       uint32_t start = time_ms();
       dbg2("INF: Place withered fungus");
       create_biome_swamp_place_fungus_withered(dungeon);
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
@@ -237,7 +283,9 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
       uint32_t start = time_ms();
       dbg2("INF: Place healing fungus");
       create_biome_swamp_place_fungus_healing(dungeon);
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
@@ -249,7 +297,9 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
       uint32_t start = time_ms();
       dbg2("INF: Place edible fungus");
       create_biome_swamp_place_fungus_edible(dungeon);
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
@@ -261,7 +311,9 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
       uint32_t start = time_ms();
       dbg2("INF: Place poison fungus");
       create_biome_swamp_place_fungus_poison(dungeon);
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
@@ -276,7 +328,9 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
       uint32_t start = time_ms();
       dbg2("INF: Place foliage");
       create_biome_swamp_place_foliage(dungeon);
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
@@ -291,7 +345,9 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
       uint32_t start = time_ms();
       dbg("INF: Place swimming monsters");
       place_swimming_monsters();
-      if (g_errored) { return false; }
+      if (g_errored) {
+        return false;
+      }
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
@@ -334,7 +390,9 @@ void Level::create_biome_swamp_place_rocks(Dungeonp d, int variant, int block_wi
       for (auto dy = 0; dy < block_height; dy++) {
         auto Y = y + dy;
 
-        if (d->is_oob(X, Y)) { continue; }
+        if (d->is_oob(X, Y)) {
+          continue;
+        }
 
         if (! d->is_rock(X, Y) && ! d->is_wall(X, Y)) {
           can_place_here = false;
@@ -347,10 +405,14 @@ void Level::create_biome_swamp_place_rocks(Dungeonp d, int variant, int block_wi
         }
       }
 
-      if (! can_place_here) { break; }
+      if (! can_place_here) {
+        break;
+      }
     }
 
-    if (! can_place_here) { continue; }
+    if (! can_place_here) {
+      continue;
+    }
 
     auto cnt = 1;
     for (auto dy = 0; dy < block_height; dy++) {
@@ -371,7 +433,9 @@ void Level::create_biome_swamp_place_rocks(Dungeonp d, int variant, int block_wi
         }
 
         auto t = thing_new(what, point(X, Y));
-        if (! t) { continue; }
+        if (! t) {
+          continue;
+        }
 
         auto tile = tile_find(tilename);
         if (unlikely(! tile)) {
@@ -390,9 +454,13 @@ void Level::create_biome_swamp_place_place_shallow_water(Dungeonp d, const std::
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-      if (is_shallow_water(x, y)) { continue; }
+      if (is_shallow_water(x, y)) {
+        continue;
+      }
 
-      if (! d->is_shallow_water(x, y)) { continue; }
+      if (! d->is_shallow_water(x, y)) {
+        continue;
+      }
 
       (void) thing_new(what, point(x, y));
     }
@@ -404,9 +472,13 @@ void Level::create_biome_swamp_place_deep_water(Dungeonp d, const std::string &w
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-      if (is_deep_water(x, y)) { continue; }
+      if (is_deep_water(x, y)) {
+        continue;
+      }
 
-      if (! d->is_deep_water(x, y)) { continue; }
+      if (! d->is_deep_water(x, y)) {
+        continue;
+      }
 
       (void) thing_new(what, point(x, y));
     }
@@ -418,11 +490,15 @@ void Level::create_biome_swamp_place_remaining_rocks(Dungeonp d)
   TRACE_AND_INDENT();
   for (auto x = 0; x < MAP_WIDTH; x++) {
     for (auto y = 0; y < MAP_HEIGHT; y++) {
-      if (is_rock(x, y)) { continue; }
+      if (is_rock(x, y)) {
+        continue;
+      }
 
       if (! is_dirt(x, y)) {
         auto tp = tp_random_dirt();
-        if (tp) { (void) thing_new(tp->name(), point(x, y)); }
+        if (tp) {
+          (void) thing_new(tp->name(), point(x, y));
+        }
       }
 
       if (d->is_wall(x, y) || d->is_rock(x, y)) {
@@ -433,7 +509,9 @@ void Level::create_biome_swamp_place_remaining_rocks(Dungeonp d)
         int  entrance_distance = MAP_BORDER_ROCK - 1;
         for (auto dx = -entrance_distance; dx <= entrance_distance; dx++) {
           for (auto dy = -entrance_distance; dy <= entrance_distance; dy++) {
-            if (d->is_oob(x + dx, y + dy)) { continue; }
+            if (d->is_oob(x + dx, y + dy)) {
+              continue;
+            }
 
             if (d->is_door(x + dx, y + dy)) {
               needed = true;
@@ -445,7 +523,9 @@ void Level::create_biome_swamp_place_remaining_rocks(Dungeonp d)
               break;
             }
           }
-          if (needed) { break; }
+          if (needed) {
+            break;
+          }
         }
 
         if (needed) {
@@ -476,9 +556,13 @@ void Level::create_biome_swamp_place_dirt(Dungeonp d)
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
       if (d->is_floor(x, y) || d->is_dirt(x, y) || d->is_corridor(x, y)) {
         auto tp = tp_random_dirt();
-        if (tp) { (void) thing_new(tp->name(), point(x, y)); }
+        if (tp) {
+          (void) thing_new(tp->name(), point(x, y));
+        }
 
-        if (d100() < 20) { (void) thing_new("water", point(x, y)); }
+        if (d100() < 20) {
+          (void) thing_new("water", point(x, y));
+        }
       }
     }
   }
@@ -489,14 +573,24 @@ void Level::create_biome_swamp_place_foliage(Dungeonp d)
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-      if (! d->is_foliage(x, y)) { continue; }
-      if (d->is_ascend_dungeon(x, y)) { continue; }
-      if (d->is_descend_dungeon(x, y)) { continue; }
+      if (! d->is_foliage(x, y)) {
+        continue;
+      }
+      if (d->is_ascend_dungeon(x, y)) {
+        continue;
+      }
+      if (d->is_descend_dungeon(x, y)) {
+        continue;
+      }
       if (d->is_floor(x, y)) {
-        if (d100() < 50) { continue; }
+        if (d100() < 50) {
+          continue;
+        }
       }
       if (d->is_corridor(x, y)) {
-        if (d100() < 50) { continue; }
+        if (d100() < 50) {
+          continue;
+        }
       }
 
       //
@@ -515,14 +609,24 @@ void Level::create_biome_swamp_place_foliage(Dungeonp d)
             break;
           }
         }
-        if (skip) { break; }
+        if (skip) {
+          break;
+        }
       }
 
-      if (skip) { continue; }
-      if (is_rock(x, y)) { continue; }
-      if (is_wall(x, y)) { continue; }
+      if (skip) {
+        continue;
+      }
+      if (is_rock(x, y)) {
+        continue;
+      }
+      if (is_wall(x, y)) {
+        continue;
+      }
       auto tp = tp_random_foliage();
-      if (unlikely(! tp)) { return; }
+      if (unlikely(! tp)) {
+        return;
+      }
 
       (void) thing_new(tp->name(), point(x, y));
     }
@@ -534,10 +638,14 @@ void Level::create_biome_swamp_place_grass_dry(Dungeonp d)
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-      if (is_rock(x, y)) { continue; }
+      if (is_rock(x, y)) {
+        continue;
+      }
       if (d->is_grass_dry(x, y)) {
         auto tp = tp_random_grass_dry();
-        if (unlikely(! tp)) { return; }
+        if (unlikely(! tp)) {
+          return;
+        }
 
         (void) thing_new(tp->name(), point(x, y));
       }
@@ -550,10 +658,14 @@ void Level::create_biome_swamp_place_grass_wet(Dungeonp d)
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-      if (is_rock(x, y)) { continue; }
+      if (is_rock(x, y)) {
+        continue;
+      }
       if (d->is_grass_wet(x, y)) {
         auto tp = tp_random_grass_wet();
-        if (unlikely(! tp)) { return; }
+        if (unlikely(! tp)) {
+          return;
+        }
 
         (void) thing_new(tp->name(), point(x, y));
       }
@@ -570,16 +682,24 @@ void Level::create_biome_swamp_place_fungus_withered(Dungeonp d)
   auto tp = tp_random_fungus_withered();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-      if (is_rock(x, y)) { continue; }
+      if (is_rock(x, y)) {
+        continue;
+      }
       if (d->is_fungus_withered(x, y)) {
-        if (unlikely(! tp)) { return; }
+        if (unlikely(! tp)) {
+          return;
+        }
 
-        if (is_fungus(x, y)) { continue; }
+        if (is_fungus(x, y)) {
+          continue;
+        }
 
         //
         // Change mushroom type
         //
-        if (d100() < 10) { tp = tp_random_fungus_withered(); }
+        if (d100() < 10) {
+          tp = tp_random_fungus_withered();
+        }
         (void) thing_new(tp->name(), point(x, y));
       }
     }
@@ -595,16 +715,24 @@ void Level::create_biome_swamp_place_fungus_healing(Dungeonp d)
   auto tp = tp_random_fungus_healing();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-      if (is_rock(x, y)) { continue; }
+      if (is_rock(x, y)) {
+        continue;
+      }
       if (d->is_fungus_healing(x, y)) {
-        if (unlikely(! tp)) { return; }
+        if (unlikely(! tp)) {
+          return;
+        }
 
-        if (is_fungus(x, y)) { continue; }
+        if (is_fungus(x, y)) {
+          continue;
+        }
 
         //
         // Change mushroom type
         //
-        if (d100() < 10) { tp = tp_random_fungus_healing(); }
+        if (d100() < 10) {
+          tp = tp_random_fungus_healing();
+        }
         (void) thing_new(tp->name(), point(x, y));
       }
     }
@@ -620,16 +748,24 @@ void Level::create_biome_swamp_place_fungus_poison(Dungeonp d)
   auto tp = tp_random_fungus_poison();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-      if (is_rock(x, y)) { continue; }
+      if (is_rock(x, y)) {
+        continue;
+      }
       if (d->is_fungus_poison(x, y)) {
-        if (unlikely(! tp)) { return; }
+        if (unlikely(! tp)) {
+          return;
+        }
 
-        if (is_fungus(x, y)) { continue; }
+        if (is_fungus(x, y)) {
+          continue;
+        }
 
         //
         // Change mushroom type
         //
-        if (d100() < 10) { tp = tp_random_fungus_poison(); }
+        if (d100() < 10) {
+          tp = tp_random_fungus_poison();
+        }
         (void) thing_new(tp->name(), point(x, y));
       }
     }
@@ -645,16 +781,24 @@ void Level::create_biome_swamp_place_fungus_edible(Dungeonp d)
   auto tp = tp_random_fungus_edible();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-      if (is_rock(x, y)) { continue; }
+      if (is_rock(x, y)) {
+        continue;
+      }
       if (d->is_fungus_edible(x, y)) {
-        if (unlikely(! tp)) { return; }
+        if (unlikely(! tp)) {
+          return;
+        }
 
-        if (is_fungus(x, y)) { continue; }
+        if (is_fungus(x, y)) {
+          continue;
+        }
 
         //
         // Change mushroom type
         //
-        if (d100() < 10) { tp = tp_random_fungus_edible(); }
+        if (d100() < 10) {
+          tp = tp_random_fungus_edible();
+        }
         (void) thing_new(tp->name(), point(x, y));
       }
     }

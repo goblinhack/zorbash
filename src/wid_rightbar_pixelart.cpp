@@ -23,10 +23,14 @@ bool wid_rightbar_pixelart_create(void)
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
-  if (! level) { return false; }
+  if (! level) {
+    return false;
+  }
 
   auto player = level->player;
-  if (! player) { return false; }
+  if (! player) {
+    return false;
+  }
 
   int width = UI_RIGHTBAR_WIDTH;
   int y_at  = 6;
@@ -576,7 +580,9 @@ bool wid_rightbar_pixelart_create(void)
         }
 
         auto t = level->thing_find(thing_id);
-        if (unlikely(! t)) { continue; }
+        if (unlikely(! t)) {
+          continue;
+        }
 
         auto tpp   = t->tp();
         auto tiles = &tpp->tiles;
@@ -612,7 +618,9 @@ bool wid_rightbar_pixelart_create(void)
           auto thing_id = get(itemsp->inventory_shortcuts, i);
           if (thing_id == equip_id) {
             static Tilep tile;
-            if (unlikely(! tile)) { tile = tile_find_mand("item_equiped"); }
+            if (unlikely(! tile)) {
+              tile = tile_find_mand("item_equiped");
+            }
             if (i == game->inventory_highlight_slot) {
               wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
             } else {
@@ -698,7 +706,9 @@ bool wid_rightbar_pixelart_create(void)
         for (auto id : itemsp->skills) {
           auto o = level->thing_find(id);
           if (o) {
-            if (o == t) { activated = o->is_activated; }
+            if (o == t) {
+              activated = o->is_activated;
+            }
           }
         }
 
@@ -726,7 +736,9 @@ bool wid_rightbar_pixelart_create(void)
           wid_set_color(w, WID_COLOR_TEXT_FG, GRAY60);
         }
 
-        if (activated) { wid_set_color(w, WID_COLOR_TEXT_FG, WHITE); }
+        if (activated) {
+          wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+        }
 
         wid_set_on_mouse_over_begin(w, wid_skillbox_mouse_over_begin);
         wid_set_on_mouse_over_end(w, wid_skillbox_mouse_over_end);
@@ -779,7 +791,9 @@ bool wid_rightbar_pixelart_create(void)
         for (auto id : itemsp->spells) {
           auto o = level->thing_find(id);
           if (o) {
-            if (o == t) { activated = o->is_activated; }
+            if (o == t) {
+              activated = o->is_activated;
+            }
           }
         }
 
@@ -807,7 +821,9 @@ bool wid_rightbar_pixelart_create(void)
           wid_set_color(w, WID_COLOR_TEXT_FG, GRAY60);
         }
 
-        if (activated) { wid_set_color(w, WID_COLOR_TEXT_FG, WHITE); }
+        if (activated) {
+          wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+        }
 
         wid_set_on_mouse_over_begin(w, wid_spellbox_mouse_over_begin);
         wid_set_on_mouse_over_end(w, wid_spellbox_mouse_over_end);
@@ -860,7 +876,9 @@ bool wid_rightbar_pixelart_create(void)
         for (auto id : itemsp->buffs) {
           auto o = level->thing_find(id);
           if (o) {
-            if (o == t) { activated = o->is_activated; }
+            if (o == t) {
+              activated = o->is_activated;
+            }
           }
         }
 
@@ -935,7 +953,9 @@ bool wid_rightbar_pixelart_create(void)
         for (auto id : itemsp->debuffs) {
           auto o = level->thing_find(id);
           if (o) {
-            if (o == t) { activated = o->is_activated; }
+            if (o == t) {
+              activated = o->is_activated;
+            }
           }
         }
 

@@ -8,13 +8,21 @@
 void Thing::solid_rock_tick(void)
 {
   TRACE_NO_INDENT();
-  if (! level->is_rock(curr_at.x, curr_at.y) && ! level->is_wall(curr_at.x, curr_at.y)) { return; }
+  if (! level->is_rock(curr_at.x, curr_at.y) && ! level->is_wall(curr_at.x, curr_at.y)) {
+    return;
+  }
 
-  if (! is_monst() && ! is_player()) { return; }
+  if (! is_monst() && ! is_player()) {
+    return;
+  }
 
-  if (is_ethereal()) { return; }
+  if (is_ethereal()) {
+    return;
+  }
 
-  if (is_able_to_walk_through_walls()) { return; }
+  if (is_able_to_walk_through_walls()) {
+    return;
+  }
 
   log("Solid rock tick");
   TRACE_AND_INDENT();
@@ -25,6 +33,8 @@ void Thing::solid_rock_tick(void)
     }
     dead("by suffocation inside solid rock");
   } else {
-    if (is_player()) { msg("You are stuck in solid rock!"); }
+    if (is_player()) {
+      msg("You are stuck in solid rock!");
+    }
   }
 }

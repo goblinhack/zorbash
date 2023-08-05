@@ -9,7 +9,9 @@ void Thing::burnt_set(void)
 {
   TRACE_NO_INDENT();
 
-  if (is_burnt) { return; }
+  if (is_burnt) {
+    return;
+  }
 
   level_pop();
   is_burnt = true;
@@ -20,5 +22,7 @@ void Thing::burnt_set(void)
   //
   // Burnt things are more tasty.
   //
-  if (maybe_infop()) { infop()->nutrition *= 2; }
+  if (maybe_infop()) {
+    infop()->nutrition *= 2;
+  }
 }

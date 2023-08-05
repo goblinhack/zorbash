@@ -16,7 +16,9 @@ std::vector< Lightp > &Thing::light_get(void)
   //
   // Faster to avoid the infop API as this is called a lot
   //
-  if (_infop) { return (_infop->light); }
+  if (_infop) {
+    return (_infop->light);
+  }
   static std::vector< Lightp > no_light;
   return no_light;
 }
@@ -112,12 +114,16 @@ void Thing::init_lights(void)
     // Not too many lights
     //
     if (is_lava()) {
-      if (d100() < 50) { return; }
+      if (d100() < 50) {
+        return;
+      }
     }
 
     if (unlikely(initial_light_dist_get())) {
       std::string l = light_color();
-      if (l.empty()) { l = "white"; }
+      if (l.empty()) {
+        l = "white";
+      }
       color c = string2color(l);
       new_light(point(0, 0), initial_light_dist_get() * TILE_WIDTH, c, FBO_PLAYER_VISIBLE_LIGHTING);
       has_light = true;
@@ -129,11 +135,15 @@ int Thing::light_distance_update(void)
 {
   TRACE_NO_INDENT();
 
-  if (! maybe_infop()) { return initial_light_dist_get(); }
+  if (! maybe_infop()) {
+    return initial_light_dist_get();
+  }
 
   uint8_t light_dist = infop()->light_dist;
 
-  if (! light_dist) { light_dist = initial_light_dist_get(); }
+  if (! light_dist) {
+    light_dist = initial_light_dist_get();
+  }
 
   if (is_player()) {
     light_dist                         = 0;
@@ -144,12 +154,18 @@ int Thing::light_distance_update(void)
   infop()->light_dist = light_dist;
 
   float light_dist_new = light_dist_get();
-  if (! light_dist_new) { light_dist_new = 1; }
+  if (! light_dist_new) {
+    light_dist_new = 1;
+  }
 
   for (auto l : light_get()) {
-    if (l->ray_cast_only) { continue; }
+    if (l->ray_cast_only) {
+      continue;
+    }
 
-    if (l->fbo == FBO_SMALL_POINT_LIGHTS) { continue; }
+    if (l->fbo == FBO_SMALL_POINT_LIGHTS) {
+      continue;
+    }
 
     //
     // The player has a distance they can see. This allows us to see things that are
@@ -208,21 +224,27 @@ int Thing::light_distance_update(void)
         //
         // In chasm levels we can see further and off-screen. Limit to what is onscreen.
         //
-        if (t->tile_is_offscreen()) { continue; }
+        if (t->tile_is_offscreen()) {
+          continue;
+        }
 
         t->is_visible_to_player = true;
 
         FOR_ALL_EQUIP(iter)
         {
           auto it = t->equip_carry_anim(iter);
-          if (it) { it->is_visible_to_player = true; }
+          if (it) {
+            it->is_visible_to_player = true;
+          }
         }
 
         FOR_ALL_BODYPART(iter)
         {
           if (bodypart_id_get(iter).ok()) {
             auto it = level->thing_find(bodypart_id_get(iter));
-            if (it) { it->is_visible_to_player = true; }
+            if (it) {
+              it->is_visible_to_player = true;
+            }
           }
         }
       }
@@ -239,7 +261,9 @@ int Thing::light_distance_update(void)
 int Thing::prev_light_dist_get(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_infop()) { return (infop()->prev_light_dist); }
+  if (maybe_infop()) {
+    return (infop()->prev_light_dist);
+  }
   return 0;
 }
 
@@ -287,7 +311,9 @@ int Thing::initial_light_dist_get(void)
   auto light_dist = tp()->light_dist();
 
   if (is_player()) {
-    if (level->biome == BIOME_CHASMS) { light_dist *= 2; }
+    if (level->biome == BIOME_CHASMS) {
+      light_dist *= 2;
+    }
   }
 
   return light_dist;
@@ -297,17 +323,23 @@ int Thing::light_dist_get(void)
 {
   TRACE_NO_INDENT();
 
-  if (! maybe_infop()) { return initial_light_dist_get(); }
+  if (! maybe_infop()) {
+    return initial_light_dist_get();
+  }
 
   uint8_t light_dist = infop()->light_dist;
 
-  if (is_player()) { light_dist = 0; }
+  if (is_player()) {
+    light_dist = 0;
+  }
 
   light_dist_including_torch_effect_get(light_dist);
   infop()->light_dist = light_dist;
 
   if (is_player()) {
-    if (level->biome == BIOME_CHASMS) { light_dist *= 2; }
+    if (level->biome == BIOME_CHASMS) {
+      light_dist *= 2;
+    }
   }
 
   return light_dist;

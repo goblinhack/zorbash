@@ -15,10 +15,14 @@ static Tilep player_tile;
 
 bool Thing::tile_is_offscreen(void)
 {
-  if (g_opt_ascii) { return false; }
+  if (g_opt_ascii) {
+    return false;
+  }
 
   auto tile = tile_index_to_tile(tile_curr);
-  if (! tile) { return false; }
+  if (! tile) {
+    return false;
+  }
 
   auto blit_at_x = last_blit_at.x - level->pixel_map_at.x;
   auto blit_at_y = last_blit_at.y - level->pixel_map_at.y;
@@ -26,13 +30,21 @@ bool Thing::tile_is_offscreen(void)
   //
   // In chasm levels we can see further and offscreen. Limit to what is onscreen.
   //
-  if (blit_at_x > game->config.game_pix_width) { return true; }
+  if (blit_at_x > game->config.game_pix_width) {
+    return true;
+  }
 
-  if (blit_at_y > game->config.game_pix_height) { return true; }
+  if (blit_at_y > game->config.game_pix_height) {
+    return true;
+  }
 
-  if (blit_at_x < -tile->pix_width) { return true; }
+  if (blit_at_x < -tile->pix_width) {
+    return true;
+  }
 
-  if (blit_at_y < -tile->pix_height) { return true; }
+  if (blit_at_y < -tile->pix_height) {
+    return true;
+  }
 
   return false;
 }
@@ -42,11 +54,17 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
   TRACE_NO_INDENT();
   IF_DEBUG2 { return; }
 
-  if (g_render_monochrome) { return; }
+  if (g_render_monochrome) {
+    return;
+  }
 
-  if (is_invisible_currently()) { return; }
+  if (is_invisible_currently()) {
+    return;
+  }
 
-  if (! level->player) { return; }
+  if (! level->player) {
+    return;
+  }
 
   if (is_foliage()) {
     fpoint p  = level->player->interpolated_at_get();
@@ -135,7 +153,9 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
         dx            = d.x / D;
         dy            = d.y / D;
 
-        if (distance(o, p) > TILES_VISIBLE_ACROSS / 2) { return; }
+        if (distance(o, p) > TILES_VISIBLE_ACROSS / 2) {
+          return;
+        }
       }
     } else {
       // use default shadow
@@ -180,14 +200,18 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
       shadow_tr.y += ((float) TILE_WIDTH) * dy * 20;
     }
 
-    if (shadow_tl.x > shadow_tr.x) { std::swap(shadow_tl, shadow_tr); }
+    if (shadow_tl.x > shadow_tr.x) {
+      std::swap(shadow_tl, shadow_tr);
+    }
 
     float bounce = bounce_curr();
     float tileh  = game->config.tile_pix_height;
     float bh     = (tileh / TILE_HEIGHT) * (int) (bounce * TILE_HEIGHT);
 
     float fadeup = fadeup_curr();
-    if (fadeup < 0) { return; }
+    if (fadeup < 0) {
+      return;
+    }
 
     bh += fadeup;
 
@@ -202,7 +226,9 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
     shadow_br.x -= bh;
 
     color c = BLACK;
-    if (likely(! tpp->gfx_pixelart_shadow_solid())) { c.a = 150; }
+    if (likely(! tpp->gfx_pixelart_shadow_solid())) {
+      c.a = 150;
+    }
 
     glcolor(c);
     tile_blit(tile, shadow_bl, shadow_br, shadow_tl, shadow_tr);
@@ -215,9 +241,13 @@ void Thing::blit_player_owned_shadow(const Tpp &tpp, const Tilep &tile, const po
   TRACE_NO_INDENT();
   IF_DEBUG2 { return; }
 
-  if (g_render_monochrome) { return; }
+  if (g_render_monochrome) {
+    return;
+  }
 
-  if (is_invisible_currently()) { return; }
+  if (is_invisible_currently()) {
+    return;
+  }
 
   point shadow_tl = blit_tl;
   point shadow_br = blit_br;
@@ -226,7 +256,9 @@ void Thing::blit_player_owned_shadow(const Tpp &tpp, const Tilep &tile, const po
   float dy = game->config.one_pixel_width;
 
   color c = BLACK;
-  if (likely(! tpp->gfx_pixelart_shadow_solid())) { c.a = 150; }
+  if (likely(! tpp->gfx_pixelart_shadow_solid())) {
+    c.a = 150;
+  }
 
   dx *= -4;
   dy *= -4;
@@ -248,11 +280,17 @@ void Thing::blit_shadow(const Tpp &tpp, const Tilep &tile, const point blit_tl, 
   TRACE_NO_INDENT();
   IF_DEBUG2 { return; }
 
-  if (g_render_monochrome) { return; }
+  if (g_render_monochrome) {
+    return;
+  }
 
-  if (is_invisible_currently()) { return; }
+  if (is_invisible_currently()) {
+    return;
+  }
 
-  if (! gfx_pixelart_shadow()) { return; }
+  if (! gfx_pixelart_shadow()) {
+    return;
+  }
 
   if (! level->player) {
     blit_non_player_owned_shadow(tpp, tile, blit_tl, blit_br);
@@ -279,7 +317,9 @@ static int blit_msg_strlen(std::string const &text)
 
     if (c == '%') {
       if (text_iter != text.end()) {
-        if (*text_iter == '%') { text_iter++; }
+        if (*text_iter == '%') {
+          text_iter++;
+        }
       }
 
       if (std::string(text_iter, text_iter + 3) == "fg=") {
@@ -400,9 +440,13 @@ void Thing::blit_text(std::string const &text, color fg, point oblit_tl, point o
       continue;
     }
 
-    if (unlikely(! tile)) { tile = font_pixelart_small->unicode_to_tile(c); }
+    if (unlikely(! tile)) {
+      tile = font_pixelart_small->unicode_to_tile(c);
+    }
 
-    if (tile) { tile_blit(tile, blit_tl, blit_br, fg); }
+    if (tile) {
+      tile_blit(tile, blit_tl, blit_br, fg);
+    }
 
     tile = nullptr;
     blit_tl.x += UI_FONT_SMALL_WIDTH;
@@ -435,7 +479,9 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
     //
     // Hide weapons that have swung
     //
-    if (is_dead) { blit = false; }
+    if (is_dead) {
+      blit = false;
+    }
   } else if (is_cursor() || is_cursor_path() || is_the_grid) {
     blit = true;
   }
@@ -473,7 +519,9 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
 
   if (is_player()) {
     tile = player_tile;
-    if (! player_tile) { tile = {}; }
+    if (! player_tile) {
+      tile = {};
+    }
   }
 
   //
@@ -516,9 +564,13 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
         if (diff > flip_time) {
           ts_flip_start_set(0);
           is_facing_left = ! is_facing_left;
-          if (is_dir_left() || is_dir_tl() || is_dir_bl()) { std::swap(blit_tl.x, blit_br.x); }
+          if (is_dir_left() || is_dir_tl() || is_dir_bl()) {
+            std::swap(blit_tl.x, blit_br.x);
+          }
         } else {
-          if (is_dir_right() || is_dir_tr() || is_dir_br()) { std::swap(blit_tl.x, blit_br.x); }
+          if (is_dir_right() || is_dir_tr() || is_dir_br()) {
+            std::swap(blit_tl.x, blit_br.x);
+          }
           float w   = blit_br.x - blit_tl.x;
           float dw  = w / flip_steps;
           float tlx = blit_tl.x;
@@ -532,12 +584,16 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
         //
         // Fast flip
         //
-        if (is_dir_right() || is_dir_tr() || is_dir_br()) { std::swap(blit_tl.x, blit_br.x); }
+        if (is_dir_right() || is_dir_tr() || is_dir_br()) {
+          std::swap(blit_tl.x, blit_br.x);
+        }
       }
     }
 
     if (unlikely(tpp->gfx_pixelart_animated_can_vflip())) {
-      if (is_dir_down() || is_dir_br() || is_dir_bl()) { std::swap(blit_tl.y, blit_br.y); }
+      if (is_dir_down() || is_dir_br() || is_dir_bl()) {
+        std::swap(blit_tl.y, blit_br.y);
+      }
     }
   }
 
@@ -593,7 +649,9 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
 
     fall = fall_curr();
     update_interpolated_position();
-    if (o_top) { fall = o_top->fall_curr(); }
+    if (o_top) {
+      fall = o_top->fall_curr();
+    }
 
     auto s = ((blit_br.y - blit_tl.y - 1) / 2) * fall;
     blit_tl.x += s;
@@ -608,7 +666,9 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   //
   // Prevent items inside bags/chests being seen.
   //
-  if (unlikely(o_imm && o_imm->is_bag_item_container())) { blit = false; }
+  if (unlikely(o_imm && o_imm->is_bag_item_container())) {
+    blit = false;
+  }
 
   //
   // Lunge to attack.
@@ -702,7 +762,9 @@ uint8_t Thing::blit_begin_submerged(bool scissors)
     blit_flush();
     auto waterline = last_blit_br.y;
     auto owner     = immediate_owner();
-    if (owner) { waterline = owner->last_blit_br.y; }
+    if (owner) {
+      waterline = owner->last_blit_br.y;
+    }
     if (waterline < game->config.game_pix_height) {
       if (scissors) {
         glScissor(0, game->config.game_pix_height - waterline, game->config.game_pix_width,
@@ -710,7 +772,9 @@ uint8_t Thing::blit_begin_submerged(bool scissors)
       }
       GL_ERROR_CHECK();
     }
-    if (scissors) { glEnable(GL_SCISSOR_TEST); }
+    if (scissors) {
+      glEnable(GL_SCISSOR_TEST);
+    }
     glTranslatef(0, submerged, 0);
     blit_init();
   }
@@ -732,14 +796,18 @@ uint8_t Thing::blit_begin_reflection_submerged(void)
 {
   TRACE_NO_INDENT();
 
-  if (! gfx_pixelart_reflection()) { return false; }
+  if (! gfx_pixelart_reflection()) {
+    return false;
+  }
 
   auto submerged = submerged_offset_get();
   if (submerged) {
     blit_flush();
     auto waterline = last_blit_br.y;
     auto owner     = immediate_owner();
-    if (owner) { waterline = owner->last_blit_br.y; }
+    if (owner) {
+      waterline = owner->last_blit_br.y;
+    }
     if (waterline < game->config.game_pix_height) {
       glScissor(0, 0, game->config.game_pix_width, game->config.game_pix_height - waterline);
       GL_ERROR_CHECK();
@@ -755,7 +823,9 @@ void Thing::blit_end_reflection_submerged(uint8_t submerged)
 {
   TRACE_NO_INDENT();
 
-  if (! gfx_pixelart_reflection()) { return; }
+  if (! gfx_pixelart_reflection()) {
+    return;
+  }
 
   blit_flush();
   glTranslatef(0, submerged, 0);
@@ -784,7 +854,9 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   //
   // Displayed as a particles
   //
-  if (is_jumping) { return; }
+  if (is_jumping) {
+    return;
+  }
 
   //
   // If rendering the background, no shadows
@@ -807,7 +879,9 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
     }
   }
 
-  if (unlikely(is_msg())) { blit_text(msg_get(), WHITE, blit_tl, blit_br); }
+  if (unlikely(is_msg())) {
+    blit_text(msg_get(), WHITE, blit_tl, blit_br);
+  }
 
   //
   // Show a health bar over the thing?
@@ -841,7 +915,9 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
             //
             // If asleep and we are allowed to show the Zzz animation. Not for gargoyles when asleep.
             //
-            if (gfx_pixelart_show_asleep_anim()) { index = 1; }
+            if (gfx_pixelart_show_asleep_anim()) {
+              index = 1;
+            }
           }
         }
 
@@ -855,7 +931,9 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
           // Sleeping?
           //
           std::string s = "health" + std::to_string(h_step);
-          if (index) { s = "health_sleeping" + std::to_string(h_step); }
+          if (index) {
+            s = "health_sleeping" + std::to_string(h_step);
+          }
           tile = tile_find_mand(s);
           set(game->tile_cache_health, index, h_step, tile);
         }
@@ -880,7 +958,9 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   // Try to look like we are trapped in ice
   //
   if (! is_block_of_ice()) {
-    if (level->is_block_of_ice(curr_at)) { c = CYAN; }
+    if (level->is_block_of_ice(curr_at)) {
+      c = CYAN;
+    }
   }
 
   //
@@ -1010,7 +1090,9 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
       //
       submerged              = blit_begin_submerged(false);
       color under_water_part = WHITE;
-      if (is_foliage()) { under_water_part = DARKGREEN; }
+      if (is_foliage()) {
+        under_water_part = DARKGREEN;
+      }
 
       //
       // Make the bottom bodyparts harder to see when submerged.
@@ -1112,7 +1194,9 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   tiles_get();
 
   if (is_wall()) {
-    if (! blit_options->reflection) { blit_wall_shadow(blit_tl, blit_br, &tiles); }
+    if (! blit_options->reflection) {
+      blit_wall_shadow(blit_tl, blit_br, &tiles);
+    }
     blit_wall_cladding(blit_tl, blit_br, &tiles);
   }
 
@@ -1120,7 +1204,9 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   // NOTE: chasm tiles are not blitted explicitly. Instead a floor tile
   // will check for the presence of a chasm beneath it and blit the chasm
   //
-  if (tiles.bot3_tile) { blit_floor_chasm(blit_tl, blit_br, &tiles); }
+  if (tiles.bot3_tile) {
+    blit_floor_chasm(blit_tl, blit_br, &tiles);
+  }
 
   if (wobble != 0.0) {
     blit_flush();
@@ -1133,11 +1219,15 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
 
 void Thing::blit_to_tex(void)
 {
-  if (! player_tile) { player_tile = new Tile(); }
+  if (! player_tile) {
+    player_tile = new Tile();
+  }
 
   point tl, br;
   auto  tile = tile_index_to_tile(tile_curr);
-  if (! map_offset_coords_get(tl, br, tile, false)) { return; }
+  if (! map_offset_coords_get(tl, br, tile, false)) {
+    return;
+  }
 
   auto  width  = tl.x > br.x ? (tl.x - br.x) : (br.x - tl.x);
   auto  height = br.y - tl.y;
@@ -1202,10 +1292,14 @@ void Thing::blit_pixelart(int fbo)
   //
   // Bodyparts are done in the context of the player, see below.
   //
-  if (is_player_bodypart()) { return; }
+  if (is_player_bodypart()) {
+    return;
+  }
 
   BlitOptions blit_options;
-  if (is_player()) { blit_to_tex(); }
+  if (is_player()) {
+    blit_to_tex();
+  }
   blit_pixelart_do(fbo, &blit_options);
 }
 
@@ -1226,11 +1320,17 @@ void Thing::blit_pixelart_do(int fbo, BlitOptions *blit_options)
     point pre_effect_blit_tl;
     point pre_effect_blit_br;
 
-    if (! coords_get(blit_tl, blit_br, pre_effect_blit_tl, pre_effect_blit_br, tile, false)) { return; }
+    if (! coords_get(blit_tl, blit_br, pre_effect_blit_tl, pre_effect_blit_br, tile, false)) {
+      return;
+    }
   } else {
-    if (! map_offset_coords_get(blit_tl, blit_br, tile, false)) { return; }
+    if (! map_offset_coords_get(blit_tl, blit_br, tile, false)) {
+      return;
+    }
 
-    if (tile_is_offscreen()) { return; }
+    if (tile_is_offscreen()) {
+      return;
+    }
   }
 
   blit_internal(fbo, blit_tl, blit_br, tile, WHITE, blit_options);
@@ -1240,7 +1340,9 @@ void Thing::blit_upside_down(int fbo)
 {
   TRACE_NO_INDENT();
 
-  if (! gfx_pixelart_reflection()) { return; }
+  if (! gfx_pixelart_reflection()) {
+    return;
+  }
 
   point blit_tl, blit_br;
   Tilep tile = {};
@@ -1250,9 +1352,13 @@ void Thing::blit_upside_down(int fbo)
     point pre_effect_blit_tl;
     point pre_effect_blit_br;
 
-    if (! coords_get(blit_tl, blit_br, pre_effect_blit_tl, pre_effect_blit_br, tile, false)) { return; }
+    if (! coords_get(blit_tl, blit_br, pre_effect_blit_tl, pre_effect_blit_br, tile, false)) {
+      return;
+    }
   } else {
-    if (! map_offset_coords_get(blit_tl, blit_br, tile, true)) { return; }
+    if (! map_offset_coords_get(blit_tl, blit_br, tile, true)) {
+      return;
+    }
   }
 
   auto diff = blit_br.y - blit_tl.y;

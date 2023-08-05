@@ -8,16 +8,19 @@ bool starts_with(const std::string &s, const std::string &prefix) { return s.com
 
 bool ends_with(const std::string &s, const std::string &suffix)
 {
-  if (s.length() < suffix.length()) return false;
+  if (s.length() < suffix.length())
+    return false;
   return s.find(suffix, s.length() - suffix.length()) != std::string::npos;
 }
 
 int ends_with(const std::string &s, const char *const suffixes[])
 {
-  if (! suffixes) return 0;
+  if (! suffixes)
+    return 0;
 
   for (int i = 0; suffixes[ i ]; ++i)
-    if (ends_with(s, suffixes[ i ])) return 1 + i;
+    if (ends_with(s, suffixes[ i ]))
+      return 1 + i;
 
   return 0;
 }
@@ -43,7 +46,8 @@ std::string pluralise(const std::string &name)
   }
 
   if (ends_with(name, "us")) {
-    if (ends_with(name, "lotus") || ends_with(name, "status")) return name + "es";
+    if (ends_with(name, "lotus") || ends_with(name, "status"))
+      return name + "es";
     return name.substr(0, name.length() - 2) + "i";
   }
   if (ends_with(name, "larva") || ends_with(name, "antenna") || ends_with(name, "hypha") || ends_with(name, "noma")) {
@@ -53,13 +57,18 @@ std::string pluralise(const std::string &name)
     // Vortex; vortexes is legal, but the classic plural is cooler.
     return name.substr(0, name.length() - 2) + "ices";
   }
-  if (ends_with(name, "mosquito") || ends_with(name, "ss")) return name + "es";
-  if (ends_with(name, "cyclops")) return name.substr(0, name.length() - 1) + "es";
-  if (ends_with(name, "s")) return name;
+  if (ends_with(name, "mosquito") || ends_with(name, "ss"))
+    return name + "es";
+  if (ends_with(name, "cyclops"))
+    return name.substr(0, name.length() - 1) + "es";
+  if (ends_with(name, "s"))
+    return name;
   if (ends_with(name, "y")) {
-    if (name == "y") return "ys";
+    if (name == "y")
+      return "ys";
     // day -> days, boy -> boys, etc
-    if (is_vowel(name[ name.length() - 2 ])) return name + "s";
+    if (is_vowel(name[ name.length() - 2 ]))
+      return name + "s";
     // jelly -> jellies
     else
       return name.substr(0, name.length() - 1) + "ies";
@@ -96,21 +105,29 @@ std::string pluralise(const std::string &name)
 
 std::string apostrophise(const std::string &name)
 {
-  if (name.empty()) return name;
+  if (name.empty())
+    return name;
 
-  if (name == "you" || name == "You") return name + "r";
+  if (name == "you" || name == "You")
+    return name + "r";
 
-  if (name == "it" || name == "It") return name + "s";
+  if (name == "it" || name == "It")
+    return name + "s";
 
-  if (name == "itself") return "its own";
+  if (name == "itself")
+    return "its own";
 
-  if (name == "himself") return "his own";
+  if (name == "himself")
+    return "his own";
 
-  if (name == "herself") return "her own";
+  if (name == "herself")
+    return "her own";
 
-  if (name == "themselves" || name == "themself") return "their own";
+  if (name == "themselves" || name == "themself")
+    return "their own";
 
-  if (name == "yourself") return "your own";
+  if (name == "yourself")
+    return "your own";
 
   // We're going with the assumption that we're finding the possessive of
   // singular nouns ending in 's' more often than that of plural nouns.

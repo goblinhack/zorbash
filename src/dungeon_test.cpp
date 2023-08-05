@@ -94,5 +94,7 @@ void dungeon_test(void)
   game->fini();
   DIE("x");
 
-  if (! dungeon_seed--) { DIE("end of test"); }
+  if (! dungeon_seed--) {
+    DIE("end of test");
+  }
 }

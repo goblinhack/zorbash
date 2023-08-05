@@ -8,7 +8,9 @@
 Thingp World::thing_find_optional(ThingId id)
 {
   auto f = all_thing_ptrs.find(id);
-  if (f == all_thing_ptrs.end()) { return nullptr; }
+  if (f == all_thing_ptrs.end()) {
+    return nullptr;
+  }
 
   return (f->second);
 }
@@ -38,7 +40,9 @@ void World::alloc_thing_id(Thingp t)
     auto id = last_id;
     if (thing_find_optional(id)) {
       id = pcg_rand() & 0x0ffffff;
-      if (thing_find_optional(id)) { continue; }
+      if (thing_find_optional(id)) {
+        continue;
+      }
     }
 
     t->id                = id;
@@ -56,7 +60,9 @@ void World::alloc_tmp_thing_id(Thingp t)
     auto id = last_id;
     if (thing_find_optional(id)) {
       id = pcg_rand() | 0x8000000;
-      if (thing_find_optional(id)) { continue; }
+      if (thing_find_optional(id)) {
+        continue;
+      }
     }
 
     t->id                = id;

@@ -61,5 +61,7 @@ void Level::display_pixelart_map_mini(void)
     game->map_mini_over = point(-1, -1);
   }
 
-  if (old_map_mini_over != game->map_mini_over) { is_map_mini_valid = false; }
+  if (old_map_mini_over != game->map_mini_over) {
+    is_map_mini_valid = false;
+  }
 }
