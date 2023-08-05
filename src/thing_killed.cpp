@@ -352,13 +352,21 @@ void Thing::killed(Thingp defeater, const char *reason)
         score_incr(1);
       }
 
-      if (game->config.hiscores.is_new_hiscore(this)) {
-        if (game->robot_mode) {
-          msg("%%fg=yellow$New robo high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
-        } else {
-          msg("%%fg=yellow$New high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
+      //
+      // Don't add to the hi-score table in test mode
+      //
+      if (! g_opt_test_dungeon_gen) {
+        //
+        // New hi-score?
+        //
+        if (game->config.hiscores.is_new_hiscore(this)) {
+          if (game->robot_mode) {
+            msg("%%fg=yellow$New robo high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
+          } else {
+            msg("%%fg=yellow$New high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
+          }
+          game->config.hiscores.add_new_hiscore(this, title(), reason);
         }
-        game->config.hiscores.add_new_hiscore(this, title(), reason);
       }
 
       level->is_map_follow_player = false;

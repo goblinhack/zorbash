@@ -30,7 +30,14 @@ void Level::display_ascii_lasers(point tl, point br)
       return true;
     }
 
-    if (dt > 1) {
+    //
+    // We need reliable durations when testing
+    //
+    if (g_opt_test_dungeon_gen) {
+      dt = 1;
+    }
+
+    if (dt >= 1) {
       if (t) {
         //
         // Cannot kill at this point as will be in the display loop and

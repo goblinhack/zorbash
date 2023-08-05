@@ -241,5 +241,12 @@ void Game::tick_update(void)
     if (game->tick_dt > 1) {
       game->tick_dt = 1;
     }
+
+    //
+    // We need reliable durations when testing
+    //
+    if (g_opt_test_dungeon_gen || g_opt_ascii) {
+      game->tick_dt = 1;
+    }
   }
 }

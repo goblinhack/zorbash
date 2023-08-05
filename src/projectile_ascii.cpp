@@ -31,7 +31,14 @@ void Level::display_ascii_projectiles(point tl, point br)
       return true;
     }
 
-    if (dt > 1) {
+    //
+    // We need reliable durations when testing
+    //
+    if (g_opt_test_dungeon_gen) {
+      dt = 1;
+    }
+
+    if (dt >= 1) {
       if (t) {
         t->dead("End of projectile");
         t->has_projectile = false;

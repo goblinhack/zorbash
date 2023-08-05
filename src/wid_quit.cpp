@@ -42,18 +42,30 @@ static uint8_t wid_quit_yes(Widp w, int x, int y, uint32_t button)
           player->score_incr(1);
         }
 
-        if (game->config.hiscores.is_new_hiscore(player)) {
-          if (game->robot_mode) {
-            TOPCON("%%fg=red$RIP: Robot went back to the metal shop%%fg=reset$");
-            TOPCON("%%fg=gold$New robo high score, %s place!%%fg=reset$", game->config.hiscores.place_str(player));
+        //
+        // Don't add to the hi-score table in test mode
+        //
+        if (! g_opt_test_dungeon_gen) {
+          //
+          // New hi-score?
+          //
+          if (game->config.hiscores.is_new_hiscore(player)) {
+            if (game->robot_mode) {
+              TOPCON("%%fg=red$RIP: Robot went back to the metal shop%%fg=reset$");
+              TOPCON("%%fg=gold$New robo high score, %s place!%%fg=reset$", game->config.hiscores.place_str(player));
+            } else {
+              TOPCON("%%fg=red$RIP: Player quit the game%%fg=reset$");
+              TOPCON("%%fg=gold$New high score, %s place!%%fg=reset$", game->config.hiscores.place_str(player));
+            }
+
+            //
+            // Add to the hi-scores
+            //
+            game->config.hiscores.add_new_hiscore(player, player->title(), "went home early");
+            CON("INF: Player quit the game; new hiscore");
           } else {
-            TOPCON("%%fg=red$RIP: Player quit the game%%fg=reset$");
-            TOPCON("%%fg=gold$New high score, %s place!%%fg=reset$", game->config.hiscores.place_str(player));
+            CON("INF: Player quit the game; no hiscore change");
           }
-          game->config.hiscores.add_new_hiscore(player, player->title(), "went home early");
-          CON("INF: Player quit the game; new hiscore");
-        } else {
-          CON("INF: Player quit the game; no hiscore change");
         }
       }
     }

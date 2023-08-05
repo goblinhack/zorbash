@@ -65,6 +65,13 @@ void Level::handle_external_particles(void)
     float t  = p.ts_stop - p.ts_start;
     float dt = (((float) (now) -p.ts_start)) / t;
 
+    //
+    // We need reliable durations when testing
+    //
+    if (g_opt_test_dungeon_gen) {
+      dt = 1;
+    }
+
     // con("dt %f", dt);
     if (dt >= 1) {
       if (p.id.id) {
