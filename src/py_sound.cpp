@@ -33,6 +33,10 @@ PyObject *sound_load_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
+  if (g_opt_test_dungeon_gen) {
+    Py_RETURN_TRUE;
+  }
+
   PY_DBG("sound_load(volume=%f, file=%s, name=%s)", volume, file, name);
 
   std::string filearg = file;
@@ -58,6 +62,10 @@ PyObject *sound_play_(PyObject *obj, PyObject *args, PyObject *keywds)
   if (! name) {
     ERR("sound_play: Missing name attr");
     Py_RETURN_FALSE;
+  }
+
+  if (g_opt_test_dungeon_gen) {
+    Py_RETURN_TRUE;
   }
 
   PY_DBG("sound_play(name=%s)", name);
@@ -87,6 +95,10 @@ PyObject *sound_play_channel_(PyObject *obj, PyObject *args, PyObject *keywds)
   if (! name) {
     ERR("sound_play_channel: Missing name attr");
     Py_RETURN_FALSE;
+  }
+
+  if (g_opt_test_dungeon_gen) {
+    Py_RETURN_TRUE;
   }
 
   PY_DBG("sound_play_channel(channel=%d, name=%s)", channel, name);

@@ -16,11 +16,13 @@ void Level::log_(const char *fmt, va_list args)
   verify(MTYPE_LEVEL, this);
   auto l = this;
   char buf[ MAXLONGSTR ];
-  int  len;
+  int  len = 0;
 
   buf[ 0 ] = '\0';
-  get_timestamp(buf, MAXLONGSTR);
-  len = (int) strlen(buf);
+  if (! g_opt_test_dungeon_gen) {
+    get_timestamp(buf, MAXLONGSTR);
+    len = (int) strlen(buf);
+  }
 
   snprintf(buf + len, MAXLONGSTR - len, "%100s: %*s", l->to_string().c_str(), g_callframes_indent, "");
 
@@ -46,11 +48,13 @@ void Level::con_(const char *fmt, va_list args)
   verify(MTYPE_LEVEL, this);
   auto l = this;
   char buf[ MAXLONGSTR ];
-  int  len;
+  int  len = 0;
 
   buf[ 0 ] = '\0';
-  get_timestamp(buf, MAXLONGSTR);
-  len = (int) strlen(buf);
+  if (! g_opt_test_dungeon_gen) {
+    get_timestamp(buf, MAXLONGSTR);
+    len = (int) strlen(buf);
+  }
   snprintf(buf + len, MAXLONGSTR - len, "Level %s: ", l->to_string().c_str());
 
   len = (int) strlen(buf);
@@ -86,14 +90,16 @@ void Level::err_(const char *fmt, va_list args)
   verify(MTYPE_LEVEL, this);
   auto l = this;
   char buf[ MAXLONGSTR ];
-  int  len;
+  int  len = 0;
 
   callstack_dump();
   backtrace_dump();
 
   buf[ 0 ] = '\0';
-  get_timestamp(buf, MAXLONGSTR);
-  len = (int) strlen(buf);
+  if (! g_opt_test_dungeon_gen) {
+    get_timestamp(buf, MAXLONGSTR);
+    len = (int) strlen(buf);
+  }
   snprintf(buf + len, MAXLONGSTR - len, "ERROR: Level %s: ", l->to_string().c_str());
 
   len = (int) strlen(buf);

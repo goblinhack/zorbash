@@ -14,7 +14,7 @@
 #include "my_unicode.hpp"
 #include "my_wid.hpp"
 
-void ascii_dump_to_console(bool use_color)
+void ascii_dump_to_console(FILE *out, bool use_color)
 {
   TRACE_NO_INDENT();
 
@@ -22,15 +22,15 @@ void ascii_dump_to_console(bool use_color)
   int  x;
   int  y;
 
-  putchar('+');
+  fprintf(out, "%lc", '+');
   for (x = 0; x < TERM_WIDTH; x++) {
-    putchar('-');
+    fprintf(out, "%lc", '-');
   }
-  putchar('+');
-  putchar('\n');
+  fprintf(out, "%lc", '+');
+  fprintf(out, "%lc", '\n');
 
   for (y = 0; y < TERM_HEIGHT; y++) {
-    putchar('|');
+    fprintf(out, "%lc", '|');
     for (x = 0; x < TERM_WIDTH; x++) {
       const AsciiCell *cell = &getref_no_check(cells, x, y);
 
@@ -107,7 +107,7 @@ void ascii_dump_to_console(bool use_color)
         } else {
           snprintf(fgstr, sizeof(fgstr), "\e[39m\e[49m");
         }
-        fputs(fgstr, stdout);
+        fprintf(out, "%s", fgstr);
       }
 
       //
@@ -122,12 +122,8 @@ void ascii_dump_to_console(bool use_color)
           continue;
         }
         if (cell->ch[ depth ]) {
-          wchar_t out = unicode_alias_to_char(cell->ch[ depth ]);
-          if (out > 128) {
-            printf("%lc", out);
-          } else {
-            putchar(out);
-          }
+          wchar_t ch = unicode_alias_to_char(cell->ch[ depth ]);
+          fprintf(out, "%lc", ch);
           got_one = true;
           break;
         }
@@ -137,7 +133,7 @@ void ascii_dump_to_console(bool use_color)
       // Nothing at all?
       //
       if (! got_one) {
-        putchar(' ');
+        fprintf(out, "%lc", ' ');
       }
 
       //
@@ -145,18 +141,18 @@ void ascii_dump_to_console(bool use_color)
       //
       if (use_color) {
         snprintf(fgstr, sizeof(fgstr), "\e[39m\e[49m");
-        fputs(fgstr, stdout);
+        fprintf(out, "%s", fgstr);
       }
     }
 
-    putchar('|');
-    putchar('\n');
+    fprintf(out, "%lc", '|');
+    fprintf(out, "%lc", '\n');
   }
 
-  putchar('+');
+  fprintf(out, "%lc", '+');
   for (x = 0; x < TERM_WIDTH; x++) {
-    putchar('-');
+    fprintf(out, "%lc", '-');
   }
-  putchar('+');
-  putchar('\n');
+  fprintf(out, "%lc", '+');
+  fprintf(out, "%lc", '\n');
 }

@@ -1094,6 +1094,10 @@ PyObject *thing_sound_play_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
+  if (g_opt_test_dungeon_gen) {
+    Py_RETURN_TRUE;
+  }
+
   PY_DBG("thing_sound_play(name=%s)", name);
 
   std::string alias = name;
@@ -1132,6 +1136,10 @@ PyObject *thing_sound_play_channel_(PyObject *obj, PyObject *args, PyObject *key
   if (! name) {
     ERR("thing_sound_play_channel: Missing name attr");
     Py_RETURN_FALSE;
+  }
+
+  if (g_opt_test_dungeon_gen) {
+    Py_RETURN_TRUE;
   }
 
   PY_DBG("sound_play_channel(channel=%d, name=%s)", channel, name);

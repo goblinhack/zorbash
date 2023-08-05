@@ -69,22 +69,10 @@ void Level::assign_leaders_and_followers(void)
   }
 
   //
-  // Ok now we have everyone in their groups
-  //
-  for (const auto &g : groups) {
-    dbg("Pre-assigned leader group %p", g.first);
-    for (const auto &m : g.second) {
-      dbg("- Member %s", m->to_short_string().c_str());
-    }
-  }
-
-  //
   // Now choose the leader
   //
   dbg("Choose the leaders");
   for (const auto &g : groups) {
-    dbg("Final group %p", g.first);
-
     Thingp leader = nullptr;
     for (const auto &m : g.second) {
       if (! leader) {

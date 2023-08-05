@@ -13,11 +13,13 @@
 static void py_log_(const char *fmt, va_list args)
 {
   char buf[ MAXLONGSTR ];
-  int  len;
+  int  len = 0;
 
   buf[ 0 ] = '\0';
-  get_timestamp(buf, MAXLONGSTR);
-  len = (int) strlen(buf);
+  if (! g_opt_test_dungeon_gen) {
+    get_timestamp(buf, MAXLONGSTR);
+    len = (int) strlen(buf);
+  }
   snprintf(buf + len, MAXLONGSTR - len, "PYC: ");
   len = (int) strlen(buf);
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);

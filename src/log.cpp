@@ -50,11 +50,13 @@ void log_catchup_missing_indent_levels(void)
 static void log_(const char *fmt, va_list args)
 {
   char buf[ MAXLONGSTR ];
-  int  len;
+  int  len = 0;
 
   buf[ 0 ] = '\0';
-  get_timestamp(buf, MAXLONGSTR);
-  len = (int) strlen(buf);
+  if (! g_opt_test_dungeon_gen) {
+    get_timestamp(buf, MAXLONGSTR);
+    len = (int) strlen(buf);
+  }
 
   if (! g_log_stdout) {
     // No indent
@@ -71,12 +73,13 @@ static void log_(const char *fmt, va_list args)
 static void log_missing_(const char *fmt, va_list args)
 {
   char buf[ MAXLONGSTR ];
-
-  int len;
+  int  len = 0;
 
   buf[ 0 ] = '\0';
-  get_timestamp(buf, MAXLONGSTR);
-  len = (int) strlen(buf);
+  if (! g_opt_test_dungeon_gen) {
+    get_timestamp(buf, MAXLONGSTR);
+    len = (int) strlen(buf);
+  }
 
   if (! g_log_stdout) {
     // No indent
@@ -110,11 +113,13 @@ void LOG_MISSING(const char *fmt, ...)
 static void warn_(const char *fmt, va_list args)
 {
   char buf[ MAXLONGSTR ];
-  int  len;
+  int  len = 0;
 
   buf[ 0 ] = '\0';
-  get_timestamp(buf, MAXLONGSTR);
-  len = (int) strlen(buf);
+  if (! g_opt_test_dungeon_gen) {
+    get_timestamp(buf, MAXLONGSTR);
+    len = (int) strlen(buf);
+  }
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
   putf(MY_STDOUT, buf);
@@ -138,7 +143,6 @@ static void con_(const char *fmt, va_list args)
   int  len = 0;
 
   buf[ 0 ] = '\0';
-
   if (! g_opt_test_dungeon_gen) {
     get_timestamp(buf, MAXLONGSTR);
     len = (int) strlen(buf);
@@ -216,7 +220,6 @@ void topcon_(const char *fmt, va_list args)
   int  len = 0;
 
   buf[ 0 ] = '\0';
-
   if (! g_opt_test_dungeon_gen) {
     get_timestamp(ts, MAXLONGSTR);
     snprintf(buf, sizeof(buf) - 1, "%s", ts);
@@ -327,11 +330,13 @@ void TOPCON(const wchar_t *fmt, ...)
 static void dying_(const char *fmt, va_list args)
 {
   char buf[ MAXLONGSTR ];
-  int  len;
+  int  len = 0;
 
   buf[ 0 ] = '\0';
-  get_timestamp(buf, MAXLONGSTR);
-  len = (int) strlen(buf);
+  if (! g_opt_test_dungeon_gen) {
+    get_timestamp(buf, MAXLONGSTR);
+    len = (int) strlen(buf);
+  }
 
   snprintf(buf + len, MAXLONGSTR - len, "DIE: ");
 
@@ -356,11 +361,13 @@ static void err_(const char *fmt, va_list args)
   backtrace_dump();
 
   char buf[ MAXLONGSTR ];
-  int  len;
+  int  len = 0;
 
   buf[ 0 ] = '\0';
-  get_timestamp(buf, MAXLONGSTR);
-  len = (int) strlen(buf);
+  if (! g_opt_test_dungeon_gen) {
+    get_timestamp(buf, MAXLONGSTR);
+    len = (int) strlen(buf);
+  }
 
   snprintf(buf + len, MAXLONGSTR - len, "ERROR: %%%%fg=red$");
 
@@ -392,12 +399,14 @@ static void croak_(const char *fmt, va_list args)
   g_die_occurred = true;
 
   char buf[ MAXLONGSTR ];
-  int  len;
-  int  tslen;
+  int  len   = 0;
+  int  tslen = 0;
 
   buf[ 0 ] = '\0';
-  get_timestamp(buf, MAXLONGSTR);
-  tslen = len = (int) strlen(buf);
+  if (! g_opt_test_dungeon_gen) {
+    get_timestamp(buf, MAXLONGSTR);
+    tslen = len = (int) strlen(buf);
+  }
 
   snprintf(buf + len, MAXLONGSTR - len, "FATAL ERROR: ");
 
@@ -499,14 +508,16 @@ void myerr(const char *fmt, ...)
 static void msgerr_(const char *fmt, va_list args)
 {
   char buf[ MAXLONGSTR ];
-  int  len;
+  int  len = 0;
 
   callstack_dump();
   backtrace_dump();
 
   buf[ 0 ] = '\0';
-  get_timestamp(buf, MAXLONGSTR);
-  len = (int) strlen(buf);
+  if (! g_opt_test_dungeon_gen) {
+    get_timestamp(buf, MAXLONGSTR);
+    len = (int) strlen(buf);
+  }
 
   snprintf(buf + len, MAXLONGSTR - len, "ERROR: %%%%fg=red$");
 
@@ -543,14 +554,16 @@ static void sdl_msgerr_(const char *fmt, va_list args)
 #if SDL_MAJOR_VERSION >= 2
   int ts_len;
 #endif
-  int len;
+  int len = 0;
 
   callstack_dump();
   backtrace_dump();
 
   buf[ 0 ] = '\0';
-  get_timestamp(buf, MAXLONGSTR);
-  len = (int) strlen(buf);
+  if (! g_opt_test_dungeon_gen) {
+    get_timestamp(buf, MAXLONGSTR);
+    len = (int) strlen(buf);
+  }
 
   snprintf(buf + len, MAXLONGSTR - len, "ERROR: ");
 
@@ -587,12 +600,15 @@ static void botcon_(const char *fmt, va_list args)
 {
   char buf[ MAXLONGSTR ];
   char ts[ MAXLONGSTR / 2 ];
-  int  len;
+  int  len = 0;
 
   buf[ 0 ] = '\0';
-  get_timestamp(ts, MAXLONGSTR);
-  snprintf(buf, sizeof(buf) - 1, "%sBOTCON: ", ts);
-  len = (int) strlen(buf);
+  if (! g_opt_test_dungeon_gen) {
+    get_timestamp(ts, MAXLONGSTR);
+    snprintf(buf, sizeof(buf) - 1, "%sBOTCON: ", ts);
+    len = (int) strlen(buf);
+  }
+
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
   // putf(MY_STDOUT, buf);
@@ -606,7 +622,7 @@ static void botcon_(const char *fmt, va_list args)
 
 static void botcon_(const wchar_t *fmt, va_list args)
 {
-  {
+  if (! g_opt_test_dungeon_gen) {
     char ts[ MAXLONGSTR ];
     ts[ 0 ] = '\0';
     get_timestamp(ts, MAXLONGSTR);

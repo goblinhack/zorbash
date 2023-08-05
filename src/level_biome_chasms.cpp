@@ -34,7 +34,9 @@ bool Level::create_biome_chasms(point3d at, uint32_t seed)
       continue;
     }
 
-    log("INF: Create dungeon layout took %u ms", time_ms() - start);
+    if (! g_opt_test_dungeon_gen) {
+      log("INF: Create dungeon layout took %u ms", time_ms() - start);
+    }
 
     //
     // Check we have a dungeon start
@@ -338,8 +340,12 @@ bool Level::create_biome_chasms(point3d at, uint32_t seed)
     break;
   }
 
-  dbg("INF: Populated dungeon with %u monsters at world map (%d,%d,%d) took %u ms, slowest element took %u ms (%s)",
-      monst_count, at.x, at.y, at.z, time_ms() - start, slowest_so_far, slowest_so_far_which.c_str());
+  if (g_opt_test_dungeon_gen) {
+    dbg("INF: Populated dungeon with %u monsters at world map (%d,%d,%d),", monst_count, at.x, at.y, at.z);
+  } else {
+    dbg("INF: Populated dungeon with %u monsters at world map (%d,%d,%d) took %u ms, slowest element took %u ms (%s)",
+        monst_count, at.x, at.y, at.z, time_ms() - start, slowest_so_far, slowest_so_far_which.c_str());
+  }
   return true;
 }
 

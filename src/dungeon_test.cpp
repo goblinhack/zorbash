@@ -42,8 +42,18 @@ void dungeon_test(void)
   //
   // Needed to set the terminal size
   //
-  g_opt_ascii  = true;
+  g_opt_ascii = true;
+
+  //
+  // Useful to see what is going on
+  //
   g_opt_debug1 = true;
+
+  //
+  // No monster sounds when testin
+  //
+  g_opt_silent = true;
+
   TRACE_NO_INDENT();
   sdl_display_reset();
 
@@ -61,17 +71,25 @@ void dungeon_test(void)
   new_level->create(world_at, grid_at, dungeon_seed, difficulty_depth, dungeon_walk_order_level_no);
   game->level = new_level;
 
-  pcg_random_allowed++;
-  game->robot_mode_requested = true;
-  TRACE_NO_INDENT();
-  game->start();
-  TRACE_NO_INDENT();
-  game->tick_begin_now();
-  TRACE_NO_INDENT();
-  game->tick_end();
-  TRACE_NO_INDENT();
-  game->tick_begin_now();
-  pcg_random_allowed--;
+  {
+    pcg_random_allowed++;
+
+    game->robot_mode_requested = true;
+
+    TRACE_NO_INDENT();
+    game->start();
+
+    TRACE_NO_INDENT();
+    game->tick_begin_now();
+
+    TRACE_NO_INDENT();
+    game->tick_end();
+
+    TRACE_NO_INDENT();
+    game->tick_begin_now();
+
+    pcg_random_allowed--;
+  }
 
   while (! game->level->player->is_dead) {
     TRACE_NO_INDENT();

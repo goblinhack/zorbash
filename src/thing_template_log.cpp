@@ -17,11 +17,13 @@ void Tp::log_(const char *fmt, va_list args)
   verify(MTYPE_TP, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
-  int  len;
+  int  len = 0;
 
   buf[ 0 ] = '\0';
-  get_timestamp(buf, MAXLONGSTR);
-  len = (int) strlen(buf);
+  if (! g_opt_test_dungeon_gen) {
+    get_timestamp(buf, MAXLONGSTR);
+    len = (int) strlen(buf);
+  }
 
   snprintf(buf + len, MAXLONGSTR - len, "%100s: %*s", t->to_short_string().c_str(), g_callframes_indent, "");
 
@@ -62,11 +64,13 @@ void Tp::die_(const char *fmt, va_list args)
   verify(MTYPE_TP, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
-  int  len;
+  int  len = 0;
 
   buf[ 0 ] = '\0';
-  get_timestamp(buf, MAXLONGSTR);
-  len = (int) strlen(buf);
+  if (! g_opt_test_dungeon_gen) {
+    get_timestamp(buf, MAXLONGSTR);
+    len = (int) strlen(buf);
+  }
   snprintf(buf + len, MAXLONGSTR - len, "%s: ", t->to_short_string().c_str());
 
   len = (int) strlen(buf);
@@ -93,11 +97,13 @@ void Tp::con_(const char *fmt, va_list args)
   verify(MTYPE_TP, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
-  int  len;
+  int  len = 0;
 
   buf[ 0 ] = '\0';
-  get_timestamp(buf, MAXLONGSTR);
-  len = (int) strlen(buf);
+  if (! g_opt_test_dungeon_gen) {
+    get_timestamp(buf, MAXLONGSTR);
+    len = (int) strlen(buf);
+  }
   snprintf(buf + len, MAXLONGSTR - len, "%s: ", t->to_short_string().c_str());
 
   len = (int) strlen(buf);
@@ -116,11 +122,13 @@ void Tp::topcon_(const char *fmt, va_list args)
   verify(MTYPE_TP, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
-  int  len;
+  int  len = 0;
 
   buf[ 0 ] = '\0';
-  get_timestamp(buf, MAXLONGSTR);
-  len = (int) strlen(buf);
+  if (! g_opt_test_dungeon_gen) {
+    get_timestamp(buf, MAXLONGSTR);
+    len = (int) strlen(buf);
+  }
   snprintf(buf + len, MAXLONGSTR - len, "%s: ", t->to_short_string().c_str());
 
   len = (int) strlen(buf);
@@ -168,14 +176,16 @@ void Tp::err_(const char *fmt, va_list args)
   verify(MTYPE_TP, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
-  int  len;
+  int  len = 0;
 
   callstack_dump();
   backtrace_dump();
 
   buf[ 0 ] = '\0';
-  get_timestamp(buf, MAXLONGSTR);
-  len = (int) strlen(buf);
+  if (! g_opt_test_dungeon_gen) {
+    get_timestamp(buf, MAXLONGSTR);
+    len = (int) strlen(buf);
+  }
   snprintf(buf + len, MAXLONGSTR - len, "ERROR: Thing %s: ", t->to_short_string().c_str());
 
   len = (int) strlen(buf);

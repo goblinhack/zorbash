@@ -399,7 +399,9 @@ void dmap_process(Dmap *D, point tl, point br, bool place_border, bool allow_dia
       dmap_print(D);
     }
     if (after - before > 0) {
-      LOG("DMAP took %u ms: tl %d,%d br %d %d", after - before, tl.x, tl.y, br.x, br.y);
+      if (! g_opt_test_dungeon_gen) {
+        LOG("DMAP took %u ms: tl %d,%d br %d %d", after - before, tl.x, tl.y, br.x, br.y);
+      }
     }
   }
 }

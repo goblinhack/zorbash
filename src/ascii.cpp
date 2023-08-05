@@ -8,6 +8,8 @@
 #include "my_console.hpp"
 #include "my_font.hpp"
 #include "my_game.hpp"
+#include "my_globals.hpp"
+#include "my_globals_extra.hpp"
 #include "my_sdl_event.hpp"
 #include "my_string.hpp"
 #include "my_ui.hpp"
@@ -21,7 +23,8 @@ int16_t TERM_HEIGHT;
 int16_t ascii_mouse_x;
 int16_t ascii_mouse_y;
 
-std::array< std::array< AsciiCell, TERM_HEIGHT_MAX >, TERM_WIDTH_MAX > cells;
+std::array< std::array< AsciiCell, TERM_HEIGHT_MAX >, TERM_WIDTH_MAX >        cells;
+static std::array< std::array< AsciiCell, TERM_HEIGHT_MAX >, TERM_WIDTH_MAX > prev_cells;
 
 void ascii_init(void) {}
 
@@ -1092,6 +1095,30 @@ static void ascii_blit(void)
 }
 
 //
+// Did anything of note change in this render?
+//
+// Cannot use memcmp due to the context
+//
+bool ascii_changed(void)
+{
+  for (auto y = 0; y < TERM_HEIGHT; y++) {
+
+    for (auto x = 0; x < TERM_WIDTH; x++) {
+
+      const AsciiCell *cell      = &getref_no_check(cells, x, y);
+      const AsciiCell *prev_cell = &getref_no_check(prev_cells, x, y);
+
+      for (auto depth = 0; depth < TILE_LAYER_MAX; depth++) {
+        if (cell->ch[ depth ] != prev_cell->ch[ depth ]) {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
+}
+
+//
 // The big ascii renderer
 //
 void ascii_display(void)
@@ -1109,6 +1136,20 @@ void ascii_display(void)
     ascii_display_mouse(mouse_tile_tl, mouse_tile_br, ascii.mouse_at);
   }
 #endif
+
+  //
+  // Dump the level output as ascii if the content changes, useful in debugging.
+  // Also used in testing.
+  //
+  IF_DEBUG
+  {
+    if (ascii_changed()) {
+      prev_cells = cells;
+      TRACE_NO_INDENT();
+      ascii_dump_to_console(MY_STDOUT, false);
+      ascii_dump_to_console(stdout, ! g_opt_gfx_monochrome);
+    }
+  }
 }
 
 void ascii_clear_display(void)

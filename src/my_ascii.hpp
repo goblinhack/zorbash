@@ -142,7 +142,7 @@ void ascii_draw_line(int depth, int x0, int y0, int x1, int y1, wchar_t ch, colo
 void ascii_draw_line(int x0, int y0, int x1, int y1, const char *tilename, color c);
 void ascii_draw_line(int x0, int y0, int x1, int y1, Tilep what, color c);
 void ascii_draw_line(int x0, int y0, int x1, int y1, wchar_t what, color c);
-void ascii_dump_to_console(bool no_color);
+void ascii_dump_to_console(FILE *, bool no_color);
 void ascii_init(void);
 void ascii_put_bg_square(int tlx, int tly, int brx, int bry, const char *tilename, color c);
 void ascii_put_bg_square(int tlx, int tly, int brx, int bry, Tilep what, color c);
