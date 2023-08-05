@@ -224,8 +224,8 @@ void topcon_(const char *fmt, va_list args)
     get_timestamp(ts, MAXLONGSTR);
     snprintf(buf, sizeof(buf) - 1, "%s", ts);
     len = (int) strlen(buf);
-    vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
   }
+  vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
   putf(MY_STDOUT, buf);
 

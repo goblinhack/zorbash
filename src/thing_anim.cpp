@@ -16,15 +16,17 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
   Tilep tile = {};
   auto  tpp  = tp();
 
-  if (is_tmp_thing()) {
-    if (game->tick_current_is_too_slow) {
+  if (! g_opt_test_dungeon_gen) {
+    if (is_tmp_thing()) {
+      if (game->tick_current_is_too_slow) {
 #ifdef DEBUG_ANIM
-      if (debug || is_debug_type()) {
-        dbg("Animate: too slow, kill tmp thing");
-      }
+        if (debug || is_debug_type()) {
+          dbg("Animate: too slow, kill tmp thing");
+        }
 #endif
-      dead_scheduled("by end of anim; too slow");
-      return;
+        dead_scheduled("by end of anim; too slow");
+        return;
+      }
     }
   }
 
@@ -614,13 +616,6 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
   }
 
   //
-  // Attempt to make the game consistent when testing
-  //
-  if (g_opt_test_dungeon_gen) {
-    delay = 1;
-  }
-
-  //
   // First frame?
   //
   if (! ts_next_frame) {
@@ -638,11 +633,6 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
     if ((speedup || (delay > 0)) && (ts_next_frame + delay < time_game_ms_cached())) {
       ts_next_frame += delay;
       *next_frame_please = true;
-
-      if (g_opt_test_dungeon_gen) {
-        *next_frame_please = true;
-      }
-
 #ifdef DEBUG_ANIM
       if (debug || is_debug_type()) {
         con("Too slow %s now %d next %d delay %d", tile_name(tile).c_str(), time_game_ms_cached(), ts_next_frame,
