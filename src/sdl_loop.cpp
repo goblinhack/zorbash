@@ -189,6 +189,7 @@ void sdl_loop(void)
       // mouse position, to avoid perception of lag. Mouse motion events can be expensive
       // as we redraw the cursor path.
       //
+      LOG("SDL: Process %u events", found);
       bool processed_mouse_motion_event = false;
       for (i = 0; i < found; ++i) {
         sdl_event(&events[ i ], processed_mouse_motion_event);

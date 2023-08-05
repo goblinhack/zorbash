@@ -1147,7 +1147,7 @@ void ascii_display(void)
       prev_cells = cells;
       TRACE_NO_INDENT();
       ascii_dump_to_console(MY_STDOUT, false);
-      ascii_dump_to_console(stdout, ! g_opt_gfx_monochrome);
+      IF_DEBUG2 { ascii_dump_to_console(stdout, ! g_opt_gfx_monochrome); }
     }
   }
 }

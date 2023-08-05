@@ -232,6 +232,7 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
 
   wid_mouse_two_clicks = false;
 
+  LOG("SDL: Event type %u", event->type);
   switch (event->type) {
     case SDL_KEYDOWN : sdl_event_keydown(key, event); break;
     case SDL_KEYUP : sdl_event_keyup(key, event); break;

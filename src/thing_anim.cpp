@@ -627,10 +627,13 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
     //
     // This is to get the next frame.
     //
-    // If we are lagging behind and the next frame should also have finished, then
-    // jump past this frame.
-    //
-    if ((speedup || (delay > 0)) && (ts_next_frame + delay < time_game_ms_cached())) {
+    if (g_opt_test_dungeon_gen || g_opt_ascii) {
+      ts_next_frame = time_game_ms_cached() + delay;
+    } else if ((speedup || (delay > 0)) && (ts_next_frame + delay < time_game_ms_cached())) {
+      //
+      // If we are lagging behind and the next frame should also have finished, then
+      // jump past this frame.
+      //
       ts_next_frame += delay;
       *next_frame_please = true;
 #ifdef DEBUG_ANIM
