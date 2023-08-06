@@ -444,6 +444,12 @@ bool Thing::is_obs_ai(Thingp it)
       }
       return true;
     }
+
+    //
+    // Stops the robot trying to walk through a brazier; which if there is something in
+    // the way of the brazier, like a mob or a wall, then it gets stuck.
+    //
+    return true;
   }
 
   if (it->is_secret_door()) {
