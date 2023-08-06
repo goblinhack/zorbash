@@ -28,11 +28,17 @@ if [ ! -x zorbash ]; then
 fi
 
 for seed in \
+  charliebats \
+  dogmanlives \
+  grayalien \
+  cavemire \
+  castlespire \
+  donkeyking \
+  alphabase \
   seadragon \
   terrorlake \
   badmonkey \
   snowdrop \
-  firebelow \
   umbermonk \
   discobob \
   drakestone \
@@ -45,11 +51,11 @@ for seed in \
   victimlake
 do
   mkdir -p tests/$seed/output/
-  mkdir -p tests/$seed/expected_output
+  mkdir -p tests/$seed/expected_output/
 
   printf "%-60s ... " "Running seed ($seed)"
-  ./zorbash --debug --seed $seed --test-dungeon-gen --ascii --monochrome > tests/$seed/output/console
-  cp appdata/zorbash/stdout* tests/$seed/output/
+  ./zorbash --seed $seed --test-dungeon-gen --ascii --monochrome > tests/$seed/output/console
+  cp appdata/zorbash/stdout.txt tests/$seed/output/
 
   grep -q ERROR appdata/zorbash/*
   if [ $? -eq 0 ]; then
@@ -57,15 +63,20 @@ do
     continue
   fi
 
+  # ls -lahsi tests/$seed/output/stdout.txt
   if [ ! -f tests/$seed/expected_output/stdout.txt ]; then
-    cp -r tests/$seed/output/* tests/$seed/expected_output
-    printf "$GREEN[%s]$RESET\n" "CREATED"
+    cp -r tests/$seed/output/stdout.txt tests/$seed/expected_output/
+    moves=$(grep "End of test, move count:" tests/$seed/output/stdout.txt | sed 's/.*://g')
+    printf "$GREEN[%s]$RESET (%s moves)\n" "CREATED" $moves
   else
     diff -q tests/$seed/output/stdout.txt tests/$seed/expected_output/stdout.txt
     if [ $? -ne 0 ]; then
-      printf "$RED[%s]$RESET\n" "CHANGED"
+      moves=$(grep "End of test, move count:" tests/$seed/output/stdout.txt | sed 's/.*://g')
+      expected_moves=$(grep "End of test, move count:" tests/$seed/expected_output/stdout.txt | sed 's/.*://g')
+      printf "$RED[%s]$RESET (%s moves expected, found %s)\n" "CHANGED" $expected_moves $moves
     else
-      printf "$GREEN[%s]$RESET\n" "OK"
+      moves=$(grep "End of test, move count:" tests/$seed/output/stdout.txt | sed 's/.*://g')
+      printf "$GREEN[%s]$RESET %s moves\n" "OK" $moves
     fi
   fi
 done

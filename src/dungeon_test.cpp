@@ -83,7 +83,8 @@ void dungeon_test(void)
     pcg_random_allowed--;
   }
 
-  while (! game->level->player->is_dead) {
+  auto player = game->level->player;
+  while (! player->is_dead) {
     TRACE_NO_INDENT();
     SDL_Delay(5);
 
@@ -97,12 +98,13 @@ void dungeon_test(void)
     wid_display_all();
   }
 
+  CON("End of test, move count: %u", player->move_count());
+
   TRACE_NO_INDENT();
   delete new_level;
 
   TRACE_NO_INDENT();
   game->fini();
 
-  CON("end of test");
   exit(0);
 }
