@@ -28,26 +28,27 @@ if [ ! -x zorbash ]; then
 fi
 
 for seed in \
-  charliebats \
-  dogmanlives \
-  grayalien \
-  cavemire \
-  castlespire \
-  donkeyking \
   alphabase \
-  seadragon \
-  terrorlake \
-  badmonkey \
-  umbermonk \
-  discobob \
-  drakestone \
-  hearthstone \
-  goblinhack \
   apecastle \
+  badmonkey \
+  castlespire \
+  cavemire \
+  charliebats \
   deathpool \
+  discobob \
+  dogmanlives \
+  donkeyking \
+  drakestone \
+  goblinhack \
+  grayalien \
+  hearthstone \
   hellfire \
   pondscum \
-  victimlake
+  seadragon \
+  terrorlake \
+  umbermonk \
+  victimlake \
+  zardoz
 do
   mkdir -p tests/$seed/output/
   mkdir -p tests/$seed/expected_output/
