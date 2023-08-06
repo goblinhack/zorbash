@@ -19,6 +19,7 @@
 #include "my_wid_actionbar.hpp"
 #include "my_wid_asciimap.hpp"
 #include "my_wid_botcon.hpp"
+#include "my_wid_choose_level.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_leftbar.hpp"
 #include "my_wid_rightbar.hpp"
@@ -96,6 +97,19 @@ void dungeon_test(void)
 
     TRACE_NO_INDENT();
     wid_display_all();
+
+    if (player && player->is_waiting_to_descend_dungeon) {
+      world_at += point3d(0, 0, 2);
+      grid_at += point(0, 1);
+      delete new_level;
+
+      new_level = new Level(biome);
+      new_level->create(world_at, grid_at, difficulty_depth, dungeon_walk_order_level_no);
+      game->level = new_level;
+      player->level_change(new_level);
+
+      wid_choose_next_dungeons_destroy(nullptr);
+    }
   }
 
   CON("End of test, move count: %u", player->move_count());

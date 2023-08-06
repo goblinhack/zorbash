@@ -88,7 +88,6 @@ public:
 
 static wid_choose_next_dungeons_ctx *g_ctx;
 
-static void wid_choose_next_dungeons_destroy(Widp w);
 static void wid_choose_next_dungeons_set_focus(wid_choose_next_dungeons_ctx *ctx, int focusx, int focusy);
 
 static void wid_choose_next_dungeons_set_focus(wid_choose_next_dungeons_ctx *ctx, int focusx, int focusy)
@@ -163,7 +162,7 @@ static void wid_choose_next_dungeons_mouse_over(Widp w, int relx, int rely, int 
   }
 }
 
-static void wid_choose_next_dungeons_destroy(Widp w)
+void wid_choose_next_dungeons_destroy(Widp w)
 {
   TRACE_NO_INDENT();
   wid_choose_next_dungeons_ctx *ctx;

@@ -608,7 +608,7 @@ void Level::tick_(void)
   //
   // We've finished waiting on all things, bump the game tick.
   //
-  dbg("Level tick about to end as finshed on waiting");
+  dbg("Level tick about to end as finished on waiting");
   TRACE_AND_INDENT();
   bool tick_done = game->tick_end();
 
@@ -616,6 +616,8 @@ void Level::tick_(void)
   // Check for robot mode changes
   //
   if (g_opt_test_dungeon_gen || g_opt_ascii || ! ts_fade_in_begin) {
+    dbg("Check for robot mode changes");
+
     if (game->robot_mode_requested != game->robot_mode) {
       LOG("INF: Pressed requested robot change");
       game->robot_mode                = game->robot_mode_requested;
@@ -669,6 +671,8 @@ void Level::tick_(void)
     FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
     CON("TICK %d hash %f random %d", game->tick_current, h, pcg_rand());
 #endif
+  } else {
+    dbg("Level tick not done");
   }
 
   if (tick_done) {

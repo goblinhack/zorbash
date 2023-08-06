@@ -12,5 +12,6 @@ void wid_choose_level_border(Widp b, Levelp l);
 
 point3d wid_choose_level_grid_to_level_coord(int x, int y);
 uint8_t wid_choose_next_dungeons_enter(Widp w, int x, int y, uint32_t button);
+void    wid_choose_next_dungeons_destroy(Widp w);
 
 extern WidPopup *wid_level_contents;

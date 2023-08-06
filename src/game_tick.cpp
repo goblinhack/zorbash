@@ -141,6 +141,7 @@ bool Game::tick_end(void)
   // Move when all things are done moving
   //
   if (game->tick_completed == game->tick_current) {
+    DBG("Game tick already completed");
     return false;
   }
   game->tick_completed = game->tick_current;

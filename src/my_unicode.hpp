@@ -36,6 +36,7 @@ wchar_t unicode_alias_to_char(wchar_t);
 #define UNICODE_ALIAS_FOR_DIAMOND_SOLID ((wchar_t) (UNICODE_0x80 + 0x1a))
 #define UNICODE_ALIAS_FOR_CROSS         ((wchar_t) (UNICODE_0x80 + 0x1b))
 #define UNICODE_ALIAS_FOR_HALO          ((wchar_t) (UNICODE_0x80 + 0x1c))
+#define UNICODE_ALIAS_FOR_CURRENCY_SIGN ((wchar_t) (UNICODE_0x80 + 0x1d))
 
 #define UNICODE_ALIAS_FOR_CURSOR_STR  "3.107"
 #define UNICODE_ALIAS_FOR_BLOCK_STR   "3.108"

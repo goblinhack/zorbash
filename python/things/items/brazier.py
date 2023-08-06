@@ -61,11 +61,11 @@ def tp_init(name, text_long_name, tiles=[]):
         colors = ["yellow", "red", "orange", "orange", "yellow", "white"]
         color = random.choice(colors)
         my.tile(self,
-                ascii_fg_char="#", ascii_bg_col_name="", ascii_fg_col_name=color,
+                ascii_fg_char="currency_sign", ascii_bg_col_name="", ascii_fg_col_name=color,
                 tile=t, delay_ms=delay)
 
     my.tile(self,
-            ascii_fg_char="#", ascii_bg_col_name="", ascii_fg_col_name="darkgray",
+            ascii_fg_char="currency_sign", ascii_bg_col_name="", ascii_fg_col_name="darkgray",
             tile=name + ".dead", is_dead=True, delay_ms=delay)
 
     my.tp_update(self)

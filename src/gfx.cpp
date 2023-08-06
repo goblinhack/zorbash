@@ -615,6 +615,7 @@ static void gfx_init_font_ascii(void)
       // DIAMOND_SOLID
       // CROSS
       // HALO
+      // CURRENCY_SIGN
       //////////////////////////////////////////////////////////////////
       "3.112",
       "3.113",

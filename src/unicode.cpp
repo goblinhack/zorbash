@@ -187,6 +187,9 @@ wchar_t unicode_alias_to_char(const std::string &s)
   if (s == "right_arrow") {
     return UNICODE_ALIAS_FOR_RIGHT_ARROW;
   }
+  if (s == "currency_sign") {
+    return UNICODE_ALIAS_FOR_CURRENCY_SIGN;
+  }
   if (s == "up_triangle") {
     return UNICODE_ALIAS_FOR_UP_TRIANGLE;
   }
@@ -365,7 +368,7 @@ wchar_t unicode_alias_to_char(wchar_t in)
     case UNICODE_ALIAS_FOR_DIAMOND_SOLID : return L'◆';
     case UNICODE_ALIAS_FOR_CROSS : return L'˟';
     case UNICODE_ALIAS_FOR_HALO : return L'º';
-    case UNICODE_0x9d : return UNICODE_0x9d;     /* 157   ? */
+    case UNICODE_ALIAS_FOR_CURRENCY_SIGN : return L'¤';
     case UNICODE_0x9e : return UNICODE_0x9e;     /* 158   ? */
     case UNICODE_0x9f : return UNICODE_0x9f;     /* 159   ? */
     case UNICODE_0xa0 : return UNICODE_0xa0;     /* 160     */
