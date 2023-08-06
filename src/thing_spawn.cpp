@@ -462,6 +462,7 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, i
       //
       bool skip = false;
       if (tpp->is_monst_pack()) {
+        TRACE_AND_INDENT();
         FOR_ALL_NON_INTERNAL_THINGS(level, it, x, y)
         {
           if (it->is_monst()) {
@@ -512,7 +513,12 @@ bool Thing::spawn_set_fire_to_things_around_me(const std::string &what, int radi
     radius = 1;
   }
 
-  auto tp = tp_find(what);
+  auto tp_cands = tp_find_wildcard(what);
+  auto tp       = pcg_one_of(tp_cands);
+  if (unlikely(! tp)) {
+    err("Cannot find %s to spawn", what.c_str());
+    return false;
+  }
 
   for (int dx = -radius; dx <= radius; dx++) {
     for (int dy = -radius; dy <= radius; dy++) {
@@ -553,6 +559,7 @@ bool Thing::spawn_set_fire_to_things_around_me(const std::string &what, int radi
         continue;
       }
 
+      TRACE_AND_INDENT();
       FOR_ALL_NON_INTERNAL_THINGS(level, it, x, y)
       {
         if (! it->is_combustible() && ! it->is_burnable() && ! it->is_able_to_melt()) {
@@ -562,6 +569,25 @@ bool Thing::spawn_set_fire_to_things_around_me(const std::string &what, int radi
         auto f = level->thing_new(what, point(x, y));
         if (f) {
           spawned_newborn(f);
+        }
+
+        if (it->is_player()) {
+          if (! it->is_on_fire()) {
+            if (it->on_fire_set("sparks")) {
+              it->msg("The fire spreads to your clothing!");
+            }
+          } else {
+            level->player->msg("You dance in the fire!");
+          }
+        }
+        if (it->is_alive_monst()) {
+          if (! it->is_on_fire()) {
+            if (it->on_fire_set("sparks")) {
+              it->msg("The fires spread to %s!", it->text_the().c_str());
+            }
+          } else {
+            it->msg("%s dances in the flames!", it->text_The().c_str());
+          }
         }
       }
       FOR_ALL_THINGS_END()
@@ -581,8 +607,6 @@ bool Thing::spawn_things_around_me(const std::string &what, int radius)
   if (! radius) {
     radius = 1;
   }
-
-  auto tp = tp_find(what);
 
   for (int dx = -radius; dx <= radius; dx++) {
     for (int dy = -radius; dy <= radius; dy++) {
@@ -615,33 +639,6 @@ bool Thing::spawn_things_around_me(const std::string &what, int radius)
         continue;
       }
 
-      if (level->is_obs_spawn(x, y, tp)) {
-        continue;
-      }
-
-      FOR_ALL_NON_INTERNAL_THINGS(level, it, x, y)
-      {
-        if (it->is_player()) {
-          if (! it->is_on_fire()) {
-            if (it->on_fire_set("sparks")) {
-              it->msg("The fire spread to your clothing!");
-            }
-          } else {
-            level->player->msg("You dance in the fire!");
-          }
-        }
-        if (it->is_alive_monst()) {
-          if (! it->is_on_fire()) {
-            if (it->on_fire_set("sparks")) {
-              it->msg("The fire spread to %s!", it->text_the().c_str());
-            }
-          } else {
-            it->msg("%s dances in the flames!", it->text_The().c_str());
-          }
-        }
-      }
-      FOR_ALL_THINGS_END()
-
       //
       // Don't place krakens on lava
       //
@@ -649,6 +646,10 @@ bool Thing::spawn_things_around_me(const std::string &what, int radius)
       auto tp       = pcg_one_of(tp_cands);
       if (! tp) {
         return false;
+      }
+
+      if (level->is_obs_spawn(x, y, tp)) {
+        continue;
       }
 
       if (tp->is_disliked_by_me(level, point(x, y))) {
@@ -807,39 +808,6 @@ bool Thing::spawn_gas_healing_around_thing(int radius)
   level->tick_gas_healing();
 
   return true;
-}
-
-Thingp Thing::spawn_at_if_possible(const std::string &what)
-{
-  dbg("Spawn at if possible: %s", what.c_str());
-  TRACE_AND_INDENT();
-
-  std::vector< point > possible;
-  auto                 x = curr_at.x;
-  auto                 y = curr_at.y;
-  auto                 p = point(x, y);
-
-  possible.push_back(p);
-
-  auto cands = possible.size();
-  if (! cands) {
-    return nullptr;
-  }
-
-  auto chosen = possible[ pcg_random_range(0, cands) ];
-
-  auto tp = tp_find(what);
-
-  if (level->is_obs_spawn(p, tp)) {
-    return nullptr;
-  }
-
-  auto it = level->thing_new(what, chosen);
-  if (it) {
-    spawned_newborn(it);
-  }
-
-  return it;
 }
 
 Thingp Thing::spawn_at(const std::string &what) { return spawn_at(what, curr_at); }

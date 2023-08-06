@@ -426,7 +426,6 @@ public:
   Thingp projectile_shoot_at(Thingp wand, const std::string &item, Thingp target);
   Thingp spawn_at(const std::string &what);
   Thingp spawn_at(const std::string &what, point p);
-  Thingp spawn_at_if_possible(const std::string &what);
   Thingp spawn_minion_at_my_position(const std::string &what);
   Thingp spawn_owned_thing_at_my_position(const std::string &what);
   Thingp top_mob(void);

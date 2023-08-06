@@ -9,7 +9,6 @@
 PyObject *if_matches_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *if_matches_then_dead_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *place_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *spawn_at_if_possible(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_at_my_position(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_set_fire_to_things_around_me(PyObject *obj, PyObject *args, PyObject *keywds);

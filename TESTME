@@ -54,12 +54,23 @@ do
   mkdir -p tests/$seed/expected_output/
 
   printf "%-60s ... " "Running seed ($seed)"
-  ./zorbash --seed $seed --test-dungeon-gen --ascii --monochrome > tests/$seed/output/console
+  CMD="./zorbash --seed $seed --test-dungeon-gen --ascii --monochrome"
+  $CMD > tests/$seed/output/console
   cp appdata/zorbash/stdout.txt tests/$seed/output/
+
+  grep -q segv_handler appdata/zorbash/*
+  if [ $? -eq 0 ]; then
+    printf "$RED[%s]$RESET\n" "CRASH"
+    echo Run the following to reproduce this:
+    echo $CMD
+    exit 1
+  fi
 
   grep -q ERROR appdata/zorbash/*
   if [ $? -eq 0 ]; then
     printf "$RED[%s]$RESET\n" "ERROR"
+    echo Run the following to reproduce this:
+    echo $CMD
     continue
   fi
 

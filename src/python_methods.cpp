@@ -278,7 +278,6 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(py_non_pcg_random_range_inclusive),
     MY_ADD_PYTHON_FUNCTION(py_pcg_random_range_inclusive),
     MY_ADD_PYTHON_FUNCTION(spawn_at),
-    MY_ADD_PYTHON_FUNCTION(spawn_at_if_possible),
     MY_ADD_PYTHON_FUNCTION(spawn_at_my_position),
     MY_ADD_PYTHON_FUNCTION(spawn_gas_healing_around_thing),
     MY_ADD_PYTHON_FUNCTION(spawn_gas_poison_around_thing),
