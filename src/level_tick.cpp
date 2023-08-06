@@ -121,6 +121,7 @@ void Level::handle_input_events(void)
 void Level::tick_(void)
 {
   TRACE_NO_INDENT();
+  DBG("Level tick");
 
   if (g_opt_test_dungeon_gen) {
     //
@@ -526,6 +527,9 @@ void Level::tick_(void)
       // No point in waiting any more.
       //
     } else {
+      //
+      // Keep waiting
+      //
       return;
     }
   }
@@ -719,6 +723,7 @@ void Level::tick_begin_now(void)
   // A new game event has occurred?
   //
   if (game->tick_requested.empty()) {
+    dbg("No tick requested");
     return;
   }
 

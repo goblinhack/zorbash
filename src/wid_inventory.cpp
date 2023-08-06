@@ -29,6 +29,16 @@ void wid_inventory_fini(bool remake)
   DBG2("Close inventory");
   TRACE_AND_INDENT();
 
+  auto level = game->get_current_level();
+  if (! level) {
+    return;
+  }
+
+  auto player = level->player;
+  if (! player) {
+    return;
+  }
+
   if (wid_inventory_thing_info) {
     DBG2("Close inventory; delete inventory thing info");
     delete wid_inventory_thing_info;
@@ -57,7 +67,9 @@ void wid_inventory_fini(bool remake)
     wid_destroy(&wid_inventory_window);
     game->set_request_to_remake_rightbar();
     if (! remake) {
-      game->change_state(Game::STATE_NORMAL, "inventory close");
+      player->change_state(MONST_STATE_IDLE, "closed inventory");
+      game->change_state(Game::STATE_NORMAL, "closed inventory");
+      game->tick_begin("closed inventory");
     }
   }
 }
