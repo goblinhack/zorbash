@@ -108,7 +108,8 @@ INI: Loaded
 INI: Load early gfx tiles, text, UI etc...
 FILE: Read (ramdisk) data/fonts/font-pixelart-small.tga, 0Mb, 10580 bytes
 FILE: Read (ramdisk) data/fonts/font-pixelart-large.tga, 0Mb, 10916 bytes
-FILE: Read (ramdisk) data/fonts/font-ascii.tga, 4Mb, 4324804 bytes
+FILE: Read data/fonts/font-ascii.tga, 4Mb, 4324801 bytes
+FILE: Read file data/fonts/font-ascii.tga (newer than src build)
 FILE: Read (ramdisk) data/gfx/ui/pixelart/pixelart_ui_box0.tga, 0Mb, 3276 bytes
 FILE: Read (ramdisk) data/gfx/ui/ascii/ascii_ui_box0.tga, 0Mb, 3276 bytes
 FILE: Read (ramdisk) data/gfx/ui/pixelart/pixelart_ui_box1.tga, 0Mb, 2824 bytes
@@ -14102,8 +14103,8 @@ Seed (apecastle) tick 127 begin (player moved): 1333E L0 player1/visply/mv 81,19
 |     Molekin       m                                                                   ##       ###·····#      Score     Move#  |
 |Health         8/8                                                                     #·       #·······#      000040    114    |
 |                                                                                       #…####  ##Ω······#          Vitality     |
-|     Molekin       m                                                                ####……··#  #········#     Health      20/100|
-|   (Attacking)                                                                      #·………∷··####········#     Stamina     91/100|
+|     Molekin       m                                                                ####……··#  #········#     Health      19/100|
+|   (Attacking)                                                                      #·………∷··####········#     Stamina     90/100|
 |Health        1/13                                                                     #…∷∷·············#     Magic        10/10|
 |                                                                                ########····####········#           Stats       |
 |    Heavy Rock     o                                                            #···∷∷###·###··#········#     Def10 Att10 Str10 |
@@ -14152,8 +14153,8 @@ Seed (apecastle) tick 128 begin (player moved): 1333E L0 player1/visply/mv 82,19
 |     Molekin       m                                                                   ##       ###·····#      Score     Move#  |
 |Health         8/8                                                                     #·       #·······#      000040    114    |
 |                                                                                       #…####  ##Ω······#          Vitality     |
-|     Molekin       m                                                                ####……··#  #········#     Health      20/100|
-|Hea(Attacking)1/13                                                                  #·………∷··####········#     Stamina     91/100|
+|     Molekin       m                                                                ####……··#  #········#     Health      19/100|
+|Hea(Attacking)1/13                                                                  #·………∷··####········#     Stamina     90/100|
 |Health        1/13                                                                     #…∷∷·············#     Magic        10/10|
 |    Heavy Rock     o                                                            ########····####········#           Stats       |
 |    Heavy Rock     o                                                            #···∷∷###·###··#········#     Def10 Att10 Str10 |
@@ -14198,8 +14199,8 @@ Seed (apecastle) tick 128 begin (player moved): 1333E L0 player1/visply/mv 82,19
 |     Molekin       m                                                                   ##       ###·····#      Score     Move#  |
 |Health         8/8                                                                     #·       #·······#      000040    115    |
 |                                                                                       #…####  ##Ω······#          Vitality     |
-|     Molekin       m                                                                ####……··#  #········#     Health      20/100|
-|Health        1/13                                                                  #·………∷··####········#     Stamina     91/100|
+|     Molekin       m                                                                ####……··#  #········#     Health      19/100|
+|Health        1/13                                                                  #·………∷··####········#     Stamina     90/100|
 |                                                                                       #…∷∷·············#     Magic        10/10|
 |    Heavy Rock     o                                                            ########····####········#           Stats       |
 |                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
@@ -14248,8 +14249,8 @@ Seed (apecastle) tick 129 begin (player moved): 1333E L0 player1/visply/mv 83,18
 |     Molekin       m                                                                   ##       ###·····#      Score     Move#  |
 |Health         8/8                                                                     #·       #·······#      000040    115    |
 |                                                                                       #…####  ##Ω······#          Vitality     |
-|     Molekin       m                                                                ####……··#  #········#     Health      20/100|
-|Health        1/13                                                                  #·………∷··####········#     Stamina     91/100|
+|     Molekin       m                                                                ####……··#  #········#     Health      19/100|
+|Health        1/13                                                                  #·………∷··####········#     Stamina     90/100|
 |                                                                                       #…∷∷·············#     Magic        10/10|
 |    Heavy Rock     o                                                            ########····####········#           Stats       |
 |                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
@@ -14296,7 +14297,7 @@ The molekin collects the heavy rock.
 |Health         8/8                                                                     #·       #·······#      000040    116    |
 |                                                                                       #…####  ##Ω······#          Vitality     |
 |     Molekin       m                                                                ####……··#  #········#     Health      19/100|
-|Health        1/13                                                                  #·………∷··####········#     Stamina     91/100|
+|Health        1/13                                                                  #·………∷··####········#     Stamina     90/100|
 |                                                                                       #…∷∷·············#     Magic        10/10|
 |    Heavy Rock                                                                  ########····####········#           Stats       |
 |                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
@@ -14342,7 +14343,7 @@ The molekin collects the heavy rock.
 |Health         8/8                                                                     #·       #·······#      000040    116    |
 |                                                                                       #…####  ##Ω······#          Vitality     |
 |     Molekin       m                                                                ####……··#  #········#     Health      19/100|
-|Health        0/13                                                                  #·………∷··####········#     Stamina     91/100|
+|Health        1/13                                                                  #·………∷··####········#     Stamina     90/100|
 |                                                                                       #…∷∷·············#     Magic        10/10|
 |                                                                                ########····####········#           Stats       |
 |                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
@@ -14381,7 +14382,7 @@ The molekin collects the heavy rock.
 Seed (apecastle) tick 129 end: 1333E L0 player1/visply 83,18
 -
 Seed (apecastle) tick requested (player moved): 1333E L0 player1/visply 83,18
-Seed (apecastle) tick 130 begin (player moved): 1333E L0 player1/visply/mv 83,17
+Seed (apecastle) tick 130 begin (player moved): 1333E L0 player1/visply/mv 84,18
 +--------------------------------------------------------------------------------------------------------------------------------+
 |The molekin strikes you for 7 impact damage with the heavy rock! The molekin collects the heavy rock.          Dungeon Level 0  |
 |The molekin collects the heavy rock. One of your torches fizzles out.                                             apecastle     |
@@ -14392,15 +14393,15 @@ Seed (apecastle) tick 130 begin (player moved): 1333E L0 player1/visply/mv 83,17
 |Health         8/8                                                                     #·       #·······#      000040    116    |
 |                                                                                       #…####  ##Ω······#          Vitality     |
 |     Molekin       m                                                                ####……··#  #········#     Health      19/100|
-|Health        0/13                                                                  #·………∷··####········#     Stamina     91/100|
+|Health        1/13                                                                  #·………∷··####········#     Stamina     90/100|
 |                                                                                       #…∷∷·············#     Magic        10/10|
 |                                                                                ########····####········#           Stats       |
 |                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
 |                                                                                #···∷∷#·#·#····#·······…#     Con10 Dex10 Lck10 |
 |                                                                                #··∷∷∷#·#·#·~~·###……………## #   Thv10 Psi10 Int10 |
 |                                                                                #·∷∷∷∷····#·~····#######··#        Equipped     |
-|                                                                             ····L∷∷∷·······~······@·om···#   Sword, Short      |
-|                                                                                 L∷∷#·#·········~~·o·····#    Boots, Fluffy     |
+|                                                                             ····L∷∷∷·······~········om···#   Sword, Short      |
+|                                                                                 L∷∷#·#·········~~·o@····#    Boots, Fluffy     |
 |                                                                                 L∷##…#######·~~~~·#####LL         Shortcuts    |
 |                                                                                   #……………···#·~m~~·#∷∷∷∷∷∷    1 Dart +1         |
 |                                                                                   #…######·#·~~~~··∷∷∷∷∷∷    2 Potted Meat     |
@@ -14429,28 +14430,29 @@ Seed (apecastle) tick 130 begin (player moved): 1333E L0 player1/visply/mv 83,17
 |Robot misses the molekin.                                                                                                       |
 +--------------------------------------------------------------------------------------------------------------------------------+
 The molekin shoots the heavy rock at the noble warrior.
-The molekin CRITS you for 8 impact damage!
-                                                                       13200 L0 molekin/visply 79,20:                     POPUP: It CRITS you -8
-                                                                       1333E L0 player1/visply 83,17:                     POPUP: -8
+The molekin strikes you for 6 impact damage with the heavy rock!
+                                                                       13200 L0 molekin/visply 79,20:                     POPUP: It strikes you -6
+                                                                       1333E L0 player1/visply 84,18:                     POPUP: -6
+The molekins heavy rocks is destroyed.
 +--------------------------------------------------------------------------------------------------------------------------------+
-|The molekin collects the heavy rock. One of your torches fizzles out.                                          Dungeon Level 0  |
-|The molekin shoots the heavy rock at the noble warrior.                                                           apecastle     |
-|The molekin strikes you for 10 impact damage with the heavy rock! The molekin collects the heavy rock.          Ser Deadsmith   |
-|The molekin shoots the heavy rock at the noble warrior. The molekin CRITS you for 8 impact damage!             Gold      Keys   |
+|The molekin shoots the heavy rock at the noble warrior.                                                        Dungeon Level 0  |
+|The molekin strikes you for 10 impact damage with the heavy rock! The molekin collects the heavy rock.            apecastle     |
+|The molekin shoots the heavy rock at the noble warrior.                                                         Ser Deadsmith   |
+|The molekin strikes you for 6 impact damage with the heavy rock! The molekins heavy rocks is destroyed.        Gold      Keys   |
 |                                                                                                   ##LL##      000000    0      |
 |     Molekin       m                                                                   ##       ###·····#      Score     Move#  |
 |Healthtacking) 8/8                                                                     #·       #·······#      000040    117    |
 |Health         8/8                                                                     #…####  ##Ω······#          Vitality     |
 |     Molekin       m                                                                ####……··#  #········#     Health      18/100|
-|Healtholekin  0/13 m                                                                #·………∷··####········#     Stamina     91/100|
+|Healtholekin  1/13 m                                                                #·………∷··####········#     Stamina     90/100|
 |Health        0/13                                                                     #…∷∷·············#     Magic        10/10|
 |                                                                                ########····####········#           Stats       |
-|    Heavy Rock     o                                                            #···∷∷###·###··#········#     Def10 Att10 Str10 |
+|                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
 |                                                                                #···∷∷#·#·#····#·······…#     Con10 Dex10 Lck10 |
 |                                                                                #··∷∷∷#·#·#·~~·###……………## #   Thv10 Psi10 Int10 |
 |                                                                                #·∷∷∷∷····#·~····#######··#        Equipped     |
-|                                                                             ····L∷∷∷·······~······@··om··#   Sword, Short      |
-|                                                                                 L∷∷#·#·········~~·o·····##   Boots, Fluffy     |
+|                                                                             ····L∷∷∷·······~········oom··#   Sword, Short      |
+|                                                                                 L∷∷#·#·········~~·o@····#    Boots, Fluffy     |
 |                                                                                 L∷##…#######·~~~~·#####LL         Shortcuts    |
 |                                                                                   #……………···#·~m~~·#∷∷∷∷∷∷    1 Dart +1         |
 |                                                                                   #…######·#·~~~~··∷∷∷∷∷∷    2 Potted Meat     |
@@ -14479,26 +14481,264 @@ The molekin CRITS you for 8 impact damage!
 |Robot misses the molekin.                                                                                                       |
 +--------------------------------------------------------------------------------------------------------------------------------+
 +--------------------------------------------------------------------------------------------------------------------------------+
-|The molekin collects the heavy rock. One of your torches fizzles out.                                          Dungeon Level 0  |
-|The molekin shoots the heavy rock at the noble warrior.                                                           apecastle     |
-|The molekin strikes you for 10 impact damage with the heavy rock! The molekin collects the heavy rock.          Ser Deadsmith   |
-|The molekin shoots the heavy rock at the noble warrior. The molekin CRITS you for 8 impact damage!             Gold      Keys   |
+|The molekin shoots the heavy rock at the noble warrior.                                                        Dungeon Level 0  |
+|The molekin strikes you for 10 impact damage with the heavy rock! The molekin collects the heavy rock.            apecastle     |
+|The molekin shoots the heavy rock at the noble warrior.                                                         Ser Deadsmith   |
+|The molekin strikes you for 6 impact damage with the heavy rock! The molekins heavy rocks is destroyed.        Gold      Keys   |
 |                                                                                                   ##LL##      000000    0      |
 |     Molekin       m                                                                   ##       ###·····#      Score     Move#  |
-|   (Attacking)                                                                         #·       #·······#      000048    117    |
+|   (Attacking)                                                                         #·       #·······#      000046    117    |
 |Health         8/8                                                                     #…####  ##Ω······#          Vitality     |
-|                                                                                    ####……··#  #········#     Health       1/100|
+|                                                                                    ####……··#  #········#     Health       6/100|
+|     Molekin       m                                                                #·………∷··####········#     Stamina     90/100|
+|Health        0/13                                                                     #…∷∷·············#     Magic        10/10|
+|                                                                                ########····####········#           Stats       |
+|                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
+|                                                                                #···∷∷#·#·#····#·······…#     Con10 Dex10 Lck10 |
+|                                                                                #··∷∷∷#·#·#·~~·###……………## #   Thv10 Psi10 Int10 |
+|                                                                                #·∷∷∷∷····#·~····#######··#        Equipped     |
+|                                                                             ····L∷∷∷·······~········oom··#   Sword, Short      |
+|                                                                                 L∷∷#·#·········~~·o@····#    Boots, Fluffy     |
+|                                                                                 L∷##…#######·~~~~·#####LL         Shortcuts    |
+|                                                                                   #……………···#·~m~~·#∷∷∷∷∷∷    1 Dart +1         |
+|                                                                                   #…######·#·~~~~··∷∷∷∷∷∷    2 Potted Meat     |
+|                                                                                   ·…#     ·#·~~~··L∷∷∷∷∷∷#   3 Torch           |
+|                                                                                  ·#·#      #·~~~·LL∷∷∷∷∷∷#   4 Withered Fungus |
+|                                                                                   #·#      #·~~··L·∷∷∷∷∷∷#          Buffs      |
+|                                                                                   #··      #·~··ψ··∷∷∷∷∷∷#   Full              |
+|                                                                                   #·#   ####···L····∷∷∷∷∷L         Status      |
+|                                                                                         #·····#Lψ···#∷∷∷∷L   Critical          |
+|                                                                                         #····##·····## ∷∷                      |
+|                                                                                      ······####··~~··##                        |
+|                                                                                     ~~~~·## ##··~~~~··#                        |
+|                                                                                    ~~~~··   L··~~···~·#                        |
+|                                                                                    ·~~··    L·~~~·ψ·~·#                        |
+|                                                                                    ·~~·     #··~~·····#                        |
+|                                                                                     ~~      ##··~~~··##                        |
+|                                                                                              LL··~··L#                         |
+|                                                                                               ##···LL                          |
+|                                                                                                LL·#L                           |
+|                                                                                                ∷··∷∷                           |
+|                                                                                               ∷∷∷··∷∷                          |
+|                                                                                              ∷∷∷∷··∷∷∷                         |
+|                                                                                             L∷∷∷···∷∷∷∷                        |
+|                                                                                             L####L#####                        |
+|                                                         Quit     Robo                                                          |
+|Robot misses the molekin.                                                                                                       |
++--------------------------------------------------------------------------------------------------------------------------------+
+Seed (apecastle) tick 130 end: 1333E L0 player1/visply 84,18
+-
+Seed (apecastle) tick requested (Robot needs to rest, very low on health): 1333E L0 player1/visply 84,18
+Seed (apecastle) tick 131 begin (Robot needs to rest, very low on health): 1333E L0 player1/visply 84,18
++--------------------------------------------------------------------------------------------------------------------------------+
+|The molekin shoots the heavy rock at the noble warrior.                                                        Dungeon Level 0  |
+|The molekin strikes you for 10 impact damage with the heavy rock! The molekin collects the heavy rock.            apecastle     |
+|The molekin shoots the heavy rock at the noble warrior.                                                         Ser Deadsmith   |
+|The molekin strikes you for 6 impact damage with the heavy rock! The molekins heavy rocks is destroyed.        Gold      Keys   |
+|                                                                                                   ##LL##      000000    0      |
+|     Molekin       m                                                                   ##       ###·····#      Score     Move#  |
+|   (Attacking)                                                                         #·       #·······#      000046    117    |
+|Health         8/8                                                                     #…####  ##Ω······#          Vitality     |
+|                                                                                    ####……··#  #········#     Health       6/100|
+|     Molekin       m                                                                #·………∷··####········#     Stamina     90/100|
+|Health        0/13                                                                     #…∷∷·············#     Magic        10/10|
+|                                                                                ########····####········#           Stats       |
+|                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
+|                                                                                #···∷∷#·#·#····#·······…#     Con10 Dex10 Lck10 |
+|                                                                                #··∷∷∷#·#·#·~~·###……………## #   Thv10 Psi10 Int10 |
+|                                                                                #·∷∷∷∷····#·~····#######··#        Equipped     |
+|                                                                             ····L∷∷∷·······~········oom··#   Sword, Short      |
+|                                                                                 L∷∷#·#·········~~··@····#    Boots, Fluffy     |
+|                                                                                 L∷##…#######·~~~~·#####LL         Shortcuts    |
+|                                                                                   #……………···#·~m~~·#∷∷∷∷∷∷    1 Dart +1         |
+|                                                                                   #…######·#·~~~~··∷∷∷∷∷∷    2 Potted Meat     |
+|                                                                                   ·…#     ·#·~~~··L∷∷∷∷∷∷#   3 Torch           |
+|                                                                                  ·#·#      #·~~~·LL∷∷∷∷∷∷#   4 Withered Fungus |
+|                                                                                   #·#      #·~~··L·∷∷∷∷∷∷#          Buffs      |
+|                                                                                   #··      #·~··ψ··∷∷∷∷∷∷#   Full              |
+|                                                                                   #·#   ####···L····∷∷∷∷∷L         Status      |
+|                                                                                         #·····#Lψ···#∷∷∷∷L   Critical          |
+|                                                                                         #····##·····## ∷∷                      |
+|                                                                                      ······####··~~··##                        |
+|                                                                                     ~~~~·## ##··~~~~··#                        |
+|                                                                                    ~~~~··   L··~~···~·#                        |
+|                                                                                    ·~~··    L·~~~·ψ·~·#                        |
+|                                                                                    ·~~·     #··~~·····#                        |
+|                                                                                     ~~      ##··~~~··##                        |
+|                                                                                              LL··~··L#                         |
+|                                                                                               ##···LL                          |
+|                                                                                                LL·#L                           |
+|                                                                                                ∷··∷∷                           |
+|                                                                                               ∷∷∷··∷∷                          |
+|                                                                                              ∷∷∷∷··∷∷∷                         |
+|                                                                                             L∷∷∷···∷∷∷∷                        |
+|                                                                                             L####L#####                        |
+|                                                         Quit     Robo                                                          |
+|Robot misses the molekin.                                                                                                       |
++--------------------------------------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------+
+|The molekin shoots the heavy rock at the noble warrior.                                                        Dungeon Level 0  |
+|The molekin strikes you for 10 impact damage with the heavy rock! The molekin collects the heavy rock.            apecastle     |
+|The molekin shoots the heavy rock at the noble warrior.                                                         Ser Deadsmith   |
+|The molekin strikes you for 6 impact damage with the heavy rock! The molekins heavy rocks is destroyed.        Gold      Keys   |
+|                                                                                                   ##LL##      000000    0      |
+|     Molekin       m                                                                   ##       ###·····#      Score     Move#  |
+|   (Attacking)                                                                         #·       #·······#      000046    117    |
+|Healthunting)  8/8                                                                     #…####  ##Ω······#          Vitality     |
+|Health         8/8                                                                  ####……··#  #········#     Health       6/100|
+|     Molekin       m                                                                #·………∷··####········#     Stamina     90/100|
+|Healtholekin  0/13 m                                                                   #…∷∷·············#     Magic        10/10|
+|Health        0/13                                                              ########····####········#           Stats       |
+|                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
+|                                                                                #···∷∷#·#·#····#·······…#     Con10 Dex10 Lck10 |
+|                                                                                #··∷∷∷#·#·#·~~·###……………## #   Thv10 Psi10 Int10 |
+|                                                                                #·∷∷∷∷····#·~····#######··#        Equipped     |
+|                                                                             ····L∷∷∷·······~··········om·#   Sword, Short      |
+|                                                                                 L∷∷#·#·········~~··@····#    Boots, Fluffy     |
+|                                                                                 L∷##…#######·~m~~·#####LL         Shortcuts    |
+|                                                                                   #……………···#·~~~~·#∷∷∷∷∷∷    1 Dart +1         |
+|                                                                                   #…######·#·~~~~··∷∷∷∷∷∷    2 Potted Meat     |
+|                                                                                   ·…#     ·#·~~~··L∷∷∷∷∷∷#   3 Torch           |
+|                                                                                  ·#·#      #·~~~·LL∷∷∷∷∷∷#   4 Withered Fungus |
+|                                                                                   #·#      #·~~··L·∷∷∷∷∷∷#          Buffs      |
+|                                                                                   #··      #·~··ψ··∷∷∷∷∷∷#   Full              |
+|                                                                                   #·#   ####···L····∷∷∷∷∷L         Status      |
+|                                                                                         #·····#Lψ···#∷∷∷∷L   Critical          |
+|                                                                                         #····##·····## ∷∷                      |
+|                                                                                      ······####··~~··##                        |
+|                                                                                     ~~~~·## ##··~~~~··#                        |
+|                                                                                    ~~~~··   L··~~···~·#                        |
+|                                                                                    ·~~··    L·~~~·ψ·~·#                        |
+|                                                                                    ·~~·     #··~~·····#                        |
+|                                                                                     ~~      ##··~~~··##                        |
+|                                                                                              LL··~··L#                         |
+|                                                                                               ##···LL                          |
+|                                                                                                LL·#L                           |
+|                                                                                                ∷··∷∷                           |
+|                                                                                               ∷∷∷··∷∷                          |
+|                                                                                              ∷∷∷∷··∷∷∷                         |
+|                                                                                             L∷∷∷···∷∷∷∷                        |
+|                                                                                             L####L#####                        |
+|                                                         Quit     Robo                                                          |
+|Robot misses the molekin.                                                                                                       |
++--------------------------------------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------+
+|The molekin shoots the heavy rock at the noble warrior.                                                        Dungeon Level 0  |
+|The molekin strikes you for 10 impact damage with the heavy rock! The molekin collects the heavy rock.            apecastle     |
+|The molekin shoots the heavy rock at the noble warrior.                                                         Ser Deadsmith   |
+|The molekin strikes you for 6 impact damage with the heavy rock! The molekins heavy rocks is destroyed.        Gold      Keys   |
+|                                                                                                   ##LL##      000000    0      |
+|     Molekin       m                                                                   ##       ###·····#      Score     Move#  |
+|   (Attacking)                                                                         #·       #·······#      000046    117    |
+|    (Hunting)                                                                          #…####  ##Ω······#          Vitality     |
+|Health         8/8                                                                  ####……··#  #········#     Health       6/100|
+|                                                                                    #·………∷··####········#     Stamina     90/100|
+|     Molekin       m                                                                   #…∷∷·············#     Magic        10/10|
+|Health        0/13                                                              ########····####········#           Stats       |
+|                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
+|                                                                                #···∷∷#·#·#····#·······…#     Con10 Dex10 Lck10 |
+|                                                                                #··∷∷∷#·#·#·~~·###……………## #   Thv10 Psi10 Int10 |
+|                                                                                #·∷∷∷∷····#·~····#######··#        Equipped     |
+|                                                                             ····L∷∷∷·······~··········om·#   Sword, Short      |
+|                                                                                 L∷∷#·#·········~~··@····#    Boots, Fluffy     |
+|                                                                                 L∷##…#######·~m~~·#####LL         Shortcuts    |
+|                                                                                   #……………···#·~~~~·#∷∷∷∷∷∷    1 Dart +1         |
+|                                                                                   #…######·#·~~~~··∷∷∷∷∷∷    2 Potted Meat     |
+|                                                                                   ·…#     ·#·~~~··L∷∷∷∷∷∷#   3 Torch           |
+|                                                                                  ·#·#      #·~~~·LL∷∷∷∷∷∷#   4 Withered Fungus |
+|                                                                                   #·#      #·~~··L·∷∷∷∷∷∷#          Buffs      |
+|                                                                                   #··      #·~··ψ··∷∷∷∷∷∷#   Full              |
+|                                                                                   #·#   ####···L····∷∷∷∷∷L         Status      |
+|                                                                                         #·····#Lψ···#∷∷∷∷L   Critical          |
+|                                                                                         #····##·····## ∷∷                      |
+|                                                                                      ······####··~~··##                        |
+|                                                                                     ~~~~·## ##··~~~~··#                        |
+|                                                                                    ~~~~··   L··~~···~·#                        |
+|                                                                                    ·~~··    L·~~~·ψ·~·#                        |
+|                                                                                    ·~~·     #··~~·····#                        |
+|                                                                                     ~~      ##··~~~··##                        |
+|                                                                                              LL··~··L#                         |
+|                                                                                               ##···LL                          |
+|                                                                                                LL·#L                           |
+|                                                                                                ∷··∷∷                           |
+|                                                                                               ∷∷∷··∷∷                          |
+|                                                                                              ∷∷∷∷··∷∷∷                         |
+|                                                                                             L∷∷∷···∷∷∷∷                        |
+|                                                                                             L####L#####                        |
+|                                                         Quit     Robo                                                          |
+|Robot misses the molekin.                                                                                                       |
++--------------------------------------------------------------------------------------------------------------------------------+
+Seed (apecastle) tick 131 end: 1333E L0 player1/visply 84,18
+-
+Seed (apecastle) tick requested (Robot needs to rest, very low on health): 1333E L0 player1/visply 84,18
+Seed (apecastle) tick 132 begin (Robot needs to rest, very low on health): 1333E L0 player1/visply 84,18
++--------------------------------------------------------------------------------------------------------------------------------+
+|The molekin shoots the heavy rock at the noble warrior.                                                        Dungeon Level 0  |
+|The molekin strikes you for 10 impact damage with the heavy rock! The molekin collects the heavy rock.            apecastle     |
+|The molekin shoots the heavy rock at the noble warrior.                                                         Ser Deadsmith   |
+|The molekin strikes you for 6 impact damage with the heavy rock! The molekins heavy rocks is destroyed.        Gold      Keys   |
+|                                                                                                   ##LL##      000000    0      |
+|     Molekin       m                                                                   ##       ###·····#      Score     Move#  |
+|   (Attacking)                                                                         #·       #·······#      000046    117    |
+|Heal(Hunting)  8/8                                                                     #…####  ##Ω······#          Vitality     |
+|Health         8/8                                                                  ####……··#  #········#     Health       6/100|
+|     Molekin       m                                                                #·………∷··####········#     Stamina     90/100|
+|HealtMolekin  0/13 m                                                                   #…∷∷·············#     Magic        10/10|
+|Health        0/13                                                              ########····####········#           Stats       |
+|                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
+|                                                                                #···∷∷#·#·#····#·······…#     Con10 Dex10 Lck10 |
+|                                                                                #··∷∷∷#·#·#·~~·###……………## #   Thv10 Psi10 Int10 |
+|                                                                                #·∷∷∷∷····#·~····#######··#        Equipped     |
+|                                                                             ····L∷∷∷·······~··········om·#   Sword, Short      |
+|                                                                                 L∷∷#·#·········~~··@····#    Boots, Fluffy     |
+|                                                                                 L∷##…#######·~m~~·#####LL         Shortcuts    |
+|                                                                                   #……………···#·~~~~·#∷∷∷∷∷∷    1 Dart +1         |
+|                                                                                   #…######·#·~~~~··∷∷∷∷∷∷    2 Potted Meat     |
+|                                                                                   ·…#     ·#·~~~··L∷∷∷∷∷∷#   3 Torch           |
+|                                                                                  ·#·#      #·~~~·LL∷∷∷∷∷∷#   4 Withered Fungus |
+|                                                                                   #·#      #·~~··L·∷∷∷∷∷∷#          Buffs      |
+|                                                                                   #··      #·~··ψ··∷∷∷∷∷∷#   Full              |
+|                                                                                   #·#   ####···L····∷∷∷∷∷L         Status      |
+|                                                                                         #·····#Lψ···#∷∷∷∷L   Critical          |
+|                                                                                         #····##·····## ∷∷                      |
+|                                                                                      ······####··~~··##                        |
+|                                                                                     ~~~~·## ##··~~~~··#                        |
+|                                                                                    ~~~~··   L··~~···~·#                        |
+|                                                                                    ·~~··    L·~~~·ψ·~·#                        |
+|                                                                                    ·~~·     #··~~·····#                        |
+|                                                                                     ~~      ##··~~~··##                        |
+|                                                                                              LL··~··L#                         |
+|                                                                                               ##···LL                          |
+|                                                                                                LL·#L                           |
+|                                                                                                ∷··∷∷                           |
+|                                                                                               ∷∷∷··∷∷                          |
+|                                                                                              ∷∷∷∷··∷∷∷                         |
+|                                                                                             L∷∷∷···∷∷∷∷                        |
+|                                                                                             L####L#####                        |
+|                                                         Quit     Robo                                                          |
+|Robot misses the molekin.                                                                                                       |
++--------------------------------------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------+
+|The molekin shoots the heavy rock at the noble warrior.                                                        Dungeon Level 0  |
+|The molekin strikes you for 10 impact damage with the heavy rock! The molekin collects the heavy rock.            apecastle     |
+|The molekin shoots the heavy rock at the noble warrior.                                                         Ser Deadsmith   |
+|The molekin strikes you for 6 impact damage with the heavy rock! The molekins heavy rocks is destroyed.        Gold      Keys   |
+|                                                                                                   ##LL##      000000    0      |
+|     Molekin       m                                                                   ##       ###·····#      Score     Move#  |
+|    (Hunting)                                                                          #·       #·······#      000046    117    |
+|Health         8/8                                                                     #…####  ##Ω······#          Vitality     |
+|                                                                                    ####……··#  #········#     Health       7/100|
 |     Molekin       m                                                                #·………∷··####········#     Stamina     91/100|
 |Health        0/13                                                                     #…∷∷·············#     Magic        10/10|
 |                                                                                ########····####········#           Stats       |
-|    Heavy Rock     o                                                            #···∷∷###·###··#········#     Def10 Att10 Str10 |
+|                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
 |                                                                                #···∷∷#·#·#····#·······…#     Con10 Dex10 Lck10 |
 |                                                                                #··∷∷∷#·#·#·~~·###……………## #   Thv10 Psi10 Int10 |
 |                                                                                #·∷∷∷∷····#·~····#######··#        Equipped     |
-|                                                                             ····L∷∷∷·······~······@··om··#   Sword, Short      |
-|                                                                                 L∷∷#·#·········~~·o·····##   Boots, Fluffy     |
+|                                                                             ····L∷∷∷·······~············m#   Sword, Short      |
+|                                                                                 L∷∷#·#·········m~··@····#    Boots, Fluffy     |
 |                                                                                 L∷##…#######·~~~~·#####LL         Shortcuts    |
-|                                                                                   #……………···#·~m~~·#∷∷∷∷∷∷    1 Dart +1         |
+|                                                                                   #……………···#·~~~~·#∷∷∷∷∷∷    1 Dart +1         |
 |                                                                                   #…######·#·~~~~··∷∷∷∷∷∷    2 Potted Meat     |
 |                                                                                   ·…#     ·#·~~~··L∷∷∷∷∷∷#   3 Torch           |
 |                                                                                  ·#·#      #·~~~·LL∷∷∷∷∷∷#   4 Withered Fungus |
@@ -14524,40 +14764,572 @@ The molekin CRITS you for 8 impact damage!
 |                                                         Quit     Robo                                                          |
 |Robot misses the molekin.                                                                                                       |
 +--------------------------------------------------------------------------------------------------------------------------------+
-Seed (apecastle) tick 130 end: 1333E L0 player1/visply 83,17
+Seed (apecastle) tick 132 end: 1333E L0 player1/visply 84,18
 -
-Seed (apecastle) tick requested (Robot needs to rest, very low on health): 1333E L0 player1/visply 83,17
-Seed (apecastle) tick 131 begin (Robot needs to rest, very low on health): 1333E L0 player1/visply 83,17
+Seed (apecastle) tick requested (Robot needs to rest, very low on health): 1333E L0 player1/visply 84,18
+Seed (apecastle) tick 133 begin (Robot needs to rest, very low on health): 1333E L0 player1/visply 84,18
++--------------------------------------------------------------------------------------------------------------------------------+
+|The molekin shoots the heavy rock at the noble warrior.                                                        Dungeon Level 0  |
+|The molekin strikes you for 10 impact damage with the heavy rock! The molekin collects the heavy rock.            apecastle     |
+|The molekin shoots the heavy rock at the noble warrior.                                                         Ser Deadsmith   |
+|The molekin strikes you for 6 impact damage with the heavy rock! The molekins heavy rocks is destroyed.        Gold      Keys   |
+|                                                                                                   ##LL##      000000    0      |
+|     Molekin       m                                                                   ##       ###·····#      Score     Move#  |
+|    (Hunting)                                                                          #·       #·······#      000046    117    |
+|Health         8/8                                                                     #…####  ##Ω······#          Vitality     |
+|                                                                                    ####……··#  #········#     Health       8/100|
+|     Molekin       m                                                                #·………∷··####········#     Stamina     92/100|
+|Health        0/13                                                                     #…∷∷·············#     Magic        10/10|
+|                                                                                ########····####········#           Stats       |
+|                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
+|                                                                                #···∷∷#·#·#····#·······…#     Con10 Dex10 Lck10 |
+|                                                                                #··∷∷∷#·#·#·~~·###……………## #   Thv10 Psi10 Int10 |
+|                                                                                #·∷∷∷∷····#·~····#######·m#        Equipped     |
+|                                                                             ····L∷∷∷·······~············o#   Sword, Short      |
+|                                                                                 L∷∷#·#·········~m··@····#    Boots, Fluffy     |
+|                                                                                 L∷##…#######·~~~~·#####LL         Shortcuts    |
+|                                                                                   #……………···#·~~~~·#∷∷∷∷∷∷    1 Dart +1         |
+|                                                                                   #…######·#·~~~~··∷∷∷∷∷∷    2 Potted Meat     |
+|                                                                                   ·…#     ·#·~~~··L∷∷∷∷∷∷#   3 Torch           |
+|                                                                                  ·#·#      #·~~~·LL∷∷∷∷∷∷#   4 Withered Fungus |
+|                                                                                   #·#      #·~~··L·∷∷∷∷∷∷#          Buffs      |
+|                                                                                   #··      #·~··ψ··∷∷∷∷∷∷#   Full              |
+|                                                                                   #·#   ####···L····∷∷∷∷∷L         Status      |
+|                                                                                         #·····#Lψ···#∷∷∷∷L   Critical          |
+|                                                                                         #····##·····## ∷∷                      |
+|                                                                                      ······####··~~··##                        |
+|                                                                                     ~~~~·## ##··~~~~··#                        |
+|                                                                                    ~~~~··   L··~~···~·#                        |
+|                                                                                    ·~~··    L·~~~·ψ·~·#                        |
+|                                                                                    ·~~·     #··~~·····#                        |
+|                                                                                     ~~      ##··~~~··##                        |
+|                                                                                              LL··~··L#                         |
+|                                                                                               ##···LL                          |
+|                                                                                                LL·#L                           |
+|                                                                                                ∷··∷∷                           |
+|                                                                                               ∷∷∷··∷∷                          |
+|                                                                                              ∷∷∷∷··∷∷∷                         |
+|                                                                                             L∷∷∷···∷∷∷∷                        |
+|                                                                                             L####L#####                        |
+|                                                         Quit     Robo                                                          |
+|Robot misses the molekin.                                                                                                       |
++--------------------------------------------------------------------------------------------------------------------------------+
+Seed (apecastle) tick 133 end: 1333E L0 player1/visply 84,18
+-
+Seed (apecastle) tick requested (Robot needs to rest, very low on health): 1333E L0 player1/visply 84,18
+Seed (apecastle) tick 134 begin (Robot needs to rest, very low on health): 1333E L0 player1/visply 84,18
++--------------------------------------------------------------------------------------------------------------------------------+
+|The molekin shoots the heavy rock at the noble warrior.                                                        Dungeon Level 0  |
+|The molekin strikes you for 10 impact damage with the heavy rock! The molekin collects the heavy rock.            apecastle     |
+|The molekin shoots the heavy rock at the noble warrior.                                                         Ser Deadsmith   |
+|The molekin strikes you for 6 impact damage with the heavy rock! The molekins heavy rocks is destroyed.        Gold      Keys   |
+|                                                                                                   ##LL##      000000    0      |
+|     Molekin       m                                                                   ##       ###·····#      Score     Move#  |
+|    (Hunting)                                                                          #·       #·······#      000046    117    |
+|Health         8/8                                                                     #…####  ##Ω······#          Vitality     |
+|                                                                                    ####……··#  #········#     Health       9/100|
+|     Molekin                                                                        #·………∷··####········#     Stamina     93/100|
+|Health        0/13                                                                     #…∷∷·············#     Magic        10/10|
+|                                                                                ########····####········#           Stats       |
+|                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
+|                                                                                #···∷∷#·#·#····#·······…#     Con10 Dex10 Lck10 |
+|                                                                                #··∷∷∷#·#·#·~~·###……………## #   Thv10 Psi10 Int10 |
+|                                                                                #·∷∷∷∷····#·~····#######·o#        Equipped     |
+|                                                                             ····L∷∷∷·······~·············#   Sword, Short      |
+|                                                                                 L∷∷#·#·········~~m·@····#    Boots, Fluffy     |
+|                                                                                 L∷##…#######·~~~~·#####LL         Shortcuts    |
+|                                                                                   #……………···#·~~~~·#∷∷∷∷∷∷    1 Dart +1         |
+|                                                                                   #…######·#·~~~~··∷∷∷∷∷∷    2 Potted Meat     |
+|                                                                                   ·…#     ·#·~~~··L∷∷∷∷∷∷#   3 Torch           |
+|                                                                                  ·#·#      #·~~~·LL∷∷∷∷∷∷#   4 Withered Fungus |
+|                                                                                   #·#      #·~~··L·∷∷∷∷∷∷#          Buffs      |
+|                                                                                   #··      #·~··ψ··∷∷∷∷∷∷#   Full              |
+|                                                                                   #·#   ####···L····∷∷∷∷∷L         Status      |
+|                                                                                         #·····#Lψ···#∷∷∷∷L   Critical          |
+|                                                                                         #····##·····## ∷∷                      |
+|                                                                                      ······####··~~··##                        |
+|                                                                                     ~~~~·## ##··~~~~··#                        |
+|                                                                                    ~~~~··   L··~~···~·#                        |
+|                                                                                    ·~~··    L·~~~·ψ·~·#                        |
+|                                                                                    ·~~·     #··~~·····#                        |
+|                                                                                     ~~      ##··~~~··##                        |
+|                                                                                              LL··~··L#                         |
+|                                                                                               ##···LL                          |
+|                                                                                                LL·#L                           |
+|                                                                                                ∷··∷∷                           |
+|                                                                                               ∷∷∷··∷∷                          |
+|                                                                                              ∷∷∷∷··∷∷∷                         |
+|                                                                                             L∷∷∷···∷∷∷∷                        |
+|                                                                                             L####L#####                        |
+|                                                         Quit     Robo                                                          |
+|Robot misses the molekin.                                                                                                       |
++--------------------------------------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------+
+|The molekin shoots the heavy rock at the noble warrior.                                                        Dungeon Level 0  |
+|The molekin strikes you for 10 impact damage with the heavy rock! The molekin collects the heavy rock.            apecastle     |
+|The molekin shoots the heavy rock at the noble warrior.                                                         Ser Deadsmith   |
+|The molekin strikes you for 6 impact damage with the heavy rock! The molekins heavy rocks is destroyed.        Gold      Keys   |
+|                                                                                                   ##LL##      000000    0      |
+|     Molekin       m                                                                   ##       ###·····#      Score     Move#  |
+|    (Hunting)                                                                          #·       #·······#      000046    117    |
+|Health         8/8                                                                     #…####  ##Ω······#          Vitality     |
+|                                                                                    ####……··#  #········#     Health       9/100|
+|                                                                                    #·………∷··####········#     Stamina     93/100|
+|                                                                                       #…∷∷·············#     Magic        10/10|
+|                                                                                ########····####········#           Stats       |
+|                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
+|                                                                                #···∷∷#·#·#····#·······…#     Con10 Dex10 Lck10 |
+|                                                                                #··∷∷∷#·#·#·~~·###……………## #   Thv10 Psi10 Int10 |
+|                                                                                #·∷∷∷∷····#·~····#######·o#        Equipped     |
+|                                                                             ····L∷∷∷·······~·············#   Sword, Short      |
+|                                                                                 L∷∷#·#·········~~m·@····#    Boots, Fluffy     |
+|                                                                                 L∷##…#######·~~~~·#####LL         Shortcuts    |
+|                                                                                   #……………···#·~~~~·#∷∷∷∷∷∷    1 Dart +1         |
+|                                                                                   #…######·#·~~~~··∷∷∷∷∷∷    2 Potted Meat     |
+|                                                                                   ·…#     ·#·~~~··L∷∷∷∷∷∷#   3 Torch           |
+|                                                                                  ·#·#      #·~~~·LL∷∷∷∷∷∷#   4 Withered Fungus |
+|                                                                                   #·#      #·~~··L·∷∷∷∷∷∷#          Buffs      |
+|                                                                                   #··      #·~··ψ··∷∷∷∷∷∷#   Full              |
+|                                                                                   #·#   ####···L····∷∷∷∷∷L         Status      |
+|                                                                                         #·····#Lψ···#∷∷∷∷L   Critical          |
+|                                                                                         #····##·····## ∷∷                      |
+|                                                                                      ······####··~~··##                        |
+|                                                                                     ~~~~·## ##··~~~~··#                        |
+|                                                                                    ~~~~··   L··~~···~·#                        |
+|                                                                                    ·~~··    L·~~~·ψ·~·#                        |
+|                                                                                    ·~~·     #··~~·····#                        |
+|                                                                                     ~~      ##··~~~··##                        |
+|                                                                                              LL··~··L#                         |
+|                                                                                               ##···LL                          |
+|                                                                                                LL·#L                           |
+|                                                                                                ∷··∷∷                           |
+|                                                                                               ∷∷∷··∷∷                          |
+|                                                                                              ∷∷∷∷··∷∷∷                         |
+|                                                                                             L∷∷∷···∷∷∷∷                        |
+|                                                                                             L####L#####                        |
+|                                                         Quit     Robo                                                          |
+|Robot misses the molekin.                                                                                                       |
++--------------------------------------------------------------------------------------------------------------------------------+
+Seed (apecastle) tick 134 end: 1333E L0 player1/visply 84,18
+-
+Seed (apecastle) tick requested (player moved): 1333E L0 player1/visply 84,18
+Seed (apecastle) tick 135 begin (player moved): 1333E L0 player1/visply/mv 85,18
++--------------------------------------------------------------------------------------------------------------------------------+
+|The molekin shoots the heavy rock at the noble warrior.                                                        Dungeon Level 0  |
+|The molekin strikes you for 10 impact damage with the heavy rock! The molekin collects the heavy rock.            apecastle     |
+|The molekin shoots the heavy rock at the noble warrior.                                                         Ser Deadsmith   |
+|The molekin strikes you for 6 impact damage with the heavy rock! The molekins heavy rocks is destroyed.        Gold      Keys   |
+|                                                                                                   ##LL##      000000    0      |
+|     Molekin       m                                                                   ##       ###·····#      Score     Move#  |
+|Heal(Hunting)  8/8                                                                     #·       #·······#      000046    117    |
+|Health         8/8                                                                     #…####  ##Ω······#          Vitality     |
+|                                                                                    ####……··#  #········#     Health       9/100|
+|                                                                                    #·………∷··####········#     Stamina     93/100|
+|                                                                                       #…∷∷·············#     Magic        10/10|
+|                                                                                ########····####········#           Stats       |
+|                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
+|                                                                                #···∷∷#·#·#····#·······…#     Con10 Dex10 Lck10 |
+|                                                                                #··∷∷∷#·#·#·~~·###……………## #   Thv10 Psi10 Int10 |
+|                                                                                #·∷∷∷∷····#·~····#######·o#        Equipped     |
+|                                                                             ····L∷∷∷·······~·············#   Sword, Short      |
+|                                                                                 L∷∷#·#·········~~m··@···#    Boots, Fluffy     |
+|                                                                                 L∷##…#######·~~~~·#####LL         Shortcuts    |
+|                                                                                   #……………···#·~~~~·#∷∷∷∷∷∷    1 Dart +1         |
+|                                                                                   #…######·#·~~~~··∷∷∷∷∷∷    2 Potted Meat     |
+|                                                                                   ·…#     ·#·~~~··L∷∷∷∷∷∷#   3 Torch           |
+|                                                                                  ·#·#      #·~~~·LL∷∷∷∷∷∷#   4 Withered Fungus |
+|                                                                                   #·#      #·~~··L·∷∷∷∷∷∷#          Buffs      |
+|                                                                                   #··      #·~··ψ··∷∷∷∷∷∷#   Full              |
+|                                                                                   #·#   ####···L····∷∷∷∷∷L         Status      |
+|                                                                                         #·····#Lψ···#∷∷∷∷L   Critical          |
+|                                                                                         #····##·····## ∷∷                      |
+|                                                                                      ······####··~~··##                        |
+|                                                                                     ~~~~·## ##··~~~~··#                        |
+|                                                                                    ~~~~··   L··~~···~·#                        |
+|                                                                                    ·~~··    L·~~~·ψ·~·#                        |
+|                                                                                    ·~~·     #··~~·····#                        |
+|                                                                                     ~~      ##··~~~··##                        |
+|                                                                                              LL··~··L#                         |
+|                                                                                               ##···LL                          |
+|                                                                                                LL·#L                           |
+|                                                                                                ∷··∷∷                           |
+|                                                                                               ∷∷∷··∷∷                          |
+|                                                                                              ∷∷∷∷··∷∷∷                         |
+|                                                                                             L∷∷∷···∷∷∷∷                        |
+|                                                                                             L####L#####                        |
+|                                                         Quit     Robo                                                          |
+|Robot misses the molekin.                                                                                                       |
++--------------------------------------------------------------------------------------------------------------------------------+
+The molekin slurps at the pool of blood.
++--------------------------------------------------------------------------------------------------------------------------------+
+|The molekin strikes you for 10 impact damage with the heavy rock! The molekin collects the heavy rock.         Dungeon Level 0  |
+|The molekin shoots the heavy rock at the noble warrior.                                                           apecastle     |
+|The molekin strikes you for 6 impact damage with the heavy rock! The molekins heavy rocks is destroyed.         Ser Deadsmith   |
+|The molekin slurps at the pool of blood.                                                                       Gold      Keys   |
+|                                                                                                   ##LL##      000000    0      |
+|     Molekin       m                                                                   ##       ###·····#      Score     Move#  |
+|Health         8/8                                                                     #·       #·······#      000046    118    |
+|                                                                                       #…####  ##Ω······#          Vitality     |
+|                                                                                    ####……··#  #········#     Health       9/100|
+|                                                                                    #·………∷··####········#     Stamina     94/100|
+|                                                                                       #…∷∷·············#     Magic        10/10|
+|                                                                                ########····####········#           Stats       |
+|                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
+|                                                                                #···∷∷#·#·#····#·······…#     Con10 Dex10 Lck10 |
+|                                                                                #··∷∷∷#·#·#·~~·###……………##o#   Thv10 Psi10 Int10 |
+|                                                                                #·∷∷∷∷····#·~····#######··#        Equipped     |
+|                                                                             ····L∷∷∷·······~·············#   Sword, Short      |
+|                                                                                 L∷∷#·#·········~~m··@···#    Boots, Fluffy     |
+|                                                                                 L∷##…#######·~~~~·#####LL         Shortcuts    |
+|                                                                                   #……………···#·~~~~·#∷∷∷∷∷∷    1 Dart +1         |
+|                                                                                   #…######·#·~~~~··∷∷∷∷∷∷    2 Potted Meat     |
+|                                                                                   ·…#     ·#·~~~··L∷∷∷∷∷∷#   3 Torch           |
+|                                                                                  ·#·#      #·~~~·LL∷∷∷∷∷∷#   4 Withered Fungus |
+|                                                                                   #·#      #·~~··L·∷∷∷∷∷∷#          Buffs      |
+|                                                                                   #··      #·~··ψ··∷∷∷∷∷∷#   Full              |
+|                                                                                   #·#   ####···L····∷∷∷∷∷L         Status      |
+|                                                                                         #·····#Lψ···#∷∷∷∷L   Critical          |
+|                                                                                         #····##·····## ∷∷                      |
+|                                                                                      ······####··~~··##                        |
+|                                                                                     ~~~~·## ##··~~~~··#                        |
+|                                                                                    ~~~~··   L··~~···~·#                        |
+|                                                                                    ·~~··    L·~~~·ψ·~·#                        |
+|                                                                                    ·~~·     #··~~·····#                        |
+|                                                                                     ~~      ##··~~~··##                        |
+|                                                                                              LL··~··L#                         |
+|                                                                                               ##···LL                          |
+|                                                                                                LL·#L                           |
+|                                                                                                ∷··∷∷                           |
+|                                                                                               ∷∷∷··∷∷                          |
+|                                                                                              ∷∷∷∷··∷∷∷                         |
+|                                                                                             L∷∷∷···∷∷∷∷                        |
+|                                                                                             L####L#####                        |
+|                                                         Quit     Robo                                                          |
+|Robot misses the molekin.                                                                                                       |
++--------------------------------------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------+
+|The molekin strikes you for 10 impact damage with the heavy rock! The molekin collects the heavy rock.         Dungeon Level 0  |
+|The molekin shoots the heavy rock at the noble warrior.                                                           apecastle     |
+|The molekin strikes you for 6 impact damage with the heavy rock! The molekins heavy rocks is destroyed.         Ser Deadsmith   |
+|The molekin slurps at the pool of blood.                                                                       Gold      Keys   |
+|                                                                                                   ##LL##      000000    0      |
+|     Molekin       m                                                                   ##       ###·····#      Score     Move#  |
+|Health         8/8                                                                     #·       #·······#      000046    118    |
+|                                                                                       #…####  ##Ω······#          Vitality     |
+|                                                                                    ####……··#  #········#     Health       9/100|
+|                                                                                    #·………∷··####········#     Stamina     94/100|
+|                                                                                       #…∷∷·············#     Magic        10/10|
+|                                                                                ########····####········#           Stats       |
+|                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
+|                                                                                #···∷∷#·#·#····#·······…#     Con10 Dex10 Lck10 |
+|                                                                                #··∷∷∷#·#·#·~~·###……………##·#   Thv10 Psi10 Int10 |
+|                                                                                #·∷∷∷∷····#·~····#######··#        Equipped     |
+|                                                                             ····L∷∷∷·······~·············#   Sword, Short      |
+|                                                                                 L∷∷#·#·········~~m··@···#    Boots, Fluffy     |
+|                                                                                 L∷##…#######·~~~~·#####LL         Shortcuts    |
+|                                                                                   #……………···#·~~~~·#∷∷∷∷∷∷    1 Dart +1         |
+|                                                                                   #…######·#·~~~~··∷∷∷∷∷∷    2 Potted Meat     |
+|                                                                                   ·…#     ·#·~~~··L∷∷∷∷∷∷#   3 Torch           |
+|                                                                                  ·#·#      #·~~~·LL∷∷∷∷∷∷#   4 Withered Fungus |
+|                                                                                   #·#      #·~~··L·∷∷∷∷∷∷#          Buffs      |
+|                                                                                   #··      #·~··ψ··∷∷∷∷∷∷#   Full              |
+|                                                                                   #·#   ####···L····∷∷∷∷∷L         Status      |
+|                                                                                         #·····#Lψ···#∷∷∷∷L   Critical          |
+|                                                                                         #····##·····## ∷∷                      |
+|                                                                                      ······####··~~··##                        |
+|                                                                                     ~~~~·## ##··~~~~··#                        |
+|                                                                                    ~~~~··   L··~~···~·#                        |
+|                                                                                    ·~~··    L·~~~·ψ·~·#                        |
+|                                                                                    ·~~·     #··~~·····#                        |
+|                                                                                     ~~      ##··~~~··##                        |
+|                                                                                              LL··~··L#                         |
+|                                                                                               ##···LL                          |
+|                                                                                                LL·#L                           |
+|                                                                                                ∷··∷∷                           |
+|                                                                                               ∷∷∷··∷∷                          |
+|                                                                                              ∷∷∷∷··∷∷∷                         |
+|                                                                                             L∷∷∷···∷∷∷∷                        |
+|                                                                                             L####L#####                        |
+|                                                         Quit     Robo                                                          |
+|Robot misses the molekin.                                                                                                       |
++--------------------------------------------------------------------------------------------------------------------------------+
+Seed (apecastle) tick 135 end: 1333E L0 player1/visply 85,18
+-
+Seed (apecastle) tick requested (Robot needs to rest, very low on health): 1333E L0 player1/visply 85,18
+Seed (apecastle) tick 136 begin (Robot needs to rest, very low on health): 1333E L0 player1/visply 85,18
+The molekin slurps at the pool of blood.
++--------------------------------------------------------------------------------------------------------------------------------+
+|The molekin strikes you for 10 impact damage with the heavy rock! The molekin collects the heavy rock.         Dungeon Level 0  |
+|The molekin shoots the heavy rock at the noble warrior.                                                           apecastle     |
+|The molekin strikes you for 6 impact damage with the heavy rock! The molekins heavy rocks is destroyed.         Ser Deadsmith   |
+|The molekin slurps at the pool of blood. (x2)                                                                  Gold      Keys   |
+|                                                                                                   ##LL##      000000    0      |
+|     Molekin       m                                                                   ##       ###·····#      Score     Move#  |
+|Health(Idle)   8/8                                                                     #·       #·······#      000046    118    |
+|Health         8/8                                                                     #…####  ##Ω······#          Vitality     |
+|                                                                                    ####……··#  #········#     Health       9/100|
+|                                                                                    #·………∷··####········#     Stamina     94/100|
+|                                                                                       #…∷∷·············#     Magic        10/10|
+|                                                                                ########····####········#           Stats       |
+|                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
+|                                                                                #···∷∷#·#·#····#·······…#     Con10 Dex10 Lck10 |
+|                                                                                #··∷∷∷#·#·#·~~·###……………##·#   Thv10 Psi10 Int10 |
+|                                                                                #·∷∷∷∷····#·~····#######··#        Equipped     |
+|                                                                             ····L∷∷∷·······~·············#   Sword, Short      |
+|                                                                                 L∷∷#·#·········~~m··@···#    Boots, Fluffy     |
+|                                                                                 L∷##…#######·~~~~·#####LL         Shortcuts    |
+|                                                                                   #……………···#·~~~~·#∷∷∷∷∷∷    1 Dart +1         |
+|                                                                                   #…######·#·~~~~··∷∷∷∷∷∷    2 Potted Meat     |
+|                                                                                   ·…#     ·#·~~~··L∷∷∷∷∷∷#   3 Torch           |
+|                                                                                  ·#·#      #·~~~·LL∷∷∷∷∷∷#   4 Withered Fungus |
+|                                                                                   #·#      #·~~··L·∷∷∷∷∷∷#          Buffs      |
+|                                                                                   #··      #·~··ψ··∷∷∷∷∷∷#   Full              |
+|                                                                                   #·#   ####···L····∷∷∷∷∷L         Status      |
+|                                                                                         #·····#Lψ···#∷∷∷∷L   Critical          |
+|                                                                                         #····##·····## ∷∷                      |
+|                                                                                      ······####··~~··##                        |
+|                                                                                     ~~~~·## ##··~~~~··#                        |
+|                                                                                    ~~~~··   L··~~···~·#                        |
+|                                                                                    ·~~··    L·~~~·ψ·~·#                        |
+|                                                                                    ·~~·     #··~~·····#                        |
+|                                                                                     ~~      ##··~~~··##                        |
+|                                                                                              LL··~··L#                         |
+|                                                                                               ##···LL                          |
+|                                                                                                LL·#L                           |
+|                                                                                                ∷··∷∷                           |
+|                                                                                               ∷∷∷··∷∷                          |
+|                                                                                              ∷∷∷∷··∷∷∷                         |
+|                                                                                             L∷∷∷···∷∷∷∷                        |
+|                                                                                             L####L#####                        |
+|                                                         Quit     Robo                                                          |
+|Robot misses the molekin.                                                                                                       |
++--------------------------------------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------+
+|The molekin strikes you for 10 impact damage with the heavy rock! The molekin collects the heavy rock.         Dungeon Level 0  |
+|The molekin shoots the heavy rock at the noble warrior.                                                           apecastle     |
+|The molekin strikes you for 6 impact damage with the heavy rock! The molekins heavy rocks is destroyed.         Ser Deadsmith   |
+|The molekin slurps at the pool of blood. (x2)                                                                  Gold      Keys   |
+|                                                                                                   ##LL##      000000    0      |
+|     Molekin       m                                                                   ##       ###·····#      Score     Move#  |
+|      (Idle)                                                                           #·       #·······#      000046    118    |
+|Health         8/8                                                                     #…####  ##Ω······#          Vitality     |
+|                                                                                    ####……··#  #········#     Health       9/100|
+|                                                                                    #·………∷··####········#     Stamina     94/100|
+|                                                                                       #…∷∷·············#     Magic        10/10|
+|                                                                                ########····####········#           Stats       |
+|                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
+|                                                                                #···∷∷#·#·#····#·······…#     Con10 Dex10 Lck10 |
+|                                                                                #··∷∷∷#·#·#·~~·###……………##·#   Thv10 Psi10 Int10 |
+|                                                                                #·∷∷∷∷····#·~····#######··#        Equipped     |
+|                                                                             ····L∷∷∷·······~·············#   Sword, Short      |
+|                                                                                 L∷∷#·#·········~~m··@···#    Boots, Fluffy     |
+|                                                                                 L∷##…#######·~~~~·#####LL         Shortcuts    |
+|                                                                                   #……………···#·~~~~·#∷∷∷∷∷∷    1 Dart +1         |
+|                                                                                   #…######·#·~~~~··∷∷∷∷∷∷    2 Potted Meat     |
+|                                                                                   ·…#     ·#·~~~··L∷∷∷∷∷∷#   3 Torch           |
+|                                                                                  ·#·#      #·~~~·LL∷∷∷∷∷∷#   4 Withered Fungus |
+|                                                                                   #·#      #·~~··L·∷∷∷∷∷∷#          Buffs      |
+|                                                                                   #··      #·~··ψ··∷∷∷∷∷∷#   Full              |
+|                                                                                   #·#   ####···L····∷∷∷∷∷L         Status      |
+|                                                                                         #·····#Lψ···#∷∷∷∷L   Critical          |
+|                                                                                         #····##·····## ∷∷                      |
+|                                                                                      ······####··~~··##                        |
+|                                                                                     ~~~~·## ##··~~~~··#                        |
+|                                                                                    ~~~~··   L··~~···~·#                        |
+|                                                                                    ·~~··    L·~~~·ψ·~·#                        |
+|                                                                                    ·~~·     #··~~·····#                        |
+|                                                                                     ~~      ##··~~~··##                        |
+|                                                                                              LL··~··L#                         |
+|                                                                                               ##···LL                          |
+|                                                                                                LL·#L                           |
+|                                                                                                ∷··∷∷                           |
+|                                                                                               ∷∷∷··∷∷                          |
+|                                                                                              ∷∷∷∷··∷∷∷                         |
+|                                                                                             L∷∷∷···∷∷∷∷                        |
+|                                                                                             L####L#####                        |
+|                                                         Quit     Robo                                                          |
+|Robot misses the molekin.                                                                                                       |
++--------------------------------------------------------------------------------------------------------------------------------+
+Seed (apecastle) tick 136 end: 1333E L0 player1/visply 85,18
+-
+Seed (apecastle) tick requested (player moved): 1333E L0 player1/visply 85,18
+Seed (apecastle) tick 137 begin (player moved): 1333E L0 player1/visply/mv 86,18
++--------------------------------------------------------------------------------------------------------------------------------+
+|The molekin strikes you for 10 impact damage with the heavy rock! The molekin collects the heavy rock.         Dungeon Level 0  |
+|The molekin shoots the heavy rock at the noble warrior.                                                           apecastle     |
+|The molekin strikes you for 6 impact damage with the heavy rock! The molekins heavy rocks is destroyed.         Ser Deadsmith   |
+|The molekin slurps at the pool of blood. (x2)                                                                  Gold      Keys   |
+|                                                                                                   ##LL##      000000    0      |
+|     Molekin       m                                                                   ##       ###·····#      Score     Move#  |
+|      (Idle)                                                                           #·       #·······#      000046    118    |
+|Health         8/8                                                                     #…####  ##Ω······#          Vitality     |
+|                                                                                    ####……··#  #········#     Health      19/100|
+|                                                                                    #·………∷··####········#     Stamina     94/100|
+|                                                                                       #…∷∷·············#     Magic        10/10|
+|                                                                                ########····####········#           Stats       |
+|                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
+|                                                                                #···∷∷#·#·#····#·······…#     Con10 Dex10 Lck10 |
+|                                                                                #··∷∷∷#·#·#·~~·###……………##·#   Thv10 Psi10 Int10 |
+|                                                                                #·∷∷∷∷····#·~····#######··#        Equipped     |
+|                                                                             ····L∷∷∷·······~·············#   Sword, Short      |
+|                                                                                 L∷∷#·#·········~~m···@··#    Boots, Fluffy     |
+|                                                                                 L∷##…#######·~~~~·#####LL         Shortcuts    |
+|                                                                                   #……………···#·~~~~·#∷∷∷∷∷∷    1 Dart +1         |
+|                                                                                   #…######·#·~~~~··∷∷∷∷∷∷    2 Potted Meat     |
+|                                                                                   ·…#     ·#·~~~··L∷∷∷∷∷∷#   3 Torch           |
+|                                                                                  ·#·#      #·~~~·LL∷∷∷∷∷∷#   4 Withered Fungus |
+|                                                                                   #·#      #·~~··L·∷∷∷∷∷∷#          Buffs      |
+|                                                                                   #··      #·~··ψ··∷∷∷∷∷∷#   Full              |
+|                                                                                   #·#   ####···L····∷∷∷∷∷L         Status      |
+|                                                                                         #·····#Lψ···#∷∷∷∷L   Critical          |
+|                                                                                         #····##·····## ∷∷                      |
+|                                                                                      ······####··~~··##                        |
+|                                                                                     ~~~~·## ##··~~~~··#                        |
+|                                                                                    ~~~~··   L··~~···~·#                        |
+|                                                                                    ·~~··    L·~~~·ψ·~·#                        |
+|                                                                                    ·~~·     #··~~·····#                        |
+|                                                                                     ~~      ##··~~~··##                        |
+|                                                                                              LL··~··L#                         |
+|                                                                                               ##···LL                          |
+|                                                                                                LL·#L                           |
+|                                                                                                ∷··∷∷                           |
+|                                                                                               ∷∷∷··∷∷                          |
+|                                                                                              ∷∷∷∷··∷∷∷                         |
+|                                                                                             L∷∷∷···∷∷∷∷                        |
+|                                                                                             L####L#####                        |
+|                                                         Quit     Robo                                                          |
+|Robot misses the molekin.                                                                                                       |
++--------------------------------------------------------------------------------------------------------------------------------+
+The molekin shoots the heavy rock at the noble warrior.
+The molekin strikes you for 7 impact damage with the heavy rock!
+                                                                       13200 L0 molekin/visply 82,18:                     POPUP: It strikes you -7
+                                                                       1333E L0 player1/visply 86,18:                     POPUP: -7
++--------------------------------------------------------------------------------------------------------------------------------+
+|The molekin shoots the heavy rock at the noble warrior.                                                        Dungeon Level 0  |
+|The molekin strikes you for 6 impact damage with the heavy rock! The molekins heavy rocks is destroyed.           apecastle     |
+|The molekin slurps at the pool of blood. (x2) The molekin shoots the heavy rock at the noble warrior.           Ser Deadsmith   |
+|The molekin strikes you for 7 impact damage with the heavy rock!                                               Gold      Keys   |
+|                                                                                                   ##LL##      000000    0      |
+|     Molekin       m                                                                   ##       ###·····#      Score     Move#  |
+|   (At(Idle)g)                                                                         #·       #·······#      000046    119    |
+|Health         8/8                                                                     #…####  ##Ω······#          Vitality     |
+|                                                                                    ####……··#  #········#     Health      10/100|
+|                                                                                    #·………∷··####········#     Stamina     95/100|
+|                                                                                       #…∷∷·············#     Magic        10/10|
+|                                                                                ########····####········#           Stats       |
+|                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
+|                                                                                #···∷∷#·#·#····#·······…#·#   Con10 Dex10 Lck10 |
+|                                                                                #··∷∷∷#·#·#·~~·###……………##·#   Thv10 Psi10 Int10 |
+|                                                                                #·∷∷∷∷····#·~····#######··#        Equipped     |
+|                                                                             ····L∷∷∷·······~·············#   Sword, Short      |
+|                                                                                 L∷∷#·#·········~~m···@··#    Boots, Fluffy     |
+|                                                                                 L∷##…#######·~~~~·#####LL         Shortcuts    |
+|                                                                                   #……………···#·~~~~·#∷∷∷∷∷∷    1 Dart +1         |
+|                                                                                   #…######·#·~~~~··∷∷∷∷∷∷    2 Potted Meat     |
+|                                                                                   ·…#     ·#·~~~··L∷∷∷∷∷∷#   3 Torch           |
+|                                                                                  ·#·#      #·~~~·LL∷∷∷∷∷∷#   4 Withered Fungus |
+|                                                                                   #·#      #·~~··L·∷∷∷∷∷∷#          Buffs      |
+|                                                                                   #··      #·~··ψ··∷∷∷∷∷∷#   Full              |
+|                                                                                   #·#   ####···L····∷∷∷∷∷L         Status      |
+|                                                                                         #·····#Lψ···#∷∷∷∷L   Critical          |
+|                                                                                         #····##·····## ∷∷                      |
+|                                                                                      ······####··~~··##                        |
+|                                                                                     ~~~~·## ##··~~~~··#                        |
+|                                                                                    ~~~~··   L··~~···~·#                        |
+|                                                                                    ·~~··    L·~~~·ψ·~·#                        |
+|                                                                                    ·~~·     #··~~·····#                        |
+|                                                                                     ~~      ##··~~~··##                        |
+|                                                                                              LL··~··L#                         |
+|                                                                                               ##···LL                          |
+|                                                                                                LL·#L                           |
+|                                                                                                ∷··∷∷                           |
+|                                                                                               ∷∷∷··∷∷                          |
+|                                                                                              ∷∷∷∷··∷∷∷                         |
+|                                                                                             L∷∷∷···∷∷∷∷                        |
+|                                                                                             L####L#####                        |
+|                                                         Quit     Robo                                                          |
+|Robot misses the molekin.                                                                                                       |
++--------------------------------------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------+
+|The molekin shoots the heavy rock at the noble warrior.                                                        Dungeon Level 0  |
+|The molekin strikes you for 6 impact damage with the heavy rock! The molekins heavy rocks is destroyed.           apecastle     |
+|The molekin slurps at the pool of blood. (x2) The molekin shoots the heavy rock at the noble warrior.           Ser Deadsmith   |
+|The molekin strikes you for 7 impact damage with the heavy rock!                                               Gold      Keys   |
+|                                                                                                   ##LL##      000000    0      |
+|     Molekin       m                                                                   ##       ###·····#      Score     Move#  |
+|   (Attacking)                                                                         #·       #·······#      000053    119    |
+|Health         8/8                                                                     #…####  ##Ω······#          Vitality     |
+|                                                                                    ####……··#  #········#     Health       0/100|
+|                                                                                    #·………∷··####········#     Stamina     95/100|
+|                                                                                       #…∷∷·············#     Magic        10/10|
+|                                                                                ########····####········#           Stats       |
+|                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
+|                                                                                #···∷∷#·#·#····#·······…#·#   Con10 Dex10 Lck10 |
+|                                                                                #··∷∷∷#·#·#·~~·###……………##·#   Thv10 Psi10 Int10 |
+|                                                                                #·∷∷∷∷····#·~····#######··#        Equipped     |
+|                                                                             ····L∷∷∷·······~·············#   Sword, Short      |
+|                                                                                 L∷∷#·#·········~~m···@··#    Boots, Fluffy     |
+|                                                                                 L∷##…#######·~~~~·#####LL         Shortcuts    |
+|                                                                                   #……………···#·~~~~·#∷∷∷∷∷∷    1 Dart +1         |
+|                                                                                   #…######·#·~~~~··∷∷∷∷∷∷    2 Potted Meat     |
+|                                                                                   ·…#     ·#·~~~··L∷∷∷∷∷∷#   3 Torch           |
+|                                                                                  ·#·#      #·~~~·LL∷∷∷∷∷∷#   4 Withered Fungus |
+|                                                                                   #·#      #·~~··L·∷∷∷∷∷∷#          Buffs      |
+|                                                                                   #··      #·~··ψ··∷∷∷∷∷∷#   Full              |
+|                                                                                   #·#   ####···L····∷∷∷∷∷L         Status      |
+|                                                                                         #·····#Lψ···#∷∷∷∷L   Critical          |
+|                                                                                         #····##·····## ∷∷                      |
+|                                                                                      ······####··~~··##                        |
+|                                                                                     ~~~~·## ##··~~~~··#                        |
+|                                                                                    ~~~~··   L··~~···~·#                        |
+|                                                                                    ·~~··    L·~~~·ψ·~·#                        |
+|                                                                                    ·~~·     #··~~·····#                        |
+|                                                                                     ~~      ##··~~~··##                        |
+|                                                                                              LL··~··L#                         |
+|                                                                                               ##···LL                          |
+|                                                                                                LL·#L                           |
+|                                                                                                ∷··∷∷                           |
+|                                                                                               ∷∷∷··∷∷                          |
+|                                                                                              ∷∷∷∷··∷∷∷                         |
+|                                                                                             L∷∷∷···∷∷∷∷                        |
+|                                                                                             L####L#####                        |
+|                                                         Quit     Robo                                                          |
+|Robot misses the molekin.                                                                                                       |
++--------------------------------------------------------------------------------------------------------------------------------+
+Seed (apecastle) tick 137 end: 1333E L0 player1/visply 86,18
+-
+Seed (apecastle) tick requested (Robot needs to rest, very low on health): 1333E L0 player1/visply 86,18
+Seed (apecastle) tick 138 begin (Robot needs to rest, very low on health): 1333E L0 player1/visply 86,18
 The molekin shoots the heavy rock at the noble warrior.
 The molekin hits the pool of blood with the heavy rock.
-The molekin strikes you for 11 impact damage with the heavy rock!
-                                                                       13200 L0 molekin/visply 79,20:                     POPUP: It strikes you -11
-                                                                       1333E L0 player1/visply 83,17:                     POPUP: -11
+The molekin strikes you for 4 impact damage with the heavy rock!
+                                                                       13200 L0 molekin/visply 82,18:                     POPUP: It strikes you -4
+                                                                       1333E L0 player1/visply 86,18:                     POPUP: -4
 RIP: Robo player is deactivated by a molekin.
                                                                                                     :                      Open dead select: by a molekin
                                                                                                     :                      Open dead select: Pause
-Death was nature's way of telling you to slow down - Terry Pratchett.
+You wave farewell to the monsters.
 +--------------------------------------------------------------------------------------------------------------------------------+
-|The molekin hits the pool of blood with the heavy rock.                                                        Dungeon Level 0  |
-|The molekin strikes you for 11 impact damage with the heavy rock!                                                 apecastle     |
-|RIP: Robo player is deactivated by a molekin.                                                                   Ser Deadsmith   |
-|Death was nature's way of telling you to slow down - Terry Pratchett.                                          Gold      Keys   |
+|The molekin shoots the heavy rock at the noble warrior.                                                        Dungeon Level 0  |
+|The molekin hits the pool of blood with the heavy rock.                                                           apecastle     |
+|The molekin strikes you for 4 impact damage with the heavy rock!                                                Ser Deadsmith   |
+|RIP: Robo player is deactivated by a molekin. You wave farewell to the monsters.                               Gold      Keys   |
 |                                                                                                   ##LL##      000000    0      |
 |     Molekin                                                                           ##       ###·····#      Score     Move#  |
-|   (Attacking)                                                                         #·       #·······#      000048    117    |
+|   (Attacking)                                                                         #·       #·······#      000053    119    |
 |Health         8/8                                                                     #…####  ##Ω······#          Vitality     |
 |                                                                                    ####……··#  #········#     Health       0/100|
-|     Molekin                                                                        #·………∷··####········#     Stamina     91/100|
-|Health        0/13                                                                     #…∷∷·············#     Magic        10/10|
+|                                                                                    #·………∷··####········#     Stamina     95/100|
+|                                                                                       #…∷∷·············#     Magic        10/10|
 |                                                                                ########····####········#           Stats       |
-|    Heavy Rock                                                                  #···∷∷###·###··#········#     Def10 Att10 Str10 |
-|                                                                                #···∷∷#·#·#····#·······…#     Con10 Dex10 Lck10 |
-|                                                                                #··∷∷∷#·#·#·~~·###……………## #   Thv10 Psi10 Int10 |
+|                                                                                #···∷∷###·###··#········#     Def10 Att10 Str10 |
+|                                                                                #···∷∷#·#·#····#·······…#·#   Con10 Dex10 Lck10 |
+|                                                                                #··∷∷∷#·#·#·~~·###……………##·#   Thv10 Psi10 Int10 |
 |                                                                                #·∷∷∷∷····#·~····#######··#        Equipped     |
-|                                                                             ····L∷∷∷·······~······@···om·#   Sword, Short      |
-|                                                                                 L∷∷#·#·········~~·······##   Boots, Fluffy     |
+|                                                                             ····L∷∷∷·······~·············#   Sword, Short      |
+|                                                                                 L∷∷#·#·········~~m···@··#    Boots, Fluffy     |
 |                                                                                 L∷##…#######·~~~~·#####LL         Shortcuts    |
-|                                                                                   #……………···#·~m~~·#∷∷∷∷∷∷    1 Dart +1         |
+|                                                                                   #……………···#·~~~~·#∷∷∷∷∷∷    1 Dart +1         |
 |                                                                                   #…######·#·~~~~··∷∷∷∷∷∷    2 Potted Meat     |
 |                                                                                   ·…#     ·#·~~~··L∷∷∷∷∷∷#   3 Torch           |
 |                                                                                  ·#·#      #·~~~·LL∷∷∷∷∷∷#   4 Withered Fungus |
@@ -14583,7 +15355,7 @@ Death was nature's way of telling you to slow down - Terry Pratchett.
 |                                                         Quit     Robo                                                          |
 |Robot misses the molekin.                                                                                                       |
 +--------------------------------------------------------------------------------------------------------------------------------+
-End of test, move count: 117
+End of test, move count: 119
                                                                                           dungeon L0: Delete level
                                                                                           dungeon L0:  Delete current game level
                                                                                                     : Game fini

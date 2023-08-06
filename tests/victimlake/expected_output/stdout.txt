@@ -108,7 +108,8 @@ INI: Loaded
 INI: Load early gfx tiles, text, UI etc...
 FILE: Read (ramdisk) data/fonts/font-pixelart-small.tga, 0Mb, 10580 bytes
 FILE: Read (ramdisk) data/fonts/font-pixelart-large.tga, 0Mb, 10916 bytes
-FILE: Read (ramdisk) data/fonts/font-ascii.tga, 4Mb, 4324804 bytes
+FILE: Read data/fonts/font-ascii.tga, 4Mb, 4324801 bytes
+FILE: Read file data/fonts/font-ascii.tga (newer than src build)
 FILE: Read (ramdisk) data/gfx/ui/pixelart/pixelart_ui_box0.tga, 0Mb, 3276 bytes
 FILE: Read (ramdisk) data/gfx/ui/ascii/ascii_ui_box0.tga, 0Mb, 3276 bytes
 FILE: Read (ramdisk) data/gfx/ui/pixelart/pixelart_ui_box1.tga, 0Mb, 2824 bytes
