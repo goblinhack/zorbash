@@ -29,11 +29,10 @@ if [ ! -x zorbash ]; then
   fi
 fi
 
-#    alphabase \
-
 testme()
 {
   for seed in \
+    alphabase \
     dungeonspike \
     dwarvedelve \
     footpad \
