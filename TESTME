@@ -20,6 +20,8 @@
 . ./build/VERSION
 . ./build/common.sh
 
+OPT_UPDATE=
+
 if [ ! -x zorbash ]; then
   RUNME
   if [ ! -x zorbash ]; then
@@ -27,74 +29,115 @@ if [ ! -x zorbash ]; then
   fi
 fi
 
-for seed in \
-  dungeonspike \
-  dwarvedelve \
-  footpad \
-  golemheights \
-  alphabase \
-  apecastle \
-  badmonkey \
-  castlespire \
-  cavemire \
-  charliebats \
-  deathpool \
-  discobob \
-  dogmanlives \
-  donkeyking \
-  drakestone \
-  goblinhack \
-  grayalien \
-  hearthstone \
-  hellfire \
-  pondscum \
-  seadragon \
-  terrorlake \
-  umbermonk \
-  victimlake \
-  zardoz
-do
-  mkdir -p tests/$seed/output/
-  mkdir -p tests/$seed/expected_output/
+testme()
+{
+  for seed in \
+    dungeonspike \
+    dwarvedelve \
+    footpad \
+    golemheights \
+    alphabase \
+    apecastle \
+    badmonkey \
+    castlespire \
+    cavemire \
+    charliebats \
+    deathpool \
+    discobob \
+    dogmanlives \
+    donkeyking \
+    drakestone \
+    goblinhack \
+    grayalien \
+    hearthstone \
+    hellfire \
+    pondscum \
+    seadragon \
+    terrorlake \
+    umbermonk \
+    victimlake \
+    zardoz
+  do
+    mkdir -p tests/$seed/output/
+    mkdir -p tests/$seed/expected_output/
 
-  printf "%-60s ... " "Running seed ($seed)"
-  CMD="./zorbash --seed $seed --test-dungeon-gen --ascii --monochrome"
-  $CMD > tests/$seed/output/console
-  cp appdata/zorbash/stdout.txt tests/$seed/output/
+    printf "%-60s ... " "Running seed ($seed)"
+    CMD="./zorbash --seed $seed --test-dungeon-gen --ascii --monochrome"
+    $CMD > tests/$seed/output/console
+    cp appdata/zorbash/stdout.txt tests/$seed/output/
 
-  grep -q segv_handler appdata/zorbash/*
-  if [ $? -eq 0 ]; then
-    printf "$RED[%s]$RESET\n" "CRASH"
-    echo Run the following to reproduce this:
-    echo $CMD
-    exit 1
-  fi
-
-  grep -q ERROR appdata/zorbash/*
-  if [ $? -eq 0 ]; then
-    printf "$RED[%s]$RESET\n" "ERROR"
-    echo Run the following to reproduce this:
-    echo $CMD
-    exit 1
-    continue
-  fi
-
-  # ls -lahsi tests/$seed/output/stdout.txt
-  level=$(grep "End of test, level depth:" tests/$seed/output/stdout.txt | sed 's/.*://g')
-
-  if [ ! -f tests/$seed/expected_output/stdout.txt ]; then
-    cp -r tests/$seed/output/stdout.txt tests/$seed/expected_output/
-    moves=$(grep "End of test, move count:" tests/$seed/output/stdout.txt | sed 's/.*://g')
-    printf "$GREEN[%s]$RESET (%s moves, level %s)\n" "CREATED" $moves $level
-  else
-    diff -q tests/$seed/output/stdout.txt tests/$seed/expected_output/stdout.txt
-    if [ $? -ne 0 ]; then
-      moves=$(grep "End of test, move count:" tests/$seed/output/stdout.txt | sed 's/.*://g')
-      expected_moves=$(grep "End of test, move count:" tests/$seed/expected_output/stdout.txt | sed 's/.*://g')
-      printf "$RED[%s]$RESET (%s moves expected, found %s)\n" "CHANGED" $expected_moves $moves
-    else
-      moves=$(grep "End of test, move count:" tests/$seed/output/stdout.txt | sed 's/.*://g')
-      printf "$GREEN[%s]$RESET %s moves, level %s\n" "OK" $moves $level
+    grep -q segv_handler appdata/zorbash/*
+    if [ $? -eq 0 ]; then
+      printf "$RED[%s]$RESET\n" "CRASH"
+      echo Run the following to reproduce this:
+      echo $CMD
+      exit 1
     fi
-  fi
-done
+
+    grep -q ERROR appdata/zorbash/*
+    if [ $? -eq 0 ]; then
+      printf "$RED[%s]$RESET\n" "ERROR"
+      echo Run the following to reproduce this:
+      echo $CMD
+      exit 1
+      continue
+    fi
+
+    # ls -lahsi tests/$seed/output/stdout.txt
+    level=$(grep "End of test, level depth:" tests/$seed/output/stdout.txt | sed 's/.*://g')
+
+    if [ ! -f tests/$seed/expected_output/stdout.txt ]; then
+      cp -r tests/$seed/output/stdout.txt tests/$seed/expected_output/
+      moves=$(grep "End of test, move count:" tests/$seed/output/stdout.txt | sed 's/.*://g')
+      printf "$GREEN[%s]$RESET (%s moves, level %s)\n" "CREATED" $moves $level
+    else
+      diff -q tests/$seed/output/stdout.txt tests/$seed/expected_output/stdout.txt
+      if [ $? -ne 0 ]; then
+        moves=$(grep "End of test, move count:" tests/$seed/output/stdout.txt | sed 's/.*://g')
+        expected_moves=$(grep "End of test, move count:" tests/$seed/expected_output/stdout.txt | sed 's/.*://g')
+        printf "$RED[%s]$RESET (%s moves expected, found %s)\n" "CHANGED" $expected_moves $moves
+        if [ "$OPT_UPDATE" -eq "yes" ]; then
+          cp -r tests/$seed/output/stdout.txt tests/$seed/expected_output/
+        fi
+      else
+        moves=$(grep "End of test, move count:" tests/$seed/output/stdout.txt | sed 's/.*://g')
+        printf "$GREEN[%s]$RESET %s moves, level %s\n" "OK" $moves $level
+      fi
+    fi
+  done
+}
+
+help()
+{
+    cat << %%
+Build options:
+
+Usage: $0 [options]
+
+  [--update]  Update changed tests
+%%
+}
+
+read_opts()
+{
+    while [ "$#" -ne 0 ];
+    do
+        option=$1
+
+        case $option in
+            -*update)
+                OPT_UPDATE="yes"
+                export OPT_UPDATE
+                OPT_DEV1="yes"
+                export OPT_DEV1
+                shift
+                ;;
+            *)
+                help
+                exit 1
+                ;;
+        esac
+    done
+}
+
+read_opts "$@"
