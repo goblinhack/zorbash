@@ -1,8 +1,8 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- mob beckoning?                                                                                                                               -->
 <!-- player reflection off                                                                                                                        -->
 <!-- max damage per round should be 50 percent                                                                                                    -->
-<!-- no flattened grass initially?                                                                                                                -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

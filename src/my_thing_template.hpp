@@ -470,8 +470,10 @@ private:
   int _is_gold {};
   int _is_golem {};
   int _is_grass {};
+  int _is_grass_dead {};
   int _is_grass_dry {};
   int _is_grass_dry_trampled {};
+  int _is_grass_trampled {};
   int _is_grass_wet {};
   int _is_grass_wet_trampled {};
   int _is_green_blood {};
@@ -670,8 +672,6 @@ private:
   int _is_unused_flag111 {};
   int _is_unused_flag112 {};
   int _is_unused_flag113 {};
-  int _is_unused_flag114 {};
-  int _is_unused_flag115 {};
   int _is_unused_flag12 {};
   int _is_unused_flag124 {};
   int _is_unused_flag13 {};
@@ -1815,8 +1815,10 @@ public:
   int is_goat(void) const;
   int is_gold(void) const;
   int is_golem(void) const;
+  int is_grass_dead(void) const;
   int is_grass_dry_trampled(void) const;
   int is_grass_dry(void) const;
+  int is_grass_trampled(void) const;
   int is_grass(void) const;
   int is_grass_wet_trampled(void) const;
   int is_grass_wet(void) const;
@@ -2013,8 +2015,6 @@ public:
   int is_unused_flag111(void) const;
   int is_unused_flag112(void) const;
   int is_unused_flag113(void) const;
-  int is_unused_flag114(void) const;
-  int is_unused_flag115(void) const;
   int is_unused_flag11(void) const;
   int is_unused_flag124(void) const;
   int is_unused_flag12(void) const;
@@ -2580,9 +2580,11 @@ public:
   void is_goat_set(int v);
   void is_gold_set(int v);
   void is_golem_set(int v);
+  void is_grass_dead_set(int v);
   void is_grass_dry_set(int v);
   void is_grass_dry_trampled_set(int v);
   void is_grass_set(int v);
+  void is_grass_trampled_set(int v);
   void is_grass_wet_set(int v);
   void is_grass_wet_trampled_set(int v);
   void is_green_blooded_set(int v);
@@ -2778,8 +2780,6 @@ public:
   void is_unused_flag111_set(int v);
   void is_unused_flag112_set(int v);
   void is_unused_flag113_set(int v);
-  void is_unused_flag114_set(int v);
-  void is_unused_flag115_set(int v);
   void is_unused_flag11_set(int v);
   void is_unused_flag124_set(int v);
   void is_unused_flag12_set(int v);

@@ -1698,6 +1698,13 @@ void Level::create_biome_dungeon_place_grass_dry(Dungeonp d)
           return;
         }
 
+        //
+        // Omit trampled grass. It is useful to see what things have passed.
+        //
+        if (tp->is_grass_trampled()) {
+          continue;
+        }
+
         if (heatmap(x, y)) {
           continue;
         }
@@ -1717,6 +1724,13 @@ void Level::create_biome_dungeon_place_grass_wet(Dungeonp d)
         auto tp = tp_random_grass_wet();
         if (unlikely(! tp)) {
           return;
+        }
+
+        //
+        // Omit trampled grass. It is useful to see what things have passed.
+        //
+        if (tp->is_grass_trampled()) {
+          continue;
         }
 
         if (heatmap(x, y)) {

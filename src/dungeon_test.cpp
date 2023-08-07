@@ -138,7 +138,7 @@ void dungeon_test(void)
     }
   }
 
-  CON("End of test, level depth: %u", grid_at.y + 1);
+  CON("End of test, level depth: %u", grid_at.y);
   CON("End of test, move count: %u", player->move_count());
 
   TRACE_NO_INDENT();

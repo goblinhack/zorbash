@@ -271,8 +271,10 @@ bool Tp::matches(const std::string &what)
   if (is_goat() && (what == "is_goat")) { return true; }
   if (is_gold() && (what == "is_gold")) { return true; }
   if (is_golem() && (what == "is_golem")) { return true; }
+  if (is_grass_dead() && (what == "is_grass_dead")) { return true; }
   if (is_grass_dry_trampled() && (what == "grass_dry_trampled")) { return true; }
   if (is_grass_dry() && (what == "grass_dry")) { return true; }
+  if (is_grass_trampled() && (what == "is_grass_trampled")) { return true; }
   if (is_grass_wet_trampled() && (what == "is_grass_wet_trampled")) { return true; }
   if (is_grass_wet() && (what == "is_grass_wet")) { return true; }
   if (is_grass() && (what == "is_grass")) { return true; }
@@ -456,8 +458,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag111() && (what == "is_unused_flag111")) { return true; }
   if (is_unused_flag112() && (what == "is_unused_flag112")) { return true; }
   if (is_unused_flag113() && (what == "is_unused_flag113")) { return true; }
-  if (is_unused_flag114() && (what == "is_unused_flag114")) { return true; }
-  if (is_unused_flag115() && (what == "is_unused_flag115")) { return true; }
   if (is_unused_flag11() && (what == "is_unused_flag11")) { return true; }
   if (is_unused_flag12() && (what == "is_unused_flag12")) { return true; }
   if (is_unused_flag13() && (what == "is_unused_flag13")) { return true; }
@@ -872,8 +872,10 @@ bool Thing::matches(const std::string &what)
   if (is_goat() && (what == "is_goat")) { return true; }
   if (is_gold() && (what == "is_gold")) { return true; }
   if (is_golem() && (what == "is_golem")) { return true; }
+  if (is_grass_dead() && (what == "is_grass_dead")) { return true; }
   if (is_grass_dry_trampled() && (what == "grass_dry_trampled")) { return true; }
   if (is_grass_dry() && (what == "grass_dry")) { return true; }
+  if (is_grass_trampled() && (what == "is_grass_trampled")) { return true; }
   if (is_grass_wet_trampled() && (what == "is_grass_wet_trampled")) { return true; }
   if (is_grass_wet() && (what == "is_grass_wet")) { return true; }
   if (is_grass() && (what == "is_grass")) { return true; }
@@ -1058,8 +1060,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag111() && (what == "is_unused_flag111")) { return true; }
   if (is_unused_flag112() && (what == "is_unused_flag112")) { return true; }
   if (is_unused_flag113() && (what == "is_unused_flag113")) { return true; }
-  if (is_unused_flag114() && (what == "is_unused_flag114")) { return true; }
-  if (is_unused_flag115() && (what == "is_unused_flag115")) { return true; }
   if (is_unused_flag11() && (what == "is_unused_flag11")) { return true; }
   if (is_unused_flag12() && (what == "is_unused_flag12")) { return true; }
   if (is_unused_flag13() && (what == "is_unused_flag13")) { return true; }
@@ -1469,7 +1469,9 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_goat") { return &Thing::is_goat; }
   if (what == "is_gold") { return &Thing::is_gold; }
   if (what == "is_golem") { return &Thing::is_golem; }
+  if (what == "is_grass_dead") { return &Thing::is_grass_dead; }
   if (what == "is_grass") { return &Thing::is_grass; }
+  if (what == "is_grass_trampled") { return &Thing::is_grass_trampled; }
   if (what == "is_grass_wet") { return &Thing::is_grass_wet; }
   if (what == "is_grass_wet_trampled") { return &Thing::is_grass_wet_trampled; }
   if (what == "is_green_blooded") { return &Thing::is_green_blooded; }
@@ -1648,8 +1650,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag111") { return &Thing::is_unused_flag111; }
   if (what == "is_unused_flag112") { return &Thing::is_unused_flag112; }
   if (what == "is_unused_flag113") { return &Thing::is_unused_flag113; }
-  if (what == "is_unused_flag114") { return &Thing::is_unused_flag114; }
-  if (what == "is_unused_flag115") { return &Thing::is_unused_flag115; }
   if (what == "is_unused_flag11") { return &Thing::is_unused_flag11; }
   if (what == "is_unused_flag12") { return &Thing::is_unused_flag12; }
   if (what == "is_unused_flag13") { return &Thing::is_unused_flag13; }

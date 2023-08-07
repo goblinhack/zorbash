@@ -1591,8 +1591,10 @@ public:
   int is_goat(void);
   int is_gold(void);
   int is_golem(void);
+  int is_grass_dead(void);
   int is_grass_dry_trampled(void);
   int is_grass_dry(void);
+  int is_grass_trampled(void);
   int is_grass(void);
   int is_grass_wet_trampled(void);
   int is_grass_wet(void);
@@ -1789,8 +1791,6 @@ public:
   int is_unused_flag111(void);
   int is_unused_flag112(void);
   int is_unused_flag113(void);
-  int is_unused_flag114(void);
-  int is_unused_flag115(void);
   int is_unused_flag11(void);
   int is_unused_flag12(void);
   int is_unused_flag13(void);

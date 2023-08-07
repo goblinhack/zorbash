@@ -765,15 +765,15 @@ int Thing::is_unused_flag113(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag113());
 }
-int Thing::is_unused_flag114(void)
+int Thing::is_grass_dead(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag114());
+  return (tp()->is_grass_dead());
 }
-int Thing::is_unused_flag115(void)
+int Thing::is_grass_trampled(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag115());
+  return (tp()->is_grass_trampled());
 }
 int Thing::is_immune_to_paralysis(void)
 {
