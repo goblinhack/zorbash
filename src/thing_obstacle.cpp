@@ -413,7 +413,7 @@ bool Thing::is_obs_ai(Thingp it)
     }
 
     //
-    // Dead/extinguished braziers
+    // Dead/extinguished braziers cause no collision
     //
     if (it->is_dead) {
       if (debug && is_debug_type()) {
@@ -422,6 +422,9 @@ bool Thing::is_obs_ai(Thingp it)
       return false;
     }
 
+    //
+    // Check for open doors.
+    //
     if (! it->is_open) {
       if (it->is_door()) {
         if (is_able_to_open_doors()) {

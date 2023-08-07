@@ -193,6 +193,9 @@ public:
   Skillp skill_right = {};
 };
 
+bool skill_has_precursor(Skillp);
+bool skill_is_available(Skillp);
+
 class Spell
 {
 public:
@@ -212,6 +215,9 @@ public:
   Spellp spell_left  = {};
   Spellp spell_right = {};
 };
+
+bool spell_has_precursor(Spellp);
+bool spell_is_available(Spellp);
 
 class Game
 {

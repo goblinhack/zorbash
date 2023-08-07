@@ -2,6 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_sound.hpp"
@@ -347,25 +348,61 @@ bool Thing::can_learn_a_spell(void)
   return false;
 }
 
+//
+// Learn a random spell out of the available ones
+//
 bool Thing::learn_random_spell(void)
 {
   TRACE_NO_INDENT();
 
   std::vector< Tpp > cands;
-  for (auto tpp : tp_get_spells()) {
-    bool add = true;
-    FOR_ALL_SPELLS(oid)
-    {
-      auto o = game->level->thing_find(oid);
-      if (o) {
-        if (o->tp() == tpp) {
-          add = false;
-          break;
+
+  for (auto iter : game->spell_tree) {
+    auto tree_name = iter.first;
+    for (auto y = 0; y < SPELL_TREE_DOWN; y++) {
+      for (auto x = 0; x < SPELL_TREE_ACROSS; x++) {
+        TRACE_NO_INDENT();
+
+        auto new_spell = get(game->spell_tree[ tree_name ], x, y);
+        if (! new_spell) {
+          continue;
+        }
+
+        if (! spell_has_precursor(new_spell) || spell_is_available(new_spell)) {
+          //
+          // Available
+          //
+        } else {
+          //
+          // Not available
+          //
+          continue;
+        }
+
+        //
+        // Check this spell is not already known
+        //
+        bool spell_cand = true;
+        FOR_ALL_SPELLS(oid)
+        {
+          auto current_spell = game->level->thing_find(oid);
+          if (! current_spell) {
+            continue;
+          }
+
+          if (current_spell->tp() == new_spell->tpp) {
+            //
+            // Already known
+            //
+            spell_cand = false;
+            break;
+          }
+        }
+
+        if (spell_cand) {
+          cands.push_back(new_spell->tpp);
         }
       }
-    }
-    if (add) {
-      cands.push_back(tpp);
     }
   }
 

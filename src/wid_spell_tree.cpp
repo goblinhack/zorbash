@@ -222,7 +222,7 @@ void wid_spell_over_end(Widp w)
 //
 // Is this spell learned only after another?
 //
-static bool spell_has_precursor(Spellp spell_curr)
+bool spell_has_precursor(Spellp spell_curr)
 {
   for (auto iter : game->spell_tree) {
     auto tree_name = iter.first;
@@ -254,7 +254,7 @@ static bool spell_has_precursor(Spellp spell_curr)
 //
 // Have we unlocked a spell?
 //
-static bool spell_is_available(Spellp spell_next)
+bool spell_is_available(Spellp spell_next)
 {
   for (auto iter : game->spell_tree) {
     auto tree_name = iter.first;

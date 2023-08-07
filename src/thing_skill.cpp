@@ -2,6 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_sound.hpp"
@@ -317,25 +318,61 @@ bool Thing::can_learn_a_skill(void)
   return false;
 }
 
+//
+// Learn a random skill out of the available ones
+//
 bool Thing::learn_random_skill(void)
 {
   TRACE_NO_INDENT();
 
   std::vector< Tpp > cands;
-  for (auto tpp : tp_get_skills()) {
-    bool add = true;
-    FOR_ALL_SKILLS(oid)
-    {
-      auto o = game->level->thing_find(oid);
-      if (o) {
-        if (o->tp() == tpp) {
-          add = false;
-          break;
+
+  for (auto iter : game->skill_tree) {
+    auto tree_name = iter.first;
+    for (auto y = 0; y < SKILL_TREE_DOWN; y++) {
+      for (auto x = 0; x < SKILL_TREE_ACROSS; x++) {
+        TRACE_NO_INDENT();
+
+        auto new_skill = get(game->skill_tree[ tree_name ], x, y);
+        if (! new_skill) {
+          continue;
+        }
+
+        if (! skill_has_precursor(new_skill) || skill_is_available(new_skill)) {
+          //
+          // Available
+          //
+        } else {
+          //
+          // Not available
+          //
+          continue;
+        }
+
+        //
+        // Check this skill is not already known
+        //
+        bool skill_cand = true;
+        FOR_ALL_SKILLS(oid)
+        {
+          auto current_skill = game->level->thing_find(oid);
+          if (! current_skill) {
+            continue;
+          }
+
+          if (current_skill->tp() == new_skill->tpp) {
+            //
+            // Already known
+            //
+            skill_cand = false;
+            break;
+          }
+        }
+
+        if (skill_cand) {
+          cands.push_back(new_skill->tpp);
         }
       }
-    }
-    if (add) {
-      cands.push_back(tpp);
     }
   }
 

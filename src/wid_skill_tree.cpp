@@ -173,7 +173,7 @@ static uint8_t wid_skill_close(Widp w, int x, int y, uint32_t button)
   return true;
 }
 
-void wid_skill_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
+static void wid_skill_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
   DBG2("Skill: Begin over skill");
@@ -193,7 +193,7 @@ void wid_skill_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
   game->wid_tp_info_create(skill->tpp);
 }
 
-void wid_skill_tree_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
+static void wid_skill_tree_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   auto new_skill_tree = wid_get_string_context(w);
 
@@ -206,7 +206,7 @@ void wid_skill_tree_over_begin(Widp w, int relx, int rely, int wheelx, int wheel
   game->wid_choose_skill();
 }
 
-void wid_skill_over_end(Widp w)
+static void wid_skill_over_end(Widp w)
 {
   TRACE_NO_INDENT();
   DBG2("Skill: End over skill");
@@ -222,7 +222,7 @@ void wid_skill_over_end(Widp w)
 //
 // Is this skill learned only after another?
 //
-static bool skill_has_precursor(Skillp skill_curr)
+bool skill_has_precursor(Skillp skill_curr)
 {
   for (auto iter : game->skill_tree) {
     auto tree_name = iter.first;
@@ -254,7 +254,7 @@ static bool skill_has_precursor(Skillp skill_curr)
 //
 // Have we unlocked a skill?
 //
-static bool skill_is_available(Skillp skill_next)
+bool skill_is_available(Skillp skill_next)
 {
   for (auto iter : game->skill_tree) {
     auto tree_name = iter.first;
