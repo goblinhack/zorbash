@@ -100,6 +100,8 @@ void dungeon_test(void)
 
     if (player && player->is_waiting_to_descend_dungeon) {
       TRACE_NO_INDENT();
+      CON("Player needs to descend a level");
+
       world_at += point3d(0, 0, 2);
       grid_at += point(0, 1);
       delete new_level;
@@ -113,11 +115,16 @@ void dungeon_test(void)
       TRACE_NO_INDENT();
       player->level_change(new_level);
 
+      if (player->is_waiting_to_descend_dungeon) {
+        DIE("Player failed to descend");
+      }
+
       TRACE_NO_INDENT();
       wid_choose_next_dungeons_destroy(nullptr);
     }
   }
 
+  CON("End of test, level depth: %u", grid_at.y + 1);
   CON("End of test, move count: %u", player->move_count());
 
   TRACE_NO_INDENT();
