@@ -141,3 +141,5 @@ read_opts()
 }
 
 read_opts "$@"
+
+testme
