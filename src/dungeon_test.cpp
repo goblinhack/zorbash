@@ -99,15 +99,21 @@ void dungeon_test(void)
     wid_display_all();
 
     if (player && player->is_waiting_to_descend_dungeon) {
+      TRACE_NO_INDENT();
       world_at += point3d(0, 0, 2);
       grid_at += point(0, 1);
       delete new_level;
 
       new_level = new Level(biome);
+
+      TRACE_NO_INDENT();
       new_level->create(world_at, grid_at, difficulty_depth, dungeon_walk_order_level_no);
       game->level = new_level;
+
+      TRACE_NO_INDENT();
       player->level_change(new_level);
 
+      TRACE_NO_INDENT();
       wid_choose_next_dungeons_destroy(nullptr);
     }
   }
