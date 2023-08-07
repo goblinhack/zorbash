@@ -318,12 +318,43 @@ bool Thing::can_learn_a_skill(void)
   return false;
 }
 
+static Tpp skill_alias_set_tpp(Skillp skill)
+{
+  if (skill->skill_alias.empty()) {
+    return nullptr;
+  }
+
+  //
+  // Check the alias to skill mapping exists
+  //
+  if (game->skill_aliases.find(skill->skill_alias) == game->skill_aliases.end()) {
+    ERR("Skill alias %s not found", skill->skill_alias.c_str());
+    return nullptr;
+  }
+
+  //
+  // Find the skill template
+  //
+  auto skill_name = game->skill_aliases[ skill->skill_alias ];
+  if (skill_name.empty()) {
+    ERR("Skill name %s not found", skill->skill_alias.c_str());
+    return nullptr;
+  }
+
+  auto tpp = tp_find(skill_name);
+  if (tpp) {
+    skill->tpp = tpp;
+  }
+
+  return tpp;
+}
+
 //
 // Learn a random skill out of the available ones
 //
 bool Thing::learn_random_skill(void)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
 
   std::vector< Tpp > cands;
 
@@ -338,14 +369,31 @@ bool Thing::learn_random_skill(void)
           continue;
         }
 
+        //
+        // If the widget has not been opened yet, we need to set the skill tpp
+        //
+        skill_alias_set_tpp(new_skill);
+
+        if (! new_skill->tpp) {
+          ERR("Skill %s has no template", new_skill->skill_alias.c_str());
+          continue;
+        }
+
+        dbg("Possible skill: %s", new_skill->tpp->name().c_str());
+        TRACE_AND_INDENT();
+
         if (! skill_has_precursor(new_skill) || skill_is_available(new_skill)) {
           //
           // Available
           //
+          TRACE_AND_INDENT();
+          dbg("Candidate skill: %s", new_skill->tpp->name().c_str());
         } else {
           //
           // Not available
           //
+          TRACE_AND_INDENT();
+          dbg("Unavailable skill: %s", new_skill->tpp->name().c_str());
           continue;
         }
 
@@ -364,6 +412,8 @@ bool Thing::learn_random_skill(void)
             //
             // Already known
             //
+            TRACE_AND_INDENT();
+            dbg("Add candidate skill: %s", new_skill->tpp->name().c_str());
             skill_cand = false;
             break;
           }

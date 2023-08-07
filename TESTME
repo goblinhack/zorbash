@@ -154,7 +154,7 @@ do
   mkdir -p tests/$seed/expected_output/
 
   printf "%-60s ... " "Running seed ($seed)"
-  CMD="./zorbash --seed $seed --test-dungeon-gen --ascii --monochrome"
+  CMD="./zorbash --debug --seed $seed --test-dungeon-gen --ascii --monochrome"
   $CMD > tests/$seed/output/console
   cp appdata/zorbash/stdout.txt tests/$seed/output/
 
@@ -171,6 +171,7 @@ do
     printf "$RED[%s]$RESET\n" "ERROR"
     echo Run the following to reproduce this:
     echo $CMD
+    exit 1
     continue
   fi
 

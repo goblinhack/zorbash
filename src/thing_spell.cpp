@@ -348,12 +348,43 @@ bool Thing::can_learn_a_spell(void)
   return false;
 }
 
+static Tpp spell_alias_set_tpp(Spellp spell)
+{
+  if (spell->spell_alias.empty()) {
+    return nullptr;
+  }
+
+  //
+  // Check the alias to spell mapping exists
+  //
+  if (game->spell_aliases.find(spell->spell_alias) == game->spell_aliases.end()) {
+    ERR("Spell alias %s not found", spell->spell_alias.c_str());
+    return nullptr;
+  }
+
+  //
+  // Find the spell template
+  //
+  auto spell_name = game->spell_aliases[ spell->spell_alias ];
+  if (spell_name.empty()) {
+    ERR("Spell name %s not found", spell->spell_alias.c_str());
+    return nullptr;
+  }
+
+  auto tpp = tp_find(spell_name);
+  if (tpp) {
+    spell->tpp = tpp;
+  }
+
+  return tpp;
+}
+
 //
 // Learn a random spell out of the available ones
 //
 bool Thing::learn_random_spell(void)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
 
   std::vector< Tpp > cands;
 
@@ -368,14 +399,31 @@ bool Thing::learn_random_spell(void)
           continue;
         }
 
+        //
+        // If the widget has not been opened yet, we need to set the spell tpp
+        //
+        spell_alias_set_tpp(new_spell);
+
+        if (! new_spell->tpp) {
+          ERR("Spell %s has no template", new_spell->spell_alias.c_str());
+          continue;
+        }
+
+        dbg("Possible spell: %s", new_spell->tpp->name().c_str());
+        TRACE_AND_INDENT();
+
         if (! spell_has_precursor(new_spell) || spell_is_available(new_spell)) {
           //
           // Available
           //
+          TRACE_AND_INDENT();
+          dbg("Candidate spell: %s", new_spell->tpp->name().c_str());
         } else {
           //
           // Not available
           //
+          TRACE_AND_INDENT();
+          dbg("Unavailable spell: %s", new_spell->tpp->name().c_str());
           continue;
         }
 
@@ -394,6 +442,8 @@ bool Thing::learn_random_spell(void)
             //
             // Already known
             //
+            TRACE_AND_INDENT();
+            dbg("Add candidate spell: %s", new_spell->tpp->name().c_str());
             spell_cand = false;
             break;
           }
