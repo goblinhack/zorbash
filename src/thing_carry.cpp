@@ -625,18 +625,18 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item, Car
   }
 
   if (worth_collecting(item, &would_need_to_drop) < 0) {
-    dbg("Carry check: @(%s, %d,%d %d/%dh) is not worth collecting %s", level->to_string().c_str(), (int) curr_at.x,
+    dbg("Carry check: at (%s, %d,%d %d/%dh) is not worth collecting %s", level->to_string().c_str(), (int) curr_at.x,
         (int) curr_at.y, health(), health_max(), item->to_short_string().c_str());
     return false;
   }
 
   if (would_need_to_drop) {
-    dbg("Carry check: @(%s, %d,%d %d/%dh) try to carry %s by dropping %s", level->to_string().c_str(),
+    dbg("Carry check: at (%s, %d,%d %d/%dh) try to carry %s by dropping %s", level->to_string().c_str(),
         (int) curr_at.x, (int) curr_at.y, health(), health_max(), item->to_short_string().c_str(),
         would_need_to_drop->to_string().c_str());
 
     if (drop(would_need_to_drop)) {
-      dbg("Carry check: @(%s, %d,%d %d/%dh) dropped %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y,
+      dbg("Carry check: at (%s, %d,%d %d/%dh) dropped %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y,
           health(), health_max(), would_need_to_drop->to_string().c_str());
 
       if (is_player() && game->robot_mode) {
@@ -646,7 +646,7 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item, Car
       return true;
     }
 
-    dbg("Carry check: @(%s, %d,%d %d/%dh) failed to drop %s", level->to_string().c_str(), (int) curr_at.x,
+    dbg("Carry check: at (%s, %d,%d %d/%dh) failed to drop %s", level->to_string().c_str(), (int) curr_at.x,
         (int) curr_at.y, health(), health_max(), would_need_to_drop->to_string().c_str());
 
     if (is_player() && game->robot_mode) {
@@ -657,7 +657,7 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item, Car
   }
 
   if (try_to_carry(item, carry_options)) {
-    dbg("Carry check: @(%s, %d,%d %d/%dh) collected %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y,
+    dbg("Carry check: at (%s, %d,%d %d/%dh) collected %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y,
         health(), health_max(), item->to_short_string().c_str());
 
     if (is_player() && game->robot_mode) {
@@ -667,7 +667,7 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item, Car
     return true;
   }
 
-  dbg("Carry check: @(%s, %d,%d %d/%dh) failed to collect %s", level->to_string().c_str(), (int) curr_at.x,
+  dbg("Carry check: at (%s, %d,%d %d/%dh) failed to collect %s", level->to_string().c_str(), (int) curr_at.x,
       (int) curr_at.y, health(), health_max(), item->to_short_string().c_str());
 
   if (is_player() && game->robot_mode) {

@@ -840,7 +840,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
             t->reinit();
 
 #ifdef ENABLE_DEBUG_THING_SER
-            t->con("LOADED @%d,%d %X", t->curr_at.x, t->curr_at.y, t->id.id);
+            t->con("LOADED at %d,%d %X", t->curr_at.x, t->curr_at.y, t->id.id);
             if (t->to_dbg_saved_string() != t->debug_str) {
               CON("From save file  : %s", t->debug_str.c_str());
               CON("Newly created as: %s", t->to_dbg_saved_string().c_str());

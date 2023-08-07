@@ -33,10 +33,11 @@ void dungeon_test(void)
   //
   // Use a random biome
   //
-  auto biome = get_biome(game->seed % DUNGEONS_MAX_DIFFICULTY_LEVEL);
-  biome      = get_biome(0);
+  auto difficulty_depth = game->seed % DUNGEONS_MAX_DIFFICULTY_LEVEL;
+  auto biome            = get_biome(difficulty_depth);
+  biome                 = get_biome(0);
   point3d world_at;
-  point   grid_at;
+  point   grid_at(0, 1);
 
   //
   // Needed to set the terminal size
@@ -58,12 +59,12 @@ void dungeon_test(void)
   game->init();
 
   auto new_level                   = new Level(biome);
-  auto difficulty_depth            = 0;
-  auto dungeon_walk_order_level_no = 0;
+  auto dungeon_walk_order_level_no = 1;
 
   TRACE_NO_INDENT();
   new_level->create(world_at, grid_at, difficulty_depth, dungeon_walk_order_level_no);
-  game->level = new_level;
+  new_level->dungeon_walk_order_level_no = grid_at.y;
+  game->level                            = new_level;
 
   {
     pcg_random_allowed++;
@@ -110,9 +111,10 @@ void dungeon_test(void)
       new_level->create(world_at, grid_at, difficulty_depth, dungeon_walk_order_level_no);
       new_level->dungeon_walk_order_level_no = grid_at.y;
       game->level                            = new_level;
+      game->things_are_moving                = false;
 
       TRACE_AND_INDENT();
-      player->con("player change level %p to %p", old_level, new_level);
+      player->con("player change level");
       player->level_change(new_level);
 
       player->con("player needs to delete the old level");
@@ -130,23 +132,8 @@ void dungeon_test(void)
       wid_choose_next_dungeons_destroy(nullptr);
 
       {
-        pcg_random_allowed++;
-
-        game->robot_mode_requested = true;
-
         TRACE_NO_INDENT();
-        game->start();
-
-        TRACE_NO_INDENT();
-        game->tick_begin_now();
-
-        TRACE_NO_INDENT();
-        game->tick_end();
-
-        TRACE_NO_INDENT();
-        game->tick_begin_now();
-
-        pcg_random_allowed--;
+        game->tick_begin("explore new level");
       }
     }
   }

@@ -50,12 +50,12 @@ void Game::start(void)
   TOPCON("Welcome to the lair of the dread monster, %%fg=red$Zorbash%%fg=reset$.");
   TOPCON("Collect the %%fg=yellow$crystals%%fg=reset$ and defeat Zorbash to win.");
 
-  CON("%%fg=red$@@@@@@  @@@@@  @@@@@@  @@@@@@   @@@@@   @@@@  @@@ @@@%%fg=reset$");
-  CON("%%fg=red$@@@@@@ @@@@@@@ @@@@@@@ @@@@@@@ @@@@@@@ @@@@@@ @@@ @@@%%fg=reset$");
-  CON("%%fg=red$   @@! @@! @@@ @@! @@@ @@! @@@ @@! @@@ !@@    @@! @@@%%fg=reset$");
-  CON("%%fg=red$   @!  !@! @!@ !@! @!@ !@  @!@ !@! @!@ !@!    !@! @!@%%fg=reset$");
-  CON("%%fg=red$  @!   @!@ !@! @!@!@!  @!@@!@  @!@@!@! !!@!!  @!@!!@!%%fg=reset$");
-  CON("%%fg=red$ !!    !@! !!! !!@!!   !!!!!!! !!!!!!!  !!!!! !!!@!!!%%fg=reset$");
+  CON("%%fg=red$OOOOOO  OOOOO  OOOOOO  OOOOOO   OOOOO   OOOO  OOO OOO%%fg=reset$");
+  CON("%%fg=red$OOOOOO OOOOOOO OOOOOOO OOOOOOO OOOOOOO OOOOOO OOO OOO%%fg=reset$");
+  CON("%%fg=red$   OO! OO! OOO OO! OOO OO! OOO OO! OOO !OO    OO! OOO%%fg=reset$");
+  CON("%%fg=red$   O!  !O! O!O !O! O!O !O  O!O !O! O!O !O!    !O! O!O%%fg=reset$");
+  CON("%%fg=red$  O!   O!O !O! O!O!O!  O!OO!O  O!OO!O! !!O!!  O!O!!O!%%fg=reset$");
+  CON("%%fg=red$ !!    !O! !!! !!O!!   !!!!!!! !!!!!!!  !!!!! !!!O!!!%%fg=reset$");
   CON("%%fg=red$ !:    !!: !!! !!: !!  !!: !!! !!: !!!     !: !!: !!!%%fg=reset$");
   CON("%%fg=red$:!     :!: !:! :!: !:! :!: !:! :!: !:!    !:! :!: !:!%%fg=reset$");
   CON("%%fg=red$:::::: ::::::: ::  ::: ::::::: ::: ::: :::::: ::  :::%%fg=reset$");

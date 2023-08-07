@@ -17,6 +17,10 @@ void Game::place_player(void)
     return;
   }
 
+  if (game->level->player) {
+    return;
+  }
+
   DBG("Place player");
 
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {

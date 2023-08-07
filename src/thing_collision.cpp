@@ -447,7 +447,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos)
     return false;
   }
 
-  dbg2("Collision check only? @%d,%d with %s)", future_pos.x, future_pos.y, it->to_short_string().c_str());
+  dbg2("Collision check only? at %d,%d with %s)", future_pos.x, future_pos.y, it->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   //

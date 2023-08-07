@@ -176,12 +176,12 @@ static void game_display_flames_tiles(int w, int h)
   //
   if (g_opt_ascii) {
     char *zorb[] = {
-        (char *) "@@@@@@  @@@@@  @@@@@@  @@@@@@   @@@@@   @@@@  @@@ @@@",
-        (char *) "@@@@@@ @@@@@@@ @@@@@@@ @@@@@@@ @@@@@@@ @@@@@@ @@@ @@@",
-        (char *) "   @@! @@! @@@ @@! @@@ @@! @@@ @@! @@@ !@@    @@! @@@",
-        (char *) "   @!  !@! @!@ !@! @!@ !@  @!@ !@! @!@ !@!    !@! @!@",
-        (char *) "  @!   @!@ !@! @!@!@!  @!@@!@  @!@@!@! !!@!!  @!@!!@!",
-        (char *) " !!    !@! !!! !!@!!   !!!!!!! !!!!!!!  !!!!! !!!@!!!",
+        (char *) "OOOOOO  OOOOO  OOOOOO  OOOOOO   OOOOO   OOOO  OOO OOO",
+        (char *) "OOOOOO OOOOOOO OOOOOOO OOOOOOO OOOOOOO OOOOOO OOO OOO",
+        (char *) "   OO! OO! OOO OO! OOO OO! OOO OO! OOO !OO    OO! OOO",
+        (char *) "   O!  !O! O!O !O! O!O !O  O!O !O! O!O !O!    !O! O!O",
+        (char *) "  O!   O!O !O! O!O!O!  O!OO!O  O!OO!O! !!O!!  O!O!!O!",
+        (char *) " !!    !O! !!! !!O!!   !!!!!!! !!!!!!!  !!!!! !!!O!!!",
         (char *) " !!    !!! !!! !!! !!  !!! !!! !!!!!!!     !! !!! !!!",
         (char *) "!!     !!! !!! !!! !!! !!! !!! !!! !!!    !!! !!! !!!",
         (char *) "!!!!!! !!!!!!! !!! !!! !!!!!!! !!! !!! !!!!!! !!! !!!",
