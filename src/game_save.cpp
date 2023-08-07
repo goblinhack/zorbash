@@ -262,6 +262,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingAip & > const my)
   out << bits(my.t->thing_friends);
   out << bits(my.t->perma_friends);
   out << bits(my.t->goal_penalty);
+  out << bits(my.t->collect_penalty);
   out << bits(my.t->avoid);
   out << bits(my.t->move_path);
   out << bits(my.t->wander_dest);

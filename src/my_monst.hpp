@@ -371,6 +371,7 @@ public:
   std::map< ThingId, int > thing_attackers {}; // List of things that attacked us
   std::map< ThingId, int > avoid {};           // List of things that wronged us and need to be avoided
   std::map< ThingId, int > goal_penalty {};    // Helps to avoid goal oscillation
+  std::map< ThingId, int > collect_penalty {}; // Helps to avoid item collect/drop oscillation
 
   std::vector< point > move_path;
 

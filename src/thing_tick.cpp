@@ -177,6 +177,14 @@ void Thing::achieve_goals_in_life(void)
   }
 
   //
+  // Timeout drop penalties
+  //
+  collect_penalty_tick();
+  if (is_dead) {
+    return;
+  }
+
+  //
   // Timeout enemies to avoid
   //
   avoid_tick();

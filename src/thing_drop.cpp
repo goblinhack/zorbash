@@ -205,6 +205,7 @@ bool Thing::drop(Thingp what, Thingp target, DropOptions drop_options)
 
   what->is_being_dropped = false;
   what->tick_last_dropped_set(game->tick_current);
+  add_collect_penalty(what);
   if (! is_dead_or_dying()) {
     if (! drop_options.is_being_thrown && ! drop_options.is_able_to_be_equipped && ! drop_options.is_being_stolen) {
       what->on_dropped();

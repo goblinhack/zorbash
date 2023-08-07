@@ -11,6 +11,13 @@
 int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
 {
   //
+  // Recently dropped?
+  //
+  if (collect_penalty_get(item)) {
+    return -1;
+  }
+
+  //
   // If not the robot then we always give the option to collect.
   //
   if (is_player()) {

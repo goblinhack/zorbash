@@ -286,6 +286,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingAip & > my)
   in >> bits(my.t->thing_friends);
   in >> bits(my.t->perma_friends);
   in >> bits(my.t->goal_penalty);
+  in >> bits(my.t->collect_penalty);
   in >> bits(my.t->avoid);
   in >> bits(my.t->move_path);
   in >> bits(my.t->wander_dest);
