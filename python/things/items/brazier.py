@@ -44,6 +44,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_obs_ai(self, True)
     my.is_obs_shooting(self, True)
     my.is_obs_throwing(self, True)
+    my.is_only_one_per_tile(self, True)
     my.is_shovable(self, True)
     my.light_color(self, "orange")
     my.light_dist(self, 2)
