@@ -31,9 +31,10 @@ void dungeon_test(void)
   TRACE_NO_INDENT();
 
   //
-  // smaller node numbers mean larger rooms
+  // Use a random biome
   //
-  auto    biome = get_biome(0);
+  auto biome = get_biome(game->seed % DUNGEONS_MAX_DIFFICULTY_LEVEL);
+  biome      = get_biome(0);
   point3d world_at;
   point   grid_at;
 
@@ -87,9 +88,6 @@ void dungeon_test(void)
   auto player = game->level->player;
   while (! player->is_dead) {
     TRACE_NO_INDENT();
-    SDL_Delay(5);
-
-    TRACE_NO_INDENT();
     game->level->tick();
 
     TRACE_NO_INDENT();
@@ -99,21 +97,30 @@ void dungeon_test(void)
     wid_display_all();
 
     if (player && player->is_waiting_to_descend_dungeon) {
-      TRACE_NO_INDENT();
-      CON("Player needs to descend a level");
+      TRACE_AND_INDENT();
+      player->con("player needs to descend a level");
 
       world_at += point3d(0, 0, 2);
       grid_at += point(0, 1);
-      delete new_level;
 
-      new_level = new Level(biome);
-
-      TRACE_NO_INDENT();
+      TRACE_AND_INDENT();
+      player->con("create the next level");
+      auto old_level = game->level;
+      new_level      = new Level(biome);
       new_level->create(world_at, grid_at, difficulty_depth, dungeon_walk_order_level_no);
-      game->level = new_level;
+      new_level->dungeon_walk_order_level_no = grid_at.y;
+      game->level                            = new_level;
 
-      TRACE_NO_INDENT();
+      TRACE_AND_INDENT();
+      player->con("player change level %p to %p", old_level, new_level);
       player->level_change(new_level);
+
+      player->con("player needs to delete the old level");
+      TRACE_AND_INDENT();
+      delete old_level;
+
+      TRACE_AND_INDENT();
+      player->con("player has joined the new level");
 
       if (player->is_waiting_to_descend_dungeon) {
         DIE("Player failed to descend");
@@ -121,6 +128,26 @@ void dungeon_test(void)
 
       TRACE_NO_INDENT();
       wid_choose_next_dungeons_destroy(nullptr);
+
+      {
+        pcg_random_allowed++;
+
+        game->robot_mode_requested = true;
+
+        TRACE_NO_INDENT();
+        game->start();
+
+        TRACE_NO_INDENT();
+        game->tick_begin_now();
+
+        TRACE_NO_INDENT();
+        game->tick_end();
+
+        TRACE_NO_INDENT();
+        game->tick_begin_now();
+
+        pcg_random_allowed--;
+      }
     }
   }
 

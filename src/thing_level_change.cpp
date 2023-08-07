@@ -17,6 +17,8 @@ void Thing::level_change(Levelp l)
   TRACE_NO_INDENT();
 
   if (level == l) {
+    dbg("Same level, %p", l);
+    TRACE_AND_INDENT();
     return;
   }
 

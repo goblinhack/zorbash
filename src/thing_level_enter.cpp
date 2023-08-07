@@ -11,7 +11,9 @@ void Thing::level_enter(bool rejoin)
 {
   TRACE_NO_INDENT();
 
-  if (is_loggable()) {
+  if (is_player()) {
+    dbg("Enter level %s", level->to_string().c_str());
+  } else if (is_loggable()) {
     dbg2("Enter level %s", level->to_string().c_str());
   }
 
@@ -157,8 +159,6 @@ void Thing::level_enter(bool rejoin)
 
     game->set_request_to_remake_rightbar();
 
-    dbg2("Level entered");
-
     level->player = this;
     game->set_meta_data(level);
     level->ts_entered = time_ms();
@@ -175,5 +175,11 @@ void Thing::level_enter(bool rejoin)
         light_distance_update();
       }
     }
+  }
+
+  if (is_player()) {
+    dbg("Entered level %s", level->to_string().c_str());
+  } else if (is_loggable()) {
+    dbg2("Entered level %s", level->to_string().c_str());
   }
 }

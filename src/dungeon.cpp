@@ -2592,7 +2592,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
   TRACE_NO_INDENT();
   Dmap d {};
 
-  DBG("draw corridor from %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+  DBG2("draw corridor from %d,%d to %d,%d", start.x, start.y, end.x, end.y);
 
   if ((start.x <= 0) || (start.y <= 0) || (start.x >= map_width - 1) || (start.y >= map_height - 1)) {
     return 0;
@@ -2871,7 +2871,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
     for (auto c : p) {
       putc(c.x, c.y, MAP_DEPTH_FLOOR, Charmap::DEBUG);
     }
-    DBG("cannot create corridor, too long a corridor");
+    DBG2("cannot create corridor, too long a corridor");
     return 0;
   }
 
@@ -2913,7 +2913,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
   putc(end.x, end.y, MAP_DEPTH_OBJ, Charmap::DOOR);
 
 #if 0
-  DBG("INF: placed corridor len %d", (int) p.size());
+  DBG2("INF: placed corridor len %d", (int) p.size());
   dump();
 #endif
 
@@ -3297,7 +3297,7 @@ bool Dungeon::rooms_move_closer_together(void)
   if (! corridor_count) {
     TRACE_NO_INDENT();
 #if 0
-    DBG("level before adding corridors is NOT solvable:");
+    DBG2("level before adding corridors is NOT solvable:");
     dump();
 #endif
     return false;
@@ -3305,7 +3305,7 @@ bool Dungeon::rooms_move_closer_together(void)
 
   TRACE_NO_INDENT();
 #if 0
-  DBG("level before adding shorter corridors is solvable");
+  DBG2("level before adding shorter corridors is solvable");
 #endif
   restore_level();
 
@@ -3547,7 +3547,7 @@ bool Dungeon::rooms_move_closer_together(void)
         restore_level();
       } else {
         corridor_count = new_total_corridor_len;
-        DBG("moved rooms closer, new_total_corridor_len now %d", new_total_corridor_len);
+        DBG2("moved rooms closer, new_total_corridor_len now %d", new_total_corridor_len);
         failed_to_place_all_corridors    = 0;
         failed_to_make_shorter_corridors = 0;
         std::copy(mbegin(cells_ok), mend(cells_ok), mbegin(cells));

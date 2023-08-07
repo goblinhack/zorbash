@@ -12,13 +12,16 @@ void Thing::level_leave(void)
   //
   // Too noisy at level destroy time.
   //
-  if (is_loggable()) {
+  if (is_player()) {
+    dbg("Leave %s", level->to_string().c_str());
+  } else if (is_loggable()) {
     if (! level->is_being_destroyed) {
       dbg2("Leave %s", level->to_string().c_str());
     }
   }
   TRACE_AND_INDENT();
 
+  TRACE_NO_INDENT();
   level_pop();
 
   //
@@ -33,6 +36,7 @@ void Thing::level_leave(void)
   // release_followers();
 
   {
+    TRACE_NO_INDENT();
     auto it = immediate_mob();
     if (it) {
       mob_unset();
@@ -40,6 +44,7 @@ void Thing::level_leave(void)
   }
 
   {
+    TRACE_NO_INDENT();
     auto it = leader();
     if (it) {
       leader_unset();
@@ -47,6 +52,7 @@ void Thing::level_leave(void)
   }
 
   {
+    TRACE_NO_INDENT();
     auto it = immediate_spawner();
     if (it) {
       spawner_unset();
@@ -57,6 +63,7 @@ void Thing::level_leave(void)
   // We must remove this here or we will be leaving a stale thing on the old level.
   // This will break save and load.
   //
+  TRACE_NO_INDENT();
   {
     auto f = level->all_things.find(id);
     if (f != level->all_things.end()) {
@@ -69,6 +76,7 @@ void Thing::level_leave(void)
     //
     // If doing a walk, we must be careful and cannot modify the map
     //
+    TRACE_NO_INDENT();
     if (level->interesting_things_walk_in_progress) {
       level->interesting_things_pending_add.erase(id);
       level->interesting_things_pending_remove.insert(std::pair(id, this));
@@ -84,6 +92,7 @@ void Thing::level_leave(void)
     //
     // If doing a walk, we must be careful and cannot modify the map
     //
+    TRACE_NO_INDENT();
     if (level->tickable_things_walk_in_progress) {
       level->tickable_things_pending_add.erase(id);
       level->tickable_things_pending_remove.insert(std::pair(id, this));
@@ -99,6 +108,7 @@ void Thing::level_leave(void)
     //
     // If doing a walk, we must be careful and cannot modify the map
     //
+    TRACE_NO_INDENT();
     if (level->describable_things_walk_in_progress) {
       level->describable_things_pending_add.erase(id);
       level->describable_things_pending_remove.insert(std::pair(id, this));
@@ -114,6 +124,7 @@ void Thing::level_leave(void)
     //
     // If doing a walk, we must be careful and cannot modify the map
     //
+    TRACE_NO_INDENT();
     if (level->animated_things_walk_in_progress) {
       level->animated_things_pending_add.erase(id);
       level->animated_things_pending_remove.insert(std::pair(id, this));
@@ -126,8 +137,18 @@ void Thing::level_leave(void)
   }
 
   if (is_player()) {
+    TRACE_NO_INDENT();
     game->set_request_to_remake_rightbar();
     level->is_completed          = true;
     level->is_entered_by_falling = false;
+  }
+
+  TRACE_AND_INDENT();
+  if (is_player()) {
+    dbg("Left %s", level->to_string().c_str());
+  } else if (is_loggable()) {
+    if (! level->is_being_destroyed) {
+      dbg2("Left %s", level->to_string().c_str());
+    }
   }
 }
