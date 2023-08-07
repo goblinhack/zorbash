@@ -49,20 +49,32 @@ void Thing::move_set_dir_from_dest_or_delta(point delta)
   //
   // Check if we can lunge
   //
-  FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_OBJ)
-  {
-    if (t->is_block_of_ice()) {
-      dbg("No direction change when stuck ice");
-      return;
+  if (level) {
+    TRACE_NO_INDENT();
+    FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_OBJ)
+    {
+      if (t->is_block_of_ice()) {
+        dbg("No direction change when stuck ice");
+        return;
+      }
     }
+    FOR_ALL_THINGS_END()
   }
-  FOR_ALL_THINGS_END()
 
+  if (is_frozen) {
+    TRACE_NO_INDENT();
+    dbg("No direction change when frozen");
+    return;
+  }
+
+  TRACE_NO_INDENT();
   auto ai = maybe_aip();
   if (ai && ai->move_path.size() > 1) {
+    TRACE_NO_INDENT();
     auto goal = ai->move_path[ ai->move_path.size() - 1 ];
     move_set_dir_from_delta(goal - curr_at);
   } else {
+    TRACE_NO_INDENT();
     move_set_dir_from_delta(delta);
   }
 }

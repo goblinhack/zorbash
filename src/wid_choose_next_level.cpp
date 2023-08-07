@@ -169,19 +169,18 @@ void wid_choose_next_dungeons_destroy(Widp w)
 
   if (! w) {
     TRACE_NO_INDENT();
-    ctx = g_ctx;
-    verify(MTYPE_WID, ctx);
+    ctx   = g_ctx;
     g_ctx = nullptr;
   } else {
     TRACE_NO_INDENT();
     ctx = (wid_choose_next_dungeons_ctx *) wid_get_void_context(w);
-    verify(MTYPE_WID, ctx);
     wid_set_void_context(w, nullptr);
   }
 
   if (! ctx) {
     return;
   }
+  verify(MTYPE_WID, ctx);
 
   /*
    * Might be in tbe process of destroying.

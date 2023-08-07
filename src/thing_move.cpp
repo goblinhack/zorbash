@@ -818,6 +818,7 @@ void Thing::move_delta(point delta)
 void Thing::move_to_immediately(point to)
 {
   TRACE_NO_INDENT();
+
   move_finish();
   auto delta = to - curr_at;
   move_set_dir_from_dest_or_delta(delta);
@@ -828,6 +829,7 @@ void Thing::move_to_immediately(point to)
   // Don't check for descending here as that check will be set when falling
   //
 
+  TRACE_NO_INDENT();
   update_pos(to, true);
   move_finish();
 
@@ -844,17 +846,19 @@ void Thing::move_to_immediately(point to)
   }
 
   if (is_player()) {
-    if (! level->is_map_follow_player) {
+    if (level && ! level->is_map_follow_player) {
       level->is_map_follow_player = true;
     }
   }
 
+  TRACE_NO_INDENT();
   update_interpolated_position();
 
   //
   // If this move was initiated by a jump make sure and clear the move path
   // so we don't try to continua an AI move
   //
+  TRACE_NO_INDENT();
   if (maybe_aip()) {
     aip()->move_path.clear();
   }

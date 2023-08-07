@@ -775,21 +775,27 @@ int main(int argc, char *argv[])
   LOG("INI: Platform is __linux__");
 #endif
 
-  TRACE_NO_INDENT();
-  parse_args(argc, argv);
+  {
+    TRACE_NO_INDENT();
+    parse_args(argc, argv);
+  }
 
-  LOG("INI: Ramdisk");
-  TRACE_NO_INDENT();
-  ramdisk_init();
+  {
+    LOG("INI: Ramdisk");
+    TRACE_NO_INDENT();
+    ramdisk_init();
+  }
 
   //////////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ Use LOG
   // instead of CON until we set stdout or you see two logs
   //////////////////////////////////////////////////////////////////////////////
 
-  LOG("INI: Create console");
-  TRACE_NO_INDENT();
-  ascii_init();
+  {
+    LOG("INI: Create console");
+    TRACE_NO_INDENT();
+    ascii_init();
+  }
 
   //
   // Need this to get the UTF on the console
@@ -818,32 +824,34 @@ int main(int argc, char *argv[])
   //
   // Create and load the last saved game
   //
-  TRACE_NO_INDENT();
-  CON("INI: Load game config");
-  game              = new Game(std::string(appdata));
-  auto config_error = game->load_config();
-  if (! config_error.empty()) {
-    std::string version = "" MYVER "";
-    if (game->config.version.c_str() != version.c_str()) {
-      SDL_MSG_BOX(
-          "Config version change error: %s. Will need to reset config. Found version [%s]. Expected version [%s].",
-          config_error.c_str(), game->config.version.c_str(), version.c_str());
-    } else {
-      SDL_MSG_BOX("Config load error: %s. Will need to reset config. Found version [%s]. Expected version [%s].",
-                  config_error.c_str(), game->config.version.c_str(), version.c_str());
-    }
-
-    game->config.reset();
-    game->save_config();
-    g_errored = false;
-  }
-  CON("INI: Loaded");
-
-  TRACE_NO_INDENT();
-  if (! g_opt_tests) {
+  {
     TRACE_NO_INDENT();
-    if (! sdl_init()) {
-      ERR("SDL: Init");
+    CON("INI: Load config");
+    game              = new Game(std::string(appdata));
+    auto config_error = game->load_config();
+    if (! config_error.empty()) {
+      std::string version = "" MYVER "";
+      if (game->config.version.c_str() != version.c_str()) {
+        SDL_MSG_BOX(
+            "Config version change error: %s. Will need to reset config. Found version [%s]. Expected version [%s].",
+            config_error.c_str(), game->config.version.c_str(), version.c_str());
+      } else {
+        SDL_MSG_BOX("Config load error: %s. Will need to reset config. Found version [%s]. Expected version [%s].",
+                    config_error.c_str(), game->config.version.c_str(), version.c_str());
+      }
+
+      game->config.reset();
+      game->save_config();
+      g_errored = false;
+    }
+  }
+
+  {
+    if (! g_opt_tests) {
+      TRACE_NO_INDENT();
+      if (! sdl_init()) {
+        ERR("SDL: Init");
+      }
     }
   }
 
@@ -863,27 +871,37 @@ int main(int argc, char *argv[])
     }
   }
 
-  TRACE_NO_INDENT();
-  sdl_config_update_all();
-
-  TRACE_NO_INDENT();
-  if (g_need_restart) {
-    restart();
+  {
+    TRACE_NO_INDENT();
+    sdl_config_update_all();
   }
 
-  TRACE_NO_INDENT();
-  gl_init_2d_mode();
+  {
+    TRACE_NO_INDENT();
+    if (g_need_restart) {
+      restart();
+    }
+  }
+
+  {
+    TRACE_NO_INDENT();
+    gl_init_2d_mode();
+  }
 
   //
   // Disable vsync so the console is faster
   //
-  TRACE_NO_INDENT();
-  SDL_GL_SetSwapInterval(0);
+  {
+    TRACE_NO_INDENT();
+    SDL_GL_SetSwapInterval(0);
+  }
 
-  TRACE_NO_INDENT();
-  CON("INI: Load early gfx tiles, text, UI etc...");
-  gfx_init();
-  CON("INI: Loaded");
+  {
+    TRACE_NO_INDENT();
+    CON("INI: Load early gfx tiles, text, UI etc...");
+    gfx_init();
+    LOG("INI: Loaded");
+  }
 
   //
   // Random number
@@ -906,125 +924,159 @@ int main(int argc, char *argv[])
   }
 #endif
 
-  TRACE_NO_INDENT();
-  CON("INI: Load fonts");
-  if (! font_init()) {
-    ERR("Font init");
+  {
+    TRACE_NO_INDENT();
+    CON("INI: Load fonts");
+    if (! font_init()) {
+      ERR("Font init");
+    }
+    LOG("INI: Loaded");
   }
-  CON("INI: Loaded");
 
-  TRACE_NO_INDENT();
-  CON("INI: Load widgets");
-  if (! wid_init()) {
-    ERR("Wid init");
+  {
+    TRACE_NO_INDENT();
+    CON("INI: Load widgets");
+    if (! wid_init()) {
+      ERR("Wid init");
+    }
+    LOG("INI: Loaded");
   }
-  CON("INI: Loaded");
 
-  TRACE_NO_INDENT();
-  CON("INI: Load console");
-  if (! wid_console_init()) {
-    ERR("Wid_console init");
+  {
+    TRACE_NO_INDENT();
+    CON("INI: Load console");
+    if (! wid_console_init()) {
+      ERR("Wid_console init");
+    }
+    LOG("INI: Loaded");
+    wid_toggle_hidden(wid_console_window);
+    flush_the_console();
   }
-  CON("INI: Loaded");
-  wid_toggle_hidden(wid_console_window);
-  flush_the_console();
 
   //
   // Need to preserve spaces for restarting via exec
   //
-  TRACE_NO_INDENT();
-  original_program_name = std::string(argv[ 0 ]);
-  CON("INI: Original program name: %s", original_program_name.c_str());
-  flush_the_console();
-
-  TRACE_NO_INDENT();
-  CON("INI: Load tiles");
-  if (! wid_tiles_init()) {
-    ERR("Wid tiles init");
+  {
+    TRACE_NO_INDENT();
+    original_program_name = std::string(argv[ 0 ]);
+    CON("INI: Original program name: %s", original_program_name.c_str());
+    flush_the_console();
   }
 
+  {
+    TRACE_NO_INDENT();
+    CON("INI: Load tiles");
+    if (! wid_tiles_init()) {
+      ERR("Wid tiles init");
+    }
+  }
+
+  {
+  }
   TRACE_NO_INDENT();
   if (! tile_init()) {
     ERR("Tile init");
   }
-  CON("INI: Loaded");
+  LOG("INI: Loaded");
   flush_the_console();
 
-  TRACE_NO_INDENT();
-  CON("INI: Load textures");
-  if (! tex_init()) {
-    ERR("Tex init");
-  }
-  CON("INI: Loaded");
-  flush_the_console();
-
-  TRACE_NO_INDENT();
-  CON("INI: Load audio");
-  if (! audio_init()) {
-    ERR("Audio init");
-  }
-  CON("INI: Loaded");
-  flush_the_console();
-
-  TRACE_NO_INDENT();
-  CON("INI: Load music");
-  if (! music_init()) {
-    ERR("Music init");
-  }
-  CON("INI: Loaded");
-  flush_the_console();
-
-  TRACE_NO_INDENT();
-  CON("INI: Load sound");
-  if (! sound_init()) {
-    ERR("Sound init");
-  }
-  CON("INI: Loaded");
-  flush_the_console();
-
-  TRACE_NO_INDENT();
-  LOG("INI: Init UI topcon");
-  if (! wid_topcon_init()) {
-    ERR("Wid_topcon init");
+  {
+    TRACE_NO_INDENT();
+    CON("INI: Load textures");
+    if (! tex_init()) {
+      ERR("Tex init");
+    }
+    LOG("INI: Loaded");
+    flush_the_console();
   }
 
-  TRACE_NO_INDENT();
-  LOG("INI: Init UI actionar");
-  wid_actionbar_init();
-
-  TRACE_NO_INDENT();
-  LOG("INI: Init UI botcon");
-  if (! wid_botcon_init()) {
-    ERR("Wid_botcon init");
+  {
+    TRACE_NO_INDENT();
+    CON("INI: Load audio");
+    if (! audio_init()) {
+      ERR("Audio init");
+    }
+    LOG("INI: Loaded");
+    flush_the_console();
   }
 
-  TRACE_NO_INDENT();
-  LOG("INI: Find resource locations for gfx and music");
-  find_file_locations();
-  flush_the_console();
-
-  TRACE_NO_INDENT();
-  CON("INI: Load commands");
-  if (! command_init()) {
-    ERR("Command init");
+  {
+    TRACE_NO_INDENT();
+    CON("INI: Load music");
+    if (! music_init()) {
+      ERR("Music init");
+    }
+    LOG("INI: Loaded");
+    flush_the_console();
   }
-  CON("INI: Loaded");
-  flush_the_console();
 
-  TRACE_NO_INDENT();
-  CON("INI: Load dungeon character maps");
-  Charmap::init_charmaps();
-  CON("INI: Loaded");
-  flush_the_console();
-
-  TRACE_NO_INDENT();
-  CON("INI: Load python");
-  py_init(argv);
-  if (g_errored) {
-    goto loop;
+  {
+    TRACE_NO_INDENT();
+    CON("INI: Load sound");
+    if (! sound_init()) {
+      ERR("Sound init");
+    }
+    LOG("INI: Loaded");
+    flush_the_console();
   }
-  CON("INI: Loaded");
-  flush_the_console();
+
+  {
+    TRACE_NO_INDENT();
+    LOG("INI: Init UI topcon");
+    if (! wid_topcon_init()) {
+      ERR("Wid_topcon init");
+    }
+  }
+
+  {
+    TRACE_NO_INDENT();
+    LOG("INI: Init UI actionar");
+    wid_actionbar_init();
+  }
+
+  {
+    TRACE_NO_INDENT();
+    LOG("INI: Init UI botcon");
+    if (! wid_botcon_init()) {
+      ERR("Wid_botcon init");
+    }
+  }
+
+  {
+    TRACE_NO_INDENT();
+    LOG("INI: Find resource locations for gfx and music");
+    find_file_locations();
+    flush_the_console();
+  }
+
+  {
+    TRACE_NO_INDENT();
+    CON("INI: Load commands");
+    if (! command_init()) {
+      ERR("Command init");
+    }
+    LOG("INI: Loaded");
+    flush_the_console();
+  }
+
+  {
+    TRACE_NO_INDENT();
+    CON("INI: Load dungeon character maps");
+    Charmap::init_charmaps();
+    LOG("INI: Loaded");
+    flush_the_console();
+  }
+
+  {
+    TRACE_NO_INDENT();
+    CON("INI: Load python");
+    py_init(argv);
+    if (g_errored) {
+      goto loop;
+    }
+    LOG("INI: Loaded");
+    flush_the_console();
+  }
 
   {
     TRACE_NO_INDENT();
@@ -1032,7 +1084,7 @@ int main(int argc, char *argv[])
     pcg_random_allowed++;
     py_call_void("init2");
     pcg_random_allowed--;
-    CON("INI: Loaded");
+    LOG("INI: Loaded");
     flush_the_console();
   }
 
@@ -1045,7 +1097,7 @@ int main(int argc, char *argv[])
     if (g_errored) {
       goto loop;
     }
-    CON("INI: Loaded");
+    LOG("INI: Loaded");
     flush_the_console();
   }
 
@@ -1061,7 +1113,7 @@ int main(int argc, char *argv[])
     if (g_errored) {
       goto loop;
     }
-    CON("INI: Loaded");
+    LOG("INI: Loaded");
     flush_the_console();
   }
 
@@ -1075,10 +1127,12 @@ int main(int argc, char *argv[])
     // Now all templates are loaded, make sure we have some default config.
     // for example, for bodyparts.
     //
-    TRACE_NO_INDENT();
-    pcg_random_allowed++;
-    game->config.final_init();
-    pcg_random_allowed--;
+    {
+      TRACE_NO_INDENT();
+      pcg_random_allowed++;
+      game->config.final_init();
+      pcg_random_allowed--;
+    }
 
     if (g_opt_tests) {
       //

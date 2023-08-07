@@ -135,7 +135,7 @@ void Thing::level_change(Levelp l)
     FOR_ALL_SKILLS(id)
     {
       auto iter = level->thing_find(id);
-      if (iter && iter->is_activated) {
+      if (iter) {
         iter->level_change(l);
       }
     }
@@ -143,7 +143,7 @@ void Thing::level_change(Levelp l)
     FOR_ALL_SPELLS(id)
     {
       auto iter = level->thing_find(id);
-      if (iter && iter->is_activated) {
+      if (iter) {
         iter->level_change(l);
       }
     }

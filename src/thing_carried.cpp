@@ -35,11 +35,9 @@ std::list< Thingp > Thing::carried_item_only_list(void)
         if (unlikely(! t)) {
           continue;
         }
-        verify(MTYPE_THING, t);
         out.push_back(t);
       }
     }
-    verify(MTYPE_THING, t);
     out.push_back(t);
   }
   return out;
@@ -69,11 +67,9 @@ std::vector< Thingp > Thing::carried_item_only_vector(void)
         if (unlikely(! t)) {
           continue;
         }
-        verify(MTYPE_THING, t);
         out.push_back(t);
       }
     }
-    verify(MTYPE_THING, t);
     out.push_back(t);
   }
 
@@ -116,11 +112,9 @@ std::list< Thingp > Thing::carried_and_equipped_item_list(void)
         if (unlikely(! t)) {
           continue;
         }
-        verify(MTYPE_THING, t);
         out.push_back(t);
       }
     }
-    verify(MTYPE_THING, t);
     out.push_back(t);
   }
   return out;
@@ -159,11 +153,9 @@ std::vector< Thingp > Thing::carried_and_equipped_item_vector(void)
         if (unlikely(! t)) {
           continue;
         }
-        verify(MTYPE_THING, t);
         out.push_back(t);
       }
     }
-    verify(MTYPE_THING, t);
     out.push_back(t);
   }
 
@@ -186,6 +178,7 @@ void Thing::move_carried_items(void)
   {
     auto w = equip_get(iter);
     if (w) {
+      verify(MTYPE_THING, w);
       w->move_to_immediately(curr_at);
       w->dir = dir;
     }
@@ -253,10 +246,10 @@ void Thing::move_carried_items(void)
   FOR_ALL_BODYPART(iter)
   {
     if (bodypart_id_get(iter).ok()) {
-      auto w = level->thing_find(bodypart_id_get(iter));
-      if (w) {
-        w->move_to(curr_at);
-        w->dir = dir;
+      auto bodypart = level->thing_find(bodypart_id_get(iter));
+      if (bodypart) {
+        bodypart->move_to(curr_at);
+        bodypart->dir = dir;
       }
     }
   }
@@ -267,6 +260,7 @@ void Thing::move_carried_items(void)
   //
   if (maybe_itemsp()) {
     for (const auto o : carried_item_only_vector()) {
+      verify(MTYPE_THING, o);
       o->move_to(curr_at);
       o->dir = dir;
     }
@@ -302,11 +296,10 @@ void Thing::move_carried_items(void)
   //
   auto id = on_fire_anim_id();
   if (id.ok()) {
-    TRACE_NO_INDENT();
-    auto w = level->thing_find(id);
-    if (w) {
-      w->move_to(curr_at);
-      w->dir = dir;
+    auto iter = level->thing_find(id);
+    if (iter) {
+      iter->move_to(curr_at);
+      iter->dir = dir;
     }
   }
 }
@@ -314,6 +307,7 @@ void Thing::move_carried_items(void)
 void Thing::move_carried_items_immediately(void)
 {
   TRACE_NO_INDENT();
+
   //
   // Light source follows the thing.
   //

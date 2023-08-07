@@ -29,6 +29,8 @@ if [ ! -x zorbash ]; then
   fi
 fi
 
+#    alphabase \
+
 testme()
 {
   for seed in \
@@ -36,7 +38,6 @@ testme()
     dwarvedelve \
     footpad \
     golemheights \
-    alphabase \
     apecastle \
     badmonkey \
     castlespire \
@@ -62,7 +63,7 @@ testme()
     mkdir -p tests/$seed/expected_output/
 
     printf "%-60s ... " "Running seed ($seed)"
-    CMD="./zorbash --seed $seed --test-dungeon-gen --ascii --monochrome"
+    CMD="./zorbash $OPT_DEBUG --seed $seed --test-dungeon-gen --ascii --monochrome"
     $CMD > tests/$seed/output/console
     cp appdata/zorbash/stdout.txt tests/$seed/output/
 
@@ -96,7 +97,7 @@ testme()
         moves=$(grep "End of test, move count:" tests/$seed/output/stdout.txt | sed 's/.*://g')
         expected_moves=$(grep "End of test, move count:" tests/$seed/expected_output/stdout.txt | sed 's/.*://g')
         printf "$RED[%s]$RESET (%s moves expected, found %s)\n" "CHANGED" $expected_moves $moves
-        if [ "$OPT_UPDATE" -eq "yes" ]; then
+        if [ "$OPT_UPDATE" = "yes" ]; then
           cp -r tests/$seed/output/stdout.txt tests/$seed/expected_output/
         fi
       else
@@ -115,6 +116,8 @@ Build options:
 Usage: $0 [options]
 
   [--update]  Update changed tests
+  [--debug]   Enable debugs
+  [--debug2]  Enable more debugs
 %%
 }
 
@@ -128,8 +131,16 @@ read_opts()
             -*update)
                 OPT_UPDATE="yes"
                 export OPT_UPDATE
-                OPT_DEV1="yes"
-                export OPT_DEV1
+                shift
+                ;;
+            -*debug2)
+                OPT_DEBUG="--debug2"
+                export OPT_DEBUG
+                shift
+                ;;
+            -*debug)
+                OPT_DEBUG="--debug"
+                export OPT_DEBUG
                 shift
                 ;;
             *)

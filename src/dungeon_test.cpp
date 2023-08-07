@@ -116,6 +116,9 @@ void dungeon_test(void)
       TRACE_AND_INDENT();
       player->con("player change level");
       player->level_change(new_level);
+      if (! player->level) {
+        DIE("Player has no level");
+      }
 
       player->con("player needs to delete the old level");
       TRACE_AND_INDENT();
