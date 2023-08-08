@@ -32,76 +32,9 @@ fi
 testme()
 {
   for seed in \
-    41 \
-    42 \
-    43 \
-    44 \
-    45 \
-    46 \
-    47 \
-    48 \
-    49 \
-    50 \
-    51 \
-    52 \
-    53 \
-    54 \
-    55 \
-    56 \
-    57 \
-    58 \
-    59 \
-    60 \
-    61 \
-    62 \
-    63 \
-    64 \
-    65 \
-    66 \
-    67 \
-    68 \
-    69 \
-    70 \
-    71 \
-    72 \
-    73 \
-    74 \
-    75 \
-    76 \
-    77 \
-    78 \
-    79 \
-    80 \
-    81 \
-    82 \
-    83 \
-    84 \
-    85 \
-    86 \
-    87 \
-    88 \
-    89 \
-    90 \
-    91 \
-    92 \
-    93 \
-    94 \
-    95 \
-    96 \
-    97 \
-    98 \
-    99 \
-    100 \
     1 \
-    2 \
-    3 \
-    4 \
-    5 \
-    6 \
-    7 \
-    8 \
-    9 \
     10 \
+    100 \
     11 \
     12 \
     13 \
@@ -111,6 +44,7 @@ testme()
     17 \
     18 \
     19 \
+    2 \
     20 \
     21 \
     22 \
@@ -121,6 +55,7 @@ testme()
     27 \
     28 \
     29 \
+    3 \
     30 \
     31 \
     32 \
@@ -131,7 +66,72 @@ testme()
     37 \
     38 \
     39 \
+    4 \
     40 \
+    41 \
+    42 \
+    43 \
+    44 \
+    45 \
+    46 \
+    47 \
+    48 \
+    49 \
+    5 \
+    50 \
+    51 \
+    52 \
+    53 \
+    54 \
+    55 \
+    56 \
+    57 \
+    58 \
+    59 \
+    6 \
+    60 \
+    61 \
+    62 \
+    63 \
+    64 \
+    65 \
+    66 \
+    67 \
+    68 \
+    69 \
+    7 \
+    70 \
+    71 \
+    72 \
+    73 \
+    74 \
+    75 \
+    76 \
+    77 \
+    78 \
+    79 \
+    8 \
+    80 \
+    81 \
+    82 \
+    83 \
+    84 \
+    85 \
+    86 \
+    87 \
+    88 \
+    89 \
+    9 \
+    90 \
+    91 \
+    92 \
+    93 \
+    94 \
+    95 \
+    96 \
+    97 \
+    98 \
+    99 \
     alphabase \
     dungeonspike \
     dwarvedelve \
@@ -193,7 +193,7 @@ testme()
       cp -r tests/$seed/output/stdout.txt tests/$seed/expected_output/
       printf "$GREEN[%s]$RESET (%s moves, level (%s), score (%s), reason (%s)\n" "CREATED" "$moves" "$level" "$score" "$reason"
     else
-      diff -q tests/$seed/output/stdout.txt tests/$seed/expected_output/stdout.txt
+      diff -q tests/$seed/output/stdout.txt tests/$seed/expected_output/stdout.txt > /dev/null
       if [ $? -ne 0 ]; then
         expected_moves=$(grep "End of test, move count: *" tests/$seed/expected_output/stdout.txt | sed 's/.*: //g')
         printf "$RED[%s]$RESET (%s moves expected, found %s)\n" "CHANGED" "$expected_moves" "$moves"

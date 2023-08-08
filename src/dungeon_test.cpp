@@ -114,30 +114,23 @@ void dungeon_test(void)
     TRACE_NO_INDENT();
     wid_display_all();
 
+    player->con("NEIL %s:%d", __FUNCTION__, __LINE__);
     if (player && player->is_waiting_to_descend_dungeon) {
-      if (! player->descend_dungeon()) {
-        player->err("Failed to descend dungeon");
-      }
+      player->descend_dungeon(true, game->level->world_at + point3d(0, 0, 2));
     }
-    if (player && player->is_waiting_to_ascend_dungeon) {
-      if (! player->ascend_dungeon()) {
-        player->err("Failed to ascend dungeon");
-      }
-    }
+    player->con("NEIL %s:%d", __FUNCTION__, __LINE__);
     if (player && player->is_waiting_to_descend_sewer) {
       if (! player->descend_sewer()) {
         player->err("Failed to descend sewer");
       }
     }
+    player->con("NEIL %s:%d", __FUNCTION__, __LINE__);
     if (player && player->is_waiting_to_ascend_sewer) {
       if (! player->ascend_sewer()) {
         player->err("Failed to ascend sewer");
       }
     }
-    if (player && player->is_waiting_to_leave_level_has_completed_fall) {
-      player->fall_to_next_level();
-    }
-
+    player->con("NEIL %s:%d", __FUNCTION__, __LINE__);
     if (player->is_waiting_to_descend_dungeon) {
       DIE("Player failed to descend");
     }

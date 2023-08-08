@@ -6,6 +6,7 @@
 #include "my_english.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
+#include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
@@ -103,6 +104,10 @@ void Thing::killed(Thingp defeater, const char *reason)
     i_o->bag_remove(this);
   }
 
+  if (defeater) {
+    verify(MTYPE_THING, defeater);
+  }
+
   //
   // If a minion mob dies, kill all minions
   //
@@ -175,7 +180,9 @@ void Thing::killed(Thingp defeater, const char *reason)
           } else {
             msg("You hear an ancient rumbling noise.");
           }
-          player->update_light();
+          if (player) {
+            player->update_light();
+          }
         } else if (is_door()) {
           if (defeater && defeater->is_fire()) {
             TRACE_NO_INDENT();
@@ -199,7 +206,9 @@ void Thing::killed(Thingp defeater, const char *reason)
               msg("The hear the distant noise of a door crashing open.");
             }
           }
-          player->update_light();
+          if (player) {
+            player->update_light();
+          }
         } else {
           //
           // e.g. treasure chest
@@ -264,7 +273,7 @@ void Thing::killed(Thingp defeater, const char *reason)
         } else if (defeater && defeater->is_monst()) {
           msg("%%fg=red$RIP: Robo player is deactivated %s.%%fg=reset$", reason);
         } else {
-          msg("%%fg=red$RIP: Robo player is broken %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: Robo player is broken: (%s)%%fg=reset$", reason);
         }
       } else {
         TRACE_NO_INDENT();
@@ -423,7 +432,7 @@ void Thing::killed(Thingp defeater, const char *reason)
           }
 
           defeater->score_add(this);
-        } else if (defeater->is_monst() && player->level
+        } else if (defeater->is_monst() && player && player->level
                    && get(player->level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
           //
           // Killed by a monster
@@ -445,7 +454,7 @@ void Thing::killed(Thingp defeater, const char *reason)
           } else {
             msg("%s is destroyed %s.", The_no_dying.c_str(), reason);
           }
-        } else if (is_monst() && player->level
+        } else if (is_monst() && player && player->level
                    && get(player->level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
           //
           // Killed by something else, like a block of ice; and we can see it.
