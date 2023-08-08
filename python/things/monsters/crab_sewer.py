@@ -154,7 +154,7 @@ def tp_init(name, text_long_name):
             ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="pink",
             tile="crab_sewer.1", is_sleeping=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            ascii_fg_char="C", ascii_bg_col_name="", ascii_fg_col_name="pink",
             tile="crab_sewer.2", is_sleeping=True, delay_ms=delay)
     delay = 100
     my.tile(self,

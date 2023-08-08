@@ -52,7 +52,7 @@ def tp_init(name, text_long_name):
             ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name + ".6", delay_ms=delay, frame=6)
     my.tile(self,
-            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="green",
+            ascii_fg_char="Z", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name + ".1", is_sleeping=True, delay_ms=delay, frame=1)
     my.tile(self,
             ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="green",

@@ -159,7 +159,7 @@ def tp_init(name, text_long_name):
 
     delay = 10000
     my.tile(self,
-            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            ascii_fg_char="T", ascii_bg_col_name="", ascii_fg_col_name="pink",
             tile="teletoad.1", is_sleeping=True, delay_ms=delay)
     my.tile(self,
             ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="pink",

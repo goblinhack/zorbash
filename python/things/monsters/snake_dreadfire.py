@@ -155,7 +155,7 @@ def tp_init(name, text_long_name):
             tile="snake_dreadfire.5", delay_ms=delay)
     delay = 1500
     my.tile(self,
-            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="red",
+            ascii_fg_char="S", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile="snake_dreadfire.sleeping.1", is_sleeping=True, delay_ms=delay)
     my.tile(self,
             ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="red",

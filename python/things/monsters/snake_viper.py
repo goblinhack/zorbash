@@ -147,7 +147,7 @@ def tp_init(name, text_long_name):
             tile="snake_viper.5", delay_ms=delay)
     delay = 1500
     my.tile(self,
-            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="green",
+            ascii_fg_char="S", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile="snake_viper.sleeping.1", is_sleeping=True, delay_ms=delay)
     my.tile(self,
             ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="green",

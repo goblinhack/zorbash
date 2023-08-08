@@ -132,13 +132,13 @@ def tp_init(name, text_long_name, text_short_name):
             tile=name + "_dead.1", delay_ms=delay, is_dead=True)
     delay = 500
     my.tile(self,
-            ascii_fg_char="B", ascii_bg_col_name="", ascii_fg_col_name="green",
+            ascii_fg_char="b", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name + "_asleep.1", is_sleeping=True, delay_ms=delay)
     my.tile(self,
             ascii_fg_char="B", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name + "_asleep.2", is_sleeping=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="B", ascii_bg_col_name="", ascii_fg_col_name="green",
+            ascii_fg_char="b", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name + "_asleep.3", is_sleeping=True, delay_ms=delay)
     my.tile(self,
             ascii_fg_char="B", ascii_bg_col_name="", ascii_fg_col_name="green",

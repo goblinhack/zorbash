@@ -149,10 +149,10 @@ def tp_init(name, text_long_name):
             tile="snake_asp.5", delay_ms=delay)
     delay = 1500
     my.tile(self,
-            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            ascii_fg_char="S", ascii_bg_col_name="", ascii_fg_col_name="brown",
             tile="snake_asp.sleeping.1", is_sleeping=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            ascii_fg_char="S", ascii_bg_col_name="", ascii_fg_col_name="brown",
             tile="snake_asp.sleeping.2", is_sleeping=True, delay_ms=delay)
     delay = 150
     my.tile(self,

@@ -181,7 +181,7 @@ def tp_init(name, text_long_name):
             tile="molekin.4", delay_ms=delay)
     delay = 1500
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="brown",
             tile="molekin.sleeping.1", is_sleeping=True, delay_ms=delay)
     my.tile(self,
             ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="brown",
