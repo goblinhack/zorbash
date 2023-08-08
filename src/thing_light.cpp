@@ -176,7 +176,6 @@ int Thing::light_distance_update(void)
   }
 
   if (is_player()) {
-    con("%s:%d", __FUNCTION__, __LINE__);
     level->fov_calculate(this, &level->can_see_currently, &level->can_see_ever, curr_at.x, curr_at.y, light_dist);
 
     if (is_debug_type()) {

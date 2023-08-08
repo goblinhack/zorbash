@@ -32,7 +32,7 @@ void Thing::on_thrown(ThingId owner_id_when_thrown)
       mod = name();
     }
 
-    dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
+    dbg("Call %s.%s(%s, %u, %u)", mod.c_str(), fn.c_str(), to_short_string().c_str(), curr_at.x, curr_at.y);
 
     py_call_void_fn(mod.c_str(), fn.c_str(), owner_id_when_thrown.id, id.id, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
@@ -210,16 +210,20 @@ bool Thing::throw_at(Thingp what, Thingp target)
     FOR_ALL_THINGS_END()
   } else {
     if (is_player()) {
-      msg("You throw %s.", what->text_the().c_str());
+      msg("You throw %s at %s", what->text_the().c_str(), target->to_string().c_str());
     }
   }
 
-  dbg("Throw item %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
+  dbg("Throw item %s at %s", what->to_short_string().c_str(), target->to_string().c_str());
 
   if (target && target->is_portal()) {
     //
     // The portal will move the item.
+    //
+    TRACE_AND_INDENT();
+    dbg("Throw item %s at %s into portal", what->to_short_string().c_str(), target->to_string().c_str());
+    what->move_to_immediately(throw_at);
   } else {
     //
     // Move to the new location.

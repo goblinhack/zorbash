@@ -45,7 +45,7 @@ bool operator<(const class Path &lhs, const class Path &rhs)
 #define GOAL_ADD(prio, score, msg, it)                                                                               \
   IF_DEBUG2                                                                                                          \
   {                                                                                                                  \
-    auto s = string_sprintf("Add goal prio %d score %d @(%d,%d) %s", prio, score, p.x, p.y, msg);                    \
+    auto s = string_sprintf("Add goal prio %d score %d at (%d,%d) %s", prio, score, p.x, p.y, msg);                    \
     AI_LOG(s, it);                                                                                                   \
   }                                                                                                                  \
   goals.insert(Goal(prio, score, p, msg, it));
@@ -53,7 +53,7 @@ bool operator<(const class Path &lhs, const class Path &rhs)
 #define GOAL_AVOID_ADD(prio, score, msg, it)                                                                         \
   IF_DEBUG2                                                                                                          \
   {                                                                                                                  \
-    auto s = string_sprintf("Add goal (avoid) prio %d score %d @(%d,%d) %s", prio, score, p.x, p.y, msg);            \
+    auto s = string_sprintf("Add goal (avoid) prio %d score %d at (%d,%d) %s", prio, score, p.x, p.y, msg);            \
     AI_LOG(s, it);                                                                                                   \
   }                                                                                                                  \
   goals.insert(Goal(prio, score, p, msg, it, true /* avoid */));
@@ -151,7 +151,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
       TRACE_AND_INDENT();
 
       for (const auto &goal : g.goals) {
-        auto s = string_sprintf("Goal, prio %d score %d @(%d,%d) %s", (int) goal.prio, (int) goal.score,
+        auto s = string_sprintf("Goal, prio %d score %d at (%d,%d) %s", (int) goal.prio, (int) goal.score,
                                 (int) goal.at.x, (int) goal.at.y, goal.msg.c_str());
         AI_LOG(s);
       }
@@ -233,7 +233,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
 
                 IF_DEBUG2
                 {
-                  auto s = string_sprintf("Accept avoid goal score %d @(%d,%d) %s", (int) goal.score, (int) goal.at.x,
+                  auto s = string_sprintf("Accept avoid goal score %d at (%d,%d) %s", (int) goal.score, (int) goal.at.x,
                                           (int) goal.at.y, goal.msg.c_str());
                   AI_LOG(s);
                 }
@@ -259,7 +259,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
 
           IF_DEBUG2
           {
-            auto s = string_sprintf("Accept goal score %d @(%d,%d) %s", (int) goal.score, (int) goal.at.x,
+            auto s = string_sprintf("Accept goal score %d at (%d,%d) %s", (int) goal.score, (int) goal.at.x,
                                     (int) goal.at.y, goal.msg.c_str());
             AI_LOG(s);
           }
@@ -277,7 +277,7 @@ bool Thing::ai_create_path_to_single_goal_do(int minx, int miny, int maxx, int m
 {
   IF_DEBUG2
   {
-    auto s = string_sprintf("Process goal score %d @(%d,%d) %s", (int) goal.score, (int) goal.at.x, (int) goal.at.y,
+    auto s = string_sprintf("Process goal score %d at (%d,%d) %s", (int) goal.score, (int) goal.at.x, (int) goal.at.y,
                             goal.msg.c_str());
     AI_LOG(s);
   }
@@ -1444,7 +1444,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           }
           IF_DEBUG2
           {
-            auto s = string_sprintf("Choose possible descend sewer at @(%d,%d)", o.x, o.y);
+            auto s = string_sprintf("Choose possible descend sewer at at (%d,%d)", o.x, o.y);
             AI_LOG(s);
           }
         } else if (level->is_ascend_sewer(o)) {
@@ -1462,7 +1462,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           }
           IF_DEBUG2
           {
-            auto s = string_sprintf("Choose possible ascend sewer at @(%d,%d)", o.x, o.y);
+            auto s = string_sprintf("Choose possible ascend sewer at at (%d,%d)", o.x, o.y);
             AI_LOG(s);
           }
         } else if (level->is_descend_dungeon(o)) {
@@ -1480,7 +1480,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           }
           IF_DEBUG2
           {
-            auto s = string_sprintf("Choose possible descend dungeon at @(%d,%d)", o.x, o.y);
+            auto s = string_sprintf("Choose possible descend dungeon at at (%d,%d)", o.x, o.y);
             AI_LOG(s);
           }
         } else if (level->is_ascend_dungeon(o)) {
@@ -1498,7 +1498,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           }
           IF_DEBUG2
           {
-            auto s = string_sprintf("Choose possible ascend dungeon at @(%d,%d)", o.x, o.y);
+            auto s = string_sprintf("Choose possible ascend dungeon at at (%d,%d)", o.x, o.y);
             AI_LOG(s);
           }
         } else {
@@ -1619,7 +1619,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     if (is_hated_by_me(p)) {
       IF_DEBUG2
       {
-        auto s = string_sprintf("Search cand is hated @(%d,%d)", p.x, p.y);
+        auto s = string_sprintf("Search cand is hated at (%d,%d)", p.x, p.y);
         AI_LOG(s);
       }
       continue;
@@ -1689,12 +1689,12 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     auto mob = top_mob();
     if (mob) {
       auto dist = distance(p, mob->curr_at);
-      auto msg  = string_sprintf("search cand @(%d,%d) dist-from-owner %f", p.x, p.y, dist);
+      auto msg  = string_sprintf("search cand at (%d,%d) dist-from-owner %f", p.x, p.y, dist);
       GOAL_ADD(GOAL_PRIO_VERY_LOW, total_score, msg.c_str(), nullptr);
     } else {
-      auto msg = string_sprintf("search cand @(%d,%d) no-owner", p.x, p.y);
+      auto msg = string_sprintf("search cand at (%d,%d) no-owner", p.x, p.y);
       if (is_debug_type()) {
-        con("search cand @(%d,%d) score %d", p.x, p.y, total_score);
+        con("search cand at (%d,%d) score %d", p.x, p.y, total_score);
       }
       GOAL_ADD(GOAL_PRIO_VERY_LOW, total_score, msg.c_str(), nullptr);
     }

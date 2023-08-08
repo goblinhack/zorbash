@@ -139,6 +139,10 @@ void dungeon_test(void)
         game->tick_begin("explore new level");
       }
     }
+
+    if (g_errored) {
+      DIE("An error occurred");
+    }
   }
 
   CON("End of test, level depth: %u", grid_at.y);

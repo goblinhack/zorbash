@@ -48,8 +48,13 @@ void Thing::resting(void)
     //
     // Ok, cheating a bit. But otherwise it slows down robot mode too much.
     //
-    health_boost(nullptr, 10);
-    stamina_boost(10);
+    if (g_opt_test_dungeon_gen) {
+      health_boost(nullptr, 10);
+      stamina_boost(10);
+    } else {
+      health_boost(nullptr, 1);
+      stamina_boost(1);
+    }
   } else {
     if ((int) pcg_random_range(0, 200) < stat_str()) {
       health_boost(nullptr, 1);
