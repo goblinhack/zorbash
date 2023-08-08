@@ -318,7 +318,7 @@ PyObject *thing_perma_death(PyObject *obj, PyObject *args, PyObject *keywds)
   static char *kwlist[] = {(char *) "t", (char *) "reason", nullptr};
 
   TRACE_NO_INDENT();
-  if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id, &reason)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &reason)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }

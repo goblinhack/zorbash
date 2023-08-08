@@ -184,12 +184,13 @@ testme()
     fi
 
     # ls -lahsi tests/$seed/output/stdout.txt
+    score=$(grep "End of test, score:" tests/$seed/output/stdout.txt | sed 's/.*://g')
     level=$(grep "End of test, level depth:" tests/$seed/output/stdout.txt | sed 's/.*://g')
 
     if [ ! -f tests/$seed/expected_output/stdout.txt ]; then
       cp -r tests/$seed/output/stdout.txt tests/$seed/expected_output/
       moves=$(grep "End of test, move count:" tests/$seed/output/stdout.txt | sed 's/.*://g')
-      printf "$GREEN[%s]$RESET (%s moves, level %s)\n" "CREATED" $moves $level
+      printf "$GREEN[%s]$RESET (%s moves, level %s, score %s)\n" "CREATED" $moves $level $score
     else
       diff -q tests/$seed/output/stdout.txt tests/$seed/expected_output/stdout.txt
       if [ $? -ne 0 ]; then
@@ -201,7 +202,7 @@ testme()
         fi
       else
         moves=$(grep "End of test, move count:" tests/$seed/output/stdout.txt | sed 's/.*://g')
-        printf "$GREEN[%s]$RESET %s moves, level %s\n" "OK" $moves $level
+        printf "$GREEN[%s]$RESET %s moves, level %s, score %s\n" "OK" $moves $level $score
       fi
     fi
   done
