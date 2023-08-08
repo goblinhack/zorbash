@@ -184,25 +184,24 @@ testme()
     fi
 
     # ls -lahsi tests/$seed/output/stdout.txt
-    score=$(grep "End of test, score:" tests/$seed/output/stdout.txt | sed 's/.*://g')
-    level=$(grep "End of test, level depth:" tests/$seed/output/stdout.txt | sed 's/.*://g')
+    moves=$(grep "End of test, move count: *" tests/$seed/output/stdout.txt | sed 's/.*: //g')
+    level=$(grep "End of test, level depth: *" tests/$seed/output/stdout.txt | sed 's/.*: //g')
+    score=$(grep "End of test, score: *" tests/$seed/output/stdout.txt | sed 's/.*: //g')
+    reason=$(grep "^RIP" tests/$seed/output/stdout.txt | head -1 | sed 's/\\n//g')
 
     if [ ! -f tests/$seed/expected_output/stdout.txt ]; then
       cp -r tests/$seed/output/stdout.txt tests/$seed/expected_output/
-      moves=$(grep "End of test, move count:" tests/$seed/output/stdout.txt | sed 's/.*://g')
-      printf "$GREEN[%s]$RESET (%s moves, level %s, score %s)\n" "CREATED" $moves $level $score
+      printf "$GREEN[%s]$RESET (%s moves, level (%s), score (%s), reason (%s)\n" "CREATED" "$moves" "$level" "$score" "$reason"
     else
       diff -q tests/$seed/output/stdout.txt tests/$seed/expected_output/stdout.txt
       if [ $? -ne 0 ]; then
-        moves=$(grep "End of test, move count:" tests/$seed/output/stdout.txt | sed 's/.*://g')
-        expected_moves=$(grep "End of test, move count:" tests/$seed/expected_output/stdout.txt | sed 's/.*://g')
-        printf "$RED[%s]$RESET (%s moves expected, found %s)\n" "CHANGED" $expected_moves $moves
+        expected_moves=$(grep "End of test, move count: *" tests/$seed/expected_output/stdout.txt | sed 's/.*: //g')
+        printf "$RED[%s]$RESET (%s moves expected, found %s)\n" "CHANGED" "$expected_moves" "$moves"
         if [ "$OPT_UPDATE" = "yes" ]; then
           cp -r tests/$seed/output/stdout.txt tests/$seed/expected_output/
         fi
       else
-        moves=$(grep "End of test, move count:" tests/$seed/output/stdout.txt | sed 's/.*://g')
-        printf "$GREEN[%s]$RESET %s moves, level %s, score %s\n" "OK" $moves $level $score
+        printf "$GREEN[%s]$RESET %s moves, level (%s), score (%s), reason (%s)\n" "OK" "$moves" "$level" "$score" "$reason"
       fi
     fi
   done

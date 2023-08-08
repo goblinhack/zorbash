@@ -259,16 +259,22 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       //
       // If we have a treasure map, allow wandering
       //
-    } else {
-      if (! get(level->can_see_ever.can_see, x, y)) {
-        IF_DEBUG2 { dbg("No, is not lit or visited"); }
+    } else if (light_dist_get() <= 2) {
+      //
+      // If we can't see far, allow the jump
+      //
+    } else if (game->robot_mode) {
+      //
+      // If the robot, let it jump
+      //
+    } else if (! get(level->can_see_ever.can_see, x, y)) {
+      IF_DEBUG2 { dbg("No, is not lit or visited"); }
 
-        if (is_player()) {
-          msg("You can't jump into the unlit regions.");
-        }
-        dbg("You can't jump into the unlit regions.");
-        return false;
+      if (is_player()) {
+        msg("You can't jump into the unlit regions.");
       }
+      dbg("You can't jump into the unlit regions.");
+      return false;
     }
   }
 

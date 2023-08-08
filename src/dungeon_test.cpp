@@ -30,14 +30,10 @@ void dungeon_test(void)
 {
   TRACE_NO_INDENT();
 
-  //
-  // Use a random biome
-  //
-  auto difficulty_depth = game->seed % DUNGEONS_MAX_DIFFICULTY_LEVEL;
-  auto biome            = get_biome(difficulty_depth);
-  biome                 = get_biome(0);
-  point3d world_at;
+  point3d world_at(0, 0, 1);
   point   grid_at(0, 1);
+  auto    dungeon_walk_order_level_no = 1;
+  auto    difficulty_depth            = game->seed % DUNGEONS_MAX_DIFFICULTY_LEVEL;
 
   //
   // Needed to set the terminal size
@@ -52,19 +48,39 @@ void dungeon_test(void)
   TRACE_NO_INDENT();
   sdl_display_reset();
 
+  TRACE_NO_INDENT();
+  game->init();
+
   //
   // Create the new level
   //
   TRACE_NO_INDENT();
-  game->init();
+  if (! game->init_level(world_at, grid_at, difficulty_depth, dungeon_walk_order_level_no)) {
+    DIE("Failed to create level");
+  }
 
-  auto new_level                   = new Level(biome);
-  auto dungeon_walk_order_level_no = 1;
+  game->level = get(game->world.levels, world_at.x, world_at.y, world_at.z);
+  if (! game->level) {
+    DIE("Failed to find game level");
+  }
 
+  //
+  // Make the next level so we can fall into it
+  //
   TRACE_NO_INDENT();
-  new_level->create(world_at, grid_at, difficulty_depth, dungeon_walk_order_level_no);
-  new_level->dungeon_walk_order_level_no = grid_at.y;
-  game->level                            = new_level;
+  if (! game->init_level(world_at + point3d(0, 0, 2), grid_at + point(0, 1), difficulty_depth,
+                         dungeon_walk_order_level_no)) {
+    DIE("Failed to create 2nd level");
+  }
+
+  //
+  // Make the next level so we can fall into it
+  //
+  TRACE_NO_INDENT();
+  if (! game->init_level(world_at + point3d(0, 0, 4), grid_at + point(0, 2), difficulty_depth,
+                         dungeon_walk_order_level_no)) {
+    DIE("Failed to create 2nd level");
+  }
 
   {
     pcg_random_allowed++;
@@ -87,6 +103,7 @@ void dungeon_test(void)
   }
 
   auto player = game->level->player;
+
   while (! player->is_dead) {
     TRACE_NO_INDENT();
     game->level->tick();
@@ -98,46 +115,31 @@ void dungeon_test(void)
     wid_display_all();
 
     if (player && player->is_waiting_to_descend_dungeon) {
-      TRACE_AND_INDENT();
-      player->con("player needs to descend a level");
-
-      world_at += point3d(0, 0, 2);
-      grid_at += point(0, 1);
-
-      TRACE_AND_INDENT();
-      player->con("create the next level");
-      auto old_level = game->level;
-      new_level      = new Level(biome);
-      new_level->create(world_at, grid_at, difficulty_depth, dungeon_walk_order_level_no);
-      new_level->dungeon_walk_order_level_no = grid_at.y;
-      game->level                            = new_level;
-      game->things_are_moving                = false;
-
-      TRACE_AND_INDENT();
-      player->con("player change level");
-      player->level_change(new_level);
-      if (! player->level) {
-        DIE("Player has no level");
+      if (! player->descend_dungeon()) {
+        player->err("Failed to descend dungeon");
       }
-
-      player->con("player needs to delete the old level");
-      TRACE_AND_INDENT();
-      delete old_level;
-
-      TRACE_AND_INDENT();
-      player->con("player has joined the new level");
-
-      if (player->is_waiting_to_descend_dungeon) {
-        DIE("Player failed to descend");
+    }
+    if (player && player->is_waiting_to_ascend_dungeon) {
+      if (! player->ascend_dungeon()) {
+        player->err("Failed to ascend dungeon");
       }
-
-      TRACE_NO_INDENT();
-      wid_choose_next_dungeons_destroy(nullptr);
-
-      {
-        TRACE_NO_INDENT();
-        game->tick_begin("explore new level");
+    }
+    if (player && player->is_waiting_to_descend_sewer) {
+      if (! player->descend_sewer()) {
+        player->err("Failed to descend sewer");
       }
+    }
+    if (player && player->is_waiting_to_ascend_sewer) {
+      if (! player->ascend_sewer()) {
+        player->err("Failed to ascend sewer");
+      }
+    }
+    if (player && player->is_waiting_to_leave_level_has_completed_fall) {
+      player->fall_to_next_level();
+    }
+
+    if (player->is_waiting_to_descend_dungeon) {
+      DIE("Player failed to descend");
     }
 
     if (g_errored) {
@@ -148,9 +150,6 @@ void dungeon_test(void)
   CON("End of test, level depth: %u", grid_at.y);
   CON("End of test, move count: %u", player->move_count());
   CON("End of test, score: %u", player->score());
-
-  TRACE_NO_INDENT();
-  delete new_level;
 
   TRACE_NO_INDENT();
   game->fini();

@@ -35,6 +35,7 @@ bool Thing::descend_dungeon_tick(void)
       level->fbo_light         = sdl_fbo_save(FBO_PIXELART_FULLMAP_LIGHT);
     }
     is_waiting_to_descend_dungeon = true;
+    dbg("Player is waiting to descend");
     return true;
   }
   return descend_dungeon();
