@@ -1952,7 +1952,15 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
       int terrain_cost = terrain_cost_get(p);
       score -= (int) terrain_cost;
       score += dist * 10;
-      GOAL_ADD(GOAL_PRIO_HIGH, score, "avoid-location-1", it);
+
+      //
+      // Inject some randomness into this so we don't try the same locations over and over
+      // and fail to reach them.
+      //
+      score += d100();
+      if (d100() < 50) {
+        GOAL_ADD(GOAL_PRIO_HIGH, score, "avoid-location-1", it);
+      }
     }
   }
 
