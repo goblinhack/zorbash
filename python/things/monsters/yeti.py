@@ -164,8 +164,16 @@ def tp_init(name, text_long_name):
             ascii_fg_char="Y", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".7", delay_ms=delay, frame=4)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="gray30",
+            ascii_fg_char="Y", ascii_bg_col_name="", ascii_fg_col_name="gray30",
             tile="yeti.dead", is_dead=True, delay_ms=delay)
+
+    delay = 1500
+    my.tile(self,
+            ascii_fg_char="Y", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="yeti.1", is_sleeping=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="Y", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="yeti.2", is_sleeping=True, delay_ms=delay)
 
     my.tp_update(self)
 

@@ -55,7 +55,7 @@ void dungeon_test(void)
   // Create the new level
   //
   TRACE_NO_INDENT();
-  if (! game->init_level(world_at, grid_at, difficulty_depth, dungeon_walk_order_level_no)) {
+  if (! game->init_level(world_at, grid_at, difficulty_depth, dungeon_walk_order_level_no++)) {
     DIE("Failed to create level");
   }
 
@@ -69,7 +69,7 @@ void dungeon_test(void)
   //
   TRACE_NO_INDENT();
   if (! game->init_level(world_at + point3d(0, 0, 2), grid_at + point(0, 1), difficulty_depth,
-                         dungeon_walk_order_level_no)) {
+                         dungeon_walk_order_level_no++)) {
     DIE("Failed to create 2nd level");
   }
 
@@ -78,7 +78,7 @@ void dungeon_test(void)
   //
   TRACE_NO_INDENT();
   if (! game->init_level(world_at + point3d(0, 0, 4), grid_at + point(0, 2), difficulty_depth,
-                         dungeon_walk_order_level_no)) {
+                         dungeon_walk_order_level_no++)) {
     DIE("Failed to create 2nd level");
   }
 
@@ -114,23 +114,19 @@ void dungeon_test(void)
     TRACE_NO_INDENT();
     wid_display_all();
 
-    player->con("NEIL %s:%d", __FUNCTION__, __LINE__);
     if (player && player->is_waiting_to_descend_dungeon) {
       player->descend_dungeon(true, game->level->world_at + point3d(0, 0, 2));
     }
-    player->con("NEIL %s:%d", __FUNCTION__, __LINE__);
     if (player && player->is_waiting_to_descend_sewer) {
       if (! player->descend_sewer()) {
         player->err("Failed to descend sewer");
       }
     }
-    player->con("NEIL %s:%d", __FUNCTION__, __LINE__);
     if (player && player->is_waiting_to_ascend_sewer) {
       if (! player->ascend_sewer()) {
         player->err("Failed to ascend sewer");
       }
     }
-    player->con("NEIL %s:%d", __FUNCTION__, __LINE__);
     if (player->is_waiting_to_descend_dungeon) {
       DIE("Player failed to descend");
     }

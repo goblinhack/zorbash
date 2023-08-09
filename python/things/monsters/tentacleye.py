@@ -157,6 +157,7 @@ def tp_init(name, text_long_name):
     my.tile(self,
             ascii_fg_char="T", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name + ".6.100", delay_ms=delay)
+
     my.tile(self,
             ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name + ".sleeping.1", is_sleeping=True, delay_ms=delay)

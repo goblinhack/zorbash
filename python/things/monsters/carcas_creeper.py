@@ -167,6 +167,14 @@ def tp_init(name, text_long_name):
             ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="gray30",
             tile="carcas_creeper.dead", is_dead=True, delay_ms=delay)
 
+    delay = 1500
+    my.tile(self,
+            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            tile="carcas_creeper.1", is_sleeping=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="C", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            tile="carcas_creeper.2", is_sleeping=True, delay_ms=delay)
+
     my.tp_update(self)
 
 
