@@ -1377,6 +1377,13 @@ void Thing::blit_upside_down(int fbo)
     blit_tl.y += diff;
   }
 
+  //
+  // Only the player bodyparts reflect
+  //
+  if (is_player()) {
+    return;
+  }
+
   color       reflection = {100, 100, 100, 200};
   BlitOptions blit_options;
   blit_options.reflection = true;
