@@ -2166,6 +2166,70 @@ void Game::wid_config_keyboard_select(void)
     wid_set_text(w, "(Use double click to jump in chasms or lava)");
   }
 
+  y_at++;
+  ///////////////////////////////////////////////////////////////////////
+  // save
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "save");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Save game");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_save));
+    wid_set_on_mouse_up(w, wid_config_key_save);
+  }
+  ///////////////////////////////////////////////////////////////////////
+  // load
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "load");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Load game");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + rhs_button_left, y_at);
+    point br = make_point(width / 2 + rhs_button_right, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_load));
+    wid_set_on_mouse_up(w, wid_config_key_load);
+  }
+
   ///////////////////////////////////////////////////////////////////////
   // Move up
   ///////////////////////////////////////////////////////////////////////
@@ -2301,134 +2365,136 @@ void Game::wid_config_keyboard_select(void)
   y_at++;
   ///////////////////////////////////////////////////////////////////////
 
-  ///////////////////////////////////////////////////////////////////////
-  // Map up
-  ///////////////////////////////////////////////////////////////////////
-  y_at++;
-  {
-    TRACE_AND_INDENT();
-    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "Map up");
+  if (! g_opt_ascii) {
+    ///////////////////////////////////////////////////////////////////////
+    // Map up
+    ///////////////////////////////////////////////////////////////////////
+    y_at++;
+    {
+      TRACE_AND_INDENT();
+      auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+      auto w = wid_new_square_button(p, "Map up");
 
-    point tl = make_point(1, y_at);
-    point br = make_point(width / 2, y_at);
-    wid_set_shape_none(w);
-    wid_set_pos(w, tl, br);
-    wid_set_text_lhs(w, true);
-    wid_set_text(w, "Map up");
+      point tl = make_point(1, y_at);
+      point br = make_point(width / 2, y_at);
+      wid_set_shape_none(w);
+      wid_set_pos(w, tl, br);
+      wid_set_text_lhs(w, true);
+      wid_set_text(w, "Map up");
+    }
+    {
+      TRACE_AND_INDENT();
+      auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+      auto w = wid_new_square_button(p, "value");
+
+      point tl = make_point(width / 2 + rhs_button_left, y_at);
+      point br = make_point(width / 2 + rhs_button_right, y_at);
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, ::to_string(game->config.key_map_up));
+      wid_set_on_mouse_up(w, wid_config_key_map_up);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // Map left
+    ///////////////////////////////////////////////////////////////////////
+    y_at++;
+    {
+      TRACE_AND_INDENT();
+      auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+      auto w = wid_new_square_button(p, "Map left");
+
+      point tl = make_point(1, y_at);
+      point br = make_point(width / 2, y_at);
+      wid_set_shape_none(w);
+      wid_set_pos(w, tl, br);
+      wid_set_text_lhs(w, true);
+      wid_set_text(w, "Map left");
+    }
+    {
+      TRACE_AND_INDENT();
+      auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+      auto w = wid_new_square_button(p, "value");
+
+      point tl = make_point(width / 2 + rhs_button_left, y_at);
+      point br = make_point(width / 2 + rhs_button_right, y_at);
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, ::to_string(game->config.key_map_left));
+      wid_set_on_mouse_up(w, wid_config_key_map_left);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // Map down
+    ///////////////////////////////////////////////////////////////////////
+    y_at++;
+    {
+      TRACE_AND_INDENT();
+      auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+      auto w = wid_new_square_button(p, "Map down");
+
+      point tl = make_point(1, y_at);
+      point br = make_point(width / 2, y_at);
+      wid_set_shape_none(w);
+      wid_set_pos(w, tl, br);
+      wid_set_text_lhs(w, true);
+      wid_set_text(w, "Map down");
+    }
+    {
+      TRACE_AND_INDENT();
+      auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+      auto w = wid_new_square_button(p, "value");
+
+      point tl = make_point(width / 2 + rhs_button_left, y_at);
+      point br = make_point(width / 2 + rhs_button_right, y_at);
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, ::to_string(game->config.key_map_down));
+      wid_set_on_mouse_up(w, wid_config_key_map_down);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // Map right
+    ///////////////////////////////////////////////////////////////////////
+    y_at++;
+    {
+      TRACE_AND_INDENT();
+      auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+      auto w = wid_new_square_button(p, "Map right");
+
+      point tl = make_point(1, y_at);
+      point br = make_point(width / 2, y_at);
+      wid_set_shape_none(w);
+      wid_set_pos(w, tl, br);
+      wid_set_text_lhs(w, true);
+      wid_set_text(w, "Map right");
+    }
+    {
+      TRACE_AND_INDENT();
+      auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+      auto w = wid_new_square_button(p, "value");
+
+      point tl = make_point(width / 2 + rhs_button_left, y_at);
+      point br = make_point(width / 2 + rhs_button_right, y_at);
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, ::to_string(game->config.key_map_right));
+      wid_set_on_mouse_up(w, wid_config_key_map_right);
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    y_at++;
+    ///////////////////////////////////////////////////////////////////////
   }
-  {
-    TRACE_AND_INDENT();
-    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "value");
-
-    point tl = make_point(width / 2 + rhs_button_left, y_at);
-    point br = make_point(width / 2 + rhs_button_right, y_at);
-    wid_set_mode(w, WID_MODE_OVER);
-    wid_set_style(w, box_highlight_style);
-    wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_style(w, box_style);
-    wid_set_pos(w, tl, br);
-    wid_set_text(w, ::to_string(game->config.key_map_up));
-    wid_set_on_mouse_up(w, wid_config_key_map_up);
-  }
-  ///////////////////////////////////////////////////////////////////////
-  // Map left
-  ///////////////////////////////////////////////////////////////////////
-  y_at++;
-  {
-    TRACE_AND_INDENT();
-    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "Map left");
-
-    point tl = make_point(1, y_at);
-    point br = make_point(width / 2, y_at);
-    wid_set_shape_none(w);
-    wid_set_pos(w, tl, br);
-    wid_set_text_lhs(w, true);
-    wid_set_text(w, "Map left");
-  }
-  {
-    TRACE_AND_INDENT();
-    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "value");
-
-    point tl = make_point(width / 2 + rhs_button_left, y_at);
-    point br = make_point(width / 2 + rhs_button_right, y_at);
-    wid_set_mode(w, WID_MODE_OVER);
-    wid_set_style(w, box_highlight_style);
-    wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_style(w, box_style);
-    wid_set_pos(w, tl, br);
-    wid_set_text(w, ::to_string(game->config.key_map_left));
-    wid_set_on_mouse_up(w, wid_config_key_map_left);
-  }
-  ///////////////////////////////////////////////////////////////////////
-  // Map down
-  ///////////////////////////////////////////////////////////////////////
-  y_at++;
-  {
-    TRACE_AND_INDENT();
-    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "Map down");
-
-    point tl = make_point(1, y_at);
-    point br = make_point(width / 2, y_at);
-    wid_set_shape_none(w);
-    wid_set_pos(w, tl, br);
-    wid_set_text_lhs(w, true);
-    wid_set_text(w, "Map down");
-  }
-  {
-    TRACE_AND_INDENT();
-    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "value");
-
-    point tl = make_point(width / 2 + rhs_button_left, y_at);
-    point br = make_point(width / 2 + rhs_button_right, y_at);
-    wid_set_mode(w, WID_MODE_OVER);
-    wid_set_style(w, box_highlight_style);
-    wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_style(w, box_style);
-    wid_set_pos(w, tl, br);
-    wid_set_text(w, ::to_string(game->config.key_map_down));
-    wid_set_on_mouse_up(w, wid_config_key_map_down);
-  }
-  ///////////////////////////////////////////////////////////////////////
-  // Map right
-  ///////////////////////////////////////////////////////////////////////
-  y_at++;
-  {
-    TRACE_AND_INDENT();
-    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "Map right");
-
-    point tl = make_point(1, y_at);
-    point br = make_point(width / 2, y_at);
-    wid_set_shape_none(w);
-    wid_set_pos(w, tl, br);
-    wid_set_text_lhs(w, true);
-    wid_set_text(w, "Map right");
-  }
-  {
-    TRACE_AND_INDENT();
-    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "value");
-
-    point tl = make_point(width / 2 + rhs_button_left, y_at);
-    point br = make_point(width / 2 + rhs_button_right, y_at);
-    wid_set_mode(w, WID_MODE_OVER);
-    wid_set_style(w, box_highlight_style);
-    wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_style(w, box_style);
-    wid_set_pos(w, tl, br);
-    wid_set_text(w, ::to_string(game->config.key_map_right));
-    wid_set_on_mouse_up(w, wid_config_key_map_right);
-  }
-
-  ///////////////////////////////////////////////////////////////////////
-  y_at++;
-  ///////////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////////
   // gfx_toggle
@@ -3715,69 +3781,6 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   y_at++;
   ///////////////////////////////////////////////////////////////////////
-
-  ///////////////////////////////////////////////////////////////////////
-  // save
-  ///////////////////////////////////////////////////////////////////////
-  y_at++;
-  {
-    TRACE_AND_INDENT();
-    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "save");
-
-    point tl = make_point(1, y_at);
-    point br = make_point(width / 2, y_at);
-    wid_set_shape_none(w);
-    wid_set_pos(w, tl, br);
-    wid_set_text_lhs(w, true);
-    wid_set_text(w, "Save game");
-  }
-  {
-    TRACE_AND_INDENT();
-    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "value");
-
-    point tl = make_point(width / 2 + rhs_button_left, y_at);
-    point br = make_point(width / 2 + rhs_button_right, y_at);
-    wid_set_mode(w, WID_MODE_OVER);
-    wid_set_style(w, box_highlight_style);
-    wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_style(w, box_style);
-    wid_set_pos(w, tl, br);
-    wid_set_text(w, ::to_string(game->config.key_save));
-    wid_set_on_mouse_up(w, wid_config_key_save);
-  }
-  ///////////////////////////////////////////////////////////////////////
-  // load
-  ///////////////////////////////////////////////////////////////////////
-  y_at++;
-  {
-    TRACE_AND_INDENT();
-    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "load");
-
-    point tl = make_point(1, y_at);
-    point br = make_point(width / 2, y_at);
-    wid_set_shape_none(w);
-    wid_set_pos(w, tl, br);
-    wid_set_text_lhs(w, true);
-    wid_set_text(w, "Load game");
-  }
-  {
-    TRACE_AND_INDENT();
-    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "value");
-
-    point tl = make_point(width / 2 + rhs_button_left, y_at);
-    point br = make_point(width / 2 + rhs_button_right, y_at);
-    wid_set_mode(w, WID_MODE_OVER);
-    wid_set_style(w, box_highlight_style);
-    wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_style(w, box_style);
-    wid_set_pos(w, tl, br);
-    wid_set_text(w, ::to_string(game->config.key_load));
-    wid_set_on_mouse_up(w, wid_config_key_load);
-  }
 
   IF_DEBUG2
   {
