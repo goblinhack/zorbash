@@ -138,11 +138,42 @@ int Thing::health_set(int v)
 int Thing::health_decr(int v)
 {
   TRACE_NO_INDENT();
+
+  new_infop();
+
+  auto info = infop();
+
+  //
+  // If we've already applied too much damage, nothing to do
+  //
+  auto max_damage_per_tick = health_max() / 2;
+  if (info->damage_this_tick >= max_damage_per_tick) {
+    return info->health;
+  }
+
+  //
+  // Calculate how much damage can be applied.
+  //
+  auto max_damage_possible = max_damage_per_tick - info->damage_this_tick;
+
+  //
+  // Limit the damage applied to this maximum.
+  //
+  if (v > max_damage_possible) {
+    v -= max_damage_possible;
+  }
+
+  if (v <= 0) {
+    return info->health;
+  }
+
+  info->damage_this_tick += v;
+
   if (is_player()) {
     game->set_request_to_remake_rightbar();
   }
-  new_infop();
-  auto n = (infop()->health -= v);
+  auto n = (info->health -= v);
+
   return n;
 }
 

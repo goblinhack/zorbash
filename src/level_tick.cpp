@@ -649,6 +649,13 @@ void Level::tick_(void)
       // Need to do this even for dead things, so corpses don't hover over chasms.
       //
       t->location_check();
+
+      //
+      // Reset the amount of damage that can be applied per tick
+      //
+      if (t->maybe_infop()) {
+        t->infop()->damage_this_tick = 0;
+      }
     }
     FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
 
