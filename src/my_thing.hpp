@@ -1142,6 +1142,7 @@ public:
   int charge_count_incr(void);
   int charge_count_set(int);
   int charge_count(void);
+  int collect_penalty_get(Thingp item);
   int collision_check(void);
   int collision_hit_180(void);
   int collision_hit_360(void);
@@ -1304,7 +1305,6 @@ public:
   int gfx_pixelart_wobbles_when_hit(void);
   int gfx_water(void);
   int goal_penalty_get(Thingp attacker);
-  int collect_penalty_get(Thingp item);
   int gold_decr(int);
   int gold_decr(void);
   int gold_incr(int);
@@ -2660,12 +2660,12 @@ public:
   void acid_tick(void);
   void add_attacker(Thingp attacker, bool is_recursing = false);
   void add_avoid(Thingp attacker);
+  void add_collect_penalty(Thingp item);
   void add_enemy(Thingp attacker, bool is_recursing = false);
   void add_enemy(Tpp attacker);
   void add_friend(Thingp attacker);
   void add_friend(Tpp attacker);
   void add_goal_penalty(Thingp attacker);
-  void add_collect_penalty(Thingp item);
   void ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int miny, int maxx, int maxy);
   void ai_choose_search_goals(std::multiset< Goal > &goals, int search_type);
   void ai_get_next_hop(void);
@@ -2724,6 +2724,7 @@ public:
   void clear_dmap_can_see(void);
   void clear_interrupt_map(void);
   void clear_move_path(const std::string &why);
+  void collect_penalty_tick(void);
   void con(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void con_(const char *fmt, va_list args); // compile error without
   void corrode_tick(void);
@@ -2789,7 +2790,6 @@ public:
   void gas_poison_tick(void);
   void gc(void);
   void goal_penalty_tick(void);
-  void collect_penalty_tick(void);
   void grass_tick(void);
   void hide_callback(void);
   void hide(const std::string &);
@@ -2919,9 +2919,10 @@ public:
   void reinit(void);
   void release_followers(void);
   void remove_all_references(void);
-  void reset_goal_penalty(Thingp attacker);
   void reset_collect_penalty(Thingp attacker);
+  void reset_goal_penalty(Thingp attacker);
   void resting(void);
+  void resurrect_stop(void);
   void resurrect_tick(void);
   void score_add(Thingp victim = nullptr);
   void secret_door_tick(void);

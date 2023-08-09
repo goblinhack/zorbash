@@ -86,6 +86,7 @@ def tp_init(name, text_long_name):
     my.is_hittable(self, True)
     my.is_immune_to_cold(self, True)
     my.is_immune_to_necrosis(self, True)
+    my.is_immune_to_paralysis(self, True)
     my.is_immune_to_poison(self, True)
     my.is_immune_to_stamina_drain(self, True)
     my.is_interesting(self, True)
@@ -268,6 +269,7 @@ def tp_init(name, text_long_name):
             ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="gray30",
             tile="skeleton.dead.4", is_dead=True, delay_ms=delay, is_end_of_anim=True)
 
+    delay = 200
     my.tile(self,
             ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile="skeleton.dead.4", is_resurrecting=True, delay_ms=delay)

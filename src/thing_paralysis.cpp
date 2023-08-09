@@ -30,6 +30,10 @@ void Thing::paralysis_update(void)
       game->set_request_to_remake_rightbar();
     }
   }
+
+  if (paralysis_count()) {
+    dbg("Is paralysed");
+  }
 }
 
 int Thing::paralysis_count(void)

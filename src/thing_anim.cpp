@@ -125,18 +125,6 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
     }
 
     //
-    // If stuck in a web then don't flap wings.
-    //
-    if (is_stuck_currently()) {
-#ifdef DEBUG_ANIM
-      if (debug || is_debug_type()) {
-        con("Animate: Is stuck ");
-      }
-#endif
-      return;
-    }
-
-    //
     // Stop the animation here?
     //
     is_end_of_anim = tile_is_end_of_anim(tile);
@@ -709,52 +697,62 @@ void Thing::animate(void)
   }
 
   //
-  // No animation when in ice. But should we allow the death animation ? I think not.
+  // If stuck in a web then don't flap wings.
   //
-  if (tile_curr && /* ! (is_dead || is_dying) && */ level->is_block_of_ice(curr_at)) {
-    //
-    // In ice, we must allow swing animations to continue; as we wait on those. And how else will you break out of
-    // the ice?
-    //
-    if (is_monst() || is_player()) {
+  if (is_stuck_currently()) {
 #ifdef DEBUG_ANIM
-      if (debug || is_debug_type()) {
-        con("Animate: trapped in ice");
-      }
-#endif
-      return;
+    if (debug || is_debug_type()) {
+      con("Animate: Is stuck ");
     }
+#endif
+    //
+    // Abandon resurrection if we're stuck to avoid the anim getting stuck.
+    //
+    resurrect_stop();
+    return;
   }
 
-  if (tile_curr && paralysis_count()) {
+  if (paralysis_count()) {
     if (is_monst() || is_player()) {
 #ifdef DEBUG_ANIM
       if (debug || is_debug_type()) {
         con("Animate: paralysis");
       }
 #endif
+      //
+      // Abandon resurrection if we're stuck to avoid the anim getting stuck.
+      //
+      resurrect_stop();
       return;
     }
   }
 
-  if (tile_curr && is_frozen) {
+  if (is_frozen) {
     if (is_monst() || is_player()) {
 #ifdef DEBUG_ANIM
       if (debug || is_debug_type()) {
         con("Animate: frozen");
       }
 #endif
+      //
+      // Abandon resurrection if we're stuck to avoid the anim getting stuck.
+      //
+      resurrect_stop();
       return;
     }
   }
 
-  if (tile_curr && is_burnt) {
+  if (is_burnt) {
     if (is_monst() || is_player()) {
 #ifdef DEBUG_ANIM
       if (debug || is_debug_type()) {
         con("Animate: burnt");
       }
 #endif
+      //
+      // Abandon resurrection if we're stuck to avoid the anim getting stuck.
+      //
+      resurrect_stop();
       return;
     }
   }

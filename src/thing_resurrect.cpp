@@ -84,6 +84,27 @@ void Thing::resurrect_tick(void)
   }
 
   if (is_resurrecting) {
+    //
+    // Need to cancel resurrection?
+    //
+    if (paralysis_count()) {
+      dbg("Unable to resurrect as paralysed");
+      resurrect_stop();
+      return;
+    }
+
+    if (is_frozen) {
+      dbg("Unable to resurrect as frozen");
+      resurrect_stop();
+      return;
+    }
+
+    if (is_burnt) {
+      dbg("Unable to resurrect as burnt");
+      resurrect_stop();
+      return;
+    }
+
     dbg("Already resurrecting");
     return;
   }
@@ -121,6 +142,15 @@ void Thing::resurrect_tick(void)
   FOR_ALL_THINGS_END()
 
   resurrect();
+}
+
+void Thing::resurrect_stop(void)
+{
+  TRACE_NO_INDENT();
+
+  dbg("Unable to resurrect");
+  tick_resurrect_when_set(0);
+  is_resurrecting = false;
 }
 
 ////////////////////////////////////////////////////////////////////////////

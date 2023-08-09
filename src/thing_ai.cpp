@@ -45,7 +45,7 @@ bool operator<(const class Path &lhs, const class Path &rhs)
 #define GOAL_ADD(prio, score, msg, it)                                                                               \
   IF_DEBUG2                                                                                                          \
   {                                                                                                                  \
-    auto s = string_sprintf("Add goal prio %d score %d at (%d,%d) %s", prio, score, p.x, p.y, msg);                    \
+    auto s = string_sprintf("Add goal prio %d score %d at (%d,%d) %s", prio, score, p.x, p.y, msg);                  \
     AI_LOG(s, it);                                                                                                   \
   }                                                                                                                  \
   goals.insert(Goal(prio, score, p, msg, it));
@@ -53,7 +53,7 @@ bool operator<(const class Path &lhs, const class Path &rhs)
 #define GOAL_AVOID_ADD(prio, score, msg, it)                                                                         \
   IF_DEBUG2                                                                                                          \
   {                                                                                                                  \
-    auto s = string_sprintf("Add goal (avoid) prio %d score %d at (%d,%d) %s", prio, score, p.x, p.y, msg);            \
+    auto s = string_sprintf("Add goal (avoid) prio %d score %d at (%d,%d) %s", prio, score, p.x, p.y, msg);          \
     AI_LOG(s, it);                                                                                                   \
   }                                                                                                                  \
   goals.insert(Goal(prio, score, p, msg, it, true /* avoid */));
@@ -233,8 +233,8 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
 
                 IF_DEBUG2
                 {
-                  auto s = string_sprintf("Accept avoid goal score %d at (%d,%d) %s", (int) goal.score, (int) goal.at.x,
-                                          (int) goal.at.y, goal.msg.c_str());
+                  auto s = string_sprintf("Accept avoid goal score %d at (%d,%d) %s", (int) goal.score,
+                                          (int) goal.at.x, (int) goal.at.y, goal.msg.c_str());
                   AI_LOG(s);
                 }
                 return true;
