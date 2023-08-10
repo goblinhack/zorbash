@@ -114,21 +114,34 @@ void dungeon_test(void)
     TRACE_NO_INDENT();
     wid_display_all();
 
-    if (player && player->is_waiting_to_descend_dungeon) {
-      player->descend_dungeon(true, game->level->world_at + point3d(0, 0, 2));
-    }
-    if (player && player->is_waiting_to_descend_sewer) {
-      if (! player->descend_sewer()) {
-        player->err("Failed to descend sewer");
+    if (player) {
+      if (player->is_waiting_to_descend_dungeon) {
+        player->descend_dungeon(true, game->level->world_at + point3d(0, 0, 2));
       }
-    }
-    if (player && player->is_waiting_to_ascend_sewer) {
-      if (! player->ascend_sewer()) {
-        player->err("Failed to ascend sewer");
+
+      if (player->is_waiting_to_descend_sewer) {
+        if (! player->descend_sewer()) {
+          player->err("Failed to descend sewer");
+        }
       }
-    }
-    if (player->is_waiting_to_descend_dungeon) {
-      DIE("Player failed to descend");
+
+      if (player->is_waiting_to_ascend_sewer) {
+        if (! player->ascend_sewer()) {
+          player->err("Failed to ascend sewer");
+        }
+      }
+
+      //
+      // The robot can get stuck and oscillate in paths, so put a limit on the test.
+      //
+      if (player->move_count() > 500) {
+        player->dead("End of test");
+        break;
+      }
+
+      if (player->is_waiting_to_descend_dungeon) {
+        DIE("Player failed to descend");
+      }
     }
 
     if (g_errored) {

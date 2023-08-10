@@ -13,7 +13,7 @@ Widp wid_leftbar {};
 void wid_leftbar_fini(void)
 {
   TRACE_NO_INDENT();
-  wid_destroy(&wid_leftbar);
+  wid_destroy_nodelay(&wid_leftbar);
 
   auto level = game->get_current_level();
   if (level) {

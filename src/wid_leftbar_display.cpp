@@ -615,7 +615,6 @@ bool wid_leftbar_display_create(void)
     wid_set_ignore_scroll_events(wid_leftbar, true);
     wid_set_ignore_events(wid_leftbar, true);
     wid_set_pos(wid_leftbar, tl, br);
-    wid_set_shape_none(wid_leftbar);
     wid_lower(wid_leftbar);
   }
 
