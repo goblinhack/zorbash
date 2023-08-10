@@ -4,7 +4,6 @@ import my
 def tp_init(self):
     # begin sort marker
     my.collision_check(self, True)
-    my.collision_hit_priority(self, 1)
     my.collision_hit_priority(self, 3)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)

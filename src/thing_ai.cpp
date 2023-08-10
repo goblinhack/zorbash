@@ -2185,9 +2185,6 @@ bool Thing::ai_tick(bool recursing)
   // If not asleep, update the vision.
   //
   if (! is_sleeping) {
-    if (is_player()) {
-      con("%s:%d", __FUNCTION__, __LINE__);
-    }
     level->fov_calculate(this, &ai->can_see_currently, &ai->can_see_ever, vision_source.x, vision_source.y,
                          distance_vision_get() + 1, is_player() /* light walls */);
 
