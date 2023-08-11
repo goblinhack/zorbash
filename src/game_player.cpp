@@ -745,27 +745,7 @@ done:
   auto player = level->player;
   if (player) {
     level->request_player_light_update = true;
-
-    if (0) {
-      level->thing_new("water", point(player->curr_at.x, player->curr_at.y));
-      level->thing_new("water", point(player->curr_at.x + 1, player->curr_at.y));
-      level->thing_new("water", point(player->curr_at.x + 1, player->curr_at.y + 1));
-      level->thing_new("water", point(player->curr_at.x + 2, player->curr_at.y + 1));
-      // level->thing_new("block_of_ice", point(player->curr_at.x, player->curr_at.y));
-      // player->frozen_set();
-      // level->thing_new("lava", point(player->curr_at.x, player->curr_at.y));
-    }
-
-    if (0) {
-      IF_DEBUG2
-      {
-        player->health_max_incr(200);
-        // player->health_decr(90);
-      }
-    }
-
     game->player_is_ready_for_messages = true;
-
     player->log("Placed");
   }
 }
