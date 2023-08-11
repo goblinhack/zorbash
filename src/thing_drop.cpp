@@ -57,25 +57,36 @@ bool Thing::drop(Thingp what, Thingp target, DropOptions drop_options)
     } else {
       dbg("Drop (being stolen) %s", what->to_short_string().c_str());
     }
+    reset_collect_penalty(what);
   } else if (drop_options.is_able_to_be_equipped) {
     if (target) {
       dbg("Drop (being equipped) %s at %s", what->to_short_string().c_str(), target->to_short_string().c_str());
     } else {
       dbg("Drop (being equipped) %s", what->to_short_string().c_str());
     }
+    reset_collect_penalty(what);
   } else if (drop_options.is_being_thrown) {
     if (target) {
       dbg("Drop (being thrown) %s at %s", what->to_short_string().c_str(), target->to_short_string().c_str());
     } else {
       dbg("Drop (being thrown) %s", what->to_short_string().c_str());
     }
+    reset_collect_penalty(what);
   } else {
     if (target) {
       dbg("Drop %s at %s", what->to_short_string().c_str(), target->to_short_string().c_str());
     } else {
       dbg("Drop %s", what->to_short_string().c_str());
     }
+
+    //
+    // No penalties for the player. Allow them to pick and drop as they please.
+    //
+    if (is_monst() || (is_player() && game->robot_mode)) {
+      add_collect_penalty(what);
+    }
   }
+
   TRACE_AND_INDENT();
 
   auto top_owner       = what->top_owner();
@@ -205,7 +216,6 @@ bool Thing::drop(Thingp what, Thingp target, DropOptions drop_options)
 
   what->is_being_dropped = false;
   what->tick_last_dropped_set(game->tick_current);
-  add_collect_penalty(what);
   if (! is_dead_or_dying()) {
     if (! drop_options.is_being_thrown && ! drop_options.is_able_to_be_equipped && ! drop_options.is_being_stolen) {
       what->on_dropped();

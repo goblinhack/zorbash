@@ -135,7 +135,9 @@ void dungeon_test(void)
       // The robot can get stuck and oscillate in paths, so put a limit on the test.
       //
       if (player->move_count() > 500) {
+        pcg_random_allowed++;
         player->dead("End of test");
+        pcg_random_allowed--;
         break;
       }
 
@@ -156,5 +158,6 @@ void dungeon_test(void)
   TRACE_NO_INDENT();
   game->fini();
 
+  quit();
   exit(0);
 }
