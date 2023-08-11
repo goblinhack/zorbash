@@ -1329,10 +1329,10 @@ static Tpp tp_get_bodypart(const int bodypart, const std::string &which, int ste
   index += step;
 
   if (index < 0) {
-    index = tp_bodypart[ bodypart ].size() - 1;
+    index = (int) tp_bodypart[ bodypart ].size() - 1;
   }
 
-  if (index >= tp_bodypart[ bodypart ].size()) {
+  if (index >= (int) tp_bodypart[ bodypart ].size()) {
     index = 0;
   }
 

@@ -12,7 +12,7 @@
 //
 bool d20_ge(int stat_total, const int dice_roll_to_exceed, bool &fumble, bool &critical)
 {
-  auto dice_roll = pcg_random_range_inclusive(1, 20);
+  int dice_roll = pcg_random_range_inclusive(1, 20);
 
   critical = false;
   fumble   = false;
@@ -35,7 +35,7 @@ bool d20_ge(int stat_total, const int dice_roll_to_exceed, bool &fumble, bool &c
 //
 bool d20_ge(int stat_total, const int dice_roll_to_exceed)
 {
-  auto dice_roll = pcg_random_range_inclusive(1, 20);
+  int dice_roll = pcg_random_range_inclusive(1, 20);
 
   if (dice_roll == 20) {
     DBG("d20: rolled a 20 => success");
@@ -57,7 +57,7 @@ bool d20_ge(int stat_total, const int dice_roll_to_exceed)
 
 bool Thing::d20_ge(int stat_total, const int dice_roll_to_exceed)
 {
-  auto dice_roll = pcg_random_range_inclusive(1, 20);
+  int dice_roll = pcg_random_range_inclusive(1, 20);
 
   if (dice_roll == 20) {
     dbg("d20: rolled a 20 => success");

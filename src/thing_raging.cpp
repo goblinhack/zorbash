@@ -33,7 +33,9 @@ bool Thing::raging_set(bool val)
     }
   }
 
-  return is_raging_currently = val;
+  is_raging_currently = val;
+
+  return is_raging_currently;
 }
 
 void Thing::rage_tick(void)
