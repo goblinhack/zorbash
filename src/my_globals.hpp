@@ -135,4 +135,6 @@ extern int g_last_logged_callframes_depth;
 #define MY_STDERR (g_log_stderr ? g_log_stderr : stderr)
 #define MY_STDOUT (g_log_stdout ? g_log_stdout : stdout)
 
+void reset_globals(void);
+
 #endif

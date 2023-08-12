@@ -1107,7 +1107,7 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
   LOG("Read config: gfx_fullscreen_desktop       = %d", my.t.gfx_fullscreen_desktop);
   LOG("Read config: gfx_fullscreen               = %d", my.t.gfx_fullscreen);
   LOG("Read config: gfx_inverted                 = %d", my.t.gfx_inverted);
-  LOG("Read config: gfx_monochrome                 = %d", my.t.gfx_monochrome);
+  LOG("Read config: gfx_monochrome               = %d", my.t.gfx_monochrome);
   LOG("Read config: gfx_show_hidden              = %d", my.t.gfx_show_hidden);
   LOG("Read config: gfx_vsync_enable             = %d", my.t.gfx_vsync_enable);
   LOG("Read config: g_opt_ascii                  = %d", g_opt_ascii);

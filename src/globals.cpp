@@ -74,3 +74,28 @@ int DUNGEON_GRID_CHUNK_HEIGHT;
 int DUNGEON_GRID_CHUNK_WIDTH;
 
 int g_last_logged_callframes_depth;
+
+void reset_globals(void)
+{
+  g_opt_ascii                = false;
+  g_opt_ascii_override       = false;
+  g_opt_biome_chasms         = false;
+  g_opt_biome_flooded        = false;
+  g_opt_biome_ice            = false;
+  g_opt_biome_lava           = false;
+  g_opt_biome_swamp          = false;
+  g_opt_gfx_monochrome       = false;
+  g_opt_no_slow_log_flush    = false;
+  g_opt_override_debug_level = false;
+  g_opt_resume               = false;
+  g_opt_silent               = false;
+  g_opt_test_dungeon_gen     = false;
+  g_opt_test_level_start     = false;
+  g_opt_tests                = false;
+  g_opt_test_save_load       = false;
+  g_opt_test_skip_main_menu  = false;
+  g_render_monochrome        = false;
+  g_opt_debug1               = false;
+  g_opt_debug2               = false;
+  g_opt_debug3               = false;
+}

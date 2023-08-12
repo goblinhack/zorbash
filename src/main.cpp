@@ -837,11 +837,13 @@ int main(int argc, char *argv[])
                   game->config.version.c_str(), version.c_str());
       delete game;
       game = new Game(std::string(appdata));
+      reset_globals();
       game->save_config();
       g_errored = false;
     } else if (! config_error.empty()) {
       SDL_MSG_BOX("Config error: %s. Will need to reset config.", config_error.c_str());
       delete game;
+      reset_globals();
       game = new Game(std::string(appdata));
       game->save_config();
       g_errored = false;
