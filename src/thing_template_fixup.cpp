@@ -107,6 +107,10 @@ void tp_fixup(void)
     }
 
     if (tp->is_ethereal()) {
+      if (tp->is_air_breather()) {
+        DIE("Tp %s has ethereal set and breathes air?", tp->name().c_str());
+      }
+
       tp->is_immune_to_paralysis_set(true);
       tp->is_immune_to_poison_set(true);
       tp->is_immune_to_spiderwebs_set(true);
@@ -169,6 +173,10 @@ void tp_fixup(void)
     }
 
     if (tp->is_undead()) {
+      if (tp->is_air_breather()) {
+        DIE("Tp %s has undead set and breathes air?", tp->name().c_str());
+      }
+
       tp->is_immune_to_poison_set(true);
       tp->is_immune_to_necrosis_set(true);
       tp->is_immune_to_stamina_drain_set(true);

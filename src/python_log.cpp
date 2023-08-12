@@ -133,9 +133,9 @@ void py_err(void)
   PyErr_Display(ptype, pvalue, pbacktrace);
   PyTraceBack_Print(pbacktrace, pvalue);
 
-  pyobj_str = PyObject_Str(pvalue);
-  py_str    = py_obj_to_string(pyobj_str);
-  ERR("%s", py_str);
+  pyobj_str              = PyObject_Str(pvalue);
+  py_str                 = py_obj_to_string(pyobj_str);
+  std::string full_error = py_str;
   myfree(py_str);
 
   mod  = PyImport_ImportModule("traceback");
@@ -147,15 +147,16 @@ void py_err(void)
     Py_DECREF(string);
 
     py_str = py_obj_to_string(ret);
-    ERR("%s", py_str);
+    CON("%s", py_str);
+    full_error += "\n";
+    full_error += py_str;
     myfree(py_str);
 
     Py_DECREF(ret);
   }
 
+  ERR("Python error: %s", full_error.c_str());
   PyErr_Clear();
-
-  ERR("Python error");
 }
 
 void py_trace(void)

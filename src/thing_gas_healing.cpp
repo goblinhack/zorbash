@@ -45,6 +45,8 @@ void Thing::gas_healing_tick(void)
   if (is_alive_monst() || is_player()) {
     if (is_player()) {
       msg("%%fg=pink$You breath in the healing gas!%%fg=reset$");
+    } else {
+      msg("%s breathes in the healing gas!", text_The().c_str());
     }
     health_incr(d6());
     stamina_incr(d6());

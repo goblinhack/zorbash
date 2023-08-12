@@ -360,6 +360,17 @@ static void err_(const char *fmt, va_list args)
   callstack_dump();
   backtrace_dump();
 
+  char error_buf[ MAXLONGSTR ];
+  {
+    int len;
+
+    error_buf[ 0 ] = '\0';
+    len            = (int) strlen(error_buf);
+    vsnprintf(error_buf + len, MAXLONGSTR - len, fmt, args);
+
+    error_handler(error_buf);
+  }
+
   {
     char buf[ MAXLONGSTR ];
     int  len = 0;
@@ -370,14 +381,7 @@ static void err_(const char *fmt, va_list args)
       len = (int) strlen(buf);
     }
 
-    snprintf(buf + len, MAXLONGSTR - len, "ERROR: %%%%fg=red$");
-
-    len = (int) strlen(buf);
-    vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
-
-    len = (int) strlen(buf);
-    snprintf(buf + len, MAXLONGSTR - len, "%%%%fg=reset$");
-
+    snprintf(buf + len, MAXLONGSTR - len, "ERROR: %%%%fg=red$%s%%%%fg=reset$", error_buf);
     putf(MY_STDERR, buf);
     putf(MY_STDOUT, buf);
 
@@ -385,18 +389,6 @@ static void err_(const char *fmt, va_list args)
     putchar('\n');
 
     wid_console_log(buf);
-  }
-
-  {
-    char buf[ MAXLONGSTR ];
-    int  len = 0;
-
-    snprintf(buf, MAXLONGSTR - len, "ERROR: ");
-
-    len = (int) strlen(buf);
-    vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
-
-    error_handler(buf);
   }
 
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();

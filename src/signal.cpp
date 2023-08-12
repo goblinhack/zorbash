@@ -126,9 +126,9 @@ void common_error_handler(std::string &tech_support)
 {
   TRACE_AND_INDENT();
 
-  if (game) {
+  tech_support += "\n";
+  if (game && ! game->seed_name.empty()) {
     tech_support += "Seed name: " + game->seed_name + "\n";
-    tech_support += "\n";
   }
   tech_support += "Could you please email goblinhack@gmail.com and attach the following files and trace info?\n";
   tech_support += g_log_stdout_filename;
@@ -149,9 +149,7 @@ void common_error_handler(std::string &tech_support)
 
 void segv_handler(int sig)
 {
-  std::string tech_support = "Sorry, a crash has occurred!\n";
-  tech_support += "\n";
-
+  std::string tech_support = "Sorry, a crash has occurred!";
   common_error_handler(tech_support);
 
   ERR("Crashed");
@@ -168,11 +166,8 @@ void error_handler(const std::string &error_msg)
 {
   TRACE_AND_INDENT();
 
-  std::string tech_support = "Sorry, an error has occurred!\n";
-  tech_support += "\n";
+  std::string tech_support = "Sorry, an error has occurred: ";
   tech_support += error_msg;
-  tech_support += "\n";
-
   common_error_handler(tech_support);
 }
 
