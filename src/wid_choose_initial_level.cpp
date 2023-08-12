@@ -630,13 +630,13 @@ static void wid_choose_initial_dungeons_tick(Widp w)
     wid_set_text(b, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$E%%fg=" UI_TEXT_COLOR_STR "$nter the Dungeon");
     {
       color c = RED;
-      c.r     = val;
+      c.a     = val;
       wid_set_mode(b, WID_MODE_OVER);
       wid_set_color(b, WID_COLOR_BG, c);
     }
     {
-      color c = UI_DUNGEONS_CURRENT_LEVEL_COLOR;
-      c.g     = val;
+      color c = WHITE;
+      c.a     = val;
       wid_set_mode(b, WID_MODE_NORMAL);
       wid_set_color(b, WID_COLOR_BG, c);
     }
