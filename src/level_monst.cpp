@@ -32,7 +32,7 @@ Tpp Level::get_random_monst(point p, monst_environ_t monst_environ, monst_class_
   // Roll the dice and see if we get to place a monster.
   //
   auto roll = d1000();
-  con("get random monst: roll %d -- biome %d type %d class %d -- %d", roll, biome, monst_environ, monst_class,
+  dbg("get random monst: roll %d -- biome %d type %d class %d -- %d", roll, biome, monst_environ, monst_class,
       d1000_chance_creating_monst[ monst_environ ][ monst_class ] + difficulty_offset);
 
   if (roll <= d1000_chance_creating_monst[ monst_environ ][ monst_class ] + difficulty_offset) {

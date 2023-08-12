@@ -1168,88 +1168,116 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
   in >> bits(eol);
   if (eol != GAME_SAVE_MARKER_CONFIG) {
     game_load_error += "end of config marker not found";
+    return in;
   }
 
   if (my.t.ascii_gl_height < 0) {
     game_load_error += "ascii_gl_height is invalid";
+    return in;
   }
   if (my.t.ascii_gl_width < 0) {
     game_load_error += "ascii_gl_width is invalid";
+    return in;
   }
   if (my.t.config_pix_height < 0) {
     game_load_error += "config_pix_height is invalid";
+    return in;
   }
   if (my.t.config_pix_width < 0) {
     game_load_error += "config_pix_width is invalid";
+    return in;
   }
   if (my.t.game_pix_height < 0) {
     game_load_error += "game_pix_height is invalid";
+    return in;
   }
   if (my.t.game_pix_scale_height < 0) {
     game_load_error += "game_pix_scale_height is invalid";
+    return in;
   }
   if (my.t.game_pix_scale_width < 0) {
     game_load_error += "game_pix_scale_width is invalid";
+    return in;
   }
   if (my.t.game_pix_width < 0) {
     game_load_error += "game_pix_width is invalid";
+    return in;
   }
   if (! my.t.game_pix_zoom) {
     game_load_error += "game_pix_zoom is invalid";
+    return in;
   }
   if (my.t.one_pixel_height < 0) {
     game_load_error += "one_pixel_height is invalid";
+    return in;
   }
   if (my.t.one_pixel_width < 0) {
     game_load_error += "one_pixel_width is invalid";
+    return in;
   }
   if (my.t.tile_height < 0) {
     game_load_error += "tile_height is invalid";
+    return in;
   }
   if (my.t.tile_pixel_height < 0) {
     game_load_error += "tile_pixel_height is invalid";
+    return in;
   }
   if (my.t.tile_pixel_width < 0) {
     game_load_error += "tile_pixel_width is invalid";
+    return in;
   }
   if (my.t.tile_pix_height < 0) {
     game_load_error += "tile_pix_height is invalid";
+    return in;
   }
   if (my.t.tile_pix_width < 0) {
     game_load_error += "tile_pix_width is invalid";
+    return in;
   }
   if (my.t.tile_width < 0) {
     game_load_error += "tile_width is invalid";
+    return in;
   }
   if (my.t.ui_ascii_term_height < 0) {
     game_load_error += "ui_ascii_term_height is invalid";
+    return in;
   }
   if (my.t.ui_ascii_term_width < 0) {
     game_load_error += "ui_ascii_term_width is invalid";
+    return in;
   }
   if (my.t.ui_gfx_term_height < 0) {
     game_load_error += "ui_gfx_term_height is invalid";
+    return in;
   }
   if (my.t.ui_gfx_term_width < 0) {
     game_load_error += "ui_gfx_term_width is invalid";
+    return in;
   }
   if (my.t.ui_pix_height < 0) {
     game_load_error += "ui_pix_height is invalid";
+    return in;
   }
   if (my.t.ui_pix_width < 0) {
     game_load_error += "ui_pix_width is invalid";
+    return in;
   }
   if (my.t.ui_pix_zoom < 0) {
     game_load_error += "ui_pix_zoom is invalid";
+    return in;
   }
   if (my.t.video_w_h_ratio < 0) {
     game_load_error += "video_w_h_ratio is invalid";
+    return in;
   }
   if (my.t.window_pix_height < 0) {
     game_load_error += "window_pix_height is invalid";
+    return in;
   }
   if (my.t.window_pix_width < 0) {
     game_load_error += "window_pix_width is invalid";
+    return in;
   }
 
   return in;

@@ -829,18 +829,20 @@ int main(int argc, char *argv[])
     CON("INI: Load config");
     game              = new Game(std::string(appdata));
     auto config_error = game->load_config();
-    if (! config_error.empty()) {
-      std::string version = "" MYVER "";
-      if (game->config.version.c_str() != version.c_str()) {
-        SDL_MSG_BOX(
-            "Config version change error: %s. Will need to reset config. Found version [%s]. Expected version [%s].",
-            config_error.c_str(), game->config.version.c_str(), version.c_str());
-      } else {
-        SDL_MSG_BOX("Config load error: %s. Will need to reset config. Found version [%s]. Expected version [%s].",
-                    config_error.c_str(), game->config.version.c_str(), version.c_str());
-      }
 
-      game->config.reset();
+    std::string version = "" MYVER "";
+
+    if (game->config.version != version) {
+      SDL_MSG_BOX("Config version change. Will need to reset config. Found version [%s]. Expected version [%s].",
+                  game->config.version.c_str(), version.c_str());
+      delete game;
+      game = new Game(std::string(appdata));
+      game->save_config();
+      g_errored = false;
+    } else if (! config_error.empty()) {
+      SDL_MSG_BOX("Config error: %s. Will need to reset config.", config_error.c_str());
+      delete game;
+      game = new Game(std::string(appdata));
       game->save_config();
       g_errored = false;
     }
