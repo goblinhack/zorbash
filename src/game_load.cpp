@@ -714,6 +714,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
 
   in >> bits(l->world_at);
   in >> bits(l->grid_at);
+  in >> bits(l->stairs_at);
   in >> bits(l->biome);
 
   in >> bits(l->difficulty_depth);

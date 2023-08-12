@@ -384,6 +384,7 @@ private:
   int _is_critical_to_level {};
   int _is_crushable {};
   int _is_crystal {};
+  int _is_crystalline {};
   int _is_cursor {};
   int _is_cursor_can_hover_over {};
   int _is_cursor_can_hover_over_needs_confirm {};
@@ -671,7 +672,6 @@ private:
   int _is_unused_flag110 {};
   int _is_unused_flag111 {};
   int _is_unused_flag112 {};
-  int _is_unused_flag113 {};
   int _is_unused_flag12 {};
   int _is_unused_flag124 {};
   int _is_unused_flag13 {};
@@ -1729,6 +1729,7 @@ public:
   int is_crab(void) const;
   int is_critical_to_level(void) const;
   int is_crushable(void) const;
+  int is_crystalline(void) const;
   int is_crystal(void) const;
   int is_cursor_can_hover_over_needs_confirm(void) const;
   int is_cursor_can_hover_over(void) const;
@@ -2014,7 +2015,6 @@ public:
   int is_unused_flag110(void) const;
   int is_unused_flag111(void) const;
   int is_unused_flag112(void) const;
-  int is_unused_flag113(void) const;
   int is_unused_flag11(void) const;
   int is_unused_flag124(void) const;
   int is_unused_flag12(void) const;
@@ -2494,6 +2494,7 @@ public:
   void is_crab_set(int v);
   void is_critical_to_level_set(int v);
   void is_crushable_set(int v);
+  void is_crystalline_set(int v);
   void is_crystal_set(int v);
   void is_cursor_can_hover_over_needs_confirm_set(int v);
   void is_cursor_can_hover_over_set(int v);
@@ -2779,7 +2780,6 @@ public:
   void is_unused_flag110_set(int v);
   void is_unused_flag111_set(int v);
   void is_unused_flag112_set(int v);
-  void is_unused_flag113_set(int v);
   void is_unused_flag11_set(int v);
   void is_unused_flag124_set(int v);
   void is_unused_flag12_set(int v);

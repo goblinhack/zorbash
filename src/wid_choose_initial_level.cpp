@@ -149,6 +149,7 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
     return;
   }
 
+  TRACE_NO_INDENT();
   if (ctx->levels[ y ][ x ]) {
     switch (node->depth) {
       case -1 : break;
@@ -169,6 +170,7 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
 
   std::string fg_tilename;
 
+  TRACE_NO_INDENT();
   if (node->is_ascend_dungeon) {
     fg_tilename = "you_are_here_icon";
     wid_set_on_mouse_down(b, wid_choose_initial_dungeons_shortcut_enter);
@@ -178,6 +180,7 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
     fg_tilename = "final_boss_icon";
   }
 
+  TRACE_NO_INDENT();
   if (g_opt_ascii) {
     wid_set_style(b, UI_WID_STYLE_SOLID_DEFAULT);
   } else {
@@ -185,12 +188,14 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
     wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
   }
 
+  TRACE_NO_INDENT();
   if (! g_opt_ascii) {
     if (! bg_tilename.empty()) {
       wid_set_tilename(TILE_LAYER_BG_0, b, bg_tilename);
     }
   }
 
+  TRACE_NO_INDENT();
   auto level_at = wid_choose_level_grid_to_level_coord(x, y);
   auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
 
@@ -198,7 +203,9 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
     //
     // Place crystals at level transitions
     //
+    TRACE_NO_INDENT();
     for (auto n : l->next_levels) {
+      TRACE_NO_INDENT();
       auto nl = get(game->world.levels, n.x, n.y, n.z);
 
       //
@@ -210,40 +217,75 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
 
       auto next_node = ctx->nodes->getn(nl->grid_at.x, nl->grid_at.y);
 
+      TRACE_NO_INDENT();
       if (next_node) {
         if ((node->has_door_left && (l->grid_at + point(-1, 0) == nl->grid_at))
             || (node->has_door_right && (l->grid_at + point(1, 0) == nl->grid_at))
             || (node->has_door_down && (l->grid_at + point(0, 1) == nl->grid_at))
             || (node->has_door_up && (l->grid_at + point(0, -1) == nl->grid_at))) {
           if (next_node->is_lock) {
-            l->is_crystal_level = true;
+            bool need_crystal = false;
             switch (next_node->depth) {
               case -1 : break;
               case 0 : break;
               case 1 : break;
-              case 2 : fg_tilename = "crystal.1"; break;
-              case 3 : fg_tilename = "crystal.2"; break;
-              case 4 : fg_tilename = "crystal.3"; break;
-              case 5 : fg_tilename = "crystal.4"; break;
-              case 6 : fg_tilename = "crystal.5"; break;
-              case 7 : fg_tilename = "crystal.6"; break;
-              case 8 : fg_tilename = "crystal.7"; break;
+              case 2 :
+                fg_tilename  = "crystal1";
+                need_crystal = true;
+                break;
+              case 3 :
+                fg_tilename  = "crystal2";
+                need_crystal = true;
+                break;
+              case 4 :
+                fg_tilename  = "crystal3";
+                need_crystal = true;
+                break;
+              case 5 :
+                fg_tilename  = "crystal4";
+                need_crystal = true;
+                break;
+              case 6 :
+                fg_tilename  = "crystal5";
+                need_crystal = true;
+                break;
+              case 7 :
+                fg_tilename  = "crystal6";
+                need_crystal = true;
+                break;
+              case 8 :
+                fg_tilename  = "crystal7";
+                need_crystal = true;
+                break;
+            }
+            TRACE_NO_INDENT();
+            if (need_crystal) {
+              if (! l->is_crystal_level) {
+                l->is_crystal_level = true;
+                TRACE_NO_INDENT();
+                pcg_random_allowed++;
+                (void) l->thing_new(fg_tilename, l->stairs_at);
+                pcg_random_allowed--;
+              }
             }
           }
         }
       }
     }
 
+    TRACE_NO_INDENT();
     if (! g_opt_ascii) {
       if (! fg_tilename.empty()) {
         wid_set_tilename(TILE_LAYER_FG_0, b, fg_tilename);
       }
     }
 
+    TRACE_NO_INDENT();
     if (node->is_descend_dungeon) {
       l->is_final_boss_level = true;
     }
 
+    TRACE_NO_INDENT();
     char tmp[ MAXSHORTSTR ];
     if (l->is_crystal_level) {
       if (g_opt_ascii) {

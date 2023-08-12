@@ -50,6 +50,16 @@ void Game::place_player(void)
       }
 
       if (0) {
+        level->thing_new("crystal1", point(x, y + 1));
+        level->thing_new("crystal2", point(x, y + 2));
+        level->thing_new("crystal3", point(x, y + 3));
+        level->thing_new("crystal4", point(x, y + 4));
+        level->thing_new("crystal5", point(x, y + 5));
+        level->thing_new("crystal6", point(x, y + 6));
+        level->thing_new("crystal7", point(x, y + 7));
+      }
+
+      if (0) {
         auto k = level->thing_new("key", point(x, y));
         t->carry(k, carry_options);
       }

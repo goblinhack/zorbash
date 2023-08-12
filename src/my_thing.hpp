@@ -1502,6 +1502,7 @@ public:
   int is_crab(void);
   int is_critical_to_level(void);
   int is_crushable(void);
+  int is_crystalline(void);
   int is_crystal(void);
   int is_cursor_can_hover_over_needs_confirm(void);
   int is_cursor_can_hover_over(void);
@@ -1791,7 +1792,6 @@ public:
   int is_unused_flag110(void);
   int is_unused_flag111(void);
   int is_unused_flag112(void);
-  int is_unused_flag113(void);
   int is_unused_flag11(void);
   int is_unused_flag12(void);
   int is_unused_flag13(void);

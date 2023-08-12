@@ -80,7 +80,7 @@ PyObject *level_is_corpse_with_bones_at(PyObject *obj, PyObject *args, PyObject 
 PyObject *level_is_corridor_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_critical_to_level_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_crushable_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_crystal_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_crystalline_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cursor_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cursor_can_hover_over_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cursor_can_hover_over_needs_confirm_at(PyObject *obj, PyObject *args, PyObject *keywds);

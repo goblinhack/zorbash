@@ -813,12 +813,12 @@ int main(int argc, char *argv[])
   CON("INI: Install crash handlers");
   signal(SIGSEGV, segv_handler);
   signal(SIGABRT, segv_handler);
-  signal(SIGINT, ctrlc_handler);
-  signal(SIGILL, ctrlc_handler);
+  signal(SIGFPE, segv_handler);
+  signal(SIGILL, segv_handler);
 #ifndef _WIN32
   signal(SIGPIPE, ctrlc_handler);
 #endif
-  signal(SIGFPE, ctrlc_handler);
+  signal(SIGINT, ctrlc_handler);
 #endif
 
   //

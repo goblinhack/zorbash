@@ -278,6 +278,7 @@ PyObject *thing_is_cowardly(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_crab(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_critical_to_level(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_crushable(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_crystalline(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_crystal(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cursor_can_hover_over_needs_confirm(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cursor_can_hover_over(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -571,7 +572,6 @@ PyObject *thing_is_unused_flag10(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag110(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag111(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag112(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag113(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag11(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag12(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag13(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -13,6 +13,7 @@
 
 Thingp Level::thing_new(Tpp tp, const point at, Thingp owner)
 {
+  TRACE_NO_INDENT();
   if (unlikely(! tp)) {
     err("No tp provided for thing creation");
     return nullptr;
@@ -23,6 +24,7 @@ Thingp Level::thing_new(Tpp tp, const point at, Thingp owner)
 
 Thingp Level::thing_new(const std::string &tp_name, Thingp owner)
 {
+  TRACE_NO_INDENT();
   return thing_new(tp_name, owner->curr_at, owner);
 }
 
@@ -32,10 +34,16 @@ Thingp Level::thing_new(const std::string &name, const point at, Thingp owner)
   // Find a thing appropriate for the level and position (if it is something
   // like "random_monst_class_A") Else just find the named thing.
   //
+  TRACE_NO_INDENT();
   auto cands = tp_find_wildcard(this, at, name);
-  auto tp    = pcg_one_of(cands);
+  if (! cands.size()) {
+    DIE("Could not find thing '%s'", name.c_str());
+    return nullptr;
+  }
+
+  auto tp = pcg_one_of(cands);
   if (! tp) {
-    err("Could not create thing '%s'", name.c_str());
+    DIE("Could not create thing '%s'", name.c_str());
     return nullptr;
   }
 

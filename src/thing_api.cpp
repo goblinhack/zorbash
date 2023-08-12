@@ -760,10 +760,10 @@ int Thing::is_unused_flag112(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag112());
 }
-int Thing::is_unused_flag113(void)
+int Thing::is_crystal(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag113());
+  return (tp()->is_crystal());
 }
 int Thing::is_grass_dead(void)
 {
@@ -2560,10 +2560,10 @@ int Thing::is_key_special(void)
   return (tp()->is_key_special());
 }
 
-int Thing::is_crystal(void)
+int Thing::is_crystalline(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_crystal());
+  return (tp()->is_crystalline());
 }
 
 int Thing::is_tireless(void)

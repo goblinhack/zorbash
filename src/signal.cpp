@@ -152,14 +152,14 @@ void segv_handler(int sig)
   std::string tech_support = "Sorry, a crash has occurred!";
   common_error_handler(tech_support);
 
-  ERR("Crashed");
-
 #if defined __linux__
   //
   // Seems to cause hang issues on mac M1
   //
   debug_crash_handler(sig);
 #endif
+
+  DIE("Crashed");
 }
 
 void error_handler(const std::string &error_msg)

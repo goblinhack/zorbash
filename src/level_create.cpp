@@ -135,7 +135,7 @@ void Level::place_the_grid(void)
     for (auto y = 0; y < MAP_HEIGHT; y++) {
       (void) thing_new("the_grid", point(x, y));
       if (g_errored) {
-        ERR("Could not create level");
+        DIE("Could not create level");
         return;
       }
     }

@@ -170,6 +170,11 @@ public:
   point grid_at;
 
   //
+  // Where the stairs down are
+  //
+  point stairs_at;
+
+  //
   // What type of level
   //
   biome_t biome = {BIOME_UNKNOWN};
@@ -180,8 +185,9 @@ public:
   int difficulty_depth {};
   int dungeon_walk_order_level_no {};
 
-  bool is_final_boss_level {};
-  bool is_crystal_level {};
+  bool        is_final_boss_level {};
+  bool        is_crystal_level {};
+  std::string is_crystal_level_name {};
 
   //
   // If this level is new to the player, we reset magic on entering.

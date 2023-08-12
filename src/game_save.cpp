@@ -674,6 +674,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
 
   out << bits(my.t->world_at);
   out << bits(my.t->grid_at);
+  out << bits(my.t->stairs_at);
   out << bits(my.t->biome);
 
   out << bits(my.t->difficulty_depth);

@@ -474,6 +474,7 @@ int Tp::is_cowardly(void) const { return _is_cowardly; }
 int Tp::is_crab(void) const { return _is_crab; }
 int Tp::is_critical_to_level(void) const { return _is_critical_to_level; }
 int Tp::is_crushable(void) const { return _is_crushable; }
+int Tp::is_crystalline(void) const { return _is_crystalline; }
 int Tp::is_crystal(void) const { return _is_crystal; }
 int Tp::is_cursor_can_hover_over_needs_confirm(void) const { return _is_cursor_can_hover_over_needs_confirm; }
 int Tp::is_cursor_can_hover_over(void) const { return _is_cursor_can_hover_over; }
@@ -759,7 +760,6 @@ int Tp::is_unused_flag10(void) const { return _is_unused_flag10; }
 int Tp::is_unused_flag110(void) const { return _is_unused_flag110; }
 int Tp::is_unused_flag111(void) const { return _is_unused_flag111; }
 int Tp::is_unused_flag112(void) const { return _is_unused_flag112; }
-int Tp::is_unused_flag113(void) const { return _is_unused_flag113; }
 int Tp::is_unused_flag11(void) const { return _is_unused_flag11; }
 int Tp::is_unused_flag12(void) const { return _is_unused_flag12; }
 int Tp::is_unused_flag13(void) const { return _is_unused_flag13; }
@@ -1238,6 +1238,7 @@ void Tp::is_cowardly_set(int v) { _is_cowardly = v; }
 void Tp::is_crab_set(int v) { _is_crab = v; }
 void Tp::is_critical_to_level_set(int v) { _is_critical_to_level = v; }
 void Tp::is_crushable_set(int v) { _is_crushable = v; }
+void Tp::is_crystalline_set(int v) { _is_crystalline = v; }
 void Tp::is_crystal_set(int v) { _is_crystal = v; }
 void Tp::is_cursor_can_hover_over_needs_confirm_set(int v) { _is_cursor_can_hover_over_needs_confirm = v; }
 void Tp::is_cursor_can_hover_over_set(int v) { _is_cursor_can_hover_over = v; }
@@ -1523,7 +1524,6 @@ void Tp::is_unused_flag10_set(int v) { _is_unused_flag10 = v; }
 void Tp::is_unused_flag110_set(int v) { _is_unused_flag110 = v; }
 void Tp::is_unused_flag111_set(int v) { _is_unused_flag111 = v; }
 void Tp::is_unused_flag112_set(int v) { _is_unused_flag112 = v; }
-void Tp::is_unused_flag113_set(int v) { _is_unused_flag113 = v; }
 void Tp::is_unused_flag11_set(int v) { _is_unused_flag11 = v; }
 void Tp::is_unused_flag12_set(int v) { _is_unused_flag12 = v; }
 void Tp::is_unused_flag13_set(int v) { _is_unused_flag13 = v; }

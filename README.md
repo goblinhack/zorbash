@@ -187,8 +187,8 @@ Content:
 - 108 x monsters
 - 52 x food
 - 24 x treasure
+- 16 x items
 - 15 x weapons
-- 15 x items
 - 14 x spells
 - 12 x buffs
 - 11 x skills

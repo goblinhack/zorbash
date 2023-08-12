@@ -536,13 +536,13 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
       case -1 : break;
       case 0 : break;
       case 1 : break;
-      case 2 : fg_tilename = "crystal.1"; break;
-      case 3 : fg_tilename = "crystal.2"; break;
-      case 4 : fg_tilename = "crystal.3"; break;
-      case 5 : fg_tilename = "crystal.4"; break;
-      case 6 : fg_tilename = "crystal.5"; break;
-      case 7 : fg_tilename = "crystal.6"; break;
-      case 8 : fg_tilename = "crystal.7"; break;
+      case 2 : fg_tilename = "crystal1"; break;
+      case 3 : fg_tilename = "crystal2"; break;
+      case 4 : fg_tilename = "crystal3"; break;
+      case 5 : fg_tilename = "crystal4"; break;
+      case 6 : fg_tilename = "crystal5"; break;
+      case 7 : fg_tilename = "crystal6"; break;
+      case 8 : fg_tilename = "crystal7"; break;
     }
   }
 
