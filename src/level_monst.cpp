@@ -32,10 +32,10 @@ Tpp Level::get_random_monst(point p, monst_environ_t monst_environ, monst_class_
   // Roll the dice and see if we get to place a monster.
   //
   auto roll = d1000();
-  dbg("get random monst: roll %d -- biome %d type %d class %d -- %d", roll, biome, monst_environ, monst_class,
+  con("get random monst: roll %d -- biome %d type %d class %d -- %d", roll, biome, monst_environ, monst_class,
       d1000_chance_creating_monst[ monst_environ ][ monst_class ] + difficulty_offset);
 
-  if (roll < d1000_chance_creating_monst[ monst_environ ][ monst_class ] + difficulty_offset) {
+  if (roll <= d1000_chance_creating_monst[ monst_environ ][ monst_class ] + difficulty_offset) {
     auto tries = 0U;
     for (;;) {
       //
@@ -81,7 +81,7 @@ Tpp Level::get_random_monst(point p, monst_environ_t monst_environ, monst_class_
   } else {
     if (monst_class == MONST_CLASS_A) {
       TRACE_NO_INDENT();
-      return get_random_monst(p, monst_environ, monst_class, 0);
+      return get_random_monst(p, monst_environ, MONST_CLASS_ANY, 0);
     }
     TRACE_NO_INDENT();
     return get_random_monst(p, monst_environ, (monst_class_t) (((int) monst_class) - 1), difficulty_offset);

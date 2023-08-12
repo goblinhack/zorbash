@@ -54,7 +54,7 @@ static uint8_t wid_quit_yes(Widp w, int x, int y, uint32_t button)
               TOPCON("%%fg=red$RIP: Robot went back to the metal shop%%fg=reset$");
               TOPCON("%%fg=gold$New robo high score, %s place!%%fg=reset$", game->config.hiscores.place_str(player));
             } else {
-              TOPCON("%%fg=red$RIP: Player quit the game%%fg=reset$");
+              TOPCON("%%fg=red$RIP: Player quit the game.%%fg=reset$");
               TOPCON("%%fg=gold$New high score, %s place!%%fg=reset$", game->config.hiscores.place_str(player));
             }
 
