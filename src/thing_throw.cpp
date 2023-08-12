@@ -339,30 +339,37 @@ bool Thing::throw_at(Thingp what, Thingp target)
     }
   }
 
-  dbg("Post particle throw, use or drop");
-  TRACE_AND_INDENT();
-
-  //
-  // Potions for example are used when thrown. Chocolate frogs, no.
-  //
-  // Must come after the particle code above.
-  //
-  if (what->is_used_when_thrown()) {
-    dbg("Use thrown item");
-    TRACE_AND_INDENT();
-    used(what, target, true /* remove_after_use */);
+  if (what->is_dead_or_dying()) {
+    //
+    // No need to drop
+    //
+    dbg("Post particle throw, item is dead");
   } else {
-    DropOptions drop_options;
-    drop_options.is_being_thrown = true;
+    dbg("Post particle throw, use or drop");
+    TRACE_AND_INDENT();
 
-    if (target && target->is_portal()) {
-      dbg("Drop into portal");
+    //
+    // Potions for example are used when thrown. Chocolate frogs, no.
+    //
+    // Must come after the particle code above.
+    //
+    if (what->is_used_when_thrown()) {
+      dbg("Use thrown item");
       TRACE_AND_INDENT();
-      drop(what, target, drop_options);
+      used(what, target, true /* remove_after_use */);
     } else {
-      dbg("Drop thrown item");
-      TRACE_AND_INDENT();
-      drop(what, target, drop_options);
+      DropOptions drop_options;
+      drop_options.is_being_thrown = true;
+
+      if (target && target->is_portal()) {
+        dbg("Drop into portal");
+        TRACE_AND_INDENT();
+        drop(what, target, drop_options);
+      } else {
+        dbg("Drop thrown item");
+        TRACE_AND_INDENT();
+        drop(what, target, drop_options);
+      }
     }
   }
 
