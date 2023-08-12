@@ -126,42 +126,42 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
                    || m.is_magic_stone || m.is_weapon_class_A || m.is_weapon_class_B || m.is_weapon_class_C
                    || m.is_treasure_class_A || m.is_treasure_class_B || m.is_treasure_class_C || m.is_staff
                    || m.is_ring || m.is_deep_water) {
-          floor_string += Charmap::FLOOR;
+          floor_string += Charmap::CHAR_FLOOR;
         } else {
-          floor_string += Charmap::SPACE;
+          floor_string += Charmap::CHAR_SPACE;
         }
 
         if (m.is_foliage || m.is_spiderweb || m.is_block_of_ice || m.is_grass_dry || m.is_grass_wet
             || m.is_fungus_withered || m.is_fungus_healing || m.is_fungus_edible || m.is_fungus_poison) {
           floor2_string += c;
         } else {
-          floor2_string += Charmap::SPACE;
+          floor2_string += Charmap::CHAR_SPACE;
         }
 
         if (m.is_shallow_water || m.is_deep_water) {
           water_string += c;
         } else {
-          water_string += Charmap::SPACE;
+          water_string += Charmap::CHAR_SPACE;
         }
 
         if (m.is_lava) {
           lava_string += c;
         } else {
-          lava_string += Charmap::SPACE;
+          lava_string += Charmap::CHAR_SPACE;
         }
 
         if (m.is_chasm) {
           chasm_string += c;
         } else {
-          chasm_string += Charmap::SPACE;
+          chasm_string += Charmap::CHAR_SPACE;
         }
 
         if (m.is_wall || m.is_secret_door || m.is_door) {
           walls_string += c;
         } else if (m.is_descend_sewer) {
-          walls_string += Charmap::WALL;
+          walls_string += Charmap::CHAR_WALL;
         } else {
-          walls_string += Charmap::SPACE;
+          walls_string += Charmap::CHAR_SPACE;
         }
 
         if (m.is_red_blood || m.is_ascend_dungeon || m.is_descend_dungeon || m.is_floor_deco || m.is_food
@@ -172,7 +172,7 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
             || m.is_ring || m.is_brazier || m.is_barrel || m.is_trap || m.is_descend_sewer) {
           obj_strings += c;
         } else {
-          obj_strings += Charmap::SPACE;
+          obj_strings += Charmap::CHAR_SPACE;
         }
       }
 
@@ -249,47 +249,47 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
     // Sanity check the rooms
     //
     if (is_ascend_dungeon) {
-      if (! r->contains(MAP_DEPTH_OBJ, Charmap::ENTRANCE)) {
+      if (! r->contains(MAP_DEPTH_OBJ, Charmap::CHAR_ENTRANCE)) {
         r->con();
-        DIE("Entrance room is missing dungeon entrance char '%c'", Charmap::ENTRANCE);
+        DIE("Entrance room is missing dungeon entrance char '%c'", Charmap::CHAR_ENTRANCE);
       }
-      if (r->contains(MAP_DEPTH_OBJ, Charmap::EXIT)) {
+      if (r->contains(MAP_DEPTH_OBJ, Charmap::CHAR_EXIT)) {
         r->con();
         DIE("Exit is in entrance room");
       }
     } else if (is_descend_dungeon) {
-      if (! r->contains(MAP_DEPTH_OBJ, Charmap::EXIT)) {
+      if (! r->contains(MAP_DEPTH_OBJ, Charmap::CHAR_EXIT)) {
         r->con();
-        DIE("Exit room is missing dungeon exit char '%c'", Charmap::EXIT);
+        DIE("Exit room is missing dungeon exit char '%c'", Charmap::CHAR_EXIT);
       }
-      if (r->contains(MAP_DEPTH_OBJ, Charmap::ENTRANCE)) {
+      if (r->contains(MAP_DEPTH_OBJ, Charmap::CHAR_ENTRANCE)) {
         r->con();
         DIE("Entrance is in exit room");
       }
     } else if (is_key) {
-      if (! r->contains(MAP_DEPTH_OBJ, Charmap::KEY)) {
+      if (! r->contains(MAP_DEPTH_OBJ, Charmap::CHAR_KEY)) {
         r->con();
         if (biome == BIOME_DUNGEON) {
-          DIE("Key room is missing dungeon key char '%c'", Charmap::KEY);
+          DIE("Key room is missing dungeon key char '%c'", Charmap::CHAR_KEY);
         }
         if (biome == BIOME_FLOODED) {
-          DIE("Key room is missing dungeon key char '%c'", Charmap::KEY);
+          DIE("Key room is missing dungeon key char '%c'", Charmap::CHAR_KEY);
         }
       }
-      if (r->contains(MAP_DEPTH_OBJ, Charmap::EXIT)) {
+      if (r->contains(MAP_DEPTH_OBJ, Charmap::CHAR_EXIT)) {
         r->con();
         DIE("Exit is in key room");
       }
-      if (r->contains(MAP_DEPTH_OBJ, Charmap::ENTRANCE)) {
+      if (r->contains(MAP_DEPTH_OBJ, Charmap::CHAR_ENTRANCE)) {
         r->con();
         DIE("Entrance is in key room");
       }
     } else {
-      if (r->contains(MAP_DEPTH_OBJ, Charmap::EXIT)) {
+      if (r->contains(MAP_DEPTH_OBJ, Charmap::CHAR_EXIT)) {
         r->con();
         DIE("Exit is in normal room");
       }
-      if (r->contains(MAP_DEPTH_OBJ, Charmap::ENTRANCE)) {
+      if (r->contains(MAP_DEPTH_OBJ, Charmap::CHAR_ENTRANCE)) {
         r->con();
         DIE("Entrance is in normal room");
       }

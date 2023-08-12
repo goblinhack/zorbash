@@ -360,31 +360,44 @@ static void err_(const char *fmt, va_list args)
   callstack_dump();
   backtrace_dump();
 
-  char buf[ MAXLONGSTR ];
-  int  len = 0;
+  {
+    char buf[ MAXLONGSTR ];
+    int  len = 0;
 
-  buf[ 0 ] = '\0';
-  if (! g_opt_test_dungeon_gen) {
-    get_timestamp(buf, MAXLONGSTR);
+    buf[ 0 ] = '\0';
+    if (! g_opt_test_dungeon_gen) {
+      get_timestamp(buf, MAXLONGSTR);
+      len = (int) strlen(buf);
+    }
+
+    snprintf(buf + len, MAXLONGSTR - len, "ERROR: %%%%fg=red$");
+
     len = (int) strlen(buf);
+    vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
+
+    len = (int) strlen(buf);
+    snprintf(buf + len, MAXLONGSTR - len, "%%%%fg=reset$");
+
+    putf(MY_STDERR, buf);
+    putf(MY_STDOUT, buf);
+
+    term_log(buf);
+    putchar('\n');
+
+    wid_console_log(buf);
   }
 
-  snprintf(buf + len, MAXLONGSTR - len, "ERROR: %%%%fg=red$");
+  {
+    char buf[ MAXLONGSTR ];
+    int  len = 0;
 
-  len = (int) strlen(buf);
-  vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
+    snprintf(buf, MAXLONGSTR - len, "ERROR: ");
 
-  len = (int) strlen(buf);
-  snprintf(buf + len, MAXLONGSTR - len, "%%%%fg=reset$");
+    len = (int) strlen(buf);
+    vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
-  putf(MY_STDERR, buf);
-
-  putf(MY_STDOUT, buf);
-
-  term_log(buf);
-  putchar('\n');
-
-  wid_console_log(buf);
+    error_handler(buf);
+  }
 
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
   nested_error = false;
@@ -415,7 +428,6 @@ static void croak_(const char *fmt, va_list args)
 
   fprintf(stderr, "%s\n", buf);
 
-  SDL_MSG_BOX("%s", buf + tslen);
   ERR("%s", buf + tslen);
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 

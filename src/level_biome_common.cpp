@@ -98,7 +98,7 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
         if (r->is_more_generous_room_set) {
           is_more_generous_room = r->is_more_generous_room;
         } else {
-          is_more_generous_room        = r->contains(MAP_DEPTH_OBJ, Charmap::DOOR);
+          is_more_generous_room        = r->contains(MAP_DEPTH_OBJ, Charmap::CHAR_DOOR);
           r->is_more_generous_room_set = true;
           r->is_more_generous_room     = is_more_generous_room;
         }

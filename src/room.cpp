@@ -67,10 +67,10 @@ Roomp Room::create_w_flip(void)
       for (auto x = 0; x < width; x++) {
         auto c = get(r->data, x, y, z);
         switch (c) {
-          case Charmap::DOOR_UP : c = Charmap::DOOR_UP; break;
-          case Charmap::DOOR_DOWN : c = Charmap::DOOR_DOWN; break;
-          case Charmap::DOOR_LEFT : c = Charmap::DOOR_RIGHT; break;
-          case Charmap::DOOR_RIGHT : c = Charmap::DOOR_LEFT; break;
+          case Charmap::CHAR_DOOR_UP : c = Charmap::CHAR_DOOR_UP; break;
+          case Charmap::CHAR_DOOR_DOWN : c = Charmap::CHAR_DOOR_DOWN; break;
+          case Charmap::CHAR_DOOR_LEFT : c = Charmap::CHAR_DOOR_RIGHT; break;
+          case Charmap::CHAR_DOOR_RIGHT : c = Charmap::CHAR_DOOR_LEFT; break;
         }
         set(r->data, x, y, z, c);
       }
@@ -124,10 +124,10 @@ Roomp Room::rotate_clockwise(void)
       for (auto x = 0; x < width; x++) {
         auto c = get(r->data, x, y, z);
         switch (c) {
-          case Charmap::DOOR_UP : c = Charmap::DOOR_RIGHT; break;
-          case Charmap::DOOR_DOWN : c = Charmap::DOOR_LEFT; break;
-          case Charmap::DOOR_LEFT : c = Charmap::DOOR_UP; break;
-          case Charmap::DOOR_RIGHT : c = Charmap::DOOR_DOWN; break;
+          case Charmap::CHAR_DOOR_UP : c = Charmap::CHAR_DOOR_RIGHT; break;
+          case Charmap::CHAR_DOOR_DOWN : c = Charmap::CHAR_DOOR_LEFT; break;
+          case Charmap::CHAR_DOOR_LEFT : c = Charmap::CHAR_DOOR_UP; break;
+          case Charmap::CHAR_DOOR_RIGHT : c = Charmap::CHAR_DOOR_DOWN; break;
         }
 
         set(r->data, x, y, z, c);
@@ -162,7 +162,7 @@ void Room::find_doors(void)
 
   for (auto x : range< int >(0, width)) {
     for (auto y : range< int >(0, height)) {
-      if (get(data, x, y, z) == Charmap::DOOR_UP) {
+      if (get(data, x, y, z) == Charmap::CHAR_DOOR_UP) {
         has_door    = true;
         has_door_up = true;
         doors_up.push_back(point(x, y));
@@ -175,7 +175,7 @@ void Room::find_doors(void)
           DIE("up door has space next to it?");
         }
       }
-      if (get(data, x, y, z) == Charmap::DOOR_DOWN) {
+      if (get(data, x, y, z) == Charmap::CHAR_DOOR_DOWN) {
         has_door      = true;
         has_door_down = true;
         doors_down.push_back(point(x, y));
@@ -188,7 +188,7 @@ void Room::find_doors(void)
           DIE("down door has space next to it?");
         }
       }
-      if (get(data, x, y, z) == Charmap::DOOR_LEFT) {
+      if (get(data, x, y, z) == Charmap::CHAR_DOOR_LEFT) {
         has_door      = true;
         has_door_left = true;
         doors_left.push_back(point(x, y));
@@ -201,7 +201,7 @@ void Room::find_doors(void)
           DIE("left door has space next to it?");
         }
       }
-      if (get(data, x, y, z) == Charmap::DOOR_RIGHT) {
+      if (get(data, x, y, z) == Charmap::CHAR_DOOR_RIGHT) {
         has_door       = true;
         has_door_right = true;
         doors_right.push_back(point(x, y));
@@ -266,16 +266,16 @@ bool Room::room_do_any_doors_remain(
   //
   for (auto x : range< int >(0, width)) {
     for (auto y : range< int >(0, height)) {
-      if (get(room_copy, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_UP) {
+      if (get(room_copy, x, y, MAP_DEPTH_OBJ) == Charmap::CHAR_DOOR_UP) {
         return true;
       }
-      if (get(room_copy, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_DOWN) {
+      if (get(room_copy, x, y, MAP_DEPTH_OBJ) == Charmap::CHAR_DOOR_DOWN) {
         return true;
       }
-      if (get(room_copy, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_LEFT) {
+      if (get(room_copy, x, y, MAP_DEPTH_OBJ) == Charmap::CHAR_DOOR_LEFT) {
         return true;
       }
-      if (get(room_copy, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_RIGHT) {
+      if (get(room_copy, x, y, MAP_DEPTH_OBJ) == Charmap::CHAR_DOOR_RIGHT) {
         return true;
       }
     }
@@ -300,7 +300,7 @@ void Room::room_check_doors_can_reach_each_other(void)
   //
   for (auto x : range< int >(0, width)) {
     for (auto y : range< int >(0, height)) {
-      if (get(data, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_UP) {
+      if (get(data, x, y, MAP_DEPTH_OBJ) == Charmap::CHAR_DOOR_UP) {
         std::array< std::array< std::array< char, MAP_DEPTH >, MAP_ROOM_HEIGHT >, MAP_ROOM_WIDTH > data_copy {};
         ::std::copy(mbegin(data), mend(data), mbegin(data_copy));
         room_flood_erase(data_copy, x, y);
@@ -309,7 +309,7 @@ void Room::room_check_doors_can_reach_each_other(void)
           DIE("found an unconnected up door");
         }
       }
-      if (get(data, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_DOWN) {
+      if (get(data, x, y, MAP_DEPTH_OBJ) == Charmap::CHAR_DOOR_DOWN) {
         std::array< std::array< std::array< char, MAP_DEPTH >, MAP_ROOM_HEIGHT >, MAP_ROOM_WIDTH > data_copy {};
         ::std::copy(mbegin(data), mend(data), mbegin(data_copy));
         room_flood_erase(data_copy, x, y);
@@ -318,7 +318,7 @@ void Room::room_check_doors_can_reach_each_other(void)
           DIE("found an unconnected down door");
         }
       }
-      if (get(data, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_LEFT) {
+      if (get(data, x, y, MAP_DEPTH_OBJ) == Charmap::CHAR_DOOR_LEFT) {
         std::array< std::array< std::array< char, MAP_DEPTH >, MAP_ROOM_HEIGHT >, MAP_ROOM_WIDTH > data_copy {};
         ::std::copy(mbegin(data), mend(data), mbegin(data_copy));
         room_flood_erase(data_copy, x, y);
@@ -327,7 +327,7 @@ void Room::room_check_doors_can_reach_each_other(void)
           DIE("found an unconnected left door");
         }
       }
-      if (get(data, x, y, MAP_DEPTH_OBJ) == Charmap::DOOR_RIGHT) {
+      if (get(data, x, y, MAP_DEPTH_OBJ) == Charmap::CHAR_DOOR_RIGHT) {
         std::array< std::array< std::array< char, MAP_DEPTH >, MAP_ROOM_HEIGHT >, MAP_ROOM_WIDTH > data_copy {};
         ::std::copy(mbegin(data), mend(data), mbegin(data_copy));
         room_flood_erase(data_copy, x, y);

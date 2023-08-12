@@ -17,11 +17,12 @@ void Level::chances_of_creating_set(void)
     default : DIE("Unexpected difficulty depth %d", difficulty_depth);
     case 0 :
       for (auto monst_type = (int) MONST_ENVIRON_NORMAL; monst_type < MONST_ENVIRON_MAX; monst_type++) {
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_A ] = 1000;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_B ] = 10;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_C ] = 10;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_D ] = -1;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_E ] = -1;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_ANY ] = 1000;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_A ]   = 1000;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_B ]   = 10;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_C ]   = 10;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_D ]   = 1;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_E ]   = 1;
       }
       d1000_chance_creating_mob_challenge_class_A = 500;
       d1000_chance_creating_mob_challenge_class_B = 10;
@@ -34,11 +35,12 @@ void Level::chances_of_creating_set(void)
       break;
     case 1 :
       for (auto monst_type = (int) MONST_ENVIRON_NORMAL; monst_type < MONST_ENVIRON_MAX; monst_type++) {
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_A ] = 1000;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_B ] = 100;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_C ] = 10;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_D ] = -1;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_E ] = -1;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_ANY ] = 1000;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_A ]   = 1000;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_B ]   = 100;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_C ]   = 10;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_D ]   = 1;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_E ]   = 1;
       }
       d1000_chance_creating_mob_challenge_class_A = 500;
       d1000_chance_creating_mob_challenge_class_B = 500;
@@ -51,11 +53,12 @@ void Level::chances_of_creating_set(void)
       break;
     case 2 :
       for (auto monst_type = (int) MONST_ENVIRON_NORMAL; monst_type < MONST_ENVIRON_MAX; monst_type++) {
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_A ] = 1000;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_B ] = 500;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_C ] = 100;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_D ] = 10;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_E ] = -1;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_ANY ] = 1000;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_A ]   = 1000;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_B ]   = 500;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_C ]   = 100;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_D ]   = 10;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_E ]   = 1;
       }
       d1000_chance_creating_mob_challenge_class_A = 500;
       d1000_chance_creating_mob_challenge_class_B = 500;
@@ -68,11 +71,12 @@ void Level::chances_of_creating_set(void)
       break;
     case 3 :
       for (auto monst_type = (int) MONST_ENVIRON_NORMAL; monst_type < MONST_ENVIRON_MAX; monst_type++) {
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_A ] = 200;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_B ] = 500;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_C ] = 500;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_D ] = 100;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_E ] = 10;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_ANY ] = 1000;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_A ]   = 200;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_B ]   = 500;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_C ]   = 500;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_D ]   = 100;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_E ]   = 10;
       }
       d1000_chance_creating_mob_challenge_class_A = 500;
       d1000_chance_creating_mob_challenge_class_B = 500;
@@ -85,11 +89,12 @@ void Level::chances_of_creating_set(void)
       break;
     case 4 :
       for (auto monst_type = (int) MONST_ENVIRON_NORMAL; monst_type < MONST_ENVIRON_MAX; monst_type++) {
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_A ] = 100;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_B ] = 500;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_C ] = 300;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_D ] = 200;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_E ] = 100;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_ANY ] = 1000;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_A ]   = 100;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_B ]   = 500;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_C ]   = 300;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_D ]   = 200;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_E ]   = 100;
       }
       d1000_chance_creating_mob_challenge_class_A = 100;
       d1000_chance_creating_mob_challenge_class_B = 500;
@@ -102,11 +107,12 @@ void Level::chances_of_creating_set(void)
       break;
     case 5 :
       for (auto monst_type = (int) MONST_ENVIRON_NORMAL; monst_type < MONST_ENVIRON_MAX; monst_type++) {
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_A ] = 100;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_B ] = 100;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_C ] = 400;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_D ] = 300;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_E ] = 200;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_ANY ] = 1000;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_A ]   = 100;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_B ]   = 100;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_C ]   = 400;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_D ]   = 300;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_E ]   = 200;
       }
       d1000_chance_creating_mob_challenge_class_A = 100;
       d1000_chance_creating_mob_challenge_class_B = 500;
@@ -119,11 +125,12 @@ void Level::chances_of_creating_set(void)
       break;
     case 6 :
       for (auto monst_type = (int) MONST_ENVIRON_NORMAL; monst_type < MONST_ENVIRON_MAX; monst_type++) {
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_A ] = 100;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_B ] = 100;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_C ] = 500;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_D ] = 400;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_E ] = 300;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_ANY ] = 1000;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_A ]   = 100;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_B ]   = 100;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_C ]   = 500;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_D ]   = 400;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_E ]   = 300;
       }
       d1000_chance_creating_mob_challenge_class_A = 10;
       d1000_chance_creating_mob_challenge_class_B = 200;
@@ -136,11 +143,12 @@ void Level::chances_of_creating_set(void)
       break;
     case 7 :
       for (auto monst_type = (int) MONST_ENVIRON_NORMAL; monst_type < MONST_ENVIRON_MAX; monst_type++) {
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_A ] = 100;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_B ] = 100;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_C ] = 500;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_D ] = 500;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_E ] = 500;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_ANY ] = 1000;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_A ]   = 100;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_B ]   = 100;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_C ]   = 500;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_D ]   = 500;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_E ]   = 500;
       }
       d1000_chance_creating_mob_challenge_class_A = 10;
       d1000_chance_creating_mob_challenge_class_B = 10;
@@ -154,7 +162,7 @@ void Level::chances_of_creating_set(void)
   }
 
   for (auto monst_type = (int) MONST_ENVIRON_NORMAL; monst_type < MONST_ENVIRON_MAX; monst_type++) {
-    for (auto monst_class = (int) MONST_CLASS_A; monst_class < MONST_CLASS_MAX; monst_class++) {
+    for (auto monst_class = (int) MONST_CLASS_ANY; monst_class < MONST_CLASS_MAX; monst_class++) {
       if (d1000_chance_creating_monst[ monst_type ][ monst_class ] > 1000) {
         d1000_chance_creating_monst[ monst_type ][ monst_class ] = 1000;
       }

@@ -11,18 +11,27 @@ Tpp Level::get_random_monst(point p, monst_environ_t monst_environ, monst_class_
 {
   TRACE_NO_INDENT();
 
-  auto roll = d1000();
+  switch (monst_class) {
+    case MONST_CLASS_ANY : break;
+    case MONST_CLASS_A : break;
+    case MONST_CLASS_B : break;
+    case MONST_CLASS_C : break;
+    case MONST_CLASS_D : break;
+    case MONST_CLASS_E : break;
+    default : DIE("Unknown monster class %u", monst_class);
+  }
 
-  //
-  // Should be set to -1 if this is intentional
-  //
-  if (! d1000_chance_creating_monst[ monst_environ ][ monst_class ]) {
-    DIE("No chance of creating monster for biome %d type %d class %d", biome, monst_environ, monst_class);
+  switch (monst_environ) {
+    case MONST_ENVIRON_NORMAL : break;
+    case MONST_ENVIRON_SHALLOW_WATER : break;
+    case MONST_ENVIRON_DEEP_WATER : break;
+    default : DIE("Unknown monster environ %u", monst_environ);
   }
 
   //
   // Roll the dice and see if we get to place a monster.
   //
+  auto roll = d1000();
   dbg("get random monst: roll %d -- biome %d type %d class %d -- %d", roll, biome, monst_environ, monst_class,
       d1000_chance_creating_monst[ monst_environ ][ monst_class ] + difficulty_offset);
 
@@ -37,10 +46,12 @@ Tpp Level::get_random_monst(point p, monst_environ_t monst_environ, monst_class_
         // If we've tried too many times, try the next lower class
         //
         if (monst_class == MONST_CLASS_A) {
-          return get_random_monst(p, monst_environ, monst_class);
+          TRACE_NO_INDENT();
+          return get_random_monst(p, monst_environ, monst_class, 0);
         }
 
         tries = 0;
+        TRACE_NO_INDENT();
         dbg("INF: Try the next lowest class for -- biome %d type %d class %d -- %d", biome, monst_environ,
             monst_class, d1000_chance_creating_monst[ monst_environ ][ monst_class ] + difficulty_offset);
         return get_random_monst(p, monst_environ, (monst_class_t) (((int) monst_class) - 1), difficulty_offset);
@@ -49,6 +60,7 @@ Tpp Level::get_random_monst(point p, monst_environ_t monst_environ, monst_class_
       //
       // Filter according to monster rarity
       //
+      TRACE_NO_INDENT();
       auto tp = tp_get_with_rarity_filter(tp_monst[ biome ][ monst_environ ][ monst_class ]);
       if (! tp) {
         continue;
@@ -57,6 +69,7 @@ Tpp Level::get_random_monst(point p, monst_environ_t monst_environ, monst_class_
       //
       // Filter locations that are not appropriate
       //
+      TRACE_NO_INDENT();
       if (tp->is_disliked_by_me(this, p)) {
         dbg("INF: skip '%s' at %s", tp->text_short_capitalised().c_str(), p.to_string().c_str());
         continue;
@@ -67,13 +80,15 @@ Tpp Level::get_random_monst(point p, monst_environ_t monst_environ, monst_class_
     }
   } else {
     if (monst_class == MONST_CLASS_A) {
-      return get_random_monst(p, monst_environ, monst_class);
+      TRACE_NO_INDENT();
+      return get_random_monst(p, monst_environ, monst_class, 0);
     }
+    TRACE_NO_INDENT();
     return get_random_monst(p, monst_environ, (monst_class_t) (((int) monst_class) - 1), difficulty_offset);
   }
 }
 
-Tpp Level::get_random_monst(point p, monst_class_t monst_class, int difficulty_offset)
+Tpp Level::get_random_monst_with_class(point p, monst_class_t monst_class, int difficulty_offset)
 {
   TRACE_NO_INDENT();
 
@@ -84,10 +99,10 @@ Tpp Level::get_random_monst(point p, monst_class_t monst_class, int difficulty_o
     monst_environ = MONST_ENVIRON_SHALLOW_WATER;
   }
 
-  return get_random_monst(p, monst_environ, monst_class);
+  return get_random_monst(p, monst_environ, monst_class, difficulty_offset);
 }
 
-Tpp Level::get_random_monst(point p, monst_environ_t monst_environ, int difficulty_offset)
+Tpp Level::get_random_monst_with_env(point p, monst_environ_t monst_environ, int difficulty_offset)
 {
   TRACE_NO_INDENT();
 
@@ -100,7 +115,7 @@ Tpp Level::get_random_monst(point p, monst_environ_t monst_environ, int difficul
   return get_random_monst(p, monst_environ, (monst_class_t) (MONST_CLASS_MAX - 1), difficulty_offset);
 }
 
-Tpp Level::get_random_monst(point p, int difficulty_offset)
+Tpp Level::get_random_monst_with_diff(point p, int difficulty_offset)
 {
   TRACE_NO_INDENT();
 
@@ -122,6 +137,8 @@ Tpp Level::get_random_monst(point p, int difficulty_offset)
 
 Tpp Level::get_biome_dungeon_random_monst(Dungeonp d, point p, monst_environ_t monst_environ)
 {
+  TRACE_NO_INDENT();
+
   monst_class_t monst_class       = MONST_CLASS_ANY;
   int           difficulty_offset = 0;
 
@@ -149,6 +166,8 @@ Tpp Level::get_biome_dungeon_random_monst(Dungeonp d, point p, monst_environ_t m
 
 Tpp Level::get_biome_flooded_random_monst(Dungeonp d, point p, monst_environ_t monst_environ)
 {
+  TRACE_NO_INDENT();
+
   monst_class_t monst_class       = MONST_CLASS_ANY;
   int           difficulty_offset = 0;
 
@@ -176,6 +195,8 @@ Tpp Level::get_biome_flooded_random_monst(Dungeonp d, point p, monst_environ_t m
 
 Tpp Level::get_biome_chasms_random_monst(Dungeonp d, point p, monst_environ_t monst_environ)
 {
+  TRACE_NO_INDENT();
+
   monst_class_t monst_class       = MONST_CLASS_ANY;
   int           difficulty_offset = 0;
 
@@ -203,6 +224,8 @@ Tpp Level::get_biome_chasms_random_monst(Dungeonp d, point p, monst_environ_t mo
 
 Tpp Level::get_biome_swamp_random_monst(Dungeonp d, point p, monst_environ_t monst_environ)
 {
+  TRACE_NO_INDENT();
+
   monst_class_t monst_class = MONST_CLASS_ANY;
 
   if (d->is_monst_class_A(p.x, p.y)) {
@@ -224,6 +247,8 @@ Tpp Level::get_biome_swamp_random_monst(Dungeonp d, point p, monst_environ_t mon
 
 Tpp Level::get_biome_lava_random_monst(Dungeonp d, point p, monst_environ_t monst_environ)
 {
+  TRACE_NO_INDENT();
+
   monst_class_t monst_class = MONST_CLASS_ANY;
 
   if (d->is_monst_class_A(p.x, p.y)) {
@@ -245,6 +270,8 @@ Tpp Level::get_biome_lava_random_monst(Dungeonp d, point p, monst_environ_t mons
 
 Tpp Level::get_biome_ice_random_monst(Dungeonp d, point p, monst_environ_t monst_environ)
 {
+  TRACE_NO_INDENT();
+
   monst_class_t monst_class = MONST_CLASS_ANY;
 
   if (d->is_monst_class_A(p.x, p.y)) {
@@ -266,12 +293,15 @@ Tpp Level::get_biome_ice_random_monst(Dungeonp d, point p, monst_environ_t monst
 
 Tpp Level::get_biome_sewer_random_monst(point p, monst_environ_t monst_environ)
 {
+  TRACE_NO_INDENT();
   monst_class_t monst_class = MONST_CLASS_ANY;
-  return get_random_monst(p, monst_environ, monst_class);
+  return get_random_monst(p, monst_environ, monst_class, 0);
 }
 
 void tp_monst_add(Tpp tp)
 {
+  TRACE_NO_INDENT();
+
   // CON("INF: Add monster '%s'", tp->text_short_capitalised().c_str());
 
   std::vector< int > biomes;

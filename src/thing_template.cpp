@@ -335,23 +335,23 @@ std::vector< Tpp > tp_find_wildcard(Levelp l, point p, const std::string &name)
   }
 
   if (name == "random_monst_class_A") {
-    out.push_back(l->get_random_monst(p, MONST_CLASS_A));
+    out.push_back(l->get_random_monst_with_class(p, MONST_CLASS_A, 0));
     return out;
   }
   if (name == "random_monst_class_B") {
-    out.push_back(l->get_random_monst(p, MONST_CLASS_B));
+    out.push_back(l->get_random_monst_with_class(p, MONST_CLASS_B, 0));
     return out;
   }
   if (name == "random_monst_class_C") {
-    out.push_back(l->get_random_monst(p, MONST_CLASS_C));
+    out.push_back(l->get_random_monst_with_class(p, MONST_CLASS_C, 0));
     return out;
   }
   if (name == "random_monst_class_D") {
-    out.push_back(l->get_random_monst(p, MONST_CLASS_D));
+    out.push_back(l->get_random_monst_with_class(p, MONST_CLASS_D, 0));
     return out;
   }
   if (name == "random_monst_class_E") {
-    out.push_back(l->get_random_monst(p, MONST_CLASS_E));
+    out.push_back(l->get_random_monst_with_class(p, MONST_CLASS_E, 0));
     return out;
   }
 

@@ -706,9 +706,9 @@ public:
   Tpp get_biome_lava_random_monst(Dungeonp, point p, monst_environ_t);
   Tpp get_biome_ice_random_monst(Dungeonp, point p, monst_environ_t);
   Tpp get_random_monst(point p, monst_environ_t, monst_class_t, int difficulty_offset);
-  Tpp get_random_monst(point p, monst_environ_t, int difficulty_offset);
-  Tpp get_random_monst(point p, monst_class_t, int difficulty_offset);
-  Tpp get_random_monst(point p, int difficulty_offset);
+  Tpp get_random_monst_with_env(point p, monst_environ_t, int difficulty_offset);
+  Tpp get_random_monst_with_class(point p, monst_class_t, int difficulty_offset);
+  Tpp get_random_monst_with_diff(point p, int difficulty_offset);
 
   // begin sort marker2 {
   bool buffbox_over(const int slot);

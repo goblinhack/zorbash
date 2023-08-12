@@ -66,42 +66,42 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
                    || m.is_weapon_class_A || m.is_weapon_class_B || m.is_weapon_class_C || m.is_potion || m.is_staff
                    || m.is_ring || m.is_secret_door || m.is_brazier || m.is_barrel || m.is_trap || m.is_shallow_water
                    || m.is_deep_water || m.is_floor_deco) {
-          floor_string += Charmap::FLOOR;
+          floor_string += Charmap::CHAR_FLOOR;
         } else {
-          floor_string += Charmap::SPACE;
+          floor_string += Charmap::CHAR_SPACE;
         }
 
         if (m.is_foliage || m.is_spiderweb || m.is_block_of_ice || m.is_grass_dry || m.is_grass_wet
             || m.is_fungus_withered || m.is_fungus_healing || m.is_fungus_edible || m.is_fungus_poison) {
           floor2_string += c;
         } else {
-          floor2_string += Charmap::SPACE;
+          floor2_string += Charmap::CHAR_SPACE;
         }
 
         if (m.is_shallow_water || m.is_deep_water) {
           water_string += c;
         } else {
-          water_string += Charmap::SPACE;
+          water_string += Charmap::CHAR_SPACE;
         }
 
         if (m.is_lava) {
           lava_string += c;
         } else {
-          lava_string += Charmap::SPACE;
+          lava_string += Charmap::CHAR_SPACE;
         }
 
         if (m.is_chasm) {
           chasm_string += c;
         } else {
-          chasm_string += Charmap::SPACE;
+          chasm_string += Charmap::CHAR_SPACE;
         }
 
         if (m.is_wall || m.is_secret_door || m.is_door) {
           walls_string += c;
         } else if (m.is_descend_sewer) {
-          walls_string += Charmap::WALL;
+          walls_string += Charmap::CHAR_WALL;
         } else {
-          walls_string += Charmap::SPACE;
+          walls_string += Charmap::CHAR_SPACE;
         }
 
         if (m.is_red_blood || m.is_ascend_dungeon || m.is_descend_dungeon || m.is_descend_sewer || m.is_floor_deco
@@ -113,7 +113,7 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
             || m.is_descend_sewer) {
           obj_strings += c;
         } else {
-          obj_strings += Charmap::SPACE;
+          obj_strings += Charmap::CHAR_SPACE;
         }
       }
 

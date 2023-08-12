@@ -7,6 +7,7 @@
 #define _MY_MAIN_HPP_
 
 #include "my_format_str_attribute.hpp"
+#include <string>
 
 void BOTCON(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
 void BOTCON(const wchar_t *fmt, ...);
@@ -29,6 +30,8 @@ void topcon(const wchar_t *fmt);
 void myerr(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
 void quit(void);
 void restart(void);
+void common_error_handler(const std::string &error);
+void error_handler(const std::string &error);
 void segv_handler(int sig);
 void flush_the_console(void);
 

@@ -122,22 +122,9 @@ static void debug_crash_handler(int sig)
 }
 #endif
 
-void segv_handler(int sig)
+void common_error_handler(std::string &tech_support)
 {
   TRACE_AND_INDENT();
-  static int crashed;
-
-  if (crashed) {
-    fprintf(MY_STDERR, "Nested crash!!!");
-    exit(1);
-  }
-
-  crashed = 1;
-
-  fprintf(MY_STDERR, "Crash!!!");
-
-  std::string tech_support = "Sorry, a crash has occurred!\n";
-  tech_support += "\n";
 
   if (game) {
     tech_support += "Seed name: " + game->seed_name + "\n";
@@ -158,6 +145,14 @@ void segv_handler(int sig)
   tech_support += "The goblin responsible for this shall be punished!!!\n";
 
   SDL_MSG_BOX("%s", tech_support.c_str());
+}
+
+void segv_handler(int sig)
+{
+  std::string tech_support = "Sorry, a crash has occurred!\n";
+  tech_support += "\n";
+
+  common_error_handler(tech_support);
 
   ERR("Crashed");
 
@@ -167,6 +162,18 @@ void segv_handler(int sig)
   //
   debug_crash_handler(sig);
 #endif
+}
+
+void error_handler(const std::string &error_msg)
+{
+  TRACE_AND_INDENT();
+
+  std::string tech_support = "Sorry, an error has occurred!\n";
+  tech_support += "\n";
+  tech_support += error_msg;
+  tech_support += "\n";
+
+  common_error_handler(tech_support);
 }
 
 void ctrlc_handler(int sig)
