@@ -6,10 +6,10 @@ import crystal0
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.stat_con_bonus(self, 3)
-    my.text_description_long(self, "This magical crystal is the next to collect on your long journey towards confronting Zorbash.")
-    my.text_description_long2(self, "It glows beautifully in the dark and will bestow you with much needed constitution bonuses.")
     crystal0.tp_init(self)
+    my.stat_con_bonus(self, 3)
+    my.text_description_long2(self, "It glows beautifully in the dark and will bestow you with much needed constitution bonuses.")
+    my.text_description_long(self, "This magical crystal is the next to collect on your long journey towards confronting Zorbash.")
     # end sort marker
 
     my.tile(self,

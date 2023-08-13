@@ -737,6 +737,7 @@ int Tp::is_tickable(void) const { return _is_tickable; }
 int Tp::is_tireless(void) const { return _is_tireless; }
 int Tp::is_tmp_thing(void) const { return _is_tmp_thing; }
 int Tp::is_torch(void) const { return _is_torch; }
+int Tp::is_totem(void) const { return _is_totem; }
 int Tp::is_trap(void) const { return _is_trap; }
 int Tp::is_treasure_chest(void) const { return _is_treasure_chest; }
 int Tp::is_treasure_class_A(void) const { return _is_treasure_class_A; }
@@ -759,7 +760,6 @@ int Tp::is_unused_flag109(void) const { return _is_unused_flag109; }
 int Tp::is_unused_flag10(void) const { return _is_unused_flag10; }
 int Tp::is_unused_flag110(void) const { return _is_unused_flag110; }
 int Tp::is_unused_flag111(void) const { return _is_unused_flag111; }
-int Tp::is_unused_flag112(void) const { return _is_unused_flag112; }
 int Tp::is_unused_flag11(void) const { return _is_unused_flag11; }
 int Tp::is_unused_flag12(void) const { return _is_unused_flag12; }
 int Tp::is_unused_flag13(void) const { return _is_unused_flag13; }
@@ -1501,6 +1501,7 @@ void Tp::is_tickable_set(int v) { _is_tickable = v; }
 void Tp::is_tireless_set(int v) { _is_tireless = v; }
 void Tp::is_tmp_thing_set(int v) { _is_tmp_thing = v; }
 void Tp::is_torch_set(int v) { _is_torch = v; }
+void Tp::is_totem_set(int v) { _is_totem = v; }
 void Tp::is_trap_set(int v) { _is_trap = v; }
 void Tp::is_treasure_chest_set(int v) { _is_treasure_chest = v; }
 void Tp::is_treasure_class_A_set(int v) { _is_treasure_class_A = v; }
@@ -1523,7 +1524,6 @@ void Tp::is_unused_flag109_set(int v) { _is_unused_flag109 = v; }
 void Tp::is_unused_flag10_set(int v) { _is_unused_flag10 = v; }
 void Tp::is_unused_flag110_set(int v) { _is_unused_flag110 = v; }
 void Tp::is_unused_flag111_set(int v) { _is_unused_flag111 = v; }
-void Tp::is_unused_flag112_set(int v) { _is_unused_flag112 = v; }
 void Tp::is_unused_flag11_set(int v) { _is_unused_flag11 = v; }
 void Tp::is_unused_flag12_set(int v) { _is_unused_flag12 = v; }
 void Tp::is_unused_flag13_set(int v) { _is_unused_flag13 = v; }

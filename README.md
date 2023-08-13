@@ -187,7 +187,7 @@ Content:
 - 108 x monsters
 - 52 x food
 - 24 x treasure
-- 16 x items
+- 23 x items
 - 15 x weapons
 - 14 x spells
 - 12 x buffs
@@ -198,10 +198,10 @@ Content:
 - 5 x rings
 - 5 x keys
 - 5 x debuffs
+- 4 x traps
 - 4 x gauntlets
 - 4 x armor
 - 4 x amulets
-- 3 x traps
 - 3 x mobs
 - 3 x doors
 - 3 x cloaks

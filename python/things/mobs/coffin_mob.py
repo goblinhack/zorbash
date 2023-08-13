@@ -72,7 +72,7 @@ def tp_init(name, text_long_name):
     my.text_description_short(self, "A cursed coffin, spawning all manner of surprises.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_Z_PRIO_MONST)
+    my.z_prio(self, my.MAP_Z_PRIO_MOB)
     # end sort marker
 
     delay = 200

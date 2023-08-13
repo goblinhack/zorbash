@@ -44,6 +44,7 @@ void py_my_module_add_stat_consts(void)
   PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_FIRE", MAP_Z_PRIO_FIRE);
   PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_FOLIAGE", MAP_Z_PRIO_FOLIAGE);
   PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_ITEM", MAP_Z_PRIO_ITEM);
+  PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_MOB", MAP_Z_PRIO_MOB);
   PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_MONST", MAP_Z_PRIO_MONST);
   PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_BIG_MONST", MAP_Z_PRIO_BIG_MONST);
   PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_PLAYER_LEGS", MAP_Z_PRIO_PLAYER_LEGS);

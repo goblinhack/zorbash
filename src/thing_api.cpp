@@ -755,10 +755,10 @@ int Thing::is_unused_flag111(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag111());
 }
-int Thing::is_unused_flag112(void)
+int Thing::is_totem(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag112());
+  return (tp()->is_totem());
 }
 int Thing::is_crystal(void)
 {

@@ -1769,6 +1769,7 @@ public:
   int is_tireless(void);
   int is_tmp_thing(void);
   int is_torch(void);
+  int is_totem(void);
   int is_trap(void);
   int is_treasure_chest(void);
   int is_treasure_class_A(void);
@@ -1791,7 +1792,6 @@ public:
   int is_unused_flag10(void);
   int is_unused_flag110(void);
   int is_unused_flag111(void);
-  int is_unused_flag112(void);
   int is_unused_flag11(void);
   int is_unused_flag12(void);
   int is_unused_flag13(void);

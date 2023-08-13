@@ -647,6 +647,7 @@ private:
   int _is_tireless {};
   int _is_tmp_thing {};
   int _is_torch {};
+  int _is_totem {};
   int _is_trap {};
   int _is_treasure {};
   int _is_treasure_chest {};
@@ -671,7 +672,6 @@ private:
   int _is_unused_flag11 {};
   int _is_unused_flag110 {};
   int _is_unused_flag111 {};
-  int _is_unused_flag112 {};
   int _is_unused_flag12 {};
   int _is_unused_flag124 {};
   int _is_unused_flag13 {};
@@ -1992,6 +1992,7 @@ public:
   int is_tireless(void) const;
   int is_tmp_thing(void) const;
   int is_torch(void) const;
+  int is_totem(void) const;
   int is_trap(void) const;
   int is_treasure_chest(void) const;
   int is_treasure_class_A(void) const;
@@ -2014,7 +2015,6 @@ public:
   int is_unused_flag10(void) const;
   int is_unused_flag110(void) const;
   int is_unused_flag111(void) const;
-  int is_unused_flag112(void) const;
   int is_unused_flag11(void) const;
   int is_unused_flag124(void) const;
   int is_unused_flag12(void) const;
@@ -2757,6 +2757,7 @@ public:
   void is_tireless_set(int v);
   void is_tmp_thing_set(int v);
   void is_torch_set(int v);
+  void is_totem_set(int v);
   void is_trap_set(int v);
   void is_treasure_chest_set(int v);
   void is_treasure_class_A_set(int v);
@@ -2779,7 +2780,6 @@ public:
   void is_unused_flag10_set(int v);
   void is_unused_flag110_set(int v);
   void is_unused_flag111_set(int v);
-  void is_unused_flag112_set(int v);
   void is_unused_flag11_set(int v);
   void is_unused_flag124_set(int v);
   void is_unused_flag12_set(int v);

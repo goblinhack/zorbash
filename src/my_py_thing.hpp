@@ -552,6 +552,7 @@ PyObject *thing_is_tickable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_tireless(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_tmp_thing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_torch(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_totem(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_trap(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_treasure_chest(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_treasure(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -571,7 +572,6 @@ PyObject *thing_is_unused_flag109(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag10(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag110(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag111(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag112(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag11(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag12(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag13(PyObject *obj, PyObject *args, PyObject *keywds);
