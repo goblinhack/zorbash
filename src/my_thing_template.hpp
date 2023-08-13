@@ -611,6 +611,7 @@ private:
   int _is_rusty {};
   int _is_scorpion {};
   int _is_secret_door {};
+  int _is_sentry {};
   int _is_sewer_wall {};
   int _is_shallow_water {};
   int _is_sheep {};
@@ -671,7 +672,6 @@ private:
   int _is_unused_flag109 {};
   int _is_unused_flag11 {};
   int _is_unused_flag110 {};
-  int _is_unused_flag111 {};
   int _is_unused_flag12 {};
   int _is_unused_flag124 {};
   int _is_unused_flag13 {};
@@ -1956,6 +1956,7 @@ public:
   int is_rusty(void) const;
   int is_scorpion(void) const;
   int is_secret_door(void) const;
+  int is_sentry(void) const;
   int is_sewer_wall(void) const;
   int is_shallow_water(void) const;
   int is_sheep(void) const;
@@ -2014,7 +2015,6 @@ public:
   int is_unused_flag109(void) const;
   int is_unused_flag10(void) const;
   int is_unused_flag110(void) const;
-  int is_unused_flag111(void) const;
   int is_unused_flag11(void) const;
   int is_unused_flag124(void) const;
   int is_unused_flag12(void) const;
@@ -2721,6 +2721,7 @@ public:
   void is_rusty_set(int v);
   void is_scorpion_set(int v);
   void is_secret_door_set(int v);
+  void is_sentry_set(int v);
   void is_sewer_wall_set(int v);
   void is_shallow_water_set(int v);
   void is_sheep_set(int v);
@@ -2779,7 +2780,6 @@ public:
   void is_unused_flag109_set(int v);
   void is_unused_flag10_set(int v);
   void is_unused_flag110_set(int v);
-  void is_unused_flag111_set(int v);
   void is_unused_flag11_set(int v);
   void is_unused_flag124_set(int v);
   void is_unused_flag12_set(int v);

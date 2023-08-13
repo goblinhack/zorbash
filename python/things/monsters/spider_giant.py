@@ -31,11 +31,9 @@ def on_born(me, x, y):
 
 
 def on_want_to_shoot_at(me, target, target_x, target_y):  # Return True on doing an action
-    if my.py_pcg_random_range_inclusive(1, 100) < 10:
-        my.thing_shoot_at(me, "projectile_web", target)
-        my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "slime1")
-        return True
-    return False
+    my.thing_shoot_at(me, "projectile_web", target)
+    my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "slime1")
+    return True
 
 
 def tp_init(name, text_long_name):
@@ -47,7 +45,7 @@ def tp_init(name, text_long_name):
     my.chance_d1000_jump_attack(self, 800)
     my.chance_d1000_jump_onto(self, 100)
     my.chance_d1000_jump_randomly(self, 20)
-    my.chance_d1000_shooting(self, 500)
+    my.chance_d1000_shooting(self, 100)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 30)

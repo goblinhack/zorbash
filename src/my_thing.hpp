@@ -1734,6 +1734,7 @@ public:
   int is_rusty(void);
   int is_scorpion(void);
   int is_secret_door(void);
+  int is_sentry(void);
   int is_sewer_wall(void);
   int is_shallow_water(void);
   int is_sheep(void);
@@ -1791,7 +1792,6 @@ public:
   int is_unused_flag109(void);
   int is_unused_flag10(void);
   int is_unused_flag110(void);
-  int is_unused_flag111(void);
   int is_unused_flag11(void);
   int is_unused_flag12(void);
   int is_unused_flag13(void);

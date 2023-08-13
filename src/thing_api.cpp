@@ -750,10 +750,10 @@ int Thing::is_unused_flag110(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag110());
 }
-int Thing::is_unused_flag111(void)
+int Thing::is_sentry(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag111());
+  return (tp()->is_sentry());
 }
 int Thing::is_totem(void)
 {

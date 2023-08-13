@@ -701,6 +701,7 @@ int Tp::is_rock(void) const { return _is_rock; }
 int Tp::is_rusty(void) const { return _is_rusty; }
 int Tp::is_scorpion(void) const { return _is_scorpion; }
 int Tp::is_secret_door(void) const { return _is_secret_door; }
+int Tp::is_sentry(void) const { return _is_sentry; }
 int Tp::is_sewer_wall(void) const { return _is_sewer_wall; }
 int Tp::is_shallow_water(void) const { return _is_shallow_water; }
 int Tp::is_sheep(void) const { return _is_sheep; }
@@ -759,7 +760,6 @@ int Tp::is_unused_flag108(void) const { return _is_unused_flag108; }
 int Tp::is_unused_flag109(void) const { return _is_unused_flag109; }
 int Tp::is_unused_flag10(void) const { return _is_unused_flag10; }
 int Tp::is_unused_flag110(void) const { return _is_unused_flag110; }
-int Tp::is_unused_flag111(void) const { return _is_unused_flag111; }
 int Tp::is_unused_flag11(void) const { return _is_unused_flag11; }
 int Tp::is_unused_flag12(void) const { return _is_unused_flag12; }
 int Tp::is_unused_flag13(void) const { return _is_unused_flag13; }
@@ -1465,6 +1465,7 @@ void Tp::is_rock_set(int v) { _is_rock = v; }
 void Tp::is_rusty_set(int v) { _is_rusty = v; }
 void Tp::is_scorpion_set(int v) { _is_scorpion = v; }
 void Tp::is_secret_door_set(int v) { _is_secret_door = v; }
+void Tp::is_sentry_set(int v) { _is_sentry = v; }
 void Tp::is_sewer_wall_set(int v) { _is_sewer_wall = v; }
 void Tp::is_shallow_water_set(int v) { _is_shallow_water = v; }
 void Tp::is_sheep_set(int v) { _is_sheep = v; }
@@ -1523,7 +1524,6 @@ void Tp::is_unused_flag108_set(int v) { _is_unused_flag108 = v; }
 void Tp::is_unused_flag109_set(int v) { _is_unused_flag109 = v; }
 void Tp::is_unused_flag10_set(int v) { _is_unused_flag10 = v; }
 void Tp::is_unused_flag110_set(int v) { _is_unused_flag110 = v; }
-void Tp::is_unused_flag111_set(int v) { _is_unused_flag111 = v; }
 void Tp::is_unused_flag11_set(int v) { _is_unused_flag11 = v; }
 void Tp::is_unused_flag12_set(int v) { _is_unused_flag12 = v; }
 void Tp::is_unused_flag13_set(int v) { _is_unused_flag13 = v; }

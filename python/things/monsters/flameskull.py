@@ -25,10 +25,8 @@ def on_death(me, x, y):
 
 
 def on_want_to_shoot_at(me, target, target_x, target_y):  # Return True on doing an action
-    if my.py_pcg_random_range_inclusive(1, 10) < 3:
-        my.thing_shoot_at(me, "projectile_fire", target)
-        return True
-    return False
+    my.thing_shoot_at(me, "projectile_fire", target)
+    return True
 
 
 def tp_init(name, text_long_name):
@@ -40,7 +38,7 @@ def tp_init(name, text_long_name):
     my.attack_eater(self, True)
     my.attack_humanoid(self, True)
     my.attack_meat(self, True)
-    my.chance_d1000_shooting(self, 500)
+    my.chance_d1000_shooting(self, 300)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.distance_avoid(self, 4)

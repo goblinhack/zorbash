@@ -53,7 +53,7 @@ void Thing::update_tick(void)
 void Thing::achieve_goals_in_life(void)
 {
   //
-  // Reset verious temporary flags.
+  // Reset various temporary flags.
   //
   is_being_dropped = false;
   is_being_thrown  = false;
@@ -296,7 +296,7 @@ void Thing::achieve_goals_in_life(void)
   //
   // If this thing has AI, it can try and reach goals
   //
-  if (is_monst()) {
+  if (is_monst() || is_sentry() || is_totem()) {
     // dbg("Tick %d get next hop", game->tick_current);
     ai_get_next_hop();
     if (is_moving) {

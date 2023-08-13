@@ -31,13 +31,11 @@ def on_death(me, x, y):
 
 
 def on_want_to_shoot_at(me, target, target_x, target_y):  # Return True on doing an action
-    if my.py_pcg_random_range_inclusive(1, 100) < 20:
-        sound = f"growl{my.py_non_pcg_random_range_inclusive(1, 10)}"
-        if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
-            my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
-        my.thing_shoot_at(me, "projectile_cold", target)
-        return True
-    return False
+    sound = f"growl{my.py_non_pcg_random_range_inclusive(1, 10)}"
+    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
+        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
+    my.thing_shoot_at(me, "projectile_cold", target)
+    return True
 
 
 def tp_init(name, text_long_name):
@@ -47,7 +45,7 @@ def tp_init(name, text_long_name):
     my.ai_resent_count(self, 100)
     my.ai_wanderer(self, True)
     my.attack_eater(self, True)
-    my.chance_d1000_shooting(self, 500)
+    my.chance_d1000_shooting(self, 200)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.distance_avoid(self, 4)

@@ -31,11 +31,9 @@ def on_death(me, x, y):
 
 
 def on_want_to_shoot_at(me, target, x, y):  # Return True on doing an action
-    if my.py_pcg_random_range_inclusive(1, 100) < 10:
-        my.thing_shoot_at(me, "projectile_fire", target)
-        my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
-        return True
-    return False
+    my.thing_shoot_at(me, "projectile_fire", target)
+    my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
+    return True
 
 
 def on_receiving_dmg_melee(me, hitter, real_hitter, x, y, damage):
@@ -57,7 +55,7 @@ def tp_init(name, text_long_name):
     my.attack_humanoid(self, True)
     my.attack_meat(self, True)
     my.chance_d1000_carrier_of_treasure_class_A(self, 1000)
-    my.chance_d1000_shooting(self, 500)
+    my.chance_d1000_shooting(self, 100)
     my.chance_d1000_shove(self, 200)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)

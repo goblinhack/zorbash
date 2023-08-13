@@ -29,11 +29,9 @@ def on_want_to_shoot_at(me, target, target_x, target_y):  # Return True on doing
     # my.con("target  {} {:X} {},{}".format(my.thing_name_get(target), target, target_x, target_y))
     if not my.level_is_water_at(target, target_x, target_y):
         return False
-    if my.py_pcg_random_range_inclusive(1, 10) < 8:
-        my.thing_sound_play_channel(me, my.CHANNEL_WEAPON, "lightning_a")
-        my.thing_shoot_at(me, "laser_lightning", target)
-        return True
-    return False
+    my.thing_sound_play_channel(me, my.CHANNEL_WEAPON, "lightning_a")
+    my.thing_shoot_at(me, "laser_lightning", target)
+    return True
 
 
 def tp_init(name, text_long_name):

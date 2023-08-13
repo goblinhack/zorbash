@@ -4,11 +4,12 @@
 
 #include "my_dice.hpp"
 #include "my_main.hpp"
+#include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 
 //
-// True if the a >= b
+// Return true if we exceed the target roll
 //
 bool d20_ge(int stat_total, const int dice_roll_to_exceed, bool &fumble, bool &critical)
 {
@@ -156,3 +157,51 @@ bool Dice::crit_roll_minus_stat(void) const
 }
 
 int Dice::operator()() const { return (roll()); }
+
+int d10000(void) { return pcg_random_range_inclusive(1, 10000); }
+int d1000(void) { return pcg_random_range_inclusive(1, 1000); }
+int d100(void) { return pcg_random_range_inclusive(1, 100); }
+int d10(void) { return pcg_random_range_inclusive(1, 10); }
+int d11(void) { return pcg_random_range_inclusive(1, 11); }
+int d12(void) { return pcg_random_range_inclusive(1, 12); }
+int d13(void) { return pcg_random_range_inclusive(1, 13); }
+int d14(void) { return pcg_random_range_inclusive(1, 14); }
+int d15(void) { return pcg_random_range_inclusive(1, 15); }
+int d16(void) { return pcg_random_range_inclusive(1, 16); }
+int d17(void) { return pcg_random_range_inclusive(1, 17); }
+int d18(void) { return pcg_random_range_inclusive(1, 18); }
+int d19(void) { return pcg_random_range_inclusive(1, 19); }
+int d20(void) { return pcg_random_range_inclusive(1, 20); }
+int d2(void) { return pcg_random_range_inclusive(1, 2); }
+int d3(void) { return pcg_random_range_inclusive(1, 3); }
+int d4(void) { return pcg_random_range_inclusive(1, 4); }
+int d50(void) { return pcg_random_range_inclusive(1, 50); }
+int d5(void) { return pcg_random_range_inclusive(1, 5); }
+int d6(void) { return pcg_random_range_inclusive(1, 6); }
+int d7(void) { return pcg_random_range_inclusive(1, 7); }
+int d8(void) { return pcg_random_range_inclusive(1, 8); }
+int d9(void) { return pcg_random_range_inclusive(1, 9); }
+
+PyObject *py_d10000(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d10000()); }
+PyObject *py_d1000(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d1000()); }
+PyObject *py_d100(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d100()); }
+PyObject *py_d10(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d10()); }
+PyObject *py_d11(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d11()); }
+PyObject *py_d12(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d12()); }
+PyObject *py_d13(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d13()); }
+PyObject *py_d14(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d14()); }
+PyObject *py_d15(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d15()); }
+PyObject *py_d16(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d16()); }
+PyObject *py_d17(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d17()); }
+PyObject *py_d18(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d18()); }
+PyObject *py_d19(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d19()); }
+PyObject *py_d20(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d20()); }
+PyObject *py_d2(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d2()); }
+PyObject *py_d3(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d3()); }
+PyObject *py_d4(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d4()); }
+PyObject *py_d50(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d50()); }
+PyObject *py_d5(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d5()); }
+PyObject *py_d6(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d6()); }
+PyObject *py_d7(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d7()); }
+PyObject *py_d8(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d8()); }
+PyObject *py_d9(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d9()); }

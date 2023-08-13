@@ -28,12 +28,10 @@ def on_awake(me, x, y):
 
 
 def on_want_to_shoot_at(me, target, x, y):  # Return True on doing an action
-    if my.py_pcg_random_range_inclusive(1, 10) < 4:
-        sound = f"growl{my.py_non_pcg_random_range_inclusive(1, 10)}"
-        my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
-        my.thing_shoot_at(me, "projectile_fire", target)
-        return True
-    return False
+    sound = f"growl{my.py_non_pcg_random_range_inclusive(1, 10)}"
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
+    my.thing_shoot_at(me, "projectile_fire", target)
+    return True
 
 
 def tp_init(name, text_long_name):
@@ -43,7 +41,7 @@ def tp_init(name, text_long_name):
     my.ai_resent_count(self, 100)
     my.attack_humanoid(self, True)
     my.attack_meat(self, True)
-    my.chance_d1000_shooting(self, 500)
+    my.chance_d1000_shooting(self, 250)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.distance_vision(self, 10)

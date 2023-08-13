@@ -50,6 +50,8 @@ void Game::place_player(void)
       }
 
       if (0) {
+        level->thing_new("trap_dart", point(x + 2, y + 2));
+        level->thing_new("sentry_orb_energy", point(x - 3, y));
         level->thing_new("crystal1", point(x, y + 1));
         level->thing_new("crystal2", point(x, y + 2));
         level->thing_new("crystal3", point(x, y + 3));

@@ -23,11 +23,9 @@ def on_death(me, x, y):
 
 
 def on_want_to_shoot_at(me, target, x, y):  # Return True on doing an action
-    if my.py_pcg_random_range_inclusive(1, 100) < 10:
-        my.thing_shoot_at(me, "projectile_fire", target)
-        my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
-        return True
-    return False
+    my.thing_shoot_at(me, "projectile_fire", target)
+    my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
+    return True
 
 
 def tp_init(name, text_long_name):
@@ -37,7 +35,7 @@ def tp_init(name, text_long_name):
     my.ai_resent_count(self, 1)
     my.ai_wanderer(self, True)
     my.attack_eater(self, True)
-    my.chance_d1000_shooting(self, 500)
+    my.chance_d1000_shooting(self, 100)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 3)
