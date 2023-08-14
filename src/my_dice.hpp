@@ -12,9 +12,9 @@
 class Dice
 {
 private:
-  int ndice {};
-  int sides {};
-  int stat {};
+  int ndice {};    // 1d6+2 (1)
+  int sides {};    // 1d6+2 (6)
+  int modifier {}; // 1d6+2 (6)
 
   std::string hd;
 
@@ -31,7 +31,6 @@ public:
   int min_roll(void) const;
 
   bool crit_roll(void) const;
-  bool crit_roll_minus_stat(void) const;
 
   int operator()() const;
 };

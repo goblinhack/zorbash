@@ -116,12 +116,22 @@ Dice::Dice(std::string s)
       for (auto x : split_tokens(d, '+')) {
         auto sp = split_tokens(x, 'd');
         if (sp.size() == 2) {
+          //
+          // 1d6
+          // ^
           ndice = std::stoi(sp[ 0 ]);
+          //
+          // 1d6
+          //   ^
+          //
           sides = std::stoi(sp[ 1 ]);
         } else {
-          stat += std::stoi(sp[ 0 ]);
+          //
+          // +1
+          //
+          modifier += std::stoi(sp[ 0 ]);
         }
-        // CON("new dice %dd%d+%d", ndice, sides, stat);
+        // CON("new dice %dd%d+%d", ndice, sides, modifier);
       }
     }
   }
@@ -131,29 +141,23 @@ int Dice::roll(void) const
 {
   int n   = ndice;
   int tot = 0;
-  // CON("roll %dd%d+%d", ndice, sides, stat);
+  // CON("roll %dd%d+%d", ndice, sides, modifier);
   while (n-- > 0) {
     tot += pcg_random_range(0, sides) + 1;
   }
-  tot += stat;
-  // CON("roll %dd%d+%d => %d", ndice, sides, stat, tot);
+  tot += modifier;
+  // CON("roll %dd%d+%d => %d", ndice, sides, modifier, tot);
   return tot;
 }
 
-int Dice::max_roll(void) const { return ndice * sides + stat; }
+int Dice::max_roll(void) const { return ndice * sides + modifier; }
 
-int Dice::min_roll(void) const { return ndice * 1 + stat; }
+int Dice::min_roll(void) const { return ndice * 1 + modifier; }
 
 bool Dice::crit_roll(void) const
 {
   auto r = roll();
   return r >= (ndice * sides);
-}
-
-bool Dice::crit_roll_minus_stat(void) const
-{
-  auto r = roll();
-  return r - stat >= (ndice * sides);
 }
 
 int Dice::operator()() const { return (roll()); }

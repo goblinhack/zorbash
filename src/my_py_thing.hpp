@@ -28,7 +28,6 @@ PyObject *thing_attack_undead(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_buff_add(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_buff_remove(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_carry(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_new(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_charge_count_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_charge_count_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_charge_count(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -713,6 +712,7 @@ PyObject *thing_necrotized_amount_decr(PyObject *obj, PyObject *args, PyObject *
 PyObject *thing_necrotized_amount_get(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_necrotized_amount_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_necrotized_amount_set(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_new(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_noise_additional_on_jump_end(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_noise_additional_on_teleporting(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_noise_blocker(PyObject *obj, PyObject *args, PyObject *keywds);
