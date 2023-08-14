@@ -7,6 +7,8 @@ def on_thrown(owner, me, x, y):
         if my.thing_is_alive_monst(it) or my.thing_is_player(it):
             if it == me:
                 continue
+            if it == owner:
+                continue
             if not my.thing_paralysis_count_incr(it, 10):
                 if owner and my.thing_is_player(owner):
                     my.thing_msg(owner, "%%fg=red$Your paralysis dart has no effect.")

@@ -7,6 +7,8 @@ def on_thrown(owner, me, x, y):
         if my.thing_is_interesting(it):
             if it == me:
                 continue
+            if it == owner:
+                continue
             my.thing_hit(owner, me, it, damage=my.py_pcg_random_range_inclusive(1, 20), thrown=True)
 
 

@@ -361,14 +361,22 @@ bool Thing::throw_at(Thingp what, Thingp target)
       DropOptions drop_options;
       drop_options.is_being_thrown = true;
 
-      if (target && target->is_portal()) {
-        dbg("Drop into portal");
-        TRACE_AND_INDENT();
-        drop(what, target, drop_options);
+      //
+      // Previous bugs allowed you to throw a rock at yourself and hence by
+      // this point there would be no owner. Double check the item is still owned.
+      //
+      if (what->top_owner()) {
+        if (target && target->is_portal()) {
+          dbg("Drop into portal");
+          TRACE_AND_INDENT();
+          drop(what, target, drop_options);
+        } else {
+          dbg("Drop thrown item");
+          TRACE_AND_INDENT();
+          drop(what, target, drop_options);
+        }
       } else {
-        dbg("Drop thrown item");
-        TRACE_AND_INDENT();
-        drop(what, target, drop_options);
+        dbg("Thrown item is no longer owned");
       }
     }
   }
