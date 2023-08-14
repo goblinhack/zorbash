@@ -95,6 +95,17 @@ void Level::err_(const char *fmt, va_list args)
   callstack_dump();
   backtrace_dump();
 
+  char error_buf[ MAXLONGSTR ];
+  {
+    int len;
+
+    error_buf[ 0 ] = '\0';
+    len            = (int) strlen(error_buf);
+    vsnprintf(error_buf + len, MAXLONGSTR - len, fmt, args);
+
+    error_handler(error_buf);
+  }
+
   buf[ 0 ] = '\0';
   if (! g_opt_test_dungeon_gen) {
     get_timestamp(buf, MAXLONGSTR);
@@ -103,10 +114,8 @@ void Level::err_(const char *fmt, va_list args)
   snprintf(buf + len, MAXLONGSTR - len, "ERROR: Level %s: ", l->to_string().c_str());
 
   len = (int) strlen(buf);
-  vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
-
+  snprintf(buf + len, MAXLONGSTR - len, "ERROR: %%%%fg=red$%s%%%%fg=reset$", error_buf);
   putf(MY_STDOUT, buf);
-
   putf(MY_STDERR, buf);
 
   fprintf(stderr, "%s\n", buf);

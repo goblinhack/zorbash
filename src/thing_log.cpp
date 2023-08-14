@@ -177,6 +177,17 @@ void Thing::err_(const char *fmt, va_list args)
   callstack_dump();
   backtrace_dump();
 
+  char error_buf[ MAXLONGSTR ];
+  {
+    int len;
+
+    error_buf[ 0 ] = '\0';
+    len            = (int) strlen(error_buf);
+    vsnprintf(error_buf + len, MAXLONGSTR - len, fmt, args);
+
+    error_handler(error_buf);
+  }
+
   verify(MTYPE_THING, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
@@ -190,10 +201,8 @@ void Thing::err_(const char *fmt, va_list args)
   snprintf(buf + len, MAXLONGSTR - len, "ERROR: Thing %s: ", t->to_string().c_str());
 
   len = (int) strlen(buf);
-  vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
-
+  snprintf(buf + len, MAXLONGSTR - len, "ERROR: %%%%fg=red$%s%%%%fg=reset$", error_buf);
   putf(MY_STDOUT, buf);
-
   putf(MY_STDERR, buf);
 
   fprintf(stderr, "%s\n", buf);

@@ -41,7 +41,7 @@ void dungeon_test(void)
   g_opt_ascii = true;
 
   //
-  // No monster sounds when testin
+  // No monster sounds when testing
   //
   g_opt_silent = true;
 
@@ -65,21 +65,15 @@ void dungeon_test(void)
   }
 
   //
-  // Make the next level so we can fall into it
+  // Make the next level(s) so we can fall into them
   //
-  TRACE_NO_INDENT();
-  if (! game->init_level(world_at + point3d(0, 0, 2), grid_at + point(0, 1), difficulty_depth,
-                         dungeon_walk_order_level_no++)) {
-    DIE("Failed to create 2nd level");
-  }
-
-  //
-  // Make the next level so we can fall into it
-  //
-  TRACE_NO_INDENT();
-  if (! game->init_level(world_at + point3d(0, 0, 4), grid_at + point(0, 2), difficulty_depth,
-                         dungeon_walk_order_level_no++)) {
-    DIE("Failed to create 2nd level");
+  while (grid_at.y < DUNGEONS_GRID_CHUNK_HEIGHT - 1) {
+    TRACE_NO_INDENT();
+    world_at += point3d(0, 0, 2);
+    grid_at += point(0, 2);
+    if (! game->init_level(world_at, grid_at, difficulty_depth, dungeon_walk_order_level_no++)) {
+      DIE("Failed to create level");
+    }
   }
 
   {
