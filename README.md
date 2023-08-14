@@ -180,9 +180,8 @@ Itch.io [found here](https://goblinhackgmailcom.itch.io/zorbash)
 
 Content:
 - Dungeon, sewer, swamp, ice, lava, chasms and flooded dungeon biomes
-- No end game, bosses or crystal collection yet
-- Multiple skill trees
-- Looking for feedback
+- Multiple skill and spell trees
+- No end game yet
 <!-- begin type marker -->
 - 108 x monsters
 - 52 x food
