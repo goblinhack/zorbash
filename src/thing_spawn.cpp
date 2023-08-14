@@ -306,8 +306,8 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
       dbg("%d,%d ok", x, y);
 
       auto it = level->thing_new(what, point(x, y));
-      spawned_newborn(it);
       if (it) {
+        spawned_newborn(it);
         it->ts_anim_delay_end_set(time_game_ms_cached() + dist * 100);
       }
     }
