@@ -34,7 +34,7 @@ def on_awake(me, x, y):
 
 def on_want_to_shoot_at(me, target, x, y):  # Return True on doing an action
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monster_roar")
-    my.thing_shoot_at(me, "projectile_fire", target)
+    my.thing_shoot_projectile_or_laser_at(me, "projectile_fire", target)
     return True
 
 

@@ -9,7 +9,7 @@ def on_thrown(owner, me, x, y):
                 continue
             if it == owner:
                 continue
-            my.thing_hit_dmg_missile(owner, me, it, thrown=True)
+            my.thing_hit(owner, me, it, thrown=True)
 
     if my.py_pcg_random_range_inclusive(1, 100) < 90:
         my.thing_dead(me, "used")
@@ -22,7 +22,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.dmg_chance_d1000_missile(self, 0, 1000)
     my.dmg_chance_d1000_poison(self, 0, 1000)
     my.dmg_missile_dice(self, "1d4")
-    my.dmg_poison_dice(self, "1d4")
+    my.dmg_poison_dice(self, "1d8")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_show_highlighted(self, True)

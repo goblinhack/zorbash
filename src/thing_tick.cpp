@@ -296,7 +296,7 @@ void Thing::achieve_goals_in_life(void)
   //
   // If this thing has AI, it can try and reach goals
   //
-  if (is_monst() || is_sentry() || is_totem()) {
+  if (is_monst() || is_turret() || is_totem()) {
     // dbg("Tick %d get next hop", game->tick_current);
     ai_get_next_hop();
     if (is_moving) {

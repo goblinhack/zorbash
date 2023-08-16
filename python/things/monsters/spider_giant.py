@@ -31,7 +31,7 @@ def on_born(me, x, y):
 
 
 def on_want_to_shoot_at(me, target, target_x, target_y):  # Return True on doing an action
-    my.thing_shoot_at(me, "projectile_web", target)
+    my.thing_shoot_projectile_or_laser_at(me, "projectile_web", target)
     my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "slime1")
     return True
 

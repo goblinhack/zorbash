@@ -23,7 +23,7 @@ def on_death(me, x, y):
 
 
 def on_want_to_shoot_at(me, target, x, y):  # Return True on doing an action
-    my.thing_shoot_at(me, "projectile_fire", target)
+    my.thing_shoot_projectile_or_laser_at(me, "projectile_fire", target)
     my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
     return True
 

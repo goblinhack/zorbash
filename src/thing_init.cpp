@@ -163,7 +163,7 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
   }
 
   TRACE_NO_INDENT();
-  if (is_player() || is_monst() || is_item()) {
+  if (is_player() || is_monst() || is_item() || is_turret()) {
     new_itemsp();
   }
 

@@ -63,7 +63,7 @@ Thingp Thing::in_the_way_for_shooting(const point s, const point e, int x, int y
     }
 
     if (t->thing_size() < (int) THING_SIZE_NORMAL) {
-      dbg2("This is in not the way for firing (small): %s", t->to_short_string().c_str());
+      dbg2("This is not in the way for firing (small): %s", t->to_short_string().c_str());
       continue;
     }
 

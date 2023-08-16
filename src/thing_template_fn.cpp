@@ -701,7 +701,6 @@ int Tp::is_rock(void) const { return _is_rock; }
 int Tp::is_rusty(void) const { return _is_rusty; }
 int Tp::is_scorpion(void) const { return _is_scorpion; }
 int Tp::is_secret_door(void) const { return _is_secret_door; }
-int Tp::is_sentry(void) const { return _is_sentry; }
 int Tp::is_sewer_wall(void) const { return _is_sewer_wall; }
 int Tp::is_shallow_water(void) const { return _is_shallow_water; }
 int Tp::is_sheep(void) const { return _is_sheep; }
@@ -747,6 +746,7 @@ int Tp::is_treasure_class_C(void) const { return _is_treasure_class_C; }
 int Tp::is_treasure_type(void) const { return _is_treasure_type; }
 int Tp::is_treasure(void) const { return _is_treasure; }
 int Tp::is_troll(void) const { return _is_troll; }
+int Tp::is_turret(void) const { return _is_turret; }
 int Tp::is_undead(void) const { return _is_undead; }
 int Tp::is_unused_flag100(void) const { return _is_unused_flag100; }
 int Tp::is_unused_flag101(void) const { return _is_unused_flag101; }
@@ -1465,7 +1465,6 @@ void Tp::is_rock_set(int v) { _is_rock = v; }
 void Tp::is_rusty_set(int v) { _is_rusty = v; }
 void Tp::is_scorpion_set(int v) { _is_scorpion = v; }
 void Tp::is_secret_door_set(int v) { _is_secret_door = v; }
-void Tp::is_sentry_set(int v) { _is_sentry = v; }
 void Tp::is_sewer_wall_set(int v) { _is_sewer_wall = v; }
 void Tp::is_shallow_water_set(int v) { _is_shallow_water = v; }
 void Tp::is_sheep_set(int v) { _is_sheep = v; }
@@ -1511,6 +1510,7 @@ void Tp::is_treasure_class_C_set(int v) { _is_treasure_class_C = v; }
 void Tp::is_treasure_set(int v) { _is_treasure = v; }
 void Tp::is_treasure_type_set(int v) { _is_treasure_type = v; }
 void Tp::is_troll_set(int v) { _is_troll = v; }
+void Tp::is_turret_set(int v) { _is_turret = v; }
 void Tp::is_undead_set(int v) { _is_undead = v; }
 void Tp::is_unused_flag100_set(int v) { _is_unused_flag100 = v; }
 void Tp::is_unused_flag101_set(int v) { _is_unused_flag101 = v; }

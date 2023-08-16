@@ -10,9 +10,13 @@ def on_thrown(owner, me, x, y):
             if it == owner:
                 continue
             if not my.thing_paralysis_count_incr(it, 10):
+                if my.thing_is_player(it):
+                    my.thing_msg(it, "%%fg=red$The paralysis dart has no effect on you.")
                 if owner and my.thing_is_player(owner):
                     my.thing_msg(owner, "%%fg=red$Your paralysis dart has no effect.")
             else:
+                if my.thing_is_player(it):
+                    my.thing_msg(it, f"%%fg=red$You are struck by a {my.thing_name_get(me)}!%%fg=reset$")
                 if owner and my.thing_is_player(owner):
                     if owner == it:
                         my.thing_msg(owner, "%%fg=red$You paralyse yourself!%%fg=reset$")

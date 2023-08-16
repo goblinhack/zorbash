@@ -198,7 +198,7 @@ bool Thing::possible_to_attack(const Thingp victim)
   // Or resurrected monsters.
   // Or carnivorous plants.
   //
-  if ((! is_dead && is_carnivorous_plant()) || is_sentry() || is_totem() || is_alive_monst() || is_resurrected) {
+  if ((! is_dead && is_carnivorous_plant()) || is_turret() || is_totem() || is_alive_monst() || is_resurrected) {
     //
     // Can we eats it?
     //
@@ -1538,7 +1538,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
       //
       // Lightning cannot miss
       //
-    } else if (is_player() || is_alive_monst() || is_sentry() || is_totem()
+    } else if (is_player() || is_alive_monst() || is_turret() || is_totem()
                || (owner && (owner->is_player() || owner->is_alive_monst()))) {
       if (victim->is_dead) {
         //

@@ -25,7 +25,7 @@ def on_death(me, x, y):
 
 
 def on_want_to_shoot_at(me, target, x, y):  # Return True on doing an action
-    my.thing_shoot_at(me, "laser_energy", target)
+    my.thing_shoot_projectile_or_laser_at(me, "laser_energy", target)
     return True
 
 

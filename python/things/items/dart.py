@@ -3,17 +3,21 @@ import tp
 
 
 def on_thrown(owner, me, x, y):
+    # my.con("me     {} {:X}".format(my.thing_name_get(me), me))
+    # if owner:
+    #     my.con("owner  {} {:X}".format(my.thing_name_get(owner), owner))
     for it in my.level_get_all(me, x, y):
+        if it == me:
+            continue
+        if it == owner:
+            continue
+        # my.con("it {} {:X}".format(my.thing_name_get(it), it))
         if my.thing_is_interesting(it):
-            if it == me:
-                continue
-            if it == owner:
-                continue
             my.thing_hit_dmg_missile(owner, me, it, thrown=True)
 
     if my.py_pcg_random_range_inclusive(1, 100) < 90:
         my.thing_dead(me, "used")
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.topcon("Your dart shatters on impact!")
 
 

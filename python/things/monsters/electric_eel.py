@@ -30,7 +30,7 @@ def on_want_to_shoot_at(me, target, target_x, target_y):  # Return True on doing
     if not my.level_is_water_at(target, target_x, target_y):
         return False
     my.thing_sound_play_channel(me, my.CHANNEL_WEAPON, "lightning_a")
-    my.thing_shoot_at(me, "laser_lightning", target)
+    my.thing_shoot_projectile_or_laser_at(me, "laser_lightning", target)
     return True
 
 

@@ -101,7 +101,7 @@ PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keyw
   Py_RETURN_FALSE;
 }
 
-PyObject *thing_shoot_at(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_shoot_projectile_or_laser_at(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     owner_id  = 0;
@@ -148,17 +148,17 @@ PyObject *thing_shoot_at(PyObject *obj, PyObject *args, PyObject *keywds)
   auto cands = tp_find_wildcard(what);
   auto itemp = pcg_one_of(cands);
   if (! itemp) {
-    ERR("%s: Cannot find item to fire %s", __FUNCTION__, item);
+    ERR("%s: Cannot find item to shoot %s", __FUNCTION__, item);
     Py_RETURN_FALSE;
   }
 
-  if (itemp->is_projectile()) {
+  if (owner->is_turret() || itemp->is_projectile()) {
     if (owner->projectile_shoot_at(nullptr /* staff */, std::string(item), target)) {
       Py_RETURN_TRUE;
     }
     Py_RETURN_FALSE;
   }
-  if (itemp->is_laser()) {
+  if (owner->is_turret() || itemp->is_laser()) {
     if (owner->laser_shoot_at(nullptr /* staff */, std::string(item), target)) {
       Py_RETURN_TRUE;
     }
@@ -170,8 +170,72 @@ PyObject *thing_shoot_at(PyObject *obj, PyObject *args, PyObject *keywds)
     }
     Py_RETURN_FALSE;
   }
-  owner->err("Cannot fire %s at %s", item, target->to_short_string().c_str());
+  owner->err("Cannot shoot %s at %s", item, target->to_short_string().c_str());
   Py_RETURN_FALSE;
+}
+
+PyObject *thing_throw_at(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     owner_id  = 0;
+  char        *item      = nullptr;
+  uint32_t     victim_id = 0;
+  static char *kwlist[]  = {(char *) "owner", (char *) "item", (char *) "target", nullptr};
+
+  TRACE_NO_INDENT();
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IsI", kwlist, &owner_id, &item, &victim_id)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! owner_id) {
+    ERR("%s: No owner thing ID set", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  Thingp owner = game->thing_find(owner_id);
+  if (! owner) {
+    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    Py_RETURN_FALSE;
+  }
+
+  if (! item) {
+    ERR("%s: No item thing ID set", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! victim_id) {
+    ERR("%s: No target thing ID set", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  Thingp target = game->thing_find(victim_id);
+  if (! target) {
+    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    Py_RETURN_FALSE;
+  }
+
+  IF_DEBUG { owner->log("Throw %s at %s", item, target->to_short_string().c_str()); }
+
+  auto cands = tp_find_wildcard(item);
+  auto tp    = pcg_one_of(cands);
+  if (unlikely(! tp)) {
+    ERR("Could not find to throw %s", item);
+    Py_RETURN_FALSE;
+  }
+
+  auto what = owner->level->thing_new(tp, target->curr_at);
+  if (! what) {
+    ERR("Could not create to throw %s", item);
+    Py_RETURN_FALSE;
+  }
+
+  if (! owner->throw_at(what, target)) {
+    owner->err("Cannot throw %s at %s", item, target->to_short_string().c_str());
+    Py_RETURN_FALSE;
+  }
+
+  Py_RETURN_TRUE;
 }
 
 PyObject *thing_death_by(PyObject *obj, PyObject *args, PyObject *keywds)

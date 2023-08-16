@@ -3,14 +3,20 @@ import tp
 
 
 def on_want_to_shoot_at(me, target, target_x, target_y):  # Return True on doing an action
-    my.thing_shoot_at(me, "projectile_dart", target)
     for it in my.level_get_all(me, target_x, target_y):
+        if it == me:
+            continue
         if my.thing_is_interesting(it):
-            if it == me:
-                continue
-            dart = my.thing_new(me, "dart")
-            my.thing_hit_dmg_missile(me, dart, it, thrown=True)
-            my.thing_dead(dart, "used")
+            # my.con("shoot it {} {:X}".format(my.thing_name_get(it), it))
+            if my.thing_possible_to_attack(me, it):
+                roll = my.py_d100()
+                roll = 7
+                if roll < 5:
+                    my.thing_throw_at(me, "dart_paralysis", it)
+                elif roll < 10:
+                    my.thing_throw_at(me, "dart_poison", it)
+                else:
+                    my.thing_throw_at(me, "dart", it)
 
     return True
 
@@ -32,11 +38,11 @@ def tp_init(name, text_long_name):
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_oversized_and_on_floor(self, True)
+    my.distance_throw(self, 5)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
-    my.gfx_pixelart_show_outlined(self, True)
     my.gfx_pixelart_submergible(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "1d20")
@@ -69,18 +75,18 @@ def tp_init(name, text_long_name):
     my.is_obs_shoving(self, True)
     my.is_obs_spawn_monst(self, True)
     my.is_only_one_per_tile(self, True)
-    my.is_sentry(self, True)
     my.is_shovable(self, True)
     my.is_stone(self, True)
     my.is_tickable(self, True)
     my.is_trap(self, True)
+    my.is_turret(self, True)
     my.is_very_combustible(self, True)
     my.normal_placement_rules(self, True)
     my.on_fall_do(self, "me.on_fall()")
     my.on_want_to_shoot_at_do(self, "me.on_want_to_shoot_at()")
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "A menacing tower of stone with a roaming target-like eye atop it. It's either the entrance to a certain brand of shop, or something nasty. Which can it be...?")
-    my.text_description_short(self, "A dart tower")
+    my.text_description_long(self, "A menacing stone turret with a roaming target-like eye atop it. It's either the entrance to a certain brand of shop, or something nasty. Which can it be...?")
+    my.text_description_short(self, "A dart turret")
     my.thing_size(self, my.THING_SIZE_LARGE)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MOB)
@@ -101,7 +107,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="trap_dart", text_long_name="dart trap")
+    tp_init(name="trap_dart", text_long_name="dart turret")
 
 
 init()

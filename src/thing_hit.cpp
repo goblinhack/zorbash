@@ -1154,9 +1154,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         return false;
       }
     } else {
-      if (real_hitter->is_poisonous_danger_level()) {
-        poisoned_amount_incr(damage / 2);
-      }
+      poisoned_amount_incr(damage / 2);
       poisoned();
     }
   }
@@ -1394,8 +1392,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           real_hitter->msg("%%fg=yellow$Poison burns your lungs for %s%d damage!%%fg=reset$", dmg_type.c_str(),
                            damage);
         } else {
-          real_hitter->msg("%%fg=yellow$Poison circulates through your veins for %s%d damage!%%fg=reset$",
-                           dmg_type.c_str(), damage);
+          real_hitter->msg("%%fg=yellow$Poison circulates through your veins for %d %sdamage!%%fg=reset$", damage,
+                           dmg_type.c_str());
         }
       } else if (hitter->is_weapon()) {
         real_hitter->msg("%%fg=orange$You attack yourself for %d %sdamage with %s!%%fg=reset$", damage,
@@ -1519,13 +1517,13 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
               dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_POISON ]) {
           if (real_hitter->is_fungus()) {
-            msg("%%fg=yellow$%s's toxins poisons you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(),
+            msg("%%fg=yellow$%s's toxins injure you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(),
                 damage, dmg_type.c_str());
           } else if (real_hitter->is_monst()) {
-            msg("%%fg=yellow$%s's fangs poisons you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(),
+            msg("%%fg=yellow$%s's fangs injure you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(),
                 damage, dmg_type.c_str());
           } else {
-            msg("%%fg=yellow$%s's poisons you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
+            msg("%%fg=yellow$%s injures you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
                 dmg_type.c_str());
           }
         } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {

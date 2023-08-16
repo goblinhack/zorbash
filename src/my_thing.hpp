@@ -1734,7 +1734,6 @@ public:
   int is_rusty(void);
   int is_scorpion(void);
   int is_secret_door(void);
-  int is_sentry(void);
   int is_sewer_wall(void);
   int is_shallow_water(void);
   int is_sheep(void);
@@ -1779,6 +1778,7 @@ public:
   int is_treasure_type(void);
   int is_treasure(void);
   int is_troll(void);
+  int is_turret(void);
   int is_undead(void);
   int is_unused_flag100(void);
   int is_unused_flag101(void);

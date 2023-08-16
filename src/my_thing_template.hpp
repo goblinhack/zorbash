@@ -611,7 +611,6 @@ private:
   int _is_rusty {};
   int _is_scorpion {};
   int _is_secret_door {};
-  int _is_sentry {};
   int _is_sewer_wall {};
   int _is_shallow_water {};
   int _is_sheep {};
@@ -657,6 +656,7 @@ private:
   int _is_treasure_class_C {};
   int _is_treasure_type {};
   int _is_troll {};
+  int _is_turret {};
   int _is_undead {};
   int _is_unused_flag1 {};
   int _is_unused_flag10 {};
@@ -1956,7 +1956,6 @@ public:
   int is_rusty(void) const;
   int is_scorpion(void) const;
   int is_secret_door(void) const;
-  int is_sentry(void) const;
   int is_sewer_wall(void) const;
   int is_shallow_water(void) const;
   int is_sheep(void) const;
@@ -2002,6 +2001,7 @@ public:
   int is_treasure_type(void) const;
   int is_treasure(void) const;
   int is_troll(void) const;
+  int is_turret(void) const;
   int is_undead(void) const;
   int is_unused_flag100(void) const;
   int is_unused_flag101(void) const;
@@ -2721,7 +2721,6 @@ public:
   void is_rusty_set(int v);
   void is_scorpion_set(int v);
   void is_secret_door_set(int v);
-  void is_sentry_set(int v);
   void is_sewer_wall_set(int v);
   void is_shallow_water_set(int v);
   void is_sheep_set(int v);
@@ -2767,6 +2766,7 @@ public:
   void is_treasure_set(int v);
   void is_treasure_type_set(int v);
   void is_troll_set(int v);
+  void is_turret_set(int v);
   void is_undead_set(int v);
   void is_unused_flag100_set(int v);
   void is_unused_flag101_set(int v);
