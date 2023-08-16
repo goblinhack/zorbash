@@ -10,7 +10,6 @@ def on_want_to_shoot_at(me, target, target_x, target_y):  # Return True on doing
             # my.con("shoot it {} {:X}".format(my.thing_name_get(it), it))
             if my.thing_possible_to_attack(me, it):
                 roll = my.py_d100()
-                roll = 7
                 if roll < 5:
                     my.thing_throw_at(me, "dart_paralysis", it)
                 elif roll < 10:
@@ -29,6 +28,7 @@ def tp_init(name, text_long_name):
     my.chance_d1000_appearing(self, 100)
     my.chance_d1000_shooting(self, 300)
     my.collision_hit_priority(self, 20)
+    my.distance_throw(self, 5)
     my.distance_vision(self, 8)
     my.dmg_chance_d1000_crush(self, 0, 1000)
     my.dmg_crush_dice(self, "4d6")
@@ -37,15 +37,15 @@ def tp_init(name, text_long_name):
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)
+    my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_oversized_and_on_floor(self, True)
-    my.distance_throw(self, 5)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_submergible(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
-    my.health_initial_dice(self, "1d20")
+    my.health_initial_dice(self, "20+1d20")
     my.is_able_to_be_teleported(self, True)
     my.is_able_to_fall(self, True)
     my.is_able_to_see_in_the_dark(self, True)
@@ -74,6 +74,13 @@ def tp_init(name, text_long_name):
     my.is_obs_ai(self, True)
     my.is_obs_shoving(self, True)
     my.is_obs_spawn_monst(self, True)
+    my.is_obs_ai(self, True)
+    my.is_obs_jump_end(self, True)
+    my.is_obs_jumping(self, True)
+    my.is_obs_shooting(self, True)
+    my.is_obs_shoving(self, True)
+    my.is_obs_spawn_monst(self, True)
+    my.is_obs_throwing(self, True)
     my.is_only_one_per_tile(self, True)
     my.is_shovable(self, True)
     my.is_stone(self, True)
@@ -92,15 +99,81 @@ def tp_init(name, text_long_name):
     my.z_prio(self, my.MAP_Z_PRIO_MOB)
     # end sort marker
 
-    delay = 200
+    delay = 100
     my.tile(self,
-            ascii_fg_char="O", ascii_bg_col_name="blue", ascii_fg_col_name="red",
+            ascii_fg_char="^", ascii_bg_col_name="red", ascii_fg_col_name="white",
             tile=name + ".1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="o", ascii_bg_col_name="blue", ascii_fg_col_name="red",
+            ascii_fg_char="^", ascii_bg_col_name="white", ascii_fg_col_name="red",
             tile=name + ".2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="O", ascii_bg_col_name="gray", ascii_fg_col_name="red",
+            ascii_fg_char="^", ascii_bg_col_name="red", ascii_fg_col_name="white",
+            tile=name + ".1", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="^", ascii_bg_col_name="white", ascii_fg_col_name="red",
+            tile=name + ".2", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="^", ascii_bg_col_name="red", ascii_fg_col_name="white",
+            tile=name + ".1", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="^", ascii_bg_col_name="white", ascii_fg_col_name="red",
+            tile=name + ".2", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="^", ascii_bg_col_name="red", ascii_fg_col_name="white",
+            tile=name + ".1", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="^", ascii_bg_col_name="white", ascii_fg_col_name="red",
+            tile=name + ".2", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="^", ascii_bg_col_name="red", ascii_fg_col_name="white",
+            tile=name + ".1", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="^", ascii_bg_col_name="white", ascii_fg_col_name="red",
+            tile=name + ".2", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="^", ascii_bg_col_name="red", ascii_fg_col_name="white",
+            tile=name + ".1", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="^", ascii_bg_col_name="white", ascii_fg_col_name="red",
+            tile=name + ".2", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="^", ascii_bg_col_name="red", ascii_fg_col_name="white",
+            tile=name + ".3", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="^", ascii_bg_col_name="white", ascii_fg_col_name="red",
+            tile=name + ".4", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="^", ascii_bg_col_name="red", ascii_fg_col_name="white",
+            tile=name + ".3", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="^", ascii_bg_col_name="white", ascii_fg_col_name="red",
+            tile=name + ".4", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="^", ascii_bg_col_name="red", ascii_fg_col_name="white",
+            tile=name + ".3", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="^", ascii_bg_col_name="white", ascii_fg_col_name="red",
+            tile=name + ".4", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="^", ascii_bg_col_name="red", ascii_fg_col_name="white",
+            tile=name + ".3", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="^", ascii_bg_col_name="white", ascii_fg_col_name="red",
+            tile=name + ".4", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="^", ascii_bg_col_name="red", ascii_fg_col_name="white",
+            tile=name + ".3", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="^", ascii_bg_col_name="white", ascii_fg_col_name="red",
+            tile=name + ".4", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="^", ascii_bg_col_name="red", ascii_fg_col_name="white",
+            tile=name + ".3", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="^", ascii_bg_col_name="white", ascii_fg_col_name="red",
+            tile=name + ".4", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="^", ascii_bg_col_name="gray", ascii_fg_col_name="black",
             tile=name + ".dead", is_dead=True, delay_ms=delay, is_end_of_anim=True)
 
     my.tp_update(self)

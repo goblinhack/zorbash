@@ -404,7 +404,7 @@ bool Thing::is_obs_ai(Thingp it)
     }
   }
 
-  if (it->is_brazier() || it->is_barrel() || it->is_block_of_ice() || it->is_obs_wall_or_door()) {
+  if (it->is_turret() || it->is_brazier() || it->is_barrel() || it->is_block_of_ice() || it->is_obs_wall_or_door()) {
     if (is_able_to_walk_through_walls()) {
       if (debug && is_debug_type()) {
         con("check collision with %s, no at line %d", it->to_string().c_str(), __LINE__);
@@ -621,7 +621,8 @@ bool Tp::is_obs_ai(Thingp it)
     }
   }
 
-  if (it->is_brazier() || it->is_barrel() || it->is_portal() || it->is_block_of_ice() || it->is_obs_wall_or_door()) {
+  if (it->is_turret() || it->is_brazier() || it->is_barrel() || it->is_portal() || it->is_block_of_ice()
+      || it->is_obs_wall_or_door()) {
     if (is_able_to_walk_through_walls()) {
       return false;
     }
