@@ -48,6 +48,7 @@ void Thing::stuck(const std::string &why)
 
   stuck_count_incr();
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
@@ -66,6 +67,7 @@ void Thing::unstuck(void)
 
   stuck_count_set(0);
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
@@ -254,6 +256,7 @@ bool Thing::is_stuck_check(void)
   //
   // Blocked from moving by something stronger?
   //
+  TRACE_NO_INDENT();
   FOR_ALL_NON_INTERNAL_THINGS(level, it, curr_at.x, curr_at.y)
   {
     if (it == this) {
@@ -270,6 +273,7 @@ bool Thing::is_stuck_check(void)
       }
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
   return stuck;
@@ -362,6 +366,7 @@ void Thing::is_stuck_update(void)
   //
   // Shake the web or block of ice or barrel...
   //
+  TRACE_NO_INDENT();
   FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y)
   {
     if (t->is_player() || t->is_monst()) {
@@ -377,6 +382,7 @@ void Thing::is_stuck_update(void)
       t->wobble(5);
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 }
 

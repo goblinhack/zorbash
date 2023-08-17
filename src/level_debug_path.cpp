@@ -54,11 +54,13 @@ void Level::debug_path_clear(void)
 
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
+      TRACE_NO_INDENT();
       FOR_ALL_DEBUG_PATH_THINGS(level, t, x, y)
       {
         t->hide("debug path clear");
         t->dead("debug path clear");
       }
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_END()
     }
   }

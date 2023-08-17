@@ -15,12 +15,14 @@ void Level::assign_leaders_and_followers(void)
   //
   // Fist get all candidate followers
   //
+  TRACE_NO_INDENT();
   FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
   {
     if (t->is_able_to_follow()) {
       cands.push_back(t);
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
 
   if (! cands.size()) {

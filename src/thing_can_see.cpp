@@ -18,6 +18,7 @@ void Thing::can_see_you(point p)
   auto age_map = age_map_get();
   set(age_map->val, p.x, p.y, game->tick_current);
 
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_THAT_INTERACT(level, t, p.x, p.y)
   {
     //
@@ -66,6 +67,7 @@ void Thing::can_see_you(point p)
             if (t->is_msg_allowed_is_seen()) {
               msg("%s comes into view.", t->text_A_or_An().c_str());
 
+              TRACE_NO_INDENT();
               FOR_ALL_EQUIP(e)
               {
                 auto item = t->equip_get(e);
@@ -105,6 +107,7 @@ void Thing::can_see_you(point p)
                 msg("%s comes into view.", t->text_A_or_An().c_str());
               }
 
+              TRACE_NO_INDENT();
               FOR_ALL_EQUIP(e)
               {
                 auto item = t->equip_get(e);
@@ -162,6 +165,7 @@ void Thing::can_see_you(point p)
       }
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 }
 

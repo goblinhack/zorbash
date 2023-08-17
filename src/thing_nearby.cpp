@@ -29,6 +29,7 @@ Thingp Thing::most_dangerous_adjacent_thing(void)
       continue;
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)
     {
       if (t == this) {
@@ -67,6 +68,7 @@ Thingp Thing::most_dangerous_adjacent_thing(void)
       score += t->health_max();
       possible.push_back(std::make_pair(t, score));
     }
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END()
   }
 
@@ -99,6 +101,7 @@ Thingp Thing::most_dangerous_visible_thing(void)
         continue;
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_THAT_INTERACT(level, t, o.x, o.y)
       {
         if (t == this) {
@@ -146,6 +149,7 @@ Thingp Thing::most_dangerous_visible_thing(void)
         possible.push_back(std::make_pair(t, score));
         dbg("Potential danger: %s", t->to_short_string().c_str());
       }
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_END()
     }
   }
@@ -181,6 +185,7 @@ bool Thing::any_unfriendly_monst_visible(void)
         continue;
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_THAT_INTERACT(level, t, o.x, o.y)
       {
         if (t == this) {
@@ -207,6 +212,7 @@ bool Thing::any_unfriendly_monst_visible(void)
           return true;
         }
       }
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_END()
     }
   }
@@ -233,6 +239,7 @@ bool Thing::any_adjacent_monst(void)
       continue;
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)
     {
       if (t == this) {
@@ -251,6 +258,7 @@ bool Thing::any_adjacent_monst(void)
         return true;
       }
     }
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END()
   }
 
@@ -274,6 +282,7 @@ Thingp Thing::best_visible_target_get(void)
         continue;
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_THAT_INTERACT(level, t, o.x, o.y)
       {
         if (t == this) {
@@ -324,6 +333,7 @@ Thingp Thing::best_visible_target_get(void)
         possible.push_back(std::make_pair(t, score));
         dbg("Potential target: %s", t->to_short_string().c_str());
       }
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_END()
     }
   }

@@ -192,14 +192,17 @@ void Level::tick_(void)
   TRACE_NO_INDENT();
   {
     TRACE_NO_INDENT();
+    TRACE_NO_INDENT();
     FOR_ALL_ANIMATED_THINGS_LEVEL(this, t)
     {
       t->animate();
       t->update_interpolated_position();
       t->fall_curr();
     }
+    TRACE_NO_INDENT();
     FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
 
+    TRACE_NO_INDENT();
     TRACE_NO_INDENT();
     FOR_ALL_ANIMATED_THINGS_LEVEL(this, t)
     {
@@ -208,6 +211,7 @@ void Level::tick_(void)
         t->dead(t->dead_reason_get());
       }
     }
+    TRACE_NO_INDENT();
     FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
   }
 
@@ -307,6 +311,7 @@ void Level::tick_(void)
   TRACE_NO_INDENT();
   for (uint8_t tick_prio = MAP_TICK_PRIO_VERY_HIGH; tick_prio < MAP_TICK_PRIO; tick_prio++) {
     TRACE_NO_INDENT();
+    TRACE_NO_INDENT();
     FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
     {
       if (likely(t->tick_prio() != tick_prio)) {
@@ -361,9 +366,11 @@ void Level::tick_(void)
         }
       }
     }
+    TRACE_NO_INDENT();
     FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
   }
 
+  TRACE_NO_INDENT();
   TRACE_NO_INDENT();
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
@@ -376,12 +383,14 @@ void Level::tick_(void)
       t->dead(t->dead_reason_get());
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
 
   static const int wait_count_max = THING_TICK_WAIT_TOO_LONG;
   static int       wait_count;
   wait_count++;
 
+  TRACE_NO_INDENT();
   TRACE_NO_INDENT();
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
@@ -449,6 +458,7 @@ void Level::tick_(void)
     }
 
     TRACE_NO_INDENT();
+    TRACE_NO_INDENT();
     FOR_ALL_EQUIP(e)
     {
       //
@@ -493,6 +503,7 @@ void Level::tick_(void)
     // Make sure weapons keep up
     //
     TRACE_NO_INDENT();
+    TRACE_NO_INDENT();
     FOR_ALL_EQUIP(e)
     {
       auto o = t->equip_carry_anim(e);
@@ -502,6 +513,7 @@ void Level::tick_(void)
       }
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
 
   //
@@ -543,6 +555,7 @@ void Level::tick_(void)
   //
   bool work_to_do = game->things_are_moving;
   TRACE_NO_INDENT();
+  TRACE_NO_INDENT();
   FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
   {
     if (t->movement_remaining() > 0) {
@@ -551,6 +564,7 @@ void Level::tick_(void)
     }
     t->is_waiting = false;
   }
+  TRACE_NO_INDENT();
   FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
   if (work_to_do) {
     return;
@@ -643,6 +657,7 @@ void Level::tick_(void)
     // also handle things that do not move, like a staff that is now on fire.
     //
     TRACE_NO_INDENT();
+    TRACE_NO_INDENT();
     FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
     {
       //
@@ -657,6 +672,7 @@ void Level::tick_(void)
         t->infop()->damage_this_tick = 0;
       }
     }
+    TRACE_NO_INDENT();
     FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
 
     handle_all_pending_things();
@@ -669,12 +685,14 @@ void Level::tick_(void)
     //
     float h = 0;
     TRACE_NO_INDENT();
+TRACE_NO_INDENT();
     FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
     {
       h += t->curr_at.x;
       h += t->curr_at.y;
       t->con("at %d,%d", t->curr_at.x, t->curr_at.y);
     }
+TRACE_NO_INDENT();
     FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
     CON("TICK %d hash %f random %d", game->tick_current, h, pcg_rand());
 #endif
@@ -745,6 +763,7 @@ void Level::tick_begin_now(void)
 
   dbg("Tick add movement to all things");
   TRACE_NO_INDENT();
+  TRACE_NO_INDENT();
   FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
   {
     //
@@ -768,6 +787,7 @@ void Level::tick_begin_now(void)
       aip->recently_hit_by.clear();
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
 }
 
@@ -775,6 +795,8 @@ void Level::update_all_ticks(void)
 {
   TRACE_NO_INDENT();
 
+  TRACE_NO_INDENT();
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) { t->update_tick(); }
+  TRACE_NO_INDENT();
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
 }

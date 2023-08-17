@@ -463,6 +463,7 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, i
       bool skip = false;
       if (tpp->is_monst_pack()) {
         TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         FOR_ALL_NON_INTERNAL_THINGS(level, it, x, y)
         {
           if (it->is_monst()) {
@@ -474,6 +475,7 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, i
             break;
           }
         }
+        TRACE_NO_INDENT();
         FOR_ALL_THINGS_END()
       }
       if (skip) {
@@ -560,6 +562,7 @@ bool Thing::spawn_set_fire_to_things_around_me(const std::string &what, int radi
       }
 
       TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       FOR_ALL_NON_INTERNAL_THINGS(level, it, x, y)
       {
         if (! it->is_combustible() && ! it->is_burnable() && ! it->is_able_to_melt()) {
@@ -590,6 +593,7 @@ bool Thing::spawn_set_fire_to_things_around_me(const std::string &what, int radi
           }
         }
       }
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_END()
     }
   }

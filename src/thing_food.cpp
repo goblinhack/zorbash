@@ -17,6 +17,7 @@ std::list< Thingp > Thing::food_list(void)
     return empty;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
@@ -24,6 +25,7 @@ std::list< Thingp > Thing::food_list(void)
       continue;
     }
     if (t->is_bag()) {
+      TRACE_NO_INDENT();
       FOR_ALL_CARRIED_BY(t, item)
       {
         auto t = level->thing_find(item.id);
@@ -53,6 +55,7 @@ std::vector< Thingp > Thing::food_vector(void)
     return empty;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
@@ -60,6 +63,7 @@ std::vector< Thingp > Thing::food_vector(void)
       continue;
     }
     if (t->is_bag()) {
+      TRACE_NO_INDENT();
       FOR_ALL_CARRIED_BY(t, item)
       {
         auto t = level->thing_find(item.id);

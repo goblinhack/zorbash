@@ -451,7 +451,12 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
 
     dbg("Use and remove from carrying list");
     TRACE_AND_INDENT();
-    itemsp()->carrying.remove(what->id);
+
+    auto items = itemsp();
+    auto found = std::find(items->carrying.begin(), items->carrying.end(), what->id);
+    if (found != items->carrying.end()) {
+      items->carrying.erase(found);
+    }
 
     what->dead("by being used");
   }

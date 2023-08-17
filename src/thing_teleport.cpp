@@ -70,6 +70,7 @@ int Thing::teleport_distance_get(void)
   auto dist = teleport_distance();
   // dbg("TELEPORT %d", dist);
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
@@ -80,6 +81,7 @@ int Thing::teleport_distance_get(void)
   }
 
   if (maybe_itemsp()) {
+    TRACE_NO_INDENT();
     FOR_ALL_CARRYING(id)
     {
       auto iter = level->thing_find(id);
@@ -95,6 +97,7 @@ int Thing::teleport_distance_get(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_BUFFS_FOR(this, id)
     {
       auto iter = level->thing_find(id);
@@ -104,6 +107,7 @@ int Thing::teleport_distance_get(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_DEBUFFS_FOR(this, id)
     {
       auto iter = level->thing_find(id);
@@ -113,6 +117,7 @@ int Thing::teleport_distance_get(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_SKILLS_FOR(this, id)
     {
       auto iter = level->thing_find(id);
@@ -122,6 +127,7 @@ int Thing::teleport_distance_get(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_SPELLS_FOR(this, id)
     {
       auto iter = level->thing_find(id);
@@ -249,6 +255,7 @@ bool Thing::teleport(TeleportOptions teleport_options, point to, bool *too_far)
   //
   // See if we are prevented from teleporting. i.e. from a spider sitting on us.
   //
+  TRACE_NO_INDENT();
   FOR_ALL_NON_INTERNAL_THINGS(level, it, curr_at.x, curr_at.y)
   {
     if (it == this) {
@@ -276,6 +283,7 @@ bool Thing::teleport(TeleportOptions teleport_options, point to, bool *too_far)
       return false;
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
   //

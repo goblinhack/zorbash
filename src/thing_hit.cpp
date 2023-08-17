@@ -1277,6 +1277,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   //
   if (real_hitter->is_monst() || real_hitter->is_player()) {
     TRACE_NO_INDENT();
+    TRACE_NO_INDENT();
     FOR_ALL_SKILLS_FOR(real_hitter, oid)
     {
       auto iter = level->thing_find(oid);

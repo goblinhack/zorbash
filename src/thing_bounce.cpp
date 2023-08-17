@@ -25,6 +25,7 @@ bool Thing::bounce(float bounce_height, float bounce_fade, ts_t ms, int bounce_c
   //
   // Check if we can lunge
   //
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_OBJ)
   {
     if (t == this) {
@@ -39,6 +40,7 @@ bool Thing::bounce(float bounce_height, float bounce_fade, ts_t ms, int bounce_c
       return false;
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
   auto t = ts_bounce_begin_set(time_ms_cached());

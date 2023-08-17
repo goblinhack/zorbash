@@ -12,6 +12,7 @@ int Thing::dmg_num_of_attacks(void)
 
   auto attacks = (std::max(1, tp()->dmg_num_of_attacks()));
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
@@ -21,6 +22,7 @@ int Thing::dmg_num_of_attacks(void)
   }
 
   if (maybe_itemsp()) {
+    TRACE_NO_INDENT();
     FOR_ALL_BUFFS(id)
     {
       auto iter = level->thing_find(id);
@@ -29,6 +31,7 @@ int Thing::dmg_num_of_attacks(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_DEBUFFS(id)
     {
       auto iter = level->thing_find(id);
@@ -37,6 +40,7 @@ int Thing::dmg_num_of_attacks(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_SKILLS(id)
     {
       auto iter = level->thing_find(id);
@@ -45,6 +49,7 @@ int Thing::dmg_num_of_attacks(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_SPELLS(id)
     {
       auto iter = level->thing_find(id);

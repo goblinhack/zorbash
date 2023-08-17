@@ -26,6 +26,7 @@ void Thing::barrel_tick(void)
   //
   // Find all non barrels and crush them
   //
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_THAT_INTERACT(level, t, curr_at.x, curr_at.y)
   {
     if (t->is_barrel()) {
@@ -44,6 +45,7 @@ void Thing::barrel_tick(void)
       continue;
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 }
 

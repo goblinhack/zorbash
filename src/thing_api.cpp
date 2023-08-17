@@ -1316,6 +1316,7 @@ int Thing::is_able_to_see_through_doors(void)
 {
   TRACE_NO_INDENT();
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
@@ -1333,6 +1334,7 @@ int Thing::is_able_to_walk_through_walls(void)
 {
   TRACE_NO_INDENT();
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
@@ -2612,6 +2614,7 @@ int Thing::is_able_to_teleport_without_tiring(void)
 {
   TRACE_NO_INDENT();
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
@@ -2929,6 +2932,7 @@ int Thing::is_able_to_jump_without_tiring(void)
 {
   TRACE_NO_INDENT();
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
@@ -3543,7 +3547,7 @@ ThingInfop Thing::get_or_alloc_infop(void)
   if (unlikely(! _infop)) {
     new_infop();
   }
-  IF_DEBUG3 { verify(MTYPE_INFOP, _infop); }
+  IF_DEBUG2 { verify(MTYPE_INFOP, _infop); }
   return _infop;
 }
 
@@ -3553,7 +3557,7 @@ ThingItemsp Thing::get_or_alloc_itemsp(void)
   if (unlikely(! _itemsp)) {
     new_itemsp();
   }
-  IF_DEBUG3 { verify(MTYPE_ITEMP, _itemsp); }
+  IF_DEBUG2 { verify(MTYPE_ITEMP, _itemsp); }
   return _itemsp;
 }
 
@@ -3563,7 +3567,7 @@ ThingAip Thing::get_or_alloc_aip(void)
   if (unlikely(! _aip)) {
     new_aip();
   }
-  IF_DEBUG3 { verify(MTYPE_AIP, _aip); }
+  IF_DEBUG2 { verify(MTYPE_AIP, _aip); }
   return _aip;
 }
 
@@ -3573,7 +3577,7 @@ ThingInfop Thing::infop(void)
   if (! _infop) {
     die("no _infop");
   }
-  IF_DEBUG3 { verify(MTYPE_INFOP, _infop); }
+  IF_DEBUG2 { verify(MTYPE_INFOP, _infop); }
   return _infop;
 }
 
@@ -3583,7 +3587,7 @@ ThingItemsp Thing::itemsp(void)
   if (! _itemsp) {
     die("no _itemsp");
   }
-  IF_DEBUG3 { verify(MTYPE_ITEMP, _itemsp); }
+  IF_DEBUG2 { verify(MTYPE_ITEMP, _itemsp); }
   return _itemsp;
 }
 
@@ -3593,7 +3597,7 @@ ThingAip Thing::aip(void)
   if (! _aip) {
     die("no _aip");
   }
-  IF_DEBUG3 { verify(MTYPE_AIP, _aip); }
+  IF_DEBUG2 { verify(MTYPE_AIP, _aip); }
   return _aip;
 }
 

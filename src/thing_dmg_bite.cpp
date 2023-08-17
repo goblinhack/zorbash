@@ -130,6 +130,7 @@ int Thing::total_dmg_for_on_receiving_dmg_bite(Thingp hitter, Thingp real_hitter
     return damage;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BUFFS(item)
   {
     auto iter = level->thing_find(item.id);
@@ -138,6 +139,7 @@ int Thing::total_dmg_for_on_receiving_dmg_bite(Thingp hitter, Thingp real_hitter
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_DEBUFFS(item)
   {
     auto iter = level->thing_find(item.id);
@@ -146,6 +148,7 @@ int Thing::total_dmg_for_on_receiving_dmg_bite(Thingp hitter, Thingp real_hitter
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_SKILLS(item)
   {
     auto iter = level->thing_find(item.id);
@@ -154,6 +157,7 @@ int Thing::total_dmg_for_on_receiving_dmg_bite(Thingp hitter, Thingp real_hitter
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_SPELLS(item)
   {
     auto iter = level->thing_find(item.id);
@@ -162,6 +166,7 @@ int Thing::total_dmg_for_on_receiving_dmg_bite(Thingp hitter, Thingp real_hitter
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
@@ -268,6 +273,7 @@ int Thing::total_dmg_for_on_attacking_dmg_bite(Thingp victim, int damage)
     return damage;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BUFFS(item)
   {
     auto iter = level->thing_find(item.id);
@@ -276,6 +282,7 @@ int Thing::total_dmg_for_on_attacking_dmg_bite(Thingp victim, int damage)
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_DEBUFFS(item)
   {
     auto iter = level->thing_find(item.id);
@@ -284,6 +291,7 @@ int Thing::total_dmg_for_on_attacking_dmg_bite(Thingp victim, int damage)
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_SKILLS(item)
   {
     auto iter = level->thing_find(item.id);
@@ -292,6 +300,7 @@ int Thing::total_dmg_for_on_attacking_dmg_bite(Thingp victim, int damage)
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_SPELLS(item)
   {
     auto iter = level->thing_find(item.id);
@@ -300,6 +309,7 @@ int Thing::total_dmg_for_on_attacking_dmg_bite(Thingp victim, int damage)
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);

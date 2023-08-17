@@ -126,6 +126,7 @@ void Light::err_(const char *fmt, va_list args)
   fprintf(stderr, "%s\n", buf);
 
   wid_console_log(buf);
+  TRACE_NO_INDENT();
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 }
 

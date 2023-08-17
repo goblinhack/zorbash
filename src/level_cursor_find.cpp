@@ -70,12 +70,14 @@ void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny
     auto to = game->map_mini_over;
     if (! wid_mouse_two_clicks) {
       if (cursor) {
+        TRACE_NO_INDENT();
         FOR_ALL_NON_INTERNAL_THINGS(this, t, to.x, to.y)
         {
           if (t->is_cursor_can_hover_over_needs_confirm()) {
             goto done;
           }
         }
+        TRACE_NO_INDENT();
         FOR_ALL_THINGS_END()
       }
     }
@@ -90,6 +92,7 @@ void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny
     is_cursor_found = false;
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
+        TRACE_NO_INDENT();
         FOR_ALL_GRID_THINGS(this, t, x, y)
         {
           t->cursor_hover_over_check();
@@ -97,6 +100,7 @@ void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny
             goto done;
           }
         }
+        TRACE_NO_INDENT();
         FOR_ALL_THINGS_END();
       }
     }

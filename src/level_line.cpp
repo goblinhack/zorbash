@@ -25,6 +25,7 @@ std::vector< Thingp > Level::line(const point s, const point e, size_t max_elems
   int err = dx + dy, e2; /* error value e_xy */
 
   for (;;) { /* loop */
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_THAT_INTERACT(this, it, x0, y0)
     {
       out.push_back(it);
@@ -35,6 +36,7 @@ std::vector< Thingp > Level::line(const point s, const point e, size_t max_elems
         }
       }
     }
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END()
 
     if (x0 == x1 && y0 == y1) {

@@ -36,6 +36,7 @@ std::list< Thingp > Thing::treasure_list(void)
     return empty;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
@@ -43,6 +44,7 @@ std::list< Thingp > Thing::treasure_list(void)
       continue;
     }
     if (t->is_bag()) {
+      TRACE_NO_INDENT();
       FOR_ALL_CARRIED_BY(t, item)
       {
         auto t = level->thing_find(item.id);
@@ -72,6 +74,7 @@ std::vector< Thingp > Thing::treasure_vector(void)
     return empty;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
@@ -79,6 +82,7 @@ std::vector< Thingp > Thing::treasure_vector(void)
       continue;
     }
     if (t->is_bag()) {
+      TRACE_NO_INDENT();
       FOR_ALL_CARRIED_BY(t, item)
       {
         auto t = level->thing_find(item.id);

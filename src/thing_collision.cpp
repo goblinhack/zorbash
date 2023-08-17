@@ -392,6 +392,7 @@ bool Thing::collision_obstacle(point p)
   //
   // Avoid threats and treat them as obstacles
   //
+  TRACE_NO_INDENT();
   FOR_ALL_COLLISION_THINGS(level, it, p.x, p.y)
   {
     //
@@ -407,6 +408,7 @@ bool Thing::collision_obstacle(point p)
       return true;
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END();
 
   return false;
@@ -417,6 +419,7 @@ bool Thing::is_obs_ai(fpoint p)
   //
   // Avoid threats and treat them as obstacles
   //
+  TRACE_NO_INDENT();
   FOR_ALL_COLLISION_THINGS(level, it, p.x, p.y)
   {
     //
@@ -426,6 +429,7 @@ bool Thing::is_obs_ai(fpoint p)
       return true;
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END();
 
   return false;
@@ -805,6 +809,7 @@ bool Thing::collision_check_and_handle(point future_pos, ThingAttackOptionsp att
     auto dx = x - future_pos.x;
     for (int16_t y = miny; y <= maxy; y++) {
       auto dy = y - future_pos.y;
+      TRACE_NO_INDENT();
       FOR_ALL_COLLISION_THINGS(level, it, x, y)
       {
         if (this == it) {
@@ -827,6 +832,7 @@ bool Thing::collision_check_and_handle(point future_pos, ThingAttackOptionsp att
           return false;
         }
       }
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_END()
     }
   }
@@ -915,6 +921,7 @@ bool Thing::collision_check_only(point future_pos)
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_COLLISION_THINGS(level, it, future_pos.x, future_pos.y)
   {
     if (this == it) {
@@ -934,6 +941,7 @@ bool Thing::collision_check_only(point future_pos)
       return true;
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
   return false;

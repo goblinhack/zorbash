@@ -144,6 +144,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
         //
         // Need to check if we can hit a wall. This helps us escape from pools we fall into.
         //
+        TRACE_NO_INDENT();
         FOR_ALL_COLLISION_THINGS(level, t, x, y)
         {
           if (t == level->player) {
@@ -261,6 +262,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
             return true;
           }
         }
+        TRACE_NO_INDENT();
         FOR_ALL_THINGS_END()
 
         //
@@ -269,6 +271,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
         IF_DEBUG { player->log("Close enough to shove check"); }
         TRACE_AND_INDENT();
 
+        TRACE_NO_INDENT();
         FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)
         {
           if (t == level->player) {
@@ -289,6 +292,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
             return true;
           }
         }
+        TRACE_NO_INDENT();
         FOR_ALL_THINGS_END()
       }
     }
@@ -297,6 +301,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
     // If hovering over a double click thing then don't jump in unless the user really means it.
     //
     auto to = level->cursor->curr_at;
+    TRACE_NO_INDENT();
     FOR_ALL_NON_INTERNAL_THINGS(level, t, to.x, to.y)
     {
       if (t->is_cursor_can_hover_over_needs_confirm()) {
@@ -320,6 +325,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
         }
       }
     }
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END()
 
     //

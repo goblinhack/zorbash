@@ -14,6 +14,7 @@ bool Thing::buff_is_slippery(void)
     return false;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BUFFS(id)
   {
     auto t = level->thing_find(id);
@@ -34,6 +35,7 @@ bool Thing::buff_is_aquatic(void)
     return false;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BUFFS(id)
   {
     auto t = level->thing_find(id);
@@ -46,6 +48,7 @@ bool Thing::buff_is_aquatic(void)
 
   auto owner = top_owner();
   if (owner) {
+    TRACE_NO_INDENT();
     FOR_ALL_BUFFS_FOR(owner, item)
     {
       auto iter = level->thing_find(item.id);
@@ -68,6 +71,7 @@ bool Thing::buff_is_immune_to_fire(void)
     return false;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BUFFS(id)
   {
     auto t = level->thing_find(id);
@@ -80,6 +84,7 @@ bool Thing::buff_is_immune_to_fire(void)
 
   auto owner = top_owner();
   if (owner) {
+    TRACE_NO_INDENT();
     FOR_ALL_BUFFS_FOR(owner, item)
     {
       auto iter = level->thing_find(item.id);
@@ -102,6 +107,7 @@ bool Thing::buff_is_immune_to_cold(void)
     return false;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BUFFS(id)
   {
     auto t = level->thing_find(id);
@@ -114,6 +120,7 @@ bool Thing::buff_is_immune_to_cold(void)
 
   auto owner = top_owner();
   if (owner) {
+    TRACE_NO_INDENT();
     FOR_ALL_BUFFS_FOR(owner, item)
     {
       auto iter = level->thing_find(item.id);
@@ -136,6 +143,7 @@ bool Thing::buff_is_immune_to_poison(void)
     return false;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BUFFS(id)
   {
     auto t = level->thing_find(id);
@@ -148,6 +156,7 @@ bool Thing::buff_is_immune_to_poison(void)
 
   auto owner = top_owner();
   if (owner) {
+    TRACE_NO_INDENT();
     FOR_ALL_BUFFS_FOR(owner, item)
     {
       auto iter = level->thing_find(item.id);
@@ -170,6 +179,7 @@ bool Thing::buff_is_immune_to_negation(void)
     return false;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BUFFS(id)
   {
     auto t = level->thing_find(id);
@@ -182,6 +192,7 @@ bool Thing::buff_is_immune_to_negation(void)
 
   auto owner = top_owner();
   if (owner) {
+    TRACE_NO_INDENT();
     FOR_ALL_BUFFS_FOR(owner, item)
     {
       auto iter = level->thing_find(item.id);
@@ -204,6 +215,7 @@ bool Thing::buff_is_immune_to_teleport_attack(void)
     return false;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BUFFS(id)
   {
     auto t = level->thing_find(id);
@@ -216,6 +228,7 @@ bool Thing::buff_is_immune_to_teleport_attack(void)
 
   auto owner = top_owner();
   if (owner) {
+    TRACE_NO_INDENT();
     FOR_ALL_BUFFS_FOR(owner, item)
     {
       auto iter = level->thing_find(item.id);
@@ -238,6 +251,7 @@ bool Thing::buff_is_immune_to_water(void)
     return false;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BUFFS(id)
   {
     auto t = level->thing_find(id);
@@ -250,6 +264,7 @@ bool Thing::buff_is_immune_to_water(void)
 
   auto owner = top_owner();
   if (owner) {
+    TRACE_NO_INDENT();
     FOR_ALL_BUFFS_FOR(owner, item)
     {
       auto iter = level->thing_find(item.id);
@@ -272,6 +287,7 @@ bool Thing::buff_is_immune_to_stamina_drain(void)
     return false;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BUFFS(id)
   {
     auto t = level->thing_find(id);
@@ -284,6 +300,7 @@ bool Thing::buff_is_immune_to_stamina_drain(void)
 
   auto owner = top_owner();
   if (owner) {
+    TRACE_NO_INDENT();
     FOR_ALL_BUFFS_FOR(owner, item)
     {
       auto iter = level->thing_find(item.id);
@@ -306,6 +323,7 @@ bool Thing::buff_is_immune_to_magic_drain(void)
     return false;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BUFFS(id)
   {
     auto t = level->thing_find(id);
@@ -318,6 +336,7 @@ bool Thing::buff_is_immune_to_magic_drain(void)
 
   auto owner = top_owner();
   if (owner) {
+    TRACE_NO_INDENT();
     FOR_ALL_BUFFS_FOR(owner, item)
     {
       auto iter = level->thing_find(item.id);
@@ -340,6 +359,7 @@ bool Thing::buff_is_immune_to_necrosis(void)
     return false;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BUFFS(id)
   {
     auto t = level->thing_find(id);
@@ -352,6 +372,7 @@ bool Thing::buff_is_immune_to_necrosis(void)
 
   auto owner = top_owner();
   if (owner) {
+    TRACE_NO_INDENT();
     FOR_ALL_BUFFS_FOR(owner, item)
     {
       auto iter = level->thing_find(item.id);
@@ -374,6 +395,7 @@ bool Thing::buff_is_invisible(void)
     return false;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BUFFS(id)
   {
     auto t = level->thing_find(id);
@@ -386,6 +408,7 @@ bool Thing::buff_is_invisible(void)
 
   auto owner = top_owner();
   if (owner) {
+    TRACE_NO_INDENT();
     FOR_ALL_BUFFS_FOR(owner, item)
     {
       auto iter = level->thing_find(item.id);

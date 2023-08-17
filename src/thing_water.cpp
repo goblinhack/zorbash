@@ -49,6 +49,7 @@ void Thing::water_tick(void)
     //
     // Attack if we are standing on water
     //
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_LIQUID)
     {
       if (! t->is_water()) {
@@ -56,6 +57,7 @@ void Thing::water_tick(void)
       }
       is_attacked_with_dmg_water(t, t, t->dmg_water());
     }
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END()
   }
 }

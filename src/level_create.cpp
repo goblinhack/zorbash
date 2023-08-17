@@ -145,6 +145,7 @@ void Level::place_the_grid(void)
 int Level::total_monst_hp_level(void)
 {
   int hp = 0;
+  TRACE_NO_INDENT();
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
     if (t->is_monst()) {
@@ -155,6 +156,7 @@ int Level::total_monst_hp_level(void)
       hp += t->health_max() * t->minion_limit();
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
   return hp;
 }
@@ -162,6 +164,7 @@ int Level::total_monst_hp_level(void)
 int Level::total_monst_dmg_level(void)
 {
   int damage = 0;
+  TRACE_NO_INDENT();
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
     if (t->is_mob() || t->is_monst()) {
@@ -185,6 +188,7 @@ int Level::total_monst_dmg_level(void)
       damage += t->dmg_nat_att_dice().max_roll();
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
   return damage;
 }
@@ -192,12 +196,14 @@ int Level::total_monst_dmg_level(void)
 int Level::total_loot_level(void)
 {
   int value = 0;
+  TRACE_NO_INDENT();
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
     if (t->is_treasure() || t->is_weapon() || t->is_staff()) {
       value += t->gold_value();
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
   return value;
 }
@@ -205,12 +211,14 @@ int Level::total_loot_level(void)
 int Level::total_food_level(void)
 {
   int value = 0;
+  TRACE_NO_INDENT();
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
     if (t->is_food()) {
       value += t->nutrition_get();
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
   return value;
 }

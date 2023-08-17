@@ -46,6 +46,7 @@ void Thing::hooks_remove_from(Thingp o)
     o->on_fire_unset();
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(iter)
   {
     if (id == o->equip_id(iter)) {
@@ -113,6 +114,7 @@ void Thing::hooks_remove_from(Thingp o)
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BODYPART(iter)
   {
     if (id == o->bodypart_id_get(iter)) {
@@ -167,6 +169,7 @@ void Thing::hooks_remove()
   //
   // We own things like a sword. i.e. we are a player.
   //
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(iter)
   {
     Thingp item = equip_carry_anim(iter);
@@ -181,6 +184,7 @@ void Thing::hooks_remove()
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(iter)
   {
     Thingp item = equip_use_anim(iter);
@@ -195,6 +199,7 @@ void Thing::hooks_remove()
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BODYPART(iter)
   {
     if (bodypart_id_get(iter).ok()) {

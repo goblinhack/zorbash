@@ -25,6 +25,7 @@ void wid_show_dungeon_contents(Levelp l)
 
   for (auto x = 0; x < MAP_WIDTH; x++) {
     for (auto y = 0; y < MAP_HEIGHT; y++) {
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_THAT_INTERACT(l, t, x, y)
       {
         if (t->is_monst() || t->is_mob()) {
@@ -41,6 +42,7 @@ void wid_show_dungeon_contents(Levelp l)
           treasure_contents[ t->text_short_and_state_capitalised() ]++;
         }
       }
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_END();
     }
   }

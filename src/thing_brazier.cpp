@@ -23,6 +23,7 @@ void Thing::brazier_tick(void)
       point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1), point(-1, 0), point(1, 0), point(0, 1),
   };
 
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_OBJ)
   {
     if (! t->is_brazier()) {
@@ -55,5 +56,6 @@ void Thing::brazier_tick(void)
       }
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 }

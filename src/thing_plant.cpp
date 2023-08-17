@@ -31,6 +31,7 @@ void Thing::plant_tick(void)
     //
     // Attack if we are standing on a plant
     //
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_OBJ)
     {
       if (! t->is_carnivorous_plant()) {
@@ -43,6 +44,7 @@ void Thing::plant_tick(void)
       t->attack(this, &attack_options);
       break;
     }
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END()
   }
 }

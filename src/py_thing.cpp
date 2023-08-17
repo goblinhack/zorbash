@@ -152,13 +152,13 @@ PyObject *thing_shoot_projectile_or_laser_at(PyObject *obj, PyObject *args, PyOb
     Py_RETURN_FALSE;
   }
 
-  if (owner->is_turret() || itemp->is_projectile()) {
+  if (owner->is_totem() || owner->is_turret() || itemp->is_projectile()) {
     if (owner->projectile_shoot_at(nullptr /* staff */, std::string(item), target)) {
       Py_RETURN_TRUE;
     }
     Py_RETURN_FALSE;
   }
-  if (owner->is_turret() || itemp->is_laser()) {
+  if (owner->is_totem() || owner->is_turret() || itemp->is_laser()) {
     if (owner->laser_shoot_at(nullptr /* staff */, std::string(item), target)) {
       Py_RETURN_TRUE;
     }

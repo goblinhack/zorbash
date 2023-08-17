@@ -112,6 +112,7 @@ void Level::display_pixelart_basalt(int fbo, int16_t minx, int16_t miny, int16_t
       if (likely(! is_basalt(x, y))) {
         continue;
       }
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
       {
         auto tpp = t->tp();
@@ -120,6 +121,7 @@ void Level::display_pixelart_basalt(int fbo, int16_t minx, int16_t miny, int16_t
         }
         t->blit_pixelart(fbo);
       }
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_END()
     }
   }

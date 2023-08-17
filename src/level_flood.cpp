@@ -87,6 +87,7 @@ std::deque< point > Level::flood_fill_points(point p, std::function< int(Thingp)
     }
 
     bool got_one = false;
+    TRACE_NO_INDENT();
     FOR_ALL_NON_INTERNAL_THINGS(this, t, p.x, p.y)
     {
       if (filter(t)) {
@@ -94,6 +95,7 @@ std::deque< point > Level::flood_fill_points(point p, std::function< int(Thingp)
         break;
       }
     }
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END()
 
     if (! got_one) {
@@ -158,6 +160,7 @@ std::deque< Thingp > Level::flood_fill_things(point p, std::function< int(Thingp
     }
 
     bool got_one = false;
+    TRACE_NO_INDENT();
     FOR_ALL_NON_INTERNAL_THINGS(this, t, p.x, p.y)
     {
       if (filter(t)) {
@@ -166,6 +169,7 @@ std::deque< Thingp > Level::flood_fill_things(point p, std::function< int(Thingp
         break;
       }
     }
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END()
 
     if (! got_one) {
@@ -234,12 +238,14 @@ std::deque< Thingp > Level::flood_fill_grid_things(point p, int dist)
     }
 
     bool got_one = false;
+    TRACE_NO_INDENT();
     FOR_ALL_GRID_THINGS(this, t, p.x, p.y)
     {
       out.push_back(t);
       got_one = true;
       break;
     }
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END()
 
     if (! got_one) {

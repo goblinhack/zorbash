@@ -157,7 +157,11 @@ bool Thing::drop(Thingp what, Thingp target, DropOptions drop_options)
   if (immediate_owner) {
     dbg("Drop and remove from carrying list");
     TRACE_AND_INDENT();
-    immediate_owner->itemsp()->carrying.remove(what->id);
+    auto items = immediate_owner->itemsp();
+    auto found = std::find(items->carrying.begin(), items->carrying.end(), what->id);
+    if (found != items->carrying.end()) {
+      items->carrying.erase(found);
+    }
   }
 
   if (! drop_options.is_being_stolen) {
@@ -258,6 +262,7 @@ bool Thing::drop_into_ether(Thingp what)
   }
 
   if (top_owner) {
+    TRACE_NO_INDENT();
     FOR_ALL_EQUIP(e)
     {
       if (what == top_owner->equip_get(e)) {
@@ -283,7 +288,11 @@ bool Thing::drop_into_ether(Thingp what)
   if (immediate_owner) {
     dbg("Drop and remove from carrying list");
     TRACE_AND_INDENT();
-    immediate_owner->itemsp()->carrying.remove(what->id);
+    auto items = immediate_owner->itemsp();
+    auto found = std::find(items->carrying.begin(), items->carrying.end(), what->id);
+    if (found != items->carrying.end()) {
+      items->carrying.erase(found);
+    }
   }
   game->set_request_to_remake_rightbar();
 

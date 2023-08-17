@@ -183,6 +183,7 @@ bool Thing::shoot_at_target(void)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_THAT_INTERACT(level, victim, x, y)
       {
         if (this == victim) {
@@ -222,6 +223,7 @@ bool Thing::shoot_at_target(void)
           }
         }
       }
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_END();
     }
 

@@ -800,6 +800,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
   blit_init();
   for (auto y = miny; y < maxy; y++) {
     for (auto x = minx; x < maxx; x++) {
+      TRACE_NO_INDENT();
       FOR_ALL_LIGHTS_AT(this, t, x, y)
       {
         //
@@ -874,6 +875,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
           blit(g_light_overlay_texid, 0, 0, 1, 1, tlx, tly, brx, bry);
         }
       }
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_END()
     }
   }
@@ -887,6 +889,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
 
   for (auto y = miny; y < maxy; y++) {
     for (auto x = minx; x < maxx; x++) {
+      TRACE_NO_INDENT();
       FOR_ALL_LIGHTS_AT(this, t, x, y)
       {
         //
@@ -960,6 +963,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
           blit(g_glow_overlay_texid, 0, 0, 1, 1, tlx, tly, brx, bry);
         }
       }
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_END()
     }
   }
@@ -996,6 +1000,7 @@ void Level::lights_update_new_level(void)
 
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
+      TRACE_NO_INDENT();
       FOR_ALL_LIGHTS_AT(this, t, x, y)
       {
         //
@@ -1014,6 +1019,7 @@ void Level::lights_update_new_level(void)
           l->reset();
         }
       }
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_END()
     }
   }
@@ -1028,6 +1034,7 @@ void Level::lights_update_same_level(void)
 
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
+      TRACE_NO_INDENT();
       FOR_ALL_LIGHTS_AT(this, t, x, y)
       {
         //
@@ -1042,6 +1049,7 @@ void Level::lights_update_same_level(void)
           l->reset();
         }
       }
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_END()
     }
   }

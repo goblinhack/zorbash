@@ -106,15 +106,18 @@ bool Thing::if_matches_then_dead(const std::string &what, const point p)
   // Don't destroy the floor under critical items
   //
   if ((what == "is_floor") || (what == "is_corridor")) {
+    TRACE_NO_INDENT();
     FOR_ALL_NON_INTERNAL_THINGS(level, t, p.x, p.y)
     {
       if (t->is_critical_to_level()) {
         return true;
       }
     }
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END()
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_NON_INTERNAL_THINGS(level, t, p.x, p.y)
   {
     if (t->is_very_hard()) {
@@ -126,6 +129,7 @@ bool Thing::if_matches_then_dead(const std::string &what, const point p)
       t->location_check_me();
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
   return true;

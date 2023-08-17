@@ -187,6 +187,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   // If trapped in an engulfer, you can only attack locally
   //
+  TRACE_NO_INDENT();
   FOR_ALL_COLLISION_THINGS(level, t, curr_at.x, curr_at.y)
   {
     if (t == this) {
@@ -201,11 +202,13 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       return false;
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END();
 
   //
   // See if we are prevented from jumping. i.e. from a spider sitting on us.
   //
+  TRACE_NO_INDENT();
   FOR_ALL_NON_INTERNAL_THINGS(level, it, curr_at.x, curr_at.y)
   {
     if (it == this) {
@@ -231,6 +234,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       return false;
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
   //
@@ -435,6 +439,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   // Weapons follow also.
   //
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(iter)
   {
     if (equip_id_carry_anim(iter).ok()) {
@@ -493,6 +498,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BODYPART(iter)
   {
     auto id = bodypart_id_get(iter);
@@ -819,6 +825,7 @@ void Thing::jump_end(void)
   //
   // Weapons follow also.
   //
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(iter)
   {
     auto it = equip_get(iter);
@@ -841,6 +848,7 @@ void Thing::jump_end(void)
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BODYPART(iter)
   {
     auto id = bodypart_id_get(iter);

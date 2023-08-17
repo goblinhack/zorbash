@@ -17,6 +17,7 @@ Thingp Thing::in_the_way_for_shooting(const point s, const point e, int x, int y
   // Allow hitting the end point so that a laser hits the final target also
   //
 
+  TRACE_NO_INDENT();
   FOR_ALL_COLLISION_THINGS(level, t, x, y)
   {
     if (t == this) {
@@ -87,6 +88,7 @@ Thingp Thing::in_the_way_for_shooting(const point s, const point e, int x, int y
       return t;
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
   return nullptr;

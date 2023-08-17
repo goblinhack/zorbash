@@ -26,6 +26,7 @@ int Thing::noise_total(void)
   auto decibels = noise();
   // con("NOISE %d", decibels);
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
@@ -36,6 +37,7 @@ int Thing::noise_total(void)
   }
 
   if (maybe_itemsp()) {
+    TRACE_NO_INDENT();
     FOR_ALL_CARRYING(id)
     {
       auto iter = level->thing_find(id);
@@ -51,6 +53,7 @@ int Thing::noise_total(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_BUFFS_FOR(this, id)
     {
       auto iter = level->thing_find(id);
@@ -60,6 +63,7 @@ int Thing::noise_total(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_DEBUFFS_FOR(this, id)
     {
       auto iter = level->thing_find(id);
@@ -69,6 +73,7 @@ int Thing::noise_total(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_SKILLS_FOR(this, id)
     {
       auto iter = level->thing_find(id);
@@ -78,6 +83,7 @@ int Thing::noise_total(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_SPELLS_FOR(this, id)
     {
       auto iter = level->thing_find(id);
@@ -115,6 +121,7 @@ int Thing::noise_on_jumping(void)
   auto decibels = noise_total();
   // con("NOISE %d", decibels);
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
@@ -125,6 +132,7 @@ int Thing::noise_on_jumping(void)
   }
 
   if (maybe_itemsp()) {
+    TRACE_NO_INDENT();
     FOR_ALL_CARRYING(id)
     {
       auto iter = level->thing_find(id);
@@ -140,6 +148,7 @@ int Thing::noise_on_jumping(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_BUFFS_FOR(this, id)
     {
       auto iter = level->thing_find(id);
@@ -149,6 +158,7 @@ int Thing::noise_on_jumping(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_DEBUFFS_FOR(this, id)
     {
       auto iter = level->thing_find(id);
@@ -158,6 +168,7 @@ int Thing::noise_on_jumping(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_SKILLS_FOR(this, id)
     {
       auto iter = level->thing_find(id);
@@ -167,6 +178,7 @@ int Thing::noise_on_jumping(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_SPELLS_FOR(this, id)
     {
       auto iter = level->thing_find(id);
@@ -201,6 +213,7 @@ int Thing::noise_on_teleporting(void)
   auto decibels = noise_total();
   // con("NOISE %d", decibels);
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
@@ -211,6 +224,7 @@ int Thing::noise_on_teleporting(void)
   }
 
   if (maybe_itemsp()) {
+    TRACE_NO_INDENT();
     FOR_ALL_CARRYING(id)
     {
       auto iter = level->thing_find(id);
@@ -226,6 +240,7 @@ int Thing::noise_on_teleporting(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_BUFFS_FOR(this, id)
     {
       auto iter = level->thing_find(id);
@@ -235,6 +250,7 @@ int Thing::noise_on_teleporting(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_DEBUFFS_FOR(this, id)
     {
       auto iter = level->thing_find(id);
@@ -244,6 +260,7 @@ int Thing::noise_on_teleporting(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_SKILLS_FOR(this, id)
     {
       auto iter = level->thing_find(id);
@@ -253,6 +270,7 @@ int Thing::noise_on_teleporting(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_SPELLS_FOR(this, id)
     {
       auto iter = level->thing_find(id);

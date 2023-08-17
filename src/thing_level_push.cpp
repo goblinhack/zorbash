@@ -435,6 +435,7 @@ void Thing::level_push(void)
     // Need to push all animations also; so if we are changing state, like being
     // submerged, then when we push again, the animations are also suitably submerged.
     //
+    TRACE_NO_INDENT();
     FOR_ALL_EQUIP(iter)
     {
       if (equip_id_carry_anim(iter).ok()) {
@@ -452,6 +453,7 @@ void Thing::level_push(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_BODYPART(iter)
     {
       if (bodypart_id_get(iter).ok()) {

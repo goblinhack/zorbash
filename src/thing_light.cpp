@@ -218,6 +218,7 @@ int Thing::light_distance_update(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_INTERESTING_THINGS_ON_LEVEL(level, t)
     {
       if (get_no_check(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) {
@@ -230,6 +231,7 @@ int Thing::light_distance_update(void)
 
         t->is_visible_to_player = true;
 
+        TRACE_NO_INDENT();
         FOR_ALL_EQUIP(iter)
         {
           auto it = t->equip_carry_anim(iter);
@@ -238,6 +240,7 @@ int Thing::light_distance_update(void)
           }
         }
 
+        TRACE_NO_INDENT();
         FOR_ALL_BODYPART(iter)
         {
           if (bodypart_id_get(iter).ok()) {
@@ -249,6 +252,7 @@ int Thing::light_distance_update(void)
         }
       }
     }
+    TRACE_NO_INDENT();
     FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(level)
   }
 

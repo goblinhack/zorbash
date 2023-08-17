@@ -183,6 +183,7 @@ void Game::wid_enchant_an_item(void)
   std::map< Thingp, bool > found;
   std::map< Tpp, bool >    found_group;
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     auto t = player->equip_get(e);
@@ -219,6 +220,7 @@ void Game::wid_enchant_an_item(void)
   }
 
   if (player->maybe_itemsp()) {
+    TRACE_NO_INDENT();
     FOR_ALL_CARRIED_BY(player, id)
     {
       auto t = level->thing_find(id);
@@ -373,6 +375,7 @@ void Game::wid_enchant_an_item(void)
         s = t->text_long_name() + ", " + t->text_description_enchant();
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_EQUIP(e)
       {
         auto iter = player->equip_get(e);

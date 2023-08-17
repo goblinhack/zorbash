@@ -51,6 +51,7 @@ Thingp Level::thing_new(const std::string &name, const point at, Thingp owner)
   // Ensure things like chasms don't pile up on the same tile.
   //
   if (tp->is_only_one_per_tile()) {
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_AT_DEPTH(this, o, at.x, at.y, tp->z_depth)
     {
       if (o->tp() == tp) {
@@ -58,6 +59,7 @@ Thingp Level::thing_new(const std::string &name, const point at, Thingp owner)
         return nullptr;
       }
     }
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END()
   }
 

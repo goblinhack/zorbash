@@ -571,6 +571,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
   // Display all items as one block, and then a blank line
   //
   {
+    TRACE_NO_INDENT();
     FOR_ALL_EQUIP(e)
     {
       auto iter = t->equip_get(e);
@@ -624,6 +625,7 @@ bool wid_leftbar_display_create(void)
     // Monsters (alive)
     ///////////////////////////////////////////////////////////////////////////
     std::vector< Thingp > m;
+    TRACE_NO_INDENT();
     FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
     {
       if (! t->is_alive_monst()) {
@@ -646,6 +648,7 @@ bool wid_leftbar_display_create(void)
 
       m.push_back(t);
     }
+    TRACE_NO_INDENT();
     FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(game->level)
 
     sort(m.begin(), m.end(),
@@ -661,6 +664,7 @@ bool wid_leftbar_display_create(void)
     // Monsters (dead) and items
     ///////////////////////////////////////////////////////////////////////////
     std::vector< Thingp > m;
+    TRACE_NO_INDENT();
     FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
     {
       if (! t->is_dead && ! t->is_item()) {
@@ -686,6 +690,7 @@ bool wid_leftbar_display_create(void)
 
       m.push_back(t);
     }
+    TRACE_NO_INDENT();
     FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(game->level)
 
     sort(m.begin(), m.end(),
@@ -701,6 +706,7 @@ bool wid_leftbar_display_create(void)
     // Important environmental items
     ///////////////////////////////////////////////////////////////////////////
     std::vector< Thingp > m;
+    TRACE_NO_INDENT();
     FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
     {
       if (! t->is_door() && ! t->is_ascend_sewer() && ! t->is_descend_sewer() && ! t->is_ascend_dungeon()
@@ -728,6 +734,7 @@ bool wid_leftbar_display_create(void)
 
       m.push_back(t);
     }
+    TRACE_NO_INDENT();
     FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(game->level)
 
     sort(m.begin(), m.end(),

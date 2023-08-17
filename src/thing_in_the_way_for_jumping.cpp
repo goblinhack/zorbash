@@ -13,6 +13,7 @@ Thingp Thing::in_the_way_for_jumping(const point s, const point e, int x, int y)
 
   point p(x, y);
 
+  TRACE_NO_INDENT();
   FOR_ALL_COLLISION_THINGS(level, t, x, y)
   {
     if (t == this) {
@@ -61,6 +62,7 @@ Thingp Thing::in_the_way_for_jumping(const point s, const point e, int x, int y)
       return t;
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
   return nullptr;

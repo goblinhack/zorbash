@@ -32,7 +32,7 @@ bool Thing::buff_add(Thingp what)
     }
   }
 
-  itemsp()->buffs.push_front(what->id);
+  itemsp()->buffs.push_back(what->id);
   what->owner_set(this);
   what->hide("buff add");
 
@@ -69,7 +69,13 @@ bool Thing::buff_remove(Thingp what)
   }
 
   what->owner_unset();
-  itemsp()->buffs.remove(what->id);
+
+  auto items = itemsp();
+  auto found = std::find(items->buffs.begin(), items->buffs.end(), what->id);
+  if (found != items->buffs.end()) {
+    items->buffs.erase(found);
+  }
+
   game->set_request_to_remake_buffbox();
 
   dbg("Removed %s", what->to_short_string().c_str());

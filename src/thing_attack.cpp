@@ -98,6 +98,7 @@ bool Thing::possible_to_attack(const Thingp victim)
     //
     // If trapped in an engulfer, you can only attack locally
     //
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_THAT_INTERACT(level, t, curr_at.x, curr_at.y)
     {
       if (t == this) {
@@ -121,6 +122,7 @@ bool Thing::possible_to_attack(const Thingp victim)
         }
       }
     }
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END();
   }
 
@@ -198,7 +200,8 @@ bool Thing::possible_to_attack(const Thingp victim)
   // Or resurrected monsters.
   // Or carnivorous plants.
   //
-  if ((! is_dead && is_carnivorous_plant()) || is_turret() || is_totem() || is_alive_monst() || is_resurrected) {
+  if ((! is_dead && is_carnivorous_plant()) || is_totem() || is_turret() || is_totem() || is_alive_monst()
+      || is_resurrected) {
     //
     // Can we eats it?
     //
@@ -479,6 +482,7 @@ bool Thing::possible_to_attack_at(point at)
 
   bool ret = false;
 
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_THAT_INTERACT(level, victim, at.x, at.y)
   {
     if (! possible_to_attack(victim)) {
@@ -486,6 +490,7 @@ bool Thing::possible_to_attack_at(point at)
     }
     ret = true;
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
   return ret;

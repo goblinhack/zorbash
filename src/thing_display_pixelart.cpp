@@ -1243,6 +1243,7 @@ void Thing::blit_to_tex(void)
     glcolor(WHITE);
     blit_init();
     {
+      TRACE_NO_INDENT();
       FOR_ALL_BODYPART(iter)
       {
         auto b    = bodypart_get(iter);
@@ -1261,6 +1262,7 @@ void Thing::blit_to_tex(void)
     glcolor(WHITE);
     blit_init();
     {
+      TRACE_NO_INDENT();
       FOR_ALL_BODYPART(iter)
       {
         auto b    = bodypart_get(iter);

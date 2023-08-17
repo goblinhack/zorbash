@@ -54,6 +54,7 @@ bool Thing::spell_add(Thingp new_spell)
     existing_owner->drop(new_spell);
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_SPELLS(item)
   {
     //
@@ -72,7 +73,7 @@ bool Thing::spell_add(Thingp new_spell)
     }
   }
 
-  itemsp()->spells.push_front(new_spell->id);
+  itemsp()->spells.push_back(new_spell->id);
   new_spell->owner_set(this);
   new_spell->hide("spell added");
 
@@ -87,6 +88,7 @@ redo:
   //
   // If this new spell supersedes another spell(s), then remove them.
   //
+  TRACE_NO_INDENT();
   FOR_ALL_SPELLS(item)
   {
     auto learned_spell = level->thing_find(item);
@@ -94,6 +96,7 @@ redo:
       std::list< Tpp > preceding_spells;
       spell_get_replace_list(learned_spell->tp(), preceding_spells);
 
+      TRACE_NO_INDENT();
       FOR_ALL_SPELLS(item)
       {
         auto other_spell = level->thing_find(item);
@@ -131,7 +134,13 @@ bool Thing::spell_remove(Thingp what)
   }
 
   what->owner_unset();
-  itemsp()->spells.remove(what->id);
+
+  auto items = itemsp();
+  auto found = std::find(items->spells.begin(), items->spells.end(), what->id);
+  if (found != items->spells.end()) {
+    items->spells.erase(found);
+  }
+
   game->set_request_to_remake_spellbox();
 
   dbg("Removed %s", what->to_short_string().c_str());
@@ -236,6 +245,7 @@ bool Thing::has_spell(Tpp spell)
   }
 
   TRACE_NO_INDENT();
+  TRACE_NO_INDENT();
   FOR_ALL_SPELLS(oid)
   {
     auto learned_spell_iter = game->level->thing_find(oid);
@@ -330,6 +340,7 @@ bool Thing::can_learn_a_spell(void)
   //
   for (auto tpp : tp_get_spells()) {
     bool already_learned = false;
+    TRACE_NO_INDENT();
     FOR_ALL_SPELLS(oid)
     {
       auto o = game->level->thing_find(oid);
@@ -431,6 +442,7 @@ bool Thing::learn_random_spell(void)
         // Check this spell is not already known
         //
         bool spell_cand = true;
+        TRACE_NO_INDENT();
         FOR_ALL_SPELLS(oid)
         {
           auto current_spell = game->level->thing_find(oid);

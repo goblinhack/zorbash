@@ -154,6 +154,7 @@ bool Thing::close_door(Thingp door)
   //
   // Slamming the door on a thing for crush damage
   //
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_THAT_INTERACT(level, t, door->curr_at.x, door->curr_at.y)
   {
     if (t == this) {
@@ -178,6 +179,7 @@ bool Thing::close_door(Thingp door)
 
     t->is_attacked_with_dmg_crush(door, this, door->dmg_crush());
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
   if (door->is_key_in_lock) {

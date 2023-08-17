@@ -13,6 +13,7 @@
 
 bool Thing::is_player_bodypart(Thingp item)
 {
+  TRACE_NO_INDENT();
   FOR_ALL_BODYPART(iter)
   {
     if (item == bodypart_get(iter)) {

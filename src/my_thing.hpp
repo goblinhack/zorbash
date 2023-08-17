@@ -13,6 +13,7 @@
 #include "my_dice.hpp"
 #include "my_fwd.hpp"
 #include "my_point3d.hpp"
+#include "my_ptrcheck.hpp"
 #include "my_thing_ai.hpp"
 #include "my_thing_defs.hpp"
 #include "my_thing_id.hpp"
@@ -2991,9 +2992,29 @@ public:
   ThingItemsp get_or_alloc_itemsp(void);
   ThingAip    get_or_alloc_aip(void);
 
-  ThingInfop  maybe_infop(void) { return _infop; }
-  ThingItemsp maybe_itemsp(void) { return _itemsp; }
-  ThingAip    maybe_aip(void) { return _aip; }
+  ThingInfop maybe_infop(void)
+  {
+    if (_infop) {
+      verify(MTYPE_INFOP, _infop);
+    }
+    return _infop;
+  }
+  ThingItemsp maybe_itemsp(void)
+  {
+    if (_itemsp) {
+      verify(MTYPE_ITEMP, _itemsp);
+    }
+    return _itemsp;
+  }
+  ThingAip maybe_aip(void)
+  {
+    if (_aip) {
+      verify(MTYPE_AIP, _aip);
+    }
+    return _aip;
+  }
+
+  std::vector< ThingId > copy_of_carrying(void);
 
   ThingInfop  infop(void);
   ThingItemsp itemsp(void);

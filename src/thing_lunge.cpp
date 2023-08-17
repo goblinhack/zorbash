@@ -37,6 +37,7 @@ void Thing::lunge(point to)
   //
   // Check if we can lunge
   //
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_OBJ)
   {
     if (t == this) {
@@ -51,6 +52,7 @@ void Thing::lunge(point to)
       return;
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
   auto t = ts_lunge_begin_set(time_ms_cached());

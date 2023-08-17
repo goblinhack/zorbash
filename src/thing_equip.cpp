@@ -81,6 +81,7 @@ void Thing::on_unequip(Thingp what)
 
 bool Thing::is_equipped(Thingp item)
 {
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     if (item == equip_get(e)) {
@@ -406,6 +407,7 @@ bool Thing::unequip_me_from_owner(const char *why, bool allowed_to_recarry)
     return false;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     if (this == o->equip_get(e)) {
@@ -452,7 +454,12 @@ bool Thing::equip(Thingp item, int equip)
   if (immediate_owner) {
     dbg("Remove from carrying list");
     TRACE_AND_INDENT();
-    immediate_owner->itemsp()->carrying.remove(item->id);
+
+    auto items = immediate_owner->itemsp();
+    auto found = std::find(items->carrying.begin(), items->carrying.end(), item->id);
+    if (found != items->carrying.end()) {
+      items->carrying.erase(found);
+    }
 
     //
     // If we are equipping a sword inside a bag, then the bag is really no longer owning this.
@@ -547,6 +554,7 @@ void Thing::dump_equip(void)
 {
   TRACE_NO_INDENT();
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     auto t = equip_get(e);
@@ -810,6 +818,7 @@ bool Thing::equipped_anything(void)
     return false;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     auto what = equip_get(e);

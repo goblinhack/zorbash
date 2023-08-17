@@ -52,6 +52,7 @@ void Level::describe(point p)
   std::vector< Thingp > hover_over_things;
   hover_over = nullptr;
 
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_THAT_DO_STUFF(this, t, p.x, p.y)
   {
     int x = p.x;
@@ -128,8 +129,10 @@ void Level::describe(point p)
       hover_over = t;
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_THAT_INTERACT(this, t, p.x, p.y)
   {
     int x = p.x;
@@ -214,8 +217,10 @@ void Level::describe(point p)
       hover_over = t;
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
+  TRACE_NO_INDENT();
   FOR_ALL_NON_INTERNAL_THINGS(this, t, p.x, p.y)
   {
     int x = p.x;
@@ -305,6 +310,7 @@ void Level::describe(point p)
       hover_over = t;
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
   if (! got_one_with_long_text) {

@@ -92,6 +92,7 @@ void Thing::killed(Thingp defeater, const char *reason)
   //
   TRACE_NO_INDENT();
   if (! is_player()) {
+    TRACE_NO_INDENT();
     FOR_ALL_EQUIP(e) { unequip("owner is dead", e, false); }
   }
 

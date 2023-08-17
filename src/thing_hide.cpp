@@ -27,6 +27,7 @@ void Thing::hide(const std::string &reason)
   //
   // Hide the weapon too or it just floats in the air.
   //
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(iter)
   {
     if (equip_id_carry_anim(iter).ok()) {
@@ -44,6 +45,7 @@ void Thing::hide(const std::string &reason)
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BODYPART(iter)
   {
     if (bodypart_id_get(iter).ok()) {

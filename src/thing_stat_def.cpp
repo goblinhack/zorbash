@@ -37,6 +37,7 @@ int Thing::stat_def_total(void)
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
@@ -50,6 +51,7 @@ int Thing::stat_def_total(void)
   }
 
   if (maybe_itemsp()) {
+    TRACE_NO_INDENT();
     FOR_ALL_CARRYING(id)
     {
       auto iter = level->thing_find(id);
@@ -75,6 +77,7 @@ int Thing::stat_def_total(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_BUFFS(id)
     {
       auto iter = level->thing_find(id);
@@ -87,6 +90,7 @@ int Thing::stat_def_total(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_DEBUFFS(id)
     {
       auto iter = level->thing_find(id);
@@ -99,6 +103,7 @@ int Thing::stat_def_total(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_SKILLS(id)
     {
       auto iter = level->thing_find(id);
@@ -111,6 +116,7 @@ int Thing::stat_def_total(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_SPELLS(id)
     {
       auto iter = level->thing_find(id);

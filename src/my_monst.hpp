@@ -7,7 +7,6 @@
 #define _MY_MONST_HPP_
 
 #include <array> // do not remove
-#include <list>
 #include <map>
 
 #include "my_color.hpp"
@@ -63,12 +62,8 @@ constexpr uint32_t THING_MAGIC_FINAL = 33333333;
   if ((_t_)->maybe_itemsp())                                                                                         \
     for (auto _id_ : (_t_)->itemsp()->spells)
 
-#define FOR_ALL_CARRYING(_id_)                                                                                       \
-  if (maybe_itemsp())                                                                                                \
-    for (auto _id_ : itemsp()->carrying)
-#define FOR_ALL_CARRIED_BY(_t_, _id_)                                                                                \
-  if ((_t_)->maybe_itemsp())                                                                                         \
-    for (auto _id_ : (_t_)->itemsp()->carrying)
+#define FOR_ALL_CARRYING(_id_)        for (auto _id_ : copy_of_carrying())
+#define FOR_ALL_CARRIED_BY(_t_, _id_) for (auto _id_ : (_t_)->copy_of_carrying())
 
 //
 // Extra thing info. Needed for monsters and items.
@@ -308,11 +303,11 @@ public:
   point where_i_dropped_an_item_last {-1, -1};
   point where_i_failed_to_collect_last {-1, -1};
 
-  std::list< ThingId > carrying;
-  std::list< ThingId > skills;
-  std::list< ThingId > spells;
-  std::list< ThingId > buffs;
-  std::list< ThingId > debuffs;
+  std::vector< ThingId > carrying;
+  std::vector< ThingId > skills;
+  std::vector< ThingId > spells;
+  std::vector< ThingId > buffs;
+  std::vector< ThingId > debuffs;
 
   std::vector< ThingId > inventory_shortcuts; // Which items are in which slot
   std::vector< ThingId > skillbox_id;         // Which skills are in which slot

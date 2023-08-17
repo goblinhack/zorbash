@@ -45,6 +45,7 @@ void Thing::waiting(void)
   dbg("Waiting");
   TRACE_AND_INDENT();
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);

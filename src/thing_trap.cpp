@@ -31,12 +31,14 @@ void Thing::trap_tick(void)
   //
   // Find all non traps and crush them
   //
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_THAT_INTERACT(level, it, curr_at.x, curr_at.y)
   {
     if (it->is_trap()) {
       it->on_activated(this);
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 }
 

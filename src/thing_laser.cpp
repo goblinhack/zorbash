@@ -249,6 +249,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targeted_laser, T
                   destination_of_first_portal.to_string().c_str(), second_portal_target.to_string().c_str());
               TRACE_AND_INDENT();
 
+              TRACE_NO_INDENT();
               FOR_ALL_GRID_THINGS(level, grid_thing, second_portal_target.x, second_portal_target.y)
               {
                 if (grid_thing->is_the_grid) {
@@ -256,6 +257,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targeted_laser, T
                 }
                 break;
               }
+              TRACE_NO_INDENT();
               FOR_ALL_THINGS_END()
             }
           } else {
@@ -433,12 +435,14 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targeted_laser, p
     return laser_shoot_at(item, gfx_targeted_laser, best, use_options);
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
   {
     if (t->is_the_grid) {
       return laser_shoot_at(item, gfx_targeted_laser, t, use_options);
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
   err("No target to shoot at");

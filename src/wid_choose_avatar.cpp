@@ -189,6 +189,7 @@ void Game::wid_choose_avatar_select(void)
   auto box_style           = UI_WID_STYLE_DARK;
   auto box_highlight_style = UI_WID_STYLE_NORMAL;
 
+  TRACE_NO_INDENT();
   FOR_ALL_BODYPART(iter)
   {
     TRACE_NO_INDENT();
@@ -278,6 +279,7 @@ void Game::wid_choose_avatar_select(void)
       wid_set_pos(avatar_box, tl, br);
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_BODYPART(iter)
     {
       TRACE_NO_INDENT();

@@ -161,6 +161,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &gfx_targeted_p
             destination_of_first_portal.to_string().c_str(), second_portal_target.to_string().c_str());
         TRACE_AND_INDENT();
 
+        TRACE_NO_INDENT();
         FOR_ALL_GRID_THINGS(level, grid_thing, second_portal_target.x, second_portal_target.y)
         {
           if (grid_thing->is_the_grid) {
@@ -168,6 +169,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &gfx_targeted_p
           }
           break;
         }
+        TRACE_NO_INDENT();
         FOR_ALL_THINGS_END()
       }
     } else {
@@ -255,12 +257,14 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &gfx_targeted_p
     return projectile_shoot_at(item, gfx_targeted_projectile, best);
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
   {
     if (t->is_the_grid) {
       return projectile_shoot_at(item, gfx_targeted_projectile, t);
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
   err("No target to shoot at");

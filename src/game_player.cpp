@@ -41,6 +41,7 @@ void Game::place_player(void)
         DIE("Failed to create player");
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_BODYPART(iter)
       {
         TRACE_NO_INDENT();

@@ -27,6 +27,7 @@ void Thing::block_of_ice_tick(void)
     //
     // Find all non block_of_ices and crush them
     //
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_THAT_INTERACT(level, t, curr_at.x, curr_at.y)
     {
       if (t == this) {
@@ -46,6 +47,7 @@ void Thing::block_of_ice_tick(void)
       t->log("Crushed by a block of ice");
       t->is_attacked_with_dmg_crush(this, this, dmg_crush());
     }
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END()
   }
 }

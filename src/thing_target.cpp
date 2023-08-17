@@ -116,6 +116,7 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
     //
     auto hit_at = at + d;
 
+    TRACE_NO_INDENT();
     FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y)
     {
       int prio = t->collision_hit_priority();
@@ -199,6 +200,7 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
         found_best    = true;
       }
     }
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END();
   }
 
@@ -224,6 +226,7 @@ bool Thing::victim_attack_best_attempt_2(Thingp item, point at, Thingp *best, po
     //
     auto hit_at = at + d;
 
+    TRACE_NO_INDENT();
     FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y)
     {
       int prio = t->collision_hit_priority();
@@ -311,6 +314,7 @@ bool Thing::victim_attack_best_attempt_2(Thingp item, point at, Thingp *best, po
         found_best    = true;
       }
     }
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END();
   }
 
@@ -337,6 +341,7 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
     //
     auto hit_at = at + d;
 
+    TRACE_NO_INDENT();
     FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y)
     {
       int prio = t->collision_hit_priority();
@@ -424,6 +429,7 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
         found_best    = true;
       }
     }
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END();
   }
 
@@ -657,6 +663,7 @@ bool Thing::victim_attack_best_at(int equip, ThingAttackOptionsp attack_options)
   //
   // If trapped in an engulfer, you can only attack locally
   //
+  TRACE_NO_INDENT();
   FOR_ALL_COLLISION_THINGS(level, t, curr_at.x, curr_at.y)
   {
     if (t == this) {
@@ -668,6 +675,7 @@ bool Thing::victim_attack_best_at(int equip, ThingAttackOptionsp attack_options)
       break;
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END();
 
   //

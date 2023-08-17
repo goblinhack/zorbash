@@ -271,6 +271,7 @@ bool spell_is_available(Spellp spell_next)
         //
         if ((spell_curr->spell_up == spell_next) || (spell_curr->spell_down == spell_next)
             || (spell_curr->spell_left == spell_next) || (spell_curr->spell_right == spell_next)) {
+          TRACE_NO_INDENT();
           FOR_ALL_SPELLS_FOR(game->level->player, id)
           {
             auto known_spell = game->level->thing_find(id);

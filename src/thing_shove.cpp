@@ -361,6 +361,7 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, bool force)
     // No shove recursion
     //
     if (victim->is_shovable_and_sticky()) {
+      TRACE_NO_INDENT();
       FOR_ALL_NON_INTERNAL_THINGS(level, t, old_at.x, old_at.y)
       {
         if (t == this) {
@@ -381,6 +382,7 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, bool force)
         try_to_shove(t, delta, true);
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_END()
     }
   }
@@ -395,6 +397,7 @@ bool Thing::shove_ok(point future_pos)
 {
   TRACE_NO_INDENT();
 
+  TRACE_NO_INDENT();
   FOR_ALL_COLLISION_THINGS(level, victim, future_pos.x, future_pos.y)
   {
     if (this == victim) {
@@ -412,6 +415,7 @@ bool Thing::shove_ok(point future_pos)
       return false;
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
   return true;
@@ -445,6 +449,7 @@ ThingShoved Thing::try_to_shove(point future_pos)
   //
   // Try to shove heavy things first.
   //
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_THAT_INTERACT(level, victim, p.x, p.y)
   {
     if (this == victim) {
@@ -464,8 +469,10 @@ ThingShoved Thing::try_to_shove(point future_pos)
     point shove_delta = delta;
     return (try_to_shove(victim, shove_delta));
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_THAT_INTERACT(level, victim, p.x, p.y)
   {
     if (this == victim) {
@@ -481,6 +488,7 @@ ThingShoved Thing::try_to_shove(point future_pos)
     point shove_delta = delta;
     return (try_to_shove(victim, shove_delta));
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
   return (THING_SHOVE_NEVER_TRIED);

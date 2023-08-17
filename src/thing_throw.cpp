@@ -202,11 +202,13 @@ bool Thing::throw_at(Thingp what, Thingp target)
   }
 
   if (need_to_choose_a_new_target) {
+    TRACE_NO_INDENT();
     FOR_ALL_GRID_THINGS(level, t, throw_at.x, throw_at.y)
     {
       target = t;
       break;
     }
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END()
   } else {
     if (is_player()) {

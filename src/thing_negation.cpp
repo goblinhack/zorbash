@@ -5,6 +5,7 @@
 #include "my_english.hpp"
 #include "my_level.hpp"
 #include "my_monst.hpp"
+#include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
 void Thing::negation_dmg(int dmg, bool &is_killed)
@@ -15,11 +16,13 @@ void Thing::negation_dmg(int dmg, bool &is_killed)
   {
     auto iter = equip_get(e);
     if (iter) {
+      verify(MTYPE_THING, iter);
       iter->negation_dmg(dmg, is_killed);
     }
   }
 
   if (maybe_itemsp()) {
+    TRACE_NO_INDENT();
     FOR_ALL_CARRYING(id)
     {
       auto iter = level->thing_find(id);
@@ -28,34 +31,42 @@ void Thing::negation_dmg(int dmg, bool &is_killed)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_BUFFS(id)
     {
       auto iter = level->thing_find(id);
       if (iter) {
+        verify(MTYPE_THING, iter);
         iter->negation_dmg(dmg, is_killed);
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_DEBUFFS(id)
     {
       auto iter = level->thing_find(id);
       if (iter) {
+        verify(MTYPE_THING, iter);
         iter->negation_dmg(dmg, is_killed);
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_SKILLS(id)
     {
       auto iter = level->thing_find(id);
       if (iter && iter->is_activated) {
+        verify(MTYPE_THING, iter);
         iter->negation_dmg(dmg, is_killed);
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_SPELLS(id)
     {
       auto iter = level->thing_find(id);
       if (iter && iter->is_activated) {
+        verify(MTYPE_THING, iter);
         iter->negation_dmg(dmg, is_killed);
       }
     }

@@ -275,6 +275,7 @@ uint8_t wid_inventory_item_option_unequip(Widp w, int x, int y, uint32_t button)
     wid_inventory_fini();
     player->log("Unequip %s", what->to_short_string().c_str());
 
+    TRACE_NO_INDENT();
     FOR_ALL_EQUIP(e)
     {
       auto t = player->equip_get(e);

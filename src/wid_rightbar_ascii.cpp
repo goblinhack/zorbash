@@ -792,6 +792,7 @@ bool wid_rightbar_ascii_create(void)
       wid_set_shape_none(w);
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     auto iter = player->equip_get(e);
@@ -1123,6 +1124,7 @@ bool wid_rightbar_ascii_create(void)
   {
     bool    got_one = false;
     ThingId unused;
+    TRACE_NO_INDENT();
     FOR_ALL_BUFFS_FOR(player, id)
     {
       got_one = true;
@@ -1145,6 +1147,7 @@ bool wid_rightbar_ascii_create(void)
       }
       {
         int idx = 0;
+        TRACE_NO_INDENT();
         FOR_ALL_BUFFS_FOR(player, id)
         {
           auto iter = level->thing_find(id);
@@ -1180,6 +1183,7 @@ bool wid_rightbar_ascii_create(void)
   {
     bool    got_one = false;
     ThingId unused;
+    TRACE_NO_INDENT();
     FOR_ALL_DEBUFFS_FOR(player, id)
     {
       got_one = true;
@@ -1202,6 +1206,7 @@ bool wid_rightbar_ascii_create(void)
       }
       {
         int idx = 0;
+        TRACE_NO_INDENT();
         FOR_ALL_DEBUFFS_FOR(player, id)
         {
           auto iter = level->thing_find(id);

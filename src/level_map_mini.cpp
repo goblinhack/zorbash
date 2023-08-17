@@ -21,6 +21,7 @@ bool Level::update_map_mini_should_show_monst(int x, int y)
     return true;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_THAT_INTERACT(this, t, x, y)
   {
     if (t->is_monst()) {
@@ -38,6 +39,7 @@ bool Level::update_map_mini_should_show_monst(int x, int y)
       }
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
   return false;

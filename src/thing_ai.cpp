@@ -536,12 +536,14 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
       // jump over them. Better to walk around so you can attack
       // from all sides.
       //
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
       {
         if (is_friend(it)) {
           break;
         }
       }
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_END();
 
       //
@@ -765,6 +767,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
               //
               if (! get(ai->can_see_ever.can_see, o.x, o.y) && ! get(ai->interrupt_map.val, o.x, o.y)) {
 
+                TRACE_NO_INDENT();
                 FOR_ALL_THINGS_THAT_INTERACT(level, it, o.x, o.y)
                 {
                   if (it == this) {
@@ -802,6 +805,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
                     }
                   }
                 }
+                TRACE_NO_INDENT();
                 FOR_ALL_THINGS_END();
               }
 
@@ -974,6 +978,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         continue;
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
       {
         //
@@ -1257,6 +1262,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           }
         }
       }
+      TRACE_NO_INDENT();
       FOR_ALL_THINGS_END();
     }
   }
@@ -1334,6 +1340,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     //
     // Don't try and walk through other minions
     //
+    TRACE_NO_INDENT();
     FOR_ALL_NON_INTERNAL_THINGS(level, it, p.x, p.y)
     {
       if (it == this) {
@@ -1345,6 +1352,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
         break;
       }
     }
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END();
 
     if (skip_location) {
@@ -1724,6 +1732,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(int dx, int dy)
     return false;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_NON_INTERNAL_THINGS(level, it, at.x, at.y)
   {
     if (it->is_door() && ! it->is_open && ! it->is_dead) {
@@ -1819,6 +1828,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(int dx, int dy)
       }
     }
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END();
 
   if (is_item_collector()) {

@@ -20,6 +20,7 @@ void Thing::secret_door_tick(void)
 
   dbg("Opened a secret door");
 
+  TRACE_NO_INDENT();
   FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y)
   {
     if (! t->is_secret_door()) {
@@ -33,5 +34,6 @@ void Thing::secret_door_tick(void)
 
     break;
   }
+  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 }

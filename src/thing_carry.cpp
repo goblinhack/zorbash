@@ -7,6 +7,15 @@
 #include "my_monst.hpp"
 #include "my_thing.hpp"
 
+std::vector< ThingId > Thing::copy_of_carrying(void)
+{
+  std::vector< ThingId > empty;
+  if (! maybe_itemsp()) {
+    return empty;
+  }
+  return itemsp()->carrying;
+}
+
 bool Thing::carry(Thingp item, CarryOptions carry_options)
 {
   if (! item) {
@@ -334,7 +343,7 @@ bool Thing::carry(Thingp item, CarryOptions carry_options)
     if (! is_equipped(item)) {
       dbg("Add to carrying list");
       TRACE_AND_INDENT();
-      itemsp()->carrying.push_front(item->id);
+      itemsp()->carrying.push_back(item->id);
     }
   }
   item->owner_set(this);

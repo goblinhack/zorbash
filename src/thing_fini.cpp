@@ -61,8 +61,10 @@ void Thing::destroy(void)
   level_pop();
   level_leave();
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(iter) { unequip("unequip item as owner is destroyed", iter, false); }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BODYPART(iter) { bodypart_remove(iter); }
 
   //

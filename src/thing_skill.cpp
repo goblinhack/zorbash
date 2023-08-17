@@ -54,6 +54,7 @@ bool Thing::skill_add(Thingp new_skill)
     existing_owner->drop(new_skill);
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_SKILLS(item)
   {
     //
@@ -72,7 +73,7 @@ bool Thing::skill_add(Thingp new_skill)
     }
   }
 
-  itemsp()->skills.push_front(new_skill->id);
+  itemsp()->skills.push_back(new_skill->id);
   new_skill->owner_set(this);
   new_skill->hide("skill add");
 
@@ -91,6 +92,7 @@ redo:
   //
   // If this new skill supersedes another skill(s), then remove them.
   //
+  TRACE_NO_INDENT();
   FOR_ALL_SKILLS(item)
   {
     auto learned_skill = level->thing_find(item);
@@ -98,6 +100,7 @@ redo:
       std::list< Tpp > preceding_skills;
       skill_get_replace_list(learned_skill->tp(), preceding_skills);
 
+      TRACE_NO_INDENT();
       FOR_ALL_SKILLS(item)
       {
         auto other_skill = level->thing_find(item);
@@ -135,7 +138,13 @@ bool Thing::skill_remove(Thingp what)
   }
 
   what->owner_unset();
-  itemsp()->skills.remove(what->id);
+
+  auto items = itemsp();
+  auto found = std::find(items->skills.begin(), items->skills.end(), what->id);
+  if (found != items->skills.end()) {
+    items->skills.erase(found);
+  }
+
   game->set_request_to_remake_skillbox();
 
   dbg("Removed %s", what->to_short_string().c_str());
@@ -205,6 +214,7 @@ bool Thing::has_skill(Tpp skill)
     return false;
   }
 
+  TRACE_NO_INDENT();
   TRACE_NO_INDENT();
   FOR_ALL_SKILLS(oid)
   {
@@ -300,6 +310,7 @@ bool Thing::can_learn_a_skill(void)
   //
   for (auto tpp : tp_get_skills()) {
     bool already_learned = false;
+    TRACE_NO_INDENT();
     FOR_ALL_SKILLS(oid)
     {
       auto o = game->level->thing_find(oid);
@@ -401,6 +412,7 @@ bool Thing::learn_random_skill(void)
         // Check this skill is not already known
         //
         bool skill_cand = true;
+        TRACE_NO_INDENT();
         FOR_ALL_SKILLS(oid)
         {
           auto current_skill = game->level->thing_find(oid);

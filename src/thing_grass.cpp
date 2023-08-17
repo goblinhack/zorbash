@@ -19,6 +19,7 @@ void Thing::grass_tick(void)
   }
 
   if (level->is_grass_wet(curr_at.x, curr_at.y)) {
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_FLOOR2)
     {
       if (t->is_dead) {
@@ -62,10 +63,12 @@ void Thing::grass_tick(void)
         }
       }
     }
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END()
   }
 
   if (level->is_grass_dry(curr_at.x, curr_at.y)) {
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_FLOOR2)
     {
       if (t->is_dead) {
@@ -77,6 +80,7 @@ void Thing::grass_tick(void)
         level->thing_new("grass_dry_trampled", t->curr_at);
       }
     }
+    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END()
   }
 }

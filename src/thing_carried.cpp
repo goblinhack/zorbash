@@ -22,6 +22,7 @@ std::list< Thingp > Thing::carried_item_only_list(void)
     return empty;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
@@ -29,6 +30,7 @@ std::list< Thingp > Thing::carried_item_only_list(void)
       continue;
     }
     if (t->is_bag()) {
+      TRACE_NO_INDENT();
       FOR_ALL_CARRIED_BY(t, item)
       {
         auto t = level->thing_find(item.id);
@@ -54,6 +56,7 @@ std::vector< Thingp > Thing::carried_item_only_vector(void)
     return empty;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
@@ -61,6 +64,7 @@ std::vector< Thingp > Thing::carried_item_only_vector(void)
       continue;
     }
     if (t->is_bag()) {
+      TRACE_NO_INDENT();
       FOR_ALL_CARRIED_BY(t, item)
       {
         auto t = level->thing_find(item.id);
@@ -90,6 +94,7 @@ std::list< Thingp > Thing::carried_and_equipped_item_list(void)
     return empty;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(iter)
   {
     auto t = equip_get(iter);
@@ -99,6 +104,7 @@ std::list< Thingp > Thing::carried_and_equipped_item_list(void)
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
@@ -106,6 +112,7 @@ std::list< Thingp > Thing::carried_and_equipped_item_list(void)
       continue;
     }
     if (t->is_bag()) {
+      TRACE_NO_INDENT();
       FOR_ALL_CARRIED_BY(t, item)
       {
         auto t = level->thing_find(item.id);
@@ -131,6 +138,7 @@ std::vector< Thingp > Thing::carried_and_equipped_item_vector(void)
     return empty;
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(iter)
   {
     auto t = equip_get(iter);
@@ -140,6 +148,7 @@ std::vector< Thingp > Thing::carried_and_equipped_item_vector(void)
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_CARRYING(item)
   {
     auto t = level->thing_find(item.id);
@@ -147,6 +156,7 @@ std::vector< Thingp > Thing::carried_and_equipped_item_vector(void)
       continue;
     }
     if (t->is_bag()) {
+      TRACE_NO_INDENT();
       FOR_ALL_CARRIED_BY(t, item)
       {
         auto t = level->thing_find(item.id);
@@ -174,6 +184,7 @@ void Thing::move_carried_items(void)
   //
   // Weapons follow also.
   //
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(iter)
   {
     auto w = equip_get(iter);
@@ -207,6 +218,7 @@ void Thing::move_carried_items(void)
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BUFFS_FOR(this, id)
   {
     auto iter = level->thing_find(id);
@@ -216,6 +228,7 @@ void Thing::move_carried_items(void)
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_DEBUFFS_FOR(this, id)
   {
     auto iter = level->thing_find(id);
@@ -225,6 +238,7 @@ void Thing::move_carried_items(void)
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_SKILLS_FOR(this, id)
   {
     auto iter = level->thing_find(id);
@@ -234,6 +248,7 @@ void Thing::move_carried_items(void)
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_SPELLS_FOR(this, id)
   {
     auto iter = level->thing_find(id);
@@ -243,6 +258,7 @@ void Thing::move_carried_items(void)
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BODYPART(iter)
   {
     if (bodypart_id_get(iter).ok()) {
@@ -316,6 +332,7 @@ void Thing::move_carried_items_immediately(void)
   //
   // Weapons follow also.
   //
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(iter)
   {
     auto w = equip_get(iter);
@@ -341,6 +358,7 @@ void Thing::move_carried_items_immediately(void)
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BODYPART(iter)
   {
     if (bodypart_id_get(iter).ok()) {

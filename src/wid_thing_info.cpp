@@ -1817,6 +1817,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense                %6s", tmp2);
       w->log(tmp);
 
+      TRACE_NO_INDENT();
       FOR_ALL_EQUIP(e)
       {
         Thingp iter = t->equip_get(e);
@@ -1832,6 +1833,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_CARRIED_BY(t, id)
       {
         auto iter = level->thing_find(id);
@@ -1863,6 +1865,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_BUFFS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -1878,6 +1881,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_DEBUFFS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -1893,6 +1897,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_SKILLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -1908,6 +1913,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_SPELLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -1975,6 +1981,7 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack                 %6s", tmp2);
       w->log(tmp);
 
+      TRACE_NO_INDENT();
       FOR_ALL_EQUIP(e)
       {
         Thingp iter = t->equip_get(e);
@@ -1990,6 +1997,7 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_CARRIED_BY(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2021,6 +2029,7 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_BUFFS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2036,6 +2045,7 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_DEBUFFS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2051,6 +2061,7 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_SKILLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2066,6 +2077,7 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_SPELLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2126,6 +2138,7 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
     auto str       = t->stat_str();
     auto str_total = t->stat_str_total();
     if (str_total != str) {
+      TRACE_NO_INDENT();
       FOR_ALL_EQUIP(e)
       {
         Thingp iter = t->equip_get(e);
@@ -2141,6 +2154,7 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_CARRIED_BY(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2172,6 +2186,7 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_BUFFS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2187,6 +2202,7 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_DEBUFFS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2202,6 +2218,7 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_SKILLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2217,6 +2234,7 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_SPELLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2264,6 +2282,7 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
     auto dex       = t->stat_dex();
     auto dex_total = t->stat_dex_total();
     if (dex_total != dex) {
+      TRACE_NO_INDENT();
       FOR_ALL_EQUIP(e)
       {
         Thingp iter = t->equip_get(e);
@@ -2279,6 +2298,7 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_CARRIED_BY(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2310,6 +2330,7 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_BUFFS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2325,6 +2346,7 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_DEBUFFS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2340,6 +2362,7 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_SKILLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2355,6 +2378,7 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_SPELLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2398,6 +2422,7 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
     auto luck       = t->stat_luck();
     auto luck_total = t->stat_luck_total();
     if (luck_total != luck) {
+      TRACE_NO_INDENT();
       FOR_ALL_EQUIP(e)
       {
         Thingp iter = t->equip_get(e);
@@ -2413,6 +2438,7 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_CARRIED_BY(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2444,6 +2470,7 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_BUFFS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2459,6 +2486,7 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_DEBUFFS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2474,6 +2502,7 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_SKILLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2489,6 +2518,7 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_SPELLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2532,6 +2562,7 @@ void Game::wid_thing_info_add_stat_thv(WidPopup *w, Thingp t)
     auto thv       = t->stat_thv();
     auto thv_total = t->stat_thv_total();
     if (thv_total != thv) {
+      TRACE_NO_INDENT();
       FOR_ALL_EQUIP(e)
       {
         Thingp iter = t->equip_get(e);
@@ -2547,6 +2578,7 @@ void Game::wid_thing_info_add_stat_thv(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_CARRIED_BY(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2578,6 +2610,7 @@ void Game::wid_thing_info_add_stat_thv(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_BUFFS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2593,6 +2626,7 @@ void Game::wid_thing_info_add_stat_thv(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_DEBUFFS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2608,6 +2642,7 @@ void Game::wid_thing_info_add_stat_thv(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_SKILLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2623,6 +2658,7 @@ void Game::wid_thing_info_add_stat_thv(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_SPELLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2666,6 +2702,7 @@ void Game::wid_thing_info_add_stat_psi(WidPopup *w, Thingp t)
     auto psi       = t->stat_psi();
     auto psi_total = t->stat_psi_total();
     if (psi_total != psi) {
+      TRACE_NO_INDENT();
       FOR_ALL_EQUIP(e)
       {
         Thingp iter = t->equip_get(e);
@@ -2681,6 +2718,7 @@ void Game::wid_thing_info_add_stat_psi(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_CARRIED_BY(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2712,6 +2750,7 @@ void Game::wid_thing_info_add_stat_psi(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_BUFFS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2727,6 +2766,7 @@ void Game::wid_thing_info_add_stat_psi(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_DEBUFFS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2742,6 +2782,7 @@ void Game::wid_thing_info_add_stat_psi(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_SKILLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2757,6 +2798,7 @@ void Game::wid_thing_info_add_stat_psi(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_SPELLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2800,6 +2842,7 @@ void Game::wid_thing_info_add_stat_int(WidPopup *w, Thingp t)
     auto intel     = t->stat_int();
     auto int_total = t->stat_int_total();
     if (int_total != intel) {
+      TRACE_NO_INDENT();
       FOR_ALL_EQUIP(e)
       {
         Thingp iter = t->equip_get(e);
@@ -2815,6 +2858,7 @@ void Game::wid_thing_info_add_stat_int(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_CARRIED_BY(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2846,6 +2890,7 @@ void Game::wid_thing_info_add_stat_int(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_BUFFS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2861,6 +2906,7 @@ void Game::wid_thing_info_add_stat_int(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_DEBUFFS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2876,6 +2922,7 @@ void Game::wid_thing_info_add_stat_int(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_SKILLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2891,6 +2938,7 @@ void Game::wid_thing_info_add_stat_int(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_SPELLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2934,6 +2982,7 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
     auto con       = t->stat_con();
     auto con_total = t->stat_con_total();
     if (con_total != con) {
+      TRACE_NO_INDENT();
       FOR_ALL_EQUIP(e)
       {
         Thingp iter = t->equip_get(e);
@@ -2949,6 +2998,7 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_CARRIED_BY(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2980,6 +3030,7 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_BUFFS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -2995,6 +3046,7 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_DEBUFFS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -3010,6 +3062,7 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_SKILLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);
@@ -3025,6 +3078,7 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
         }
       }
 
+      TRACE_NO_INDENT();
       FOR_ALL_SPELLS_FOR(t, id)
       {
         auto iter = level->thing_find(id);

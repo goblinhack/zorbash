@@ -69,6 +69,7 @@ void Thing::level_change(Levelp l)
   }
 
   dbg("Move all equip");
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(iter)
   {
     auto it = equip_get(iter);
@@ -87,6 +88,7 @@ void Thing::level_change(Levelp l)
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_BODYPART(iter)
   {
     if (bodypart_id_get(iter).ok()) {
@@ -108,6 +110,7 @@ void Thing::level_change(Levelp l)
   }
 
   if (maybe_itemsp()) {
+    TRACE_NO_INDENT();
     FOR_ALL_CARRYING(id)
     {
       auto iter = level->thing_find(id);
@@ -116,6 +119,7 @@ void Thing::level_change(Levelp l)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_BUFFS(id)
     {
       auto iter = level->thing_find(id);
@@ -124,6 +128,7 @@ void Thing::level_change(Levelp l)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_DEBUFFS(id)
     {
       auto iter = level->thing_find(id);
@@ -132,6 +137,7 @@ void Thing::level_change(Levelp l)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_SKILLS(id)
     {
       auto iter = level->thing_find(id);
@@ -140,6 +146,7 @@ void Thing::level_change(Levelp l)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_SPELLS(id)
     {
       auto iter = level->thing_find(id);

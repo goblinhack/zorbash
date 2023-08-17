@@ -65,6 +65,7 @@ void Thing::resting(void)
     }
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);

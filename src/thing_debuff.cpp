@@ -32,7 +32,7 @@ bool Thing::debuff_add(Thingp what)
     }
   }
 
-  itemsp()->debuffs.push_front(what->id);
+  itemsp()->debuffs.push_back(what->id);
   what->owner_set(this);
   what->hide("add debuff");
 
@@ -68,7 +68,13 @@ bool Thing::debuff_remove(Thingp what)
   }
 
   what->owner_unset();
-  itemsp()->debuffs.remove(what->id);
+
+  auto items = itemsp();
+  auto found = std::find(items->debuffs.begin(), items->debuffs.end(), what->id);
+  if (found != items->debuffs.end()) {
+    items->debuffs.erase(found);
+  }
+
   game->set_request_to_remake_debuffbox();
 
   dbg("Removed %s", what->to_short_string().c_str());

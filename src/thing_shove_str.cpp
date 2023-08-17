@@ -24,6 +24,7 @@ int Thing::shove_strength_total(void)
     dbg3("Shove strength: with mod (%s): %d", bonus_to_string(shove_bonus()).c_str(), stat);
   }
 
+  TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
@@ -38,6 +39,7 @@ int Thing::shove_strength_total(void)
   }
 
   if (maybe_itemsp()) {
+    TRACE_NO_INDENT();
     FOR_ALL_CARRYING(id)
     {
       auto iter = level->thing_find(id);
@@ -64,6 +66,7 @@ int Thing::shove_strength_total(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_BUFFS(id)
     {
       auto iter = level->thing_find(id);
@@ -77,6 +80,7 @@ int Thing::shove_strength_total(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_DEBUFFS(id)
     {
       auto iter = level->thing_find(id);
@@ -90,6 +94,7 @@ int Thing::shove_strength_total(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_SKILLS(id)
     {
       auto iter = level->thing_find(id);
@@ -103,6 +108,7 @@ int Thing::shove_strength_total(void)
       }
     }
 
+    TRACE_NO_INDENT();
     FOR_ALL_SPELLS(id)
     {
       auto iter = level->thing_find(id);

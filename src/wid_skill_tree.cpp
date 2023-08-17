@@ -271,6 +271,7 @@ bool skill_is_available(Skillp skill_next)
         //
         if ((skill_curr->skill_up == skill_next) || (skill_curr->skill_down == skill_next)
             || (skill_curr->skill_left == skill_next) || (skill_curr->skill_right == skill_next)) {
+          TRACE_NO_INDENT();
           FOR_ALL_SKILLS_FOR(game->level->player, id)
           {
             auto iter = game->level->thing_find(id);
