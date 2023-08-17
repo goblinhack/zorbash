@@ -24,12 +24,13 @@ def tp_init(name, text_long_name):
     my.is_biome_ice(self, True)
     my.is_loggable(self, True)
     my.is_monst_class_B(self, True)
+    my.is_zorblin(self, True)
     my.on_born_do(self, "me.on_born()")
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
     my.on_you_nat_attack_attempt_do(self, "zorb_all.on_you_nat_attack_attempt()")
     my.stat_str(self, 8)
     my.text_description_long2(self, "This zorblin is world weary and longing for an early retirement. Can you help?")
-    my.text_description_short(self, "A very war-weary goblin.")
+    my.text_description_short(self, "A very war-weary zoblin.")
     # end sort marker
 
     delay = 300

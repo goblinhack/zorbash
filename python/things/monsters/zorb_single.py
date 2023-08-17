@@ -18,6 +18,7 @@ def tp_init(name, text_long_name):
     my.is_biome_ice(self, True)
     my.is_loggable(self, True)
     my.is_monst_class_A(self, True)
+    my.is_zorblin(self, True)
     my.on_born_do(self, "me.on_born()")
     my.text_description_short(self, "A very lesser and a bit insecure zorblin.")
     # end sort marker

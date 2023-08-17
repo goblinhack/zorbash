@@ -280,6 +280,10 @@ std::vector< Tpp > tp_find_wildcard(const std::string &name)
     out.push_back(tp_random_bones());
     return out;
   }
+  if (name == "random_zorblin") {
+    out.push_back(tp_random_zorblin());
+    return out;
+  }
   if (name == "random_wall_dungeon") {
     out.push_back(tp_random_wall_dungeon());
     return out;

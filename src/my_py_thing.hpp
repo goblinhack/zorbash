@@ -571,7 +571,6 @@ PyObject *thing_is_unused_flag107(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_unused_flag108(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag109(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag10(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag110(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag11(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag12(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag13(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -686,6 +685,7 @@ PyObject *thing_is_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_weapon(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_wooden(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_yeti(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_zorblin(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_jump_distance_bonus_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_jump_distance_bonus_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_jump_distance_bonus_set(PyObject *obj, PyObject *args, PyObject *keywds);

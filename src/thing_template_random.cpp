@@ -75,6 +75,7 @@ static Tpidmap tp_weapon;
 static Tpidmap tp_weapon_class_A;
 static Tpidmap tp_weapon_class_B;
 static Tpidmap tp_weapon_class_C;
+static Tpidmap tp_zorblin;
 // end sort marker1 }
 
 void tp_random_init(void)
@@ -92,6 +93,9 @@ void tp_random_init(void)
     }
     if (tp->is_bones()) {
       tp_bones.push_back(tp);
+    }
+    if (tp->is_zorblin()) {
+      tp_zorblin.push_back(tp);
     }
     if (tp->is_brazier()) {
       tp_brazier.push_back(tp);
@@ -379,6 +383,9 @@ void tp_random_init(void)
   }
   if (tp_bones.empty()) {
     DIE("No things for type:tp_bones");
+  }
+  if (tp_zorblin.empty()) {
+    DIE("No things for type:tp_zorblin");
   }
   if (tp_brazier.empty()) {
     DIE("No things for type:tp_brazier");
@@ -1214,6 +1221,16 @@ Tpp tp_random_bones(void)
     return nullptr;
   }
   return tp_get_with_no_rarity_filter(tp_bones);
+}
+
+Tpp tp_random_zorblin(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_zorblin.size())) {
+    ERR("No zorblin found");
+    return nullptr;
+  }
+  return tp_get_with_no_rarity_filter(tp_zorblin);
 }
 
 Tpp tp_random_wall_dungeon(void)

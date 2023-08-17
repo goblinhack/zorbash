@@ -26,6 +26,7 @@ def tp_init(name, text_long_name):
     my.is_daring(self, True)
     my.is_loggable(self, True)
     my.is_monst_class_A(self, True)
+    my.is_zorblin(self, True)
     my.on_born_do(self, "me.on_born()")
     my.on_death_of_my_leader_do(self, "me.on_death_of_my_leader()")
     my.on_you_nat_attack_attempt_do(self, "zorb_all.on_you_nat_attack_attempt()")

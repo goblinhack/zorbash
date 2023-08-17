@@ -759,7 +759,6 @@ int Tp::is_unused_flag107(void) const { return _is_unused_flag107; }
 int Tp::is_unused_flag108(void) const { return _is_unused_flag108; }
 int Tp::is_unused_flag109(void) const { return _is_unused_flag109; }
 int Tp::is_unused_flag10(void) const { return _is_unused_flag10; }
-int Tp::is_unused_flag110(void) const { return _is_unused_flag110; }
 int Tp::is_unused_flag11(void) const { return _is_unused_flag11; }
 int Tp::is_unused_flag12(void) const { return _is_unused_flag12; }
 int Tp::is_unused_flag13(void) const { return _is_unused_flag13; }
@@ -875,6 +874,7 @@ int Tp::is_weapon_class_C(void) const { return _is_weapon_class_C; }
 int Tp::is_weapon(void) const { return _is_weapon; }
 int Tp::is_wooden(void) const { return _is_wooden; }
 int Tp::is_yeti(void) const { return _is_yeti; }
+int Tp::is_zorblin(void) const { return _is_zorblin; }
 int Tp::item_height(void) const { return _item_height ? _item_height : 1; }
 int Tp::item_width(void) const { return _item_width ? _item_width : 1; }
 int Tp::jump_distance_bonus(void) const { return _jump_distance_bonus; }
@@ -1523,7 +1523,6 @@ void Tp::is_unused_flag107_set(int v) { _is_unused_flag107 = v; }
 void Tp::is_unused_flag108_set(int v) { _is_unused_flag108 = v; }
 void Tp::is_unused_flag109_set(int v) { _is_unused_flag109 = v; }
 void Tp::is_unused_flag10_set(int v) { _is_unused_flag10 = v; }
-void Tp::is_unused_flag110_set(int v) { _is_unused_flag110 = v; }
 void Tp::is_unused_flag11_set(int v) { _is_unused_flag11 = v; }
 void Tp::is_unused_flag12_set(int v) { _is_unused_flag12 = v; }
 void Tp::is_unused_flag13_set(int v) { _is_unused_flag13 = v; }
@@ -1639,6 +1638,7 @@ void Tp::is_weapon_class_C_set(int v) { _is_weapon_class_C = v; }
 void Tp::is_weapon_set(int v) { _is_weapon = v; }
 void Tp::is_wooden_set(int v) { _is_wooden = v; }
 void Tp::is_yeti_set(int v) { _is_yeti = v; }
+void Tp::is_zorblin_set(int v) { _is_zorblin = v; }
 void Tp::item_height_set(int v) { _item_height = v; }
 void Tp::item_width_set(int v) { _item_width = v; }
 void Tp::jump_distance_bonus_set(int v) { _jump_distance_bonus = v; }

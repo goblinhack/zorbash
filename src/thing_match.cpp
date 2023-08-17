@@ -457,7 +457,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag108() && (what == "is_unused_flag108")) { return true; }
   if (is_unused_flag109() && (what == "is_unused_flag109")) { return true; }
   if (is_unused_flag10() && (what == "is_unused_flag10")) { return true; }
-  if (is_unused_flag110() && (what == "is_unused_flag110")) { return true; }
   if (is_unused_flag11() && (what == "is_unused_flag11")) { return true; }
   if (is_unused_flag12() && (what == "is_unused_flag12")) { return true; }
   if (is_unused_flag13() && (what == "is_unused_flag13")) { return true; }
@@ -570,6 +569,7 @@ bool Tp::matches(const std::string &what)
   if (is_weapon() && (what == "is_weapon")) { return true; }
   if (is_wooden() && (what == "is_wooden")) { return true; }
   if (is_yeti() && (what == "is_yeti")) { return true; }
+  if (is_zorblin() && (what == "is_zorblin")) { return true; }
   if (minion_limit() && (what == "minion_limit")) { return true; }
   if (noise_additional_on_jump_end() && (what == "noise_additional_on_jump_end")) { return true; }
   if (noise_additional_on_teleporting() && (what == "noise_additional_on_teleporting")) { return true; }
@@ -1059,7 +1059,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag108() && (what == "is_unused_flag108")) { return true; }
   if (is_unused_flag109() && (what == "is_unused_flag109")) { return true; }
   if (is_unused_flag10() && (what == "is_unused_flag10")) { return true; }
-  if (is_unused_flag110() && (what == "is_unused_flag110")) { return true; }
   if (is_unused_flag11() && (what == "is_unused_flag11")) { return true; }
   if (is_unused_flag12() && (what == "is_unused_flag12")) { return true; }
   if (is_unused_flag13() && (what == "is_unused_flag13")) { return true; }
@@ -1172,6 +1171,7 @@ bool Thing::matches(const std::string &what)
   if (is_weapon() && (what == "is_weapon")) { return true; }
   if (is_wooden() && (what == "is_wooden")) { return true; }
   if (is_yeti() && (what == "is_yeti")) { return true; }
+  if (is_zorblin() && (what == "is_zorblin")) { return true; }
   if (minion_limit() && (what == "minion_limit")) { return true; }
   if (noise_additional_on_jump_end() && (what == "noise_additional_on_jump_end")) { return true; }
   if (noise_additional_on_teleporting() && (what == "noise_additional_on_teleporting")) { return true; }
@@ -1649,7 +1649,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag108") { return &Thing::is_unused_flag108; }
   if (what == "is_unused_flag109") { return &Thing::is_unused_flag109; }
   if (what == "is_unused_flag10") { return &Thing::is_unused_flag10; }
-  if (what == "is_unused_flag110") { return &Thing::is_unused_flag110; }
   if (what == "is_unused_flag11") { return &Thing::is_unused_flag11; }
   if (what == "is_unused_flag12") { return &Thing::is_unused_flag12; }
   if (what == "is_unused_flag13") { return &Thing::is_unused_flag13; }
@@ -1763,6 +1762,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_weapon") { return &Thing::is_weapon; }
   if (what == "is_wooden") { return &Thing::is_wooden; }
   if (what == "is_yeti") { return &Thing::is_yeti; }
+  if (what == "is_zorblin") { return &Thing::is_zorblin; }
   if (what == "minion_limit") { return &Thing::minion_limit; }
   if (what == "noise_additional_on_jump_end") { return &Thing::noise_additional_on_jump_end; }
   if (what == "noise_additional_on_teleporting") { return &Thing::noise_additional_on_teleporting; }

@@ -671,7 +671,6 @@ private:
   int _is_unused_flag108 {};
   int _is_unused_flag109 {};
   int _is_unused_flag11 {};
-  int _is_unused_flag110 {};
   int _is_unused_flag12 {};
   int _is_unused_flag124 {};
   int _is_unused_flag13 {};
@@ -786,6 +785,7 @@ private:
   int _is_weapon_class_C {};
   int _is_wooden {};
   int _is_yeti {};
+  int _is_zorblin {};
   int _item_height {};
   int _item_width {};
   int _jump_distance {};
@@ -2014,7 +2014,6 @@ public:
   int is_unused_flag108(void) const;
   int is_unused_flag109(void) const;
   int is_unused_flag10(void) const;
-  int is_unused_flag110(void) const;
   int is_unused_flag11(void) const;
   int is_unused_flag124(void) const;
   int is_unused_flag12(void) const;
@@ -2131,6 +2130,7 @@ public:
   int is_weapon(void) const;
   int is_wooden(void) const;
   int is_yeti(void) const;
+  int is_zorblin(void) const;
   int item_height(void) const;
   int item_width(void) const;
   int jump_distance_bonus(void) const;
@@ -2779,7 +2779,6 @@ public:
   void is_unused_flag108_set(int v);
   void is_unused_flag109_set(int v);
   void is_unused_flag10_set(int v);
-  void is_unused_flag110_set(int v);
   void is_unused_flag11_set(int v);
   void is_unused_flag124_set(int v);
   void is_unused_flag12_set(int v);
@@ -2896,6 +2895,7 @@ public:
   void is_weapon_set(int v);
   void is_wooden_set(int v);
   void is_yeti_set(int v);
+  void is_zorblin_set(int v);
   void item_height_set(int v);
   void item_width_set(int v);
   void jump_distance_bonus_set(int v);
@@ -3192,6 +3192,7 @@ class Tp *tp_random_ascend_sewer(void);
 class Tp *tp_random_bodypart(int bodypart);
 class Tp *tp_random_barrel(void);
 class Tp *tp_random_bones(void);
+class Tp *tp_random_zorblin(void);
 class Tp *tp_random_brazier(void);
 class Tp *tp_random_deco(void);
 class Tp *tp_random_descend_dungeon(void);

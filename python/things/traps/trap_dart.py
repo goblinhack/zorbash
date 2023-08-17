@@ -72,9 +72,6 @@ def tp_init(name, text_long_name):
     my.is_light_blocker_for_monst(self, True)  # to give cover to the player
     my.is_loggable(self, True)
     my.is_obs_ai(self, True)
-    my.is_obs_shoving(self, True)
-    my.is_obs_spawn_monst(self, True)
-    my.is_obs_ai(self, True)
     my.is_obs_jump_end(self, True)
     my.is_obs_jumping(self, True)
     my.is_obs_shooting(self, True)

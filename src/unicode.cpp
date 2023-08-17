@@ -169,8 +169,8 @@ wchar_t unicode_alias_to_char(const std::string &s)
   if (s == "solid_circle") {
     return UNICODE_ALIAS_FOR_SOLID_CIRCLE;
   }
-  if (s == "lollipop") {
-    return UNICODE_ALIAS_FOR_LOLLIPOP;
+  if (s == "neuter") {
+    return UNICODE_ALIAS_FOR_NEUTER;
   }
   if (s == "three_dots") {
     return UNICODE_ALIAS_FOR_THREE_DOTS;
@@ -348,7 +348,7 @@ wchar_t unicode_alias_to_char(wchar_t in)
     case UNICODE_ALIAS_FOR_MUSIC_NOTE : return L'♪';
     case UNICODE_ALIAS_FOR_CIRCLE : return L'o';
     case UNICODE_ALIAS_FOR_SOLID_CIRCLE : return L'⏺';
-    case UNICODE_ALIAS_FOR_LOLLIPOP : return L'⚲';
+    case UNICODE_ALIAS_FOR_NEUTER : return L'⚲';
     case UNICODE_ALIAS_FOR_THREE_DOTS : return L'…';
     case UNICODE_ALIAS_FOR_CURSOR : return L'_';
     case UNICODE_ALIAS_FOR_BLOCK : return L'█';

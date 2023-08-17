@@ -427,6 +427,7 @@ public:
   Thingp spawn_at(const std::string &what);
   Thingp spawn_at(const std::string &what, point p);
   Thingp spawn_minion_at_my_position(const std::string &what);
+  Thingp spawn_minion_next_to(const std::string &what);
   Thingp spawn_owned_thing_at_my_position(const std::string &what);
   Thingp top_mob(void);
   Thingp top_owner_internal(void);
@@ -1791,7 +1792,6 @@ public:
   int is_unused_flag108(void);
   int is_unused_flag109(void);
   int is_unused_flag10(void);
-  int is_unused_flag110(void);
   int is_unused_flag11(void);
   int is_unused_flag12(void);
   int is_unused_flag13(void);
@@ -1908,6 +1908,7 @@ public:
   int is_weapon(void);
   int is_wooden(void);
   int is_yeti(void);
+  int is_zorblin(void);
   int item_count_excluding_charges(Tpp item);
   int item_count_including_charges(Tpp item);
   int item_enchant_count(const int slot);

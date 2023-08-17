@@ -745,10 +745,10 @@ int Thing::is_unused_flag109(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag109());
 }
-int Thing::is_unused_flag110(void)
+int Thing::is_zorblin(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag110());
+  return (tp()->is_zorblin());
 }
 int Thing::is_turret(void)
 {

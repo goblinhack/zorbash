@@ -1556,6 +1556,50 @@ PyObject *spawn_minion_at_my_position(PyObject *obj, PyObject *args, PyObject *k
   Py_RETURN_FALSE;
 }
 
+PyObject *spawn_minion_next_to(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  char    *what = nullptr;
+  uint32_t id   = 0;
+
+  static char *kwlist[] = {(char *) "id", (char *) "what", nullptr};
+
+  TRACE_NO_INDENT();
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
+    ERR("%s: Bad args", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! id) {
+    ERR("%s: Missing 'id'", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! what) {
+    ERR("%s: Missing 'what'", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  PY_DBG("%s(%X, %s)", __FUNCTION__, id, what);
+
+  auto level = game->get_current_level();
+  if (! level) {
+    Py_RETURN_FALSE;
+  }
+
+  auto t = level->thing_find(ThingId(id));
+  if (unlikely(! t)) {
+    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
+    Py_RETURN_FALSE;
+  }
+
+  auto it = t->spawn_minion_next_to(std::string(what));
+  if (it) {
+    return Py_BuildValue("I", it->id);
+  }
+  Py_RETURN_FALSE;
+}
+
 PyObject *thing_get_followers(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();

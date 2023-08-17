@@ -868,3 +868,86 @@ Thingp Thing::spawn_minion_at_my_position(const std::string &what)
 
   return it;
 }
+
+Thingp Thing::spawn_minion_next_to(const std::string &what)
+{
+  TRACE_NO_INDENT();
+  dbg("Spawn %s next to", what.c_str());
+  TRACE_AND_INDENT();
+
+  std::vector< point >              possible;
+  static const std::vector< point > all_deltas = {
+      point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1), point(-1, 0), point(1, 0), point(0, 1),
+  };
+
+  auto tp_cands = tp_find_wildcard(what);
+  auto tpp      = pcg_one_of(tp_cands);
+  if (unlikely(! tpp)) {
+    err("Cannot find %s to spawn", what.c_str());
+    return nullptr;
+  }
+
+  //
+  // Don't spawn too many monsters
+  //
+  if (tpp->is_monst()) {
+    if (level->monst_count >= LEVEL_MONST_COUNT_ABS_MAX) {
+      dbg("No; too many monsters");
+      return nullptr;
+    }
+  }
+
+  //
+  // Don't spawn too many minions
+  //
+  if (is_mob()) {
+    if (minion_count() >= minion_limit()) {
+      dbg("No; too many minions");
+      return nullptr;
+    }
+  }
+
+  for (const auto &d : all_deltas) {
+    auto x = curr_at.x + d.x;
+    auto y = curr_at.y + d.y;
+    auto p = point(x, y);
+
+    //
+    // No spawning onto chasms for example
+    //
+    if (tpp->is_disliked_by_me(level, p)) {
+      continue;
+    }
+
+    if (collision_obstacle(p)) {
+      continue;
+    }
+
+    if (tpp->is_obs_ai_for_me(level, p)) {
+      continue;
+    }
+
+    possible.push_back(p);
+  }
+
+  auto cands = possible.size();
+  if (! cands) {
+    return nullptr;
+  }
+
+  auto chosen = possible[ pcg_random_range(0, cands) ];
+  auto it     = level->thing_new(what, chosen);
+  if (it) {
+    //
+    // Allow non normal minions to also be minions. No minion left behind.
+    //
+    if (! it->is_minion()) {
+      it->is_minion_set = true;
+    }
+    spawned_newborn(it);
+
+    return it;
+  }
+
+  return nullptr;
+}

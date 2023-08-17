@@ -577,7 +577,7 @@ static void gfx_init_font_ascii(void)
       // MUSIC_NOTE
       // CIRCLE
       // SOLID_CIRCLE
-      // LOLLIPOP
+      // NEUTER
       // THREE_DOTS
       // CURSOR
       // BLOCK

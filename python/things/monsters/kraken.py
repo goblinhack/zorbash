@@ -187,7 +187,7 @@ def tp_init(name, text_long_name):
             ascii_fg_char="", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile="kraken.sleeping.1", is_sleeping=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="\"", ascii_bg_col_name="", ascii_fg_col_name="green",
+            ascii_fg_char="o", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile="kraken.sleeping.2", is_sleeping=True, delay_ms=delay)
     my.tile(self,
             ascii_fg_char="", ascii_bg_col_name="", ascii_fg_col_name="green",

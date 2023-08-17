@@ -19,6 +19,7 @@ PyObject *spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *ke
 PyObject *spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_owned_thing_at_my_position(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_minion_at_my_position(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *spawn_minion_next_to(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -658,7 +659,6 @@ TP_SET_PROTO(is_unused_flag107)
 TP_SET_PROTO(is_unused_flag108)
 TP_SET_PROTO(is_unused_flag109)
 TP_SET_PROTO(is_unused_flag11)
-TP_SET_PROTO(is_unused_flag110)
 TP_SET_PROTO(is_unused_flag12)
 TP_SET_PROTO(is_unused_flag13)
 TP_SET_PROTO(is_unused_flag14)
@@ -772,6 +772,7 @@ TP_SET_PROTO(is_weapon_class_B)
 TP_SET_PROTO(is_weapon_class_C)
 TP_SET_PROTO(is_wooden)
 TP_SET_PROTO(is_yeti)
+TP_SET_PROTO(is_zorblin)
 TP_SET_PROTO(item_height)
 TP_SET_PROTO(item_width)
 TP_SET_PROTO(jump_distance)

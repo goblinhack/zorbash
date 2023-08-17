@@ -143,6 +143,7 @@ def tp_init(name, text_long_name):
     my.is_shovable(self, True)
     my.is_thief(self, 5)
     my.is_tickable(self, True)
+    my.is_zorblin(self, True)
     my.jump_distance(self, 3)
     my.move_speed(self, 100)
     my.noise_decibels_hearing(self, 10)
