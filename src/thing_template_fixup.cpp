@@ -333,6 +333,12 @@ void tp_fixup(void)
       }
     }
 
+    if (tp->is_able_to_use_ranged_weapons()) {
+      if (! tp->distance_throw()) {
+        DIE("Tp %s needs vision distance_throw if it is_able_to_use_ranged_weapons", tp->name().c_str());
+      }
+    }
+
     if (tp->is_interesting()) {
       if (tp->is_tmp_thing()) {
         DIE("Tp %s cannot be both interesting and temporary", tp->name().c_str());

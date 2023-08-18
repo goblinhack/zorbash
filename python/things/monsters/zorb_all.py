@@ -57,6 +57,8 @@ def tp_init(name, text_long_name):
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 10)
     my.distance_avoid(self, 5)
+    my.distance_throw(self, 6)
+    my.is_able_to_use_ranged_weapons(self, True)
     my.distance_leader_max(self, 5)
     my.distance_vision(self, 7)
     my.dmg_nat_att_dice(self, "1d4+2")
