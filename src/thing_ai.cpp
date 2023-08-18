@@ -768,40 +768,32 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
               if (! get(ai->can_see_ever.can_see, o.x, o.y) && ! get(ai->interrupt_map.val, o.x, o.y)) {
 
                 TRACE_NO_INDENT();
-                FOR_ALL_THINGS_THAT_INTERACT(level, it, o.x, o.y)
+                FOR_ALL_THINGS_THAT_INTERACT(level, item, o.x, o.y)
                 {
-                  if (it == this) {
+                  if (item == this) {
                     continue;
                   }
 
-                  if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
-                    continue;
-                  }
-
-                  if (! can_see_is_invisible(it)) {
-                    continue;
-                  }
-
-                  if (worth_collecting(it) > 0) {
+                  if (worth_collecting(item) > 0) {
                     set(ai->interrupt_map.val, o.x, o.y, game->tick_current);
                     if (check_for_interrupts) {
                       something_changed++;
-                      AI_LOG("Interrupted by thing worth collecting", it);
+                      AI_LOG("Interrupted by thing worth collecting", item);
                     }
                   }
-                  if (worth_eating(it)) {
+                  if (worth_eating(item)) {
                     set(ai->interrupt_map.val, o.x, o.y, game->tick_current);
                     if (check_for_interrupts) {
                       something_changed++;
-                      AI_LOG("Interrupted by edible collecting", it);
+                      AI_LOG("Interrupted by edible collecting", item);
                     }
                   }
 
-                  if (is_dangerous(it)) {
+                  if (is_dangerous(item)) {
                     set(ai->interrupt_map.val, o.x, o.y, game->tick_current);
                     if (check_for_interrupts) {
                       something_changed++;
-                      AI_LOG("Interrupted by dangerous thing", it);
+                      AI_LOG("Interrupted by dangerous thing", item);
                     }
                   }
                 }

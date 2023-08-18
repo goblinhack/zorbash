@@ -148,6 +148,10 @@ void Thing::resurrect_stop(void)
 {
   TRACE_NO_INDENT();
 
+  if (! is_resurrecting) {
+    return;
+  }
+
   dbg("Unable to resurrect");
   tick_resurrect_when_set(0);
   is_resurrecting = false;

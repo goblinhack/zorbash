@@ -11,6 +11,20 @@
 int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
 {
   //
+  // Don't be silly and try to carry things that are falling. Yes this happened.
+  //
+  if (item->is_changing_level || item->is_hidden || item->is_falling || item->is_jumping) {
+    return -1;
+  }
+
+  //
+  // Can't carry what you cannot see.
+  //
+  if (! can_see_is_invisible(item)) {
+    return -1;
+  }
+
+  //
   // Recently dropped?
   //
   if (collect_penalty_get(item)) {

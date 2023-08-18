@@ -29,6 +29,7 @@ void Level::handle_all_pending_things(void)
   animated_things_pending_add = {};
 
   for (auto &i : all_things_pending_fall) {
+    i.second->log("Pending fall");
     i.second->fall_to_next_level();
   }
   all_things_pending_fall = {};
@@ -121,7 +122,7 @@ void Level::handle_input_events(void)
 void Level::tick_(void)
 {
   TRACE_NO_INDENT();
-  DBG("Level tick");
+  dbg("Level tick");
 
   if (g_opt_test_dungeon_gen) {
     //
@@ -243,26 +244,31 @@ void Level::tick_(void)
     //
     if (g_opt_test_dungeon_gen || g_opt_ascii || fade_out_finished) {
       if (player && player->is_waiting_to_descend_dungeon) {
+        dbg("Level tick: player is waiting to descend into the dungeon");
         if (! player->descend_dungeon()) {
           player->err("Failed to descend dungeon");
         }
       }
       if (player && player->is_waiting_to_ascend_dungeon) {
+        dbg("Level tick: player is waiting to ascend from dungeon");
         if (! player->ascend_dungeon()) {
           player->err("Failed to ascend dungeon");
         }
       }
       if (player && player->is_waiting_to_descend_sewer) {
+        dbg("Level tick: player is waiting to descend into the sewer");
         if (! player->descend_sewer()) {
           player->err("Failed to descend sewer");
         }
       }
       if (player && player->is_waiting_to_ascend_sewer) {
+        dbg("Level tick: player is waiting to ascend from the sewer");
         if (! player->ascend_sewer()) {
           player->err("Failed to ascend sewer");
         }
       }
       if (player && player->is_waiting_to_leave_level_has_completed_fall) {
+        dbg("Level tick: player is waiting to leave level after fall");
         player->fall_to_next_level();
       }
       fade_out_finished = false;
@@ -278,6 +284,14 @@ void Level::tick_(void)
     if (! game->tick_requested.empty()) {
       tick_begin_now();
     }
+
+    dbg("Level tick is done");
+
+    if (player && game->robot_mode) {
+      dbg("Kick the robot");
+      player->ai_tick();
+    }
+
     return;
   }
 
@@ -481,6 +495,7 @@ void Level::tick_(void)
     }
 
     if (t->is_waiting_to_leave_level_has_completed_fall) {
+      t->log("Waiting to fall");
       t->fall_to_next_level();
       if ((wait_count > wait_count_max) && ! game->things_are_moving) {
         t->con("Waiting on waiting to fall thing longer than expected: %s", t->to_dbg_string().c_str());

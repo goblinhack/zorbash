@@ -216,12 +216,22 @@ float Thing::fall_curr(void)
 
 bool Thing::fall_to_next_level(void)
 {
+  TRACE_NO_INDENT();
+
   if (! maybe_infop()) {
     return false;
   }
 
   dbg("Try to fall to next level");
   TRACE_AND_INDENT();
+
+  //
+  // Don't let items fall first. The owner has to fall.
+  //
+  if (immediate_owner()) {
+    dbg("Do not fall to next level, wait for owner to fall.");
+    return false;
+  }
 
   //
   // Fall to the next level that exists beneath. If nothing exists, fall into the void.
@@ -295,6 +305,7 @@ bool Thing::fall_to_next_level(void)
 
     dbg("Try to fall to %d,%d", x, y);
     if (! l->is_able_to_stand_on(x, y)) {
+      dbg("No, %d,%d is not solid to stand on", x, y);
       continue;
     }
 
@@ -314,6 +325,8 @@ bool Thing::fall_to_next_level(void)
 
     if (l->is_floor(x, y) || l->is_corridor(x, y) || l->is_bridge(x, y) || l->is_water(x, y) || l->is_fire(x, y)
         || l->is_lava(x, y)) {
+
+      dbg("Try to fall to onto a solid surface at %d,%d", x, y);
 
       if (is_player()) {
         game->level = l;

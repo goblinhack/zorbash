@@ -77,9 +77,18 @@ bool Tp::is_obs_ai_for_me(Levelp level, point p)
 //
 bool Thing::collision_obstacle(Thingp it)
 {
+  TRACE_NO_INDENT();
+  verify(MTYPE_THING, it);
+
   auto p = point(it->curr_at.x, it->curr_at.y);
 
+  TRACE_NO_INDENT();
   if (it == this) {
+    return false;
+  }
+
+  if (! level) {
+    err("No level for thing?");
     return false;
   }
 
@@ -94,6 +103,7 @@ bool Thing::collision_obstacle(Thingp it)
   // Limit krakens to the depths, but allow eels and piranha_giants free roam.
   //
   if (is_swimmer()) {
+    TRACE_NO_INDENT();
     if (environ_likes_deep_water() && environ_likes_shallow_water()) {
       if (! level->is_water(it->curr_at)) {
         return true;
@@ -119,6 +129,7 @@ bool Thing::collision_obstacle(Thingp it)
   // Allow cleaners to engulf/swallow attack
   //
   if (is_engulfer() && can_eat(it)) {
+    TRACE_NO_INDENT();
     if (it->thing_size() > thing_size()) {
       return false;
     }
@@ -128,6 +139,7 @@ bool Thing::collision_obstacle(Thingp it)
   // Stop tentacleyes piling on top of each other
   //
   if (it->is_floating() || it->is_flying()) {
+    TRACE_NO_INDENT();
     if (is_floating() || is_flying()) {
       IF_DEBUG3 { dbg("Collision obstacle (flying): %s", it->to_short_string().c_str()); }
       return true;
@@ -138,6 +150,7 @@ bool Thing::collision_obstacle(Thingp it)
   // Stop ghosts piling on top of each other
   //
   if (it->is_ethereal()) {
+    TRACE_NO_INDENT();
     if (is_ethereal()) {
       IF_DEBUG3 { dbg("Collision obstacle (ethereal): %s", it->to_short_string().c_str()); }
       return true;
@@ -148,6 +161,7 @@ bool Thing::collision_obstacle(Thingp it)
   // Allow movement through open doors only
   //
   if (it->is_obs_wall_or_door()) {
+    TRACE_NO_INDENT();
     if (is_able_to_walk_through_walls()) {
       return false;
     }
@@ -159,6 +173,7 @@ bool Thing::collision_obstacle(Thingp it)
   }
 
   if (it->is_obs_destructable()) {
+    TRACE_NO_INDENT();
     if (! it->is_open) {
       IF_DEBUG3 { dbg("Collision obstacle (not open and destructable): %s", it->to_short_string().c_str()); }
       return true;
@@ -166,6 +181,7 @@ bool Thing::collision_obstacle(Thingp it)
   }
 
   if (is_player()) {
+    TRACE_NO_INDENT();
     if (it->is_alive_monst()) {
       //
       // Ignore is_ethereal to make it easier to attack ghosts
@@ -174,6 +190,7 @@ bool Thing::collision_obstacle(Thingp it)
       return true;
     }
   } else if (is_monst()) {
+    TRACE_NO_INDENT();
     auto monst_count = level->is_monst(p);
 
     //
@@ -253,6 +270,7 @@ bool Thing::collision_obstacle(Thingp it)
   }
 
   if (it->is_monst()) {
+    TRACE_NO_INDENT();
     if (it->is_dead) {
       //
       // Allow passing over corpses

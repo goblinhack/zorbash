@@ -52,6 +52,8 @@ void Thing::update_tick(void)
 
 void Thing::achieve_goals_in_life(void)
 {
+  TRACE_NO_INDENT();
+
   //
   // Reset various temporary flags.
   //
@@ -249,6 +251,7 @@ void Thing::achieve_goals_in_life(void)
     return;
   }
 
+  TRACE_NO_INDENT();
   if (! is_player()) {
     if (! is_sleeping) {
       if (try_to_escape()) {
@@ -261,14 +264,17 @@ void Thing::achieve_goals_in_life(void)
         return;
       }
 
+      TRACE_NO_INDENT();
       if (is_able_to_jump()) {
         if (d1000() < tp()->chance_d1000_jump_randomly()) {
           dbg("Try to randomly jump");
-          if (! collision_obstacle(level->player)) {
+          if (level->player && ! collision_obstacle(level->player)) {
+            TRACE_NO_INDENT();
             if (try_to_jump_towards_player()) {
               return;
             }
           } else {
+            TRACE_NO_INDENT();
             if (try_to_jump()) {
               return;
             }
@@ -278,6 +284,7 @@ void Thing::achieve_goals_in_life(void)
     }
   }
 
+  TRACE_NO_INDENT();
   if (on_tick()) {
     dbg("Did something during tick callback");
     return;
@@ -296,6 +303,7 @@ void Thing::achieve_goals_in_life(void)
   //
   // If this thing has AI, it can try and reach goals
   //
+  TRACE_NO_INDENT();
   if (is_monst() || is_turret() || is_totem()) {
     // dbg("Tick %d get next hop", game->tick_current);
     ai_get_next_hop();
@@ -307,14 +315,17 @@ void Thing::achieve_goals_in_life(void)
   //
   // If there is a next hop to go to, do it.
   //
+  TRACE_NO_INDENT();
   if (is_player()) {
     //
     // Pop the next player move at the end of the game tick
     //
+    TRACE_NO_INDENT();
     if (maybe_aip() && aip()->move_path.empty()) {
       //
       // If resting, keep resting
       //
+      TRACE_NO_INDENT();
       if (infop()->monst_state == MONST_STATE_MOVING) {
         change_state(MONST_STATE_IDLE, "move path is empty");
       }

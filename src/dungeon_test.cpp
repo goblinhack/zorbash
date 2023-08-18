@@ -109,17 +109,26 @@ void dungeon_test(void)
     wid_display_all();
 
     if (player) {
+      player->log("Tick");
+
+      if (player->is_waiting_to_leave_level_has_completed_fall) {
+        player->log("Waiting to leave level after fall");
+      }
+
       if (player->is_waiting_to_descend_dungeon) {
+        player->log("Waiting to descend dungeon");
         player->descend_dungeon(true, game->level->world_at + point3d(0, 0, 2));
       }
 
       if (player->is_waiting_to_descend_sewer) {
+        player->log("Waiting to descend sewer");
         if (! player->descend_sewer()) {
           player->err("Failed to descend sewer");
         }
       }
 
       if (player->is_waiting_to_ascend_sewer) {
+        player->log("Waiting to ascend sewer");
         if (! player->ascend_sewer()) {
           player->err("Failed to ascend sewer");
         }
