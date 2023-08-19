@@ -158,14 +158,12 @@ uint8_t sdl_init(void)
 
   LOG("SDL: Init audio");
   if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
-    SDL_MSG_BOX("SDL_Init failed %s", SDL_GetError());
     DIE("SDL_Init failed %s", SDL_GetError());
     return false;
   }
 
   LOG("SDL: Init video");
   if (SDL_VideoInit(nullptr) != 0) {
-    SDL_MSG_BOX("SDL_VideoInit failed %s", SDL_GetError());
     DIE("SDL_VideoInit failed %s", SDL_GetError());
     return false;
   }
@@ -195,7 +193,6 @@ uint8_t sdl_init(void)
 
     LOG("SDL: Init display");
     if (SDL_GetCurrentDisplayMode(0, &mode) < 0) {
-      SDL_MSG_BOX("SDL_GetCurrentDisplayMode couldn't set windowed display: %s", SDL_GetError());
       DIE("SDL_GetCurrentDisplayMode couldn't set windowed display: %s", SDL_GetError());
       return false;
     }
@@ -256,9 +253,6 @@ uint8_t sdl_init(void)
                                 video_is_unused_flags);
   if (! sdl.window) {
     ERR("SDL_CreateWindow couldn't set windowed display %ux%u: %s", video_width, video_height, SDL_GetError());
-    SDL_MSG_BOX("SDL_CreateWindow couldn't set windowed display %ux%u: %s", video_width, video_height,
-                SDL_GetError());
-
     game->config.reset();
     game->save_config();
     return false;
@@ -276,7 +270,6 @@ uint8_t sdl_init(void)
   if (! sdl.context) {
     SDL_ClearError();
     ERR("SDL_GL_CreateContext failed %s", SDL_GetError());
-    SDL_MSG_BOX("SDL_GL_CreateContext failed %s", SDL_GetError());
     return false;
   }
 
@@ -285,7 +278,6 @@ uint8_t sdl_init(void)
   if (SDL_GL_MakeCurrent(sdl.window, sdl.context) < 0) {
     SDL_ClearError();
     ERR("SDL_GL_MakeCurrent failed %s", SDL_GetError());
-    SDL_MSG_BOX("SDL_GL_MakeCurrent failed %s", SDL_GetError());
     return false;
   }
 

@@ -49,6 +49,8 @@ void log_catchup_missing_indent_levels(void)
 
 static void log_(const char *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
+
   char buf[ MAXLONGSTR ];
   int  len = 0;
 
@@ -72,6 +74,8 @@ static void log_(const char *fmt, va_list args)
 
 static void log_missing_(const char *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
+
   char buf[ MAXLONGSTR ];
   int  len = 0;
 
@@ -95,6 +99,8 @@ static void log_missing_(const char *fmt, va_list args)
 
 void LOG(const char *fmt, ...)
 {
+  TRACE_NO_INDENT();
+
   log_catchup_missing_indent_levels();
   va_list args;
   va_start(args, fmt);
@@ -104,6 +110,8 @@ void LOG(const char *fmt, ...)
 
 void LOG_MISSING(const char *fmt, ...)
 {
+  TRACE_NO_INDENT();
+
   va_list args;
   va_start(args, fmt);
   log_missing_(fmt, args);
@@ -112,6 +120,8 @@ void LOG_MISSING(const char *fmt, ...)
 
 static void warn_(const char *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
+
   char buf[ MAXLONGSTR ];
   int  len = 0;
 
@@ -130,6 +140,8 @@ static void warn_(const char *fmt, va_list args)
 
 void WARN(const char *fmt, ...)
 {
+  TRACE_NO_INDENT();
+
   va_list args;
 
   va_start(args, fmt);
@@ -139,6 +151,8 @@ void WARN(const char *fmt, ...)
 
 static void con_(const char *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
+
   char buf[ MAXLONGSTR ];
   int  len = 0;
 
@@ -161,6 +175,8 @@ static void con_(const char *fmt, va_list args)
 
 static void con_(const wchar_t *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
+
   if (! g_opt_test_dungeon_gen) {
     char buf[ MAXLONGSTR ];
 
@@ -194,6 +210,8 @@ static void con_(const wchar_t *fmt, va_list args)
 
 void con(const wchar_t *fmt)
 {
+  TRACE_NO_INDENT();
+
   if (! g_opt_test_dungeon_gen) {
     char buf[ MAXLONGSTR ];
 
@@ -215,6 +233,8 @@ void con(const wchar_t *fmt)
 
 void topcon_(const char *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
+
   char buf[ MAXLONGSTR ];
   char ts[ MAXLONGSTR / 2 ];
   int  len = 0;
@@ -239,6 +259,8 @@ void topcon_(const char *fmt, va_list args)
 
 void topcon_(const wchar_t *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
+
   if (! g_opt_test_dungeon_gen) {
     char ts[ MAXLONGSTR ];
     ts[ 0 ] = '\0';
@@ -272,6 +294,8 @@ void topcon_(const wchar_t *fmt, va_list args)
 
 void topcon(const wchar_t *fmt)
 {
+  TRACE_NO_INDENT();
+
   if (! g_opt_test_dungeon_gen) {
     char ts[ MAXLONGSTR ];
     ts[ 0 ] = '\0';
@@ -293,6 +317,8 @@ void topcon(const wchar_t *fmt)
 
 void CON(const char *fmt, ...)
 {
+  TRACE_NO_INDENT();
+
   log_catchup_missing_indent_levels();
   va_list args;
   va_start(args, fmt);
@@ -302,6 +328,8 @@ void CON(const char *fmt, ...)
 
 void CON(const wchar_t *fmt, ...)
 {
+  TRACE_NO_INDENT();
+
   va_list args;
 
   va_start(args, fmt);
@@ -311,6 +339,8 @@ void CON(const wchar_t *fmt, ...)
 
 void TOPCON(const char *fmt, ...)
 {
+  TRACE_NO_INDENT();
+
   va_list args;
 
   va_start(args, fmt);
@@ -320,6 +350,8 @@ void TOPCON(const char *fmt, ...)
 
 void TOPCON(const wchar_t *fmt, ...)
 {
+  TRACE_NO_INDENT();
+
   va_list args;
 
   va_start(args, fmt);
@@ -329,6 +361,8 @@ void TOPCON(const wchar_t *fmt, ...)
 
 static void dying_(const char *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
+
   char buf[ MAXLONGSTR ];
   int  len = 0;
 
@@ -351,6 +385,8 @@ static void dying_(const char *fmt, va_list args)
 
 static void err_(const char *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
+
   static bool nested_error;
   if (nested_error) {
     return;
@@ -397,6 +433,8 @@ static void err_(const char *fmt, va_list args)
 
 static void croak_(const char *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
+
   if (g_die_occurred) {
     fprintf(stderr, "\nNESTED FATAL ERROR %s %s %d ", __FILE__, __FUNCTION__, __LINE__);
     exit(1);
@@ -435,6 +473,8 @@ static void croak_(const char *fmt, va_list args)
 
 void CROAK(const char *fmt, ...)
 {
+  TRACE_NO_INDENT();
+
   va_list args;
 
   va_start(args, fmt);
@@ -444,6 +484,8 @@ void CROAK(const char *fmt, ...)
 
 static void croak_clean_(const char *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
+
   if (g_die_occurred) {
     fprintf(stderr, "\nNESTED FATAL ERROR %s %s %d ", __FILE__, __FUNCTION__, __LINE__);
     exit(1);
@@ -457,6 +499,8 @@ static void croak_clean_(const char *fmt, va_list args)
 
 void CROAK_CLEAN(const char *fmt, ...)
 {
+  TRACE_NO_INDENT();
+
   va_list args;
 
   va_start(args, fmt);
@@ -466,6 +510,8 @@ void CROAK_CLEAN(const char *fmt, ...)
 
 void DYING(const char *fmt, ...)
 {
+  TRACE_NO_INDENT();
+
   va_list args;
 
   va_start(args, fmt);
@@ -475,6 +521,8 @@ void DYING(const char *fmt, ...)
 
 void myerr(const char *fmt, ...)
 {
+  TRACE_NO_INDENT();
+
   static bool nested_error;
   if (nested_error) {
     return;
@@ -511,6 +559,8 @@ void myerr(const char *fmt, ...)
 
 static void msgerr_(const char *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
+
   char buf[ MAXLONGSTR ];
   int  len = 0;
 
@@ -545,6 +595,8 @@ static void msgerr_(const char *fmt, va_list args)
 
 void GAME_UI_MSG_BOX(const char *fmt, ...)
 {
+  TRACE_NO_INDENT();
+
   va_list args;
 
   va_start(args, fmt);
@@ -554,45 +606,23 @@ void GAME_UI_MSG_BOX(const char *fmt, ...)
 
 static void sdl_msgerr_(const char *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
+
   char buf[ MAXLONGSTR ];
-#if SDL_MAJOR_VERSION >= 2
-  int ts_len;
-#endif
-  int len = 0;
 
-  callstack_dump();
-  backtrace_dump();
-
-  buf[ 0 ] = '\0';
-  if (! g_opt_test_dungeon_gen) {
-    get_timestamp(buf, MAXLONGSTR);
-    len = (int) strlen(buf);
-  }
-
-  snprintf(buf + len, MAXLONGSTR - len, "ERROR: ");
-
-  len = (int) strlen(buf);
-#if SDL_MAJOR_VERSION >= 2
-  ts_len = len;
-#endif
-
-  vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
+  vsnprintf(buf, MAXLONGSTR, fmt, args);
 
 #if SDL_MAJOR_VERSION >= 2
-  SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "zorbash", buf + ts_len, nullptr);
+  CON("INF: Show SDL message box");
+  SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "zorbash", buf, nullptr);
+  CON("INF: Finished SDL message box");
 #endif
-
-  putf(MY_STDERR, buf);
-  putf(MY_STDOUT, buf);
-
-  fprintf(stderr, "%s\n", buf);
-  FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
-
-  FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 }
 
 void SDL_MSG_BOX(const char *fmt, ...)
 {
+  TRACE_NO_INDENT();
+
   va_list args;
 
   va_start(args, fmt);
@@ -602,6 +632,8 @@ void SDL_MSG_BOX(const char *fmt, ...)
 
 static void botcon_(const char *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
+
   char buf[ MAXLONGSTR ];
   char ts[ MAXLONGSTR / 2 ];
   int  len = 0;
@@ -626,6 +658,8 @@ static void botcon_(const char *fmt, va_list args)
 
 static void botcon_(const wchar_t *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
+
   if (! g_opt_test_dungeon_gen) {
     char ts[ MAXLONGSTR ];
     ts[ 0 ] = '\0';
@@ -659,6 +693,8 @@ static void botcon_(const wchar_t *fmt, va_list args)
 
 void botcon(const wchar_t *fmt)
 {
+  TRACE_NO_INDENT();
+
   {
     // fwprintf(MY_STDOUT, L"%S\n", fmt);
     // term_log(fmt);
@@ -672,6 +708,8 @@ void botcon(const wchar_t *fmt)
 
 void BOTCON(const char *fmt, ...)
 {
+  TRACE_NO_INDENT();
+
   va_list args;
 
   va_start(args, fmt);
@@ -681,6 +719,8 @@ void BOTCON(const char *fmt, ...)
 
 void BOTCON(const wchar_t *fmt, ...)
 {
+  TRACE_NO_INDENT();
+
   va_list args;
 
   va_start(args, fmt);

@@ -15,6 +15,7 @@
 
 void Thing::log_(const char *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
@@ -36,6 +37,7 @@ void Thing::log_(const char *fmt, va_list args)
 
 void Thing::log(const char *fmt, ...)
 {
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
   log_catchup_missing_indent_levels();
 
@@ -48,6 +50,7 @@ void Thing::log(const char *fmt, ...)
 
 void Thing::dbg_(const char *fmt, ...)
 {
+  TRACE_NO_INDENT();
   IF_NODEBUG { return; }
 
   verify(MTYPE_THING, this);
@@ -62,6 +65,7 @@ void Thing::dbg_(const char *fmt, ...)
 
 void Thing::die_(const char *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
@@ -82,6 +86,7 @@ void Thing::die_(const char *fmt, va_list args)
 
 void Thing::die(const char *fmt, ...)
 {
+  TRACE_NO_INDENT();
   g_errored = true;
 
   verify(MTYPE_THING, this);
@@ -95,6 +100,7 @@ void Thing::die(const char *fmt, ...)
 
 void Thing::con_(const char *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
@@ -120,6 +126,7 @@ void Thing::con_(const char *fmt, va_list args)
 
 void Thing::topcon_(const char *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
@@ -146,6 +153,7 @@ void Thing::topcon_(const char *fmt, va_list args)
 
 void Thing::con(const char *fmt, ...)
 {
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
   auto    t = this;
   va_list args;
@@ -157,6 +165,7 @@ void Thing::con(const char *fmt, ...)
 
 void Thing::topcon(const char *fmt, ...)
 {
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
   auto    t = this;
   va_list args;
@@ -168,6 +177,7 @@ void Thing::topcon(const char *fmt, ...)
 
 void Thing::err_(const char *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
   static bool nested_error;
   if (nested_error) {
     return;
@@ -184,8 +194,6 @@ void Thing::err_(const char *fmt, va_list args)
     error_buf[ 0 ] = '\0';
     len            = (int) strlen(error_buf);
     vsnprintf(error_buf + len, MAXLONGSTR - len, fmt, args);
-
-    error_handler(error_buf);
   }
 
   verify(MTYPE_THING, this);
@@ -211,11 +219,14 @@ void Thing::err_(const char *fmt, va_list args)
   TRACE_NO_INDENT();
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 
+  error_handler(error_buf);
+
   nested_error = false;
 }
 
 void Thing::err(const char *fmt, ...)
 {
+  TRACE_NO_INDENT();
   static bool nested_error;
   if (nested_error) {
     return;
@@ -244,6 +255,7 @@ void Thing::err(const char *fmt, ...)
 
 void Thing::botcon_(const char *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
@@ -270,6 +282,7 @@ void Thing::botcon_(const char *fmt, va_list args)
 
 void Thing::botcon(const char *fmt, ...)
 {
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
   auto    t = this;
   va_list args;

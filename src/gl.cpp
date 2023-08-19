@@ -284,7 +284,6 @@ static void gl_init_fbo_(int fbo, GLuint *render_buf_id, GLuint *fbo_id, GLuint 
   //
 #ifdef _WIN32
   if (! glFramebufferTexture2D_EXT) {
-    SDL_MSG_BOX("glGenRenderbuffers_EXT is not present; fatal");
     DIE("GlGenRenderbuffers_EXT is not present; fatal");
     return;
   }

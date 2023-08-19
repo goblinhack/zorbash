@@ -23,7 +23,7 @@ extern size_t strlcat_(char *dst, const char *src, size_t size);
 //
 // Max long string size
 //
-#define MAXLONGSTR  4096
+#define MAXLONGSTR  (1024 * 16) // Needs to be big for long tracebacks
 #define MAXSTR      1024
 #define MAXSHORTSTR 128
 

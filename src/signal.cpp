@@ -5,6 +5,7 @@
 #include "my_backtrace.hpp"
 #include "my_game.hpp"
 #include "my_globals_extra.hpp"
+#include "my_string.hpp"
 #include <string.h>  // do not remove
 #include <strings.h> // do not remove
 #include <time.h>    // do not remove
@@ -18,25 +19,27 @@ void callstack_dump(void)
   for (auto depth = 0; depth < g_callframes_depth; depth++) {
     auto iter = &callframes[ depth ];
     fprintf(MY_STDERR, "(trace) %d %s, line %u\n", depth, iter->func, iter->line);
+    fflush(MY_STDERR);
   }
 
   CON("code trace");
   CON("==========");
   for (auto depth = 0; depth < g_callframes_depth; depth++) {
     auto iter = &callframes[ depth ];
-    CON("(trace) %d %s, line %u", depth, iter->func, iter->line);
+    CON("(con-trace) %d %s, line %u", depth, iter->func, iter->line);
   }
 }
 
 std::string callstack_string(void)
 {
-  char tmp[ 10000 ];
+  char tmp[ MAXLONGSTR ];
 
   *tmp = '\0';
 
   for (auto depth = 0; depth < g_callframes_depth; depth++) {
     auto iter = &callframes[ depth ];
-    snprintf(tmp + strlen(tmp), sizeof(tmp) - strlen(tmp), "(trace) %d %s, line %u\n", depth, iter->func, iter->line);
+    snprintf(tmp + strlen(tmp), sizeof(tmp) - strlen(tmp), "(strace) %d %s, line %u\n", depth, iter->func,
+             iter->line);
   }
 
   return std::string(tmp);
