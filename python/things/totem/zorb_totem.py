@@ -6,8 +6,14 @@ def on_idle_tick_freq_dice(me, x, y):
     if my.thing_is_frozen(me):
         return
 
-    if my.spawn_minion_next_to(me, "random_zorblin"):
-        my.thing_sound_play_channel(me, my.CHANNEL_MONST_BIRTH, "bones1")
+    roll = my.py_d100()
+    if roll < 5:
+        my.spawn_minion_next_to(me, "zorb_wizard")
+    elif roll < 10:
+        my.spawn_minion_next_to(me, "zorb_priest")
+    else:
+        my.spawn_minion_next_to(me, "zorb_single")
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST_BIRTH, "bones1")
 
 
 def on_death(me, x, y):
@@ -69,7 +75,7 @@ def tp_init(name, text_long_name):
     my.minion_limit(self, 4)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
-    my.on_idle_tick_freq_dice(self, "1d10+10:me.on_idle_tick_freq_dice()")
+    my.on_idle_tick_freq_dice(self, "1:me.on_idle_tick_freq_dice()")
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "A tall pillar smeared in grease and blood and with the grinning face of a monstrous zorblin carved into the stonework. It's eyes follow you. They really do, this is not a figure of speech.")
     my.text_description_short(self, "Goblin holy place.")
