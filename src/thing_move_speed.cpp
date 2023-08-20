@@ -19,7 +19,7 @@ int Thing::move_speed_total(void)
   stat += move_speed_bonus();
   if (stat != prev) {
     prev = stat;
-    // dbg("Move speed: with mod (%s): %d", bonus_to_string(move_speed_bonus()).c_str(), stat);
+    dbg("Move speed: with mod (%s): %d", bonus_to_string(move_speed_bonus()).c_str(), stat);
   }
 
   TRACE_NO_INDENT();
@@ -30,8 +30,8 @@ int Thing::move_speed_total(void)
       stat += iter->move_speed_total();
       if (stat != prev) {
         prev = stat;
-        // dbg2("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
-        //   bonus_to_string(iter->move_speed_bonus()).c_str(), stat);
+        dbg2("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
+             bonus_to_string(iter->move_speed_bonus()).c_str(), stat);
       }
     }
   }
@@ -58,8 +58,8 @@ int Thing::move_speed_total(void)
         stat += iter->move_speed_total();
         if (stat != prev) {
           prev = stat;
-          // dbg("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
-          //     bonus_to_string(iter->move_speed_bonus()).c_str(), stat);
+          dbg("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
+              bonus_to_string(iter->move_speed_bonus()).c_str(), stat);
         }
       }
     }
@@ -72,8 +72,8 @@ int Thing::move_speed_total(void)
         stat += iter->move_speed_total();
         if (stat != prev) {
           prev = stat;
-          // dbg("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
-          //    bonus_to_string(iter->move_speed_bonus()).c_str(), stat);
+          dbg("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
+              bonus_to_string(iter->move_speed_bonus()).c_str(), stat);
         }
       }
     }
@@ -86,8 +86,8 @@ int Thing::move_speed_total(void)
         stat += iter->move_speed_total();
         if (stat != prev) {
           prev = stat;
-          // dbg("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
-          //               bonus_to_string(iter->move_speed_bonus()).c_str(), stat);
+          dbg("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
+              bonus_to_string(iter->move_speed_bonus()).c_str(), stat);
         }
       }
     }
@@ -100,8 +100,8 @@ int Thing::move_speed_total(void)
         stat += iter->move_speed_total();
         if (stat != prev) {
           prev = stat;
-          // dbg("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
-          //               bonus_to_string(iter->move_speed_bonus()).c_str(), stat);
+          dbg("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
+              bonus_to_string(iter->move_speed_bonus()).c_str(), stat);
         }
       }
     }
@@ -114,8 +114,8 @@ int Thing::move_speed_total(void)
         stat += iter->move_speed_total();
         if (stat != prev) {
           prev = stat;
-          // dbg("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
-          //               bonus_to_string(iter->move_speed_bonus()).c_str(), stat);
+          dbg("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
+              bonus_to_string(iter->move_speed_bonus()).c_str(), stat);
         }
       }
     }

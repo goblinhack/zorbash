@@ -491,7 +491,7 @@ def init_tiles_16x16_main():
         "",
         "",
         "",
-        "buff_slow",
+        "debuff_slowed",
         "",
         "",
         "",

@@ -2,16 +2,17 @@ import my
 import tp
 
 
+def on_use(owner, item, target, x, y):
+    # my.topcon("owner  {} {}".format(my.thing_name_get(owner), my.thing_health(owner)))
+    # my.topcon("item   {} {}".format(my.thing_name_get(item), my.thing_health(item)))
+    # my.topcon("target {} {}".format(my.thing_name_get(target), my.thing_health(target)))
+    for it in my.level_get_all(item, x, y):
+        if my.thing_is_alive_monst(it) or my.thing_is_player(it):
+            my.thing_buff_add(it, "buff_is_invisible")
+
+
 def on_thrown(owner, me, x, y):
     explode(me, x, y)
-
-
-def on_use(owner, item, target, x, y):
-    # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
-    # my.con("item    {} {:X}".format(my.thing_name_get(item), item))
-    # my.con("target  {} {:X}".format(my.thing_name_get(target), target))
-    my.thing_buff_add(owner, "buff_is_invisible")
-    return
 
 
 def explode(me, x, y):

@@ -6,7 +6,10 @@ def on_use(owner, item, target, x, y):
     # my.topcon("owner  {} {}".format(my.thing_name_get(owner), my.thing_health(owner)))
     # my.topcon("item   {} {}".format(my.thing_name_get(item), my.thing_health(item)))
     # my.topcon("target {} {}".format(my.thing_name_get(target), my.thing_health(target)))
-    my.thing_buff_add(target, "debuff_slowed")
+    for it in my.level_get_all(item, x, y):
+        # my.topcon("it {} {}".format(my.thing_name_get(it), my.thing_health(it)))
+        if my.thing_is_alive_monst(it) or my.thing_is_player(it):
+            my.thing_buff_add(it, "debuff_slowed")
 
 
 def tp_init(name, text_long_name, text_short_name):
