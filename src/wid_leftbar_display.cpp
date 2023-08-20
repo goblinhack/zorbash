@@ -457,6 +457,58 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
         y_at++;
       }
     }
+
+    TRACE_NO_INDENT();
+    FOR_ALL_BUFFS_FOR(t, id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter) {
+        TRACE_NO_INDENT();
+        auto  w  = wid_new_square_button(wid_leftbar, "(Buff)");
+        point tl = make_point(0, y_at);
+        point br = make_point(width - 1, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "(" + iter->text_short_name() + ")");
+        if (g_opt_ascii) {
+          wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_ascii_green");
+        } else {
+          wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_green");
+        }
+        if (g_opt_test_dungeon_gen) {
+          wid_set_shape_none(w);
+        }
+        wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
+        wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
+        wid_set_thing_context(w, t, 0);
+        y_at++;
+      }
+    }
+
+    TRACE_NO_INDENT();
+    FOR_ALL_DEBUFFS_FOR(t, id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter) {
+        TRACE_NO_INDENT();
+        auto  w  = wid_new_square_button(wid_leftbar, "(Debuff)");
+        point tl = make_point(0, y_at);
+        point br = make_point(width - 1, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "(" + iter->text_short_name() + ")");
+        if (g_opt_ascii) {
+          wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_ascii_red");
+        } else {
+          wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_pixelart_red");
+        }
+        if (g_opt_test_dungeon_gen) {
+          wid_set_shape_none(w);
+        }
+        wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
+        wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
+        wid_set_thing_context(w, t, 0);
+        y_at++;
+      }
+    }
   }
 
   if (t->is_door() || t->is_ascend_dungeon() || t->is_descend_dungeon()) {

@@ -9,7 +9,7 @@ def on_use(owner, item, target, x, y):
     for it in my.level_get_all(item, x, y):
         # my.topcon("it {} {}".format(my.thing_name_get(it), my.thing_health(it)))
         if my.thing_is_alive_monst(it) or my.thing_is_player(it):
-            my.thing_buff_add(it, "debuff_slowed")
+            my.thing_debuff_add(it, "debuff_slowed")
 
 
 def tp_init(name, text_long_name, text_short_name):
