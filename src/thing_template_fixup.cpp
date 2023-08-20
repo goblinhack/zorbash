@@ -531,7 +531,10 @@ void tp_assign_allies(void)
     auto allies = tp->is_allied_with();
     for (auto ally : split_tokens(allies, ',')) {
       auto tp_cands = tp_find_wildcard(ally);
-      auto tp2      = pcg_one_of(tp_cands);
+      if (! tp_cands.size()) {
+        DIE("Tp no %s ally not found: %s", tp->name().c_str(), ally.c_str());
+      }
+      auto tp2 = pcg_one_of(tp_cands);
       if (! tp2) {
         DIE("Tp %s ally not found: %s", tp->name().c_str(), ally.c_str());
       }

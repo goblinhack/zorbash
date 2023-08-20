@@ -50,6 +50,10 @@ T non_pcg_one_of(C< T > &c)
   typename C< T >::iterator eo = c.end();
 
   size_t sz = eo - so;
+  if (! sz) {
+    DIE("no size given");
+  }
+
   return *(so + (rand() % sz));
 }
 
@@ -60,6 +64,10 @@ T pcg_one_of(C< T > &c)
   typename C< T >::iterator eo = c.end();
 
   size_t sz = eo - so;
+  if (! sz) {
+    DIE("no size given");
+  }
+
   return *(so + (pcg_rand() % sz));
 }
 

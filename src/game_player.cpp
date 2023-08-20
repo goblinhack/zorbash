@@ -168,6 +168,14 @@ void Game::place_player(void)
         level->thing_new("potion_health", point(x - 2, y));
       }
 
+      if (1) {
+        auto w = level->thing_new("spell_hasted", point(x, y));
+        t->spell_add(w);
+      }
+      if (1) {
+        auto w = level->thing_new("spell_slowed", point(x, y));
+        t->spell_add(w);
+      }
       if (0) {
         auto w = level->thing_new("spell_summon_rock", point(x, y));
         t->spell_add(w);

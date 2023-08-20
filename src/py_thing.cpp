@@ -144,9 +144,14 @@ PyObject *thing_shoot_projectile_or_laser_at(PyObject *obj, PyObject *args, PyOb
 
   IF_DEBUG { owner->log("Fire %s at %s", item, target->to_short_string().c_str()); }
 
-  auto what  = std::string(item);
-  auto cands = tp_find_wildcard(what);
-  auto itemp = pcg_one_of(cands);
+  auto what     = std::string(item);
+  auto tp_cands = tp_find_wildcard(what);
+  if (! tp_cands.size()) {
+    ERR("Cannot find any %s to spawn", what.c_str());
+    Py_RETURN_FALSE;
+  }
+
+  auto itemp = pcg_one_of(tp_cands);
   if (! itemp) {
     ERR("%s: Cannot find item to shoot %s", __FUNCTION__, item);
     Py_RETURN_FALSE;
@@ -217,8 +222,13 @@ PyObject *thing_throw_at(PyObject *obj, PyObject *args, PyObject *keywds)
 
   IF_DEBUG { owner->log("Throw %s at %s", item, target->to_short_string().c_str()); }
 
-  auto cands = tp_find_wildcard(item);
-  auto tp    = pcg_one_of(cands);
+  auto tp_cands = tp_find_wildcard(item);
+  if (! tp_cands.size()) {
+    ERR("Cannot find any %s to spawn", item);
+    Py_RETURN_FALSE;
+  }
+
+  auto tp = pcg_one_of(tp_cands);
   if (unlikely(! tp)) {
     ERR("Could not find to throw %s", item);
     Py_RETURN_FALSE;
@@ -890,13 +900,19 @@ PyObject *thing_buff_add(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  auto cands = tp_find_wildcard(what);
-  auto tp    = pcg_one_of(cands);
+  auto tp_cands = tp_find_wildcard(what);
+  if (! tp_cands.size()) {
+    ERR("Cannot find any %s to spawn", what);
+    Py_RETURN_FALSE;
+  }
+
+  auto tp = pcg_one_of(tp_cands);
   if (unlikely(! tp)) {
     ERR("%s: No buff tp called %s found", __FUNCTION__, what);
     Py_RETURN_FALSE;
   }
 
+  TRACE_NO_INDENT();
   owner->buff_add(tp);
   Py_RETURN_TRUE;
 }
@@ -930,8 +946,13 @@ PyObject *thing_debuff_add(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  auto cands = tp_find_wildcard(what);
-  auto tp    = pcg_one_of(cands);
+  auto tp_cands = tp_find_wildcard(what);
+  if (! tp_cands.size()) {
+    ERR("Cannot find any %s to spawn", what);
+    Py_RETURN_FALSE;
+  }
+
+  auto tp = pcg_one_of(tp_cands);
   if (unlikely(! tp)) {
     ERR("%s: No debuff tp called %s found", __FUNCTION__, what);
     Py_RETURN_FALSE;
@@ -970,8 +991,13 @@ PyObject *thing_buff_remove(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  auto cands = tp_find_wildcard(what);
-  auto tp    = pcg_one_of(cands);
+  auto tp_cands = tp_find_wildcard(what);
+  if (! tp_cands.size()) {
+    ERR("Cannot find any %s to spawn", what);
+    Py_RETURN_FALSE;
+  }
+
+  auto tp = pcg_one_of(tp_cands);
   if (unlikely(! tp)) {
     ERR("%s: No buff tp called %s found", __FUNCTION__, what);
     Py_RETURN_FALSE;
@@ -1010,8 +1036,13 @@ PyObject *thing_debuff_remove(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  auto cands = tp_find_wildcard(what);
-  auto tp    = pcg_one_of(cands);
+  auto tp_cands = tp_find_wildcard(what);
+  if (! tp_cands.size()) {
+    ERR("Cannot find any %s to spawn", what);
+    Py_RETURN_FALSE;
+  }
+
+  auto tp = pcg_one_of(tp_cands);
   if (unlikely(! tp)) {
     ERR("%s: No debuff tp called %s found", __FUNCTION__, what);
     Py_RETURN_FALSE;

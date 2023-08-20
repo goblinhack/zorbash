@@ -35,13 +35,18 @@ Thingp Level::thing_new(const std::string &name, const point at, Thingp owner)
   // like "random_monst_class_A") Else just find the named thing.
   //
   TRACE_NO_INDENT();
-  auto cands = tp_find_wildcard(this, at, name);
-  if (! cands.size()) {
+  auto tp_cands = tp_find_wildcard(this, at, name);
+  if (! tp_cands.size()) {
     DIE("Could not find thing '%s'", name.c_str());
     return nullptr;
   }
 
-  auto tp = pcg_one_of(cands);
+  if (! tp_cands.size()) {
+    err("Cannot find any %s to spawn", name.c_str());
+    return nullptr;
+  }
+
+  auto tp = pcg_one_of(tp_cands);
   if (! tp) {
     DIE("Could not create thing '%s'", name.c_str());
     return nullptr;
@@ -118,8 +123,13 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
     DIE("Thing template cannot be created: No name given");
   }
 
-  auto cands = tp_find_wildcard(name_in);
-  auto tpp   = pcg_one_of(cands);
+  auto tp_cands = tp_find_wildcard(name_in);
+  if (! tp_cands.size()) {
+    err("Cannot find any %s to spawn", name_in.c_str());
+    return;
+  }
+
+  auto tpp = pcg_one_of(tp_cands);
   if (unlikely(! tpp)) {
     ERR("Thing template [%s] not found", name_in.c_str());
     return;

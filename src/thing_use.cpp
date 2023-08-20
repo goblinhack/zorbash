@@ -11,6 +11,8 @@
 
 void Thing::on_use(Thingp what)
 {
+  TRACE_NO_INDENT();
+
   verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot use null thing");
@@ -47,6 +49,8 @@ void Thing::on_use(Thingp what)
 
 void Thing::on_use_skill(Thingp what)
 {
+  TRACE_NO_INDENT();
+
   verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot use null thing");
@@ -84,6 +88,8 @@ void Thing::on_use_skill(Thingp what)
 
 void Thing::on_swing(Thingp what)
 {
+  TRACE_NO_INDENT();
+
   verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot swing null thing");
@@ -119,6 +125,8 @@ void Thing::on_swing(Thingp what)
 
 void Thing::on_use(Thingp what, Thingp target)
 {
+  TRACE_NO_INDENT();
+
   verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot on_use null thing");
@@ -126,7 +134,7 @@ void Thing::on_use(Thingp what, Thingp target)
   }
 
   verify(MTYPE_THING, target);
-  if (! what) {
+  if (! target) {
     err("Cannot on_use null target");
     return;
   }
@@ -159,6 +167,8 @@ void Thing::on_use(Thingp what, Thingp target)
 
 void Thing::on_use_skill(Thingp what, Thingp target)
 {
+  TRACE_NO_INDENT();
+
   verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot on_use_skill null thing");
@@ -200,6 +210,8 @@ void Thing::on_use_skill(Thingp what, Thingp target)
 
 void Thing::on_final_use(Thingp what)
 {
+  TRACE_NO_INDENT();
+
   verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot final_use null thing");
@@ -236,6 +248,8 @@ void Thing::on_final_use(Thingp what)
 
 void Thing::on_final_use(Thingp what, Thingp target)
 {
+  TRACE_NO_INDENT();
+
   verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot on_final_use null thing");
@@ -277,6 +291,8 @@ void Thing::on_final_use(Thingp what, Thingp target)
 
 void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *use_options)
 {
+  TRACE_NO_INDENT();
+
   verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot used null thing");
@@ -464,6 +480,8 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
 
 bool Thing::use(Thingp what, UseOptions *use_options)
 {
+  TRACE_NO_INDENT();
+
   verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot use null thing");

@@ -15,6 +15,8 @@ my.map_load_spell_tree(
         "dC", "spell_dominate_monst3",
         "dD", "spell_dominate_monst4",
         "dE", "spell_dominate_monst5",
+        "hh", "spell_hasted",
+        "ss", "spell_slowed",
     ])
 
 my.map_load_spell_tree(
@@ -22,9 +24,9 @@ my.map_load_spell_tree(
     tree_data=[
         "mm                                      ",
         "                                        ",
+        "hh                                      ",
         "                                        ",
-        "                                        ",
-        "                                        ",
+        "ss                                      ",
         "                                        ",
         "                                        ",
         "                                        ",

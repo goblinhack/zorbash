@@ -99,7 +99,12 @@ bool Thing::spawn_next_to(const std::string &what)
   };
 
   auto tp_cands = tp_find_wildcard(what);
-  auto tpp      = pcg_one_of(tp_cands);
+  if (! tp_cands.size()) {
+    err("Cannot find any %s to spawn", what.c_str());
+    return false;
+  }
+
+  auto tpp = pcg_one_of(tp_cands);
   if (unlikely(! tpp)) {
     err("Cannot find %s to spawn", what.c_str());
     return false;
@@ -174,7 +179,12 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
   };
 
   auto tp_cands = tp_find_wildcard(what);
-  auto tpp      = pcg_one_of(tp_cands);
+  if (! tp_cands.size()) {
+    err("Cannot find any %s to spawn", what.c_str());
+    return false;
+  }
+
+  auto tpp = pcg_one_of(tp_cands);
   if (unlikely(! tpp)) {
     err("Cannot find %s to spawn", what.c_str());
     return false;
@@ -237,7 +247,12 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
   TRACE_NO_INDENT();
 
   auto tp_cands = tp_find_wildcard(what);
-  auto tpp      = pcg_one_of(tp_cands);
+  if (! tp_cands.size()) {
+    err("Cannot find any %s to spawn", what.c_str());
+    return false;
+  }
+
+  auto tpp = pcg_one_of(tp_cands);
   if (unlikely(! tpp)) {
     err("Cannot find %s to spawn", what.c_str());
     return false;
@@ -321,7 +336,12 @@ bool Thing::spawn_radius_range(const std::string &what, int radius_min, int radi
   TRACE_NO_INDENT();
 
   auto tp_cands = tp_find_wildcard(what);
-  auto tpp      = pcg_one_of(tp_cands);
+  if (! tp_cands.size()) {
+    err("Cannot find any %s to spawn", what.c_str());
+    return false;
+  }
+
+  auto tpp = pcg_one_of(tp_cands);
   if (unlikely(! tpp)) {
     err("Cannot find %s to spawn", what.c_str());
     return false;
@@ -378,7 +398,12 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, i
   TRACE_NO_INDENT();
 
   auto tp_cands = tp_find_wildcard(what);
-  auto tpp      = pcg_one_of(tp_cands);
+  if (! tp_cands.size()) {
+    err("Cannot find any %s to spawn", what.c_str());
+    return false;
+  }
+
+  auto tpp = pcg_one_of(tp_cands);
   if (unlikely(! tpp)) {
     err("Cannot find %s to spawn", what.c_str());
     return false;
@@ -516,7 +541,12 @@ bool Thing::spawn_set_fire_to_things_around_me(const std::string &what, int radi
   }
 
   auto tp_cands = tp_find_wildcard(what);
-  auto tp       = pcg_one_of(tp_cands);
+  if (! tp_cands.size()) {
+    err("Cannot find any %s to spawn", what.c_str());
+    return false;
+  }
+
+  auto tp = pcg_one_of(tp_cands);
   if (unlikely(! tp)) {
     err("Cannot find %s to spawn", what.c_str());
     return false;
@@ -647,7 +677,11 @@ bool Thing::spawn_things_around_me(const std::string &what, int radius)
       // Don't place krakens on lava
       //
       auto tp_cands = tp_find_wildcard(what);
-      auto tp       = pcg_one_of(tp_cands);
+      if (! tp_cands.size()) {
+        return false;
+      }
+
+      auto tp = pcg_one_of(tp_cands);
       if (! tp) {
         return false;
       }
@@ -885,7 +919,12 @@ Thingp Thing::spawn_minion_next_to(const std::string &what)
   };
 
   auto tp_cands = tp_find_wildcard(what);
-  auto tpp      = pcg_one_of(tp_cands);
+  if (! tp_cands.size()) {
+    err("Cannot find any %s to spawn", what.c_str());
+    return nullptr;
+  }
+
+  auto tpp = pcg_one_of(tp_cands);
   if (unlikely(! tpp)) {
     err("Cannot find %s to spawn", what.c_str());
     return nullptr;
