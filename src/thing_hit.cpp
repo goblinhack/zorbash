@@ -1603,13 +1603,17 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           }
           popup("%%fg=red$!");
         } else if (attack_options->attack[ THING_ATTACK_DIGEST ]) {
-          msg("%%fg=red$You are being consumed by %s for %d damage!%%fg=reset$", real_hitter->text_the().c_str(),
+          msg("%%fg=orange$You are being consumed by %s for %d damage!%%fg=reset$", real_hitter->text_the().c_str(),
               damage);
         } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
-          msg("%%fg=red$You are drowning!%%fg=reset$");
+          msg("%%fg=orange$You are drowning!%%fg=reset$");
         } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
-          msg("%%fg=orange$%s strikes you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
-              damage, dmg_type.c_str(), hitter->text_the().c_str());
+          if (hitter == real_hitter) {
+            msg("%%fg=orange$%s strikes you!%%fg=reset$", real_hitter->text_The().c_str());
+          } else {
+            msg("%%fg=orange$%s strikes you with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                hitter->text_the().c_str());
+          }
         } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
           if (hitter == real_hitter) {
             msg("%%fg=orange$%s burns you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
