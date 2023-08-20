@@ -200,8 +200,7 @@ bool Thing::possible_to_attack(const Thingp victim)
   // Or resurrected monsters.
   // Or carnivorous plants.
   //
-  if ((! is_dead && is_carnivorous_plant()) || is_totem() || is_turret() || is_totem() || is_alive_monst()
-      || is_resurrected) {
+  if ((! is_dead && is_carnivorous_plant()) || is_totem() || is_turret() || is_alive_monst() || is_resurrected) {
     //
     // Can we eats it?
     //
