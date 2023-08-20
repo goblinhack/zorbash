@@ -458,6 +458,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       }
     }
 
+    //
+    // Monster or player buffs
+    //
     TRACE_NO_INDENT();
     FOR_ALL_BUFFS_FOR(t, id)
     {
@@ -484,6 +487,9 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
       }
     }
 
+    //
+    // Monster or player debuffs
+    //
     TRACE_NO_INDENT();
     FOR_ALL_DEBUFFS_FOR(t, id)
     {
