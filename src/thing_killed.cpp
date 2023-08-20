@@ -91,7 +91,28 @@ void Thing::killed(Thingp defeater, const char *reason)
   // Unequip weapons. Keep player items around for post mortem analysis.
   //
   TRACE_NO_INDENT();
-  if (! is_player()) {
+  if (is_player()) {
+    //
+    // But hide any carry animations as a floating sword looks odd.
+    //
+    TRACE_NO_INDENT();
+    FOR_ALL_EQUIP(iter)
+    {
+      if (equip_id_carry_anim(iter).ok()) {
+        auto w = level->thing_find(equip_id_carry_anim(iter));
+        if (w) {
+          w->hide("player killed");
+        }
+      }
+
+      if (equip_id_use_anim(iter).ok()) {
+        auto w = level->thing_find(equip_id_use_anim(iter));
+        if (w) {
+          w->hide("player killed");
+        }
+      }
+    }
+  } else {
     TRACE_NO_INDENT();
     FOR_ALL_EQUIP(e) { unequip("owner is dead", e, false); }
   }
