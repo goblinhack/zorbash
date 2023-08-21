@@ -418,6 +418,7 @@ public:
   Thingp in_the_way_for_jumping(const point s, const point e, int x, int y);
   Thingp in_the_way_for_shooting(const point s, const point e, int x, int y);
   Thingp in_the_way_for_throwing(const point s, const point e, int x, int y);
+  Thingp in_the_way_for_casting(const point s, const point e, int x, int y);
   Thingp item_targeted_use_at(Thingp wand, point at);
   Thingp item_targeted_use_at(Thingp wand, Thingp target);
   Thingp leader(void);
@@ -438,6 +439,7 @@ public:
   std::vector< Thingp > in_the_way_for_jumping(const point s, const point e, size_t max_elems = 0);
   std::vector< Thingp > in_the_way_for_shooting(const point s, const point e, size_t max_elems = 0);
   std::vector< Thingp > in_the_way_for_throwing(const point s, const point e, size_t max_elems = 0);
+  std::vector< Thingp > in_the_way_for_casting(const point s, const point e, size_t max_elems = 0);
 
   // begin sort marker3 {
   bool ai_blocked_completely(void);
@@ -507,6 +509,7 @@ public:
   bool can_see_is_invisible(Thingp);
   bool carrying_anything(void);
   bool carry(Thingp w, CarryOptions);
+  bool cast_spell_at(Thingp w, Thingp target);
   bool check_anything_to_carry(CarryOptions);
   bool close_door(Thingp door);
   bool close(Thingp it);
@@ -1033,6 +1036,7 @@ public:
   float distance_recruitment_max_float(point p);
   float distance_recruitment_max_float(void);
   float distance_throw_get(void);
+  float distance_cast_spell_get(void);
   float distance_vision_get(void);
   float fadeup_fade_curr(void);
   float fadeup_height_curr(void);
@@ -1163,6 +1167,11 @@ public:
   int danger_initial_level(Thingp);
   int danger_initial_level(void);
   int defence(void);
+  int distance_cast_spell_decr(int);
+  int distance_cast_spell_decr(void);
+  int distance_cast_spell_incr(int);
+  int distance_cast_spell_incr(void);
+  int distance_cast_spell_set(int);
   int distance_leader_max(void);
   int distance_minion_vision_shared(void);
   int distance_recruitment_max(void);
@@ -1361,6 +1370,7 @@ public:
   int is_able_to_break_down_doors(void);
   int is_able_to_break_out_of_ice(void);
   int is_able_to_break_out_of_webs(void);
+  int is_able_to_cast_spells(void);
   int is_able_to_change_levels(void);
   int is_able_to_collect_keys(void);
   int is_able_to_dampen_footsteps(void);
@@ -1626,6 +1636,8 @@ public:
   int is_immune_to_negation(void);
   int is_immune_to_paralysis(void);
   int is_immune_to_poison(void);
+  int is_immune_to_slow_spell(void);
+  int is_immune_to_spell_hold(void);
   int is_immune_to_spiderwebs(void);
   int is_immune_to_stamina_drain(void);
   int is_immune_to_teleport_attack(void);
@@ -1689,6 +1701,7 @@ public:
   int is_obj_spawning_monst(void);
   int is_obj_spawning(void);
   int is_obs_ai(void);
+  int is_obs_casting(void);
   int is_obs_destructable(void);
   int is_obsidian(void);
   int is_obs_jump_end(void);
@@ -1751,6 +1764,8 @@ public:
   int is_snake(void);
   int is_soft(void);
   int is_spellbook(void);
+  int is_spell_hold(void);
+  int is_spell_slowed(void);
   int is_spell(void);
   int is_spider(void);
   int is_spiderweb(void);
@@ -1786,12 +1801,6 @@ public:
   int is_unused_flag101(void);
   int is_unused_flag102(void);
   int is_unused_flag103(void);
-  int is_unused_flag104(void);
-  int is_unused_flag105(void);
-  int is_unused_flag106(void);
-  int is_unused_flag107(void);
-  int is_unused_flag108(void);
-  int is_unused_flag109(void);
   int is_unused_flag10(void);
   int is_unused_flag11(void);
   int is_unused_flag12(void);
@@ -2983,7 +2992,15 @@ public:
 
   static std::function< int(Thingp) > matches_to_func(const std::string &what);
 
+  //
+  // Followers are things that follow a leaded, typically a captain or some sort.
+  //
   std::list< Thingp > all_followers_get(void);
+
+  //
+  // Minions are under the control of a mob
+  //
+  std::list< Thingp > all_minions_get(void);
 
   std::pair< Path, Path > astar_solve(const class Goal *goal, char path_debug, point s, point g, const Dmap *d,
                                       bool allow_diagonals);

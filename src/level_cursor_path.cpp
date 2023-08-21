@@ -42,8 +42,15 @@ void Level::cursor_path_draw_circle(void)
       too_far = true;
     }
   } else if (game->request_to_use_item) {
-    if (dist > what->range_max()) {
-      too_far = true;
+
+    if (what->is_spell()) {
+      if (dist > player->distance_cast_spell_get()) {
+        too_far = true;
+      }
+    } else {
+      if (dist > what->range_max()) {
+        too_far = true;
+      }
     }
   }
 

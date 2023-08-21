@@ -189,8 +189,14 @@ void Level::cursor_recreate(point curr_at)
       too_far = dist > player->distance_throw_get();
     }
 
-    if (what->range_max()) {
-      too_far = too_far || dist > what->range_max();
+    if (what->is_spell()) {
+      if (player->distance_cast_spell_get()) {
+        too_far = dist > player->distance_cast_spell_get();
+      }
+    } else {
+      if (what->range_max()) {
+        too_far = too_far || dist > what->range_max();
+      }
     }
 
     if (too_far) {

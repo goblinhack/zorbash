@@ -715,35 +715,35 @@ int Thing::is_unused_flag103(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag103());
 }
-int Thing::is_unused_flag104(void)
+int Thing::is_able_to_cast_spells(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag104());
+  return (tp()->is_able_to_cast_spells());
 }
-int Thing::is_unused_flag105(void)
+int Thing::is_spell_hold(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag105());
+  return (tp()->is_spell_hold());
 }
-int Thing::is_unused_flag106(void)
+int Thing::is_spell_slowed(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag106());
+  return (tp()->is_spell_slowed());
 }
-int Thing::is_unused_flag107(void)
+int Thing::is_immune_to_slow_spell(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag107());
+  return (tp()->is_immune_to_slow_spell());
 }
-int Thing::is_unused_flag108(void)
+int Thing::is_immune_to_spell_hold(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag108());
+  return (tp()->is_immune_to_spell_hold());
 }
-int Thing::is_unused_flag109(void)
+int Thing::is_obs_casting(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag109());
+  return (tp()->is_obs_casting());
 }
 int Thing::is_zorblin(void)
 {

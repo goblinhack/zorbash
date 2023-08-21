@@ -200,6 +200,7 @@ PyObject *level_is_moveable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_msg_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_necrotic_danger_level_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_no_tile_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_obs_casting_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_obs_destructable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_obs_jumping_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_obs_throwing_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -274,6 +275,7 @@ PyObject *level_move_speed_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_shove_strength_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_teleport_distance_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_all_minions_get(PyObject *obj, PyObject *args, PyObject *keywds);
 // end sort marker1 }
 
 #endif

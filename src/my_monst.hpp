@@ -104,6 +104,7 @@ public:
   int capacity_height     = {};
   int capacity_width      = {};
   int damage_this_tick    = {}; // Limits damage per tick to 50% of initial health
+  int distance_cast_spell = {};
   int distance_throw      = {};
   int enchant             = {};
   int enchant_max         = {};

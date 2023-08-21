@@ -7,6 +7,34 @@
 #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
+//
+// Get all minions following you
+//
+std::list< Thingp > Thing::all_minions_get(void)
+{
+  TRACE_NO_INDENT();
+
+  std::list< Thingp > out;
+  if (! minion_count()) {
+    return out;
+  }
+
+  //
+  // Slow, but not used too often
+  //
+  {
+    for (auto p : level->all_things) {
+      auto minion = p.second;
+      auto mob    = minion->immediate_mob();
+      if (mob && (mob == this)) {
+        out.push_back(minion);
+      }
+    }
+  }
+
+  return out;
+}
+
 float Thing::distance_from_mob(void)
 {
   auto mob = top_mob();

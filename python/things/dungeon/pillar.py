@@ -21,6 +21,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_floor_deco(self, True)
     my.is_interesting(self, True)
     my.is_obs_ai(self, True)
+    my.is_obs_casting(self, True)
     my.is_obs_jump_end(self, True)
     my.is_obs_jumping(self, True)
     my.is_obs_shooting(self, True)

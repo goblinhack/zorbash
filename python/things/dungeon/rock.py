@@ -50,6 +50,7 @@ def tp_init(
     my.is_hittable(self, True)
     my.is_light_blocker(self, True)
     my.is_obs_ai(self, True)
+    my.is_obs_casting(self, True)
     my.is_obs_jump_end(self, True)
     my.is_obs_jumping(self, True)
     my.is_obs_shooting(self, True)

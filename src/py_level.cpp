@@ -421,6 +421,45 @@ PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywd
   return lst;
 }
 
+PyObject *thing_all_minions_get(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_AND_INDENT();
+  uint32_t     id       = 0;
+  static char *kwlist[] = {(char *) "id", nullptr};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! id) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    Py_RETURN_NONE;
+  }
+
+  Thingp t = game->thing_find(id);
+  if (unlikely(! t)) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    Py_RETURN_NONE;
+  }
+
+  auto minions = t->all_minions_get();
+
+  if (minions.empty()) {
+    Py_RETURN_NONE;
+  }
+
+  auto      items = minions.size();
+  PyObject *lst   = PyList_New(items);
+  auto      item  = 0;
+  for (auto follower : minions) {
+    PyList_SetItem(lst, item, Py_BuildValue("I", follower->id));
+    item++;
+  }
+
+  return lst;
+}
+
 #define LEVEL_BODY_GET_BOOL_AT(__func__, __api__)                                                                    \
   PyObject *__func__(PyObject * obj, PyObject * args, PyObject * keywds)                                             \
   {                                                                                                                  \
@@ -657,6 +696,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_moveable_at, is_moveable)
 LEVEL_BODY_GET_BOOL_AT(level_is_msg_at, is_msg)
 LEVEL_BODY_GET_BOOL_AT(level_is_necrotic_danger_level_at, is_necrotic_danger_level)
 LEVEL_BODY_GET_BOOL_AT(level_is_no_tile_at, is_no_tile)
+LEVEL_BODY_GET_BOOL_AT(level_is_obs_casting_at, is_obs_casting)
 LEVEL_BODY_GET_BOOL_AT(level_is_obs_destructable_at, is_obs_destructable)
 LEVEL_BODY_GET_BOOL_AT(level_is_obs_jumping_at, is_obs_jumping)
 LEVEL_BODY_GET_BOOL_AT(level_is_obs_spawn_at, is_obs_spawn)

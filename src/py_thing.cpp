@@ -248,6 +248,75 @@ PyObject *thing_throw_at(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_TRUE;
 }
 
+PyObject *thing_cast_spell_at(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     owner_id  = 0;
+  char        *item      = nullptr;
+  uint32_t     victim_id = 0;
+  static char *kwlist[]  = {(char *) "owner", (char *) "item", (char *) "target", nullptr};
+
+  TRACE_NO_INDENT();
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IsI", kwlist, &owner_id, &item, &victim_id)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! owner_id) {
+    ERR("%s: No owner thing ID set", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  Thingp owner = game->thing_find(owner_id);
+  if (! owner) {
+    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    Py_RETURN_FALSE;
+  }
+
+  if (! item) {
+    ERR("%s: No item thing ID set", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! victim_id) {
+    ERR("%s: No target thing ID set", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  Thingp target = game->thing_find(victim_id);
+  if (! target) {
+    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    Py_RETURN_FALSE;
+  }
+
+  IF_DEBUG { owner->log("Throw %s at %s", item, target->to_short_string().c_str()); }
+
+  auto tp_cands = tp_find_wildcard(item);
+  if (! tp_cands.size()) {
+    ERR("Cannot find any %s to spawn", item);
+    Py_RETURN_FALSE;
+  }
+
+  auto tp = pcg_one_of(tp_cands);
+  if (unlikely(! tp)) {
+    ERR("Could not find to cast_spell %s", item);
+    Py_RETURN_FALSE;
+  }
+
+  auto what = owner->level->thing_new(tp, target->curr_at);
+  if (! what) {
+    ERR("Could not create to cast_spell %s", item);
+    Py_RETURN_FALSE;
+  }
+
+  if (! owner->cast_spell_at(what, target)) {
+    owner->err("Cannot cast_spell %s at %s", item, target->to_short_string().c_str());
+    Py_RETURN_FALSE;
+  }
+
+  Py_RETURN_TRUE;
+}
+
 PyObject *thing_death_by(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();

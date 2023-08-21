@@ -30,6 +30,10 @@ def on_want_to_shoot_at(me, target, target_x, target_y):  # Return True on doing
     # my.con("target  {} {:X} {},{}".format(my.thing_name_get(target), target, target_x, target_y))
     my.thing_sound_play_channel(me, my.CHANNEL_WEAPON, "lightning_a")
     my.thing_shoot_projectile_or_laser_at(me, "laser_lightning", target)
+
+    # if my.thing_is_player(target) or my.thing_is_alive_monst(target):
+    #     my.thing_cast_spell_at(me, "spell_slowed", target)
+
     return True
 
 
@@ -42,6 +46,7 @@ def tp_init(name, text_long_name):
     my.collision_check(self, True)
     my.collision_hit_priority(self, 5)
     my.dmg_received_doubled_from_water(self, True)
+    my.distance_throw(self, 5)
     my.environ_hates_water(self, 100)
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
@@ -76,7 +81,7 @@ def tp_init(name, text_long_name):
     my.is_described_in_leftbar(self, True)
     my.is_only_one_per_tile(self, True)
     my.is_described_when_hovering_over(self, True)
-    my.is_immune_to_fire(self, True)
+    my.is_immune_to_cold(self, True)
     my.is_immune_to_necrosis(self, True)
     my.is_immune_to_poison(self, True)
     my.is_immune_to_stamina_drain(self, True)
@@ -98,6 +103,7 @@ def tp_init(name, text_long_name):
     my.is_obs_shoving(self, True)
     my.is_obs_spawn_monst(self, True)
     my.is_obs_throwing(self, True)
+    my.is_obs_casting(self, True)
     my.is_shovable(self, True)
     my.is_tickable(self, True)
     my.light_color(self, "green")

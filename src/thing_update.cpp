@@ -87,6 +87,13 @@ void Thing::update(void)
   }
   {
     TRACE_NO_INDENT();
+    auto v = tpp->distance_cast_spell();
+    if (unlikely(v)) {
+      distance_cast_spell_set(v);
+    }
+  }
+  {
+    TRACE_NO_INDENT();
     auto v = tpp->enchant_max();
     if (unlikely(v)) {
       enchant_max_current_set(v);

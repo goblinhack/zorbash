@@ -339,6 +339,12 @@ void tp_fixup(void)
       }
     }
 
+    if (tp->is_able_to_cast_spells()) {
+      if (! tp->distance_cast_spell()) {
+        DIE("Tp %s needs vision distance_cast_spell if it is_able_to_cast_spells", tp->name().c_str());
+      }
+    }
+
     if (tp->is_interesting()) {
       if (tp->is_tmp_thing()) {
         DIE("Tp %s cannot be both interesting and temporary", tp->name().c_str());
