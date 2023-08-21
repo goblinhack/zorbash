@@ -142,7 +142,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targeted_laser, T
         }
       } else {
         if (item) {
-          msg("%s zaps %s %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
+          msg("%s zaps %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
         } else {
           msg("%s zaps %s.", text_The().c_str(), target->text_the().c_str());
         }
@@ -200,7 +200,7 @@ bool Thing::laser_shoot_at(Thingp item, const std::string &gfx_targeted_laser, T
             }
           } else {
             if (item) {
-              msg("%s zaps %s %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
+              msg("%s zaps %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
             } else {
               msg("%s zaps %s.", text_The().c_str(), target->text_the().c_str());
             }
