@@ -1,6 +1,9 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- mob beckoning?                                                                                                                               -->
+<!-- - spell of beckoning                                                                                                                         -->
+<!-- - totem minions should not die immediately?                                                                                                  -->
+<!-- - ogre totems?                                                                                                                               -->
+<!-- - stealth                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -15,9 +18,7 @@
 <!-- - skill, heroic charge, rush enemy                                                                                                           -->
 <!-- - skill, guaranteed hit, but you have no defense in the next move                                                                            -->
 <!-- - skill, whirl attack, attack 2 or 3 enemies                                                                                                 -->
-<!-- - skill, defensive mode, recover stamina                                                                                                     -->
 <!-- - skill, kneecap, hobble enemy                                                                                                               -->
-<!-- - skill, switch to defensive                                                                                                                 -->
 <!-- - skill, blind strike, attack the eyes                                                                                                       -->
 <!-- - skill, slash and roll                                                                                                                      -->
 <!-- - skill, slash and jump                                                                                                                      -->
@@ -26,20 +27,16 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - stealth                                                                                                                                    -->
 <!-- - cracked walls                                                                                                                              -->
-<!-- - paralysis dart                                                                                                                             -->
 <!-- - cloak of slime                                                                                                                             -->
 <!-- - sword of slime                                                                                                                             -->
 <!-- - spider web spawn small spiders?                                                                                                            -->
 <!-- - monsters with random buffs like vampirism would be interesting                                                                             -->
 <!-- - chaos bell of summoning                                                                                                                    -->
 <!-- - crystals walls (or chest) that reflect, so can use on yourself or ally                                                                     -->
-<!-- - need allies                                                                                                                                -->
 <!-- - cursed weapon with bad luck                                                                                                                -->
 <!-- - luck trap                                                                                                                                  -->
 <!-- - runics on weapons, like vampirism, force, quietus, lightning                                                                               -->
-<!-- - ogre totems?                                                                                                                               -->
 <!-- - boss 1 Mummy mummy, ankh of life                                                                                                           -->
 <!-- - boss 2 slime boss, spawns slimes, tries to jump splat the player                                                                           -->
 <!--          swamp tiles that allow 50% movement                                                                                                 -->
@@ -56,7 +53,6 @@
 <!-- -        This curse must be renewed many times. Zorbash, -ash means servant of Zorb was such a team member who was sacrificed.               -->
 <!-- -        The only way to break the curse is to destroy the crystals. Zorbash will then be freed from servitude.                              -->
 <!-- - different sound for bosses                                                                                                                 -->
-<!-- - crystal collection                                                                                                                         -->
 <!-- - 4 bosses and final zorb boss                                                                                                               -->
 <!-- - level fall through to special level ?                                                                                                      -->
 <!-- - hub shop levels                                                                                                                            -->
@@ -72,7 +68,6 @@
 <!-- Level                                                                                                                                        -->
 <!-- ------                                                                                                                                       -->
 <!-- - tomb of past player ? or random player ? leads to random small room?                                                                       -->
-<!-- - totems are like mobs, but do not spawn except initially. The worshippers are imbued with power but do not die when the totem does.         -->
 <!-- - vaults                                                                                                                                     -->
 <!-- - portable hunger - teleports you to a room full of digestive juices                                                                         -->
 <!-- - moving floor                                                                                                                               -->
@@ -106,7 +101,6 @@
 <!--                                                                                                                                              -->
 <!-- Staffs                                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
-<!-- - staves that recharge                                                                                                                       -->
 <!-- - staff of death should stop regenerating monst                                                                                              -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
@@ -187,16 +181,16 @@ Content:
 - 52 x food
 - 24 x treasure
 - 23 x items
+- 16 x spells
 - 15 x weapons
-- 14 x spells
-- 12 x buffs
+- 13 x buffs
 - 11 x skills
 - 6 x staffs
 - 6 x shield
+- 6 x debuffs
 - 6 x boots
 - 5 x rings
 - 5 x keys
-- 5 x debuffs
 - 4 x traps
 - 4 x gauntlets
 - 4 x armor
