@@ -184,7 +184,7 @@ bool Thing::spell_can_use(Thingp what)
   return true;
 }
 
-bool Thing::spell_use(Thingp what)
+bool Thing::spell_cast(Thingp what)
 {
   TRACE_NO_INDENT();
 
@@ -206,7 +206,7 @@ bool Thing::spell_use(Thingp what)
   return true;
 }
 
-bool Thing::cast_spell_at(Thingp what, Thingp target)
+bool Thing::spell_cast_at(Thingp what, Thingp target)
 {
   verify(MTYPE_THING, what);
   if (! what) {
@@ -221,17 +221,17 @@ bool Thing::cast_spell_at(Thingp what, Thingp target)
   }
 
   //
-  // We don't always get to cast_spell as far as we want.
+  // We don't always get to spell_cast as far as we want.
   //
   bool need_to_choose_a_new_target = false;
 
   //
-  // Check for obstacles in the way of the cast_spelling.
+  // Check for obstacles in the way of the spell_casting.
   //
-  auto cast_spell_at             = target->curr_at;
-  auto cast_spell_was_stopped_at = in_the_way_for_casting(curr_at, cast_spell_at);
+  auto spell_cast_at             = target->curr_at;
+  auto spell_cast_was_stopped_at = in_the_way_for_casting(curr_at, spell_cast_at);
 
-  auto in_the_way = in_the_way_for_casting(curr_at, cast_spell_at, 1);
+  auto in_the_way = in_the_way_for_casting(curr_at, spell_cast_at, 1);
   if (in_the_way.size()) {
     target = in_the_way[ 0 ];
 
@@ -246,16 +246,16 @@ bool Thing::cast_spell_at(Thingp what, Thingp target)
 
     need_to_choose_a_new_target = true;
 
-    cast_spell_at = target->curr_at;
+    spell_cast_at = target->curr_at;
     dbg("Casts %s at new in-the-way thing at: %s", what->to_short_string().c_str(),
-        cast_spell_at.to_string().c_str());
+        spell_cast_at.to_string().c_str());
   }
 
   //
   // If you can't cast that far, cast as far as you can.
   //
-  float dist     = DISTANCE(curr_at.x, curr_at.y, cast_spell_at.x, cast_spell_at.y);
-  float max_dist = distance_cast_spell_get();
+  float dist     = DISTANCE(curr_at.x, curr_at.y, spell_cast_at.x, spell_cast_at.y);
+  float max_dist = distance_spell_cast_get();
   if (! max_dist) {
     err("Cannot cast spell, no distance set");
     return false;
@@ -268,23 +268,23 @@ bool Thing::cast_spell_at(Thingp what, Thingp target)
       }
     }
 
-    float dx = (float) cast_spell_at.x - (float) curr_at.x;
-    float dy = (float) cast_spell_at.y - (float) curr_at.y;
+    float dx = (float) spell_cast_at.x - (float) curr_at.x;
+    float dy = (float) spell_cast_at.y - (float) curr_at.y;
     dx /= dist;
     dy /= dist;
     dx *= max_dist - 1;
     dy *= max_dist - 1;
-    cast_spell_at = curr_at + point(dx, dy);
+    spell_cast_at = curr_at + point(dx, dy);
 
-    float dist = distance(curr_at, cast_spell_at);
+    float dist = distance(curr_at, spell_cast_at);
     dbg("Cast %s at new point %s, dist %f, max dist %f", what->to_short_string().c_str(),
-        cast_spell_at.to_string().c_str(), dist, max_dist);
+        spell_cast_at.to_string().c_str(), dist, max_dist);
     need_to_choose_a_new_target = true;
   }
 
   if (need_to_choose_a_new_target) {
     TRACE_NO_INDENT();
-    FOR_ALL_GRID_THINGS(level, t, cast_spell_at.x, cast_spell_at.y)
+    FOR_ALL_GRID_THINGS(level, t, spell_cast_at.x, spell_cast_at.y)
     {
       target = t;
       break;
@@ -303,9 +303,13 @@ bool Thing::cast_spell_at(Thingp what, Thingp target)
   //
   // Move to the new location.
   //
-  what->move_to_immediately(cast_spell_at);
+  what->move_to_immediately(spell_cast_at);
 
   used(what, target, false /* remove after use */);
+
+  if (game->state == Game::STATE_CHOOSING_TARGET) {
+    game->change_state(Game::STATE_NORMAL, "finished choosing a target");
+  }
 
   return true;
 }
@@ -583,53 +587,53 @@ bool Thing::learn_random_spell(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// distance_cast_spell
+// distance_spell_cast
 ////////////////////////////////////////////////////////////////////////////
-float Thing::distance_cast_spell_get(void)
+float Thing::distance_spell_cast_get(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop()->distance_cast_spell);
+    return (infop()->distance_spell_cast);
   }
   return 0;
 }
 
-int Thing::distance_cast_spell_set(int v)
+int Thing::distance_spell_cast_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop()->distance_cast_spell = v);
+  auto n = (infop()->distance_spell_cast = v);
   return n;
 }
 
-int Thing::distance_cast_spell_decr(int v)
+int Thing::distance_spell_cast_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop()->distance_cast_spell -= v);
+  auto n = (infop()->distance_spell_cast -= v);
   return n;
 }
 
-int Thing::distance_cast_spell_incr(int v)
+int Thing::distance_spell_cast_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop()->distance_cast_spell += v);
+  auto n = (infop()->distance_spell_cast += v);
   return n;
 }
 
-int Thing::distance_cast_spell_decr(void)
+int Thing::distance_spell_cast_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop()->distance_cast_spell--);
+  auto n = (infop()->distance_spell_cast--);
   return n;
 }
 
-int Thing::distance_cast_spell_incr(void)
+int Thing::distance_spell_cast_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop()->distance_cast_spell++);
+  auto n = (infop()->distance_spell_cast++);
   return n;
 }

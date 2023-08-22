@@ -99,30 +99,38 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
     }
 
     if (game->request_to_use_item) {
-      player->log("Player used an item");
-      TRACE_AND_INDENT();
-
       auto item = game->request_to_use_item;
-
-      player->used(item, level->cursor, true);
-
-      //
-      // The laser name is provided by the likes of wand
-      //
-      if (! item->gfx_targeted_laser().empty()) {
-        player->laser_shoot_at(item, item->gfx_targeted_laser(), level->cursor->curr_at);
-      } else if (! item->gfx_targeted_projectile().empty()) {
-        player->projectile_shoot_at(item, item->gfx_targeted_projectile(), level->cursor->curr_at);
-      } else if (item->is_item_targeted()) {
-        player->item_targeted_use_at(item, level->cursor->curr_at);
+      if (item->is_spell()) {
+        player->log("Player cast a spell");
+        TRACE_AND_INDENT();
+        if (level->cursor->curr_at == player->curr_at) {
+          player->spell_cast(item);
+        } else {
+          player->spell_cast_at(item, level->cursor);
+        }
       } else {
-        TOPCON("Unknown beam weapon: %s.", item->text_the().c_str());
-      }
+        player->log("Player used an item");
+        TRACE_AND_INDENT();
+        player->used(item, level->cursor, true);
 
-      //
-      // Get the damage from the enchanted wand, so the laser inflicts that damage.
-      //
-      player->dmg_current_set(item->dmg_current(nullptr));
+        //
+        // The laser name is provided by the likes of wand
+        //
+        if (! item->gfx_targeted_laser().empty()) {
+          player->laser_shoot_at(item, item->gfx_targeted_laser(), level->cursor->curr_at);
+        } else if (! item->gfx_targeted_projectile().empty()) {
+          player->projectile_shoot_at(item, item->gfx_targeted_projectile(), level->cursor->curr_at);
+        } else if (item->is_item_targeted()) {
+          player->item_targeted_use_at(item, level->cursor->curr_at);
+        } else {
+          TOPCON("Unknown beam weapon: %s.", item->text_the().c_str());
+        }
+
+        //
+        // Get the damage from the enchanted wand, so the laser inflicts that damage.
+        //
+        player->dmg_current_set(item->dmg_current(nullptr));
+      }
     }
     return true;
   }

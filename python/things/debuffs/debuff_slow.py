@@ -42,12 +42,12 @@ def tp_init(name, text_long_name, text_short_name):
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
     my.tile(self,
-            tile="debuff_slowed")
+            tile="debuff_slow")
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="debuff_slowed", text_long_name="sluggishly slow", text_short_name="slowed")
+    tp_init(name="debuff_slow", text_long_name="sluggishly slow", text_short_name="slowed")
 
 
 init()

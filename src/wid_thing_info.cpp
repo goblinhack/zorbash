@@ -801,6 +801,14 @@ void Game::wid_thing_info_add_immunity(WidPopup *w, Thingp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Water");
     w->log(tmp);
   }
+  if (t->is_immune_to_spell_slow()) {
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Slowing");
+    w->log(tmp);
+  }
+  if (t->is_immune_to_spell_hold()) {
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Holding");
+    w->log(tmp);
+  }
 }
 
 void Game::wid_thing_info_add_nutrition(WidPopup *w, Thingp t)

@@ -517,7 +517,7 @@ bool Thing::use(Thingp what, UseOptions *use_options)
   } else if (what->is_spell()) {
     dbg("Trying to use spell: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
-    spell_use(what);
+    spell_cast(what);
   } else if (what->is_enchantstone()) {
     dbg("Trying to use enchantstone: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();

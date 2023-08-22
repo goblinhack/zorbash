@@ -165,11 +165,11 @@ private:
   int _collision_hit_two_tiles_ahead {};
   int _consume_per_bite_amount {};
   int _distance_avoid {};
-  int _distance_cast_spell {};
   int _distance_leader_max {};
   int _distance_minion_from_mob_max {};
   int _distance_minion_vision_shared {};
   int _distance_recruitment_max {};
+  int _distance_spell_cast {};
   int _distance_throw {};
   int _distance_vision {};
   int _dmg_num_of_attacks {};
@@ -265,7 +265,6 @@ private:
   int _is_able_to_break_down_doors {};
   int _is_able_to_break_out_of_ice {};
   int _is_able_to_break_out_of_webs {};
-  int _is_able_to_cast_spells {};
   int _is_able_to_change_levels {};
   int _is_able_to_collect_keys {};
   int _is_able_to_dampen_footsteps {};
@@ -301,6 +300,7 @@ private:
   int _is_able_to_shove {};
   int _is_able_to_sleep {};
   int _is_able_to_spawn_things {};
+  int _is_able_to_spell_cast {};
   int _is_able_to_swim {};
   int _is_able_to_teleport_attack {};
   int _is_able_to_teleport_escape {};
@@ -502,8 +502,8 @@ private:
   int _is_immune_to_negation {};
   int _is_immune_to_paralysis {};
   int _is_immune_to_poison {};
-  int _is_immune_to_slow_spell {};
   int _is_immune_to_spell_hold {};
+  int _is_immune_to_spell_slow {};
   int _is_immune_to_spiderwebs {};
   int _is_immune_to_stamina_drain {};
   int _is_immune_to_teleport_attack {};
@@ -633,7 +633,7 @@ private:
   int _is_spell {};
   int _is_spellbook {};
   int _is_spell_hold {};
-  int _is_spell_slowed {};
+  int _is_spell_slow {};
   int _is_spider {};
   int _is_spiderweb {};
   int _is_splatter {};
@@ -1494,11 +1494,11 @@ public:
   int collision_hit_two_tiles_ahead(void) const;
   int consume_per_bite_amount(void) const;
   int distance_avoid(void) const;
-  int distance_cast_spell(void) const;
   int distance_leader_max(void) const;
   int distance_minion_from_mob_max(void) const;
   int distance_minion_vision_shared(void) const;
   int distance_recruitment_max(void) const;
+  int distance_spell_cast(void) const;
   int distance_throw(void) const;
   int distance_vision(void) const;
   int dmg_chance_d1000_acid(int index) const;
@@ -1612,7 +1612,6 @@ public:
   int is_able_to_break_down_doors(void) const;
   int is_able_to_break_out_of_ice(void) const;
   int is_able_to_break_out_of_webs(void) const;
-  int is_able_to_cast_spells(void) const;
   int is_able_to_change_levels(void) const;
   int is_able_to_collect_keys(void) const;
   int is_able_to_dampen_footsteps(void) const;
@@ -1648,6 +1647,7 @@ public:
   int is_able_to_shove(void) const;
   int is_able_to_sleep(void) const;
   int is_able_to_spawn_things(void) const;
+  int is_able_to_spell_cast(void) const;
   int is_able_to_swim(void) const;
   int is_able_to_teleport_attack(void) const;
   int is_able_to_teleport_escape(void) const;
@@ -1849,8 +1849,8 @@ public:
   int is_immune_to_negation(void) const;
   int is_immune_to_paralysis(void) const;
   int is_immune_to_poison(void) const;
-  int is_immune_to_slow_spell(void) const;
   int is_immune_to_spell_hold(void) const;
+  int is_immune_to_spell_slow(void) const;
   int is_immune_to_spiderwebs(void) const;
   int is_immune_to_stamina_drain(void) const;
   int is_immune_to_teleport_attack(void) const;
@@ -1978,7 +1978,7 @@ public:
   int is_soft(void) const;
   int is_spellbook(void) const;
   int is_spell_hold(void) const;
-  int is_spell_slowed(void) const;
+  int is_spell_slow(void) const;
   int is_spell(void) const;
   int is_spider(void) const;
   int is_spiderweb(void) const;
@@ -2274,11 +2274,11 @@ public:
   void collision_hit_two_tiles_ahead_set(int v);
   void consume_per_bite_amount_set(int v);
   void distance_avoid_set(int v);
-  void distance_cast_spell_set(int v);
   void distance_leader_max_set(int v);
   void distance_minion_from_mob_max_set(int v);
   void distance_minion_vision_shared_set(int v);
   void distance_recruitment_max_set(int v);
+  void distance_spell_cast_set(int v);
   void distance_throw_set(int v);
   void distance_vision_set(int v);
   void dmg_num_of_attacks_set(int v);
@@ -2377,7 +2377,6 @@ public:
   void is_able_to_break_down_doors_set(int v);
   void is_able_to_break_out_of_ice_set(int v);
   void is_able_to_break_out_of_webs_set(int v);
-  void is_able_to_cast_spells_set(int v);
   void is_able_to_change_levels_set(int v);
   void is_able_to_collect_keys_set(int v);
   void is_able_to_dampen_footsteps_set(int v);
@@ -2413,6 +2412,7 @@ public:
   void is_able_to_shove_set(int v);
   void is_able_to_sleep_set(int v);
   void is_able_to_spawn_things_set(int v);
+  void is_able_to_spell_cast_set(int v);
   void is_able_to_swim_set(int v);
   void is_able_to_teleport_attack_set(int v);
   void is_able_to_teleport_escape_set(int v);
@@ -2615,8 +2615,8 @@ public:
   void is_immune_to_negation_set(int v);
   void is_immune_to_paralysis_set(int v);
   void is_immune_to_poison_set(int v);
-  void is_immune_to_slow_spell_set(int v);
   void is_immune_to_spell_hold_set(int v);
+  void is_immune_to_spell_slow_set(int v);
   void is_immune_to_spiderwebs_set(int v);
   void is_immune_to_stamina_drain_set(int v);
   void is_immune_to_teleport_attack_set(int v);
@@ -2745,7 +2745,7 @@ public:
   void is_spellbook_set(int v);
   void is_spell_hold_set(int v);
   void is_spell_set(int v);
-  void is_spell_slowed_set(int v);
+  void is_spell_slow_set(int v);
   void is_spider_set(int v);
   void is_spiderweb_set(int v);
   void is_splatter_set(int v);

@@ -259,11 +259,11 @@ int Tp::collision_hit_priority(void) const { return _collision_hit_priority; }
 int Tp::collision_hit_two_tiles_ahead(void) const { return _collision_hit_two_tiles_ahead; }
 int Tp::consume_per_bite_amount(void) const { return _consume_per_bite_amount; }
 int Tp::distance_avoid(void) const { return _distance_avoid; }
-int Tp::distance_cast_spell(void) const { return _distance_cast_spell; }
 int Tp::distance_leader_max(void) const { return _distance_leader_max; }
 int Tp::distance_minion_from_mob_max(void) const { return _distance_minion_from_mob_max; }
 int Tp::distance_minion_vision_shared(void) const { return _distance_minion_vision_shared; }
 int Tp::distance_recruitment_max(void) const { return _distance_recruitment_max; }
+int Tp::distance_spell_cast(void) const { return _distance_spell_cast; }
 int Tp::distance_throw(void) const { return _distance_throw; }
 int Tp::distance_vision(void) const { return _distance_vision; }
 int Tp::dmg_num_of_attacks(void) const { return _dmg_num_of_attacks; }
@@ -356,7 +356,6 @@ int Tp::is_able_to_be_teleported(void) const { return _is_able_to_be_teleported;
 int Tp::is_able_to_break_down_doors(void) const { return _is_able_to_break_down_doors; }
 int Tp::is_able_to_break_out_of_ice(void) const { return _is_able_to_break_out_of_ice; }
 int Tp::is_able_to_break_out_of_webs(void) const { return _is_able_to_break_out_of_webs; }
-int Tp::is_able_to_cast_spells(void) const { return _is_able_to_cast_spells; }
 int Tp::is_able_to_change_levels(void) const { return _is_able_to_change_levels; }
 int Tp::is_able_to_collect_keys(void) const { return _is_able_to_collect_keys; }
 int Tp::is_able_to_dampen_footsteps(void) const { return _is_able_to_dampen_footsteps; }
@@ -392,6 +391,7 @@ int Tp::is_able_to_shoot_at(void) const { return _is_able_to_shoot_at; }
 int Tp::is_able_to_shove(void) const { return _is_able_to_shove; }
 int Tp::is_able_to_sleep(void) const { return _is_able_to_sleep; }
 int Tp::is_able_to_spawn_things(void) const { return _is_able_to_spawn_things; }
+int Tp::is_able_to_spell_cast(void) const { return _is_able_to_spell_cast; }
 int Tp::is_able_to_swim(void) const { return _is_able_to_swim; }
 int Tp::is_able_to_teleport_attack(void) const { return _is_able_to_teleport_attack; }
 int Tp::is_able_to_teleport_escape(void) const { return _is_able_to_teleport_escape; }
@@ -593,8 +593,8 @@ int Tp::is_immune_to_necrosis(void) const { return _is_immune_to_necrosis; }
 int Tp::is_immune_to_negation(void) const { return _is_immune_to_negation; }
 int Tp::is_immune_to_paralysis(void) const { return _is_immune_to_paralysis; }
 int Tp::is_immune_to_poison(void) const { return _is_immune_to_poison; }
-int Tp::is_immune_to_slow_spell(void) const { return _is_immune_to_slow_spell; }
 int Tp::is_immune_to_spell_hold(void) const { return _is_immune_to_spell_hold; }
+int Tp::is_immune_to_spell_slow(void) const { return _is_immune_to_spell_slow; }
 int Tp::is_immune_to_spiderwebs(void) const { return _is_immune_to_spiderwebs; }
 int Tp::is_immune_to_stamina_drain(void) const { return _is_immune_to_stamina_drain; }
 int Tp::is_immune_to_teleport_attack(void) const { return _is_immune_to_teleport_attack; }
@@ -722,7 +722,7 @@ int Tp::is_snake(void) const { return _is_snake; }
 int Tp::is_soft(void) const { return _is_soft; }
 int Tp::is_spellbook(void) const { return _is_spellbook; }
 int Tp::is_spell_hold(void) const { return _is_spell_hold; }
-int Tp::is_spell_slowed(void) const { return _is_spell_slowed; }
+int Tp::is_spell_slow(void) const { return _is_spell_slow; }
 int Tp::is_spell(void) const { return _is_spell; }
 int Tp::is_spider(void) const { return _is_spider; }
 int Tp::is_spiderweb(void) const { return _is_spiderweb; }
@@ -1017,11 +1017,11 @@ void Tp::collision_hit_priority_set(int v) { _collision_hit_priority = v; }
 void Tp::collision_hit_two_tiles_ahead_set(int v) { _collision_hit_two_tiles_ahead = v; }
 void Tp::consume_per_bite_amount_set(int v) { _consume_per_bite_amount = v; }
 void Tp::distance_avoid_set(int v) { _distance_avoid = v; }
-void Tp::distance_cast_spell_set(int v) { _distance_cast_spell = v; }
 void Tp::distance_leader_max_set(int v) { _distance_leader_max = v; }
 void Tp::distance_minion_from_mob_max_set(int v) { _distance_minion_from_mob_max = v; }
 void Tp::distance_minion_vision_shared_set(int v) { _distance_minion_vision_shared = v; }
 void Tp::distance_recruitment_max_set(int v) { _distance_recruitment_max = v; }
+void Tp::distance_spell_cast_set(int v) { _distance_spell_cast = v; }
 void Tp::distance_throw_set(int v) { _distance_throw = v; }
 void Tp::distance_vision_set(int v) { _distance_vision = v; }
 void Tp::dmg_num_of_attacks_set(int v) { _dmg_num_of_attacks = v; }
@@ -1120,7 +1120,6 @@ void Tp::is_able_to_be_teleported_set(int v) { _is_able_to_be_teleported = v; }
 void Tp::is_able_to_break_down_doors_set(int v) { _is_able_to_break_down_doors = v; }
 void Tp::is_able_to_break_out_of_ice_set(int v) { _is_able_to_break_out_of_ice = v; }
 void Tp::is_able_to_break_out_of_webs_set(int v) { _is_able_to_break_out_of_webs = v; }
-void Tp::is_able_to_cast_spells_set(int v) { _is_able_to_cast_spells = v; }
 void Tp::is_able_to_change_levels_set(int v) { _is_able_to_change_levels = v; }
 void Tp::is_able_to_collect_keys_set(int v) { _is_able_to_collect_keys = v; }
 void Tp::is_able_to_dampen_footsteps_set(int v) { _is_able_to_dampen_footsteps = v; }
@@ -1156,6 +1155,7 @@ void Tp::is_able_to_shoot_at_set(int v) { _is_able_to_shoot_at = v; }
 void Tp::is_able_to_shove_set(int v) { _is_able_to_shove = v; }
 void Tp::is_able_to_sleep_set(int v) { _is_able_to_sleep = v; }
 void Tp::is_able_to_spawn_things_set(int v) { _is_able_to_spawn_things = v; }
+void Tp::is_able_to_spell_cast_set(int v) { _is_able_to_spell_cast = v; }
 void Tp::is_able_to_swim_set(int v) { _is_able_to_swim = v; }
 void Tp::is_able_to_teleport_attack_set(int v) { _is_able_to_teleport_attack = v; }
 void Tp::is_able_to_teleport_escape_set(int v) { _is_able_to_teleport_escape = v; }
@@ -1358,8 +1358,8 @@ void Tp::is_immune_to_necrosis_set(int v) { _is_immune_to_necrosis = v; }
 void Tp::is_immune_to_negation_set(int v) { _is_immune_to_negation = v; }
 void Tp::is_immune_to_paralysis_set(int v) { _is_immune_to_paralysis = v; }
 void Tp::is_immune_to_poison_set(int v) { _is_immune_to_poison = v; }
-void Tp::is_immune_to_slow_spell_set(int v) { _is_immune_to_slow_spell = v; }
 void Tp::is_immune_to_spell_hold_set(int v) { _is_immune_to_spell_hold = v; }
+void Tp::is_immune_to_spell_slow_set(int v) { _is_immune_to_spell_slow = v; }
 void Tp::is_immune_to_spiderwebs_set(int v) { _is_immune_to_spiderwebs = v; }
 void Tp::is_immune_to_stamina_drain_set(int v) { _is_immune_to_stamina_drain = v; }
 void Tp::is_immune_to_teleport_attack_set(int v) { _is_immune_to_teleport_attack = v; }
@@ -1488,7 +1488,7 @@ void Tp::is_soft_set(int v) { _is_soft = v; }
 void Tp::is_spellbook_set(int v) { _is_spellbook = v; }
 void Tp::is_spell_hold_set(int v) { _is_spell_hold = v; }
 void Tp::is_spell_set(int v) { _is_spell = v; }
-void Tp::is_spell_slowed_set(int v) { _is_spell_slowed = v; }
+void Tp::is_spell_slow_set(int v) { _is_spell_slow = v; }
 void Tp::is_spider_set(int v) { _is_spider = v; }
 void Tp::is_spiderweb_set(int v) { _is_spiderweb = v; }
 void Tp::is_splatter_set(int v) { _is_splatter = v; }

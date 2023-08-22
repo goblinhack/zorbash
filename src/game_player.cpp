@@ -172,8 +172,8 @@ void Game::place_player(void)
         auto w = level->thing_new("spell_hasted", point(x, y));
         t->spell_add(w);
       }
-      if (0) {
-        auto w = level->thing_new("spell_slowed", point(x, y));
+      if (1) {
+        auto w = level->thing_new("spell_slow", point(x, y));
         t->spell_add(w);
       }
       if (0) {
@@ -185,7 +185,8 @@ void Game::place_player(void)
         t->spell_add(w);
       }
       if (0) {
-        level->thing_new("tentacleye", point(x + 1, y + 1));
+        level->thing_new("tentacleye", point(x + 4, y));
+        level->thing_new("wall_dungeon.1", point(x + 3, y));
       }
       if (0) {
         auto w = level->thing_new("skill_iron_defense1", point(x, y));

@@ -190,8 +190,8 @@ void Level::cursor_recreate(point curr_at)
     }
 
     if (what->is_spell()) {
-      if (player->distance_cast_spell_get()) {
-        too_far = dist > player->distance_cast_spell_get();
+      if (player->distance_spell_cast_get()) {
+        too_far = dist > player->distance_spell_cast_get();
       }
     } else {
       if (what->range_max()) {

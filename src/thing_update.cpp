@@ -87,9 +87,9 @@ void Thing::update(void)
   }
   {
     TRACE_NO_INDENT();
-    auto v = tpp->distance_cast_spell();
+    auto v = tpp->distance_spell_cast();
     if (unlikely(v)) {
-      distance_cast_spell_set(v);
+      distance_spell_cast_set(v);
     }
   }
   {

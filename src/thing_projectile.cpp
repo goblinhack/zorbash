@@ -91,11 +91,23 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &gfx_targeted_p
   }
 
   if (is_player()) {
-    msg("You shoot %s at %s.", item->text_the().c_str(), target->text_the().c_str());
+    if (item->is_spell()) {
+      msg("You cast %s at %s.", item->text_the().c_str(), target->text_the().c_str());
+    } else {
+      msg("You shoot %s at %s.", item->text_the().c_str(), target->text_the().c_str());
+    }
   } else if (item) {
-    msg("%s shoots %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
+    if (item->is_spell()) {
+      msg("%s casts %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
+    } else {
+      msg("%s shoots %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
+    }
   } else {
-    msg("%s shoots at %s.", text_The().c_str(), target->text_the().c_str());
+    if (item->is_spell()) {
+      msg("%s casts at %s.", text_The().c_str(), target->text_the().c_str());
+    } else {
+      msg("%s shoots at %s.", text_The().c_str(), target->text_the().c_str());
+    }
   }
   TRACE_AND_INDENT();
 

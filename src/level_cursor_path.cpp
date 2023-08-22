@@ -44,7 +44,7 @@ void Level::cursor_path_draw_circle(void)
   } else if (game->request_to_use_item) {
 
     if (what->is_spell()) {
-      if (dist > player->distance_cast_spell_get()) {
+      if (dist > player->distance_spell_cast_get()) {
         too_far = true;
       }
     } else {

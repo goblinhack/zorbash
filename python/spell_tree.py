@@ -16,7 +16,7 @@ my.map_load_spell_tree(
         "dD", "spell_dominate_monst4",
         "dE", "spell_dominate_monst5",
         "hh", "spell_hasted",
-        "ss", "spell_slowed",
+        "ss", "spell_slow",
     ])
 
 my.map_load_spell_tree(

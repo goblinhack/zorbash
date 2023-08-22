@@ -9,7 +9,7 @@ def on_use(owner, item, target, x, y):
     for it in my.level_get_all(item, x, y):
         # my.topcon("it {} {}".format(my.thing_name_get(it), my.thing_health(it)))
         if my.thing_is_alive_monst(it) or my.thing_is_player(it):
-            my.thing_debuff_add(it, "debuff_slowed")
+            my.thing_debuff_add(it, "debuff_slow")
 
 
 def tp_init(name, text_long_name, text_short_name):
@@ -27,19 +27,19 @@ def tp_init(name, text_long_name, text_short_name):
     my.spell_cost(self, 2)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "The target of this spell will have their speed reduced.")
-    my.text_description_short(self, "Spell, slowed.")
+    my.text_description_short(self, "Spell, slow.")
     my.text_description_very_short(self, "Slowed")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
 
-    my.tile(self, tile="spell_slowed")
-    my.tile(self, tile="spell_slowed_activated")
+    my.tile(self, tile="spell_slow")
+    my.tile(self, tile="spell_slow_activated")
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="spell_slowed", text_long_name="slowed", text_short_name="slowed")
+    tp_init(name="spell_slow", text_long_name="slow", text_short_name="slow")
 
 
 init()

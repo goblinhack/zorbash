@@ -32,7 +32,7 @@ def on_want_to_shoot_at(me, target, target_x, target_y):  # Return True on doing
     my.thing_shoot_projectile_or_laser_at(me, "laser_lightning", target)
 
     # if my.thing_is_player(target) or my.thing_is_alive_monst(target):
-    #     my.thing_cast_spell_at(me, "spell_slowed", target)
+    #     my.thing_spell_cast_at(me, "spell_slow", target)
 
     return True
 
@@ -47,6 +47,7 @@ def tp_init(name, text_long_name):
     my.collision_hit_priority(self, 5)
     my.dmg_received_doubled_from_water(self, True)
     my.distance_throw(self, 5)
+    my.distance_spell_cast(self, 5)
     my.environ_hates_water(self, 100)
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)

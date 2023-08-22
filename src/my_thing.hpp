@@ -509,7 +509,6 @@ public:
   bool can_see_is_invisible(Thingp);
   bool carrying_anything(void);
   bool carry(Thingp w, CarryOptions);
-  bool cast_spell_at(Thingp w, Thingp target);
   bool check_anything_to_carry(CarryOptions);
   bool close_door(Thingp door);
   bool close(Thingp it);
@@ -672,8 +671,9 @@ public:
   bool spellbox_id_insert(Thingp what);
   bool spellbox_id_remove(Thingp what);
   bool spell_can_use(Thingp);
+  bool spell_cast_at(Thingp w, Thingp target);
+  bool spell_cast(Thingp it);
   bool spell_remove(Thingp it);
-  bool spell_use(Thingp it);
   bool state_idle(Thingp threat, int minx, int miny, int maxx, int maxy);
   bool state_moving(void);
   bool state_open_inventory(void);
@@ -1036,7 +1036,7 @@ public:
   float distance_recruitment_max_float(point p);
   float distance_recruitment_max_float(void);
   float distance_throw_get(void);
-  float distance_cast_spell_get(void);
+  float distance_spell_cast_get(void);
   float distance_vision_get(void);
   float fadeup_fade_curr(void);
   float fadeup_height_curr(void);
@@ -1167,14 +1167,14 @@ public:
   int danger_initial_level(Thingp);
   int danger_initial_level(void);
   int defence(void);
-  int distance_cast_spell_decr(int);
-  int distance_cast_spell_decr(void);
-  int distance_cast_spell_incr(int);
-  int distance_cast_spell_incr(void);
-  int distance_cast_spell_set(int);
   int distance_leader_max(void);
   int distance_minion_vision_shared(void);
   int distance_recruitment_max(void);
+  int distance_spell_cast_decr(int);
+  int distance_spell_cast_decr(void);
+  int distance_spell_cast_incr(int);
+  int distance_spell_cast_incr(void);
+  int distance_spell_cast_set(int);
   int distance_throw_decr(int);
   int distance_throw_decr(void);
   int distance_throw_incr(int);
@@ -1370,7 +1370,6 @@ public:
   int is_able_to_break_down_doors(void);
   int is_able_to_break_out_of_ice(void);
   int is_able_to_break_out_of_webs(void);
-  int is_able_to_cast_spells(void);
   int is_able_to_change_levels(void);
   int is_able_to_collect_keys(void);
   int is_able_to_dampen_footsteps(void);
@@ -1406,6 +1405,7 @@ public:
   int is_able_to_shove(void);
   int is_able_to_sleep(void);
   int is_able_to_spawn_things(void);
+  int is_able_to_spell_cast(void);
   int is_able_to_swim(void);
   int is_able_to_teleport_attack(void);
   int is_able_to_teleport_escape(void);
@@ -1636,8 +1636,8 @@ public:
   int is_immune_to_negation(void);
   int is_immune_to_paralysis(void);
   int is_immune_to_poison(void);
-  int is_immune_to_slow_spell(void);
   int is_immune_to_spell_hold(void);
+  int is_immune_to_spell_slow(void);
   int is_immune_to_spiderwebs(void);
   int is_immune_to_stamina_drain(void);
   int is_immune_to_teleport_attack(void);
@@ -1765,7 +1765,7 @@ public:
   int is_soft(void);
   int is_spellbook(void);
   int is_spell_hold(void);
-  int is_spell_slowed(void);
+  int is_spell_slow(void);
   int is_spell(void);
   int is_spider(void);
   int is_spiderweb(void);

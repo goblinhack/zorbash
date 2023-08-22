@@ -85,7 +85,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->damage_this_tick);
    in >> bits(my.t->dead_reason);
    in >> bits(my.t->distance_throw);
-   in >> bits(my.t->distance_cast_spell);
+   in >> bits(my.t->distance_spell_cast);
    in >> bits(my.t->enchant);
    in >> bits(my.t->enchant_max);
    in >> bits(my.t->fadeup_fade);

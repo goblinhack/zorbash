@@ -248,7 +248,7 @@ PyObject *thing_throw_at(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_TRUE;
 }
 
-PyObject *thing_cast_spell_at(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_spell_cast_at(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     owner_id  = 0;
@@ -299,18 +299,18 @@ PyObject *thing_cast_spell_at(PyObject *obj, PyObject *args, PyObject *keywds)
 
   auto tp = pcg_one_of(tp_cands);
   if (unlikely(! tp)) {
-    ERR("Could not find to cast_spell %s", item);
+    ERR("Could not find to spell_cast %s", item);
     Py_RETURN_FALSE;
   }
 
   auto what = owner->level->thing_new(tp, target->curr_at);
   if (! what) {
-    ERR("Could not create to cast_spell %s", item);
+    ERR("Could not create to spell_cast %s", item);
     Py_RETURN_FALSE;
   }
 
-  if (! owner->cast_spell_at(what, target)) {
-    owner->err("Cannot cast_spell %s at %s", item, target->to_short_string().c_str());
+  if (! owner->spell_cast_at(what, target)) {
+    owner->err("Cannot spell_cast %s at %s", item, target->to_short_string().c_str());
     Py_RETURN_FALSE;
   }
 

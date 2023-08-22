@@ -61,7 +61,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->damage_this_tick);
   out << bits(my.t->dead_reason);
   out << bits(my.t->distance_throw);
-  out << bits(my.t->distance_cast_spell);
+  out << bits(my.t->distance_spell_cast);
   out << bits(my.t->enchant);
   out << bits(my.t->enchant_max);
   out << bits(my.t->fadeup_fade);

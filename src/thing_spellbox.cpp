@@ -309,7 +309,7 @@ bool Level::spell_chosen(Thingp what)
   what->is_activated = ! what->is_activated;
   IF_DEBUG2 { what->log("Chosen spellbox item"); }
 
-  player->spell_use(what);
+  player->spell_cast(what);
 
   return true;
 }
