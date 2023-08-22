@@ -349,7 +349,15 @@ void Level::tick_(void)
       auto speed = t->move_speed_total();
       if (speed) {
         if (player) {
-          remaining -= player->move_speed_total();
+          //
+          // The speed of monsters moving is always relative to the player
+          //
+          auto player_speed = player->move_speed_total();
+          if (player_speed > 0) {
+            remaining -= player_speed;
+          } else {
+            remaining -= 100;
+          }
         } else {
           remaining -= 100;
         }

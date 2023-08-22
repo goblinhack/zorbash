@@ -81,12 +81,12 @@ def tp_init(name, text_long_name):
     my.is_light_blocker(self, True)
     my.is_loggable(self, True)
     my.is_obs_ai(self, True)
-    my.is_obs_casting(self, True)
     my.is_obs_jump_end(self, True)
     my.is_obs_jumping(self, True)
     my.is_obs_shooting(self, True)
     my.is_obs_shoving(self, True)
     my.is_obs_spawn_monst(self, True)
+    my.is_obs_spell_casting(self, True)
     my.is_obs_throwing(self, True)
     my.is_only_one_per_tile(self, True) # so wands of ice do not pile these up
     my.is_shovable_and_sticky(self, True)  # so a dogman in ice is also shoved

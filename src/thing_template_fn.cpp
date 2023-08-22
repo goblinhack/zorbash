@@ -659,7 +659,6 @@ int Tp::is_no_tile(void) const { return _is_no_tile; }
 int Tp::is_obj_spawning_monst(void) const { return _is_obj_spawning_monst; }
 int Tp::is_obj_spawning(void) const { return _is_obj_spawning; }
 int Tp::is_obs_ai(void) const { return _is_obs_ai; }
-int Tp::is_obs_casting(void) const { return _is_obs_casting; }
 int Tp::is_obs_destructable(void) const { return _is_obs_destructable; }
 int Tp::is_obsidian(void) const { return _is_obsidian; }
 int Tp::is_obs_jump_end(void) const { return _is_obs_jump_end; }
@@ -668,6 +667,7 @@ int Tp::is_obs_shooting(void) const { return _is_obs_shooting; }
 int Tp::is_obs_shoving(void) const { return _is_obs_shoving; }
 int Tp::is_obs_spawn_monst(void) const { return _is_obs_spawn_monst; }
 int Tp::is_obs_spawn(void) const { return _is_obs_spawn; }
+int Tp::is_obs_spell_casting(void) const { return _is_obs_spell_casting; }
 int Tp::is_obs_throwing(void) const { return _is_obs_throwing; }
 int Tp::is_obs_wall_or_door(void) const { return _is_obs_wall_or_door; }
 int Tp::is_obs_when_dead(void) const { return _is_obs_when_dead; }
@@ -1424,7 +1424,6 @@ void Tp::is_no_tile_set(int v) { _is_no_tile = v; }
 void Tp::is_obj_spawning_monst_set(int v) { _is_obj_spawning_monst = v; }
 void Tp::is_obj_spawning_set(int v) { _is_obj_spawning = v; }
 void Tp::is_obs_ai_set(int v) { _is_obs_ai = v; }
-void Tp::is_obs_casting_set(int v) { _is_obs_casting = v; }
 void Tp::is_obs_destructable_set(int v) { _is_obs_destructable = v; }
 void Tp::is_obsidian_set(int v) { _is_obsidian = v; }
 void Tp::is_obs_jump_end_set(int v) { _is_obs_jump_end = v; }
@@ -1433,6 +1432,7 @@ void Tp::is_obs_shooting_set(int v) { _is_obs_shooting = v; }
 void Tp::is_obs_shoving_set(int v) { _is_obs_shoving = v; }
 void Tp::is_obs_spawn_monst_set(int v) { _is_obs_spawn_monst = v; }
 void Tp::is_obs_spawn_set(int v) { _is_obs_spawn = v; }
+void Tp::is_obs_spell_casting_set(int v) { _is_obs_spell_casting = v; }
 void Tp::is_obs_throwing_set(int v) { _is_obs_throwing = v; }
 void Tp::is_obs_wall_or_door_set(int v) { _is_obs_wall_or_door = v; }
 void Tp::is_obs_when_dead_set(int v) { _is_obs_when_dead = v; }

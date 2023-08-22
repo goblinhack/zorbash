@@ -121,6 +121,15 @@ bool Thing::is_stuck_check(void)
     return false;
   }
 
+  //
+  // Slowed so much it cannot move?
+  //
+  if (tp()->move_speed()) {
+    if (move_speed_total() <= 0) {
+      return true;
+    }
+  }
+
   if (is_frozen) {
     return true;
   }

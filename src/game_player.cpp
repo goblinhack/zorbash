@@ -186,7 +186,6 @@ void Game::place_player(void)
       }
       if (0) {
         level->thing_new("tentacleye", point(x + 4, y));
-        level->thing_new("wall_dungeon.1", point(x + 3, y));
       }
       if (0) {
         auto w = level->thing_new("skill_iron_defense1", point(x, y));

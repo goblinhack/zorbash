@@ -471,13 +471,13 @@ PyObject *thing_is_necrotic_danger_level(PyObject *obj, PyObject *args, PyObject
 PyObject *thing_is_no_tile(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obj_spawning_monst(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obj_spawning(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_obs_casting(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obs_destructable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obsidian(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obs_jump_end(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obs_jumping(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obs_shooting(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obs_shoving(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_obs_spell_casting(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obs_throwing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obs_wall_or_door(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obs_when_dead(PyObject *obj, PyObject *args, PyObject *keywds);

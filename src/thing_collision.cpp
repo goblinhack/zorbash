@@ -782,8 +782,7 @@ bool Thing::collision_check_and_handle(point future_pos, ThingAttackOptionsp att
     return false;
   }
 
-  dbg2("Collision handle");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   int minx = future_pos.x - radius;
   while (minx < 0) {
@@ -838,7 +837,6 @@ bool Thing::collision_check_and_handle(point future_pos, ThingAttackOptionsp att
   }
 
   if (thing_colls.empty()) {
-    dbg2("Collision check, clear");
     return false;
   }
 
@@ -851,12 +849,11 @@ bool Thing::collision_check_and_handle(point future_pos, ThingAttackOptionsp att
 //
 bool Thing::collision_check_only(point future_pos)
 {
+  TRACE_NO_INDENT();
+
   if (is_cursor()) {
     return false;
   }
-
-  dbg2("Collision check only");
-  TRACE_AND_INDENT();
 
   //
   // Check we cannot walk off onto the map edge.

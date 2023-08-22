@@ -1701,7 +1701,6 @@ public:
   int is_obj_spawning_monst(void);
   int is_obj_spawning(void);
   int is_obs_ai(void);
-  int is_obs_casting(void);
   int is_obs_destructable(void);
   int is_obsidian(void);
   int is_obs_jump_end(void);
@@ -1710,6 +1709,7 @@ public:
   int is_obs_shoving(void);
   int is_obs_spawn_monst(void);
   int is_obs_spawn(void);
+  int is_obs_spell_casting(void);
   int is_obs_throwing(void);
   int is_obs_wall_or_door(void);
   int is_obs_when_dead(void);

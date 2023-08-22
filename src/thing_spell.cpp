@@ -228,10 +228,10 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
   //
   // Check for obstacles in the way of the spell_casting.
   //
-  auto spell_cast_at             = target->curr_at;
-  auto spell_cast_was_stopped_at = in_the_way_for_casting(curr_at, spell_cast_at);
+  auto target_at                 = target->curr_at;
+  auto spell_cast_was_stopped_at = in_the_way_for_casting(curr_at, target_at);
 
-  auto in_the_way = in_the_way_for_casting(curr_at, spell_cast_at, 1);
+  auto in_the_way = in_the_way_for_casting(curr_at, target_at, 1);
   if (in_the_way.size()) {
     target = in_the_way[ 0 ];
 
@@ -246,15 +246,14 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
 
     need_to_choose_a_new_target = true;
 
-    spell_cast_at = target->curr_at;
-    dbg("Casts %s at new in-the-way thing at: %s", what->to_short_string().c_str(),
-        spell_cast_at.to_string().c_str());
+    target_at = target->curr_at;
+    dbg("Casts %s at new in-the-way thing at: %s", what->to_short_string().c_str(), target_at.to_string().c_str());
   }
 
   //
   // If you can't cast that far, cast as far as you can.
   //
-  float dist     = DISTANCE(curr_at.x, curr_at.y, spell_cast_at.x, spell_cast_at.y);
+  float dist     = DISTANCE(curr_at.x, curr_at.y, target_at.x, target_at.y);
   float max_dist = distance_spell_cast_get();
   if (! max_dist) {
     err("Cannot cast spell, no distance set");
@@ -268,33 +267,29 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
       }
     }
 
-    float dx = (float) spell_cast_at.x - (float) curr_at.x;
-    float dy = (float) spell_cast_at.y - (float) curr_at.y;
+    float dx = (float) target_at.x - (float) curr_at.x;
+    float dy = (float) target_at.y - (float) curr_at.y;
     dx /= dist;
     dy /= dist;
     dx *= max_dist - 1;
     dy *= max_dist - 1;
-    spell_cast_at = curr_at + point(dx, dy);
+    target_at = curr_at + point(dx, dy);
 
-    float dist = distance(curr_at, spell_cast_at);
+    float dist = distance(curr_at, target_at);
     dbg("Cast %s at new point %s, dist %f, max dist %f", what->to_short_string().c_str(),
-        spell_cast_at.to_string().c_str(), dist, max_dist);
+        target_at.to_string().c_str(), dist, max_dist);
     need_to_choose_a_new_target = true;
   }
 
   if (need_to_choose_a_new_target) {
     TRACE_NO_INDENT();
-    FOR_ALL_GRID_THINGS(level, t, spell_cast_at.x, spell_cast_at.y)
+    FOR_ALL_GRID_THINGS(level, t, target_at.x, target_at.y)
     {
       target = t;
       break;
     }
     TRACE_NO_INDENT();
     FOR_ALL_THINGS_END()
-  } else {
-    if (is_player()) {
-      msg("You cast %s at %s", what->text_the().c_str(), target->to_string().c_str());
-    }
   }
 
   TRACE_AND_INDENT();
@@ -303,9 +298,41 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
   //
   // Move to the new location.
   //
-  what->move_to_immediately(spell_cast_at);
+  what->move_to_immediately(target_at);
+
+  dbg("Cast spell particle");
+  TRACE_AND_INDENT();
+
+  {
+    auto o        = what->top_owner();
+    auto callback = std::bind(&Thing::on_thrown_callback, what, o ? o->id : NoThingId);
+
+    auto src = (last_blit_tl + last_blit_br) / (short) 2;
+    auto dst = (target->last_blit_tl + target->last_blit_br) / (short) 2;
+    auto sz  = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
+
+    //
+    // Default thrown particle speed
+    //
+    auto delay = 0;
+
+    //
+    // But it's too fast in ascii mode
+    //
+    if (g_opt_ascii) {
+      delay = PARTICLE_SPEED_SPELL_CAST_ASCII_MS;
+    } else {
+      delay = PARTICLE_SPEED_SPELL_CAST_PIXELART_MS;
+    }
+
+    projectile_shoot_at(what, what->gfx_targeted_projectile(), target_at);
+  }
 
   used(what, target, false /* remove after use */);
+
+  if (is_player()) {
+    game->tick_begin("player cast a spell");
+  }
 
   if (game->state == Game::STATE_CHOOSING_TARGET) {
     game->change_state(Game::STATE_NORMAL, "finished choosing a target");

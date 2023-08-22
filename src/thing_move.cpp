@@ -638,7 +638,13 @@ void Thing::update_interpolated_position(void)
   // Handle fast moving things
   //
   if (level->player) {
-    auto player_speed = level->player->move_speed_curr();
+    //
+    // The speed of monsters moving is always relative to the player
+    //
+    auto player_speed = level->player->move_speed_total();
+    if (player_speed <= 0) {
+      player_speed = 100;
+    }
 
     int  speed = 0;
     auto infop = maybe_infop();

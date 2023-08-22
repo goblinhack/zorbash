@@ -57,8 +57,7 @@ void Thing::location_check(Thingp filter_to)
     return;
   }
 
-  dbg2("Location check");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // Allow fall through to fall check, so burnt things can fall.

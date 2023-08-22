@@ -9,7 +9,7 @@
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
 <!-- ------                                                                                                                                       -->
-<!-- sudo operf ./zorbash --playername discobob --seed victimlake --nodebug --quick-start                                                         -->
+<!-- sudo operf ./zorbash --playername discobob --seed victimlake --nodebug --test-start                                                          -->
 <!-- opreport  --demangle=smart --symbols| less                                                                                                   -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

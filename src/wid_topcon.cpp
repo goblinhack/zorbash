@@ -56,16 +56,21 @@ uint8_t wid_topcon_init(void)
 uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
 {
   TRACE_NO_INDENT();
+  DBG("INF: Pressed a key");
+
   if (! game) {
+    DBG("INF: Pressed a key; no game");
     return false;
   }
 
   auto level = game->get_current_level();
   if (! level) {
+    DBG("INF: Pressed a key; no level");
     return false;
   }
 
   if (sdlk_eq(*key, game->config.key_console)) {
+    DBG("INF: Pressed a key; over console, ignore");
     return false;
   }
 
@@ -112,6 +117,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   // Toggle gfx mode. Do this outside the level tick loop to avoid issues with moving things.
   //
   if (sdlk_eq(*key, game->config.key_gfx_toggle)) {
+    DBG("INF: Pressed a key; request to toggle");
     game->request_to_toggle_gfx = true;
     return false; // To avoid click noise
   }

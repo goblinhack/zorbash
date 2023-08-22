@@ -740,10 +740,10 @@ int Thing::is_immune_to_spell_hold(void)
   TRACE_NO_INDENT();
   return (tp()->is_immune_to_spell_hold());
 }
-int Thing::is_obs_casting(void)
+int Thing::is_obs_spell_casting(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_obs_casting());
+  return (tp()->is_obs_spell_casting());
 }
 int Thing::is_zorblin(void)
 {

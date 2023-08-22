@@ -103,10 +103,10 @@ bool Thing::throw_at(Thingp what, Thingp target)
   //
   // Check for obstacles in the way of the throwing.
   //
-  auto throw_at             = target->curr_at;
-  auto throw_was_stopped_at = in_the_way_for_throwing(curr_at, throw_at);
+  auto target_at            = target->curr_at;
+  auto throw_was_stopped_at = in_the_way_for_throwing(curr_at, target_at);
 
-  auto in_the_way = in_the_way_for_throwing(curr_at, throw_at, 1);
+  auto in_the_way = in_the_way_for_throwing(curr_at, target_at, 1);
   if (in_the_way.size()) {
     target = in_the_way[ 0 ];
 
@@ -133,14 +133,14 @@ bool Thing::throw_at(Thingp what, Thingp target)
       need_to_choose_a_new_target = true;
     }
 
-    throw_at = target->curr_at;
-    dbg("Throw %s at new in-the-way thing at: %s", what->to_short_string().c_str(), throw_at.to_string().c_str());
+    target_at = target->curr_at;
+    dbg("Throw %s at new in-the-way thing at: %s", what->to_short_string().c_str(), target_at.to_string().c_str());
   }
 
   //
   // If you can't throw that far, throw as far as you can.
   //
-  float dist     = DISTANCE(curr_at.x, curr_at.y, throw_at.x, throw_at.y);
+  float dist     = DISTANCE(curr_at.x, curr_at.y, target_at.x, target_at.y);
   float max_dist = distance_throw_get();
   if (! max_dist) {
     err("Cannot throw, no distance set");
@@ -174,17 +174,17 @@ bool Thing::throw_at(Thingp what, Thingp target)
       }
     }
 
-    float dx = (float) throw_at.x - (float) curr_at.x;
-    float dy = (float) throw_at.y - (float) curr_at.y;
+    float dx = (float) target_at.x - (float) curr_at.x;
+    float dy = (float) target_at.y - (float) curr_at.y;
     dx /= dist;
     dy /= dist;
     dx *= max_dist - 1;
     dy *= max_dist - 1;
-    throw_at = curr_at + point(dx, dy);
+    target_at = curr_at + point(dx, dy);
 
-    float dist = distance(curr_at, throw_at);
+    float dist = distance(curr_at, target_at);
     dbg("Throw %s at new point %s, dist %f, max dist %f", what->to_short_string().c_str(),
-        throw_at.to_string().c_str(), dist, max_dist);
+        target_at.to_string().c_str(), dist, max_dist);
     need_to_choose_a_new_target = true;
   }
 
@@ -203,7 +203,7 @@ bool Thing::throw_at(Thingp what, Thingp target)
 
   if (need_to_choose_a_new_target) {
     TRACE_NO_INDENT();
-    FOR_ALL_GRID_THINGS(level, t, throw_at.x, throw_at.y)
+    FOR_ALL_GRID_THINGS(level, t, target_at.x, target_at.y)
     {
       target = t;
       break;
@@ -225,12 +225,12 @@ bool Thing::throw_at(Thingp what, Thingp target)
     //
     TRACE_AND_INDENT();
     dbg("Throw item %s at %s into portal", what->to_short_string().c_str(), target->to_string().c_str());
-    what->move_to_immediately(throw_at);
+    what->move_to_immediately(target_at);
   } else {
     //
     // Move to the new location.
     //
-    what->move_to_immediately(throw_at);
+    what->move_to_immediately(target_at);
   }
 
   //
@@ -276,13 +276,13 @@ bool Thing::throw_at(Thingp what, Thingp target)
     if (! is_being_destroyed) {
       if (g_opt_ascii) {
         //
-        // Ascii animations happen inside the level as projectils
+        // Ascii animations happen inside the level as projectiles
         //
         if (! what->gfx_targeted_projectile().empty()) {
           //
           // Fire the ascii projectile which should not really interact.
           //
-          projectile_shoot_at(what, what->gfx_targeted_projectile(), throw_at);
+          projectile_shoot_at(what, what->gfx_targeted_projectile(), target_at);
 
           //
           // Make sure the thrown item appears.
@@ -296,13 +296,13 @@ bool Thing::throw_at(Thingp what, Thingp target)
         }
       } else if (what->is_thrown_as_a_weapon()) {
         //
-        // Ascii animations happen inside the level as projectils
+        // Ascii animations happen inside the level as projectiles
         //
         if (! what->gfx_targeted_projectile().empty()) {
           //
           // Fire the ascii projectile which should not really interact.
           //
-          projectile_shoot_at(what, what->gfx_targeted_projectile(), throw_at);
+          projectile_shoot_at(what, what->gfx_targeted_projectile(), target_at);
 
           //
           // Make sure the thrown item appears.

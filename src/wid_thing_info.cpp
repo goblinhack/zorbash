@@ -3258,8 +3258,8 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
 
   monst_max_dmg *= t->dmg_num_of_attacks();
 
-  if (t->move_speed()) {
-    monst_max_dmg *= t->move_speed() / player->move_speed();
+  if (t->move_speed() && player && player->move_speed_total()) {
+    monst_max_dmg *= t->move_speed() / player->move_speed_total();
   }
 
   if (monst_max_dmg != 0) {

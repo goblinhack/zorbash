@@ -569,7 +569,6 @@ private:
   int _is_obj_spawning {};
   int _is_obj_spawning_monst {};
   int _is_obs_ai {};
-  int _is_obs_casting {};
   int _is_obs_destructable {};
   int _is_obsidian {};
   int _is_obs_jump_end {};
@@ -578,6 +577,7 @@ private:
   int _is_obs_shoving {};
   int _is_obs_spawn {};
   int _is_obs_spawn_monst {};
+  int _is_obs_spell_casting {};
   int _is_obs_throwing {};
   int _is_obs_wall_or_door {};
   int _is_obs_when_dead {};
@@ -1915,7 +1915,6 @@ public:
   int is_obj_spawning_monst(void) const;
   int is_obj_spawning(void) const;
   int is_obs_ai(void) const;
-  int is_obs_casting(void) const;
   int is_obs_destructable(void) const;
   int is_obsidian(void) const;
   int is_obs_jump_end(void) const;
@@ -1924,6 +1923,7 @@ public:
   int is_obs_shoving(void) const;
   int is_obs_spawn_monst(void) const;
   int is_obs_spawn(void) const;
+  int is_obs_spell_casting(void) const;
   int is_obs_throwing(void) const;
   int is_obs_wall_or_door(void) const;
   int is_obs_when_dead(void) const;
@@ -2681,7 +2681,6 @@ public:
   void is_obj_spawning_monst_set(int v);
   void is_obj_spawning_set(int v);
   void is_obs_ai_set(int v);
-  void is_obs_casting_set(int v);
   void is_obs_destructable_set(int v);
   void is_obsidian_set(int v);
   void is_obs_jump_end_set(int v);
@@ -2690,6 +2689,7 @@ public:
   void is_obs_shoving_set(int v);
   void is_obs_spawn_monst_set(int v);
   void is_obs_spawn_set(int v);
+  void is_obs_spell_casting_set(int v);
   void is_obs_throwing_set(int v);
   void is_obs_wall_or_door_set(int v);
   void is_obs_when_dead_set(int v);

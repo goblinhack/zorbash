@@ -74,7 +74,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
   wid_tp_info_fini("mouse down");
 
   if (game->state == Game::STATE_CHOOSING_TARGET) {
-    DBG("Game mouse down and choosen target");
+    DBG("Game mouse down and chosen target");
     TRACE_AND_INDENT();
 
     //
@@ -103,11 +103,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
       if (item->is_spell()) {
         player->log("Player cast a spell");
         TRACE_AND_INDENT();
-        if (level->cursor->curr_at == player->curr_at) {
-          player->spell_cast(item);
-        } else {
-          player->spell_cast_at(item, level->cursor);
-        }
+        player->spell_cast_at(item, level->cursor);
       } else {
         player->log("Player used an item");
         TRACE_AND_INDENT();

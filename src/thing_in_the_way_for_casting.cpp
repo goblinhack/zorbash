@@ -48,7 +48,7 @@ Thingp Thing::in_the_way_for_casting(const point s, const point e, int x, int y)
       return t;
     }
 
-    if (t->is_obs_casting()) {
+    if (t->is_obs_spell_casting()) {
       dbg("This is in the way: %s", t->to_short_string().c_str());
       return t;
     }
