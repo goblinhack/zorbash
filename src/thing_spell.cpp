@@ -304,26 +304,8 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
   TRACE_AND_INDENT();
 
   {
-    auto o        = what->top_owner();
-    auto callback = std::bind(&Thing::on_thrown_callback, what, o ? o->id : NoThingId);
-
-    auto src = (last_blit_tl + last_blit_br) / (short) 2;
-    auto dst = (target->last_blit_tl + target->last_blit_br) / (short) 2;
-    auto sz  = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
-
-    //
-    // Default thrown particle speed
-    //
-    auto delay = 0;
-
-    //
-    // But it's too fast in ascii mode
-    //
-    if (g_opt_ascii) {
-      delay = PARTICLE_SPEED_SPELL_CAST_ASCII_MS;
-    } else {
-      delay = PARTICLE_SPEED_SPELL_CAST_PIXELART_MS;
-    }
+    auto o  = what->top_owner();
+    auto sz = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
 
     projectile_shoot_at(what, what->gfx_targeted_projectile(), target_at);
   }

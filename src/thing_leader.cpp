@@ -148,7 +148,8 @@ bool Thing::too_far_from_leader(point p, float delta)
 Thingp Thing::leader(void)
 {
   TRACE_NO_INDENT();
-  verify(MTYPE_THING, this);
+
+  IF_DEBUG3 { verify(MTYPE_THING, this); }
 
   auto id = leader_id();
   if (likely(id.ok())) {
@@ -218,7 +219,6 @@ void Thing::leader_set(Thingp new_leader)
 void Thing::leader_unset(void)
 {
   TRACE_NO_INDENT();
-  verify(MTYPE_THING, this);
 
   auto old_leader = leader();
   if (! old_leader) {

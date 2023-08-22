@@ -105,7 +105,6 @@ bool Thing::worth_eating(Thingp victim)
 {
   TRACE_NO_INDENT();
 
-  verify(MTYPE_THING, victim);
   if (! victim) {
     err("Cannot check worth eating null thing");
     return false;

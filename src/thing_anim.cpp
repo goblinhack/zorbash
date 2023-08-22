@@ -234,7 +234,8 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
         }
       }
     } else {
-      verify(MTYPE_TILE, tile);
+      IF_DEBUG3 { verify(MTYPE_TILE, tile); }
+
       tile = tile_next(tmap, tile);
     }
   }
@@ -291,7 +292,9 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
         }
 #endif
       }
-      verify(MTYPE_TILE, tile);
+
+      IF_DEBUG3 { verify(MTYPE_TILE, tile); }
+
 #ifdef DEBUG_ANIM
       if (debug || is_debug_type()) {
         con("Tile %s moving %d up %d down %d left %d right %d "

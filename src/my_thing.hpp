@@ -3011,22 +3011,42 @@ public:
 
   ThingInfop maybe_infop(void)
   {
-    if (_infop) {
-      verify(MTYPE_INFOP, _infop);
+    //
+    // Expensive, hence debug level 3
+    //
+    IF_DEBUG3
+    {
+      if (_infop) {
+        verify(MTYPE_INFOP, _infop);
+      }
     }
     return _infop;
   }
+
   ThingItemsp maybe_itemsp(void)
   {
-    if (_itemsp) {
-      verify(MTYPE_ITEMP, _itemsp);
+    //
+    // Expensive, hence debug level 3
+    //
+    IF_DEBUG3
+    {
+      if (_itemsp) {
+        verify(MTYPE_ITEMP, _itemsp);
+      }
     }
     return _itemsp;
   }
+
   ThingAip maybe_aip(void)
   {
-    if (_aip) {
-      verify(MTYPE_AIP, _aip);
+    //
+    // Expensive, hence debug level 3
+    //
+    IF_DEBUG3
+    {
+      if (_aip) {
+        verify(MTYPE_AIP, _aip);
+      }
     }
     return _aip;
   }

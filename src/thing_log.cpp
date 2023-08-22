@@ -16,7 +16,7 @@
 void Thing::log_(const char *fmt, va_list args)
 {
   TRACE_NO_INDENT();
-  verify(MTYPE_THING, this);
+
   auto t = this;
   char buf[ MAXLONGSTR ];
   int  len = 0;

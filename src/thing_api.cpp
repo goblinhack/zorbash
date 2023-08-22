@@ -3547,7 +3547,10 @@ ThingInfop Thing::get_or_alloc_infop(void)
   if (unlikely(! _infop)) {
     new_infop();
   }
-  IF_DEBUG2 { verify(MTYPE_INFOP, _infop); }
+  //
+  // Called a lot and is hence expensive, so debug level 3
+  //
+  IF_DEBUG3 { verify(MTYPE_INFOP, _infop); }
   return _infop;
 }
 
@@ -3557,7 +3560,10 @@ ThingItemsp Thing::get_or_alloc_itemsp(void)
   if (unlikely(! _itemsp)) {
     new_itemsp();
   }
-  IF_DEBUG2 { verify(MTYPE_ITEMP, _itemsp); }
+  //
+  // Called a lot and is hence expensive, so debug level 3
+  //
+  IF_DEBUG3 { verify(MTYPE_ITEMP, _itemsp); }
   return _itemsp;
 }
 
@@ -3567,7 +3573,10 @@ ThingAip Thing::get_or_alloc_aip(void)
   if (unlikely(! _aip)) {
     new_aip();
   }
-  IF_DEBUG2 { verify(MTYPE_AIP, _aip); }
+  //
+  // Called a lot and is hence expensive, so debug level 3
+  //
+  IF_DEBUG3 { verify(MTYPE_AIP, _aip); }
   return _aip;
 }
 
@@ -3577,7 +3586,10 @@ ThingInfop Thing::infop(void)
   if (! _infop) {
     die("no _infop");
   }
-  IF_DEBUG2 { verify(MTYPE_INFOP, _infop); }
+  //
+  // Called a lot and is hence expensive, so debug level 3
+  //
+  IF_DEBUG3 { verify(MTYPE_INFOP, _infop); }
   return _infop;
 }
 
@@ -3587,7 +3599,10 @@ ThingItemsp Thing::itemsp(void)
   if (! _itemsp) {
     die("no _itemsp");
   }
-  IF_DEBUG2 { verify(MTYPE_ITEMP, _itemsp); }
+  //
+  // Called a lot and is hence expensive, so debug level 3
+  //
+  IF_DEBUG3 { verify(MTYPE_ITEMP, _itemsp); }
   return _itemsp;
 }
 
@@ -3597,7 +3612,10 @@ ThingAip Thing::aip(void)
   if (! _aip) {
     die("no _aip");
   }
-  IF_DEBUG2 { verify(MTYPE_AIP, _aip); }
+  //
+  // Called a lot and is hence expensive, so debug level 3
+  //
+  IF_DEBUG3 { verify(MTYPE_AIP, _aip); }
   return _aip;
 }
 

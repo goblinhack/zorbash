@@ -660,6 +660,10 @@ int ptrcheck_free(int mtype, void *ptr, const char *func, const char *file, int 
 //
 int ptrcheck_verify(int mtype, const void *ptr, const char *func, const char *file, int line)
 {
+  //
+  // Handy if things get too slow, to see what is firing most
+  //
+  // fprintf(stderr, "PTRCHECK %s %s %d\n", file, func, line);
   return (ptrcheck_verify_pointer(mtype, ptr, file, func, line, false /* don't store */) != nullptr);
 }
 

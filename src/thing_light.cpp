@@ -46,7 +46,6 @@ void Thing::delete_lights(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    verify(MTYPE_INFOP, maybe_infop());
     for (auto &l : infop()->light) {
       delete l;
     }

@@ -12,7 +12,8 @@ std::string Thing::to_string(void)
   TRACE_NO_INDENT();
 
   auto tpp = tp();
-  verify(MTYPE_THING, this);
+
+  IF_DEBUG3 { verify(MTYPE_THING, this); }
 
   if (unlikely(! level)) {
     return (string_sprintf("%" PRIX32 " <not in level> <no tp>%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id,
@@ -91,7 +92,8 @@ std::string Thing::to_short_string(void)
   TRACE_NO_INDENT();
 
   auto tpp = tp();
-  verify(MTYPE_THING, this);
+
+  IF_DEBUG3 { verify(MTYPE_THING, this); }
 
   if (unlikely(! level)) {
     return (string_sprintf("%" PRIX32 " <not in level> <no tp>%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id,
@@ -130,7 +132,7 @@ std::string Thing::to_dbg_string(void)
 {
   TRACE_NO_INDENT();
 
-  verify(MTYPE_THING, this);
+  IF_DEBUG3 { verify(MTYPE_THING, this); }
 
   return (string_sprintf(
       "L%d %" PRIX32
@@ -194,7 +196,7 @@ std::string Thing::to_dbg_saved_string(void)
 {
   TRACE_NO_INDENT();
 
-  verify(MTYPE_THING, this);
+  IF_DEBUG3 { verify(MTYPE_THING, this); }
 
   return (string_sprintf(
       "L%d %" PRIX32

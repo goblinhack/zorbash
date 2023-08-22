@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - player stuck debuff                                                                                                                        -->
 <!-- - immune to slow/hold                                                                                                                        -->
 <!-- - spell of beckoning                                                                                                                         -->
 <!-- - totem minions should not die immediately?                                                                                                  -->

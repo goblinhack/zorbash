@@ -46,7 +46,7 @@ void tile_fini(void)
   }
 
   for (auto &t : all_tiles) {
-    verify(MTYPE_TILE, t.second);
+    IF_DEBUG3 { verify(MTYPE_TILE, t.second); }
     delete t.second;
   }
 

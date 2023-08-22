@@ -13,7 +13,7 @@ Thingp World::thing_find_optional(ThingId id)
     return nullptr;
   }
 
-  verify(MTYPE_THING, f->second);
+  IF_DEBUG3 { verify(MTYPE_THING, f->second); }
   return (f->second);
 }
 
@@ -25,7 +25,7 @@ Thingp World::thing_find(ThingId id)
     return nullptr;
   }
 
-  verify(MTYPE_THING, f->second);
+  IF_DEBUG3 { verify(MTYPE_THING, f->second); }
   return (f->second);
 }
 
