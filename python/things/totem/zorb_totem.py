@@ -31,8 +31,11 @@ def on_want_to_shoot_at(me, target, target_x, target_y):  # Return True on doing
     my.thing_sound_play_channel(me, my.CHANNEL_WEAPON, "lightning_a")
     my.thing_shoot_projectile_or_laser_at(me, "laser_lightning", target)
 
-    # if my.thing_is_player(target) or my.thing_is_alive_monst(target):
-    #     my.thing_spell_cast_at(me, "spell_slow", target)
+    if my.thing_is_same_mob(me, target):
+        return
+
+    if my.thing_is_player(target) or my.thing_is_alive_monst(target):
+        my.thing_spell_cast_at(me, "spell_slow", target)
 
     return True
 

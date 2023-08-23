@@ -373,16 +373,22 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
       }
     }
 
-    auto existing_owner = what->top_owner();
-    if (existing_owner != this) {
-      if (is_dead) {
-        //
-        // Can happen if we teleport into solid rock and die, hence no longer
-        // having those teleport boots.
-        //
-      } else {
-        err("Attempt to use %s which is not carried", what->to_short_string().c_str());
-        return;
+    if (is_totem()) {
+      //
+      // Totems cast spells without knowing them
+      //
+    } else {
+      auto existing_owner = what->top_owner();
+      if (existing_owner != this) {
+        if (is_dead) {
+          //
+          // Can happen if we teleport into solid rock and die, hence no longer
+          // having those teleport boots.
+          //
+        } else {
+          err("Attempt to use %s which is not carried", what->to_short_string().c_str());
+          return;
+        }
       }
     }
 

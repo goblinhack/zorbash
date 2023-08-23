@@ -801,6 +801,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_is_rock_ice),
     MY_ADD_PYTHON_FUNCTION(thing_is_rock_lava),
     MY_ADD_PYTHON_FUNCTION(thing_is_rusty),
+    MY_ADD_PYTHON_FUNCTION(thing_is_same_mob),
     MY_ADD_PYTHON_FUNCTION(thing_is_scorpion),
     MY_ADD_PYTHON_FUNCTION(thing_is_secret_door),
     MY_ADD_PYTHON_FUNCTION(thing_is_sewer_wall),

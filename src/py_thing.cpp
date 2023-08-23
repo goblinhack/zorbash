@@ -901,6 +901,48 @@ PyObject *thing_set_mob(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_TRUE;
 }
 
+PyObject *thing_is_same_mob(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     id       = 0;
+  uint32_t     owner_id = 0;
+  static char *kwlist[] = {(char *) "t", (char *) "owner", nullptr};
+
+  TRACE_NO_INDENT();
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &owner_id)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! id) {
+    ERR("%s: No thing ID set", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! owner_id) {
+    ERR("%s: No owner thing ID set", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  Thingp t = game->thing_find(id);
+  if (! t) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    Py_RETURN_FALSE;
+  }
+
+  Thingp owner = game->thing_find(owner_id);
+  if (! owner) {
+    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    Py_RETURN_FALSE;
+  }
+
+  if (t->same_mob(owner)) {
+    Py_RETURN_TRUE;
+  }
+
+  Py_RETURN_FALSE;
+}
+
 PyObject *thing_set_leader(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();

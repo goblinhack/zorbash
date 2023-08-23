@@ -211,6 +211,7 @@ PyObject *thing_is_acid(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_aerodynamic(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_air_breather(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_alive_monst(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_same_mob(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_alive_on_end_of_anim(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_always_activated(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_always_hit(PyObject *obj, PyObject *args, PyObject *keywds);
