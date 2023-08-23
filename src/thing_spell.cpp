@@ -303,13 +303,10 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
   dbg("Cast spell particle");
   TRACE_AND_INDENT();
 
-  {
-    auto o  = what->top_owner();
-    auto sz = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
+  projectile_shoot_at(what, what->gfx_targeted_projectile(), target_at);
 
-    projectile_shoot_at(what, what->gfx_targeted_projectile(), target_at);
-  }
-
+  dbg("Spell is used");
+  TRACE_AND_INDENT();
   used(what, target, false /* remove after use */);
 
   if (is_player()) {

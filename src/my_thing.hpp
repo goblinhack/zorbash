@@ -405,20 +405,20 @@ public:
   Thingp bag_what_is_at(point pos);
   Thingp best_shoot_at_target_get(void);
   Thingp best_visible_target_get(void);
+  Thingp bodypart_carry_anim(int bodypart);
+  Thingp bodypart_get(int bodypart);
   Thingp buff_find(const std::string &);
   Thingp debuff_find(const std::string &);
   Thingp equip_carry_anim(int equip);
-  Thingp bodypart_carry_anim(int bodypart);
   Thingp equip_get(int equip);
-  Thingp bodypart_get(int bodypart);
   Thingp equip_use_anim(int equip);
   Thingp immediate_mob(void);
   Thingp immediate_owner(void);
   Thingp immediate_spawner(void);
+  Thingp in_the_way_for_casting(const point s, const point e, int x, int y);
   Thingp in_the_way_for_jumping(const point s, const point e, int x, int y);
   Thingp in_the_way_for_shooting(const point s, const point e, int x, int y);
   Thingp in_the_way_for_throwing(const point s, const point e, int x, int y);
-  Thingp in_the_way_for_casting(const point s, const point e, int x, int y);
   Thingp item_targeted_use_at(Thingp wand, point at);
   Thingp item_targeted_use_at(Thingp wand, Thingp target);
   Thingp leader(void);
@@ -3051,11 +3051,46 @@ public:
     return _aip;
   }
 
-  std::vector< ThingId > copy_of_carrying(void);
+  ThingInfop infop(void)
+  {
+    if (! _infop) {
+      die("no _infop");
+    }
 
-  ThingInfop  infop(void);
-  ThingItemsp itemsp(void);
-  ThingAip    aip(void);
+    //
+    // Called a lot and is hence expensive, so debug level 3
+    //
+    IF_DEBUG3 { verify(MTYPE_INFOP, _infop); }
+    return _infop;
+  }
+
+  ThingItemsp itemsp(void)
+  {
+    if (! _itemsp) {
+      die("no _itemsp");
+    }
+
+    //
+    // Called a lot and is hence expensive, so debug level 3
+    //
+    IF_DEBUG3 { verify(MTYPE_ITEMP, _itemsp); }
+    return _itemsp;
+  }
+
+  ThingAip aip(void)
+  {
+    if (! _aip) {
+      die("no _aip");
+    }
+
+    //
+    // Called a lot and is hence expensive, so debug level 3
+    //
+    IF_DEBUG3 { verify(MTYPE_AIP, _aip); }
+    return _aip;
+  }
+
+  std::vector< ThingId > copy_of_carrying(void);
 
   bool victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, point *best_hit_at,
                                     std::vector< point > &all_deltas, ThingAttackOptionsp);

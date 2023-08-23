@@ -3580,45 +3580,6 @@ ThingAip Thing::get_or_alloc_aip(void)
   return _aip;
 }
 
-ThingInfop Thing::infop(void)
-{
-  TRACE_NO_INDENT();
-  if (! _infop) {
-    die("no _infop");
-  }
-  //
-  // Called a lot and is hence expensive, so debug level 3
-  //
-  IF_DEBUG3 { verify(MTYPE_INFOP, _infop); }
-  return _infop;
-}
-
-ThingItemsp Thing::itemsp(void)
-{
-  TRACE_NO_INDENT();
-  if (! _itemsp) {
-    die("no _itemsp");
-  }
-  //
-  // Called a lot and is hence expensive, so debug level 3
-  //
-  IF_DEBUG3 { verify(MTYPE_ITEMP, _itemsp); }
-  return _itemsp;
-}
-
-ThingAip Thing::aip(void)
-{
-  TRACE_NO_INDENT();
-  if (! _aip) {
-    die("no _aip");
-  }
-  //
-  // Called a lot and is hence expensive, so debug level 3
-  //
-  IF_DEBUG3 { verify(MTYPE_AIP, _aip); }
-  return _aip;
-}
-
 ////////////////////////////////////////////////////////////////////////////
 // age_map
 ////////////////////////////////////////////////////////////////////////////
