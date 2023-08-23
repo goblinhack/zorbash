@@ -1062,7 +1062,7 @@ testme()
     mkdir -p tests/$seed/expected_output/
 
     printf "%-60s ... " "Running seed ($seed)"
-    CMD="./zorbash $OPT_DEBUG --seed $seed --test-dungeon-gen --ascii --monochrome"
+    CMD="./zorbash $OPT_DEBUG --seed $seed --test-dungeon --ascii --monochrome"
     $CMD > tests/$seed/output/console
     cp appdata/zorbash/stdout.txt tests/$seed/output/
 
