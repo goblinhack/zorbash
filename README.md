@@ -2,6 +2,7 @@
 <!-- ------                                                                                                                                       -->
 <!-- - immune to slow/hold                                                                                                                        -->
 <!-- - spell of beckoning                                                                                                                         -->
+<!-- - |The ray of lightning electrifies the wet grass for 5 damage. The water zaps the wet grass.                                                -->
 <!-- - totem minions should not die immediately?                                                                                                  -->
 <!-- - ogre totems?                                                                                                                               -->
 <!-- - stealth                                                                                                                                    -->

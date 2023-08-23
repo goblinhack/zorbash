@@ -788,7 +788,13 @@ PyObject *place_at(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (t->level->thing_new(std::string(what), point(x, y))) {
+  auto it = t->level->thing_new(std::string(what), point(x, y));
+  if (it) {
+    //
+    // If a chasm, we need to check what is now ready to fall
+    //
+    it->log("New born location check");
+    it->location_check_me();
     Py_RETURN_TRUE;
   }
 
