@@ -386,6 +386,16 @@ void Thing::tick(void)
   TRACE_NO_INDENT();
 
   //
+  // We only check tick_last in the caller for things that do not move,
+  // to ensure they get only one action per tick.
+  //
+  // For monsters that are fast moving, this routine can be called multiple
+  // times p=er game tick, hence we do not want to check tick_last, to allow
+  // meat faries to run wild.
+  //
+  tick_last_set(game->tick_current);
+
+  //
   // Save fields that may change during the tick
   //
   was_frozen = is_frozen;
@@ -438,4 +448,52 @@ void Thing::tick(void)
       idle_count_set(0);
     }
   }
+}
+
+////////////////////////////////////////////////////////////////////////////
+// tick_last
+////////////////////////////////////////////////////////////////////////////
+int Thing::tick_last(void)
+{
+  TRACE_NO_INDENT();
+
+  if (maybe_infop()) {
+    return (infop()->tick_last);
+  }
+  return 0;
+}
+
+int Thing::tick_last_set(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last = v);
+}
+
+int Thing::tick_last_decr(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last -= v);
+}
+
+int Thing::tick_last_incr(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last += v);
+}
+
+int Thing::tick_last_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last--);
+}
+
+int Thing::tick_last_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last++);
 }

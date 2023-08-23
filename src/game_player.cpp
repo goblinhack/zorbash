@@ -172,7 +172,7 @@ void Game::place_player(void)
         auto w = level->thing_new("spell_hasted", point(x, y));
         t->spell_add(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("spell_slow", point(x, y));
         t->spell_add(w);
       }
@@ -768,6 +768,6 @@ done:
   if (player) {
     level->request_player_light_update = true;
     game->player_is_ready_for_messages = true;
-    player->log("Placed");
+    IF_DEBUG { player->log("Placed"); }
   }
 }

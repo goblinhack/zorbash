@@ -5840,7 +5840,7 @@ void wid_key_down(const struct SDL_Keysym *key, int x, int y)
 
   pixel_to_ascii(&x, &y);
   if (! ascii_ok(x, y)) {
-    LOG("SDL: Keyboard: bad coord %d,%d", x, y);
+    DBG("SDL: Keyboard: bad coord %d,%d", x, y);
     return;
   }
   ascii_mouse_x = x;
@@ -5896,15 +5896,15 @@ void wid_key_down(const struct SDL_Keysym *key, int x, int y)
     //
     // If no-one handles it, feed it to the default handler, the console.
     //
-    LOG("SDL: Keyboard: no one handled the event");
+    DBG("SDL: Keyboard: no one handled the event");
     wid_receive_unhandled_input(key);
     return;
   }
 
   {
-    LOG("WID: key over by wid: %s for (%d,%d)", w->name.c_str(), ascii_mouse_x, ascii_mouse_y);
+    DBG("WID: Key over by wid: %s for (%d,%d)", w->name.c_str(), ascii_mouse_x, ascii_mouse_y);
     if ((w->on_key_down)(w, key)) {
-      LOG("WID: key grabbed by wid: %s for (%d,%d)", w->name.c_str(), ascii_mouse_x, ascii_mouse_y);
+      DBG("WID: Key grabbed by wid: %s for (%d,%d)", w->name.c_str(), ascii_mouse_x, ascii_mouse_y);
       sound_play("click");
       //
       // Do not raise, gets in the way of popups the callback creates.
@@ -5924,7 +5924,7 @@ try_parent:
   while (w) {
     if (w->on_key_down) {
       if ((w->on_key_down)(w, key)) {
-        LOG("WID: key grabbed by wid: %s for (%d,%d)", w->name.c_str(), ascii_mouse_x, ascii_mouse_y);
+        DBG("WID: key grabbed by wid: %s for (%d,%d)", w->name.c_str(), ascii_mouse_x, ascii_mouse_y);
         sound_play("click");
         //
         // Do not raise, gets in the way of popups the callback
@@ -5941,7 +5941,7 @@ try_parent:
   // If no-one handles it, feed it to the default handler, the console.
   //
   {
-    LOG("WID: key is unhandled");
+    DBG("WID: key is unhandled");
     wid_receive_unhandled_input(key);
   }
 }

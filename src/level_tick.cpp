@@ -29,7 +29,7 @@ void Level::handle_all_pending_things(void)
   animated_things_pending_add = {};
 
   for (auto &i : all_things_pending_fall) {
-    i.second->log("Pending fall");
+    IF_DEBUG { i.second->log("Pending fall"); }
     i.second->fall_to_next_level();
   }
   all_things_pending_fall = {};
@@ -333,8 +333,26 @@ void Level::tick_(void)
       }
 
       int remaining = t->movement_remaining();
-      if (remaining <= 0) {
-        continue;
+      if (t->tp()->move_speed()) {
+        //
+        // This is for things that move, like monsters. If we've exhausted remaining moves,
+        // then we're done.
+        //
+        if (remaining <= 0) {
+          continue;
+        }
+
+        //
+        // We will check tick_last() later in tick() to avoid the same monster doing multiple
+        // things per tick if it is moving in increments smaller than the player.
+        //
+      } else {
+        //
+        // This is for things that need to tick, like buffs, that do not move
+        //
+        if (t->tick_last() == game->tick_current) {
+          continue;
+        }
       }
 
       if (t->is_waiting) {
@@ -354,8 +372,15 @@ void Level::tick_(void)
           //
           auto player_speed = player->move_speed_total();
           if (player_speed > 0) {
+            //
+            // e.g. if the monster speed is 100 and the player 50, then the monster will
+            // get two moves for this tick
+            //
             remaining -= player_speed;
           } else {
+            //
+            // If the player has no speed (slowed?) then use a default speed.
+            //
             remaining -= 100;
           }
         } else {

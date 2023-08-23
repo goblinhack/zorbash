@@ -158,6 +158,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->tick_born);
    in >> bits(my.t->tick_last_awoke);
    in >> bits(my.t->tick_last_did_something);
+   in >> bits(my.t->tick_last);
    in >> bits(my.t->tick_last_dropped);
    in >> bits(my.t->tick_last_escape);
    in >> bits(my.t->tick_last_gas_healing_exposure);

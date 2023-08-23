@@ -324,6 +324,7 @@ std::initializer_list< std::string > tps = {
     "debuff_poisoned",
     "debuff_slow",
     "debuff_starving",
+    "debuff_stuck",
     "debug_path",
     "deep_water",
     "demon_fire",

@@ -17,7 +17,7 @@
 void sdl_loop(void)
 {
   TRACE_NO_INDENT();
-  LOG("SDL: main loop");
+  DBG("SDL: main loop");
 
   //
   // Keep this lowish to avoid too much lag when processing mouse motion events, that redraw the cursor path.
@@ -75,7 +75,7 @@ void sdl_loop(void)
   SDL_PumpEvents();
 
   for (; /*ever*/;) {
-    // LOG("SDL: tick");
+    // DBG("SDL: tick");
 
     frames++;
     game->frame_count++;
@@ -189,7 +189,7 @@ void sdl_loop(void)
       // mouse position, to avoid perception of lag. Mouse motion events can be expensive
       // as we redraw the cursor path.
       //
-      LOG("SDL: Process %u events", found);
+      DBG("SDL: Process %u events", found);
       bool processed_mouse_motion_event = false;
       for (i = 0; i < found; ++i) {
         sdl_event(&events[ i ], processed_mouse_motion_event);
@@ -228,7 +228,7 @@ void sdl_loop(void)
       //
       if (unlikely(! g_do_screenshot)) {
         if (unlikely(! g_main_loop_running)) {
-          LOG("Exit main loop");
+          DBG("Exit main loop");
           break;
         }
       }
@@ -310,7 +310,7 @@ void sdl_loop(void)
 #endif
   }
 
-  LOG("Exited main loop");
+  DBG("Exited main loop");
 
   gl_leave_2d_mode();
 

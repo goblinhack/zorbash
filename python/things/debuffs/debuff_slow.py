@@ -30,7 +30,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_debuff(self, True)
     my.is_loggable(self, True)
     my.is_tickable(self, True)
-    my.lifespan_dice(self, "1d100+50")
+    my.lifespan_dice(self, "1d30+10")
     my.move_speed_bonus(self, -50)
     my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_unset_do(self, "me.on_owner_unset()")

@@ -77,6 +77,7 @@ void Thing::lifespan_tick(void)
     }
   }
 
+  dbg("Lifespan tick: dead");
   dead("by ran out of life");
 }
 

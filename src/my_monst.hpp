@@ -190,6 +190,10 @@ public:
   //
   int tick_born {-1 /* std::numeric_limits< uint32_t >::max() */};
   //
+  // Last completed tick
+  //
+  int tick_last {-1 /* std::numeric_limits< uint32_t >::max() */};
+  //
   // Used for calling on_idle()
   //
   // Avoiding numeric_limits to reduce the number of headers to pull in.

@@ -3,6 +3,7 @@
 //
 
 #include "my_array_bounds_check.hpp"
+#include "my_game.hpp"
 #include "my_level.hpp"
 #include "my_monst.hpp"
 #include "my_python.hpp"
@@ -311,10 +312,13 @@ void Thing::is_stuck_update(void)
   //
   // Check if we are still stuck
   //
+
   if (stuck_count()) {
     if (! is_stuck_check()) {
       if (is_player()) {
         msg("You are no longer stuck!");
+        debuff_remove(tp_find("debuff_stuck"));
+        game->set_request_to_remake_rightbar();
       } else if (is_monst()) {
         msg("%s is no longer stuck.", text_The().c_str());
       }
@@ -340,6 +344,9 @@ void Thing::is_stuck_update(void)
     stuck("newly stuck at location");
 
     if (is_player()) {
+      debuff_add_if_not_found(tp_find("debuff_stuck"));
+      game->set_request_to_remake_rightbar();
+
       if (level->is_spiderweb(curr_at.x, curr_at.y)) {
         msg("You are trapped in a web!");
       } else if (level->is_block_of_ice(curr_at.x, curr_at.y)) {

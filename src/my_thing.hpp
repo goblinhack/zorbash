@@ -2594,6 +2594,13 @@ public:
   int tick_last_did_something_set(uint32_t);
   int tick_last_did_something(void);
 
+  int tick_last_decr(uint32_t);
+  int tick_last_decr(void);
+  int tick_last_incr(uint32_t);
+  int tick_last_incr(void);
+  int tick_last_set(uint32_t);
+  int tick_last(void);
+
   int tick_last_seen_by_player_decr(uint32_t);
   int tick_last_seen_by_player_decr(void);
   int tick_last_seen_by_player_incr(uint32_t);

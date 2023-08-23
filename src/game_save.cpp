@@ -134,6 +134,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->tick_born);
   out << bits(my.t->tick_last_awoke);
   out << bits(my.t->tick_last_did_something);
+  out << bits(my.t->tick_last);
   out << bits(my.t->tick_last_dropped);
   out << bits(my.t->tick_last_escape);
   out << bits(my.t->tick_last_gas_healing_exposure);
