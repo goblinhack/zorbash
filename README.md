@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - player stuck debuff                                                                                                                        -->
 <!-- - immune to slow/hold                                                                                                                        -->
 <!-- - spell of beckoning                                                                                                                         -->
 <!-- - totem minions should not die immediately?                                                                                                  -->
@@ -187,9 +186,9 @@ Content:
 - 15 x weapons
 - 13 x buffs
 - 11 x skills
+- 7 x debuffs
 - 6 x staffs
 - 6 x shield
-- 6 x debuffs
 - 6 x boots
 - 5 x rings
 - 5 x keys
