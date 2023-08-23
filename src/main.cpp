@@ -514,15 +514,15 @@ static void usage(void)
   CON(" --no-debug                  -- Disable debugs.");
   CON(" ");
   CON("Testing options:");
-  CON(" --test-dungeon-gen          -- Generate lots of dungeons to check for errors");
+  CON(" --test-biome-chasms         -- Test the chasms biome");
+  CON(" --test-biome-flooded        -- Test the flooded biome");
+  CON(" --test-biome-ice            -- Test the ice biome");
+  CON(" --test-biome-lava           -- Test the lava biome");
+  CON(" --test-biome-swamp          -- Test the swamp biome");
+  CON(" --test-depth <number>       -- Set the level depth for testing");
+  CON(" --test-dungeon              -- Generate lots of dungeons to check for errors");
   CON(" --test-save-load            -- Testing level save and load");
   CON(" --test-start                -- Skip menus, start the game at a test level.");
-  CON(" --test-depth <number>       -- Set the level depth for testing");
-  CON(" --test-biome-swamp          -- Test the swamp biome");
-  CON(" --test-biome-ice            -- Test the ice biome");
-  CON(" --test-biome-chasms         -- Test the chasms biome");
-  CON(" --test-biome-lava           -- Test the lava biome");
-  CON(" --test-biome-flooded        -- Test the flooded biome");
   CON(" ");
   CON("Written by goblinhack@gmail.com");
 }
@@ -617,7 +617,7 @@ static void parse_args(int argc, char *argv[])
       continue;
     }
 
-    if (! strcasecmp(argv[ i ], "--test-dungeon-gen") || ! strcasecmp(argv[ i ], "-test-dungeon-gen")) {
+    if (! strcasecmp(argv[ i ], "--test-dungeon") || ! strcasecmp(argv[ i ], "-test-dungeon")) {
       g_opt_test_dungeon_gen = true;
       g_opt_tests            = true;
       continue;
