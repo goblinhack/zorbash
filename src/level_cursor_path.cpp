@@ -154,10 +154,8 @@ std::vector< point > Level::cursor_path_draw_line_attempt(Thingp it, point start
 
   //
   // If standing on a hazard, then plot a course that allows travel over hazards.
-  // Or likewise if the cursor is on a hazard.
   //
-  if (is_cursor_path_hazard(player->curr_at.x, player->curr_at.y)
-      || (cursor && is_cursor_path_hazard(cursor->curr_at.x, cursor->curr_at.y))) {
+  if (is_cursor_path_hazard(player->curr_at.x, player->curr_at.y)) {
     //
     // Just map the shortest path outta here
     //
@@ -170,7 +168,71 @@ std::vector< point > Level::cursor_path_draw_line_attempt(Thingp it, point start
         }
       }
     }
+  } else if (cursor && is_cursor_path_hazard(cursor->curr_at.x, cursor->curr_at.y)) {
+    if (is_lava(cursor->curr_at.x, cursor->curr_at.y)) {
+      //
+      // If the cursor is on a hazard then allow creating a path via hazards.
+      //
+      // However, be careful. If we click on lava, and the shortest path
+      // to that lava is via a chasm, then we do not want to jump into the
+      // chasm.
+      //
+      for (auto y = miny; y < maxy; y++) {
+        for (auto x = minx; x < maxx; x++) {
+          if (is_cursor_path_hazard(x, y)) {
+            if (! is_lava(x, y)) {
+              set(d.val, x, y, DMAP_IS_WALL);
+              continue;
+            }
+          }
+          if (is_cursor_path_blocker(it, x, y)) {
+            set(d.val, x, y, DMAP_IS_WALL);
+          } else {
+            set(d.val, x, y, DMAP_IS_PASSABLE);
+          }
+        }
+      }
+    } else if (is_chasm(cursor->curr_at.x, cursor->curr_at.y)) {
+      //
+      // If the cursor is on a hazard then allow creating a path via hazards.
+      //
+      // However, be careful. If we click on chasm, and the shortest path
+      // to that chasm is through lava, then we do not want to walk through
+      // the lava!
+      //
+      for (auto y = miny; y < maxy; y++) {
+        for (auto x = minx; x < maxx; x++) {
+          if (is_cursor_path_hazard(x, y)) {
+            if (! is_chasm(x, y)) {
+              set(d.val, x, y, DMAP_IS_WALL);
+              continue;
+            }
+          }
+          if (is_cursor_path_blocker(it, x, y)) {
+            set(d.val, x, y, DMAP_IS_WALL);
+          } else {
+            set(d.val, x, y, DMAP_IS_PASSABLE);
+          }
+        }
+      }
+    } else {
+      //
+      // Plough through all hazards? This is probably not good. Let's play safe.
+      //
+      for (auto y = miny; y < maxy; y++) {
+        for (auto x = minx; x < maxx; x++) {
+          if (is_cursor_path_blocker(it, x, y) || is_cursor_path_hazard(x, y)) {
+            set(d.val, x, y, DMAP_IS_WALL);
+          } else {
+            set(d.val, x, y, DMAP_IS_PASSABLE);
+          }
+        }
+      }
+    }
   } else {
+    //
+    // Normal path. Avoid hazards.
+    //
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
         if (is_cursor_path_blocker(it, x, y) || is_cursor_path_hazard(x, y)) {
@@ -222,8 +284,8 @@ std::vector< point > Level::cursor_path_draw_line_attempt(Thingp it, point start
   }
 
   //
-  // If we could not reach the target, then the path will just plot the distance from the start, which is not what we
-  // want.
+  // If we could not reach the target, then the path will just plot the distance from the start, which is not what
+  // we want.
   //
   if (p[ path_size - 1 ] != end) {
     dbg2("Could not reach");

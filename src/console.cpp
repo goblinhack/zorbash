@@ -262,8 +262,6 @@ int term_color_to_console_color(color c)
     return TERM_COLOR_WHITE;
   if (c == GREEN)
     return TERM_COLOR_GREEN;
-  if (c == LAVA)
-    return TERM_COLOR_RED;
   if (c == LIGHTBLUE)
     return TERM_COLOR_BLUE;
   if (c == LIGHTGREEN)

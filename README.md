@@ -1,7 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- - immune to slow/hold                                                                                                                        -->
-<!-- - more orangey lava                                                                                                                          -->
 <!-- - spell of beckoning                                                                                                                         -->
 <!-- - totem minions should not die immediately?                                                                                                  -->
 <!-- - ogre totems?                                                                                                                               -->
