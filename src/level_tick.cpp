@@ -332,6 +332,12 @@ void Level::tick_(void)
         continue;
       }
 
+      //
+      // We need to check this per move in case something is stuck now and is unable to
+      // tick (excessive slow spells)
+      //
+      t->is_stuck_update();
+
       int remaining = t->movement_remaining();
       if (t->tp()->move_speed()) {
         //
@@ -365,7 +371,7 @@ void Level::tick_(void)
       game->things_are_moving = true;
 
       auto speed = t->move_speed_total();
-      if (speed) {
+      if (speed > 0) {
         if (player) {
           //
           // The speed of monsters moving is always relative to the player

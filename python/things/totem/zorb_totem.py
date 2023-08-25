@@ -32,7 +32,7 @@ def on_want_to_shoot_at(me, target, target_x, target_y):  # Return True on doing
         return
 
     roll = my.py_d100()
-    if roll < 80:
+    if roll < 90:
         my.thing_sound_play_channel(me, my.CHANNEL_WEAPON, "lightning_a")
         my.thing_shoot_projectile_or_laser_at(me, "laser_lightning", target)
     else:

@@ -80,11 +80,6 @@ void Thing::achieve_goals_in_life(void)
   light_distance_update();
 
   //
-  // Check if stuck in a web
-  //
-  is_stuck_update();
-
-  //
   // If newly spawned, do not immediately move. That looks strange with summon monst spell.
   //
   if (is_monst()) {
@@ -345,11 +340,6 @@ void Thing::achieve_goals_in_death(void)
 {
   dbg("Achieve death goals at tick %u", game->tick_current);
   TRACE_AND_INDENT();
-
-  //
-  // Check if stuck in a web
-  //
-  is_stuck_update();
 
   resurrect_tick();
   update_tick();

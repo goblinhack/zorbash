@@ -126,8 +126,44 @@ bool Thing::is_stuck_check(void)
   // Slowed so much it cannot move?
   //
   if (tp()->move_speed()) {
-    if (move_speed_total() <= 0) {
+    if (move_speed_total() == 0) {
       return true;
+    }
+
+    //
+    // So slow that your body stops functioning?
+    //
+    if (move_speed_total() < 0) {
+      if (is_player()) {
+        //
+        // Body shutdown due to being too slow
+        //
+        msg("You became so slow, you're body just stopped...");
+        dead("body just stopped");
+        return true;
+      } else if (is_magical() || is_undead() || is_ethereal()) {
+        //
+        // The undead really don't care if their body stops working.
+        //
+        return true;
+      } else if (is_flying()) {
+        //
+        // Body shutdown due to being too slow
+        //
+        dead("fell to the ground dead");
+        return true;
+      } else if (is_humanoid()) {
+        //
+        // Body shutdown due to being too slow
+        //
+        dead("simply stopped");
+        return true;
+      } else {
+        //
+        // Stuck
+        //
+        return true;
+      }
     }
   }
 
