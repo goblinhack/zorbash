@@ -310,6 +310,17 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
   }
 
   //
+  // If paralysed, wait it out
+  //
+  if (paralysis_count() > 0) {
+    change_state(MONST_STATE_RESTING, "nothing to do, rest");
+    if (is_player()) {
+      game->tick_begin("nothing to do, paralysed,rest");
+    }
+    return true;
+  }
+
+  //
   // What is the point of it all?
   //
   AI_LOG("Nothing to do at all.");
