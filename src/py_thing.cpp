@@ -310,7 +310,7 @@ PyObject *thing_spell_cast_at(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   if (! owner->spell_cast_at(what, target)) {
-    owner->err("Cannot spell_cast %s at %s", item, target->to_short_string().c_str());
+    owner->log("Cannot cast spell %s at %s", item, target->to_short_string().c_str());
     Py_RETURN_FALSE;
   }
 
