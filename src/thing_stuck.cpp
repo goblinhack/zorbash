@@ -407,12 +407,12 @@ void Thing::is_stuck_update(void)
         msg("%s is stuck!", text_The().c_str());
       }
     }
-  }
 
-  if (is_frozen) {
-    popup(string_sprintf("%%fg=lightblue$!"));
-  } else {
-    popup(string_sprintf("%%fg=red$!"));
+    if (is_frozen) {
+      popup(string_sprintf("%%fg=lightblue$Frozen!%%fg=reset$"));
+    } else {
+      popup(string_sprintf("Stuck!"));
+    }
   }
 
   //
