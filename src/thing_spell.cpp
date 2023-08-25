@@ -69,7 +69,8 @@ bool Thing::spell_add(Thingp new_spell)
 
   if (is_player()) {
     if (! spellbox_id_insert(new_spell)) {
-      dbg("No; no space in spellbox");
+      msg("You cannot add any more skills!");
+      new_spell->dead("too many spells");
       return false;
     }
   }
@@ -294,15 +295,7 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
     FOR_ALL_THINGS_END()
   }
 
-  TRACE_AND_INDENT();
   dbg("Cast %s at %s", what->to_short_string().c_str(), target->to_string().c_str());
-
-  //
-  // Move to the new location.
-  //
-  what->move_to_immediately(target_at);
-
-  dbg("Cast spell particle");
   TRACE_AND_INDENT();
 
   projectile_shoot_at(what, what->gfx_targeted_projectile(), target_at);

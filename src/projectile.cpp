@@ -69,7 +69,6 @@ Projectile_::Projectile_(Levelp level, ThingId thing_id, ThingId victim_id, Proj
   // "projectile_green.{frame}.15",
   // "projectile_green.{frame}.16",
   //
-  //
   // Use the preferred name if set.
   //
   if (proj_tp) {

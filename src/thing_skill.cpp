@@ -68,7 +68,8 @@ bool Thing::skill_add(Thingp new_skill)
 
   if (is_player()) {
     if (! skillbox_id_insert(new_skill)) {
-      dbg("No; no space in skillbox");
+      msg("You cannot receive any more skills!");
+      new_skill->dead("too many skills");
       return false;
     }
   }

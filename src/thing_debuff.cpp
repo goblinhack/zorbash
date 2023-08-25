@@ -7,9 +7,9 @@
 #include "my_thing.hpp"
 #include "my_wid_debuffbox.hpp"
 
-bool Thing::debuff_add(Thingp what)
+bool Thing::debuff_add(Thingp debuff)
 {
-  dbg("Try to add debuff %s", what->to_short_string().c_str());
+  dbg("Try to add debuff %s", debuff->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   if (! maybe_itemsp()) {
@@ -19,24 +19,28 @@ bool Thing::debuff_add(Thingp what)
 
   FOR_ALL_DEBUFFS(item)
   {
-    if (item == what->id) {
+    if (item == debuff->id) {
       dbg("No; already carried");
       return false;
     }
   }
 
+  //
+  // There has to be a limit to misfortune. Plus we only have so much space in the box.
+  //
   if (is_player()) {
-    if (! debuffbox_id_insert(what)) {
-      dbg("No; no space in debuffbox");
+    if (! debuffbox_id_insert(debuff)) {
+      msg("You cannot receive any more debuffs!");
+      debuff->dead("too many debuffs");
       return false;
     }
   }
 
-  itemsp()->debuffs.push_back(what->id);
-  what->owner_set(this);
-  what->hide("add debuff");
+  itemsp()->debuffs.push_back(debuff->id);
+  debuff->owner_set(this);
+  debuff->hide("add debuff");
 
-  dbg("Add debuff %s", what->to_short_string().c_str());
+  dbg("Add debuff %s", debuff->to_short_string().c_str());
 
   if (is_player()) {
     wid_debuffbox_init();
@@ -45,45 +49,45 @@ bool Thing::debuff_add(Thingp what)
   return true;
 }
 
-bool Thing::debuff_remove(Thingp what)
+bool Thing::debuff_remove(Thingp debuff)
 {
-  if (! what) {
+  if (! debuff) {
     return false;
   }
 
-  dbg("Removing debuff %s", what->to_short_string().c_str());
+  dbg("Removing debuff %s", debuff->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  auto existing_owner = what->immediate_owner();
+  auto existing_owner = debuff->immediate_owner();
   if (existing_owner != this) {
-    err("Attempt to remove debuff %s which is not owned", what->to_short_string().c_str());
+    err("Attempt to remove debuff %s which is not owned", debuff->to_short_string().c_str());
     return false;
   }
 
-  Thingp o = what->top_owner();
+  Thingp o = debuff->top_owner();
   if (o) {
     if (o->is_player()) {
-      o->debuffbox_id_remove(what);
+      o->debuffbox_id_remove(debuff);
     }
   }
 
-  what->owner_unset();
+  debuff->owner_unset();
 
   auto items = itemsp();
-  auto found = std::find(items->debuffs.begin(), items->debuffs.end(), what->id);
+  auto found = std::find(items->debuffs.begin(), items->debuffs.end(), debuff->id);
   if (found != items->debuffs.end()) {
     items->debuffs.erase(found);
   }
 
-  dbg("Removed %s", what->to_short_string().c_str());
-  what->dead("removed");
+  dbg("Removed %s", debuff->to_short_string().c_str());
+  debuff->dead("removed");
 
   game->set_request_to_remake_debuffbox();
 
   return true;
 }
 
-Thingp Thing::debuff_find(const std::string &what)
+Thingp Thing::debuff_find(const std::string &debuff)
 {
   TRACE_NO_INDENT();
 
@@ -95,7 +99,7 @@ Thingp Thing::debuff_find(const std::string &what)
   {
     auto t = level->thing_find(id);
     if (t) {
-      if (t->name() == what) {
+      if (t->name() == debuff) {
         return t;
       }
     }
@@ -121,16 +125,16 @@ void Thing::debuff_remove_all(void)
   }
 }
 
-bool Thing::debuff_use(Thingp what)
+bool Thing::debuff_use(Thingp debuff)
 {
-  dbg("Try to use debuff %s", what->to_short_string().c_str());
+  dbg("Try to use debuff %s", debuff->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  used(what, this, false /* remove after use */);
+  used(debuff, this, false /* remove after use */);
   return true;
 }
 
-bool Thing::debuff_add(Tpp what)
+bool Thing::debuff_add(Tpp debuff)
 {
   if (! maybe_itemsp()) {
     return false;
@@ -139,7 +143,7 @@ bool Thing::debuff_add(Tpp what)
   //
   // Need to allow for duplicates, so cannot check if the tp exists
   //
-  auto t = level->thing_new(what, curr_at);
+  auto t = level->thing_new(debuff, curr_at);
   if (unlikely(! t)) {
     return false;
   }
@@ -152,7 +156,7 @@ bool Thing::debuff_add(Tpp what)
   return true;
 }
 
-bool Thing::debuff_add_if_not_found(Tpp what)
+bool Thing::debuff_add_if_not_found(Tpp debuff)
 {
   if (! maybe_itemsp()) {
     return false;
@@ -161,7 +165,7 @@ bool Thing::debuff_add_if_not_found(Tpp what)
   FOR_ALL_DEBUFFS(item)
   {
     auto t = level->thing_find(item.id);
-    if (t && (t->tp() == what)) {
+    if (t && (t->tp() == debuff)) {
       return true;
     }
   }
@@ -169,7 +173,7 @@ bool Thing::debuff_add_if_not_found(Tpp what)
   //
   // Need to allow for duplicates, so cannot check if the tp exists
   //
-  auto t = level->thing_new(what, curr_at);
+  auto t = level->thing_new(debuff, curr_at);
   if (unlikely(! t)) {
     return false;
   }
@@ -182,7 +186,7 @@ bool Thing::debuff_add_if_not_found(Tpp what)
   return true;
 }
 
-bool Thing::debuff_remove(Tpp what)
+bool Thing::debuff_remove(Tpp debuff)
 {
   if (! maybe_itemsp()) {
     return false;
@@ -191,7 +195,7 @@ bool Thing::debuff_remove(Tpp what)
   FOR_ALL_DEBUFFS(item)
   {
     auto t = level->thing_find(item.id);
-    if (t && (t->tp() == what)) {
+    if (t && (t->tp() == debuff)) {
       debuff_remove(t);
       return true;
     }

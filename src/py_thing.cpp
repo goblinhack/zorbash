@@ -314,6 +314,8 @@ PyObject *thing_spell_cast_at(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
+  what->dead("used");
+
   Py_RETURN_TRUE;
 }
 

@@ -28,14 +28,19 @@ def on_death(me, x, y):
 
 def on_want_to_shoot_at(me, target, target_x, target_y):  # Return True on doing an action
     # my.con("target  {} {:X} {},{}".format(my.thing_name_get(target), target, target_x, target_y))
-    my.thing_sound_play_channel(me, my.CHANNEL_WEAPON, "lightning_a")
-    my.thing_shoot_projectile_or_laser_at(me, "laser_lightning", target)
-
     if my.thing_is_same_mob(me, target):
         return
 
-    if my.thing_is_player(target) or my.thing_is_alive_monst(target):
-        my.thing_spell_cast_at(me, "spell_slow", target)
+    roll = my.py_d100()
+    if roll < 80:
+        my.thing_sound_play_channel(me, my.CHANNEL_WEAPON, "lightning_a")
+        my.thing_shoot_projectile_or_laser_at(me, "laser_lightning", target)
+    else:
+        if my.thing_is_player(target) or my.thing_is_alive_monst(target):
+            my.thing_spell_cast_at(me, "spell_slow", target)
+        else:
+            my.thing_sound_play_channel(me, my.CHANNEL_WEAPON, "lightning_a")
+            my.thing_shoot_projectile_or_laser_at(me, "laser_lightning", target)
 
     return True
 
@@ -69,7 +74,7 @@ def tp_init(name, text_long_name):
     my.is_always_hit(self, True)
     my.is_attackable_by_monst(self, True)
     my.on_want_to_shoot_at_do(self, "me.on_want_to_shoot_at()")
-    my.chance_d1000_shooting(self, 100)
+    my.chance_d1000_shooting(self, 200)
     my.is_able_to_see_in_the_dark(self, True)
     my.is_able_to_shoot_at_close_range(self, True)
     my.is_able_to_shoot_at(self, True)
