@@ -75,9 +75,11 @@ bool Thing::debuff_remove(Thingp what)
     items->debuffs.erase(found);
   }
 
+  dbg("Removed %s", what->to_short_string().c_str());
+  what->dead("removed");
+
   game->set_request_to_remake_debuffbox();
 
-  dbg("Removed %s", what->to_short_string().c_str());
   return true;
 }
 

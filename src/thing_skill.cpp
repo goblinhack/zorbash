@@ -145,9 +145,11 @@ bool Thing::skill_remove(Thingp what)
     items->skills.erase(found);
   }
 
+  dbg("Removed %s", what->to_short_string().c_str());
+  what->dead("removed");
+
   game->set_request_to_remake_skillbox();
 
-  dbg("Removed %s", what->to_short_string().c_str());
   return true;
 }
 

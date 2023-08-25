@@ -142,9 +142,11 @@ bool Thing::spell_remove(Thingp what)
     items->spells.erase(found);
   }
 
-  game->set_request_to_remake_spellbox();
-
   dbg("Removed %s", what->to_short_string().c_str());
+  what->dead("removed");
+
+  game->set_request_to_remake_skillbox();
+
   return true;
 }
 
