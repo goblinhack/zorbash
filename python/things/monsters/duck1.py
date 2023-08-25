@@ -37,6 +37,7 @@ def tp_init(name, text_long_name):
     my.ai_wanderer(self, True)
     my.attack_eater(self, True)
     my.collision_check(self, True)
+    my.gfx_pixelart_submergible(self, True)
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 5)
     my.distance_avoid(self, 5)

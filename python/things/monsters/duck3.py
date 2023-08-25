@@ -38,6 +38,7 @@ def tp_init(name, text_long_name):
     my.attack_eater(self, True)
     my.attack_humanoid(self, True)
     my.attack_meat(self, True)
+    my.gfx_pixelart_submergible(self, True)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 5)

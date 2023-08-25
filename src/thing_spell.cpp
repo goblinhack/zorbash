@@ -307,6 +307,21 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
     //
     // Failed
     //
+  } else if ((target->is_immune_to_spell_slow() && what->is_spell_slow())
+             || (target->is_immune_to_spell_hold() && what->is_spell_hold())) {
+    //
+    // Immune. Spell fails.
+    //
+    dbg("Spell fails on immune target: %s", target->to_string().c_str());
+    TRACE_AND_INDENT();
+
+    if (target->is_player()) {
+      target->msg("%%fg=green$You are immune to %s %s spell.%%fg=reset$", apostrophise(text_the()).c_str(),
+                  what->text_long_name().c_str());
+    } else if (target->is_monst() && is_player()) {
+      msg("%%fg=yellow$%s is immune to your %s spell.%%fg=reset$", target->text_The().c_str(),
+          what->text_long_name().c_str());
+    }
   } else if (! target->is_attackable_by_monst() && ! target->is_attackable_by_monst()) {
     //
     // Probably found nothing to hit

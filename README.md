@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - immune to slow/hold                                                                                                                        -->
 <!-- - spell of beckoning                                                                                                                         -->
 <!-- - ogre totems?                                                                                                                               -->
 <!-- - stealth                                                                                                                                    -->
