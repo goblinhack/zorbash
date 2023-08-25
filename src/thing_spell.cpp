@@ -303,7 +303,15 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
   dbg("Spell is used");
   TRACE_AND_INDENT();
 
-  if (this == target) {
+  if (! target) {
+    //
+    // Failed
+    //
+  } else if (! target->is_attackable_by_monst() && ! target->is_attackable_by_monst()) {
+    //
+    // Probably found nothing to hit
+    //
+  } else if (this == target) {
     //
     // Allow the ability to cast spells on yourself
     //
@@ -361,7 +369,7 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
     game->change_state(Game::STATE_NORMAL, "finished choosing a target");
   }
 
-  return true;
+  return target != nullptr;
 }
 
 void Thing::spell_deactivate(Thingp what)
