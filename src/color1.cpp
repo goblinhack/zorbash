@@ -156,7 +156,6 @@ color GOLD1;
 color GOLD2;
 color GOLD3;
 color GOLD4;
-color LAVA;
 color LIME;
 color LIMEGREEN;
 color PALEBLUE;
@@ -304,7 +303,6 @@ void color_init1(void)
   color_set("gold3", &GOLD3, 205, 173, 0, 255);
   color_set("gold4", &GOLD4, 139, 117, 0, 255);
   color_set("gold", &GOLD, 255, 215, 0, 255);
-  color_set("lava", &LAVA, 207, 16, 32, 255);
   color_set("limegreen", &LIMEGREEN, 50, 205, 50, 255);
   color_set("lime", &LIME, 50, 205, 50, 255);
   color_set("none", &COLOR_NONE, 0, 0, 0, 0);

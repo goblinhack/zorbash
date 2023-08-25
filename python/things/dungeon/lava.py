@@ -18,7 +18,8 @@ def lava_init(name, text_long_name, tiles=[]):
     my.dmg_fire_dice(self, "1d12+6")
     my.dmg_nat_att_type(self, "burn")
     my.gfx_ascii_animated(self, True)
-    my.gfx_ascii_bg_color_spread_hue(self, 30)
+    my.gfx_ascii_bg_color_spread_green(self, 30)
+    my.gfx_ascii_bg_color_spread_red(self, 30)
     my.gfx_ascii_color_fg_unchanged_by_lights(self, True)
     my.gfx_ascii_color_is_animated(self, True)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
@@ -57,10 +58,10 @@ def lava_init(name, text_long_name, tiles=[]):
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
 
-    delay = 200
+    delay = 150
     for t in tiles:
         my.tile(self,
-                ascii_fg_char="L", ascii_bg_col_name="red", ascii_fg_col_name="white",
+                ascii_fg_char="~", ascii_bg_col_name="orange", ascii_fg_col_name="orange",
                 tile=t, delay_ms=delay)
 
     my.tp_update(self)

@@ -384,7 +384,6 @@ extern color KHAKI1;
 extern color KHAKI2;
 extern color KHAKI3;
 extern color KHAKI4;
-extern color LAVA;
 extern color LAVENDER;
 extern color LEMON_CHIFFON;
 extern color LEMONCHIFFON;
