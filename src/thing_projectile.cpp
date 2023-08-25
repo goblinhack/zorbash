@@ -48,6 +48,9 @@ bool Thing::projectile_choose_target(Thingp item, Thingp victim /* can be null *
   return is_target_select(item);
 }
 
+//
+// Returns the target
+//
 Thingp Thing::projectile_shoot_at(Thingp item, const std::string &gfx_targeted_projectile, Thingp target)
 {
   //
@@ -221,9 +224,12 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &gfx_targeted_p
     level->line_set_all_undead_on_fire(curr_at, target->curr_at, 0, "projectile");
   }
 
-  return projectile;
+  return target;
 }
 
+//
+// Returns the target
+//
 Thingp Thing::projectile_shoot_at(Thingp item, const std::string &gfx_targeted_projectile, point at)
 {
   //

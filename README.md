@@ -2,9 +2,7 @@
 <!-- ------                                                                                                                                       -->
 <!-- - immune to slow/hold                                                                                                                        -->
 <!-- - spell of beckoning                                                                                                                         -->
-<!-- - totem minions should not die immediately?                                                                                                  -->
 <!-- - ogre totems?                                                                                                                               -->
-<!-- - spell saving throws                                                                                                                        -->
 <!-- - stealth                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

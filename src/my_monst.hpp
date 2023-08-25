@@ -121,6 +121,7 @@ public:
   int monst_state         = {};
   int move_count          = {};
   int movement_remaining  = {};
+  int move_penalty        = {}; // Blocks you from moving until this is zero
   int move_speed_bonus    = {};
   int move_speed_curr     = {};
   int necrosis            = {};

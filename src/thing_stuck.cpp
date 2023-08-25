@@ -139,7 +139,7 @@ bool Thing::is_stuck_check(void)
         // Body shutdown due to being too slow
         //
         msg("You became so slow, you're body just stopped...");
-        dead("body just stopped");
+        dead("by extreme slowing");
         return true;
       } else if (is_magical() || is_undead() || is_ethereal()) {
         //
@@ -150,13 +150,13 @@ bool Thing::is_stuck_check(void)
         //
         // Body shutdown due to being too slow
         //
-        dead("fell to the ground dead");
+        dead("bu falling to the ground dead");
         return true;
       } else if (is_humanoid()) {
         //
         // Body shutdown due to being too slow
         //
-        dead("simply stopped");
+        dead("by extreme slowing");
         return true;
       } else {
         //

@@ -85,6 +85,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->mob_id);
   out << bits(my.t->monst_state);
   out << bits(my.t->move_count);
+  out << bits(my.t->move_penalty);
   out << bits(my.t->movement_remaining);
   out << bits(my.t->move_speed_bonus);
   out << bits(my.t->move_speed_curr);

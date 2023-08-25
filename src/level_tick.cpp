@@ -328,7 +328,19 @@ void Level::tick_(void)
     TRACE_NO_INDENT();
     FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
     {
+      //
+      // Allow things like the player the initiative
+      //
       if (likely(t->tick_prio() != tick_prio)) {
+        continue;
+      }
+
+      //
+      // Unable to move this round?
+      //
+      if (t->move_penalty() > 0) {
+        t->move_penalty_decr();
+        t->movement_remaining_set(0);
         continue;
       }
 

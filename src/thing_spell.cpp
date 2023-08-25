@@ -3,6 +3,7 @@
 //
 
 #include "my_array_bounds_check.hpp"
+#include "my_english.hpp"
 #include "my_game.hpp"
 #include "my_math.hpp"
 #include "my_monst.hpp"
@@ -199,11 +200,10 @@ bool Thing::spell_cast(Thingp what)
   }
 
   if (what->is_target_select()) {
-    msg("You prepare to cast %s.", what->text_the().c_str());
     return item_choose_target(what);
   }
 
-  msg("You cast %s.", what->text_the().c_str());
+  msg("You cast %s spell.", what->text_the().c_str());
   used(what, this, false /* remove after use */);
 
   return true;
@@ -298,11 +298,60 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
   dbg("Cast %s at %s", what->to_short_string().c_str(), target->to_string().c_str());
   TRACE_AND_INDENT();
 
-  projectile_shoot_at(what, what->gfx_targeted_projectile(), target_at);
+  target = projectile_shoot_at(what, what->gfx_targeted_projectile(), target_at);
 
   dbg("Spell is used");
   TRACE_AND_INDENT();
-  used(what, target, false /* remove after use */);
+
+  if (this == target) {
+    //
+    // Allow the ability to cast spells on yourself
+    //
+    dbg("Spell is used on self");
+    TRACE_AND_INDENT();
+  } else {
+    //
+    // Casting upon another
+    //
+    dbg("Spell is used on target: %s", target->to_string().c_str());
+    TRACE_AND_INDENT();
+
+    if (d20() + stat_psi_bonus() > target->stat_psi()) {
+      //
+      // Spell succeeds
+      //
+      dbg("Spell succeeds on target: %s", target->to_string().c_str());
+      TRACE_AND_INDENT();
+
+      if (target->is_player()) {
+        target->msg("%%fg=yellow$You are hit by %s %s spell.%%fg=reset$", apostrophise(text_the()).c_str(),
+                    what->text_long_name().c_str());
+      } else if (target->is_monst() && is_player()) {
+        msg("%%fg=green$Your spell succeeds.%%fg=reset$");
+      }
+
+      used(what, target, false /* remove after use */);
+
+      //
+      // Prevent the thing from moving due to shock
+      //
+      target->move_penalty_incr();
+    } else {
+      //
+      // Spell fails
+      //
+      dbg("Spell fails on target: %s", target->to_string().c_str());
+      TRACE_AND_INDENT();
+
+      if (target->is_player()) {
+        target->msg("%%fg=green$You resist %s %s spell.%%fg=reset$", apostrophise(text_the()).c_str(),
+                    what->text_long_name().c_str());
+      } else if (target->is_monst() && is_player()) {
+        msg("%%fg=yellow$%s resists your %s spell.%%fg=reset$", target->text_The().c_str(),
+            what->text_long_name().c_str());
+      }
+    }
+  }
 
   if (is_player()) {
     game->tick_begin("player cast a spell");

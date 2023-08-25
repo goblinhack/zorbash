@@ -1981,6 +1981,12 @@ public:
   int move_count_incr(void);
   int move_count_set(int);
   int move_count(void);
+  int move_penalty_decr(int);
+  int move_penalty_decr(void);
+  int move_penalty_incr(int);
+  int move_penalty_incr(void);
+  int move_penalty_set(int);
+  int move_penalty(void);
   int move_speed_bonus_decr(int);
   int move_speed_bonus_decr(void);
   int move_speed_bonus_incr(int);
