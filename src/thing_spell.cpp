@@ -384,7 +384,7 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
     game->change_state(Game::STATE_NORMAL, "finished choosing a target");
   }
 
-  return target != nullptr;
+  return target;
 }
 
 void Thing::spell_deactivate(Thingp what)
