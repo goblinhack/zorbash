@@ -710,10 +710,10 @@ int Thing::is_unused_flag102(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag102());
 }
-int Thing::is_unused_flag103(void)
+int Thing::is_able_to_attack_totems(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag103());
+  return (tp()->is_able_to_attack_totems());
 }
 int Thing::is_able_to_spell_cast(void)
 {

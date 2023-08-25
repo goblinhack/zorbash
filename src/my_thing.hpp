@@ -1363,6 +1363,7 @@ public:
   int is_able_to_amplify_footsteps(void);
   int is_able_to_attack_mobs(void);
   int is_able_to_attack_owner(void);
+  int is_able_to_attack_totems(void);
   int is_able_to_be_equipped(void);
   int is_able_to_be_resurrected(void);
   int is_able_to_be_surprised(void);
@@ -1800,7 +1801,6 @@ public:
   int is_unused_flag100(void);
   int is_unused_flag101(void);
   int is_unused_flag102(void);
-  int is_unused_flag103(void);
   int is_unused_flag10(void);
   int is_unused_flag11(void);
   int is_unused_flag12(void);

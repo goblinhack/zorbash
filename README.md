@@ -4,7 +4,6 @@
 <!-- - spell of beckoning                                                                                                                         -->
 <!-- - totem minions should not die immediately?                                                                                                  -->
 <!-- - ogre totems?                                                                                                                               -->
-<!-- - speed < 0 your heart stops?                                                                                                                -->
 <!-- - spell saving throws                                                                                                                        -->
 <!-- - stealth                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->

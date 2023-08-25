@@ -239,6 +239,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.hunger_is_hunger_level_hungry_at_pct(self, 50)
     my.hunger_is_hunger_level_starving_at_pct(self, 10)
     my.is_able_to_attack_mobs(self, True)
+    my.is_able_to_attack_totems(self, True)
     my.is_able_to_be_surprised(self, True)
     my.is_able_to_be_teleported(self, True)
     my.is_able_to_break_down_doors(self, True)

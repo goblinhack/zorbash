@@ -130,10 +130,16 @@ void Thing::killed(Thingp defeater, const char *reason)
     verify(MTYPE_THING, defeater);
   }
 
-  //
-  // If a minion mob dies, kill all minions
-  //
-  if (defeater && is_mob()) {
+  if (defeater && is_totem()) {
+    //
+    // If a totem mob dies, release all minions
+    //
+    TRACE_NO_INDENT();
+    unleash_minions();
+  } else if (defeater && is_mob()) {
+    //
+    // If a minion mob dies, kill all minions
+    //
     TRACE_NO_INDENT();
     destroy_minions(defeater);
   }

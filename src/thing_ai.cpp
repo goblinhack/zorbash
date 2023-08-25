@@ -1181,6 +1181,14 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 GOAL_ADD(GOAL_PRIO_HIGHER, aggression_pct() + (int) (max_dist - dist) * health_diff - goal_penalty,
                          "attack-enemy", it);
               }
+            } else if (it->is_totem() && is_able_to_attack_totems()) {
+              //
+              // Very close, very high priority attack as they can spawn much danger! and attack you!
+              //
+              AI_LOG("Very close and can attack totem");
+
+              GOAL_ADD(GOAL_PRIO_HIGH, 300 + aggression_pct() + (int) (max_dist - dist) * health_diff - goal_penalty,
+                       "attack-nearby-totem", it);
             } else if (it->is_mob() && is_able_to_attack_mobs()) {
               //
               // Very close, very high priority attack as they can spawn much danger!

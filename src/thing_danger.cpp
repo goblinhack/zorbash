@@ -404,7 +404,7 @@ int Thing::danger_current_level(void)
 
 int Thing::is_dangerous(Thingp it)
 {
-  if (! it->is_mob() && ! it->is_monst() && ! it->is_player()) {
+  if (! it->is_totem() && ! it->is_mob() && ! it->is_monst() && ! it->is_player()) {
     return false;
   }
 

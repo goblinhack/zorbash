@@ -258,6 +258,7 @@ private:
   int _is_able_to_amplify_footsteps {};
   int _is_able_to_attack_mobs {};
   int _is_able_to_attack_owner {};
+  int _is_able_to_attack_totems {};
   int _is_able_to_be_equipped {};
   int _is_able_to_be_resurrected {};
   int _is_able_to_be_surprised {};
@@ -670,7 +671,6 @@ private:
   int _is_unused_flag100 {};
   int _is_unused_flag101 {};
   int _is_unused_flag102 {};
-  int _is_unused_flag103 {};
   int _is_unused_flag11 {};
   int _is_unused_flag12 {};
   int _is_unused_flag124 {};
@@ -1605,6 +1605,7 @@ public:
   int is_able_to_amplify_footsteps(void) const;
   int is_able_to_attack_mobs(void) const;
   int is_able_to_attack_owner(void) const;
+  int is_able_to_attack_totems(void) const;
   int is_able_to_be_equipped(void) const;
   int is_able_to_be_resurrected(void) const;
   int is_able_to_be_surprised(void) const;
@@ -2014,7 +2015,6 @@ public:
   int is_unused_flag100(void) const;
   int is_unused_flag101(void) const;
   int is_unused_flag102(void) const;
-  int is_unused_flag103(void) const;
   int is_unused_flag10(void) const;
   int is_unused_flag11(void) const;
   int is_unused_flag124(void) const;
@@ -2370,6 +2370,7 @@ public:
   void is_able_to_amplify_footsteps_set(int v);
   void is_able_to_attack_mobs_set(int v);
   void is_able_to_attack_owner_set(int v);
+  void is_able_to_attack_totems_set(int v);
   void is_able_to_be_equipped_set(int v);
   void is_able_to_be_resurrected_set(int v);
   void is_able_to_be_surprised_set(int v);
@@ -2780,7 +2781,6 @@ public:
   void is_unused_flag100_set(int v);
   void is_unused_flag101_set(int v);
   void is_unused_flag102_set(int v);
-  void is_unused_flag103_set(int v);
   void is_unused_flag10_set(int v);
   void is_unused_flag11_set(int v);
   void is_unused_flag124_set(int v);

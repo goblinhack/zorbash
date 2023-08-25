@@ -75,6 +75,7 @@ def tp_init(name, text_long_name):
     my.health_initial_dice(self, "1d6")
     my.hunger_clock_tick_freq(self, 50)
     my.is_able_to_attack_mobs(self, True)
+    my.is_able_to_attack_totems(self, True)
     my.is_able_to_be_surprised(self, True)
     my.is_able_to_be_teleported(self, True)
     my.is_able_to_break_down_doors(self, True)

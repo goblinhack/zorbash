@@ -459,6 +459,16 @@ bool Thing::possible_to_attack(const Thingp victim)
   }
 
   //
+  // Some things can be helpful and attack totems.
+  //
+  if (victim->is_totem() && is_able_to_attack_totems()) {
+    if (is_debug_type()) {
+      dbg("Can attack totem %s", victim->to_short_string().c_str());
+    }
+    return true;
+  }
+
+  //
   // Some things can be helpful and attack mobs.
   //
   if (victim->is_mob() && is_able_to_attack_mobs()) {
@@ -1512,7 +1522,8 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
       //
       // Don't swing weapons at pools of blood.
       //
-      if (victim->is_alive_monst() || victim->is_door() || victim->is_player() || victim->is_mob()) {
+      if (victim->is_alive_monst() || victim->is_door() || victim->is_player() || victim->is_mob()
+          || victim->is_totem()) {
         if (attack_options->attack[ THING_ATTACK_MELEE ]) {
           //
           // Attack with carried weapon.

@@ -141,7 +141,9 @@ bool Thing::fall(void)
   //
   // If a mob falls, the connection to the minions is severed
   //
-  if (is_mob()) {
+  if (is_totem()) {
+    unleash_minions();
+  } else if (is_mob()) {
     destroy_minions(nullptr);
   }
 

@@ -166,7 +166,15 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
         }
       }
 
-      if (t->is_block_of_ice() || t->is_mob() || t->is_monst() || t->is_player()) {
+      if (t->is_totem()) {
+        prio += danger_current_level(t);
+        prio += 200;
+        dbg2("Target-attack-best: %s monst prio %d", t->to_short_string().c_str(), prio);
+      } else if (t->is_mob()) {
+        prio += danger_current_level(t);
+        prio += 150;
+        dbg2("Target-attack-best: %s mob prio %d", t->to_short_string().c_str(), prio);
+      } else if (t->is_block_of_ice() || t->is_monst() || t->is_player()) {
         prio += danger_current_level(t);
 
         //

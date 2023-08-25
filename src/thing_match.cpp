@@ -61,6 +61,7 @@ bool Tp::matches(const std::string &what)
   if (is_able_to_amplify_footsteps() && (what == "is_able_to_amplify_footsteps")) { return true; }
   if (is_able_to_attack_mobs() && (what == "is_able_to_attack_mobs")) { return true; }
   if (is_able_to_attack_owner() && (what == "is_able_to_attack_owner")) { return true; }
+  if (is_able_to_attack_totems() && (what == "is_able_to_attack_totems")) { return true; }
   if (is_able_to_be_equipped() && (what == "is_able_to_be_equipped")) { return true; }
   if (is_able_to_be_resurrected() && (what == "is_able_to_be_resurrected")) { return true; }
   if (is_able_to_be_surprised() && (what == "is_able_to_be_surprised")) { return true; }
@@ -455,7 +456,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag100() && (what == "is_unused_flag100")) { return true; }
   if (is_unused_flag101() && (what == "is_unused_flag101")) { return true; }
   if (is_unused_flag102() && (what == "is_unused_flag102")) { return true; }
-  if (is_unused_flag103() && (what == "is_unused_flag103")) { return true; }
   if (is_unused_flag10() && (what == "is_unused_flag10")) { return true; }
   if (is_unused_flag11() && (what == "is_unused_flag11")) { return true; }
   if (is_unused_flag12() && (what == "is_unused_flag12")) { return true; }
@@ -661,6 +661,7 @@ bool Thing::matches(const std::string &what)
   if (is_able_to_amplify_footsteps() && (what == "is_able_to_amplify_footsteps")) { return true; }
   if (is_able_to_attack_mobs() && (what == "is_able_to_attack_mobs")) { return true; }
   if (is_able_to_attack_owner() && (what == "is_able_to_attack_owner")) { return true; }
+  if (is_able_to_attack_totems() && (what == "is_able_to_attack_totems")) { return true; }
   if (is_able_to_be_equipped() && (what == "is_able_to_be_equipped")) { return true; }
   if (is_able_to_be_resurrected() && (what == "is_able_to_be_resurrected")) { return true; }
   if (is_able_to_be_surprised() && (what == "is_able_to_be_surprised")) { return true; }
@@ -1057,7 +1058,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag100() && (what == "is_unused_flag100")) { return true; }
   if (is_unused_flag101() && (what == "is_unused_flag101")) { return true; }
   if (is_unused_flag102() && (what == "is_unused_flag102")) { return true; }
-  if (is_unused_flag103() && (what == "is_unused_flag103")) { return true; }
   if (is_unused_flag10() && (what == "is_unused_flag10")) { return true; }
   if (is_unused_flag11() && (what == "is_unused_flag11")) { return true; }
   if (is_unused_flag12() && (what == "is_unused_flag12")) { return true; }
@@ -1260,6 +1260,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_able_to_amplify_footsteps") { return &Thing::is_able_to_amplify_footsteps; }
   if (what == "is_able_to_attack_mobs") { return &Thing::is_able_to_attack_mobs; }
   if (what == "is_able_to_attack_owner") { return &Thing::is_able_to_attack_owner; }
+  if (what == "is_able_to_attack_totems") { return &Thing::is_able_to_attack_totems; }
   if (what == "is_able_to_be_equipped") { return &Thing::is_able_to_be_equipped; }
   if (what == "is_able_to_be_resurrected") { return &Thing::is_able_to_be_resurrected; }
   if (what == "is_able_to_be_surprised") { return &Thing::is_able_to_be_surprised; }
@@ -1647,7 +1648,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag100") { return &Thing::is_unused_flag100; }
   if (what == "is_unused_flag101") { return &Thing::is_unused_flag101; }
   if (what == "is_unused_flag102") { return &Thing::is_unused_flag102; }
-  if (what == "is_unused_flag103") { return &Thing::is_unused_flag103; }
   if (what == "is_unused_flag10") { return &Thing::is_unused_flag10; }
   if (what == "is_unused_flag11") { return &Thing::is_unused_flag11; }
   if (what == "is_unused_flag12") { return &Thing::is_unused_flag12; }
