@@ -3,6 +3,7 @@
 <!-- - spell of beckoning                                                                                                                         -->
 <!-- - ogre totems?                                                                                                                               -->
 <!-- - stealth                                                                                                                                    -->
+<!-- - portable hole and teleport?                                                                                                                -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -180,7 +181,7 @@ Content:
 - 52 x food
 - 24 x treasure
 - 23 x items
-- 16 x spells
+- 17 x spells
 - 15 x weapons
 - 13 x buffs
 - 11 x skills

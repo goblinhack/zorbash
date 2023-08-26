@@ -169,14 +169,21 @@ void Game::place_player(void)
       }
 
       if (0) {
+        // level->thing_new("block_of_ice", point(x + 1, y));
+        // level->thing_new("spell_of_holding_barrier", point(x + 1, y + 1));
+        // level->thing_new("spell_of_holding_barrier", point(x, y));
+        auto w = level->thing_new("spell_of_holding", point(x, y));
+        t->spell_add(w);
+      }
+      if (0) {
         auto w = level->thing_new("spell_hasted", point(x, y));
         t->spell_add(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("spell_slow", point(x, y));
         t->spell_add(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("spell_summon_rock", point(x, y));
         t->spell_add(w);
       }
@@ -692,7 +699,6 @@ void Game::place_player(void)
         level->thing_new("lava", point(x + 2, y + 1));
         level->thing_new("block_of_ice", point(x + 2, y + 1));
       }
-      level->thing_new("spell_of_holding", point(x + 2, y + 1));
       // level->thing_new("vampire_rose_stem", point(x, y + 1));
       // level->thing_new("fire", point(x - 4, y + 5));
       // level->thing_new("foliage", point(x - 4, y + 5));

@@ -356,6 +356,7 @@ int Tp::is_able_to_be_surprised(void) const { return _is_able_to_be_surprised; }
 int Tp::is_able_to_be_teleported(void) const { return _is_able_to_be_teleported; }
 int Tp::is_able_to_break_down_doors(void) const { return _is_able_to_break_down_doors; }
 int Tp::is_able_to_break_out_of_ice(void) const { return _is_able_to_break_out_of_ice; }
+int Tp::is_able_to_break_out_of_spell_of_holding(void) const { return _is_able_to_break_out_of_spell_of_holding; }
 int Tp::is_able_to_break_out_of_webs(void) const { return _is_able_to_break_out_of_webs; }
 int Tp::is_able_to_change_levels(void) const { return _is_able_to_change_levels; }
 int Tp::is_able_to_collect_keys(void) const { return _is_able_to_collect_keys; }
@@ -722,7 +723,7 @@ int Tp::is_smoke(void) const { return _is_smoke; }
 int Tp::is_snake(void) const { return _is_snake; }
 int Tp::is_soft(void) const { return _is_soft; }
 int Tp::is_spellbook(void) const { return _is_spellbook; }
-int Tp::is_spell_of_holding_effect(void) const { return _is_spell_of_holding_effect; }
+int Tp::is_spell_of_holding_barrier(void) const { return _is_spell_of_holding_barrier; }
 int Tp::is_spell_of_holding(void) const { return _is_spell_of_holding; }
 int Tp::is_spell_slow(void) const { return _is_spell_slow; }
 int Tp::is_spell(void) const { return _is_spell; }
@@ -758,7 +759,6 @@ int Tp::is_troll(void) const { return _is_troll; }
 int Tp::is_turret(void) const { return _is_turret; }
 int Tp::is_undead(void) const { return _is_undead; }
 int Tp::is_unused_flag100(void) const { return _is_unused_flag100; }
-int Tp::is_able_to_break_out_of_spell_of_holding(void) const { return _is_able_to_break_out_of_spell_of_holding; }
 int Tp::is_unused_flag10(void) const { return _is_unused_flag10; }
 int Tp::is_unused_flag11(void) const { return _is_unused_flag11; }
 int Tp::is_unused_flag12(void) const { return _is_unused_flag12; }
@@ -1120,6 +1120,7 @@ void Tp::is_able_to_be_surprised_set(int v) { _is_able_to_be_surprised = v; }
 void Tp::is_able_to_be_teleported_set(int v) { _is_able_to_be_teleported = v; }
 void Tp::is_able_to_break_down_doors_set(int v) { _is_able_to_break_down_doors = v; }
 void Tp::is_able_to_break_out_of_ice_set(int v) { _is_able_to_break_out_of_ice = v; }
+void Tp::is_able_to_break_out_of_spell_of_holding_set(int v) { _is_able_to_break_out_of_spell_of_holding = v; }
 void Tp::is_able_to_break_out_of_webs_set(int v) { _is_able_to_break_out_of_webs = v; }
 void Tp::is_able_to_change_levels_set(int v) { _is_able_to_change_levels = v; }
 void Tp::is_able_to_collect_keys_set(int v) { _is_able_to_collect_keys = v; }
@@ -1487,7 +1488,7 @@ void Tp::is_smoke_set(int v) { _is_smoke = v; }
 void Tp::is_snake_set(int v) { _is_snake = v; }
 void Tp::is_soft_set(int v) { _is_soft = v; }
 void Tp::is_spellbook_set(int v) { _is_spellbook = v; }
-void Tp::is_spell_of_holding_effect_set(int v) { _is_spell_of_holding_effect = v; }
+void Tp::is_spell_of_holding_barrier_set(int v) { _is_spell_of_holding_barrier = v; }
 void Tp::is_spell_of_holding_set(int v) { _is_spell_of_holding = v; }
 void Tp::is_spell_set(int v) { _is_spell = v; }
 void Tp::is_spell_slow_set(int v) { _is_spell_slow = v; }
@@ -1523,7 +1524,6 @@ void Tp::is_troll_set(int v) { _is_troll = v; }
 void Tp::is_turret_set(int v) { _is_turret = v; }
 void Tp::is_undead_set(int v) { _is_undead = v; }
 void Tp::is_unused_flag100_set(int v) { _is_unused_flag100 = v; }
-void Tp::is_able_to_break_out_of_spell_of_holding_set(int v) { _is_able_to_break_out_of_spell_of_holding = v; }
 void Tp::is_unused_flag10_set(int v) { _is_unused_flag10 = v; }
 void Tp::is_unused_flag11_set(int v) { _is_unused_flag11 = v; }
 void Tp::is_unused_flag12_set(int v) { _is_unused_flag12 = v; }

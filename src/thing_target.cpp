@@ -174,7 +174,7 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
         prio += danger_current_level(t);
         prio += 200;
         dbg2("Target-attack-best: %s mob prio %d", t->to_short_string().c_str(), prio);
-      } else if (t->is_block_of_ice() || t->is_spell_of_holding()) {
+      } else if (t->is_block_of_ice() || t->is_spell_of_holding_barrier()) {
         prio += danger_current_level(t);
         prio += 150;
         dbg2("Target-attack-best: %s monst prio %d", t->to_short_string().c_str(), prio);
@@ -661,7 +661,8 @@ bool Thing::victim_attack_best_at(int equip, ThingAttackOptionsp attack_options)
   // If stuck in a web we can only hit the web
   //
   std::vector< point > local_only = {point(0, 0)};
-  if (level->is_block_of_ice(curr_at) || level->is_spell_of_holding(curr_at) || level->is_spiderweb(curr_at)) {
+  if (level->is_block_of_ice(curr_at) || level->is_spell_of_holding_barrier(curr_at)
+      || level->is_spiderweb(curr_at)) {
     all_deltas = local_only;
     //
     // This prevents us trying to use the attack direction of the weapon when trapped.

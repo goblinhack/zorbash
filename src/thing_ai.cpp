@@ -1802,7 +1802,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(int dx, int dy)
     }
 
     if (is_able_to_break_out_of_spell_of_holding()) {
-      if (it->is_spell_of_holding() && (it->curr_at == curr_at)) {
+      if (it->is_spell_of_holding_barrier() && (it->curr_at == curr_at)) {
         //
         // Try hitting the barrier
         //

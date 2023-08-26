@@ -118,7 +118,7 @@ void Thing::location_check(Thingp filter_to)
     }
   }
 
-  if (! filter_to || filter_to->is_spell_of_holding()) {
+  if (! filter_to || filter_to->is_spell_of_holding_barrier()) {
     spell_of_holding_tick();
     if (is_dead) {
       return;

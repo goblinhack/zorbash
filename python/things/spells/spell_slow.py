@@ -28,6 +28,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.spell_cost(self, 2)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "The target of this spell will have their speed reduced.")
+    my.text_description_long2(self, "If the target is slowed to such an extent that their speed becomes negative, they many simply drop dead...")
     my.text_description_short(self, "Spell, slow.")
     my.text_description_very_short(self, "Slowed")
     my.z_depth(self, my.MAP_DEPTH_OBJ)

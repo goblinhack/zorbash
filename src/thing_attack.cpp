@@ -84,7 +84,7 @@ bool Thing::possible_to_attack(const Thingp victim)
     //
     // If stuck in a spell barrier, we can only attack locally
     //
-    if (level->is_spell_of_holding(curr_at)) {
+    if (level->is_spell_of_holding_barrier(curr_at)) {
       if (victim->curr_at != curr_at) {
         if (is_debug_type()) {
           dbg("Cannot attack %s, stuck in a spell barrier", victim->to_short_string().c_str());
@@ -390,7 +390,7 @@ bool Thing::possible_to_attack(const Thingp victim)
       return false;
     }
 
-    if (victim->is_spell_of_holding()) {
+    if (victim->is_spell_of_holding_barrier()) {
       if (is_able_to_break_out_of_spell_of_holding()) {
         if (is_debug_type()) {
           dbg("Can attack and break out of spell barrier %s", victim->to_short_string().c_str());

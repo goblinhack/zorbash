@@ -265,6 +265,7 @@ private:
   int _is_able_to_be_teleported {};
   int _is_able_to_break_down_doors {};
   int _is_able_to_break_out_of_ice {};
+  int _is_able_to_break_out_of_spell_of_holding {};
   int _is_able_to_break_out_of_webs {};
   int _is_able_to_change_levels {};
   int _is_able_to_collect_keys {};
@@ -634,7 +635,7 @@ private:
   int _is_spell {};
   int _is_spellbook {};
   int _is_spell_of_holding {};
-  int _is_spell_of_holding_effect {};
+  int _is_spell_of_holding_barrier {};
   int _is_spell_slow {};
   int _is_spider {};
   int _is_spiderweb {};
@@ -670,7 +671,6 @@ private:
   int _is_unused_flag1 {};
   int _is_unused_flag10 {};
   int _is_unused_flag100 {};
-  int _is_able_to_break_out_of_spell_of_holding {};
   int _is_unused_flag11 {};
   int _is_unused_flag12 {};
   int _is_unused_flag124 {};
@@ -1612,6 +1612,7 @@ public:
   int is_able_to_be_teleported(void) const;
   int is_able_to_break_down_doors(void) const;
   int is_able_to_break_out_of_ice(void) const;
+  int is_able_to_break_out_of_spell_of_holding(void) const;
   int is_able_to_break_out_of_webs(void) const;
   int is_able_to_change_levels(void) const;
   int is_able_to_collect_keys(void) const;
@@ -1978,7 +1979,7 @@ public:
   int is_snake(void) const;
   int is_soft(void) const;
   int is_spellbook(void) const;
-  int is_spell_of_holding_effect(void) const;
+  int is_spell_of_holding_barrier(void) const;
   int is_spell_of_holding(void) const;
   int is_spell_slow(void) const;
   int is_spell(void) const;
@@ -2014,7 +2015,6 @@ public:
   int is_turret(void) const;
   int is_undead(void) const;
   int is_unused_flag100(void) const;
-  int is_able_to_break_out_of_spell_of_holding(void) const;
   int is_unused_flag10(void) const;
   int is_unused_flag11(void) const;
   int is_unused_flag124(void) const;
@@ -2377,6 +2377,7 @@ public:
   void is_able_to_be_teleported_set(int v);
   void is_able_to_break_down_doors_set(int v);
   void is_able_to_break_out_of_ice_set(int v);
+  void is_able_to_break_out_of_spell_of_holding_set(int v);
   void is_able_to_break_out_of_webs_set(int v);
   void is_able_to_change_levels_set(int v);
   void is_able_to_collect_keys_set(int v);
@@ -2744,7 +2745,7 @@ public:
   void is_snake_set(int v);
   void is_soft_set(int v);
   void is_spellbook_set(int v);
-  void is_spell_of_holding_effect_set(int v);
+  void is_spell_of_holding_barrier_set(int v);
   void is_spell_of_holding_set(int v);
   void is_spell_set(int v);
   void is_spell_slow_set(int v);
@@ -2780,7 +2781,6 @@ public:
   void is_turret_set(int v);
   void is_undead_set(int v);
   void is_unused_flag100_set(int v);
-  void is_able_to_break_out_of_spell_of_holding_set(int v);
   void is_unused_flag10_set(int v);
   void is_unused_flag11_set(int v);
   void is_unused_flag124_set(int v);

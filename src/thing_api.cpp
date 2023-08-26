@@ -705,10 +705,10 @@ int Thing::is_able_to_break_out_of_spell_of_holding(void)
   TRACE_NO_INDENT();
   return (tp()->is_able_to_break_out_of_spell_of_holding());
 }
-int Thing::is_spell_of_holding_effect(void)
+int Thing::is_spell_of_holding_barrier(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_spell_of_holding_effect());
+  return (tp()->is_spell_of_holding_barrier());
 }
 int Thing::is_able_to_attack_totems(void)
 {

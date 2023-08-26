@@ -59,7 +59,6 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_barrel {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_basalt {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_block_of_ice {};
-  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_spell_of_holding {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_brazier {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_bridge {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_burnable {};
@@ -111,6 +110,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_skillstone {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_smoke {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_spellbook {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_spell_of_holding_barrier {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_spiderweb {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_staff {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_steam {};
@@ -848,8 +848,6 @@ public:
   uint8_t is_blocker(const point p);
   uint8_t is_block_of_ice(const int x, const int y);
   uint8_t is_block_of_ice(const point p);
-  uint8_t is_spell_of_holding(const int x, const int y);
-  uint8_t is_spell_of_holding(const point p);
   uint8_t is_brazier(const int x, const int y);
   uint8_t is_brazier(const point p);
   uint8_t is_brazier_no_check(const int x, const int y);
@@ -960,6 +958,8 @@ public:
   uint8_t is_smoke(const point p);
   uint8_t is_spellbook(const int x, const int y);
   uint8_t is_spellbook(const point p);
+  uint8_t is_spell_of_holding_barrier(const int x, const int y);
+  uint8_t is_spell_of_holding_barrier(const point p);
   uint8_t is_spiderweb(const int x, const int y);
   uint8_t is_spiderweb(const point p);
   uint8_t is_staff(const int x, const int y);
@@ -1175,8 +1175,6 @@ public:
   void is_blocker_unset(const int x, const int y);
   void is_block_of_ice_set(const int x, const int y);
   void is_block_of_ice_unset(const int x, const int y);
-  void is_spell_of_holding_set(const int x, const int y);
-  void is_spell_of_holding_unset(const int x, const int y);
   void is_brazier_set(const int x, const int y);
   void is_brazier_unset(const int x, const int y);
   void is_bridge_set(const int x, const int y);
@@ -1324,6 +1322,8 @@ public:
   void is_smoke_unset(const int x, const int y);
   void is_spellbook_set(const int x, const int y);
   void is_spellbook_unset(const int x, const int y);
+  void is_spell_of_holding_barrier_set(const int x, const int y);
+  void is_spell_of_holding_barrier_unset(const int x, const int y);
   void is_spiderweb_set(const int x, const int y);
   void is_spiderweb_unset(const int x, const int y);
   void is_staff_set(const int x, const int y);

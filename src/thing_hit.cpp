@@ -2299,7 +2299,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_CLAW ]) {
         reason = "by clawing";
       } else if (attack_options->attack[ THING_ATTACK_COLD ]) {
-        if (level->is_spell_of_holding(curr_at.x, curr_at.y)) {
+        if (level->is_spell_of_holding_barrier(curr_at.x, curr_at.y)) {
           reason = "by magical holding";
         } else if (level->is_block_of_ice(curr_at.x, curr_at.y)) {
           reason = "by refrigeration";

@@ -426,7 +426,6 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_barrel                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_basalt                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_block_of_ice                  ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_spell_of_holding                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_brazier                       ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_bridge                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_burnable                      ? 1LLU : 0LLU) << shift; shift++;
@@ -467,6 +466,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_obs_wall_or_door              ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_obs_when_dead                 ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_portal                        ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_spell_of_holding_barrier      ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_trap                          ? 1LLU : 0LLU) << shift; shift++;
   // end sort marker3 }
   // clang-format on
@@ -598,7 +598,6 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_barrel);
   out << bits(my.t->_is_basalt);
   out << bits(my.t->_is_block_of_ice);
-  out << bits(my.t->_is_spell_of_holding);
   out << bits(my.t->_is_brazier);
   out << bits(my.t->_is_bridge);
   out << bits(my.t->_is_burnable);
@@ -656,6 +655,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_skillstone);
   out << bits(my.t->_is_smoke);
   out << bits(my.t->_is_spellbook);
+  out << bits(my.t->_is_spell_of_holding_barrier);
   out << bits(my.t->_is_spiderweb);
   out << bits(my.t->_is_staff);
   out << bits(my.t->_is_steam);

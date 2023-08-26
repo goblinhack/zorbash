@@ -73,6 +73,7 @@ def tp_init(name, text_long_name):
     my.stat_def(self, 4)
     my.stat_dex(self, 5)
     my.stat_luck(self, 10)
+    my.stat_psi(self, 0)
     my.stat_str(self, 18)
     my.temperature_max(self, 50)
     my.temperature_min(self, -20)

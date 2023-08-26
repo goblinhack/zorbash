@@ -17,6 +17,7 @@ my.map_load_spell_tree(
         "dE", "spell_dominate_monst5",
         "hh", "spell_hasted",
         "ss", "spell_slow",
+        "HH", "spell_of_holding",
     ])
 
 my.map_load_spell_tree(
@@ -24,9 +25,61 @@ my.map_load_spell_tree(
     tree_data=[
         "mm                                      ",
         "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+    ],
+)
+
+my.map_load_spell_tree(
+    tree_name="defensive",
+    tree_data=[
+        "HH                                      ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+    ],
+)
+
+my.map_load_spell_tree(
+    tree_name="movement",
+    tree_data=[
         "hh                                      ",
         "                                        ",
         "ss                                      ",
+        "                                        ",
+        "                                        ",
         "                                        ",
         "                                        ",
         "                                        ",

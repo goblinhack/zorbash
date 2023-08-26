@@ -67,9 +67,9 @@ void Thing::level_push(void)
     i_set_is_block_of_ice = true;
     level->is_block_of_ice_set(x, y);
   }
-  if (is_spell_of_holding()) {
-    i_set_is_spell_of_holding = true;
-    level->is_spell_of_holding_set(x, y);
+  if (is_spell_of_holding_barrier()) {
+    i_set_is_spell_of_holding_barrier = true;
+    level->is_spell_of_holding_barrier_set(x, y);
   }
   if (is_bridge()) {
     i_set_is_bridge = true;

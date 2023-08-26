@@ -322,10 +322,6 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
       msg("%%fg=yellow$%s is immune to your %s spell.%%fg=reset$", target->text_The().c_str(),
           what->text_long_name().c_str());
     }
-  } else if (! target->is_attackable_by_monst() && ! target->is_attackable_by_monst()) {
-    //
-    // Probably found nothing to hit
-    //
   } else if (this == target) {
     //
     // Allow the ability to cast spells on yourself

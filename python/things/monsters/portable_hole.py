@@ -56,6 +56,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_def(self, 10)
     my.stat_dex(self, 10)
     my.stat_luck(self, 10)
+    my.stat_psi(self, 0)
     my.stat_str(self, 10)
     my.teleport_distance(self, 20)
     my.text_a_or_an(self, "a")

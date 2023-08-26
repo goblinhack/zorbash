@@ -29,7 +29,6 @@ void Level::clear(void)
   _is_attackable_by_player           = {};
   _is_basalt                         = {};
   _is_block_of_ice                   = {};
-  _is_spell_of_holding                     = {};
   _is_bridge                         = {};
   _is_carnivorous_plant              = {};
   _is_chasm                          = {};
@@ -75,6 +74,7 @@ void Level::clear(void)
   _is_skillstone                     = {};
   _is_smoke                          = {};
   _is_spellbook                      = {};
+  _is_spell_of_holding_barrier       = {};
   _is_spiderweb                      = {};
   _is_steam                          = {};
   _is_sticky                         = {};

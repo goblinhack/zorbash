@@ -27,6 +27,7 @@ def tp_init(name, text_long_name):
     my.stat_con(self, 12)
     my.stat_def(self, 14)
     my.stat_dex(self, 8)
+    my.stat_psi(self, 11)
     my.stat_str(self, 12)
     my.text_description_long2(self, "Ser Gnomealot is a master of the tiny martial arts.")
     my.text_description_short(self, "A gnome knight.")

@@ -179,7 +179,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   // If stuck in a magical hold, cannot jump
   //
-  if (level->is_spell_of_holding(curr_at) && ! is_immune_to_spell_of_holding()) {
+  if (level->is_spell_of_holding_barrier(curr_at) && ! is_immune_to_spell_of_holding()) {
     dbg("Cannot jump, stuck in a magical hold");
     return false;
   }

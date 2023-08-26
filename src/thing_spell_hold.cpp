@@ -8,18 +8,18 @@
 
 void Thing::spell_of_holding_tick(void)
 {
-  if (! is_spell_of_holding()) {
+  if (! is_spell_of_holding_barrier()) {
     return;
   }
 
-  if (! level->is_spell_of_holding(curr_at.x, curr_at.y)) {
+  if (! level->is_spell_of_holding_barrier(curr_at.x, curr_at.y)) {
     return;
   }
 
   dbg("Spell of holding tick");
   TRACE_AND_INDENT();
 
-  if (is_spell_of_holding()) {
+  if (is_spell_of_holding_barrier()) {
     TRACE_NO_INDENT();
     FOR_ALL_THINGS_THAT_INTERACT(level, t, curr_at.x, curr_at.y)
     {
@@ -36,40 +36,40 @@ void Thing::spell_of_holding_tick(void)
   }
 }
 
-uint8_t Level::is_spell_of_holding(const point p)
+uint8_t Level::is_spell_of_holding_barrier(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
     return false;
   }
-  return (get(_is_spell_of_holding, p.x, p.y));
+  return (get(_is_spell_of_holding_barrier, p.x, p.y));
 }
 
-uint8_t Level::is_spell_of_holding(const int x, const int y)
+uint8_t Level::is_spell_of_holding_barrier(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
     return false;
   }
-  return (get(_is_spell_of_holding, x, y));
+  return (get(_is_spell_of_holding_barrier, x, y));
 }
 
-void Level::is_spell_of_holding_set(const int x, const int y)
+void Level::is_spell_of_holding_barrier_set(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
     return;
   }
   is_map_changed = true;
-  incr(_is_spell_of_holding, x, y, (uint8_t) 1);
+  incr(_is_spell_of_holding_barrier, x, y, (uint8_t) 1);
 }
 
-void Level::is_spell_of_holding_unset(const int x, const int y)
+void Level::is_spell_of_holding_barrier_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
     return;
   }
   is_map_changed = true;
-  decr(_is_spell_of_holding, x, y, (uint8_t) 1);
+  decr(_is_spell_of_holding_barrier, x, y, (uint8_t) 1);
 }

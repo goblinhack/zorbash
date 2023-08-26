@@ -28,7 +28,7 @@ int Thing::is_able_to_shoot_at(void)
   //
   // If trapped in a magical hold, cannot shoot.
   //
-  if (level->is_spell_of_holding(curr_at)) {
+  if (level->is_spell_of_holding_barrier(curr_at)) {
     return false;
   }
 

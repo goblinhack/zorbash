@@ -34,6 +34,7 @@ def tp_init(name, text_long_name):
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
     my.on_you_nat_attack_attempt_do(self, "zorb_all.on_you_nat_attack_attempt()")
     my.stat_str(self, 14)
+    my.stat_psi(self, 11)
     my.text_description_long2(self, "This particular zorblin was once a ruthless adventurer who plundered the seas in their mighty pirate ship, but due to a series of unfortunate events finds themselves wandering this dungeon looking for the odd piece of eight.")
     my.text_description_short(self, "A one-eyed pirate zorblin.")
     # end sort marker

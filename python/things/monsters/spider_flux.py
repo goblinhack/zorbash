@@ -127,6 +127,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_def(self, 10)
     my.stat_dex(self, 12)
     my.stat_luck(self, 10)
+    my.stat_psi(self, 8)
     my.stat_str(self, 8)
     my.teleport_distance(self, 10)
     my.temperature_max(self, 50)

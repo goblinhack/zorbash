@@ -24,7 +24,7 @@ bool Thing::wake(const std::string &reason)
   //
   // I think if trapped in a spell of holding and asleep, you stay asleep. Forever...
   //
-  if (level->is_spell_of_holding(curr_at)) {
+  if (level->is_spell_of_holding_barrier(curr_at)) {
     dbg("Wake %s; no, stay asleep in the magical holding", reason.c_str());
     return false;
   }

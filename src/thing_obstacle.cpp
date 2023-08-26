@@ -640,8 +640,10 @@ bool Tp::is_obs_ai(Thingp it)
     }
   }
 
-  if (it->is_spell_of_holding() || ! is_immune_to_spell_of_holding()) {
-    return true;
+  if (it->is_spell_of_holding_barrier()) {
+    if (! is_immune_to_spell_of_holding()) {
+      return true;
+    }
   }
 
   if (it->is_totem() || it->is_turret() || it->is_brazier() || it->is_barrel() || it->is_portal()

@@ -119,6 +119,7 @@ def tp_init(name, text_long_name):
     my.temperature_max(self, 50)
     my.temperature_min(self, 0)
     my.temperature(self, 20)
+    my.stat_psi(self, 0)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
     my.text_description_long2(self, "This one is a baby slime. It tends to avoid adults of its kind. So should you.")

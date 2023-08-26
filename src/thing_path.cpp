@@ -108,8 +108,8 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
       //
       // Jump over hazards
       //
-      if (is_disliked_by_me(future_pos) || level->is_spell_of_holding(future_pos) || level->is_block_of_ice(future_pos)
-          || level->is_barrel(future_pos) || level->is_brazier(future_pos)) {
+      if (is_disliked_by_me(future_pos) || level->is_spell_of_holding_barrier(future_pos)
+          || level->is_block_of_ice(future_pos) || level->is_barrel(future_pos) || level->is_brazier(future_pos)) {
         DBG2("Next position %s is a hazard (move path size %d)", future_pos.to_string().c_str(),
              (int) ai->move_path.size());
         TRACE_AND_INDENT();
