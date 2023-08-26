@@ -253,6 +253,7 @@ public:
   uint64_t i_set_is_barrel                    : 1 {};
   uint64_t i_set_is_basalt                    : 1 {};
   uint64_t i_set_is_block_of_ice              : 1 {};
+  uint64_t i_set_is_spell_of_holding                : 1 {};
   uint64_t i_set_is_brazier                   : 1 {};
   uint64_t i_set_is_bridge                    : 1 {};
   uint64_t i_set_is_burnable                  : 1 {}; // may produce a flame
@@ -1637,7 +1638,7 @@ public:
   int is_immune_to_negation(void);
   int is_immune_to_paralysis(void);
   int is_immune_to_poison(void);
-  int is_immune_to_spell_hold(void);
+  int is_immune_to_spell_of_holding(void);
   int is_immune_to_spell_slow(void);
   int is_immune_to_spiderwebs(void);
   int is_immune_to_stamina_drain(void);
@@ -1765,8 +1766,8 @@ public:
   int is_snake(void);
   int is_soft(void);
   int is_spellbook(void);
-  int is_spell_hold_effect(void);
-  int is_spell_hold(void);
+  int is_spell_of_holding_effect(void);
+  int is_spell_of_holding(void);
   int is_spell_slow(void);
   int is_spell(void);
   int is_spider(void);
@@ -1800,7 +1801,7 @@ public:
   int is_turret(void);
   int is_undead(void);
   int is_unused_flag100(void);
-  int is_unused_flag101(void);
+  int is_able_to_break_out_of_spell_of_holding(void);
   int is_unused_flag10(void);
   int is_unused_flag11(void);
   int is_unused_flag12(void);
@@ -2723,6 +2724,7 @@ public:
   void blit_wall_cladding(point tl, point br, const ThingTiles *tiles);
   void blit_wall_shadow(point tl, point br, const ThingTiles *tiles);
   void block_of_ice_tick(void);
+  void spell_of_holding_tick(void);
   void bodypart_remove(int equip);
   void born_set(point3d);
   void botcon(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);

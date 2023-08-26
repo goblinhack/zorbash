@@ -56,6 +56,7 @@ PyObject *level_is_biome_dungeon_at(PyObject *obj, PyObject *args, PyObject *key
 PyObject *level_is_biome_swamp_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_bleeder_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_block_of_ice_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_spell_of_holding_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_bloodied_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_bones_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_boots_at(PyObject *obj, PyObject *args, PyObject *keywds);

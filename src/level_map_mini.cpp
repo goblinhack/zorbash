@@ -180,6 +180,8 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           c = GREEN;
         } else if (is_block_of_ice(x, y)) {
           c = CYAN;
+        } else if (is_spell_of_holding(x, y)) {
+          c = GRAY50;
         } else {
           c = BLACK;
         }

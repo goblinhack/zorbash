@@ -594,7 +594,7 @@ int Tp::is_immune_to_necrosis(void) const { return _is_immune_to_necrosis; }
 int Tp::is_immune_to_negation(void) const { return _is_immune_to_negation; }
 int Tp::is_immune_to_paralysis(void) const { return _is_immune_to_paralysis; }
 int Tp::is_immune_to_poison(void) const { return _is_immune_to_poison; }
-int Tp::is_immune_to_spell_hold(void) const { return _is_immune_to_spell_hold; }
+int Tp::is_immune_to_spell_of_holding(void) const { return _is_immune_to_spell_of_holding; }
 int Tp::is_immune_to_spell_slow(void) const { return _is_immune_to_spell_slow; }
 int Tp::is_immune_to_spiderwebs(void) const { return _is_immune_to_spiderwebs; }
 int Tp::is_immune_to_stamina_drain(void) const { return _is_immune_to_stamina_drain; }
@@ -722,8 +722,8 @@ int Tp::is_smoke(void) const { return _is_smoke; }
 int Tp::is_snake(void) const { return _is_snake; }
 int Tp::is_soft(void) const { return _is_soft; }
 int Tp::is_spellbook(void) const { return _is_spellbook; }
-int Tp::is_spell_hold_effect(void) const { return _is_spell_hold_effect; }
-int Tp::is_spell_hold(void) const { return _is_spell_hold; }
+int Tp::is_spell_of_holding_effect(void) const { return _is_spell_of_holding_effect; }
+int Tp::is_spell_of_holding(void) const { return _is_spell_of_holding; }
 int Tp::is_spell_slow(void) const { return _is_spell_slow; }
 int Tp::is_spell(void) const { return _is_spell; }
 int Tp::is_spider(void) const { return _is_spider; }
@@ -758,7 +758,7 @@ int Tp::is_troll(void) const { return _is_troll; }
 int Tp::is_turret(void) const { return _is_turret; }
 int Tp::is_undead(void) const { return _is_undead; }
 int Tp::is_unused_flag100(void) const { return _is_unused_flag100; }
-int Tp::is_unused_flag101(void) const { return _is_unused_flag101; }
+int Tp::is_able_to_break_out_of_spell_of_holding(void) const { return _is_able_to_break_out_of_spell_of_holding; }
 int Tp::is_unused_flag10(void) const { return _is_unused_flag10; }
 int Tp::is_unused_flag11(void) const { return _is_unused_flag11; }
 int Tp::is_unused_flag12(void) const { return _is_unused_flag12; }
@@ -1359,7 +1359,7 @@ void Tp::is_immune_to_necrosis_set(int v) { _is_immune_to_necrosis = v; }
 void Tp::is_immune_to_negation_set(int v) { _is_immune_to_negation = v; }
 void Tp::is_immune_to_paralysis_set(int v) { _is_immune_to_paralysis = v; }
 void Tp::is_immune_to_poison_set(int v) { _is_immune_to_poison = v; }
-void Tp::is_immune_to_spell_hold_set(int v) { _is_immune_to_spell_hold = v; }
+void Tp::is_immune_to_spell_of_holding_set(int v) { _is_immune_to_spell_of_holding = v; }
 void Tp::is_immune_to_spell_slow_set(int v) { _is_immune_to_spell_slow = v; }
 void Tp::is_immune_to_spiderwebs_set(int v) { _is_immune_to_spiderwebs = v; }
 void Tp::is_immune_to_stamina_drain_set(int v) { _is_immune_to_stamina_drain = v; }
@@ -1487,8 +1487,8 @@ void Tp::is_smoke_set(int v) { _is_smoke = v; }
 void Tp::is_snake_set(int v) { _is_snake = v; }
 void Tp::is_soft_set(int v) { _is_soft = v; }
 void Tp::is_spellbook_set(int v) { _is_spellbook = v; }
-void Tp::is_spell_hold_effect_set(int v) { _is_spell_hold_effect = v; }
-void Tp::is_spell_hold_set(int v) { _is_spell_hold = v; }
+void Tp::is_spell_of_holding_effect_set(int v) { _is_spell_of_holding_effect = v; }
+void Tp::is_spell_of_holding_set(int v) { _is_spell_of_holding = v; }
 void Tp::is_spell_set(int v) { _is_spell = v; }
 void Tp::is_spell_slow_set(int v) { _is_spell_slow = v; }
 void Tp::is_spider_set(int v) { _is_spider = v; }
@@ -1523,7 +1523,7 @@ void Tp::is_troll_set(int v) { _is_troll = v; }
 void Tp::is_turret_set(int v) { _is_turret = v; }
 void Tp::is_undead_set(int v) { _is_undead = v; }
 void Tp::is_unused_flag100_set(int v) { _is_unused_flag100 = v; }
-void Tp::is_unused_flag101_set(int v) { _is_unused_flag101 = v; }
+void Tp::is_able_to_break_out_of_spell_of_holding_set(int v) { _is_able_to_break_out_of_spell_of_holding = v; }
 void Tp::is_unused_flag10_set(int v) { _is_unused_flag10 = v; }
 void Tp::is_unused_flag11_set(int v) { _is_unused_flag11 = v; }
 void Tp::is_unused_flag12_set(int v) { _is_unused_flag12 = v; }

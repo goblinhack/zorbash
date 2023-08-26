@@ -308,7 +308,7 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
     // Failed
     //
   } else if ((target->is_immune_to_spell_slow() && what->is_spell_slow())
-             || (target->is_immune_to_spell_hold() && what->is_spell_hold())) {
+             || (target->is_immune_to_spell_of_holding() && what->is_spell_of_holding())) {
     //
     // Immune. Spell fails.
     //

@@ -727,6 +727,8 @@ std::initializer_list< std::string > tps = {
     "spell_dominate_monst4",
     "spell_dominate_monst5",
     "spell_hasted",
+    "spell_of_holding",
+    "spell_of_holding_effect",
     "spell_magic_missile",
     "spell_slow",
     "spell_summon_food",

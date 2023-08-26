@@ -65,6 +65,10 @@ void Thing::level_pop(void)
       i_set_is_block_of_ice = false;
       level->is_block_of_ice_unset(x, y);
     }
+    if (i_set_is_spell_of_holding) {
+      i_set_is_spell_of_holding = false;
+      level->is_spell_of_holding_unset(x, y);
+    }
     if (i_set_is_brazier) {
       i_set_is_brazier = false;
       level->is_brazier_unset(x, y);

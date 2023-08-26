@@ -195,6 +195,14 @@ bool Thing::is_stuck_check(void)
     } else {
       stuck = true;
     }
+  } else if (level->is_spell_of_holding(curr_at.x, curr_at.y)) {
+    if (is_immune_to_spell_of_holding()) {
+      //
+      // ok
+      //
+    } else {
+      stuck = true;
+    }
   } else if (level->is_block_of_ice(curr_at.x, curr_at.y)) {
     if (is_able_to_walk_through_walls()) {
       //
@@ -385,6 +393,8 @@ void Thing::is_stuck_update(void)
 
       if (level->is_spiderweb(curr_at.x, curr_at.y)) {
         msg("You are trapped in a web!");
+      } else if (level->is_spell_of_holding(curr_at.x, curr_at.y) && ! is_immune_to_spell_of_holding()) {
+        msg("You are trapped in a magical hold!");
       } else if (level->is_block_of_ice(curr_at.x, curr_at.y)) {
         msg("You are trapped in ice!");
       } else if (level->is_barrel(curr_at.x, curr_at.y)) {
@@ -397,6 +407,8 @@ void Thing::is_stuck_update(void)
     } else if (is_monst()) {
       if (level->is_spiderweb(curr_at.x, curr_at.y)) {
         msg("%s is trapped in a web!", text_The().c_str());
+      } else if (level->is_spell_of_holding(curr_at.x, curr_at.y) && ! is_immune_to_spell_of_holding()) {
+        msg("%s is trapped in a magical hold!", text_The().c_str());
       } else if (level->is_block_of_ice(curr_at.x, curr_at.y)) {
         msg("%s is trapped in ice!", text_The().c_str());
       } else if (level->is_barrel(curr_at.x, curr_at.y)) {
@@ -425,6 +437,9 @@ void Thing::is_stuck_update(void)
       t->wobble(pcg_random_range(5, 20));
     }
     if (t->is_spiderweb()) {
+      t->wobble(5);
+    }
+    if (t->is_spell_of_holding()) {
       t->wobble(5);
     }
     if (t->is_block_of_ice()) {

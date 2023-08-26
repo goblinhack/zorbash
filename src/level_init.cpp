@@ -29,6 +29,7 @@ void Level::clear(void)
   _is_attackable_by_player           = {};
   _is_basalt                         = {};
   _is_block_of_ice                   = {};
+  _is_spell_of_holding                     = {};
   _is_bridge                         = {};
   _is_carnivorous_plant              = {};
   _is_chasm                          = {};

@@ -503,7 +503,7 @@ private:
   int _is_immune_to_negation {};
   int _is_immune_to_paralysis {};
   int _is_immune_to_poison {};
-  int _is_immune_to_spell_hold {};
+  int _is_immune_to_spell_of_holding {};
   int _is_immune_to_spell_slow {};
   int _is_immune_to_spiderwebs {};
   int _is_immune_to_stamina_drain {};
@@ -633,8 +633,8 @@ private:
   int _is_soft {};
   int _is_spell {};
   int _is_spellbook {};
-  int _is_spell_hold {};
-  int _is_spell_hold_effect {};
+  int _is_spell_of_holding {};
+  int _is_spell_of_holding_effect {};
   int _is_spell_slow {};
   int _is_spider {};
   int _is_spiderweb {};
@@ -670,7 +670,7 @@ private:
   int _is_unused_flag1 {};
   int _is_unused_flag10 {};
   int _is_unused_flag100 {};
-  int _is_unused_flag101 {};
+  int _is_able_to_break_out_of_spell_of_holding {};
   int _is_unused_flag11 {};
   int _is_unused_flag12 {};
   int _is_unused_flag124 {};
@@ -1850,7 +1850,7 @@ public:
   int is_immune_to_negation(void) const;
   int is_immune_to_paralysis(void) const;
   int is_immune_to_poison(void) const;
-  int is_immune_to_spell_hold(void) const;
+  int is_immune_to_spell_of_holding(void) const;
   int is_immune_to_spell_slow(void) const;
   int is_immune_to_spiderwebs(void) const;
   int is_immune_to_stamina_drain(void) const;
@@ -1978,8 +1978,8 @@ public:
   int is_snake(void) const;
   int is_soft(void) const;
   int is_spellbook(void) const;
-  int is_spell_hold_effect(void) const;
-  int is_spell_hold(void) const;
+  int is_spell_of_holding_effect(void) const;
+  int is_spell_of_holding(void) const;
   int is_spell_slow(void) const;
   int is_spell(void) const;
   int is_spider(void) const;
@@ -2014,7 +2014,7 @@ public:
   int is_turret(void) const;
   int is_undead(void) const;
   int is_unused_flag100(void) const;
-  int is_unused_flag101(void) const;
+  int is_able_to_break_out_of_spell_of_holding(void) const;
   int is_unused_flag10(void) const;
   int is_unused_flag11(void) const;
   int is_unused_flag124(void) const;
@@ -2616,7 +2616,7 @@ public:
   void is_immune_to_negation_set(int v);
   void is_immune_to_paralysis_set(int v);
   void is_immune_to_poison_set(int v);
-  void is_immune_to_spell_hold_set(int v);
+  void is_immune_to_spell_of_holding_set(int v);
   void is_immune_to_spell_slow_set(int v);
   void is_immune_to_spiderwebs_set(int v);
   void is_immune_to_stamina_drain_set(int v);
@@ -2744,8 +2744,8 @@ public:
   void is_snake_set(int v);
   void is_soft_set(int v);
   void is_spellbook_set(int v);
-  void is_spell_hold_effect_set(int v);
-  void is_spell_hold_set(int v);
+  void is_spell_of_holding_effect_set(int v);
+  void is_spell_of_holding_set(int v);
   void is_spell_set(int v);
   void is_spell_slow_set(int v);
   void is_spider_set(int v);
@@ -2780,7 +2780,7 @@ public:
   void is_turret_set(int v);
   void is_undead_set(int v);
   void is_unused_flag100_set(int v);
-  void is_unused_flag101_set(int v);
+  void is_able_to_break_out_of_spell_of_holding_set(int v);
   void is_unused_flag10_set(int v);
   void is_unused_flag11_set(int v);
   void is_unused_flag124_set(int v);

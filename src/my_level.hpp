@@ -59,6 +59,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_barrel {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_basalt {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_block_of_ice {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_spell_of_holding {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_brazier {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_bridge {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_burnable {};
@@ -847,6 +848,8 @@ public:
   uint8_t is_blocker(const point p);
   uint8_t is_block_of_ice(const int x, const int y);
   uint8_t is_block_of_ice(const point p);
+  uint8_t is_spell_of_holding(const int x, const int y);
+  uint8_t is_spell_of_holding(const point p);
   uint8_t is_brazier(const int x, const int y);
   uint8_t is_brazier(const point p);
   uint8_t is_brazier_no_check(const int x, const int y);
@@ -1172,6 +1175,8 @@ public:
   void is_blocker_unset(const int x, const int y);
   void is_block_of_ice_set(const int x, const int y);
   void is_block_of_ice_unset(const int x, const int y);
+  void is_spell_of_holding_set(const int x, const int y);
+  void is_spell_of_holding_unset(const int x, const int y);
   void is_brazier_set(const int x, const int y);
   void is_brazier_unset(const int x, const int y);
   void is_bridge_set(const int x, const int y);

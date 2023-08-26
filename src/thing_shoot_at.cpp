@@ -26,7 +26,14 @@ int Thing::is_able_to_shoot_at(void)
   }
 
   //
-  // If trapped in ice, cannot fire.
+  // If trapped in a magical hold, cannot shoot.
+  //
+  if (level->is_spell_of_holding(curr_at)) {
+    return false;
+  }
+
+  //
+  // If trapped in ice, cannot shoot.
   //
   if (level->is_block_of_ice(curr_at)) {
     return false;

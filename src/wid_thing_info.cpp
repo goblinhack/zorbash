@@ -805,7 +805,7 @@ void Game::wid_thing_info_add_immunity(WidPopup *w, Thingp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Slowing");
     w->log(tmp);
   }
-  if (t->is_immune_to_spell_hold()) {
+  if (t->is_immune_to_spell_of_holding()) {
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Holding");
     w->log(tmp);
   }

@@ -692,6 +692,7 @@ void Game::place_player(void)
         level->thing_new("lava", point(x + 2, y + 1));
         level->thing_new("block_of_ice", point(x + 2, y + 1));
       }
+      level->thing_new("spell_of_holding", point(x + 2, y + 1));
       // level->thing_new("vampire_rose_stem", point(x, y + 1));
       // level->thing_new("fire", point(x - 4, y + 5));
       // level->thing_new("foliage", point(x - 4, y + 5));

@@ -22,6 +22,14 @@ bool Thing::wake(const std::string &reason)
   TRACE_AND_INDENT();
 
   //
+  // I think if trapped in a spell of holding and asleep, you stay asleep. Forever...
+  //
+  if (level->is_spell_of_holding(curr_at)) {
+    dbg("Wake %s; no, stay asleep in the magical holding", reason.c_str());
+    return false;
+  }
+
+  //
   // I think if trapped in ice and asleep, you stay asleep. Forever...
   //
   if (level->is_block_of_ice(curr_at)) {

@@ -534,6 +534,24 @@ bool Thing::collision_check_only(Thingp it, point future_pos)
     }
   }
 
+  if (it->is_spell_of_holding() && ! is_immune_to_spell_of_holding()) {
+    if (it->curr_at == curr_at) {
+      //
+      // Do not allow movement away. This happens if you are placed inside an spell_of_holding.
+      //
+      dbg2("Collision; inside spell barrier");
+      return true;
+    }
+
+    //
+    // As we want to be able to shove the spell_of_holding, we need to check for collision.
+    //
+    if (things_overlap(me, future_pos, it)) {
+      dbg2("Collision; overlaps block of ice");
+      return true;
+    }
+  }
+
   if (it->is_block_of_ice() && ! is_ethereal() && ! is_flying()) {
     if (it->curr_at == curr_at) {
       //

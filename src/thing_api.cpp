@@ -700,15 +700,15 @@ int Thing::is_unused_flag100(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag100());
 }
-int Thing::is_unused_flag101(void)
+int Thing::is_able_to_break_out_of_spell_of_holding(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag101());
+  return (tp()->is_able_to_break_out_of_spell_of_holding());
 }
-int Thing::is_spell_hold_effect(void)
+int Thing::is_spell_of_holding_effect(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_spell_hold_effect());
+  return (tp()->is_spell_of_holding_effect());
 }
 int Thing::is_able_to_attack_totems(void)
 {
@@ -720,10 +720,10 @@ int Thing::is_able_to_spell_cast(void)
   TRACE_NO_INDENT();
   return (tp()->is_able_to_spell_cast());
 }
-int Thing::is_spell_hold(void)
+int Thing::is_spell_of_holding(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_spell_hold());
+  return (tp()->is_spell_of_holding());
 }
 int Thing::is_spell_slow(void)
 {
@@ -735,10 +735,10 @@ int Thing::is_immune_to_spell_slow(void)
   TRACE_NO_INDENT();
   return (tp()->is_immune_to_spell_slow());
 }
-int Thing::is_immune_to_spell_hold(void)
+int Thing::is_immune_to_spell_of_holding(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_immune_to_spell_hold());
+  return (tp()->is_immune_to_spell_of_holding());
 }
 int Thing::is_obs_spell_casting(void)
 {

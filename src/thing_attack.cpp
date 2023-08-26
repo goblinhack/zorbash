@@ -82,6 +82,18 @@ bool Thing::possible_to_attack(const Thingp victim)
     }
 
     //
+    // If stuck in a spell barrier, we can only attack locally
+    //
+    if (level->is_spell_of_holding(curr_at)) {
+      if (victim->curr_at != curr_at) {
+        if (is_debug_type()) {
+          dbg("Cannot attack %s, stuck in a spell barrier", victim->to_short_string().c_str());
+        }
+        return false;
+      }
+    }
+
+    //
     // If stuck in a web, we can only attack locally
     //
     if (! is_immune_to_spiderwebs()) {
@@ -378,6 +390,19 @@ bool Thing::possible_to_attack(const Thingp victim)
       return false;
     }
 
+    if (victim->is_spell_of_holding()) {
+      if (is_able_to_break_out_of_spell_of_holding()) {
+        if (is_debug_type()) {
+          dbg("Can attack and break out of spell barrier %s", victim->to_short_string().c_str());
+        }
+        return true;
+      }
+      if (is_debug_type()) {
+        dbg("Can not break out of spell barrier %s", victim->to_short_string().c_str());
+      }
+      return false;
+    }
+
     if (victim->is_block_of_ice()) {
       if (is_able_to_break_out_of_ice()) {
         if (is_debug_type()) {
@@ -386,7 +411,7 @@ bool Thing::possible_to_attack(const Thingp victim)
         return true;
       }
       if (is_debug_type()) {
-        dbg("Can not break out of web %s", victim->to_short_string().c_str());
+        dbg("Can not break out of ice %s", victim->to_short_string().c_str());
       }
       return false;
     }
@@ -405,8 +430,8 @@ bool Thing::possible_to_attack(const Thingp victim)
       || victim->is_fungus_withered() || victim->is_fungus_healing() || victim->is_fungus_edible()
       || victim->is_fungus_poison() || victim->is_treasure_type() || victim->is_enchantstone()
       || victim->is_skillstone() || victim->is_spellbook() || victim->is_foliage() || victim->is_carnivorous_plant()
-      || victim->is_spiderweb() || victim->is_block_of_ice() || victim->is_sticky() || victim->is_brazier()
-      || victim->is_barrel() || victim->is_player() || victim->is_food() || victim->is_trap()
+      || victim->is_spiderweb() || victim->is_block_of_ice() || victim->is_spell_of_holding() || victim->is_sticky()
+      || victim->is_brazier() || victim->is_barrel() || victim->is_player() || victim->is_food() || victim->is_trap()
       || victim->is_bag_item()) {
     if (is_laser()) {
       if (is_debug_type()) {
