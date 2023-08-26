@@ -722,6 +722,7 @@ int Tp::is_smoke(void) const { return _is_smoke; }
 int Tp::is_snake(void) const { return _is_snake; }
 int Tp::is_soft(void) const { return _is_soft; }
 int Tp::is_spellbook(void) const { return _is_spellbook; }
+int Tp::is_spell_hold_effect(void) const { return _is_spell_hold_effect; }
 int Tp::is_spell_hold(void) const { return _is_spell_hold; }
 int Tp::is_spell_slow(void) const { return _is_spell_slow; }
 int Tp::is_spell(void) const { return _is_spell; }
@@ -758,7 +759,6 @@ int Tp::is_turret(void) const { return _is_turret; }
 int Tp::is_undead(void) const { return _is_undead; }
 int Tp::is_unused_flag100(void) const { return _is_unused_flag100; }
 int Tp::is_unused_flag101(void) const { return _is_unused_flag101; }
-int Tp::is_unused_flag102(void) const { return _is_unused_flag102; }
 int Tp::is_unused_flag10(void) const { return _is_unused_flag10; }
 int Tp::is_unused_flag11(void) const { return _is_unused_flag11; }
 int Tp::is_unused_flag12(void) const { return _is_unused_flag12; }
@@ -1487,6 +1487,7 @@ void Tp::is_smoke_set(int v) { _is_smoke = v; }
 void Tp::is_snake_set(int v) { _is_snake = v; }
 void Tp::is_soft_set(int v) { _is_soft = v; }
 void Tp::is_spellbook_set(int v) { _is_spellbook = v; }
+void Tp::is_spell_hold_effect_set(int v) { _is_spell_hold_effect = v; }
 void Tp::is_spell_hold_set(int v) { _is_spell_hold = v; }
 void Tp::is_spell_set(int v) { _is_spell = v; }
 void Tp::is_spell_slow_set(int v) { _is_spell_slow = v; }
@@ -1523,7 +1524,6 @@ void Tp::is_turret_set(int v) { _is_turret = v; }
 void Tp::is_undead_set(int v) { _is_undead = v; }
 void Tp::is_unused_flag100_set(int v) { _is_unused_flag100 = v; }
 void Tp::is_unused_flag101_set(int v) { _is_unused_flag101 = v; }
-void Tp::is_unused_flag102_set(int v) { _is_unused_flag102 = v; }
 void Tp::is_unused_flag10_set(int v) { _is_unused_flag10 = v; }
 void Tp::is_unused_flag11_set(int v) { _is_unused_flag11 = v; }
 void Tp::is_unused_flag12_set(int v) { _is_unused_flag12 = v; }

@@ -332,7 +332,7 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
     //
     dbg("Spell is used on self");
     TRACE_AND_INDENT();
-  } else {
+  } else if (target->is_alive_monst() || target->is_player()) {
     //
     // Casting upon another
     //
@@ -374,6 +374,11 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
             what->text_long_name().c_str());
       }
     }
+  } else {
+    //
+    // Could be the grid, the cursor, a door etc.. etc...
+    //
+    used(what, target, false /* remove after use */);
   }
 
   if (is_player()) {

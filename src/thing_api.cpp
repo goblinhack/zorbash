@@ -705,10 +705,10 @@ int Thing::is_unused_flag101(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag101());
 }
-int Thing::is_unused_flag102(void)
+int Thing::is_spell_hold_effect(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag102());
+  return (tp()->is_spell_hold_effect());
 }
 int Thing::is_able_to_attack_totems(void)
 {

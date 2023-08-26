@@ -1765,6 +1765,7 @@ public:
   int is_snake(void);
   int is_soft(void);
   int is_spellbook(void);
+  int is_spell_hold_effect(void);
   int is_spell_hold(void);
   int is_spell_slow(void);
   int is_spell(void);
@@ -1800,7 +1801,6 @@ public:
   int is_undead(void);
   int is_unused_flag100(void);
   int is_unused_flag101(void);
-  int is_unused_flag102(void);
   int is_unused_flag10(void);
   int is_unused_flag11(void);
   int is_unused_flag12(void);

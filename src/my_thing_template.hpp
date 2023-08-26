@@ -634,6 +634,7 @@ private:
   int _is_spell {};
   int _is_spellbook {};
   int _is_spell_hold {};
+  int _is_spell_hold_effect {};
   int _is_spell_slow {};
   int _is_spider {};
   int _is_spiderweb {};
@@ -670,7 +671,6 @@ private:
   int _is_unused_flag10 {};
   int _is_unused_flag100 {};
   int _is_unused_flag101 {};
-  int _is_unused_flag102 {};
   int _is_unused_flag11 {};
   int _is_unused_flag12 {};
   int _is_unused_flag124 {};
@@ -1978,6 +1978,7 @@ public:
   int is_snake(void) const;
   int is_soft(void) const;
   int is_spellbook(void) const;
+  int is_spell_hold_effect(void) const;
   int is_spell_hold(void) const;
   int is_spell_slow(void) const;
   int is_spell(void) const;
@@ -2014,7 +2015,6 @@ public:
   int is_undead(void) const;
   int is_unused_flag100(void) const;
   int is_unused_flag101(void) const;
-  int is_unused_flag102(void) const;
   int is_unused_flag10(void) const;
   int is_unused_flag11(void) const;
   int is_unused_flag124(void) const;
@@ -2744,6 +2744,7 @@ public:
   void is_snake_set(int v);
   void is_soft_set(int v);
   void is_spellbook_set(int v);
+  void is_spell_hold_effect_set(int v);
   void is_spell_hold_set(int v);
   void is_spell_set(int v);
   void is_spell_slow_set(int v);
@@ -2780,7 +2781,6 @@ public:
   void is_undead_set(int v);
   void is_unused_flag100_set(int v);
   void is_unused_flag101_set(int v);
-  void is_unused_flag102_set(int v);
   void is_unused_flag10_set(int v);
   void is_unused_flag11_set(int v);
   void is_unused_flag124_set(int v);

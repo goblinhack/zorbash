@@ -176,7 +176,7 @@ void Game::place_player(void)
         auto w = level->thing_new("spell_slow", point(x, y));
         t->spell_add(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("spell_summon_rock", point(x, y));
         t->spell_add(w);
       }
