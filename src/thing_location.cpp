@@ -167,8 +167,14 @@ void Thing::location_check(Thingp filter_to)
     }
   }
 
-  gas_poison_tick();
-  gas_healing_tick();
+  //
+  // If we drop an item, that triggers a location check. We don't therefore want to
+  // check for unrelated things that might spark a fire.
+  //
+  if (! filter_to) {
+    gas_poison_tick();
+    gas_healing_tick();
+  }
 
   if (! is_able_to_change_levels()) {
     return;
@@ -278,22 +284,15 @@ void Thing::location_check_me(void)
   location_check();
 
   //
-  // Needs to be for all things to stuff that does nothing like bones can fall
-  // into a chasm
+  // Check but filter only to this thing
   //
   TRACE_NO_INDENT();
   FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y)
   {
-    verify(MTYPE_THING, t);
-
     if (t == this) {
       continue;
     }
 
-    //
-    // Check but filter only to this thing
-    //
-    verify(MTYPE_THING, this);
     t->location_check(this);
   }
   FOR_ALL_THINGS_END()

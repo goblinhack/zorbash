@@ -261,7 +261,9 @@ void Thing::owner_unset(void)
     return;
   }
 
-  dbg2("Remove owner %s", old_owner->to_short_string().c_str());
+  dbg("Remove owner %s", old_owner->to_short_string().c_str());
+  TRACE_AND_INDENT();
+
   on_owner_unset(old_owner);
 
   //

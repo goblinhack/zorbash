@@ -157,6 +157,7 @@ bool Thing::drop(Thingp what, Thingp target, DropOptions drop_options)
   if (immediate_owner) {
     dbg("Drop and remove from carrying list");
     TRACE_AND_INDENT();
+
     auto items = immediate_owner->itemsp();
     auto found = std::find(items->carrying.begin(), items->carrying.end(), what->id);
     if (found != items->carrying.end()) {
@@ -280,25 +281,46 @@ bool Thing::drop_into_ether(Thingp what)
     //
   }
 
-  dbg("Update bag with drop of: %s", what->to_short_string().c_str());
-  bag_remove(what);
-  while (bag_compress()) {}
+  {
+    dbg("Update bag with drop of: %s", what->to_short_string().c_str());
+    TRACE_AND_INDENT();
 
-  what->owner_unset();
+    bag_remove(what);
+    while (bag_compress()) {}
+    dbg("Updated bag with drop of: %s", what->to_short_string().c_str());
+  }
+
+  //
+  // Safest to do this prior to owner_unset as owner_unset triggers a location check
+  // which could potentially throw an error for a thing that has been unset but is
+  // still on the carrying list.
+  //
   if (immediate_owner) {
     dbg("Drop and remove from carrying list");
     TRACE_AND_INDENT();
+
     auto items = immediate_owner->itemsp();
     auto found = std::find(items->carrying.begin(), items->carrying.end(), what->id);
     if (found != items->carrying.end()) {
       items->carrying.erase(found);
     }
   }
+
+  {
+    dbg("Unset owner from drop of: %s", what->to_short_string().c_str());
+    TRACE_AND_INDENT();
+    what->owner_unset();
+  }
+
   game->set_request_to_remake_rightbar();
 
-  dbg("Dropped %s into the ether", what->to_short_string().c_str());
-  check_all_carried_items_are_owned();
-  check_all_carried_maps();
+  {
+    dbg("Dropped %s into the ether", what->to_short_string().c_str());
+    TRACE_AND_INDENT();
+    check_all_carried_items_are_owned();
+    check_all_carried_maps();
+    dbg("Dropped %s into the ether finished", what->to_short_string().c_str());
+  }
 
   return true;
 }

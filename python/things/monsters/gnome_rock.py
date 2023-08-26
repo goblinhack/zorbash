@@ -32,8 +32,8 @@ def tp_init(name, text_long_name):
     my.on_you_nat_attack_attempt_do(self, "gnome_all.on_you_nat_attack_attempt()")
     my.stat_def(self, 14)
     my.stat_dex(self, 6)
-    my.stat_str(self, 12)
     my.stat_psi(self, 12)
+    my.stat_str(self, 12)
     my.text_description_long2(self, "This particular gnome is a rock gnome. Having spent so long underground, these gnomes have developed a dusty, rock like skin and a personality to match. This all makes them exceptionally tough to hit.")
     my.text_description_short(self, "An granite complexioned rock gnome.")
     # end sort marker

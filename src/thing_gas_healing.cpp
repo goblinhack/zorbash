@@ -13,6 +13,8 @@ void Thing::gas_healing_tick(void)
   if (is_lava() || is_fire() || is_fire_elemental()) {
     auto intensity = level->is_gas_healing(curr_at.x, curr_at.y) / 10;
     if (intensity) {
+      dbg("Healing gas explosion due to fire");
+      TRACE_AND_INDENT();
       level->gas_healing_explosion(curr_at);
     }
     return;

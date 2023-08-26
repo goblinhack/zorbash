@@ -31,8 +31,8 @@ def tp_init(name, text_long_name):
     my.on_born_do(self, "me.on_born()")
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
     my.on_you_nat_attack_attempt_do(self, "zorb_all.on_you_nat_attack_attempt()")
-    my.stat_str(self, 12)
     my.stat_psi(self, 11)
+    my.stat_str(self, 12)
     my.text_description_long2(self, "This particular zorblin has risen through the ranks. As tough as stone nails in a stone coffin, this zorblin is not prepared to take any of your cheek.")
     my.text_description_short(self, "A grizzled war-weary zorblin.")
     # end sort marker
