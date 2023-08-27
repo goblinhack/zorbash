@@ -16,6 +16,13 @@ void Thing::spell_of_holding_tick(void)
     return;
   }
 
+  //
+  // Occasionally the barrier impacts cold damage to those withing
+  //
+  if (d100() < 80) {
+    return;
+  }
+
   dbg("Spell of holding tick");
   TRACE_AND_INDENT();
 
