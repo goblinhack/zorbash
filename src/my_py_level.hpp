@@ -143,6 +143,7 @@ PyObject *level_is_fungus_healing_at(PyObject *obj, PyObject *args, PyObject *ke
 PyObject *level_is_fungus_poison_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_fungus_withered_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_gas_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_gas_explosion_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_gauntlet_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_gelatinous_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_glass_at(PyObject *obj, PyObject *args, PyObject *keywds);

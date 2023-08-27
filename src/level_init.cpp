@@ -41,6 +41,7 @@ void Level::clear(void)
   _is_dirt                           = {};
   _is_door                           = {};
   _is_enchantstone                   = {};
+  _is_engulfer                       = {};
   _is_fire                           = {};
   _is_floor                          = {};
   _is_foliage                        = {};
@@ -50,6 +51,7 @@ void Level::clear(void)
   _is_fungus_poison                  = {};
   _is_fungus_withered                = {};
   _is_gas_blocker                    = {};
+  _is_gas_explosion_blocker          = {};
   _is_gas_healing                    = {};
   _is_gas_poison                     = {};
   _is_gold                           = {};

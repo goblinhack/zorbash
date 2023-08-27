@@ -1268,6 +1268,44 @@ void Level::is_able_to_stand_on_unset(const int x, const int y)
   decr(_is_able_to_stand_on, x, y, (uint8_t) 1);
 }
 
+uint8_t Level::is_engulfer(const point p)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
+  return (get(_is_engulfer, p.x, p.y));
+}
+
+uint8_t Level::is_engulfer(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
+  return (get(_is_engulfer, x, y));
+}
+
+void Level::is_engulfer_set(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  is_map_changed = true;
+  incr(_is_engulfer, x, y, (uint8_t) 1);
+}
+
+void Level::is_engulfer_unset(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  is_map_changed = true;
+  decr(_is_engulfer, x, y, (uint8_t) 1);
+}
+
 uint8_t Level::is_portal(const point p)
 {
   TRACE_NO_INDENT();
@@ -2006,46 +2044,6 @@ void Level::is_walked_unset(const int x, const int y)
 }
 
 void Level::is_walked_no_check_unset(const int x, const int y) { set_no_check(_is_walked, x, y, false); }
-
-bool Level::is_gas_blocker(const point p) const
-{
-  if (unlikely(is_oob(p.x, p.y))) {
-    return false;
-  }
-  return (get(_is_gas_blocker, p.x, p.y));
-}
-
-bool Level::is_gas_blocker_no_check(const point p) const { return (get_no_check(_is_gas_blocker, p.x, p.y)); }
-
-bool Level::is_gas_blocker(const int x, const int y) const
-{
-  if (unlikely(is_oob(x, y))) {
-    return false;
-  }
-  return (get(_is_gas_blocker, x, y));
-}
-
-bool Level::is_gas_blocker_no_check(const int x, const int y) const { return (get_no_check(_is_gas_blocker, x, y)); }
-
-void Level::is_gas_blocker_set(const int x, const int y)
-{
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
-  set(_is_gas_blocker, x, y, true);
-}
-
-void Level::is_gas_blocker_no_check_set(const int x, const int y) { set_no_check(_is_gas_blocker, x, y, true); }
-
-void Level::is_gas_blocker_unset(const int x, const int y)
-{
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
-  set(_is_gas_blocker, x, y, false);
-}
-
-void Level::is_gas_blocker_no_check_unset(const int x, const int y) { set_no_check(_is_gas_blocker, x, y, false); }
 
 bool Level::noise_blocker(const point p) const
 {

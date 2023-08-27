@@ -190,6 +190,13 @@ void Level::gas_poison_explosion(point at)
     return;
   }
 
+  //
+  // Protection from explosions
+  //
+  if (is_gas_explosion_blocker(at)) {
+    return;
+  }
+
   for (auto dx = 0; dx < DUNGEON_GAS_RESOLUTION; dx++) {
     for (auto dy = 0; dy < DUNGEON_GAS_RESOLUTION; dy++) {
       uint16_t gx                  = at.x * DUNGEON_GAS_RESOLUTION + dx;

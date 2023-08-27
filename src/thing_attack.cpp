@@ -626,6 +626,16 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
   }
 
   //
+  // Shielded checks? Is the thing inside a magical shield for example?
+  //
+  if (victim->is_player()) {
+    if (victim->is_shielded_from_attack_by(this)) {
+      dbg("Attack failed, victim is shielded %s", victim->to_short_string().c_str());
+      return false;
+    }
+  }
+
+  //
   // Critical attack optins
   //
   if (d10000() < chance_d10000_crit()) {

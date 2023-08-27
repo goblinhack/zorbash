@@ -467,6 +467,7 @@ private:
   int _is_fungus_poison {};
   int _is_fungus_withered {};
   int _is_gas_blocker {};
+  int _is_gas_explosion_blocker {};
   int _is_gauntlet {};
   int _is_gelatinous {};
   int _is_glass {};
@@ -670,7 +671,6 @@ private:
   int _is_undead {};
   int _is_unused_flag1 {};
   int _is_unused_flag10 {};
-  int _is_unused_flag100 {};
   int _is_unused_flag11 {};
   int _is_unused_flag12 {};
   int _is_unused_flag124 {};
@@ -1814,6 +1814,7 @@ public:
   int is_fungus(void) const;
   int is_fungus_withered(void) const;
   int is_gas_blocker(void) const;
+  int is_gas_explosion_blocker(void) const;
   int is_gauntlet(void) const;
   int is_gelatinous(void) const;
   int is_glass(void) const;
@@ -2014,7 +2015,6 @@ public:
   int is_troll(void) const;
   int is_turret(void) const;
   int is_undead(void) const;
-  int is_unused_flag100(void) const;
   int is_unused_flag10(void) const;
   int is_unused_flag11(void) const;
   int is_unused_flag124(void) const;
@@ -2580,6 +2580,7 @@ public:
   void is_fungus_set(int v);
   void is_fungus_withered_set(int v);
   void is_gas_blocker_set(int v);
+  void is_gas_explosion_blocker_set(int v);
   void is_gauntlet_set(int v);
   void is_gelatinous_set(int v);
   void is_glass_set(int v);
@@ -2780,7 +2781,6 @@ public:
   void is_troll_set(int v);
   void is_turret_set(int v);
   void is_undead_set(int v);
-  void is_unused_flag100_set(int v);
   void is_unused_flag10_set(int v);
   void is_unused_flag11_set(int v);
   void is_unused_flag124_set(int v);

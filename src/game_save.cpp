@@ -442,12 +442,14 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_dirt                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_door                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_enchantstone                  ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_engulfer                      ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_fire                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_floor                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_foliage                       ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_food                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_fungus                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_gas_blocker                   ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_gas_explosion_blocker         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_gold                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_green_blood                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_hazard                        ? 1LLU : 0LLU) << shift; shift++;
@@ -615,6 +617,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_dirt);
   out << bits(my.t->_is_door);
   out << bits(my.t->_is_enchantstone);
+  out << bits(my.t->_is_engulfer);
   out << bits(my.t->_is_fire);
   out << bits(my.t->_is_floor);
   out << bits(my.t->_is_foliage);
@@ -624,6 +627,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_fungus_healing);
   out << bits(my.t->_is_fungus_withered);
   out << bits(my.t->_is_gas_blocker);
+  out << bits(my.t->_is_gas_explosion_blocker);
   out << bits(my.t->_is_gas_healing);
   out << bits(my.t->_is_gold);
   out << bits(my.t->_is_grass_dry);

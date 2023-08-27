@@ -373,6 +373,7 @@ PyObject *thing_is_fungus_poison(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_fungus(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_fungus_withered(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_gas_blocker(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_gas_explosion_blocker(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_gas_healing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_gas_poison(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_gauntlet(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -570,7 +571,6 @@ PyObject *thing_is_treasure_type(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_troll(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_turret(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_undead(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag100(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag10(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag11(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag12(PyObject *obj, PyObject *args, PyObject *keywds);

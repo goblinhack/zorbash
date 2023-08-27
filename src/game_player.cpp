@@ -50,9 +50,9 @@ void Game::place_player(void)
         t->bodypart_add(my_bodypart, iter);
       }
 
+      level->thing_new("trap_dart", point(x + 2, y + 2));
       if (0) {
         level->thing_new("zorb_totem", point(x + 2, y + 2));
-        level->thing_new("trap_dart", point(x + 2, y + 2));
         level->thing_new("sentry_orb_energy", point(x - 3, y));
         level->thing_new("crystal1", point(x, y + 1));
         level->thing_new("crystal2", point(x, y + 2));
@@ -168,10 +168,10 @@ void Game::place_player(void)
         level->thing_new("potion_health", point(x - 2, y));
       }
 
-      if (0) {
+      if (1) {
         // level->thing_new("block_of_ice", point(x + 1, y));
         // level->thing_new("spell_of_holding_barrier", point(x + 1, y + 1));
-        // level->thing_new("spell_of_holding_barrier", point(x, y));
+        level->thing_new("spell_of_holding_barrier", point(x, y));
         auto w = level->thing_new("spell_of_holding", point(x, y));
         t->spell_add(w);
       }
@@ -251,8 +251,8 @@ void Game::place_player(void)
         level->thing_new("rat_large", point(x + 1, y + 3));
         level->thing_new("trap_monster", point(x - 2, y));
       }
-      if (0) {
-        auto d = level->thing_new("belcher", point(x - 3, y + 1));
+      if (1) {
+        auto d = level->thing_new("belcher", point(x - 1, y));
         d->wake("");
       }
       if (0) {

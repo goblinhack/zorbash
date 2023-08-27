@@ -695,10 +695,10 @@ int Thing::is_unused_flag99(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag99());
 }
-int Thing::is_unused_flag100(void)
+int Thing::is_gas_explosion_blocker(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag100());
+  return (tp()->is_gas_explosion_blocker());
 }
 int Thing::is_able_to_break_out_of_spell_of_holding(void)
 {

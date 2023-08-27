@@ -25,6 +25,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.spell_cost(self, 3)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "Use this spell to place a magical barrier around a monster to prevent either their escape, or them attacking you!")
+    my.text_description_long2(self, "While this barrier is active the entity within the shield will be immune to many types of attack.")
     my.text_description_short(self, "Spell of holding.")
     my.text_description_very_short(self, "Holding")
     my.z_depth(self, my.MAP_DEPTH_OBJ)

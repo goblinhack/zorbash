@@ -1099,7 +1099,7 @@ bool sdlk_eq(const SDL_Keysym &a, const SDL_Keysym &b)
   auto k2 = sdlk_normalize(b);
 
   if (0) {
-    fprintf(stderr, "ZZZ NEIL %s %s %d A [%s] B [%s]\n", __FILE__, __FUNCTION__, __LINE__, to_string(a).c_str(),
+    fprintf(stderr, "ZZZ %s %s %d A [%s] B [%s]\n", __FILE__, __FUNCTION__, __LINE__, to_string(a).c_str(),
             to_string(b).c_str());
   }
 

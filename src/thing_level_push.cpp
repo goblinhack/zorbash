@@ -47,10 +47,6 @@ void Thing::level_push(void)
     return;
   }
 
-  if (is_acid()) {
-    i_set_is_acid = true;
-    level->is_acid_set(x, y);
-  }
   if (is_ascend_dungeon()) {
     i_set_is_ascend_dungeon = true;
     level->is_ascend_dungeon_set(x, y);
@@ -78,10 +74,6 @@ void Thing::level_push(void)
   if (is_burnable()) {
     i_set_is_burnable = true;
     level->is_burnable_set(x, y);
-  }
-  if (is_carnivorous_plant()) {
-    i_set_is_carnivorous_plant = true;
-    level->is_carnivorous_plant_set(x, y);
   }
   if (is_chasm()) {
     i_set_is_chasm = true;
@@ -239,7 +231,6 @@ void Thing::level_push(void)
     i_set_is_wall = true;
     level->is_wall_set(x, y);
   }
-
   if (is_shallow_water() || is_deep_water()) {
     i_set_water = true;
     level->gfx_water_set(x, y);
@@ -261,6 +252,18 @@ void Thing::level_push(void)
     //
     // Do we want dead giant spiders to be an obstacle?
     //
+    if (is_acid()) {
+      i_set_is_acid = true;
+      level->is_acid_set(x, y);
+    }
+    if (is_engulfer()) {
+      i_set_is_engulfer = true;
+      level->is_engulfer_set(x, y);
+    }
+    if (is_carnivorous_plant()) {
+      i_set_is_carnivorous_plant = true;
+      level->is_carnivorous_plant_set(x, y);
+    }
     if (is_heavy()) {
       i_set_is_heavy = true;
       level->is_heavy_set(x, y);
@@ -312,6 +315,10 @@ void Thing::level_push(void)
     if (is_gas_blocker() && ! is_open) {
       i_set_is_gas_blocker = true;
       level->is_gas_blocker_set(x, y);
+    }
+    if (is_gas_explosion_blocker() && ! is_dead) {
+      i_set_is_gas_explosion_blocker = true;
+      level->is_gas_explosion_blocker_set(x, y);
     }
     if (noise_blocker() && ! is_open) {
       i_set_noise_blocker = true;

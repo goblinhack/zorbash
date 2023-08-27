@@ -269,6 +269,7 @@ public:
   uint64_t i_set_is_dirt                      : 1 {};
   uint64_t i_set_is_door                      : 1 {};
   uint64_t i_set_is_enchantstone              : 1 {};
+  uint64_t i_set_is_engulfer                  : 1 {};
   uint64_t i_set_is_fire                      : 1 {};
   uint64_t i_set_is_floor                     : 1 {};
   uint64_t i_set_is_foliage                   : 1 {};
@@ -279,6 +280,7 @@ public:
   uint64_t i_set_is_fungus_poison             : 1 {};
   uint64_t i_set_is_fungus_withered           : 1 {};
   uint64_t i_set_is_gas_blocker               : 1 {};
+  uint64_t i_set_is_gas_explosion_blocker     : 1 {};
   uint64_t i_set_is_gold                      : 1 {};
   uint64_t i_set_is_grass_dry                 : 1 {};
   uint64_t i_set_is_grass_wet                 : 1 {};
@@ -597,6 +599,7 @@ public:
   bool is_player_bodypart(Thingp item);
   bool is_raging_set(bool);
   bool is_raging(void);
+  bool is_shielded_from_attack_by(Thingp hitter);
   bool is_state_sleeping(void);
   bool is_stuck_check(void);
   bool is_stuck_currently(void);
@@ -1601,6 +1604,7 @@ public:
   int is_fungus(void);
   int is_fungus_withered(void);
   int is_gas_blocker(void);
+  int is_gas_explosion_blocker(void);
   int is_gauntlet(void);
   int is_gelatinous(void);
   int is_glass(void);
@@ -1801,7 +1805,6 @@ public:
   int is_troll(void);
   int is_turret(void);
   int is_undead(void);
-  int is_unused_flag100(void);
   int is_unused_flag10(void);
   int is_unused_flag11(void);
   int is_unused_flag12(void);

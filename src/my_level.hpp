@@ -29,18 +29,16 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX * DUNGEON_GAS_RESOLUTION >, MAP_WIDTH_MAX * DUNGEON_GAS_RESOLUTION >
       gas_healing_cloud {};
 
-  //
-  // These are caches for fast lookup in display code
-  //
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_gas_blocker {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_gas_explosion_blocker {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_light_blocker {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_light_blocker_for_monst {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_destructable {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_jump_end {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_spawn {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_spawn_monst {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_wall_or_door {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_when_dead {};
-  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_jump_end {};
-  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_spawn_monst {};
-  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_spawn {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_walked {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _noise_blocker {};
 
@@ -77,6 +75,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_dirt {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_door {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_enchantstone {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_engulfer {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_fire {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_floor {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_foliage {};
@@ -743,6 +742,10 @@ public:
   bool is_gas_blocker(const point p) const;
   bool is_gas_blocker_no_check(const int x, const int y) const;
   bool is_gas_blocker_no_check(const point p) const;
+  bool is_gas_explosion_blocker(const int x, const int y) const;
+  bool is_gas_explosion_blocker(const point p) const;
+  bool is_gas_explosion_blocker_no_check(const int x, const int y) const;
+  bool is_gas_explosion_blocker_no_check(const point p) const;
   bool is_light_blocker(const int x, const int y) const;
   bool is_light_blocker(const point p) const;
   bool is_light_blocker_for_monst(const int x, const int y) const;
@@ -887,6 +890,8 @@ public:
   uint8_t is_door(const point p);
   uint8_t is_enchantstone(const int x, const int y);
   uint8_t is_enchantstone(const point p);
+  uint8_t is_engulfer(const int x, const int y);
+  uint8_t is_engulfer(const point p);
   uint8_t is_fire(const int x, const int y);
   uint8_t is_fire(const point p);
   uint8_t is_fire_no_check(const int x, const int y);
@@ -1138,7 +1143,6 @@ public:
   void fade_in_no_check_unset(const int x, const int y);
   void fade_in_unset(const int x, const int y);
   void fini(void);
-  void gas_healing_explosion(point at);
   void gas_poison_explosion(point at);
   void gfx_water_set(const int x, const int y);
   void gfx_water_unset(const int x, const int y);
@@ -1214,6 +1218,8 @@ public:
   void is_door_unset(const int x, const int y);
   void is_enchantstone_set(const int x, const int y);
   void is_enchantstone_unset(const int x, const int y);
+  void is_engulfer_set(const int x, const int y);
+  void is_engulfer_unset(const int x, const int y);
   void is_fire_set(const int x, const int y);
   void is_fire_unset(const int x, const int y);
   void is_floor_set(const int x, const int y);
@@ -1236,6 +1242,10 @@ public:
   void is_gas_blocker_no_check_unset(const int x, const int y);
   void is_gas_blocker_set(const int x, const int y);
   void is_gas_blocker_unset(const int x, const int y);
+  void is_gas_explosion_blocker_no_check_set(const int x, const int y);
+  void is_gas_explosion_blocker_no_check_unset(const int x, const int y);
+  void is_gas_explosion_blocker_set(const int x, const int y);
+  void is_gas_explosion_blocker_unset(const int x, const int y);
   void is_gas_healing_no_check_set(const int x, const int y, uint8_t val);
   void is_gas_healing_no_check_unset(const int x, const int y);
   void is_gas_healing_set(const int x, const int y, uint8_t val);

@@ -558,6 +558,7 @@ int Tp::is_fungus_poison(void) const { return _is_fungus_poison; }
 int Tp::is_fungus(void) const { return _is_fungus; }
 int Tp::is_fungus_withered(void) const { return _is_fungus_withered; }
 int Tp::is_gas_blocker(void) const { return _is_gas_blocker; }
+int Tp::is_gas_explosion_blocker(void) const { return _is_gas_explosion_blocker; }
 int Tp::is_gauntlet(void) const { return _is_gauntlet; }
 int Tp::is_gelatinous(void) const { return _is_gelatinous; }
 int Tp::is_glass(void) const { return _is_glass; }
@@ -758,7 +759,6 @@ int Tp::is_treasure(void) const { return _is_treasure; }
 int Tp::is_troll(void) const { return _is_troll; }
 int Tp::is_turret(void) const { return _is_turret; }
 int Tp::is_undead(void) const { return _is_undead; }
-int Tp::is_unused_flag100(void) const { return _is_unused_flag100; }
 int Tp::is_unused_flag10(void) const { return _is_unused_flag10; }
 int Tp::is_unused_flag11(void) const { return _is_unused_flag11; }
 int Tp::is_unused_flag12(void) const { return _is_unused_flag12; }
@@ -1323,6 +1323,7 @@ void Tp::is_fungus_poison_set(int v) { _is_fungus_poison = v; }
 void Tp::is_fungus_set(int v) { _is_fungus = v; }
 void Tp::is_fungus_withered_set(int v) { _is_fungus_withered = v; }
 void Tp::is_gas_blocker_set(int v) { _is_gas_blocker = v; }
+void Tp::is_gas_explosion_blocker_set(int v) { _is_gas_explosion_blocker = v; }
 void Tp::is_gauntlet_set(int v) { _is_gauntlet = v; }
 void Tp::is_gelatinous_set(int v) { _is_gelatinous = v; }
 void Tp::is_glass_set(int v) { _is_glass = v; }
@@ -1523,7 +1524,6 @@ void Tp::is_treasure_type_set(int v) { _is_treasure_type = v; }
 void Tp::is_troll_set(int v) { _is_troll = v; }
 void Tp::is_turret_set(int v) { _is_turret = v; }
 void Tp::is_undead_set(int v) { _is_undead = v; }
-void Tp::is_unused_flag100_set(int v) { _is_unused_flag100 = v; }
 void Tp::is_unused_flag10_set(int v) { _is_unused_flag10 = v; }
 void Tp::is_unused_flag11_set(int v) { _is_unused_flag11 = v; }
 void Tp::is_unused_flag12_set(int v) { _is_unused_flag12 = v; }

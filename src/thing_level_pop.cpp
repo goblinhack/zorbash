@@ -37,6 +37,10 @@ void Thing::level_pop(void)
       i_set_is_acid = false;
       level->is_acid_unset(x, y);
     }
+    if (i_set_is_engulfer) {
+      i_set_is_engulfer = false;
+      level->is_engulfer_unset(x, y);
+    }
     if (i_set_is_ascend_dungeon) {
       i_set_is_ascend_dungeon = false;
       level->is_ascend_dungeon_unset(x, y);
@@ -172,6 +176,10 @@ void Thing::level_pop(void)
     if (i_set_is_gas_blocker) {
       i_set_is_gas_blocker = false;
       level->is_gas_blocker_unset(x, y);
+    }
+    if (i_set_is_gas_explosion_blocker) {
+      i_set_is_gas_explosion_blocker = false;
+      level->is_gas_explosion_blocker_unset(x, y);
     }
     if (i_set_is_gold) {
       i_set_is_gold = false;
