@@ -27,6 +27,14 @@ void Thing::spell_of_holding_tick(void)
         continue;
       }
 
+      if (! t->is_attackable_by_monst()) {
+        continue;
+      }
+
+      if (t->temperature_never_changes()) {
+        continue;
+      }
+
       t->log("Spell of holding cold damage");
       t->move_penalty_incr();
       t->is_attacked_with_dmg_cold(this, this, dmg_cold());
