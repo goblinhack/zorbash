@@ -8,7 +8,7 @@ def on_you_nat_attack_attempt(me, x, y):
 
 def on_idle(me, x, y):
     if not my.thing_is_sleeping(me):
-        my.spawn_gas_poison_around_thing(me, 3)
+        my.spawn_gas_poison_around_thing(me, 2)
 
 
 def on_death(me, x, y):
