@@ -171,7 +171,7 @@ void Game::place_player(void)
       if (1) {
         // level->thing_new("block_of_ice", point(x + 1, y));
         // level->thing_new("spell_of_holding_barrier", point(x + 1, y + 1));
-        level->thing_new("spell_of_holding_barrier", point(x, y));
+        // level->thing_new("spell_of_holding_barrier", point(x, y));
         auto w = level->thing_new("spell_of_holding", point(x, y));
         t->spell_add(w);
       }
@@ -292,7 +292,7 @@ void Game::place_player(void)
         auto w = level->thing_new("amulet_endurance", point(x, y - 2));
         t->carry(w, carry_options);
       }
-      if (0) {
+      if (1) {
         level->thing_new("portable_hole", point(x - 3, y));
         auto w = level->thing_new("amulet_teleport_attack", point(x, y - 2));
         t->carry(w, carry_options);
