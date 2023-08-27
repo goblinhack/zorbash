@@ -17,6 +17,7 @@ def tp_init(name):
     my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_show_outlined(self, True)
     my.gfx_pixelart_submergible(self, True)
+    my.is_animation(self, True)
     my.is_loggable(self, True)
     my.is_moveable(self, True)
     my.text_a_or_an(self, "a")

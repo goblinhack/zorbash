@@ -420,6 +420,7 @@ int Tp::is_always_activated(void) const { return _is_always_activated; }
 int Tp::is_always_hit(void) const { return _is_always_hit; }
 int Tp::is_always_submerged_in_water(void) const { return _is_always_submerged_in_water; }
 int Tp::is_amulet(void) const { return _is_amulet; }
+int Tp::is_animation(void) const { return _is_animation; }
 int Tp::is_ant(void) const { return _is_ant; }
 int Tp::is_aquatic(void) const { return _is_aquatic; }
 int Tp::is_armor(void) const { return _is_armor; }
@@ -858,8 +859,6 @@ int Tp::is_unused_flag94(void) const { return _is_unused_flag94; }
 int Tp::is_unused_flag95(void) const { return _is_unused_flag95; }
 int Tp::is_unused_flag96(void) const { return _is_unused_flag96; }
 int Tp::is_unused_flag97(void) const { return _is_unused_flag97; }
-int Tp::is_unused_flag98(void) const { return _is_unused_flag98; }
-int Tp::is_unused_flag99(void) const { return _is_unused_flag99; }
 int Tp::is_unused_flag9(void) const { return _is_unused_flag9; }
 int Tp::is_usable(void) const { return _is_usable; }
 int Tp::is_used_when_thrown(void) const { return _is_used_when_thrown; }
@@ -949,6 +948,7 @@ int Tp::stat_thv(void) const { return _stat_thv; }
 int Tp::teleport_distance(void) const { return _teleport_distance; }
 int Tp::temperature_max(void) const { return _temperature_max; }
 int Tp::temperature_min(void) const { return _temperature_min; }
+int Tp::temperature_never_changes(void) const { return _temperature_never_changes; }
 int Tp::temperature_sensitive_to_sudden_changes(void) const { return _temperature_sensitive_to_sudden_changes; }
 int Tp::temperature_sensitive(void) const { return _temperature_sensitive; }
 int Tp::temperature(void) const { return _temperature; }
@@ -1185,6 +1185,7 @@ void Tp::is_always_activated_set(int v) { _is_always_activated = v; }
 void Tp::is_always_hit_set(int v) { _is_always_hit = v; }
 void Tp::is_always_submerged_in_water_set(int v) { _is_always_submerged_in_water = v; }
 void Tp::is_amulet_set(int v) { _is_amulet = v; }
+void Tp::is_animation_set(int v) { _is_animation = v; }
 void Tp::is_ant_set(int v) { _is_ant = v; }
 void Tp::is_aquatic_set(int v) { _is_aquatic = v; }
 void Tp::is_armor_set(int v) { _is_armor = v; }
@@ -1623,8 +1624,6 @@ void Tp::is_unused_flag94_set(int v) { _is_unused_flag94 = v; }
 void Tp::is_unused_flag95_set(int v) { _is_unused_flag95 = v; }
 void Tp::is_unused_flag96_set(int v) { _is_unused_flag96 = v; }
 void Tp::is_unused_flag97_set(int v) { _is_unused_flag97 = v; }
-void Tp::is_unused_flag98_set(int v) { _is_unused_flag98 = v; }
-void Tp::is_unused_flag99_set(int v) { _is_unused_flag99 = v; }
 void Tp::is_unused_flag9_set(int v) { _is_unused_flag9 = v; }
 void Tp::is_usable_set(int v) { _is_usable = v; }
 void Tp::is_used_when_thrown_set(int v) { _is_used_when_thrown = v; }
@@ -1860,6 +1859,7 @@ void Tp::str1_set(const std::string &v) { _str1 = v; }
 void Tp::str2_set(const std::string &v) { _str2 = v; }
 void Tp::str4_set(const std::string &v) { _str4 = v; }
 void Tp::teleport_distance_set(int v) { _teleport_distance = v; }
+void Tp::temperature_never_changes_set(int v) { _temperature_never_changes = v; }
 void Tp::temperature_sensitive_set(int v) { _temperature_sensitive = v; }
 void Tp::temperature_sensitive_to_sudden_changes_set(int v) { _temperature_sensitive_to_sudden_changes = v; }
 void Tp::text_a_or_an_set(const std::string &v) { _text_a_or_an = v; }

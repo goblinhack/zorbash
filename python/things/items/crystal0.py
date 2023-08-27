@@ -32,6 +32,7 @@ def tp_init(self):
     my.light_color(self, "white")
     my.light_dist(self, 1)
     my.noise_on_dropping(self, 25)
+    my.temperature_never_changes(self, True)
     my.text_a_or_an(self, "a")
     my.text_description_long3(self, "Collecting all 7 crystals will unlock the final door that leads back to the surface world.")
     my.text_description_long4(self, "Each crystal will bestow different ability bonuses. Collect them all for maximum power!")

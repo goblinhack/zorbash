@@ -218,6 +218,7 @@ PyObject *thing_is_always_activated(PyObject *obj, PyObject *args, PyObject *key
 PyObject *thing_is_always_hit(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_always_submerged_in_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_amulet(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_animation(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ant(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_aquatic(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_armor(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -670,8 +671,6 @@ PyObject *thing_is_unused_flag94(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag95(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag96(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag97(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag98(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag99(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag9(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_usable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_used_when_thrown(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -872,6 +871,7 @@ PyObject *thing_teleport(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_teleport_randomly(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_temperature_max(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_temperature_min(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_temperature_never_changes(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_throw_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_tick_prio(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_top_owner_id_get(PyObject *obj, PyObject *args, PyObject *keywds);

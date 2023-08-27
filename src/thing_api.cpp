@@ -685,15 +685,15 @@ int Thing::is_unused_flag97(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag97());
 }
-int Thing::is_unused_flag98(void)
+int Thing::is_animation(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag98());
+  return (tp()->is_animation());
 }
-int Thing::is_unused_flag99(void)
+int Thing::temperature_never_changes(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag99());
+  return (tp()->temperature_never_changes());
 }
 int Thing::is_gas_explosion_blocker(void)
 {

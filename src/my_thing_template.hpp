@@ -329,6 +329,7 @@ private:
   int _is_always_hit {};
   int _is_always_submerged_in_water {};
   int _is_amulet {};
+  int _is_animation {};
   int _is_ant {};
   int _is_aquatic {};
   int _is_armor {};
@@ -770,8 +771,6 @@ private:
   int _is_unused_flag95 {};
   int _is_unused_flag96 {};
   int _is_unused_flag97 {};
-  int _is_unused_flag98 {};
-  int _is_unused_flag99 {};
   int _is_usable {};
   int _is_used_when_thrown {};
   int _is_very_combustible {};
@@ -860,6 +859,7 @@ private:
   int _teleport_distance {};
   int _temperature_max {};
   int _temperature_min {};
+  int _temperature_never_changes {};
   int _temperature_sensitive {};
   int _temperature_sensitive_to_sudden_changes {};
   int _temperature {TEMPERATURE_ROOM};
@@ -1676,6 +1676,7 @@ public:
   int is_always_hit(void) const;
   int is_always_submerged_in_water(void) const;
   int is_amulet(void) const;
+  int is_animation(void) const;
   int is_ant(void) const;
   int is_aquatic(void) const;
   int is_armor(void) const;
@@ -2115,8 +2116,6 @@ public:
   int is_unused_flag95(void) const;
   int is_unused_flag96(void) const;
   int is_unused_flag97(void) const;
-  int is_unused_flag98(void) const;
-  int is_unused_flag99(void) const;
   int is_unused_flag9(void) const;
   int is_usable(void) const;
   int is_used_when_thrown(void) const;
@@ -2206,6 +2205,7 @@ public:
   int teleport_distance(void) const;
   int temperature_max(void) const;
   int temperature_min(void) const;
+  int temperature_never_changes(void) const;
   int temperature_sensitive_to_sudden_changes(void) const;
   int temperature_sensitive(void) const;
   int temperature(void) const;
@@ -2442,6 +2442,7 @@ public:
   void is_always_hit_set(int v);
   void is_always_submerged_in_water_set(int v);
   void is_amulet_set(int v);
+  void is_animation_set(int v);
   void is_ant_set(int v);
   void is_aquatic_set(int v);
   void is_armor_set(int v);
@@ -2881,8 +2882,6 @@ public:
   void is_unused_flag95_set(int v);
   void is_unused_flag96_set(int v);
   void is_unused_flag97_set(int v);
-  void is_unused_flag98_set(int v);
-  void is_unused_flag99_set(int v);
   void is_unused_flag9_set(int v);
   void is_usable_set(int v);
   void is_used_when_thrown_set(int v);
@@ -3120,6 +3119,7 @@ public:
   void teleport_distance_set(int v);
   void temperature_max_set(int v);
   void temperature_min_set(int v);
+  void temperature_never_changes_set(int v);
   void temperature_sensitive_set(int v);
   void temperature_sensitive_to_sudden_changes_set(int v);
   void temperature_set(int v);

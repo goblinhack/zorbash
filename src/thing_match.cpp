@@ -132,6 +132,7 @@ bool Tp::matches(const std::string &what)
   if (is_always_hit() && (what == "is_always_hit")) { return true; }
   if (is_always_submerged_in_water() && (what == "is_always_submerged_in_water")) { return true; }
   if (is_amulet() && (what == "is_amulet")) { return true; }
+  if (is_animation() && (what == "is_animation")) { return true; }
   if (is_ant() && (what == "is_ant")) { return true; }
   if (is_aquatic() && (what == "is_aquatic")) { return true; }
   if (is_armor() && (what == "is_armor")) { return true; }
@@ -555,8 +556,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag95() && (what == "is_unused_flag95")) { return true; }
   if (is_unused_flag96() && (what == "is_unused_flag96")) { return true; }
   if (is_unused_flag97() && (what == "is_unused_flag97")) { return true; }
-  if (is_unused_flag98() && (what == "is_unused_flag98")) { return true; }
-  if (is_unused_flag99() && (what == "is_unused_flag99")) { return true; }
   if (is_unused_flag9() && (what == "is_unused_flag9")) { return true; }
   if (is_usable() && (what == "is_usable")) { return true; }
   if (is_used_when_thrown() && (what == "is_used_when_thrown")) { return true; }
@@ -597,6 +596,7 @@ bool Tp::matches(const std::string &what)
   if (stat_def_penalty_when_in_shallow_water() && (what == "stat_def_penalty_when_in_shallow_water")) { return true; }
   if (stat_def_penalty_when_stuck_max() && (what == "stat_def_penalty_when_stuck_max")) { return true; }
   if (stat_def_penalty_when_stuck() && (what == "stat_def_penalty_when_stuck")) { return true; }
+  if (temperature_never_changes() && (what == "temperature_never_changes")) { return true; }
   if (tick_prio() && (what == "tick_prio")) { return true; }
   if (unused_flag129() && (what == "unused_flag129")) { return true; }
   // end sort marker1 }
@@ -732,6 +732,7 @@ bool Thing::matches(const std::string &what)
   if (is_always_hit() && (what == "is_always_hit")) { return true; }
   if (is_always_submerged_in_water() && (what == "is_always_submerged_in_water")) { return true; }
   if (is_amulet() && (what == "is_amulet")) { return true; }
+  if (is_animation() && (what == "is_animation")) { return true; }
   if (is_ant() && (what == "is_ant")) { return true; }
   if (is_aquatic() && (what == "is_aquatic")) { return true; }
   if (is_armor() && (what == "is_armor")) { return true; }
@@ -1157,8 +1158,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag95() && (what == "is_unused_flag95")) { return true; }
   if (is_unused_flag96() && (what == "is_unused_flag96")) { return true; }
   if (is_unused_flag97() && (what == "is_unused_flag97")) { return true; }
-  if (is_unused_flag98() && (what == "is_unused_flag98")) { return true; }
-  if (is_unused_flag99() && (what == "is_unused_flag99")) { return true; }
   if (is_unused_flag9() && (what == "is_unused_flag9")) { return true; }
   if (is_usable() && (what == "is_usable")) { return true; }
   if (is_used_when_thrown() && (what == "is_used_when_thrown")) { return true; }
@@ -1199,6 +1198,7 @@ bool Thing::matches(const std::string &what)
   if (stat_def_penalty_when_in_shallow_water() && (what == "stat_def_penalty_when_in_shallow_water")) { return true; }
   if (stat_def_penalty_when_stuck_max() && (what == "stat_def_penalty_when_stuck_max")) { return true; }
   if (stat_def_penalty_when_stuck() && (what == "stat_def_penalty_when_stuck")) { return true; }
+  if (temperature_never_changes() && (what == "temperature_never_changes")) { return true; }
   if (tick_prio() && (what == "tick_prio")) { return true; }
   if (unused_flag129() && (what == "unused_flag129")) { return true; }
   // end sort marker2 }
@@ -1331,6 +1331,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_always_hit") { return &Thing::is_always_hit; }
   if (what == "is_always_submerged_in_water") { return &Thing::is_always_submerged_in_water; }
   if (what == "is_amulet") { return &Thing::is_amulet; }
+  if (what == "is_animation") { return &Thing::is_animation; }
   if (what == "is_ant") { return &Thing::is_ant; }
   if (what == "is_aquatic") { return &Thing::is_aquatic; }
   if (what == "is_armor") { return &Thing::is_armor; }
@@ -1747,8 +1748,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag95") { return &Thing::is_unused_flag95; }
   if (what == "is_unused_flag96") { return &Thing::is_unused_flag96; }
   if (what == "is_unused_flag97") { return &Thing::is_unused_flag97; }
-  if (what == "is_unused_flag98") { return &Thing::is_unused_flag98; }
-  if (what == "is_unused_flag99") { return &Thing::is_unused_flag99; }
   if (what == "is_unused_flag9") { return &Thing::is_unused_flag9; }
   if (what == "is_usable") { return &Thing::is_usable; }
   if (what == "is_used_when_thrown") { return &Thing::is_used_when_thrown; }
@@ -1790,6 +1789,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "stat_def_penalty_when_in_shallow_water") { return &Thing::stat_def_penalty_when_in_shallow_water; }
   if (what == "stat_def_penalty_when_stuck_max") { return &Thing::stat_def_penalty_when_stuck_max; }
   if (what == "stat_def_penalty_when_stuck") { return &Thing::stat_def_penalty_when_stuck; }
+  if (what == "temperature_never_changes") { return &Thing::temperature_never_changes; }
   if (what == "tick_prio") { return &Thing::tick_prio; }
   if (what == "unused_flag129") { return &Thing::unused_flag129; }
   // end sort marker3 }

@@ -50,8 +50,8 @@ void Game::place_player(void)
         t->bodypart_add(my_bodypart, iter);
       }
 
-      level->thing_new("trap_dart", point(x + 2, y + 2));
       if (0) {
+        level->thing_new("trap_dart", point(x + 2, y + 2));
         level->thing_new("zorb_totem", point(x + 2, y + 2));
         level->thing_new("sentry_orb_energy", point(x - 3, y));
         level->thing_new("crystal1", point(x, y + 1));
@@ -251,7 +251,7 @@ void Game::place_player(void)
         level->thing_new("rat_large", point(x + 1, y + 3));
         level->thing_new("trap_monster", point(x - 2, y));
       }
-      if (1) {
+      if (0) {
         auto d = level->thing_new("belcher", point(x - 1, y));
         d->wake("");
       }

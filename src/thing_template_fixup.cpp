@@ -108,7 +108,13 @@ void tp_fixup(void)
 
     if (tp->is_ethereal()) {
       if (tp->is_air_breather()) {
-        DIE("Tp %s has ethereal set and breathes air?", tp->name().c_str());
+        DIE("Tp %s is ethereal set and breathes air?", tp->name().c_str());
+      }
+      if (tp->temperature_sensitive()) {
+        DIE("Tp %s is ethereal set and temperature sensitive set?", tp->name().c_str());
+      }
+      if (tp->is_crushable()) {
+        DIE("Tp %s is ethereal and crushable?", tp->name().c_str());
       }
 
       tp->is_immune_to_paralysis_set(true);
@@ -118,9 +124,7 @@ void tp_fixup(void)
       tp->is_immune_to_stamina_drain_set(true);
       tp->is_immune_to_fire_set(true);
       tp->is_immune_to_cold_set(true);
-      if (tp->is_crushable()) {
-        DIE("Tp %s is ethereal and crushable?", tp->name().c_str());
-      }
+      tp->temperature_never_changes_set(true);
     }
 
     if (tp->environ_hates_acid()) {

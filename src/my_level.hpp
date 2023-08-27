@@ -545,6 +545,9 @@ public:
   FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)                                                                         \
   if (t->is_internal()) {                                                                                            \
     continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_animation()) {                                                                                           \
+    continue;                                                                                                        \
   }
 
 #define FOR_ALL_GRID_THINGS(level, t, x, y)                                                                          \
@@ -594,6 +597,9 @@ public:
   if (t->is_hidden) {                                                                                                \
     continue;                                                                                                        \
   }                                                                                                                  \
+  if (t->is_animation()) {                                                                                           \
+    continue;                                                                                                        \
+  }                                                                                                                  \
   if (! t->is_tickable()) {                                                                                          \
     continue;                                                                                                        \
   }
@@ -613,6 +619,9 @@ public:
   if (t->is_hidden) {                                                                                                \
     continue;                                                                                                        \
   }                                                                                                                  \
+  if (t->is_animation()) {                                                                                           \
+    continue;                                                                                                        \
+  }                                                                                                                  \
   if (! t->is_interesting()) {                                                                                       \
     continue;                                                                                                        \
   }
@@ -626,6 +635,9 @@ public:
     continue;                                                                                                        \
   }                                                                                                                  \
   if (t->is_hidden) {                                                                                                \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_animation()) {                                                                                           \
     continue;                                                                                                        \
   }                                                                                                                  \
   if (! t->is_interesting()) {                                                                                       \
@@ -644,6 +656,9 @@ public:
     continue;                                                                                                        \
   }                                                                                                                  \
   if (t->is_hidden) {                                                                                                \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_animation()) {                                                                                           \
     continue;                                                                                                        \
   }                                                                                                                  \
   if (t->is_interesting() || t->is_attackable_by_monst() || t->is_attackable_by_player() || t->is_obs_ai()) {        \

@@ -72,12 +72,22 @@ void Thing::temperature_tick(void)
     }
 
     //
+    // Do not count hidden player body parts
+    //
+    if (t->is_player_bodypart()) {
+      continue;
+    }
+
+    //
     // Do not count hidden (carried) items
     //
     if (t->is_hidden) {
       continue;
     }
 
+    if (t->top_owner()) {
+      t->die("wtf hidden %d", t->is_hidden);
+    }
     //
     // Without this check a player will heat themselves up ridiculously
     //
@@ -533,13 +543,23 @@ int Thing::temperature_set(int v)
   return v;
 }
 
-void Thing::temperature_decr(int v) { temperature_incr(-v); }
+void Thing::temperature_decr(int v)
+{
+  if (temperature_never_changes()) {
+    return;
+  }
+  temperature_incr(-v);
+}
 
 void Thing::temperature_incr(int temperature_change)
 {
   TRACE_NO_INDENT();
 
   if (! temperature_change) {
+    return;
+  }
+
+  if (temperature_never_changes()) {
     return;
   }
 
@@ -622,8 +642,20 @@ void Thing::temperature_incr(int temperature_change)
   }
 }
 
-void Thing::temperature_decr(void) { temperature_incr(-1); }
+void Thing::temperature_decr(void)
+{
+  if (temperature_never_changes()) {
+    return;
+  }
+  temperature_incr(-1);
+}
 
-void Thing::temperature_incr(void) { temperature_incr(1); }
+void Thing::temperature_incr(void)
+{
+  if (temperature_never_changes()) {
+    return;
+  }
+  temperature_incr(1);
+}
 
 bool Thing::has_temperature(void) { return tp()->has_temperature(); }

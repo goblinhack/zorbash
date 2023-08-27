@@ -62,6 +62,7 @@ def tp_init(name, text_long_name):
     my.noise_blocker(self, True)
     my.normal_placement_rules(self, True)
     my.temperature(self, -100)
+    my.temperature_never_changes(self, True)
     my.text_a_or_an(self, "a")
     my.text_description_short(self, "An impenetrable shimmering field of energy.")
     my.thing_size(self, my.THING_SIZE_GIANT)

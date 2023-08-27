@@ -1439,6 +1439,7 @@ public:
   int is_always_hit(void);
   int is_always_submerged_in_water(void);
   int is_amulet(void);
+  int is_animation(void);
   int is_ant(void);
   int is_aquatic(void);
   int is_armor(void);
@@ -1904,8 +1905,6 @@ public:
   int is_unused_flag95(void);
   int is_unused_flag96(void);
   int is_unused_flag97(void);
-  int is_unused_flag98(void);
-  int is_unused_flag99(void);
   int is_unused_flag9(void);
   int is_usable(void);
   int is_used_when_thrown(void);
@@ -2372,6 +2371,7 @@ public:
   int temperature_get(void);
   int temperature_max_get(void);
   int temperature_min_get(void);
+  int temperature_never_changes(void);
   int temperature_sensitive_to_sudden_changes(void);
   int temperature_sensitive(void);
   int temperature_set(int);
