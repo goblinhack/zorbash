@@ -49,6 +49,7 @@ def tp_init(name, text_long_name):
     my.is_interesting(self, True)  # so it can be shoved
     my.is_loggable(self, True)
     my.is_obs_ai(self, True)
+    my.temperature_never_changes(self, True)
     my.is_obs_jump_end(self, True)
     my.is_obs_jumping(self, True)
     my.is_obs_shooting(self, True)
@@ -62,7 +63,6 @@ def tp_init(name, text_long_name):
     my.noise_blocker(self, True)
     my.normal_placement_rules(self, True)
     my.temperature(self, -100)
-    my.temperature_never_changes(self, True)
     my.text_a_or_an(self, "a")
     my.text_description_short(self, "An impenetrable shimmering field of energy.")
     my.thing_size(self, my.THING_SIZE_GIANT)

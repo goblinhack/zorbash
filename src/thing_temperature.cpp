@@ -23,6 +23,10 @@ void Thing::temperature_tick(void)
     return;
   }
 
+  if (temperature_never_changes()) {
+    return;
+  }
+
   //
   // Don't allow things inside chests to catch fire.
   //
@@ -85,9 +89,6 @@ void Thing::temperature_tick(void)
       continue;
     }
 
-    if (t->top_owner()) {
-      t->die("wtf hidden %d", t->is_hidden);
-    }
     //
     // Without this check a player will heat themselves up ridiculously
     //

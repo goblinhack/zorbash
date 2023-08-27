@@ -35,6 +35,13 @@ void Thing::spell_of_holding_tick(void)
         continue;
       }
 
+      //
+      // Allow a saving throw to avoid cold damage.
+      //
+      if (d20() < t->stat_con()) {
+        continue;
+      }
+
       t->log("Spell of holding cold damage");
       t->move_penalty_incr();
       t->is_attacked_with_dmg_cold(this, this, dmg_cold());
