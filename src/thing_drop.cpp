@@ -162,6 +162,17 @@ bool Thing::drop(Thingp what, Thingp target, DropOptions drop_options)
     auto found = std::find(items->carrying.begin(), items->carrying.end(), what->id);
     if (found != items->carrying.end()) {
       items->carrying.erase(found);
+    } else {
+      dbg("Could not remove from carrying list");
+    }
+  }
+
+  TRACE_NO_INDENT();
+  FOR_ALL_CARRYING(id)
+  {
+    auto iter = level->thing_find(id);
+    if (iter) {
+      iter->log("Remaining carried item");
     }
   }
 

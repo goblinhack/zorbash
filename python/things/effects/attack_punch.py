@@ -11,6 +11,7 @@ def init1(name, text_long_name):
     my.gfx_pixelart_animated_can_vflip(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_attack_anim(self, True)
+    my.is_animation(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)

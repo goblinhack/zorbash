@@ -254,7 +254,8 @@ public:
   int tick_resurrect_when = {-1 /* std::numeric_limits< uint32_t >::max() */};
 
   //
-  // List of things I own:
+  // List of things I own. This is different potentially from the carry list as it
+  // includes all things like spells, buffs etc...
   //
   std::set< ThingId > owned {};
   //

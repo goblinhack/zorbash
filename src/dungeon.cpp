@@ -3494,7 +3494,7 @@ bool Dungeon::rooms_move_closer_together(void)
                 break;
               }
               break;
-            case 4 : ERR("Wtf");
+            case 4 : ERR("could not move rooms closer");
           }
 
           if (moved_one) {

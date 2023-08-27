@@ -44,15 +44,15 @@ void Thing::destroy(void)
   is_being_destroyed = true;
 
   if (is_loggable()) {
-    dbg2("Destroy");
+    dbg("Destroy");
     auto i_o = immediate_owner();
     if (i_o) {
       auto top_o = top_owner();
       if (top_o) {
-        dbg2("Is being destroyed, has top owner: %s", top_o->to_string().c_str());
+        dbg("Is being destroyed, has top owner: %s", top_o->to_string().c_str());
       }
       if (top_o != i_o) {
-        dbg2("Is being destroyed, has immediate owner: %s", i_o->to_string().c_str());
+        dbg("Is being destroyed, has immediate owner: %s", i_o->to_string().c_str());
       }
     }
   }

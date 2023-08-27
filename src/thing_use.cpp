@@ -396,8 +396,10 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
     // Monsters do not deplete staffs. Because.
     //
     if (is_monst()) {
-      dbg("Used %s (do not deplete %d charges)", what->to_short_string().c_str(), what->charge_count());
-      return;
+      if (what->initial_charge_count()) {
+        dbg("Used %s (do not deplete %d charges)", what->to_short_string().c_str(), what->charge_count());
+        goto remove_after_use_check;
+      }
     }
 
     //
@@ -466,6 +468,7 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
     return;
   }
 
+remove_after_use_check:
   if (remove_after_use) {
     auto immediate_owner = what->immediate_owner();
     if (immediate_owner) {

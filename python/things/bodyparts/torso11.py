@@ -10,6 +10,8 @@ def tp_init(name):
     my.gfx_pixelart_anim_synced_with_owner(self, True)
     my.gfx_pixelart_bounce_on_move(self, True)
     my.gfx_pixelart_equip_carry_anim(self, True)
+    my.is_animation(self, True)
+    my.is_animation(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_submergible(self, True)
     my.gfx_pixelart_shadow(self, True)

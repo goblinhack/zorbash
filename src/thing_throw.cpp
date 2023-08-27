@@ -72,8 +72,10 @@ bool Thing::throw_item_choose_target(Thingp what)
 
 void Thing::on_thrown_callback(ThingId owner_id_when_thrown)
 {
+  dbg("Thrown callback");
   on_thrown(owner_id_when_thrown);
   visible("thrown");
+  dbg("Thrown callback done");
 }
 
 bool Thing::throw_at(Thingp what, Thingp target)
@@ -343,9 +345,12 @@ bool Thing::throw_at(Thingp what, Thingp target)
 
   if (what->is_dead_or_dying()) {
     //
-    // No need to drop
+    // Callback could still be running so make sure we drop it.
     //
     dbg("Post particle throw, item is dead");
+    TRACE_AND_INDENT();
+    used(what, target, true /* remove_after_use */);
+    dbg("Post used, item is dead");
   } else {
     dbg("Post particle throw, use or drop");
     TRACE_AND_INDENT();

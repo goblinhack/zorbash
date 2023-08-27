@@ -223,7 +223,7 @@ wchar_t unicode_alias_to_char(const std::string &s)
   if (s == "pointer") {
     return UNICODE_ALIAS_FOR_POINTER;
   }
-  if (s == "wtf") {
+  if (s == "unknown") {
     return UNICODE_ALIAS_FOR_UNKNOWN;
   }
   if (s == "newline") {
