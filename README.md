@@ -1,9 +1,8 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - spell of beckoning                                                                                                                         -->
+<!-- - spell of beckoning/repulsing                                                                                                               -->
 <!-- - ogre totems?                                                                                                                               -->
 <!-- - stealth                                                                                                                                    -->
-<!-- - portable hole and teleport?                                                                                                                -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
