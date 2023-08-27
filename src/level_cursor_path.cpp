@@ -96,7 +96,7 @@ std::vector< point > Level::cursor_path_draw_line_attempt(Thingp it, point start
 {
   static std::vector< point > empty;
 
-  dbg2("Create cursor draw line %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+  dbg2("Create cursor draw line %d,%d to @%d,%d", start.x, start.y, end.x, end.y);
   TRACE_AND_INDENT();
 
   Dmap  d {};
@@ -270,7 +270,7 @@ std::vector< point > Level::cursor_path_draw_line_attempt(Thingp it, point start
   set(d.val, end.x, end.y, DMAP_IS_GOAL);
   set(d.val, start.x, start.y, DMAP_IS_PASSABLE);
 
-  dbg2("Make cursor path %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+  dbg2("Make cursor path %d,%d to @%d,%d", start.x, start.y, end.x, end.y);
 
   // dmap_print(&d, start, dmap_start, dmap_end);
   dmap_process(&d, dmap_start, dmap_end, true, true);
@@ -354,7 +354,7 @@ bool Level::cursor_path_draw_line(Thingp it, point start, point end)
 void Level::cursor_path_draw_straight_line(Thingp it, point start, point end)
 {
   pcg_random_allowed++;
-  dbg2("Create cursor draw line %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+  dbg2("Create cursor draw line %d,%d to @%d,%d", start.x, start.y, end.x, end.y);
   TRACE_AND_INDENT();
 
   //
@@ -365,7 +365,7 @@ void Level::cursor_path_draw_straight_line(Thingp it, point start, point end)
     return;
   }
 
-  dbg2("Make straight line cursor path %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+  dbg2("Make straight line cursor path %d,%d to @%d,%d", start.x, start.y, end.x, end.y);
 
   for (auto &c : ::line(start, end)) {
     if (cursor && cursor->is_visible()) {
@@ -414,7 +414,7 @@ bool Level::cursor_path_draw_line(Thingp it, const std::vector< point > &move_pa
 void Level::cursor_path_draw(Thingp it, point start, point end)
 {
   pcg_random_allowed++;
-  dbg2("Create cursor draw %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+  dbg2("Create cursor draw %d,%d to @%d,%d", start.x, start.y, end.x, end.y);
   TRACE_AND_INDENT();
 
   if (! player) {

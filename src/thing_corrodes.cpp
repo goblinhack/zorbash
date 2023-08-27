@@ -50,7 +50,7 @@ void Thing::corrode_tick(void)
 
     if (chance) {
       if (d1000() < chance) {
-        dead("Corroded in acid");
+        dead("corroded in acid");
         return;
       }
     }

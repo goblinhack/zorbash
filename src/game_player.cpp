@@ -152,23 +152,21 @@ void Game::place_player(void)
         auto w = level->thing_new("debuff_necrotized", point(x, y));
         t->debuff_add(w);
       }
-      // level->thing_new("zorb_wizard", point(x - 4, y));
       if (0) {
+        level->thing_new("zorb_wizard", point(x - 4, y));
         level->thing_new("zorb_necro", point(x + 2, y));
         level->thing_new("zorb_pirate", point(x + 2, y + 1));
         level->thing_new("fire", point(x + 1, y - 1));
         level->thing_new("fire", point(x + 1, y + 1));
         level->thing_new("small_fire", point(x + 3, y + 3));
       }
-
       if (0) {
         level->thing_new("portal", point(x, y + 4));
         level->thing_new("portal", point(x - 2, y + 7));
         level->thing_new("potion_health", point(x - 2, y + 9));
         level->thing_new("potion_health", point(x - 2, y));
       }
-
-      if (1) {
+      if (0) {
         // level->thing_new("block_of_ice", point(x + 1, y));
         // level->thing_new("spell_of_holding_barrier", point(x + 1, y + 1));
         // level->thing_new("spell_of_holding_barrier", point(x, y));
@@ -292,7 +290,8 @@ void Game::place_player(void)
         auto w = level->thing_new("amulet_endurance", point(x, y - 2));
         t->carry(w, carry_options);
       }
-      if (1) {
+      if (0) {
+        level->thing_new("portal", point(x - 2, y));
         level->thing_new("portable_hole", point(x - 3, y));
         auto w = level->thing_new("amulet_teleport_attack", point(x, y - 2));
         t->carry(w, carry_options);

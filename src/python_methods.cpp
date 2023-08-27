@@ -2003,6 +2003,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(on_owner_receive_dmg_water_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_owner_unset_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_polymorphed_do),
+    MY_ADD_PYTHON_TP_FUNCTION(on_pre_teleport_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_receiving_dmg_acid_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_receiving_dmg_bite_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_receiving_dmg_claw_do),

@@ -2592,7 +2592,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
   TRACE_NO_INDENT();
   Dmap d {};
 
-  DBG2("draw corridor from %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+  DBG2("draw corridor from %d,%d to @%d,%d", start.x, start.y, end.x, end.y);
 
   if ((start.x <= 0) || (start.y <= 0) || (start.x >= map_width - 1) || (start.y >= map_height - 1)) {
     return 0;

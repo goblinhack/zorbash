@@ -14,10 +14,10 @@ void Level::display_pixelart_internal_particles(void)
 #if 0
   CON("-");
   for (auto p : all_internal_particles) {
-    CON("all int p %d,%d to %d,%d %s", p.start.x, p.start.y, p.stop.x, p.stop.y, p.tile->name.c_str());
+    CON("all int p %d,%d to @%d,%d %s", p.start.x, p.start.y, p.stop.x, p.stop.y, p.tile->name.c_str());
   }
   for (auto p : new_internal_particles) {
-    CON("new int p %d,%d to %d,%d %s", p.start.x, p.start.y, p.stop.x, p.stop.y, p.tile->name.c_str());
+    CON("new int p %d,%d to @%d,%d %s", p.start.x, p.start.y, p.stop.x, p.stop.y, p.tile->name.c_str());
   }
 #endif
 

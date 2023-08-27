@@ -122,7 +122,7 @@ void Level::cursor_move(void)
     TRACE_AND_INDENT();
     verify(MTYPE_THING, cursor);
     if ((cursor_at != cursor_old) || (cursor->curr_at != cursor_at)) {
-      dbg("cursor move to %d,%d", cursor_at.x, cursor_at.y);
+      dbg("cursor move to @%d,%d", cursor_at.x, cursor_at.y);
 
       cursor_old = cursor_at;
       cursor->move_to_immediately(cursor_at);

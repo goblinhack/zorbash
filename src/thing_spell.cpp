@@ -244,7 +244,7 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
     if (is_player()) {
       msg("You fail to cast %s that far, something was in the way.", what->text_the().c_str());
     } else {
-      dbg("Fail to cast %s that far, something was in the way.", what->text_the().c_str());
+      dbg("Fail to cast %s that far, something was in the way", what->text_the().c_str());
     }
 
     need_to_choose_a_new_target = true;

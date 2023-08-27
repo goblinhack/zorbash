@@ -2,6 +2,14 @@ import my
 import tp
 
 
+def on_pre_teleport(me, x, y):
+    if my.thing_is_dead_or_dying(me):
+        return
+    my.thing_dead(me, "by a dimensional rift")
+    my.thing_msg(me, "The portable hole explodes violently!")
+    my.spawn_at_my_position(me, "explosion_major")
+
+
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
@@ -31,7 +39,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_biome_lava(self, True)
     my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
-    my.is_ethereal(self, True)
     my.is_immune_to_acid(self, True)
     my.is_immune_to_cold(self, True)
     my.is_immune_to_fire(self, True)
@@ -50,6 +57,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.noise_decibels_hearing(self, 5)
     my.noise_on_moving(self, 1)
     my.normal_placement_rules(self, True)
+    my.on_pre_teleport_do(self, "me.on_pre_teleport()")
     my.rarity(self, my.RARITY_UNCOMMON)  # how rare within this monster class
     my.stat_con(self, 10)
     my.stat_def(self, 10)

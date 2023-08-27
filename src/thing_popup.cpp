@@ -102,5 +102,5 @@ void Thing::popup(std::string const &m)
 
   game->popups.push_front(msg);
 
-  log("POPUP: %s", m.c_str());
+  dbg2("POPUP: %s", m.c_str());
 }

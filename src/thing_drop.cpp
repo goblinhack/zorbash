@@ -167,15 +167,6 @@ bool Thing::drop(Thingp what, Thingp target, DropOptions drop_options)
     }
   }
 
-  TRACE_NO_INDENT();
-  FOR_ALL_CARRYING(id)
-  {
-    auto iter = level->thing_find(id);
-    if (iter) {
-      iter->log("Remaining carried item");
-    }
-  }
-
   if (! drop_options.is_being_stolen) {
     //
     // Prevent too soon re-carry

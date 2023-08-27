@@ -638,7 +638,7 @@ bool Thing::player_cursor_path_pop_first_move(ThingMoveReason reason)
   // step there.
   //
   if ((fabs(future_pos.x - curr_at.x) <= 1) && (fabs(future_pos.y - curr_at.y) <= 1)) {
-    DBG2("Target is adjacent, attack or move to %d,%d", cursor->curr_at.x, cursor->curr_at.y);
+    DBG2("Target is adjacent, attack or move to @%d,%d", cursor->curr_at.x, cursor->curr_at.y);
 
     //
     // If we are able to walk through walls, then don't attack the wall, move into it.

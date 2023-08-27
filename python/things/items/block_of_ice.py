@@ -13,7 +13,7 @@ def melt(me, x, y):
             my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "splash6")
             for it in my.level_get_all(me, x + dx, y + dy):
                 if my.thing_is_lava(it) or my.thing_is_fire(it):
-                    my.thing_dead(it, "frozen")
+                    my.thing_dead(it, "by freezing")
 
 
 def on_fire(me, x, y):
@@ -88,7 +88,7 @@ def tp_init(name, text_long_name):
     my.is_obs_spawn_monst(self, True)
     my.is_obs_spell_casting(self, True)
     my.is_obs_throwing(self, True)
-    my.is_only_one_per_tile(self, True) # so wands of ice do not pile these up
+    my.is_only_one_per_tile(self, True)  # so wands of ice do not pile these up
     my.is_shovable_and_sticky(self, True)  # so a dogman in ice is also shoved
     my.is_shovable(self, True)
     my.is_tickable(self, True)  # So it can interact with fire

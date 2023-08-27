@@ -29,7 +29,7 @@ void Thing::lunge(point to)
     return;
   }
 
-  dbg("Lunge to %d,%d", to.x, to.y);
+  dbg("Lunge to @%d,%d", to.x, to.y);
   TRACE_AND_INDENT();
 
   move_finish();

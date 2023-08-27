@@ -956,6 +956,7 @@ public:
   const std::string &on_owner_receive_dmg_water_do(void);
   const std::string &on_owner_unset_do(void);
   const std::string &on_polymorphed_do(void);
+  const std::string &on_pre_teleport_do(void);
   const std::string &on_receiving_dmg_acid_do(void);
   const std::string &on_receiving_dmg_bite_do(void);
   const std::string &on_receiving_dmg_claw_do(void);
@@ -2917,6 +2918,7 @@ public:
   void on_targeted_radial(void);
   void on_targeted(void);
   void on_teleport(void);
+  void on_pre_teleport(void);
   void on_thrown_callback(ThingId owner_id_when_thrown);
   void on_thrown(ThingId owner_id_when_thrown);
   void on_unequip(Thingp what);

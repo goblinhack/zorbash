@@ -149,7 +149,7 @@ bool Thing::move(point future_pos)
 {
   TRACE_NO_INDENT();
   if (! is_hidden) {
-    dbg2("Move to %d,%d", future_pos.x, future_pos.y);
+    dbg2("Move to @%d,%d", future_pos.x, future_pos.y);
   }
 
   bool up              = future_pos.y < curr_at.y;
@@ -276,7 +276,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
           // Allow attacking at the edges of movement
           //
         } else {
-          dbg2("Minion cannot move to %d,%d (new-dist %f, curr-dist %f); it tugs at the leash at %d,%d", future_pos.x,
+          dbg2("Minion cannot move to @%d,%d (new-dist %f, curr-dist %f); it tugs at the leash at %d,%d", future_pos.x,
                future_pos.y, new_distance, curr_distance, mob->curr_at.x, mob->curr_at.y);
           //
           // Don't make spiders (minions to webs) lunge
@@ -693,7 +693,6 @@ void Thing::update_interpolated_position(void)
       }
 
       new_pos = make_fpoint(curr_at);
-      last_at = curr_at;
     }
   } else if (game->tick_dt >= 1) {
     if (curr_at != last_at) {
@@ -703,7 +702,6 @@ void Thing::update_interpolated_position(void)
       level->noisemap_in_incr(curr_at.x, curr_at.y, noise_total());
 
       new_pos = make_fpoint(curr_at);
-      last_at = curr_at;
 
       move_finish();
     }
@@ -743,7 +741,6 @@ void Thing::update_pos(point to, bool immediately)
 
   point old_at((int) curr_at.x, (int) curr_at.y);
 
-  last_at        = curr_at;
   has_ever_moved = true;
 
   //
@@ -760,8 +757,10 @@ void Thing::update_pos(point to, bool immediately)
     return;
   }
 
+  last_at = curr_at;
+
   if (! is_hidden) {
-    dbg2("Move to %d,%d", to.x, to.y);
+    dbg2("Move to @%d,%d", to.x, to.y);
   }
 
   if (is_player()) {
@@ -829,7 +828,7 @@ void Thing::move_to_immediately(point to)
   auto delta = to - curr_at;
   move_set_dir_from_dest_or_delta(delta);
 
-  // dbg("Move immediately to %s", to.to_string().c_str());
+  // dbg2("Move immediately to %s", to.to_string().c_str());
 
   //
   // Don't check for descending here as that check will be set when falling
@@ -891,7 +890,7 @@ bool Thing::move_to_try(const point nh, const bool escaping, bool check_only)
     // We would hit something and cannot do this move. However,
     // see if we can hit the thing that is in the way.
     //
-    dbg2("Cannot move to %d,%d will hit obstacle or monst", nh.x, nh.y);
+    dbg2("Cannot move to @%d,%d will hit obstacle or monst", nh.x, nh.y);
     TRACE_AND_INDENT();
 
     ThingAttackOptions attack_options {};
@@ -899,13 +898,13 @@ bool Thing::move_to_try(const point nh, const bool escaping, bool check_only)
     attack_options.victim_overlaps = false;
     collision_check_and_handle_nearby(nh, &attack_options);
     if (attack_options.victim_attacked) {
-      dbg2("Cannot move to %d,%d, must attack", nh.x, nh.y);
+      dbg2("Cannot move to @%d,%d, must attack", nh.x, nh.y);
       return true;
     }
-    dbg2("Cannot move to %d,%d, obstacle", nh.x, nh.y);
+    dbg2("Cannot move to @%d,%d, obstacle", nh.x, nh.y);
     return false;
   }
-  dbg2("Move to %d,%d is ok", nh.x, nh.y);
+  dbg2("Move to @%d,%d is ok", nh.x, nh.y);
 
   if (! escaping) {
     if (terrain_cost_get(nh) >= DMAP_LESS_PREFERRED_TERRAIN) {

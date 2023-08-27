@@ -29,7 +29,7 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
   }
 
   TRACE_NO_INDENT();
-  bag->log("Populate the bag");
+  IF_DEBUG { bag->log("Populate the bag"); }
 
   //
   // Intentionally not walking the bag children here
@@ -45,8 +45,11 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
     auto tl = t->itemsp()->bag_position + point(1, 1);
 
     if (t->itemsp()->bag_position == point(-1, -1)) {
-      bag->log("+ item %s at %d,%d (not carried in bag)", t->to_short_string().c_str(), t->itemsp()->bag_position.x,
-               t->itemsp()->bag_position.y);
+      IF_DEBUG
+      {
+        bag->log("+ item %s at %d,%d (not carried in bag)", t->to_short_string().c_str(), t->itemsp()->bag_position.x,
+                 t->itemsp()->bag_position.y);
+      }
       continue;
     }
 
@@ -60,8 +63,11 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
       wid_set_style(w, UI_WID_STYLE_RED);
     }
 
-    bag->log("+ item %s at %d,%d", t->to_short_string().c_str(), t->itemsp()->bag_position.x,
-             t->itemsp()->bag_position.y);
+    IF_DEBUG
+    {
+      bag->log("+ item %s at %d,%d", t->to_short_string().c_str(), t->itemsp()->bag_position.x,
+               t->itemsp()->bag_position.y);
+    }
 
     wid_set_on_mouse_over_begin(w, wid_bag_item_mouse_over_begin);
     wid_set_on_mouse_over_end(w, wid_bag_item_mouse_over_end);
@@ -120,7 +126,7 @@ static void wid_in_transit_item_place_in_bag(Widp wid_bag_container, Thingp bag,
 {
   TRACE_NO_INDENT();
 
-  t->log("Can place at %d,%d", at.x, at.y);
+  IF_DEBUG { t->log("Can place at %d,%d", at.x, at.y); }
 
   wid_destroy(&game->in_transit_item);
 
@@ -135,11 +141,13 @@ static void wid_in_transit_item_place_in_bag(Widp wid_bag_container, Thingp bag,
     game->inventory_highlight_slot = game->previous_slot;
   }
 
-  t->log("Compress bag and request to remake inventory");
+  IF_DEBUG { t->log("Compress bag and request to remake inventory"); }
+
   while (bag->bag_compress()) {}
   game->set_request_to_remake_rightbar();
 
-  t->log("In transit item place completed");
+  IF_DEBUG { t->log("In transit item place completed"); }
+
   TRACE_AND_INDENT();
 
   wid_bag_add_items(wid_bag_container, bag);
@@ -176,7 +184,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
     return false;
   }
 
-  t->log("In transit item place");
+  IF_DEBUG { t->log("In transit item place"); }
   TRACE_AND_INDENT();
 
   //
@@ -184,12 +192,12 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
   //
   if (is_mouse_over_rightbar()) {
     TRACE_NO_INDENT();
-    t->log("Is over inventory");
+    IF_DEBUG { t->log("Is over inventory"); }
     CarryOptions carry_options;
     if (game->level->player->carry(t, carry_options)) {
-      t->log("Placed in inventory");
+      IF_DEBUG { t->log("Placed in inventory"); }
       wid_destroy(&game->in_transit_item);
-      t->log("Placed item: Request to remake inventory");
+      IF_DEBUG { t->log("Placed item: Request to remake inventory"); }
       game->set_request_to_remake_rightbar();
     }
     return true;
@@ -429,14 +437,14 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
 
   if (! wid_bag_container) {
     TRACE_NO_INDENT();
-    t->log("Is not over any bag");
+    IF_DEBUG { t->log("Is not over any bag"); }
     wid_in_transit_item_drop();
     DBG("Request to remake inventory as dropped item");
     game->set_request_to_remake_inventory();
     return false;
   }
 
-  t->log("Try to place in bag");
+  IF_DEBUG { t->log("Try to place in bag"); }
   TRACE_AND_INDENT();
 
   auto bag_id = wid_get_thing_id_context(wid_bag_container, 0);
@@ -462,7 +470,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
   // Try to place the item at the chosen location, or the last place thie
   // iteam was at, or last resort, anywhere.
   // /
-  bag->log("Try to place %s at %d,%d", t->to_short_string().c_str(), at.x, at.y);
+  IF_DEBUG { bag->log("Try to place %s at %d,%d", t->to_short_string().c_str(), at.x, at.y); }
   TRACE_AND_INDENT();
 
   auto existing_item = bag->bag_what_is_at(at);
@@ -470,7 +478,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
     //
     // Place at a specific loation
     //
-    bag->log("Try to place %s specifically at %d,%d", t->to_short_string().c_str(), at.x, at.y);
+    IF_DEBUG { bag->log("Try to place %s specifically at %d,%d", t->to_short_string().c_str(), at.x, at.y); }
     TRACE_AND_INDENT();
     wid_in_transit_item_place_in_bag(wid_bag_container, bag, t, at);
   } else if (existing_item && existing_item->is_bag_item_container()) {
@@ -478,33 +486,36 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
     // Place anywhere in the specified bag
     //
     point where;
-    bag->log("Failed to place, try to place %s into %s anywhere", t->to_short_string().c_str(),
-             existing_item->to_short_string().c_str());
+    IF_DEBUG
+    {
+      bag->log("Failed to place, try to place %s into %s anywhere", t->to_short_string().c_str(),
+               existing_item->to_short_string().c_str());
+    }
     TRACE_AND_INDENT();
     if (existing_item->bag_can_place_anywhere(t, where)) {
       wid_in_transit_item_place_in_bag(wid_bag_container, existing_item, t, where);
     } else {
-      t->log("In transit item place failed");
+      IF_DEBUG { t->log("In transit item place failed"); }
       TOPCON("Could not fit that item in that bag. You can always drop the item if needed.");
     }
   } else if (t->maybe_itemsp() && bag->bag_can_place_at(t, t->itemsp()->last_bag_position)) {
     //
     // Place back where it was picked up
     //
-    bag->log("Try to place %s back where it was picked up", t->to_short_string().c_str());
+    IF_DEBUG { bag->log("Try to place %s back where it was picked up", t->to_short_string().c_str()); }
     TRACE_AND_INDENT();
     wid_in_transit_item_place_in_bag(wid_bag_container, bag, t, t->itemsp()->last_bag_position);
   } else {
     //
     // Place anywhere
     //
-    bag->log("Failed to place, try to place %s anywhere", t->to_short_string().c_str());
+    IF_DEBUG { bag->log("Failed to place, try to place %s anywhere", t->to_short_string().c_str()); }
     TRACE_AND_INDENT();
     point where;
     if (bag->bag_can_place_anywhere(t, where)) {
       wid_in_transit_item_place_in_bag(wid_bag_container, bag, t, where);
     } else {
-      t->log("In transit item place failed");
+      IF_DEBUG { t->log("In transit item place failed"); }
       TOPCON("Could not fit that item. You can always drop the item if needed.");
     }
   }
@@ -543,7 +554,7 @@ uint8_t wid_in_transit_item_drop(void)
     return false;
   }
 
-  t->log("Drop from ether");
+  IF_DEBUG { t->log("Drop from ether"); }
   game->level->player->drop_from_ether(t);
   wid_destroy(&game->in_transit_item);
 
@@ -628,7 +639,7 @@ bool Game::wid_bag_move_item(Thingp t)
   }
 
   verify(MTYPE_THING, t);
-  t->log("Chosen to move me");
+  IF_DEBUG { t->log("Chosen to move me"); }
   TRACE_AND_INDENT();
 
   Widp    wid_bag_container;
@@ -637,9 +648,9 @@ bool Game::wid_bag_move_item(Thingp t)
 
   for (auto b : game->bags) {
     for (auto w : wid_find_all_containing(b->wid_bag_container, "wid_bag item")) {
-      player->log("+ current item %s", wid_get_name(w).c_str());
+      IF_DEBUG { player->log("+ current item %s", wid_get_name(w).c_str()); }
       if (wid_get_thing_id_context(w, 0).id == t->id.id) {
-        player->log("Moving bag thing %s", t->to_short_string().c_str());
+        IF_DEBUG { player->log("Moving bag thing %s", t->to_short_string().c_str()); }
         wid_bag_container = wid_get_parent(w);
         bag_id            = wid_get_thing_id_context(wid_bag_container, 0);
         bag               = game->thing_find(bag_id);
@@ -655,7 +666,7 @@ bool Game::wid_bag_move_item(Thingp t)
       //
       // This is ok, moving from equipment into the ether
       //
-      t->log("Moving equipped thing");
+      IF_DEBUG { t->log("Moving equipped thing"); }
       TRACE_AND_INDENT();
       t->unequip_me_from_owner("moved item into ether", true);
     } else if (! bag) {

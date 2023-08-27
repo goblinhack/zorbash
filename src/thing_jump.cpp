@@ -79,7 +79,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   if (be_careful) {
     dbg("Try to jump carefully %d,%d", to.x, to.y);
   } else {
-    dbg("Try to jump to %d,%d", to.x, to.y);
+    dbg("Try to jump to @%d,%d", to.x, to.y);
   }
   TRACE_AND_INDENT();
 
@@ -134,7 +134,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   auto x = to.x;
   auto y = to.y;
 
-  dbg("Try jump to %d,%d", x, y);
+  dbg("Try jump to @%d,%d", x, y);
   TRACE_AND_INDENT();
 
   if (level->is_oob(x, y)) {
@@ -172,7 +172,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       }
     }
     wobble(25);
-    dbg("You try to jump but are stuck fast.");
+    dbg("You try to jump but are stuck fast");
     return false;
   }
 
@@ -285,7 +285,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       if (is_player()) {
         msg("You can't jump into the unlit regions.");
       }
-      dbg("You can't jump into the unlit regions.");
+      dbg("You can't jump into the unlit regions");
       return false;
     }
   }
@@ -600,7 +600,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
 
   level->noisemap_in_incr(to.x, to.y, noise_on_jumping());
 
-  dbg("Jump success to %d,%d.", curr_at.x, curr_at.y);
+  dbg("Jump success to @%d,%d", curr_at.x, curr_at.y);
 
   if (is_player()) {
     move_count_incr();

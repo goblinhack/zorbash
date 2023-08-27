@@ -231,7 +231,7 @@ bool Thing::fall_to_next_level(void)
   // Don't let items fall first. The owner has to fall.
   //
   if (immediate_owner()) {
-    dbg("Do not fall to next level, wait for owner to fall.");
+    dbg("Do not fall to next level, wait for owner to fall");
     return false;
   }
 
@@ -305,7 +305,7 @@ bool Thing::fall_to_next_level(void)
       continue;
     }
 
-    dbg("Try to fall to %d,%d", x, y);
+    dbg("Try to fall to @%d,%d", x, y);
     if (! l->is_able_to_stand_on(x, y)) {
       dbg("No, %d,%d is not solid to stand on", x, y);
       continue;
@@ -359,11 +359,11 @@ bool Thing::fall_to_next_level(void)
         }
       }
 
-      dbg("Land on the next level, change level then move to %d,%d", x, y);
+      dbg("Land on the next level, change level then move to @%d,%d", x, y);
       TRACE_AND_INDENT();
       level_change(l);
 
-      dbg("Land on the next level, move to %d,%d", x, y);
+      dbg("Land on the next level, move to @%d,%d", x, y);
       TRACE_AND_INDENT();
       move_to_immediately(point(x, y));
 

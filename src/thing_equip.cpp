@@ -730,7 +730,7 @@ bool Thing::equip_use(bool forced, int equip, ThingAttackOptionsp attack_options
       //
       // Do not swing. We will look around for a target and swing at that.
       //
-      dbg("Do not swing. We will look around for a target and swing at that.");
+      dbg("Do not swing. We will look around for a target and swing at that");
     }
   }
 

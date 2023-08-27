@@ -21,7 +21,7 @@ void Level::update_new_level(void)
   if (player) {
     dbg("Update new level with player present");
     if (game->level != this) {
-      dbg("Game level is not set yet.");
+      dbg("Game level is not set yet");
     }
   } else {
     dbg("Update new level with no player present");

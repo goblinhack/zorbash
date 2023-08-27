@@ -242,7 +242,7 @@ bool Thing::move_away_from_entrance(void)
       continue;
     }
 
-    dbg("Move away from entrance, to %d,%d", x, y);
+    dbg("Move away from entrance, to @%d,%d", x, y);
     TRACE_AND_INDENT();
     move_to_immediately(point(x, y));
 

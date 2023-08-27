@@ -44,6 +44,36 @@ void Thing::on_teleport(void)
   }
 }
 
+void Thing::on_pre_teleport(void)
+{
+  TRACE_NO_INDENT();
+  auto on_pre_teleport = tp()->on_pre_teleport_do();
+  if (std::empty(on_pre_teleport)) {
+    return;
+  }
+
+  auto t = split_tokens(on_pre_teleport, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    if (mod == "me") {
+      mod = name();
+    }
+
+    dbg("Call %s.%s(%ss)", mod.c_str(), fn.c_str(), to_short_string().c_str());
+
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+  } else {
+    ERR("Bad on_pre_teleport call [%s] expected mod:function, got %d elems", on_pre_teleport.c_str(),
+        (int) on_pre_teleport.size());
+  }
+}
+
 float Thing::teleport_distance_with_modifiers_get(void)
 {
   TRACE_NO_INDENT();
@@ -161,7 +191,7 @@ bool Thing::teleport(TeleportOptions teleport_options, point to, bool *too_far)
   if (teleport_options.teleport_carefully) {
     dbg("Try to teleport carefully %d,%d", to.x, to.y);
   } else {
-    dbg("Try to teleport to %d,%d", to.x, to.y);
+    dbg("Try to teleport to @%d,%d", to.x, to.y);
   }
 
   TRACE_AND_INDENT();
@@ -224,7 +254,7 @@ bool Thing::teleport(TeleportOptions teleport_options, point to, bool *too_far)
   auto x = to.x;
   auto y = to.y;
 
-  dbg("Try teleport to %d,%d", x, y);
+  dbg("Try teleport to @%d,%d", x, y);
   TRACE_AND_INDENT();
 
   if (level->is_oob(x, y)) {
@@ -242,7 +272,7 @@ bool Thing::teleport(TeleportOptions teleport_options, point to, bool *too_far)
   // Need to allow teleporting when stuck so there is a way out of barrels!
   //
   if (is_stuck_currently()) {
-    dbg("You teleport out of trouble.");
+    dbg("You teleport out of trouble");
     if (is_player()) {
       if (teleport_options.teleport_self) {
         msg("You teleport out of your sticky situation!");
@@ -292,10 +322,13 @@ bool Thing::teleport(TeleportOptions teleport_options, point to, bool *too_far)
   float d    = teleport_distance_with_modifiers_get();
   float dist = distance(curr_at, to);
 
-  if (! teleport_options.teleport_limit) {
+  if (level->is_portal(curr_at)) {
+    //
+    // No limit if you are entering a portal.
+    //
+  } else if (! teleport_options.teleport_limit) {
     //
     // No limit if you are being teleported.
-    // No limit if you are entering a portal.
     //
     dbg("Try to teleport %d,%d with no distance limit", to.x, to.y);
   } else {
@@ -344,10 +377,21 @@ bool Thing::teleport(TeleportOptions teleport_options, point to, bool *too_far)
   level->thing_new("teleport_out", curr_at);
   level->thing_new("teleport_in", dest);
 
-  dbg("Teleport to destination.");
+  dbg("Teleport to destination");
   TRACE_AND_INDENT();
 
   is_teleporting = true;
+  on_pre_teleport();
+
+  //
+  // Died during teleport?
+  //
+  if (is_dead_or_dying()) {
+    dbg("Died during teleport to destination");
+    is_teleporting = false;
+    return false;
+  }
+
   move_to_immediately(dest);
 
   //
@@ -405,7 +449,7 @@ bool Thing::teleport(TeleportOptions teleport_options, point to, bool *too_far)
 
   movement_remaining_set(0);
 
-  dbg("Teleport success.");
+  dbg("Teleport success");
   TRACE_AND_INDENT();
 
   //

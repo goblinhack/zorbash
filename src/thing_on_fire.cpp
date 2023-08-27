@@ -314,7 +314,7 @@ bool Thing::ai_on_fire_choose_target(point &nh)
       target = best;
       if (ai_create_on_fire_path(nh, start, target)) {
         aip()->wander_dest = target;
-        dbg("On-fire move to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
+        dbg("On-fire move to @%d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
         if (is_player()) {
           msg("You are thinking of jumping into that cool water!");
           popup("Need water!");
@@ -347,7 +347,7 @@ bool Thing::ai_on_fire_choose_target(point &nh)
       target = best;
       if (ai_create_on_fire_path(nh, start, target)) {
         aip()->wander_dest = target;
-        dbg("On-fire move to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
+        dbg("On-fire move to @%d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
         if (is_player()) {
           msg("You are thinking of jumping into a chasm!");
           popup("Need water!");

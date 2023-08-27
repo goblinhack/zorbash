@@ -175,7 +175,7 @@ sdl_event_mousemotion(SDL_Keysym *key, SDL_Event *event, bool &processed_mouse_m
   last_mx = mx;
   last_my = my;
 
-  DBG("SDL: Mouse: Moved to %d,%d (rel %d,%d) state %d (actually at %d,%d)", event->motion.x, event->motion.y,
+  DBG("SDL: Mouse: Moved to @%d,%d (rel %d,%d) state %d (actually at %d,%d)", event->motion.x, event->motion.y,
       event->motion.xrel, event->motion.yrel, sdl.mouse_down, mx, my);
 
   wid_mouse_visible = 1;
@@ -232,13 +232,24 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
 
   wid_mouse_two_clicks = false;
 
-  LOG("SDL: Event type %u", event->type);
   switch (event->type) {
-    case SDL_KEYDOWN : sdl_event_keydown(key, event); break;
-    case SDL_KEYUP : sdl_event_keyup(key, event); break;
+    case SDL_KEYDOWN :
+      LOG("SDL: Event key down");
+      sdl_event_keydown(key, event);
+      break;
+    case SDL_KEYUP :
+      LOG("SDL: Event key up");
+      sdl_event_keyup(key, event);
+      break;
     case SDL_MOUSEMOTION : sdl_event_mousemotion(key, event, processed_mouse_motion_event); break;
-    case SDL_MOUSEBUTTONDOWN : sdl_event_mousedown(key, event); break;
-    case SDL_MOUSEBUTTONUP : sdl_event_mouseup(key, event); break;
+    case SDL_MOUSEBUTTONDOWN :
+      LOG("SDL: Event mouse button down");
+      sdl_event_mousedown(key, event);
+      break;
+    case SDL_MOUSEBUTTONUP :
+      LOG("SDL: Event mouse button up");
+      sdl_event_mouseup(key, event);
+      break;
     case SDL_TEXTINPUT :
       {
         sdl.event_count++;

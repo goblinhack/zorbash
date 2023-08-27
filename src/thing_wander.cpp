@@ -63,7 +63,7 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
     return false;
   }
 
-  dbg2("AI: create path from %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+  dbg2("AI: create path from %d,%d to @%d,%d", start.x, start.y, end.x, end.y);
   TRACE_AND_INDENT();
 
   Dmap  dmap {};
@@ -255,19 +255,19 @@ bool Thing::ai_choose_wander(point &nh)
   // There may be nowhere else for it to try to move.
   //
   if (too_far_from_mob(dest)) {
-    dbg2("Too far off the leash but allow wander anyway to %d,%d", dest.x, dest.y);
+    dbg2("Too far off the leash but allow wander anyway to @%d,%d", dest.x, dest.y);
   }
 
   if (too_far_from_leader(dest)) {
     if (distance_from_leader() > too_far_from_leader(dest)) {
       dbg2("Wander closer to leader via %d,%d", dest.x, dest.y);
     } else {
-      dbg2("Too far from leader; but allow wander anyway to %d,%d", dest.x, dest.y);
+      dbg2("Too far from leader; but allow wander anyway to @%d,%d", dest.x, dest.y);
     }
   }
 
   if (! ai_create_path(nh, curr_at, dest)) {
-    dbg2("Could not wander; could not create path to %d,%d", dest.x, dest.y);
+    dbg2("Could not wander; could not create path to @%d,%d", dest.x, dest.y);
     return false;
   }
 
@@ -280,7 +280,7 @@ bool Thing::ai_choose_wander(point &nh)
 #ifdef ENABLE_DEBUG_AI_WANDER
   thing_new("ai_path2", fpoint(dest.x, dest.y));
 #endif
-  dbg2("Wander to %d,%d nh %d,%d", dest.x, dest.y, nh.x, nh.y);
+  dbg2("Wander to @%d,%d nh %d,%d", dest.x, dest.y, nh.x, nh.y);
 
   if (game->robot_mode && is_player()) {
     game->tick_begin("need to wander");

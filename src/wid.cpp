@@ -198,7 +198,7 @@ void wid_dump(Widp w, int depth)
 
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
-  printf("\n          %*s dump: [%s] text [%S] %d,%d to %d,%d %d children", depth * 2, "", wid_name(w).c_str(),
+  printf("\n          %*s dump: [%s] text [%S] %d,%d to @%d,%d %d children", depth * 2, "", wid_name(w).c_str(),
          wid_get_text(w).c_str(), tlx, tly, brx, bry, wid_count(w, depth));
 
 #if 1
@@ -6359,7 +6359,7 @@ static void wid_display(Widp w, uint8_t disable_scissor, uint8_t *updated_scisso
     // Set the tiles this widget is over, taking into account the scissors
     // if the parent is resized.
     //
-    // CON("%d,%d to %d,%d %s %p", tl.x, tl.y, br.x, br.y, w->name.c_str(), w);
+    // CON("%d,%d to @%d,%d %s %p", tl.x, tl.y, br.x, br.y, w->name.c_str(), w);
     for (auto x = tl.x; x < br.x; x++) {
       if (unlikely(! ascii_x_ok(x))) {
         continue;

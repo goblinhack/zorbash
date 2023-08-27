@@ -14,10 +14,10 @@ void Level::display_pixelart_external_particles(void)
 #if 0
   CON("-");
   for (auto p : all_external_particles) {
-    CON("all ext p %d,%d to %d,%d %s", p.start.x, p.start.y, p.stop.x, p.stop.y, p.tile->name.c_str());
+    CON("all ext p %d,%d to @%d,%d %s", p.start.x, p.start.y, p.stop.x, p.stop.y, p.tile->name.c_str());
   }
   for (auto p : new_external_particles) {
-    CON("new ext p %d,%d to %d,%d %s", p.start.x, p.start.y, p.stop.x, p.stop.y, p.tile->name.c_str());
+    CON("new ext p %d,%d to @%d,%d %s", p.start.x, p.start.y, p.stop.x, p.stop.y, p.tile->name.c_str());
   }
 #endif
 
@@ -123,7 +123,7 @@ void Level::display_pixelart_external_particles(void)
 
 #if 0
   for (auto p : all_external_particles) {
-    CON("end ext p %d,%d to %d,%d %s", p.start.x, p.start.y, p.stop.x, p.stop.y, p.tile->name.c_str());
+    CON("end ext p %d,%d to @%d,%d %s", p.start.x, p.start.y, p.stop.x, p.stop.y, p.tile->name.c_str());
   }
 #endif
 }
