@@ -349,8 +349,12 @@ bool Thing::throw_at(Thingp what, Thingp target)
     //
     dbg("Post particle throw, item is dead");
     TRACE_AND_INDENT();
-    used(what, target, true /* remove_after_use */);
-    dbg("Post used, item is dead");
+    if (what->top_owner()) {
+      DropOptions drop_options;
+      drop_options.is_being_thrown = true;
+      drop(what, target, drop_options);
+      dbg("Post used, dropped item is dead");
+    }
   } else {
     dbg("Post particle throw, use or drop");
     TRACE_AND_INDENT();
