@@ -1,8 +1,10 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - is_invisible should use an outline when a monst is in gas                                                                                  -->
 <!-- - spell of beckoning/repulsing                                                                                                               -->
 <!-- - ogre totems?                                                                                                                               -->
 <!-- - stealth                                                                                                                                    -->
+<!-- - invisible phantoms that leave puddles of ectoplasm ?                                                                                       -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
