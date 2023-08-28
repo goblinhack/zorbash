@@ -248,10 +248,6 @@ std::vector< Tpp > tp_find_wildcard(const std::string &name)
     out.push_back(tp_random_secret_door());
     return out;
   }
-  if (name == "random_mob") {
-    out.push_back(tp_random_mob());
-    return out;
-  }
   if (name == "random_trap") {
     out.push_back(tp_random_trap());
     return out;
@@ -260,12 +256,16 @@ std::vector< Tpp > tp_find_wildcard(const std::string &name)
     out.push_back(tp_random_ethereal_mob());
     return out;
   }
-  if (name == "random_mob_challenge_class_A") {
-    out.push_back(tp_random_mob_challenge_class_A());
+  if (name == "random_mob_class_A") {
+    out.push_back(tp_random_mob_class_A());
     return out;
   }
-  if (name == "random_mob_challenge_class_B") {
-    out.push_back(tp_random_mob_challenge_class_B());
+  if (name == "random_mob_class_B") {
+    out.push_back(tp_random_mob_class_B());
+    return out;
+  }
+  if (name == "random_mob_class_C") {
+    out.push_back(tp_random_mob_class_C());
     return out;
   }
   if (name == "random_red_blood") {

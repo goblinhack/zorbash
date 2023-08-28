@@ -189,8 +189,6 @@ PyObject *level_is_meat_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_metal_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_minion_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_mob_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_mob_challenge_class_A_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_mob_challenge_class_B_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_monst_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_monst_class_A_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_monst_class_B_at(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -130,19 +130,7 @@ Tpp Level::tp_random_weapon_class_C(const point p)
   }
 }
 
-Tpp Level::tp_random_mob_challenge_class_A(const point p)
-{
-  TRACE_NO_INDENT();
-  return tp_random_mob(p);
-}
-
-Tpp Level::tp_random_mob_challenge_class_B(const point p)
-{
-  TRACE_NO_INDENT();
-  return tp_random_mob(p);
-}
-
-Tpp Level::tp_random_mob(const point p)
+Tpp Level::tp_random_mob_class_A(const point p)
 {
   TRACE_NO_INDENT();
   auto tries = 0U;
@@ -150,7 +138,39 @@ Tpp Level::tp_random_mob(const point p)
     if (tries++ > 10000) {
       return nullptr;
     }
-    auto tpp = ::tp_random_mob();
+    auto tpp = ::tp_random_mob_class_A();
+    if (tpp->is_disliked_by_me(this, p)) {
+      continue;
+    }
+    return tpp;
+  }
+}
+
+Tpp Level::tp_random_mob_class_B(const point p)
+{
+  TRACE_NO_INDENT();
+  auto tries = 0U;
+  for (;;) {
+    if (tries++ > 10000) {
+      return tp_random_mob_class_A(p);
+    }
+    auto tpp = ::tp_random_mob_class_B();
+    if (tpp->is_disliked_by_me(this, p)) {
+      continue;
+    }
+    return tpp;
+  }
+}
+
+Tpp Level::tp_random_mob_class_C(const point p)
+{
+  TRACE_NO_INDENT();
+  auto tries = 0U;
+  for (;;) {
+    if (tries++ > 10000) {
+      return tp_random_mob_class_B(p);
+    }
+    auto tpp = ::tp_random_mob_class_C();
     if (tpp->is_disliked_by_me(this, p)) {
       continue;
     }

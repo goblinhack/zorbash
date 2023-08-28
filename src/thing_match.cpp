@@ -347,8 +347,9 @@ bool Tp::matches(const std::string &what)
   if (is_mimic() && (what == "is_mimic")) { return true; }
   if (is_minion() && (what == "is_minion")) { return true; }
   if (is_missile() && (what == "is_missile")) { return true; }
-  if (is_mob_challenge_class_A() && (what == "is_mob_challenge_class_A")) { return true; }
-  if (is_mob_challenge_class_B() && (what == "is_mob_challenge_class_B")) { return true; }
+  if (is_mob_class_A() && (what == "is_mob_class_A")) { return true; }
+  if (is_mob_class_B() && (what == "is_mob_class_B")) { return true; }
+  if (is_mob_class_C() && (what == "is_mob_class_C")) { return true; }
   if (is_mob() && (what == "is_mob")) { return true; }
   if (is_molekin() && (what == "is_molekin")) { return true; }
   if (is_monst_class_A() && (what == "is_monst_class_A")) { return true; }
@@ -948,8 +949,9 @@ bool Thing::matches(const std::string &what)
   if (is_mimic() && (what == "is_mimic")) { return true; }
   if (is_minion() && (what == "is_minion")) { return true; }
   if (is_missile() && (what == "is_missile")) { return true; }
-  if (is_mob_challenge_class_A() && (what == "is_mob_challenge_class_A")) { return true; }
-  if (is_mob_challenge_class_B() && (what == "is_mob_challenge_class_B")) { return true; }
+  if (is_mob_class_A() && (what == "is_mob_class_A")) { return true; }
+  if (is_mob_class_B() && (what == "is_mob_class_B")) { return true; }
+  if (is_mob_class_C() && (what == "is_mob_class_C")) { return true; }
   if (is_mob() && (what == "is_mob")) { return true; }
   if (is_molekin() && (what == "is_molekin")) { return true; }
   if (is_monst_class_A() && (what == "is_monst_class_A")) { return true; }
@@ -1542,8 +1544,9 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_mimic") { return &Thing::is_mimic; }
   if (what == "is_minion") { return &Thing::is_minion; }
   if (what == "is_missile") { return &Thing::is_missile; }
-  if (what == "is_mob_challenge_class_A") { return &Thing::is_mob_challenge_class_A; }
-  if (what == "is_mob_challenge_class_B") { return &Thing::is_mob_challenge_class_B; }
+  if (what == "is_mob_class_A") { return &Thing::is_mob_class_A; }
+  if (what == "is_mob_class_B") { return &Thing::is_mob_class_B; }
+  if (what == "is_mob_class_C") { return &Thing::is_mob_class_C; }
   if (what == "is_mob") { return &Thing::is_mob; }
   if (what == "is_molekin") { return &Thing::is_molekin; }
   if (what == "is_monst_class_A") { return &Thing::is_monst_class_A; }

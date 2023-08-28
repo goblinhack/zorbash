@@ -104,7 +104,7 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
         }
       }
 
-      if (d->is_mob_challenge_class_A(x, y) || d->is_mob_challenge_class_B(x, y)) {
+      if (d->is_mob_class_A(x, y) || d->is_mob_class_B(x, y) || d->is_mob_class_C(x, y)) {
         //
         // If surrounded by hazards then choose an ethereal mob
         //
@@ -112,21 +112,26 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
             && d->is_hazard(x - 1, y - 1) && d->is_hazard(x + 1, y - 1) && d->is_hazard(x - 1, y + 1)
             && d->is_hazard(x + 1, y + 1)) {
 
-          if (d1000() < d1000_chance_creating_mob_challenge_class_A) {
+          if (d1000() < d1000_chance_creating_mob_class_A) {
             tp = tp_random_ethereal_mob();
           }
         } else {
           //
           // Else choose a normal mob
           //
-          if (d->is_mob_challenge_class_A(x, y)) {
-            if (d1000() < d1000_chance_creating_mob_challenge_class_A) {
-              tp = tp_random_mob_challenge_class_A(p);
+          if (d->is_mob_class_A(x, y)) {
+            if (d1000() < d1000_chance_creating_mob_class_A) {
+              tp = tp_random_mob_class_A(p);
             }
           }
-          if (d->is_mob_challenge_class_B(x, y)) {
-            if (d1000() < d1000_chance_creating_mob_challenge_class_B) {
-              tp = tp_random_mob_challenge_class_B(p);
+          if (d->is_mob_class_B(x, y)) {
+            if (d1000() < d1000_chance_creating_mob_class_B) {
+              tp = tp_random_mob_class_B(p);
+            }
+          }
+          if (d->is_mob_class_C(x, y)) {
+            if (d1000() < d1000_chance_creating_mob_class_C) {
+              tp = tp_random_mob_class_C(p);
             }
           }
         }

@@ -46,6 +46,7 @@ public:
     CHAR_MAGIC_STONE         = '*',
     CHAR_MOB_SPAWNER_CLASS_A = 'g',
     CHAR_MOB_SPAWNER_CLASS_B = 'G',
+    CHAR_MOB_SPAWNER_CLASS_C = 'P',
     CHAR_MONST_CLASS_A       = 'm',
     CHAR_MONST_CLASS_B       = 'M',
     CHAR_MONST_CLASS_C       = 'h',
@@ -102,8 +103,9 @@ public:
   bool is_key {false};
   bool is_lava {false};
   bool is_magic_stone {false};
-  bool is_mob_challenge_class_A {false};
-  bool is_mob_challenge_class_B {false};
+  bool is_mob_class_A {false};
+  bool is_mob_class_B {false};
+  bool is_mob_class_C {false};
   bool is_monst_class_A {false};
   bool is_monst_class_B {false};
   bool is_monst_class_C {false};

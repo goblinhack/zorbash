@@ -1685,8 +1685,9 @@ public:
   int is_mimic(void);
   int is_minion(void);
   int is_missile(void);
-  int is_mob_challenge_class_A(void);
-  int is_mob_challenge_class_B(void);
+  int is_mob_class_A(void);
+  int is_mob_class_B(void);
+  int is_mob_class_C(void);
   int is_mob(void);
   int is_molekin(void);
   int is_monst_class_A(void);
@@ -2909,6 +2910,7 @@ public:
   void on_owner_add(Thingp owner);
   void on_owner_unset(Thingp owner);
   void on_polymorphed(void);
+  void on_pre_teleport(void);
   void on_resting(void);
   void on_stealing(Thingp from, Thingp what);
   void on_stuck(void);
@@ -2918,7 +2920,6 @@ public:
   void on_targeted_radial(void);
   void on_targeted(void);
   void on_teleport(void);
-  void on_pre_teleport(void);
   void on_thrown_callback(ThingId owner_id_when_thrown);
   void on_thrown(ThingId owner_id_when_thrown);
   void on_unequip(Thingp what);

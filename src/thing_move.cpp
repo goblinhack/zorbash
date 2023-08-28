@@ -276,8 +276,8 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
           // Allow attacking at the edges of movement
           //
         } else {
-          dbg2("Minion cannot move to @%d,%d (new-dist %f, curr-dist %f); it tugs at the leash at %d,%d", future_pos.x,
-               future_pos.y, new_distance, curr_distance, mob->curr_at.x, mob->curr_at.y);
+          dbg2("Minion cannot move to @%d,%d (new-dist %f, curr-dist %f); it tugs at the leash at %d,%d",
+               future_pos.x, future_pos.y, new_distance, curr_distance, mob->curr_at.x, mob->curr_at.y);
           //
           // Don't make spiders (minions to webs) lunge
           //

@@ -202,8 +202,9 @@ public:
   //
   // Set to -1 to mean no chance
   //
-  int d1000_chance_creating_mob_challenge_class_A {};
-  int d1000_chance_creating_mob_challenge_class_B {};
+  int d1000_chance_creating_mob_class_A {};
+  int d1000_chance_creating_mob_class_B {};
+  int d1000_chance_creating_mob_class_C {};
   int d1000_chance_creating_treasure_class_A {};
   int d1000_chance_creating_treasure_class_B {};
   int d1000_chance_creating_treasure_class_C {};
@@ -709,9 +710,9 @@ public:
   Thingp thing_new(const std::string &tp_name, Thingp owner = nullptr);
   Thingp thing_new(Tpp, const point at, Thingp owner = nullptr);
 
-  Tpp tp_random_mob(const point p);
-  Tpp tp_random_mob_challenge_class_A(const point p);
-  Tpp tp_random_mob_challenge_class_B(const point p);
+  Tpp tp_random_mob_class_A(const point p);
+  Tpp tp_random_mob_class_B(const point p);
+  Tpp tp_random_mob_class_C(const point p);
   Tpp tp_random_treasure_class_A(const point p);
   Tpp tp_random_treasure_class_C(const point p);
   Tpp tp_random_treasure_class_B(const point p);

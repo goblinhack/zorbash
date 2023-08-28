@@ -96,7 +96,7 @@ def tp_init(name, text_long_name):
     my.is_immune_to_stamina_drain(self, True)
     my.is_interesting(self, True)
     my.is_loggable(self, True)
-    my.is_mob_challenge_class_B(self, True)
+    my.is_mob_class_B(self, True)
     my.is_mob(self, True)
     my.is_totem(self, True)
     my.is_obs_destructable(self, True)

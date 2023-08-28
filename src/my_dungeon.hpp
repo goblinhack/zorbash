@@ -127,8 +127,9 @@ public:
   bool is_lava_no_check(const int x, const int y);
   bool is_magic_stone(const int x, const int y);
   bool is_mob_any(const int x, const int y);
-  bool is_mob_challenge_class_A(const int x, const int y);
-  bool is_mob_challenge_class_B(const int x, const int y);
+  bool is_mob_class_A(const int x, const int y);
+  bool is_mob_class_B(const int x, const int y);
+  bool is_mob_class_C(const int x, const int y);
   bool is_monst_any(const int x, const int y);
   bool is_monst_class_A(const int x, const int y);
   bool is_monst_class_B(const int x, const int y);

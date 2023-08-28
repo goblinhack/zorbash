@@ -71,7 +71,7 @@ def tp_init(name, text_long_name):
     my.is_lifeless(self, True)
     my.is_light_blocker_for_monst(self, True)  # to give cover to the player
     my.is_loggable(self, True)
-    my.is_mob_challenge_class_B(self, True)
+    my.is_mob_class_B(self, True)
     my.is_mob(self, True)
     my.is_obs_ai(self, True)
     my.is_obs_jump_end(self, True)

@@ -40,7 +40,9 @@ static Tpidmap tp_item_not_a_container_class_C;
 static Tpidmap tp_key;
 static Tpidmap tp_large_ripples;
 static Tpidmap tp_magic_stone;
-static Tpidmap tp_mob;
+static Tpidmap tp_mob_class_A;
+static Tpidmap tp_mob_class_B;
+static Tpidmap tp_mob_class_C;
 static Tpidmap tp_monst_class_A;
 static Tpidmap tp_monst_class_B;
 static Tpidmap tp_monst_class_C;
@@ -160,8 +162,14 @@ void tp_random_init(void)
     if (tp->is_magic_stone()) {
       tp_magic_stone.push_back(tp);
     }
-    if (tp->is_mob()) {
-      tp_mob.push_back(tp);
+    if (tp->is_mob_class_A()) {
+      tp_mob_class_A.push_back(tp);
+    }
+    if (tp->is_mob_class_B()) {
+      tp_mob_class_B.push_back(tp);
+    }
+    if (tp->is_mob_class_C()) {
+      tp_mob_class_C.push_back(tp);
     }
     if (tp->is_player_bodypart_eyes()) {
       tp_bodypart[ BODYPART_EYES ].push_back(tp);
@@ -458,9 +466,6 @@ void tp_random_init(void)
   }
   if (tp_magic_stone.empty()) {
     DIE("No things for type:tp_magic_stone");
-  }
-  if (tp_mob.empty()) {
-    DIE("No things for type:tp_mob");
   }
   if (tp_monst_class_A.empty()) {
     DIE("No things for type:tp_monst_class_A");
@@ -1169,29 +1174,42 @@ Tpp tp_random_secret_door(void)
   return tp_get_with_no_rarity_filter(tp_secret_door);
 }
 
-Tpp tp_random_mob(void)
+Tpp tp_random_mob_class_A(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_mob.size())) {
-    ERR("No mob found");
+  if (unlikely(! tp_mob_class_A.size())) {
     return nullptr;
   }
-  return tp_get_with_rarity_filter(tp_mob);
+  return tp_get_with_rarity_filter(tp_mob_class_A);
+}
+
+Tpp tp_random_mob_class_B(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_mob_class_B.size())) {
+    return tp_random_mob_class_A();
+  }
+  return tp_get_with_rarity_filter(tp_mob_class_B);
+}
+
+Tpp tp_random_mob_class_C(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_mob_class_C.size())) {
+    return tp_random_mob_class_B();
+  }
+  return tp_get_with_rarity_filter(tp_mob_class_C);
 }
 
 Tpp tp_random_ethereal_mob(void)
 {
   TRACE_NO_INDENT();
   if (unlikely(! tp_ethereal_mob.size())) {
-    ERR("No mob found");
+    ERR("No ethereal mob found");
     return nullptr;
   }
   return tp_get_with_rarity_filter(tp_ethereal_mob);
 }
-
-Tpp tp_random_mob_challenge_class_A(void) { return tp_random_mob(); }
-
-Tpp tp_random_mob_challenge_class_B(void) { return tp_random_mob(); }
 
 Tpp tp_random_red_blood(void)
 {

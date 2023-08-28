@@ -1038,17 +1038,20 @@ bool Dungeon::is_mob_any(const int x, const int y)
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_mob_challenge_class_A) {
+    if (v.is_mob_class_A) {
       return true;
     }
-    if (v.is_mob_challenge_class_B) {
+    if (v.is_mob_class_B) {
+      return true;
+    }
+    if (v.is_mob_class_C) {
       return true;
     }
   }
   return false;
 }
 
-bool Dungeon::is_mob_challenge_class_A(const int x, const int y)
+bool Dungeon::is_mob_class_A(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
@@ -1058,14 +1061,14 @@ bool Dungeon::is_mob_challenge_class_A(const int x, const int y)
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_mob_challenge_class_A) {
+    if (v.is_mob_class_A) {
       return true;
     }
   }
   return false;
 }
 
-bool Dungeon::is_mob_challenge_class_B(const int x, const int y)
+bool Dungeon::is_mob_class_B(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
@@ -1075,7 +1078,24 @@ bool Dungeon::is_mob_challenge_class_B(const int x, const int y)
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_mob_challenge_class_B) {
+    if (v.is_mob_class_B) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool Dungeon::is_mob_class_C(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) {
+    DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
+  }
+
+  for (auto d = 0; d < map_depth; d++) {
+    auto c = getc(x, y, d);
+    auto v = get(Charmap::all_charmaps, c);
+
+    if (v.is_mob_class_C) {
       return true;
     }
   }

@@ -639,8 +639,9 @@ int Tp::is_metal(void) const { return _is_metal; }
 int Tp::is_mimic(void) const { return _is_mimic; }
 int Tp::is_minion(void) const { return _is_minion; }
 int Tp::is_missile(void) const { return _is_missile; }
-int Tp::is_mob_challenge_class_A(void) const { return _is_mob_challenge_class_A; }
-int Tp::is_mob_challenge_class_B(void) const { return _is_mob_challenge_class_B; }
+int Tp::is_mob_class_A(void) const { return _is_mob_class_A; }
+int Tp::is_mob_class_B(void) const { return _is_mob_class_B; }
+int Tp::is_mob_class_C(void) const { return _is_mob_class_C; }
 int Tp::is_mob(void) const { return _is_mob; }
 int Tp::is_molekin(void) const { return _is_molekin; }
 int Tp::is_monst_class_A(void) const { return _is_monst_class_A; }
@@ -1404,8 +1405,9 @@ void Tp::is_metal_set(int v) { _is_metal = v; }
 void Tp::is_mimic_set(int v) { _is_mimic = v; }
 void Tp::is_minion_set(int v) { _is_minion = v; }
 void Tp::is_missile_set(int v) { _is_missile = v; }
-void Tp::is_mob_challenge_class_A_set(int v) { _is_mob_challenge_class_A = v; }
-void Tp::is_mob_challenge_class_B_set(int v) { _is_mob_challenge_class_B = v; }
+void Tp::is_mob_class_A_set(int v) { _is_mob_class_A = v; }
+void Tp::is_mob_class_B_set(int v) { _is_mob_class_B = v; }
+void Tp::is_mob_class_C_set(int v) { _is_mob_class_C = v; }
 void Tp::is_mob_set(int v) { _is_mob = v; }
 void Tp::is_molekin_set(int v) { _is_molekin = v; }
 void Tp::is_monst_class_A_set(int v) { _is_monst_class_A = v; }

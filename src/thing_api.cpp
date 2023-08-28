@@ -2784,16 +2784,22 @@ int Thing::is_eater_of_green_blood(void)
   return (tp()->is_eater_of_green_blood());
 }
 
-int Thing::is_mob_challenge_class_B(void)
+int Thing::is_mob_class_A(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_mob_challenge_class_B());
+  return (tp()->is_mob_class_A());
 }
 
-int Thing::is_mob_challenge_class_A(void)
+int Thing::is_mob_class_B(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_mob_challenge_class_A());
+  return (tp()->is_mob_class_B());
+}
+
+int Thing::is_mob_class_C(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_mob_class_C());
 }
 
 int Thing::is_monst_class_D(void)
