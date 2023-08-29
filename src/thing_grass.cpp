@@ -26,40 +26,53 @@ void Thing::grass_tick(void)
         continue;
       }
 
-      if (t->name() == "grass_wet1") {
+      if (level->is_lava(curr_at) || level->is_fire(curr_at)) {
+        //
+        // Burnt grass
+        //
         if (t->is_grass_wet()) {
           t->dead("trampled");
-          level->thing_new("grass_wet_trampled1", t->curr_at);
+          level->thing_new("grass_dry_dead", t->curr_at);
         }
-      }
-      if (t->name() == "grass_wet2") {
-        if (t->is_grass_wet()) {
-          t->dead("trampled");
-          level->thing_new("grass_wet_trampled2", t->curr_at);
+      } else {
+        //
+        // Flattened grass
+        //
+        if (t->name() == "grass_wet1") {
+          if (t->is_grass_wet()) {
+            t->dead("trampled");
+            level->thing_new("grass_wet_trampled1", t->curr_at);
+          }
         }
-      }
-      if (t->name() == "grass_wet3") {
-        if (t->is_grass_wet()) {
-          t->dead("trampled");
-          level->thing_new("grass_wet_trampled3", t->curr_at);
+        if (t->name() == "grass_wet2") {
+          if (t->is_grass_wet()) {
+            t->dead("trampled");
+            level->thing_new("grass_wet_trampled2", t->curr_at);
+          }
         }
-      }
-      if (t->name() == "grass_wet4") {
-        if (t->is_grass_wet()) {
-          t->dead("trampled");
-          level->thing_new("grass_wet_trampled4", t->curr_at);
+        if (t->name() == "grass_wet3") {
+          if (t->is_grass_wet()) {
+            t->dead("trampled");
+            level->thing_new("grass_wet_trampled3", t->curr_at);
+          }
         }
-      }
-      if (t->name() == "grass_wet5") {
-        if (t->is_grass_wet()) {
-          t->dead("trampled");
-          level->thing_new("grass_wet_trampled5", t->curr_at);
+        if (t->name() == "grass_wet4") {
+          if (t->is_grass_wet()) {
+            t->dead("trampled");
+            level->thing_new("grass_wet_trampled4", t->curr_at);
+          }
         }
-      }
-      if (t->name() == "grass_wet6") {
-        if (t->is_grass_wet()) {
-          t->dead("trampled");
-          level->thing_new("grass_wet_trampled6", t->curr_at);
+        if (t->name() == "grass_wet5") {
+          if (t->is_grass_wet()) {
+            t->dead("trampled");
+            level->thing_new("grass_wet_trampled5", t->curr_at);
+          }
+        }
+        if (t->name() == "grass_wet6") {
+          if (t->is_grass_wet()) {
+            t->dead("trampled");
+            level->thing_new("grass_wet_trampled6", t->curr_at);
+          }
         }
       }
     }

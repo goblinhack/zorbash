@@ -329,9 +329,12 @@ void Level::tick_(void)
     FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
     {
       //
-      // Allow things like the player the initiative
+      // Allow the player the initiative.
       //
       if (likely(t->tick_prio() != tick_prio)) {
+        //
+        // Filter to the current prio
+        //
         continue;
       }
 
@@ -339,6 +342,9 @@ void Level::tick_(void)
       // Unable to move this round?
       //
       if (t->move_penalty() > 0) {
+        //
+        // No move this round.
+        //
         t->move_penalty_decr();
         t->movement_remaining_set(0);
         continue;
@@ -369,6 +375,9 @@ void Level::tick_(void)
         // This is for things that need to tick, like buffs, that do not move
         //
         if (t->tick_last() == game->tick_current) {
+          //
+          // Has already ticked, done.
+          //
           continue;
         }
       }

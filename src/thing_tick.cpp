@@ -372,7 +372,7 @@ bool Thing::collision_check_do(void)
 
 void Thing::tick(void)
 {
-  dbg("Tick %d", game->tick_current);
+  dbg2("Tick %d", game->tick_current);
   TRACE_NO_INDENT();
 
   //

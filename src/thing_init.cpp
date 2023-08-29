@@ -311,6 +311,11 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
     tick_last_location_check_set(game->tick_current);
     tick_last_did_something_set(game->tick_current);
     tick_born_set(game->tick_current);
+
+    //
+    // Need to set this, or newly born things will immediately do something.
+    //
+    tick_last_set(game->tick_current);
   }
 
   //

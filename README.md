@@ -1,11 +1,9 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - is_invisible should use an outline when a monst is in gas                                                                                  -->
-<!-- - need any gas type                                                                                                                          -->
 <!-- - spell of beckoning/repulsing                                                                                                               -->
 <!-- - ogre totems?                                                                                                                               -->
-<!-- - stealth                                                                                                                                    -->
 <!-- - invisible phantoms that leave puddles of ectoplasm ?                                                                                       -->
+<!-- - need any gas type                                                                                                                          -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -29,12 +27,13 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
+<!-- - mace/hammer - but next move penalty and strength penalties and pushes victim back one tile                                                 -->
+<!-- - stealth                                                                                                                                    -->
 <!-- - cracked walls                                                                                                                              -->
 <!-- - cloak of slime                                                                                                                             -->
 <!-- - sword of slime                                                                                                                             -->
 <!-- - spider web spawn small spiders?                                                                                                            -->
 <!-- - monsters with random buffs like vampirism would be interesting                                                                             -->
-<!-- - chaos bell of summoning                                                                                                                    -->
 <!-- - crystals walls (or chest) that reflect, so can use on yourself or ally                                                                     -->
 <!-- - cursed weapon with bad luck                                                                                                                -->
 <!-- - luck trap                                                                                                                                  -->
