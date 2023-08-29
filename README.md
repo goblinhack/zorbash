@@ -1,6 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- - is_invisible should use an outline when a monst is in gas                                                                                  -->
+<!-- - need any gas type                                                                                                                          -->
 <!-- - spell of beckoning/repulsing                                                                                                               -->
 <!-- - ogre totems?                                                                                                                               -->
 <!-- - stealth                                                                                                                                    -->

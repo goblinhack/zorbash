@@ -76,6 +76,26 @@ bool Thing::blit_outline_should_be_shown(color &outline_color)
     }
   }
 
+  //
+  // Show phantoms as an outline?
+  //
+  if (is_monst()) {
+    bool is_invisible_show_outline = is_invisible_currently();
+    if (tile_curr) {
+      auto tile = tile_index_to_tile(tile_curr);
+      if (tile && tile->is_invisible) {
+        if (level && (level->is_gas_poison(curr_at.x, curr_at.y) || level->is_gas_healing(curr_at.x, curr_at.y))) {
+          is_invisible_show_outline = true;
+        }
+      }
+    }
+
+    if (is_invisible_show_outline) {
+      outline_color = WHITE;
+      outline_shown = true;
+    }
+  }
+
   if (gfx_pixelart_show_highlighted() && ! immediate_owner()) {
     if ((this == game->current_wid_thing_info) || (level->cursor && (this->curr_at == level->cursor->curr_at))) {
       outline_color = RED;

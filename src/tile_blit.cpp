@@ -655,6 +655,8 @@ void tile_blit_burnt(const Tilep &tile, const point tl, const point br)
 
 void tile_blit_outline_only(const Tilep &tile, const point tl, const point br, color c)
 {
+  TRACE_NO_INDENT();
+
   int width  = (tl.x > br.x) ? (tl.x - br.x) : (br.x - tl.x);
   int height = br.y - tl.y;
 
