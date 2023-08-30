@@ -294,6 +294,7 @@ Content:
 - 1 x player
 <!-- end type marker -->
 
+<h6>
 <!-- begin monster type marker -->
 | Monster | Danger level | Dmg:Acid | Dmg:Bite | Dmg:Claw | Dmg:Cold | Dmg:Crush | Dmg:Digest | Dmg:Drown | Dmg:Energy | Dmg:Fire | Dmg:Heat | Dmg:Lightning | Dmg:Magic | Dmg:Melee | Dmg:Missile | Dmg:Nat Attack | Dmg:Nat Attack Type | Dmg:Necrosis | Dmg:Negation | Dmg:Poison | Dmg:Stamina | Dmg:Water |
 | :--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -400,6 +401,7 @@ Content:
 | Bloated Bloodbug | 24 |  | 1d2 |  |  |  |  |  |  |  |  |  |  |  |  | 1d2+1 | bite |  |  |  | 1d1 |  |
 | Lava Ant | 22 |  | 1d4 | 1d3 |  |  |  |  |  | 1d3+1 |  |  |  |  |  | 1d3+1 | burn |  |  |  |  |  |
 <!-- end monster type marker -->
+</h6>
 
 Pixelart Screenshots
 --------------------
