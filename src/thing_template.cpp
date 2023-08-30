@@ -535,7 +535,8 @@ void tp_dump_monsters(void)
       dmg_str += " Water:";
       dmg_str += tp->dmg_water_dice_str();
     }
-    printf("DUMP: | %s | %u | %u | %s | %s |\n", capitalise(tp->text_long_name()).c_str(), tp->get_danger_level(),
-           tp->dmg_num_of_attacks(), tp->dmg_nat_att_dice_str().c_str(), dmg_str.c_str());
+
+    printf("DUMP: | %s | %u | %s | %u | %s |\n", capitalise(tp->text_long_name()).c_str(), tp->get_danger_level(),
+           tp->dmg_nat_att_dice_str().c_str(), tp->dmg_num_of_attacks(), dmg_str.c_str());
   }
 }
