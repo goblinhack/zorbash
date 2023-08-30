@@ -295,110 +295,111 @@ Content:
 <!-- end type marker -->
 
 <!-- begin monster type marker -->
-| Name               | Danger level |
-| :---                  | --- |
-| Ettin, Two Headed Giant        |        702 |
-| Reaper                         |        676 |
-| Flesh Golem                    |        600 |
-| Undead Bear                    |        520 |
-| Bearowl                        |        490 |
-| Fire Demon                     |        488 |
-| Cthulite                       |        482 |
-| Baby Kraken                    |        439 |
-| Yeti                           |        376 |
-| Colossal Scorpion              |        375 |
-| Fire Troll                     |        374 |
-| Stone Troll                    |        353 |
-| Giant Skeleton                 |        344 |
-| Dungeon Cleaner                |        317 |
-| Cement Man                     |        310 |
-| Mummy                          |        280 |
-| Hill Ogre                      |        223 |
-| Lesser Tentacleye              |        216 |
-| Bone Spider                    |        212 |
-| Iceman                         |        205 |
-| Gargoyle                       |        204 |
-| Giant Spider                   |        203 |
-| Unleashed Gargoyle             |        195 |
-| Flameskull                     |        175 |
-| Murder Bunny                   |        148 |
-| Giant Battle Duck              |        144 |
-| Mummy Necromancer              |        144 |
-| Giant Piranha                  |        141 |
-| Demon Goat                     |        139 |
-| Treasure Chest                 |        139 |
-| Mimic                          |        139 |
-| Portable Hole                  |        118 |
-| Mantisman                      |        109 |
-| Zorblin Priest                 |        108 |
-| White Assassin Duck            |        107 |
-| Cuddly Electric Eel            |        103 |
-| Gargoyle Baby                  |        102 |
-| Zorblin Leader                 |        100 |
-| Zorblin Pirate                 |        100 |
-| Noble Warrior                  |        100 |
-| Dreadfire Snake                |         93 |
-| Zoblin                         |         92 |
-| Dungeon Belcher                |         92 |
-| Flux Spider                    |         89 |
-| Zorblin Soldier                |         88 |
-| Huge Fluffy Bat                |         86 |
-| Teletoad                       |         83 |
-| Dogman                         |         82 |
-| Death Hornet                   |         80 |
-| Molekin                        |         79 |
-| Pyrolizard                     |         79 |
-| Zorblin Wizard                 |         76 |
-| Carcass Creeper                |         76 |
-| Lesser Zorblin                 |         76 |
-| Gaseous Gloat                  |         75 |
-| Gnome Knight                   |         74 |
-| Battle Goat                    |         72 |
-| Zorblin Eldster                |         72 |
-| Zorblin Necromancer            |         72 |
-| Deathstalker Scorpion          |         70 |
-| Kraken Tentacle                |         70 |
-| Rock Gnome                     |         70 |
-| Gnorf                          |         68 |
-| Piranha                        |         67 |
-| Flaming Skeleton               |         64 |
-| Cuddly Eel                     |         63 |
-| Slime Jumper                   |         62 |
-| Brown Extrovert Spider         |         62 |
-| Blinkcat                       |         59 |
-| Gnome Thief                    |         58 |
-| Onyx Widow                     |         57 |
-| Burning Skeleton               |         56 |
-| Narhornet                      |         54 |
-| Giant Dungeon Duck             |         53 |
-| Giant Rat                      |         52 |
-| Moresquito                     |         52 |
-| Meatfairy                      |         52 |
-| Centipede                      |         51 |
-| Scorpion                       |         49 |
-| Jackalope                      |         48 |
-| Goldfish                       |         47 |
-| Asp                            |         47 |
-| Clingy Leech                   |         47 |
-| Para Spider                    |         43 |
-| Large Rat                      |         42 |
-| Fluffy Bat                     |         41 |
-| Jade Viper                     |         41 |
-| Fluffy Bat Minion              |         40 |
-| Orb Of Fire                    |         39 |
-| Skeleton                       |         38 |
-| Orb Of Energy                  |         38 |
-| Sewer Crab                     |         37 |
-| Possessed Ghost                |         36 |
-| Ghost                          |         36 |
-| Fleshbee                       |         36 |
-| Sheep                          |         34 |
-| Possessed Skeleton             |         34 |
-| Skeleton                       |         34 |
-| Vampire Rose                   |         28 |
-| Baby Slime Jumper              |         28 |
-| Bloated Bloodbug               |         26 |
-| Lava Ant                       |         24 |
+||Monster||Danger level||Dmg:Acid||Dmg:Bite||Dmg:Claw||Dmg:Cold||Dmg:Crush||Dmg:Digest||Dmg:Drown||Dmg:Energy||Dmg:Fire||Dmg:Heat||Dmg:Lightning||Dmg:Magic||Dmg:Melee||Dmg:Missile||Dmg:Nat Attack||Dmg:Nat Attack Type||Dmg:Necrosis||Dmg:Negation||Dmg:Poison||Dmg:Stamina||Dmg:Water||
+|:---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| :---  | --- |
+|Ettin, Two Headed Giant|382|||||||||||||||1d10+4|bludgeon||||||
+|Reaper|356|||||||||||||||1d6+6|touch||||||
+|Flesh Golem|336|||||||||||||||2d8+4|gore||||||
+|Fire Demon|328|||||||||1d6+6||||||1d14+4|bludgeon||||||
+|Cthulite|322|2d6||||||||||||||1d14+4|bludgeon|||2d12|||
+|Undead Bear|320|||||||||||||||2d8+5|claw|1|||||
+|Bearowl|290|||||||||||||||2d8+5|beak||||||
+|Baby Kraken|279||3d8+10||||1d40|1d20+10|||||||||||||||
+|Colossal Scorpion|255||3d8+10||||1d40|||||||||||||1d20+10|||
+|Yeti|216|||||||||||||||1d20+8|claw||||||
+|Fire Troll|214|||||||||||||||1d12+4|bludgeon||||||
+|Dungeon Cleaner|197||||||1d40|||||||||1d20|burn||||||
+|Stone Troll|193|||||||||||||||1d12+4|bludgeon||||||
+|Giant Skeleton|184|||||||||||||||1d6|gore||||||
+|Mummy|184|||||||||||||||1d10+10|gore||||1d10||
+|Cement Man|178|||||||||||||||3d8+6|gore||||||
+|Giant Spider|139|||||||||||||||1d8+3|gore|||2d8|||
+|Lesser Tentacleye|136|||||||||||||||2d6|whip||||||
+|Bone Spider|132|||||||||||||||1d8+3|gore|||2d8|||
+|Murder Bunny|132||1d6|1d4||||||||||||1d8|demon stare||||||
+|Gargoyle|128|||||||||||||||2d6|gore||||||
+|Hill Ogre|127|||||||||||||||1d10+4|bludgeon||||||
+|Iceman|125||||1d8||||||||||||||||||
+|Flameskull|121|||||||||||||||2d6|bite||||||
+|Unleashed Gargoyle|119|||||||||||||||1d6+2|gore||||||
+|Portable Hole|117||||||||||||||||||||||
+|Mummy Necromancer|112|||||||||||||||1d6+10|gore|1|||||
+|Demon Goat|103|||||||||||||||2d6+2|rutt||||||
+|Giant Piranha|101||1d8|||||||||||||1d10+3|bite||||||
+|Noble Warrior|100|||||||||||||||1d3|punch||||||
+|Giant Battle Duck|96||1d10|1d6||||||||||||1d8+4|metal wing||||||
+|Mimic|91|||||||||||||||1d8+4|bite||||||
+|Treasure Chest|91|||||||||||||||1d8+4|bite||||||
+|Mantisman|85|||||||||||||||1d12+8|claw||||||
+|Zorblin Priest|84|||||||||||||||2d6+2|punch||||||
+|Cuddly Electric Eel|83||1d4|||||||||||||1d3+1|bite||||||
+|Dreadfire Snake|81|||||||||||||||1d3+1|bite|||1d4|||
+|Flux Spider|77|||||||||||||||1d3|gore|1||1d4|||
+|Zorblin Pirate|76|||||||||||||||1d4+2|gore||||||
+|Zorblin Leader|76|||||||||||||||1d4+2|gore||||||
+|White Assassin Duck|75||1d8|1d6||||||||||||1d6+1|webbed||||||
+|Gaseous Gloat|74||||||1d40|||||||||1d20|burn||||||
+|Gargoyle Baby|74|||||||||||||||1d6|gore||||||
+|Huge Fluffy Bat|74||1d8|1d6||||||||||||1d8+2|gore|||1d4+1|||
+|Death Hornet|72||1d10|||||||||||||1d4+1|pierce|||1d10|||
+|Dungeon Belcher|72||||||1d10|||||||||1d20|burn||||||
+|Teletoad|71|||||||||||||||1d3+1|bite|||1d10|||
+|Zorblin Soldier|70|||||||||||||||1d4+2|gore||||||
+|Deathstalker Scorpion|66|||||||||||||||1d6+1|bite|||1d30|||
+|Lesser Zorblin|64|||||||||||||||1d4+2|gore||||||
+|Zorblin Wizard|64|||||||||||||||1d4+2|gore||||||
+|Dogman|64|||||||||||||||1d4+1|bite||||||
+|Molekin|63|||||||||||||||1d4+2|claw||||||
+|Pyrolizard|63|||||||||||||||1d6+1|bite||||||
+|Gnome Knight|62|||||||||||||||1d6+1|stabs||||||
+|Zorblin Eldster|62|||||||||||||||1d4+2|gore||||||
+|Zorblin Necromancer|62|||||||||||||||1d4+2|gore||||||
+|Rock Gnome|60|||||||||||||||1d6+1|gravel||||||
+|Zoblin|60|||||||||||||||1d6|bite||||||
+|Carcass Creeper|60||1d8|1d6||||||||||||1d6+2|gore|||1d10|||
+|Piranha|59||1d4|||||||||||||1d4+3|bite||||||
+|Gnorf|58|||||||||||||||1d4+1|chop||||||
+|Brown Extrovert Spider|58|||||||||||||||1d3|gore|1||1d4|||
+|Battle Goat|56|||||||||||||||1d6+2|rutt||||||
+|Flaming Skeleton|56|||||||||||||||1d4|gore||||||
+|Slime Jumper|52|1d6||||||||||||||2d6+2|bludgeon||||||
+|Burning Skeleton|52|||||||||||||||1d3|gore||||||
+|Gnome Thief|52|||||||||||||||1d2+1|stab||||||
+|Onyx Widow|51|||||||||||||||1d3|gore|||1d4|||
+|Kraken Tentacle|50|||||||||||||||1d3+1|lash|||1d8+1|||
+|Meatfairy|50||1d4|1d2||||||||||||1d3+1|stab||||||
+|Moresquito|48||1d4|1d3||||||||||||1d3+1|stab|||1d4|1d4||
+|Blinkcat|47|||||||||||||||1d3+1|bite||||||
+|Narhornet|46||1d4|||||||||||||1d6+1|sting|||1d8|||
+|Scorpion|45|||||||||||||||1d3+1|bite|||1d12|||
+|Giant Rat|44|||||||||||||||1d6+2|bite||||||
+|Centipede|43||1d8|1d4||||||||||||1d4+2|gore|||1d4|||
+|Asp|43|||||||||||||||1d3+1|bite|||1d3+1|||
+|Cuddly Eel|43||1d4|||||||||||||1d3+1|bite||||||
+|Para Spider|39|||||||||||||||1d3|gore|||1d4|||
+|Fluffy Bat Minion|39||1d3|1d2||||||||||||1|nibble||||||
+|Large Rat|38|||||||||||||||1d4+2|bite||||||
+|Jackalope|38|||||||||||||||1d6|antler||||||
+|Orb Of Fire|38||||||||||||||||||||||
+|Fluffy Bat|37||1d3|1d2||||||||||||1|nibble||||||
+|Orb Of Energy|37||||||||||||||||||||||
+|Giant Dungeon Duck|37||1d4|1d3||||||||||||1d3+1|webbed||||||
+|Ghost|35||||1||||||||||||||||||
+|Possessed Ghost|35||||1||||||||||||||||||
+|Clingy Leech|35||1d4|||||||||||||1d3+1|bite||||1d4||
+|Jade Viper|35|||||||||||||||1d3+1|bite|||1d2|||
+|Fleshbee|32||1d4|1d3||||||||||||1d3+1|stab||||||
+|Skeleton|32|||||||||||||||1d3|gore||||||
+|Sewer Crab|31|||||||||||||||1d3+1|bite||||||
+|Skeleton|30|||||||||||||||1d3|gnashing||||||
+|Possessed Skeleton|30|||||||||||||||1d3|gore||||||
+|Baby Slime Jumper|27|1d3||||||||||||||1|sting||||||
+|Goldfish|27||1d1+1|||||||||||||1|nibble||||||
+|Sheep|26|||||||||||||||1d3+2|nudge||||||
+|Vampire Rose|25||||||1d5|||||||||1d6|bleed||||||
+|Bloated Bloodbug|24||1d2|||||||||||||1d2+1|bite||||1d1||
+|Lava Ant|22||1d4|1d3||||||1d3+1||||||1d3+1|burn||||||
 <!-- end monster type marker -->
 
 Pixelart Screenshots
