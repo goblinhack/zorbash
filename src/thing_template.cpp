@@ -481,7 +481,7 @@ void tp_dump_monsters(void)
       dmg_str += tp->dmg_crush_dice_str();
     }
     if (! tp->dmg_digest_dice_str().empty()) {
-      dmg_str += " Digest:";
+      dmg_str += " Digestive juices:";
       dmg_str += tp->dmg_digest_dice_str();
     }
     if (! tp->dmg_drown_dice_str().empty()) {
