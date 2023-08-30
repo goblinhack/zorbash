@@ -6,13 +6,7 @@ def on_idle_tick_freq_dice(me, x, y):
     if my.thing_is_frozen(me):
         return
 
-    roll = my.py_d100()
-    if roll < 5:
-        my.spawn_minion_next_to(me, "zorb_wizard")
-    elif roll < 10:
-        my.spawn_minion_next_to(me, "zorb_priest")
-    else:
-        my.spawn_minion_next_to(me, "zorb_single")
+    my.spawn_minion_next_to(me, "ogre")
     my.thing_sound_play_channel(me, my.CHANNEL_MONST_BIRTH, "bones1")
 
 
@@ -53,7 +47,7 @@ def tp_init(name, text_long_name):
     my.collision_check(self, True)
     my.collision_hit_priority(self, 5)
     my.dmg_received_doubled_from_water(self, True)
-    my.distance_throw(self, 5)
+    my.distance_throw(self, 7)
     my.distance_spell_cast(self, 5)
     my.environ_hates_water(self, 100)
     my.gfx_ascii_fade_with_dist(self, True)
@@ -65,8 +59,8 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_submergible(self, True)
-    my.distance_minion_from_mob_max(self, 5)
-    my.distance_vision(self, 7)
+    my.distance_minion_from_mob_max(self, 7)
+    my.distance_vision(self, 8)
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "3d6")
     my.is_able_to_fall(self, True)
@@ -79,7 +73,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_shoot_at(self, True)
     my.is_attackable_by_player(self, True)
     my.dmg_chance_d1000_crush(self, 0, 1000)
-    my.dmg_crush_dice(self, "4d6")
+    my.dmg_crush_dice(self, "6d6")
     my.dmg_num_of_attacks(self, 0)  # fires only
     my.is_biome_chasms(self, True)
     my.is_biome_dungeon(self, True)
@@ -114,15 +108,15 @@ def tp_init(name, text_long_name):
     my.is_obs_spell_casting(self, True)
     my.is_shovable(self, True)
     my.is_tickable(self, True)
-    my.light_color(self, "green")
-    my.light_dist(self, 1)
-    my.minion_limit(self, 4)
+    my.light_color(self, "cyan")
+    my.light_dist(self, 3)
+    my.minion_limit(self, 3)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
     my.on_idle_tick_freq_dice(self, "1:me.on_idle_tick_freq_dice()")
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "A tall pillar smeared in grease and blood and with the grinning face of a monstrous zorblin carved into the stonework. It's eyes follow you. They really do, this is not a figure of speech.")
-    my.text_description_short(self, "Zorblin holy place.")
+    my.text_description_long(self, "A tall pillar of skulls, smeared in grease and blood. This is not a place to hang out.")
+    my.text_description_short(self, "Ogre holy place.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MOB)
@@ -130,10 +124,10 @@ def tp_init(name, text_long_name):
 
     delay = 200
     my.tile(self,
-            ascii_fg_char="neuter", ascii_bg_col_name="", ascii_fg_col_name="green",
+            ascii_fg_char="neuter", ascii_bg_col_name="", ascii_fg_col_name="cyan",
             tile=name + ".1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="neuter", ascii_bg_col_name="", ascii_fg_col_name="green",
+            ascii_fg_char="neuter", ascii_bg_col_name="", ascii_fg_col_name="cyan",
             tile=name + ".2", delay_ms=delay)
     my.tile(self,
             ascii_fg_char="neuter", ascii_bg_col_name="", ascii_fg_col_name="gray",
@@ -143,7 +137,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="zorb_totem", text_long_name="zorblin totem")
+    tp_init(name="ogre_totem", text_long_name="ogre totem")
 
 
 init()

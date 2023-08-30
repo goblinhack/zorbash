@@ -115,6 +115,7 @@ bool Thing::is_stuck_check(void)
   // Paralysed
   //
   if (paralysis_count() > 0) {
+    dbg("Stuck, yes: paralysed");
     return true;
   }
 
@@ -127,6 +128,7 @@ bool Thing::is_stuck_check(void)
   //
   if (tp()->move_speed()) {
     if (move_speed_total() == 0) {
+      dbg("Stuck, yes: no move speed");
       return true;
     }
 
@@ -140,6 +142,7 @@ bool Thing::is_stuck_check(void)
         //
         msg("You became so slow, you're body just stopped...");
         dead("by extreme slowing");
+        dbg("Stuck, yes: too slow");
         return true;
       } else if (is_magical() || is_undead() || is_ethereal()) {
         //
@@ -151,23 +154,27 @@ bool Thing::is_stuck_check(void)
         // Body shutdown due to being too slow
         //
         dead("bu falling to the ground dead");
+        dbg("Stuck, yes: falling down dead");
         return true;
       } else if (is_humanoid()) {
         //
         // Body shutdown due to being too slow
         //
+        dbg("Stuck, yes: extreme slowing");
         dead("by extreme slowing");
         return true;
       } else {
         //
         // Stuck
         //
+        dbg("Stuck, yes: too slow");
         return true;
       }
     }
   }
 
   if (is_frozen) {
+    dbg("Stuck, yes: frozen");
     return true;
   }
 
@@ -193,6 +200,7 @@ bool Thing::is_stuck_check(void)
       // Give a chance to escape.
       //
     } else {
+      dbg("Stuck, yes: caught in a web");
       stuck = true;
     }
   } else if (level->is_spell_of_holding_barrier(curr_at.x, curr_at.y)) {
@@ -201,6 +209,7 @@ bool Thing::is_stuck_check(void)
       // ok
       //
     } else {
+      dbg("Stuck, yes: caught in a spell of holding");
       stuck = true;
     }
   } else if (level->is_block_of_ice(curr_at.x, curr_at.y)) {
@@ -213,6 +222,7 @@ bool Thing::is_stuck_check(void)
       // ok
       //
     } else {
+      dbg("Stuck, yes: caught in a ice");
       stuck = true;
     }
   } else if (level->is_sticky(curr_at.x, curr_at.y)) {
@@ -233,6 +243,7 @@ bool Thing::is_stuck_check(void)
       // ok
       //
     } else {
+      dbg("Stuck, yes: caught in sticky stuff");
       stuck = true;
     }
   } else if (level->is_tentacle(curr_at.x, curr_at.y)) {
@@ -253,6 +264,7 @@ bool Thing::is_stuck_check(void)
       // ok
       //
     } else {
+      dbg("Stuck, yes: caught in a tentacle");
       stuck = true;
     }
   }
@@ -276,6 +288,7 @@ bool Thing::is_stuck_check(void)
       // Give a chance to escape.
       //
     } else {
+      dbg("Stuck, yes: caught in a rock, wall or barrel");
       stuck = true;
     }
   }
@@ -302,6 +315,7 @@ bool Thing::is_stuck_check(void)
         // ok
         //
       } else {
+        dbg("Stuck, yes: caught under a heavy monster");
         stuck = true;
       }
     }
@@ -322,7 +336,16 @@ bool Thing::is_stuck_check(void)
     }
 
     if (it->is_engulfer() || it->is_heavy()) {
-      if (! d20_ge(stat_str_total(), it->stat_str_total())) {
+      if (is_engulfer()) {
+        //
+        // Fellow engulfer
+        //
+      } else if (is_heavy()) {
+        //
+        // Fellow heavy thing
+        //
+      } else if (! d20_ge(stat_str_total(), it->stat_str_total())) {
+        dbg("Stuck, yes: caught in an engulfer");
         stuck = true;
       }
     }

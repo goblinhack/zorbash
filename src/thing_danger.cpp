@@ -265,7 +265,8 @@ int Thing::danger_current_level(void)
 
   int danger_level = 0;
 
-  danger_level = health() / 10;
+  danger_level = health() * 2;
+  con("danger %u ", danger_level);
 
   if (is_player()) {
     danger_level /= 2;
@@ -370,6 +371,11 @@ int Thing::danger_current_level(void)
   danger_level += dmg_digest_dice().max_roll();
   danger_level += dmg_nat_att_dice().max_roll();
 
+  auto d         = dmg_nat_att_dice();
+  auto min_value = d.min_roll();
+  auto max_value = d.max_roll();
+  con("danger %u nat att %u %u..%u", danger_level, dmg_nat_att_dice().max_roll(), min_value, max_value);
+
   danger_level += aggression_pct() / 10;
 
   //
@@ -397,7 +403,7 @@ int Thing::danger_current_level(void)
   danger_level += stat_dex_bonus();
   danger_level += move_speed() / 10;
   danger_level *= dmg_num_of_attacks();
-  // con("danger %u num att %u", danger_level, dmg_num_of_attacks());
+  con("danger %u num att %u", danger_level, dmg_num_of_attacks());
 
   return danger_level;
 }

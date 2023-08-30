@@ -275,10 +275,10 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     wid_thing_info_add_move_speed(wid_popup_window, t);
     wid_thing_info_add_shove_strength(wid_popup_window, t);
     wid_thing_info_add_jump_distance(wid_popup_window, t);
-    wid_thing_info_add_immunity(wid_popup_window, t);
-    if (t->is_alive_monst()) {
+    if (t->is_alive_monst() || t->is_totem() || t->is_mob()) {
       wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
     }
+    wid_thing_info_add_immunity(wid_popup_window, t);
     wid_thing_info_add_charge_count(wid_popup_window, t);
     wid_thing_info_add_danger_level(wid_popup_window, t);
   }

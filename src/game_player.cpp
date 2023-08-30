@@ -50,6 +50,7 @@ void Game::place_player(void)
         t->bodypart_add(my_bodypart, iter);
       }
 
+      level->thing_new("ogre_totem", point(x + 2, y + 2));
       if (0) {
         level->thing_new("trap_dart", point(x + 2, y + 2));
         level->thing_new("zorb_totem", point(x + 2, y + 2));
