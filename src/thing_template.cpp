@@ -476,63 +476,63 @@ void tp_dump_monsters(void)
       dmg_str += tp->dmg_cold_dice_str();
     }
     if (! tp->dmg_crush_dice_str().empty()) {
-      dmg_str += "Crush:";
+      dmg_str += " Crush:";
       dmg_str += tp->dmg_crush_dice_str();
     }
     if (! tp->dmg_digest_dice_str().empty()) {
-      dmg_str += "Digest:";
+      dmg_str += " Digest:";
       dmg_str += tp->dmg_digest_dice_str();
     }
     if (! tp->dmg_drown_dice_str().empty()) {
-      dmg_str += "Drown:";
+      dmg_str += " Drown:";
       dmg_str += tp->dmg_drown_dice_str();
     }
     if (! tp->dmg_energy_dice_str().empty()) {
-      dmg_str += "Energy:";
+      dmg_str += " Energy:";
       dmg_str += tp->dmg_energy_dice_str();
     }
     if (! tp->dmg_fire_dice_str().empty()) {
-      dmg_str += "Fire:";
+      dmg_str += " Fire:";
       dmg_str += tp->dmg_fire_dice_str();
     }
     if (! tp->dmg_heat_dice_str().empty()) {
-      dmg_str += "Heat:";
+      dmg_str += " Heat:";
       dmg_str += tp->dmg_heat_dice_str();
     }
     if (! tp->dmg_lightning_dice_str().empty()) {
-      dmg_str += "Lightning:";
+      dmg_str += " Lightning:";
       dmg_str += tp->dmg_lightning_dice_str();
     }
     if (! tp->dmg_magic_dice_str().empty()) {
-      dmg_str += "Magic:";
+      dmg_str += " Magic:";
       dmg_str += tp->dmg_magic_dice_str();
     }
     if (! tp->dmg_melee_dice_str().empty()) {
-      dmg_str += "Melee:";
+      dmg_str += " Melee:";
       dmg_str += tp->dmg_melee_dice_str();
     }
     if (! tp->dmg_missile_dice_str().empty()) {
-      dmg_str += "Missile:";
+      dmg_str += " Missile:";
       dmg_str += tp->dmg_missile_dice_str();
     }
     if (! tp->dmg_necrosis_dice_str().empty()) {
-      dmg_str += "Necrosis:";
+      dmg_str += " Necrosis:";
       dmg_str += tp->dmg_necrosis_dice_str();
     }
     if (! tp->dmg_negation_dice_str().empty()) {
-      dmg_str += "Negation:";
+      dmg_str += " Negation:";
       dmg_str += tp->dmg_negation_dice_str();
     }
     if (! tp->dmg_poison_dice_str().empty()) {
-      dmg_str += "Poison:";
+      dmg_str += " Poison:";
       dmg_str += tp->dmg_poison_dice_str();
     }
     if (! tp->dmg_stamina_dice_str().empty()) {
-      dmg_str += "Stamina:";
+      dmg_str += " Stamina:";
       dmg_str += tp->dmg_stamina_dice_str();
     }
     if (! tp->dmg_water_dice_str().empty()) {
-      dmg_str += "Water:";
+      dmg_str += " Water:";
       dmg_str += tp->dmg_water_dice_str();
     }
     printf("DUMP: | %s | %u | %s | %s |\n", capitalise(tp->text_long_name()).c_str(), tp->get_danger_level(),
