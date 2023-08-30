@@ -442,7 +442,8 @@ void tp_dump_monsters(void)
   // | git status   | git status     | git status    |
   // | git diff     | git diff       | git diff      |
 
-  printf("DUMP: | %s | %s | %s | %s | %s |\n", "Monster", "Danger", "Nat Attack", "# Attacks", "Other damage types");
+  printf("DUMP: | %s | %s | %s | %s | %s |\n", "Monster", "Danger level", "Natural attack", "# Attacks",
+         "Other damage types");
 
   printf("DUMP: | %s | %s | %s | %s | %s |\n", ":---", "---", "---", "---", "---");
 
