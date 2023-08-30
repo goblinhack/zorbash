@@ -624,4 +624,27 @@ Content
 Other content
 -------------
 <!-- begin type marker -->
+- 108 x monsters
+- 52 x food
+- 24 x treasure
+- 23 x items
+- 18 x spells
+- 15 x weapons
+- 13 x buffs
+- 11 x skills
+- 7 x debuffs
+- 6 x staffs
+- 6 x shield
+- 6 x boots
+- 5 x rings
+- 5 x keys
+- 4 x traps
+- 4 x gauntlets
+- 4 x armor
+- 4 x amulets
+- 3 x mobs
+- 3 x doors
+- 3 x cloaks
+- 2 x potions
+- 1 x player
 <!-- end type marker -->
