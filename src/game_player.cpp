@@ -50,8 +50,8 @@ void Game::place_player(void)
         t->bodypart_add(my_bodypart, iter);
       }
 
-      level->thing_new("ogre_totem", point(x + 2, y + 2));
       if (0) {
+        level->thing_new("ogre_totem", point(x + 2, y + 2));
         level->thing_new("trap_dart", point(x + 2, y + 2));
         level->thing_new("zorb_totem", point(x + 2, y + 2));
         level->thing_new("sentry_orb_energy", point(x - 3, y));
@@ -274,8 +274,8 @@ void Game::place_player(void)
         t->carry(f, carry_options);
       }
       if (0) {
-        level->thing_new("lava_ant", point(x - 2, y));
         level->thing_new("dogman", point(x + 1, y + 3));
+        level->thing_new("lava_ant", point(x - 2, y));
         level->thing_new("grass_wet1", point(x + 1, y));
         level->thing_new("grass_wet2", point(x + 2, y));
         level->thing_new("grass_wet4", point(x + 3, y));

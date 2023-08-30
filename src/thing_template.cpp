@@ -4,6 +4,7 @@
 
 #include "my_level.hpp"
 #include "my_ptrcheck.hpp"
+#include "my_string.hpp"
 #include "my_vector_bounds_check.hpp"
 
 Tpnamemap tp_name_map;
@@ -432,4 +433,28 @@ Tilep tp_first_tile(Tpp tp)
   // Get the first anim tile.
   //
   return (tile_first(tiles));
+}
+
+void tp_dump_monsters(void)
+{
+  // | Left-aligned | Center-aligned | Right-aligned |
+  // | :---         |     :---:      |          ---: |
+  // | git status   | git status     | git status    |
+  // | git diff     | git diff       | git diff      |
+
+  printf("DUMP: %-20s %10s\n", "| Name", "| Danger level |");
+  printf("DUMP: %-20s %10s\n", "| :--- ", "| --- |");
+
+  std::vector< Tpp > m;
+
+  for (auto &tp : tp_id_map) {
+    if (tp->is_monst() || tp->is_player()) {
+      m.push_back(tp);
+    }
+  }
+  sort(m.begin(), m.end(), [](Tpp a, Tpp b) -> bool { return a->get_danger_level() > b->get_danger_level(); });
+
+  for (auto tp : m) {
+    printf("DUMP: | %-30s | %10u |\n", capitalise(tp->text_long_name()).c_str(), tp->get_danger_level());
+  }
 }

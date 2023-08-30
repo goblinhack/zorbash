@@ -173,36 +173,6 @@ Welcome to the lair of the dread tentacleye, Zorbash. Collect the crystals of Zo
 
 Itch.io [found here](https://goblinhackgmailcom.itch.io/zorbash)
 
-Content:
-- Dungeon, sewer, swamp, ice, lava, chasms and flooded dungeon biomes
-- Multiple skill and spell trees
-- No end game yet
-<!-- begin type marker -->
-- 108 x monsters
-- 52 x food
-- 24 x treasure
-- 23 x items
-- 18 x spells
-- 15 x weapons
-- 13 x buffs
-- 11 x skills
-- 7 x debuffs
-- 6 x staffs
-- 6 x shield
-- 6 x boots
-- 5 x rings
-- 5 x keys
-- 4 x traps
-- 4 x gauntlets
-- 4 x armor
-- 4 x amulets
-- 3 x mobs
-- 3 x doors
-- 3 x cloaks
-- 2 x potions
-- 1 x player
-<!-- end type marker -->
-
 Comments and suggestions welcome.
 
 Pixel art and ascii mode options
@@ -293,6 +263,143 @@ Press TAB to switch between modes during the game.
 &nbsp; &nbsp; &nbsp; &nbsp;
 <img alt="Ascii art" src="pics/ascii/screenshot.14.png" width="45%">
 </p>
+
+Content:
+- Dungeon, sewer, swamp, ice, lava, chasms and flooded dungeon biomes
+- Multiple skill and spell trees
+- No end game yet
+<!-- begin type marker -->
+- 108 x monsters
+- 52 x food
+- 24 x treasure
+- 23 x items
+- 18 x spells
+- 15 x weapons
+- 13 x buffs
+- 11 x skills
+- 7 x debuffs
+- 6 x staffs
+- 6 x shield
+- 6 x boots
+- 5 x rings
+- 5 x keys
+- 4 x traps
+- 4 x gauntlets
+- 4 x armor
+- 4 x amulets
+- 3 x mobs
+- 3 x doors
+- 3 x cloaks
+- 2 x potions
+- 1 x player
+<!-- end type marker -->
+
+<!-- begin monster type marker -->
+| Name               | Danger level |
+| :---                  | --- |
+| Ettin, Two Headed Giant        |        702 |
+| Reaper                         |        676 |
+| Flesh Golem                    |        600 |
+| Undead Bear                    |        520 |
+| Bearowl                        |        490 |
+| Fire Demon                     |        488 |
+| Cthulite                       |        482 |
+| Baby Kraken                    |        439 |
+| Yeti                           |        376 |
+| Colossal Scorpion              |        375 |
+| Fire Troll                     |        374 |
+| Stone Troll                    |        353 |
+| Giant Skeleton                 |        344 |
+| Dungeon Cleaner                |        317 |
+| Cement Man                     |        310 |
+| Mummy                          |        280 |
+| Hill Ogre                      |        223 |
+| Lesser Tentacleye              |        216 |
+| Bone Spider                    |        212 |
+| Iceman                         |        205 |
+| Gargoyle                       |        204 |
+| Giant Spider                   |        203 |
+| Unleashed Gargoyle             |        195 |
+| Flameskull                     |        175 |
+| Murder Bunny                   |        148 |
+| Giant Battle Duck              |        144 |
+| Mummy Necromancer              |        144 |
+| Giant Piranha                  |        141 |
+| Demon Goat                     |        139 |
+| Treasure Chest                 |        139 |
+| Mimic                          |        139 |
+| Portable Hole                  |        118 |
+| Mantisman                      |        109 |
+| Zorblin Priest                 |        108 |
+| White Assassin Duck            |        107 |
+| Cuddly Electric Eel            |        103 |
+| Gargoyle Baby                  |        102 |
+| Zorblin Leader                 |        100 |
+| Zorblin Pirate                 |        100 |
+| Noble Warrior                  |        100 |
+| Dreadfire Snake                |         93 |
+| Zoblin                         |         92 |
+| Dungeon Belcher                |         92 |
+| Flux Spider                    |         89 |
+| Zorblin Soldier                |         88 |
+| Huge Fluffy Bat                |         86 |
+| Teletoad                       |         83 |
+| Dogman                         |         82 |
+| Death Hornet                   |         80 |
+| Molekin                        |         79 |
+| Pyrolizard                     |         79 |
+| Zorblin Wizard                 |         76 |
+| Carcass Creeper                |         76 |
+| Lesser Zorblin                 |         76 |
+| Gaseous Gloat                  |         75 |
+| Gnome Knight                   |         74 |
+| Battle Goat                    |         72 |
+| Zorblin Eldster                |         72 |
+| Zorblin Necromancer            |         72 |
+| Deathstalker Scorpion          |         70 |
+| Kraken Tentacle                |         70 |
+| Rock Gnome                     |         70 |
+| Gnorf                          |         68 |
+| Piranha                        |         67 |
+| Flaming Skeleton               |         64 |
+| Cuddly Eel                     |         63 |
+| Slime Jumper                   |         62 |
+| Brown Extrovert Spider         |         62 |
+| Blinkcat                       |         59 |
+| Gnome Thief                    |         58 |
+| Onyx Widow                     |         57 |
+| Burning Skeleton               |         56 |
+| Narhornet                      |         54 |
+| Giant Dungeon Duck             |         53 |
+| Giant Rat                      |         52 |
+| Moresquito                     |         52 |
+| Meatfairy                      |         52 |
+| Centipede                      |         51 |
+| Scorpion                       |         49 |
+| Jackalope                      |         48 |
+| Goldfish                       |         47 |
+| Asp                            |         47 |
+| Clingy Leech                   |         47 |
+| Para Spider                    |         43 |
+| Large Rat                      |         42 |
+| Fluffy Bat                     |         41 |
+| Jade Viper                     |         41 |
+| Fluffy Bat Minion              |         40 |
+| Orb Of Fire                    |         39 |
+| Skeleton                       |         38 |
+| Orb Of Energy                  |         38 |
+| Sewer Crab                     |         37 |
+| Possessed Ghost                |         36 |
+| Ghost                          |         36 |
+| Fleshbee                       |         36 |
+| Sheep                          |         34 |
+| Possessed Skeleton             |         34 |
+| Skeleton                       |         34 |
+| Vampire Rose                   |         28 |
+| Baby Slime Jumper              |         28 |
+| Bloated Bloodbug               |         26 |
+| Lava Ant                       |         24 |
+<!-- end monster type marker -->
 
 Pixelart Screenshots
 --------------------

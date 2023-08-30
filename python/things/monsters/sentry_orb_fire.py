@@ -116,7 +116,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="sentry_orb_fire", text_long_name="sentry orb", text_short_name="sentry orb")
+    tp_init(name="sentry_orb_fire", text_long_name="orb of fire", text_short_name="sentry orb")
 
 
 init()

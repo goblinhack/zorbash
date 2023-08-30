@@ -514,6 +514,7 @@ static void usage(void)
   CON(" --no-debug                  -- Disable debugs.");
   CON(" ");
   CON("Testing options:");
+  CON(" --dump-monsters             -- Dump monster info");
   CON(" --test-biome-chasms         -- Test the chasms biome");
   CON(" --test-biome-flooded        -- Test the flooded biome");
   CON(" --test-biome-ice            -- Test the ice biome");
@@ -569,6 +570,11 @@ static void parse_args(int argc, char *argv[])
 
     if (! strcasecmp(argv[ i ], "--test-biome-ice") || ! strcasecmp(argv[ i ], "-test-biome-ice")) {
       g_opt_biome_ice = true;
+      continue;
+    }
+
+    if (! strcasecmp(argv[ i ], "--dump-monsters") || ! strcasecmp(argv[ i ], "-dump-monsters")) {
+      g_opt_dump_monsters = true;
       continue;
     }
 
@@ -851,7 +857,7 @@ int main(int argc, char *argv[])
   }
 
   {
-    if (! g_opt_tests) {
+    if (! g_opt_tests && ! g_opt_dump_monsters) {
       TRACE_NO_INDENT();
       if (! sdl_init()) {
         ERR("SDL: Init");
@@ -1103,6 +1109,14 @@ int main(int argc, char *argv[])
     }
     LOG("INI: Loaded");
     flush_the_console();
+
+    if (g_opt_dump_monsters) {
+      TRACE_NO_INDENT();
+      wid_toggle_hidden(wid_console_window);
+      tp_dump_monsters();
+      quit();
+      return 0;
+    }
   }
 
   //

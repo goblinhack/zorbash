@@ -8,12 +8,16 @@
 int Tp::get_danger_level(void)
 {
   TRACE_NO_INDENT();
-  int danger_level = 0;
-
-  danger_level = health_initial_max_roll() / 10;
 
   if (is_player()) {
-    danger_level /= 2;
+    return 100;
+  }
+
+  int danger_level = 0;
+  danger_level     = health_initial_max_roll();
+
+  if (is_player()) {
+    return 100;
   }
   if (is_undead()) {
     danger_level++;
@@ -82,7 +86,7 @@ int Tp::get_danger_level(void)
     danger_level *= 2;
   }
   if (is_able_to_teleport_attack()) {
-    danger_level *= 2;
+    danger_level += 100;
   }
 
   danger_level += dmg_melee_dice().max_roll();
@@ -113,7 +117,12 @@ int Tp::get_danger_level(void)
   danger_level += stat_def_bonus();
   danger_level += stat_dex_bonus();
   danger_level += move_speed() / 10;
-  danger_level *= dmg_num_of_attacks();
+  if (dmg_num_of_attacks()) {
+    //
+    // Sentry orbs shoot only
+    //
+    danger_level *= dmg_num_of_attacks();
+  }
 
   // CON("level %d", danger_level);
   return danger_level;
@@ -122,13 +131,14 @@ int Tp::get_danger_level(void)
 int Thing::danger_initial_level(void)
 {
   TRACE_NO_INDENT();
-  int danger_level = 0;
-
-  danger_level = health_max() / 10;
 
   if (is_player()) {
-    danger_level /= 2;
+    return 100;
   }
+
+  int danger_level = 0;
+  danger_level     = tp()->health_initial_max_roll();
+
   if (is_undead()) {
     danger_level++;
   }
@@ -208,7 +218,7 @@ int Thing::danger_initial_level(void)
     danger_level *= 2;
   }
   if (is_able_to_teleport_attack()) {
-    danger_level *= 2;
+    danger_level += 100;
   }
 
   danger_level += dmg_melee_dice().max_roll();
@@ -250,7 +260,12 @@ int Thing::danger_initial_level(void)
   danger_level += stat_def_bonus();
   danger_level += stat_dex_bonus();
   danger_level += move_speed() / 10;
-  danger_level *= dmg_num_of_attacks();
+  if (dmg_num_of_attacks()) {
+    //
+    // Sentry orbs shoot only
+    //
+    danger_level *= dmg_num_of_attacks();
+  }
 
   return danger_level;
 }
@@ -263,14 +278,15 @@ int Thing::danger_current_level(void)
     return 0;
   }
 
+  if (is_player()) {
+    return 100;
+  }
+
   int danger_level = 0;
 
-  danger_level = health() * 2;
-  con("danger %u ", danger_level);
+  danger_level = health_max();
+  danger_level += health() / 10;
 
-  if (is_player()) {
-    danger_level /= 2;
-  }
   if (is_undead()) {
     danger_level++;
   }
@@ -350,7 +366,7 @@ int Thing::danger_current_level(void)
     danger_level *= 2;
   }
   if (is_able_to_teleport_attack()) {
-    danger_level *= 2;
+    danger_level += 100;
   }
 
   danger_level += dmg_melee_dice().max_roll();
@@ -370,11 +386,6 @@ int Thing::danger_current_level(void)
   danger_level += dmg_water_dice().max_roll();
   danger_level += dmg_digest_dice().max_roll();
   danger_level += dmg_nat_att_dice().max_roll();
-
-  auto d         = dmg_nat_att_dice();
-  auto min_value = d.min_roll();
-  auto max_value = d.max_roll();
-  con("danger %u nat att %u %u..%u", danger_level, dmg_nat_att_dice().max_roll(), min_value, max_value);
 
   danger_level += aggression_pct() / 10;
 
@@ -402,8 +413,12 @@ int Thing::danger_current_level(void)
   danger_level += stat_def_bonus();
   danger_level += stat_dex_bonus();
   danger_level += move_speed() / 10;
-  danger_level *= dmg_num_of_attacks();
-  con("danger %u num att %u", danger_level, dmg_num_of_attacks());
+  if (dmg_num_of_attacks()) {
+    //
+    // Sentry orbs shoot only
+    //
+    danger_level *= dmg_num_of_attacks();
+  }
 
   return danger_level;
 }
@@ -489,8 +504,8 @@ int Thing::is_dangerous(Thingp it)
 
 const std::string Thing::danger_level_str(Thingp it)
 {
-  auto my_danger_level  = danger_current_level();
-  auto its_danger_level = it->danger_current_level();
+  auto my_danger_level  = danger_initial_level();
+  auto its_danger_level = it->danger_initial_level();
   auto delta            = its_danger_level - my_danger_level;
 
   if (delta > 20) {

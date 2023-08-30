@@ -730,6 +730,11 @@ PYTHONPATH=/${MINGW_TYPE}/lib/python${PYVER}/:/${MINGW_TYPE}/lib/python${PYVER}/
             cat ${TARGET}.sh
             chmod +x ${TARGET}.sh
             ;;
+        Linux)
+            ./build/list_monsts.sh ./${TARGET} do
+            log_info "Run:"
+            echo "  ./${TARGET}"
+            ;;
         *)
             log_info "Run:"
             echo "  ./${TARGET}"

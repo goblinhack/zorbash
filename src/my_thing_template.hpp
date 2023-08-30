@@ -3284,6 +3284,7 @@ void tp_fini(void);
 void tp_fixup(void);
 void tp_get_id(const std::string &tp_name, int *id);
 void tp_random_init(void);
+void tp_dump_monsters(void);
 
 enum {
   THING_DIR_NONE,

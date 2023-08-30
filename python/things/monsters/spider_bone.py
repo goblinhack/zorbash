@@ -59,7 +59,7 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_submergible(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
-    my.health_initial_dice(self, "4d25")
+    my.health_initial_dice(self, "5d8")
     my.hunger_clock_tick_freq(self, 50)
     my.hunger_is_insatiable(self, True)
     my.is_able_to_be_resurrected(self, True)
