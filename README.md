@@ -295,110 +295,110 @@ Content:
 <!-- end type marker -->
 
 <!-- begin monster type marker -->
-| Monster | Danger level | Natural Attack | Other damage types |
-| :--- | --- | --- | --- |
-| Ettin, Two Headed Giant | 382 | 1d10+4 |  |
-| Reaper | 356 | 1d6+6 |  |
-| Flesh Golem | 336 | 2d8+4 |  |
-| Fire Demon | 328 | 1d14+4 |  Fire:1d6+6 |
-| Cthulite | 322 | 1d14+4 |  Acid:2d6 Poison:2d12 |
-| Undead Bear | 320 | 2d8+5 |  Necrosis:1 |
-| Bearowl | 290 | 2d8+5 |  |
-| Baby Kraken | 279 |  |  Bite:3d8+10 Digest:1d40 Drown:1d20+10 |
-| Colossal Scorpion | 255 |  |  Bite:3d8+10 Digest:1d40 Poison:1d20+10 |
-| Yeti | 216 | 1d20+8 |  |
-| Fire Troll | 214 | 1d12+4 |  |
-| Dungeon Cleaner | 197 | 1d20 |  Digest:1d40 |
-| Stone Troll | 193 | 1d12+4 |  |
-| Giant Skeleton | 184 | 1d6 |  |
-| Mummy | 184 | 1d10+10 |  Stamina:1d10 |
-| Cement Man | 178 | 3d8+6 |  |
-| Giant Spider | 139 | 1d8+3 |  Poison:2d8 |
-| Lesser Tentacleye | 136 | 2d6 |  |
-| Bone Spider | 132 | 1d8+3 |  Poison:2d8 |
-| Murder Bunny | 132 | 1d8 |  Bite:1d6 Claw:1d4 |
-| Gargoyle | 128 | 2d6 |  |
-| Hill Ogre | 127 | 1d10+4 |  |
-| Iceman | 125 |  |  Cold:1d8 |
-| Flameskull | 121 | 2d6 |  |
-| Unleashed Gargoyle | 119 | 1d6+2 |  |
-| Portable Hole | 117 |  |  |
-| Mummy Necromancer | 112 | 1d6+10 |  Necrosis:1 |
-| Demon Goat | 103 | 2d6+2 |  |
-| Giant Piranha | 101 | 1d10+3 |  Bite:1d8 |
-| Noble Warrior | 100 | 1d3 |  |
-| Giant Battle Duck | 96 | 1d8+4 |  Bite:1d10 Claw:1d6 |
-| Mimic | 91 | 1d8+4 |  |
-| Treasure Chest | 91 | 1d8+4 |  |
-| Mantisman | 85 | 1d12+8 |  |
-| Zorblin Priest | 84 | 2d6+2 |  |
-| Cuddly Electric Eel | 83 | 1d3+1 |  Bite:1d4 |
-| Dreadfire Snake | 81 | 1d3+1 |  Poison:1d4 |
-| Flux Spider | 77 | 1d3 |  Necrosis:1 Poison:1d4 |
-| Zorblin Pirate | 76 | 1d4+2 |  |
-| Zorblin Leader | 76 | 1d4+2 |  |
-| White Assassin Duck | 75 | 1d6+1 |  Bite:1d8 Claw:1d6 |
-| Gaseous Gloat | 74 | 1d20 |  Digest:1d40 |
-| Gargoyle Baby | 74 | 1d6 |  |
-| Huge Fluffy Bat | 74 | 1d8+2 |  Bite:1d8 Claw:1d6 Poison:1d4+1 |
-| Death Hornet | 72 | 1d4+1 |  Bite:1d10 Poison:1d10 |
-| Dungeon Belcher | 72 | 1d20 |  Digest:1d10 |
-| Teletoad | 71 | 1d3+1 |  Poison:1d10 |
-| Zorblin Soldier | 70 | 1d4+2 |  |
-| Deathstalker Scorpion | 66 | 1d6+1 |  Poison:1d30 |
-| Lesser Zorblin | 64 | 1d4+2 |  |
-| Zorblin Wizard | 64 | 1d4+2 |  |
-| Dogman | 64 | 1d4+1 |  |
-| Molekin | 63 | 1d4+2 |  |
-| Pyrolizard | 63 | 1d6+1 |  |
-| Gnome Knight | 62 | 1d6+1 |  |
-| Zorblin Eldster | 62 | 1d4+2 |  |
-| Zorblin Necromancer | 62 | 1d4+2 |  |
-| Rock Gnome | 60 | 1d6+1 |  |
-| Zoblin | 60 | 1d6 |  |
-| Carcass Creeper | 60 | 1d6+2 |  Bite:1d8 Claw:1d6 Poison:1d10 |
-| Piranha | 59 | 1d4+3 |  Bite:1d4 |
-| Gnorf | 58 | 1d4+1 |  |
-| Brown Extrovert Spider | 58 | 1d3 |  Necrosis:1 Poison:1d4 |
-| Battle Goat | 56 | 1d6+2 |  |
-| Flaming Skeleton | 56 | 1d4 |  |
-| Slime Jumper | 52 | 2d6+2 |  Acid:1d6 |
-| Burning Skeleton | 52 | 1d3 |  |
-| Gnome Thief | 52 | 1d2+1 |  |
-| Onyx Widow | 51 | 1d3 |  Poison:1d4 |
-| Kraken Tentacle | 50 | 1d3+1 |  Poison:1d8+1 |
-| Meatfairy | 50 | 1d3+1 |  Bite:1d4 Claw:1d2 |
-| Moresquito | 48 | 1d3+1 |  Bite:1d4 Claw:1d3 Poison:1d4 Stamina:1d4 |
-| Blinkcat | 47 | 1d3+1 |  |
-| Narhornet | 46 | 1d6+1 |  Bite:1d4 Poison:1d8 |
-| Scorpion | 45 | 1d3+1 |  Poison:1d12 |
-| Giant Rat | 44 | 1d6+2 |  |
-| Centipede | 43 | 1d4+2 |  Bite:1d8 Claw:1d4 Poison:1d4 |
-| Asp | 43 | 1d3+1 |  Poison:1d3+1 |
-| Cuddly Eel | 43 | 1d3+1 |  Bite:1d4 |
-| Para Spider | 39 | 1d3 |  Poison:1d4 |
-| Fluffy Bat Minion | 39 | 1 |  Bite:1d3 Claw:1d2 |
-| Large Rat | 38 | 1d4+2 |  |
-| Jackalope | 38 | 1d6 |  |
-| Orb Of Fire | 38 |  |  |
-| Fluffy Bat | 37 | 1 |  Bite:1d3 Claw:1d2 |
-| Orb Of Energy | 37 |  |  |
-| Giant Dungeon Duck | 37 | 1d3+1 |  Bite:1d4 Claw:1d3 |
-| Ghost | 35 |  |  Cold:1 |
-| Possessed Ghost | 35 |  |  Cold:1 |
-| Clingy Leech | 35 | 1d3+1 |  Bite:1d4 Stamina:1d4 |
-| Jade Viper | 35 | 1d3+1 |  Poison:1d2 |
-| Fleshbee | 32 | 1d3+1 |  Bite:1d4 Claw:1d3 |
-| Skeleton | 32 | 1d3 |  |
-| Sewer Crab | 31 | 1d3+1 |  |
-| Skeleton | 30 | 1d3 |  |
-| Possessed Skeleton | 30 | 1d3 |  |
-| Baby Slime Jumper | 27 | 1 |  Acid:1d3 |
-| Goldfish | 27 | 1 |  Bite:1d1+1 |
-| Sheep | 26 | 1d3+2 |  |
-| Vampire Rose | 25 | 1d6 |  Digest:1d5 |
-| Bloated Bloodbug | 24 | 1d2+1 |  Bite:1d2 Stamina:1d1 |
-| Lava Ant | 22 | 1d3+1 |  Bite:1d4 Claw:1d3 Fire:1d3+1 |
+| Monster | Danger | Nat Attack | # Attacks | Other damage types |
+| :--- | --- | --- | --- | --- |
+| Ettin, Two Headed Giant | 382 | 2 | 1d10+4 |  |
+| Reaper | 356 | 1 | 1d6+6 |  |
+| Flesh Golem | 336 | 2 | 2d8+4 |  |
+| Fire Demon | 328 | 2 | 1d14+4 |  Fire:1d6+6 |
+| Cthulite | 322 | 2 | 1d14+4 |  Acid:2d6 Poison:2d12 |
+| Undead Bear | 320 | 2 | 2d8+5 |  Necrosis:1 |
+| Bearowl | 290 | 2 | 2d8+5 |  |
+| Baby Kraken | 279 | 1 |  |  Bite:3d8+10 Digest:1d40 Drown:1d20+10 |
+| Colossal Scorpion | 255 | 1 |  |  Bite:3d8+10 Digest:1d40 Poison:1d20+10 |
+| Yeti | 216 | 1 | 1d20+8 |  |
+| Fire Troll | 214 | 1 | 1d12+4 |  |
+| Dungeon Cleaner | 197 | 1 | 1d20 |  Digest:1d40 |
+| Stone Troll | 193 | 1 | 1d12+4 |  |
+| Giant Skeleton | 184 | 1 | 1d6 |  |
+| Mummy | 184 | 2 | 1d10+10 |  Stamina:1d10 |
+| Cement Man | 178 | 1 | 3d8+6 |  |
+| Giant Spider | 139 | 1 | 1d8+3 |  Poison:2d8 |
+| Lesser Tentacleye | 136 | 1 | 2d6 |  |
+| Bone Spider | 132 | 1 | 1d8+3 |  Poison:2d8 |
+| Murder Bunny | 132 | 2 | 1d8 |  Bite:1d6 Claw:1d4 |
+| Gargoyle | 128 | 1 | 2d6 |  |
+| Hill Ogre | 127 | 1 | 1d10+4 |  |
+| Iceman | 125 | 1 |  |  Cold:1d8 |
+| Flameskull | 121 | 1 | 2d6 |  |
+| Unleashed Gargoyle | 119 | 1 | 1d6+2 |  |
+| Portable Hole | 117 | 0 |  |  |
+| Mummy Necromancer | 112 | 1 | 1d6+10 |  Necrosis:1 |
+| Demon Goat | 103 | 1 | 2d6+2 |  |
+| Giant Piranha | 101 | 1 | 1d10+3 |  Bite:1d8 |
+| Noble Warrior | 100 | 1 | 1d3 |  |
+| Giant Battle Duck | 96 | 1 | 1d8+4 |  Bite:1d10 Claw:1d6 |
+| Mimic | 91 | 1 | 1d8+4 |  |
+| Treasure Chest | 91 | 1 | 1d8+4 |  |
+| Mantisman | 85 | 1 | 1d12+8 |  |
+| Zorblin Priest | 84 | 1 | 2d6+2 |  |
+| Cuddly Electric Eel | 83 | 1 | 1d3+1 |  Bite:1d4 |
+| Dreadfire Snake | 81 | 1 | 1d3+1 |  Poison:1d4 |
+| Flux Spider | 77 | 1 | 1d3 |  Necrosis:1 Poison:1d4 |
+| Zorblin Pirate | 76 | 1 | 1d4+2 |  |
+| Zorblin Leader | 76 | 1 | 1d4+2 |  |
+| White Assassin Duck | 75 | 1 | 1d6+1 |  Bite:1d8 Claw:1d6 |
+| Gaseous Gloat | 74 | 1 | 1d20 |  Digest:1d40 |
+| Gargoyle Baby | 74 | 1 | 1d6 |  |
+| Huge Fluffy Bat | 74 | 1 | 1d8+2 |  Bite:1d8 Claw:1d6 Poison:1d4+1 |
+| Death Hornet | 72 | 1 | 1d4+1 |  Bite:1d10 Poison:1d10 |
+| Dungeon Belcher | 72 | 1 | 1d20 |  Digest:1d10 |
+| Teletoad | 71 | 1 | 1d3+1 |  Poison:1d10 |
+| Zorblin Soldier | 70 | 1 | 1d4+2 |  |
+| Deathstalker Scorpion | 66 | 1 | 1d6+1 |  Poison:1d30 |
+| Lesser Zorblin | 64 | 1 | 1d4+2 |  |
+| Zorblin Wizard | 64 | 1 | 1d4+2 |  |
+| Dogman | 64 | 1 | 1d4+1 |  |
+| Molekin | 63 | 1 | 1d4+2 |  |
+| Pyrolizard | 63 | 1 | 1d6+1 |  |
+| Gnome Knight | 62 | 1 | 1d6+1 |  |
+| Zorblin Eldster | 62 | 1 | 1d4+2 |  |
+| Zorblin Necromancer | 62 | 1 | 1d4+2 |  |
+| Rock Gnome | 60 | 1 | 1d6+1 |  |
+| Zoblin | 60 | 1 | 1d6 |  |
+| Carcass Creeper | 60 | 1 | 1d6+2 |  Bite:1d8 Claw:1d6 Poison:1d10 |
+| Piranha | 59 | 1 | 1d4+3 |  Bite:1d4 |
+| Gnorf | 58 | 1 | 1d4+1 |  |
+| Brown Extrovert Spider | 58 | 1 | 1d3 |  Necrosis:1 Poison:1d4 |
+| Battle Goat | 56 | 1 | 1d6+2 |  |
+| Flaming Skeleton | 56 | 1 | 1d4 |  |
+| Slime Jumper | 52 | 1 | 2d6+2 |  Acid:1d6 |
+| Burning Skeleton | 52 | 1 | 1d3 |  |
+| Gnome Thief | 52 | 1 | 1d2+1 |  |
+| Onyx Widow | 51 | 1 | 1d3 |  Poison:1d4 |
+| Kraken Tentacle | 50 | 1 | 1d3+1 |  Poison:1d8+1 |
+| Meatfairy | 50 | 1 | 1d3+1 |  Bite:1d4 Claw:1d2 |
+| Moresquito | 48 | 1 | 1d3+1 |  Bite:1d4 Claw:1d3 Poison:1d4 Stamina:1d4 |
+| Blinkcat | 47 | 1 | 1d3+1 |  |
+| Narhornet | 46 | 1 | 1d6+1 |  Bite:1d4 Poison:1d8 |
+| Scorpion | 45 | 1 | 1d3+1 |  Poison:1d12 |
+| Giant Rat | 44 | 1 | 1d6+2 |  |
+| Centipede | 43 | 1 | 1d4+2 |  Bite:1d8 Claw:1d4 Poison:1d4 |
+| Asp | 43 | 1 | 1d3+1 |  Poison:1d3+1 |
+| Cuddly Eel | 43 | 1 | 1d3+1 |  Bite:1d4 |
+| Para Spider | 39 | 1 | 1d3 |  Poison:1d4 |
+| Fluffy Bat Minion | 39 | 1 | 1 |  Bite:1d3 Claw:1d2 |
+| Large Rat | 38 | 1 | 1d4+2 |  |
+| Jackalope | 38 | 1 | 1d6 |  |
+| Orb Of Fire | 38 | 0 |  |  |
+| Fluffy Bat | 37 | 1 | 1 |  Bite:1d3 Claw:1d2 |
+| Orb Of Energy | 37 | 0 |  |  |
+| Giant Dungeon Duck | 37 | 1 | 1d3+1 |  Bite:1d4 Claw:1d3 |
+| Ghost | 35 | 1 |  |  Cold:1 |
+| Possessed Ghost | 35 | 1 |  |  Cold:1 |
+| Clingy Leech | 35 | 1 | 1d3+1 |  Bite:1d4 Stamina:1d4 |
+| Jade Viper | 35 | 1 | 1d3+1 |  Poison:1d2 |
+| Fleshbee | 32 | 1 | 1d3+1 |  Bite:1d4 Claw:1d3 |
+| Skeleton | 32 | 1 | 1d3 |  |
+| Sewer Crab | 31 | 1 | 1d3+1 |  |
+| Skeleton | 30 | 1 | 1d3 |  |
+| Possessed Skeleton | 30 | 1 | 1d3 |  |
+| Baby Slime Jumper | 27 | 1 | 1 |  Acid:1d3 |
+| Goldfish | 27 | 1 | 1 |  Bite:1d1+1 |
+| Sheep | 26 | 1 | 1d3+2 |  |
+| Vampire Rose | 25 | 1 | 1d6 |  Digest:1d5 |
+| Bloated Bloodbug | 24 | 1 | 1d2+1 |  Bite:1d2 Stamina:1d1 |
+| Lava Ant | 22 | 1 | 1d3+1 |  Bite:1d4 Claw:1d3 Fire:1d3+1 |
 <!-- end monster type marker -->
 
 Pixelart Screenshots
