@@ -442,10 +442,9 @@ void tp_dump_monsters(void)
   // | git status   | git status     | git status    |
   // | git diff     | git diff       | git diff      |
 
-  printf("DUMP: | %s | %s | %s | %s | %s |\n", "Monster", "Danger level", "Dmg:Nat Attack", "Dmg:Nat Attack Type",
-         "Dmg:Other");
+  printf("DUMP: | %s | %s | %s | %s |\n", "Monster", "Danger level", "Natural Attack", "Other damage types");
 
-  printf("DUMP: | %s | %s | %s | %s | %s |\n", ":---", "---", "---", "---", "---");
+  printf("DUMP: | %s | %s | %s | %s |\n", ":---", "---", "---", "---");
 
   std::vector< Tpp > m;
 
@@ -536,7 +535,7 @@ void tp_dump_monsters(void)
       dmg_str += "Water:";
       dmg_str += tp->dmg_water_dice_str();
     }
-    printf("DUMP: | %s | %u | %s | %s | %s |\n", capitalise(tp->text_long_name()).c_str(), tp->get_danger_level(),
-           tp->dmg_nat_att_dice_str().c_str(), tp->dmg_nat_att_type().c_str(), dmg_str.c_str());
+    printf("DUMP: | %s | %u | %s | %s |\n", capitalise(tp->text_long_name()).c_str(), tp->get_danger_level(),
+           tp->dmg_nat_att_dice_str().c_str(), dmg_str.c_str());
   }
 }
