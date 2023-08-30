@@ -42,7 +42,7 @@ def tp_init(name, text_long_name):
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 100)
     my.distance_vision(self, 3)
-    my.dmg_bite_dice(self, "3d8+10")
+    my.dmg_bite_dice(self, "2d8+6")
     my.dmg_chance_d1000_bite(self, 0, 200)
     my.dmg_chance_d1000_digest(self, 0, 200)
     my.dmg_chance_d1000_poison(self, 0, 800)

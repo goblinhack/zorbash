@@ -46,7 +46,7 @@ def tp_init(name, text_long_name):
     my.distance_avoid(self, 4)
     my.distance_vision(self, 10)
     my.dmg_chance_d1000_nat_att(self, 0, 100)
-    my.dmg_nat_att_dice(self, "1d20+8")
+    my.dmg_nat_att_dice(self, "1d12+8")
     my.dmg_nat_att_type(self, "claw")
     my.environ_hates_fire(self, 100)
     my.gfx_anim_use(self, "attack_red")

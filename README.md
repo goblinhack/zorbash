@@ -276,12 +276,12 @@ Bestiary
 | Cthulite | 322 | 1d14+4 | 2 |  Acid:2d6 Poison:2d12 |
 | Undead Bear | 320 | 2d8+5 | 2 |  Necrosis:1 |
 | Bearowl | 290 | 2d8+5 | 2 |  |
-| Colossal Scorpion | 255 |  | 1 |  Bite:3d8+10 Digest:1d40 Poison:1d20+10 |
 | Baby Kraken | 249 |  | 1 |  Bite:3d8+10 Digest:1d20 Drown:1d20 |
-| Yeti | 216 | 1d20+8 | 1 |  |
+| Colossal Scorpion | 243 |  | 1 |  Bite:2d8+6 Digest:1d40 Poison:1d20+10 |
 | Fire Troll | 214 | 1d12+4 | 1 |  |
-| Dungeon Cleaner | 197 | 1d20 | 1 |  Digest:1d40 |
+| Yeti | 208 | 1d12+8 | 1 |  |
 | Stone Troll | 193 | 1d12+4 | 1 |  |
+| Dungeon Cleaner | 187 | 1d10 | 1 |  Digest:1d40 |
 | Giant Skeleton | 184 | 1d6 | 1 |  |
 | Mummy | 184 | 1d10+10 | 2 |  Stamina:1d10 |
 | Cement Man | 178 | 3d8+6 | 1 |  |
