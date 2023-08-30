@@ -295,7 +295,7 @@ Content:
 <!-- end type marker -->
 
 <!-- begin monster type marker -->
-| Monster | Danger | Nat Attack | # Attacks | Other damage types |
+| Monster | Danger level | Natural attack | # Attacks | Other damage types |
 | :--- | --- | --- | --- | --- |
 | Ettin, Two Headed Giant | 382 | 1d10+4 | 2 |  |
 | Reaper | 356 | 1d6+6 | 1 |  |
