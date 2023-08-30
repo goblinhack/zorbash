@@ -276,12 +276,12 @@ Bestiary
 | Cthulite | 322 | 1d14+4 | 2 |  Acid:2d6 Poison:2d12 |
 | Undead Bear | 320 | 2d8+5 | 2 |  Necrotic:1 |
 | Bearowl | 290 | 2d8+5 | 2 |  |
-| Baby Kraken | 249 |  | 1 |  Bite:3d8+10 Digest:1d20 Drown:1d20 |
-| Colossal Scorpion | 243 |  | 1 |  Bite:2d8+6 Digest:1d40 Poison:1d20+10 |
+| Baby Kraken | 249 |  | 1 |  Bite:3d8+10 Digestive juices:1d20 Drown:1d20 |
+| Colossal Scorpion | 243 |  | 1 |  Bite:2d8+6 Digestive juices:1d40 Poison:1d20+10 |
 | Fire Troll | 214 | 1d12+4 | 1 |  |
 | Yeti | 208 | 1d12+8 | 1 |  |
 | Stone Troll | 193 | 1d12+4 | 1 |  |
-| Dungeon Cleaner | 187 | 1d10 | 1 |  Digest:1d40 |
+| Dungeon Cleaner | 187 | 1d10 | 1 |  Digestive juices:1d40 |
 | Giant Skeleton | 184 | 1d6 | 1 |  |
 | Mummy | 184 | 1d10+10 | 2 |  Stamina drain:1d10 |
 | Cement Man | 178 | 3d8+6 | 1 |  |
@@ -311,8 +311,8 @@ Bestiary
 | Zorblin Leader | 76 | 1d4+2 | 1 |  |
 | White Assassin Duck | 75 | 1d6+1 | 1 |  Bite:1d8 Claw:1d6 |
 | Gargoyle Baby | 74 | 1d6 | 1 |  |
-| Gaseous Gloat | 74 | 1d20 | 1 |  Digest:1d40 |
-| Dungeon Belcher | 72 | 1d20 | 1 |  Digest:1d10 |
+| Gaseous Gloat | 74 | 1d20 | 1 |  Digestive juices:1d40 |
+| Dungeon Belcher | 72 | 1d20 | 1 |  Digestive juices:1d10 |
 | Death Hornet | 72 | 1d4+1 | 1 |  Bite:1d10 Poison:1d10 |
 | Teletoad | 71 | 1d3+1 | 1 |  Poison:1d10 |
 | Zorblin Soldier | 70 | 1d4+2 | 1 |  |
@@ -369,7 +369,7 @@ Bestiary
 | Goldfish | 27 | 1 | 1 |  Bite:1d1+1 |
 | Sheep | 26 | 1d3+2 | 1 |  |
 | Bloated Bloodbug | 24 | 1d2+1 | 1 |  Bite:1d2 Stamina drain:1d1 |
-| Vampire Rose | 22 | 1d3 | 1 |  Digest:1d5 |
+| Vampire Rose | 22 | 1d3 | 1 |  Digestive juices:1d5 |
 | Lava Ant | 22 | 1d3+1 | 1 |  Bite:1d4 Claw:1d3 Fire:1d3+1 |
 <!-- end monster type marker -->
 
