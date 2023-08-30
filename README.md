@@ -166,7 +166,7 @@
 <!--                                                                                                                                              -->
 
 <p align="center">
-<img alt="Pixel art" src="pics/banner.png" width="100%">
+<img alt="Pixel art" src="data/pics/banner.png" width="100%">
 </p>
 
 Welcome to the lair of the dread tentacleye, Zorbash. Collect the crystals of Zorb and confront Zorbash to win.
@@ -181,87 +181,87 @@ Pixel art and ascii mode options
 Press TAB to switch between modes during the game.
 
 <p align="center">
-<img alt="Pixel art" src="pics/pixelart/screenshot.1.png" width="45%">
+<img alt="Pixel art" src="data/pics/pixelart/screenshot.1.png" width="45%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-<img alt="Ascii art" src="pics/ascii/screenshot.1.png" width="45%">
+<img alt="Ascii art" src="data/pics/ascii/screenshot.1.png" width="45%">
 </p>
 
 <p align="center">
-<img alt="Pixel art" src="pics/pixelart/screenshot.2.png" width="45%">
+<img alt="Pixel art" src="data/pics/pixelart/screenshot.2.png" width="45%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-<img alt="Ascii art" src="pics/ascii/screenshot.2.png" width="45%">
+<img alt="Ascii art" src="data/pics/ascii/screenshot.2.png" width="45%">
 </p>
 
 <p align="center">
-<img alt="Pixel art" src="pics/pixelart/screenshot.3.png" width="45%">
+<img alt="Pixel art" src="data/pics/pixelart/screenshot.3.png" width="45%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-<img alt="Ascii art" src="pics/ascii/screenshot.3.png" width="45%">
+<img alt="Ascii art" src="data/pics/ascii/screenshot.3.png" width="45%">
 </p>
 
 <p align="center">
-<img alt="Pixel art" src="pics/pixelart/screenshot.4.png" width="45%">
+<img alt="Pixel art" src="data/pics/pixelart/screenshot.4.png" width="45%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-<img alt="Ascii art" src="pics/ascii/screenshot.4.png" width="45%">
+<img alt="Ascii art" src="data/pics/ascii/screenshot.4.png" width="45%">
 </p>
 
 <p align="center">
-<img alt="Pixel art" src="pics/pixelart/screenshot.5.png" width="45%">
+<img alt="Pixel art" src="data/pics/pixelart/screenshot.5.png" width="45%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-<img alt="Ascii art" src="pics/ascii/screenshot.5.png" width="45%">
+<img alt="Ascii art" src="data/pics/ascii/screenshot.5.png" width="45%">
 </p>
 
 <p align="center">
-<img alt="Pixel art" src="pics/pixelart/screenshot.6.png" width="45%">
+<img alt="Pixel art" src="data/pics/pixelart/screenshot.6.png" width="45%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-<img alt="Ascii art" src="pics/ascii/screenshot.6.png" width="45%">
+<img alt="Ascii art" src="data/pics/ascii/screenshot.6.png" width="45%">
 </p>
 
 <p align="center">
-<img alt="Pixel art" src="pics/pixelart/screenshot.7.png" width="45%">
+<img alt="Pixel art" src="data/pics/pixelart/screenshot.7.png" width="45%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-<img alt="Ascii art" src="pics/ascii/screenshot.7.png" width="45%">
+<img alt="Ascii art" src="data/pics/ascii/screenshot.7.png" width="45%">
 </p>
 
 <p align="center">
-<img alt="Pixel art" src="pics/pixelart/screenshot.8.png" width="45%">
+<img alt="Pixel art" src="data/pics/pixelart/screenshot.8.png" width="45%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-<img alt="Ascii art" src="pics/ascii/screenshot.8.png" width="45%">
+<img alt="Ascii art" src="data/pics/ascii/screenshot.8.png" width="45%">
 </p>
 
 <p align="center">
-<img alt="Pixel art" src="pics/pixelart/screenshot.9.png" width="45%">
+<img alt="Pixel art" src="data/pics/pixelart/screenshot.9.png" width="45%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-<img alt="Ascii art" src="pics/ascii/screenshot.9.png" width="45%">
+<img alt="Ascii art" src="data/pics/ascii/screenshot.9.png" width="45%">
 </p>
 
 <p align="center">
-<img alt="Pixel art" src="pics/pixelart/screenshot.10.png" width="45%">
+<img alt="Pixel art" src="data/pics/pixelart/screenshot.10.png" width="45%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-<img alt="Ascii art" src="pics/ascii/screenshot.10.png" width="45%">
+<img alt="Ascii art" src="data/pics/ascii/screenshot.10.png" width="45%">
 </p>
 
 <p align="center">
-<img alt="Pixel art" src="pics/pixelart/screenshot.11.png" width="45%">
+<img alt="Pixel art" src="data/pics/pixelart/screenshot.11.png" width="45%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-<img alt="Ascii art" src="pics/ascii/screenshot.11.png" width="45%">
+<img alt="Ascii art" src="data/pics/ascii/screenshot.11.png" width="45%">
 </p>
 
 <p align="center">
-<img alt="Pixel art" src="pics/pixelart/screenshot.12.png" width="45%">
+<img alt="Pixel art" src="data/pics/pixelart/screenshot.12.png" width="45%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-<img alt="Ascii art" src="pics/ascii/screenshot.12.png" width="45%">
+<img alt="Ascii art" src="data/pics/ascii/screenshot.12.png" width="45%">
 </p>
 
 <p align="center">
-<img alt="Pixel art" src="pics/pixelart/screenshot.13.png" width="45%">
+<img alt="Pixel art" src="data/pics/pixelart/screenshot.13.png" width="45%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-<img alt="Ascii art" src="pics/ascii/screenshot.13.png" width="45%">
+<img alt="Ascii art" src="data/pics/ascii/screenshot.13.png" width="45%">
 </p>
 
 <p align="center">
-<img alt="Pixel art" src="pics/pixelart/screenshot.14.png" width="45%">
+<img alt="Pixel art" src="data/pics/pixelart/screenshot.14.png" width="45%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-<img alt="Ascii art" src="pics/ascii/screenshot.14.png" width="45%">
+<img alt="Ascii art" src="data/pics/ascii/screenshot.14.png" width="45%">
 </p>
 
 Bestiary
@@ -376,46 +376,46 @@ Bestiary
 Pixelart Screenshots
 --------------------
 
-![Alt text](pics/pixelart/screenshot.1.png?raw=true "")
-![Alt text](pics/pixelart/screenshot.2.png?raw=true "")
-![Alt text](pics/pixelart/screenshot.3.png?raw=true "")
-![Alt text](pics/pixelart/screenshot.4.png?raw=true "")
-![Alt text](pics/pixelart/screenshot.5.png?raw=true "")
-![Alt text](pics/pixelart/screenshot.6.png?raw=true "")
-![Alt text](pics/pixelart/screenshot.7.png?raw=true "")
-![Alt text](pics/pixelart/screenshot.8.png?raw=true "")
-![Alt text](pics/pixelart/screenshot.9.png?raw=true "")
-![Alt text](pics/pixelart/screenshot.10.png?raw=true "")
-![Alt text](pics/pixelart/screenshot.11.png?raw=true "")
-![Alt text](pics/pixelart/screenshot.12.png?raw=true "")
-![Alt text](pics/pixelart/screenshot.13.png?raw=true "")
-![Alt text](pics/pixelart/screenshot.14.png?raw=true "")
-![Alt text](pics/pixelart/screenshot.15.png?raw=true "")
-![Alt text](pics/pixelart/screenshot.16.png?raw=true "")
-![Alt text](pics/pixelart/screenshot.17.png?raw=true "")
-![Alt text](pics/pixelart/screenshot.18.png?raw=true "")
-![Alt text](pics/pixelart/screenshot.19.png?raw=true "")
-![Alt text](pics/pixelart/screenshot.20.png?raw=true "")
-![Alt text](pics/pixelart/screenshot.21.png?raw=true "")
-![Alt text](pics/pixelart/screenshot.22.png?raw=true "")
+![Alt text](data/pics/pixelart/screenshot.1.png?raw=true "")
+![Alt text](data/pics/pixelart/screenshot.2.png?raw=true "")
+![Alt text](data/pics/pixelart/screenshot.3.png?raw=true "")
+![Alt text](data/pics/pixelart/screenshot.4.png?raw=true "")
+![Alt text](data/pics/pixelart/screenshot.5.png?raw=true "")
+![Alt text](data/pics/pixelart/screenshot.6.png?raw=true "")
+![Alt text](data/pics/pixelart/screenshot.7.png?raw=true "")
+![Alt text](data/pics/pixelart/screenshot.8.png?raw=true "")
+![Alt text](data/pics/pixelart/screenshot.9.png?raw=true "")
+![Alt text](data/pics/pixelart/screenshot.10.png?raw=true "")
+![Alt text](data/pics/pixelart/screenshot.11.png?raw=true "")
+![Alt text](data/pics/pixelart/screenshot.12.png?raw=true "")
+![Alt text](data/pics/pixelart/screenshot.13.png?raw=true "")
+![Alt text](data/pics/pixelart/screenshot.14.png?raw=true "")
+![Alt text](data/pics/pixelart/screenshot.15.png?raw=true "")
+![Alt text](data/pics/pixelart/screenshot.16.png?raw=true "")
+![Alt text](data/pics/pixelart/screenshot.17.png?raw=true "")
+![Alt text](data/pics/pixelart/screenshot.18.png?raw=true "")
+![Alt text](data/pics/pixelart/screenshot.19.png?raw=true "")
+![Alt text](data/pics/pixelart/screenshot.20.png?raw=true "")
+![Alt text](data/pics/pixelart/screenshot.21.png?raw=true "")
+![Alt text](data/pics/pixelart/screenshot.22.png?raw=true "")
 
 Ascii Screenshots
 -----------------
 
-![Alt text](pics/ascii/screenshot.1.png?raw=true "")
-![Alt text](pics/ascii/screenshot.2.png?raw=true "")
-![Alt text](pics/ascii/screenshot.3.png?raw=true "")
-![Alt text](pics/ascii/screenshot.4.png?raw=true "")
-![Alt text](pics/ascii/screenshot.5.png?raw=true "")
-![Alt text](pics/ascii/screenshot.6.png?raw=true "")
-![Alt text](pics/ascii/screenshot.7.png?raw=true "")
-![Alt text](pics/ascii/screenshot.8.png?raw=true "")
-![Alt text](pics/ascii/screenshot.9.png?raw=true "")
-![Alt text](pics/ascii/screenshot.10.png?raw=true "")
-![Alt text](pics/ascii/screenshot.11.png?raw=true "")
-![Alt text](pics/ascii/screenshot.12.png?raw=true "")
-![Alt text](pics/ascii/screenshot.13.png?raw=true "")
-![Alt text](pics/ascii/screenshot.14.png?raw=true "")
+![Alt text](data/pics/ascii/screenshot.1.png?raw=true "")
+![Alt text](data/pics/ascii/screenshot.2.png?raw=true "")
+![Alt text](data/pics/ascii/screenshot.3.png?raw=true "")
+![Alt text](data/pics/ascii/screenshot.4.png?raw=true "")
+![Alt text](data/pics/ascii/screenshot.5.png?raw=true "")
+![Alt text](data/pics/ascii/screenshot.6.png?raw=true "")
+![Alt text](data/pics/ascii/screenshot.7.png?raw=true "")
+![Alt text](data/pics/ascii/screenshot.8.png?raw=true "")
+![Alt text](data/pics/ascii/screenshot.9.png?raw=true "")
+![Alt text](data/pics/ascii/screenshot.10.png?raw=true "")
+![Alt text](data/pics/ascii/screenshot.11.png?raw=true "")
+![Alt text](data/pics/ascii/screenshot.12.png?raw=true "")
+![Alt text](data/pics/ascii/screenshot.13.png?raw=true "")
+![Alt text](data/pics/ascii/screenshot.14.png?raw=true "")
 
 How to build
 ------------
