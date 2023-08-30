@@ -47,7 +47,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.dmg_chance_d1000_digest(self, 0, 1000)
     my.dmg_chance_d1000_nat_att(self, 0, 1000)
     my.dmg_digest_dice(self, "1d5")
-    my.dmg_nat_att_dice(self, "1d6")
+    my.dmg_nat_att_dice(self, "1d3")
     my.dmg_nat_att_type(self, "bleed")
     my.dmg_received_doubled_from_fire(self, True)
     my.environ_hates_acid(self, True)

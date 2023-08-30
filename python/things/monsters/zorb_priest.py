@@ -17,7 +17,7 @@ def tp_init(name, text_long_name):
     # begin sort marker
     my.chance_d1000_shooting(self, 500)
     my.distance_avoid(self, 5)
-    my.dmg_nat_att_dice(self, "2d6+2")
+    my.dmg_nat_att_dice(self, "1d6+2")
     my.dmg_nat_att_type(self, "punch")
     my.gfx_anim_use(self, "attack_punch")
     my.health_initial_dice(self, "2d10+4")

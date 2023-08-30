@@ -44,7 +44,7 @@ def tp_init(name, text_long_name):
     my.dmg_chance_d1000_bite(self, 0, 500)
     my.dmg_chance_d1000_nat_att(self, 0, 900)
     my.dmg_chance_d1000_poison(self, 0, 900)
-    my.dmg_nat_att_dice(self, "1d6+1")
+    my.dmg_nat_att_dice(self, "1d4+1")
     my.dmg_nat_att_type(self, "sting")
     my.dmg_poison_dice(self, "1d8")
     my.gfx_anim_use(self, "attack_red")

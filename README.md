@@ -264,36 +264,8 @@ Press TAB to switch between modes during the game.
 <img alt="Ascii art" src="pics/ascii/screenshot.14.png" width="45%">
 </p>
 
-Content:
-- Dungeon, sewer, swamp, ice, lava, chasms and flooded dungeon biomes
-- Multiple skill and spell trees
-- No end game yet
-<!-- begin type marker -->
-- 108 x monsters
-- 52 x food
-- 24 x treasure
-- 23 x items
-- 18 x spells
-- 15 x weapons
-- 13 x buffs
-- 11 x skills
-- 7 x debuffs
-- 6 x staffs
-- 6 x shield
-- 6 x boots
-- 5 x rings
-- 5 x keys
-- 4 x traps
-- 4 x gauntlets
-- 4 x armor
-- 4 x amulets
-- 3 x mobs
-- 3 x doors
-- 3 x cloaks
-- 2 x potions
-- 1 x player
-<!-- end type marker -->
-
+Bestiary
+--------
 <!-- begin monster type marker -->
 | Monster | Danger level | Natural attack | # Attacks | Other damage types |
 | :--- | --- | --- | --- | --- |
@@ -304,8 +276,8 @@ Content:
 | Cthulite | 322 | 1d14+4 | 2 |  Acid:2d6 Poison:2d12 |
 | Undead Bear | 320 | 2d8+5 | 2 |  Necrosis:1 |
 | Bearowl | 290 | 2d8+5 | 2 |  |
-| Baby Kraken | 279 |  | 1 |  Bite:3d8+10 Digest:1d40 Drown:1d20+10 |
 | Colossal Scorpion | 255 |  | 1 |  Bite:3d8+10 Digest:1d40 Poison:1d20+10 |
+| Baby Kraken | 249 |  | 1 |  Bite:3d8+10 Digest:1d20 Drown:1d20 |
 | Yeti | 216 | 1d20+8 | 1 |  |
 | Fire Troll | 214 | 1d12+4 | 1 |  |
 | Dungeon Cleaner | 197 | 1d20 | 1 |  Digest:1d40 |
@@ -323,37 +295,37 @@ Content:
 | Flameskull | 121 | 2d6 | 1 |  |
 | Unleashed Gargoyle | 119 | 1d6+2 | 1 |  |
 | Portable Hole | 117 |  | 0 |  |
-| Mummy Necromancer | 112 | 1d6+10 | 1 |  Necrosis:1 |
+| Mummy Necromancer | 104 | 1d6+2 | 1 |  Necrosis:1 |
 | Demon Goat | 103 | 2d6+2 | 1 |  |
 | Giant Piranha | 101 | 1d10+3 | 1 |  Bite:1d8 |
 | Noble Warrior | 100 | 1d3 | 1 |  |
 | Giant Battle Duck | 96 | 1d8+4 | 1 |  Bite:1d10 Claw:1d6 |
-| Mimic | 91 | 1d8+4 | 1 |  |
 | Treasure Chest | 91 | 1d8+4 | 1 |  |
+| Mimic | 91 | 1d8+4 | 1 |  |
 | Mantisman | 85 | 1d12+8 | 1 |  |
-| Zorblin Priest | 84 | 2d6+2 | 1 |  |
 | Cuddly Electric Eel | 83 | 1d3+1 | 1 |  Bite:1d4 |
 | Dreadfire Snake | 81 | 1d3+1 | 1 |  Poison:1d4 |
+| Zorblin Priest | 78 | 1d6+2 | 1 |  |
 | Flux Spider | 77 | 1d3 | 1 |  Necrosis:1 Poison:1d4 |
 | Zorblin Pirate | 76 | 1d4+2 | 1 |  |
 | Zorblin Leader | 76 | 1d4+2 | 1 |  |
 | White Assassin Duck | 75 | 1d6+1 | 1 |  Bite:1d8 Claw:1d6 |
-| Gaseous Gloat | 74 | 1d20 | 1 |  Digest:1d40 |
 | Gargoyle Baby | 74 | 1d6 | 1 |  |
-| Huge Fluffy Bat | 74 | 1d8+2 | 1 |  Bite:1d8 Claw:1d6 Poison:1d4+1 |
-| Death Hornet | 72 | 1d4+1 | 1 |  Bite:1d10 Poison:1d10 |
+| Gaseous Gloat | 74 | 1d20 | 1 |  Digest:1d40 |
 | Dungeon Belcher | 72 | 1d20 | 1 |  Digest:1d10 |
+| Death Hornet | 72 | 1d4+1 | 1 |  Bite:1d10 Poison:1d10 |
 | Teletoad | 71 | 1d3+1 | 1 |  Poison:1d10 |
 | Zorblin Soldier | 70 | 1d4+2 | 1 |  |
 | Deathstalker Scorpion | 66 | 1d6+1 | 1 |  Poison:1d30 |
+| Huge Fluffy Bat | 66 | 1d4+2 | 1 |  Bite:1d4 Claw:1d6 Poison:1d4+1 |
 | Lesser Zorblin | 64 | 1d4+2 | 1 |  |
 | Zorblin Wizard | 64 | 1d4+2 | 1 |  |
 | Dogman | 64 | 1d4+1 | 1 |  |
 | Molekin | 63 | 1d4+2 | 1 |  |
 | Pyrolizard | 63 | 1d6+1 | 1 |  |
-| Gnome Knight | 62 | 1d6+1 | 1 |  |
 | Zorblin Eldster | 62 | 1d4+2 | 1 |  |
 | Zorblin Necromancer | 62 | 1d4+2 | 1 |  |
+| Gnome Knight | 62 | 1d6+1 | 1 |  |
 | Rock Gnome | 60 | 1d6+1 | 1 |  |
 | Zoblin | 60 | 1d6 | 1 |  |
 | Carcass Creeper | 60 | 1d6+2 | 1 |  Bite:1d8 Claw:1d6 Poison:1d10 |
@@ -370,20 +342,20 @@ Content:
 | Meatfairy | 50 | 1d3+1 | 1 |  Bite:1d4 Claw:1d2 |
 | Moresquito | 48 | 1d3+1 | 1 |  Bite:1d4 Claw:1d3 Poison:1d4 Stamina:1d4 |
 | Blinkcat | 47 | 1d3+1 | 1 |  |
-| Narhornet | 46 | 1d6+1 | 1 |  Bite:1d4 Poison:1d8 |
 | Scorpion | 45 | 1d3+1 | 1 |  Poison:1d12 |
+| Narhornet | 44 | 1d4+1 | 1 |  Bite:1d4 Poison:1d8 |
 | Giant Rat | 44 | 1d6+2 | 1 |  |
 | Centipede | 43 | 1d4+2 | 1 |  Bite:1d8 Claw:1d4 Poison:1d4 |
 | Asp | 43 | 1d3+1 | 1 |  Poison:1d3+1 |
 | Cuddly Eel | 43 | 1d3+1 | 1 |  Bite:1d4 |
 | Para Spider | 39 | 1d3 | 1 |  Poison:1d4 |
 | Fluffy Bat Minion | 39 | 1 | 1 |  Bite:1d3 Claw:1d2 |
-| Large Rat | 38 | 1d4+2 | 1 |  |
-| Jackalope | 38 | 1d6 | 1 |  |
 | Orb Of Fire | 38 |  | 0 |  |
+| Large Rat | 37 | 1d3+2 | 1 |  |
 | Fluffy Bat | 37 | 1 | 1 |  Bite:1d3 Claw:1d2 |
 | Orb Of Energy | 37 |  | 0 |  |
 | Giant Dungeon Duck | 37 | 1d3+1 | 1 |  Bite:1d4 Claw:1d3 |
+| Jackalope | 36 | 1d4 | 1 |  |
 | Ghost | 35 |  | 1 |  Cold:1 |
 | Possessed Ghost | 35 |  | 1 |  Cold:1 |
 | Clingy Leech | 35 | 1d3+1 | 1 |  Bite:1d4 Stamina:1d4 |
@@ -396,8 +368,8 @@ Content:
 | Baby Slime Jumper | 27 | 1 | 1 |  Acid:1d3 |
 | Goldfish | 27 | 1 | 1 |  Bite:1d1+1 |
 | Sheep | 26 | 1d3+2 | 1 |  |
-| Vampire Rose | 25 | 1d6 | 1 |  Digest:1d5 |
 | Bloated Bloodbug | 24 | 1d2+1 | 1 |  Bite:1d2 Stamina:1d1 |
+| Vampire Rose | 22 | 1d3 | 1 |  Digest:1d5 |
 | Lava Ant | 22 | 1d3+1 | 1 |  Bite:1d4 Claw:1d3 Fire:1d3+1 |
 <!-- end monster type marker -->
 
@@ -642,3 +614,14 @@ Sound effects
 - Sword sounds by SlavicMagic [found here](https://freesound.org/people/SlavicMagic/sounds/446015/)
 - Water splash by launemax [found here](https://freesound.org/people/launemax/)
 - Wood break by Deathscyp [found here](https://freesound.org/people/Deathscyp/)
+
+Content
+-------
+- Dungeon, sewer, swamp, ice, lava, chasms and flooded dungeon biomes
+- Multiple skill and spell trees
+- No end game yet
+
+Other content
+-------------
+<!-- begin type marker -->
+<!-- end type marker -->

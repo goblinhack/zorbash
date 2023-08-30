@@ -40,7 +40,7 @@ def tp_init(name, text_long_name):
     my.distance_avoid(self, 5)
     my.distance_vision(self, 5)
     my.dmg_chance_d1000_nat_att(self, 0, 900)
-    my.dmg_nat_att_dice(self, "1d6")
+    my.dmg_nat_att_dice(self, "1d4")
     my.dmg_nat_att_type(self, "antler")
     my.gfx_anim_use(self, "attack_red")
     my.gfx_ascii_fade_with_dist(self, True)

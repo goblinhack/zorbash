@@ -89,7 +89,7 @@ def tp_init(name, text_long_name):
     my.distance_vision(self, 5)
     my.dmg_chance_d1000_nat_att(self, 0, 950)
     my.dmg_chance_d1000_necrosis(self, 0, 50)
-    my.dmg_nat_att_dice(self, "1d6+10")
+    my.dmg_nat_att_dice(self, "1d6+2")
     my.dmg_nat_att_type(self, "gore")
     my.dmg_necrosis_dice(self, "1")
     my.dmg_received_doubled_from_fire(self, True)
