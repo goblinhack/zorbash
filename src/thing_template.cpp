@@ -442,8 +442,8 @@ void tp_dump_monsters(void)
   // | git status   | git status     | git status    |
   // | git diff     | git diff       | git diff      |
 
-  printf("DUMP: | %s | %s | %s | %s | %s |\n", "Monster", "Danger level", "Natural attack", "# Attacks",
-         "Other damage types");
+  printf("DUMP: | %s | %s | %s | %s | %s |\n", "Monster", "Danger level", "Primary attack", "# Attacks",
+         "Other attacks");
 
   printf("DUMP: | %s | %s | %s | %s | %s |\n", ":---", "---", "---", "---", "---");
 
@@ -517,7 +517,7 @@ void tp_dump_monsters(void)
       dmg_str += tp->dmg_missile_dice_str();
     }
     if (! tp->dmg_necrosis_dice_str().empty()) {
-      dmg_str += " Necrosis:";
+      dmg_str += " Necrotic:";
       dmg_str += tp->dmg_necrosis_dice_str();
     }
     if (! tp->dmg_negation_dice_str().empty()) {
@@ -529,7 +529,7 @@ void tp_dump_monsters(void)
       dmg_str += tp->dmg_poison_dice_str();
     }
     if (! tp->dmg_stamina_dice_str().empty()) {
-      dmg_str += " Stamina:";
+      dmg_str += " Stamina drain:";
       dmg_str += tp->dmg_stamina_dice_str();
     }
     if (! tp->dmg_water_dice_str().empty()) {

@@ -267,14 +267,14 @@ Press TAB to switch between modes during the game.
 Bestiary
 --------
 <!-- begin monster type marker -->
-| Monster | Danger level | Natural attack | # Attacks | Other damage types |
+| Monster | Danger level | Primary attack | # Attacks | Other attacks |
 | :--- | --- | --- | --- | --- |
 | Ettin, Two Headed Giant | 382 | 1d10+4 | 2 |  |
 | Reaper | 356 | 1d6+6 | 1 |  |
 | Flesh Golem | 336 | 2d8+4 | 2 |  |
 | Fire Demon | 328 | 1d14+4 | 2 |  Fire:1d6+6 |
 | Cthulite | 322 | 1d14+4 | 2 |  Acid:2d6 Poison:2d12 |
-| Undead Bear | 320 | 2d8+5 | 2 |  Necrosis:1 |
+| Undead Bear | 320 | 2d8+5 | 2 |  Necrotic:1 |
 | Bearowl | 290 | 2d8+5 | 2 |  |
 | Baby Kraken | 249 |  | 1 |  Bite:3d8+10 Digest:1d20 Drown:1d20 |
 | Colossal Scorpion | 243 |  | 1 |  Bite:2d8+6 Digest:1d40 Poison:1d20+10 |
@@ -283,7 +283,7 @@ Bestiary
 | Stone Troll | 193 | 1d12+4 | 1 |  |
 | Dungeon Cleaner | 187 | 1d10 | 1 |  Digest:1d40 |
 | Giant Skeleton | 184 | 1d6 | 1 |  |
-| Mummy | 184 | 1d10+10 | 2 |  Stamina:1d10 |
+| Mummy | 184 | 1d10+10 | 2 |  Stamina drain:1d10 |
 | Cement Man | 178 | 3d8+6 | 1 |  |
 | Giant Spider | 139 | 1d8+3 | 1 |  Poison:2d8 |
 | Lesser Tentacleye | 136 | 2d6 | 1 |  |
@@ -295,7 +295,7 @@ Bestiary
 | Flameskull | 121 | 2d6 | 1 |  |
 | Unleashed Gargoyle | 119 | 1d6+2 | 1 |  |
 | Portable Hole | 117 |  | 0 |  |
-| Mummy Necromancer | 104 | 1d6+2 | 1 |  Necrosis:1 |
+| Mummy Necromancer | 104 | 1d6+2 | 1 |  Necrotic:1 |
 | Demon Goat | 103 | 2d6+2 | 1 |  |
 | Giant Piranha | 101 | 1d10+3 | 1 |  Bite:1d8 |
 | Noble Warrior | 100 | 1d3 | 1 |  |
@@ -306,7 +306,7 @@ Bestiary
 | Cuddly Electric Eel | 83 | 1d3+1 | 1 |  Bite:1d4 |
 | Dreadfire Snake | 81 | 1d3+1 | 1 |  Poison:1d4 |
 | Zorblin Priest | 78 | 1d6+2 | 1 |  |
-| Flux Spider | 77 | 1d3 | 1 |  Necrosis:1 Poison:1d4 |
+| Flux Spider | 77 | 1d3 | 1 |  Necrotic:1 Poison:1d4 |
 | Zorblin Pirate | 76 | 1d4+2 | 1 |  |
 | Zorblin Leader | 76 | 1d4+2 | 1 |  |
 | White Assassin Duck | 75 | 1d6+1 | 1 |  Bite:1d8 Claw:1d6 |
@@ -331,7 +331,7 @@ Bestiary
 | Carcass Creeper | 60 | 1d6+2 | 1 |  Bite:1d8 Claw:1d6 Poison:1d10 |
 | Piranha | 59 | 1d4+3 | 1 |  Bite:1d4 |
 | Gnorf | 58 | 1d4+1 | 1 |  |
-| Brown Extrovert Spider | 58 | 1d3 | 1 |  Necrosis:1 Poison:1d4 |
+| Brown Extrovert Spider | 58 | 1d3 | 1 |  Necrotic:1 Poison:1d4 |
 | Battle Goat | 56 | 1d6+2 | 1 |  |
 | Flaming Skeleton | 56 | 1d4 | 1 |  |
 | Slime Jumper | 52 | 2d6+2 | 1 |  Acid:1d6 |
@@ -340,7 +340,7 @@ Bestiary
 | Onyx Widow | 51 | 1d3 | 1 |  Poison:1d4 |
 | Kraken Tentacle | 50 | 1d3+1 | 1 |  Poison:1d8+1 |
 | Meatfairy | 50 | 1d3+1 | 1 |  Bite:1d4 Claw:1d2 |
-| Moresquito | 48 | 1d3+1 | 1 |  Bite:1d4 Claw:1d3 Poison:1d4 Stamina:1d4 |
+| Moresquito | 48 | 1d3+1 | 1 |  Bite:1d4 Claw:1d3 Poison:1d4 Stamina drain:1d4 |
 | Blinkcat | 47 | 1d3+1 | 1 |  |
 | Scorpion | 45 | 1d3+1 | 1 |  Poison:1d12 |
 | Narhornet | 44 | 1d4+1 | 1 |  Bite:1d4 Poison:1d8 |
@@ -358,7 +358,7 @@ Bestiary
 | Jackalope | 36 | 1d4 | 1 |  |
 | Ghost | 35 |  | 1 |  Cold:1 |
 | Possessed Ghost | 35 |  | 1 |  Cold:1 |
-| Clingy Leech | 35 | 1d3+1 | 1 |  Bite:1d4 Stamina:1d4 |
+| Clingy Leech | 35 | 1d3+1 | 1 |  Bite:1d4 Stamina drain:1d4 |
 | Jade Viper | 35 | 1d3+1 | 1 |  Poison:1d2 |
 | Fleshbee | 32 | 1d3+1 | 1 |  Bite:1d4 Claw:1d3 |
 | Skeleton | 32 | 1d3 | 1 |  |
@@ -368,7 +368,7 @@ Bestiary
 | Baby Slime Jumper | 27 | 1 | 1 |  Acid:1d3 |
 | Goldfish | 27 | 1 | 1 |  Bite:1d1+1 |
 | Sheep | 26 | 1d3+2 | 1 |  |
-| Bloated Bloodbug | 24 | 1d2+1 | 1 |  Bite:1d2 Stamina:1d1 |
+| Bloated Bloodbug | 24 | 1d2+1 | 1 |  Bite:1d2 Stamina drain:1d1 |
 | Vampire Rose | 22 | 1d3 | 1 |  Digest:1d5 |
 | Lava Ant | 22 | 1d3+1 | 1 |  Bite:1d4 Claw:1d3 Fire:1d3+1 |
 <!-- end monster type marker -->
