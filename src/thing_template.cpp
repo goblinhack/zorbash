@@ -445,9 +445,9 @@ void tp_dump_monsters(void)
   printf(
       "DUMP: | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | "
       "%s | %s | %s |\n",
-      "Monster", "Danger level", "Dmg:Acid", "Dmg:Bite", "Dmg:Claw", "Dmg:Cold", "Dmg:Crush", "Dmg:Digest",
-      "Dmg:Drown", "Dmg:Energy", "Dmg:Fire", "Dmg:Heat", "Dmg:Lightning", "Dmg:Magic", "Dmg:Melee", "Dmg:Missile",
-      "Dmg:Nat Attack", "Dmg:Nat Attack Type", "Dmg:Necrosis", "Dmg:Negation", "Dmg:Poison", "Dmg:Stamina",
+      "Monster", "Danger level", "Dmg:Nat Attack", "Dmg:Nat Attack Type", "Dmg:Acid", "Dmg:Bite", "Dmg:Claw",
+      "Dmg:Cold", "Dmg:Crush", "Dmg:Digest", "Dmg:Drown", "Dmg:Energy", "Dmg:Fire", "Dmg:Heat", "Dmg:Lightning",
+      "Dmg:Magic", "Dmg:Melee", "Dmg:Missile", "Dmg:Necrosis", "Dmg:Negation", "Dmg:Poison", "Dmg:Stamina",
       "Dmg:Water");
 
   printf(
@@ -470,12 +470,12 @@ void tp_dump_monsters(void)
     printf(
         "DUMP: | %s | %u | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | "
         "%s | %s | %s |\n",
-        capitalise(tp->text_long_name()).c_str(), tp->get_danger_level(), tp->dmg_acid_dice_str().c_str(),
-        tp->dmg_bite_dice_str().c_str(), tp->dmg_claw_dice_str().c_str(), tp->dmg_cold_dice_str().c_str(),
-        tp->dmg_crush_dice_str().c_str(), tp->dmg_digest_dice_str().c_str(), tp->dmg_drown_dice_str().c_str(),
-        tp->dmg_energy_dice_str().c_str(), tp->dmg_fire_dice_str().c_str(), tp->dmg_heat_dice_str().c_str(),
-        tp->dmg_lightning_dice_str().c_str(), tp->dmg_magic_dice_str().c_str(), tp->dmg_melee_dice_str().c_str(),
-        tp->dmg_missile_dice_str().c_str(), tp->dmg_nat_att_dice_str().c_str(), tp->dmg_nat_att_type().c_str(),
+        capitalise(tp->text_long_name()).c_str(), tp->get_danger_level(), tp->dmg_nat_att_dice_str().c_str(),
+        tp->dmg_nat_att_type().c_str(), tp->dmg_acid_dice_str().c_str(), tp->dmg_bite_dice_str().c_str(),
+        tp->dmg_claw_dice_str().c_str(), tp->dmg_cold_dice_str().c_str(), tp->dmg_crush_dice_str().c_str(),
+        tp->dmg_digest_dice_str().c_str(), tp->dmg_drown_dice_str().c_str(), tp->dmg_energy_dice_str().c_str(),
+        tp->dmg_fire_dice_str().c_str(), tp->dmg_heat_dice_str().c_str(), tp->dmg_lightning_dice_str().c_str(),
+        tp->dmg_magic_dice_str().c_str(), tp->dmg_melee_dice_str().c_str(), tp->dmg_missile_dice_str().c_str(),
         tp->dmg_necrosis_dice_str().c_str(), tp->dmg_negation_dice_str().c_str(), tp->dmg_poison_dice_str().c_str(),
         tp->dmg_stamina_dice_str().c_str(), tp->dmg_water_dice_str().c_str());
   }
