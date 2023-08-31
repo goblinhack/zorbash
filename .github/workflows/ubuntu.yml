@@ -16,5 +16,5 @@ jobs:
         packages: build-essential g++ libegl1 libfishsound1-dev libflac-dev libfluidsynth-dev libfreetype6-dev libgl1 libglvnd0 libglx0 libmikmod-dev liboggz2-dev libsdl2-2.0-0 libsdl2-dev libsdl2-mixer-2.0-0 libsdl2-mixer-dev libsmpeg-dev libx11-6 libxext6 python3 python3-dev
         version: 1.0
     - name: configure
-      run: ./RUNME
+      run: ./RUNME --guthub
 

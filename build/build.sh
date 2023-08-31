@@ -731,7 +731,9 @@ PYTHONPATH=/${MINGW_TYPE}/lib/python${PYVER}/:/${MINGW_TYPE}/lib/python${PYVER}/
             chmod +x ${TARGET}.sh
             ;;
         Linux)
-            ./build/list_monsts.sh ./${TARGET} do
+            if [[ $OPT_GITHUB = "" ]]; then
+              ./build/list_monsts.sh ./${TARGET} do
+            fi
             log_info "Run:"
             echo "  ./${TARGET}"
             ;;

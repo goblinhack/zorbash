@@ -139,10 +139,11 @@ Build options:
 
 Usage: $0 [options]
 
-  [--dev]  Enable development warnings
-  [--dev2] Enable stack checking (SLOW)
-  [--prof] Enable gprof
-  [--gcc]  Prefer g++ over clang
+  [--dev]    Enable development warnings
+  [--dev2]   Enable stack checking (SLOW)
+  [--prof]   Enable gprof
+  [--gcc]    Prefer g++ over clang
+  [--github] CI/CD build (turns off modification of README)
 %%
 }
 
@@ -150,6 +151,7 @@ OPT_DEV1=
 OPT_DEV2=
 OPT_PROF=
 OPT_GCC=
+OPT_GITHUB=
 
 read_opts()
 {
@@ -178,6 +180,11 @@ read_opts()
             -*gcc)
                 OPT_GCC="yes"
                 export OPT_GCC
+                shift
+                ;;
+            -*github)
+                OPT_GITHUB="yes"
+                export OPT_GITHUB
                 shift
                 ;;
             *)

@@ -81,4 +81,4 @@ jobs:
       - name: CI-Build
         run: |
           echo 'Running in MSYS2!'
-          ./RUNME
+          ./RUNME --github
