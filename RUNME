@@ -188,6 +188,8 @@ read_opts()
                 shift
                 ;;
             *)
+
+                log_err "Unknown argument: [$option]"
                 help
                 exit 1
                 ;;
