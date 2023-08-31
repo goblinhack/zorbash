@@ -170,10 +170,7 @@
 </p>
 
 Welcome to the lair of the dread tentacleye, Zorbash. Collect the crystals of Zorb and confront Zorbash to win.
-
-Itch.io [found here](https://goblinhackgmailcom.itch.io/zorbash)
-
-Comments and suggestions welcome.
+[Itch.io](https://goblinhackgmailcom.itch.io/zorbash)
 
 Pixel art and ascii mode options
 --------------------------------

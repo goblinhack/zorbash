@@ -510,8 +510,6 @@ case "$MY_OS_NAME" in
         LDLIBS+="-lGL "
 
         if [[ $OPT_DEV2 != "" ]]; then
-            ASAN_OPTIONS=fast_unwind_on_malloc
-            export ASAN_OPTIONS
             C_FLAGS+=" -fsanitize=address -fno-omit-frame-pointer -fno-common"
             LDFLAGS+=" -fsanitize=address"
         fi
@@ -732,7 +730,7 @@ PYTHONPATH=/${MINGW_TYPE}/lib/python${PYVER}/:/${MINGW_TYPE}/lib/python${PYVER}/
             ;;
         Linux)
             if [[ $OPT_GITHUB = "" ]]; then
-              ./build/list_monsts.sh ./${TARGET} do
+              ./build/list_monsts.sh ./${TARGET} do-it
             fi
             log_info "Run:"
             echo "  ./${TARGET}"
