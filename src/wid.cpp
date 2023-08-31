@@ -265,6 +265,10 @@ void wid_get_tl_x_tl_y_br_x_br_y(Widp w, int *tl_x, int *tl_y, int *br_x, int *b
   TRACE_NO_INDENT();
 
   if (! w) {
+    *tl_x = 0;
+    *tl_y = 0;
+    *br_x = 0;
+    *br_y = 0;
     ERR("NULL wid");
     return;
   }
