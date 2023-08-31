@@ -1,7 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- - spell of beckoning/repulsing                                                                                                               -->
-<!-- - ogre totems?                                                                                                                               -->
 <!-- - invisible phantoms that leave puddles of ectoplasm ?                                                                                       -->
 <!-- - need any gas type                                                                                                                          -->
 <!-- ------                                                                                                                                       -->

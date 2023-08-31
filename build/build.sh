@@ -703,7 +703,7 @@ sed -i "s/<version>.*/<version>$MYVER<\/version>/g" build/windows/windows.xml
 # All commits since last tag
 #
 echo \$0: all commits since last tag
-git log \$(git describe --tags --abbrev=0)..HEAD --oneline | grep "bug:"
+git log \$(git describe --tags --abbrev=0)..HEAD --oneline | egrep "feat:|bug:" | sort +1 -r
 
 #
 # Lay a tag
