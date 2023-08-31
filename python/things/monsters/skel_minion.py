@@ -303,7 +303,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="skel_minion", text_long_name="possessed skeleton")
+    tp_init(name="skel_minion", text_long_name="skeleton minion")
 
 
 init()

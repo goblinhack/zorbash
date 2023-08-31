@@ -139,7 +139,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="ghost_minion", text_long_name="possessed ghost")
+    tp_init(name="ghost_minion", text_long_name="ghost minion")
 
 
 init()
