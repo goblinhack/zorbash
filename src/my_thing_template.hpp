@@ -506,7 +506,9 @@ private:
   int _is_immune_to_negation {};
   int _is_immune_to_paralysis {};
   int _is_immune_to_poison {};
+  int _is_immune_to_spell_beckoning {};
   int _is_immune_to_spell_of_holding {};
+  int _is_immune_to_spell_repulsion {};
   int _is_immune_to_spell_slow {};
   int _is_immune_to_spiderwebs {};
   int _is_immune_to_stamina_drain {};
@@ -636,6 +638,7 @@ private:
   int _is_snake {};
   int _is_soft {};
   int _is_spell {};
+  int _is_spell_beckoning {};
   int _is_spellbook {};
   int _is_spell_of_holding {};
   int _is_spell_of_holding_barrier {};
@@ -770,8 +773,6 @@ private:
   int _is_unused_flag93 {};
   int _is_unused_flag94 {};
   int _is_unused_flag95 {};
-  int _is_unused_flag96 {};
-  int _is_unused_flag97 {};
   int _is_usable {};
   int _is_used_when_thrown {};
   int _is_very_combustible {};
@@ -872,7 +873,6 @@ private:
   int _unused_chance4_d1000 {};
   int _unused_chance5_d1000 {};
   int _unused_chance6_d1000 {};
-  int _unused_flag129 {};
   int _weapon_dmg {};
   int _weapon_use_distance {};
   // end sort marker1 }
@@ -1856,7 +1856,9 @@ public:
   int is_immune_to_negation(void) const;
   int is_immune_to_paralysis(void) const;
   int is_immune_to_poison(void) const;
+  int is_immune_to_spell_beckoning(void) const;
   int is_immune_to_spell_of_holding(void) const;
+  int is_immune_to_spell_repulsion(void) const;
   int is_immune_to_spell_slow(void) const;
   int is_immune_to_spiderwebs(void) const;
   int is_immune_to_stamina_drain(void) const;
@@ -1984,6 +1986,7 @@ public:
   int is_smoke(void) const;
   int is_snake(void) const;
   int is_soft(void) const;
+  int is_spell_beckoning(void) const;
   int is_spellbook(void) const;
   int is_spell_of_holding_barrier(void) const;
   int is_spell_of_holding(void) const;
@@ -2118,8 +2121,6 @@ public:
   int is_unused_flag93(void) const;
   int is_unused_flag94(void) const;
   int is_unused_flag95(void) const;
-  int is_unused_flag96(void) const;
-  int is_unused_flag97(void) const;
   int is_unused_flag9(void) const;
   int is_usable(void) const;
   int is_used_when_thrown(void) const;
@@ -2221,7 +2222,6 @@ public:
   int unused_chance4_d1000(void) const;
   int unused_chance5_d1000(void) const;
   int unused_chance6_d1000(void) const;
-  int unused_flag129(void) const;
   int weapon_dmg(void) const;
   // end sort marker4 }
 
@@ -2623,7 +2623,9 @@ public:
   void is_immune_to_negation_set(int v);
   void is_immune_to_paralysis_set(int v);
   void is_immune_to_poison_set(int v);
+  void is_immune_to_spell_beckoning_set(int v);
   void is_immune_to_spell_of_holding_set(int v);
+  void is_immune_to_spell_repulsion_set(int v);
   void is_immune_to_spell_slow_set(int v);
   void is_immune_to_spiderwebs_set(int v);
   void is_immune_to_stamina_drain_set(int v);
@@ -2751,6 +2753,7 @@ public:
   void is_smoke_set(int v);
   void is_snake_set(int v);
   void is_soft_set(int v);
+  void is_spell_beckoning_set(int v);
   void is_spellbook_set(int v);
   void is_spell_of_holding_barrier_set(int v);
   void is_spell_of_holding_set(int v);
@@ -2885,8 +2888,6 @@ public:
   void is_unused_flag93_set(int v);
   void is_unused_flag94_set(int v);
   void is_unused_flag95_set(int v);
-  void is_unused_flag96_set(int v);
-  void is_unused_flag97_set(int v);
   void is_unused_flag9_set(int v);
   void is_usable_set(int v);
   void is_used_when_thrown_set(int v);
@@ -3156,7 +3157,6 @@ public:
   void unused_chance4_d1000_set(int v);
   void unused_chance5_d1000_set(int v);
   void unused_chance6_d1000_set(int v);
-  void unused_flag129_set(int v);
   void weapon_dmg_set(int v);
   void weapon_use_distance_set(int v);
   void z_depth_set(int v);

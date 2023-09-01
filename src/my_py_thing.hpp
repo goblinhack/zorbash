@@ -414,7 +414,9 @@ PyObject *thing_is_immune_to_necrosis(PyObject *obj, PyObject *args, PyObject *k
 PyObject *thing_is_immune_to_negation(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_paralysis(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_poison(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_immune_to_spell_beckoning(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_spell_of_holding(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_immune_to_spell_repulsion(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_spell_slow(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_spiderwebs(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_stamina_drain(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -541,6 +543,7 @@ PyObject *thing_is_slippery(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_smoke(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_snake(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_soft(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_spell_beckoning(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spellbook(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spell_of_holding_barrier(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spell_of_holding(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -670,8 +673,6 @@ PyObject *thing_is_unused_flag92(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag93(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag94(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag95(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag96(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag97(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag9(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_usable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_used_when_thrown(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -877,7 +878,6 @@ PyObject *thing_throw_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_tick_prio(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_top_owner_id_get(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unfreeze(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag129(PyObject *obj, PyObject *args, PyObject *keywds);
 // end sort marker1 }
 
 #endif

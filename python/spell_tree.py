@@ -17,6 +17,7 @@ my.map_load_spell_tree(
         "dE", "spell_dominate_monst5",
         "hh", "spell_hasted",
         "ss", "spell_slow",
+        "bk", "is_spell_beckoning",
         "HH", "spell_of_holding",
     ])
 
@@ -71,7 +72,7 @@ my.map_load_spell_tree(
         "                                ",
         "ss                              ",
         "                                ",
-        "                                ",
+        "bk                              ",
         "                                ",
         "                                ",
         "                                ",

@@ -675,15 +675,15 @@ int Thing::is_unused_flag95(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag95());
 }
-int Thing::is_unused_flag96(void)
+int Thing::is_immune_to_spell_repulsion(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag96());
+  return (tp()->is_immune_to_spell_repulsion());
 }
-int Thing::is_unused_flag97(void)
+int Thing::is_immune_to_spell_beckoning(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag97());
+  return (tp()->is_immune_to_spell_beckoning());
 }
 int Thing::is_animation(void)
 {
@@ -820,10 +820,10 @@ int Thing::is_mummy(void)
   TRACE_NO_INDENT();
   return (tp()->is_mummy());
 }
-int Thing::unused_flag129(void)
+int Thing::is_spell_beckoning(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag129());
+  return (tp()->is_spell_beckoning());
 }
 int Thing::is_kept_after_final_use(void)
 {

@@ -1645,7 +1645,9 @@ public:
   int is_immune_to_negation(void);
   int is_immune_to_paralysis(void);
   int is_immune_to_poison(void);
+  int is_immune_to_spell_beckoning(void);
   int is_immune_to_spell_of_holding(void);
+  int is_immune_to_spell_repulsion(void);
   int is_immune_to_spell_slow(void);
   int is_immune_to_spiderwebs(void);
   int is_immune_to_stamina_drain(void);
@@ -1773,6 +1775,7 @@ public:
   int is_smoke(void);
   int is_snake(void);
   int is_soft(void);
+  int is_spell_beckoning(void);
   int is_spellbook(void);
   int is_spell_of_holding_barrier(void);
   int is_spell_of_holding(void);
@@ -1905,8 +1908,6 @@ public:
   int is_unused_flag93(void);
   int is_unused_flag94(void);
   int is_unused_flag95(void);
-  int is_unused_flag96(void);
-  int is_unused_flag97(void);
   int is_unused_flag9(void);
   int is_usable(void);
   int is_used_when_thrown(void);
@@ -2432,7 +2433,6 @@ public:
   int unused_chance4_d1000(void);
   int unused_chance5_d1000(void);
   int unused_chance6_d1000(void);
-  int unused_flag129(void);
   int value(const Thingp it);
   int weapon_dmgd_pct(void);
   int weapon_dmg_modify(int damage, Thingp victim = nullptr);
