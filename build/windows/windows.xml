@@ -16,51 +16,51 @@
                 <shortcut>
                     <comment>zorbash</comment>
                     <exec>${installdir}/zorbash/zorbash</exec>
-                    <icon>${installdir}/zorbash//build/windows/zorbash.ico</icon>
+                    <icon>${installdir}/zorbash/zorbash.ico</icon>
                     <name>zorbash</name>
                     <noPinToStart>0</noPinToStart>
                     <path>${installdir}/zorbash</path>
                     <platforms>windows-x64</platforms>
                     <runAsAdmin>0</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
-                    <windowsExec>${installdir}/zorbash.exe</windowsExec>
+                    <windowsExec>${installdir}/zorbash/zorbash.exe</windowsExec>
                     <windowsExecArgs></windowsExecArgs>
-                    <windowsIcon>${installdir}/zorbash.ico</windowsIcon>
-                    <windowsPath>${installdir}/</windowsPath>
+                    <windowsIcon>${installdir}/zorbash/zorbash.ico</windowsIcon>
+                    <windowsPath>${installdir}/zorbash/</windowsPath>
                 </shortcut>
             </desktopShortcutList>
             <folderList>
                 <folder>
                     <description>Program Files</description>
-                    <destination>${installdir}</destination>
+                    <destination>${installdir}/zorbash/</destination>
                     <name>programfiles</name>
                     <platforms>windows-x64</platforms>
                     <shortcutList>
                         <shortcut>
                             <comment>Uninstall</comment>
-                            <exec>${installdir}/${uninstallerName}</exec>
+                            <exec>${installdir}/zorbash/${uninstallerName}</exec>
                             <icon></icon>
                             <name>Uninstall ${product_fullname}</name>
-                            <path>${installdir}</path>
+                            <path>${installdir}/zorbash/</path>
                             <platforms>windows-x64</platforms>
                             <runAsAdmin>0</runAsAdmin>
                             <runInTerminal>0</runInTerminal>
-                            <windowsExec>${installdir}/${uninstallerName}.exe</windowsExec>
+                            <windowsExec>${installdir}/zorbash/${uninstallerName}.exe</windowsExec>
                             <windowsExecArgs></windowsExecArgs>
                             <windowsIcon></windowsIcon>
-                            <windowsPath>${installdir}</windowsPath>
+                            <windowsPath>${installdir}/zorbash/</windowsPath>
                         </shortcut>
                     </shortcutList>
                 </folder>
                 <folder>
                     <description>Program Files</description>
-                    <destination>${installdir}</destination>
+                    <destination>${installdir}/zorbash/</destination>
                     <name>programfileslinux</name>
                     <platforms>linux</platforms>
                 </folder>
                 <folder>
                     <description>Program Files</description>
-                    <destination>${installdir}</destination>
+                    <destination>${installdir}/zorbash/</destination>
                     <name>programfileswindows</name>
                     <platforms>windows-x64</platforms>
                     <distributionFileList>
@@ -389,7 +389,7 @@
                 </folder>
                 <folder>
                     <description>zorbash</description>
-                    <destination>${installdir}/zorbash</destination>
+                    <destination>${installdir}/zorbash/</destination>
                     <name>zorbash</name>
                     <platforms>all</platforms>
                 </folder>
@@ -400,27 +400,27 @@
                     <name>Uninstall ${product_fullname}</name>
                     <runAsAdmin>0</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
-                    <windowsExec>${installdir}/${uninstallerName}.exe</windowsExec>
+                    <windowsExec>${installdir}/zorbash/${uninstallerName}.exe</windowsExec>
                     <windowsExecArgs></windowsExecArgs>
                     <windowsIcon></windowsIcon>
-                    <windowsPath>${installdir}/</windowsPath>
+                    <windowsPath>${installdir}/zorbash/</windowsPath>
                 </startMenuShortcut>
                 <startMenuShortcut>
                     <comment>Zorbash</comment>
                     <name>zorbash</name>
                     <runAsAdmin>0</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
-                    <windowsExec>${installdir}/zorbash/zorbash/src/zorbash.exe</windowsExec>
+                    <windowsExec>${installdir}/zorbash/zorbash.exe</windowsExec>
                     <windowsExecArgs></windowsExecArgs>
-                    <windowsIcon>${installdir}/zorbash/zorbash/build/windows/zorbash.ico</windowsIcon>
-                    <windowsPath>${installdir}/zorbash/zorbash</windowsPath>
+                    <windowsIcon>${installdir}/zorbash/zorbash.ico</windowsIcon>
+                    <windowsPath>${installdir}/zorbash</windowsPath>
                 </startMenuShortcut>
             </startMenuShortcutList>
         </component>
     </componentList>
     <preInstallationActionList>
       <deleteFile>
-        <path>${installdir}</path>
+        <path>${installdir}/zorbash/</path>
       </deleteFile>
     </preInstallationActionList>
     <enableRollback>1</enableRollback>
