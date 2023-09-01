@@ -268,395 +268,107 @@ Bestiary
 | Monster | Dngr | Attack | # Attcks | Other attacks | Immunity |
 | :--- | --- | --- | --- | --- | --- |
 | Ettin, Two Headed Giant | 382 | 1d10+4 | 2 |  |  |
-| Reaper | 356 | 1d6+6 | 1 |  | Acid
-Cold
-Fire
-Necrosis
-Negation
-Paralysis
-poison
-Holding
-Slowing
-Webs
-Drain
- |
-| Flesh Golem | 336 | 2d8+4 | 2 |  | Cold
-poison
-Drain
- |
-| Fire Demon | 328 | 1d14+4 | 2 | Fire:1d6+6
- | Cold
-Fire
-Necrosis
-poison
- |
-| Cthulite | 322 | 1d14+4 | 2 | Acid:2d6
-Poison:2d12
- | Acid
-Necrosis
-poison
- |
-| Undead Bear | 320 | 2d8+5 | 2 | Necrotic:1
- | Cold
-Necrosis
-poison
-Drain
- |
+| Reaper | 356 | 1d6+6 | 1 |  | Acid,Cold,Fire,Necrosis,Negation,Paralysis,poison,Holding,Slowing,Webs,Drain, |
+| Flesh Golem | 336 | 2d8+4 | 2 |  | Cold,poison,Drain, |
+| Fire Demon | 328 | 1d14+4 | 2 | Fire:1d6+6, | Cold,Fire,Necrosis,poison, |
+| Cthulite | 322 | 1d14+4 | 2 | Acid:2d6,Poison:2d12, | Acid,Necrosis,poison, |
+| Undead Bear | 320 | 2d8+5 | 2 | Necrotic:1, | Cold,Necrosis,poison,Drain, |
 | Bearowl | 290 | 2d8+5 | 2 |  |  |
-| Baby Kraken | 249 |  | 1 | Bite:3d8+10
-Digest:1d20
-Drown:1d20
- | Water
- |
-| Colossal Scorpion | 243 |  | 1 | Bite:2d8+6
-Digest:1d40
-Poison:1d20+10
- |  |
-| Fire Troll | 214 | 1d12+4 | 1 |  | Fire
-poison
- |
-| Yeti | 208 | 1d12+8 | 1 |  | Cold
- |
-| Stone Troll | 193 | 1d12+4 | 1 |  | poison
- |
-| Dungeon Cleaner | 187 | 1d10 | 1 | Digest:1d40
- | Acid
- |
-| Giant Skeleton | 184 | 1d6 | 1 |  | Cold
-Necrosis
-Paralysis
-poison
-Drain
- |
-| Mummy | 184 | 1d10+10 | 2 | Drain:1d10
- | Cold
-Fire
-Necrosis
-poison
-Drain
- |
-| Cement Man | 178 | 3d8+6 | 1 |  | Cold
-Fire
-poison
-Drain
- |
-| Giant Spider | 139 | 1d8+3 | 1 | Poison:2d8
- | Webs
- |
-| Lesser Tentacleye | 136 | 2d6 | 1 |  | Cold
-Necrosis
-poison
-Drain
-Water
- |
-| Bone Spider | 132 | 1d8+3 | 1 | Poison:2d8
- | Cold
-Necrosis
-poison
-Webs
-Drain
- |
-| Murder Bunny | 132 | 1d8 | 2 | Bite:1d6
-Claw:1d4
- |  |
-| Gargoyle | 128 | 2d6 | 1 |  | Cold
-Necrosis
-poison
-Drain
-Water
- |
+| Baby Kraken | 249 |  | 1 | Bite:3d8+10,Digest:1d20,Drown:1d20, | Water, |
+| Colossal Scorpion | 243 |  | 1 | Bite:2d8+6,Digest:1d40,Poison:1d20+10, |  |
+| Fire Troll | 214 | 1d12+4 | 1 |  | Fire,poison, |
+| Yeti | 208 | 1d12+8 | 1 |  | Cold, |
+| Stone Troll | 193 | 1d12+4 | 1 |  | poison, |
+| Dungeon Cleaner | 187 | 1d10 | 1 | Digest:1d40, | Acid, |
+| Giant Skeleton | 184 | 1d6 | 1 |  | Cold,Necrosis,Paralysis,poison,Drain, |
+| Mummy | 184 | 1d10+10 | 2 | Drain:1d10, | Cold,Fire,Necrosis,poison,Drain, |
+| Cement Man | 178 | 3d8+6 | 1 |  | Cold,Fire,poison,Drain, |
+| Giant Spider | 139 | 1d8+3 | 1 | Poison:2d8, | Webs, |
+| Lesser Tentacleye | 136 | 2d6 | 1 |  | Cold,Necrosis,poison,Drain,Water, |
+| Bone Spider | 132 | 1d8+3 | 1 | Poison:2d8, | Cold,Necrosis,poison,Webs,Drain, |
+| Murder Bunny | 132 | 1d8 | 2 | Bite:1d6,Claw:1d4, |  |
+| Gargoyle | 128 | 2d6 | 1 |  | Cold,Necrosis,poison,Drain,Water, |
 | Hill Ogre | 127 | 1d10+4 | 1 |  |  |
-| Iceman | 125 |  | 1 | Cold:1d8
- | Cold
- |
-| Flameskull | 121 | 2d6 | 1 |  | Acid
-Cold
-Fire
-Necrosis
-Paralysis
-poison
-Drain
- |
-| Unleashed Gargoyle | 119 | 1d6+2 | 1 |  | Necrosis
-poison
-Drain
-Water
- |
-| Portable Hole | 117 |  | 0 |  | Acid
-Cold
-Fire
-poison
- |
-| Mummy Necromancer | 104 | 1d6+2 | 1 | Necrotic:1
- | Cold
-Necrosis
-poison
-Drain
- |
-| Demon Goat | 103 | 2d6+2 | 1 |  | Fire
-Necrosis
-poison
- |
-| Giant Piranha | 101 | 1d10+3 | 1 | Bite:1d8
- | Water
- |
+| Iceman | 125 |  | 1 | Cold:1d8, | Cold, |
+| Flameskull | 121 | 2d6 | 1 |  | Acid,Cold,Fire,Necrosis,Paralysis,poison,Drain, |
+| Unleashed Gargoyle | 119 | 1d6+2 | 1 |  | Necrosis,poison,Drain,Water, |
+| Portable Hole | 117 |  | 0 |  | Acid,Cold,Fire,poison, |
+| Mummy Necromancer | 104 | 1d6+2 | 1 | Necrotic:1, | Cold,Necrosis,poison,Drain, |
+| Demon Goat | 103 | 2d6+2 | 1 |  | Fire,Necrosis,poison, |
+| Giant Piranha | 101 | 1d10+3 | 1 | Bite:1d8, | Water, |
 | Noble Warrior | 100 | 1d3 | 1 |  |  |
-| Giant Battle Duck | 96 | 1d8+4 | 1 | Bite:1d10
-Claw:1d6
- | Water
- |
-| Treasure Chest | 91 | 1d8+4 | 1 |  | Water
- |
-| Mimic | 91 | 1d8+4 | 1 |  | Water
- |
+| Giant Battle Duck | 96 | 1d8+4 | 1 | Bite:1d10,Claw:1d6, | Water, |
+| Treasure Chest | 91 | 1d8+4 | 1 |  | Water, |
+| Mimic | 91 | 1d8+4 | 1 |  | Water, |
 | Mantisman | 85 | 1d12+8 | 1 |  |  |
-| Cuddly Electric Eel | 83 | 1d3+1 | 1 | Bite:1d4
- | Electricity
-Water
- |
-| Dreadfire Snake | 81 | 1d3+1 | 1 | Poison:1d4
- | Webs
-Water
- |
+| Cuddly Electric Eel | 83 | 1d3+1 | 1 | Bite:1d4, | Electricity,Water, |
+| Dreadfire Snake | 81 | 1d3+1 | 1 | Poison:1d4, | Webs,Water, |
 | Zorblin Priest | 78 | 1d6+2 | 1 |  |  |
-| Flux Spider | 77 | 1d3 | 1 | Necrotic:1
-Poison:1d4
- | Cold
-Necrosis
-poison
-Webs
- |
+| Flux Spider | 77 | 1d3 | 1 | Necrotic:1,Poison:1d4, | Cold,Necrosis,poison,Webs, |
 | Zorblin Pirate | 76 | 1d4+2 | 1 |  |  |
 | Zorblin Leader | 76 | 1d4+2 | 1 |  |  |
-| White Assassin Duck | 75 | 1d6+1 | 1 | Bite:1d8
-Claw:1d6
- | Water
- |
-| Gargoyle Baby | 74 | 1d6 | 1 |  | Cold
-Necrosis
-poison
-Drain
-Water
- |
-| Gaseous Gloat | 74 | 1d20 | 1 | Digest:1d40
- |  |
-| Dungeon Belcher | 72 | 1d20 | 1 | Digest:1d10
- |  |
-| Death Hornet | 72 | 1d4+1 | 1 | Bite:1d10
-Poison:1d10
- |  |
-| Teletoad | 71 | 1d3+1 | 1 | Poison:1d10
- | Cold
-Water
- |
+| White Assassin Duck | 75 | 1d6+1 | 1 | Bite:1d8,Claw:1d6, | Water, |
+| Gargoyle Baby | 74 | 1d6 | 1 |  | Cold,Necrosis,poison,Drain,Water, |
+| Gaseous Gloat | 74 | 1d20 | 1 | Digest:1d40, |  |
+| Dungeon Belcher | 72 | 1d20 | 1 | Digest:1d10, |  |
+| Death Hornet | 72 | 1d4+1 | 1 | Bite:1d10,Poison:1d10, |  |
+| Teletoad | 71 | 1d3+1 | 1 | Poison:1d10, | Cold,Water, |
 | Zorblin Soldier | 70 | 1d4+2 | 1 |  |  |
-| Deathstalker Scorpion | 66 | 1d6+1 | 1 | Poison:1d30
- |  |
-| Huge Fluffy Bat | 66 | 1d4+2 | 1 | Bite:1d4
-Claw:1d6
-Poison:1d4+1
- | Water
- |
+| Deathstalker Scorpion | 66 | 1d6+1 | 1 | Poison:1d30, |  |
+| Huge Fluffy Bat | 66 | 1d4+2 | 1 | Bite:1d4,Claw:1d6,Poison:1d4+1, | Water, |
 | Lesser Zorblin | 64 | 1d4+2 | 1 |  |  |
 | Zorblin Wizard | 64 | 1d4+2 | 1 |  |  |
-| Dogman | 64 | 1d4+1 | 1 |  | Water
- |
-| Molekin | 63 | 1d4+2 | 1 |  | Water
- |
-| Pyrolizard | 63 | 1d6+1 | 1 |  | Fire
- |
+| Dogman | 64 | 1d4+1 | 1 |  | Water, |
+| Molekin | 63 | 1d4+2 | 1 |  | Water, |
+| Pyrolizard | 63 | 1d6+1 | 1 |  | Fire, |
 | Zorblin Eldster | 62 | 1d4+2 | 1 |  |  |
 | Zorblin Necromancer | 62 | 1d4+2 | 1 |  |  |
-| Gnome Knight | 62 | 1d6+1 | 1 |  | poison
- |
-| Rock Gnome | 60 | 1d6+1 | 1 |  | poison
- |
-| Zoblin | 60 | 1d6 | 1 |  | Cold
-Necrosis
-poison
-Drain
- |
-| Carcass Creeper | 60 | 1d6+2 | 1 | Bite:1d8
-Claw:1d6
-Poison:1d10
- | poison
- |
-| Piranha | 59 | 1d4+3 | 1 | Bite:1d4
- | Water
- |
-| Gnorf | 58 | 1d4+1 | 1 |  | Cold
-poison
- |
-| Brown Extrovert Spider | 58 | 1d3 | 1 | Necrotic:1
-Poison:1d4
- | Necrosis
-Webs
- |
-| Battle Goat | 56 | 1d6+2 | 1 |  | poison
-Water
- |
-| Flaming Skeleton | 56 | 1d4 | 1 |  | Cold
-Fire
-Necrosis
-Paralysis
-poison
-Drain
- |
-| Slime Jumper | 52 | 2d6+2 | 1 | Acid:1d6
- | Acid
-Necrosis
- |
-| Burning Skeleton | 52 | 1d3 | 1 |  | Cold
-Fire
-Necrosis
-Paralysis
-poison
-Drain
- |
-| Gnome Thief | 52 | 1d2+1 | 1 |  | Cold
-poison
- |
-| Onyx Widow | 51 | 1d3 | 1 | Poison:1d4
- | Webs
- |
-| Kraken Tentacle | 50 | 1d3+1 | 1 | Poison:1d8+1
- | Water
- |
-| Meatfairy | 50 | 1d3+1 | 1 | Bite:1d4
-Claw:1d2
- |  |
-| Moresquito | 48 | 1d3+1 | 1 | Bite:1d4
-Claw:1d3
-Poison:1d4
-Drain:1d4
- |  |
-| Blinkcat | 47 | 1d3+1 | 1 |  | Cold
-Water
- |
-| Scorpion | 45 | 1d3+1 | 1 | Poison:1d12
- |  |
-| Narhornet | 44 | 1d4+1 | 1 | Bite:1d4
-Poison:1d8
- |  |
-| Giant Rat | 44 | 1d6+2 | 1 |  | Water
- |
-| Centipede | 43 | 1d4+2 | 1 | Bite:1d8
-Claw:1d4
-Poison:1d4
- | poison
- |
-| Asp | 43 | 1d3+1 | 1 | Poison:1d3+1
- | Webs
-Water
- |
-| Cuddly Eel | 43 | 1d3+1 | 1 | Bite:1d4
- | Water
- |
-| Para Spider | 39 | 1d3 | 1 | Poison:1d4
- | Cold
-Fire
-Necrosis
-Paralysis
-poison
-Webs
-Drain
- |
-| Rabid Bat Minion | 39 | 1 | 1 | Bite:1d3
-Claw:1d2
- | Water
- |
-| Orb Of Fire | 38 |  | 0 |  | Fire
-Necrosis
-Paralysis
-poison
- |
-| Large Rat | 37 | 1d3+2 | 1 |  | Water
- |
-| Fluffy Bat | 37 | 1 | 1 | Bite:1d3
-Claw:1d2
- | Water
- |
-| Orb Of Energy | 37 |  | 0 |  | Necrosis
-Paralysis
-poison
- |
-| Giant Dungeon Duck | 37 | 1d3+1 | 1 | Bite:1d4
-Claw:1d3
- | Water
- |
+| Gnome Knight | 62 | 1d6+1 | 1 |  | poison, |
+| Rock Gnome | 60 | 1d6+1 | 1 |  | poison, |
+| Zoblin | 60 | 1d6 | 1 |  | Cold,Necrosis,poison,Drain, |
+| Carcass Creeper | 60 | 1d6+2 | 1 | Bite:1d8,Claw:1d6,Poison:1d10, | poison, |
+| Piranha | 59 | 1d4+3 | 1 | Bite:1d4, | Water, |
+| Gnorf | 58 | 1d4+1 | 1 |  | Cold,poison, |
+| Brown Extrovert Spider | 58 | 1d3 | 1 | Necrotic:1,Poison:1d4, | Necrosis,Webs, |
+| Battle Goat | 56 | 1d6+2 | 1 |  | poison,Water, |
+| Flaming Skeleton | 56 | 1d4 | 1 |  | Cold,Fire,Necrosis,Paralysis,poison,Drain, |
+| Slime Jumper | 52 | 2d6+2 | 1 | Acid:1d6, | Acid,Necrosis, |
+| Burning Skeleton | 52 | 1d3 | 1 |  | Cold,Fire,Necrosis,Paralysis,poison,Drain, |
+| Gnome Thief | 52 | 1d2+1 | 1 |  | Cold,poison, |
+| Onyx Widow | 51 | 1d3 | 1 | Poison:1d4, | Webs, |
+| Kraken Tentacle | 50 | 1d3+1 | 1 | Poison:1d8+1, | Water, |
+| Meatfairy | 50 | 1d3+1 | 1 | Bite:1d4,Claw:1d2, |  |
+| Moresquito | 48 | 1d3+1 | 1 | Bite:1d4,Claw:1d3,Poison:1d4,Drain:1d4, |  |
+| Blinkcat | 47 | 1d3+1 | 1 |  | Cold,Water, |
+| Scorpion | 45 | 1d3+1 | 1 | Poison:1d12, |  |
+| Narhornet | 44 | 1d4+1 | 1 | Bite:1d4,Poison:1d8, |  |
+| Giant Rat | 44 | 1d6+2 | 1 |  | Water, |
+| Centipede | 43 | 1d4+2 | 1 | Bite:1d8,Claw:1d4,Poison:1d4, | poison, |
+| Asp | 43 | 1d3+1 | 1 | Poison:1d3+1, | Webs,Water, |
+| Cuddly Eel | 43 | 1d3+1 | 1 | Bite:1d4, | Water, |
+| Para Spider | 39 | 1d3 | 1 | Poison:1d4, | Cold,Fire,Necrosis,Paralysis,poison,Webs,Drain, |
+| Rabid Bat Minion | 39 | 1 | 1 | Bite:1d3,Claw:1d2, | Water, |
+| Orb Of Fire | 38 |  | 0 |  | Fire,Necrosis,Paralysis,poison, |
+| Large Rat | 37 | 1d3+2 | 1 |  | Water, |
+| Fluffy Bat | 37 | 1 | 1 | Bite:1d3,Claw:1d2, | Water, |
+| Orb Of Energy | 37 |  | 0 |  | Necrosis,Paralysis,poison, |
+| Giant Dungeon Duck | 37 | 1d3+1 | 1 | Bite:1d4,Claw:1d3, | Water, |
 | Jackalope | 36 | 1d4 | 1 |  |  |
-| Ghost | 35 |  | 1 | Cold:1
- | Acid
-Cold
-Fire
-Necrosis
-Paralysis
-poison
-Webs
-Drain
-Water
- |
-| Ghost Minion | 35 |  | 1 | Cold:1
- | Acid
-Cold
-Fire
-Necrosis
-Paralysis
-poison
-Webs
-Drain
-Water
- |
-| Clingy Leech | 35 | 1d3+1 | 1 | Bite:1d4
-Drain:1d4
- | Water
- |
-| Jade Viper | 35 | 1d3+1 | 1 | Poison:1d2
- | Webs
-Water
- |
-| Fleshbee | 32 | 1d3+1 | 1 | Bite:1d4
-Claw:1d3
- |  |
-| Skeleton | 32 | 1d3 | 1 |  | Cold
-Necrosis
-Paralysis
-poison
-Drain
- |
-| Sewer Crab | 31 | 1d3+1 | 1 |  | Water
- |
-| Skeleton | 30 | 1d3 | 1 |  | Cold
-Necrosis
-Paralysis
-poison
-Drain
- |
-| Skeleton Minion | 30 | 1d3 | 1 |  | Cold
-Necrosis
-Paralysis
-poison
-Drain
- |
-| Baby Slime Jumper | 27 | 1 | 1 | Acid:1d3
- | Acid
-Necrosis
- |
-| Goldfish | 27 | 1 | 1 | Bite:1d1+1
- | Water
- |
-| Sheep | 26 | 1d3+2 | 1 |  | Water
- |
-| Bloated Bloodbug | 24 | 1d2+1 | 1 | Bite:1d2
-Drain:1d1
- |  |
-| Vampire Rose | 22 | 1d3 | 1 | Digest:1d5
- |  |
-| Lava Ant | 22 | 1d3+1 | 1 | Bite:1d4
-Claw:1d3
-Fire:1d3+1
- | Fire
- |
+| Ghost | 35 |  | 1 | Cold:1, | Acid,Cold,Fire,Necrosis,Paralysis,poison,Webs,Drain,Water, |
+| Ghost Minion | 35 |  | 1 | Cold:1, | Acid,Cold,Fire,Necrosis,Paralysis,poison,Webs,Drain,Water, |
+| Clingy Leech | 35 | 1d3+1 | 1 | Bite:1d4,Drain:1d4, | Water, |
+| Jade Viper | 35 | 1d3+1 | 1 | Poison:1d2, | Webs,Water, |
+| Fleshbee | 32 | 1d3+1 | 1 | Bite:1d4,Claw:1d3, |  |
+| Skeleton | 32 | 1d3 | 1 |  | Cold,Necrosis,Paralysis,poison,Drain, |
+| Sewer Crab | 31 | 1d3+1 | 1 |  | Water, |
+| Skeleton | 30 | 1d3 | 1 |  | Cold,Necrosis,Paralysis,poison,Drain, |
+| Skeleton Minion | 30 | 1d3 | 1 |  | Cold,Necrosis,Paralysis,poison,Drain, |
+| Baby Slime Jumper | 27 | 1 | 1 | Acid:1d3, | Acid,Necrosis, |
+| Goldfish | 27 | 1 | 1 | Bite:1d1+1, | Water, |
+| Sheep | 26 | 1d3+2 | 1 |  | Water, |
+| Bloated Bloodbug | 24 | 1d2+1 | 1 | Bite:1d2,Drain:1d1, |  |
+| Vampire Rose | 22 | 1d3 | 1 | Digest:1d5, |  |
+| Lava Ant | 22 | 1d3+1 | 1 | Bite:1d4,Claw:1d3,Fire:1d3+1, | Fire, |
 <!-- end monster type marker -->
 
 Pixelart Screenshots
@@ -931,3 +643,4 @@ Other content
 - 2 x potions
 - 1 x player
 <!-- end type marker -->
+

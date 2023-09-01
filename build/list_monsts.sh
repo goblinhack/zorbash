@@ -11,7 +11,7 @@ if [[ $? -ne 0 ]]; then
   exit 1
 fi
 
-sed -i 's/<newline>/\n/g' $PAYLOAD
+sed -i 's/<newline>/,/g' $PAYLOAD
 sed "1,/begin monster type marker/!d" $IN > $PRE
 sed "/end monster type marker/,\$!d" $IN | tail -n +1 - > $POST
 
