@@ -15,7 +15,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_spell(self, True)
     my.is_target_select(self, True)
     my.is_usable(self, True)
-    my.spell_replaces(self, "spell_summon_monst2")
+    my.spell_replaces(self, "spell_of_summon_monst2")
     my.on_targeted_do(self, "me.on_targeted()")
     my.range_max(self, 7)
     my.spell_base_name(self, name)
@@ -28,13 +28,13 @@ def tp_init(name, text_long_name, text_short_name):
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
 
-    my.tile(self, tile="spell_summon_monst3")
-    my.tile(self, tile="spell_summon_monst3_activated")
+    my.tile(self, tile="spell_of_summon_monst3")
+    my.tile(self, tile="spell_of_summon_monst3_activated")
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="spell_summon_monst3", text_long_name="summon monst III", text_short_name="summon monst III")
+    tp_init(name="spell_of_summon_monst3", text_long_name="summon monst III", text_short_name="summon monst III")
 
 
 init()

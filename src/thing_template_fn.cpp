@@ -598,10 +598,10 @@ int Tp::is_immune_to_necrosis(void) const { return _is_immune_to_necrosis; }
 int Tp::is_immune_to_negation(void) const { return _is_immune_to_negation; }
 int Tp::is_immune_to_paralysis(void) const { return _is_immune_to_paralysis; }
 int Tp::is_immune_to_poison(void) const { return _is_immune_to_poison; }
-int Tp::is_immune_to_spell_beckoning(void) const { return _is_immune_to_spell_beckoning; }
+int Tp::is_immune_to_spell_of_beckoning(void) const { return _is_immune_to_spell_of_beckoning; }
 int Tp::is_immune_to_spell_of_holding(void) const { return _is_immune_to_spell_of_holding; }
-int Tp::is_immune_to_spell_repulsion(void) const { return _is_immune_to_spell_repulsion; }
-int Tp::is_immune_to_spell_slow(void) const { return _is_immune_to_spell_slow; }
+int Tp::is_immune_to_spell_of_repulsion(void) const { return _is_immune_to_spell_of_repulsion; }
+int Tp::is_immune_to_spell_of_slowing(void) const { return _is_immune_to_spell_of_slowing; }
 int Tp::is_immune_to_spiderwebs(void) const { return _is_immune_to_spiderwebs; }
 int Tp::is_immune_to_stamina_drain(void) const { return _is_immune_to_stamina_drain; }
 int Tp::is_immune_to_teleport_attack(void) const { return _is_immune_to_teleport_attack; }
@@ -728,11 +728,12 @@ int Tp::is_slippery(void) const { return _is_slippery; }
 int Tp::is_smoke(void) const { return _is_smoke; }
 int Tp::is_snake(void) const { return _is_snake; }
 int Tp::is_soft(void) const { return _is_soft; }
-int Tp::is_spell_beckoning(void) const { return _is_spell_beckoning; }
 int Tp::is_spellbook(void) const { return _is_spellbook; }
+int Tp::is_spell_of_beckoning(void) const { return _is_spell_of_beckoning; }
 int Tp::is_spell_of_holding_barrier(void) const { return _is_spell_of_holding_barrier; }
 int Tp::is_spell_of_holding(void) const { return _is_spell_of_holding; }
-int Tp::is_spell_slow(void) const { return _is_spell_slow; }
+int Tp::is_spell_of_slowing(void) const { return _is_spell_of_slowing; }
+int Tp::is_spell_of_repulsion(void) const { return _is_spell_of_repulsion; }
 int Tp::is_spell(void) const { return _is_spell; }
 int Tp::is_spider(void) const { return _is_spider; }
 int Tp::is_spiderweb(void) const { return _is_spiderweb; }
@@ -861,7 +862,6 @@ int Tp::is_unused_flag91(void) const { return _is_unused_flag91; }
 int Tp::is_unused_flag92(void) const { return _is_unused_flag92; }
 int Tp::is_unused_flag93(void) const { return _is_unused_flag93; }
 int Tp::is_unused_flag94(void) const { return _is_unused_flag94; }
-int Tp::is_unused_flag95(void) const { return _is_unused_flag95; }
 int Tp::is_unused_flag9(void) const { return _is_unused_flag9; }
 int Tp::is_usable(void) const { return _is_usable; }
 int Tp::is_used_when_thrown(void) const { return _is_used_when_thrown; }
@@ -1364,10 +1364,10 @@ void Tp::is_immune_to_necrosis_set(int v) { _is_immune_to_necrosis = v; }
 void Tp::is_immune_to_negation_set(int v) { _is_immune_to_negation = v; }
 void Tp::is_immune_to_paralysis_set(int v) { _is_immune_to_paralysis = v; }
 void Tp::is_immune_to_poison_set(int v) { _is_immune_to_poison = v; }
-void Tp::is_immune_to_spell_beckoning_set(int v) { _is_immune_to_spell_beckoning = v; }
+void Tp::is_immune_to_spell_of_beckoning_set(int v) { _is_immune_to_spell_of_beckoning = v; }
 void Tp::is_immune_to_spell_of_holding_set(int v) { _is_immune_to_spell_of_holding = v; }
-void Tp::is_immune_to_spell_repulsion_set(int v) { _is_immune_to_spell_repulsion = v; }
-void Tp::is_immune_to_spell_slow_set(int v) { _is_immune_to_spell_slow = v; }
+void Tp::is_immune_to_spell_of_repulsion_set(int v) { _is_immune_to_spell_of_repulsion = v; }
+void Tp::is_immune_to_spell_of_slowing_set(int v) { _is_immune_to_spell_of_slowing = v; }
 void Tp::is_immune_to_spiderwebs_set(int v) { _is_immune_to_spiderwebs = v; }
 void Tp::is_immune_to_stamina_drain_set(int v) { _is_immune_to_stamina_drain = v; }
 void Tp::is_immune_to_teleport_attack_set(int v) { _is_immune_to_teleport_attack = v; }
@@ -1494,12 +1494,13 @@ void Tp::is_slippery_set(int v) { _is_slippery = v; }
 void Tp::is_smoke_set(int v) { _is_smoke = v; }
 void Tp::is_snake_set(int v) { _is_snake = v; }
 void Tp::is_soft_set(int v) { _is_soft = v; }
-void Tp::is_spell_beckoning_set(int v) { _is_spell_beckoning = v; }
 void Tp::is_spellbook_set(int v) { _is_spellbook = v; }
+void Tp::is_spell_of_beckoning_set(int v) { _is_spell_of_beckoning = v; }
 void Tp::is_spell_of_holding_barrier_set(int v) { _is_spell_of_holding_barrier = v; }
 void Tp::is_spell_of_holding_set(int v) { _is_spell_of_holding = v; }
+void Tp::is_spell_of_slowing_set(int v) { _is_spell_of_slowing = v; }
+void Tp::is_spell_of_repulsion_set(int v) { _is_spell_of_repulsion = v; }
 void Tp::is_spell_set(int v) { _is_spell = v; }
-void Tp::is_spell_slow_set(int v) { _is_spell_slow = v; }
 void Tp::is_spider_set(int v) { _is_spider = v; }
 void Tp::is_spiderweb_set(int v) { _is_spiderweb = v; }
 void Tp::is_splatter_set(int v) { _is_splatter = v; }
@@ -1627,7 +1628,6 @@ void Tp::is_unused_flag91_set(int v) { _is_unused_flag91 = v; }
 void Tp::is_unused_flag92_set(int v) { _is_unused_flag92 = v; }
 void Tp::is_unused_flag93_set(int v) { _is_unused_flag93 = v; }
 void Tp::is_unused_flag94_set(int v) { _is_unused_flag94 = v; }
-void Tp::is_unused_flag95_set(int v) { _is_unused_flag95 = v; }
 void Tp::is_unused_flag9_set(int v) { _is_unused_flag9 = v; }
 void Tp::is_usable_set(int v) { _is_usable = v; }
 void Tp::is_used_when_thrown_set(int v) { _is_used_when_thrown = v; }

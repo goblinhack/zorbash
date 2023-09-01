@@ -479,6 +479,7 @@ public:
   bool bag_place_at(Thingp item, point pos);
   bool bag_remove_at(Thingp item, point pos);
   bool bag_remove(Thingp);
+  bool beckon(Thingp target);
   bool blit_outline_should_be_shown(color &outline_color);
   bool bodypart_add(Thingp w, int bodypart);
   bool bounce(float bounce_height, float bounce_fade, ts_t ms, int bounce_count);
@@ -647,6 +648,7 @@ public:
   bool projectile_anim_exists(void);
   bool projectile_choose_target(Thingp item, Thingp victim = nullptr);
   bool raging_set(bool val);
+  bool repulse(Thingp target);
   bool resurrect_forced(void);
   bool resurrect(void);
   bool same_leader_or_owner(Thingp it);
@@ -1645,10 +1647,10 @@ public:
   int is_immune_to_negation(void);
   int is_immune_to_paralysis(void);
   int is_immune_to_poison(void);
-  int is_immune_to_spell_beckoning(void);
+  int is_immune_to_spell_of_beckoning(void);
   int is_immune_to_spell_of_holding(void);
-  int is_immune_to_spell_repulsion(void);
-  int is_immune_to_spell_slow(void);
+  int is_immune_to_spell_of_repulsion(void);
+  int is_immune_to_spell_of_slowing(void);
   int is_immune_to_spiderwebs(void);
   int is_immune_to_stamina_drain(void);
   int is_immune_to_teleport_attack(void);
@@ -1775,11 +1777,12 @@ public:
   int is_smoke(void);
   int is_snake(void);
   int is_soft(void);
-  int is_spell_beckoning(void);
   int is_spellbook(void);
+  int is_spell_of_beckoning(void);
   int is_spell_of_holding_barrier(void);
   int is_spell_of_holding(void);
-  int is_spell_slow(void);
+  int is_spell_of_slowing(void);
+  int is_spell_of_repulsion(void);
   int is_spell(void);
   int is_spider(void);
   int is_spiderweb(void);
@@ -1907,7 +1910,6 @@ public:
   int is_unused_flag92(void);
   int is_unused_flag93(void);
   int is_unused_flag94(void);
-  int is_unused_flag95(void);
   int is_unused_flag9(void);
   int is_usable(void);
   int is_used_when_thrown(void);

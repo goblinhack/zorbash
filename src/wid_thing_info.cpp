@@ -801,12 +801,20 @@ void Game::wid_thing_info_add_immunity(WidPopup *w, Thingp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Water");
     w->log(tmp);
   }
-  if (t->is_immune_to_spell_slow()) {
+  if (t->is_immune_to_spell_of_slowing()) {
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Slowing");
     w->log(tmp);
   }
   if (t->is_immune_to_spell_of_holding()) {
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Holding");
+    w->log(tmp);
+  }
+  if (t->is_immune_to_spell_of_beckoning()) {
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Beckoning");
+    w->log(tmp);
+  }
+  if (t->is_immune_to_spell_of_repulsion()) {
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Repulsion");
     w->log(tmp);
   }
 }

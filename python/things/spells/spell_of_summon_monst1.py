@@ -28,13 +28,13 @@ def tp_init(name, text_long_name, text_short_name):
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
 
-    my.tile(self, tile="spell_summon_monst1")
-    my.tile(self, tile="spell_summon_monst1_activated")
+    my.tile(self, tile="spell_of_summon_monst1")
+    my.tile(self, tile="spell_of_summon_monst1_activated")
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="spell_summon_monst1", text_long_name="summon monst I", text_short_name="summon monst I")
+    tp_init(name="spell_of_summon_monst1", text_long_name="summon monst I", text_short_name="summon monst I")
 
 
 init()

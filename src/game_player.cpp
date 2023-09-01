@@ -168,6 +168,13 @@ void Game::place_player(void)
         level->thing_new("potion_health", point(x - 2, y));
       }
       if (0) {
+        auto w = level->thing_new("spell_of_beckoning", point(x, y));
+        t->spell_add(w);
+        level->thing_new("dogman", point(x + 3, y));
+        level->thing_new("brazier", point(x + 2, y));
+        level->thing_new("potion_health", point(x + 2, y + 5));
+      }
+      if (0) {
         // level->thing_new("block_of_ice", point(x + 1, y));
         // level->thing_new("spell_of_holding_barrier", point(x + 1, y + 1));
         // level->thing_new("spell_of_holding_barrier", point(x, y));
@@ -175,19 +182,19 @@ void Game::place_player(void)
         t->spell_add(w);
       }
       if (0) {
-        auto w = level->thing_new("spell_hasted", point(x, y));
+        auto w = level->thing_new("spell_of_hasted", point(x, y));
         t->spell_add(w);
       }
       if (0) {
-        auto w = level->thing_new("spell_slow", point(x, y));
+        auto w = level->thing_new("spell_of_slowing", point(x, y));
         t->spell_add(w);
       }
       if (0) {
-        auto w = level->thing_new("spell_summon_rock", point(x, y));
+        auto w = level->thing_new("spell_of_summon_rock", point(x, y));
         t->spell_add(w);
       }
       if (0) {
-        auto w = level->thing_new("spell_dominate_monst1", point(x, y));
+        auto w = level->thing_new("spell_of_dominate_monst1", point(x, y));
         t->spell_add(w);
       }
       if (0) {

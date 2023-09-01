@@ -588,7 +588,13 @@ void tp_dump_monsters(void)
     if (tp->is_immune_to_spell_of_holding()) {
       imm_str += "Holding<newline>";
     }
-    if (tp->is_immune_to_spell_slow()) {
+    if (tp->is_immune_to_spell_of_beckoning()) {
+      imm_str += "Beckoning<newline>";
+    }
+    if (tp->is_immune_to_spell_of_repulsion()) {
+      imm_str += "Repulsion<newline>";
+    }
+    if (tp->is_immune_to_spell_of_slowing()) {
       imm_str += "Slowing<newline>";
     }
     if (tp->is_immune_to_spiderwebs()) {

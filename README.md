@@ -911,7 +911,7 @@ Other content
 - 52 x food
 - 24 x treasure
 - 23 x items
-- 19 x spells
+- 20 x spells
 - 15 x weapons
 - 13 x buffs
 - 11 x skills

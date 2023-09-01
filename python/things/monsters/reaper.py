@@ -61,7 +61,7 @@ def tp_init(name, text_long_name):
     my.is_immune_to_paralysis(self, True)
     my.is_immune_to_poison(self, True)
     my.is_immune_to_spell_of_holding(self, True)
-    my.is_immune_to_spell_slow(self, True)
+    my.is_immune_to_spell_of_slowing(self, True)
     my.is_immune_to_stamina_drain(self, True)
     my.is_interesting(self, True)
     my.is_loggable(self, True)

@@ -455,6 +455,90 @@ PyObject *thing_unfreeze(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_TRUE;
 }
 
+PyObject *thing_beckon(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     me_id    = 0;
+  uint32_t     it_id    = 0;
+  static char *kwlist[] = {(char *) "me", (char *) "it", nullptr};
+
+  TRACE_NO_INDENT();
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &me_id, &it_id)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! me_id) {
+    ERR("%s: No me_id thing ID set", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! it_id) {
+    ERR("%s: No it_id thing ID set", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  Thingp me = game->thing_find(me_id);
+  if (! me) {
+    ERR("%s: Cannot find me thing ID %u", __FUNCTION__, me_id);
+    Py_RETURN_FALSE;
+  }
+
+  Thingp it = game->thing_find(it_id);
+  if (! it) {
+    ERR("%s: Cannot find it thing ID %u", __FUNCTION__, it_id);
+    Py_RETURN_FALSE;
+  }
+
+  if (me->beckon(it)) {
+    Py_RETURN_TRUE;
+  }
+
+  Py_RETURN_FALSE;
+}
+
+PyObject *thing_repulse(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     me_id    = 0;
+  uint32_t     it_id    = 0;
+  static char *kwlist[] = {(char *) "me", (char *) "it", nullptr};
+
+  TRACE_NO_INDENT();
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &me_id, &it_id)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! me_id) {
+    ERR("%s: No me_id thing ID set", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! it_id) {
+    ERR("%s: No it_id thing ID set", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  Thingp me = game->thing_find(me_id);
+  if (! me) {
+    ERR("%s: Cannot find me thing ID %u", __FUNCTION__, me_id);
+    Py_RETURN_FALSE;
+  }
+
+  Thingp it = game->thing_find(it_id);
+  if (! it) {
+    ERR("%s: Cannot find it thing ID %u", __FUNCTION__, it_id);
+    Py_RETURN_FALSE;
+  }
+
+  if (me->repulse(it)) {
+    Py_RETURN_TRUE;
+  }
+
+  Py_RETURN_FALSE;
+}
+
 PyObject *thing_perma_death(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
