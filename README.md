@@ -274,7 +274,8 @@ Bestiary
 | Cthulite | 322 | 1d14+4 | 2 | Acid:2d6,Poison:2d12, | Acid,Necrosis,poison, |
 | Undead Bear | 320 | 2d8+5 | 2 | Necrotic:1, | Cold,Necrosis,poison,Drain, |
 | Bearowl | 290 | 2d8+5 | 2 |  |  |
-| Baby Kraken | 249 |  | 1 | Bite:3d8+10,Digest:1d20,Drown:1d20, | Water, |
+| Baby Kraken | 249 |  | 1 | Bite:3d8+10,Digest:1d20,
+Drown:1d20, | Water, |
 | Colossal Scorpion | 243 |  | 1 | Bite:2d8+6,Digest:1d40,Poison:1d20+10, |  |
 | Fire Troll | 214 | 1d12+4 | 1 |  | Fire,poison, |
 | Yeti | 208 | 1d12+8 | 1 |  | Cold, |
