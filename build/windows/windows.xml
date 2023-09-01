@@ -1,14 +1,9 @@
 <project>
-		<readyToInstallActionList>
-			<deleteFile>
-				<path>${installdir}/zorbash/</path>
-			</deleteFile>
-		</readyToInstallActionList>
     <shortName>Zorbash</shortName>
     <fullName>Zorbash</fullName>
-    <version>0.1.6</version>
+    <version>0.1.7</version>
     <installerFilename></installerFilename>
-    <licenseFile>C:/msys64/home/neila/zorbash/LICENSE</licenseFile>
+    <licenseFile>C:/msys64/home/neila/zorbash/src/LICENSE</licenseFile>
     <logoImage>C:/msys64/home/neila/zorbash/build/windows/zorbash-logo.png</logoImage>
     <componentList>
         <component>
@@ -411,7 +406,7 @@
                     <windowsPath>${installdir}/</windowsPath>
                 </startMenuShortcut>
                 <startMenuShortcut>
-                    <comment>The Dungeons of Doom</comment>
+                    <comment>Zorbash</comment>
                     <name>zorbash</name>
                     <runAsAdmin>0</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
@@ -423,6 +418,11 @@
             </startMenuShortcutList>
         </component>
     </componentList>
+    <preInstallationActionList>
+      <deleteFile>
+        <path>${installdir}</path>
+      </deleteFile>
+    </preInstallationActionList>
     <enableRollback>1</enableRollback>
     <enableTimestamp>1</enableTimestamp>
     <vendor>goblinhack</vendor>
