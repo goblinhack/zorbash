@@ -439,8 +439,6 @@ def init_tiles_16x16_main():
         "",
         ############################################################
         "",
-        "spell_magic_missile",
-        "spell_magic_missile_activated",
         "spell_summon_monst1",
         "spell_summon_monst1_activated",
         "spell_summon_monst2",
@@ -457,6 +455,8 @@ def init_tiles_16x16_main():
         "spell_summon_rock_activated",
         "spell_hasted",
         "spell_hasted_activated",
+        "",
+        "",
         ############################################################
         "",
         "spell_dominate_monst1",
@@ -483,8 +483,8 @@ def init_tiles_16x16_main():
         "spell_repulsion_activated",
         "spell_beckoning",
         "spell_beckoning_activated",
-        "",
-        "",
+        "spell_magic_missile",
+        "spell_magic_missile_activated",
         "",
         "",
         "",
