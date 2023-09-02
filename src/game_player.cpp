@@ -69,9 +69,14 @@ void Game::place_player(void)
         auto k = level->thing_new("key", point(x, y));
         t->carry(k, carry_options);
       }
+      if (1) {
+        auto w = level->thing_new("sword_wood", point(x, y));
+        t->carry(w, carry_options);
+      }
       if (0) {
         auto w = level->thing_new("warhammer", point(x, y));
         t->carry(w, carry_options);
+        level->thing_new("tentacleye", point(x + 1, y));
       }
       if (0) {
         level->thing_new("skeleton", point(x, y + 3));
@@ -168,7 +173,6 @@ void Game::place_player(void)
         level->thing_new("potion_health", point(x - 2, y + 9));
         level->thing_new("potion_health", point(x - 2, y));
       }
-      level->thing_new("tentacleye", point(x + 1, y));
       if (0) {
         level->thing_new("dogman", point(x + 1, y));
         t->spell_add(level->thing_new("spell_of_beckoning", point(x, y)));
