@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - repulsion fixes                                                                                                                            -->
 <!-- - mace/hammer - but next move penalty and strength penalties and pushes victim back one tile                                                 -->
 <!-- - invisible phantoms that leave puddles of ectoplasm ?                                                                                       -->
 <!-- ------                                                                                                                                       -->
@@ -260,8 +261,13 @@ Press TAB to switch between modes during the game.
 
 Bestiary
 --------
-<!-- begin monster type marker -->
-<!-- end monster type marker -->
+<!-- begin weapons type marker -->
+<!-- end weapons type marker -->
+
+Weapons
+-------
+<!-- begin weapons type marker -->
+<!-- end weapons type marker -->
 
 Pixelart Screenshots
 --------------------

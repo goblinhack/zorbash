@@ -730,7 +730,8 @@ PYTHONPATH=/${MINGW_TYPE}/lib/python${PYVER}/:/${MINGW_TYPE}/lib/python${PYVER}/
             ;;
         Linux)
             if [[ $OPT_GITHUB = "" ]]; then
-              ./build/list_monsts.sh ./${TARGET} do-it
+              ./build/list_monsters.sh ./${TARGET} do-it
+              ./build/list_weapons.sh ./${TARGET} do-it
             fi
             log_info "Run:"
             echo "  ./${TARGET}"

@@ -615,3 +615,34 @@ void tp_dump_monsters(void)
            imm_str.c_str());
   }
 }
+
+void tp_dump_weapons(void)
+{
+  // | Left-aligned | Center-aligned | Right-aligned |
+  // | :---         |     :---:      |          ---: |
+  // | git status   | git status     | git status    |
+  // | git diff     | git diff       | git diff      |
+
+  printf("DUMP: | %s | %s | %s | %s |\n", "Name", "Damage", "Dmg Roll", "Dmg Chance");
+
+  printf("DUMP: | %s | %s | %s | %s |\n", ":---", "---", "---", "---");
+
+  std::vector< Tpp > m;
+
+  for (auto &tp : tp_id_map) {
+    if (tp->is_weapon()) {
+      m.push_back(tp);
+    }
+  }
+
+  sort(m.begin(), m.end(),
+       [](Tpp a, Tpp b) -> bool { return a->dmg_melee_dice().max_roll() > b->dmg_melee_dice().max_roll(); });
+
+  for (auto tp : m) {
+    std::string dmg_str;
+
+    printf("DUMP: | %s | %u - %u | %s | %.2f %% |\n", capitalise(tp->text_long_name()).c_str(),
+           tp->dmg_melee_dice().min_roll(), tp->dmg_melee_dice().max_roll(), tp->dmg_melee_dice_str().c_str(),
+           (float) tp->chance_d10000_damaged() / (float) 100.0);
+  }
+}

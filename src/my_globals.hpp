@@ -28,7 +28,8 @@ extern bool g_opt_biome_flooded;        // Force this biome
 extern bool g_opt_biome_ice;            // Force this biome
 extern bool g_opt_biome_lava;           // Force this biome
 extern bool g_opt_biome_swamp;          // Force this biome
-extern bool g_opt_dump_monsters;        // Dump monster info
+extern bool g_opt_dump_monsters;        // Dump monsters info
+extern bool g_opt_dump_weapons;         // Dump weapons info
 extern bool g_opt_gfx_monochrome;       // Black and white
 extern bool g_opt_no_slow_log_flush;    // Do not flush after each console log at start
 extern bool g_opt_override_debug_level; // Temporary, used to disable existing debugs

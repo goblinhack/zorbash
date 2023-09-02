@@ -33,7 +33,8 @@ bool g_opt_biome_flooded;        // Force this biome
 bool g_opt_biome_ice;            // Force this biome
 bool g_opt_biome_lava;           // Force this biome
 bool g_opt_biome_swamp;          // Force this biome
-bool g_opt_dump_monsters;        // Dump monster info
+bool g_opt_dump_monsters;        // Dump monsters info
+bool g_opt_dump_weapons;         // Dump weapons info
 bool g_opt_gfx_monochrome;       // Black and white
 bool g_opt_no_slow_log_flush;    // Do not flush after each console log at start
 bool g_opt_override_debug_level; // Temporary used to disable debugs on load

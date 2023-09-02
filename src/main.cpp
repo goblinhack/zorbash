@@ -514,7 +514,8 @@ static void usage(void)
   CON(" --no-debug                  -- Disable debugs.");
   CON(" ");
   CON("Testing options:");
-  CON(" --dump-monsters             -- Dump monster info");
+  CON(" --dump-monsters             -- Dump monsters info");
+  CON(" --dump-weapons              -- Dump weapons info");
   CON(" --test-biome-chasms         -- Test the chasms biome");
   CON(" --test-biome-flooded        -- Test the flooded biome");
   CON(" --test-biome-ice            -- Test the ice biome");
@@ -575,6 +576,11 @@ static void parse_args(int argc, char *argv[])
 
     if (! strcasecmp(argv[ i ], "--dump-monsters") || ! strcasecmp(argv[ i ], "-dump-monsters")) {
       g_opt_dump_monsters = true;
+      continue;
+    }
+
+    if (! strcasecmp(argv[ i ], "--dump-weapons") || ! strcasecmp(argv[ i ], "-dump-weapons")) {
+      g_opt_dump_weapons = true;
       continue;
     }
 
@@ -857,7 +863,7 @@ int main(int argc, char *argv[])
   }
 
   {
-    if (! g_opt_tests && ! g_opt_dump_monsters) {
+    if (! g_opt_tests && ! g_opt_dump_monsters && ! g_opt_dump_weapons) {
       TRACE_NO_INDENT();
       if (! sdl_init()) {
         ERR("SDL: Init");
@@ -881,7 +887,7 @@ int main(int argc, char *argv[])
     }
   }
 
-  if (! g_opt_tests && ! g_opt_dump_monsters) {
+  if (! g_opt_tests && ! g_opt_dump_monsters && ! g_opt_dump_weapons) {
     TRACE_NO_INDENT();
     sdl_config_update_all();
   }
@@ -1114,6 +1120,14 @@ int main(int argc, char *argv[])
       TRACE_NO_INDENT();
       wid_toggle_hidden(wid_console_window);
       tp_dump_monsters();
+      quit();
+      return 0;
+    }
+
+    if (g_opt_dump_weapons) {
+      TRACE_NO_INDENT();
+      wid_toggle_hidden(wid_console_window);
+      tp_dump_weapons();
       quit();
       return 0;
     }
