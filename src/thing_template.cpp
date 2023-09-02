@@ -792,6 +792,10 @@ void tp_dump_weapons(void)
       special += "Additional-attack<newline>";
     }
 
+    if (tp->is_warhammer() || tp->is_mace()) {
+      special += "Move-penalty";
+    }
+
     printf("DUMP: | %s | %u - %u | %s | %.2f %% | %s |\n", capitalise(tp->text_long_name()).c_str(),
            tp->dmg_melee_dice().min_roll(), tp->dmg_melee_dice().max_roll(), tp->dmg_melee_dice_str().c_str(),
            (float) tp->chance_d10000_damaged() / (float) 100.0, special.c_str());
