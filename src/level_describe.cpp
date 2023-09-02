@@ -375,7 +375,14 @@ void Level::describe(point p)
       }
       hover_over_things_tmp.push_back(t);
     }
-    hover_over_things = hover_over_things_tmp;
+
+    if (hover_over_things_tmp.empty()) {
+      //
+      // We filtered too much
+      //
+    } else {
+      hover_over_things = hover_over_things_tmp;
+    }
   }
 
   //
@@ -392,7 +399,14 @@ void Level::describe(point p)
       }
       hover_over_things_tmp.push_back(t);
     }
-    hover_over_things = hover_over_things_tmp;
+
+    if (hover_over_things_tmp.empty()) {
+      //
+      // We filtered too much
+      //
+    } else {
+      hover_over_things = hover_over_things_tmp;
+    }
   }
 
   if (0) {
