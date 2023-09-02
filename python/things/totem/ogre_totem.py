@@ -25,16 +25,11 @@ def on_want_to_shoot_at(me, target, target_x, target_y):  # Return True on doing
     if my.thing_is_same_mob(me, target):
         return
 
-    roll = my.py_d100()
-    if roll < 90:
+    if my.thing_is_player(target) or my.thing_is_alive_monst(target):
+        my.thing_spell_cast_at(me, "spell_of_beckoning", target)
+    else:
         my.thing_sound_play_channel(me, my.CHANNEL_WEAPON, "lightning_a")
         my.thing_shoot_projectile_or_laser_at(me, "laser_lightning", target)
-    else:
-        if my.thing_is_player(target) or my.thing_is_alive_monst(target):
-            my.thing_spell_cast_at(me, "spell_of_beckoning", target)
-        else:
-            my.thing_sound_play_channel(me, my.CHANNEL_WEAPON, "lightning_a")
-            my.thing_shoot_projectile_or_laser_at(me, "laser_lightning", target)
 
     return True
 
@@ -48,7 +43,7 @@ def tp_init(name, text_long_name):
     my.collision_hit_priority(self, 5)
     my.dmg_received_doubled_from_water(self, True)
     my.distance_throw(self, 7)
-    my.distance_spell_cast(self, 5)
+    my.distance_spell_cast(self, 7)
     my.environ_hates_water(self, 100)
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
@@ -67,7 +62,7 @@ def tp_init(name, text_long_name):
     my.is_always_hit(self, True)
     my.is_attackable_by_monst(self, True)
     my.on_want_to_shoot_at_do(self, "me.on_want_to_shoot_at()")
-    my.chance_d1000_shooting(self, 200)
+    my.chance_d1000_shooting(self, 1000)
     my.is_able_to_see_in_the_dark(self, True)
     my.is_able_to_shoot_at_close_range(self, True)
     my.is_able_to_shoot_at(self, True)
@@ -110,7 +105,7 @@ def tp_init(name, text_long_name):
     my.is_tickable(self, True)
     my.light_color(self, "cyan")
     my.light_dist(self, 3)
-    my.minion_limit(self, 3)
+    my.minion_limit(self, 2)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
     my.on_idle_tick_freq_dice(self, "1:me.on_idle_tick_freq_dice()")
