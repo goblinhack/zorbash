@@ -69,8 +69,8 @@ void Game::place_player(void)
         auto k = level->thing_new("key", point(x, y));
         t->carry(k, carry_options);
       }
-      if (1) {
-        auto w = level->thing_new("sword_wood", point(x, y));
+      if (0) {
+        auto w = level->thing_new("warhammer", point(x, y));
         t->carry(w, carry_options);
       }
       if (0) {

@@ -121,18 +121,6 @@ int Thing::move_speed_total(void)
     }
   }
 
-  auto player = level->player;
-  if (is_monst() && player) {
-    stat += 100 * player->move_penalty();
-  } else if (is_player()) {
-    if (player->move_penalty()) {
-      stat -= 100 * player->move_penalty();
-      if (stat < 0) {
-        stat = 0;
-      }
-    }
-  }
-
   return stat;
 }
 

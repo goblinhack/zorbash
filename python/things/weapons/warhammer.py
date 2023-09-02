@@ -4,6 +4,7 @@ import tp
 
 def on_swing(owner, item, x, y):
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_swing{my.py_non_pcg_random_range_inclusive(1, 3)}")
+    my.thing_move_penalty_incr(owner, 1)
 
 
 def on_owner_attack_dmg_melee(me, owner, victim, x, y, damage):
@@ -12,6 +13,8 @@ def on_owner_attack_dmg_melee(me, owner, victim, x, y, damage):
     # my.con("victim  {} {:X}".format(my.thing_name_get(victim), victim))
     # my.con("damage  {}".format(damage))
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_impact{my.py_non_pcg_random_range_inclusive(1, 4)}")
+    if my.thing_is_moveable(victim):
+        my.thing_repulse(owner, victim)
     return damage + my.thing_enchant_count_get(me)
 
 
@@ -27,12 +30,12 @@ def on_unequip(owner, me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.chance_d10000_damaged(self, 100)
-    my.chance_d10000_set_on_fire(self, 5000)
+    my.chance_d10000_damaged(self, 1)
+    my.chance_d10000_set_on_fire(self, 5)
     my.dmg_chance_d1000_melee(self, 0, 1000)
-    my.dmg_melee_dice(self, "1d4")
-    my.equip_carry_anim(self, "sword_wood_carry")
-    my.gfx_anim_use(self, "sword_wood_swing")
+    my.dmg_melee_dice(self, "4d8")
+    my.equip_carry_anim(self, "warhammer_carry")
+    my.gfx_anim_use(self, "warhammer_swing")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
@@ -42,8 +45,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_submergible(self, True)
-    my.gold_value_dice(self, "25")
-    my.health_initial_dice(self, "1d20+10")
+    my.gold_value_dice(self, "250")
+    my.health_initial_dice(self, "1d200+10")
     my.is_able_to_be_equipped(self, True)
     my.is_able_to_be_teleported(self, True)
     my.is_able_to_fall(self, True)
@@ -81,25 +84,26 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_swing_do(self, "me.on_swing()")
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_COMMON)
-    my.stamina_drain_on_attacking(self, 0)
+    my.stamina_drain_on_attacking(self, 3)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+2 DMG")
-    my.text_description_long(self, "Ideal for play fighting and not much else.")
-    my.text_description_short(self, "Thy wooden means of justice.")
+    my.text_description_long(self, "The warhammer is the weapon of choice for those that wish the impact of their actions to be felt.")
+    my.text_description_long2(self, "Dealing massive damage and driving the victim back one tile, the only disadvantage is that each swing has a move penalty. Hopefully the extra damage dealt compensates!")
+    my.text_description_short(self, "Mighty warhammer")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
     # end sort marker
 
     my.tile(self,
-            ascii_fg_char="up_arrow", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="up_arrow", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile=name)
 
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="sword_wood", text_long_name="wooden short sword", text_short_name="sword, short")
+    tp_init(name="warhammer", text_long_name="warhammer", text_short_name="warhammer")
 
 
 init()
