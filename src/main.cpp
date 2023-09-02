@@ -881,7 +881,7 @@ int main(int argc, char *argv[])
     }
   }
 
-  {
+  if (! g_opt_tests && ! g_opt_dump_monsters) {
     TRACE_NO_INDENT();
     sdl_config_update_all();
   }

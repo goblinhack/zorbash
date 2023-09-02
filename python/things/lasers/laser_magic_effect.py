@@ -41,7 +41,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 def init():
     tp_init(
-        name="laser_magic",
+        name="laser_magic_effect",
         text_long_name="burst of magic",
         text_short_name="burst of magic",
     )

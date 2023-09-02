@@ -642,8 +642,8 @@ private:
   int _is_spell_of_beckoning {};
   int _is_spell_of_holding {};
   int _is_spell_of_holding_barrier {};
-  int _is_spell_of_slowing {};
   int _is_spell_of_repulsion {};
+  int _is_spell_of_slowing {};
   int _is_spider {};
   int _is_spiderweb {};
   int _is_splatter {};
@@ -1990,8 +1990,8 @@ public:
   int is_spell_of_beckoning(void) const;
   int is_spell_of_holding_barrier(void) const;
   int is_spell_of_holding(void) const;
-  int is_spell_of_slowing(void) const;
   int is_spell_of_repulsion(void) const;
+  int is_spell_of_slowing(void) const;
   int is_spell(void) const;
   int is_spider(void) const;
   int is_spiderweb(void) const;
@@ -2757,8 +2757,8 @@ public:
   void is_spell_of_beckoning_set(int v);
   void is_spell_of_holding_barrier_set(int v);
   void is_spell_of_holding_set(int v);
-  void is_spell_of_slowing_set(int v);
   void is_spell_of_repulsion_set(int v);
+  void is_spell_of_slowing_set(int v);
   void is_spell_set(int v);
   void is_spider_set(int v);
   void is_spiderweb_set(int v);

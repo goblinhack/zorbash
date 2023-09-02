@@ -527,7 +527,7 @@ std::initializer_list< std::string > tps = {
     "laser_energy",
     "laser_lightning",
     "laser_lightning_fork",
-    "laser_magic",
+    "laser_magic_effect",
     "laser_negation",
     "lava",
     "lava_ant",

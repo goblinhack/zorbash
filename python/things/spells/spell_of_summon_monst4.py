@@ -10,7 +10,7 @@ def tp_init(name, text_long_name, text_short_name):
     global self
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.gfx_targeted_projectile(self, "projectile_magical_effect")
+    my.gfx_targeted_projectile(self, "laser_magic_effect")
     my.spell_replaces(self, "spell_of_summon_monst3")
     my.is_loggable(self, True)
     my.is_spell(self, True)

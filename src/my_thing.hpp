@@ -1781,8 +1781,8 @@ public:
   int is_spell_of_beckoning(void);
   int is_spell_of_holding_barrier(void);
   int is_spell_of_holding(void);
-  int is_spell_of_slowing(void);
   int is_spell_of_repulsion(void);
+  int is_spell_of_slowing(void);
   int is_spell(void);
   int is_spider(void);
   int is_spiderweb(void);
