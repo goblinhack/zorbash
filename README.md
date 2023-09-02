@@ -373,22 +373,22 @@ Weapons
 <!-- begin weapons type marker -->
 | Name | Damage | Dmg Roll | Dmg Chance | Special |
 | :--- | --- | --- | --- | --- |
-| Warhammer | 4 - 32 | 4d8 | 0.01 % |  |
-| Very Broadsword | 2 - 24 | 2d12 | 0.01 % |  |
-| Double Shovel | 2 - 20 | 2d10 | 1.00 % |  |
-| Holy Sword Of Clonrichet | 5 - 20 | 1d16+4 | 0.01 % |  |
-| Scythe | 3 - 18 | 3d6 | 0.05 % |  |
-| Sword Of Plutonium | 5 - 16 | 1d12+4 | 0.01 % |  |
-| Sword Of Duck Summoning | 3 - 12 | 1d10+2 | 0.01 % |  |
-| Cutlass | 1 - 10 | 1d10 | 0.20 % |  |
-| Pike | 1 - 10 | 1d10 | 0.50 % |  |
-| Shovel | 1 - 8 | 1d8 | 0.50 % |  |
-| Short Sword | 1 - 8 | 1d8 | 0.10 % |  |
-| Sword Of Draining | 1 - 8 | 1d8 | 0.05 % | Damage-Drain:1d20<br /> |
-| Rusty Short Sword | 2 - 7 | 1d6+1 | 2.00 % | Damage-Poison:1d2+1<br /> |
-| Short Axe | 1 - 6 | 1d6 | 0.10 % |  |
-| Dagger | 1 - 4 | 1d4 | 0.05 % |  |
-| Wooden Short Sword | 1 - 4 | 1d4 | 1.00 % |  |
+| Warhammer | 4 - 32 | 4d8 | 0.01 % |   |
+| Very Broadsword | 2 - 24 | 2d12 | 0.01 % |  Immunity-Acid<br /> |
+| Double Shovel | 2 - 20 | 2d10 | 1.00 % |   |
+| Holy Sword Of Clonrichet | 5 - 20 | 1d16+4 | 0.01 % |  Immunity-Acid<br /> |
+| Scythe | 3 - 18 | 3d6 | 0.05 % |   |
+| Sword Of Plutonium | 5 - 16 | 1d12+4 | 0.01 % |  Immunity-Acid<br /> |
+| Sword Of Duck Summoning | 3 - 12 | 1d10+2 | 0.01 % |  Immunity-Acid<br /> |
+| Cutlass | 1 - 10 | 1d10 | 0.20 % |   |
+| Pike | 1 - 10 | 1d10 | 0.50 % |   |
+| Shovel | 1 - 8 | 1d8 | 0.50 % |   |
+| Short Sword | 1 - 8 | 1d8 | 0.10 % |   |
+| Sword Of Draining | 1 - 8 | 1d8 | 0.05 % | Damage-Drain:1d20<br /> Immunity-Drain<br />Additional-attack<br /> |
+| Rusty Short Sword | 2 - 7 | 1d6+1 | 2.00 % | Damage-Poison:1d2+1<br />  |
+| Short Axe | 1 - 6 | 1d6 | 0.10 % |   |
+| Dagger | 1 - 4 | 1d4 | 0.05 % |   |
+| Wooden Short Sword | 1 - 4 | 1d4 | 1.00 % |   |
 <!-- end weapons type marker -->
 
 Pixelart Screenshots
