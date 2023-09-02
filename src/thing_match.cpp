@@ -338,6 +338,7 @@ bool Tp::matches(const std::string &what)
   if (is_limb() && (what == "is_limb")) { return true; }
   if (is_living() && (what == "is_living")) { return true; }
   if (is_loggable() && (what == "is_loggable")) { return true; }
+  if (is_mace() && (what == "is_mace")) { return true; }
   if (is_made_of_rock() && (what == "is_made_of_rock")) { return true; }
   if (is_magical_effect() && (what == "is_magical_effect")) { return true; }
   if (is_magical() && (what == "is_magical")) { return true; }
@@ -447,6 +448,7 @@ bool Tp::matches(const std::string &what)
   if (is_target_radial() && (what == "is_target_radial")) { return true; }
   if (is_target_select() && (what == "is_target_select")) { return true; }
   if (is_tentacle() && (what == "is_tentacle")) { return true; }
+  if (is_tentacleye() && (what == "is_tentacleye")) { return true; }
   if (is_thief() && (what == "is_thief")) { return true; }
   if (is_throwable() && (what == "is_throwable")) { return true; }
   if (is_thrown_as_a_weapon() && (what == "is_thrown_as_a_weapon")) { return true; }
@@ -555,9 +557,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag8() && (what == "is_unused_flag8")) { return true; }
   if (is_unused_flag90() && (what == "is_unused_flag90")) { return true; }
   if (is_unused_flag91() && (what == "is_unused_flag91")) { return true; }
-  if (is_unused_flag92() && (what == "is_unused_flag92")) { return true; }
-  if (is_unused_flag93() && (what == "is_unused_flag93")) { return true; }
-  if (is_unused_flag94() && (what == "is_unused_flag94")) { return true; }
   if (is_unused_flag9() && (what == "is_unused_flag9")) { return true; }
   if (is_usable() && (what == "is_usable")) { return true; }
   if (is_used_when_thrown() && (what == "is_used_when_thrown")) { return true; }
@@ -567,6 +566,7 @@ bool Tp::matches(const std::string &what)
   if (is_very_intelligent() && (what == "is_very_intelligent")) { return true; }
   if (is_wall_dungeon() && (what == "is_wall_dungeon")) { return true; }
   if (is_wall() && (what == "is_wall")) { return true; }
+  if (is_warhammer() && (what == "is_warhammer")) { return true; }
   if (is_weapon() && (what == "is_weapon")) { return true; }
   if (is_wooden() && (what == "is_wooden")) { return true; }
   if (is_yeti() && (what == "is_yeti")) { return true; }
@@ -940,6 +940,7 @@ bool Thing::matches(const std::string &what)
   if (is_limb() && (what == "is_limb")) { return true; }
   if (is_living() && (what == "is_living")) { return true; }
   if (is_loggable() && (what == "is_loggable")) { return true; }
+  if (is_mace() && (what == "is_mace")) { return true; }
   if (is_made_of_rock() && (what == "is_made_of_rock")) { return true; }
   if (is_magical_effect() && (what == "is_magical_effect")) { return true; }
   if (is_magical() && (what == "is_magical")) { return true; }
@@ -1050,6 +1051,7 @@ bool Thing::matches(const std::string &what)
   if (is_target_radial() && (what == "is_target_radial")) { return true; }
   if (is_target_select() && (what == "is_target_select")) { return true; }
   if (is_tentacle() && (what == "is_tentacle")) { return true; }
+  if (is_tentacleye() && (what == "is_tentacleye")) { return true; }
   if (is_thief() && (what == "is_thief")) { return true; }
   if (is_throwable() && (what == "is_throwable")) { return true; }
   if (is_thrown_as_a_weapon() && (what == "is_thrown_as_a_weapon")) { return true; }
@@ -1158,9 +1160,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag8() && (what == "is_unused_flag8")) { return true; }
   if (is_unused_flag90() && (what == "is_unused_flag90")) { return true; }
   if (is_unused_flag91() && (what == "is_unused_flag91")) { return true; }
-  if (is_unused_flag92() && (what == "is_unused_flag92")) { return true; }
-  if (is_unused_flag93() && (what == "is_unused_flag93")) { return true; }
-  if (is_unused_flag94() && (what == "is_unused_flag94")) { return true; }
   if (is_unused_flag9() && (what == "is_unused_flag9")) { return true; }
   if (is_usable() && (what == "is_usable")) { return true; }
   if (is_used_when_thrown() && (what == "is_used_when_thrown")) { return true; }
@@ -1170,6 +1169,7 @@ bool Thing::matches(const std::string &what)
   if (is_very_intelligent() && (what == "is_very_intelligent")) { return true; }
   if (is_wall_dungeon() && (what == "is_wall_dungeon")) { return true; }
   if (is_wall() && (what == "is_wall")) { return true; }
+  if (is_warhammer() && (what == "is_warhammer")) { return true; }
   if (is_weapon() && (what == "is_weapon")) { return true; }
   if (is_wooden() && (what == "is_wooden")) { return true; }
   if (is_yeti() && (what == "is_yeti")) { return true; }
@@ -1535,6 +1535,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_limb") { return &Thing::is_limb; }
   if (what == "is_living") { return &Thing::is_living; }
   if (what == "is_loggable") { return &Thing::is_loggable; }
+  if (what == "is_mace") { return &Thing::is_mace; }
   if (what == "is_made_of_rock") { return &Thing::is_made_of_rock; }
   if (what == "is_magical_effect") { return &Thing::is_magical_effect; }
   if (what == "is_magical") { return &Thing::is_magical; }
@@ -1641,6 +1642,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_sword") { return &Thing::is_sword; }
   if (what == "is_target_radial") { return &Thing::is_target_radial; }
   if (what == "is_tentacle") { return &Thing::is_tentacle; }
+  if (what == "is_tentacleye") { return &Thing::is_tentacleye; }
   if (what == "is_thief") { return &Thing::is_thief; }
   if (what == "is_throwable") { return &Thing::is_throwable; }
   if (what == "is_thrown_as_a_weapon") { return &Thing::is_thrown_as_a_weapon; }
@@ -1749,9 +1751,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag8") { return &Thing::is_unused_flag8; }
   if (what == "is_unused_flag90") { return &Thing::is_unused_flag90; }
   if (what == "is_unused_flag91") { return &Thing::is_unused_flag91; }
-  if (what == "is_unused_flag92") { return &Thing::is_unused_flag92; }
-  if (what == "is_unused_flag93") { return &Thing::is_unused_flag93; }
-  if (what == "is_unused_flag94") { return &Thing::is_unused_flag94; }
   if (what == "is_unused_flag9") { return &Thing::is_unused_flag9; }
   if (what == "is_usable") { return &Thing::is_usable; }
   if (what == "is_used_when_thrown") { return &Thing::is_used_when_thrown; }
@@ -1761,6 +1760,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_very_intelligent") { return &Thing::is_very_intelligent; }
   if (what == "is_wall_dungeon") { return &Thing::is_wall_dungeon; }
   if (what == "is_wall") { return &Thing::is_wall; }
+  if (what == "is_warhammer") { return &Thing::is_warhammer; }
   if (what == "is_water") { return &Thing::is_water; }
   if (what == "is_weapon") { return &Thing::is_weapon; }
   if (what == "is_wooden") { return &Thing::is_wooden; }

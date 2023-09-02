@@ -1677,6 +1677,7 @@ public:
   int is_limb(void);
   int is_living(void);
   int is_loggable(void);
+  int is_mace(void);
   int is_made_of_rock(void);
   int is_magical_effect(void);
   int is_magical(void);
@@ -1796,6 +1797,7 @@ public:
   int is_target_radial(void);
   int is_target_select(void);
   int is_tentacle(void);
+  int is_tentacleye(void);
   int is_thief(void);
   int is_throwable(void);
   int is_thrown_as_a_weapon(void);
@@ -1907,9 +1909,6 @@ public:
   int is_unused_flag8(void);
   int is_unused_flag90(void);
   int is_unused_flag91(void);
-  int is_unused_flag92(void);
-  int is_unused_flag93(void);
-  int is_unused_flag94(void);
   int is_unused_flag9(void);
   int is_usable(void);
   int is_used_when_thrown(void);
@@ -1919,6 +1918,7 @@ public:
   int is_very_intelligent(void);
   int is_wall_dungeon(void);
   int is_wall(void);
+  int is_warhammer(void);
   int is_water(void);
   int is_weapon_class_A(void);
   int is_weapon_class_B(void);

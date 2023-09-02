@@ -629,6 +629,7 @@ int Tp::is_light(void) const { return _is_light; }
 int Tp::is_limb(void) const { return _is_limb; }
 int Tp::is_living(void) const { return _is_living; }
 int Tp::is_loggable(void) const { return _is_loggable; }
+int Tp::is_mace(void) const { return _is_mace; }
 int Tp::is_made_of_rock(void) const { return _is_made_of_rock; }
 int Tp::is_magical_effect(void) const { return _is_magical_effect; }
 int Tp::is_magical(void) const { return _is_magical; }
@@ -747,6 +748,7 @@ int Tp::is_sword(void) const { return _is_sword; }
 int Tp::is_target_radial(void) const { return _is_target_radial; }
 int Tp::is_target_select(void) const { return _is_target_select; }
 int Tp::is_tentacle(void) const { return _is_tentacle; }
+int Tp::is_tentacleye(void) const { return _is_tentacleye; }
 int Tp::is_the_grid(void) const { return _is_the_grid; }
 int Tp::is_thief(void) const { return _is_thief; }
 int Tp::is_throwable(void) const { return _is_throwable; }
@@ -859,9 +861,6 @@ int Tp::is_unused_flag89(void) const { return _is_unused_flag89; }
 int Tp::is_unused_flag8(void) const { return _is_unused_flag8; }
 int Tp::is_unused_flag90(void) const { return _is_unused_flag90; }
 int Tp::is_unused_flag91(void) const { return _is_unused_flag91; }
-int Tp::is_unused_flag92(void) const { return _is_unused_flag92; }
-int Tp::is_unused_flag93(void) const { return _is_unused_flag93; }
-int Tp::is_unused_flag94(void) const { return _is_unused_flag94; }
 int Tp::is_unused_flag9(void) const { return _is_unused_flag9; }
 int Tp::is_usable(void) const { return _is_usable; }
 int Tp::is_used_when_thrown(void) const { return _is_used_when_thrown; }
@@ -871,6 +870,7 @@ int Tp::is_very_heavy(void) const { return _is_very_heavy; }
 int Tp::is_very_intelligent(void) const { return _is_very_intelligent; }
 int Tp::is_wall_dungeon(void) const { return _is_wall_dungeon; }
 int Tp::is_wall(void) const { return _is_wall; }
+int Tp::is_warhammer(void) const { return _is_warhammer; }
 int Tp::is_weapon_class_A(void) const { return _is_weapon_class_A; }
 int Tp::is_weapon_class_B(void) const { return _is_weapon_class_B; }
 int Tp::is_weapon_class_C(void) const { return _is_weapon_class_C; }
@@ -1395,6 +1395,7 @@ void Tp::is_light_set(int v) { _is_light = v; }
 void Tp::is_limb_set(int v) { _is_limb = v; }
 void Tp::is_living_set(int v) { _is_living = v; }
 void Tp::is_loggable_set(int v) { _is_loggable = v; }
+void Tp::is_mace_set(int v) { _is_mace = v; }
 void Tp::is_made_of_rock_set(int v) { _is_made_of_rock = v; }
 void Tp::is_magical_effect_set(int v) { _is_magical_effect = v; }
 void Tp::is_magical_set(int v) { _is_magical = v; }
@@ -1513,6 +1514,7 @@ void Tp::is_sword_set(int v) { _is_sword = v; }
 void Tp::is_target_radial_set(int v) { _is_target_radial = v; }
 void Tp::is_target_select_set(int v) { _is_target_select = v; }
 void Tp::is_tentacle_set(int v) { _is_tentacle = v; }
+void Tp::is_tentacleye_set(int v) { _is_tentacleye = v; }
 void Tp::is_the_grid_set(int v) { _is_the_grid = v; }
 void Tp::is_thief_set(int v) { _is_thief = v; }
 void Tp::is_throwable_set(int v) { _is_throwable = v; }
@@ -1625,9 +1627,6 @@ void Tp::is_unused_flag89_set(int v) { _is_unused_flag89 = v; }
 void Tp::is_unused_flag8_set(int v) { _is_unused_flag8 = v; }
 void Tp::is_unused_flag90_set(int v) { _is_unused_flag90 = v; }
 void Tp::is_unused_flag91_set(int v) { _is_unused_flag91 = v; }
-void Tp::is_unused_flag92_set(int v) { _is_unused_flag92 = v; }
-void Tp::is_unused_flag93_set(int v) { _is_unused_flag93 = v; }
-void Tp::is_unused_flag94_set(int v) { _is_unused_flag94 = v; }
 void Tp::is_unused_flag9_set(int v) { _is_unused_flag9 = v; }
 void Tp::is_usable_set(int v) { _is_usable = v; }
 void Tp::is_used_when_thrown_set(int v) { _is_used_when_thrown = v; }
@@ -1637,6 +1636,7 @@ void Tp::is_very_heavy_set(int v) { _is_very_heavy = v; }
 void Tp::is_very_intelligent_set(int v) { _is_very_intelligent = v; }
 void Tp::is_wall_dungeon_set(int v) { _is_wall_dungeon = v; }
 void Tp::is_wall_set(int v) { _is_wall = v; }
+void Tp::is_warhammer_set(int v) { _is_warhammer = v; }
 void Tp::is_weapon_class_A_set(int v) { _is_weapon_class_A = v; }
 void Tp::is_weapon_class_B_set(int v) { _is_weapon_class_B = v; }
 void Tp::is_weapon_class_C_set(int v) { _is_weapon_class_C = v; }

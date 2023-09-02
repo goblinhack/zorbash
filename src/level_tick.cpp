@@ -341,13 +341,15 @@ void Level::tick_(void)
       //
       // Unable to move this round?
       //
-      if (t->move_penalty() > 0) {
-        //
-        // No move this round.
-        //
-        t->move_penalty_decr();
-        t->movement_remaining_set(0);
-        continue;
+      if (! t->is_player()) {
+        if (t->move_penalty() > 0) {
+          //
+          // No move this round.
+          //
+          t->move_penalty_decr();
+          t->movement_remaining_set(0);
+          continue;
+        }
       }
 
       //
@@ -776,7 +778,13 @@ TRACE_NO_INDENT();
   }
 
   if (tick_done) {
-    if (player && game->robot_mode) {
+    if (player && (player->move_penalty() > 0)) {
+      //
+      // No move this round.
+      //
+      player->move_penalty_decr();
+      game->tick_begin("move penalty");
+    } else if (player && game->robot_mode) {
       dbg("Level tick done and in robot mode");
       TRACE_AND_INDENT();
 

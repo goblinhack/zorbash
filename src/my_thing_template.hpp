@@ -538,6 +538,7 @@ private:
   int _is_limb {};
   int _is_living {};
   int _is_loggable {};
+  int _is_mace {};
   int _is_made_of_rock {};
   int _is_magical {};
   int _is_magical_effect {};
@@ -656,6 +657,7 @@ private:
   int _is_target_radial {};
   int _is_target_select {};
   int _is_tentacle {};
+  int _is_tentacleye {};
   int _is_the_grid {};
   int _is_thief {};
   int _is_throwable {};
@@ -770,9 +772,6 @@ private:
   int _is_unused_flag9 {};
   int _is_unused_flag90 {};
   int _is_unused_flag91 {};
-  int _is_unused_flag92 {};
-  int _is_unused_flag93 {};
-  int _is_unused_flag94 {};
   int _is_usable {};
   int _is_used_when_thrown {};
   int _is_very_combustible {};
@@ -781,6 +780,7 @@ private:
   int _is_very_intelligent {};
   int _is_wall {};
   int _is_wall_dungeon {};
+  int _is_warhammer {};
   int _is_weapon {};
   int _is_weapon_class_A {};
   int _is_weapon_class_B {};
@@ -1887,6 +1887,7 @@ public:
   int is_limb(void) const;
   int is_living(void) const;
   int is_loggable(void) const;
+  int is_mace(void) const;
   int is_made_of_rock(void) const;
   int is_magical_effect(void) const;
   int is_magical(void) const;
@@ -2005,6 +2006,7 @@ public:
   int is_target_radial(void) const;
   int is_target_select(void) const;
   int is_tentacle(void) const;
+  int is_tentacleye(void) const;
   int is_the_grid(void) const;
   int is_thief(void) const;
   int is_throwable(void) const;
@@ -2118,9 +2120,6 @@ public:
   int is_unused_flag8(void) const;
   int is_unused_flag90(void) const;
   int is_unused_flag91(void) const;
-  int is_unused_flag92(void) const;
-  int is_unused_flag93(void) const;
-  int is_unused_flag94(void) const;
   int is_unused_flag9(void) const;
   int is_usable(void) const;
   int is_used_when_thrown(void) const;
@@ -2130,6 +2129,7 @@ public:
   int is_very_intelligent(void) const;
   int is_wall_dungeon(void) const;
   int is_wall(void) const;
+  int is_warhammer(void) const;
   int is_weapon_class_A(void) const;
   int is_weapon_class_B(void) const;
   int is_weapon_class_C(void) const;
@@ -2654,6 +2654,7 @@ public:
   void is_limb_set(int v);
   void is_living_set(int v);
   void is_loggable_set(int v);
+  void is_mace_set(int v);
   void is_made_of_rock_set(int v);
   void is_magical_effect_set(int v);
   void is_magical_set(int v);
@@ -2772,6 +2773,7 @@ public:
   void is_target_radial_set(int v);
   void is_target_select_set(int v);
   void is_tentacle_set(int v);
+  void is_tentacleye_set(int v);
   void is_the_grid_set(int v);
   void is_thief_set(int v);
   void is_throwable_set(int v);
@@ -2885,9 +2887,6 @@ public:
   void is_unused_flag8_set(int v);
   void is_unused_flag90_set(int v);
   void is_unused_flag91_set(int v);
-  void is_unused_flag92_set(int v);
-  void is_unused_flag93_set(int v);
-  void is_unused_flag94_set(int v);
   void is_unused_flag9_set(int v);
   void is_usable_set(int v);
   void is_used_when_thrown_set(int v);
@@ -2897,6 +2896,7 @@ public:
   void is_very_intelligent_set(int v);
   void is_wall_dungeon_set(int v);
   void is_wall_set(int v);
+  void is_warhammer_set(int v);
   void is_weapon_class_A_set(int v);
   void is_weapon_class_B_set(int v);
   void is_weapon_class_C_set(int v);

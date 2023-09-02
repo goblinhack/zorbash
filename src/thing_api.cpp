@@ -655,20 +655,20 @@ int Thing::is_unused_flag91(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag91());
 }
-int Thing::is_unused_flag92(void)
+int Thing::is_tentacleye(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag92());
+  return (tp()->is_tentacleye());
 }
-int Thing::is_unused_flag93(void)
+int Thing::is_mace(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag93());
+  return (tp()->is_mace());
 }
-int Thing::is_unused_flag94(void)
+int Thing::is_warhammer(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag94());
+  return (tp()->is_warhammer());
 }
 int Thing::is_spell_of_repulsion(void)
 {
