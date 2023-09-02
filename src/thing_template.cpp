@@ -623,9 +623,9 @@ void tp_dump_weapons(void)
   // | git status   | git status     | git status    |
   // | git diff     | git diff       | git diff      |
 
-  printf("DUMP: | %s | %s | %s | %s |\n", "Name", "Damage", "Dmg Roll", "Dmg Chance");
+  printf("DUMP: | %s | %s | %s | %s | %s |\n", "Name", "Damage", "Dmg Roll", "Dmg Chance", "Special");
 
-  printf("DUMP: | %s | %s | %s | %s |\n", ":---", "---", "---", "---");
+  printf("DUMP: | %s | %s | %s | %s | %s |\n", ":---", "---", "---", "---", "---");
 
   std::vector< Tpp > m;
 
@@ -641,8 +641,155 @@ void tp_dump_weapons(void)
   for (auto tp : m) {
     std::string dmg_str;
 
-    printf("DUMP: | %s | %u - %u | %s | %.2f %% |\n", capitalise(tp->text_long_name()).c_str(),
+    if (! tp->dmg_acid_dice_str().empty()) {
+      dmg_str += "Acid:";
+      dmg_str += tp->dmg_acid_dice_str();
+      dmg_str += "<newline>";
+    }
+    if (! tp->dmg_bite_dice_str().empty()) {
+      dmg_str += "Bite:";
+      dmg_str += tp->dmg_bite_dice_str();
+      dmg_str += "<newline>";
+    }
+    if (! tp->dmg_claw_dice_str().empty()) {
+      dmg_str += "Claw:";
+      dmg_str += tp->dmg_claw_dice_str();
+      dmg_str += "<newline>";
+    }
+    if (! tp->dmg_cold_dice_str().empty()) {
+      dmg_str += "Cold:";
+      dmg_str += tp->dmg_cold_dice_str();
+      dmg_str += "<newline>";
+    }
+    if (! tp->dmg_crush_dice_str().empty()) {
+      dmg_str += "Crush:";
+      dmg_str += tp->dmg_crush_dice_str();
+      dmg_str += "<newline>";
+    }
+    if (! tp->dmg_digest_dice_str().empty()) {
+      dmg_str += "Digest:";
+      dmg_str += tp->dmg_digest_dice_str();
+      dmg_str += "<newline>";
+    }
+    if (! tp->dmg_drown_dice_str().empty()) {
+      dmg_str += "Drown:";
+      dmg_str += tp->dmg_drown_dice_str();
+      dmg_str += "<newline>";
+    }
+    if (! tp->dmg_energy_dice_str().empty()) {
+      dmg_str += "Energy:";
+      dmg_str += tp->dmg_energy_dice_str();
+      dmg_str += "<newline>";
+    }
+    if (! tp->dmg_fire_dice_str().empty()) {
+      dmg_str += "Fire:";
+      dmg_str += tp->dmg_fire_dice_str();
+      dmg_str += "<newline>";
+    }
+    if (! tp->dmg_heat_dice_str().empty()) {
+      dmg_str += "Heat:";
+      dmg_str += tp->dmg_heat_dice_str();
+      dmg_str += "<newline>";
+    }
+    if (! tp->dmg_lightning_dice_str().empty()) {
+      dmg_str += "Lightning:";
+      dmg_str += tp->dmg_lightning_dice_str();
+      dmg_str += "<newline>";
+    }
+    if (! tp->dmg_magic_dice_str().empty()) {
+      dmg_str += "Magic:";
+      dmg_str += tp->dmg_magic_dice_str();
+      dmg_str += "<newline>";
+    }
+    if (! tp->dmg_missile_dice_str().empty()) {
+      dmg_str += "Missile:";
+      dmg_str += tp->dmg_missile_dice_str();
+      dmg_str += "<newline>";
+    }
+    if (! tp->dmg_necrosis_dice_str().empty()) {
+      dmg_str += "Necrotic:";
+      dmg_str += tp->dmg_necrosis_dice_str();
+      dmg_str += "<newline>";
+    }
+    if (! tp->dmg_negation_dice_str().empty()) {
+      dmg_str += "Negation:";
+      dmg_str += tp->dmg_negation_dice_str();
+      dmg_str += "<newline>";
+    }
+    if (! tp->dmg_poison_dice_str().empty()) {
+      dmg_str += "Poison:";
+      dmg_str += tp->dmg_poison_dice_str();
+      dmg_str += "<newline>";
+    }
+    if (! tp->dmg_stamina_dice_str().empty()) {
+      dmg_str += "Drain:";
+      dmg_str += tp->dmg_stamina_dice_str();
+      dmg_str += "<newline>";
+    }
+    if (! tp->dmg_water_dice_str().empty()) {
+      dmg_str += "Water:";
+      dmg_str += tp->dmg_water_dice_str();
+      dmg_str += "<newline>";
+    }
+
+    std::string imm_str;
+
+    if (tp->is_immune_to_acid()) {
+      imm_str += "Acid<newline>";
+    }
+    if (tp->is_immune_to_cold()) {
+      imm_str += "Cold<newline>";
+    }
+    if (tp->is_immune_to_electricity()) {
+      imm_str += "Electricity<newline>";
+    }
+    if (tp->is_immune_to_fire()) {
+      imm_str += "Fire<newline>";
+    }
+    if (tp->is_immune_to_magic_drain()) {
+      imm_str += "Psi<newline>";
+    }
+    if (tp->is_immune_to_necrosis()) {
+      imm_str += "Necrosis<newline>";
+    }
+    if (tp->is_immune_to_negation()) {
+      imm_str += "Negation<newline>";
+    }
+    if (tp->is_immune_to_paralysis()) {
+      imm_str += "Paralysis<newline>";
+    }
+    if (tp->is_immune_to_poison()) {
+      imm_str += "poison<newline>";
+    }
+    if (tp->is_immune_to_spell_of_holding()) {
+      imm_str += "Holding<newline>";
+    }
+    if (tp->is_immune_to_spell_of_beckoning()) {
+      imm_str += "Beckoning<newline>";
+    }
+    if (tp->is_immune_to_spell_of_repulsion()) {
+      imm_str += "Repulsion<newline>";
+    }
+    if (tp->is_immune_to_spell_of_slowing()) {
+      imm_str += "Slowing<newline>";
+    }
+    if (tp->is_immune_to_spiderwebs()) {
+      imm_str += "Webs<newline>";
+    }
+    if (tp->is_immune_to_stamina_drain()) {
+      imm_str += "Drain<newline>";
+    }
+    if (tp->is_immune_to_teleport_attack()) {
+      imm_str += "Teleport<newline>";
+    }
+    if (tp->is_immune_to_water()) {
+      imm_str += "Water<newline>";
+    }
+
+    std::string special = dmg_str + " " + imm_str;
+
+    printf("DUMP: | %s | %u - %u | %s | %.2f %% | %s |\n", capitalise(tp->text_long_name()).c_str(),
            tp->dmg_melee_dice().min_roll(), tp->dmg_melee_dice().max_roll(), tp->dmg_melee_dice_str().c_str(),
-           (float) tp->chance_d10000_damaged() / (float) 100.0);
+           (float) tp->chance_d10000_damaged() / (float) 100.0, dmg_str.c_str());
   }
 }
