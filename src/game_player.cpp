@@ -167,9 +167,10 @@ void Game::place_player(void)
         level->thing_new("potion_health", point(x - 2, y + 9));
         level->thing_new("potion_health", point(x - 2, y));
       }
-      if (1) {
-        auto w = level->thing_new("spell_of_beckoning", point(x, y));
-        t->spell_add(w);
+      if (0) {
+        t->spell_add(level->thing_new("spell_of_beckoning", point(x, y)));
+        t->spell_add(level->thing_new("spell_of_magic_missile", point(x, y)));
+        level->thing_new("barrel", point(x + 3, y - 3));
         level->thing_new("dogman", point(x + 3, y));
         level->thing_new("brazier", point(x + 2, y));
         level->thing_new("potion_health", point(x + 2, y + 5));

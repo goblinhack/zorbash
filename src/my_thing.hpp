@@ -427,8 +427,10 @@ public:
   Thingp leader(void);
   Thingp most_dangerous_adjacent_thing(void);
   Thingp most_dangerous_visible_thing(void);
-  Thingp projectile_shoot_at(Thingp wand, const std::string &item, point at);
-  Thingp projectile_shoot_at(Thingp wand, const std::string &item, Thingp target);
+  Thingp projectile_shoot_at(Thingp item, const std::string &proj_name, point at);
+  Thingp projectile_shoot_at(Thingp item, const std::string &proj_name, Thingp target);
+  Thingp laser_shoot_at(Thingp item, const std::string &laser_name, point at, UseOptions *use_options = nullptr);
+  Thingp laser_shoot_at(Thingp item, const std::string &laser_name, Thingp target, UseOptions *use_options = nullptr);
   Thingp spawn_at(const std::string &what);
   Thingp spawn_at(const std::string &what, point p);
   Thingp spawn_minion_at_my_position(const std::string &what);
@@ -610,8 +612,6 @@ public:
   bool jump_attack(Thingp it = nullptr);
   bool laser_anim_exists(void);
   bool laser_choose_target(Thingp item, Thingp victim = nullptr);
-  bool laser_shoot_at(Thingp staff, const std::string &item, point at, UseOptions *use_options = nullptr);
-  bool laser_shoot_at(Thingp staff, const std::string &item, Thingp target, UseOptions *use_options = nullptr);
   bool learn_random_skill(void);
   bool learn_random_spell(void);
   bool map_offset_coords_get(point &blit_tl, point &blit_br, Tilep &tile, bool reflection);

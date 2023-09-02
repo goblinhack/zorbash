@@ -298,7 +298,14 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
   dbg("Cast %s at %s", what->to_short_string().c_str(), target->to_string().c_str());
   TRACE_AND_INDENT();
 
-  target = projectile_shoot_at(what, what->gfx_targeted_projectile(), target_at);
+  //
+  // Particle or laser effect for the spell?
+  //
+  if (what->gfx_targeted_laser().empty()) {
+    target = projectile_shoot_at(what, what->gfx_targeted_projectile(), target_at);
+  } else {
+    target = laser_shoot_at(what, what->gfx_targeted_laser(), target_at);
+  }
 
   dbg("Spell is used");
   TRACE_AND_INDENT();
