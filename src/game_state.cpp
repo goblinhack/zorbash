@@ -71,7 +71,7 @@ void Game::change_state(int new_state, const std::string &why)
   //
   // Why oh why change state
   //
-  IF_DEBUG3
+  IF_DEBUG
   {
     CON("Game state change: %s -> %s, reason %s", gama_state_to_string(old_state).c_str(),
         gama_state_to_string(new_state).c_str(), why.c_str());
@@ -170,19 +170,21 @@ void Game::change_state(int new_state, const std::string &why)
 
   switch (old_state) {
     case STATE_NORMAL :
+      if (pcg_random_allowed) {
+        if (level) {
+          level->cursor_recreate();
+          if (level->cursor) {
+            level->cursor->clear_move_path("Game state change");
+          }
+        }
+      }
+      break;
     case STATE_INVENTORY :        // Currently managing inventory
     case STATE_COLLECTING_ITEMS : // Collecting en masse from the level
     case STATE_ENCHANTING_ITEMS :
     case STATE_CHOOSING_SKILLS :
     case STATE_CHOOSING_SPELLS :
-      if (level) {
-        level->cursor_recreate();
-        if (level->cursor) {
-          level->cursor->clear_move_path("Game state change");
-        }
-      }
-      break;
-    case STATE_CHOOSING_LEVEL :
+    case STATE_CHOOSING_LEVEL : break;
     case STATE_CHOOSING_TARGET : // Looking to somewhere to throw at
       //
       // Don't create the cursor right after selecting. Wait until

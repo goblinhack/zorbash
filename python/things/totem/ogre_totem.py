@@ -31,7 +31,7 @@ def on_want_to_shoot_at(me, target, target_x, target_y):  # Return True on doing
         my.thing_shoot_projectile_or_laser_at(me, "laser_lightning", target)
     else:
         if my.thing_is_player(target) or my.thing_is_alive_monst(target):
-            my.thing_spell_cast_at(me, "spell_of_slowing", target)
+            my.thing_spell_cast_at(me, "spell_of_beckoning", target)
         else:
             my.thing_sound_play_channel(me, my.CHANNEL_WEAPON, "lightning_a")
             my.thing_shoot_projectile_or_laser_at(me, "laser_lightning", target)
@@ -89,7 +89,7 @@ def tp_init(name, text_long_name):
     my.is_immune_to_stamina_drain(self, True)
     my.is_interesting(self, True)
     my.is_loggable(self, True)
-    my.is_mob_class_B(self, True)
+    my.is_mob_class_C(self, True)
     my.is_mob(self, True)
     my.is_totem(self, True)
     my.is_obs_destructable(self, True)
@@ -116,6 +116,7 @@ def tp_init(name, text_long_name):
     my.on_idle_tick_freq_dice(self, "1:me.on_idle_tick_freq_dice()")
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "A tall pillar of skulls, smeared in grease and blood. This is not a place to hang out.")
+    my.text_description_long2(self, "You may however find this revolting pillar oddly attracting.")
     my.text_description_short(self, "Ogre holy place.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
