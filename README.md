@@ -373,7 +373,7 @@ Weapons
 <!-- begin weapons type marker -->
 | Name | Damage | Dmg Roll | Dmg Chance | Special |
 | :--- | --- | --- | --- | --- |
-| Warhammer | 4 - 32 | 4d8 | 0.01 % |   |
+| Warhammer | 4 - 32 | 4d8 | 0.01 % |  Move-penalty |
 | Very Broadsword | 2 - 24 | 2d12 | 0.01 % |  Immunity-Acid<br /> |
 | Double Shovel | 2 - 20 | 2d10 | 1.00 % |   |
 | Holy Sword Of Clonrichet | 5 - 20 | 1d16+4 | 0.01 % |  Immunity-Acid<br /> |
