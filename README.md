@@ -384,8 +384,8 @@ Weapons
 | Pike | 1 - 10 | 1d10 | 0.50 % |  |
 | Shovel | 1 - 8 | 1d8 | 0.50 % |  |
 | Short Sword | 1 - 8 | 1d8 | 0.10 % |  |
-| Sword Of Draining | 1 - 8 | 1d8 | 0.05 % | Drain:1d20<br /> |
-| Rusty Short Sword | 2 - 7 | 1d6+1 | 2.00 % | Poison:1d2+1<br /> |
+| Sword Of Draining | 1 - 8 | 1d8 | 0.05 % | Damage-Drain:1d20<br /> |
+| Rusty Short Sword | 2 - 7 | 1d6+1 | 2.00 % | Damage-Poison:1d2+1<br /> |
 | Short Axe | 1 - 6 | 1d6 | 0.10 % |  |
 | Dagger | 1 - 4 | 1d4 | 0.05 % |  |
 | Wooden Short Sword | 1 - 4 | 1d4 | 1.00 % |  |

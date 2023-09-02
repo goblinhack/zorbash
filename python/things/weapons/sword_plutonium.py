@@ -55,7 +55,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.chance_d10000_damaged(self, 1)
     my.dmg_chance_d1000_melee(self, 0, 1000)
     my.dmg_melee_dice(self, "1d12+4")
-    my.dmg_num_of_attacks(self, 1)
     my.equip_carry_anim(self, "sword_plutonium_carry")
     my.gfx_anim_use(self, "sword_plutonium_swing")
     my.gfx_ascii_fade_with_dist(self, True)
