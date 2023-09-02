@@ -2,7 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_array_bounds_check.hpp"
+#include "my_level.hpp"
 #include "my_thing.hpp"
 
 bool Thing::beckon(Thingp target)
@@ -13,6 +13,20 @@ bool Thing::beckon(Thingp target)
 
   if (points.size() < 2) {
     dbg("Beckon: %s too close", target->to_short_string().c_str());
+    return false;
+  }
+
+  if (level->is_spell_of_holding_barrier(target->curr_at)) {
+    //
+    // Unable to beckon as shielded?
+    //
+    if (target->is_player()) {
+      target->msg("%%fg=green$You are shielded from beckoning.%%fg=reset$");
+    } else if (target->is_monst() && is_player()) {
+      msg("%%fg=yellow$%s is shielded from beckoning.%%fg=reset$", target->text_The().c_str());
+    }
+
+    dbg("Beckon: %s is held in a magic barrier", target->to_short_string().c_str());
     return false;
   }
 

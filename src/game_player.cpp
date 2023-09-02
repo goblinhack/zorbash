@@ -51,6 +51,7 @@ void Game::place_player(void)
       }
 
       if (0) {
+        level->thing_new("spell_of_holding_barrier", point(x, y));
         level->thing_new("ogre_totem", point(x + 2, y + 2));
         level->thing_new("trap_dart", point(x + 2, y + 2));
         level->thing_new("zorb_totem", point(x + 2, y + 2));

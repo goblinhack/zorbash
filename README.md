@@ -1,8 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - healing spell?                                                                                                                             -->
-<!-- - add immunity to github                                                                                                                     -->
-<!-- - spell of beckoning/repulsing                                                                                                               -->
 <!-- - invisible phantoms that leave puddles of ectoplasm ?                                                                                       -->
 <!-- - need any gas type                                                                                                                          -->
 <!-- ------                                                                                                                                       -->
