@@ -46,7 +46,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_submergible(self, True)
-    my.gold_value_dice(self, "250")
+    my.gold_value_dice(self, "450")
     my.health_initial_dice(self, "1d200+10")
     my.is_able_to_be_equipped(self, True)
     my.is_able_to_be_teleported(self, True)

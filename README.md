@@ -373,13 +373,13 @@ Weapons
 <!-- begin weapons type marker -->
 | Name | Class/Rarity | Damage | Damage Roll | Special | Damage Chance | Gold Value |
 | :--- | --- | --- | --- | --- | --- | --- |
-| Mace | C/common | 4 - 32 | 4d8 |  Swing-penalty<br /> | 0.01 % | 250 |
-| Warhammer | C/common | 3 - 24 | 3d8 |  Swing-penalty<br />Hits all surrounding<br /> | 0.01 % | 250 |
-| Very Broadsword | C/uncommon | 2 - 24 | 2d12 |  Immunity-Acid<br />Hits adjacent<br /> | 0.01 % | 350 |
+| Mace | C/common | 4 - 32 | 4d8 |  Swing-penalty<br /> | 0.01 % | 350 |
+| Warhammer | C/common | 3 - 24 | 3d8 |  Swing-penalty<br />Hits all surrounding<br /> | 0.01 % | 450 |
+| Very Broadsword | C/uncommon | 2 - 24 | 2d12 |  Hits adjacent<br /> | 0.01 % | 350 |
 | Double Shovel | C/uncommon | 2 - 20 | 2d10 |  Hits in-front and behind<br /> | 1.00 % | 50 |
-| Holy Sword Of Clonrichet | C/v-rare | 5 - 20 | 1d16+4 |  Immunity-Acid<br />Immunity-Cold<br />Immunity-poison<br />x2 undead<br /> | 0.01 % | 5000 |
+| Holy Sword Of Clonrichet | C/v-rare | 5 - 20 | 1d16+4 |  Immunity-Acid<br />Immunity-Cold<br />Immunity-poison<br />x2 undead<br />Hits all surrounding<br /> | 0.01 % | 2500 |
 | Scythe | C/uncommon | 3 - 18 | 3d6 |  Hits all surrounding<br /> | 0.05 % | 250 |
-| Sword Of Plutonium | C/v-rare | 5 - 16 | 1d12+4 |  Immunity-Acid<br /> | 0.01 % | 2000 |
+| Sword Of Plutonium | C/v-rare | 5 - 16 | 1d12+4 |  Immunity-Acid<br /> | 0.01 % | 1000 |
 | Sword Of Duck Summoning | C/v-rare | 3 - 12 | 1d10+2 |  Immunity-Acid<br /> | 0.01 % | 1500 |
 | Sword Of Draining | C/v-rare | 1 - 12 | 1d12 | Damage-Drain:1d20<br /> Immunity-Drain<br /> Additional-attack<br /> | 0.05 % | 1000 |
 | Cutlass | B/rare | 1 - 10 | 1d10 |   | 0.20 % | 100 |

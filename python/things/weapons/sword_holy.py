@@ -29,6 +29,7 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.attack_no_msg(self, True)
     my.chance_d10000_damaged(self, 1)
+    my.collision_hit_360(self, True)
     my.dmg_chance_d1000_melee(self, 0, 1000)
     my.dmg_melee_dice(self, "1d16+4")
     my.equip_carry_anim(self, "sword_holy_carry")
@@ -42,7 +43,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_submergible(self, True)
-    my.gold_value_dice(self, "5000")
+    my.gold_value_dice(self, "2500")
     my.health_initial_dice(self, "1d1000+500")
     my.is_able_to_attack_owner(self, True)
     my.is_able_to_be_equipped(self, True)
