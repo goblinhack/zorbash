@@ -1,7 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - repulsion fixes                                                                                                                            -->
-<!-- - mace/hammer - but next move penalty and strength penalties and pushes victim back one tile                                                 -->
+<!-- - add strength penalties                                                                                                                     -->
+<!-- - add mace                                                                                                                                   -->
 <!-- - invisible phantoms that leave puddles of ectoplasm ?                                                                                       -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
