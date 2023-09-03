@@ -27,13 +27,19 @@ def on_unequip(owner, me, x, y):
     return
 
 
+def on_enchant(me, x, y):
+    owner = my.thing_top_owner_id_get(me)
+    if my.thing_is_player(owner):
+        my.thing_msg_if_not_dead_or_dying(me, "The warhammer glows.")
+
+
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.chance_d10000_damaged(self, 1)
     my.chance_d10000_set_on_fire(self, 5)
-    my.dmg_chance_d1000_melee(self, 0, 1000)
     my.collision_hit_360(self, True)
+    my.dmg_chance_d1000_melee(self, 0, 1000)
     my.dmg_melee_dice(self, "3d8")
     my.equip_carry_anim(self, "warhammer_carry")
     my.gfx_anim_use(self, "warhammer_swing")
@@ -80,6 +86,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.item_height(self, 5)
     my.item_width(self, 5)
     my.noise_on_dropping(self, 30)
+    my.on_enchant_do(self, "me.on_enchant()")
     my.on_equip_do(self, "me.on_equip()")
     my.on_owner_attack_dmg_melee_do(self, "me.on_owner_attack_dmg_melee()")
     my.on_swing_do(self, "me.on_swing()")
@@ -89,8 +96,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_str_min(self, 14)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 DMG")
-    my.text_description_long2(self, "Dealing massive damage and driving the victim back one tile the warhammer is a formidable weapon.")
-    my.text_description_long(self, "Also ideal for home baking.")
+    my.text_description_long2(self, "Also useful for pruning and general gardening activities.")
+    my.text_description_long(self, "Dealing massive damage and driving the victim back one tile, the only disadvantage of the mighty warhammer is that each swing has a move penalty. Hopefully the extra damage dealt compensates!")
     my.text_description_short(self, "Mighty warhammer")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)

@@ -24,6 +24,12 @@ def on_unequip(owner, me, x, y):
     return
 
 
+def on_enchant(me, x, y):
+    owner = my.thing_top_owner_id_get(me)
+    if my.thing_is_player(owner):
+        my.thing_msg_if_not_dead_or_dying(me, "The sword glows. You hear angels sing.")
+
+
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
@@ -84,6 +90,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.light_color(self, "white")
     my.light_dist(self, 2)
     my.noise_on_dropping(self, 25)
+    my.on_enchant_do(self, "me.on_enchant()")
     my.on_equip_do(self, "me.on_equip()")
     my.on_owner_attack_dmg_melee_do(self, "me.on_owner_attack_dmg_melee()")
     my.on_swing_do(self, "me.on_swing()")
