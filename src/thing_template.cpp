@@ -795,11 +795,13 @@ void tp_dump_weapons(void)
     std::string special = dmg_str + " " + imm_str;
 
     if (tp->dmg_num_of_attacks() > 1) {
-      special += "Additional-attack<newline>";
+      special += " Additional-attack<newline>";
     }
-
     if (tp->is_warhammer() || tp->is_mace()) {
-      special += "Move-penalty";
+      special += "Swing-penalty<newline>";
+    }
+    if (tp->is_holy()) {
+      special += "Holy (2xDMG undead)<newline>";
     }
 
     printf(

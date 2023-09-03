@@ -90,7 +90,7 @@ def tp_init(name, text_long_name):
     my.is_loggable(self, True)
     my.is_made_of_rock(self, True)
     my.is_magical(self, True)
-    my.is_monst_class_D(self, True)
+    my.is_monst_class_C(self, True)
     my.is_monst(self, True)
     my.is_moveable(self, True)
     my.is_msg_allowed_hears_something(self, True)

@@ -89,7 +89,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_att_bonus(self, 2)  # means +2 per enchant
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 DMG, +2 ATT")
-    my.text_description_long2(self, "Class two relic.")
+    my.text_description_long2(self, "Class two relic. Deals double damage to the undead.")
     my.text_description_long(self, "The origins of this holy sword are unknown, but rumored to have been forged from the craggy clifftops of a far away isle. Imbued with the essence of Saint Ted, this sword will serve you well.")
     my.text_description_short(self, "Thy holy means of justice.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
