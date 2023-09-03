@@ -442,7 +442,7 @@ void tp_dump_monsters(void)
   // | git status   | git status     | git status    |
   // | git diff     | git diff       | git diff      |
 
-  printf("DUMP: | %s | %s | %s | %s | %s | %s | %s |\n", "Monster", "Class", "Dngr", "Attack", "# Attcks",
+  printf("DUMP: | %s | %s | %s | %s | %s | %s | %s |\n", "Monster", "Class/Rarity", "Dngr", "Attack", "# Attcks",
          "Other attacks", "Immunity");
 
   printf("DUMP: | %s | %s | %s | %s | %s | %s | %s |\n", ":---", "---", "---", "---", "---", "---", "---");
@@ -628,7 +628,8 @@ void tp_dump_weapons(void)
   // | git status   | git status     | git status    |
   // | git diff     | git diff       | git diff      |
 
-  printf("DUMP: | %s | %s | %s | %s | %s | %s |\n", "Name", "Class", "Damage", "Dmg Roll", "Dmg Chance", "Special");
+  printf("DUMP: | %s | %s | %s | %s | %s | %s |\n", "Name", "Class/Rarity", "Damage", "Dmg Roll", "Dmg Chance",
+         "Special");
 
   printf("DUMP: | %s | %s | %s | %s | %s | %s |\n", ":---", "---", "---", "---", "---", "---");
 

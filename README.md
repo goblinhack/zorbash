@@ -262,7 +262,7 @@ Press TAB to switch between modes during the game.
 Bestiary
 --------
 <!-- begin monsters type marker -->
-| Monster | Class | Dngr | Attack | # Attcks | Other attacks | Immunity |
+| Monster | Class/Rarity | Dngr | Attack | # Attcks | Other attacks | Immunity |
 | :--- | --- | --- | --- | --- | --- | --- |
 | Ettin, Two Headed Giant | D/rare | 382 | 1d10+4 | 2 |  |  |
 | Reaper | E/common | 356 | 1d6+6 | 1 |  | Acid<br />Cold<br />Fire<br />Necrosis<br />Negation<br />Paralysis<br />poison<br />Holding<br />Slowing<br />Webs<br />Drain<br /> |
@@ -371,7 +371,7 @@ Bestiary
 Weapons
 -------
 <!-- begin weapons type marker -->
-| Name | Class | Damage | Dmg Roll | Dmg Chance | Special |
+| Name | Class/Rarity | Damage | Dmg Roll | Dmg Chance | Special |
 | :--- | --- | --- | --- | --- | --- |
 | Warhammer | C/common | 4 - 32 | 4d8 | 0.01 % |  Move-penalty |
 | Very Broadsword | C/uncommon | 2 - 24 | 2d12 | 0.01 % |  Immunity-Acid<br /> |
