@@ -442,10 +442,10 @@ void tp_dump_monsters(void)
   // | git status   | git status     | git status    |
   // | git diff     | git diff       | git diff      |
 
-  printf("DUMP: | %s | %s | %s | %s | %s | %s |\n", "Monster", "Dngr", "Attack", "# Attcks", "Other attacks",
-         "Immunity");
+  printf("DUMP: | %s | %s | %s | %s | %s | %s | %s |\n", "Monster", "Class", "Dngr", "Attack", "# Attcks",
+         "Other attacks", "Immunity");
 
-  printf("DUMP: | %s | %s | %s | %s | %s | %s |\n", ":---", "---", "---", "---", "---", "---");
+  printf("DUMP: | %s | %s | %s | %s | %s | %s | %s |\n", ":---", "---", "---", "---", "---", "---", "---");
 
   std::vector< Tpp > m;
 
@@ -610,9 +610,10 @@ void tp_dump_monsters(void)
       imm_str += "Water<newline>";
     }
 
-    printf("DUMP: | %s | %u | %s | %u | %s | %s |\n", capitalise(tp->text_long_name()).c_str(),
-           tp->get_danger_level(), tp->dmg_nat_att_dice_str().c_str(), tp->dmg_num_of_attacks(), dmg_str.c_str(),
-           imm_str.c_str());
+    printf("DUMP: | %s | %s%s%s%s%s | %u | %s | %u | %s | %s |\n", capitalise(tp->text_long_name()).c_str(),
+           tp->is_monst_class_A() ? "A" : "", tp->is_monst_class_B() ? "B" : "", tp->is_monst_class_C() ? "C" : "",
+           tp->is_monst_class_D() ? "D" : "", tp->is_monst_class_E() ? "E" : "", tp->get_danger_level(),
+           tp->dmg_nat_att_dice_str().c_str(), tp->dmg_num_of_attacks(), dmg_str.c_str(), imm_str.c_str());
   }
 }
 
@@ -623,9 +624,9 @@ void tp_dump_weapons(void)
   // | git status   | git status     | git status    |
   // | git diff     | git diff       | git diff      |
 
-  printf("DUMP: | %s | %s | %s | %s | %s |\n", "Name", "Damage", "Dmg Roll", "Dmg Chance", "Special");
+  printf("DUMP: | %s | %s | %s | %s | %s | %s |\n", "Name", "Class", "Damage", "Dmg Roll", "Dmg Chance", "Special");
 
-  printf("DUMP: | %s | %s | %s | %s | %s |\n", ":---", "---", "---", "---", "---");
+  printf("DUMP: | %s | %s | %s | %s | %s | %s |\n", ":---", "---", "---", "---", "---", "---");
 
   std::vector< Tpp > m;
 
@@ -796,7 +797,8 @@ void tp_dump_weapons(void)
       special += "Move-penalty";
     }
 
-    printf("DUMP: | %s | %u - %u | %s | %.2f %% | %s |\n", capitalise(tp->text_long_name()).c_str(),
+    printf("DUMP: | %s | %s%s%s | %u - %u | %s | %.2f %% | %s |\n", capitalise(tp->text_long_name()).c_str(),
+           tp->is_weapon_class_A() ? "A" : "", tp->is_weapon_class_B() ? "B" : "", tp->is_weapon_class_C() ? "C" : "",
            tp->dmg_melee_dice().min_roll(), tp->dmg_melee_dice().max_roll(), tp->dmg_melee_dice_str().c_str(),
            (float) tp->chance_d10000_damaged() / (float) 100.0, special.c_str());
   }
