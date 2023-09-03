@@ -303,11 +303,11 @@ public:
   uint64_t i_set_is_necrotic_danger_level     : 1 {};
   uint64_t i_set_is_obs_destructable          : 1 {};
   uint64_t i_set_is_obs_jump_end              : 1 {};
+  uint64_t i_set_is_obs_shoving               : 1 {};
   uint64_t i_set_is_obs_spawn                 : 1 {};
   uint64_t i_set_is_obs_spawn_monst           : 1 {};
   uint64_t i_set_is_obs_wall_or_door          : 1 {};
   uint64_t i_set_is_obs_when_dead             : 1 {};
-  uint64_t i_set_is_obs_shoving               : 1 {};
   uint64_t i_set_is_poisonous_danger_level    : 1 {};
   uint64_t i_set_is_portal                    : 1 {};
   uint64_t i_set_is_potion                    : 1 {};
@@ -2200,7 +2200,6 @@ public:
   int stamina_set(int);
   int stamina(void);
   int stat_att_bonus_decr(int);
-  int stat_str_min(void);
   int stat_att_bonus_decr(void);
   int stat_att_bonus_incr(int);
   int stat_att_bonus_incr(void);
@@ -2357,6 +2356,7 @@ public:
   int stat_str_decr(void);
   int stat_str_incr(int);
   int stat_str_incr(void);
+  int stat_str_min(void);
   int stat_str_set(int);
   int stat_str_total(void);
   int stat_str(void);

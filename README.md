@@ -644,7 +644,7 @@ Other content
 - 24 x treasure
 - 23 x items
 - 20 x spells
-- 15 x weapons
+- 16 x weapons
 - 13 x buffs
 - 11 x skills
 - 7 x debuffs

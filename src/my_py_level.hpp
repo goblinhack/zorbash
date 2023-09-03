@@ -201,11 +201,11 @@ PyObject *level_is_necrotic_danger_level_at(PyObject *obj, PyObject *args, PyObj
 PyObject *level_is_no_tile_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_obs_destructable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_obs_jumping_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_obs_shoving_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_obs_spell_casting_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_obs_throwing_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_obs_wall_or_door_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_obs_when_dead_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_obs_shoving_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_on_want_to_shoot_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_openable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_organic_at(PyObject *obj, PyObject *args, PyObject *keywds);
