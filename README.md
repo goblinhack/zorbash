@@ -371,24 +371,25 @@ Bestiary
 Weapons
 -------
 <!-- begin weapons type marker -->
-| Name | Class/Rarity | Damage | Dmg Roll | Dmg Chance | Special |
-| :--- | --- | --- | --- | --- | --- |
-| Warhammer | C/common | 4 - 32 | 4d8 | 0.01 % |  Swing-penalty<br /> |
-| Very Broadsword | C/uncommon | 2 - 24 | 2d12 | 0.01 % |  Immunity-Acid<br /> |
-| Double Shovel | C/uncommon | 2 - 20 | 2d10 | 1.00 % |   |
-| Holy Sword Of Clonrichet | C/v-rare | 5 - 20 | 1d16+4 | 0.01 % |  Immunity-Acid<br />Holy (2xDMG undead)<br /> |
-| Scythe | C/uncommon | 3 - 18 | 3d6 | 0.05 % |   |
-| Sword Of Plutonium | C/v-rare | 5 - 16 | 1d12+4 | 0.01 % |  Immunity-Acid<br /> |
-| Sword Of Draining | C/v-rare | 1 - 12 | 1d12 | 0.05 % | Damage-Drain:1d20<br /> Immunity-Drain<br /> Additional-attack<br /> |
-| Sword Of Duck Summoning | C/v-rare | 3 - 12 | 1d10+2 | 0.01 % |  Immunity-Acid<br /> |
-| Cutlass | B/rare | 1 - 10 | 1d10 | 0.20 % |   |
-| Pike | B/uncommon | 1 - 10 | 1d10 | 0.50 % |   |
-| Shovel | B/uncommon | 1 - 8 | 1d8 | 0.50 % |   |
-| Short Sword | A/common | 1 - 8 | 1d8 | 0.10 % |   |
-| Rusty Short Sword | A/common | 2 - 7 | 1d6+1 | 2.00 % | Damage-Poison:1d2+1<br />  |
-| Short Axe | B/uncommon | 1 - 6 | 1d6 | 0.10 % |   |
-| Dagger | A/common | 1 - 4 | 1d4 | 0.05 % |   |
-| Wooden Short Sword | A/common | 1 - 4 | 1d4 | 1.00 % |   |
+| Name | Class/Rarity | Damage | Damage Roll | Special | Damage Chance | Gold Value |
+| :--- | --- | --- | --- | --- | --- | --- |
+| Mace | C/common | 4 - 32 | 4d8 |  Swing-penalty<br /> | 0.01 % | 250 |
+| Very Broadsword | C/uncommon | 2 - 24 | 2d12 |  Immunity-Acid<br />Hits adjacent tiles<br /> | 0.01 % | 350 |
+| Warhammer | C/common | 3 - 24 | 3d8 |  Swing-penalty<br />Hits all surrounding<br /> | 0.01 % | 250 |
+| Double Shovel | C/uncommon | 2 - 20 | 2d10 |  Hits infront and behind<br /> | 1.00 % | 50 |
+| Holy Sword Of Clonrichet | C/v-rare | 5 - 20 | 1d16+4 |  Immunity-Acid<br />Holy (2xDMG undead)<br /> | 0.01 % | 5000 |
+| Scythe | C/uncommon | 3 - 18 | 3d6 |  Hits all surrounding<br /> | 0.05 % | 250 |
+| Sword Of Plutonium | C/v-rare | 5 - 16 | 1d12+4 |  Immunity-Acid<br /> | 0.01 % | 2000 |
+| Sword Of Duck Summoning | C/v-rare | 3 - 12 | 1d10+2 |  Immunity-Acid<br /> | 0.01 % | 1500 |
+| Sword Of Draining | C/v-rare | 1 - 12 | 1d12 | Damage-Drain:1d20<br /> Immunity-Drain<br /> Additional-attack<br /> | 0.05 % | 1000 |
+| Cutlass | B/rare | 1 - 10 | 1d10 |   | 0.20 % | 100 |
+| Pike | B/uncommon | 1 - 10 | 1d10 |  Hits two tiles ahead<br /> | 0.50 % | 10 |
+| Short Sword | A/common | 1 - 8 | 1d8 |   | 0.10 % | 100 |
+| Shovel | B/uncommon | 1 - 8 | 1d8 |   | 0.50 % | 5 |
+| Rusty Short Sword | A/common | 2 - 7 | 1d6+1 | Damage-Poison:1d2+1<br />  | 2.00 % | 50 |
+| Short Axe | B/uncommon | 1 - 6 | 1d6 |  Hits all surrounding<br /> | 0.10 % | 150 |
+| Wooden Short Sword | A/common | 1 - 4 | 1d4 |   | 1.00 % | 25 |
+| Dagger | A/common | 1 - 4 | 1d4 |   | 0.05 % | 15 |
 <!-- end weapons type marker -->
 
 Pixelart Screenshots
@@ -644,7 +645,7 @@ Other content
 - 24 x treasure
 - 23 x items
 - 20 x spells
-- 16 x weapons
+- 17 x weapons
 - 13 x buffs
 - 11 x skills
 - 7 x debuffs

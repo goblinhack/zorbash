@@ -628,10 +628,10 @@ void tp_dump_weapons(void)
   // | git status   | git status     | git status    |
   // | git diff     | git diff       | git diff      |
 
-  printf("DUMP: | %s | %s | %s | %s | %s | %s |\n", "Name", "Class/Rarity", "Damage", "Dmg Roll", "Dmg Chance",
-         "Special");
+  printf("DUMP: | %s | %s | %s | %s | %s | %s | %s |\n", "Name", "Class/Rarity", "Damage", "Damage Roll", "Special",
+         "Damage Chance", "Gold Value");
 
-  printf("DUMP: | %s | %s | %s | %s | %s | %s |\n", ":---", "---", "---", "---", "---", "---");
+  printf("DUMP: | %s | %s | %s | %s | %s | %s | %s |\n", ":---", "---", "---", "---", "---", "---", "---");
 
   std::vector< Tpp > m;
 
@@ -803,14 +803,27 @@ void tp_dump_weapons(void)
     if (tp->is_holy()) {
       special += "Holy (2xDMG undead)<newline>";
     }
+    if (tp->collision_hit_180()) {
+      special += "Hits infront and behind<newline>";
+    }
+    if (tp->collision_hit_360()) {
+      special += "Hits all surrounding<newline>";
+    }
+    if (tp->collision_hit_adj()) {
+      special += "Hits adjacent tiles<newline>";
+    }
+    if (tp->collision_hit_two_tiles_ahead()) {
+      special += "Hits two tiles ahead<newline>";
+    }
 
-    printf(
-        "DUMP: | %s | %s%s%s%s%s%s%s%s | %u - %u | %s | %.2f %% | %s |\n", capitalise(tp->text_long_name()).c_str(),
-        tp->is_weapon_class_A() ? "A" : "", tp->is_weapon_class_B() ? "B" : "", tp->is_weapon_class_C() ? "C" : "",
-        tp->rarity() == THING_RARITY_COMMON ? "/common" : "",
-        tp->rarity() == THING_RARITY_UNCOMMON ? "/uncommon" : "", tp->rarity() == THING_RARITY_RARE ? "/rare" : "",
-        tp->rarity() == THING_RARITY_VERY_RARE ? "/v-rare" : "", tp->rarity() == THING_RARITY_UNIQUE ? "/unique" : "",
-        tp->dmg_melee_dice().min_roll(), tp->dmg_melee_dice().max_roll(), tp->dmg_melee_dice_str().c_str(),
-        (float) tp->chance_d10000_damaged() / (float) 100.0, special.c_str());
+    printf("DUMP: | %s | %s%s%s%s%s%s%s%s | %u - %u | %s | %s | %.2f %% | %u |\n",
+           capitalise(tp->text_long_name()).c_str(), tp->is_weapon_class_A() ? "A" : "",
+           tp->is_weapon_class_B() ? "B" : "", tp->is_weapon_class_C() ? "C" : "",
+           tp->rarity() == THING_RARITY_COMMON ? "/common" : "",
+           tp->rarity() == THING_RARITY_UNCOMMON ? "/uncommon" : "", tp->rarity() == THING_RARITY_RARE ? "/rare" : "",
+           tp->rarity() == THING_RARITY_VERY_RARE ? "/v-rare" : "",
+           tp->rarity() == THING_RARITY_UNIQUE ? "/unique" : "", tp->dmg_melee_dice().min_roll(),
+           tp->dmg_melee_dice().max_roll(), tp->dmg_melee_dice_str().c_str(), special.c_str(),
+           (float) tp->chance_d10000_damaged() / (float) 100.0, tp->gold_value_dice().max_roll());
   }
 }

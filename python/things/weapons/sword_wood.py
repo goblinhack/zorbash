@@ -12,7 +12,7 @@ def on_owner_attack_dmg_melee(me, owner, victim, x, y, damage):
     # my.con("victim  {} {:X}".format(my.thing_name_get(victim), victim))
     # my.con("damage  {}".format(damage))
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_impact{my.py_non_pcg_random_range_inclusive(1, 4)}")
-    return damage + my.thing_enchant_count_get(me)
+    return damage + my.thing_enchant_count_get(me) * 2
 
 
 def on_equip(owner, me, x, y):
