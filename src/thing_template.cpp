@@ -614,7 +614,7 @@ void tp_dump_monsters(void)
            tp->is_monst_class_A() ? "A" : "", tp->is_monst_class_B() ? "B" : "", tp->is_monst_class_C() ? "C" : "",
            tp->is_monst_class_D() ? "D" : "", tp->is_monst_class_E() ? "E" : "",
            tp->rarity() == THING_RARITY_COMMON ? "/common" : "",
-           tp->rarity() == THING_RARITY_COMMON ? "/uncommon" : "", tp->rarity() == THING_RARITY_RARE ? "/rare" : "",
+           tp->rarity() == THING_RARITY_UNCOMMON ? "/uncommon" : "", tp->rarity() == THING_RARITY_RARE ? "/rare" : "",
            tp->rarity() == THING_RARITY_VERY_RARE ? "/v-rare" : "",
            tp->rarity() == THING_RARITY_UNIQUE ? "/unique" : "", tp->get_danger_level(),
            tp->dmg_nat_att_dice_str().c_str(), tp->dmg_num_of_attacks(), dmg_str.c_str(), imm_str.c_str());
@@ -804,10 +804,10 @@ void tp_dump_weapons(void)
     printf(
         "DUMP: | %s | %s%s%s%s%s%s%s%s | %u - %u | %s | %.2f %% | %s |\n", capitalise(tp->text_long_name()).c_str(),
         tp->is_weapon_class_A() ? "A" : "", tp->is_weapon_class_B() ? "B" : "", tp->is_weapon_class_C() ? "C" : "",
-        tp->rarity() == THING_RARITY_COMMON ? "/common" : "", tp->rarity() == THING_RARITY_COMMON ? "/uncommon" : "",
-        tp->rarity() == THING_RARITY_RARE ? "/rare" : "", tp->rarity() == THING_RARITY_VERY_RARE ? "/v-rare" : "",
-        tp->rarity() == THING_RARITY_UNIQUE ? "/unique" : "", tp->dmg_melee_dice().min_roll(),
-        tp->dmg_melee_dice().max_roll(), tp->dmg_melee_dice_str().c_str(),
+        tp->rarity() == THING_RARITY_COMMON ? "/common" : "",
+        tp->rarity() == THING_RARITY_UNCOMMON ? "/uncommon" : "", tp->rarity() == THING_RARITY_RARE ? "/rare" : "",
+        tp->rarity() == THING_RARITY_VERY_RARE ? "/v-rare" : "", tp->rarity() == THING_RARITY_UNIQUE ? "/unique" : "",
+        tp->dmg_melee_dice().min_roll(), tp->dmg_melee_dice().max_roll(), tp->dmg_melee_dice_str().c_str(),
         (float) tp->chance_d10000_damaged() / (float) 100.0, special.c_str());
   }
 }
