@@ -801,19 +801,19 @@ void tp_dump_weapons(void)
       special += "Swing-penalty<newline>";
     }
     if (tp->is_holy()) {
-      special += "Holy (2xDMG undead)<newline>";
+      special += "x2 undead<newline>";
     }
     if (tp->collision_hit_180()) {
-      special += "Hits infront and behind<newline>";
+      special += "Hits in-front and behind<newline>";
     }
     if (tp->collision_hit_360()) {
       special += "Hits all surrounding<newline>";
     }
     if (tp->collision_hit_adj()) {
-      special += "Hits adjacent tiles<newline>";
+      special += "Hits adjacent<newline>";
     }
     if (tp->collision_hit_two_tiles_ahead()) {
-      special += "Hits two tiles ahead<newline>";
+      special += "Hits two ahead<newline>";
     }
 
     printf("DUMP: | %s | %s%s%s%s%s%s%s%s | %u - %u | %s | %s | %.2f %% | %u |\n",

@@ -15,7 +15,7 @@ def on_owner_attack_dmg_melee(me, owner, victim, x, y, damage):
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_impact{my.py_non_pcg_random_range_inclusive(1, 4)}")
     if my.thing_is_moveable(victim):
         my.thing_repulse(owner, victim)
-    return damage + my.thing_enchant_count_get(me)
+    return damage + my.thing_enchant_count_get(me) * 2
 
 
 def on_equip(owner, me, x, y):
@@ -33,10 +33,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.chance_d10000_damaged(self, 1)
     my.chance_d10000_set_on_fire(self, 5)
     my.dmg_chance_d1000_melee(self, 0, 1000)
-    my.collision_hit_360(self, True)
-    my.dmg_melee_dice(self, "3d8")
-    my.equip_carry_anim(self, "warhammer_carry")
-    my.gfx_anim_use(self, "warhammer_swing")
+    my.dmg_melee_dice(self, "4d8")
+    my.equip_carry_anim(self, "mace_carry")
+    my.gfx_anim_use(self, "mace_swing")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
@@ -68,13 +67,13 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_interesting(self, True)
     my.is_item(self, True)
     my.is_loggable(self, True)
+    my.is_mace(self, True)
     my.is_moveable(self, True)
     my.is_pointy(self, True)
     my.is_sword(self, True)
     my.is_treasure_class_C(self, True)
     my.is_treasure_type(self, True)
     my.is_usable(self, True)
-    my.is_warhammer(self, True)
     my.is_weapon_class_C(self, True)
     my.is_weapon(self, True)
     my.item_height(self, 5)
@@ -86,11 +85,11 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_COMMON)
     my.stamina_drain_on_attacking(self, 3)
-    my.stat_str_min(self, 14)
+    my.stat_str_min(self, 16)
     my.text_a_or_an(self, "a")
-    my.text_description_enchant(self, "+1 DMG")
-    my.text_description_long2(self, "Dealing massive damage and driving the victim back one tile the mace is a formidable weapon.")
-    my.text_description_long(self, "Also ideal for home baking.")
+    my.text_description_enchant(self, "+2 DMG")
+    my.text_description_long2(self, "Dealing massive damage and driving the victim back one tile, the only disadvantage is that each swing has a move penalty. Hopefully the extra damage dealt compensates!")
+    my.text_description_long(self, "The mace is the weapon of choice for those that wish the impact of their actions to be felt.")
     my.text_description_short(self, "Mighty mace")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -105,7 +104,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="warhammer", text_long_name="warhammer", text_short_name="warhammer")
+    tp_init(name="mace", text_long_name="mace", text_short_name="mace")
 
 
 init()

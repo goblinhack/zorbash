@@ -44,7 +44,7 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="mace_carry")
+    tp_init(name="warhammer_carry")
 
 
 init()

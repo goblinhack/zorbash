@@ -23,7 +23,7 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="warhammer_swing")
+    tp_init(name="mace_swing")
 
 
 init()
