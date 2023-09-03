@@ -945,6 +945,7 @@ int Tp::stats06(void) const { return _stats06; }
 int Tp::stats07(void) const { return _stats07; }
 int Tp::stats09(void) const { return _stats09; }
 int Tp::stat_str_bonus(void) const { return _stat_str_bonus; }
+int Tp::stat_str_min(void) const { return _stat_str_min; }
 int Tp::stat_str(void) const { return _stat_str; }
 int Tp::stat_thv_bonus(void) const { return _stat_thv_bonus; }
 int Tp::stat_thv(void) const { return _stat_thv; }
@@ -1857,6 +1858,7 @@ void Tp::stats06_set(int v) { _stats06 = v; }
 void Tp::stats07_set(int v) { _stats07 = v; }
 void Tp::stats09_set(int v) { _stats09 = v; }
 void Tp::stat_str_bonus_set(int v) { _stat_str_bonus = v; }
+void Tp::stat_str_min_set(int v) { _stat_str_min = v; }
 void Tp::stat_str_set(int v) { _stat_str = v; }
 void Tp::stat_thv_bonus_set(int v) { _stat_thv_bonus = v; }
 void Tp::stat_thv_set(int v) { _stat_thv = v; }

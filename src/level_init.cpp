@@ -68,6 +68,7 @@ void Level::clear(void)
   _is_obs_spawn_monst                = {};
   _is_obs_wall_or_door               = {};
   _is_obs_when_dead                  = {};
+  _is_obs_shoving                    = {};
   _is_portal                         = {};
   _is_red_blood                      = {};
   _is_rock                           = {};

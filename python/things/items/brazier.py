@@ -55,7 +55,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.text_a_or_an(self, "a")
     my.text_description_short(self, "A beacon of light in this blighted place.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
+    my.z_prio(self, my.MAP_Z_PRIO_BARREL)
     # end sort marker
 
     delay = 60

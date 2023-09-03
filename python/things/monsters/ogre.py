@@ -44,6 +44,7 @@ def tp_init(name, text_long_name):
     my.chance_d1000_shove(self, 200)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
+    my.is_burnable(self, True)
     my.consume_per_bite_amount(self, 10)
     my.distance_vision(self, 3)
     my.dmg_chance_d1000_nat_att(self, 0, 1000)

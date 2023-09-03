@@ -46,6 +46,7 @@ def tp_init(name, text_long_name):
     my.dmg_nat_att_dice(self, "1d3+1")
     my.dmg_nat_att_type(self, "bite")
     my.dmg_poison_dice(self, "1d4")
+    my.is_burnable(self, True)
     my.environ_hates_cold(self, 100)
     my.gfx_anim_use(self, "attack_red")
     my.gfx_ascii_fade_with_dist(self, True)

@@ -35,6 +35,7 @@ def tp_init(name, text_long_name):
     my.attack_humanoid(self, True)
     my.chance_d1000_shove(self, 200)
     my.collision_check(self, True)
+    my.is_burnable(self, True)
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 5)
     my.distance_avoid(self, 5)

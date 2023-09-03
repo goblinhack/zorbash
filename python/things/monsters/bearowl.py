@@ -43,6 +43,7 @@ def tp_init(name, text_long_name):
     my.dmg_chance_d1000_nat_att(self, 1, 200)
     my.dmg_nat_att_dice(self, "2d8+5")
     my.dmg_nat_att_type(self, "beak")
+    my.is_burnable(self, True)
     my.dmg_num_of_attacks(self, 2)
     my.dmg_received_doubled_from_fire(self, True)
     my.gfx_anim_use(self, "sword_plutonium_swing")

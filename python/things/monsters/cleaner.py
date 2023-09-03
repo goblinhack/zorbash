@@ -70,6 +70,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_bounce_on_move(self, True)
     my.gfx_pixelart_health_bar_shown(self, True)
+    my.is_burnable(self, True)
     my.gfx_pixelart_oversized_and_on_floor(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)

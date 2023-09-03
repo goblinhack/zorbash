@@ -341,6 +341,10 @@ void Thing::level_pop(void)
       i_set_is_obs_when_dead = false;
       level->is_obs_when_dead_unset(x, y);
     }
+    if (is_obs_shoving() && is_dead) {
+      i_set_is_obs_shoving = false;
+      level->is_obs_shoving_unset(x, y);
+    }
 
     if (i_set_is_monst) {
       i_set_is_monst = false;

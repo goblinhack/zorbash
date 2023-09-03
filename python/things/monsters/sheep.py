@@ -50,6 +50,7 @@ def tp_init(name, text_long_name):
     my.dmg_nat_att_type(self, "nudge")
     my.dmg_received_doubled_from_fire(self, True)
     my.environ_hates_fire(self, 100)
+    my.is_burnable(self, True)
     my.gfx_anim_use(self, "attack_green")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)

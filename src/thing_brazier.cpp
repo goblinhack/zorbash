@@ -9,6 +9,14 @@
 
 void Thing::brazier_tick(void)
 {
+  if (is_brazier()) {
+    return;
+  }
+
+  if (! is_monst() && ! is_player()) {
+    return;
+  }
+
   //
   // This is for if you land on a brazier
   //
@@ -20,9 +28,12 @@ void Thing::brazier_tick(void)
   TRACE_AND_INDENT();
 
   static const std::vector< point > all_deltas = {
-      point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1), point(-1, 0), point(1, 0), point(0, 1),
+      point(0, -1), point(-1, 0), point(1, 0), point(0, 1), point(-1, -1), point(1, -1), point(-1, 1), point(1, 1),
   };
 
+  //
+  // Try to find any braziers at this location
+  //
   TRACE_NO_INDENT();
   FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_OBJ)
   {
@@ -31,29 +42,55 @@ void Thing::brazier_tick(void)
     }
 
     //
-    // Ignore knocked over braziers.
+    // Ignore dead braziers
     //
     if (t->is_dead) {
       continue;
     }
 
-    for (auto i = 0; i < 9; i++) {
-      auto delta = get(all_deltas, pcg_random_range(0, (int) all_deltas.size()));
-      if (try_to_shove(t, delta)) {
-        if (! is_dead) {
+    if (! is_dead) {
+      dbg("Try to shove brazier");
+      for (auto i = 0; i < 9; i++) {
+        auto delta = get(all_deltas, pcg_random_range(0, (int) all_deltas.size()));
+
+        dbg("Try to shove brazier; delta %s", delta.to_string().c_str());
+        ShoveOptions shove_options;
+        shove_options.stumble = true;
+        if (try_to_shove(t, delta, shove_options) == THING_SHOVE_TRIED_AND_PASSED) {
+          dbg("Try to shove brazier; success, delta %s", delta.to_string().c_str());
+          IF_DEBUG { t->log("Post shove"); }
           if (is_player()) {
             msg("You knock over the brazier!");
+          } else {
+            msg("%%fg=orange$%s knocks over a brazier.%%fg=reset$", text_The().c_str());
           }
+          break;
         }
-        return;
       }
+
+      if (is_monst()) {
+        if (on_fire_set("stumbles into the flames")) {
+          msg("%%fg=orange$%s catches fire.%%fg=reset$", text_The().c_str());
+        } else {
+          msg("%s avoids catching fire.", text_The().c_str());
+        }
+      } else {
+        if (pcg_random_range(0, 100) < 20) {
+          if (on_fire_set("stumbled into flames")) {
+            msg("You stumble into the flames!");
+          } else {
+            msg("You avoid the flames!");
+          }
+        } else {
+          msg("You avoid catching fire from the brazier!");
+        }
+      }
+    } else {
+      msg("%%fg=orange$%s catches fire.%%fg=reset$", text_The().c_str());
     }
 
-    if (! is_dead) {
-      if (pcg_random_range(0, 100) < 20) {
-        msg("You stumble into the flames!");
-        on_fire_set("stumbled into flames");
-      }
+    if (! t->is_dead_or_dying()) {
+      t->dead("knocked over");
     }
   }
   TRACE_NO_INDENT();

@@ -856,6 +856,7 @@ private:
   int _stats09 {};
   int _stat_str {};
   int _stat_str_bonus {};
+  int _stat_str_min {};
   int _stat_thv {};
   int _stat_thv_bonus {};
   int _teleport_distance {};
@@ -2204,6 +2205,7 @@ public:
   int stats07(void) const;
   int stats09(void) const;
   int stat_str_bonus(void) const;
+  int stat_str_min(void) const;
   int stat_str(void) const;
   int stat_thv_bonus(void) const;
   int stat_thv(void) const;
@@ -3117,6 +3119,7 @@ public:
   void stats07_set(int v);
   void stats09_set(int v);
   void stat_str_bonus_set(int v);
+  void stat_str_min_set(int v);
   void stat_str_set(int v);
   void stat_thv_bonus_set(int v);
   void stat_thv_set(int v);

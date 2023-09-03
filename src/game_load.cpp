@@ -518,6 +518,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->i_set_is_obs_spawn_monst               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_obs_wall_or_door              = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_obs_when_dead                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_obs_shoving                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_portal                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_spell_of_holding_barrier      = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_trap                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -687,6 +688,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_obs_spawn_monst);
   in >> bits(my.t->_is_obs_wall_or_door);
   in >> bits(my.t->_is_obs_when_dead);
+  in >> bits(my.t->_is_obs_shoving);
   in >> bits(my.t->_is_portal);
   in >> bits(my.t->_is_potion);
   in >> bits(my.t->_is_red_blood);

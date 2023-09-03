@@ -70,6 +70,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_lunge(self, True)
     my.is_able_to_rest(self, True)
     my.is_able_to_see_in_the_dark(self, True)
+    my.is_burnable(self, True)
     my.is_able_to_sleep(self, True)
     my.is_able_to_swim(self, True)
     my.is_able_to_tire(self, True)

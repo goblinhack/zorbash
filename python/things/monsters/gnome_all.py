@@ -58,6 +58,7 @@ def tp_init(name, text_long_name):
     my.dmg_nat_att_type(self, "stab")
     my.environ_dislikes_acid(self, 100)
     my.environ_dislikes_fire(self, 10)
+    my.is_burnable(self, True)
     my.environ_dislikes_poison(self, 100)
     my.gfx_anim_use(self, "attack_red")
     my.gfx_ascii_fade_with_dist(self, True)

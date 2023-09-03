@@ -48,6 +48,7 @@ def tp_init(name, text_long_name):
     my.dmg_claw_dice(self, "1d3")
     my.dmg_nat_att_dice(self, "1d3+1")
     my.dmg_nat_att_type(self, "webbed")
+    my.is_burnable(self, True)
     my.environ_hates_fire(self, 100)
     my.environ_likes_shallow_water(self, True)
     my.gfx_anim_use(self, "attack_red")

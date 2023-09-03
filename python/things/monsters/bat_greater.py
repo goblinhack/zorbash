@@ -40,6 +40,7 @@ def tp_init(name, text_long_name):
     my.distance_vision(self, 6)
     my.dmg_bite_dice(self, "1d4")
     my.dmg_chance_d1000_bite(self, 0, 500)
+    my.is_burnable(self, True)
     my.dmg_chance_d1000_claw(self, 0, 500)
     my.dmg_chance_d1000_nat_att(self, 0, 100)
     my.dmg_chance_d1000_poison(self, 0, 100)

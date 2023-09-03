@@ -47,6 +47,7 @@ def tp_init(name, text_long_name):
     my.environ_dislikes_fire(self, 100)
     my.environ_likes_deep_water(self, True)
     my.environ_likes_shallow_water(self, True)
+    my.is_burnable(self, True)
     my.gfx_anim_use(self, "attack_green")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)

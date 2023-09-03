@@ -23,7 +23,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_usable(self, True)
     my.on_use_do(self, "me.on_use()")
     my.range_max(self, 9)
-    my.gfx_targeted_projectile(self, "laser_magic_effect")
+    my.gfx_targeted_laser(self, "laser_magic_effect")
     my.spell_base_name(self, name)
     my.spell_cost(self, 2)
     my.text_a_or_an(self, "a")

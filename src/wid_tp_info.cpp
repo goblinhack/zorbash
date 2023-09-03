@@ -1359,8 +1359,14 @@ void Game::wid_tp_info_add_stat_str(WidPopup *w, Tpp t)
       w->log("%%fg=pink$(while skill is active)");
     }
     if (t->is_skill()) {
-      w->log("%%fg=pink$(while skill is active)");
+      w->log("%%fg=pink$(while spell is active)");
     }
+  }
+
+  if (t->stat_str_min()) {
+    auto stat = t->stat_str_min();
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength min needed    %4u", stat);
+    w->log(tmp);
   }
 }
 
@@ -1383,7 +1389,7 @@ void Game::wid_tp_info_add_stat_dex(WidPopup *w, Tpp t)
       w->log("%%fg=pink$(while skill is active)");
     }
     if (t->is_skill()) {
-      w->log("%%fg=pink$(while skill is active)");
+      w->log("%%fg=pink$(while spell is active)");
     }
   }
 }
@@ -1407,7 +1413,7 @@ void Game::wid_tp_info_add_stat_luck(WidPopup *w, Tpp t)
       w->log("%%fg=pink$(while skill is active)");
     }
     if (t->is_skill()) {
-      w->log("%%fg=pink$(while skill is active)");
+      w->log("%%fg=pink$(while spell is active)");
     }
   }
 }
@@ -1431,7 +1437,7 @@ void Game::wid_tp_info_add_stat_thv(WidPopup *w, Tpp t)
       w->log("%%fg=pink$(while skill is active)");
     }
     if (t->is_skill()) {
-      w->log("%%fg=pink$(while skill is active)");
+      w->log("%%fg=pink$(while spell is active)");
     }
   }
 }
@@ -1455,7 +1461,7 @@ void Game::wid_tp_info_add_stat_psi(WidPopup *w, Tpp t)
       w->log("%%fg=pink$(while skill is active)");
     }
     if (t->is_skill()) {
-      w->log("%%fg=pink$(while skill is active)");
+      w->log("%%fg=pink$(while spell is active)");
     }
   }
 }
@@ -1479,7 +1485,7 @@ void Game::wid_tp_info_add_stat_int(WidPopup *w, Tpp t)
       w->log("%%fg=pink$(while skill is active)");
     }
     if (t->is_skill()) {
-      w->log("%%fg=pink$(while skill is active)");
+      w->log("%%fg=pink$(while spell is active)");
     }
   }
 }
@@ -1503,7 +1509,7 @@ void Game::wid_tp_info_add_stat_con(WidPopup *w, Tpp t)
       w->log("%%fg=pink$(while skill is active)");
     }
     if (t->is_skill()) {
-      w->log("%%fg=pink$(while skill is active)");
+      w->log("%%fg=pink$(while spell is active)");
     }
   }
 }
@@ -1525,7 +1531,7 @@ void Game::wid_tp_info_add_move_speed(WidPopup *w, Tpp t)
       w->log("%%fg=pink$(while skill is active)");
     }
     if (t->is_skill()) {
-      w->log("%%fg=pink$(while skill is active)");
+      w->log("%%fg=pink$(while spell is active)");
     }
   }
 }
@@ -1549,7 +1555,7 @@ void Game::wid_tp_info_add_shove_strength(WidPopup *w, Tpp t)
       w->log("%%fg=pink$(while skill is active)");
     }
     if (t->is_skill()) {
-      w->log("%%fg=pink$(while skill is active)");
+      w->log("%%fg=pink$(while spell is active)");
     }
   }
 }
@@ -1573,7 +1579,7 @@ void Game::wid_tp_info_add_jump_distance(WidPopup *w, Tpp t)
       w->log("%%fg=pink$(while skill is active)");
     }
     if (t->is_skill()) {
-      w->log("%%fg=pink$(while skill is active)");
+      w->log("%%fg=pink$(while spell is active)");
     }
   }
 }

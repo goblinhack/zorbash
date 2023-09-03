@@ -37,6 +37,7 @@ def tp_init(name, text_long_name):
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 1)
     my.distance_avoid(self, 2)
+    my.is_burnable(self, True)
     my.distance_vision(self, 3)
     my.dmg_chance_d1000_nat_att(self, 0, 100)
     my.dmg_chance_d1000_poison(self, 0, 900)

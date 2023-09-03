@@ -38,6 +38,7 @@ def tp_init(name, text_long_name):
     my.dmg_chance_d1000_nat_att(self, 0, 100)
     my.dmg_chance_d1000_poison(self, 0, 500)
     my.dmg_nat_att_dice(self, "1d3+1")
+    my.is_burnable(self, True)
     my.dmg_nat_att_type(self, "bite")
     my.dmg_poison_dice(self, "1d3+1")
     my.dmg_received_doubled_from_fire(self, True)

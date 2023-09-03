@@ -55,6 +55,7 @@ def tp_init(name, text_long_name):
     my.dmg_nat_att_dice(self, "1d3+1")
     my.dmg_nat_att_type(self, "bite")
     my.environ_dislikes_fire(self, 100)
+    my.is_burnable(self, True)
     my.environ_likes_deep_water(self, True)
     my.environ_likes_shallow_water(self, True)
     my.gfx_anim_use(self, "attack_green")

@@ -44,6 +44,7 @@ def tp_init(name, text_long_name):
     my.dmg_chance_d1000_bite(self, 0, 500)
     my.dmg_chance_d1000_claw(self, 0, 500)
     my.dmg_chance_d1000_nat_att(self, 0, 900)
+    my.is_burnable(self, True)
     my.dmg_chance_d1000_poison(self, 0, 900)
     my.dmg_chance_d1000_stamina_drain(self, 1, 200)
     my.dmg_claw_dice(self, "1d3")

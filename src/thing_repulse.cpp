@@ -16,6 +16,8 @@ bool Thing::repulse(Thingp target)
     return false;
   }
 
+  target->wake("repulsed");
+
   if (level->is_spell_of_holding_barrier(target->curr_at)) {
     //
     // Unable to beckon as shielded?
@@ -31,6 +33,43 @@ bool Thing::repulse(Thingp target)
   }
 
   auto dest = points[ points.size() - 2 ];
+
+  if (level->is_obs_shoving(dest)) {
+    if (level->is_wall(dest)) {
+      //
+      // Slammed against a wall?
+      //
+      if (target->is_player()) {
+        target->msg("%%fg=green$You are slammed against a wall.%%fg=reset$");
+      } else if (target->is_monst() && is_player()) {
+        msg("%%fg=yellow$%s is slammed against a wall.%%fg=reset$", target->text_The().c_str());
+      }
+      target->is_attacked_with_dmg_crush(this, this, d10());
+    } else if (level->is_door(dest)) {
+      //
+      // Slammed against a door?
+      //
+      if (target->is_player()) {
+        target->msg("%%fg=green$You are slammed against a door.%%fg=reset$");
+      } else if (target->is_monst() && is_player()) {
+        msg("%%fg=yellow$%s is slammed against a door.%%fg=reset$", target->text_The().c_str());
+      }
+      target->is_attacked_with_dmg_crush(this, this, d8());
+    } else {
+      //
+      // Slammed against something.
+      //
+      if (target->is_player()) {
+        target->msg("%%fg=green$You are slammed against an obstacle.%%fg=reset$");
+      } else if (target->is_monst() && is_player()) {
+        msg("%%fg=yellow$%s is slammed against an obstacle.%%fg=reset$", target->text_The().c_str());
+      }
+      target->is_attacked_with_dmg_crush(this, this, d6());
+    }
+
+    dbg("Beckon: %s is blocked by an obstacle", target->to_short_string().c_str());
+    return false;
+  }
 
   dbg("Repulse: %s", target->to_short_string().c_str());
   target->move_delta(target->curr_at - dest);

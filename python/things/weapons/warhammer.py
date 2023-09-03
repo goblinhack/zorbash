@@ -77,6 +77,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_weapon_class_A(self, True)
     my.is_weapon(self, True)
     my.is_wooden(self, True)
+    my.stat_str_min(self, 16)
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.noise_on_dropping(self, 5)

@@ -2281,6 +2281,12 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
       w->log("%%fg=pink$(while spell is active)");
     }
   }
+
+  if (t->stat_str_min()) {
+    auto stat = t->stat_str_min();
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength min needed      %4u", stat);
+    w->log(tmp);
+  }
 }
 
 void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)

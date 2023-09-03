@@ -39,6 +39,7 @@ public:
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_spawn_monst {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_wall_or_door {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_when_dead {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_obs_shoving {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_walked {};
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _noise_blocker {};
 
@@ -798,6 +799,10 @@ public:
   bool is_obs_when_dead(const point p) const;
   bool is_obs_when_dead_no_check(const int x, const int y) const;
   bool is_obs_when_dead_no_check(const point p) const;
+  bool is_obs_shoving(const int x, const int y) const;
+  bool is_obs_shoving(const point p) const;
+  bool is_obs_shoving_no_check(const int x, const int y) const;
+  bool is_obs_shoving_no_check(const point p) const;
   bool is_oob(const fpoint p) const;
   bool is_oob(const int x, const int y) const;
   bool is_oob(const int x, const int y, const int z) const;
@@ -1324,6 +1329,10 @@ public:
   void is_obs_when_dead_no_check_unset(const int x, const int y);
   void is_obs_when_dead_set(const int x, const int y);
   void is_obs_when_dead_unset(const int x, const int y);
+  void is_obs_shoving_no_check_set(const int x, const int y);
+  void is_obs_shoving_no_check_unset(const int x, const int y);
+  void is_obs_shoving_set(const int x, const int y);
+  void is_obs_shoving_unset(const int x, const int y);
   void is_portal_set(const int x, const int y);
   void is_portal_unset(const int x, const int y);
   void is_potion_set(const int x, const int y);

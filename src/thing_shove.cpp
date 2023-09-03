@@ -7,12 +7,17 @@
 #include "my_sprintf.hpp"
 #include "my_thing.hpp"
 
-ThingShoved Thing::try_to_shove(Thingp victim, point delta, bool force)
+ThingShoved Thing::try_to_shove(Thingp victim, point delta, ShoveOptions shove_options)
 {
   TRACE_NO_INDENT();
 
-  if (! is_able_to_shove()) {
-    return (THING_SHOVE_NEVER_TRIED);
+  //
+  // Allow a monster that would not normally shove, knock over a brazier
+  //
+  if (! shove_options.stumble) {
+    if (! is_able_to_shove()) {
+      return (THING_SHOVE_NEVER_TRIED);
+    }
   }
 
   dbg("Try to shove, %s delta %d,%d", victim->to_short_string().c_str(), (int) delta.x, (int) delta.y);
@@ -84,9 +89,9 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, bool force)
   point shove_delta = delta;
   point shove_pos   = victim->curr_at + shove_delta;
 
-  if (force) {
+  if (shove_options.force) {
     //
-    // For example, shoving an block_of_ice with something it it, we need to bypass most checks.
+    // For example, shoving a block of ice with something it it, we need to bypass most checks.
     //
   } else {
     if (victim->is_block_of_ice()) {
@@ -182,7 +187,7 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, bool force)
   // The force check here is to allow something that is in a block of ice to be shoved to the new location where the
   // ice is.
   //
-  if (! force && ! victim->shove_ok(shove_pos)) {
+  if (! shove_options.force && ! victim->shove_ok(shove_pos)) {
     //
     // This is a failure to shove
     //
@@ -356,7 +361,7 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, bool force)
   //
   // For example, if shoving something like a block of ice, drag a dead dogman that is inside it.
   //
-  if (! force) {
+  if (! shove_options.force) {
     //
     // No shove recursion
     //
@@ -379,7 +384,9 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, bool force)
         if (t->curr_at == victim->curr_at) {
           continue;
         }
-        try_to_shove(t, delta, true);
+        ShoveOptions shove_options;
+        shove_options.force = true;
+        try_to_shove(t, delta, shove_options);
       }
 
       TRACE_NO_INDENT();

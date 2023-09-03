@@ -84,6 +84,13 @@ public:
   bool is_being_used {};
 } DropOptions;
 
+typedef class ShoveOptions_
+{
+public:
+  bool force {};
+  bool stumble {};
+} ShoveOptions;
+
 typedef class CarryOptions_
 {
 public:
@@ -300,6 +307,7 @@ public:
   uint64_t i_set_is_obs_spawn_monst           : 1 {};
   uint64_t i_set_is_obs_wall_or_door          : 1 {};
   uint64_t i_set_is_obs_when_dead             : 1 {};
+  uint64_t i_set_is_obs_shoving               : 1 {};
   uint64_t i_set_is_poisonous_danger_level    : 1 {};
   uint64_t i_set_is_portal                    : 1 {};
   uint64_t i_set_is_potion                    : 1 {};
@@ -385,7 +393,7 @@ public:
   std::vector< Thingp > ranged_weapon_vector(void);
   std::vector< Thingp > weapon_vector(void);
 
-  ThingShoved try_to_shove(Thingp it, point delta, bool force = false);
+  ThingShoved try_to_shove(Thingp it, point delta, ShoveOptions = {});
   ThingShoved try_to_shove(point future_pos);
   ThingShoved try_to_shove_into_hazard(Thingp it, point delta);
 
@@ -2192,6 +2200,7 @@ public:
   int stamina_set(int);
   int stamina(void);
   int stat_att_bonus_decr(int);
+  int stat_str_min(void);
   int stat_att_bonus_decr(void);
   int stat_att_bonus_incr(int);
   int stat_att_bonus_incr(void);

@@ -40,6 +40,7 @@ def tp_init(name, text_long_name):
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 20)
+    my.is_burnable(self, True)
     my.distance_avoid(self, 8)
     my.distance_throw(self, 6)
     my.distance_vision(self, 3)

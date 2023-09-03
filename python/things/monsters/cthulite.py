@@ -57,6 +57,7 @@ def tp_init(name, text_long_name):
     my.distance_vision(self, 7)
     my.dmg_acid_dice(self, "2d6")
     my.dmg_chance_d1000_acid(self, 0, 500)
+    my.is_burnable(self, True)
     my.dmg_chance_d1000_acid(self, 1, 200)
     my.dmg_chance_d1000_nat_att(self, 0, 1000)
     my.dmg_chance_d1000_nat_att(self, 1, 100)

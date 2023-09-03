@@ -16,6 +16,8 @@ bool Thing::beckon(Thingp target)
     return false;
   }
 
+  target->wake("beckoned");
+
   if (level->is_spell_of_holding_barrier(target->curr_at)) {
     //
     // Unable to beckon as shielded?

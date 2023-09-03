@@ -25,9 +25,9 @@ void Game::tick_begin(const std::string &why)
       }
     } else {
       if (player) {
-        CON("Seed (%s) tick requested (%s): %s", game->seed_name.c_str(), why.c_str(), player->to_string().c_str());
+        DBG("Seed (%s) tick requested (%s): %s", game->seed_name.c_str(), why.c_str(), player->to_string().c_str());
       } else {
-        CON("Seed (%s) tick requested (%s): %s", game->seed_name.c_str(), why.c_str(), level->to_string().c_str());
+        DBG("Seed (%s) tick requested (%s): %s", game->seed_name.c_str(), why.c_str(), level->to_string().c_str());
       }
     }
   }

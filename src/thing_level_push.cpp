@@ -332,6 +332,10 @@ void Thing::level_push(void)
       i_set_is_obs_when_dead = true;
       level->is_obs_when_dead_set(x, y);
     }
+    if (is_obs_shoving() && is_dead) {
+      i_set_is_obs_shoving = true;
+      level->is_obs_shoving_set(x, y);
+    }
     if (is_obs_jump_end() && ! is_open) {
       i_set_is_obs_jump_end = true;
       level->is_obs_jump_end_set(x, y);

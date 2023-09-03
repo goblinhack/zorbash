@@ -101,11 +101,11 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
     if (game->request_to_use_item) {
       auto item = game->request_to_use_item;
       if (item->is_spell()) {
-        player->log("Player cast a spell");
+        IF_DEBUG { player->log("Player cast a spell"); }
         TRACE_AND_INDENT();
         player->spell_cast_at(item, level->cursor);
       } else {
-        player->log("Player used an item");
+        IF_DEBUG { player->log("Player used an item"); }
         TRACE_AND_INDENT();
         player->used(item, level->cursor, true);
 

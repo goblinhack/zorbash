@@ -206,6 +206,12 @@ int Thing::stat_str_bonus(void)
   return 0;
 }
 
+int Thing::stat_str_min(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->stat_str_min());
+}
+
 int Thing::stat_str_bonus_set(int v)
 {
   TRACE_NO_INDENT();

@@ -44,6 +44,7 @@ def tp_init(name, text_long_name):
     my.consume_per_bite_amount(self, 30)
     my.distance_avoid(self, 4)
     my.distance_vision(self, 8)
+    my.is_burnable(self, True)
     my.dmg_nat_att_dice(self, "2d6")
     my.dmg_nat_att_type(self, "whip")
     my.dmg_received_doubled_from_fire(self, True)

@@ -684,7 +684,7 @@ void Thing::animate(void)
 
 #ifdef DEBUG_ANIM
   if (debug || is_debug_type()) {
-    con("Animate");
+    con("Animate tile_curr %d", tile_curr);
   }
 #endif
 
@@ -694,6 +694,16 @@ void Thing::animate(void)
 #ifdef DEBUG_ANIM
     if (debug || is_debug_type()) {
       con("Animate: no tmap");
+    }
+#endif
+    return;
+  }
+
+  std::vector< Tilep > *tiles = &((*tmap));
+  if (unlikely(! tiles || tiles->empty())) {
+#ifdef DEBUG_ANIM
+    if (debug || is_debug_type()) {
+      err("Has no tiles");
     }
 #endif
     return;
@@ -712,7 +722,13 @@ void Thing::animate(void)
     // Abandon resurrection if we're stuck to avoid the anim getting stuck.
     //
     resurrect_stop();
-    return;
+
+    //
+    // If we do not have a tile yet, we need to continue.
+    //
+    if (tile_curr) {
+      return;
+    }
   }
 
   if (paralysis_count()) {
@@ -726,7 +742,13 @@ void Thing::animate(void)
       // Abandon resurrection if we're stuck to avoid the anim getting stuck.
       //
       resurrect_stop();
-      return;
+
+      //
+      // If we do not have a tile yet, we need to continue.
+      //
+      if (tile_curr) {
+        return;
+      }
     }
   }
 
@@ -741,7 +763,13 @@ void Thing::animate(void)
       // Abandon resurrection if we're stuck to avoid the anim getting stuck.
       //
       resurrect_stop();
-      return;
+
+      //
+      // If we do not have a tile yet, we need to continue.
+      //
+      if (tile_curr) {
+        return;
+      }
     }
   }
 
@@ -756,18 +784,14 @@ void Thing::animate(void)
       // Abandon resurrection if we're stuck to avoid the anim getting stuck.
       //
       resurrect_stop();
-      return;
-    }
-  }
 
-  std::vector< Tilep > *tiles = &((*tmap));
-  if (unlikely(! tiles || tiles->empty())) {
-#ifdef DEBUG_ANIM
-    if (debug || is_debug_type()) {
-      err("Has no tiles");
+      //
+      // If we do not have a tile yet, we need to continue.
+      //
+      if (tile_curr) {
+        return;
+      }
     }
-#endif
-    return;
   }
 
   //
