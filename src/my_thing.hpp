@@ -1151,6 +1151,7 @@ public:
   int chance_d1000_jump_randomly(void);
   int chance_d1000_melting(void);
   int chance_d1000_regenerate(void);
+  int chance_d1000_runic(void);
   int chance_d1000_shooting_avoid_friends(void);
   int chance_d1000_shooting(void);
   int chance_d1000_shove(void);

@@ -245,6 +245,7 @@ int Tp::chance_d1000_jump_onto(void) const { return _chance_d1000_jump_onto; }
 int Tp::chance_d1000_jump_randomly(void) const { return _chance_d1000_jump_randomly; }
 int Tp::chance_d1000_melting(void) const { return _chance_d1000_melting; }
 int Tp::chance_d1000_regenerate(void) const { return _chance_d1000_regenerate; }
+int Tp::chance_d1000_runic(void) const { return _chance_d1000_runic; }
 int Tp::chance_d1000_shooting_avoid_friends(void) const { return _chance_d1000_shooting_avoid_friends; }
 int Tp::chance_d1000_shooting(void) const { return _chance_d1000_shooting; }
 int Tp::chance_d1000_shove(void) const { return _chance_d1000_shove; }
@@ -1004,6 +1005,7 @@ void Tp::chance_d1000_jump_onto_set(int v) { _chance_d1000_jump_onto = v; }
 void Tp::chance_d1000_jump_randomly_set(int v) { _chance_d1000_jump_randomly = v; }
 void Tp::chance_d1000_melting_set(int v) { _chance_d1000_melting = v; }
 void Tp::chance_d1000_regenerate_set(int v) { _chance_d1000_regenerate = v; }
+void Tp::chance_d1000_runic_set(int v) { _chance_d1000_runic = v; }
 void Tp::chance_d1000_shooting_avoid_friends_set(int v) { _chance_d1000_shooting_avoid_friends = v; }
 void Tp::chance_d1000_shooting_set(int v) { _chance_d1000_shooting = v; }
 void Tp::chance_d1000_shove_set(int v) { _chance_d1000_shove = v; }

@@ -1205,6 +1205,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(chance_d1000_jump_randomly),
     MY_ADD_PYTHON_TP_FUNCTION(chance_d1000_melting),
     MY_ADD_PYTHON_TP_FUNCTION(chance_d1000_regenerate),
+    MY_ADD_PYTHON_TP_FUNCTION(chance_d1000_runic),
     MY_ADD_PYTHON_TP_FUNCTION(chance_d1000_shooting),
     MY_ADD_PYTHON_TP_FUNCTION(chance_d1000_shooting_avoid_friends),
     MY_ADD_PYTHON_TP_FUNCTION(chance_d1000_shove),

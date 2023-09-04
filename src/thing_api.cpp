@@ -55,6 +55,12 @@ int Thing::chance_d1000_shove(void)
   return (tp()->chance_d1000_shove());
 }
 
+int Thing::chance_d1000_runic(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->chance_d1000_runic());
+}
+
 int Thing::chance_d1000_grapple(void)
 {
   TRACE_NO_INDENT();

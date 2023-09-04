@@ -149,6 +149,7 @@ private:
   int _chance_d1000_jump_randomly {};
   int _chance_d1000_melting {};
   int _chance_d1000_regenerate {};
+  int _chance_d1000_runic {};
   int _chance_d1000_shooting {};
   int _chance_d1000_shooting_avoid_friends {};
   int _chance_d1000_shove {};
@@ -1483,6 +1484,7 @@ public:
   int chance_d1000_jump_randomly(void) const;
   int chance_d1000_melting(void) const;
   int chance_d1000_regenerate(void) const;
+  int chance_d1000_runic(void) const;
   int chance_d1000_shooting_avoid_friends(void) const;
   int chance_d1000_shooting(void) const;
   int chance_d1000_shove(void) const;
@@ -2264,6 +2266,7 @@ public:
   void chance_d1000_jump_randomly_set(int v);
   void chance_d1000_melting_set(int v);
   void chance_d1000_regenerate_set(int v);
+  void chance_d1000_runic_set(int v);
   void chance_d1000_shooting_avoid_friends_set(int v);
   void chance_d1000_shooting_set(int v);
   void chance_d1000_shove_set(int v);
