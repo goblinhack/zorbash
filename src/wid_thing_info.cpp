@@ -297,6 +297,20 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_gold_value(wid_popup_window, t);
   wid_thing_info_add_spell_cost(wid_popup_window, t);
 
+  //
+  // If the weapon has a runic, add it
+  //
+  if (t->is_able_to_have_a_runic_inscribed()) {
+    auto runic = t->runic_name_get();
+    if (! runic.empty()) {
+      auto rune = tp_find(runic);
+      if (rune) {
+        wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+        wid_popup_window->log("This weapon is inscribed with a magical " + rune->text_long_name() + " rune");
+      }
+    }
+  }
+
   t->show_botcon_description();
 
   if (game->current_wid_thing_info != t) {
@@ -3770,7 +3784,8 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
     }
   }
 
-  if (t->is_skill() || t->is_spell() || t->is_item() || t->is_monst() || t->is_player() || printed_something) {
+  if (t->is_weapon() || t->is_skill() || t->is_spell() || t->is_item() || t->is_monst() || t->is_player()
+      || printed_something) {
     w->log(UI_LOGGING_EMPTY_LINE);
   }
 }

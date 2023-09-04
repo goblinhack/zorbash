@@ -345,6 +345,16 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
   equip_remove_anim(equip);
 
   //
+  // If the weapon has a runic, add it
+  //
+  if (item->is_able_to_have_a_runic_inscribed()) {
+    auto runic = item->runic_name_get();
+    if (! runic.empty()) {
+      buff_remove(tp_find(runic));
+    }
+  }
+
+  //
   // Call prior to dropping so the owner is prserved.
   //
   on_unequip(item);
@@ -542,6 +552,16 @@ bool Thing::equip(Thingp item, int equip)
       } else if (item->is_magical()) {
         msg("You hear the distant sound of magic, whatever that is.");
       }
+    }
+  }
+
+  //
+  // If the weapon has a runic, add it
+  //
+  if (item->is_able_to_have_a_runic_inscribed()) {
+    auto runic = item->runic_name_get();
+    if (! runic.empty()) {
+      buff_add(tp_find(runic));
     }
   }
 

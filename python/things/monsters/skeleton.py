@@ -51,7 +51,7 @@ def tp_init(name, text_long_name):
     my.consume_per_bite_amount(self, 10)
     my.distance_vision(self, 5)
     my.dmg_nat_att_dice(self, "1d3")
-    my.dmg_nat_att_type(self, "gnashing")
+    my.dmg_nat_att_type(self, "bone biting")
     my.dmg_received_doubled_from_water(self, True)
     my.environ_hates_water(self, 100)
     my.gfx_anim_use(self, "attack_red")

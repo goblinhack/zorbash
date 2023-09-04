@@ -35,7 +35,7 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.chance_d10000_crit(self, 200)
     my.chance_d10000_damaged(self, 20)
-    my.chance_d10000_runic(self, 0)
+    my.chance_d10000_runic(self, 50)
     my.dmg_chance_d1000_melee(self, 0, 1000)
     my.dmg_melee_dice(self, "1d10")
     my.equip_carry_anim(self, "cutlass_carry")
