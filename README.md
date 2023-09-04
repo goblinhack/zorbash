@@ -371,9 +371,9 @@ Weapons
 <!-- begin weapons type marker -->
 | Name | Class/Rarity | Damage | Damage Roll | Special | Damage Chance | Gold Value |
 | :--- | --- | --- | --- | --- | --- | --- |
-| Mace | C/common | 4 - 32 | 4d8 |  Swing-penalty<br /> | 0.01 % | 350 |
-| Warhammer | C/common | 3 - 24 | 3d8 |  Swing-penalty<br />Hits all surrounding<br /> | 0.01 % | 450 |
+| Warhammer | C/common | 4 - 32 | 4d8 |  Swing-penalty<br />Hits all surrounding<br /> | 0.01 % | 450 |
 | Very Broadsword | C/uncommon | 2 - 24 | 2d12 |  Hits adjacent<br /> | 0.01 % | 350 |
+| Mace | C/common | 3 - 24 | 3d8 |  Swing-penalty<br /> | 0.01 % | 350 |
 | Double Shovel | C/uncommon | 2 - 20 | 2d10 |  Hits in-front and behind<br /> | 1.00 % | 50 |
 | Holy Sword Of Clonrichet | C/v-rare | 5 - 20 | 1d16+4 |  Immunity-Acid<br />Immunity-Cold<br />Immunity-poison<br />x2 undead<br />Hits all surrounding<br /> | 0.01 % | 2500 |
 | Scythe | C/uncommon | 3 - 18 | 3d6 |  Hits all surrounding<br /> | 0.05 % | 250 |
