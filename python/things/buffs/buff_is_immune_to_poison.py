@@ -42,6 +42,7 @@ def tp_init(name, text_long_name):
 
     my.gfx_ascii_shown(self, True)
     my.is_buff(self, True)
+    my.is_runic(self, True)
     my.is_immune_to_poison(self, True)
     my.is_interesting(self, True)
     my.is_loggable(self, True)

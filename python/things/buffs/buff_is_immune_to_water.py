@@ -23,6 +23,7 @@ def tp_init(name, text_long_name):
     my.gfx_ascii_shown(self, True)
     my.is_aquatic(self, True)
     my.is_buff(self, True)
+    my.is_runic(self, True)
     my.is_immune_to_water(self, True)
     my.is_loggable(self, True)
     my.on_owner_add_do(self, "me.on_owner_add()")
@@ -37,7 +38,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="buff_is_immune_to_water", text_long_name="aquatic lover")
+    tp_init(name="buff_is_immune_to_water", text_long_name="aqua fresh")
 
 
 init()

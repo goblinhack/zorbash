@@ -21,6 +21,7 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.gfx_ascii_shown(self, True)
     my.is_buff(self, True)
+    my.is_runic(self, True)
     my.is_invisible(self, True)
     my.is_loggable(self, True)
     my.is_tickable(self, True)

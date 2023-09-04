@@ -633,7 +633,7 @@ void tp_dump_weapons(void)
   // | git diff     | git diff       | git diff      |
 
   printf("DUMP: | %s | %s | %s | %s | %s | %s | %s | %s |\n", "Name", "Class/Rarity", "Damage", "Damage Roll",
-         "Special", "Damage Chance", "Runic Chance", "Gold Value");
+         "Special", "Weapon Damaged Chance", "Runic Chance", "Gold Value");
 
   printf("DUMP: | %s | %s | %s | %s | %s | %s | %s | %s |\n", ":---", "---", "---", "---", "---", "---", "---",
          "---");
