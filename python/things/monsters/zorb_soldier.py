@@ -11,6 +11,11 @@ def on_death_of_my_leader(me, x, y):
         my.thing_msg(me, "The zorblin soldier cries out in rage!")
 
 
+def on_death_of_a_follower(me, leader, x, y):
+    if not my.thing_is_dead_or_dying(me):
+        my.thing_msg(me, "The zorblin soldier cries out in anguish!")
+
+
 def tp_init(name, text_long_name):
     self = zorb_all.tp_init(name, text_long_name)
     # begin sort marker
@@ -28,6 +33,7 @@ def tp_init(name, text_long_name):
     my.is_monst_class_A(self, True)
     my.is_zorblin(self, True)
     my.on_born_do(self, "me.on_born()")
+    my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
     my.on_death_of_my_leader_do(self, "me.on_death_of_my_leader()")
     my.on_you_nat_attack_attempt_do(self, "zorb_all.on_you_nat_attack_attempt()")
     my.stat_psi(self, 10)

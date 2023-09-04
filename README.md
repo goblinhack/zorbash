@@ -1,6 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - invisible phantoms that leave puddles of ectoplasm ?                                                                                       -->
+<!-- - weapon runics                                                                                                                              -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -124,6 +124,7 @@
 <!--                                                                                                                                              -->
 <!-- Monsts                                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
+<!-- - invisible phantoms that leave puddles of ectoplasm ?                                                                                       -->
 <!-- - chocolate golem fires chocolate                                                                                                            -->
 <!-- - chickens - battle chickens - lay eggs as food - and they get names                                                                         -->
 <!-- - acid jellies should damage weapons                                                                                                         -->
