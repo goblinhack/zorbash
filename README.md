@@ -264,12 +264,12 @@ Bestiary
 <!-- begin monsters type marker -->
 | Monster | Class/Rarity | Dngr | Attack | # Attcks | Other attacks | Immunity |
 | :--- | --- | --- | --- | --- | --- | --- |
+| Reaper | E/common | 712 | 1d6+6 | 2 |  | Acid<br />Cold<br />Fire<br />Necrosis<br />Negation<br />Paralysis<br />poison<br />Holding<br />Slowing<br />Webs<br />Drain<br /> |
 | Ettin, Two Headed Giant | D/rare | 382 | 1d10+4 | 2 |  |  |
-| Reaper | E/common | 356 | 1d6+6 | 1 |  | Acid<br />Cold<br />Fire<br />Necrosis<br />Negation<br />Paralysis<br />poison<br />Holding<br />Slowing<br />Webs<br />Drain<br /> |
 | Flesh Golem | C/rare | 336 | 2d8+4 | 2 |  | Cold<br />poison<br />Drain<br /> |
 | Fire Demon | D/uncommon | 328 | 1d14+4 | 2 | Fire:1d6+6<br /> | Cold<br />Fire<br />Necrosis<br />poison<br /> |
 | Cthulite | D/rare | 322 | 1d14+4 | 2 | Acid:2d6<br />Poison:2d12<br /> | Acid<br />Necrosis<br />poison<br /> |
-| Undead Bear | B/common | 320 | 2d8+5 | 2 | Necrotic:1<br /> | Cold<br />Necrosis<br />poison<br />Drain<br /> |
+| Undead Bear | C/common | 320 | 2d8+5 | 2 | Necrotic:1<br /> | Cold<br />Necrosis<br />poison<br />Drain<br /> |
 | Bearowl | C/common | 290 | 2d8+5 | 2 |  |  |
 | Baby Kraken | D/rare | 249 |  | 1 | Bite:3d8+10<br />Digest:1d20<br />Drown:1d20<br /> | Water<br /> |
 | Colossal Scorpion | E/v-rare | 243 |  | 1 | Bite:2d8+6<br />Digest:1d40<br />Poison:1d20+10<br /> |  |
@@ -279,7 +279,7 @@ Bestiary
 | Dungeon Cleaner | B/common | 187 | 1d10 | 1 | Digest:1d40<br /> | Acid<br /> |
 | Giant Skeleton | C/common | 184 | 1d6 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />poison<br />Drain<br /> |
 | Mummy | B/common | 184 | 1d10+10 | 2 | Drain:1d10<br /> | Cold<br />Fire<br />Necrosis<br />poison<br />Drain<br /> |
-| Cement Man | D/common | 178 | 3d8+6 | 1 |  | Cold<br />Fire<br />poison<br />Drain<br /> |
+| Cement Man | C/common | 178 | 3d8+6 | 1 |  | Cold<br />Fire<br />poison<br />Drain<br /> |
 | Giant Spider | B/common | 139 | 1d8+3 | 1 | Poison:2d8<br /> | Webs<br /> |
 | Lesser Tentacleye | C/common | 136 | 2d6 | 1 |  | Cold<br />Necrosis<br />poison<br />Drain<br />Water<br /> |
 | Bone Spider | C/common | 132 | 1d8+3 | 1 | Poison:2d8<br /> | Cold<br />Necrosis<br />poison<br />Webs<br />Drain<br /> |
