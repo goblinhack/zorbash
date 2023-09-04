@@ -1013,6 +1013,7 @@ public:
   const std::string &on_you_nat_attack_success_do(void);
   const std::string &poison_reason_get(void);
   const std::string &resurrect_dice_str(void);
+  const std::string &runic_name_get(void);
   const std::string &skill_base_name(void);
   const std::string &skill_replaces(void);
   const std::string &spawn_group_size_dice_str(void);
@@ -1135,6 +1136,7 @@ public:
   int carried_weapon_least_value(Thingp *out);
   int chance_d10000_crit(void);
   int chance_d10000_damaged(void);
+  int chance_d10000_runic(void);
   int chance_d10000_set_on_fire(void);
   int chance_d1000_appearing(void);
   int chance_d1000_attack_engulf(void);
@@ -1151,7 +1153,6 @@ public:
   int chance_d1000_jump_randomly(void);
   int chance_d1000_melting(void);
   int chance_d1000_regenerate(void);
-  int chance_d1000_runic(void);
   int chance_d1000_shooting_avoid_friends(void);
   int chance_d1000_shooting(void);
   int chance_d1000_shove(void);
@@ -1399,6 +1400,7 @@ public:
   int is_able_to_follow(void);
   int is_able_to_freeze(void);
   int is_able_to_grapple(void);
+  int is_able_to_have_a_runic_inscribed(void);
   int is_able_to_jump_attack(void);
   int is_able_to_jump_escape(void);
   int is_able_to_jump_onto(void);
@@ -1770,6 +1772,7 @@ public:
   int is_rock_ice(void);
   int is_rock_lava(void);
   int is_rock(void);
+  int is_runic(void);
   int is_rusty(void);
   int is_scorpion(void);
   int is_secret_door(void);
@@ -1916,8 +1919,6 @@ public:
   int is_unused_flag88(void);
   int is_unused_flag89(void);
   int is_unused_flag8(void);
-  int is_unused_flag90(void);
-  int is_unused_flag91(void);
   int is_unused_flag9(void);
   int is_usable(void);
   int is_used_when_thrown(void);
@@ -2967,6 +2968,7 @@ public:
   void resting(void);
   void resurrect_stop(void);
   void resurrect_tick(void);
+  void runic_name_set(const std::string &);
   void score_add(Thingp victim = nullptr);
   void secret_door_tick(void);
   void show_botcon_description(void);

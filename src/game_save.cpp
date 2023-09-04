@@ -99,6 +99,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->physical_training);
   out << bits(my.t->poison);
   out << bits(my.t->poison_reason);
+  out << bits(my.t->runic_name);
   out << bits(my.t->prev_light_dist);
   out << bits(my.t->score);
   out << bits(my.t->shove_bonus);

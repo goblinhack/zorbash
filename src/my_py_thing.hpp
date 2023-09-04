@@ -170,6 +170,7 @@ PyObject *thing_is_able_to_enchant_items(PyObject *obj, PyObject *args, PyObject
 PyObject *thing_is_able_to_fall(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_follow(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_freeze(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_have_a_runic_inscribed(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_jump_attack(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_jump_escape(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_jump_onto(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -526,6 +527,7 @@ PyObject *thing_is_ripple(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rock_ice(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rock_lava(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rock(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_runic(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rusty(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_same_mob(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_scorpion(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -671,8 +673,6 @@ PyObject *thing_is_unused_flag87(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag88(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag89(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag90(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag91(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag9(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_usable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_used_when_thrown(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -123,6 +123,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->physical_training);
    in >> bits(my.t->poison);
    in >> bits(my.t->poison_reason);
+   in >> bits(my.t->runic_name);
    in >> bits(my.t->prev_light_dist);
    in >> bits(my.t->score);
    in >> bits(my.t->shove_bonus);

@@ -55,10 +55,10 @@ int Thing::chance_d1000_shove(void)
   return (tp()->chance_d1000_shove());
 }
 
-int Thing::chance_d1000_runic(void)
+int Thing::chance_d10000_runic(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->chance_d1000_runic());
+  return (tp()->chance_d10000_runic());
 }
 
 int Thing::chance_d1000_grapple(void)
@@ -651,15 +651,15 @@ int Thing::is_unused_flag89(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag89());
 }
-int Thing::is_unused_flag90(void)
+int Thing::is_able_to_have_a_runic_inscribed(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag90());
+  return (tp()->is_able_to_have_a_runic_inscribed());
 }
-int Thing::is_unused_flag91(void)
+int Thing::is_runic(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag91());
+  return (tp()->is_runic());
 }
 int Thing::is_tentacleye(void)
 {

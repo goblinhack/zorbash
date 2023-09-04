@@ -45,6 +45,10 @@ std::vector< Tpp > tp_find_wildcard(const std::string &name)
     out.push_back(tp_random_food());
     return out;
   }
+  if (name == "random_runic") {
+    out.push_back(tp_random_runic());
+    return out;
+  }
   if (name == "random_gold") {
     out.push_back(tp_random_gold());
     return out;
@@ -628,10 +632,11 @@ void tp_dump_weapons(void)
   // | git status   | git status     | git status    |
   // | git diff     | git diff       | git diff      |
 
-  printf("DUMP: | %s | %s | %s | %s | %s | %s | %s |\n", "Name", "Class/Rarity", "Damage", "Damage Roll", "Special",
-         "Damage Chance", "Gold Value");
+  printf("DUMP: | %s | %s | %s | %s | %s | %s | %s | %s |\n", "Name", "Class/Rarity", "Damage", "Damage Roll",
+         "Special", "Damage Chance", "Runic Chance", "Gold Value");
 
-  printf("DUMP: | %s | %s | %s | %s | %s | %s | %s |\n", ":---", "---", "---", "---", "---", "---", "---");
+  printf("DUMP: | %s | %s | %s | %s | %s | %s | %s | %s |\n", ":---", "---", "---", "---", "---", "---", "---",
+         "---");
 
   std::vector< Tpp > m;
 
@@ -816,7 +821,7 @@ void tp_dump_weapons(void)
       special += "Hits two ahead<newline>";
     }
 
-    printf("DUMP: | %s | %s%s%s%s%s%s%s%s | %u - %u | %s | %s | %.2f %% | %u |\n",
+    printf("DUMP: | %s | %s%s%s%s%s%s%s%s | %u - %u | %s | %s | %.2f %% | %.2f%% | %u |\n",
            capitalise(tp->text_long_name()).c_str(), tp->is_weapon_class_A() ? "A" : "",
            tp->is_weapon_class_B() ? "B" : "", tp->is_weapon_class_C() ? "C" : "",
            tp->rarity() == THING_RARITY_COMMON ? "/common" : "",
@@ -824,6 +829,7 @@ void tp_dump_weapons(void)
            tp->rarity() == THING_RARITY_VERY_RARE ? "/v-rare" : "",
            tp->rarity() == THING_RARITY_UNIQUE ? "/unique" : "", tp->dmg_melee_dice().min_roll(),
            tp->dmg_melee_dice().max_roll(), tp->dmg_melee_dice_str().c_str(), special.c_str(),
-           (float) tp->chance_d10000_damaged() / (float) 100.0, tp->gold_value_dice().max_roll());
+           (float) tp->chance_d10000_damaged() / (float) 100.0, (float) tp->chance_d10000_runic() / (float) 100.0,
+           tp->gold_value_dice().max_roll());
   }
 }

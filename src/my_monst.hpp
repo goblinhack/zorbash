@@ -172,6 +172,7 @@ public:
   std::string msg;           // Text that floats on screen
   std::string dead_reason;   // What defeated me
   std::string poison_reason; // What poisoned me
+  std::string runic_name;    // The name of this weapon's optional runic
 
   // begin sort marker2 {
   ts_t ts_anim_delay_end {};

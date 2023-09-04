@@ -229,6 +229,7 @@ int Tp::capacity_height(void) const { return _capacity_height; }
 int Tp::capacity_width(void) const { return _capacity_width; }
 int Tp::chance_d10000_crit(void) const { return _chance_d10000_crit; }
 int Tp::chance_d10000_damaged(void) const { return _chance_d10000_damaged; }
+int Tp::chance_d10000_runic(void) const { return _chance_d10000_runic; }
 int Tp::chance_d10000_set_on_fire(void) const { return _chance_d10000_set_on_fire; }
 int Tp::chance_d1000_appearing(void) const { return _chance_d1000_appearing; }
 int Tp::chance_d1000_attack_engulf(void) const { return _chance_d1000_attack_engulf; }
@@ -245,7 +246,6 @@ int Tp::chance_d1000_jump_onto(void) const { return _chance_d1000_jump_onto; }
 int Tp::chance_d1000_jump_randomly(void) const { return _chance_d1000_jump_randomly; }
 int Tp::chance_d1000_melting(void) const { return _chance_d1000_melting; }
 int Tp::chance_d1000_regenerate(void) const { return _chance_d1000_regenerate; }
-int Tp::chance_d1000_runic(void) const { return _chance_d1000_runic; }
 int Tp::chance_d1000_shooting_avoid_friends(void) const { return _chance_d1000_shooting_avoid_friends; }
 int Tp::chance_d1000_shooting(void) const { return _chance_d1000_shooting; }
 int Tp::chance_d1000_shove(void) const { return _chance_d1000_shove; }
@@ -371,6 +371,7 @@ int Tp::is_able_to_fall(void) const { return _is_able_to_fall; }
 int Tp::is_able_to_follow(void) const { return _is_able_to_follow; }
 int Tp::is_able_to_freeze(void) const { return _is_able_to_freeze; }
 int Tp::is_able_to_grapple(void) const { return _is_able_to_grapple; }
+int Tp::is_able_to_have_a_runic_inscribed(void) const { return _is_able_to_have_a_runic_inscribed; }
 int Tp::is_able_to_jump_attack(void) const { return _is_able_to_jump_attack; }
 int Tp::is_able_to_jump_escape(void) const { return _is_able_to_jump_escape; }
 int Tp::is_able_to_jump_onto(void) const { return _is_able_to_jump_onto; }
@@ -713,6 +714,7 @@ int Tp::is_ripple(void) const { return _is_ripple; }
 int Tp::is_rock_ice(void) const { return _is_rock_ice; }
 int Tp::is_rock_lava(void) const { return _is_rock_lava; }
 int Tp::is_rock(void) const { return _is_rock; }
+int Tp::is_runic(void) const { return _is_runic; }
 int Tp::is_rusty(void) const { return _is_rusty; }
 int Tp::is_scorpion(void) const { return _is_scorpion; }
 int Tp::is_secret_door(void) const { return _is_secret_door; }
@@ -860,8 +862,6 @@ int Tp::is_unused_flag87(void) const { return _is_unused_flag87; }
 int Tp::is_unused_flag88(void) const { return _is_unused_flag88; }
 int Tp::is_unused_flag89(void) const { return _is_unused_flag89; }
 int Tp::is_unused_flag8(void) const { return _is_unused_flag8; }
-int Tp::is_unused_flag90(void) const { return _is_unused_flag90; }
-int Tp::is_unused_flag91(void) const { return _is_unused_flag91; }
 int Tp::is_unused_flag9(void) const { return _is_unused_flag9; }
 int Tp::is_usable(void) const { return _is_usable; }
 int Tp::is_used_when_thrown(void) const { return _is_used_when_thrown; }
@@ -989,6 +989,7 @@ void Tp::capacity_height_set(int v) { _capacity_height = v; }
 void Tp::capacity_width_set(int v) { _capacity_width = v; }
 void Tp::chance_d10000_crit_set(int v) { _chance_d10000_crit = v; }
 void Tp::chance_d10000_damaged_set(int v) { _chance_d10000_damaged = v; }
+void Tp::chance_d10000_runic_set(int v) { _chance_d10000_runic = v; }
 void Tp::chance_d10000_set_on_fire_set(int v) { _chance_d10000_set_on_fire = v; }
 void Tp::chance_d1000_appearing_set(int v) { _chance_d1000_appearing = v; }
 void Tp::chance_d1000_attack_engulf_set(int v) { _chance_d1000_attack_engulf = v; }
@@ -1005,7 +1006,6 @@ void Tp::chance_d1000_jump_onto_set(int v) { _chance_d1000_jump_onto = v; }
 void Tp::chance_d1000_jump_randomly_set(int v) { _chance_d1000_jump_randomly = v; }
 void Tp::chance_d1000_melting_set(int v) { _chance_d1000_melting = v; }
 void Tp::chance_d1000_regenerate_set(int v) { _chance_d1000_regenerate = v; }
-void Tp::chance_d1000_runic_set(int v) { _chance_d1000_runic = v; }
 void Tp::chance_d1000_shooting_avoid_friends_set(int v) { _chance_d1000_shooting_avoid_friends = v; }
 void Tp::chance_d1000_shooting_set(int v) { _chance_d1000_shooting = v; }
 void Tp::chance_d1000_shove_set(int v) { _chance_d1000_shove = v; }
@@ -1138,6 +1138,7 @@ void Tp::is_able_to_fall_set(int v) { _is_able_to_fall = v; }
 void Tp::is_able_to_follow_set(int v) { _is_able_to_follow = v; }
 void Tp::is_able_to_freeze_set(int v) { _is_able_to_freeze = v; }
 void Tp::is_able_to_grapple_set(int v) { _is_able_to_grapple = v; }
+void Tp::is_able_to_have_a_runic_inscribed_set(int v) { _is_able_to_have_a_runic_inscribed = v; }
 void Tp::is_able_to_jump_attack_set(int v) { _is_able_to_jump_attack = v; }
 void Tp::is_able_to_jump_escape_set(int v) { _is_able_to_jump_escape = v; }
 void Tp::is_able_to_jump_onto_set(int v) { _is_able_to_jump_onto = v; }
@@ -1481,6 +1482,7 @@ void Tp::is_ripple_set(int v) { _is_ripple = v; }
 void Tp::is_rock_ice_set(int v) { _is_rock_ice = v; }
 void Tp::is_rock_lava_set(int v) { _is_rock_lava = v; }
 void Tp::is_rock_set(int v) { _is_rock = v; }
+void Tp::is_runic_set(int v) { _is_runic = v; }
 void Tp::is_rusty_set(int v) { _is_rusty = v; }
 void Tp::is_scorpion_set(int v) { _is_scorpion = v; }
 void Tp::is_secret_door_set(int v) { _is_secret_door = v; }
@@ -1628,8 +1630,6 @@ void Tp::is_unused_flag87_set(int v) { _is_unused_flag87 = v; }
 void Tp::is_unused_flag88_set(int v) { _is_unused_flag88 = v; }
 void Tp::is_unused_flag89_set(int v) { _is_unused_flag89 = v; }
 void Tp::is_unused_flag8_set(int v) { _is_unused_flag8 = v; }
-void Tp::is_unused_flag90_set(int v) { _is_unused_flag90 = v; }
-void Tp::is_unused_flag91_set(int v) { _is_unused_flag91 = v; }
 void Tp::is_unused_flag9_set(int v) { _is_unused_flag9 = v; }
 void Tp::is_usable_set(int v) { _is_usable = v; }
 void Tp::is_used_when_thrown_set(int v) { _is_used_when_thrown = v; }

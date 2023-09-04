@@ -263,6 +263,10 @@ void tp_fixup(void)
       tp->is_able_to_shove_set(true);
     }
 
+    if (tp->chance_d10000_runic()) {
+      tp->is_able_to_have_a_runic_inscribed_set(true);
+    }
+
     if (tp->chance_d1000_shooting()) {
       tp->is_able_to_shoot_at_set(true);
     }

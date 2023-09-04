@@ -133,6 +133,7 @@ private:
   int _capacity_width {};
   int _chance_d10000_crit {};
   int _chance_d10000_damaged {};
+  int _chance_d10000_runic {};
   int _chance_d10000_set_on_fire {};
   int _chance_d1000_appearing {};
   int _chance_d1000_attack_engulf {};
@@ -149,7 +150,6 @@ private:
   int _chance_d1000_jump_randomly {};
   int _chance_d1000_melting {};
   int _chance_d1000_regenerate {};
-  int _chance_d1000_runic {};
   int _chance_d1000_shooting {};
   int _chance_d1000_shooting_avoid_friends {};
   int _chance_d1000_shove {};
@@ -279,6 +279,7 @@ private:
   int _is_able_to_follow {};
   int _is_able_to_freeze {};
   int _is_able_to_grapple {};
+  int _is_able_to_have_a_runic_inscribed {};
   int _is_able_to_jump {};
   int _is_able_to_jump_attack {};
   int _is_able_to_jump_escape {};
@@ -622,6 +623,7 @@ private:
   int _is_rock {};
   int _is_rock_ice {};
   int _is_rock_lava {};
+  int _is_runic {};
   int _is_rusty {};
   int _is_scorpion {};
   int _is_secret_door {};
@@ -771,8 +773,6 @@ private:
   int _is_unused_flag88 {};
   int _is_unused_flag89 {};
   int _is_unused_flag9 {};
-  int _is_unused_flag90 {};
-  int _is_unused_flag91 {};
   int _is_usable {};
   int _is_used_when_thrown {};
   int _is_very_combustible {};
@@ -1468,6 +1468,7 @@ public:
   int capacity_width(void) const;
   int chance_d10000_crit(void) const;
   int chance_d10000_damaged(void) const;
+  int chance_d10000_runic(void) const;
   int chance_d10000_set_on_fire(void) const;
   int chance_d1000_appearing(void) const;
   int chance_d1000_attack_engulf(void) const;
@@ -1484,7 +1485,6 @@ public:
   int chance_d1000_jump_randomly(void) const;
   int chance_d1000_melting(void) const;
   int chance_d1000_regenerate(void) const;
-  int chance_d1000_runic(void) const;
   int chance_d1000_shooting_avoid_friends(void) const;
   int chance_d1000_shooting(void) const;
   int chance_d1000_shove(void) const;
@@ -1631,6 +1631,7 @@ public:
   int is_able_to_follow(void) const;
   int is_able_to_freeze(void) const;
   int is_able_to_grapple(void) const;
+  int is_able_to_have_a_runic_inscribed(void) const;
   int is_able_to_jump_attack(void) const;
   int is_able_to_jump_escape(void) const;
   int is_able_to_jump_onto(void) const;
@@ -1973,6 +1974,7 @@ public:
   int is_rock_ice(void) const;
   int is_rock_lava(void) const;
   int is_rock(void) const;
+  int is_runic(void) const;
   int is_rusty(void) const;
   int is_scorpion(void) const;
   int is_secret_door(void) const;
@@ -2121,8 +2123,6 @@ public:
   int is_unused_flag88(void) const;
   int is_unused_flag89(void) const;
   int is_unused_flag8(void) const;
-  int is_unused_flag90(void) const;
-  int is_unused_flag91(void) const;
   int is_unused_flag9(void) const;
   int is_usable(void) const;
   int is_used_when_thrown(void) const;
@@ -2250,6 +2250,7 @@ public:
   void capacity_width_set(int v);
   void chance_d10000_crit_set(int v);
   void chance_d10000_damaged_set(int v);
+  void chance_d10000_runic_set(int v);
   void chance_d10000_set_on_fire_set(int v);
   void chance_d1000_appearing_set(int v);
   void chance_d1000_attack_engulf_set(int v);
@@ -2266,7 +2267,6 @@ public:
   void chance_d1000_jump_randomly_set(int v);
   void chance_d1000_melting_set(int v);
   void chance_d1000_regenerate_set(int v);
-  void chance_d1000_runic_set(int v);
   void chance_d1000_shooting_avoid_friends_set(int v);
   void chance_d1000_shooting_set(int v);
   void chance_d1000_shove_set(int v);
@@ -2399,6 +2399,7 @@ public:
   void is_able_to_follow_set(int v);
   void is_able_to_freeze_set(int v);
   void is_able_to_grapple_set(int v);
+  void is_able_to_have_a_runic_inscribed_set(int v);
   void is_able_to_jump_attack_set(int v);
   void is_able_to_jump_escape_set(int v);
   void is_able_to_jump_onto_set(int v);
@@ -2742,6 +2743,7 @@ public:
   void is_rock_ice_set(int v);
   void is_rock_lava_set(int v);
   void is_rock_set(int v);
+  void is_runic_set(int v);
   void is_rusty_set(int v);
   void is_scorpion_set(int v);
   void is_secret_door_set(int v);
@@ -2890,8 +2892,6 @@ public:
   void is_unused_flag88_set(int v);
   void is_unused_flag89_set(int v);
   void is_unused_flag8_set(int v);
-  void is_unused_flag90_set(int v);
-  void is_unused_flag91_set(int v);
   void is_unused_flag9_set(int v);
   void is_usable_set(int v);
   void is_used_when_thrown_set(int v);
@@ -3224,6 +3224,7 @@ class Tp *tp_random_ethereal_mob(void);
 class Tp *tp_random_floor(void);
 class Tp *tp_random_foliage(void);
 class Tp *tp_random_food(void);
+class Tp *tp_random_runic(void);
 class Tp *tp_random_gold(void);
 class Tp *tp_random_green_blood(void);
 class Tp *tp_random_green_splatter(void);

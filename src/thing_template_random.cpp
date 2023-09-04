@@ -57,6 +57,7 @@ static Tpidmap tp_ring_class_A;
 static Tpidmap tp_ring_class_B;
 static Tpidmap tp_ring_class_C;
 static Tpidmap tp_rock;
+static Tpidmap tp_runic;
 static Tpidmap tp_secret_door;
 static Tpidmap tp_sewer_wall;
 static Tpidmap tp_skills;
@@ -128,6 +129,9 @@ void tp_random_init(void)
     }
     if (tp->is_food()) {
       tp_food.push_back(tp);
+    }
+    if (tp->is_runic()) {
+      tp_runic.push_back(tp);
     }
     if (tp->is_fungus_edible()) {
       tp_fungus_edible.push_back(tp);
@@ -672,6 +676,16 @@ Tpp tp_random_food(void)
     return nullptr;
   }
   return tp_get_with_rarity_filter(tp_food);
+}
+
+Tpp tp_random_runic(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_runic.size())) {
+    ERR("No runics found");
+    return nullptr;
+  }
+  return tp_get_with_rarity_filter(tp_runic);
 }
 
 Tpp tp_random_gold(void)
