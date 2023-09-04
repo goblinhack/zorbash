@@ -793,7 +793,7 @@ PyObject *place_at(PyObject *obj, PyObject *args, PyObject *keywds)
     //
     // If a chasm, we need to check what is now ready to fall
     //
-    it->log("New born location check");
+    IF_DEBUG { it->log("New born location check"); }
     it->location_check_me();
     Py_RETURN_TRUE;
   }

@@ -87,11 +87,12 @@ void wid_rightbar_stats_over_def_b(Widp w, int relx, int rely, int wheelx, int w
   }
 
   {
-    auto tot = player->stat_def_total();
     auto val = player->stat_def();
+    auto tot = player->stat_def_total() - player->stat_def_penalties_total();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
-      snprintf(tmp, sizeof(tmp) - 1, "Your total defense including all items and modifiers is %d.", tot);
+      snprintf(tmp, sizeof(tmp) - 1, "Your total defense including all items and modifiers and penalties is %d.",
+               tot);
       wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     } else {
       wid_rightbar_popup->log("You currently have no armor bonuses", TEXT_FORMAT_LHS);
@@ -221,10 +222,10 @@ void wid_rightbar_stats_over_stat_att_b(Widp w, int relx, int rely, int wheelx, 
 
   {
     auto val = player->stat_att();
-    auto tot = player->stat_att_total();
+    auto tot = player->stat_att_total() - player->stat_att_penalties_total();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
-      snprintf(tmp, sizeof(tmp) - 1, "Your total attack including all items and modifiers is %d.", tot);
+      snprintf(tmp, sizeof(tmp) - 1, "Your total attack including all items and modifiers and penalties is %d.", tot);
       wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     } else {
       wid_rightbar_popup->log("You currently have no attack bonuses", TEXT_FORMAT_LHS);

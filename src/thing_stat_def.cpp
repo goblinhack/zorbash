@@ -157,13 +157,17 @@ int Thing::stat_def_penalties_total(void)
 {
   TRACE_NO_INDENT();
 
+  //
+  // NOTE: update wid_thing_info_add_stat_def_penalties when adding here
+  //
+
   int penalty = 0;
   int prev    = 0;
 
   //
   // Positional penalties
   //
-  if (stuck_count() && stat_att_penalty_when_stuck()) {
+  if (stuck_count() && stat_def_penalty_when_stuck()) {
     int p = stat_def_penalty_when_stuck() + stuck_count();
     p     = std::min(p, stat_def_penalty_when_stuck_max());
     penalty += p;
@@ -171,7 +175,7 @@ int Thing::stat_def_penalties_total(void)
       prev = penalty;
       dbg("Def penalty: stuck %d", p);
     }
-  } else if (idle_count() && stat_att_penalty_when_idle()) {
+  } else if (idle_count() && stat_def_penalty_when_idle()) {
     int p = stat_def_penalty_when_idle() + idle_count();
     p     = std::min(p, stat_def_penalty_when_idle_max());
     penalty += p;

@@ -555,7 +555,7 @@ bool Thing::attack(point future_pos)
 
 bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
 {
-  dbg("Attack %s", victim->to_short_string().c_str());
+  con("Attack %s", victim->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   idle_count_set(0);
@@ -772,7 +772,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
 
     //
     // If a critical hit then ignore any negative attack bonus. This gives a 1 in 20 chance even
-    // in bad siturations of achieving some damage.
+    // in bad situations of achieving some damage.
     //
     if (attack_options->crit) {
       if (attacker_att_bonus < 0) {

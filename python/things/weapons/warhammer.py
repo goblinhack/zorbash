@@ -40,7 +40,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.chance_d10000_set_on_fire(self, 5)
     my.collision_hit_360(self, True)
     my.dmg_chance_d1000_melee(self, 0, 1000)
-    my.dmg_melee_dice(self, "3d8")
+    my.dmg_melee_dice(self, "4d8")
     my.equip_carry_anim(self, "warhammer_carry")
     my.gfx_anim_use(self, "warhammer_swing")
     my.gfx_ascii_fade_with_dist(self, True)

@@ -115,17 +115,23 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     return nullptr;
   }
 
-  if (! player->player_is_ready_for_popups()) {
-    IF_DEBUG1 { t->log("Create thing info popup; not ready for thing info"); }
-    return nullptr;
+  if (! t->is_player()) {
+    //
+    // Showing something other than the player too early?
+    //
+    if (! player->player_is_ready_for_popups()) {
+      IF_DEBUG1 { t->log("Create thing info popup; not ready for thing info"); }
+      return nullptr;
+    }
+
+    if (t->text_description_long().empty()) {
+      IF_DEBUG1 { t->log("Create thing info popup; no, has no text"); }
+      wid_thing_info_fini("has no text");
+      t->show_botcon_description();
+      return nullptr;
+    }
   }
 
-  if (t->text_description_long().empty()) {
-    IF_DEBUG1 { t->log("Create thing info popup; no, has no text"); }
-    wid_thing_info_fini("has no text");
-    t->show_botcon_description();
-    return nullptr;
-  }
   auto tp    = t->tp();
   auto tiles = &tp->tiles;
   auto tile  = tile_first(tiles);
@@ -264,7 +270,9 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     wid_thing_info_add_dmgd_chance(wid_popup_window, t);
     wid_thing_info_add_crit_chance(wid_popup_window, t);
     wid_thing_info_add_stat_att(wid_popup_window, t);
+    wid_thing_info_add_stat_att_penalties(wid_popup_window, t);
     wid_thing_info_add_stat_def(wid_popup_window, t);
+    wid_thing_info_add_stat_def_penalties(wid_popup_window, t);
     wid_thing_info_add_stat_str(wid_popup_window, t);
     wid_thing_info_add_stat_con(wid_popup_window, t);
     wid_thing_info_add_stat_dex(wid_popup_window, t);
@@ -1982,6 +1990,7 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
 
   if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
       || t->is_magical()) {
+
     //
     // Don't display for dead monsters
     //
@@ -2135,6 +2144,220 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
     }
     if (t->is_spell()) {
       w->log("%%fg=pink$(while spell is active)");
+    }
+  }
+}
+
+void Game::wid_thing_info_add_stat_att_penalties(WidPopup *w, Thingp t)
+{
+  TRACE_AND_INDENT();
+  char tmp[ MAXSHORTSTR ];
+
+  //
+  // Don't display for dead monsters
+  //
+  if (t->is_dead) {
+    return;
+  }
+
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
+
+    auto p = t->stat_att_penalties_total();
+    if (! p) {
+      return;
+    }
+
+    TRACE_NO_INDENT();
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack penalty:          %4d", -p);
+    w->log(tmp);
+
+    TRACE_NO_INDENT();
+    FOR_ALL_EQUIP(e)
+    {
+      auto iter = t->equip_get(e);
+      if (iter) {
+        //
+        // Warhammer, mace etc...
+        //
+        if (iter->stat_str_min()) {
+          if (t->stat_str_total() < iter->stat_str_min()) {
+            auto p = iter->stat_str_min() - t->stat_str_total();
+            if (p) {
+              snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$- Weapon min strength    %4d", -p);
+              w->log(tmp);
+            }
+          }
+        }
+      }
+    }
+
+    //
+    // Positional penalties
+    //
+    if (t->stuck_count() && t->stat_att_penalty_when_stuck()) {
+      int p = t->stat_att_penalty_when_stuck() + t->stuck_count();
+      p     = std::min(p, t->stat_att_penalty_when_stuck_max());
+      if (p) {
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$- Stuck                  %4d", -p);
+        w->log(tmp);
+      }
+    } else if (t->idle_count() && t->stat_att_penalty_when_idle()) {
+      int p = t->stat_att_penalty_when_idle() + t->idle_count();
+      p     = std::min(p, t->stat_att_penalty_when_idle_max());
+      if (p) {
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$- Idle too long          %4d", -p);
+        w->log(tmp);
+      }
+    }
+
+    //
+    // Hunger penalties
+    //
+    if (t->is_hunger_level_starving) {
+      int p = THING_HUNGER_PENALTY_WHEN_STARVING;
+      if (p) {
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$- Starving               %4d", -p);
+        w->log(tmp);
+      }
+    } else if (t->is_hunger_level_hungry) {
+      int p = THING_HUNGER_PENALTY_WHEN_HUNGRY;
+      if (p) {
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$- Hungry                 %4d", -p);
+        w->log(tmp);
+      }
+    }
+
+    //
+    // Terrain penalties
+    //
+    if (! t->is_aquatic() && ! t->buff_is_aquatic()) {
+      if (level->is_deep_water(t->curr_at)) {
+        int p = t->stat_att_penalty_when_in_deep_water();
+        if (p) {
+          if (t->is_able_to_swim()) {
+            p /= 2;
+          }
+          if (t->is_heavy()) {
+            p *= 2;
+          }
+          if (t->is_stone()) {
+            p *= 2;
+          }
+          if (p) {
+            snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$- Terrain                %4d", -p);
+            w->log(tmp);
+          }
+        } else if (level->is_shallow_water(t->curr_at)) {
+          int p = t->stat_att_penalty_when_in_shallow_water();
+          if (p) {
+            if (t->is_able_to_swim()) {
+              p /= 2;
+            }
+            if (p) {
+              snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$- Terrain                %4d", -p);
+              w->log(tmp);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+void Game::wid_thing_info_add_stat_def_penalties(WidPopup *w, Thingp t)
+{
+  TRACE_AND_INDENT();
+  char tmp[ MAXSHORTSTR ];
+
+  //
+  // Don't display for dead monsters
+  //
+  if (t->is_dead) {
+    return;
+  }
+
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
+
+    auto p = t->stat_def_penalties_total();
+    if (! p) {
+      return;
+    }
+
+    TRACE_NO_INDENT();
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense penalty:         %4d", -p);
+    w->log(tmp);
+
+    //
+    // Positional penalties
+    //
+    if (t->stuck_count() && t->stat_def_penalty_when_stuck()) {
+      int p = t->stat_def_penalty_when_stuck() + t->stuck_count();
+      p     = std::min(p, t->stat_def_penalty_when_stuck_max());
+      if (p) {
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$- Stuck                  %4d", -p);
+        w->log(tmp);
+      }
+    } else if (t->idle_count() && t->stat_def_penalty_when_idle()) {
+      int p = t->stat_def_penalty_when_idle() + t->idle_count();
+      p     = std::min(p, t->stat_def_penalty_when_idle_max());
+      if (p) {
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$- Idle too long          %4d", -p);
+        w->log(tmp);
+      }
+    }
+
+    //
+    // Hunger penalties
+    //
+    if (t->is_hunger_level_starving) {
+      int p = THING_HUNGER_PENALTY_WHEN_STARVING;
+      if (p) {
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$- Starving               %4d", -p);
+        w->log(tmp);
+      }
+    } else if (t->is_hunger_level_hungry) {
+      int p = THING_HUNGER_PENALTY_WHEN_HUNGRY;
+      if (p) {
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$- Hungry                 %4d", -p);
+        w->log(tmp);
+      }
+    }
+
+    //
+    // Terrain penalties
+    //
+    if (! t->is_aquatic() && ! t->buff_is_aquatic()) {
+      if (level->is_deep_water(t->curr_at)) {
+        int p = t->stat_def_penalty_when_in_deep_water();
+        if (p) {
+          if (t->is_able_to_swim()) {
+            p /= 2;
+          }
+          if (t->is_heavy()) {
+            p *= 2;
+          }
+          if (t->is_stone()) {
+            p *= 2;
+          }
+          if (p) {
+            snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$- Terrain                %4d", -p);
+            w->log(tmp);
+          }
+        }
+      } else if (level->is_shallow_water(t->curr_at)) {
+        int p = t->stat_def_penalty_when_in_shallow_water();
+        if (p) {
+          if (t->is_able_to_swim()) {
+            p /= 2;
+          }
+          if (p) {
+            snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$- Terrain                %4d", -p);
+            w->log(tmp);
+          }
+        }
+      }
     }
   }
 }

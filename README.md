@@ -1,7 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - add strength penalties                                                                                                                     -->
-<!-- - add mace                                                                                                                                   -->
 <!-- - invisible phantoms that leave puddles of ectoplasm ?                                                                                       -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

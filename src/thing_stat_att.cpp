@@ -166,8 +166,33 @@ int Thing::stat_att_penalties_total(void)
 {
   TRACE_NO_INDENT();
 
+  //
+  // NOTE: update wid_thing_info_add_stat_att_penalties when adding here
+  //
+
   int penalty = 0;
   int prev    = 0;
+
+  TRACE_NO_INDENT();
+  FOR_ALL_EQUIP(e)
+  {
+    auto iter = equip_get(e);
+    if (iter) {
+      //
+      // Warhammer, mace etc...
+      //
+      if (iter->stat_str_min()) {
+        if (stat_str_total() < iter->stat_str_min()) {
+          auto p = iter->stat_str_min() - stat_str_total();
+          penalty += p;
+          if (penalty != prev) {
+            prev = penalty;
+            dbg("Att penalty: weapon min str not reached %d", p);
+          }
+        }
+      }
+    }
+  }
 
   //
   // Positional penalties

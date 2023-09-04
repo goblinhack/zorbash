@@ -716,8 +716,10 @@ public:
   void wid_thing_info_add_nutrition(WidPopup *w, Thingp t);
   void wid_thing_info_add_shove_strength(WidPopup *w, Thingp t);
   void wid_thing_info_add_spell_cost(WidPopup *w, Thingp t);
+  void wid_thing_info_add_stat_att_penalties(WidPopup *w, Thingp t);
   void wid_thing_info_add_stat_att(WidPopup *w, Thingp t);
   void wid_thing_info_add_stat_con(WidPopup *w, Thingp t);
+  void wid_thing_info_add_stat_def_penalties(WidPopup *w, Thingp t);
   void wid_thing_info_add_stat_def(WidPopup *w, Thingp t);
   void wid_thing_info_add_stat_dex(WidPopup *w, Thingp t);
   void wid_thing_info_add_stat_int(WidPopup *w, Thingp t);
