@@ -158,7 +158,7 @@ def tp_init(name, text_long_name):
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "Molekin are notorious hoarders and highly skilled with throwing heavy items. At you.")
-    my.text_description_long(self, "Molekin spend much of their lives underground and have developed large bulbous eyes that glow in the dark. They have powerful upper bodies and long serrated claws, perfect for digging... and goring those that get in their way.")
+    my.text_description_long2(self, "Molekin spend much of their lives underground and have developed large bulbous eyes that glow in the dark. They have powerful upper bodies and long serrated claws, perfect for digging... and goring those that get in their way.")
     my.text_description_short(self, "Mole person")
     my.text_hits(self, "claws")
     my.thing_size(self, my.THING_SIZE_NORMAL)
