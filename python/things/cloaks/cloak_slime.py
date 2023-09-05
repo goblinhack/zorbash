@@ -50,7 +50,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.noise_on_dropping(self, -20)
     my.normal_placement_rules(self, True)
     my.on_equip_do(self, "me.on_equip()")
-    my.on_move_do(self, "me.on_move()")
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_COMMON)
     my.stat_def_bonus(self, 1)

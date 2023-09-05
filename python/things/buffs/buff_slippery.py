@@ -22,8 +22,8 @@ def tp_init(name, text_long_name, text_short_name):
 
     my.gfx_ascii_shown(self, True)
     my.is_buff(self, True)
-    my.is_runic(self, True)
     my.is_loggable(self, True)
+    my.is_runic(self, True)
     my.is_slippery(self, True)
     my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_unset_do(self, "me.on_owner_unset()")

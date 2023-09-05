@@ -367,7 +367,7 @@ Bestiary
 Weapons
 -------
 <!-- begin weapons type marker -->
-| Name | Class/Rarity | Damage | Damage Roll | Special | Damage Chance | Runic Chance | Gold Value |
+| Name | Class/Rarity | Damage | Damage Roll | Special | Weapon Damaged Chance | Runic Chance | Gold Value |
 | :--- | --- | --- | --- | --- | --- | --- | --- |
 | Warhammer | C/common | 4 - 32 | 4d8 |  Swing-penalty<br />Hits all surrounding<br /> | 0.01 % | 10.00% | 450 |
 | Very Broadsword | C/uncommon | 2 - 24 | 2d12 |  Hits adjacent<br /> | 0.01 % | 10.00% | 350 |
@@ -642,7 +642,7 @@ Other content
 - 23 x items
 - 20 x spells
 - 17 x weapons
-- 13 x buffs
+- 14 x buffs
 - 11 x skills
 - 7 x debuffs
 - 6 x staffs
@@ -652,11 +652,11 @@ Other content
 - 5 x keys
 - 4 x traps
 - 4 x gauntlets
+- 4 x cloaks
 - 4 x armor
 - 4 x amulets
 - 3 x mobs
 - 3 x doors
-- 3 x cloaks
 - 2 x potions
 - 1 x player
 <!-- end type marker -->
