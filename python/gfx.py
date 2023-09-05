@@ -532,7 +532,7 @@ def init_tiles_16x16_main():
         "buff_is_immune_to_teleport_attack",
         "buff_raging",
         "buff_hasted",
-        "",
+        "buff_slime",
         "",
         "",
         "",

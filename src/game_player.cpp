@@ -152,6 +152,12 @@ void Game::place_player(void)
         w->enchant_randomly();
       }
       if (0) {
+        auto w = level->thing_new("buff_slime", point(x, y));
+        level->thing_new("slime_parent", point(x, y + 1));
+        level->thing_new("slime_baby", point(x + 1, y + 1));
+        t->buff_add(w);
+      }
+      if (0) {
         auto w = level->thing_new("buff_undead_protection", point(x, y));
         t->buff_add(w);
       }
