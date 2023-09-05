@@ -283,6 +283,8 @@ std::initializer_list< std::string > tps = {
     "cloak_fire_carry",
     "cloak_protection",
     "cloak_protection_carry",
+    "cloak_slime",
+    "cloak_slime_carry",
     "cloak_stone",
     "cloak_stone_carry",
     "coffin_mob",

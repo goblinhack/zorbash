@@ -126,7 +126,7 @@ def tp_init(name, text_long_name, text_short_name):
 def init():
     tp_init(
         name="cloak_stone",
-        text_long_name="stone cloak",
+        text_long_name="cloak of stone",
         text_short_name="cloak, stone",
     )
 

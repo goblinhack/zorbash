@@ -411,6 +411,10 @@ void Game::place_player(void)
         t->carry(w, carry_options);
       }
       if (0) {
+        auto w = level->thing_new("cloak_slime", point(x, y));
+        t->carry(w, carry_options);
+      }
+      if (0) {
         auto w = level->thing_new("cloak_fire", point(x, y));
         t->carry(w, carry_options);
       }
