@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - runics on weapons, like vampirism, force, quietus, lightning                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -30,7 +31,6 @@
 <!-- - crystals walls (or chest) that reflect, so can use on yourself or ally                                                                     -->
 <!-- - cursed weapon with bad luck                                                                                                                -->
 <!-- - luck trap                                                                                                                                  -->
-<!-- - runics on weapons, like vampirism, force, quietus, lightning                                                                               -->
 <!-- - boss 1 Mummy mummy, ankh of life                                                                                                           -->
 <!-- - boss 2 slime boss, spawns slimes, tries to jump splat the player                                                                           -->
 <!--          swamp tiles that allow 50% movement                                                                                                 -->
