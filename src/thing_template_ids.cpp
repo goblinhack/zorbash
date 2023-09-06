@@ -580,6 +580,7 @@ std::initializer_list< std::string > tps = {
     "portal",
     "potato",
     "potion_effect",
+    "potion_life",
     "potion_health",
     "potion_invisibility",
     "pottedmeat",

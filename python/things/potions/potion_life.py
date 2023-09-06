@@ -2,47 +2,56 @@ import my
 import tp
 
 
-def on_use(owner, item, target, x, y):
-    # my.topcon("owner  {} {}".format(my.thing_name_get(owner), my.thing_health(owner)))
-    # my.topcon("item   {} {}".format(my.thing_name_get(item), my.thing_health(item)))
-    # my.topcon("target {} {}".format(my.thing_name_get(target), my.thing_health(target)))
-    for it in my.level_get_all(item, x, y):
-        if my.thing_is_alive_monst(it) or my.thing_is_player(it):
-            my.thing_buff_add(it, "buff_is_invisible")
-
-
 def on_thrown(owner, me, x, y):
-    explode(me, x, y)
+    shatters(me, x, y)
 
 
-def explode(me, x, y):
+def on_use(owner, item, target, x, y):
+    # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
+    # my.con("item    {} {:X}".format(my.thing_name_get(item), item))
+    # my.con("target  {} {:X}".format(my.thing_name_get(target), target))
+    my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, "potion")
+
+    my.thing_health_max_incr(owner, 10)
+    my.thing_stamina_max_incr(owner, 10)
+
+    my.thing_health_set(owner, my.thing_health_max(owner))
+    my.thing_stamina_set(owner, my.thing_stamina_max(owner))
+
+    my.thing_poisoned_amount_set(owner, 0)
+
+    my.spawn_using_items_radius_range(owner, item, target, "potion_effect")
+    if my.thing_is_player(owner):
+        my.thing_msg(owner, "%%fg=pink$You glow with renewed life.%%fg=reset$")
+
+
+def shatters(me, x, y):
     if my.thing_is_dead(me):
         return
 
     owner = my.thing_top_owner_id_get(me)
     if owner:
         if my.thing_is_player(owner):
-            my.thing_msg(me, "Your potion of invisibility visibly explodes.")
+            my.thing_msg(me, "Your potion of life shatters.")
         else:
-            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s potion of invisibility visibly explodes.")
+            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s potion of life shatters.")
     else:
-        my.thing_msg(me, "The potion of invisibility visibly explodes.")
+        my.thing_msg(me, "The potion of life shatters.")
 
-    my.spawn_at_my_position(me, "explosion_fire")
-    my.spawn_set_fire_to_things_around_me(me, "fire")
-    my.thing_dead(me, "exploded")
+    my.spawn_at_my_position(me, "water")
+    my.thing_dead(me, "broken")
 
 
 def on_hit_and_still_alive(me, hitter, real_hitter, x, y, crit, damage):
-    explode(me, x, y)
+    shatters(me, x, y)
 
 
 def on_fire(me, x, y):
-    explode(me, x, y)
+    shatters(me, x, y)
 
 
 def on_fall(me, x, y):
-    explode(me, x, y)
+    shatters(me, x, y)
 
 
 def tp_init(name, text_long_name, text_short_name):
@@ -75,6 +84,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_described_when_hovering_over(self, True)
     my.is_droppable(self, True)
     my.is_glass(self, True)
+    my.is_health_booster(self, True)
     my.is_hittable(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)
@@ -91,28 +101,33 @@ def tp_init(name, text_long_name, text_short_name):
     my.item_width(self, 4)
     my.noise_on_dropping(self, 10)
     my.normal_placement_rules(self, True)
+    my.nutrition_dice(self, "1d20")
     my.on_fall_do(self, "me.on_fall()")
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_thrown_do(self, "me.on_thrown()")
     my.on_use_do(self, "me.on_use()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "For a limited time only thwart your enemies by being invisible.")
-    my.text_description_short(self, "A potion of invisibility.")
+    my.text_description_long(self, "Increases your maximum health and stamina values by 10 and then restores you to your original pathetic glory.")
+    my.text_description_long2(self, "Also cures all known poison ailments.")
+    my.text_description_long3(self, "Guaranteed to work or, well, let's face it, you're not going to make it back!")
+    my.text_description_long4(self, "Contains no snake oil, guaranteed.")
+    my.text_description_long5(self, "PT Barnum patent pending.")
+    my.text_description_short(self, "Potion of life")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
 
     my.tile(self,
-            ascii_fg_char="_", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="!", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name, delay_ms=500)
 
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="potion_invisibility", text_long_name="potion of invisibility", text_short_name="potion of invis")
+    tp_init(name="potion_life", text_long_name="potion of life", text_short_name="potion of life")
 
 
 init()

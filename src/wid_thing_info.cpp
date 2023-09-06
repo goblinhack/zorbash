@@ -219,7 +219,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     wid_popup_window->log(t->text_description_long(), TEXT_FORMAT_LHS, "gray80");
 
     if (! t->text_description_long2().empty()) {
-      wid_popup_window->log(t->text_description_long2(), TEXT_FORMAT_LHS, "pink");
+      wid_popup_window->log(t->text_description_long2(), TEXT_FORMAT_LHS, "gray60");
     }
 
     if (! t->text_description_long3().empty()) {
@@ -227,7 +227,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     }
 
     if (! t->text_description_long4().empty()) {
-      wid_popup_window->log(t->text_description_long4(), TEXT_FORMAT_LHS, "pink");
+      wid_popup_window->log(t->text_description_long4(), TEXT_FORMAT_LHS, "gray60");
     }
 
     if (! t->text_description_long5().empty()) {

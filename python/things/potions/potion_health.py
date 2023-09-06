@@ -38,10 +38,6 @@ def on_use(owner, item, target, x, y):
         did_something = True
         my.thing_stamina_set(owner, new_stamina)
 
-    if my.thing_poisoned_amount_get(owner) != 0:
-        did_something = True
-        my.thing_poisoned_amount_set(owner, 0)
-
     if did_something:
         my.spawn_using_items_radius_range(owner, item, target, "potion_effect")
         if my.thing_is_player(owner):
@@ -127,7 +123,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_obs_shooting(self, True)
     my.is_potion(self, True)
     my.is_throwable(self, True)
-    my.is_treasure_class_B(self, True)
+    my.is_treasure_class_A(self, True)
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
     my.is_usable(self, True)
@@ -154,22 +150,7 @@ def tp_init(name, text_long_name, text_short_name):
 
     my.tile(self,
             ascii_fg_char="!", ascii_bg_col_name="", ascii_fg_col_name="pink",
-            tile=name + ".1", delay_ms=500)
-    my.tile(self,
-            ascii_fg_char="!", ascii_bg_col_name="", ascii_fg_col_name="pink",
-            tile=name + ".2", delay_ms=500)
-    my.tile(self,
-            ascii_fg_char="!", ascii_bg_col_name="", ascii_fg_col_name="pink",
-            tile=name + ".3", delay_ms=500)
-    my.tile(self,
-            ascii_fg_char="!", ascii_bg_col_name="", ascii_fg_col_name="pink",
-            tile=name + ".4", delay_ms=500)
-    my.tile(self,
-            ascii_fg_char="!", ascii_bg_col_name="", ascii_fg_col_name="pink",
-            tile=name + ".5", delay_ms=500)
-    my.tile(self,
-            ascii_fg_char="!", ascii_bg_col_name="", ascii_fg_col_name="pink",
-            tile=name + ".6", delay_ms=500)
+            tile=name, delay_ms=500)
 
     my.tp_update(self)
 

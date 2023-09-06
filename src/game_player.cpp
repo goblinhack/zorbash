@@ -92,6 +92,10 @@ void Game::place_player(void)
         t->carry(w, carry_options);
       }
       if (0) {
+        auto w = level->thing_new("potion_life", point(x, y));
+        t->carry(w, carry_options);
+      }
+      if (0) {
         auto w = level->thing_new("potion_health", point(x, y));
         t->carry(w, carry_options);
       }

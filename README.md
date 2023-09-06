@@ -1,6 +1,60 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - runics on weapons, like vampirism, force, quietus, lightning                                                                               -->
+<!-- TODO Potion of Caustic Gas - Produces a cloud of damaging caustic gas.                                                                       -->
+<!-- TODO Potion of Confusion - Produces a cloud of confusion gas.                                                                                -->
+<!-- TODO Potion of Creeping Death - Unleashes a spreading fungus that inflicts poisoning when stepped upon.                                      -->
+<!-- TODO Potion of Darkness - Produces a cloud of darkness that obscures an area of the dungeon.                                                 -->
+<!-- TODO Potion of Descent - Instantly erodes an area of the floor. Nearby monsters/objects will fall to the next level.                         -->
+<!-- TODO Potion of Detect Magic - Soft-IDs all inventory items. Soft-ID's and locates magic items on the current level.                          -->
+<!-- TODO Potion of Fire Immunity - Make you immune to fire/burning/lava, but not explosions.                                                     -->
+<!-- TODO Potion of Hallucination - Causes long term hal                                                                                          -->
+<!-- TODO Potion of Incineration - Bursts into cloud of flames. Sets nearby monsters and terrain on fire.                                         -->
+<!-- DONE Potion of Invisibility - Reduces you stealth radius considerably. Currently bugged in v1.7.3.                                           -->
+<!-- TODO Potion of Levitation - Causes you to float, Useful for escaping and crossing dangerous terrains.                                        -->
+<!-- DONE Potion of Life - Restores full health and permantely increases maximum health. Cures most status ailments.                              -->
+<!-- TODO Potion of Malevolent (when applied or thrown):                                                                                          -->
+<!-- TODO Potion of Paralysis - Produces a cloud of paraylsis gas.                                                                                -->
+<!-- TODO Potion of Speed - Increases your speed to twice normal, even if previously slowed.                                                      -->
+<!-- TODO Potion of Strength - Permanently increases you strength by one point. Cures weakness.                                                   -->
+<!-- TODO Potion of Telepathy - Allows you to see the location of most enemies, and see whatever they can see.                                    -->
+<!-- TODO runics on weapons, like vampirism, force, quietus, lightning                                                                            -->
+<!-- TODO Runics on weapons, like vampirism, force, quietus, lightning                                                                            -->
+<!-- TODO Scroll of Aggravate Monsters                                                                                                            -->
+<!-- TODO Scroll of Discord                                                                                                                       -->
+<!-- TODO Scroll of Enchanting                                                                                                                    -->
+<!-- TODO Scroll of Identify                                                                                                                      -->
+<!-- TODO Scroll of Magic Mapping                                                                                                                 -->
+<!-- TODO Scroll of Negation                                                                                                                      -->
+<!-- TODO Scroll of Protect Armor                                                                                                                 -->
+<!-- TODO Scroll of Protect Weapon                                                                                                                -->
+<!-- TODO Scroll of Recharging                                                                                                                    -->
+<!-- TODO Scroll of Remove Curse                                                                                                                  -->
+<!-- TODO Scroll of Sanctuary                                                                                                                     -->
+<!-- TODO Scroll of Shattering                                                                                                                    -->
+<!-- TODO Scroll of Summon Monsters                                                                                                               -->
+<!-- TODO Scroll of Teleportation                                                                                                                 -->
+<!-- TODO Scrolls and Potions disappear when used. Potions can be thrown.                                                                         -->
+<!-- TODO Staff of Conjuration                                                                                                                    -->
+<!-- TODO Staff of Discord                                                                                                                        -->
+<!-- TODO Staff of Entrancement                                                                                                                   -->
+<!-- TODO Staff of Firebolt                                                                                                                       -->
+<!-- TODO Staff of Haste                                                                                                                          -->
+<!-- TODO Staff of Healing                                                                                                                        -->
+<!-- TODO Staff of Lightning                                                                                                                      -->
+<!-- TODO Staff of Obstruction                                                                                                                    -->
+<!-- TODO Staff of Poison                                                                                                                         -->
+<!-- TODO Staff of Protection                                                                                                                     -->
+<!-- TODO Staff of Tunneling                                                                                                                      -->
+<!-- TODO Staves and Wands fire blasts of magical energy but have a finite number of charges. Staves recharge over time, but wands do not.        -->
+<!-- TODO Wand of Beckoning                                                                                                                       -->
+<!-- TODO Wand of Domination                                                                                                                      -->
+<!-- TODO Wand of Empowerment                                                                                                                     -->
+<!-- TODO Wand of Invisibility                                                                                                                    -->
+<!-- TODO Wand of Negation                                                                                                                        -->
+<!-- TODO Wand of Plenty                                                                                                                          -->
+<!-- TODO Wand of Polymorphism                                                                                                                    -->
+<!-- TODO Wand of Slowness                                                                                                                        -->
+<!-- TODO Wand of Teleportation                                                                                                                   -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
