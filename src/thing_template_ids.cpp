@@ -581,7 +581,7 @@ std::initializer_list< std::string > tps = {
     "potato",
     "potion_effect",
     "potion_life",
-    "potion_health",
+    "potion_invigoration",
     "potion_invisibility",
     "pottedmeat",
     "pretzel",

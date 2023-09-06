@@ -21,6 +21,7 @@ def tp_init(self):
     my.is_attackable_by_player(self, True)
     my.is_bag_item(self, True)
     my.is_biome_dungeon(self, True)
+    my.is_biome_flooded(self, True)
     my.is_biome_swamp(self, True)
     my.is_collectable(self, True)
     my.is_cursor_can_hover_over(self, True)

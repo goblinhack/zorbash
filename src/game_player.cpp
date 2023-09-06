@@ -104,7 +104,7 @@ void Game::place_player(void)
         t->carry(w, carry_options);
       }
       if (0) {
-        auto w = level->thing_new("potion_health", point(x, y));
+        auto w = level->thing_new("potion_invigoration", point(x, y));
         t->carry(w, carry_options);
       }
       if (0) {
@@ -160,7 +160,7 @@ void Game::place_player(void)
         t->enchant_without_stone(w);
       }
       if (0) {
-        auto w = level->thing_new("potion_health", point(x, y - 2));
+        auto w = level->thing_new("potion_invigoration", point(x, y - 2));
         w->enchant_randomly();
       }
       if (0) {
@@ -188,8 +188,8 @@ void Game::place_player(void)
       if (0) {
         level->thing_new("portal", point(x, y + 4));
         level->thing_new("portal", point(x - 2, y + 7));
-        level->thing_new("potion_health", point(x - 2, y + 9));
-        level->thing_new("potion_health", point(x - 2, y));
+        level->thing_new("potion_invigoration", point(x - 2, y + 9));
+        level->thing_new("potion_invigoration", point(x - 2, y));
       }
       if (0) {
         level->thing_new("dogman", point(x + 1, y));
@@ -198,7 +198,7 @@ void Game::place_player(void)
         t->spell_add(level->thing_new("spell_of_magic_missile", point(x, y)));
         level->thing_new("barrel", point(x + 3, y - 3));
         level->thing_new("brazier", point(x + 2, y));
-        level->thing_new("potion_health", point(x + 2, y + 5));
+        level->thing_new("potion_invigoration", point(x + 2, y + 5));
       }
       if (0) {
         // level->thing_new("block_of_ice", point(x + 1, y));
@@ -648,7 +648,7 @@ void Game::place_player(void)
       }
       if (0) {
         level->thing_new("skeleton", point(x, y + 3));
-        auto w = level->thing_new("potion_health", point(x, y));
+        auto w = level->thing_new("potion_invigoration", point(x, y));
         t->carry(w, carry_options);
       }
       IF_DEBUG2

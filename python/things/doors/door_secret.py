@@ -24,6 +24,7 @@ def tp_init(name, text_long_name):
     my.is_biome_flooded(self, True)
     my.is_biome_ice(self, True)
     my.is_biome_lava(self, True)
+    my.is_biome_swamp(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_cursor_path_blocker(self, True)
     my.is_described_in_leftbar(self, True)

@@ -709,8 +709,8 @@ Other content
 - 4 x cloaks
 - 4 x armor
 - 4 x amulets
+- 3 x potions
 - 3 x mobs
 - 3 x doors
-- 2 x potions
 - 1 x player
 <!-- end type marker -->

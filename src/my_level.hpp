@@ -815,6 +815,7 @@ public:
   bool noise_blocker(const point p) const;
   bool noise_blocker_no_check(const int x, const int y) const;
   bool noise_blocker_no_check(const point p) const;
+  bool place_random_named(Dungeonp d, const std::string &what);
   bool screen_shake_begin(void);
   bool should_display_map(void);
   bool skillbox_chosen(const int slot);

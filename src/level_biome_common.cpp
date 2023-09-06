@@ -564,7 +564,7 @@ void Level::place_random_treasure(Dungeonp d)
         }
       } else {
         //
-        // Frther enchant deep water items?
+        // Further enchant deep water items?
         //
         if (pcg_random_range(0, 100) < 20) {
           if (d->is_deep_water(x, y)) {
@@ -578,6 +578,74 @@ void Level::place_random_treasure(Dungeonp d)
       if (treasure_max-- < 0) {
         return;
       }
+    }
+  }
+}
+
+bool Level::place_random_named(Dungeonp d, const std::string &what)
+{
+  TRACE_AND_INDENT();
+  int tries = 1000;
+
+  auto tp = tp_find(what);
+  if (unlikely(! tp)) {
+    return false;
+  }
+
+  while (tries-- > 0) {
+    auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK + 1);
+    auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK + 1);
+
+    if (d->is_door(x, y) || d->is_rock(x, y) || d->is_wall(x, y) || d->is_chasm(x, y) || d->is_lava(x, y)) {
+      continue;
+    }
+
+    if (d->is_dirt(x, y) || d->is_weapon_class_A(x, y) || d->is_weapon_class_B(x, y) || d->is_weapon_class_C(x, y)
+        || d->is_treasure_class_A(x, y) || d->is_treasure_class_B(x, y) || d->is_treasure_class_C(x, y)) {
+
+      if (tp->is_torch()) {
+        if (d->is_deep_water(x, y) || d->is_foliage(x, y)) {
+          continue;
+        }
+      }
+
+      //
+      // Be nice and enchant this lost treasure.
+      //
+      auto t = thing_new(tp->name(), point(x, y));
+      if (! t) {
+        continue;
+      }
+
+      if (pcg_random_range(0, 100) < 20) {
+        t->enchant_randomly();
+      }
+
+      if (t->is_sword()) {
+        //
+        // Double enchant swords in lakes :)
+        //
+        if (d->is_shallow_water(x, y)) {
+          t->enchant_randomly();
+        }
+
+        if (d->is_deep_water(x, y)) {
+          t->enchant_randomly();
+        }
+      } else {
+        //
+        // Further enchant deep water items?
+        //
+        if (pcg_random_range(0, 100) < 20) {
+          if (d->is_deep_water(x, y)) {
+            t->enchant_randomly();
+          }
+        }
+      }
+
+      dbg("INF: Placed random item '%s'", t->text_short_capitalised().c_str());
+
+      return true;
     }
   }
 }

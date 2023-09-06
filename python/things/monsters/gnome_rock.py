@@ -23,6 +23,7 @@ def tp_init(name, text_long_name):
     my.dmg_nat_att_type(self, "gravel")
     my.health_initial_dice(self, "1d6+4")
     my.is_biome_dungeon(self, True)
+    my.is_biome_flooded(self, True)
     my.is_daring(self, True)
     my.is_hard(self, True)
     my.is_heavy(self, True)

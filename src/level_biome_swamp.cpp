@@ -219,6 +219,23 @@ bool Level::create_biome_swamp(point3d at, uint32_t seed)
     }
 
     //
+    // Be even nicer
+    //
+    if (d100() < 25) {
+      uint32_t start = time_ms();
+      dbg2("INF: Place random treasure");
+      place_random_named(dungeon, "potion_of_life");
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing potion of life";
+      }
+    }
+
+    //
     // Final update of the heatmap to account placement of braziers
     //
     dbg2("INF: Final update heatmap");

@@ -106,6 +106,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_biome_flooded(self, True)
     my.is_biome_ice(self, True)
     my.is_biome_lava(self, True)
+    my.is_biome_swamp(self, True)
     my.is_collectable(self, True)
     my.is_combustible(self, True)
     my.is_crushable(self, True)
@@ -141,8 +142,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+10 percent health and stamina")
-    my.text_description_long(self, "Restores your health and stamina to at least 80 percent. You'll feel like your old self again. Only even more awesome.")
-    my.text_description_short(self, "A potion of health restoration.")
+    my.text_description_long2(self, "You'll feel like your old self again. Only even more awesome, if that could be possible...")
+    my.text_description_long(self, "A bubbling pink elixir that restores your health and stamina to at least 80 percent.")
+    my.text_description_short(self, "A potion of invigoration.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -156,7 +158,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="potion_health", text_long_name="potion of health awesomeness", text_short_name="potion of health")
+    tp_init(name="potion_invigoration", text_long_name="potion of invigoration", text_short_name="potion of invig.")
 
 
 init()
