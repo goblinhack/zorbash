@@ -42,6 +42,7 @@ def tp_init(name):
     my.is_biome_flooded(self, True)
     my.is_biome_ice(self, True)
     my.is_biome_lava(self, True)
+    my.is_biome_swamp(self, True)
     my.is_burnable(self, True)
     my.is_corpse_on_death(self, True)
     my.is_cursor_can_hover_over(self, True)
