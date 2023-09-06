@@ -9,7 +9,7 @@
 <!-- TODO Potion of Fire Immunity - Make you immune to fire/burning/lava, but not explosions.                                                     -->
 <!-- TODO Potion of Hallucination - Causes long term hal                                                                                          -->
 <!-- TODO Potion of Incineration - Bursts into cloud of flames. Sets nearby monsters and terrain on fire.                                         -->
-<!-- DONE Potion of Invisibility - Reduces you stealth radius considerably. Currently bugged in v1.7.3.                                           -->
+<!-- DONE Potion of Invisibility - Reduces you stealth radius considerably.                                                                       -->
 <!-- TODO Potion of Levitation - Causes you to float, Useful for escaping and crossing dangerous terrains.                                        -->
 <!-- DONE Potion of Life - Restores full health and permantely increases maximum health. Cures most status ailments.                              -->
 <!-- TODO Potion of Malevolent (when applied or thrown):                                                                                          -->
@@ -17,7 +17,6 @@
 <!-- TODO Potion of Speed - Increases your speed to twice normal, even if previously slowed.                                                      -->
 <!-- TODO Potion of Strength - Permanently increases you strength by one point. Cures weakness.                                                   -->
 <!-- TODO Potion of Telepathy - Allows you to see the location of most enemies, and see whatever they can see.                                    -->
-<!-- TODO runics on weapons, like vampirism, force, quietus, lightning                                                                            -->
 <!-- TODO Runics on weapons, like vampirism, force, quietus, lightning                                                                            -->
 <!-- TODO Scroll of Aggravate Monsters                                                                                                            -->
 <!-- TODO Scroll of Discord                                                                                                                       -->
