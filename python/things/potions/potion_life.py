@@ -20,6 +20,13 @@ def on_use(owner, item, target, x, y):
 
     my.thing_poisoned_amount_set(owner, 0)
 
+    my.thing_debuff_remove(owner, "debuff_slow")
+    my.thing_debuff_remove(owner, "debuff_necrotized")
+    my.thing_debuff_remove(owner, "debuff_paralysis")
+    my.thing_debuff_remove(owner, "debuff_poisoned")
+    my.thing_debuff_remove(owner, "debuff_starving")
+    my.thing_debuff_remove(owner, "debuff_hungry")
+
     my.spawn_using_items_radius_range(owner, item, target, "potion_effect")
     if my.thing_is_player(owner):
         my.thing_msg(owner, "%%fg=pink$You glow with renewed life.%%fg=reset$")
@@ -109,7 +116,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "Increases your maximum health and stamina values by 10 and then restores you to your original pathetic glory.")
-    my.text_description_long2(self, "Also cures all known poison ailments.")
+    my.text_description_long2(self, "Cures all known poison ailments and other... conditions.")
     my.text_description_long3(self, "Guaranteed to work or, well, let's face it, you're not going to make it back!")
     my.text_description_long4(self, "Contains no snake oil, guaranteed.")
     my.text_description_long5(self, "PT Barnum patent pending.")

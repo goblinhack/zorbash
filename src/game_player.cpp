@@ -91,6 +91,14 @@ void Game::place_player(void)
         auto w = level->thing_new("dagger", point(x, y));
         t->carry(w, carry_options);
       }
+      if (1) {
+        auto w = level->thing_new("debuff_necrotized", point(x, y));
+        t->debuff_add(w);
+      }
+      if (0) {
+        auto w = level->thing_new("debuff_slow", point(x, y));
+        t->debuff_add(w);
+      }
       if (0) {
         auto w = level->thing_new("potion_life", point(x, y));
         t->carry(w, carry_options);
