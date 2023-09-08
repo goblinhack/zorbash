@@ -109,7 +109,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.item_width(self, 4)
     my.noise_on_dropping(self, 10)
     my.normal_placement_rules(self, True)
-    my.nutrition_dice(self, "1d20")
     my.on_fall_do(self, "me.on_fall()")
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_thrown_do(self, "me.on_thrown()")

@@ -2,16 +2,6 @@ import my
 import tp
 
 
-def on_get_text_description_long(owner, me, x, y):
-    enchant = my.thing_enchant_count_get(me)
-    if enchant == 0:
-        return ["Restores you to 80 percent health"]
-    elif enchant == 1:
-        return ["Restores you to 90 percent health"]
-    else:
-        return ["Restores you to full health"]
-
-
 def on_thrown(owner, me, x, y):
     shatters(me, x, y)
 
@@ -24,16 +14,14 @@ def on_use(owner, item, target, x, y):
 
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, "potion")
 
-    enchant = my.thing_enchant_count_get(item)
-
     health = my.thing_health(owner)
-    new_health = int((float(my.thing_health_max(owner)) / 100.0) * 80.0 + enchant * 10.0)
+    new_health = int((float(my.thing_health_max(owner)) / 100.0) * 80.0)
     if new_health > health:
         did_something = True
         my.thing_health_set(owner, new_health)
 
     stamina = my.thing_stamina(owner)
-    new_stamina = int((float(my.thing_stamina_max(owner)) / 100.0) * 80.0 + enchant * 10.0)
+    new_stamina = int((float(my.thing_stamina_max(owner)) / 100.0) * 80.0)
     if new_stamina > stamina:
         did_something = True
         my.thing_stamina_set(owner, new_stamina)
@@ -54,11 +42,11 @@ def shatters(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if owner:
         if my.thing_is_player(owner):
-            my.thing_msg(me, "Your potion of health shatters.")
+            my.thing_msg(me, "Your potion of invigoration shatters.")
         else:
-            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s potion of health shatters.")
+            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s potion of invigoration shatters.")
     else:
-        my.thing_msg(me, "The potion of health shatters.")
+        my.thing_msg(me, "The potion of invigoration shatters.")
 
     my.spawn_at_my_position(me, "water")
     my.thing_dead(me, "broken")
@@ -76,18 +64,11 @@ def on_fall(me, x, y):
     shatters(me, x, y)
 
 
-def on_enchant(me, x, y):
-    owner = my.thing_top_owner_id_get(me)
-    if my.thing_is_player(owner):
-        my.thing_msg(me, "The potion bubbles.")
-
-
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.collision_hit_priority(self, 5)
     my.collision_hit_priority(self, 6)
-    my.enchant_max(self, 5)
     my.environ_dislikes_fire(self, 20)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
@@ -113,7 +94,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_droppable(self, True)
-    my.is_enchantable(self, True)
     my.is_glass(self, True)
     my.is_health_booster(self, True)
     my.is_hittable(self, True)
@@ -132,16 +112,12 @@ def tp_init(name, text_long_name, text_short_name):
     my.item_width(self, 4)
     my.noise_on_dropping(self, 10)
     my.normal_placement_rules(self, True)
-    my.nutrition_dice(self, "1d20")
-    my.on_enchant_do(self, "me.on_enchant()")
     my.on_fall_do(self, "me.on_fall()")
-    my.on_get_text_description_long_do(self, "me.on_get_text_description_long()")
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_thrown_do(self, "me.on_thrown()")
     my.on_use_do(self, "me.on_use()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.text_a_or_an(self, "a")
-    my.text_description_enchant(self, "+10 percent health and stamina")
     my.text_description_long2(self, "You'll feel like your old self again. Only even more awesome, if that could be possible...")
     my.text_description_long(self, "A bubbling pink elixir that restores your health and stamina to at least 80 percent.")
     my.text_description_short(self, "A potion of invigoration.")

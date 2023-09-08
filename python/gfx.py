@@ -859,7 +859,7 @@ def init_tiles_16x16_main():
         "",
         ############################################################
         "potion_invisibility",
-        "",
+        "potion_strength",
         "",
         "",
         "",
