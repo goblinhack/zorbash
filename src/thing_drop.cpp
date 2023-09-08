@@ -206,17 +206,17 @@ bool Thing::drop(Thingp what, Thingp target, DropOptions drop_options)
       if (! is_dead_or_dying()) {
         msg("You drop %s.", what->text_the().c_str());
         sound_play("drop");
-        level->noisemap_in_incr(curr_at.x, curr_at.y, what->noise_on_dropping());
+        level->sound_sources_incr(curr_at.x, curr_at.y, what->noise_on_dropping());
       }
     } else if (is_bag_item_container()) {
       if (! drop_options.is_being_thrown && ! drop_options.is_able_to_be_equipped && ! drop_options.is_being_stolen) {
         msg("%s falls out of %s.", what->text_The().c_str(), text_the().c_str());
-        level->noisemap_in_incr(curr_at.x, curr_at.y, what->noise_on_dropping());
+        level->sound_sources_incr(curr_at.x, curr_at.y, what->noise_on_dropping());
       }
     } else if (is_monst()) {
       if (! drop_options.is_being_thrown && ! drop_options.is_able_to_be_equipped && ! drop_options.is_being_stolen) {
         msg("%s drops %s.", text_The().c_str(), what->text_the().c_str());
-        level->noisemap_in_incr(curr_at.x, curr_at.y, what->noise_on_dropping());
+        level->sound_sources_incr(curr_at.x, curr_at.y, what->noise_on_dropping());
       }
     }
   }

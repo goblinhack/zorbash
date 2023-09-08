@@ -27,23 +27,23 @@ def tp_init(name, text_long_name):
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "1d4")
     my.text_a_or_an(self, "a")
-    my.text_description_short(self, "An artwork comprised mainly of blood.")
+    my.text_description_short(self, "An artwork comprised mainly of red blood.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_FLOOR2)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
 
     my.tile(self,
-            ascii_fg_char="middle_dot", ascii_bg_col_name="", ascii_fg_col_name="red",
+            ascii_fg_char="_", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".100", is_hp_100_percent=True)
     my.tile(self,
-            ascii_fg_char="middle_dot", ascii_bg_col_name="", ascii_fg_col_name="red",
+            ascii_fg_char="_", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".75", is_hp_75_percent=True)
     my.tile(self,
-            ascii_fg_char="middle_dot", ascii_bg_col_name="", ascii_fg_col_name="red",
+            ascii_fg_char="_", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".50", is_hp_50_percent=True)
     my.tile(self,
-            ascii_fg_char="middle_dot", ascii_bg_col_name="", ascii_fg_col_name="red",
+            ascii_fg_char="_", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".25", is_hp_25_percent=True)
 
     my.tp_update(self)

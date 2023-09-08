@@ -646,10 +646,10 @@ int Thing::is_unused_flag88(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag88());
 }
-int Thing::is_unused_flag89(void)
+int Thing::is_shootable(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag89());
+  return (tp()->is_shootable());
 }
 int Thing::is_able_to_have_a_runic_inscribed(void)
 {

@@ -16,39 +16,40 @@ std::string Thing::to_string(void)
   IF_DEBUG3 { verify(MTYPE_THING, this); }
 
   if (unlikely(! level)) {
-    return (string_sprintf("%" PRIX32 " <not in level> <no tp>%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id,
-                           is_sleeping ? "/sleeping" : "", is_dead ? "/dead" : (is_dying ? "/dying" : ""),
-                           is_scheduled_for_death ? "/dead-sched" : "", is_stuck_currently() ? "/stuck" : "",
-                           is_resurrecting ? "/resurrecting" : "", is_frozen ? "/frozen" : "",
-                           is_burnt ? "/burnt" : "", is_visible_to_player ? "/visply" : "/offscreen",
-                           is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "", is_jumping ? "/jumping" : "",
-                           is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x, curr_at.y));
+    return (string_sprintf(
+        "%" PRIX32 " <not in level> <no tp>%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, is_sleeping ? "/sleeping" : "",
+        is_dead ? "/dead" : (is_dying ? "/dying" : ""), is_scheduled_for_death ? "/dead-sched" : "",
+        is_stuck_currently() ? "/stuck" : "", is_resurrecting ? "/resurrecting" : "", is_frozen ? "/frozen" : "",
+        is_burnt ? "/burnt" : "", is_visible_to_player ? "/visply" : "/offscreen",
+        is_invisible_currently() ? "/invis" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
+        is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x, curr_at.y));
   }
 
   if (unlikely(! tpp)) {
     TRACE_NO_INDENT();
     return (string_sprintf(
-        "%" PRIX32 " L%d <no tp>%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->dungeon_walk_order_level_no,
+        "%" PRIX32 " L%d <no tp>%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->dungeon_walk_order_level_no,
         is_sleeping ? "/sleeping" : "", is_dead ? "/dead" : (is_dying ? "/dying" : ""), is_frozen ? "/frozen" : "",
         is_burnt ? "/burnt" : "", is_scheduled_for_death ? "/dead-sched" : "", is_stuck_currently() ? "/stuck" : "",
         is_resurrecting ? "/resurrecting" : "", is_visible_to_player ? "/visply" : "/offscreen",
-        is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "", is_jumping ? "/jumping" : "", is_moving ? "/mv" : "",
-        is_falling ? "/fall" : "", curr_at.x, curr_at.y));
+        is_invisible_currently() ? "/invis" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
+        is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x, curr_at.y));
   }
 
   if (! g_loading) {
     auto l = leader();
     if (l && (l != this)) {
       return (string_sprintf(
-          "%" PRIX32 " %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d l:%s", id.id, tpp->name().c_str(),
+          "%" PRIX32 " %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d l:%s", id.id, tpp->name().c_str(),
           is_sleeping ? "/sleeping" : "", is_dead ? "/dead" : (is_dying ? "/dying" : ""),
           is_scheduled_for_death ? "/dead-sched" : "", is_frozen ? "/frozen" : "", is_burnt ? "/burnt" : "",
           is_stuck_currently() ? "/stuck" : "", is_resurrecting ? "/resurrecting" : "",
           is_visible_to_player ? "/visply" : "/offscreen", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
-          is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
-          is_changing_level ? "/chg-level" : "", is_waiting_to_ascend_dungeon ? "/asc-dung" : "",
-          is_waiting_to_descend_dungeon ? "/des-dung" : "", is_waiting_to_descend_sewer ? "/des-sewer" : "",
-          is_waiting_to_ascend_sewer ? "/asc-sewer" : "", curr_at.x, curr_at.y, l->to_short_string().c_str()));
+          is_invisible_currently() ? "/invis" : "", is_jumping ? "/jumping" : "", is_moving ? "/mv" : "",
+          is_falling ? "/fall" : "", is_changing_level ? "/chg-level" : "",
+          is_waiting_to_ascend_dungeon ? "/asc-dung" : "", is_waiting_to_descend_dungeon ? "/des-dung" : "",
+          is_waiting_to_descend_sewer ? "/des-sewer" : "", is_waiting_to_ascend_sewer ? "/asc-sewer" : "", curr_at.x,
+          curr_at.y, l->to_short_string().c_str()));
     }
   }
 
@@ -60,28 +61,30 @@ std::string Thing::to_string(void)
     if (! g_loading && immediate_owner()) {
       auto o = immediate_owner();
       return (string_sprintf(
-          "%" PRIX32 " L%d %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s o:%s", id.id, level->dungeon_walk_order_level_no,
+          "%" PRIX32 " L%d %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s o:%s", id.id, level->dungeon_walk_order_level_no,
           tpp->name().c_str(), is_sleeping ? "/sleeping" : "", is_dead ? "/dead" : (is_dying ? "/dying" : ""),
           is_scheduled_for_death ? "/dead-sched" : "", is_stuck_currently() ? "/stuck" : "",
           is_resurrecting ? "/resurrecting" : "", is_frozen ? "/frozen" : "", is_burnt ? "/burnt" : "",
           is_visible_to_player ? "/visply" : "/offscreen", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
-          is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
-          is_changing_level ? "/chg-level" : "", is_waiting_to_ascend_dungeon ? "/asc-dung" : "",
-          is_waiting_to_descend_dungeon ? "/des-dung" : "", is_waiting_to_descend_sewer ? "/des-sewer" : "",
-          is_waiting_to_ascend_sewer ? "/asc-sewer" : "", o->to_short_string().c_str()));
+          is_invisible_currently() ? "/invis" : "", is_jumping ? "/jumping" : "", is_moving ? "/mv" : "",
+          is_falling ? "/fall" : "", is_changing_level ? "/chg-level" : "",
+          is_waiting_to_ascend_dungeon ? "/asc-dung" : "", is_waiting_to_descend_dungeon ? "/des-dung" : "",
+          is_waiting_to_descend_sewer ? "/des-sewer" : "", is_waiting_to_ascend_sewer ? "/asc-sewer" : "",
+          o->to_short_string().c_str()));
     }
   }
 
   return (string_sprintf(
-      "%" PRIX32 " L%d %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->dungeon_walk_order_level_no,
+      "%" PRIX32 " L%d %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->dungeon_walk_order_level_no,
       tpp->name().c_str(), is_sleeping ? "/sleeping" : "", is_dead ? "/dead" : (is_dying ? "/dying" : ""),
       is_scheduled_for_death ? "/dead-sched" : "", is_stuck_currently() ? "/stuck" : "",
       is_resurrecting ? "/resurrecting" : "", is_visible_to_player ? "/visply" : "/offscreen",
-      is_frozen ? "/frozen" : "", is_burnt ? "/burnt" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
-      is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
-      is_changing_level ? "/chg-level" : "", is_waiting_to_ascend_dungeon ? "/asc-dung" : "",
-      is_waiting_to_descend_dungeon ? "/des-dung" : "", is_waiting_to_descend_sewer ? "/des-sewer" : "",
-      is_waiting_to_ascend_sewer ? "/asc-sewer" : "", curr_at.x, curr_at.y));
+      is_invisible_currently() ? "/invis" : "", is_frozen ? "/frozen" : "", is_burnt ? "/burnt" : "",
+      is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "", is_jumping ? "/jumping" : "", is_moving ? "/mv" : "",
+      is_falling ? "/fall" : "", is_changing_level ? "/chg-level" : "",
+      is_waiting_to_ascend_dungeon ? "/asc-dung" : "", is_waiting_to_descend_dungeon ? "/des-dung" : "",
+      is_waiting_to_descend_sewer ? "/des-sewer" : "", is_waiting_to_ascend_sewer ? "/asc-sewer" : "", curr_at.x,
+      curr_at.y));
 }
 
 //
@@ -96,36 +99,37 @@ std::string Thing::to_short_string(void)
   IF_DEBUG3 { verify(MTYPE_THING, this); }
 
   if (unlikely(! level)) {
-    return (string_sprintf("%" PRIX32 " <not in level> <no tp>%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id,
-                           is_sleeping ? "/dead" : "", is_dead ? "/dead" : (is_dying ? "/dying" : ""),
-                           is_scheduled_for_death ? "/dead-sched" : "", is_stuck_currently() ? "/stuck" : "",
-                           is_resurrecting ? "/resurrecting" : "", is_frozen ? "/frozen" : "",
-                           is_burnt ? "/burnt" : "", is_visible_to_player ? "/visply" : "/offscreen",
-                           is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "", is_jumping ? "/jumping" : "",
-                           is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x, curr_at.y));
+    return (string_sprintf(
+        "%" PRIX32 " <not in level> <no tp>%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, is_sleeping ? "/dead" : "",
+        is_dead ? "/dead" : (is_dying ? "/dying" : ""), is_scheduled_for_death ? "/dead-sched" : "",
+        is_stuck_currently() ? "/stuck" : "", is_resurrecting ? "/resurrecting" : "", is_frozen ? "/frozen" : "",
+        is_burnt ? "/burnt" : "", is_visible_to_player ? "/visply" : "/offscreen",
+        is_invisible_currently() ? "/invis" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
+        is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x, curr_at.y));
   }
 
   if (unlikely(! tpp)) {
     TRACE_NO_INDENT();
-    return (string_sprintf("%" PRIX32 " L%d <no tp>%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id,
-                           level->dungeon_walk_order_level_no, is_sleeping ? "/dead" : "",
-                           is_dead ? "/dead" : (is_dying ? "/dying" : ""),
-                           is_scheduled_for_death ? "/dead-sched" : "", is_stuck_currently() ? "/stuck" : "",
-                           is_resurrecting ? "/resurrecting" : "", is_visible_to_player ? "/visply" : "/offscreen",
-                           is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "", is_jumping ? "/jumping" : "",
-                           is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x, curr_at.y));
+    return (string_sprintf(
+        "%" PRIX32 " L%d <no tp>%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->dungeon_walk_order_level_no,
+        is_sleeping ? "/dead" : "", is_dead ? "/dead" : (is_dying ? "/dying" : ""),
+        is_scheduled_for_death ? "/dead-sched" : "", is_stuck_currently() ? "/stuck" : "",
+        is_resurrecting ? "/resurrecting" : "", is_visible_to_player ? "/visply" : "/offscreen",
+        is_invisible_currently() ? "/invis" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
+        is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x, curr_at.y));
   }
 
   return (string_sprintf(
-      "%" PRIX32 " L%d %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->dungeon_walk_order_level_no,
+      "%" PRIX32 " L%d %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->dungeon_walk_order_level_no,
       tpp->name().c_str(), is_sleeping ? "/dead" : "", is_dead ? "/dead" : (is_dying ? "/dying" : ""),
       is_scheduled_for_death ? "/dead-sched" : "", is_stuck_currently() ? "/stuck" : "",
       is_resurrecting ? "/resurrecting" : "", is_visible_to_player ? "/visply" : "/offscreen",
-      is_frozen ? "/frozen" : "", is_burnt ? "/burnt" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
-      is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
-      is_changing_level ? "/chg-level" : "", is_waiting_to_ascend_dungeon ? "/asc-dung" : "",
-      is_waiting_to_descend_dungeon ? "/des-dung" : "", is_waiting_to_descend_sewer ? "/des-sewer" : "",
-      is_waiting_to_ascend_sewer ? "/asc-sewer" : "", curr_at.x, curr_at.y));
+      is_invisible_currently() ? "/invis" : "", is_frozen ? "/frozen" : "", is_burnt ? "/burnt" : "",
+      is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "", is_jumping ? "/jumping" : "", is_moving ? "/mv" : "",
+      is_falling ? "/fall" : "", is_changing_level ? "/chg-level" : "",
+      is_waiting_to_ascend_dungeon ? "/asc-dung" : "", is_waiting_to_descend_dungeon ? "/des-dung" : "",
+      is_waiting_to_descend_sewer ? "/des-sewer" : "", is_waiting_to_ascend_sewer ? "/asc-sewer" : "", curr_at.x,
+      curr_at.y));
 }
 
 std::string Thing::to_dbg_string(void)

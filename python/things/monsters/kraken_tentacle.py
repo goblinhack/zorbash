@@ -63,6 +63,7 @@ def tp_init(name, text_long_name):
     my.is_monst_class_A(self, True)
     my.is_monst(self, True)
     my.is_moveable(self, True)
+    my.is_shootable(self, True)
     my.is_soft(self, True)
     my.is_tentacle(self, True)
     my.is_tickable(self, True)

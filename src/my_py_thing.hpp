@@ -536,6 +536,7 @@ PyObject *thing_is_sewer_wall(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_shallow_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_sheep(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_shield(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_shootable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_shovable_and_sticky(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_shovable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_skeleton(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -671,7 +672,6 @@ PyObject *thing_is_unused_flag85(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag86(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag87(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag88(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag89(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag9(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_usable(PyObject *obj, PyObject *args, PyObject *keywds);

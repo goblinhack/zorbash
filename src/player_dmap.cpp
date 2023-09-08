@@ -90,7 +90,7 @@ void Level::dmap_to_player_update(void)
 
   set(dmap_to_player.val, player->curr_at.x, player->curr_at.y, DMAP_IS_GOAL);
 
-  dmap_process(&dmap_to_player, point(0, 0), point(MAP_WIDTH - 1, MAP_HEIGHT - 1), true, true);
+  dmap_process_allow_diagonals(&dmap_to_player, point(0, 0), point(MAP_WIDTH - 1, MAP_HEIGHT - 1), true);
 
   IF_DEBUG3
   {

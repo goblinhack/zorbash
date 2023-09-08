@@ -67,7 +67,7 @@ bool Thing::close(Thingp it)
   update_light();
   level->request_dmap_to_player_update = true;
 
-  level->noisemap_in_incr(it->curr_at.x, it->curr_at.y, it->noise_on_open_or_close());
+  level->sound_sources_incr(it->curr_at.x, it->curr_at.y, it->noise_on_open_or_close());
 
   return true;
 }
@@ -102,7 +102,7 @@ bool Thing::close(void)
   update_light();
   level->request_dmap_to_player_update = true;
 
-  level->noisemap_in_incr(curr_at.x, curr_at.y, noise_on_open_or_close());
+  level->sound_sources_incr(curr_at.x, curr_at.y, noise_on_open_or_close());
 
   return true;
 }

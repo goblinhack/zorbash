@@ -42,6 +42,7 @@ def tp_init(name, tiles=[]):
     my.is_light_blocker_for_monst(self, True)  # to give cover
     my.is_only_one_per_tile(self, True)
     my.is_organic(self, True)
+    my.is_shootable(self, True)
     my.light_color(self, "pink")
     my.light_dist(self, 1)
     my.on_death_do(self, "me.on_death()")

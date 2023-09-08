@@ -110,6 +110,7 @@ void Game::place_player(void)
       if (0) {
         auto w = level->thing_new("potion_invisibility", point(x, y));
         t->carry(w, carry_options);
+        level->thing_new("dogman", point(x + 2, y));
       }
       {
         //

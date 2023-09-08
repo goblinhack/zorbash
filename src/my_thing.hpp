@@ -1780,6 +1780,7 @@ public:
   int is_shallow_water(void);
   int is_sheep(void);
   int is_shield(void);
+  int is_shootable(void);
   int is_shovable_and_sticky(void);
   int is_shovable(void);
   int is_skeleton(void);
@@ -1917,7 +1918,6 @@ public:
   int is_unused_flag86(void);
   int is_unused_flag87(void);
   int is_unused_flag88(void);
-  int is_unused_flag89(void);
   int is_unused_flag8(void);
   int is_unused_flag9(void);
   int is_usable(void);

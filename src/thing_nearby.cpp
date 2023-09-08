@@ -204,10 +204,6 @@ bool Thing::any_unfriendly_monst_visible(void)
           continue;
         }
 
-        if (! can_detect(t)) {
-          continue;
-        }
-
         if (t->possible_to_attack(this)) {
           return true;
         }

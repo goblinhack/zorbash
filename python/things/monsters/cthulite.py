@@ -121,6 +121,7 @@ def tp_init(name, text_long_name):
     my.is_msg_allowed_is_wounded(self, True)
     my.is_obs_when_dead(self, True)
     my.is_poisonous_danger_level(self, 4)
+    my.is_shootable(self, True)
     my.is_slime(self, True)
     my.is_tickable(self, True)
     my.is_very_intelligent(self, True)

@@ -97,6 +97,7 @@ def tp_init(name, text_long_name):
     my.is_msg_allowed_is_dead(self, True)
     my.is_msg_allowed_is_seen(self, True)
     my.is_msg_allowed_is_wounded(self, True)
+    my.is_shootable(self, True)
     my.is_shovable(self, True)
     my.is_stone(self, True)
     my.is_tickable(self, True)

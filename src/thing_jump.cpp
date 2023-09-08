@@ -598,7 +598,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
 
   on_jump();
 
-  level->noisemap_in_incr(to.x, to.y, noise_on_jumping());
+  level->sound_sources_incr(to.x, to.y, noise_on_jumping());
 
   dbg("Jump success to @%d,%d", curr_at.x, curr_at.y);
 

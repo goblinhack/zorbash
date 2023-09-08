@@ -129,10 +129,15 @@ public:
   FovMap can_see_ever;      // Shadowcasting of what can be seen ever on this level
 
   //
-  // Holds noise as it fades around the level
+  // These are the input sounds, like a door clicking
+  //
+  Dmap _sound_sources {};
+
+  //
+  // This is the result of all sounds on the level. The values in here are damped
+  // by LEVEL_SOUND_DAMPENING.
   //
   Dmap _noisemap {};
-  Dmap _noisemap_in {};
 
   //
   // For level transitions
@@ -1017,12 +1022,12 @@ public:
   uint8_t is_weapon_type(const point p);
   uint8_t noisemap(const int x, const int y);
   uint8_t noisemap(const point p);
-  uint8_t noisemap_in(const int x, const int y);
-  uint8_t noisemap_in(const point p);
-  uint8_t noisemap_in_no_check(const int x, const int y);
-  uint8_t noisemap_in_no_check(const point p);
   uint8_t noisemap_no_check(const int x, const int y);
   uint8_t noisemap_no_check(const point p);
+  uint8_t sound_sources(const int x, const int y);
+  uint8_t sound_sources(const point p);
+  uint8_t sound_sources_no_check(const int x, const int y);
+  uint8_t sound_sources_no_check(const point p);
   // end sort marker3 }
 
   // begin sort marker4 {
@@ -1398,22 +1403,8 @@ public:
   void noise_blocker_no_check_unset(const int x, const int y);
   void noise_blocker_set(const int x, const int y);
   void noise_blocker_unset(const int x, const int y);
-  void noisemap_incr(const int x, const int y);
-  void noisemap_in_incr(const int x, const int y);
-  void noisemap_in_incr(const int x, const int y, int dv);
-  void noisemap_in_no_check_incr(const int x, const int y);
-  void noisemap_in_no_check_incr(const int x, const int y, int dv);
-  void noisemap_in_no_check_set(const int x, const int y, uint8_t v);
-  void noisemap_in_no_check_unset(const int x, const int y);
-  void noisemap_in_set(const int x, const int y, uint8_t v);
-  void noisemap_in_unset(const int x, const int y);
-  void noisemap_no_check_incr(const int x, const int y);
-  void noisemap_no_check_incr(const int x, const int y, int dv);
   void noisemap_no_check_set(const int x, const int y, uint8_t v);
-  void noisemap_no_check_unset(const int x, const int y);
   void noisemap_print(void);
-  void noisemap_set(const int x, const int y, uint8_t v);
-  void noisemap_unset(const int x, const int y);
   void place_dirt(Dungeonp d);
   void place_objects_with_normal_placement_rules(Dungeonp d);
   void place_portals(Dungeonp d);
@@ -1430,6 +1421,14 @@ public:
   void scroll_map_to_player_immediately(void);
   void scroll_map_to_player(void);
   void scroll_map(void);
+  void sound_sources_incr(const int x, const int y);
+  void sound_sources_incr(const int x, const int y, int dv);
+  void sound_sources_no_check_incr(const int x, const int y);
+  void sound_sources_no_check_incr(const int x, const int y, int dv);
+  void sound_sources_no_check_set(const int x, const int y, uint8_t v);
+  void sound_sources_no_check_unset(const int x, const int y);
+  void sound_sources_set(const int x, const int y, uint8_t v);
+  void sound_sources_unset(const int x, const int y);
   void things_gc(bool force);
   void things_gc_force(void);
   void things_gc_if_possible(void);

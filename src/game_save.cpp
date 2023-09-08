@@ -675,7 +675,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_wall);
   out << bits(my.t->_noise_blocker);
   out << bits(my.t->_noisemap);
-  out << bits(my.t->_noisemap_in);
+  out << bits(my.t->_sound_sources);
   // end sort marker5 }
 
   out << bits(my.t->can_see_currently);

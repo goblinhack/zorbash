@@ -216,6 +216,13 @@ bool Thing::shoot_at_target(void)
         }
 
         //
+        // Don't shoot puddles of blood
+        //
+        if (! victim->is_shootable()) {
+          continue;
+        }
+
+        //
         // No shooting at blood!
         //
         if (victim->is_monst() || victim->is_player()) {

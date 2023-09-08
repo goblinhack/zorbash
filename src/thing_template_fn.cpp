@@ -722,6 +722,7 @@ int Tp::is_sewer_wall(void) const { return _is_sewer_wall; }
 int Tp::is_shallow_water(void) const { return _is_shallow_water; }
 int Tp::is_sheep(void) const { return _is_sheep; }
 int Tp::is_shield(void) const { return _is_shield; }
+int Tp::is_shootable(void) const { return _is_shootable; }
 int Tp::is_shovable_and_sticky(void) const { return _is_shovable_and_sticky; }
 int Tp::is_shovable(void) const { return _is_shovable; }
 int Tp::is_skeleton(void) const { return _is_skeleton; }
@@ -860,7 +861,6 @@ int Tp::is_unused_flag85(void) const { return _is_unused_flag85; }
 int Tp::is_unused_flag86(void) const { return _is_unused_flag86; }
 int Tp::is_unused_flag87(void) const { return _is_unused_flag87; }
 int Tp::is_unused_flag88(void) const { return _is_unused_flag88; }
-int Tp::is_unused_flag89(void) const { return _is_unused_flag89; }
 int Tp::is_unused_flag8(void) const { return _is_unused_flag8; }
 int Tp::is_unused_flag9(void) const { return _is_unused_flag9; }
 int Tp::is_usable(void) const { return _is_usable; }
@@ -1490,6 +1490,7 @@ void Tp::is_sewer_wall_set(int v) { _is_sewer_wall = v; }
 void Tp::is_shallow_water_set(int v) { _is_shallow_water = v; }
 void Tp::is_sheep_set(int v) { _is_sheep = v; }
 void Tp::is_shield_set(int v) { _is_shield = v; }
+void Tp::is_shootable_set(int v) { _is_shootable = v; }
 void Tp::is_shovable_and_sticky_set(int v) { _is_shovable_and_sticky = v; }
 void Tp::is_shovable_set(int v) { _is_shovable = v; }
 void Tp::is_skeleton_set(int v) { _is_skeleton = v; }
@@ -1628,7 +1629,6 @@ void Tp::is_unused_flag85_set(int v) { _is_unused_flag85 = v; }
 void Tp::is_unused_flag86_set(int v) { _is_unused_flag86 = v; }
 void Tp::is_unused_flag87_set(int v) { _is_unused_flag87 = v; }
 void Tp::is_unused_flag88_set(int v) { _is_unused_flag88 = v; }
-void Tp::is_unused_flag89_set(int v) { _is_unused_flag89 = v; }
 void Tp::is_unused_flag8_set(int v) { _is_unused_flag8 = v; }
 void Tp::is_unused_flag9_set(int v) { _is_unused_flag9 = v; }
 void Tp::is_usable_set(int v) { _is_usable = v; }

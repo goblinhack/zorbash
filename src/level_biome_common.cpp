@@ -648,4 +648,6 @@ bool Level::place_random_named(Dungeonp d, const std::string &what)
       return true;
     }
   }
+
+  return false;
 }

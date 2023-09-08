@@ -89,7 +89,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   std::string s = "Choose goal";
   IF_DEBUG2 { s = string_sprintf("Try to find goals, search-type %d", search_type); }
   AI_LOG(s);
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // Find all the possible goals. Higher scores, lower costs are preferred
@@ -144,11 +144,11 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   IF_DEBUG2
   {
     AI_LOG("All goals:");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
 
     for (auto &g : goalmaps) {
       AI_LOG("Goalmap:");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
 
       for (const auto &goal : g.goals) {
         auto s = string_sprintf("Goal, prio %d score %d at (%d,%d) %s", (int) goal.prio, (int) goal.score,
@@ -159,7 +159,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   }
 
   AI_LOG("Process goals:");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // Calculate this only once, so we don't try to shoot per goal.
@@ -213,7 +213,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
       for (const auto &goal : g.goals) {
         if (goal.avoid) {
           AI_LOG("Processing avoid goal");
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
 
           std::multiset< Goal > avoid;
           if (ai_choose_avoid_goals(avoid, goal)) {
@@ -225,7 +225,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
 
                 if (shooting_chance < chance_d1000_shooting()) {
                   AI_LOG("Processing shoot goal");
-                  TRACE_AND_INDENT();
+                  TRACE_NO_INDENT();
                   if (shoot_at(goal.what)) {
                     return true;
                   }
@@ -246,7 +246,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
 
         if (shooting_chance < chance_d1000_shooting()) {
           AI_LOG("Processing shoot goal");
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
           if (shoot_at(goal.what)) {
             return true;
           }
@@ -433,7 +433,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
 {
   if (! ai_create_path_to_single_goal_do(minx, miny, maxx, maxy, goal, saved_dmap, false)) {
     AI_LOG("Try diagonal path");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     return ai_create_path_to_single_goal_do(minx, miny, maxx, maxy, goal, saved_dmap, true);
   }
   return true;
@@ -445,7 +445,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
 int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int search_type, bool check_for_interrupts)
 {
   AI_LOG("Init dmap can see");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > can_jump = {};
 
@@ -539,6 +539,10 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
       TRACE_NO_INDENT();
       FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
       {
+        if (! can_detect(it)) {
+          continue;
+        }
+
         if (is_friend(it)) {
           break;
         }
@@ -774,6 +778,10 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
                     continue;
                   }
 
+                  if (! can_detect(item)) {
+                    continue;
+                  }
+
                   if (worth_collecting(item) > 0) {
                     set(ai->interrupt_map.val, o.x, o.y, game->tick_current);
                     if (check_for_interrupts) {
@@ -913,7 +921,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
     }
   }
 
-  dmap_process(dmap_can_see, point(minx, miny), point(maxx, maxy), true, true);
+  dmap_process_allow_diagonals(dmap_can_see, point(minx, miny), point(maxx, maxy), true);
 
   IF_DEBUG2
   {
@@ -934,7 +942,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
 void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int miny, int maxx, int maxy)
 {
   AI_LOG("Choose can see goals");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto dmap_can_see = dmap_can_see_get();
   auto age_map      = age_map_get();
@@ -950,7 +958,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
   }
 
   dbg2("Choose can see goals between %d,%d and %d,%d", minx, miny, maxx, maxy);
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   for (int y = miny; y <= maxy; y++) {
     for (int x = minx; x <= maxx; x++) {
@@ -1120,7 +1128,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             dbg2("AI: Consider (my agg+health %d, its health %d) ? %s%s%s%s", my_health, it_health,
                  it->to_short_string().c_str(), is_enemy(it) ? ", is enemy" : "",
                  is_dangerous(it) ? ", is dangerous" : "", is_to_be_avoided(it) ? ", is to be avoided" : "");
-            TRACE_AND_INDENT();
+            TRACE_NO_INDENT();
 
             if (is_attacker(it) && (dist <= max_dist)) {
               AI_LOG("Is attacker and is close");
@@ -1276,7 +1284,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
 void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type)
 {
   AI_LOG("Choose search goals");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   point start((int) curr_at.x, (int) curr_at.y);
 
@@ -1344,6 +1352,10 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     FOR_ALL_NON_INTERNAL_THINGS(level, it, p.x, p.y)
     {
       if (it == this) {
+        continue;
+      }
+
+      if (! can_detect(it)) {
         continue;
       }
 
@@ -1735,6 +1747,10 @@ bool Thing::ai_choose_immediately_adjacent_goal(int dx, int dy)
   TRACE_NO_INDENT();
   FOR_ALL_NON_INTERNAL_THINGS(level, it, at.x, at.y)
   {
+    if (! can_detect(it)) {
+      continue;
+    }
+
     if (it->is_door() && ! it->is_open && ! it->is_dead) {
       if (is_able_to_open_doors()) {
         if (keys()) {
@@ -1880,14 +1896,14 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
   // Look locally first.
   //
   AI_LOG("Choose current location goal");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (ai_choose_immediately_adjacent_goal(0, 0)) {
     return true;
   }
 
   AI_LOG("Choose immediately adjacent goals");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   for (int dx = -1; dx <= 1; dx++) {
     for (int dy = -1; dy <= 1; dy++) {
@@ -1913,7 +1929,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
 void Thing::ai_get_next_hop(void)
 {
   dbg2("AI: get nexthop");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // Find the best goal to go to
@@ -1948,7 +1964,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
   }
 
   AI_LOG("Needs to avoid", it);
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto d = distance_vision_get();
   if (! d) {
@@ -2088,7 +2104,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
   }
 
   AI_LOG("Did not find any location to avoid to");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // Last resorts
@@ -2109,7 +2125,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
 bool Thing::ai_tick(bool recursing)
 {
   dbg2("AI: tick");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto ai = aip();
 
@@ -2183,7 +2199,7 @@ bool Thing::ai_tick(bool recursing)
     // Wake on noise? Like a player hitting a wall.
     //
     if (noise_decibels_hearing()) {
-      if (LEVEL_LOUDEST_SOUND - level->noisemap(curr_at) > noise_decibels_hearing()) {
+      if (level->noisemap(curr_at) * LEVEL_SOUND_DAMPENING > noise_decibels_hearing()) {
         if (is_msg_allowed_hears_something()) {
           msg("%s hears something!", text_The().c_str());
         }
@@ -2266,7 +2282,7 @@ bool Thing::ai_tick(bool recursing)
   // See if anything dangerous is close
   //
   dbg2("AI: look for dangerous things");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   threat = most_dangerous_visible_thing();
   if (threat) {
@@ -2277,12 +2293,12 @@ bool Thing::ai_tick(bool recursing)
   // A threat can be a few tiles away; but if one is standing literally next to us! then it takes priority.
   //
   dbg2("AI: look for adjacent dangerous things");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto adjacent_threat = most_dangerous_adjacent_thing();
   if (adjacent_threat) {
     AI_LOG("Adjacent threat", adjacent_threat);
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
 
     if (is_dangerous(adjacent_threat)) {
       threat = adjacent_threat;
@@ -2317,7 +2333,7 @@ bool Thing::ai_tick(bool recursing)
         //
         if (is_on_fire() && environ_dislikes_fire()) {
           AI_LOG("I am on fire!");
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
 
           if (is_player()) {
             game->tick_begin("Robot move interrupted by being on fire");
@@ -2331,7 +2347,7 @@ bool Thing::ai_tick(bool recursing)
         //
         if (terrain_cost_get(curr_at) >= DMAP_LESS_PREFERRED_TERRAIN) {
           AI_LOG("I am on some bad terrain!");
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
 
           if (is_player()) {
             game->tick_begin("Robot move interrupted by bad terrain");
@@ -2356,7 +2372,7 @@ bool Thing::ai_tick(bool recursing)
         //
         if (is_on_fire() && environ_dislikes_fire()) {
           AI_LOG("I am on fire!");
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
 
           //
           // We're going to change state, but make sure we rest at least once
@@ -2376,7 +2392,7 @@ bool Thing::ai_tick(bool recursing)
         //
         if (terrain_cost_get(curr_at) >= DMAP_LESS_PREFERRED_TERRAIN) {
           AI_LOG("I am on some bad terrain!");
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
 
           //
           // We're going to change state, but make sure we rest at least once
@@ -2425,11 +2441,11 @@ bool Thing::ai_tick(bool recursing)
         // Check for lesser interrupts; like a monster being seen
         //
         AI_LOG("Check for interruptions");
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
 
         if (ai_dmap_can_see_init(minx, miny, maxx, maxy, MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED, true)) {
           AI_LOG("Something interrupted me while moving");
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
 
           if (is_player()) {
             game->tick_begin("Robot move interrupted by something");
@@ -2445,11 +2461,11 @@ bool Thing::ai_tick(bool recursing)
         // Check for lesser interrupts; like a monster being seen
         //
         AI_LOG("Check for interruptions");
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
 
         if (ai_dmap_can_see_init(minx, miny, maxx, maxy, MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED, true)) {
           AI_LOG("Something interrupted me while resting");
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
 
           if (is_player()) {
             game->tick_begin("Robot rest interrupted by something");
@@ -2511,13 +2527,13 @@ bool Thing::ai_tick(bool recursing)
   }
 
   dbg2("AI: state handling");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   switch (infop()->monst_state) {
     case MONST_STATE_IDLE :
       {
         dbg2("AI: state idle");
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
 
         if (state_idle(threat, minx, miny, maxx, maxy)) {
           return true;
@@ -2527,7 +2543,7 @@ bool Thing::ai_tick(bool recursing)
     case MONST_STATE_MOVING :
       {
         dbg2("AI: state moving");
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
 
         if (state_moving()) {
           return true;
@@ -2537,7 +2553,7 @@ bool Thing::ai_tick(bool recursing)
     case MONST_STATE_SLEEPING :
       {
         dbg2("AI: state sleeping");
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
 
         if (state_sleeping(do_something, wait)) {
           return true;
@@ -2547,7 +2563,7 @@ bool Thing::ai_tick(bool recursing)
     case MONST_STATE_RESTING :
       {
         dbg2("AI: state resting");
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
 
         if (state_resting(do_something, wait)) {
           return true;
@@ -2557,7 +2573,7 @@ bool Thing::ai_tick(bool recursing)
     case MONST_STATE_OPEN_INVENTORY :
       {
         dbg2("AI: state open inventory");
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
 
         if (state_open_inventory()) {
           return true;
@@ -2567,7 +2583,7 @@ bool Thing::ai_tick(bool recursing)
     case MONST_STATE_USING_ENCHANTSTONE :
       {
         dbg2("AI: state use enchantstone");
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
 
         if (state_using_enchantstone()) {
           return true;
@@ -2577,7 +2593,7 @@ bool Thing::ai_tick(bool recursing)
     case MONST_STATE_USING_SKILLSTONE :
       {
         dbg2("AI: state use skillstone");
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
 
         if (state_using_skillstone()) {
           return true;
@@ -2587,7 +2603,7 @@ bool Thing::ai_tick(bool recursing)
     case MONST_STATE_USING_SPELLBOOK :
       {
         dbg2("AI: state use spellbook");
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
 
         if (state_using_spellbook()) {
           return true;
@@ -2597,7 +2613,7 @@ bool Thing::ai_tick(bool recursing)
     case MONST_STATE_REPACK_INVENTORY :
       {
         dbg2("AI: state repack inventory");
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
 
         if (state_repack_inventory()) {
           return true;

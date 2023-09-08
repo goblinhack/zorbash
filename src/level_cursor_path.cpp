@@ -273,7 +273,7 @@ std::vector< point > Level::cursor_path_draw_line_attempt(Thingp it, point start
   dbg2("Make cursor path %d,%d to @%d,%d", start.x, start.y, end.x, end.y);
 
   // dmap_print(&d, start, dmap_start, dmap_end);
-  dmap_process(&d, dmap_start, dmap_end, true, true);
+  dmap_process_allow_diagonals(&d, dmap_start, dmap_end, true);
   // dmap_print(&d, start, dmap_start, dmap_end);
 
   auto p         = dmap_solve(&d, start);

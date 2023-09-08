@@ -102,6 +102,7 @@ def tp_init(name, text_long_name):
     my.is_monst(self, True)
     my.is_moveable(self, True)
     my.is_msg_allowed_is_dead(self, True)
+    my.is_shootable(self, True)
     my.is_shovable(self, True)
     my.is_tickable(self, True)
     my.is_wooden(self, True)

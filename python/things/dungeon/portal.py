@@ -35,6 +35,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_obs_throwing(self, True)
     my.is_only_one_per_tile(self, True)
     my.is_portal(self, True)
+    my.is_shootable(self, True)
     my.light_color(self, "purple")
     my.light_dist(self, 3)
     my.normal_placement_rules(self, True)

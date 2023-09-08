@@ -699,7 +699,7 @@ void Thing::update_interpolated_position(void)
       if (! is_hidden) {
         dbg2("End of move position (new %d,%d, old %d,%d)", curr_at.x, curr_at.y, last_at.x, last_at.y);
       }
-      level->noisemap_in_incr(curr_at.x, curr_at.y, noise_total());
+      level->sound_sources_incr(curr_at.x, curr_at.y, noise_total());
 
       new_pos = make_fpoint(curr_at);
 

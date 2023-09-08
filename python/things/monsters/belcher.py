@@ -80,6 +80,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_msg_allowed_senses_danger(self, True)
     my.is_obs_when_dead(self, True)
     my.is_plant(self, True)
+    my.is_shootable(self, True)
     my.is_shovable(self, True)
     my.is_soft(self, True)
     my.is_sticky(self, True)

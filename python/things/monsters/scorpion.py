@@ -105,6 +105,7 @@ def tp_init(name, text_long_name):
     my.is_msg_allowed_senses_danger(self, True)
     my.is_poisonous_danger_level(self, 4)
     my.is_scorpion(self, True)
+    my.is_shootable(self, True)
     my.is_soft(self, True)
     my.is_tickable(self, True)
     my.jump_distance(self, 2)

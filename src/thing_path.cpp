@@ -98,7 +98,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
   // Jump over obstacles if they appear in the path
   //
   if (is_able_to_jump() && (is_monst() || (is_player() && game->robot_mode))) {
-    DBG2("Can try to jump");
+    dbg("Can try to jump");
     TRACE_AND_INDENT();
 
     //
@@ -110,8 +110,8 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
       //
       if (is_disliked_by_me(future_pos) || level->is_spell_of_holding_barrier(future_pos)
           || level->is_block_of_ice(future_pos) || level->is_barrel(future_pos) || level->is_brazier(future_pos)) {
-        DBG2("Next position %s is a hazard (move path size %d)", future_pos.to_string().c_str(),
-             (int) ai->move_path.size());
+        dbg("Next position %s is a hazard (move path size %d)", future_pos.to_string().c_str(),
+            (int) ai->move_path.size());
         TRACE_AND_INDENT();
 
         if (ai->move_path.size()) {
@@ -121,9 +121,9 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
           IF_DEBUG2
           {
             if (is_disliked_by_me(jump_pos)) {
-              DBG2("Next jump pos %s (is disliked)", jump_pos.to_string().c_str());
+              dbg("Next jump pos %s (is disliked)", jump_pos.to_string().c_str());
             } else {
-              DBG2("Next jump pos %s", jump_pos.to_string().c_str());
+              dbg("Next jump pos %s", jump_pos.to_string().c_str());
             }
           }
 
@@ -133,7 +133,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
           TRACE_NO_INDENT();
 
           if (is_disliked_by_me(jump_pos) && ai->move_path.size()) {
-            DBG2("Next-next position %s is also a hazard", jump_pos.to_string().c_str());
+            dbg("Next-next position %s is also a hazard", jump_pos.to_string().c_str());
 
             auto jump_pos = ai->move_path[ 0 ];
             ai->move_path.erase(ai->move_path.begin());
@@ -142,11 +142,11 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
               //
               // Give up. Don't bump the tick. This allows the monst to try an alternative path.
               //
-              DBG2("Failed to jump cannot jump over hazards");
+              dbg("Failed to jump cannot jump over hazards");
               clear_move_path("Failed to jump cannot jump over all hazards");
               return false;
             } else if (try_to_jump_carefully(jump_pos)) {
-              DBG2("Long jump");
+              dbg("Long jump");
               if (is_player()) {
                 game->tick_begin("Tried a long jump");
               }
@@ -156,28 +156,28 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
               //
               // Don't bump the tick. This allows the monst to try an alternative path.
               //
-              DBG2("Failed to try a long jump");
+              dbg("Failed to try a long jump");
               clear_move_path("Failed to try a long jump");
               return false;
             }
           } else if (is_disliked_by_me(jump_pos)) {
-            DBG2("Final jump position %d,%d is also a hazard", (int) jump_pos.x, (int) jump_pos.y);
+            dbg("Final jump position %d,%d is also a hazard", (int) jump_pos.x, (int) jump_pos.y);
 
             //
             // Give up. Don't bump the tick. This allows the monst to try an alternative path.
             //
-            DBG2("Failed to jump cannot jump over hazards");
+            dbg("Failed to jump cannot jump over hazards");
             clear_move_path("Failed to jump cannot jump over all hazards");
             return false;
           } else if (try_to_jump_carefully(jump_pos, &too_far)) {
-            DBG2("Jumped carefully");
+            dbg("Jumped carefully");
             if (is_player()) {
               game->tick_begin("Jumped carefully");
             }
             clear_move_path("Jumped carefully");
             return true;
           } else {
-            DBG2("Failed to jump carefully; try entire path");
+            dbg("Failed to jump carefully; try entire path");
 
             //
             // Try the entire path. This allows us to jump next to a thing that
@@ -189,7 +189,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
                 break;
               }
               if (try_to_jump_carefully(jump_pos, &too_far)) {
-                DBG2("Jumped carefully; try entire path %d,%d", jump_pos.x, jump_pos.y);
+                dbg("Jumped carefully; try entire path %d,%d", jump_pos.x, jump_pos.y);
                 if (is_player()) {
                   game->tick_begin("Jumped carefully");
                 }
@@ -208,7 +208,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
                 break;
               }
               if (try_to_jump_carefully(jump_pos, &too_far)) {
-                DBG2("Jumped carefully; try entire path %d,%d (horiz)", jump_pos.x, jump_pos.y);
+                dbg("Jumped carefully; try entire path %d,%d (horiz)", jump_pos.x, jump_pos.y);
                 if (is_player()) {
                   game->tick_begin("Jumped carefully");
                 }
@@ -227,7 +227,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
                 break;
               }
               if (try_to_jump_carefully(jump_pos, &too_far)) {
-                DBG2("Jumped carefully; try entire path %d,%d (vert)", jump_pos.x, jump_pos.y);
+                dbg("Jumped carefully; try entire path %d,%d (vert)", jump_pos.x, jump_pos.y);
                 if (is_player()) {
                   game->tick_begin("Jumped carefully");
                 }
@@ -252,7 +252,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
               }
             }
 
-            DBG2("Failed to jump carefully; try wandering instead");
+            dbg("Failed to jump carefully; try wandering instead");
             return ai_wander();
           }
         } else {
@@ -272,7 +272,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
       //
       // Can the monst shove it into a something bad?
       //
-      DBG2("Something is in our way that can be shoved");
+      dbg("Something is in our way that can be shoved");
       auto delta = future_pos - curr_at;
 
       FOR_ALL_NON_INTERNAL_THINGS(level, t, future_pos.x, future_pos.y)
@@ -284,7 +284,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
         switch (try_to_shove_into_hazard(t, delta)) {
           case THING_SHOVE_TRIED_AND_FAILED :
             {
-              DBG2("Tried to shove monst into hazard at %s but failed", future_pos.to_string().c_str());
+              dbg("Tried to shove monst into hazard at %s but failed", future_pos.to_string().c_str());
               if (is_player()) {
                 game->tick_begin("Tried to shove but failed");
               }
@@ -293,7 +293,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
             }
           case THING_SHOVE_TRIED_AND_PASSED :
             {
-              DBG2("Shoved monst at %s", future_pos.to_string().c_str());
+              dbg("Shoved monst at %s", future_pos.to_string().c_str());
               if (is_player()) {
                 game->tick_begin("Tried to shove");
               }
@@ -305,7 +305,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
       }
       FOR_ALL_THINGS_END()
 
-      DBG2("Move, no shove allowed, no attack allowed");
+      dbg("Move, no shove allowed, no attack allowed");
       if (move_no_shove_no_attack(future_pos)) {
         return true;
       }
@@ -324,13 +324,13 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
     // Make sure and check for hazard after the monst, as the monst could be floating over lava or a chasm
     //
     if (is_disliked_by_me(future_pos)) {
-      DBG2("Cannot pass hazard at %s", future_pos.to_string().c_str());
+      dbg("Cannot pass hazard at %s", future_pos.to_string().c_str());
 
       //
       // Could be a monster sitting in lava, attack it?
       //
       if (level->is_monst(future_pos)) {
-        DBG2("Hazard, but a monst is on it. Try to attack it.");
+        dbg("Hazard, but a monst is on it. Try to attack it.");
         TRACE_AND_INDENT();
 
         if (move_no_shove_attack_allowed(future_pos)) {
@@ -338,12 +338,12 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
         }
       }
 
-      DBG2("Cannot pass hazard at %s, failed to move", future_pos.to_string().c_str());
+      dbg("Cannot pass hazard at %s, failed to move", future_pos.to_string().c_str());
       clear_move_path("Could not move");
       return false;
     }
 
-    DBG2("Try to move (shoving not allowed, attack allowed) to %s", future_pos.to_string().c_str());
+    dbg("Try to move (shoving not allowed, attack allowed) to %s", future_pos.to_string().c_str());
     TRACE_AND_INDENT();
 
     if (move_no_shove_attack_allowed(future_pos)) {
@@ -357,7 +357,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
       return true;
     }
 
-    DBG2("Try to move (shoving and attacking allowed) to %s", future_pos.to_string().c_str());
+    dbg("Try to move (shoving and attacking allowed) to %s", future_pos.to_string().c_str());
     if (move(future_pos)) {
       return true;
     }
@@ -380,7 +380,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
       //
       // Can the monst shove it into a something bad?
       //
-      DBG2("Try to grapple");
+      dbg("Try to grapple");
       TRACE_AND_INDENT();
 
       FOR_ALL_NON_INTERNAL_THINGS(level, t, future_pos.x, future_pos.y)
@@ -437,7 +437,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
         // trying to move to the next hop at m which will be an attack.
         //
         auto mouse_at = level->cursor->curr_at;
-        DBG2("Try to move, no shove, attack allowed as mouse clicked on %s", mouse_at.to_string().c_str());
+        dbg("Try to move, no shove, attack allowed as mouse clicked on %s", mouse_at.to_string().c_str());
         TRACE_AND_INDENT();
 
         if ((std::abs(curr_at.x - level->cursor->curr_at.x) <= 1)
@@ -445,7 +445,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
           //
           // If more than one hop away, we must jump.
           //
-          DBG2("Cursor is adjacent, try to move there");
+          dbg("Cursor is adjacent, try to move there");
           TRACE_AND_INDENT();
 
           //
@@ -460,7 +460,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
           //
           // If more than one hop away, we must jump if we cannot move to the next hop without hitting something.
           //
-          DBG2("Cursor is not adjacent, try to move to the next hop first");
+          dbg("Cursor is not adjacent, try to move to the next hop first");
           TRACE_AND_INDENT();
 
           if (move_no_shove_no_attack(future_pos)) {
@@ -470,7 +470,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
           //
           // Ok something is in the way, try to jump.
           //
-          DBG2("Cursor is not adjacent, try to jump there");
+          dbg("Cursor is not adjacent, try to jump there");
           TRACE_AND_INDENT();
 
           //
@@ -487,14 +487,14 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
         }
       }
 
-      DBG2("Try to move, no shove, attack allowed on next hop %s", future_pos.to_string().c_str());
+      dbg("Try to move, no shove, attack allowed on next hop %s", future_pos.to_string().c_str());
       TRACE_AND_INDENT();
 
       if (move_no_shove_attack_allowed(future_pos)) {
         return true;
       }
     } else {
-      DBG2("Try to move, no shove, no attack as have move path");
+      dbg("Try to move, no shove, no attack as have move path");
       TRACE_AND_INDENT();
 
       if (move_no_shove_no_attack(future_pos)) {
@@ -503,14 +503,14 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
     }
   } else if (is_player() && ! game->robot_mode) {
     if (reason == THING_MOVE_REASON_MOUSE) {
-      DBG2("Try to move player, no shove, attack allowed on next hop %s", future_pos.to_string().c_str());
+      dbg("Try to move player, no shove, attack allowed on next hop %s", future_pos.to_string().c_str());
       TRACE_AND_INDENT();
 
       if (move_no_shove_attack_allowed(future_pos)) {
         return true;
       }
     } else {
-      DBG2("Try to move player, no shove, no attack as have move path");
+      dbg("Try to move player, no shove, no attack as have move path");
       TRACE_AND_INDENT();
 
       if (move_no_shove_no_attack(future_pos)) {
@@ -519,14 +519,14 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
     }
   } else {
     if (possible_to_attack_at(future_pos)) {
-      DBG2("Try to move and attack");
+      dbg("Try to move and attack");
       TRACE_AND_INDENT();
 
       if (move_no_shove_attack_allowed(future_pos)) {
         return true;
       }
     } else {
-      DBG2("Try to move, no shove, no attack");
+      dbg("Try to move, no shove, no attack");
       TRACE_AND_INDENT();
 
       if (move_no_shove_no_attack(future_pos)) {
@@ -534,7 +534,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
       }
 
       if (possible_to_attack_at(future_pos)) {
-        DBG2("Try to move, no shove, attack allowed");
+        dbg("Try to move, no shove, attack allowed");
         TRACE_AND_INDENT();
 
         if (move_no_shove_attack_allowed(future_pos)) {
@@ -573,7 +573,7 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
 //
 bool Thing::player_cursor_path_pop_first_move(ThingMoveReason reason)
 {
-  DBG2("Cursor pop first move");
+  dbg("Cursor pop first move");
   TRACE_AND_INDENT();
 
   if (! is_player()) {
@@ -583,19 +583,19 @@ bool Thing::player_cursor_path_pop_first_move(ThingMoveReason reason)
 
   auto cursor = level->cursor;
   if (! cursor) {
-    DBG2("Cursor pop first move: no cursor, recreate");
+    dbg("Cursor pop first move: no cursor, recreate");
     TRACE_AND_INDENT();
 
     level->cursor_recreate();
     cursor = level->cursor;
     if (! cursor) {
-      DBG2("Cursor pop first move: no cursor");
+      dbg("Cursor pop first move: no cursor");
       return false;
     }
   }
 
   if (game->cursor_move_path.size()) {
-    DBG2("Cursor path exists");
+    dbg("Cursor path exists");
 
     //
     // A path to the target exists.
@@ -605,7 +605,7 @@ bool Thing::player_cursor_path_pop_first_move(ThingMoveReason reason)
     game->cursor_move_path.clear();
 
     if (player_or_monst_path_pop_next_move(reason)) {
-      DBG2("Move to cursor next hop");
+      dbg("Move to cursor next hop");
       if (game->cursor_move_path.empty()) {
         level->cursor_path_create(this);
       }
@@ -616,7 +616,7 @@ bool Thing::player_cursor_path_pop_first_move(ThingMoveReason reason)
     // We get here if for example we click on a monster but are unable to move into its cell because it blocks
     // Or we click on a locked door and cannot pass through.
     //
-    DBG2("Failed to move to cursor next hop");
+    dbg("Failed to move to cursor next hop");
     level->cursor_path_create(this);
     return false;
   }
@@ -638,7 +638,7 @@ bool Thing::player_cursor_path_pop_first_move(ThingMoveReason reason)
   // step there.
   //
   if ((fabs(future_pos.x - curr_at.x) <= 1) && (fabs(future_pos.y - curr_at.y) <= 1)) {
-    DBG2("Target is adjacent, attack or move to @%d,%d", cursor->curr_at.x, cursor->curr_at.y);
+    dbg("Target is adjacent, attack or move to @%d,%d", cursor->curr_at.x, cursor->curr_at.y);
 
     //
     // If we are able to walk through walls, then don't attack the wall, move into it.
@@ -662,7 +662,7 @@ bool Thing::player_cursor_path_pop_first_move(ThingMoveReason reason)
   // If not adjacent, try and jump.
   //
   if (level->can_see_point_or_nearby(future_pos, THING_CAN_SEE_INTO_SHADOWS_DISTANCE)) {
-    DBG2("Cursor path does not exist; jump?");
+    dbg("Cursor path does not exist; jump?");
     if (is_able_to_jump() && game->robot_mode) {
       if (try_to_jump_carefully(future_pos)) {
         game->tick_begin("player tried to jump");

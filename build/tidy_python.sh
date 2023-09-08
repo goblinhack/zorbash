@@ -37,8 +37,10 @@ for i in \
   rings \
   shield \
   skills \
+  spells \
   staffs \
   traps \
+  totem \
   treasure \
   weapons
 do
@@ -72,8 +74,10 @@ for IN in \
   rings/*py \
   shield/*py \
   skills/*py \
+  spells/*py \
   staffs/*py \
   traps/*py \
+  totem/*py \
   treasure/*py \
   weapons/*py
 do

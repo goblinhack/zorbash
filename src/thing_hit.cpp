@@ -2403,7 +2403,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     //
     // Set up noise, for example a door being hit
     //
-    level->noisemap_in_incr(curr_at.x, curr_at.y, noise_on_hit_and_still_alive());
+    level->sound_sources_incr(curr_at.x, curr_at.y, noise_on_hit_and_still_alive());
   } else if (is_sleeping) {
     //
     // e.g. Gargoyle being attacked by ice and does not wake.
@@ -2415,7 +2415,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     //
     // Set up noise, for example a door being broken
     //
-    level->noisemap_in_incr(curr_at.x, curr_at.y, noise_on_hit_and_now_dead());
+    level->sound_sources_incr(curr_at.x, curr_at.y, noise_on_hit_and_now_dead());
 
     //
     // Interrupt whatever the monster was doing.

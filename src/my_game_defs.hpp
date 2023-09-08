@@ -24,6 +24,7 @@
 #define DUNGEON_GAS_RESOLUTION 4
 
 #define LEVEL_LOUDEST_SOUND        100 // Decibels
+#define LEVEL_SOUND_DAMPENING      4   // The higher this is, the less sounds travels
 #define LEVEL_FADE_IN_MS           500 // Level start fade animation time
 #define LEVEL_FADE_OUT_MS          500 // Level end fade animation time
 #define LEVEL_MONST_COUNT_INIT_MAX 25  // Monsters max per level at creation. Want more? You're mad...

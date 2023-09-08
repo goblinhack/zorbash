@@ -949,6 +949,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
           case THING_SIZE_TINY : health_bar_width = TILE_WIDTH / 2; break;
         }
 
+        glcolor(WHITE);
         tile_blit(tile, point(x - health_bar_width / 2, y - TILE_HEIGHT), point(x + health_bar_width / 2 + 1, y));
       }
     }

@@ -444,8 +444,8 @@ bool Thing::teleport(TeleportOptions teleport_options, point to, bool *too_far)
     msg("You fade out of existance!");
   }
 
-  level->noisemap_in_incr(curr_at.x, curr_at.y, noise_on_teleporting());
-  level->noisemap_in_incr(to.x, to.y, noise_on_teleporting());
+  level->sound_sources_incr(curr_at.x, curr_at.y, noise_on_teleporting());
+  level->sound_sources_incr(to.x, to.y, noise_on_teleporting());
 
   movement_remaining_set(0);
 

@@ -15,11 +15,11 @@ def tp_init(name, text_long_name, text_short_name):
     global self
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
+    my.gfx_targeted_laser(self, "laser_magic_effect")
     my.is_loggable(self, True)
     my.is_spell(self, True)
     my.is_target_select(self, True)
     my.is_usable(self, True)
-    my.gfx_targeted_laser(self, "laser_magic_effect")
     my.on_use_do(self, "me.on_use()")
     my.range_max(self, 7)
     my.spell_base_name(self, name)

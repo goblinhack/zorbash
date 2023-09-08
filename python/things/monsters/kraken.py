@@ -120,6 +120,7 @@ def tp_init(name, text_long_name):
     my.is_msg_allowed_hears_something(self, True)
     my.is_msg_allowed_is_dead(self, True)
     my.is_obs_when_dead(self, True)
+    my.is_shootable(self, True)
     my.is_soft(self, True)
     my.is_tickable(self, True)
     my.light_color(self, "green")

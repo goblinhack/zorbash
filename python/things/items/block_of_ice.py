@@ -89,6 +89,7 @@ def tp_init(name, text_long_name):
     my.is_obs_spell_casting(self, True)
     my.is_obs_throwing(self, True)
     my.is_only_one_per_tile(self, True)  # so wands of ice do not pile these up
+    my.is_shootable(self, True)
     my.is_shovable_and_sticky(self, True)  # so a dogman in ice is also shoved
     my.is_shovable(self, True)
     my.is_tickable(self, True)  # So it can interact with fire

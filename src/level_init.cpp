@@ -86,7 +86,7 @@ void Level::clear(void)
   _is_wall                           = {};
   _noise_blocker                     = {};
   _noisemap                          = {};
-  _noisemap_in                       = {};
+  _sound_sources                     = {};
   // end sort marker1 }
 
   can_see_currently = {};

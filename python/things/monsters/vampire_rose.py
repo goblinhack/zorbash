@@ -93,6 +93,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_msg_allowed_is_wounded(self, True)
     my.is_plant(self, True)
     my.is_red_blooded(self, True)
+    my.is_shootable(self, True)
     my.is_soft(self, True)
     my.is_tickable(self, True)
     my.normal_placement_rules(self, True)

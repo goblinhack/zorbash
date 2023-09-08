@@ -297,6 +297,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.is_moveable(self, True)
     my.is_player(self, True)
     my.is_red_blooded(self, True)
+    my.is_shootable(self, True)
     my.is_shovable(self, True)
     my.is_tickable(self, True)
     my.jump_distance(self, 2)

@@ -715,7 +715,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_wall);
   in >> bits(my.t->_noise_blocker);
   in >> bits(my.t->_noisemap);
-  in >> bits(my.t->_noisemap_in);
+  in >> bits(my.t->_sound_sources);
   // end sort marker5 }
 
   in >> bits(my.t->can_see_currently);

@@ -631,6 +631,7 @@ private:
   int _is_shallow_water {};
   int _is_sheep {};
   int _is_shield {};
+  int _is_shootable {};
   int _is_shovable {};
   int _is_shovable_and_sticky {};
   int _is_skeleton {};
@@ -771,7 +772,6 @@ private:
   int _is_unused_flag86 {};
   int _is_unused_flag87 {};
   int _is_unused_flag88 {};
-  int _is_unused_flag89 {};
   int _is_unused_flag9 {};
   int _is_usable {};
   int _is_used_when_thrown {};
@@ -1982,6 +1982,7 @@ public:
   int is_shallow_water(void) const;
   int is_sheep(void) const;
   int is_shield(void) const;
+  int is_shootable(void) const;
   int is_shovable_and_sticky(void) const;
   int is_shovable(void) const;
   int is_skeleton(void) const;
@@ -2121,7 +2122,6 @@ public:
   int is_unused_flag86(void) const;
   int is_unused_flag87(void) const;
   int is_unused_flag88(void) const;
-  int is_unused_flag89(void) const;
   int is_unused_flag8(void) const;
   int is_unused_flag9(void) const;
   int is_usable(void) const;
@@ -2751,6 +2751,7 @@ public:
   void is_shallow_water_set(int v);
   void is_sheep_set(int v);
   void is_shield_set(int v);
+  void is_shootable_set(int v);
   void is_shovable_and_sticky_set(int v);
   void is_shovable_set(int v);
   void is_skeleton_set(int v);
@@ -2890,7 +2891,6 @@ public:
   void is_unused_flag86_set(int v);
   void is_unused_flag87_set(int v);
   void is_unused_flag88_set(int v);
-  void is_unused_flag89_set(int v);
   void is_unused_flag8_set(int v);
   void is_unused_flag9_set(int v);
   void is_usable_set(int v);

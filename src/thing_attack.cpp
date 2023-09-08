@@ -555,7 +555,7 @@ bool Thing::attack(point future_pos)
 
 bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
 {
-  con("Attack %s", victim->to_short_string().c_str());
+  dbg("Attack %s", victim->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   idle_count_set(0);
@@ -1446,9 +1446,9 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     // An attack counts as making noise.
     //
     if (owner) {
-      level->noisemap_in_incr(curr_at.x, curr_at.y, owner->noise_total());
+      level->sound_sources_incr(curr_at.x, curr_at.y, owner->noise_total());
     } else {
-      level->noisemap_in_incr(curr_at.x, curr_at.y, noise_total());
+      level->sound_sources_incr(curr_at.x, curr_at.y, noise_total());
     }
 
     //

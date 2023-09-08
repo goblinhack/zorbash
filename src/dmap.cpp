@@ -129,25 +129,25 @@ void dmap_print(const Dmap *D)
     for (x = 0; x < MAP_WIDTH; x++) {
       uint8_t e = get_no_check(D->val, x, y);
       if (e == DMAP_IS_WALL) {
-        debug += (" ##");
+        debug += ("##");
         continue;
       }
       if (e == DMAP_IS_PASSABLE) {
-        debug += ("  .");
+        debug += (" .");
         continue;
       }
 
       if (e > 0) {
-        debug += string_sprintf("%3X", e);
+        debug += string_sprintf("%2X", e);
       } else {
-        debug += "  *";
+        debug += " *";
       }
     }
     LOG("DMAP: %s", debug.c_str());
   }
 }
 
-void dmap_process(Dmap *D, point tl, point br, bool place_border, bool allow_diagonals)
+void dmap_process_no_diagonals(Dmap *D, point tl, point br, bool place_border)
 {
   auto                                                                      before = SDL_GetTicks();
   uint8_t                                                                   x;
@@ -299,9 +299,7 @@ void dmap_process(Dmap *D, point tl, point br, bool place_border, bool allow_dia
         //
         // Avoid diagonal moves.
         //
-        if (! allow_diagonals
-            && ((get_no_check(D->val, x - 1, y) == DMAP_IS_WALL)
-                || (get_no_check(D->val, x, y - 1) == DMAP_IS_WALL))) {
+        if (((get_no_check(D->val, x - 1, y) == DMAP_IS_WALL) || (get_no_check(D->val, x, y - 1) == DMAP_IS_WALL))) {
           a = DMAP_IS_WALL;
         } else {
           a = get_no_check(D->val, x - 1, y - 1);
@@ -309,9 +307,7 @@ void dmap_process(Dmap *D, point tl, point br, bool place_border, bool allow_dia
 
         b = get_no_check(D->val, x, y - 1);
 
-        if (! allow_diagonals
-            && ((get_no_check(D->val, x + 1, y) == DMAP_IS_WALL)
-                || (get_no_check(D->val, x, y - 1) == DMAP_IS_WALL))) {
+        if (((get_no_check(D->val, x + 1, y) == DMAP_IS_WALL) || (get_no_check(D->val, x, y - 1) == DMAP_IS_WALL))) {
           c = DMAP_IS_WALL;
         } else {
           c = get_no_check(D->val, x + 1, y - 1);
@@ -320,9 +316,7 @@ void dmap_process(Dmap *D, point tl, point br, bool place_border, bool allow_dia
         d = get_no_check(D->val, x - 1, y);
         f = get_no_check(D->val, x + 1, y);
 
-        if (! allow_diagonals
-            && ((get_no_check(D->val, x - 1, y) == DMAP_IS_WALL)
-                || (get_no_check(D->val, x, y + 1) == DMAP_IS_WALL))) {
+        if (((get_no_check(D->val, x - 1, y) == DMAP_IS_WALL) || (get_no_check(D->val, x, y + 1) == DMAP_IS_WALL))) {
           g = DMAP_IS_WALL;
         } else {
           g = get_no_check(D->val, x - 1, y + 1);
@@ -330,9 +324,7 @@ void dmap_process(Dmap *D, point tl, point br, bool place_border, bool allow_dia
 
         h = get_no_check(D->val, x, y + 1);
 
-        if (! allow_diagonals
-            && ((get_no_check(D->val, x + 1, y) == DMAP_IS_WALL)
-                || (get_no_check(D->val, x, y + 1) == DMAP_IS_WALL))) {
+        if (((get_no_check(D->val, x + 1, y) == DMAP_IS_WALL) || (get_no_check(D->val, x, y + 1) == DMAP_IS_WALL))) {
           i = DMAP_IS_WALL;
         } else {
           i = get_no_check(D->val, x + 1, y + 1);
@@ -365,6 +357,525 @@ void dmap_process(Dmap *D, point tl, point br, bool place_border, bool allow_dia
 
         if (*e - lowest >= 2) {
           *e      = lowest + 1;
+          changed = true;
+        }
+      }
+    }
+  } while (changed);
+
+  //
+  // Mix in any original depth stats
+  //
+  for (y = miny + 1; y <= maxy - 1; y++) {
+    for (x = minx + 1; x <= maxx - 1; x++) {
+      uint8_t o = get_no_check(orig, x, y);
+      if (o != DMAP_IS_WALL) {
+        if (o > DMAP_IS_PASSABLE) {
+          o         = o - DMAP_IS_PASSABLE;
+          uint8_t n = get_no_check(D->val, x, y);
+          if (o + n < DMAP_IS_PASSABLE) {
+            incr(D->val, x, y, o);
+          }
+        }
+      }
+    }
+  }
+
+  //
+  // Sanity check the dmap does not take too much time
+  //
+  if (unlikely(g_opt_debug1)) {
+    auto after = SDL_GetTicks();
+    if (after - before > 70) {
+      ERR("DMAP is taking too long, %d ms", after - before);
+      dmap_print(D);
+    }
+    if (after - before > 0) {
+      if (! g_opt_test_dungeon_gen) {
+        LOG("DMAP took %u ms: tl %d,%d br %d %d", after - before, tl.x, tl.y, br.x, br.y);
+      }
+    }
+  }
+}
+
+//
+// Pre:
+//
+// 9 9 9 9 9
+// 9 9 9 9 9
+// 9 9 9 9 9
+// 9 9 0 9 9
+// 9 9 9 9 9
+// 9 9 9 9 9
+// 9 9 9 9 9
+//
+// Post:
+//
+// 3 3 3 3 3
+// 2 2 2 2 2
+// 2 1 1 1 2
+// 3 1 0 1 2
+// 2 1 1 1 2
+// 2 2 2 2 2
+// 3 3 3 3 3
+//
+void dmap_process_allow_diagonals(Dmap *D, point tl, point br, bool place_border)
+{
+  auto                                                                      before = SDL_GetTicks();
+  uint8_t                                                                   x;
+  uint8_t                                                                   y;
+  uint8_t                                                                   a;
+  uint8_t                                                                   b;
+  uint8_t                                                                   c;
+  uint8_t                                                                   d;
+  uint8_t                                                                  *e;
+  uint8_t                                                                   f;
+  uint8_t                                                                   g;
+  uint8_t                                                                   h;
+  uint8_t                                                                   i;
+  uint8_t                                                                   lowest;
+  uint8_t                                                                   changed;
+  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig;
+  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig_valid;
+  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > valid;
+
+  int minx, miny, maxx, maxy;
+  if (tl.x < br.x) {
+    minx = tl.x;
+    maxx = br.x;
+  } else {
+    minx = br.x;
+    maxx = tl.x;
+  }
+  if (tl.y < br.y) {
+    miny = tl.y;
+    maxy = br.y;
+  } else {
+    miny = br.y;
+    maxy = tl.y;
+  }
+
+  //
+  // We always place a border around the dmap so the search doesn't trickly off the map.
+  // So grow the search space slightly so that creatures that can only see one tile, do
+  // not lose out and have nothing to look at.
+  //
+  if (place_border) {
+    minx--;
+    miny--;
+    maxx++;
+    maxy++;
+  }
+
+  if (minx < 0) {
+    minx = 0;
+  }
+  if (miny < 0) {
+    miny = 0;
+  }
+  if (maxx >= MAP_WIDTH) {
+    maxx = MAP_WIDTH - 1;
+  }
+  if (maxy >= MAP_HEIGHT) {
+    maxy = MAP_HEIGHT - 1;
+  }
+
+  //
+  // Need a wall around the dmap or the search will sort of trickle off the map
+  //
+  for (y = miny; y <= maxy; y++) {
+    set(D->val, minx, y, DMAP_IS_WALL);
+    set(D->val, maxx, y, DMAP_IS_WALL);
+  }
+  for (x = minx; x <= maxx; x++) {
+    set(D->val, x, miny, DMAP_IS_WALL);
+    set(D->val, x, maxy, DMAP_IS_WALL);
+  }
+
+  bool all_walls;
+
+  //
+  // Try to minimize the DMAP area if it is mostly walls at the edges, for speed.
+  //
+  all_walls = true;
+  for (x = minx; (x <= maxx) && all_walls; x++) {
+    for (y = miny; (y <= maxy) && all_walls; y++) {
+      all_walls = get_no_check(D->val, x, y) == DMAP_IS_WALL;
+    }
+    if (all_walls) {
+      minx = x;
+    }
+  }
+
+  all_walls = true;
+  for (x = maxx; (x > minx) && all_walls; x--) {
+    for (y = miny; (y <= maxy) && all_walls; y++) {
+      all_walls = get_no_check(D->val, x, y) == DMAP_IS_WALL;
+    }
+    if (all_walls) {
+      maxx = x;
+    }
+  }
+
+  all_walls = true;
+  for (y = miny; (y <= maxy) && all_walls; y++) {
+    for (x = minx; (x <= maxx) && all_walls; x++) {
+      all_walls = get_no_check(D->val, x, y) == DMAP_IS_WALL;
+    }
+    if (all_walls) {
+      miny = y;
+    }
+  }
+
+  all_walls = true;
+  for (y = maxy; (y > miny) && all_walls; y--) {
+    for (x = minx; (x <= maxx) && all_walls; x++) {
+      all_walls = get_no_check(D->val, x, y) == DMAP_IS_WALL;
+    }
+    if (all_walls) {
+      maxy = y;
+    }
+  }
+
+  for (y = miny + 1; y <= maxy - 1; y++) {
+    for (x = minx + 1; x <= maxx - 1; x++) {
+      set(orig, x, y, get_no_check(D->val, x, y));
+
+      e = &getref(D->val, x, y);
+      if (*e != DMAP_IS_WALL) {
+        set(valid, x, y, (uint8_t) 1);
+        set(orig_valid, x, y, (uint8_t) 1);
+        continue;
+      }
+
+      set(valid, x, y, (uint8_t) 0);
+      set(orig_valid, x, y, (uint8_t) 0);
+    }
+  }
+
+  do {
+    changed = false;
+
+    for (y = miny + 1; y <= maxy - 1; y++) {
+      for (x = minx + 1; x <= maxx - 1; x++) {
+        if (! get_no_check(orig_valid, x, y)) {
+          continue;
+        }
+
+        if (! get_no_check(valid, x, y)) {
+          continue;
+        }
+
+        e = &getref(D->val, x, y);
+
+        a = get_no_check(D->val, x - 1, y - 1);
+        b = get_no_check(D->val, x, y - 1);
+        c = get_no_check(D->val, x + 1, y - 1);
+        d = get_no_check(D->val, x - 1, y);
+        f = get_no_check(D->val, x + 1, y);
+        g = get_no_check(D->val, x - 1, y + 1);
+        h = get_no_check(D->val, x, y + 1);
+        i = get_no_check(D->val, x + 1, y + 1);
+
+        if (a < b) {
+          lowest = a;
+        } else {
+          lowest = b;
+        }
+
+        if (c < lowest) {
+          lowest = c;
+        }
+        if (d < lowest) {
+          lowest = d;
+        }
+        if (f < lowest) {
+          lowest = f;
+        }
+        if (g < lowest) {
+          lowest = g;
+        }
+        if (h < lowest) {
+          lowest = h;
+        }
+        if (i < lowest) {
+          lowest = i;
+        }
+
+        if (*e - lowest >= 2) {
+          *e      = lowest + 1;
+          changed = true;
+        }
+      }
+    }
+  } while (changed);
+
+  //
+  // Mix in any original depth stats
+  //
+  for (y = miny + 1; y <= maxy - 1; y++) {
+    for (x = minx + 1; x <= maxx - 1; x++) {
+      uint8_t o = get_no_check(orig, x, y);
+      if (o != DMAP_IS_WALL) {
+        if (o > DMAP_IS_PASSABLE) {
+          o         = o - DMAP_IS_PASSABLE;
+          uint8_t n = get_no_check(D->val, x, y);
+          if (o + n < DMAP_IS_PASSABLE) {
+            incr(D->val, x, y, o);
+          }
+        }
+      }
+    }
+  }
+
+  //
+  // Sanity check the dmap does not take too much time
+  //
+  if (unlikely(g_opt_debug1)) {
+    auto after = SDL_GetTicks();
+    if (after - before > 70) {
+      ERR("DMAP is taking too long, %d ms", after - before);
+      dmap_print(D);
+    }
+    if (after - before > 0) {
+      if (! g_opt_test_dungeon_gen) {
+        LOG("DMAP took %u ms: tl %d,%d br %d %d", after - before, tl.x, tl.y, br.x, br.y);
+      }
+    }
+  }
+}
+
+//
+// Pre:
+//
+// 0 0 0 0 0
+// 0 0 0 0 0
+// 0 0 0 0 0
+// 0 0 3 0 0
+// 0 0 0 0 0
+// 0 0 0 0 0
+// 0 0 0 0 0
+//
+// Post:
+//
+// 0 0 0 0 0
+// 0 1 1 1 0
+// 1 2 2 2 1
+// 1 2 3 2 1
+// 1 2 2 2 1
+// 0 1 1 1 0
+// 0 0 0 0 0
+//
+void dmap_process_reverse_allow_diagonals(Dmap *D, point tl, point br, bool place_border)
+{
+  auto                                                                      before = SDL_GetTicks();
+  uint8_t                                                                   x;
+  uint8_t                                                                   y;
+  uint8_t                                                                   a;
+  uint8_t                                                                   b;
+  uint8_t                                                                   c;
+  uint8_t                                                                   d;
+  uint8_t                                                                  *e;
+  uint8_t                                                                   f;
+  uint8_t                                                                   g;
+  uint8_t                                                                   h;
+  uint8_t                                                                   i;
+  uint8_t                                                                   highest;
+  uint8_t                                                                   changed;
+  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig;
+  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig_valid;
+  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > valid;
+
+  int minx, miny, maxx, maxy;
+  if (tl.x < br.x) {
+    minx = tl.x;
+    maxx = br.x;
+  } else {
+    minx = br.x;
+    maxx = tl.x;
+  }
+  if (tl.y < br.y) {
+    miny = tl.y;
+    maxy = br.y;
+  } else {
+    miny = br.y;
+    maxy = tl.y;
+  }
+
+  //
+  // We always place a border around the dmap so the search doesn't trickly off the map.
+  // So grow the search space slightly so that creatures that can only see one tile, do
+  // not lose out and have nothing to look at.
+  //
+  if (place_border) {
+    minx--;
+    miny--;
+    maxx++;
+    maxy++;
+  }
+
+  if (minx < 0) {
+    minx = 0;
+  }
+  if (miny < 0) {
+    miny = 0;
+  }
+  if (maxx >= MAP_WIDTH) {
+    maxx = MAP_WIDTH - 1;
+  }
+  if (maxy >= MAP_HEIGHT) {
+    maxy = MAP_HEIGHT - 1;
+  }
+
+  //
+  // Need a wall around the dmap or the search will sort of trickle off the map
+  //
+  for (y = miny; y <= maxy; y++) {
+    set(D->val, minx, y, DMAP_IS_WALL);
+    set(D->val, maxx, y, DMAP_IS_WALL);
+  }
+  for (x = minx; x <= maxx; x++) {
+    set(D->val, x, miny, DMAP_IS_WALL);
+    set(D->val, x, maxy, DMAP_IS_WALL);
+  }
+
+  bool all_walls;
+
+  //
+  // Try to minimize the DMAP area if it is mostly walls at the edges, for speed.
+  //
+  all_walls = true;
+  for (x = minx; (x <= maxx) && all_walls; x++) {
+    for (y = miny; (y <= maxy) && all_walls; y++) {
+      all_walls = get_no_check(D->val, x, y) == DMAP_IS_WALL;
+    }
+    if (all_walls) {
+      minx = x;
+    }
+  }
+
+  all_walls = true;
+  for (x = maxx; (x > minx) && all_walls; x--) {
+    for (y = miny; (y <= maxy) && all_walls; y++) {
+      all_walls = get_no_check(D->val, x, y) == DMAP_IS_WALL;
+    }
+    if (all_walls) {
+      maxx = x;
+    }
+  }
+
+  all_walls = true;
+  for (y = miny; (y <= maxy) && all_walls; y++) {
+    for (x = minx; (x <= maxx) && all_walls; x++) {
+      all_walls = get_no_check(D->val, x, y) == DMAP_IS_WALL;
+    }
+    if (all_walls) {
+      miny = y;
+    }
+  }
+
+  all_walls = true;
+  for (y = maxy; (y > miny) && all_walls; y--) {
+    for (x = minx; (x <= maxx) && all_walls; x++) {
+      all_walls = get_no_check(D->val, x, y) == DMAP_IS_WALL;
+    }
+    if (all_walls) {
+      maxy = y;
+    }
+  }
+
+  for (y = miny + 1; y <= maxy - 1; y++) {
+    for (x = minx + 1; x <= maxx - 1; x++) {
+      set(orig, x, y, get_no_check(D->val, x, y));
+
+      e = &getref(D->val, x, y);
+      if (*e != DMAP_IS_WALL) {
+        set(valid, x, y, (uint8_t) 1);
+        set(orig_valid, x, y, (uint8_t) 1);
+        continue;
+      }
+
+      set(valid, x, y, (uint8_t) 0);
+      set(orig_valid, x, y, (uint8_t) 0);
+    }
+  }
+
+  do {
+    changed = false;
+
+    for (y = miny + 1; y <= maxy - 1; y++) {
+      for (x = minx + 1; x <= maxx - 1; x++) {
+        if (! get_no_check(orig_valid, x, y)) {
+          continue;
+        }
+
+        if (! get_no_check(valid, x, y)) {
+          continue;
+        }
+
+        e = &getref(D->val, x, y);
+
+        a = get_no_check(D->val, x - 1, y - 1);
+        b = get_no_check(D->val, x, y - 1);
+        c = get_no_check(D->val, x + 1, y - 1);
+        d = get_no_check(D->val, x - 1, y);
+        f = get_no_check(D->val, x + 1, y);
+        g = get_no_check(D->val, x - 1, y + 1);
+        h = get_no_check(D->val, x, y + 1);
+        i = get_no_check(D->val, x + 1, y + 1);
+
+        if (a >= DMAP_IS_PASSABLE) {
+          a = 0;
+        }
+        if (b >= DMAP_IS_PASSABLE) {
+          b = 0;
+        }
+        if (c >= DMAP_IS_PASSABLE) {
+          c = 0;
+        }
+        if (d >= DMAP_IS_PASSABLE) {
+          d = 0;
+        }
+        if (f >= DMAP_IS_PASSABLE) {
+          f = 0;
+        }
+        if (g >= DMAP_IS_PASSABLE) {
+          g = 0;
+        }
+        if (h >= DMAP_IS_PASSABLE) {
+          h = 0;
+        }
+        if (i >= DMAP_IS_PASSABLE) {
+          i = 0;
+        }
+
+        if (a > b) {
+          highest = a;
+        } else {
+          highest = b;
+        }
+
+        if (c > highest) {
+          highest = c;
+        }
+        if (d > highest) {
+          highest = d;
+        }
+        if (f > highest) {
+          highest = f;
+        }
+        if (g > highest) {
+          highest = g;
+        }
+        if (h > highest) {
+          highest = h;
+        }
+        if (i > highest) {
+          highest = i;
+        }
+
+        if (highest - *e >= 2) {
+          *e      = highest - 1;
           changed = true;
         }
       }
