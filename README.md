@@ -704,11 +704,11 @@ Other content
 - 5 x rings
 - 5 x keys
 - 4 x traps
+- 4 x potions
 - 4 x gauntlets
 - 4 x cloaks
 - 4 x armor
 - 4 x amulets
-- 3 x potions
 - 3 x mobs
 - 3 x doors
 - 1 x player
