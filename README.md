@@ -15,7 +15,7 @@
 <!-- TODO Potion of Malevolent (when applied or thrown):                                                                                          -->
 <!-- TODO Potion of Paralysis - Produces a cloud of paraylsis gas.                                                                                -->
 <!-- TODO Potion of Speed - Increases your speed to twice normal, even if previously slowed.                                                      -->
-<!-- TODO Potion of Strength - Permanently increases you strength by one point. Cures weakness.                                                   -->
+<!-- DONE Potion of Strength - Permanently increases you strength by one point. Cures weakness.                                                   -->
 <!-- TODO Potion of Telepathy - Allows you to see the location of most enemies, and see whatever they can see.                                    -->
 <!-- TODO Runics on weapons, like vampirism, force, quietus, lightning                                                                            -->
 <!-- TODO Scroll of Aggravate Monsters                                                                                                            -->

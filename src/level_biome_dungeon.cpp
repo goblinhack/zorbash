@@ -1783,6 +1783,10 @@ void Level::create_biome_dungeon_place_fungus_withered(Dungeonp d)
           continue;
         }
 
+        if (is_obs_wall_or_door(x, y)) {
+          continue;
+        }
+
         //
         // Change mushroom type
         //
@@ -1814,6 +1818,10 @@ void Level::create_biome_dungeon_place_fungus_healing(Dungeonp d)
         }
 
         if (is_fungus(x, y)) {
+          continue;
+        }
+
+        if (is_obs_wall_or_door(x, y)) {
           continue;
         }
 
@@ -1851,6 +1859,10 @@ void Level::create_biome_dungeon_place_fungus_poison(Dungeonp d)
           continue;
         }
 
+        if (is_obs_wall_or_door(x, y)) {
+          continue;
+        }
+
         //
         // Change mushroom type
         //
@@ -1882,6 +1894,10 @@ void Level::create_biome_dungeon_place_fungus_edible(Dungeonp d)
         }
 
         if (is_fungus(x, y)) {
+          continue;
+        }
+
+        if (is_obs_wall_or_door(x, y)) {
           continue;
         }
 
