@@ -280,22 +280,28 @@ void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
       return;
     }
 
-    float dim                  = 0.5;
+    float dim                  = 0.8;
+    float light_contribution   = 0.5;
     color combined_light_color = combined_light.tocolor();
 
-    int r = (((float) c.r) * dim) + combined_light_color.r;
+    //
+    // Don't over dominate the original color, or things like red blood
+    // seem white when lit.
+    //
+
+    int r = (((float) c.r) * dim) + (((float) combined_light_color.r) * light_contribution);
     if (r > 255) {
       r = 255;
     }
     c.r = r;
 
-    int g = (((float) c.g) * dim) + combined_light_color.g;
+    int g = (((float) c.g) * dim) + (((float) combined_light_color.g) * light_contribution);
     if (g > 255) {
       g = 255;
     }
     c.g = g;
 
-    int b = (((float) c.b) * dim) + combined_light_color.b;
+    int b = (((float) c.b) * dim) + (((float) combined_light_color.b) * light_contribution);
     if (b > 255) {
       b = 255;
     }
