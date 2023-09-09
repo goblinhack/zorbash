@@ -83,9 +83,10 @@ void Level::tick_gas_poison(void)
   // Anything less than 9 will cause gas to spread more
   //
   int reduction;
-  if (pcg_random_range(0, 100) < 90) {
+  int roll = d100();
+  if (roll < 90) {
     reduction = 9;
-  } else if (pcg_random_range(0, 100) < 80) {
+  } else if (roll < 95) {
     reduction = 8;
   } else {
     reduction = 7;

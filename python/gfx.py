@@ -864,7 +864,7 @@ def init_tiles_16x16_main():
         "",
         "",
         "potion_invigoration",
-        "",
+        "potion_poison_gas",
         "",
         "",
         "",

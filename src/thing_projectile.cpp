@@ -193,7 +193,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &effect_name, T
 
   if (! projectile->is_projectile()) {
     if (is_player()) {
-      msg("I don't know how to shoot projectile: %s.", projectile->to_string().c_str());
+      msg("I don't know how to shoot projectile: %s.", projectile->text_long_name().c_str());
       game->tick_begin("player tried to use something they could not");
     } else {
       err("I don't know how to shoot projectile: %s.", projectile->to_string().c_str());

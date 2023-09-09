@@ -25,6 +25,10 @@ void Level::display_ascii_gas(point tl, point br, int16_t minx, int16_t miny, in
         if (intensity > 255) {
           intensity = 255;
         }
+        int alpha = 100 + intensity;
+        if (alpha > 255) {
+          alpha = 255;
+        }
 
         point p(x, y);
         int   tx = tl.x + (p.x - minx) - (MAP_BORDER_ROCK - 1);
@@ -34,7 +38,7 @@ void Level::display_ascii_gas(point tl, point br, int16_t minx, int16_t miny, in
 
         color c = LIMEGREEN;
         c       = color_change_hue(c, non_pcg_random_range(0, 50));
-        c.a     = intensity / 2;
+        c.a     = alpha;
         ascii_set(TILE_LAYER_FG_1, tx, ty, c);
       }
 
@@ -42,6 +46,10 @@ void Level::display_ascii_gas(point tl, point br, int16_t minx, int16_t miny, in
       if (intensity != 0) {
         if (intensity > 255) {
           intensity = 255;
+        }
+        int alpha = 100 + intensity;
+        if (alpha > 255) {
+          alpha = 255;
         }
 
         point p(x, y);
@@ -52,7 +60,7 @@ void Level::display_ascii_gas(point tl, point br, int16_t minx, int16_t miny, in
 
         color c = PINK;
         c       = color_change_hue(c, non_pcg_random_range(0, 50));
-        c.a     = intensity / 2;
+        c.a     = alpha;
         ascii_set(TILE_LAYER_FG_2, tx, ty, c);
       }
     }

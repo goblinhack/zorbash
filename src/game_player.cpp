@@ -91,13 +91,17 @@ void Game::place_player(void)
         auto w = level->thing_new("dagger", point(x, y));
         t->carry(w, carry_options);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("debuff_necrotized", point(x, y));
         t->debuff_add(w);
       }
       if (0) {
         auto w = level->thing_new("debuff_slow", point(x, y));
         t->debuff_add(w);
+      }
+      if (1) {
+        auto w = level->thing_new("potion_poison_gas", point(x, y));
+        t->carry(w, carry_options);
       }
       if (0) {
         auto w = level->thing_new("potion_strength", point(x, y));
@@ -632,9 +636,15 @@ void Game::place_player(void)
         // level->thing_new("cleaner", point(x + 2, y - 2));
       }
 
-      if (0) {
-        level->thing_new("door_secret", point(x + 2, y));
-        level->thing_new("door_metal", point(x + 2, y));
+      if (1) {
+        level->thing_new("wall_dungeon.1", point(x, y - 2));
+        level->thing_new("wall_dungeon.1", point(x - 1, y - 2));
+        level->thing_new("wall_dungeon.1", point(x + 1, y - 2));
+        level->thing_new("door_metal", point(x + 2, y - 2));
+        level->thing_new("wall_dungeon.1", point(x + 3, y - 2));
+        level->thing_new("wall_dungeon.1", point(x + 4, y - 2));
+        level->thing_new("wall_dungeon.1", point(x + 4, y - 2));
+        level->thing_new("key", point(x + 5, y));
         // d->dead("killed");
       }
       // level->thing_new("golem_flesh", point(x + 1, y + 3));

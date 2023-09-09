@@ -214,7 +214,11 @@ bool Thing::throw_at(Thingp what, Thingp target)
     FOR_ALL_THINGS_END()
   } else {
     if (is_player()) {
-      msg("You throw %s at %s", what->text_the().c_str(), target->to_string().c_str());
+      if (target->is_cursor()) {
+        msg("You throw %s at the ground", what->text_the().c_str());
+      } else {
+        msg("You throw %s at %s", what->text_the().c_str(), target->text_the().c_str());
+      }
     }
   }
 

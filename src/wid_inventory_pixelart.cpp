@@ -367,6 +367,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=red$Spent");
         y_at += 3;
+
       } else if (! item->gfx_targeted_laser().empty()) {
         TRACE_AND_INDENT();
         auto p = wid_inventory_window;
@@ -379,6 +380,20 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
         wid_set_pos(w, tl, br);
         wid_set_text(w, "Use (choose target)");
         y_at += 3;
+
+      } else if (item->is_potion()) {
+        TRACE_AND_INDENT();
+        auto p = wid_inventory_window;
+        auto w = wid_new_square_button(p, "Use (drink)");
+
+        point tl = make_point(x_off, y_at);
+        point br = make_point(x_off + width, y_at + 2);
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
+        wid_set_on_mouse_up(w, wid_inventory_item_option_use);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "Use (drink)");
+        y_at += 3;
+
       } else {
         //
         // For example boots of teleport

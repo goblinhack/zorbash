@@ -387,6 +387,22 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
         wid_set_text(w, "Use (choose target)");
         y_at += 2;
 
+      } else if (item->is_potion()) {
+        TRACE_AND_INDENT();
+        auto p = wid_inventory_window;
+        auto w = wid_new_square_button(p, "Use (drink)");
+
+        point tl = make_point(x_off, y_at);
+        point br = make_point(x_off + width, y_at);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_style(w, box_highlight_style);
+        wid_set_mode(w, WID_MODE_NORMAL);
+        wid_set_style(w, box_style);
+        wid_set_on_mouse_up(w, wid_inventory_item_option_use);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "Use (drink)");
+        y_at += 2;
+
       } else {
         //
         // For example boots of teleport or an enchantstone

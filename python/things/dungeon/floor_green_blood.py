@@ -34,16 +34,16 @@ def tp_init(name, text_long_name):
     # end sort marker
 
     my.tile(self,
-            ascii_fg_char="_", ascii_bg_col_name="", ascii_fg_col_name="green",
+            ascii_fg_char="three_dots", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name + ".100", is_hp_100_percent=True)
     my.tile(self,
-            ascii_fg_char="_", ascii_bg_col_name="", ascii_fg_col_name="green",
+            ascii_fg_char="three_dots", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name + ".75", is_hp_75_percent=True)
     my.tile(self,
-            ascii_fg_char="_", ascii_bg_col_name="", ascii_fg_col_name="green",
+            ascii_fg_char="three_dots", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name + ".50", is_hp_50_percent=True)
     my.tile(self,
-            ascii_fg_char="_", ascii_bg_col_name="", ascii_fg_col_name="green",
+            ascii_fg_char="three_dots", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name + ".25", is_hp_25_percent=True)
 
     my.tp_update(self)

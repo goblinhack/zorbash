@@ -41,7 +41,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_interesting(self, True)
     my.is_obs_spawn_monst(self, True)
     my.is_only_one_per_tile(self, True)
-    my.light_color(self, "yellow")
+    my.light_color(self, "white")
     my.light_dist(self, 3)
     my.normal_placement_rules(self, True)
     my.on_get_text_description_long_do(self, "me.on_get_text_description_long()")
