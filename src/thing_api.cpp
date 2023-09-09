@@ -641,10 +641,10 @@ int Thing::is_unused_flag87(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag87());
 }
-int Thing::is_unused_flag88(void)
+int Thing::is_able_to_see_in_magical_darkness(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag88());
+  return (tp()->is_able_to_see_in_magical_darkness());
 }
 int Thing::is_shootable(void)
 {

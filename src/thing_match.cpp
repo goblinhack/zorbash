@@ -98,6 +98,7 @@ bool Tp::matches(const std::string &what)
   if (is_able_to_regenerate() && (what == "is_able_to_regenerate")) { return true; }
   if (is_able_to_rest() && (what == "is_able_to_rest")) { return true; }
   if (is_able_to_run_away_after_stealing() && (what == "is_able_to_run_away_after_stealing")) { return true; }
+  if (is_able_to_see_in_magical_darkness() && (what == "is_able_to_see_in_magical_darkness")) { return true; }
   if (is_able_to_see_in_the_dark() && (what == "is_able_to_see_in_the_dark")) { return true; }
   if (is_able_to_see_invisible() && (what == "is_able_to_see_invisible")) { return true; }
   if (is_able_to_see_through_doors() && (what == "is_able_to_see_through_doors")) { return true; }
@@ -555,7 +556,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag85() && (what == "is_unused_flag85")) { return true; }
   if (is_unused_flag86() && (what == "is_unused_flag86")) { return true; }
   if (is_unused_flag87() && (what == "is_unused_flag87")) { return true; }
-  if (is_unused_flag88() && (what == "is_unused_flag88")) { return true; }
   if (is_unused_flag8() && (what == "is_unused_flag8")) { return true; }
   if (is_unused_flag9() && (what == "is_unused_flag9")) { return true; }
   if (is_usable() && (what == "is_usable")) { return true; }
@@ -698,6 +698,7 @@ bool Thing::matches(const std::string &what)
   if (is_able_to_regenerate() && (what == "is_able_to_regenerate")) { return true; }
   if (is_able_to_rest() && (what == "is_able_to_rest")) { return true; }
   if (is_able_to_run_away_after_stealing() && (what == "is_able_to_run_away_after_stealing")) { return true; }
+  if (is_able_to_see_in_magical_darkness() && (what == "is_able_to_see_in_magical_darkness")) { return true; }
   if (is_able_to_see_in_the_dark() && (what == "is_able_to_see_in_the_dark")) { return true; }
   if (is_able_to_see_invisible() && (what == "is_able_to_see_invisible")) { return true; }
   if (is_able_to_see_through_doors() && (what == "is_able_to_see_through_doors")) { return true; }
@@ -1158,7 +1159,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag85() && (what == "is_unused_flag85")) { return true; }
   if (is_unused_flag86() && (what == "is_unused_flag86")) { return true; }
   if (is_unused_flag87() && (what == "is_unused_flag87")) { return true; }
-  if (is_unused_flag88() && (what == "is_unused_flag88")) { return true; }
   if (is_unused_flag8() && (what == "is_unused_flag8")) { return true; }
   if (is_unused_flag9() && (what == "is_unused_flag9")) { return true; }
   if (is_usable() && (what == "is_usable")) { return true; }
@@ -1298,6 +1298,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_able_to_regenerate") { return &Thing::is_able_to_regenerate; }
   if (what == "is_able_to_rest") { return &Thing::is_able_to_rest; }
   if (what == "is_able_to_run_away_after_stealing") { return &Thing::is_able_to_run_away_after_stealing; }
+  if (what == "is_able_to_see_in_magical_darkness") { return &Thing::is_able_to_see_in_magical_darkness; }
   if (what == "is_able_to_see_in_the_dark") { return &Thing::is_able_to_see_in_the_dark; }
   if (what == "is_able_to_see_invisible") { return &Thing::is_able_to_see_invisible; }
   if (what == "is_able_to_see_through_doors") { return &Thing::is_able_to_see_through_doors; }
@@ -1749,7 +1750,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag85") { return &Thing::is_unused_flag85; }
   if (what == "is_unused_flag86") { return &Thing::is_unused_flag86; }
   if (what == "is_unused_flag87") { return &Thing::is_unused_flag87; }
-  if (what == "is_unused_flag88") { return &Thing::is_unused_flag88; }
   if (what == "is_unused_flag8") { return &Thing::is_unused_flag8; }
   if (what == "is_unused_flag9") { return &Thing::is_unused_flag9; }
   if (what == "is_usable") { return &Thing::is_usable; }

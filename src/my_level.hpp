@@ -27,6 +27,8 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX * DUNGEON_GAS_RESOLUTION >, MAP_WIDTH_MAX * DUNGEON_GAS_RESOLUTION >
       gas_poison_cloud {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX * DUNGEON_GAS_RESOLUTION >, MAP_WIDTH_MAX * DUNGEON_GAS_RESOLUTION >
+      darkness_cloud {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX * DUNGEON_GAS_RESOLUTION >, MAP_WIDTH_MAX * DUNGEON_GAS_RESOLUTION >
       gas_healing_cloud {};
 
   std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_gas_blocker {};
@@ -70,6 +72,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_currently_pixelart_raycast_lit {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_cursor_path_blocker {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_cursor_path_hazard {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_darkness {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_deep_water {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_descend_dungeon {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_descend_sewer {};
@@ -236,6 +239,13 @@ public:
   bool is_map_mini_valid {};
   bool is_starting {}; // Loading level
   bool is_entered_by_falling {};
+
+  //
+  // If there is no gas, skip the expensive display routines
+  //
+  bool display_darkness {};
+  bool display_gas_poison {};
+  bool display_gas_healing {};
 
   point cursor_at;
   point cursor_old;
@@ -905,6 +915,10 @@ public:
   uint8_t is_cursor_path_blocker(Thingp, const point p);
   uint8_t is_cursor_path_hazard(const int x, const int y);
   uint8_t is_cursor_path_hazard(const point p);
+  uint8_t is_darkness(const int x, const int y) const;
+  uint8_t is_darkness(const point p) const;
+  uint8_t is_darkness_no_check(const int x, const int y) const;
+  uint8_t is_darkness_no_check(const point p) const;
   uint8_t is_deep_water(const int x, const int y);
   uint8_t is_deep_water(const point p);
   uint8_t is_descend_dungeon(const int x, const int y);
@@ -1139,6 +1153,7 @@ public:
   void display_map(void);
   void display_pixelart_basalt(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);
   void display_pixelart_blood(void);
+  void display_pixelart_darkness(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);
   void display_pixelart_deep_water(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);
   void display_pixelart_external_particles(void);
   void display_pixelart_fade_in(void);
@@ -1233,6 +1248,10 @@ public:
   void is_cursor_path_blocker_unset(const int x, const int y);
   void is_cursor_path_hazard_set(const int x, const int y);
   void is_cursor_path_hazard_unset(const int x, const int y);
+  void is_darkness_no_check_set(const int x, const int y, uint8_t val);
+  void is_darkness_no_check_unset(const int x, const int y);
+  void is_darkness_set(const int x, const int y, uint8_t val);
+  void is_darkness_unset(const int x, const int y);
   void is_deep_water_set(const int x, const int y);
   void is_deep_water_unset(const int x, const int y);
   void is_descend_dungeon_set(const int x, const int y);
@@ -1434,6 +1453,7 @@ public:
   void things_gc_if_possible(void);
   void things_tick(void);
   void tick_begin_now(void);
+  void tick_darkness(void);
   void tick_gas_healing(void);
   void tick_gas_poison(void);
   void tick(void);

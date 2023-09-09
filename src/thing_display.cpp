@@ -84,7 +84,9 @@ bool Thing::blit_outline_should_be_shown(color &outline_color)
     if (tile_curr) {
       auto tile = tile_index_to_tile(tile_curr);
       if (tile && tile->is_invisible) {
-        if (level && (level->is_gas_poison(curr_at.x, curr_at.y) || level->is_gas_healing(curr_at.x, curr_at.y))) {
+        if (level
+            && (level->is_gas_poison(curr_at.x, curr_at.y) || level->is_darkness(curr_at.x, curr_at.y)
+                || level->is_gas_healing(curr_at.x, curr_at.y))) {
           is_invisible_show_outline = true;
         }
       }

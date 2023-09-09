@@ -14,6 +14,7 @@ PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_set_fire_to_things_around_me(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_things_around_me(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *spawn_darkness_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_gas_healing_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -279,6 +280,7 @@ TP_SET_PROTO(is_able_to_rage)
 TP_SET_PROTO(is_able_to_regenerate)
 TP_SET_PROTO(is_able_to_rest)
 TP_SET_PROTO(is_able_to_run_away_after_stealing)
+TP_SET_PROTO(is_able_to_see_in_magical_darkness)
 TP_SET_PROTO(is_able_to_see_in_the_dark)
 TP_SET_PROTO(is_able_to_see_invisible)
 TP_SET_PROTO(is_able_to_see_through_doors)
@@ -758,7 +760,6 @@ TP_SET_PROTO(is_unused_flag84)
 TP_SET_PROTO(is_unused_flag85)
 TP_SET_PROTO(is_unused_flag86)
 TP_SET_PROTO(is_unused_flag87)
-TP_SET_PROTO(is_unused_flag88)
 TP_SET_PROTO(is_unused_flag9)
 TP_SET_PROTO(is_usable)
 TP_SET_PROTO(is_used_when_thrown)

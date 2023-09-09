@@ -33,6 +33,8 @@ void Level::tick_gas_healing(void)
 
   old_gas_healing_cloud = gas_healing_cloud;
 
+  display_gas_healing = false;
+
   TRACE_NO_INDENT();
   for (auto x = 0; x < MAP_WIDTH; x++) {
     for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -152,6 +154,10 @@ void Level::tick_gas_healing(void)
 
       uint8_t nn = (ga + gb + gc + gd + ge + gf + gg + gh + gi) / reduction;
       set_no_check(gas_healing_cloud, x, y, nn);
+
+      if (nn) {
+        display_gas_healing = true;
+      }
     }
   }
 

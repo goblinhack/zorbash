@@ -700,11 +700,11 @@ Other content
 - 7 x debuffs
 - 6 x staffs
 - 6 x shield
+- 6 x potions
 - 6 x boots
 - 5 x rings
 - 5 x keys
 - 4 x traps
-- 4 x potions
 - 4 x gauntlets
 - 4 x cloaks
 - 4 x armor

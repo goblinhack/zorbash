@@ -296,6 +296,7 @@ private:
   int _is_able_to_regenerate {};
   int _is_able_to_rest {};
   int _is_able_to_run_away_after_stealing {};
+  int _is_able_to_see_in_magical_darkness {};
   int _is_able_to_see_in_the_dark {};
   int _is_able_to_see_invisible {};
   int _is_able_to_see_through_doors {};
@@ -771,7 +772,6 @@ private:
   int _is_unused_flag85 {};
   int _is_unused_flag86 {};
   int _is_unused_flag87 {};
-  int _is_unused_flag88 {};
   int _is_unused_flag9 {};
   int _is_usable {};
   int _is_used_when_thrown {};
@@ -1648,6 +1648,7 @@ public:
   int is_able_to_regenerate(void) const;
   int is_able_to_rest(void) const;
   int is_able_to_run_away_after_stealing(void) const;
+  int is_able_to_see_in_magical_darkness(void) const;
   int is_able_to_see_in_the_dark(void) const;
   int is_able_to_see_invisible(void) const;
   int is_able_to_see_through_doors(void) const;
@@ -2121,7 +2122,6 @@ public:
   int is_unused_flag85(void) const;
   int is_unused_flag86(void) const;
   int is_unused_flag87(void) const;
-  int is_unused_flag88(void) const;
   int is_unused_flag8(void) const;
   int is_unused_flag9(void) const;
   int is_usable(void) const;
@@ -2416,6 +2416,7 @@ public:
   void is_able_to_regenerate_set(int v);
   void is_able_to_rest_set(int v);
   void is_able_to_run_away_after_stealing_set(int v);
+  void is_able_to_see_in_magical_darkness_set(int v);
   void is_able_to_see_in_the_dark_set(int v);
   void is_able_to_see_invisible_set(int v);
   void is_able_to_see_through_doors_set(int v);
@@ -2890,7 +2891,6 @@ public:
   void is_unused_flag85_set(int v);
   void is_unused_flag86_set(int v);
   void is_unused_flag87_set(int v);
-  void is_unused_flag88_set(int v);
   void is_unused_flag8_set(int v);
   void is_unused_flag9_set(int v);
   void is_usable_set(int v);

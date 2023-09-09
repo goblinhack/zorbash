@@ -388,6 +388,7 @@ int Tp::is_able_to_rage(void) const { return _is_able_to_rage; }
 int Tp::is_able_to_regenerate(void) const { return _is_able_to_regenerate; }
 int Tp::is_able_to_rest(void) const { return _is_able_to_rest; }
 int Tp::is_able_to_run_away_after_stealing(void) const { return _is_able_to_run_away_after_stealing; }
+int Tp::is_able_to_see_in_magical_darkness(void) const { return _is_able_to_see_in_magical_darkness; }
 int Tp::is_able_to_see_in_the_dark(void) const { return _is_able_to_see_in_the_dark; }
 int Tp::is_able_to_see_invisible(void) const { return _is_able_to_see_invisible; }
 int Tp::is_able_to_see_through_doors(void) const { return _is_able_to_see_through_doors; }
@@ -860,7 +861,6 @@ int Tp::is_unused_flag84(void) const { return _is_unused_flag84; }
 int Tp::is_unused_flag85(void) const { return _is_unused_flag85; }
 int Tp::is_unused_flag86(void) const { return _is_unused_flag86; }
 int Tp::is_unused_flag87(void) const { return _is_unused_flag87; }
-int Tp::is_unused_flag88(void) const { return _is_unused_flag88; }
 int Tp::is_unused_flag8(void) const { return _is_unused_flag8; }
 int Tp::is_unused_flag9(void) const { return _is_unused_flag9; }
 int Tp::is_usable(void) const { return _is_usable; }
@@ -1155,6 +1155,7 @@ void Tp::is_able_to_rage_set(int v) { _is_able_to_rage = v; }
 void Tp::is_able_to_regenerate_set(int v) { _is_able_to_regenerate = v; }
 void Tp::is_able_to_rest_set(int v) { _is_able_to_rest = v; }
 void Tp::is_able_to_run_away_after_stealing_set(int v) { _is_able_to_run_away_after_stealing = v; }
+void Tp::is_able_to_see_in_magical_darkness_set(int v) { _is_able_to_see_in_magical_darkness = v; }
 void Tp::is_able_to_see_in_the_dark_set(int v) { _is_able_to_see_in_the_dark = v; }
 void Tp::is_able_to_see_invisible_set(int v) { _is_able_to_see_invisible = v; }
 void Tp::is_able_to_see_through_doors_set(int v) { _is_able_to_see_through_doors = v; }
@@ -1628,7 +1629,6 @@ void Tp::is_unused_flag84_set(int v) { _is_unused_flag84 = v; }
 void Tp::is_unused_flag85_set(int v) { _is_unused_flag85 = v; }
 void Tp::is_unused_flag86_set(int v) { _is_unused_flag86 = v; }
 void Tp::is_unused_flag87_set(int v) { _is_unused_flag87 = v; }
-void Tp::is_unused_flag88_set(int v) { _is_unused_flag88 = v; }
 void Tp::is_unused_flag8_set(int v) { _is_unused_flag8 = v; }
 void Tp::is_unused_flag9_set(int v) { _is_unused_flag9 = v; }
 void Tp::is_usable_set(int v) { _is_usable = v; }

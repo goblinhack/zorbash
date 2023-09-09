@@ -584,6 +584,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->ts_fade_out_begin);
   out << bits(my.t->ts_fade_in_begin);
 
+  out << bits(my.t->darkness_cloud);
   out << bits(my.t->gas_poison_cloud);
   out << bits(my.t->gas_healing_cloud);
 

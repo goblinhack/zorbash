@@ -186,6 +186,7 @@ PyObject *thing_is_able_to_open_doors(PyObject *obj, PyObject *args, PyObject *k
 PyObject *thing_is_able_to_regenerate(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_rest(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_run_away_after_stealing(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_see_in_magical_darkness(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_see_in_the_dark(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_see_invisible(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_see_through_doors(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -377,8 +378,6 @@ PyObject *thing_is_fungus(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_fungus_withered(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_gas_blocker(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_gas_explosion_blocker(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_gas_healing(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_gas_poison(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_gauntlet(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_gelatinous(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_glass(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -671,7 +670,6 @@ PyObject *thing_is_unused_flag84(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag85(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag86(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag87(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag88(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag9(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_usable(PyObject *obj, PyObject *args, PyObject *keywds);

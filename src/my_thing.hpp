@@ -672,6 +672,7 @@ public:
   bool skillbox_id_remove(Thingp what);
   bool skill_remove(Thingp it);
   bool skill_use(Thingp it);
+  bool spawn_darkness_around_thing(int radius);
   bool spawn_gas_healing_around_thing(int radius);
   bool spawn_gas_poison_around_thing(int radius);
   bool spawn_next_to(const std::string &what);
@@ -1417,6 +1418,7 @@ public:
   int is_able_to_regenerate(void);
   int is_able_to_rest(void);
   int is_able_to_run_away_after_stealing(void);
+  int is_able_to_see_in_magical_darkness(void);
   int is_able_to_see_in_the_dark(void);
   int is_able_to_see_invisible(void);
   int is_able_to_see_through_doors(void);
@@ -1917,7 +1919,6 @@ public:
   int is_unused_flag85(void);
   int is_unused_flag86(void);
   int is_unused_flag87(void);
-  int is_unused_flag88(void);
   int is_unused_flag8(void);
   int is_unused_flag9(void);
   int is_usable(void);

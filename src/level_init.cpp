@@ -35,6 +35,7 @@ void Level::clear(void)
   _is_corpse                         = {};
   _is_corridor                       = {};
   _is_currently_pixelart_raycast_lit = {};
+  _is_darkness                       = {};
   _is_deep_water                     = {};
   _is_descend_dungeon                = {};
   _is_descend_sewer                  = {};
