@@ -453,16 +453,14 @@ void Level::display_pixelart_map_all(void)
     //
     display_pixelart_internal_particles();
 
-    if (0) {
-      if (display_gas_healing) {
-        display_pixelart_gas_poison(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
-      }
-      if (display_gas_poison) {
-        display_pixelart_gas_healing(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
-      }
-      if (display_darkness) {
-        display_pixelart_darkness(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
-      }
+    if (display_gas_healing) {
+      display_pixelart_gas_poison(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
+    }
+    if (display_gas_poison) {
+      display_pixelart_gas_healing(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
+    }
+    if (display_darkness) {
+      display_pixelart_darkness(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
     }
 
     IF_NODEBUG2

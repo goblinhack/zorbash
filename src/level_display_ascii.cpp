@@ -166,7 +166,6 @@ void Level::display_ascii_map(point tl, point br)
 {
   TRACE_NO_INDENT();
 
-  return;
   if (! should_display_map()) {
     return;
   }
