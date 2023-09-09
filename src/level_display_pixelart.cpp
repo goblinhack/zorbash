@@ -463,6 +463,9 @@ void Level::display_pixelart_map_all(void)
       display_pixelart_darkness(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
     }
 
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glcolor(WHITE);
+
     IF_NODEBUG2
     {
       glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);

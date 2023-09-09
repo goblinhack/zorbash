@@ -153,6 +153,9 @@ void Level::display_pixelart_gas_poison(int fbo, int16_t minx, int16_t miny, int
   c.a     = 150;
   glcolor(c);
   blit_fbo(fbo_mask2);
+
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glcolor(WHITE);
 }
 
 void Level::display_pixelart_gas_healing(int fbo, int16_t minx, int16_t miny, int16_t maxx, int16_t maxy)
@@ -302,6 +305,9 @@ void Level::display_pixelart_gas_healing(int fbo, int16_t minx, int16_t miny, in
   c.a     = 150;
   glcolor(c);
   blit_fbo(fbo_mask2);
+
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glcolor(WHITE);
 }
 
 void Level::display_pixelart_darkness(int fbo, int16_t minx, int16_t miny, int16_t maxx, int16_t maxy)
@@ -451,4 +457,7 @@ void Level::display_pixelart_darkness(int fbo, int16_t minx, int16_t miny, int16
   c.a     = 150;
   glcolor(c);
   blit_fbo(fbo_mask2);
+
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glcolor(WHITE);
 }
