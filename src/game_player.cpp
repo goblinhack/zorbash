@@ -99,7 +99,7 @@ void Game::place_player(void)
         auto w = level->thing_new("debuff_slow", point(x, y));
         t->debuff_add(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("potion_poison_gas", point(x, y));
         t->carry(w, carry_options);
       }
@@ -636,7 +636,7 @@ void Game::place_player(void)
         // level->thing_new("cleaner", point(x + 2, y - 2));
       }
 
-      if (1) {
+      if (0) {
         level->thing_new("wall_dungeon.1", point(x, y - 2));
         level->thing_new("wall_dungeon.1", point(x - 1, y - 2));
         level->thing_new("wall_dungeon.1", point(x + 1, y - 2));
