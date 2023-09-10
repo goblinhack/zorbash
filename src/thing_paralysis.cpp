@@ -32,6 +32,7 @@ void Thing::paralysis_update(void)
   }
 
   if (paralysis_count()) {
+    clear_move_path("paralysis");
     dbg("Is paralysed");
   }
 }

@@ -54,6 +54,7 @@ void Level::clear(void)
   _is_gas_blocker                    = {};
   _is_gas_explosion_blocker          = {};
   _is_gas_healing                    = {};
+  _is_gas_paralysis                  = {};
   _is_gas_poison                     = {};
   _is_gold                           = {};
   _is_grass_dry                      = {};

@@ -165,6 +165,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->tick_last_escape);
    in >> bits(my.t->tick_last_gas_healing_exposure);
    in >> bits(my.t->tick_last_gas_poison_exposure);
+   in >> bits(my.t->tick_last_gas_paralysis_exposure);
    in >> bits(my.t->tick_last_i_attacked);
    in >> bits(my.t->tick_last_i_tried_to_attack);
    in >> bits(my.t->tick_last_i_was_attacked);
@@ -627,6 +628,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
 
   in >> bits(my.t->darkness_cloud);
   in >> bits(my.t->gas_poison_cloud);
+  in >> bits(my.t->gas_paralysis_cloud);
   in >> bits(my.t->gas_healing_cloud);
 
   // begin sort marker5 {

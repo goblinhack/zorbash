@@ -100,12 +100,12 @@ void Game::place_player(void)
         auto w = level->thing_new("debuff_slow", point(x, y));
         t->debuff_add(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("potion_darkness", point(x, y));
         level->thing_new("dogman", point(x + 2, y));
         t->carry(w, carry_options);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("potion_gas_poison", point(x, y));
         t->carry(w, carry_options);
       }
@@ -280,13 +280,14 @@ void Game::place_player(void)
       }
 
       if (0) {
+        level->thing_new("trap_pressure_plate_gas2", point(x - 2, y));
         level->thing_new("trap_paralysis", point(x - 2, y));
         level->thing_new("wall_dungeon.1", point(x - 2, y + 2));
         level->thing_new("wall_dungeon.1", point(x - 1, y + 2));
         level->thing_new("wall_dungeon.1", point(x, y + 2));
         level->thing_new("wall_dungeon.1", point(x + 1, y + 2));
         level->thing_new("wall_dungeon.1", point(x + 2, y + 2));
-        level->thing_new("trap_pressure_plate_gas", point(x - 2, y));
+        level->thing_new("trap_pressure_plate_gas1", point(x - 2, y));
         level->thing_new("rat_large", point(x + 1, y + 3));
         level->thing_new("trap_monster", point(x - 2, y));
       }

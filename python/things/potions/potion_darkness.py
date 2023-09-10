@@ -14,7 +14,7 @@ def on_use(owner, item, target, x, y):
             my.thing_msg(owner, "The darkness envelops you!")
             my.thing_blinded_count_incr(owner, 30)
             my.thing_popup(owner, "!!!")
-    for it in my.level_flood_fill_get_all_grid_things(item, x, y, 3):
+    for it in my.level_flood_fill_gas_get_all_grid_things(item, x, y, 3):
         my.spawn_darkness_around_thing(it, 1)
     my.thing_dead(item, "broken")
 
@@ -32,7 +32,7 @@ def shatters(item, target, x, y):
     else:
         my.thing_msg(item, "The potion of darkness shatters.")
 
-    for it in my.level_flood_fill_get_all_grid_things(item, x, y, 3):
+    for it in my.level_flood_fill_gas_get_all_grid_things(item, x, y, 3):
         my.spawn_darkness_around_thing(it, 1)
     my.thing_dead(item, "broken")
 
@@ -102,7 +102,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_use_do(self, "me.on_use()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "A bubbling black elixir that will spawn a cloud of utter darkness when opened. Use this cloud to escape your enemies. Or to get thoroughly lost.")
+    my.text_description_long(self, "A bubbling black elixir that will spawn a thick gas cloud of utter darkness when opened. Use this cloud to escape your enemies. Or to get thoroughly lost.")
+    my.text_description_long2(self, "The darkness is so profound that not even other gasses may co-exist in the same tile.")
     my.text_description_short(self, "A potion of darkness.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)

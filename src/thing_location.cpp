@@ -173,6 +173,7 @@ void Thing::location_check(Thingp filter_to)
   //
   if (! filter_to) {
     gas_poison_tick();
+    gas_paralysis_tick();
     gas_healing_tick();
   }
 

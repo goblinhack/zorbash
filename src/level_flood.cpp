@@ -283,3 +283,79 @@ std::deque< Thingp > Level::flood_fill_grid_things(point p, int dist)
 
   return out;
 }
+
+std::deque< Thingp > Level::flood_fill_gas_grid_things(point p, int dist)
+{
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > walked = {};
+  std::array< std::array< bool, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > pushed = {};
+  std::deque< point >                                             in;
+  std::deque< Thingp >                                            out;
+
+  auto start = p;
+
+  in.push_back(p);
+  set(pushed, p.x, p.y, true);
+
+  while (! in.empty()) {
+    auto p = in.front();
+    in.pop_front();
+
+    if (get(walked, p.x, p.y)) {
+      continue;
+    }
+    set(walked, p.x, p.y, true);
+
+    if (is_gas_blocker(p)) {
+      continue;
+    }
+
+    if (distance(start, p) > dist) {
+      continue;
+    }
+
+    bool got_one = false;
+    TRACE_NO_INDENT();
+    FOR_ALL_GRID_THINGS(this, t, p.x, p.y)
+    {
+      out.push_back(t);
+      got_one = true;
+      break;
+    }
+    TRACE_NO_INDENT();
+    FOR_ALL_THINGS_END()
+
+    if (! got_one) {
+      continue;
+    }
+
+    if (p.x <= MAP_WIDTH - MAP_BORDER_ROCK) {
+      if (! get(pushed, p.x + 1, p.y)) {
+        set(pushed, p.x + 1, p.y, true);
+        in.push_back(point(p.x + 1, p.y));
+      }
+    }
+
+    if (p.x >= MAP_BORDER_ROCK) {
+      if (! get(pushed, p.x - 1, p.y)) {
+        set(pushed, p.x - 1, p.y, true);
+        in.push_back(point(p.x - 1, p.y));
+      }
+    }
+
+    if (p.y <= MAP_HEIGHT - MAP_BORDER_ROCK) {
+      if (! get(pushed, p.x, p.y + 1)) {
+        set(pushed, p.x, p.y + 1, true);
+        in.push_back(point(p.x, p.y + 1));
+      }
+    }
+
+    if (p.y >= MAP_BORDER_ROCK) {
+      if (! get(pushed, p.x, p.y - 1)) {
+        set(pushed, p.x, p.y - 1, true);
+        in.push_back(point(p.x, p.y - 1));
+      }
+    }
+  }
+
+  return out;
+}

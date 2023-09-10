@@ -11631,6 +11631,22 @@ def init_tiles_32x32_surface_effects():
         "darkness.14",
         "darkness.15",
         "darkness.16",
+        "gas_paralysis.1",
+        "gas_paralysis.2",
+        "gas_paralysis.3",
+        "gas_paralysis.4",
+        "gas_paralysis.5",
+        "gas_paralysis.6",
+        "gas_paralysis.7",
+        "gas_paralysis.8",
+        "gas_paralysis.9",
+        "gas_paralysis.10",
+        "gas_paralysis.11",
+        "gas_paralysis.12",
+        "gas_paralysis.13",
+        "gas_paralysis.14",
+        "gas_paralysis.15",
+        "gas_paralysis.16",
     ]
 
     my.tile_load_arr_sprites(

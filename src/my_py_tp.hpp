@@ -14,6 +14,7 @@ PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_set_fire_to_things_around_me(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_things_around_me(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *spawn_gas_paralysis_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_darkness_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_gas_healing_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *keywds);

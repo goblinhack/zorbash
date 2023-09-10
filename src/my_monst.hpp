@@ -234,6 +234,10 @@ public:
   //
   int tick_last_gas_poison_exposure {-1 /* std::numeric_limits< uint32_t >::max() */};
   //
+  // Last time we had to hold our breath
+  //
+  int tick_last_gas_paralysis_exposure {-1 /* std::numeric_limits< uint32_t >::max() */};
+  //
   // Last time we were healed by gas
   //
   int tick_last_gas_healing_exposure {-1 /* std::numeric_limits< uint32_t >::max() */};

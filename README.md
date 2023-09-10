@@ -1,21 +1,21 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- DONE Potion of Caustic Gas - Produces a cloud of damaging caustic gas.                                                                       -->
+<!-- DONE Potion of Darkness - Produces a cloud of darkness that obscures an area of the dungeon.                                                 -->
+<!-- DONE Potion of Invisibility - Reduces you stealth radius considerably.                                                                       -->
+<!-- DONE Potion of Life - Restores full health and increases maximum health. Cures most status ailments.                                         -->
+<!-- DONE Potion of Strength - Permanently increases you strength by one point. Cures weakness.                                                   -->
+<!-- TODO Potion of Paralysis - Produces a cloud of paraylsis gas.                                                                                -->
 <!-- TODO Potion of Confusion - Produces a cloud of confusion gas.                                                                                -->
 <!-- TODO Potion of Creeping Death - Unleashes a spreading fungus that inflicts poisoning when stepped upon.                                      -->
-<!-- DONE Potion of Darkness - Produces a cloud of darkness that obscures an area of the dungeon.                                                 -->
 <!-- TODO Potion of Descent - Instantly erodes an area of the floor. Nearby monsters/objects will fall to the next level.                         -->
 <!-- TODO Potion of Detect Magic - Soft-IDs all inventory items. Soft-ID's and locates magic items on the current level.                          -->
 <!-- TODO Potion of Fire Immunity - Make you immune to fire/burning/lava, but not explosions.                                                     -->
 <!-- TODO Potion of Hallucination - Causes long term hal                                                                                          -->
 <!-- TODO Potion of Incineration - Bursts into cloud of flames. Sets nearby monsters and terrain on fire.                                         -->
-<!-- DONE Potion of Invisibility - Reduces you stealth radius considerably.                                                                       -->
 <!-- TODO Potion of Levitation - Causes you to float, Useful for escaping and crossing dangerous terrains.                                        -->
-<!-- DONE Potion of Life - Restores full health and permantely increases maximum health. Cures most status ailments.                              -->
 <!-- TODO Potion of Malevolent (when applied or thrown):                                                                                          -->
-<!-- TODO Potion of Paralysis - Produces a cloud of paraylsis gas.                                                                                -->
 <!-- TODO Potion of Speed - Increases your speed to twice normal, even if previously slowed.                                                      -->
-<!-- DONE Potion of Strength - Permanently increases you strength by one point. Cures weakness.                                                   -->
 <!-- TODO Potion of Telepathy - Allows you to see the location of most enemies, and see whatever they can see.                                    -->
 <!-- TODO Runics on weapons, like vampirism, force, quietus, lightning                                                                            -->
 <!-- TODO Scroll of Aggravate Monsters                                                                                                            -->
@@ -698,11 +698,11 @@ Other content
 - 14 x buffs
 - 11 x skills
 - 8 x debuffs
+- 6 x traps
 - 6 x staffs
 - 6 x shield
 - 6 x potions
 - 6 x boots
-- 5 x traps
 - 5 x rings
 - 5 x keys
 - 4 x gauntlets

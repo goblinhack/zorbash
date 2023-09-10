@@ -14,7 +14,7 @@ def on_use(owner, item, target, x, y):
             my.thing_msg(owner, "The poison gas fills your lungs!")
             roll = my.py_d20()
             my.thing_hit_dmg_poison(item, item, owner, roll)
-    for it in my.level_flood_fill_get_all_grid_things(item, x, y, 0):
+    for it in my.level_flood_fill_gas_get_all_grid_things(item, x, y, 0):
         my.spawn_gas_poison_around_thing(it, 1)
     my.thing_dead(item, "broken")
 
@@ -32,7 +32,7 @@ def shatters(item, target, x, y):
     else:
         my.thing_msg(item, "The potion of poison gas shatters.")
 
-    for it in my.level_flood_fill_get_all_grid_things(item, x, y, 3):
+    for it in my.level_flood_fill_gas_get_all_grid_things(item, x, y, 3):
         my.spawn_gas_poison_around_thing(it, 1)
     my.thing_dead(item, "broken")
 

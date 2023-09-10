@@ -387,7 +387,9 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
 #endif
       }
 
-      if (level->is_gas_poison(curr_at.x, curr_at.y)) {
+      if (level->is_gas_paralysis(curr_at.x, curr_at.y)) {
+        msg("You hang out in the paralysis gas cloud.");
+      } else if (level->is_gas_poison(curr_at.x, curr_at.y)) {
         msg("You hang out in the poison gas cloud.");
       } else if (level->is_gas_healing(curr_at.x, curr_at.y)) {
         msg("You hang out in the healing gas cloud.");
@@ -402,7 +404,9 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       waiting();
       move_count_incr();
     } else {
-      if (level->is_gas_poison(curr_at.x, curr_at.y)) {
+      if (level->is_gas_paralysis(curr_at.x, curr_at.y)) {
+        msg("You rest in the paralysis gas cloud.");
+      } else if (level->is_gas_poison(curr_at.x, curr_at.y)) {
         msg("You rest in the poison gas cloud.");
       } else if (level->is_gas_healing(curr_at.x, curr_at.y)) {
         msg("You rest in the healing gas cloud.");

@@ -306,6 +306,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(spawn_at_my_position),
     MY_ADD_PYTHON_FUNCTION(spawn_darkness_around_thing),
     MY_ADD_PYTHON_FUNCTION(spawn_gas_healing_around_thing),
+    MY_ADD_PYTHON_FUNCTION(spawn_gas_paralysis_around_thing),
     MY_ADD_PYTHON_FUNCTION(spawn_gas_poison_around_thing),
     MY_ADD_PYTHON_FUNCTION(spawn_minion_at_my_position),
     MY_ADD_PYTHON_FUNCTION(spawn_minion_next_to),

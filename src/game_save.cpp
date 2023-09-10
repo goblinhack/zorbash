@@ -141,6 +141,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->tick_last_escape);
   out << bits(my.t->tick_last_gas_healing_exposure);
   out << bits(my.t->tick_last_gas_poison_exposure);
+  out << bits(my.t->tick_last_gas_paralysis_exposure);
   out << bits(my.t->tick_last_i_attacked);
   out << bits(my.t->tick_last_i_tried_to_attack);
   out << bits(my.t->tick_last_i_was_attacked);
@@ -587,6 +588,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
 
   out << bits(my.t->darkness_cloud);
   out << bits(my.t->gas_poison_cloud);
+  out << bits(my.t->gas_paralysis_cloud);
   out << bits(my.t->gas_healing_cloud);
 
   // begin sort marker5 {

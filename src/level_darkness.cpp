@@ -160,6 +160,15 @@ void Level::tick_darkness(void)
       set_no_check(darkness_cloud, x, y, nn);
 
       if (nn) {
+        //
+        // Clear out other gas types?
+        //
+        set_no_check(gas_poison_cloud, x, y, nn);
+        set_no_check(gas_paralysis_cloud, x, y, nn);
+        set_no_check(gas_healing_cloud, x, y, nn);
+      }
+
+      if (nn) {
         display_darkness = true;
       }
     }

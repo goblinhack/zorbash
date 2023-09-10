@@ -27,6 +27,8 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX * DUNGEON_GAS_RESOLUTION >, MAP_WIDTH_MAX * DUNGEON_GAS_RESOLUTION >
       gas_poison_cloud {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX * DUNGEON_GAS_RESOLUTION >, MAP_WIDTH_MAX * DUNGEON_GAS_RESOLUTION >
+      gas_paralysis_cloud {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX * DUNGEON_GAS_RESOLUTION >, MAP_WIDTH_MAX * DUNGEON_GAS_RESOLUTION >
       darkness_cloud {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX * DUNGEON_GAS_RESOLUTION >, MAP_WIDTH_MAX * DUNGEON_GAS_RESOLUTION >
       gas_healing_cloud {};
@@ -90,6 +92,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_fungus_poison {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_fungus_withered {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_gas_healing {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_gas_paralysis {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_gas_poison {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_gold {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_grass_dry {};
@@ -245,6 +248,7 @@ public:
   //
   bool display_darkness {};
   bool display_gas_poison {};
+  bool display_gas_paralysis {};
   bool display_gas_healing {};
 
   point cursor_at;
@@ -956,6 +960,10 @@ public:
   uint8_t is_gas_healing(const point p) const;
   uint8_t is_gas_healing_no_check(const int x, const int y) const;
   uint8_t is_gas_healing_no_check(const point p) const;
+  uint8_t is_gas_paralysis(const int x, const int y) const;
+  uint8_t is_gas_paralysis(const point p) const;
+  uint8_t is_gas_paralysis_no_check(const int x, const int y) const;
+  uint8_t is_gas_paralysis_no_check(const point p) const;
   uint8_t is_gas_poison(const int x, const int y) const;
   uint8_t is_gas_poison(const point p) const;
   uint8_t is_gas_poison_no_check(const int x, const int y) const;
@@ -1159,6 +1167,7 @@ public:
   void display_pixelart_fade_in(void);
   void display_pixelart_fade_out(void);
   void display_pixelart_gas_healing(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);
+  void display_pixelart_gas_paralysis(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);
   void display_pixelart_gas_poison(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);
   void display_pixelart_internal_particles(void);
   void display_pixelart_lasers(point tl, point br);
@@ -1296,6 +1305,10 @@ public:
   void is_gas_healing_no_check_unset(const int x, const int y);
   void is_gas_healing_set(const int x, const int y, uint8_t val);
   void is_gas_healing_unset(const int x, const int y);
+  void is_gas_paralysis_no_check_set(const int x, const int y, uint8_t val);
+  void is_gas_paralysis_no_check_unset(const int x, const int y);
+  void is_gas_paralysis_set(const int x, const int y, uint8_t val);
+  void is_gas_paralysis_unset(const int x, const int y);
   void is_gas_poison_no_check_set(const int x, const int y, uint8_t val);
   void is_gas_poison_no_check_unset(const int x, const int y);
   void is_gas_poison_set(const int x, const int y, uint8_t val);
@@ -1455,6 +1468,7 @@ public:
   void tick_begin_now(void);
   void tick_darkness(void);
   void tick_gas_healing(void);
+  void tick_gas_paralysis(void);
   void tick_gas_poison(void);
   void tick(void);
   void tick_(void);
@@ -1507,6 +1521,7 @@ public:
   std::deque< point >  flood_fill_points(point, std::function< int(Thingp) > filter);
   std::deque< Thingp > flood_fill_things(point, std::function< int(Thingp) > filter);
   std::deque< Thingp > flood_fill_grid_things(point, int distance);
+  std::deque< Thingp > flood_fill_gas_grid_things(point, int distance);
 
   std::vector< point >  cursor_path_draw_line_attempt(Thingp, point start, point end, int);
   std::vector< Thingp > line(const point s, const point e, size_t max_elems = 0);
