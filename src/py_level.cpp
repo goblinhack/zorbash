@@ -382,6 +382,58 @@ PyObject *level_flood_fill_get_all_grid_things(PyObject *obj, PyObject *args, Py
   return lst;
 }
 
+PyObject *level_flood_fill_gas_get_all_grid_things(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_AND_INDENT();
+  uint32_t     id       = 0;
+  int          x        = NO_VALUE;
+  int          y        = NO_VALUE;
+  int          distance = NO_VALUE;
+  static char *kwlist[] = {(char *) "id", (char *) "x", (char *) "y", (char *) "distance", nullptr};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iiii", kwlist, &id, &x, &y, &distance)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! id) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    Py_RETURN_NONE;
+  }
+
+  if (x == NO_VALUE) {
+    ERR("%s: Missing 'x'", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (y == NO_VALUE) {
+    ERR("%s: Missing 'y'", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp t = game->thing_find(id);
+  if (unlikely(! t)) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    Py_RETURN_NONE;
+  }
+
+  if (t->level->is_oob(x, y)) {
+    PyObject *lst = PyList_New(0);
+    return lst;
+  }
+
+  auto      things = t->level->flood_fill_gas_grid_things(point(x, y), distance);
+  auto      items  = things.size();
+  PyObject *lst    = PyList_New(items);
+  auto      item   = 0;
+  for (auto t : things) {
+    PyList_SetItem(lst, item, Py_BuildValue("I", t->id));
+    item++;
+  }
+
+  return lst;
+}
+
 PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
