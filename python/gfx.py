@@ -505,7 +505,7 @@ def init_tiles_16x16_main():
         "debuff_starving",
         "debuff_paralysis",
         "debuff_stuck",
-        "",
+        "debuff_blinded",
         "",
         "",
         "",

@@ -1,9 +1,9 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- TODO Potion of Caustic Gas - Produces a cloud of damaging caustic gas.                                                                       -->
+<!-- DONE Potion of Caustic Gas - Produces a cloud of damaging caustic gas.                                                                       -->
 <!-- TODO Potion of Confusion - Produces a cloud of confusion gas.                                                                                -->
 <!-- TODO Potion of Creeping Death - Unleashes a spreading fungus that inflicts poisoning when stepped upon.                                      -->
-<!-- TODO Potion of Darkness - Produces a cloud of darkness that obscures an area of the dungeon.                                                 -->
+<!-- DONE Potion of Darkness - Produces a cloud of darkness that obscures an area of the dungeon.                                                 -->
 <!-- TODO Potion of Descent - Instantly erodes an area of the floor. Nearby monsters/objects will fall to the next level.                         -->
 <!-- TODO Potion of Detect Magic - Soft-IDs all inventory items. Soft-ID's and locates magic items on the current level.                          -->
 <!-- TODO Potion of Fire Immunity - Make you immune to fire/burning/lava, but not explosions.                                                     -->
@@ -697,14 +697,14 @@ Other content
 - 17 x weapons
 - 14 x buffs
 - 11 x skills
-- 7 x debuffs
+- 8 x debuffs
 - 6 x staffs
 - 6 x shield
 - 6 x potions
 - 6 x boots
+- 5 x traps
 - 5 x rings
 - 5 x keys
-- 4 x traps
 - 4 x gauntlets
 - 4 x cloaks
 - 4 x armor

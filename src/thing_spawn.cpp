@@ -708,7 +708,7 @@ bool Thing::spawn_gas_poison_around_thing(int radius)
 {
   TRACE_NO_INDENT();
 
-  dbg("Spawn gas swamp");
+  dbg("Spawn poison gas");
   TRACE_AND_INDENT();
 
   std::vector< point > possible;
@@ -780,7 +780,7 @@ bool Thing::spawn_darkness_around_thing(int radius)
 {
   TRACE_NO_INDENT();
 
-  dbg("Spawn gas swamp");
+  dbg("Spawn darkness");
   TRACE_AND_INDENT();
 
   std::vector< point > possible;
@@ -852,7 +852,7 @@ bool Thing::spawn_gas_healing_around_thing(int radius)
 {
   TRACE_NO_INDENT();
 
-  dbg("Spawn gas swamp");
+  dbg("Spawn healing gas");
   TRACE_AND_INDENT();
 
   std::vector< point > possible;

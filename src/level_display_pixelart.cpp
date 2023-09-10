@@ -442,25 +442,34 @@ void Level::display_pixelart_map_all(void)
     //
     display_pixelart_map_fg_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
 
-    //
-    // I want to see lasers on top of things like the entrance and not under.
-    //
-    display_lasers(tl, br);
-    display_projectiles(tl, br);
+    if (unlikely(player && player->blinded_count())) {
+      //
+      // Don't show gas or jumping monsters when blinded. Too cruel?
+      //
+    } else {
+      //
+      // I want to see lasers on top of things like the entrance and not under.
+      //
+      display_lasers(tl, br);
+      display_projectiles(tl, br);
 
-    //
-    // So we can see monsters jump over walls
-    //
-    display_pixelart_internal_particles();
+      //
+      // So we can see monsters jump over walls
+      //
+      display_pixelart_internal_particles();
 
-    if (display_gas_healing) {
-      display_pixelart_gas_poison(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
-    }
-    if (display_gas_poison) {
-      display_pixelart_gas_healing(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
-    }
-    if (display_darkness) {
-      display_pixelart_darkness(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
+      //
+      // Showing gas is expensive, so only do it if the gas exists
+      //
+      if (display_gas_poison) {
+        display_pixelart_gas_poison(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
+      }
+      if (display_gas_healing) {
+        display_pixelart_gas_healing(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
+      }
+      if (display_darkness) {
+        display_pixelart_darkness(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
+      }
     }
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

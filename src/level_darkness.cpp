@@ -4,6 +4,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_level.hpp"
+#include "my_thing.hpp"
 
 void Level::tick_darkness(void)
 {
@@ -22,7 +23,7 @@ void Level::tick_darkness(void)
            y++) {
         for (uint16_t x = DUNGEON_GAS_RESOLUTION; x < (MAP_WIDTH * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION;
              x++) {
-          if (pcg_random_range(0, 100) < 10) {
+          if (pcg_random_range(0, 100) < spread_chance) {
             darkness_cloud[ x ][ y ] = 9;
           }
         }
@@ -85,13 +86,15 @@ void Level::tick_darkness(void)
   // Anything less than 9 will cause gas to spread more
   //
   int reduction;
-  int roll = d100();
-  if (roll < 90) {
+  int roll = d1000();
+  if (roll < 900) {
     reduction = 9;
-  } else if (roll < 95) {
+  } else if (roll < 950) {
     reduction = 8;
-  } else {
+  } else if (roll < 995) {
     reduction = 7;
+  } else {
+    reduction = 2;
   }
 
   TRACE_NO_INDENT();
@@ -185,6 +188,28 @@ void Level::tick_darkness(void)
         g = 254;
       }
       is_darkness_no_check_set(x, y, g);
+    }
+  }
+
+  if (0) {
+    for (auto y = 0; y <= MAP_HEIGHT; y++) {
+      std::string debug;
+      for (auto x = 0; x <= MAP_WIDTH; x++) {
+        if (point(x, y) == player->curr_at) {
+          debug += "@";
+          continue;
+        }
+        if (is_wall(x, y)) {
+          debug += "#";
+          continue;
+        }
+        if (is_darkness(x, y)) {
+          debug += "D";
+          continue;
+        }
+        debug += " ";
+      }
+      LOG("DARK: %s", debug.c_str());
     }
   }
 }

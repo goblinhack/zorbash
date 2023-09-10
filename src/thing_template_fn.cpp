@@ -593,6 +593,7 @@ int Tp::is_holy_water(void) const { return _is_holy_water; }
 int Tp::is_humanoid(void) const { return _is_humanoid; }
 int Tp::is_iceman(void) const { return _is_iceman; }
 int Tp::is_immune_to_acid(void) const { return _is_immune_to_acid; }
+int Tp::is_immune_to_blinding(void) const { return _is_immune_to_blinding; }
 int Tp::is_immune_to_cold(void) const { return _is_immune_to_cold; }
 int Tp::is_immune_to_electricity(void) const { return _is_immune_to_electricity; }
 int Tp::is_immune_to_fire(void) const { return _is_immune_to_fire; }
@@ -1361,6 +1362,7 @@ void Tp::is_holy_water_set(int v) { _is_holy_water = v; }
 void Tp::is_humanoid_set(int v) { _is_humanoid = v; }
 void Tp::is_iceman_set(int v) { _is_iceman = v; }
 void Tp::is_immune_to_acid_set(int v) { _is_immune_to_acid = v; }
+void Tp::is_immune_to_blinding_set(int v) { _is_immune_to_blinding = v; }
 void Tp::is_immune_to_cold_set(int v) { _is_immune_to_cold = v; }
 void Tp::is_immune_to_electricity_set(int v) { _is_immune_to_electricity = v; }
 void Tp::is_immune_to_fire_set(int v) { _is_immune_to_fire = v; }

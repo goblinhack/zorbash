@@ -1606,6 +1606,10 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         //
         // If paralysis, it cannot avoid the hits.
         //
+      } else if (victim->blinded_count()) {
+        //
+        // If blinded, it cannot avoid the hits.
+        //
       } else if (victim->stuck_count()) {
         //
         // If stuck, it cannot avoid the hits.

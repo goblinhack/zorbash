@@ -13,7 +13,7 @@ void Thing::lunge(point to)
     return;
   }
 
-  if ((paralysis_count() > 0) || is_frozen || is_burnt || is_dead) {
+  if ((blinded_count() > 0) || (paralysis_count() > 0) || is_frozen || is_burnt || is_dead) {
     return;
   }
 

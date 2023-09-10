@@ -9,9 +9,12 @@ def on_thrown(owner, me, x, y):
 def on_use(owner, item, target, x, y):
     owner = my.thing_top_owner_id_get(item)
     if owner:
+        my.thing_stat_con_incr(owner, 1)
         if my.thing_is_player(owner):
-            my.thing_msg(owner, "The poison gas envelops you!")
-    for it in my.level_flood_fill_get_all_grid_things(item, x, y, 3):
+            my.thing_msg(owner, "The poison gas fills your lungs!")
+            roll = my.py_d20()
+            my.thing_hit_dmg_poison(item, item, owner, roll)
+    for it in my.level_flood_fill_get_all_grid_things(item, x, y, 0):
         my.spawn_gas_poison_around_thing(it, 1)
     my.thing_dead(item, "broken")
 

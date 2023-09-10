@@ -9,8 +9,11 @@ def on_thrown(owner, me, x, y):
 def on_use(owner, item, target, x, y):
     owner = my.thing_top_owner_id_get(item)
     if owner:
+        my.thing_stat_psi_incr(owner, 1)
         if my.thing_is_player(owner):
             my.thing_msg(owner, "The darkness envelops you!")
+            my.thing_blinded_count_incr(owner, 30)
+            my.thing_popup(owner, "!!!")
     for it in my.level_flood_fill_get_all_grid_things(item, x, y, 3):
         my.spawn_darkness_around_thing(it, 1)
     my.thing_dead(item, "broken")
@@ -91,7 +94,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_usable(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.noise_on_dropping(self, 10)
+    my.noise_on_dropping(self, 50)
     my.normal_placement_rules(self, True)
     my.on_fall_do(self, "me.on_fall()")
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")

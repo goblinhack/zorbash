@@ -13,6 +13,15 @@
 void Thing::can_see_you(point p)
 {
   //
+  // Can it see though the darkness?
+  //
+  if (! is_able_to_see_in_magical_darkness()) {
+    if (level->is_darkness(p)) {
+      return;
+    }
+  }
+
+  //
   // Record we've been here.
   //
   auto age_map = age_map_get();
@@ -158,7 +167,13 @@ void Thing::can_see_you(point p)
             if (t->is_on_fire()) {
               msg("%s can see your flaming body!", text_The().c_str());
             } else {
-              msg("%s can see you!", text_The().c_str());
+              if (level->is_darkness(t->curr_at)) {
+                msg("%s can see your outline in the magical darkness!", text_The().c_str());
+              } else if (level->is_darkness(curr_at)) {
+                msg("%s can see you vaguely in the magical darkness!", text_The().c_str());
+              } else {
+                msg("%s can see you!", text_The().c_str());
+              }
             }
           }
         }
@@ -180,9 +195,18 @@ bool Level::can_see_point_or_nearby(point p, int dist)
       if (is_oob(o)) {
         continue;
       }
+
       if (get(can_see_ever.can_see, o.x, o.y)) {
         return true;
       }
+
+      //
+      // Can it see though the darkness?
+      //
+      if (is_darkness(o)) {
+        continue;
+      }
+
       if (get(can_see_currently.can_see, o.x, o.y)) {
         return true;
       }

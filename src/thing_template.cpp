@@ -586,6 +586,9 @@ void tp_dump_monsters(void)
     if (tp->is_immune_to_paralysis()) {
       imm_str += "Paralysis<newline>";
     }
+    if (tp->is_immune_to_blinding()) {
+      imm_str += "Paralysis<newline>";
+    }
     if (tp->is_immune_to_poison()) {
       imm_str += "poison<newline>";
     }
@@ -767,6 +770,9 @@ void tp_dump_weapons(void)
       imm_str += "Immunity-Negation<newline>";
     }
     if (tp->is_immune_to_paralysis()) {
+      imm_str += "Immunity-Paralysis<newline>";
+    }
+    if (tp->is_immune_to_blinding()) {
       imm_str += "Immunity-Paralysis<newline>";
     }
     if (tp->is_immune_to_poison()) {

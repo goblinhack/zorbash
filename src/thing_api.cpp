@@ -786,6 +786,11 @@ int Thing::is_immune_to_paralysis(void)
   TRACE_NO_INDENT();
   return (tp()->is_immune_to_paralysis());
 }
+int Thing::is_immune_to_blinding(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_immune_to_blinding());
+}
 int Thing::is_holy(void)
 {
   TRACE_NO_INDENT();
@@ -1881,18 +1886,35 @@ int Thing::is_lava(void)
 int Thing::is_light_blocker(void)
 {
   TRACE_NO_INDENT();
+
   return (tp()->is_light_blocker());
 }
 
 int Thing::is_light_blocker_for_monst(void)
 {
   TRACE_NO_INDENT();
+
+  //
+  // Can it see though the darkness?
+  //
+  if (level->is_darkness(curr_at)) {
+    return false;
+  }
+
   return (tp()->is_light_blocker_for_monst());
 }
 
 int Thing::is_gas_blocker(void)
 {
   TRACE_NO_INDENT();
+
+  //
+  // Allow darkness to stop poison spreading.
+  //
+  if (level->is_darkness(curr_at)) {
+    return true;
+  }
+
   return (tp()->is_gas_blocker());
 }
 

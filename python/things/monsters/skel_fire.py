@@ -107,6 +107,7 @@ def tp_init(name, text_long_name):
     my.is_eater_of_red_blood(self, True)
     my.is_fire_elemental(self, True)
     my.is_hittable(self, True)
+    my.is_immune_to_blinding(self, True)
     my.is_immune_to_fire(self, True)
     my.is_immune_to_necrosis(self, True)
     my.is_immune_to_paralysis(self, True)

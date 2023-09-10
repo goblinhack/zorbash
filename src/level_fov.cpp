@@ -104,6 +104,13 @@ void Level::scan(Thingp me, FovMap *fov_curr, FovMap *fov_ever, int pov_x, int p
       if (! light_blocker) {
         light_blocker = is_light_blocker_for_monst(map_x, map_y);
       }
+      if (! light_blocker) {
+        if (! me->is_player()) {
+          if (! me->is_able_to_see_in_magical_darkness()) {
+            light_blocker = is_darkness(map_x, map_y);
+          }
+        }
+      }
     }
 
     if (angle * angle + distance_from_origin * distance_from_origin <= radius_squared

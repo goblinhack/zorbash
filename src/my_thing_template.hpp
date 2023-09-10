@@ -501,6 +501,7 @@ private:
   int _is_humanoid {};
   int _is_iceman {};
   int _is_immune_to_acid {};
+  int _is_immune_to_blinding {};
   int _is_immune_to_cold {};
   int _is_immune_to_electricity {};
   int _is_immune_to_fire {};
@@ -1853,6 +1854,7 @@ public:
   int is_humanoid(void) const;
   int is_iceman(void) const;
   int is_immune_to_acid(void) const;
+  int is_immune_to_blinding(void) const;
   int is_immune_to_cold(void) const;
   int is_immune_to_electricity(void) const;
   int is_immune_to_fire(void) const;
@@ -2622,6 +2624,7 @@ public:
   void is_humanoid_set(int v);
   void is_iceman_set(int v);
   void is_immune_to_acid_set(int v);
+  void is_immune_to_blinding_set(int v);
   void is_immune_to_cold_set(int v);
   void is_immune_to_electricity_set(int v);
   void is_immune_to_fire_set(int v);

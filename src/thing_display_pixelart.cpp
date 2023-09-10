@@ -859,6 +859,15 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   }
 
   //
+  // You can only "see" yourself when blinded.
+  //
+  if (unlikely(level->player && level->player->blinded_count())) {
+    if (! is_player()) {
+      return;
+    }
+  }
+
+  //
   // If rendering the background, no shadows
   //
   if (! g_render_monochrome) {

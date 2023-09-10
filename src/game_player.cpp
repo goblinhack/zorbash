@@ -51,6 +51,7 @@ void Game::place_player(void)
       }
 
       if (0) {
+        level->thing_new("trap_blinded", point(x + 2, y + 2));
         level->thing_new("spell_of_holding_barrier", point(x, y));
         level->thing_new("ogre_totem", point(x + 2, y + 2));
         level->thing_new("trap_dart", point(x + 2, y + 2));
@@ -99,8 +100,9 @@ void Game::place_player(void)
         auto w = level->thing_new("debuff_slow", point(x, y));
         t->debuff_add(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("potion_darkness", point(x, y));
+        level->thing_new("dogman", point(x + 2, y));
         t->carry(w, carry_options);
       }
       if (0) {

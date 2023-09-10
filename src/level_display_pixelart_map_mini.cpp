@@ -10,6 +10,13 @@
 
 void Level::display_pixelart_map_mini(void)
 {
+  if (unlikely(player && player->blinded_count())) {
+    //
+    // No minimap when blinded. Too cruel?
+    //
+    return;
+  }
+
   float tlx = map_mini_tl.x * game->config.ascii_gl_width;
   float tly = map_mini_tl.y * game->config.ascii_gl_height;
 

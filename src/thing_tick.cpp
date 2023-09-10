@@ -96,6 +96,14 @@ void Thing::achieve_goals_in_life(void)
   }
 
   //
+  // Check if blinded
+  //
+  blinded_tick();
+  if (is_dead) {
+    return;
+  }
+
+  //
   // Check if paralysed
   //
   paralysis_tick();

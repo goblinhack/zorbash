@@ -301,6 +301,7 @@ bool Tp::matches(const std::string &what)
   if (is_humanoid() && (what == "is_humanoid")) { return true; }
   if (is_iceman() && (what == "is_iceman")) { return true; }
   if (is_immune_to_acid() && (what == "is_immune_to_acid")) { return true; }
+  if (is_immune_to_blinding() && (what == "is_immune_to_blinding")) { return true; }
   if (is_immune_to_cold() && (what == "is_immune_to_cold")) { return true; }
   if (is_immune_to_electricity() && (what == "is_immune_to_electricity")) { return true; }
   if (is_immune_to_fire() && (what == "is_immune_to_fire")) { return true; }
@@ -903,6 +904,7 @@ bool Thing::matches(const std::string &what)
   if (is_humanoid() && (what == "is_humanoid")) { return true; }
   if (is_iceman() && (what == "is_iceman")) { return true; }
   if (is_immune_to_acid() && (what == "is_immune_to_acid")) { return true; }
+  if (is_immune_to_blinding() && (what == "is_immune_to_blinding")) { return true; }
   if (is_immune_to_cold() && (what == "is_immune_to_cold")) { return true; }
   if (is_immune_to_electricity() && (what == "is_immune_to_electricity")) { return true; }
   if (is_immune_to_fire() && (what == "is_immune_to_fire")) { return true; }
@@ -1499,6 +1501,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_humanoid") { return &Thing::is_humanoid; }
   if (what == "is_iceman") { return &Thing::is_iceman; }
   if (what == "is_immune_to_acid") { return &Thing::is_immune_to_acid; }
+  if (what == "is_immune_to_blinding") { return &Thing::is_immune_to_blinding; }
   if (what == "is_immune_to_cold") { return &Thing::is_immune_to_cold; }
   if (what == "is_immune_to_electricity") { return &Thing::is_immune_to_electricity; }
   if (what == "is_immune_to_fire") { return &Thing::is_immune_to_fire; }

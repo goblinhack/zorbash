@@ -39,6 +39,11 @@ void Thing::on_thrown(ThingId owner_id_when_thrown)
   } else {
     ERR("Bad on_thrown call [%s] expected mod:function, got %d elems", on_thrown.c_str(), (int) on_thrown.size());
   }
+
+  //
+  // So thrown potions make a noise
+  //
+  level->sound_sources_incr(curr_at.x, curr_at.y, noise_on_dropping());
 }
 
 bool Thing::throw_item_choose_target(Thingp what)

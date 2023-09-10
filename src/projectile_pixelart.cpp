@@ -86,7 +86,7 @@ void Level::display_pixelart_projectiles(point tl, point br)
     if (frame < (int) p.tiles.size()) {
       tile_blit(get(p.tiles, frame), tl, tr, bl, br);
     } else if (t) {
-      t->err("Tile overflow %d", frame);
+      frame = 0;
     }
 
 #if 0

@@ -214,6 +214,9 @@ int Thing::danger_initial_level(void)
   if (paralysis_count()) {
     danger_level /= 10;
   }
+  if (blinded_count()) {
+    danger_level /= 10;
+  }
   if (is_always_submerged_in_water()) {
     danger_level *= 2;
   }
@@ -360,6 +363,9 @@ int Thing::danger_current_level(void)
     danger_level /= 2;
   }
   if (paralysis_count()) {
+    danger_level /= 10;
+  }
+  if (blinded_count()) {
     danger_level /= 10;
   }
   if (is_always_submerged_in_water()) {

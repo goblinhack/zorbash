@@ -173,7 +173,14 @@ void Level::display_ascii_map(point tl, point br)
   display_map_set_bounds();
   display_tick_animation();
 
-  display_ascii_gas(tl, br, minx, miny, maxx, maxy);
+  if (unlikely(player && player->blinded_count())) {
+    //
+    // No gas display when blinded. Too cruel?
+    //
+  } else {
+    display_ascii_gas(tl, br, minx, miny, maxx, maxy);
+  }
+
   cursor_find_on_visible_things(minx, miny, maxx, maxy);
   update_light_ascii_map();
 

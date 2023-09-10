@@ -65,6 +65,11 @@ bool Thing::will_avoid_monst(const Thingp it)
     return false;
   }
 
+  if (it->blinded_count()) {
+    dbg2("Avoid %s? no it's blinded", it->to_short_string().c_str());
+    return false;
+  }
+
   //
   // It's stuck?
   //
@@ -163,6 +168,10 @@ bool Thing::will_avoid_monst(const point p)
     // It's really stuck?
     //
     if (it->paralysis_count()) {
+      continue;
+    }
+
+    if (it->blinded_count()) {
       continue;
     }
 

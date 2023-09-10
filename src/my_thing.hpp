@@ -1087,6 +1087,12 @@ public:
   int attack_undead(void);
   int attack(void);
   int blast_min_radius(void);
+  int blinded_count_decr(int);
+  int blinded_count_decr(void);
+  int blinded_count_incr(int);
+  int blinded_count_incr(void);
+  int blinded_count_set(int);
+  int blinded_count(void);
   int bounce_count(void);
   int capacity_height(void);
   int capacity_width(void);
@@ -1652,6 +1658,7 @@ public:
   int is_humanoid(void);
   int is_iceman(void);
   int is_immune_to_acid(void);
+  int is_immune_to_blinding(void);
   int is_immune_to_cold(void);
   int is_immune_to_electricity(void);
   int is_immune_to_fire(void);
@@ -2721,6 +2728,8 @@ public:
   void avoid_tick(void);
   void awake(void);
   void barrel_tick(void);
+  void blinded_tick(void);
+  void blinded_update(void);
   void blit_ascii_adjust_color(color &c, bool fg, bool leftbar);
   void blit_ascii_adjust_color_hue(color &c, bool fg);
   void blit_ascii_at(point tl, bool lit = true, bool leftbar = false);
