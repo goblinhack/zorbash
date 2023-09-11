@@ -46,6 +46,7 @@ def tp_init(name, text_long_name):
     my.chance_d1000_jump_onto(self, 100)
     my.chance_d1000_jump_randomly(self, 20)
     my.chance_d1000_shooting(self, 100)
+    my.chance_d1000_tameable(self, 0)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 30)

@@ -3,6 +3,14 @@ import tp
 
 
 def on_thrown(owner, me, x, y):
+    # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
+    # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
+    for it in my.level_get_all(me, x, y):
+        # my.con("it      {} {:X} {},{}".format(my.thing_name_get(it), it, x, y))
+        if my.thing_is_alive_monst(it) or my.thing_is_player(it):
+            on_use(owner, me, it, x, y)
+            return
+
     shatters(me, x, y)
 
 
@@ -11,18 +19,20 @@ def on_use(owner, item, target, x, y):
     # my.con("item    {} {:X}".format(my.thing_name_get(item), item))
     # my.con("target  {} {:X}".format(my.thing_name_get(target), target))
 
-    my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, "potion")
+    my.thing_sound_play_channel(target, my.CHANNEL_WEAPON, "potion")
 
-    stamina = my.thing_stamina(owner)
-    new_stamina = int((float(my.thing_stamina_max(owner)) / 100.0) * 80.0)
+    stamina = my.thing_stamina(target)
+    new_stamina = int((float(my.thing_stamina_max(target)) / 100.0) * 80.0)
     if new_stamina > stamina:
-        my.thing_stamina_set(owner, new_stamina)
+        my.thing_stamina_set(target, new_stamina)
 
-    my.thing_stat_str_incr(owner, 1)
+    my.thing_stat_str_incr(target, 1)
 
-    my.spawn_using_items_radius_range(owner, item, target, "potion_effect")
-    if my.thing_is_player(owner):
-        my.thing_msg(owner, "%%fg=pink$You look like you've been working out!%fg=reset$")
+    my.spawn_using_items_radius_range(target, item, target, "potion_effect")
+    if my.thing_is_player(target):
+        my.thing_msg(target, "%%fg=pink$You look like you've been working out!%fg=reset$")
+    else:
+        my.thing_msg(target, f"The {my.thing_name_get(target)} looks stronger.")
 
 
 def shatters(me, x, y):
@@ -82,6 +92,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_crushable(self, True)
     my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
+    my.is_drinkable(self, True)
     my.is_droppable(self, True)
     my.is_glass(self, True)
     my.is_health_booster(self, True)

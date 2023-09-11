@@ -293,7 +293,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
       wid_set_pos(w, tl, br);
       if (item->is_weapon()) {
         wid_set_text(w, "Equip");
-      } else if (item->is_potion()) {
+      } else if (item->is_drinkable()) {
         wid_set_text(w, "Drink");
       } else if (item->is_staff()) {
         wid_set_text(w, "Shoot");
@@ -381,7 +381,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
         wid_set_text(w, "Use (choose target)");
         y_at += 3;
 
-      } else if (item->is_potion()) {
+      } else if (item->is_drinkable()) {
         TRACE_AND_INDENT();
         auto p = wid_inventory_window;
         auto w = wid_new_square_button(p, "Use (drink)");

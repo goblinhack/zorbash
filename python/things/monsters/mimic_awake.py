@@ -36,6 +36,7 @@ def tp_init(name, test_short_name, text_long_name):
     my.chance_d1000_carrier_of_treasure_class_A(self, 500)
     my.chance_d1000_carrier_of_treasure_class_B(self, 100)
     my.chance_d1000_carrier_of_treasure_class_C(self, 20)
+    my.chance_d1000_tameable(self, 0)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 10)

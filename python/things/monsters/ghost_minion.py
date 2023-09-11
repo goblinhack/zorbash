@@ -16,6 +16,7 @@ def tp_init(name, text_long_name):
     # begin sort marker
     my.aggression_pct(self, 100)
     my.attack_humanoid(self, True)
+    my.chance_d1000_tameable(self, 0)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.distance_minion_from_mob_max(self, 4)

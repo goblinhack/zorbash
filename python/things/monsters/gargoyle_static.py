@@ -46,6 +46,7 @@ def tp_init(name, text_long_name):
     my.attack_humanoid(self, True)
     my.attack_meat(self, True)
     my.chance_d1000_shooting(self, 800)
+    my.chance_d1000_tameable(self, 0)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.distance_vision(self, 10)

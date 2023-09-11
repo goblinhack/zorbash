@@ -339,6 +339,15 @@ void Level::tick_(void)
       }
 
       //
+      // If a potion is being thrown at a monster, then the callback is done once
+      // the particle ends. Delay monsters moving until that completes.
+      //
+      if (all_projectiles.size() || all_lasers.size() || all_internal_particles.size()
+          || all_external_particles.size()) {
+        continue;
+      }
+
+      //
       // Unable to move this round?
       //
       if (! t->is_player()) {
@@ -649,7 +658,7 @@ void Level::tick_(void)
 
   //
   // Stop rapid pickup/drop events if particles are still in progress
-  // Don't move this priot to update_interpolated_position or see flicker
+  // Don't move this prior to update_interpolated_position or see flicker
   // in jumping.
   //
   if (player && player->particle_anim_exists()) {

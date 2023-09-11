@@ -52,7 +52,7 @@ void Thing::update_tick(void)
 
 void Thing::achieve_goals_in_life(void)
 {
-  dbg("Achieve goals");
+  dbg2("Achieve goals");
   TRACE_AND_INDENT();
 
   //

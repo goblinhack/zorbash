@@ -55,6 +55,12 @@ int Thing::chance_d1000_shove(void)
   return (tp()->chance_d1000_shove());
 }
 
+int Thing::chance_d1000_tameable(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->chance_d1000_tameable());
+}
+
 int Thing::chance_d10000_runic(void)
 {
   TRACE_NO_INDENT();
@@ -631,15 +637,15 @@ int Thing::is_unused_flag85(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag85());
 }
-int Thing::is_unused_flag86(void)
+int Thing::is_drinkable(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag86());
+  return (tp()->is_drinkable());
 }
-int Thing::is_unused_flag87(void)
+int Thing::is_tameable(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag87());
+  return (tp()->is_tameable());
 }
 int Thing::is_able_to_see_in_magical_darkness(void)
 {

@@ -154,6 +154,7 @@ private:
   int _chance_d1000_shooting_avoid_friends {};
   int _chance_d1000_shove {};
   int _chance_d1000_steal_item {};
+  int _chance_d1000_tameable {};
   int _chance_d1000_teleport_attack {};
   int _chance_d1000_teleport_self {};
   int _charge_count {};
@@ -418,6 +419,7 @@ private:
   int _is_destroyed_on_hitting {};
   int _is_dirt {};
   int _is_door {};
+  int _is_drinkable {};
   int _is_droppable {};
   int _is_duck {};
   int _is_eater_of_amulets {};
@@ -660,6 +662,7 @@ private:
   int _is_stone {};
   int _is_swimmer {};
   int _is_sword {};
+  int _is_tameable {};
   int _is_target_radial {};
   int _is_target_select {};
   int _is_tentacle {};
@@ -771,8 +774,6 @@ private:
   int _is_unused_flag83 {};
   int _is_unused_flag84 {};
   int _is_unused_flag85 {};
-  int _is_unused_flag86 {};
-  int _is_unused_flag87 {};
   int _is_unused_flag9 {};
   int _is_usable {};
   int _is_used_when_thrown {};
@@ -1490,6 +1491,7 @@ public:
   int chance_d1000_shooting(void) const;
   int chance_d1000_shove(void) const;
   int chance_d1000_steal_item(void) const;
+  int chance_d1000_tameable(void) const;
   int chance_d1000_teleport_attack(void) const;
   int chance_d1000_teleport_self(void) const;
   int charge_count(void) const;
@@ -1771,6 +1773,7 @@ public:
   int is_destroyed_on_hitting(void) const;
   int is_dirt(void) const;
   int is_door(void) const;
+  int is_drinkable(void) const;
   int is_droppable(void) const;
   int is_duck(void) const;
   int is_eater_of_amulets(void) const;
@@ -2012,6 +2015,7 @@ public:
   int is_stone(void) const;
   int is_swimmer(void) const;
   int is_sword(void) const;
+  int is_tameable(void) const;
   int is_target_radial(void) const;
   int is_target_select(void) const;
   int is_tentacle(void) const;
@@ -2122,8 +2126,6 @@ public:
   int is_unused_flag83(void) const;
   int is_unused_flag84(void) const;
   int is_unused_flag85(void) const;
-  int is_unused_flag86(void) const;
-  int is_unused_flag87(void) const;
   int is_unused_flag8(void) const;
   int is_unused_flag9(void) const;
   int is_usable(void) const;
@@ -2273,6 +2275,7 @@ public:
   void chance_d1000_shooting_set(int v);
   void chance_d1000_shove_set(int v);
   void chance_d1000_steal_item_set(int v);
+  void chance_d1000_tameable_set(int v);
   void chance_d1000_teleport_attack_set(int v);
   void chance_d1000_teleport_self_set(int v);
   void charge_count_set(int v);
@@ -2541,6 +2544,7 @@ public:
   void is_destroyed_on_hitting_set(int v);
   void is_dirt_set(int v);
   void is_door_set(int v);
+  void is_drinkable_set(int v);
   void is_droppable_set(int v);
   void is_duck_set(int v);
   void is_eater_of_amulets_set(int v);
@@ -2782,6 +2786,7 @@ public:
   void is_stone_set(int v);
   void is_swimmer_set(int v);
   void is_sword_set(int v);
+  void is_tameable_set(int v);
   void is_target_radial_set(int v);
   void is_target_select_set(int v);
   void is_tentacle_set(int v);
@@ -2892,8 +2897,6 @@ public:
   void is_unused_flag83_set(int v);
   void is_unused_flag84_set(int v);
   void is_unused_flag85_set(int v);
-  void is_unused_flag86_set(int v);
-  void is_unused_flag87_set(int v);
   void is_unused_flag8_set(int v);
   void is_unused_flag9_set(int v);
   void is_usable_set(int v);

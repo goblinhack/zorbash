@@ -92,6 +92,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_crushable(self, True)
     my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
+    my.is_drinkable(self, True)
     my.is_droppable(self, True)
     my.is_glass(self, True)
     my.is_health_booster(self, True)

@@ -41,6 +41,7 @@ def tp_init(name, text_long_name):
     my.ai_wanderer(self, True)
     my.attack_eater(self, True)
     my.chance_d1000_shooting(self, 100)
+    my.chance_d1000_tameable(self, 100)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.distance_avoid(self, 4)

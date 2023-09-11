@@ -705,11 +705,11 @@ bool Thing::use(Thingp what, UseOptions *use_options)
     if (is_player()) {
       game->tick_begin("player ate an item");
     }
-  } else if (what->is_potion()) {
+  } else if (what->is_drinkable()) {
     dbg("Trying to drink: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
     if (is_player()) {
-      msg("You quaff %s.", what->text_the().c_str());
+      msg("You drink %s.", what->text_the().c_str());
     }
     used(what, this, true /* remove after use */);
     if (is_player()) {

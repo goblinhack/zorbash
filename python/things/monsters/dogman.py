@@ -44,6 +44,7 @@ def tp_init(name, text_long_name):
     my.chance_d1000_carrier_of_treasure_class_A(self, 20)
     my.chance_d1000_carrier_of_weapon_class_A(self, 1000)
     my.chance_d1000_shooting(self, 500)
+    my.chance_d1000_tameable(self, 50)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 10)

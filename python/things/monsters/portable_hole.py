@@ -16,6 +16,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.aggression_pct(self, 100)
     my.ai_wanderer(self, True)
     my.attack_humanoid(self, True)
+    my.chance_d1000_tameable(self, 0)
     my.chance_d1000_teleport_attack(self, 1000)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)

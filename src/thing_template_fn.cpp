@@ -250,6 +250,7 @@ int Tp::chance_d1000_shooting_avoid_friends(void) const { return _chance_d1000_s
 int Tp::chance_d1000_shooting(void) const { return _chance_d1000_shooting; }
 int Tp::chance_d1000_shove(void) const { return _chance_d1000_shove; }
 int Tp::chance_d1000_steal_item(void) const { return _chance_d1000_steal_item; }
+int Tp::chance_d1000_tameable(void) const { return _chance_d1000_tameable; }
 int Tp::chance_d1000_teleport_attack(void) const { return _chance_d1000_teleport_attack; }
 int Tp::chance_d1000_teleport_self(void) const { return _chance_d1000_teleport_self; }
 int Tp::charge_count(void) const { return _charge_count; }
@@ -510,6 +511,7 @@ int Tp::is_destroyed_on_hit_or_miss(void) const { return _is_destroyed_on_hit_or
 int Tp::is_destroyed_on_hitting(void) const { return _is_destroyed_on_hitting; }
 int Tp::is_dirt(void) const { return _is_dirt; }
 int Tp::is_door(void) const { return _is_door; }
+int Tp::is_drinkable(void) const { return _is_drinkable; }
 int Tp::is_droppable(void) const { return _is_droppable; }
 int Tp::is_duck(void) const { return _is_duck; }
 int Tp::is_eater_of_amulets(void) const { return _is_eater_of_amulets; }
@@ -751,6 +753,7 @@ int Tp::is_sticky(void) const { return _is_sticky; }
 int Tp::is_stone(void) const { return _is_stone; }
 int Tp::is_swimmer(void) const { return _is_swimmer; }
 int Tp::is_sword(void) const { return _is_sword; }
+int Tp::is_tameable(void) const { return _is_tameable; }
 int Tp::is_target_radial(void) const { return _is_target_radial; }
 int Tp::is_target_select(void) const { return _is_target_select; }
 int Tp::is_tentacle(void) const { return _is_tentacle; }
@@ -860,8 +863,6 @@ int Tp::is_unused_flag82(void) const { return _is_unused_flag82; }
 int Tp::is_unused_flag83(void) const { return _is_unused_flag83; }
 int Tp::is_unused_flag84(void) const { return _is_unused_flag84; }
 int Tp::is_unused_flag85(void) const { return _is_unused_flag85; }
-int Tp::is_unused_flag86(void) const { return _is_unused_flag86; }
-int Tp::is_unused_flag87(void) const { return _is_unused_flag87; }
 int Tp::is_unused_flag8(void) const { return _is_unused_flag8; }
 int Tp::is_unused_flag9(void) const { return _is_unused_flag9; }
 int Tp::is_usable(void) const { return _is_usable; }
@@ -1011,6 +1012,7 @@ void Tp::chance_d1000_shooting_avoid_friends_set(int v) { _chance_d1000_shooting
 void Tp::chance_d1000_shooting_set(int v) { _chance_d1000_shooting = v; }
 void Tp::chance_d1000_shove_set(int v) { _chance_d1000_shove = v; }
 void Tp::chance_d1000_steal_item_set(int v) { _chance_d1000_steal_item = v; }
+void Tp::chance_d1000_tameable_set(int v) { _chance_d1000_tameable = v; }
 void Tp::chance_d1000_teleport_attack_set(int v) { _chance_d1000_teleport_attack = v; }
 void Tp::chance_d1000_teleport_self_set(int v) { _chance_d1000_teleport_self = v; }
 void Tp::charge_count_set(int v) { _charge_count = v; }
@@ -1279,6 +1281,7 @@ void Tp::is_destroyed_on_hit_or_miss_set(int v) { _is_destroyed_on_hit_or_miss =
 void Tp::is_destroyed_on_hitting_set(int v) { _is_destroyed_on_hitting = v; }
 void Tp::is_dirt_set(int v) { _is_dirt = v; }
 void Tp::is_door_set(int v) { _is_door = v; }
+void Tp::is_drinkable_set(int v) { _is_drinkable = v; }
 void Tp::is_droppable_set(int v) { _is_droppable = v; }
 void Tp::is_duck_set(int v) { _is_duck = v; }
 void Tp::is_eater_of_amulets_set(int v) { _is_eater_of_amulets = v; }
@@ -1520,6 +1523,7 @@ void Tp::is_sticky_set(int v) { _is_sticky = v; }
 void Tp::is_stone_set(int v) { _is_stone = v; }
 void Tp::is_swimmer_set(int v) { _is_swimmer = v; }
 void Tp::is_sword_set(int v) { _is_sword = v; }
+void Tp::is_tameable_set(int v) { _is_tameable = v; }
 void Tp::is_target_radial_set(int v) { _is_target_radial = v; }
 void Tp::is_target_select_set(int v) { _is_target_select = v; }
 void Tp::is_tentacle_set(int v) { _is_tentacle = v; }
@@ -1629,8 +1633,6 @@ void Tp::is_unused_flag82_set(int v) { _is_unused_flag82 = v; }
 void Tp::is_unused_flag83_set(int v) { _is_unused_flag83 = v; }
 void Tp::is_unused_flag84_set(int v) { _is_unused_flag84 = v; }
 void Tp::is_unused_flag85_set(int v) { _is_unused_flag85 = v; }
-void Tp::is_unused_flag86_set(int v) { _is_unused_flag86 = v; }
-void Tp::is_unused_flag87_set(int v) { _is_unused_flag87 = v; }
 void Tp::is_unused_flag8_set(int v) { _is_unused_flag8 = v; }
 void Tp::is_unused_flag9_set(int v) { _is_unused_flag9 = v; }
 void Tp::is_usable_set(int v) { _is_usable = v; }

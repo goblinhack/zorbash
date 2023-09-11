@@ -22,6 +22,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.ai_wanderer(self, True)
     my.attack_eater(self, True)
     my.chance_d1000_attack_engulf(self, 1000)
+    my.chance_d1000_tameable(self, 0)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 30)

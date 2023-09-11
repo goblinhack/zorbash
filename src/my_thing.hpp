@@ -1165,6 +1165,7 @@ public:
   int chance_d1000_shooting(void);
   int chance_d1000_shove(void);
   int chance_d1000_steal_item(void);
+  int chance_d1000_tameable(void);
   int chance_d1000_teleport_attack(void);
   int chance_d1000_teleport_self(void);
   int charge_count_decr(int);
@@ -1574,6 +1575,7 @@ public:
   int is_destroyed_on_hitting(void);
   int is_dirt(void);
   int is_door(void);
+  int is_drinkable(void);
   int is_droppable(void);
   int is_duck(void);
   int is_eater_of_amulets(void);
@@ -1817,6 +1819,7 @@ public:
   int is_stone(void);
   int is_swimmer(void);
   int is_sword(void);
+  int is_tameable(void);
   int is_target_radial(void);
   int is_target_select(void);
   int is_tentacle(void);
@@ -1925,8 +1928,6 @@ public:
   int is_unused_flag83(void);
   int is_unused_flag84(void);
   int is_unused_flag85(void);
-  int is_unused_flag86(void);
-  int is_unused_flag87(void);
   int is_unused_flag8(void);
   int is_unused_flag9(void);
   int is_usable(void);
