@@ -401,6 +401,39 @@ PyObject *thing_dead(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_TRUE;
 }
 
+PyObject *thing_wake(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     id       = 0;
+  char        *reason   = nullptr;
+  static char *kwlist[] = {(char *) "t", (char *) "reason", nullptr};
+
+  TRACE_NO_INDENT();
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &reason)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! id) {
+    ERR("%s: No t thing ID set", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  Thingp t = game->thing_find(id);
+  if (! t) {
+    ERR("%s: Cannot find t thing ID %u", __FUNCTION__, id);
+    Py_RETURN_FALSE;
+  }
+
+  if (! reason) {
+    ERR("%s: No reason thing ID set", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  t->wake(reason);
+  Py_RETURN_TRUE;
+}
+
 PyObject *thing_freeze(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();

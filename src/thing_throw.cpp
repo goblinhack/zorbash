@@ -220,7 +220,7 @@ bool Thing::throw_at(Thingp what, Thingp target)
   } else {
     if (is_player()) {
       if (target->is_cursor()) {
-        msg("You throw %s at the ground", what->text_the().c_str());
+        msg("You throw %s at the ground.", what->text_the().c_str());
       } else {
         msg("You throw %s at %s", what->text_the().c_str(), target->text_the().c_str());
       }

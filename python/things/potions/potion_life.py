@@ -3,33 +3,44 @@ import tp
 
 
 def on_thrown(owner, me, x, y):
-    shatters(me, x, y)
+    # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
+    # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
+    for it in my.level_get_all(me, x, y):
+        # my.con("it      {} {:X} {},{}".format(my.thing_name_get(it), it, x, y))
+        if my.thing_is_alive_monst(it) or my.thing_is_player(it):
+            on_use(owner, me, it, x, y)
+            return
+
+    my.thing_dead(me, "used")
 
 
 def on_use(owner, item, target, x, y):
     # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
     # my.con("item    {} {:X}".format(my.thing_name_get(item), item))
     # my.con("target  {} {:X}".format(my.thing_name_get(target), target))
-    my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, "potion")
+    my.thing_sound_play_channel(target, my.CHANNEL_WEAPON, "potion")
+    my.thing_wake(target, "potion")
 
-    my.thing_health_max_incr(owner, 10)
-    my.thing_stamina_max_incr(owner, 10)
+    my.thing_health_max_incr(target, 10)
+    my.thing_stamina_max_incr(target, 10)
 
-    my.thing_health_set(owner, my.thing_health_max(owner))
-    my.thing_stamina_set(owner, my.thing_stamina_max(owner))
+    my.thing_health_set(target, my.thing_health_max(target))
+    my.thing_stamina_set(target, my.thing_stamina_max(target))
 
-    my.thing_poisoned_amount_set(owner, 0)
+    my.thing_poisoned_amount_set(target, 0)
 
-    my.thing_debuff_remove(owner, "debuff_slow")
-    my.thing_debuff_remove(owner, "debuff_necrotized")
-    my.thing_debuff_remove(owner, "debuff_paralysis")
-    my.thing_debuff_remove(owner, "debuff_poisoned")
-    my.thing_debuff_remove(owner, "debuff_starving")
-    my.thing_debuff_remove(owner, "debuff_hungry")
+    my.thing_debuff_remove(target, "debuff_slow")
+    my.thing_debuff_remove(target, "debuff_necrotized")
+    my.thing_debuff_remove(target, "debuff_paralysis")
+    my.thing_debuff_remove(target, "debuff_poisoned")
+    my.thing_debuff_remove(target, "debuff_starving")
+    my.thing_debuff_remove(target, "debuff_hungry")
 
-    my.spawn_using_items_radius_range(owner, item, target, "potion_effect")
-    if my.thing_is_player(owner):
-        my.thing_msg(owner, "%%fg=pink$You glow with renewed life.%%fg=reset$")
+    my.spawn_using_items_radius_range(target, item, target, "potion_effect")
+    if my.thing_is_player(target):
+        my.thing_msg(target, "%%fg=pink$You glow with renewed life.%%fg=reset$")
+    else:
+        my.thing_msg(target, f"The {my.thing_name_get(target)} glows with renewed life.")
 
 
 def shatters(me, x, y):
@@ -134,7 +145,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="potion_life", text_long_name="potion of life", text_short_name="potion of life")
+    tp_init(name="potion_life", text_long_name="potion of life", text_short_name="potion, life")
 
 
 init()

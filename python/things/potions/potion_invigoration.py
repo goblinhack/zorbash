@@ -3,36 +3,48 @@ import tp
 
 
 def on_thrown(owner, me, x, y):
-    shatters(me, x, y)
+    # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
+    # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
+    for it in my.level_get_all(me, x, y):
+        # my.con("it      {} {:X} {},{}".format(my.thing_name_get(it), it, x, y))
+        if my.thing_is_alive_monst(it) or my.thing_is_player(it):
+            on_use(owner, me, it, x, y)
+            return
+
+    my.thing_dead(me, "used")
 
 
 def on_use(owner, item, target, x, y):
     # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
     # my.con("item    {} {:X}".format(my.thing_name_get(item), item))
     # my.con("target  {} {:X}".format(my.thing_name_get(target), target))
+    my.thing_sound_play_channel(target, my.CHANNEL_WEAPON, "potion")
+    my.thing_wake(target, "potion")
+
     did_something = False
-
-    my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, "potion")
-
-    health = my.thing_health(owner)
-    new_health = int((float(my.thing_health_max(owner)) / 100.0) * 80.0)
+    health = my.thing_health(target)
+    new_health = int((float(my.thing_health_max(target)) / 100.0) * 80.0)
     if new_health > health:
         did_something = True
-        my.thing_health_set(owner, new_health)
+        my.thing_health_set(target, new_health)
 
-    stamina = my.thing_stamina(owner)
-    new_stamina = int((float(my.thing_stamina_max(owner)) / 100.0) * 80.0)
+    stamina = my.thing_stamina(target)
+    new_stamina = int((float(my.thing_stamina_max(target)) / 100.0) * 80.0)
     if new_stamina > stamina:
         did_something = True
-        my.thing_stamina_set(owner, new_stamina)
+        my.thing_stamina_set(target, new_stamina)
 
     if did_something:
-        my.spawn_using_items_radius_range(owner, item, target, "potion_effect")
-        if my.thing_is_player(owner):
-            my.thing_msg(owner, "%%fg=pink$You glow with renewed health.%%fg=reset$")
+        my.spawn_using_items_radius_range(target, item, target, "potion_effect")
+        if my.thing_is_player(target):
+            my.thing_msg(target, "%%fg=pink$You glow with renewed health.%%fg=reset$")
+        else:
+            my.thing_msg(target, f"The {my.thing_name_get(target)} glows with health.")
     else:
-        if my.thing_is_player(owner):
-            my.thing_msg(owner, "Hm. That potion didn't seem to do anything.")
+        if my.thing_is_player(target):
+            my.thing_msg(target, "Hm. That potion didn't seem to do anything.")
+        else:
+            my.thing_msg(target, f"The {my.thing_name_get(target)} shrugs.")
 
 
 def shatters(me, x, y):
@@ -134,7 +146,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="potion_invigoration", text_long_name="potion of invigoration", text_short_name="potion of invig.")
+    tp_init(name="potion_invigoration", text_long_name="potion of invigoration", text_short_name="potion, invigorate")
 
 
 init()

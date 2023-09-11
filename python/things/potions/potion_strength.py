@@ -11,15 +11,15 @@ def on_thrown(owner, me, x, y):
             on_use(owner, me, it, x, y)
             return
 
-    shatters(me, x, y)
+    my.thing_dead(me, "used")
 
 
 def on_use(owner, item, target, x, y):
     # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
     # my.con("item    {} {:X}".format(my.thing_name_get(item), item))
     # my.con("target  {} {:X}".format(my.thing_name_get(target), target))
-
     my.thing_sound_play_channel(target, my.CHANNEL_WEAPON, "potion")
+    my.thing_wake(target, "potion")
 
     stamina = my.thing_stamina(target)
     new_stamina = int((float(my.thing_stamina_max(target)) / 100.0) * 80.0)
@@ -134,7 +134,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="potion_strength", text_long_name="potion of strength", text_short_name="potion of strength")
+    tp_init(name="potion_strength", text_long_name="potion of strength", text_short_name="potion, strength")
 
 
 init()

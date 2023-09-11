@@ -341,6 +341,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_consume_per_bite_amount),
     MY_ADD_PYTHON_FUNCTION(thing_coords_get),
     MY_ADD_PYTHON_FUNCTION(thing_dead),
+    MY_ADD_PYTHON_FUNCTION(thing_wake),
     MY_ADD_PYTHON_FUNCTION(thing_death_by),
     MY_ADD_PYTHON_FUNCTION(thing_debuff_add),
     MY_ADD_PYTHON_FUNCTION(thing_debuff_remove),

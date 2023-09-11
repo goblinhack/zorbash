@@ -109,14 +109,15 @@ void Game::place_player(void)
         auto w = level->thing_new("potion_gas_poison", point(x, y));
         t->carry(w, carry_options);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("potion_strength", point(x, y));
         t->carry(w, carry_options);
-        level->thing_new("dogman", point(x + 2, y));
       }
       if (0) {
         auto w = level->thing_new("potion_life", point(x, y));
         t->carry(w, carry_options);
+        t->carry(w, carry_options);
+        level->thing_new("dogman", point(x + 2, y));
       }
       if (0) {
         auto w = level->thing_new("potion_invigoration", point(x, y));

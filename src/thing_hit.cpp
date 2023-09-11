@@ -2404,10 +2404,6 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     // Set up noise, for example a door being hit
     //
     level->sound_sources_incr(curr_at.x, curr_at.y, noise_on_hit_and_still_alive());
-  } else if (is_sleeping) {
-    //
-    // e.g. Gargoyle being attacked by ice and does not wake.
-    //
   } else {
     TRACE_NO_INDENT();
     on_hit_and_still_alive(hitter, real_hitter, attack_options->crit, damage);

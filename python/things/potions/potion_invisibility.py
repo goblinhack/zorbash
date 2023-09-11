@@ -113,7 +113,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="potion_invisibility", text_long_name="potion of invisibility", text_short_name="potion of invis")
+    tp_init(name="potion_invisibility", text_long_name="potion of invisibility", text_short_name="potion, invisible")
 
 
 init()
