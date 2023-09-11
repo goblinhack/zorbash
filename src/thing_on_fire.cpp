@@ -124,6 +124,10 @@ bool Thing::on_fire_set(const std::string &why)
       return false;
     }
 
+    if (level->is_fire(curr_at)) {
+      return false;
+    }
+
     con("Spawn fire, %s", why.c_str());
     level->thing_new("fire", this);
   } else {
@@ -154,13 +158,17 @@ bool Thing::on_fire_set(const std::string &why)
     // I mean, it's likely this will cause you to wake.
     //
     wake("on fire");
-  }
 
-  //
-  // In case the fire is over a chasm. Don't call forced as we could
-  // have already stepped on lava that triggered this.
-  //
-  location_check_me();
+    //
+    // In case the fire is over a chasm. Don't call forced as we could
+    // have already stepped on lava that triggered this.
+    //
+    // Only call this is we actually managed to set it on fire.
+    //
+    if (on_fire_anim_id().ok()) {
+      location_check_me();
+    }
+  }
 
   return true;
 }

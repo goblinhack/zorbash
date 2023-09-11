@@ -8,7 +8,7 @@
 <!-- DONE Potion of Invisibility - Reduces you stealth radius considerably.                                                                       -->
 <!-- DONE Potion of Life - Restores full health and increases maximum health. Cures most status ailments.                                         -->
 <!-- DONE Potion of Strength - Permanently increases you strength by one point. Cures weakness.                                                   -->
-<!-- TODO Potion of Paralysis - Produces a cloud of paraylsis gas.                                                                                -->
+<!-- DONE Potion of Paralysis - Produces a cloud of paraylsis gas.                                                                                -->
 <!-- TODO Potion of Confusion - Produces a cloud of confusion gas.                                                                                -->
 <!-- TODO Potion of Creeping Death - Unleashes a spreading fungus that inflicts poisoning when stepped upon.                                      -->
 <!-- TODO Potion of Descent - Instantly erodes an area of the floor. Nearby monsters/objects will fall to the next level.                         -->
