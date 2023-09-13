@@ -39,7 +39,7 @@ def tp_init(name, text_long_name):
     my.distance_avoid(self, 3)
     my.distance_minion_from_mob_max(self, 12)
     my.distance_minion_vision_shared(self, True)
-    my.distance_vision(self, 13)
+    my.distance_vision(self, 3)
     my.dmg_bite_dice(self, "1d3")
     my.dmg_chance_d1000_bite(self, 0, 500)
     my.dmg_chance_d1000_claw(self, 0, 500)

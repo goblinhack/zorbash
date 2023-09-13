@@ -38,7 +38,7 @@ def tp_init(name, text_long_name):
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 5)
     my.distance_avoid(self, 3)
-    my.distance_vision(self, 6)
+    my.distance_vision(self, 4)
     my.dmg_bite_dice(self, "1d4")
     my.dmg_chance_d1000_bite(self, 0, 500)
     my.dmg_chance_d1000_claw(self, 0, 500)

@@ -126,7 +126,7 @@ def tp_init(name, text_long_name):
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "an")
     my.text_description_long2(self, "It seems friendly and definitely non non venomous. Want to pet it...?")
-    my.text_description_long(self, "A two foot long snake with shiny yellow irises and a cutely upturned snout giving it the appearance of a small spike.")
+    my.text_description_long(self, "A two foot long snake with shiny yellow irises and an upturned snout giving it the appearance of a small spike.")
     my.text_description_short(self, "A friendly little venomous snake.")
     my.text_hits(self, "gores")
     my.thing_size(self, my.THING_SIZE_NORMAL)

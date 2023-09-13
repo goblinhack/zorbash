@@ -125,7 +125,7 @@ def tp_init(name, text_long_name):
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
     my.text_description_long2(self, "How these creatures evolved down here is beyond me. There are rumours of a wizard leaving open a portal to the abyss and out hopped the first murder bunny. The wizard didn't last long. Neither will you!")
-    my.text_description_long(self, "Murder bunnies look cute, if you ignore the red eyes. As one of the fastest and most deranged creatures you will meet in the dungeon, simply turn around and run away.")
+    my.text_description_long(self, "Murder bunnies look cute if you ignore the red eyes. As one of the fastest and most deranged creatures you will meet in the dungeon, simply turn around and run away.")
     my.text_description_short(self, "A murder bunny.")
     my.text_hits(self, "slashes")
     my.thing_size(self, my.THING_SIZE_SMALL)
