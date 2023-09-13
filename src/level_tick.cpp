@@ -85,14 +85,7 @@ void Level::handle_input_events(void)
     // sooner and should result in the flag below being cleared.
     //
     if (game->things_are_moving) {
-      dbg("Fast forward loop");
-      do {
-        time_game_delta += 50;
-        display_pixelart_internal_particles();
-        display_pixelart_external_particles();
-        tick();
-      } while (game->things_are_moving);
-      dbg("Fast forward end");
+      time_game_delta += 50;
     }
 
     game->request_player_move = 0;

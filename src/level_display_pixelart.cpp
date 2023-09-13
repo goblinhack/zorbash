@@ -318,9 +318,9 @@ void Level::display_pixelart_map_all(void)
   display_map_set_bounds();
   display_tick_animation();
 
-  bool fade_out = ts_fade_out_begin != 0;
-  bool fade_in  = ts_fade_in_begin != 0;
-  bool frozen   = player ? player->is_changing_level : false;
+  bool fade_out       = ts_fade_out_begin != 0;
+  bool fade_in        = ts_fade_in_begin != 0;
+  bool changing_level = player ? player->is_changing_level : false;
 
   if (fade_out) {
     if ((time_ms_cached() < ts_fade_out_begin) || (time_ms_cached() - ts_fade_out_begin > LEVEL_FADE_OUT_MS)) {
@@ -346,7 +346,7 @@ void Level::display_pixelart_map_all(void)
 
   pixel_map_at = point(map_at.x * TILE_WIDTH, map_at.y * TILE_HEIGHT);
 
-  if (! frozen) {
+  if (! changing_level) {
     TRACE_NO_INDENT();
     //
     // Generate an FBO with all light sources merged together
@@ -382,7 +382,7 @@ void Level::display_pixelart_map_all(void)
     lights_render(light_minx, light_miny, light_maxx, light_maxy, FBO_SMALL_POINT_LIGHTS);
   }
 
-  if (! frozen) {
+  if (! changing_level) {
     TRACE_NO_INDENT();
     //
     // Generate the non visited map with the light inverted on it to hide visible areas
@@ -422,7 +422,7 @@ void Level::display_pixelart_map_all(void)
     }
   }
 
-  if (! frozen) {
+  if (! changing_level) {
     TRACE_NO_INDENT();
     //
     // Generate the currently visible map
@@ -442,22 +442,26 @@ void Level::display_pixelart_map_all(void)
     //
     display_pixelart_map_fg_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
 
+    //
+    // I want to see lasers on top of things like the entrance and not under.
+    //
+    // NOTE: must always call this, as monsters will block on the end of particles
+    //
+    display_lasers(tl, br);
+    display_projectiles(tl, br);
+
+    //
+    // So we can see monsters jump over walls
+    //
+    // NOTE: must always call this, as monsters will block on the end of particles
+    //
+    display_pixelart_internal_particles();
+
     if (unlikely(player && player->blinded_count())) {
       //
       // Don't show gas or jumping monsters when blinded. Too cruel?
       //
     } else {
-      //
-      // I want to see lasers on top of things like the entrance and not under.
-      //
-      display_lasers(tl, br);
-      display_projectiles(tl, br);
-
-      //
-      // So we can see monsters jump over walls
-      //
-      display_pixelart_internal_particles();
-
       //
       // Showing gas is expensive, so only do it if the gas exists
       //

@@ -107,15 +107,15 @@ void Level::display_projectiles(point tl, point br)
 {
   TRACE_NO_INDENT();
 
-#if 0
-  CON("-");
-  for (auto p : all_projectiles) {
-    CON("all int p %d,%d to @%d,%d %s", p.start.x, p.start.y, p.stop.x, p.stop.y, p.tile->name.c_str());
+  if (0) {
+    CON("- particles:");
+    for (auto p : all_projectiles) {
+      CON("all int p %d,%d to @%d,%d", p.info.map_start.x, p.info.map_start.y, p.info.map_stop.x, p.info.map_stop.y);
+    }
+    for (auto p : new_projectiles) {
+      CON("new int p %d,%d to @%d,%d", p.info.map_start.x, p.info.map_start.y, p.info.map_stop.x, p.info.map_stop.y);
+    }
   }
-  for (auto p : new_projectiles) {
-    CON("new int p %d,%d to @%d,%d %s", p.start.x, p.start.y, p.stop.x, p.stop.y, p.tile->name.c_str());
-  }
-#endif
 
   all_projectiles.insert(std::end(all_projectiles), std::begin(new_projectiles), std::end(new_projectiles));
   new_projectiles.clear();
