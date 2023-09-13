@@ -861,7 +861,7 @@ def init_tiles_16x16_main():
         "potion_invisibility",
         "potion_strength",
         "",
-        "",
+        "potion_haste",
         "",
         "potion_invigoration",
         "potion_gas_poison",

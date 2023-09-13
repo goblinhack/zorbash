@@ -101,6 +101,11 @@ void Game::place_player(void)
         t->debuff_add(w);
       }
       if (0) {
+        auto w = level->thing_new("potion_haste", point(x, y));
+        level->thing_new("dogman", point(x + 2, y));
+        t->carry(w, carry_options);
+      }
+      if (0) {
         auto w = level->thing_new("potion_darkness", point(x, y));
         level->thing_new("dogman", point(x + 2, y));
         t->carry(w, carry_options);

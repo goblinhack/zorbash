@@ -6,7 +6,7 @@ self = None
 
 def on_owner_add(me, owner, x, y):
     if my.thing_is_player(owner):
-        my.thing_msg(me, "You feel hasted.")
+        my.thing_msg(me, "You feel speedy.")
 
 
 # Called on removing a ring. Not called on death of the owner.
