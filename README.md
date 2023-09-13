@@ -9,17 +9,17 @@
 <!-- DONE Potion of Life - Restores full health and increases maximum health. Cures most status ailments.                                         -->
 <!-- DONE Potion of Strength - Permanently increases you strength by one point. Cures weakness.                                                   -->
 <!-- DONE Potion of Paralysis - Produces a cloud of paraylsis gas.                                                                                -->
-<!-- TODO Potion of Confusion - Produces a cloud of confusion gas.                                                                                -->
-<!-- TODO Potion of Creeping Death - Unleashes a spreading fungus that inflicts poisoning when stepped upon.                                      -->
-<!-- TODO Potion of Descent - Instantly erodes an area of the floor. Nearby monsters/objects will fall to the next level.                         -->
-<!-- TODO Potion of Detect Magic - Soft-IDs all inventory items. Soft-ID's and locates magic items on the current level.                          -->
+<!-- DONE Potion of Speed - Increases your speed to twice normal, even if previously slowed.                                                      -->
 <!-- TODO Potion of Fire Immunity - Make you immune to fire/burning/lava, but not explosions.                                                     -->
-<!-- TODO Potion of Hallucination - Causes long term hal                                                                                          -->
 <!-- TODO Potion of Incineration - Bursts into cloud of flames. Sets nearby monsters and terrain on fire.                                         -->
+<!-- TODO Potion of Telepathy - Allows you to see the location of most enemies, and see whatever they can see.                                    -->
+<!-- TODO Potion of Descent - Instantly erodes an area of the floor. Nearby monsters/objects will fall to the next level.                         -->
+<!-- TODO Potion of Creeping Death - Unleashes a spreading fungus that inflicts poisoning when stepped upon.                                      -->
+<!-- TODO Potion of Confusion - Produces a cloud of confusion gas.                                                                                -->
+<!-- TODO Potion of Detect Magic - Soft-IDs all inventory items. Soft-ID's and locates magic items on the current level.                          -->
+<!-- TODO Potion of Hallucination - Causes long term hal                                                                                          -->
 <!-- TODO Potion of Levitation - Causes you to float, Useful for escaping and crossing dangerous terrains.                                        -->
 <!-- TODO Potion of Malevolent (when applied or thrown):                                                                                          -->
-<!-- TODO Potion of Speed - Increases your speed to twice normal, even if previously slowed.                                                      -->
-<!-- TODO Potion of Telepathy - Allows you to see the location of most enemies, and see whatever they can see.                                    -->
 <!-- TODO Runics on weapons, like vampirism, force, quietus, lightning                                                                            -->
 <!-- TODO Scroll of Aggravate Monsters                                                                                                            -->
 <!-- TODO Scroll of Discord                                                                                                                       -->
