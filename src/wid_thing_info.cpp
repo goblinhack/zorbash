@@ -1414,12 +1414,12 @@ void Game::wid_thing_info_add_dmg_missile(WidPopup *w, Thingp t, int attack_inde
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_missile_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Impact dmg%19s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Missile dmg%18s", tmp2);
       } else {
         min_value += t->enchant_count_get();
         max_value += t->enchant_count_get();
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_missile_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Impact dmg%19s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Missile dmg%18s", tmp2);
       }
       w->log(tmp);
 

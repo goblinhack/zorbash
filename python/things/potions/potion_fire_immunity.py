@@ -11,7 +11,7 @@ def on_thrown(owner, me, x, y):
             on_use(owner, me, it, x, y)
             return
 
-    my.thing_dead(me, "used")
+    shatters(me, me, x, y)
 
 
 def on_use(owner, item, target, x, y):
@@ -27,33 +27,33 @@ def on_use(owner, item, target, x, y):
         my.thing_msg(target, f"The {my.thing_name_get(target)} is fire proof.")
 
 
-def shatters(me, x, y):
-    if my.thing_is_dead(me):
+def shatters(item, target, x, y):
+    if my.thing_is_dead(item):
         return
 
-    owner = my.thing_top_owner_id_get(me)
+    owner = my.thing_top_owner_id_get(item)
     if owner:
         if my.thing_is_player(owner):
-            my.thing_msg(me, "Your potion of fire immunity shatters.")
+            my.thing_msg(owner, "Your potion of fire immunitu shatters.")
         else:
-            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s potion of fire immunity shatters.")
+            my.thing_msg(owner, f"The {my.thing_name_get(owner)}'s potion of fire immunitu shatters.")
     else:
-        my.thing_msg(me, "The potion of fire immunity shatters.")
+        my.thing_msg(item, "The potion of fire immunitu shatters.")
 
-    my.spawn_at_my_position(me, "explosion_fire")
-    my.thing_dead(me, "broken")
+    my.spawn_at_my_position(target, "explosion_major")
+    my.thing_dead(item, "broken")
 
 
 def on_hit_and_still_alive(me, hitter, real_hitter, x, y, crit, damage):
-    shatters(me, x, y)
+    shatters(me, me, x, y)
 
 
 def on_fire(me, x, y):
-    shatters(me, x, y)
+    shatters(me, me, x, y)
 
 
 def on_fall(me, x, y):
-    shatters(me, x, y)
+    shatters(me, me, x, y)
 
 
 def tp_init(name, text_long_name, text_short_name):
@@ -109,6 +109,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "A bubbling orange elixir that will provide you with a time limited offer of fire immunity.")
+    my.text_description_long2(self, "Lava bathing not guaranteed.")
     my.text_description_short(self, "A potion of fire immunity.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)

@@ -100,11 +100,13 @@ void Game::place_player(void)
         auto w = level->thing_new("debuff_temporary_slow", point(x, y));
         t->debuff_add(w);
       }
-      if (0) {
+      auto w = level->thing_new("potion_fire_immunity", point(x, y));
+      t->carry(w, carry_options);
+      if (1) {
         auto w = level->thing_new("potion_fire_immunity", point(x, y));
         t->carry(w, carry_options);
-        level->thing_new("fire", point(x + 1, y - 1));
-        level->thing_new("fire", point(x + 1, y + 1));
+        level->thing_new("lava", point(x + 1, y - 1));
+        level->thing_new("lava", point(x + 1, y + 1));
         level->player->on_fire_set("");
       }
       if (0) {

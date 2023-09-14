@@ -6,6 +6,7 @@ def attack(me, it):
     if my.thing_possible_to_attack(me, it):
         if it != me:
             my.thing_hit(0, me, it)
+            # my.thing_hit_dmg_poison(owner, me, target, roll)
 
 
 def on_born(me, x, y):
@@ -24,6 +25,7 @@ def on_born(me, x, y):
             if my.py_pcg_random_range_inclusive(1, 100) < 10:
                 my.place_at(me, "fire", x + dx, y + dy)
             for it in my.level_get_all(me, selection_x + dx, selection_y + dy):
+                # my.topcon("it  {} {}".format(my.thing_name_get(it), my.thing_health(it)))
                 attack(me, it)
 
 
