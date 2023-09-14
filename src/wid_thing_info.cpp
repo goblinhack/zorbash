@@ -258,6 +258,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
       wid_thing_info_add_dmg_fire(wid_popup_window, t, attack_index);
       wid_thing_info_add_dmg_heat(wid_popup_window, t, attack_index);
       wid_thing_info_add_dmg_crush(wid_popup_window, t, attack_index);
+      wid_thing_info_add_dmg_impact(wid_popup_window, t, attack_index);
       wid_thing_info_add_dmg_missile(wid_popup_window, t, attack_index);
       wid_thing_info_add_dmg_lightning(wid_popup_window, t, attack_index);
       wid_thing_info_add_dmg_energy(wid_popup_window, t, attack_index);
@@ -1366,16 +1367,64 @@ void Game::wid_thing_info_add_dmg_crush(WidPopup *w, Thingp t, int attack_index)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_crush_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Crush dmg%20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Impact dmg%19s", tmp2);
       } else {
         min_value += t->enchant_count_get();
         max_value += t->enchant_count_get();
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_crush_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Crush dmg%20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Impact dmg%19s", tmp2);
       }
       w->log(tmp);
 
       int chance = (int) (((((float) tp->dmg_chance_d1000_crush(attack_index))) / 1000.0) * 100.0);
+
+      if (! t->is_player()) {
+        if (chance > 0) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+          w->log(tmp);
+        }
+      }
+    }
+  }
+}
+
+void Game::wid_thing_info_add_dmg_impact(WidPopup *w, Thingp t, int attack_index)
+{
+  TRACE_AND_INDENT();
+  char tmp[ MAXSHORTSTR ];
+  char tmp2[ MAXSHORTSTR ];
+
+  auto tp = t->tp();
+  if (! tp->dmg_chance_d1000_impact(attack_index)) {
+    return;
+  }
+
+  if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
+      || t->is_magical()) {
+    //
+    // Don't display for dead monsters
+    //
+    if (t->is_dead) {
+      return;
+    }
+
+    auto dmg_impact_dice = t->dmg_impact_dice();
+    auto min_value       = dmg_impact_dice.min_roll();
+    auto max_value       = dmg_impact_dice.max_roll();
+    if (min_value > 0) {
+      if (min_value == max_value) {
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_impact_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Crush dmg%20s", tmp2);
+      } else {
+        min_value += t->enchant_count_get();
+        max_value += t->enchant_count_get();
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_impact_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Crush dmg%20s", tmp2);
+      }
+      w->log(tmp);
+
+      int chance = (int) (((((float) tp->dmg_chance_d1000_impact(attack_index))) / 1000.0) * 100.0);
 
       if (! t->is_player()) {
         if (chance > 0) {

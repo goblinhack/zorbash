@@ -489,6 +489,11 @@ void tp_dump_monsters(void)
       dmg_str += tp->dmg_crush_dice_str();
       dmg_str += "<newline>";
     }
+    if (! tp->dmg_impact_dice_str().empty()) {
+      dmg_str += "Impact:";
+      dmg_str += tp->dmg_impact_dice_str();
+      dmg_str += "<newline>";
+    }
     if (! tp->dmg_digest_dice_str().empty()) {
       dmg_str += "Digest:";
       dmg_str += tp->dmg_digest_dice_str();
@@ -678,6 +683,11 @@ void tp_dump_weapons(void)
     if (! tp->dmg_crush_dice_str().empty()) {
       dmg_str += "Damage-Crush:";
       dmg_str += tp->dmg_crush_dice_str();
+      dmg_str += "<newline>";
+    }
+    if (! tp->dmg_impact_dice_str().empty()) {
+      dmg_str += "Damage-Impact:";
+      dmg_str += tp->dmg_impact_dice_str();
       dmg_str += "<newline>";
     }
     if (! tp->dmg_digest_dice_str().empty()) {

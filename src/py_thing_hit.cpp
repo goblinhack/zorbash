@@ -126,6 +126,12 @@ PyObject *thing_hit_dmg_crush(PyObject *obj, PyObject *args, PyObject *keywds)
   return thing_hit_common(obj, args, keywds, THING_ATTACK_CRUSH);
 }
 
+PyObject *thing_hit_dmg_impact(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  return thing_hit_common(obj, args, keywds, THING_ATTACK_IMPACT);
+}
+
 PyObject *thing_hit_dmg_missile(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();

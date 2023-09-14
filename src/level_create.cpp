@@ -177,6 +177,7 @@ int Level::total_monst_dmg_level(void)
       damage += t->dmg_fire_dice().max_roll();
       damage += t->dmg_heat_dice().max_roll();
       damage += t->dmg_crush_dice().max_roll();
+      damage += t->dmg_impact_dice().max_roll();
       damage += t->dmg_missile_dice().max_roll();
       damage += t->dmg_lightning_dice().max_roll();
       damage += t->dmg_energy_dice().max_roll();

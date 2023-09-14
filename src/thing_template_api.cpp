@@ -124,6 +124,15 @@ void               Tp::dmg_crush_dice_set(const std::string &v)
   _dmg_crush_dice_str = v;
 }
 
+const Dice        &Tp::dmg_impact_dice(void) const { return _dmg_impact_dice; }
+const int          Tp::dmg_impact(void) const { return _dmg_impact_dice.roll(); }
+const std::string &Tp::dmg_impact_dice_str(void) const { return _dmg_impact_dice_str; }
+void               Tp::dmg_impact_dice_set(const std::string &v)
+{
+  _dmg_impact_dice     = v;
+  _dmg_impact_dice_str = v;
+}
+
 const Dice        &Tp::dmg_missile_dice(void) const { return _dmg_missile_dice; }
 const int          Tp::dmg_missile(void) const { return _dmg_missile_dice.roll(); }
 const std::string &Tp::dmg_missile_dice_str(void) const { return _dmg_missile_dice_str; }

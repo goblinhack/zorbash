@@ -64,6 +64,7 @@ private:
   Dice _dmg_claw_dice {};
   Dice _dmg_cold_dice {};
   Dice _dmg_crush_dice {};
+  Dice _dmg_impact_dice {};
   Dice _dmg_digest_dice {};
   Dice _dmg_drown_dice {};
   Dice _dmg_energy_dice {};
@@ -94,6 +95,7 @@ private:
   std::vector< int > _dmg_chance_d1000_water {};
   std::vector< int > _dmg_chance_d1000_cold {};
   std::vector< int > _dmg_chance_d1000_crush {};
+  std::vector< int > _dmg_chance_d1000_impact {};
   std::vector< int > _dmg_chance_d1000_missile {};
   std::vector< int > _dmg_chance_d1000_digest {};
   std::vector< int > _dmg_chance_d1000_energy {};
@@ -892,6 +894,7 @@ private:
   std::string _dmg_energy_dice_str;
   std::string _dmg_fire_dice_str;
   std::string _dmg_heat_dice_str;
+  std::string _dmg_impact_dice_str;
   std::string _dmg_lightning_dice_str;
   std::string _dmg_magic_dice_str;
   std::string _dmg_melee_dice_str;
@@ -927,6 +930,7 @@ private:
   std::string _on_attacking_dmg_energy_do;
   std::string _on_attacking_dmg_fire_do;
   std::string _on_attacking_dmg_heat_do;
+  std::string _on_attacking_dmg_impact_do;
   std::string _on_attacking_dmg_lightning_do;
   std::string _on_attacking_dmg_magic_do;
   std::string _on_attacking_dmg_melee_do;
@@ -973,6 +977,7 @@ private:
   std::string _on_owner_attack_dmg_energy_do;
   std::string _on_owner_attack_dmg_fire_do;
   std::string _on_owner_attack_dmg_heat_do;
+  std::string _on_owner_attack_dmg_impact_do;
   std::string _on_owner_attack_dmg_lightning_do;
   std::string _on_owner_attack_dmg_magic_do;
   std::string _on_owner_attack_dmg_melee_do;
@@ -996,6 +1001,7 @@ private:
   std::string _on_owner_receive_dmg_energy_do;
   std::string _on_owner_receive_dmg_fire_do;
   std::string _on_owner_receive_dmg_heat_do;
+  std::string _on_owner_receive_dmg_impact_do;
   std::string _on_owner_receive_dmg_lightning_do;
   std::string _on_owner_receive_dmg_magic_do;
   std::string _on_owner_receive_dmg_melee_do;
@@ -1022,6 +1028,7 @@ private:
   std::string _on_receiving_dmg_energy_do;
   std::string _on_receiving_dmg_fire_do;
   std::string _on_receiving_dmg_heat_do;
+  std::string _on_receiving_dmg_impact_do;
   std::string _on_receiving_dmg_lightning_do;
   std::string _on_receiving_dmg_magic_do;
   std::string _on_receiving_dmg_melee_do;
@@ -1119,6 +1126,7 @@ public:
   const Dice &dmg_water_dice(void) const;
   const Dice &dmg_nat_att_dice(void) const;
   const Dice &dmg_crush_dice(void) const;
+  const Dice &dmg_impact_dice(void) const;
   const Dice &dmg_missile_dice(void) const;
   const Dice &dmg_digest_dice(void) const;
   const Dice &dmg_energy_dice(void) const;
@@ -1149,6 +1157,7 @@ public:
   const int dmg_water(void) const;
   const int dmg_nat_att(void) const;
   const int dmg_crush(void) const;
+  const int dmg_impact(void) const;
   const int dmg_missile(void) const;
   const int dmg_digest(void) const;
   const int dmg_energy(void) const;
@@ -1210,6 +1219,7 @@ public:
   void dmg_water_dice_set(const std::string &);
   void dmg_cold_dice_set(const std::string &);
   void dmg_crush_dice_set(const std::string &);
+  void dmg_impact_dice_set(const std::string &);
   void dmg_missile_dice_set(const std::string &);
   void show_botcon_description(void);
   void dmg_digest_dice_set(const std::string &);
@@ -1255,6 +1265,7 @@ public:
   const std::string &dmg_energy_dice_str(void) const;
   const std::string &dmg_fire_dice_str(void) const;
   const std::string &dmg_heat_dice_str(void) const;
+  const std::string &dmg_impact_dice_str(void) const;
   const std::string &dmg_lightning_dice_str(void) const;
   const std::string &dmg_magic_dice_str(void) const;
   const std::string &dmg_melee_dice_str(void) const;
@@ -1290,6 +1301,7 @@ public:
   const std::string &on_attacking_dmg_energy_do(void) const;
   const std::string &on_attacking_dmg_fire_do(void) const;
   const std::string &on_attacking_dmg_heat_do(void) const;
+  const std::string &on_attacking_dmg_impact_do(void) const;
   const std::string &on_attacking_dmg_lightning_do(void) const;
   const std::string &on_attacking_dmg_magic_do(void) const;
   const std::string &on_attacking_dmg_melee_do(void) const;
@@ -1336,6 +1348,7 @@ public:
   const std::string &on_owner_attack_dmg_energy_do(void) const;
   const std::string &on_owner_attack_dmg_fire_do(void) const;
   const std::string &on_owner_attack_dmg_heat_do(void) const;
+  const std::string &on_owner_attack_dmg_impact_do(void) const;
   const std::string &on_owner_attack_dmg_lightning_do(void) const;
   const std::string &on_owner_attack_dmg_magic_do(void) const;
   const std::string &on_owner_attack_dmg_melee_do(void) const;
@@ -1359,6 +1372,7 @@ public:
   const std::string &on_owner_receive_dmg_energy_do(void) const;
   const std::string &on_owner_receive_dmg_fire_do(void) const;
   const std::string &on_owner_receive_dmg_heat_do(void) const;
+  const std::string &on_owner_receive_dmg_impact_do(void) const;
   const std::string &on_owner_receive_dmg_lightning_do(void) const;
   const std::string &on_owner_receive_dmg_magic_do(void) const;
   const std::string &on_owner_receive_dmg_melee_do(void) const;
@@ -1385,6 +1399,7 @@ public:
   const std::string &on_receiving_dmg_energy_do(void) const;
   const std::string &on_receiving_dmg_fire_do(void) const;
   const std::string &on_receiving_dmg_heat_do(void) const;
+  const std::string &on_receiving_dmg_impact_do(void) const;
   const std::string &on_receiving_dmg_lightning_do(void) const;
   const std::string &on_receiving_dmg_magic_do(void) const;
   const std::string &on_receiving_dmg_melee_do(void) const;
@@ -1515,6 +1530,7 @@ public:
   int dmg_chance_d1000_claw(int index) const;
   int dmg_chance_d1000_cold(int index) const;
   int dmg_chance_d1000_crush(int index) const;
+  int dmg_chance_d1000_impact(int index) const;
   int dmg_chance_d1000_digest(int index) const;
   int dmg_chance_d1000_drown(int index) const;
   int dmg_chance_d1000_energy(int index) const;
@@ -2949,6 +2965,7 @@ public:
   void on_attacking_dmg_energy_do_set(const std::string &v);
   void on_attacking_dmg_fire_do_set(const std::string &v);
   void on_attacking_dmg_heat_do_set(const std::string &v);
+  void on_attacking_dmg_impact_do_set(const std::string &v);
   void on_attacking_dmg_lightning_do_set(const std::string &v);
   void on_attacking_dmg_magic_do_set(const std::string &v);
   void on_attacking_dmg_melee_do_set(const std::string &v);
@@ -2997,6 +3014,7 @@ public:
   void on_owner_attack_dmg_energy_do_set(const std::string &v);
   void on_owner_attack_dmg_fire_do_set(const std::string &v);
   void on_owner_attack_dmg_heat_do_set(const std::string &v);
+  void on_owner_attack_dmg_impact_do_set(const std::string &v);
   void on_owner_attack_dmg_lightning_do_set(const std::string &v);
   void on_owner_attack_dmg_magic_do_set(const std::string &v);
   void on_owner_attack_dmg_melee_do_set(const std::string &v);
@@ -3020,6 +3038,7 @@ public:
   void on_owner_receive_dmg_energy_do_set(const std::string &v);
   void on_owner_receive_dmg_fire_do_set(const std::string &v);
   void on_owner_receive_dmg_heat_do_set(const std::string &v);
+  void on_owner_receive_dmg_impact_do_set(const std::string &v);
   void on_owner_receive_dmg_lightning_do_set(const std::string &v);
   void on_owner_receive_dmg_magic_do_set(const std::string &v);
   void on_owner_receive_dmg_melee_do_set(const std::string &v);
@@ -3046,6 +3065,7 @@ public:
   void on_receiving_dmg_energy_do_set(const std::string &v);
   void on_receiving_dmg_fire_do_set(const std::string &v);
   void on_receiving_dmg_heat_do_set(const std::string &v);
+  void on_receiving_dmg_impact_do_set(const std::string &v);
   void on_receiving_dmg_lightning_do_set(const std::string &v);
   void on_receiving_dmg_magic_do_set(const std::string &v);
   void on_receiving_dmg_melee_do_set(const std::string &v);
@@ -3179,6 +3199,7 @@ public:
   void dmg_chance_d1000_acid_set(int index, int v);
   void dmg_chance_d1000_cold_set(int index, int v);
   void dmg_chance_d1000_crush_set(int index, int v);
+  void dmg_chance_d1000_impact_set(int index, int v);
   void dmg_chance_d1000_missile_set(int index, int v);
   void dmg_chance_d1000_digest_set(int index, int v);
   void dmg_chance_d1000_energy_set(int index, int v);

@@ -425,6 +425,7 @@ void tp_fixup(void)
     num_attack_types += tp->dmg_fire() ? 1 : 0;
     num_attack_types += tp->dmg_heat() ? 1 : 0;
     num_attack_types += tp->dmg_crush() ? 1 : 0;
+    num_attack_types += tp->dmg_impact() ? 1 : 0;
     num_attack_types += tp->dmg_missile() ? 1 : 0;
     num_attack_types += tp->dmg_lightning() ? 1 : 0;
     num_attack_types += tp->dmg_energy() ? 1 : 0;
@@ -454,6 +455,9 @@ void tp_fixup(void)
         }
         if (tp->dmg_crush() > 0) {
           tp->dmg_chance_d1000_crush_set(attack_index, 1000);
+        }
+        if (tp->dmg_impact() > 0) {
+          tp->dmg_chance_d1000_impact_set(attack_index, 1000);
         }
         if (tp->dmg_missile() > 0) {
           tp->dmg_chance_d1000_missile_set(attack_index, 1000);
@@ -513,11 +517,11 @@ void tp_fixup(void)
       for (auto i = 0; i < tp->dmg_num_of_attacks(); i++) {
         auto total_damange_for_this_attack_round
             = tp->dmg_chance_d1000_acid(i) + tp->dmg_chance_d1000_water(i) + tp->dmg_chance_d1000_cold(i)
-            + tp->dmg_chance_d1000_crush(i) + tp->dmg_chance_d1000_missile(i) + tp->dmg_chance_d1000_digest(i)
-            + tp->dmg_chance_d1000_energy(i) + tp->dmg_chance_d1000_negation(i) + tp->dmg_chance_d1000_fire(i)
-            + tp->dmg_chance_d1000_heat(i) + tp->dmg_chance_d1000_drown(i) + tp->dmg_chance_d1000_bite(i)
-            + tp->dmg_chance_d1000_claw(i) + tp->dmg_chance_d1000_lightning(i) + tp->dmg_chance_d1000_melee(i)
-            + tp->dmg_chance_d1000_nat_att(i) + tp->dmg_chance_d1000_necrosis(i)
+            + tp->dmg_chance_d1000_crush(i) + tp->dmg_chance_d1000_impact(i) + tp->dmg_chance_d1000_missile(i)
+            + tp->dmg_chance_d1000_digest(i) + tp->dmg_chance_d1000_energy(i) + tp->dmg_chance_d1000_negation(i)
+            + tp->dmg_chance_d1000_fire(i) + tp->dmg_chance_d1000_heat(i) + tp->dmg_chance_d1000_drown(i)
+            + tp->dmg_chance_d1000_bite(i) + tp->dmg_chance_d1000_claw(i) + tp->dmg_chance_d1000_lightning(i)
+            + tp->dmg_chance_d1000_melee(i) + tp->dmg_chance_d1000_nat_att(i) + tp->dmg_chance_d1000_necrosis(i)
             + tp->dmg_chance_d1000_stamina_drain(i) + tp->dmg_chance_d1000_magic_drain(i)
             + tp->dmg_chance_d1000_poison(i);
 

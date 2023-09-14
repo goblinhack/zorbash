@@ -44,7 +44,7 @@ bool Thing::repulse(Thingp target)
       } else if (target->is_monst() && is_player()) {
         msg("%%fg=yellow$%s is slammed against a wall.%%fg=reset$", target->text_The().c_str());
       }
-      target->is_attacked_with_dmg_crush(this, this, d10());
+      target->is_attacked_with_dmg_impact(this, this, d10());
     } else if (level->is_door(dest)) {
       //
       // Slammed against a door?
@@ -54,7 +54,7 @@ bool Thing::repulse(Thingp target)
       } else if (target->is_monst() && is_player()) {
         msg("%%fg=yellow$%s is slammed against a door.%%fg=reset$", target->text_The().c_str());
       }
-      target->is_attacked_with_dmg_crush(this, this, d8());
+      target->is_attacked_with_dmg_impact(this, this, d8());
     } else {
       //
       // Slammed against something.
@@ -64,7 +64,7 @@ bool Thing::repulse(Thingp target)
       } else if (target->is_monst() && is_player()) {
         msg("%%fg=yellow$%s is slammed against an obstacle.%%fg=reset$", target->text_The().c_str());
       }
-      target->is_attacked_with_dmg_crush(this, this, d6());
+      target->is_attacked_with_dmg_impact(this, this, d6());
     }
 
     dbg("Beckon: %s is blocked by an obstacle", target->to_short_string().c_str());

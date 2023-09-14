@@ -150,6 +150,7 @@ int Thing::dmg_max(Thingp victim)
   max_dmg      = std::max(max_dmg, dmg_fire_dice().max_roll());
   max_dmg      = std::max(max_dmg, dmg_heat_dice().max_roll());
   max_dmg      = std::max(max_dmg, dmg_crush_dice().max_roll());
+  max_dmg      = std::max(max_dmg, dmg_impact_dice().max_roll());
   max_dmg      = std::max(max_dmg, dmg_missile_dice().max_roll());
   max_dmg      = std::max(max_dmg, dmg_lightning_dice().max_roll());
   max_dmg      = std::max(max_dmg, dmg_energy_dice().max_roll());
@@ -187,6 +188,7 @@ int Thing::dmg_min(Thingp victim)
   min_dmg      = std::min(min_dmg, dmg_fire_dice().min_roll());
   min_dmg      = std::min(min_dmg, dmg_heat_dice().min_roll());
   min_dmg      = std::min(min_dmg, dmg_crush_dice().min_roll());
+  min_dmg      = std::min(min_dmg, dmg_impact_dice().min_roll());
   min_dmg      = std::min(min_dmg, dmg_missile_dice().min_roll());
   min_dmg      = std::min(min_dmg, dmg_lightning_dice().min_roll());
   min_dmg      = std::min(min_dmg, dmg_energy_dice().min_roll());

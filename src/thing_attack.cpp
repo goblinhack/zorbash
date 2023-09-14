@@ -740,6 +740,8 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
       dbg("Attack type already set: attack[THING_ATTACK_FIRE]");
     } else if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
       dbg("Attack type already set: attack[THING_ATTACK_CRUSH]");
+    } else if (attack_options->attack[ THING_ATTACK_IMPACT ]) {
+      dbg("Attack type already set: attack[THING_ATTACK_IMPACT]");
     } else if (attack_options->attack[ THING_ATTACK_LIGHTNING ]) {
       dbg("Attack type already set: attack[THING_ATTACK_LIGHTNING]");
     } else if (attack_options->attack[ THING_ATTACK_ENERGY ]) {
@@ -1060,7 +1062,35 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     }
 
     //
-    // Chance of attack[THING_ATTACK_CRUSH] damage?
+    // Chance of attack[THING_ATTACK_IMPACT] damage?
+    //
+    if (! attack_options->attack[ THING_ATTACK_IMPACT ]) {
+      if (! attack_options->dmg_set) {
+        if (d1000() < dmg_chance_d1000_impact(attack_options->attack_num)) {
+          int dmg_impact_val = dmg_impact(victim);
+          if (dmg_impact_val > 0) {
+            attack_options->damage                        = dmg_impact_val;
+            attack_options->dmg_set                       = true;
+            attack_options->attack[ THING_ATTACK_IMPACT ] = true;
+            dbg("Set impact damage %d", attack_options->damage);
+          }
+        }
+      }
+    } else if (! attack_options->dmg_set) {
+      //
+      // Here we've indicated the attack type is mandatory, but not set the damage
+      //
+      int dmg_impact_val = dmg_impact(victim);
+      if (dmg_impact_val > 0) {
+        attack_options->damage                        = dmg_impact_val;
+        attack_options->dmg_set                       = true;
+        attack_options->attack[ THING_ATTACK_IMPACT ] = true;
+        dbg("Set impact damage %d", attack_options->damage);
+      }
+    }
+
+    //
+    // Chance of attack[THING_ATTACK_MISSILE] damage?
     //
     if (! attack_options->attack[ THING_ATTACK_MISSILE ]) {
       if (! attack_options->dmg_set) {
@@ -1411,6 +1441,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         attack_options->attack[ THING_ATTACK_COLD ]      = false;
         attack_options->attack[ THING_ATTACK_FIRE ]      = false;
         attack_options->attack[ THING_ATTACK_CRUSH ]     = false;
+        attack_options->attack[ THING_ATTACK_IMPACT ]    = false;
         attack_options->attack[ THING_ATTACK_LIGHTNING ] = false;
         attack_options->attack[ THING_ATTACK_ENERGY ]    = false;
         attack_options->attack[ THING_ATTACK_NEGATION ]  = false;
@@ -1777,6 +1808,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     attack_options->attack[ THING_ATTACK_COLD ]      = false;
     attack_options->attack[ THING_ATTACK_FIRE ]      = false;
     attack_options->attack[ THING_ATTACK_CRUSH ]     = false;
+    attack_options->attack[ THING_ATTACK_IMPACT ]    = false;
     attack_options->attack[ THING_ATTACK_LIGHTNING ] = false;
     attack_options->attack[ THING_ATTACK_ENERGY ]    = false;
     attack_options->attack[ THING_ATTACK_NEGATION ]  = false;
@@ -2011,6 +2043,20 @@ int Thing::is_attacked_with_dmg_crush(Thingp hitter, Thingp real_hitter, int dam
   ThingAttackOptions attack_options {};
   attack_options.attack[ THING_ATTACK_CRUSH ] = true;
   attack_options.real_hitter                  = real_hitter;
+  IF_DEBUG
+  {
+    hitter->log("Crush attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
+  }
+  TRACE_AND_INDENT();
+  return is_hit(hitter, &attack_options, damage);
+}
+
+int Thing::is_attacked_with_dmg_impact(Thingp hitter, Thingp real_hitter, int damage)
+{
+  TRACE_NO_INDENT();
+  ThingAttackOptions attack_options {};
+  attack_options.attack[ THING_ATTACK_IMPACT ] = true;
+  attack_options.real_hitter                   = real_hitter;
   IF_DEBUG
   {
     hitter->log("Crush attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());

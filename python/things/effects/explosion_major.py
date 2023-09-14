@@ -6,7 +6,7 @@ def attack(me, it):
     if my.thing_possible_to_attack(me, it):
         if it != me:
             my.thing_hit(0, me, it)
-            # my.thing_hit_dmg_poison(owner, me, target, roll)
+            my.thing_hit_dmg_impact(0, me, it)
 
 
 def on_born(me, x, y):
@@ -33,7 +33,9 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.dmg_chance_d1000_fire(self, 0, 1000)
+    my.dmg_chance_d1000_impact(self, 0, 1000)
     my.dmg_fire_dice(self, "6d6")
+    my.dmg_impact_dice(self, "3d6")
     my.dmg_nat_att_type(self, "blast")
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)

@@ -219,6 +219,7 @@ WidPopup *Game::wid_tp_info_create_popup(Tpp t, point tl, point br)
   wid_tp_info_add_dmg_fire(wid_popup_window, t, attack_index);
   wid_tp_info_add_dmg_heat(wid_popup_window, t, attack_index);
   wid_tp_info_add_dmg_crush(wid_popup_window, t, attack_index);
+  wid_tp_info_add_dmg_impact(wid_popup_window, t, attack_index);
   wid_tp_info_add_dmg_missile(wid_popup_window, t, attack_index);
   wid_tp_info_add_dmg_lightning(wid_popup_window, t, attack_index);
   wid_tp_info_add_dmg_energy(wid_popup_window, t, attack_index);
@@ -972,6 +973,36 @@ void Game::wid_tp_info_add_dmg_crush(WidPopup *w, Tpp t, int index)
       w->log(tmp);
 
       int chance = (int) (((((float) t->dmg_chance_d1000_crush(index))) / 1000.0) * 100.0);
+      if (chance < 100) {
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        w->log(tmp);
+      }
+    }
+  }
+}
+
+void Game::wid_tp_info_add_dmg_impact(WidPopup *w, Tpp t, int index)
+{
+  TRACE_AND_INDENT();
+  char tmp[ MAXSHORTSTR ];
+  char tmp2[ MAXSHORTSTR ];
+
+  if (t->is_ranged_weapon() || t->is_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    auto dmg_impact_dice = t->dmg_impact_dice();
+    auto min_value       = dmg_impact_dice.min_roll();
+    auto max_value       = dmg_impact_dice.max_roll();
+    if (min_value > 0) {
+      if (min_value == max_value) {
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_impact_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Impact dmg%19s", tmp2);
+      } else {
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_impact_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Impact dmg%19s", tmp2);
+      }
+      w->log(tmp);
+
+      int chance = (int) (((((float) t->dmg_chance_d1000_impact(index))) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
