@@ -23,10 +23,10 @@ void Thing::blinded_update(void)
 {
   if (is_player()) {
     if (blinded_count()) {
-      debuff_add_if_not_found(tp_find("debuff_blinded"));
+      debuff_add_if_not_found(tp_find("debuff_status_blinded"));
       game->set_request_to_remake_rightbar();
     } else {
-      debuff_remove(tp_find("debuff_blinded"));
+      debuff_remove(tp_find("debuff_status_blinded"));
       game->set_request_to_remake_rightbar();
     }
   }

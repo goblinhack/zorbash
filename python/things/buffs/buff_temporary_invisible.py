@@ -33,12 +33,12 @@ def tp_init(name, text_long_name, text_short_name):
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
-    my.tile(self, tile="buff_is_invisible")
+    my.tile(self, tile="buff_invisible")
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="buff_is_invisible", text_long_name="invisible", text_short_name="invisible")
+    tp_init(name="buff_temporary_invisible", text_long_name="invisible", text_short_name="invisible")
 
 
 init()

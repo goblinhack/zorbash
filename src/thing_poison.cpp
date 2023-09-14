@@ -75,7 +75,7 @@ void Thing::poison_tick(void)
 void Thing::poisoned(void)
 {
   if (is_player()) {
-    debuff_add_if_not_found(tp_find("debuff_poisoned"));
+    debuff_add_if_not_found(tp_find("debuff_status_poisoned"));
   }
 }
 

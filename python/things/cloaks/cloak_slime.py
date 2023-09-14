@@ -5,11 +5,11 @@ self = None
 
 
 def on_equip(owner, me, x, y):
-    my.thing_buff_add(owner, "buff_slime")
+    my.thing_buff_add(owner, "buff_permanent_slime_protection")
 
 
 def on_unequip(owner, me, x, y):
-    my.thing_buff_remove(owner, "buff_slime")
+    my.thing_buff_remove(owner, "buff_permanent_slime_protection")
 
 
 def tp_init(name, text_long_name, text_short_name):

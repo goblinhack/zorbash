@@ -5,11 +5,11 @@ self = None
 
 
 def on_equip(owner, me, x, y):
-    my.thing_buff_add(owner, "buff_is_immune_to_water")
+    my.thing_buff_add(owner, "buff_permanent_immune_to_water")
 
 
 def on_unequip(owner, me, x, y):
-    my.thing_buff_remove(owner, "buff_is_immune_to_water")
+    my.thing_buff_remove(owner, "buff_permanent_immune_to_water")
 
 
 def on_enchant(me, x, y):

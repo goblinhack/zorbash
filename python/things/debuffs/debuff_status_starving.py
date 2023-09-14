@@ -24,12 +24,12 @@ def tp_init(name, text_long_name, text_short_name):
     # end sort marker
 
     my.tile(self,
-            tile="debuff_starving")
+            tile="debuff_status_starving")
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="debuff_starving", text_long_name="starving", text_short_name="starving")
+    tp_init(name="debuff_status_starving", text_long_name="starving", text_short_name="starving")
 
 
 init()

@@ -3,11 +3,11 @@ import tp
 
 
 def on_equip(owner, me, x, y):
-    my.thing_buff_add(owner, "buff_is_immune_to_negation")
+    my.thing_buff_add(owner, "buff_permanent_immune_to_negation")
 
 
 def on_unequip(owner, me, x, y):
-    my.thing_buff_remove(owner, "buff_is_immune_to_negation")
+    my.thing_buff_remove(owner, "buff_permanent_immune_to_negation")
 
 
 def tp_init(name, text_long_name, text_short_name):

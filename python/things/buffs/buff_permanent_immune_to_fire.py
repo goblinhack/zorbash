@@ -54,12 +54,12 @@ def tp_init(name, text_long_name):
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
     my.tile(self,
-            tile="buff_is_immune_to_fire")
+            tile="buff_immune_to_fire")
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="buff_is_immune_to_fire", text_long_name="fire proof")
+    tp_init(name="buff_permanent_immune_to_fire", text_long_name="fire proof")
 
 
 init()

@@ -2245,7 +2245,7 @@ void Game::wid_thing_info_add_stat_att_penalties(WidPopup *w, Thingp t)
     //
     // Terrain penalties
     //
-    if (! t->is_aquatic() && ! t->buff_is_aquatic()) {
+    if (! t->is_aquatic() && ! t->buff_aquatic()) {
       if (level->is_deep_water(t->curr_at)) {
         int p = t->stat_att_penalty_when_in_deep_water();
         if (p) {
@@ -2342,7 +2342,7 @@ void Game::wid_thing_info_add_stat_def_penalties(WidPopup *w, Thingp t)
     //
     // Terrain penalties
     //
-    if (! t->is_aquatic() && ! t->buff_is_aquatic()) {
+    if (! t->is_aquatic() && ! t->buff_aquatic()) {
       if (level->is_deep_water(t->curr_at)) {
         int p = t->stat_def_penalty_when_in_deep_water();
         if (p) {

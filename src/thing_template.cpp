@@ -575,7 +575,7 @@ void tp_dump_monsters(void)
       imm_str += "Fire<newline>";
     }
     if (tp->is_immune_to_magic_drain()) {
-      imm_str += "Psi<newline>";
+      imm_str += "Magic-drain<newline>";
     }
     if (tp->is_immune_to_necrosis()) {
       imm_str += "Necrosis<newline>";
@@ -587,10 +587,10 @@ void tp_dump_monsters(void)
       imm_str += "Paralysis<newline>";
     }
     if (tp->is_immune_to_blinding()) {
-      imm_str += "Paralysis<newline>";
+      imm_str += "Blinding<newline>";
     }
     if (tp->is_immune_to_poison()) {
-      imm_str += "poison<newline>";
+      imm_str += "Poison<newline>";
     }
     if (tp->is_immune_to_spell_of_holding()) {
       imm_str += "Holding<newline>";
@@ -608,7 +608,7 @@ void tp_dump_monsters(void)
       imm_str += "Webs<newline>";
     }
     if (tp->is_immune_to_stamina_drain()) {
-      imm_str += "Drain<newline>";
+      imm_str += "Draining<newline>";
     }
     if (tp->is_immune_to_teleport_attack()) {
       imm_str += "Teleport<newline>";

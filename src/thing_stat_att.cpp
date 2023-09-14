@@ -237,7 +237,7 @@ int Thing::stat_att_penalties_total(void)
   //
   // Terrain penalties
   //
-  if (! is_aquatic() && ! buff_is_aquatic()) {
+  if (! is_aquatic() && ! buff_aquatic()) {
     if (level->is_deep_water(curr_at)) {
       int p = stat_att_penalty_when_in_deep_water();
       if (p) {

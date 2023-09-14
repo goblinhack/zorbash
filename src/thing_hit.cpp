@@ -354,7 +354,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     if (is_immune_to_poison()) {
       if (real_hitter->is_player()) {
         if (is_player()) {
-          msg("You are immune to poison!");
+          msg("You are immune to poison damage!");
         } else if (is_mob() || is_item() || is_alive_monst()) {
           msg("%s is immune to poison damage!", text_The().c_str());
         }
@@ -462,7 +462,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     if (is_immune_to_cold()) {
       if (real_hitter->is_player()) {
         if (is_player()) {
-          msg("You are immune to cold!");
+          msg("You are immune to cold damage!");
         } else if (is_mob() || is_item() || is_alive_monst()) {
           msg("%s is immune to cold damage!", text_The().c_str());
         } else {
@@ -507,7 +507,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     if (is_immune_to_fire()) {
       if (real_hitter->is_player()) {
         if (is_player()) {
-          msg("You are immune to fire!");
+          msg("You are immune to fire damage!");
         } else if (is_mob() || is_item() || is_alive_monst()) {
           msg("%s is immune to fire damage!", text_The().c_str());
         } else {
@@ -784,11 +784,11 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     if (is_immune_to_necrosis()) {
       if (real_hitter->is_player()) {
         if (is_player()) {
-          msg("You are immune to unpleasant!");
+          msg("You are immune to rotting!");
         } else if (is_mob() || is_item() || is_alive_monst()) {
-          msg("%s is immune to unpleasant!", text_The().c_str());
+          msg("%s is immune to rotting!", text_The().c_str());
         } else {
-          dbg("Takes no unpleasant damage");
+          dbg("Takes no rotting damage");
         }
       }
       return false;
@@ -796,17 +796,17 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
 
     if (! damage) {
       if (is_player()) {
-        msg("You take no necrosis damage!");
+        msg("You take no rotting damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no necrosis damage!", text_The().c_str());
+        msg("%s takes no rotting damage!", text_The().c_str());
       } else {
-        dbg("Takes no necrosis damage");
+        dbg("Takes no rotting damage");
       }
       return false;
     }
 
     IF_DEBUG { real_hitter->log("Attack necrosis damage %d on %s", damage, to_short_string().c_str()); }
-    dmg_type = "unpleasant ";
+    dmg_type = "rotting ";
 
     if (dmg_received_doubled_from_necrosis()) {
       damage *= 2;
@@ -919,7 +919,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     if (is_immune_to_fire()) {
       if (real_hitter->is_player()) {
         if (is_player()) {
-          msg("You are immune to heat!");
+          msg("You are immune to heat damage!");
         } else if (is_mob() || is_item() || is_alive_monst()) {
           msg("%s is immune to heat damage!", text_The().c_str());
         } else {
@@ -1199,15 +1199,15 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           }
           if (real_hitter->is_necrotic_danger_level()) {
             if (damage > 1) {
-              unpleasant();
+              rotting();
               necrotized_amount_incr(damage - 1);
             }
           }
           stat_str_decr();
           if (is_player()) {
-            msg("%%fg=limegreen$Your skin is unpleasant. You lose 1 permanent strength!%%fg=reset$");
+            msg("%%fg=limegreen$Your skin is rotting. You lose 1 permanent strength!%%fg=reset$");
           } else if (is_alive_monst() && real_hitter->is_player()) {
-            msg("%%fg=limegreen$Your unpleasant hand touches %s for 1 permanent strength damage!%%fg=reset$",
+            msg("%%fg=limegreen$Your rotting hand touches %s for 1 permanent strength damage!%%fg=reset$",
                 text_the().c_str());
           }
           return true;
@@ -1236,15 +1236,15 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           }
           if (real_hitter->is_necrotic_danger_level()) {
             if (damage > 1) {
-              unpleasant();
+              rotting();
               necrotized_amount_incr(damage - 1);
             }
           }
           stat_con_decr();
           if (is_player()) {
-            msg("%%fg=limegreen$Your skin is unpleasant. You lose 1 permanent con!%%fg=reset$");
+            msg("%%fg=limegreen$Your skin is rotting. You lose 1 permanent con!%%fg=reset$");
           } else if (is_alive_monst() && real_hitter->is_player()) {
-            msg("%%fg=limegreen$Your unpleasant hand touches %s for 1 permanent con damage!%%fg=reset$",
+            msg("%%fg=limegreen$Your rotting hand touches %s for 1 permanent con damage!%%fg=reset$",
                 text_the().c_str());
           }
           return true;
@@ -1672,7 +1672,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_DIGEST ]) {
         msg("Your %s is dissolving.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
-        msg("Your %s is unpleasant.", text_long_name().c_str());
+        msg("Your %s is rotting.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
         msg("Your %s is physically drained.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
@@ -1914,7 +1914,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_DIGEST ]) {
         msg("Your %s is dissolving.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
-        msg("Your %s is unpleasant.", text_long_name().c_str());
+        msg("Your %s is rotting.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
         msg("Your %s is physically drained.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
@@ -1952,7 +1952,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_DIGEST ]) {
         msg("Your %s is dissolving.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
-        msg("Your %s is unpleasant.", text_long_name().c_str());
+        msg("Your %s is rotting.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
         msg("Your %s is physically drained.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
@@ -1990,7 +1990,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_DIGEST ]) {
         real_hitter->msg("%s is being digested.", text_The().c_str());
       } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
-        real_hitter->msg("%s is unpleasant.", text_The().c_str());
+        real_hitter->msg("%s is rotting.", text_The().c_str());
       } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
         real_hitter->msg("%s is being physically drained.", text_The().c_str());
       } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
@@ -2045,7 +2045,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   } else if (is_on_fire()) {
     if (is_player()) {
       if (real_hitter->is_monst()) {
-        msg("%%fg=red$You burn whilst being attacked!%%fg=reset$");
+        if (! is_immune_to_fire()) {
+          msg("%%fg=red$You burn whilst being attacked!%%fg=reset$");
+        }
       }
     }
     if (hitter->on_fire_set("hit by fire due to attacking")) {
@@ -2327,7 +2329,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_DIGEST ]) {
         reason = "by digestion";
       } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
-        reason = "by unpleasant";
+        reason = "by rotting";
       } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
         reason = "by stamina draining";
       } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {

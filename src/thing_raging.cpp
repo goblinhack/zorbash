@@ -27,9 +27,9 @@ bool Thing::raging_set(bool val)
 
   if (is_player()) {
     if (val) {
-      buff_add_if_not_found(tp_find("buff_raging"));
+      buff_add_if_not_found(tp_find("buff_permanent_raging"));
     } else {
-      buff_remove(tp_find("buff_raging"));
+      buff_remove(tp_find("buff_permanent_raging"));
     }
   }
 

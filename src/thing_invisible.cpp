@@ -14,7 +14,7 @@ bool Thing::is_invisible(void)
   auto old_is_currently_invisible = is_invisible_;
   bool new_is_currently_invisible = tp()->is_invisible();
 
-  if (buff_is_invisible()) {
+  if (buff_invisible()) {
     new_is_currently_invisible = true;
   }
 

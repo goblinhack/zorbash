@@ -93,12 +93,19 @@ void Game::place_player(void)
         t->carry(w, carry_options);
       }
       if (0) {
-        auto w = level->thing_new("debuff_necrotized", point(x, y));
+        auto w = level->thing_new("debuff_status_necrotized", point(x, y));
         t->debuff_add(w);
       }
       if (0) {
-        auto w = level->thing_new("debuff_slow", point(x, y));
+        auto w = level->thing_new("debuff_temporary_slow", point(x, y));
         t->debuff_add(w);
+      }
+      if (0) {
+        auto w = level->thing_new("potion_fire_immunity", point(x, y));
+        t->carry(w, carry_options);
+        level->thing_new("fire", point(x + 1, y - 1));
+        level->thing_new("fire", point(x + 1, y + 1));
+        level->player->on_fire_set("");
       }
       if (0) {
         auto w = level->thing_new("potion_haste", point(x, y));
@@ -182,17 +189,17 @@ void Game::place_player(void)
         t->enchant_without_stone(w);
       }
       if (0) {
-        auto w = level->thing_new("buff_slime", point(x, y));
+        auto w = level->thing_new("buff_permanent_slime_protection", point(x, y));
         level->thing_new("slime_parent", point(x, y + 1));
         level->thing_new("slime_baby", point(x + 1, y + 1));
         t->buff_add(w);
       }
       if (0) {
-        auto w = level->thing_new("buff_undead_protection", point(x, y));
+        auto w = level->thing_new("buff_permanent_undead_protection", point(x, y));
         t->buff_add(w);
       }
       if (0) {
-        auto w = level->thing_new("debuff_necrotized", point(x, y));
+        auto w = level->thing_new("debuff_status_necrotized", point(x, y));
         t->debuff_add(w);
       }
       if (0) {
@@ -758,7 +765,6 @@ void Game::place_player(void)
       // level->thing_new("fire", point(x - 4, y + 5));
       // level->thing_new("foliage", point(x - 4, y + 5));
       // level->thing_new("foliage", point(x, y + 5));
-      // level->player->on_fire_set("");
       // level->thing_new("block_of_ice", point(x, y + 1));
       // level->thing_new("block_of_ice", point(x, y + 2));
       if (0) {

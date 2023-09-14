@@ -56,12 +56,12 @@ def tp_init(name, text_long_name):
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
     my.tile(self,
-            tile="buff_is_immune_to_poison")
+            tile="buff_immune_to_poison")
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="buff_is_immune_to_poison", text_long_name="poison immunity")
+    tp_init(name="buff_permanent_immune_to_poison", text_long_name="poison immunity")
 
 
 init()

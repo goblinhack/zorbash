@@ -44,7 +44,6 @@ PyObject *thing_collision_hit_two_tiles_ahead(PyObject *obj, PyObject *args, PyO
 PyObject *thing_consume_per_bite_amount(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_coords_get(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_dead(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_wake(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_death_by(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_debuff_add(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_debuff_remove(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -890,6 +889,7 @@ PyObject *thing_throw_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_tick_prio(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_top_owner_id_get(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unfreeze(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_wake(PyObject *obj, PyObject *args, PyObject *keywds);
 // end sort marker1 }
 
 #endif

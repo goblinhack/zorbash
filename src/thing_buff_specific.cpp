@@ -6,7 +6,7 @@
 #include "my_monst.hpp"
 #include "my_thing.hpp"
 
-bool Thing::buff_is_slippery(void)
+bool Thing::buff_slippery(void)
 {
   TRACE_NO_INDENT();
 
@@ -27,7 +27,7 @@ bool Thing::buff_is_slippery(void)
   return false;
 }
 
-bool Thing::buff_is_aquatic(void)
+bool Thing::buff_aquatic(void)
 {
   TRACE_NO_INDENT();
 
@@ -63,7 +63,7 @@ bool Thing::buff_is_aquatic(void)
   return false;
 }
 
-bool Thing::buff_is_immune_to_fire(void)
+bool Thing::buff_immune_to_fire(void)
 {
   TRACE_NO_INDENT();
 
@@ -99,7 +99,7 @@ bool Thing::buff_is_immune_to_fire(void)
   return false;
 }
 
-bool Thing::buff_is_immune_to_cold(void)
+bool Thing::buff_immune_to_cold(void)
 {
   TRACE_NO_INDENT();
 
@@ -135,7 +135,7 @@ bool Thing::buff_is_immune_to_cold(void)
   return false;
 }
 
-bool Thing::buff_is_immune_to_poison(void)
+bool Thing::buff_immune_to_poison(void)
 {
   TRACE_NO_INDENT();
 
@@ -171,7 +171,7 @@ bool Thing::buff_is_immune_to_poison(void)
   return false;
 }
 
-bool Thing::buff_is_immune_to_negation(void)
+bool Thing::buff_immune_to_negation(void)
 {
   TRACE_NO_INDENT();
 
@@ -207,7 +207,7 @@ bool Thing::buff_is_immune_to_negation(void)
   return false;
 }
 
-bool Thing::buff_is_immune_to_teleport_attack(void)
+bool Thing::buff_immune_to_teleport_attack(void)
 {
   TRACE_NO_INDENT();
 
@@ -243,7 +243,7 @@ bool Thing::buff_is_immune_to_teleport_attack(void)
   return false;
 }
 
-bool Thing::buff_is_immune_to_water(void)
+bool Thing::buff_immune_to_water(void)
 {
   TRACE_NO_INDENT();
 
@@ -279,7 +279,7 @@ bool Thing::buff_is_immune_to_water(void)
   return false;
 }
 
-bool Thing::buff_is_immune_to_stamina_drain(void)
+bool Thing::buff_immune_to_stamina_drain(void)
 {
   TRACE_NO_INDENT();
 
@@ -315,7 +315,7 @@ bool Thing::buff_is_immune_to_stamina_drain(void)
   return false;
 }
 
-bool Thing::buff_is_immune_to_magic_drain(void)
+bool Thing::buff_immune_to_magic_drain(void)
 {
   TRACE_NO_INDENT();
 
@@ -351,7 +351,7 @@ bool Thing::buff_is_immune_to_magic_drain(void)
   return false;
 }
 
-bool Thing::buff_is_immune_to_necrosis(void)
+bool Thing::buff_immune_to_necrosis(void)
 {
   TRACE_NO_INDENT();
 
@@ -387,7 +387,7 @@ bool Thing::buff_is_immune_to_necrosis(void)
   return false;
 }
 
-bool Thing::buff_is_invisible(void)
+bool Thing::buff_invisible(void)
 {
   TRACE_NO_INDENT();
 

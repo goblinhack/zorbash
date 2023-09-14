@@ -6,7 +6,7 @@ self = None
 
 def on_owner_add(me, owner, x, y):
     if my.thing_is_player(owner):
-        my.thing_msg(me, "You are paralysed and unable to move!")
+        my.thing_msg(me, "You are blinded and unable to move!")
 
 
 def tp_init(name, text_long_name, text_short_name):
@@ -18,18 +18,18 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_debuff(self, True)
     my.is_loggable(self, True)
     my.on_owner_add_do(self, "me.on_owner_add()")
-    my.text_description_long(self, "You are paralysed and unable to move!")
-    my.text_description_short(self, "You are paralysed.")
+    my.text_description_long(self, "You are blinded!")
+    my.text_description_short(self, "You are blinded.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     # end sort marker
 
     my.tile(self,
-            tile="debuff_paralysis")
+            tile="debuff_status_blinded")
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="debuff_paralysis", text_long_name="paralysis", text_short_name="paralysis")
+    tp_init(name="debuff_status_blinded", text_long_name="blinded", text_short_name="blinded")
 
 
 init()

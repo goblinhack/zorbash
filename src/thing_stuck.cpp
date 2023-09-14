@@ -191,7 +191,7 @@ bool Thing::is_stuck_check(void)
       //
       // ok
       //
-    } else if (buff_is_slippery() && (d20() < stat_str())) {
+    } else if (buff_slippery() && (d20() < stat_str())) {
       //
       // Give a better chance to escape if slippery.
       //
@@ -238,7 +238,7 @@ bool Thing::is_stuck_check(void)
       //
       // ok
       //
-    } else if (buff_is_slippery()) {
+    } else if (buff_slippery()) {
       //
       // ok
       //
@@ -259,7 +259,7 @@ bool Thing::is_stuck_check(void)
       //
       // ok
       //
-    } else if (buff_is_slippery()) {
+    } else if (buff_slippery()) {
       //
       // ok
       //
@@ -384,7 +384,7 @@ void Thing::is_stuck_update(void)
     if (! is_stuck_check()) {
       if (is_player()) {
         msg("You are no longer stuck!");
-        debuff_remove(tp_find("debuff_stuck"));
+        debuff_remove(tp_find("debuff_status_stuck"));
         game->set_request_to_remake_rightbar();
       } else if (is_monst()) {
         msg("%s is no longer stuck.", text_The().c_str());
@@ -411,7 +411,7 @@ void Thing::is_stuck_update(void)
     stuck("newly stuck at location");
 
     if (is_player()) {
-      debuff_add_if_not_found(tp_find("debuff_stuck"));
+      debuff_add_if_not_found(tp_find("debuff_status_stuck"));
       game->set_request_to_remake_rightbar();
 
       if (level->is_spiderweb(curr_at.x, curr_at.y)) {

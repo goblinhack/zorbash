@@ -6,13 +6,13 @@ self = None
 
 def on_owner_add(me, owner, x, y):
     if my.thing_is_player(owner):
-        my.thing_msg(me, "A protective green slimy glow surrounds you.")
+        my.thing_msg(me, "A protective glow surrounds you.")
 
 
 # Called on removing a ring. Not called on death of the owner.
 def on_owner_unset(me, owner, x, y):
     if my.thing_is_player(owner):
-        my.thing_msg(me, "The protective green slimy glow around you fades.")
+        my.thing_msg(me, "The protective glow around you fades.")
 
 
 def on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage):
@@ -20,24 +20,11 @@ def on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage):
     # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
     # my.con("hitter  {} {:X}".format(my.thing_name_get(hitter), hitter))
     # my.con("rhitter {} {:X}".format(my.thing_name_get(real_hitter), real_hitter))
-    if my.thing_is_slime(hitter):
+    if my.thing_is_undead(hitter):
         if my.thing_is_player(owner):
-            my.thing_msg(me, "You take half damage from the slime attack.")
+            my.thing_msg(me, "You take half damage from the undead attack.")
         return int(damage / 2)
     return damage
-
-
-def on_owner_attack_dmg_melee(me, owner, victim, x, y, damage):
-    # my.con("on_owner_attack_dmg_melee")
-    # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
-    # my.con("victim  {} {:X}".format(my.thing_name_get(victim), victim))
-    # my.con("damage  {}".format(damage))
-    my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_impact{my.py_non_pcg_random_range_inclusive(1, 4)}")
-    if my.thing_is_slime(victim):
-        if my.thing_is_player(owner):
-            my.thing_msg(me, "You issue double damage slime attack.")
-        return (damage + my.thing_enchant_count_get(me)) * 2
-    return damage + my.thing_enchant_count_get(me)
 
 
 def on_owner_receive_dmg_melee(me, owner, hitter, real_hitter, x, y, damage):
@@ -114,10 +101,11 @@ def tp_init(name, text_long_name):
     # begin sort marker
     my.gfx_ascii_shown(self, True)
     my.is_buff(self, True)
+    my.is_immune_to_necrosis(self, True)
+    my.is_immune_to_stamina_drain(self, True)
     my.is_loggable(self, True)
     my.is_runic(self, True)
     my.on_owner_add_do(self, "me.on_owner_add()")
-    my.on_owner_attack_dmg_melee_do(self, "me.on_owner_attack_dmg_melee()")
     my.on_owner_receive_dmg_acid_do(self, "me.on_owner_receive_dmg_acid()")
     my.on_owner_receive_dmg_bite_do(self, "me.on_owner_receive_dmg_bite()")
     my.on_owner_receive_dmg_claw_do(self, "me.on_owner_receive_dmg_claw()")
@@ -135,17 +123,18 @@ def tp_init(name, text_long_name):
     my.on_owner_receive_dmg_stat_con_do(self, "me.on_owner_receive_dmg_stat_con()")
     my.on_owner_receive_dmg_stat_str_do(self, "me.on_owner_receive_dmg_stat_str()")
     my.on_owner_unset_do(self, "me.on_owner_unset()")
-    my.text_description_long(self, "Fear slime no more. You now issue double damage on slime composed monstrosities and receive only half damage from their vile attacks.")
+    my.text_description_long2(self, "Self flagellation is optional.")
+    my.text_description_long(self, "Receive blessed protection from the undead (half damage) along with immunities against various corruptions of the body.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
     my.tile(self,
-            tile="buff_slime")
+            tile="buff_undead_protection")
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="buff_slime", text_long_name="holy protection")
+    tp_init(name="buff_permanent_undead_protection", text_long_name="holy protection")
 
 
 init()

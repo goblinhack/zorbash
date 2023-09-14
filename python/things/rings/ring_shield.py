@@ -3,11 +3,11 @@ import tp
 
 
 def on_equip(owner, me, x, y):
-    my.thing_buff_add(owner, "buff_missile_protection")
+    my.thing_buff_add(owner, "buff_permanent_missile_protection")
 
 
 def on_unequip(owner, me, x, y):
-    my.thing_buff_remove(owner, "buff_missile_protection")
+    my.thing_buff_remove(owner, "buff_permanent_missile_protection")
 
 
 def tp_init(name, text_long_name, text_short_name):

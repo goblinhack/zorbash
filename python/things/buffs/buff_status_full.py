@@ -20,12 +20,12 @@ def tp_init(name, text_long_name, text_short_name):
     # end sort marker
 
     my.tile(self,
-            tile="buff_full")
+            tile="buff_status_full")
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="buff_full", text_long_name="full and happy", text_short_name="full")
+    tp_init(name="buff_status_full", text_long_name="full and happy", text_short_name="full")
 
 
 init()

@@ -81,17 +81,17 @@ void Thing::hunger_update(void)
 
   if (is_player()) {
     if (is_hunger_level_gorged || is_hunger_level_satiated) {
-      buff_add_if_not_found(tp_find("buff_full"));
-      debuff_remove(tp_find("debuff_hungry"));
-      debuff_remove(tp_find("debuff_starving"));
+      buff_add_if_not_found(tp_find("buff_status_full"));
+      debuff_remove(tp_find("debuff_status_hungry"));
+      debuff_remove(tp_find("debuff_status_starving"));
     } else if (is_hunger_level_starving) {
-      buff_remove(tp_find("buff_full"));
-      debuff_remove(tp_find("debuff_hungry"));
-      debuff_add_if_not_found(tp_find("debuff_starving"));
+      buff_remove(tp_find("buff_status_full"));
+      debuff_remove(tp_find("debuff_status_hungry"));
+      debuff_add_if_not_found(tp_find("debuff_status_starving"));
     } else if (is_hunger_level_hungry) {
-      buff_remove(tp_find("buff_full"));
-      debuff_remove(tp_find("debuff_starving"));
-      debuff_add_if_not_found(tp_find("debuff_hungry"));
+      buff_remove(tp_find("buff_status_full"));
+      debuff_remove(tp_find("debuff_status_starving"));
+      debuff_add_if_not_found(tp_find("debuff_status_hungry"));
     }
   }
 }

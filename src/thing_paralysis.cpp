@@ -23,10 +23,10 @@ void Thing::paralysis_update(void)
 {
   if (is_player()) {
     if (paralysis_count()) {
-      debuff_add_if_not_found(tp_find("debuff_paralysis"));
+      debuff_add_if_not_found(tp_find("debuff_status_paralysis"));
       game->set_request_to_remake_rightbar();
     } else {
-      debuff_remove(tp_find("debuff_paralysis"));
+      debuff_remove(tp_find("debuff_status_paralysis"));
       game->set_request_to_remake_rightbar();
     }
   }

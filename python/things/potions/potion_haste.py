@@ -18,7 +18,7 @@ def on_use(owner, item, target, x, y):
     # my.topcon("owner  {} {}".format(my.thing_name_get(owner), my.thing_health(owner)))
     # my.topcon("item   {} {}".format(my.thing_name_get(item), my.thing_health(item)))
     # my.topcon("target {} {}".format(my.thing_name_get(target), my.thing_health(target)))
-    my.thing_buff_add(target, "buff_hasted")
+    my.thing_buff_add(target, "buff_temporary_hasted")
     my.thing_wake(target, "potion")
 
     if my.thing_is_player(target):
